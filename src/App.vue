@@ -17,7 +17,12 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #1A1A1A;
   margin-top: 60px;
 }
+</style>
+
+<style lang="scss">
+@import "styles/reset.scss";
+@import "styles/index.scss";
 </style>

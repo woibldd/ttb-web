@@ -1,0 +1,200 @@
+@import "./vars";
+@import "./mixins";
+// @import "./tooltip";
+// @import "./tooltip-eosforce";
+
+html {
+  background-color: #393E59;
+}
+html.light-bg {
+  background-color: #F0F0F0;
+}
+html.upgrading {
+  background-color: #1F2338;
+  body {
+    min-width: auto;
+    background-color: #1F2338;
+  }
+}
+html.white-bg {
+  background-color: white;
+  body {
+    background-color: white;
+  }
+}
+html.hybrid-dark-bg {
+  &, body {
+    background-color: #070C1D;
+  }
+}
+html {
+  height: 100%;
+}
+body {
+  font-size: 14px;
+  line-height: 1.42857;
+  min-height: 100%;
+  width: 100%;
+  min-width: $page-width;
+  color: $text;
+  background-color: #f0f0f0;
+}
+
+body.responsive-body {
+  min-width: auto;
+}
+/* 路由相关 start */
+// 登录注册，KYC页面背景深色
+body.v-route-account,
+body.v-route-kyc {
+  background-color: $nav-2;
+}
+body.v-route-trading {
+  min-width: auto;
+  background-color: #141721;
+  overflow-x: auto;
+  #app {
+    min-width: 960px;
+  }
+}
+
+/* 路由相关 end */
+
+table tr td,
+table tr th {
+  &.left {
+    text-align: left;
+  }
+  &.right {
+    text-align: right;
+  }
+  &.center {
+    text-align: center;
+  }
+}
+th {
+  font-weight: bold;
+}
+.iconfont {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+[transparent] {
+  opacity: 0;
+}
+#app {
+  min-height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  outline: none;
+}
+.btn {
+  cursor: pointer;
+}
+/*
+.progressing {
+  cursor: progress;
+  a {
+    cursor: progress;
+  }
+  .btn {
+    cursor: progress;
+  }
+}
+*/
+input {
+  margin: 0;
+}
+embed {display: none;}
+.fluid-container {
+  min-width: $page-width;
+}
+.main-container {
+  box-sizing: border-box;
+}
+footer {
+  background-color: $nav-2;
+  width: 100%;
+  height: 300px;
+  box-sizing: border-box;
+}
+.pull-left {
+  float: left;
+}
+.pull-right {
+  float: right;
+}
+.ibt {
+  display: inline-block;
+  vertical-align: top;
+}
+.logo {
+  @include bg-retina($logo-pic, 'png', $logo-bg-width, $logo-bg-height);
+}
+.panel {
+  background-color: white;
+}
+.panel-title {
+  font-weight: bold;
+}
+.bold {
+  font-weight: bold;
+}
+a,
+a:hover,
+a:focus,
+a:active,
+a:visited {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  text-decoration: none;
+}
+a {
+  &, &:visited, &:focus {
+    color: $text-link;
+  }
+  &:hover {
+    color: $text-link-hover;
+  }
+  &:active {
+    color: $text-link-active;
+  }
+}
+a.o {
+  @include a() {
+    color: inherit;
+  }
+}
+input::placeholder {
+  color: #CCC;
+}
+td.left {
+  text-align: left;
+}
+td.right {
+  text-align: right;
+}
+.page-mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: transparent;
+  z-index: 99999;
+  cursor: progress;
+}
+
+@media screen and (max-width: 768px) {
+  body.v-route-account {
+    min-width: auto;
+  }
+  body.v-route-account footer {
+    display: none;
+  }
+}
