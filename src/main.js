@@ -5,9 +5,32 @@ import App from './App'
 import router from './router'
 import VueI18n from 'vue-i18n'
 import utils from './modules/utils'
+import theme from './modules/dynamic-theme'
+import { actions } from './modules/store'
+import './bootstrap'
+import en from '@/libs/languages/en.json'
+import eventHub from '@/modules/eventHub'
+import VTooltip from 'v-tooltip'
 
 Vue.config.productionTip = false
 Vue.use(VueI18n)
+Vue.use(VTooltip)
+
+theme.set()
+
+utils.$i18n = new VueI18n({
+  fallbackLocale: 'en',
+  locale: 'en',
+  silentTranslationWarn: true, // process.env.NODE_ENV === 'production',
+  messages: {
+    en: actions.replaceName(en)
+  }
+})
+
+Vue.prototype.$eh = eventHub
+
+actions.setLocale()
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

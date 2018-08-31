@@ -2,7 +2,6 @@ import _ from 'lodash'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
 import Locals from '@/modules/locals'
-import ramStore from '@/pages/ram/ramStore'
 
 const locales = process.env.THEME_ENV.locales
 // const locales = ['zh-CN']
@@ -121,7 +120,6 @@ export const actions = {
       actions.clearAssets()
       service.clearAll()
       actions.clearFavorite()
-      ramStore.actions.clearUserInfo()
       window.zE && window.zE(function () {
         window.zE.identify({
           name: 'Guest',

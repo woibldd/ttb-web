@@ -3,14 +3,21 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
+const THEME_ENV=require(`../src/theme/js/default.js`);
 
 module.exports = {
   dev: {
-
+    THEME_ENV,
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/gate': {
+        target: 'https://thinkbit-beta.com/',
+        changeOrigin: true,
+        secure: false
+      },
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

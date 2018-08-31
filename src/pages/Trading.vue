@@ -1,0 +1,272 @@
+<template>
+  <div class="trade-pro" ref="wrap">
+    <v-nav pro="1"></v-nav>
+    <div class="container-trade-panel">
+      <div class="pro-col pro-col-1">
+        <div class="pro-grid pro-grid-tv" ref="gridTradingView">
+          <TradingView ref="TradingView"></TradingView>
+        </div>
+        <div class="pro-grid pro-grid-order" ref="gridOrder">
+          <Order ref="Order"></Order>
+        </div>
+      </div>
+      <div class="pro-col pro-col-2">
+        <div class="pro-grid pro-grid-orderbook" ref="gridOrderbook">
+          <Orderbook ref="Orderbook"></Orderbook>
+        </div>
+        <div class="pro-grid pro-grid-deal" ref="gridDeal">
+          <Deal ref="Deal"></Deal>
+        </div>
+      </div>
+      <div class="pro-col pro-col-3">
+        <div class="pro-grid pro-grid-pairnav" ref="gridPairNav">
+          <PairNav ref="PairNav"></PairNav>
+        </div>
+        <div class="pro-grid pro-grid-operate" ref="gridOperate">
+          <Operate ref="Operate"></Operate>
+        </div>
+      </div>
+      <!--<DepthChart ref="DepthChart"></DepthChart>-->
+    </div>
+    <order-deal-popover />
+  </div>
+</template>
+
+<script>
+import _ from 'lodash'
+import {local, state} from '@/modules/store'
+import service from '@/modules/service'
+import utils from '@/modules/utils'
+
+import VNav from '@/components/VNav'
+import TradingView from '@/components/Trading/TradingView'
+import Order from '@/components/Trading/Order'
+import Deal from '@/components/Trading/Deal'
+// import DepthChart from '@/components/DepthChart'
+import Orderbook from '../components/Trading/Orderbook'
+import PairNav from '@/components/Trading/PairNav'
+import Operate from '@/components/Trading/Operate'
+import OrderDealPopover from '@/components/Trading/OrderDealPopover'
+
+export default {
+  name: 'trading',
+  components: {
+    VNav,
+    OrderDealPopover,
+    TradingView,
+    Order,
+    Deal,
+    // DepthChart,
+    Orderbook,
+    PairNav,
+    Operate
+  },
+  data () {
+    return {
+      state,
+      comps: []
+    }
+  },
+  watch: {
+    '$route.query.pair': {
+      async handler (pair = '') {
+        this.state.pro.lock = true
+        const match = pair.match(/^([A-Z]*)_([A-Z]*)$/)
+        if (match) {
+          this.state.pro.pair = pair
+          local.pair = pair
+          const [product, currency] = match.slice(1, 3)
+          this.state.pro.product_name = product
+          this.state.pro.currency_name = currency
+          const res = await service.getPairInfo({pair_name: pair})
+          if (!res.code) {
+            this.state.pro.pairInfo = res.data
+          } else {
+            this.state.pro.pairInfo = null
+          }
+          await this.refreshBalance()
+        }
+        this.state.pro.lock = false
+      },
+      immediate: true
+    }
+  },
+  methods: {
+    async refreshBalance () {
+      const product = this.state.pro.product_name
+      const currency = this.state.pro.currency_name
+      if (this.state.pro.product && this.state.pro.product.currency_name !== product) {
+        this.state.pro.product = null
+      }
+      if (this.state.pro.currency && this.state.pro.currency.currency_name !== currency) {
+        this.state.pro.currency = null
+      }
+      const [resc, resp] = await Promise.all([
+        service.getBalanceInfo({currency_name: currency}),
+        service.getBalanceInfo({currency_name: product})
+      ])
+      if (!resc.code && !resp.code && product === this.state.pro.product_name && currency === this.state.pro.currency_name) {
+        this.state.pro.product = resp.data
+        this.state.pro.currency = resc.data
+      }
+    },
+    setGridContainers () {
+      for (var compName in this.$options.components) {
+        if (!this.$refs[compName]) {
+          continue
+        }
+        const grid = this.$refs['grid' + compName]
+        this.$refs[compName].container = {
+          width: grid.clientWidth,
+          height: grid.clientHeight
+        }
+      }
+    },
+    async onresize () {
+      const layoutHeight = window.innerHeight
+      this.$refs.wrap.style.height = layoutHeight + 'px'
+      this.setGridContainers()
+      // $(this.$refs.layout).height($(window).height() - 50)
+      // this.layout.updateSize()
+    }
+  },
+  async created () {
+    document.documentElement.style.overflow = 'hidden'
+    document.querySelector('.page-preload').classList.add('show')
+    if (!this.$route.query.pair) {
+      const res = await service.getPairList()
+      if (res.code) {
+        return utils.alert(res.message)
+      }
+      this.$router.replace({
+        name: 'trading',
+        query: {
+          pair: _.find(res.data.items, item => item.name === local.pair) ? local.pair : res.data.items[0].name
+        }
+      })
+    }
+    this.state.loading = true
+
+    this.$nextTick(() => {
+      const layoutHeight = window.innerHeight
+      this.$refs.wrap.style.height = layoutHeight + 'px'
+      this.state.loading = false
+      this.state.pro.layout = true
+
+      this.setGridContainers()
+
+      this.$eh.$emit('protrade:layout:init')
+      utils.log('Layout inited')
+
+      this.$eh.$on('protrade:balance:refresh', this.refreshBalance)
+      this.$eh.$on('app:resize', this.onresize)
+      document.querySelector('.page-preload').classList.remove('show')
+    })
+  },
+  beforeRouteLeave (to, from, next) {
+    if (this.state.pro.lock) {
+      return next(false)
+    }
+    this.$refs.TradingView.$destroy()
+    next()
+  },
+  destroyed () {
+    this.$eh.$off('app:resize', this.onresize)
+    this.$eh.$off('protrade:balance:refresh', this.refreshBalance)
+    this.state.pro.layout = false
+    document.querySelector('.page-preload').classList.remove('show')
+    document.documentElement.setAttribute('style', '')
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.container-trade-panel {
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  ::-webkit-scrollbar-track {
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #475166;
+    border: 2px solid #141721;
+  }
+  ::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+}
+.trade-pro {
+  overflow: hidden;
+  user-select: none;
+  position: relative;
+  color: #BCBFCE;
+  min-height: 100%;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+
+}
+.container-trade-panel {
+  flex: 1;
+  display: flex;
+}
+.pro-col {
+  display: flex;
+  flex-direction: column;
+}
+.pro-col-1 {
+  flex: 1;
+}
+.pro-col-2 {
+  width: 320px;
+}
+.pro-col-3 {
+  width: 320px;
+}
+.pro-grid {
+  position: relative;
+  border: 1px solid $splitter;
+}
+.pro-grid-tv {
+  flex: 2;
+  height: 2px;
+}
+.pro-grid-order {
+  flex: 1;
+  height: 1px;
+}
+.pro-grid-deal {
+  flex: 1;
+  height: 1px;
+}
+.pro-grid-orderbook {
+  flex: 2;
+  height: 2px;
+}
+.pro-grid-pairnav {
+  flex: 1;
+  height: 1px;
+}
+.pro-grid-operate {
+  flex: 1;
+  height: 1px;
+}
+</style>
+
+<style lang="scss">
+// @import "../style/golden-layout";
+@import "../styles/mixins";
+
+.pro-panel {
+  width: 100%;
+  height: 100%;
+  &.progress {
+    cursor: progress;
+  }
+}
+.tmp-children {
+  display: none;
+}
+</style>

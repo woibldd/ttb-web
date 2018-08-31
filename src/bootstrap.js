@@ -1,0 +1,58 @@
+import Vue from 'vue'
+
+import utils from './modules/utils'
+import commonMixins from '@/mixins/common'
+
+import Icon from '@/components/Icon'
+import VModal from '@/components/VModal'
+import VLoading from '@/components/VLoading'
+import FiatMoney from '@/components/FiatMoney'
+
+Vue.mixin(commonMixins)
+
+Vue.component('icon', Icon)
+Vue.component('v-modal', VModal)
+Vue.component('v-loading', VLoading)
+Vue.component('fiat-money', FiatMoney)
+
+Vue.filter('localeName', utils.getLocaleName)
+
+window.Promise.prototype.finally = function (callback) {
+  let constructor = this.constructor
+  return this.then(function (value) {
+    return constructor.resolve(callback()).then(function () {
+      return value
+    })
+  }, function (reason) {
+    return constructor.resolve(callback()).then(function () {
+      throw reason
+    })
+  })
+};
+
+(function () {
+  if (document.scrollingElement) {
+    return
+  }
+  let element = null
+  function scrollingElement () {
+    if (element) {
+      return element
+    } else if (document.body.scrollTop) {
+      // speed up if scrollTop > 0
+      return (element = document.body)
+    }
+    let iframe = document.createElement('iframe')
+    iframe.style.height = '1px'
+    document.documentElement.appendChild(iframe)
+    let doc = iframe.contentWindow.document
+    doc.write('<!DOCTYPE html><div style="height:9999em">x</div>')
+    doc.close()
+    let isCompliant = doc.documentElement.scrollHeight > doc.body.scrollHeight
+    iframe.parentNode.removeChild(iframe)
+    return (element = isCompliant ? document.documentElement : document.body)
+  }
+  Object.defineProperty(document, 'scrollingElement', {
+    get: scrollingElement
+  })
+})()

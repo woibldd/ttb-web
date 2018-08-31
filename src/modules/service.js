@@ -2,126 +2,127 @@ import Vue from 'vue'
 import config from '@/libs/config'
 import _ from 'lodash'
 import utils from './utils'
-import {state, actions} from '@/modules/store'
+import api from './request'
+import { state, actions } from '@/modules/store'
 
 // const Mock = () => import('./mock')
 
 const service = {
   getBanners (data = {}) {
     data.platform = 0
-    return gate('banner/list', data)
+    return request('banner/list', data)
   },
   forgot (data) {
-    return gate('password/forgot', data)
+    return request('password/forgot', data)
   },
   sendRecoverEmail () {
-    return gate('password/reactivate')
+    return request('password/reactivate')
   },
   resetPassword (data) {
-    return gate('password/reset', data)
+    return request('password/reset', data)
   },
   changePassword (data) {
-    return gate('password/modify', data)
+    return request('password/modify', data)
   },
   getSmsCode (data) {
     if (data.task === 'register') {
-      return gate('sign/signup/code/resend', data)
+      return request('sign/signup/code/resend', data)
     }
-    return gate('fa2/sms', data)
+    return request('fa2/sms', data)
   },
   fa2 (data) {
     if (data.task === 'register') {
-      return gate('sign/signup/code', data)
+      return request('sign/signup/code', data)
     }
-    return gate('fa2/verify', data)
+    return request('fa2/verify', data)
   },
   getUserInfo () {
-    return getCache('session', () => gate('sign/session'), 6e4)
+    return getCache('session', () => request('sign/session'), 6e4)
   },
   activate (code) {
     rmCache('session')
-    return gate('sign/activate?auth=' + code)
+    return request('sign/activate?auth=' + code)
   },
   presetPhone (data) {
-    return gate('sign/signup/code', data)
+    return request('sign/signup/code', data)
   },
   sendVerifyEmail () {
-    return gate('sign/reactivate')
+    return request('sign/reactivate')
   },
   login (data) {
     rmCache('session')
     if (data.email) {
-      return gate('sign/signin/email', data)
+      return request('sign/signin/email', data)
     }
     if (data.phone) {
-      return gate('sign/signin/phone', data)
+      return request('sign/signin/phone', data)
     }
   },
   register (data) {
     rmCache('session')
     if (data.phone) {
-      return gate('sign/signup/phone', data)
+      return request('sign/signup/phone', data)
     }
-    return gate('sign/signup', data)
+    return request('sign/signup', data)
   },
   signout () {
     rmCache('session')
     rmCache('balanceList')
     state.pro.currency = null
     state.pro.product = null
-    return gate('sign/signout')
+    return request('sign/signout')
   },
   getBalance () {
-    return getCache('balanceList', () => gate('balance/list'), 2e3)
+    return getCache('balanceList', () => request('balance/list'), 2e3)
   },
   createOrder (data) {
-    return gate('order/create', data)
+    return request('order/create', data)
   },
   removeOrder (data) {
-    return gate('order/remove', data)
+    return request('order/remove', data)
   },
   removeOrderList (orderList) {
     return orderList.reduce(async function (preTask, order) {
       await preTask
-      return gate('order/remove', order)
+      return request('order/remove', order)
     }, 0)
   },
   removeAllOrder () {
-    return gate('order/removeall')
+    return request('order/removeall')
   },
-  queryOrder ({id, finished}) {
+  queryOrder ({ id, finished }) {
     if (finished) {
-      return getCache('orderQuery' + id, () => gate('order/query', {order_id: id}))
+      return getCache('orderQuery' + id, () => request('order/query', { order_id: id }))
     }
-    return gate('order/query', {order_id: id})
+    return request('order/query', { order_id: id })
   },
   getOrderList (data) {
-    return gate('order/list', data)
+    return request('order/list', data)
   },
   orderActive (data) {
-    return gate('order/active', data)
+    return request('order/active', data)
   },
   orderClosed (data) {
-    return gate('order/closed', data)
+    return request('order/closed', data)
   },
   orderHistory (data) {
-    return gate('order/history', data)
+    return request('order/history', data)
   },
   getQuote (data) {
-    return gate('quote/query', data)
+    return request('quote/query', data)
   },
   getRegionList () {
-    return getCache('regionList', () => gate('region/list'))
+    return getCache('regionList', () => request('region/list'))
   },
   getKycInfo (data) {
-    return gate('kyc/query', data)
+    return request('kyc/query', data)
   },
   updateKycInfo (data) {
-    return gate('kyc/update', data)
+    return request('kyc/update', data)
   },
   uploadKycPics (form) {
     const handler = new Vue()
-    const upload = gate('kyc/upload', form, {
+    const upload = request('kyc/upload', form, {
       timeout: 0,
       uploadProgress (event) {
         handler.$emit('progress', event)
@@ -133,13 +134,13 @@ const service = {
     return handler
   },
   getRecommend () {
-    return gate('pair/recommends')
+    return request('pair/recommends')
   },
   getHomeNotice (slot) {
-    return gate('notice/list', {platform: 0, slot: slot})
+    return request('notice/list', { platform: 0, slot: slot })
   },
   async getPairInfo (data = {}) {
-    // const res = await gate('pair/list')
+    // const res = await request('pair/list')
     const res = await this.getPairList()
     if (!res.code) {
       const find = _.find(res.data.items, item => item.name === data.pair_name)
@@ -152,13 +153,13 @@ const service = {
     return res
   },
   getPairList () {
-    return getCache('pairList', () => gate('pair/list'))
+    return getCache('pairList', () => request('pair/list'))
   },
-  getQuoteHandicap ({pair, accuracy, offset, size}) {
-    return quote(`handicap/${pair}`, {offset, accuracy, size})
+  getQuoteHandicap ({ pair, accuracy, offset, size }) {
+    return quote(`handicap/${pair}`, { offset, accuracy, size })
   },
-  getQuoteDeal ({pair, size}) {
-    return quote(`deal/${pair}`, {size})
+  getQuoteDeal ({ pair, size }) {
+    return quote(`deal/${pair}`, { size })
   },
   getQuoteHistory (data) {
     if (data.begin && data.end) {
@@ -171,100 +172,100 @@ const service = {
     return ['google', 'message']
   },
   getGoogleKey () {
-    return gate('google/begin')
+    return request('google/begin')
   },
   bindGoogle (data) {
-    return gate('google/bind', data)
+    return request('google/bind', data)
   },
   unbindGoogle () {
-    return gate('google/unbind')
+    return request('google/unbind')
   },
   setPhone (data) {
-    return gate('phone/begin', data)
+    return request('phone/begin', data)
   },
   bindPhone (data) {
-    return gate('phone/bind', data)
+    return request('phone/bind', data)
   },
   unbindPhone () {
-    return gate('phone/unbind')
+    return request('phone/unbind')
   },
   getApiList () {
-    return gate('api/list')
+    return request('api/list')
   },
   getApiPermissions () {
-    return gate('api/permissions')
+    return request('api/permissions')
   },
   createApiKey (data) {
-    return gate('api/create', data)
+    return request('api/create', data)
   },
   confirmApiKey (data) {
-    return gate('api/create/confirm', data)
+    return request('api/create/confirm', data)
   },
   removeApiKey (data) {
-    return gate('api/remove', data)
+    return request('api/remove', data)
   },
   getRate (name) {
-    return getCache(name + 'FiatRate', () => gate('currency/rate', {name}), 1e4)
+    return getCache(name + 'FiatRate', () => request('currency/rate', { name }), 1e4)
   },
   getCoins () {
-    return getCache('currencyList', () => gate('currency/list'))
+    return getCache('currencyList', () => request('currency/list'))
   },
   // 资产-转出页面请求转出地址，请求参数为 currency_name
   getWithdrawAddress (data) {
-    return gate('address/withdraw/list', data)
+    return request('address/withdraw/list', data)
   },
   // 资产-转出页面-新增转出地址，请求参数为 currency_name:币名,label:自定义标签,address:地址值
   addWithdrawAddress (data) {
-    return gate('address/withdraw/create', data)
+    return request('address/withdraw/create', data)
   },
   // 资产-转出页面-转出目标地址下拉列表-列表项删除按钮 请求参数为 地址id
   delWithwrawAddress (id) {
-    return gate('address/withdraw/remove', {id: id})
+    return request('address/withdraw/remove', { id: id })
   },
   getDepositAddress (data) {
-    return gate('address/deposit/query', data)
+    return request('address/deposit/query', data)
   },
   getCollect () {
-    return getCache('favoriteList', () => gate('favorite/list'))
+    return getCache('favoriteList', () => request('favorite/list'))
   },
   collect (data) {
-    return gate('favorite/create', data)
+    return request('favorite/create', data)
   },
   uncollect (data) {
-    return gate('favorite/remove', data)
+    return request('favorite/remove', data)
   },
   getWithdrawInfo (currency) {
-    return this.getBalanceInfo({currency_name: currency})
+    return this.getBalanceInfo({ currency_name: currency })
   },
   getBalanceInfo (data) {
-    return gate('balance/query', data)
+    return request('balance/query', data)
   },
   withdraw (data) {
-    return gate('withdraw/create', data)
+    return request('withdraw/create', data)
   },
   confirmWithdraw (data) {
-    return gate('withdraw/confirm', data)
+    return request('withdraw/confirm', data)
   },
   cancelWithdraw (data) {
-    return gate('withdraw/cancel', data)
+    return request('withdraw/cancel', data)
   },
   getTransferStats () {
-    return gate('transfer/stats')
+    return request('transfer/stats')
   },
   getTransferList (data) {
-    return gate('transfer/list', data)
+    return request('transfer/list', data)
   },
   geetestBegin () {
-    return gate('geetest/begin')
+    return request('geetest/begin')
   },
   geetestVerify () {
-    return gate('geetest/verify')
+    return request('geetest/verify')
   },
   getPresellLock () {
-    return gate('presell/query')
+    return request('presell/query')
   },
   confirmPresellLock (data) {
-    return gate('presell/lock', data)
+    return request('presell/lock', data)
   },
   rmCache (key) {
     rmCache(key)
@@ -274,62 +275,62 @@ const service = {
       rmCache(key)
     }
   },
-  // taxi api
-  getMiningData () {
-    return gate('statistics/tb')
-  },
+  // // taxi api
+  // getMiningData () {
+  //   return request('statistics/tb')
+  // },
   getMiningRefundData () {
-    return gate('statistics/refund')
+    return request('statistics/refund')
   },
   // ram 交易
   getRamTrade (data) {
-    return gate('eosram/getEosRamList', data)
+    return request('eosram/getEosRamList', data)
   },
   getRamTradeByUser (data) {
-    return gate('eosram/getEosRamListByUser', data)
+    return request('eosram/getEosRamListByUser', data)
   },
   getRamPrice () {
-    return gate('eosram/getEosRamPrice')
+    return request('eosram/getEosRamPrice')
   },
   buyRam (data) {
-    return gate('eosram/buyEosRam', data)
+    return request('eosram/buyEosRam', data)
   },
   sellRam (data) {
-    return gate('eosram/sellEosRam', data)
+    return request('eosram/sellEosRam', data)
   },
   // eosforce
   getEoscVoteList (data) {
-    return gate('eosc/vote/list', data)
+    return request('eosc/vote/list', data)
   },
   getEoscVoteBalance (data) {
-    return gate('eosc/balance', data)
+    return request('eosc/balance', data)
   },
   getEoscVoteFee (data) {
-    return gate('eosc/fee', data)
+    return request('eosc/fee', data)
   },
   eoscVoteCreate (data) {
-    return gate('eosc/vote/create', data)
+    return request('eosc/vote/create', data)
   },
   eoscVoteRelease (data) {
-    return gate('eosc/vote/release', data)
+    return request('eosc/vote/release', data)
   },
   eoscVoteTransfer (data) {
-    return gate('eosc/transfer', data)
+    return request('eosc/transfer', data)
   },
   eoscVoteTransferResult (data) {
-    return gate('eosc/transfer/status', data)
+    return request('eosc/transfer/status', data)
   },
   eoscVoteReward (data) {
-    return gate('eosc/vote/reward', data)
+    return request('eosc/vote/reward', data)
   },
   getEoscVoteActiveList () {
-    return gate('eosc/vote/active_list')
+    return request('eosc/vote/active_list')
   },
   obtainFreeVotes (data) {
-    return gate('eosc/vote/obtain', data)
+    return request('eosc/vote/obtain', data)
   },
   checkFreeVotes () {
-    return gate('eosc/vote/obtain')
+    return request('eosc/vote/obtain')
   }
 }
 
@@ -351,12 +352,12 @@ export async function fetch (url, body, options, method = 'post') {
   try {
     let res
     if (method === 'get') {
-      url = url + '?' + _.map(_.keys(body), key => key + '=' + body[key]).join('&')
-      res = await Vue.http.get(url, options)
+      // url = url + '?' + _.map(_.keys(body), key => key + '=' + body[key]).join('&')
+      res = await api.get(url, { params: body }, options)
     } else {
-      res = await Vue.http.post(url, body, options)
+      res = await api.post(url, body, options)
     }
-    const data = await res.json()
+    const data = await res // .json()
     if (data.code === 1025 && state.userInfo) {
       // Session 失效
       actions.setUserInfo(null)
@@ -394,10 +395,10 @@ export async function fetch (url, body, options, method = 'post') {
     }
   }
 }
-export function gate (url, body, options) {
-  if (process.env.NODE_ENV === 'development') {
-    return fetch('/beta-gate/' + url, body, options)
-  }
+export function request (url, body, options) {
+  // if (process.env.NODE_ENV === 'development') {
+  // return fetch('/beta-gate/' + url, body, options)
+  // }
   return fetch('/gate/' + url, body, options)
 }
 function quote (url, body, options) {
@@ -428,7 +429,7 @@ if (process.env.NODE_ENV !== 'production') {
   window.cache = cache
   window.service = service
   service.fetch = fetch
-  service.gate = gate
+  service.reqeust = request
   service.quote = quote
 }
 
