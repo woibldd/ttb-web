@@ -64,6 +64,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       filename: config.build.index,
       template: 'index.html',
       inject: true,
+      theme:config.build.THEME_ENV,
       minify: {
         removeComments: true,
         collapseWhitespace: true,

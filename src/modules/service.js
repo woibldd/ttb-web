@@ -5,7 +5,7 @@ import utils from './utils'
 import api from './request'
 import { state, actions } from '@/modules/store'
 
-// const Mock = () => import('./mock')
+const Mock = () => import('./mock')
 
 const service = {
   getBanners (data = {}) {
@@ -335,20 +335,20 @@ const service = {
 }
 
 export async function fetch (url, body, options, method = 'post') {
-  /*
-   * let mock = false
-   * if (process.env.NODE_ENV === 'development') {
-   *   mock = await Mock()
-   *   if (mock && mock.filter[url]) {
-   *     const find = _.find(mock.list, item => item.url && item.url.test(url))
-   *     if (find) {
-   *       const res = await find.res(body)
-   *       utils.log('Mock', url, body, res)
-   *       return res
-   *     }
-   *   }
-   * }
-   */
+   let mock = false
+  //  if (process.env.NODE_ENV === 'development') {
+     mock = await Mock()
+     if (mock && url.indexOf('api.thi') > 0) {
+       const find = _.find(mock.list, item => { 
+         return item.url && item.url.test(url)
+       })
+       if (find) {
+         const res = await find.res(body)
+         utils.log('Mock', url, body, res)
+         return res
+       }
+     }
+  //  }
   try {
     let res
     if (method === 'get') {

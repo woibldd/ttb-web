@@ -7,6 +7,10 @@ import Icon from '@/components/Icon'
 import VModal from '@/components/VModal'
 import VLoading from '@/components/VLoading'
 import FiatMoney from '@/components/FiatMoney'
+import PrettyNum from '@/components/PrettyNum'
+import CurrencyInput from '@/components/CurrencyInput'
+import NumberInput from '@/components/NumberInput'
+import VBtn from '@/components/VBtn'
 
 Vue.mixin(commonMixins)
 
@@ -14,8 +18,22 @@ Vue.component('icon', Icon)
 Vue.component('v-modal', VModal)
 Vue.component('v-loading', VLoading)
 Vue.component('fiat-money', FiatMoney)
+Vue.component('num', PrettyNum)
+Vue.component('currency-input', CurrencyInput)
+Vue.component('number-input', NumberInput)
+Vue.component('v-btn', VBtn)
 
 Vue.filter('localeName', utils.getLocaleName)
+Vue.filter('num', utils.toNum)
+Vue.filter('big', utils.toBig)
+Vue.filter('round', utils.toRound)
+Vue.filter('fixed', utils.toFixed)
+Vue.filter('unsign', utils.unsign)
+Vue.filter('sign', num => num > 0 ? '+' : (num < 0 ? '-' : ''))
+Vue.filter('abs', num => Math.abs(num))
+Vue.filter('ts2date', utils.dateFormatter)
+Vue.filter('date', utils.dateFormatter)
+// Vue.filter('money', exRate.getLocaleMoney)
 
 window.Promise.prototype.finally = function (callback) {
   let constructor = this.constructor

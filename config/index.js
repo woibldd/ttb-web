@@ -16,7 +16,7 @@ module.exports = {
         target: 'https://thinkbit-beta.com/',
         changeOrigin: true,
         secure: false
-      },
+      }
     },
 
     // Various Dev Server settings
@@ -51,6 +51,7 @@ module.exports = {
   },
 
   build: {
+    THEME_ENV,
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
 

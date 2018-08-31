@@ -25,7 +25,7 @@
         <a class="link" :class="{'home': isHome}" target="_blank" v-if="state.theme.themeName === 'default'"  :href="announcementLink">{{ $t('footer_notice') }}</a>
         <a class="link" :class="{'home': isHome}" :href="helpLink" target="_blank"><span>{{ $t('help') }}</span></a>
         <a v-if="!state.userInfo" class="link signin" :class="{'home': isHome}" @click.prevent="signin"><span>{{ $t('signin') }}</span></a>
-        <router-link v-if="!state.userInfo" class="link signup" :class="{'home': isHome}" :to="{name: 'register'}"><span>{{ $t('signup') }}</span></router-link>
+        <router-link v-if="!state.userInfo" class="link signup" :class="{'home': isHome}" :to="{name: 'signup'}"><span>{{ $t('signup') }}</span></router-link>
         <a v-if="state.userInfo" class="icon-link link dropdown-anchor" @click.prevent>
           <span class="icon-user"></span>
           <div class="dropdown-tri" v-if="!closed"></div>
@@ -174,7 +174,7 @@ export default {
 .header-nav {
   font-size: 16px;
   position: relative;
-  height: 50px;
+  height: 90px;
   color: rgba(255,255,255, .8);
   width: 100%;
   min-width: $page-width;
@@ -184,7 +184,7 @@ export default {
     box-sizing: border-box;
     background: #4956C9;
     padding: 0 30px;
-    height: 50px;
+    height: 90px;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -231,7 +231,7 @@ export default {
 .logo {
   float: left;
   width: 143px;
-  height: 50px;
+  height: 90px;
 }
 a.link {
   color: rgba(255,255,255, .9);
@@ -242,7 +242,7 @@ a.link {
 }
 .link {
   float: left;
-  line-height: 50px;
+  line-height: 90px;
   margin-right: 10px;
   padding: 0 10px;
   position: relative;
@@ -256,17 +256,18 @@ a.link {
     @include retina('../assets/account', 'png', 20px, 20px);
   }
   &.router-link-active {
-    span:after {
-      content: ' ';
-      position: absolute;
-      bottom: 0;
-      height: 2px;
-      left: 0;
-      margin-left: -4px;
-      background-color: rgba(255,255,255, .5);
-      width: 100%;
-      padding: 0 4px;
-    }
+    color: #C1A538;
+    // span:after {
+    //   content: ' ';
+    //   position: absolute;
+    //   bottom: 0;
+    //   height: 2px;
+    //   left: 0;
+    //   margin-left: -4px;
+    //   background-color: rgba(255,255,255, .5);
+    //   width: 100%;
+    //   padding: 0 4px;
+    // }
   }
   &.icon-link.router-link-active {
     span:after {
@@ -404,7 +405,7 @@ a.link {
     background-color: white;
     position: absolute;
     right: 0;
-    top: 50px;
+    top: 90px;
     border-radius: 4px;
     overflow: hidden;
     box-shadow: -1px 1px 1px rgba(128,128,128,.1);
