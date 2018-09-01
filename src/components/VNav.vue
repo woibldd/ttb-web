@@ -172,10 +172,10 @@ export default {
   }
 }
 .header-nav {
-  font-size: 16px;
+  font-size: 20px;
   position: relative;
   height: 90px;
-  color: rgba(255,255,255, .8);
+  color: #C9CACA;
   width: 100%;
   min-width: $page-width;
   z-index: 10000;
