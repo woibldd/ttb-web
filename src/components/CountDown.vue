@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     countdown() {
-      let remain = this.getRemainSecond()
+      let remain = this.getRemainSecond ()
       let seconds = remain % 60
       let day = Math.floor(remain / (60 * 60 * 24))
       let hour = Math.floor((remain - day * 60 * 60 * 24) / (60 * 60))
@@ -42,7 +42,7 @@ export default {
       this.hour = hour < 10 ? "0" + hour : hour
       this.day = day < 10 ? "0" + day : day
     },
-    getRemainSecond() {
+    getRemainSecond () {
       let remain = Math.floor(
         (this.terminal.getTime() - new Date().getTime()) / 1000
       )
@@ -53,10 +53,10 @@ export default {
     }
   },
   computed: {},
-  created() {
+  created () {
     this.timer = setInterval(this.countdown, 1000)
   },
-  destroyed() {
+  destroyed () {
     clearInterval(this.timer)
   }
 }

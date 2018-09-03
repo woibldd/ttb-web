@@ -14,9 +14,8 @@
       <form class="form" onsubmit="return false" autocomplete="off">
         <div class="field" v-show="by === 'phone'">
           <div class="input-box">
-            <div class="label">{{ $t('region_label') }}</div>
             <v-loading v-if="!regionOptions.length" color="gray"></v-loading>
-            <select class="select" v-else v-model="regionId">
+            <select class="select item" v-else v-model="regionId">
               <option value="">{{ $t('region_ph') }}</option>
               <option :value="option.id" v-for="option in regionOptions" :key="option.id">
                 <span>+{{ option.id }}</span>
@@ -157,6 +156,7 @@ import pwChecker from '@/modules/pw-checker'
 import VBtn from '@/components/VBtn'
 import VNav from '@/components/VNav2.vue'
 import {state} from '@/modules/store'
+// import { MdField } from 'vue-material/dist/components'
 // import gtMixin from '@/mixins/gt'
 
 export default {

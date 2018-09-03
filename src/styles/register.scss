@@ -13,6 +13,7 @@
 }
 
 .page-register {
+  background: #303E4B;
   padding-top: 36px;
   padding-bottom: 46px;
   color: $primary;
@@ -165,7 +166,7 @@
     .input {
       border-bottom: 1px solid $primary;
       transition: border-bottom .7s;
-      font-size: 12px
+      font-size: 14px
     }
   }
   .item {
@@ -190,20 +191,33 @@
     background-color: transparent;
     // padding: 8px;
     width: 280px;
+
+    &:hover {
+      border-bottom: 1px solid $primary;
+      transition: border-bottom .7s;
+    }
+    &::-webkit-input-placeholder {
+      color:#999999
+    }
   }
   
   .select {
     appearance: none;
     -webkit-appearance: none;
-    border: 1px solid #AAAAAA;
-    float: left;
+    background: inherit;
+    color: #fff;
+    border-bottom: 1px solid #ffffff;
     outline: none;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 18px;
     padding: 8px;
     height: 36px;
     box-sizing: border-box;
-    width: 228px;
+    width: 280px;
+    &:hover {
+      border-bottom: 1px solid $primary;
+      transition: border-bottom .7s;
+    }
   }
   .split {
     height: 36px;
