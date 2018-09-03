@@ -9,23 +9,29 @@
       <br />
       <router-link :to="{name:'profile'}">go to profile</router-link>
       test1
+      <p>
+        <count-down :terminal="date"></count-down>
+      </p>
     </div>
 </div>
 </template>
 <script>
 import {state} from '@/modules/store'
 import VNav from '@/components/VNav.vue'
+import CountDown from '@/components/CountDown.vue'
 
 export default {
   data () {
     return {
       state,
       news: [],
-      notice: null
+      notice: null,
+      date: new Date(2018, 8, 20)
     }
   },
   components: {
-    VNav
+    VNav,
+    CountDown
   }
 }
 </script>

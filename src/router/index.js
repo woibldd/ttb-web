@@ -94,12 +94,12 @@ let router = new Router({
       // component: (isMobile && process.env.MODE === 'beta') ? MobileProfile : Profile
       component: Profile
     }, {
-      path: 'signup',
+      path: '/signup',
       name: 'signup',
       component: Register,
       redirect: 'signup/email'
     }, {
-      path: 'signup/:by',
+      path: '/signup/:by',
       name: 'registerBy',
       component: Register,
       props: true

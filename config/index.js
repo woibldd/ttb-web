@@ -13,7 +13,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/gate': {
-        target: 'https://thinkbit-beta.com/',
+        target: 'https://thinkbit.com/',
         changeOrigin: true,
         secure: false
       }

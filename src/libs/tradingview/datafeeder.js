@@ -2,7 +2,7 @@ import utils from '@/modules/utils'
 import service from '@/modules/service'
 import ws from '@/modules/ws'
 import _ from 'lodash'
-const theme = process.env.THEME_ENV
+// const theme = process.env.THEME_ENV
 
 let lastTime
 
