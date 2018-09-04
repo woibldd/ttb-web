@@ -26,6 +26,6 @@ export default {
 <style scoped lang="scss">
     @import "../styles/vars";
     @import "../styles/mixins";
-    .page-home{background:url(../assets/index_bg.png) center center;}
+    .page-home{background:url(../assets/index_bg.jpg) center center;}
     .ind_cen{text-align:center;}
 </style>
