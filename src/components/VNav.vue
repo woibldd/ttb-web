@@ -25,7 +25,7 @@
         <a class="link" :class="{'home': isHome}" target="_blank" v-if="state.theme.themeName === 'default'"  :href="announcementLink">{{ $t('footer_notice') }}</a>
         <a class="link" :class="{'home': isHome}" :href="helpLink" target="_blank"><span>{{ $t('help') }}</span></a>
         <a v-if="!state.userInfo" class="link signin" :class="{'home': isHome}" @click.prevent="signin"><span>{{ $t('signin') }}</span></a>
-        <router-link v-if="!state.userInfo" class="link signup" :class="{'home': isHome}" :to="{name: 'signup'}"><span>{{ $t('signup') }}</span></router-link>
+        <router-link v-if="!state.userInfo" class="link signup" :class="{'home': isHome}" :to="{name: 'register'}"><span>{{ $t('signup') }}</span></router-link>
         <a v-if="state.userInfo" class="icon-link link dropdown-anchor" @click.prevent>
           <span class="icon-user"></span>
           <div class="dropdown-tri" v-if="!closed"></div>

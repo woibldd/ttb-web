@@ -10,12 +10,14 @@
       <router-view/>
     </div>
     <v-footer ref="footer" v-if="footer === 'default'" :fixed="fixed" v-show="showFooter"/>
+    <v-notify-list/>
   </div>
 </template>
 
 <script>
 import VNav from '@/components/VNav.vue'
 import VFooter from '@/components/VFooter.vue'
+import VNotifyList from '@/components/VNotifyList.vue'
 import {state, actions} from '@/modules/store'
 import utils from '@/modules/utils'
 
@@ -25,7 +27,8 @@ export default {
   name: 'App',
   components: {
     VNav,
-    VFooter
+    VFooter,
+    VNotifyList
   },
   data () {
     return {

@@ -280,6 +280,8 @@ export default {
   },
   methods: {
     async submit (e) {
+      utils.alert('111')
+      return;
       // 本地校验
       const check = this.checkParams()
       if (!check.ok) {

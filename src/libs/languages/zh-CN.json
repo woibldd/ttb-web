@@ -163,7 +163,7 @@
   "kyc_submitted": "已提交",
   "kyc_submit": "提交审核",
   "kyc_submit_success": "提交成功",
-  "login_title": "使用 ThinkBit Pro 帐号登录",
+  "login_title": "登 录",
   "login_label_mail": "电子邮箱",
   "login_label_pw": "密码",
   "login_ph_pw": "请输入密码",
@@ -527,5 +527,6 @@
   "qrcode_close": "完成",
   "phone_regionid_m": "区号",
   "phone_number_m": "手机号",
-  "region_label_m": "地区"
+  "region_label_m": "地区",
+  "profile_left_invite": "我的邀请"
 }

@@ -1,6 +1,6 @@
 /* primary */
 $primary: #C9A96C; // base -主色
-$primary-hover: #C9A96C; // hover
+$primary-hover: #aa8b61; // hover
 $primary-active: #C9A96C; // active
 $primary-disabled: rgba(0,0,0,0.2); // disabled
 $primary-opacity: rgba(73,86,201,.2); // background 交易品种列表选中的背景色，主色25%透明度
@@ -68,7 +68,10 @@ $state-text-red-active: #CE5D42; // active
 $state-info: #4956C9;
 
 /* text */
-$text: #333333; // 基础文字
+$text: #000000; // 基础文字
+$text-strong: #333333; // 重要文字
+$text-light: #666666; // 重要文字
+$text-week: #999999; // 重要文字
 
 /* hover */
 $hover-bg: #C9A96C; // 首页按钮hover
@@ -97,3 +100,6 @@ $protrade-bg: #141721;
 
 /* font family */
 $hex: monaco, monospace, arial;
+
+/* profile 左侧 背景色 */
+$profile-menu-bg: #E5E5E5;
