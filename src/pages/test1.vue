@@ -1,7 +1,7 @@
 <template>
 <div class="page-home">
     <div class="header">
-      <v-nav isHome="true" :notice="notice" @hide="notice = null"></v-nav>
+      <v-nav2 isHome="true" :notice="notice" @hide="notice = null"></v-nav2>
       <br />
       <router-link :to="{name:'Test2'}">go to test2</router-link>
       <br />
@@ -17,7 +17,7 @@
 </template>
 <script>
 import {state} from '@/modules/store'
-import VNav from '@/components/VNav.vue'
+import VNav2 from '@/components/VNav2.vue'
 import CountDown from '@/components/CountDown.vue'
 
 export default {
@@ -30,8 +30,12 @@ export default {
     }
   },
   components: {
-    VNav,
+    VNav2,
     CountDown
   }
 }
 </script>
+
+<style scoped lang="scss">
+.page-home{background:#303E4B}
+</style>

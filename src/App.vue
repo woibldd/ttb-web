@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import VNav from '@/components/VNav.vue'
+import VNav2 from '@/components/VNav2.vue'
 import VFooter from '@/components/VFooter.vue'
 import VNotifyList from '@/components/VNotifyList.vue'
 import {state, actions} from '@/modules/store'
@@ -26,7 +26,7 @@ let zeStyleEl = document.querySelector('#ze-style')
 export default {
   name: 'App',
   components: {
-    VNav,
+    VNav2,
     VFooter,
     VNotifyList
   },

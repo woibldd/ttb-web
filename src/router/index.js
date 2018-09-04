@@ -66,12 +66,12 @@ let router = new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       meta: {
         auth: false
       },
-      component: Test1
+      component: home
     }, {
       path: '/test2',
       name: 'Test2',
