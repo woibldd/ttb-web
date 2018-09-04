@@ -16,6 +16,15 @@ Vue.config.productionTip = false
 Vue.use(VueI18n)
 Vue.use(VTooltip)
 
+const request = require.context('./assets/svg', true, /\.svg$/)
+/* console.log('request', request)
+console.log('request.keys', request.keys())
+console.log('request.id', request.id)
+console.log('request.resolve()', request.resolve('./store.svg'))
+console.log('request.resolve', request.resolve) */
+// require every module
+request.keys().forEach(request)
+
 theme.set()
 
 utils.$i18n = new VueI18n({

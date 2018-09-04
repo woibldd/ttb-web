@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import {state, actions} from '@/modules/store'
-import service from '@/modules/service'
-import utils from '@/modules/utils'
-import SettingModal from '@/components/SettingModal'
+import { state, actions } from "@/modules/store"
+import service from "@/modules/service"
+import utils from "@/modules/utils"
+import SettingModal from "@/components/SettingModal"
 
 export default {
   props: {
@@ -31,15 +31,56 @@ export default {
 @import "../styles/vars";
 @import "../styles/mixins";
 
-.nav_box{width:100%;height:80px;line-height:42px;
-  .nav_logo{float:left;width:150px;height:42px;display:block;background:url(../assets/nav_logo.png);float:left;margin:19px 0;}
-  .nav_right{float:right;}
-  .nav_right a{
-    float:left;margin:19px 0 19px 40px;color:#fff;height:42px;font-size:14px;
-    &:hover,&.router-link-active{color:#C9A96C}
+.nav_box {
+  width: 100%;
+  height: 80px;
+  line-height: 42px;
+  .nav_logo {
+    float: left;
+    width: 150px;
+    height: 42px;
+    display: block;
+    background: url(../assets/nav_logo.png);
+    float: left;
+    margin: 19px 0;
   }
-  .lang{width:110px;height:24px;float:left;color:#fff;line-height:24px;border-radius:20px;border:1px solid #fff;margin:28px 0 0 60px;background:url(../assets/lang.png) no-repeat 12px center;text-indent:32px;position:relative;font-size:12px;cursor:pointer;
-    b{width:8px;height:24px;background:url(../assets/xl.png) center center no-repeat;display:block;position:absolute;top:0;right:16px}
+  .nav_right {
+    float: right;
+  }
+  .nav_right a {
+    float: left;
+    margin: 19px 0 19px 40px;
+    color: #fff;
+    height: 42px;
+    font-size: 14px;
+    &:hover,
+    &.router-link-active {
+      color: #c9a96c;
+    }
+  }
+  .lang {
+    width: 110px;
+    height: 24px;
+    float: left;
+    color: #fff;
+    line-height: 24px;
+    border-radius: 20px;
+    border: 1px solid #fff;
+    margin: 28px 0 0 60px;
+    background: url(../assets/lang.png) no-repeat 12px center;
+    text-indent: 32px;
+    position: relative;
+    font-size: 12px;
+    cursor: pointer;
+    b {
+      width: 8px;
+      height: 24px;
+      background: url(../assets/xl.png) center center no-repeat;
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 16px;
+    }
   }
 }
 .dark {

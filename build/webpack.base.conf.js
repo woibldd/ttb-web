@@ -4,7 +4,7 @@ const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
@@ -79,10 +79,11 @@ module.exports = {
       {
         test: /\.svg$/,
         include: [resolve('src')],
-        loader: 'svg-sprite?' + JSON.stringify({
+        loader: 'svg-sprite-loader'
+        /* loader: 'svg-sprite?' + JSON.stringify({
           name: '[name]',
           prefixize: true,
-        })
+        }) */
       }
     ]
   },
