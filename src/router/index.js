@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { state, actions } from '@/modules/store'
 import utils from '@/modules/utils'
-import Account from '@/pages/Account'
 import _ from 'lodash'
 // import HelloWorld from '@/components/HelloWorld'
 let loaded = false
@@ -10,13 +9,12 @@ Vue.use(Router)
 
 const isMobile = utils.isMobile()
 
+const home = () => import(/* webpackChunkName: "home" */ '@/pages/home.vue')
 const Test1 = () => import(/* webpackChunkName: "Test1" */ '@/pages/test1.vue')
 const Test2 = () => import(/* webpackChunkName: "Test2" */ '@/pages/test2.vue')
 const Trading = () => import(/* webpackChunkName: "Trading" */ '@/pages/Trading')
 const Profile = () => import(/* webpackChunkName: "Profile" */ '@/pages/Profile')
-const Invite = () => import(/* webpackChunkName: "Invite" */ '@/pages/Invite')
 const Register = () => import(/* webpackChunkName: "Register" */ '@/pages/Register')
-const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
 
 async function beforeEach (to, from, next) {
@@ -66,12 +64,16 @@ let router = new Router({
   mode: 'history',
   routes: [
     {
-      path: '/home',
+      path: '/',
       name: 'home',
       meta: {
         auth: false
       },
       component: home
+    }, {
+      path: '/Test1',
+      name: 'Test1',
+      component: Test1
     }, {
       path: '/test2',
       name: 'Test2',
@@ -95,43 +97,18 @@ let router = new Router({
         mobileNav: isMobile
       },
       // component: (isMobile && process.env.MODE === 'beta') ? MobileProfile : Profile
-      component: Profile,
-      children: [{
-        path: 'invite',
-        name: 'invite',
-        component: Invite
-      }]
+      component: Profile
     }, {
-      path: '/user',
-      name: 'account',
-      meta: {
-        auth: false,
-        nav: false
-      },
-      component: Account,
-      children: [{
-        path: 'login',
-        name: 'login',
-        component: Login,
-        redirect: 'login/email'
-      }, {
-        path: 'login/:by',
-        name: 'loginBy',
-        component: Login,
-        props: true
-      }, {
-        path: 'register',
-        name: 'register',
-        component: Register,
-        redirect: 'register/email'
-      }, {
-        path: 'register/:by',
-        name: 'registerBy',
-        component: Register,
-        props: true
-      }]
+      path: '/signup',
+      name: 'signup',
+      component: Register,
+      redirect: 'signup/email'
+    }, {
+      path: '/signup/:by',
+      name: 'registerBy',
+      component: Register,
+      props: true
     }
-
   ]
 })
 
