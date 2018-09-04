@@ -17,9 +17,9 @@
 <script>
 import VNav2 from '@/components/VNav2.vue'
 import VFooter from '@/components/VFooter.vue'
-import VNotifyList from '@/components/VNotifyList.vue'
 import {state, actions} from '@/modules/store'
 import utils from '@/modules/utils'
+import VNotifyList from '@/components/VNotifyList.vue'
 
 let zeStyleEl = document.querySelector('#ze-style')
 
@@ -109,7 +109,7 @@ export default {
     fixPosition () {
       const box = this.$refs.container
       if (box && this.footer === 'default') {
-        box.style.minHeight = window.innerHeight - (this.showFooter ? 400 : 0) - (this.showNav ? 50 : 0) + 'px'
+        box.style.minHeight = window.innerHeight - (this.showFooter ? 80 : 0) - (this.showNav ? 50 : 0) + 'px'
       }
     },
     async keepSession () {

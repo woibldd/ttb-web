@@ -71,10 +71,6 @@ let router = new Router({
       },
       component: home
     }, {
-      path: '/Test1',
-      name: 'Test1',
-      component: Test1
-    }, {
       path: '/test2',
       name: 'Test2',
       component: Test2
