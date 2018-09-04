@@ -1,6 +1,6 @@
 <template>
   <div class="user-center-left">
-    <div class="left-menu-container left-menu-nobottom" style="width: 180px;">
+    <div class="left-menu-container left-menu-nobottom">
       <p class="left-menu-title">
         <i class="icon iconfont icon-transactioninformat title-icon" style="left: 16px; position: absolute; font-size: 12px;"></i>
         <span class="menu-title">个人中心</span>
@@ -29,6 +29,7 @@
     border-radius: 4px;
     box-sizing: border-box;
     margin-bottom: 16px;
+    width: 160px;
 
     .left-menu-title {
       width: 100%;

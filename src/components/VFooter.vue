@@ -1,7 +1,7 @@
 <template>
   <footer>
     <div class="c_box">
-      <router-link :to="{name:'Test2'}" class="footer_logo"></router-link>
+      <router-link :to="{name:'home'}" class="footer_logo"></router-link>
     </div>
   </footer>
 </template>
@@ -20,7 +20,11 @@ export default {
     min-width: $page-width;
     width: 100%;
     height:110px;
-    background-color: #000;
+    background-color: $home-header-bgdark;
   }
-  .footer_logo{width:106px;height:30px;background:url(../assets/footer_logo.png);float:left;margin-top:40px;}
+  .footer_logo{
+    width:106px;
+    height:30px;
+    background:url(../assets/footer_logo.png);float:left;margin-top:40px;
+  }
 </style>

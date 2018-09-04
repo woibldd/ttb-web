@@ -54,7 +54,7 @@ export default {
 
 <style scoped lang="scss">
 .notify-list-wrap {
-  min-width: 380px;
+  min-width: 360px;
   box-sizing: border-box;
   border-radius: 4px;
   // border: 1px solid #ebeef5;

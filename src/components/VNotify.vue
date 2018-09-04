@@ -1,9 +1,6 @@
 <template>
   <div class="notify-wrap" @mouseenter="pause" @mouseleave="play">
     <div class="notify-panel" :class="[show ? 'show' : '']" ref="panel">
-      <!-- <div class="notify-icon" :class="style">
-        <icon class="icon-default" :name="getIconName(style)"/>
-      </div> -->
       <div class="notify-box" :class="['bg-' + style]">
         <div class="notify-info" :class="{h: !title || !content}">
           <div class="title" v-show="title">{{ title }}</div>
@@ -13,10 +10,6 @@
           <icon class="icon-default" name="guanbi"/>
         </div>
       </div>
-      <!-- <div class="notify-control" :class="'type-' + type">
-        <a class="notify-control-btn notify-close" @click.prevent.stop="close">{{ $t('close') }}</a>
-        <a class="notify-control-btn notify-confirm" v-if="type === 1" @click.prevent.stop="confirm">{{ $t('confirm') }}</a>
-      </div> -->
     </div>
   </div>
 </template>
@@ -55,7 +48,6 @@ export default {
     this.$nextTick(() => {
       setTimeout(this.comeIn, 20)
     })
-    // this.$eh.$once('app:keyup:enter', this.confirm)
     this.$eh.$once('app:keyup:esc', this.close)
   },
   methods: {
@@ -210,7 +202,7 @@ export default {
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translate(100%, 0);
+    transform: translate(0, -100%);
   }
   to {
     opacity: 1;
@@ -224,7 +216,7 @@ export default {
   }
   to {
     opacity: 0;
-    transform: translate(100%, 0);
+    transform: translate(0, -100%);
   }
 }
 </style>

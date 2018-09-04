@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const _ = require('lodash')
-const THEME = 'default'//process.env
+const THEME = 'default'// process.env
 
 function colorRgb (color) {
   let sColor = color.toLowerCase()

@@ -6,7 +6,9 @@
 
 <script>
 export default {
-  name: 'profile'
+  name: 'profile',
+  components: {
+  }
 }
 </script>
 <style lang="scss">

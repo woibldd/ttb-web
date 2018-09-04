@@ -1,6 +1,5 @@
 <template>
   <div class="page page-login">
-    <v-nav></v-nav>
     <div class="panel">
       <div class="title-wrap">
         <div class="panel-title" v-t="'login_title'"></div>
@@ -88,13 +87,11 @@ import service from '@/modules/service'
 import VBtn from '@/components/VBtn'
 import {state, actions, local} from '@/modules/store'
 import utils from '@/modules/utils'
-import VNav from '@/components/VNav2.vue'
 
 export default {
   name: 'login',
   components: {
-    VBtn,
-    VNav
+    VBtn
   },
   props: ['by'],
   data () {

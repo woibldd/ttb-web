@@ -93,6 +93,7 @@ let router = new Router({
       meta: {
         auth: false,
         nav: !isMobile,
+        class: 'dark',
         mobileNav: isMobile
       },
       // component: (isMobile && process.env.MODE === 'beta') ? MobileProfile : Profile
@@ -107,7 +108,8 @@ let router = new Router({
       name: 'account',
       meta: {
         auth: false,
-        nav: false
+        nav: true,
+        class: 'login'
       },
       component: Account,
       children: [{

@@ -8,7 +8,7 @@ $primary-opacity: rgba(73,86,201,.2); // background 交易品种列表选中的�
 /* nav */
 $nav: #252838; // 主导航颜色 -nav bg
 $normal-nav: #252838; // 资产个人中心导航颜色 -nav bg
-$nav-2: #393e59; // 副导航颜色 -nav-2
+$nav-2: #303E4B; // 副导航颜色 -nav-2
 
 /* link */
 $text-link: #C9A96C; // base -文字链
@@ -71,7 +71,8 @@ $state-info: #4956C9;
 $text: #000000; // 基础文字
 $text-strong: #333333; // 重要文字
 $text-light: #666666; // 重要文字
-$text-week: #999999; // 重要文字
+$text-weak: #999999; // 重要文字
+$text-normal: #cccccc; // 一般
 
 /* hover */
 $hover-bg: #C9A96C; // 首页按钮hover
@@ -79,6 +80,8 @@ $dropdown-bg: rgba(0,0,0,0.1); // 下拉列表hover
 
 /* home header background */
 $home-header-bg:linear-gradient(-153.7deg,#1B244F,#494988);
+$home-header-bgdark: #1A1A1A;
+$home-header-login: #303E4B;
 
 /* const */
 $splitter: rgba(255,255,255,.2); // trade split line 交易页面分割线

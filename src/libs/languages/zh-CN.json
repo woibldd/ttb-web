@@ -1,6 +1,6 @@
 {
   "signup": "创建帐号",
-  "signin": "登录",
+  "signin": "登 录",
   "signout": "退出登录",
   "trading": "币币交易",
   "asset": "资产",
@@ -528,5 +528,6 @@
   "phone_regionid_m": "区号",
   "phone_number_m": "手机号",
   "region_label_m": "地区",
-  "profile_left_invite": "我的邀请"
+  "profile_left_invite": "我的邀请",
+  "invite_reward_text": "邀请奖励计划即将开启，敬请期待"
 }

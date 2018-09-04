@@ -5,8 +5,8 @@
     @keyup.enter="onkeyup('enter')"
     @keyup.esc="onkeyup('esc')">
     <div class="page-mask" v-show="state.loading"></div>
-    <v-nav v-if="showNav" :class="[navClass]"></v-nav>
-    <div class="main-container" ref="container" :style="{background: $route.name === 'eosforcevote' ? '#FFFFFF' : 'initial'}">
+    <v-nav2 v-if="showNav" :class="[navClass]"></v-nav2>
+    <div class="main-container" ref="container" :style="{background: 'initial'}">
       <router-view/>
     </div>
     <v-footer ref="footer" v-if="footer === 'default'" :fixed="fixed" v-show="showFooter"/>
@@ -68,6 +68,17 @@ export default {
       }
       return utils.getRouteMeta(this.$route, 'class')
     },
+    bgColor () {
+      let navClass = this.navClass
+      switch (navClass) {
+        case 'login':
+          return '#303E4B'
+        case 'dark':
+          return '#1A1A1A'
+        default:
+          return 'initial'
+      }
+    },
     footer () {
       if (this.state.theme.themeName === 'default' && !this.isMobile) {
         return 'default'
@@ -109,7 +120,7 @@ export default {
     fixPosition () {
       const box = this.$refs.container
       if (box && this.footer === 'default') {
-        box.style.minHeight = window.innerHeight - (this.showFooter ? 80 : 0) - (this.showNav ? 50 : 0) + 'px'
+        box.style.minHeight = window.innerHeight - (this.showFooter ? 110 : 0) - (this.showNav ? 80 : 0) + 'px'
       }
     },
     async keepSession () {

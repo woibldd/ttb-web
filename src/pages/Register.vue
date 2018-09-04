@@ -1,6 +1,5 @@
 <template>
   <div class="page page-register">
-    <v-nav></v-nav>
     <div class="panel">
       <div class="title-wrap">
         <div class="panel-title" v-t="'signup_title'"></div>
@@ -154,7 +153,6 @@ import utils from '@/modules/utils'
 import service from '@/modules/service'
 import pwChecker from '@/modules/pw-checker'
 import VBtn from '@/components/VBtn'
-import VNav from '@/components/VNav2.vue'
 import {state} from '@/modules/store'
 // import { MdField } from 'vue-material/dist/components'
 // import gtMixin from '@/mixins/gt'
@@ -162,8 +160,7 @@ import {state} from '@/modules/store'
 export default {
   name: 'register',
   components: {
-    VBtn,
-    VNav
+    VBtn
   },
   props: ['by'],
   data () {
@@ -280,8 +277,6 @@ export default {
   },
   methods: {
     async submit (e) {
-      utils.alert('111')
-      return;
       // 本地校验
       const check = this.checkParams()
       if (!check.ok) {

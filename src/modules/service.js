@@ -282,55 +282,8 @@ const service = {
   getMiningRefundData () {
     return request('statistics/refund')
   },
-  // ram 交易
-  getRamTrade (data) {
-    return request('eosram/getEosRamList', data)
-  },
-  getRamTradeByUser (data) {
-    return request('eosram/getEosRamListByUser', data)
-  },
-  getRamPrice () {
-    return request('eosram/getEosRamPrice')
-  },
-  buyRam (data) {
-    return request('eosram/buyEosRam', data)
-  },
-  sellRam (data) {
-    return request('eosram/sellEosRam', data)
-  },
-  // eosforce
-  getEoscVoteList (data) {
-    return request('eosc/vote/list', data)
-  },
-  getEoscVoteBalance (data) {
-    return request('eosc/balance', data)
-  },
-  getEoscVoteFee (data) {
-    return request('eosc/fee', data)
-  },
-  eoscVoteCreate (data) {
-    return request('eosc/vote/create', data)
-  },
-  eoscVoteRelease (data) {
-    return request('eosc/vote/release', data)
-  },
-  eoscVoteTransfer (data) {
-    return request('eosc/transfer', data)
-  },
-  eoscVoteTransferResult (data) {
-    return request('eosc/transfer/status', data)
-  },
-  eoscVoteReward (data) {
-    return request('eosc/vote/reward', data)
-  },
-  getEoscVoteActiveList () {
-    return request('eosc/vote/active_list')
-  },
-  obtainFreeVotes (data) {
-    return request('eosc/vote/obtain', data)
-  },
-  checkFreeVotes () {
-    return request('eosc/vote/obtain')
+  getMyInviteCode () {
+    return request('user/my_invite')
   }
 }
 
@@ -338,7 +291,7 @@ export async function fetch (url, body, options, method = 'post') {
   let mock = false
   mock = await Mock()
   if (mock && url.indexOf('api.thi') > 0) {
-    const find = _.find(mock.list, item => { 
+    const find = _.find(mock.list, item => {
       return item.url && item.url.test(url)
     })
     if (find) {
