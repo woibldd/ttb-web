@@ -207,6 +207,9 @@
       border-bottom: 1px solid $primary;
       transition: border-bottom .7s;
     }
+    option {
+      color:#000;
+    }
   }
   .split {
     height: 36px;

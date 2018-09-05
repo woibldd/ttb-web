@@ -11,7 +11,7 @@
       </div>
       <div class="error-block" v-show="errmsg">{{ errmsg }}</div>
       <form class="form" onsubmit="return false">
-        <div :class="['field', {active: activeList['phone'].active}]" v-show="by === 'phone'">
+        <div :class="['field']" v-show="by === 'phone'">
           <div class="input-box">
             <div class="label">{{ $t('region_label') }}</div>
             <v-loading v-if="!regionOptions.length" color="gray"></v-loading>
@@ -25,7 +25,7 @@
             </select>
           </div>
         </div>
-        <div class="field" v-show="by === 'phone'">
+        <div class="field" v-show="by === 'phone'" :class="{active: activeList['phone'].active}">
           <div class="input-box">
             <div class="label">{{ $t('phone_number') }}</div>
             <input class="input item" type="text"
