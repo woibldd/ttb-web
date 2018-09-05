@@ -1,5 +1,6 @@
 <template>
   <div class="page page-register">
+    <resbg></resbg>
     <div class="panel">
       <div class="title-wrap">
         <div class="panel-title" v-t="'signup_title'"></div>
@@ -154,13 +155,15 @@ import service from '@/modules/service'
 import pwChecker from '@/modules/pw-checker'
 import VBtn from '@/components/VBtn'
 import {state} from '@/modules/store'
+import resbg from '@/components/resbg'
 // import { MdField } from 'vue-material/dist/components'
 // import gtMixin from '@/mixins/gt'
 
 export default {
   name: 'register',
   components: {
-    VBtn
+    VBtn,
+    resbg
   },
   props: ['by'],
   data () {

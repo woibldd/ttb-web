@@ -17,6 +17,8 @@
   padding-top: 36px;
   padding-bottom: 46px;
   color: $primary;
+  position:relative;
+  overflow: hidden;
 }
 .page-password-reset {
   padding-top: 36px;
@@ -51,6 +53,8 @@
   padding: 0 40px;
   text-align: center;
   margin-bottom: 28px;
+  position: relative;
+  z-index:1000;
   .panel-title {
     font-size: 24px;
     line-height: 1.5;
