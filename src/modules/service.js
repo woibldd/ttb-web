@@ -284,6 +284,9 @@ const service = {
   },
   getMyInviteCode () {
     return request('user/my_invite')
+  },
+  getTerminalDate () {
+    return reqeust('get_terminal_date')
   }
 }
 

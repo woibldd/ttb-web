@@ -114,6 +114,7 @@ embed {display: none;}
 .main-container {
   box-sizing: border-box;
   @include clearfix();
+  position: relative;
 }
 footer {
   background-color: $nav-2;

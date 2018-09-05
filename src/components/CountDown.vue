@@ -67,4 +67,5 @@ export default {
   font-size: 44px;
   color: $primary;
 }
+.countdown{font-size:58px;}
 </style>
