@@ -6,27 +6,28 @@
         <div class="title-box">{{$t('profile_left_invite')}}</div>
         <div class="invite-wrap">
           <div class="share_style login_show">
-            <div class="post_btn share_div"><p>我的邀请二维码</p>
-              <div class="btn_select" @click="showQrcode">我的邀请二维码</div>
+            <div class="post_btn share_div"><p>{{$t('profile_left_invite_qrcode')}}</p>
+              <div class="btn_select" @click="showQrcode">{{$t('profile_left_invite_qrcode')}}</div>
               <div class="qrcode" v-show="show">
                 <canvas class="qr-img" ref="qr"></canvas>
               </div>
             </div>
-            <div class="user_url share_div"><p>专属注册链接</p>
+            <div class="user_url share_div"><p>{{$t("profile_left_invite_link")}}</p>
               <div class="share_code_wrap">
                 <p class="url">
                   <input type="text" class="share_link" v-model="inviteLink">
                 </p>
-                <a @click.prevent="copy('inviteLink')" class="copy_url copy_btn copy_url_2" data-clipboard-target=".share_link">复制链接分享</a>
+                <a @click.prevent="copy('inviteLink')" class="copy_url copy_btn copy_url_2" data-clipboard-target=".share_link">{{$t('profile_left_copy_invite_link')}}</a>
               </div>
             </div>
-            <div class="user_code share_div"><p>专属邀请码</p>
+            <div class="user_code share_div"><p>{{$t('profile_left_invite_code')}}</p>
               <div class="share_code_wrap"><p class="share_code">{{inviteCode}}</p>
-                <a @click.prevent="copy('inviteCode')" class="copy_url copy_btn copy_url_1" data-clipboard-target=".share_code">复制邀请码</a>
+                <a @click.prevent="copy('inviteCode')" class="copy_url copy_btn copy_url_1" data-clipboard-target=".share_code">{{$t('profile_left_copy_invite_code')}}</a>
               </div>
             </div>
           </div>
         </div>
+        <div class="title-box">{{$t('invite_history_text')}}</div>
         <div class="invite-list ">
           <div class="empty">
             <span class="text">{{$t("invite_reward_text")}}</span>
@@ -100,19 +101,16 @@
   @import '../styles/mixins';
 
   .user-center-right {
-    padding-left: 40px;
-    min-height: 580px;
+    padding-left: 60px;
     float: left;
     .profile-container {
       width: 960px;
-      min-height: 600px;
       position: relative;
 
       .title-box {
         width: 100%;
-        height: 51px;
-        line-height: 35px;
-        font-size: 24px;
+        height: 40px;
+        font-size: 18px;
         font-weight: 600;
         color: $text-strong;
         border-bottom: 1px solid #e6e6e6;
@@ -120,8 +118,7 @@
       .invite-wrap {
         margin-top: 24px;
         @include clearfix();
-        height: 185px;
-        border-bottom: 1px solid #e6e6e6;
+        height: 150px;
         .share_style .post_btn {
           padding: 0;
           width: 160px;
@@ -135,6 +132,7 @@
             border-radius: 4px;
             padding: 12px;
             position: absolute;
+            background: #fff;
           }
         }
         .btn_select {
@@ -148,6 +146,7 @@
           text-align: center;
           border-radius: 4px;
           cursor: pointer;
+          user-select: none;
         }
         .share_div {
           display: inline-block;

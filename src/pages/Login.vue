@@ -2,7 +2,7 @@
   <div class="page page-login">
     <div class="panel">
       <div class="title-wrap">
-        <div class="panel-title" v-t="'login_title'"></div>
+        <div class="panel-title" v-t="'signin'"></div>
         <div class="by-links" v-if="state.enablePhoneSignup">
           <router-link class="by-link ibt" to="email">{{ $t('login_by_email') }}</router-link>
           <span class="sp-line"></span>
