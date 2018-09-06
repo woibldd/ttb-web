@@ -73,8 +73,8 @@
             @click="submit"></v-btn>
           <div class="to-others">
             <router-link :to="{name: 'registerBy', params: $route.params, query: $route.query}">{{ $t('signup') }}</router-link>
-            <i></i>
-            <router-link :to="{name: 'recover'}">{{ $t('if_forgot') }}</router-link>
+            <!-- <i></i> -->
+            <!-- <router-link :to="{name: 'recover'}">{{ $t('if_forgot') }}</router-link> -->
           </div>
         </div>
       </form>
@@ -153,7 +153,7 @@ export default {
         params.email = this.email
       } else if (this.by === 'phone') {
         params.phone = this.phone
-        params.region_id = this.regionId
+        params.region = this.regionId
       }
       return params
     }
@@ -212,14 +212,9 @@ export default {
       this.errmsg = ''
 
       this.loading = true
-      const gtVerifier = await this.gtVerifier()
-      if (!gtVerifier) {
-        this.loading = false
-        return
-      }
 
-      const res = await service.login(gtVerifier(this.params))
-      if (res.code) {
+      const res = await service.login(this.params)
+      if (res.code != 200) {
         this.loading = false
         this.errmsg = res.message
         return false
@@ -243,12 +238,9 @@ export default {
       }
 
       // 去二次验证
-      actions.setFa2(res.data)
+      // actions.setFa2(res.data)
       this.$router.push({
-        name: 'verify',
-        params: {
-          task: 'login'
-        }
+        name: 'invite'
       })
     },
     active (field, active) {
@@ -271,8 +263,8 @@ export default {
     this.fetchRegion()
 
     const returnTo = this.$route.query.return_to
-    if (returnTo && returnTo.indexOf('https://thinkbit.zendesk.com/') > -1) {
-      actions.setLoginBack('/gate/zendesk/auth' + location.search)
+    if (returnTo && returnTo.indexOf('https://ix.zendesk.com/') > -1) {
+      actions.setLoginBack('/zendesk/auth' + location.search)
     }
     const backTo = this.$route.query.from
     if (backTo && (/^\/campaigns\//.test(backTo) || /^\/activity\//.test(backTo))) {

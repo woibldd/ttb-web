@@ -12,8 +12,8 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/gate': {
-        target: 'https://thinkbit.com/',
+      '/': {
+        target: 'http://i.ix-test.com/',
         changeOrigin: true,
         secure: false
       }

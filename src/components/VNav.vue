@@ -162,11 +162,6 @@ export default {
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
-.v-route-eosforcevote {
-  .header-nav {
-    background: none;
-  }
-}
 .header-nav {
   font-size: 20px;
   position: relative;

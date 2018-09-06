@@ -77,12 +77,9 @@ export const local = new Locals('store', {
   interval: '15',
   supportNum: 129,
   proOnFav: false,
-  eosforceFeeModalPopped: false,
-  eosforceTabIndex: 0,
   pairTableTab: 'USDT',
   everSignup: false,
-  hideOthers: false,
-  eoscVisited: false
+  hideOthers: false
 })
 
 export const actions = {
@@ -123,7 +120,7 @@ export const actions = {
       window.zE && window.zE(function () {
         window.zE.identify({
           name: 'Guest',
-          email: 'guest@thinkbit.com'
+          email: 'guest@ix.com'
         })
       })
     }
@@ -257,7 +254,7 @@ export const actions = {
     const obj = {}
     for (const key in msg) {
       if (msg.hasOwnProperty(key)) {
-        obj[key] = msg[key].replace('ThinkBit Pro', exchangeName).replace('ThinkBit', companyName)
+        obj[key] = msg[key].replace('IX.COM', exchangeName).replace('IX', companyName)
       }
     }
     return {...msg, ...obj}

@@ -12,29 +12,29 @@ module.exports = {
   description: 'IX致力于打造一家回归区块链精神的数字资产交易所，公开、公正、透明',
   shortcut: '',
   telegram: {
-    'zh-CN': 'https://t.me/ThinkBitProCN',
-    en: 'https://t.me/ThinkBitProEnglish'
+    'zh-CN': 'https://t.me/ixCN',
+    en: 'https://t.me/ixEnglish'
   },
-  supportMail: 'support@thinkbit.com',
-  hrMail: 'hr@thinkbit.com',
+  supportMail: 'support@ix.com',
+  hrMail: 'hr@ix.com',
   apiDoc: {
-    'en': 'https://github.com/thinkbitpro/API_docs_en/wiki',
-    'zh-CN': 'https://github.com/thinkbitpro/API_docs_zh/wiki'
+    'en': 'https://github.com/ix/API_docs_en/wiki',
+    'zh-CN': 'https://github.com/ix/API_docs_zh/wiki'
   },
   faq: {
-    'en': 'https://thinkbit.zendesk.com/hc/en-us/categories/360000222934',
-    'zh-CN': 'https://thinkbit.zendesk.com/hc/zh-cn/categories/360000222934'
+    'en': 'https://ix.zendesk.com/hc/en-us/categories/360000222934',
+    'zh-CN': 'https://ix.zendesk.com/hc/zh-cn/categories/360000222934'
   },
   announcement: {
-    'en': 'https://thinkbit.zendesk.com/hc/en-us/categories/360000242414',
-    'zh-CN': 'https://thinkbit.zendesk.com/hc/zh-cn/categories/360000242414'
+    'en': 'https://ix.zendesk.com/hc/en-us/categories/360000242414',
+    'zh-CN': 'https://ix.zendesk.com/hc/zh-cn/categories/360000242414'
   },
   help: {
-    'en': 'https://thinkbit.zendesk.com/hc/en-us',
-    'zh-CN': 'https://thinkbit.zendesk.com/hc/zh-cn'
+    'en': 'https://ix.zendesk.com/hc/en-us',
+    'zh-CN': 'https://ix.zendesk.com/hc/zh-cn'
   },
   request: {
-    'en': 'https://thinkbit.zendesk.com/hc/en-us/requests/new',
-    'zh-CN': 'https://thinkbit.zendesk.com/hc/zh-cn/requests/new'
+    'en': 'https://ix.zendesk.com/hc/en-us/requests/new',
+    'zh-CN': 'https://ix.zendesk.com/hc/zh-cn/requests/new'
   }
 }

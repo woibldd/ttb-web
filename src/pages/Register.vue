@@ -37,7 +37,7 @@
               v-model.trim="phone" />
           </div>
         </div>
-        <div :class="['field', {active: activeList['email'].active}]">
+        <div :class="['field', {active: activeList['email'].active}]" v-show="by === 'email'">
           <div class="input-box">
             <div class="label" v-t="'email'"></div>
             <input v-model.trim="email" @focus="active('email', true)" @blur="active('email', false)"
@@ -248,10 +248,11 @@ export default {
     params () {
       const params = {
         email: this.email,
-        password: this.password
+        password: this.password,
+        code: this.captcha
       }
       if (this.by === 'phone') {
-        params.region_id = this.regionId
+        params.region = this.regionId
         params.phone = this.phone
       }
       if (this.invitorId) {
@@ -288,7 +289,6 @@ export default {
         return false
       }
       this.resetError()
-
       // 服务端校验
       // this.loading = true
       // const gtVerifier = await this.gtVerifier()
@@ -298,32 +298,32 @@ export default {
       // }
       const res = await service.register(this.params)
 
-      if (res.code) {
+      if (res.code !== 200) {
         // 错误信息
         this.errmsg = res.message
         this.loading = false
         return false
       }
 
-      if (this.by === 'phone') {
-        const fa2 = await utils.$fa2.verify({
-          phone: true,
-          google: false,
-          key: res.data.auth,
-          task: 'register'
-        })
-        if (!fa2) {
-          this.loading = false
-          return false
-        }
-      }
+      // if (this.by === 'phone') {
+      //   const fa2 = await utils.$fa2.verify({
+      //     phone: true,
+      //     google: false,
+      //     key: res.data.auth,
+      //     task: 'register'
+      //   })
+      //   if (!fa2) {
+      //     this.loading = false
+      //     return false
+      //   }
+      // }
 
       utils.eraseCookie('invitor')
-
+      utils.success()
       // 激活邮箱
-      this.state.verifyEmail = this.email
+      // this.state.verifyEmail = this.email
       this.$router.push({
-        name: 'mailVerify',
+        name: 'login',
         params: {
           task: 'register'
         }
@@ -354,11 +354,13 @@ export default {
           return err(this.$i18n.t('bind_phone_err_empty'), 'phone')
         }
       }
-      if (!this.email) {
-        return err(this.$i18n.t('err_empty_email'), 'email')
-      }
-      if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(this.email)) {
-        return err(this.$i18n.t('err_invalid_email'), 'email')
+      if (this.by === 'email') {
+        if (!this.email) {
+          return err(this.$i18n.t('err_empty_email'), 'email')
+        }
+        if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(this.email)) {
+          return err(this.$i18n.t('err_invalid_email'), 'email')
+        }
       }
       if (!this.password) {
         return err(this.$i18n.t('err_empty_password'), 'password')
@@ -410,9 +412,12 @@ export default {
       this.sms.status = 1
       this.sms.countDown = 60
       this.startCountDown()
-      const res = await service.presetPhone({
-        region_id: this.regionId,
-        phone: this.phone
+      const res = await service.sendCode({
+        by: this.by,
+        region: this.regionId,
+        phone: this.phone,
+        email: this.email,
+        lang: state.locale
       })
       if (res.code) {
         this.errmsg = res.message

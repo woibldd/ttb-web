@@ -37,14 +37,20 @@ const service = {
     return request('fa2/verify', data)
   },
   getUserInfo () {
-    return getCache('session', () => request('sign/session'), 6e4)
+    return getCache('session', () => request('user/session'), 6e4)
   },
   activate (code) {
     rmCache('session')
     return request('sign/activate?auth=' + code)
   },
-  presetPhone (data) {
-    return request('sign/signup/code', data)
+  /**
+   * 发送验证码
+   * @param {*} data by lang phone email region
+   */
+  sendCode (data) {
+    let url = `user/register/${data.by}/code`
+    let params = data
+    return request(url, data)
   },
   sendVerifyEmail () {
     return request('sign/reactivate')
@@ -52,18 +58,18 @@ const service = {
   login (data) {
     rmCache('session')
     if (data.email) {
-      return request('sign/signin/email', data)
+      return request('/user/login/email', data)
     }
     if (data.phone) {
-      return request('sign/signin/phone', data)
+      return request('/user/login/phone', data)
     }
   },
   register (data) {
     rmCache('session')
     if (data.phone) {
-      return request('sign/signup/phone', data)
+      return request('user/register/phone', data)
     }
-    return request('sign/signup', data)
+    return request('user/register/email', data)
   },
   signout () {
     rmCache('session')
@@ -332,10 +338,8 @@ export async function fetch (url, body, options, method = 'post') {
         return data
       }
     }
-    if (data.status > 200) {
-      data.code = data.status
-    }
-    if (data.code === 200) {
+
+    if (data.code == 200) {
       data.code = 0
     }
     if (data.code && !data.message) {
@@ -362,7 +366,7 @@ export function request (url, body, options) {
   // if (process.env.NODE_ENV === 'development') {
   // return fetch('/beta-gate/' + url, body, options)
   // }
-  return fetch('/api/' + url, body, options)
+  return fetch(url, body, options)
 }
 function quote (url, body, options) {
   return fetch(config.quoteUrl + url, body, options, 'get')

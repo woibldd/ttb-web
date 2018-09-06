@@ -2,8 +2,8 @@ let wsUrl
 let quoteUrl
 
 if (process.env.NODE_ENV === 'development') {
-  wsUrl = 'wss://ws.thinkbit-beta.com/v2/'
-  quoteUrl = 'https://api.thinkbit-beta.com/v2/'
+  wsUrl = 'wss://ws.ix-test.com/v2/'
+  quoteUrl = 'https://api.ix-test.com/v2/'
 } else {
   const hostname = location.hostname.match(/(\.|^)([\w-]*.[\w]*)$/)[2]
   wsUrl = `wss://ws.${hostname}/v2/`
