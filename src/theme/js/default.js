@@ -7,13 +7,10 @@ module.exports = {
   locales: ['en', 'zh-CN', 'zh-HK', 'ja', 'ko'],
   themeName: 'default',
   companyName: 'IX.COM',
-  exchangeName: 'IX.COM',
-  keywords: 'ThinkBit Pro, 信币, Bitcoin Exchange, Bitcoin, BTC, Bitcoin Price, Bitcoin Markets, USDT, Litecoin, BCH, Ethereum, ETH, Ethereum Classic, EOS, 比特币交易平台,比特币,BTC,比特币价格,比特币行情,USDT,莱特币,BCH,以太坊,ETH,以太经典,柚子',
-  description: 'ThinkBit Pro, 信币, Bitcoin Exchange, Bitcoin, BTC, Bitcoin Price, Bitcoin Markets, USDT, Litecoin, BCH, Ethereum, ETH, Ethereum Classic, EOS, 比特币交易平台,比特币,BTC,比特币价格,比特币行情,USDT,莱特币,BCH,以太坊,ETH,以太经典,柚子',
+  exchangeName: '比特币/以太坊交易平台，IX，数字资产交易所',
+  keywords: '比特币,比特币交易,以太坊,区块链,IX,共识,自由联合,数字资产交易所',
+  description: 'IX致力于打造一家回归区块链精神的数字资产交易所，公开、公正、透明',
   shortcut: '',
-  eosRamTrading: true,
-  eosforcevote: true,
-  freevote: true,
   telegram: {
     'zh-CN': 'https://t.me/ThinkBitProCN',
     en: 'https://t.me/ThinkBitProEnglish'
@@ -39,9 +36,5 @@ module.exports = {
   request: {
     'en': 'https://thinkbit.zendesk.com/hc/en-us/requests/new',
     'zh-CN': 'https://thinkbit.zendesk.com/hc/zh-cn/requests/new'
-  },
-  eosforceLink: {
-    'en': 'https://thinkbit.zendesk.com/hc/en-us/articles/360007849274',
-    'zh-CN': 'https://thinkbit.zendesk.com/hc/zh-cn/articles/360007849274'
   }
 }

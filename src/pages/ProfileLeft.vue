@@ -2,8 +2,8 @@
   <div class="user-center-left">
     <div class="left-menu-container left-menu-nobottom">
       <p class="left-menu-title">
-        <i class="icon iconfont icon-transactioninformat title-icon" style="left: 16px; position: absolute; font-size: 12px;"></i>
-        <span class="menu-title">个人中心</span>
+        <icon name="personal-center"></icon>
+        <span class="menu-title">{{$t('profile_personal_center')}}</span>
         </p>
         <ul class="left-menu-list">
           <li class="active"><span class="menu-name">{{ $t('profile_left_invite') }}</span></li>
@@ -23,8 +23,8 @@
   .left-menu-container {
     background: #fff;
     position: relative;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     border: 1px solid #e9e9e9;
     border-radius: 4px;
     box-sizing: border-box;
@@ -33,15 +33,20 @@
 
     .left-menu-title {
       width: 100%;
-      font-size: 12px;
-      line-height: 36px;
+      font-size: 14px;
+      margin-left: 12px;
       text-align: left;
-      color: rgba(0,0,0,.43);
+      color: $text-weak;
       box-sizing: border-box;
+
+      .menu-title {
+        margin-left: 6px;
+      }
     }
 
     .left-menu-list {
       width: 100%;
+      margin-top: 20px;
       li {
         width: 100%;
         text-align: left;

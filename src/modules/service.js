@@ -112,7 +112,7 @@ const service = {
     return request('quote/query', data)
   },
   getRegionList () {
-    return getCache('regionList', () => request('region/list'))
+    return getCache('regionList', () => Promise.resolve(require('./region.json')))
   },
   getKycInfo (data) {
     return request('kyc/query', data)
@@ -283,7 +283,7 @@ const service = {
     return request('statistics/refund')
   },
   getMyInviteCode () {
-    return request('user/my_invite')
+    return request('user/invite')
   },
   getTerminalDate () {
     return reqeust('get_terminal_date')
@@ -316,7 +316,6 @@ export async function fetch (url, body, options, method = 'post') {
   try {
     let res
     if (method === 'get') {
-      // url = url + '?' + _.map(_.keys(body), key => key + '=' + body[key]).join('&')
       res = await api.get(url, { params: body }, options)
     } else {
       res = await api.post(url, body, options)
@@ -363,7 +362,7 @@ export function request (url, body, options) {
   // if (process.env.NODE_ENV === 'development') {
   // return fetch('/beta-gate/' + url, body, options)
   // }
-  return fetch('/gate/' + url, body, options)
+  return fetch('/api/' + url, body, options)
 }
 function quote (url, body, options) {
   return fetch(config.quoteUrl + url, body, options, 'get')

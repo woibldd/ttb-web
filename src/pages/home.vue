@@ -5,7 +5,7 @@
     </div>
     <div class="ind_cen">
         <div class="ix_logo"></div>
-        <b class="ind_txt">自由人的自由联合</b>
+        <b class="ind_txt">{{$t("slogan")}}</b>
         <p class="count_down">
             <count-down :terminal="date"></count-down>
         </p>
@@ -41,7 +41,7 @@ export default {
       }
   },
   created () {
-      this.fetchData()
+    //   this.fetchData()
   }
 }
 </script>

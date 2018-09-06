@@ -3,9 +3,10 @@
     <div class="c_box">
       <router-link :to="{name:'home'}" class="nav_logo"></router-link>
       <div class="nav_right">
-        <router-link :to="{name:'login'}" class="nav_log_res">登陆</router-link>
-        <router-link :to="{name:'register'}" class="nav_log_res">注册</router-link>
-        <div class="lang">简体中文<b></b></div>
+        <router-link :to="{name:'login'}" class="nav_log_res">{{$t("signin")}}</router-link>
+        <router-link :to="{name:'register'}" class="nav_log_res">{{$t("signup_title")}}</router-link>
+        <div class="lang" @click="setLocale">{{localeText}}<b></b>
+      </div>
       </div>
     </div>
   </div>
@@ -23,6 +24,30 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  data () {
+    return {
+      state
+    }
+  },
+  computed: {
+    localeText () {
+      return utils.getLocaleName(state.locale)
+    }
+  },
+  methods: {
+    setLocale () {
+      let localeCode = 'en'
+      switch (state.locale) {
+        case 'zh-CN':
+          localeCode = 'en'
+          break
+        default:
+          localeCode = 'zh-CN'
+          break
+      }
+      actions.setLocale(localeCode)
+    },
   }
 }
 </script>
