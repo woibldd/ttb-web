@@ -214,7 +214,7 @@ export default {
       this.loading = true
 
       const res = await service.login(this.params)
-      if (res.code != 200) {
+      if (res.code) {
         this.loading = false
         this.errmsg = res.message
         return false

@@ -327,7 +327,7 @@ export async function fetch (url, body, options, method = 'post') {
       res = await api.post(url, body, options)
     }
     const data = await res // .json()
-    if (data.code === 1025 && state.userInfo) {
+    if (data.code === 401 && state.userInfo) {
       // Session 失效
       actions.setUserInfo(null)
       if (utils.getRouteMeta(utils.$app.$route, 'auth')) {

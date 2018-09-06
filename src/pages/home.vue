@@ -24,7 +24,6 @@ import service from '@/modules/service'
 export default {
   data () {
     return {
-        state,
         news: [],
         notice: null,
         date: new Date(2018, 8, 20)

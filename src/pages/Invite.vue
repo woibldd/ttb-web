@@ -42,6 +42,7 @@
   import ProfileLeft from './ProfileLeft'
   import copyToClipboard from 'copy-to-clipboard'
   import service from '@/modules/service'
+  import {state} from '@/modules/store'
   const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
 
   export default {
@@ -51,18 +52,22 @@
     },
     data () {
       return {
+        state,
         show: false,
-        qrReady: false,
-        inviteCode: ''
+        qrReady: false
       }
     },
     computed: {
       inviteLink() {
-        return `${location.protocol}//${location.host}/user/register/?code=${this.inviteCode}`
+        return `${location.protocol}//${location.host}/user/register/?invitor=${this.inviteCode}`
+      },
+      inviteCode() {
+        if (this.state.userInfo)
+          return this.state.userInfo.id
+        return ''
       }
     },
     async created () {
-      this.inviteCode = '234324' // await service.getMyInviteCode()
       this.setQr(this.inviteLink)
     },
     methods: {

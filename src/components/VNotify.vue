@@ -34,10 +34,10 @@ export default {
   },
   computed: {
     type () {
-      return this.options.type || 'info'
+      return this.options.style || 'info'
     },
     style () {
-      return this.options.type || 'info'
+      return this.options.style || 'info'
     },
     title () {
       return this.options.title || ''

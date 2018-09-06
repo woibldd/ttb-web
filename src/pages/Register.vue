@@ -289,44 +289,20 @@ export default {
         return false
       }
       this.resetError()
-      // 服务端校验
-      // this.loading = true
-      // const gtVerifier = await this.gtVerifier()
-      // if (!gtVerifier) {
-      //   this.loading = false
-      //   return
-      // }
       const res = await service.register(this.params)
 
-      if (res.code !== 200) {
+      if (res.code) {
         // 错误信息
         this.errmsg = res.message
         this.loading = false
         return false
       }
-
-      // if (this.by === 'phone') {
-      //   const fa2 = await utils.$fa2.verify({
-      //     phone: true,
-      //     google: false,
-      //     key: res.data.auth,
-      //     task: 'register'
-      //   })
-      //   if (!fa2) {
-      //     this.loading = false
-      //     return false
-      //   }
-      // }
-
       utils.eraseCookie('invitor')
-      utils.success()
+      utils.success(this.$i18n.t('register_success'))
       // 激活邮箱
       // this.state.verifyEmail = this.email
       this.$router.push({
-        name: 'login',
-        params: {
-          task: 'register'
-        }
+        name: 'login'
       })
     },
     active (field, active) {
