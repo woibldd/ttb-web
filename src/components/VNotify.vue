@@ -2,6 +2,12 @@
   <div class="notify-wrap" @mouseenter="pause" @mouseleave="play">
     <div class="notify-panel" :class="[show ? 'show' : '']" ref="panel">
       <div class="notify-box" :class="['bg-' + style]">
+        <div class="notify-type">
+            <svg class="icon-notify" v-if="type == 'info'"><use xlink:href="#icon-notify-info" /></svg>
+            <svg class="icon-notify" v-if="type == 'success'"><use xlink:href="#icon-notify-success" /></svg>
+            <svg class="icon-notify" v-if="type == 'warning'"><use xlink:href="#icon-notify-warning" /></svg>
+            <svg class="icon-notify" v-if="type == 'danger'"><use xlink:href="#icon-notify-danger" /></svg>
+        </div>
         <div class="notify-info" :class="{h: !title || !content}">
           <div class="title" v-show="title">{{ title }}</div>
           <div class="content" v-show="content">{{ content }}</div>
@@ -27,11 +33,11 @@ export default {
     }
   },
   computed: {
-    // type () {
-    //   return this.options.type || 0
-    // },
+    type () {
+      return this.options.type || 'info'
+    },
     style () {
-      return this.options.style || 'info'
+      return this.options.type || 'info'
     },
     title () {
       return this.options.title || ''
@@ -41,7 +47,7 @@ export default {
     },
     duration () {
       // return this.type === 0 ? (this.options.duration || 3000) : 0
-      return this.options.duration || 3000
+      return this.options.duration || 300000
     }
   },
   mounted () {
@@ -132,6 +138,7 @@ export default {
     border-radius: 3px;
     opacity: 0.95;
     transition: 0.2s linear;
+    display: flex;
     &.bg-danger{
       background:rgba(226, 92, 68, 0.95);
     }
@@ -164,6 +171,19 @@ export default {
         opacity: 0.8;
       }
     }
+  }
+  .notify-type {
+      display: flex;
+      align-items: center;
+      margin-right: 10px;
+
+      .icon-notify {
+          width: 35px;
+          height: 35px;
+          display: inline-block;
+          background-size: 100% 100%;
+          background-repeat: no-repeat;
+      }
   }
   .notify-info {
     text-align: left;
