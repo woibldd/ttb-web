@@ -10,8 +10,8 @@
             <count-down :terminal="date"></count-down>
         </p>
         <div class="ind_but">
-            <a href="https://ix-test.com/IX_WhitePaper_CN-1.pdf" class="xy">宣言</a>
-            <a href="https://ix-test.com/IX_+Consensus+manifesto_CN-1.pdf" class="wb">白皮书</a>
+            <a :href="'/docs/The+Declaration+of+IX'+pdfSubfix+'.pdf'" target="_blank" class="xy">{{$t("declaration")}}</a>
+            <a :href="'/docs/IX_WhitePaper'+pdfSubfix+'.pdf'" target="_blank" class="wb">{{$t("whitepagger")}}</a>
         </div>
     </div>
 </div>
@@ -20,6 +20,7 @@
 import VNav2 from '@/components/VNav2.vue'
 import CountDown from '@/components/CountDown.vue'
 import service from '@/modules/service'
+import {state} from '@/modules/store'
 
 export default {
   data () {
@@ -32,6 +33,14 @@ export default {
   components: {
     VNav2,
     CountDown
+  },
+  computed: {
+    pdfSubfix() {
+        if (state.locale === 'zh-CN') {
+            return '+zh-CN'
+        }
+        return ''
+    }  
   },
   methods: {
       async fetchData () {

@@ -20,6 +20,15 @@
     </div>
   </div>
   <div id="app"></div>
+  <% if (htmlWebpackPlugin.options.mode === 'prod') { %>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<%= htmlWebpackPlugin.options.theme.googleAnalyticsId %>"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '<%= htmlWebpackPlugin.options.theme.googleAnalyticsId %>');
+    </script>
+  <% } %>  
   <!-- built files will be auto injected -->
 </body>
 

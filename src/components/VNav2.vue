@@ -2,15 +2,20 @@
   <div class="nav_box" :class="{dark: dark}">
     <div class="c_box">
       <router-link :to="{name:'home'}" class="nav_logo"></router-link>
-      <div v-show="sign" class="nav_right">
-        <router-link :to="{name:'login'}" class="nav_log_res">{{$t("signin")}}</router-link>
-        <router-link :to="{name:'register'}" class="nav_log_res">{{$t("signup_title")}}</router-link>
+      <div class="nav_right">
+        <div v-if="!state.userInfo" class="right_options">
+          <router-link :to="{name:'login'}" class="nav_log_res">{{$t("signin")}}</router-link>
+          <router-link :to="{name:'register'}" class="nav_log_res">{{$t("signup_title")}}</router-link>
+        </div>
+        <div class="right_options" v-else>
+          <p class="email">
+            <router-link :to="{name:'profile'}">{{desentInfo}}</router-link>
+          </p>
+          <a class="quit" @click="logout">[ {{$t("signout")}} ]</a>
+        </div>
+
         <div class="lang" @click="setLocale">{{localeText}}<b></b>
         </div>
-      </div>
-      <div v-show="!sign" class="nav_right">
-        <p class="email">sdfxzchgadgi@qq.cpm</p>
-        <a class="quit">[ 注销 ]</a>
       </div>
     </div>
   </div>
@@ -27,9 +32,6 @@ export default {
     dark: {
       type: Boolean,
       default: false,
-    },
-    sign: {
-      default: false
     }
   },
   data () {
@@ -40,6 +42,18 @@ export default {
   computed: {
     localeText () {
       return utils.getLocaleName(state.locale)
+    },
+    desentInfo() {
+      let userInfo = this.state.userInfo
+      if (userInfo) {
+        if (userInfo.phone) {
+          return utils.publicDesensitization(userInfo.phone)[0]
+        } else if (userInfo.email) {
+          return utils.publicDesensitization(userInfo.email)[0]
+        }
+      }
+
+      return ''
     }
   },
   methods: {
@@ -55,6 +69,15 @@ export default {
       }
       actions.setLocale(localeCode)
     },
+    logout () {
+      actions.setUserInfo(null)
+      service.signout()
+      if (utils.getRouteMeta(this.$route, 'auth')) {
+        this.$router.push({
+          name: 'login'
+        })
+      }
+    }
   }
 }
 </script>
@@ -77,6 +100,9 @@ export default {
     margin: 19px 0;
   }
   .nav_right {
+    .right_options {
+      float: left;
+    }
     float: right;
     .email{
       float: left;
@@ -88,7 +114,7 @@ export default {
       color:#fff;
     }
   }
-  .nav_right a {
+  .nav_right .nav_log_res, .nav_right .quit {
     float: left;
     margin: 19px 0 19px 40px;
     color: #fff;

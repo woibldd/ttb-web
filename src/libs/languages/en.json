@@ -532,11 +532,13 @@
   "profile_left_invite_qrcode": "My Referral QR Code",
   "profile_left_invite_code": "My Referral Code",
   "profile_left_invite_link": "Sign up Referral link",
-  "profile_left_copy_invite_code": "Copy Referral Code",
-  "profile_left_copy_invite_link": "Copy to share link",
+  "profile_left_copy_invite_code": "Copy",
+  "profile_left_copy_invite_link": "Copy",
   "invite_reward_text": "The Referral rewards program is coming soon",
   "profile_personal_center": "Personal Center",
   "invite_history_text": "Referral Record",
   "slogan": "FREE MAN FREE UNION",
-  "register_success": "Register successfully"
+  "register_success": "Register successfully",
+  "declaration": "Declaration",
+  "whitepagger": "WhitePagger"
 }

@@ -96,6 +96,7 @@ let router = new Router({
         class: 'dark',
         mobileNav: isMobile
       },
+      redirect: 'profile/invite',
       // component: (isMobile && process.env.MODE === 'beta') ? MobileProfile : Profile
       component: Profile,
       children: [{
