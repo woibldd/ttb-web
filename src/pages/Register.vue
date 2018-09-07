@@ -1,5 +1,5 @@
 <template>
-  <div class="page page-register">
+  <div class="page page-register " ref="container" >
     <resbg></resbg>
     <div class="panel">
       <div class="title-wrap">
@@ -409,7 +409,14 @@ export default {
     },
     resetError () {
       this.errmsg = ''
+    },
+    fixPosition () {
+      this.$refs.container.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
     }
+  },
+  mounted () {
+    this.$eh.$on('app:resize', () => this.fixPosition())
+    this.$nextTick(this.fixPosition)
   },
   async created () {
     // this.gtInit()
