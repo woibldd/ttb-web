@@ -108,7 +108,7 @@
 .field {
   @include clearfix();
   position: relative;
-  
+
   height: 60px;
   .input-box {
     width: 100%;
@@ -204,7 +204,7 @@
       color:#999999
     }
   }
-  
+
   .select {
     appearance: none;
     -webkit-appearance: none;
