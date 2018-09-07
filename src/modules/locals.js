@@ -17,7 +17,7 @@ class Locals {
       data () {
         let data = initData
         _.assign(data, this.load())
-        utils.log('localStorage', id, data)
+        // utils.log('localStorage', id, data)
         return {
           data
         }
@@ -37,7 +37,7 @@ class Locals {
       created () {
         this.$watch('data', (n) => {
           this.save()
-          utils.log(id + ' locals saved')
+          // utils.log(id + ' locals saved')
         }, {
           immediate: true,
           deep: true

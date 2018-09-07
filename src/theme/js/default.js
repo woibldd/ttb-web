@@ -2,8 +2,7 @@ const getSassVariables = require('./getSassVariables')
 
 module.exports = {
   styleVar: getSassVariables(),
-  googleAnalyticsId: 'UA-115918448-1',
-  googleAdClient: 'ca-pub-3338747877281288',
+  googleAnalyticsId: 'UA-125390817-2',
   locales: ['en', 'zh-CN', 'zh-HK', 'ja', 'ko'],
   themeName: 'default',
   companyName: 'IX.COM',

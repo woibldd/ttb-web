@@ -76,7 +76,7 @@ const service = {
     rmCache('balanceList')
     state.pro.currency = null
     state.pro.product = null
-    return request('sign/signout')
+    return request('user/logout')
   },
   getBalance () {
     return getCache('balanceList', () => request('balance/list'), 2e3)
@@ -388,7 +388,7 @@ function getCache (key, promiseGetter, ttl = 0) {
   return cache[key].promise
 }
 function rmCache (key) {
-  utils.log('Remove Cache:', key)
+  // utils.log('Remove Cache:', key)
   delete cache[key]
 }
 

@@ -42,6 +42,7 @@
   import ProfileLeft from './ProfileLeft'
   import copyToClipboard from 'copy-to-clipboard'
   import service from '@/modules/service'
+  import utils from '@/modules/utils'
   import {state} from '@/modules/store'
   const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
 
