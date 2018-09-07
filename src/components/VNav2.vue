@@ -2,11 +2,15 @@
   <div class="nav_box" :class="{dark: dark}">
     <div class="c_box">
       <router-link :to="{name:'home'}" class="nav_logo"></router-link>
-      <div class="nav_right">
+      <div v-show="sign" class="nav_right">
         <router-link :to="{name:'login'}" class="nav_log_res">{{$t("signin")}}</router-link>
         <router-link :to="{name:'register'}" class="nav_log_res">{{$t("signup_title")}}</router-link>
         <div class="lang" @click="setLocale">{{localeText}}<b></b>
+        </div>
       </div>
+      <div v-show="!sign" class="nav_right">
+        <p class="email">sdfxzchgadgi@qq.cpm</p>
+        <a class="quit">[ 注销 ]</a>
       </div>
     </div>
   </div>
@@ -22,6 +26,9 @@ export default {
   props: {
     dark: {
       type: Boolean,
+      default: false,
+    },
+    sign: {
       default: false
     }
   },
@@ -71,6 +78,15 @@ export default {
   }
   .nav_right {
     float: right;
+    .email{
+      float: left;
+      color:#fff;
+      margin:19px 0;
+    }
+    .quit{
+      float: left;
+      color:#fff;
+    }
   }
   .nav_right a {
     float: left;

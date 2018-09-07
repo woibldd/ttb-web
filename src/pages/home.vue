@@ -10,8 +10,8 @@
             <count-down :terminal="date"></count-down>
         </p>
         <div class="ind_but">
-            <router-link :to="{name:'Test2'}" class="xy">宣言</router-link>
-            <router-link :to="{name:'Test2'}" class="wb">白皮书</router-link>
+            <a href="https://ix-test.com/IX_WhitePaper_CN-1.pdf" class="xy">宣言</a>
+            <a href="https://ix-test.com/IX_+Consensus+manifesto_CN-1.pdf" class="wb">白皮书</a>
         </div>
     </div>
 </div>
@@ -46,7 +46,7 @@ export default {
 </script>
 <style scoped lang="scss">
     @import "../styles/vars";
-    .page-home{background:url(../assets/index_bg.jpg) center center;background-size:auto 100%;width:100%;position:absolute;height:100%;}
+    .page-home{background:url(../assets/index_bg.jpg) center center;background-size:120% 100%;width:100%;position:absolute;height:100%;}
     @import "../styles/mixins";
     .ind_cen{text-align:center;width:100%;height:auto;
         .ix_logo{width:100%;height:81px;background:url(../assets/ix_a.png) no-repeat center center;margin-top:5%}
