@@ -33,6 +33,9 @@ Vue.filter('sign', num => num > 0 ? '+' : (num < 0 ? '-' : ''))
 Vue.filter('abs', num => Math.abs(num))
 Vue.filter('ts2date', utils.dateFormatter)
 Vue.filter('date', utils.dateFormatter)
+Vue.filter('p', str => str.match(/^(.*)_/)[1])
+Vue.filter('c', str => str.match(/_(.*)$/)[1])
+
 // Vue.filter('money', exRate.getLocaleMoney)
 
 window.Promise.prototype.finally = function (callback) {

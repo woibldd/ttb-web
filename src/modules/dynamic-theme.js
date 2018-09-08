@@ -3,20 +3,20 @@ import {local} from '@/modules/store'
 
 const configs = [{
   id: 'gr',
-  up: '#0DB37E',
-  down: '#E25C44'
+  up: '#09C989',
+  down: '#F24E4D'
 }, {
   id: 'rg',
-  up: '#E25C44',
-  down: '#0DB37E'
+  up: '#F24E4D',
+  down: '#09C989'
 }, {
   id: 'br',
   up: '#6075FF',
-  down: '#E25C44'
+  down: '#F24E4D'
 }, {
   id: 'yr',
   up: '#F7BE37',
-  down: '#E25C44'
+  down: '#F24E4D'
 }]
 
 const vm = {

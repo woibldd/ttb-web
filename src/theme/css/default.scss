@@ -3,10 +3,10 @@ $primary: #C9A96C; // base -主色
 $primary-hover: #aa8b61; // hover
 $primary-active: #C9A96C; // active
 $primary-disabled: rgba(0,0,0,0.2); // disabled
-$primary-opacity: rgba(73,86,201,.2); // background 交易品种列表选中的背景色，主色25%透明度
+$primary-opacity: #293443; // background 交易品种列表选中的背景色，主色25%透明度
 
 /* nav */
-$nav: #252838; // 主导航颜色 -nav bg
+$nav: #192D3F; // 主导航颜色 -nav bg
 $normal-nav: #252838; // 资产个人中心导航颜色 -nav bg
 $nav-2: #303E4B; // 副导航颜色 -nav-2
 
@@ -22,7 +22,7 @@ $buy-hover: #2367de; // hover
 $buy-active: #3070e0; // active
 $buy-disabled: rgba(0,0,0,0.2); // disabled
 
-$sell: #e25c44; // base 卖按钮 -跌色
+$sell: #F24E4D; // base 卖按钮 -跌色
 $sell-hover: #e46851; // hover
 $sell-active: #e46851; // active
 $sell-disabled: rgba(0,0,0,0.2); // disabled
@@ -35,8 +35,8 @@ $down-price: #f46c53; // base 下降数字 -跌文字
 $down-price-hover: #f46c53; // hover
 $down-price-active: #f46c53; // active
 
-$search-bar-bg: #141721; // search bg 搜索框背景
-$search-bar-border: #414557; // search border 搜索框border
+$search-bar-bg: #283B4C; // search bg 搜索框背景
+$search-bar-border: #666666; // search border 搜索框border
 
 $up-candle: #6ba583; // 蜡烛图涨色
 $down-candle: #d75442; // 蜡烛图跌色
@@ -79,13 +79,13 @@ $hover-bg: #C9A96C; // 首页按钮hover
 $dropdown-bg: rgba(0,0,0,0.1); // 下拉列表hover
 
 /* home header background */
-$home-header-bg:linear-gradient(-153.7deg,#1B244F,#494988);
+// $home-header-bg:linear-gradient(-153.7deg,#1B244F,#494988);
 $home-header-bgdark: #1A1A1A;
 $home-header-login: #303E4B;
 
 /* const */
-$splitter: rgba(255,255,255,.2); // trade split line 交易页面分割线
-$loading-mask: #141721; // 交易页面loading背景
+$splitter:#3A444F; // trade split line 交易页面分割线
+$loading-mask: #283B4C; // 交易页面loading背景
 $trading-layout-bg: #141414; // 交易页面box背景  trading view 要改custom_v1.css
 $order-input-label: #cdcdcd; //订单填写 input 右侧币种的背景色
 

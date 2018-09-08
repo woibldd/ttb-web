@@ -20,7 +20,7 @@
     </div>
   </div>
   <div id="app"></div>
-  <% if (htmlWebpackPlugin.options.mode === 'prod') { %>
+  <% if (htmlWebpackPlugin.options.NODE_ENV === 'production') { %>
     <script async src="https://www.googletagmanager.com/gtag/js?id=<%= htmlWebpackPlugin.options.theme.googleAnalyticsId %>"></script>
     <script>
       window.dataLayer = window.dataLayer || [];

@@ -135,7 +135,7 @@
               type="checkbox"
               name="accept"
               id="accept">
-            <label for="accept" v-html="$t('agreement_v2', {agreement: goAgreement(), privacyPolicy: goPrivacy()})">
+            <label for="accept" v-html="$t('agreement', {agreement: goAgreement(), privacyPolicy: goPrivacy()})">
             </label>
           </div>
           <!-- <div class="to-login">
@@ -402,7 +402,7 @@ export default {
       }
     },
     goAgreement () {
-      return '/agreement'
+      return '/terms'
     },
     goPrivacy () {
       return '/privacy-policy'

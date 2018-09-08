@@ -8,7 +8,7 @@
         </span>
         <input type="text" ref="input"
           class="input search-input"
-          :placeholder="$t('search') + hotKey"
+          :placeholder="$t('search')"
           @keydown.ctrl.prevent
           @keydown.meta.prevent
           v-model="search">
@@ -284,8 +284,8 @@ export default {
   }
   .tr.cur {
     background-color: $primary-opacity;
-    border-top: 1px solid $primary;
-    border-bottom: 1px solid $primary;
+    border-top: 1px solid rgba($color: #ffffff, $alpha: 0.5);
+    border-bottom: 1px solid rgba($color: #ffffff, $alpha: 0.5);
   }
 }
 th {
@@ -350,7 +350,7 @@ td {
 .input {
   display: block;
   background-color: $search-bar-bg;
-  border-radius: 12px;
+  // border-radius: 12px;
   height: 24px;
   box-sizing: border-box;
   border: 1px solid $search-bar-border;

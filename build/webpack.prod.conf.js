@@ -61,6 +61,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
+      NODE_ENV: process.env.NODE_ENV,
       filename: config.build.index,
       template: 'index.html',
       inject: true,

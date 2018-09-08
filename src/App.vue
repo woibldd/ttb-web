@@ -86,9 +86,6 @@ export default {
       if (this.state.theme.themeName === 'default' && this.isMobile) {
         return 'mobile'
       }
-      if (this.state.theme.themeName === 'taxi') {
-        return 'taxi'
-      }
     }
   },
   watch: {
