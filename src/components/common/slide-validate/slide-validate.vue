@@ -7,6 +7,7 @@
 export default {
   name: 'v-validate',
   mounted () {
+    const _self = this
     const nc_token = ['CF_APP_1', (new Date()).getTime(), Math.random()].join(':')
     const NC_Opt =
         {
@@ -33,6 +34,7 @@ export default {
             // 'umid_serUrl': 'https://g.com/service/um.json'
           },
           callback: function (data) {
+            _self.$emit('validateDone', data)
             window.console && console.log(nc_token)
             window.console && console.log(data.csessionid)
             window.console && console.log(data.sig)

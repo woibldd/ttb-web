@@ -190,4 +190,39 @@
         width: 290px;
         box-sizing: border-box;
     }
+
+    .sms-btn {
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 20px;
+        margin-left: 10px;
+        margin-right: 40px;
+        border: 1px $primary solid;
+        // background-color: #3075ee;
+        color: $primary;
+        text-align: center;
+        position: absolute;
+        right: 0;
+        bottom: 10px;
+    
+        &.disabled {
+          @include a() {
+            color: #AAAAAA;
+          }
+        }
+    }
+
+    .recover-success {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #ffffff;
+        padding-top: 160px;
+    }
+    .icon-reset-psw-success {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 41px;
+    }
 }
