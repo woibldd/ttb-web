@@ -139,29 +139,36 @@ export default {
     opacity: 0.95;
     transition: 0.2s linear;
     display: flex;
+
     &.bg-danger{
-      background:rgba(226, 92, 68, 0.95);
-    }
-    &.bg-danger:hover{
-      background:rgba(226, 92, 68, 0.75);
+      background-color: #fef0f0;
+      border-color: #fde2e2;
+      .title{
+          color: #f56c6c !important;
+      }
     }
     &.bg-info{
-      background:rgba(96, 117, 255, 0.95);
-    }
-    &.bg-info:hover{
-      background:rgba(96, 117, 255, 0.75);
+      background:#edf2fc;
+      border-color: #ebeef5;
+      .title {
+          color: #999;
+      }
     }
     &.bg-warning{
-      background:rgba(247, 190, 55, 0.95);
-    }
-    &.bg-warning:hover{
-      background:rgba(247, 190, 55, 0.75);
+      background-color: #fdf6ec;
+      border-color: #faecd8;
+
+      .title {
+          color: #e6a23c;
+      }
     }
     &.bg-success{
-      background:rgba(13, 179, 126, 0.95);
-    }
-    &.bg-success:hover{
-      background:rgba(13, 179, 126, 0.75);
+      background-color: #f0f9eb;
+      border-color: #e1f3d8;
+
+      .title{
+          color: #67c23a !important;
+      }
     }
     &:hover{
       .title{

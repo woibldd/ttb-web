@@ -187,6 +187,12 @@ const utils = {
   success (msg, id = msg) {
     return utils.alert(msg, id, 'success')
   },
+  danger (msg, id = msg) {
+    return utils.alert(msg, id, 'danger')
+  },
+  warning (msg, id = msg) {
+    return utils.alert(msg, id, 'warning')
+  },
   alert (msg, id = msg, style = 'danger') {
     return utils.notify({
       id,
@@ -418,29 +424,29 @@ const utils = {
    * @param arguments 多个要脱敏数据
    */
   publicDesensitization () {
-    //先将内置的 arguments 转换为真正的数组
-    var dataArr = Array.prototype.slice.apply(arguments);
+    // 先将内置的 arguments 转换为真正的数组
+    var dataArr = Array.prototype.slice.apply(arguments)
     for (var i = 0; i < dataArr.length; i++) {
-        var data = dataArr[i];
-        // 正则判断返回相应数据
-        if(/(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(data) || /^(13[0-9]|16[0-9]|19[0-9]|147|15[0-9]|17[6-8]|18[0-9])\d{8}|17[0-9]\d{8}$/.test(data) || /(^(?:(?![IOZSV])[\dA-Z]){2}\d{6}(?:(?![IOZSV])[\dA-Z]){10}$)|(^\d{15}$)/.test(data)){
-            //身份证号 || 手机号  ||  营业执照    前三后四
-            data = data.substr(0,3) + "****" + data.substr(-4);
-        }else if(/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/.test(data)){
-            //邮箱号码  前二 后以 @ 分割
-            data = data.substr(0,2) + "****" + data.substr(data.indexOf('@'));
-        }else if(/^\d{16}|\d{19}$/.test(data)){
-            //银行卡号  后四位
-            data = "****" + data.substr(-4);
-        }else if(data.indexOf('公司') > -1){
-            //企业名称  前二后四
-            data = data.substr(0,2) + "****" + data.substr(-4);
-        }else{
-            return;
-        }
-        dataArr[i] = data;
+      var data = dataArr[i]
+      // 正则判断返回相应数据
+      if (/(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(data) || /^(13[0-9]|16[0-9]|19[0-9]|147|15[0-9]|17[6-8]|18[0-9])\d{8}|17[0-9]\d{8}$/.test(data) || /(^(?:(?![IOZSV])[\dA-Z]){2}\d{6}(?:(?![IOZSV])[\dA-Z]){10}$)|(^\d{15}$)/.test(data)) {
+        // 身份证号 || 手机号  ||  营业执照    前三后四
+        data = data.substr(0, 3) + '****' + data.substr(-4)
+      } else if (/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/.test(data)) {
+        // 邮箱号码  前二 后以 @ 分割
+        data = data.substr(0, 2) + '****' + data.substr(data.indexOf('@'))
+      } else if (/^\d{16}|\d{19}$/.test(data)) {
+        // 银行卡号  后四位
+        data = '****' + data.substr(-4)
+      } else if (data.indexOf('公司') > -1) {
+        // 企业名称  前二后四
+        data = data.substr(0, 2) + '****' + data.substr(-4)
+      } else {
+        return
       }
-      return dataArr;
+      dataArr[i] = data
+    }
+    return dataArr
   }
 }
 
