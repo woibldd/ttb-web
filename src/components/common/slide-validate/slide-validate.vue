@@ -75,7 +75,7 @@ export default {
                 background-color: #313e4b;
             }
             .btn_ok {
-                background: $text-link url('../../../assets/icon_slide-validate-success.png') no-repeat center !important;
+                background: $text-link url('../../../assets/icon-slide-validate-success.png') no-repeat center !important;
                 & > * {
                     display: none;
                 }

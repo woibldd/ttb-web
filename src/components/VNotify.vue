@@ -3,10 +3,7 @@
     <div class="notify-panel" :class="[show ? 'show' : '']" ref="panel">
       <div class="notify-box" :class="['bg-' + style]">
         <div class="notify-type">
-            <svg class="icon-notify" v-if="type == 'info'"><use xlink:href="#icon-notify-info" /></svg>
-            <svg class="icon-notify" v-if="type == 'success'"><use xlink:href="#icon-notify-success" /></svg>
-            <svg class="icon-notify" v-if="type == 'warning'"><use xlink:href="#icon-notify-warning" /></svg>
-            <svg class="icon-notify" v-if="type == 'danger'"><use xlink:href="#icon-notify-danger" /></svg>
+            <icon class="icon-notify" :name="'notify-'+style"></icon>
         </div>
         <div class="notify-info" :class="{h: !title || !content}">
           <div class="title" v-show="title">{{ title }}</div>
