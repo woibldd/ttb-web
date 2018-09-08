@@ -32,11 +32,11 @@ html {
 body {
   font-size: 14px;
   line-height: 1.42857;
-  min-height: 100%;
   width: 100%;
   min-width: $page-width;
   color: $text;
   background-color: #ffffff;
+  min-height: 600px;
 }
 
 body.responsive-body {
