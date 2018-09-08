@@ -273,3 +273,34 @@
     color:white;
   }
 }
+
+
+@for $i from 1 through 30 { 
+    .mt-#{$i} { 
+        margin-top: $i * 1px !important; 
+    } 
+    .mr-#{$i} { 
+        margin-right: $i * 1px !important; 
+    } 
+    .ml-#{$i} { 
+        margin-left: $i * 1px !important; 
+    } 
+    .mb-#{$i} { 
+        margin-bottom: $i * 1px !important; 
+    } 
+}
+
+@for $i from 1 through 30 { 
+    .pt-#{$i} { 
+        padding-top: $i * 1px !important; 
+    } 
+    .pr-#{$i} { 
+        padding-right: $i * 1px !important; 
+    } 
+    .pl-#{$i} { 
+        padding-left: $i * 1px !important; 
+    } 
+    .pb-#{$i} { 
+        padding-bottom: $i * 1px !important; 
+    } 
+}

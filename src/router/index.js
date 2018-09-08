@@ -17,6 +17,7 @@ const Trading = () => import(/* webpackChunkName: "Trading" */ '@/pages/Trading'
 const Profile = () => import(/* webpackChunkName: "Profile" */ '@/pages/Profile')
 const Invite = () => import(/* webpackChunkName: "Invite" */ '@/pages/Invite')
 const Register = () => import(/* webpackChunkName: "Register" */ '@/pages/Register')
+const Recover = () => import(/* webpackChunkName: "Register" */ '@/pages/user/recover/recover.vue')
 const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
 const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pages/PrivacyPolicy')
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
@@ -137,6 +138,11 @@ let router = new Router({
         path: 'register/:by',
         name: 'registerBy',
         component: Register,
+        props: true
+      }, {
+        path: 'recover',
+        name: 'recover',
+        component: Recover,
         props: true
       }]
     }
