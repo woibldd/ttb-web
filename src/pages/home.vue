@@ -25,9 +25,9 @@ import {state} from '@/modules/store'
 export default {
   data () {
     return {
-        news: [],
-        notice: null,
-        date: new Date(2018, 8, 20)
+      news: [],
+      notice: null,
+      date: new Date(2018, 8, 20)
     }
   },
   components: {
@@ -35,18 +35,18 @@ export default {
     CountDown
   },
   computed: {
-    pdfSubfix() {
-        if (state.locale === 'zh-CN') {
-            return '+zh-CN'
-        }
-        return ''
-    }  
+    pdfSubfix () {
+      if (state.locale === 'zh-CN') {
+        return '+zh-CN'
+      }
+      return ''
+    }
   },
   methods: {
-      async fetchData () {
-          let result = await service.getTerminalDate()
-          this.date = result || new Date(2018, 8, 20)
-      }
+    async fetchData () {
+      let result = await service.getTerminalDate()
+      this.date = result || new Date(2018, 8, 20)
+    }
   },
   created () {
     //   this.fetchData()

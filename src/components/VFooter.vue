@@ -9,7 +9,7 @@
 <script>
 import {state} from '@/modules/store'
 export default {
-  
+
 }
 </script>
 
