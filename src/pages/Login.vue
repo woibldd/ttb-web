@@ -73,8 +73,7 @@
             @click="submit"></v-btn>
           <div class="to-others">
             <router-link :to="{name: 'registerBy', params: $route.params, query: $route.query}">{{ $t('signup') }}</router-link>
-            <!-- <i></i> -->
-            <!-- <router-link :to="{name: 'recover'}">{{ $t('if_forgot') }}</router-link> -->
+            <router-link :to="{name: 'recover'}">{{ $t('if_forgot') }}</router-link>
           </div>
         </div>
       </form>
@@ -257,7 +256,7 @@ export default {
     quickDelete (field) {
       this[field] = ''
       this.activeList[field].qd = false
-    },
+    }
   },
   created () {
     this.fetchRegion()
