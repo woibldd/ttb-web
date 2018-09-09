@@ -19,6 +19,7 @@ const Invite = () => import(/* webpackChunkName: "Invite" */ '@/pages/Invite')
 const Register = () => import(/* webpackChunkName: "Register" */ '@/pages/Register')
 const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
 const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pages/PrivacyPolicy')
+const agreement = () => import(/* webpackChunkName: "agreement" */ '@/pages/agreement')
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
 
 async function beforeEach (to, from, next) {
@@ -74,6 +75,10 @@ let router = new Router({
         auth: false
       },
       component: home
+    }, {
+      path: '/agreement',
+      name: 'agreement',
+      component: agreement
     }, {
       path: '/privacy-policy',
       name: 'privacy-policy',
