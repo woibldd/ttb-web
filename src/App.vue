@@ -86,9 +86,6 @@ export default {
       if (this.state.theme.themeName === 'default' && this.isMobile) {
         return 'mobile'
       }
-      if (this.state.theme.themeName === 'taxi') {
-        return 'taxi'
-      }
     }
   },
   watch: {
@@ -134,6 +131,7 @@ export default {
   mounted () {
     this.$eh.$on('app:resize', () => this.fixPosition())
     this.$nextTick(this.fixPosition)
+    utils.success('chengogngang')
   },
   created () {
     utils.$app = this

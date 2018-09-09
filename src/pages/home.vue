@@ -25,9 +25,9 @@ import {state} from '@/modules/store'
 export default {
   data () {
     return {
-        news: [],
-        notice: null,
-        date: new Date(2018, 8, 20)
+      news: [],
+      notice: null,
+      date: new Date(2018, 8, 20)
     }
   },
   components: {
@@ -35,18 +35,18 @@ export default {
     CountDown
   },
   computed: {
-    pdfSubfix() {
-        if (state.locale === 'zh-CN') {
-            return '+zh-CN'
-        }
-        return ''
-    }  
+    pdfSubfix () {
+      if (state.locale === 'zh-CN') {
+        return '+zh-CN'
+      }
+      return ''
+    }
   },
   methods: {
-      async fetchData () {
-          let result = await service.getTerminalDate()
-          this.date = result || new Date(2018, 8, 20)
-      }
+    async fetchData () {
+      let result = await service.getTerminalDate()
+      this.date = result || new Date(2018, 8, 20)
+    }
   },
   created () {
     //   this.fetchData()
@@ -55,7 +55,7 @@ export default {
 </script>
 <style scoped lang="scss">
     @import "../styles/vars";
-    .page-home{background:url(../assets/index_bg.jpg) center center;background-size:120% 100%;width:100%;position:absolute;height:100%;}
+    .page-home{background:url(../assets/index_bg.jpg) center center;background-size:120% 100%;width:100%;position:absolute;height:100%;min-height:600px;}
     @import "../styles/mixins";
     .ind_cen{text-align:center;width:100%;height:auto;
         .ix_logo{width:100%;height:81px;background:url(../assets/ix_a.png) no-repeat center center;margin-top:5%}

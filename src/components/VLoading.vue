@@ -1,8 +1,9 @@
 <template>
-  <div class="polygon-loading v-loading">
-    <div class="polygon-loading-icon" :style="style"></div>
-    <div class="polygon-loading-icon" :style="style"></div>
-    <div class="polygon-loading-icon" :style="style"></div>
+  <div class="ix-loading k-square-holder">
+    <div class="k-square3 k-square3a" :style="style"></div>
+    <div class="k-square3 k-square3b" :style="style"></div>
+    <div class="k-square3 k-square3c" :style="style"></div>
+    <div class="k-square3 k-square3d" :style="style"></div>
   </div>
 </template>
 
@@ -31,38 +32,39 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$duration: 1.1s;
-.polygon-loading {
-  text-align: center;
-  font-size: 0;
-  white-space: nowrap;
+.k-square-holder {
+    width: 50px;
 }
-.polygon-loading-icon {
-  border-radius: 1px;
+.k-square3 {
   display: inline-block;
-  animation-name: ani;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-  animation-duration: $duration;
-  transform: skewX(-12deg);
-  &:nth-child(3) {
-    animation-delay: 0;
-  }
-  &:nth-child(2) {
-    animation-delay: 0 - $duration * 0.28;
-  }
-  &:nth-child(1) {
-    animation-delay: 0 - $duration * 0.56;
-  }
+  width: 15px;
+  height: 15px;
+  background: #000;
+  opacity: .2;
+  animation: k-loadingQ 2s infinite;
+  opacity: .5;
 }
-@keyframes ani {
-  from, 65%, to {
-    opacity: .3;
-    transform: skewX(-12deg);
-  }
-  20% {
+.k-square3a {
+  transform: translate(0,-25px);
+}
+.k-square3b {
+    transform: translate(25px,0);
+}
+.k-square3c {
+    transform: translate(-25px,0);
+}
+.k-square3d {
+    transform: translate(0,25px);
+}
+
+@keyframes k-loadingQ {
+  33% {
+    transform: translate(0,0);
     opacity: .7;
-    transform: skewX(-12deg) scale(1.3);
+  }
+  66% {
+    transform: translate(0,0);
+    opacity: .7;
   }
 }
 </style>

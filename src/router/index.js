@@ -17,6 +17,7 @@ const Trading = () => import(/* webpackChunkName: "Trading" */ '@/pages/Trading'
 const Profile = () => import(/* webpackChunkName: "Profile" */ '@/pages/Profile')
 const Invite = () => import(/* webpackChunkName: "Invite" */ '@/pages/Invite')
 const Register = () => import(/* webpackChunkName: "Register" */ '@/pages/Register')
+const Recover = () => import(/* webpackChunkName: "Register" */ '@/pages/user/recover/recover.vue')
 const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
 const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pages/PrivacyPolicy')
 const agreement = () => import(/* webpackChunkName: "agreement" */ '@/pages/agreement')
@@ -66,7 +67,7 @@ function onError (err) {
 }
 
 let router = new Router({
-  // mode: 'history',
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -84,16 +85,20 @@ let router = new Router({
       name: 'privacy-policy',
       component: PrivacyPolicy
     }, {
+      path: '/terms',
+      name: 'terms',
+      component: PrivacyPolicy
+    }, {
       path: '/test2',
       name: 'Test2',
       component: Test2
     }, {
-      path: '/trading',
+      path: '/trading/:pair?',
       name: 'trading',
       meta: {
         zendeskWidget: false,
         auth: false,
-        footer: false,
+        footer: true,
         nav: false
       },
       component: Trading
@@ -142,6 +147,11 @@ let router = new Router({
         path: 'register/:by',
         name: 'registerBy',
         component: Register,
+        props: true
+      }, {
+        path: 'recover',
+        name: 'recover',
+        component: Recover,
         props: true
       }]
     }

@@ -169,10 +169,11 @@ import {local, state, actions} from '@/modules/store'
 import _ from 'lodash'
 import OrderDeal from './OrderDealTarget'
 import orderWatcher from '@/mixins/order-watcher'
+import {pairfix} from '@/mixins/'
 
 export default {
   name: 'order',
-  mixins: [orderWatcher],
+  mixins: [orderWatcher, pairfix],
   components: {
     OrderDeal
   },
@@ -644,9 +645,9 @@ tbody tr:nth-child(odd) {
   }
 }
 .mask {
-  @include pro-mask();
+  @include ix-mask();
   top: 32px;
-  .polygon-loading {
+  .ix-loading {
     margin-top: -16px;
   }
 }

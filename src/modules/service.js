@@ -299,7 +299,7 @@ const service = {
 export async function fetch (url, body, options, method = 'post') {
   let mock = false
   mock = await Mock()
-  if (mock && url.indexOf('api.thi') > 0) {
+  if (mock && url.indexOf('api.ix') > 0) {
     const find = _.find(mock.list, item => {
       return item.url && item.url.test(url)
     })

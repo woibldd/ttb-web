@@ -20,7 +20,7 @@
     </div>
   </div>
   <div id="app"></div>
-  <% if (htmlWebpackPlugin.options.mode === 'prod') { %>
+  <% if (htmlWebpackPlugin.options.NODE_ENV === 'production') { %>
     <script async src="https://www.googletagmanager.com/gtag/js?id=<%= htmlWebpackPlugin.options.theme.googleAnalyticsId %>"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -29,6 +29,8 @@
       gtag('config', '<%= htmlWebpackPlugin.options.theme.googleAnalyticsId %>');
     </script>
   <% } %>  
+  <!-- 国内使用 滑块验证，如果主要客户是国外用户，需要替换以下地址-->
+    <script type="text/javascript" charset="utf-8" src="//g.alicdn.com/sd/ncpc/nc.js?t=2015052012"></script>
   <!-- built files will be auto injected -->
 </body>
 

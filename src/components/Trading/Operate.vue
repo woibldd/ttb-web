@@ -1,28 +1,22 @@
 <template>
-  <div class="pro-panel" :class="{loading: loading}">
-    <div class="pro-header-sub">
-      <a class="pro-header-nav o"
+  <div class="ix-panel" :class="{loading: loading}">
+    <div class="ix-header-sub">
+      <a class="ix-header-nav o"
         :class="{cur: tab === 'limit'}"
         @click.prevent="setTab('limit')">
         {{ $t('operate_limit') }}
       </a>
-      <a class="pro-header-nav o"
+      <a class="ix-header-nav o"
         :class="{cur: tab === 'market'}"
         @click.prevent="setTab('market')">
         {{ $t('operate_market') }}
       </a>
-      <a class="pro-header-nav o"
-        :class="{cur: tab === 'stop'}"
-        @click.prevent="setTab('stop')">
-        {{ $t('operate_stop') }}
-      </a>
     </div>
-    <div class="op-container" :style="{height: bodyHeight}">
+    <div class="op-container">
       <ProLimitOrder v-show="tab === 'limit'"></ProLimitOrder>
       <ProMarketOrder v-show="tab === 'market'"></ProMarketOrder>
-      <ProStopOrder v-show="tab === 'stop'"></ProStopOrder>
     </div>
-    <div class="mask" :class="{show: state.userStatus === 0}">
+    <!-- <div class="mask" :class="{show: state.userStatus === 0}">
       <div class="mask-front">
         <div class="hint">{{ $t('operate_noauth') }}</div>
         <div class="link-group">
@@ -30,7 +24,7 @@
           <router-link class="link btn ibt signup theme-bgcolor-down" :to="{name: 'register'}"><span>{{ $t('signup') }}</span></router-link>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -89,14 +83,14 @@ export default {
 @import "../../styles/vars";
 @import "../../styles/mixins";
 
-.pro-header-sub {
+.ix-header-sub {
   height: 32px;
   line-height: 32px;
-  text-align: center;
+  text-align: left;
   background-color: $nav;
   color: white;
 }
-.pro-header-nav {
+.ix-header-nav {
   font-size: 13px;
   opacity: .4;
   margin: 0 10px;

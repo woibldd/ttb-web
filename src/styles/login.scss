@@ -219,7 +219,7 @@
     background-color: #DDDDDD;
     margin-right: 10px;
   }
-  .polygon-loading {
+  .ix-loading {
     float: left;
     width: 40px;
     margin-top: 14px;
@@ -269,6 +269,7 @@
   text-align: right;
   a {
     font-size: 14px;
+    display: inline-block;
   }
   i {
     &:after {
@@ -285,4 +286,6 @@
 }
 .submit-btn {
   margin: 0 auto 13px;
+  width: 290px;
+  box-sizing: border-box;
 }
