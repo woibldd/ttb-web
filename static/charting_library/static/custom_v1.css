@@ -17,6 +17,7 @@ body {
   /* hahahahaha at last I found you - Thien */
   background: transparent;
   border-color: hsla(218, 26%, 86%, 0.25);
+  border: none;
   /* border-color: var(--primary-2); */
 }
 
@@ -33,12 +34,12 @@ body {
 }
 .chart-controls-bar-buttons a.active,
 .feature-no-touch .chart-controls-bar-buttons a.active:hover {
-  color: hsla(206, 94%, 57%, 1);
+  color: #C9A96C;
   /* color: var(--accent); */
 }
 .feature-no-touch .chart-controls-bar-buttons a:not(.disabled):hover {
   background: transparent;
-  color: hsla(206, 94%, 57%, 1);
+  color: #C9A96C;
   /* color: var(--accent); */
 }
 
@@ -53,7 +54,7 @@ body {
   /* fill: var(--primary-3); */
 }
 .tv-side-toolbar .button.selected svg {
-  fill: hsla(206, 94%, 57%, 1);
+  fill: #C9A96C;
   /* fill: var(--accent); */
 }
 
@@ -76,7 +77,7 @@ body {
 
 .feature-no-touch .tv-side-toolbar .tools-group .button:hover .main.text-as-icon,
 .tv-side-toolbar .tools-group .button.selected .main.text-as-icon {
-  color: hsla(206, 94%, 57%, 1);
+  color: #C9A96C;
   /* color: var(--accent); */
 }
 
@@ -121,7 +122,7 @@ body {
 }
 .drawings-popup-list.iconed .item.active svg,
 .drawings-popup-list .item.active svg {
-  fill: hsla(206, 94%, 57%, 1);
+  fill: #C9A96C;
   /* fill: var(--accent); */
 }
 .drawings-popup-list.iconed .item svg,
@@ -137,7 +138,7 @@ body {
 }
 .charts-popup-list.intervals-list .item.active,
 .charts-popup-list .item.active span {
-  color: hsla(206, 94%, 57%, 1);
+  color: #C9A96C;
   /* color: var(--accent); */
 }
 .charts-popup-list .item.active {
@@ -158,7 +159,7 @@ body {
   /* fill: var(--primary-3) !important; */
 }
 .feature-no-touch .favored-list .to-quick:hover svg {
-  fill: hsla(206, 94%, 57%, 1) !important;
+  fill: #C9A96C !important;
   /* fill: var(--accent) !important; */
 }
 
@@ -234,7 +235,7 @@ body {
 }
 .favored-list-container.active span.submenu,
 .favored-list-container span.submenu.active {
-  color: hsla(206, 94%, 57%, 1);
+  color: #C9A96C;
   /* color: var(--accent); */
   background: hsla(206, 94%, 57%, 0.4) !important;
   /* background: var(--accent-2) !important; */
@@ -279,12 +280,12 @@ body {
 .symbol-edit-widget .button.active {
   background: hsla(206, 94%, 57%, 0.4) !important;
   /* background: var(--accent-2) !important; */
-  color: hsla(206, 94%, 57%, 1);
+  color: #C9A96C;
   /* color: var(--accent); */
 }
 
 .button.indicators.active svg {
-  fill: hsla(206, 94%, 57%, 1);
+  fill: #C9A96C;
   /* fill: var(--accent); */
 }
 
@@ -293,11 +294,11 @@ body {
   /* fill: var(--primary-3); */
 }
 .feature-no-touch .pane-legend-icon svg:hover {
-  fill: hsla(206, 94%, 57%, 1);
+  fill: #C9A96C;
   /* fill: var(--accent); */
 }
 .pane-legend-line.disabled .icon-hide svg {
-  fill: hsla(206, 94%, 57%, 1);
+  fill: #C9A96C;
   /* fill: var(--accent); */
 }
 
