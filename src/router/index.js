@@ -66,7 +66,7 @@ function onError (err) {
 }
 
 let router = new Router({
-  // mode: 'history',
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -80,16 +80,20 @@ let router = new Router({
       name: 'privacy-policy',
       component: PrivacyPolicy
     }, {
+      path: '/terms',
+      name: 'terms',
+      component: PrivacyPolicy
+    }, {
       path: '/test2',
       name: 'Test2',
       component: Test2
     }, {
-      path: '/trading',
+      path: '/trading/:pair?',
       name: 'trading',
       meta: {
         zendeskWidget: false,
         auth: false,
-        footer: false,
+        footer: true,
         nav: false
       },
       component: Trading

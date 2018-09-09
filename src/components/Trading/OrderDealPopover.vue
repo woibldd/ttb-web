@@ -154,7 +154,7 @@ export default {
   z-index: 10;
 }
 .mask {
-  @include pro-mask();
+  @include ix-mask();
   position: relative;
   background-color: transparent;
   width: 180px;

@@ -376,6 +376,7 @@ const utils = {
     return num.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,')
   },
   toBig (num) {
+    console.log('---' + num)
     return Big(num).toString()
   },
   toRound (num, scale = 20, rm = consts.ROUND_DOWN) {

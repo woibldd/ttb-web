@@ -6,29 +6,31 @@ const coins = ['USDT', 'BTC', 'ETH', 'EOS', 'IOST', 'ADA', 'DTA']
 const rand = n => Math.floor(Math.random() * (n + 1))
 
 const balanceItem = (currency) => {
-  return {
-    currency,
-    name: currency,
-    fullname: currency + ' coin',
-    avail: rand(10000),
-    unavail: rand(10000),
-    quota: 50000,
-    quotabtc: 100,
-    fee: 0.001,
-    mincharge: 0.01,
-    address: currency + 'ooooLzLQyM4GE8GuvBVvpNCoupkh5iS',
-    tradeconfirm: 1,
-    withdrawconfirm: 3,
-    reviewamount: 80
-  }
+  return { "currency_name": "USDT", "unavailable": "0", "ordering": "0", "locking": "0", "available": "439.3373024886", "withdrawable_amount": "439.3373024886", "withdrawing": "0", "scale": 6, "priced": true, "quota_btc": "100", "full_name": "Tether(OMNI)", "confirming": "0", "quota": "643017.999321", "equality": "0.068324" }
 }
 
 export const filter = {
-  'user/my_invite': 1
+  'pair/list': 1,
+  'currency/rate': 1,
+  'user/my_invite': 1,
+  'balance/query': 1,
+  'order/active': 1,
+  'favorite/list': 1,
+
 }
 export const list = [{
+  url: /^order\/active/,
+  res ({ currency } = {}) {
+    return ok({ "items": [{ "id": "241867103081484288", "pair_name": "EOSC_USDT", "side": "SELL", "price": "0.5", "amount": "52.26", "unclosed": "52.26", "create_time": 1535624011000, "deal_amount": "0", "total": "0", "type": "LIMIT" }, { "id": "241866968909897728", "pair_name": "EOSC_USDT", "side": "SELL", "price": "0.1", "amount": "34.83", "unclosed": "34.83", "create_time": 1535623979000, "deal_amount": "0", "total": "0", "type": "LIMIT" }, { "id": "241866608841482240", "pair_name": "EOSC_USDT", "side": "SELL", "price": "0.08", "amount": "46.45", "unclosed": "46.45", "create_time": 1535623893000, "deal_amount": "0", "total": "0", "type": "LIMIT" }, { "id": "231368936590299136", "pair_name": "TB_USDT", "side": "SELL", "price": "0.1", "amount": "2000", "unclosed": "2000", "create_time": 1533121053000, "deal_amount": "0", "total": "0", "type": "LIMIT" }] })
+  }
+}, {
+  url: /^favorite\/list/,
+  res ({ currency } = {}) {
+    return ok({ "items": [{ "pair_name": "EOS_USDT" }, { "pair_name": "ETH_USDT" }] })
+  }
+}, {
   url: /^balance\/list/,
-  res ({currency} = {}) {
+  res ({ currency } = {}) {
     return ok(_.map(coins, balanceItem))
   }
 }, {
@@ -85,7 +87,7 @@ export const list = [{
   }
 }, {
   url: /balance\/query/,
-  res ({currency}) {
+  res ({ currency }) {
     return ok(balanceItem(currency))
   }
 }, {
@@ -100,6 +102,11 @@ export const list = [{
         }
       })
     })
+  }
+}, {
+  url: /currency\/rate/,
+  res (data) {
+    return ok({ "HKD": "7.85", "TWD": "30.79", "SGD": "1.37", "KRW": "1124", "JPY": "110", "EUR": "0.86", "GBP": "0.77", "USD": "1", "CNY": "6.84" })
   }
 }, {
   url: /google\/new/,
@@ -180,25 +187,33 @@ export const list = [{
         currencyscale: 6
       })))
     } else {
-      return ok(_.map(coins, coin => ({
-        name: coin + '_BTC',
-        price: rand(100),
-        volumn: rand(100),
-        delta: 3 - rand(5),
-        product: coin,
-        productscale: 2,
-        currency: 'BTC',
-        currencyscale: 6
-      })).concat(_.map(coins, coin => ({
-        name: coin + '_USDT',
-        price: rand(200),
-        volumn: rand(100),
-        delta: 3 - rand(5),
-        product: coin,
-        productscale: 4,
-        currency: 'USDT',
-        currencyscale: 6
-      }))))
+      return ok({
+        items: _.map(coins, coin => ({
+          name: coin + '_BTC',
+          price: rand(100),
+          product_name: coin,
+          product_scale: 2,
+          currency_name: 'BTC',
+          currency_scale: 6,
+          price_scale: 6,
+          min_amount: "1",
+          max_amount: "10000000",
+          min_total: "0.01",
+          max_total: "10000000",
+        })).concat(_.map(coins, coin => ({
+          name: coin + '_USDT',
+          price: rand(200),
+          min_amount: "1",
+          max_amount: "10000000",
+          min_total: "0.01",
+          max_total: "10000000",
+          product_name: coin,
+          product_scale: 4,
+          currency_scale: 6,
+          currency_name: 'USDT',
+          price_scale: 6
+        })))
+      })
     }
   }
 }, {
@@ -274,17 +289,17 @@ export const list = [{
     return err()
   }
 }, {
-  url: /api\.thinkbit.*deal/,
+  url: /api\.ix-test.*deal/,
   res () {
-    return ok([{'time': 1535716099735, 'side': 'sell', 'values': ['0.000901', '214.467']}, {'time': 1535715916739, 'side': 'buy', 'values': ['0.000899', '256.4311']}, {'time': 1535715692734, 'side': 'sell', 'values': ['0.000896', '259.39']}, {'time': 1535715507741, 'side': 'buy', 'values': ['0.0009', '279.6957']}, {'time': 1535715278754, 'side': 'sell', 'values': ['0.000901', '288.6194']}, {'time': 1535715094738, 'side': 'buy', 'values': ['0.000901', '283.1885']}, {'time': 1535714862745, 'side': 'sell', 'values': ['0.000898', '281.1275']}, {'time': 1535714633733, 'side': 'buy', 'values': ['0.000899', '210.8261']}, {'time': 1535714466741, 'side': 'sell', 'values': ['0.000903', '285.9508']}, {'time': 1535714310739, 'side': 'sell', 'values': ['0.000899', '290.5931']}, {'time': 1535714087738, 'side': 'buy', 'values': ['0.000898', '284.6423']}, {'time': 1535713873739, 'side': 'sell', 'values': ['0.000899', '299.5677']}, {'time': 1535713699739, 'side': 'sell', 'values': ['0.000902', '247.4491']}, {'time': 1535713474738, 'side': 'sell', 'values': ['0.000892', '257.8579']}, {'time': 1535713302731, 'side': 'buy', 'values': ['0.000889', '234.7187']}, {'time': 1535713085741, 'side': 'sell', 'values': ['0.00089', '275.514']}, {'time': 1535712923743, 'side': 'sell', 'values': ['0.00089', '281.8391']}, {'time': 1535712765742, 'side': 'sell', 'values': ['0.000889', '288.1326']}, {'time': 1535712580925, 'side': 'sell', 'values': ['0.000889', '276.8175']}, {'time': 1535712421739, 'side': 'sell', 'values': ['0.000887', '234.0154']}, {'time': 1535712255743, 'side': 'buy', 'values': ['0.000889', '207.3649']}])
+    return ok([{ 'time': 1535716099735, 'side': 'sell', 'values': ['0.000901', '214.467'] }, { 'time': 1535715916739, 'side': 'buy', 'values': ['0.000899', '256.4311'] }, { 'time': 1535715692734, 'side': 'sell', 'values': ['0.000896', '259.39'] }, { 'time': 1535715507741, 'side': 'buy', 'values': ['0.0009', '279.6957'] }, { 'time': 1535715278754, 'side': 'sell', 'values': ['0.000901', '288.6194'] }, { 'time': 1535715094738, 'side': 'buy', 'values': ['0.000901', '283.1885'] }, { 'time': 1535714862745, 'side': 'sell', 'values': ['0.000898', '281.1275'] }, { 'time': 1535714633733, 'side': 'buy', 'values': ['0.000899', '210.8261'] }, { 'time': 1535714466741, 'side': 'sell', 'values': ['0.000903', '285.9508'] }, { 'time': 1535714310739, 'side': 'sell', 'values': ['0.000899', '290.5931'] }, { 'time': 1535714087738, 'side': 'buy', 'values': ['0.000898', '284.6423'] }, { 'time': 1535713873739, 'side': 'sell', 'values': ['0.000899', '299.5677'] }, { 'time': 1535713699739, 'side': 'sell', 'values': ['0.000902', '247.4491'] }, { 'time': 1535713474738, 'side': 'sell', 'values': ['0.000892', '257.8579'] }, { 'time': 1535713302731, 'side': 'buy', 'values': ['0.000889', '234.7187'] }, { 'time': 1535713085741, 'side': 'sell', 'values': ['0.00089', '275.514'] }, { 'time': 1535712923743, 'side': 'sell', 'values': ['0.00089', '281.8391'] }, { 'time': 1535712765742, 'side': 'sell', 'values': ['0.000889', '288.1326'] }, { 'time': 1535712580925, 'side': 'sell', 'values': ['0.000889', '276.8175'] }, { 'time': 1535712421739, 'side': 'sell', 'values': ['0.000887', '234.0154'] }, { 'time': 1535712255743, 'side': 'buy', 'values': ['0.000889', '207.3649'] }])
   }
 }, {
-  url: /api\.thinkbit.*handicap/,
+  url: /api\.ix-test.*handicap/,
   res () {
-    return ok({'asks': [{'values': ['0.000921', '4.89']}, {'values': ['0.000925', '39.67']}, {'values': ['0.000928', '53.58']}, {'values': ['0.000929', '7.3']}, {'values': ['0.000934', '7.28']}, {'values': ['0.00094', '265.87']}, {'values': ['0.000944', '143.44']}, {'values': ['0.000971', '143.61']}, {'values': ['0.000993', '27']}, {'values': ['0.000997', '54.22']}, {'values': ['0.000999', '15.1']}, {'values': ['0.001', '53.5']}, {'values': ['0.001005', '44.85']}, {'values': ['0.001008', '21.48']}, {'values': ['0.001011', '71.07']}, {'values': ['0.001015', '57.12']}, {'values': ['0.001042', '29.34']}, {'values': ['0.001057', '109.25']}, {'values': ['0.001079', '76']}, {'values': ['0.001127', '52.94']}], 'bids': [{'values': ['0.000879', '251.29']}, {'values': ['0.000877', '43.52']}, {'values': ['0.000875', '2.7']}, {'values': ['0.00087', '401.93']}, {'values': ['0.000863', '44.95']}, {'values': ['0.000859', '7.87']}, {'values': ['0.000833', '339.81']}, {'values': ['0.000811', '4.93']}, {'values': ['0.000807', '29']}, {'values': ['0.000805', '27']}, {'values': ['0.000804', '30.1']}, {'values': ['0.000799', '17.98']}, {'values': ['0.000796', '301.39']}, {'values': ['0.000793', '10.55']}, {'values': ['0.000789', '44.88']}, {'values': ['0.000762', '69.77']}, {'values': ['0.000747', '245.89']}, {'values': ['0.000725', '58.28']}, {'values': ['0.000708', '2']}, {'values': ['0.0007', '2']}]})
+    return ok({ 'asks': [{ 'values': ['0.000921', '4.89'] }, { 'values': ['0.000925', '39.67'] }, { 'values': ['0.000928', '53.58'] }, { 'values': ['0.000929', '7.3'] }, { 'values': ['0.000934', '7.28'] }, { 'values': ['0.00094', '265.87'] }, { 'values': ['0.000944', '143.44'] }, { 'values': ['0.000971', '143.61'] }, { 'values': ['0.000993', '27'] }, { 'values': ['0.000997', '54.22'] }, { 'values': ['0.000999', '15.1'] }, { 'values': ['0.001', '53.5'] }, { 'values': ['0.001005', '44.85'] }, { 'values': ['0.001008', '21.48'] }, { 'values': ['0.001011', '71.07'] }, { 'values': ['0.001015', '57.12'] }, { 'values': ['0.001042', '29.34'] }, { 'values': ['0.001057', '109.25'] }, { 'values': ['0.001079', '76'] }, { 'values': ['0.001127', '52.94'] }], 'bids': [{ 'values': ['0.000879', '251.29'] }, { 'values': ['0.000877', '43.52'] }, { 'values': ['0.000875', '2.7'] }, { 'values': ['0.00087', '401.93'] }, { 'values': ['0.000863', '44.95'] }, { 'values': ['0.000859', '7.87'] }, { 'values': ['0.000833', '339.81'] }, { 'values': ['0.000811', '4.93'] }, { 'values': ['0.000807', '29'] }, { 'values': ['0.000805', '27'] }, { 'values': ['0.000804', '30.1'] }, { 'values': ['0.000799', '17.98'] }, { 'values': ['0.000796', '301.39'] }, { 'values': ['0.000793', '10.55'] }, { 'values': ['0.000789', '44.88'] }, { 'values': ['0.000762', '69.77'] }, { 'values': ['0.000747', '245.89'] }, { 'values': ['0.000725', '58.28'] }, { 'values': ['0.000708', '2'] }, { 'values': ['0.0007', '2'] }] })
   }
 }, {
-  url: /api\.thinkbit.*history/,
+  url: /api\.ix-test.*history/,
   res () {
     return ok([{
       'time': 1535501700000,

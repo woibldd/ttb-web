@@ -1,28 +1,32 @@
 <template>
-  <div class="trade-pro" ref="wrap">
+  <div class="trading-chart" ref="wrap">
     <v-nav pro="1"></v-nav>
     <div class="container-trade-panel">
-      <div class="pro-col pro-col-1">
-        <div class="pro-grid pro-grid-tv" ref="gridTradingView">
-          <TradingView ref="TradingView"></TradingView>
+      <div class="ix-row">
+        <div class="ix-col ix-col-1">
+          <div class="ix-grid ix-grid-pairnav" ref="gridPairNav">
+            <PairNav ref="PairNav"></PairNav>
+          </div>
+          <div class="ix-grid ix-grid-deal" ref="gridDeal">
+            <Deal ref="Deal"></Deal>
+          </div>
         </div>
-        <div class="pro-grid pro-grid-order" ref="gridOrder">
+        <div class="ix-col ix-col-2">
+          <div class="ix-grid ix-grid-tv" ref="gridTradingView">
+            <TradingView ref="TradingView"></TradingView>
+          </div>
+        </div>
+        <div class="ix-col ix-col-3">
+          <div class="ix-grid ix-grid-orderbook" ref="gridOrderbook">
+            <Orderbook ref="Orderbook"></Orderbook>
+          </div>
+        </div>
+      </div>  
+      <div class="ix-row">
+        <div class="ix-grid ix-grid-order" ref="gridOrder">
           <Order ref="Order"></Order>
         </div>
-      </div>
-      <div class="pro-col pro-col-2">
-        <div class="pro-grid pro-grid-orderbook" ref="gridOrderbook">
-          <Orderbook ref="Orderbook"></Orderbook>
-        </div>
-        <div class="pro-grid pro-grid-deal" ref="gridDeal">
-          <Deal ref="Deal"></Deal>
-        </div>
-      </div>
-      <div class="pro-col pro-col-3">
-        <div class="pro-grid pro-grid-pairnav" ref="gridPairNav">
-          <PairNav ref="PairNav"></PairNav>
-        </div>
-        <div class="pro-grid pro-grid-operate" ref="gridOperate">
+        <div class="ix-grid ix-grid-operate" ref="gridOperate">
           <Operate ref="Operate"></Operate>
         </div>
       </div>
@@ -68,7 +72,7 @@ export default {
     }
   },
   watch: {
-    '$route.query.pair': {
+    '$route.params.pair': {
       async handler (pair = '') {
         this.state.pro.lock = true
         const match = pair.match(/^([A-Z]*)_([A-Z]*)$/)
@@ -133,14 +137,14 @@ export default {
   async created () {
     document.documentElement.style.overflow = 'hidden'
     document.querySelector('.page-preload').classList.add('show')
-    if (!this.$route.query.pair) {
+    if (!this.$route.params.pair) {
       const res = await service.getPairList()
       if (res.code) {
         return utils.alert(res.message)
       }
       this.$router.replace({
         name: 'trading',
-        query: {
+        params: {
           pair: _.find(res.data.items, item => item.name === local.pair) ? local.pair : res.data.items[0].name
         }
       })
@@ -197,7 +201,7 @@ export default {
     background-color: transparent;
   }
 }
-.trade-pro {
+.trading-chart {
   overflow: hidden;
   user-select: none;
   position: relative;
@@ -211,52 +215,63 @@ export default {
 .container-trade-panel {
   flex: 1;
   display: flex;
+  flex-direction: column;
 }
-.pro-col {
+.ix-row {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+.ix-col {
   display: flex;
   flex-direction: column;
 }
-.pro-col-1 {
+.ix-col-1 {
+  width: 350px; 
+}
+.ix-col-2 {
   flex: 1;
 }
-.pro-col-2 {
-  width: 320px;
+.ix-col-3 {
+  width: 350px;
 }
-.pro-col-3 {
-  width: 320px;
-}
-.pro-grid {
+.ix-grid {
   position: relative;
-  border: 1px solid $splitter;
+  border-top: 4px solid $splitter;
+  border-left: 4px solid $splitter;
 }
-.pro-grid-tv {
+.ix-grid-tv {
   flex: 2;
   height: 2px;
 }
-.pro-grid-order {
+.ix-grid-order {
   flex: 1;
   height: 1px;
 }
-.pro-grid-deal {
+.ix-grid-deal {
   flex: 1;
   height: 1px;
 }
-.pro-grid-orderbook {
+.ix-grid-orderbook {
   flex: 2;
   height: 2px;
 }
-.pro-grid-pairnav {
+.ix-grid-pairnav {
   flex: 1;
   height: 1px;
 }
-.pro-grid-operate {
+.ix-grid-operate {
   flex: 1;
   height: 1px;
+}
+@media screen and (max-width: 1000px) {
+  .ix-col-1 {
+    display: none;
+  }
 }
 </style>
 
 <style lang="scss">
-// @import "../style/golden-layout";
 @import "../styles/mixins";
 
 .pro-panel {

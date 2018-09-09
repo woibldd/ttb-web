@@ -1,6 +1,6 @@
 <template>
-  <div class="pro-panel">
-    <div class="pro-header">
+  <div class="ix-panel">
+    <div class="ix-header">
       <orderbook-nav :height="navHeight" />
       <div class="pull-right">
         <span v-show="offset || accuracy !== 1"
@@ -16,16 +16,16 @@
         </div>
       </div>
     </div>
-    <div class="pro-panel-thead" :style="{paddingRight: hasScrollBar ? '14px' : '4px'}">
-      <div class="table table-pro-handicap">
+    <div class="ix-panel-thead" :style="{paddingRight: hasScrollBar ? '14px' : '4px'}">
+      <div class="table table-ix-handicap">
         <div class="thead">
           <div class="th ibt left">{{ $t('price') }}</div>
-          <div class="th ibt right">{{ $t('amount') }}</div>
-          <div class="th ibt right">{{ $t('total') }}</div>
+          <div class="th ibt right">{{ $t('amount', {unit: state.pro.product_name}) }}</div>
+          <div class="th ibt right">{{ $t('total', {unit: state.pro.product_name}) }}</div>
         </div>
       </div>
     </div>
-    <div class="pro-panel-body" ref="body" :style="{height: bookHeight + 'px'}">
+    <div class="ix-panel-body" ref="body" :style="{height: bookHeight + 'px'}">
       <div class="side-wrap ask" :style="askStyle" v-show="local.orderbookMode !== 'bid'">
         <table class="table table-asks">
           <tbody v-if="state.pro.pairInfo">
@@ -120,7 +120,7 @@ export default {
       loading: false,
       changing: false,
       clearTip: {
-        classes: ['pro-popover'],
+        classes: ['ix-popover'],
         content () {
           return vm.$i18n.t('click_to_clear')
         }
@@ -408,14 +408,14 @@ export default {
 }
 
 .mask {
-  @include pro-mask();
+  @include ix-mask();
   &.changing {
     pointer-events: none;
     background-color: transparent;
     z-index: 1;
   }
 }
-.pro-header {
+.ix-header {
   background-color: $nav;
   height: 32px;
   line-height: 32px;
@@ -430,11 +430,11 @@ export default {
 .has-underline {
   border-bottom: 1px dotted #788694;
 }
-.pro-panel-thead {
+.ix-panel-thead {
   padding-left: 10px;
   height: 30px;
 }
-.pro-panel-body {
+.ix-panel-body {
   overflow-y: hidden;
 }
 .err,
@@ -453,7 +453,7 @@ export default {
 }
 .th {
   font-size: 12px;
-  color: #788694;
+  color: #A5B4C5;
   line-height: 30px;
   padding: 0 5px;
   width: 33.33%;
@@ -463,7 +463,7 @@ export default {
   }
 }
 .table tbody tr:hover {
-  background-color: fade-out(white, .94)!important;
+  background-color: $primary-opacity;
 }
 th.buy {
   padding-right: 10px;

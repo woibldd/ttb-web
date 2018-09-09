@@ -111,7 +111,7 @@ export default {
   }
 }
 .mask {
-  @include pro-mask();
+  @include ix-mask();
   background-color: transparent;
 }
 .num {

@@ -184,7 +184,7 @@ export default {
 @import "../../styles/mixins";
 
 .mask {
-  @include pro-mask();
+  @include ix-mask();
 }
 .pro-header {
   background-color: $nav;

@@ -46,17 +46,6 @@ export default {
           return 'zh'
         case 'zh-HK':
           return 'zh_TW'
-        case 'ja':
-          return 'ja'
-        case 'ko':
-          return 'ko'
-        case 'tr':
-          return 'tr'
-        case 'ru':
-          return 'ru'
-        case 'en':
-        default:
-          return 'en'
       }
     },
     async init (pair) {
@@ -169,7 +158,7 @@ export default {
   width: 100%;
   height: 100%;
   .mask {
-    @include pro-mask();
+    @include ix-mask();
   }
 }
 </style>
