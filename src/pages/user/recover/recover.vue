@@ -5,28 +5,18 @@
         <div class="panel-title" v-t="'if_forgot'"></div>
       </div>
       <form class="form pt-10" autocomplete="off" onsubmit="return false">
-        <!-- <div v-if="step < 3" class="field" >
-          <div class="input-box">
-            <div class="label">{{ $t('phone_number') }}</div>
-            <input class="input item" type="text"
-              name="phone"
-              @focus="active('phone', true)" @blur="active('phone', false)"
-              @input="input('phone')"
-              :placeholder="$t('bind_phone_input')"
-              :disabled="loading"
-              v-model.trim="phone" />
-          </div>
-        </div> -->
-        <!--  -->
         <div v-if="step < 3" class="field">
             <ix-input
+                ref="recoverPhone"
                 v-model.trim="phone"
+                :required='true'
+                :empty-err-tips="$t('bind_phone_err_empty')"
+                :rule="validateRules.phone"
                 :placeholder="$t('bind_phone_input')"
                 :label="$t('phone_number')"
                 >
-                </ix-input>
+            </ix-input>
         </div>
-        <!--  -->
         <div v-if="step===1" class="field recover__validate mt-17" :class="[{active: activeList['captcha'].active}]">
           <slide-validate @validateDone="validateDone"></slide-validate>
         </div>
@@ -47,44 +37,32 @@
               {{smsBtnText}}</a>
           </div>
         </div>
-        <div v-if="step===3" :class="['field', {active: activeList['password'].active}]">
-          <div class="input-box">
-            <div class="label" v-t="'password'"></div>
-            <input v-model.trim="password"
-              :disabled="loading"
-              autocomplete="off"
-              type="password"
-              name="password"
-              class="input item"
-              :placeholder="$t('change_password_new')"
-              @focus="active('password', true)" @blur="active('password', false)"
-              @input="pwChange"
-              @keyup.enter="submit" />
-            <!-- <div class="pw-helps" :class="{show: atPw}">
-              <div class="title" v-t="'pwcheck_guide'"></div>
-              <ul class="pw-checks">
-                <li v-for="(check, index) in pwCheckList"
-                  class="pw-check" :key="index">
-                  <span class="pw-state" :class="{pass: check.pass}"></span>
-                  <span class="desc">{{ $t(check.desc) }}</span>
-                </li>
-              </ul>
-            </div> -->
-          </div>
+        <!-- 输入密码 -->
+        <div v-if="step===3" :class="['field']">
+            <ix-input
+                ref="recoverPassword"
+                v-model.trim="password"
+                autocomplete="off"
+                :required='true'
+                :empty-err-tips="$t('login_ph_pw')"
+                :rule="validateRules.password"
+                :placeholder="$t('change_password_new')"
+                :label="$t('change_password_new')"
+                >
+            </ix-input>
         </div>
-        <div v-if="step===3" :class="['field', {active: activeList['password2'].active}]">
-          <div class="input-box">
-            <div class="label" v-t="'password2'"></div>
-            <input v-model.trim="password2"
-              :disabled="loading"
-              autocomplete="off"
-              type="password"
-              name="password2"
-              class="input item"
-              :placeholder="$t('change_password_repeat')"
-              @focus="active('password2', true)" @blur="active('password2', false)"
-              @keyup.enter="submit" />
-          </div>
+        <div v-if="step===3" :class="['field']">
+         <ix-input
+                ref="recoverPassword2"
+                v-model.trim="password2"
+                autocomplete="off"
+                :required='true'
+                :empty-err-tips="$t('change_password_diff')"
+                :rule="validateRules.password2"
+                :placeholder="$t('change_password_repeat')"
+                :label="$t('change_password_repeat')"
+                >
+            </ix-input>
         </div>
         <div class="field submit mt-16">
           <v-btn class="submit-btn" :label="$t('nextstep')"
@@ -122,20 +100,30 @@ export default {
   },
   data () {
     return {
-      step: 1,
+      step: 3,
       phone: '',
       loading: false,
       disableNextBtn: true,
       password: '',
       password2: '',
       captcha: '',
-      errmsg: '格式错误',
       sms: {
         // 0:可以发送, 1:倒计时, 2:重新发送
         loading: false,
         status: 0,
         countDown: 0,
         timer: null
+      },
+      validateRules: {
+        phone: {
+          errTips: '', // 空值，表示跳过校验
+          validateFunc: (num) => {
+            return !(/^1[34578]\d{9}$/.test(num))
+          }
+        },
+        password: {
+
+        }
       },
       activeList: {
         'email': {
@@ -179,11 +167,15 @@ export default {
   },
   methods: {
     nextstep () {
-      if (!this.phone) {
-        this.errmsg = this.$i18n.t('bind_phone_err_empty')
+      // 第一步，未正确输入手机号
+      if (this.step === 1 && !this.$refs.recoverPhone.validateSuccess) {
         return false
       }
-      console.log(this.phone, 'phone')
+
+      // 第二步，未填写手机验证码
+      if (this.step === 2 && !this.captcha) {
+        return false
+      }
       this.step++
       this.disableNextBtn = false
     },
