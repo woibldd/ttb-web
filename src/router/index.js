@@ -20,7 +20,7 @@ const Register = () => import(/* webpackChunkName: "Register" */ '@/pages/Regist
 const Recover = () => import(/* webpackChunkName: "Register" */ '@/pages/user/recover/recover.vue')
 const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
 const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pages/PrivacyPolicy')
-const agreement = () => import(/* webpackChunkName: "agreement" */ '@/pages/agreement')
+const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
 
 async function beforeEach (to, from, next) {
@@ -67,7 +67,6 @@ function onError (err) {
 }
 
 let router = new Router({
-  mode: 'history',
   routes: [
     {
       path: '/',
@@ -77,17 +76,13 @@ let router = new Router({
       },
       component: home
     }, {
-      path: '/agreement',
-      name: 'agreement',
-      component: agreement
-    }, {
-      path: '/privacy-policy',
-      name: 'privacy-policy',
+      path: '/PrivacyPolicy',
+      name: 'PrivacyPolicy',
       component: PrivacyPolicy
     }, {
       path: '/terms',
       name: 'terms',
-      component: PrivacyPolicy
+      component: terms
     }, {
       path: '/test2',
       name: 'Test2',
