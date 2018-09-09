@@ -4,9 +4,8 @@
       <div class="title-wrap">
         <div class="panel-title" v-t="'if_forgot'"></div>
       </div>
-      <div class="error-block" v-show="errmsg">{{ errmsg }}</div>
-      <form class="form pt-10" onsubmit="return false">
-        <div v-if="step < 3" class="field" >
+      <form class="form pt-10" autocomplete="off" onsubmit="return false">
+        <!-- <div v-if="step < 3" class="field" >
           <div class="input-box">
             <div class="label">{{ $t('phone_number') }}</div>
             <input class="input item" type="text"
@@ -17,7 +16,17 @@
               :disabled="loading"
               v-model.trim="phone" />
           </div>
+        </div> -->
+        <!--  -->
+        <div v-if="step < 3" class="field">
+            <ix-input
+                v-model.trim="phone"
+                :placeholder="$t('bind_phone_input')"
+                :label="$t('phone_number')"
+                >
+                </ix-input>
         </div>
+        <!--  -->
         <div v-if="step===1" class="field recover__validate mt-17" :class="[{active: activeList['captcha'].active}]">
           <slide-validate @validateDone="validateDone"></slide-validate>
         </div>
@@ -103,11 +112,13 @@ import slideValidate from '@/components/common/slide-validate/slide-validate.vue
 import service from '@/modules/service'
 import {state} from '@/modules/store'
 import pwChecker from '@/modules/pw-checker'
+import ixInput from '@/components/common/ix-input/ix-input.vue'
 
 export default {
   name: 'recover',
   components: {
-    slideValidate
+    slideValidate,
+    ixInput
   },
   data () {
     return {
@@ -118,7 +129,7 @@ export default {
       password: '',
       password2: '',
       captcha: '',
-      errmsg: '',
+      errmsg: '格式错误',
       sms: {
         // 0:可以发送, 1:倒计时, 2:重新发送
         loading: false,
@@ -168,6 +179,11 @@ export default {
   },
   methods: {
     nextstep () {
+      if (!this.phone) {
+        this.errmsg = this.$i18n.t('bind_phone_err_empty')
+        return false
+      }
+      console.log(this.phone, 'phone')
       this.step++
       this.disableNextBtn = false
     },

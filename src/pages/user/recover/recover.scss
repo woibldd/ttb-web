@@ -82,16 +82,6 @@
     clear: both;
   }
 }
-.error-block {
-  font-weight: bold;
-  border-radius: 3px;
-  border: 2px solid $state-text-red;
-  margin: 0 10px;
-  padding: 11px 14px;
-  font-size: 12px;
-  color: $state-text-red;
-}
-
 .recover-container {
     .field {
         display: flex;
@@ -101,15 +91,20 @@
         
         height: 60px;
         .input-box {
+          position: relative;
           width: 100%;
           height: 60px;
           padding: 12px 38px 0;
           top: 0;
           left: 0;
-        }
-        .error-tips {
-          color: $state-text-red;
-          font-size: 12px;
+
+          .error-tips {
+            color: $state-text-red;
+            font-size: 12px;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+          }
         }
         .label {
           color: $primary;
