@@ -65,7 +65,7 @@ export default {
         }
         .ind_but{width:auto;height:30px;line-height:30px;display:table;margin:0 auto;
             a{width:120px;height:30px;display:block;border-radius:4px;color:#fff;margin:0 20px;float:left;padding:0;
-                &.xy{background-image:url(../assets/xy.png);}
+                &.xy{background: linear-gradient(90deg, #b28e43, #c9aa68);}
                 &.wb{border:1px solid #fff;}
             }
         }
