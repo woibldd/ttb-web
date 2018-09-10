@@ -10,6 +10,7 @@
             :placeholder="placeholder"
             :type="type">
         <span v-if="showErrorTips" class="ix-input__err-tips">{{errTips}}</span>
+        <span class="ix-quick-delete"></span>
     </div>
 </template>
 <script>
