@@ -3,6 +3,7 @@
     width: 280px;
     box-sizing: border-box;
     position: relative;
+    padding-right: 40px;
 
     .ix-input__label {
         display: inline-block;
@@ -14,6 +15,7 @@
 
     .ix-input__text {
         box-sizing: border-box;
+        padding-right: 20px;
         font-size: 16px;
         height: 40px;
         width: 100%;
@@ -49,5 +51,32 @@
         bottom: -18px;
         font-size: 10px;
         color:$state-text-red;
+    }
+    .ix-quick-delete{
+        pointer-events: auto;
+        -webkit-transition: all .7s;
+        transition: all .7s;
+
+        display: inline-block;
+        position: absolute;
+        top: 32px;
+        right: 6px;
+        width: 14px;
+        height: 14px;
+        cursor: default;
+        z-index: 98;
+
+        &::after{
+            z-index: 99;
+            content: "\2715";
+            font-size: 14px;
+            font-weight: bolder;
+            color: #999;
+            display: block;
+            width: 14px;
+            height: 14px;
+            line-height: 14px;
+            text-align: center;
+        }
     }
 }

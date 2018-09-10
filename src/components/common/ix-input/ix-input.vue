@@ -10,6 +10,7 @@
             :placeholder="placeholder"
             :type="type">
         <span v-if="showErrorTips" class="ix-input__err-tips">{{errTips}}</span>
+        <span v-if="value && value.length" @click="clearText"  class="ix-quick-delete"></span>
     </div>
 </template>
 <script>
@@ -82,6 +83,9 @@ export default{
     valueChange ($event) {
       this.validateSuccess = this.validate($event.target.value)
       this.$emit('change', $event.target.value)
+    },
+    clearText () {
+      this.$emit('change', '')
     }
   }
 }
