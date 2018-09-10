@@ -134,7 +134,7 @@ export default {
     }
   },
   async created () {
-    document.querySelector('.page-preload').classList.add('show')
+    document.querySelector('.page-loading').classList.add('show')
     if (!this.$route.params.pair) {
       const res = await service.getPairList()
       if (res.code) {
@@ -162,7 +162,7 @@ export default {
 
       this.$eh.$on('protrade:balance:refresh', this.refreshBalance)
       this.$eh.$on('app:resize', this.onresize)
-      document.querySelector('.page-preload').classList.remove('show')
+      document.querySelector('.page-loading').classList.remove('show')
     })
   },
   beforeRouteLeave (to, from, next) {
@@ -176,7 +176,7 @@ export default {
     this.$eh.$off('app:resize', this.onresize)
     this.$eh.$off('protrade:balance:refresh', this.refreshBalance)
     this.state.pro.layout = false
-    document.querySelector('.page-preload').classList.remove('show')
+    document.querySelector('.page-loading').classList.remove('show')
     document.documentElement.setAttribute('style', '')
   }
 }

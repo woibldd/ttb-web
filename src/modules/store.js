@@ -4,7 +4,6 @@ import service from '@/modules/service'
 import Locals from '@/modules/locals'
 
 const locales = process.env.THEME_ENV.locales
-// const locales = ['zh-CN']
 
 export const state = {
   enablePhoneSignup: true,

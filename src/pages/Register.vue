@@ -436,6 +436,9 @@ export default {
     if (state.locale === 'zh-CN') {
       this.regionId = 86
     }
+  },
+  destroyed() {
+    this.$eh.$off('app:resize')
   }
 }
 </script>
