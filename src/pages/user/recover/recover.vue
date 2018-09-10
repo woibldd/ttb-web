@@ -4,21 +4,6 @@
       <div class="title-wrap">
         <div class="panel-title" v-t="'if_forgot'"></div>
       </div>
-<<<<<<< HEAD
-      <div class="error-block" v-show="errmsg">{{ errmsg }}</div>
-      <form class="form pt-10" onsubmit="return false">
-        <div v-if="step < 3" class="field" >
-          <div class="input-box">
-            <div class="label">{{ $t('phone_number') }}</div>
-            <input class="input item" type="text"
-              name="phone"
-              @focus="active('phone', true)" @blur="active('phone', false)"
-              @input="input('phone')"
-              :placeholder="$t('bind_phone_input')"
-              :disabled="loading"
-              v-model.trim="phone" />
-          </div>
-=======
       <form class="form pt-10" autocomplete="off" onsubmit="return false">
         <div v-if="step < 3" class="field">
             <ix-input
@@ -31,7 +16,6 @@
                 :label="$t('phone_number')"
                 >
             </ix-input>
->>>>>>> 0e37cd6d276f67b11643de2d83161fad25117d24
         </div>
         <div v-if="step===1" class="field recover__validate mt-17" :class="[{active: activeList['captcha'].active}]">
           <slide-validate @validateDone="validateDone"></slide-validate>
@@ -121,10 +105,6 @@ export default {
       password: '',
       password2: '',
       captcha: '',
-<<<<<<< HEAD
-      errmsg: '',
-=======
->>>>>>> 0e37cd6d276f67b11643de2d83161fad25117d24
       sms: {
         // 0:可以发送, 1:倒计时, 2:重新发送
         loading: false,
@@ -185,8 +165,6 @@ export default {
   },
   methods: {
     nextstep () {
-<<<<<<< HEAD
-=======
       // 第一步，未正确输入手机号
       if (this.step === 1 && !this.$refs.recoverPhone.validateSuccess) {
         return false
@@ -196,7 +174,6 @@ export default {
       if (this.step === 2 && !this.captcha) {
         return false
       }
->>>>>>> 0e37cd6d276f67b11643de2d83161fad25117d24
       this.step++
       this.disableNextBtn = false
     },
