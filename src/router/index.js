@@ -22,6 +22,10 @@ const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
 const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pages/PrivacyPolicy')
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
 
+const CoinManage = () => import(/* webpackChunkName: "CoinManage" */ '@/pages/user/coin-manage/coin-manage.vue')
+const Withdraw = () => import(/* webpackChunkName: "Withdraw" */ '@/components/CoinManage/Withdraw/Withdraw.vue')
+const Charge = () => import(/* webpackChunkName: "Charge" */ '@/components/CoinManage/Charge/Charge.vue')
+
 async function beforeEach (to, from, next) {
   state.loading = true
   const auth = utils.getRouteMeta(to, 'auth')
@@ -66,7 +70,7 @@ function onError (err) {
 }
 
 let router = new Router({
-  mode: 'history',
+//   mode: 'history',
   routes: [
     {
       path: '/',
@@ -149,6 +153,20 @@ let router = new Router({
         component: Recover,
         props: true
       }]
+    }, {
+      path: '/coin-manage',
+      name: 'coinManage',
+      component: CoinManage,
+      children: [{
+        path: 'withdraw',
+        name: 'withdraw',
+        component: Withdraw
+      }, {
+        path: 'charge',
+        name: 'charge',
+        component: Charge
+      } ]
+
     }
 
   ]

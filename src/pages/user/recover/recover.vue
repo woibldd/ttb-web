@@ -122,7 +122,10 @@ export default {
           }
         },
         password: {
+          errTips: this.$i18n.t('change_password_diff'),
+          validateFunc: (text) => { // text 表示当前input绑定的值
 
+          }
         }
       },
       activeList: {
