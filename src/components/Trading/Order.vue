@@ -1,30 +1,25 @@
 <template>
-  <div class="pro-panel" :class="{progress: progressing}">
+  <div class="ix-panel" :class="{progress: progressing}">
     <div class="mask" :class="{show: hasMask, transparent: curCtx.nextId}">
       <v-loading></v-loading>
     </div>
-    <div class="pro-header">
-      <a class="pro-header-nav o"
+    <div class="ix-header">
+      <a class="ix-header-nav raw"
         :class="{cur: tab === 'active'}"
         @click.prevent="setTab('active')">
         {{ $t('order_active') }}
         <span v-if="activeTotal">[{{ activeTotal }}]</span>
       </a>
-      <a class="pro-header-nav o"
-        :class="{cur: tab === 'filled'}"
-        @click.prevent="setTab('filled')">
-        {{ $t('order_filled') }}
-      </a>
-      <a class="pro-header-nav o"
+      <a class="ix-header-nav raw"
         :class="{cur: tab === 'history'}"
         @click.prevent="setTab('history')">
         {{ $t('order_history') }}
       </a>
       <div class="header-icons">
-        <span class="hide-others btn"
-          :class="{on: local.hideOthers}"
+        
+        <span class="hide-others btn on"
           @click="local.hideOthers = !local.hideOthers">
-          <icon name="filter"></icon>
+          <input type="checkbox" v-model="local.hideOthers">
           {{ $t('hide_others', {pair: pair}) }}
         </span>
         <a @click.prevent="update" class="header-btn btn">
@@ -32,9 +27,9 @@
         </a>
       </div>
     </div>
-    <div class="pro-panel-body" v-show="tab === 'active'" ref="active">
+    <div class="ix-panel-body" v-show="tab === 'active'" ref="active">
       <div class="inner" ref="activeContent">
-        <table class="table table-pro-order table-active">
+        <table class="table table-ix-order table-active">
           <thead>
             <tr v-show="active.list.length">
               <th class="side-icon"></th>
@@ -80,9 +75,9 @@
         <div class="err" v-show="!active.fetching && active.err && !active.list.length">{{ active.err }}</div>
       </div>
     </div>
-    <div class="pro-panel-body" v-show="tab === 'filled'" ref="filled" @scroll.prevent="onScroll('filled')">
+    <div class="ix-panel-body" v-show="tab === 'filled'" ref="filled" @scroll.prevent="onScroll('filled')">
       <div class="inner" ref="filledContent">
-        <table class="table table-pro-order table-filled">
+        <table class="table table-ix-order table-filled">
           <thead>
             <tr v-show="filled.list.length">
               <th class="side-icon"></th>
@@ -118,9 +113,9 @@
         <div class="err" v-show="!filled.fetching && filled.err && !filled.list.length">{{ filled.err }}</div>
       </div>
     </div>
-    <div class="pro-panel-body" v-show="tab === 'history'" ref="history" @scroll.prevent="onScroll('history')">
+    <div class="ix-panel-body" v-show="tab === 'history'" ref="history" @scroll.prevent="onScroll('history')">
       <div class="inner" ref="historyContent">
-        <table class="table table-pro-order table-history">
+        <table class="table table-ix-order table-history">
           <thead>
             <tr v-show="history.list.length">
               <th class="side-icon"></th>
@@ -576,25 +571,23 @@ tbody tr:nth-child(odd) {
 .table-history .side-icon i {
   border-radius: 1px;
 }
-.pro-header {
+.ix-header {
   background-color: $nav;
   height: 32px;
   line-height: 32px;
-  padding-left: 12px;
   box-sizing: border-box;
   color: white;
 }
-.pro-panel-body {
+.ix-panel-body {
   overflow-y: auto;
   overflow-scrolling: touch;
   -webkit-overflow-scrolling: touch;
 }
-.pro-panel .pro-header {
-  padding-left: 30px;
+.ix-panel .ix-header {
+  // padding-left: 30px;
 }
-.pro-header-nav {
+.ix-header-nav {
   opacity: .4;
-  margin-right: 30px;
   transition: opacity 300ms;
   color: white;
   display: inline-block;
@@ -602,10 +595,11 @@ tbody tr:nth-child(odd) {
   height: 30px;
   border-bottom: 2px solid transparent;
   vertical-align: top;
-  padding: 0 2px;
+  padding: 0 14px;
   &.cur {
     opacity: 1;
-    border-bottom: 2px solid white;
+    background: $protrade-bg;
+    border-top: 2px solid $primary;
   }
 }
 .progress .op-cancel {

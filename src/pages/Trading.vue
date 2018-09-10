@@ -30,7 +30,6 @@
           <Operate ref="Operate"></Operate>
         </div>
       </div>
-      <!--<DepthChart ref="DepthChart"></DepthChart>-->
     </div>
     <order-deal-popover />
   </div>
@@ -135,7 +134,6 @@ export default {
     }
   },
   async created () {
-    document.documentElement.style.overflow = 'hidden'
     document.querySelector('.page-preload').classList.add('show')
     if (!this.$route.params.pair) {
       const res = await service.getPairList()

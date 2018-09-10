@@ -27,7 +27,7 @@ export default function () {
       'compare_symbol',
       'context_menus',
       // 'volume_force_overlay',
-      'use_localstorage_for_settings'
+      // 'use_localstorage_for_settings'
     ],
     enabled_features: [
       'adaptive_logo'
@@ -39,7 +39,7 @@ export default function () {
     },
     overrides: {
       'symbolWatermarkProperties.color': 'rgba(255,255,255,0.1)',
-      'paneProperties.background': '#141721',
+      'paneProperties.background': '#283B4C',
       'paneProperties.vertGridProperties.color': 'rgba(210, 217, 229, 0.06)',
       'paneProperties.horzGridProperties.color': 'rgba(210, 217, 229, 0.06)',
       'paneProperties.crossHairProperties.color': 'rgb(210, 217, 229)',
@@ -80,6 +80,7 @@ export default function () {
       'volume.volume ma.linewidth': 2,
       'volume.volume ma.plottype': 'line',
       'volume.show ma': true,
+      // 'volume.show macd': true,
       'volume.options.showStudyArguments': true
     },
     charts_storage_url: 'http://saveload.tradingview.com',

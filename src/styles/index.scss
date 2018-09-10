@@ -164,7 +164,7 @@ a {
     color: $text-link-active;
   }
 }
-a.o {
+a.raw {
   @include a() {
     color: inherit;
   }
