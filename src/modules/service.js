@@ -293,6 +293,9 @@ const service = {
   },
   getTerminalDate () {
     return reqeust('get_terminal_date')
+  },
+  getLoginHistory () {
+    return request('user/login/history')
   }
 }
 

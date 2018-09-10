@@ -6,7 +6,8 @@
         <span class="menu-title">{{$t('profile_personal_center')}}</span>
         </p>
         <ul class="left-menu-list">
-          <li class="active"><span class="menu-name">{{ $t('profile_left_invite') }}</span></li>
+          <li class="active"><span class="menu-name">{{ $t('profile_left_invite_perinfo') }}</span></li>
+          <li class=""><span class="menu-name">{{ $t('profile_left_invite') }}</span></li>
         </ul>
       </div>
   </div>
@@ -52,7 +53,7 @@
         text-align: left;
         line-height: 36px;
         font-size: 14px;
-        color: rgba(0,0,0,.85);
+        color: #333;
         cursor: pointer;
         padding-left: 34px;
         box-sizing: border-box;

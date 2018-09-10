@@ -16,6 +16,7 @@ const Test2 = () => import(/* webpackChunkName: "Test2" */ '@/pages/test2.vue')
 const Trading = () => import(/* webpackChunkName: "Trading" */ '@/pages/Trading')
 const Profile = () => import(/* webpackChunkName: "Profile" */ '@/pages/Profile')
 const Invite = () => import(/* webpackChunkName: "Invite" */ '@/pages/Invite')
+const ProfileInfo = () => import(/* webpackChunkName: "ProfileInfo" */ '@/pages/ProfileInfo')
 const Register = () => import(/* webpackChunkName: "Register" */ '@/pages/Register')
 const Recover = () => import(/* webpackChunkName: "Register" */ '@/pages/user/recover/recover.vue')
 const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
@@ -101,18 +102,26 @@ let router = new Router({
       path: '/profile',
       name: 'profile',
       meta: {
-        auth: true,
+        auth: false,
         nav: !isMobile,
         class: 'dark',
         mobileNav: isMobile
       },
       redirect: 'profile/invite',
+      redirect: 'profile/InviteInfo',
+
       // component: (isMobile && process.env.MODE === 'beta') ? MobileProfile : Profile
       component: Profile,
       children: [{
         path: 'invite',
         name: 'invite',
         component: Invite
+      }],
+      component: Profile,
+      children: [{
+        path: 'ProfileInfo',
+        name: 'ProfileInfo',
+        component: ProfileInfo
       }]
     }, {
       path: '/user',
