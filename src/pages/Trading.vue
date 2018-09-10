@@ -21,13 +21,18 @@
             <Orderbook ref="Orderbook"></Orderbook>
           </div>
         </div>
-      </div>  
+      </div>
       <div class="ix-row">
         <div class="ix-grid ix-grid-order" ref="gridOrder">
           <Order ref="Order"></Order>
         </div>
         <div class="ix-grid ix-grid-operate" ref="gridOperate">
           <Operate ref="Operate"></Operate>
+        </div>
+      </div>
+      <div class="ix-row">
+        <div class="ix-grid ix-grid-intro" ref="gridIntro">
+          <intro></intro>
         </div>
       </div>
     </div>
@@ -50,6 +55,7 @@ import Orderbook from '../components/Trading/Orderbook'
 import PairNav from '@/components/Trading/PairNav'
 import Operate from '@/components/Trading/Operate'
 import OrderDealPopover from '@/components/Trading/OrderDealPopover'
+import Intro from '@/components/Trading/Intro'
 
 export default {
   name: 'trading',
@@ -59,6 +65,7 @@ export default {
     TradingView,
     Order,
     Deal,
+    Intro,
     // DepthChart,
     Orderbook,
     PairNav,
@@ -225,7 +232,7 @@ export default {
   flex-direction: column;
 }
 .ix-col-1 {
-  width: 350px; 
+  width: 350px;
 }
 .ix-col-2 {
   flex: 1;
@@ -248,7 +255,7 @@ export default {
 }
 .ix-grid-deal {
   flex: 1;
-  // height: 1px;
+  height: 256px;
 }
 .ix-grid-orderbook {
   flex: 2;
@@ -256,11 +263,15 @@ export default {
 }
 .ix-grid-pairnav {
   flex: 1;
-  // height: 1px;
+  height: 268px;
 }
 .ix-grid-operate {
   flex: 1;
   // height: 1px;
+}
+.ix-grid-intro {
+  flex: 1;
+  height: 300px;
 }
 @media screen and (max-width: 1000px) {
   .ix-col-1 {
@@ -272,7 +283,7 @@ export default {
 <style lang="scss">
 @import "../styles/mixins";
 
-.pro-panel {
+.ix-panel {
   width: 100%;
   height: 100%;
   &.progress {

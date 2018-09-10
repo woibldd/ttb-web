@@ -38,6 +38,9 @@ body {
   background-color: #ffffff;
   min-height: 600px;
 }
+::-webkit-scrollbar {
+  display:none
+}
 
 body.responsive-body {
   min-width: auto;
