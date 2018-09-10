@@ -16,6 +16,9 @@
   padding-top: 36px;
   padding-bottom: 46px;
   color: $primary;
+  position:relative;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 .logo {
   width: 200px;
@@ -49,6 +52,8 @@
     line-height: 1.5;
     color: $primary;
     float: left;
+    z-index: 999;
+    position: relative;
     // letter-spacing: 10px;
   }
   .by-links {

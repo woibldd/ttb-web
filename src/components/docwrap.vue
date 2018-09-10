@@ -42,7 +42,7 @@ export default {
 }
 .page-wrap {
   position: relative;
-  margin:  20px auto;
+  margin:  20px auto 0 auto;
   width: $page-width;
   padding-bottom: 40px;
 }

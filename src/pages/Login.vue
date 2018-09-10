@@ -1,5 +1,6 @@
 <template>
-  <div class="page page-login">
+  <div class="page page-login" ref="container">
+    <resbg></resbg>
     <div class="panel">
       <div class="title-wrap">
         <div class="panel-title" v-t="'signin'"></div>
@@ -87,11 +88,13 @@ import service from '@/modules/service'
 import VBtn from '@/components/VBtn'
 import {state, actions, local} from '@/modules/store'
 import utils from '@/modules/utils'
+import resbg from '@/components/resbg'
 
 export default {
   name: 'login',
   components: {
-    VBtn
+    VBtn,
+    resbg
   },
   props: ['by'],
   data () {
@@ -257,7 +260,14 @@ export default {
     quickDelete (field) {
       this[field] = ''
       this.activeList[field].qd = false
+    },
+    fixPosition () {
+      this.$refs.container.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
     }
+  },
+  mounted () {
+    this.$eh.$on('app:resize', () => this.fixPosition())
+    this.$nextTick(this.fixPosition)
   },
   created () {
     this.fetchRegion()
