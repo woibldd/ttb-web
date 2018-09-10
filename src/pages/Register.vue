@@ -405,7 +405,7 @@ export default {
       return '/terms'
     },
     goPrivacy () {
-      return '/privacy-policy'
+      return '/privacypolicy'
     },
     resetError () {
       this.errmsg = ''
