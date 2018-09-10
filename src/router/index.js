@@ -67,7 +67,7 @@ function onError (err) {
 }
 
 let router = new Router({
-  mode: process.env.NODE_ENV === 'development' ? 'history' : 'hash',
+  mode: process.env.NODE_ENV === 'development' ? 'hash' : 'history',
   routes: [
     {
       path: '/',
@@ -160,4 +160,3 @@ router.beforeEach(beforeEach)
 router.onError(onError)
 
 export default router
-console.log(process.env)
