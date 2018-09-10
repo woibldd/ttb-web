@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="error-block" v-show="errmsg">{{ errmsg }}</div>
-      <form class="form" onsubmit="return false">
+      <form class="form" onsubmit="return false" autocomplete="off">
         <div :class="['field']" v-show="by === 'phone'">
           <div class="input-box">
             <div class="label">{{ $t('region_label') }}</div>
@@ -29,6 +29,17 @@
         <div class="field" v-show="by === 'phone'" :class="{active: activeList['phone'].active}">
           <div class="input-box">
             <div class="label">{{ $t('phone_number') }}</div>
+            <!-- <ix-input
+                class="input item"
+                ref="phone"
+                v-model.trim="phone"
+                :required='true'
+                :empty-err-tips="$t('bind_phone_err_empty')"
+                :rule="validateRules.phone"
+                :placeholder="$t('bind_phone_input')"
+                :label="$t('phone_number')"
+                >
+            </ix-input> -->
             <input class="input item" type="text"
               name="phone"
               @focus="active('phone', true)" @blur="active('phone', false)"
@@ -89,12 +100,14 @@ import VBtn from '@/components/VBtn'
 import {state, actions, local} from '@/modules/store'
 import utils from '@/modules/utils'
 import resbg from '@/components/resbg'
+import ixInput from '@/components/common/ix-input/ix-input.vue'
 
 export default {
   name: 'login',
   components: {
     VBtn,
-    resbg
+    resbg,
+    ixInput
   },
   props: ['by'],
   data () {
@@ -108,6 +121,17 @@ export default {
       loading: false,
       phone: '',
       regionOptions: [],
+      validateRules: {
+        phone: {
+          errTips: '', // 空值，表示跳过校验
+          validateFunc: (num) => {
+            return !(/\d+$/.test(num))
+          }
+        },
+        password: {
+
+        }
+      },
       activeList: {
         'email': {
           active: false,

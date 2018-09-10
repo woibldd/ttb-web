@@ -127,7 +127,7 @@ export default {
     },
     async onresize () {
       const layoutHeight = window.innerHeight
-      this.$refs.wrap.style.height = layoutHeight + 'px'
+      // this.$refs.wrap.style.height = layoutHeight + 'px'
       this.setGridContainers()
       // $(this.$refs.layout).height($(window).height() - 50)
       // this.layout.updateSize()
@@ -150,8 +150,8 @@ export default {
     this.state.loading = true
 
     this.$nextTick(() => {
-      const layoutHeight = window.innerHeight
-      this.$refs.wrap.style.height = layoutHeight + 'px'
+      // const layoutHeight = window.innerHeight
+      // this.$refs.wrap.style.height = layoutHeight + 'px'
       this.state.loading = false
       this.state.pro.layout = true
 
@@ -244,23 +244,23 @@ export default {
 }
 .ix-grid-order {
   flex: 1;
-  height: 1px;
+  // height: 1px;
 }
 .ix-grid-deal {
   flex: 1;
-  height: 1px;
+  // height: 1px;
 }
 .ix-grid-orderbook {
   flex: 2;
-  height: 2px;
+  // height: 2px;
 }
 .ix-grid-pairnav {
   flex: 1;
-  height: 1px;
+  // height: 1px;
 }
 .ix-grid-operate {
   flex: 1;
-  height: 1px;
+  // height: 1px;
 }
 @media screen and (max-width: 1000px) {
   .ix-col-1 {

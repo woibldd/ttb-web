@@ -90,15 +90,17 @@ import slideValidate from '@/components/common/slide-validate/slide-validate.vue
 import service from '@/modules/service'
 import {state} from '@/modules/store'
 import pwChecker from '@/modules/pw-checker'
+import ixInput from '@/components/common/ix-input/ix-input.vue'
 
 export default {
   name: 'recover',
   components: {
-    slideValidate
+    slideValidate,
+    ixInput
   },
   data () {
     return {
-      step: 3,
+      step: 1,
       phone: '',
       loading: false,
       disableNextBtn: true,

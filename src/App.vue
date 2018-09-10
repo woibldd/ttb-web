@@ -131,7 +131,6 @@ export default {
   mounted () {
     this.$eh.$on('app:resize', () => this.fixPosition())
     this.$nextTick(this.fixPosition)
-    utils.success('chengogngang')
   },
   created () {
     utils.$app = this
