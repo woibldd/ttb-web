@@ -238,7 +238,7 @@
     width: 40px;
     margin-top: 14px;
   }
-  .input.captcha {
+  .register__input-captcha {
     width: 170px;
     // border-right: 1px solid #DDDDDD;
   }
@@ -255,7 +255,7 @@
     text-align: center;
     position: absolute;
     right: 0;
-    bottom: 0;
+    bottom: -6px;
 
     &.disabled {
       @include a() {
