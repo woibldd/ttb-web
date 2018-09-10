@@ -26,6 +26,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
+        outline: none;
 
         &:hover {
             border-bottom: 1px solid $primary;
@@ -38,6 +39,11 @@
             color:#999999
         }
     }
+    .ix-input__error {
+      border-bottom: 1px solid #F24E4D;
+      transition: border-bottom .7s;
+    }
+
     .ix-input__err-tips {
         position: absolute;
         display: inline-block;

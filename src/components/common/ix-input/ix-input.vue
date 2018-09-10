@@ -1,7 +1,7 @@
 <template>
     <div class="ix-input-container">
         <span v-show="showLabel" class="ix-input__label">{{label}}</span>
-        <input class="ix-input__text"
+        <input class="ix-input__text" :class="{'ix-input__error': showErrorTips}"
             v-on:change="valueChange($event)"
             @focus="inputFocus"
             @blur="inputBlur($event)"
@@ -68,6 +68,7 @@ export default{
         this.errTips = this.emptyErrTips
         return false
       }
+
       if (this.rule && this.rule.errTips) {
         this.errTips = this.rule.errTips
         const fun = this.rule.validateFunc
@@ -77,7 +78,7 @@ export default{
           return true
         }
       }
-      return false
+      return true
     },
     valueChange ($event) {
       this.validateSuccess = this.validate($event.target.value)

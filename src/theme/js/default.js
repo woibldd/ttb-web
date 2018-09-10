@@ -3,7 +3,7 @@ const getSassVariables = require('./getSassVariables')
 module.exports = {
   styleVar: getSassVariables(),
   googleAnalyticsId: 'UA-125390817-2',
-  locales: ['en', 'zh-CN', 'zh-HK', 'ja', 'ko'],
+  locales: ['en', 'zh-CN', 'zh-HK'],
   themeName: 'default',
   companyName: 'IX.COM',
   exchangeName: '比特币/以太坊交易平台，IX，数字资产交易所',

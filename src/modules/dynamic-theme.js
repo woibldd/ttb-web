@@ -38,11 +38,11 @@ const vm = {
     }
 
     if (configs[vm.curIndex]) {
-      document.body.classList.remove('body-theme-' + configs[vm.curIndex].id)
+      document.body.classList.remove(configs[vm.curIndex].id)
     }
     vm.curIndex = curIndex
     const config = configs[vm.curIndex]
-    document.body.classList.add('body-theme-' + config.id)
+    document.body.classList.add(config.id)
 
     const styleList = []
     styleList.push(`.theme-color-up { color: ${config.up} !important; }`)
