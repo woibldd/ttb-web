@@ -94,7 +94,7 @@
         }
       }
       .invinfo-box {
-        margin: 50px auto;
+        margin: 10px auto 60px auto;
         .inv_tl{
             height: 32px;
             line-height: 32px;

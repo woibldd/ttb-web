@@ -33,6 +33,11 @@
     width: 100%;
   }
 }
+.panel_box {
+    display: table;
+    width: auto;
+    margin: 0 auto;
+}
 .panel {
   border-radius: 4px;
   width: 360px;
@@ -40,7 +45,8 @@
   padding-bottom: 10px;
   background:rgba(48,62,75,.8);
   margin: 0 auto;
-
+  display: table-cell;
+  vertical-align: middle;
   input, select, textarea {
     resize: none;
     border: none;

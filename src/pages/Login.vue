@@ -1,84 +1,86 @@
 <template>
   <div class="page page-login" ref="container">
     <resbg></resbg>
-    <div class="panel">
-      <div class="title-wrap">
-        <div class="panel-title" v-t="'signin'"></div>
-        <div class="by-links" v-if="state.enablePhoneSignup">
-          <router-link class="by-link ibt" to="email">{{ $t('login_by_email') }}</router-link>
-          <span class="sp-line"></span>
-          <router-link class="by-link ibt" to="phone">{{ $t('login_by_phone') }}</router-link>
+    <div class="panel_box" ref="containera">
+        <div class="panel">
+            <div class="title-wrap">
+                <div class="panel-title" v-t="'signin'"></div>
+                <div class="by-links" v-if="state.enablePhoneSignup">
+                <router-link class="by-link ibt" to="email">{{ $t('login_by_email') }}</router-link>
+                <span class="sp-line"></span>
+                <router-link class="by-link ibt" to="phone">{{ $t('login_by_phone') }}</router-link>
+                </div>
+            </div>
+            <div class="error-block" v-show="errmsg">{{ errmsg }}</div>
+            <form class="form" onsubmit="return false">
+                <div :class="['field']" v-show="by === 'phone'">
+                <div class="input-box">
+                    <div class="label">{{ $t('region_label') }}</div>
+                    <v-loading v-if="!regionOptions.length" color="gray"></v-loading>
+                    <select class="select" v-else v-model="regionId">
+                    <option value="">{{ $t('region_ph') }}</option>
+                    <option :value="option.id" v-for="option in regionOptions" :key="option.id">
+                        <span>+{{ option.id }}</span>
+                        <template v-if="state.locale === 'zh-CN'">{{ option.cname }}</template>
+                        <template v-else>{{ option.fullname }}</template>
+                    </option>
+                    </select>
+                </div>
+                </div>
+                <div class="field" v-show="by === 'phone'" :class="{active: activeList['phone'].active}">
+                <div class="input-box">
+                    <div class="label">{{ $t('phone_number') }}</div>
+                    <input class="input item" type="text"
+                    name="phone"
+                    @focus="active('phone', true)" @blur="active('phone', false)"
+                    @input="input('phone')"
+                    :placeholder="$t('bind_phone_input')"
+                    :disabled="loading"
+                    v-model.trim="phone" />
+                </div>
+                </div>
+                <div :class="['field', {active: activeList['email'].active}]" v-show="by === 'email'">
+                <div class="input-box">
+                    <div class="label" v-t="'login_label_mail'"></div>
+                    <input v-model.trim="email"
+                    class="input item"
+                    @focus="active('email', true)" @blur="active('email', false)"
+                    @input="input('email')"
+                    type="email"
+                    placeholder="you@example.com"
+                    name="email"
+                    :disabled="loading"
+                    >
+                    <span class="quick-delete" :data-enable="activeList['email'].qd" @click="quickDelete('email')"></span>
+                </div>
+                </div>
+                <div :class="['field', {active: activeList['password'].active}]">
+                <div class="input-box">
+                    <div class="label" v-t="'login_label_pw'"></div>
+                    <input v-model.trim="password"
+                    class="input item"
+                    type="password"
+                    :placeholder="$t('login_ph_pw')"
+                    name="password"
+                    :disabled="loading"
+                    @keyup.enter="submit"
+                    @focus="active('password', true)" @blur="active('password', false)"
+                    @input="input('password')">
+                </div>
+                </div>
+                <div class="field submit">
+                <v-btn class="submit-btn" :label="$t('signin')"
+                    height="40"
+                    width="290"
+                    :loading="loading"
+                    @click="submit"></v-btn>
+                <div class="to-others">
+                    <router-link :to="{name: 'registerBy', params: $route.params, query: $route.query}">{{ $t('signup') }}</router-link>
+                    <router-link class="ml-5" :to="{name: 'recover'}">{{ $t('if_forgot') }}</router-link>
+                </div>
+                </div>
+            </form>
         </div>
-      </div>
-      <div class="error-block" v-show="errmsg">{{ errmsg }}</div>
-      <form class="form" onsubmit="return false">
-        <div :class="['field']" v-show="by === 'phone'">
-          <div class="input-box">
-            <div class="label">{{ $t('region_label') }}</div>
-            <v-loading v-if="!regionOptions.length" color="gray"></v-loading>
-            <select class="select" v-else v-model="regionId">
-              <option value="">{{ $t('region_ph') }}</option>
-              <option :value="option.id" v-for="option in regionOptions" :key="option.id">
-                <span>+{{ option.id }}</span>
-                <template v-if="state.locale === 'zh-CN'">{{ option.cname }}</template>
-                <template v-else>{{ option.fullname }}</template>
-              </option>
-            </select>
-          </div>
-        </div>
-        <div class="field" v-show="by === 'phone'" :class="{active: activeList['phone'].active}">
-          <div class="input-box">
-            <div class="label">{{ $t('phone_number') }}</div>
-            <input class="input item" type="text"
-              name="phone"
-              @focus="active('phone', true)" @blur="active('phone', false)"
-              @input="input('phone')"
-              :placeholder="$t('bind_phone_input')"
-              :disabled="loading"
-              v-model.trim="phone" />
-          </div>
-        </div>
-        <div :class="['field', {active: activeList['email'].active}]" v-show="by === 'email'">
-          <div class="input-box">
-            <div class="label" v-t="'login_label_mail'"></div>
-            <input v-model.trim="email"
-              class="input item"
-              @focus="active('email', true)" @blur="active('email', false)"
-              @input="input('email')"
-              type="email"
-              placeholder="you@example.com"
-              name="email"
-              :disabled="loading"
-              >
-            <span class="quick-delete" :data-enable="activeList['email'].qd" @click="quickDelete('email')"></span>
-          </div>
-        </div>
-        <div :class="['field', {active: activeList['password'].active}]">
-          <div class="input-box">
-            <div class="label" v-t="'login_label_pw'"></div>
-            <input v-model.trim="password"
-              class="input item"
-              type="password"
-              :placeholder="$t('login_ph_pw')"
-              name="password"
-              :disabled="loading"
-              @keyup.enter="submit"
-              @focus="active('password', true)" @blur="active('password', false)"
-              @input="input('password')">
-          </div>
-        </div>
-        <div class="field submit">
-          <v-btn class="submit-btn" :label="$t('signin')"
-            height="40"
-            width="290"
-            :loading="loading"
-            @click="submit"></v-btn>
-          <div class="to-others">
-            <router-link :to="{name: 'registerBy', params: $route.params, query: $route.query}">{{ $t('signup') }}</router-link>
-            <router-link class="ml-5" :to="{name: 'recover'}">{{ $t('if_forgot') }}</router-link>
-          </div>
-        </div>
-      </form>
     </div>
   </div>
 </template>
@@ -263,6 +265,7 @@ export default {
     },
     fixPosition () {
       this.$refs.container.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
+      this.$refs.containera.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
     }
   },
   mounted () {

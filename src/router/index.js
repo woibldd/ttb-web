@@ -22,6 +22,7 @@ const Recover = () => import(/* webpackChunkName: "Register" */ '@/pages/user/re
 const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
 const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pages/PrivacyPolicy')
 const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
+const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/ProfileSafety')
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
 
 async function beforeEach (to, from, next) {
@@ -107,8 +108,9 @@ let router = new Router({
         class: 'dark',
         mobileNav: isMobile
       },
-      redirect: 'profile/invite',
-      redirect: 'profile/InviteInfo',
+      //redirect: 'profile/invite',
+      //redirect: 'profile/ProfileInfo',
+      //redirect: 'profile/ProfileSafety',
 
       // component: (isMobile && process.env.MODE === 'beta') ? MobileProfile : Profile
       component: Profile,
@@ -116,12 +118,14 @@ let router = new Router({
         path: 'invite',
         name: 'invite',
         component: Invite
-      }],
-      component: Profile,
-      children: [{
+      },{
         path: 'ProfileInfo',
         name: 'ProfileInfo',
         component: ProfileInfo
+      },{
+        path: 'ProfileSafety',
+        name: 'ProfileSafety',
+        component: ProfileSafety
       }]
     }, {
       path: '/user',

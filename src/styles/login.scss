@@ -13,12 +13,11 @@
 }
 .page-login {
   background: #303E4B;
-  padding-top: 36px;
-  padding-bottom: 46px;
   color: $primary;
   position:relative;
   overflow: hidden;
   box-sizing: border-box;
+  width: 100%;
 }
 .logo {
   width: 200px;
@@ -27,14 +26,17 @@
   font-size: 24px;
   color: #FFFFFF;
 }
+.panel_box {
+    display: table;
+    width: auto;
+    margin: 0 auto;
+}
 .panel {
   border-radius: 4px;
   width: 360px;
-  padding-top: 40px;
-  padding-bottom: 10px;
   background:rgba(48,62,75,.8);
-  margin: 0 auto;
-  
+  display: table-cell;
+  vertical-align: middle;
   input, select, textarea {
     resize: none;
     border: none;
