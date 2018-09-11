@@ -3,17 +3,10 @@
 // @import "./tooltip";
 
 html {
-  background-color: #393E59;
+  background-color: #ffffff;
 }
 html.light-bg {
   background-color: #F0F0F0;
-}
-html.upgrading {
-  background-color: #1F2338;
-  body {
-    min-width: auto;
-    background-color: #1F2338;
-  }
 }
 html.white-bg {
   background-color: white;

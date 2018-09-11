@@ -18,5 +18,6 @@ export default {
 p {
   font-size: 72px;
   font-weight: bold;
+  background: transparent;
 }
 </style>
