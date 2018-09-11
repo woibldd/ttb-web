@@ -23,7 +23,7 @@ export default {
     background-color: $home-header-bgdark;
   }
   .footer_logo{
-    width:106px;
+    width:90px;
     height:30px;
     background:url(../assets/footer_logo.png);float:left;margin-top:40px;
   }

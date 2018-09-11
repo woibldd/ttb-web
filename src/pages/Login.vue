@@ -1,5 +1,7 @@
 <template>
   <div class="page page-login">
+    <resbg></resbg>
+    <div class="panel_box" ref="container">
     <div class="panel">
       <div class="title-wrap">
         <div class="panel-title" v-t="'signin'"></div>
@@ -9,8 +11,7 @@
           <router-link class="by-link ibt" to="phone">{{ $t('login_by_phone') }}</router-link>
         </div>
       </div>
-      <div class="error-block" v-show="errmsg">{{ errmsg }}</div>
-      <form class="form" onsubmit="return false">
+      <form class="form" onsubmit="return false" autocomplete="off">
         <div :class="['field']" v-show="by === 'phone'">
           <div class="input-box">
             <div class="label">{{ $t('region_label') }}</div>
@@ -25,45 +26,60 @@
             </select>
           </div>
         </div>
-        <div class="field" v-show="by === 'phone'" :class="{active: activeList['phone'].active}">
+        <div class="field" v-show="by === 'phone'">
           <div class="input-box">
-            <div class="label">{{ $t('phone_number') }}</div>
-            <input class="input item" type="text"
+            <!-- <div class="label">{{ $t('phone_number') }}</div> -->
+            <ix-input
+              class=""
+              ref="phone"
+              v-model.trim="phone"
+              :required='true'
+              :empty-err-tips="$t('bind_phone_err_empty')"
+              :rule="validateRules.phone"
+              :placeholder="$t('bind_phone_input')"
+              :label="$t('phone_number')"
+              >
+            </ix-input>
+            <!-- <input class="input item" type="text"
               name="phone"
               @focus="active('phone', true)" @blur="active('phone', false)"
               @input="input('phone')"
               :placeholder="$t('bind_phone_input')"
               :disabled="loading"
-              v-model.trim="phone" />
+              v-model.trim="phone" /> -->
           </div>
         </div>
-        <div :class="['field', {active: activeList['email'].active}]" v-show="by === 'email'">
+        <div :class="['field']" v-show="by === 'email'">
           <div class="input-box">
-            <div class="label" v-t="'login_label_mail'"></div>
-            <input v-model.trim="email"
-              class="input item"
-              @focus="active('email', true)" @blur="active('email', false)"
-              @input="input('email')"
-              type="email"
-              placeholder="you@example.com"
-              name="email"
-              :disabled="loading"
+            <!-- <div class="label" v-t="'login_label_mail'"></div> -->
+            <ix-input
+              class=""
+              ref="email"
+              v-model.trim="email"
+              :required='true'
+              :empty-err-tips="$t('err_empty_email')"
+              :rule="validateRules.email"
+              :placeholder="$t('err_empty_email')"
+              :label="$t('login_label_mail')"
               >
-            <span class="quick-delete" :data-enable="activeList['email'].qd" @click="quickDelete('email')"></span>
+            </ix-input>
           </div>
         </div>
-        <div :class="['field', {active: activeList['password'].active}]">
+        <div :class="['field']">
           <div class="input-box">
-            <div class="label" v-t="'login_label_pw'"></div>
-            <input v-model.trim="password"
-              class="input item"
+            <!-- <div class="label" v-t="'login_label_pw'"></div> -->
+            <ix-input
+              class=""
+              ref="password"
+              v-model.trim="password"
+              :required='true'
               type="password"
-              :placeholder="$t('login_ph_pw')"
-              name="password"
-              :disabled="loading"
-              @keyup.enter="submit"
-              @focus="active('password', true)" @blur="active('password', false)"
-              @input="input('password')">
+              :empty-err-tips="$t('err_empty_password')"
+              :rule="validateRules.password"
+              :placeholder="$t('err_empty_password')"
+              :label="$t('login_label_pw')"
+              >
+            </ix-input>
           </div>
         </div>
         <div class="field submit">
@@ -79,6 +95,7 @@
         </div>
       </form>
     </div>
+    </div>
   </div>
 </template>
 
@@ -87,11 +104,15 @@ import service from '@/modules/service'
 import VBtn from '@/components/VBtn'
 import {state, actions, local} from '@/modules/store'
 import utils from '@/modules/utils'
+import resbg from '@/components/resbg'
+import ixInput from '@/components/common/ix-input/ix-input.vue'
 
 export default {
   name: 'login',
   components: {
-    VBtn
+    VBtn,
+    resbg,
+    ixInput
   },
   props: ['by'],
   data () {
@@ -105,26 +126,21 @@ export default {
       loading: false,
       phone: '',
       regionOptions: [],
-      activeList: {
-        'email': {
-          active: false,
-          qd: false,
-          error: ''
+      validateRules: {
+        phone: {
+          errTips: this.$t('bind_phone_err_format'), // 空值，表示跳过校验
+          validateFunc: (num) => {
+            return !(/\d+$/.test(num))
+          }
         },
-        'password': {
-          active: false,
-          qd: false,
-          error: ''
+        email: {
+          errTips: this.$t('err_invalid_email'), // 空值，表示跳过校验
+          validateFunc: (email) => {
+            return !(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(email))
+          }
         },
-        'phone': {
-          active: false,
-          qd: false,
-          error: ''
-        },
-        'captcha': {
-          active: false,
-          qd: false,
-          error: ''
+        password: {
+
         }
       }
     }
@@ -180,33 +196,20 @@ export default {
       }
     },
     checkParams () {
-      const err = em => ({ok: false, em})
-      if (this.by === 'phone') {
-        if (!this.regionId) {
-          return err(this.$i18n.t('region_ph'))
-        }
-        if (!this.phone) {
-          return err(this.$i18n.t('bind_phone_err_empty'))
+      if (this.$refs.password.validateSuccess) {
+        if (this.by === 'phone' && this.$refs.phone.validateSuccess) {
+          return true
+        } else if (this.by === 'email' && this.$refs.email.validateSuccess) {
+          return true
         }
       }
-      if (this.by === 'email') {
-        if (!this.email) {
-          return err(this.$i18n.t('err_empty_email'))
-        }
-        if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(this.email)) {
-          return err(this.$i18n.t('err_invalid_email'))
-        }
-      }
-      if (!this.password) {
-        return err(this.$i18n.t('err_empty_password'))
-      }
-      return {ok: true}
+
+      return false
     },
     async submit (e) {
       // 本地校验
       const check = this.checkParams()
-      if (!check.ok) {
-        this.errmsg = check.em
+      if (!check) {
         return false
       }
       this.errmsg = ''
@@ -216,9 +219,10 @@ export default {
       const res = await service.login(this.params)
       if (res.code) {
         this.loading = false
-        this.errmsg = res.message
+        utils.alert(res.message)
         return false
       }
+      actions.setUserInfo(res.data)
 
       if (this.by === 'phone') {
         this.local.regionId = this.regionId
@@ -228,13 +232,13 @@ export default {
 
       // 无二步验证
       if (!res.data.phone && !res.data.google) {
-        actions.resetStatus()
-        if (typeof state.loginBack === 'string') {
-          location.href = state.loginBack
-        } else {
-          this.$router.push(state.loginBack)
-        }
-        return actions.setLoginBack(null)
+        // actions.resetStatus()
+        // if (typeof state.loginBack === 'string') {
+        //   location.href = state.loginBack
+        // } else {
+        //   this.$router.push(state.loginBack)
+        // }
+        // return actions.setLoginBack(null)
       }
 
       // 去二次验证
@@ -243,21 +247,15 @@ export default {
         name: 'invite'
       })
     },
-    active (field, active) {
-      this.activeList[field].active = active
-      if (field === 'password') {
-        this.atPw = active
-      }
-    },
-    input (field) {
-      let text = this[field]
-      this.activeList[field].qd = !!text
-      this.errmsg = ''
-    },
-    quickDelete (field) {
-      this[field] = ''
-      this.activeList[field].qd = false
+    fixPosition () {
+      // this.$refs.container.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
+      this.$refs.container.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
+      // this.$refs.containera.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
     }
+  },
+  mounted () {
+    this.$eh.$on('app:resize', () => this.fixPosition())
+    this.$nextTick(this.fixPosition)
   },
   created () {
     this.fetchRegion()
@@ -270,6 +268,9 @@ export default {
     if (backTo && (/^\/campaigns\//.test(backTo) || /^\/activity\//.test(backTo))) {
       actions.setLoginBack(backTo)
     }
+  },
+  destroyed () {
+    this.$eh.$off('app:resize')
   }
 }
 </script>

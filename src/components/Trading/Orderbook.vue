@@ -20,7 +20,7 @@
       <div class="table table-ix-handicap">
         <div class="thead">
           <div class="th ibt left">{{ $t('price') }}</div>
-          <div class="th ibt right">{{ $t('amount', {unit: state.pro.product_name}) }}</div>
+          <div class="th ibt right">{{ $t('amount_unit', {unit: state.pro.product_name}) }}</div>
           <div class="th ibt right">{{ $t('total', {unit: state.pro.product_name}) }}</div>
         </div>
       </div>

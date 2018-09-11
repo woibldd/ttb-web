@@ -14,7 +14,12 @@
           <a class="quit" @click="logout">[ {{$t("signout")}} ]</a>
         </div>
 
-        <div class="lang" @click="setLocale">{{localeText}}<b></b>
+        <div class="lang">{{localeText}}<b></b>
+            <div class="lang_box">
+                <a @click="langcn">简体中文</a>
+                <!-- <a @click="langen">中文繁體</a> -->
+                <a @click="langen">English</a>
+            </div>
         </div>
       </div>
     </div>
@@ -57,17 +62,13 @@ export default {
     }
   },
   methods: {
-    setLocale () {
-      let localeCode = 'en'
-      switch (state.locale) {
-        case 'zh-CN':
-          localeCode = 'en'
-          break
-        default:
-          localeCode = 'zh-CN'
-          break
-      }
-      actions.setLocale(localeCode)
+    langcn () {
+      let lang_cn = 'zh-CN'
+      actions.setLocale(lang_cn)
+    },
+    langen () {
+      let lang_en = 'en'
+      actions.setLocale(lang_en)
     },
     logout () {
       actions.setUserInfo(null)
@@ -77,6 +78,9 @@ export default {
           name: 'login'
         })
       }
+    },
+    clickStar($event){
+        this.className='active';//console.log($event.currentTarget);
     }
   }
 }
@@ -92,12 +96,12 @@ export default {
   line-height: 42px;
   .nav_logo {
     float: left;
-    width: 150px;
-    height: 42px;
+    width: 142px;
+    height: 46px;
     display: block;
     background: url(../assets/nav_logo.png);
     float: left;
-    margin: 19px 0;
+    margin: 17px 0;
   }
   .nav_right {
     .right_options {
@@ -139,6 +143,7 @@ export default {
     position: relative;
     font-size: 12px;
     cursor: pointer;
+    z-index: 1;
     b {
       width: 8px;
       height: 24px;
@@ -148,7 +153,35 @@ export default {
       top: 0;
       right: 16px;
     }
+    .lang_box{
+        display: block;
+        width: 200%;
+        height: auto;
+        line-height: 40px;
+        padding-top: 27px;
+        right:0;
+        position: absolute;
+        display: none;
+        a{
+            background: #303c47;
+            display: block;
+            width: 50%;
+            height: 40px;
+            float: left;
+            color: #fff;
+            &:hover{
+                background:#273440;
+                color: #c9a96c;
+            }
+        }
+    }
+    &:hover{
+        .lang_box{
+            display: block;
+        }
+    }
   }
+
 }
 .dark {
   background: $home-header-bgdark;

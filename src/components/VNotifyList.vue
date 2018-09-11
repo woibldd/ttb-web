@@ -41,13 +41,16 @@ export default {
     this.$eh.$on('app:notify', (options) => {
       if (options.id && _.find(this.notifyList, item => item.id === options.id)) {
         // 去重
-        utils.logI('duplicate notify: ' + options.id)
+        utils.logI('repeat toast: ' + options.id + new Date())
         return false
       }
       options.id = options.id || _.uniqueId()
       options.close = 0
       this.notifyList.push(options)
     })
+  },
+  destroyed () {
+    this.$eh.$off('app:notify')
   }
 }
 </script>

@@ -63,6 +63,7 @@ export default {
 .v-btn {
   position: relative;
   cursor: pointer;
+  user-select: none;
   border-style: inset;
   border-color: rgba(0,0,0, .2);
   &, &:focus, &:visited {

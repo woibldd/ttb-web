@@ -16,10 +16,13 @@ const Test2 = () => import(/* webpackChunkName: "Test2" */ '@/pages/test2.vue')
 const Trading = () => import(/* webpackChunkName: "Trading" */ '@/pages/Trading')
 const Profile = () => import(/* webpackChunkName: "Profile" */ '@/pages/Profile')
 const Invite = () => import(/* webpackChunkName: "Invite" */ '@/pages/Invite')
+const ProfileInfo = () => import(/* webpackChunkName: "ProfileInfo" */ '@/pages/ProfileInfo')
 const Register = () => import(/* webpackChunkName: "Register" */ '@/pages/Register')
 const Recover = () => import(/* webpackChunkName: "Register" */ '@/pages/user/recover/recover.vue')
 const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
 const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pages/PrivacyPolicy')
+const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
+const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/ProfileSafety')
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
 
 const CoinManage = () => import(/* webpackChunkName: "CoinManage" */ '@/pages/user/coin-manage/coin-manage.vue')
@@ -47,8 +50,8 @@ async function beforeEach (to, from, next) {
 
 function beforeResolve (to, from, next) {
   if (to.name !== '404' || (from.name && from.name !== '404')) {
-    document.body.className = document.body.className.replace(/\bv-route-([-a-zA-Z0-9]+)\b/g, '')
-    let className = 'v-route'
+    document.body.className = document.body.className.replace(/\brouter-([-a-zA-Z0-9]+)\b/g, '')
+    let className = 'router'
     _.each(to.matched, (match) => {
       className += ('-' + match.name)
       document.body.classList.add(className)
@@ -70,7 +73,7 @@ function onError (err) {
 }
 
 let router = new Router({
-//   mode: 'history',
+  mode: process.env.NODE_ENV === 'development' ? 'hash' : 'history',
   routes: [
     {
       path: '/',
@@ -80,13 +83,13 @@ let router = new Router({
       },
       component: home
     }, {
-      path: '/privacy-policy',
-      name: 'privacy-policy',
+      path: '/PrivacyPolicy',
+      name: 'PrivacyPolicy',
       component: PrivacyPolicy
     }, {
       path: '/terms',
       name: 'terms',
-      component: PrivacyPolicy
+      component: terms
     }, {
       path: '/test2',
       name: 'Test2',
@@ -105,18 +108,29 @@ let router = new Router({
       path: '/profile',
       name: 'profile',
       meta: {
-        auth: true,
+        auth: false,
         nav: !isMobile,
         class: 'dark',
         mobileNav: isMobile
       },
-      redirect: 'profile/invite',
+      // redirect: 'profile/invite',
+      // redirect: 'profile/ProfileInfo',
+      // redirect: 'profile/ProfileSafety',
+
       // component: (isMobile && process.env.MODE === 'beta') ? MobileProfile : Profile
       component: Profile,
       children: [{
         path: 'invite',
         name: 'invite',
         component: Invite
+      }, {
+        path: 'ProfileInfo',
+        name: 'ProfileInfo',
+        component: ProfileInfo
+      }, {
+        path: 'ProfileSafety',
+        name: 'ProfileSafety',
+        component: ProfileSafety
       }]
     }, {
       path: '/user',

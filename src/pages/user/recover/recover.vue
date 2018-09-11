@@ -100,7 +100,7 @@ export default {
   },
   data () {
     return {
-      step: 3,
+      step: 1,
       phone: '',
       loading: false,
       disableNextBtn: true,

@@ -1,6 +1,6 @@
 <template>
-  <div class="pro-panel" :class="{loading: loading}">
-    <div class="pro-header">
+  <div class="ix-pannel" :class="{loading: loading}">
+    <div class="ix-header">
       {{ $t('pairnav_title') }}
       <div class="input-wrap">
         <span class="search-icon">
@@ -14,11 +14,11 @@
           v-model="search">
       </div>
     </div>
-    <div class="pro-header-sub">
-      <a class="pro-header-nav favor" :class="{cur: tab === '*'}" @click.prevent="setTab('*')">
+    <div class="ix-header-sub">
+      <a class="ix-header-nav favor" :class="{cur: tab === '*'}" @click.prevent="setTab('*')">
         <i class="icon-collect"></i>
       </a>
-      <a class="pro-header-nav"
+      <a class="ix-header-nav"
         v-for="currency in group"
         href="javascript:;"
         :key="currency"
@@ -27,10 +27,10 @@
         {{ currency }}
       </a>
     </div>
-    <div class="pro-panel-body">
+    <div class="ix-pannel-body">
       <div class="no-data" v-if="errmsg">{{ $t(errmsg) }}</div>
       <div class="err" v-if="!loading && err && !pairList.length">{{ err }}</div>
-      <div class="pro-pair-head tr" v-show="sortedList.length">
+      <div class="ix-pair-head tr" v-show="sortedList.length">
         <div class="th collect"></div>
         <div class="th pair" @click="setSort('pair')">
           <sort :label="$t('pairnav_pair')"
@@ -49,7 +49,7 @@
             :state="stateSortBy('vol')"></sort>
         </div>
       </div>
-      <ul class="ul pro-pair-body tbody" :style="{height: bodyHeight}" v-show="sortedList.length">
+      <ul class="ul ix-pair-body tbody" :style="{height: bodyHeight}" v-show="sortedList.length">
         <li class="tr" v-for="pair in sortedList"
           :class="{cur: pair.name === state.pro.pair}"
           :key="pair.id"
@@ -170,21 +170,21 @@ export default {
 @import "../../styles/vars";
 @import "../../styles/mixins";
 
-.pro-header {
+.ix-header {
   height: 32px;
   line-height: 32px;
   padding-left: 12px;
   background-color: $nav;
   color: white;
 }
-.pro-header-sub {
+.ix-header-sub {
   padding-left: 12px;
   height: 24px;
   line-height: 24px;
   background-color: $nav;
   color: white;
 }
-.pro-header-nav {
+.ix-header-nav {
   font-size: 12px;
   opacity: .4;
   margin-right: 12px;
@@ -266,10 +266,10 @@ export default {
     padding-right: 7px;
   }
 }
-.pro-pair-head {
+.ix-pair-head {
 
 }
-.pro-pair-body {
+.ix-pair-body {
   overflow-y: auto;
   .tr {
     border-top: 1px solid transparent;

@@ -86,8 +86,7 @@ $home-header-login: #303E4B;
 /* const */
 $splitter:#3A444F; // trade split line 交易页面分割线
 $loading-mask: #283B4C; // 交易页面loading背景
-$trading-layout-bg: #141414; // 交易页面box背景  trading view 要改custom_v1.css
-$order-input-label: #cdcdcd; //订单填写 input 右侧币种的背景色
+$order-input-label: #666666; //订单填写 input 右侧币种的背景色
 
 /* logo pic */
 $logo-pic: 'assets/logo'; // logo图片
@@ -99,10 +98,10 @@ $kyc-pic: '../assets/kyc-example';
 
 $page-width: 1135px;
 
-$protrade-bg: #141721;
+$protrade-bg: #283B4C;
 
 /* font family */
 $hex: monaco, monospace, arial;
 
 /* profile 左侧 背景色 */
-$profile-menu-bg: #E5E5E5;
+$profile-menu-bg: #f3edd7;

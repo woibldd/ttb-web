@@ -13,9 +13,11 @@
 }
 .page-login {
   background: #303E4B;
-  padding-top: 36px;
-  padding-bottom: 46px;
   color: $primary;
+  position:relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
 }
 .logo {
   width: 200px;
@@ -24,14 +26,17 @@
   font-size: 24px;
   color: #FFFFFF;
 }
+.panel_box {
+    display: table;
+    width: auto;
+    margin: 0 auto;
+}
 .panel {
   border-radius: 4px;
   width: 360px;
-  padding-top: 40px;
-  padding-bottom: 10px;
   background:rgba(48,62,75,.8);
-  margin: 0 auto;
-  
+  display: table-cell;
+  vertical-align: middle;
   input, select, textarea {
     resize: none;
     border: none;
@@ -44,6 +49,8 @@
   padding: 0 40px;
   text-align: center;
   margin-bottom: 28px;
+  z-index: 999;
+  position: relative;
   .panel-title {
     font-size: 24px;
     line-height: 1.5;
@@ -94,12 +101,12 @@
 .field {
   @include clearfix();
   position: relative;
-  
   height: 60px;
+
   .input-box {
     width: 100%;
     height: 60px;
-    padding: 12px 38px 0;
+    padding: 0 38px;
     top: 0;
     left: 0;
   }
@@ -190,7 +197,7 @@
       color:#999999
     }
   }
-  
+
   .select {
     appearance: none;
     -webkit-appearance: none;
@@ -204,6 +211,8 @@
     height: 36px;
     box-sizing: border-box;
     width: 280px;
+    position: absolute;
+    bottom: 0;
     &:hover {
       border-bottom: 1px solid $primary;
       transition: border-bottom .7s;

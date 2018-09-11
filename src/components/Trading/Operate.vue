@@ -1,12 +1,12 @@
 <template>
   <div class="ix-panel" :class="{loading: loading}">
     <div class="ix-header-sub">
-      <a class="ix-header-nav o"
+      <a class="ix-header-nav raw limit"
         :class="{cur: tab === 'limit'}"
         @click.prevent="setTab('limit')">
         {{ $t('operate_limit') }}
       </a>
-      <a class="ix-header-nav o"
+      <a class="ix-header-nav raw market"
         :class="{cur: tab === 'market'}"
         @click.prevent="setTab('market')">
         {{ $t('operate_market') }}
@@ -91,21 +91,27 @@ export default {
   color: white;
 }
 .ix-header-nav {
-  font-size: 13px;
+  font-size: 12px;
   opacity: .4;
-  margin: 0 10px;
   transition: opacity 300ms;
   color: white;
   display: inline-block;
   line-height: 30px;
   height: 30px;
-  border-bottom: 2px solid transparent;
+  border-top: none;
   vertical-align: top;
-  padding: 0 10px;
+  padding: 0 20px;
   &.cur {
     opacity: 1;
-    border-bottom: 2px solid white;
+    background: $protrade-bg;
+    border-top: 2px solid $primary;
   }
+  // &.limit {
+  //   border-color: #ff0000;
+  // }
+  // &.market {
+  //   border-color: #00ff00;
+  // }
 }
 .op-container {
   box-sizing: border-box;

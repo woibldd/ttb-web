@@ -14,7 +14,7 @@
       :class="{long: currency.length > 5}">
       {{ currency }}
     </div>
-    <div class="btn bid1" v-show="bid"
+    <!-- <div class="btn bid1" v-show="bid"
       v-tooltip.left="bidTip"
       @click="setBid">
       <i class="ibt theme-bgcolor-up"></i>
@@ -23,7 +23,7 @@
       v-tooltip.left="askTip"
       @click="setAsk">
       <i class="ibt theme-bgcolor-down"></i>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -240,7 +240,7 @@ export default {
 .input {
   font-family: monaco Trebuchet MS, Tahoma, Arial, sans-serif;
   outline: none;
-  border: 1px solid #DDDDDD;
+  border: 1px solid $text-light;
   border-radius: 3px;
   background-color: transparent;
   width: 100%;
@@ -249,6 +249,7 @@ export default {
   line-height: 20px;
   font-size: 14px;
   padding: 9px 60px 9px 9px;
+  color: #ffffff;
 }
 ::placeholder {
   color: #999;
@@ -256,17 +257,17 @@ export default {
 .pro.currency-input {
   &.static {
     .input {
-      color: rgba(0,0,0, .3);
+      color: $text-light;
     }
     .label {
     }
   }
   .label {
     color: black;
-    background-color: $order-input-label;
+    background-color: #CCCCCC;
     width: 54px;
-    line-height: 26px;
-    height: 28px;
+    line-height: 30px;
+    height: 32px;
     box-sizing: border-box;
     border-top: 1px solid $order-input-label;
     border-right: 1px solid $order-input-label;
@@ -278,8 +279,8 @@ export default {
   .input {
     border: 1px solid $order-input-label;
     border-radius: 0;
-    background-color: white;
-    height: 28px;
+    background-color: $protrade-bg;
+    height: 32px;
     line-height: 20px;
     padding: 3px 60px 3px 9px;
     text-align: right;

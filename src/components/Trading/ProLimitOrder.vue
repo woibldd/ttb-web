@@ -1,8 +1,8 @@
 <template>
-  <div class="pro-trade-op limit-order">
+  <div class="ix-trade-op pt-14 limit-order">
     <ul class="ul buy-ul" v-if="pairInfo">
-      <li class="li-price li-mb">
-        <div class="label">{{ $t('price') }}</div>
+      <li class="li-price mb-10">
+        <div class="label mr-20">{{ $t('price') }}</div>
         <div class="content">
           <currency-input class="pro"
             v-model="price"
@@ -14,8 +14,8 @@
           </currency-input>
         </div>
       </li>
-      <li class="li-amount li-mb">
-        <div class="label">{{ $t('amount') }}</div>
+      <li class="li-amount mb-10">
+        <div class="label mr-20">{{ $t('amount') }}</div>
         <div class="content">
           <currency-input class="pro"
             v-model="amount"
@@ -23,7 +23,7 @@
             :currency="pairInfo.product_name"
             :scale="pairInfo.amount_scale">
           </currency-input>
-          <div class="btn point-btn buy-all"
+          <!-- <div class="btn point-btn buy-all"
             v-tooltip.left="buyTip"
             @click="setBuyVolumn(1)">
             <i class="ibt theme-bgcolor-up"></i>
@@ -32,11 +32,11 @@
             v-tooltip.left="sellTip"
             @click="setSellVolumn(1)">
             <i class="ibt theme-bgcolor-down"></i>
-          </div>
+          </div> -->
         </div>
       </li>
-      <li class="li-worth li-mb">
-        <div class="label">{{ $t('order_value') }}</div>
+      <li class="li-worth mb-10">
+        <div class="label mr-20">{{ $t('order_value') }}</div>
         <div class="content">
           <currency-input class="pro"
             @blur="worthBlur"
@@ -49,22 +49,13 @@
         </div>
       </li>
       <!--
-      <li class="li-worth li-mb">
+      <li class="li-worth mb-10">
         <div class="label">{{ $t('order_value') }}</div>
         <div class="content">{{ worth }} {{ pairInfo.currency_name }}</div>
       </li>
       -->
-      <li class="li-setting li-mb">
-        <label class="checkbox left" v-tooltip="postOnlyTip">
-          <input type="checkbox" v-model="postOnly">
-          {{ $t('post_only') }}
-        </label>
-        <!--<label class="checkbox right">-->
-          <!--隐藏订单-->
-          <!--<input type="checkbox" v-model="hidden">-->
-          <!--</label>-->
-      </li>
-      <li class="li-volume li-mb">
+      
+      <li class="li-volume mb-10">
         <div class="half-wrap left">
           <div class="currency-volume">
             <div class="avbl">
@@ -80,6 +71,91 @@
             </div>
           </div>
         </div>
+        <!-- <div class="half-wrap right">
+          <div class="product-volume">
+            <div class="avbl">
+              <div class="avbl-label">{{ $t('avlb') }} {{ pairInfo.product_name }}</div>
+              <div class="avbl-value" v-if="product">{{ product.available | fixed(pairInfo.product_scale) }}</div>
+              <div class="avbl-value" v-else>----</div>
+            </div>
+            <div class="volume-sets">
+              <a class="volume-set" @click.prevent="setSellVolumn(.25)"><span>25%</span></a>
+              <a class="volume-set" @click.prevent="setSellVolumn(.5)"><span>50%</span></a>
+              <a class="volume-set" @click.prevent="setSellVolumn(.75)"><span>75%</span></a>
+              <a class="volume-set" @click.prevent="setSellVolumn(1)"><span>100%</span></a>
+            </div>
+          </div>
+        </div> -->
+      </li>
+      <li class="li-submit">
+        <div class="half-wrap left">
+          <v-btn :label="$t('operate_buy', {coin: pairInfo.product_name})"
+            class="submit-btn"
+            radius="0"
+            color="probuy"
+            width="100%"
+            height="44"
+            :loading="submitting === 'BUY'"
+            @click="submit('BUY')"></v-btn>
+        </div>
+      </li>
+    </ul>
+    <!-- 埋单 -->
+    <ul class="ul sell-ul" v-if="pairInfo">
+      <li class="li-price mb-10">
+        <div class="label mr-20">{{ $t('price') }}</div>
+        <div class="content">
+          <currency-input class="pro"
+            v-model="price"
+            :class="[input.price.status]"
+            :bid="state.pro.bid"
+            :ask="state.pro.ask"
+            :currency="pairInfo.currency_name"
+            :scale="pairInfo.price_scale">
+          </currency-input>
+        </div>
+      </li>
+      <li class="li-amount mb-10">
+        <div class="label mr-20">{{ $t('amount') }}</div>
+        <div class="content">
+          <currency-input class="pro"
+            v-model="amount"
+            :class="[input.amount.status]"
+            :currency="pairInfo.product_name"
+            :scale="pairInfo.amount_scale">
+          </currency-input>
+          <!-- <div class="btn point-btn buy-all"
+            v-tooltip.left="buyTip"
+            @click="setBuyVolumn(1)">
+            <i class="ibt theme-bgcolor-up"></i>
+          </div>
+          <div class="btn point-btn sell-all"
+            v-tooltip.left="sellTip"
+            @click="setSellVolumn(1)">
+            <i class="ibt theme-bgcolor-down"></i>
+          </div> -->
+        </div>
+      </li>
+      <li class="li-worth mb-10">
+        <div class="label mr-20">{{ $t('order_value') }}</div>
+        <div class="content">
+          <currency-input class="pro"
+            @blur="worthBlur"
+            @focus="worthFocus"
+            v-model="worth"
+            :currency="pairInfo.currency_name"
+            :step-scale="pairInfo.currency_scale"
+            :scale="pairInfo.amount_scale + pairInfo.price_scale">
+          </currency-input>
+        </div>
+      </li>
+      <!-- <li class="li-setting mb-10">
+        <label class="checkbox left" v-tooltip="postOnlyTip">
+          <input type="checkbox" v-model="postOnly">
+          {{ $t('post_only') }}
+        </label>
+      </li> -->
+      <li class="li-volume mb-10">
         <div class="half-wrap right">
           <div class="product-volume">
             <div class="avbl">
@@ -97,15 +173,6 @@
         </div>
       </li>
       <li class="li-submit">
-        <div class="half-wrap left">
-          <v-btn :label="$t('operate_buy', {coin: pairInfo.product_name})"
-            class="submit-btn"
-            radius="0"
-            color="probuy"
-            height="44"
-            :loading="submitting === 'BUY'"
-            @click="submit('BUY')"></v-btn>
-        </div>
         <div class="half-wrap right">
           <v-btn :label="$t('operate_sell', {coin: pairInfo.product_name})"
             class="submit-btn"
@@ -145,7 +212,7 @@ export default {
         }
       },
       postOnlyTip: {
-        classes: ['pro-popover'],
+        classes: ['ix-popover'],
         popperOptions: {
           modifiers: {
             flip: {
@@ -161,7 +228,7 @@ export default {
         }
       },
       buyTip: {
-        classes: ['pro-popover'],
+        classes: ['ix-popover'],
         offset: '-4px',
         popperOptions: {
           modifiers: {
@@ -178,7 +245,7 @@ export default {
         }
       },
       sellTip: {
-        classes: ['pro-popover'],
+        classes: ['ix-popover'],
         offset: '-4px',
         popperOptions: {
           modifiers: {
@@ -419,37 +486,38 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../styles/mixins";
-.pro-trade-op {
-  padding-top: 14px;
+.ix-trade-op {
+  display: flex;
 }
 .half-wrap {
   float: left;
-  width: 50%;
+  width: 100%;
   box-sizing: border-box;
-  &.left {
-    padding-right: 6px;
-  }
-  &.right {
-    padding-left: 6px;
-  }
+  // &.left {
+  //   padding-right: 6px;
+  // }
+  // &.right {
+  //   padding-left: 6px;
+  // }
 }
 .submit-btn {
   box-sizing: border-box;
 }
 .ul {
   margin: 0 14px;
+  flex: 1;
   li {
     @include clearfix();
   }
   .label {
-    width: 28%;
+    color: #A5B4C5;
     float: left;
     box-sizing: border-box;
     min-height: 20px;
   }
   .content {
     position: relative;
-    width: 72%;
+    width: 88%;
     float: left;
     box-sizing: border-box;
   }
@@ -460,7 +528,7 @@ export default {
   margin-bottom: 9px;
   .label {
     line-height: 28px;
-    color: white;
+    color: #A5B4C5;
   }
 }
 .li-volume {
@@ -500,9 +568,6 @@ export default {
     line-height: 17px;
     height: 17px;
   }
-}
-.li-mb {
-  margin-bottom: 10px;
 }
 .volume-sets {
   padding: 7px 0;
