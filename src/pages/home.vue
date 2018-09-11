@@ -7,7 +7,9 @@
         <div class="ix_logo"></div>
         <b class="ind_txt">{{$t("slogan")}}</b>
         <p class="count_down">
+            <i class="cli"></i>
             <count-down :terminal="date"></count-down>
+            <i class="cri"></i>
         </p>
         <div class="ind_but">
             <a :href="'/docs/The+Declaration+of+IX'+pdfSubfix+'.pdf'" target="_blank" class="xy">{{$t("declaration")}}</a>
@@ -60,8 +62,27 @@ export default {
     .ind_cen{text-align:center;width:100%;height:auto;
         .ix_logo{width:100%;height:81px;background:url(../assets/ix_a.png) no-repeat center center;margin-top:5%}
         .ind_txt{height:24px;line-height:24px;font-size:22px;color:#fff;display:block;margin-top:2.5%;}
-        .count_down{background:url(../assets/hx.png) no-repeat center center;margin:4% 0 3% 0;
-            div.countdown{font-size:58px;}
+        .count_down{
+            margin: 4% 0 3% 0;
+            position: relative;
+            div.countdown{
+                font-size:58px;
+            }
+            i{
+                position: absolute;
+                width: 115px;
+                height: 1px;
+                display: block;
+                top:50%;
+                &.cli{
+                    left: 23%;
+                    background-image: linear-gradient(to left, rgba(201, 169, 108, 1) 0%,  rgba(201, 169, 108, 0.1) 100%, #c9a96c 100%);
+                }
+                &.cri{
+                    right: 23%;
+                    background-image: linear-gradient(to right, rgba(201, 169, 108, 1) 0%,  rgba(201, 169, 108, 0.1) 100%, #c9a96c 100%);
+                }
+            }
         }
         .ind_but{width:auto;height:30px;line-height:30px;display:table;margin:0 auto;
             a{width:120px;height:30px;display:block;border-radius:4px;color:#fff;margin:0 20px;float:left;padding:0;
