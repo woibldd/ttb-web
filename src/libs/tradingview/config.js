@@ -27,7 +27,7 @@ export default function () {
       'compare_symbol',
       'context_menus',
       // 'volume_force_overlay',
-      // 'use_localstorage_for_settings'
+      'use_localstorage_for_settings'
     ],
     enabled_features: [
       'adaptive_logo'

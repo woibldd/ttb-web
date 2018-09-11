@@ -6,20 +6,21 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="keywords" content="<%= htmlWebpackPlugin.options.theme.keywords %>">
     <meta name="description" content="<%= htmlWebpackPlugin.options.theme.description %>">
-    <link rel="shortcut icon" type="image/x-icon" href="<%= htmlWebpackPlugin.options.static %>static/ico/<%= htmlWebpackPlugin.options.theme.themeName %>/ico-64.ico">
-    <link rel="apple-touch-icon" href="<%= htmlWebpackPlugin.options.static %>static/ico/<%= htmlWebpackPlugin.options.theme.themeName %>/icon-256.png">
+    <link rel="shortcut icon" type="image/x-icon" href="<%= htmlWebpackPlugin.options.static %>/static/icon.png">
     <title><%= htmlWebpackPlugin.options.theme.exchangeName %></title>
 </head>
 
 <body>
-  <div class="page-preload show">
-    <div class="_a">
-      <div class="_b _b1"></div>
-      <div class="_b _b2"></div>
-      <div class="_b _b3"></div>
+  <div class="page-loading page-mask show">
+    <div class="ix-loading k-square-holder">
+      <div class="k-square3 k-square3a"></div>
+      <div class="k-square3 k-square3b"></div>
+      <div class="k-square3 k-square3c"></div>
+      <div class="k-square3 k-square3d"></div>
     </div>
   </div>
   <div id="app"></div>
+  <div id="debug" style="display: none"></div>
   <% if (htmlWebpackPlugin.options.NODE_ENV === 'production') { %>
     <script async src="https://www.googletagmanager.com/gtag/js?id=<%= htmlWebpackPlugin.options.theme.googleAnalyticsId %>"></script>
     <script>
@@ -29,8 +30,9 @@
       gtag('config', '<%= htmlWebpackPlugin.options.theme.googleAnalyticsId %>');
     </script>
   <% } %>  
+    <script type="text/javascript">window.grayline=true</script>
   <!-- 国内使用 滑块验证，如果主要客户是国外用户，需要替换以下地址-->
-    <script type="text/javascript" charset="utf-8" src="//g.alicdn.com/sd/ncpc/nc.js?t=2015052012"></script>
+    <script type="text/javascript" async charset="utf-8" src="//g.alicdn.com/sd/ncpc/nc.js?t=2015052012"></script>
   <!-- built files will be auto injected -->
 </body>
 

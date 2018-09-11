@@ -21,13 +21,18 @@
             <Orderbook ref="Orderbook"></Orderbook>
           </div>
         </div>
-      </div>  
+      </div>
       <div class="ix-row">
         <div class="ix-grid ix-grid-order" ref="gridOrder">
           <Order ref="Order"></Order>
         </div>
         <div class="ix-grid ix-grid-operate" ref="gridOperate">
           <Operate ref="Operate"></Operate>
+        </div>
+      </div>
+      <div class="ix-row">
+        <div class="ix-grid ix-grid-intro" ref="gridIntro">
+          <intro></intro>
         </div>
       </div>
     </div>
@@ -50,6 +55,7 @@ import Orderbook from '../components/Trading/Orderbook'
 import PairNav from '@/components/Trading/PairNav'
 import Operate from '@/components/Trading/Operate'
 import OrderDealPopover from '@/components/Trading/OrderDealPopover'
+import Intro from '@/components/Trading/Intro'
 
 export default {
   name: 'trading',
@@ -59,6 +65,7 @@ export default {
     TradingView,
     Order,
     Deal,
+    Intro,
     // DepthChart,
     Orderbook,
     PairNav,
@@ -127,14 +134,14 @@ export default {
     },
     async onresize () {
       const layoutHeight = window.innerHeight
-      this.$refs.wrap.style.height = layoutHeight + 'px'
+      // this.$refs.wrap.style.height = layoutHeight + 'px'
       this.setGridContainers()
       // $(this.$refs.layout).height($(window).height() - 50)
       // this.layout.updateSize()
     }
   },
   async created () {
-    document.querySelector('.page-preload').classList.add('show')
+    document.querySelector('.page-loading').classList.add('show')
     if (!this.$route.params.pair) {
       const res = await service.getPairList()
       if (res.code) {
@@ -150,8 +157,8 @@ export default {
     this.state.loading = true
 
     this.$nextTick(() => {
-      const layoutHeight = window.innerHeight
-      this.$refs.wrap.style.height = layoutHeight + 'px'
+      // const layoutHeight = window.innerHeight
+      // this.$refs.wrap.style.height = layoutHeight + 'px'
       this.state.loading = false
       this.state.pro.layout = true
 
@@ -162,7 +169,7 @@ export default {
 
       this.$eh.$on('protrade:balance:refresh', this.refreshBalance)
       this.$eh.$on('app:resize', this.onresize)
-      document.querySelector('.page-preload').classList.remove('show')
+      document.querySelector('.page-loading').classList.remove('show')
     })
   },
   beforeRouteLeave (to, from, next) {
@@ -176,7 +183,7 @@ export default {
     this.$eh.$off('app:resize', this.onresize)
     this.$eh.$off('protrade:balance:refresh', this.refreshBalance)
     this.state.pro.layout = false
-    document.querySelector('.page-preload').classList.remove('show')
+    document.querySelector('.page-loading').classList.remove('show')
     document.documentElement.setAttribute('style', '')
   }
 }
@@ -225,7 +232,7 @@ export default {
   flex-direction: column;
 }
 .ix-col-1 {
-  width: 350px; 
+  width: 350px;
 }
 .ix-col-2 {
   flex: 1;
@@ -244,23 +251,27 @@ export default {
 }
 .ix-grid-order {
   flex: 1;
-  height: 1px;
+  // height: 1px;
 }
 .ix-grid-deal {
   flex: 1;
-  height: 1px;
+  height: 256px;
 }
 .ix-grid-orderbook {
   flex: 2;
-  height: 2px;
+  // height: 2px;
 }
 .ix-grid-pairnav {
   flex: 1;
-  height: 1px;
+  height: 268px;
 }
 .ix-grid-operate {
   flex: 1;
-  height: 1px;
+  // height: 1px;
+}
+.ix-grid-intro {
+  flex: 1;
+  height: 300px;
 }
 @media screen and (max-width: 1000px) {
   .ix-col-1 {
@@ -272,7 +283,7 @@ export default {
 <style lang="scss">
 @import "../styles/mixins";
 
-.pro-panel {
+.ix-panel {
   width: 100%;
   height: 100%;
   &.progress {

@@ -101,12 +101,12 @@
 .field {
   @include clearfix();
   position: relative;
-  
   height: 60px;
+
   .input-box {
     width: 100%;
     height: 60px;
-    padding: 12px 38px 0;
+    padding: 0 38px;
     top: 0;
     left: 0;
   }
@@ -211,6 +211,8 @@
     height: 36px;
     box-sizing: border-box;
     width: 280px;
+    position: absolute;
+    bottom: 0;
     &:hover {
       border-bottom: 1px solid $primary;
       transition: border-bottom .7s;

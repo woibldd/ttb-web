@@ -3,7 +3,7 @@ import Big from 'big.js'
 import eventHub from './eventHub'
 import consts from '@/libs/consts'
 
-const preloadEl = document.querySelector('.page-preload')
+const preloadEl = document.querySelector('.page-loading')
 const externalModule = {}
 const localeName = {
   'en': 'English',

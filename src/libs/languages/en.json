@@ -219,6 +219,7 @@
   "phone_code_ph": "6 digit code",
   "bind_phone_confirm": "Authentification",
   "bind_phone_err_empty": "Please enter cellphone number",
+  "bind_phone_err_format": "cellphone number format is not valid",
   "sms_send": "Send code",
   "sms_retry": "Resend",
   "phone_code": "SMS verification",
