@@ -109,7 +109,7 @@ let router = new Router({
         class: 'dark',
         mobileNav: isMobile
       },
-      //redirect: 'profile/invite',
+      redirect: 'profile/invite',
       //redirect: 'profile/ProfileInfo',
       //redirect: 'profile/ProfileSafety',
 
