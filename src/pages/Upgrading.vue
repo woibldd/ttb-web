@@ -5,6 +5,15 @@
     </p>
   </div>
 </template>
+<script>
+import utils from '@/modules/utils'
+export default {
+  created () {
+    utils.preloadEnd()
+  }  
+}
+</script>
+
 <style lang="scss" scoped>
 p {
   font-size: 72px;
