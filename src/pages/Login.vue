@@ -11,8 +11,7 @@
           <router-link class="by-link ibt" to="phone">{{ $t('login_by_phone') }}</router-link>
         </div>
       </div>
-      <div class="error-block" v-show="errmsg">{{ errmsg }}</div>
-      <form class="form" onsubmit="return false">
+      <form class="form" onsubmit="return false" autocomplete="off">
         <div :class="['field']" v-show="by === 'phone'">
           <div class="input-box">
             <div class="label">{{ $t('region_label') }}</div>
@@ -29,43 +28,58 @@
         </div>
         <div class="field" v-show="by === 'phone'">
           <div class="input-box">
-            <div class="label">{{ $t('phone_number') }}</div>
-            <input class="input item" type="text"
+            <!-- <div class="label">{{ $t('phone_number') }}</div> -->
+            <ix-input
+              class=""
+              ref="phone"
+              v-model.trim="phone"
+              :required='true'
+              :empty-err-tips="$t('bind_phone_err_empty')"
+              :rule="validateRules.phone"
+              :placeholder="$t('bind_phone_input')"
+              :label="$t('phone_number')"
+              >
+            </ix-input>
+            <!-- <input class="input item" type="text"
               name="phone"
               @focus="active('phone', true)" @blur="active('phone', false)"
               @input="input('phone')"
               :placeholder="$t('bind_phone_input')"
               :disabled="loading"
-              v-model.trim="phone" />
+              v-model.trim="phone" /> -->
           </div>
         </div>
         <div :class="['field']" v-show="by === 'email'">
           <div class="input-box">
-            <div class="label" v-t="'login_label_mail'"></div>
-            <input v-model.trim="email"
-              class="input item"
-              @focus="active('email', true)" @blur="active('email', false)"
-              @input="input('email')"
-              type="email"
-              placeholder="you@example.com"
-              name="email"
-              :disabled="loading"
+            <!-- <div class="label" v-t="'login_label_mail'"></div> -->
+            <ix-input
+              class=""
+              ref="email"
+              v-model.trim="email"
+              :required='true'
+              :empty-err-tips="$t('err_empty_email')"
+              :rule="validateRules.email"
+              :placeholder="$t('err_empty_email')"
+              :label="$t('login_label_mail')"
               >
-            <span class="quick-delete" :data-enable="activeList['email'].qd" @click="quickDelete('email')"></span>
+            </ix-input>
           </div>
         </div>
         <div :class="['field']">
           <div class="input-box">
-            <div class="label" v-t="'login_label_pw'"></div>
-            <input v-model.trim="password"
-              class="input item"
+            <!-- <div class="label" v-t="'login_label_pw'"></div> -->
+            <ix-input
+              class=""
+              ref="password"
+              v-model.trim="password"
+              :required='true'
               type="password"
-              :placeholder="$t('login_ph_pw')"
-              name="password"
-              :disabled="loading"
-              @keyup.enter="submit"
-              @focus="active('password', true)" @blur="active('password', false)"
-              @input="input('password')">
+              :empty-err-tips="$t('err_empty_password')"
+              :rule="validateRules.password"
+              :placeholder="$t('err_empty_password')"
+              :label="$t('login_label_pw')"
+              >
+            </ix-input>
           </div>
         </div>
         <div class="field submit">
@@ -76,7 +90,7 @@
             @click="submit"></v-btn>
           <div class="to-others">
             <router-link :to="{name: 'registerBy', params: $route.params, query: $route.query}">{{ $t('signup') }}</router-link>
-            <!-- <router-link class="ml-5" :to="{name: 'recover'}">{{ $t('if_forgot') }}</router-link> -->
+            <router-link class="ml-5" :to="{name: 'recover'}">{{ $t('if_forgot') }}</router-link>
           </div>
         </div>
       </form>
@@ -236,7 +250,7 @@ export default {
     fixPosition () {
       // this.$refs.container.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
       this.$refs.container.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
-      this.$refs.containera.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
+      // this.$refs.containera.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
     }
   },
   mounted () {
