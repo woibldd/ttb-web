@@ -10,7 +10,7 @@
           <router-link class="by-link ibt" to="phone">{{ $t('register_by_phone') }}</router-link>
         </div>
       </div>
-      <div class="error-block" v-show="errmsg">{{ errmsg }}</div>
+      <!-- <div class="error-block" v-show="errmsg">{{ errmsg }}</div> -->
       <form class="form" onsubmit="return false" autocomplete="off">
         <div class="field" v-show="by === 'phone'">
           <div class="input-box">
@@ -25,11 +25,12 @@
             </select>
           </div>
         </div>
-        <div :class="['field', {active: activeList['phone'].active}]" v-show="by === 'phone'">
+        <div :class="['field']" v-show="by === 'phone'">
           <div class="input-box">
             <ix-input
               ref="phone"
               v-model.trim="phone"
+              @input="phone=$event"
               :triggerValidate="triggerValidate"
               :required='true'
               :empty-err-tips="$t('bind_phone_err_empty')"
@@ -40,12 +41,13 @@
             </ix-input>
           </div>
         </div>
-        <div :class="['field', {active: activeList['email'].active}]" v-show="by === 'email'">
+        <div :class="['field']" v-show="by === 'email'">
           <div class="input-box">
             <ix-input
               class=""
               ref="email"
               v-model.trim="email"
+              @input="email=$event"
               :triggerValidate="triggerValidate"
               :required='true'
               :empty-err-tips="$t('err_empty_email')"
@@ -56,7 +58,7 @@
             </ix-input>
           </div>
         </div>
-        <div :class="['field', {active: activeList['captcha'].active}]">
+        <div :class="['field']">
           <div class="input-box">
               <ix-input
                 class="register__input-captcha"
@@ -64,6 +66,7 @@
                 v-model.trim="captcha"
                 :triggerValidate="triggerValidate"
                 :required='true'
+                @input="captcha=$event"
                 :empty-err-tips="$t('err_captcha_empty')"
                 :rule="validateRules.captcha"
                 :placeholder="$t('captcha')"
@@ -77,16 +80,17 @@
               {{smsBtnText}}</a>
           </div>
         </div>
-        <div :class="['field', {active: activeList['password'].active}]">
+        <div :class="['field']">
           <div class="input-box">
             <ix-input
                 ref="password"
                 v-model.trim="password"
-                @change="pwChange"
-                @focus="active('password', true)"
-                @blur="active('password', false)"
+                @input="password=$event;pwChange($event)"
                 :triggerValidate="triggerValidate"
+                type="password"
                 :required='true'
+                @focus="active(true)"
+                @blur="active(false)"
                 :empty-err-tips="$t('err_empty_password')"
                 :rule="validateRules.password"
                 :placeholder="$t('pwcheck_ph')"
@@ -105,13 +109,15 @@
             </div>
           </div>
         </div>
-        <div :class="['field', {active: activeList['password2'].active}]">
+        <div :class="['field']">
           <div class="input-box">
             <ix-input
                 ref="password2"
                 v-model.trim="password2"
+                @input="password2=$event"
                 :triggerValidate="triggerValidate"
                 :required='true'
+                type="password"
                 :empty-err-tips="$t('change_password_diff')"
                 :rule="validateRules.password2"
                 :placeholder="$t('pwcheck_ph2')"
@@ -120,11 +126,12 @@
             </ix-input>
           </div>
         </div>
-        <div :class="['field', {active: activeList['invitor'].active}]">
+        <div :class="['field']">
           <div class="input-box">
             <ix-input
                 ref="invitor"
                 v-model.trim="invitorId"
+                @input="invitorId=$event"
                 :rule="validateRules.invitor"
                 :placeholder="$t('invitor_ph')"
                 :label="$t('invitor')"
@@ -147,10 +154,6 @@
             <label for="accept" v-html="$t('agreement', {agreement: goAgreement(), privacyPolicy: goPrivacy()})">
             </label>
           </div>
-          <!-- <div class="to-login">
-            <span v-t="'signup_has_account'"></span>
-            <router-link :to="{name: 'loginBy', query: $route.query, params: $route.params}">{{ $t('signin') }}</router-link>
-          </div> -->
         </div>
       </form>
     </div>
@@ -204,39 +207,6 @@ export default {
         status: 0,
         countDown: 0,
         timer: null
-      },
-
-      activeList: {
-        'email': {
-          active: false,
-          qd: false,
-          error: ''
-        },
-        'password': {
-          active: false,
-          qd: false,
-          error: ''
-        },
-        'password2': {
-          active: false,
-          qd: false,
-          error: ''
-        },
-        'phone': {
-          active: false,
-          qd: false,
-          error: ''
-        },
-        'invitor': {
-          active: false,
-          qd: false,
-          error: ''
-        },
-        'captcha': {
-          active: false,
-          qd: false,
-          error: ''
-        }
       },
       validateRules: {
         phone: {
@@ -320,23 +290,31 @@ export default {
   watch: {
     params () {
       this.resetError()
+    },
+    $route () {
+      this.resetError()
+      this.clearCountDown()
     }
   },
   methods: {
     async submit (e) {
       // 本地校验
       const check = this.checkParams()
-      if (!check.ok) {
-        this.errmsg = check.em
-        // this.activeList[check.field].error = check.em
+      if (!check.ok || !!this.triggerValidate) {
+        if (check.em) {
+          utils.alert(check.em)
+        }
+        // this.errmsg = check.em
         return false
       }
       this.resetError()
+      this.loading = true
       const res = await service.register(this.params)
-
+      this.loading = false
       if (res.code) {
         // 错误信息
-        this.errmsg = res.message
+        // this.errmsg = res.message
+        utils.alert(res.message)
         this.loading = false
         return false
       }
@@ -348,21 +326,12 @@ export default {
         name: 'login'
       })
     },
-    active (field, active) {
-      console.log('acacac')
-      this.activeList[field].active = active
-      if (field === 'password') {
-        this.atPw = active
-      }
+    active (active) {
+      this.atPw = active
     },
-    input (field) {
-      let text = this[field]
-      this.activeList[field].qd = !!text
-    },
-    quickDelete (field) {
-      this[field] = ''
-      // this.activeList[field].active = true
-      this.activeList[field].qd = false
+    input (field, value) {
+      console.log(arguments)
+      this[field] = value
     },
     checkParams () {
       const err = (em, field) => ({ok: false, em, field})
@@ -370,7 +339,6 @@ export default {
         if (!this.regionId) { // 这里默认选择中国86了吧，可以不需要这个验证了？
           return err(this.$i18n.t('region_ph'), 'regionId')
         }
-        console.log('pp')
         if (!this.phone) {
           this.triggerValidate = true
         }
@@ -389,7 +357,7 @@ export default {
       if (this.pwLevel < 4) {
         this.triggerValidate = true
       }
-      console.log(this.password, this.password2)
+      // console.log(this.password, this.password2)
       if (this.password !== this.password2) {
         this.triggerValidate = true
         // return err(this.$i18n.t('change_password_diff'), 'password2')
@@ -414,40 +382,49 @@ export default {
         }
       }, 1000)
     },
+    clearCountDown () {
+      this.sms.status = 0
+      clearInterval(this.sms.timer)
+    },
     async getSmsCode () {
       if (this.sms.status === 1 || this.sms.loading || this.loading) {
         return false
       }
       if (this.by === 'phone') {
         if (!this.regionId) {
-          this.errmsg = this.$i18n.t('region_ph')
+          utils.alert(this.$i18n.t('region_ph'))
           return false
         }
         if (!this.phone) {
-          this.errmsg = this.$i18n.t('bind_phone_err_empty')
+          utils.alert(this.$i18n.t('bind_phone_err_empty'))
+          // this.triggerValidate = true
+          // this.errmsg = this.$i18n.t('bind_phone_err_empty')
           return false
         }
       } else {
         if (!this.email) {
-          this.errmsg = this.$i18n.t('err_empty_email')
+          // this.triggerValidate = true
+          utils.alert(this.$i18n.t('err_empty_email'))
+          // this.errmsg = this.$i18n.t('err_empty_email')
           return false
         }
       }
       this.sms.status = 1
       this.sms.countDown = 60
       this.startCountDown()
-      const res = await service.sendCode({
-        by: this.by,
-        region: this.regionId,
-        phone: this.phone,
-        email: this.email,
-        lang: state.locale
-      })
-      if (res.code) {
-        this.errmsg = res.message
-      } else {
-        this.errmsg = ''
-      }
+      // const res = await service.sendCode({
+      //   by: this.by,
+      //   region: this.regionId,
+      //   phone: this.phone,
+      //   email: this.email,
+      //   lang: state.locale
+      // })
+      // if (res.code) {
+      //   utils.alert(res.message)
+      //   // this.errmsg = res.message
+      // } else {
+      //   this.errmsg = ''
+      // }
     },
     goAgreement () {
       return '/terms'
@@ -457,6 +434,7 @@ export default {
     },
     resetError () {
       this.errmsg = ''
+      this.triggerValidate = false
     },
     fixPosition () {
       this.$refs.container.style.minHeight = window.innerHeight - (110) - (80) + 'px'

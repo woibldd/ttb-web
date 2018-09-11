@@ -8,7 +8,7 @@
             :placeholder="placeholder"
             :type="type">
         <span v-show="showErrorTips" class="ix-input__err-tips">{{errTips}}</span>
-        <span v-if="value && value.length" @click="clearText"  class="ix-quick-delete"></span>
+        <span v-if="canDelete && value && value.length" @click="clearText"  class="ix-quick-delete"></span>
     </div>
 </template>
 <script>
@@ -35,6 +35,7 @@ export default{
     placeholder: {type: String, default: ''},
     autocomplete: {type: String, default: 'off'},
     required: {type: Boolean, default: false}, // 是否必须， 提示字段为 emptyErrTips
+    canDelete: {type: Boolean, default: true},
     rule: { // 校验提示语和规则
       type: Object,
       default () {

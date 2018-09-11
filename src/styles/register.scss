@@ -308,8 +308,8 @@
       @include bg-retina('../assets/check', 'png', 12px, 9px);
       width: 20px;
       height: 20px;
-      border: 1px solid #01A63F;
-      background-color: #01A63F;
+      border: 1px solid $primary;
+      background-color: $primary;
     }
   }
   .title {

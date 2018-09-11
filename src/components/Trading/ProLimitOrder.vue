@@ -517,7 +517,7 @@ export default {
   }
   .content {
     position: relative;
-    width: 72%;
+    width: 88%;
     float: left;
     box-sizing: border-box;
   }
