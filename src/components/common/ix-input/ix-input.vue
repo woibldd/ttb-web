@@ -2,14 +2,12 @@
     <div class="ix-input-container">
         <span v-show="showLabel" class="ix-input__label">{{label}}</span>
         <input class="ix-input__text" :class="{'ix-input__error': showErrorTips}"
-            v-on:change="valueChange($event)"
-            @focus="inputFocus"
-            @blur="inputBlur($event)"
+            v-on="inputListeners"
             :autocomplete="autocomplete"
             :value="value"
             :placeholder="placeholder"
             :type="type">
-        <span v-if="showErrorTips" class="ix-input__err-tips">{{errTips}}</span>
+        <span v-show="showErrorTips" class="ix-input__err-tips">{{errTips}}</span>
         <span v-if="value && value.length" @click="clearText"  class="ix-quick-delete"></span>
     </div>
 </template>
@@ -30,6 +28,7 @@ export default{
   },
   props: {
     value: {type: String, default: ''}, // 这里的value跟上面的model参数配合使用！！！
+    triggerValidate: {type: Boolean, default: false}, // 外部触发非空提示
     type: {type: String, default: 'text'}, // 一般是text
     label: {type: String, default: '标题'}, // 左上角label
     emptyErrTips: {type: String, default: ''}, // 字段为空时错误提示
@@ -48,21 +47,48 @@ export default{
   },
   computed: {
     showErrorTips () {
-      return this.touched && !this.isFocus && !this.validateSuccess
+      if (!this.touched && this.triggerValidate) { // 外部触发错误校验
+        this.validateSuccess = this.validate(this.value)
+        return true
+      } else {
+        return this.touched && !this.isFocus && !this.validateSuccess
+      }
     },
     showLabel () {
       return this.isFocus
+    },
+    inputListeners: function () {
+      var vm = this
+      // `Object.assign` 将所有的对象合并为一个新对象
+      return Object.assign({},
+        // 我们从父级添加所有的监听器
+        this.$listeners,
+        // 然后我们添加自定义监听器，
+        // 或覆写一些监听器的行为
+        {
+          // 这里确保组件配合 `v-model` 的工作
+          input: function (event) {
+            vm.$emit('input', event.target.value)
+          },
+          focus: function (event) {
+            vm.touched = true
+            vm.isFocus = true
+            vm.$emit('focus', event.target.value)
+          },
+          blur: function (event) {
+            vm.isFocus = false
+            vm.valueChange(event) // blur 和change 时候是否都需要这个呢 ？
+            vm.$emit('blur', event.target.value)
+          },
+          change: function ($event) {
+            vm.validateSuccess = vm.validate($event.target.value)
+            vm.$emit('change', $event.target.value)
+          }
+        }
+      )
     }
   },
   methods: {
-    inputFocus () {
-      this.touched = true
-      this.isFocus = true
-    },
-    inputBlur ($event) {
-      this.isFocus = false
-      this.valueChange($event) // blur 和change 时候是否都需要这个呢 ？
-    },
     validate (value) {
       if (this.required && !value) {
         this.errTips = this.emptyErrTips
