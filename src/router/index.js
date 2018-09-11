@@ -25,9 +25,9 @@ const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
 const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/ProfileSafety')
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
 
-const CoinManage = () => import(/* webpackChunkName: "CoinManage" */ '@/pages/user/coin-manage/coin-manage.vue')
-const Withdraw = () => import(/* webpackChunkName: "Withdraw" */ '@/components/CoinManage/Withdraw/Withdraw.vue')
-const Charge = () => import(/* webpackChunkName: "Charge" */ '@/components/CoinManage/Charge/Charge.vue')
+const Fund = () => import(/* webpackChunkName: "CoinManage" */ '@/pages/Fund')
+const Withdraw = () => import(/* webpackChunkName: "Withdraw" */ '@/components/Fund/Withdraw/Withdraw.vue')
+const Deposit = () => import(/* webpackChunkName: "Deposit" */ '@/components/Fund/deposit/deposit.vue')
 
 async function beforeEach (to, from, next) {
   state.loading = true
@@ -168,19 +168,25 @@ let router = new Router({
         props: true
       }]
     }, {
-      path: '/coin-manage',
-      name: 'coinManage',
-      component: CoinManage,
+      path: '/fund',
+      name: 'fund',
+      component: Fund,
+      redirect: { name: 'withdraw' },
+      meta: {
+        auth: false,
+        footer: true,
+        nav: true,
+        class: 'dark'
+      },
       children: [{
         path: 'withdraw',
         name: 'withdraw',
         component: Withdraw
       }, {
-        path: 'charge',
-        name: 'charge',
-        component: Charge
+        path: 'deposit',
+        name: 'deposit',
+        component: Deposit
       } ]
-
     }
 
   ]

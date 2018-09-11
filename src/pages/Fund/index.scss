@@ -1,0 +1,47 @@
+@import "~@/styles/vars";
+@import '~@/styles/mixins';
+.page-fund-container{
+    background: #ffffff;
+    min-width: 1180px;
+    padding-top: 60px;
+    padding-bottom: 100px;
+    .page-fund-content {
+        width: 1180px;
+        margin: 0 auto;
+        display: flex;
+    }
+
+    .fund-right {
+        box-sizing: border-box;
+        padding-left: 60px;
+    }
+    .fund-container {
+        box-sizing: border-box;
+        width: 920px;
+
+        .title-box {
+            width: 100%;
+            height: 40px;
+            font-size: 18px;
+            font-weight: 600;
+            color: $text-strong;
+            border-bottom: 1px solid #e6e6e6;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    .fund-items-container{
+        margin-top: 54px;
+
+        .fund-item-row{
+            height: 40px;
+            line-height: 40px;
+
+            .row__label{
+                font-size: 14px;
+                color:$text-strong;
+            }
+        }
+    }
+}
+  

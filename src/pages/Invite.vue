@@ -39,68 +39,67 @@
 </template>
 
 <script>
-  import ProfileLeft from './ProfileLeft'
-  import copyToClipboard from 'copy-to-clipboard'
-  import service from '@/modules/service'
-  import utils from '@/modules/utils'
-  import {state} from '@/modules/store'
-  const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
+import ProfileLeft from './ProfileLeft'
+import copyToClipboard from 'copy-to-clipboard'
+import service from '@/modules/service'
+import utils from '@/modules/utils'
+import {state} from '@/modules/store'
+const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
 
-  export default {
-    name: 'invite',
-    components: {
-      ProfileLeft
+export default {
+  name: 'invite',
+  components: {
+    ProfileLeft
+  },
+  data () {
+    return {
+      state,
+      show: false,
+      qrReady: false
+    }
+  },
+  computed: {
+    inviteLink () {
+      return `${location.protocol}//${location.host}/user/register/?invitor=${this.inviteCode}`
     },
-    data () {
-      return {
-        state,
-        show: false,
-        qrReady: false
-      }
+    inviteCode () {
+      if (this.state.userInfo) { return this.state.userInfo.id }
+      return ''
+    }
+  },
+  async created () {
+    this.setQr(this.inviteLink)
+  },
+  methods: {
+    showQrcode () {
+      this.show = !this.show
     },
-    computed: {
-      inviteLink() {
-        return `${location.protocol}//${location.host}/user/register/?invitor=${this.inviteCode}`
-      },
-      inviteCode() {
-        if (this.state.userInfo)
-          return this.state.userInfo.id
-        return ''
-      }
+    copy (key) {
+      copyToClipboard(this[key])
+      utils.success(this.$i18n.t('copyed'))
     },
-    async created () {
-      this.setQr(this.inviteLink)
-    },
-    methods: {
-      showQrcode () {
-        this.show = !this.show
-      },
-      copy (key) {
-        copyToClipboard(this[key])
-        utils.success(this.$i18n.t('copyed'))
-      },
-      async setQr (url) {
-        const QRCode = await qrcode()
-        QRCode.toCanvas(
-          this.$refs.qr,
-          url,
-          {
-            margin: 0,
-            width: 136,
-            height: 136,
-            errorCorrectionLevel: 'H'
-          },
-          (err) => {
-            if (err) {
-              // @improve
-              return utils.log('qrcode error')
-            }
-            this.qrReady = true
+    async setQr (url) {
+      const QRCode = await qrcode()
+      QRCode.toCanvas(
+        this.$refs.qr,
+        url,
+        {
+          margin: 0,
+          width: 136,
+          height: 136,
+          errorCorrectionLevel: 'H'
+        },
+        (err) => {
+          if (err) {
+            // @improve
+            return utils.log('qrcode error')
           }
-        )
-      }
+          this.qrReady = true
+        }
+      )
     }
   }
+}
 </script>
 <style lang="scss">
   @import "../styles/vars";
@@ -239,4 +238,3 @@
     }
   }
 </style>
-
