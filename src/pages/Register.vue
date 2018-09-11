@@ -221,7 +221,6 @@ export default {
         password2: {
           errTips: this.$i18n.t('change_password_diff'),
           validateFunc: () => {
-            console.log(this.password, 'pp', this.password2)
             return this.password !== this.password2
           }
         },

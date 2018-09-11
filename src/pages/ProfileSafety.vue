@@ -3,7 +3,7 @@
     <profile-left></profile-left>
     <div class="user-center-right">
       <div class="profile-container">
-        <div class="title-box">{{$t('Profile_left_invite_Safety')}}<span>安全等级： <i>低</i></span></div>
+        <div class="title-box">{{$t('profile_left_invite_safety')}}<span>安全等级： <i>低</i></span></div>
         <div class="invinfo-box">
             <ul>
                 <li class="yz">
@@ -44,14 +44,14 @@
     },
     data () {
       return {
-        
+
       }
     },
     computed: {
-      
+
     },
     methods: {
-      
+
     }
   }
 </script>

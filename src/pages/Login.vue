@@ -1,7 +1,7 @@
 <template>
-  <div class="page page-login" ref="container">
+  <div class="page page-login">
     <resbg></resbg>
-    <div class="panel_box" ref="containera">
+    <div class="panel_box" ref="container">
     <div class="panel">
       <div class="title-wrap">
         <div class="panel-title" v-t="'signin'"></div>
@@ -27,7 +27,7 @@
             </select>
           </div>
         </div>
-        <div class="field" v-show="by === 'phone'" :class="{active: activeList['phone'].active}">
+        <div class="field" v-show="by === 'phone'">
           <div class="input-box">
             <div class="label">{{ $t('phone_number') }}</div>
             <input class="input item" type="text"
@@ -39,7 +39,7 @@
               v-model.trim="phone" />
           </div>
         </div>
-        <div :class="['field', {active: activeList['email'].active}]" v-show="by === 'email'">
+        <div :class="['field']" v-show="by === 'email'">
           <div class="input-box">
             <div class="label" v-t="'login_label_mail'"></div>
             <input v-model.trim="email"
@@ -54,7 +54,7 @@
             <span class="quick-delete" :data-enable="activeList['email'].qd" @click="quickDelete('email')"></span>
           </div>
         </div>
-        <div :class="['field', {active: activeList['password'].active}]">
+        <div :class="['field']">
           <div class="input-box">
             <div class="label" v-t="'login_label_pw'"></div>
             <input v-model.trim="password"
@@ -76,7 +76,7 @@
             @click="submit"></v-btn>
           <div class="to-others">
             <router-link :to="{name: 'registerBy', params: $route.params, query: $route.query}">{{ $t('signup') }}</router-link>
-            <router-link class="ml-5" :to="{name: 'recover'}">{{ $t('if_forgot') }}</router-link>
+            <!-- <router-link class="ml-5" :to="{name: 'recover'}">{{ $t('if_forgot') }}</router-link> -->
           </div>
         </div>
       </form>
@@ -127,28 +127,6 @@ export default {
         },
         password: {
 
-        }
-      },
-      activeList: {
-        'email': {
-          active: false,
-          qd: false,
-          error: ''
-        },
-        'password': {
-          active: false,
-          qd: false,
-          error: ''
-        },
-        'phone': {
-          active: false,
-          qd: false,
-          error: ''
-        },
-        'captcha': {
-          active: false,
-          qd: false,
-          error: ''
         }
       }
     }
@@ -230,6 +208,7 @@ export default {
         utils.alert(res.message)
         return false
       }
+      actions.setUserInfo(res.data)
 
       if (this.by === 'phone') {
         this.local.regionId = this.regionId
@@ -254,22 +233,8 @@ export default {
         name: 'invite'
       })
     },
-    active (field, active) {
-      this.activeList[field].active = active
-      if (field === 'password') {
-        this.atPw = active
-      }
-    },
-    input (field) {
-      let text = this[field]
-      this.activeList[field].qd = !!text
-      this.errmsg = ''
-    },
-    quickDelete (field) {
-      this[field] = ''
-      this.activeList[field].qd = false
-    },
     fixPosition () {
+      // this.$refs.container.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
       this.$refs.container.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
       this.$refs.containera.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
     }
@@ -290,7 +255,7 @@ export default {
       actions.setLoginBack(backTo)
     }
   },
-  destroyed() {
+  destroyed () {
     this.$eh.$off('app:resize')
   }
 }

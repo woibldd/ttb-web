@@ -2,6 +2,7 @@
 module.exports = {
   NODE_ENV: '"production"',
   STATIC: JSON.stringify(process.env.STATIC),
-  BASE_API: '"http://i.ix-test.com:8080"',
+  // BASE_API: '"http://i.ix-test.com:8080"',
+  BASE_API: '"https://i.ix.com/"',
   ...require("./theme.env")
 }
