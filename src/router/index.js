@@ -17,6 +17,7 @@ const Trading = () => import(/* webpackChunkName: "Trading" */ '@/pages/Trading'
 const Profile = () => import(/* webpackChunkName: "Profile" */ '@/pages/Profile')
 const Invite = () => import(/* webpackChunkName: "Invite" */ '@/pages/Invite')
 const ProfileInfo = () => import(/* webpackChunkName: "ProfileInfo" */ '@/pages/ProfileInfo')
+const SafeVerified = () => import(/* webpackChunkName: "SafeVerified" */ '@/pages/SafeVerified')
 const Register = () => import(/* webpackChunkName: "Register" */ '@/pages/Register')
 const Recover = () => import(/* webpackChunkName: "Register" */ '@/pages/user/recover/recover.vue')
 const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
@@ -126,6 +127,10 @@ let router = new Router({
         path: 'ProfileSafety',
         name: 'ProfileSafety',
         component: ProfileSafety
+      },{
+        path: 'SafeVerified',
+        name: 'SafeVerified',
+        component: SafeVerified
       }]
     }, {
       path: '/user',
