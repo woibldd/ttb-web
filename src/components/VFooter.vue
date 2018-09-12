@@ -1,11 +1,11 @@
 <template>
   <footer>
-    <a class="footer-container">
+    <div class="footer-container">
       <router-link
         :to="{name:'home'}"
         class="footer_logo"/>
 
-      <a class="contact-list">
+      <div class="contact-list">
         <a
           class="contact-item-wrapper mr-20 pointer"
           href='https://www.facebook.com/IXExchange'>
@@ -53,7 +53,7 @@
         </div>
       </div>
     </div>
-  </a></a></footer>
+  </footer>
 </template>
 
 <script>
