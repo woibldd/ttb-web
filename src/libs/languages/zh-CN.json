@@ -168,6 +168,7 @@
   "kyc_submit": "提交审核",
   "kyc_submit_success": "提交成功",
   "login_title": "登录",
+  "sub": "提交",
   "login_label_mail": "电子邮箱",
   "login_label_pw": "密码",
   "login_ph_pw": "请输入密码",

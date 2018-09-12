@@ -3,27 +3,28 @@
     <profile-left></profile-left>
     <div class="user-center-right">
       <div class="profile-container">
-        <div class="title-box">{{$t('profile_left_invite_safety')}}<span>{{$t('Verified')}}</span></div>
+        <div class="title-box">{{$t('profile_left_invite_safety')}}<span>{{$t('Phone_binding')}}</span></div>
         <div class="invinfo-box">
-            <div>
+            <div class="inp_box">
                 <p>{{$t('Country')}}</p>
                 <select>
                     <option value="aa"></option>
                 </select>
             </div>
-            <div>
+            <div class="inp_box">
                 <p>{{$t('name')}}</p>
                 <input type="text" />
-                <span>请输入您的真实姓名</span>
+                <span class="tips">请输入您的真实姓名</span>
             </div>
-            <div>
+            <div class="inp_box">
                 <p>{{$t('kyc_idcard')}}</p>
                 <input type="text" />
-                <span>请输入正确的身份证号</span>
+                <span class="tips">请输入正确的身份证号</span>
             </div>
-            <div>
-                <p></p>
-                <button>提交</button>
+            <div class="inp_box">
+                <v-btn class="submit-btn" :label="$t('sub')"
+                :loading="loading"
+                @click="submit"></v-btn>
             </div>
         </div>
       </div>
@@ -34,11 +35,13 @@
 <script>
   import ProfileLeft from './ProfileLeft'
   import service from '@/modules/service'
+  import VBtn from '@/components/VBtn'
 
   export default {
     name: 'SafeVerified',
     components: {
-      ProfileLeft
+      ProfileLeft,
+      VBtn
     },
     data () {
       return {
@@ -90,7 +93,7 @@
       .invinfo-box {
         width: 445px;
         margin: 50px auto;
-        div{
+        div.inp_box{
             width:100%;
             height: 40px;
             position: relative;
@@ -113,17 +116,12 @@
                 border:none;
                 border:1px solid #C2A538;
             }
-            button{
+            .submit-btn{
                 width: 340px;
                 height: 40px;
-                border: none;
-                border-radius: 4px;
-                box-sizing: border-box;
-                background: #C1A538;
-                color: #fff;
-                cursor: pointer;
+                margin-left: 104px;
             }
-            span{
+            span.tips{
                 display: block;
                 width: 300px;
                 height: 30px;

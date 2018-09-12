@@ -24,6 +24,7 @@ const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
 const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pages/PrivacyPolicy')
 const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
 const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/ProfileSafety')
+const PhoneBind = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/PhoneBind')
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
 
 async function beforeEach (to, from, next) {
@@ -132,6 +133,10 @@ let router = new Router({
         path: 'SafeVerified',
         name: 'SafeVerified',
         component: SafeVerified
+      },{
+        path: 'PhoneBind',
+        name: 'PhoneBind',
+        component: PhoneBind
       }]
     }, {
       path: '/user',
