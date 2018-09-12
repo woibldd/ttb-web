@@ -14,6 +14,7 @@ import eventHub from '@/modules/eventHub'
 import VTooltip from 'v-tooltip'
 import qs from 'querystring'
 
+import 'element-ui/lib/theme-chalk/index.css'
 import { Select } from 'element-ui'
 
 Vue.config.productionTip = false
@@ -46,7 +47,7 @@ Vue.prototype.$eh = eventHub
 actions.setLocale()
 
 /* eslint-disable no-new */
-let release = qs.parse(location.search.replace('?', '')).release
+const release = qs.parse(location.search.replace('?', '')).release
 if (release || !window.grayline) {
   new Vue({
     el: '#app',

@@ -30,17 +30,25 @@
             justify-content: space-between;
         }
     }
-    .fund-items-container{
-        margin-top: 54px;
+    .fund-items-content{
+        margin: 54px auto 0;
+        width: 600px;
 
         .fund-item-row{
+            display: flex;
             height: 40px;
             line-height: 40px;
+            margin-bottom: 24px;
 
             .row__label{
                 font-size: 14px;
                 color:$text-strong;
+                width: 88px;
             }
+        }
+
+        .fund-item-other {
+            padding-left: 88px;
         }
     }
 }
