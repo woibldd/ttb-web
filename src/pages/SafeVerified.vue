@@ -3,7 +3,7 @@
     <profile-left></profile-left>
     <div class="user-center-right">
       <div class="profile-container">
-        <div class="title-box">{{$t('profile_left_invite_safety')}}<span>{{$t('Phone_binding')}}</span></div>
+        <div class="title-box">{{$t('profile_left_invite_safety')}}<span>{{$t('Verified')}}</span></div>
         <div class="invinfo-box">
             <div class="inp_box">
                 <p>{{$t('Country')}}</p>
@@ -104,12 +104,14 @@
                 line-height: 40px;
                 color: #999;
             }
+            input{
+                padding-left: 15px;
+            }
             select,input{
                 display: block;
                 width: 340px;
                 height: 40px;
                 float: left;
-                padding: 0;
                 margin: 0;
                 box-sizing: border-box;
                 border-radius: 4px;
