@@ -2,7 +2,7 @@
   <div class="ix-trade-op pt-14 limit-order">
     <ul class="ul buy-ul" v-if="pairInfo">
       <li class="li-price mb-10">
-        <div class="label mr-20">{{ $t('price') }}</div>
+        <div class="label">{{ $t('price') }}</div>
         <div class="content">
           <currency-input class="pro"
             v-model="price"
@@ -15,7 +15,7 @@
         </div>
       </li>
       <li class="li-amount mb-10">
-        <div class="label mr-20">{{ $t('amount') }}</div>
+        <div class="label">{{ $t('amount') }}</div>
         <div class="content">
           <currency-input class="pro"
             v-model="amount"
@@ -36,7 +36,7 @@
         </div>
       </li>
       <li class="li-worth mb-10">
-        <div class="label mr-20">{{ $t('order_value') }}</div>
+        <div class="label">{{ $t('order_value') }}</div>
         <div class="content">
           <currency-input class="pro"
             @blur="worthBlur"
@@ -114,7 +114,7 @@
     <!-- 埋单 -->
     <ul class="ul sell-ul" v-if="pairInfo">
       <li class="li-price mb-10">
-        <div class="label mr-20">{{ $t('price') }}</div>
+        <div class="label">{{ $t('price') }}</div>
         <div class="content">
           <currency-input class="pro"
             v-model="price"
@@ -127,7 +127,7 @@
         </div>
       </li>
       <li class="li-amount mb-10">
-        <div class="label mr-20">{{ $t('amount') }}</div>
+        <div class="label">{{ $t('amount') }}</div>
         <div class="content">
           <currency-input class="pro"
             v-model="amount"
@@ -148,7 +148,7 @@
         </div>
       </li>
       <li class="li-worth mb-10">
-        <div class="label mr-20">{{ $t('order_value') }}</div>
+        <div class="label">{{ $t('order_value') }}</div>
         <div class="content">
           <currency-input class="pro"
             @blur="worthBlur"
@@ -566,6 +566,7 @@ export default {
   .label {
     line-height: 28px;
     color: #A5B4C5;
+    width: 12%;
   }
 }
 .li-volume {
@@ -607,7 +608,8 @@ export default {
   }
 }
 .ix-slider {
-  padding: 7px 0;
+  padding: 7px 0px;
+  margin-right: 20px;
   position: relative;
   box-sizing: border-box;
   @include clearfix();
@@ -669,6 +671,7 @@ export default {
 .custom-tooltip {
   position: absolute;
   bottom: -44px;
+  left: -7px;
   color: #A5B4C5;
 }
 .custom-label.active {

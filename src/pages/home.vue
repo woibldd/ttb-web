@@ -13,7 +13,7 @@
         </p>
         <div class="ind_but">
             <a :href="'/docs/The+Declaration+of+IX'+pdfSubfix+'.pdf'" target="_blank" class="xy">{{$t("declaration")}}</a>
-            <a :href="'/docs/IX_WhitePaper'+pdfSubfix+'.pdf'" target="_blank" class="wb">{{$t("whitepagger")}}</a>
+            <a :href="'/docs/IX+WhitePaper'+pdfSubfix+'.pdf'" target="_blank" class="wb">{{$t("whitepagger")}}</a>
         </div>
     </div>
 </div>
