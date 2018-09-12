@@ -1,28 +1,45 @@
 <template>
- <div class="page page-login recover-container">
-    <div class="panel" v-if="step < 4">
+  <div class="page page-login recover-container">
+    <div
+      class="panel"
+      v-if="step < 4">
       <div class="title-wrap">
-        <div class="panel-title" v-t="'if_forgot'"></div>
+        <div
+          class="panel-title"
+          v-t="'if_forgot'"/>
       </div>
-      <form class="form pt-10" autocomplete="off" onsubmit="return false">
-        <div v-if="step < 3" class="field">
-            <ix-input
-                ref="recoverPhone"
-                v-model.trim="phone"
-                :required='true'
-                :empty-err-tips="$t('bind_phone_err_empty')"
-                :rule="validateRules.phone"
-                :placeholder="$t('bind_phone_input')"
-                :label="$t('phone_number')"
-                >
-            </ix-input>
+      <form
+        class="form pt-10"
+        autocomplete="off"
+        onsubmit="return false">
+        <div
+          v-if="step < 3"
+          class="field">
+          <ix-input
+            ref="recoverPhone"
+            v-model.trim="phone"
+            :required='true'
+            :empty-err-tips="$t('bind_phone_err_empty')"
+            :rule="validateRules.phone"
+            :placeholder="$t('bind_phone_input')"
+            :label="$t('phone_number')"
+          />
         </div>
-        <div v-if="step===1" class="field recover__validate mt-17" :class="[{active: activeList['captcha'].active}]">
-          <slide-validate @validateDone="validateDone"></slide-validate>
+        <div
+          v-if="step===1"
+          class="field recover__validate mt-17"
+          :class="[{active: activeList['captcha'].active}]">
+          <slide-validate @validateDone="validateDone"/>
         </div>
-        <div v-if="step===2" class="field recover__validate mt-17" :class="[{active: activeList['captcha'].active}]">
+        <div
+          v-if="step===2"
+          class="field recover__validate mt-17"
+          :class="[{active: activeList['captcha'].active}]">
           <div class="input-box">
-            <input v-model.trim="captcha" @focus="active('captcha', true)" @blur="active('captcha', false)"
+            <input
+              v-model.trim="captcha"
+              @focus="active('captcha', true)"
+              @blur="active('captcha', false)"
               @input="input('captcha')"
               ref="captcha"
               class="input captcha item"
@@ -31,53 +48,60 @@
               :placeholder="$t('phone_code')"
               :disabled="loading">
 
-              <a class="sms-btn"
+            <a
+              class="sms-btn"
               :class="{disabled: sms.status === 1}"
               @click.prevent="getSmsCode">
-              {{smsBtnText}}</a>
+              {{ smsBtnText }}</a>
           </div>
         </div>
         <!-- 输入密码 -->
-        <div v-if="step===3" :class="['field']">
-            <ix-input
-                ref="recoverPassword"
-                v-model.trim="password"
-                autocomplete="off"
-                :required='true'
-                :empty-err-tips="$t('login_ph_pw')"
-                :rule="validateRules.password"
-                :placeholder="$t('change_password_new')"
-                :label="$t('change_password_new')"
-                >
-            </ix-input>
+        <div
+          v-if="step===3"
+          :class="['field']">
+          <ix-input
+            ref="recoverPassword"
+            v-model.trim="password"
+            autocomplete="off"
+            :required='true'
+            :empty-err-tips="$t('login_ph_pw')"
+            :rule="validateRules.password"
+            :placeholder="$t('change_password_new')"
+            :label="$t('change_password_new')"
+          />
         </div>
-        <div v-if="step===3" :class="['field']">
-         <ix-input
-                ref="recoverPassword2"
-                v-model.trim="password2"
-                autocomplete="off"
-                :required='true'
-                :empty-err-tips="$t('change_password_diff')"
-                :rule="validateRules.password2"
-                :placeholder="$t('change_password_repeat')"
-                :label="$t('change_password_repeat')"
-                >
-            </ix-input>
+        <div
+          v-if="step===3"
+          :class="['field']">
+          <ix-input
+            ref="recoverPassword2"
+            v-model.trim="password2"
+            autocomplete="off"
+            :required='true'
+            :empty-err-tips="$t('change_password_diff')"
+            :rule="validateRules.password2"
+            :placeholder="$t('change_password_repeat')"
+            :label="$t('change_password_repeat')"
+          />
         </div>
         <div class="field submit mt-16">
-          <v-btn class="submit-btn" :label="$t('nextstep')"
+          <v-btn
+            class="submit-btn"
+            :label="$t('nextstep')"
             height="40"
             :loading="loading"
             :disabled="disableNextBtn"
-            @click="nextstep"></v-btn>
+            @click="nextstep"/>
         </div>
       </form>
     </div>
     <div class="panel">
-      <div class="recover-success" v-if="step === 4">
+      <div
+        class="recover-success"
+        v-if="step === 4">
         <svg class="icon-reset-psw-success" ><use xlink:href="#icon-reset-psw-success" /></svg>
         <div class="success__text">
-          {{$t('reset_success')}}
+          {{ $t('reset_success') }}
         </div>
       </div>
     </div>
@@ -85,7 +109,6 @@
 
 </template>
 <script>
-import './recover.scss'
 import slideValidate from '@/components/common/slide-validate/slide-validate.vue'
 import service from '@/modules/service'
 import {state} from '@/modules/store'
@@ -93,7 +116,7 @@ import pwChecker from '@/modules/pw-checker'
 import ixInput from '@/components/common/ix-input/ix-input.vue'
 
 export default {
-  name: 'recover',
+  name: 'Recover',
   components: {
     slideValidate,
     ixInput
@@ -241,3 +264,6 @@ export default {
   }
 }
 </script>
+<style scoped lang="scss">
+ @import "./recover";
+</style>
