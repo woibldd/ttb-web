@@ -3,21 +3,21 @@
     <profile-left></profile-left>
     <div class="user-center-right">
       <div class="profile-container">
-        <div class="title-box">{{$t('profile_left_invite_safety')}}<span>实名认证</span></div>
+        <div class="title-box">{{$t('profile_left_invite_safety')}}<span>{{$t('Verified')}}</span></div>
         <div class="invinfo-box">
             <div>
-                <p>国籍</p>
+                <p>{{$t('Country')}}</p>
                 <select>
                     <option value="aa"></option>
                 </select>
             </div>
             <div>
-                <p>姓名</p>
+                <p>{{$t('name')}}</p>
                 <input type="text" />
                 <span>请输入您的真实姓名</span>
             </div>
             <div>
-                <p>身份证号</p>
+                <p>{{$t('kyc_idcard')}}</p>
                 <input type="text" />
                 <span>请输入正确的身份证号</span>
             </div>
@@ -72,13 +72,18 @@
         color: $text-strong;
         border-bottom: 1px solid #e6e6e6;
         span{
-            color: #999;
-            font-size: 14px;
-            float: right;
+            color: #666;
+            font-size: 18px;
             font-weight: lighter;
-            padding-right: 25px;
+            padding-left: 10px;
             i{
                 color: #EB5757;
+            }
+            &:before{
+                content: ">";
+                color: #333;
+                font-size: 18px;
+                margin-right: 10px;
             }
         }
       }
