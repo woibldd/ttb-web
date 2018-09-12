@@ -24,7 +24,9 @@ const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
 const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pages/PrivacyPolicy')
 const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
 const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/ProfileSafety')
-const PhoneBind = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/PhoneBind')
+const PhoneBind = () => import(/* webpackChunkName: "PhoneBind" */ '@/pages/PhoneBind')
+const eBind = () => import(/* webpackChunkName: "EmailBind" */ '@/pages/eBind')
+const ModPwd = () => import(/* webpackChunkName: "ModPwd" */ '@/pages/ModPwd')
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
 
 async function beforeEach (to, from, next) {
@@ -137,6 +139,14 @@ let router = new Router({
         path: 'PhoneBind',
         name: 'PhoneBind',
         component: PhoneBind
+      },{
+        path: 'eBind',
+        name: 'eBind',
+        component: eBind
+      },{
+        path: 'ModPwd',
+        name: 'ModPwd',
+        component: ModPwd
       }]
     }, {
       path: '/user',

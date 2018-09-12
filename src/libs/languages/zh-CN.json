@@ -201,7 +201,7 @@
   "change_password_success": "修改密码成功",
   "change_password_orig": "原密码",
   "change_password_new": "新密码",
-  "change_password_repeat": "确认密码",
+  "change_password_repeat": "确认新密码",
   "change_password_diff": "两次输入的密码不一致",
   "secure_level": "安全等级",
   "secure_level_0": "弱",
@@ -229,6 +229,7 @@
   "hq_send": "获取验证码",
   "sms_retry": "再次发送",
   "phone_code": "短信验证码",
+  "email_code": "邮箱验证码",
   "bind_phone_label_code": "输入短信验证码",
   "profile_kyc_tip": "为了保证用户资产安全，需要完成身份验证才能获得更多提现额度。",
   "profile_kyc_start": "开始验证",
@@ -553,10 +554,12 @@
   "whitepagger": "白皮书",
   "coin_intro": "币种资料",
   "Phone_binding": "手机绑定",
+  "email_binding": "邮箱绑定",
   "google_validator": "谷歌验证器",
   "log_pwd": "登录密码",
   "Bindings": "已绑定",
   "No_Bindings": "未绑定",
   "Verified": "实名认证",
-  "Country": "国籍"
+  "Country": "国籍",
+  "modify": "修改"
 }
