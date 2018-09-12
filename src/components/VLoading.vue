@@ -12,7 +12,7 @@ export default {
   name: 'vLoading',
   props: {
     color: {
-      default: 'white'
+      default: '#C9A96C'
     },
     size: {
       default: 8
@@ -38,6 +38,7 @@ export default {
 .k-square3 {
   display: inline-block;
   width: 15px;
+  margin: 0;
   height: 15px;
   background: #000;
   opacity: .2;
@@ -48,13 +49,13 @@ export default {
   transform: translate(0,-25px);
 }
 .k-square3b {
-    transform: translate(25px,0);
+  transform: translate(25px,0);
 }
 .k-square3c {
-    transform: translate(-25px,0);
+  transform: translate(-25px,0);
 }
 .k-square3d {
-    transform: translate(0,25px);
+  transform: translate(0,25px);
 }
 
 @keyframes k-loadingQ {

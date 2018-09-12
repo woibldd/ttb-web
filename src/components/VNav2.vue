@@ -17,6 +17,7 @@
         <div class="lang">{{localeText}}<b></b>
             <div class="lang_box">
                 <a @click="langcn">简体中文</a>
+                <!-- <a @click="langen">中文繁體</a> -->
                 <a @click="langen">English</a>
             </div>
         </div>
@@ -95,12 +96,12 @@ export default {
   line-height: 42px;
   .nav_logo {
     float: left;
-    width: 150px;
-    height: 42px;
+    width: 142px;
+    height: 46px;
     display: block;
     background: url(../assets/nav_logo.png);
     float: left;
-    margin: 19px 0;
+    margin: 17px 0;
   }
   .nav_right {
     .right_options {

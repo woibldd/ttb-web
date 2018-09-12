@@ -1,9 +1,9 @@
 <template>
-  <div class="pro-panel">
-    <div class="pro-header">
+  <div class="ix-pannel">
+    <div class="ix-header">
       <span class="pull-left">{{ $t('deal_title') }} ({{ state.pro.pair | pairfix }})</span>
     </div>
-    <div class="pro-panel-body" ref="body">
+    <div class="ix-pannel-body" ref="body">
       <table class="table table-pro-deal">
         <tbody v-if="state.pro.pairInfo">
           <tr>
@@ -186,7 +186,7 @@ export default {
 .mask {
   @include ix-mask();
 }
-.pro-header {
+.ix-header {
   background-color: $nav;
   height: 32px;
   line-height: 32px;
@@ -194,7 +194,7 @@ export default {
   box-sizing: border-box;
   color: white;
 }
-.pro-panel-body {
+.ix-pannel-body {
   overflow-y: auto;
 }
 .err,

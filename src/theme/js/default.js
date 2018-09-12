@@ -3,11 +3,11 @@ const getSassVariables = require('./getSassVariables')
 module.exports = {
   styleVar: getSassVariables(),
   googleAnalyticsId: 'UA-125390817-2',
-  locales: ['en', 'zh-CN', 'zh-HK', 'ja', 'ko'],
+  locales: ['en', 'zh-CN', 'zh-HK'],
   themeName: 'default',
   companyName: 'IX.COM',
-  exchangeName: '比特币/以太坊交易平台，IX，数字资产交易所',
-  keywords: '比特币,比特币交易,以太坊,区块链,IX,共识,自由联合,数字资产交易所',
+  exchangeName: 'IX | 自由人的自由联合',
+  keywords: 'IX,比特币,比特币交易,以太坊,区块链,共识,自由联合,数字资产交易所',
   description: 'IX致力于打造一家回归区块链精神的数字资产交易所，公开、公正、透明',
   shortcut: '',
   telegram: {

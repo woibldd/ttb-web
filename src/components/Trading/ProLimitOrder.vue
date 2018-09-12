@@ -2,7 +2,7 @@
   <div class="ix-trade-op pt-14 limit-order">
     <ul class="ul buy-ul" v-if="pairInfo">
       <li class="li-price mb-10">
-        <div class="label mr-20">{{ $t('price') }}</div>
+        <div class="label">{{ $t('price') }}</div>
         <div class="content">
           <currency-input class="pro"
             v-model="price"
@@ -15,7 +15,7 @@
         </div>
       </li>
       <li class="li-amount mb-10">
-        <div class="label mr-20">{{ $t('amount') }}</div>
+        <div class="label">{{ $t('amount') }}</div>
         <div class="content">
           <currency-input class="pro"
             v-model="amount"
@@ -23,7 +23,7 @@
             :currency="pairInfo.product_name"
             :scale="pairInfo.amount_scale">
           </currency-input>
-          <div class="btn point-btn buy-all"
+          <!-- <div class="btn point-btn buy-all"
             v-tooltip.left="buyTip"
             @click="setBuyVolumn(1)">
             <i class="ibt theme-bgcolor-up"></i>
@@ -32,11 +32,11 @@
             v-tooltip.left="sellTip"
             @click="setSellVolumn(1)">
             <i class="ibt theme-bgcolor-down"></i>
-          </div>
+          </div> -->
         </div>
       </li>
       <li class="li-worth mb-10">
-        <div class="label mr-20">{{ $t('order_value') }}</div>
+        <div class="label">{{ $t('order_value') }}</div>
         <div class="content">
           <currency-input class="pro"
             @blur="worthBlur"
@@ -63,15 +63,26 @@
               <div class="avbl-value" v-if="currency">{{ currency.available | fixed(pairInfo.currency_scale) }}</div>
               <div class="avbl-value" v-else>----</div>
             </div>
-            <div class="volume-sets">
-              <a class="volume-set" @click.prevent="setBuyVolumn(.25)"><span>25%</span></a>
+            <div class="ix-slider">
+              <ix-slider @input="onSliderDragEnd($event, 'buy')" height="4" :dot-size="14" :lazy="true" :min="0" :max="100" :piecewiseLabel="true" :interval="1" :piecewise="false">
+                <template slot="label" slot-scope="{ label, active }">
+                  <span :class="['custom-label', { active }]" v-if="label % 25 === 0">
+                  </span>
+                </template>
+                <template slot="tooltip" slot-scope="tooltip">
+                  <div class="custom-tooltip">
+                    {{ tooltip.value }}%
+                  </div>
+                </template>
+              </ix-slider>
+              <!-- <a class="volume-set" @click.prevent="setBuyVolumn(.25)"><span>25%</span></a>
               <a class="volume-set" @click.prevent="setBuyVolumn(.5)"><span>50%</span></a>
               <a class="volume-set" @click.prevent="setBuyVolumn(.75)"><span>75%</span></a>
-              <a class="volume-set" @click.prevent="setBuyVolumn(1)"><span>100%</span></a>
+              <a class="volume-set" @click.prevent="setBuyVolumn(1)"><span>100%</span></a> -->
             </div>
           </div>
         </div>
-        <div class="half-wrap right">
+        <!-- <div class="half-wrap right">
           <div class="product-volume">
             <div class="avbl">
               <div class="avbl-label">{{ $t('avlb') }} {{ pairInfo.product_name }}</div>
@@ -85,7 +96,7 @@
               <a class="volume-set" @click.prevent="setSellVolumn(1)"><span>100%</span></a>
             </div>
           </div>
-        </div>
+        </div> -->
       </li>
       <li class="li-submit">
         <div class="half-wrap left">
@@ -93,21 +104,14 @@
             class="submit-btn"
             radius="0"
             color="probuy"
+            width="100%"
             height="44"
             :loading="submitting === 'BUY'"
             @click="submit('BUY')"></v-btn>
         </div>
-        <div class="half-wrap right">
-          <v-btn :label="$t('operate_sell', {coin: pairInfo.product_name})"
-            class="submit-btn"
-            radius="0"
-            color="prosell"
-            height="44"
-            :loading="submitting === 'SELL'"
-            @click="submit('SELL')"></v-btn>
-        </div>
       </li>
     </ul>
+    <!-- 埋单 -->
     <ul class="ul sell-ul" v-if="pairInfo">
       <li class="li-price mb-10">
         <div class="label">{{ $t('price') }}</div>
@@ -131,7 +135,7 @@
             :currency="pairInfo.product_name"
             :scale="pairInfo.amount_scale">
           </currency-input>
-          <div class="btn point-btn buy-all"
+          <!-- <div class="btn point-btn buy-all"
             v-tooltip.left="buyTip"
             @click="setBuyVolumn(1)">
             <i class="ibt theme-bgcolor-up"></i>
@@ -140,7 +144,7 @@
             v-tooltip.left="sellTip"
             @click="setSellVolumn(1)">
             <i class="ibt theme-bgcolor-down"></i>
-          </div>
+          </div> -->
         </div>
       </li>
       <li class="li-worth mb-10">
@@ -156,38 +160,13 @@
           </currency-input>
         </div>
       </li>
-      <!--
-      <li class="li-worth mb-10">
-        <div class="label">{{ $t('order_value') }}</div>
-        <div class="content">{{ worth }} {{ pairInfo.currency_name }}</div>
-      </li>
-      -->
-      <li class="li-setting mb-10">
+      <!-- <li class="li-setting mb-10">
         <label class="checkbox left" v-tooltip="postOnlyTip">
           <input type="checkbox" v-model="postOnly">
           {{ $t('post_only') }}
         </label>
-        <!--<label class="checkbox right">-->
-          <!--隐藏订单-->
-          <!--<input type="checkbox" v-model="hidden">-->
-          <!--</label>-->
-      </li>
+      </li> -->
       <li class="li-volume mb-10">
-        <div class="half-wrap left">
-          <div class="currency-volume">
-            <div class="avbl">
-              <div class="avbl-label">{{ $t('avlb') }} {{ pairInfo.currency_name }}</div>
-              <div class="avbl-value" v-if="currency">{{ currency.available | fixed(pairInfo.currency_scale) }}</div>
-              <div class="avbl-value" v-else>----</div>
-            </div>
-            <div class="volume-sets">
-              <a class="volume-set" @click.prevent="setBuyVolumn(.25)"><span>25%</span></a>
-              <a class="volume-set" @click.prevent="setBuyVolumn(.5)"><span>50%</span></a>
-              <a class="volume-set" @click.prevent="setBuyVolumn(.75)"><span>75%</span></a>
-              <a class="volume-set" @click.prevent="setBuyVolumn(1)"><span>100%</span></a>
-            </div>
-          </div>
-        </div>
         <div class="half-wrap right">
           <div class="product-volume">
             <div class="avbl">
@@ -195,25 +174,29 @@
               <div class="avbl-value" v-if="product">{{ product.available | fixed(pairInfo.product_scale) }}</div>
               <div class="avbl-value" v-else>----</div>
             </div>
-            <div class="volume-sets">
+            <div class="ix-slider">
+              <ix-slider @input="onSliderDragEnd($event, 'sell')" height="4" :dot-size="14" :lazy="true" :min="0" :max="100" :piecewiseLabel="true" :interval="1" :piecewise="false">
+                <template slot="label" slot-scope="{ label, active }">
+                  <span :class="['custom-label', { active }]" v-if="label % 25 === 0">
+                  </span>
+                </template>
+                <template slot="tooltip" slot-scope="tooltip">
+                  <div class="custom-tooltip">
+                    {{ tooltip.value }}%
+                  </div>
+                </template>
+              </ix-slider>
+            </div>
+            <!-- <div class="volume-sets">
               <a class="volume-set" @click.prevent="setSellVolumn(.25)"><span>25%</span></a>
               <a class="volume-set" @click.prevent="setSellVolumn(.5)"><span>50%</span></a>
               <a class="volume-set" @click.prevent="setSellVolumn(.75)"><span>75%</span></a>
               <a class="volume-set" @click.prevent="setSellVolumn(1)"><span>100%</span></a>
-            </div>
+            </div> -->
           </div>
         </div>
       </li>
       <li class="li-submit">
-        <div class="half-wrap left">
-          <v-btn :label="$t('operate_buy', {coin: pairInfo.product_name})"
-            class="submit-btn"
-            radius="0"
-            color="probuy"
-            height="44"
-            :loading="submitting === 'BUY'"
-            @click="submit('BUY')"></v-btn>
-        </div>
         <div class="half-wrap right">
           <v-btn :label="$t('operate_sell', {coin: pairInfo.product_name})"
             class="submit-btn"
@@ -232,6 +215,7 @@
 import {state} from '@/modules/store'
 import service from '@/modules/service'
 import utils from '@/modules/utils'
+import ixSlider from '@/components/common/ix-slider/'
 
 export default {
   name: 'proLimitOrder',
@@ -517,7 +501,19 @@ export default {
       if (!res.code) {
         this.checkOrder(res.data.order_id)
       }
+    },
+    onSliderDragEnd (value, dir) {
+      value = value / 100.0;
+      if (dir === 'buy') {
+        this.setBuyVolumn(value)
+      } else {
+        this.setSellVolumn(value)
+      }
+      console.log(value)
     }
+  },
+  components: {
+    ixSlider
   },
   created () {
     this.$eh.$on('protrade:exchange:set', this.set)
@@ -532,14 +528,14 @@ export default {
 }
 .half-wrap {
   float: left;
-  width: 50%;
+  width: 100%;
   box-sizing: border-box;
-  &.left {
-    padding-right: 6px;
-  }
-  &.right {
-    padding-left: 6px;
-  }
+  // &.left {
+  //   padding-right: 6px;
+  // }
+  // &.right {
+  //   padding-left: 6px;
+  // }
 }
 .submit-btn {
   box-sizing: border-box;
@@ -558,7 +554,7 @@ export default {
   }
   .content {
     position: relative;
-    width: 72%;
+    width: 88%;
     float: left;
     box-sizing: border-box;
   }
@@ -570,6 +566,7 @@ export default {
   .label {
     line-height: 28px;
     color: #A5B4C5;
+    width: 12%;
   }
 }
 .li-volume {
@@ -610,38 +607,12 @@ export default {
     height: 17px;
   }
 }
-.volume-sets {
-  padding: 7px 0;
+.ix-slider {
+  padding: 7px 0px;
+  margin-right: 20px;
   position: relative;
   box-sizing: border-box;
   @include clearfix();
-}
-.volume-set {
-  float: left;
-  width: 25%;
-  height: 18px;
-  line-height: 18px;
-  text-align: center;
-  box-sizing: border-box;
-  border-left: 1px solid rgba(255,255,255, .5);
-  border-top: 1px solid rgba(255,255,255, .5);
-  border-bottom: 1px solid rgba(255,255,255, .5);
-  @include a() {
-    color: rgba(255,255,255, .5);
-  }
-  &:hover {
-    color: rgba(255,255,255, .8);
-  }
-  &:last-child {
-    border-right: 1px solid rgba(255,255,255, .5);
-  }
-  span {
-    height: 16px;
-    line-height: 16px;
-    display: inline-block;
-    vertical-align: top;
-    transform: scale(.8);
-  }
 }
 .checkbox {
   color: white;
@@ -684,5 +655,31 @@ export default {
   i {
     margin-top: 4px;
   }
+}
+.custom-label {
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  transform: translate(-50%, -12px);
+  margin-left: 3px;
+  width:10px;
+  height:10px;
+  background:#fff;
+  border-radius:50%;
+  cursor: pointer;
+}
+.custom-tooltip {
+  position: absolute;
+  bottom: -44px;
+  left: -7px;
+  color: #A5B4C5;
+}
+.custom-label.active {
+  background-color: #C9AA6D;
+  font-weight: bold;
+}
+.custom-label.active::after {
+  background-color: #C9AA6D;
+  width: 2px;
 }
 </style>

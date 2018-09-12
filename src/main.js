@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import Upgrading from './pages/Upgrading'
 import router from './router'
 import VueI18n from 'vue-i18n'
 import utils from './modules/utils'
@@ -11,6 +12,7 @@ import './bootstrap'
 import en from '@/libs/languages/en.json'
 import eventHub from '@/modules/eventHub'
 import VTooltip from 'v-tooltip'
+import qs from 'querystring'
 
 Vue.config.productionTip = false
 Vue.use(VueI18n)
@@ -41,10 +43,19 @@ Vue.prototype.$eh = eventHub
 actions.setLocale()
 
 /* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  i18n: utils.$i18n,
-  components: { App },
-  template: '<App/>'
-})
+let release = qs.parse(location.search.replace('?', '')).release
+if (release || !window.grayline) {
+  new Vue({
+    el: '#app',
+    router,
+    i18n: utils.$i18n,
+    components: { App },
+    template: '<App/>'
+  })
+} else {
+  new Vue({
+    el: '#app',
+    components: {App: Upgrading},
+    template: '<App/>'
+  })
+}

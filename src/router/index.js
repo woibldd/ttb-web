@@ -47,8 +47,8 @@ async function beforeEach (to, from, next) {
 
 function beforeResolve (to, from, next) {
   if (to.name !== '404' || (from.name && from.name !== '404')) {
-    document.body.className = document.body.className.replace(/\bv-route-([-a-zA-Z0-9]+)\b/g, '')
-    let className = 'v-route'
+    document.body.className = document.body.className.replace(/\brouter-([-a-zA-Z0-9]+)\b/g, '')
+    let className = 'router'
     _.each(to.matched, (match) => {
       className += ('-' + match.name)
       document.body.classList.add(className)
@@ -70,6 +70,7 @@ function onError (err) {
 }
 
 let router = new Router({
+  mode: process.env.NODE_ENV === 'development' ? 'hash' : 'history',
   routes: [
     {
       path: '/',
@@ -109,7 +110,7 @@ let router = new Router({
         class: 'dark',
         mobileNav: isMobile
       },
-      //redirect: 'profile/invite',
+      redirect: 'profile/invite',
       //redirect: 'profile/ProfileInfo',
       //redirect: 'profile/ProfileSafety',
 

@@ -106,7 +106,6 @@ export default {
       immediate: true
     },
     'local.upDown' () {
-      console.log('change')
       if (this.tvReady) {
         this.widget.remove()
       }
@@ -117,7 +116,6 @@ export default {
       })
     },
     'state.locale' (locale) {
-      console.log('change')
       // SetLanguage is bugy
       // this.widget.setLanguage(this.getLanguage(this.state.locale))
       // Reload widget

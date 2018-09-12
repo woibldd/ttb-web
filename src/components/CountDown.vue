@@ -54,6 +54,7 @@ export default {
   },
   computed: {},
   created () {
+    this.countdown()
     this.timer = setInterval(this.countdown, 1000)
   },
   destroyed () {

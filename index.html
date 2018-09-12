@@ -6,17 +6,17 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="keywords" content="<%= htmlWebpackPlugin.options.theme.keywords %>">
     <meta name="description" content="<%= htmlWebpackPlugin.options.theme.description %>">
-    <link rel="shortcut icon" type="image/x-icon" href="<%= htmlWebpackPlugin.options.static %>static/ico/<%= htmlWebpackPlugin.options.theme.themeName %>/ico-64.ico">
-    <link rel="apple-touch-icon" href="<%= htmlWebpackPlugin.options.static %>static/ico/<%= htmlWebpackPlugin.options.theme.themeName %>/icon-256.png">
+    <link rel="shortcut icon" type="image/x-icon" href="<%= htmlWebpackPlugin.options.static %>/static/icon.png">
     <title><%= htmlWebpackPlugin.options.theme.exchangeName %></title>
+    <style>.page-mask {position: fixed;width: 100%;height: 100%;left: 0;right: 0;top: 0;bottom: 0;background-color: transparent;z-index: 99999;cursor: progress;}.page-loading {background: #283B4C;opacity: 0;visibility: hidden;transition: opacity 300ms, visibility 0s 300ms;}.page-loading.show {opacity: 1;visibility: visible;transition: none;}.k-square-holder {width: 50px;position: absolute;text-align:center;bottom: 50%;left: 50%;}.k-square3 {display: inline-block;width: 15px;height: 15px;margin-right:5px;background: #C9A96C;opacity: 0.2;animation: k-loadingQ 2s infinite;opacity: 0.5;}.k-square3a {transform: translate(0,-25px);}.k-square3b {transform: translate(25px,0);}.k-square3c {transform: translate(-25px,0);}.k-square3d {transform: translate(0,25px);}@keyframes k-loadingQ {33% {  transform: translate(0,0);  opacity: .7;}66% {  transform: translate(0,0);  opacity: .7;}}</style>
 </head>
-
 <body>
-  <div class="page-preload show">
-    <div class="_a">
-      <div class="_b _b1"></div>
-      <div class="_b _b2"></div>
-      <div class="_b _b3"></div>
+  <div class="page-loading page-mask show">
+    <div class="ix-loading k-square-holder">
+      <div class="k-square3 k-square3a"></div>
+      <div class="k-square3 k-square3b"></div>
+      <div class="k-square3 k-square3c"></div>
+      <div class="k-square3 k-square3d"></div>
     </div>
   </div>
   <div id="app"></div>
@@ -29,8 +29,9 @@
       gtag('config', '<%= htmlWebpackPlugin.options.theme.googleAnalyticsId %>');
     </script>
   <% } %>  
+    <script type="text/javascript">window.grayline=false</script>
   <!-- 国内使用 滑块验证，如果主要客户是国外用户，需要替换以下地址-->
-    <script type="text/javascript" charset="utf-8" src="//g.alicdn.com/sd/ncpc/nc.js?t=2015052012"></script>
+    <script type="text/javascript" async charset="utf-8" src="//g.alicdn.com/sd/ncpc/nc.js?t=2015052012"></script>
   <!-- built files will be auto injected -->
 </body>
 
