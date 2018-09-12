@@ -10,7 +10,8 @@ Vue.use(Router)
 
 const isMobile = utils.isMobile()
 
-const home = () => import(/* webpackChunkName: "home" */ '@/pages/home.vue')
+const Home = () => import(/* webpackChunkName: "home" */ '@/pages/home.vue')
+const MobileHome = () => import(/* webpackChunkName: "mobilehome" */ '@/pages/Mobile/home.vue')
 // const Test1 = () => import(/* webpackChunkName: "Test1" */ '@/pages/test1.vue')
 const Test2 = () => import(/* webpackChunkName: "Test2" */ '@/pages/test2.vue')
 const Trading = () => import(/* webpackChunkName: "Trading" */ '@/pages/Trading')
@@ -77,7 +78,7 @@ let router = new Router({
       meta: {
         auth: false
       },
-      component: home
+      component: isMobile ? MobileHome : Home
     }, {
       path: '/PrivacyPolicy',
       name: 'PrivacyPolicy',
@@ -104,8 +105,8 @@ let router = new Router({
       path: '/profile',
       name: 'profile',
       meta: {
-        auth: false,
-        nav: !isMobile,
+        auth: true,
+        nav: true,
         class: 'dark',
         mobileNav: isMobile
       },

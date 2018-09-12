@@ -35,7 +35,7 @@ body {
   display:none
 }
 
-body.responsive-body {
+body.responsive {
   min-width: auto;
 }
 /* 路由相关 start */
@@ -178,7 +178,7 @@ td.right {
   body.router-account {
     min-width: auto;
   }
-  body.router-account footer {
-    display: none;
-  }
+  // body.router-account footer {
+  //   display: none;
+  // }
 }

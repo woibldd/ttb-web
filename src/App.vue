@@ -10,6 +10,7 @@
       <router-view/>
     </div>
     <v-footer ref="footer" v-if="footer === 'default'" :fixed="fixed" v-show="showFooter"/>
+    <mobile-footer ref="footer" v-if="footer === 'mobile'" :fixed="fixed" v-show="showFooter"/>
     <v-notify-list/>
   </div>
 </template>
@@ -17,6 +18,7 @@
 <script>
 import VNav2 from '@/components/VNav2.vue'
 import VFooter from '@/components/VFooter.vue'
+import MobileFooter from '@/components/MobileFooter.vue'
 import {state, actions} from '@/modules/store'
 import utils from '@/modules/utils'
 import VNotifyList from '@/components/VNotifyList.vue'
@@ -28,7 +30,8 @@ export default {
   components: {
     VNav2,
     VFooter,
-    VNotifyList
+    VNotifyList,
+    MobileFooter
   },
   data () {
     return {
@@ -116,7 +119,7 @@ export default {
     },
     fixPosition () {
       const box = this.$refs.container
-      if (box && this.footer === 'default') {
+      if (box) {
         box.style.minHeight = window.innerHeight - (this.showFooter ? 110 : 0) - (this.showNav ? 80 : 0) + 'px'
       }
     },

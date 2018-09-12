@@ -182,6 +182,20 @@ export default {
     }
   }
 
+  @media screen and (max-width: 768px){
+    .c_box {
+      padding: 0 10px;
+    }
+    .lang {
+      display: none;
+      visibility: hidden;
+    }
+    .right_options {
+      .nav_log_res, .email,.quit {
+        margin-left: 10px;
+      }
+    }
+  }
 }
 .dark {
   background: $home-header-bgdark;

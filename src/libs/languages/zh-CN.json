@@ -270,10 +270,10 @@
   "recover_title": "重置 IX.COM 帐号密码",
   "back_to_login": "返回登录",
   "signup_title": "注册",
-  "pwcheck_ph": "至少8个字符",
+  "pwcheck_ph": "密码至少8个字符",
   "pwcheck_ph2": "确认密码",
   "pwcheck_guide": "你的密码必须满足以下条件",
-  "pwcheck_gt8": "至少8个字符",
+  "pwcheck_gt8": "密码至少8个字符",
   "pwcheck_upper": "包含至少一个大写字母",
   "pwcheck_lower": "包含至少一个小写字母",
   "pwcheck_number": "包含至少一个数字",
@@ -553,5 +553,6 @@
   "google_validator": "谷歌验证器",
   "log_pwd": "登录密码",
   "Bindings": "已绑定",
-  "No_Bindings": "未绑定"
+  "No_Bindings": "未绑定",
+  "count_down_start": "正式开启倒计时"
 }

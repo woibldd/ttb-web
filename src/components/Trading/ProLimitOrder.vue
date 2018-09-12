@@ -82,21 +82,6 @@
             </div>
           </div>
         </div>
-        <!-- <div class="half-wrap right">
-          <div class="product-volume">
-            <div class="avbl">
-              <div class="avbl-label">{{ $t('avlb') }} {{ pairInfo.product_name }}</div>
-              <div class="avbl-value" v-if="product">{{ product.available | fixed(pairInfo.product_scale) }}</div>
-              <div class="avbl-value" v-else>----</div>
-            </div>
-            <div class="volume-sets">
-              <a class="volume-set" @click.prevent="setSellVolumn(.25)"><span>25%</span></a>
-              <a class="volume-set" @click.prevent="setSellVolumn(.5)"><span>50%</span></a>
-              <a class="volume-set" @click.prevent="setSellVolumn(.75)"><span>75%</span></a>
-              <a class="volume-set" @click.prevent="setSellVolumn(1)"><span>100%</span></a>
-            </div>
-          </div>
-        </div> -->
       </li>
       <li class="li-submit">
         <div class="half-wrap left">
@@ -135,16 +120,6 @@
             :currency="pairInfo.product_name"
             :scale="pairInfo.amount_scale">
           </currency-input>
-          <!-- <div class="btn point-btn buy-all"
-            v-tooltip.left="buyTip"
-            @click="setBuyVolumn(1)">
-            <i class="ibt theme-bgcolor-up"></i>
-          </div>
-          <div class="btn point-btn sell-all"
-            v-tooltip.left="sellTip"
-            @click="setSellVolumn(1)">
-            <i class="ibt theme-bgcolor-down"></i>
-          </div> -->
         </div>
       </li>
       <li class="li-worth mb-10">
@@ -160,12 +135,6 @@
           </currency-input>
         </div>
       </li>
-      <!-- <li class="li-setting mb-10">
-        <label class="checkbox left" v-tooltip="postOnlyTip">
-          <input type="checkbox" v-model="postOnly">
-          {{ $t('post_only') }}
-        </label>
-      </li> -->
       <li class="li-volume mb-10">
         <div class="half-wrap right">
           <div class="product-volume">
@@ -219,6 +188,12 @@ import ixSlider from '@/components/common/ix-slider/'
 
 export default {
   name: 'proLimitOrder',
+  props: {
+    type: {
+      type: String,
+      default: 'limit'
+    }
+  },
   data () {
     return {
       state,

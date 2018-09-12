@@ -7,9 +7,7 @@
         <div class="ix_logo"></div>
         <b class="ind_txt">{{$t("slogan")}}</b>
         <p class="count_down">
-            <i class="cli"></i>
             <count-down :terminal="date"></count-down>
-            <i class="cri"></i>
             <span class="desc">{{$t('count_down_start')}}</span>
         </p>
         <div class="ind_but">
@@ -24,8 +22,10 @@ import VNav2 from '@/components/VNav2.vue'
 import CountDown from '@/components/CountDown.vue'
 import service from '@/modules/service'
 import {state} from '@/modules/store'
+import responsiveMixin from '@/mixins/responsive'
 
 export default {
+  mixins: [responsiveMixin],
   data () {
     return {
       news: [],
@@ -57,14 +57,14 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-    @import "../styles/vars";
-    @import "../styles/mixins";
-    .page-home{background:url(../assets/index_bg.jpg) center center;background-size:120% 100%;width:100%;position:absolute;height:100%;min-height:600px;}
+    @import "../../styles/vars";
+    @import "../../styles/mixins";
+    .page-home{background:url(../../assets/index_bg.jpg) center center;background-size:120% 100%;width:100%;position:absolute;height:100%;min-height:600px;}
     .ind_cen{text-align:center;width:100%;height:auto;
-        .ix_logo{width:100%;height:81px;background:url(../assets/ix_a.png) no-repeat center center;margin-top:5%}
+        .ix_logo{width:100%;height:81px;background:url(../../assets/ix_a.png) no-repeat center center;margin-top:5%}
         .ind_txt{height:24px;line-height:24px;font-size:22px;color:#fff;display:block;margin-top:2.5%;}
         .count_down {
-            margin: 4% 0 3% 0;
+            margin: 4% 0 10% 0;
             position: relative;
             div.countdown{
                 font-size:58px;
@@ -89,6 +89,8 @@ export default {
           font-size: 16px;
           color: $primary;
           font-weight:400;
+          display: inline-block;
+          margin-top: 24px;
         }
         .ind_but{width:auto;height:30px;line-height:30px;display:table;margin:0 auto;
             a{width:120px;height:30px;display:block;border-radius:4px;color:#fff;margin:0 20px;float:left;padding:0;

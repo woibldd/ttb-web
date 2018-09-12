@@ -13,8 +13,8 @@
       </a>
     </div>
     <div class="op-container">
-      <ProLimitOrder v-show="tab === 'limit'"></ProLimitOrder>
-      <ProMarketOrder v-show="tab === 'market'"></ProMarketOrder>
+      <ProLimitOrder v-show="tab === 'limit'" :type="'limit'"></ProLimitOrder>
+      <ProLimitOrder v-show="tab === 'market'" :type="'market'"></ProLimitOrder>
     </div>
     <!-- <div class="mask" :class="{show: state.userStatus === 0}">
       <div class="mask-front">
