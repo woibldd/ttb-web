@@ -62,13 +62,13 @@ export default {
         return
       }
       await actions.updateFavorite()
-      this.collected = _.findIndex(state.favorite.list, item => item.pair_name === this.pair) > -1
+      this.collected = _.findIndex(state.favorite.list, item => item.symbol === this.pair) > -1
     },
     async update () {
       if (this.collected) {
-        service.collect({pair_name: this.pair})
+        service.collect({symbol: this.pair})
       } else {
-        service.uncollect({pair_name: this.pair})
+        service.uncollect({symbol: this.pair})
       }
     },
     onChange () {

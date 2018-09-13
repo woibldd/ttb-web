@@ -1,8 +1,8 @@
 <template>
-  <div 
-    ref="wrap" 
-    :class="['vue-slider-component', flowDirection, disabledClass, stateClass, { 'vue-slider-has-label': piecewiseLabel }]" 
-    v-show="show" 
+  <div
+    ref="wrap"
+    :class="['vue-slider-component', flowDirection, disabledClass, stateClass, { 'vue-slider-has-label': piecewiseLabel }]"
+    v-show="show"
     :style="[wrapStyles, boolDisabled ? disabledStyle : null]"
     @click="wrapClick"
   >
@@ -12,10 +12,10 @@
           ref="dot0"
           key="dot0"
           :class="[
-            tooltipStatus, 
-            'vue-slider-dot', 
-            { 
-              'vue-slider-dot-focus': focusFlag && focusSlider === 0, 
+            tooltipStatus,
+            'vue-slider-dot',
+            {
+              'vue-slider-dot-focus': focusFlag && focusSlider === 0,
               'vue-slider-dot-dragging': flag && currentSlider === 0,
               'vue-slider-dot-disabled': !boolDisabled && disabledArray[0]
             }
@@ -23,7 +23,7 @@
           :style="[
             dotStyles,
             (!boolDisabled && disabledArray[0]) ? disabledDotStyles[0] : null,
-            sliderStyles[0], focusFlag && focusSlider === 0 ? focusStyles[0] 
+            sliderStyles[0], focusFlag && focusSlider === 0 ? focusStyles[0]
           : null]"
           @mousedown="moveStart($event, 0)"
           @touchstart="moveStart($event, 0)"
@@ -38,10 +38,10 @@
           ref="dot1"
           key="dot1"
           :class="[
-            tooltipStatus, 
-            'vue-slider-dot', 
-            { 
-              'vue-slider-dot-focus': focusFlag && focusSlider === 1, 
+            tooltipStatus,
+            'vue-slider-dot',
+            {
+              'vue-slider-dot-focus': focusFlag && focusSlider === 1,
               'vue-slider-dot-dragging': flag && currentSlider === 1,
               'vue-slider-dot-disabled': !boolDisabled && disabledArray[1]
             }
@@ -49,7 +49,7 @@
           :style="[
             dotStyles,
             (!boolDisabled && disabledArray[1]) ? disabledDotStyles[1] : null,
-            sliderStyles[1], focusFlag && focusSlider === 1 ? focusStyles[1] 
+            sliderStyles[1], focusFlag && focusSlider === 1 ? focusStyles[1]
           : null]"
           @mousedown="moveStart($event, 1)"
           @touchstart="moveStart($event, 1)"
@@ -66,16 +66,16 @@
           ref="dot"
           key="dot"
           :class="[
-            tooltipStatus, 
-            'vue-slider-dot', 
-            { 
-              'vue-slider-dot-focus': focusFlag && focusSlider === 0, 
+            tooltipStatus,
+            'vue-slider-dot',
+            {
+              'vue-slider-dot-focus': focusFlag && focusSlider === 0,
               'vue-slider-dot-dragging': flag && currentSlider === 0
             }
           ]"
           :style="[
-            dotStyles, 
-            sliderStyles, 
+            dotStyles,
+            sliderStyles,
             focusFlag && focusSlider === 0 ? focusStyles : null
           ]"
           @mousedown="moveStart"
@@ -123,9 +123,9 @@
           </slot>
         </li>
       </ul>
-      <div 
+      <div
         ref="process"
-        :class="['vue-slider-process', { 'vue-slider-process-dragable': isRange && processDragable }]" 
+        :class="['vue-slider-process', { 'vue-slider-process-dragable': isRange && processDragable }]"
         :style="processStyle"
         @click="processClick"
         @mousedown="moveStart($event, 0, true)"

@@ -12,7 +12,7 @@
             <th class="right">{{ $t('deal_th_amount') }}</th>
             <th>{{ $t('deal_th_time') }}</th>
           </tr>
-          <tr v-for="(deal, index) in dealList" :key="index" :class="[deal.side]" :style="getStyle(deal)">
+          <tr v-for="(deal, index) in dealList" :key="index" :class="[deal.side]" :style="getStyle(deal, index)">
             <td class="td-dir">
               <span class="side-icon ibt" :class="['side-' + deal.side, sideColor(deal.side)]" v-if="state.locale !== 'zh-CN'">
                 <icon name="back"></icon>
@@ -86,19 +86,24 @@ export default {
         this.update(data)
       })
     },
-    getStyle (deal) {
+    getStyle (deal, index) {
+      if (index % 2 === 0) {
+        return {
+          backgroundColor: '#293443'
+        }
+      }
       // const { styleVar: { $buyRGB, $sellRGB } } = process.env.THEME_ENV
 
       // 其实不需要传入 this.local.upDown，只是为了形成依赖，这样 local.upDown 变化时会触发函数执行
-      const {up, down} = theme.getStyle(this.local.upDown)
+      // const {up, down} = theme.getStyle(this.local.upDown)
 
       // const bgRgb = deal.side === 'buy' ? $buyRGB.match(/[\d|,]{5,}/)[0] : $sellRGB.match(/[\d|,]{5,}/)[0]
-      const bg = deal.side === 'buy' ? up : down
-      const alpha = Math.pow(2, Math.log10(this.dealList.length * deal.amount / this.volume)) * 0.18 + 0.05
-      return {
-        backgroundColor: theme.getRgba(bg, alpha),
-        borderBottom: `1px inset ${theme.getRgba(bg, 0.03)}`
-      }
+      // const bg = deal.side === 'buy' ? up : down
+      // const alpha = Math.pow(2, Math.log10(this.dealList.length * deal.amount / this.volume)) * 0.18 + 0.05
+      // return {
+        // backgroundColor: theme.getRgba(bg, alpha),
+        // borderBottom: `1px inset ${theme.getRgba(bg, 0.03)}`
+      // }
     },
     update (data) {
       const dealList = _.map(data, item => {

@@ -27,10 +27,46 @@
             </div>
           </div>
         </div>
-        <div class="title-box">{{$t('invite_history_text')}}</div>
-        <div class="invite-list ">
-          <div class="empty">
-            <span class="text">{{$t("invite_reward_text")}}</span>
+        <div class="invite-container">
+          <!-- 邀请记录 -->
+          <div class="invite-wrap left">
+            <div class="title-box">{{$t('invite_history_text')}}</div>
+            <div class="invite-list ">
+              <div class="th pd-15">
+                <div class="td">{{$t('invited')}}</div>
+                <div class="td">{{$t('time')}}</div>
+              </div>
+              <div class="tbody">
+                <div class="empty" v-if="list.length === 0">
+                  <span class="text" @click="goInvite" v-html="$t('invite_reward_text')"></span>
+                </div>
+                <div v-else class="row pt-20 pl-20 pr-20" v-for="item in list" :key="item.id">
+                  <div class="td">{{item.phone || item.email}}</div>
+                  <div class="td">{{item.register_time | ts2date}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 返佣记录 -->
+          <div class="invite-wrap right">
+            <div class="title-box">{{$t('commission_history_text')}}</div>
+            <div class="invite-list ">
+              <div class="th pd-15">
+                <div class="td">{{$t('username')}}</div>
+                <div class="td">{{$t('commission_amount')}}</div>
+                <div class="td">{{$t('time')}}</div>
+              </div>
+              <div class="tbody">
+                <div class="empty" v-if="clist.length === 0">
+                  <span class="text" v-html="$t('invite_commission_text')"></span>
+                </div>
+                <div v-else class="row pt-20 pl-20 pr-20" v-for="item in clist" :key="item.id">
+                  <div class="td">{{item.phone || item.email}}</div>
+                  <div class="td">{{item.register_time | ts2date}}</div>
+                  <div class="td">{{item.register_time | ts2date}}</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -55,7 +91,9 @@
       return {
         state,
         show: false,
-        qrReady: false
+        qrReady: false,
+        list: [],
+        clist: []
       }
     },
     computed: {
@@ -70,6 +108,7 @@
     },
     async created () {
       this.setQr(this.inviteLink)
+      this.getInviteList()
     },
     methods: {
       showQrcode () {
@@ -78,6 +117,18 @@
       copy (key) {
         copyToClipboard(this[key])
         utils.success(this.$i18n.t('copyed'))
+      },
+      goInvite () {
+        copyToClipboard(this.inviteLink)
+        utils.success(this.$i18n.t('link_copyed'))
+      },
+      async getInviteList () {
+         let result = await service.getMyInviteList();
+         if (result && !result.code) {
+           this.list = result.data
+         } else {
+           utils.alert(result.message)
+         }
       },
       async setQr (url) {
         const QRCode = await qrcode()
@@ -110,9 +161,25 @@
     padding-left: 60px;
     float: left;
     .profile-container {
-      width: 960px;
+      max-width: 920px;
       position: relative;
 
+      .invite-container {
+        display: flex;
+        flex-direction: row;
+        @include clearfix();
+
+        .invite-wrap {
+          flex: 1;
+
+          &.left {
+            
+          }
+          &.right {
+            margin-left: 40px;
+          }
+        }
+      }
       .title-box {
         width: 100%;
         height: 40px;
@@ -123,8 +190,7 @@
       }
       .invite-wrap {
         margin-top: 24px;
-        @include clearfix();
-        height: 150px;
+        min-height: 150px;
         .share_style .post_btn {
           padding: 0;
           width: 160px;
@@ -226,8 +292,24 @@
         }
       }
       .invite-list {
+        .th, .row{
+          display: flex;
+          justify-content: space-between;
+          font-size: 14px;
+          color: $text-light;
+        }
+        .row {
+          color: $text-weak;
+        }
+        .tbody {
+          background: #FAF8EF;
+          border: 1px solid $text-normal;
+          border-radius:4px;
+          min-height: 140px;
+          box-sizing: border-box;
+        }
         .empty {
-          margin: 50px auto;
+          margin: 60px auto;
           text-align: center;
 
           .text {

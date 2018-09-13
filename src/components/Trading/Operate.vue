@@ -13,8 +13,8 @@
       </a>
     </div>
     <div class="op-container">
-      <ProLimitOrder v-show="tab === 'limit'" :type="'limit'"></ProLimitOrder>
-      <!-- <ProLimitOrder v-show="tab === 'market'" :type="'market'"></ProLimitOrder> -->
+      <ProLimitOrder v-show="tab === 'limit'"></ProLimitOrder>
+      <ProMarketOrder v-show="tab === 'market'"></ProMarketOrder>
     </div>
     <div class="mask" :class="{show: state.userStatus === 0}">
       <div class="mask-front">
@@ -52,6 +52,7 @@ export default {
   methods: {
     setTab (tab) {
       this.tab = tab
+      this.$eh.$emit('order:tab_switch', tab)
     },
     layoutInit () {
       this.onresize()

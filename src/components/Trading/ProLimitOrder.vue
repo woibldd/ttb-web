@@ -1,10 +1,10 @@
 <template>
   <div class="ix-trade-op pt-14 limit-order">
     <ul class="ul buy-ul" v-if="pairInfo">
-      <li class="li-price mb-10" v-if="type === 'limit'">
+      <li class="li-price mb-14">
         <div class="label">{{ $t('price') }}</div>
         <div class="content">
-          <currency-input class="pro"
+          <currency-input class="trade"
             v-model="buy_price"
             :class="[input.buy_price.status]"
             :bid="state.pro.bid"
@@ -14,10 +14,10 @@
           </currency-input>
         </div>
       </li>
-      <li class="li-amount mb-10">
+      <li class="li-amount mb-14">
         <div class="label">{{ $t('amount') }}</div>
         <div class="content">
-          <currency-input class="pro"
+          <currency-input class="trade"
             v-model="buy_amount"
             :class="[input.buy_amount.status]"
             :currency="pairInfo.product_name"
@@ -25,10 +25,10 @@
           </currency-input>
         </div>
       </li>
-      <li class="li-worth mb-10">
+      <li class="li-worth mb-14">
         <div class="label">{{ $t('order_value') }}</div>
         <div class="content">
-          <currency-input class="pro"
+          <currency-input class="trade"
             @blur="worthBlur('buy')"
             @focus="worthFocus('buy')"
             v-model="buy_worth"
@@ -38,7 +38,7 @@
           </currency-input>
         </div>
       </li>
-      <li class="li-volume mb-10">
+      <li class="li-volume mb-14">
         <div class="half-wrap left">
           <div class="currency-volume">
             <div class="avbl">
@@ -71,7 +71,7 @@
           <v-btn :label="$t('operate_buy', {coin: pairInfo.product_name})"
             class="submit-btn"
             radius="0"
-            color="probuy"
+            color="ixbuy"
             width="100%"
             height="44"
             :loading="submitting === 'BUY'"
@@ -81,10 +81,10 @@
     </ul>
     <!-- 埋单 -->
     <ul class="ul sell-ul" v-if="pairInfo">
-      <li class="li-price mb-10">
+      <li class="li-price mb-14">
         <div class="label">{{ $t('price') }}</div>
         <div class="content">
-          <currency-input class="pro"
+          <currency-input class="trade"
             v-model="sell_price"
             :class="[input.buy_price.status]"
             :bid="state.pro.bid"
@@ -94,10 +94,10 @@
           </currency-input>
         </div>
       </li>
-      <li class="li-amount mb-10">
+      <li class="li-amount mb-14">
         <div class="label">{{ $t('amount') }}</div>
         <div class="content">
-          <currency-input class="pro"
+          <currency-input class="trade"
             v-model="sell_amount"
             :class="[input.sell_amount.status]"
             :currency="pairInfo.product_name"
@@ -105,10 +105,10 @@
           </currency-input>
         </div>
       </li>
-      <li class="li-worth mb-10">
+      <li class="li-worth mb-14">
         <div class="label">{{ $t('order_value') }}</div>
         <div class="content">
-          <currency-input class="pro"
+          <currency-input class="trade"
             @blur="worthBlur('sell')"
             @focus="worthFocus('sell')"
             v-model="sell_worth"
@@ -118,7 +118,7 @@
           </currency-input>
         </div>
       </li>
-      <li class="li-volume mb-10">
+      <li class="li-volume mb-14">
         <div class="half-wrap right">
           <div class="product-volume">
             <div class="avbl">
@@ -139,12 +139,6 @@
                 </template>
               </ix-slider>
             </div>
-            <!-- <div class="volume-sets">
-              <a class="volume-set" @click.prevent="setSellVolumn(.25)"><span>25%</span></a>
-              <a class="volume-set" @click.prevent="setSellVolumn(.5)"><span>50%</span></a>
-              <a class="volume-set" @click.prevent="setSellVolumn(.75)"><span>75%</span></a>
-              <a class="volume-set" @click.prevent="setSellVolumn(1)"><span>100%</span></a>
-            </div> -->
           </div>
         </div>
       </li>
@@ -153,7 +147,7 @@
           <v-btn :label="$t('operate_sell', {coin: pairInfo.product_name})"
             class="submit-btn"
             radius="0"
-            color="prosell"
+            color="ixsell"
             height="44"
             :loading="submitting === 'SELL'"
             @click="submit('SELL')"></v-btn>
@@ -498,7 +492,7 @@ export default {
         side: side,
         price: $price.toString(),
         amount: $amount.toString(),
-        pair_name: this.state.pro.pair
+        symbol: this.state.pro.pair
       }
       const res = await service.createOrder(order)
       this.submitting = false
@@ -548,12 +542,6 @@ export default {
   float: left;
   width: 100%;
   box-sizing: border-box;
-  // &.left {
-  //   padding-right: 6px;
-  // }
-  // &.right {
-  //   padding-left: 6px;
-  // }
 }
 .submit-btn {
   box-sizing: border-box;
@@ -582,7 +570,7 @@ export default {
 .li-worth {
   margin-bottom: 9px;
   .label {
-    line-height: 28px;
+    line-height: 32px;
     color: #A5B4C5;
     width: 12%;
   }
@@ -625,13 +613,6 @@ export default {
     height: 17px;
   }
 }
-.ix-slider {
-  padding: 7px 0px;
-  margin-right: 20px;
-  position: relative;
-  box-sizing: border-box;
-  @include clearfix();
-}
 .checkbox {
   color: white;
   &.left {
@@ -673,6 +654,13 @@ export default {
   i {
     margin-top: 4px;
   }
+}
+.ix-slider {
+  padding: 7px 0px;
+  margin-right: 20px;
+  position: relative;
+  box-sizing: border-box;
+  @include clearfix();
 }
 .custom-label {
   position: absolute;

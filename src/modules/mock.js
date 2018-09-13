@@ -6,7 +6,11 @@ const coins = ['USDT', 'BTC', 'ETH', 'EOS', 'IOST', 'ADA', 'DTA']
 const rand = n => Math.floor(Math.random() * (n + 1))
 
 const balanceItem = (currency) => {
-  return { "currency_name": "USDT", "unavailable": "0", "ordering": "0", "locking": "0", "available": "439.3373024886", "withdrawable_amount": "439.3373024886", "withdrawing": "0", "scale": 6, "priced": true, "quota_btc": "100", "full_name": "Tether(OMNI)", "confirming": "0", "quota": "643017.999321", "equality": "0.068324" }
+  let test = { "currency_name": "USDT", "unavailable": "0", "ordering": "0", "locking": "0", "available": "439.3373024886", "withdrawable_amount": "439.3373024886", "withdrawing": "0", "scale": 6, "priced": true, "quota_btc": "100", "full_name": "Tether(OMNI)", "confirming": "0", "quota": "643017.999321", "equality": "0.068324" }
+  // if (currency === 'BTC') {
+    // test.available = 0
+  // }
+  return test
 }
 
 export const filter = {
@@ -21,12 +25,12 @@ export const filter = {
 export const list = [{
   url: /^order\/active/,
   res ({ currency } = {}) {
-    return ok({ "items": [{ "id": "241867103081484288", "pair_name": "EOSC_USDT", "side": "SELL", "price": "0.5", "amount": "52.26", "unclosed": "52.26", "create_time": 1535624011000, "deal_amount": "0", "total": "0", "type": "LIMIT" }, { "id": "241866968909897728", "pair_name": "EOSC_USDT", "side": "SELL", "price": "0.1", "amount": "34.83", "unclosed": "34.83", "create_time": 1535623979000, "deal_amount": "0", "total": "0", "type": "LIMIT" }, { "id": "241866608841482240", "pair_name": "EOSC_USDT", "side": "SELL", "price": "0.08", "amount": "46.45", "unclosed": "46.45", "create_time": 1535623893000, "deal_amount": "0", "total": "0", "type": "LIMIT" }, { "id": "231368936590299136", "pair_name": "TB_USDT", "side": "SELL", "price": "0.1", "amount": "2000", "unclosed": "2000", "create_time": 1533121053000, "deal_amount": "0", "total": "0", "type": "LIMIT" }] })
+    return ok({ "items": [{ "id": "241867103081484288", "symbol": "EOSC_USDT", "side": "SELL", "price": "0.5", "amount": "52.26", "unclosed": "52.26", "create_time": 1535624011000, "deal_amount": "0", "total": "0", "type": "LIMIT" }, { "id": "241866968909897728", "symbol": "EOSC_USDT", "side": "SELL", "price": "0.1", "amount": "34.83", "unclosed": "34.83", "create_time": 1535623979000, "deal_amount": "0", "total": "0", "type": "LIMIT" }, { "id": "241866608841482240", "symbol": "EOSC_USDT", "side": "SELL", "price": "0.08", "amount": "46.45", "unclosed": "46.45", "create_time": 1535623893000, "deal_amount": "0", "total": "0", "type": "LIMIT" }, { "id": "231368936590299136", "symbol": "TB_USDT", "side": "SELL", "price": "0.1", "amount": "2000", "unclosed": "2000", "create_time": 1533121053000, "deal_amount": "0", "total": "0", "type": "LIMIT" }] })
   }
 }, {
   url: /^favorite\/list/,
   res ({ currency } = {}) {
-    return ok({ "items": [{ "pair_name": "EOS_USDT" }, { "pair_name": "ETH_USDT" }] })
+    return ok({ "items": [{ "symbol": "EOS_USDT" }, { "symbol": "ETH_USDT" }] })
   }
 }, {
   url: /^balance\/list/,

@@ -102,6 +102,7 @@
   "deposit_title": "Deposit",
   "deposit_address": "Address",
   "copyed": "Copyed",
+  "link_copyed": "Share Link has Copyed",
   "deposit_loading": "Loading",
   "deposit_hint_title": "Important notice",
   "deposit_hint_addr": "This address is only used to receive %{name} (%{fullname}). Do not send other digital asset to this address. If you do it wont be recoverable.",

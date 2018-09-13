@@ -61,7 +61,7 @@ export default {
     const ticker = product + '_' + currency
     // @check end
 
-    const res = await service.getPairInfo({pair_name: ticker})
+    const res = await service.getPairInfo({symbol: ticker})
     const scale = res.code ? 1e8 : Math.pow(10, res.data.price_scale)
     if (res.code) {
       return reject()

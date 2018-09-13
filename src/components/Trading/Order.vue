@@ -16,7 +16,6 @@
         {{ $t('order_history') }}
       </a>
       <div class="header-icons">
-        
         <span class="hide-others btn on"
           @click="local.hideOthers = !local.hideOthers">
           <input type="checkbox" v-model="local.hideOthers">
@@ -32,41 +31,44 @@
         <table class="table table-ix-order table-active">
           <thead>
             <tr v-show="active.list.length">
-              <th class="side-icon"></th>
+              <th>{{ $t('order_th_placed') }}</th>
+              <!-- <th class="side-icon"></th> -->
               <th>{{ $t('pair') }}</th>
-              <th>{{ $t('order_th_type') }}</th>
+              <th>{{ $t('deal_th_side') }}</th>
+              <!-- <th>{{ $t('order_th_type') }}</th> -->
               <th class="right">{{ $t('price') }}</th>
               <th class="right">{{ $t('amount') }}</th>
               <th></th>
               <th>{{ $t('order_th_status') }}</th>
-              <th>{{ $t('order_th_placed') }}</th>
-              <th class="center" v-if="active.list.length">
+              <!-- <th class="center" v-if="active.list.length">
                 <a class="btn op-cancel" @click.prevent="cancelAll"></a>
-              </th>
-              <th class="center" v-else>{{ $t('operation') }}</th>
+              </th> -->
+              <th class="center">{{ $t('operation') }}</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="order in active.list" :key="order.id">
-              <td class="side-icon"><i :class="sideBg(order.side)"></i></td>
-              <td>{{ order.pair_name | pairfix }}</td>
-              <td>{{ getType(order.type) }}</td>
+              <td>{{ order.create_time | date }}</td>
+              <td>{{ order.symbol | pairfix }}</td>
+              <td style="color: #09C989" v-if="order.side === 'BUY'">{{$t('order_side_buy')}}</td>
+              <td style="color: #F24E4D" v-else>{{$t('order_side_sell')}}</td>
+              <!-- <td>{{ getType(order.type) }}</td> -->
               <td class="right">
-                <span v-if="order.price > 0">{{ fixPrice(order.price, order.pair_name) }}</span>
+                <span v-if="order.price > 0">{{ fixPrice(order.price, order.symbol) }}</span>
                 <span v-else>--</span>
               </td>
               <td class="right">
-                <span>{{ fixAmount(order.deal_amount, order.pair_name) }} /</span>
-                <span>{{ fixAmount(order.amount, order.pair_name) }}</span>
+                <span>{{ fixAmount(order.deal_amount, order.symbol) }} /</span>
+                <span>{{ fixAmount(order.amount, order.symbol) }}</span>
               </td>
-              <td class="ccy">{{ order.pair_name | p }}</td>
+              <td class="ccy">{{ order.symbol | p }}</td>
               <td>
                 {{ order.deal_amount > 0 ? $t('order_sts_partial') : $t('order_sts_active') }}
-                <order-deal v-if="order.deal_amount > 0" :key="active.fetchId" :id="order.id" :pairName="order.pair_name"/>
+                <order-deal v-if="order.deal_amount > 0" :key="active.fetchId" :id="order.id" :pairName="order.symbol"/>
               </td>
-              <td>{{ order.create_time | date }}</td>
               <td class="center">
-                <a class="btn op-cancel" @click.prevent="cancel(order)"></a>
+                <a @click.prevent="cancel(order)">{{$t('cancel_order')}}</a>
+                <!-- <a class="btn op-cancel" @click.prevent="cancel(order)"></a> -->
               </td>
             </tr>
           </tbody>
@@ -93,17 +95,17 @@
           <tbody>
             <tr v-for="order in filled.list" :key="order.id">
               <td class="side-icon"><i :class="sideBg(order.side)"></i></td>
-              <td>{{ order.pair_name | pairfix }}</td>
+              <td>{{ order.symbol | pairfix }}</td>
               <td>{{ getType(order.type) }}</td>
               <td class="right"><num :num="avg(order)"/></td>
               <td class="right">
-                <span v-if="$big(order.deal_amount).lt(order.amount)">{{ fixAmount(order.deal_amount, order.pair_name) }} /</span>
-                <span>{{ fixAmount(order.amount, order.pair_name) }}</span>
+                <span v-if="$big(order.deal_amount).lt(order.amount)">{{ fixAmount(order.deal_amount, order.symbol) }} /</span>
+                <span>{{ fixAmount(order.amount, order.symbol) }}</span>
               </td>
-              <td class="ccy">{{ order.pair_name | p }}</td>
+              <td class="ccy">{{ order.symbol | p }}</td>
               <td>
                 {{ orderSts(order.status) }}
-                <order-deal :id="order.id" :pairName="order.pair_name" :finished="true" />
+                <order-deal :id="order.id" :pairName="order.symbol" :finished="true" />
               </td>
               <td>{{ order.create_time | date }}</td>
             </tr>
@@ -131,20 +133,20 @@
           <tbody>
             <tr v-for="order in history.list" :key="order.id">
               <td class="side-icon"><i :class="sideBg(order.side)"></i></td>
-              <td>{{ order.pair_name | pairfix }}</td>
+              <td>{{ order.symbol | pairfix }}</td>
               <td>{{ getType(order.type) }}</td>
               <td class="right">
                 <span v-if="order.deal_amount > 0"><num :num="avg(order)"/></span>
                 <span v-else>--</span>
               </td>
               <td class="right">
-                <span v-if="$big(order.deal_amount).lt(order.amount)">{{ fixAmount(order.deal_amount, order.pair_name) }} /</span>
-                <span>{{ fixAmount(order.amount, order.pair_name) }}</span>
+                <span v-if="$big(order.deal_amount).lt(order.amount)">{{ fixAmount(order.deal_amount, order.symbol) }} /</span>
+                <span>{{ fixAmount(order.amount, order.symbol) }}</span>
               </td>
-              <td class="ccy">{{ order.pair_name | p }}</td>
+              <td class="ccy">{{ order.symbol | p }}</td>
               <td>
                 {{ orderSts(order.status) }}
-                <order-deal v-if="order.status <= 2" :id="order.id" :pairName="order.pair_name" :finished="true" />
+                <order-deal v-if="order.status <= 2" :id="order.id" :pairName="order.symbol" :finished="true" />
               </td>
               <td>{{ order.create_time | date }}</td>
             </tr>
@@ -283,7 +285,7 @@ export default {
       return utils.toFixed(amount, scale)
     },
     avg (order) {
-      return this.fixPrice(this.$big(order.total).div(order.deal_amount), order.pair_name)
+      return this.fixPrice(this.$big(order.total).div(order.deal_amount), order.symbol)
     },
     orderSts (statusId) {
       const context = {
@@ -319,14 +321,14 @@ export default {
       }
       this.progressing = true
       const res = await service.removeOrder({
-        pair_name: order.pair_name,
+        symbol: order.symbol,
         order_id: order.id
       })
       if (res.code) {
         utils.alert(res.message)
       } else {
         const find = _.findIndex(this.active.list, item => {
-          return item.id === order.id && item.pair_name === order.pair_name
+          return item.id === order.id && item.symbol === order.symbol
         })
         if (find > -1) {
           this.active.list.splice(find, 1)
@@ -334,9 +336,9 @@ export default {
       }
       this.update()
       this.progressing = false
-      if (order.pair_name.indexOf(this.state.pro.product_name) > -1 ||
-        order.pair_name.indexOf(this.state.pro.product_name) > -1) {
-        this.$eh.$emit('protrade:balance:refresh', order.pair_name)
+      if (order.symbol.indexOf(this.state.pro.product_name) > -1 ||
+        order.symbol.indexOf(this.state.pro.product_name) > -1) {
+        this.$eh.$emit('protrade:balance:refresh', order.symbol)
       }
     },
     async cancelAll () {
@@ -358,7 +360,7 @@ export default {
       if (this.local.hideOthers) {
         const params = _.map(this.active.list, order => {
           return {
-            pair_name: order.pair_name,
+            symbol: order.symbol,
             order_id: order.id
           }
         })
@@ -406,7 +408,7 @@ export default {
         start: ctx.nextId
       }
       if (this.local.hideOthers) {
-        params.pair_name = this.state.pro.pair
+        params.symbol = this.state.pro.pair
       }
       const res = await service[ctx.api](params)
       await service.getPairList() // 由于 avg() 使用了 pairList，需要等待该请求完成
@@ -419,7 +421,7 @@ export default {
         ctx.err = res.message
       } else {
         const items = this.local.hideOthers
-          ? res.data.items.filter(item => item.pair_name === this.state.pro.pair)
+          ? res.data.items.filter(item => item.symbol === this.state.pro.pair)
           : res.data.items
         if (nextId) {
           ctx.list = ctx.list.concat(items)

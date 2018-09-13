@@ -358,6 +358,9 @@ const utils = {
     return utils.dateFormatter(unix * 1000, tpl)
   },
   dateFormatter (ts, tpl = 'Y-M-D H:m:s') {
+    if (typeof ts === 'string') {
+      ts = parseInt(ts)
+    }
     const date = new Date(ts)
     const dateObj = {
       Y: date.getFullYear(),
