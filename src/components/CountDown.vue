@@ -68,5 +68,15 @@ export default {
   font-size: 44px;
   color: $primary;
 }
-.countdown{font-size:58px;}
+.countdown{
+  font-size: 58px;
+}
+
+@media screen and (max-width: 768px) {
+  .countdown {
+    font-size: 40px;
+  }
+
+}
+
 </style>

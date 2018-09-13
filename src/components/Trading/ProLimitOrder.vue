@@ -1,12 +1,12 @@
 <template>
   <div class="ix-trade-op pt-14 limit-order">
     <ul class="ul buy-ul" v-if="pairInfo">
-      <li class="li-price mb-10">
-        <div class="label mr-20">{{ $t('price') }}</div>
+      <li class="li-price mb-14">
+        <div class="label">{{ $t('price') }}</div>
         <div class="content">
-          <currency-input class="pro"
-            v-model="price"
-            :class="[input.price.status]"
+          <currency-input class="trade"
+            v-model="buy_price"
+            :class="[input.buy_price.status]"
             :bid="state.pro.bid"
             :ask="state.pro.ask"
             :currency="pairInfo.currency_name"
@@ -14,48 +14,31 @@
           </currency-input>
         </div>
       </li>
-      <li class="li-amount mb-10">
-        <div class="label mr-20">{{ $t('amount') }}</div>
+      <li class="li-amount mb-14">
+        <div class="label">{{ $t('amount') }}</div>
         <div class="content">
-          <currency-input class="pro"
-            v-model="amount"
-            :class="[input.amount.status]"
+          <currency-input class="trade"
+            v-model="buy_amount"
+            :class="[input.buy_amount.status]"
             :currency="pairInfo.product_name"
             :scale="pairInfo.amount_scale">
           </currency-input>
-          <!-- <div class="btn point-btn buy-all"
-            v-tooltip.left="buyTip"
-            @click="setBuyVolumn(1)">
-            <i class="ibt theme-bgcolor-up"></i>
-          </div>
-          <div class="btn point-btn sell-all"
-            v-tooltip.left="sellTip"
-            @click="setSellVolumn(1)">
-            <i class="ibt theme-bgcolor-down"></i>
-          </div> -->
         </div>
       </li>
-      <li class="li-worth mb-10">
-        <div class="label mr-20">{{ $t('order_value') }}</div>
+      <li class="li-worth mb-14">
+        <div class="label">{{ $t('order_value') }}</div>
         <div class="content">
-          <currency-input class="pro"
-            @blur="worthBlur"
-            @focus="worthFocus"
-            v-model="worth"
+          <currency-input class="trade"
+            @blur="worthBlur('buy')"
+            @focus="worthFocus('buy')"
+            v-model="buy_worth"
             :currency="pairInfo.currency_name"
             :step-scale="pairInfo.currency_scale"
             :scale="pairInfo.amount_scale + pairInfo.price_scale">
           </currency-input>
         </div>
       </li>
-      <!--
-      <li class="li-worth mb-10">
-        <div class="label">{{ $t('order_value') }}</div>
-        <div class="content">{{ worth }} {{ pairInfo.currency_name }}</div>
-      </li>
-      -->
-      
-      <li class="li-volume mb-10">
+      <li class="li-volume mb-14">
         <div class="half-wrap left">
           <div class="currency-volume">
             <div class="avbl">
@@ -63,36 +46,32 @@
               <div class="avbl-value" v-if="currency">{{ currency.available | fixed(pairInfo.currency_scale) }}</div>
               <div class="avbl-value" v-else>----</div>
             </div>
-            <div class="volume-sets">
-              <a class="volume-set" @click.prevent="setBuyVolumn(.25)"><span>25%</span></a>
+            <div class="ix-slider">
+              <ix-slider :disabled="!currencyAvailable" @input="onSliderDragEnd($event, 'buy')" height="4" :dot-size="14" :lazy="true" :min="0" :max="100" :piecewiseLabel="true" :interval="1" :piecewise="false">
+                <template slot="label" slot-scope="{ label, active }">
+                  <span :class="['custom-label', { active }]" v-if="label % 25 === 0">
+                  </span>
+                </template>
+                <template slot="tooltip" slot-scope="tooltip">
+                  <div class="custom-tooltip">
+                    {{ tooltip.value }}%
+                  </div>
+                </template>
+              </ix-slider>
+              <!-- <a class="volume-set" @click.prevent="setBuyVolumn(.25)"><span>25%</span></a>
               <a class="volume-set" @click.prevent="setBuyVolumn(.5)"><span>50%</span></a>
               <a class="volume-set" @click.prevent="setBuyVolumn(.75)"><span>75%</span></a>
-              <a class="volume-set" @click.prevent="setBuyVolumn(1)"><span>100%</span></a>
+              <a class="volume-set" @click.prevent="setBuyVolumn(1)"><span>100%</span></a> -->
             </div>
           </div>
         </div>
-        <!-- <div class="half-wrap right">
-          <div class="product-volume">
-            <div class="avbl">
-              <div class="avbl-label">{{ $t('avlb') }} {{ pairInfo.product_name }}</div>
-              <div class="avbl-value" v-if="product">{{ product.available | fixed(pairInfo.product_scale) }}</div>
-              <div class="avbl-value" v-else>----</div>
-            </div>
-            <div class="volume-sets">
-              <a class="volume-set" @click.prevent="setSellVolumn(.25)"><span>25%</span></a>
-              <a class="volume-set" @click.prevent="setSellVolumn(.5)"><span>50%</span></a>
-              <a class="volume-set" @click.prevent="setSellVolumn(.75)"><span>75%</span></a>
-              <a class="volume-set" @click.prevent="setSellVolumn(1)"><span>100%</span></a>
-            </div>
-          </div>
-        </div> -->
       </li>
       <li class="li-submit">
         <div class="half-wrap left">
           <v-btn :label="$t('operate_buy', {coin: pairInfo.product_name})"
             class="submit-btn"
             radius="0"
-            color="probuy"
+            color="ixbuy"
             width="100%"
             height="44"
             :loading="submitting === 'BUY'"
@@ -102,12 +81,12 @@
     </ul>
     <!-- 埋单 -->
     <ul class="ul sell-ul" v-if="pairInfo">
-      <li class="li-price mb-10">
-        <div class="label mr-20">{{ $t('price') }}</div>
+      <li class="li-price mb-14">
+        <div class="label">{{ $t('price') }}</div>
         <div class="content">
-          <currency-input class="pro"
-            v-model="price"
-            :class="[input.price.status]"
+          <currency-input class="trade"
+            v-model="sell_price"
+            :class="[input.buy_price.status]"
             :bid="state.pro.bid"
             :ask="state.pro.ask"
             :currency="pairInfo.currency_name"
@@ -115,47 +94,31 @@
           </currency-input>
         </div>
       </li>
-      <li class="li-amount mb-10">
-        <div class="label mr-20">{{ $t('amount') }}</div>
+      <li class="li-amount mb-14">
+        <div class="label">{{ $t('amount') }}</div>
         <div class="content">
-          <currency-input class="pro"
-            v-model="amount"
-            :class="[input.amount.status]"
+          <currency-input class="trade"
+            v-model="sell_amount"
+            :class="[input.sell_amount.status]"
             :currency="pairInfo.product_name"
             :scale="pairInfo.amount_scale">
           </currency-input>
-          <!-- <div class="btn point-btn buy-all"
-            v-tooltip.left="buyTip"
-            @click="setBuyVolumn(1)">
-            <i class="ibt theme-bgcolor-up"></i>
-          </div>
-          <div class="btn point-btn sell-all"
-            v-tooltip.left="sellTip"
-            @click="setSellVolumn(1)">
-            <i class="ibt theme-bgcolor-down"></i>
-          </div> -->
         </div>
       </li>
-      <li class="li-worth mb-10">
-        <div class="label mr-20">{{ $t('order_value') }}</div>
+      <li class="li-worth mb-14">
+        <div class="label">{{ $t('order_value') }}</div>
         <div class="content">
-          <currency-input class="pro"
-            @blur="worthBlur"
-            @focus="worthFocus"
-            v-model="worth"
+          <currency-input class="trade"
+            @blur="worthBlur('sell')"
+            @focus="worthFocus('sell')"
+            v-model="sell_worth"
             :currency="pairInfo.currency_name"
             :step-scale="pairInfo.currency_scale"
             :scale="pairInfo.amount_scale + pairInfo.price_scale">
           </currency-input>
         </div>
       </li>
-      <!-- <li class="li-setting mb-10">
-        <label class="checkbox left" v-tooltip="postOnlyTip">
-          <input type="checkbox" v-model="postOnly">
-          {{ $t('post_only') }}
-        </label>
-      </li> -->
-      <li class="li-volume mb-10">
+      <li class="li-volume mb-14">
         <div class="half-wrap right">
           <div class="product-volume">
             <div class="avbl">
@@ -163,11 +126,18 @@
               <div class="avbl-value" v-if="product">{{ product.available | fixed(pairInfo.product_scale) }}</div>
               <div class="avbl-value" v-else>----</div>
             </div>
-            <div class="volume-sets">
-              <a class="volume-set" @click.prevent="setSellVolumn(.25)"><span>25%</span></a>
-              <a class="volume-set" @click.prevent="setSellVolumn(.5)"><span>50%</span></a>
-              <a class="volume-set" @click.prevent="setSellVolumn(.75)"><span>75%</span></a>
-              <a class="volume-set" @click.prevent="setSellVolumn(1)"><span>100%</span></a>
+            <div class="ix-slider">
+              <ix-slider :disabled="!currencyAvailable" @input="onSliderDragEnd($event, 'sell')" height="4" :dot-size="14" :lazy="true" :min="0" :max="100" :piecewiseLabel="true" :interval="1" :piecewise="false">
+                <template slot="label" slot-scope="{ label, active }">
+                  <span :class="['custom-label', { active }]" v-if="label % 25 === 0">
+                  </span>
+                </template>
+                <template slot="tooltip" slot-scope="tooltip">
+                  <div class="custom-tooltip">
+                    {{ tooltip.value }}%
+                  </div>
+                </template>
+              </ix-slider>
             </div>
           </div>
         </div>
@@ -177,7 +147,7 @@
           <v-btn :label="$t('operate_sell', {coin: pairInfo.product_name})"
             class="submit-btn"
             radius="0"
-            color="prosell"
+            color="ixsell"
             height="44"
             :loading="submitting === 'SELL'"
             @click="submit('SELL')"></v-btn>
@@ -191,22 +161,40 @@
 import {state} from '@/modules/store'
 import service from '@/modules/service'
 import utils from '@/modules/utils'
+import ixSlider from '@/components/common/ix-slider/'
 
 export default {
   name: 'proLimitOrder',
+  props: {
+    type: {
+      type: String,
+      default: 'limit'
+    }
+  },
   data () {
     return {
       state,
-      amount: '',
-      price: '',
-      worth: '',
+      buy_amount: '',
+      buy_price: '',
+      buy_worth: '',
+      sell_amount: '',
+      sell_price: '',
+      sell_worth: '',
       worthLock: false,
       input: {
-        amount: {
+        buy_amount: {
           timer: null,
           status: ''
         },
-        price: {
+        buy_price: {
+          timer: null,
+          status: ''
+        },
+        sell_amount: {
+          timer: null,
+          status: ''
+        },
+        sell_price: {
           timer: null,
           status: ''
         }
@@ -278,7 +266,13 @@ export default {
     },
     pairInfo () {
       return this.state.pro.pairInfo
-    }
+    },
+    currencyAvailable () {
+      return this.currency && !!this.currency.available
+    },
+    productAvailable () {
+      return this.product && !!this.product.available
+    },
   },
   watch: {
     'state.pro.pair': {
@@ -289,75 +283,110 @@ export default {
       },
       immediate: true
     },
-    amount () {
-      this.calcWorth()
+    buy_amount (newval) {
+      console.log('value_' + newval)
+      this.calcWorth('buy')
     },
-    price () {
-      this.calcWorth()
+    buy_price () {
+      this.calcWorth('buy')
     },
-    worth () {
-      this.calcAmount()
+    buy_worth () {
+      this.calcAmount('buy')
+    },
+    sell_amount () {
+      this.calcWorth('sell')
+    },
+    sell_price () {
+      this.calcWorth('sell')
+    },
+    sell_worth () {
+      this.calcAmount('sell')
     }
   },
   methods: {
     clear () {
-      this.amount = ''
-      this.price = ''
-      this.worth = ''
+      this.buy_amount = ''
+      this.buy_price = ''
+      this.buy_worth = ''
+      this.sell_amount = ''
+      this.sell_price = ''
+      this.sell_worth = ''
     },
-    worthFocus () {
+    worthFocus (type) {
       this.worthLock = true
     },
-    worthBlur () {
+    worthBlur (type) {
       this.worthLock = false
-      this.calcAmount()
-      this.calcWorth()
+      this.calcAmount(type)
+      this.calcWorth(type)
     },
-    calcWorth () {
+    calcWorth (type) {
       if (this.worthLock) {
         return
       }
-      if (!this.amount || !this.price) {
-        this.worth = ''
-        return
+      if (type === 'buy') {
+        if (!this.buy_amount || !this.buy_price) {
+          this.buy_worth = ''
+          return
+        }
+        this.buy_worth = this.$big(this.buy_amount).mul(this.buy_price).toString()
+      } else if (type === 'sell') {
+        if (!this.sell_amount || !this.sell_price) {
+          this.sell_worth = ''
+          return
+        }
+        this.sell_worth = this.$big(this.sell_amount).mul(this.sell_price).toString()
       }
-      this.worth = this.$big(this.amount).mul(this.price).toString()
     },
-    calcAmount () {
-      if (!this.worth || !this.price || !this.pairInfo) {
-        this.amount = ''
-        return
+    calcAmount (type) {
+      if (type === 'buy') {
+        if (!this.buy_worth || !this.buy_price || !this.pairInfo) {
+          this.buy_amount = ''
+          return
+        }
+        if (this.$big(this.buy_price).lte(0)) {
+          return
+        }
+        this.buy_amount = this.$big(this.buy_worth).div(this.buy_price).round(this.pairInfo.amount_scale).toString()
+      } else {
+        if (!this.sell_worth || !this.sell_price || !this.pairInfo) {
+          this.sell_amount = ''
+          return
+        }
+        if (this.$big(this.sell_price).lte(0)) {
+          return
+        }
+        this.sell_amount = this.$big(this.sell_worth).div(this.sell_price).round(this.pairInfo.amount_scale).toString()
       }
-      if (this.$big(this.price).lte(0)) {
-        return
-      }
-      this.amount = this.$big(this.worth).div(this.price).round(this.pairInfo.amount_scale).toString()
     },
-    set ({price, amount, dontOveride}) {
+    set ({price, amount, dontOveride, side}) {
+      if (!side) {
+        side = 'BUY'
+      }
       if (price) {
-        if (!dontOveride || (dontOveride && !this.price)) {
-          this.price = this.$big(price).toString()
+        if (!dontOveride || (dontOveride && !this.getValues('price', side))) {
+          this.setValues('price', side, this.$big(price).toString())
         }
       }
       if (amount) {
-        if (!dontOveride || (dontOveride && !this.amount)) {
-          this.amount = this.$big(amount).toString()
+        if (!dontOveride || (dontOveride && !this.getValues('amount', side))) {
+          this.setValues('amount', side, this.$big(amount).toString())
         }
       }
     },
     setBuyVolumn (ratio) {
-      if (this.price && this.price !== '0') {
-        this.amount = this.$big(this.currency.available)
+      if (this.buy_price && this.buy_price !== '0') {
+        this.buy_amount = this.$big(this.currency.available)
           .mul(ratio)
-          .div(this.price)
+          .div(this.buy_price)
           .round(this.pairInfo.amount_scale)
           .toString()
       } else {
-        this.setInputStatus('price', 'error')
+        this.setInputStatus('buy_price', 'error')
       }
     },
     setSellVolumn (ratio) {
-      this.amount = this.$big(this.product.available)
+      this.sell_amount = this.$big(this.product.available)
         .mul(ratio)
         .round(this.pairInfo.amount_scale)
         .toString()
@@ -373,6 +402,15 @@ export default {
       this.$eh.$emit('protrade:order:refresh')
       this.$eh.$emit('protrade:balance:refresh')
     },
+    getFiled (field, type) {
+      return type.toLowerCase() + '_' + field
+    },
+    getValues (field, type) {
+      return this[this.getFiled(field, type)]
+    },
+    setValues (field, type, value) {
+      this[type.toLowerCase() + '_' + field] = value
+    },
     async submit (side) {
       if (!this.currency || !this.currency.available) {
         return false
@@ -383,16 +421,16 @@ export default {
       if (this.submitting) {
         return false
       }
-      const $price = this.$big(this.price || 0)
-      const $amount = this.$big(this.amount || 0)
+      const $price = this.$big(this.getValues('price', side) || 0)
+      const $amount = this.$big(this.getValues('amount', side) || 0)
       const $bid = this.$big(this.state.pro.bid || 0)
       const $ask = this.$big(this.state.pro.ask || 0)
       const $value = $price.mul($amount)
       if (!$price.gt(0)) {
-        return this.setInputStatus('price', 'error')
+        return this.setInputStatus(this.getFiled('price', side), 'error')
       }
       if (!$amount.gt(0)) {
-        return this.setInputStatus('amount', 'error')
+        return this.setInputStatus(this.getFiled('amount', side), 'error')
       }
       if (side === 'BUY' && $value.gt(this.currency.available)) {
         return utils.alert(this.$i18n.t('amount_over'))
@@ -454,8 +492,7 @@ export default {
         side: side,
         price: $price.toString(),
         amount: $amount.toString(),
-        pair_name: this.state.pro.pair,
-        post_only: +this.postOnly
+        symbol: this.state.pro.pair
       }
       const res = await service.createOrder(order)
       this.submitting = false
@@ -463,7 +500,7 @@ export default {
         return utils.alert(res.message)
       }
 
-      this.amount = ''
+      this.setValues('amount', side, '')
 
       if (res.code < 0) {
         utils.alert(res.message)
@@ -476,7 +513,19 @@ export default {
       if (!res.code) {
         this.checkOrder(res.data.order_id)
       }
+    },
+    onSliderDragEnd (value, dir) {
+      value = value / 100.0;
+      if (dir === 'buy') {
+        this.setBuyVolumn(value)
+      } else {
+        this.setSellVolumn(value)
+      }
+      console.log(value)
     }
+  },
+  components: {
+    ixSlider
   },
   created () {
     this.$eh.$on('protrade:exchange:set', this.set)
@@ -493,12 +542,6 @@ export default {
   float: left;
   width: 100%;
   box-sizing: border-box;
-  // &.left {
-  //   padding-right: 6px;
-  // }
-  // &.right {
-  //   padding-left: 6px;
-  // }
 }
 .submit-btn {
   box-sizing: border-box;
@@ -527,8 +570,9 @@ export default {
 .li-worth {
   margin-bottom: 9px;
   .label {
-    line-height: 28px;
+    line-height: 32px;
     color: #A5B4C5;
+    width: 12%;
   }
 }
 .li-volume {
@@ -567,39 +611,6 @@ export default {
   .avbl-label {
     line-height: 17px;
     height: 17px;
-  }
-}
-.volume-sets {
-  padding: 7px 0;
-  position: relative;
-  box-sizing: border-box;
-  @include clearfix();
-}
-.volume-set {
-  float: left;
-  width: 25%;
-  height: 18px;
-  line-height: 18px;
-  text-align: center;
-  box-sizing: border-box;
-  border-left: 1px solid rgba(255,255,255, .5);
-  border-top: 1px solid rgba(255,255,255, .5);
-  border-bottom: 1px solid rgba(255,255,255, .5);
-  @include a() {
-    color: rgba(255,255,255, .5);
-  }
-  &:hover {
-    color: rgba(255,255,255, .8);
-  }
-  &:last-child {
-    border-right: 1px solid rgba(255,255,255, .5);
-  }
-  span {
-    height: 16px;
-    line-height: 16px;
-    display: inline-block;
-    vertical-align: top;
-    transform: scale(.8);
   }
 }
 .checkbox {
@@ -643,5 +654,38 @@ export default {
   i {
     margin-top: 4px;
   }
+}
+.ix-slider {
+  padding: 7px 0px;
+  margin-right: 20px;
+  position: relative;
+  box-sizing: border-box;
+  @include clearfix();
+}
+.custom-label {
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  transform: translate(-50%, -12px);
+  margin-left: 3px;
+  width:10px;
+  height:10px;
+  background:#fff;
+  border-radius:50%;
+  cursor: pointer;
+}
+.custom-tooltip {
+  position: absolute;
+  bottom: -44px;
+  left: -7px;
+  color: #A5B4C5;
+}
+.custom-label.active {
+  background-color: #C9AA6D;
+  font-weight: bold;
+}
+.custom-label.active::after {
+  background-color: #C9AA6D;
+  width: 2px;
 }
 </style>

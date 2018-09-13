@@ -254,7 +254,7 @@ export default {
 ::placeholder {
   color: #999;
 }
-.pro.currency-input {
+.trade.currency-input {
   &.static {
     .input {
       color: $text-light;

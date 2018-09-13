@@ -105,7 +105,7 @@ export default {
       return utils.getSign(num)
     },
     isCollect (pair) {
-      return _.find(this.state.favorite.list, item => item.pair_name === pair.name)
+      return _.find(this.state.favorite.list, item => item.symbol === pair.name)
     },
     setSort (key) {
       if (this.sortBy === key) {

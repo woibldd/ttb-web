@@ -102,6 +102,7 @@
   "deposit_title": "Deposit",
   "deposit_address": "Address",
   "copyed": "Copyed",
+  "link_copyed": "Share Link has Copyed",
   "deposit_loading": "Loading",
   "deposit_hint_title": "Important notice",
   "deposit_hint_addr": "This address is only used to receive %{name} (%{fullname}). Do not send other digital asset to this address. If you do it wont be recoverable.",
@@ -267,7 +268,7 @@
   "recover_title": "Reset password",
   "back_to_login": "Return to Sign in",
   "signup_title": "Sign up",
-  "pwcheck_ph": "At least 8 characters",
+  "pwcheck_ph": "Password at least 8 characters",
   "pwcheck_ph2": "Confirm Password",
   "pwcheck_guide": "Your password must",
   "pwcheck_gt8": "Have at least 8 characters",
@@ -535,9 +536,11 @@
   "profile_left_copy_invite_link": "Copy",
   "invite_reward_text": "The Referral rewards program is coming soon",
   "profile_personal_center": "Personal Center",
+  "profile_left_invite_perinfo": "My Referral",
   "invite_history_text": "Referral Record",
-  "slogan": "FREE MAN FREE UNION",
+  "slogan": "FREE MAN FREE UNITING",
   "register_success": "Register successfully",
   "declaration": "Declaration",
-  "whitepagger": "WhitePagger"
+  "whitepagger": "WhitePaper",
+  "count_down_start": "The official version will be launched in"
 }

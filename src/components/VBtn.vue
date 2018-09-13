@@ -2,8 +2,8 @@
   <div class="v-btn btn"
     @click.prevent="onclick"
     :class="[disabled ? 'disabled' : '', loading ? 'loading' : '', color,
-       color === 'probuy' ? 'theme-bgcolor-up' : '',
-       color === 'prosell' ? 'theme-bgcolor-down' : '']"
+       color === 'ixbuy' ? 'theme-bgcolor-up' : '',
+       color === 'ixsell' ? 'theme-bgcolor-down' : '']"
     :style="{
       height: height + 'px',
       lineHeight: height - 2 * border + 'px',
@@ -79,8 +79,8 @@ export default {
   &:active {
     background-color: $primary-active;
   }
-  &.probuy,
-  &.prosell {
+  &.ixbuy,
+  &.ixsell {
     .spinner {
       @include spinner(9px, 2px, white);
     }

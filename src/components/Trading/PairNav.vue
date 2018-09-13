@@ -14,7 +14,7 @@
           v-model="search">
       </div>
     </div>
-    <div class="ix-header-sub">
+    <!-- <div class="ix-header-sub">
       <a class="ix-header-nav favor" :class="{cur: tab === '*'}" @click.prevent="setTab('*')">
         <i class="icon-collect"></i>
       </a>
@@ -26,12 +26,11 @@
         @click.prevent="setTab(currency)">
         {{ currency }}
       </a>
-    </div>
+    </div> -->
     <div class="ix-pannel-body">
       <div class="no-data" v-if="errmsg">{{ $t(errmsg) }}</div>
       <div class="err" v-if="!loading && err && !pairList.length">{{ err }}</div>
       <div class="ix-pair-head tr" v-show="sortedList.length">
-        <div class="th collect"></div>
         <div class="th pair" @click="setSort('pair')">
           <sort :label="$t('pairnav_pair')"
             :state="stateSortBy('pair')"></sort>
@@ -54,10 +53,6 @@
           :class="{cur: pair.name === state.pro.pair}"
           :key="pair.id"
           @click="setPair(pair)">
-          <collect-star class="td collect" :pair="pair.name" @click.native.stop :key="pair.name">
-            <i slot="collected" class="icon-collect collected"></i>
-            <i slot="uncollect" class="icon-collect"></i>
-          </collect-star>
           <div class="td pair">{{ pair.product_name }}/{{ pair.currency_name }}</div>
           <div class="td price">
             <span v-if="pair.tick">{{ pair.tick.current | fixed(pair.price_scale) }}</span>
@@ -115,7 +110,7 @@ export default {
     setPair (pair) {
       this.$router.replace({
         name: 'trading',
-        query: {
+        params: {
           pair: pair.name
         }
       })
@@ -228,6 +223,7 @@ export default {
   color: #788694;
   &.pair {
     padding: 4px 0;
+    margin-left: 14px;
   }
 }
 .collect {
@@ -238,6 +234,7 @@ export default {
 }
 .pair {
   padding: 0;
+  margin-left: 14px;
   width: 20%;
 }
 .price {

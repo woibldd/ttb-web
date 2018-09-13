@@ -88,7 +88,7 @@ export default {
           const [product, currency] = match.slice(1, 3)
           this.state.pro.product_name = product
           this.state.pro.currency_name = currency
-          const res = await service.getPairInfo({pair_name: pair})
+          const res = await service.getPairInfo({symbol: pair})
           if (!res.code) {
             this.state.pro.pairInfo = res.data
           } else {
@@ -251,7 +251,7 @@ export default {
 }
 .ix-grid-order {
   flex: 1;
-  // height: 1px;
+  height: 275px;
 }
 .ix-grid-deal {
   flex: 1;

@@ -226,14 +226,14 @@ export const actions = {
     state.favorite.ready = true
   },
   addLocalFavorite (pairName) {
-    if (!_.find(state.favorite.list, item => item.pair_name === pairName)) {
+    if (!_.find(state.favorite.list, item => item.symbol === pairName)) {
       state.favorite.list.push({
-        pair_name: pairName
+        symbol: pairName
       })
     }
   },
   removeLocalFavorite (pairName) {
-    const findIndex = _.findIndex(state.favorite.list, item => item.pair_name === pairName)
+    const findIndex = _.findIndex(state.favorite.list, item => item.symbol === pairName)
     if (findIndex > -1) {
       state.favorite.list.splice(findIndex, 1)
     }

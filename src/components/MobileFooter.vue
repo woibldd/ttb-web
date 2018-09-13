@@ -68,6 +68,7 @@ export default {
     width: 100%;
     height:110px;
     line-height: 110px;
+    display: flex;
     background-color: $home-header-bgdark;
   }
   .footer_logo{
@@ -80,10 +81,13 @@ export default {
           cursor: pointer;
       }
       margin: 0 auto;
-      max-width: 1200px;
-      min-width: $page-width;
+      // max-width: 1200px;
+      // min-width: $page-width;
+      padding: 0 10px;
       display: flex;
+      flex: 1;
       justify-content: space-between;
+      align-items: center;
 
       .contact-list {
           margin-top: 40px;

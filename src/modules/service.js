@@ -149,7 +149,7 @@ const service = {
     // const res = await request('pair/list')
     const res = await this.getPairList()
     if (!res.code) {
-      const find = _.find(res.data.items, item => item.name === data.pair_name)
+      const find = _.find(res.data.items, item => item.name === data.symbol)
       return {
         code: find ? 0 : 100001,
         data: find,
@@ -288,8 +288,8 @@ const service = {
   getMiningRefundData () {
     return request('statistics/refund')
   },
-  getMyInviteCode () {
-    return request('user/invite')
+  getMyInviteList () {
+    return request('/user/invitation/list')
   },
   getTerminalDate () {
     return reqeust('get_terminal_date')

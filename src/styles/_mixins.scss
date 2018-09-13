@@ -287,7 +287,10 @@
     } 
     .mb-#{$i} { 
         margin-bottom: $i * 1px !important; 
-    } 
+    }
+    .mg-#{$i} { 
+      margin: $i * 1px !important; 
+    }
 }
 
 @for $i from 1 through 30 { 
@@ -302,5 +305,8 @@
     } 
     .pb-#{$i} { 
         padding-bottom: $i * 1px !important; 
-    } 
+    }
+    .pd-#{$i} {
+      padding: $i * 1px !important
+    }
 }

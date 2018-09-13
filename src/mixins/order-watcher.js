@@ -39,7 +39,7 @@ export default {
     myHighestBid () {
       let bid = this.$big(0)
       this.active.list.forEach((order) => {
-        if (order.side !== 'BUY' || order.pair_name !== this.state.pro.pair) {
+        if (order.side !== 'BUY' || order.symbol !== this.state.pro.pair) {
           return
         }
         const price = this.$big(order.price || 0)
@@ -52,7 +52,7 @@ export default {
     myLowestAsk () {
       let ask = this.$big(0)
       this.active.list.forEach((order) => {
-        if (order.side !== 'SELL' || order.pair_name !== this.state.pro.pair) {
+        if (order.side !== 'SELL' || order.symbol !== this.state.pro.pair) {
           return
         }
         const price = this.$big(order.price || 0)
