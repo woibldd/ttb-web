@@ -42,7 +42,7 @@ const vm = {
     }
     vm.curIndex = curIndex
     const config = configs[vm.curIndex]
-    document.body.classList.add(config.id)
+    // document.body.classList.add(config.id)
 
     const styleList = []
     styleList.push(`.theme-color-up { color: ${config.up} !important; }`)

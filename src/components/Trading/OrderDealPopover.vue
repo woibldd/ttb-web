@@ -212,7 +212,7 @@ tbody tr {
     width: 6px;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: #475166;
+    background-color: #1A1A1A;
     border: 2px solid transparent;
   }
   &::-webkit-scrollbar-corner {

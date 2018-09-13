@@ -4,10 +4,10 @@
       @click="setPrice(item.price)">
       <num :num="fixPrice(item.price)"></num>
     </td>
-    <td class="right btn" @click="setAmount(item.total);setPrice(item.price)">
+    <td class="right btn" @click="setAmount(item.amount);">
       {{ fixAmount(item.amount) }}
     </td>
-    <td class="right btn" @click="setAmount(item.total);setPrice(item.price)">
+    <td class="right btn" @click="setAmount(item.total);">
       {{ fixAmount(item.total) }}
     </td>
   </tr>
@@ -37,10 +37,10 @@ export default {
       return big.toFixed(this.priceScale)
     },
     setPrice (price) {
-      this.$eh.$emit('protrade:exchange:set', {price})
+      this.$eh.$emit('protrade:exchange:set', {price, side: this.side})
     },
     setAmount (amount) {
-      this.$eh.$emit('protrade:exchange:set', {amount})
+      this.$eh.$emit('protrade:exchange:set', {amount, side: this.side})
     }
   }
 }

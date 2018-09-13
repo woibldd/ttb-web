@@ -305,7 +305,7 @@ export default {
         subtitle21: '19.	The agreement of entry into force and interpretation',
         p95: '19.1	This agreement shall become effective when you click the registration page of this website to sign up and complete the registration procedures, obtain the account number and password of this website, and shall be binding on this you and website.',
         p96: '19.2	The final interpretation right of this agreement belongs to this website.',
-        
+
       },
       'zh-CN': {
         title: '《用户使用条款》',
@@ -434,5 +434,5 @@ export default {
     @import "../styles/vars";
     @import "../styles/mixins";
     .page-home{background:#303E4B;}
-    
+
 </style>

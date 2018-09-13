@@ -14,9 +14,9 @@
     </div>
     <div class="op-container">
       <ProLimitOrder v-show="tab === 'limit'" :type="'limit'"></ProLimitOrder>
-      <ProLimitOrder v-show="tab === 'market'" :type="'market'"></ProLimitOrder>
+      <!-- <ProLimitOrder v-show="tab === 'market'" :type="'market'"></ProLimitOrder> -->
     </div>
-    <!-- <div class="mask" :class="{show: state.userStatus === 0}">
+    <div class="mask" :class="{show: state.userStatus === 0}">
       <div class="mask-front">
         <div class="hint">{{ $t('operate_noauth') }}</div>
         <div class="link-group">
@@ -24,7 +24,7 @@
           <router-link class="link btn ibt signup theme-bgcolor-down" :to="{name: 'register'}"><span>{{ $t('signup') }}</span></router-link>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -130,7 +130,7 @@ export default {
   transition: opacity 300ms, visibility 0s 300ms;
   box-sizing: border-box;
   text-align: center;
-  background-color: rgba(0,0,0, .8);
+  background-color: RGBA(35, 56, 75, 0.8);
   &.show {
     transition: none;
     visibility: visible;

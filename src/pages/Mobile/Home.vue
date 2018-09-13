@@ -7,8 +7,8 @@
         <div class="ix_logo"></div>
         <b class="ind_txt">{{$t("slogan")}}</b>
         <p class="count_down">
-            <count-down :terminal="date"></count-down>
-            <span class="desc">{{$t('count_down_start')}}</span>
+          <span class="desc">{{$t('count_down_start')}}</span>
+          <count-down :terminal="date"></count-down>
         </p>
         <div class="ind_but">
             <a :href="'/docs/The+Declaration+of+IX'+pdfSubfix+'.pdf'" target="_blank" class="xy">{{$t("declaration")}}</a>

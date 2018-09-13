@@ -195,6 +195,7 @@ export const list = [{
           product_scale: 2,
           currency_name: 'BTC',
           currency_scale: 6,
+          amount_scale: 4,
           price_scale: 6,
           min_amount: "1",
           max_amount: "10000000",
@@ -211,7 +212,8 @@ export const list = [{
           product_scale: 4,
           currency_scale: 6,
           currency_name: 'USDT',
-          price_scale: 6
+          price_scale: 6,
+          amount_scale: 4
         })))
       })
     }
