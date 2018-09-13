@@ -10,11 +10,11 @@
         <li class=""><router-link
           class="menu-name"
           active-class="active"
-          to="/fund/withdraw">{{ $t('提币') }}</router-link></li>
+          to="/fund/deposit">{{ $t('充币') }}</router-link></li>
         <li class=""><router-link
           class="menu-name"
           active-class="active"
-          to="/fund/deposit">{{ $t('充币') }}</router-link></li>
+          to="/fund/withdraw">{{ $t('提币') }}</router-link></li>
           <!-- <li class=""><router-link class="menu-name" active-class="active">{{ $t('地址管理') }}</router-link></li> -->
       </ul>
     </div>

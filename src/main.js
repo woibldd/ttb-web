@@ -15,12 +15,14 @@ import VTooltip from 'v-tooltip'
 import qs from 'querystring'
 
 import 'element-ui/lib/theme-chalk/index.css'
-import { Select } from 'element-ui'
+import { Select, Option } from 'element-ui'
 
 Vue.config.productionTip = false
 Vue.use(VueI18n)
 Vue.use(VTooltip)
+
 Vue.use(Select) // 引入element单个组件
+Vue.use(Option)
 
 const request = require.context('./assets/svg', true, /\.svg$/)
 /* console.log('request', request)

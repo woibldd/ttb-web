@@ -1,13 +1,99 @@
 <template>
-    <div class="deposit-container fund-container">
-        <div class="title-box">{{$t('充币')}}</div>
-        <div class="invite-wrap">
-        </div>
+  <div class="deposit-container fund-container">
+    <div class="title-box">
+      <div> {{ $t('提币') }}</div>
+      <div class="fund-history"> {{ $t('资金记录') }}</div>
     </div>
-</template>
+    <div class="fund-items-content">
+      <div class="fund-item-row">
+        <div class="row__label">{{ $t('币种') }}</div>
+        <div class="row__value">
+          <el-select
+            v-model="selectCoinType"
+            placeholder="请选择">
+            <el-option
+              v-for="item in allCoins"
+              :key="item"
+              :label="item"
+              :value="item"/>
+          </el-select>
+        </div>
+      </div>
+      <div class="fund-item-row">
+        <div class="row__label">{{ $t('充币地址') }}</div>
+        <div class="row__value">
+          <div class="deposit-address">
+            <span class="address-txt">{{ address }}</span>
+            <span
+              class="address-copy"
+              @click="copy">复制</span>
+          </div>
+        </div>
+      </div>
+      <div class="fund-item-other deposit-least">
+        {{ $t("最低充值数为0.001BTC") }}
+      </div>
+      <div class="fund-item-other deposit-qrcode">
+        <div
+          class="qrcode">
+          <canvas
+            class="qr-img"
+            ref="qr"/>
+        </div>
+      </div>
+      <ul
+        class="fund-item-other mt-10 text-des"
+        style="padding-left: 102px">
+        <li> {{ $t('禁止向LTC地址充值除LTC之外的资产，任何充入LTC地址的非LTC 资产将不可找回。') }}</li>
+        <li>  {{ $t('使用LTC地址充值需要1个网络确认才能到账') }}</li>
+        <li>  {{ $t('默认充值至我的钱包，若想进行币币交易，可在币币账户操作“资金划转”将资金转至币币账户。') }}</li>
+      </ul>
+
+    </div>
+</div></template>
 <script>
 import './deposit.scss'
+import copyToClipboard from 'copy-to-clipboard'
+import utils from '@/modules/utils'
+const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
+
 export default {
-  name: 'charge'
+  name: 'Deposit',
+  data () {
+    return {
+      address: '31kV4sEEnPMcyMrzWkggmewg3Bmm2Az6nX', // 先写死，之后要用真实值代替哦
+      allCoins: ['BTC', 'ETH', 'EOS'],
+      selectCoinType: 'BTC'
+    }
+  },
+  async created () {
+    this.setQr('我的收款地址二维码')// TODO 这个咋整
+  },
+  methods: {
+    copy () {
+      copyToClipboard(this.address)
+      utils.success(this.$i18n.t('copyed'))
+    },
+    async setQr (url) {
+      const QRCode = await qrcode()
+      QRCode.toCanvas(
+        this.$refs.qr,
+        url,
+        {
+          margin: 0,
+          width: 136,
+          height: 136,
+          errorCorrectionLevel: 'H'
+        },
+        (err) => {
+          if (err) {
+            // @improve
+            return utils.log('qrcode error')
+          }
+          this.qrReady = true
+        }
+      )
+    }
+  }
 }
 </script>

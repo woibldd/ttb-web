@@ -172,7 +172,7 @@ let router = new Router({
       path: '/fund',
       name: 'fund',
       component: Fund,
-      redirect: { name: 'withdraw' },
+      redirect: { name: 'deposit' },
       meta: {
         auth: false,
         footer: true,

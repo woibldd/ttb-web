@@ -42,6 +42,7 @@
 
             .row__label{
                 font-size: 14px;
+                font-weight: bold;
                 color:$text-strong;
                 width: 88px;
             }
@@ -50,6 +51,15 @@
         .fund-item-other {
             padding-left: 88px;
         }
+    }
+
+
+    .fund__spot {
+        display: inline-block;
+        width:4px;
+        height:4px;
+        background:rgba(124,124,124,1);
+        border-radius:50%;
     }
 }
   
