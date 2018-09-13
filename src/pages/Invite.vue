@@ -1,28 +1,43 @@
 <template>
   <div style="page-invite-wrap">
-    <profile-left></profile-left>
+    <profile-left/>
     <div class="user-center-right">
       <div class="profile-container">
-        <div class="title-box">{{$t('profile_left_invite')}}</div>
+        <div class="title-box">{{ $t('profile_left_invite') }}</div>
         <div class="invite-wrap">
           <div class="share_style login_show">
-            <div class="post_btn share_div"><p>{{$t('profile_left_invite_qrcode')}}</p>
-              <div class="btn_select" @click="showQrcode">{{$t('profile_left_invite_qrcode')}}</div>
-              <div class="qrcode" v-show="show">
-                <canvas class="qr-img" ref="qr"></canvas>
+            <div class="post_btn share_div"><p>{{ $t('profile_left_invite_qrcode') }}</p>
+              <div
+                class="btn_select"
+                @click="showQrcode">{{ $t('profile_left_invite_qrcode') }}</div>
+              <div
+                class="qrcode"
+                v-show="show">
+                <canvas
+                  class="qr-img"
+                  ref="qr"/>
               </div>
             </div>
-            <div class="user_url share_div"><p>{{$t("profile_left_invite_link")}}</p>
+            <div class="user_url share_div"><p>{{ $t("profile_left_invite_link") }}</p>
               <div class="share_code_wrap">
                 <p class="url">
-                  <input type="text" class="share_link" v-model="inviteLink">
+                  <input
+                    type="text"
+                    class="share_link"
+                    v-model="inviteLink">
                 </p>
-                <a @click.prevent="copy('inviteLink')" class="copy_url copy_btn copy_url_2" data-clipboard-target=".share_link">{{$t('profile_left_copy_invite_link')}}</a>
+                <a
+                  @click.prevent="copy('inviteLink')"
+                  class="copy_url copy_btn copy_url_2"
+                  data-clipboard-target=".share_link">{{ $t('profile_left_copy_invite_link') }}</a>
               </div>
             </div>
-            <div class="user_code share_div"><p>{{$t('profile_left_invite_code')}}</p>
-              <div class="share_code_wrap"><p class="share_code">{{inviteCode}}</p>
-                <a @click.prevent="copy('inviteCode')" class="copy_url copy_btn copy_url_1" data-clipboard-target=".share_code">{{$t('profile_left_copy_invite_code')}}</a>
+            <div class="user_code share_div"><p>{{ $t('profile_left_invite_code') }}</p>
+              <div class="share_code_wrap"><p class="share_code">{{ inviteCode }}</p>
+                <a
+                  @click.prevent="copy('inviteCode')"
+                  class="copy_url copy_btn copy_url_1"
+                  data-clipboard-target=".share_code">{{ $t('profile_left_copy_invite_code') }}</a>
               </div>
             </div>
           </div>
@@ -30,40 +45,57 @@
         <div class="invite-container">
           <!-- 邀请记录 -->
           <div class="invite-wrap left">
-            <div class="title-box">{{$t('invite_history_text')}}</div>
+            <div class="title-box">{{ $t('invite_history_text') }}</div>
             <div class="invite-list ">
               <div class="th pd-15">
-                <div class="td">{{$t('invited')}}</div>
-                <div class="td">{{$t('time')}}</div>
+                <div class="td">{{ $t('invited') }}</div>
+                <div class="td">{{ $t('time') }}</div>
               </div>
               <div class="tbody">
-                <div class="empty" v-if="list.length === 0">
-                  <span class="text" @click="goInvite" v-html="$t('invite_reward_text')"></span>
+                <div
+                  class="empty"
+                  v-if="list.length === 0">
+                  <span
+                    class="text"
+                    @click="goInvite"
+                    v-html="$t('invite_reward_text')"/>
                 </div>
-                <div v-else class="row pt-20 pl-20 pr-20" v-for="item in list" :key="item.id">
-                  <div class="td">{{item.phone || item.email}}</div>
-                  <div class="td">{{item.register_time | ts2date}}</div>
+                <div
+                  v-else
+                  class="row pt-20 pl-20 pr-20"
+                  v-for="item in list"
+                  :key="item.id">
+                  <div class="td">{{ item.phone || item.email }}</div>
+                  <div class="td">{{ item.register_time | ts2date }}</div>
                 </div>
               </div>
             </div>
           </div>
           <!-- 返佣记录 -->
           <div class="invite-wrap right">
-            <div class="title-box">{{$t('commission_history_text')}}</div>
+            <div class="title-box">{{ $t('commission_history_text') }}</div>
             <div class="invite-list ">
               <div class="th pd-15">
-                <div class="td">{{$t('username')}}</div>
-                <div class="td">{{$t('commission_amount')}}</div>
-                <div class="td">{{$t('time')}}</div>
+                <div class="td">{{ $t('username') }}</div>
+                <div class="td">{{ $t('commission_amount') }}</div>
+                <div class="td">{{ $t('time') }}</div>
               </div>
               <div class="tbody">
-                <div class="empty" v-if="clist.length === 0">
-                  <span class="text" v-html="$t('invite_commission_text')"></span>
+                <div
+                  class="empty"
+                  v-if="clist.length === 0">
+                  <span
+                    class="text"
+                    v-html="$t('invite_commission_text')"/>
                 </div>
-                <div v-else class="row pt-20 pl-20 pr-20" v-for="item in clist" :key="item.id">
-                  <div class="td">{{item.phone || item.email}}</div>
-                  <div class="td">{{item.register_time | ts2date}}</div>
-                  <div class="td">{{item.register_time | ts2date}}</div>
+                <div
+                  v-else
+                  class="row pt-20 pl-20 pr-20"
+                  v-for="item in clist"
+                  :key="item.id">
+                  <div class="td">{{ item.phone || item.email }}</div>
+                  <div class="td">{{ item.register_time | ts2date }}</div>
+                  <div class="td">{{ item.register_time | ts2date }}</div>
                 </div>
               </div>
             </div>
@@ -75,83 +107,82 @@
 </template>
 
 <script>
-  import ProfileLeft from './ProfileLeft'
-  import copyToClipboard from 'copy-to-clipboard'
-  import service from '@/modules/service'
-  import utils from '@/modules/utils'
-  import {state} from '@/modules/store'
-  const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
+import ProfileLeft from './ProfileLeft'
+import copyToClipboard from 'copy-to-clipboard'
+import service from '@/modules/service'
+import utils from '@/modules/utils'
+import {state} from '@/modules/store'
+const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
 
-  export default {
-    name: 'invite',
-    components: {
-      ProfileLeft
+export default {
+  name: 'Invite',
+  components: {
+    ProfileLeft
+  },
+  data () {
+    return {
+      state,
+      show: false,
+      qrReady: false,
+      list: [],
+      clist: []
+    }
+  },
+  computed: {
+    inviteLink () {
+      return `${location.protocol}//${location.host}/user/register/?invitor=${this.inviteCode}`
     },
-    data () {
-      return {
-        state,
-        show: false,
-        qrReady: false,
-        list: [],
-        clist: []
+    inviteCode () {
+      if (this.state.userInfo) { return this.state.userInfo.id }
+      return ''
+    }
+  },
+  async created () {
+    this.setQr(this.inviteLink)
+    this.getInviteList()
+  },
+  methods: {
+    showQrcode () {
+      this.show = !this.show
+    },
+    copy (key) {
+      copyToClipboard(this[key])
+      utils.success(this.$i18n.t('copyed'))
+    },
+    goInvite () {
+      copyToClipboard(this.inviteLink)
+      utils.success(this.$i18n.t('link_copyed'))
+    },
+    async getInviteList () {
+      let result = await service.getMyInviteList()
+      if (result && !result.code) {
+        this.list = result.data
+      } else {
+        utils.alert(result.message)
       }
     },
-    computed: {
-      inviteLink() {
-        return `${location.protocol}//${location.host}/user/register/?invitor=${this.inviteCode}`
-      },
-      inviteCode() {
-        if (this.state.userInfo)
-          return this.state.userInfo.id
-        return ''
-      }
-    },
-    async created () {
-      this.setQr(this.inviteLink)
-      this.getInviteList()
-    },
-    methods: {
-      showQrcode () {
-        this.show = !this.show
-      },
-      copy (key) {
-        copyToClipboard(this[key])
-        utils.success(this.$i18n.t('copyed'))
-      },
-      goInvite () {
-        copyToClipboard(this.inviteLink)
-        utils.success(this.$i18n.t('link_copyed'))
-      },
-      async getInviteList () {
-         let result = await service.getMyInviteList();
-         if (result && !result.code) {
-           this.list = result.data
-         } else {
-           utils.alert(result.message)
-         }
-      },
-      async setQr (url) {
-        const QRCode = await qrcode()
-        QRCode.toCanvas(
-          this.$refs.qr,
-          url,
-          {
-            margin: 0,
-            width: 136,
-            height: 136,
-            errorCorrectionLevel: 'H'
-          },
-          (err) => {
-            if (err) {
-              // @improve
-              return utils.log('qrcode error')
-            }
-            this.qrReady = true
+    async setQr (url) {
+      const QRCode = await qrcode()
+      QRCode.toCanvas(
+        this.$refs.qr,
+        url,
+        {
+          margin: 0,
+          width: 136,
+          height: 136,
+          errorCorrectionLevel: 'H'
+        },
+        (err) => {
+          if (err) {
+            // @improve
+            return utils.log('qrcode error')
           }
-        )
-      }
+          this.qrReady = true
+        }
+      )
     }
   }
+}
 </script>
 <style lang="scss">
   @import "../styles/vars";
@@ -173,7 +204,7 @@
           flex: 1;
 
           &.left {
-            
+
           }
           &.right {
             margin-left: 40px;
@@ -321,4 +352,3 @@
     }
   }
 </style>
-
