@@ -1,11 +1,11 @@
 <template>
   <div class="deposit-container fund-container">
     <div class="title-box">
-      <div> {{ $t('提币') }}</div>
+      <div> {{ $t('充币') }}</div>
       <div class="fund-history"> {{ $t('资金记录') }}</div>
     </div>
     <div class="fund-items-content">
-      <div class="fund-item-row">
+      <div class="fund-item-row mb-24">
         <div class="row__label">{{ $t('币种') }}</div>
         <div class="row__value">
           <el-select
@@ -19,7 +19,7 @@
           </el-select>
         </div>
       </div>
-      <div class="fund-item-row">
+      <div class="fund-item-row mb-24">
         <div class="row__label">{{ $t('充币地址') }}</div>
         <div class="row__value">
           <div class="deposit-address">

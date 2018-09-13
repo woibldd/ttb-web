@@ -38,7 +38,6 @@
             display: flex;
             height: 40px;
             line-height: 40px;
-            margin-bottom: 24px;
 
             .row__label{
                 font-size: 14px;
@@ -60,6 +59,10 @@
         height:4px;
         background:rgba(124,124,124,1);
         border-radius:50%;
+    }
+
+    .pointer {
+        cursor:pointer;
     }
 }
   

@@ -1,0 +1,105 @@
+
+.withdraw-container{
+    .fund-history {
+        width:75px;
+        height:28px;
+        line-height: 28px;
+        text-align: center;
+        border:1px solid rgba(193,164,66,1);
+        border-radius:14px;
+        color: $primary;
+        font-size: 14px;
+    }
+    .withdraw-address {
+        display: flex;
+        width: 438px;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 4px;
+        color: $text-strong;
+
+        .el-select {
+            width: 100%;
+        }
+    }
+
+    .withdraw-remain {
+        color: $text-weak;
+        > span {
+            display: inline-block;
+        }
+
+        .up-limit {
+            width:56px;
+            height:15px;
+            font-size:14px;
+            font-family:MicrosoftYaHei;
+            font-weight:400;
+            color:rgba(193,164,66,1);
+            line-height:18px;
+        }
+    }
+
+    .withdraw-least {
+        color:#FBA917;
+    }
+    .withdraw-new-address{
+        font-size: 14px;
+        color: $text-strong;
+        display: flex;
+        align-items: center;
+
+        .add-icon {
+            width:14px;
+            height:14px;
+            text-align: center;
+            line-height: 12px;
+            display: inline-block;
+            background:$primary;
+            border-radius:50%;
+            color: white;
+        }
+    }
+
+    .withdraw-fee{
+        font-weight:400;
+        color:rgba(51,51,51,1);
+
+        .fee__label{
+            display: inline-block;
+            max-width: 120px;
+            min-width: 80px;
+        }
+
+        .fee__coin{
+            font-weight:bold;
+        }
+    }
+    .text-des {
+        font-family: MicrosoftYaHei;
+        line-height: 18px;
+        font-size: 12px;
+        color: $text-weak;
+
+        li {
+            list-style: outside;
+        }
+        .dib{
+            display: inline-block;
+        }
+    }
+    .withdraw-btn {
+        width:200px;
+        height:40px;
+        background:$primary;
+        color: white;
+        border-radius:4px;
+        text-align: center;
+        line-height: 40px;
+
+        &:hover{
+            opacity:0.5;
+        }
+    }
+        
+}
