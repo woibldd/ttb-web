@@ -18,12 +18,19 @@ const Trading = () => import(/* webpackChunkName: "Trading" */ '@/pages/Trading'
 const Profile = () => import(/* webpackChunkName: "Profile" */ '@/pages/Profile')
 const Invite = () => import(/* webpackChunkName: "Invite" */ '@/pages/Invite')
 const ProfileInfo = () => import(/* webpackChunkName: "ProfileInfo" */ '@/pages/ProfileInfo')
+const SafeVerified = () => import(/* webpackChunkName: "SafeVerified" */ '@/pages/SafeVerified')
 const Register = () => import(/* webpackChunkName: "Register" */ '@/pages/Register')
 const Recover = () => import(/* webpackChunkName: "Register" */ '@/pages/user/recover/recover.vue')
 const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
 const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pages/PrivacyPolicy')
 const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
 const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/ProfileSafety')
+const PhoneBind = () => import(/* webpackChunkName: "PhoneBind" */ '@/pages/PhoneBind')
+const eBind = () => import(/* webpackChunkName: "EmailBind" */ '@/pages/eBind')
+const ModPwd = () => import(/* webpackChunkName: "ModPwd" */ '@/pages/ModPwd')
+const GoogleTitle = () => import(/* webpackChunkName: "GoogleTitle" */ '@/pages/GoogleTitle')
+const ProfileAuthen = () => import(/* webpackChunkName: "ProfileAuthen" */ '@/pages/ProfileAuthen')
+const Authen = () => import(/* webpackChunkName: "Authen" */ '@/pages/Authen')
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
 
 const Fund = () => import(/* webpackChunkName: "CoinManage" */ '@/pages/Fund')
@@ -134,6 +141,34 @@ let router = new Router({
         path: 'ProfileSafety',
         name: 'ProfileSafety',
         component: ProfileSafety
+      },{
+        path: 'SafeVerified',
+        name: 'SafeVerified',
+        component: SafeVerified
+      },{
+        path: 'PhoneBind',
+        name: 'PhoneBind',
+        component: PhoneBind
+      },{
+        path: 'eBind',
+        name: 'eBind',
+        component: eBind
+      },{
+        path: 'ModPwd',
+        name: 'ModPwd',
+        component: ModPwd
+      },{
+        path: 'GoogleTitle',
+        name: 'GoogleTitle',
+        component: GoogleTitle
+      },{
+        path: 'ProfileAuthen',
+        name: 'ProfileAuthen',
+        component: ProfileAuthen
+      },{
+        path: 'Authen',
+        name: 'Authen',
+        component: Authen
       }]
     }, {
       path: '/user',

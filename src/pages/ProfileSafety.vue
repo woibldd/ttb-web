@@ -85,6 +85,7 @@
         }
       }
       .invinfo-box {
+        width: 100%;
         ul{
             li{
                 height: 60px;
