@@ -17,11 +17,7 @@
               v-for="(item, idx) in allCoins"
               :key="idx"
               :label="item.currency"
-              :value="item">
-              <template>
-                {{ item.currency }}
-              </template>
-            </el-option>
+              :value="item"/>
           </el-select>
         </div>
       </div>
@@ -37,7 +33,7 @@
         </div>
       </div>
       <div class="fund-item-other deposit-least">
-        {{ $t("最低充值数为0.001BTC") }}
+        {{ $t("最低充值数为") }} {{ selectCoin.min_deposit_amount }} {{ selectCoin.currency }}
       </div>
       <div class="fund-item-other deposit-qrcode">
         <div
