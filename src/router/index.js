@@ -27,6 +27,9 @@ const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pa
 const PhoneBind = () => import(/* webpackChunkName: "PhoneBind" */ '@/pages/PhoneBind')
 const eBind = () => import(/* webpackChunkName: "EmailBind" */ '@/pages/eBind')
 const ModPwd = () => import(/* webpackChunkName: "ModPwd" */ '@/pages/ModPwd')
+const GoogleTitle = () => import(/* webpackChunkName: "GoogleTitle" */ '@/pages/GoogleTitle')
+const ProfileAuthen = () => import(/* webpackChunkName: "ProfileAuthen" */ '@/pages/ProfileAuthen')
+const Authen = () => import(/* webpackChunkName: "Authen" */ '@/pages/Authen')
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
 
 async function beforeEach (to, from, next) {
@@ -147,6 +150,18 @@ let router = new Router({
         path: 'ModPwd',
         name: 'ModPwd',
         component: ModPwd
+      },{
+        path: 'GoogleTitle',
+        name: 'GoogleTitle',
+        component: GoogleTitle
+      },{
+        path: 'ProfileAuthen',
+        name: 'ProfileAuthen',
+        component: ProfileAuthen
+      },{
+        path: 'Authen',
+        name: 'Authen',
+        component: Authen
       }]
     }, {
       path: '/user',

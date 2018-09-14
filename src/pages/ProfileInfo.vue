@@ -94,6 +94,7 @@
         }
       }
       .invinfo-box {
+        width: 100%;
         margin: 10px auto 60px auto;
         .inv_tl{
             height: 32px;

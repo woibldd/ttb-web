@@ -96,6 +96,7 @@
         div.inp_box{
             width:100%;
             height: 40px;
+            margin-bottom: 30px;
             position: relative;
             p{
                 float: left;
@@ -124,7 +125,7 @@
                 display: block;
                 width: 300px;
                 height: 30px;
-                line-height: 30px;
+                line-height: 20px;
                 position: absolute;
                 left: 104px;
                 top: 40px;
@@ -132,7 +133,7 @@
                 color: #EB5757;
             }
             .inp_cox{
-                border: 1px solid #ccc;
+                border: 1px solid $c;
                 width: 340px;
                 float: left;
                 height: 40px;
@@ -145,7 +146,7 @@
                     height: 38px;
                     line-height: 38px;
                     text-align: center;
-                    border-right: 1px solid #ccc;
+                    border-right: 1px solid $c;
                     color: #333;
                     z-index: 11;
                     position: relative;
@@ -163,7 +164,7 @@
                         content: "";
                         width: 1px;
                         height: 20px;
-                        background: #ccc;
+                        background: $c;
                         display: block;
                         position: absolute;
                         left: 0;
@@ -185,12 +186,6 @@
                         padding-left:15px;
                     }
                 }
-            }
-            &:nth-child(1){
-                margin-bottom: 40px;
-            }
-            &:nth-child(2){
-                margin-bottom: 40px;
             }
         }
       }

@@ -561,5 +561,6 @@
   "No_Bindings": "未绑定",
   "Verified": "实名认证",
   "Country": "国籍",
+  "identity_authentication": "身份认证",
   "modify": "修改"
 }

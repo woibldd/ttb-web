@@ -96,6 +96,7 @@
         div.inp_box{
             width:100%;
             height: 40px;
+            margin-bottom: 30px;
             position: relative;
             p{
                 float: left;
@@ -116,7 +117,7 @@
                 box-sizing: border-box;
                 border-radius: 4px;
                 border:none;
-                border:1px solid #C2A538;
+                border:1px solid $c;
             }
             .submit-btn{
                 width: 340px;
@@ -127,21 +128,12 @@
                 display: block;
                 width: 300px;
                 height: 30px;
-                line-height: 30px;
+                line-height: 20px;
                 position: absolute;
                 left: 104px;
                 top: 40px;
                 font-size: 10px;
                 color: #EB5757;
-            }
-            &:nth-child(1){
-                margin-bottom: 40px;
-            }
-            &:nth-child(2){
-                margin-bottom: 40px;
-            }
-            &:nth-child(3){
-                margin-bottom: 40px;
             }
         }
       }
