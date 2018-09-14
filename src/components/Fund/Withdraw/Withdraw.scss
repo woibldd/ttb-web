@@ -146,6 +146,9 @@
             }
             .c-primary {
                 color: $primary;
+                &:hover {
+                    opacity: .7;
+                }
             }
 
         }

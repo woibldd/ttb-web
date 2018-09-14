@@ -114,7 +114,7 @@ export default {
       allCoinAddress: [],
       selectCoinAddress: '',
       withdrawCount: 0,
-      showModal: true,
+      showModal: false,
       code: '',
       state
     }
@@ -130,7 +130,6 @@ export default {
   },
   components: {vModal},
   async created () {
-    console.log(this.state)
     await this.getAllCoinTypes()
     await this.getCoinAddress()
   },
