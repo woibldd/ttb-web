@@ -9,13 +9,19 @@
         <div class="row__label">{{ $t('币种') }}</div>
         <div class="row__value">
           <el-select
-            v-model="selectCoinType"
+            v-model="selectCoin"
+            @change="changeCoinType"
+            value-key="currency"
             placeholder="请选择">
             <el-option
-              v-for="item in allCoins"
-              :key="item"
-              :label="item"
-              :value="item"/>
+              v-for="(item, idx) in allCoins"
+              :key="idx"
+              :label="item.currency"
+              :value="item">
+              <template>
+                {{ item.currency }}
+              </template>
+            </el-option>
           </el-select>
         </div>
       </div>
@@ -55,24 +61,39 @@
 import './deposit.scss'
 import copyToClipboard from 'copy-to-clipboard'
 import utils from '@/modules/utils'
+import service from '@/modules/service'
+
 const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
 
 export default {
   name: 'Deposit',
   data () {
     return {
-      address: '31kV4sEEnPMcyMrzWkggmewg3Bmm2Az6nX', // 先写死，之后要用真实值代替哦
-      allCoins: ['BTC', 'ETH', 'EOS'],
-      selectCoinType: 'BTC'
+      address: '',
+      allCoins: [],
+      selectCoin: {}
     }
   },
   async created () {
-    this.setQr('我的收款地址二维码')// TODO 这个咋整
+    await this.getAllCoinTypes()
+    await this.getCoinAddress()
+    this.setQr(this.address)// TODO 这个咋整
   },
   methods: {
     copy () {
       copyToClipboard(this.address)
       utils.success(this.$i18n.t('copyed'))
+    },
+    async getCoinAddress () {
+      const param = {
+        chain: this.selectCoin.chain,
+        currency: this.selectCoin.currency
+      }
+      return service.getMyCoinAddress(param).then((res) => {
+        if (res && res.data) {
+          this.address = res.data.address
+        }
+      })
     },
     async setQr (url) {
       const QRCode = await qrcode()
@@ -93,6 +114,20 @@ export default {
           this.qrReady = true
         }
       )
+    },
+    async changeCoinType (coin) {
+      console.log(coin)
+      this.selectCoin = coin
+      await this.getCoinAddress()
+      this.setQr(this.address)
+    },
+    async getAllCoinTypes () {
+      await service.getAllCoinTypes().then(res => {
+        if (res && res.data) {
+          this.allCoins = res.data
+          this.selectCoin = this.allCoins[0]
+        }
+      })
     }
   }
 }

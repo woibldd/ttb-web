@@ -292,10 +292,20 @@ const service = {
     return request('/user/invitation/list')
   },
   getTerminalDate () {
-    return reqeust('get_terminal_date')
+    return request('get_terminal_date')
   },
   getLoginHistory () {
     return request('user/login/history')
+  },
+
+  // 充币，提币
+  getMyCoinAddress (param) {
+    return request('account/address/query', param)
+  },
+
+  // 获取币种列表
+  getAllCoinTypes (param) {
+    return request('account/currency/list')
   }
 }
 
