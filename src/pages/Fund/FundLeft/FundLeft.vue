@@ -6,10 +6,10 @@
         <span class="menu-title">{{ $t('资金管理') }}</span>
       </p>
       <ul class="left-menu-list">
-        <!-- <li class="active"><router-link
+        <li class="active"><router-link
           class="menu-name"
           active-class="active"
-          to="/fund/my">{{ $t('我的资产') }}</router-link></li> -->
+          to="/fund/my">{{ $t('我的资产') }}</router-link></li>
         <li class=""><router-link
           class="menu-name"
           active-class="active"
@@ -18,7 +18,10 @@
           class="menu-name"
           active-class="active"
           to="/fund/withdraw">{{ $t('提币') }}</router-link></li>
-          <!-- <li class=""><router-link class="menu-name" active-class="active">{{ $t('地址管理') }}</router-link></li> -->
+        <li class=""><router-link
+          class="menu-name"
+          to="/fund/address"
+          active-class="active">{{ $t('地址管理') }}</router-link></li>
       </ul>
     </div>
   </div>
