@@ -56,7 +56,10 @@
         <p><span class="fee__label">{{ $t('实际到账') }}</span> <span class="fee__coin">这是哪个字段 ？0BTC</span></p>
       </div>
       <div class="fund-item-other">
-        <div class="withdraw-btn default">{{ $t('确认提币') }}</div>
+        <v-btn
+          style="width: 200px"
+          @click="ensure"
+          :label="$t('确认提币')"/>
       </div>
       <ul
         class="fund-item-other mt-25 text-des"
@@ -66,13 +69,40 @@
       </ul>
 
     </div>
-</div></template>
+    <v-modal
+      :open.sync="showModal"
+      @click="hideModal">
+      <div class="ensure-modal">
+        <div class="modal__title mb-30">{{ $t('安全验证') }}</div>
+        <div class="modal__content">
+          <div class="modal__row">
+            <div class="row__label mb-9">{{ $t('邮箱') }}</div>
+            <div class="row__input" >{{ contact }} </div>
+          </div>
+          <div class="modal__row mt-12 mb-25">
+            <div class="row__label mb-9">{{ $t('邮箱验证码') }}</div>
+            <div class="row__input" >
+              <input
+                v-model="code"
+                class="input-validate mr-14">
+              <span class="default c-primary">{{ $t('获取验证码') }}</span>
+            </div>
+          </div>
+          <v-btn
+            class="w-340"
+            :label="$t('立即验证')"/>
+        </div>
+      </div>
+    </v-modal>
+  </div>
+</template>
 <script>
 import './Withdraw.scss'
 import copyToClipboard from 'copy-to-clipboard'
 import vModal from '@/components/VModal.vue'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
+import { state } from '@/modules/store'
 
 export default {
   name: 'Withdraw',
@@ -83,11 +113,24 @@ export default {
       selectCoin: {},
       allCoinAddress: [],
       selectCoinAddress: '',
-      withdrawCount: 0
+      withdrawCount: 0,
+      showModal: true,
+      code: '',
+      state
+    }
+  },
+  computed: {
+    contact () {
+      if (this.state && this.state.userInfo) {
+        return this.state.userInfo.phone || this.state.userInfo.email
+      } else {
+        return ''
+      }
     }
   },
   components: {vModal},
   async created () {
+    console.log(this.state)
     await this.getAllCoinTypes()
     await this.getCoinAddress()
   },
@@ -119,6 +162,12 @@ export default {
           this.selectCoin = this.allCoins[0]
         }
       })
+    },
+    ensure () {
+      this.showModal = true
+    },
+    hideModal () {
+      this.showModal = false
     }
   }
 }
