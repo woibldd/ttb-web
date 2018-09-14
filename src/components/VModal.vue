@@ -1,26 +1,37 @@
 <template>
-  <div class="modal-bg" ref="bg"
+  <div
+    class="modal-bg"
+    ref="bg"
     :class="{open: open}"
     @click.self="clickBackdrop">
-    <div class="modal-wrap" :style="{backgroundColor: bgColor}">
-      <slot></slot>
-      <a class="close-btn" @click.prevent="close"></a>
+    <div
+      class="modal-wrap"
+      :style="{backgroundColor: bgColor}">
+      <slot/>
+      <a
+        class="close-btn"
+        @click.prevent="close"/>
     </div>
-    <div class="modal-mask" v-show="!open"></div>
+    <div
+      class="modal-mask"
+      v-show="!open"/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'vModal',
+  name: 'VModal',
   props: {
     bgColor: {
+      type: String,
       default: 'white'
     },
     open: {
+      type: Boolean,
       default: false
     },
     backdrop: {
+      type: Boolean,
       default: true
     }
   },
