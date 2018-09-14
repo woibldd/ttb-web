@@ -11,6 +11,18 @@
         display: flex;
     }
 
+    .fund-history {
+        width:75px;
+        height:28px;
+        line-height: 28px;
+        text-align: center;
+        border:1px solid rgba(193,164,66,1);
+        border-radius:14px;
+        color: $primary;
+        font-size: 14px;
+        cursor: default;
+    }
+
     .fund-right {
         box-sizing: border-box;
         padding-left: 60px;
@@ -63,6 +75,9 @@
 
     .pointer {
         cursor:pointer;
+    }
+    .default {
+        cursor: default;
     }
 }
   

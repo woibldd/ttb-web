@@ -6,7 +6,10 @@
         <span class="menu-title">{{ $t('资金管理') }}</span>
       </p>
       <ul class="left-menu-list">
-        <!-- <li class="active"><router-link class="menu-name" active-class="active" to="/fund/my">{{ $t('我的资产') }}</router-link></li> -->
+        <!-- <li class="active"><router-link
+          class="menu-name"
+          active-class="active"
+          to="/fund/my">{{ $t('我的资产') }}</router-link></li> -->
         <li class=""><router-link
           class="menu-name"
           active-class="active"

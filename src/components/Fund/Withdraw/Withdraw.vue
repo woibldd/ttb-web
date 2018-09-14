@@ -56,7 +56,7 @@
         <p><span class="fee__label">{{ $t('实际到账') }}</span> <span class="fee__coin">这是哪个字段 ？0BTC</span></p>
       </div>
       <div class="fund-item-other">
-        <div class="withdraw-btn">{{ $t('确认提币') }}</div>
+        <div class="withdraw-btn default">{{ $t('确认提币') }}</div>
       </div>
       <ul
         class="fund-item-other mt-25 text-des"
@@ -68,8 +68,9 @@
     </div>
 </div></template>
 <script>
-import './withdraw.scss'
+import './Withdraw.scss'
 import copyToClipboard from 'copy-to-clipboard'
+import vModal from '@/components/VModal.vue'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
 
@@ -85,6 +86,7 @@ export default {
       withdrawCount: 0
     }
   },
+  components: {vModal},
   async created () {
     await this.getAllCoinTypes()
     await this.getCoinAddress()

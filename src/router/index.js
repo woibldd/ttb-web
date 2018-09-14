@@ -28,7 +28,9 @@ const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pa
 
 const Fund = () => import(/* webpackChunkName: "CoinManage" */ '@/pages/Fund')
 const Withdraw = () => import(/* webpackChunkName: "Withdraw" */ '@/components/Fund/Withdraw/Withdraw.vue')
-const Deposit = () => import(/* webpackChunkName: "Deposit" */ '@/components/Fund/deposit/deposit.vue')
+const Deposit = () => import(/* webpackChunkName: "Deposit" */ '@/components/Fund/Deposit/deposit.vue')
+const MyFund = () => import(/* webpackChunkName: "Deposit" */ '@/components/Fund/My/my.vue')
+const FundAddress = () => import(/* webpackChunkName: "Deposit" */ '@/components/Fund/Address/address.vue')
 
 async function beforeEach (to, from, next) {
   state.loading = true
@@ -187,6 +189,14 @@ let router = new Router({
         path: 'deposit',
         name: 'deposit',
         component: Deposit
+      }, {
+        path: 'my',
+        name: 'my',
+        component: MyFund
+      }, {
+        path: 'address',
+        name: 'address',
+        component: FundAddress
       } ]
     }
 
