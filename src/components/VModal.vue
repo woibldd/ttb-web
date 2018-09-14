@@ -38,10 +38,12 @@ export default {
   methods: {
     clickBackdrop () {
       if (this.backdrop) {
+        this.$emit('update:open', false)
         this.$emit('close')
       }
     },
     close () {
+      this.$emit('update:open', false)
       this.$emit('close')
     }
   }
