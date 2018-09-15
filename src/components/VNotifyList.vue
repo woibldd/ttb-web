@@ -5,10 +5,11 @@
         v-for="(notify, index) in notifyList"
         :options="notify"
         :key="notify.id"
-        @destroy="destroy(index)">
-      </v-notify>
+        @destroy="destroy(index)"/>
     </div>
-    <div class="notify-backdrop" v-show="confirming"></div>
+    <div
+      class="notify-backdrop"
+      v-show="confirming"/>
   </div>
 </template>
 
@@ -18,7 +19,7 @@ import utils from '@/modules/utils'
 import VNotify from './VNotify'
 
 export default {
-  name: 'vNotifyList',
+  name: 'VNotifyList',
   components: {
     VNotify
   },

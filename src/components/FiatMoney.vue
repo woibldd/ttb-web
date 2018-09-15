@@ -1,7 +1,11 @@
 <template>
   <span>
-    <span class="value" v-if="ready">{{ displayValue }}</span>
-    <span class="wait" v-else>...</span>
+    <span
+      class="value"
+      v-if="ready">{{ displayValue }}</span>
+    <span
+      class="wait"
+      v-else>...</span>
   </span>
 </template>
 
@@ -9,7 +13,7 @@
 import {state, actions} from '@/modules/store'
 
 export default {
-  name: 'fiatMoney',
+  name: 'FiatMoney',
   props: ['base', 'value'],
   data () {
     return {
