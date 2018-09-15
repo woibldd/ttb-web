@@ -1,18 +1,17 @@
 <template>
   <div class="deposit-container fund-container">
     <div class="title-box">
-      <div> {{ $t('充币') }}</div>
+      <div> {{ $t('deposit') }}</div>
       <div class="fund-history"> {{ $t('资金记录') }}</div>
     </div>
     <div class="fund-items-content">
       <div class="fund-item-row mb-24">
-        <div class="row__label">{{ $t('币种') }}</div>
+        <div class="row__label">{{ $t('currency') }}</div>
         <div class="row__value">
           <el-select
             v-model="selectCoin"
             @change="changeCoinType"
-            value-key="currency"
-            placeholder="请选择">
+            value-key="currency">
             <el-option
               v-for="(item, idx) in allCoins"
               :key="idx"
@@ -22,18 +21,18 @@
         </div>
       </div>
       <div class="fund-item-row mb-24">
-        <div class="row__label">{{ $t('充币地址') }}</div>
+        <div class="row__label">{{ $t('deposit_address') }}</div>
         <div class="row__value">
           <div class="deposit-address">
             <span class="address-txt">{{ address }}</span>
             <span
               class="address-copy"
-              @click="copy">复制</span>
+              @click="copy">{{ $t('copy') }}</span>
           </div>
         </div>
       </div>
       <div class="fund-item-other deposit-least">
-        {{ $t("最低充值数为") }} {{ selectCoin.min_deposit_amount }} {{ selectCoin.currency }}
+        {{ $t("deposit_hint_min") }} {{ selectCoin.min_deposit_amount }} {{ selectCoin.currency }}
       </div>
       <div class="fund-item-other deposit-qrcode">
         <div
@@ -50,9 +49,9 @@
         <li>  {{ $t('使用LTC地址充值需要1个网络确认才能到账') }}</li>
         <li>  {{ $t('默认充值至我的钱包，若想进行币币交易，可在币币账户操作“资金划转”将资金转至币币账户。') }}</li>
       </ul>
-
     </div>
-</div></template>
+  </div>
+</template>
 <script>
 import './deposit.scss'
 import copyToClipboard from 'copy-to-clipboard'

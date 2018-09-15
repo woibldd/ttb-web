@@ -1,18 +1,17 @@
 <template>
   <div class="withdraw-container fund-container">
     <div class="title-box">
-      <div> {{ $t('提币') }}</div>
+      <div> {{ $t('withdraw') }}</div>
       <div class="fund-history"> {{ $t('资金记录') }}</div>
     </div>
     <div class="fund-items-content">
       <div class="fund-item-row">
-        <div class="row__label">{{ $t('币种') }}</div>
+        <div class="row__label">{{ $t('currency') }}</div>
         <div class="row__value">
           <el-select
             v-model="selectCoin"
             @change="changeCoinType"
-            value-key="currency"
-            placeholder="请选择">
+            value-key="currency">
             <el-option
               v-for="item in allCoins"
               :key="item.id"
@@ -22,12 +21,12 @@
         </div>
       </div>
       <div class="fund-item-other mt-13 mb-23 withdraw-remain">
-        <span>{{ $t("可用") }}:  {{ selectCoin.withdraw_fee }}</span>
+        <span>{{ $t("withdraw_avlb") }}:  {{ selectCoin.withdraw_fee }}</span>
         <span class="ml-29 mr-29">{{ $t("限额") }}: {{ selectCoin.min_withdraw_amount }}</span>
         <span class="up-limit pointer">{{ $t("提升限额") }}</span>
       </div>
       <div class="fund-item-row">
-        <div class="row__label">{{ $t('提币地址') }}</div>
+        <div class="row__label">{{ $t('withdraw_addr') }}</div>
         <div class="row__value">
           <div class="withdraw-address pl-10">
             {{ selectCoinAddress }}
@@ -35,10 +34,10 @@
         </div>
       </div>
       <div class="fund-item-other withdraw-new-address mt-14 mb-24">
-        <span class="add-icon mr-10">+</span>{{ $t("添加新地址") }}
+        <span class="add-icon mr-10">+</span>{{ $t("add_withdraw_addr") }}
       </div>
       <div class="fund-item-row">
-        <div class="row__label">{{ $t('提币数量') }}</div>
+        <div class="row__label">{{ $t('withdraw_amount') }}</div>
         <div class="row__value">
           <div class="withdraw-address pl-10">
             <input
@@ -49,17 +48,17 @@
         </div>
       </div>
       <div class="fund-item-other withdraw-least mt-14 mb-22">
-        {{ $t("最低提币数量") }} {{ selectCoin.min_withdraw_amount }} {{ selectCoin.currency }}
+        {{ $t("withdraw_min") }} {{ selectCoin.min_withdraw_amount }} {{ selectCoin.currency }}
       </div>
       <div class="fund-item-other withdraw-fee mb-23">
-        <p> <span class="fee__label">{{ $t('提现手续费') }} </span> <span class="fee__coin">{{ selectCoin.withdraw_fee }}{{ selectCoin.currency }}</span> </p>
-        <p><span class="fee__label">{{ $t('实际到账') }}</span> <span class="fee__coin">这是哪个字段 ？0BTC</span></p>
+        <p> <span class="fee__label">{{ $t('withdraw_fee') }} </span> <span class="fee__coin">{{ selectCoin.withdraw_fee }}{{ selectCoin.currency }}</span> </p>
+        <p><span class="fee__label">{{ $t('withdraw_arrival') }}</span> <span class="fee__coin">这是哪个字段 ？0BTC</span></p>
       </div>
       <div class="fund-item-other">
         <v-btn
           style="width: 200px"
           @click="ensure"
-          :label="$t('确认提币')"/>
+          :label="$t('withdraw_confirm')"/>
       </div>
       <ul
         class="fund-item-other mt-25 text-des"
