@@ -30,7 +30,7 @@ const SecuritySummary = () => import(/* webpackChunkName: "SecuritySummary" */ '
 const eBind = () => import(/* webpackChunkName: "EmailBind" */ '@/pages/eBind')
 const ModPwd = () => import(/* webpackChunkName: "ModPwd" */ '@/pages/ModPwd')
 const GoogleTitle = () => import(/* webpackChunkName: "GoogleTitle" */ '@/pages/GoogleTitle')
-const ProfileAuthen = () => import(/* webpackChunkName: "ProfileAuthen" */ '@/pages/ProfileAuthen')
+// const ProfileAuthen = () => import(/* webpackChunkName: "ProfileAuthen" */ '@/pages/ProfileAuthen')
 const Authen = () => import(/* webpackChunkName: "Authen" */ '@/pages/Authen')
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
 
@@ -161,17 +161,13 @@ let router = new Router({
           component: ModPwd
         },]
       }, {
-        path: 'safe_verified',
-        name: 'SafeVerified',
+        path: 'kyc',
+        name: 'Kyc',
         component: SafeVerified
       },  {
         path: 'google_title',
         name: 'GoogleTitle',
         component: GoogleTitle
-      }, {
-        path: 'kyc',
-        name: 'Kyc',
-        component: ProfileAuthen
       }, {
         path: 'kyc_upload',
         name: 'KycUpload',

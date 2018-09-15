@@ -5,17 +5,17 @@
         <div class="inp_box">
             <p>{{$t('register_by_email')}}</p>
             <div class="inp_cox">
-                <input type="text" />
+                <input type="text" v-model="email" />
             </div>
-            <span class="tips">错误提示</span>
+            <!-- <span class="tips">错误提示</span> -->
         </div>
         <div class="inp_box">
             <p>{{$t('email_code')}}</p>
             <div class="inp_cox">
-                <input type="text" />
+                <input type="text" v-model="code" />
                 <a href="javascript:void(0)">{{$t('hq_send')}}</a>
             </div>
-            <span class="tips">错误提示</span>
+            <!-- <span class="tips">错误提示</span> -->
         </div>
         <div class="inp_box">
             <v-btn class="submit-btn" :label="$t('bind')"
@@ -37,14 +37,27 @@
     },
     data () {
       return {
-
+        email: '',
+        code: '',
+        loading: false
       }
     },
     computed: {
 
     },
     methods: {
-
+      async submit () {
+        let params = {
+          email: this.email,
+          code: this.code
+        }
+        let result = await service.bindEmail(params)
+        if (!result.code) {
+          this.$router.push({
+            name: 'ProfileInfo'
+          })
+        }
+      }
     }
   }
 </script>

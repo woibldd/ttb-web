@@ -130,6 +130,9 @@ const service = {
   updateKycInfo (data) {
     return request('kyc/update', data)
   },
+  updateKyc1 (data) {
+    return request('/user/kyc1', data)
+  },
   uploadKycPics (form) {
     const handler = new Vue()
     const upload = request('kyc/upload', form, {
@@ -194,10 +197,16 @@ const service = {
     return request('phone/begin', data)
   },
   bindPhone (data) {
-    return request('phone/bind', data)
+    return request('user/bind/phone/code', data)
   },
   unbindPhone () {
     return request('phone/unbind')
+  },
+  bindEmail (data) {
+    return request('user/bind/email')
+  },
+  bindEmailCode (data) {
+    return request('user/bind/email/code')
   },
   getApiList () {
     return request('api/list')

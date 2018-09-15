@@ -1,25 +1,23 @@
 <template>
   <div style="page-invite-wrap">
-    <profile-left></profile-left>
     <div class="user-center-right">
       <div class="profile-container">
-        <div class="title-box">{{$t('profile_left_invite_safety')}}<span>{{$t('Verified')}}</span></div>
+        <div class="title-box">{{$t('identity_authentication')}}<span>{{$t('Verified')}}</span></div>
         <div class="invinfo-box">
             <div class="inp_box">
-                <p>{{$t('Country')}}</p>
-                <select>
-                    <option value="aa"></option>
-                </select>
+                <p>{{$t('name')}}</p>
+                <input type="text" v-model="name" />
             </div>
             <div class="inp_box">
-                <p>{{$t('name')}}</p>
-                <input type="text" />
-                <span class="tips">请输入您的真实姓名</span>
+                <p>{{$t('kyc_id_type')}}</p>
+                <el-select v-model="id_type">
+                  <el-option :label="$t('kyc_idcard')" :value="1"/>
+                  <el-option :label="$t('kyc_passport')" :value="2"/>
+                </el-select>
             </div>
             <div class="inp_box">
                 <p>{{$t('kyc_idcard')}}</p>
-                <input type="text" />
-                <span class="tips">请输入正确的身份证号</span>
+                <input type="text" v-model="id_number" />
             </div>
             <div class="inp_box">
                 <v-btn class="submit-btn" :label="$t('sub')"
@@ -45,14 +43,29 @@
     },
     data () {
       return {
-
+        name: '',
+        id_type: 1,
+        id_number: '',
+        loading: false
       }
     },
     computed: {
 
     },
     methods: {
-
+      async submit () {
+        let params = {
+          name: this.name,
+          id_type: this.id_type,
+          id_number: this.id_number
+        }
+        let result = await service.updateKyc1(params)
+        if (result) {
+          this.$router.push({
+            name: 'ProfileInfo'
+          })
+        }
+      }
     }
   }
 </script>

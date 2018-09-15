@@ -16,7 +16,7 @@ import qs from 'querystring'
 
 import 'element-ui/lib/theme-chalk/index.css'
 
-import { Select, Option, Table} from 'element-ui'
+import { Select, Option, Table, Input, Form} from 'element-ui'
 
 Vue.config.productionTip = false
 Vue.use(VueI18n)
@@ -25,6 +25,8 @@ Vue.use(VTooltip)
 Vue.use(Select) // 引入element单个组件
 Vue.use(Option)
 Vue.use(Table)
+Vue.use(Form)
+Vue.use(Input)
 
 const request = require.context('./assets/svg', true, /\.svg$/)
 /* console.log('request', request)

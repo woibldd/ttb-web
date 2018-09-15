@@ -545,5 +545,6 @@
   "identity_authentication": "身份认证",
   "modify": "修改",
   "to_verify": "去认证",
-  "to_bind": "去绑定"
+  "to_bind": "去绑定",
+  "kyc_id_type": "证件类型"
 }

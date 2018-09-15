@@ -15,9 +15,9 @@
         <li class="">
             <router-link class="menu-name" active-class="active" :to="{name: 'Kyc'}">{{ $t('profile_sec_kyc') }}</router-link>
         </li>
-        <li class="">
+        <!-- <li class="">
             <router-link class="menu-name" active-class="active" :to="{name: 'Kyc'}">{{ $t('profile_sec_api') }}</router-link>
-        </li>
+        </li> -->
         <li class="">
           <router-link class="menu-name" :to="{name: 'invite'}" active-class="active">
             {{ $t('profile_left_invite') }}
