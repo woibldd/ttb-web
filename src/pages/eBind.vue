@@ -1,87 +1,91 @@
 <template>
   <div class="profile-container">
-    <div class="title-box">{{$t('profile_left_invite_safety')}}<span>{{$t('email_binding')}}</span></div>
+    <div class="title-box">{{ $t('profile_left_invite_safety') }}<span>{{ $t('email_binding') }}</span></div>
     <div class="invinfo-box">
-        <div class="inp_box">
-            <p>{{$t('register_by_email')}}</p>
-            <div class="inp_cox">
-                <input type="text" v-model="email" />
-            </div>
-            <!-- <span class="tips">错误提示</span> -->
+      <div class="inp_box">
+        <p>{{ $t('register_by_email') }}</p>
+        <div class="inp_cox">
+          <input
+            type="text"
+            v-model="email" >
         </div>
-        <div class="inp_box">
-            <p>{{$t('email_code')}}</p>
-            <div class="inp_cox">
-                <input type="text" v-model="code" />
-                <countdown-code-button 
-                  :sendText="$t('hq_send')"
-                  :validation="validation" 
-                  :sendCodeFunc="sendCode">
-                </countdown-code-button>
-            </div>
-            <!-- <span class="tips">错误提示</span> -->
+        <!-- <span class="tips">错误提示</span> -->
+      </div>
+      <div class="inp_box">
+        <p>{{ $t('email_code') }}</p>
+        <div class="inp_cox">
+          <input
+            type="text"
+            v-model="code" >
+          <countdown-code-button
+            :send-text="$t('hq_send')"
+            :validation="validation"
+            :send-code-func="sendCode"/>
         </div>
-        <div class="inp_box">
-            <v-btn class="submit-btn" :label="$t('bind')"
-            :loading="loading"
-            @click="submit"></v-btn>
-        </div>
+        <!-- <span class="tips">错误提示</span> -->
+      </div>
+      <div class="inp_box">
+        <v-btn
+          class="submit-btn"
+          :label="$t('bind')"
+          :loading="loading"
+          @click="submit"/>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-  import service from '@/modules/service'
-  import VBtn from '@/components/VBtn'
-  import countdownCodeButton from '@/components/common/countdown-code-button'
-  import utils from '@/modules/utils'
+import service from '@/modules/service'
+import VBtn from '@/components/VBtn'
+import countdownCodeButton from '@/components/common/countdown-code-button'
+import utils from '@/modules/utils'
 
-  export default {
-    name: 'SafeVerified',
-    components: {
-      VBtn,
-      countdownCodeButton
-    },
-    data () {
-      return {
-        email: '',
-        code: '',
-        loading: false
+export default {
+  name: 'SafeVerified',
+  components: {
+    VBtn,
+    countdownCodeButton
+  },
+  data () {
+    return {
+      email: '',
+      code: '',
+      loading: false
+    }
+  },
+  computed: {
+
+  },
+  methods: {
+    validation () {
+      if (!this.email) {
+        utils.alert(this.$t('err_empty_password'))
+        return false
       }
+      if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(this.email)) {
+        utils.alert(this.$t('err_invalid_email'))
+        return false
+      }
+      return true
     },
-    computed: {
-
+    sendCode () {
+      return service.bindEmailCode({email: this.email})
     },
-    methods: {
-      validation () {
-        if (!this.email) {
-          debugger
-          utils.alert(this.$t('err_empty_password'))
-          return false
-        }
-        if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(this.email)) {
-          utils.alert(this.$t('err_invalid_email'))
-          return false
-        }
-        return true
-      },
-      sendCode () {
-        return service.bindEmailCode({email: this.email})
-      },
-      async submit () {
-        let params = {
-          email: this.email,
-          code: this.code
-        }
-        let result = await service.bindEmail(params)
-        if (!result.code) {
-          this.$router.push({
-            name: 'ProfileInfo'
-          })
-        }
+    async submit () {
+      let params = {
+        email: this.email,
+        code: this.code
+      }
+      let result = await service.bindEmail(params)
+      if (!result.code) {
+        this.$router.push({
+          name: 'ProfileInfo'
+        })
       }
     }
   }
+}
 </script>
 <style lang="scss" scoped>
   @import "../styles/vars";
