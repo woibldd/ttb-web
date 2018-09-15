@@ -164,10 +164,5 @@ export default {
           color: $text-weak
       }
     }
-
-    // 隐藏form的必填标志
-    .el-form-item.is-required>.el-form-item__label:before {
-        display: none
-    }
   }
 </style>

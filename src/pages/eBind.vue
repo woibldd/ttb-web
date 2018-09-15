@@ -1,37 +1,41 @@
 <template>
   <div class="profile-container">
     <div class="title-box">{{ $t('profile_left_invite_safety') }}<span>{{ $t('email_binding') }}</span></div>
-    <div class="invinfo-box">
-      <div class="inp_box">
-        <p>{{ $t('register_by_email') }}</p>
+    <el-form
+      class="invinfo-box"
+      ref="form"
+      :rules="rules"
+      label-position="left"
+      :model="form"
+      label-width="104px">
+      <el-form-item
+        prop="email"
+        class="inp_box"
+        :label="$t('register_by_email')">
+        <el-input
+          v-model="form.email"/>
+      </el-form-item>
+      <el-form-item
+        prop="code"
+        class="inp_box"
+        :label="$t('email_code')">
         <div class="inp_cox">
-          <input
-            type="text"
-            v-model="email" >
-        </div>
-        <!-- <span class="tips">错误提示</span> -->
-      </div>
-      <div class="inp_box">
-        <p>{{ $t('email_code') }}</p>
-        <div class="inp_cox">
-          <input
-            type="text"
-            v-model="code" >
+          <el-input
+            v-model="form.code"/>
           <countdown-code-button
             :send-text="$t('hq_send')"
             :validation="validation"
             :send-code-func="sendCode"/>
         </div>
-        <!-- <span class="tips">错误提示</span> -->
-      </div>
-      <div class="inp_box">
+      </el-form-item>
+      <el-form-item class="inp_box">
         <v-btn
           class="submit-btn"
           :label="$t('bind')"
           :loading="loading"
           @click="submit"/>
-      </div>
-    </div>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
@@ -48,10 +52,30 @@ export default {
     countdownCodeButton
   },
   data () {
+    const validataEmail = (rule, value, callback) => {
+      if (!value) {
+        callback(new Error(this.$i18n.t('不能为空')))
+      } else {
+        if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(value)) {
+          this.$refs.form.validateField('email')
+        }
+        callback(new Error(this.$t('err_invalid_email')))
+      }
+    }
     return {
-      email: '',
-      code: '',
-      loading: false
+      form: {
+        email: '',
+        code: ''
+      },
+      loading: false,
+      rules: {
+        email: [
+          { validator: validataEmail, trigger: 'blur' }
+        ],
+        code: [
+          { required: true, message: this.$i18n.t('不能为空'), trigger: 'blur' }
+        ]
+      }
     }
   },
   computed: {
@@ -59,12 +83,10 @@ export default {
   },
   methods: {
     validation () {
-      if (!this.email) {
-        utils.alert(this.$t('err_empty_password'))
+      if (!this.form.email) {
         return false
       }
       if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(this.email)) {
-        utils.alert(this.$t('err_invalid_email'))
         return false
       }
       return true
@@ -74,8 +96,8 @@ export default {
     },
     async submit () {
       let params = {
-        email: this.email,
-        code: this.code
+        email: this.form.email,
+        code: this.form.code
       }
       let result = await service.bindEmail(params)
       if (!result.code) {
@@ -150,7 +172,6 @@ export default {
             .submit-btn{
                 width: 340px;
                 height: 40px;
-                margin-left: 104px;
             }
             span.tips{
                 display: block;
@@ -164,7 +185,6 @@ export default {
                 color: #EB5757;
             }
             .inp_cox{
-                border: 1px solid $c;
                 width: 340px;
                 float: left;
                 height: 40px;
