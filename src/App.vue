@@ -1,16 +1,33 @@
 <template>
-  <div id="app" :class="['lang-' + $i18n.locale]"
+  <div
+    id="app"
+    :class="['lang-' + $i18n.locale]"
     tabindex="0"
     @click="onclick"
     @keyup.enter="onkeyup('enter')"
     @keyup.esc="onkeyup('esc')">
-    <div class="page-mask" v-show="state.loading"></div>
-    <v-nav2 v-if="showNav" :class="[navClass]"></v-nav2>
-    <div class="main-container" ref="container" :style="{background: 'initial'}">
+    <div
+      class="page-mask"
+      v-show="state.loading"/>
+    <v-nav2
+      v-if="showNav"
+      :class="[navClass]"/>
+    <div
+      class="main-container"
+      ref="container"
+      :style="{background: 'initial'}">
       <router-view/>
     </div>
-    <v-footer ref="footer" v-if="footer === 'default'" :fixed="fixed" v-show="showFooter"/>
-    <mobile-footer ref="footer" v-if="footer === 'mobile'" :fixed="fixed" v-show="showFooter"/>
+    <v-footer
+      ref="footer"
+      v-if="footer === 'default'"
+      :fixed="fixed"
+      v-show="showFooter"/>
+    <mobile-footer
+      ref="footer"
+      v-if="footer === 'mobile'"
+      :fixed="fixed"
+      v-show="showFooter"/>
     <v-notify-list/>
   </div>
 </template>

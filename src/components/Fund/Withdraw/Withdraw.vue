@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="fund-item-other mt-13 mb-23 withdraw-remain">
-        <span>{{ $t("withdraw_avlb") }}:  {{ selectCoin.withdraw_fee }}</span>
+        <span>{{ $t("withdraw_avlb") }}:  {{ myCoinInfo.available }}</span>
         <span class="ml-29 mr-29">{{ $t("限额") }}: {{ selectCoin.min_withdraw_amount }}</span>
         <span class="up-limit pointer">{{ $t("提升限额") }}</span>
       </div>
@@ -29,11 +29,16 @@
         <div class="row__label">{{ $t('withdraw_addr') }}</div>
         <div class="row__value">
           <div class="withdraw-address pl-10">
-            {{ selectCoinAddress }}
+            <input
+              class="coin-count"
+              type="text"
+              v-model="transfer2Address">
           </div>
         </div>
       </div>
-      <div class="fund-item-other withdraw-new-address mt-14 mb-24">
+      <div
+        @click="addNewAddr"
+        class="fund-item-other withdraw-new-address mt-14 mb-24 default">
         <span class="add-icon mr-10">+</span>{{ $t("add_withdraw_addr") }}
       </div>
       <div class="fund-item-row">
@@ -43,6 +48,9 @@
             <input
               class="coin-count"
               type="number"
+              :step="Number(selectCoin.min_withdraw_amount)"
+              :min="Number(selectCoin.min_withdraw_amount)"
+              :max="Number(myCoinInfo.available)"
               v-model="withdrawCount">
           </div>
         </div>
@@ -52,7 +60,7 @@
       </div>
       <div class="fund-item-other withdraw-fee mb-23">
         <p> <span class="fee__label">{{ $t('withdraw_fee') }} </span> <span class="fee__coin">{{ selectCoin.withdraw_fee }}{{ selectCoin.currency }}</span> </p>
-        <p><span class="fee__label">{{ $t('withdraw_arrival') }}</span> <span class="fee__coin">这是哪个字段 ？0BTC</span></p>
+        <p><span class="fee__label">{{ $t('withdraw_arrival') }}</span> <span class="fee__coin">{{ coinArrival }} {{ selectCoin.currency }}</span></p>
       </div>
       <div class="fund-item-other">
         <v-btn
@@ -75,21 +83,24 @@
         <div class="modal__title mb-30">{{ $t('安全验证') }}</div>
         <div class="modal__content">
           <div class="modal__row">
-            <div class="row__label mb-9">{{ $t('邮箱') }}</div>
+            <div class="row__label mb-9">{{ $t('手机') }}</div>
             <div class="row__input" >{{ contact }} </div>
           </div>
           <div class="modal__row mt-12 mb-25">
-            <div class="row__label mb-9">{{ $t('邮箱验证码') }}</div>
+            <div class="row__label mb-9">{{ $t('手机验证码') }}</div>
             <div class="row__input" >
               <input
-                v-model="code"
+                v-model="phoneCode"
                 class="input-validate mr-14">
-              <span class="default c-primary">{{ $t('获取验证码') }}</span>
+              <span
+                @click="getVerifyCode"
+                class="default c-primary">{{ $t('获取验证码') }}</span>
             </div>
           </div>
           <v-btn
             class="w-340"
-            :label="$t('立即验证')"/>
+            @click="confirmWithdraw"
+            :label="$t('确认提币')"/>
         </div>
       </div>
     </v-modal>
@@ -111,10 +122,12 @@ export default {
       allCoins: [],
       selectCoin: {},
       allCoinAddress: [],
-      selectCoinAddress: '',
+      transfer2Address: '',
       withdrawCount: 0,
       showModal: false,
-      code: '',
+      myCoinInfoList: [],
+      myCoinInfo: {},
+      phoneCode: '',
       state
     }
   },
@@ -125,12 +138,16 @@ export default {
       } else {
         return ''
       }
+    },
+    coinArrival () {
+      return this.$big(this.withdrawCount) - this.$big(this.selectCoin.withdraw_fee)
     }
   },
   components: {vModal},
   async created () {
     await this.getAllCoinTypes()
-    await this.getCoinAddress()
+    this.updadeMyCoinInfo()
+    this.getCoinAddress()
   },
   methods: {
     copy () {
@@ -139,19 +156,26 @@ export default {
     },
     async getCoinAddress () {
       const param = {
-        chain: this.selectCoin.chain,
         currency: this.selectCoin.currency
       }
-      return service.getMyCoinAddress(param).then((res) => {
+      return service.getAddressList(param).then((res) => {
         if (res && res.data) {
-          this.selectCoinAddress = res.data.address
+          //  TODO这里需要更新提币地址哈
         }
       })
     },
     async changeCoinType (coin) {
-      console.log(coin)
       this.selectCoin = coin
-      await this.getCoinAddress()
+      this.getCoinAddress()
+      this.getAccountBalanceList() // 更改币种后，重新获取一次自己的钱包状态
+    },
+    async updadeMyCoinInfo () {
+      await this.getAccountBalanceList()
+      this.myCoinInfoList.forEach(mc => {
+        if (mc.currency === this.selectCoin.currency) {
+          this.myCoinInfo = mc
+        }
+      })
     },
     async getAllCoinTypes () {
       await service.getAllCoinTypes().then(res => {
@@ -161,11 +185,42 @@ export default {
         }
       })
     },
+    getAccountBalanceList () {
+      return service.getAccountBalanceList().then(res => {
+        this.myCoinInfoList = res.data
+      })
+    },
+    getVerifyCode () {
+      const param = {
+        region: 86,
+        phone: this.contact
+      }
+      service.getVerifyCode(param, 'phone').then(res => {
+        console.log(res)
+      })
+    },
+    confirmWithdraw () {
+      const param = {
+        currency: this.selectCoin.currency,
+        to_address: this.transfer2Address,
+        amount: this.withdrawCount,
+        // memo:
+        // email_code
+        phone_code: this.phoneCode
+        // google_code
+      }
+      service.confirmWithdraw(param).then(res => {
+        console.log(res)
+      })
+    },
     ensure () {
       this.showModal = true
     },
     hideModal () {
       this.showModal = false
+    },
+    addNewAddr () {
+      this.$router.push('/fund/address')
     }
   }
 }

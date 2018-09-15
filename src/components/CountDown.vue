@@ -1,15 +1,15 @@
 <template>
-    <section class="countdown-wrap">
-        <div class="countdown">
-            <span class="day">{{day}}</span>
-            <span class="split">:</span>
-            <span class="day">{{hour}}</span>
-            <span class="split">:</span>
-            <span class="day">{{minutes}}</span>
-            <span class="split">:</span>
-            <span class="day">{{seconds}}</span>
-        </div>
-    </section>
+  <section class="countdown-wrap">
+    <div class="countdown">
+      <span class="day">{{ day }}</span>
+      <span class="split">:</span>
+      <span class="day">{{ hour }}</span>
+      <span class="split">:</span>
+      <span class="day">{{ minutes }}</span>
+      <span class="split">:</span>
+      <span class="day">{{ seconds }}</span>
+    </div>
+  </section>
 </template>
 <script>
 export default {

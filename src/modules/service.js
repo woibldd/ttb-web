@@ -253,21 +253,6 @@ const service = {
   uncollect (data) {
     return request('favorite/remove', data)
   },
-  getWithdrawInfo (currency) {
-    return this.getBalanceInfo({ currency_name: currency })
-  },
-  getBalanceInfo (data) {
-    return request('balance/query', data)
-  },
-  withdraw (data) {
-    return request('withdraw/create', data)
-  },
-  confirmWithdraw (data) {
-    return request('withdraw/confirm', data)
-  },
-  cancelWithdraw (data) {
-    return request('withdraw/cancel', data)
-  },
   getTransferStats () {
     return request('transfer/stats')
   },
@@ -311,15 +296,59 @@ const service = {
     return request('user/login/history')
   },
 
+  /* -- 资金管理 start  -- */
   // 充币，提币
   getMyCoinAddress (param) {
     return request('account/address/query', param)
   },
-
   // 获取币种列表
   getAllCoinTypes (param) {
     return request('account/currency/list')
+  },
+  // 获取用户余额信息
+  getAccountBalanceList () {
+    return request('account/balance/list')
+  },
+  // 提币记录
+  getWithdrawHistory () {
+    return request('/account/withdraw/list')
+  },
+  // 充币记录
+  getDepositHistory (param) {
+    return request('/account/deposit/list', param)
+  },
+  // 获取添加过的地址列表
+  getAddressList (param) {
+    return request('/account/withdraw/address/list', param)
+  },
+  // 添加提币地址
+  addCoinAddress (param) {
+    return request('/account/withdraw/address/create', param)
+  },
+  // 删除提币地址
+  deleteCoinAddress (param) {
+    return request('/account/withdraw/address/delete', param)
+  },
+  // 获取提币邮箱/手机验证码
+  getVerifyCode (param, type) {
+    let url
+    if (type === 'phone') {
+      url = '/account/withdraw/phone/code'
+    } else {
+      url = '/account/withdraw/email/code'
+    }
+    return request(url, param)
+  },
+  // 发起提币
+  confirmWithdraw (param) {
+    return request('/account/withdraw/create', param)
+  },
+  // 取消提币
+  cancelWithdraw (param) {
+    return request('/account/withdraw/cancel', param)
   }
+  /* -- 资金管理 end  -- */
+
 }
 
 export async function fetch (url, body, options, method = 'post') {

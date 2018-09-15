@@ -32,7 +32,8 @@
         </div>
       </div>
       <div class="fund-item-other deposit-least">
-        {{ $t("deposit_hint_min") }} {{ selectCoin.min_deposit_amount }} {{ selectCoin.currency }}
+        {{ $t('deposit_hint_min', {min: selectCoin.min_deposit_amount}) }}
+        {{ selectCoin.currency }}
       </div>
       <div class="fund-item-other deposit-qrcode">
         <div
@@ -70,6 +71,7 @@ export default {
     }
   },
   async created () {
+    this.getDepositHistory()
     await this.getAllCoinTypes()
     await this.getCoinAddress()
     this.setQr(this.address)// TODO 这个咋整
@@ -122,6 +124,16 @@ export default {
           this.allCoins = res.data
           this.selectCoin = this.allCoins[0]
         }
+      })
+    },
+    getDepositHistory () {
+      const param = {
+        page: 0,
+        size: 10
+      }
+      console.log(param, 'prpr')
+      service.getDepositHistory(param).then(res => {
+        console.log(res, 'wtwh')
       })
     }
   }

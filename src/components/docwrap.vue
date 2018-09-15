@@ -5,7 +5,7 @@
     </div>
     <div class="page-wrap doc-page">
       <div class="panel">
-        <slot></slot>
+        <slot/>
       </div>
     </div>
   </div>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'docWrap',
+  name: 'DocWrap',
   props: ['title']
 }
 </script>
