@@ -100,7 +100,7 @@
           <v-btn
             class="w-340"
             @click="confirmWithdraw"
-            :label="$t('立即验证')"/>
+            :label="$t('确认提币')"/>
         </div>
       </div>
     </v-modal>
@@ -156,14 +156,13 @@ export default {
     },
     async getCoinAddress () {
       const param = {
-        chain: this.selectCoin.chain,
         currency: this.selectCoin.currency
       }
-      //   return service.getMyCoinAddress(param).then((res) => {
-      // if (res && res.data) {
-      //   this.transfer2Address = res.data.address
-      // }
-    //   })
+      return service.getAddressList(param).then((res) => {
+        if (res && res.data) {
+          //  TODO这里需要更新提币地址哈
+        }
+      })
     },
     async changeCoinType (coin) {
       this.selectCoin = coin

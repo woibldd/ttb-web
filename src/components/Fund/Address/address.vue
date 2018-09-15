@@ -83,10 +83,9 @@ export default {
     },
     async getCoinAddress () {
       const param = {
-        chain: this.selectCoin.chain,
         currency: this.selectCoin.currency
       }
-      return service.getMyCoinAddress(param).then((res) => {
+      return service.getAddressList(param).then((res) => {
         if (res && res.data) {
           this.newAddress = res.data.address
         }

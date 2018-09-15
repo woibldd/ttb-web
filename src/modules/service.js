@@ -308,6 +308,10 @@ const service = {
   getDepositHistory (param) {
     return request('/account/deposit/list', param)
   },
+  // 获取添加过的地址列表
+  getAddressList (param) {
+    return request('/account/withdraw/address/list', param)
+  },
   // 添加提币地址
   addCoinAddress (param) {
     return request('/account/withdraw/address/create', param)
