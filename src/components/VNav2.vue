@@ -3,24 +3,9 @@
     <div class="c_box">
       <router-link :to="{name:'home'}" class="nav_logo"></router-link>
       <div class="nav_right">
-        <div v-if="!state.userInfo" class="right_options">
-          <router-link :to="{name:'login'}" class="nav_log_res">{{$t("signin")}}</router-link>
-          <router-link :to="{name:'register'}" class="nav_log_res">{{$t("signup_title")}}</router-link>
-        </div>
-        <div class="right_options" v-else>
-          <p class="email">
-            <router-link :to="{name:'profile'}">{{desentInfo}}</router-link>
-          </p>
-          <a class="quit" @click="logout">[ {{$t("signout")}} ]</a>
-        </div>
-
-        <div class="lang">{{localeText}}<b></b>
-            <div class="lang_box">
-                <a @click="langcn">简体中文</a>
-                <!-- <a @click="langen">中文繁體</a> -->
-                <a @click="langen">English</a>
-            </div>
-        </div>
+        <router-link :to="{name:'login'}" class="nav_log_res">登陆</router-link>
+        <router-link :to="{name:'register'}" class="nav_log_res">注册</router-link>
+        <div class="lang">简体中文<b></b></div>
       </div>
     </div>
   </div>
@@ -36,51 +21,7 @@ export default {
   props: {
     dark: {
       type: Boolean,
-      default: false,
-    }
-  },
-  data () {
-    return {
-      state
-    }
-  },
-  computed: {
-    localeText () {
-      return utils.getLocaleName(state.locale)
-    },
-    desentInfo() {
-      let userInfo = this.state.userInfo
-      if (userInfo) {
-        if (userInfo.phone) {
-          return utils.publicDesensitization(userInfo.phone)[0]
-        } else if (userInfo.email) {
-          return utils.publicDesensitization(userInfo.email)[0]
-        }
-      }
-
-      return ''
-    }
-  },
-  methods: {
-    langcn () {
-      let lang_cn = 'zh-CN'
-      actions.setLocale(lang_cn)
-    },
-    langen () {
-      let lang_en = 'en'
-      actions.setLocale(lang_en)
-    },
-    logout () {
-      actions.setUserInfo(null)
-      service.signout()
-      if (utils.getRouteMeta(this.$route, 'auth')) {
-        this.$router.push({
-          name: 'login'
-        })
-      }
-    },
-    clickStar($event){
-        this.className='active';//console.log($event.currentTarget);
+      default: false
     }
   }
 }
@@ -96,29 +37,17 @@ export default {
   line-height: 42px;
   .nav_logo {
     float: left;
-    width: 142px;
-    height: 46px;
+    width: 150px;
+    height: 42px;
     display: block;
     background: url(../assets/nav_logo.png);
     float: left;
-    margin: 17px 0;
+    margin: 19px 0;
   }
   .nav_right {
-    .right_options {
-      float: left;
-    }
     float: right;
-    .email{
-      float: left;
-      color:#fff;
-      margin:19px 0;
-    }
-    .quit{
-      float: left;
-      color:#fff;
-    }
   }
-  .nav_right .nav_log_res, .nav_right .quit {
+  .nav_right a {
     float: left;
     margin: 19px 0 19px 40px;
     color: #fff;
@@ -143,7 +72,6 @@ export default {
     position: relative;
     font-size: 12px;
     cursor: pointer;
-    z-index: 1;
     b {
       width: 8px;
       height: 24px;
@@ -152,48 +80,6 @@ export default {
       position: absolute;
       top: 0;
       right: 16px;
-    }
-    .lang_box{
-        display: block;
-        width: 200%;
-        height: auto;
-        line-height: 40px;
-        padding-top: 27px;
-        right:0;
-        position: absolute;
-        display: none;
-        a{
-            background: #303c47;
-            display: block;
-            width: 50%;
-            height: 40px;
-            float: left;
-            color: #fff;
-            &:hover{
-                background:#273440;
-                color: #c9a96c;
-            }
-        }
-    }
-    &:hover{
-        .lang_box{
-            display: block;
-        }
-    }
-  }
-
-  @media screen and (max-width: 768px){
-    .c_box {
-      padding: 0 10px;
-    }
-    .lang {
-      display: none;
-      visibility: hidden;
-    }
-    .right_options {
-      .nav_log_res, .email,.quit {
-        margin-left: 10px;
-      }
     }
   }
 }
