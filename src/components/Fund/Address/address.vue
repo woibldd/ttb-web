@@ -3,7 +3,6 @@
     <div class="fund-container">
       <div class="title-box">
         <div> {{ $t('deposit') }}</div>
-        <div class="fund-history"> {{ $t('资金记录') }}</div>
       </div>
       <div class="fund-items-content">
         <div class="fund-item-row mb-24">
@@ -12,8 +11,7 @@
             <el-select
               v-model="selectCoin"
               @change="changeCoinType"
-              value-key="currency"
-              placeholder="请选择">
+              value-key="currency">
               <el-option
                 v-for="(item, idx) in allCoins"
                 :key="idx"
@@ -64,7 +62,7 @@ import service from '@/modules/service'
 const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
 
 export default {
-  name: 'Deposit',
+  name: 'MyAddress',
   data () {
     return {
       address: '',
@@ -107,6 +105,9 @@ export default {
           this.selectCoin = this.allCoins[0]
         }
       })
+    },
+    ensure () {
+
     }
   }
 }

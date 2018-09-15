@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'prettyNum',
+  name: 'PrettyNum',
   props: ['num'],
   computed: {
     numStr () {

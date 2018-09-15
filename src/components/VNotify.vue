@@ -1,16 +1,36 @@
 <template>
-  <div class="notify-wrap" @mouseenter="pause" @mouseleave="play">
-    <div class="notify-panel" :class="[show ? 'show' : '']" ref="panel">
-      <div class="notify-box" :class="['bg-' + style]">
+  <div
+    class="notify-wrap"
+    @mouseenter="pause"
+    @mouseleave="play">
+    <div
+      class="notify-panel"
+      :class="[show ? 'show' : '']"
+      ref="panel">
+      <div
+        class="notify-box"
+        :class="['bg-' + style]">
         <div class="notify-type">
-            <icon class="icon-notify" :name="'notify-'+style"></icon>
+          <icon
+            class="icon-notify"
+            :name="'notify-'+style"/>
         </div>
-        <div class="notify-info" :class="{h: !title || !content}">
-          <div class="title" v-show="title">{{ title }}</div>
-          <div class="content" v-show="content">{{ content }}</div>
+        <div
+          class="notify-info"
+          :class="{h: !title || !content}">
+          <div
+            class="title"
+            v-show="title">{{ title }}</div>
+          <div
+            class="content"
+            v-show="content">{{ content }}</div>
         </div>
-        <div class="notify-close-icon" @click.prevent.stop="close">
-          <icon class="icon-default" name="guanbi"/>
+        <div
+          class="notify-close-icon"
+          @click.prevent.stop="close">
+          <icon
+            class="icon-default"
+            name="guanbi"/>
         </div>
       </div>
     </div>
@@ -21,7 +41,7 @@
 import _ from 'lodash'
 
 export default {
-  name: 'vNotify',
+  name: 'VNotify',
   props: ['options'],
   data () {
     return {
