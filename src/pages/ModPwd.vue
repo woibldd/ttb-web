@@ -1,60 +1,95 @@
 <template>
   <div class="profile-container">
-    <div class="title-box">{{$t('profile_left_invite_safety')}}<span>{{$t('email_binding')}}</span></div>
-    <div class="invinfo-box">
-        <div class="inp_box">
-            <p>{{$t('change_password_orig')}}</p>
-            <div class="inp_cox">
-                <input type="text" />
-            </div>
-            <span class="tips">错误提示</span>
-        </div>
-        <div class="inp_box">
-            <p>{{$t('change_password_new')}}</p>
-            <div class="inp_cox">
-                <input type="text" />
-            </div>
-            <span class="tips">错误提示</span>
-        </div>
-        <div class="inp_box">
-            <p>{{$t('change_password_repeat')}}</p>
-            <div class="inp_cox">
-                <input type="text" />
-            </div>
-            <span class="tips">错误提示</span>
-        </div>
-        <div class="inp_box">
-            <v-btn class="submit-btn" :label="$t('modify')"
-            :loading="loading"
-            @click="submit"></v-btn>
-        </div>
-    </div>
+    <div class="title-box">{{ $t('profile_left_invite_safety') }}<span>{{ $t('change_password') }}</span></div>
+    <el-form
+      class="invinfo-box"
+      ref="form"
+      :rules="rules"
+      label-position="left"
+      :model="form"
+      label-width="104px">
+      <el-form-item
+        prop="password_orig"
+        class="inp_box"
+        :label="$t('change_password_orig')">
+        <el-input
+          v-model="form.password_orig"/>
+      </el-form-item>
+      <el-form-item
+        prop="password_new"
+        class="inp_box"
+        :label="$t('change_password_new')">
+        <el-input
+          type="password"
+          v-model="form.password_new"/>
+      </el-form-item>
+      <el-form-item
+        prop="password_repeat"
+        class="inp_box"
+        :label="$t('change_password_repeat')">
+        <el-input
+          type="password"
+          v-model="form.password_repeat"/>
+      </el-form-item>
+      <el-form-item class="inp_box">
+        <v-btn
+          class="submit-btn"
+          :label="$t('modify')"
+          :loading="loading"
+          @click="submit"/>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
 <script>
-  import service from '@/modules/service'
-  import VBtn from '@/components/VBtn'
+import service from '@/modules/service'
+import VBtn from '@/components/VBtn'
 
-  export default {
-    name: 'SafeVerified',
-    components: {
-      VBtn
-    },
-    data () {
-      return {
-        
-      }
-    },
-    computed: {
-
-    },
-    methods: {
-      async changePassword () {
-        let result = await service.changePassword()
+export default {
+  name: 'SafeVerified',
+  components: {
+    VBtn
+  },
+  data () {
+    const validataPswRepeat = (rule, value, callback) => {
+      if (!value) {
+        callback(new Error(this.$i18n.t('不能为空')))
+      } else {
+        if (value === this.form.password_new) {
+          this.$refs.form.validateField('email')
+        }
+        callback(new Error(this.$t('change_password_diff')))
       }
     }
+    return {
+      loading: false,
+      form: {},
+      rules: {
+        password_repeat: [
+          { validator: validataPswRepeat, trigger: 'blur' }
+        ],
+        password_new: [
+          { validator: validataPswRepeat, trigger: 'blur' }
+        ],
+        password_orig: [
+          { required: true, message: this.$i18n.t('不能为空'), trigger: 'blur' }
+        ]
+      }
+    }
+  },
+  computed: {
+
+  },
+  methods: {
+    async changePassword () {
+      let result = await service.changePassword()
+    },
+    submit () {
+
+    }
   }
+}
 </script>
 <style lang="scss" scoped>
   @import "../styles/vars";
@@ -118,7 +153,6 @@
             .submit-btn{
                 width: 340px;
                 height: 40px;
-                margin-left: 104px;
             }
             span.tips{
                 display: block;
@@ -130,45 +164,6 @@
                 top: 40px;
                 font-size: 10px;
                 color: #EB5757;
-            }
-            .inp_cox{
-                border: 1px solid $c;
-                width: 340px;
-                float: left;
-                height: 40px;
-                border-radius: 4px;
-                box-sizing: border-box;
-                position: relative;
-                a{
-                    height: 38px;
-                    line-height: 38px;
-                    width: 100px;
-                    text-align: center;
-                    display: block;
-                    position: absolute;
-                    right: 0;
-                    top: 0;
-                    &:before{
-                        content: "";
-                        width: 1px;
-                        height: 20px;
-                        background: $c;
-                        display: block;
-                        position: absolute;
-                        left: 0;
-                        top: 50%;
-                        margin-top: -10px;
-                    }
-                }
-                input{
-                    padding-left: 35px;
-                    width: 100%;
-                    height: 100%;
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    padding-left:15px;
-                }
             }
         }
       }
