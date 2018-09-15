@@ -19,10 +19,14 @@ const service = {
     return request('password/reactivate')
   },
   resetPassword (data) {
-    return request('password/reset', data)
+    let uri = 'user/reset/password/email'
+    if (data.by === 'phone') {
+      uri = 'user/reset/password/phone'
+    }
+    return request(uri, data)
   },
   changePassword (data) {
-    return request('password/modify', data)
+    return request('user/modify/password', data)
   },
   getSmsCode (data) {
     if (data.task === 'register') {
@@ -120,8 +124,8 @@ const service = {
   getRegionList () {
     return getCache('regionList', () => Promise.resolve(require('./region.json')))
   },
-  getKycInfo (data) {
-    return request('kyc/query', data)
+  getKycInfo () {
+    return request('user/kyc')
   },
   updateKycInfo (data) {
     return request('kyc/update', data)

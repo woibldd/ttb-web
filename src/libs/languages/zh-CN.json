@@ -543,5 +543,7 @@
   "Verified": "实名认证",
   "Country": "国籍",
   "identity_authentication": "身份认证",
-  "modify": "修改"
+  "modify": "修改",
+  "to_verify": "去认证",
+  "to_bind": "去绑定"
 }

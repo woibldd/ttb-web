@@ -1,22 +1,39 @@
 <template>
-  <div class="user-center-left">
+  <div class="profile-left-container">
     <div class="left-menu-container left-menu-nobottom">
       <p class="left-menu-title">
         <icon name="personal-center"/>
         <span class="menu-title">{{ $t('profile_personal_center') }}</span>
       </p>
       <ul class="left-menu-list">
-        <li class=""><span class="menu-name">{{ $t('profile_left_invite_perinfo') }}</span></li>
-        <li class=""><span class="menu-name">{{ $t('profile_left_invite_safety') }}</span></li>
-        <li class=""><span class="menu-name">{{ $t('profile_left_invite') }}</span></li>
+        <li class="">
+            <router-link class="menu-name" active-class="active" :to="{name: 'ProfileInfo'}">{{ $t('profile_left_invite_perinfo') }}</router-link>
+        </li>
+        <li class="">
+            <router-link class="menu-name" active-class="active" :to="{name: 'ProfileSafety'}">{{ $t('profile_left_invite_safety') }}</router-link>
+        </li>
+        <li class="">
+            <router-link class="menu-name" active-class="active" :to="{name: 'Kyc'}">{{ $t('profile_sec_kyc') }}</router-link>
+        </li>
+        <li class="">
+            <router-link class="menu-name" active-class="active" :to="{name: 'Kyc'}">{{ $t('profile_sec_api') }}</router-link>
+        </li>
+        <li class="">
+          <router-link class="menu-name" :to="{name: 'invite'}" active-class="active">
+            {{ $t('profile_left_invite') }}
+          </router-link>    
+        </li>
       </ul>
     </div>
   </div>
 </template>
+<script>
+export default{
+
+}
+</script>
 <style lang="scss">
-@import "../styles/vars";
-@import "../styles/mixins";
-.user-center-left {
+.profile-left-container {
   float: left;
   .left-menu-nobottom {
     border-bottom: 0;
@@ -49,15 +66,13 @@
     .left-menu-list {
       width: 100%;
       margin-top: 20px;
-      li {
-        width: 100%;
-        text-align: left;
-        line-height: 36px;
-        font-size: 14px;
-        color: #333;
-        cursor: pointer;
-        padding-left: 34px;
+
+      .menu-name {
         box-sizing: border-box;
+        width: 100%;
+        display: inline-block;
+        padding-left: 34px;
+        color: $text-strong;
 
         &.active, &:hover {
           color: $primary;
@@ -65,8 +80,16 @@
           box-shadow: inset 3px 0 0 0 $primary;
         }
       }
+      li {
+        width: 100%;
+        text-align: left;
+        line-height: 36px;
+        font-size: 14px;
+        color: #333;
+        cursor: pointer;
+        margin-bottom: 5px;
+      }
     }
   }
 }
-
 </style>

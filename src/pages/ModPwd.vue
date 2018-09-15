@@ -1,72 +1,66 @@
 <template>
-  <div style="page-invite-wrap">
-    <profile-left></profile-left>
-    <div class="user-center-right">
-      <div class="profile-container">
-        <div class="title-box">{{$t('profile_left_invite_safety')}}<span>{{$t('email_binding')}}</span></div>
-        <div class="invinfo-box">
-            <div class="inp_box">
-                <p>{{$t('change_password_orig')}}</p>
-                <div class="inp_cox">
-                    <input type="text" />
-                </div>
-                <span class="tips">错误提示</span>
+  <div class="profile-container">
+    <div class="title-box">{{$t('profile_left_invite_safety')}}<span>{{$t('email_binding')}}</span></div>
+    <div class="invinfo-box">
+        <div class="inp_box">
+            <p>{{$t('change_password_orig')}}</p>
+            <div class="inp_cox">
+                <input type="text" />
             </div>
-            <div class="inp_box">
-                <p>{{$t('change_password_new')}}</p>
-                <div class="inp_cox">
-                    <input type="text" />
-                </div>
-                <span class="tips">错误提示</span>
-            </div>
-            <div class="inp_box">
-                <p>{{$t('change_password_repeat')}}</p>
-                <div class="inp_cox">
-                    <input type="text" />
-                </div>
-                <span class="tips">错误提示</span>
-            </div>
-            <div class="inp_box">
-                <v-btn class="submit-btn" :label="$t('modify')"
-                :loading="loading"
-                @click="submit"></v-btn>
-            </div>
+            <span class="tips">错误提示</span>
         </div>
-      </div>
+        <div class="inp_box">
+            <p>{{$t('change_password_new')}}</p>
+            <div class="inp_cox">
+                <input type="text" />
+            </div>
+            <span class="tips">错误提示</span>
+        </div>
+        <div class="inp_box">
+            <p>{{$t('change_password_repeat')}}</p>
+            <div class="inp_cox">
+                <input type="text" />
+            </div>
+            <span class="tips">错误提示</span>
+        </div>
+        <div class="inp_box">
+            <v-btn class="submit-btn" :label="$t('modify')"
+            :loading="loading"
+            @click="submit"></v-btn>
+        </div>
     </div>
   </div>
 </template>
 
 <script>
-  import ProfileLeft from './ProfileLeft'
   import service from '@/modules/service'
   import VBtn from '@/components/VBtn'
 
   export default {
     name: 'SafeVerified',
     components: {
-      ProfileLeft,
       VBtn
     },
     data () {
       return {
-
+        
       }
     },
     computed: {
 
     },
     methods: {
-
+      async changePassword () {
+        let result = await service.changePassword()
+      }
     }
   }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   @import "../styles/vars";
   @import '../styles/mixins';
 
   .user-center-right {
-    padding-left: 60px;
     float: left;
     .profile-container {
       width: 960px;

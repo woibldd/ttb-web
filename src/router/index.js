@@ -26,6 +26,7 @@ const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pa
 const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
 const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/ProfileSafety')
 const PhoneBind = () => import(/* webpackChunkName: "PhoneBind" */ '@/pages/PhoneBind')
+const SecuritySummary = () => import(/* webpackChunkName: "SecuritySummary" */ '@/pages/SecuritySummary')
 const eBind = () => import(/* webpackChunkName: "EmailBind" */ '@/pages/eBind')
 const ModPwd = () => import(/* webpackChunkName: "ModPwd" */ '@/pages/ModPwd')
 const GoogleTitle = () => import(/* webpackChunkName: "GoogleTitle" */ '@/pages/GoogleTitle')
@@ -118,7 +119,7 @@ let router = new Router({
       path: '/profile',
       name: 'profile',
       meta: {
-        auth: true,
+        auth: false,
         nav: true,
         class: 'dark',
         mobileNav: isMobile
@@ -134,40 +135,46 @@ let router = new Router({
         name: 'invite',
         component: Invite
       }, {
-        path: 'ProfileInfo',
+        path: 'info',
         name: 'ProfileInfo',
         component: ProfileInfo
       }, {
-        path: 'ProfileSafety',
+        path: 'security',
         name: 'ProfileSafety',
-        component: ProfileSafety
-      },{
-        path: 'SafeVerified',
+        component: ProfileSafety,
+        redirect: 'security/summary',
+        children: [{
+          path: 'summary',
+          name: 'Safety',
+          component: SecuritySummary
+        }, {
+          path: 'phone',
+          name: 'PhoneBind',
+          component: PhoneBind
+        }, {
+          path: 'email',
+          name: 'EmailBind',
+          component: eBind
+        }, {
+          path: 'change_password',
+          name: 'ModPwd',
+          component: ModPwd
+        },]
+      }, {
+        path: 'safe_verified',
         name: 'SafeVerified',
         component: SafeVerified
-      },{
-        path: 'PhoneBind',
-        name: 'PhoneBind',
-        component: PhoneBind
-      },{
-        path: 'eBind',
-        name: 'eBind',
-        component: eBind
-      },{
-        path: 'ModPwd',
-        name: 'ModPwd',
-        component: ModPwd
-      },{
-        path: 'GoogleTitle',
+      },  {
+        path: 'google_title',
         name: 'GoogleTitle',
         component: GoogleTitle
-      },{
-        path: 'ProfileAuthen',
-        name: 'ProfileAuthen',
+      }, {
+        path: 'kyc',
+        name: 'Kyc',
         component: ProfileAuthen
-      },{
-        path: 'Authen',
-        name: 'Authen',
+      }, {
+        path: 'kyc_upload',
+        name: 'KycUpload',
         component: Authen
       }]
     }, {

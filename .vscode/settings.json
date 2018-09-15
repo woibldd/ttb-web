@@ -7,7 +7,7 @@
       "autoFix": true
     }
   ],
-  "eslint.autoFixOnSave": true,
+  "eslint.autoFixOnSave": false,
   "editor.detectIndentation": false,
   "editor.renderControlCharacters": true,
   "editor.renderWhitespace": "all",

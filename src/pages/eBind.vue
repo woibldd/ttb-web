@@ -1,45 +1,38 @@
 <template>
-  <div style="page-invite-wrap">
-    <profile-left></profile-left>
-    <div class="user-center-right">
-      <div class="profile-container">
-        <div class="title-box">{{$t('profile_left_invite_safety')}}<span>{{$t('email_binding')}}</span></div>
-        <div class="invinfo-box">
-            <div class="inp_box">
-                <p>{{$t('register_by_email')}}</p>
-                <div class="inp_cox">
-                    <input type="text" />
-                </div>
-                <span class="tips">错误提示</span>
+  <div class="profile-container">
+    <div class="title-box">{{$t('profile_left_invite_safety')}}<span>{{$t('email_binding')}}</span></div>
+    <div class="invinfo-box">
+        <div class="inp_box">
+            <p>{{$t('register_by_email')}}</p>
+            <div class="inp_cox">
+                <input type="text" />
             </div>
-            <div class="inp_box">
-                <p>{{$t('email_code')}}</p>
-                <div class="inp_cox">
-                    <input type="text" />
-                    <a href="javascript:void(0)">{{$t('hq_send')}}</a>
-                </div>
-                <span class="tips">错误提示</span>
-            </div>
-            <div class="inp_box">
-                <v-btn class="submit-btn" :label="$t('bind')"
-                :loading="loading"
-                @click="submit"></v-btn>
-            </div>
+            <span class="tips">错误提示</span>
         </div>
-      </div>
+        <div class="inp_box">
+            <p>{{$t('email_code')}}</p>
+            <div class="inp_cox">
+                <input type="text" />
+                <a href="javascript:void(0)">{{$t('hq_send')}}</a>
+            </div>
+            <span class="tips">错误提示</span>
+        </div>
+        <div class="inp_box">
+            <v-btn class="submit-btn" :label="$t('bind')"
+            :loading="loading"
+            @click="submit"></v-btn>
+        </div>
     </div>
   </div>
 </template>
 
 <script>
-  import ProfileLeft from './ProfileLeft'
   import service from '@/modules/service'
   import VBtn from '@/components/VBtn'
 
   export default {
     name: 'SafeVerified',
     components: {
-      ProfileLeft,
       VBtn
     },
     data () {
@@ -55,12 +48,12 @@
     }
   }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   @import "../styles/vars";
   @import '../styles/mixins';
 
   .user-center-right {
-    padding-left: 60px;
+    // padding-left: 60px;
     float: left;
     .profile-container {
       width: 960px;

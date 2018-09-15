@@ -1,76 +1,73 @@
 <template>
-  <div style="page-invite-wrap">
-    <profile-left></profile-left>
-    <div class="user-center-right">
-      <div class="profile-container">
-        <div class="title-box">{{$t('identity_authentication')}}</div>
-        <div class="invinfo-box">
-            <div class="inp_box mbo">
-                <p>账号类型</p>
-                <div class="rd">
-                    <p></p>个人
-                </div>
-            </div>
-            <div class="inp_box">
-                <p>{{$t('name')}}</p>
-                <input type="text" class="s_ip" />
-                <input type="text" class="s_ip" />
-                <span class="tips"></span>
-            </div>
-            <div class="inp_box">
-                <p>出生日期</p>
-                <select class="s_ip">
-                    <option value="aa"></option>
-                </select>
-                <select class="s_ip">
-                    <option value="aa"></option>
-                </select>
-                <select class="s_ip">
-                    <option value="aa"></option>
-                </select>
-            </div>
-            <div class="inp_box">
-                <p>证件类型</p>
-                <select>
-                    <option value="aa"></option>
-                </select>
-            </div>
-            <div class="inp_box mbo">
-                <p>地址</p>
-                <input type="text" />
-            </div>
-            <div class="inp_box mbo">
-                <p></p>
-                <input type="text" />
-            </div>
-            <div class="inp_box">
-                <p></p>
-                <select class="s_ip">
-                    <option value="aa"></option>
-                </select>
-                <select class="s_ipa">
-                    <option value="aa"></option>
-                </select>
-                <span class="tips"></span>
-            </div>
-            <div class="inp_box">
-                <p>{{$t('kyc_idcard')}}</p>
-                <input type="text" />
-                <span class="tips"></span>
-            </div>
-            <div class="inp_box">
-                <p>{{$t('kyc_idcard')}}</p>
-                <select class="">
-                    <option value="aa"></option>
-                </select>
-                <span class="tips"></span>
-            </div>
-            <div class="inp_box">
-                <v-btn class="submit-btn" :label="$t('sub')"
-                :loading="loading"
-                @click="submit"></v-btn>
-            </div>
-        </div>
+  <div class="user-center-right">
+    <div class="profile-container">
+      <div class="title-box">{{$t('identity_authentication')}}</div>
+      <div class="invinfo-box">
+          <div class="inp_box mbo">
+              <p>账号类型</p>
+              <div class="rd">
+                  <p></p>个人
+              </div>
+          </div>
+          <div class="inp_box">
+              <p>{{$t('name')}}</p>
+              <input type="text" class="s_ip" />
+              <input type="text" class="s_ip" />
+              <span class="tips"></span>
+          </div>
+          <div class="inp_box">
+              <p>出生日期</p>
+              <select class="s_ip">
+                  <option value="aa"></option>
+              </select>
+              <select class="s_ip">
+                  <option value="aa"></option>
+              </select>
+              <select class="s_ip">
+                  <option value="aa"></option>
+              </select>
+          </div>
+          <div class="inp_box">
+              <p>证件类型</p>
+              <select>
+                  <option value="aa"></option>
+              </select>
+          </div>
+          <div class="inp_box mbo">
+              <p>地址</p>
+              <input type="text" />
+          </div>
+          <div class="inp_box mbo">
+              <p></p>
+              <input type="text" />
+          </div>
+          <div class="inp_box">
+              <p></p>
+              <select class="s_ip">
+                  <option value="aa"></option>
+              </select>
+              <select class="s_ipa">
+                  <option value="aa"></option>
+              </select>
+              <span class="tips"></span>
+          </div>
+          <div class="inp_box">
+              <p>{{$t('kyc_idcard')}}</p>
+              <input type="text" />
+              <span class="tips"></span>
+          </div>
+          <div class="inp_box">
+              <p>{{$t('kyc_idcard')}}</p>
+              <select class="">
+                  <option value="aa"></option>
+              </select>
+              <span class="tips"></span>
+          </div>
+          <div class="inp_box">
+              <v-btn class="submit-btn" :label="$t('sub')"
+              :loading="loading"
+              @click="submit"></v-btn>
+          </div>
       </div>
     </div>
   </div>
@@ -100,7 +97,7 @@
     }
   }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   @import "../styles/vars";
   @import '../styles/mixins';
 
