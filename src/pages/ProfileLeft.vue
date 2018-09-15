@@ -2,15 +2,15 @@
   <div class="user-center-left">
     <div class="left-menu-container left-menu-nobottom">
       <p class="left-menu-title">
-        <icon name="personal-center"/>
-        <span class="menu-title">{{ $t('profile_personal_center') }}</span>
-      </p>
-      <ul class="left-menu-list">
-        <li class=""><span class="menu-name">{{ $t('profile_left_invite_perinfo') }}</span></li>
-        <li class=""><span class="menu-name">{{ $t('profile_left_invite_safety') }}</span></li>
-        <li class=""><span class="menu-name">{{ $t('profile_left_invite') }}</span></li>
-      </ul>
-    </div>
+        <icon name="personal-center"></icon>
+        <span class="menu-title">{{$t('profile_personal_center')}}</span>
+        </p>
+        <ul class="left-menu-list">
+          <!-- <li class="active"><span class="menu-name">{{ $t('profile_left_invite_perinfo') }}</span></li> -->
+          <!-- <li class=""><span class="menu-name">{{ $t('profile_left_invite_safety') }}</span></li> -->
+          <li class="active"><span class="menu-name">{{ $t('profile_left_invite') }}</span></li>
+        </ul>
+      </div>
   </div>
 </template>
 <style lang="scss">
