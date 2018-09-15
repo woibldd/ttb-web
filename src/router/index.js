@@ -159,15 +159,15 @@ let router = new Router({
           path: 'change_password',
           name: 'ModPwd',
           component: ModPwd
-        },]
+        }, {
+          path: '2fa',
+          name: 'GoogleBind',
+          component: GoogleTitle
+        }]
       }, {
         path: 'kyc',
         name: 'Kyc',
         component: SafeVerified
-      },  {
-        path: 'google_title',
-        name: 'GoogleTitle',
-        component: GoogleTitle
       }, {
         path: 'kyc_upload',
         name: 'KycUpload',

@@ -203,10 +203,10 @@ const service = {
     return request('phone/unbind')
   },
   bindEmail (data) {
-    return request('user/bind/email')
+    return request('user/bind/email', data)
   },
   bindEmailCode (data) {
-    return request('user/bind/email/code')
+    return request('user/bind/email/code', data)
   },
   getApiList () {
     return request('api/list')

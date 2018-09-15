@@ -13,7 +13,11 @@
             <p>{{$t('email_code')}}</p>
             <div class="inp_cox">
                 <input type="text" v-model="code" />
-                <a href="javascript:void(0)">{{$t('hq_send')}}</a>
+                <countdown-code-button 
+                  :sendText="$t('hq_send')"
+                  :validation="validation" 
+                  :sendCodeFunc="sendCode">
+                </countdown-code-button>
             </div>
             <!-- <span class="tips">错误提示</span> -->
         </div>
@@ -29,11 +33,14 @@
 <script>
   import service from '@/modules/service'
   import VBtn from '@/components/VBtn'
+  import countdownCodeButton from '@/components/common/countdown-code-button'
+  import utils from '@/modules/utils'
 
   export default {
     name: 'SafeVerified',
     components: {
-      VBtn
+      VBtn,
+      countdownCodeButton
     },
     data () {
       return {
@@ -46,6 +53,21 @@
 
     },
     methods: {
+      validation () {
+        if (!this.email) {
+          debugger
+          utils.alert(this.$t('err_empty_password'))
+          return false
+        }
+        if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(this.email)) {
+          utils.alert(this.$t('err_invalid_email'))
+          return false
+        }
+        return true
+      },
+      sendCode () {
+        return service.bindEmailCode({email: this.email})
+      },
       async submit () {
         let params = {
           email: this.email,

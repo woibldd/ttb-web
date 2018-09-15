@@ -11,18 +11,20 @@
           <router-link v-if="!phone" :to="{name: 'PhoneBind'}">{{$t('bind')}}</router-link>
         </div>
       </li>
-      <li>
+      <li :class="{pass: !!email}">
         <div><span></span><p>{{$t('email')}}</p></div>
-        <div>{{$t('No_Bindings')}}</div>
+        <div>{{$t( !!email ? 'Bindings' : 'No_Bindings')}}</div>
         <div>
           {{email}}
           <router-link v-if="!email" :to="{name: 'EmailBind'}">{{$t('bind')}}</router-link>
         </div>
       </li>
-      <li>
+      <li :class="{pass: !!google_key_bound}">
         <div><span></span><p>{{$t('google_validator')}}</p></div>
-        <div>{{$t('No_Bindings')}}</div>
-        <div>关闭验证</div>
+        <div>{{$t( !!google_key_bound ? 'Bindings' : 'No_Bindings')}}</div>
+        <div>
+          <router-link v-if="!google_key_bound" :to="{name: 'GoogleBind'}">{{$t('bind')}}</router-link>
+        </div>
       </li>
       <li>
         <div><span></span><p>{{$t('log_pwd')}}</p></div>
@@ -48,17 +50,24 @@ export default {
   },
   computed: {
     phone () {
-      if (state.userInfo.phone) {
+      if (state.userInfo && state.userInfo.phone) {
         return utils.publicDesensitization(state.userInfo.phone)[0]
       }
       return ''
     },
     email () {
-      if (state.userInfo.email) {
-        return utils.publicDesensitization(state.userInfo.phone)[0]
+      if (state.userInfo && state.userInfo.email) {
+        return utils.publicDesensitization(state.userInfo.email)[0]
       }
       return ''
-    }
+    },
+    google_key_bound () {
+      if (state.userInfo && state.userInfo.google_key_bound) {
+        return 'true'
+      }
+      return ''
+    },
+    
 
   },
   methods: {
@@ -69,6 +78,25 @@ export default {
 
 
 <style lang="scss" scoped>
+.title-box {
+        width: 100%;
+        height: 40px;
+        font-size: 18px;
+        font-weight: 600;
+        color: $text-strong;
+        border-bottom: 1px solid #e6e6e6;
+        span{
+            color: #999;
+            font-size: 14px;
+            float: right;
+            font-weight: lighter;
+            padding-right: 25px;
+            i{
+                color: #EB5757;
+            }
+        }
+      }
+      
 .invinfo-box {
   width: 100%;
   ul{

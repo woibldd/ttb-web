@@ -1,54 +1,47 @@
 <template>
-  <div style="page-invite-wrap">
-    <profile-left></profile-left>
-    <div class="user-center-right">
-      <div class="profile-container">
-        <div class="title-box">{{$t('profile_left_invite_safety')}}<span>{{$t('bind_google_title')}}</span></div>
-        <div class="invinfo-box">
-            <p class="gt_txt">{{$t('bind_google_title')}}</p>
-            <div class="gt_ewm">
-                <img src="../assets/ewm.jpg" />
-            </div>
-            <p class="gt_t">验证码密钥</p>
-            <span class="gt_yz">GVQWSBTQNZGZWPLG</span>
-            <ul>
-                <li><i>1</i>使用没有越狱或者Root过的手机，在App Store 或应用市场内搜索 Google Authenticator 并安装；</li>
-                <li><i>2</i>使用 Google Authenticator 扫描二维码；</li>
-                <li><i>3</i>请手写或打印16位密钥，放置到安全的地方。如果你的手机被盗或抹掉内容，你可以使用16位密钥进行恢复；</li>
-                <li><i>4</i>不要把密钥告诉别人！IX 客服不会索取你的密钥。</li>
-            </ul>
-            <p class="gt_btxt">请确认</p>
-            <div class="gt_lb">
-                <input type="checkbox" id="asda" class="">
-                <label for="asda">我的iPhone或Android手机没有经过越狱、Root或任何形式的破解</label>
-            </div>
-            <div class="gt_lb">
-                <input type="checkbox" id="asd" class="">
-                <label for="asd">已经手写或打印16位密钥，放到安全的地方</label>
-            </div>
+  <div class="profile-container">
+    <div class="title-box">{{$t('profile_left_invite_safety')}}<span>{{$t('bind_google_title')}}</span></div>
+    <div class="invinfo-box">
+        <p class="gt_txt">{{$t('bind_google_title')}}</p>
+        <div class="gt_ewm">
+            <img src="../assets/ewm.jpg" />
         </div>
-        <div class="inp_box">
-            <input type="text" placeholder="6位谷歌验证码" />
+        <p class="gt_t">验证码密钥</p>
+        <span class="gt_yz">GVQWSBTQNZGZWPLG</span>
+        <ul>
+            <li><i>1</i>使用没有越狱或者Root过的手机，在App Store 或应用市场内搜索 Google Authenticator 并安装；</li>
+            <li><i>2</i>使用 Google Authenticator 扫描二维码；</li>
+            <li><i>3</i>请手写或打印16位密钥，放置到安全的地方。如果你的手机被盗或抹掉内容，你可以使用16位密钥进行恢复；</li>
+            <li><i>4</i>不要把密钥告诉别人！IX 客服不会索取你的密钥。</li>
+        </ul>
+        <p class="gt_btxt">请确认</p>
+        <div class="gt_lb">
+            <input type="checkbox" id="asda" class="">
+            <label for="asda">我的iPhone或Android手机没有经过越狱、Root或任何形式的破解</label>
         </div>
-        <div class="inp_box">
-            <v-btn class="submit-btn" :label="$t('bind')"
-            :loading="loading"
-            @click="submit"></v-btn>
+        <div class="gt_lb">
+            <input type="checkbox" id="asd" class="">
+            <label for="asd">已经手写或打印16位密钥，放到安全的地方</label>
         </div>
-      </div>
+    </div>
+    <div class="inp_box">
+        <input type="text" placeholder="6位谷歌验证码" />
+    </div>
+    <div class="inp_box">
+        <v-btn class="submit-btn" :label="$t('bind')"
+        :loading="loading"
+        @click="submit"></v-btn>
     </div>
   </div>
 </template>
 
 <script>
-  import ProfileLeft from './ProfileLeft'
   import service from '@/modules/service'
   import VBtn from '@/components/VBtn'
 
   export default {
     name: 'SafeVerified',
     components: {
-      ProfileLeft,
       VBtn
     },
     data () {
@@ -64,7 +57,7 @@
     }
   }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   @import "../styles/vars";
   @import '../styles/mixins';
 
