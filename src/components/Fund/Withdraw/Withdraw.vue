@@ -62,7 +62,15 @@
       </div>
       <div class="fund-item-other withdraw-fee mb-23">
         <p> <span class="fee__label">{{ $t('withdraw_fee') }} </span> <span class="fee__coin">{{ selectCoin.withdraw_fee }}{{ selectCoin.currency }}</span> </p>
-        <p><span class="fee__label">{{ $t('withdraw_arrival') }}</span> <span class="fee__coin">{{ coinArrival }} {{ selectCoin.currency }}</span></p>
+        <p><span class="fee__label">{{ $t('withdraw_arrival') }}</span>
+          <span
+            class="fee__coin"
+            v-if="coinArrival > 0">{{ coinArrival }} {{ selectCoin.currency }}
+          </span>
+          <span v-else>
+            --
+          </span>
+        </p>
       </div>
       <div class="fund-item-other">
         <v-btn
@@ -73,8 +81,8 @@
       <ul
         class="fund-item-other mt-25 text-des"
         style="padding-left: 102px">
-        <li>  {{ $t('提现转出时间为 30 分钟内，具体到账时间以区块链网络速度决定；') }}</li>
-        <li>  {{ $t('为了确保安全，提现数量超过 0 BTC 时将进行人工审核，请正确填写提现地址。') }}</li>
+        <li>  {{ $t('withdraw_hint_delay') }}</li>
+        <li>  {{ $t('withdraw_hint_check',{num: selectCoin.min_review_amount ,coin: selectCoin.currency}) }}</li>
       </ul>
 
     </div>
@@ -160,9 +168,10 @@ export default {
       const param = {
         currency: this.selectCoin.currency
       }
-      return service.getAddressList(param).then((res) => {
+      return service.getMyAddressList(param).then((res) => {
         if (res && res.data) {
-          //  TODO这里需要更新提币地址哈
+          console.log(res, 'pppp')
+        //   this.transfer2Address = res
         }
       })
     },
