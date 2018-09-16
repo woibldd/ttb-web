@@ -82,9 +82,6 @@ export default {
 
   },
   methods: {
-    async changePassword () {
-      let result = await service.changePassword()
-    },
     async submit () {
       if (this.form.password_new == this.form.password_repeat) {
         let params = {
@@ -94,7 +91,7 @@ export default {
         let result = await service.changePassword(params)
         if (result && !result.code) {
           this.$router.push({
-            name: 'ProfileInfo'
+            name: 'Safety'
           })
         } else {
           utils.alert(result.message)

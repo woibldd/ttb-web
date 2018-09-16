@@ -110,6 +110,8 @@
   "deposit_hint_confirm": "%{coin} transfers must be confirmed by the %{net} blockchain network. The transacted amount could be traded after %{trade} confirmations, and become withdrawable after %{withdraw} confirmations.",
   "deposit_fa2_hint": "To ensure your account security, please enable a 2-factor Authentication",
   "qrcode_fail": "Fail to generate QR code",
+  "err_check_google_code": "Please confirm that the Google verification code key has been safely backed up",
+  "invalid_google_code": "Invalid Google code",
   "fa2_google_code": "Google Authenticator",
   "fa2_phone_code": "SMS Authentication",
   "fa2_enable": "Enable",

@@ -4,10 +4,12 @@
     <div class="invinfo-box">
         <p class="gt_txt">{{$t('bind_google_title')}}</p>
         <div class="gt_ewm">
-            <img src="../assets/ewm.jpg" />
+            <canvas
+                class="qr-img"
+                ref="qr"/>
         </div>
         <p class="gt_t">验证码密钥</p>
-        <span class="gt_yz">GVQWSBTQNZGZWPLG</span>
+        <span class="gt_yz">{{google_key}}</span>
         <ul>
             <li><i>1</i>使用没有越狱或者Root过的手机，在App Store 或应用市场内搜索 Google Authenticator 并安装；</li>
             <li><i>2</i>使用 Google Authenticator 扫描二维码；</li>
@@ -16,16 +18,16 @@
         </ul>
         <p class="gt_btxt">请确认</p>
         <div class="gt_lb">
-            <input type="checkbox" id="asda" class="">
+            <input type="checkbox" v-model="checkbox1">
             <label for="asda">我的iPhone或Android手机没有经过越狱、Root或任何形式的破解</label>
         </div>
         <div class="gt_lb">
-            <input type="checkbox" id="asd" class="">
+            <input type="checkbox" v-model="checkbox2">
             <label for="asd">已经手写或打印16位密钥，放到安全的地方</label>
         </div>
     </div>
     <div class="inp_box">
-        <input type="text" placeholder="6位谷歌验证码" />
+        <input type="text" v-model="code" placeholder="6位谷歌验证码" />
     </div>
     <div class="inp_box">
         <v-btn class="submit-btn" :label="$t('bind')"
@@ -38,6 +40,8 @@
 <script>
   import service from '@/modules/service'
   import VBtn from '@/components/VBtn'
+  import {state} from '@/modules/store'
+  const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
 
   export default {
     name: 'SafeVerified',
@@ -46,14 +50,79 @@
     },
     data () {
       return {
-
+        state,
+        google_key: '',
+        code: '',
+        checkbox1: false,
+        checkbox2: false
       }
     },
     computed: {
-
+      username () {
+        if (this.state.userInfo) {
+          return this.state.userInfo.phone || this.state.userInfo.email
+        }
+        return ''
+      },
+    },
+    async created () {
+      this.getGoogleKey()
     },
     methods: {
-
+      async getGoogleKey() {
+        let result = await service.getGoogleKey()
+        if (result && !result.code) {
+          this.google_key = result.data.google_key
+          let qrurl = "otpauth://totp/"+this.username+"?secret="+this.google_key+"&issuer="+location.hostname
+          this.setQr(qrurl)
+        } else {
+          utils.alert(result.message)
+        }
+      },
+      async setQr (url) {
+        const QRCode = await qrcode()
+        QRCode.toCanvas(
+          this.$refs.qr,
+          url,
+          {
+            margin: 0,
+            width: 136,
+            height: 136,
+            errorCorrectionLevel: 'H'
+          },
+          (err) => {
+            if (err) {
+              // @improve
+              return utils.log('qrcode error')
+            }
+            this.qrReady = true
+          }
+        )
+      },
+      async submit () {
+        if (this.checkbox1 && this.checkbox2) {
+          if (this.code.length == 6) {
+            let params = {
+              google_key: this.google_key,
+              code: this.code
+            }
+            let result = await service.bindGoogleKey(params)
+            if (result && !result.code) {
+              this.$router.push({
+                name: 'Safety'
+              })
+            } else {
+              utils.alert(result.message)
+            }
+          } else {
+            utils.alert(this.$i18n.t('invalid_google_code'))
+            return false;
+          }
+        } else {
+          utils.alert(this.$i18n.t('err_check_google_code'))
+          return false
+        }
+      }
     }
   }
 </script>

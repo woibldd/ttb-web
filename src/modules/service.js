@@ -185,13 +185,10 @@ const service = {
     return ['google', 'message']
   },
   getGoogleKey () {
-    return request('google/begin')
+    return request('user/generate/google_key')
   },
-  bindGoogle (data) {
-    return request('google/bind', data)
-  },
-  unbindGoogle () {
-    return request('google/unbind')
+  bindGoogleKey (data) {
+    return request('/user/bind/google_key', data)
   },
   setPhone (data) {
     return request('phone/begin', data)

@@ -105,6 +105,8 @@
   "deposit_hint_confirm": "%{coin} 充值需要 %{net} 區塊鏈網路進行確認，充值金額在 %{trade} 個網路確認後可以交易，%{withdraw} 個確認後可以提幣。",
   "deposit_fa2_hint": "為了保護你的數位資產安全，請先選擇開啟一種二步認證方式",
   "qrcode_fail": "二維碼生成失敗",
+  "err_check_google_code": "請確谷歌驗證碼密鑰已安全備份",
+  "invalid_google_code": "谷歌驗證碼錯誤",
   "fa2_google_code": "谷歌驗證",
   "fa2_phone_code": "短信驗證",
   "fa2_enable": "開啟",

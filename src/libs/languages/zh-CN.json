@@ -484,6 +484,8 @@
   "invite_remind_2": "本次活动的返佣及返利，将于2018年8月1日（UTC时间）开始计算，并返还至您的账户中。",
   "balance": "余额",
   "right_to_interpret": "本活动最终解释权归 IX.COM 所有。",
+  "err_check_google_code": "请确认谷歌验证码密钥已安全备份",
+  "invalid_google_code": "谷歌验证码错误",
   "fa2_google_code_mobile": "谷歌验证码",
   "fa2_input_google_mobile": "输入你收到的6位谷歌验证码",
   "fa2_help": "如果无法使用验证码，请联系",
