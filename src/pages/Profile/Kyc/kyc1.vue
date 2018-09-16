@@ -128,7 +128,7 @@ export default {
         }
         let result = await service.updateKyc1(params)
         if (result) {
-          if (!result.code) {
+          if (result.code) {
             utils.alert(result.message)
           }
           await actions.updateSession()

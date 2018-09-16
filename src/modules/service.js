@@ -144,7 +144,7 @@ const service = {
     return request('user/kyc')
   },
   updateKycInfo(data) {
-    return request('kyc/update', data)
+    return request('user/kyc2', data)
   },
   updateKyc1(data) {
     return request('user/kyc1', data)
