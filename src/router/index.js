@@ -165,12 +165,12 @@ let router = new Router({
           component: GoogleTitle
         }]
       }, {
-        path: 'kyc',
+        path: 'kyc_step1',
         name: 'Kyc',
         component: SafeVerified
       }, {
-        path: 'kyc_upload',
-        name: 'KycUpload',
+        path: 'kyc_step2',
+        name: 'KycStep2',
         component: Authen
       }]
     }, {

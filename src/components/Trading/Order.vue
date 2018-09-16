@@ -32,7 +32,6 @@
           <thead>
             <tr v-show="active.list.length">
               <th>{{ $t('order_th_placed') }}</th>
-              <!-- <th class="side-icon"></th> -->
               <th>{{ $t('pair') }}</th>
               <th>{{ $t('deal_th_side') }}</th>
               <!-- <th>{{ $t('order_th_type') }}</th> -->
@@ -68,7 +67,6 @@
               </td>
               <td class="center">
                 <a @click.prevent="cancel(order)">{{$t('cancel_order')}}</a>
-                <!-- <a class="btn op-cancel" @click.prevent="cancel(order)"></a> -->
               </td>
             </tr>
           </tbody>
@@ -281,6 +279,7 @@ export default {
       return utils.toFixed(price, scale)
     },
     fixAmount (amount, pairName) {
+      if (typeof amount === 'undefined') return ''
       const scale = _.get(this.pairGroup, `${pairName}.amount_scale`, 8)
       return utils.toFixed(amount, scale)
     },
@@ -405,7 +404,7 @@ export default {
       const fetchId = ctx.fetchId
       const params = {
         size: pageSize,
-        start: ctx.nextId
+        page: 1
       }
       if (this.local.hideOthers) {
         params.symbol = this.state.pro.pair
