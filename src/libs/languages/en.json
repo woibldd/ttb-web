@@ -203,7 +203,7 @@
   "change_password_repeat": "Confirm new password",
   "change_password_diff": "Input password incorrectly",
   "secure_level": "Security level",
-  "secure_level_0": "Weak",
+  "secure_level_0": "Low",
   "secure_level_1": "Medium",
   "secure_level_2": "High",
   "invite_friends": "Invite friends",
