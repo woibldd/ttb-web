@@ -13,11 +13,11 @@
         <li class=""><router-link
           class="menu-name"
           active-class="active"
-          to="/fund/deposit">{{ $t('deposit') }}</router-link></li>
+          to="/fund/deposit/btc">{{ $t('deposit') }}</router-link></li>
         <li class=""><router-link
           class="menu-name"
           active-class="active"
-          to="/fund/withdraw">{{ $t('withdraw') }}</router-link></li>
+          to="/fund/withdraw/btc">{{ $t('withdraw') }}</router-link></li>
         <li class=""><router-link
           class="menu-name"
           to="/fund/address"

@@ -2,7 +2,9 @@
   <div class="withdraw-container fund-container">
     <div class="title-box">
       <div> {{ $t('withdraw') }}</div>
-      <div class="fund-history"> {{ $t('资金记录') }}</div>
+      <router-link
+        to="/fund/history/withdraw"
+        class="fund-history"> {{ $t('资金记录') }}</router-link>
     </div>
     <div class="fund-items-content">
       <div class="fund-item-row">
@@ -181,6 +183,14 @@ export default {
       await service.getAllCoinTypes().then(res => {
         if (res && res.data) {
           this.allCoins = res.data
+          if (this.$route.params.currency) {
+            const currency = this.$route.params.currency.toUpperCase()
+
+            this.selectCoin = this.allCoins.find(item => {
+              return item.currency.toUpperCase() === currency
+            })
+            return
+          }
           this.selectCoin = this.allCoins[0]
         }
       })

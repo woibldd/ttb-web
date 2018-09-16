@@ -2,7 +2,9 @@
   <div class="deposit-container fund-container">
     <div class="title-box">
       <div> {{ $t('deposit') }}</div>
-      <div class="fund-history"> {{ $t('资金记录') }}</div>
+      <router-link
+        to="/fund/history/deposit"
+        class="fund-history"> {{ $t('资金记录') }}</router-link>
     </div>
     <div class="fund-items-content">
       <div class="fund-item-row mb-24">
@@ -46,8 +48,8 @@
       <ul
         class="fund-item-other mt-10 text-des"
         style="padding-left: 102px">
-        <li> {{ $t('禁止向LTC地址充值除LTC之外的资产，任何充入LTC地址的非LTC 资产将不可找回。') }}</li>
-        <li>  {{ $t('使用LTC地址充值需要1个网络确认才能到账') }}</li>
+        <li> {{ $t('deposit_hint_addr', {coin: selectCoin.currency}) }}</li>
+        <li>  {{ $t('deposit_hint_confirm',{confirm: selectCoin.min_confirm, coin: selectCoin.currency}) }}</li>
         <li>  {{ $t('默认充值至我的钱包，若想进行币币交易，可在币币账户操作“资金划转”将资金转至币币账户。') }}</li>
       </ul>
     </div>
@@ -67,10 +69,13 @@ export default {
     return {
       address: '',
       allCoins: [],
-      selectCoin: {}
+      selectCoin: {},
+      tableData: []
     }
   },
   async created () {
+    console.log(this.$route.params, 'allcointype')
+
     this.getDepositHistory()
     await this.getAllCoinTypes()
     await this.getCoinAddress()
@@ -113,7 +118,6 @@ export default {
       )
     },
     async changeCoinType (coin) {
-      console.log(coin)
       this.selectCoin = coin
       await this.getCoinAddress()
       this.setQr(this.address)
@@ -122,6 +126,13 @@ export default {
       await service.getAllCoinTypes().then(res => {
         if (res && res.data) {
           this.allCoins = res.data
+          if (this.$route.params.currency) {
+            const currency = this.$route.params.currency.toUpperCase()
+            this.selectCoin = this.allCoins.find(item => {
+              return item.currency.toUpperCase() === currency
+            })
+            return
+          }
           this.selectCoin = this.allCoins[0]
         }
       })
@@ -129,11 +140,10 @@ export default {
     getDepositHistory () {
       const param = {
         page: 0,
-        size: 10
+        size: 3
       }
-      console.log(param, 'prpr')
       service.getDepositHistory(param).then(res => {
-        console.log(res, 'wtwh')
+        this.tableData = []
       })
     }
   }
