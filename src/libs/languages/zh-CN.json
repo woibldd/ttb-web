@@ -546,6 +546,7 @@
   "kyc_upload": "实名认证",
   "kyc_complete": "完成认证",
   "Country": "国籍",
+  "identity_authentication1": "填写信息",
   "identity_authentication": "身份认证",
   "modify": "修改",
   "to_verify": "去认证",

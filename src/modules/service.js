@@ -147,7 +147,10 @@ const service = {
     return request('kyc/update', data)
   },
   updateKyc1(data) {
-    return request('/user/kyc1', data)
+    return request('user/kyc1', data)
+  },
+  getOSSPolicy () {
+    return request('user/kyc/oss/policy')
   },
   uploadKycPics(form) {
     const handler = new Vue()

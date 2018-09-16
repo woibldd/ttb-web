@@ -1,13 +1,11 @@
 <template>
-  <div style="page-invite-wrap">
-    <div class="user-center-right safe-verified-container">
       <div class="profile-container">
         <div class="title-box">{{ $t('identity_authentication') }}<span>{{ $t('Verified') }}</span></div>
         <div class="invinfo-box">
           <div class="authen_top">
               <i class=""></i>
               <p class="yy">
-                  {{$t('Verified')}}
+                  {{$t('identity_authentication1')}}
               </p>
               <p class="">
                   {{$t('kyc_upload')}}
@@ -59,12 +57,9 @@
           </el-form>
         </div>
       </div>
-    </div>
-  </div>
 </template>
 
 <script>
-import ProfileLeft from './ProfileLeft'
 import service from '@/modules/service'
 import VBtn from '@/components/VBtn'
 import utils from '@/modules/utils'
@@ -73,7 +68,6 @@ import {state, actions} from '@/modules/store'
 export default {
   name: 'SafeVerified',
   components: {
-    ProfileLeft,
     VBtn
   },
   data () {
@@ -148,142 +142,133 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  @import "../styles/vars";
-  @import '../styles/mixins';
+  @import "../../../styles/vars";
+  @import '../../../styles/mixins';
 
-  .user-center-right.safe-verified-container{
-    padding-left: 60px;
-    float: left;
-    .profile-container {
-      width: 960px;
-      position: relative;
-
-      .title-box {
-        width: 100%;
-        height: 40px;
+  .title-box {
+    width: 100%;
+    height: 40px;
+    font-size: 18px;
+    font-weight: 600;
+    color: $text-strong;
+    border-bottom: 1px solid #e6e6e6;
+    span{
+        color: #666;
         font-size: 18px;
-        font-weight: 600;
-        color: $text-strong;
-        border-bottom: 1px solid #e6e6e6;
-        span{
-            color: #666;
-            font-size: 18px;
-            font-weight: lighter;
-            padding-left: 10px;
-            i{
-                color: #EB5757;
-            }
-            &:before{
-                content: ">";
-                color: #333;
-                font-size: 18px;
-                margin-right: 10px;
-            }
-        }
-      }
-      .invinfo-box {
-        width: 960px;
-        margin: 20px auto;
-        .form {
-          width: 445px;
-          margin: 50px auto;
-        }
-        div.inp_box{
-            width:100%;
-            height: 40px;
-            position: relative;
-
-            .el-select{
-                width: 100%;
-            }
-            .submit-btn{
-                width: 340px;
-                height: 40px;
-            }
-            span.tips{
-                display: block;
-                width: 300px;
-                height: 30px;
-                line-height: 20px;
-                position: absolute;
-                left: 104px;
-                top: 40px;
-                font-size: 10px;
-                color: #EB5757;
-            }
-        }
-      }
-      .authen_top{
-        width: 100%;
-        height: 30px;
-        padding: 5px 0;
-        margin-bottom: 40px;
-        box-sizing: border-box;
-        position: relative;
-        p{
-            width: 90px;
-            height: 20px;
-            font-size: 12px;
-            line-height: 20px;
-            text-indent: 25px;
-            position: absolute;
-            text-align: center;
-            background: #fff;
-            &:before{
-            content: "";
-            width: 20px;
-            height: 20px;
-            line-height: 20px;
-            display: block;
-            border-radius: 10px;
-            position: absolute;
-            left: 6px;
-            text-indent: 0;
-            background: #B6B6B6;
-            color: #fff;
-            font-size: 14px;
-            }
-            &:nth-child(2){
-                left: 0;
-            &:before{
-                content: "1";
-            }
-            }
-            &:nth-child(3){
-                left: 50%;
-                margin-left: -45px;
-            &:before{
-                content: "2";
-            }
-            }
-            &:nth-child(4){
-                right: 0;
-            &:before{
-                content: "3";
-            }
-            }
-            &.yy{
-              color: #C1A538;
-              &:before{
-                background: #C1A538;
-              }
-            }
-        }
+        font-weight: lighter;
+        padding-left: 10px;
         i{
-            width: 50%;
-            height: 2px;
-            background: #ccc;
-            display: block;
-            float: left;
-            margin-top: 9px;
-            &.jd{
-                background: #C1A538;
-            }
+            color: #EB5757;
         }
-      }
-      .el-form-item__label {
-          color: $text-weak
-      }
+        &:before{
+            content: ">";
+            color: #333;
+            font-size: 18px;
+            margin-right: 10px;
+        }
     }
+  }
+  .invinfo-box {
+    width: 960px;
+    margin: 20px auto;
+    .form {
+      width: 445px;
+      margin: 50px auto;
+    }
+    div.inp_box{
+        width:100%;
+        height: 40px;
+        position: relative;
+
+        .el-select{
+            width: 100%;
+        }
+        .submit-btn{
+            width: 340px;
+            height: 40px;
+        }
+        span.tips{
+            display: block;
+            width: 300px;
+            height: 30px;
+            line-height: 20px;
+            position: absolute;
+            left: 104px;
+            top: 40px;
+            font-size: 10px;
+            color: #EB5757;
+        }
+    }
+  }
+  .authen_top{
+    width: 100%;
+    height: 30px;
+    padding: 5px 0;
+    margin-bottom: 40px;
+    box-sizing: border-box;
+    position: relative;
+    p{
+        width: 90px;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        text-indent: 25px;
+        position: absolute;
+        text-align: center;
+        background: #fff;
+        &:before{
+        content: "";
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        display: block;
+        border-radius: 10px;
+        position: absolute;
+        left: 6px;
+        text-indent: 0;
+        background: #B6B6B6;
+        color: #fff;
+        font-size: 14px;
+        }
+        &:nth-child(2){
+            left: 0;
+        &:before{
+            content: "1";
+        }
+        }
+        &:nth-child(3){
+            left: 50%;
+            margin-left: -45px;
+        &:before{
+            content: "2";
+        }
+        }
+        &:nth-child(4){
+            right: 0;
+        &:before{
+            content: "3";
+        }
+        }
+        &.yy{
+          color: #C1A538;
+          &:before{
+            background: #C1A538;
+          }
+        }
+    }
+    i{
+        width: 50%;
+        height: 2px;
+        background: #ccc;
+        display: block;
+        float: left;
+        margin-top: 9px;
+        &.jd{
+            background: #C1A538;
+        }
+    }
+  }
+  .el-form-item__label {
+      color: $text-weak
   }
 </style>
