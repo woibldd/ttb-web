@@ -5,7 +5,7 @@
         <div> {{ $t('deposit') }}</div>
       </div>
       <div class="fund-items-content">
-        <div class="fund-item-row mb-24">
+        <div class="fund-item-row mb-14">
           <div class="row__label">{{ $t('currency') }}</div>
           <div class="row__value">
             <el-select
@@ -20,28 +20,26 @@
             </el-select>
           </div>
         </div>
-        <div class="fund-item-row mb-24">
+        <div class="fund-item-row mb-14">
           <div class="row__label">{{ $t('withdraw_addr') }}</div>
           <div class="row__value">
             <input
-              v-model="newAddress"
-              class="input-address pl-10">
-            </input>
+              v-model="address"
+              class="input-address pl-10" >
           </div>
         </div>
-        <div class="fund-item-row mb-24">
+        <div class="fund-item-row mb-14">
           <div class="row__label">{{ $t('note') }}</div>
           <div class="row__value">
             <input
-              v-model="remark"
-              class="input-address pl-10">
-            </input>
+              v-model="description"
+              class="input-address pl-10" >
           </div>
         </div>
         <div class="fund-item-other">
           <v-btn
             style="width: 200px"
-            @click="ensure"
+            @click="confirmAdd"
             :label="$t('add_withdraw_addr')"/>
         </div>
       </div>
@@ -49,6 +47,30 @@
     <div class="address-list">
       <div class="title-box">
         <div> {{ $t('地址列表') }}</div>
+        <el-table
+          :data="addressList"
+          class="fund-coin-pool">
+          <el-table-column
+            v-for="(hd, idx) in header"
+            :key="idx"
+            :prop="hd.key"
+            :label="hd.title"/>
+
+          <el-table-column
+            header-align='right'
+            width="200px"
+            :label="operate.title">
+            <!-- <span>解锁/锁仓</span> -->
+            <template slot-scope="scope">
+              <span
+                @click="copy(scope.row)"
+                class="my-fund-operate address-copy cursor-default ">复制</span>
+              <span
+                @click="deleteAddr(scope.row)"
+                class="my-fund-operate cursor-default ">删除</span>
+            </template>
+          </el-table-column>
+        </el-table>
       </div>
     </div>
   </div>
@@ -59,8 +81,6 @@ import copyToClipboard from 'copy-to-clipboard'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
 
-const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
-
 export default {
   name: 'MyAddress',
   data () {
@@ -68,8 +88,15 @@ export default {
       address: '',
       allCoins: [],
       selectCoin: {},
-      newAddress: '',
-      remark: ''
+      addressList: [],
+      description: '',
+      header: [
+        {key: 'currency', title: '币种'},
+        {key: 'address', title: '提币地址'},
+        {key: 'description', title: '备注'}
+      ],
+      operate: {key: 'operate', title: '操作'}
+
     }
   },
   async created () {
@@ -77,17 +104,18 @@ export default {
     await this.getCoinAddress()
   },
   methods: {
-    copy () {
-      copyToClipboard(this.address)
+    copy (row) {
+      console.log(row)
+      copyToClipboard(row.address)
       utils.success(this.$i18n.t('copyed'))
     },
     async getCoinAddress () {
       const param = {
         currency: this.selectCoin.currency
       }
-      return service.getAddressList(param).then((res) => {
+      return service.getMyAddressList(param).then((res) => {
         if (res && res.data) {
-          this.newAddress = res.data.address
+          this.addressList = res.data
         }
       })
     },
@@ -95,7 +123,6 @@ export default {
       console.log(coin)
       this.selectCoin = coin
       await this.getCoinAddress()
-      this.setQr(this.address)
     },
     async getAllCoinTypes () {
       await service.getAllCoinTypes().then(res => {
@@ -105,8 +132,24 @@ export default {
         }
       })
     },
-    ensure () {
-
+    confirmAdd () {
+      const param = {
+        currency: this.selectCoin.currency,
+        address: this.address,
+        description: this.description
+      }
+      service.addCoinAddress(param).then(res => {
+        utils.success(this.$i18n.t('add_withdraw_success'))
+        this.address = ''
+        this.description = ''
+        this.getCoinAddress()
+      })
+    },
+    deleteAddr (row) {
+      service.deleteCoinAddress({id: row.id}).then(() => {
+        utils.success(this.$t('del_withdraw_success'))
+        this.getCoinAddress()
+      })
     }
   }
 }

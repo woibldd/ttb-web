@@ -82,7 +82,8 @@
     .pointer {
         cursor:pointer;
     }
-    .default {
+    .default,
+    .cursor-default {
         cursor: default;
     }
 }
