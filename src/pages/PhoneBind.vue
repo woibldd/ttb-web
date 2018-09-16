@@ -6,17 +6,20 @@
             <p>{{$t('phone_number')}}</p>
             <div class="inp_cox">
                 <span class="gh">+86</span>
-                <input type="text" class="a" />
+                <input type="text" v-model="phone" class="a" />
             </div>
-            <span class="tips">错误提示</span>
+            <span class="tips"></span>
         </div>
         <div class="inp_box">
             <p>{{$t('phone_code')}}</p>
             <div class="inp_cox">
-                <input type="text" class="b" />
-                <a href="javascript:void(0)">{{$t('hq_send')}}</a>
+                <input type="text" v-model="code" class="b" />
+                <countdown-code-button
+                    :send-text="$t('hq_send')"
+                    :validation="validation"
+                    :send-code-func="sendCode"/>
             </div>
-            <span class="tips">错误提示</span>
+            <span class="tips"></span>
         </div>
         <div class="inp_box">
             <v-btn class="submit-btn" :label="$t('bind')"
@@ -30,22 +33,53 @@
 <script>
   import service from '@/modules/service'
   import VBtn from '@/components/VBtn'
+  import {actions} from '@/modules/store'
+  import countdownCodeButton from '@/components/common/countdown-code-button'
 
   export default {
     name: 'SafeVerified',
     components: {
-      VBtn
+      VBtn,
+      countdownCodeButton
     },
     data () {
       return {
-
+        region: '86',
+        phone: '',
+        code: '',
+        loading: false
       }
     },
     computed: {
 
     },
     methods: {
-
+      validation () {
+        if (!this.phone) {
+          utils.alert('缺少phone')
+          return false
+        }
+        return true
+      },
+      sendCode () {
+        return service.bindPhoneCode({region: this.region, phone: this.phone})
+      },
+      async submit () {
+        let params = {
+          region: this.region,
+          phone: this.phone,
+          code: this.code,
+        }
+        let result = await service.bindPhone(params)
+        if (result && !result.code) {
+          await actions.updateSession()
+          this.$router.push({
+            name: 'Safety'
+          })
+        } else {
+          utils.alert(result.message)
+        }
+      }
     }
   }
 </script>
