@@ -36,11 +36,12 @@ const GoogleTitle = () => import(/* webpackChunkName: "GoogleTitle" */ '@/pages/
 
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
 
-const Fund = () => import(/* webpackChunkName: "CoinManage" */ '@/pages/Fund')
-const Withdraw = () => import(/* webpackChunkName: "Withdraw" */ '@/components/Fund/Withdraw/Withdraw.vue')
-const Deposit = () => import(/* webpackChunkName: "Deposit" */ '@/components/Fund/Deposit/deposit.vue')
-const MyFund = () => import(/* webpackChunkName: "Deposit" */ '@/components/Fund/My/my.vue')
-const FundAddress = () => import(/* webpackChunkName: "Deposit" */ '@/components/Fund/Address/address.vue')
+const Fund = () => import(/* webpackChunkName: "Fund" */ '@/pages/Fund')
+const Withdraw = () => import(/* webpackChunkName: "FundWithdraw" */ '@/components/Fund/Withdraw/Withdraw.vue')
+const Deposit = () => import(/* webpackChunkName: "FundDeposit" */ '@/components/Fund/Deposit/deposit.vue')
+const MyFund = () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/My/my.vue')
+const FundAddress = () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/Address/address.vue')
+const FundHistory = () => import(/* webpackChunkName: "FundHistory" */ '@/components/Fund/history/history.vue')
 
 async function beforeEach (to, from, next) {
   state.loading = true
@@ -223,7 +224,7 @@ let router = new Router({
       path: '/fund',
       name: 'fund',
       component: Fund,
-      redirect: { name: 'deposit' },
+      redirect: { name: 'my' },
       meta: {
         auth: false,
         footer: true,
@@ -231,13 +232,18 @@ let router = new Router({
         class: 'dark'
       },
       children: [{
-        path: 'withdraw',
+        path: 'withdraw/:currency?',
         name: 'withdraw',
         component: Withdraw
       }, {
-        path: 'deposit',
+        path: 'deposit/:currency?',
         name: 'deposit',
-        component: Deposit
+        component: Deposit,
+        children: [
+          {
+            path: 'history'
+          }
+        ]
       }, {
         path: 'my',
         name: 'my',
@@ -246,6 +252,11 @@ let router = new Router({
         path: 'address',
         name: 'address',
         component: FundAddress
+      }, {
+        path: 'history/:from',
+        name: 'history',
+        alias: 'deposit/:currency/history',
+        component: FundHistory
       } ]
     }
 

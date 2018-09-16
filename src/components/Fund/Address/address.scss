@@ -9,12 +9,31 @@
         color: $text-strong;
         box-sizing: border-box;
         border: 1px solid rgba(204,204,204,1);
-
-        
-
         &:focus{
             outline: none;
         }
 
+    }
+
+    .a-copy {
+        color: $primary;
+    }
+
+    .my-fund-operate {
+        display: inline-block;
+        margin-left: 5px;
+        &:hover{
+            opacity: .5;
+        }
+    }
+    .address-list {
+        margin-top: 40px;
+        height: 500px;
+        overflow: scroll;
+    }
+
+    .address__table {
+        height: 400px;
+        overflow-x: scroll;
     }
 }
