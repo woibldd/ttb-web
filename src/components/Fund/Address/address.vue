@@ -45,33 +45,34 @@
       </div>
     </div>
     <div class="address-list">
-      <div class="title-box">
+      <div class="title-box mb-30">
         <div> {{ $t('地址列表') }}</div>
-        <el-table
-          :data="addressList"
-          class="fund-coin-pool">
-          <el-table-column
-            v-for="(hd, idx) in header"
-            :key="idx"
-            :prop="hd.key"
-            :label="hd.title"/>
-
-          <el-table-column
-            header-align='right'
-            width="200px"
-            :label="operate.title">
-            <!-- <span>解锁/锁仓</span> -->
-            <template slot-scope="scope">
-              <span
-                @click="copy(scope.row)"
-                class="my-fund-operate address-copy cursor-default ">复制</span>
-              <span
-                @click="deleteAddr(scope.row)"
-                class="my-fund-operate cursor-default ">删除</span>
-            </template>
-          </el-table-column>
-        </el-table>
       </div>
+      <el-table
+        :data="addressList"
+        class="fund-coin-pool address__table">
+        <el-table-column
+          v-for="(hd, idx) in header"
+          :key="idx"
+          :prop="hd.key"
+          :label="hd.title"/>
+
+        <el-table-column
+          header-align='right'
+          width="200px"
+          align="right"
+          :label="operate.title">
+          <!-- <span>解锁/锁仓</span> -->
+          <template slot-scope="scope">
+            <span
+              @click="copy(scope.row)"
+              class="my-fund-operate a-copy cursor-default ">复制</span>
+            <span
+              @click="deleteAddr(scope.row)"
+              class="my-fund-operate cursor-default ">删除</span>
+          </template>
+        </el-table-column>
+      </el-table>
     </div>
   </div>
 </template>
