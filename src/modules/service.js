@@ -220,31 +220,28 @@ const service = {
   async getSupportedVerifys() {
     return ['google', 'message']
   },
-  getGoogleKey() {
-    return request('google/begin')
+  getGoogleKey () {
+    return request('user/generate/google_key')
   },
-  bindGoogle(data) {
-    return request('google/bind', data)
-  },
-  unbindGoogle() {
-    return request('google/unbind')
+  bindGoogleKey (data) {
+    return request('/user/bind/google_key', data)
   },
   setPhone(data) {
     return request('phone/begin', data)
   },
-  bindPhone(data) {
+  bindPhoneCode (data) {
     return request('user/bind/phone/code', data)
   },
-  unbindPhone() {
-    return request('phone/unbind')
-  },
-  bindEmail(data) {
-    return request('user/bind/email', data)
+  bindPhone (data) {
+    return request('user/bind/phone', data)
   },
   bindEmailCode(data) {
     return request('user/bind/email/code', data)
   },
-  getApiList() {
+  bindEmail (data) {
+    return request('user/bind/email', data)
+  },
+  getApiList () {
     return request('api/list')
   },
   getApiPermissions() {

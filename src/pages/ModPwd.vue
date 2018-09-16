@@ -82,11 +82,24 @@ export default {
 
   },
   methods: {
-    async changePassword () {
-      let result = await service.changePassword()
-    },
-    submit () {
-
+    async submit () {
+      if (this.form.password_new == this.form.password_repeat) {
+        let params = {
+          old_password: this.form.password_orig,
+          new_password: this.form.password_new
+        }
+        let result = await service.changePassword(params)
+        if (result && !result.code) {
+          this.$router.push({
+            name: 'Safety'
+          })
+        } else {
+          utils.alert(result.message)
+        }
+      } else {
+        console.log('error submit!!');
+        return false;
+      }
     }
   }
 }

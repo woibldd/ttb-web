@@ -1,6 +1,10 @@
 <template>
 <div class="profile-container">
-  <div class="title-box">{{$t('profile_left_invite_safety')}}<span>安全等级： <i>低</i></span></div>
+  <div class="title-box">{{$t('profile_left_invite_safety')}}<span>{{$t('secure_level')}}： 
+    <i v-if="secure_level <= 1">{{$t('secure_level_0')}}</i>
+    <i v-if="secure_level == 2" style="color:#C9A96C">{{$t('secure_level_1')}}</i>
+    <i v-if="secure_level == 3" style="color:#2FB883">{{$t('secure_level_2')}}</i>
+  </span></div>
   <div class="invinfo-box">
     <ul>
       <li :class="{pass: !!phone}">
@@ -49,6 +53,13 @@ export default {
     }
   },
   computed: {
+    secure_level () {
+      let secure_level_count = 0
+      if (this.phone) {secure_level_count++}
+      if (this.email) {secure_level_count++}
+      if (this.google_key_bound) {secure_level_count++}
+      return secure_level_count
+    },
     phone () {
       if (state.userInfo && state.userInfo.phone) {
         return utils.publicDesensitization(state.userInfo.phone)[0]
