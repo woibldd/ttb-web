@@ -139,8 +139,8 @@ export default {
     },
     getDepositHistory () {
       const param = {
-        page: 0,
-        size: 3
+        page: 1,
+        size: 10
       }
       service.getDepositHistory(param).then(res => {
         this.tableData = []

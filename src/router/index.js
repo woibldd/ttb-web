@@ -221,11 +221,11 @@ let router = new Router({
         class: 'dark'
       },
       children: [{
-        path: 'withdraw/:currency',
+        path: 'withdraw/:currency?',
         name: 'withdraw',
         component: Withdraw
       }, {
-        path: 'deposit/:currency',
+        path: 'deposit/:currency?',
         name: 'deposit',
         component: Deposit,
         children: [

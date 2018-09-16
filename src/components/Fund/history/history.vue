@@ -19,13 +19,12 @@
 
         <el-table-column
           header-align='right'
+          align="right"
           width="200px"
-          :label="operate.title">
+          :label="state.title">
           <!-- <span>解锁/锁仓</span> -->
           <template slot-scope="scope">
-            <span class="my-fund-operate">充币</span>
-            <span class="my-fund-operate">提币</span>
-            <span class="my-fund-operate">交易</span>
+            <span :class="['state', scope.row.state === 1 && 'complete']">{{ scope.row.state === 1 ? '已完成' : '未完成' }}</span>
           </template>
         </el-table-column>
 
@@ -54,10 +53,9 @@ export default {
         {key: 'currency', title: '币种'},
         {key: 'confirm', title: '确认数'},
         {key: 'chain', title: '链名'},
-        {key: 'amount', title: '数量'},
-        {key: 'state', title: '状态'}
+        {key: 'amount', title: '数量'}
       ],
-      operate: {key: 'operate', title: '操作'},
+      state: {key: 'state', title: '状态'},
       tableData: [],
       from: 'all'
     }
@@ -98,7 +96,7 @@ export default {
           break
       }
       const param = {
-        page: 0,
+        page: 1,
         size: 10
       }
       request(param).then(res => {
@@ -133,5 +131,13 @@ export default {
         cursor: pointer;
         margin-left: 21px;
     }
+    .state {
+       color:  #EBB166;
+
+       &.complete {
+            color: #31C78C;
+        }
+    }
+
 }
 </style>
