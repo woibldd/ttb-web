@@ -193,17 +193,17 @@ const service = {
   setPhone (data) {
     return request('phone/begin', data)
   },
-  bindPhone (data) {
+  bindPhoneCode (data) {
     return request('user/bind/phone/code', data)
   },
-  unbindPhone () {
-    return request('phone/unbind')
-  },
-  bindEmail (data) {
-    return request('user/bind/email', data)
+  bindPhone (data) {
+    return request('user/bind/phone', data)
   },
   bindEmailCode (data) {
     return request('user/bind/email/code', data)
+  },
+  bindEmail (data) {
+    return request('user/bind/email', data)
   },
   getApiList () {
     return request('api/list')

@@ -42,7 +42,7 @@
 <script>
   import service from '@/modules/service'
   import VBtn from '@/components/VBtn'
-  import {state} from '@/modules/store'
+  import {state, actions} from '@/modules/store'
   const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
 
   export default {
@@ -110,6 +110,7 @@
             }
             let result = await service.bindGoogleKey(params)
             if (result && !result.code) {
+              await actions.updateSession()
               this.$router.push({
                 name: 'Safety'
               })
