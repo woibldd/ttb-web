@@ -62,7 +62,15 @@
       </div>
       <div class="fund-item-other withdraw-fee mb-23">
         <p> <span class="fee__label">{{ $t('withdraw_fee') }} </span> <span class="fee__coin">{{ selectCoin.withdraw_fee }}{{ selectCoin.currency }}</span> </p>
-        <p><span class="fee__label">{{ $t('withdraw_arrival') }}</span> <span class="fee__coin">{{ coinArrival }} {{ selectCoin.currency }}</span></p>
+        <p><span class="fee__label">{{ $t('withdraw_arrival') }}</span>
+          <span
+            class="fee__coin"
+            v-if="coinArrival > 0">{{ coinArrival }} {{ selectCoin.currency }}
+          </span>
+          <span v-else>
+            --
+          </span>
+        </p>
       </div>
       <div class="fund-item-other">
         <v-btn
