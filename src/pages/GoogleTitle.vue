@@ -4,30 +4,32 @@
     <div class="invinfo-box">
         <p class="gt_txt">{{$t('bind_google_title')}}</p>
         <div class="gt_ewm">
+          <div class="pd-10" style="background:#fff; height: 160px; box-sizing: border-box">
             <canvas
                 class="qr-img"
                 ref="qr"/>
+          </div>
         </div>
-        <p class="gt_t">验证码密钥</p>
+        <p class="gt_t">{{$t('google_skey')}}</p>
         <span class="gt_yz">{{google_key}}</span>
         <ul>
-            <li><i>1</i>使用没有越狱或者Root过的手机，在App Store 或应用市场内搜索 Google Authenticator 并安装；</li>
-            <li><i>2</i>使用 Google Authenticator 扫描二维码；</li>
-            <li><i>3</i>请手写或打印16位密钥，放置到安全的地方。如果你的手机被盗或抹掉内容，你可以使用16位密钥进行恢复；</li>
-            <li><i>4</i>不要把密钥告诉别人！IX 客服不会索取你的密钥。</li>
+            <li><i>1</i>{{$t('bind_google_hint_1')}}</li>
+            <li><i>2</i>{{$t('bind_google_hint_2')}}</li>
+            <li><i>3</i>{{$t('bind_google_hint_3')}}</li>
+            <li><i>4</i>{{$t('bind_google_hint_4')}}</li>
         </ul>
-        <p class="gt_btxt">请确认</p>
+        <p class="gt_btxt">{{$t('confirm_please')}}</p>
         <div class="gt_lb">
             <input type="checkbox" v-model="checkbox1">
-            <label for="asda">我的iPhone或Android手机没有经过越狱、Root或任何形式的破解</label>
+            <label for="asda">{{$t('bind_google_confirm_1')}}</label>
         </div>
         <div class="gt_lb">
             <input type="checkbox" v-model="checkbox2">
-            <label for="asd">已经手写或打印16位密钥，放到安全的地方</label>
+            <label for="asd">{{$t('bind_google_confirm_2')}}</label>
         </div>
     </div>
     <div class="inp_box">
-        <input type="text" v-model="code" placeholder="6位谷歌验证码" />
+        <input type="text" v-model="code" :placeholder="$t('bind_google_ph')" />
     </div>
     <div class="inp_box">
         <v-btn class="submit-btn" :label="$t('bind')"
@@ -86,8 +88,8 @@
           url,
           {
             margin: 0,
-            width: 136,
-            height: 136,
+            width: 140,
+            height: 140,
             errorCorrectionLevel: 'H'
           },
           (err) => {
