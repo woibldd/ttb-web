@@ -345,9 +345,8 @@ const utils = {
     // the library js should assign the [key] to window object
     const map = {
       'key': 'static/keymaster.js',
-      'jQuery': 'static/jquery.min.js',
-      'GoldenLayout': 'static/golden-layout/goldenlayout.min.js',
-      'TradingView': 'static/charting_library/charting_library.min.js'
+      'TradingView': 'static/charting_library/charting_library.min.js',
+      'plupload': 'static/plupload-2.1.2/js/plupload.full.min.js'
     }
     return map[key] ? utils.getScript(map[key], key) : null
   },

@@ -488,8 +488,8 @@ export default {
       }
       this.submitting = side
       const order = {
-        type: 'LIMIT',
-        side: side,
+        type: 1,
+        side: side === 'SELL' ? 2 : 1,
         price: $price.toString(),
         amount: $amount.toString(),
         symbol: this.state.pro.pair

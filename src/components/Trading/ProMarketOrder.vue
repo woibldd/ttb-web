@@ -313,11 +313,19 @@ export default {
       }
       this.submitting = side
       const order = {
-        type: 'MARKET',
-        side: side,
-        amount: $amount.toString(),
-        symbol: this.state.pro.pair
+        type: 2,
+        side: side === 'SELL' ? 2 : 1,
+        price: 0,
+        amount: 0,
+        locked: $amount.toString(),
+        symbol: this.state.pro.pair,
       }
+
+      // if (side === 'BUY') {
+        // order.locked = order.amount
+        // order.amount = 0
+        // delete order.amount
+      // }
       const res = await service.createOrder(order)
       this.submitting = false
       if (res.code > 0) {

@@ -18,7 +18,9 @@ const Trading = () => import(/* webpackChunkName: "Trading" */ '@/pages/Trading'
 const Profile = () => import(/* webpackChunkName: "Profile" */ '@/pages/Profile')
 const Invite = () => import(/* webpackChunkName: "Invite" */ '@/pages/Invite')
 const ProfileInfo = () => import(/* webpackChunkName: "ProfileInfo" */ '@/pages/ProfileInfo')
-const SafeVerified = () => import(/* webpackChunkName: "SafeVerified" */ '@/pages/SafeVerified')
+const Kyc = () => import(/* webpackChunkName: "Kyc" */ '@/pages/Profile/Kyc/index')
+const Kyc1 = () => import(/* webpackChunkName: "SafeVerified" */ '@/pages/Profile/Kyc/kyc1')
+const Kyc2 = () => import(/* webpackChunkName: "Authen" */ '@/pages/Profile/Kyc/kyc2')
 const Register = () => import(/* webpackChunkName: "Register" */ '@/pages/Register')
 const Recover = () => import(/* webpackChunkName: "Register" */ '@/pages/user/recover/recover.vue')
 const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
@@ -31,7 +33,7 @@ const eBind = () => import(/* webpackChunkName: "EmailBind" */ '@/pages/eBind')
 const ModPwd = () => import(/* webpackChunkName: "ModPwd" */ '@/pages/ModPwd')
 const GoogleTitle = () => import(/* webpackChunkName: "GoogleTitle" */ '@/pages/GoogleTitle')
 // const ProfileAuthen = () => import(/* webpackChunkName: "ProfileAuthen" */ '@/pages/ProfileAuthen')
-const Authen = () => import(/* webpackChunkName: "Authen" */ '@/pages/Authen')
+
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
 
 const Fund = () => import(/* webpackChunkName: "Fund" */ '@/pages/Fund')
@@ -168,12 +170,21 @@ let router = new Router({
       }, {
         path: 'kyc',
         name: 'Kyc',
-        component: SafeVerified
-      }, {
-        path: 'kyc_upload',
-        name: 'KycUpload',
-        component: Authen
-      }]
+        component: Kyc,
+        redirect: 'kyc/kyc_step1',
+        children: [
+          {
+            path: 'kyc_step1',
+            name: 'KycStep1',
+            component: Kyc1
+          }, {
+            path: 'kyc_step2',
+            name: 'KycStep2',
+            component: Kyc2
+          }
+        ]
+      }
+    ]
     }, {
       path: '/user',
       name: 'account',

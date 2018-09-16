@@ -30,11 +30,11 @@
           <Operate ref="Operate"></Operate>
         </div>
       </div>
-      <div class="ix-row">
+      <!-- <div class="ix-row">
         <div class="ix-grid ix-grid-intro" ref="gridIntro">
           <intro></intro>
         </div>
-      </div>
+      </div> -->
     </div>
     <order-deal-popover />
   </div>

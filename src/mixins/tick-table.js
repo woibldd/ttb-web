@@ -42,15 +42,7 @@ export default {
       return this.state.pro.pairList
     },
     showList () {
-      let list
-      if (!this.tab) {
-        list = this.pairList
-      } else if (this.tab === '*') {
-        list = _.filter(this.pairList, this.isCollect)
-      } else {
-        list = _.filter(this.pairList, pair => pair.currency_name === this.tab)
-      }
-      return _.filter(list, pair => pair.product_name.indexOf(this.search.toUpperCase()) > -1)
+      return this.pairList
     },
     sortedList () {
       if (!this.sortBy || !this.sortState) {
@@ -174,6 +166,6 @@ export default {
     }
     await this.fetch()
     this.subMarket()
-    actions.updateFavorite()
+    // actions.updateFavorite()
   }
 }

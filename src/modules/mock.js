@@ -18,7 +18,7 @@ export const filter = {
   'currency/rate': 1,
   'user/my_invite': 1,
   'balance/query': 1,
-  'order/active': 1,
+  'order/active': 0,
   'favorite/list': 1,
 
 }

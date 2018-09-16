@@ -543,10 +543,16 @@
   "commission_history_text": "返佣记录",
   "commission_amount": "返佣金额",
   "Verified": "实名认证",
+  "kyc_upload": "实名认证",
+  "kyc_complete": "完成认证",
   "Country": "国籍",
+  "identity_authentication1": "填写信息",
   "identity_authentication": "身份认证",
   "modify": "修改",
   "to_verify": "去认证",
   "to_bind": "去绑定",
-  "kyc_id_type": "证件类型"
+  "kyc_id_type": "证件类型",
+  "kyc_id_no_err": "身份证号码格式不正确",
+  "kyc_passport_err": "护照号码格式不正确",
+  "kyc_name_err": "请填写姓名"
 }
