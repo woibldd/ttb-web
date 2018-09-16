@@ -134,6 +134,10 @@ export default {
       })
     },
     confirmAdd () {
+      if (!this.address) {
+        utils.danger('地址不能为空！')
+        return
+      }
       const param = {
         currency: this.selectCoin.currency,
         address: this.address,
