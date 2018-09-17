@@ -26,6 +26,13 @@ const service = {
     }
     return request(uri, data)
   },
+  resetPaswordCode(data) {
+    let uri = 'user/reset/password/email/code'
+    if (data.by === 'phone') {
+      uri = 'user/reset/password/phone/code'
+    }
+    return request(uri, data)
+  },
   changePassword(data) {
     return request('user/modify/password', data)
   },

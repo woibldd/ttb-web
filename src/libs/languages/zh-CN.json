@@ -138,7 +138,7 @@
   "login_label_mail": "电子邮箱",
   "login_label_pw": "密码",
   "login_ph_pw": "请输入密码",
-  "if_forgot": "忘记密码？",
+  "if_forgot": "忘记密码",
   "sth_went_wrong": "出错了",
   "geetest_went_wrong": "极验验证失败",
   "mail_verify": "验证邮件",

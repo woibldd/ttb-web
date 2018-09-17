@@ -335,7 +335,6 @@ export default {
       this.atPw = active
     },
     input (field, value) {
-      console.log(arguments)
       this[field] = value
     },
     checkParams () {

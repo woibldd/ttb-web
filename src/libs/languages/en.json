@@ -171,7 +171,7 @@
   "login_label_mail": "Email",
   "login_label_pw": "Password",
   "login_ph_pw": "Please enter your password",
-  "if_forgot": "Forgot password?",
+  "if_forgot": "Forgot password",
   "sth_went_wrong": "Error",
   "geetest_went_wrong": "Geetest Verify Error",
   "mail_verify": "Verification Email",

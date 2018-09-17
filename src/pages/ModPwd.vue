@@ -13,6 +13,7 @@
         class="inp_box"
         :label="$t('change_password_orig')">
         <el-input
+          type="password"
           v-model="form.password_orig"/>
       </el-form-item>
       <el-form-item
@@ -21,7 +22,20 @@
         :label="$t('change_password_new')">
         <el-input
           type="password"
+          @input="pwChange"
+          @focus="focus"
+          @blur="blur"
           v-model="form.password_new"/>
+        <div class="pw-helps" :class="{show: atPw}">
+            <div class="title" v-t="'pwcheck_guide'"></div>
+            <ul class="pw-checks">
+            <li v-for="(check, index) in pwCheckList"
+                class="pw-check" :key="index">
+                <span class="pw-state" :class="{pass: check.pass}"></span>
+                <span class="desc">{{ $t(check.desc) }}</span>
+            </li>
+            </ul>
+        </div>
       </el-form-item>
       <el-form-item
         prop="password_repeat"
@@ -45,6 +59,7 @@
 <script>
 import service from '@/modules/service'
 import VBtn from '@/components/VBtn'
+import pwChecker from '@/modules/pw-checker'
 
 export default {
   name: 'SafeVerified',
@@ -54,23 +69,35 @@ export default {
   data () {
     const validataPswRepeat = (rule, value, callback) => {
       if (!value) {
-        callback(new Error(this.$i18n.t('不能为空')))
+        return callback(new Error(this.$i18n.t('err_empty_password')))
       } else {
-        if (value === this.form.password_new) {
-          this.$refs.form.validateField('email')
+        if (value !== this.form.password_new) {
+          return callback(new Error(this.$t('change_password_diff')))
         }
-        callback(new Error(this.$t('change_password_diff')))
       }
+      return callback()
+    }
+    const validataPswStrong = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error(this.$i18n.t('err_empty_password')))
+      } 
+      const pwCheckList = pwChecker.getState(value)
+      if (_.filter(pwCheckList, r => r.pass).length < 4) {
+        return callback(new Error(this.$i18n.t('err_weak_password')))
+      }
+      callback()
     }
     return {
       loading: false,
       form: {},
+      atPw: false,
+      pwCheckList: pwChecker.getState(''),
       rules: {
         password_repeat: [
           { validator: validataPswRepeat, trigger: 'blur' }
         ],
         password_new: [
-          { validator: validataPswRepeat, trigger: 'blur' }
+          { validator: validataPswStrong, trigger: 'change' }
         ],
         password_orig: [
           { required: true, message: this.$i18n.t('不能为空'), trigger: 'blur' }
@@ -79,7 +106,7 @@ export default {
     }
   },
   computed: {
-
+    
   },
   methods: {
     async submit () {
@@ -100,6 +127,15 @@ export default {
         console.log('error submit!!');
         return false;
       }
+    },
+    pwChange () {
+      this.pwCheckList = pwChecker.getState(this.form.password_new || '')
+    },
+    focus () {
+      this.atPw = true
+    },
+    blur () {
+      this.atPw = false
     }
   }
 }
@@ -182,4 +218,63 @@ export default {
       }
     }
   }
+  .pw-helps {
+    border-radius: 3px;
+    position: absolute;
+    right: -229px;
+    transform: translateX(10px);
+    top: 0;
+    width: 216px;
+    min-height: 160px;
+    color: #000;
+    background-color: white;
+    box-sizing: border-box;
+    padding: 16px;
+    font-size: 12px;
+    opacity: 0;
+    transition: visibility 300ms 300ms, transform 300ms, opacity 300ms;
+    &.show {
+        opacity: 1;
+        transition: visibility 300ms, transform 300ms, opacity 300ms;
+        right: -223px;
+        transform: translateX(0);
+        visibility: visible;
+    }
+    .pw-state {
+        width: 20px;
+        height: 20px;
+        margin-right: 4px;
+        background-color: white;
+        border: 1px solid #979797;
+        box-sizing: border-box;
+        display: inline-block;
+        vertical-align: top;
+        border-radius: 2px;
+        transition: background-color 300ms;
+        &.pass {
+        @include bg-retina('../assets/check', 'png', 12px, 9px);
+        width: 20px;
+        height: 20px;
+        border: 1px solid $primary;
+        background-color: $primary;
+        }
+    }
+    .title {
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    .desc {
+        width: 160px;
+        display: inline-block;
+        vertical-align: top;
+        font-size: 12px;
+        line-height: 20px;
+        white-space: normal;
+    }
+    .pw-check {
+        font-size: 0;
+        white-space: nowrap;
+        margin-bottom: 4px;
+    }
+}
 </style>
