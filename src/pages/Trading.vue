@@ -13,10 +13,13 @@
         </div>
         <div class="ix-col ix-col-2">
           <div class="ix-grid ix-grid-tv" ref="gridTradingView">
+            <div class="grid-title">
+              asdfasdfasdfjkljkj
+            </div>
             <TradingView ref="TradingView"></TradingView>
             <div class="active-box" v-if="showCountdown">
-              <p class="text">据获奖者产生剩余：<span class="seconds">{{countdownText}}</span>秒</p>
-              <span class="link">活动规则</span>
+              <p class="text">{{$t('active_countdown_text')}}<span class="seconds">{{countdownText}}</span>{{$t('active_countdown_unit')}}</p>
+              <a class="link" href="http://baidu.com" target="_blank">{{$t('active_rules')}}</a>
             </div>
           </div>
         </div>
@@ -344,10 +347,23 @@ export default {
       color: #EEDC50;
       width: 22px;
       text-align: right;
-      margin: 0 5px;
+      margin-right: 5px;
       display: inline-block;
     }
   }
+  .link  {
+    position: absolute;
+    bottom: 12px;
+    left: 14px;
+    padding: 1px 3px;
+    box-sizing: content-box;
+    background: #FFD100;
+    border-radius: 3px;
+    color: #2064A2;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
 }
 @media screen and (max-width: 1000px) {
   .ix-col-1 {

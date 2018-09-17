@@ -123,7 +123,7 @@ let router = new Router({
       path: '/profile',
       name: 'profile',
       meta: {
-        auth: true,
+        auth: false,
         nav: true,
         class: 'dark',
         mobileNav: isMobile
@@ -222,6 +222,12 @@ let router = new Router({
       }, {
         path: 'recover',
         name: 'recover',
+        component: Recover,
+        redirect: 'recover/email',
+        props: true
+      }, {
+        path: 'recover/:by?',
+        name: 'recoverBy',
         component: Recover,
         props: true
       }]

@@ -24,6 +24,9 @@ body {
 .chart-controls-bar {
   background: transparent;
 }
+.layout__area--top {
+    background: #192D3F;
+}
 .chart-controls-bar-buttons a {
   color: hsla(218, 26%, 86%, 0.5);
   /* color: var(--primary-3); */
@@ -115,7 +118,7 @@ body {
 
 .charts-popup-list {
   border: none;
-  background-color: hsla(218, 26%, 19%, 1);
+  background-color: #192D3F;
   /* background-color: var(--background); */
   box-shadow: #283B4C 0 6px 24px;
   /* box-shadow: var(--background-alt) 0 6px 24px; */
