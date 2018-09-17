@@ -1,45 +1,55 @@
 <template>
-<div class="profile-container">
-  <div class="title-box">{{$t('profile_left_invite_safety')}}<span>{{$t('secure_level')}}： 
-    <i v-if="secure_level <= 1">{{$t('secure_level_0')}}</i>
-    <i v-if="secure_level == 2" style="color:#C9A96C">{{$t('secure_level_1')}}</i>
-    <i v-if="secure_level == 3" style="color:#2FB883">{{$t('secure_level_2')}}</i>
-  </span></div>
-  <div class="invinfo-box">
-    <ul>
-      <li :class="{pass: !!phone}">
-        <div><span></span><p>{{$t('Phone_binding')}}</p></div>
-        <div>{{$t( !!phone ? 'Bindings' : 'No_Bindings')}}</div>
-        <div>
-          {{phone}}
-          <router-link v-if="!phone" :to="{name: 'PhoneBind'}">{{$t('bind')}}</router-link>
-        </div>
-      </li>
-      <li :class="{pass: !!email}">
-        <div><span></span><p>{{$t('email')}}</p></div>
-        <div>{{$t( !!email ? 'Bindings' : 'No_Bindings')}}</div>
-        <div>
-          {{email}}
-          <router-link v-if="!email" :to="{name: 'EmailBind'}">{{$t('bind')}}</router-link>
-        </div>
-      </li>
-      <li :class="{pass: !!google_key_bound}">
-        <div><span></span><p>{{$t('google_validator')}}</p></div>
-        <div>{{$t( !!google_key_bound ? 'Bindings' : 'No_Bindings')}}</div>
-        <div>
-          <router-link v-if="!google_key_bound" :to="{name: 'GoogleBind'}">{{$t('bind')}}</router-link>
-        </div>
-      </li>
-      <li>
-        <div><span></span><p>{{$t('log_pwd')}}</p></div>
-        <div>{{$t('settinged')}}</div>
-        <div>
-          <router-link :to="{name: 'ModPwd'}">{{$t('modify')}}</router-link>
-        </div>
-      </li>
-    </ul>
+  <div class="profile-container">
+    <div class="title-box">{{ $t('profile_left_invite_safety') }}<span>{{ $t('secure_level') }}：
+      <i v-if="secure_level <= 1">{{ $t('secure_level_0') }}</i>
+      <i
+        v-if="secure_level == 2"
+        style="color:#C9A96C">{{ $t('secure_level_1') }}</i>
+      <i
+        v-if="secure_level == 3"
+        style="color:#2FB883">{{ $t('secure_level_2') }}</i>
+    </span></div>
+    <div class="invinfo-box">
+      <ul>
+        <li :class="{pass: !!phone}">
+          <div><span/><p>{{ $t('Phone_binding') }}</p></div>
+          <div>{{ $t( !!phone ? 'Bindings' : 'No_Bindings') }}</div>
+          <div>
+            {{ phone }}
+            <router-link
+              v-if="!phone"
+              :to="{name: 'PhoneBind'}">{{ $t('bind') }}</router-link>
+          </div>
+        </li>
+        <li :class="{pass: !!email}">
+          <div><span/><p>{{ $t('email') }}</p></div>
+          <div>{{ $t( !!email ? 'Bindings' : 'No_Bindings') }}</div>
+          <div>
+            {{ email }}
+            <router-link
+              v-if="!email"
+              :to="{name: 'EmailBind'}">{{ $t('bind') }}</router-link>
+          </div>
+        </li>
+        <li :class="{pass: !!google_key_bound}">
+          <div><span/><p>{{ $t('google_validator') }}</p></div>
+          <div>{{ $t( !!google_key_bound ? 'Bindings' : 'No_Bindings') }}</div>
+          <div>
+            <router-link
+              v-if="!google_key_bound"
+              :to="{name: 'GoogleBind'}">{{ $t('bind') }}</router-link>
+          </div>
+        </li>
+        <li>
+          <div><span/><p>{{ $t('log_pwd') }}</p></div>
+          <div>{{ $t('settinged') }}</div>
+          <div>
+            <router-link :to="{name: 'ModPwd'}">{{ $t('modify') }}</router-link>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
 </template>
 <script>
 import service from '@/modules/service'
@@ -55,9 +65,9 @@ export default {
   computed: {
     secure_level () {
       let secure_level_count = 0
-      if (this.phone) {secure_level_count++}
-      if (this.email) {secure_level_count++}
-      if (this.google_key_bound) {secure_level_count++}
+      if (this.phone) { secure_level_count++ }
+      if (this.email) { secure_level_count++ }
+      if (this.google_key_bound) { secure_level_count++ }
       return secure_level_count
     },
     phone () {
@@ -74,11 +84,10 @@ export default {
     },
     google_key_bound () {
       if (state.userInfo && state.userInfo.google_key_bound) {
-        return 'true'
+        return true
       }
-      return ''
-    },
-    
+      return false
+    }
 
   },
   methods: {
@@ -86,7 +95,6 @@ export default {
   }
 }
 </script>
-
 
 <style lang="scss" scoped>
 .title-box {
@@ -107,7 +115,7 @@ export default {
             }
         }
       }
-      
+
 .invinfo-box {
   width: 100%;
   ul{
@@ -158,4 +166,3 @@ export default {
   }
 }
 </style>
-

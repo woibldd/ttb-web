@@ -8,6 +8,10 @@
             outline: none;
         }
     }
+    .set-kyc {
+        height: 40px;
+        line-height: 40px;
+    }
     .withdraw-address {
         display: flex;
         width: 438px;
@@ -16,11 +20,15 @@
         border-radius: 4px;
         overflow: hidden;
         color: $text-strong;
-        border: 1px solid rgba(204,204,204,1);
 
         .el-select {
             width: 100%;
         }
+    }
+
+    .border-1 {
+        border: 1px solid rgba(204,204,204,1);
+
     }
 
     .withdraw-remain {
@@ -104,7 +112,7 @@
 
     .ensure-modal {
         width:541px;
-        height:330px;
+        height:430px;
         background:rgba(255,255,255,1);
         border-radius:8px;
         padding-top: 34px;
@@ -138,6 +146,10 @@
                 width: 220px;
                 border: 0;
                 border-right: 1px solid $text-normal;
+
+                &.google {
+                    border: 0;
+                }
 
                 &:focus{
                     outline: none;

@@ -3,7 +3,7 @@
     <div class="title-box">
       <div> {{ $t('withdraw') }}</div>
       <router-link
-        to="/fund/history/withdraw"
+        to="/fund/my/history/withdraw"
         class="fund-history"> {{ $t('资金记录') }}</router-link>
     </div>
     <div class="fund-items-content">
@@ -30,11 +30,22 @@
       <div class="fund-item-row">
         <div class="row__label">{{ $t('withdraw_addr') }}</div>
         <div class="row__value">
-          <div class="withdraw-address pl-10">
+          <!-- <div class="withdraw-address pl-10">
             <input
               class="coin-count"
               type="text"
               v-model="transfer2Address">
+          </div> -->
+          <div class="withdraw-address">
+            <el-select
+              v-model="selectAddress"
+              @change="changeAddress">
+              <el-option
+                v-for="item in allAddress"
+                :key="item.id"
+                :label="item.address"
+                :value="item.address"/>
+            </el-select>
           </div>
         </div>
       </div>
@@ -46,7 +57,7 @@
       <div class="fund-item-row">
         <div class="row__label">{{ $t('withdraw_amount') }}</div>
         <div class="row__value">
-          <div class="withdraw-address pl-10">
+          <div class="withdraw-address border-1 pl-10">
             <input
               class="coin-count"
               type="number"
@@ -76,7 +87,14 @@
         <v-btn
           style="width: 200px"
           @click="ensure"
+          :disabled="false"
           :label="$t('withdraw_confirm')"/>
+        <router-link
+          v-if="!hasKyc"
+          class="set-kyc"
+          to="">
+          请先设置KYC！！！ 点击去设置
+        </router-link>
       </div>
       <ul
         class="fund-item-other mt-25 text-des"
@@ -107,6 +125,16 @@
                 class="default c-primary">{{ $t('获取验证码') }}</span>
             </div>
           </div>
+          <div
+            class="modal__row mt-12 mb-25"
+            v-if="google_key_bound || true">
+            <div class="row__label mb-9">{{ $t('fa2_google_code_mobile') }}</div>
+            <div class="row__input" >
+              <input
+                v-model="googleCode"
+                class="input-validate google mr-14">
+            </div>
+          </div>
           <v-btn
             class="w-340"
             @click="confirmWithdraw"
@@ -131,13 +159,14 @@ export default {
       address: '',
       allCoins: [],
       selectCoin: {},
-      allCoinAddress: [],
-      transfer2Address: '',
+      allAddress: [],
+      selectAddress: '',
       withdrawCount: 0,
       showModal: false,
       myCoinInfoList: [],
       myCoinInfo: {},
       phoneCode: '',
+      googleCode: '',
       state
     }
   },
@@ -151,10 +180,21 @@ export default {
     },
     coinArrival () {
       return this.$big(this.withdrawCount) - this.$big(this.selectCoin.withdraw_fee)
+    },
+    hasKyc () {
+    //   console.log(this.state.userInfo.lv)
+      return state.userInfo && state.userInfo.lv > 0
+    },
+    google_key_bound () {
+      if (state.userInfo && state.userInfo.google_key_bound) {
+        return true
+      }
+      return false
     }
   },
   components: {vModal},
   async created () {
+    // 检测kyc
     await this.getAllCoinTypes()
     this.updadeMyCoinInfo()
     this.getCoinAddress()
@@ -170,8 +210,7 @@ export default {
       }
       return service.getMyAddressList(param).then((res) => {
         if (res && res.data) {
-          console.log(res, 'pppp')
-        //   this.transfer2Address = res
+          this.allAddress = res.data
         }
       })
     },
@@ -218,15 +257,18 @@ export default {
         console.log(res)
       })
     },
+    changeAddress () {},
     confirmWithdraw () {
       const param = {
         currency: this.selectCoin.currency,
-        to_address: this.transfer2Address,
+        to_address: this.selectAddress,
         amount: this.withdrawCount,
         // memo:
         // email_code
         phone_code: this.phoneCode
-        // google_code
+      }
+      if (this.googleCode) {
+        param.google_code = this.googleCode
       }
       service.confirmWithdraw(param).then(res => {
         console.log(res)

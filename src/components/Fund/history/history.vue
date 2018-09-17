@@ -1,8 +1,5 @@
 <template>
   <div class="fund-container fund-history-container">
-    <div class="title-box">
-      <div> {{ $t('我的资产') }} <span class="title__second"> <span class="ml-10 mr-10">></span> {{ $t('资金记录') }}</span></div>
-    </div>
     <div class="my-fund-content">
       <div class="fund-total">
         <div class="total__label">{{ $t('账户可用余额') }}</div>

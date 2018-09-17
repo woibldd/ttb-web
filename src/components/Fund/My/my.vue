@@ -2,11 +2,14 @@
   <div class="fund-container my-fund-container">
     <div class="title-box">
       <div> {{ $t('我的资产') }} <span class="title__second"> <span class="mt-10 mr-10">></span>{{ $t('资金记录') }}</span></div>
-      <div
+      <router-link
+        v-if="!showHistory"
         class="fund-history"
-        @click="showFundHistory"> {{ $t('资金记录') }}</div>
+        to="/fund/my/history/withdraw"> {{ $t('资金记录') }}</router-link>
     </div>
-    <div class="my-fund-content">
+    <div
+      v-if="!showHistory"
+      class="my-fund-content">
       <div class="fund-total">
         <div class="total__label">{{ $t('账户可用余额') }}</div>
         <div class="total__coin">{{ $t('账户可用余额') }} <span class="coin-rmb">≈ ￥3.00</span></div>
@@ -40,6 +43,7 @@
 
       </el-table>
     </div>
+    <router-view/>
   </div>
 </template>
 <script>
@@ -71,6 +75,11 @@ export default {
       tableData: []
     }
   },
+  computed: {
+    showHistory () {
+      return this.$route.name === 'history'
+    }
+  },
   async created () {
     this.getAccountBalanceList()
   },
@@ -83,9 +92,6 @@ export default {
         this.tableData = res.data || []
         console.log(res, 'pppp')
       })
-    },
-    showFundHistory () {
-
     }
   }
 }
