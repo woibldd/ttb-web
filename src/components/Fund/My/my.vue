@@ -49,7 +49,7 @@
 </template>
 <script>
 import './my.scss'
-// import utils from '@/modules/utils'
+import utils from '@/modules/utils'
 import service from '@/modules/service'
 import {reduce} from 'lodash'
 

@@ -23,6 +23,7 @@
         <el-table-column
           v-for="(hd, idx) in header"
           :key="idx"
+          :formatter="formatter"
           :prop="hd.key"
           :label="hd.title"/>
 
@@ -113,6 +114,13 @@ export default {
     this.getFundHistory(this.from)
   },
   methods: {
+    formatter (row, column) {
+      if (column.property === 'create_time') {
+        return utils.dateFormatter(row.create_time)
+      } else {
+        return row[column.property]
+      }
+    },
     showCXID (row) {
       const url = utils.getBlockChainUrl(row.txid, row.currency, row.chain)
       window.open(url)
