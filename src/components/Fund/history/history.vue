@@ -1,15 +1,24 @@
 <template>
   <div class="fund-container fund-history-container">
-    <div class="title-box">
-      <div> {{ $t('我的资产') }} <span class="title__second"> <span class="ml-10 mr-10">></span> {{ $t('资金记录') }}</span></div>
-    </div>
     <div class="my-fund-content">
       <div class="fund-total">
-        <div class="total__label">{{ $t('账户可用余额') }}</div>
-        <div class="total__coin">{{ $t('账户可用余额') }} <span class="coin-rmb">≈ ￥3.00</span></div>
+        <div class="left">
+          <div class="total__label">{{ $t('账户可用余额') }}</div>
+          <div class="total__coin">{{ $t('账户可用余额') }} <span class="coin-rmb">≈ ￥3.00</span></div>
+        </div>
+        <el-radio-group
+          @change="changeType"
+          class="total__switch"
+          v-model="type">
+          <!-- <el-radio-button label="all">{{ $t('近期交易') }}</el-radio-button> -->
+          <el-radio-button label="deposit">{{ $t('deposit') }}</el-radio-button>
+          <el-radio-button label="withdraw">{{ $t('withdraw') }}</el-radio-button>
+          <!-- <el-radio-button label="reward"> {{ $t('奖励分配') }} </el-radio-button> -->
+        </el-radio-group>
       </div>
       <el-table
         :data="tableData"
+        height="550"
         class="fund-coin-pool">
         <el-table-column
           v-for="(hd, idx) in header"
@@ -27,14 +36,31 @@
             <span :class="['state', scope.row.state === 1 && 'complete']">{{ scope.row.state === 1 ? '已完成' : '未完成' }}</span>
           </template>
         </el-table-column>
-
+        <el-table-column
+          header-align='right'
+          align="right"
+          width="200px"
+          :label="operate.title">
+          <!-- <span>解锁/锁仓</span> -->
+          <template slot-scope="scope">
+            <span
+              class="show-address"
+              @click="showCXID(scope.row)">查看地址</span>
+          </template>
+        </el-table-column>
       </el-table>
+      <div class="history__footer pt-10">
+        <ix-pagination
+          :page.sync="page"
+          :func="getPage"/>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import service from '@/modules/service'
-
+import utils from '@/modules/utils'
+import ixPagination from '@/components/common/ix-pagination'
 /**
  *
 currency 币名
@@ -46,6 +72,7 @@ max_quota 当前提币总额度
  */
 export default {
   name: 'MyFund',
+  components: {ixPagination},
   data () {
     return {
       header: [
@@ -56,8 +83,11 @@ export default {
         {key: 'amount', title: '数量'}
       ],
       state: {key: 'state', title: '状态'},
+      operate: {key: 'txid', title: '操作'},
       tableData: [],
-      from: 'all'
+      from: 'all',
+      type: 'deposit',
+      page: 1
     }
   },
   computed: {
@@ -83,7 +113,17 @@ export default {
     this.getFundHistory(this.from)
   },
   methods: {
-    getFundHistory (from = 'all') {
+    showCXID (row) {
+      const url = utils.getBlockChainUrl(row.txid, row.currency, row.chain)
+      window.open(url)
+    },
+    changeType (type) {
+      this.getFundHistory(type)
+    },
+    getPage () {
+      this.getFundHistory(this.type)
+    },
+    getFundHistory (from = 'deposit') {
       let request = ''
       switch (from) {
         case 'deposit':
@@ -95,13 +135,13 @@ export default {
         default:
           break
       }
+      if (!request) { return }
       const param = {
-        page: 1,
+        page: this.page,
         size: 10
       }
       request(param).then(res => {
         this.tableData = res.data
-        console.log(res, 'resshsh')
       })
     }
   }
@@ -115,6 +155,11 @@ export default {
         margin-bottom: 58px;
         display: flex;
         align-items: center;
+        justify-content: space-between;
+
+        .left {
+            display: flex;
+        }
     }
     .total__label {
         margin-right: 50px;
@@ -137,6 +182,41 @@ export default {
        &.complete {
             color: #31C78C;
         }
+    }
+    .show-address {
+        cursor: pointer;
+    }
+    .total__switch {
+       .el-radio-button__orig-radio,
+       .el-radio-button__inner {
+        background-color: white;
+        display: inline-block;
+        width: 80px;
+        color: $text-weak;
+        border: 1px solid $text-weak;
+        height: 30px;
+        line-height: 30px;
+        box-sizing: border-box;
+        text-align: center;
+        border-radius: 15px;
+        padding: 0;
+        box-shadow: none;
+        margin-left: 10px;
+       }
+
+        .el-radio-button{
+            box-shadow: none !important;
+        }
+        .el-radio-button.is-active {
+            .el-radio-button__inner {
+                color: $primary !important;
+                border: 1px solid $primary !important;
+            }
+        }
+    }
+    .history__footer {
+        display: flex;
+        justify-content: flex-end;
     }
 
 }

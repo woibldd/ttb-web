@@ -39,7 +39,7 @@ const GoogleTitle = () => import(/* webpackChunkName: "GoogleTitle" */ '@/pages/
 
 const Fund = () => import(/* webpackChunkName: "Fund" */ '@/pages/Fund')
 const Withdraw = () => import(/* webpackChunkName: "FundWithdraw" */ '@/components/Fund/Withdraw/Withdraw.vue')
-const Deposit = () => import(/* webpackChunkName: "FundDeposit" */ '@/components/Fund/Deposit/deposit.vue')
+const Deposit = () => import(/* webpackChunkName: "FundDeposit" */ '@/components/Fund/deposit/deposit.vue')
 const MyFund = () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/My/my.vue')
 const FundAddress = () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/Address/address.vue')
 const FundHistory = () => import(/* webpackChunkName: "FundHistory" */ '@/components/Fund/history/history.vue')
@@ -189,7 +189,7 @@ let router = new Router({
           }
         ]
       }
-    ]
+      ]
     }, {
       path: '/user',
       name: 'account',
@@ -249,26 +249,24 @@ let router = new Router({
       }, {
         path: 'deposit/:currency?',
         name: 'deposit',
-        component: Deposit,
-        children: [
-          {
-            path: 'history'
-          }
-        ]
+        component: Deposit
       }, {
         path: 'my',
         name: 'my',
-        component: MyFund
+        component: MyFund,
+        children: [
+          {
+            path: 'history/:from',
+            name: 'history',
+            alias: 'deposit/:currency/history',
+            component: FundHistory
+          }
+        ]
       }, {
         path: 'address',
         name: 'address',
         component: FundAddress
-      }, {
-        path: 'history/:from',
-        name: 'history',
-        alias: 'deposit/:currency/history',
-        component: FundHistory
-      } ]
+      }]
     }
 
   ]

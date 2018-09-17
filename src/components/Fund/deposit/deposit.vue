@@ -3,7 +3,7 @@
     <div class="title-box">
       <div> {{ $t('deposit') }}</div>
       <router-link
-        to="/fund/history/deposit"
+        to="/fund/my/history/deposit"
         class="fund-history"> {{ $t('资金记录') }}</router-link>
     </div>
     <div class="fund-items-content">
