@@ -78,17 +78,17 @@
         </p>
       </div>
       <div class="fund-item-other">
-        <v-btn
-          style="width: 200px"
-          @click="ensure"
-          :disabled="!hasKyc"
-          :label="$t('withdraw_confirm')"/>
         <router-link
           v-if="!hasKyc"
           class="set-kyc"
           to="">
           请先设置KYC！！！ 点击去设置
         </router-link>
+        <v-btn
+          style="width: 200px"
+          @click="ensure"
+          :disabled="!hasKyc"
+          :label="$t('withdraw_confirm')"/>
       </div>
       <ul
         class="fund-item-other mt-25 text-des"

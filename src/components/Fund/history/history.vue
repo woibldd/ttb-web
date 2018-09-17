@@ -18,6 +18,7 @@
       </div>
       <el-table
         :data="tableData"
+        height="550"
         class="fund-coin-pool">
         <el-table-column
           v-for="(hd, idx) in header"
@@ -48,12 +49,18 @@
           </template>
         </el-table-column>
       </el-table>
+      <div class="history__footer pt-10">
+        <ix-pagination
+          :page.sync="page"
+          :func="getPage"/>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import service from '@/modules/service'
 import utils from '@/modules/utils'
+import ixPagination from '@/components/common/ix-pagination'
 /**
  *
 currency 币名
@@ -65,6 +72,7 @@ max_quota 当前提币总额度
  */
 export default {
   name: 'MyFund',
+  components: {ixPagination},
   data () {
     return {
       header: [
@@ -78,7 +86,8 @@ export default {
       operate: {key: 'txid', title: '操作'},
       tableData: [],
       from: 'all',
-      type: ''
+      type: 'deposit',
+      page: 1
     }
   },
   computed: {
@@ -111,7 +120,10 @@ export default {
     changeType (type) {
       this.getFundHistory(type)
     },
-    getFundHistory (from = 'all') {
+    getPage () {
+      this.getFundHistory(this.type)
+    },
+    getFundHistory (from = 'deposit') {
       let request = ''
       switch (from) {
         case 'deposit':
@@ -125,7 +137,7 @@ export default {
       }
       if (!request) { return }
       const param = {
-        page: 1,
+        page: this.page,
         size: 10
       }
       request(param).then(res => {
@@ -201,6 +213,10 @@ export default {
                 border: 1px solid $primary !important;
             }
         }
+    }
+    .history__footer {
+        display: flex;
+        justify-content: flex-end;
     }
 
 }
