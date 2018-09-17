@@ -81,7 +81,7 @@
         <router-link
           v-if="!hasKyc"
           class="set-kyc"
-          to="">
+          to="/profile/kyc/kyc_step1">
           请先设置KYC！！！ 点击去设置
         </router-link>
         <v-btn
