@@ -251,11 +251,11 @@ export const actions = {
   replaceName (msg) {
     const { exchangeName, companyName } = process.env.THEME_ENV
     const obj = {}
-    for (const key in msg) {
-      if (msg.hasOwnProperty(key)) {
-        obj[key] = msg[key].replace('IX.COM', exchangeName).replace('IX', companyName)
-      }
-    }
+    // for (const key in msg) {
+    //   if (msg.hasOwnProperty(key)) {
+    //     obj[key] = msg[key].replace('IX.COM', exchangeName).replace('IX', companyName)
+    //   }
+    // }
     return {...msg, ...obj}
   },
   setZendeskLocale (locale) {

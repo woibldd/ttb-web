@@ -30,7 +30,7 @@
                 {{ pairName | c }}
               </td>
               <td class="left">
-                <div v-if="!$big(deal.fee_tb).eq(0)"><span class="num">{{ deal.fee_tb }}</span> TB</div>
+                <div v-if="!$big(deal.fee_tb).eq(0)"><span class="num">{{ deal.fee_tb }}</span> IX</div>
                 <div v-if="!$big(deal.fee_currency).eq(0)"><span class="num">{{ deal.fee_currency }}</span> {{ pairName | c }}</div>
                 <div v-if="!$big(deal.fee_product).eq(0)"><span class="num">{{ deal.fee_product }}</span> {{ pairName | p }}</div>
                 <div v-if="isFree(deal)">0</div>
@@ -55,8 +55,6 @@ export default {
     return {
       list: [],
       errmsg: '',
-      loading: true,
-      loaded: false,
       isHide: false,
       options: {
         modifiers: {
@@ -77,18 +75,7 @@ export default {
       if (this.loaded) {
         return false
       }
-      this.loaded = true // 只是避免重复请求，提前认为已加载完成
-      this.loading = true
       this.errmsg = ''
-      const res = await service.queryOrder({id: this.id, finished: this.finished})
-      this.loading = false
-      if (res.code) {
-        this.errmsg = res.message
-        // 可重试
-        await utils.sleep(1500)
-        this.loaded = false
-        return false
-      }
       this.list = res.data.items
     }
   }

@@ -3,6 +3,7 @@ import config from '@/libs/config'
 import _ from 'lodash'
 import utils from './utils'
 import api from './request'
+import { quotaApi } from './request'
 import { state, actions } from '@/modules/store'
 
 const Mock = () => import('./mock')
@@ -132,7 +133,21 @@ const service = {
     return request('order/closed', data)
   },
   orderHistory(data) {
-    return request('order/history', data)
+    return request('order/history', data).then(res => {
+      if (res.data) {
+        if (res.data.length) {
+          res.data = res.data.map (item => {
+            item.side = item.side === 1 ? 'BUY' : 'SELL'
+            item.type = item.type === 1 ? 'LIMIT' : 'MARKET'
+            item.deal_amount = item.executed
+            item.status = item.state
+            return item
+          })
+        }
+        res.data = { items: res.data }
+      }
+      return res
+    })
   },
   getQuote(data) {
     return request('quote/query', data)
@@ -144,7 +159,7 @@ const service = {
     return request('user/kyc')
   },
   updateKycInfo(data) {
-    return request('kyc/update', data)
+    return request('user/kyc2', data)
   },
   updateKyc1(data) {
     return request('user/kyc1', data)
@@ -390,7 +405,7 @@ const service = {
 export async function fetch(url, body, options, method = 'post') {
   let mock = false
   mock = await Mock()
-  if (mock && url.indexOf('api.ix') > 0) {
+  if (mock && url.indexOf('quota.ix') > 0) {
     const find = _.find(mock.list, item => {
       return item.url && item.url.test(url)
     })
@@ -409,7 +424,6 @@ export async function fetch(url, body, options, method = 'post') {
       }
     }
   }
-  //  }
   try {
     let res
     if (method === 'get') {
@@ -453,6 +467,50 @@ export async function fetch(url, body, options, method = 'post') {
     }
   }
 }
+export async function fetchQuota(url, body, options, method = 'post') {
+  try {
+    let res
+    if (method === 'get') {
+      res = await quotaApi.get(url, { params: body }, options)
+    } else {
+      res = await quotaApi.post(url, body, options)
+    }
+    const data = await res // .json()
+    if (data.code === 401 && state.userInfo) {
+      // Session 失效
+      actions.setUserInfo(null)
+      if (utils.getRouteMeta(utils.$app.$route, 'auth')) {
+        actions.setLoginBack(utils.$app.$route)
+        utils.$app.$router.push({
+          name: 'login'
+        })
+        return data
+      }
+    }
+
+    if (data.code == 200) {
+      data.code = 0
+    }
+    if (data.code && !data.message) {
+      data.message = 'Error ' + data.code
+    }
+    return data.data
+  } catch (err) {
+    utils.logE(err)
+    if (err.url && err.status === 0) {
+      return {
+        code: -1,
+        message: utils.$app && utils.$app.$i18n.t('err_timeout'),
+        data: null
+      }
+    }
+    return {
+      code: -2,
+      message: utils.$app && utils.$app.$i18n.t('err_network'),
+      data: null
+    }
+  }
+}
 export function request(url, body, options) {
   // if (process.env.NODE_ENV === 'development') {
   // return fetch('/beta-gate/' + url, body, options)
@@ -460,7 +518,7 @@ export function request(url, body, options) {
   return fetch(url, body, options)
 }
 function quote(url, body, options) {
-  return fetch(config.quoteUrl + url, body, options, 'get')
+  return fetchQuota(config.quoteUrl + url, body, options, 'get')
 }
 
 const cache = {}

@@ -21,6 +21,7 @@ const ProfileInfo = () => import(/* webpackChunkName: "ProfileInfo" */ '@/pages/
 const Kyc = () => import(/* webpackChunkName: "Kyc" */ '@/pages/Profile/Kyc/index')
 const Kyc1 = () => import(/* webpackChunkName: "SafeVerified" */ '@/pages/Profile/Kyc/kyc1')
 const Kyc2 = () => import(/* webpackChunkName: "Authen" */ '@/pages/Profile/Kyc/kyc2')
+const Kyc3 = () => import(/* webpackChunkName: "Authen" */ '@/pages/Profile/Kyc/kyc3')
 const Register = () => import(/* webpackChunkName: "Register" */ '@/pages/Register')
 const Recover = () => import(/* webpackChunkName: "Register" */ '@/pages/user/recover/recover.vue')
 const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
@@ -122,7 +123,7 @@ let router = new Router({
       path: '/profile',
       name: 'profile',
       meta: {
-        auth: false,
+        auth: true,
         nav: true,
         class: 'dark',
         mobileNav: isMobile
@@ -181,6 +182,10 @@ let router = new Router({
             path: 'kyc_step2',
             name: 'KycStep2',
             component: Kyc2
+          }, {
+            path: 'kyc_step3',
+            name: 'KycStep3',
+            component: Kyc3
           }
         ]
       }

@@ -14,6 +14,10 @@
         <div class="ix-col ix-col-2">
           <div class="ix-grid ix-grid-tv" ref="gridTradingView">
             <TradingView ref="TradingView"></TradingView>
+            <div class="active-box" v-if="showCountdown">
+              <p class="text">据获奖者产生剩余：<span class="seconds">{{countdownText}}</span>秒</p>
+              <span class="link">活动规则</span>
+            </div>
           </div>
         </div>
         <div class="ix-col ix-col-3">
@@ -74,7 +78,11 @@ export default {
   data () {
     return {
       state,
-      comps: []
+      comps: [],
+      showCountdown: false,
+      countdownTimer: 0,
+      countdownText: '20',
+      lastDealTime: 0
     }
   },
   watch: {
@@ -134,10 +142,48 @@ export default {
     },
     async onresize () {
       const layoutHeight = window.innerHeight
-      // this.$refs.wrap.style.height = layoutHeight + 'px'
       this.setGridContainers()
-      // $(this.$refs.layout).height($(window).height() - 50)
-      // this.layout.updateSize()
+    },
+    startTimer () {
+      this.stopTimer()
+      this.countdownTimer = setInterval(this.doCountdown, 1000)
+    },
+    doCountdown () {
+        let num = parseInt(this.countdownText, 10)
+        // console.log('--' + num)
+        num--
+        if (num < 0) {
+          this.stopTimer()
+          return
+        }
+        this.countdownText = num
+    },
+    stopTimer () {
+      clearInterval(this.countdownTimer)
+    },
+    dealChanged (data) {
+      if (data && data.length > 0) {
+        // 第一次进入
+        if (!this.showCountdown) {
+          this.lastDealTime = data[data.length - 1].time
+          let tick = new Date().getTime() - this.lastDealTime
+          if (tick < 0) {
+            tick = 0
+          } else if (tick > 20000) {
+            tick = 20000
+          }
+          this.countdownText = Math.floor(tick / 1000) + ''
+          this.showCountdown = true
+          this.startTimer()
+        } else {
+          if (data[data.length - 1].time > this.lastDealTime) {
+            // 有行情变化
+            this.countdownText = '20'
+            this.lastDealTime = data[data.length - 1].time
+            this.startTimer()
+          }
+        }
+      }
     }
   },
   async created () {
@@ -169,6 +215,7 @@ export default {
 
       this.$eh.$on('protrade:balance:refresh', this.refreshBalance)
       this.$eh.$on('app:resize', this.onresize)
+      this.$eh.$on('deal:update', this.dealChanged)
       document.querySelector('.page-loading').classList.remove('show')
     })
   },
@@ -182,6 +229,7 @@ export default {
   destroyed () {
     this.$eh.$off('app:resize', this.onresize)
     this.$eh.$off('protrade:balance:refresh', this.refreshBalance)
+    this.$eh.$off('deal:update', this.dealChanged)
     this.state.pro.layout = false
     document.querySelector('.page-loading').classList.remove('show')
     document.documentElement.setAttribute('style', '')
@@ -272,6 +320,34 @@ export default {
 .ix-grid-intro {
   flex: 1;
   height: 300px;
+}
+.active-box {
+  position: absolute;
+  top: 13px;
+  right: 25px;
+  width: 260px;
+  height: 68px;
+  background: url("../assets/active_bg.png") no-repeat;
+  background-size: 100%;
+
+  .text {
+    font-size: 14px;
+    line-height: 14px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(250,248,239,1);
+    margin-top: 12px;
+    margin-left: 14px;
+
+    .seconds {
+      font-size: 20px;
+      color: #EEDC50;
+      width: 22px;
+      text-align: right;
+      margin: 0 5px;
+      display: inline-block;
+    }
+  }
 }
 @media screen and (max-width: 1000px) {
   .ix-col-1 {

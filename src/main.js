@@ -16,7 +16,7 @@ import qs from 'querystring'
 
 import 'element-ui/lib/theme-chalk/index.css'
 
-import { Select, Option, Table, Input, Form, FormItem, TableColumn} from 'element-ui'
+import { Select, Option, Table, Input, Form, FormItem, TableColumn, Upload} from 'element-ui'
 
 Vue.config.productionTip = false
 Vue.use(VueI18n)
@@ -29,6 +29,7 @@ Vue.use(TableColumn)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
+Vue.use(Upload)
 
 const request = require.context('./assets/svg', true, /\.svg$/)
 /* console.log('request', request)
