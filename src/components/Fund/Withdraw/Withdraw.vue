@@ -30,12 +30,6 @@
       <div class="fund-item-row">
         <div class="row__label">{{ $t('withdraw_addr') }}</div>
         <div class="row__value">
-          <!-- <div class="withdraw-address pl-10">
-            <input
-              class="coin-count"
-              type="text"
-              v-model="transfer2Address">
-          </div> -->
           <div class="withdraw-address">
             <el-select
               v-model="selectAddress"
@@ -87,7 +81,7 @@
         <v-btn
           style="width: 200px"
           @click="ensure"
-          :disabled="false"
+          :disabled="!hasKyc"
           :label="$t('withdraw_confirm')"/>
         <router-link
           v-if="!hasKyc"
