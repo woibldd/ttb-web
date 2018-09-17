@@ -15,13 +15,20 @@
     }
     .withdraw-address {
         display: flex;
+        box-sizing: border-box;
         width: 438px;
         height: 40px;
         line-height: 40px;
         border-radius: 4px;
         overflow: hidden;
         color: $text-strong;
-
+        position: relative;
+        .coin-type{
+            position: absolute;
+            right: 10px;
+            bottom: 0;
+            background: #ffffff;
+        }
         .el-select {
             width: 100%;
         }

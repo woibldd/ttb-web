@@ -11,8 +11,8 @@
       v-if="!showHistory"
       class="my-fund-content">
       <div class="fund-total">
-        <div class="total__label">{{ $t('账户可用余额') }}</div>
-        <div class="total__coin">{{ $t('账户可用余额') }} <span class="coin-rmb">≈ ￥3.00</span></div>
+        <div class="total__label">{{ $t('总资产折合') }}</div>
+        <!-- <div class="total__coin">{{ total }} USDT </div> -->
       </div>
       <el-table
         :data="tableData"
@@ -51,6 +51,7 @@
 import './my.scss'
 // import utils from '@/modules/utils'
 import service from '@/modules/service'
+import {reduce} from 'lodash'
 
 /**
  *
@@ -73,7 +74,8 @@ export default {
         {key: 'max_quota', title: '估值'}
       ],
       operate: {key: 'operate', title: '操作'},
-      tableData: []
+      tableData: [],
+      total: 0
     }
   },
   computed: {
@@ -85,13 +87,14 @@ export default {
     this.getAccountBalanceList()
   },
   methods: {
-    click (r) {
-      console.log(r, '000')
-    },
     getAccountBalanceList () {
       return service.getAccountBalanceList().then(res => {
         this.tableData = res.data || []
-        console.log(res, 'pppp')
+        this.total = reduce(res.data,
+          (sum, item) => sum.plus(item.available), this.$big(0))
+          .toFixed(8)
+
+        console.log(this.total, 'totalll')
       })
     }
   }

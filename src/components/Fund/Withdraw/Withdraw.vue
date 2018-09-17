@@ -25,7 +25,9 @@
       <div class="fund-item-other mt-13 mb-23 withdraw-remain">
         <span>{{ $t("withdraw_avlb") }}:  {{ myCoinInfo.available }}</span>
         <span class="ml-29 mr-29">{{ $t("限额") }}: {{ selectCoin.min_withdraw_amount }}</span>
-        <span class="up-limit pointer">{{ $t("提升限额") }}</span>
+        <router-link
+          to="/profile/kyc/"
+          class="up-limit pointer">{{ $t("提升限额") }}</router-link>
       </div>
       <div class="fund-item-row">
         <div class="row__label">{{ $t('withdraw_addr') }}</div>
@@ -59,6 +61,7 @@
               :min="Number(selectCoin.min_withdraw_amount)"
               :max="Number(myCoinInfo.available)"
               v-model="withdrawCount">
+            <span class="coin-type">{{ selectCoin.currency }}</span>
           </div>
         </div>
       </div>
@@ -81,7 +84,7 @@
         <router-link
           v-if="!hasKyc"
           class="set-kyc"
-          to="/profile/kyc/kyc_step1">
+          to="/profile/kyc">
           请先设置KYC！！！ 点击去设置
         </router-link>
         <v-btn

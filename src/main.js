@@ -26,7 +26,8 @@ import {
   TableColumn,
   Upload,
   RadioGroup,
-  RadioButton
+  RadioButton,
+  Loading
 } from 'element-ui'
 
 Vue.config.productionTip = false
@@ -43,6 +44,7 @@ Vue.use(Input)
 Vue.use(Upload)
 Vue.use(RadioGroup)
 Vue.use(RadioButton)
+Vue.use(Loading)
 
 const request = require.context('./assets/svg', true, /\.svg$/)
 /* console.log('request', request)

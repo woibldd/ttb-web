@@ -49,7 +49,9 @@
         <div> {{ $t('地址列表') }}</div>
       </div>
       <el-table
+        v-loading="loading"
         :data="addressList"
+        height="400"
         class="fund-coin-pool address__table">
         <el-table-column
           v-for="(hd, idx) in header"
@@ -96,7 +98,8 @@ export default {
         {key: 'address', title: '提币地址'},
         {key: 'description', title: '备注'}
       ],
-      operate: {key: 'operate', title: '操作'}
+      operate: {key: 'operate', title: '操作'},
+      loading: true
 
     }
   },
@@ -117,6 +120,7 @@ export default {
       return service.getMyAddressList(param).then((res) => {
         if (res && res.data) {
           this.addressList = res.data
+          this.loading = false
         }
       })
     },
