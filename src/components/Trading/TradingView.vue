@@ -66,14 +66,19 @@ export default {
         }
         vm.tvReady = true
         vm.$emit('chartReady')
-        vm.widget.chart().createStudy('Moving Average', !1, !0, [7], null, {
-          'Plot.color': '#43bedc',
-          'Plot.linewidth': 2,
+        vm.widget.chart().createStudy('Moving Average', !1, !0, [5], null, {
+          'Plot.color': '#8E8E8E',
+          'Plot.linewidth': 5,
+          precision: 8
+        })
+        vm.widget.chart().createStudy('Moving Average', !1, !0, [10], null, {
+          'Plot.color': '#C7BE4C',
+          'Plot.linewidth': 5,
           precision: 8
         })
         vm.widget.chart().createStudy('Moving Average', !1, !0, [30], null, {
-          'Plot.color': '#eebb93',
-          'Plot.linewidth': 2,
+          'Plot.color': '#CD3BD5',
+          'Plot.linewidth': 5,
           precision: 8
         })
         vm.widget.chart().onIntervalChanged().subscribe(null, function (interval) {

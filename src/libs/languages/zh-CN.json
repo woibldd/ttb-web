@@ -522,5 +522,8 @@
   "profile_kyc_ing": "认证资料提交完成，审核中...",
   "profile_kyc_ing_desc": "1-2个工作日后完成审核，请耐心等候",
   "err_check_google_code": "请确认谷歌验证码密钥已安全备份",
-  "invalid_google_code": "谷歌验证码错误"
+  "invalid_google_code": "谷歌验证码错误",
+  "active_rules": "活动规则",
+  "active_countdown_text": "据获奖者产生剩余：",
+  "active_countdown_unit": "秒"
 }
