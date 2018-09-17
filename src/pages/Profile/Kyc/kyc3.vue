@@ -18,7 +18,7 @@
     <div class="notify">
       <div class="content mb-30" v-if="kycState === 1">
         <p class="p1">
-          <icon name="footer-biyong"></icon>
+          <icon name="kyc_review"></icon>
           {{$t('profile_kyc_ing')}}
         </p>
         <p class="p2 mt-24">
@@ -27,15 +27,16 @@
       </div>
       <div class="content mb-30" v-else-if="kycState === 2">
         <p class="p1">
-          <icon name="footer-biyong"></icon>
+          <icon name="kyc_pass"></icon>
           {{$t('profile_kyc_success')}}
         </p>
       </div>
       <div class="content mb-30" v-else-if="kycState === -1">
         <p class="p1">
-          <icon name="footer-biyong"></icon>
+          <icon name="kyc_fail"></icon>
           {{$t('profile_kyc_fail')}}
         </p>
+        <p class="p2 mt-24" v-html="$t('profile_kyc_again', {kyc: '#/profile/kyc/kyc_step2'})"></p>
       </div>
       <div class="content mb-30" v-else>
         未知状态

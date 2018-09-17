@@ -109,8 +109,9 @@ export default {
   },
   async beforeRouteEnter(to, from, next) {
     let result = await actions.updateSession()
-    if (state.userInfo.kyc) {
-      if (state.userInfo.kyc === 1) {
+    if (state.userInfo.lv) {
+      if (state.userInfo.lv === 1) {
+        console.log('goto:: step2')
         next({name: 'KycStep2'})
       }
     }

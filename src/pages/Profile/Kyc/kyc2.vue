@@ -187,6 +187,7 @@
       if (!res.code) {
         kycInfo = res.data
         if (kycInfo.state != 0) {
+          console.log('goto:: step3')
           next({
             name: 'KycStep3'
           })
@@ -360,12 +361,6 @@
                     
                     float: left;
 
-                    .el-upload-dragger {
-                      width: 260px;
-                      height: 190px;
-                      border: none;
-                      background: transparent;
-                    }
                     .upload_box {
                       width: 100%;
                       height: 100%;
@@ -409,4 +404,13 @@
         margin-left: 110px;
     }
   }
+</style>
+
+<style lang="scss">
+.el-upload-dragger {
+  width: 260px;
+  height: 190px;
+  border: none;
+  background: transparent;
+}
 </style>
