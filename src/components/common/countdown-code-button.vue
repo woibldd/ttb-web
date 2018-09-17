@@ -1,16 +1,19 @@
 <template>
-  <a class="sms-btn"
+  <a
+    class="sms-btn"
     :class="{disabled: sms.status === 1}"
     @click.prevent="getSmsCode">
-    {{smsBtnText}}</a>
+    {{ smsBtnText }}</a>
 </template>
 <script>
+import utils from '@/modules/utils'
+
 export default {
   props: {
     sendText: {
       type: String,
       default: 'sms_send'
-    }, 
+    },
     sendRetry: {
       type: String,
       default: 'sms_retry'
@@ -21,7 +24,7 @@ export default {
     },
     validation: {
       type: Function,
-      default() {
+      default () {
         return true
       }
     },
@@ -37,7 +40,7 @@ export default {
         status: 0,
         countDown: 0,
         timer: null
-      },
+      }
     }
   },
   computed: {
@@ -78,16 +81,15 @@ export default {
       this.sms.countDown = this.interval
       this.startCountDown()
       const res = await this.sendCodeFunc()
-      if (res.code) {
+      if (res && res.code) {
         utils.alert(res.message)
       } else {
         this.errmsg = ''
       }
-    },
+    }
   },
   destroyed () {
     clearInterval(this.sms.timer)
   }
 }
 </script>
-

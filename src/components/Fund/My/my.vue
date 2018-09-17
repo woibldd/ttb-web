@@ -25,19 +25,20 @@
 
         <el-table-column
           header-align='right'
+          align="right"
           width="200px"
           :label="operate.title">
           <!-- <span>解锁/锁仓</span> -->
           <template slot-scope="scope">
             <router-link
               :to="'/fund/deposit/' + scope.row.currency"
-              class="my-fund-operate">充币</router-link>
+              class="my-fund-operate">{{ $t('deposit') }}</router-link>
             <router-link
               :to="'/fund/withdraw/'+scope.row.currency"
-              class="my-fund-operate">提币</router-link>
+              class="my-fund-operate">{{ $t('withdraw') }}</router-link>
             <router-link
               to="/trading"
-              class="my-fund-operate">交易</router-link>
+              class="my-fund-operate">{{ $t('asset_trading') }}</router-link>
           </template>
         </el-table-column>
 

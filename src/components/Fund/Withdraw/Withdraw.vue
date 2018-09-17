@@ -105,7 +105,7 @@
         <div class="modal__title mb-30">{{ $t('安全验证') }}</div>
         <div class="modal__content">
           <div class="modal__row">
-            <div class="row__label mb-9">{{ $t('手机') }}</div>
+            <div class="row__label mb-9">{{ $t('register_by_phone') }}</div>
             <div class="row__input" >{{ contact }} </div>
           </div>
           <div class="modal__row mt-12 mb-25">
@@ -114,9 +114,10 @@
               <input
                 v-model="phoneCode"
                 class="input-validate mr-14">
-              <span
-                @click="getVerifyCode"
-                class="default c-primary">{{ $t('获取验证码') }}</span>
+              <count-down
+                :send-text="$t('hq_send')"
+                :send-code-func="getVerifyCode"
+              />
             </div>
           </div>
           <div
@@ -132,7 +133,7 @@
           <v-btn
             class="w-340"
             @click="confirmWithdraw"
-            :label="$t('确认提币')"/>
+            :label="$t('withdraw_confirm')"/>
         </div>
       </div>
     </v-modal>
@@ -144,6 +145,7 @@ import copyToClipboard from 'copy-to-clipboard'
 import vModal from '@/components/VModal.vue'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
+import countDown from '@/components/common/countdown-code-button'
 import { state } from '@/modules/store'
 
 export default {
@@ -186,7 +188,7 @@ export default {
       return false
     }
   },
-  components: {vModal},
+  components: {vModal, countDown},
   async created () {
     // 检测kyc
     await this.getAllCoinTypes()
@@ -244,7 +246,7 @@ export default {
     },
     getVerifyCode () {
       const param = {
-        region: 86,
+        region: this.state.userInfo.region,
         phone: this.contact
       }
       service.getVerifyCode(param, 'phone').then(res => {
