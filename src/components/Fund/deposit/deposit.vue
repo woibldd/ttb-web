@@ -4,7 +4,7 @@
       <div> {{ $t('deposit') }}</div>
       <router-link
         to="/fund/my/history/deposit"
-        class="fund-history"> {{ $t('资金记录') }}</router-link>
+        class="fund-history"> {{ $t('capital_record') }}</router-link>
     </div>
     <div class="fund-items-content">
       <div class="fund-item-row mb-24">

@@ -4,7 +4,7 @@
       <div> {{ $t('withdraw') }}</div>
       <router-link
         to="/fund/my/history/withdraw"
-        class="fund-history"> {{ $t('资金记录') }}</router-link>
+        class="fund-history"> {{ $t('capital_record') }}</router-link>
     </div>
     <div class="fund-items-content">
       <div class="fund-item-row">
@@ -24,10 +24,10 @@
       </div>
       <div class="fund-item-other mt-13 mb-23 withdraw-remain">
         <span>{{ $t("withdraw_avlb") }}:  {{ myCoinInfo.available }}</span>
-        <span class="ml-29 mr-29">{{ $t("限额") }}: {{ selectCoin.min_withdraw_amount }}</span>
+        <span class="ml-29 mr-29">{{ $t("quota") }}: {{ selectCoin.min_withdraw_amount }}</span>
         <router-link
           to="/profile/kyc/"
-          class="up-limit pointer">{{ $t("提升限额") }}</router-link>
+          class="up-limit pointer">{{ $t("upgrade_quota") }}</router-link>
       </div>
       <div class="fund-item-row">
         <div class="row__label">{{ $t('withdraw_addr') }}</div>
@@ -105,14 +105,14 @@
       :open.sync="showModal"
       @click="hideModal">
       <div class="ensure-modal">
-        <div class="modal__title mb-30">{{ $t('安全验证') }}</div>
+        <div class="modal__title mb-30">{{ $t('security_verification') }}</div>
         <div class="modal__content">
           <div class="modal__row">
             <div class="row__label mb-9">{{ $t('register_by_phone') }}</div>
             <div class="row__input" >{{ contact }} </div>
           </div>
           <div class="modal__row mt-12 mb-25">
-            <div class="row__label mb-9">{{ $t('手机验证码') }}</div>
+            <div class="row__label mb-9">{{ $t('phone_verification_code') }}</div>
             <div class="row__input" >
               <input
                 v-model="phoneCode"

@@ -101,6 +101,8 @@
   "asset_value": "Estimated Value",
   "deposit_title": "Deposit",
   "deposit_address": "Address",
+  "address_manage": "Address Manage",
+  "add_address_error": "Address is required",
   "copyed": "Copyed",
   "link_copyed": "Share Link has Copyed",
   "deposit_loading": "Loading",
@@ -296,6 +298,7 @@
   "wallets_nav_transfer": "History",
   "wallets_nav_asset": "Balance",
   "add_withdraw_addr": "Add new addrees",
+  "withdraw_addr_list": "Addrees list",
   "add_withdraw_success": "New address added",
   "del_withdraw_success": "Address has been removed",
   "err_empty_withdraw_addr": "Please input withdraw address",
@@ -545,5 +548,9 @@
   "register_success": "Register successfully",
   "declaration": "Declaration",
   "whitepagger": "WhitePaper",
-  "count_down_start": "The official version will be launched in"
+  "count_down_start": "The official version will be launched in",
+  "capital_record":"Capital record",
+  "quota": "Quota"
+
+
 }

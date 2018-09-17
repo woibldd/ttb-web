@@ -70,6 +70,8 @@
   "asset_value": "估值",
   "deposit_title": "数字资产充值",
   "deposit_address": "充币地址",
+  "address_manage":"地址管理",
+  "add_address_error":"地址不能为空",
   "copyed": "已复制",
   "link_copyed": "分享链接已复制",
   "deposit_loading": "正在读取中",
@@ -274,6 +276,7 @@
   "withdraw_quota_equal": "可提现限额等值%{coin}",
   "withdraw_total": "总额",
   "withdraw_addr": "提币地址",
+  "withdraw_addr_list": "地址列表",
   "withdraw_amount": "提币数量",
   "withdraw_min": "最低提币数量",
   "withdraw_all": "全部提现",
@@ -525,5 +528,11 @@
   "invalid_google_code": "谷歌验证码错误",
   "active_rules": "活动规则",
   "active_countdown_text": "据获奖者产生剩余：",
-  "active_countdown_unit": "秒"
+  "active_countdown_unit": "秒",
+  "capital_record":"资金记录",
+  "quota": "限额",
+  "upgrade_quota": "提升限额",
+  "security_verification":"安全验证",
+  "phone_verification_code": "手机验证码",
+  "total_count": "总计"
 }

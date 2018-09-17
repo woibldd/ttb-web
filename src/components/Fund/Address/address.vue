@@ -46,7 +46,7 @@
     </div>
     <div class="address-list">
       <div class="title-box mb-30">
-        <div> {{ $t('地址列表') }}</div>
+        <div> {{ $t('withdraw_addr_list') }}</div>
       </div>
       <el-table
         v-loading="loading"
@@ -68,10 +68,10 @@
           <template slot-scope="scope">
             <span
               @click="copy(scope.row)"
-              class="my-fund-operate a-copy cursor-default ">复制</span>
+              class="my-fund-operate a-copy cursor-default ">{{ $t('copy') }}</span>
             <span
               @click="deleteAddr(scope.row)"
-              class="my-fund-operate cursor-default ">删除</span>
+              class="my-fund-operate cursor-default ">{{ $t('profile_api_remove') }}</span>
           </template>
         </el-table-column>
       </el-table>
@@ -94,12 +94,12 @@ export default {
       addressList: [],
       description: '',
       header: [
-        {key: 'currency', title: '币种'},
-        {key: 'address', title: '提币地址'},
-        {key: 'description', title: '备注'}
+        {key: 'currency', title: this.$t('fees_name')},
+        {key: 'address', title: this.$t('withdraw_addr')},
+        {key: 'description', title: this.$t('note')}
       ],
-      operate: {key: 'operate', title: '操作'},
-      loading: true
+      operate: {key: 'operate', title: this.$t('operation')},
+      loading: false
 
     }
   },
@@ -139,7 +139,7 @@ export default {
     },
     confirmAdd () {
       if (!this.address) {
-        utils.danger('地址不能为空！')
+        utils.danger(this.$t('add_address_error'))
         return
       }
       const param = {

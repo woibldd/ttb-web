@@ -1,19 +1,19 @@
 <template>
   <div class="fund-container my-fund-container">
     <div class="title-box">
-      <div> {{ $t('我的资产') }} <span class="title__second"> <span class="mt-10 mr-10">></span>{{ $t('资金记录') }}</span></div>
+      <div> {{ $t('wallets_nav_asset') }} <span class="title__second"> <span class="mt-10 mr-10">></span>{{ $t('capital_record') }}</span></div>
       <router-link
         v-if="!showHistory"
         class="fund-history"
-        to="/fund/my/history/withdraw"> {{ $t('资金记录') }}</router-link>
+        to="/fund/my/history/withdraw"> {{ $t('capital_record') }}</router-link>
     </div>
     <div
       v-if="!showHistory"
       class="my-fund-content">
-      <div class="fund-total">
+      <!-- <div class="fund-total">
         <div class="total__label">{{ $t('总资产折合') }}</div>
-        <!-- <div class="total__coin">{{ total }} USDT </div> -->
-      </div>
+        <div class="total__coin">{{ total }} USDT </div>
+      </div> -->
       <el-table
         :data="tableData"
         class="fund-coin-pool">
@@ -67,13 +67,13 @@ export default {
   data () {
     return {
       header: [
-        {key: 'currency', title: '币种'},
-        {key: 'available', title: '可用'},
-        {key: 'ordering', title: '冻结'},
-        {key: 'quota', title: '总计'},
-        {key: 'max_quota', title: '估值'}
+        {key: 'currency', title: this.$t('fees_name')},
+        {key: 'available', title: this.$t('avlb')},
+        {key: 'ordering', title: this.$t('asset_th_unavlb')},
+        {key: 'quota', title: this.$t('total_count')},
+        {key: 'max_quota', title: this.$t('homechart_fiat')}
       ],
-      operate: {key: 'operate', title: '操作'},
+      operate: {key: 'operate', title: 'operation'},
       tableData: [],
       total: 0
     }

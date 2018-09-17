@@ -21,7 +21,7 @@
         <li class=""><router-link
           class="menu-name"
           to="/fund/address"
-          active-class="active">{{ $t('地址管理') }}</router-link></li>
+          active-class="active">{{ $t('address_manage') }}</router-link></li>
       </ul>
     </div>
   </div>
