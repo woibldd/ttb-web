@@ -3,7 +3,7 @@
     <div class="left-menu-container left-menu-nobottom">
       <p class="left-menu-title">
         <icon name="personal-center"/>
-        <span class="menu-title">{{ $t('资金管理') }}</span>
+        <span class="menu-title">{{ $t('capital_manage') }}</span>
       </p>
       <ul class="left-menu-list">
         <li class="active"><router-link
