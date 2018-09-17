@@ -452,8 +452,7 @@ const utils = {
     return dataArr
   },
   getBlockChainUrl (tx, type, chainName) {
-    chainName = chainName || this.model.chainName
-    let url = 'javascript:alert("' + chainName + ' has no url pattern")'
+    let url = ''
     switch (chainName) {
       case 'BTC':
         url = `https://blockchain.info/${type}/${tx}`

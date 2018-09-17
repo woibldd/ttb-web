@@ -105,7 +105,7 @@ export default {
   },
   methods: {
     showCXID (row) {
-      const url = utils.getBlockChainUrl(row.txid, row.currency)
+      const url = utils.getBlockChainUrl(row.txid, row.currency, row.chain)
       window.open(url)
     },
     changeType (type) {
@@ -170,6 +170,9 @@ export default {
        &.complete {
             color: #31C78C;
         }
+    }
+    .show-address {
+        cursor: pointer;
     }
     .total__switch {
        .el-radio-button__orig-radio,
