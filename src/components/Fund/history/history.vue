@@ -203,15 +203,15 @@ export default {
         background-color: white;
         display: inline-block;
         width: 80px;
-        color: $text-weak;
-        border: 1px solid $text-weak;
+        color: $text-weak !important;
+        border: 1px solid $text-weak !important;
         height: 30px;
         line-height: 30px;
         box-sizing: border-box;
         text-align: center;
-        border-radius: 15px;
+        border-radius: 15px !important;
         padding: 0;
-        box-shadow: none;
+        box-shadow: none !important;
         margin-left: 10px;
        }
 

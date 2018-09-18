@@ -26,7 +26,7 @@
       </div>
       <div class="fund-item-other mt-13 mb-23 withdraw-remain">
         <span>{{ $t("withdraw_avlb") }}:  {{ myCoinInfo.available }}</span>
-        <span class="ml-29 mr-29">{{ $t("quota") }}: {{ selectCoin.min_withdraw_amount }}</span>
+        <span class="ml-29 mr-29">{{ $t("quota") }}: {{ myCoinInfo.quota }}</span>
         <router-link
           to="/profile/kyc/"
           class="up-limit pointer">{{ $t("upgrade_quota") }}</router-link>
