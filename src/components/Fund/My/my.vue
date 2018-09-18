@@ -10,10 +10,10 @@
     <div
       v-if="!showHistory"
       class="my-fund-content">
-      <!-- <div class="fund-total">
-        <div class="total__label">{{ $t('总资产折合') }}</div>
-        <div class="total__coin">{{ total }} USDT </div>
-      </div> -->
+      <div class="fund-total">
+        <div class="total__label">{{ $t('账户可用余额') }}</div>
+        <div class="total__coin">{{ total }} {{ unit }} </div>
+      </div>
       <el-table
         :data="tableData"
         class="fund-coin-pool">
@@ -51,6 +51,7 @@
 import './my.scss'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
+import {state, actions} from '@/modules/store'
 import {reduce} from 'lodash'
 
 /**
@@ -74,27 +75,38 @@ export default {
         {key: 'max_quota', title: this.$t('homechart_fiat')}
       ],
       operate: {key: 'operate', title: 'operation'},
-      tableData: [],
-      total: 0
+      tableData: []
     }
   },
   computed: {
     showHistory () {
       return this.$route.name === 'history'
+    },
+    total () {
+      let sum = 0
+      if (state.locale === 'zh-CN') {
+        this.tableData.forEach(item => {
+          sum += item.available * item.rates.CNY
+        })
+      } else if (state.locale === 'en') {
+        this.tableData.forEach(item => {
+          sum += item.available * item.rates.USD
+        })
+      }
+      return sum
+    },
+    unit () {
+      return state.locale === 'zh-CN' ? 'CNY' : 'USD'
     }
   },
   async created () {
     this.getAccountBalanceList()
+    actions.updateSession()
   },
   methods: {
     getAccountBalanceList () {
       return service.getAccountBalanceList().then(res => {
         this.tableData = res.data || []
-        this.total = reduce(res.data,
-          (sum, item) => sum.plus(item.available), this.$big(0))
-          .toFixed(8)
-
-        console.log(this.total, 'totalll')
       })
     }
   }

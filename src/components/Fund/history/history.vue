@@ -34,7 +34,7 @@
           :label="state.title">
           <!-- <span>解锁/锁仓</span> -->
           <template slot-scope="scope">
-            <span :class="['state', scope.row.state === 1 && 'complete']">{{ scope.row.state === 1 ? $t('done') : $t('pending') }}</span>
+            <span :class="['state', scope.row.state === 4 && 'complete']">{{ scope.row.state === 1 ? $t('done') : $t('pending') }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -84,7 +84,7 @@ export default {
         {key: 'currency', title: this.$i18n.t('currency')},
         {key: 'confirm', title: this.$i18n.t('confirm')},
         {key: 'chain', title: this.$i18n.t('chain')},
-        {key: 'amount', title: this.$i18n.t('amount')}
+        {key: 'amount', title: this.$i18n.t('amount')} // -fee
       ],
       state: {key: 'state', title: this.$i18n.t('state')},
       operate: {key: 'txid', title: this.$i18n.t('actions')},
@@ -125,7 +125,7 @@ export default {
       }
     },
     showCXID (row) {
-      const url = utils.getBlockChainUrl(row.txid, row.currency, row.chain)
+      const url = utils.getBlockChainUrl(row.txid, 'tx', row.chain)
       window.open(url)
     },
     changeType (type) {
@@ -203,15 +203,15 @@ export default {
         background-color: white;
         display: inline-block;
         width: 80px;
-        color: $text-weak;
-        border: 1px solid $text-weak;
+        color: $text-weak !important;
+        border: 1px solid $text-weak !important;
         height: 30px;
         line-height: 30px;
         box-sizing: border-box;
         text-align: center;
-        border-radius: 15px;
+        border-radius: 15px !important;
         padding: 0;
-        box-shadow: none;
+        box-shadow: none !important;
         margin-left: 10px;
        }
 
