@@ -285,7 +285,7 @@ const service = {
     return request('api/remove', data)
   },
   getRate(name) {
-    return getCache(name + 'FiatRate', () => request('currency/rate', { name }), 1e4)
+    return getCache(name + 'FiatRate', () => request('currency/query', { name }), 1e4)
   },
   getCoins() {
     return getCache('currencyList', () => request('currency/list'))
