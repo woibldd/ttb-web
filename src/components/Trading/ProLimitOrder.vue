@@ -361,7 +361,19 @@ export default {
     },
     set ({price, amount, dontOveride, side}) {
       if (!side) {
-        side = 'BUY'
+        this.set({
+            price,
+            amount,
+            dontOveride,
+            side: 'BUY'
+        })
+        this.set({
+            price,
+            amount,
+            dontOveride,
+            side: 'SELL'
+        })
+        return
       }
       if (price) {
         if (!dontOveride || (dontOveride && !this.getValues('price', side))) {
@@ -456,36 +468,36 @@ export default {
       if (side === 'SELL' && $bid.gt(0) && $price.div(0.7).lt($bid)) {
         return utils.alert(this.$i18n.t('price_low', {per: 30}))
       }
-      if ($bid.gt(0) && $ask.gt(0) && $bid.mul(1.05).lt($ask) &&
-        ((side === 'SELL' && $price.lte($bid)) || (side === 'BUY' && $price.gte($ask)))) {
-        // 盘口差价较大，且下单价超过盘口
-        const ok = await utils.confirm({
-          trade: true,
-          content: this.$i18n.t('spread_too_big', {per: 5}),
-          title: this.$i18n.t('confirm_your_order')
-        })
-        if (!ok) {
-          return false
-        }
-      } else if (side === 'BUY' && $ask.gt(0) && $price.div(1.05).gt($ask)) {
-        const ok = await utils.confirm({
-          trade: true,
-          content: this.$i18n.t('price_little_high', {per: 5}),
-          title: this.$i18n.t('confirm_your_order')
-        })
-        if (!ok) {
-          return false
-        }
-      } else if (side === 'SELL' && $bid.gt(0) && $price.div(0.95).lt($bid)) {
-        const ok = await utils.confirm({
-          trade: true,
-          content: this.$i18n.t('price_little_low', {per: 5}),
-          title: this.$i18n.t('confirm_your_order')
-        })
-        if (!ok) {
-          return false
-        }
-      }
+    //   if ($bid.gt(0) && $ask.gt(0) && $bid.mul(1.05).lt($ask) &&
+    //     ((side === 'SELL' && $price.lte($bid)) || (side === 'BUY' && $price.gte($ask)))) {
+    //     // 盘口差价较大，且下单价超过盘口
+    //     const ok = await utils.confirm({
+    //       trade: true,
+    //       content: this.$i18n.t('spread_too_big', {per: 5}),
+    //       title: this.$i18n.t('confirm_your_order')
+    //     })
+    //     if (!ok) {
+    //       return false
+    //     }
+    //   } else if (side === 'BUY' && $ask.gt(0) && $price.div(1.05).gt($ask)) {
+    //     const ok = await utils.confirm({
+    //       trade: true,
+    //       content: this.$i18n.t('price_little_high', {per: 5}),
+    //       title: this.$i18n.t('confirm_your_order')
+    //     })
+    //     if (!ok) {
+    //       return false
+    //     }
+    //   } else if (side === 'SELL' && $bid.gt(0) && $price.div(0.95).lt($bid)) {
+    //     const ok = await utils.confirm({
+    //       trade: true,
+    //       content: this.$i18n.t('price_little_low', {per: 5}),
+    //       title: this.$i18n.t('confirm_your_order')
+    //     })
+    //     if (!ok) {
+    //       return false
+    //     }
+    //   }
       this.submitting = side
       const order = {
         type: 1,

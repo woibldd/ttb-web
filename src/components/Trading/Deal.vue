@@ -85,7 +85,6 @@ export default {
       this.socket.$on('message', (data) => {
         this.loading = false
         this.update(data)
-        console.log(data)
         this.$eh.$emit('deal:update', data)
       })
     },

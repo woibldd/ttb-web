@@ -300,17 +300,17 @@ export default {
       if ($amount.gt(this.pairInfo.max_amount)) {
         return utils.alert(this.$i18n.t('amount_high', {num: this.pairInfo.max_amount + ' ' + this.pairInfo.product_name}))
       }
-      if ($bid.gt(0) && $ask.gt(0) && $bid.mul(1.05).lt($ask)) {
-        // 盘口差价较大，且下单价超过盘口
-        const ok = await utils.confirm({
-          trade: true,
-          content: this.$i18n.t('spread_too_big', {per: 5}),
-          title: this.$i18n.t('confirm_your_order')
-        })
-        if (!ok) {
-          return false
-        }
-      }
+    //   if ($bid.gt(0) && $ask.gt(0) && $bid.mul(1.05).lt($ask)) {
+    //     // 盘口差价较大，且下单价超过盘口
+    //     const ok = await utils.confirm({
+    //       trade: true,
+    //       content: this.$i18n.t('spread_too_big', {per: 5}),
+    //       title: this.$i18n.t('confirm_your_order')
+    //     })
+    //     if (!ok) {
+    //       return false
+    //     }
+    //   }
       this.submitting = side
       const order = {
         type: 2,
@@ -353,7 +353,6 @@ export default {
       } else {
         this.setSellVolumn(value)
       }
-      console.log(value)
     }
   },
   components: {

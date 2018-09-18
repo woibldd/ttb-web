@@ -90,8 +90,20 @@ const service = {
     state.pro.product = null
     return request('user/logout')
   },
+  async getBalanceByPair(...currencys) {
+    let result = await this.getBalance()
+    let resp = []
+    if (!result.code) {
+        let list = result.data
+        currencys.forEach(currency => {
+            let balance = list.filter(l => currency === l.currency)[0] || {}
+            resp.push(balance)
+        })
+    }
+    return resp
+  },
   getBalance() {
-    return getCache('balanceList', () => request('balance/list'), 2e3)
+    return getCache('balanceList', () => request('account/balance/list'), 2e3)
   },
   getBalanceInfo(data) {
     return request('balance/query', data)
@@ -410,7 +422,7 @@ const service = {
 }
 
 export async function fetch(url, body, options, method = 'post') {
-  let mock = false
+  /* let mock = false
   mock = await Mock()
   if (mock && url.indexOf('quota.ix') > 0) {
     const find = _.find(mock.list, item => {
@@ -430,7 +442,7 @@ export async function fetch(url, body, options, method = 'post') {
         return res
       }
     }
-  }
+  } */
   try {
     let res
     if (method === 'get') {

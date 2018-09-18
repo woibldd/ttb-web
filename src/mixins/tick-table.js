@@ -116,7 +116,6 @@ export default {
         find.tick = item
       }
       if (item.pair === this.state.pro.pair) {
-          debugger
         this.state.pro.pairTick = item
       }
     },

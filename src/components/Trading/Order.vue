@@ -1,6 +1,6 @@
 <template>
   <div class="ix-panel" :class="{progress: progressing}">
-    <div class="mask" :class="{show: hasMask, transparent: curCtx.nextId}">
+    <div class="mask" :class="{show: hasMask, transparent: curCtx.page > 0}">
       <v-loading></v-loading>
     </div>
     <div class="ix-header">
@@ -145,7 +145,7 @@ export default {
       activeTotal: 0,
       local,
       active: {
-        nextId: 0,
+        page: 0,
         fetchId: 0,
         fetching: false,
         over: false,
@@ -153,17 +153,8 @@ export default {
         api: 'orderActive',
         list: []
       },
-      filled: {
-        nextId: 0,
-        fetchId: 0,
-        fetching: false,
-        over: false,
-        latest: false,
-        api: 'orderClosed',
-        list: []
-      },
       history: {
-        nextId: 0,
+        page: 0,
         fetchId: 0,
         fetching: false,
         over: false,
@@ -356,7 +347,6 @@ export default {
 
       if (!ctx.latest) {
         ctx.latest = true
-        ctx.nextId = 0
         ctx.over = false
         ctx.fetching = false
       }
@@ -364,13 +354,14 @@ export default {
         return false
       }
       ctx.fetchId += 1
+      ctx.page += 1
+      console.log('----'+ ctx.page)
       ctx.fetching = true
       const pageSize = 20
-      const nextId = ctx.nextId
       const fetchId = ctx.fetchId
       const params = {
         size: pageSize,
-        page: 1
+        page: ctx.page
       }
       if (this.local.hideOthers) {
         params.symbol = this.state.pro.pair
@@ -378,7 +369,7 @@ export default {
       const res = await service[ctx.api](params)
       await service.getPairList() // 由于 avg() 使用了 pairList，需要等待该请求完成
 
-      if (nextId !== ctx.nextId || fetchId !== ctx.fetchId || this._isDestroyed) {
+      if (fetchId !== ctx.fetchId || this._isDestroyed) {
         return false
       }
       ctx.fetching = false
@@ -388,28 +379,25 @@ export default {
         const items = this.local.hideOthers
           ? res.data.items.filter(item => item.symbol === this.state.pro.pair)
           : res.data.items
-        if (nextId) {
+        if (ctx.page > 1) {
           ctx.list = ctx.list.concat(items)
         } else {
           this.$refs[tab].scrollTop = 0
           ctx.list = items
         }
         ctx.over = res.data.items.length < pageSize
-        ctx.nextId = _.get(_.last(res.data.items), 'id', 0)
         this.$nextTick(() => this.onScroll(tab))
       }
     },
     resetAll () {
       // 设置 latest=false 下次该tab fetch 时会进行刷新
       this.active.latest = false
-      this.filled.latest = false
       this.history.latest = false
     },
     clear (tab) {
       const ctx = this[tab]
       ctx.latest = false
       ctx.list = []
-      ctx.nextId = 0
       ctx.fetchId += 1
       ctx.fetching = false
       ctx.over = false
@@ -419,7 +407,6 @@ export default {
     },
     clearAll () {
       this.clear('active')
-      this.clear('filled')
       this.clear('history')
 
       // 通知 deals 浮窗关闭

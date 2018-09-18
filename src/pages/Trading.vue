@@ -13,9 +13,9 @@
         </div>
         <div class="ix-col ix-col-2">
           <div class="ix-grid ix-grid-tv" ref="gridTradingView">
-            <div class="grid-title">
-              asdfasdfasdfjkljkj
-            </div>
+            <!-- <div class="grid-title">
+              {{state.pro.pairTick}}
+            </div> -->
             <TradingView ref="TradingView"></TradingView>
             <div class="active-box" v-if="showCountdown">
               <p class="text">{{$t('active_countdown_text')}}<span class="seconds">{{countdownText}}</span>{{$t('active_countdown_unit')}}</p>
@@ -122,13 +122,10 @@ export default {
       if (this.state.pro.currency && this.state.pro.currency.currency_name !== currency) {
         this.state.pro.currency = null
       }
-      const [resc, resp] = await Promise.all([
-        service.getBalanceInfo({currency_name: currency}),
-        service.getBalanceInfo({currency_name: product})
-      ])
-      if (!resc.code && !resp.code && product === this.state.pro.product_name && currency === this.state.pro.currency_name) {
-        this.state.pro.product = resp.data
-        this.state.pro.currency = resc.data
+      let [resc, resp] = await service.getBalanceByPair(currency, product)
+      if (resc && resp && product === this.state.pro.product_name && currency === this.state.pro.currency_name) {
+        this.state.pro.product = resp
+        this.state.pro.currency = resc
       }
     },
     setGridContainers () {
@@ -153,7 +150,6 @@ export default {
     },
     doCountdown () {
         let num = parseInt(this.countdownText, 10)
-        // console.log('--' + num)
         num--
         if (num < 0) {
           this.stopTimer()
@@ -323,6 +319,9 @@ export default {
 .ix-grid-intro {
   flex: 1;
   height: 300px;
+}
+.grid-title {
+  height: 56px;
 }
 .active-box {
   position: absolute;
