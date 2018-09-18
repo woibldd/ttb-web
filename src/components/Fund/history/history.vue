@@ -4,7 +4,7 @@
       <div class="fund-total">
         <div class="left">
           <div class="total__label">{{ $t('withdraw_avlb') }}</div>
-          <div class="total__coin">{{ $t('wallets_value') }} <span class="coin-rmb">≈ ￥3.00</span></div>
+          <div class="total__coin">{{ total }} {{ unit }} </div>
         </div>
         <el-radio-group
           @change="changeType"
@@ -31,7 +31,7 @@
           header-align='right'
           align="right"
           width="200px"
-          :label="state.title">
+          :label="status.title">
           <!-- <span>解锁/锁仓</span> -->
           <template slot-scope="scope">
             <span :class="['state', scope.row.state === 4 && 'complete']">{{ scope.row.state === 1 ? $t('done') : $t('pending') }}</span>
@@ -64,6 +64,7 @@
 <script>
 import service from '@/modules/service'
 import utils from '@/modules/utils'
+import {state} from '@/modules/store'
 import ixPagination from '@/components/common/ix-pagination'
 /**
  *
@@ -86,12 +87,15 @@ export default {
         {key: 'chain', title: this.$i18n.t('chain')},
         {key: 'amount', title: this.$i18n.t('amount')} // -fee
       ],
-      state: {key: 'state', title: this.$i18n.t('state')},
+      status: {key: 'state', title: this.$i18n.t('state')},
       operate: {key: 'txid', title: this.$i18n.t('actions')},
       tableData: [],
       from: 'all',
       type: 'deposit',
-      page: 1
+      page: 1,
+      total: 0,
+      unit: 'CNY',
+      state
     }
   },
   computed: {
@@ -113,8 +117,8 @@ export default {
   },
   async created () {
     this.from = this.$route.params.from
-    console.log(this.$route.params.from, 'from')
     this.getFundHistory(this.from)
+    this.getAccountBalanceList()
   },
   methods: {
     formatter (row, column) {
@@ -154,6 +158,28 @@ export default {
       request(param).then(res => {
         this.tableData = res.data
       })
+    },
+    getAccountBalanceList () {
+      return service.getAccountBalanceList().then(res => {
+        let sum = 0
+        if (state.locale === 'zh-CN') {
+          this.unit = 'CNY'
+          res.data.forEach(item => {
+            sum += item.available * item.rates.CNY
+          })
+        } else if (state.locale === 'en') {
+          this.unit = 'USD'
+          res.data.forEach(item => {
+            sum += item.available * item.rates.USD
+          })
+        }
+        this.total = sum
+      })
+    }
+  },
+  watch: {
+    'state.locale' (v) {
+      this.getAccountBalanceList()
     }
   }
 }
