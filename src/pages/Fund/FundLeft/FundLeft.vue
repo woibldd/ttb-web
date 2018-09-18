@@ -2,7 +2,7 @@
   <div class="fund-left-container">
     <div class="left-menu-container left-menu-nobottom">
       <p class="left-menu-title">
-        <icon name="personal-center"/>
+        <icon name="fund-history-money"/>
         <span class="menu-title">{{ $t('capital_manage') }}</span>
       </p>
       <ul class="left-menu-list">
