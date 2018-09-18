@@ -579,7 +579,6 @@
   "kyc_upload": "Upload",
   "kyc_name": "Name: Jack",
   
-<<<<<<< HEAD
   "kyc_valid_time": "Issue Date",
   "kyc_hand": "The photo of you holding ID Card",
   "kyc_notice1": "The above materials should be uploaded in JPG / JPEG / PNG format。Please ensure that the photos should be clear, full page and use gentle light and file size should not exceed 5M.",
@@ -596,25 +595,6 @@
   "err_check_google_code": "Please confirm that the key of Google authentication code has been safely backed up.",
   "active_rules": "Activity Rules",
   "active_countdown_text": "Prize countdown : ",
-=======
-  "kyc_valid_time": "有效期限",
-  "kyc_hand": "手持证件照",
-  "kyc_notice1": "以上材料需用 JPG / JPEG / PNG 格式上传，并保证照片清晰、边角完整、亮度均匀，且大小不得超过5M",
-  "kyc_notice2": "提示：手臂前伸证件照更清晰",
-  "kyc_notice3": "，请保证照片中五官清晰，证件信息清晰，无涂改",
-  "kyc_photo1_empty": "请上传证件正面照片",
-  "kyc_photo2_empty": "请上传证件背面照片",
-  "kyc_photo3_empty": "请上传手持证件照片",
-  "profile_kyc_success": "恭喜您，审核通过！",
-  "profile_kyc_fail": "抱歉，您的审核未通过！",
-  "profile_kyc_again": "请<a href=\"%{kyc}\">重新审核</a>",
-  "profile_kyc_ing": "认证资料提交完成，审核中...",
-  "profile_kyc_ing_desc": "1-2个工作日后完成审核，请耐心等候",
-  "err_check_google_code": "请确认谷歌验证码密钥已安全备份",
-  "active_rules": "活动规则",
-  "active_countdown_text": "距获奖者产生剩余：",
-
->>>>>>> bd10ba473109888bbf97aa3d60467dff3525eaa5
   "invalid_google_code": "Invalid Google verification code",
   "active_countdown_unit": "S",
   "capital_record":"Asset Records",
