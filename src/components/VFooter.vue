@@ -62,18 +62,18 @@
           <router-link :to="{name: 'trading'}">{{$t('trading')}}</router-link>
           <!-- <a href="#" target="_blank">{{$t('footer_services')}}</a> -->
           <!-- <a href="#" target="_blank">{{$t('footer_help')}}</a> -->
-          <a href="#" target="_blank">{{$t('footer_request')}}</a>
+          <a :href="requestLink" target="_blank">{{$t('footer_request')}}</a>
         </div>
         <div class="footer_ct">
           <p>{{$t('footer_tools')}}</p>
-          <a href="#" target="_blank">{{$t('footer_help')}}</a>
-          <a href="#" target="_blank">{{$t('user_guide')}}</a>
+          <a :href="announcementLink" target="_blank">{{$t('footer_notice')}}</a>
+          <a :href="helpLink" target="_blank">{{$t('user_guide')}}</a>
           <!-- <a href="#" target="_blank">{{$t('footer_api')}}</a> -->
         </div>
         <div class="footer_ct">
           <p>{{$t('footer_terms')}}</p>
-          <a href="#" target="_blank">{{$t('footer_agreement')}}</a>
-          <a href="#" target="_blank">{{$t('footer_private')}}</a>
+          <router-link :to="{name: 'terms'}" target="_blank">{{$t('footer_agreement')}}</router-link>
+          <router-link :to="{name: 'PrivacyPolicy'}" target="_blank">{{$t('footer_private')}}</router-link>
           <!-- <a href="#" target="_blank">{{$t('footer_fee')}}</a> -->
         </div>
       </div>
@@ -82,7 +82,28 @@
 </template>
 
 <script>
+import { state } from '@/modules/store'
 export default {
+  data () {
+    return {
+      state
+    }
+  },
+  computed: {
+    helpLink () {
+      return this.state.theme.help[this.state.locale] || this.state.theme.help.en
+    },
+    requestLink () {
+      if (this.state.userInfo && this.state.theme.themeName === 'default') {
+        return process.env.BASE_API + '/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
+      } else {
+        return this.state.theme.request[this.state.locale] || this.request.theme.help.en
+      }
+    },
+    announcementLink () {
+      return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
+    }
+  }
 }
 </script>
 

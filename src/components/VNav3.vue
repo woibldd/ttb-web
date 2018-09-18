@@ -33,17 +33,17 @@
             <router-link :to="{name:'fund'}">我的资产</router-link>
           </p> -->
           <div class="fund mr-30">
-              <icon name="fund"></icon>
+              <icon name="fund" ></icon>
               {{$t('wallets_nav_asset')}}
               <div class="dropdown-sub-menu">
                 <ul class="dropdown-list pt-10 pb-10">
-                  <li class="dropdown-item pl-24">
+                  <li class="dropdown-item pl-24 pr-24">
                     <router-link :to="{name: 'fund'}" class="link">{{$t('capital_manage')}}</router-link>
                   </li>
-                  <li class="dropdown-item pl-24">
+                  <li class="dropdown-item pl-24 pr-24">
                     <router-link :to="{name: 'deposit'}" class="link">{{$t('deposit')}}</router-link>
                   </li>
-                  <li class="dropdown-item pl-24">
+                  <li class="dropdown-item pl-24 pr-24">
                     <router-link :to="{name: 'withdraw'}" class="link">{{$t('withdraw')}}</router-link>
                   </li>
                 </ul>
@@ -53,10 +53,10 @@
             <router-link :to="{name:'profile'}">{{ desentInfo }}</router-link>
             <div class="dropdown-sub-menu">
                 <ul class="dropdown-list pt-10 pb-10">
-                  <li class="dropdown-item pl-24">
+                  <li class="dropdown-item pl-24 pr-24">
                     <router-link :to="{name: 'profile'}" class="link">{{$t('profile_personal_center')}}</router-link>
                   </li>
-                  <li class="dropdown-item pl-24">
+                  <li class="dropdown-item pl-24 pr-24">
                     <a class="link" @click="logout">{{$t('signout')}}</a>
                   </li>
                 </ul>
@@ -66,14 +66,14 @@
             {{ $t('footer_help') }}
             <div class="dropdown-sub-menu">
                 <ul class="dropdown-list pt-10 pb-10">
-                  <li class="dropdown-item pl-24">
-                    <a class="link" target="_blank" href="">{{$t('footer_notice')}}</a>
+                  <li class="dropdown-item pl-24 pr-24">
+                    <a class="link" target="_blank" :href="announcementLink">{{$t('footer_notice')}}</a>
                   </li>
-                  <li class="dropdown-item pl-24">
-                    <a class="link" target="_blank" href="">{{$t('新手指引')}}</a>
+                  <li class="dropdown-item pl-24 pr-24">
+                    <a class="link" target="_blank" :href="helpLink">{{$t('user_guide')}}</a>
                   </li>
-                  <li class="dropdown-item pl-24">
-                    <a class="link" target="_blank" href="">{{$t('footer_request')}}</a>
+                  <li class="dropdown-item pl-24 pr-24">
+                    <a class="link" target="_blank" :href="requestLink">{{$t('footer_request')}}</a>
                   </li>
                 </ul>
               </div>
@@ -123,8 +123,20 @@ export default {
           return utils.publicDesensitization(userInfo.email)[0]
         }
       }
-
       return ''
+    },
+    helpLink () {
+      return this.state.theme.help[this.state.locale] || this.state.theme.help.en
+    },
+    requestLink () {
+      if (this.state.userInfo && this.state.theme.themeName === 'default') {
+        return process.env.BASE_API + '/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
+      } else {
+        return this.state.theme.request[this.state.locale] || this.request.theme.help.en
+      }
+    },
+    announcementLink () {
+      return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
     }
   },
   methods: {
@@ -214,8 +226,6 @@ export default {
       z-index: 999;
 
       .dropdown-list {
-        width: 120px;
-
         .dropdown-item {
           height: 40px;
           .link {
@@ -270,7 +280,7 @@ export default {
     line-height: 24px;
     border-radius: 20px;
     border: 1px solid #fff;
-    margin: 28px 0 0 60px;
+    margin: 28px 0 0 30px;
     background: url(../assets/lang.png) no-repeat 12px center;
     text-indent: 32px;
     position: relative;
