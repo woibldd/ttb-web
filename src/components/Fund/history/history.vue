@@ -125,7 +125,7 @@ export default {
       }
     },
     showCXID (row) {
-      const url = utils.getBlockChainUrl(row.txid, row.currency, row.chain)
+      const url = utils.getBlockChainUrl(row.txid, 'tx', row.chain)
       window.open(url)
     },
     changeType (type) {
