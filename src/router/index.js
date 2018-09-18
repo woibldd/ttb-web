@@ -11,7 +11,7 @@ Vue.use(Router)
 const isMobile = utils.isMobile()
 
 const Home = () => import(/* webpackChunkName: "home" */ '@/pages/home.vue')
-const home_new = () => import(/* webpackChunkName: "home" */ '@/pages/home_new.vue')
+const home_new = () => import(/* webpackChunkName: "home_new" */ '@/pages/home_new.vue')
 const MobileHome = () => import(/* webpackChunkName: "mobilehome" */ '@/pages/Mobile/home.vue')
 // const Test1 = () => import(/* webpackChunkName: "Test1" */ '@/pages/test1.vue')
 const Test2 = () => import(/* webpackChunkName: "Test2" */ '@/pages/test2.vue')
@@ -25,6 +25,7 @@ const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
 const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pages/PrivacyPolicy')
 const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
 const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/ProfileSafety')
+const relay = () => import(/* webpackChunkName: "relay" */ '@/pages/active/relay')
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
 
 async function beforeEach (to, from, next) {
@@ -81,9 +82,13 @@ let router = new Router({
       },
       component: isMobile ? MobileHome : Home
     }, {
-        path: '/home_new',
-        name: 'home_new',
-        component: home_new
+      path: '/active/relay',
+      name: 'relay',
+      component: relay
+    }, {
+      path: '/home_new',
+      name: 'home_new',
+      component: home_new
     }, {
       path: '/PrivacyPolicy',
       name: 'PrivacyPolicy',
@@ -116,8 +121,8 @@ let router = new Router({
         mobileNav: isMobile
       },
       redirect: 'profile/invite',
-      //redirect: 'profile/ProfileInfo',
-      //redirect: 'profile/ProfileSafety',
+      // redirect: 'profile/ProfileInfo',
+      // redirect: 'profile/ProfileSafety',
 
       // component: (isMobile && process.env.MODE === 'beta') ? MobileProfile : Profile
       component: Profile,
@@ -125,11 +130,11 @@ let router = new Router({
         path: 'invite',
         name: 'invite',
         component: Invite
-      },{
+      }, {
         path: 'ProfileInfo',
         name: 'ProfileInfo',
         component: ProfileInfo
-      },{
+      }, {
         path: 'ProfileSafety',
         name: 'ProfileSafety',
         component: ProfileSafety
