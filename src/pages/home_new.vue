@@ -19,7 +19,7 @@
         </a>
       </div>
     </div>
-    <div class="ind_cen ind_jd">
+    <div class="ind_cen ind_jd" v-if="false">
       <div class="jd_box">
         <div
           class="jd_cen"
@@ -40,10 +40,10 @@
         <div><span>剩余挖矿量：</span>28,669,123.23441975<em>IX</em></div>
       </div>
     </div>
-    <div class="ind_cen ind_tit">
+    <div class="ind_cen ind_tit" v-if="false">
       交易区
     </div>
-    <div class="ind_cen trade">
+    <div class="ind_cen trade" v-if="false">
       <ul class="tit">
         <li class="ta">币种</li>
         <li class="tb">最新价</li>
@@ -172,10 +172,6 @@
     data: function () {
       return {
         banners: [
-          '/static/banner.jpg',
-          '/static/bannera.jpg',
-          '/static/banner.jpg'
-
         ],
         notices: [],
         swiperOption: {
@@ -205,7 +201,7 @@
     }
   }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   @import "../styles/vars";
   @import "../styles/mixins";
 

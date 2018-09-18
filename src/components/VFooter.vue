@@ -58,23 +58,23 @@
       </div>
       <div class="footer_right">
         <div class="footer_ct">
-          <p>服务</p>
-          <a href="#">币币交易</a>
-          <a href="#">锁仓挖矿</a>
-          <a href="#">帮助中心</a>
-          <a href="#">提交工单</a>
+          <p>{{$t('footer_services')}}</p>
+          <router-link :to="{name: 'trading'}">{{$t('trading')}}</router-link>
+          <!-- <a href="#" target="_blank">{{$t('footer_services')}}</a> -->
+          <!-- <a href="#" target="_blank">{{$t('footer_help')}}</a> -->
+          <a href="#" target="_blank">{{$t('footer_request')}}</a>
         </div>
         <div class="footer_ct">
-          <p>工具</p>
-          <a href="#">帮助中心</a>
-          <a href="#">新手指引</a>
-          <a href="#">API文档</a>
+          <p>{{$t('footer_tools')}}</p>
+          <a href="#" target="_blank">{{$t('footer_help')}}</a>
+          <a href="#" target="_blank">{{$t('user_guide')}}</a>
+          <!-- <a href="#" target="_blank">{{$t('footer_api')}}</a> -->
         </div>
         <div class="footer_ct">
-          <p>条款说明</p>
-          <a href="#">用户协议</a>
-          <a href="#">隐私条款</a>
-          <a href="#">费率</a>
+          <p>{{$t('footer_terms')}}</p>
+          <a href="#" target="_blank">{{$t('footer_agreement')}}</a>
+          <a href="#" target="_blank">{{$t('footer_private')}}</a>
+          <!-- <a href="#" target="_blank">{{$t('footer_fee')}}</a> -->
         </div>
       </div>
     </div>
@@ -108,7 +108,7 @@ export default {
     .footer_logo{
       width: 141px;
       height: 46px;
-      background: url(../assets/nav_logo.png);
+      @include bg-retina('../assets/nav_logo', 'png', 142px, 46px);
       float: left;
       margin-bottom: 18px;
     }
@@ -137,6 +137,10 @@ export default {
       color: #fff;
       display: table;
       line-height: 36px;
+
+      &:hover {
+        color: $primary;
+      }
     }
   }
   .footer-container {

@@ -188,6 +188,7 @@ export default {
   }
   .nav_right {
     float: right;
+    font-size: 14px;
     
     .right_options {
       float: left;

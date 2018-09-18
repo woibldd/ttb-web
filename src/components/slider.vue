@@ -48,7 +48,7 @@ import 'swiper/dist/css/swiper.css'
       }
     }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     /* @import "swiper.css"; */
     .swiper-box{
         width: 100%;
@@ -106,19 +106,22 @@ import 'swiper/dist/css/swiper.css'
         position: absolute;
         width: 100%;
     }
-    .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet{
-      width: 30px;
-      height: 4px;
-      border-radius: 4px;
-      margin: 0 5px;
-    }
-    .swiper-pagination-bullet{
-      background: rgba(255, 255, 255, .4);
-    }
-    .swiper-pagination-bullet-active{
-      background: rgba(201, 169, 108, 1);
-    }
-    .swiper-container{
-        z-index: 0;
-    }
+</style>
+
+<style>
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+  width: 30px;
+  height: 4px;
+  border-radius: 4px;
+  margin: 0 5px;
+}
+.swiper-pagination-bullet{
+  background: rgba(255, 255, 255, .4);
+}
+.swiper-pagination-bullet-active{
+  background: rgba(201, 169, 108, 1);
+}
+.swiper-container{
+    z-index: 0;
+}
 </style>

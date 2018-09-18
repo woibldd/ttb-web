@@ -3,6 +3,7 @@
   "signin": "Sign in",
   "signout": "Sign out",
   "trading": "Trading",
+  "mining": "Mining",
   "asset": "Assets",
   "mining_robot": "Mining Robot",
   "help": "Help",
@@ -383,8 +384,6 @@
   "pairnav_price": "Latest price",
   "pairnav_wave": "24Hr",
   "order_value": "Value",
-  "post_only": "Post-only",
-  "post_only_tip": "\"Post Only\" limit orders are orders that allow you to be sure to always pay the maker fee. When placed, a \"Post Only\" limit order is either inserted into the order book or cancelled (only for limit orders).",
   "avlb": "Available",
   "coming_soon": "Coming soon",
   "operate_buy": "Buy %{coin}",
@@ -612,7 +611,10 @@
   "pending": "Pending",
   "done": "Done",
   "please_choose": "Please Choose one",
-  "no_data": "No Data"
-
+  "no_data": "No Data",
+  "footer_services": "Services",
+  "footer_tools": "Tools",
+  "footer_terms": "Terms",
+  "user_guide": "User Guide"
 
 }
