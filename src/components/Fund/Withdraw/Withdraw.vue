@@ -13,6 +13,8 @@
           <el-select
             v-model="selectCoin"
             @change="changeCoinType"
+            :placeholder="$t('please_choose')"
+            :no-data-text="$t('no_data')"
             value-key="currency">
             <el-option
               v-for="item in allCoins"
@@ -35,6 +37,8 @@
           <div class="withdraw-address">
             <el-select
               v-model="selectAddress"
+              :placeholder="$t('please_choose')"
+              :no-data-text="$t('no_data')"
               @change="changeAddress">
               <el-option
                 v-for="item in allAddress"

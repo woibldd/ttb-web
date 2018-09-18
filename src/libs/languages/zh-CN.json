@@ -46,21 +46,13 @@
   "hour": "小时",
   "minute": "分钟",
   "setting_auto": "自动",
-  "no_inner_transfer": "注：%{coin} 暂时不能提现到 IX.COM 帐号地址",
   "memo_important": "转帐务必填写正确的 MEMO 备注，否则将充值失败",
-  "mainPairs": "主要交易对",
-  "openList": "展开全部%{num}项",
-  "closeList": "收起列表",
-  "slogan_p": "IX.COM 是下一代数字资产交易平台，<br>让你方便地交易、储蓄数字资产，合规、专业、贴心。",
-  "homechart_market": "资产品种",
   "homechart_price": "最新价",
   "homechart_fiat": "估值",
   "homechart_24h_chg": "24H涨跌幅",
   "homechart_24h_h": "24H最高价",
   "homechart_24h_l": "24H最低价",
   "homechart_24h_v": "24H成交量",
-  "activated": "激活成功，正在前往用户中心",
-  "activating": "正在激活...",
   "asset_th_name": "资产品种",
   "asset_th_avlb": "可用数量",
   "asset_th_unavlb": "冻结",
@@ -535,7 +527,6 @@
   "profile_kyc_ing": "认证资料提交完成，审核中...",
   "profile_kyc_ing_desc": "1-2个工作日后完成审核，请耐心等候",
   "err_check_google_code": "请确认谷歌验证码密钥已安全备份",
-
   "invalid_google_code": "谷歌验证码错误",
   "active_rules": "活动规则",
   "active_countdown_text": "距获奖者产生剩余：",
@@ -553,5 +544,7 @@
   "view_txid": "查看TXID",
   "pending": "等待中",
   "done": "已完成",
-  "wallets_nav_asset": "我的资产"
+  "wallets_nav_asset": "我的资产",
+  "please_choose": "请选择",
+  "no_data": "无数据"
 }

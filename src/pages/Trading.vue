@@ -53,7 +53,7 @@ import {local, state} from '@/modules/store'
 import service from '@/modules/service'
 import utils from '@/modules/utils'
 
-import VNav from '@/components/VNav2'
+import VNav from '@/components/VNav3'
 import TradingView from '@/components/Trading/TradingView'
 import Order from '@/components/Trading/Order'
 import Deal from '@/components/Trading/Deal'

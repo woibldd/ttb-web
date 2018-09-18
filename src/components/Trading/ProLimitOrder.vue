@@ -572,7 +572,7 @@ export default {
   }
   .content {
     position: relative;
-    width: 88%;
+    width: 86%;
     float: left;
     box-sizing: border-box;
   }
@@ -584,7 +584,7 @@ export default {
   .label {
     line-height: 32px;
     color: #A5B4C5;
-    width: 12%;
+    width: 14%;
   }
 }
 .li-volume {

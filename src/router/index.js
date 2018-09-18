@@ -134,7 +134,7 @@ let router = new Router({
       path: '/profile',
       name: 'profile',
       meta: {
-        auth: false,
+        auth: true,
         nav: true,
         class: 'dark',
         mobileNav: isMobile

@@ -63,7 +63,7 @@
               <td class="ccy">{{ order.symbol | p }}</td>
               <td>
                 {{ order.deal_amount > 0 ? $t('order_sts_partial') : $t('order_sts_active') }}
-                <order-deal v-if="order.deal_amount > 0" :key="active.fetchId" :id="order.id" :pairName="order.symbol"/>
+                <!-- <order-deal v-if="order.deal_amount > 0" :key="active.fetchId" :id="order.id" :pairName="order.symbol"/> -->
               </td>
               <td class="center">
                 <a @click.prevent="cancel(order)">{{$t('transfer_cancel')}}</a>
@@ -354,14 +354,13 @@ export default {
         return false
       }
       ctx.fetchId += 1
-      ctx.page += 1
       console.log('----'+ ctx.page)
       ctx.fetching = true
       const pageSize = 20
       const fetchId = ctx.fetchId
       const params = {
         size: pageSize,
-        page: ctx.page
+        page: ctx.page + 1
       }
       if (this.local.hideOthers) {
         params.symbol = this.state.pro.pair
@@ -385,6 +384,7 @@ export default {
           this.$refs[tab].scrollTop = 0
           ctx.list = items
         }
+        ctx.page ++
         ctx.over = res.data.items.length < pageSize
         this.$nextTick(() => this.onScroll(tab))
       }

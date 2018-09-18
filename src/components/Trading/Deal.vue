@@ -14,11 +14,8 @@
           </tr>
           <tr v-for="(deal, index) in dealList" :key="index" :class="[deal.side]" :style="getStyle(deal, index)">
             <td class="td-dir">
-              <span class="side-icon ibt" :class="['side-' + deal.side, sideColor(deal.side)]" v-if="state.locale !== 'zh-CN'">
-                <icon name="back"></icon>
-              </span>
-              <span class="side-text ibt" :class="['side-' + deal.side, sideColor(deal.side)]" v-if="state.locale === 'zh-CN'">
-                {{ deal.side === 'buy' ? '买' : '卖' }}
+              <span class="side-text ibt" :class="['side-' + deal.side, sideColor(deal.side)]">
+                {{ deal.side === 'buy' ? $t('order_side_buy') : $t('order_side_buy') }}
               </span>
             </td>
             <td class="right"><num :num="$big(deal.price).toFixed(state.pro.pairInfo.price_scale)"/></td>
