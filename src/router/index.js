@@ -11,6 +11,7 @@ Vue.use(Router)
 const isMobile = utils.isMobile()
 
 const Home = () => import(/* webpackChunkName: "home" */ '@/pages/home.vue')
+const home_new = () => import(/* webpackChunkName: "home" */ '@/pages/home_new.vue')
 const MobileHome = () => import(/* webpackChunkName: "mobilehome" */ '@/pages/Mobile/home.vue')
 // const Test1 = () => import(/* webpackChunkName: "Test1" */ '@/pages/test1.vue')
 const Test2 = () => import(/* webpackChunkName: "Test2" */ '@/pages/test2.vue')
@@ -97,6 +98,10 @@ let router = new Router({
         auth: false
       },
       component: isMobile ? MobileHome : Home
+    }, {
+        path: '/home_new',
+        name: 'home_new',
+        component: home_new
     }, {
       path: '/PrivacyPolicy',
       name: 'PrivacyPolicy',
