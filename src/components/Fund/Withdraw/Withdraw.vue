@@ -39,7 +39,7 @@
               <el-option
                 v-for="item in allAddress"
                 :key="item.id"
-                :label="item.address"
+                :label="item.address + '  -  ' + item.description"
                 :value="item.address"/>
             </el-select>
           </div>

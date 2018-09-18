@@ -536,5 +536,11 @@
   "upgrade_quota": "提升限额",
   "security_verification":"安全验证",
   "phone_verification_code": "手机验证码",
-  "total_count": "总计"
+  "chain": "链名",
+  "state": "状态",
+  "actions": "操作",
+  "total_count": "总计",
+  "view_txid": "查看TXID",
+  "pending": "等待中",
+  "done": "已完成"
 }

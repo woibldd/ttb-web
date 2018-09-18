@@ -50,7 +50,6 @@
         style="padding-left: 102px">
         <li> {{ $t('deposit_hint_addr', {coin: selectCoin.currency}) }}</li>
         <li>  {{ $t('deposit_hint_confirm',{confirm: selectCoin.min_confirm, coin: selectCoin.currency}) }}</li>
-        <li>  {{ $t('默认充值至我的钱包，若想进行币币交易，可在币币账户操作“资金划转”将资金转至币币账户。') }}</li>
       </ul>
     </div>
   </div>

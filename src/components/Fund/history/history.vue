@@ -3,8 +3,8 @@
     <div class="my-fund-content">
       <div class="fund-total">
         <div class="left">
-          <div class="total__label">{{ $t('账户可用余额') }}</div>
-          <div class="total__coin">{{ $t('账户可用余额') }} <span class="coin-rmb">≈ ￥3.00</span></div>
+          <div class="total__label">{{ $t('withdraw_avlb') }}</div>
+          <div class="total__coin">{{ $t('wallets_value') }} <span class="coin-rmb">≈ ￥3.00</span></div>
         </div>
         <el-radio-group
           @change="changeType"
@@ -34,7 +34,7 @@
           :label="state.title">
           <!-- <span>解锁/锁仓</span> -->
           <template slot-scope="scope">
-            <span :class="['state', scope.row.state === 1 && 'complete']">{{ scope.row.state === 1 ? '已完成' : '未完成' }}</span>
+            <span :class="['state', scope.row.state === 1 && 'complete']">{{ scope.row.state === 1 ? $t('done') : $t('pending') }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -46,7 +46,7 @@
           <template slot-scope="scope">
             <span
               class="show-address"
-              @click="showCXID(scope.row)">查看地址</span>
+              @click="showCXID(scope.row)">{{ $t('view_txid') }}</span>
           </template>
         </el-table-column>
       </el-table>
@@ -77,14 +77,14 @@ export default {
   data () {
     return {
       header: [
-        {key: 'create_time', title: '时间'},
-        {key: 'currency', title: '币种'},
-        {key: 'confirm', title: '确认数'},
-        {key: 'chain', title: '链名'},
-        {key: 'amount', title: '数量'}
+        {key: 'create_time', title: this.$i18n.t('time')},
+        {key: 'currency', title: this.$i18n.t('currency')},
+        {key: 'confirm', title: this.$i18n.t('confirm')},
+        {key: 'chain', title: this.$i18n.t('chain')},
+        {key: 'amount', title: this.$i18n.t('amount')}
       ],
-      state: {key: 'state', title: '状态'},
-      operate: {key: 'txid', title: '操作'},
+      state: {key: 'state', title: this.$i18n.t('state')},
+      operate: {key: 'txid', title: this.$i18n.t('actions')},
       tableData: [],
       from: 'all',
       type: 'deposit',
@@ -102,7 +102,7 @@ export default {
           res = this.$t('withdraw')
           break
         default:
-          res = this.$t('我的资产')
+          res = this.$t('asset')
           break
       }
       return res

@@ -109,9 +109,9 @@
   "link_copyed": "Share Link has Copyed",
   "deposit_loading": "Loading",
   "deposit_hint_title": "Important notice",
-  "deposit_hint_addr": "This address is only used to receive %{name} (%{fullname}). Do not send other digital asset to this address. If you do it wont be recoverable.",
+  "deposit_hint_addr": "This address is only used to receive %{coin}. Do not send other digital asset to this address. If you do it wont be recoverable.",
   "deposit_hint_min": "Deposit minimum amount: %{min}.",
-  "deposit_hint_confirm": "%{coin} transfers must be confirmed by the %{net} blockchain network. The transacted amount could be traded after %{trade} confirmations, and become withdrawable after %{withdraw} confirmations.",
+  "deposit_hint_confirm": "%{coin} transfers must be confirmed by the %{confirm} blockchain network.",
   "deposit_fa2_hint": "To ensure your account security, please enable a 2-factor Authentication",
   "qrcode_fail": "Fail to generate QR code",
   "profile_left_invite_safety": "Security",
@@ -487,7 +487,7 @@
   "invite_attention_content1": "IX.COM will strictly check for duplicate or fake accounts. If there is cheating, you will be disqualified from the event.",
   "invite_attention_content2": "The final interpretation of this event is owned by IX.COM and reserves the right to adjust the rules of the rebate activity according to market conditions.",
   "next_page": "Next",
-  "last_page": "Last",
+  "last_page": "Prev",
   "invite_no_invest": "No referral friends yet.",
   "commission": "Commission",
   "invite_no_commission": "No commission yet.",
@@ -597,11 +597,19 @@
   "active_countdown_text": "据获奖者产生剩余：",
   "active_countdown_unit": "S",
   "capital_record":"Asset Records",
-  "capital_manage":"Asset Management",
+  "capital_manage":"My Assets",
   "quota": "Limited Quota",
   "upgrade_quota": "Improve Limited Quota",
   "security_verification":"Security Certification",
   "phone_verification_code": "SMS Verification Code",
-  "total_count": "Total"
+  "total_count": "Total",
+  "chain": "Chain",
+  "status": "Total",
+  "state": "State",
+  "actions": "Actions",
+  "view_txid": "View TXID",
+  "pending": "Pending",
+  "done": "Done"
+
 
 }
