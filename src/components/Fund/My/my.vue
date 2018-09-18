@@ -11,7 +11,7 @@
       v-if="!showHistory"
       class="my-fund-content">
       <div class="fund-total">
-        <div class="total__label">{{ $t('账户可用余额') }}</div>
+        <div class="total__label">{{ $t('withdraw_avlb') }}</div>
         <div class="total__coin">{{ total }} {{ unit }} </div>
       </div>
       <el-table
@@ -49,10 +49,8 @@
 </template>
 <script>
 import './my.scss'
-import utils from '@/modules/utils'
 import service from '@/modules/service'
 import {state, actions} from '@/modules/store'
-import {reduce} from 'lodash'
 
 /**
  *
