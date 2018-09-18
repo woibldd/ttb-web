@@ -6,7 +6,7 @@
       <router-link
         :to="{name:'home'}"
         class="nav_logo"/>
-      <div class="nav_left">
+      <div class="nav_left" v-if="false">
         <div class="left_options">
           <router-link :to="{name: 'trading'}" class="nav_link">{{$t('trading')}}</router-link>
           <!-- <router-link :to="{}" class="nav_link ml-30">asdfasdf</router-link> -->
@@ -50,7 +50,7 @@
               </div>
           </div>
           <div class="email mr-30">
-            <router-link :to="{name:'profile'}">{{ desentInfo }}</router-link>
+            {{ desentInfo }}
             <div class="dropdown-sub-menu">
                 <ul class="dropdown-list pt-10 pb-10">
                   <li class="dropdown-item pl-24 pr-24">
@@ -83,7 +83,6 @@
         <div class="lang">{{ localeText }}<b/>
           <div class="lang_box">
             <a @click="langcn">简体中文</a>
-            <!-- <a @click="langen">中文繁體</a> -->
             <a @click="langen">English</a>
           </div>
         </div>
@@ -130,7 +129,7 @@ export default {
     },
     requestLink () {
       if (this.state.userInfo && this.state.theme.themeName === 'default') {
-        return process.env.BASE_API + '/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
+        return process.env.BASE_API + 'zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
       } else {
         return this.state.theme.request[this.state.locale] || this.request.theme.help.en
       }
@@ -334,6 +333,10 @@ export default {
       visibility: hidden;
     }
     .right_options {
+      .fund, .help {
+        display: none;
+        margin: 0;
+      }
       .nav_log_res, .email,.quit {
         margin-left: 10px;
       }

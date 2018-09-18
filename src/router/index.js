@@ -139,7 +139,7 @@ let router = new Router({
         class: 'dark',
         mobileNav: isMobile
       },
-      redirect: 'profile/invite',
+      redirect: 'profile/info',
       // redirect: 'profile/ProfileInfo',
       // redirect: 'profile/ProfileSafety',
 
@@ -248,7 +248,7 @@ let router = new Router({
       component: Fund,
       redirect: { name: 'my' },
       meta: {
-        auth: false,
+        auth: true,
         footer: true,
         nav: true,
         class: 'dark'

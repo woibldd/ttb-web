@@ -34,6 +34,7 @@
 
 <script>
 import VNav2 from '@/components/VNav3.vue'
+// import VMobileNav from '@/components/VMobileNav.vue'
 import VFooter from '@/components/VFooter.vue'
 import MobileFooter from '@/components/MobileFooter.vue'
 import {state, actions} from '@/modules/store'
@@ -48,7 +49,8 @@ export default {
     VNav2,
     VFooter,
     VNotifyList,
-    MobileFooter
+    MobileFooter,
+    // VMobileNav
   },
   data () {
     return {

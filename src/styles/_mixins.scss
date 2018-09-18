@@ -274,6 +274,12 @@
   }
 }
 
+@mixin limit($line: 1) {
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  overflow:hidden;
+}
+
 
 @for $i from 1 through 30 { 
     .mt-#{$i} { 

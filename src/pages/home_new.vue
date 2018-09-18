@@ -12,7 +12,7 @@
             {{item.title}}
           </a>
         </div>
-        <a class="more" href="gonggao" target="_blank">
+        <a class="more" :href="announcementLink" target="_blank">
           <i></i>
           <i></i>
           <i></i>
@@ -167,10 +167,12 @@
 <script>
   import Slider from '@/components/slider.vue'
   import service from '@/modules/service'
+  import { state } from '@/modules/store'
 
   export default {
     data: function () {
       return {
+        state,
         banners: [
         ],
         notices: [],
@@ -185,6 +187,11 @@
     },
     components: {
       kSlider: Slider
+    },
+    computed: {
+      announcementLink () {
+        return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
+      }
     },
     async created() {
       const res = await service.getBanners()
@@ -213,16 +220,16 @@
     position: relative;
     margin: 0 60px;
   }
-    .ind_cena{
-        position: relative;
-        padding: 0 60px;
-        background-position: top center;
-        background-repeat: no-repeat;
-        background-image: url(../assets/bg_qx.png);
-        padding-top: 35px;
-        margin-top: 80px;
-        padding-bottom: 110px;
-    }
+  .ind_cena{
+      position: relative;
+      padding: 0 60px;
+      background-position: top center;
+      background-repeat: no-repeat;
+      background-image: url(../assets/bg_qx.png);
+      padding-top: 35px;
+      margin-top: 80px;
+      padding-bottom: 110px;
+  }
 
   .ind_txt {
     width: 100%;

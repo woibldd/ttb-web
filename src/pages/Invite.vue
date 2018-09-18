@@ -46,7 +46,7 @@
           <div class="title-box">{{ $t('invite_history_text') }}</div>
           <div class="invite-list">
             <div class="th pd-15">
-              <div class="td">{{ $t('invited') }}</div>
+              <div class="td">{{ $t('username') }}</div>
               <div class="td">{{ $t('time') }}</div>
             </div>
             <div class="tbody pb-20">

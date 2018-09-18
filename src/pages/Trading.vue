@@ -325,8 +325,8 @@ export default {
 }
 .active-box {
   position: absolute;
-  top: 13px;
-  right: 25px;
+  top: 2px;
+  right: 2px;
   width: 260px;
   height: 68px;
   background: url("../assets/active_bg.png") no-repeat;

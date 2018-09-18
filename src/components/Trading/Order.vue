@@ -145,7 +145,7 @@ export default {
       activeTotal: 0,
       local,
       active: {
-        page: 0,
+        page: 1,
         fetchId: 0,
         fetching: false,
         over: false,
@@ -154,7 +154,7 @@ export default {
         list: []
       },
       history: {
-        page: 0,
+        page: 1,
         fetchId: 0,
         fetching: false,
         over: false,
@@ -354,13 +354,12 @@ export default {
         return false
       }
       ctx.fetchId += 1
-      console.log('----'+ ctx.page)
       ctx.fetching = true
-      const pageSize = 20
+      const pageSize = 200
       const fetchId = ctx.fetchId
       const params = {
         size: pageSize,
-        page: ctx.page + 1
+        page: ctx.page
       }
       if (this.local.hideOthers) {
         params.symbol = this.state.pro.pair
@@ -384,7 +383,6 @@ export default {
           this.$refs[tab].scrollTop = 0
           ctx.list = items
         }
-        ctx.page ++
         ctx.over = res.data.items.length < pageSize
         this.$nextTick(() => this.onScroll(tab))
       }

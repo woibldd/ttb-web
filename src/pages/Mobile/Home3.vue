@@ -10,7 +10,7 @@
                 {{item.title}}
               </a>
             </div>
-            <a  class="more" href="gonggao" target="_blank">
+            <a  class="more" :href="announcementLink" target="_blank">
                 <i></i>
                 <i></i>
                 <i></i>
@@ -22,25 +22,21 @@
         <div class="ind_bot_cen">
             <div class="photo iphone"></div>
             <p>IOS 版下载教程
-                <span>123</span>
             </p>
         </div>
         <div class="ind_bot_cen">
             <div class="photo android"></div>
             <p>Android
-                <span></span>
             </p>
         </div>
         <div class="ind_bot_cen">
             <div class="photo windows"></div>
             <p>Windows
-                <span></span>
             </p>
         </div>
         <div class="ind_bot_cen">
             <div class="photo mac"></div>
             <p>Mac
-                <span></span>
             </p>
         </div>
     </div>
@@ -53,16 +49,13 @@
     import Slider from '@/components/slider.vue'
     import service from '@/modules/service'
     import responsiveMixin from '@/mixins/responsive'
+    import { state } from '@/modules/store'
     export default {
         mixins: [responsiveMixin],
         data:function(){
           return{
-              banners:[
-                  '/static/banner.jpg',
-                  '/static/bannera.jpg',
-                  '/static/banner.jpg'
-
-              ],
+            state,
+              banners:[],
               notices: [],
               swiperOption:{
                   direction:'horizontal',
@@ -76,6 +69,11 @@
         components:{
             kSlider: Slider
         },
+        computed: {
+          announcementLink () {
+            return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
+          }
+        },
         async created () {
           const res = await service.getBanners()
           if (!res.code) {
@@ -83,7 +81,8 @@
             if (list.length > 0) {
               this.banners = list.filter(b => b.slot === 1)
               this.notices = list.filter(b => b.slot === 2)
-              if (this.notices.length > 3) {
+              if (this.notices.length > 1) {
+                this.notices.splice(1)
               }
             }
           }
@@ -111,8 +110,9 @@
             text-align: center;
             font-size: 14px;
             float: left;
-            width: 33.33%;
+            width: 100%;
             color: #6C869C;
+            @include limit();
             .text_link {
               color: #6C869C;
               &:hover {
@@ -326,19 +326,17 @@
     }
     .ind_bot{
         margin-bottom: 55px;
-        padding-top: 115px;
         .ind_bot_tit{
             color: #fff;
             font-size: 24px;
             text-align: center;
-            height: 35px;
+            height: 80px;
             margin-bottom: 55px;
             line-height: 35px;
         }
         .ind_bot_cen{
-            width:20%;
+            width:100%;
             text-align: center;
-            float: left;
             margin: 0 2%;
             .photo{
                 width: 100%;
@@ -348,16 +346,16 @@
                 background-position: center center;
             }
             .iphone{
-                background-image: url(~/assets/iphone.png);
+                background-image: url(~@/assets/iphone.png);
             }
             .android{
-                background-image: url(~/assets/Android.png);
+                background-image: url(~@/assets/Android.png);
             }
             .windows{
-                background-image: url(~/assets/Windows.png);
+                background-image: url(~@/assets/Windows.png);
             }
             .mac{
-                background-image: url(~/assets/Mac.png);
+                background-image: url(~@/assets/Mac.png);
             }
             p{
                 background: #151e25;

@@ -14,6 +14,7 @@
         <div class="total__label">{{ $t('withdraw_avlb') }}</div>
         <div class="total__coin">{{ total }} {{ unit }} </div>
       </div>
+      {{tableData}}
       <el-table
         :data="tableData"
         class="fund-coin-pool">
@@ -72,7 +73,7 @@ export default {
         {key: 'quota', title: this.$t('total_count')},
         {key: 'max_quota', title: this.$t('homechart_fiat')}
       ],
-      operate: {key: 'operate', title: 'operation'},
+      operate: {key: 'operate', title: this.$t('operation')},
       tableData: []
     }
   },

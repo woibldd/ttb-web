@@ -142,7 +142,7 @@ export const actions = {
   async fetchRate (base = 'USDT') {
     const res = await service.getRate(base)
     if (!res.code) {
-      state.rate[base] = res.data
+      state.rate[base] = res.data[base]
     } else if (!state.rate[base] && base === 'USDT') {
       state.rate[base] = {
         CNY: 6.4,

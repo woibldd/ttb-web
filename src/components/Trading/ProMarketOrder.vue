@@ -12,12 +12,12 @@
         </div>
       </li>
       <li class="li-amount mb-14">
-        <div class="label">{{ $t('amount') }}</div>
+        <div class="label">{{ $t('order_value') }}</div>
         <div class="content">
           <currency-input class="trade"
             :class="[input.buy_amount.status]"
             v-model="buy_amount"
-            :currency="state.pro.product_name"
+            :currency="state.pro.currency_name"
             :scale="pairInfo.amount_scale">
           </currency-input>
         </div>
@@ -28,7 +28,7 @@
             <div class="avbl">
               <div class="avbl-label">{{ $t('avlb') }} {{ state.pro.currency_name }}</div>
               <div class="avbl-value" v-if="currency">{{ currency.available | fixed(pairInfo.currency_scale) }}</div>
-              <div class="avbl-value" v-else>----</div>
+              <div class="avbl-value" v-else>...</div>
             </div>
             <div class="ix-slider">
               <ix-slider :disabled="!currencyAvailable" @input="onSliderDragEnd($event, 'buy')" height="4" :dot-size="14" :lazy="true" :min="0" :max="100" :piecewiseLabel="true" :interval="1" :piecewise="false" :show="tabActive">
@@ -87,7 +87,7 @@
             <div class="avbl">
               <div class="avbl-label">{{ $t('avlb') }} {{ state.pro.product_name }}</div>
               <div class="avbl-value" v-if="product">{{ product.available | fixed(pairInfo.product_scale) }}</div>
-              <div class="avbl-value" v-else>----</div>
+              <div class="avbl-value" v-else>...</div>
             </div>
             <div class="ix-slider">
               <ix-slider :disabled="!currencyAvailable" @input="onSliderDragEnd($event, 'sell')" height="4" :dot-size="14" :lazy="true" :min="0" :max="100" :piecewiseLabel="true" :interval="1" :piecewise="false" :show="tabActive">
@@ -240,14 +240,10 @@ export default {
       }
     },
     setBuyVolumn (ratio) {
-      const price = _.get(this, 'state.pro.pairInfo.price', 0)
-      if (price > 0) {
-        this.buy_amount = this.$big(this.currency.available)
-          .mul(ratio)
-          .div(price)
-          .round(this.pairInfo.amount_scale)
-          .toString()
-      }
+      this.buy_amount = this.$big(this.currency.available)
+        .mul(ratio)
+        .round(this.pairInfo.amount_scale)
+        .toString()
     },
     setSellVolumn (ratio) {
       this.sell_amount = this.$big(this.product.available)

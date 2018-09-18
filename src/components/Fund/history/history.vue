@@ -226,7 +226,7 @@ export default {
     .total__switch {
        .el-radio-button__orig-radio,
        .el-radio-button__inner {
-        background-color: white;
+        background-color: white !important;
         display: inline-block;
         width: 80px;
         color: $text-weak !important;

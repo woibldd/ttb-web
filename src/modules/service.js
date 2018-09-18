@@ -284,11 +284,12 @@ const service = {
   removeApiKey(data) {
     return request('api/remove', data)
   },
-  getRate(name) {
-    return getCache(name + 'FiatRate', () => request('currency/query', { name }), 1e4)
+  getRate(currency) {
+    // return getCache(name + 'FiatRate', () => request('currency/query', { name }), 1e4)
+    return getCache(name + 'FiatRate', () => request('account/currency/rates', { currency }), 1e4)
   },
   getCoins() {
-    return getCache('currencyList', () => request('currency/list'))
+    return getCache('currencyList', () => request('account/currency/list'))
   },
   // 资产-转出页面请求转出地址，请求参数为 currency_name
   getWithdrawAddress(data) {

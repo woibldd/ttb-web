@@ -44,7 +44,7 @@
             <div class="avbl">
               <div class="avbl-label">{{ $t('avlb') }} {{ pairInfo.currency_name }}</div>
               <div class="avbl-value" v-if="currency">{{ currency.available | fixed(pairInfo.currency_scale) }}</div>
-              <div class="avbl-value" v-else>----</div>
+              <div class="avbl-value" v-else>...</div>
             </div>
             <div class="ix-slider">
               <ix-slider :disabled="!currencyAvailable" @input="onSliderDragEnd($event, 'buy')" height="4" :dot-size="14" :lazy="true" :min="0" :max="100" :piecewiseLabel="true" :interval="1" :piecewise="false">
@@ -124,7 +124,7 @@
             <div class="avbl">
               <div class="avbl-label">{{ $t('avlb') }} {{ pairInfo.product_name }}</div>
               <div class="avbl-value" v-if="product">{{ product.available | fixed(pairInfo.product_scale) }}</div>
-              <div class="avbl-value" v-else>----</div>
+              <div class="avbl-value" v-else>...</div>
             </div>
             <div class="ix-slider">
               <ix-slider :disabled="!currencyAvailable" @input="onSliderDragEnd($event, 'sell')" height="4" :dot-size="14" :lazy="true" :min="0" :max="100" :piecewiseLabel="true" :interval="1" :piecewise="false">

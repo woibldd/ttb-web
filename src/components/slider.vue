@@ -21,10 +21,11 @@ import 'swiper/dist/css/swiper.css'
       data:function() {
         return {
         swiperOption:{
-          autoplay: true,
+          autoplay: false,
           delay: 5000,
           pagination: {
-            el: '.swiper-pagination'
+            el: '.swiper-pagination',
+            clickable: true
           }
         }
         }
@@ -116,12 +117,12 @@ import 'swiper/dist/css/swiper.css'
   margin: 0 5px;
 }
 .swiper-pagination-bullet{
-  background: rgba(255, 255, 255, .4);
+  background: rgba(255, 255, 255, .4) !important;
 }
 .swiper-pagination-bullet-active{
-  background: rgba(201, 169, 108, 1);
+  background: rgba(201, 169, 108, 1) !important;
 }
 .swiper-container{
-    z-index: 0;
+    z-index: 0 !important;
 }
 </style>
