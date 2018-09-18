@@ -82,17 +82,17 @@ export default {
       return this.$route.name === 'history'
     },
     total () {
-      let sum = 0
+      let sum = this.$big(0)
       if (state.locale === 'zh-CN') {
         this.tableData.forEach(item => {
-          sum += item.available * item.rates.CNY
+          sum = sum.plus(this.$big(item.available).times(this.$big(item.rates.CNY)))
         })
       } else if (state.locale === 'en') {
         this.tableData.forEach(item => {
-          sum += item.available * item.rates.USD
+          sum = sum.plus(this.$big(item.available).times(this.$big(item.rates.USD)))
         })
       }
-      return sum
+      return sum.toString()
     },
     unit () {
       return state.locale === 'zh-CN' ? 'CNY' : 'USD'
