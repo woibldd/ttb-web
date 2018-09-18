@@ -34,7 +34,7 @@
           :label="status.title">
           <!-- <span>解锁/锁仓</span> -->
           <template slot-scope="scope">
-            <span :class="['state', scope.row.state === 4 && 'complete']">{{ scope.row.state === 1 ? $t('done') : $t('pending') }}</span>
+            <span :class="['state', scope.row.state === 4 && 'complete']">{{ scope.row.state === 4 ? $t('done') : $t('pending') }}</span>
           </template>
         </el-table-column>
         <el-table-column
