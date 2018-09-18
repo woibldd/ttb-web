@@ -1,5 +1,6 @@
 
 .withdraw-container{
+    position: relative;
     .coin-count {
         width: 100%;
         border: 0;
@@ -76,6 +77,48 @@
             background:$primary;
             border-radius:50%;
             color: white;
+        }
+    }
+
+    .not-verified-layer{
+        position: relative;
+        width:410px;
+        background:rgba(255,255,255,1);
+        border-radius:8px;
+        padding-bottom: 50px;
+        padding-top: 34px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .layer__title {
+            font-size:20px;
+            font-weight:bold;
+            color:$text-strong;
+        }
+
+        .layer__row_note {
+            color: $text-weak;
+            font-size: 16px;
+        }
+        .layer__row {
+            width: 330px;
+            display: flex;
+            justify-content: space-between;
+
+            .row__label {
+                padding-left: 20px;
+                color: $text-light;
+            }
+            .row__status {
+                color: $primary;
+                cursor: pointer;
+
+                &.done {
+                    color: #09C989;
+                    cursor: default;
+                }
+            }
         }
     }
 

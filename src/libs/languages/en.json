@@ -596,10 +596,10 @@
   "active_countdown_text": "Prize countdown : ",
   "invalid_google_code": "Invalid Google verification code",
   "active_countdown_unit": "S",
-  "capital_record":"Asset Records",
-  "capital_manage":"My Assets",
+  "capital_record":"Asset Record",
+  "capital_manage":"Asset Management",
   "quota": "Limited Quota",
-  "upgrade_quota": "Improve Limited Quota",
+  "upgrade_quota": "Improve Limit on Money",
   "security_verification":"Security Certification",
   "phone_verification_code": "SMS Verification Code",
   "total_count": "Total",
@@ -610,11 +610,16 @@
   "view_txid": "View TXID",
   "pending": "Pending",
   "done": "Done",
-  "please_choose": "Please Choose one",
+  "please_choose": "Please Select",
   "no_data": "No Data",
   "footer_services": "Services",
   "footer_tools": "Tools",
   "footer_terms": "Terms",
-  "user_guide": "User Guide"
+  "user_guide": "User Guide",
+  "withdraw_need_verify": "Finish Followings to Withdraw",
+  "bind_email":"Link to your E-mail.",
+  "bind_phone":"Link to your phone",
+  "complete_verified":"Complete identity authentication."
+
 
 }

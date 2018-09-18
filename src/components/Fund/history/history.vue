@@ -34,7 +34,7 @@
           :label="state.title">
           <!-- <span>解锁/锁仓</span> -->
           <template slot-scope="scope">
-            <span :class="['state', scope.row.state === 1 && 'complete']">{{ scope.row.state === 1 ? $t('done') : $t('pending') }}</span>
+            <span :class="['state', scope.row.state === 4 && 'complete']">{{ scope.row.state === 1 ? $t('done') : $t('pending') }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -84,7 +84,7 @@ export default {
         {key: 'currency', title: this.$i18n.t('currency')},
         {key: 'confirm', title: this.$i18n.t('confirm')},
         {key: 'chain', title: this.$i18n.t('chain')},
-        {key: 'amount', title: this.$i18n.t('amount')}
+        {key: 'amount', title: this.$i18n.t('amount')} // -fee
       ],
       state: {key: 'state', title: this.$i18n.t('state')},
       operate: {key: 'txid', title: this.$i18n.t('actions')},

@@ -85,16 +85,10 @@
         </p>
       </div>
       <div class="fund-item-other">
-        <router-link
-          v-if="!hasKyc"
-          class="set-kyc"
-          to="/profile/kyc">
-          请先设置KYC！！！ 点击去设置
-        </router-link>
         <v-btn
           style="width: 200px"
           @click="ensure"
-          :disabled="!hasKyc"
+          :disabled="showLayerModal"
           :label="$t('withdraw_confirm')"/>
       </div>
       <ul
@@ -144,6 +138,39 @@
         </div>
       </div>
     </v-modal>
+    <v-modal :open.sync="showLayerModal">
+      <div class="not-verified-layer">
+        <div class="layer__title mb-30">{{ $t('withdraw_need_verify') }}</div>
+        <div class="layer__content">
+          <div class="layer__row_note">
+            <div class="row__label">{{ $t('withdraw_need_verify_note') }}</div>
+          </div>
+          <div class="layer__row mt-30">
+            <span class="row__label">1. {{ $t('bind_email') }}</span>
+            <span
+              class="row__status"
+              @click="clickVerifyRow(email_bound)"
+              :class="{'done': email_bound}">{{ email_bound ? $t('done') : $t('to_verify') }}</span>
+          </div>
+          <div class="layer__row mt-20">
+            <span class="row__label">2. {{ $t('bind_phone') }}</span>
+            <span
+              class="row__status"
+              @click="clickVerifyRow(phone_bound)"
+              :class="{'done': phone_bound}">{{ phone_bound ? $t('done') : $t('to_verify') }}</span>
+
+          </div>
+          <div class="layer__row mt-20">
+            <span class="row__label">3. {{ $t('complete_verified') }}</span>
+            <span
+              class="row__status"
+              @click="clickVerifyRow(all_bound)"
+              :class="{'done': all_bound}">{{ all_bound ? $t('done') : $t('to_verify') }}</span>
+          </div>
+        </div>
+      </div>
+    </v-modal>
+
   </div>
 </template>
 <script>
@@ -153,12 +180,13 @@ import vModal from '@/components/VModal.vue'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
 import countDown from '@/components/common/countdown-code-button'
-import { state } from '@/modules/store'
+import { state, actions } from '@/modules/store'
 
 export default {
   name: 'Withdraw',
   data () {
     return {
+      showLayerModal: false,
       address: '',
       allCoins: [],
       selectCoin: {},
@@ -184,25 +212,38 @@ export default {
     coinArrival () {
       return this.$big(this.withdrawCount) - this.$big(this.selectCoin.withdraw_fee)
     },
-    hasKyc () {
-    //   console.log(this.state.userInfo.lv)
-      return state.userInfo && state.userInfo.lv > 0
-    },
     google_key_bound () {
-      if (state.userInfo && state.userInfo.google_key_bound) {
+      if (this.state.userInfo && this.state.userInfo.google_key_bound) {
         return true
       }
       return false
+    },
+    email_bound () {
+      return this.state.userInfo && this.state.userInfo.email
+    },
+    phone_bound () {
+      return this.state.userInfo && this.state.userInfo.phone
+    },
+    all_bound () {
+      // kyc > 0 就可以提币
+      return this.state.userInfo && this.state.userInfo.lv > 0
     }
   },
   components: {vModal, countDown},
   async created () {
-    // 检测kyc
+    await actions.updateSession()
+    this.showLayerModal = !this.email_bound || !this.phone_bound || !this.all_bound
     await this.getAllCoinTypes()
     this.updadeMyCoinInfo()
     this.getCoinAddress()
   },
   methods: {
+    clickVerifyRow (v) {
+      if (v) {
+        return
+      }
+      this.$router.push('/profile/kyc')
+    },
     copy () {
       copyToClipboard(this.address)
       utils.success(this.$i18n.t('copyed'))
