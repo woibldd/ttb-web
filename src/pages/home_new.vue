@@ -1,189 +1,218 @@
 <template>
-<div class="page-home">
+  <div class="page-home">
     <div class="header">
-        <v-nav2 isHome="true" :notice="notice" @hide="notice = null"></v-nav2>
+      <v-nav2
+        is-home="true"
+        :notice="notice"
+        @hide="notice = null"/>
     </div>
     <div class="home2">
-        <k-slider :banners="banners" :swiperOption="swiperOption"></k-slider>
+      <k-slider
+        :banners="banners"
+        :swiper-option="swiperOption"/>
     </div>
     <div class="ind_txt">
-        <div class="ind_cen">
-            <div class="ind_c">关于IX交易XXXXXXXXXX</div>
-            <div class="ind_c">关于IX交易XXXXXXXXXX</div>
-            <div class="ind_c">关于IX交易XXXXXXXXXX</div>
-            <a>
-                <i></i>
-                <i></i>
-                <i></i>
-            </a>
-        </div>
+      <div class="ind_cen">
+        <div class="ind_c">关于IX交易XXXXXXXXXX</div>
+        <div class="ind_c">关于IX交易XXXXXXXXXX</div>
+        <div class="ind_c">关于IX交易XXXXXXXXXX</div>
+        <a>
+          <i/>
+        </a>
+      </div>
     </div>
     <div class="ind_cen ind_jd">
-        <div class="jd_box">
-            <div class="jd_cen">
-                <p>
-                    <span>
-                        <i>挖矿进度：</i>126631.45633211<i>IX</i>
-                    </span>
-                </p>
-            </div>
-            <em>0 IX</em>
-            <em>33,333,333 IX</em>
+      <div class="jd_box">
+        <div
+          class="jd_cen"
+          style="width:30%;">
+          <p>
+            <span>
+              <i>挖矿进度：</i>126631.45633211<i>IX</i>
+            </span>
+          </p>
         </div>
-        <div class="jd_btxt">
-            <div>0:00 - 8:00</div>
-            <div><span>挖矿总量：</span>,333,333<em>IX</em></div>
-            <div><span>已挖矿量：</span>126631.45633211<em>IX</em></div>
-            <div><span>剩余挖矿量：</span>28,669,123.23441975<em>IX</em></div>
-        </div>
+        <em>0 IX</em>
+        <em>33,333,333 IX</em>
+      </div>
+      <div class="jd_btxt">
+        <div>0:00 - 8:00</div>
+        <div><span>挖矿总量：</span>,333,333<em>IX</em></div>
+        <div><span>已挖矿量：</span>126631.45633211<em>IX</em></div>
+        <div><span>剩余挖矿量：</span>28,669,123.23441975<em>IX</em></div>
+      </div>
     </div>
     <div class="ind_cen ind_tit">
-        交易区
+      交易区
     </div>
     <div class="ind_cen trade">
-        <ul class="tit">
-            <li class="ta">币种</li>
-            <li class="tb">最新价</li>
-            <li class="tc">24H涨跌幅</li>
-            <li class="td">24H最低</li>
-            <li class="te">24H最高</li>
-            <li class="tf">24H成交量</li>
-            <li class="tg">操作</li>
-        </ul>
-        <ul class="tra_cen">
-            <li class="ta">ABL <span>/ BTC</span></li>
-            <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-            <li class="tc">-6.09%-0.00000021</li>
-            <li class="td">0.00000304</li>
-            <li class="te">0.00000358</li>
-            <li class="tf">17,798,092<span>ABL</span></li>
-            <li class="tg"><span></span></li>
-        </ul>
-        <ul class="tra_cen">
-            <li class="ta">ABL <span>/ BTC</span></li>
-            <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-            <li class="tc">-6.09%-0.00000021</li>
-            <li class="td">0.00000304</li>
-            <li class="te">0.00000358</li>
-            <li class="tf">17,798,092<span>ABL</span></li>
-            <li class="tg"><span></span></li>
-        </ul>
-        <ul class="tra_cen">
-            <li class="ta">ABL <span>/ BTC</span></li>
-            <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-            <li class="tc">-6.09%-0.00000021</li>
-            <li class="td">0.00000304</li>
-            <li class="te">0.00000358</li>
-            <li class="tf">17,798,092<span>ABL</span></li>
-            <li class="tg"><span></span></li>
-        </ul>
-        <ul class="tra_cen">
-            <li class="ta">ABL <span>/ BTC</span></li>
-            <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-            <li class="tc">-6.09%-0.00000021</li>
-            <li class="td">0.00000304</li>
-            <li class="te">0.00000358</li>
-            <li class="tf">17,798,092<span>ABL</span></li>
-            <li class="tg"><span></span></li>
-        </ul>
-        <ul class="tra_cen">
-            <li class="ta">ABL <span>/ BTC</span></li>
-            <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-            <li class="tc">-6.09%-0.00000021</li>
-            <li class="td">0.00000304</li>
-            <li class="te">0.00000358</li>
-            <li class="tf">17,798,092<span>ABL</span></li>
-            <li class="tg"><span></span></li>
-        </ul>
-        <ul class="tra_cen">
-            <li class="ta">ABL <span>/ BTC</span></li>
-            <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-            <li class="tc">-6.09%-0.00000021</li>
-            <li class="td">0.00000304</li>
-            <li class="te">0.00000358</li>
-            <li class="tf">17,798,092<span>ABL</span></li>
-            <li class="tg"><span></span></li>
-        </ul>
-        <ul class="tra_cen">
-            <li class="ta">ABL <span>/ BTC</span></li>
-            <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-            <li class="tc">-6.09%-0.00000021</li>
-            <li class="td">0.00000304</li>
-            <li class="te">0.00000358</li>
-            <li class="tf">17,798,092<span>ABL</span></li>
-            <li class="tg"><span></span></li>
-        </ul>
+      <ul class="tit">
+        <li class="ta">币种</li>
+        <li class="tb">最新价</li>
+        <li class="tc">24H涨跌幅</li>
+        <li class="td">24H最低</li>
+        <li class="te">24H最高</li>
+        <li class="tf">24H成交量</li>
+        <li class="tg">操作</li>
+      </ul>
+      <ul class="tra_cen">
+        <li class="ta">ABL <span>/ BTC</span></li>
+        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
+        <li class="tc">-6.09%-0.00000021</li>
+        <li class="td">0.00000304</li>
+        <li class="te">0.00000358</li>
+        <li class="tf">17,798,092<span>ABL</span></li>
+        <li class="tg">
+          <icon name="handle-active" />
+        </li>
+      </ul>
+      <ul class="tra_cen">
+        <li class="ta">ABL <span>/ BTC</span></li>
+        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
+        <li class="tc">-6.09%-0.00000021</li>
+        <li class="td">0.00000304</li>
+        <li class="te">0.00000358</li>
+        <li class="tf">17,798,092<span>ABL</span></li>
+        <li class="tg">
+          <icon name="handle" />
+        </li>
+      </ul>
+      <ul class="tra_cen">
+        <li class="ta">ABL <span>/ BTC</span></li>
+        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
+        <li class="tc">-6.09%-0.00000021</li>
+        <li class="td">0.00000304</li>
+        <li class="te">0.00000358</li>
+        <li class="tf">17,798,092<span>ABL</span></li>
+        <li class="tg">
+          <icon name="handle" />
+        </li>
+      </ul>
+      <ul class="tra_cen">
+        <li class="ta">ABL <span>/ BTC</span></li>
+        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
+        <li class="tc">-6.09%-0.00000021</li>
+        <li class="td">0.00000304</li>
+        <li class="te">0.00000358</li>
+        <li class="tf">17,798,092<span>ABL</span></li>
+        <li class="tg">
+          <icon name="handle" />
+        </li>
+      </ul>
+      <ul class="tra_cen">
+        <li class="ta">ABL <span>/ BTC</span></li>
+        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
+        <li class="tc">-6.09%-0.00000021</li>
+        <li class="td">0.00000304</li>
+        <li class="te">0.00000358</li>
+        <li class="tf">17,798,092<span>ABL</span></li>
+        <li class="tg">
+          <icon name="handle" />
+        </li>
+      </ul>
+      <ul class="tra_cen">
+        <li class="ta">ABL <span>/ BTC</span></li>
+        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
+        <li class="tc">-6.09%-0.00000021</li>
+        <li class="td">0.00000304</li>
+        <li class="te">0.00000358</li>
+        <li class="tf">17,798,092<span>ABL</span></li>
+        <li class="tg">
+          <icon name="handle" />
+        </li>
+      </ul>
+      <ul class="tra_cen">
+        <li class="ta">ABL <span>/ BTC</span></li>
+        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
+        <li class="tc">-6.09%-0.00000021</li>
+        <li class="td">0.00000304</li>
+        <li class="te">0.00000358</li>
+        <li class="tf">17,798,092<span>ABL</span></li>
+        <li class="tg">
+          <icon name="handle" />
+        </li>
+      </ul>
     </div>
-    <div class="ind_cen ind_bot">
+    <div class="ind_cena">
+      <div class="ind_bot">
         <div class="ind_bot_tit">覆盖 IOS、Android、Windows、Mac 多个平台，支持全业务功能</div>
         <div class="ind_bot_cen">
-            <div class="photo iphone"></div>
-            <p>IOS 版下载教程
-                <span>123</span>
-            </p>
+          <div class="photo iphone"/>
+          <p>IOS 版下载教程
+            <span>即将上线，敬请期待</span>
+          </p>
         </div>
         <div class="ind_bot_cen">
-            <div class="photo android"></div>
-            <p>Android
-                <span></span>
-            </p>
+          <div class="photo android"/>
+          <p>Android
+            <span>即将上线，敬请期待</span>
+          </p>
         </div>
         <div class="ind_bot_cen">
-            <div class="photo windows"></div>
-            <p>Windows
-                <span></span>
-            </p>
+          <div class="photo windows"/>
+          <p>Windows
+            <span>即将上线，敬请期待</span>
+          </p>
         </div>
         <div class="ind_bot_cen">
-            <div class="photo mac"></div>
-            <p>Mac
-                <span></span>
-            </p>
+          <div class="photo mac"/>
+          <p>Mac
+            <span>即将上线，敬请期待</span>
+          </p>
         </div>
+      </div>
     </div>
 
-
-</div>
+  </div>
 
 </template>
 <script>
-    import VNav2 from '@/components/VNav2'
-    import Slider from '@/components/slider.vue'
-    export default {
-        data:function(){
-          return{
-              banners:[
-                  '/static/banner.jpg',
-                  '/static/bannera.jpg',
-                  '/static/banner.jpg'
+import VNav2 from '@/components/VNav2'
+import Slider from '@/components/slider.vue'
+export default {
+  data: function () {
+    return {
+      banners: [
+        '/static/banner.jpg',
+        '/static/bannera.jpg',
+        '/static/banner.jpg'
 
-              ],
-              swiperOption:{
-                  direction:'horizontal',
-                  loop:true,
-                  autoplay:1000,
-                  paginationType:'fraction',
-                  pagination:'.swiper-pagination'
-              },
-              notice: ""
-          }
-        },
-        components:{
-            kSlider :Slider,
-            VNav2
-        }
+      ],
+      swiperOption: {
+        direction: 'horizontal',
+        loop: true,
+        autoplay: 1000,
+        paginationType: 'fraction',
+        pagination: '.swiper-pagination'
+      },
+      notice: ''
     }
+  },
+  components: {
+    kSlider: Slider,
+    VNav2
+  }
+}
 </script>
 <style lang="scss">
     @import "../styles/vars";
     @import "../styles/mixins";
     .page-home{
-        background:#303E4B;
-        overflow: hidden;
+        background: linear-gradient(0deg, #222931, #3A444F);
     }
     .ind_cen{
         position: relative;
         margin: 0 60px;
+    }
+    .ind_cena{
+        position: relative;
+        padding: 0 60px;
+        background-position: top center;
+        background-repeat: no-repeat;
+        background-image: url(../assets/bg_qx.png);
+        padding-top: 35px;
+        margin-top: 80px;
+        padding-bottom: 110px;
     }
     .ind_txt{
         width: 100%;
@@ -222,7 +251,7 @@
             position: absolute;
             width: 15px;
             height: 15px;
-            right: -14px;
+            right: 0;
             top: 23px;
             i{
                 display: block;
@@ -230,18 +259,25 @@
                 height: 3px;
                 right: 0;
                 background: #6C869C;
-                &:nth-child(1){
-                    width: 100%;
-                    top: 0;
-                }
-                &:nth-child(2){
-                    width: 70%;
-                    top: 6px;
-                }
-                &:nth-child(3){
-                    width: 40%;
-                    bottom: 0;
-                }
+                width: 70%;
+                top: 6px;
+            }
+            &::before,&::after{
+                position: absolute;
+                display: block;
+                position: absolute;
+                height: 3px;
+                right: 0;
+                background: #6C869C;
+                content: "";
+            }
+            &::before{
+                width: 100%;
+                top: 0;
+            }
+            &::after{
+                width: 40%;
+                bottom: 0;
             }
         }
     }
@@ -273,7 +309,6 @@
                 float: left;
                 position: relative;
                 border-radius: 4px;
-                width: 40%;
                 background: #C9A96E;
                 p{
                     display: block;
@@ -354,6 +389,7 @@
             line-height: 64px;
             &.tit{
                 border-bottom: 1px solid #CBE6FD;
+                height: 45px;
                 line-height: 45px;
                 font-size: 14px;
                 li{
@@ -365,6 +401,7 @@
             }
             li{
                 float: left;
+                height: 64px;
                 text-align: center;
                 span{
                     color: #6C869C;
@@ -373,10 +410,10 @@
                     width: 8%;
                 }
                 &.tb{
-                    width: 18%;
+                    width: 17%;
                 }
                 &.tc{
-                    width: 18%;
+                    width: 17%;
                 }
                 &.td{
                     width: 17%;
@@ -385,11 +422,23 @@
                     width: 17%;
                 }
                 &.tf{
-                    width: 18%;
+                    width: 17%;
                 }
                 &.tg{
-                    width: 4%;
-                    text-align: left
+                    width: 7%;
+                }
+                a{
+                    width: 18px;
+                    height: 18px;
+                    display: block;
+                    margin: 23px auto;
+                    background-repeat: no-repeat;
+                    &.yellow{
+                        /*background-image: url(../assets/svg/jy.svg);*/
+                    }
+                    &.blue{
+                       /* background-image: url(../assets/svg/jy2.svg);*/
+                    }
                 }
             }
             &:last-child{
@@ -404,8 +453,13 @@
         }
     }
     .ind_bot{
-        margin-bottom: 55px;
-        padding-top: 115px;
+        &:after{
+            content: "";
+            clear: both;
+            width: 100%;
+            height: 1px;
+            display:block;
+        }
         .ind_bot_tit{
             color: #fff;
             font-size: 24px;
@@ -460,12 +514,15 @@
                         display: block;
                         width: 210px;
                         height: 50px;
+                        line-height: 50px;
+                        color: #C9A96E;
                         border:1px solid #C9A96E;
                         position: absolute;
                         left: 50%;
                         margin-left: -105px;
                         bottom: -70px;
                         z-index: 9999;
+                        border-radius: 5px;
                     }
                 }
             }
