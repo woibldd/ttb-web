@@ -8,9 +8,13 @@
           class="panel-title"
           v-t="'if_forgot'"/>
         <div class="by-links">
-          <router-link class="by-link ibt" to="email">{{ $t('register_by_email') }}</router-link>
-          <span class="sp-line"></span>
-          <router-link class="by-link ibt" to="phone">{{ $t('register_by_phone') }}</router-link>
+          <router-link
+            class="by-link ibt"
+            to="email">{{ $t('register_by_email') }}</router-link>
+          <span class="sp-line"/>
+          <router-link
+            class="by-link ibt"
+            to="phone">{{ $t('register_by_phone') }}</router-link>
         </div>
       </div>
       <form
@@ -30,12 +34,22 @@
             :label="$t('phone_number')"
           />
         </div> -->
-        <div class="field" v-show="by === 'phone'">
+        <div
+          class="field"
+          v-show="by === 'phone'">
           <div class="input-box">
-            <v-loading v-if="!regionOptions.length" color="gray"></v-loading>
-            <select class="select item" v-else v-model="regionId">
+            <v-loading
+              v-if="!regionOptions.length"
+              color="gray"/>
+            <select
+              class="select item"
+              v-else
+              v-model="regionId">
               <option value="">{{ $t('region_ph') }}</option>
-              <option :value="option.id" v-for="option in regionOptions" :key="option.id">
+              <option
+                :value="option.id"
+                v-for="option in regionOptions"
+                :key="option.id">
                 <span>+{{ option.id }}</span>
                 <template v-if="state.locale === 'zh-CN'">{{ option.cname }}</template>
                 <template v-else>{{ option.fullname }}</template>
@@ -43,63 +57,64 @@
             </select>
           </div>
         </div>
-        <div :class="['field']" v-show="by === 'phone'">
+        <div
+          :class="['field']"
+          v-show="by === 'phone'">
           <div class="input-box">
             <ix-input
               ref="phone"
               v-model.trim="phone"
               @input="phone=$event"
-              :triggerValidate="triggerValidate"
+              :trigger-validate="triggerValidate"
               :required='true'
               :empty-err-tips="$t('bind_phone_err_empty')"
               :rule="validateRules.phone"
               :placeholder="$t('bind_phone_input')"
               :label="$t('phone_number')"
-              >
-            </ix-input>
+            />
           </div>
         </div>
-        <div :class="['field']" v-show="by === 'email'">
+        <div
+          :class="['field']"
+          v-show="by === 'email'">
           <div class="input-box">
             <ix-input
               class=""
               ref="email"
               v-model.trim="email"
               @input="email=$event"
-              :triggerValidate="triggerValidate"
+              :trigger-validate="triggerValidate"
               :required='true'
               :empty-err-tips="$t('err_empty_email')"
               :rule="validateRules.email"
               placeholder="you@example.com"
               :label="$t('email')"
-              >
-            </ix-input>
+            />
           </div>
         </div>
         <div
           v-if="step===1"
           class="field recover__validate mt-17"
-          >
+        >
           <slide-validate @validateDone="validateDone"/>
         </div>
         <div
           v-if="step===2"
           class="field recover__validate"
-          >
+        >
           <div class="input-box">
-           <ix-input
+            <ix-input
               class="register__input-captcha"
               ref="captcha"
               v-model.trim="captcha"
-              :triggerValidate="triggerValidate"
+              :trigger-validate="triggerValidate"
               :required='true'
               @input="captcha=$event"
               :empty-err-tips="$t('err_captcha_empty')"
               :rule="validateRules.captcha"
               :placeholder="$t('captcha')"
               :label="$t('captcha')"
-              >
-            </ix-input>
+            />
             <a
               class="sms-btn"
               :class="{disabled: sms.status === 1}"
@@ -126,16 +141,24 @@
               :placeholder="$t('change_password_new')"
               :label="$t('change_password_new')"
             />
-            <div class="pw-helps" :class="{show: atPw}">
-              <div class="title" v-t="'pwcheck_guide'"></div>
+            <div
+              class="pw-helps"
+              :class="{show: atPw}">
+              <div
+                class="title"
+                v-t="'pwcheck_guide'"/>
               <ul class="pw-checks">
-              <li v-for="(check, index) in pwCheckList"
-                  class="pw-check" :key="index">
-                  <span class="pw-state" :class="{pass: check.pass}"></span>
+                <li
+                  v-for="(check, index) in pwCheckList"
+                  class="pw-check"
+                  :key="index">
+                  <span
+                    class="pw-state"
+                    :class="{pass: check.pass}"/>
                   <span class="desc">{{ $t(check.desc) }}</span>
-              </li>
+                </li>
               </ul>
-          </div>
+            </div>
           </div>
         </div>
         <div
@@ -186,6 +209,8 @@ import service from '@/modules/service'
 import {state} from '@/modules/store'
 import pwChecker from '@/modules/pw-checker'
 import ixInput from '@/components/common/ix-input/ix-input.vue'
+import utils from '@/modules/utils'
+import _ from 'lodash'
 
 export default {
   name: 'Recover',
@@ -334,7 +359,7 @@ export default {
         this.triggerValidate = true
         // return err(this.$i18n.t('change_password_diff'), 'password2')
       }
-      
+
       return {ok: true}
     },
     pwChange () {

@@ -44,9 +44,12 @@
           :label="operate.title">
           <!-- <span>解锁/锁仓</span> -->
           <template slot-scope="scope">
-            <span
-              class="show-address"
-              @click="showCXID(scope.row)">{{ $t('view_txid') }}</span>
+            <div class="contact-item">
+              <icon name="fund-history-copy"/>
+              <span
+                class="show-address"
+                @click="showCXID(scope.row)">{{ $t('view_txid') }}</span>
+            </div>
           </template>
         </el-table-column>
       </el-table>
@@ -225,6 +228,13 @@ export default {
     .history__footer {
         display: flex;
         justify-content: flex-end;
+    }
+    .contact-item{
+      height: 20px;
+      color: #999999 !important;
+      &:hover {
+         color: #C1A538 !important;
+      }
     }
 
 }
