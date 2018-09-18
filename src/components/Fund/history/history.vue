@@ -34,7 +34,7 @@
           :label="status.title">
           <!-- <span>解锁/锁仓</span> -->
           <template slot-scope="scope">
-            <span :class="['state', scope.row.state === 4 && 'complete']">{{ scope.row.state === 1 ? $t('done') : $t('pending') }}</span>
+            <span :class="['state', hasComplated(scope.row)]">{{ hasComplated(scope.row.state) ? $t('done') : $t('pending') }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -137,6 +137,17 @@ export default {
     },
     getPage () {
       this.getFundHistory(this.type)
+    },
+    hasComplated (row) {
+      if (this.type === 'deposit' && row.state === 1) {
+        return true
+      }
+
+      if (this.type === 'withdraw' && row.state === 4) {
+        return true
+      }
+
+      return false
     },
     getFundHistory (from = 'deposit') {
       let request = ''

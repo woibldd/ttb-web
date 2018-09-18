@@ -57,9 +57,10 @@ export default {
         callback(new Error(this.$i18n.t('不能为空')))
       } else {
         if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(value)) {
-          this.$refs.form.validateField('email')
+          callback()
+        } else {
+          callback(new Error(this.$t('err_invalid_email')))
         }
-        callback(new Error(this.$t('err_invalid_email')))
       }
     }
     return {
@@ -84,17 +85,22 @@ export default {
   methods: {
     validation () {
       if (!this.form.email) {
+        utils.alert(this.$i18n.t('err_empty_email'))
         return false
       }
-      if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(this.email)) {
+      if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(this.form.email)) {
+        utils.alert(this.$i18n.t('err_invalid_email'))
         return false
       }
       return true
     },
     sendCode () {
-      return service.bindEmailCode({email: this.email})
+      return service.bindEmailCode({email: this.form.email})
     },
     async submit () {
+      if (!this.validation()) {
+          return
+        }
       let params = {
         email: this.form.email,
         code: this.form.code
@@ -104,6 +110,8 @@ export default {
         this.$router.push({
           name: 'ProfileInfo'
         })
+      } else {
+        utils.alert(result.message)
       }
     }
   }

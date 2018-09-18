@@ -407,9 +407,9 @@
 
 <style lang="scss">
 .el-upload-dragger {
-  width: 260px;
-  height: 190px;
-  border: none;
-  background: transparent;
+  width: 260px !important;
+  height: 190px !important;
+  border: none !important;
+  background: transparent !important;
 }
 </style>

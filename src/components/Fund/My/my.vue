@@ -14,7 +14,6 @@
         <div class="total__label">{{ $t('withdraw_avlb') }}</div>
         <div class="total__coin">{{ total }} {{ unit }} </div>
       </div>
-      {{tableData}}
       <el-table
         :data="tableData"
         class="fund-coin-pool">
@@ -60,6 +59,8 @@ available 可用量
 ordering 委托锁定量
 withdrawing 提币锁定量
 quota 当前提币剩余额度
+locking = ordering + withdrawing
+amount = available + ordering + withdrawing
 max_quota 当前提币总额度
  */
 export default {
@@ -69,9 +70,9 @@ export default {
       header: [
         {key: 'currency', title: this.$t('fees_name')},
         {key: 'available', title: this.$t('avlb')},
-        {key: 'ordering', title: this.$t('asset_th_unavlb')},
-        {key: 'quota', title: this.$t('total_count')},
-        {key: 'max_quota', title: this.$t('homechart_fiat')}
+        {key: 'locking', title: this.$t('asset_th_unavlb')},
+        {key: 'amount', title: this.$t('total_count')},
+        {key: 'estValue', title: this.$t('homechart_fiat') + '(' + (state.locale === 'zh-CN' ? 'CNY' : 'USD') + ')'}
       ],
       operate: {key: 'operate', title: this.$t('operation')},
       tableData: []
@@ -105,8 +106,16 @@ export default {
   methods: {
     getAccountBalanceList () {
       return service.getAccountBalanceList().then(res => {
-        this.tableData = res.data || []
+        this.tableData = (res.data || []).map(item => {
+          item.locking = this.$big(item.ordering || 0).plus(this.$big(item.withdrawing || 0)).toString()
+          item.amount = this.$big(item.locking).plus(this.$big(item.available)).toString()
+          item.estValue = this.getEstValue(item)
+          return item
+        }) 
       })
+    },
+    getEstValue (item) {
+      return this.$big(item.available).times(this.$big(item.rates[this.unit])).toString()
     }
   }
 }

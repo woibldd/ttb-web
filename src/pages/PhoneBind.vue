@@ -56,7 +56,7 @@
     methods: {
       validation () {
         if (!this.phone) {
-          utils.alert('缺少phone')
+          utils.alert(this.$i18n.t('bind_phone_err_empty'))
           return false
         }
         return true
@@ -65,6 +65,9 @@
         return service.bindPhoneCode({region: this.region, phone: this.phone})
       },
       async submit () {
+        if (!this.validation()) {
+          return
+        }
         let params = {
           region: this.region,
           phone: this.phone,

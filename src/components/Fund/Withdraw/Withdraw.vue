@@ -315,7 +315,7 @@ export default {
         param.google_code = this.googleCode
       }
       service.confirmWithdraw(param).then(res => {
-        if (res.code !== 200) {
+        if (res.code) {
           utils.alert(res.message)
         } else {
           this.$router.push('/fund/my/history/withdraw')
