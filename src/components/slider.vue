@@ -1,12 +1,12 @@
 <template>
     <div class="swiper-box" rel="swiperBox">
         <swiper :options="swiperOption" class="swiper-container" ref="mySwiper">
-            <!-- 轮播项 -->      
+            <!-- 轮播项 -->
             <swiper-slide v-for="banner in banners" :key="banner.id">
               <a class="link" target="_blank" :href="banner.url">
                 <img :src="banner.picture" class="swiper-image">
               </a>
-                
+
             </swiper-slide>
             <!-- 轮播的小圆点 -->
             <div class="swiper-pagination" slot="pagination"></div>
@@ -14,8 +14,8 @@
     </div>
 </template>
 <script>
-    import { swiper, swiperSlide } from 'vue-awesome-swiper'
-    import "swiper/dist/css/swiper.css"
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
 
     export default {
       data:function() {
@@ -41,7 +41,7 @@
       //定义这个sweiper对象
       computed: {
         swiper:function() {
-          return this.$refs.mySwiper.swiper;
+          return this.$refs.mySwiper.swiper
         }
       },
       created() {
@@ -117,5 +117,8 @@
     }
     .swiper-pagination-bullet-active{
       background: rgba(201, 169, 108, 1);
+    }
+    .swiper-container{
+        z-index: 0;
     }
 </style>
