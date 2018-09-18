@@ -161,19 +161,19 @@ export default {
     },
     getAccountBalanceList () {
       return service.getAccountBalanceList().then(res => {
-        let sum = 0
+        let sum = this.$big(0)
         if (state.locale === 'zh-CN') {
           this.unit = 'CNY'
           res.data.forEach(item => {
-            sum += item.available * item.rates.CNY
+            sum = sum.plus(this.$big(item.available).times(this.$big(item.rates.CNY)))
           })
         } else if (state.locale === 'en') {
           this.unit = 'USD'
           res.data.forEach(item => {
-            sum += item.available * item.rates.USD
+            sum = sum.plus(this.$big(item.available).times(this.$big(item.rates.USD)))
           })
         }
-        this.total = sum
+        this.total = sum.toString()
       })
     }
   },
