@@ -10,14 +10,8 @@ const Mock = () => import('./mock')
 
 const service = {
   getBanners(data = {}) {
-    data.platform = 0
-    return request('banner/list', data)
-  },
-  forgot(data) {
-    return request('password/forgot', data)
-  },
-  sendRecoverEmail() {
-    return request('password/reactivate')
+    data.platform = 1
+    return request('/announcement/list', data)
   },
   resetPassword(data) {
     let uri = 'user/reset/password/email'
@@ -70,10 +64,10 @@ const service = {
   login(data) {
     rmCache('session')
     if (data.email) {
-      return request('/user/login/email', data)
+      return request('user/login/email', data)
     }
     if (data.phone) {
-      return request('/user/login/phone', data)
+      return request('user/login/phone', data)
     }
   },
   register(data) {
@@ -104,9 +98,6 @@ const service = {
   },
   getBalance() {
     return getCache('balanceList', () => request('account/balance/list'), 2e3)
-  },
-  getBalanceInfo(data) {
-    return request('balance/query', data)
   },
   createOrder(data) {
     return request('order/create', data)

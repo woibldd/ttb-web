@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import VNav2 from '@/components/VNav2.vue'
+import VNav2 from '@/components/VNav3.vue'
 import VFooter from '@/components/VFooter.vue'
 import MobileFooter from '@/components/MobileFooter.vue'
 import {state, actions} from '@/modules/store'

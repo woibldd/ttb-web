@@ -6,6 +6,12 @@
       <router-link
         :to="{name:'home'}"
         class="nav_logo"/>
+      <div class="nav_left">
+        <div class="left_options">
+          <router-link :to="{name: 'trading'}" class="nav_link">{{$t('trading')}}</router-link>
+          <!-- <router-link :to="{}" class="nav_link ml-30">asdfasdf</router-link> -->
+        </div>
+      </div>
       <div class="nav_right">
         <div
           v-if="!state.userInfo"
@@ -20,18 +26,58 @@
         <div
           class="right_options"
           v-else>
-          <p class="email">
+          <!-- <p class="email">
             <router-link :to="{name:'trading'}">币币交易</router-link>
           </p>
           <p class="email">
             <router-link :to="{name:'fund'}">我的资产</router-link>
-          </p>
-          <p class="email">
+          </p> -->
+          <div class="fund mr-30">
+              <icon name="fund"></icon>
+              {{$t('wallets_nav_asset')}}
+              <div class="dropdown-sub-menu">
+                <ul class="dropdown-list pt-10 pb-10">
+                  <li class="dropdown-item pl-24">
+                    <router-link :to="{name: 'fund'}" class="link">{{$t('capital_manage')}}</router-link>
+                  </li>
+                  <li class="dropdown-item pl-24">
+                    <router-link :to="{name: 'deposit'}" class="link">{{$t('deposit')}}</router-link>
+                  </li>
+                  <li class="dropdown-item pl-24">
+                    <router-link :to="{name: 'withdraw'}" class="link">{{$t('withdraw')}}</router-link>
+                  </li>
+                </ul>
+              </div>
+          </div>
+          <div class="email mr-30">
             <router-link :to="{name:'profile'}">{{ desentInfo }}</router-link>
-          </p>
-          <a
-            class="quit"
-            @click="logout">[ {{ $t("signout") }} ]</a>
+            <div class="dropdown-sub-menu">
+                <ul class="dropdown-list pt-10 pb-10">
+                  <li class="dropdown-item pl-24">
+                    <router-link :to="{name: 'profile'}" class="link">{{$t('profile_personal_center')}}</router-link>
+                  </li>
+                  <li class="dropdown-item pl-24">
+                    <a class="link" @click="logout">{{$t('signout')}}</a>
+                  </li>
+                </ul>
+              </div>
+          </div>
+          <div class="help">
+            {{ $t('footer_help') }}
+            <div class="dropdown-sub-menu">
+                <ul class="dropdown-list pt-10 pb-10">
+                  <li class="dropdown-item pl-24">
+                    <a class="link" target="_blank" href="">{{$t('footer_notice')}}</a>
+                  </li>
+                  <li class="dropdown-item pl-24">
+                    <a class="link" target="_blank" href="">{{$t('新手指引')}}</a>
+                  </li>
+                  <li class="dropdown-item pl-24">
+                    <a class="link" target="_blank" href="">{{$t('footer_request')}}</a>
+                  </li>
+                </ul>
+              </div>
+          </div>
         </div>
 
         <div class="lang">{{ localeText }}<b/>
@@ -119,19 +165,85 @@ export default {
     width: 142px;
     height: 46px;
     display: block;
-    background: url(../assets/nav_logo.png);
+    @include bg-retina('../assets/nav_logo', 'png', 142px, 46px);
     float: left;
     margin: 17px 0;
   }
+  .nav_left {
+    float: left;
+    margin-left: 20px;
+
+    .left_options {
+      float: left;
+      margin: 18px 0 18px 40px;
+      .nav_link {
+        color: #FFFFFF;
+        font-size: 16px;
+
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+  }
   .nav_right {
+    float: right;
+    
     .right_options {
       float: left;
     }
-    float: right;
-    .email{
+    
+    .fund, .email, .help {
       float: left;
       color:#fff;
-      margin:19px 0;
+      padding:19px 0;
+      cursor: pointer;
+      
+      .dropdown-sub-menu {
+        opacity: 0;
+        display: none;
+        visibility: hidden;
+      }
+    }
+    .dropdown-sub-menu {
+      background: #283B4C;
+      position: absolute;
+      top: 80px;
+      border-radius: 4px;
+      z-index: 999;
+
+      .dropdown-list {
+        width: 120px;
+
+        .dropdown-item {
+          height: 40px;
+          .link {
+            width: 100%;
+            height: 100%;
+            display: block;
+            color: #fff;
+          }
+
+          &:hover {
+            background: #192D3F;
+            .link {
+              color: $primary;
+            }
+          }
+        }
+
+      }
+    }
+    
+    .fund:hover, .email:hover, .help:hover {
+      color: $primary;
+      .dropdown-sub-menu {
+        // transition: opacity .3s,visibility 0s;
+        opacity: 1;
+        visibility: visible;
+        display: block;
+        
+      }
     }
     .quit{
       float: left;
@@ -182,7 +294,6 @@ export default {
         right:0;
         position: absolute;
         display: none;
-        z-index: 999;
         a{
             background: #303c47;
             display: block;

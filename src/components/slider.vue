@@ -2,8 +2,11 @@
     <div class="swiper-box" rel="swiperBox">
         <swiper :options="swiperOption" class="swiper-container" ref="mySwiper">
             <!-- 轮播项 -->      
-            <swiper-slide v-for="banner in banners" :key="banner">
-                <img :src="banner" class="swiper-image">
+            <swiper-slide v-for="banner in banners" :key="banner.id">
+              <a class="link" target="_blank" :href="banner.url">
+                <img :src="banner.picture" class="swiper-image">
+              </a>
+                
             </swiper-slide>
             <!-- 轮播的小圆点 -->
             <div class="swiper-pagination" slot="pagination"></div>
@@ -15,30 +18,34 @@
     import "swiper/dist/css/swiper.css"
 
     export default {
-        data:function() {
-          return {
-          swiperOption:{
-            pagination: {
-              el: '.swiper-pagination'
-            }
+      data:function() {
+        return {
+        swiperOption:{
+          autoplay: true,
+          delay: 5000,
+          pagination: {
+            el: '.swiper-pagination'
           }
-          }
-        },
-        props:{
-          banners:{
-            type:Array
-          }
-        },
-        components:{
-          swiper,
-          swiperSlide
-        },
-        //定义这个sweiper对象
-        computed: {
-          swiper:function() {
-            return this.$refs.mySwiper.swiper;
-          }
-        },
+        }
+        }
+      },
+      props:{
+        banners:{
+          type:Array
+        }
+      },
+      components:{
+        swiper,
+        swiperSlide
+      },
+      //定义这个sweiper对象
+      computed: {
+        swiper:function() {
+          return this.$refs.mySwiper.swiper;
+        }
+      },
+      created() {
+      }
     }
 </script>
 <style lang="scss">
@@ -47,6 +54,13 @@
         width: 100%;
         height: 400px;
         margin: 0 auto;
+    }
+    @media screen and (max-width: 768px) {
+      .swiper-box{
+        width: 100%;
+        height: 120px;
+        margin: 0 auto;
+      }
     }
     .swiper-box .swiper-container {
         width: 100%;
@@ -73,7 +87,7 @@
             left: 50%;
             margin-left: -960
         }
-        img{
+        img {
             display: block;
             width: 100%;
             height: 100%;
@@ -84,10 +98,13 @@
             transition: all 1s ease 0s;
         }
     }
+    .link {
+      display: flex;
+      height: 100%;
+    }
     .swiper-image{
         position: absolute;
-        left: 50%;
-        margin-left: -960px;
+        width: 100%;
     }
     .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet{
       width: 30px;

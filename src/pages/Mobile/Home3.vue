@@ -17,102 +17,6 @@
             </a>
         </div>
     </div>
-    <div class="ind_cen ind_jd">
-        <div class="jd_box">
-            <div class="jd_cen">
-                <p>
-                    <span>
-                        <i>挖矿进度：</i>126631.45633211<i>IX</i>
-                    </span>
-                </p>
-            </div>
-            <em>0 IX</em>
-            <em>33,333,333 IX</em>
-        </div>
-        <div class="jd_btxt">
-            <div>0:00 - 8:00</div>
-            <div><span>挖矿总量：</span>,333,333<em>IX</em></div>
-            <div><span>已挖矿量：</span>126631.45633211<em>IX</em></div>
-            <div><span>剩余挖矿量：</span>28,669,123.23441975<em>IX</em></div>
-        </div>
-    </div>
-    <div class="ind_cen ind_tit">
-        交易区
-    </div>
-    <div class="ind_cen trade">
-        <ul class="tit">
-            <li class="ta">币种</li>
-            <li class="tb">最新价</li>
-            <li class="tc">24H涨跌幅</li>
-            <li class="td">24H最低</li>
-            <li class="te">24H最高</li>
-            <li class="tf">24H成交量</li>
-            <li class="tg">操作</li>
-        </ul>
-        <ul class="tra_cen">
-            <li class="ta">ABL <span>/ BTC</span></li>
-            <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-            <li class="tc">-6.09%-0.00000021</li>
-            <li class="td">0.00000304</li>
-            <li class="te">0.00000358</li>
-            <li class="tf">17,798,092<span>ABL</span></li>
-            <li class="tg"><span></span></li>
-        </ul>
-        <ul class="tra_cen">
-            <li class="ta">ABL <span>/ BTC</span></li>
-            <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-            <li class="tc">-6.09%-0.00000021</li>
-            <li class="td">0.00000304</li>
-            <li class="te">0.00000358</li>
-            <li class="tf">17,798,092<span>ABL</span></li>
-            <li class="tg"><span></span></li>
-        </ul>
-        <ul class="tra_cen">
-            <li class="ta">ABL <span>/ BTC</span></li>
-            <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-            <li class="tc">-6.09%-0.00000021</li>
-            <li class="td">0.00000304</li>
-            <li class="te">0.00000358</li>
-            <li class="tf">17,798,092<span>ABL</span></li>
-            <li class="tg"><span></span></li>
-        </ul>
-        <ul class="tra_cen">
-            <li class="ta">ABL <span>/ BTC</span></li>
-            <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-            <li class="tc">-6.09%-0.00000021</li>
-            <li class="td">0.00000304</li>
-            <li class="te">0.00000358</li>
-            <li class="tf">17,798,092<span>ABL</span></li>
-            <li class="tg"><span></span></li>
-        </ul>
-        <ul class="tra_cen">
-            <li class="ta">ABL <span>/ BTC</span></li>
-            <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-            <li class="tc">-6.09%-0.00000021</li>
-            <li class="td">0.00000304</li>
-            <li class="te">0.00000358</li>
-            <li class="tf">17,798,092<span>ABL</span></li>
-            <li class="tg"><span></span></li>
-        </ul>
-        <ul class="tra_cen">
-            <li class="ta">ABL <span>/ BTC</span></li>
-            <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-            <li class="tc">-6.09%-0.00000021</li>
-            <li class="td">0.00000304</li>
-            <li class="te">0.00000358</li>
-            <li class="tf">17,798,092<span>ABL</span></li>
-            <li class="tg"><span></span></li>
-        </ul>
-        <ul class="tra_cen">
-            <li class="ta">ABL <span>/ BTC</span></li>
-            <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-            <li class="tc">-6.09%-0.00000021</li>
-            <li class="td">0.00000304</li>
-            <li class="te">0.00000358</li>
-            <li class="tf">17,798,092<span>ABL</span></li>
-            <li class="tg"><span></span></li>
-        </ul>
-    </div>
     <div class="ind_cen ind_bot">
         <div class="ind_bot_tit">覆盖 IOS、Android、Windows、Mac 多个平台，支持全业务功能</div>
         <div class="ind_bot_cen">
@@ -148,7 +52,9 @@
 <script>
     import Slider from '@/components/slider.vue'
     import service from '@/modules/service'
+    import responsiveMixin from '@/mixins/responsive'
     export default {
+        mixins: [responsiveMixin],
         data:function(){
           return{
               banners:[
@@ -178,7 +84,6 @@
               this.banners = list.filter(b => b.slot === 1)
               this.notices = list.filter(b => b.slot === 2)
               if (this.notices.length > 3) {
-                this.notices.splice(3)
               }
             }
           }
@@ -186,8 +91,8 @@
     }
 </script>
 <style lang="scss">
-    @import "../styles/vars";
-    @import "../styles/mixins";
+    @import "~@/styles/vars";
+    @import "~@/styles/mixins";
     .page-home{
         background:#303E4B;
         overflow: hidden;
@@ -443,16 +348,16 @@
                 background-position: center center;
             }
             .iphone{
-                background-image: url(../assets/iphone.png);
+                background-image: url(~/assets/iphone.png);
             }
             .android{
-                background-image: url(../assets/Android.png);
+                background-image: url(~/assets/Android.png);
             }
             .windows{
-                background-image: url(../assets/Windows.png);
+                background-image: url(~/assets/Windows.png);
             }
             .mac{
-                background-image: url(../assets/Mac.png);
+                background-image: url(~/assets/Mac.png);
             }
             p{
                 background: #151e25;

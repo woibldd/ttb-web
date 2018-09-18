@@ -4,7 +4,6 @@
   "signout": "退出登录",
   "trading": "币币交易",
   "asset": "资产",
-  "mining_robot": "挖矿机器人",
   "help": "帮助",
   "userCenter": "用户中心",
   "total": "累计(%{unit})",
@@ -261,7 +260,6 @@
   "deposit_support": "支持 %{0} 种数字资产",
   "withdraw_desc": "提现帐户中的数字资产",
   "wallets_nav_transfer": "充值提现记录",
-  "wallets_nav_asset": "我的资产",
   "add_withdraw_addr": "添加新地址",
   "add_withdraw_success": "添加成功",
   "del_withdraw_success": "删除成功",
@@ -535,5 +533,6 @@
   "upgrade_quota": "提升限额",
   "security_verification":"安全验证",
   "phone_verification_code": "手机验证码",
-  "total_count": "总计"
+  "total_count": "总计",
+  "wallets_nav_asset": "我的资产"
 }
