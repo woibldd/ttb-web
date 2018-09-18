@@ -261,7 +261,7 @@ export default {
     async changeCoinType (coin) {
       this.selectCoin = coin
       this.getCoinAddress()
-      this.getAccountBalanceList() // 更改币种后，重新获取一次自己的钱包状态
+      this.updadeMyCoinInfo() // 更改币种后，重新获取一次自己的钱包状态
     },
     async updadeMyCoinInfo () {
       await this.getAccountBalanceList()
