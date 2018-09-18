@@ -66,7 +66,7 @@
                 <order-deal v-if="order.deal_amount > 0" :key="active.fetchId" :id="order.id" :pairName="order.symbol"/>
               </td>
               <td class="center">
-                <a @click.prevent="cancel(order)">{{$t('cancel_order')}}</a>
+                <a @click.prevent="cancel(order)">{{$t('transfer_cancel')}}</a>
               </td>
             </tr>
           </tbody>

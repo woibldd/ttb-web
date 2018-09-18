@@ -16,7 +16,7 @@
           <i></i>
       </div>
       <div class="aut_box">
-          <div class="aut_lt">证件上传</div>
+          <div class="aut_lt">{{$t('kyc_upload')}}</div>
           <div class="aut_rt">
               <div class="aut_up">
                 <el-upload class="upload" :action="uploadConfig.host" :data="frontConfig" :show-file-list="false" :drag="true" accept="image/*" :on-success="handleIdFrontSuccess">
@@ -25,8 +25,8 @@
                 </el-upload>
               </div>
               <div class="aut_up_txt">
-                  <p>姓名：张三</p>
-                  <p>身份证号：10010198802022222</p>
+                  <p>{{$t('kyc_name')}}</p>
+                  <p>{{$t('kyc_id_number')}}：10010198802022222</p>
               </div>
           </div>
           <div class="aut_rt">
@@ -35,23 +35,22 @@
                   <img class="img" v-if="photo2" :src="photo2" alt="">
                   <div class="upload_box up_emblem" v-else></div>
                 </el-upload>
-                <p>以上材料需用 JPG / JPEG / PNG 格式上传，并保证照片清晰、边角完整、亮度均匀，且大小不得超过5M</p>
+                <p>{{$t('kyc_notice1')}}</p>
               </div>
               <div class="aut_up_txt">
-                  <p>签发机关：北京市朝阳分局</p>
-                  <p>有效期限：2018.03.22-2038.03.22</p>
+                  <p>{{$t('kyc_valid_time')}}：2018.03.22-2038.03.22</p>
               </div>
           </div>
       </div>
       <div class="aut_box">
-          <div class="aut_lt">手持证件照</div>
+          <div class="aut_lt">{{$t('kyc_hand')}}</div>
           <div class="aut_rt">
               <div class="aut_up">
                 <el-upload class="upload" :action="uploadConfig.host" :data="holdConfig" :show-file-list="false" :drag="true" accept="image/*" :on-success="handleIdHoldSuccess">
                   <img class="img" v-if="photo3" :src="photo3" alt="">
                   <div class="upload_box up_take" v-else></div>
                 </el-upload>
-                <p>提示：手臂前伸证件照更清晰<br />请保证照片中五官清晰，证件信息清晰，无涂改</p>
+                <p>{{$t('kyc_notice2')}}<br />{{$t('kyc_notice3')}}</p>
               </div>
               <div></div>
           </div>
@@ -59,7 +58,7 @@
       <div class="aut_box">
           <div class="aut_lt"></div>
           <div class="aut_rta">
-              <v-btn class="submit-btn" :label="$t('sub')"
+              <v-btn class="submit-btn" :label="$t('kyc_submit')"
               :loading="loading"
               @click="submit"></v-btn>
           </div>

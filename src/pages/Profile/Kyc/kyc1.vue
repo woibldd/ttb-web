@@ -44,13 +44,13 @@
             <el-form-item
               prop="id_number"
               class="inp_box"
-              :label="$t('kyc_idcard')">
+              :label="$t('kyc_id_number')">
               <el-input v-model="form.id_number"/>
             </el-form-item>
             <el-form-item class="inp_box">
               <v-btn
                 class="submit-btn"
-                :label="$t('sub')"
+                :label="$t('kyc_submit')"
                 :loading="loading"
                 @click="submit"/>
             </el-form-item>
