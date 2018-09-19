@@ -90,7 +90,6 @@ export default {
   },
   computed: {
     rule_link () {
-      debugger
       return this.state.theme.activeRule[this.state.locale] || this.state.theme.activeRule.en
     }
   },
@@ -173,14 +172,15 @@ export default {
           this.lastDealTime = data[data.length - 1].time
           let tick = new Date().getTime() - this.lastDealTime
           if (tick < 0) {
-            tick = 0
+            tick = 2000
           } else if (tick > 20000) {
-            tick = 20000
+            tick = 0
           }
           this.countdownText = Math.floor(tick / 1000) + ''
           this.showCountdown = true
           this.startTimer()
         } else {
+          debugger
           if (data[data.length - 1].time > this.lastDealTime) {
             // 有行情变化
             this.countdownText = '20'

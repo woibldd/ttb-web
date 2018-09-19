@@ -28,9 +28,6 @@ export default {
       if (this.search && !this.showList.length) {
         return 'pairnav_no_matched'
       }
-      if (this.tab === '*' && !this.showList.length) {
-        return 'pairnav_no_fav'
-      }
       return ''
     },
     group () {

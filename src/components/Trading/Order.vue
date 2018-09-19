@@ -246,9 +246,9 @@ export default {
       console.log(statusId)
       const context = {
         3: 'order_sts_filled',
-        4: 'order_sts_post_rm',
+        4: 'order_sts_canceled',
         5: 'order_sts_partial',
-        6: 'order_sts_canceled',
+        6: 'order_sts_post_rm',
         7: 'order_sts_partial'
       }[statusId] || 'Unknown'
       return this.$i18n.t(context)

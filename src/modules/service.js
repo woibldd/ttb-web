@@ -408,8 +408,16 @@ const service = {
   // 取消提币
   cancelWithdraw(param) {
     return request('/account/withdraw/cancel', param)
-  }
+  },
   /* -- 资金管理 end  -- */
+
+  /* 挖矿 */
+  getMineTotal (data) {
+    return getCache('currencyList', () => request('account/currency/list'))
+    return request('/account/withdraw/cancel', param)
+  }
+  /* 挖矿 end */
+  
 
 }
 
