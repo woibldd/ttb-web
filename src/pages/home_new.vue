@@ -40,10 +40,11 @@
         <div><span>剩余挖矿量：</span>28,669,123.23441975<em>IX</em></div>
       </div>
     </div>
-    <div class="ind_cen ind_tit" v-if="false">
-      交易区
+    <div class="ind_cen ind_tit">
+      {{$t('exchange_area')}}
     </div>
-    <div class="ind_cen trade" v-if="false">
+    {{sortedList}}
+    <div class="ind_cen trade">
       <ul class="tit">
         <li class="ta">币种</li>
         <li class="tb">最新价</li>
@@ -53,13 +54,15 @@
         <li class="tf">24H成交量</li>
         <li class="tg">操作</li>
       </ul>
-      <ul class="tra_cen">
-        <li class="ta">ABL <span>/ BTC</span></li>
-        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-        <li class="tc">-6.09%-0.00000021</li>
-        <li class="td">0.00000304</li>
-        <li class="te">0.00000358</li>
-        <li class="tf">17,798,092<span>ABL</span></li>
+      <ul class="tra_cen" v-for="pair in sortedList" :key="pair.name">
+        <li class="ta" v-if="pair.tick">{{pair.product}} <span>/ {{pair.currency}}</span></li>
+        <li class="tb">{{ pair.tick.current | fixed(pair.price_scale) }} <span>¥ 0.16</span></li>
+        <li class="tc" :class="{'theme-color-up': getDelta(pair.tick) > 0, 'theme-color-down': getDelta(pair.tick) < 0}">
+          <p v-if="pair.tick">{{ (getDelta(pair.tick) > 0) ? '+' : ''}}{{ getDelta(pair.tick) }}%  {{pair.tick.increment_24h}}</p>
+          <p v-else>...</p></li>
+        <li class="td">{{pair.tick.lowest_24h}}</li>
+        <li class="te">{{pair.tick.highest_24h}}</li>
+        <li class="tf">{{ pretty(pair.tick.volume_24h) }}<span> {{pair.product}}</span></li>
         <li class="tg">
           <icon name="handle-active"/>
         </li>
@@ -168,11 +171,12 @@
   import Slider from '@/components/slider.vue'
   import service from '@/modules/service'
   import { state } from '@/modules/store'
+  import tickTableMixin from '@/mixins/tick-table'
 
   export default {
+    mixins: [tickTableMixin],
     data: function () {
       return {
-        state,
         banners: [
         ],
         notices: [],
@@ -192,6 +196,27 @@
       announcementLink () {
         return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
       }
+    },
+    methods: {
+      pretty (num) {
+        num = this.$big(num || 0)
+        if (num < 100) {
+          return num.toFixed(2)
+        }
+        if (num < 1e6) {
+          return num.toFixed(0)
+        }
+        if (num < 1e7) {
+          return num.div(1e6).toFixed(1) + ' M'
+        }
+        if (num < 1e9) {
+          return num.div(1e6).toFixed(0) + ' M'
+        }
+        if (num < 1e10) {
+          return num.div(1e9).toFixed(1) + ' B'
+        }
+        return num.div(1e9).toFixed(0) + ' B'
+      },
     },
     async created() {
       const res = await service.getBanners()
@@ -481,11 +506,15 @@
       &:last-child {
         border-bottom: none;
       }
-      &.tra_cen:nth-child(odd) li.tc {
-        color: #F24E4D;
-      }
-      &.tra_cen:nth-child(even) li.tc {
-        color: #09C989;
+      &.tra_cen {
+        li {
+          &.theme-color-down {
+            color: #F24E4D;
+          }
+          &.theme-color-up {
+            color: #09C989;
+          }
+        }
       }
     }
   }

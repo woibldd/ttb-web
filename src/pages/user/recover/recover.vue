@@ -243,9 +243,15 @@ export default {
       },
       validateRules: {
         phone: {
-          errTips: '', // 空值，表示跳过校验
+          errTips: this.$t('bind_phone_err_format'),
           validateFunc: (num) => {
-            return !(/^1[34578]\d{9}$/.test(num))
+            return !(/\d+$/.test(num))
+          }
+        },
+        email: {
+          errTips: this.$t('err_invalid_email'),
+          validateFunc: (email) => {
+            return !(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(email))
           }
         },
         password: {
@@ -296,7 +302,6 @@ export default {
   methods: {
     async nextstep () {
       const check = this.checkParams()
-      debugger
       if (!check.ok || !!this.triggerValidate) {
         if (check.em) {
           utils.alert(check.em)
@@ -357,7 +362,7 @@ export default {
       // console.log(this.password, this.password2)
       if (this.password !== this.password2) {
         this.triggerValidate = true
-        // return err(this.$i18n.t('change_password_diff'), 'password2')
+        return err(this.$i18n.t('change_password_diff'), 'password2')
       }
 
       return {ok: true}

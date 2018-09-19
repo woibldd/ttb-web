@@ -35,7 +35,7 @@ export default {
     },
     group () {
       return _.sortBy(_.uniq(_.map(this.state.pro.pairList, 'currency_name')), name => {
-        return (_.indexOf(['USDT', 'BTC', 'ETH', 'EOS', 'PAI'], name) + 1) || 100
+        return (_.indexOf(['USDT', 'BTC', 'ETH', 'EOS'], name) + 1) || 100
       })
     },
     pairList () {
