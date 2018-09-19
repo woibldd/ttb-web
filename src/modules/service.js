@@ -284,7 +284,7 @@ const service = {
   removeApiKey(data) {
     return request('api/remove', data)
   },
-  getRate(currency) {
+  getRate(currency = 'USDT') {
     // return getCache(name + 'FiatRate', () => request('currency/query', { name }), 1e4)
     return getCache(name + 'FiatRate', () => request('account/currency/rates', { currency }), 1e4)
   },

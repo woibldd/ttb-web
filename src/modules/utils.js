@@ -150,14 +150,14 @@ const utils = {
       'ja': 'JP¥',
       'ko': '₩',
       'zh-HK': 'HK$',
-      'en': 'US$'
+      'en': '$'
     }
     return map[locale] || 'US$'
   },
   getFiatMoneySymbolByFiat (fiat) {
     const map = {
       'CNY': '¥',
-      'USD': 'US$',
+      'USD': '$',
       'HKD': 'HK$',
       'JPY': 'JP¥',
       'KRW': '₩',
