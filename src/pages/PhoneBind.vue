@@ -5,7 +5,16 @@
         <div class="inp_box">
             <p>{{$t('phone_number')}}</p>
             <div class="inp_cox">
-                <span class="gh">+86</span>
+                <span class="gh">
+                  <span>+{{regionId}}
+                    <div class="selector">
+                    <ul class="list">
+                      <li @click="selectRegion(option.id)" v-for="option in regionOptions" :key="option.id" class="item">+{{option.id}} {{state.locale === 'zh-CN' ? option.cname : option.fullname}}</li>
+                    </ul>
+                  </div>
+                  </span>
+                  
+                </span>
                 <input type="text" v-model="phone" class="a" />
             </div>
             <span class="tips"></span>
@@ -45,14 +54,25 @@
     },
     data () {
       return {
-        region: '86',
+        state,
+        regionId: '86',
         phone: '',
         code: '',
+        regionOptions: [],
         loading: false
       }
     },
     computed: {
 
+    },
+    async created() {
+      const res = await service.getRegionList()
+      if (!res.code) {
+        this.regionOptions = res.data
+      }
+      if (state.locale === 'zh-CN') {
+        this.regionId = 86
+      }
     },
     methods: {
       validation () {
@@ -63,14 +83,17 @@
         return true
       },
       sendCode () {
-        return service.bindPhoneCode({region: this.region, phone: this.phone})
+        return service.bindPhoneCode({region: this.regionId, phone: this.phone})
+      },
+      selectRegion (id) {
+        this.regionId = id
       },
       async submit () {
         if (!this.validation()) {
           return
         }
         let params = {
-          region: this.region,
+          region: this.regionId,
           phone: this.phone,
           code: this.code,
         }
@@ -181,6 +204,37 @@
                     color: #333;
                     z-index: 11;
                     position: relative;
+
+                    &:hover {
+                      .selector {
+                        display: block;
+                      }
+                    }
+
+                    .selector {
+                      display: none;
+                      background: #fff;
+                      width: 180px;
+                      padding: 10px 0;
+                      border: 1px solid #ccc;
+                      border-radius: 4px;
+
+                      .list {
+                        margin: 0;
+                        padding: 0;
+                        height: 200px;
+                        overflow-y: scroll;
+                        .item {
+                          padding: 0 20px;
+                          text-align: left;
+                          cursor: pointer;
+                          &:hover {
+                            background: $primary;
+                            color: #fff;
+                          }
+                        }
+                      }
+                    }
                 }
                 a{
                     height: 38px;

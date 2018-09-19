@@ -80,7 +80,7 @@ export default {
           callback(new Error(this.$i18n.t('kyc_id_no_err')))
         }
       } else {
-        if (!/^1[45][0-9]{7}|([P|p|S|s]\d{7})|([S|s|G|g]\d{8})|([Gg|Tt|Ss|Ll|Qq|Dd|Aa|Ff]\d{8})|([H|h|M|m]\d{8，10})$/.test(value)) {
+        if (!/^1[45][0-9]{7}|([P|p|S|s]\d{7})|([S|s|G|g]\d{8})|([Gg|Tt|Ss|Ll|Qq|Dd|Aa|Ff]\d{8})|([H|h|M|m]\d{8，10})$/.test(value) && !/[\w\W]+\d{7,8}/.test(value)) {
           callback(new Error(this.$i18n.t('kyc_passport_err')))
         }
       }
