@@ -121,6 +121,7 @@ export default {
       if (userInfo) {
         if (userInfo.phone) {
           return utils.publicDesensitization(userInfo.phone)[0]
+          // return utils.publicDesensitization('91418865')[0]
         } else if (userInfo.email) {
           return utils.publicDesensitization(userInfo.email)[0]
         }

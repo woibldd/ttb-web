@@ -175,8 +175,8 @@ td.right {
 }
 .home-ball {
   cursor: pointer;
-  position: absolute;
-  bottom: 400px;
+  position: fixed;
+  bottom: 40px;
   width: 160px;
   right: 60px;
   border-radius: 30px;

@@ -59,17 +59,19 @@ import 'swiper/dist/css/swiper.css'
     @media screen and (max-width: 768px) {
       .swiper-box{
         width: 100%;
-        height: 120px;
+        height: 90px !important;
         margin: 0 auto;
       }
       .swiper-slide {
         width: 100%;
-        max-height: 400px;
+        max-height: 90px;
         overflow: hidden;
       }
       .swiper-image{
         position: absolute;
-        width: 100%;
+        width: 100% !important;
+        left: 0 !important;
+        margin-left: 0 !important;
       }
     }
     .swiper-box .swiper-container {

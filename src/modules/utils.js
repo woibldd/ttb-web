@@ -444,7 +444,6 @@ const utils = {
         // 企业名称  前二后四
         data = data.substr(0, 2) + '****' + data.substr(-4)
       } else {
-        return
       }
       dataArr[i] = data
     }

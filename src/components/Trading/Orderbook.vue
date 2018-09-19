@@ -7,7 +7,7 @@
           class="group-display ibt"
           v-tooltip="clearTip"
           @click="clearSetting">
-          {{ curGroup }} <span class="has-underline">{{ $t('handicap_group') }}</span>
+          {{ curGroup }} <span class="has-underline">{{ $t('orderbook_group') }}</span>
         </span>
         <div class="header-icons ibt">
           <a @click.prevent.stop="toggleSetting" class="header-btn btn">
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="ix-panel-thead" :style="{paddingRight: hasScrollBar ? '14px' : '4px'}">
-      <div class="table table-ix-handicap">
+      <div class="table table-ix-orderbook">
         <div class="thead">
           <div class="th ibt left">{{ $t('price') }}</div>
           <div class="th ibt right">{{ $t('amount_unit', {unit: state.pro.product_name}) }}</div>
@@ -61,12 +61,12 @@
           </tbody>
         </table>
       </div>
-      <!--<div class="no-data" v-show="!err && !handicapList.length">{{ $t('handicap_empty') }}</div>-->
+      <!--<div class="no-data" v-show="!err && !orderbookList.length">{{ $t('orderbook_empty') }}</div>-->
       <!--<div class="err" v-show="err">{{ err }}</div>-->
     </div>
     <div class="setting-panel" :class="{show: panelShow}" @click.stop>
       <div class="setting-panel-header">{{ $t('orderbook_options') }}</div>
-      <div class="group-title">{{ $t('handicap_group') }}</div>
+      <div class="group-title">{{ $t('orderbook_group') }}</div>
       <div class="group-wrap">
         <span class="group-value">{{ curGroup }}</span>
         <span class="minus theme-bgcolor-down" @click="minus"></span>
@@ -328,7 +328,7 @@ export default {
         this.socket.$destroy()
       }
       const fetchId = this.pair + this.offset + this.accuracy
-      const res = await service.getQuoteHandicap({
+      const res = await service.getQuoteOrderbook({
         pair: this.pair,
         offset: this.offset,
         accuracy: this.accuracy,
@@ -340,7 +340,7 @@ export default {
       if (!res.code) {
         this.assignData(res.data)
       }
-      this.socket = ws.create(`handicap/${this.pair}/${this.offset}/${this.accuracy}/20`)
+      this.socket = ws.create(`orderbook/${this.pair}/${this.offset}/${this.accuracy}/20`)
       this.socket.$on('message', (data) => {
         this.assignData(data)
       })
@@ -349,7 +349,7 @@ export default {
       const toBig = item => [this.$big(item.values[0]), this.$big(item.values[1])]
       this.buy = _.map(data.bids, toBig)
       this.sell = _.map(data.asks, toBig)
-      this.$eh.$emit('protrade:handicap:update', {
+      this.$eh.$emit('protrade:orderbook:update', {
         buy: this.buy,
         sell: this.sell
       })

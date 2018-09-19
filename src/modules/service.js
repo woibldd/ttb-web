@@ -232,8 +232,8 @@ const service = {
       }
     }))
   },
-  getQuoteHandicap({ pair, accuracy, offset, size }) {
-    return quote(`handicap/${pair}`, { offset, accuracy, size })
+  getQuoteOrderbook({ pair, accuracy, offset, size }) {
+    return quote(`orderbook/${pair}`, { offset, accuracy, size })
   },
   getQuoteDeal({ pair, size }) {
     return quote(`deal/${pair}`, { size })

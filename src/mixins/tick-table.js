@@ -147,7 +147,7 @@ export default {
       if (this.socket) {
         this.socket.$destroy()
       }
-      this.socket = ws.create('market/ticker')
+      this.socket = ws.create('market/tickers')
       this.socket.$on('message', (datas) => {
         datas.forEach(data => {
           this.patch(data)

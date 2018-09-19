@@ -60,7 +60,8 @@ export default {
     return {
       state,
       isMobile: utils.isMobile(),
-      fixed: false
+      fixed: false,
+      showContact: true
     }
   },
   computed: {
@@ -86,7 +87,7 @@ export default {
       if (!this.$route.name) {
         return false
       }
-      return !(utils.getRouteMeta(this.$route, 'zendeskWidget') === false)
+      return !(utils.getRouteMeta(this.$route, 'zendeskWidget') === false) && this.showContact
     },
     navClass () {
       if (!this.$route.name) {
@@ -154,7 +155,17 @@ export default {
       this.keepSession()
     },
     toNotice () {
-      window.open(this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en)
+      let url = ''
+       if (this.state.userInfo && this.state.theme.themeName === 'default') {
+        url = process.env.BASE_API + 'zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
+      } else {
+        url = this.state.theme.request[this.state.locale] || this.request.theme.help.en
+      }
+      if (!url) {
+        showContact = false
+      } else {
+        window.open(url)
+      }
     }
   },
   mounted () {
