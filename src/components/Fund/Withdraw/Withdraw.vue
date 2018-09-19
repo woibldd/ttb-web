@@ -323,6 +323,16 @@ export default {
       })
     },
     ensure () {
+      console.log(this.$big(this.withdrawCount), this.selectCoin.min_withdraw_amount, '0000')
+      if (this.$big(this.withdrawCount).lt(this.$big(this.selectCoin.min_withdraw_amount))) {
+        utils.alert(this.$t('withdraw_count_min_error'))
+        return
+      }
+      if (this.$big(this.withdrawCount).gt(this.$big(this.myCoinInfo.available))) {
+        utils.alert(this.$t('withdraw_count_max_error'))
+        return
+      }
+
       this.showModal = true
     },
     hideModal () {
