@@ -39,7 +39,6 @@
         <p class="p2 mt-24" v-html="$t('profile_kyc_again', {kyc: '#/profile/kyc/kyc_step2'})"></p>
       </div>
       <div class="content mb-30" v-else>
-        未知状态
       </div>
     </div>
   </div>

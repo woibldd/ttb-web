@@ -445,6 +445,7 @@
 
   "kyc_valid_time": "Issue Date",
   "kyc_hand": "The photo of you holding ID Card",
+  "kyc_image_uploading": "Please wait until the upload is complete",
   "kyc_notice1": "The above materials should be uploaded in JPG / JPEG / PNG format。Please ensure that the photos should be clear, full page and use gentle light and file size should not exceed 5M.",
   "kyc_notice2": "The photo of you holding ID Card",
   "kyc_notice3": "The ID Card information is clear without correction.",
