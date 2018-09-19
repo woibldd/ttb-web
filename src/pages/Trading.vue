@@ -19,7 +19,7 @@
             <TradingView ref="TradingView"></TradingView>
             <div class="active-box" v-if="showCountdown">
               <p class="text">{{$t('active_countdown_text')}}<span class="seconds">{{countdownText}}</span>{{$t('active_countdown_unit')}}</p>
-              <a class="link" href="http://baidu.com" target="_blank">{{$t('active_rules')}}</a>
+              <a class="link" :href="rule_link" target="_blank">{{$t('active_rules')}}</a>
             </div>
           </div>
         </div>
@@ -86,6 +86,12 @@ export default {
       countdownTimer: 0,
       countdownText: '20',
       lastDealTime: 0
+    }
+  },
+  computed: {
+    rule_link () {
+      debugger
+      return this.state.theme.activeRule[this.state.locale] || this.state.theme.activeRule.en
     }
   },
   watch: {

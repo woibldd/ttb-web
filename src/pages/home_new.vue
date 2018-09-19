@@ -19,7 +19,7 @@
         </a>
       </div>
     </div>
-    <div class="ind_cen ind_jd" v-if="false">
+    <div class="ind_cen ind_jd" v-if="true">
       <div class="jd_box">
         <div
           class="jd_cen"
@@ -80,15 +80,14 @@
 <script>
   import Slider from '@/components/slider.vue'
   import service from '@/modules/service'
-  import { state } from '@/modules/store'
-  
+  import {state} from '@/modules/store'
   import PairTable from '@/components/Trading/PairTable'
 
   export default {
     data: function () {
       return {
-        banners: [
-        ],
+        state,
+        banners: [],
         notices: [],
         swiperOption: {
           direction: 'horizontal',
@@ -104,37 +103,8 @@
       PairTable
     },
     computed: {
-      announcementLink () {
+      announcementLink() {
         return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
-      }
-    },
-    methods: {
-      pretty (num) {
-        num = this.$big(num || 0)
-        if (num < 100) {
-          return num.toFixed(2)
-        }
-        if (num < 1e6) {
-          return num.toFixed(0)
-        }
-        if (num < 1e7) {
-          return num.div(1e6).toFixed(1) + ' M'
-        }
-        if (num < 1e9) {
-          return num.div(1e6).toFixed(0) + ' M'
-        }
-        if (num < 1e10) {
-          return num.div(1e9).toFixed(1) + ' B'
-        }
-        return num.div(1e9).toFixed(0) + ' B'
-      },
-      toExchange (pair) {
-        this.$router.push({
-          name: 'trading',
-          params: {
-            pair: pair
-          }
-        })
       }
     },
     async created() {
@@ -156,19 +126,24 @@
   @import "../styles/vars";
   @import "../styles/mixins";
 
+  .ind_cen {
+    position: relative;
+    margin: 0 60px;
+  }
+
   .page-home {
     background: linear-gradient(0deg, #222931, #3A444F);
   }
 
-  .ind_cena{
-      position: relative;
-      padding: 0 60px;
-      background-position: top center;
-      background-repeat: no-repeat;
-      background-image: url(../assets/bg_qx.png);
-      padding-top: 35px;
-      margin-top: 80px;
-      padding-bottom: 110px;
+  .ind_cena {
+    position: relative;
+    padding: 0 60px;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-image: url(../assets/bg_qx.png);
+    padding-top: 35px;
+    margin-top: 80px;
+    padding-bottom: 110px;
   }
 
   .ind_txt {
@@ -183,13 +158,13 @@
       float: left;
       width: 33.33%;
       color: #6C869C;
-            .text_link {
-              color: #6C869C;
-              &:hover {
-                color: $primary;
-              }
-            }
-            &:nth-child(2) {
+      .text_link {
+        color: #6C869C;
+        &:hover {
+          color: $primary;
+        }
+      }
+      &:nth-child(2) {
         position: relative;
         &:before, &:after {
           content: "";
@@ -215,32 +190,32 @@
       height: 15px;
       right: 0;
       top: 23px;
-      
+
       i {
         display: block;
         position: absolute;
         height: 3px;
         right: 0;
         background: #6C869C;
-                width: 70%;
-                top: 6px;
-            }
-            &::before,&::after{
-                position: absolute;
-                display: block;
-                position: absolute;
-                height: 3px;
-                right: 0;
-                background: #6C869C;
-                content: "";
-            }
-            &::before{
-                width: 100%;
-                top: 0;
-            }
-            &::after{
-                width: 40%;
-                bottom: 0;
+        width: 70%;
+        top: 6px;
+      }
+      &::before, &::after {
+        position: absolute;
+        display: block;
+        position: absolute;
+        height: 3px;
+        right: 0;
+        background: #6C869C;
+        content: "";
+      }
+      &::before {
+        width: 100%;
+        top: 0;
+      }
+      &::after {
+        width: 40%;
+        bottom: 0;
       }
     }
   }
@@ -357,85 +332,14 @@
     }
   }
 
-  .trade {
-    border: 1px solid #CBE6FD;
-    ul {
-      overflow: hidden;
-      color: #CBE6FD;
-      font-size: 16px;
-      border-bottom: 1px dashed #464d55;
-      line-height: 64px;
-      &.tit {
-        border-bottom: 1px solid #CBE6FD;
-        height: 45px;
-        line-height: 45px;
-        font-size: 14px;
-        li {
-          border-bottom: none;
-          &.tc {
-            color: #CBE6FD;
-          }
-        }
-      }
-      li {
-        float: left;
-                height: 64px;
-        text-align: center;
-        span {
-          color: #6C869C;
-        }
-        &.ta {
-          width: 8%;
-        }
-        &.tb {
-                    width: 17%;
-        }
-        &.tc {
-                    width: 17%;
-        }
-        &.td {
-          width: 17%;
-        }
-        &.te {
-          width: 17%;
-        }
-        &.tf {
-                    width: 17%;
-        }
-        &.tg {
-          width: 7%;
-          color: #5c89b0;
-          cursor: pointer;
-
-          &:hover {
-            color: #c9a96e;
-          }
-        }
-      }
-      &:last-child {
-        border-bottom: none;
-      }
-      &.tra_cen {
-        li {
-          &.theme-color-down {
-            color: #F24E4D;
-          }
-          &.theme-color-up {
-            color: #09C989;
-          }
-        }
-      }
-    }
-  }
-
   .ind_bot {
-        &:after{
-            content: "";
-            clear: both;
-            width: 100%;
-            height: 1px;
-            display:block;
-        }
+    &:after {
+      content: "";
+      clear: both;
+      width: 100%;
+      height: 1px;
+      display: block;
+    }
     .ind_bot_tit {
       color: #fff;
       font-size: 24px;
@@ -490,15 +394,15 @@
             display: block;
             width: 210px;
             height: 50px;
-                        line-height: 50px;
-                        color: #C9A96E;
+            line-height: 50px;
+            color: #C9A96E;
             border: 1px solid #C9A96E;
             position: absolute;
             left: 50%;
             margin-left: -105px;
             bottom: -70px;
             z-index: 9999;
-                        border-radius: 5px;
+            border-radius: 5px;
           }
         }
       }

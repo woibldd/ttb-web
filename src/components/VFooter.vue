@@ -59,7 +59,7 @@
       <div class="footer_right">
         <div class="footer_ct">
           <p>{{$t('footer_services')}}</p>
-          <!-- <router-link :to="{name: 'trading'}">{{$t('trading')}}</router-link> -->
+          <router-link :to="{name: 'trading'}">{{$t('trading')}}</router-link>
           <!-- <a href="#" target="_blank">{{$t('footer_services')}}</a> -->
           <!-- <a href="#" target="_blank">{{$t('footer_help')}}</a> -->
           <a :href="requestLink" target="_blank">{{$t('footer_request')}}</a>
