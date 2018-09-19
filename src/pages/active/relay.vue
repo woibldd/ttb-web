@@ -97,6 +97,16 @@
                   <p class="scr_m">买</p>
                   <p class="scr_r">2018-09-26 13:24:46</p>
                 </li>
+                <li>
+                  <p class="scr_l">23.89001237</p>
+                  <p class="scr_m">买</p>
+                  <p class="scr_r">2018-09-26 13:24:46</p>
+                </li>
+                <li>
+                  <p class="scr_l">23.89001237</p>
+                  <p class="scr_m">买</p>
+                  <p class="scr_r">2018-09-26 13:24:46</p>
+                </li>
               </ul>
             </div>
           </div>
@@ -467,15 +477,13 @@ export default {
       }
     }
     .scr{
-      padding: 8px 20px 0 20px;
+      padding: 8px 20px 20px 20px;
       .scr-cen{
         width: 100%;
+        height: 270px;
         overflow: hidden;
         transition: all 0.5s;
         ul{
-          height: 270px;
-          margin-bottom: 20px;
-          overflow: hidden;
           li{
             height: 30px;
             line-height: 30px;
