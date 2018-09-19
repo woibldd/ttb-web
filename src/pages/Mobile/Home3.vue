@@ -328,7 +328,7 @@
         margin-bottom: 55px;
         .ind_bot_tit{
             color: #fff;
-            font-size: 24px;
+            font-size: 16px;
             text-align: center;
             height: 80px;
             margin-bottom: 55px;

@@ -59,7 +59,7 @@
       <div class="footer_right">
         <div class="footer_ct">
           <p>{{$t('footer_services')}}</p>
-          <router-link :to="{name: 'trading'}">{{$t('trading')}}</router-link>
+          <!-- <router-link :to="{name: 'trading'}">{{$t('trading')}}</router-link> -->
           <!-- <a href="#" target="_blank">{{$t('footer_services')}}</a> -->
           <!-- <a href="#" target="_blank">{{$t('footer_help')}}</a> -->
           <a :href="requestLink" target="_blank">{{$t('footer_request')}}</a>
@@ -95,7 +95,7 @@ export default {
     },
     requestLink () {
       if (this.state.userInfo && this.state.theme.themeName === 'default') {
-        return process.env.BASE_API + '/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
+        return process.env.BASE_API + 'zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
       } else {
         return this.state.theme.request[this.state.locale] || this.request.theme.help.en
       }

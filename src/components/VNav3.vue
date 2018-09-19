@@ -53,6 +53,9 @@
             {{ desentInfo }}
             <div class="dropdown-sub-menu">
                 <ul class="dropdown-list pt-10 pb-10">
+                  <li class="dropdown-item pl-24 pr-24 mobile">
+                    <router-link :to="{name: 'fund'}" class="link">{{$t('capital_manage')}}</router-link>
+                  </li>
                   <li class="dropdown-item pl-24 pr-24">
                     <router-link :to="{name: 'profile'}" class="link">{{$t('profile_personal_center')}}</router-link>
                   </li>
@@ -227,6 +230,9 @@ export default {
       .dropdown-list {
         .dropdown-item {
           height: 40px;
+          &.mobile {
+            display: none;
+          }
           .link {
             width: 100%;
             height: 100%;
@@ -341,7 +347,11 @@ export default {
         margin-left: 10px;
       }
     }
+    .mobile {
+      display: block !important;
+    }
   }
+  
 }
 .dark {
   background: $home-header-bgdark;
