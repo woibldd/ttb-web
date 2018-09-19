@@ -173,9 +173,26 @@ td.left {
 td.right {
   text-align: right;
 }
+.home-ball {
+  cursor: pointer;
+  position: absolute;
+  bottom: 400px;
+  width: 160px;
+  right: 60px;
+  border-radius: 30px;
+  background: #C9A96C;
+  padding: 20px 30px;
+  text-align: center;
+  color: #fff;
+  box-sizing: border-box;
+  font-size: 18px;
+}
 @media screen and (max-width: 768px) {
   body.router-account {
     min-width: auto;
+  }
+  .home-ball {
+    display: none;
   }
   // body.router-account footer {
   //   display: none;

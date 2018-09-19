@@ -29,6 +29,10 @@
       :fixed="fixed"
       v-show="showFooter"/>
     <v-notify-list/>
+    <div class="home-ball" @click="toNotice" v-if="zendeskWidget">
+      <icon name="serve"></icon>
+      <span>{{$t('contact_us')}}</span>
+    </div>
   </div>
 </template>
 
@@ -148,6 +152,9 @@ export default {
         await actions.updateSession()
       }
       this.keepSession()
+    },
+    toNotice () {
+      window.open(this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en)
     }
   },
   mounted () {

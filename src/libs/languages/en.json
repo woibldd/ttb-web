@@ -529,7 +529,7 @@
   "phone_regionid_m": "Regionid",
   "phone_number_m": "Phone",
   "region_label_m": "Region",
-  "profile_left_invite": "My Referral",
+  "profile_left_invite": "My Profle",
   "profile_left_invite_qrcode": "My Referral QR Code",
   "profile_left_invite_code": "My Referral Code",
   "profile_left_invite_link": "Sign up Referral link",
@@ -626,5 +626,6 @@
   "footer_bussness": "Business Cooperation",
   "app_download_sologan": "It covers multiple platforms including IOS, Android, Windows and Mac, and supports full-service function.",
   "app_download_ios": "Guide for IOS",
-  "my_balance_equal": "Available balance"
+  "my_balance_equal": "Available balance",
+  "contact_us": "Contact US"
 }
