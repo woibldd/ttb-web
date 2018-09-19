@@ -21,7 +21,7 @@ import 'swiper/dist/css/swiper.css'
       data:function() {
         return {
         swiperOption:{
-          autoplay: false,
+          autoplay: true,
           delay: 5000,
           pagination: {
             el: '.swiper-pagination',
