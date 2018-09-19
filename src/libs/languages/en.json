@@ -618,7 +618,9 @@
   "withdraw_need_verify": "Finish Followings to Withdraw",
   "bind_email":"Link to your E-mail.",
   "bind_phone":"Link to your phone",
-  "complete_verified":"Complete identity authentication."
+  "complete_verified":"Complete identity authentication.",
+  "withdraw_count_max_error": "Exceeding the maximum quantity",
+  "withdraw_count_min_error": "Less than minimum quantity"
 
 
 }

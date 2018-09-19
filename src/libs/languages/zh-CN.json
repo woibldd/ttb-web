@@ -553,5 +553,7 @@
   "withdraw_need_verify_note": "为保证您的资产安全，请完成：",
   "bind_email":"绑定邮箱",
   "bind_phone":"绑定手机",
-  "complete_verified":"完成身份认证"
+  "complete_verified":"完成身份认证",
+  "withdraw_count_max_error": "超过最大可提币数量",
+  "withdraw_count_min_error": "小于最低可提币数量"
 }
