@@ -62,6 +62,15 @@ import 'swiper/dist/css/swiper.css'
         height: 120px;
         margin: 0 auto;
       }
+      .swiper-slide {
+        width: 100%;
+        max-height: 400px;
+        overflow: hidden;
+      }
+      .swiper-image{
+        position: absolute;
+        width: 100%;
+      }
     }
     .swiper-box .swiper-container {
         width: 100%;
@@ -72,10 +81,10 @@ import 'swiper/dist/css/swiper.css'
         height: 100%;
     }
     .swiper-slide {
-            width: 100%;
-            height: 400px;
-            overflow: hidden;
-        }
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+    }
     
     .link {
       display: flex;
@@ -86,7 +95,6 @@ import 'swiper/dist/css/swiper.css'
         width: 1920px;
         left: 50%;
         margin-left: -960px;
-        // width: 100%;
     }
 </style>
 

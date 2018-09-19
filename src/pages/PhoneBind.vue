@@ -34,6 +34,7 @@
   import service from '@/modules/service'
   import VBtn from '@/components/VBtn'
   import {actions} from '@/modules/store'
+  import utils from '@/modules/utils'
   import countdownCodeButton from '@/components/common/countdown-code-button'
 
   export default {

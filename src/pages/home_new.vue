@@ -268,13 +268,14 @@
         }
       }
     }
-        .more {
+    .more {
       display: block;
       position: absolute;
       width: 15px;
       height: 15px;
-            right: 0;
+      right: 0;
       top: 23px;
+      
       i {
         display: block;
         position: absolute;
