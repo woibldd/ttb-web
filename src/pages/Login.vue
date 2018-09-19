@@ -244,7 +244,7 @@ export default {
       // 去二次验证
       // actions.setFa2(res.data)
       this.$router.push({
-        name: 'invite'
+        name: 'profile'
       })
     },
     fixPosition () {

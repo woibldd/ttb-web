@@ -11,7 +11,7 @@
       v-if="!showHistory"
       class="my-fund-content">
       <div class="fund-total">
-        <div class="total__label">{{ $t('withdraw_avlb') }}</div>
+        <div class="total__label">{{ $t('my_balance_equal') }}</div>
         <div class="total__coin">{{ total }} {{ unit }} </div>
       </div>
       <el-table

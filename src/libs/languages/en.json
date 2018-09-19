@@ -350,11 +350,11 @@
   "err_timeout": "Request overtime",
   "err_network": "Network error",
   "orderbook_group": "grouping",
-  "handicap_buyprice": "Price",
-  "handicap_sellprice": "Price",
-  "handicap_empty": "Handicap empty",
-  "handicap_chart": "Depth",
-  "handicap_avg_price": "Mid Market Price",
+  "orderbook_buyprice": "Price",
+  "orderbook_sellprice": "Price",
+  "orderbook_empty": "Orderbook empty",
+  "orderbook_chart": "Depth",
+  "orderbook_avg_price": "Mid Market Price",
   "last_price": "Last Price",
   "price_spread": "Spread",
   "deal_title": "Recent Trades",
@@ -401,8 +401,8 @@
   "avg_price": "Average",
   "nav_media": "Community",
   "footer_law": "Legal Statement",
-  "handicap_title": "Orderbook",
-  "handicap_group": "Grouping",
+  "orderbook_title": "Orderbook",
+  "orderbook_group": "Grouping",
   "order_sts_active": "Active",
   "order_sts_filled": "Executed",
   "order_sts_partial": "Partially filled",
@@ -539,7 +539,7 @@
   "invite_commission_text": "The Rebate program is coming soon",
   "profile_personal_center": "个人中心",
   "profile_personal_center": "Personal Center",
-  "profile_left_invite_perinfo": "My Referral",
+  "profile_left_invite_perinfo": "My Profle",
   "log_recording": "Login Records",
   "log_recording_prompt": "（The latest 10 records）",
   "invite_history_text": "Referral Record",
@@ -576,7 +576,7 @@
 
   "kyc_upload": "Upload",
   "kyc_name": "Name: Jack",
-  
+
   "kyc_valid_time": "Issue Date",
   "kyc_hand": "The photo of you holding ID Card",
   "kyc_notice1": "The above materials should be uploaded in JPG / JPEG / PNG format。Please ensure that the photos should be clear, full page and use gentle light and file size should not exceed 5M.",
@@ -626,6 +626,6 @@
   "footer_bussness": "Business Cooperation",
   "app_download_sologan": "It covers multiple platforms including IOS, Android, Windows and Mac, and supports full-service function.",
   "app_download_ios": "Guide for IOS",
-  "exchange_area": "Transactios Area"
-
+  "my_balance_equal": "Available balance",
+  "contact_us": "Contact US"
 }

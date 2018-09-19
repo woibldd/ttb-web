@@ -29,6 +29,10 @@
       :fixed="fixed"
       v-show="showFooter"/>
     <v-notify-list/>
+    <div class="home-ball" @click="toNotice" v-if="zendeskWidget">
+      <icon name="serve"></icon>
+      <span>{{$t('contact_us')}}</span>
+    </div>
   </div>
 </template>
 
@@ -56,7 +60,8 @@ export default {
     return {
       state,
       isMobile: utils.isMobile(),
-      fixed: false
+      fixed: false,
+      showContact: true
     }
   },
   computed: {
@@ -82,7 +87,7 @@ export default {
       if (!this.$route.name) {
         return false
       }
-      return !(utils.getRouteMeta(this.$route, 'zendeskWidget') === false)
+      return !(utils.getRouteMeta(this.$route, 'zendeskWidget') === false) && this.showContact
     },
     navClass () {
       if (!this.$route.name) {
@@ -148,6 +153,19 @@ export default {
         await actions.updateSession()
       }
       this.keepSession()
+    },
+    toNotice () {
+      let url = ''
+       if (this.state.userInfo && this.state.theme.themeName === 'default') {
+        url = process.env.BASE_API + 'zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
+      } else {
+        url = this.state.theme.request[this.state.locale] || this.request.theme.help.en
+      }
+      if (!url) {
+        showContact = false
+      } else {
+        window.open(url)
+      }
     }
   },
   mounted () {

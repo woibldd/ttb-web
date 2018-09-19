@@ -59,8 +59,19 @@ import 'swiper/dist/css/swiper.css'
     @media screen and (max-width: 768px) {
       .swiper-box{
         width: 100%;
-        height: 120px;
+        height: 90px !important;
         margin: 0 auto;
+      }
+      .swiper-slide {
+        width: 100%;
+        max-height: 90px;
+        overflow: hidden;
+      }
+      .swiper-image{
+        position: absolute;
+        width: 100% !important;
+        left: 0 !important;
+        margin-left: 0 !important;
       }
     }
     .swiper-box .swiper-container {
@@ -71,41 +82,21 @@ import 'swiper/dist/css/swiper.css'
         width: 100%;
         height: 100%;
     }
-    .swiper {
-        margin: 10px auto;
-        width: 100%;
-        height: 400px;
-        overflow: hidden;
-        .swiper-slide {
-            width: 100%;
-            height: 400px;
-            overflow: hidden;
-        }
-        .swiper-slide-active img {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            left: 50%;
-            margin-left: -960
-        }
-        img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            -webkit-transition: all 1s ease 0s;
-            -moz-transition: all 1s ease 0s;
-            -ms-transition: all 1s ease 0s;
-            -o-transition: all 1s ease 0s;
-            transition: all 1s ease 0s;
-        }
+    .swiper-slide {
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
     }
+    
     .link {
       display: flex;
       height: 100%;
     }
     .swiper-image{
         position: absolute;
-        width: 100%;
+        width: 1920px;
+        left: 50%;
+        margin-left: -960px;
     }
 </style>
 

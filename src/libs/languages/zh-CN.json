@@ -309,11 +309,11 @@
   "err_timeout": "请求超时",
   "err_network": "网络异常",
   "orderbook_group": "合并",
-  "handicap_buyprice": "买价",
-  "handicap_sellprice": "卖价",
-  "handicap_empty": "暂无订单",
-  "handicap_chart": "深度图",
-  "handicap_avg_price": "市场中间价",
+  "orderbook_buyprice": "买价",
+  "orderbook_sellprice": "卖价",
+  "orderbook_empty": "暂无订单",
+  "orderbook_chart": "深度图",
+  "orderbook_avg_price": "市场中间价",
   "last_price": "最新价",
   "price_spread": "差价",
   "deal_title": "最新交易",
@@ -360,8 +360,8 @@
   "avg_price": "成交均价",
   "nav_media": "社区",
   "footer_law": "法律声明",
-  "handicap_title": "挂单簿",
-  "handicap_group": "合并",
+  "orderbook_title": "挂单簿",
+  "orderbook_group": "合并",
   "order_sts_active": "生效",
   "order_sts_filled": "全部成交",
   "order_sts_partial": "部分成交",
@@ -505,7 +505,7 @@
   "kyc_name_err": "请填写姓名",
   "kyc_upload": "证件上传",
   "kyc_name": "姓名：张三",
-  
+
   "kyc_valid_time": "有效期限",
   "kyc_hand": "手持证件照",
   "kyc_notice1": "以上材料需用 JPG / JPEG / PNG 格式上传，并保证照片清晰、边角完整、亮度均匀，且大小不得超过5M",
@@ -527,7 +527,7 @@
   "active_rules": "活动规则",
   "active_countdown_text": "距获奖者产生剩余：",
   "active_countdown_unit": "秒",
-  "capital_record":"资产记录",
+  "capital_record":"财务记录",
   "capital_manage":"资产管理",
   "quota": "限额",
   "upgrade_quota": "提升限额",
@@ -558,5 +558,6 @@
   "footer_bussness": "商务合作",
   "app_download_sologan": "覆盖 IOS、Android、Windows、Mac 多个平台，支持全业务功能",
   "app_download_ios": "IOS 版下载教程",
-  "exchange_area": "交易区"
+  "my_balance_equal": "总资产折合",
+  "contact_us": "在线帮助"
 }

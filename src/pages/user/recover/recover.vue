@@ -376,6 +376,10 @@ export default {
     active (active) {
       this.atPw = active
     },
+    resetError () {
+      this.errmsg = ''
+      this.triggerValidate = false
+    },
     async getSmsCode () {
       if (this.sms.status === 1 || this.sms.loading || this.loading) {
         return false
@@ -425,6 +429,15 @@ export default {
           clearInterval(this.sms.timer)
         }
       }, 1000)
+    }
+  },
+  watch: {
+    params () {
+      this.resetError()
+    },
+    $route () {
+      this.resetError()
+      this.clearCountDown()
     }
   },
   async created () {
