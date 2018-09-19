@@ -34,7 +34,7 @@
           :label="status.title">
           <!-- <span>解锁/锁仓</span> -->
           <template slot-scope="scope">
-            <span :class="['state', hasComplated(scope.row)]">{{ hasComplated(scope.row.state) ? $t('done') : $t('pending') }}</span>
+            <span :class="['state', hasComplated(scope.row) && 'complete']">{{ hasComplated(scope.row) ? $t('done') : $t('pending') }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -91,7 +91,7 @@ export default {
       operate: {key: 'txid', title: this.$i18n.t('actions')},
       tableData: [],
       from: 'all',
-      type: 'deposit',
+      type: this.$route.params.from || 'deposit',
       page: 1,
       total: 0,
       unit: 'CNY',
@@ -101,7 +101,7 @@ export default {
   computed: {
     title () {
       let res
-      switch (this.from) {
+      switch (this.type) {
         case 'deposit':
           res = this.$t('deposit')
           break
@@ -116,8 +116,7 @@ export default {
     }
   },
   async created () {
-    this.from = this.$route.params.from
-    this.getFundHistory(this.from)
+    this.getFundHistory(this.type)
     this.getAccountBalanceList()
   },
   methods: {
