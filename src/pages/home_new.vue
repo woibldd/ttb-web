@@ -43,93 +43,26 @@
     <div class="ind_cen ind_tit">
       {{$t('exchange_area')}}
     </div>
-    {{sortedList}}
     <div class="ind_cen trade">
       <ul class="tit">
-        <li class="ta">币种</li>
-        <li class="tb">最新价</li>
-        <li class="tc">24H涨跌幅</li>
-        <li class="td">24H最低</li>
-        <li class="te">24H最高</li>
-        <li class="tf">24H成交量</li>
-        <li class="tg">操作</li>
+        <li class="ta">{{$t('currency')}}</li>
+        <li class="tb">{{$t('homechart_price')}}</li>
+        <li class="tc">{{$t('homechart_24h_chg')}}</li>
+        <li class="td">{{$t('homechart_24h_l')}}</li>
+        <li class="te">{{$t('homechart_24h_h')}}</li>
+        <li class="tf">{{$t('homechart_24h_v')}}</li>
+        <li class="tg">{{$t('actions')}}</li>
       </ul>
-      <ul class="tra_cen" v-for="pair in sortedList" :key="pair.name">
-        <li class="ta" v-if="pair.tick">{{pair.product}} <span>/ {{pair.currency}}</span></li>
-        <li class="tb">{{ pair.tick.current | fixed(pair.price_scale) }} <span>¥ 0.16</span></li>
+      <ul class="tra_cen" v-for="pair in sortedList" :key="pair.name" v-if="pair.tick">
+        <li class="ta">{{pair.product}} <span>/ {{pair.currency}}</span></li>
+        <li class="tb" v-if="pair.tick">{{ pair.tick.current | fixed(pair.price_scale) }} <span>¥ 0.16</span></li>
         <li class="tc" :class="{'theme-color-up': getDelta(pair.tick) > 0, 'theme-color-down': getDelta(pair.tick) < 0}">
           <p v-if="pair.tick">{{ (getDelta(pair.tick) > 0) ? '+' : ''}}{{ getDelta(pair.tick) }}%  {{pair.tick.increment_24h}}</p>
           <p v-else>...</p></li>
-        <li class="td">{{pair.tick.lowest_24h}}</li>
-        <li class="te">{{pair.tick.highest_24h}}</li>
-        <li class="tf">{{ pretty(pair.tick.volume_24h) }}<span> {{pair.product}}</span></li>
-        <li class="tg">
-          <icon name="handle-active"/>
-        </li>
-      </ul>
-      <ul class="tra_cen">
-        <li class="ta">ABL <span>/ BTC</span></li>
-        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-        <li class="tc">-6.09%-0.00000021</li>
-        <li class="td">0.00000304</li>
-        <li class="te">0.00000358</li>
-        <li class="tf">17,798,092<span>ABL</span></li>
-        <li class="tg">
-          <icon name="handle"/>
-        </li>
-      </ul>
-      <ul class="tra_cen">
-        <li class="ta">ABL <span>/ BTC</span></li>
-        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-        <li class="tc">-6.09%-0.00000021</li>
-        <li class="td">0.00000304</li>
-        <li class="te">0.00000358</li>
-        <li class="tf">17,798,092<span>ABL</span></li>
-        <li class="tg">
-          <icon name="handle"/>
-        </li>
-      </ul>
-      <ul class="tra_cen">
-        <li class="ta">ABL <span>/ BTC</span></li>
-        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-        <li class="tc">-6.09%-0.00000021</li>
-        <li class="td">0.00000304</li>
-        <li class="te">0.00000358</li>
-        <li class="tf">17,798,092<span>ABL</span></li>
-        <li class="tg">
-          <icon name="handle"/>
-        </li>
-      </ul>
-      <ul class="tra_cen">
-        <li class="ta">ABL <span>/ BTC</span></li>
-        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-        <li class="tc">-6.09%-0.00000021</li>
-        <li class="td">0.00000304</li>
-        <li class="te">0.00000358</li>
-        <li class="tf">17,798,092<span>ABL</span></li>
-        <li class="tg">
-          <icon name="handle"/>
-        </li>
-      </ul>
-      <ul class="tra_cen">
-        <li class="ta">ABL <span>/ BTC</span></li>
-        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-        <li class="tc">-6.09%-0.00000021</li>
-        <li class="td">0.00000304</li>
-        <li class="te">0.00000358</li>
-        <li class="tf">17,798,092<span>ABL</span></li>
-        <li class="tg">
-          <icon name="handle"/>
-        </li>
-      </ul>
-      <ul class="tra_cen">
-        <li class="ta">ABL <span>/ BTC</span></li>
-        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-        <li class="tc">-6.09%-0.00000021</li>
-        <li class="td">0.00000304</li>
-        <li class="te">0.00000358</li>
-        <li class="tf">17,798,092<span>ABL</span></li>
-        <li class="tg">
+        <li class="td" v-if="pair.tick">{{pair.tick.lowest_24h}}</li>
+        <li class="te" v-show="pair.tick">{{pair.tick.highest_24h}}</li>
+        <li class="tf" v-if="pair.tick">{{ pretty(pair.tick.volume_24h) }}<span> {{pair.product}}</span></li>
+        <li class="tg" @click="toExchange(pair.name)">
           <icon name="handle"/>
         </li>
       </ul>
@@ -217,6 +150,14 @@
         }
         return num.div(1e9).toFixed(0) + ' B'
       },
+      toExchange (pair) {
+        this.$router.push({
+          name: 'trading',
+          params: {
+            pair: pair
+          }
+        })
+      }
     },
     async created() {
       const res = await service.getBanners()
@@ -487,20 +428,13 @@
                     width: 17%;
         }
         &.tg {
-                    width: 7%;
-                }
-                a{
-                    width: 18px;
-                    height: 18px;
-                    display: block;
-                    margin: 23px auto;
-                    background-repeat: no-repeat;
-                    &.yellow{
-                        /*background-image: url(../assets/svg/jy.svg);*/
-                    }
-                    &.blue{
-                       /* background-image: url(../assets/svg/jy2.svg);*/
-                    }
+          width: 7%;
+          color: #5c89b0;
+          cursor: pointer;
+
+          &:hover {
+            color: #c9a96e;
+          }
         }
       }
       &:last-child {
