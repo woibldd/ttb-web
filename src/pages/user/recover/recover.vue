@@ -243,9 +243,15 @@ export default {
       },
       validateRules: {
         phone: {
-          errTips: '', // 空值，表示跳过校验
+          errTips: this.$t('bind_phone_err_format'),
           validateFunc: (num) => {
-            return !(/^1[34578]\d{9}$/.test(num))
+            return !(/\d+$/.test(num))
+          }
+        },
+        email: {
+          errTips: this.$t('err_invalid_email'),
+          validateFunc: (email) => {
+            return !(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(email))
           }
         },
         password: {
@@ -371,6 +377,10 @@ export default {
     active (active) {
       this.atPw = active
     },
+    resetError () {
+      this.errmsg = ''
+      this.triggerValidate = false
+    },
     async getSmsCode () {
       if (this.sms.status === 1 || this.sms.loading || this.loading) {
         return false
@@ -420,6 +430,15 @@ export default {
           clearInterval(this.sms.timer)
         }
       }, 1000)
+    }
+  },
+  watch: {
+    params () {
+      this.resetError()
+    },
+    $route () {
+      this.resetError()
+      this.clearCountDown()
     }
   },
   async created () {
