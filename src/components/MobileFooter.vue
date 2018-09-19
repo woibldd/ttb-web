@@ -5,8 +5,8 @@
         <router-link
           :to="{name:'home'}"
           class="footer_logo"/>
-        <p class="footer_ltxt">服务邮箱：service@ix.com</p>
-        <p class="footer_ltxt">商务合作：business@ix.com</p>
+        <p class="footer_ltxt">{{$t('footer_services_email')}}：service@ix.com</p>
+        <p class="footer_ltxt">{{$t('footer_bussness')}}：business@ix.com</p>
         <div class="contact-list">
           <a
             class="contact-item-wrapper mr-20 pointer"

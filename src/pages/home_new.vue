@@ -133,29 +133,29 @@
     </div>
     <div class="ind_cena">
       <div class="ind_bot">
-        <div class="ind_bot_tit">覆盖 IOS、Android、Windows、Mac 多个平台，支持全业务功能</div>
+        <div class="ind_bot_tit">{{$t('app_download_sologan')}}</div>
         <div class="ind_bot_cen">
           <div class="photo iphone"/>
-          <p>IOS 版下载教程
-            <span>即将上线，敬请期待</span>
+          <p>{{$t('app_download_ios')}}
+            <span>{{$t('coming_soon')}}</span>
           </p>
         </div>
         <div class="ind_bot_cen">
           <div class="photo android"/>
           <p>Android
-            <span>即将上线，敬请期待</span>
+            <span>{{$t('coming_soon')}}</span>
           </p>
         </div>
         <div class="ind_bot_cen">
           <div class="photo windows"/>
           <p>Windows
-            <span>即将上线，敬请期待</span>
+            <span>{{$t('coming_soon')}}</span>
           </p>
         </div>
         <div class="ind_bot_cen">
           <div class="photo mac"/>
           <p>Mac
-            <span>即将上线，敬请期待</span>
+            <span>{{$t('coming_soon')}}</span>
           </p>
         </div>
       </div>

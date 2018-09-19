@@ -222,9 +222,11 @@
   "bind_phone_confirm": "Authentification",
   "bind_phone_err_empty": "Please enter cellphone number",
   "bind_phone_err_format": "cellphone number format is not valid",
+  "hq_send": "Send code",
   "sms_send": "Send code",
   "sms_retry": "Resend",
   "phone_code": "SMS verification",
+  "email_code": "Code",
   "bind_phone_label_code": "Enter 2FA authentication code",
   "profile_kyc_tip": "In order to ensure the safety of our user's asset, you need to complete the authentication in order to withdraw more funds.",
   "profile_kyc_start": "Start",
@@ -497,8 +499,6 @@
   "invite_profit_tip": "Total transaction amount of invited users* transaction fee rate * bonus ratio",
   "invite_copy_link_success": "Successfully copied! Go to invite friends now!",
   "invite_remind_title": "Please",
-  "invite_remind_1": "In order to support our loyal users, the \"60% Super Rebate\" activity will retroactively take affect as of the 10th of May 2018. Users who invited friends to register from May 10th on will be added to this activity. ",
-  "invite_remind_2": "The commission and bonuses will retroactively be credited back to your account from August 1st 2018.",
   "balance": "Balance",
   "right_to_interpret": "IX Team reserves all rights of this event.",
   "fa2_google_code_mobile": "Google Authenticator Code",
@@ -616,11 +616,15 @@
   "footer_terms": "Terms",
   "user_guide": "User Guide",
   "withdraw_need_verify": "Finish Followings to Withdraw",
+  "withdraw_need_verify_note": "For the sake of your asset security,please complete:",
   "bind_email":"Link to your E-mail.",
   "bind_phone":"Link to your phone",
   "complete_verified":"Complete identity authentication.",
   "withdraw_count_max_error": "Exceeding the maximum quantity",
-  "withdraw_count_min_error": "Less than minimum quantity"
-
+  "withdraw_count_min_error": "Less than minimum quantity",
+  "footer_services_email": "Service E-mail",
+  "footer_bussness": "Business Cooperation",
+  "app_download_sologan": "It covers multiple platforms including IOS, Android, Windows and Mac, and supports full-service function.",
+  "app_download_ios": "Guide for IOS"
 
 }

@@ -58,10 +58,18 @@
         <div class="row__label">{{ $t('withdraw_amount') }}</div>
         <div class="row__value">
           <div class="withdraw-address border-1 pl-10">
+            <!-- <el-input 
+              class="coin-count"
+              type="number"
+              :min="Number(selectCoin.min_withdraw_amount)"
+              :max="Number(myCoinInfo.available)"
+              :step="Number(selectCoin.min_withdraw_amount)"
+              v-model="withdrawCount"
+            ></el-input> -->
             <input
               class="coin-count"
               type="number"
-              :step="Number(selectCoin.min_withdraw_amount)"
+              
               :min="Number(selectCoin.min_withdraw_amount)"
               :max="Number(myCoinInfo.available)"
               v-model="withdrawCount">
@@ -149,23 +157,23 @@
             <span class="row__label">1. {{ $t('bind_email') }}</span>
             <span
               class="row__status"
-              @click="clickVerifyRow(email_bound)"
-              :class="{'done': email_bound}">{{ email_bound ? $t('done') : $t('to_verify') }}</span>
+              @click="clickVerifyRow('EmailBind')"
+              :class="{'done': email_bound}">{{ email_bound ? $t('done') : $t('to_bind') }}</span>
           </div>
           <div class="layer__row mt-20">
             <span class="row__label">2. {{ $t('bind_phone') }}</span>
             <span
               class="row__status"
-              @click="clickVerifyRow(phone_bound)"
-              :class="{'done': phone_bound}">{{ phone_bound ? $t('done') : $t('to_verify') }}</span>
+              @click="clickVerifyRow('PhoneBind')"
+              :class="{'done': phone_bound}">{{ phone_bound ? $t('done') : $t('to_bind') }}</span>
 
           </div>
           <div class="layer__row mt-20">
             <span class="row__label">3. {{ $t('complete_verified') }}</span>
             <span
               class="row__status"
-              @click="clickVerifyRow(all_bound)"
-              :class="{'done': all_bound}">{{ all_bound ? $t('done') : $t('to_verify') }}</span>
+              @click="clickVerifyRow('Kyc')"
+              :class="{'done': all_bound}">{{ all_bound ? $t('done') : $t('to_bind') }}</span>
           </div>
         </div>
       </div>
@@ -239,10 +247,9 @@ export default {
   },
   methods: {
     clickVerifyRow (v) {
-      if (v) {
-        return
-      }
-      this.$router.push('/profile/kyc')
+      this.$router.push({
+        name: v
+      })
     },
     copy () {
       copyToClipboard(this.address)
@@ -255,11 +262,15 @@ export default {
       return service.getMyAddressList(param).then((res) => {
         if (res && res.data) {
           this.allAddress = res.data
+          if (this.allAddress.length > 0) {
+            this.selectAddress = this.allAddress[0].address
+          }
         }
       })
     },
     async changeCoinType (coin) {
       this.selectCoin = coin
+      this.selectAddress = ''
       this.getCoinAddress()
       this.updadeMyCoinInfo() // 更改币种后，重新获取一次自己的钱包状态
     },
@@ -330,6 +341,10 @@ export default {
       }
       if (this.$big(this.withdrawCount).gt(this.$big(this.myCoinInfo.available))) {
         utils.alert(this.$t('withdraw_count_max_error'))
+        return
+      }
+      if (!this.selectAddress) {
+        utils.alert(this.$t('add_address_error'))
         return
       }
 

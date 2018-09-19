@@ -346,7 +346,7 @@
   "pairnav_wave": "涨跌幅",
   "order_value": "金额",
   "avlb": "可用",
-  "coming_soon": "即将推出",
+  "coming_soon": "即将上线，敬请期待",
   "operate_buy": "买入 %{coin}",
   "operate_sell": "卖出 %{coin}",
   "orderbook_options": "挂单簿选项",
@@ -433,8 +433,6 @@
   "invite_profit_tip": "被邀请人交易总额*交易手续费率*红利比例",
   "invite_copy_link_success": "复制成功",
   "invite_remind_title": "特别提醒",
-  "invite_remind_1": "为了回馈老用户，“60%超高返利”活动有效期提前至2018年5月10日，即自2018年5月10日后邀请好友注册的用户均计入本次活动。\n",
-  "invite_remind_2": "本次活动的返佣及返利，将于2018年8月1日（UTC时间）开始计算，并返还至您的账户中。",
   "balance": "余额",
   "right_to_interpret": "本活动最终解释权归 IX.COM 所有。",
   "fa2_google_code_mobile": "谷歌验证码",
@@ -555,5 +553,9 @@
   "bind_phone":"绑定手机",
   "complete_verified":"完成身份认证",
   "withdraw_count_max_error": "超过最大可提币数量",
-  "withdraw_count_min_error": "小于最低可提币数量"
+  "withdraw_count_min_error": "小于最低可提币数量",
+  "footer_services_email": "服务邮箱",
+  "footer_bussness": "商务合作",
+  "app_download_sologan": "覆盖 IOS、Android、Windows、Mac 多个平台，支持全业务功能",
+  "app_download_ios": "IOS 版下载教程"
 }
