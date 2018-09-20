@@ -13,7 +13,7 @@
           <!-- <el-radio-button label="all">{{ $t('近期交易') }}</el-radio-button> -->
           <el-radio-button label="deposit">{{ $t('deposit') }}</el-radio-button>
           <el-radio-button label="withdraw">{{ $t('withdraw') }}</el-radio-button>
-          <el-radio-button label="reward"> {{ $t('fund_reward') }} </el-radio-button>
+          <!-- <el-radio-button label="reward"> {{ $t('fund_reward') }} </el-radio-button> -->
         </el-radio-group>
       </div>
       <el-table

@@ -217,6 +217,7 @@ export default {
       clearInterval(this.countdownTimer)
     },
     dealChanged (data) {
+      return
       if (data && data.length > 0) {
         // 第一次进入
         if (!this.showCountdown) {
