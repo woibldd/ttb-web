@@ -274,6 +274,11 @@ export const actions = {
       state.fiatMoneySymbol = utils.getFiatMoneySymbolByFiat(fiat)
     }
   },
+  setTitle (locale = 'en') {
+    const { exchangeNameConfig } = process.env.THEME_ENV
+    console.log(process.env.THEME_ENV);
+    document.title = exchangeNameConfig[locale]
+  },
   async setLocale (locale) {
     if (!locale) {
       // 初始化时
@@ -290,6 +295,8 @@ export const actions = {
     actions.setZendeskLocale(locale)
 
     actions.setFiat()
+
+    actions.setTitle(locale)
 
     if (!utils.$i18n.messages[locale]) {
       try {

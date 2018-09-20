@@ -29,9 +29,12 @@
       :fixed="fixed"
       v-show="showFooter"/>
     <v-notify-list/>
-    <div class="home-ball" @click="toNotice" v-if="zendeskWidget">
-      <icon name="serve"></icon>
-      <span>{{$t('contact_us')}}</span>
+    <div
+      class="home-ball"
+      @click="toNotice"
+      v-if="zendeskWidget">
+      <icon name="serve"/>
+      <span>{{ $t('contact_us') }}</span>
     </div>
   </div>
 </template>
@@ -53,7 +56,7 @@ export default {
     VNav2,
     VFooter,
     VNotifyList,
-    MobileFooter,
+    MobileFooter
     // VMobileNav
   },
   data () {
@@ -156,13 +159,13 @@ export default {
     },
     toNotice () {
       let url = ''
-       if (this.state.userInfo && this.state.theme.themeName === 'default') {
+      if (this.state.userInfo && this.state.theme.themeName === 'default') {
         url = process.env.BASE_API + 'zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
       } else {
         url = this.state.theme.request[this.state.locale] || this.request.theme.help.en
       }
       if (!url) {
-        showContact = false
+        this.showContact = false
       } else {
         window.open(url)
       }
