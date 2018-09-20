@@ -15,22 +15,7 @@
         :base="pair.currency" :value="pair.tick.current"/></span></li>
       <li class="tc" :class="{'theme-color-up': getDelta(pair.tick) > 0, 'theme-color-down': getDelta(pair.tick) < 0}">
         <p v-if="pair.tick">{{ (getDelta(pair.tick) > 0) ? '+' : ''}}{{ getDelta(pair.tick) }}%
-          {{pair.tick.increment_24h}}</p>
-        <p v-else>...</p></li>
-      <li class="td" v-if="pair.tick">{{pair.tick.lowest_24h | fixed(pair.price_scale)}}</li>
-      <li class="te" v-show="pair.tick">{{pair.tick.highest_24h | fixed(pair.price_scale)}}</li>
-      <li class="tf" v-if="pair.tick">{{ pretty(pair.tick.volume_24h) }}<span> {{pair.product}}</span></li>
-      <li class="tg" @click="toExchange(pair.name)">
-        <icon name="handle"/>
-      </li>
-    </ul>
-    <ul class="tra_cen" v-for="pair in sortedList" :key="pair.name" v-if="pair.tick">
-      <li class="ta">{{pair.product}} <span>/ {{pair.currency}}</span></li>
-      <li class="tb" v-if="pair.tick">{{ pair.tick.current | fixed(pair.price_scale) }} <span> ≈ {{ state.fiatMoneySymbol }} <fiat-money
-        :base="pair.currency" :value="pair.tick.current"/></span></li>
-      <li class="tc" :class="{'theme-color-up': getDelta(pair.tick) > 0, 'theme-color-down': getDelta(pair.tick) < 0}">
-        <p v-if="pair.tick">{{ (getDelta(pair.tick) > 0) ? '+' : ''}}{{ getDelta(pair.tick) }}%
-          {{pair.tick.increment_24h}}</p>
+        </p>
         <p v-else>...</p></li>
       <li class="td" v-if="pair.tick">{{pair.tick.lowest_24h | fixed(pair.price_scale)}}</li>
       <li class="te" v-show="pair.tick">{{pair.tick.highest_24h | fixed(pair.price_scale)}}</li>
