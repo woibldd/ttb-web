@@ -391,7 +391,7 @@ export default {
         this.buy_amount = this.$big(this.currency.available)
           .mul(ratio)
           .div(this.buy_price)
-          .round(this.pairInfo.amount_scale)
+          .round(this.pairInfo.amount_scale, this.C.ROUND_DOWN)
           .toString()
       } else {
         this.setInputStatus('buy_price', 'error')
@@ -400,7 +400,7 @@ export default {
     setSellVolumn (ratio) {
       this.sell_amount = this.$big(this.product.available)
         .mul(ratio)
-        .round(this.pairInfo.amount_scale)
+        .round(this.pairInfo.amount_scale, this.C.ROUND_DOWN)
         .toString()
     },
     setInputStatus (input, status) {

@@ -499,5 +499,7 @@
   "mine_progress": "Mining Progress",
   "mine_total": "Total Mining",
   "mine_mined": "Mined Amount",
-  "mine_remain": "Rest Mining Volume"
+  "mine_remain": "Rest Mining Volume",
+  "mine_my_total": "Personal Daily Total Amount of Mining",
+  "mine_my_remain": "My Rest Mining Volume"
 }

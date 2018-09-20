@@ -12,7 +12,7 @@
     <ul class="tra_cen" v-for="pair in sortedList" :key="pair.name" v-if="pair.tick">
       <li class="ta">{{pair.product}} <span>/ {{pair.currency}}</span></li>
       <li class="tb" v-if="pair.tick">{{ pair.tick.current | fixed(pair.price_scale) }} <span> ≈ {{ state.fiatMoneySymbol }} <fiat-money
-        base="USDT" :value="pair.tick.current"/></span></li>
+        :base="pair.currency" :value="pair.tick.current"/></span></li>
       <li class="tc" :class="{'theme-color-up': getDelta(pair.tick) > 0, 'theme-color-down': getDelta(pair.tick) < 0}">
         <p v-if="pair.tick">{{ (getDelta(pair.tick) > 0) ? '+' : ''}}{{ getDelta(pair.tick) }}%
           {{pair.tick.increment_24h}}</p>
@@ -70,8 +70,7 @@
 
 
 <style lang="scss" scoped>
-
-  .trade {
+  .ind_cen.trade {
     border: 1px solid #CBE6FD;
     ul {
       overflow: hidden;

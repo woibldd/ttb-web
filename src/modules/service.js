@@ -286,7 +286,7 @@ const service = {
   },
   getRate(currency = 'USDT') {
     // return getCache(name + 'FiatRate', () => request('currency/query', { name }), 1e4)
-    return getCache(name + 'FiatRate', () => request('account/currency/rates', { currency }), 1e4)
+    return getCache(currency + 'FiatRate', () => request('account/currency/rates', { currency }), 1e4)
   },
   getCoins() {
     return getCache('currencyList', () => request('account/currency/list'))
