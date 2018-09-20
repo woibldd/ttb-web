@@ -16,9 +16,18 @@
       </div>
       <div class="jd_btxt">
         <div class="row time_range">{{ mineSummary.range }}</div>
-        <div class="row col"><span class="text">{{ $t('mine_total') }} : </span>{{ mineSummary.max_amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
-        <div class="row col"><span class="text">{{ $t('mine_mined') }} : </span>{{ mineSummary.amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
-        <div class="row col"><span class="text">{{ $t('mine_remain') }} : </span>{{ mineSummary.remain | fixed(2) | thousand }}<em class="unit">IX</em></div>
+        <div class="row col left__col mr-20">
+          <p class="text mb-6">{{ $t('mine_total') }} : </p>
+          <p>{{ mineSummary.max_amount | fixed(2) | thousand }}<em class="unit">IX</em></p>
+        </div>
+        <div class="row col left__col mr-20">
+          <p class="text mb-6">{{ $t('mine_mined') }} : </p>
+          <p>{{ mineSummary.amount | fixed(2) | thousand }}<em class="unit">IX</em></p>
+        </div>
+        <div class="row col left__col">
+          <p class="text mb-6">{{ $t('mine_remain') }} : </p>
+          <p>{{ mineSummary.remain | fixed(2) | thousand }}<em class="unit">IX</em></p>
+        </div>
       </div>
       <div
         class="jd_btxt mt-30"
