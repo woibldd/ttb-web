@@ -32,11 +32,14 @@
           class="up-limit pointer">{{ $t("upgrade_quota") }}</router-link>
       </div>
       <div class="fund-item-other mb-14">
-          <span 
-            class="quick-btn mr-10"
-            :class="[selectCoin.currency === c.currency && 'selected']"
-           @click="quickSelectCoin(c)" v-for="(c, idx) in allCoins" :kyes="idx">{{c.currency}}</span>
-        </div>
+        <span
+          :class="['quick-btn mr-10', selectCoin.currency === c.currency && 'selected']"
+          @click="quickSelectCoin(c)"
+          v-for="(c, idx) in allCoins"
+          :kyes="idx">
+          {{ c.currency }}
+        </span>
+      </div>
       <div class="fund-item-row">
         <div class="row__label">{{ $t('withdraw_addr') }}</div>
         <div class="row__value">
@@ -64,7 +67,7 @@
         <div class="row__label">{{ $t('withdraw_amount') }}</div>
         <div class="row__value">
           <div class="withdraw-address border-1 pl-10">
-            <!-- <el-input 
+            <!-- <el-input
               class="coin-count"
               type="number"
               :min="Number(selectCoin.min_withdraw_amount)"
@@ -75,7 +78,7 @@
             <input
               class="coin-count"
               type="number"
-              
+
               :min="Number(selectCoin.min_withdraw_amount)"
               :max="Number(myCoinInfo.available)"
               v-model="withdrawCount">
@@ -307,7 +310,7 @@ export default {
         }
       })
     },
-    quickSelectCoin(coin) {
+    quickSelectCoin (coin) {
       this.selectCoin = coin
     },
     getAccountBalanceList () {

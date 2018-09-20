@@ -84,15 +84,9 @@ export default {
     },
     total () {
       let sum = this.$big(0)
-      if (state.locale === 'zh-CN') {
-        this.tableData.forEach(item => {
-          sum = sum.plus(this.$big(item.available).times(this.$big(item.rates.CNY)))
-        })
-      } else if (state.locale === 'en') {
-        this.tableData.forEach(item => {
-          sum = sum.plus(this.$big(item.available).times(this.$big(item.rates.USD)))
-        })
-      }
+      this.tableData.forEach(item => {
+        sum = sum.plus(this.getEstValue(item))
+      })
       return sum.toString()
     },
     unit () {

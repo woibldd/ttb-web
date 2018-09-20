@@ -52,7 +52,9 @@
           <template slot-scope="scope">
             <div :class="['state complete', unReleased(scope.row) && 'un-release']">
               {{ unReleased(scope.row) ? $t('waiting_for_release') : $t('done') }}
-              <icon name="question" v-if="unReleased(scope.row)" />
+              <icon
+                name="question"
+                v-if="unReleased(scope.row)" />
             </div>
             <span class="popover">
               {{ $t('mine_release_at', {time: formatTime(scope.row.release_time)}) }}
@@ -164,7 +166,7 @@ export default {
 
       return false
     },
-    unReleased(row) {
+    unReleased (row) {
       return this.type === 'reward' && row.state == 0// 0 待发放, 1 已完成
     },
     getFundHistory (from = 'deposit') {
@@ -192,7 +194,6 @@ export default {
       request(param).then(res => {
         if (res.data.length === 0) {
           this.loading = false
-          return
         } else {
           this.tableData = res.data
           this.loading = false
