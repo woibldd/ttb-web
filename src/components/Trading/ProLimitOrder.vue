@@ -404,6 +404,21 @@ export default {
       }
     },
     set ({price, amount, dontOveride, side}) {
+      if (!side) {
+        this.set({
+          price,
+          amount,
+          dontOveride,
+          side: 'BUY'
+        })
+        this.set({
+          price,
+          amount,
+          dontOveride,
+          side: 'SELL'
+        })
+        return
+      }
       if (price) {
         if (!dontOveride || (dontOveride && !this.getValues('price', side))) {
           this.setValues('price', 'BUY', this.$big(price).toString())
