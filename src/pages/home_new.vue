@@ -21,7 +21,66 @@
         </a>
       </div>
     </div>
-    <div class="ind_cen ind_jd">
+    <div class="ind_cen ind_jda">
+      <div class="jd_c jd_cl">
+        <div class="jd_box">
+          <div
+            class="jd_cen"
+            style="width:30%;">
+            <p>
+              <span>
+                <i>挖矿进度：</i>126631.45633211<i>IX</i>
+              </span>
+            </p>
+          </div>
+          <em>0 IX</em>
+          <em>33,333,333 IX</em>
+        </div>
+        <div class="jd-time">
+          0:00 - 8:00
+        </div>
+        <div class="jd-stat">
+          <p>挖矿总量：<span class="s_col">33,333,333 IX</span></p>
+          <p>已挖矿量：<span class="s_col">33,333,333 IX</span></p>
+          <p>剩余挖矿量：<span class="s_col">33,333,333 IX</span></p>
+        </div>
+        <div class="jd-yue">
+          <p>个人今日可挖矿总量：<span class="s_col">100000 IX</span></p>
+          <p>我的今日剩余挖矿总量：<span class="s_col">100000 IX</span></p>
+        </div>
+      </div>
+      <div class="jd_c jd_cm">
+        <div class="cm-tit">
+          昨日交易挖矿产出
+        </div>
+        <div class="cm-bt">
+          26993.00000000<span>IX</span>
+        </div>
+        <div class="cm-bst">
+          昨日邀请挖矿产出：
+        </div>
+        <div class="cm-bn">
+          19222.99002345 IX
+        </div>
+      </div>
+      <div class="jd_c jd_cr">
+        <p>
+          <span class="bt">今日待分配收入：</span>
+          <span class="yt">26993.00000000 BTC</span>
+        </p>
+        <p>
+          <span class="bt">昨日连续持有500.00000000 BTC分配：</span>
+          <span class="yt">3.00000000 BTC</span>
+        </p>
+        <p>
+          <span class="bt">昨日持BTC分配手续费：</span>
+          <span class="yt">993.00000000 BTC</span>
+        </p>
+      </div>
+    </div>
+    <div
+      class="ind_cen ind_jd"
+      style="">
       <div class="jd_box">
         <div
           class="jd_cen"
@@ -44,6 +103,10 @@
     </div>
     <div class="ind_cen ind_tit">
       交易区
+      <div class="ind_search">
+        <icon name="search" />
+        <input type="text">
+      </div>
     </div>
     <div class="ind_cen trade">
       <ul class="tit">
@@ -281,61 +344,61 @@ export default {
             }
         }
     }
+    .jd_box{
+      width: 100%;
+      background: #6D869C;
+      height: 4px;
+      border-radius: 4px;
+      position: relative;
+      em{
+        position: absolute;
+        color: #6D869C;
+        font-size: 14px;
+        line-height: 34px;
+        bottom: -34px;
+        &:nth-child(2){
+          left: 0;
+        }
+        &:nth-child(3){
+          right: 0;
+        }
+      }
+      .jd_cen{
+        height: 4px;
+        float: left;
+        position: relative;
+        border-radius: 4px;
+        background: #C9A96E;
+        p{
+          display: block;
+          border-left: 5px solid transparent;
+          border-right: 5px solid transparent;
+          border-top: 6px solid #C9A96E;
+          top: -20px;
+          right: -3px;
+          position: absolute;
+          span{
+            display:block;
+            width: 300px;
+            height: 33px;
+            position: absolute;
+            top: -33px;
+            text-align: center;
+            left: 50%;
+            margin-left: -150px;
+            color: #C9A96E;
+            i{
+              &:nth-child(1){color: #CBE6FD;}
+              &:nth-child(2){color: #6D869C}
+            }
+          }
+        }
+      }
+    }
     .ind_jd{
         border: 1px solid #CBE6FD;
         margin-bottom: 59px;
         padding: 75px 6% 50px 6%;
-        .jd_box{
-            width: 100%;
-            background: #6D869C;
-            height: 4px;
-            border-radius: 4px;
-            position: relative;
-            em{
-                position: absolute;
-                color: #6D869C;
-                font-size: 14px;
-                line-height: 34px;
-                bottom: -34px;
-                &:nth-child(2){
-                    left: 0;
-                }
-                &:nth-child(3){
-                    right: 0;
-                }
-            }
-            .jd_cen{
-                height: 4px;
-                float: left;
-                position: relative;
-                border-radius: 4px;
-                background: #C9A96E;
-                p{
-                    display: block;
-                    border-left: 5px solid transparent;
-                    border-right: 5px solid transparent;
-                    border-top: 6px solid #C9A96E;
-                    top: -20px;
-                    right: -3px;
-                    position: absolute;
-                    span{
-                        display:block;
-                        width: 300px;
-                        height: 33px;
-                        position: absolute;
-                        top: -33px;
-                        text-align: center;
-                        left: 50%;
-                        margin-left: -150px;
-                        color: #C9A96E;
-                        i{
-                            &:nth-child(1){color: #CBE6FD;}
-                            &:nth-child(2){color: #6D869C}
-                        }
-                    }
-                }
-            }
-        }
         .jd_btxt{
             font-size: 20px;
             overflow: hidden;
@@ -359,12 +422,104 @@ export default {
             }
         }
     }
+    .ind_jda{
+      height: 210px;
+      margin-bottom: 60px;
+      .jd_c{
+        border: 1px solid #CBE6FD;
+        height: 210px;
+        box-sizing: border-box;
+      }
+      .jd_cl{
+        float: left;
+        padding: 63px 30px 0 30px;
+        width: 47%;
+        .s_col{
+          color: #C9A96E;
+        }
+        .jd-time{
+          float: left;
+          width: 20%;
+          margin-top: 50px;
+          color: #C9A96E;
+          font-size: 18px;
+          font-weight: bold;
+        }
+        .jd-stat{
+          float: left;
+          width: 40%;
+          margin-top: 50px;
+          color: #CBE6FD;
+          font-size: 14px;
+          line-height: 24px;
+        }
+        .jd-yue{
+          float: left;
+          margin-top: 50px;
+          color: #CBE6FD;
+          font-size: 14px;
+          p{
+            margin-bottom: 30px;
+          }
+        }
+      }
+      .jd_cm{
+        width: 25%;
+        float: left;
+        margin-left: 1.5%;
+        color: #CBE6FD;
+        padding: 0 20px;
+        padding-top: 30px;
+        .cm-tit,.cm-bst{
+          color: #CBE6FD;
+          font-size: 14px;
+          line-height: 30px;
+        }
+        .cm-bt{
+          font-size: 30px;
+          margin-bottom: 24px;
+          color: #C9A96E;
+          span{
+            font-size: 20px;
+            padding-left: 10px;
+          }
+        }
+        .cm-bst{
+          color: #CBE6FD;
+        }
+        .cm-bn{
+          color: #C9A96E;
+          font-size: 16px;
+          line-height: 30px;
+        }
+      }
+      .jd_cr{
+        width: 25%;
+        float: right;
+        padding: 0 20px;
+        margin-left: 1.5%;
+        padding-top: 20px;
+       p{
+         margin-bottom: 13px;
+         span{
+           display: block;
+           line-height: 24px;
+           &.bt{
+             color: #CBE6FD;
+           }
+           &.yt{
+             color: #C9A96E;
+           }
+         }
+       }
+      }
+    }
     .ind_tit{
-        height: 35px;
-        line-height: 35px;
+        height: 40px;
+        line-height: 40px;
         font-size: 28px;
         color: #CBE6FD;
-        margin-bottom: 37px;
+        margin-bottom: 33px;
         text-indent: 25px;
         position: relative;
         &:before{
@@ -377,6 +532,32 @@ export default {
             left: 0;
             background: #CBE6FD;
             margin-top: -14px;
+        }
+        .ind_search{
+          float: right;
+          width: 200px;
+          height: 40px;
+          position: relative;
+          border-radius: 40px;
+          background: #272F38;
+          input{
+            width: 155px;
+            height: 40px;
+            border: none;
+            float: right;
+            background: none;
+            color: #CBE6FD;
+            font-size: 14px;
+            outline: medium;
+          }
+          svg{
+            width: 18px;
+            display: block;
+            height: 18px;
+            position: absolute;
+            top: 11px;
+            left: 18px;
+          }
         }
     }
     .trade{

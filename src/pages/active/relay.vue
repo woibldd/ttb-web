@@ -328,7 +328,7 @@ export default {
   .banner{
     width:100%;
     height: 520px;
-    background-image: url(../../../static/active/relay/banner.png);
+    background-image: url(/static/active/relay/banner.jpg);
     text-align: center;
     font-size: 48px;
     font-weight: bold;
@@ -420,7 +420,7 @@ export default {
         color: #2A94FF;
       }
       .scr-tit{
-        background-image: url(../../../static/active/relay/tit1.png);
+        background-image: url(/static/active/relay/tit1.png);
       }
       .join{
         background:linear-gradient(90deg,rgba(10,207,254,1) 0%,rgba(73,90,255,1) 100%);
@@ -431,7 +431,7 @@ export default {
       float: left;
       margin-left: 30px;
       .scr-tit{
-        background-image: url(../../../static/active/relay/tit2.png);
+        background-image: url(/static/active/relay/tit2.png);
       }
       .scr-txt{
         color: #FB9168;
@@ -447,7 +447,7 @@ export default {
         color: #8D5CDF;
       }
       .scr-tit{
-        background-image: url(../../../static/active/relay/tit3.png);
+        background-image: url(/static/active/relay/tit3.png);
       }
       .join{
         background:linear-gradient(90deg,rgba(102,126,234,1) 0%,rgba(178,58,212,1) 100%);
@@ -575,7 +575,7 @@ export default {
       .ex_b{
         width: 24px;
         height: 24px;
-        background: url(../../../static/active/relay/yuan.png);
+        background: url(/static/active/relay/yuan.png);
         position: absolute;
         top: -6px;
         text-align: center;
@@ -624,7 +624,7 @@ export default {
   .fbg{
     width: 100%;
     height: 264px;
-    background-image: url(../../../static/active/relay/footer.png);
+    background-image: url(/static/active/relay/footer.png);
     background-position: center center;
   }
 </style>
