@@ -26,6 +26,7 @@ const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pa
 const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
 const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/ProfileSafety')
 const relay = () => import(/* webpackChunkName: "relay" */ '@/pages/active/relay')
+const creation = () => import(/* webpackChunkName: "creation" */ '@/pages/active/creation')
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
 
 async function beforeEach (to, from, next) {
@@ -81,6 +82,10 @@ let router = new Router({
         auth: false
       },
       component: isMobile ? MobileHome : Home
+    }, {
+      path: '/active/creation',
+      name: 'creation',
+      component: creation
     }, {
       path: '/active/relay',
       name: 'relay',
