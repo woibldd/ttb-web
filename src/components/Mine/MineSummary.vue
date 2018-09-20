@@ -1,7 +1,6 @@
 <template>
   <div class="mine-summary-container">
-    <div
-      class="ind_cen ind_jd">
+    <div class="ind_cen ind_jd">
       <div class="jd_box">
         <div
           class="jd_cen"
