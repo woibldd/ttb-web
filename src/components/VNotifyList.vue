@@ -17,7 +17,6 @@
 import _ from 'lodash'
 import utils from '@/modules/utils'
 import VNotify from './VNotify'
-
 export default {
   name: 'VNotifyList',
   components: {

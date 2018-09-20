@@ -1,15 +1,24 @@
 <template>
-    <div class="ix-input-container">
-        <span v-show="showLabel" class="ix-input__label">{{label}}</span>
-        <input class="ix-input__text" :class="{'ix-input__error': showErrorTips}"
-            v-on="inputListeners"
-            :autocomplete="autocomplete"
-            :value="value"
-            :placeholder="placeholder"
-            :type="type">
-        <span v-show="showErrorTips" class="ix-input__err-tips">{{errTips}}</span>
-        <span v-if="canDelete && value && value.length" @click="clearText"  class="ix-quick-delete"></span>
-    </div>
+  <div class="ix-input-container">
+    <span
+      v-show="showLabel"
+      class="ix-input__label">{{ label }}</span>
+    <input
+      class="ix-input__text"
+      :class="{'ix-input__error': showErrorTips}"
+      v-on="inputListeners"
+      :autocomplete="autocomplete"
+      :value="value"
+      :placeholder="placeholder"
+      :type="type">
+    <span
+      v-show="showErrorTips"
+      class="ix-input__err-tips">{{ errTips }}</span>
+    <span
+      v-if="canDelete && value && value.length"
+      @click="clearText"
+      class="ix-quick-delete"/>
+  </div>
 </template>
 <script>
 import './ix-input.scss'

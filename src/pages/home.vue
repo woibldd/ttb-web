@@ -1,24 +1,33 @@
 <template>
-<div class="page-home">
+  <div class="page-home">
     <div class="header">
-      <v-nav2 isHome="true" :notice="notice" @hide="notice = null"></v-nav2>
+      <v-nav2
+        is-home="true"
+        :notice="notice"
+        @hide="notice = null"/>
     </div>
     <div class="ind_cen">
-        <div class="ix_logo"></div>
-        <b class="ind_txt">{{$t("slogan")}}</b>
-        <p class="count_down">
-            <span class="desc">{{$t('count_down_start')}}</span>
-            <i class="cli"></i>
-            <count-down :terminal="date"></count-down>
-            <i class="cri"></i>
-            
-        </p>
-        <div class="ind_but">
-            <a :href="'/docs/The+Declaration+of+IX'+pdfSubfix+'.pdf'" target="_blank" class="xy">{{$t("declaration")}}</a>
-            <a :href="'/docs/IX+WhitePaper'+pdfSubfix+'.pdf'" target="_blank" class="wb">{{$t("whitepagger")}}</a>
-        </div>
+      <div class="ix_logo"/>
+      <b class="ind_txt">{{ $t("slogan") }}</b>
+      <p class="count_down">
+        <span class="desc">{{ $t('count_down_start') }}</span>
+        <i class="cli"/>
+        <count-down :terminal="date"/>
+        <i class="cri"/>
+
+      </p>
+      <div class="ind_but">
+        <a
+          :href="'/docs/The+Declaration+of+IX'+pdfSubfix+'.pdf'"
+          target="_blank"
+          class="xy">{{ $t("declaration") }}</a>
+        <a
+          :href="'/docs/IX+WhitePaper'+pdfSubfix+'.pdf'"
+          target="_blank"
+          class="wb">{{ $t("whitepagger") }}</a>
+      </div>
     </div>
-</div>
+  </div>
 </template>
 <script>
 import VNav2 from '@/components/VNav2.vue'
@@ -59,6 +68,7 @@ export default {
 </script>
 <style scoped lang="scss">
     @import "../styles/vars";
+    .page-home{background:url(../assets/index_bg.jpg) center center;background-size:120% 100%;width:100%;height:100%;min-height:600px;}
     @import "../styles/mixins";
     .page-home{background:url(../assets/index_bg.jpg) center center;background-size:120% 100%;width:100%;position:absolute;height:100%;min-height:600px;}
     .ind_cen{text-align:center;width:100%;height:auto;

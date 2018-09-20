@@ -1,102 +1,99 @@
 <template>
-  <div style="page-invite-wrap">
-    <profile-left/>
-    <div class="user-center-right">
-      <div class="profile-container">
-        <div class="title-box">{{ $t('profile_left_invite') }}</div>
-        <div class="invite-wrap">
-          <div class="share_style login_show">
-            <div class="post_btn share_div"><p>{{ $t('profile_left_invite_qrcode') }}</p>
-              <div
-                class="btn_select"
-                @click="showQrcode">{{ $t('profile_left_invite_qrcode') }}</div>
-              <div
-                class="qrcode"
-                v-show="show">
-                <canvas
-                  class="qr-img"
-                  ref="qr"/>
-              </div>
+  <div class="user-center-right">
+    <div class="profile-container">
+      <div class="title-box">{{ $t('profile_left_invite') }}</div>
+      <div class="invite-wrap">
+        <div class="share_style login_show">
+          <div class="post_btn share_div"><p>{{ $t('profile_left_invite_qrcode') }}</p>
+            <div
+              class="btn_select"
+              @click="showQrcode">{{ $t('profile_left_invite_qrcode') }}</div>
+            <div
+              class="qrcode"
+              v-show="show">
+              <canvas
+                class="qr-img"
+                ref="qr"/>
             </div>
-            <div class="user_url share_div"><p>{{ $t("profile_left_invite_link") }}</p>
-              <div class="share_code_wrap">
-                <p class="url">
-                  <input
-                    type="text"
-                    class="share_link"
-                    v-model="inviteLink">
-                </p>
-                <a
-                  @click.prevent="copy('inviteLink')"
-                  class="copy_url copy_btn copy_url_2"
-                  data-clipboard-target=".share_link">{{ $t('profile_left_copy_invite_link') }}</a>
-              </div>
+          </div>
+          <div class="user_url share_div"><p>{{ $t("profile_left_invite_link") }}</p>
+            <div class="share_code_wrap">
+              <p class="url">
+                <input
+                  type="text"
+                  class="share_link"
+                  v-model="inviteLink">
+              </p>
+              <a
+                @click.prevent="copy('inviteLink')"
+                class="copy_url copy_btn copy_url_2"
+                data-clipboard-target=".share_link">{{ $t('profile_left_copy_invite_link') }}</a>
             </div>
-            <div class="user_code share_div"><p>{{ $t('profile_left_invite_code') }}</p>
-              <div class="share_code_wrap"><p class="share_code">{{ inviteCode }}</p>
-                <a
-                  @click.prevent="copy('inviteCode')"
-                  class="copy_url copy_btn copy_url_1"
-                  data-clipboard-target=".share_code">{{ $t('profile_left_copy_invite_code') }}</a>
+          </div>
+          <div class="user_code share_div"><p>{{ $t('profile_left_invite_code') }}</p>
+            <div class="share_code_wrap"><p class="share_code">{{ inviteCode }}</p>
+              <a
+                @click.prevent="copy('inviteCode')"
+                class="copy_url copy_btn copy_url_1"
+                data-clipboard-target=".share_code">{{ $t('profile_left_copy_invite_code') }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="invite-container">
+        <!-- 邀请记录 -->
+        <div class="invite-wrap left">
+          <div class="title-box">{{ $t('invite_history_text') }}</div>
+          <div class="invite-list">
+            <div class="th pd-15">
+              <div class="td">{{ $t('invited') }}</div>
+              <div class="td">{{ $t('time') }}</div>
+            </div>
+            <div class="tbody pb-20">
+              <div
+                class="empty"
+                v-if="list.length === 0">
+                <span
+                  class="text"
+                  @click="goInvite"
+                  v-html="$t('invite_reward_text')"/>
+              </div>
+              <div
+                v-else
+                class="row pt-20 pl-20 pr-20"
+                v-for="item in list"
+                :key="item.id">
+                <div class="td">{{ item.phone || item.email }}</div>
+                <div class="td">{{ item.register_time | ts2date }}</div>
               </div>
             </div>
           </div>
         </div>
-        <div class="invite-container">
-          <!-- 邀请记录 -->
-          <div class="invite-wrap left">
-            <div class="title-box">{{ $t('invite_history_text') }}</div>
-            <div class="invite-list ">
-              <div class="th pd-15">
-                <div class="td">{{ $t('invited') }}</div>
-                <div class="td">{{ $t('time') }}</div>
-              </div>
-              <div class="tbody">
-                <div
-                  class="empty"
-                  v-if="list.length === 0">
-                  <span
-                    class="text"
-                    @click="goInvite"
-                    v-html="$t('invite_reward_text')"/>
-                </div>
-                <div
-                  v-else
-                  class="row pt-20 pl-20 pr-20"
-                  v-for="item in list"
-                  :key="item.id">
-                  <div class="td">{{ item.phone || item.email }}</div>
-                  <div class="td">{{ item.register_time | ts2date }}</div>
-                </div>
-              </div>
+        <!-- 返佣记录 -->
+        <div class="invite-wrap right">
+          <div class="title-box">{{ $t('commission_history_text') }}</div>
+          <div class="invite-list ">
+            <div class="th pd-15">
+              <div class="td">{{ $t('username') }}</div>
+              <div class="td">{{ $t('commission_amount') }}</div>
+              <div class="td">{{ $t('time') }}</div>
             </div>
-          </div>
-          <!-- 返佣记录 -->
-          <div class="invite-wrap right">
-            <div class="title-box">{{ $t('commission_history_text') }}</div>
-            <div class="invite-list ">
-              <div class="th pd-15">
-                <div class="td">{{ $t('username') }}</div>
-                <div class="td">{{ $t('commission_amount') }}</div>
-                <div class="td">{{ $t('time') }}</div>
+            <div class="tbody pb-20">
+              <div
+                class="empty"
+                v-if="clist.length === 0">
+                <span
+                  class="text"
+                  v-html="$t('invite_commission_text')"/>
               </div>
-              <div class="tbody">
-                <div
-                  class="empty"
-                  v-if="clist.length === 0">
-                  <span
-                    class="text"
-                    v-html="$t('invite_commission_text')"/>
-                </div>
-                <div
-                  v-else
-                  class="row pt-20 pl-20 pr-20"
-                  v-for="item in clist"
-                  :key="item.id">
-                  <div class="td">{{ item.phone || item.email }}</div>
-                  <div class="td">{{ item.register_time | ts2date }}</div>
-                  <div class="td">{{ item.register_time | ts2date }}</div>
-                </div>
+              <div
+                v-else
+                class="row pt-20 pl-20 pr-20"
+                v-for="item in clist"
+                :key="item.id">
+                <div class="td">{{ item.phone || item.email }}</div>
+                <div class="td">{{ item.register_time | ts2date }}</div>
+                <div class="td">{{ item.register_time | ts2date }}</div>
               </div>
             </div>
           </div>
@@ -107,7 +104,6 @@
 </template>
 
 <script>
-import ProfileLeft from './ProfileLeft'
 import copyToClipboard from 'copy-to-clipboard'
 import service from '@/modules/service'
 import utils from '@/modules/utils'
@@ -117,7 +113,6 @@ const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
 export default {
   name: 'Invite',
   components: {
-    ProfileLeft
   },
   data () {
     return {

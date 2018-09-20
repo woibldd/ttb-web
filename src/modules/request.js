@@ -8,6 +8,11 @@ const api = axios.create({
   timeout: 30000, // request timeout
   withCredentials: true
 })
+export const quotaApi = axios.create({
+  baseURL: _env_ || process.env.BASE_API, // api的base_url
+  timeout: 30000, // request timeout
+  withCredentials: false
+})
 
 // request interceptor
 api.interceptors.request.use(config => {

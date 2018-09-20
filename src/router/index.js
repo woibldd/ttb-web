@@ -11,7 +11,7 @@ Vue.use(Router)
 const isMobile = utils.isMobile()
 
 const Home = () => import(/* webpackChunkName: "home" */ '@/pages/home.vue')
-const home_new = () => import(/* webpackChunkName: "home_new" */ '@/pages/home_new.vue')
+const home_new = () => import(/* webpackChunkName: "home" */ '@/pages/home_new.vue')
 const MobileHome = () => import(/* webpackChunkName: "mobilehome" */ '@/pages/Mobile/home.vue')
 // const Test1 = () => import(/* webpackChunkName: "Test1" */ '@/pages/test1.vue')
 const Test2 = () => import(/* webpackChunkName: "Test2" */ '@/pages/test2.vue')
@@ -19,6 +19,10 @@ const Trading = () => import(/* webpackChunkName: "Trading" */ '@/pages/Trading'
 const Profile = () => import(/* webpackChunkName: "Profile" */ '@/pages/Profile')
 const Invite = () => import(/* webpackChunkName: "Invite" */ '@/pages/Invite')
 const ProfileInfo = () => import(/* webpackChunkName: "ProfileInfo" */ '@/pages/ProfileInfo')
+const Kyc = () => import(/* webpackChunkName: "Kyc" */ '@/pages/Profile/Kyc/index')
+const Kyc1 = () => import(/* webpackChunkName: "SafeVerified" */ '@/pages/Profile/Kyc/kyc1')
+const Kyc2 = () => import(/* webpackChunkName: "Authen" */ '@/pages/Profile/Kyc/kyc2')
+const Kyc3 = () => import(/* webpackChunkName: "Authen" */ '@/pages/Profile/Kyc/kyc3')
 const Register = () => import(/* webpackChunkName: "Register" */ '@/pages/Register')
 const Recover = () => import(/* webpackChunkName: "Register" */ '@/pages/user/recover/recover.vue')
 const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
@@ -27,7 +31,21 @@ const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
 const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/ProfileSafety')
 const relay = () => import(/* webpackChunkName: "relay" */ '@/pages/active/relay')
 const creation = () => import(/* webpackChunkName: "creation" */ '@/pages/active/creation')
+const PhoneBind = () => import(/* webpackChunkName: "PhoneBind" */ '@/pages/PhoneBind')
+const SecuritySummary = () => import(/* webpackChunkName: "SecuritySummary" */ '@/pages/SecuritySummary')
+const eBind = () => import(/* webpackChunkName: "EmailBind" */ '@/pages/eBind')
+const ModPwd = () => import(/* webpackChunkName: "ModPwd" */ '@/pages/ModPwd')
+const GoogleTitle = () => import(/* webpackChunkName: "GoogleTitle" */ '@/pages/GoogleTitle')
+// const ProfileAuthen = () => import(/* webpackChunkName: "ProfileAuthen" */ '@/pages/ProfileAuthen')
+
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
+
+const Fund = () => import(/* webpackChunkName: "Fund" */ '@/pages/Fund')
+const Withdraw = () => import(/* webpackChunkName: "FundWithdraw" */ '@/components/Fund/Withdraw/Withdraw.vue')
+const Deposit = () => import(/* webpackChunkName: "FundDeposit" */ '@/components/Fund/deposit/deposit.vue')
+const MyFund = () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/My/my.vue')
+const FundAddress = () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/Address/address.vue')
+const FundHistory = () => import(/* webpackChunkName: "FundHistory" */ '@/components/Fund/history/history.vue')
 
 async function beforeEach (to, from, next) {
   state.loading = true
@@ -126,8 +144,8 @@ let router = new Router({
         mobileNav: isMobile
       },
       redirect: 'profile/invite',
-      // redirect: 'profile/ProfileInfo',
-      // redirect: 'profile/ProfileSafety',
+      //redirect: 'profile/ProfileInfo',
+      //redirect: 'profile/ProfileSafety',
 
       // component: (isMobile && process.env.MODE === 'beta') ? MobileProfile : Profile
       component: Profile,
@@ -136,14 +154,57 @@ let router = new Router({
         name: 'invite',
         component: Invite
       }, {
-        path: 'ProfileInfo',
+        path: 'info',
         name: 'ProfileInfo',
         component: ProfileInfo
       }, {
-        path: 'ProfileSafety',
+        path: 'security',
         name: 'ProfileSafety',
-        component: ProfileSafety
-      }]
+        component: ProfileSafety,
+        redirect: 'security/summary',
+        children: [{
+          path: 'summary',
+          name: 'Safety',
+          component: SecuritySummary
+        }, {
+          path: 'phone',
+          name: 'PhoneBind',
+          component: PhoneBind
+        }, {
+          path: 'email',
+          name: 'EmailBind',
+          component: eBind
+        }, {
+          path: 'change_password',
+          name: 'ModPwd',
+          component: ModPwd
+        }, {
+          path: '2fa',
+          name: 'GoogleBind',
+          component: GoogleTitle
+        }]
+      }, {
+        path: 'kyc',
+        name: 'Kyc',
+        component: Kyc,
+        redirect: 'kyc/kyc_step1',
+        children: [
+          {
+            path: 'kyc_step1',
+            name: 'KycStep1',
+            component: Kyc1
+          }, {
+            path: 'kyc_step2',
+            name: 'KycStep2',
+            component: Kyc2
+          }, {
+            path: 'kyc_step3',
+            name: 'KycStep3',
+            component: Kyc3
+          }
+        ]
+      }
+      ]
     }, {
       path: '/user',
       name: 'account',
@@ -177,7 +238,49 @@ let router = new Router({
         path: 'recover',
         name: 'recover',
         component: Recover,
+        redirect: 'recover/email',
         props: true
+      }, {
+        path: 'recover/:by?',
+        name: 'recoverBy',
+        component: Recover,
+        props: true
+      }]
+    }, {
+      path: '/fund',
+      name: 'fund',
+      component: Fund,
+      redirect: { name: 'my' },
+      meta: {
+        auth: false,
+        footer: true,
+        nav: true,
+        class: 'dark'
+      },
+      children: [{
+        path: 'withdraw/:currency?',
+        name: 'withdraw',
+        component: Withdraw
+      }, {
+        path: 'deposit/:currency?',
+        name: 'deposit',
+        component: Deposit
+      }, {
+        path: 'my',
+        name: 'my',
+        component: MyFund,
+        children: [
+          {
+            path: 'history/:from',
+            name: 'history',
+            alias: 'deposit/:currency/history',
+            component: FundHistory
+          }
+        ]
+      }, {
+        path: 'address',
+        name: 'address',
+        component: FundAddress
       }]
     }
 

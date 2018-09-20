@@ -79,11 +79,13 @@ export default {
       if (!res.code) {
         this.loading = false
         this.update(res.data)
+        this.$eh.$emit('deal:update', res.data)
       }
       this.socket = ws.create(`deal/${this.state.pro.pair}`)
       this.socket.$on('message', (data) => {
         this.loading = false
         this.update(data)
+        this.$eh.$emit('deal:update', data)
       })
     },
     getStyle (deal, index) {
@@ -106,6 +108,7 @@ export default {
       // }
     },
     update (data) {
+      if (!data) return
       const dealList = _.map(data, item => {
         return {
           time: item.time,

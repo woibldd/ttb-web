@@ -345,8 +345,6 @@ const utils = {
     // the library js should assign the [key] to window object
     const map = {
       'key': 'static/keymaster.js',
-      'jQuery': 'static/jquery.min.js',
-      'GoldenLayout': 'static/golden-layout/goldenlayout.min.js',
       'TradingView': 'static/charting_library/charting_library.min.js'
     }
     return map[key] ? utils.getScript(map[key], key) : null
@@ -451,6 +449,38 @@ const utils = {
       dataArr[i] = data
     }
     return dataArr
+  },
+  getBlockChainUrl (tx, type, chainName) {
+    let url = ''
+    switch (chainName) {
+      case 'BTC':
+        url = `https://blockchain.info/${type}/${tx}`
+        break
+      case 'ETH':
+        url = `https://etherscan.io/${type}/${tx}`
+        break
+      case 'EOS':
+        type = type === 'address' ? 'account' : type
+        url = `https://eosflare.io/${type}/${tx}`
+        break
+      case 'OMNI':
+        url = `https://omniexplorer.info/${type}/${tx}`
+        break
+      case 'PAI':
+        url = `https://paichain.info/${type}/${tx}`
+        break
+      case 'BCH':
+        url = `http://www.qukuai.com/search/zh-CN/BCH/${tx}/1`
+        break
+      case 'LTC':
+        url = `http://www.qukuai.com/search/zh-CN/LTC/${tx}/1`
+        break
+      case 'EOSC':
+        type = type === 'address' ? 'account_detail_view' : 'transaction_detail_view'
+        url = `https://explorer.eosforce.io/#/${type}/${tx}`
+        break
+    }
+    return url
   }
 }
 

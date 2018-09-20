@@ -13,7 +13,14 @@
         </div>
         <div class="ix-col ix-col-2">
           <div class="ix-grid ix-grid-tv" ref="gridTradingView">
+            <!-- <div class="grid-title">
+              {{state.pro.pairTick}}
+            </div> -->
             <TradingView ref="TradingView"></TradingView>
+            <div class="active-box" v-if="showCountdown">
+              <p class="text">{{$t('active_countdown_text')}}<span class="seconds">{{countdownText}}</span>{{$t('active_countdown_unit')}}</p>
+              <a class="link" href="http://baidu.com" target="_blank">{{$t('active_rules')}}</a>
+            </div>
           </div>
         </div>
         <div class="ix-col ix-col-3">
@@ -30,11 +37,11 @@
           <Operate ref="Operate"></Operate>
         </div>
       </div>
-      <div class="ix-row">
+      <!-- <div class="ix-row">
         <div class="ix-grid ix-grid-intro" ref="gridIntro">
           <intro></intro>
         </div>
-      </div>
+      </div> -->
     </div>
     <order-deal-popover />
   </div>
@@ -74,7 +81,11 @@ export default {
   data () {
     return {
       state,
-      comps: []
+      comps: [],
+      showCountdown: false,
+      countdownTimer: 0,
+      countdownText: '20',
+      lastDealTime: 0
     }
   },
   watch: {
@@ -111,13 +122,10 @@ export default {
       if (this.state.pro.currency && this.state.pro.currency.currency_name !== currency) {
         this.state.pro.currency = null
       }
-      const [resc, resp] = await Promise.all([
-        service.getBalanceInfo({currency_name: currency}),
-        service.getBalanceInfo({currency_name: product})
-      ])
-      if (!resc.code && !resp.code && product === this.state.pro.product_name && currency === this.state.pro.currency_name) {
-        this.state.pro.product = resp.data
-        this.state.pro.currency = resc.data
+      let [resc, resp] = await service.getBalanceByPair(currency, product)
+      if (resc && resp && product === this.state.pro.product_name && currency === this.state.pro.currency_name) {
+        this.state.pro.product = resp
+        this.state.pro.currency = resc
       }
     },
     setGridContainers () {
@@ -134,10 +142,47 @@ export default {
     },
     async onresize () {
       const layoutHeight = window.innerHeight
-      // this.$refs.wrap.style.height = layoutHeight + 'px'
       this.setGridContainers()
-      // $(this.$refs.layout).height($(window).height() - 50)
-      // this.layout.updateSize()
+    },
+    startTimer () {
+      this.stopTimer()
+      this.countdownTimer = setInterval(this.doCountdown, 1000)
+    },
+    doCountdown () {
+        let num = parseInt(this.countdownText, 10)
+        num--
+        if (num < 0) {
+          this.stopTimer()
+          return
+        }
+        this.countdownText = num
+    },
+    stopTimer () {
+      clearInterval(this.countdownTimer)
+    },
+    dealChanged (data) {
+      if (data && data.length > 0) {
+        // 第一次进入
+        if (!this.showCountdown) {
+          this.lastDealTime = data[data.length - 1].time
+          let tick = new Date().getTime() - this.lastDealTime
+          if (tick < 0) {
+            tick = 0
+          } else if (tick > 20000) {
+            tick = 20000
+          }
+          this.countdownText = Math.floor(tick / 1000) + ''
+          this.showCountdown = true
+          this.startTimer()
+        } else {
+          if (data[data.length - 1].time > this.lastDealTime) {
+            // 有行情变化
+            this.countdownText = '20'
+            this.lastDealTime = data[data.length - 1].time
+            this.startTimer()
+          }
+        }
+      }
     }
   },
   async created () {
@@ -169,6 +214,7 @@ export default {
 
       this.$eh.$on('protrade:balance:refresh', this.refreshBalance)
       this.$eh.$on('app:resize', this.onresize)
+      this.$eh.$on('deal:update', this.dealChanged)
       document.querySelector('.page-loading').classList.remove('show')
     })
   },
@@ -182,6 +228,7 @@ export default {
   destroyed () {
     this.$eh.$off('app:resize', this.onresize)
     this.$eh.$off('protrade:balance:refresh', this.refreshBalance)
+    this.$eh.$off('deal:update', this.dealChanged)
     this.state.pro.layout = false
     document.querySelector('.page-loading').classList.remove('show')
     document.documentElement.setAttribute('style', '')
@@ -272,6 +319,50 @@ export default {
 .ix-grid-intro {
   flex: 1;
   height: 300px;
+}
+.grid-title {
+  height: 56px;
+}
+.active-box {
+  position: absolute;
+  top: 13px;
+  right: 25px;
+  width: 260px;
+  height: 68px;
+  background: url("../assets/active_bg.png") no-repeat;
+  background-size: 100%;
+
+  .text {
+    font-size: 14px;
+    line-height: 14px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(250,248,239,1);
+    margin-top: 12px;
+    margin-left: 14px;
+
+    .seconds {
+      font-size: 20px;
+      color: #EEDC50;
+      width: 22px;
+      text-align: right;
+      margin-right: 5px;
+      display: inline-block;
+    }
+  }
+  .link  {
+    position: absolute;
+    bottom: 12px;
+    left: 14px;
+    padding: 1px 3px;
+    box-sizing: content-box;
+    background: #FFD100;
+    border-radius: 3px;
+    color: #2064A2;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
 }
 @media screen and (max-width: 1000px) {
   .ix-col-1 {
