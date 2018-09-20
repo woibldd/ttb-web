@@ -1,28 +1,32 @@
 <template>
-  <div
-    class="ind_cen ind_jd mine-summary-container">
-    <div class="jd_box">
-      <div
-        class="jd_cen"
-        :style="{ 'width': mineSummary.rate+'%'}">
-        <p class="line">
-          <span class="cursor_arrow">
-            <i class="text">{{ $t('mine_progress') }} : </i>{{ mineSummary.rate | fixed(2) }}<i class="unit">%</i>
-          </span>
-        </p>
+  <div class="mine-summary-container">
+    <div
+      class="ind_cen ind_jd">
+      <div class="jd_box">
+        <div
+          class="jd_cen"
+          :style="{ 'width': mineSummary.rate+'%'}">
+          <p class="line">
+            <span class="cursor_arrow">
+              <i class="text">{{ $t('mine_progress') }} : </i>{{ mineSummary.rate | fixed(2) }}<i class="unit">%</i>
+            </span>
+          </p>
+        </div>
+        <em class="cursor cursor_left">0 IX</em>
+        <em class="cursor cursor_right">{{ mineSummary.max_amount | fixed(2) | thousand }} IX</em>
       </div>
-      <em class="cursor cursor_left">0 IX</em>
-      <em class="cursor cursor_right">{{ mineSummary.max_amount | fixed(2) | thousand }} IX</em>
-    </div>
-    <div class="jd_btxt">
-      <div class="row time_range">{{ mineSummary.range }}</div>
-      <div class="row col"><span class="text">{{ $t('mine_total') }} : </span>{{ mineSummary.max_amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
-      <div class="row col"><span class="text">{{ $t('mine_mined') }} : </span>{{ mineSummary.amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
-      <div class="row col"><span class="text">{{ $t('mine_remain') }} : </span>{{ mineSummary.remain | fixed(2) | thousand }}<em class="unit">IX</em></div>
-    </div>
-    <div class="jd_btxt mt-30" v-if="hasMineMy">
-      <div class="row personal"><span class="text">{{ $t('mine_my_total') }} : </span>{{ mineMy.max_amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
-      <div class="row personal ml-30"><span class="text">{{ $t('mine_my_remain') }} : </span>{{ ( mineMy.max_amount - mineMy.amount ) | fixed(2) | thousand }}<em class="unit">IX</em></div>
+      <div class="jd_btxt">
+        <div class="row time_range">{{ mineSummary.range }}</div>
+        <div class="row col"><span class="text">{{ $t('mine_total') }} : </span>{{ mineSummary.max_amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
+        <div class="row col"><span class="text">{{ $t('mine_mined') }} : </span>{{ mineSummary.amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
+        <div class="row col"><span class="text">{{ $t('mine_remain') }} : </span>{{ mineSummary.remain | fixed(2) | thousand }}<em class="unit">IX</em></div>
+      </div>
+      <div
+        class="jd_btxt mt-30"
+        v-if="hasMineMy">
+        <div class="row personal"><span class="text">{{ $t('mine_my_total') }} : </span>{{ mineMy.max_amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
+        <div class="row personal ml-30"><span class="text">{{ $t('mine_my_remain') }} : </span>{{ ( mineMy.max_amount - mineMy.amount ) | fixed(2) | thousand }}<em class="unit">IX</em></div>
+      </div>
     </div>
   </div>
 </template>
