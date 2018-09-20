@@ -2,7 +2,7 @@
   <div
     class="nav_box"
     :class="{dark: dark}">
-    <div class="c_box">
+    <div class="ind_cen">
       <router-link
         :to="{name:'home'}"
         class="nav_logo"/>
@@ -171,6 +171,11 @@ export default {
 @import "../styles/mixins";
 
 .nav_box {
+  .ind_cen {
+    position: relative;
+    margin: 0 60px;
+    min-width: 1200px;
+  }
   width: 100%;
   height: 80px;
   line-height: 42px;

@@ -7,6 +7,10 @@ module.exports = {
   themeName: 'default',
   companyName: 'IX.COM',
   exchangeName: 'IX | 自由人的自由联合',
+  exchangeNameConfig: {
+    'zh-CN': 'IX | 自由人的自由联合',
+    'en': 'IX | FREE MAN FREE UNITING'
+  },
   keywords: 'IX,比特币,比特币交易,以太坊,区块链,共识,自由联合,数字资产交易所',
   description: 'IX致力于打造一家回归区块链精神的数字资产交易所，公开、公正、透明',
   shortcut: '',
