@@ -41,7 +41,6 @@
               class="my-fund-operate">{{ $t('asset_trading') }}</router-link>
           </template>
         </el-table-column>
-
       </el-table>
     </div>
     <router-view/>
@@ -102,14 +101,20 @@ export default {
       return service.getAccountBalanceList().then(res => {
         this.tableData = (res.data || []).map(item => {
           item.locking = this.$big(item.ordering || 0).plus(this.$big(item.withdrawing || 0)).toString()
-          item.amount = this.$big(item.locking).plus(this.$big(item.available)).toString()
+          item.amount = this.$big(item.locking).plus(this.$big(item.available)).round(8, this.C.ROUND_DOWN).toString()
           item.estValue = this.getEstValue(item)
+          item.available = this.$big(item.available).round(8, this.C.ROUND_DOWN).toString()
           return item
         })
       })
     },
     getEstValue (item) {
-      return this.$big(item.amount).times(this.$big(item.rates[this.unit])).round(4, this.C.ROUND_DOWN).toString()
+      let res = this.$big(item.amount).times(this.$big(item.rates[this.unit]))
+      let num = 4
+      if (this.unit === 'USD') {
+        num = 8
+      }
+      return res.round(num, this.C.ROUND_DOWN).toString()
     }
   }
 }
