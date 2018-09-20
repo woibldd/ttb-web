@@ -496,8 +496,8 @@
   "my_balance_equal": "Available balance",
   "contact_us": "Help",
   "exchange_area": "Transactios Area",
-  "mine_progress": "挖矿进度",
-  "mine_total": "挖矿总量",
-  "mine_mined": "已挖矿量",
-  "mine_remain": "剩余挖矿量"
+  "mine_progress": "Mining Progress",
+  "mine_total": "Total Mining",
+  "mine_mined": "Mined Amount",
+  "mine_remain": "Rest Mining Volume"
 }
