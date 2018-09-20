@@ -15,7 +15,7 @@
         :base="pair.currency" :value="pair.tick.current"/></span></li>
       <li class="tc" :class="{'theme-color-up': getDelta(pair.tick) > 0, 'theme-color-down': getDelta(pair.tick) < 0}">
         <p v-if="pair.tick">{{ (getDelta(pair.tick) > 0) ? '+' : ''}}{{ getDelta(pair.tick) }}%
-          {{pair.tick.increment_24h}}</p>
+        </p>
         <p v-else>...</p></li>
       <li class="td" v-if="pair.tick">{{pair.tick.lowest_24h | fixed(pair.price_scale)}}</li>
       <li class="te" v-show="pair.tick">{{pair.tick.highest_24h | fixed(pair.price_scale)}}</li>
@@ -98,22 +98,25 @@
           color: #6C869C;
         }
         &.ta {
-          width: 8%;
+          width: 13%;
         }
         &.tb {
-          width: 17%;
+          width: 22%;
+          text-align: left;
+          text-indent: 35px;
         }
         &.tc {
-          width: 17%;
+          text-align: left;
+          width: 14%;
         }
         &.td {
-          width: 17%;
+          width: 14%;
         }
         &.te {
-          width: 17%;
+          width: 14%;
         }
         &.tf {
-          width: 17%;
+          width: 16%;
         }
         &.tg {
           width: 7%;
