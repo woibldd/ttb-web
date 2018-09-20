@@ -57,7 +57,7 @@ export default {
       }
     },
     loop () {
-      this.timer = setInterval(this.fetch, 3e3)
+      this.timer = setInterval(this.fetch, 3e4)
     },
     fixData (summary) {
       summary.rate = this.$big(summary.amount).div(summary.max_amount).times(100).toString()
