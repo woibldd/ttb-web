@@ -28,14 +28,11 @@ export default {
       if (this.search && !this.showList.length) {
         return 'pairnav_no_matched'
       }
-      if (this.tab === '*' && !this.showList.length) {
-        return 'pairnav_no_fav'
-      }
       return ''
     },
     group () {
       return _.sortBy(_.uniq(_.map(this.state.pro.pairList, 'currency_name')), name => {
-        return (_.indexOf(['USDT', 'BTC', 'ETH', 'EOS', 'PAI'], name) + 1) || 100
+        return (_.indexOf(['USDT', 'BTC', 'ETH', 'EOS'], name) + 1) || 100
       })
     },
     pairList () {

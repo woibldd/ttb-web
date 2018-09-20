@@ -3,8 +3,10 @@
     <div class="ix-header">
       <span class="pull-left">{{ $t('deal_title') }} ({{ state.pro.pair | pairfix }})</span>
     </div>
-    <div class="ix-pannel-body" ref="body">
-      <table class="table table-pro-deal">
+    <div
+      class="ix-pannel-body"
+      ref="body">
+      <table class="table table-ix-deal">
         <tbody v-if="state.pro.pairInfo">
           <tr>
             <th class="th-dir">{{ $t('deal_th_side') }}</th>
@@ -12,9 +14,15 @@
             <th class="right">{{ $t('deal_th_amount') }}</th>
             <th>{{ $t('deal_th_time') }}</th>
           </tr>
-          <tr v-for="(deal, index) in dealList" :key="index" :class="[deal.side]" :style="getStyle(deal, index)">
+          <tr
+            v-for="(deal, index) in dealList"
+            :key="index"
+            :class="[deal.side, 'twinkling']"
+            :style="getStyle(deal, index)">
             <td class="td-dir">
-              <span class="side-text ibt" :class="['side-' + deal.side, sideColor(deal.side)]">
+              <span
+                class="side-text ibt"
+                :class="['side-' + deal.side, sideColor(deal.side)]">
                 {{ deal.side === 'buy' ? $t('order_side_buy') : $t('order_side_buy') }}
               </span>
             </td>
@@ -24,26 +32,31 @@
           </tr>
         </tbody>
       </table>
-      <div class="no-data" v-show="!loading && !err && !dealList.length">{{ $t('deal_empty') }}</div>
-      <div class="err" v-show="!loading && err && !dealList.length">{{ err }}</div>
-      <div class="mask" :class="{show: loading}">
-        <v-loading></v-loading>
+      <div
+        class="no-data"
+        v-show="!loading && !err && !dealList.length">{{ $t('deal_empty') }}</div>
+      <div
+        class="err"
+        v-show="!loading && err && !dealList.length">{{ err }}</div>
+      <div
+        class="mask"
+        :class="{show: loading}">
+        <v-loading/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import {state, local} from '@/modules/store'
-import ws from '@/modules/ws'
-import _ from 'lodash'
-import config from '@/libs/config'
-import service from '@/modules/service'
-import theme from '@/modules/dynamic-theme'
-import {pairfix} from '@/mixins/index'
+import { state, local } from '@/modules/store';
+import ws from '@/modules/ws';
+import _ from 'lodash';
+import config from '@/libs/config';
+import service from '@/modules/service';
+import { pairfix } from '@/mixins/index';
 
 export default {
-  name: 'deal',
+  name: 'Deal',
   mixins: [pairfix],
   data () {
     return {
@@ -57,10 +70,12 @@ export default {
   },
   methods: {
     sideColor (side) {
-      return side.toUpperCase() === 'BUY' ? 'theme-color-up' : 'theme-color-down'
+      return side.toUpperCase() === 'BUY'
+        ? 'theme-color-up'
+        : 'theme-color-down';
     },
     clear () {
-      this.err = ''
+      this.err = '';
       this.dealList = []
     },
     async sub () {
@@ -69,7 +84,10 @@ export default {
         this.socket.$destroy()
       }
       const pair = this.state.pro.pair
-      const res = await service.getQuoteDeal({pair: this.state.pro.pair, size: 20})
+      const res = await service.getQuoteDeal({
+        pair: this.state.pro.pair,
+        size: 20
+      })
       if (pair !== this.state.pro.pair) {
         return false
       }
@@ -79,7 +97,7 @@ export default {
         this.$eh.$emit('deal:update', res.data)
       }
       this.socket = ws.create(`deal/${this.state.pro.pair}`)
-      this.socket.$on('message', (data) => {
+      this.socket.$on('message', data => {
         this.loading = false
         this.update(data)
         this.$eh.$emit('deal:update', data)
@@ -100,8 +118,8 @@ export default {
       // const bg = deal.side === 'buy' ? up : down
       // const alpha = Math.pow(2, Math.log10(this.dealList.length * deal.amount / this.volume)) * 0.18 + 0.05
       // return {
-        // backgroundColor: theme.getRgba(bg, alpha),
-        // borderBottom: `1px inset ${theme.getRgba(bg, 0.03)}`
+      // backgroundColor: theme.getRgba(bg, alpha),
+      // borderBottom: `1px inset ${theme.getRgba(bg, 0.03)}`
       // }
     },
     update (data) {
@@ -114,8 +132,11 @@ export default {
           side: item.side.toLowerCase()
         }
       })
-      if (dealList.length && this.dealList.length &&
-        dealList[0].time <= this.dealList[0].time) {
+      if (
+        dealList.length &&
+        this.dealList.length &&
+        dealList[0].time <= this.dealList[0].time
+      ) {
         // 因断线重连，导致重新获取了全量数据
         this.dealList = dealList
       } else {
@@ -123,11 +144,13 @@ export default {
       }
     },
     setTitle () {
-      document.title = (this.price ? this.price : '...') + ` (${this.state.pro.pair.replace('_', '/')}) ${config.title}`
+      document.title =
+        (this.price ? this.price : '...') +
+        ` (${this.state.pro.pair.replace('_', '/')}) ${config.title}`
     },
     onresize: _.debounce(function () {
-      this.$refs.body.style.width = this.container.width + 'px'
-      this.$refs.body.style.height = this.container.height - 32 + 'px'
+      this.$refs.body.style.width = this.container.width + 'px';
+      this.$refs.body.style.height = this.container.height - 32 + 'px';
     }, 100),
     layout () {
       this.onresize()
@@ -136,8 +159,11 @@ export default {
   },
   computed: {
     volume () {
-      return _.reduce(this.dealList, (sum, newItem) =>
-        sum.plus(newItem.amount), this.$big(0))
+      return _.reduce(
+        this.dealList,
+        (sum, newItem) => sum.plus(newItem.amount),
+        this.$big(0)
+      )
     },
     price () {
       return this.dealList.length ? this.dealList[0].price : 0
@@ -206,14 +232,15 @@ export default {
 .no-data {
   line-height: 70px;
   text-align: center;
-  color: rgba(200,200,200, .2);
+  color: rgba(200, 200, 200, 0.2);
 }
 .table {
   font-size: 12px;
   width: 100%;
-  color: rgba(255,255,255, .8);
+  color: rgba(255, 255, 255, 0.8);
 }
-td, th {
+td,
+th {
   white-space: nowrap;
   text-align: center;
   padding: 0 5px;
@@ -235,10 +262,10 @@ th {
   color: $down-price;
 }
 .side-icon.side-buy {
-  transform: scale(.9) rotate(90deg);
+  transform: scale(0.9) rotate(90deg);
 }
 .side-icon.side-sell {
-  transform: scale(.9) rotate(-90deg);
+  transform: scale(0.9) rotate(-90deg);
 }
 .td-dir,
 .th-dir {
@@ -247,4 +274,21 @@ th {
 .fiat {
   padding-right: 12px;
 }
+// .twinkling {
+//   animation:twinkling 2.1s 1 ease-in-out;
+// }
+// @keyframes twinkling {
+//   0% {
+//     background: #788694;
+//     filter:alpha(opacity=20);
+//   }
+//   50% {
+//     background: #333;
+//     filter:alpha(opacity=50);
+//   }
+//   100% {
+//     opacity:0.2;
+//     filter:alpha(opacity=20);
+//   }
+// }
 </style>

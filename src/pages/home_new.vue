@@ -19,118 +19,11 @@
         </a>
       </div>
     </div>
-    <div class="ind_cen ind_jd" v-if="false">
-      <div class="jd_box">
-        <div
-          class="jd_cen"
-          style="width:30%;">
-          <p>
-            <span>
-              <i>挖矿进度：</i>126631.45633211<i>IX</i>
-            </span>
-          </p>
-        </div>
-        <em>0 IX</em>
-        <em>33,333,333 IX</em>
-      </div>
-      <div class="jd_btxt">
-        <div>0:00 - 8:00</div>
-        <div><span>挖矿总量：</span>,333,333<em>IX</em></div>
-        <div><span>已挖矿量：</span>126631.45633211<em>IX</em></div>
-        <div><span>剩余挖矿量：</span>28,669,123.23441975<em>IX</em></div>
-      </div>
+    <mine-summary></mine-summary>
+    <div class="ind_cen ind_tit">
+      {{$t('exchange_area')}}
     </div>
-    <div class="ind_cen ind_tit" v-if="false">
-      交易区
-    </div>
-    <div class="ind_cen trade" v-if="false">
-      <ul class="tit">
-        <li class="ta">币种</li>
-        <li class="tb">最新价</li>
-        <li class="tc">24H涨跌幅</li>
-        <li class="td">24H最低</li>
-        <li class="te">24H最高</li>
-        <li class="tf">24H成交量</li>
-        <li class="tg">操作</li>
-      </ul>
-      <ul class="tra_cen">
-        <li class="ta">ABL <span>/ BTC</span></li>
-        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-        <li class="tc">-6.09%-0.00000021</li>
-        <li class="td">0.00000304</li>
-        <li class="te">0.00000358</li>
-        <li class="tf">17,798,092<span>ABL</span></li>
-        <li class="tg">
-          <icon name="handle-active"/>
-        </li>
-      </ul>
-      <ul class="tra_cen">
-        <li class="ta">ABL <span>/ BTC</span></li>
-        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-        <li class="tc">-6.09%-0.00000021</li>
-        <li class="td">0.00000304</li>
-        <li class="te">0.00000358</li>
-        <li class="tf">17,798,092<span>ABL</span></li>
-        <li class="tg">
-          <icon name="handle"/>
-        </li>
-      </ul>
-      <ul class="tra_cen">
-        <li class="ta">ABL <span>/ BTC</span></li>
-        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-        <li class="tc">-6.09%-0.00000021</li>
-        <li class="td">0.00000304</li>
-        <li class="te">0.00000358</li>
-        <li class="tf">17,798,092<span>ABL</span></li>
-        <li class="tg">
-          <icon name="handle"/>
-        </li>
-      </ul>
-      <ul class="tra_cen">
-        <li class="ta">ABL <span>/ BTC</span></li>
-        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-        <li class="tc">-6.09%-0.00000021</li>
-        <li class="td">0.00000304</li>
-        <li class="te">0.00000358</li>
-        <li class="tf">17,798,092<span>ABL</span></li>
-        <li class="tg">
-          <icon name="handle"/>
-        </li>
-      </ul>
-      <ul class="tra_cen">
-        <li class="ta">ABL <span>/ BTC</span></li>
-        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-        <li class="tc">-6.09%-0.00000021</li>
-        <li class="td">0.00000304</li>
-        <li class="te">0.00000358</li>
-        <li class="tf">17,798,092<span>ABL</span></li>
-        <li class="tg">
-          <icon name="handle"/>
-        </li>
-      </ul>
-      <ul class="tra_cen">
-        <li class="ta">ABL <span>/ BTC</span></li>
-        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-        <li class="tc">-6.09%-0.00000021</li>
-        <li class="td">0.00000304</li>
-        <li class="te">0.00000358</li>
-        <li class="tf">17,798,092<span>ABL</span></li>
-        <li class="tg">
-          <icon name="handle"/>
-        </li>
-      </ul>
-      <ul class="tra_cen">
-        <li class="ta">ABL <span>/ BTC</span></li>
-        <li class="tb">0.00000324 <span>¥ 0.16</span></li>
-        <li class="tc">-6.09%-0.00000021</li>
-        <li class="td">0.00000304</li>
-        <li class="te">0.00000358</li>
-        <li class="tf">17,798,092<span>ABL</span></li>
-        <li class="tg">
-          <icon name="handle"/>
-        </li>
-      </ul>
-    </div>
+    <pair-table></pair-table>
     <div class="ind_cena">
       <div class="ind_bot">
         <div class="ind_bot_tit">{{$t('app_download_sologan')}}</div>
@@ -167,14 +60,15 @@
 <script>
   import Slider from '@/components/slider.vue'
   import service from '@/modules/service'
-  import { state } from '@/modules/store'
+  import {state} from '@/modules/store'
+  import PairTable from '@/components/Trading/PairTable'
+  import MineSummary from '@/components/Mine/MineSummary'
 
   export default {
     data: function () {
       return {
         state,
-        banners: [
-        ],
+        banners: [],
         notices: [],
         swiperOption: {
           direction: 'horizontal',
@@ -186,10 +80,12 @@
       }
     },
     components: {
-      kSlider: Slider
+      kSlider: Slider,
+      PairTable,
+      MineSummary
     },
     computed: {
-      announcementLink () {
+      announcementLink() {
         return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
       }
     },
@@ -212,23 +108,24 @@
   @import "../styles/vars";
   @import "../styles/mixins";
 
-  .page-home {
-    background: linear-gradient(0deg, #222931, #3A444F);
-  }
-
   .ind_cen {
     position: relative;
     margin: 0 60px;
   }
-  .ind_cena{
-      position: relative;
-      padding: 0 60px;
-      background-position: top center;
-      background-repeat: no-repeat;
-      background-image: url(../assets/bg_qx.png);
-      padding-top: 35px;
-      margin-top: 80px;
-      padding-bottom: 110px;
+
+  .page-home {
+    background: linear-gradient(0deg, #222931, #3A444F);
+  }
+
+  .ind_cena {
+    position: relative;
+    padding: 0 60px;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-image: url(../assets/bg_qx.png);
+    padding-top: 35px;
+    margin-top: 80px;
+    padding-bottom: 110px;
   }
 
   .ind_txt {
@@ -243,13 +140,13 @@
       float: left;
       width: 33.33%;
       color: #6C869C;
-            .text_link {
-              color: #6C869C;
-              &:hover {
-                color: $primary;
-              }
-            }
-            &:nth-child(2) {
+      .text_link {
+        color: #6C869C;
+        &:hover {
+          color: $primary;
+        }
+      }
+      &:nth-child(2) {
         position: relative;
         &:before, &:after {
           content: "";
@@ -275,127 +172,36 @@
       height: 15px;
       right: 0;
       top: 23px;
-      
+
       i {
         display: block;
         position: absolute;
         height: 3px;
         right: 0;
         background: #6C869C;
-                width: 70%;
-                top: 6px;
-            }
-            &::before,&::after{
-                position: absolute;
-                display: block;
-                position: absolute;
-                height: 3px;
-                right: 0;
-                background: #6C869C;
-                content: "";
-            }
-            &::before{
-                width: 100%;
-                top: 0;
-            }
-            &::after{
-                width: 40%;
-                bottom: 0;
+        width: 70%;
+        top: 6px;
       }
-    }
-  }
-
-  .ind_jd {
-    border: 1px solid #CBE6FD;
-    margin-bottom: 59px;
-    padding: 75px 6% 50px 6%;
-    .jd_box {
-      width: 100%;
-      background: #6D869C;
-      height: 4px;
-      border-radius: 4px;
-      position: relative;
-      em {
+      &::before, &::after {
         position: absolute;
-        color: #6D869C;
-        font-size: 14px;
-        line-height: 34px;
-        bottom: -34px;
-        &:nth-child(2) {
-          left: 0;
-        }
-        &:nth-child(3) {
-          right: 0;
-        }
+        display: block;
+        position: absolute;
+        height: 3px;
+        right: 0;
+        background: #6C869C;
+        content: "";
       }
-      .jd_cen {
-        height: 4px;
-        float: left;
-        position: relative;
-        border-radius: 4px;
-        background: #C9A96E;
-        p {
-          display: block;
-          border-left: 5px solid transparent;
-          border-right: 5px solid transparent;
-          border-top: 6px solid #C9A96E;
-          top: -20px;
-          right: -3px;
-          position: absolute;
-          span {
-            display: block;
-            width: 300px;
-            height: 33px;
-            position: absolute;
-            top: -33px;
-            text-align: center;
-            left: 50%;
-            margin-left: -150px;
-            color: #C9A96E;
-            i {
-              &:nth-child(1) {
-                color: #CBE6FD;
-              }
-              &:nth-child(2) {
-                color: #6D869C
-              }
-            }
-          }
-        }
+      &::before {
+        width: 100%;
+        top: 0;
       }
-    }
-    .jd_btxt {
-      font-size: 20px;
-      overflow: hidden;
-      margin-top: 65px;
-      div {
-        float: left;
-        color: #C9A96E;
-        &:nth-child(1) {
-          width: 15%
-        }
-        &:nth-child(2) {
-          width: 25%;
-        }
-        &:nth-child(3) {
-          width: 25%;
-        }
-        &:last-child {
-          float: right;
-        }
-        b {
-          font-weight: bold;
-        }
-        span {
-          color: #CBE6FD;
-        }
-        em {
-          color: #6D869C;
-        }
+      &::after {
+        width: 40%;
+        bottom: 0;
       }
     }
   }
-
+  
   .ind_tit {
     height: 35px;
     line-height: 35px;
@@ -417,88 +223,14 @@
     }
   }
 
-  .trade {
-    border: 1px solid #CBE6FD;
-    ul {
-      overflow: hidden;
-      color: #CBE6FD;
-      font-size: 16px;
-      border-bottom: 1px dashed #464d55;
-      line-height: 64px;
-      &.tit {
-        border-bottom: 1px solid #CBE6FD;
-                height: 45px;
-        line-height: 45px;
-        font-size: 14px;
-        li {
-          border-bottom: none;
-          &.tc {
-            color: #CBE6FD;
-          }
-        }
-      }
-      li {
-        float: left;
-                height: 64px;
-        text-align: center;
-        span {
-          color: #6C869C;
-        }
-        &.ta {
-          width: 8%;
-        }
-        &.tb {
-                    width: 17%;
-        }
-        &.tc {
-                    width: 17%;
-        }
-        &.td {
-          width: 17%;
-        }
-        &.te {
-          width: 17%;
-        }
-        &.tf {
-                    width: 17%;
-        }
-        &.tg {
-                    width: 7%;
-                }
-                a{
-                    width: 18px;
-                    height: 18px;
-                    display: block;
-                    margin: 23px auto;
-                    background-repeat: no-repeat;
-                    &.yellow{
-                        /*background-image: url(../assets/svg/jy.svg);*/
-                    }
-                    &.blue{
-                       /* background-image: url(../assets/svg/jy2.svg);*/
-                    }
-        }
-      }
-      &:last-child {
-        border-bottom: none;
-      }
-      &.tra_cen:nth-child(odd) li.tc {
-        color: #F24E4D;
-      }
-      &.tra_cen:nth-child(even) li.tc {
-        color: #09C989;
-      }
-    }
-  }
-
   .ind_bot {
-        &:after{
-            content: "";
-            clear: both;
-            width: 100%;
-            height: 1px;
-            display:block;
-        }
+    &:after {
+      content: "";
+      clear: both;
+      width: 100%;
+      height: 1px;
+      display: block;
+    }
     .ind_bot_tit {
       color: #fff;
       font-size: 24px;
@@ -553,15 +285,15 @@
             display: block;
             width: 210px;
             height: 50px;
-                        line-height: 50px;
-                        color: #C9A96E;
+            line-height: 50px;
+            color: #C9A96E;
             border: 1px solid #C9A96E;
             position: absolute;
             left: 50%;
             margin-left: -105px;
             bottom: -70px;
             z-index: 9999;
-                        border-radius: 5px;
+            border-radius: 5px;
           }
         }
       }

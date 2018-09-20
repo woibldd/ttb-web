@@ -70,7 +70,7 @@
         <div class="half-wrap left">
           <v-btn :label="$t('operate_buy', {coin: pairInfo.product_name})"
             class="submit-btn"
-            radius="0"
+            radius="4"
             color="ixbuy"
             width="100%"
             height="44"
@@ -146,7 +146,7 @@
         <div class="half-wrap right">
           <v-btn :label="$t('operate_sell', {coin: pairInfo.product_name})"
             class="submit-btn"
-            radius="0"
+            radius="4"
             color="ixsell"
             height="44"
             :loading="submitting === 'SELL'"

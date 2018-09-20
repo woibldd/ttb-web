@@ -6,7 +6,7 @@
       <router-link
         :to="{name:'home'}"
         class="nav_logo"/>
-      <div class="nav_left" v-if="false">
+      <div class="nav_left">
         <div class="left_options">
           <router-link :to="{name: 'trading'}" class="nav_link">{{$t('trading')}}</router-link>
           <!-- <router-link :to="{}" class="nav_link ml-30">asdfasdf</router-link> -->
@@ -98,7 +98,6 @@
 import { state, actions } from '@/modules/store'
 import service from '@/modules/service'
 import utils from '@/modules/utils'
-import SettingModal from '@/components/SettingModal'
 
 export default {
   props: {

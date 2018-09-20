@@ -284,7 +284,7 @@ const service = {
   removeApiKey(data) {
     return request('api/remove', data)
   },
-  getRate(currency) {
+  getRate(currency = 'USDT') {
     // return getCache(name + 'FiatRate', () => request('currency/query', { name }), 1e4)
     return getCache(name + 'FiatRate', () => request('account/currency/rates', { currency }), 1e4)
   },
@@ -408,8 +408,15 @@ const service = {
   // 取消提币
   cancelWithdraw(param) {
     return request('/account/withdraw/cancel', param)
-  }
+  },
   /* -- 资金管理 end  -- */
+
+  /* 挖矿 */
+  getMineTotal (data) {
+    return getCache('mine_total', () => request('mine/exchange/total'), 1e4)
+  }
+  /* 挖矿 end */
+  
 
 }
 

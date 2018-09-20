@@ -54,7 +54,7 @@ export default {
   data () {
     const validataEmail = (rule, value, callback) => {
       if (!value) {
-        callback(new Error(this.$i18n.t('不能为空')))
+        callback(new Error(this.$i18n.t('err_empty_email')))
       } else {
         if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(value)) {
           callback()
@@ -74,7 +74,7 @@ export default {
           { validator: validataEmail, trigger: 'blur' }
         ],
         code: [
-          { required: true, message: this.$i18n.t('不能为空'), trigger: 'blur' }
+          { required: true, message: this.$i18n.t('err_empty_email'), trigger: 'blur' }
         ]
       }
     }

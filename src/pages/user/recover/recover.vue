@@ -302,7 +302,6 @@ export default {
   methods: {
     async nextstep () {
       const check = this.checkParams()
-      debugger
       if (!check.ok || !!this.triggerValidate) {
         if (check.em) {
           utils.alert(check.em)
@@ -363,7 +362,7 @@ export default {
       // console.log(this.password, this.password2)
       if (this.password !== this.password2) {
         this.triggerValidate = true
-        // return err(this.$i18n.t('change_password_diff'), 'password2')
+        return err(this.$i18n.t('change_password_diff'), 'password2')
       }
 
       return {ok: true}

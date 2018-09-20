@@ -35,5 +35,9 @@ module.exports = {
   request: {
     'en': 'https://ixcustomer.zendesk.com/hc/en-us/requests/new',
     'zh-CN': 'https://ixcustomer.zendesk.com/hc/zh-cn/requests/new'
+  },
+  activeRule: {
+    'en': 'https://ixcustomer.zendesk.com/hc/en-us/articles/360015900832',
+    'zh-CN': 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360015900832'
   }
 }

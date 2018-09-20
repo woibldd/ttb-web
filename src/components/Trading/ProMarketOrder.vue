@@ -50,7 +50,7 @@
         <div class="half-wrap left">
           <v-btn :label="$t('operate_buy', {coin: state.pro.product_name})"
             class="submit-btn"
-            radius="0"
+            radius="4"
             color="ixbuy"
             height="44"
             :loading="submitting === 'BUY'"
@@ -109,7 +109,7 @@
         <div class="half-wrap right">
           <v-btn :label="$t('operate_sell', {coin: state.pro.product_name})"
             class="submit-btn"
-            radius="0"
+            radius="4"
             color="ixsell"
             height="44"
             :loading="submitting === 'SELL'"
@@ -290,12 +290,15 @@ export default {
       if (side === 'SELL' && $amount.gt(this.product.available)) {
         return utils.alert(this.$i18n.t('amount_over'))
       }
-      if ($amount.lt(this.pairInfo.min_amount)) {
-        return utils.alert(this.$i18n.t('amount_low', {num: this.pairInfo.min_amount + ' ' + this.pairInfo.product_name}))
+      if (side === 'BUY' && $amount.gt(this.currency.available)) {
+        return utils.alert(this.$i18n.t('amount_over'))
       }
-      if ($amount.gt(this.pairInfo.max_amount)) {
-        return utils.alert(this.$i18n.t('amount_high', {num: this.pairInfo.max_amount + ' ' + this.pairInfo.product_name}))
-      }
+      // if ($amount.lt(this.pairInfo.min_amount)) {
+      //   return utils.alert(this.$i18n.t('amount_low', {num: this.pairInfo.min_amount + ' ' + this.pairInfo.product_name}))
+      // }
+      // if ($amount.gt(this.pairInfo.max_amount)) {
+      //   return utils.alert(this.$i18n.t('amount_high', {num: this.pairInfo.max_amount + ' ' + this.pairInfo.product_name}))
+      // }
     //   if ($bid.gt(0) && $ask.gt(0) && $bid.mul(1.05).lt($ask)) {
     //     // 盘口差价较大，且下单价超过盘口
     //     const ok = await utils.confirm({

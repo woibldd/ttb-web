@@ -19,10 +19,14 @@
           <div class="aut_lt">{{$t('kyc_upload')}}</div>
           <div class="aut_rt">
               <div class="aut_up">
-                <el-upload class="upload" :action="uploadConfig.host" :data="frontConfig" :show-file-list="false" :drag="true" accept="image/*" :on-success="handleIdFrontSuccess">
-                  <img class="img" v-if="photo1" :src="photo1" alt="">
-                  <div class="upload_box up_face" v-else></div>
-                </el-upload>
+                <image-upload type="front" :url="front.url" :host="uploadConfig.host" :config="frontConfig" @uploadProgress="uploadProgress" @uploadSuccess="uploadSuccess" @uploadError="uploadError" @uploadStart="uploadStart">
+                  <template slot-scope="file">
+                    <img class="img" v-if="file.dataUrl" :src="file.dataUrl" alt="">
+                      <div class="upload_box up_face">
+                        <div ref="front_mask" class="mask" v-if="file.dataUrl"></div>
+                      </div>
+                  </template>
+                </image-upload>
               </div>
               <div class="aut_up_txt">
                   <p>{{$t('kyc_name')}}</p>
@@ -31,10 +35,14 @@
           </div>
           <div class="aut_rt">
               <div class="aut_up">
-                <el-upload class="upload" :action="uploadConfig.host" :data="backConfig" :show-file-list="false" :drag="true" accept="image/*" :on-success="handleIdBackSuccess">
-                  <img class="img" v-if="photo2" :src="photo2" alt="">
-                  <div class="upload_box up_emblem" v-else></div>
-                </el-upload>
+                <image-upload type="back" :url="back.url" :host="uploadConfig.host" :config="backConfig" @uploadProgress="uploadProgress" @uploadSuccess="uploadSuccess" @uploadError="uploadError" @uploadStart="uploadStart">
+                  <template slot-scope="file">
+                    <img class="img" v-if="file.dataUrl" :src="file.dataUrl" alt="">
+                      <div class="upload_box up_emblem">
+                        <div ref="back_mask" class="mask" v-if="file.dataUrl"></div>
+                      </div>
+                  </template>
+                </image-upload>
                 <p>{{$t('kyc_notice1')}}</p>
               </div>
               <div class="aut_up_txt">
@@ -46,10 +54,14 @@
           <div class="aut_lt">{{$t('kyc_hand')}}</div>
           <div class="aut_rt">
               <div class="aut_up">
-                <el-upload class="upload" :action="uploadConfig.host" :data="holdConfig" :show-file-list="false" :drag="true" accept="image/*" :on-success="handleIdHoldSuccess">
-                  <img class="img" v-if="photo3" :src="photo3" alt="">
-                  <div class="upload_box up_take" v-else></div>
-                </el-upload>
+                <image-upload type="hold" :url="hold.url" :host="uploadConfig.host" :config="holdConfig" @uploadProgress="uploadProgress" @uploadSuccess="uploadSuccess" @uploadError="uploadError" @uploadStart="uploadStart">
+                  <template slot-scope="file">
+                    <img class="img" v-if="file.dataUrl" :src="file.dataUrl" alt="">
+                      <div class="upload_box up_take">
+                        <div ref="hold_mask" class="mask" v-if="file.dataUrl"></div>
+                      </div>
+                  </template>
+                </image-upload>
                 <p>{{$t('kyc_notice2')}}<br />{{$t('kyc_notice3')}}</p>
               </div>
               <div></div>
@@ -70,6 +82,7 @@
 <script>
   import service from '@/modules/service'
   import VBtn from '@/components/VBtn'
+  import ImageUpload from '@/components/common/ix-upload'
   import isEmpty from 'lodash/isEmpty'
   import {state, actions} from '@/modules/store'
   import utils from '@/modules/utils'
@@ -77,7 +90,8 @@
   export default {
     name: 'SafeVerified',
     components: {
-      VBtn
+      VBtn,
+      ImageUpload
     },
     data () {
       return {
@@ -87,9 +101,21 @@
         uploadConfig: {
           host: '//ix-test.oss-cn-beijing.aliyuncs.com'
         },
-        photo1: '',
-        photo2: '',
-        photo3: '',
+        front: {
+          loading: false,
+          error: false,
+          url: ''
+        },
+        back: {
+          loading: false,
+          error: false,
+          url: ''
+        },
+        hold: {
+          loading: false,
+          error: false,
+          url: ''
+        },
         filedir: ''
       }
     },
@@ -145,22 +171,29 @@
         return {}
       },
       async submit () {
-        if (!this.photo1) {
+        if (this.front.loading || this.back.loading || this.hold.loading) {
+          debugger
+          utils.alert(this.$i18n.t('kyc_image_uploading'))
+          return
+        }
+
+        if (!this.front.url) {
           utils.alert(this.$i18n.t('kyc_photo1_empty'))
           return
         }
-        if (!this.photo2) {
+        if (!this.back.url) {
           utils.alert(this.$i18n.t('kyc_photo2_empty'))
           return
         }
-        if (!this.photo3) {
+        if (!this.hold.url) {
           utils.alert(this.$i18n.t('kyc_photo3_empty'))
           return
         }
+        
         let result = await service.updateKycInfo({
-          photo1: this.photo1,
-          photo2: this.photo2,
-          photo3: this.photo3
+          photo1: this.front.url,
+          photo2: this.back.url,
+          photo3: this.hold.url
         })
 
         if (!result.code) {
@@ -171,14 +204,22 @@
           utils.alert(result.message)
         }
       },
-      handleIdFrontSuccess (res, file) {
-        this.photo1 = `${this.uploadConfig.host}/${this.policy.dir}${this.filedir}_front_${file.name}`
+      uploadStart ({type}) {
+        this[type].loading = true
       },
-      handleIdBackSuccess (res, file) {
-        this.photo2 = `${this.uploadConfig.host}/${this.policy.dir}${this.filedir}_back_${file.name}`
+      uploadProgress ({type, file}) {
+        this.$refs[type + '_mask'].style.transform = 'translateY('+file.percentage+'%)'
       },
-      handleIdHoldSuccess (res, file) {
-        this.photo3 = `${this.uploadConfig.host}/${this.policy.dir}${this.filedir}_hold_${file.name}`
+      uploadSuccess ({type, file}) {
+        this.$refs[type + '_mask'].style.transform = 'translateY(100%)'
+        this[type].loading = false
+        this[type].url = `${this.uploadConfig.host}/${this.policy.dir}${this.filedir}_${type}_${file.name}`
+        console.log(this[type].url)
+      },
+      uploadError ({type, message}) {
+        this[type].error = message
+        this[type].loading = false
+        utils.alert(data.message)
       }
     },
     async beforeRouteEnter(to, from, next) {
@@ -199,6 +240,10 @@
       this.photo1 = kycInfo.photo1
       this.photo2 = kycInfo.photo2
       this.photo3 = kycInfo.photo3
+
+      this.front.url = this.photo1
+      this.back.url = this.photo2
+      this.hold.url = this.photo3
       let policy = await service.getOSSPolicy()
       if (!policy.code) {
         this.policy = JSON.parse(policy.data)
@@ -213,7 +258,7 @@
         }
 
         this.policy = obj
-        
+
       } else {
         utils.alert('获取服务端签名失败')
       }
@@ -365,10 +410,23 @@
                       height: 100%;
                       background-repeat: no-repeat;
                       background-position: center 32px;
-                      
+
+                      .mask {
+                        position: absolute;
+                        width: 100%;
+                        top: 0;
+                        height: 100%;
+                        background: #eee;
+                        transform: translateY(0%);
+                        transition: translateY 2s;
+                        opacity: 0.5;
+                      }
                     }
                     .img {
                       width: 100%;
+                      position: absolute;
+                      left: 0;
+                      top: 0;
                     }
                     .up_face{
                         background-image: url(../../../assets/id-up.png);
