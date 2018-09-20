@@ -417,6 +417,10 @@ const service = {
   getPersonalTotal (data) {
     return getCache('mine_my_total', () => request('mine/exchange/me'), 1e4)
   }
+
+  // mineSummary 页面用到的挖矿接口
+  
+
   /* 挖矿 end */
 
 }
