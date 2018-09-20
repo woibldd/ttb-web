@@ -57,10 +57,10 @@ export default {
       }
     },
     loop () {
-      this.timer = setInterval(this.fetch, 3e4)
+      this.timer = setInterval(this.fetch, 3e3)
     },
     fixData (summary) {
-      summary.rate = this.$big(summary.amount).div(summary.max_amount).toString()
+      summary.rate = this.$big(summary.amount).div(summary.max_amount).times(100).toString()
       summary.range = options[summary.index || 0]
       summary.remain = this.$big(summary.max_amount).minus(summary.amount)
       return summary
@@ -116,7 +116,7 @@ export default {
       border-radius: 4px;
       background: #c9a96e;
       width: 0px;
-      transition: width 2s ease-in-out;
+      transition: width 2s;
 
       .line {
         display: block;
