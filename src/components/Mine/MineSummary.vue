@@ -27,6 +27,13 @@
         <div class="row personal ml-30"><span class="text">{{ $t('mine_my_remain') }} : </span>{{ ( mineMy.max_amount - mineMy.amount ) | fixed(2) | thousand }}<em class="unit">IX</em></div>
       </div>
     </div>
+    <div class="ind_cen ind_tit">
+      交易区
+      <div class="ind_search">
+        <icon name="search" />
+        <input type="text">
+      </div>
+    </div>
   </div>
 </template>
 <script>
