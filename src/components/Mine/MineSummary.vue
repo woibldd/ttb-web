@@ -1,35 +1,77 @@
 <template>
   <div
-    class="ind_cen ind_jd"
-    v-if="1==1">
+    class="ind_cen ind_jd">
     <div class="jd_box">
       <div
         class="jd_cen"
-        style="width:100%;">
+        :style="{ 'width': mineSummary.rate+'%'}">
         <p class="line">
           <span class="cursor_arrow">
-            <i class="text">{{ $t('mine_progress') }} : </i>126631.45633211<i class="unit">IX</i>
+            <i class="text">{{ $t('mine_progress') }} : </i>{{ mineSummary.rate | fixed(2) }}<i class="unit">%</i>
           </span>
         </p>
       </div>
       <em class="cursor cursor_left">0 IX</em>
-      <em class="cursor cursor_right">33,333,333 IX</em>
+      <em class="cursor cursor_right">{{ mineSummary.max_amount | fixed(2) | thousand }} IX</em>
     </div>
     <div class="jd_btxt">
-      <div class="row time_range">0:00 - 8:00</div>
-      <div class="row"><span class="text">{{ $t('mine_total') }} : </span>,333,333<em class="unit">IX</em></div>
-      <div class="row"><span class="text">{{ $t('mine_mined') }} : </span>126631.45633211<em class="unit">IX</em></div>
-      <div class="row"><span class="text">{{ $t('mine_remain') }} : </span>28,669,123.23441975<em class="unit">IX</em></div>
+      <div class="row time_range">{{ mineSummary.range }}</div>
+      <div class="row"><span class="text">{{ $t('mine_total') }} : </span>{{ mineSummary.max_amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
+      <div class="row"><span class="text">{{ $t('mine_mined') }} : </span>{{ mineSummary.amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
+      <div class="row"><span class="text">{{ $t('mine_remain') }} : </span>{{ mineSummary.remain | fixed(2) | thousand }}<em class="unit">IX</em></div>
     </div>
   </div>
 </template>
 <script>
 import { state } from '@/modules/store'
+import service from '@/modules/service'
+import isEmpty from 'lodash/isEmpty'
+
+const options = [
+  '0:00 - 8:00',
+  '8:00 - 16:00',
+  '16:00 - 24:00'
+]
 export default {
   data () {
     return {
-      state
+      state,
+      mineSummary: {
+        rate: 0,
+        max_amount: '333333333333',
+        amount: 0
+      },
+      timer: 0
     }
+  },
+  computed: {
+    hasMineSummary () {
+      return !isEmpty(this.mineSummary)
+    }
+  },
+  methods: {
+    async fetch () {
+      let res = await service.getMineTotal()
+      if (!res.code && !isEmpty(res.data)) {
+        this.mineSummary = this.fixData(res.data)
+      }
+    },
+    loop () {
+      this.timer = setInterval(this.fetch, 3e4)
+    },
+    fixData (summary) {
+      summary.rate = this.$big(summary.amount).div(summary.max_amount).toString()
+      summary.range = options[summary.index || 0]
+      summary.remain = this.$big(summary.max_amount).minus(summary.amount)
+      return summary
+    }
+  },
+  destroyed () {
+    clearInterval(this.timer)
+  },
+  created () {
+    this.fetch()
+    this.loop()
   }
 }
 </script>
@@ -73,6 +115,9 @@ export default {
       position: relative;
       border-radius: 4px;
       background: #c9a96e;
+      width: 0px;
+      transition: width 2s ease-in-out;
+
       .line {
         display: block;
         border-left: 5px solid transparent;
@@ -112,7 +157,7 @@ export default {
         width: 25%;
       }
       &:last-child {
-        float: right;
+        width: 25%;
       }
     }
   }

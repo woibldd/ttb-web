@@ -98,7 +98,6 @@
 import { state, actions } from '@/modules/store'
 import service from '@/modules/service'
 import utils from '@/modules/utils'
-import SettingModal from '@/components/SettingModal'
 
 export default {
   props: {

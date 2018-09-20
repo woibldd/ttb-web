@@ -349,7 +349,7 @@ const utils = {
     return tpl
   },
   toThousand (num = 0) {
-    return num.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,')
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   },
   toBig (num) {
     return Big(num).toString()
