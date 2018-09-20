@@ -31,6 +31,12 @@
           to="/profile/kyc/"
           class="up-limit pointer">{{ $t("upgrade_quota") }}</router-link>
       </div>
+      <div class="fund-item-other mb-14">
+          <span 
+            class="quick-btn mr-10"
+            :class="[selectCoin.currency === c.currency && 'selected']"
+           @click="quickSelectCoin(c)" v-for="(c, idx) in allCoins" :kyes="idx">{{c.currency}}</span>
+        </div>
       <div class="fund-item-row">
         <div class="row__label">{{ $t('withdraw_addr') }}</div>
         <div class="row__value">
@@ -297,6 +303,9 @@ export default {
           this.selectCoin = this.allCoins[0]
         }
       })
+    },
+    quickSelectCoin(coin) {
+      this.selectCoin = coin
     },
     getAccountBalanceList () {
       return service.getAccountBalanceList().then(res => {

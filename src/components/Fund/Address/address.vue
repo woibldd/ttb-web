@@ -58,7 +58,6 @@
           :key="idx"
           :prop="hd.key"
           :label="hd.title"/>
-
         <el-table-column
           header-align='right'
           width="200px"
@@ -100,7 +99,6 @@ export default {
       ],
       operate: {key: 'operate', title: this.$t('operation')},
       loading: false
-
     }
   },
   async created () {

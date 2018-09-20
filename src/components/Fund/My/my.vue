@@ -111,11 +111,11 @@ export default {
           item.amount = this.$big(item.locking).plus(this.$big(item.available)).toString()
           item.estValue = this.getEstValue(item)
           return item
-        }) 
+        })
       })
     },
     getEstValue (item) {
-      return this.$big(item.available).times(this.$big(item.rates[this.unit])).toString()
+      return this.$big(item.amount).times(this.$big(item.rates[this.unit])).round(4, this.C.ROUND_DOWN).toString()
     }
   }
 }
