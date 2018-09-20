@@ -410,8 +410,13 @@ const service = {
   },
   getPersonalTotal (data) {
     return getCache('mine_my_total', () => request('mine/exchange/me'), 1e4)
-  }
+  },
   /* 挖矿 end */
+
+  /* 行情 */
+  getDealHistory (pair, data) {
+    return quote(`history/${pair}`, data)
+  }
 
 }
 

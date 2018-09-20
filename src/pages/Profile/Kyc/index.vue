@@ -1,30 +1,28 @@
 <template>
-<div style="page-kyc-wrap">
-  <div class="user-center-right">
-    <router-view></router-view>    
+  <div style="page-kyc-wrap">
+    <div class="user-center-right">
+      <router-view/>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
-  import service from '@/modules/service'
-
-  export default {
-    name: 'Kyc',
-    components: {
-    },
-    data () {
-      return {
-
-      }
-    },
-    computed: {
-
-    },
-    methods: {
+export default {
+  name: 'Kyc',
+  components: {
+  },
+  data () {
+    return {
 
     }
+  },
+  computed: {
+
+  },
+  methods: {
+
   }
+}
 </script>
 <style lang="scss" scoped>
 .user-center-right {
@@ -46,7 +44,7 @@
   .invinfo-box {
     width: 100%;
     margin: 20px auto 50px auto;
-    
+
   }
 }
 </style>

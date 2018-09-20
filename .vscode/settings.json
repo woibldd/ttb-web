@@ -14,5 +14,6 @@
   "emmet.includeLanguages": {
     "vue-html": "html",
     "vue": "html"
-  }
+  },
+  "eslint.autoFixOnSave": true
 }
