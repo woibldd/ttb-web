@@ -48,7 +48,7 @@ const FundHistory = () => import(/* webpackChunkName: "FundHistory" */ '@/compon
 async function beforeEach (to, from, next) {
   state.loading = true
   const auth = utils.getRouteMeta(to, 'auth')
-  utils.log('to:', to.name, auth)
+  // utils.log('to:', to.name, 'from:', from.name)
   if (auth) {
     await actions.updateSession()
     if (!state.userStatus) {

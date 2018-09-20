@@ -23,10 +23,10 @@
               <span
                 class="side-text ibt"
                 :class="['side-' + deal.side, sideColor(deal.side)]">
-                {{ deal.side === 'buy' ? $t('order_side_buy') : $t('order_side_buy') }}
+                {{ deal.side === 'buy' ? $t('order_side_buy') : $t('order_side_sell') }}
               </span>
             </td>
-            <td class="right"><num :num="$big(deal.price).toFixed(state.pro.pairInfo.price_scale)"/></td>
+            <td class="right" :class="['side-' + deal.side, sideColor(deal.side)]"><num :num="$big(deal.price).toFixed(state.pro.pairInfo.price_scale)"/></td>
             <td class="right">{{ deal.amount | fixed(state.pro.pairInfo.amount_scale) }}</td>
             <td>{{ deal.time | date('H:m:s') }}</td>
           </tr>
@@ -72,10 +72,10 @@ export default {
     sideColor (side) {
       return side.toUpperCase() === 'BUY'
         ? 'theme-color-up'
-        : 'theme-color-down';
+        : 'theme-color-down'
     },
     clear () {
-      this.err = '';
+      this.err = ''
       this.dealList = []
     },
     async sub () {

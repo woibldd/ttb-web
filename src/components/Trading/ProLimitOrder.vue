@@ -433,6 +433,7 @@ export default {
       if (this.submitting) {
         return false
       }
+
       const $price = this.$big(this.getValues('price', side) || 0)
       const $amount = this.$big(this.getValues('amount', side) || 0)
       const $bid = this.$big(this.state.pro.bid || 0)

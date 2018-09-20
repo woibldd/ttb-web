@@ -16,9 +16,13 @@
     </div>
     <div class="jd_btxt">
       <div class="row time_range">{{ mineSummary.range }}</div>
-      <div class="row"><span class="text">{{ $t('mine_total') }} : </span>{{ mineSummary.max_amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
-      <div class="row"><span class="text">{{ $t('mine_mined') }} : </span>{{ mineSummary.amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
-      <div class="row"><span class="text">{{ $t('mine_remain') }} : </span>{{ mineSummary.remain | fixed(2) | thousand }}<em class="unit">IX</em></div>
+      <div class="row col"><span class="text">{{ $t('mine_total') }} : </span>{{ mineSummary.max_amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
+      <div class="row col"><span class="text">{{ $t('mine_mined') }} : </span>{{ mineSummary.amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
+      <div class="row col"><span class="text">{{ $t('mine_remain') }} : </span>{{ mineSummary.remain | fixed(2) | thousand }}<em class="unit">IX</em></div>
+    </div>
+    <div class="jd_btxt mt-30" v-if="hasMineMy">
+      <div class="row personal"><span class="text">{{ $t('mine_my_total') }} : </span>{{ mineMy.max_amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
+      <div class="row personal ml-30"><span class="text">{{ $t('mine_my_remain') }} : </span>{{ ( mineMy.max_amount - mineMy.amount ) | fixed(2) | thousand }}<em class="unit">IX</em></div>
     </div>
   </div>
 </template>
@@ -41,12 +45,16 @@ export default {
         max_amount: '333333333333',
         amount: 0
       },
+      mineMy: {},
       timer: 0
     }
   },
   computed: {
     hasMineSummary () {
       return !isEmpty(this.mineSummary)
+    },
+    hasMineMy () {
+      return !isEmpty(this.mineMy)
     }
   },
   methods: {
@@ -54,6 +62,12 @@ export default {
       let res = await service.getMineTotal()
       if (!res.code && !isEmpty(res.data)) {
         this.mineSummary = this.fixData(res.data)
+      }
+      if (this.state.userInfo) {
+        let resMy = await service.getPersonalTotal()
+        if (!resMy.code && !isEmpty(resMy.data)) {
+          this.mineMy = resMy.data
+        }
       }
     },
     loop () {
@@ -147,17 +161,11 @@ export default {
     .row {
       float: left;
       color: #c9a96e;
-      &:nth-child(1) {
+      &.col {
+        width: 25%;
+      }
+      &.time_range {
         width: 15%;
-      }
-      &:nth-child(2) {
-        width: 25%;
-      }
-      &:nth-child(3) {
-        width: 25%;
-      }
-      &:last-child {
-        width: 25%;
       }
     }
   }

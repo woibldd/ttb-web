@@ -9,43 +9,43 @@ import { state, actions } from '@/modules/store'
 const Mock = () => import('./mock')
 
 const service = {
-  getBanners(data = {}) {
+  getBanners (data = {}) {
     data.platform = 1
     return request('/announcement/list', data)
   },
-  resetPassword(data) {
+  resetPassword (data) {
     let uri = 'user/reset/password/email'
     if (data.by === 'phone') {
       uri = 'user/reset/password/phone'
     }
     return request(uri, data)
   },
-  resetPaswordCode(data) {
+  resetPaswordCode (data) {
     let uri = 'user/reset/password/email/code'
     if (data.by === 'phone') {
       uri = 'user/reset/password/phone/code'
     }
     return request(uri, data)
   },
-  changePassword(data) {
+  changePassword (data) {
     return request('user/modify/password', data)
   },
-  getSmsCode(data) {
+  getSmsCode (data) {
     if (data.task === 'register') {
       return request('sign/signup/code/resend', data)
     }
     return request('fa2/sms', data)
   },
-  fa2(data) {
+  fa2 (data) {
     if (data.task === 'register') {
       return request('sign/signup/code', data)
     }
     return request('fa2/verify', data)
   },
-  getUserInfo() {
+  getUserInfo () {
     return getCache('session', () => request('user/session'), 6e4)
   },
-  activate(code) {
+  activate (code) {
     rmCache('session')
     return request('sign/activate?auth=' + code)
   },
@@ -53,15 +53,15 @@ const service = {
    * 发送验证码
    * @param {*} data by lang phone email region
    */
-  sendCode(data) {
+  sendCode (data) {
     let url = `user/register/${data.by}/code`
     let params = data
     return request(url, data)
   },
-  sendVerifyEmail() {
+  sendVerifyEmail () {
     return request('sign/reactivate')
   },
-  login(data) {
+  login (data) {
     rmCache('session')
     if (data.email) {
       return request('user/login/email', data)
@@ -70,64 +70,64 @@ const service = {
       return request('user/login/phone', data)
     }
   },
-  register(data) {
+  register (data) {
     rmCache('session')
     if (data.phone) {
       return request('user/register/phone', data)
     }
     return request('user/register/email', data)
   },
-  signout() {
+  signout () {
     rmCache('session')
     rmCache('balanceList')
     state.pro.currency = null
     state.pro.product = null
     return request('user/logout')
   },
-  async getBalanceByPair(...currencys) {
+  async getBalanceByPair (...currencys) {
     let result = await this.getBalance()
     let resp = []
     if (!result.code) {
-        let list = result.data
-        currencys.forEach(currency => {
-            let balance = list.filter(l => currency === l.currency)[0] || {}
-            resp.push(balance)
-        })
+      let list = result.data
+      currencys.forEach(currency => {
+        let balance = list.filter(l => currency === l.currency)[0] || {}
+        resp.push(balance)
+      })
     }
     return resp
   },
-  getBalance() {
+  getBalance () {
     return getCache('balanceList', () => request('account/balance/list'), 2e3)
   },
-  createOrder(data) {
+  createOrder (data) {
     return request('order/create', data)
   },
-  removeOrder(data) {
+  removeOrder (data) {
     return request('order/remove', data)
   },
-  removeOrderList(orderList) {
+  removeOrderList (orderList) {
     return orderList.reduce(async function (preTask, order) {
       await preTask
       return request('order/remove', order)
     }, 0)
   },
-  removeAllOrder() {
+  removeAllOrder () {
     return request('order/removeall')
   },
-  queryOrder({ id, finished }) {
+  queryOrder ({ id, finished }) {
     if (finished) {
       return getCache('orderQuery' + id, () => request('order/query', { order_id: id }))
     }
     return request('order/query', { order_id: id })
   },
-  getOrderList(data) {
+  getOrderList (data) {
     return request('order/list', data)
   },
-  orderActive(data) {
+  orderActive (data) {
     return request('order/active', data).then(res => {
       if (res.data) {
         if (res.data.length) {
-          res.data = res.data.map (item => {
+          res.data = res.data.map(item => {
             item.side = item.side === 1 ? 'BUY' : 'SELL'
             item.type = item.type === 1 ? 'LIMIT' : 'MARKET'
             item.deal_amount = item.executed
@@ -139,14 +139,14 @@ const service = {
       return res
     })
   },
-  orderClosed(data) {
+  orderClosed (data) {
     return request('order/closed', data)
   },
-  orderHistory(data) {
+  orderHistory (data) {
     return request('order/history', data).then(res => {
       if (res.data) {
         if (res.data.length) {
-          res.data = res.data.map (item => {
+          res.data = res.data.map(item => {
             item.side = item.side === 1 ? 'BUY' : 'SELL'
             item.type = item.type === 1 ? 'LIMIT' : 'MARKET'
             item.deal_amount = item.executed
@@ -159,29 +159,29 @@ const service = {
       return res
     })
   },
-  getQuote(data) {
+  getQuote (data) {
     return request('quote/query', data)
   },
-  getRegionList() {
+  getRegionList () {
     return getCache('regionList', () => Promise.resolve(require('./region.json')))
   },
-  getKycInfo() {
+  getKycInfo () {
     return request('user/kyc')
   },
-  updateKycInfo(data) {
+  updateKycInfo (data) {
     return request('user/kyc2', data)
   },
-  updateKyc1(data) {
+  updateKyc1 (data) {
     return request('user/kyc1', data)
   },
   getOSSPolicy () {
     return request('user/kyc/oss/policy')
   },
-  uploadKycPics(form) {
+  uploadKycPics (form) {
     const handler = new Vue()
     const upload = request('kyc/upload', form, {
       timeout: 0,
-      uploadProgress(event) {
+      uploadProgress (event) {
         handler.$emit('progress', event)
       }
     })
@@ -190,13 +190,13 @@ const service = {
     })
     return handler
   },
-  getRecommend() {
+  getRecommend () {
     return request('pair/recommends')
   },
-  getHomeNotice(slot) {
+  getHomeNotice (slot) {
     return request('notice/list', { platform: 0, slot: slot })
   },
-  async getPairInfo(data = {}) {
+  async getPairInfo (data = {}) {
     const res = await this.getPairList()
     if (!res.code) {
       // if (res.data && res.data.length) {
@@ -216,7 +216,7 @@ const service = {
     }
     return res
   },
-  getPairList() {
+  getPairList () {
     return getCache('pairList', () => request('order/symbol/list').then(res => {
       if (res && res.data) {
         res.data = res.data.map(item => {
@@ -232,20 +232,20 @@ const service = {
       }
     }))
   },
-  getQuoteOrderbook({ pair, accuracy, offset, size }) {
+  getQuoteOrderbook ({ pair, accuracy, offset, size }) {
     return quote(`orderbook/${pair}`, { offset, accuracy, size })
   },
-  getQuoteDeal({ pair, size }) {
+  getQuoteDeal ({ pair, size }) {
     return quote(`deal/${pair}`, { size })
   },
-  getQuoteHistory(data) {
+  getQuoteHistory (data) {
     if (data.begin && data.end) {
       return quote(`history/millis/${data.pair}`, data)
     } else {
       return quote(`history/${data.pair}`, data)
     }
   },
-  async getSupportedVerifys() {
+  async getSupportedVerifys () {
     return ['google', 'message']
   },
   getGoogleKey () {
@@ -254,7 +254,7 @@ const service = {
   bindGoogleKey (data) {
     return request('/user/bind/google_key', data)
   },
-  setPhone(data) {
+  setPhone (data) {
     return request('phone/begin', data)
   },
   bindPhoneCode (data) {
@@ -263,7 +263,7 @@ const service = {
   bindPhone (data) {
     return request('user/bind/phone', data)
   },
-  bindEmailCode(data) {
+  bindEmailCode (data) {
     return request('user/bind/email/code', data)
   },
   bindEmail (data) {
@@ -272,111 +272,104 @@ const service = {
   getApiList () {
     return request('api/list')
   },
-  getApiPermissions() {
+  getApiPermissions () {
     return request('api/permissions')
   },
-  createApiKey(data) {
+  createApiKey (data) {
     return request('api/create', data)
   },
-  confirmApiKey(data) {
+  confirmApiKey (data) {
     return request('api/create/confirm', data)
   },
-  removeApiKey(data) {
+  removeApiKey (data) {
     return request('api/remove', data)
   },
-  getRate(currency = 'USDT') {
+  getRate (currency = 'USDT') {
     // return getCache(name + 'FiatRate', () => request('currency/query', { name }), 1e4)
     return getCache(currency + 'FiatRate', () => request('account/currency/rates', { currency }), 1e4)
   },
-  getCoins() {
+  getCoins () {
     return getCache('currencyList', () => request('account/currency/list'))
   },
   // 资产-转出页面请求转出地址，请求参数为 currency_name
-  getWithdrawAddress(data) {
+  getWithdrawAddress (data) {
     return request('address/withdraw/list', data)
   },
   // 资产-转出页面-新增转出地址，请求参数为 currency_name:币名,label:自定义标签,address:地址值
-  addWithdrawAddress(data) {
+  addWithdrawAddress (data) {
     return request('address/withdraw/create', data)
   },
   // 资产-转出页面-转出目标地址下拉列表-列表项删除按钮 请求参数为 地址id
-  delWithwrawAddress(id) {
+  delWithwrawAddress (id) {
     return request('address/withdraw/remove', { id: id })
   },
-  getDepositAddress(data) {
+  getDepositAddress (data) {
     return request('address/deposit/query', data)
   },
-  getCollect() {
+  getCollect () {
     return getCache('favoriteList', () => request('favorite/list'))
   },
-  collect(data) {
+  collect (data) {
     return request('favorite/create', data)
   },
-  uncollect(data) {
+  uncollect (data) {
     return request('favorite/remove', data)
   },
-  getTransferStats() {
+  getTransferStats () {
     return request('transfer/stats')
   },
-  getTransferList(data) {
+  getTransferList (data) {
     return request('transfer/list', data)
   },
-  geetestBegin() {
+  geetestBegin () {
     return request('geetest/begin')
   },
-  geetestVerify() {
+  geetestVerify () {
     return request('geetest/verify')
   },
-  getPresellLock() {
+  getPresellLock () {
     return request('presell/query')
   },
-  confirmPresellLock(data) {
+  confirmPresellLock (data) {
     return request('presell/lock', data)
   },
-  rmCache(key) {
+  rmCache (key) {
     rmCache(key)
   },
-  clearAll() {
+  clearAll () {
     for (const key in cache) {
       rmCache(key)
     }
   },
-  // // taxi api
-  // getMiningData () {
-  //   return request('statistics/tb')
-  // },
-  getMiningRefundData() {
-    return request('statistics/refund')
-  },
-  getMyInviteList() {
+  getMyInviteList () {
     return request('/user/invitation/list')
   },
-  getTerminalDate() {
+  getTerminalDate () {
     return request('get_terminal_date')
   },
-  getLoginHistory() {
+  getLoginHistory () {
     return request('user/login/history')
   },
 
   /* -- 资金管理 start  -- */
   // 充币，提币
-  getMyCoinAddress(param) {
+  getMyCoinAddress (param) {
     return request('account/address/query', param)
   },
   // 获取币种列表
-  getAllCoinTypes(param) {
+  getAllCoinTypes (param) {
     return request('account/currency/list')
   },
   // 获取用户余额信息
-  getAccountBalanceList() {
+  getAccountBalanceList () {
     return request('account/balance/list')
   },
   // 提币记录
-  getWithdrawHistory() {
+  getWithdrawHistory () {
     return request('/account/withdraw/list')
   },
   // 充币记录
-  getDepositHistory(param) {
+  getDepositHistory (param) {
     return request('/account/deposit/list', param)
   },
   // 获取添加过的地址列表
@@ -384,15 +377,15 @@ const service = {
     return request('/account/withdraw/address/list', param)
   },
   // 添加提币地址
-  addCoinAddress(param) {
+  addCoinAddress (param) {
     return request('/account/withdraw/address/create', param)
   },
   // 删除提币地址
-  deleteCoinAddress(param) {
+  deleteCoinAddress (param) {
     return request('/account/withdraw/address/delete', param)
   },
   // 获取提币邮箱/手机验证码
-  getVerifyCode(param, type) {
+  getVerifyCode (param, type) {
     let url
     if (type === 'phone') {
       url = '/account/withdraw/phone/code'
@@ -402,11 +395,11 @@ const service = {
     return request(url, param)
   },
   // 发起提币
-  confirmWithdraw(param) {
+  confirmWithdraw (param) {
     return request('/account/withdraw/create', param)
   },
   // 取消提币
-  cancelWithdraw(param) {
+  cancelWithdraw (param) {
     return request('/account/withdraw/cancel', param)
   },
   /* -- 资金管理 end  -- */
@@ -414,13 +407,15 @@ const service = {
   /* 挖矿 */
   getMineTotal (data) {
     return getCache('mine_total', () => request('mine/exchange/total'), 1e4)
+  },
+  getPersonalTotal (data) {
+    return getCache('mine_my_total', () => request('mine/exchange/me'), 1e4)
   }
   /* 挖矿 end */
-  
 
 }
 
-export async function fetch(url, body, options, method = 'post') {
+export async function fetch (url, body, options, method = 'post') {
   /* let mock = false
   mock = await Mock()
   if (mock && url.indexOf('quota.ix') > 0) {
@@ -485,7 +480,7 @@ export async function fetch(url, body, options, method = 'post') {
     }
   }
 }
-export async function fetchQuota(url, body, options, method = 'post') {
+export async function fetchQuota (url, body, options, method = 'post') {
   try {
     let res
     if (method === 'get') {
@@ -529,18 +524,18 @@ export async function fetchQuota(url, body, options, method = 'post') {
     }
   }
 }
-export function request(url, body, options) {
+export function request (url, body, options) {
   // if (process.env.NODE_ENV === 'development') {
   // return fetch('/beta-gate/' + url, body, options)
   // }
   return fetch(url, body, options)
 }
-function quote(url, body, options) {
+function quote (url, body, options) {
   return fetchQuota(config.quoteUrl + url, body, options, 'get')
 }
 
 const cache = {}
-function getCache(key, promiseGetter, ttl = 0) {
+function getCache (key, promiseGetter, ttl = 0) {
   if (!cache[key] || (cache[key].expired && cache[key].expired < new Date())) {
     cache[key] = {
       promise: promiseGetter(),
@@ -554,7 +549,7 @@ function getCache(key, promiseGetter, ttl = 0) {
   })
   return cache[key].promise
 }
-function rmCache(key) {
+function rmCache (key) {
   // utils.log('Remove Cache:', key)
   delete cache[key]
 }

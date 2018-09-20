@@ -156,6 +156,25 @@ export default {
         this.state.pro.currency = null
       }
       let [resc, resp] = await service.getBalanceByPair(currency, product)
+      if (!resc || typeof resc.available === 'undefined') {
+        resc = {
+          available: '0',
+          currency: currency,
+          ordering: '0',
+          quota: '20000',
+          withdrawing: '0'
+        }
+      }
+
+      if (!resp || typeof resp.available === 'undefined') {
+        resp = {
+          available: '0',
+          currency: product,
+          ordering: '0',
+          quota: '20000',
+          withdrawing: '0'
+        }
+      }
       if (
         resc &&
         resp &&
