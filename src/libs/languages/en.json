@@ -494,6 +494,7 @@
   "app_download_sologan": "It covers multiple platforms including IOS, Android, Windows and Mac, and supports full-service function.",
   "app_download_ios": "Guide for IOS",
   "my_balance_equal": "Available balance",
+  "fund_reward": "Reward",
   "contact_us": "Help",
   "exchange_area": "Transactios Area",
   "mine_progress": "Mining Progress",
@@ -501,5 +502,6 @@
   "mine_mined": "Mined Amount",
   "mine_remain": "Rest Mining Volume",
   "mine_my_total": "Personal Daily Total Amount of Mining",
-  "mine_my_remain": "My Rest Mining Volume"
+  "mine_my_remain": "My Rest Mining Volume",
+  "waiting_for_release": "Will Release"
 }

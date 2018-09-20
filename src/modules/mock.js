@@ -20,6 +20,7 @@ export const filter = {
   'balance/query': 1,
   'order/active': 0,
   'favorite/list': 1,
+  '/account/candy/list': 1
 
 }
 export const list = [{
@@ -1256,6 +1257,38 @@ export const list = [{
       'pair': 'EOS_BTC',
       'values': ['0.000898', '0.000898', '0.000898', '0.000903', '1068.4975', '0.9614419282', '0.000898', '4', '281.1275']
     }])
+  }
+}, {
+  url: /candy/,
+  res () {
+    return ok([
+      {
+        "id": "11",
+        "user_id": "198110",
+        "chain": "BTC",
+        "currency": "BTC",
+        "type": "type001",
+        "amount": "1.366",
+        "name": "邀请返佣",
+        "confirm": 6,
+        "state": 2,
+        "create_time": 1537193044000,
+        "release_time": 1537193044000
+    },
+    {
+      "id": "11",
+      "user_id": "198110",
+      "chain": "BTC",
+      "currency": "BTC",
+      "type": "type001",
+      "amount": "1.366",
+      "name": "邀请返佣",
+      "confirm": 6,
+      "state": 2,
+      "create_time": 1537193044000,
+      "release_time": 1537193044000
+  },
+    ])
   }
 }]
 

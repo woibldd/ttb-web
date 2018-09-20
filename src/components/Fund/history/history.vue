@@ -13,15 +13,17 @@
           <!-- <el-radio-button label="all">{{ $t('近期交易') }}</el-radio-button> -->
           <el-radio-button label="deposit">{{ $t('deposit') }}</el-radio-button>
           <el-radio-button label="withdraw">{{ $t('withdraw') }}</el-radio-button>
-          <!-- <el-radio-button label="reward"> {{ $t('奖励分配') }} </el-radio-button> -->
+          <el-radio-button label="reward"> {{ $t('fund_reward') }} </el-radio-button>
         </el-radio-group>
       </div>
       <el-table
         :data="tableData"
         height="550"
+        v-loading="loading"
+        cell-class-name="unrelease-cell"
         class="fund-coin-pool">
         <el-table-column
-          v-for="(hd, idx) in header"
+          v-for="(hd, idx) in (type==='reward' ? headerReward:header)"
           :key="idx"
           :formatter="formatter"
           :prop="hd.key"
@@ -29,16 +31,36 @@
 
         <el-table-column
           header-align='right'
+          v-if="type!=='reward'"
           align="right"
           width="200px"
           :label="status.title">
           <!-- <span>解锁/锁仓</span> -->
           <template slot-scope="scope">
-            <span :class="['state', hasComplated(scope.row) && 'complete']">{{ hasComplated(scope.row) ? $t('done') : $t('pending') }}</span>
+            <span :class="['state', hasComplated(scope.row) && 'complete']">
+              {{ hasComplated(scope.row) ? $t('done') : $t('pending') }}
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          header-align='left'
+          v-if="type==='reward'"
+          align="left"
+          width="200px"
+          :label="status.title">
+          <!-- <span>解锁/锁仓</span> -->
+          <template slot-scope="scope">
+            <div v-if="type==='reward'" :class="['state', unReleased(scope.row) && 'un-release']">
+              {{ $t('waiting_for_release') }}
+            </div>
+            <span class="popover">
+              {{ $t('mine_release_at', {time: formatTime(scope.row.release_time)}) }}
+            </span>
           </template>
         </el-table-column>
         <el-table-column
           header-align='right'
+          v-if="type!=='reward'"
           align="right"
           width="200px"
           :label="operate.title">
@@ -87,6 +109,12 @@ export default {
         {key: 'chain', title: this.$i18n.t('chain')},
         {key: 'amount', title: this.$i18n.t('amount')} // -fee
       ],
+      headerReward: [
+        {key: 'create_time', title: this.$i18n.t('time')},
+        {key: 'currency', title: this.$i18n.t('currency')},
+        {key: 'name', title: this.$i18n.t('order_th_type')},
+        {key: 'amount', title: this.$i18n.t('amount')} // -fee
+      ],
       status: {key: 'state', title: this.$i18n.t('state')},
       operate: {key: 'txid', title: this.$i18n.t('actions')},
       tableData: [],
@@ -95,24 +123,8 @@ export default {
       page: 1,
       total: 0,
       unit: 'CNY',
+      loading: true,
       state
-    }
-  },
-  computed: {
-    title () {
-      let res
-      switch (this.type) {
-        case 'deposit':
-          res = this.$t('deposit')
-          break
-        case 'withdraw':
-          res = this.$t('withdraw')
-          break
-        default:
-          res = this.$t('asset')
-          break
-      }
-      return res
     }
   },
   async created () {
@@ -137,6 +149,9 @@ export default {
     getPage () {
       this.getFundHistory(this.type)
     },
+    formatTime (time) {
+      return utils.dateFormatter(time, 'Y-M-D')
+    },
     hasComplated (row) {
       if (this.type === 'deposit' && row.state === 1) {
         return true
@@ -148,7 +163,11 @@ export default {
 
       return false
     },
+    unReleased(row) {
+      return this.type === 'reward' && row.state// TODO 待发放的值需要定一下
+    },
     getFundHistory (from = 'deposit') {
+      this.loading = true
       let request = ''
       switch (from) {
         case 'deposit':
@@ -157,16 +176,22 @@ export default {
         case 'withdraw':
           request = service.getWithdrawHistory
           break
+        case 'reward':
+          request = service.getRewardHistory
+          break
         default:
           break
       }
+
       if (!request) { return }
       const param = {
         page: this.page,
         size: 10
       }
       request(param).then(res => {
+        console.log(res, 'res from history')
         this.tableData = res.data
+        this.loading = false
       })
     },
     getAccountBalanceList () {
@@ -228,6 +253,39 @@ export default {
 
        &.complete {
             color: #31C78C;
+        }
+
+      &.un-release {
+        color: #9FA9B7;
+      }
+    }
+    .unrelease-cell .cell{
+
+        overflow: visible !important;
+        position: relative !important;
+
+        &:hover {
+          .popover{
+            display: inline-block;
+          }
+        }
+
+        .popover {
+          line-height: 1.2;
+          position: absolute;
+          padding: 6px 10px;
+          box-sizing: border-box;
+          display: none;
+          font-size: 14px;
+          font-weight: 400;
+          width: 130px;
+          height: 50px;
+          background:rgba(159,169,183,1);
+          border-radius:4px;
+          color: white;
+          left: 50px;
+          top: 30px;
+          word-break: initial;
         }
     }
     .show-address {

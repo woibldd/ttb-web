@@ -372,6 +372,12 @@ const service = {
   getDepositHistory (param) {
     return request('/account/deposit/list', param)
   },
+
+  // 发放奖励记录
+  getRewardHistory (param) {
+    return request('/account/candy/list', param)
+  },
+
   // 获取添加过的地址列表
   getMyAddressList (param) {
     return request('/account/withdraw/address/list', param)
@@ -416,27 +422,27 @@ const service = {
 }
 
 export async function fetch (url, body, options, method = 'post') {
-  /* let mock = false
-  mock = await Mock()
-  if (mock && url.indexOf('quota.ix') > 0) {
-    const find = _.find(mock.list, item => {
-      return item.url && item.url.test(url)
-    })
-    if (find) {
-      const res = await find.res(body)
-      utils.log('Mock', url, body, res)
-      return res
-    }
-  } else {
-    if (mock.filter[url]) {
-      const find = _.find(mock.list, item => item.url && item.url.test(url))
-      if (find) {
-        const res = await find.res(body)
-        utils.log('Mock', url, body, res)
-        return res
-      }
-    }
-  } */
+  // let mock = false
+  // mock = await Mock()
+  // if (mock && url.indexOf('quota.ix') > 0) {
+  //   const find = _.find(mock.list, item => {
+  //     return item.url && item.url.test(url)
+  //   })
+  //   if (find) {
+  //     const res = await find.res(body)
+  //     utils.log('Mock', url, body, res)
+  //     return res
+  //   }
+  // } else {
+  //   if (mock.filter[url]) {
+  //     const find = _.find(mock.list, item => item.url && item.url.test(url))
+  //     if (find) {
+  //       const res = await find.res(body)
+  //       utils.log('Mock', url, body, res)
+  //       return res
+  //     }
+  //   }
+  // }
   try {
     let res
     if (method === 'get') {
