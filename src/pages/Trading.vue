@@ -359,7 +359,7 @@ export default {
   height: 275px;
 }
 .ix-grid-deal {
-  flex: 1;
+  // flex: 1;
   height: 256px;
 }
 .ix-grid-orderbook {
@@ -367,7 +367,7 @@ export default {
   // height: 2px;
 }
 .ix-grid-pairnav {
-  flex: 1;
+  // flex: 1;
   height: 268px;
 }
 .ix-grid-operate {
