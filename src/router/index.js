@@ -12,7 +12,7 @@ const isMobile = utils.isMobile()
 
 const Home = () => import(/* webpackChunkName: "home" */ '@/pages/home.vue')
 const home_new = () => import(/* webpackChunkName: "home" */ '@/pages/home_new.vue')
-const MobileHome = () => import(/* webpackChunkName: "mobilehome" */ '@/pages/Mobile/home3.vue')
+const MobileHome = () => import(/* webpackChunkName: "mobilehome" */ '@/pages/Mobile/home.vue')
 // const Test1 = () => import(/* webpackChunkName: "Test1" */ '@/pages/test1.vue')
 const Test2 = () => import(/* webpackChunkName: "Test2" */ '@/pages/test2.vue')
 const Trading = () => import(/* webpackChunkName: "Trading" */ '@/pages/Trading')
@@ -29,6 +29,8 @@ const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
 const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pages/PrivacyPolicy')
 const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
 const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/ProfileSafety')
+const relay = () => import(/* webpackChunkName: "relay" */ '@/pages/active/relay')
+const creation = () => import(/* webpackChunkName: "creation" */ '@/pages/active/creation')
 const PhoneBind = () => import(/* webpackChunkName: "PhoneBind" */ '@/pages/PhoneBind')
 const SecuritySummary = () => import(/* webpackChunkName: "SecuritySummary" */ '@/pages/SecuritySummary')
 const eBind = () => import(/* webpackChunkName: "EmailBind" */ '@/pages/eBind')
@@ -95,19 +97,21 @@ let router = new Router({
       path: '/',
       name: 'home',
       meta: {
-        nav: true,
-        class: 'dark',
         auth: false
       },
-      component: isMobile ? MobileHome : home_new
+      component: isMobile ? MobileHome : Home
     }, {
-        path: '/home_new',
-        name: 'home_new',
-        component: home_new,
-        meta: {
-          nav: true,
-          class: 'dark'
-        }
+      path: '/active/creation',
+      name: 'creation',
+      component: creation
+    }, {
+      path: '/active/relay',
+      name: 'relay',
+      component: relay
+    }, {
+      path: '/home_new',
+      name: 'home_new',
+      component: home_new
     }, {
       path: '/PrivacyPolicy',
       name: 'PrivacyPolicy',
