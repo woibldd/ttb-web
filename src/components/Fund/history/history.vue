@@ -50,8 +50,8 @@
           :label="status.title">
           <!-- <span>解锁/锁仓</span> -->
           <template slot-scope="scope">
-            <div v-if="type==='reward'" :class="['state', unReleased(scope.row) && 'un-release']">
-              {{ $t('waiting_for_release') }}
+            <div :class="['state complete', unReleased(scope.row) && 'un-release']">
+              {{ unReleased(scope.row) ? $t('waiting_for_release') : $t('done') }}
             </div>
             <span class="popover">
               {{ $t('mine_release_at', {time: formatTime(scope.row.release_time)}) }}
@@ -164,7 +164,7 @@ export default {
       return false
     },
     unReleased(row) {
-      return this.type === 'reward' && row.state// TODO 待发放的值需要定一下
+      return this.type === 'reward' && row.state == 0// 0 待发放, 1 已完成
     },
     getFundHistory (from = 'deposit') {
       this.loading = true
@@ -189,7 +189,6 @@ export default {
         size: 10
       }
       request(param).then(res => {
-        console.log(res, 'res from history')
         this.tableData = res.data
         this.loading = false
       })
@@ -263,6 +262,7 @@ export default {
 
         overflow: visible !important;
         position: relative !important;
+        cursor: default;
 
         &:hover {
           .popover{
@@ -271,6 +271,7 @@ export default {
         }
 
         .popover {
+          z-index: 11;
           line-height: 1.2;
           position: absolute;
           padding: 6px 10px;
@@ -279,7 +280,6 @@ export default {
           font-size: 14px;
           font-weight: 400;
           width: 130px;
-          height: 50px;
           background:rgba(159,169,183,1);
           border-radius:4px;
           color: white;

@@ -503,5 +503,6 @@
   "mine_remain": "Rest Mining Volume",
   "mine_my_total": "Personal Daily Total Amount of Mining",
   "mine_my_remain": "My Rest Mining Volume",
-  "waiting_for_release": "Will Release"
+  "waiting_for_release": "Will Release",
+  "mine_release_at": "Release at: %{time}"
 }
