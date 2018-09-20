@@ -19,27 +19,7 @@
         </a>
       </div>
     </div>
-    <div class="ind_cen ind_jd" v-if="true">
-      <div class="jd_box">
-        <div
-          class="jd_cen"
-          style="width:30%;">
-          <p>
-            <span>
-              <i>挖矿进度：</i>126631.45633211<i>IX</i>
-            </span>
-          </p>
-        </div>
-        <em>0 IX</em>
-        <em>33,333,333 IX</em>
-      </div>
-      <div class="jd_btxt">
-        <div>0:00 - 8:00</div>
-        <div><span>挖矿总量：</span>,333,333<em>IX</em></div>
-        <div><span>已挖矿量：</span>126631.45633211<em>IX</em></div>
-        <div><span>剩余挖矿量：</span>28,669,123.23441975<em>IX</em></div>
-      </div>
-    </div>
+    <mine-summary></mine-summary>
     <div class="ind_cen ind_tit">
       {{$t('exchange_area')}}
     </div>
@@ -82,6 +62,7 @@
   import service from '@/modules/service'
   import {state} from '@/modules/store'
   import PairTable from '@/components/Trading/PairTable'
+  import MineSummary from '@/components/Mine/MineSummary'
 
   export default {
     data: function () {
@@ -100,7 +81,8 @@
     },
     components: {
       kSlider: Slider,
-      PairTable
+      PairTable,
+      MineSummary
     },
     computed: {
       announcementLink() {
@@ -219,98 +201,7 @@
       }
     }
   }
-
-  .ind_jd {
-    border: 1px solid #CBE6FD;
-    margin-bottom: 59px;
-    padding: 75px 6% 50px 6%;
-    .jd_box {
-      width: 100%;
-      background: #6D869C;
-      height: 4px;
-      border-radius: 4px;
-      position: relative;
-      em {
-        position: absolute;
-        color: #6D869C;
-        font-size: 14px;
-        line-height: 34px;
-        bottom: -34px;
-        &:nth-child(2) {
-          left: 0;
-        }
-        &:nth-child(3) {
-          right: 0;
-        }
-      }
-      .jd_cen {
-        height: 4px;
-        float: left;
-        position: relative;
-        border-radius: 4px;
-        background: #C9A96E;
-        p {
-          display: block;
-          border-left: 5px solid transparent;
-          border-right: 5px solid transparent;
-          border-top: 6px solid #C9A96E;
-          top: -20px;
-          right: -3px;
-          position: absolute;
-          span {
-            display: block;
-            width: 300px;
-            height: 33px;
-            position: absolute;
-            top: -33px;
-            text-align: center;
-            left: 50%;
-            margin-left: -150px;
-            color: #C9A96E;
-            i {
-              &:nth-child(1) {
-                color: #CBE6FD;
-              }
-              &:nth-child(2) {
-                color: #6D869C
-              }
-            }
-          }
-        }
-      }
-    }
-    .jd_btxt {
-      font-size: 20px;
-      overflow: hidden;
-      margin-top: 65px;
-      div {
-        float: left;
-        color: #C9A96E;
-        &:nth-child(1) {
-          width: 15%
-        }
-        &:nth-child(2) {
-          width: 25%;
-        }
-        &:nth-child(3) {
-          width: 25%;
-        }
-        &:last-child {
-          float: right;
-        }
-        b {
-          font-weight: bold;
-        }
-        span {
-          color: #CBE6FD;
-        }
-        em {
-          color: #6D869C;
-        }
-      }
-    }
-  }
-
+  
   .ind_tit {
     height: 35px;
     line-height: 35px;

@@ -348,5 +348,9 @@
   "app_download_ios": "IOS 版下载教程",
   "my_balance_equal": "总资产折合",
   "contact_us": "在线帮助",
-  "exchange_area": "交易区"
+  "exchange_area": "交易区",
+  "mine_progress": "挖矿进度",
+  "mine_total": "挖矿总量",
+  "mine_mined": "已挖矿量",
+  "mine_remain": "剩余挖矿量"
 }

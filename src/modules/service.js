@@ -413,8 +413,7 @@ const service = {
 
   /* 挖矿 */
   getMineTotal (data) {
-    return getCache('currencyList', () => request('account/currency/list'))
-    return request('/account/withdraw/cancel', param)
+    return getCache('mine_total', () => request('mine/exchange/total'), 1e4)
   }
   /* 挖矿 end */
   

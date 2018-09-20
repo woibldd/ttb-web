@@ -1,33 +1,49 @@
 <template>
-  <div class="ix-panel" :class="{progress: progressing}">
-    <div class="mask" :class="{show: hasMask, transparent: curCtx.page > 0}">
-      <v-loading></v-loading>
+  <div
+    class="ix-panel"
+    :class="{progress: progressing}">
+    <div
+      class="mask"
+      :class="{show: hasMask, transparent: curCtx.page > 0}">
+      <v-loading/>
     </div>
     <div class="ix-header">
-      <a class="ix-header-nav raw"
+      <a
+        class="ix-header-nav raw"
         :class="{cur: tab === 'active'}"
         @click.prevent="setTab('active')">
         {{ $t('order_active') }}
         <span v-if="activeTotal">[{{ activeTotal }}]</span>
       </a>
-      <a class="ix-header-nav raw"
+      <a
+        class="ix-header-nav raw"
         :class="{cur: tab === 'history'}"
         @click.prevent="setTab('history')">
         {{ $t('order_history') }}
       </a>
       <div class="header-icons">
-        <span class="hide-others btn on"
+        <span
+          class="hide-others btn on"
           @click="local.hideOthers = !local.hideOthers">
-          <input type="checkbox" v-model="local.hideOthers">
+          <input
+            type="checkbox"
+            v-model="local.hideOthers">
           {{ $t('hide_others', {pair: pair}) }}
         </span>
-        <a @click.prevent="update" class="header-btn btn">
-          <icon name="refresh"></icon>
+        <a
+          @click.prevent="update"
+          class="header-btn btn">
+          <icon name="refresh"/>
         </a>
       </div>
     </div>
-    <div class="ix-panel-body" v-show="tab === 'active'" ref="active">
-      <div class="inner" ref="activeContent">
+    <div
+      class="ix-panel-body"
+      v-show="tab === 'active'"
+      ref="active">
+      <div
+        class="inner"
+        ref="activeContent">
         <table class="table table-ix-order table-active">
           <thead>
             <tr v-show="active.list.length">
@@ -37,7 +53,7 @@
               <!-- <th>{{ $t('order_th_type') }}</th> -->
               <th class="right">{{ $t('price') }}</th>
               <th class="right">{{ $t('amount') }}</th>
-              <th></th>
+              <th/>
               <th>{{ $t('order_th_status') }}</th>
               <!-- <th class="center" v-if="active.list.length">
                 <a class="btn op-cancel" @click.prevent="cancelAll"></a>
@@ -46,11 +62,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="order in active.list" :key="order.id">
+            <tr
+              v-for="order in active.list"
+              :key="order.id">
               <td>{{ order.create_time | date }}</td>
               <td>{{ order.symbol | pairfix }}</td>
-              <td style="color: #09C989" v-if="order.side === 'BUY'">{{$t('order_side_buy')}}</td>
-              <td style="color: #F24E4D" v-else>{{$t('order_side_sell')}}</td>
+              <td
+                style="color: #09C989"
+                v-if="order.side === 'BUY'">{{ $t('order_side_buy') }}</td>
+              <td
+                style="color: #F24E4D"
+                v-else>{{ $t('order_side_sell') }}</td>
               <!-- <td>{{ getType(order.type) }}</td> -->
               <td class="right">
                 <span v-if="order.price > 0">{{ fixPrice(order.price, order.symbol) }}</span>
@@ -66,17 +88,27 @@
                 <!-- <order-deal v-if="order.deal_amount > 0" :key="active.fetchId" :id="order.id" :pairName="order.symbol"/> -->
               </td>
               <td class="center">
-                <a @click.prevent="cancel(order)">{{$t('transfer_cancel')}}</a>
+                <a @click.prevent="cancel(order)">{{ $t('transfer_cancel') }}</a>
               </td>
             </tr>
           </tbody>
         </table>
-        <div class="no-data" v-show="!active.fetching && !active.err && !active.list.length">{{ $t(empty) }}</div>
-        <div class="err" v-show="!active.fetching && active.err && !active.list.length">{{ active.err }}</div>
+        <div
+          class="no-data"
+          v-show="!active.fetching && !active.err && !active.list.length">{{ $t(empty) }}</div>
+        <div
+          class="err"
+          v-show="!active.fetching && active.err && !active.list.length">{{ active.err }}</div>
       </div>
     </div>
-    <div class="ix-panel-body" v-show="tab === 'history'" ref="history" @scroll.prevent="onScroll('history')">
-      <div class="inner" ref="historyContent">
+    <div
+      class="ix-panel-body"
+      v-show="tab === 'history'"
+      ref="history"
+      @scroll.prevent="onScroll('history')">
+      <div
+        class="inner"
+        ref="historyContent">
         <table class="table table-ix-order table-history">
           <thead>
             <tr v-show="history.list.length">
@@ -86,17 +118,23 @@
               <th>{{ $t('order_th_type') }}</th>
               <th class="right">{{ $t('avg_price') }}</th>
               <th class="right">{{ $t('amount') }}</th>
-              <th></th>
+              <th/>
               <th>{{ $t('order_th_status') }}</th>
-              
+
             </tr>
           </thead>
           <tbody>
-            <tr v-for="order in history.list" :key="order.id">
+            <tr
+              v-for="order in history.list"
+              :key="order.id">
               <td>{{ order.create_time | date }}</td>
               <td>{{ order.symbol | pairfix }}</td>
-              <td style="color: #09C989" v-if="order.side === 'BUY'">{{$t('order_side_buy')}}</td>
-              <td style="color: #F24E4D" v-else>{{$t('order_side_sell')}}</td>
+              <td
+                style="color: #09C989"
+                v-if="order.side === 'BUY'">{{ $t('order_side_buy') }}</td>
+              <td
+                style="color: #F24E4D"
+                v-else>{{ $t('order_side_sell') }}</td>
               <td>{{ getType(order.type) }}</td>
               <td class="right">
                 <span v-if="order.deal_amount > 0"><num :num="avg(order)"/></span>
@@ -111,12 +149,16 @@
                 {{ orderSts(order.status) }}
                 <!-- <order-deal v-if="order.status == 3 || order.status == 5 || order.status == 7" :data="order" :pairName="order.symbol" :finished="true" /> -->
               </td>
-              
+
             </tr>
           </tbody>
         </table>
-        <div class="no-data" v-show="!history.fetching && !history.err && !history.list.length">{{ $t(empty) }}</div>
-        <div class="err" v-show="!history.fetching && history.err && !history.list.length">{{ history.err }}</div>
+        <div
+          class="no-data"
+          v-show="!history.fetching && !history.err && !history.list.length">{{ $t(empty) }}</div>
+        <div
+          class="err"
+          v-show="!history.fetching && history.err && !history.list.length">{{ history.err }}</div>
       </div>
     </div>
   </div>
@@ -132,7 +174,7 @@ import orderWatcher from '@/mixins/order-watcher'
 import {pairfix} from '@/mixins/'
 
 export default {
-  name: 'order',
+  name: 'Order',
   mixins: [orderWatcher, pairfix],
   components: {
     // OrderDeal
