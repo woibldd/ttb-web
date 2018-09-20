@@ -102,7 +102,7 @@
         <v-btn
           style="width: 200px"
           @click="ensure"
-          :disabled="showLayerModal"
+          :disabled="disableBtn"
           :label="$t('withdraw_confirm')"/>
       </div>
       <ul
@@ -241,6 +241,9 @@ export default {
     all_bound () {
       // kyc > 0 就可以提币
       return this.state.userInfo && this.state.userInfo.lv > 0
+    },
+    disableBtn () {
+      return !this.email_bound || !this.phone_bound || !this.all_bound
     }
   },
   components: {vModal, countDown},
