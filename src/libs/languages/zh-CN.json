@@ -354,5 +354,30 @@
   "mine_mined": "已挖矿量",
   "mine_remain": "剩余挖矿量",
   "mine_my_total": "个人今日可挖矿总量",
-  "mine_my_remain": "我的今日剩余挖矿量"
+  "mine_my_remain": "我的今日剩余挖矿量",
+  "active_relay_h1": "所有交易手续费的<span>40%</span>等你来拿",
+  "active_relay_h2": "盯紧屏幕，下一个中奖的就是你",
+  "active_relay_h3": "您距离中奖还有<span>20</span>秒",
+  "active_relay_start": "开始时间：2018年9月20日",
+  "active_relay_next": "每日<span>00:00:00重启</span>进入下一轮",
+  "active_relay_totally": "奖池累计额度：",
+  "active_relay_amount": "交易量",
+  "active_relay_operator": "操作",
+  "active_relay_time": "交易时间",
+  "active_relay_join": "立即参加",
+  "active_relay_rule": "规则介绍",
+  "active_relay_rule1": "任一交易对20秒内没有新的交易，则最后一个交易者成为“中奖者”，可获得该交易对产生的所有手续费的40%。新的交易产生后，交易接力重新开始；",
+  "active_relay_rule2": "以天为周期，无论任一交易对当日是否产生“中奖者”，交易接力规则都于次日00:00（GMT+8）重新启动；",
+  "active_relay_rule3": "奖励次日到账",
+  "active_relay_rule4": "IX保留该规则的最终解释权。",
+  "active_relay_example": "举个例子：",
+  "active_relay_example_1": "以BTC/USDT为例<br >开启时间：12:00",
+  "active_relay_example_2": "第一位获奖者A<br >在16:00出现",
+  "active_relay_example_3": "A：获得12:00-16:00期间，<br>BTC/USDT交易手续费的40%",
+  "active_relay_example_4": "第二位获奖者B<br >在21:00出现",
+  "active_relay_example_5": "B：获得16:00-21:00期间，<br>BTC/USDT交易手续费的40%",
+  "active_relay_example_6": "从21:00-24:00没有产生获奖者，<br>那么该区间段产生的交易手续费<br>归入平台手续费收入分配",
+  "active_relay_example_reset": "重置时间：24:00"
+
+
 }

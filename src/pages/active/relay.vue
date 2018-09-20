@@ -3,30 +3,29 @@
     <div class="header">
       <v-nav2
         is-home="true"
-        :notice="notice"
         @hide="notice = null"/>
     </div>
     <div class="banner">
       <div class="banner_txt">
-        <p class="ban-txt">所有交易手续费的<span>40%</span>等你来拿</p>
-        <p>盯紧屏幕，下一个中奖的就是你</p>
-        <p>您距离中奖还有<span>20</span>秒</p>
+        <p class="ban-txt" v-html="$t('active_relay_h1')"></p>
+        <p v-t="'active_relay_h2'"></p>
+        <p v-html="$t('active_relay_h3')"></p>
       </div>
     </div>
     <div class="top-txt">
-      <div class="t-t lt">开始时间：<span>2018年9月20日 12:00:00</span></div>
-      <div class="t-t rt">每日<span>00:00:00重启</span>进入下一轮</div>
+      <div class="t-t lt"><span v-t="'active_relay_start'"></span></div>
+      <div class="t-t rt" v-html="$t('active_relay_next')"></div>
     </div>
     <div class="cen_scr">
       <div class="scr-cen scr-l">
-        <p class="scr-txt">奖池累计额度：<span>85.92114584</span>BTC</p>
+        <p class="scr-txt">{{$t('active_relay_totally')}}<span>85.92114584</span>BTC</p>
         <div class="scr-box">
           <p class="scr-tit">BTC/USDT</p>
           <div class="scr">
             <div class="scr-title">
-              <p class="scr_l">交易量</p>
-              <p class="scr_m">操作</p>
-              <p class="scr_r">交易时间</p>
+              <p class="scr_l">{{$t('active_relay_amount')}}</p>
+              <p class="scr_m">{{$t('active_relay_operator')}}</p>
+              <p class="scr_r">{{$t('active_relay_time')}}</p>
             </div>
             <div
               class="scr-cen"
@@ -37,7 +36,7 @@
                 :class="{anim:animate==true}">
                 <li>
                   <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
+                  <p class="scr_m">{{$t('order_side_buy')}}</p>
                   <p class="scr_r">2018-09-26 13:24:46</p>
                 </li>
                 <li>
@@ -106,10 +105,10 @@
         </div>
         <a
           href="#"
-          class="join">立即参加</a>
+          class="join">{{$t('active_relay_join')}}</a>
       </div>
       <div class="scr-cen scr-m">
-        <p class="scr-txt">奖池累计额度：<span>85.92114584</span>BTC</p>
+        <p class="scr-txt">{{$t('active_relay_totally')}}<span>85.92114584</span>BTC</p>
         <div class="scr-box">
           <p class="scr-tit">BTC/USDT</p>
           <div class="scr">
@@ -174,7 +173,7 @@
           class="join">立即参加</a>
       </div>
       <div class="scr-cen scr-r">
-        <p class="scr-txt">奖池累计额度：<span>85.92114584</span>BTC</p>
+        <p class="scr-txt">{{$t('active_relay_totally')}}<span>85.92114584</span>BTC</p>
         <div class="scr-box">
           <p class="scr-tit">BTC/USDT</p>
           <div class="scr">
@@ -240,40 +239,39 @@
       </div>
     </div>
     <div class="rule">
-      <p>规则介绍</p>
+      <p v-t="'active_relay_rule'"></p>
       <ul>
-        <li>1、平台所有币对适用于此规则，交易功能开启后，该规则生效</li>
-        <li>2、以平台币对BTC/USDT为例，如果该币对超过20秒没有产生交易 ，则20秒前的最后一位交易用户为中奖用户</li>
-        <li>3、中奖用户获得从规则开启到获奖期间所有BTC/USDT交易者交易手续费的40%</li>
-        <li>4、该币对下一位交易者出现；奖池金额继续开始累积；直至24:00奖池金额清零（用于发放奖励或归入社区手续费返还）</li>
-        <li>5、中奖用户奖励派发时间为：次日12:00-14:00。</li>
+        <li>1、{{$t('active_relay_rule1')}}</li>
+        <li>2、{{$t('active_relay_rule2')}}</li>
+        <li>3、{{$t('active_relay_rule3')}}</li>
+        <li>4、{{$t('active_relay_rule4')}}</li>
       </ul>
     </div>
     <div class="example">
-      <p class="ex_tit">举个例子：</p>
+      <p class="ex_tit" v-t="'active_relay_example'"></p>
       <div class="ex_jd">
         <div class="e_a ex_b">
           <div class="ex_ct">
-            <p>以BTC/USDT为例<br >开启时间：12:00</p>
+            <p v-html="$t('active_relay_example_1')"></p>
           </div>
         </div>
         <div class="e_b ex_b">
           <div class="ex_ct">
-            <p>第一位获奖者A<br >在16:00出现</p>
+            <p v-html="$t('active_relay_example_2')"></p>
           </div>
-          <span>A：获得12:00-16:00期间，<br>BTC/USDT交易手续费的40%</span>
+          <span v-html="$t('active_relay_example_3')"></span>
         </div>
         <div class="e_c ex_b">
           <div class="ex_ct">
-            <p>第二位获奖者B<br >在21:00出现</p>
+            <p v-html="$t('active_relay_example_4')"></p>
           </div>
-          <span>B：获得16:00-21:00期间，<br>BTC/USDT交易手续费的40%</span>
+          <span v-html="$t('active_relay_example_5')"></span>
         </div>
         <div class="e_d ex_b">
           <div class="ex_ct">
-            <p>重置时间：24:00</p>
+            <p>{{$t('active_relay_example_reset')}}</p>
           </div>
-          <span>从21:00-24:00没有产生获奖者，<br>那么该区间段产生的交易手续费<br>归入平台手续费收入分配</span>
+          <span v-html="$t('active_relay_example_6')"></span>
         </div>
       </div>
     </div>

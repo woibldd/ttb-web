@@ -99,7 +99,7 @@ let router = new Router({
       meta: {
         auth: false
       },
-      component: isMobile ? MobileHome : Home
+      component: isMobile ? MobileHome : home_new
     }, {
       path: '/active/creation',
       name: 'creation',
