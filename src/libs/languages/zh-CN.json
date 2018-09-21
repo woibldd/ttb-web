@@ -270,7 +270,7 @@
   "invite_history_text": "邀请记录",
   "slogan": "自由人的自由联合",
   "register_success": "注册成功",
-  "declaration": "宣言",
+  "declaration": "共识宣言",
   "whitepagger": "白皮书",
   "coin_intro": "币种资料",
   "Phone_binding": "手机绑定",
@@ -358,5 +358,7 @@
   "mine_my_remain": "我的今日剩余挖矿量",
   "waiting_for_release": "待发放",
   "mine_release_at": "挖矿收入于: %{time} 发放",
-  "remove": "删除"
+  "remove": "删除",
+  "deposit_record": "充币记录",
+  "withdraw_record": "提币记录"
 }

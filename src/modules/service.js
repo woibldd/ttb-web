@@ -342,7 +342,7 @@ const service = {
     }
   },
   getMyInviteList () {
-    return request('/user/invitation/list')
+    return request('user/invitation/list')
   },
   getTerminalDate () {
     return request('get_terminal_date')

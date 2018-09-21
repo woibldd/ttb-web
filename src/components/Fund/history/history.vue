@@ -4,15 +4,15 @@
       <div class="fund-total">
         <div class="left">
           <div class="total__label">{{ $t('withdraw_avlb') }}</div>
-          <div class="total__coin">{{ total }} {{ unit }} </div>
+          <div class="total__coin">{{ total | fixed(2) }} {{ unit }} </div>
         </div>
         <el-radio-group
           @change="changeType"
           class="total__switch"
           v-model="type">
           <!-- <el-radio-button label="all">{{ $t('近期交易') }}</el-radio-button> -->
-          <el-radio-button label="deposit">{{ $t('deposit') }}</el-radio-button>
-          <el-radio-button label="withdraw">{{ $t('withdraw') }}</el-radio-button>
+          <el-radio-button label="deposit">{{ $t('deposit_record') }}</el-radio-button>
+          <el-radio-button label="withdraw">{{ $t('withdraw_record') }}</el-radio-button>
           <el-radio-button label="reward"> {{ $t('fund_reward') }} </el-radio-button>
         </el-radio-group>
       </div>
@@ -121,10 +121,10 @@ export default {
       status: {key: 'state', title: this.$i18n.t('state')},
       operate: {key: 'txid', title: this.$i18n.t('actions')},
       tableData: [],
+      total: 0,
       from: 'all',
       type: this.$route.params.from || 'deposit',
       page: 1,
-      total: 0,
       unit: 'CNY',
       loading: true,
       state
@@ -167,7 +167,7 @@ export default {
       return false
     },
     unReleased (row) {
-      return this.type === 'reward' && row.state == 0// 0 待发放, 1 已完成
+      return this.type === 'reward' && row.state === 0// 0 待发放, 1 已完成
     },
     getFundHistory (from = 'deposit') {
       this.loading = true
@@ -191,6 +191,7 @@ export default {
         page: this.page,
         size: 10
       }
+      this.tableData = []
       request(param).then(res => {
         if (res.data.length === 0) {
           this.loading = false
@@ -202,20 +203,25 @@ export default {
     },
     getAccountBalanceList () {
       return service.getAccountBalanceList().then(res => {
-        let sum = this.$big(0)
-        if (state.locale === 'zh-CN') {
-          this.unit = 'CNY'
-          res.data.forEach(item => {
-            sum = sum.plus(this.$big(item.available).times(this.$big(item.rates.CNY)))
-          })
-        } else if (state.locale === 'en') {
-          this.unit = 'USD'
-          res.data.forEach(item => {
-            sum = sum.plus(this.$big(item.available).times(this.$big(item.rates.USD)))
+        this.total = 0
+        if (!res.code && res.data) {
+          res.data.map(item => {
+            item.locking = this.$big(item.ordering || 0).plus(this.$big(item.withdrawing || 0)).toString()
+            item.amount = this.$big(item.locking).plus(this.$big(item.available)).round(8, this.C.ROUND_DOWN).toString()
+            item.estValue = this.getEstValue(item)
+            this.total = this.$big(this.total).plus(item.estValue)
+            return item
           })
         }
-        this.total = sum.toString()
       })
+    },
+    getEstValue (item) {
+      let res = this.$big(item.amount).times(this.$big(item.rates[this.unit]))
+      let num = 4
+      if (this.unit === 'USD') {
+        num = 8
+      }
+      return res.round(num, this.C.ROUND_DOWN).toString()
     }
   },
   watch: {

@@ -494,7 +494,7 @@
   "my_balance_equal": "Available balance",
   "fund_reward": "Reward",
   "contact_us": "Help",
-  "exchange_area": "Transactios Area",
+  "exchange_area": "Transactions Area",
   "mine_progress": "Mining Progress",
   "mine_total": "Total Mining",
   "mine_mined": "Mined Amount",
@@ -503,5 +503,7 @@
   "mine_my_remain": "My Rest Mining Volume",
   "waiting_for_release": "Will Release",
   "mine_release_at": "Release at: %{time}",
-  "remove": "Remove"
+  "remove": "Remove",
+  "deposit_record": "Top Up",
+  "withdraw_record": "Withdraw"
 }
