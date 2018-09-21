@@ -321,33 +321,41 @@ export default {
         }
       }
       .buy p {
-        animation: shark_buy .5s ease-in-out;
-        transition: all 2s;
+
+        &.scr_m {
+          color: #09C989;
+          animation: shark_buy .5s ease-in-out;
+          transition: all 2s;
+        }
 
         @keyframes shark_buy {
           from {
             opacity: 0;
-            color: #09C989;
+            color: #666666;
           }
           to {
             opacity: 1;
-            color: #666666;
+            color: #09C989;
           }
 
         }
       }
       .sell p {
-        animation: shark_sell .5s ease-in-out;
-        transition: all 2s;
+
+        &.scr_m {
+          color: #F24E4D;
+          animation: shark_sell .5s ease-in-out;
+          transition: all 2s;
+        }
 
         @keyframes shark_sell {
           from {
             opacity: 0;
-            color: #F24E4D;
+            color: #666666;
           }
           to {
             opacity: 1;
-            color: #666666;
+            color: #F24E4D;
           }
 
         }
