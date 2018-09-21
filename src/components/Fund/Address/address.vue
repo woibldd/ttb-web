@@ -2,7 +2,7 @@
   <div class="address-container">
     <div class="fund-container">
       <div class="title-box">
-        <div> {{ $t('deposit') }}</div>
+        <div> {{ $t('address_manage') }}</div>
       </div>
       <div class="fund-items-content">
         <div class="fund-item-row mb-14">
