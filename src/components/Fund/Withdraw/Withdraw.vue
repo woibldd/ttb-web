@@ -36,7 +36,7 @@
           :class="['quick-btn mr-10', selectCoin.currency === c.currency && 'selected']"
           @click="quickSelectCoin(c)"
           v-for="(c, idx) in allCoins"
-          :kyes="idx">
+          :key="idx">
           {{ c.currency }}
         </span>
       </div>
@@ -67,14 +67,6 @@
         <div class="row__label">{{ $t('withdraw_amount') }}</div>
         <div class="row__value">
           <div class="withdraw-address border-1 pl-10">
-            <!-- <el-input
-              class="coin-count"
-              type="number"
-              :min="Number(selectCoin.min_withdraw_amount)"
-              :max="Number(myCoinInfo.available)"
-              :step="Number(selectCoin.min_withdraw_amount)"
-              v-model="withdrawCount"
-            ></el-input> -->
             <input
               class="coin-count"
               type="number"
@@ -227,7 +219,7 @@ export default {
       }
     },
     coinArrival () {
-      return this.$big(this.withdrawCount) - this.$big(this.selectCoin.withdraw_fee)
+      return this.$big(parseFloat(this.withdrawCount) || 0) - this.$big(this.selectCoin.withdraw_fee)
     },
     google_key_bound () {
       if (this.state.userInfo && this.state.userInfo.google_key_bound) {
@@ -311,7 +303,7 @@ export default {
       })
     },
     quickSelectCoin (coin) {
-      this.selectCoin = coin
+      this.changeCoinType(coin)
     },
     getAccountBalanceList () {
       return service.getAccountBalanceList().then(res => {
@@ -349,12 +341,15 @@ export default {
       })
     },
     ensure () {
-      console.log(this.$big(this.withdrawCount), this.selectCoin.min_withdraw_amount, '0000')
-      if (this.$big(this.withdrawCount).lt(this.$big(this.selectCoin.min_withdraw_amount))) {
+      if (this.disableBtn) {
+        utils.alert('请完善你的资料')
+        return
+      }
+      if (this.$big(this.withdrawCount || 0).lt(this.$big(this.selectCoin.min_withdraw_amount))) {
         utils.alert(this.$t('withdraw_count_min_error'))
         return
       }
-      if (this.$big(this.withdrawCount).gt(this.$big(this.myCoinInfo.available))) {
+      if (this.$big(this.withdrawCount || 0).gt(this.$big(this.myCoinInfo.available))) {
         utils.alert(this.$t('withdraw_count_max_error'))
         return
       }

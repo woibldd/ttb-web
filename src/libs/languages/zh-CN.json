@@ -357,5 +357,6 @@
   "mine_my_total": "个人今日可挖矿总量",
   "mine_my_remain": "我的今日剩余挖矿量",
   "waiting_for_release": "待发放",
-  "mine_release_at": "挖矿收入于: %{time} 发放"
+  "mine_release_at": "挖矿收入于: %{time} 发放",
+  "remove": "删除"
 }

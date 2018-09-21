@@ -70,7 +70,7 @@
               class="my-fund-operate a-copy cursor-default ">{{ $t('copy') }}</span>
             <span
               @click="deleteAddr(scope.row)"
-              class="my-fund-operate cursor-default ">{{ $t('profile_api_remove') }}</span>
+              class="my-fund-operate cursor-default ">{{ $t('remove') }}</span>
           </template>
         </el-table-column>
       </el-table>

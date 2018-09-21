@@ -144,8 +144,6 @@
   "profile_api_applied": "Succesful, please check your email ",
   "profile_api_tip": "You can use the API key to perform automation.",
   "profile_api_remove": "Remove",
-  "api_remove_confirm": "Delete the key",
-  "api_remove_confirm_desc": "The key will be disabled after the deletion. Are you sure?",
   "transfer_th_title": "Top Up / Withdraw",
   "transfer_cfm_progress": "Progress",
   "transfer_viewtxid": "View TXID",
@@ -504,5 +502,6 @@
   "mine_my_total": "Personal Daily Total Amount of Mining",
   "mine_my_remain": "My Rest Mining Volume",
   "waiting_for_release": "Will Release",
-  "mine_release_at": "Release at: %{time}"
+  "mine_release_at": "Release at: %{time}",
+  "remove": "Remove"
 }

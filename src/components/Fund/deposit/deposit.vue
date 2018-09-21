@@ -27,7 +27,7 @@
           :class="['quick-btn mr-10', selectCoin.currency === c.currency && 'selected']"
           @click="quickSelectCoin(c)"
           v-for="(c, idx) in allCoins"
-          :kyes="idx">
+          :key="idx">
           {{ c.currency }}
         </span>
       </div>
