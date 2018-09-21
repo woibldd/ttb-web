@@ -1,11 +1,11 @@
 {
   "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    {
-      "language": "vue",
-      "autoFix": true
-    }
+      "javascript",
+      "javascriptreact",
+      {
+          "language": "vue",
+          "autoFix": true
+      }
   ],
   "eslint.autoFixOnSave": true,
   "editor.detectIndentation": false,
@@ -13,7 +13,7 @@
   "editor.renderWhitespace": "all",
   // emmet支持vue中不全tag
   "emmet.includeLanguages": {
-    "vue-html": "html",
-    "vue": "html"
+      "vue-html": "html",
+      "vue": "html"
   }
 }
