@@ -345,11 +345,12 @@ export default {
         utils.alert('请完善你的资料')
         return
       }
+      debugger
       if (this.$big(this.withdrawCount || 0).lt(this.$big(this.selectCoin.min_withdraw_amount))) {
         utils.alert(this.$t('withdraw_count_min_error'))
         return
       }
-      if (this.$big(this.withdrawCount || 0).gt(this.$big(this.myCoinInfo.available))) {
+      if (this.$big(this.withdrawCount || 0).gt(this.$big(this.myCoinInfo.available || 0))) {
         utils.alert(this.$t('withdraw_count_max_error'))
         return
       }

@@ -276,7 +276,7 @@ export const actions = {
   },
   setTitle (locale = 'en') {
     const { exchangeNameConfig } = process.env.THEME_ENV
-    console.log(process.env.THEME_ENV);
+    console.log(process.env.THEME_ENV)
     document.title = exchangeNameConfig[locale]
   },
   async setLocale (locale) {
@@ -304,7 +304,7 @@ export const actions = {
 
         utils.$i18n.setLocaleMessage(locale, actions.replaceName(msg))
       } catch (e) {
-        utils.logE('I18n Failed')
+        utils.logE('load language failed')
       }
     }
     if (locale === state.locale) {

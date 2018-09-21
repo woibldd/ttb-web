@@ -7,48 +7,57 @@
     </div>
     <div class="ind_txt">
       <div class="ind_cen">
-        <div class="ind_c" v-for="(item) in notices" :key="item.id">
-          <a class="text_link" :href="item.url || 'javascript:;'" target="_blank">
-            {{item.title}}
+        <div
+          class="ind_c"
+          v-for="(item) in notices"
+          :key="item.id">
+          <a
+            class="text_link"
+            :href="item.url || 'javascript:;'"
+            target="_blank">
+            {{ item.title }}
           </a>
         </div>
-        <a class="more" :href="announcementLink" target="_blank">
-          <i></i>
-          <i></i>
-          <i></i>
+        <a
+          class="more"
+          :href="announcementLink"
+          target="_blank">
+          <i/>
+          <i/>
+          <i/>
         </a>
       </div>
     </div>
-    <mine-summary></mine-summary>
+    <mine-summary/>
     <div class="ind_cen ind_tit">
-      {{$t('exchange_area')}}
+      {{ $t('exchange_area') }}
     </div>
-    <pair-table></pair-table>
+    <pair-table/>
     <div class="ind_cena">
       <div class="ind_bot">
-        <div class="ind_bot_tit">{{$t('app_download_sologan')}}</div>
+        <div class="ind_bot_tit">{{ $t('app_download_sologan') }}</div>
         <div class="ind_bot_cen">
           <div class="photo iphone"/>
-          <p>{{$t('app_download_ios')}}
-            <span>{{$t('coming_soon')}}</span>
+          <p>{{ $t('app_download_ios') }}
+            <span>{{ $t('coming_soon') }}</span>
           </p>
         </div>
         <div class="ind_bot_cen">
           <div class="photo android"/>
           <p>Android
-            <span>{{$t('coming_soon')}}</span>
+            <span>{{ $t('coming_soon') }}</span>
           </p>
         </div>
         <div class="ind_bot_cen">
           <div class="photo windows"/>
           <p>Windows
-            <span>{{$t('coming_soon')}}</span>
+            <span>{{ $t('coming_soon') }}</span>
           </p>
         </div>
         <div class="ind_bot_cen">
           <div class="photo mac"/>
           <p>Mac
-            <span>{{$t('coming_soon')}}</span>
+            <span>{{ $t('coming_soon') }}</span>
           </p>
         </div>
       </div>
@@ -58,38 +67,44 @@
 
 </template>
 <script>
-  import Slider from '@/components/slider.vue'
-  import service from '@/modules/service'
-  import {state} from '@/modules/store'
-  import PairTable from '@/components/Trading/PairTable'
-  import MineSummary from '@/components/Mine/MineSummary'
+import Slider from '@/components/slider.vue'
+import service from '@/modules/service'
+import {state} from '@/modules/store'
+import PairTable from '@/components/Trading/PairTable'
+import MineSummary from '@/components/Mine/MineSummary'
 
-  export default {
-    data: function () {
-      return {
-        state,
-        banners: [],
-        notices: [],
-        swiperOption: {
-          direction: 'horizontal',
-          loop: true,
-          autoplay: 1000,
-          paginationType: 'fraction',
-          pagination: '.swiper-pagination'
-        },
+export default {
+  data: function () {
+    return {
+      state,
+      banners: [],
+      notices: [],
+      swiperOption: {
+        direction: 'horizontal',
+        loop: true,
+        autoplay: 1000,
+        paginationType: 'fraction',
+        pagination: '.swiper-pagination'
       }
-    },
-    components: {
-      kSlider: Slider,
-      PairTable,
-      MineSummary
-    },
-    computed: {
-      announcementLink() {
-        return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
-      }
-    },
-    async created() {
+    }
+  },
+  components: {
+    kSlider: Slider,
+    PairTable,
+    MineSummary
+  },
+  computed: {
+    announcementLink () {
+      return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
+    }
+  },
+  watch: {
+    'state.locale' (locale) {
+      this.getBanners()
+    }
+  },
+  methods: {
+    async getBanners () {
       const res = await service.getBanners()
       if (!res.code) {
         let list = res.data
@@ -102,7 +117,11 @@
         }
       }
     }
+  },
+  created () {
+    this.getBanners()
   }
+}
 </script>
 <style lang="scss" scoped>
   @import "../styles/vars";
@@ -201,7 +220,7 @@
       }
     }
   }
-  
+
   .ind_tit {
     height: 35px;
     line-height: 35px;
