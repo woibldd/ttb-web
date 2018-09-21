@@ -219,7 +219,7 @@ export default {
       }
     },
     coinArrival () {
-      return this.$big(parseFloat(this.withdrawCount) || 0) - this.$big(this.selectCoin.withdraw_fee)
+      return this.$big(parseFloat(this.withdrawCount) || 0).minus(this.$big(this.selectCoin.withdraw_fee || 0)).toString()
     },
     google_key_bound () {
       if (this.state.userInfo && this.state.userInfo.google_key_bound) {

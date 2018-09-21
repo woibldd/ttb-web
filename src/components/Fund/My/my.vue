@@ -1,7 +1,8 @@
 <template>
   <div class="fund-container my-fund-container">
     <div class="title-box">
-      <div> {{ $t('wallets_nav_asset') }} <span class="title__second"> <span class="mt-10 mr-10">></span>{{ $t('capital_record') }}</span></div>
+
+      <div>{{ $t('wallets_nav_asset') }}</div>
       <router-link
         v-if="!showHistory"
         class="fund-history"

@@ -3,13 +3,13 @@
     <div class="left-menu-container left-menu-nobottom">
       <p class="left-menu-title">
         <icon name="fund-history-money"/>
-        <span class="menu-title">{{ $t('capital_manage') }}</span>
+        <span class="menu-title">{{ $t('wallets_nav_asset') }}</span>
       </p>
       <ul class="left-menu-list">
         <li class="active"><router-link
           class="menu-name"
           active-class="active"
-          to="/fund/my">{{ $t('wallets_nav_asset') }}</router-link></li>
+          to="/fund/my">{{ $t('capital_manage') }}</router-link></li>
         <li class=""><router-link
           class="menu-name"
           active-class="active"
