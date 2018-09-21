@@ -5,8 +5,8 @@
         <router-link
           :to="{name:'home'}"
           class="footer_logo"/>
-        <p class="footer_ltxt">{{$t('footer_services_email')}}：service@ix.com</p>
-        <p class="footer_ltxt">{{$t('footer_bussness')}}：business@ix.com</p>
+        <p class="footer_ltxt">{{ $t('footer_services_email') }}：service@ix.com</p>
+        <p class="footer_ltxt">{{ $t('footer_bussness') }}：business@ix.com</p>
         <div class="contact-list">
           <a
             class="contact-item-wrapper mr-20 pointer"
@@ -58,23 +58,35 @@
       </div>
       <div class="footer_right">
         <div class="footer_ct">
-          <p>{{$t('footer_services')}}</p>
-          <router-link :to="{name: 'trading'}">{{$t('trading')}}</router-link>
-          <!-- <a href="#" target="_blank">{{$t('footer_services')}}</a> -->
+          <p>{{ $t('footer_services') }}</p>
+          <router-link :to="{name: 'trading'}">{{ $t('trading') }}</router-link>
+          <a
+            :href="aboutLink"
+            target="_blank">{{ $t('footer_about') }}</a>
           <!-- <a href="#" target="_blank">{{$t('footer_help')}}</a> -->
-          <a :href="requestLink" target="_blank">{{$t('footer_request')}}</a>
+          <a
+            :href="requestLink"
+            target="_blank">{{ $t('footer_request') }}</a>
         </div>
         <div class="footer_ct">
-          <p>{{$t('footer_tools')}}</p>
-          <a :href="announcementLink" target="_blank">{{$t('footer_notice')}}</a>
-          <a :href="helpLink" target="_blank">{{$t('user_guide')}}</a>
-          <!-- <a href="#" target="_blank">{{$t('footer_api')}}</a> -->
+          <p>{{ $t('footer_tools') }}</p>
+          <a
+            :href="announcementLink"
+            target="_blank">{{ $t('footer_notice') }}</a>
+          <a
+            :href="helpLink"
+            target="_blank">{{ $t('user_guide') }}</a>
+            <!-- <a href="#" target="_blank">{{$t('footer_api')}}</a> -->
         </div>
         <div class="footer_ct">
-          <p>{{$t('footer_terms')}}</p>
-          <router-link :to="{name: 'terms'}" target="_blank">{{$t('footer_agreement')}}</router-link>
-          <router-link :to="{name: 'PrivacyPolicy'}" target="_blank">{{$t('footer_private')}}</router-link>
-          <!-- <a href="#" target="_blank">{{$t('footer_fee')}}</a> -->
+          <p>{{ $t('footer_terms') }}</p>
+          <router-link
+            :to="{name: 'terms'}"
+            target="_blank">{{ $t('footer_agreement') }}</router-link>
+          <router-link
+            :to="{name: 'PrivacyPolicy'}"
+            target="_blank">{{ $t('footer_private') }}</router-link>
+            <!-- <a href="#" target="_blank">{{$t('footer_fee')}}</a> -->
         </div>
       </div>
     </div>
@@ -102,6 +114,9 @@ export default {
     },
     announcementLink () {
       return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
+    },
+    aboutLink () {
+      return `/docs/IX_introduction_${this.state.locale || 'en'}.pdf`
     }
   }
 }

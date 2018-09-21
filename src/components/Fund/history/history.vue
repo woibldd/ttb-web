@@ -56,7 +56,9 @@
                 name="question"
                 v-if="unReleased(scope.row)" />
             </div>
-            <span class="popover">
+            <span
+              class="popover"
+              v-if="unReleased(scope.row)">
               {{ $t('mine_release_at', {time: formatTime(scope.row.release_time)}) }}
             </span>
           </template>
@@ -143,8 +145,10 @@ export default {
       }
     },
     showCXID (row) {
-      const url = utils.getBlockChainUrl(row.txid, 'tx', row.chain)
-      window.open(url)
+      if (row.txid) {
+        const url = utils.getBlockChainUrl(row.txid, 'tx', row.chain)
+        window.open(url)
+      }
     },
     changeType (type) {
       this.getFundHistory(type)

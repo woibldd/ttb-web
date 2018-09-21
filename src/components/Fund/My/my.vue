@@ -6,7 +6,7 @@
       <router-link
         v-if="!showHistory"
         class="fund-history"
-        to="/fund/my/history/withdraw"> {{ $t('capital_record') }}</router-link>
+        to="/fund/my/history/deposit"> {{ $t('capital_record') }}</router-link>
     </div>
     <div
       v-if="!showHistory"
