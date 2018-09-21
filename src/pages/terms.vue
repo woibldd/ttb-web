@@ -1,57 +1,59 @@
 <template>
-<div class="page-home">
-  <div class="header">
-    <v-nav2 isHome="true" :notice="notice" @hide="notice = null"></v-nav2>
-  </div>
+  <div class="page-home">
+    <div class="header">
+      <v-nav2
+        is-home="true"
+        @hide="notice = null"/>
+    </div>
 
-  <doc-wrap :title="$t('title')">
-    <h3>{{ $t('subtitle1') }}</h3>
-    <p>{{ $t('p1') }}</p>
-    <p>{{ $t('p2') }}</p>
-    <p>{{ $t('p3') }}</p>
-    <h3>{{ $t('subtitle2') }}</h3>
-    <p>{{ $t('p3a') }}</p>
-    <p>{{ $t('p4') }}</p>
-    <p>{{ $t('p5') }}</p>
-    <p>{{ $t('p6') }}</p>
-    <p>{{ $t('p7') }}</p>
-    <p>{{ $t('p8') }}</p>
-    <h3>{{ $t('p10') }}</h3>
-    <ul>
+    <doc-wrap :title="$t('title')">
+      <h3>{{ $t('subtitle1') }}</h3>
+      <p>{{ $t('p1') }}</p>
+      <p>{{ $t('p2') }}</p>
+      <p>{{ $t('p3') }}</p>
+      <h3>{{ $t('subtitle2') }}</h3>
+      <p>{{ $t('p3a') }}</p>
+      <p>{{ $t('p4') }}</p>
+      <p>{{ $t('p5') }}</p>
+      <p>{{ $t('p6') }}</p>
+      <p>{{ $t('p7') }}</p>
+      <p>{{ $t('p8') }}</p>
+      <h3>{{ $t('p10') }}</h3>
+      <ul>
         <li>{{ $t('p11') }}</li>
         <li>{{ $t('p12') }}</li>
         <li>{{ $t('p13') }}</li>
         <li>{{ $t('p14') }}</li>
         <li>{{ $t('p15') }}</li>
         <li>{{ $t('p16') }}</li>
-    </ul>
-    <h3>{{ $t('subtitle4') }}</h3>
-    <ul>
-      <li>{{ $t('p17') }}</li>
-      <li>{{ $t('p18') }}</li>
-      <li>{{ $t('p19') }}</li>
-      <li>{{ $t('p20') }}</li>
-    </ul>
-    <h3>{{ $t('subtitle5') }}</h3>
-    <ul>
-      <li>{{ $t('p21') }}</li>
-    </ul>
-    <h3>{{ $t('subtitle6') }}</h3>
-    <ul>
+      </ul>
+      <h3>{{ $t('subtitle4') }}</h3>
+      <ul>
+        <li>{{ $t('p17') }}</li>
+        <li>{{ $t('p18') }}</li>
+        <li>{{ $t('p19') }}</li>
+        <li>{{ $t('p20') }}</li>
+      </ul>
+      <h3>{{ $t('subtitle5') }}</h3>
+      <ul>
+        <li>{{ $t('p21') }}</li>
+      </ul>
+      <h3>{{ $t('subtitle6') }}</h3>
+      <ul>
         <li>{{ $t('p22') }}</li>
         <li>{{ $t('p23') }}</li>
         <li>{{ $t('p24') }}</li>
         <li>{{ $t('p25') }}</li>
         <li>{{ $t('p26') }}</li>
-    </ul>
-    <h3>{{ $t('subtitle7') }}</h3>
-    <ul>
+      </ul>
+      <h3>{{ $t('subtitle7') }}</h3>
+      <ul>
         <li>{{ $t('p27') }}</li>
         <li>{{ $t('p28') }}</li>
         <li>{{ $t('p29') }}</li>
-    </ul>
-    <h3>{{ $t('subtitle8') }}</h3>
-    <ul>
+      </ul>
+      <h3>{{ $t('subtitle8') }}</h3>
+      <ul>
         <li>{{ $t('p30') }}</li>
         <li>{{ $t('p31') }}</li>
         <li>{{ $t('p32') }}</li>
@@ -65,9 +67,9 @@
         <li>{{ $t('p40') }}</li>
         <li>{{ $t('p41') }}</li>
         <li>{{ $t('p42') }}</li>
-    </ul>
-    <h3>{{ $t('subtitle9') }}</h3>
-    <ul>
+      </ul>
+      <h3>{{ $t('subtitle9') }}</h3>
+      <ul>
         <li>{{ $t('p43') }}</li>
         <li>{{ $t('p44') }}</li>
         <li>{{ $t('p45') }}</li>
@@ -77,38 +79,38 @@
         <li>{{ $t('p49') }}</li>
         <li>{{ $t('p50') }}</li>
         <li>{{ $t('p51') }}</li>
-    </ul>
-    <h3>{{ $t('subtitle10') }}</h3>
-    <ul>
+      </ul>
+      <h3>{{ $t('subtitle10') }}</h3>
+      <ul>
         <li>{{ $t('p52') }}</li>
         <li>{{ $t('p53') }}</li>
-    </ul>
-    <h3>{{ $t('subtitle11') }}</h3>
-    <ul>
+      </ul>
+      <h3>{{ $t('subtitle11') }}</h3>
+      <ul>
         <li>{{ $t('p54') }}</li>
         <li>
-            <ul>
-                <li>{{ $t('p55') }}</li>
-                <li>{{ $t('p56') }}</li>
-                <li>{{ $t('p57') }}</li>
-                <li>{{ $t('p58') }}</li>
-                <li>{{ $t('p59') }}</li>
-                <li>{{ $t('p60') }}</li>
-                <li>{{ $t('p61') }}</li>
-                <li>{{ $t('p62') }}</li>
+          <ul>
+            <li>{{ $t('p55') }}</li>
+            <li>{{ $t('p56') }}</li>
+            <li>{{ $t('p57') }}</li>
+            <li>{{ $t('p58') }}</li>
+            <li>{{ $t('p59') }}</li>
+            <li>{{ $t('p60') }}</li>
+            <li>{{ $t('p61') }}</li>
+            <li>{{ $t('p62') }}</li>
 
-            </ul>
+          </ul>
         </li>
         <li>{{ $t('p63') }}</li>
         <li>
-            <ul>
-                <li>{{ $t('p64') }}</li>
-                <li>{{ $t('p65') }}</li>
-                <li>{{ $t('p66') }}</li>
-                <li>{{ $t('p67') }}</li>
-                <li>{{ $t('p68') }}</li>
+          <ul>
+            <li>{{ $t('p64') }}</li>
+            <li>{{ $t('p65') }}</li>
+            <li>{{ $t('p66') }}</li>
+            <li>{{ $t('p67') }}</li>
+            <li>{{ $t('p68') }}</li>
 
-            </ul>
+          </ul>
         </li>
         <li>{{ $t('p69') }}</li>
         <li>{{ $t('p70') }}</li>
@@ -120,67 +122,65 @@
         <li>{{ $t('p76') }}</li>
         <li>{{ $t('p77') }}</li>
         <li>{{ $t('p78') }}</li>
-    </ul>
-    <h3>{{ $t('subtitle12') }}</h3>
-    <ul>
-      <li>{{ $t('p79') }}</li>
-      <li>{{ $t('p80') }}</li>
-      <li>{{ $t('p81') }}</li>
-      <li>{{ $t('p82') }}</li>
-    </ul>
-    <h3>{{ $t('subtitle13') }}</h3>
-    <ul>
+      </ul>
+      <h3>{{ $t('subtitle12') }}</h3>
+      <ul>
+        <li>{{ $t('p79') }}</li>
+        <li>{{ $t('p80') }}</li>
+        <li>{{ $t('p81') }}</li>
+        <li>{{ $t('p82') }}</li>
+      </ul>
+      <h3>{{ $t('subtitle13') }}</h3>
+      <ul>
         <li>{{ $t('p83') }}</li>
         <li>{{ $t('p84') }}</li>
         <li>{{ $t('p85') }}</li>
         <li>{{ $t('p86') }}</li>
-    </ul>
-    <h3>{{ $t('subtitle14') }}</h3>
-    <ul>
+      </ul>
+      <h3>{{ $t('subtitle14') }}</h3>
+      <ul>
         <li>{{ $t('p87') }}</li>
-    </ul>
-    <h3>{{ $t('subtitle15') }}</h3>
-    <ul>
-      <li>{{ $t('p88') }}</li>
-    </ul>
-    <h3>{{ $t('subtitle16') }}</h3>
-    <ul>
-      <li>{{ $t('p89') }}</li>
-    </ul>
-    <h3>{{ $t('subtitle17') }}</h3>
-    <ul>
-      <li>{{ $t('p90') }}</li>
-    </ul>
-    <h3>{{ $t('subtitle18') }}</h3>
-    <ul>
-      <li>{{ $t('p91') }}</li>
-    </ul>
-    <h3>{{ $t('subtitle19') }}</h3>
-    <ul>
-      <li>{{ $t('p92') }}</li>
-    </ul>
-    <h3>{{ $t('subtitle20') }}</h3>
-    <ul>
-      <li>{{ $t('p93') }}</li>
-      <li>{{ $t('p94') }}</li>
-    </ul>
-    <h3>{{ $t('subtitle21') }}</h3>
-    <ul>
-      <li>{{ $t('p95') }}</li>
-      <li>{{ $t('p96') }}</li>
-    </ul>
+      </ul>
+      <h3>{{ $t('subtitle15') }}</h3>
+      <ul>
+        <li>{{ $t('p88') }}</li>
+      </ul>
+      <h3>{{ $t('subtitle16') }}</h3>
+      <ul>
+        <li>{{ $t('p89') }}</li>
+      </ul>
+      <h3>{{ $t('subtitle17') }}</h3>
+      <ul>
+        <li>{{ $t('p90') }}</li>
+      </ul>
+      <h3>{{ $t('subtitle18') }}</h3>
+      <ul>
+        <li>{{ $t('p91') }}</li>
+      </ul>
+      <h3>{{ $t('subtitle19') }}</h3>
+      <ul>
+        <li>{{ $t('p92') }}</li>
+      </ul>
+      <h3>{{ $t('subtitle20') }}</h3>
+      <ul>
+        <li>{{ $t('p93') }}</li>
+        <li>{{ $t('p94') }}</li>
+      </ul>
+      <h3>{{ $t('subtitle21') }}</h3>
+      <ul>
+        <li>{{ $t('p95') }}</li>
+        <li>{{ $t('p96') }}</li>
+      </ul>
 
-
-
-  </doc-wrap>
-</div>
+    </doc-wrap>
+  </div>
 </template>
 
 <script>
-import VNav2 from '@/components/VNav2'
+import VNav2 from '@/components/VNav3'
 import DocWrap from '@/components/docwrap'
 export default {
-  name: 'privacy-Policy',
+  name: 'Terms',
   components: {
     VNav2,
     DocWrap
@@ -304,7 +304,7 @@ export default {
         p94: '18.2	 Any related dispute arising from this agreement or the services of this website shall be submitted to the Singapore International Arbitration Centre for arbitration, which should be in accordance with the latest SIAC Arbitration Rules ,and take Singapore as the place of arbitration to be solved by arbitration finally. The SIAC Rules is regarded as part of the arbitration clause.',
         subtitle21: '19.	The agreement of entry into force and interpretation',
         p95: '19.1	This agreement shall become effective when you click the registration page of this website to sign up and complete the registration procedures, obtain the account number and password of this website, and shall be binding on this you and website.',
-        p96: '19.2	The final interpretation right of this agreement belongs to this website.',
+        p96: '19.2	The final interpretation right of this agreement belongs to this website.'
 
       },
       'zh-CN': {
@@ -424,7 +424,7 @@ export default {
         p94: '18.2	如因本协议或本网站服务所引起或与其有关的任何争议应提交新加坡国际仲裁中心（下称“新仲”），依据仲裁开始时最新施行的《新加坡国际仲裁中心仲裁规则》（下称“新仲规则”），以新加坡为仲裁地，通过仲裁方式最终解决。新仲规则视为本仲裁条款的一部分。',
         subtitle21: '19	协议的生效和解释',
         p95: '19.1	本协议于您点击本网站注册页面的同意注册并完成注册程序、获得本网站账号和密码时生效，对本网站和您均具有约束力。',
-        p96: '19.2	本协议的最终解释权归本网站所有。',
+        p96: '19.2	本协议的最终解释权归本网站所有。'
       }
     }
   }

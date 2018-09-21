@@ -5,7 +5,7 @@
     .ind_jd {
         border: 1px solid #cbe6fd;
         margin-bottom: 59px;
-        padding: 75px 6% 50px 6%;
+        padding: 75px 6% 30px 6%;
         .unit {
           color: #6d869c;
           margin-left: 5px;
@@ -66,12 +66,16 @@
           }
         }
         .jd_btxt {
-          font-size: 20px;
+          font-size: 14px;
           overflow: hidden;
-          margin-top: 65px;
+          margin-top: 45px;
           display: flex;
-        //   flex-direction: column;
           color: #c9a96e;
+
+          .time_range {
+            min-width: 120px;
+            font-size: 18px;
+          }
         }
     }
       
@@ -89,6 +93,7 @@
         margin-left: 1.5%;
         color: #CBE6FD;
         padding: 0 20px;
+        min-width: 300px;
         padding-top: 30px;
         .cm-tit,.cm-bst{
             color: #CBE6FD;
@@ -101,7 +106,6 @@
             color: #C9A96E;
             span{
             font-size: 20px;
-            padding-left: 10px;
             }
         }
         .cm-bst{

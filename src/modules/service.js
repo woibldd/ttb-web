@@ -412,10 +412,13 @@ const service = {
 
   /* 挖矿 */
   getMineTotal (data) {
-    return getCache('mine_total', () => request('mine/exchange/total'), 1e4)
+    return request('mine/exchange/total', data)
   },
   getPersonalTotal (data) {
     return getCache('mine_my_total', () => request('mine/exchange/me'), 1e4)
+  },
+  getInviteMineTotal (data) {
+    return request('mine/invite/total', data)
   },
   /* 挖矿 end */
 

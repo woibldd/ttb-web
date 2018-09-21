@@ -15,7 +15,7 @@
         <em class="cursor cursor_right">{{ mineSummary.max_amount | fixed(2) | thousand }} IX</em>
       </div>
       <div class="jd_btxt">
-        <div class="row time_range">{{ mineSummary.range }}</div>
+        <div class="row time_range mr-20">{{ mineSummary.range }}</div>
         <div class="row col left__col mr-20">
           <p class="text mb-6">{{ $t('mine_total') }} : </p>
           <p>{{ mineSummary.max_amount | fixed(2) | thousand }}<em class="unit">IX</em></p>
@@ -30,28 +30,31 @@
         </div>
       </div>
       <div
-        class="jd_btxt mt-30"
+        class="jd_btxt mt-20"
         v-if="hasMineMy">
         <div class="row personal"><span class="text">{{ $t('mine_my_total') }} : </span>{{ mineMy.max_amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
         <div class="row personal ml-30"><span class="text">{{ $t('mine_my_remain') }} : </span>{{ ( mineMy.max_amount - mineMy.amount ) | fixed(2) | thousand }}<em class="unit">IX</em></div>
       </div>
     </div>
     <div
+      v-if="showMiddle"
       class="jd_c jd_middle ind_jd">
       <div class="cm-tit">
-        昨日交易挖矿产出
+        {{ $t('mine_mining_amount') }}
       </div>
       <div class="cm-bt">
-        26993.00000000<span>IX</span>
+        {{ yestodayMine.exchangeMine | round(4) }}
+        <span>IX</span>
       </div>
       <div class="cm-bst">
-        昨日邀请挖矿产出：
+        {{ $t('mine_invite_amount') }}
       </div>
       <div class="cm-bn">
-        19222.99002345 IX
+        {{ yestodayMine.inviteMine | round(4) }} IX
       </div>
     </div>
     <div
+      v-if="false"
       class="jd_c jd_right ind_jd">
       <div class="cm-tit">
         昨日交易挖矿产出
@@ -88,8 +91,13 @@ export default {
         max_amount: '333333333333',
         amount: 0
       },
+      yestodayMine: {
+        exchangeMine: 0,
+        inviteMine: 0
+      },
       mineMy: {},
-      timer: 0
+      timer: 0,
+      showMiddle: false
     }
   },
   computed: {
@@ -102,7 +110,7 @@ export default {
   },
   methods: {
     async fetch () {
-      let res = await service.getMineTotal()
+      let res = await service.getMineTotal({offset: 0})
       if (!res.code && !isEmpty(res.data)) {
         this.mineSummary = this.fixData(res.data)
       }
@@ -111,6 +119,19 @@ export default {
         if (!resMy.code && !isEmpty(resMy.data)) {
           this.mineMy = resMy.data
         }
+      }
+    },
+    async getYestoryData () {
+      let res = await service.getMineTotal({offset: -1})
+      if (!res.code && !isEmpty(res.data)) {
+        this.showMiddle = true
+        this.yestodayMine.exchangeMine = res.data.amount
+      }
+
+      let resp = await service.getInviteMineTotal({offset: -1})
+      if (!resp.code && !isEmpty(resp.data)) {
+        this.showMiddle = true
+        this.yestodayMine.inviteMine = resp.data.amount
       }
     },
     loop () {
@@ -129,6 +150,7 @@ export default {
   created () {
     this.fetch()
     this.loop()
+    this.getYestoryData()
   }
 }
 </script>
