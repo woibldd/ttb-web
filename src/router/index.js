@@ -12,7 +12,7 @@ const isMobile = utils.isMobile()
 
 const Home = () => import(/* webpackChunkName: "home" */ '@/pages/home.vue')
 const home_new = () => import(/* webpackChunkName: "home" */ '@/pages/home_new.vue')
-const MobileHome = () => import(/* webpackChunkName: "mobilehome" */ '@/pages/Mobile/home3.vue')
+const MobileHome = () => import(/* webpackChunkName: "mobilehome" */ '@/pages/Mobile/home.vue')
 // const Test1 = () => import(/* webpackChunkName: "Test1" */ '@/pages/test1.vue')
 const Test2 = () => import(/* webpackChunkName: "Test2" */ '@/pages/test2.vue')
 const Trading = () => import(/* webpackChunkName: "Trading" */ '@/pages/Trading')
@@ -29,6 +29,8 @@ const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
 const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pages/PrivacyPolicy')
 const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
 const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/ProfileSafety')
+const relay = () => import(/* webpackChunkName: "relay" */ '@/pages/active/relay')
+const creation = () => import(/* webpackChunkName: "creation" */ '@/pages/active/creation')
 const PhoneBind = () => import(/* webpackChunkName: "PhoneBind" */ '@/pages/PhoneBind')
 const SecuritySummary = () => import(/* webpackChunkName: "SecuritySummary" */ '@/pages/SecuritySummary')
 const eBind = () => import(/* webpackChunkName: "EmailBind" */ '@/pages/eBind')
@@ -95,32 +97,41 @@ let router = new Router({
       path: '/',
       name: 'home',
       meta: {
-        nav: true,
-        class: 'dark',
         auth: false
       },
       component: isMobile ? MobileHome : home_new
-    }, {
-        path: '/home_new',
-        name: 'home_new',
-        component: home_new,
-        meta: {
-          nav: true,
-          class: 'dark'
-        }
-    }, {
+    },
+    {
+      path: '/active/creation',
+      name: 'creation',
+      component: creation
+    },
+    {
+      path: '/active/relay',
+      name: 'relay',
+      component: relay
+    },
+    {
+      path: '/home_new',
+      name: 'home_new',
+      component: home_new
+    },
+    {
       path: '/PrivacyPolicy',
       name: 'PrivacyPolicy',
       component: PrivacyPolicy
-    }, {
+    },
+    {
       path: '/terms',
       name: 'terms',
       component: terms
-    }, {
+    },
+    {
       path: '/test2',
       name: 'Test2',
       component: Test2
-    }, {
+    },
+    {
       path: '/trading/:pair?',
       name: 'trading',
       meta: {
@@ -130,7 +141,8 @@ let router = new Router({
         nav: false
       },
       component: Trading
-    }, {
+    },
+    {
       path: '/profile',
       name: 'profile',
       meta: {
@@ -145,63 +157,76 @@ let router = new Router({
 
       // component: (isMobile && process.env.MODE === 'beta') ? MobileProfile : Profile
       component: Profile,
-      children: [{
-        path: 'invite',
-        name: 'invite',
-        component: Invite
-      }, {
-        path: 'info',
-        name: 'ProfileInfo',
-        component: ProfileInfo
-      }, {
-        path: 'security',
-        name: 'ProfileSafety',
-        component: ProfileSafety,
-        redirect: 'security/summary',
-        children: [{
-          path: 'summary',
-          name: 'Safety',
-          component: SecuritySummary
-        }, {
-          path: 'phone',
-          name: 'PhoneBind',
-          component: PhoneBind
-        }, {
-          path: 'email',
-          name: 'EmailBind',
-          component: eBind
-        }, {
-          path: 'change_password',
-          name: 'ModPwd',
-          component: ModPwd
-        }, {
-          path: '2fa',
-          name: 'GoogleBind',
-          component: GoogleTitle
-        }]
-      }, {
-        path: 'kyc',
-        name: 'Kyc',
-        component: Kyc,
-        redirect: 'kyc/kyc_step1',
-        children: [
-          {
-            path: 'kyc_step1',
-            name: 'KycStep1',
-            component: Kyc1
-          }, {
-            path: 'kyc_step2',
-            name: 'KycStep2',
-            component: Kyc2
-          }, {
-            path: 'kyc_step3',
-            name: 'KycStep3',
-            component: Kyc3
-          }
-        ]
-      }
+      children: [
+        {
+          path: 'invite',
+          name: 'invite',
+          component: Invite
+        },
+        {
+          path: 'info',
+          name: 'ProfileInfo',
+          component: ProfileInfo
+        },
+        {
+          path: 'security',
+          name: 'ProfileSafety',
+          component: ProfileSafety,
+          redirect: 'security/summary',
+          children: [
+            {
+              path: 'summary',
+              name: 'Safety',
+              component: SecuritySummary
+            },
+            {
+              path: 'phone',
+              name: 'PhoneBind',
+              component: PhoneBind
+            },
+            {
+              path: 'email',
+              name: 'EmailBind',
+              component: eBind
+            },
+            {
+              path: 'change_password',
+              name: 'ModPwd',
+              component: ModPwd
+            },
+            {
+              path: '2fa',
+              name: 'GoogleBind',
+              component: GoogleTitle
+            }
+          ]
+        },
+        {
+          path: 'kyc',
+          name: 'Kyc',
+          component: Kyc,
+          redirect: 'kyc/kyc_step1',
+          children: [
+            {
+              path: 'kyc_step1',
+              name: 'KycStep1',
+              component: Kyc1
+            },
+            {
+              path: 'kyc_step2',
+              name: 'KycStep2',
+              component: Kyc2
+            },
+            {
+              path: 'kyc_step3',
+              name: 'KycStep3',
+              component: Kyc3
+            }
+          ]
+        }
       ]
-    }, {
+    },
+    {
       path: '/user',
       name: 'account',
       meta: {
@@ -210,39 +235,47 @@ let router = new Router({
         class: 'login'
       },
       component: Account,
-      children: [{
-        path: 'login',
-        name: 'login',
-        component: Login,
-        redirect: 'login/email'
-      }, {
-        path: 'login/:by',
-        name: 'loginBy',
-        component: Login,
-        props: true
-      }, {
-        path: 'register',
-        name: 'register',
-        component: Register,
-        redirect: 'register/email'
-      }, {
-        path: 'register/:by',
-        name: 'registerBy',
-        component: Register,
-        props: true
-      }, {
-        path: 'recover',
-        name: 'recover',
-        component: Recover,
-        redirect: 'recover/email',
-        props: true
-      }, {
-        path: 'recover/:by?',
-        name: 'recoverBy',
-        component: Recover,
-        props: true
-      }]
-    }, {
+      children: [
+        {
+          path: 'login',
+          name: 'login',
+          component: Login,
+          redirect: 'login/email'
+        },
+        {
+          path: 'login/:by',
+          name: 'loginBy',
+          component: Login,
+          props: true
+        },
+        {
+          path: 'register',
+          name: 'register',
+          component: Register,
+          redirect: 'register/email'
+        },
+        {
+          path: 'register/:by',
+          name: 'registerBy',
+          component: Register,
+          props: true
+        },
+        {
+          path: 'recover',
+          name: 'recover',
+          component: Recover,
+          redirect: 'recover/email',
+          props: true
+        },
+        {
+          path: 'recover/:by?',
+          name: 'recoverBy',
+          component: Recover,
+          props: true
+        }
+      ]
+    },
+    {
       path: '/fund',
       name: 'fund',
       component: Fund,
@@ -253,34 +286,44 @@ let router = new Router({
         nav: true,
         class: 'dark'
       },
-      children: [{
-        path: 'withdraw/:currency?',
-        name: 'withdraw',
-        component: Withdraw
-      }, {
-        path: 'deposit/:currency?',
-        name: 'deposit',
-        component: Deposit
-      }, {
-        path: 'my',
-        name: 'my',
-        component: MyFund,
-        children: [
-          {
-            path: 'history/:from',
-            name: 'history',
-            alias: 'deposit/:currency/history',
-            component: FundHistory
-          }
-        ]
-      }, {
-        path: 'address',
-        name: 'address',
-        component: FundAddress
-      }]
+      children: [
+        {
+          path: 'withdraw/:currency?',
+          name: 'withdraw',
+          component: Withdraw
+        },
+        {
+          path: 'deposit/:currency?',
+          name: 'deposit',
+          component: Deposit
+        },
+        {
+          path: 'my',
+          name: 'my',
+          component: MyFund,
+          children: [
+            {
+              path: 'history/:from',
+              name: 'history',
+              alias: 'deposit/:currency/history',
+              component: FundHistory
+            }
+          ]
+        },
+        {
+          path: 'address',
+          name: 'address',
+          component: FundAddress
+        }
+      ]
     }
-
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    if (to.name === 'trading') {
+      return { x: 0, y: 0 }
+    }
+    return null
+  }
 })
 
 router.beforeResolve(beforeResolve)
