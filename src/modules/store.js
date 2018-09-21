@@ -276,7 +276,6 @@ export const actions = {
   },
   setTitle (locale = 'en') {
     const { exchangeNameConfig } = process.env.THEME_ENV
-    console.log(process.env.THEME_ENV)
     document.title = exchangeNameConfig[locale]
   },
   async setLocale (locale) {

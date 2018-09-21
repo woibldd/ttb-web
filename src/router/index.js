@@ -107,7 +107,7 @@ let router = new Router({
       component: creation
     },
     {
-      path: '/active/relay',
+      path: '/activity/relay',
       name: 'relay',
       component: relay
     },
