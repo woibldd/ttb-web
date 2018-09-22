@@ -26,8 +26,15 @@
           <span class="cre slt">0%</span>
           <span class="cre srt">100%</span>
         </div>
-        <div class="cre_jdt cr_jd_lt">
-          <p><span>{{ $t('Openingtime') }}</span>{{ $t('Ota') }}</p>
+        <div
+          class="cre_jdt cr_jd_lt"
+          id="content">
+          <p
+            :class="{'class-a':isA,'class-b':!isA}"
+            @click="toggle">
+            <span>{{ $t('Openingtime') }}</span>
+            {{ $t('Ota') }}
+          </p>
           <p><span>{{ $t('distime') }}</span>{{ $t('distimea') }}</p>
         </div>
         <div class="cre_jdt cr_jd_rt">
@@ -37,7 +44,9 @@
       </div>
       <div class="tr">
         <div class="tr_d">
-          <span class="tr_dt">{{ $t('miningamount') }}</span>
+          <span class="tr_dt">
+            <em>{{ $t('miningamount') }}</em>
+          </span>
           <div class="tr_dc">
             <input
               type="text"
@@ -47,7 +56,9 @@
           <div class="tr-ts">{{ $t('entexceeds') }}</div>
         </div>
         <div class="tr_d">
-          <span class="tr_dt">{{ $t('paymentcurrencyd') }}</span>
+          <span class="tr_dt">
+            <em>{{ $t('paymentcurrencyd') }}</em>
+          </span>
           <div class="tr_dc">
             <input
               type="text"
@@ -111,15 +122,15 @@ import VBtn from '@/components/VBtn'
 
 export default {
   data () {
+
   },
   components: {
     VBtn,
     VNav2
   }
-
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   @import "~@/styles/vars";
   @import "~@/styles/mixins";
   .page-home{
@@ -238,6 +249,19 @@ export default {
         color: #CBE6FD;
       }
     }
+    .cre_jdta{
+      float: left;
+      color: #000;
+      font-size: 12px;
+      line-height: 24px;
+      margin-top: 16px;
+      p{
+        margin-bottom: 10px;
+      }
+      span{
+        color: #CBE6FD;
+      }
+    }
     .cr_jd_lt{
       width: 45%;
     }
@@ -256,9 +280,15 @@ export default {
       position: relative;
       .tr_dt{
         float: left;
-        line-height: 75px;
+        height: 75px;
+        line-height: 25px;
         width: 90px;
         color: #fff;
+        display: table;
+        em{
+          display: table-cell;
+          vertical-align: middle;
+        }
       }
       .tr_dc{
         float: left;
