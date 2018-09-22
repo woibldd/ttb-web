@@ -56,7 +56,7 @@
       <div class="scr-cen scr-m">
         <!-- <p class="scr-txt">{{ $t('active_relay_totally') }}<span>85.92114584</span>BTC</p> -->
         <div class="scr-box">
-          <p class="scr-tit">{{ pairs[0] | pairfix }}</p>
+          <p class="scr-tit">{{ pairs[1] | pairfix }}</p>
           <div class="scr">
             <div class="scr-title">
               <p class="scr_l">{{ $t('active_relay_amount') }}</p>
@@ -89,7 +89,7 @@
       <div class="scr-cen scr-r">
         <!-- <p class="scr-txt">{{ $t('active_relay_totally') }}<span>85.92114584</span>BTC</p> -->
         <div class="scr-box">
-          <p class="scr-tit">{{ pairs[0] | pairfix }}</p>
+          <p class="scr-tit">{{ pairs[2] | pairfix }}</p>
           <div class="scr">
             <div class="scr-title">
               <p class="scr_l">{{ $t('active_relay_amount') }}</p>

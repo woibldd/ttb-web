@@ -29,10 +29,10 @@
               class="active-box"
               v-if="showCountdown">
               <p class="text">{{ $t('active_countdown_text') }}<span class="seconds">{{ countdownText }}</span>{{ $t('active_countdown_unit') }}</p>
-              <a
+              <router-link
                 class="link"
-                :href="rule_link"
-                target="_blank">{{ $t('active_rules') }}</a>
+                :to="{name: 'relay'}"
+                target="_blank">{{ $t('active_rules') }}</router-link>
             </div>
           </div>
         </div>
@@ -105,14 +105,6 @@ export default {
       countdownTimer: 0,
       countdownText: '20',
       lastDealTime: 0
-    }
-  },
-  computed: {
-    rule_link () {
-      return (
-        this.state.theme.activeRule[this.state.locale] ||
-        this.state.theme.activeRule.en
-      )
     }
   },
   watch: {
@@ -217,7 +209,6 @@ export default {
       clearInterval(this.countdownTimer)
     },
     dealChanged (data) {
-      return
       if (data && data.length > 0) {
         // 第一次进入
         if (!this.showCountdown) {
