@@ -65,6 +65,8 @@
     }
     .form {
         margin-top: rem(10);
+        display: flex;
+        flex-direction: column;
     }
     .page-password-reset {
         padding-top: 36px;
@@ -83,9 +85,15 @@
         color: $state-text-red;
     }
     .field {
-        @include clearfix();
         position: relative;
         min-height: rem(92);
+        box-sizing: border-box;
+        padding-left: rem(90);
+        padding-right: rem(90);
+        .ix-input-container {
+            padding-right: 0 !important;
+            width: 100% !important;
+        }
         .ix-input-container .ix-input__text {
             border-bottom: 1px solid #cccccc !important;
 
@@ -95,10 +103,8 @@
         }
         .input-box {
             width: 100%;
-            height: 60px;
-            padding: 0 38px 0;
-            top: 0;
-            left: 0;
+            height: 100%;
+            position: relative;
         }
         .error-tips {
             color: $state-text-red;
@@ -187,12 +193,10 @@
             color: #fff;
             border-bottom: 1px solid #ffffff;
             outline: none;
-            font-size: 16px;
-            line-height: 18px;
-            padding: 8px;
-            height: 36px;
+            font-size: rem(16);
             box-sizing: border-box;
-            width: 280px;
+            height: rem(92);
+            width: 100%;
             &:hover {
                 border-bottom: 1px solid $primary;
                 transition: border-bottom .7s;
@@ -202,33 +206,32 @@
             }
         }
         .split {
-            height: 36px;
+            height: rem(36);
             float: left;
             width: 1px;
             background-color: #DDDDDD;
-            margin-right: 10px;
+            margin-right: rem(10);
         }
         .ix-loading {
             float: left;
-            width: 40px;
-            margin-top: 14px;
+            width: rem(40);
+            margin-top: rem(14);
         }
         .register__input-captcha {
-            width: 170px; // border-right: 1px solid #DDDDDD;
+            width: rem(170);
+            .ix-quick-delete {
+                display: none !important;
+            }
         }
         .sms-btn {
-            width: 100px;
-            height: 30px;
-            line-height: 30px;
-            border-radius: 20px;
-            margin-left: 10px;
-            margin-right: 40px;
-            border: 1px $primary solid; // background-color: #3075ee;
+            height: rem(92);
+            line-height: rem(92);
+            padding-right: rem(10);
+            border: 0; // background-color: #3075ee;
             color: $primary;
-            text-align: center;
             position: absolute;
             right: 0;
-            bottom: -6px;
+            bottom: rem(-6);
             &.disabled {
                 @include a() {
                     color: #AAAAAA;
@@ -240,7 +243,7 @@
         }
     }
     .error-block {
-        margin-top: 18px;
+        margin-top: rem(18);
     }
     .pw-helps {
         border-radius: 3px;
@@ -330,7 +333,6 @@
     .field.submit {
         .submit-btn {
             height: rem(70) !important;
-            width: rem(480) !important;
             border-radius: rem(35) !important;
             margin-top: rem(42);
             margin-bottom: rem(34)
@@ -347,21 +349,18 @@
         box-sizing: border-box;
         width:100%;
         text-align: right;
-        padding-right: rem(80);
         height: rem(23);
         font-size:rem(24);
         font-family:PingFangSC-Light;
-        font-weight: rem(300);
+        font-weight: bold;
         color:rgba(164,114,59,1);
         line-height:rem(25);
     }
 
-    .submit-btn {
-        margin: 0 auto 13px;
-    }
     .h5__panel-next {
+        box-sizing: border-box;
         height: 100vh;
-        padding-top: 13vh;
+        padding-top: rem(130);
         background-image: url('../../../assets/h5/h5-bg2.png');
         background-repeat: no-repeat;
         background-size: 100% 100%; 
