@@ -289,6 +289,10 @@ export default {
     meta.name = 'renderer'
     meta.content = 'webkit'
     ele.appendChild(meta)
+    let title = document.createElement('title')
+    title.append('IX | 持BTC躺赚30%高额分红！')
+    ele.getElementsByTagName('title')[0].remove()
+    ele.appendChild(title)
     next()
   },
   computed: {
