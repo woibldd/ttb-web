@@ -219,6 +219,9 @@
         }
         .register__input-captcha {
             width: rem(170);
+            .ix-quick-delete {
+                display: none !important;
+            }
         }
         .sms-btn {
             height: rem(92);
