@@ -47,6 +47,9 @@ const MyFund = () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/
 const FundAddress = () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/Address/address.vue')
 const FundHistory = () => import(/* webpackChunkName: "FundHistory" */ '@/components/Fund/history/history.vue')
 
+// h5相关页面
+const h5login = () => import(/* webpackChunkName: "h5login" */ '@/pages/h5/sign-up')
+
 async function beforeEach (to, from, next) {
   state.loading = true
   const auth = utils.getRouteMeta(to, 'auth')
@@ -102,6 +105,16 @@ let router = new Router({
         auth: false
       },
       component: isMobile ? MobileHome : HomeNew
+    }, {
+      path: '/h5',
+      name: 'h5index',
+      meta: {
+        auth: false,
+        nav: false,
+        footer: false,
+        zendeskWidget: false
+      },
+      component: h5login
     },
     {
       path: '/active/creation',
