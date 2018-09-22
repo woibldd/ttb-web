@@ -316,3 +316,8 @@
       padding: $i * 1px !important
     }
 }
+
+@function rem($px){
+    $rem : 32;
+    @return ($px/$rem) + rem;
+}
