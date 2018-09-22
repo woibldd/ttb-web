@@ -38,8 +38,8 @@
         <div class="row personal"><span class="text">{{ $t('mine_my_remain') }} : </span>
           <p class="mb-6">{{ ( mineMy.max_amount - mineMy.amount ) | fixed(2) | thousand }}<em class="unit">IX</em></p>
         </div>
-        <div class="row personal ml-30"><span class="text">{{ $t('mine_my_remain') }} : </span>
-          <p class="mb-6">{{ ( mineMy.max_amount - mineMy.amount ) | fixed(2) | thousand }}<em class="unit">IX</em></p>
+        <div class="row personal ml-30"><span class="text">{{ $t('mine_my_reduce') }} : </span>
+          <p class="mb-6">{{ ( mineMy.total ) | fixed(2) | thousand }}<em class="unit">IX</em></p>
         </div>
       </div>
     </div>
