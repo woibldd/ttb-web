@@ -277,21 +277,23 @@ export default {
       triggerValidate: false
     }
   },
-  /* beforeRouteEnter (to, from, next) {
-    if (to.params.by === 'email') {
-      return next()
-    }
-    if (to.params.by === 'phone' && state.enablePhoneSignup) {
-      return next()
-    }
-    next({
-      name: 'loginBy',
-      params: {
-        by: 'email'
-      },
-      query: to.query
-    })
-  }, */
+  beforeRouteEnter (to, from, next) {
+    let ele = document.getElementsByTagName('head')[0]
+    let meta = document.createElement('meta')
+    meta.name = 'viewport'
+    meta.content = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
+    ele.appendChild(meta)
+    meta.name = 'x5-orientation'
+    meta.content = 'portrait'
+    ele.appendChild(meta)
+    meta.name = 'renderer'
+    meta.content = 'webkit'
+    ele.appendChild(meta)
+    let title = document.createElement('title')
+    title.append('持BTC躺赚30%高额分红！')
+    ele.appendChild(title)
+    next()
+  },
   computed: {
     // 表单数据
     params () {
@@ -370,6 +372,8 @@ export default {
     },
     switchRegister () {
       this.by = this.by === 'phone' ? 'email' : 'phone'
+      let ele = document.scrollingElement || document.body
+      ele.scrollTop = 0
     },
     checkParams () {
       const err = (em, field) => ({ok: false, em, field})
