@@ -107,7 +107,7 @@
                 </div>
               </template>
             </image-upload>
-            <p v-html="kyc_notice2">{{ $t('kyc_notice2') }}<br >{{ $t('kyc_notice3') }}</p>
+            <p v-html="$t('kyc_notice2')"/>
           </div>
           <div/>
         </div>
