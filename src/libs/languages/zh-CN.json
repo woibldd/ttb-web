@@ -324,6 +324,7 @@
   "total_count": "总计",
   "view_txid": "查看TXID",
   "pending": "等待中",
+  "broadcasting,": "已广播",
   "done": "已完成",
   "wallets_nav_asset": "我的资产",
   "please_choose": "请选择",

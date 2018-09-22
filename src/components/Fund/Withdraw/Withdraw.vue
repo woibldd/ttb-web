@@ -345,7 +345,6 @@ export default {
         utils.alert('请完善你的资料')
         return
       }
-      debugger
       if (this.$big(this.withdrawCount || 0).lt(this.$big(this.selectCoin.min_withdraw_amount))) {
         utils.alert(this.$t('withdraw_count_min_error'))
         return

@@ -91,7 +91,7 @@ function onError (err) {
 }
 
 let router = new Router({
-  mode: process.env.NODE_ENV === 'development' ? 'hash' : 'history',
+  mode: process.env.NODE_ENV === 'development' ? 'history' : 'history',
   routes: [
     {
       path: '/',

@@ -460,6 +460,7 @@
   "actions": "Actions",
   "view_txid": "View TXID",
   "pending": "Pending",
+  "broadcasting,": "Broadcasting",
   "done": "Done",
   "please_choose": "Please Select",
   "no_data": "No Data",

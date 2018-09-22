@@ -1,45 +1,69 @@
 <template>
   <div class="page page-login">
-    <resbg></resbg>
-    <div class="panel_box" ref="container">
-    <div class="panel">
-      <div class="title-wrap">
-        <div class="panel-title" v-t="'signin'"></div>
-        <div class="by-links" v-if="state.enablePhoneSignup">
-          <router-link class="by-link ibt" to="email">{{ $t('login_by_email') }}</router-link>
-          <span class="sp-line"></span>
-          <router-link class="by-link ibt" to="phone">{{ $t('login_by_phone') }}</router-link>
-        </div>
-      </div>
-      <form class="form" onsubmit="return false" autocomplete="off">
-        <div :class="['field']" v-show="by === 'phone'">
-          <div class="input-box">
-            <div class="label">{{ $t('region_label') }}</div>
-            <v-loading v-if="!regionOptions.length" color="gray"></v-loading>
-            <select class="select" v-else v-model="regionId">
-              <option value="">{{ $t('region_ph') }}</option>
-              <option :value="option.id" v-for="option in regionOptions" :key="option.id">
-                <span>+{{ option.id }}</span>
-                <template v-if="state.locale === 'zh-CN'">{{ option.cname }}</template>
-                <template v-else>{{ option.fullname }}</template>
-              </option>
-            </select>
+    <resbg/>
+    <div
+      class="panel_box"
+      ref="container">
+      <div class="panel">
+        <div class="title-wrap">
+          <div
+            class="panel-title"
+            v-t="'signin'"/>
+          <div
+            class="by-links"
+            v-if="state.enablePhoneSignup">
+            <router-link
+              class="by-link ibt"
+              to="email">{{ $t('login_by_email') }}</router-link>
+            <span class="sp-line"/>
+            <router-link
+              class="by-link ibt"
+              to="phone">{{ $t('login_by_phone') }}</router-link>
           </div>
         </div>
-        <div class="field" v-show="by === 'phone'">
-          <div class="input-box">
-            <!-- <div class="label">{{ $t('phone_number') }}</div> -->
-            <ix-input
-              class=""
-              ref="phone"
-              v-model.trim="phone"
-              :required='true'
-              :empty-err-tips="$t('bind_phone_err_empty')"
-              :rule="validateRules.phone"
-              :placeholder="$t('bind_phone_input')"
-              :label="$t('phone_number')"
-              >
-            </ix-input>
+        <form
+          class="form"
+          onsubmit="return false"
+          autocomplete="off">
+          <div
+            :class="['field']"
+            v-show="by === 'phone'">
+            <div class="input-box">
+              <div class="label">{{ $t('region_label') }}</div>
+              <v-loading
+                v-if="!regionOptions.length"
+                color="gray"/>
+              <select
+                class="select"
+                v-else
+                v-model="regionId">
+                <option value="">{{ $t('region_ph') }}</option>
+                <option
+                  :value="option.id"
+                  v-for="option in regionOptions"
+                  :key="option.id">
+                  <span>+{{ option.id }}</span>
+                  <template v-if="state.locale === 'zh-CN'">{{ option.cname }}</template>
+                  <template v-else>{{ option.fullname }}</template>
+                </option>
+              </select>
+            </div>
+          </div>
+          <div
+            class="field"
+            v-show="by === 'phone'">
+            <div class="input-box">
+              <!-- <div class="label">{{ $t('phone_number') }}</div> -->
+              <ix-input
+                class=""
+                ref="phone"
+                v-model.trim="phone"
+                :required='true'
+                :empty-err-tips="$t('bind_phone_err_empty')"
+                :rule="validateRules.phone"
+                :placeholder="$t('bind_phone_input')"
+                :label="$t('phone_number')"
+              />
             <!-- <input class="input item" type="text"
               name="phone"
               @focus="active('phone', true)" @blur="active('phone', false)"
@@ -47,55 +71,126 @@
               :placeholder="$t('bind_phone_input')"
               :disabled="loading"
               v-model.trim="phone" /> -->
+            </div>
           </div>
-        </div>
-        <div :class="['field']" v-show="by === 'email'">
-          <div class="input-box">
-            <!-- <div class="label" v-t="'login_label_mail'"></div> -->
-            <ix-input
-              class=""
-              ref="email"
-              v-model.trim="email"
-              :required='true'
-              :empty-err-tips="$t('err_empty_email')"
-              :rule="validateRules.email"
-              :placeholder="$t('err_empty_email')"
-              :label="$t('login_label_mail')"
-              >
-            </ix-input>
+          <div
+            :class="['field']"
+            v-show="by === 'email'">
+            <div class="input-box">
+              <!-- <div class="label" v-t="'login_label_mail'"></div> -->
+              <ix-input
+                class=""
+                ref="email"
+                v-model.trim="email"
+                :required='true'
+                :empty-err-tips="$t('err_empty_email')"
+                :rule="validateRules.email"
+                :placeholder="$t('err_empty_email')"
+                :label="$t('login_label_mail')"
+              />
+            </div>
           </div>
-        </div>
-        <div :class="['field']">
-          <div class="input-box">
-            <!-- <div class="label" v-t="'login_label_pw'"></div> -->
-            <ix-input
-              class=""
-              ref="password"
-              v-model.trim="password"
-              :required='true'
-              type="password"
-              :empty-err-tips="$t('err_empty_password')"
-              :rule="validateRules.password"
-              :placeholder="$t('err_empty_password')"
-              :label="$t('login_label_pw')"
-              >
-            </ix-input>
+          <div :class="['field']">
+            <div class="input-box">
+              <!-- <div class="label" v-t="'login_label_pw'"></div> -->
+              <ix-input
+                class=""
+                ref="password"
+                v-model.trim="password"
+                :required='true'
+                type="password"
+                :empty-err-tips="$t('err_empty_password')"
+                :rule="validateRules.password"
+                :placeholder="$t('err_empty_password')"
+                :label="$t('login_label_pw')"
+              />
+            </div>
           </div>
-        </div>
-        <div class="field submit">
-          <v-btn class="submit-btn" :label="$t('signin')"
-            height="40"
-            width="290"
-            :loading="loading"
-            @click="submit"></v-btn>
-          <div class="to-others">
-            <router-link :to="{name: 'registerBy', params: $route.params, query: $route.query}">{{ $t('signup') }}</router-link>
-            <router-link class="ml-5" :to="{name: 'recover'}">{{ $t('if_forgot') }}?</router-link>
+          <div class="field submit">
+            <v-btn
+              class="submit-btn"
+              :label="$t('signin')"
+              height="40"
+              width="290"
+              :loading="loading"
+              @click="submit"/>
+            <div class="to-others">
+              <router-link :to="{name: 'registerBy', params: $route.params, query: $route.query}">{{ $t('signup') }}</router-link>
+              <router-link
+                class="ml-5"
+                :to="{name: 'recover'}">{{ $t('if_forgot') }}?</router-link>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-    </div>
+    <v-modal
+      :open.sync="showModal"
+      :backdrop="false"
+      @click="hideModal">
+      <div class="ensure-modal">
+        <div class="modal__title mb-30">{{ $t('security_verification') }}</div>
+        <div class="modal__content">
+          <div
+            class="modal__row mt-12 mb-25"
+            v-if="google_key_bound">
+            <div class="row__label mb-9">{{ $t('fa2_google_code_mobile') }}</div>
+            <div class="row__input" >
+              <input
+                v-model="googleCode"
+                class="input-validate google mr-14">
+            </div>
+          </div>
+          <div
+            class="modal_phone"
+            v-else-if="phone">
+            <div class="modal__row" >
+              <div class="row__label mb-9">{{ $t('register_by_phone') }}</div>
+              <div class="row__input" >{{ phone }} </div>
+            </div>
+            <div class="modal__row mt-12 mb-25">
+              <div class="row__label mb-9">{{ $t('phone_code') }}</div>
+              <div class="row__input" >
+                <input
+                  v-model="phoneCode"
+                  class="input-validate mr-14">
+                <count-down
+                  :send-text="$t('hq_send')"
+                  :start-when-loaded="showModal"
+                  :send-code-func="getPhoneVerifyCode"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="modal_phone"
+            v-else-if="email">
+            <div class="modal__row" >
+              <div class="row__label mb-9">{{ $t('register_by_email') }}</div>
+              <div class="row__input" >{{ email }} </div>
+            </div>
+            <div class="modal__row mt-12 mb-25">
+              <div class="row__label mb-9">{{ $t('email_code') }}</div>
+              <div class="row__input" >
+                <input
+                  v-model="emailCode"
+                  class="input-validate mr-14">
+                <count-down
+                  :send-text="$t('hq_send')"
+                  :start-when-loaded="showModal"
+                  :send-code-func="getEmailVerifyCode"
+                />
+              </div>
+            </div>
+          </div>
+
+          <v-btn
+            class="w-340"
+            @click="toVerifyCode"
+            :label="$t('signin')"/>
+        </div>
+      </div>
+    </v-modal>
   </div>
 </template>
 
@@ -106,13 +201,15 @@ import {state, actions, local} from '@/modules/store'
 import utils from '@/modules/utils'
 import resbg from '@/components/resbg'
 import ixInput from '@/components/common/ix-input/ix-input.vue'
+import countDown from '@/components/common/countdown-code-button'
 
 export default {
-  name: 'login',
+  name: 'Login',
   components: {
     VBtn,
     resbg,
-    ixInput
+    ixInput,
+    countDown
   },
   props: ['by'],
   data () {
@@ -124,6 +221,11 @@ export default {
       email: '',
       password: '',
       loading: false,
+      showModal: false,
+      google_key_bound: 0,
+      phoneCode: '',
+      emailCode: '',
+      googleCode: '',
       phone: '',
       regionOptions: [],
       validateRules: {
@@ -206,6 +308,9 @@ export default {
 
       return false
     },
+    hideModal () {
+      this.showModal = false
+    },
     async submit (e) {
       // 本地校验
       const check = this.checkParams()
@@ -222,7 +327,6 @@ export default {
         utils.alert(res.message)
         return false
       }
-      actions.setUserInfo(res.data)
 
       if (this.by === 'phone') {
         this.local.regionId = this.regionId
@@ -230,27 +334,99 @@ export default {
 
       utils.eraseCookie('invitor')
 
-      // 无二步验证
-      if (!res.data.phone && !res.data.google) {
-        // actions.resetStatus()
-        // if (typeof state.loginBack === 'string') {
-        //   location.href = state.loginBack
-        // } else {
-        //   this.$router.push(state.loginBack)
-        // }
-        // return actions.setLoginBack(null)
+      if (res.data.google_key_bound || res.data.phone || res.data.email) {
+        this.google_key_bound = res.data.google_key_bound
+        this.phone = res.data.phone
+        this.email = res.data.email
+        this.showModal = true
+      } else {
+      // 未开启二步认证
+        this.loginSuccess(res.data)
       }
+      // 无二步验证
+      // if (!res.data.phone && !res.data.google) {
+      // actions.resetStatus()
+      // if (typeof state.loginBack === 'string') {
+      //   location.href = state.loginBack
+      // } else {
+      //   this.$router.push(state.loginBack)
+      // }
+      // return actions.setLoginBack(null)
+      // }
 
       // 去二次验证
       // actions.setFa2(res.data)
-      this.$router.push({
-        name: 'profile'
-      })
     },
     fixPosition () {
       // this.$refs.container.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
-      this.$refs.container.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
+      this.$refs.container.style.minHeight = window.innerHeight - (110) - (80) + 'px'
       // this.$refs.containera.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
+    },
+    async toVerifyCode () {
+      let type = 'google'
+      let params = {
+      }
+      if (this.google_key_bound) {
+        params = {
+          code: this.googleCode
+        }
+      } else if (this.phone) {
+        params = {
+          phone: this.phone,
+          code: this.phoneCode
+        }
+        type = 'phone'
+      } else {
+        params = {
+          email: this.email,
+          code: this.emailCode
+        }
+        type = 'email'
+      }
+      if (!params.code) {
+        utils.alert(this.$i18n.t('err_captcha_empty'))
+        return
+      }
+      let resp = await service.verifyLoginVerifyCode(params, type)
+      if (!resp.code) {
+        if (resp.data && resp.data.verified) {
+          this.loginSuccess(resp.data)
+        }
+      } else {
+        utils.alert(resp.message)
+      }
+    },
+    loginSuccess (userInfo) {
+      actions.setUserInfo(userInfo)
+      actions.resetStatus()
+      if (typeof state.loginBack === 'string') {
+        location.href = state.loginBack
+      } else {
+        this.$router.push(state.loginBack)
+      }
+      actions.setLoginBack(null)
+      // this.$router.push({
+      //   name: 'profile'
+      // })
+    },
+    getPhoneVerifyCode () {
+      const param = {
+        region: this.regionId,
+        phone: this.phone,
+        email: this.email
+      }
+      service.getLoginVerifyCode(param, 'phone').then(res => {
+        console.log(res)
+      })
+    },
+    getEmailVerifyCode () {
+      const param = {
+        region: this.regionId,
+        email: this.email
+      }
+      service.getLoginVerifyCode(param, 'email').then(res => {
+        console.log(res)
+      })
     }
   },
   mounted () {
