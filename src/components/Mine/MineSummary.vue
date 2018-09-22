@@ -44,29 +44,36 @@
       </div>
       <div class="cm-bt">
         {{ yestodayMine.exchangeMine | round(4) }}
-        <span>IX</span>
+        <span class="unit">IX</span>
       </div>
       <div class="cm-bst">
         {{ $t('mine_invite_amount') }}
       </div>
       <div class="cm-bn">
-        {{ yestodayMine.inviteMine | round(4) }} IX
+        {{ yestodayMine.inviteMine | round(4) }}
+        <span class="unit">IX</span>
       </div>
     </div>
     <div
-      v-if="false"
+      v-if="showRight"
       class="jd_c jd_right ind_jd">
-      <div class="cm-tit">
-        昨日交易挖矿产出
-      </div>
-      <div class="cm-bt">
-        26993.00000000<span>IX</span>
-      </div>
       <div class="cm-bst">
-        昨日邀请挖矿产出：
+        {{ $t('mine_bonus_today') }}
       </div>
       <div class="cm-bn">
-        19222.99002345 IX
+        {{ bonusMine.today | round(8) }}<span class="unit">BTC</span>
+      </div>
+      <div class="cm-bst">
+        {{ $t('mine_bonus_rate') }}
+      </div>
+      <div class="cm-bn">
+        {{ bonusMine.rate | round(8) }}<span class="unit">BTC</span>
+      </div>
+      <div class="cm-bst">
+        {{ $t('mine_bonus_yestoday') }}
+      </div>
+      <div class="cm-bn">
+        {{ bonusMine.yesterday | round(8) }}<span class="unit">BTC</span>
       </div>
     </div>
   </div>
@@ -96,8 +103,14 @@ export default {
         inviteMine: 0
       },
       mineMy: {},
+      bonusMine: {
+        yesterday: 0,
+        today: 0,
+        rate: 0
+      },
       timer: 0,
-      showMiddle: false
+      showMiddle: false,
+      showRight: false
     }
   },
   computed: {
@@ -122,16 +135,22 @@ export default {
       }
     },
     async getYestoryData () {
-      let res = await service.getMineTotal({offset: -1})
+      let [res, resp, resc] = await Promise.all([service.getMineTotal({offset: -1}), service.getInviteMineTotal({offset: -1}), service.getBonusMineTotal()])
+      // 邀请挖矿 全部
       if (!res.code && !isEmpty(res.data)) {
         this.showMiddle = true
         this.yestodayMine.exchangeMine = res.data.amount
       }
 
-      let resp = await service.getInviteMineTotal({offset: -1})
+      // 邀请挖矿 个人
       if (!resp.code && !isEmpty(resp.data)) {
         this.showMiddle = true
         this.yestodayMine.inviteMine = resp.data.amount
+      }
+      // 持仓分红
+      if (!resc.code && !isEmpty(resc.data)) {
+        this.showRight = true
+        this.bonusMine = resc.data
       }
     },
     loop () {

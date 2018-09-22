@@ -420,6 +420,9 @@ const service = {
   getInviteMineTotal (data) {
     return request('mine/invite/total', data)
   },
+  getBonusMineTotal (data) {
+    return request('bonus/btc/total', data)
+  },
   /* 挖矿 end */
 
   /* 行情 */
