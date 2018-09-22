@@ -185,7 +185,7 @@
       </form>
     </div>
     <div class="h5__panel-next">
-      <p> IX-全球首家</p>
+      <p>IX-全球首家</p>
       <p>支持比特币作为平台权益证明</p>
       <p>数字货币交易平台</p>
     </div>
@@ -289,9 +289,6 @@ export default {
     meta.name = 'renderer'
     meta.content = 'webkit'
     ele.appendChild(meta)
-    let title = document.createElement('title')
-    title.append('持BTC躺赚30%高额分红！')
-    ele.appendChild(title)
     next()
   },
   computed: {

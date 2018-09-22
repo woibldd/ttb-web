@@ -2,6 +2,7 @@
 @import '~@/styles/_vars.scss';
 .router-h5index,
 .main-container {
+    background: #000;
     width: 100vw !important;
     .page-loading,
     .page-mask {
@@ -17,13 +18,14 @@
     width: 100vw;
 
     .panel {
+        overflow: hidden;
         box-sizing: border-box;
         background-image: url('../../../assets/h5/h5-bg1.png');
         background-repeat: no-repeat;
         background-size: 100% 100%;
         border-radius: rem(4);
         width: 100%;
-        height: 100vh;
+        min-height: 100vh;
         input,
         select,
         textarea {
@@ -344,6 +346,9 @@
         margin-bottom: rem(21);
         color: #ffffff;
         padding-left: rem(86);
+        .checkbox {
+            vertical-align: sub;
+        }
     }
     .switch-btn {
         box-sizing: border-box;
@@ -358,6 +363,7 @@
     }
 
     .h5__panel-next {
+        overflow: hidden;
         box-sizing: border-box;
         height: 100vh;
         padding-top: rem(130);
