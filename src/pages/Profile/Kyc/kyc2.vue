@@ -284,7 +284,11 @@ export default {
     let res = await service.getKycInfo()
     if (!res.code) {
       kycInfo = res.data
-      if (kycInfo.state != 0) {
+      if (kycInfo.state !== 0) {
+        if (kycInfo.state === -1) {
+          next()
+          return
+        }
         console.log('goto:: step3')
         next({
           name: 'KycStep3'
