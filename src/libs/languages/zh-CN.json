@@ -386,7 +386,7 @@
   "active_relay_example_4": "第二位获奖者B<br >在21:00出现",
   "active_relay_example_5": "B：获得16:00-21:00期间，<br>BTC/USDT交易手续费的40%",
   "active_relay_example_6": "从21:00-24:00没有产生获奖者，<br>那么该区间段产生的交易手续费<br>归入平台手续费收入分配",
-  "active_relay_example_reset": "重置时间：24:00"
+  "active_relay_example_reset": "重置时间：24:00",
   "imta": "IX创世挖矿总额",
   "Openingtime": "开启时间:",
   "Ota": "2018年9月25日12:00:00",
