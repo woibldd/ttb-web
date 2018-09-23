@@ -100,7 +100,7 @@ export default {
           { validator: validataPswStrong, trigger: 'change' }
         ],
         password_orig: [
-          { required: true, message: this.$i18n.t('不能为空'), trigger: 'blur' }
+          { required: true, message: this.$i18n.t('err_empty_password'), trigger: 'blur' }
         ]
       }
     }

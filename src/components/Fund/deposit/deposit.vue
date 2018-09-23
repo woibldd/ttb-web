@@ -22,6 +22,15 @@
           </el-select>
         </div>
       </div>
+      <div class="fund-item-other mb-14">
+        <span
+          :class="['quick-btn mr-10', selectCoin.currency === c.currency && 'selected']"
+          @click="quickSelectCoin(c)"
+          v-for="(c, idx) in allCoins"
+          :key="idx">
+          {{ c.currency }}
+        </span>
+      </div>
       <div class="fund-item-row mb-24">
         <div class="row__label">{{ $t('deposit_address') }}</div>
         <div class="row__value">
@@ -135,6 +144,9 @@ export default {
           this.selectCoin = this.allCoins[0]
         }
       })
+    },
+    quickSelectCoin (coin) {
+      this.changeCoinType(coin)
     },
     getDepositHistory () {
       const param = {

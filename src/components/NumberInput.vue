@@ -122,7 +122,6 @@ export default {
 
       if (value === '' || this.$big(value) + '' === value) {
         // Emit the number value through the input event
-        utils.log(`Input: ${value}`)
         this.$emit('input', value)
       } else {
         // Input is not ready, E.g.

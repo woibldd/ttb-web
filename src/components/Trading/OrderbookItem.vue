@@ -1,13 +1,19 @@
 <template>
   <tr :style="{lineHeight: height}">
-    <td class="left btn" :class="sideColor(side)"
-      @click="setPrice(item.price)">
-      <num :num="fixPrice(item.price)"></num>
+    <td
+      class="left btn"
+      :class="sideColor(side)"
+      @click="setPrice(item.price);setAmount(item.amount)">
+      <num :num="fixPrice(item.price)"/>
     </td>
-    <td class="right btn" @click="setAmount(item.amount);">
+    <td
+      class="right btn"
+      @click="setAmount(item.total);setPrice(item.price)">
       {{ fixAmount(item.amount) }}
     </td>
-    <td class="right btn" @click="setAmount(item.total);">
+    <td
+      class="right btn"
+      @click="setAmount(item.total);setPrice(item.price)">
       {{ fixAmount(item.total) }}
     </td>
   </tr>
@@ -15,7 +21,7 @@
 
 <script>
 export default {
-  name: 'orderbookItem',
+  name: 'OrderbookItem',
   props: ['item', 'side', 'priceScale', 'amountScale', 'height'],
   data () {
     return {}

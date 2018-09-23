@@ -274,6 +274,12 @@
   }
 }
 
+@mixin limit($line: 1) {
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  overflow:hidden;
+}
+
 
 @for $i from 1 through 30 { 
     .mt-#{$i} { 
@@ -309,4 +315,9 @@
     .pd-#{$i} {
       padding: $i * 1px !important
     }
+}
+
+@function rem($px){
+    $rem : 32;
+    @return ($px/$rem) + rem;
 }

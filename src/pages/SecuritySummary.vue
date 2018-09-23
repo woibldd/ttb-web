@@ -18,7 +18,7 @@
             {{ phone }}
             <router-link
               v-if="!phone"
-              :to="{name: 'PhoneBind'}">{{ $t('bind') }}</router-link>
+              :to="{name: 'PhoneBind'}">{{ $t('to_bind') }}</router-link>
           </div>
         </li>
         <li :class="{pass: !!email}">
@@ -28,7 +28,7 @@
             {{ email }}
             <router-link
               v-if="!email"
-              :to="{name: 'EmailBind'}">{{ $t('bind') }}</router-link>
+              :to="{name: 'EmailBind'}">{{ $t('to_bind') }}</router-link>
           </div>
         </li>
         <li :class="{pass: !!google_key_bound}">
@@ -37,7 +37,7 @@
           <div>
             <router-link
               v-if="!google_key_bound"
-              :to="{name: 'GoogleBind'}">{{ $t('bind') }}</router-link>
+              :to="{name: 'GoogleBind'}">{{ $t('to_bind') }}</router-link>
           </div>
         </li>
         <li>

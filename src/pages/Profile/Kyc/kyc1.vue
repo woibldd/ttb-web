@@ -1,62 +1,62 @@
 <template>
-      <div class="profile-container">
-        <div class="title-box">{{ $t('identity_authentication') }}<span>{{ $t('Verified') }}</span></div>
-        <div class="invinfo-box">
-          <div class="authen_top">
-              <i class=""></i>
-              <p class="yy">
-                  {{$t('identity_authentication1')}}
-              </p>
-              <p class="">
-                  {{$t('kyc_upload')}}
-              </p>
-              <p>
-                  {{$t('kyc_complete')}}
-              </p>
-              <i></i>
-          </div>
-          <el-form
-            class="form"
-            ref="form"
-            :rules="rules"
-            label-position="left"
-            :model="form"
-            label-width="104px">
-            <el-form-item
-              prop="name"
-              class="inp_box"
-              :label="$t('name')">
-              <el-input
-                v-model="form.name"/>
-            </el-form-item>
-            <el-form-item
-              class="inp_box"
-              :label="$t('kyc_id_type')">
-              <el-select v-model="form.id_type">
-                <el-option
-                  :label="$t('kyc_idcard')"
-                  :value="1"/>
-                <el-option
-                  :label="$t('kyc_passport')"
-                  :value="2"/>
-              </el-select>
-            </el-form-item>
-            <el-form-item
-              prop="id_number"
-              class="inp_box"
-              :label="$t('kyc_id_number')">
-              <el-input v-model="form.id_number"/>
-            </el-form-item>
-            <el-form-item class="inp_box">
-              <v-btn
-                class="submit-btn"
-                :label="$t('kyc_submit')"
-                :loading="loading"
-                @click="submit"/>
-            </el-form-item>
-          </el-form>
-        </div>
+  <div class="profile-container">
+    <div class="title-box">{{ $t('identity_authentication') }}<span>{{ $t('Verified') }}</span></div>
+    <div class="invinfo-box">
+      <div class="authen_top">
+        <i class=""/>
+        <p class="yy">
+          {{ $t('identity_authentication1') }}
+        </p>
+        <p class="">
+          {{ $t('kyc_upload') }}
+        </p>
+        <p>
+          {{ $t('kyc_complete') }}
+        </p>
+        <i/>
       </div>
+      <el-form
+        class="form"
+        ref="form"
+        :rules="rules"
+        label-position="left"
+        :model="form"
+        label-width="104px">
+        <el-form-item
+          prop="name"
+          class="inp_box"
+          :label="$t('name')">
+          <el-input
+            v-model="form.name"/>
+        </el-form-item>
+        <el-form-item
+          class="inp_box"
+          :label="$t('kyc_id_type')">
+          <el-select v-model="form.id_type">
+            <el-option
+              :label="$t('kyc_idcard')"
+              :value="1"/>
+            <el-option
+              :label="$t('kyc_passport')"
+              :value="2"/>
+          </el-select>
+        </el-form-item>
+        <el-form-item
+          prop="id_number"
+          class="inp_box"
+          :label="$t('kyc_id_number')">
+          <el-input v-model="form.id_number"/>
+        </el-form-item>
+        <el-form-item class="inp_box">
+          <v-btn
+            class="submit-btn"
+            :label="$t('kyc_submit')"
+            :loading="loading"
+            @click="submit"/>
+        </el-form-item>
+      </el-form>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -76,11 +76,11 @@ export default {
         callback(new Error(this.$i18n.t('kyc_ph_id')))
       }
       if (this.form.id_type === 1) {
-        if (!/^[1-9]\d{5}(18|19|2([0-9]))\d{2}(0[0-9]|10|11|12)([0-2][1-9]|30|31)\d{3}[0-9Xx]$/.test(value)) {
+        if (!/^[1-9]\d{5}(18|19|2([0-9]))\d{2}(0[0-9]|10|11|12)([0-2][0-9]|30|31)\d{3}[0-9Xx]$/.test(value)) {
           callback(new Error(this.$i18n.t('kyc_id_no_err')))
         }
       } else {
-        if (!/^1[45][0-9]{7}|([P|p|S|s]\d{7})|([S|s|G|g]\d{8})|([Gg|Tt|Ss|Ll|Qq|Dd|Aa|Ff]\d{8})|([H|h|M|m]\d{8，10})$/.test(value)) {
+        if (!/^[a-zA-Z0-9]{1,9}$/.test(value)) {
           callback(new Error(this.$i18n.t('kyc_passport_err')))
         }
       }
@@ -99,7 +99,7 @@ export default {
           { required: true, message: this.$i18n.t('kyc_name_err'), trigger: 'blur' }
         ],
         id_number: [
-          { validator: validationFunc, trigger: 'blur'}
+          { validator: validationFunc, trigger: 'blur' }
         ]
       }
     }
@@ -107,8 +107,8 @@ export default {
   computed: {
 
   },
-  async beforeRouteEnter(to, from, next) {
-    let result = await actions.updateSession()
+  async beforeRouteEnter (to, from, next) {
+    await actions.updateSession()
     if (state.userInfo.lv) {
       if (state.userInfo.lv === 1) {
         console.log('goto:: step2')

@@ -3,8 +3,7 @@
     <div class="header">
       <v-nav2
         is-home="true"
-        :notice="notice"
-        @hide="notice = null"/>
+      />
     </div>
     <div class="banner">
       <div class="banner-txt"/>
@@ -29,9 +28,7 @@
         <div
           class="cre_jdt cr_jd_lt"
           id="content">
-          <p
-            :class="{'class-a':isA,'class-b':!isA}"
-            @click="toggle">
+          <p>
             <span>{{ $t('Openingtime') }}</span>
             {{ $t('Ota') }}
           </p>
@@ -117,12 +114,14 @@
 
 </template>
 <script>
-import VNav2 from '@/components/VNav2'
+import VNav2 from '@/components/VNav3'
 import VBtn from '@/components/VBtn'
 
 export default {
   data () {
+    return {
 
+    }
   },
   components: {
     VBtn,

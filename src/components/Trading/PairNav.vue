@@ -40,7 +40,6 @@
           :class="{cur: pair.name === state.pro.pair}"
           :key="pair.id"
           @click="setPair(pair)">
-          {{pair}}
           <div class="td pair">{{ pair.product_name }}/{{ pair.currency_name }}</div>
           <div class="td price">
             <span v-if="pair.tick">{{ pair.tick.current | fixed(pair.price_scale) }}</span>

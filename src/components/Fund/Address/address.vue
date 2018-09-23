@@ -2,7 +2,7 @@
   <div class="address-container">
     <div class="fund-container">
       <div class="title-box">
-        <div> {{ $t('deposit') }}</div>
+        <div> {{ $t('address_manage') }}</div>
       </div>
       <div class="fund-items-content">
         <div class="fund-item-row mb-14">
@@ -58,7 +58,6 @@
           :key="idx"
           :prop="hd.key"
           :label="hd.title"/>
-
         <el-table-column
           header-align='right'
           width="200px"
@@ -71,7 +70,7 @@
               class="my-fund-operate a-copy cursor-default ">{{ $t('copy') }}</span>
             <span
               @click="deleteAddr(scope.row)"
-              class="my-fund-operate cursor-default ">{{ $t('profile_api_remove') }}</span>
+              class="my-fund-operate cursor-default ">{{ $t('remove') }}</span>
           </template>
         </el-table-column>
       </el-table>
@@ -100,7 +99,6 @@ export default {
       ],
       operate: {key: 'operate', title: this.$t('operation')},
       loading: false
-
     }
   },
   async created () {

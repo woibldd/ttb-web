@@ -1,40 +1,59 @@
 <template>
-  <div class="trading-chart" ref="wrap">
-    <v-nav pro="1"></v-nav>
+  <div
+    class="trading-chart"
+    ref="wrap">
+    <v-nav pro="1"/>
     <div class="container-trade-panel">
       <div class="ix-row">
         <div class="ix-col ix-col-1">
-          <div class="ix-grid ix-grid-pairnav" ref="gridPairNav">
-            <PairNav ref="PairNav"></PairNav>
+          <div
+            class="ix-grid ix-grid-pairnav"
+            ref="gridPairNav">
+            <PairNav ref="PairNav"/>
           </div>
-          <div class="ix-grid ix-grid-deal" ref="gridDeal">
-            <Deal ref="Deal"></Deal>
+          <div
+            class="ix-grid ix-grid-deal"
+            ref="gridDeal">
+            <Deal ref="Deal"/>
           </div>
         </div>
         <div class="ix-col ix-col-2">
-          <div class="ix-grid ix-grid-tv" ref="gridTradingView">
+          <div
+            class="ix-grid ix-grid-tv"
+            ref="gridTradingView">
             <!-- <div class="grid-title">
               {{state.pro.pairTick}}
             </div> -->
-            <TradingView ref="TradingView"></TradingView>
-            <div class="active-box" v-if="showCountdown">
-              <p class="text">{{$t('active_countdown_text')}}<span class="seconds">{{countdownText}}</span>{{$t('active_countdown_unit')}}</p>
-              <a class="link" href="http://baidu.com" target="_blank">{{$t('active_rules')}}</a>
+            <TradingView ref="TradingView"/>
+            <div
+              class="active-box"
+              v-if="showCountdown">
+              <p class="text">{{ $t('active_countdown_text') }}<span class="seconds">{{ countdownText }}</span>{{ $t('active_countdown_unit') }}</p>
+              <router-link
+                class="link"
+                :to="{name: 'relay'}"
+                target="_blank">{{ $t('active_rules') }}</router-link>
             </div>
           </div>
         </div>
         <div class="ix-col ix-col-3">
-          <div class="ix-grid ix-grid-orderbook" ref="gridOrderbook">
-            <Orderbook ref="Orderbook"></Orderbook>
+          <div
+            class="ix-grid ix-grid-orderbook"
+            ref="gridOrderbook">
+            <Orderbook ref="Orderbook"/>
           </div>
         </div>
       </div>
       <div class="ix-row">
-        <div class="ix-grid ix-grid-order" ref="gridOrder">
-          <Order ref="Order"></Order>
+        <div
+          class="ix-grid ix-grid-order"
+          ref="gridOrder">
+          <Order ref="Order"/>
         </div>
-        <div class="ix-grid ix-grid-operate" ref="gridOperate">
-          <Operate ref="Operate"></Operate>
+        <div
+          class="ix-grid ix-grid-operate"
+          ref="gridOperate">
+          <Operate ref="Operate"/>
         </div>
       </div>
       <!-- <div class="ix-row">
@@ -49,11 +68,11 @@
 
 <script>
 import _ from 'lodash'
-import {local, state} from '@/modules/store'
+import { local, state } from '@/modules/store'
 import service from '@/modules/service'
 import utils from '@/modules/utils'
 
-import VNav from '@/components/VNav2'
+import VNav from '@/components/VNav3'
 import TradingView from '@/components/Trading/TradingView'
 import Order from '@/components/Trading/Order'
 import Deal from '@/components/Trading/Deal'
@@ -65,7 +84,7 @@ import OrderDealPopover from '@/components/Trading/OrderDealPopover'
 import Intro from '@/components/Trading/Intro'
 
 export default {
-  name: 'trading',
+  name: 'Trading',
   components: {
     VNav,
     OrderDealPopover,
@@ -99,7 +118,7 @@ export default {
           const [product, currency] = match.slice(1, 3)
           this.state.pro.product_name = product
           this.state.pro.currency_name = currency
-          const res = await service.getPairInfo({symbol: pair})
+          const res = await service.getPairInfo({ symbol: pair })
           if (!res.code) {
             this.state.pro.pairInfo = res.data
           } else {
@@ -116,14 +135,44 @@ export default {
     async refreshBalance () {
       const product = this.state.pro.product_name
       const currency = this.state.pro.currency_name
-      if (this.state.pro.product && this.state.pro.product.currency_name !== product) {
+      if (
+        this.state.pro.product &&
+        this.state.pro.product.currency_name !== product
+      ) {
         this.state.pro.product = null
       }
-      if (this.state.pro.currency && this.state.pro.currency.currency_name !== currency) {
+      if (
+        this.state.pro.currency &&
+        this.state.pro.currency.currency_name !== currency
+      ) {
         this.state.pro.currency = null
       }
       let [resc, resp] = await service.getBalanceByPair(currency, product)
-      if (resc && resp && product === this.state.pro.product_name && currency === this.state.pro.currency_name) {
+      if (!resc || typeof resc.available === 'undefined') {
+        resc = {
+          available: '0',
+          currency: currency,
+          ordering: '0',
+          quota: '20000',
+          withdrawing: '0'
+        }
+      }
+
+      if (!resp || typeof resp.available === 'undefined') {
+        resp = {
+          available: '0',
+          currency: product,
+          ordering: '0',
+          quota: '20000',
+          withdrawing: '0'
+        }
+      }
+      if (
+        resc &&
+        resp &&
+        product === this.state.pro.product_name &&
+        currency === this.state.pro.currency_name
+      ) {
         this.state.pro.product = resp
         this.state.pro.currency = resc
       }
@@ -141,7 +190,6 @@ export default {
       }
     },
     async onresize () {
-      const layoutHeight = window.innerHeight
       this.setGridContainers()
     },
     startTimer () {
@@ -149,13 +197,13 @@ export default {
       this.countdownTimer = setInterval(this.doCountdown, 1000)
     },
     doCountdown () {
-        let num = parseInt(this.countdownText, 10)
-        num--
-        if (num < 0) {
-          this.stopTimer()
-          return
-        }
-        this.countdownText = num
+      let num = parseInt(this.countdownText, 10)
+      num--
+      if (num < 0) {
+        this.stopTimer()
+        return
+      }
+      this.countdownText = num
     },
     stopTimer () {
       clearInterval(this.countdownTimer)
@@ -167,9 +215,9 @@ export default {
           this.lastDealTime = data[data.length - 1].time
           let tick = new Date().getTime() - this.lastDealTime
           if (tick < 0) {
-            tick = 0
+            tick = 2000
           } else if (tick > 20000) {
-            tick = 20000
+            tick = 0
           }
           this.countdownText = Math.floor(tick / 1000) + ''
           this.showCountdown = true
@@ -195,7 +243,9 @@ export default {
       this.$router.replace({
         name: 'trading',
         params: {
-          pair: _.find(res.data.items, item => item.name === local.pair) ? local.pair : res.data.items[0].name
+          pair: _.find(res.data.items, item => item.name === local.pair)
+            ? local.pair
+            : res.data.items[0].name
         }
       })
     }
@@ -257,12 +307,11 @@ export default {
   overflow: hidden;
   user-select: none;
   position: relative;
-  color: #BCBFCE;
+  color: #bcbfce;
   min-height: 100%;
   font-size: 12px;
   display: flex;
   flex-direction: column;
-
 }
 .container-trade-panel {
   flex: 1;
@@ -301,7 +350,7 @@ export default {
   height: 275px;
 }
 .ix-grid-deal {
-  flex: 1;
+  // flex: 1;
   height: 256px;
 }
 .ix-grid-orderbook {
@@ -309,7 +358,7 @@ export default {
   // height: 2px;
 }
 .ix-grid-pairnav {
-  flex: 1;
+  // flex: 1;
   height: 268px;
 }
 .ix-grid-operate {
@@ -325,8 +374,8 @@ export default {
 }
 .active-box {
   position: absolute;
-  top: 13px;
-  right: 25px;
+  top: 2px;
+  right: 2px;
   width: 260px;
   height: 68px;
   background: url("../assets/active_bg.png") no-repeat;
@@ -335,34 +384,34 @@ export default {
   .text {
     font-size: 14px;
     line-height: 14px;
-    font-family:MicrosoftYaHei;
-    font-weight:400;
-    color:rgba(250,248,239,1);
+    font-family: MicrosoftYaHei;
+    font-weight: 400;
+    color: rgba(250, 248, 239, 1);
     margin-top: 12px;
     margin-left: 14px;
 
     .seconds {
       font-size: 20px;
-      color: #EEDC50;
+      color: #eedc50;
       width: 22px;
       text-align: right;
       margin-right: 5px;
       display: inline-block;
     }
   }
-  .link  {
+  .link {
     position: absolute;
     bottom: 12px;
     left: 14px;
     padding: 1px 3px;
     box-sizing: content-box;
-    background: #FFD100;
+    background: #ffd100;
     border-radius: 3px;
-    color: #2064A2;
+    color: #2064a2;
     font-size: 12px;
     font-weight: bold;
     cursor: pointer;
-}
+  }
 }
 @media screen and (max-width: 1000px) {
   .ix-col-1 {
