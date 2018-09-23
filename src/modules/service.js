@@ -439,6 +439,9 @@ const service = {
   getBonusMineTotal (data) {
     return request('bonus/btc/total', data)
   },
+  getRelayTotal () {
+    return request('relay/query')
+  },
   /* 挖矿 end */
 
   /* 行情 */
