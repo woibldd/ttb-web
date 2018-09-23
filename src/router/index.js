@@ -31,6 +31,7 @@ const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
 const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/ProfileSafety')
 const relay = () => import(/* webpackChunkName: "relay" */ '@/pages/active/relay')
 const creation = () => import(/* webpackChunkName: "creation" */ '@/pages/active/creation')
+const LockWarehouse = () => import(/* webpackChunkName: "LockWarehouse" */ '@/pages/active/LockWarehouse')
 const PhoneBind = () => import(/* webpackChunkName: "PhoneBind" */ '@/pages/PhoneBind')
 const SecuritySummary = () => import(/* webpackChunkName: "SecuritySummary" */ '@/pages/SecuritySummary')
 const eBind = () => import(/* webpackChunkName: "EmailBind" */ '@/pages/eBind')
@@ -105,6 +106,10 @@ let router = new Router({
       name: 'creation',
       component: creation
     }, {
+      path: '/active/LockWarehouse',
+      name: 'LockWarehouse',
+      component: LockWarehouse
+    }, {
       path: '/active/relay',
       name: 'relay',
       component: relay
@@ -144,8 +149,8 @@ let router = new Router({
         mobileNav: isMobile
       },
       redirect: 'profile/invite',
-      //redirect: 'profile/ProfileInfo',
-      //redirect: 'profile/ProfileSafety',
+      // redirect: 'profile/ProfileInfo',
+      // redirect: 'profile/ProfileSafety',
 
       // component: (isMobile && process.env.MODE === 'beta') ? MobileProfile : Profile
       component: Profile,
