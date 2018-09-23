@@ -68,19 +68,19 @@
         {{ $t('mine_bonus_today') }}
       </div>
       <div class="cm-bn">
-        {{ bonusMine.today | round(8) }}<span class="unit">BTC</span>
+        {{ bonusMine.today | round(8) }}<span class="unit">USDT</span>
       </div>
       <div class="cm-bst">
         {{ $t('mine_bonus_rate') }}
       </div>
       <div class="cm-bn">
-        {{ bonusMine.rate | round(8) }}<span class="unit">BTC</span>
+        {{ bonusMine.rate | round(8) }}<span class="unit">USDT</span>
       </div>
       <div class="cm-bst">
         {{ $t('mine_bonus_yestoday') }}
       </div>
       <div class="cm-bn">
-        {{ bonusMine.yesterday | round(8) }}<span class="unit">BTC</span>
+        {{ bonusMine.yesterday | round(8) }}<span class="unit">USDT</span>
       </div>
     </div>
   </div>

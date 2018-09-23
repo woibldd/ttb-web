@@ -24,6 +24,7 @@
         <!-- <div class="error-block" v-show="errmsg">{{ errmsg }}</div> -->
         <form
           class="form"
+          @keydown.enter.stop.prevent="submit"
           onsubmit="return false"
           autocomplete="off">
           <div

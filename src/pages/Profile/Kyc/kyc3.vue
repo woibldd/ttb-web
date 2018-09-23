@@ -44,7 +44,7 @@
           </p>
           <p
             class="p2 mt-24"
-            v-html="$t('profile_kyc_again', {kyc: '#/profile/kyc/kyc_step2'})"/>
+            v-html="$t('profile_kyc_again', {kyc: '/profile/kyc/kyc_step2'})"/>
         </div>
         <div
           class="content mb-30"

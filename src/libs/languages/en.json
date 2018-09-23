@@ -423,11 +423,15 @@
   "kyc_id_type": "Type",
   "kyc_id_no_err": "Invalid ID number",
   "kyc_passport_err": "Invalid Passport",
+  "kyc_passport_front_upload": "Upload passport data page",
+  "kyc_passport_back_upload": "Upload passport cover",
+  "kyc_passport_hold_upload": "Upload Handheld with photo ID and note",
+  "kyc_id_front_upload": "Upload Identity Card Information",
+  "kyc_id_back_upload": "Upload Identity Card Back",
+  "kyc_id_hold_upload": "Upload Hand Held Card Picture",
   "kyc_name_err": "Please fill in the name",
-
   "kyc_upload": "Upload",
   "kyc_name": "Name: Jack",
-
   "kyc_valid_time": "Issue Date",
   "kyc_hand": "The photo of you holding ID Card",
   "kyc_image_uploading": "Please wait until the upload is complete",
