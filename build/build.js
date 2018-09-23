@@ -2,6 +2,8 @@
 require('./check-versions')()
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'production'
+process.env.MODE = process.argv[2] || 'prod'
+process.env.STATIC = '/'
 
 const ora = require('ora')
 const rm = require('rimraf')

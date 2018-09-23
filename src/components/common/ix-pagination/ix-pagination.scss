@@ -1,0 +1,11 @@
+.ix-pagination-container {
+    display: flex;
+
+    .pa-btn {
+        cursor: pointer;
+
+        &:hover {
+            opacity: .7;
+        }
+    }
+}

@@ -1,13 +1,18 @@
 <template>
   <div class="page page-profile">
-    <router-view></router-view>
+     <div style="page-profile-wrap">
+      <profile-left/>
+      <router-view></router-view>
+     </div>
   </div>
 </template>
 
 <script>
+import ProfileLeft from './ProfileLeft'
 export default {
   name: 'profile',
   components: {
+    ProfileLeft
   }
 }
 </script>

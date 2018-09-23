@@ -12,12 +12,12 @@
         </div>
       </li>
       <li class="li-amount mb-14">
-        <div class="label">{{ $t('amount') }}</div>
+        <div class="label">{{ $t('order_value') }}</div>
         <div class="content">
           <currency-input class="trade"
             :class="[input.buy_amount.status]"
             v-model="buy_amount"
-            :currency="state.pro.product_name"
+            :currency="state.pro.currency_name"
             :scale="pairInfo.amount_scale">
           </currency-input>
         </div>
@@ -28,7 +28,7 @@
             <div class="avbl">
               <div class="avbl-label">{{ $t('avlb') }} {{ state.pro.currency_name }}</div>
               <div class="avbl-value" v-if="currency">{{ currency.available | fixed(pairInfo.currency_scale) }}</div>
-              <div class="avbl-value" v-else>----</div>
+              <div class="avbl-value" v-else>...</div>
             </div>
             <div class="ix-slider">
               <ix-slider :disabled="!currencyAvailable" @input="onSliderDragEnd($event, 'buy')" height="4" :dot-size="14" :lazy="true" :min="0" :max="100" :piecewiseLabel="true" :interval="1" :piecewise="false" :show="tabActive">
@@ -50,7 +50,7 @@
         <div class="half-wrap left">
           <v-btn :label="$t('operate_buy', {coin: state.pro.product_name})"
             class="submit-btn"
-            radius="0"
+            radius="4"
             color="ixbuy"
             height="44"
             :loading="submitting === 'BUY'"
@@ -87,7 +87,7 @@
             <div class="avbl">
               <div class="avbl-label">{{ $t('avlb') }} {{ state.pro.product_name }}</div>
               <div class="avbl-value" v-if="product">{{ product.available | fixed(pairInfo.product_scale) }}</div>
-              <div class="avbl-value" v-else>----</div>
+              <div class="avbl-value" v-else>...</div>
             </div>
             <div class="ix-slider">
               <ix-slider :disabled="!currencyAvailable" @input="onSliderDragEnd($event, 'sell')" height="4" :dot-size="14" :lazy="true" :min="0" :max="100" :piecewiseLabel="true" :interval="1" :piecewise="false" :show="tabActive">
@@ -109,7 +109,7 @@
         <div class="half-wrap right">
           <v-btn :label="$t('operate_sell', {coin: state.pro.product_name})"
             class="submit-btn"
-            radius="0"
+            radius="4"
             color="ixsell"
             height="44"
             :loading="submitting === 'SELL'"
@@ -240,14 +240,10 @@ export default {
       }
     },
     setBuyVolumn (ratio) {
-      const price = _.get(this, 'state.pro.pairInfo.price', 0)
-      if (price > 0) {
-        this.buy_amount = this.$big(this.currency.available)
-          .mul(ratio)
-          .div(price)
-          .round(this.pairInfo.amount_scale)
-          .toString()
-      }
+      this.buy_amount = this.$big(this.currency.available)
+        .mul(ratio)
+        .round(this.pairInfo.amount_scale)
+        .toString()
     },
     setSellVolumn (ratio) {
       this.sell_amount = this.$big(this.product.available)
@@ -294,30 +290,41 @@ export default {
       if (side === 'SELL' && $amount.gt(this.product.available)) {
         return utils.alert(this.$i18n.t('amount_over'))
       }
-      if ($amount.lt(this.pairInfo.min_amount)) {
-        return utils.alert(this.$i18n.t('amount_low', {num: this.pairInfo.min_amount + ' ' + this.pairInfo.product_name}))
+      if (side === 'BUY' && $amount.gt(this.currency.available)) {
+        return utils.alert(this.$i18n.t('amount_over'))
       }
-      if ($amount.gt(this.pairInfo.max_amount)) {
-        return utils.alert(this.$i18n.t('amount_high', {num: this.pairInfo.max_amount + ' ' + this.pairInfo.product_name}))
-      }
-      if ($bid.gt(0) && $ask.gt(0) && $bid.mul(1.05).lt($ask)) {
-        // 盘口差价较大，且下单价超过盘口
-        const ok = await utils.confirm({
-          trade: true,
-          content: this.$i18n.t('spread_too_big', {per: 5}),
-          title: this.$i18n.t('confirm_your_order')
-        })
-        if (!ok) {
-          return false
-        }
-      }
+      // if ($amount.lt(this.pairInfo.min_amount)) {
+      //   return utils.alert(this.$i18n.t('amount_low', {num: this.pairInfo.min_amount + ' ' + this.pairInfo.product_name}))
+      // }
+      // if ($amount.gt(this.pairInfo.max_amount)) {
+      //   return utils.alert(this.$i18n.t('amount_high', {num: this.pairInfo.max_amount + ' ' + this.pairInfo.product_name}))
+      // }
+    //   if ($bid.gt(0) && $ask.gt(0) && $bid.mul(1.05).lt($ask)) {
+    //     // 盘口差价较大，且下单价超过盘口
+    //     const ok = await utils.confirm({
+    //       trade: true,
+    //       content: this.$i18n.t('spread_too_big', {per: 5}),
+    //       title: this.$i18n.t('confirm_your_order')
+    //     })
+    //     if (!ok) {
+    //       return false
+    //     }
+    //   }
       this.submitting = side
       const order = {
-        type: 'MARKET',
-        side: side,
-        amount: $amount.toString(),
-        symbol: this.state.pro.pair
+        type: 2,
+        side: side === 'SELL' ? 2 : 1,
+        price: 0,
+        amount: 0,
+        locked: $amount.toString(),
+        symbol: this.state.pro.pair,
       }
+
+      // if (side === 'BUY') {
+        // order.locked = order.amount
+        // order.amount = 0
+        // delete order.amount
+      // }
       const res = await service.createOrder(order)
       this.submitting = false
       if (res.code > 0) {
@@ -345,7 +352,6 @@ export default {
       } else {
         this.setSellVolumn(value)
       }
-      console.log(value)
     }
   },
   components: {

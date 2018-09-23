@@ -1,5 +1,5 @@
 <template>
-  <div class="v-btn btn"
+  <div class="ix-button btn"
     @click.prevent="onclick"
     :class="[disabled ? 'disabled' : '', loading ? 'loading' : '', color,
        color === 'ixbuy' ? 'theme-bgcolor-up' : '',
@@ -60,7 +60,7 @@ export default {
 @import "../styles/vars";
 @import "../styles/mixins";
 
-.v-btn {
+.ix-button {
   position: relative;
   cursor: pointer;
   user-select: none;
@@ -86,8 +86,8 @@ export default {
     }
   }
 }
-.loading.v-btn,
-.loading.v-btn.primary {
+.loading.ix-button,
+.loading.ix-button.primary {
   border-color: transparent;
   transition: background-color 200ms;
   &, &:hover, &:focus, &:active, &:visited {
@@ -95,8 +95,8 @@ export default {
     background-color: #dddddd;
   }
 }
-.disabled.v-btn,
-.disabled.v-btn.primary {
+.disabled.ix-button,
+.disabled.ix-button.primary {
   border-color: transparent;
   transition: background-color 200ms;
   &, &:hover, &:focus, &:active, &:visited {

@@ -14,19 +14,6 @@
           v-model="search">
       </div>
     </div>
-    <!-- <div class="ix-header-sub">
-      <a class="ix-header-nav favor" :class="{cur: tab === '*'}" @click.prevent="setTab('*')">
-        <i class="icon-collect"></i>
-      </a>
-      <a class="ix-header-nav"
-        v-for="currency in group"
-        href="javascript:;"
-        :key="currency"
-        :class="{cur: tab === currency}"
-        @click.prevent="setTab(currency)">
-        {{ currency }}
-      </a>
-    </div> -->
     <div class="ix-pannel-body">
       <div class="no-data" v-if="errmsg">{{ $t(errmsg) }}</div>
       <div class="err" v-if="!loading && err && !pairList.length">{{ err }}</div>

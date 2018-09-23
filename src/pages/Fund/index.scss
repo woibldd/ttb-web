@@ -1,0 +1,91 @@
+@import "~@/styles/vars";
+@import '~@/styles/mixins';
+.page-fund-container{
+    background: #ffffff;
+    min-width: 1180px;
+    padding-top: 60px;
+    padding-bottom: 100px;
+    .page-fund-content {
+        width: 1180px;
+        margin: 0 auto;
+        display: flex;
+    }
+
+    .title__second {
+        color: $text-light;
+        font-size: 18px;
+        font-weight: 400;
+    }
+
+    .fund-history {
+        padding-left: 10px;
+        padding-right: 10px;
+        height:28px;
+        line-height: 28px;
+        text-align: center;
+        border:1px solid rgba(193,164,66,1);
+        border-radius:14px;
+        color: $primary;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .fund-right {
+        box-sizing: border-box;
+        padding-left: 60px;
+    }
+    .fund-container {
+        box-sizing: border-box;
+        width: 920px;
+
+        .title-box {
+            width: 100%;
+            height: 40px;
+            font-size: 18px;
+            font-weight: 600;
+            color: $text-strong;
+            border-bottom: 1px solid #e6e6e6;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    .fund-items-content{
+        margin: 54px auto 0;
+        width: 600px;
+
+        .fund-item-row{
+            display: flex;
+            height: 40px;
+            line-height: 40px;
+
+            .row__label{
+                font-size: 14px;
+                font-weight: bold;
+                color:$text-strong;
+                width: 88px;
+            }
+        }
+
+        .fund-item-other {
+            padding-left: 88px;
+        }
+    }
+
+
+    .fund__spot {
+        display: inline-block;
+        width:4px;
+        height:4px;
+        background:rgba(124,124,124,1);
+        border-radius:50%;
+    }
+
+    .pointer {
+        cursor:pointer;
+    }
+    .default,
+    .cursor-default {
+        cursor: default;
+    }
+}
+  

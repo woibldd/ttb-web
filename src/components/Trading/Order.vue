@@ -1,44 +1,59 @@
 <template>
-  <div class="ix-panel" :class="{progress: progressing}">
-    <div class="mask" :class="{show: hasMask, transparent: curCtx.nextId}">
-      <v-loading></v-loading>
+  <div
+    class="ix-panel"
+    :class="{progress: progressing}">
+    <div
+      class="mask"
+      :class="{show: hasMask, transparent: curCtx.page > 0}">
+      <v-loading/>
     </div>
     <div class="ix-header">
-      <a class="ix-header-nav raw"
+      <a
+        class="ix-header-nav raw"
         :class="{cur: tab === 'active'}"
         @click.prevent="setTab('active')">
         {{ $t('order_active') }}
         <span v-if="activeTotal">[{{ activeTotal }}]</span>
       </a>
-      <a class="ix-header-nav raw"
+      <a
+        class="ix-header-nav raw"
         :class="{cur: tab === 'history'}"
         @click.prevent="setTab('history')">
         {{ $t('order_history') }}
       </a>
       <div class="header-icons">
-        <span class="hide-others btn on"
+        <span
+          class="hide-others btn on"
           @click="local.hideOthers = !local.hideOthers">
-          <input type="checkbox" v-model="local.hideOthers">
+          <input
+            type="checkbox"
+            v-model="local.hideOthers">
           {{ $t('hide_others', {pair: pair}) }}
         </span>
-        <a @click.prevent="update" class="header-btn btn">
-          <icon name="refresh"></icon>
+        <a
+          @click.prevent="update"
+          class="header-btn btn">
+          <icon name="refresh"/>
         </a>
       </div>
     </div>
-    <div class="ix-panel-body" v-show="tab === 'active'" ref="active">
-      <div class="inner" ref="activeContent">
+    <div
+      class="ix-panel-body"
+      v-show="tab === 'active'"
+      ref="active">
+      <div
+        class="inner"
+        ref="activeContent">
         <table class="table table-ix-order table-active">
           <thead>
             <tr v-show="active.list.length">
               <th>{{ $t('order_th_placed') }}</th>
-              <!-- <th class="side-icon"></th> -->
               <th>{{ $t('pair') }}</th>
               <th>{{ $t('deal_th_side') }}</th>
               <!-- <th>{{ $t('order_th_type') }}</th> -->
               <th class="right">{{ $t('price') }}</th>
               <th class="right">{{ $t('amount') }}</th>
-              <th></th>
+              <th/>
               <th>{{ $t('order_th_status') }}</th>
               <!-- <th class="center" v-if="active.list.length">
                 <a class="btn op-cancel" @click.prevent="cancelAll"></a>
@@ -47,11 +62,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="order in active.list" :key="order.id">
+            <tr
+              v-for="order in active.list"
+              :key="order.id">
               <td>{{ order.create_time | date }}</td>
               <td>{{ order.symbol | pairfix }}</td>
-              <td style="color: #09C989" v-if="order.side === 'BUY'">{{$t('order_side_buy')}}</td>
-              <td style="color: #F24E4D" v-else>{{$t('order_side_sell')}}</td>
+              <td
+                style="color: #09C989"
+                v-if="order.side === 'BUY'">{{ $t('order_side_buy') }}</td>
+              <td
+                style="color: #F24E4D"
+                v-else>{{ $t('order_side_sell') }}</td>
               <!-- <td>{{ getType(order.type) }}</td> -->
               <td class="right">
                 <span v-if="order.price > 0">{{ fixPrice(order.price, order.symbol) }}</span>
@@ -64,76 +85,56 @@
               <td class="ccy">{{ order.symbol | p }}</td>
               <td>
                 {{ order.deal_amount > 0 ? $t('order_sts_partial') : $t('order_sts_active') }}
-                <order-deal v-if="order.deal_amount > 0" :key="active.fetchId" :id="order.id" :pairName="order.symbol"/>
+                <!-- <order-deal v-if="order.deal_amount > 0" :key="active.fetchId" :id="order.id" :pairName="order.symbol"/> -->
               </td>
               <td class="center">
-                <a @click.prevent="cancel(order)">{{$t('cancel_order')}}</a>
-                <!-- <a class="btn op-cancel" @click.prevent="cancel(order)"></a> -->
+                <a @click.prevent="cancel(order)">{{ $t('transfer_cancel') }}</a>
               </td>
             </tr>
           </tbody>
         </table>
-        <div class="no-data" v-show="!active.fetching && !active.err && !active.list.length">{{ $t(empty) }}</div>
-        <div class="err" v-show="!active.fetching && active.err && !active.list.length">{{ active.err }}</div>
+        <div
+          class="no-data"
+          v-show="!active.fetching && !active.err && !active.list.length">{{ $t(empty) }}</div>
+        <div
+          class="err"
+          v-show="!active.fetching && active.err && !active.list.length">{{ active.err }}</div>
       </div>
     </div>
-    <div class="ix-panel-body" v-show="tab === 'filled'" ref="filled" @scroll.prevent="onScroll('filled')">
-      <div class="inner" ref="filledContent">
-        <table class="table table-ix-order table-filled">
-          <thead>
-            <tr v-show="filled.list.length">
-              <th class="side-icon"></th>
-              <th>{{ $t('pair') }}</th>
-              <th>{{ $t('order_th_type') }}</th>
-              <th class="right">{{ $t('avg_price') }}</th>
-              <th class="right">{{ $t('amount') }}</th>
-              <th></th>
-              <th>{{ $t('order_th_status') }}</th>
-              <th>{{ $t('order_th_placed') }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="order in filled.list" :key="order.id">
-              <td class="side-icon"><i :class="sideBg(order.side)"></i></td>
-              <td>{{ order.symbol | pairfix }}</td>
-              <td>{{ getType(order.type) }}</td>
-              <td class="right"><num :num="avg(order)"/></td>
-              <td class="right">
-                <span v-if="$big(order.deal_amount).lt(order.amount)">{{ fixAmount(order.deal_amount, order.symbol) }} /</span>
-                <span>{{ fixAmount(order.amount, order.symbol) }}</span>
-              </td>
-              <td class="ccy">{{ order.symbol | p }}</td>
-              <td>
-                {{ orderSts(order.status) }}
-                <order-deal :id="order.id" :pairName="order.symbol" :finished="true" />
-              </td>
-              <td>{{ order.create_time | date }}</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="no-data" v-show="!filled.fetching && !filled.err && !filled.list.length">{{ $t(empty) }}</div>
-        <div class="err" v-show="!filled.fetching && filled.err && !filled.list.length">{{ filled.err }}</div>
-      </div>
-    </div>
-    <div class="ix-panel-body" v-show="tab === 'history'" ref="history" @scroll.prevent="onScroll('history')">
-      <div class="inner" ref="historyContent">
+    <div
+      class="ix-panel-body"
+      v-show="tab === 'history'"
+      ref="history"
+      @scroll.prevent="onScroll('history')">
+      <div
+        class="inner"
+        ref="historyContent">
         <table class="table table-ix-order table-history">
           <thead>
             <tr v-show="history.list.length">
-              <th class="side-icon"></th>
+              <th>{{ $t('time') }}</th>
               <th>{{ $t('pair') }}</th>
+              <th>{{ $t('deal_th_side') }}</th>
               <th>{{ $t('order_th_type') }}</th>
               <th class="right">{{ $t('avg_price') }}</th>
               <th class="right">{{ $t('amount') }}</th>
-              <th></th>
+              <th/>
               <th>{{ $t('order_th_status') }}</th>
-              <th>{{ $t('time') }}</th>
+
             </tr>
           </thead>
           <tbody>
-            <tr v-for="order in history.list" :key="order.id">
-              <td class="side-icon"><i :class="sideBg(order.side)"></i></td>
+            <tr
+              v-for="order in history.list"
+              :key="order.id">
+              <td>{{ order.create_time | date }}</td>
               <td>{{ order.symbol | pairfix }}</td>
+              <td
+                style="color: #09C989"
+                v-if="order.side === 'BUY'">{{ $t('order_side_buy') }}</td>
+              <td
+                style="color: #F24E4D"
+                v-else>{{ $t('order_side_sell') }}</td>
               <td>{{ getType(order.type) }}</td>
               <td class="right">
                 <span v-if="order.deal_amount > 0"><num :num="avg(order)"/></span>
@@ -146,14 +147,18 @@
               <td class="ccy">{{ order.symbol | p }}</td>
               <td>
                 {{ orderSts(order.status) }}
-                <order-deal v-if="order.status <= 2" :id="order.id" :pairName="order.symbol" :finished="true" />
+                <!-- <order-deal v-if="order.status == 3 || order.status == 5 || order.status == 7" :data="order" :pairName="order.symbol" :finished="true" /> -->
               </td>
-              <td>{{ order.create_time | date }}</td>
+
             </tr>
           </tbody>
         </table>
-        <div class="no-data" v-show="!history.fetching && !history.err && !history.list.length">{{ $t(empty) }}</div>
-        <div class="err" v-show="!history.fetching && history.err && !history.list.length">{{ history.err }}</div>
+        <div
+          class="no-data"
+          v-show="!history.fetching && !history.err && !history.list.length">{{ $t(empty) }}</div>
+        <div
+          class="err"
+          v-show="!history.fetching && history.err && !history.list.length">{{ history.err }}</div>
       </div>
     </div>
   </div>
@@ -164,15 +169,15 @@ import service from '@/modules/service'
 import utils from '@/modules/utils'
 import {local, state, actions} from '@/modules/store'
 import _ from 'lodash'
-import OrderDeal from './OrderDealTarget'
+// import OrderDeal from './OrderDealTarget'
 import orderWatcher from '@/mixins/order-watcher'
 import {pairfix} from '@/mixins/'
 
 export default {
-  name: 'order',
+  name: 'Order',
   mixins: [orderWatcher, pairfix],
   components: {
-    OrderDeal
+    // OrderDeal
   },
   data () {
     return {
@@ -182,7 +187,7 @@ export default {
       activeTotal: 0,
       local,
       active: {
-        nextId: 0,
+        page: 1,
         fetchId: 0,
         fetching: false,
         over: false,
@@ -190,17 +195,8 @@ export default {
         api: 'orderActive',
         list: []
       },
-      filled: {
-        nextId: 0,
-        fetchId: 0,
-        fetching: false,
-        over: false,
-        latest: false,
-        api: 'orderClosed',
-        list: []
-      },
       history: {
-        nextId: 0,
+        page: 1,
         fetchId: 0,
         fetching: false,
         over: false,
@@ -281,6 +277,7 @@ export default {
       return utils.toFixed(price, scale)
     },
     fixAmount (amount, pairName) {
+      if (typeof amount === 'undefined') return ''
       const scale = _.get(this.pairGroup, `${pairName}.amount_scale`, 8)
       return utils.toFixed(amount, scale)
     },
@@ -288,12 +285,13 @@ export default {
       return this.fixPrice(this.$big(order.total).div(order.deal_amount), order.symbol)
     },
     orderSts (statusId) {
+      console.log(statusId)
       const context = {
-        1: 'order_sts_filled',
-        2: 'order_sts_partial',
-        3: 'order_sts_canceled',
-        4: 'order_sts_post_rm',
-        5: 'order_sts_empty_rm'
+        3: 'order_sts_filled',
+        4: 'order_sts_canceled',
+        5: 'order_sts_partial',
+        6: 'order_sts_post_rm',
+        7: 'order_sts_partial'
       }[statusId] || 'Unknown'
       return this.$i18n.t(context)
     },
@@ -391,7 +389,6 @@ export default {
 
       if (!ctx.latest) {
         ctx.latest = true
-        ctx.nextId = 0
         ctx.over = false
         ctx.fetching = false
       }
@@ -400,12 +397,11 @@ export default {
       }
       ctx.fetchId += 1
       ctx.fetching = true
-      const pageSize = 20
-      const nextId = ctx.nextId
+      const pageSize = 200
       const fetchId = ctx.fetchId
       const params = {
         size: pageSize,
-        start: ctx.nextId
+        page: ctx.page
       }
       if (this.local.hideOthers) {
         params.symbol = this.state.pro.pair
@@ -413,7 +409,7 @@ export default {
       const res = await service[ctx.api](params)
       await service.getPairList() // 由于 avg() 使用了 pairList，需要等待该请求完成
 
-      if (nextId !== ctx.nextId || fetchId !== ctx.fetchId || this._isDestroyed) {
+      if (fetchId !== ctx.fetchId || this._isDestroyed) {
         return false
       }
       ctx.fetching = false
@@ -423,28 +419,25 @@ export default {
         const items = this.local.hideOthers
           ? res.data.items.filter(item => item.symbol === this.state.pro.pair)
           : res.data.items
-        if (nextId) {
+        if (ctx.page > 1) {
           ctx.list = ctx.list.concat(items)
         } else {
           this.$refs[tab].scrollTop = 0
           ctx.list = items
         }
         ctx.over = res.data.items.length < pageSize
-        ctx.nextId = _.get(_.last(res.data.items), 'id', 0)
         this.$nextTick(() => this.onScroll(tab))
       }
     },
     resetAll () {
       // 设置 latest=false 下次该tab fetch 时会进行刷新
       this.active.latest = false
-      this.filled.latest = false
       this.history.latest = false
     },
     clear (tab) {
       const ctx = this[tab]
       ctx.latest = false
       ctx.list = []
-      ctx.nextId = 0
       ctx.fetchId += 1
       ctx.fetching = false
       ctx.over = false
@@ -454,7 +447,6 @@ export default {
     },
     clearAll () {
       this.clear('active')
-      this.clear('filled')
       this.clear('history')
 
       // 通知 deals 浮窗关闭
@@ -480,7 +472,6 @@ export default {
         return this.$nextTick(() => this.onresize())
       }
       this.$refs.active.style.height = this.container.height - 32 + 'px'
-      this.$refs.filled.style.height = this.container.height - 32 + 'px'
       this.$refs.history.style.height = this.container.height - 32 + 'px'
       this.onScroll(this.tab)
     }, 100),
@@ -569,7 +560,6 @@ tbody tr:nth-child(odd) {
     background-color: $sell;
   }
 }
-.table-filled .side-icon i,
 .table-history .side-icon i {
   border-radius: 1px;
 }

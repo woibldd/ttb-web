@@ -1,39 +1,41 @@
 <template>
-  <div style="page-invite-wrap">
-    <profile-left></profile-left>
-    <div class="user-center-right">
-      <div class="profile-container">
-        <div class="title-box">{{$t('profile_left_invite_perinfo')}}</div>
-        <div class="invinfo-box">
-            <div class="inv_tl">
-                <p>{{$t('u_name')}}</p>
-                <span><a>去认证</a></span>
-            </div>
-            <div class="inv_tl">
-                <p>{{$t('register_by_phone')}}</p>
-                <span>185****6608</span>
-            </div>
-            <div class="inv_tl">
-                <p>{{$t('register_by_email')}}</p>
-                <span>185****@163.com</span>
-            </div>
+  <div class="user-center-right">
+    <div class="profile-container">
+      <div class="title-box">{{ $t('profile_left_invite_perinfo') }}</div>
+      <div class="invinfo-box">
+        <div class="inv_tl">
+          <p>{{ $t('u_name') }}</p>
+          <span v-if="name">{{ name }}</span>
+          <span v-else><router-link :to="{name: 'Kyc'}">{{ $t("to_verify") }}</router-link> </span>
         </div>
-        <div class="title-box">{{$t('log_recording')}}<span>{{$t('log_recording_prompt')}}</span></div>
-        <div class="invite-list ">
-          <div class="invinfo-box">
-              <ul>
-                  <li class="inf-rt">
-                      <div>{{$t('date')}}</div>
-                      <div>{{$t('ip_address')}}</div>
-                      <div>{{$t('region_label')}}</div>
-                  </li>
-                  <li v-for="item in historyList" :key="'h_'+item.id">
-                      <div>{{item.login_time}}</div>
-                      <div>{{item.ip}}</div>
-                      <div>{{item.address}}</div>
-                  </li>
-              </ul>
-          </div>
+        <div class="inv_tl">
+          <p>{{ $t('register_by_phone') }}</p>
+          <span v-if="phone"> {{ phone }}</span>
+          <span v-else><router-link :to="{name: 'PhoneBind'}">{{ $t('to_bind') }}</router-link></span>
+        </div>
+        <div class="inv_tl">
+          <p>{{ $t('register_by_email') }}</p>
+          <span v-if="email"> {{ email }}</span>
+          <span v-else><router-link :to="{name: 'EmailBind'}">{{ $t('to_bind') }}</router-link></span>
+        </div>
+      </div>
+      <div class="title-box">{{ $t('log_recording') }}<span>{{ $t('log_recording_prompt') }}</span></div>
+      <div class="invite-list ">
+        <div class="invinfo-box">
+          <ul>
+            <li class="inf-rt">
+              <div>{{ $t('date') }}</div>
+              <div>{{ $t('ip_address') }}</div>
+              <div>{{ $t('region_label') }}</div>
+            </li>
+            <li
+              v-for="item in historyList"
+              :key="'h_'+item.id">
+              <div>{{ item.login_time }}</div>
+              <div>{{ item.ip }}</div>
+              <div>{{ item.address }}</div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -41,34 +43,58 @@
 </template>
 
 <script>
-  import ProfileLeft from './ProfileLeft'
-  import service from '@/modules/service'
+import service from '@/modules/service'
+import {state} from '@/modules/store'
+import utils from '@/modules/utils'
 
-  export default {
-    name: 'ProfileInfo',
-    components: {
-      ProfileLeft
-    },
-    data () {
-      return {
-        historyList: []
+export default {
+  name: 'ProfileInfo',
+  components: {
+  },
+  data () {
+    return {
+      state,
+      historyList: [],
+      kyc: {}
+    }
+  },
+  computed: {
+    name () {
+      if (state.userInfo) {
+        return state.userInfo.name
       }
+      return ''
     },
-    computed: {
-      
-    },
-    methods: {
-      
-    },
-    async created() {
-      let historyResult = await service.getLoginHistory()
-      if (!historyResult.code) {
-        this.historyList = historyResult.data
+    phone () {
+      if (state.userInfo.phone) {
+        return utils.publicDesensitization(state.userInfo.phone)[0]
       }
+      return ''
+    },
+    email () {
+      if (state.userInfo.email) {
+        return utils.publicDesensitization(state.userInfo.email)[0]
+      }
+      return ''
+    }
+  },
+  methods: {
+
+  },
+  async created () {
+    // let kyc = await service.getKycInfo()
+    // if (!kyc.code) {
+    //   kyc.data =
+    // }
+
+    let historyResult = await service.getLoginHistory()
+    if (!historyResult.code) {
+      this.historyList = historyResult.data
     }
   }
+}
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   @import "../styles/vars";
   @import '../styles/mixins';
 
@@ -94,6 +120,7 @@
         }
       }
       .invinfo-box {
+        width: 100%;
         margin: 10px auto 60px auto;
         .inv_tl{
             height: 32px;
@@ -144,4 +171,3 @@
     }
   }
 </style>
-

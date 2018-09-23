@@ -1,0 +1,25 @@
+.my-fund-container {
+
+    .fund-total {
+        margin-top: 45px;
+        margin-bottom: 58px;
+        display: flex;
+        align-items: center;
+        height: 30px;
+    }
+    .total__label {
+        margin-right: 50px;
+    }
+    .total__coin {
+        color: $primary;
+    }
+    .coin-rmb {
+        display: inline-block;
+        color: $text-weak;
+    }
+    .my-fund-operate {
+        color: $primary;
+        cursor: pointer;
+        margin-left: 21px;
+    }
+}

@@ -7,6 +7,10 @@ module.exports = {
   themeName: 'default',
   companyName: 'IX.COM',
   exchangeName: 'IX | 自由人的自由联合',
+  exchangeNameConfig: {
+    'zh-CN': 'IX | 自由人的自由联合',
+    'en': 'IX | FREE MAN FREE UNITING'
+  },
   keywords: 'IX,比特币,比特币交易,以太坊,区块链,共识,自由联合,数字资产交易所',
   description: 'IX致力于打造一家回归区块链精神的数字资产交易所，公开、公正、透明',
   shortcut: '',
@@ -21,19 +25,23 @@ module.exports = {
     'zh-CN': 'https://github.com/ix/API_docs_zh/wiki'
   },
   faq: {
-    'en': 'https://ix.zendesk.com/hc/en-us/categories/360000222934',
-    'zh-CN': 'https://ix.zendesk.com/hc/zh-cn/categories/360000222934'
+    'en': 'https://ixcustomer.zendesk.com/hc/en-us/categories/360000964011',
+    'zh-CN': 'https://ixcustomer.zendesk.com/hc/zh-cn/categories/360000964011'
   },
   announcement: {
-    'en': 'https://ix.zendesk.com/hc/en-us/categories/360000242414',
-    'zh-CN': 'https://ix.zendesk.com/hc/zh-cn/categories/360000242414'
+    'en': 'https://ixcustomer.zendesk.com/hc/en-us/categories/360000964031',
+    'zh-CN': 'https://ixcustomer.zendesk.com/hc/zh-cn/categories/360000964031'
   },
   help: {
-    'en': 'https://ix.zendesk.com/hc/en-us',
-    'zh-CN': 'https://ix.zendesk.com/hc/zh-cn'
+    'en': 'https://ixcustomer.zendesk.com/hc/en-us/sections/360002271551',
+    'zh-CN': 'https://ixcustomer.zendesk.com/hc/zh-cn/sections/360002271551'
   },
   request: {
-    'en': 'https://ix.zendesk.com/hc/en-us/requests/new',
-    'zh-CN': 'https://ix.zendesk.com/hc/zh-cn/requests/new'
+    'en': 'https://ixcustomer.zendesk.com/hc/en-us/requests/new',
+    'zh-CN': 'https://ixcustomer.zendesk.com/hc/zh-cn/requests/new'
+  },
+  activeRule: {
+    'en': 'https://ixcustomer.zendesk.com/hc/en-us/articles/360015900832',
+    'zh-CN': 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360015900832'
   }
 }

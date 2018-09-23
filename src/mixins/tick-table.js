@@ -28,29 +28,18 @@ export default {
       if (this.search && !this.showList.length) {
         return 'pairnav_no_matched'
       }
-      if (this.tab === '*' && !this.showList.length) {
-        return 'pairnav_no_fav'
-      }
       return ''
     },
     group () {
       return _.sortBy(_.uniq(_.map(this.state.pro.pairList, 'currency_name')), name => {
-        return (_.indexOf(['USDT', 'BTC', 'ETH', 'EOS', 'PAI'], name) + 1) || 100
+        return (_.indexOf(['USDT', 'BTC', 'ETH', 'EOS'], name) + 1) || 100
       })
     },
     pairList () {
       return this.state.pro.pairList
     },
     showList () {
-      let list
-      if (!this.tab) {
-        list = this.pairList
-      } else if (this.tab === '*') {
-        list = _.filter(this.pairList, this.isCollect)
-      } else {
-        list = _.filter(this.pairList, pair => pair.currency_name === this.tab)
-      }
-      return _.filter(list, pair => pair.product_name.indexOf(this.search.toUpperCase()) > -1)
+      return this.pairList
     },
     sortedList () {
       if (!this.sortBy || !this.sortState) {
@@ -155,7 +144,7 @@ export default {
       if (this.socket) {
         this.socket.$destroy()
       }
-      this.socket = ws.create('market/ticker')
+      this.socket = ws.create('market/tickers')
       this.socket.$on('message', (datas) => {
         datas.forEach(data => {
           this.patch(data)
@@ -174,6 +163,6 @@ export default {
     }
     await this.fetch()
     this.subMarket()
-    actions.updateFavorite()
+    // actions.updateFavorite()
   }
 }

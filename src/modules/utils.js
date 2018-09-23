@@ -8,11 +8,7 @@ const externalModule = {}
 const localeName = {
   'en': 'English',
   'zh-CN': '简体中文',
-  'zh-HK': '繁體中文',
-  'ja': '日本語',
-  'ko': '한국어',
-  'tr': 'Türkçe',
-  'ru': 'Pусский'
+  'zh-HK': '繁體中文'
 }
 
 const utils = {
@@ -57,18 +53,6 @@ const utils = {
     }
     if (/^zh-(HK|TW)/.test(lang)) {
       return 'zh-HK'
-    }
-    if (/^ja(-|$)/.test(lang)) {
-      return 'ja'
-    }
-    if (/^ko(-|$)/.test(lang)) {
-      return 'ko'
-    }
-    if (/^tr(-|$)/.test(lang)) {
-      return 'tr'
-    }
-    if (/^ru(-|$)/.test(lang)) {
-      return 'ru'
     }
     return 'en'
   },
@@ -137,8 +121,6 @@ const utils = {
   getFiatMoneyByLocale (locale) {
     const map = {
       'zh-CN': 'CNY',
-      'ja': 'JPY',
-      'ko': 'KRW',
       'zh-HK': 'HKD',
       'en': 'USD'
     }
@@ -147,24 +129,17 @@ const utils = {
   getFiatMoneySymbolByLocale (locale) {
     const map = {
       'zh-CN': '¥',
-      'ja': 'JP¥',
-      'ko': '₩',
       'zh-HK': 'HK$',
-      'en': 'US$'
+      'en': '$'
     }
     return map[locale] || 'US$'
   },
   getFiatMoneySymbolByFiat (fiat) {
     const map = {
       'CNY': '¥',
-      'USD': 'US$',
+      'USD': '$',
       'HKD': 'HK$',
-      'JPY': 'JP¥',
-      'KRW': '₩',
-      'SGD': 'SGD',
-      'TWD': 'NT$',
-      'EUR': '€',
-      'GBP': '£'
+      'JPY': 'JP¥'
     }
     return map[fiat] || fiat
   },
@@ -345,8 +320,6 @@ const utils = {
     // the library js should assign the [key] to window object
     const map = {
       'key': 'static/keymaster.js',
-      'jQuery': 'static/jquery.min.js',
-      'GoldenLayout': 'static/golden-layout/goldenlayout.min.js',
       'TradingView': 'static/charting_library/charting_library.min.js'
     }
     return map[key] ? utils.getScript(map[key], key) : null
@@ -376,16 +349,18 @@ const utils = {
     return tpl
   },
   toThousand (num = 0) {
-    return num.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,')
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   },
   toBig (num) {
-    console.log('---' + num)
     return Big(num).toString()
   },
   toRound (num, scale = 20, rm = consts.ROUND_DOWN) {
     return Big(num).round(scale, rm).toString()
   },
   toFixed (num, scale = 8, rm = consts.ROUND_DOWN) {
+    if (typeof num === 'undefined') {
+      return 0
+    }
     return Big(num).round(scale, rm).toFixed(scale)
   },
   toNum (num) {
@@ -446,11 +421,29 @@ const utils = {
         // 企业名称  前二后四
         data = data.substr(0, 2) + '****' + data.substr(-4)
       } else {
-        return
       }
       dataArr[i] = data
     }
     return dataArr
+  },
+  getBlockChainUrl (tx, type, chainName) {
+    let url = ''
+    switch (chainName) {
+      case 'BTC':
+        url = `https://blockchain.info/${type}/${tx}`
+        break
+      case 'ETH':
+        url = `https://etherscan.io/${type}/${tx}`
+        break
+      case 'EOS':
+        type = type === 'address' ? 'account' : type
+        url = `https://eosflare.io/${type}/${tx}`
+        break
+      case 'OMNI':
+        url = `https://omniexplorer.info/${type}/${tx}`
+        break
+    }
+    return url
   }
 }
 

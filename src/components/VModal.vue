@@ -53,7 +53,7 @@ export default {
 @import "../styles/mixins";
 
 .modal-bg {
-  z-index: 80000;
+  z-index: 1001;
   position: fixed;
   left: 0;
   top: 0;

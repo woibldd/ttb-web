@@ -1,25 +1,39 @@
 <template>
-  <div class="nav_box" :class="{dark: dark}">
+  <div
+    class="nav_box"
+    :class="{dark: dark}">
     <div class="c_box">
-      <router-link :to="{name:'home'}" class="nav_logo"></router-link>
+      <router-link
+        :to="{name:'home'}"
+        class="nav_logo"/>
       <div class="nav_right">
-        <div v-if="!state.userInfo" class="right_options">
-          <router-link :to="{name:'login'}" class="nav_log_res">{{$t("signin")}}</router-link>
-          <router-link :to="{name:'register'}" class="nav_log_res">{{$t("signup_title")}}</router-link>
+        <div
+          v-if="!state.userInfo"
+          class="right_options">
+          <router-link
+            :to="{name:'login'}"
+            class="nav_log_res">{{ $t("signin") }}</router-link>
+          <router-link
+            :to="{name:'register'}"
+            class="nav_log_res">{{ $t("signup_title") }}</router-link>
         </div>
-        <div class="right_options" v-else>
+        <div
+          class="right_options"
+          v-else>
           <p class="email">
-            <router-link :to="{name:'profile'}">{{desentInfo}}</router-link>
+            <router-link :to="{name:'profile'}">{{ desentInfo }}</router-link>
           </p>
-          <a class="quit" @click="logout">[ {{$t("signout")}} ]</a>
+          <a
+            class="quit"
+            @click="logout">[ {{ $t("signout") }} ]</a>
         </div>
 
-        <div class="lang">{{localeText}}<b></b>
-            <div class="lang_box">
-                <a @click="langcn">简体中文</a>
-                <!-- <a @click="langen">中文繁體</a> -->
-                <a @click="langen">English</a>
-            </div>
+        <div class="lang">{{ localeText }}<b/>
+          <div class="lang_box">
+            <a @click="langcn">简体中文</a>
+            <!-- <a @click="langen">中文繁體</a> -->
+            <a @click="langen">English</a>
+          </div>
         </div>
       </div>
     </div>
@@ -27,16 +41,16 @@
 </template>
 
 <script>
-import { state, actions } from "@/modules/store"
-import service from "@/modules/service"
-import utils from "@/modules/utils"
-import SettingModal from "@/components/SettingModal"
+import { state, actions } from '@/modules/store'
+import service from '@/modules/service'
+import utils from '@/modules/utils'
+import SettingModal from '@/components/SettingModal'
 
 export default {
   props: {
     dark: {
       type: Boolean,
-      default: false,
+      default: false
     }
   },
   data () {
@@ -48,7 +62,7 @@ export default {
     localeText () {
       return utils.getLocaleName(state.locale)
     },
-    desentInfo() {
+    desentInfo () {
       let userInfo = this.state.userInfo
       if (userInfo) {
         if (userInfo.phone) {
@@ -79,8 +93,8 @@ export default {
         })
       }
     },
-    clickStar($event){
-        this.className='active';//console.log($event.currentTarget);
+    clickStar ($event) {
+      this.className = 'active'// console.log($event.currentTarget);
     }
   }
 }
@@ -162,6 +176,7 @@ export default {
         right:0;
         position: absolute;
         display: none;
+        z-index: 999;
         a{
             background: #303c47;
             display: block;

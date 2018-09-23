@@ -14,9 +14,37 @@ import eventHub from '@/modules/eventHub'
 import VTooltip from 'v-tooltip'
 import qs from 'querystring'
 
+import 'element-ui/lib/theme-chalk/index.css'
+
+import {
+  Select,
+  Option,
+  Table,
+  Input,
+  Form,
+  FormItem,
+  TableColumn,
+  Upload,
+  RadioGroup,
+  RadioButton,
+  Loading
+} from 'element-ui'
+
 Vue.config.productionTip = false
 Vue.use(VueI18n)
 Vue.use(VTooltip)
+
+Vue.use(Select) // 引入element单个组件
+Vue.use(Option)
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(Form)
+Vue.use(FormItem)
+Vue.use(Input)
+Vue.use(Upload)
+Vue.use(RadioGroup)
+Vue.use(RadioButton)
+Vue.use(Loading)
 
 const request = require.context('./assets/svg', true, /\.svg$/)
 /* console.log('request', request)
@@ -43,7 +71,7 @@ Vue.prototype.$eh = eventHub
 actions.setLocale()
 
 /* eslint-disable no-new */
-let release = qs.parse(location.search.replace('?', '')).release
+const release = qs.parse(location.search.replace('?', '')).release
 if (release || !window.grayline) {
   new Vue({
     el: '#app',

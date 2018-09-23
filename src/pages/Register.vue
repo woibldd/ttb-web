@@ -1,93 +1,118 @@
 <template>
   <div class="page page-register">
-    <resbg></resbg>
-    <div class="panel_box" ref="container">
-    <div class="panel">
-      <div class="title-wrap">
-        <div class="panel-title" v-t="'signup_title'"></div>
-        <div class="by-links" v-if="state.enablePhoneSignup">
-          <router-link class="by-link ibt" to="email">{{ $t('register_by_email') }}</router-link>
-          <span class="sp-line"></span>
-          <router-link class="by-link ibt" to="phone">{{ $t('register_by_phone') }}</router-link>
-        </div>
-      </div>
-      <!-- <div class="error-block" v-show="errmsg">{{ errmsg }}</div> -->
-      <form class="form" onsubmit="return false" autocomplete="off">
-        <div class="field" v-show="by === 'phone'">
-          <div class="input-box">
-            <v-loading v-if="!regionOptions.length" color="gray"></v-loading>
-            <select class="select item" v-else v-model="regionId">
-              <option value="">{{ $t('region_ph') }}</option>
-              <option :value="option.id" v-for="option in regionOptions" :key="option.id">
-                <span>+{{ option.id }}</span>
-                <template v-if="state.locale === 'zh-CN'">{{ option.cname }}</template>
-                <template v-else>{{ option.fullname }}</template>
-              </option>
-            </select>
+    <resbg/>
+    <div
+      class="panel_box"
+      ref="container">
+      <div class="panel">
+        <div class="title-wrap">
+          <div
+            class="panel-title"
+            v-t="'signup_title'"/>
+          <div
+            class="by-links"
+            v-if="state.enablePhoneSignup">
+            <router-link
+              class="by-link ibt"
+              to="email">{{ $t('register_by_email') }}</router-link>
+            <span class="sp-line"/>
+            <router-link
+              class="by-link ibt"
+              to="phone">{{ $t('register_by_phone') }}</router-link>
           </div>
         </div>
-        <div :class="['field']" v-show="by === 'phone'">
-          <div class="input-box">
-            <ix-input
-              ref="phone"
-              v-model.trim="phone"
-              @input="phone=$event"
-              :triggerValidate="triggerValidate"
-              :required='true'
-              :empty-err-tips="$t('bind_phone_err_empty')"
-              :rule="validateRules.phone"
-              :placeholder="$t('bind_phone_input')"
-              :label="$t('phone_number')"
-              >
-            </ix-input>
+        <!-- <div class="error-block" v-show="errmsg">{{ errmsg }}</div> -->
+        <form
+          class="form"
+          onsubmit="return false"
+          autocomplete="off">
+          <div
+            class="field"
+            v-show="by === 'phone'">
+            <div class="input-box">
+              <v-loading
+                v-if="!regionOptions.length"
+                color="gray"/>
+              <select
+                class="select item"
+                v-else
+                v-model="regionId">
+                <option value="">{{ $t('region_ph') }}</option>
+                <option
+                  :value="option.id"
+                  v-for="option in regionOptions"
+                  :key="option.id">
+                  <span>+{{ option.id }}</span>
+                  <template v-if="state.locale === 'zh-CN'">{{ option.cname }}</template>
+                  <template v-else>{{ option.fullname }}</template>
+                </option>
+              </select>
+            </div>
           </div>
-        </div>
-        <div :class="['field']" v-show="by === 'email'">
-          <div class="input-box">
-            <ix-input
-              class=""
-              ref="email"
-              v-model.trim="email"
-              @input="email=$event"
-              :triggerValidate="triggerValidate"
-              :required='true'
-              :empty-err-tips="$t('err_empty_email')"
-              :rule="validateRules.email"
-              placeholder="you@example.com"
-              :label="$t('email')"
-              >
-            </ix-input>
+          <div
+            :class="['field']"
+            v-show="by === 'phone'">
+            <div class="input-box">
+              <ix-input
+                ref="phone"
+                v-model.trim="phone"
+                @input="phone=$event"
+                :trigger-validate="triggerValidate"
+                :required='true'
+                :empty-err-tips="$t('bind_phone_err_empty')"
+                :rule="validateRules.phone"
+                :placeholder="$t('bind_phone_input')"
+                :label="$t('phone_number')"
+              />
+            </div>
           </div>
-        </div>
-        <div :class="['field']">
-          <div class="input-box">
+          <div
+            :class="['field']"
+            v-show="by === 'email'">
+            <div class="input-box">
+              <ix-input
+                class=""
+                ref="email"
+                v-model.trim="email"
+                @input="email=$event"
+                :trigger-validate="triggerValidate"
+                :required='true'
+                :empty-err-tips="$t('err_empty_email')"
+                :rule="validateRules.email"
+                placeholder="you@example.com"
+                :label="$t('email')"
+              />
+            </div>
+          </div>
+          <div :class="['field']">
+            <div class="input-box">
               <ix-input
                 class="register__input-captcha"
                 ref="captcha"
                 v-model.trim="captcha"
-                :triggerValidate="triggerValidate"
+                :trigger-validate="triggerValidate"
                 :required='true'
                 @input="captcha=$event"
                 :empty-err-tips="$t('err_captcha_empty')"
                 :rule="validateRules.captcha"
                 :placeholder="$t('captcha')"
                 :label="$t('captcha')"
-                >
-             </ix-input>
+              />
 
-              <a class="sms-btn"
-              :class="{disabled: sms.status === 1}"
-              @click.prevent="getSmsCode">
-              {{smsBtnText}}</a>
+              <a
+                class="sms-btn"
+                :class="{disabled: sms.status === 1}"
+                @click.prevent="getSmsCode">
+                {{ smsBtnText }}</a>
+            </div>
           </div>
-        </div>
-        <div :class="['field']">
-          <div class="input-box">
-            <ix-input
+          <div :class="['field']">
+            <div class="input-box">
+              <ix-input
                 ref="password"
                 v-model.trim="password"
                 @input="password=$event;pwChange($event)"
-                :triggerValidate="triggerValidate"
+                :trigger-validate="triggerValidate"
                 type="password"
                 :required='true'
                 @focus="active(true)"
@@ -96,68 +121,77 @@
                 :rule="validateRules.password"
                 :placeholder="$t('pwcheck_ph')"
                 :label="$t('password')"
-                >
-            </ix-input>
-            <div class="pw-helps" :class="{show: atPw}">
-              <div class="title" v-t="'pwcheck_guide'"></div>
-              <ul class="pw-checks">
-                <li v-for="(check, index) in pwCheckList"
-                  class="pw-check" :key="index">
-                  <span class="pw-state" :class="{pass: check.pass}"></span>
-                  <span class="desc">{{ $t(check.desc) }}</span>
-                </li>
-              </ul>
+              />
+              <div
+                class="pw-helps"
+                :class="{show: atPw}">
+                <div
+                  class="title"
+                  v-t="'pwcheck_guide'"/>
+                <ul class="pw-checks">
+                  <li
+                    v-for="(check, index) in pwCheckList"
+                    class="pw-check"
+                    :key="index">
+                    <span
+                      class="pw-state"
+                      :class="{pass: check.pass}"/>
+                    <span class="desc">{{ $t(check.desc) }}</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-        <div :class="['field']">
-          <div class="input-box">
-            <ix-input
+          <div :class="['field']">
+            <div class="input-box">
+              <ix-input
                 ref="password2"
                 v-model.trim="password2"
                 @input="password2=$event"
-                :triggerValidate="triggerValidate"
+                :trigger-validate="triggerValidate"
                 :required='true'
                 type="password"
                 :empty-err-tips="$t('change_password_diff')"
                 :rule="validateRules.password2"
                 :placeholder="$t('pwcheck_ph2')"
                 :label="$t('password2')"
-                >
-            </ix-input>
+              />
+            </div>
           </div>
-        </div>
-        <div :class="['field']">
-          <div class="input-box">
-            <ix-input
+          <div :class="['field']">
+            <div class="input-box">
+              <ix-input
                 ref="invitor"
                 v-model.trim="invitorId"
                 @input="invitorId=$event"
                 :rule="validateRules.invitor"
                 :placeholder="$t('invitor_ph')"
                 :label="$t('invitor')"
-                >
-            </ix-input>
+              />
+            </div>
           </div>
-        </div>
-        <div class="field submit">
-          <v-btn :label="$t('signup_submit')" :loading="loading"
-            height="40"
-            width="390"
-            class="submit-btn" @click="submit">
-          </v-btn>
-          <div class="agreement">
-            <input v-model="accept"
-              class="checkbox"
-              type="checkbox"
-              name="accept"
-              id="accept">
-            <label for="accept" v-html="$t('agreement', {agreement: goAgreement(), privacyPolicy: goPrivacy()})">
-            </label>
+          <div class="field submit">
+            <v-btn
+              :label="$t('signup_submit')"
+              :loading="loading"
+              height="40"
+              width="390"
+              class="submit-btn"
+              @click="submit"/>
+            <div class="agreement">
+              <input
+                v-model="accept"
+                class="checkbox"
+                type="checkbox"
+                name="accept"
+                id="accept">
+              <label
+                for="accept"
+                v-html="$t('agreement', {agreement: goAgreement(), privacyPolicy: goPrivacy()})"/>
+            </div>
           </div>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -176,7 +210,7 @@ import ixInput from '@/components/common/ix-input/ix-input.vue'
 // import gtMixin from '@/mixins/gt'
 
 export default {
-  name: 'register',
+  name: 'Register',
   components: {
     VBtn,
     resbg,
@@ -335,7 +369,6 @@ export default {
       this.atPw = active
     },
     input (field, value) {
-      console.log(arguments)
       this[field] = value
     },
     checkParams () {
@@ -442,7 +475,7 @@ export default {
       this.triggerValidate = false
     },
     fixPosition () {
-      this.$refs.container.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
+      this.$refs.container.style.minHeight = window.innerHeight - (110) - (80) + 'px'
       // this.$refs.containera.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
     }
   },
