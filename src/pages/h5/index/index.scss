@@ -58,6 +58,7 @@
                 flex-direction: column;
                 width: rem(320);
                 top: rem(96);
+                z-index: 11;
 
                 .list__item, a {
                     display: inline-block;
@@ -78,13 +79,14 @@
         padding-top: rem(32);
         .banner-pic {
             box-sizing: border-box;
-            background-image: url('https://ix.com/banner/banner2_cn.jpg');
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
             height: rem(340);
             width: rem(686);
             margin: 0 auto;
             border-radius: rem(12);
+            img {
+                height: rem(340);
+                width: rem(686);
+            }
         }
         .banner-announce{
             height: rem(106);
