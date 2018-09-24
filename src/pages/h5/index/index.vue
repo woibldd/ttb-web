@@ -23,7 +23,7 @@
           v-if="!state.userInfo">{{ $t("signup_title") }}</span>
         <span
           class="operate"
-          @click="toggleMenu">三</span>
+          @click="toggleMenu"><icon name="h5-menu"/> </span>
         <div
           class="hide-list"
           v-if="showMenu">

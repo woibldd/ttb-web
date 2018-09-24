@@ -5,7 +5,11 @@
         <div class="row__title">服务</div>
         <div
           class="row__pick__arrow"
-          @click="pickUp('service')">{{ !list.service ? '展开' : '收起' }}</div>
+          @click="pickUp('service')">
+          <icon
+            name="arrow-down"
+            :class="[list.service && 'up']"/>
+          {{ !list.service ? '展开' : '收起' }}</div>
       </div>
       <div
         class="row-content"
@@ -25,7 +29,11 @@
         <div class="row__title">工具</div>
         <div
           class="row__pick__arrow"
-          @click="pickUp('tool')">{{ !list.tool ?'展开' : '收起' }}</div>
+          @click="pickUp('tool')">
+          <icon
+            name="arrow-down"
+            :class="[list.tool && 'up']"/>
+          {{ !list.tool ?'展开' : '收起' }}</div>
       </div>
       <div
         class="row-content"
@@ -44,7 +52,11 @@
         <div class="row__title">说明</div>
         <div
           class="row__pick__arrow"
-          @click="pickUp('intro')">{{ !list.intro ? '展开' : '收起' }}</div>
+          @click="pickUp('intro')">
+          <icon
+            name="arrow-down"
+            :class="[list.intro && 'up']"/>
+          {{ !list.intro ? '展开' : '收起' }}</div>
       </div>
       <div
         class="row-content"
