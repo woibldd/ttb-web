@@ -20,7 +20,9 @@
         <div class="news">"预挖矿"公告</div>
       </div>
     </div>
-    <div class="mine-info-section">
+    <div 
+class="mine-info-section"
+         v-if="false">
       <mine-summary/>
     </div>
     <div class="h5-trading-summary">
@@ -34,7 +36,7 @@
 <script>
 import './index.scss'
 import MineSummary from '../mine-summary'
-import PairTable from '@/components/Trading/PairTable'
+import PairTable from '@/components/Mobile/PairTable'
 
 export default {
   data () {

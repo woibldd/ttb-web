@@ -2,7 +2,7 @@
   <span>
     <span
       class="value"
-      v-if="ready">{{ displayValue }}</span>
+      v-if="ready">{{ displayValue | thousand }}</span>
     <span
       class="wait"
       v-else>...</span>
