@@ -10,7 +10,9 @@
         </div>
       </div>
       <div class="header__right">
-        <span class="profile">
+        <span
+          class="profile"
+          @click="toggleMenu">
           {{ desentInfo }}
         </span>
         <span
@@ -26,12 +28,15 @@
           class="hide-list"
           v-if="showMenu">
           <router-link
+            @click="toggleMenu"
             :to="{name: 'trading'}"
           >{{ $t('trading') }}</router-link>
           <a
+            @click="toggleMenu"
             :href="'/docs/The+Declaration+of+IX'+pdfSubfix+'.pdf'"
             target="_blank">{{ $t("declaration") }}</a>
           <a
+            @click="toggleMenu"
             :href="'/docs/IX+WhitePaper'+pdfSubfix+'.pdf'"
             target="_blank">{{ $t("whitepagger") }}</a>
         </div>
@@ -153,6 +158,9 @@ export default {
       }
       return ''
     }
+  },
+  created () {
+    this.getBanners()
   },
   methods: {
     toggleMenu () {
