@@ -12,9 +12,6 @@
     <v-nav2
       v-if="showNav && !isMobile"
       :class="[navClass]"/>
-    <v-mobile-nav
-      v-if="showNav && isMobile"
-      :class="[navClass]"/>
     <div
       class="main-container"
       ref="container"
@@ -24,11 +21,6 @@
     <v-footer
       ref="footer"
       v-if="footer === 'default'"
-      :fixed="fixed"
-      v-show="showFooter"/>
-    <mobile-footer
-      ref="footer"
-      v-if="footer === 'mobile'"
       :fixed="fixed"
       v-show="showFooter"/>
     <v-notify-list/>
@@ -149,7 +141,7 @@ export default {
     },
     fixPosition () {
       const box = this.$refs.container
-      if (box) {
+      if (box && !this.isMobile) {
         box.style.minHeight = window.innerHeight - (this.showFooter ? 110 : 0) - (this.showNav ? 80 : 0) + 'px'
       }
     },

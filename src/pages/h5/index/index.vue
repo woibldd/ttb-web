@@ -4,25 +4,42 @@
       <div class="header__left">
         <div class="title-pic"/>
         <div class="title--text">
-          币币交易
+          <router-link
+            :to="{name: 'trading'}"
+            class="nav_link">{{ $t('trading') }}</router-link>
         </div>
       </div>
       <div class="header__right">
-        <span class="operate">登录</span>
-        <span class="operate signup">注册</span>
+        <span class="profile">
+          {{ desentInfo }}
+        </span>
+        <span
+          class="operate"
+          v-if="!state.userInfo">{{ $t("signin") }}</span>
+        <span
+          class="operate signup"
+          v-if="!state.userInfo">{{ $t("signup_title") }}</span>
         <span class="operate">三</span>
       </div>
     </div>
     <div class="h5-page__banner">
       <div class="banner-pic"/>
       <div class="banner-announce">
-        <div class="intro">公告</div>
-        <div class="news">"预挖矿"公告</div>
+        <div class="intro">{{ $t('footer_notice') }}</div>
+        <div
+          class="news"
+          v-for="(item) in notices"
+          :key="item.id"><a
+            class="text_link"
+            :href="item.url || 'javascript:;'"
+            target="_blank">
+            {{ item.title }}
+        </a></div>
       </div>
     </div>
     <div
       class="mine-info-section"
-      v-if="false">
+    >
       <mine-summary/>
     </div>
     <div class="h5-trading-summary">
@@ -89,12 +106,49 @@ import './index.scss'
 import MineSummary from '../mine-summary'
 import h5Footer from '../footer'
 import PairTable from '@/components/Mobile/PairTable'
+import utils from '@/modules/utils'
+import {state} from '@/modules/store'
+import service from '@/modules/service'
 
 export default {
   data () {
     return {
-
+      state,
+      banners: [],
+      notices: []
     }
+  },
+  computed: {
+    desentInfo () {
+      let userInfo = this.state.userInfo
+      if (userInfo) {
+        if (userInfo.phone) {
+          return utils.publicDesensitization(userInfo.phone)[0]
+          // return utils.publicDesensitization('91418865')[0]
+        } else if (userInfo.email) {
+          return utils.publicDesensitization(userInfo.email)[0]
+        }
+      }
+      return ''
+    }
+  },
+  methods: {
+    async getBanners () {
+      const res = await service.getBanners()
+      if (!res.code) {
+        let list = res.data
+        if (list.length > 0) {
+          this.banners = list.filter(b => b.slot === 1)
+          this.notices = list.filter(b => b.slot === 2)
+          if (this.notices.length > 1) {
+            this.notices.splice(1)
+          }
+        }
+      }
+    }
+  },
+  created () {
+    this.getBanners()
   },
   components: {
     MineSummary,

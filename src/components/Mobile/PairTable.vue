@@ -84,15 +84,19 @@ div {
 }
 .pairtable_box {
   border-radius: rem(4);
-  padding: rem(50) 0;
+  padding: rem(25) 0;
+  flex-direction: column;
   .trading_row {
     flex: 1;
 
+    &:last-child {
+      .row {
+        border: none;
+      }
+    }
     .row {
-      padding-left: rem(40);
-      padding-right: rem(40);
       border-bottom: 1px solid #566573;
-      padding-bottom: rem(25);
+      padding: rem(40) rem(25);
       flex: 1;
       justify-content: space-between;
       font-weight: 400;

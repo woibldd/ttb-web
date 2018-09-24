@@ -105,7 +105,7 @@ let router = new Router({
         class: 'dark',
         auth: false
       },
-      component: isMobile ? MobileHome : HomeNew
+      component: isMobile ? h5index : HomeNew
     }, {
       path: '/h5',
       name: 'hlogin',
