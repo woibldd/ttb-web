@@ -15,7 +15,6 @@
   width: 200px;
   height: 300px;
   border-radius: 50px;
-  @include rempx(margin, 1rem 2rem);
 }
 
 </style>

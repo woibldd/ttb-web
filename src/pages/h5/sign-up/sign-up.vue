@@ -466,7 +466,7 @@ export default {
       }
     },
     goAgreement () {
-      return '/terms'
+      return '/services'
     },
     goPrivacy () {
       return '/privacypolicy'

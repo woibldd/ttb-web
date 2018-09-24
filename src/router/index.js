@@ -132,7 +132,7 @@ let router = new Router({
       component: PrivacyPolicy
     },
     {
-      path: '/terms',
+      path: '/services',
       name: 'terms',
       component: terms
     },
