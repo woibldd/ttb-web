@@ -384,7 +384,7 @@
   "active_relay_rule": "规则介绍",
   "active_relay_rule1": "任一交易对20秒内没有新的交易，则最后一个交易者成为“中奖者”，可获得该交易对产生的所有手续费的40%。新的交易产生后，交易接力重新开始；",
   "active_relay_rule2": "以天为周期，无论任一交易对当日是否产生“中奖者”，交易接力规则都于次日00:00（GMT+8）重新启动；",
-  "active_relay_rule3": "奖励次日到账",
+  "active_relay_rule3": "奖励次日到账；",
   "active_relay_rule4": "IX保留该规则的最终解释权。",
   "active_relay_example": "举个例子：",
   "active_relay_example_1": "以BTC/USDT为例<br >开启时间：12:00",

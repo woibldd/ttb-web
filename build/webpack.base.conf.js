@@ -3,6 +3,10 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+let entrys = {}
+for (let key in config.projects) {
+  entrys[key] = config.projects[key].entry
+}
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
@@ -19,11 +23,11 @@ const createLintingRule = () => ({
     emitWarning: !config.dev.showEslintErrorsInOverlay
   }
 })
-
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.js'
+    app: './src/main.js',
+    ...entrys
   },
   output: {
     path: config.build.assetsRoot,

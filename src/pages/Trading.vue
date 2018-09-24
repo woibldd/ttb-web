@@ -129,6 +129,8 @@ export default {
             this.state.pro.pairInfo = null
           }
           await this.refreshBalance()
+
+          this.stopTimer()
         }
         this.state.pro.lock = false
       },
