@@ -18,7 +18,7 @@ for (let key in config.projects) {
       filename: key + ".html",
       template: config.projects[key].template,
       theme: config.build.THEME_ENV,
-      chunks: [key],
+      chunks: [key, 'manifest','vendor'],
       inject: true,
       config: config.projects[key].config
     })
@@ -79,6 +79,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       filename: config.build.index,
       template: "index.html",
       inject: true,
+      chunks: ["app", "manifest", "vendor"],
       theme: config.build.THEME_ENV,
       minify: {
         removeComments: true,
@@ -130,7 +131,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         ignore: [".*"]
       }
     ])
-  ]//.concat(...plugins)
+  ].concat(...plugins)
 });
 
 if (config.build.productionGzip) {

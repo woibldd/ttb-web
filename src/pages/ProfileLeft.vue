@@ -31,7 +31,7 @@
         <li class="">
           <router-link
             class="menu-name"
-            :to="{path: 'invite'}"
+            :to="{name: 'invite'}"
             active-class="active">
             {{ $t('profile_left_invite') }}
           </router-link>
