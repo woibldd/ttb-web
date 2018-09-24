@@ -70,7 +70,7 @@
       class="mine-other-info">
       <div class="mine-info-row">
         <div class="row__label">
-          昨日交易挖矿产出
+          {{ $t('mine_mining_amount') }}
         </div>
         <div class="row__value">
           26993.00000000<span class="unit">IX</span>
@@ -78,7 +78,7 @@
       </div>
       <div class="mine-info-row">
         <div class="row__label">
-          昨日邀请挖矿产出：
+          {{ $t('mine_invite_amount') }}
         </div>
         <div class="row__value">
           19222.99002345 <span class="unit">IX</span>
@@ -104,9 +104,9 @@ export default {
     return {
       state,
       mineSummary: {
-        rate: 10,
+        rate: 0,
         max_amount: '333333333333',
-        amount: 2220,
+        amount: 0,
         range: '00:00 - 23:59'
       },
       yestodayMine: {
@@ -130,7 +130,7 @@ export default {
     async fetch () {
       let res = await service.getMineTotal({offset: 0})
       if (!res.code && !isEmpty(res.data)) {
-        // this.mineSummary = this.fixData(res.data)
+        this.mineSummary = this.fixData(res.data)
       }
       if (this.state.userInfo) {
         let resMy = await service.getPersonalTotal()

@@ -129,8 +129,10 @@ import PairTable from '@/components/Mobile/PairTable'
 import utils from '@/modules/utils'
 import {state} from '@/modules/store'
 import service from '@/modules/service'
+import responsiveMixin from '@/mixins/responsive'
 
 export default {
+  mixins: [responsiveMixin],
   data () {
     return {
       state,
