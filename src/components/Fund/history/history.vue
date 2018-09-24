@@ -38,7 +38,7 @@
           <!-- <span>解锁/锁仓</span> -->
           <template slot-scope="scope">
             <span :class="['state', hasComplated(scope.row) && 'complete']">
-              {{ hasComplated(scope.row) ? $t('done') : $t('pending') }}
+              {{ hasComplated(scope.row) === 1 ? $t('done') : (hasComplated(scope.row) === 1 ? $t('broadcasting') : $t('pending')) }}
             </span>
           </template>
         </el-table-column>
@@ -161,14 +161,18 @@ export default {
     },
     hasComplated (row) {
       if (this.type === 'deposit' && row.state === 1) {
-        return true
+        return 1
       }
 
       if (this.type === 'withdraw' && row.state === 4) {
-        return true
+        return 1
       }
 
-      return false
+      if (this.type === 'withdraw' && row.state === 2) {
+        return 2
+      }
+
+      return 0
     },
     unReleased (row) {
       return this.type === 'reward' && row.state === 0// 0 待发放, 1 已完成

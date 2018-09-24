@@ -2,21 +2,26 @@
   <div class="ix-panel">
     <div class="ix-header">
       <orderbook-nav :height="navHeight" />
-      <div class="pull-right">
-        <span v-show="offset || accuracy !== 1"
+      <!-- <div class="pull-right">
+        <span
+          v-show="offset || accuracy !== 1"
           class="group-display ibt"
           v-tooltip="clearTip"
           @click="clearSetting">
           {{ curGroup }} <span class="has-underline">{{ $t('orderbook_group') }}</span>
         </span>
         <div class="header-icons ibt">
-          <a @click.prevent.stop="toggleSetting" class="header-btn btn">
-            <icon name="setting"></icon>
+          <a
+            @click.prevent.stop="toggleSetting"
+            class="header-btn btn">
+            <icon name="setting"/>
           </a>
         </div>
-      </div>
+      </div> -->
     </div>
-    <div class="ix-panel-thead" :style="{paddingRight: hasScrollBar ? '14px' : '4px'}">
+    <div
+      class="ix-panel-thead"
+      :style="{paddingRight: hasScrollBar ? '14px' : '4px'}">
       <div class="table table-ix-orderbook">
         <div class="thead">
           <div class="th ibt left">{{ $t('price') }}</div>
@@ -25,17 +30,25 @@
         </div>
       </div>
     </div>
-    <div class="ix-panel-body" ref="body" :style="{height: bookHeight + 'px'}">
-      <div class="side-wrap ask" :style="askStyle" v-show="local.orderbookMode !== 'bid'">
+    <div
+      class="ix-panel-body"
+      ref="body"
+      :style="{height: bookHeight + 'px'}">
+      <div
+        class="side-wrap ask"
+        :style="askStyle"
+        v-show="local.orderbookMode !== 'bid'">
         <table class="table table-asks">
           <tbody v-if="state.pro.pairInfo">
-            <tr is="OrderbookItem" v-for="(item, index) in asks" :key="index"
+            <tr
+              is="OrderbookItem"
+              v-for="(item, index) in asks"
+              :key="index"
               :height="itemHeight + 'px'"
               side="sell"
               :item="item"
-              :priceScale="priceScale"
-              :amountScale="amountScale">
-            </tr>
+              :price-scale="priceScale"
+              :amount-scale="amountScale"/>
           </tbody>
         </table>
       </div>
@@ -43,40 +56,61 @@
         <div class="left-part">
           <div class="last-price">{{ lastPrice }}</div>
           <div class="estimate">
-            {{ state.fiatMoneySymbol }} <fiat-money :base="state.pro.currency_name" :value="lastPrice" />
+            {{ state.fiatMoneySymbol }} <fiat-money
+              :base="state.pro.currency_name"
+              :value="lastPrice" />
           </div>
         </div>
-        <span v-if="delta" class="delta" :class="{'theme-color-up': delta > 0, 'theme-color-down': delta < 0}">{{ delta > 0 ? '+' : ''}}{{ delta }}%</span>
+        <span
+          v-if="delta"
+          class="delta"
+          :class="{'theme-color-up': delta > 0, 'theme-color-down': delta < 0}">{{ delta > 0 ? '+' : '' }}{{ delta }}%</span>
       </div>
-      <div class="side-wrap bid" :style="bidStyle" v-show="local.orderbookMode !== 'ask'">
+      <div
+        class="side-wrap bid"
+        :style="bidStyle"
+        v-show="local.orderbookMode !== 'ask'">
         <table class="table table-bids">
           <tbody v-if="state.pro.pairInfo">
-            <tr is="OrderbookItem" v-for="(item, index) in bids" :key="index"
+            <tr
+              is="OrderbookItem"
+              v-for="(item, index) in bids"
+              :key="index"
               :height="itemHeight + 'px'"
               side="buy"
               :item="item"
-              :priceScale="priceScale"
-              :amountScale="amountScale">
-            </tr>
+              :price-scale="priceScale"
+              :amount-scale="amountScale"/>
           </tbody>
         </table>
       </div>
       <!--<div class="no-data" v-show="!err && !orderbookList.length">{{ $t('orderbook_empty') }}</div>-->
       <!--<div class="err" v-show="err">{{ err }}</div>-->
     </div>
-    <div class="setting-panel" :class="{show: panelShow}" @click.stop>
+    <!-- <div
+      class="setting-panel"
+      :class="{show: panelShow}"
+      @click.stop>
       <div class="setting-panel-header">{{ $t('orderbook_options') }}</div>
       <div class="group-title">{{ $t('orderbook_group') }}</div>
       <div class="group-wrap">
         <span class="group-value">{{ curGroup }}</span>
-        <span class="minus theme-bgcolor-down" @click="minus"></span>
-        <span class="plus theme-bgcolor-up" @click="plus"></span>
+        <span
+          class="minus theme-bgcolor-down"
+          @click="minus"/>
+        <span
+          class="plus theme-bgcolor-up"
+          @click="plus"/>
       </div>
-    </div>
-    <div class="mask" :class="{show: loading && !bids.length && !asks.length}">
+    </div> -->
+    <div
+      class="mask"
+      :class="{show: loading && !bids.length && !asks.length}">
       <v-loading />
     </div>
-    <div class="mask changing" :class="{show: changing}">
+    <div
+      class="mask changing"
+      :class="{show: changing}">
       <v-loading />
     </div>
   </div>
@@ -92,7 +126,7 @@ import OrderbookNav from './OrderbookNav'
 import service from '@/modules/service'
 
 export default {
-  name: 'orderbook',
+  name: 'Orderbook',
   components: {
     OrderbookItem,
     OrderbookNav

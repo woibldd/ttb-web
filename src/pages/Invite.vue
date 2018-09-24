@@ -40,7 +40,7 @@
           </div>
         </div>
       </div>
-      <div class="invite-container">
+      <div class="invite-container mb-30">
         <!-- 邀请记录 -->
         <div class="invite-wrap left">
           <div class="title-box">{{ $t('invite_history_text') }}</div>

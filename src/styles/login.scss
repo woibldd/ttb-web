@@ -300,3 +300,56 @@
   width: 290px;
   box-sizing: border-box;
 }
+
+.ensure-modal {
+        width:541px;
+        background:rgba(255,255,255,1);
+        border-radius:8px;
+        padding-bottom: 50px;
+        padding-top: 34px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .modal__title {
+            font-size:20px;
+            font-weight:bold;
+            color:$text-strong;
+        }
+        .modal__row {
+            box-sizing: border-box;
+            .row__label {
+                font-size:14px;
+                font-weight:400;
+                color:$text-weak;
+            }
+            .row__input {
+                box-sizing: border-box;
+                border: 1px solid $text-normal;
+                width: 340px;
+                height: 40px;
+                line-height: 40px;
+                border-radius: 4px;
+                color: $text-weak;
+                padding-left: 10px;
+            }
+            .input-validate {
+                width: 220px;
+                border: 0;
+                border-right: 1px solid $text-normal;
+
+                &.google {
+                    border: 0;
+                }
+
+                &:focus{
+                    outline: none;
+                }
+            }
+
+        }
+        .w-340 {
+            width: 340px;
+        }
+
+    }
