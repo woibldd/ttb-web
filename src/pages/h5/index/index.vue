@@ -10,7 +10,22 @@
       <div class="header__right">
         <span class="operate">登录</span>
         <span class="operate signup">注册</span>
-        <span class="operate">三</span>
+        <span
+          class="operate"
+          @click="toggleMenu">三</span>
+        <div
+          class="hide-list"
+          v-if="showMenu">
+          <router-link
+            :to="{name: 'trading'}"
+          >{{ $t('trading') }}</router-link>
+          <a
+            :href="'/docs/The+Declaration+of+IX'+pdfSubfix+'.pdf'"
+            target="_blank">{{ $t("declaration") }}</a>
+          <a
+            :href="'/docs/IX+WhitePaper'+pdfSubfix+'.pdf'"
+            target="_blank">{{ $t("whitepagger") }}</a>
+        </div>
       </div>
     </div>
     <div class="h5-page__banner">
@@ -89,11 +104,25 @@ import './index.scss'
 import MineSummary from '../mine-summary'
 import h5Footer from '../footer'
 import PairTable from '@/components/Mobile/PairTable'
+import { state } from '@/modules/store'
 
 export default {
   data () {
     return {
-
+      showMenu: false
+    }
+  },
+  methods: {
+    toggleMenu () {
+      this.showMenu = !this.showMenu
+    }
+  },
+  computed: {
+    pdfSubfix () {
+      if (state.locale === 'zh-CN') {
+        return '+zh-CN'
+      }
+      return ''
     }
   },
   components: {
