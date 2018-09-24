@@ -39,6 +39,7 @@
             }
         }
         .header__right {
+            position: relative;
             .operate {
                 display: inline-block;
                 margin-left: rem(40);
@@ -47,6 +48,26 @@
                     border: 1px solid #ffffff;
                     border-radius: rem(4);
                     padding: rem(8) rem(16);
+                }
+            }
+            .hide-list{
+                position: absolute;
+                background-color: #000000;
+                text-align: left;
+                display: flex;
+                flex-direction: column;
+                width: rem(320);
+                top: rem(96);
+
+                .list__item, a {
+                    display: inline-block;
+                    height: rem(76);
+                    color: white;
+                    line-height: rem(76);
+                      padding-left: rem(31);
+                    &:hover {
+                        background:rgba(33,37,42,1);
+                    }
                 }
             }
         }

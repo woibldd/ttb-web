@@ -19,7 +19,22 @@
         <span
           class="operate signup"
           v-if="!state.userInfo">{{ $t("signup_title") }}</span>
-        <span class="operate">三</span>
+        <span
+          class="operate"
+          @click="toggleMenu">三</span>
+        <div
+          class="hide-list"
+          v-if="showMenu">
+          <router-link
+            :to="{name: 'trading'}"
+          >{{ $t('trading') }}</router-link>
+          <a
+            :href="'/docs/The+Declaration+of+IX'+pdfSubfix+'.pdf'"
+            target="_blank">{{ $t("declaration") }}</a>
+          <a
+            :href="'/docs/IX+WhitePaper'+pdfSubfix+'.pdf'"
+            target="_blank">{{ $t("whitepagger") }}</a>
+        </div>
       </div>
     </div>
     <div class="h5-page__banner">
@@ -115,7 +130,8 @@ export default {
     return {
       state,
       banners: [],
-      notices: []
+      notices: [],
+      showMenu: false
     }
   },
   computed: {
@@ -130,9 +146,18 @@ export default {
         }
       }
       return ''
+    },
+    pdfSubfix () {
+      if (state.locale === 'zh-CN') {
+        return '+zh-CN'
+      }
+      return ''
     }
   },
   methods: {
+    toggleMenu () {
+      this.showMenu = !this.showMenu
+    },
     async getBanners () {
       const res = await service.getBanners()
       if (!res.code) {
@@ -146,9 +171,6 @@ export default {
         }
       }
     }
-  },
-  created () {
-    this.getBanners()
   },
   components: {
     MineSummary,
