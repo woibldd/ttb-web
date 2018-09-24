@@ -23,7 +23,7 @@
           v-if="!state.userInfo">{{ $t("signup_title") }}</span>
         <span
           class="operate"
-          @click="toggleMenu">三</span>
+          @click="toggleMenu"><icon name="h5-menu"/> </span>
         <div
           class="hide-list"
           v-if="showMenu">
@@ -43,7 +43,31 @@
       </div>
     </div>
     <div class="h5-page__banner">
-      <div class="banner-pic"/>
+      <div class="banner-pic">
+        <swiper
+          :options="swiperOption"
+          class="swiper-container"
+          ref="mySwiper">
+          <!-- 轮播项 -->
+          <swiper-slide
+            v-for="banner in banners"
+            :key="banner.id">
+            <a
+              class="link"
+              target="_blank"
+              :href="banner.url">
+              <img
+                :src="banner.picture"
+                class="swiper-image">
+            </a>
+
+          </swiper-slide>
+          <!-- 轮播的小圆点 -->
+          <div
+            class="swiper-pagination"
+            slot="pagination"/>
+        </swiper>
+      </div>
       <div class="banner-announce">
         <div class="intro">{{ $t('footer_notice') }}</div>
         <div
@@ -131,14 +155,25 @@ import {state} from '@/modules/store'
 import service from '@/modules/service'
 import responsiveMixin from '@/mixins/responsive'
 
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
+
 export default {
   mixins: [responsiveMixin],
   data () {
     return {
       state,
-      banners: [],
+      banners: [{id: 1, url: 'https://ix.com/banner/banner2_cn.jpg'}, {id: 2, url: 'https://ix.com/banner/banner2_cn.jpg'}],
       notices: [],
-      showMenu: false
+      showMenu: false,
+      swiperOption: {
+        autoplay: true,
+        delay: 1000,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        }
+      }
     }
   },
   computed: {
@@ -159,6 +194,9 @@ export default {
         return '+zh-CN'
       }
       return ''
+    },
+    swiper: function () {
+      return this.$refs.mySwiper.swiper
     }
   },
   created () {
@@ -185,7 +223,9 @@ export default {
   components: {
     MineSummary,
     PairTable,
-    h5Footer
+    h5Footer,
+    swiper,
+    swiperSlide
   }
 }
 </script>
