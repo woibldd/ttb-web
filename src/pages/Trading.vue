@@ -2,7 +2,9 @@
   <div
     class="trading-chart"
     ref="wrap">
-    <v-nav pro="1"/>
+    <v-nav
+      pro="1"
+      v-if="!isMobile"/>
     <div class="container-trade-panel">
       <div class="ix-row">
         <div class="ix-col ix-col-1">
@@ -108,7 +110,8 @@ export default {
       countdownTimer: 0,
       countdownText: '20',
       lastDealTime: 0,
-      relayTotal: {}
+      relayTotal: {},
+      isMobile: utils.isMobile()
     }
   },
   watch: {
@@ -338,6 +341,7 @@ export default {
   flex: 1;
   display: flex;
   flex-direction: row;
+  background: $protrade-bg;
 }
 .ix-col {
   display: flex;

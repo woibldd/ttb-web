@@ -381,7 +381,11 @@ export default {
     },
     fixPosition () {
       // this.$refs.container.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
-      this.$refs.container.style.minHeight = window.innerHeight - (110) - (80) + 'px'
+      if (utils.isMobile) {
+        this.$refs.container.style.minHeight = window.innerHeight - (60) + 'px'
+      } else {
+        this.$refs.container.style.minHeight = window.innerHeight - (110) - (80) + 'px'
+      }
       // this.$refs.containera.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
     },
     async toVerifyCode () {

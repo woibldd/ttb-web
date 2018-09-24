@@ -11,6 +11,8 @@
         }
         .text {
           color: #cbe6fd;
+          word-break: break-all;
+          word-wrap: break-word;
         }
 
         .mine-process-wrapper {
@@ -21,6 +23,7 @@
               display: flex;
               flex-direction: column;
               min-width: 180px;
+              align-items: flex-end;
           }
         }
         
@@ -63,11 +66,12 @@
             .line-tip {
               border-left: 5px solid transparent;
               border-right: 5px solid transparent;
-              border-top: 6px solid #c9a96e;
+              border-top: 6px solid #C9A96E;
               margin-top: rem(10);
+              // position: relative;
             }
             .line-tip-text {
-              color: #c9a96e;
+              color: #BD813A;
               word-break: keep-all;
               background:linear-gradient(0deg,rgba(193,194,194,1) 0%,rgba(255,255,255,1) 100%);
               border-radius: rem(18);
@@ -103,23 +107,30 @@
     }
 
     .process-mine-left-all {
-      font-size: 14px;
+      font-size: 12px;
       overflow: hidden;
       color: #c9a96e;
+      flex: 1;
 
       .left__col {
         display: flex;
         margin-bottom: rem(26);
-        font-size: rem(20);
-
-        .mr-rem-10{
-          margin-right: rem(10);
-        }
+        align-items: flex-end;
+        // font-size: rem(20);
       }
     }
-
+    .mr-rem-10{
+      margin-right: rem(10);
+    }
     .process-mine-left-my {
       text-align: right;
+      flex: 1;
+      font-size: 12px;
+      .left__col {
+        // display: flex;
+        // align-items: flex-end;
+        margin-bottom: rem(26);
+      }
     }
     
     .mine-info-yesterday, .mine-other-info{

@@ -195,4 +195,16 @@
         }
     }
 
+    .swiper-container {
+      border-radius: rem(12);
+      .swiper-pagination-bullet {
+        background: #ffffff !important;
+        opacity: 0.6;
+      }
+      .swiper-pagination-bullet-active{
+        background: #ffffff !important;
+        opacity: 1;
+      }
+    }
+    
 }

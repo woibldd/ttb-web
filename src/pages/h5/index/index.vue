@@ -1,48 +1,9 @@
 <template>
   <div class="h5-index-container">
-    <div class="h5-page-header">
-      <div class="header__left">
-        <div class="title-pic"/>
-        <div class="title--text">
-          <router-link
-            :to="{name: 'trading'}"
-            class="nav_link">{{ $t('trading') }}</router-link>
-        </div>
-      </div>
-      <div class="header__right">
-        <span
-          class="profile"
-          @click="toggleMenu">
-          {{ desentInfo }}
-        </span>
-        <span
-          class="operate"
-          v-if="!state.userInfo">{{ $t("signin") }}</span>
-        <span
-          class="operate signup"
-          v-if="!state.userInfo">{{ $t("signup_title") }}</span>
-        <span
-          class="operate"
-          @click="toggleMenu"><icon name="h5-menu"/> </span>
-        <div
-          class="hide-list"
-          v-if="showMenu">
-          <router-link
-            @click="toggleMenu"
-            :to="{name: 'trading'}"
-          >{{ $t('trading') }}</router-link>
-          <a
-            @click="toggleMenu"
-            :href="'/docs/The+Declaration+of+IX'+pdfSubfix+'.pdf'"
-            target="_blank">{{ $t("declaration") }}</a>
-          <a
-            @click="toggleMenu"
-            :href="'/docs/IX+WhitePaper'+pdfSubfix+'.pdf'"
-            target="_blank">{{ $t("whitepagger") }}</a>
-        </div>
-      </div>
-    </div>
-    <div class="h5-page__banner">
+    <!-- <mobile-nav/> -->
+    <div
+      class="h5-page__banner"
+      v-if="banners && banners.length">
       <div class="banner-pic">
         <swiper
           :options="swiperOption"
@@ -151,9 +112,10 @@ import MineSummary from '../mine-summary'
 import h5Footer from '../footer'
 import PairTable from '@/components/Mobile/PairTable'
 import utils from '@/modules/utils'
-import {state} from '@/modules/store'
+import {state, actions} from '@/modules/store'
 import service from '@/modules/service'
 import responsiveMixin from '@/mixins/responsive'
+import MobileNav from '@/components/Mobile/MobileNav'
 
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
@@ -163,11 +125,10 @@ export default {
   data () {
     return {
       state,
-      banners: [{id: 1, url: 'https://ix.com/banner/banner2_cn.jpg'}, {id: 2, url: 'https://ix.com/banner/banner2_cn.jpg'}],
+      banners: [],
       notices: [],
-      showMenu: false,
       swiperOption: {
-        autoplay: true,
+        autoplay: false,
         delay: 1000,
         pagination: {
           el: '.swiper-pagination',
@@ -177,24 +138,6 @@ export default {
     }
   },
   computed: {
-    desentInfo () {
-      let userInfo = this.state.userInfo
-      if (userInfo) {
-        if (userInfo.phone) {
-          return utils.publicDesensitization(userInfo.phone)[0]
-          // return utils.publicDesensitization('91418865')[0]
-        } else if (userInfo.email) {
-          return utils.publicDesensitization(userInfo.email)[0]
-        }
-      }
-      return ''
-    },
-    pdfSubfix () {
-      if (state.locale === 'zh-CN') {
-        return '+zh-CN'
-      }
-      return ''
-    },
     swiper: function () {
       return this.$refs.mySwiper.swiper
     }
@@ -203,11 +146,8 @@ export default {
     this.getBanners()
   },
   methods: {
-    toggleMenu () {
-      this.showMenu = !this.showMenu
-    },
     async getBanners () {
-      const res = await service.getBanners()
+      const res = await service.getBanners({platform: 3})
       if (!res.code) {
         let list = res.data
         if (list.length > 0) {
@@ -225,7 +165,8 @@ export default {
     PairTable,
     h5Footer,
     swiper,
-    swiperSlide
+    swiperSlide,
+    MobileNav
   }
 }
 </script>

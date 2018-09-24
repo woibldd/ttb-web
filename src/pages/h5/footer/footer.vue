@@ -1,15 +1,19 @@
 <template>
   <div class="h5-footer-container">
     <div class="footer-row">
-      <div class="row-pick-up">
-        <div class="row__title">服务</div>
+      <div
+        class="row-pick-up"
+        @click="pickUp('service')">
+        <div
+          class="row__title"
+          v-t="'footer_services'"/>
         <div
           class="row__pick__arrow"
-          @click="pickUp('service')">
+        >
           <icon
             name="arrow-down"
             :class="[list.service && 'up']"/>
-          {{ !list.service ? '展开' : '收起' }}</div>
+        </div>
       </div>
       <div
         class="row-content"
@@ -25,15 +29,19 @@
       </div>
     </div>
     <div class="footer-row">
-      <div class="row-pick-up">
-        <div class="row__title">工具</div>
+      <div
+        class="row-pick-up"
+        @click="pickUp('tool')">
+        <div
+          class="row__title"
+          v-t="'footer_tools'"/>
         <div
           class="row__pick__arrow"
-          @click="pickUp('tool')">
+        >
           <icon
             name="arrow-down"
             :class="[list.tool && 'up']"/>
-          {{ !list.tool ?'展开' : '收起' }}</div>
+        </div>
       </div>
       <div
         class="row-content"
@@ -48,15 +56,18 @@
       </div>
     </div>
     <div class="footer-row">
-      <div class="row-pick-up">
-        <div class="row__title">说明</div>
+      <div
+        class="row-pick-up"
+        @click="pickUp('intro')">
         <div
-          class="row__pick__arrow"
-          @click="pickUp('intro')">
+          class="row__title"
+          v-t="'footer_terms'"/>
+        <div
+          class="row__pick__arrow">
           <icon
             name="arrow-down"
             :class="[list.intro && 'up']"/>
-          {{ !list.intro ? '展开' : '收起' }}</div>
+        </div>
       </div>
       <div
         class="row-content"

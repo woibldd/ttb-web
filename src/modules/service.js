@@ -10,7 +10,7 @@ const Mock = () => import('./mock')
 
 const service = {
   getBanners (data = {}) {
-    data.platform = 1
+    data.platform = data.platform || 1
     return request('/announcement/list', data)
   },
   resetPassword (data) {
