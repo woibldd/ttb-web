@@ -102,7 +102,6 @@
   </div>
 </template>
 <script>
-import './mine-summary.scss'
 import { state } from '@/modules/store'
 import service from '@/modules/service'
 import isEmpty from 'lodash/isEmpty'
@@ -196,3 +195,6 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+@import './mine-summary.scss'
+</style>

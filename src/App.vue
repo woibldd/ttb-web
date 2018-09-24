@@ -12,8 +12,9 @@
     <v-nav2
       v-if="showNav && !isMobile"
       :class="[navClass]"/>
-    <mobile-nav v-if="isMobile" 
-:class="[navClass]"/>
+    <mobile-nav 
+v-if="isMobile"
+                :class="[navClass]"/>
     <div
       class="main-container"
       ref="container"
@@ -45,7 +46,7 @@
 import VNav2 from '@/components/VNav3.vue'
 import MobileNav from '@/components/Mobile/MobileNav.vue'
 import VFooter from '@/components/VFooter.vue'
-import MobileFooter from '@/components/Mobile/footer/'
+// import MobileFooter from '@/components/Mobile/footer/'
 import {state, actions} from '@/modules/store'
 import utils from '@/modules/utils'
 import VNotifyList from '@/components/VNotifyList.vue'
@@ -58,7 +59,7 @@ export default {
     VNav2,
     VFooter,
     VNotifyList,
-    MobileFooter,
+    // MobileFooter,
     MobileNav
   },
   data () {
