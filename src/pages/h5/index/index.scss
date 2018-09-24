@@ -1,0 +1,122 @@
+@import '~@/styles/_mixins.scss';
+@import '~@/styles/_vars.scss';
+
+.h5-index-container{
+    color: $primary;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 100vw;
+
+    background-color: #273039;
+
+    .h5-page-header {
+        background-color: #1a1a1a;
+        font-size: rem(24);
+        height: rem(120);
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: rem(32);
+        padding-right: rem(32);
+        box-sizing: border-box;
+        color: #ffffff;
+
+        .title-pic {
+            background-image: url('../../../assets/h5/h5-logo@2x.png');
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            width: rem(164);
+            height: rem(38);
+        }
+
+        .header__left{
+            display: flex;
+            line-height: 1.9;
+            .title--text {
+                margin-left: rem(40);
+            }
+        }
+        .header__right {
+            .operate {
+                display: inline-block;
+                margin-left: rem(40);
+    
+                &.signup {
+                    border: 1px solid #ffffff;
+                    border-radius: rem(4);
+                    padding: rem(8) rem(16);
+                }
+            }
+        }
+    }
+
+    .h5-page__banner {
+        background:rgba(51,59,70,1);
+        padding-top: rem(32);
+        .banner-pic {
+            box-sizing: border-box;
+            background-image: url('https://ix.com/banner/banner2_cn.jpg');
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            height: rem(340);
+            width: rem(686);
+            margin: 0 auto;
+            border-radius: rem(12);
+        }
+        .banner-announce{
+            height: rem(106);
+            padding-left: rem(32);
+            display: flex;
+            align-items: center;
+            .intro {
+                margin-right: rem(24);
+                color: #ffffff;
+            }
+            .news {
+                width: rem(580);
+                text-align: center;
+                height: rem(28);
+                border-radius: rem(14);
+                background:rgba(39,48,57,1);
+                font-size: rem(20);
+            }
+        }
+    }
+
+    .mine-info-section {
+        padding-left: rem(32);
+        padding-right: rem(32);
+        margin-top: rem(4);
+        margin-bottom: rem(4);
+        padding-top: rem(100);
+        background:rgba(51,59,70,1);
+
+        .mine-summary-container {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    .h5-trading-summary {
+        width: 100%;
+        margin-top: rem(4);
+        padding-top: rem(40);
+        padding-left: rem(32);
+        padding-right: rem(32);
+        box-sizing: border-box;
+        .trading__title {
+            height:rem(54);
+            width: 100%;
+            box-sizing: border-box;
+            background:linear-gradient(0deg,rgba(193,194,194,1) 0%,rgba(255,255,255,1) 100%);
+            border-radius:rem(27);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: rem(40);
+        }
+        
+    }
+
+}

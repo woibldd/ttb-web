@@ -49,6 +49,7 @@ const FundHistory = () => import(/* webpackChunkName: "FundHistory" */ '@/compon
 
 // h5相关页面
 const h5login = () => import(/* webpackChunkName: "h5login" */ '@/pages/h5/sign-up')
+const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index')
 
 async function beforeEach (to, from, next) {
   state.loading = true
@@ -107,7 +108,7 @@ let router = new Router({
       component: isMobile ? MobileHome : HomeNew
     }, {
       path: '/h5',
-      name: 'h5index',
+      name: 'hlogin',
       meta: {
         auth: false,
         nav: false,
@@ -115,6 +116,16 @@ let router = new Router({
         zendeskWidget: false
       },
       component: h5login
+    }, {
+      path: '/h5-index',
+      name: 'h5index',
+      meta: {
+        auth: false,
+        nav: false,
+        footer: false,
+        zendeskWidget: false
+      },
+      component: h5index
     },
     {
       path: '/active/creation',
