@@ -42,6 +42,10 @@
             v-if="hasMineMy">
             <div class="left__col"><span class="text mr-rem-10">{{ $t('mine_my_total') }}: </span>{{ mineMy.max_amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
             <div class="left__col"><span class="text mr-rem-10">{{ $t('mine_my_remain') }}: </span>{{ ( mineMy.max_amount - mineMy.amount ) | fixed(2) | thousand }}<em class="unit">IX</em></div>
+            <!-- <div class="left__col">
+              <span class="text mr-rem-10">{{ $t('mine_my_reduce') }} : </span>
+              {{ mineMy.total | fixed(2) | thousand }}<em class="unit">IX</em>
+            </div> -->
           </div>
         </div>
       </div>
@@ -73,10 +77,10 @@
       class="mine-other-info">
       <div class="mine-info-row">
         <div class="row__label">
-          {{ $t('mine_bonus_yestoday') }}
+          {{ $t('mine_bonus_today') }}
         </div>
         <div class="row__value">
-          {{ bonusMine.yestoday | round(8) }}
+          {{ bonusMine.today | round(8) }}
           <span class="unit">USDT</span>
         </div>
       </div>
@@ -93,7 +97,7 @@
           {{ $t('mine_bonus_yestoday') }}
         </div>
         <div class="row__value">
-          {{ bonusMine.today | round(8) }}
+          {{ bonusMine.yesterday | round(8) }}
           <span class="unit">USDT</span>
         </div>
       </div>

@@ -191,7 +191,8 @@ export default {
                 height: rem(76);
                 color: white;
                 line-height: rem(76);
-                  padding-left: rem(31);
+                padding-left: rem(31);
+                border-bottom: 1px solid #43464A;
                 &:hover {
                     background:rgba(33,37,42,1);
                 }

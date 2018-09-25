@@ -128,8 +128,8 @@ export default {
       banners: [],
       notices: [],
       swiperOption: {
-        autoplay: false,
-        delay: 1000,
+        autoplay: true,
+        delay: 5000,
         pagination: {
           el: '.swiper-pagination',
           clickable: true
@@ -147,7 +147,7 @@ export default {
   },
   methods: {
     async getBanners () {
-      const res = await service.getBanners({platform: 2})
+      const res = await service.getBanners({platform: 3})
       if (!res.code) {
         let list = res.data
         if (list.length > 0) {
