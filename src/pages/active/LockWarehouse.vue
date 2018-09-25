@@ -10,170 +10,211 @@
     <div class="c-box">
       <div class="top-box">
         <div class="top-cen">
-          <span class="top-tit">昨日挖矿总收益折合(btc)</span>
-          <p class="top-txt top-txt-yellow">1.00009999</p>
+          <div class="m-middle">
+            <span class="top-s-tit">{{ $t('ystd_trad') }}</span>
+            <p class="top-s-txt top-txt-yellow mar-bot">1BTC≈￥49999.98789</p>
+            <span class="top-s-tit">{{ $t('td_trad') }}</span>
+            <p class="top-s-txt top-txt-yellow">1BTC≈￥49999.98189</p>
+          </div>
         </div>
         <div class="top-cen">
-          <span class="top-tit">我的算力</span>
-          <p class="top-txt top-txt-blue">100.XXX<em>IX/H</em></p>
+          <div class="m-middle">
+            <span class="top-tit">{{ $t('hash_rate') }}</span>
+            <p class="top-txt top-txt-blue">100.XXX<em>IX/H</em></p>
+          </div>
         </div>
         <div class="top-cen">
-          <span class="top-tit">昨日挖矿量(btc)</span>
-          <p class="top-txt top-txt-blue">100.XXX<em>IX/H</em></p>
+          <div class="m-middle">
+            <span class="top-tit">{{ $t('td_trad_amount') }}</span>
+            <p class="top-txt top-txt-blue">100.XXX<em>IX/H</em></p>
+          </div>
         </div>
         <div class="top-cen">
-          <span class="top-tit">累计挖矿</span>
-          <p class="top-txt top-txt-blue">100.XXX<em>IX/H</em></p>
+          <div class="m-middle">
+            <span class="top-s-tit">{{ $t('cum_trad_amount') }}</span>
+            <p class="top-s-txt top-txt-blue mar-bot">10000.9988<em>IX/H</em></p>
+            <span class="top-s-tit">{{ $t('cum_trad_revenue') }}</span>
+            <p class="top-s-txt top-txt-blue">10000.9988<em>IX/H</em></p>
+          </div>
         </div>
       </div>
     </div>
     <div class="c-box operating">
       <div class="oper-cen">
-        <div class="oper-cen-tit col-yel">提升算力</div>
+        <div class="oper-cen-tit col-yel">{{ $t('improve_hash_rate') }}</div>
         <div class="oper-con">
           <p class="oper-con-l">
-            <span>可用余额</span>
+            <span>{{ $t('available_balance') }}</span>
           </p>
           <p class="balance">888000000  IX</p>
         </div>
         <div class="oper-con">
           <p class="oper-con-l">
-            <span>锁仓量</span>
+            <span>{{ $t('lock_amount') }}</span>
           </p>
           <input
             type="text"
-            placeholder="请输入20000的整数倍  IX"
+            :placeholder="$t('integer_ultiple')"
             class="balance">
           <a
             href="javascript:void(0)"
-            class="num-max">最大</a>
+            class="num-max">{{ $t('maximum') }}</a>
         </div>
         <button
           disabled="disabled"
-          class="oper-but change">锁仓</button>
+          class="oper-but change">{{ $t('locked') }}</button>
       </div>
       <div class="oper-cen">
-        <div class="oper-cen-tit">解锁</div>
+        <div class="oper-cen-tit">{{ $t('unlock') }}</div>
         <div class="oper-con">
           <p class="oper-con-l">
-            <span>可解锁</span>
+            <span>{{ $t('unlock_available') }}</span>
           </p>
           <p class="balance">888000000  IX</p>
         </div>
         <div class="oper-con">
           <p class="oper-con-l">
-            <span>解锁量</span>
+            <span>{{ $t('unlocked_amount') }}</span>
           </p>
           <input
             type="text"
-            placeholder="请输入20000的整数倍  IX"
+            placeholder="integer_ultiple"
             class="balance">
           <a
             href="javascript:void(0)"
-            class="num-max">最大</a>
+            class="num-max">{{ $t('maximum') }}</a>
         </div>
         <button
           disabled="disabled"
-          class="oper-but">解锁</button>
+          class="oper-but">{{ $t('unlock') }}</button>
       </div>
       <div class="oper-cen">
-        <div class="oper-cen-tit">解锁中</div>
+        <div class="oper-cen-tit">{{ $t('unlocking') }}</div>
         <div class="oper-wait">
           <p class="num">20000  IX</p>
-          <span class="tips">*解锁部分于1小时后释放</span>
+          <span class="tips">*{{ $t('unlocked') }}</span>
         </div>
       </div>
     </div>
     <div class="c-box record">
       <div class="rec record-l">
         <div class="rec-tit">
-          锁仓记录
+          {{ $t('mining_records') }}
+          <a href="">{{ $t('more') }}</a>
         </div>
         <div class="rec-t">
-          <p class="re-a">锁仓时间</p>
-          <p class="re-b">数量（IX）</p>
-          <p class="re-c">状态</p>
+          <p class="re-a">{{ $t('time') }}</p>
+          <p class="re-b">{{ $t('transaction_fee') }}</p>
+          <p class="re-c">锁仓IX（估值btc）</p>
+          <p class="re-d">{{ $t('mining_output') }}</p>
+          <p class="re-e">状态</p>
         </div>
         <div class="scroll-con">
           <ul>
             <li>
               <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">20000</p>
-              <p class="re-c c-yellow">已派发</p>
+              <p class="re-b">0.3</p>
+              <p class="re-c">0.00007</p>
+              <p class="re-d">100</p>
+              <p class="re-e c-yellow">已派发</p>
             </li>
             <li>
               <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">20000</p>
-              <p class="re-c c-blue">待明日派发</p>
+              <p class="re-b">0.3</p>
+              <p class="re-c">0.00007</p>
+              <p class="re-d">100</p>
+              <p class="re-e c-blue">未派发
+                <span>
+                  <em>2018—09—24 发放 <i/> </em>
+                </span>
+              </p>
             </li>
             <li>
               <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">20000</p>
-              <p class="re-c c-yellow">已派发</p>
+              <p class="re-b">0.3</p>
+              <p class="re-c">0.00007</p>
+              <p class="re-d">100</p>
+              <p class="re-e c-yellow">已派发</p>
             </li>
             <li>
               <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">20000</p>
-              <p class="re-c c-blue">待明日派发</p>
+              <p class="re-b">0.3</p>
+              <p class="re-c">0.00007</p>
+              <p class="re-d">100</p>
+              <p class="re-e c-blue">未派发
+                <span>
+                  <em>2018—09—24 发放 <i/> </em>
+                </span>
+              </p>
             </li>
             <li>
               <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">20000</p>
-              <p class="re-c c-yellow">已派发</p>
+              <p class="re-b">0.3</p>
+              <p class="re-c">0.00007</p>
+              <p class="re-d">100</p>
+              <p class="re-e c-yellow">已派发</p>
             </li>
             <li>
               <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">20000</p>
-              <p class="re-c c-blue">待明日派发</p>
+              <p class="re-b">0.3</p>
+              <p class="re-c">0.00007</p>
+              <p class="re-d">100</p>
+              <p class="re-e c-blue">未派发
+                <span>
+                  <em>2018—09—24 发放 <i/> </em>
+                </span>
+              </p>
             </li>
             <li>
               <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">20000</p>
-              <p class="re-c c-yellow">已派发</p>
+              <p class="re-b">0.3</p>
+              <p class="re-c">0.00007</p>
+              <p class="re-d">100</p>
+              <p class="re-e c-yellow">已派发</p>
             </li>
             <li>
               <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">20000</p>
-              <p class="re-c c-blue">待明日派发</p>
+              <p class="re-b">0.3</p>
+              <p class="re-c">0.00007</p>
+              <p class="re-d">100</p>
+              <p class="re-e c-blue">未派发
+                <span>
+                  <em>2018—09—24 发放 <i/> </em>
+                </span>
+              </p>
             </li>
             <li>
               <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">20000</p>
-              <p class="re-c c-yellow">已派发</p>
+              <p class="re-b">0.3</p>
+              <p class="re-c">0.00007</p>
+              <p class="re-d">100</p>
+              <p class="re-e c-yellow">已派发</p>
             </li>
             <li>
               <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">20000</p>
-              <p class="re-c c-blue">待明日派发</p>
+              <p class="re-b">0.3</p>
+              <p class="re-c">0.00007</p>
+              <p class="re-d">100</p>
+              <p class="re-e c-blue">未派发
+                <span>
+                  <em>2018—09—24 发放 <i/> </em>
+                </span>
+              </p>
             </li>
           </ul>
         </div>
       </div>
-      <div class="rec record-r">
-        <div class="rec-tit">
-          挖矿记录
-          <a href="#">更多</a>
-        </div>
-        <div class="rec-t">
-          <p class="re-a">锁仓时间</p>
-          <p class="re-b">数量（IX）</p>
-          <p class="re-c">状态</p>
-        </div>
-        <div class="scroll-con">
-          <p class="no-record">暂无记录</p>
-        </div>
-      </div>
     </div>
     <div class="c-box condition">
-      <p class="cdt-title">参与条件</p>
+      <p class="cdt-title">{{ $t('requirements') }}</p>
       <ul>
-        <li><i>1.</i>参与条件：锁仓至少20000 IX；挖矿基准算力：100 IX/H<br >挖矿基准算力：即每个账户锁仓20000IX后，每小时可挖出的IX数量。您每小时挖矿产出数量=（您的IX锁仓量/20000)*</li>
-        <li><i>2.</i>锁仓：随时锁仓，锁仓后算力从下一整点开始计算；</li>
-        <li><i>3.</i>解锁：随时解锁，解锁的IX将在24小时后释放<br >锁仓和解锁的最小额度为20000 IX，总额为20000的整数倍；</li>
-        <li><i>4.</i>锁仓的IX正常参与每日平台50%交易手续费分红；</li>
-        <li><i>5.</i>每小时进行锁仓快照；取锁仓快照时的基准算力与该小时您的交易手续费中的较小的值作为您该小时实际挖矿量</li>
-        <li><i>6.</i>根据前一天的挖矿产出总量和难度值，调整当天的基准算力；并于每天的0点更新基准算力；</li>
-        <li><i>7.</i>IX保留调整交易挖矿规则的最终解释权；</li>
+        <li><i>1.</i>{{ $t('req_a') }}<br >{{ $t('req_a_a') }}</li>
+        <li><i>2.</i>{{ $t('req_b') }}</li>
+        <li><i>3.</i>{{ $t('req_c') }}<br >{{ $t('req_c_a') }}</li>
+        <li><i>4.</i>{{ $t('req_d') }}</li>
+        <li><i>5.</i>{{ $t('req_e') }}</li>
+        <li><i>6.</i>{{ $t('req_f') }}</li>
+        <li><i>7.</i>{{ $t('req_g') }}</li>
       </ul>
     </div>
   </div>
@@ -190,7 +231,7 @@ export default {
 
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   @import "~@/styles/vars";
   @import "~@/styles/mixins";
   .page-home{
@@ -227,13 +268,17 @@ export default {
       float: left;
       width: 290px;
       height: 177px;
-      padding-top: 33px;
+      display: table;
+      padding-left: 30px;
       border-radius: 8px;
-      text-align: center;
       margin-right: 13px;
       background: #2D3540;
       box-sizing: border-box;
       box-shadow:0px 0px 21px 0px rgba(32,36,39,0.3);
+      .m-middle{
+        display: table-cell;
+        vertical-align: middle;
+      }
       &:last-child{
         float: right;
         margin: 0;
@@ -248,6 +293,24 @@ export default {
       .top-txt{
         font-size: 36px;
         line-height: 60px;
+        em{
+          color: #6C869C;
+          font-size: 18px;
+          padding-left: 15px;
+        }
+      }
+      .mar-bot{
+        margin-bottom: 18px;
+      }
+      .top-s-tit{
+        font-size: 18px;
+        line-height: 24px;
+        display: block;
+        color: #fff;
+      }
+      .top-s-txt{
+        font-size: 16px;
+        line-height: 32px;
         em{
           color: #6C869C;
           font-size: 18px;
@@ -298,7 +361,8 @@ export default {
           width: 103px;
           height: 58px;
           display: table;
-          text-indent: 15px;
+          padding-left: 15px;
+          box-sizing: border-box;
           color: #A6BED3;
           float: left;
           span{
@@ -325,18 +389,18 @@ export default {
           text-align: center;
           line-height: 58px;
           color: #A6BED3;
+          padding: 0 10px;
           display: block;
           height: 58px;
-          width: 56px;
           right: 0;
           top: 0;
           &::before{
-            content: "";
             background: #343E4C;
             position: absolute;
             margin-top: -11px;
             display: block;
             height: 22px;
+            content: "";
             width: 1px;
             top: 50%;
             left: 0;
@@ -347,9 +411,9 @@ export default {
         width: 100%;
         height: 68px;
         border: none;
+        color: #A6BED3;
         cursor: pointer;
         margin-top: 23px;
-        color: #A6BED3;
         border-radius: 4px;
         background: #353F4D;
       }
@@ -392,9 +456,6 @@ export default {
     .record-l{
       float: left;
     }
-    .record-r{
-      float: right;
-    }
     .rec{
       padding: 18px 15px 0 15px;
       box-sizing: border-box;
@@ -402,7 +463,7 @@ export default {
       border-radius: 8px;
       text-align: center;
       height: 477px;
-      width: 590px;
+      width: 100%;
       .rec-tit{
         height: auto;
         color: #fff;
@@ -433,6 +494,55 @@ export default {
             }
             .c-blue{
               color: #446683;
+              position: relative;
+              span{
+                background: #3D4959;
+                border-radius: 10px;
+                position: absolute;
+                margin-top: -10px;
+                display: block;
+                height: 20px;
+                width: 20px;
+                right: 40px;
+                top: 50%;
+                &::before{
+                  line-height: 20px;
+                  color: #5F7EA7;
+                  font-size: 13px;
+                  cursor: pointer;
+                  display: block;
+                  content: "?";
+                  height: 20px;
+                  width: 20px;
+                }
+                em{
+                  width: 138px;
+                  height: 43px;
+                  line-height: 43px;
+                  display: none;
+                  position: absolute;
+                  text-align: center;
+                  color: #fff;
+                  font-size: 12px;
+                  background: #3D4959;
+                  border-radius: 4px;
+                  left: 10px;
+                  top: -58px;
+                  &::before{
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    bottom: -10px;
+                    border-top: 12px solid #3D4959;
+                    border-right: 14px solid transparent;
+                  }
+                }
+                &:hover{
+                  em{
+                    display: block;
+                  }
+                }
+              }
             }
           }
         }
@@ -451,7 +561,7 @@ export default {
       color: #A6BED3;
     }
     .re-a{
-      width: 35%;
+      width: 20%;
       float: left;
     }
     .re-b{
@@ -459,9 +569,16 @@ export default {
       float: left;
     }
     .re-c{
-      width: 40%;
+      width: 25%;
       float: left;
-
+    }
+    .re-d{
+      width: 15%;
+      float: left;
+    }
+    .re-e{
+      width: 15%;
+      float: left;
     }
   }
   .condition{
@@ -485,6 +602,12 @@ export default {
           top: 0;
         }
       }
+    }
+  }
+  .lang-en {
+    .top-s-tit{
+        font-size: 13px !important;
+        line-height: 24px;
     }
   }
 </style>
