@@ -147,7 +147,7 @@ export default {
   },
   methods: {
     async getBanners () {
-      const res = await service.getBanners({platform: 1})
+      const res = await service.getBanners({platform: 2})
       if (!res.code) {
         let list = res.data
         if (list.length > 0) {
