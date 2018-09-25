@@ -18,7 +18,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .page-profile {
   background: #ffffff;
   margin: 0 auto;
@@ -26,4 +26,11 @@ export default {
   padding-top: 60px;
   padding-bottom: 100px;
 }
+
+.mobile {
+  .page-profile {
+    width: 100%;
+  }
+}
+
 </style>

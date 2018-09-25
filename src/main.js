@@ -87,3 +87,10 @@ if (release || !window.grayline) {
     template: '<App/>'
   })
 }
+
+if (utils.isMobile()) {
+  document.body.classList.add('mobile')
+  if (utils.isIos()) {
+    document.body.classList.add('ios')
+  }
+}

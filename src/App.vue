@@ -147,11 +147,15 @@ export default {
     onclick (e) {
       this.$eh.$emit('app:click')
     },
-    fixPosition () {
+    fixPosition (name) {
       const box = this.$refs.container
       if (box) {
         if (this.isMobile) {
-          box.style.minHeight = window.innerHeight - (this.showFooter ? 205 : 0) - (this.showNav ? 60 : 0) + 'px'
+          if (name === 'trading') {
+            box.style.minHeight = screen.availHeight - (this.showFooter ? 205 : 0) - (this.showNav ? 60 : 0) + 'px'
+          } else {
+            box.style.minHeight = screen.availHeight - (this.showFooter ? 205 : 0) - (this.showNav ? 60 : 0) + 'px'
+          }
         } else {
           box.style.minHeight = window.innerHeight - (this.showFooter ? 110 : 0) - (this.showNav ? 80 : 0) + 'px'
         }
@@ -187,9 +191,12 @@ export default {
     this.state.router = this.$router
     this.$router.afterEach((to, from) => {
       if (from.name === 'trading') {
-        this.fixPosition()
+        this.$nextTick(() => {
+          this.fixPosition(from.name)
+        })
       }
     })
+
     this.keepSession()
     window.onresize = () => {
       this.$eh.$emit('app:resize')

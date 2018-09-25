@@ -182,7 +182,7 @@ export default {
             text-align: left;
             display: flex;
             flex-direction: column;
-            width: rem(320);
+            width: rem(224);
             top: rem(96);
             z-index: 11;
 

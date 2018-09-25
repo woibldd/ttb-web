@@ -44,12 +44,26 @@ body.router-account,
 body.router-kyc {
   background-color: $nav-2;
 }
+body.router-profile,
+body.router-fund {
+  min-width: 1200px;
+  max-width: 1200px;
+  &.ios {
+    // min-width: auto;
+  }
+}
 body.router-trading {
   min-width: auto;
   background-color: #283B4C;
   overflow-x: auto;
   #app {
     min-width: 960px;
+  }
+  &.mobile {
+    min-width: 1200px;
+    &.ios {
+      min-width: auto;
+    }
   }
 }
 

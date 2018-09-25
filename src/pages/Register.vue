@@ -478,8 +478,11 @@ export default {
       this.triggerValidate = false
     },
     fixPosition () {
-      this.$refs.container.style.minHeight = window.innerHeight - (110) - (80) + 'px'
-      // this.$refs.containera.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
+      if (utils.isMobile) {
+        this.$refs.container.style.minHeight = screen.availHeight - (205) + 'px'
+      } else {
+        this.$refs.container.style.minHeight = window.innerHeight - (110) - (80) + 'px'
+      }
     }
   },
   mounted () {
@@ -487,8 +490,6 @@ export default {
     this.$nextTick(this.fixPosition)
   },
   async created () {
-    // this.gtInit()
-
     let invitorId = this.$route.query.invitor
     if (!invitorId) {
       invitorId = utils.getCookie('invitor')

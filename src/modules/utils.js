@@ -410,6 +410,9 @@ const utils = {
   isMobile () {
     return navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
   },
+  isIos () {
+    return navigator.userAgent.match(/(iPhone|iPod|ios|iPad)/i)
+  },
   /**
    * 脱敏
    * @param arguments 多个要脱敏数据

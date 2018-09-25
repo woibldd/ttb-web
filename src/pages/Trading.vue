@@ -224,6 +224,7 @@ export default {
     },
     startTimer () {
       this.stopTimer()
+      this.doCountdown()
       this.countdownTimer = setInterval(this.doCountdown, 1000)
     },
     doCountdown () {
@@ -233,7 +234,7 @@ export default {
         this.stopTimer()
         return
       }
-      this.countdownText = num
+      this.countdownText = num || '-'
     },
     stopTimer () {
       clearInterval(this.countdownTimer)
@@ -248,7 +249,7 @@ export default {
       if (data && data.length > 0) {
         // 第一次进入
         if (!this.showCountdown) {
-          this.lastDealTime = data[data.length - 1].time
+          this.lastDealTime = data[0].time
           let tick = new Date().getTime() - this.lastDealTime
           if (tick < 0) {
             tick = 2000
@@ -259,10 +260,10 @@ export default {
           this.showCountdown = true
           this.startTimer()
         } else {
-          if (data[data.length - 1].time > this.lastDealTime) {
+          if (data[0].time > this.lastDealTime) {
             // 有行情变化
             this.countdownText = '20'
-            this.lastDealTime = data[data.length - 1].time
+            this.lastDealTime = data[0].time
             this.startTimer()
           }
         }
@@ -319,6 +320,7 @@ export default {
     this.$eh.$off('app:resize', this.onresize)
     this.$eh.$off('protrade:balance:refresh', this.refreshBalance)
     this.$eh.$off('deal:update', this.dealChanged)
+    this.stopTimer()
     this.state.pro.layout = false
     document.querySelector('.page-loading').classList.remove('show')
     document.documentElement.setAttribute('style', '')
@@ -464,20 +466,21 @@ export default {
   }
 
 }
-@media screen and (max-width: 1000px) {
-  // .ix-col-1 {
-  //   display: none;
-  // }
+@media screen and (max-width: 1200px) {
   .ix-grid-orderbook {
     height: 500px;
   }
   .wd-100 {
     width: 100%;
   }
-  // .ix-row:last-child {
-  //   border-bottom: 2px solid #37424E;
-  // }
-
+}
+.mobile {
+  .ix-grid-orderbook {
+    height: 500px;
+  }
+  .wd-100 {
+    width: 100%;
+  }
 }
 </style>
 

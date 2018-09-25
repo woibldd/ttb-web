@@ -340,10 +340,10 @@ let router = new Router({
     }
   ],
   scrollBehavior (to, from, savedPosition) {
-    if (to.name === 'trading') {
-      return { x: 0, y: 0 }
-    }
-    return null
+    // if (to.name === 'trading') {
+    return { x: 0, y: 0 }
+    // }
+    // return null
   }
 })
 

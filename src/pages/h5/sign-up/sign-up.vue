@@ -193,7 +193,6 @@
 </template>
 
 <script>
-import './sign-up.scss'
 import _ from 'lodash'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
@@ -507,3 +506,6 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+@import './sign-up.scss';
+</style>
