@@ -1,86 +1,138 @@
 <template>
-  <div class="h5-footer-container">
-    <div class="footer-row">
-      <div
-        class="row-pick-up"
-        @click="pickUp('service')">
+  <section>
+    <div class="h5-footer-container">
+      <div class="footer-row">
         <div
-          class="row__title"
-          v-t="'footer_services'"/>
+          class="row-pick-up"
+          @click="pickUp('service')">
+          <div
+            class="row__title"
+            v-t="'footer_services'"/>
+          <div
+            class="row__pick__arrow"
+          >
+            <icon
+              name="arrow-down"
+              :class="[list.service && 'up']"/>
+          </div>
+        </div>
         <div
-          class="row__pick__arrow"
-        >
-          <icon
-            name="arrow-down"
-            :class="[list.service && 'up']"/>
+          class="row-content"
+          v-if="list.service">
+          <router-link :to="{name: 'trading'}">{{ $t('trading') }}</router-link>
+          <a
+            :href="aboutLink"
+            target="_blank">{{ $t('footer_about') }}</a>
+          <!-- <a href="#" target="_blank">{{$t('footer_help')}}</a> -->
+          <a
+            :href="requestLink"
+            target="_blank">{{ $t('footer_request') }}</a>
         </div>
       </div>
-      <div
-        class="row-content"
-        v-if="list.service">
-        <router-link :to="{name: 'trading'}">{{ $t('trading') }}</router-link>
-        <a
-          :href="aboutLink"
-          target="_blank">{{ $t('footer_about') }}</a>
-        <!-- <a href="#" target="_blank">{{$t('footer_help')}}</a> -->
-        <a
-          :href="requestLink"
-          target="_blank">{{ $t('footer_request') }}</a>
-      </div>
-    </div>
-    <div class="footer-row">
-      <div
-        class="row-pick-up"
-        @click="pickUp('tool')">
+      <div class="footer-row">
         <div
-          class="row__title"
-          v-t="'footer_tools'"/>
-        <div
-          class="row__pick__arrow"
-        >
-          <icon
-            name="arrow-down"
-            :class="[list.tool && 'up']"/>
+          class="row-pick-up"
+          @click="pickUp('tool')">
+          <div
+            class="row__title"
+            v-t="'footer_tools'"/>
+          <div
+            class="row__pick__arrow"
+          >
+            <icon
+              name="arrow-down"
+              :class="[list.tool && 'up']"/>
+          </div>
         </div>
-      </div>
-      <div
-        class="row-content"
-        v-if="list.tool">
-        <a
-          :href="announcementLink"
-          target="_blank">{{ $t('footer_notice') }}</a>
-        <a
-          :href="helpLink"
-          target="_blank">{{ $t('user_guide') }}</a>
+        <div
+          class="row-content"
+          v-if="list.tool">
+          <a
+            :href="announcementLink"
+            target="_blank">{{ $t('footer_notice') }}</a>
+          <a
+            :href="helpLink"
+            target="_blank">{{ $t('user_guide') }}</a>
 
-      </div>
-    </div>
-    <div class="footer-row">
-      <div
-        class="row-pick-up"
-        @click="pickUp('intro')">
-        <div
-          class="row__title"
-          v-t="'footer_terms'"/>
-        <div
-          class="row__pick__arrow">
-          <icon
-            name="arrow-down"
-            :class="[list.intro && 'up']"/>
         </div>
       </div>
-      <div
-        class="row-content"
-        v-if="list.intro">
-        <router-link
-          :to="{name: 'terms'}"
-          target="_blank">{{ $t('footer_agreement') }}</router-link>
-        <router-link
-          :to="{name: 'PrivacyPolicy'}"
-          target="_blank">{{ $t('footer_private') }}</router-link>
+      <div class="footer-row">
+        <div
+          class="row-pick-up"
+          @click="pickUp('intro')">
+          <div
+            class="row__title"
+            v-t="'footer_terms'"/>
+          <div
+            class="row__pick__arrow">
+            <icon
+              name="arrow-down"
+              :class="[list.intro && 'up']"/>
+          </div>
+        </div>
+        <div
+          class="row-content"
+          v-if="list.intro">
+          <router-link
+            :to="{name: 'terms'}"
+            target="_blank">{{ $t('footer_agreement') }}</router-link>
+          <router-link
+            :to="{name: 'PrivacyPolicy'}"
+            target="_blank">{{ $t('footer_private') }}</router-link>
+        </div>
       </div>
     </div>
-  </div>
+    <div class="h5-contact-info">
+      <div class="contact-list">
+        <a
+          class="contact-item-wrapper mr-20 pointer"
+          href='https://www.facebook.com/IXExchange'>
+          <icon
+            class="contact-item"
+            name="footer-facebook"/>
+        </a>
+        <a
+          class="contact-item-wrapper mr-20 pointer"
+          href='https://twitter.com/IXExchange'>
+          <icon
+            class="contact-item"
+            name="footer-twitter"/>
+        </a>
+
+        <a
+          href="mailto:service@ix.com"
+          class="contact-item-wrapper mr-20 pointer">
+          <icon
+            class="contact-item"
+            name="footer-email"/>
+        </a>
+        <div class="contact-item-wrapper mr-20">
+          <icon
+            class="contact-item"
+            name="footer-wx"/>
+          <img
+            class="contact-img"
+            src="../../../assets/pic-contact-wx.jpg">
+        </div>
+        <a
+          class="contact-item-wrapper mr-20 pointer"
+          href='https://t.me/ixofficial'>
+          <icon
+            class="contact-item "
+            name="footer-telegram"/>
+        </a>
+        <div class="contact-item-wrapper">
+          <icon
+            class="contact-item"
+            name="footer-biyong"/>
+          <img
+            class="contact-img"
+            src="../../../assets/pic-contact-biyong.jpg">
+        </div>
+      </div>
+      <p class="copyright">Copyright © 2018 IX.COM</p>
+    </div>
+  </section>
 </template>
 <script>
 import './footer.scss'

@@ -12,9 +12,9 @@
     <v-nav2
       v-if="showNav && !isMobile"
       :class="[navClass]"/>
-    <mobile-nav 
-v-if="isMobile"
-                :class="[navClass]"/>
+    <mobile-nav
+      v-if="isMobile"
+      :class="[navClass]"/>
     <div
       class="main-container"
       ref="container"
@@ -26,11 +26,11 @@ v-if="isMobile"
       v-if="footer === 'default'"
       :fixed="fixed"
       v-show="showFooter"/>
-    <!-- <mobile-footer
+    <mobile-footer
       ref="footer"
       v-if="footer === 'mobile'"
       :fixed="fixed"
-      v-show="showFooter"/> -->
+      v-show="showFooter"/>
     <v-notify-list/>
     <div
       class="home-ball"
@@ -46,7 +46,7 @@ v-if="isMobile"
 import VNav2 from '@/components/VNav3.vue'
 import MobileNav from '@/components/Mobile/MobileNav.vue'
 import VFooter from '@/components/VFooter.vue'
-// import MobileFooter from '@/components/Mobile/footer/'
+import MobileFooter from '@/pages/h5/footer'
 import {state, actions} from '@/modules/store'
 import utils from '@/modules/utils'
 import VNotifyList from '@/components/VNotifyList.vue'
@@ -59,7 +59,7 @@ export default {
     VNav2,
     VFooter,
     VNotifyList,
-    // MobileFooter,
+    MobileFooter,
     MobileNav
   },
   data () {
@@ -151,7 +151,7 @@ export default {
       const box = this.$refs.container
       if (box) {
         if (this.isMobile) {
-          box.style.minHeight = window.innerHeight - (this.showFooter ? 0 : 0) - (this.showNav ? 60 : 0) + 'px'
+          box.style.minHeight = window.innerHeight - (this.showFooter ? 205 : 0) - (this.showNav ? 60 : 0) + 'px'
         } else {
           box.style.minHeight = window.innerHeight - (this.showFooter ? 110 : 0) - (this.showNav ? 80 : 0) + 'px'
         }

@@ -218,8 +218,10 @@ import utils from '@/modules/utils'
 import resbg from '@/components/resbg'
 import ixInput from '@/components/common/ix-input/ix-input.vue'
 import countDown from '@/components/common/countdown-code-button'
+import responsive from '@/mixins/responsive'
 
 export default {
+  mixins: [responsive],
   name: 'Login',
   components: {
     VBtn,

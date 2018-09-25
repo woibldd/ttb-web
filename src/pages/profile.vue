@@ -9,8 +9,10 @@
 
 <script>
 import ProfileLeft from './ProfileLeft'
+import responsiveScale from '@/mixins/responsiveScale'
 export default {
-  name: 'profile',
+  mixins: [responsiveScale],
+  name: 'Profile',
   components: {
     ProfileLeft
   }

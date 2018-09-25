@@ -7,7 +7,9 @@
       v-if="!isMobile"/>
     <div class="container-trade-panel">
       <div class="ix-row">
-        <div class="ix-col ix-col-1">
+        <div
+          class="ix-col ix-col-1"
+          v-if="!isMobile">
           <div
             class="ix-grid ix-grid-pairnav"
             ref="gridPairNav">
@@ -51,6 +53,7 @@
       </div>
       <div class="ix-row">
         <div
+          v-if="!isMobile"
           class="ix-grid ix-grid-order"
           ref="gridOrder">
           <Order ref="Order"/>
@@ -59,6 +62,22 @@
           class="ix-grid ix-grid-operate"
           ref="gridOperate">
           <Operate ref="Operate"/>
+        </div>
+      </div>
+      <div class="ix-row">
+        <div
+          class="ix-col ix-col-1 wd-100"
+          v-if="isMobile">
+          <div
+            class="ix-grid ix-grid-order"
+            ref="gridOrder">
+            <Order ref="Order"/>
+          </div>
+          <div
+            class="ix-grid ix-grid-deal wd-100"
+            ref="gridDeal">
+            <Deal ref="Deal"/>
+          </div>
         </div>
       </div>
       <!-- <div class="ix-row">
@@ -87,8 +106,10 @@ import PairNav from '@/components/Trading/PairNav'
 import Operate from '@/components/Trading/Operate'
 import OrderDealPopover from '@/components/Trading/OrderDealPopover'
 import Intro from '@/components/Trading/Intro'
+import responsiveScale from '@/mixins/responsiveScale'
 
 export default {
+  mixins: [responsiveScale],
   name: 'Trading',
   components: {
     VNav,
@@ -348,13 +369,13 @@ export default {
   flex-direction: column;
 }
 .ix-col-1 {
-  width: 350px;
+  width: 320px;
 }
 .ix-col-2 {
   flex: 1;
 }
 .ix-col-3 {
-  width: 350px;
+  width: 320px;
 }
 .ix-grid {
   position: relative;
@@ -444,9 +465,19 @@ export default {
 
 }
 @media screen and (max-width: 1000px) {
-  .ix-col-1 {
-    display: none;
+  // .ix-col-1 {
+  //   display: none;
+  // }
+  .ix-grid-orderbook {
+    height: 500px;
   }
+  .wd-100 {
+    width: 100%;
+  }
+  // .ix-row:last-child {
+  //   border-bottom: 2px solid #37424E;
+  // }
+
 }
 </style>
 

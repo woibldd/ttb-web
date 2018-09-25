@@ -53,63 +53,13 @@
       </div>
       <pair-table/>
     </div>
-    <h5-footer/>
-    <div class="h5-contact-info">
-      <div class="contact-list">
-        <a
-          class="contact-item-wrapper mr-20 pointer"
-          href='https://www.facebook.com/IXExchange'>
-          <icon
-            class="contact-item"
-            name="footer-facebook"/>
-        </a>
-        <a
-          class="contact-item-wrapper mr-20 pointer"
-          href='https://twitter.com/IXExchange'>
-          <icon
-            class="contact-item"
-            name="footer-twitter"/>
-        </a>
-
-        <a
-          href="mailto:service@ix.com"
-          class="contact-item-wrapper mr-20 pointer">
-          <icon
-            class="contact-item"
-            name="footer-email"/>
-        </a>
-        <div class="contact-item-wrapper mr-20">
-          <icon
-            class="contact-item"
-            name="footer-wx"/>
-          <img
-            class="contact-img"
-            src="../../../assets/pic-contact-wx.jpg">
-        </div>
-        <a
-          class="contact-item-wrapper mr-20 pointer"
-          href='https://t.me/ixofficial'>
-          <icon
-            class="contact-item "
-            name="footer-telegram"/>
-        </a>
-        <div class="contact-item-wrapper">
-          <icon
-            class="contact-item"
-            name="footer-biyong"/>
-          <img
-            class="contact-img"
-            src="../../../assets/pic-contact-biyong.jpg">
-        </div>
-      </div>
-      <p class="copyright">Copyright © 2018 IX.COM</p>
-    </div>
+    <!-- <h5-footer/> -->
   </div>
 </template>
 <script>
 import './index.scss'
 import MineSummary from '../mine-summary'
-import h5Footer from '../footer'
+// import h5Footer from '../footer'
 import PairTable from '@/components/Mobile/PairTable'
 import utils from '@/modules/utils'
 import {state, actions} from '@/modules/store'
@@ -163,7 +113,7 @@ export default {
   components: {
     MineSummary,
     PairTable,
-    h5Footer,
+    // h5Footer,
     swiper,
     swiperSlide,
     MobileNav

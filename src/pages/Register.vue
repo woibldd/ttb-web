@@ -206,11 +206,13 @@ import VBtn from '@/components/VBtn'
 import {state} from '@/modules/store'
 import resbg from '@/components/resbg'
 import ixInput from '@/components/common/ix-input/ix-input.vue'
+import responsive from '@/mixins/responsive'
 
 // import { MdField } from 'vue-material/dist/components'
 // import gtMixin from '@/mixins/gt'
 
 export default {
+  mixins: [responsive],
   name: 'Register',
   components: {
     VBtn,

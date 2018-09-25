@@ -211,8 +211,10 @@ import pwChecker from '@/modules/pw-checker'
 import ixInput from '@/components/common/ix-input/ix-input.vue'
 import utils from '@/modules/utils'
 import _ from 'lodash'
+import responsive from '@/mixins/responsive'
 
 export default {
+  mixins: [responsive],
   name: 'Recover',
   components: {
     slideValidate,

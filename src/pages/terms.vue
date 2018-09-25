@@ -3,7 +3,7 @@
     <div class="header">
       <v-nav2
         is-home="true"
-        @hide="notice = null"/>
+      />
     </div>
 
     <doc-wrap :title="$t('title')">
@@ -180,8 +180,14 @@
 <script>
 import VNav2 from '@/components/VNav3'
 import DocWrap from '@/components/docwrap'
+import utils from '@/modules/utils'
 export default {
   name: 'Terms',
+  data () {
+    return {
+      isMobile: utils.isMobile()
+    }
+  },
   components: {
     VNav2,
     DocWrap
