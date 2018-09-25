@@ -10,7 +10,7 @@ const Mock = () => import('./mock')
 
 const service = {
   getBanners (data = {}) {
-    data.platform = 1
+    data.platform = data.platform || 1
     return request('/announcement/list', data)
   },
   resetPassword (data) {
@@ -69,6 +69,22 @@ const service = {
     if (data.phone) {
       return request('user/login/phone', data)
     }
+  },
+  // 获取登录邮箱/手机验证码
+  getLoginVerifyCode (param, type) {
+    let url
+    if (type === 'phone') {
+      url = 'user/login/phone/code'
+    } else {
+      url = 'user/login/email/code'
+    }
+    return request(url, param)
+  },
+  // 验证登录验证码
+  verifyLoginVerifyCode (param, type) {
+    // 新版登录接口后面加2
+    let url = '/user/login/' + type + '2'
+    return request(url, param)
   },
   register (data) {
     rmCache('session')
@@ -419,6 +435,12 @@ const service = {
   },
   getInviteMineTotal (data) {
     return request('mine/invite/total', data)
+  },
+  getBonusMineTotal (data) {
+    return request('bonus/btc/total', data)
+  },
+  getRelayTotal () {
+    return request('relay/query')
   },
   /* 挖矿 end */
 

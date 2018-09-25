@@ -2,7 +2,9 @@
   <div
     class="trading-chart"
     ref="wrap">
-    <v-nav pro="1"/>
+    <v-nav
+      pro="1"
+      v-if="!isMobile"/>
     <div class="container-trade-panel">
       <div class="ix-row">
         <div class="ix-col ix-col-1">
@@ -28,11 +30,14 @@
             <div
               class="active-box"
               v-if="showCountdown">
-              <p class="text">{{ $t('active_countdown_text') }}<span class="seconds">{{ countdownText }}</span>{{ $t('active_countdown_unit') }}</p>
-              <a
-                class="link"
-                :href="rule_link"
-                target="_blank">{{ $t('active_rules') }}</a>
+              <p class="text"><span v-html="$t('active_countdown_text')"/><span class="seconds">{{ countdownText }}</span>{{ $t('active_countdown_unit') }}</p>
+              <router-link
+                class="line link"
+                :to="{name: 'relay'}"
+                target="_blank">{{ $t('active_rules') }}</router-link>
+              <span
+                class="line totally"
+                v-if="typeof relayTotal[state.pro.pair] != 'undefined'">{{ $t('active_relay_short') }} {{ relayTotal[state.pro.pair]|round(0) }} USDT</span>
             </div>
           </div>
         </div>
@@ -104,15 +109,9 @@ export default {
       showCountdown: false,
       countdownTimer: 0,
       countdownText: '20',
-      lastDealTime: 0
-    }
-  },
-  computed: {
-    rule_link () {
-      return (
-        this.state.theme.activeRule[this.state.locale] ||
-        this.state.theme.activeRule.en
-      )
+      lastDealTime: 0,
+      relayTotal: {},
+      isMobile: utils.isMobile()
     }
   },
   watch: {
@@ -133,6 +132,8 @@ export default {
             this.state.pro.pairInfo = null
           }
           await this.refreshBalance()
+
+          this.stopTimer()
         }
         this.state.pro.lock = false
       },
@@ -216,8 +217,13 @@ export default {
     stopTimer () {
       clearInterval(this.countdownTimer)
     },
+    async getRelayTotal () {
+      let res = await service.getRelayTotal()
+      if (!res.code) {
+        this.relayTotal = res.data
+      }
+    },
     dealChanged (data) {
-      return
       if (data && data.length > 0) {
         // 第一次进入
         if (!this.showCountdown) {
@@ -274,6 +280,10 @@ export default {
       this.$eh.$on('protrade:balance:refresh', this.refreshBalance)
       this.$eh.$on('app:resize', this.onresize)
       this.$eh.$on('deal:update', this.dealChanged)
+      this.getRelayTotal()
+      setInterval(() => {
+        this.getRelayTotal()
+      }, 1e4)
       document.querySelector('.page-loading').classList.remove('show')
     })
   },
@@ -331,6 +341,7 @@ export default {
   flex: 1;
   display: flex;
   flex-direction: row;
+  background: $protrade-bg;
 }
 .ix-col {
   display: flex;
@@ -391,36 +402,46 @@ export default {
   background-size: 100%;
 
   .text {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 14px;
     font-family: MicrosoftYaHei;
     font-weight: 400;
-    color: rgba(250, 248, 239, 1);
+    color: #737373;
     margin-top: 12px;
     margin-left: 14px;
 
     .seconds {
       font-size: 20px;
-      color: #eedc50;
+      color: #A37138;
       width: 22px;
       text-align: right;
       margin-right: 5px;
       display: inline-block;
     }
   }
-  .link {
+  .line {
     position: absolute;
-    bottom: 12px;
-    left: 14px;
+    bottom: 6px;
     padding: 1px 3px;
     box-sizing: content-box;
-    background: #ffd100;
-    border-radius: 3px;
-    color: #2064a2;
     font-size: 12px;
+    color: #737373;
     font-weight: bold;
-    cursor: pointer;
+
+    &.link {
+      cursor: pointer;
+      border: 1px solid #ffffff;
+      background:linear-gradient(0deg,rgba(195,196,196,1) 0%,rgba(255,255,255,1) 100%);
+      border-radius:20px;
+      left: 14px;
+      padding: 2px 8px;
+    }
+    &.totally {
+      right: 55px;
+      bottom: 8px;
+    }
   }
+
 }
 @media screen and (max-width: 1000px) {
   .ix-col-1 {

@@ -1,9 +1,9 @@
 <template>
   <div class="page page-profile">
-     <div style="page-profile-wrap">
+    <div style="page-profile-wrap">
       <profile-left/>
-      <router-view></router-view>
-     </div>
+      <router-view/>
+    </div>
   </div>
 </template>
 

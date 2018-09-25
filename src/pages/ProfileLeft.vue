@@ -7,21 +7,34 @@
       </p>
       <ul class="left-menu-list">
         <li class="">
-            <router-link class="menu-name" active-class="active" :to="{name: 'ProfileInfo'}">{{ $t('profile_left_invite_perinfo') }}</router-link>
+          <router-link
+            class="menu-name"
+            active-class="active"
+            :to="{name: 'ProfileInfo'}">{{ $t('profile_left_invite_perinfo') }}</router-link>
         </li>
         <li class="">
-            <router-link class="menu-name" active-class="active" :to="{name: 'ProfileSafety'}">{{ $t('profile_left_invite_safety') }}</router-link>
+          <router-link
+            class="menu-name"
+            active-class="active"
+            :to="{name: 'ProfileSafety'}">{{ $t('profile_left_invite_safety') }}</router-link>
         </li>
         <li class="">
-            <router-link class="menu-name" active-class="active" :to="{name: 'Kyc'}">{{ $t('profile_sec_kyc') }}</router-link>
+          <router-link
+            class="menu-name"
+            :replace="true"
+            active-class="active"
+            :to="kycRouter">{{ $t('profile_sec_kyc') }}</router-link>
         </li>
         <!-- <li class="">
             <router-link class="menu-name" active-class="active" :to="{name: 'Kyc'}">{{ $t('profile_sec_api') }}</router-link>
         </li> -->
         <li class="">
-          <router-link class="menu-name" :to="{name: 'invite'}" active-class="active">
+          <router-link
+            class="menu-name"
+            :to="{name: 'invite'}"
+            active-class="active">
             {{ $t('profile_left_invite') }}
-          </router-link>    
+          </router-link>
         </li>
       </ul>
     </div>
@@ -30,6 +43,33 @@
 <script>
 export default{
 
+  data () {
+    return {
+      kycRouter: {path: '/profile/kyc/'}
+    }
+  }
+  /*
+  methods: {
+    setKycRouter ($route) {
+      // kyc页面，强制kyc路径
+      if ($route.name.indexOf('Kyc') === 0) {
+        this.kycRouter = {
+          name: $route.name
+        }
+      } else {
+        this.kycRouter = {name: 'Kyc'}
+      }
+    }
+  },
+  created () {
+    this.setKycRouter(this.$route)
+  },
+  watch: {
+    $route ($route) {
+      this.setKycRouter($route)
+    }
+  }
+  */
 }
 </script>
 <style lang="scss">

@@ -49,6 +49,7 @@ const FundHistory = () => import(/* webpackChunkName: "FundHistory" */ '@/compon
 
 // h5相关页面
 const h5login = () => import(/* webpackChunkName: "h5login" */ '@/pages/h5/sign-up')
+const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index')
 
 async function beforeEach (to, from, next) {
   state.loading = true
@@ -94,7 +95,7 @@ function onError (err) {
 }
 
 let router = new Router({
-  mode: process.env.NODE_ENV === 'development' ? 'hash' : 'history',
+  mode: process.env.NODE_ENV === 'development' ? 'history' : 'history',
   routes: [
     {
       path: '/',
@@ -104,10 +105,10 @@ let router = new Router({
         class: 'dark',
         auth: false
       },
-      component: isMobile ? MobileHome : HomeNew
+      component: isMobile ? h5index : HomeNew
     }, {
       path: '/h5',
-      name: 'h5index',
+      name: 'hlogin',
       meta: {
         auth: false,
         nav: false,
@@ -115,6 +116,16 @@ let router = new Router({
         zendeskWidget: false
       },
       component: h5login
+    }, {
+      path: '/h5-index',
+      name: 'h5index',
+      meta: {
+        auth: false,
+        nav: false,
+        footer: false,
+        zendeskWidget: false
+      },
+      component: h5index
     },
     {
       path: '/active/creation',
@@ -132,7 +143,7 @@ let router = new Router({
       component: PrivacyPolicy
     },
     {
-      path: '/terms',
+      path: '/services',
       name: 'terms',
       component: terms
     },

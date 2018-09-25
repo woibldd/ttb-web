@@ -470,7 +470,7 @@ export default {
       }
     },
     goAgreement () {
-      return '/terms'
+      return '/services'
     },
     goPrivacy () {
       return '/privacypolicy'
@@ -483,6 +483,7 @@ export default {
   mounted () {
   },
   async created () {
+    document.title = 'IX | 持BTC躺赚平台收入30%'
     // this.gtInit()
 
     let invitorId = this.$route.query.invitor
