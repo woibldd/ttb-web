@@ -1,87 +1,95 @@
 <template>
-<div class="profile-container">
-  <div class="title-box">{{$t('identity_authentication')}}</div>
-  <div class="invinfo-box">
-    <div class="authen_top">
-        <i class="jd"></i>
+  <div class="profile-container">
+    <div class="title-box">{{ $t('identity_authentication') }}</div>
+    <div class="invinfo-box">
+      <div class="authen_top">
+        <i class="jd"/>
         <p class="yy">
-            {{$t('identity_authentication1')}}
+          {{ $t('identity_authentication1') }}
         </p>
         <p class="yy">
-            {{$t('kyc_upload')}}
+          {{ $t('kyc_upload') }}
         </p>
         <p :class="{yy: kycState === 2}">
-            {{$t('kyc_complete')}}
+          {{ $t('kyc_complete') }}
         </p>
-        <i class="jd"></i>
-    </div>
-    <div class="notify">
-      <div class="content mb-30" v-if="kycState === 1">
-        <p class="p1">
-          <icon name="kyc_review"></icon>
-          {{$t('profile_kyc_ing')}}
-        </p>
-        <p class="p2 mt-24">
-          {{$t('profile_kyc_ing_desc')}}
-        </p>
+        <i class="jd"/>
       </div>
-      <div class="content mb-30" v-else-if="kycState === 2">
-        <p class="p1">
-          <icon name="kyc_pass"></icon>
-          {{$t('profile_kyc_success')}}
-        </p>
-      </div>
-      <div class="content mb-30" v-else-if="kycState === -1">
-        <p class="p1">
-          <icon name="kyc_fail"></icon>
-          {{$t('profile_kyc_fail')}}
-        </p>
-        <p class="p2 mt-24" v-html="$t('profile_kyc_again', {kyc: '#/profile/kyc/kyc_step2'})"></p>
-      </div>
-      <div class="content mb-30" v-else>
-        未知状态
+      <div class="notify">
+        <div
+          class="content mb-30"
+          v-if="kycState === 1">
+          <p class="p1">
+            <icon name="kyc_review"/>
+            {{ $t('profile_kyc_ing') }}
+          </p>
+          <p class="p2 mt-24">
+            {{ $t('profile_kyc_ing_desc') }}
+          </p>
+        </div>
+        <div
+          class="content mb-30"
+          v-else-if="kycState === 2">
+          <p class="p1">
+            <icon name="kyc_pass"/>
+            {{ $t('profile_kyc_success') }}
+          </p>
+        </div>
+        <div
+          class="content mb-30"
+          v-else-if="kycState === -1">
+          <p class="p1">
+            <icon name="kyc_fail"/>
+            {{ $t('profile_kyc_fail') }}
+          </p>
+          <p
+            class="p2 mt-24"
+            v-html="$t('profile_kyc_again', {kyc: '#/profile/kyc/kyc_step2'})"/>
+        </div>
+        <div
+          class="content mb-30"
+          v-else/>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
-  import service from '@/modules/service'
-  import VBtn from '@/components/VBtn'
-  import isEmpty from 'lodash/isEmpty'
-  import {state, actions} from '@/modules/store'
-  import utils from '@/modules/utils'
-  let kycInfo = {}
-  export default {
-    name: 'SafeVerified',
-    components: {
-      VBtn
-    },
-    data () {
-      return {
-        state,
-        kycInfo
+import service from '@/modules/service'
+import VBtn from '@/components/VBtn'
+import isEmpty from 'lodash/isEmpty'
+import {state, actions} from '@/modules/store'
+import utils from '@/modules/utils'
+let kycInfo = {}
+export default {
+  name: 'SafeVerified',
+  components: {
+    VBtn
+  },
+  data () {
+    return {
+      state,
+      kycInfo
+    }
+  },
+  computed: {
+    kycState () {
+      if (this.kycInfo) {
+        return this.kycInfo.state
       }
-    },
-    computed: {
-      kycState () {
-        if (this.kycInfo) {
-          return this.kycInfo.state
-        }
-        return -2
-      }
-    },
-    methods: {
-      
-    },
-    async created () {
-      let res = await service.getKycInfo()
-      if (!res.code) {
-        this.kycInfo = res.data
-      }
+      return -2
+    }
+  },
+  methods: {
+
+  },
+  async created () {
+    let res = await service.getKycInfo()
+    if (!res.code) {
+      this.kycInfo = res.data
     }
   }
+}
 </script>
 <style lang="scss" scoped>
   @import "../../../styles/vars";
@@ -113,7 +121,7 @@
   .invinfo-box {
     width: 100%;
     margin: 20px auto 50px auto;
-    
+
   }
   .authen_top{
     width: 100%;

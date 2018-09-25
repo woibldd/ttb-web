@@ -5,8 +5,8 @@
         <router-link
           :to="{name:'home'}"
           class="footer_logo"/>
-        <p class="footer_ltxt">服务邮箱：service@ix.com</p>
-        <p class="footer_ltxt">商务合作：business@ix.com</p>
+        <p class="footer_ltxt">{{ $t('footer_services_email') }}：service@ix.com</p>
+        <p class="footer_ltxt">{{ $t('footer_bussness') }}：business@ix.com</p>
         <div class="contact-list">
           <a
             class="contact-item-wrapper mr-20 pointer"
@@ -58,23 +58,35 @@
       </div>
       <div class="footer_right">
         <div class="footer_ct">
-          <p>服务</p>
-          <a href="#">币币交易</a>
-          <a href="#">锁仓挖矿</a>
-          <a href="#">帮助中心</a>
-          <a href="#">提交工单</a>
+          <p>{{ $t('footer_services') }}</p>
+          <router-link :to="{name: 'trading'}">{{ $t('trading') }}</router-link>
+          <a
+            :href="aboutLink"
+            target="_blank">{{ $t('footer_about') }}</a>
+          <!-- <a href="#" target="_blank">{{$t('footer_help')}}</a> -->
+          <a
+            :href="requestLink"
+            target="_blank">{{ $t('footer_request') }}</a>
         </div>
         <div class="footer_ct">
-          <p>工具</p>
-          <a href="#">帮助中心</a>
-          <a href="#">新手指引</a>
-          <a href="#">API文档</a>
+          <p>{{ $t('footer_tools') }}</p>
+          <a
+            :href="announcementLink"
+            target="_blank">{{ $t('footer_notice') }}</a>
+          <a
+            :href="helpLink"
+            target="_blank">{{ $t('user_guide') }}</a>
+            <!-- <a href="#" target="_blank">{{$t('footer_api')}}</a> -->
         </div>
         <div class="footer_ct">
-          <p>条款说明</p>
-          <a href="#">用户协议</a>
-          <a href="#">隐私条款</a>
-          <a href="#">费率</a>
+          <p>{{ $t('footer_terms') }}</p>
+          <router-link
+            :to="{name: 'terms'}"
+            target="_blank">{{ $t('footer_agreement') }}</router-link>
+          <router-link
+            :to="{name: 'PrivacyPolicy'}"
+            target="_blank">{{ $t('footer_private') }}</router-link>
+            <!-- <a href="#" target="_blank">{{$t('footer_fee')}}</a> -->
         </div>
       </div>
     </div>
@@ -82,7 +94,31 @@
 </template>
 
 <script>
+import { state } from '@/modules/store'
 export default {
+  data () {
+    return {
+      state
+    }
+  },
+  computed: {
+    helpLink () {
+      return this.state.theme.help[this.state.locale] || this.state.theme.help.en
+    },
+    requestLink () {
+      if (this.state.userInfo && this.state.theme.themeName === 'default') {
+        return process.env.BASE_API + 'zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
+      } else {
+        return this.state.theme.request[this.state.locale] || this.request.theme.help.en
+      }
+    },
+    announcementLink () {
+      return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
+    },
+    aboutLink () {
+      return `/docs/IX_introduction_${this.state.locale || 'en'}.pdf`
+    }
+  }
 }
 </script>
 
@@ -108,7 +144,7 @@ export default {
     .footer_logo{
       width: 141px;
       height: 46px;
-      background: url(../assets/nav_logo.png);
+      @include bg-retina('../assets/nav_logo', 'png', 142px, 46px);
       float: left;
       margin-bottom: 18px;
     }
@@ -137,6 +173,10 @@ export default {
       color: #fff;
       display: table;
       line-height: 36px;
+
+      &:hover {
+        color: $primary;
+      }
     }
   }
   .footer-container {

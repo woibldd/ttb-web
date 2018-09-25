@@ -3,7 +3,7 @@
     <div class="title-box">
       <div> {{ $t('withdraw') }}</div>
       <router-link
-        to="/fund/my/history/withdraw"
+        to="/fund/my/history/deposit"
         class="fund-history"> {{ $t('capital_record') }}</router-link>
     </div>
     <div class="fund-items-content">
@@ -13,6 +13,8 @@
           <el-select
             v-model="selectCoin"
             @change="changeCoinType"
+            :placeholder="$t('please_choose')"
+            :no-data-text="$t('no_data')"
             value-key="currency">
             <el-option
               v-for="item in allCoins"
@@ -24,10 +26,19 @@
       </div>
       <div class="fund-item-other mt-13 mb-23 withdraw-remain">
         <span>{{ $t("withdraw_avlb") }}:  {{ myCoinInfo.available }}</span>
-        <span class="ml-29 mr-29">{{ $t("quota") }}: {{ selectCoin.min_withdraw_amount }}</span>
+        <span class="ml-29 mr-29">{{ $t("quota") }}: {{ myCoinInfo.quota }}</span>
         <router-link
           to="/profile/kyc/"
           class="up-limit pointer">{{ $t("upgrade_quota") }}</router-link>
+      </div>
+      <div class="fund-item-other mb-14">
+        <span
+          :class="['quick-btn mr-10', selectCoin.currency === c.currency && 'selected']"
+          @click="quickSelectCoin(c)"
+          v-for="(c, idx) in allCoins"
+          :key="idx">
+          {{ c.currency }}
+        </span>
       </div>
       <div class="fund-item-row">
         <div class="row__label">{{ $t('withdraw_addr') }}</div>
@@ -35,6 +46,8 @@
           <div class="withdraw-address">
             <el-select
               v-model="selectAddress"
+              :placeholder="$t('please_choose')"
+              :no-data-text="$t('no_data')"
               @change="changeAddress">
               <el-option
                 v-for="item in allAddress"
@@ -57,7 +70,7 @@
             <input
               class="coin-count"
               type="number"
-              :step="Number(selectCoin.min_withdraw_amount)"
+
               :min="Number(selectCoin.min_withdraw_amount)"
               :max="Number(myCoinInfo.available)"
               v-model="withdrawCount">
@@ -81,16 +94,10 @@
         </p>
       </div>
       <div class="fund-item-other">
-        <router-link
-          v-if="!hasKyc"
-          class="set-kyc"
-          to="/profile/kyc">
-          请先设置KYC！！！ 点击去设置
-        </router-link>
         <v-btn
           style="width: 200px"
           @click="ensure"
-          :disabled="!hasKyc"
+          :disabled="disableBtn"
           :label="$t('withdraw_confirm')"/>
       </div>
       <ul
@@ -125,7 +132,7 @@
           </div>
           <div
             class="modal__row mt-12 mb-25"
-            v-if="google_key_bound || true">
+            v-if="google_key_bound">
             <div class="row__label mb-9">{{ $t('fa2_google_code_mobile') }}</div>
             <div class="row__input" >
               <input
@@ -140,6 +147,39 @@
         </div>
       </div>
     </v-modal>
+    <v-modal :open.sync="showLayerModal">
+      <div class="not-verified-layer">
+        <div class="layer__title mb-30">{{ $t('withdraw_need_verify') }}</div>
+        <div class="layer__content">
+          <div class="layer__row_note">
+            <div class="row__label">{{ $t('withdraw_need_verify_note') }}</div>
+          </div>
+          <div class="layer__row mt-30">
+            <span class="row__label">1. {{ $t('bind_email') }}</span>
+            <span
+              class="row__status"
+              @click="clickVerifyRow('EmailBind')"
+              :class="{'done': email_bound}">{{ email_bound ? $t('done') : $t('to_bind') }}</span>
+          </div>
+          <div class="layer__row mt-20">
+            <span class="row__label">2. {{ $t('bind_phone') }}</span>
+            <span
+              class="row__status"
+              @click="clickVerifyRow('PhoneBind')"
+              :class="{'done': phone_bound}">{{ phone_bound ? $t('done') : $t('to_bind') }}</span>
+
+          </div>
+          <div class="layer__row mt-20">
+            <span class="row__label">3. {{ $t('complete_verified') }}</span>
+            <span
+              class="row__status"
+              @click="clickVerifyRow('Kyc')"
+              :class="{'done': all_bound}">{{ all_bound ? $t('done') : $t('to_bind') }}</span>
+          </div>
+        </div>
+      </div>
+    </v-modal>
+
   </div>
 </template>
 <script>
@@ -149,12 +189,13 @@ import vModal from '@/components/VModal.vue'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
 import countDown from '@/components/common/countdown-code-button'
-import { state } from '@/modules/store'
+import { state, actions } from '@/modules/store'
 
 export default {
   name: 'Withdraw',
   data () {
     return {
+      showLayerModal: false,
       address: '',
       allCoins: [],
       selectCoin: {},
@@ -178,27 +219,42 @@ export default {
       }
     },
     coinArrival () {
-      return this.$big(this.withdrawCount) - this.$big(this.selectCoin.withdraw_fee)
-    },
-    hasKyc () {
-    //   console.log(this.state.userInfo.lv)
-      return state.userInfo && state.userInfo.lv > 0
+      return this.$big(parseFloat(this.withdrawCount) || 0).minus(this.$big(this.selectCoin.withdraw_fee || 0)).toString()
     },
     google_key_bound () {
-      if (state.userInfo && state.userInfo.google_key_bound) {
+      if (this.state.userInfo && this.state.userInfo.google_key_bound) {
         return true
       }
       return false
+    },
+    email_bound () {
+      return this.state.userInfo && this.state.userInfo.email
+    },
+    phone_bound () {
+      return this.state.userInfo && this.state.userInfo.phone
+    },
+    all_bound () {
+      // kyc > 0 就可以提币
+      return this.state.userInfo && this.state.userInfo.lv > 0
+    },
+    disableBtn () {
+      return !this.email_bound || !this.phone_bound || !this.all_bound
     }
   },
   components: {vModal, countDown},
   async created () {
-    // 检测kyc
+    await actions.updateSession()
+    this.showLayerModal = !this.email_bound || !this.phone_bound || !this.all_bound
     await this.getAllCoinTypes()
     this.updadeMyCoinInfo()
     this.getCoinAddress()
   },
   methods: {
+    clickVerifyRow (v) {
+      this.$router.push({
+        name: v
+      })
+    },
     copy () {
       copyToClipboard(this.address)
       utils.success(this.$i18n.t('copyed'))
@@ -210,13 +266,17 @@ export default {
       return service.getMyAddressList(param).then((res) => {
         if (res && res.data) {
           this.allAddress = res.data
+          if (this.allAddress.length > 0) {
+            this.selectAddress = this.allAddress[0].address
+          }
         }
       })
     },
     async changeCoinType (coin) {
       this.selectCoin = coin
+      this.selectAddress = ''
       this.getCoinAddress()
-      this.getAccountBalanceList() // 更改币种后，重新获取一次自己的钱包状态
+      this.updadeMyCoinInfo() // 更改币种后，重新获取一次自己的钱包状态
     },
     async updadeMyCoinInfo () {
       await this.getAccountBalanceList()
@@ -241,6 +301,9 @@ export default {
           this.selectCoin = this.allCoins[0]
         }
       })
+    },
+    quickSelectCoin (coin) {
+      this.changeCoinType(coin)
     },
     getAccountBalanceList () {
       return service.getAccountBalanceList().then(res => {
@@ -270,10 +333,31 @@ export default {
         param.google_code = this.googleCode
       }
       service.confirmWithdraw(param).then(res => {
-        console.log(res)
+        if (res.code) {
+          utils.alert(res.message)
+        } else {
+          this.$router.push('/fund/my/history/withdraw')
+        }
       })
     },
     ensure () {
+      if (this.disableBtn) {
+        utils.alert('请完善你的资料')
+        return
+      }
+      if (this.$big(this.withdrawCount || 0).lt(this.$big(this.selectCoin.min_withdraw_amount))) {
+        utils.alert(this.$t('withdraw_count_min_error'))
+        return
+      }
+      if (this.$big(this.withdrawCount || 0).gt(this.$big(this.myCoinInfo.available || 0))) {
+        utils.alert(this.$t('withdraw_count_max_error'))
+        return
+      }
+      if (!this.selectAddress) {
+        utils.alert(this.$t('add_address_error'))
+        return
+      }
+
       this.showModal = true
     },
     hideModal () {

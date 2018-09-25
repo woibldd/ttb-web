@@ -1,20 +1,19 @@
 {
-    "eslint.validate": [
-        "javascript",
-        "javascriptreact",
-        {
-            "language": "vue",
-            "autoFix": true
-        }
-    ],
-    "eslint.autoFixOnSave": true,
-    "editor.detectIndentation": false,
-    "editor.renderControlCharacters": true,
-    "editor.renderWhitespace": "all",
-
-    // emmet支持vue中不全tag
-    "emmet.includeLanguages": {
-        "vue-html": "html",
-        "vue": "html"
-    }
+  "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      {
+          "language": "vue",
+          "autoFix": true
+      }
+  ],
+  "eslint.autoFixOnSave": true,
+  "editor.detectIndentation": false,
+  "editor.renderControlCharacters": true,
+  "editor.renderWhitespace": "all",
+  // emmet支持vue中不全tag
+  "emmet.includeLanguages": {
+      "vue-html": "html",
+      "vue": "html"
+  }
 }

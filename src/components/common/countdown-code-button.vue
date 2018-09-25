@@ -28,6 +28,10 @@ export default {
         return true
       }
     },
+    startWhenLoaded: {
+      type: Boolean,
+      default: false
+    },
     sendCodeFunc: {
       type: Function
     }
@@ -86,6 +90,18 @@ export default {
       } else {
         this.errmsg = ''
       }
+    }
+  },
+  watch: {
+    startWhenLoaded (newVal) {
+      if (newVal) {
+        this.getSmsCode()
+      }
+    }
+  },
+  mounted () {
+    if (this.startWhenLoaded) {
+      this.getSmsCode()
     }
   },
   destroyed () {

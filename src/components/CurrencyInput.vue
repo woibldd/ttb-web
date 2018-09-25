@@ -263,8 +263,8 @@ export default {
     }
   }
   .label {
-    color: black;
-    background-color: #CCCCCC;
+    color: white;
+    // background-color: #CCCCCC;
     width: 54px;
     line-height: 30px;
     height: 32px;

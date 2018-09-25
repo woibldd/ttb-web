@@ -54,7 +54,6 @@ body.router-trading {
 }
 
 /* 路由相关 end */
-
 table tr td,
 table tr th {
   &.left {
@@ -174,14 +173,45 @@ td.left {
 td.right {
   text-align: right;
 }
+.home-ball {
+  cursor: pointer;
+  position: fixed;
+  bottom: 40px;
+  width: 140px;
+  right: 60px;
+  border-radius: 30px;
+  background: #C9A96C;
+  padding: 10px 10px;
+  text-align: center;
+  color: #fff;
+  box-sizing: border-box;
+  font-size: 18px;
+  z-index: 99999;
+}
 @media screen and (max-width: 768px) {
   body.router-account {
     min-width: auto;
+  }
+  .home-ball {
+    display: none;
   }
   // body.router-account footer {
   //   display: none;
   // }
 }
+
+// h5
+@media screen and (max-width: 768px) {
+    body.router-h5index {
+      min-width: auto;
+    }
+    .home-ball {
+      display: none;
+    }
+    // body.router-account footer {
+    //   display: none;
+    // }
+  }
 
 
 // element reset

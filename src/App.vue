@@ -10,7 +10,10 @@
       class="page-mask"
       v-show="state.loading"/>
     <v-nav2
-      v-if="showNav"
+      v-if="showNav && !isMobile"
+      :class="[navClass]"/>
+    <v-mobile-nav
+      v-if="showNav && isMobile"
       :class="[navClass]"/>
     <div
       class="main-container"
@@ -29,11 +32,19 @@
       :fixed="fixed"
       v-show="showFooter"/>
     <v-notify-list/>
+    <div
+      class="home-ball"
+      @click="toNotice"
+      v-if="zendeskWidget">
+      <icon name="serve"/>
+      <span>{{ $t('contact_us') }}</span>
+    </div>
   </div>
 </template>
 
 <script>
-import VNav2 from '@/components/VNav2.vue'
+import VNav2 from '@/components/VNav3.vue'
+import VMobileNav from '@/components/VMobileNav.vue'
 import VFooter from '@/components/VFooter.vue'
 import MobileFooter from '@/components/MobileFooter.vue'
 import {state, actions} from '@/modules/store'
@@ -48,13 +59,15 @@ export default {
     VNav2,
     VFooter,
     VNotifyList,
-    MobileFooter
+    MobileFooter,
+    VMobileNav
   },
   data () {
     return {
       state,
       isMobile: utils.isMobile(),
-      fixed: false
+      fixed: false,
+      showContact: true
     }
   },
   computed: {
@@ -80,7 +93,7 @@ export default {
       if (!this.$route.name) {
         return false
       }
-      return !(utils.getRouteMeta(this.$route, 'zendeskWidget') === false)
+      return !(utils.getRouteMeta(this.$route, 'zendeskWidget') === false) && this.showContact
     },
     navClass () {
       if (!this.$route.name) {
@@ -146,6 +159,19 @@ export default {
         await actions.updateSession()
       }
       this.keepSession()
+    },
+    toNotice () {
+      let url = ''
+      if (this.state.userInfo && this.state.theme.themeName === 'default') {
+        url = process.env.BASE_API + 'zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
+      } else {
+        url = this.state.theme.request[this.state.locale] || this.request.theme.help.en
+      }
+      if (!url) {
+        this.showContact = false
+      } else {
+        window.open(url)
+      }
     }
   },
   mounted () {

@@ -43,6 +43,7 @@
   import service from '@/modules/service'
   import VBtn from '@/components/VBtn'
   import {state, actions} from '@/modules/store'
+  import utils from '@/modules/utils'
   const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
 
   export default {

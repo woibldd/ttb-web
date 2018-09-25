@@ -21,12 +21,6 @@
           class="right_options"
           v-else>
           <p class="email">
-            <router-link :to="{name:'trading'}">币币交易</router-link>
-          </p>
-          <p class="email">
-            <router-link :to="{name:'fund'}">我的资产</router-link>
-          </p>
-          <p class="email">
             <router-link :to="{name:'profile'}">{{ desentInfo }}</router-link>
           </p>
           <a
@@ -182,6 +176,7 @@ export default {
         right:0;
         position: absolute;
         display: none;
+        z-index: 999;
         a{
             background: #303c47;
             display: block;

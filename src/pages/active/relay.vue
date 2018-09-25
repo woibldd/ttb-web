@@ -1,32 +1,34 @@
 <template>
   <div class="page-home">
     <div class="header">
-      <v-nav2
-        is-home="true"
-        :notice="notice"
-        @hide="notice = null"/>
+      <v-nav
+        is-home="true"/>
     </div>
     <div class="banner">
       <div class="banner_txt">
-        <p class="ban-txt">所有交易手续费的<span>40%</span>等你来拿</p>
-        <p>盯紧屏幕，下一个中奖的就是你</p>
-        <p>您距离中奖还有<span>20</span>秒</p>
+        <p
+          class="ban-txt"
+          v-html="$t('active_relay_h1')"/>
+        <p v-t="'active_relay_h2'"/>
+        <p v-html="$t('active_relay_h3')"/>
       </div>
     </div>
     <div class="top-txt">
-      <div class="t-t lt">开始时间：<span>2018年9月20日 12:00:00</span></div>
-      <div class="t-t rt">每日<span>00:00:00重启</span>进入下一轮</div>
+      <!-- <div class="t-t lt"><span v-t="'active_relay_start'"/></div> -->
+      <div
+        class="t-t rt"
+        v-html="$t('active_relay_next')"/>
     </div>
     <div class="cen_scr">
       <div class="scr-cen scr-l">
-        <p class="scr-txt">奖池累计额度：<span>85.92114584</span>BTC</p>
+        <!-- <p class="scr-txt">{{ $t('active_relay_totally') }}<span>85.92114584</span>BTC</p> -->
         <div class="scr-box">
-          <p class="scr-tit">BTC/USDT</p>
+          <p class="scr-tit">{{ pairs[0] | pairfix }}</p>
           <div class="scr">
             <div class="scr-title">
-              <p class="scr_l">交易量</p>
-              <p class="scr_m">操作</p>
-              <p class="scr_r">交易时间</p>
+              <p class="scr_l">{{ $t('active_relay_amount') }}</p>
+              <p class="scr_m">{{ $t('active_relay_operator') }}</p>
+              <p class="scr_r">{{ $t('active_relay_time') }}</p>
             </div>
             <div
               class="scr-cen"
@@ -34,246 +36,126 @@
               <ul
                 id="con1"
                 ref="con1"
-                :class="{anim:animate==true}">
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
+              >
+                <li
+                  :class="ticker.side"
+                  v-for="(ticker, $index) in tickers['BTC_USDT']"
+                  :key="'BTC_USDT'+ ticker.time + $index">
+                  <p class="scr_l">{{ ticker.values[1] | fixed(4) }}</p>
+                  <p class="scr_m">{{ $t(ticker.side === 'buy' ? 'order_side_buy':'order_side_sell') }}</p>
+                  <p class="scr_r">{{ ticker.time | ts2date('Y-M-D H:m:s') }}</p>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-        <a
-          href="#"
-          class="join">立即参加</a>
+        <router-link
+          class="join"
+          :to="{name: 'trading', params: {pair: 'BTC_USDT'}}">{{ $t('active_relay_join') }}</router-link>
       </div>
       <div class="scr-cen scr-m">
-        <p class="scr-txt">奖池累计额度：<span>85.92114584</span>BTC</p>
+        <!-- <p class="scr-txt">{{ $t('active_relay_totally') }}<span>85.92114584</span>BTC</p> -->
         <div class="scr-box">
-          <p class="scr-tit">BTC/USDT</p>
+          <p class="scr-tit">{{ pairs[1] | pairfix }}</p>
           <div class="scr">
             <div class="scr-title">
-              <p class="scr_l">交易量</p>
-              <p class="scr_m">操作</p>
-              <p class="scr_r">交易时间</p>
+              <p class="scr_l">{{ $t('active_relay_amount') }}</p>
+              <p class="scr_m">{{ $t('active_relay_operator') }}</p>
+              <p class="scr_r">{{ $t('active_relay_time') }}</p>
             </div>
-            <div class="scr-cen">
-              <ul>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
+            <div
+              class="scr-cen"
+              id="box">
+              <ul
+                id="con1"
+                ref="con1"
+              >
+                <li
+                  :class="ticker.side"
+                  v-for="(ticker, $index) in tickers['ETH_USDT']"
+                  :key="'ETH_USDT'+ ticker.time + $index">
+                  <p class="scr_l">{{ ticker.values[1] | fixed(4) }}</p>
+                  <p class="scr_m">{{ $t(ticker.side === 'buy' ? 'order_side_buy':'order_side_sell') }}</p>
+                  <p class="scr_r">{{ ticker.time | ts2date('Y-M-D H:m:s') }}</p>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-        <a
-          href="#"
-          class="join">立即参加</a>
+        <router-link
+          class="join"
+          :to="{name: 'trading', params: {pair: 'ETH_USDT'}}">{{ $t('active_relay_join') }}</router-link>
       </div>
       <div class="scr-cen scr-r">
-        <p class="scr-txt">奖池累计额度：<span>85.92114584</span>BTC</p>
+        <!-- <p class="scr-txt">{{ $t('active_relay_totally') }}<span>85.92114584</span>BTC</p> -->
         <div class="scr-box">
-          <p class="scr-tit">BTC/USDT</p>
+          <p class="scr-tit">{{ pairs[2] | pairfix }}</p>
           <div class="scr">
             <div class="scr-title">
-              <p class="scr_l">交易量</p>
-              <p class="scr_m">操作</p>
-              <p class="scr_r">交易时间</p>
+              <p class="scr_l">{{ $t('active_relay_amount') }}</p>
+              <p class="scr_m">{{ $t('active_relay_operator') }}</p>
+              <p class="scr_r">{{ $t('active_relay_time') }}</p>
             </div>
-            <div class="scr-cen">
-              <ul>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
-                </li>
-                <li>
-                  <p class="scr_l">23.89001237</p>
-                  <p class="scr_m">买</p>
-                  <p class="scr_r">2018-09-26 13:24:46</p>
+            <div
+              class="scr-cen"
+              id="box">
+              <ul
+                id="con1"
+                ref="con1"
+              >
+                <li
+                  :class="ticker.side"
+                  v-for="(ticker, $index) in tickers['ETH_BTC']"
+                  :key="'ETH_BTC'+ ticker.time + $index">
+                  <p class="scr_l">{{ ticker.values[1] | fixed(4) }}</p>
+                  <p class="scr_m">{{ $t(ticker.side === 'buy' ? 'order_side_buy':'order_side_sell') }}</p>
+                  <p class="scr_r">{{ ticker.time | ts2date('Y-M-D H:m:s') }}</p>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-        <a
-          href="#"
-          class="join">立即参加</a>
+        <router-link
+          class="join"
+          :to="{name: 'trading', params: {pair: 'ETH_BTC'}}">{{ $t('active_relay_join') }}</router-link>
       </div>
     </div>
     <div class="rule">
-      <p>规则介绍</p>
+      <p v-t="'active_relay_rule'"/>
       <ul>
-        <li>1、平台所有币对适用于此规则，交易功能开启后，该规则生效</li>
-        <li>2、以平台币对BTC/USDT为例，如果该币对超过20秒没有产生交易 ，则20秒前的最后一位交易用户为中奖用户</li>
-        <li>3、中奖用户获得从规则开启到获奖期间所有BTC/USDT交易者交易手续费的40%</li>
-        <li>4、该币对下一位交易者出现；奖池金额继续开始累积；直至24:00奖池金额清零（用于发放奖励或归入社区手续费返还）</li>
-        <li>5、中奖用户奖励派发时间为：次日12:00-14:00。</li>
+        <li>1、{{ $t('active_relay_rule1') }}</li>
+        <li>2、{{ $t('active_relay_rule2') }}</li>
+        <li>3、{{ $t('active_relay_rule3') }}</li>
+        <li>4、{{ $t('active_relay_rule4') }}</li>
       </ul>
     </div>
     <div class="example">
-      <p class="ex_tit">举个例子：</p>
+      <p
+        class="ex_tit"
+        v-t="'active_relay_example'"/>
       <div class="ex_jd">
         <div class="e_a ex_b">
           <div class="ex_ct">
-            <p>以BTC/USDT为例<br >开启时间：12:00</p>
+            <p v-html="$t('active_relay_example_1')"/>
           </div>
         </div>
         <div class="e_b ex_b">
           <div class="ex_ct">
-            <p>第一位获奖者A<br >在16:00出现</p>
+            <p v-html="$t('active_relay_example_2')"/>
           </div>
-          <span>A：获得12:00-16:00期间，<br>BTC/USDT交易手续费的40%</span>
+          <span v-html="$t('active_relay_example_3')"/>
         </div>
         <div class="e_c ex_b">
           <div class="ex_ct">
-            <p>第二位获奖者B<br >在21:00出现</p>
+            <p v-html="$t('active_relay_example_4')"/>
           </div>
-          <span>B：获得16:00-21:00期间，<br>BTC/USDT交易手续费的40%</span>
+          <span v-html="$t('active_relay_example_5')"/>
         </div>
         <div class="e_d ex_b">
           <div class="ex_ct">
-            <p>重置时间：24:00</p>
+            <p>{{ $t('active_relay_example_reset') }}</p>
           </div>
-          <span>从21:00-24:00没有产生获奖者，<br>那么该区间段产生的交易手续费<br>归入平台手续费收入分配</span>
+          <span v-html="$t('active_relay_example_6')"/>
         </div>
       </div>
     </div>
@@ -282,37 +164,69 @@
 
 </template>
 <script>
-import VNav2 from '@/components/VNav2'
+import VNav from '@/components/VNav3'
+import ws from '@/modules/ws'
+import service from '@/modules/service'
+import { pairfix } from '@/mixins/index'
+
 export default {
+  mixins: [ pairfix ],
   data () {
     return {
-      animate: false
+      pairs: ['BTC_USDT', 'ETH_USDT', 'ETH_BTC'],
+      sockets: {},
+      tickers: {
+        BTC_USDT: [],
+        ETH_USDT: [],
+        ETH_BTC: []
+      }
     }
   },
   components: {
-    VNav2
+    VNav
   },
   created () {
-    setInterval(this.scroll, 1000)
+    this.pairs.forEach(pair => {
+      this.history(pair)
+      this.wsConnect(pair)
+    })
   },
+
   methods: {
-    scroll () {
-      let con1 = this.$refs.con1
-      con1.style.marginTop = '-30px'
-      this.animate = !this.animate
-      var that = this
-      setTimeout(function () {
-        that.items.push(that.items[0])
-        that.items.shift()
-        con1.style.marginTop = '0px'
-        that.animate = !that.animate
-      }, 500)
+    async history (pair) {
+      let res = await service.getQuoteDeal({pair, size: 10})
+      if (!res.code) {
+        this.update(pair, res.data)
+      }
+    },
+    wsConnect (pair) {
+      this.sockets[pair] = ws.create(`deal/${pair}`)
+      this.sockets[pair].$on('message', data => {
+        this.loading = false
+        this.update(pair, data)
+      })
+    },
+    update (pair, data) {
+      if (!this.tickers[pair]) {
+        this.tickers[pair] = data.sort((a, b) => {
+          return b.time - a.time
+        })
+      } else {
+        this.tickers[pair] = this.tickers[pair].concat(data).sort((a, b) => {
+          return b.time - a.time
+        }).map(ticker => {
+          if (ticker.values.lenth > 2) {
+            ticker.values[1] = ticker.values[4]
+          }
+          return ticker
+        })
+      }
     }
   }
 
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   @import "~@/styles/vars";
   @import "~@/styles/mixins";
   .header{
@@ -404,6 +318,46 @@ export default {
         span{
           font-size: 24px;
           font-weight: bold;
+        }
+      }
+      .buy p {
+
+        &.scr_m {
+          color: #09C989;
+          animation: shark_buy .5s ease-in-out;
+          transition: all 2s;
+        }
+
+        @keyframes shark_buy {
+          from {
+            opacity: 0;
+            color: #666666;
+          }
+          to {
+            opacity: 1;
+            color: #09C989;
+          }
+
+        }
+      }
+      .sell p {
+
+        &.scr_m {
+          color: #F24E4D;
+          animation: shark_sell .5s ease-in-out;
+          transition: all 2s;
+        }
+
+        @keyframes shark_sell {
+          from {
+            opacity: 0;
+            color: #666666;
+          }
+          to {
+            opacity: 1;
+            color: #F24E4D;
+          }
+
         }
       }
     }
