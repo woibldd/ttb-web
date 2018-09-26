@@ -153,8 +153,8 @@ export default {
             this.state.pro.pairInfo = null
           }
           await this.refreshBalance()
-
-          this.stopTimer()
+          this.countdownText = '-'
+          // this.stopTimer()
         }
         this.state.pro.lock = false
       },
@@ -228,7 +228,7 @@ export default {
       this.countdownTimer = setInterval(this.doCountdown, 1000)
     },
     doCountdown () {
-      let num = parseInt(this.countdownText, 10)
+      let num = parseInt(this.countdownText, 10) || 1
       num--
       if (num < 0) {
         this.stopTimer()

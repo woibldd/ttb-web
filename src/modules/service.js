@@ -55,7 +55,6 @@ const service = {
    */
   sendCode (data) {
     let url = `user/register/${data.by}/code`
-    let params = data
     return request(url, data)
   },
   sendVerifyEmail () {
