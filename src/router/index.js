@@ -332,7 +332,7 @@ let router = new Router({
           ]
         },
         {
-          path: 'address',
+          path: 'address/:currency?',
           name: 'address',
           component: FundAddress
         }

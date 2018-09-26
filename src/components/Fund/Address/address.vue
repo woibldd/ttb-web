@@ -107,7 +107,6 @@ export default {
   },
   methods: {
     copy (row) {
-      console.log(row)
       copyToClipboard(row.address)
       utils.success(this.$i18n.t('copyed'))
     },
@@ -131,7 +130,13 @@ export default {
       await service.getAllCoinTypes().then(res => {
         if (res && res.data) {
           this.allCoins = res.data
-          this.selectCoin = this.allCoins[0]
+          if (this.$route.params.currency) {
+            this.selectCoin = this.allCoins.find(item => {
+              return item.currency === this.$route.params.currency
+            })
+          } else {
+            this.selectCoin = this.allCoins[0]
+          }
         }
       })
     },

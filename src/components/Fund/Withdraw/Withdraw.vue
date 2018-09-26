@@ -364,7 +364,8 @@ export default {
       this.showModal = false
     },
     addNewAddr () {
-      this.$router.push('/fund/address')
+      const url = '/fund/address/' + this.selectCoin.currency
+      this.$router.push(url)
     }
   }
 }
