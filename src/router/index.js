@@ -106,7 +106,8 @@ let router = new Router({
         auth: false
       },
       component: isMobile ? h5index : HomeNew
-    }, {
+    },
+    {
       path: '/h5',
       name: 'hlogin',
       meta: {
@@ -116,7 +117,8 @@ let router = new Router({
         zendeskWidget: false
       },
       component: h5login
-    }, {
+    },
+    {
       path: '/h5-index',
       name: 'h5index',
       meta: {
@@ -169,6 +171,7 @@ let router = new Router({
       meta: {
         auth: true,
         nav: true,
+        footer: true,
         class: 'dark',
         mobileNav: isMobile
       },

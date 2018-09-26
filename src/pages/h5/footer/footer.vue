@@ -135,7 +135,6 @@
   </section>
 </template>
 <script>
-import './footer.scss'
 import { state } from '@/modules/store'
 
 export default {
@@ -174,3 +173,6 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+@import './footer.scss';
+</style>

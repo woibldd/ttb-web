@@ -28,9 +28,9 @@
       v-show="showFooter"/>
     <mobile-footer
       ref="footer"
-      v-if="footer === 'mobile'"
+      v-if="showFooter && footer === 'mobile'"
       :fixed="fixed"
-      v-show="showFooter"/>
+    />
     <v-notify-list/>
     <div
       class="home-ball"

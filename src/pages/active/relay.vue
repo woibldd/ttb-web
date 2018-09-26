@@ -2,7 +2,11 @@
   <div class="page-home">
     <div class="header">
       <v-nav
+        v-if="!isMobile"
         is-home="true"/>
+      <mobile-nav
+        v-if="isMobile"
+      />
     </div>
     <div class="banner">
       <div class="banner_txt">
@@ -173,10 +177,13 @@
 import VNav from '@/components/VNav3'
 import ws from '@/modules/ws'
 import service from '@/modules/service'
+import utils from '@/modules/utils'
 import { pairfix } from '@/mixins/index'
+import responsiveScale from '@/mixins/responsiveScale'
+import MobileNav from '@/components/Mobile/MobileNav.vue'
 
 export default {
-  mixins: [ pairfix ],
+  mixins: [ pairfix, responsiveScale ],
   data () {
     return {
       pairs: ['BTC_USDT', 'ETH_USDT', 'ETH_BTC'],
@@ -186,11 +193,13 @@ export default {
         ETH_USDT: [],
         ETH_BTC: []
       },
-      relayTotal: {}
+      relayTotal: {},
+      isMobile: utils.isMobile()
     }
   },
   components: {
-    VNav
+    VNav,
+    MobileNav
   },
   created () {
     this.pairs.forEach(pair => {
