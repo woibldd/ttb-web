@@ -34,7 +34,7 @@
       <div class="fund-item-other mb-14">
         <span
           :class="['quick-btn mr-10', selectCoin.currency === c.currency && 'selected']"
-          @click="quickSelectCoin(c)"
+          @click.prevent="quickSelectCoin(c)"
           v-for="(c, idx) in allCoins"
           :key="idx">
           {{ c.currency }}
@@ -63,7 +63,7 @@
         </div>
       </div>
       <div
-        @click="addNewAddr"
+        @click.prevent="addNewAddr"
         class="fund-item-other withdraw-new-address mt-14 mb-24 default">
         <span class="add-icon mr-10">+</span>{{ $t("add_withdraw_addr") }}
       </div>
@@ -100,7 +100,7 @@
       <div class="fund-item-other">
         <v-btn
           style="width: 200px"
-          @click="ensure"
+          @click.prevent="ensure"
           :disabled="disableBtn"
           :label="$t('withdraw_confirm')"/>
       </div>

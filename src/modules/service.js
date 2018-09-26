@@ -367,7 +367,7 @@ const service = {
     // })
   },
   getCommissionList (data) {
-    return request('user/brokerage/list', data)
+    return request('mine/invite/list', data)
   },
   /**
    * 登录历史

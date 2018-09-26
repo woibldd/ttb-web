@@ -425,5 +425,6 @@
   "comptright": "5.确权完成，开启发币：确权完成后，平台会向用户发放IX，未挖矿成功部分资金解冻 。",
   "totalamount": "6.挖矿信息：IX挖矿总额度上线为1000,000,000IX，每个用户抢购额度位10-250000IX，1IX≈0.2CNY。",
   "actbeloplat": "7.活动最终解释权归IX.COM平台所有。",
-  "activity_max_input": "输入范围：20000-250000"
+  "activity_max_input": "输入范围：20000-250000",
+  "more_record": "更多记录"
 }
