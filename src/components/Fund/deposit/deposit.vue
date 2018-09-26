@@ -64,7 +64,6 @@
   </div>
 </template>
 <script>
-import './deposit.scss'
 import copyToClipboard from 'copy-to-clipboard'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
@@ -82,12 +81,10 @@ export default {
     }
   },
   async created () {
-    console.log(this.$route.params, 'allcointype')
-
     this.getDepositHistory()
     await this.getAllCoinTypes()
     await this.getCoinAddress()
-    this.setQr(this.address)// TODO 这个咋整
+    this.setQr(this.address)
   },
   methods: {
     copy () {
@@ -160,3 +157,6 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+@import './deposit.scss';
+</style>

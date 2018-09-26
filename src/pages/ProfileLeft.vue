@@ -72,7 +72,7 @@ export default{
   */
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .profile-left-container {
   float: left;
   .left-menu-nobottom {

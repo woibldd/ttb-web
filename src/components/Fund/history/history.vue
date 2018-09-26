@@ -239,9 +239,8 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .fund-history-container {
-
     .fund-total {
         margin-top: 45px;
         margin-bottom: 58px;

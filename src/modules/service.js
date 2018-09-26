@@ -356,12 +356,22 @@ const service = {
       rmCache(key)
     }
   },
-  getMyInviteList () {
-    return request('user/invitation/list')
+  /**
+   * 邀请记录
+   */
+  getMyInviteList (data) {
+    return request('user/invitation/list', data)
+    // .then(resp => {
+    //   resp.data = resp.data.concat(resp.data).concat(resp.data)
+    //   return resp
+    // })
   },
-  getTerminalDate () {
-    return request('get_terminal_date')
+  getCommissionList (data) {
+    return request('user/brokerage/list', data)
   },
+  /**
+   * 登录历史
+   */
   getLoginHistory () {
     return request('user/login/history')
   },

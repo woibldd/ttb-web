@@ -40,5 +40,6 @@ export default {
 }
 </script>
 <style lang="scss">
-@import "../../styles/reset.scss";
+@import "~@/styles/reset";
+@import "~@/styles/index";
 </style>

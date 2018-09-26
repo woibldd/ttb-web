@@ -143,6 +143,8 @@ import VBtn from '@/components/VBtn'
 import ImageUpload from '@/components/common/ix-upload'
 import {state} from '@/modules/store'
 import utils from '@/modules/utils'
+import qs from 'query-string'
+const { reload } = qs.parse(location.search)
 let kycInfo = {}
 export default {
   name: 'SafeVerified',
@@ -285,7 +287,7 @@ export default {
     if (!res.code) {
       kycInfo = res.data
       if (kycInfo.state !== 0) {
-        if (kycInfo.state === -1) {
+        if (kycInfo.state === -1 && reload) {
           next()
           return
         }

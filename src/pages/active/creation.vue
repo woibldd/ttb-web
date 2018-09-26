@@ -3,7 +3,9 @@
     <div class="header">
       <v-nav2
         is-home="true"
+        v-if="!isMobile"
       />
+      <mobile-nav v-if="isMobile"/>
     </div>
     <div class="banner">
       <div class="banner-txt"/>
@@ -17,9 +19,9 @@
         <div class="cre_jd">
           <div
             class="cre_jdc"
-            style="width:50%">
+            :style="{width: progress+'%'}">
             <p>
-              <em>50%</em>
+              <em>{{ progress }}%</em>
             </p>
           </div>
           <span class="cre slt">0%</span>
@@ -29,14 +31,13 @@
           class="cre_jdt cr_jd_lt"
           id="content">
           <p>
-            <span>{{ $t('Openingtime') }}</span>
-            {{ $t('Ota') }}
+            <span>{{ $t('Openingtime') }}</span>  {{ $t('Ota') }}
           </p>
-          <p><span>{{ $t('distime') }}</span>{{ $t('distimea') }}</p>
+          <p><span>{{ $t('distime') }}</span> {{ $t('distimea') }}</p>
         </div>
         <div class="cre_jdt cr_jd_rt">
-          <p><span>{{ $t('sinin') }}</span>10-250000 ix</p>
-          <p><span>{{ $t('Priceof') }}</span>1ix=0.00289855usdt=0.00000045btc</p>
+          <p><span>{{ $t('sinin') }}</span> 10-250000 IX</p>
+          <p><span>{{ $t('Priceof') }}</span> 1IX = 0.00289855USDT = 0.00000045BTC</p>
         </div>
       </div>
       <div class="tr">
@@ -46,11 +47,19 @@
           </span>
           <div class="tr_dc">
             <input
-              type="text"
+              type="number"
+              min="20000"
+              step="1"
+              @input="onAmountInput"
+              max="250000"
+              :placeholder="$t('activity_max_input')"
+              v-model="params.amount"
               class="tr-inp-t" >
             <span class="tr-tlt">IX</span>
           </div>
-          <div class="tr-ts">{{ $t('entexceeds') }}</div>
+          <div
+            class="tr-ts"
+            v-show="amount_error">{{ amount_error }}</div>
         </div>
         <div class="tr_d">
           <span class="tr_dt">
@@ -58,22 +67,43 @@
           </span>
           <div class="tr_dc">
             <input
-              type="text"
+              type="number"
+              min="0"
+              :max="balance[currency].available"
+              @input="onValueInput"
+              v-model="params.value"
+              placeholder="0.00000000"
               class="tr-inp-t" >
-            <select name="">
-              <option value="">usdt</option>
-              <option value="">usdt</option>
-              <option value="">usdt</option>
+            <select
+              v-model="currency"
+              @change="onAmountInput">
+              <option
+                :value="c"
+                v-for="c in supportCurrency"
+                :key="c"
+              >
+                {{ c }}
+              </option>
             </select>
             <div class="sjb"/>
           </div>
-          <div class="tr-ts">{{ $t('entexceeds') }}</div>
+          <div
+            class="tr-ts"
+            v-show="value_error">{{ value_error }}</div>
         </div>
-        <p class="tr_ct">{{ $t('available') }}666.22 usdt<a href="">{{ $t('TopUp') }}</a></p>
-        <p class="tr_ct tmb">{{ $t('available') }}666.22 btc<a href="">{{ $t('TopUp') }}</a></p>
+        <p class="tr_ct">{{ $t('available') }} {{ balance.USDT.available | round(4) }} USDT<router-link :to="{name: 'deposit'}">{{ $t('TopUp') }}</router-link></p>
+        <p class="tr_ct tmb">{{ $t('available') }} {{ balance.BTC.available | round(4) }} BTC <router-link :to="{name: 'deposit'}">{{ $t('TopUp') }}</router-link></p>
 
         <div class="inp_box">
-          <button>{{ $t('mined') }}</button>
+          <v-btn
+            class="btn"
+            height="70"
+            fontsize="24"
+            :loading="loading"
+            @click.prevent="submit"
+            :disabled="btnDisabled"
+            :label="btnLable"
+          />
         </div>
       </div>
     </div>
@@ -115,23 +145,123 @@
 </template>
 <script>
 import VNav2 from '@/components/VNav3'
+import MobileNav from '@/components/Mobile/MobileNav.vue'
+import utils from '@/modules/utils'
 import VBtn from '@/components/VBtn'
+import service from '@/modules/service'
+import {state} from '@/modules/store'
+import responsiveScale from '@/mixins/responsiveScale'
+const MIN_BUY_UNIT = 10
+const MAX_BUY_UNIT = 250000
 
 export default {
+  mixins: [responsiveScale],
   data () {
     return {
-
+      state,
+      loading: false,
+      isMobile: utils.isMobile(),
+      supportCurrency: ['USDT', 'BTC'],
+      currency: 'USDT',
+      progress: 20,
+      balance: {
+        BTC: {available: '0'},
+        USDT: {available: '0'}
+      },
+      rates: {
+        BTC: '0.00000045',
+        USDT: '0.00289855'
+      },
+      params: {
+        value: '',
+        amount: ''
+      },
+      value_error: '',
+      amount_error: ''
     }
   },
   components: {
     VBtn,
+    MobileNav,
     VNav2
+  },
+  computed: {
+    isLogin () {
+      return this.state.userInfo !== null
+    },
+    btnDisabled () {
+      return !this.isLogin || !this.params.amount || this.amount_error || this.value_error
+    },
+    btnLable () {
+      if (!this.isLogin) {
+        return this.$i18n.t('signin')
+      } else {
+        return this.$i18n.t('mined')
+      }
+    }
+  },
+  methods: {
+    async fetch () {
+      if (this.isLogin) {
+        let result = await service.getBalance()
+        if (!result.code && result.data) {
+          this.balance.USDT = result.data.filter(item => item.currency === 'USDT')[0] || { available: '0' }
+          this.balance.BTC = result.data.filter(item => item.currency === 'BTC')[0] || { available: '0' }
+        }
+      }
+    },
+    onAmountInput () {
+      this.amount_error = ''
+      this.value_error = ''
+      let value = this.$big(this.params.amount || 0)
+      if (value.lt(MIN_BUY_UNIT)) {
+        value = this.$big(MIN_BUY_UNIT)
+        this.params.amount = value.toString()
+        // this.amount_error = this.$i18n.t('entexceeds')
+      }
+      if (value.gt(MAX_BUY_UNIT)) {
+        value = this.$big(MAX_BUY_UNIT)
+        this.params.amount = value.toString()
+        // this.amount_error = this.$i18n.t('entexceeds')
+      }
+      let rates = this.$big(this.rates[this.currency])
+      let amount = value.times(rates).round(8, this.C.ROUND_HALF_UP).toString()
+      this.params.value = amount
+    },
+    onValueInput () {
+      this.value_error = ''
+      this.amount_error = ''
+      let value = this.$big(this.params.value || 0)
+      if (value.gt(this.balance[this.currency].available)) {
+        value = this.$big(this.balance[this.currency].available)
+        this.params.value = value
+        this.value_error = this.$i18n.t('accbalanient')
+      }
+      let rates = this.$big(this.rates[this.currency])
+      let amount = value.div(rates).round(8, this.C.ROUND_HALF_UP)
+      if (amount.gt(MAX_BUY_UNIT) || amount.lt(MIN_BUY_UNIT)) {
+        this.amount_error = this.$i18n.t('entexceeds')
+        return
+      }
+      this.params.amount = amount.toString()
+    },
+    submit () {
+      if (this.value_error || this.amount_error) {
+        return
+      }
+      this.loading = true
+      // todo sumit
+    }
+  },
+  created () {
+    this.fetch()
   }
 }
 </script>
 <style lang="scss" scoped>
   @import "~@/styles/vars";
   @import "~@/styles/mixins";
+
   .page-home{
     background-color: #262D36;
     background-image: url(/static/active/creation/banner.jpg);
@@ -226,7 +356,7 @@ export default {
       }
       .cre{
         position: absolute;
-        top: -36px;
+        top: 10px;
       }
       .slt{
         left: 0;
@@ -307,8 +437,19 @@ export default {
           outline: medium;
           background: none;
           border: none;
+          font-size: 18px;
+          color: #ffffff;
           text-indent: 2em;
-          color: #fff;
+          appearance: none;
+
+          &::placeholder {
+            color: #446683;
+          }
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+              -webkit-appearance: none;
+          }
+
           &.tr-inp-t{
             width: 100%;
           }
@@ -369,15 +510,22 @@ export default {
     }
   }
   .inp_box{
-    button{
+    .btn{
       width: 100%;
       height: 70px;
-      background: #353F4D;
       border-radius: 5px;
       border: none;
       color: #fff;
       font-size: 24px;
       margin-top: 20px;
+
+      &.disabled {
+        background: #353F4D;
+
+        &:hover {
+          background: #353F4D;
+        }
+      }
     }
   }
   .process{

@@ -156,9 +156,9 @@ footer {
   display: inline-block;
   vertical-align: top;
 }
-.logo {
-  @include bg-retina($logo-pic, 'png', $logo-bg-width, $logo-bg-height);
-}
+// .logo {
+//   @include bg-retina($logo-pic, 'png', $logo-bg-width, $logo-bg-height);
+// }
 .panel {
   background-color: white;
 }

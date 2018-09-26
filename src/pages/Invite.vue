@@ -52,7 +52,7 @@
             <div class="tbody pb-20">
               <div
                 class="empty"
-                v-if="list.length === 0">
+                v-if="invitationList.list.length === 0">
                 <span
                   class="text"
                   @click="goInvite"
@@ -61,11 +61,19 @@
               <div
                 v-else
                 class="row pt-20 pl-20 pr-20"
-                v-for="item in list"
+                v-for="item in invitationList.list"
                 :key="item.id">
                 <div class="td">{{ item.phone || item.email }}</div>
                 <div class="td">{{ item.register_time | ts2date }}</div>
               </div>
+            </div>
+            <div
+              class="pagination mt-10"
+              v-if="false">
+              <ix-pagination
+                :page.sync="invitationList.page"
+                :is-end.sync="invitationList.isEnd"
+                :func="getInviteList"/>
             </div>
           </div>
         </div>
@@ -81,7 +89,7 @@
             <div class="tbody pb-20">
               <div
                 class="empty"
-                v-if="clist.length === 0">
+                v-if="commissionList.list.length === 0">
                 <span
                   class="text"
                   v-html="$t('invite_commission_text')"/>
@@ -89,7 +97,7 @@
               <div
                 v-else
                 class="row pt-20 pl-20 pr-20"
-                v-for="item in clist"
+                v-for="item in commissionList.list"
                 :key="item.id">
                 <div class="td">{{ item.phone || item.email }}</div>
                 <div class="td">{{ item.register_time | ts2date }}</div>
@@ -108,19 +116,35 @@ import copyToClipboard from 'copy-to-clipboard'
 import service from '@/modules/service'
 import utils from '@/modules/utils'
 import {state} from '@/modules/store'
+import ixPagination from '@/components/common/ix-pagination'
 const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
+
+const PageSize = 10
 
 export default {
   name: 'Invite',
   components: {
+    ixPagination
   },
   data () {
     return {
       state,
       show: false,
       qrReady: false,
-      list: [],
-      clist: []
+      invitationList: {
+        list: [],
+        page: 1,
+        size: PageSize + 1,
+        isEnd: false
+      },
+      commissionList: {
+        list: [],
+        page: 1,
+        size: PageSize + 1,
+        isEnd: false
+      },
+      isLastInvitation: false,
+      isLastCommission: false
     }
   },
   computed: {
@@ -149,11 +173,33 @@ export default {
       utils.success(this.$i18n.t('link_copyed'))
     },
     async getInviteList () {
-      let result = await service.getMyInviteList()
+      let result = await service.getMyInviteList({
+        page: this.invitationList.page,
+        size: PageSize + 1
+      })
       if (result && !result.code) {
-        this.list = result.data
+        this.invitationList.list = result.data
+        if (result.data.length <= PageSize) {
+          this.invitationList.isEnd = true
+        } else {
+          this.invitationList.isEnd = false
+        }
       } else {
         utils.alert(result.message)
+      }
+    },
+    async getCommissionList () {
+      let result = await service.getCommissionList({
+        page: this.commissionList.page,
+        size: PageSize + 1
+      })
+      if (result.code) {
+        this.commissionList.list = result.data
+        if (result.data.length <= PageSize) {
+          this.commissionList.isEnd = true
+        } else {
+          this.commissionList.isEnd = false
+        }
       }
     },
     async setQr (url) {
@@ -179,7 +225,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   @import "../styles/vars";
   @import '../styles/mixins';
 
@@ -343,6 +389,10 @@ export default {
             color: $text-weak;
           }
         }
+      }
+      .pagination {
+        display: flex;
+        justify-content: flex-end;
       }
     }
   }

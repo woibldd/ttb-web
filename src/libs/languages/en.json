@@ -556,5 +556,6 @@
   "aends": "4.Activity Ends: Innovative Mining will end according to the time expiration, reach the amount limit or the exchange will terminate early according to the market conditions. The final IX quota will be allocated, depending on the amount of mined coins and the success of all mining users involved in the Innovative  Mining.",
   "comptright": "5.Complete the right confirmation to open the currency: After the confirmation is completed, the platform will issue IX to the user, and part funds which is not successful will be unfrozen.",
   "totalamount": "6.Mining Information: The total amount of IX mining is 1000,000,000 IX, and each user buys a quota of 10-250000 IX, 1 IX ≈ 0.2CNY.",
-  "actbeloplat": "7.The final interpretation right of this activity belongs to the IX.COM platform."
+  "actbeloplat": "7.The final interpretation right of this activity belongs to the IX.COM platform.",
+  "activity_max_input": "range: 20000-250000"
 }

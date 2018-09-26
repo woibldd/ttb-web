@@ -130,7 +130,7 @@ let router = new Router({
       component: h5index
     },
     {
-      path: '/active/creation',
+      path: '/activity/creation',
       name: 'creation',
       component: creation
     },
