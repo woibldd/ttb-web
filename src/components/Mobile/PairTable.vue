@@ -7,11 +7,11 @@
       v-for="pair in sortedList"
       :key="pair.name"
       v-if="pair.tick">
-      <div class="row">
+      <div class="row" @click="toExchange(pair.name)">
         <div class="col updown">
           <span
             class="up pair"
-            @click="toExchange(pair.name)">{{ pair.product }}/{{ pair.currency }}</span>
+            >{{ pair.product }}/{{ pair.currency }}</span>
           <span class="down">{{ $t('homechart_24h_v') }} {{ pretty(pair.tick.volume_24h) }}</span>
         </div>
         <div class="col col-right">

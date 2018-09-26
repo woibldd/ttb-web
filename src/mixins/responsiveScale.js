@@ -25,7 +25,7 @@ export default {
     setResponsivePage () {
       let content = ''
       if (isResponsive > 0) {
-        content = 'width=device-width, initial-scale=0.0'
+        content = 'width=device-width'
         if (isIos) {
           // content = content.replace(/,/g, ';')
         }

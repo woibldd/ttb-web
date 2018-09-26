@@ -13,7 +13,7 @@
       v-if="showNav && !isMobile"
       :class="[navClass]"/>
     <mobile-nav
-      v-if="isMobile"
+      v-if="showNav && isMobile"
       :class="[navClass]"/>
     <div
       class="main-container"

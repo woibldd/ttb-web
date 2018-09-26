@@ -5,6 +5,9 @@
     <v-nav
       pro="1"
       v-if="!isMobile"/>
+    <mobile-nav
+      v-if="isMobile"
+      />
     <div class="container-trade-panel">
       <div class="ix-row">
         <div
@@ -95,8 +98,9 @@ import _ from 'lodash'
 import { local, state } from '@/modules/store'
 import service from '@/modules/service'
 import utils from '@/modules/utils'
-
+import MobileNav from '@/components/Mobile/MobileNav.vue'
 import VNav from '@/components/VNav3'
+
 import TradingView from '@/components/Trading/TradingView'
 import Order from '@/components/Trading/Order'
 import Deal from '@/components/Trading/Deal'
@@ -121,7 +125,8 @@ export default {
     // DepthChart,
     Orderbook,
     PairNav,
-    Operate
+    Operate,
+    MobileNav
   },
   data () {
     return {
