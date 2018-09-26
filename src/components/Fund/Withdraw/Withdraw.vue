@@ -45,6 +45,10 @@
         <div class="row__value">
           <div class="withdraw-address">
             <el-select
+              class="select-address"
+              filterable
+              allow-create
+              default-first-option
               v-model="selectAddress"
               :placeholder="$t('please_choose')"
               :no-data-text="$t('no_data')"
