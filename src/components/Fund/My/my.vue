@@ -101,6 +101,7 @@ export default {
     getAccountBalanceList () {
       return service.getAccountBalanceList().then(res => {
         this.tableData = (res.data || []).map(item => {
+          item.rates = item.rates || {}
           item.locking = this.$big(item.ordering || 0).plus(this.$big(item.withdrawing || 0)).toString()
           item.amount = this.$big(item.locking).plus(this.$big(item.available)).round(8, this.C.ROUND_DOWN).toString()
           item.estValue = this.getEstValue(item)
