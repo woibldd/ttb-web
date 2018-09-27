@@ -9,6 +9,8 @@
     <link rel="shortcut icon" type="image/x-icon" href="<%= htmlWebpackPlugin.options.static %>/static/icon.png">
     <title><%= htmlWebpackPlugin.options.theme.exchangeName %></title>
     <style>.page-mask {position: fixed;width: 100%;height: 100%;left: 0;right: 0;top: 0;bottom: 0;background-color: transparent;z-index: 99999;cursor: progress;}.page-loading {background: #283B4C;opacity: 0;visibility: hidden;transition: opacity 300ms, visibility 0s 300ms;}.page-loading.show {opacity: 1;visibility: visible;transition: none;}.k-square-holder {width: 50px;position: absolute;text-align:center;bottom: 50%;left: 50%;}.k-square3 {display: inline-block;width: 15px;height: 15px;margin-right:5px;background: #C9A96C;opacity: 0.2;animation: k-loadingQ 2s infinite;opacity: 0.5;}.k-square3a {transform: translate(0,-25px);}.k-square3b {transform: translate(25px,0);}.k-square3c {transform: translate(-25px,0);}.k-square3d {transform: translate(0,25px);}@keyframes k-loadingQ {33% {  transform: translate(0,0);  opacity: .7;}66% {  transform: translate(0,0);  opacity: .7;}}</style>
+    <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=a446c17d-3693-473c-a9d1-ba99e187a0fc">
+    </script>
 </head>
 <body>
   <div class="page-loading page-mask show">
@@ -29,6 +31,17 @@
       gtag('config', '<%= htmlWebpackPlugin.options.theme.googleAnalyticsId %>');
     </script>
   <% } %>
+  <!--Start of ixcustomer Zendesk Widget script-->
+    <script>
+      window.zESettings = { webWidget: { offset: { mobile: { horizontal: '-1000px', vertical: '-1000px' } } } };
+    </script>
+    
+  <!-- End of ixcustomer Zendesk Widget script -->
+  <!-- <style id="ze-style">
+    iframe#launcher {
+      visibility: hidden;
+    }
+  </style> -->
     <script type="text/javascript">window.grayline=false</script>
   <!-- 国内使用 滑块验证，如果主要客户是国外用户，需要替换以下地址-->
   <!-- <script type="text/javascript" async charset="utf-8" src="//g.alicdn.com/sd/ncpc/nc.js?t=2015052012"></script> -->
