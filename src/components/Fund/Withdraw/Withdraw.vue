@@ -100,7 +100,7 @@
       <div class="fund-item-other">
         <v-btn
           style="width: 200px"
-          @click.prevent="ensure"
+          @click="ensure"
           :disabled="disableBtn"
           :label="$t('withdraw_confirm')"/>
       </div>

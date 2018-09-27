@@ -110,7 +110,7 @@ export default {
       })
     },
     getEstValue (item) {
-      let res = this.$big(item.amount).times(this.$big(item.rates[this.unit]))
+      let res = this.$big(item.amount).times(this.$big(item.rates[this.unit] || 0))
       let num = 4
       if (this.unit === 'USD') {
         num = 8

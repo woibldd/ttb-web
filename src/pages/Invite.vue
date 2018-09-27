@@ -191,7 +191,7 @@ export default {
         size: PageSize
       })
       if (result && !result.code) {
-        if (!result.data || result.data.length === 0) {
+        if (!result.data || result.data.length < PageSize) {
           this.invitationList.isEnd = true
           return
         }
@@ -211,7 +211,7 @@ export default {
         size: PageSize
       })
       if (!result.code) {
-        if (!result.data || result.data.length === 0) {
+        if (!result.data || result.data.length < PageSize) {
           this.commissionList.isEnd = true
           return
         }
