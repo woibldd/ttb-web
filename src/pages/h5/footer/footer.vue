@@ -81,6 +81,33 @@
             target="_blank">{{ $t('footer_private') }}</router-link>
         </div>
       </div>
+      <div class="footer-row">
+        <div
+          class="row-pick-up"
+          @click="pickUp('qrcode')">
+          <div
+            class="row__title"
+            v-t="'footer_contract'"/>
+          <div
+            class="row__pick__arrow">
+            <icon
+              name="arrow-down"
+              :class="[list.qrcode && 'up']"/>
+          </div>
+        </div>
+        <div
+          class="row-content"
+          v-if="list.qrcode">
+          <div class="qrcode">
+            <img
+              src="~@/assets/contact.png"
+            >
+            <p
+              class="contact_desc mt-10 mb-10"
+              v-t="'footer_contract_desc'"/>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="h5-contact-info">
       <div class="contact-list">
@@ -143,7 +170,8 @@ export default {
       list: {
         service: false,
         tool: false,
-        intro: false
+        intro: false,
+        qrcode: false
       },
       state
     }

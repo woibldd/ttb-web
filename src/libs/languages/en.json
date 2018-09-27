@@ -469,6 +469,8 @@
   "footer_services": "Services",
   "footer_tools": "Tools",
   "footer_terms": "Terms",
+  "footer_contract": "Contact",
+  "footer_contract_desc": "Scan the QR Code to add online customer service",
   "user_guide": "User Guide",
   "withdraw_need_verify": "Finish Followings to Withdraw",
   "withdraw_need_verify_note": "For the sake of your asset security,please complete:",

@@ -33,6 +33,17 @@
         flex-direction: column;
         justify-content: flex-start;
 
+        .qrcode {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          .contact_desc {
+            color: #999999;
+            font-size: rem(12);
+          }
+        }
+
         a {
             display: inline-block;
             margin-bottom: rem(20);
