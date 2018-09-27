@@ -193,9 +193,9 @@ export default {
       if (result && !result.code) {
         if (!result.data || result.data.length < PageSize) {
           this.invitationList.isEnd = true
-          return
+        } else {
+          this.invitationList.isEnd = false
         }
-        this.invitationList.isEnd = false
         if (this.invitationList.list.length > 0) {
           this.invitationList.list = this.invitationList.list.concat(result.data)
         } else {
@@ -213,10 +213,11 @@ export default {
       if (!result.code) {
         if (!result.data || result.data.length < PageSize) {
           this.commissionList.isEnd = true
-          return
+        } else {
+          this.commissionList.isEnd = false
         }
-        this.commissionList.isEnd = false
-        if (this.commissionList.list.length > 0) {
+
+        if (this.commissionList.list.length >= 0) {
           this.commissionList.list = this.commissionList.list.concat(result.data)
         } else {
           this.commissionList.list = result.data

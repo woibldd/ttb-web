@@ -130,7 +130,7 @@ export default {
     },
     zendeskWidget (show) {
       window.zE && window.zE(function () {
-        if (utils.isApp() || utils.isMobile()) {
+        if (utils.isMobile()) {
           return window.zE.hide()
         }
         if (show && zeStyleEl && zeStyleEl.parentNode) {
