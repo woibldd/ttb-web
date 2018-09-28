@@ -460,12 +460,12 @@ const service = {
 
   /** 登录验证修改 */
   // 获取修改密码邮箱验证码 POST
-  getCode4modifyEmailPassword () {
-    return request('/user/modify/password/email/code')
+  getCode4modifyEmailPassword (data) {
+    return request('/user/modify/password/email/code', data)
   },
   // 获取修改密码手机验证码 POST /user/modify/password/phone/code
-  getCode4modifyPhonePassword () {
-    return request('/user/modify/password/phone/code')
+  getCode4modifyPhonePassword (data) {
+    return request('/user/modify/password/phone/code', data)
   },
   // 修改密码 POST
   modifyPassword () {
