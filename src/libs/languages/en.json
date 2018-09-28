@@ -560,5 +560,7 @@
   "totalamount": "6.Mining Information: The total amount of IX mining is 1000,000,000 IX, and each user buys a quota of 10-250000 IX, 1 IX ≈ 0.2CNY.",
   "actbeloplat": "7.The final interpretation right of this activity belongs to the IX.COM platform.",
   "activity_max_input": "range: 20000-250000",
-  "more_record": "More"
+  "more_record": "More",
+  "first": "First ",
+  "bitcoin_equity_certificate": "exchange regards  Bitcoin as equity certificate"
 }
