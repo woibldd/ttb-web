@@ -485,6 +485,7 @@
   "app_download_ios": "Guide for IOS",
   "my_balance_equal": "Available balance",
   "fund_reward": "Reward",
+  "internal_transfer": "Internal Transfer",
   "contact_us": "Help",
   "exchange_area": "Transactions Area",
   "mine_progress": "Mining Progress",
@@ -566,5 +567,7 @@
   "close_verify": "Close",
   "already_closed": "Already Closed",
   "open_verify": "Open",
-  "already_open": "Already Open"
+  "already_open": "Already Open",
+  "transfer_in": "In",
+  "transfer_out": "Out"
 }
