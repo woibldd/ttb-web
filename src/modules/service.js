@@ -336,17 +336,12 @@ const service = {
   getTransferList (data) {
     return request('transfer/list', data)
   },
-  geetestBegin () {
-    return request('geetest/begin')
-  },
-  geetestVerify () {
-    return request('geetest/verify')
-  },
-  getPresellLock () {
-    return request('presell/query')
-  },
-  confirmPresellLock (data) {
-    return request('presell/lock', data)
+  /**
+   * 获取内部转账历史
+   * @param {page,size} data
+   */
+  getInternalHistory (data) {
+    return request('account/balance/transfer/list', data)
   },
   rmCache (key) {
     rmCache(key)
@@ -457,7 +452,6 @@ const service = {
   getDealHistory (pair, data) {
     return quote(`history/${pair}`, data)
   }
-
 }
 
 export async function fetch (url, body, options, method = 'post') {
