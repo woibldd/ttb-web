@@ -1,28 +1,13 @@
 <template>
   <div class="user-center-right">
-    <router-view></router-view>    
+    <router-view/>
   </div>
 </template>
 
 <script>
-  import service from '@/modules/service'
-
-  export default {
-    name: 'ProfileSafety',
-    components: {
-    },
-    data () {
-      return {
-
-      }
-    },
-    computed: {
-
-    },
-    methods: {
-
-    }
-  }
+export default {
+  name: 'ProfileSafety'
+}
 </script>
 <style lang="scss" scoped>
   @import "../styles/vars";

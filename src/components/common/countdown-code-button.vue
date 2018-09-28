@@ -109,3 +109,10 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.mobile {
+  .sms-btn {
+    font-size: 12px;
+  }
+}
+</style>

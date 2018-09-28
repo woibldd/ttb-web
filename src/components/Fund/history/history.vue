@@ -157,6 +157,9 @@ export default {
       this.getFundHistory(this.type)
     },
     formatTime (time) {
+      if (!time) {
+        return '--'
+      }
       return utils.dateFormatter(time, 'Y-M-D')
     },
     hasComplated (row) {
@@ -214,6 +217,7 @@ export default {
         this.total = 0
         if (!res.code && res.data) {
           res.data.map(item => {
+            item.rates = item.rates || {}
             item.locking = this.$big(item.ordering || 0).plus(this.$big(item.withdrawing || 0)).toString()
             item.amount = this.$big(item.locking).plus(this.$big(item.available)).round(8, this.C.ROUND_DOWN).toString()
             item.estValue = this.getEstValue(item)
@@ -224,7 +228,7 @@ export default {
       })
     },
     getEstValue (item) {
-      let res = this.$big(item.amount).times(this.$big(item.rates[this.unit]))
+      let res = this.$big(item.amount).times(this.$big(item.rates[this.unit] || 0))
       let num = 4
       if (this.unit === 'USD') {
         num = 8
@@ -241,7 +245,6 @@ export default {
 </script>
 <style lang="scss">
 .fund-history-container {
-
     .fund-total {
         margin-top: 45px;
         margin-bottom: 58px;

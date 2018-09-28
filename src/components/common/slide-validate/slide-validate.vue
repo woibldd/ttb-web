@@ -1,11 +1,10 @@
 <template>
-    <div class="v-slide-validate" id="v-slide-validate">
-
-    </div>
+  <div class="v-slide-validate" 
+id="v-slide-validate"/>
 </template>
 <script>
 export default {
-  name: 'v-validate',
+  name: 'VValidate',
   mounted () {
     const _self = this
     const nc_token = ['CF_APP_1', (new Date()).getTime(), Math.random()].join(':')
@@ -50,7 +49,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .v-slide-validate.nc-container{
         width: 280px;
         .nc_wrapper {

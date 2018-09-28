@@ -1,7 +1,9 @@
 <template>
   <div class="profile-container">
     <div class="title-box">{{ $t('identity_authentication') }}</div>
-    <div class="invinfo-box">
+    <div
+      class="invinfo-box"
+      :class="['id_type_' + id_type]">
       <div class="authen_top">
         <i class="jd"/>
         <p class="yy">
@@ -39,13 +41,16 @@
                     ref="front_mask"
                     class="mask"
                     v-if="file.dataUrl"/>
+                  <span class="upload_desc"><icon
+                    class="upload_icon"
+                    name="upload"/> {{ $t(id_type === 1 ? 'kyc_id_front_upload': 'kyc_passport_front_upload') }}</span>
                 </div>
               </template>
             </image-upload>
           </div>
           <div class="aut_up_txt">
-            <p>{{ $t('kyc_name') }}</p>
-            <p>{{ $t('kyc_id_number') }}：10010198802022222</p>
+            <!-- <p>{{ $t('kyc_name') }}</p> -->
+            <!-- <p>{{ $t('kyc_id_number') }}：10010198802022222</p> -->
           </div>
         </div>
         <div class="aut_rt">
@@ -70,13 +75,16 @@
                     ref="back_mask"
                     class="mask"
                     v-if="file.dataUrl"/>
+                  <span class="upload_desc"><icon
+                    class="upload_icon"
+                    name="upload"/> {{ $t(id_type === 1 ? 'kyc_id_back_upload' : 'kyc_passport_back_upload') }}</span>
                 </div>
               </template>
             </image-upload>
             <p>{{ $t('kyc_notice1') }}</p>
           </div>
           <div class="aut_up_txt">
-            <p>{{ $t('kyc_valid_time') }}：2018.03.22-2038.03.22</p>
+            <!-- <p>{{ $t('kyc_valid_time') }}：2018.03.22-2038.03.22</p> -->
           </div>
         </div>
       </div>
@@ -104,6 +112,9 @@
                     ref="hold_mask"
                     class="mask"
                     v-if="file.dataUrl"/>
+                  <span class="upload_desc"><icon
+                    class="upload_icon"
+                    name="upload"/> {{ $t(id_type === 1 ? 'kyc_id_hold_upload': 'kyc_passport_hold_upload') }}</span>
                 </div>
               </template>
             </image-upload>
@@ -132,6 +143,8 @@ import VBtn from '@/components/VBtn'
 import ImageUpload from '@/components/common/ix-upload'
 import {state} from '@/modules/store'
 import utils from '@/modules/utils'
+import qs from 'query-string'
+const { reload } = qs.parse(location.search)
 let kycInfo = {}
 export default {
   name: 'SafeVerified',
@@ -147,6 +160,7 @@ export default {
       uploadConfig: {
         host: '//ix-test.oss-cn-beijing.aliyuncs.com'
       },
+      id_type: 1,
       front: {
         loading: false,
         error: false,
@@ -265,14 +279,18 @@ export default {
     uploadError ({type, message}) {
       this[type].error = message
       this[type].loading = false
-      utils.alert(data.message)
+      utils.alert(message)
     }
   },
   async beforeRouteEnter (to, from, next) {
     let res = await service.getKycInfo()
     if (!res.code) {
       kycInfo = res.data
-      if (kycInfo.state != 0) {
+      if (kycInfo.state !== 0) {
+        if (kycInfo.state === -1 && reload) {
+          next()
+          return
+        }
         console.log('goto:: step3')
         next({
           name: 'KycStep3'
@@ -286,6 +304,7 @@ export default {
     this.photo1 = kycInfo.photo1
     this.photo2 = kycInfo.photo2
     this.photo3 = kycInfo.photo3
+    this.id_type = kycInfo.id_type
 
     this.front.url = this.photo1
     this.back.url = this.photo2
@@ -341,6 +360,11 @@ export default {
     width: 100%;
     margin: 20px auto 50px auto;
 
+    &.id_type_2 {
+      .aut_box .aut_rt div.aut_up .upload .up_face {
+        background-image: url(../../../assets/id-passport.png)
+      }
+    }
   }
   .authen_top{
     width: 100%;
@@ -453,6 +477,7 @@ export default {
                     .upload_box {
                       width: 100%;
                       height: 100%;
+                      @include clearfix();
                       background-repeat: no-repeat;
                       background-position: center 32px;
 
@@ -465,6 +490,14 @@ export default {
                         transform: translateY(0%);
                         transition: translateY 2s;
                         opacity: 0.5;
+                      }
+
+                      .upload_desc {
+                        position: absolute;
+                        bottom: 20px;
+                        color: #C1A538;
+                        display: block;
+                        width: 100%;
                       }
                     }
                     .img {

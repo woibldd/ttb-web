@@ -2,10 +2,12 @@
   <div class="ix-pagination-container">
     <div
       class="prev-page pa-btn "
-      @click="prev">{{ $t('last_page') }}</div>
+      @click="prev"
+      v-if="page > 1">{{ $t('last_page') }}</div>
     <div
       class="next-page pa-btn ml-20"
-      @click="next">{{ $t('next_page') }}</div>
+      @click="next"
+      v-if="!isEnd">{{ $t('next_page') }}</div>
   </div>
 </template>
 <script>
@@ -19,6 +21,13 @@ export default {
     size: {
       type: Number,
       default: 10
+    },
+    /**
+     * 最后一页 true 则不显示下一页
+     */
+    isEnd: {
+      type: Boolean,
+      default: false
     },
     func: {
       type: Function,

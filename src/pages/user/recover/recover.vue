@@ -204,15 +204,17 @@
 
 </template>
 <script>
-import slideValidate from '@/components/common/slide-validate/slide-validate.vue'
-import service from '@/modules/service'
-import {state} from '@/modules/store'
-import pwChecker from '@/modules/pw-checker'
-import ixInput from '@/components/common/ix-input/ix-input.vue'
-import utils from '@/modules/utils'
-import _ from 'lodash'
+import slideValidate from '@/components/common/slide-validate/slide-validate.vue';
+import service from '@/modules/service';
+import { state } from '@/modules/store';
+import pwChecker from '@/modules/pw-checker';
+import ixInput from '@/components/common/ix-input/ix-input.vue';
+import utils from '@/modules/utils';
+import _ from 'lodash';
+import responsive from '@/mixins/responsive';
 
 export default {
+  mixins: [responsive],
   name: 'Recover',
   components: {
     slideValidate,
@@ -244,19 +246,19 @@ export default {
       validateRules: {
         phone: {
           errTips: this.$t('bind_phone_err_format'),
-          validateFunc: (num) => {
-            return !(/\d+$/.test(num))
+          validateFunc: num => {
+            return !/\d+$/.test(num)
           }
         },
         email: {
           errTips: this.$t('err_invalid_email'),
-          validateFunc: (email) => {
-            return !(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(email))
+          validateFunc: email => {
+            return !/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(email)
           }
         },
         password: {
           errTips: this.$t('err_weak_password'),
-          validateFunc: (pswd) => {
+          validateFunc: pswd => {
             const pwCheckList = pwChecker.getState(pswd)
             return _.filter(pwCheckList, r => r.pass).length < 4
           }
@@ -336,9 +338,10 @@ export default {
       // this.disableNextBtn = false
     },
     checkParams () {
-      const err = (em, field) => ({ok: false, em, field})
+      const err = (em, field) => ({ ok: false, em, field })
       if (this.by === 'phone') {
-        if (!this.regionId) { // 这里默认选择中国86了吧，可以不需要这个验证了？
+        if (!this.regionId) {
+          // 这里默认选择中国86了吧，可以不需要这个验证了？
           return err(this.$i18n.t('region_ph'), 'regionId')
         }
         if (!this.phone) {
@@ -349,7 +352,11 @@ export default {
         if (!this.email) {
           this.triggerValidate = true
         }
-        if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(this.email)) {
+        if (
+          !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(
+            this.email
+          )
+        ) {
           this.triggerValidate = true
         }
       }
@@ -365,7 +372,7 @@ export default {
         return err(this.$i18n.t('change_password_diff'), 'password2')
       }
 
-      return {ok: true}
+      return { ok: true }
     },
     pwChange () {
       this.pwCheckList = pwChecker.getState(this.password)
@@ -377,7 +384,7 @@ export default {
       this.atPw = active
     },
     resetError () {
-      this.errmsg = ''
+      this.errmsg = '';
       this.triggerValidate = false
     },
     async getSmsCode () {
@@ -416,7 +423,7 @@ export default {
       if (res.code) {
         this.errmsg = res.message
       } else {
-        this.errmsg = ''
+        this.errmsg = '';
       }
     },
     startCountDown () {
@@ -452,5 +459,5 @@ export default {
 }
 </script>
 <style scoped lang="scss">
- @import "./recover";
+@import "./recover";
 </style>

@@ -349,12 +349,21 @@ const utils = {
     return tpl
   },
   toThousand (num = 0) {
+    if (typeof num === 'undefined') {
+      return 0
+    }
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   },
   toBig (num) {
+    if (typeof num === 'undefined') {
+      return 0
+    }
     return Big(num).toString()
   },
   toRound (num, scale = 20, rm = consts.ROUND_DOWN) {
+    if (typeof num === 'undefined') {
+      return 0
+    }
     return Big(num).round(scale, rm).toString()
   },
   toFixed (num, scale = 8, rm = consts.ROUND_DOWN) {
@@ -364,6 +373,9 @@ const utils = {
     return Big(num).round(scale, rm).toFixed(scale)
   },
   toNum (num) {
+    if (typeof num === 'undefined') {
+      return 0
+    }
     return +Big(num).toFixed(12)
   },
   unsign (num) {
@@ -397,6 +409,9 @@ const utils = {
   logE () {},
   isMobile () {
     return navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
+  },
+  isIos () {
+    return navigator.userAgent.match(/(iPhone|iPod|ios|iPad)/i)
   },
   /**
    * 脱敏

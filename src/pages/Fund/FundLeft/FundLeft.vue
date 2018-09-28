@@ -31,7 +31,7 @@ export default{
 
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .fund-left-container {
   float: left;
   .left-menu-nobottom {

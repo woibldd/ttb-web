@@ -44,12 +44,42 @@ body.router-account,
 body.router-kyc {
   background-color: $nav-2;
 }
+// body.router-profile,
+// body.router-fund,
+// body.router-relay {
+//   min-width: 1200px;
+//   &.ios {
+//     // min-width: auto;
+//   }
+// }
+body.mobile {
+  min-width: 1200px;
+  .home-ball {
+    display: none;
+  }
+}
+body.router-home {
+  min-width: auto;
+}
+body.router-account {
+  min-width: auto;
+}
+body.router-h5index {
+  min-width: auto;
+}
+
 body.router-trading {
   min-width: auto;
   background-color: #283B4C;
   overflow-x: auto;
   #app {
     min-width: 960px;
+  }
+  &.mobile {
+    min-width: 1200px;
+    &.ios {
+      min-width: auto;
+    }
   }
 }
 
@@ -126,9 +156,9 @@ footer {
   display: inline-block;
   vertical-align: top;
 }
-.logo {
-  @include bg-retina($logo-pic, 'png', $logo-bg-width, $logo-bg-height);
-}
+// .logo {
+//   @include bg-retina($logo-pic, 'png', $logo-bg-width, $logo-bg-height);
+// }
 .panel {
   background-color: white;
 }
@@ -188,31 +218,6 @@ td.right {
   font-size: 18px;
   z-index: 99999;
 }
-@media screen and (max-width: 768px) {
-  body.router-account {
-    min-width: auto;
-  }
-  .home-ball {
-    display: none;
-  }
-  // body.router-account footer {
-  //   display: none;
-  // }
-}
-
-// h5
-@media screen and (max-width: 768px) {
-    body.router-h5index {
-      min-width: auto;
-    }
-    .home-ball {
-      display: none;
-    }
-    // body.router-account footer {
-    //   display: none;
-    // }
-  }
-
 
 // element reset
 .el-form-item.is-required>.el-form-item__label:before {

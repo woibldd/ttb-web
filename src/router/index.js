@@ -29,8 +29,6 @@ const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
 const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pages/PrivacyPolicy')
 const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
 const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/ProfileSafety')
-const relay = () => import(/* webpackChunkName: "relay" */ '@/pages/active/relay')
-const creation = () => import(/* webpackChunkName: "creation" */ '@/pages/active/creation')
 const PhoneBind = () => import(/* webpackChunkName: "PhoneBind" */ '@/pages/PhoneBind')
 const SecuritySummary = () => import(/* webpackChunkName: "SecuritySummary" */ '@/pages/SecuritySummary')
 const eBind = () => import(/* webpackChunkName: "EmailBind" */ '@/pages/eBind')
@@ -49,6 +47,12 @@ const FundHistory = () => import(/* webpackChunkName: "FundHistory" */ '@/compon
 
 // h5相关页面
 const h5login = () => import(/* webpackChunkName: "h5login" */ '@/pages/h5/sign-up')
+const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index')
+
+// 活动页面
+const relay = () => import(/* webpackChunkName: "relay" */ '@/pages/active/relay')
+const creation = () => import(/* webpackChunkName: "creation" */ '@/pages/active/creation')
+const LockWarehouse = () => import(/* webpackChunkName: "LockWarehouse" */ '@/pages/active/LockWarehouse.vue')
 
 async function beforeEach (to, from, next) {
   state.loading = true
@@ -104,10 +108,11 @@ let router = new Router({
         class: 'dark',
         auth: false
       },
-      component: isMobile ? MobileHome : HomeNew
-    }, {
+      component: isMobile ? h5index : HomeNew
+    },
+    {
       path: '/h5',
-      name: 'h5index',
+      name: 'hlogin',
       meta: {
         auth: false,
         nav: false,
@@ -117,7 +122,18 @@ let router = new Router({
       component: h5login
     },
     {
-      path: '/active/creation',
+      path: '/h5-index',
+      name: 'h5index',
+      meta: {
+        auth: false,
+        nav: false,
+        footer: false,
+        zendeskWidget: false
+      },
+      component: h5index
+    },
+    {
+      path: '/activity/creation',
       name: 'creation',
       component: creation
     },
@@ -127,12 +143,17 @@ let router = new Router({
       component: relay
     },
     {
+      path: '/activity/lock',
+      name: 'LockWarehouse',
+      component: LockWarehouse
+    },
+    {
       path: '/PrivacyPolicy',
       name: 'PrivacyPolicy',
       component: PrivacyPolicy
     },
     {
-      path: '/terms',
+      path: '/services',
       name: 'terms',
       component: terms
     },
@@ -158,6 +179,7 @@ let router = new Router({
       meta: {
         auth: true,
         nav: true,
+        footer: true,
         class: 'dark',
         mobileNav: isMobile
       },
@@ -321,7 +343,7 @@ let router = new Router({
           ]
         },
         {
-          path: 'address',
+          path: 'address/:currency?',
           name: 'address',
           component: FundAddress
         }
@@ -329,10 +351,10 @@ let router = new Router({
     }
   ],
   scrollBehavior (to, from, savedPosition) {
-    if (to.name === 'trading') {
-      return { x: 0, y: 0 }
-    }
-    return null
+    // if (to.name === 'trading') {
+    return { x: 0, y: 0 }
+    // }
+    // return null
   }
 })
 

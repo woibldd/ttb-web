@@ -10,7 +10,7 @@ const Mock = () => import('./mock')
 
 const service = {
   getBanners (data = {}) {
-    data.platform = 1
+    data.platform = data.platform || 1
     return request('/announcement/list', data)
   },
   resetPassword (data) {
@@ -55,7 +55,6 @@ const service = {
    */
   sendCode (data) {
     let url = `user/register/${data.by}/code`
-    let params = data
     return request(url, data)
   },
   sendVerifyEmail () {
@@ -357,12 +356,22 @@ const service = {
       rmCache(key)
     }
   },
-  getMyInviteList () {
-    return request('user/invitation/list')
+  /**
+   * 邀请记录
+   */
+  getMyInviteList (data) {
+    return request('user/invitation/list', data)
+    // .then(resp => {
+    //   resp.data = resp.data.concat(resp.data).concat(resp.data)
+    //   return resp
+    // })
   },
-  getTerminalDate () {
-    return request('get_terminal_date')
+  getCommissionList (data) {
+    return request('mine/invite/list', data)
   },
+  /**
+   * 登录历史
+   */
   getLoginHistory () {
     return request('user/login/history')
   },
@@ -438,6 +447,9 @@ const service = {
   },
   getBonusMineTotal (data) {
     return request('bonus/btc/total', data)
+  },
+  getRelayTotal () {
+    return request('relay/query')
   },
   /* 挖矿 end */
 

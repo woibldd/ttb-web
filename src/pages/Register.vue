@@ -24,6 +24,7 @@
         <!-- <div class="error-block" v-show="errmsg">{{ errmsg }}</div> -->
         <form
           class="form"
+          @keydown.enter.stop.prevent="submit"
           onsubmit="return false"
           autocomplete="off">
           <div
@@ -205,11 +206,13 @@ import VBtn from '@/components/VBtn'
 import {state} from '@/modules/store'
 import resbg from '@/components/resbg'
 import ixInput from '@/components/common/ix-input/ix-input.vue'
+import responsive from '@/mixins/responsive'
 
 // import { MdField } from 'vue-material/dist/components'
 // import gtMixin from '@/mixins/gt'
 
 export default {
+  mixins: [responsive],
   name: 'Register',
   components: {
     VBtn,
@@ -465,7 +468,7 @@ export default {
       }
     },
     goAgreement () {
-      return '/terms'
+      return '/services'
     },
     goPrivacy () {
       return '/privacypolicy'
@@ -475,8 +478,11 @@ export default {
       this.triggerValidate = false
     },
     fixPosition () {
-      this.$refs.container.style.minHeight = window.innerHeight - (110) - (80) + 'px'
-      // this.$refs.containera.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
+      if (utils.isMobile) {
+        this.$refs.container.style.minHeight = screen.availHeight - (205) + 'px'
+      } else {
+        this.$refs.container.style.minHeight = window.innerHeight - (110) - (80) + 'px'
+      }
     }
   },
   mounted () {
@@ -484,8 +490,6 @@ export default {
     this.$nextTick(this.fixPosition)
   },
   async created () {
-    // this.gtInit()
-
     let invitorId = this.$route.query.invitor
     if (!invitorId) {
       invitorId = utils.getCookie('invitor')

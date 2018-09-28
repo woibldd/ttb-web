@@ -34,7 +34,7 @@
       <div class="fund-item-other mb-14">
         <span
           :class="['quick-btn mr-10', selectCoin.currency === c.currency && 'selected']"
-          @click="quickSelectCoin(c)"
+          @click.prevent="quickSelectCoin(c)"
           v-for="(c, idx) in allCoins"
           :key="idx">
           {{ c.currency }}
@@ -45,6 +45,10 @@
         <div class="row__value">
           <div class="withdraw-address">
             <el-select
+              class="select-address"
+              filterable
+              allow-create
+              default-first-option
               v-model="selectAddress"
               :placeholder="$t('please_choose')"
               :no-data-text="$t('no_data')"
@@ -59,7 +63,7 @@
         </div>
       </div>
       <div
-        @click="addNewAddr"
+        @click.prevent="addNewAddr"
         class="fund-item-other withdraw-new-address mt-14 mb-24 default">
         <span class="add-icon mr-10">+</span>{{ $t("add_withdraw_addr") }}
       </div>
@@ -364,7 +368,8 @@ export default {
       this.showModal = false
     },
     addNewAddr () {
-      this.$router.push('/fund/address')
+      const url = '/fund/address/' + this.selectCoin.currency
+      this.$router.push(url)
     }
   }
 }

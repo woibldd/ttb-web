@@ -66,13 +66,13 @@ export default {
       return ''
     },
     phone () {
-      if (state.userInfo.phone) {
+      if (state.userInfo && state.userInfo.phone) {
         return utils.publicDesensitization(state.userInfo.phone)[0]
       }
       return ''
     },
     email () {
-      if (state.userInfo.email) {
+      if (state.userInfo && state.userInfo.email) {
         return utils.publicDesensitization(state.userInfo.email)[0]
       }
       return ''

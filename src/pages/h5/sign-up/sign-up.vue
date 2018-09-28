@@ -193,7 +193,6 @@
 </template>
 
 <script>
-import './sign-up.scss'
 import _ from 'lodash'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
@@ -289,6 +288,10 @@ export default {
     meta.name = 'renderer'
     meta.content = 'webkit'
     ele.appendChild(meta)
+    let title = document.createElement('title')
+    title.append('IX | 持BTC躺赚30%高额分红！')
+    ele.getElementsByTagName('title')[0].remove()
+    ele.appendChild(title)
     next()
   },
   computed: {
@@ -466,7 +469,7 @@ export default {
       }
     },
     goAgreement () {
-      return '/terms'
+      return '/services'
     },
     goPrivacy () {
       return '/privacypolicy'
@@ -479,6 +482,7 @@ export default {
   mounted () {
   },
   async created () {
+    document.title = 'IX | 持BTC躺赚平台收入30%'
     // this.gtInit()
 
     let invitorId = this.$route.query.invitor
@@ -502,3 +506,6 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+@import './sign-up.scss';
+</style>

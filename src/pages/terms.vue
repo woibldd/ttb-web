@@ -3,7 +3,7 @@
     <div class="header">
       <v-nav2
         is-home="true"
-        @hide="notice = null"/>
+      />
     </div>
 
     <doc-wrap :title="$t('title')">
@@ -74,6 +74,7 @@
         <li>{{ $t('p44') }}</li>
         <li>{{ $t('p45') }}</li>
         <li>{{ $t('p46') }}</li>
+        <li>{{ $t('p46a') }}</li>
         <li>{{ $t('p47') }}</li>
         <li>{{ $t('p48') }}</li>
         <li>{{ $t('p49') }}</li>
@@ -179,8 +180,14 @@
 <script>
 import VNav2 from '@/components/VNav3'
 import DocWrap from '@/components/docwrap'
+import utils from '@/modules/utils'
 export default {
   name: 'Terms',
+  data () {
+    return {
+      isMobile: utils.isMobile()
+    }
+  },
   components: {
     VNav2,
     DocWrap
@@ -242,12 +249,13 @@ export default {
         p43: '7.1	If you do not have the qualification of registration as stipulated in this Agreement, the website has the right to refuse your registration. If you have registered, the website has the right to cancel your account, and the website reserves the right to hold you or your authorized agent accountable. At the same time, the website reserves the right to decide whether to accept your registration under any other circumstances.',
         p44: '7.2	If this website finds that the account user is not the initial user of the account, it has the right to suspend or terminate the use of the account.',
         p45: '7.3	The website has the right to notify you to correct, update or suspend or terminate the service provided by the website when the information you provided is reasonably suspected to be wrong, untrue, invalid or incomplete through technical testing, manual random inspection and other testing methods.',
-        p46: '7.4	The website reserves the right to correct clearly erroneous in any information displayed on the website.',
-        p47: '7.5	The website reserves the right to modify, suspend or terminate the service of the website at any time. The website does not need to inform you in advance if it exercises of right to modify or suspend the service. If the website terminates one or more services, the termination shall be effective on the date when the website publishes the notice of termination on the website.',
-        p48: '7.6	The website shall take necessary technical and management measures to guarantee the normal operation of the website, provide necessary and reliable trading environment and services, and maintain the order of digital assets trading.',
-        p49: '7.7	This website safeguards the safety of your digital assets by strengthening technical input and improving security precautions,and is obliged to inform you in advance when any foreseeable security risks emerge under your account.',
-        p50: '7.8	The website has the right to delete all kinds of contents in the website which do not conform to the laws and regulations or the rules of the website at any time, and the website does not need to inform you in advance when exercise of such rights.',
-        p51: '7.9	This website has the right to request you to offer more information according to the request of the laws, regulations, rules, orders and other regulations of your sovereign country or region to take reasonable measures to meet the requirements of local regulations. You are obliged to cooperate with the above description; This website has the right to suspend or permanently terminate the opening of this website and all or part of its services to you according to request of the laws, regulations, rules, orders and other regulations of your sovereign country or region.',
+        p46: '7.4 You agree that, based on the compliance and the need of trading security, before trading, you must complete and pass the KYC authentication which is required by the website. All rewards based on the trading are authorized only if you have completed the KYC authentication. Otherwise, the reward is invalid.',
+        p46a: '7.5	The website reserves the right to correct clearly erroneous in any information displayed on the website.',
+        p47: '7.6	The website reserves the right to modify, suspend or terminate the service of the website at any time. The website does not need to inform you in advance if it exercises of right to modify or suspend the service. If the website terminates one or more services, the termination shall be effective on the date when the website publishes the notice of termination on the website.',
+        p48: '7.7	The website shall take necessary technical and management measures to guarantee the normal operation of the website, provide necessary and reliable trading environment and services, and maintain the order of digital assets trading.',
+        p49: '7.8	This website safeguards the safety of your digital assets by strengthening technical input and improving security precautions,and is obliged to inform you in advance when any foreseeable security risks emerge under your account.',
+        p50: '7.9	The website has the right to delete all kinds of contents in the website which do not conform to the laws and regulations or the rules of the website at any time, and the website does not need to inform you in advance when exercise of such rights.',
+        p51: '7.10	This website has the right to request you to offer more information according to the request of the laws, regulations, rules, orders and other regulations of your sovereign country or region to take reasonable measures to meet the requirements of local regulations. You are obliged to cooperate with the above description; This website has the right to suspend or permanently terminate the opening of this website and all or part of its services to you according to request of the laws, regulations, rules, orders and other regulations of your sovereign country or region.',
         subtitle10: '8. The compensation',
         p52: '8.1	Because of your breach of this agreement or other documents mentioned here and incorporated into this agreement, or because you violated the laws, regulations and rules, the government normative documents, or the infringement of the rights of a third party, and make the our company and its shareholders, employees, agents any losses in the process of the third party filed a lawsuit to our company and its shareholders, employees, agents (including but not limited to the judicial costs and the fee of hiring  other professional), you must bear the responsibility of compensation for our company and the shareholders, employees, agent, make them from losses',
         p53: '8.2	If the website violates the relevant laws, regulations or any terms in this agreement and causes losses to the user, the website agrees to be liable for damages caused thereby.',
@@ -362,12 +370,13 @@ export default {
         p43: '7.1	如您不具备本协议约定的注册资格，则本网站有权拒绝您进行注册，对已注册的，本网站有权注销您的账号，本网站保留向您或您的有权代理人追究责任的权利。同时，本网站保留其他任何情况下决定是否接受您注册的权利。',
         p44: '7.2	本网站发现账户使用者并非账户初始注册人时，有权中止或终止该账户的使用。',
         p45: '7.3	本网站通过技术检测、人工抽检等检测方式合理怀疑您提供的信息错误、不实、失效或不完整时，有权通知您更正、更新信息或中止、终止为其提供本网站服务。',
-        p46: '7.4	本网站有权在发现本网站上显示的任何信息存在明显错误时，对信息予以更正。',
-        p47: '7.5	本网站保留随时修改、中止或终止本网站服务的权利，本网站行使修改或中止服务的权利不需事先告知您；本网站终止本网站一项或多项服务的，终止自本网站在网站上发布终止公告之日生效。',
-        p48: '7.6	本网站应当采取必要的技术手段和管理措施保障本网站的正常运行，并提供必要、可靠的交易环境和交易服务，维护数字资产交易秩序。',
-        p49: '7.7	本网站通过加强技术投入、提升安全防范等措施保障您的数字资产的安全，有义务在您账户出现可以预见的安全风险时提前通知您。',
-        p50: '7.8	本网站有权随时删除本网站内各类不符合法律法规或本网站规定等的内容信息，本网站行使该等权利不需提前通知您。',
-        p51: '7.9	本网站有权根据您所属主权国家或地区的法律法规、规则、命令等规范的要求，向您要求提供更多的信息或资料等，并采取合理的措施以符合当地的规范之要求，您有义务配合上述措施；本网站有权根据您所属主权国家或地区的法律法规、规则、命令等规范的要求，暂停或永久停止对您的开放本网站及其部分或全部服务。',
+        p46: '7.4 用户同意，基于合规和交易安全的需要，在交易之前，用户应该完成并通过本网站要求的KYC认证。所有基于交易而设置的奖赏，用户在交易之前，必须完成并通过本网站要求的KYC认证，否则奖赏无效。',
+        p46a: '7.5	本网站有权在发现本网站上显示的任何信息存在明显错误时，对信息予以更正。',
+        p47: '7.6	本网站保留随时修改、中止或终止本网站服务的权利，本网站行使修改或中止服务的权利不需事先告知您；本网站终止本网站一项或多项服务的，终止自本网站在网站上发布终止公告之日生效。',
+        p48: '7.7	本网站应当采取必要的技术手段和管理措施保障本网站的正常运行，并提供必要、可靠的交易环境和交易服务，维护数字资产交易秩序。',
+        p49: '7.8	本网站通过加强技术投入、提升安全防范等措施保障您的数字资产的安全，有义务在您账户出现可以预见的安全风险时提前通知您。',
+        p50: '7.9	本网站有权随时删除本网站内各类不符合法律法规或本网站规定等的内容信息，本网站行使该等权利不需提前通知您。',
+        p51: '7.10	本网站有权根据您所属主权国家或地区的法律法规、规则、命令等规范的要求，向您要求提供更多的信息或资料等，并采取合理的措施以符合当地的规范之要求，您有义务配合上述措施；本网站有权根据您所属主权国家或地区的法律法规、规则、命令等规范的要求，暂停或永久停止对您的开放本网站及其部分或全部服务。',
         subtitle10: '8	赔偿',
         p52: '8.1	因您违反本协议或经在此提及而纳入本协议的其他文件，或因您违反了法律、法规、规章、政府规范性文件或侵害了第三方的权利，而使本公司及其股东、职员、代理人在第三方对本网站及其股东、职员、代理人提起的诉讼中遭受的任何损失（包括但不限于由此产生的司法费用和聘请其他专业人士的费用），您必须对本公司及股东、职员、代理人承担赔偿责任，使其等免遭损失。',
         p53: '8.2	如因本网站违反有关法律、法规或本协议项下的任何条款而给用户造成损失，本网站同意承担由此造成的损害赔偿责任。',

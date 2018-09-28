@@ -2,7 +2,11 @@
   <div class="page-home">
     <div class="header">
       <v-nav
+        v-if="!isMobile"
         is-home="true"/>
+      <mobile-nav
+        v-if="isMobile"
+      />
     </div>
     <div class="banner">
       <div class="banner_txt">
@@ -21,7 +25,9 @@
     </div>
     <div class="cen_scr">
       <div class="scr-cen scr-l">
-        <!-- <p class="scr-txt">{{ $t('active_relay_totally') }}<span>85.92114584</span>BTC</p> -->
+        <p
+          class="scr-txt"
+          v-if="typeof relayTotal[pairs[0]] !== 'undefined'">{{ $t('active_relay_totally') }}<span>{{ relayTotal[pairs[0]] | round(4) }} </span>USDT</p>
         <div class="scr-box">
           <p class="scr-tit">{{ pairs[0] | pairfix }}</p>
           <div class="scr">
@@ -54,7 +60,9 @@
           :to="{name: 'trading', params: {pair: 'BTC_USDT'}}">{{ $t('active_relay_join') }}</router-link>
       </div>
       <div class="scr-cen scr-m">
-        <!-- <p class="scr-txt">{{ $t('active_relay_totally') }}<span>85.92114584</span>BTC</p> -->
+        <p
+          class="scr-txt"
+          v-if="typeof relayTotal[pairs[1]] !== 'undefined'">{{ $t('active_relay_totally') }}<span>{{ relayTotal[pairs[1]] | round(4) }} </span>USDT</p>
         <div class="scr-box">
           <p class="scr-tit">{{ pairs[1] | pairfix }}</p>
           <div class="scr">
@@ -87,7 +95,9 @@
           :to="{name: 'trading', params: {pair: 'ETH_USDT'}}">{{ $t('active_relay_join') }}</router-link>
       </div>
       <div class="scr-cen scr-r">
-        <!-- <p class="scr-txt">{{ $t('active_relay_totally') }}<span>85.92114584</span>BTC</p> -->
+        <p
+          class="scr-txt"
+          v-if="typeof relayTotal[pairs[0]] !== 'undefined'">{{ $t('active_relay_totally') }}<span>{{ relayTotal[pairs[2]] | round(4) }} </span>USDT</p>
         <div class="scr-box">
           <p class="scr-tit">{{ pairs[2] | pairfix }}</p>
           <div class="scr">
@@ -167,10 +177,13 @@
 import VNav from '@/components/VNav3'
 import ws from '@/modules/ws'
 import service from '@/modules/service'
+import utils from '@/modules/utils'
 import { pairfix } from '@/mixins/index'
+import responsiveScale from '@/mixins/responsiveScale'
+import MobileNav from '@/components/Mobile/MobileNav.vue'
 
 export default {
-  mixins: [ pairfix ],
+  mixins: [ pairfix, responsiveScale ],
   data () {
     return {
       pairs: ['BTC_USDT', 'ETH_USDT', 'ETH_BTC'],
@@ -179,17 +192,25 @@ export default {
         BTC_USDT: [],
         ETH_USDT: [],
         ETH_BTC: []
-      }
+      },
+      relayTotal: {},
+      isMobile: utils.isMobile()
     }
   },
   components: {
-    VNav
+    VNav,
+    MobileNav
   },
   created () {
     this.pairs.forEach(pair => {
       this.history(pair)
       this.wsConnect(pair)
     })
+
+    this.getRelayTotal()
+    setInterval(() => {
+      this.getRelayTotal()
+    }, 1e4)
   },
 
   methods: {
@@ -197,6 +218,12 @@ export default {
       let res = await service.getQuoteDeal({pair, size: 10})
       if (!res.code) {
         this.update(pair, res.data)
+      }
+    },
+    async getRelayTotal () {
+      let res = await service.getRelayTotal()
+      if (!res.code) {
+        this.relayTotal = res.data
       }
     },
     wsConnect (pair) {

@@ -24,6 +24,7 @@
         <form
           class="form"
           onsubmit="return false"
+          @keydown.enter.stop.prevent="submit"
           autocomplete="off">
           <div
             :class="['field']"
@@ -36,7 +37,9 @@
               <select
                 class="select"
                 v-else
-                v-model="regionId">
+                v-model="regionId"
+                tabindex="1"
+              >
                 <option value="">{{ $t('region_ph') }}</option>
                 <option
                   :value="option.id"
@@ -57,6 +60,7 @@
               <ix-input
                 class=""
                 ref="phone"
+                tabindex="2"
                 v-model.trim="phone"
                 :required='true'
                 :empty-err-tips="$t('bind_phone_err_empty')"
@@ -80,6 +84,7 @@
               <!-- <div class="label" v-t="'login_label_mail'"></div> -->
               <ix-input
                 class=""
+                tabindex="2"
                 ref="email"
                 v-model.trim="email"
                 :required='true'
@@ -96,6 +101,7 @@
               <ix-input
                 class=""
                 ref="password"
+                tabindex="3"
                 v-model.trim="password"
                 :required='true'
                 type="password"
@@ -108,6 +114,7 @@
           </div>
           <div class="field submit">
             <v-btn
+              tabindex="4"
               class="submit-btn"
               :label="$t('signin')"
               height="40"
@@ -138,6 +145,9 @@
             <div class="row__input" >
               <input
                 v-model="googleCode"
+                @input="keyPress"
+                maxlength="6"
+                @keydown.enter.stop.prevent="toVerifyCode"
                 class="input-validate google mr-14">
             </div>
           </div>
@@ -153,6 +163,9 @@
               <div class="row__input" >
                 <input
                   v-model="phoneCode"
+                  @input="keyPress"
+                  maxlength="6"
+                  @keydown.enter.stop.prevent="toVerifyCode"
                   class="input-validate mr-14">
                 <count-down
                   :send-text="$t('hq_send')"
@@ -174,6 +187,9 @@
               <div class="row__input" >
                 <input
                   v-model="emailCode"
+                  @input="keyPress"
+                  maxlength="6"
+                  @keydown.enter.stop.prevent="toVerifyCode"
                   class="input-validate mr-14">
                 <count-down
                   :send-text="$t('hq_send')"
@@ -202,8 +218,10 @@ import utils from '@/modules/utils'
 import resbg from '@/components/resbg'
 import ixInput from '@/components/common/ix-input/ix-input.vue'
 import countDown from '@/components/common/countdown-code-button'
+import responsive from '@/mixins/responsive'
 
 export default {
+  mixins: [responsive],
   name: 'Login',
   components: {
     VBtn,
@@ -311,6 +329,12 @@ export default {
     hideModal () {
       this.showModal = false
     },
+    keyPress ($event) {
+      let code = $event.srcElement.value
+      if (code && code.length === 6 && /^\d{6}$/.test(code)) {
+        this.toVerifyCode()
+      }
+    },
     async submit (e) {
       // 本地校验
       const check = this.checkParams()
@@ -358,9 +382,11 @@ export default {
       // actions.setFa2(res.data)
     },
     fixPosition () {
-      // this.$refs.container.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
-      this.$refs.container.style.minHeight = window.innerHeight - (110) - (80) + 'px'
-      // this.$refs.containera.style.minHeight = window.innerHeight - ( 110 ) - ( 80 ) + 'px'
+      if (utils.isMobile) {
+        this.$refs.container.style.minHeight = screen.availHeight - (205) + 'px'
+      } else {
+        this.$refs.container.style.minHeight = window.innerHeight - (110) - (80) + 'px'
+      }
     },
     async toVerifyCode () {
       let type = 'google'

@@ -151,7 +151,7 @@ export default {
         ` (${this.state.pro.pair.replace('_', '/')}) ${config.title}`
     },
     onresize: _.debounce(function () {
-      this.$refs.body.style.width = this.container.width + 'px'
+      // this.$refs.body.style.width = this.container.width + 'px'
       this.$refs.body.style.height = this.container.height - 32 + 'px'
     }, 100),
     layout () {
