@@ -451,7 +451,37 @@ const service = {
   /* 行情 */
   getDealHistory (pair, data) {
     return quote(`history/${pair}`, data)
+  },
+
+  /** 登录验证修改 */
+  // 获取修改密码邮箱验证码 POST
+  getCode4modifyEmailPassword (data) {
+    return request('/user/modify/password/email/code', data)
+  },
+  // 获取修改密码手机验证码 POST /user/modify/password/phone/code
+  getCode4modifyPhonePassword (data) {
+    return request('/user/modify/password/phone/code', data)
+  },
+  // 修改密码 POST
+  modifyPassword () {
+    return request('/user/modify/password')
+  },
+  // 获取开关验证邮箱验证码 POST
+  getCode4switchEmailVerify () {
+    return request('/user/bind/switch/email/code')
+  },
+  // 获取开关验证手机验证码 POST
+  getCode4switchPhoneVerify () {
+    return request('/user/bind/switch/phone/code')
+  },
+  // 开关验证 POST
+  switchBindAction (params) {
+    return request('/user/bind/switch', params)
   }
+  // 申请API POST /user/api/create
+  // 发起提币 POST /account/withdraw/create
+  // 获取内部划转记录 POST /account/balance/transfer/list
+
 }
 
 export async function fetch (url, body, options, method = 'post') {

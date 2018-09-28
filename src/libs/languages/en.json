@@ -564,6 +564,10 @@
   "more_record": "More",
   "first": "First ",
   "bitcoin_equity_certificate": "exchange regards  Bitcoin as equity certificate",
+  "close_verify": "Close",
+  "already_closed": "Already Closed",
+  "open_verify": "Open",
+  "already_open": "Already Open",
   "transfer_in": "In",
   "transfer_out": "Out"
 }

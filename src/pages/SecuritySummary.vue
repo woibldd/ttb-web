@@ -16,6 +16,12 @@
           <div>{{ $t( !!phone ? 'Bindings' : 'No_Bindings') }}</div>
           <div>
             {{ phone }}
+            <a
+              v-if="verify_phone"
+              @click="switchPhoneBind">{{ $t('close_verify') }}</a>
+            <a
+              v-if="!verify_phone && phone"
+              @click="switchPhoneBind">{{ $t('open_verify') }}</a>
             <router-link
               v-if="!phone"
               :to="{name: 'PhoneBind'}">{{ $t('to_bind') }}</router-link>
@@ -26,6 +32,12 @@
           <div>{{ $t( !!email ? 'Bindings' : 'No_Bindings') }}</div>
           <div>
             {{ email }}
+            <a
+              v-if="verify_email"
+              @click="switchEmailBind">{{ $t('close_verify') }}</a>
+            <a
+              v-if="!verify_email && email"
+              @click="switchEmailBind">{{ $t('open_verify') }}</a>
             <router-link
               v-if="!email"
               :to="{name: 'EmailBind'}">{{ $t('to_bind') }}</router-link>
@@ -35,6 +47,12 @@
           <div><span/><p>{{ $t('google_validator') }}</p></div>
           <div>{{ $t( !!google_key_bound ? 'Bindings' : 'No_Bindings') }}</div>
           <div>
+            <a
+              v-if="verify_google"
+              @click="switchGoogleBind">{{ $t('close_verify') }}</a>
+            <a
+              v-if="!verify_google && google_key_bound"
+              @click="switchGoogleBind">{{ $t('open_verify') }}</a>
             <router-link
               v-if="!google_key_bound"
               :to="{name: 'GoogleBind'}">{{ $t('to_bind') }}</router-link>
@@ -49,18 +67,36 @@
         </li>
       </ul>
     </div>
+    <verify-modal
+      :open.sync="showModal"
+      :code.sync="verifyCode"
+      :hide-count-down="hideCountDown"
+      :open-or-close="openOrClose"
+      :ensure-callback="modalEnsureCallback"
+      :get-code-func="currentGetCodeFunc"/>
   </div>
 </template>
 <script>
 import service from '@/modules/service'
 import utils from '@/modules/utils'
 import {state} from '@/modules/store'
+import verifyModal from '@/components/common/verify-modal'
 
 export default {
   data () {
     return {
+      showModal: false,
+      // 1 已开启 0 已关闭
+      openOrClose: true,
+      currentGetCodeFunc: () => {},
+      modalEnsureCallback: () => {},
+      verifyCode: '',
+      hideCountDown: false,
       state
     }
+  },
+  components: {
+    verifyModal
   },
   computed: {
     secure_level () {
@@ -87,11 +123,106 @@ export default {
         return true
       }
       return false
+    },
+    verify_phone () {
+      if (state.userInfo && state.userInfo.verify_phone && this.phone) {
+        return true
+      }
+      return false
+    },
+    verify_email () {
+      if (state.userInfo && state.userInfo.verify_email && this.email) {
+        return true
+      }
+      return false
+    },
+    verify_google () {
+      if (state.userInfo && state.userInfo.verify_google && this.google_key_bound) {
+        return true
+      }
+      return false
     }
 
   },
   methods: {
-
+    switchPhoneBind () {
+      this.showModal = !this.showModal
+      this.openOrClose = this.verify_phone
+      this.currentGetCodeFunc = this.getCode4switchPhoneVerify
+      this.modalEnsureCallback = this.ensureSwitchPhoneBind
+    },
+    switchEmailBind () {
+      this.showModal = !this.showModal
+      this.openOrClose = this.verify_email
+      this.currentGetCodeFunc = this.getCode4switchEmailVerify
+      this.modalEnsureCallback = this.ensureSwitchEmailBind
+    },
+    switchGoogleBind () {
+      this.showModal = !this.showModal
+      this.openOrClose = this.verify_google
+      this.hideCountDown = true
+      this.currentGetCodeFunc = this.getCode4switchEmailVerify
+      this.modalEnsureCallback = () => {
+        let params = {
+          verify_google: this.verify_google ? 0 : 1,
+          google_code: this.verifyCode
+        }
+        service.switchBindAction(params).then(res => {
+          if (!res.code) {
+            utils.success(this.$i18n.t(this.verify_google ? 'already_closed' : 'already_open'))
+            this.state.userInfo.verify_google = this.verify_google ? 0 : 1
+          } else {
+            utils.alert(res.message || 'error')
+          }
+        }).finally(() => {
+          this.showModal = false
+          this.hideCountDown = false
+          this.verifyCode = ''
+        })
+      }
+    },
+    async getCode4switchEmailVerify () {
+      let res = await service.getCode4switchEmailVerify()
+      if (res.code) {
+        utils.alert(res.message)
+      }
+    },
+    async getCode4switchPhoneVerify () {
+      let res = await service.getCode4switchPhoneVerify()
+      if (res.code) {
+        utils.alert(res.message)
+      }
+    },
+    ensureSwitchPhoneBind () {
+      const params = {
+        verify_phone: this.verify_phone ? 0 : 1,
+        phone_code: this.verifyCode
+      }
+      service.switchBindAction(params).then(res => {
+        if (!res.code) {
+          utils.success(this.$i18n.t(this.verify_phone ? 'already_closed' : 'already_open'))
+          this.showModal = false
+          this.state.userInfo.verify_phone = this.verify_phone ? 0 : 1
+        } else {
+          utils.alert(res.message)
+        }
+      })
+    },
+    ensureSwitchEmailBind () {
+      const params = {
+        verify_email: this.verify_email ? 0 : 1,
+        email_code: this.verifyCode
+      }
+      service.switchBindAction(params).then(res => {
+        if (!res.code) {
+          utils.success(this.$i18n.t(this.verify_email ? 'already_closed' : 'already_open'))
+          this.showModal = false
+          this.state.userInfo.verify_email = this.verify_email ? 0 : 1
+        } else {
+          utils.alert(res.message)
+        }
+      })
+    }
   }
 }
 </script>
