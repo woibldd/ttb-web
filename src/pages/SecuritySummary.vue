@@ -16,12 +16,12 @@
           <div>{{ $t( !!phone ? 'Bindings' : 'No_Bindings') }}</div>
           <div>
             {{ phone }}
-            <router-link
-              v-if="phone"
-              :to="{name: 'PhoneBind'}">{{ $t('modify') }}</router-link>
             <a
-              v-if="phone"
-              @click="closePhoneBind">{{ $t('close') }}</a>
+              v-if="verify_phone"
+              @click="switchPhoneBind">{{ $t('close_verify') }}</a>
+            <a
+              v-if="!verify_phone && phone"
+              @click="switchPhoneBind">{{ $t('open_verify') }}</a>
             <router-link
               v-if="!phone"
               :to="{name: 'PhoneBind'}">{{ $t('to_bind') }}</router-link>
@@ -33,8 +33,11 @@
           <div>
             {{ email }}
             <a
-              v-if="email"
-              @click="closeEmailBind">{{ $t('close') }}</a>
+              v-if="verify_email"
+              @click="switchEmailBind">{{ $t('close_verify') }}</a>
+            <a
+              v-if="!verify_email && email"
+              @click="switchEmailBind">{{ $t('open_verify') }}</a>
             <router-link
               v-if="!email"
               :to="{name: 'EmailBind'}">{{ $t('to_bind') }}</router-link>
@@ -45,8 +48,11 @@
           <div>{{ $t( !!google_key_bound ? 'Bindings' : 'No_Bindings') }}</div>
           <div>
             <a
-              v-if="google_key_bound"
-              @click="closeGoogleBind">{{ $t('close') }}</a>
+              v-if="verify_google"
+              @click="switchGoogleBind">{{ $t('close_verify') }}</a>
+            <a
+              v-if="!verify_google && google_key_bound"
+              @click="switchGoogleBind">{{ $t('open_verify') }}</a>
             <router-link
               v-if="!google_key_bound"
               :to="{name: 'GoogleBind'}">{{ $t('to_bind') }}</router-link>
@@ -65,6 +71,7 @@
       :open.sync="showModal"
       :code.sync="verifyCode"
       :hide-count-down="hideCountDown"
+      :open-or-close="openOrClose"
       :ensure-callback="modalEnsureCallback"
       :get-code-func="currentGetCodeFunc"/>
   </div>
@@ -79,6 +86,8 @@ export default {
   data () {
     return {
       showModal: false,
+      // 1 已开启 0 已关闭
+      openOrClose: true,
       currentGetCodeFunc: () => {},
       modalEnsureCallback: () => {},
       verifyCode: '',
@@ -114,33 +123,54 @@ export default {
         return true
       }
       return false
+    },
+    verify_phone () {
+      if (state.userInfo && state.userInfo.verify_phone && this.phone) {
+        return true
+      }
+      return false
+    },
+    verify_email () {
+      if (state.userInfo && state.userInfo.verify_email && this.email) {
+        return true
+      }
+      return false
+    },
+    verify_google () {
+      if (state.userInfo && state.userInfo.verify_google && this.google_key_bound) {
+        return true
+      }
+      return false
     }
 
   },
   methods: {
-    closePhoneBind () {
+    switchPhoneBind () {
       this.showModal = !this.showModal
+      this.openOrClose = this.verify_phone
       this.currentGetCodeFunc = this.getCode4switchPhoneVerify
-      this.modalEnsureCallback = this.ensureClosePhoneBind
+      this.modalEnsureCallback = this.ensureSwitchPhoneBind
     },
-    closeEmailBind () {
+    switchEmailBind () {
       this.showModal = !this.showModal
+      this.openOrClose = this.verify_email
       this.currentGetCodeFunc = this.getCode4switchEmailVerify
-      this.modalEnsureCallback = this.ensureCloseEmailBind
+      this.modalEnsureCallback = this.ensureSwitchEmailBind
     },
-    closeGoogleBind () {
+    switchGoogleBind () {
       this.showModal = !this.showModal
+      this.openOrClose = this.verify_google
       this.hideCountDown = true
       this.currentGetCodeFunc = this.getCode4switchEmailVerify
       this.modalEnsureCallback = () => {
         let params = {
-          verify_google: 1,
+          verify_google: this.verify_google ? 0 : 1,
           google_code: this.verifyCode
         }
         service.switchBindAction(params).then(res => {
-          console.log(res)
-          if (res.code === 200) {
-            utils.success(this.$i18n.t('already_closed'))
+          if (!res.code) {
+            utils.success(this.$i18n.t(this.verify_google ? 'already_closed' : 'already_open'))
+            this.state.userInfo.verify_google = this.verify_google ? 0 : 1
           } else {
             utils.alert(res.message || 'error')
           }
@@ -151,33 +181,46 @@ export default {
         })
       }
     },
-    getCode4switchEmailVerify () {
-      return service.getCode4switchEmailVerify()
+    async getCode4switchEmailVerify () {
+      let res = await service.getCode4switchEmailVerify()
+      if (res.code) {
+        utils.alert(res.message)
+      }
     },
-    getCode4switchPhoneVerify () {
-      return service.getCode4switchPhoneVerify()
+    async getCode4switchPhoneVerify () {
+      let res = await service.getCode4switchPhoneVerify()
+      if (res.code) {
+        utils.alert(res.message)
+      }
     },
-    ensureClosePhoneBind () {
+    ensureSwitchPhoneBind () {
       const params = {
-        verify_phone: 1,
+        verify_phone: this.verify_phone ? 0 : 1,
         phone_code: this.verifyCode
       }
       service.switchBindAction(params).then(res => {
-        console.log(res, 'email res')
-      })
-    },
-    ensureCloseEmailBind () {
-      const params = {
-        verify_email: 1,
-        email_code: this.verifyCode
-      }
-      service.switchBindAction(params).then(res => {
-        if (res.code === 200) {
-          utils.success(this.$t('already_closed'))
+        if (!res.code) {
+          utils.success(this.$i18n.t(this.verify_phone ? 'already_closed' : 'already_open'))
+          this.showModal = false
+          this.state.userInfo.verify_phone = this.verify_phone ? 0 : 1
         } else {
           utils.alert(res.message)
         }
-        this.showModal = false
+      })
+    },
+    ensureSwitchEmailBind () {
+      const params = {
+        verify_email: this.verify_email ? 0 : 1,
+        email_code: this.verifyCode
+      }
+      service.switchBindAction(params).then(res => {
+        if (!res.code) {
+          utils.success(this.$i18n.t(this.verify_email ? 'already_closed' : 'already_open'))
+          this.showModal = false
+          this.state.userInfo.verify_email = this.verify_email ? 0 : 1
+        } else {
+          utils.alert(res.message)
+        }
       })
     }
   }

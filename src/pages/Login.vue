@@ -146,6 +146,7 @@
               <input
                 v-model="googleCode"
                 @input="keyPress"
+                v-focus
                 maxlength="6"
                 @keydown.enter.stop.prevent="toVerifyCode"
                 class="input-validate google mr-14">

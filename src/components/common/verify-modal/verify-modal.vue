@@ -9,14 +9,17 @@
         class="modal-wrap"
         :style="{backgroundColor: bgColor}">
         <div class="verify-modal-layer">
-          <div class="layer__title mb-30">{{ title || $t('close_verify') }}</div>
+          <div class="layer__title mb-30">{{ title || $t(openOrClose ? 'close_verify' : 'open_verify') }}</div>
           <div class="layer__content">
             <div class="modal__row mt-12 mb-25">
               <div class="row__label mb-9">{{ $t('err_captcha_empty') }}</div>
               <div class="row__input" >
                 <input
                   v-model="code"
+                  v-focus
+                  maxlength="6"
                   @change="codeChange"
+                  @input="onInput"
                   :class="computedHideCountDown && 'google'"
                   class="input-validate mr-14">
                 <count-down
@@ -82,6 +85,10 @@ export default {
       type: Boolean,
       default: true
     },
+    openOrClose: {
+      type: Boolean,
+      default: true
+    },
     hideCountDown: {
       type: Boolean,
       default: false
@@ -106,6 +113,11 @@ export default {
       return this.hideCountDown
     }
   },
+  watch: {
+    open (val) {
+      this.code = ''
+    }
+  },
   methods: {
     ensure () {
       this.ensureCallback()
@@ -127,6 +139,14 @@ export default {
     codeChange () {
       console.log(this.code, 'code')
       this.$emit('update:code', this.code)
+    },
+    onInput () {
+      // let code = this.code
+      // if (code && code.length === 6 && /^\d{6}$/.test(code)) {
+      //   this.$nextTick(() => {
+      //     this.ensure()
+      //   })
+      // }
     }
   }
 }
