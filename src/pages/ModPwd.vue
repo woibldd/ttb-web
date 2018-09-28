@@ -26,15 +26,23 @@
           @focus="focus"
           @blur="blur"
           v-model="form.password_new"/>
-        <div class="pw-helps" :class="{show: atPw}">
-            <div class="title" v-t="'pwcheck_guide'"></div>
-            <ul class="pw-checks">
-            <li v-for="(check, index) in pwCheckList"
-                class="pw-check" :key="index">
-                <span class="pw-state" :class="{pass: check.pass}"></span>
-                <span class="desc">{{ $t(check.desc) }}</span>
+        <div
+          class="pw-helps"
+          :class="{show: atPw}">
+          <div
+            class="title"
+            v-t="'pwcheck_guide'"/>
+          <ul class="pw-checks">
+            <li
+              v-for="(check, index) in pwCheckList"
+              class="pw-check"
+              :key="index">
+              <span
+                class="pw-state"
+                :class="{pass: check.pass}"/>
+              <span class="desc">{{ $t(check.desc) }}</span>
             </li>
-            </ul>
+          </ul>
         </div>
       </el-form-item>
       <el-form-item
@@ -53,6 +61,82 @@
           @click="submit"/>
       </el-form-item>
     </el-form>
+    <v-modal
+      :open.sync="showModal"
+      :backdrop="false"
+      @click="hideModal">
+      <div class="ensure-modal">
+        <div class="modal__title mb-30">{{ $t('security_verification') }}</div>
+        <div class="modal__content">
+          <div
+            class="modal__row mt-12 mb-25"
+            v-if="google_key_bound">
+            <div class="row__label mb-9">{{ $t('fa2_google_code_mobile') }}</div>
+            <div class="row__input" >
+              <input
+                v-model="googleCode"
+                @input="keyPress"
+                maxlength="6"
+                @keydown.enter.stop.prevent="submit"
+                class="input-validate google mr-14">
+            </div>
+          </div>
+          <div
+            class="modal_phone"
+            v-else-if="phone_bound">
+            <div class="modal__row" >
+              <div class="row__label mb-9">{{ $t('register_by_phone') }}</div>
+              <div class="row__input" >{{ phone }} </div>
+            </div>
+            <div class="modal__row mt-12 mb-25">
+              <div class="row__label mb-9">{{ $t('phone_code') }}</div>
+              <div class="row__input" >
+                <input
+                  v-model="phoneCode"
+                  @input="keyPress"
+                  maxlength="6"
+                  @keydown.enter.stop.prevent="submit"
+                  class="input-validate mr-14">
+                <count-down
+                  :send-text="$t('hq_send')"
+                  :start-when-loaded="showModal"
+                  :send-code-func="getPhoneVerifyCode"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="modal_phone"
+            v-else-if="email_bound">
+            <div class="modal__row" >
+              <div class="row__label mb-9">{{ $t('register_by_email') }}</div>
+              <div class="row__input" >{{ email_bound }} </div>
+            </div>
+            <div class="modal__row mt-12 mb-25">
+              <div class="row__label mb-9">{{ $t('email_code') }}</div>
+              <div class="row__input" >
+                <input
+                  v-model="emailCode"
+                  @input="keyPress"
+                  maxlength="6"
+                  @keydown.enter.stop.prevent="submit"
+                  class="input-validate mr-14">
+                <count-down
+                  :send-text="$t('hq_send')"
+                  :start-when-loaded="showModal"
+                  :send-code-func="getEmailVerifyCode"
+                />
+              </div>
+            </div>
+          </div>
+
+          <v-btn
+            class="w-340"
+            @click="submit"
+            :label="$t('signin')"/>
+        </div>
+      </div>
+    </v-modal>
   </div>
 </template>
 
@@ -60,6 +144,8 @@
 import service from '@/modules/service'
 import VBtn from '@/components/VBtn'
 import pwChecker from '@/modules/pw-checker'
+import utils from '@/modules/utils'
+import { state } from '@/modules/store'
 
 export default {
   name: 'SafeVerified',
@@ -80,7 +166,7 @@ export default {
     const validataPswStrong = (rule, value, callback) => {
       if (!value) {
         return callback(new Error(this.$i18n.t('err_empty_password')))
-      } 
+      }
       const pwCheckList = pwChecker.getState(value)
       if (_.filter(pwCheckList, r => r.pass).length < 4) {
         return callback(new Error(this.$i18n.t('err_weak_password')))
@@ -102,19 +188,36 @@ export default {
         password_orig: [
           { required: true, message: this.$i18n.t('err_empty_password'), trigger: 'blur' }
         ]
-      }
+      },
+      showModal: true,
+      phoneCode: '',
+      emailCode: '',
+      googleCode: '',
+
+      state
     }
   },
   computed: {
-    
+    email_bound () {
+      return this.state.userInfo && this.state.userInfo.verify_email
+    },
+    phone_bound () {
+      return this.state.userInfo && this.state.userInfo.verify_phone
+    },
+    google_key_bound () {
+      return this.state.userInfo && this.state.userInfo.verify_google
+    }
   },
   methods: {
     async submit () {
-      if (this.form.password_new == this.form.password_repeat) {
+      const verifyObj = this.verifyCode()
+      if (this.form.password_new === this.form.password_repeat) {
         let params = {
           old_password: this.form.password_orig,
           new_password: this.form.password_new
         }
+
+        params = Object.assign(verifyObj)
         let result = await service.changePassword(params)
         if (result && !result.code) {
           this.$router.push({
@@ -124,9 +227,12 @@ export default {
           utils.alert(result.message)
         }
       } else {
-        console.log('error submit!!');
-        return false;
+        console.log('error submit!!')
+        return false
       }
+    },
+    hideModal () {
+      this.showModal = false
     },
     pwChange () {
       this.pwCheckList = pwChecker.getState(this.form.password_new || '')
@@ -136,6 +242,30 @@ export default {
     },
     blur () {
       this.atPw = false
+    },
+    getPhoneVerifyCode () {
+      return service.getCode4modifyPhonePassword()
+    },
+    getEmailVerifyCode () {
+      return service.getCode4modifyEmailPassword()
+    },
+    verifyCode () {
+      let verifyObj = {}
+
+      if (this.google_key_bound) {
+        verifyObj = {
+          google_code: this.googleCode
+        }
+      } else if (this.phone) {
+        verifyObj = {
+          phone_code: this.phoneCode
+        }
+      } else {
+        verifyObj = {
+          email_code: this.emailCode
+        }
+      }
+      return verifyObj
     }
   }
 }

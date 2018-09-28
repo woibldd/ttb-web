@@ -430,5 +430,8 @@
   "activity_max_input": "输入范围：20000-250000",
   "more_record": "更多记录",
   "first": "全球首家",
-  "bitcoin_equity_certificate": "比特币权益证明交易所"
+  "bitcoin_equity_certificate": "比特币权益证明交易所",
+  "close_verify": "关闭验证",
+  "already_closed": "已关闭"
+
 }

@@ -562,5 +562,7 @@
   "activity_max_input": "range: 20000-250000",
   "more_record": "More",
   "first": "First ",
-  "bitcoin_equity_certificate": "exchange regards  Bitcoin as equity certificate"
+  "bitcoin_equity_certificate": "exchange regards  Bitcoin as equity certificate",
+  "close_verify": "close verify",
+  "already_closed": "already closed"
 }
