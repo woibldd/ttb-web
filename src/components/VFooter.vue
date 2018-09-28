@@ -5,56 +5,11 @@
         <router-link
           :to="{name:'home'}"
           class="footer_logo"/>
-        <p class="footer_ltxt">{{$t('footer_services_email')}}：service@ix.com</p>
-        <p class="footer_ltxt">{{$t('footer_bussness')}}：business@ix.com</p>
-        <div class="contact-list">
-          <a
-            class="contact-item-wrapper mr-20 pointer"
-            href='https://www.facebook.com/IXExchange'>
-            <icon
-              class="contact-item"
-              name="footer-facebook"/>
-          </a>
-          <a
-            class="contact-item-wrapper mr-20 pointer"
-            href='https://twitter.com/IXExchange'>
-            <icon
-              class="contact-item"
-              name="footer-twitter"/>
-          </a>
-
-          <a
-            href="mailto:service@ix.com"
-            class="contact-item-wrapper mr-20 pointer">
-            <icon
-              class="contact-item"
-              name="footer-email"/>
-          </a>
-          <div class="contact-item-wrapper mr-20">
-            <icon
-              class="contact-item"
-              name="footer-wx"/>
-            <img
-              class="contact-img"
-              src="../assets/pic-contact-wx.jpg">
-          </div>
-          <a
-            class="contact-item-wrapper mr-20 pointer"
-            href='https://t.me/ixofficial'>
-            <icon
-              class="contact-item "
-              name="footer-telegram"/>
-          </a>
-          <div class="contact-item-wrapper">
-            <icon
-              class="contact-item"
-              name="footer-biyong"/>
-            <img
-              class="contact-img"
-              src="../assets/pic-contact-biyong.jpg">
-          </div>
-        </div>
-        <p class="copyright">Copyright © 2018 IX.COM</p>
+        <p class="footer_ltxt"><b>全球首家</b>比特币权益证明交易所</p>
+        <img
+          class="footer_ewm"
+          src="../assets/ewm.png">
+        <p class="footer_ewm_ltxt">扫一扫 添加在线客服</p>
       </div>
       <div class="footer_right">
         <div class="footer_ct">
@@ -70,11 +25,69 @@
           <a :href="helpLink" target="_blank">{{$t('user_guide')}}</a>
           <!-- <a href="#" target="_blank">{{$t('footer_api')}}</a> -->
         </div>
-        <div class="footer_ct">
-          <p>{{$t('footer_terms')}}</p>
+        <div class="footer_ct footer-rt">
+          <p>{{$t('footer_terms')}}11</p>
           <router-link :to="{name: 'terms'}" target="_blank">{{$t('footer_agreement')}}</router-link>
           <router-link :to="{name: 'PrivacyPolicy'}" target="_blank">{{$t('footer_private')}}</router-link>
           <!-- <a href="#" target="_blank">{{$t('footer_fee')}}</a> -->
+        </div>
+        <div class="hg"></div>
+        <div class="right-bottom">
+          <div class="bottom-txt bot-la">
+            <p class="footer_ltxt">{{$t('footer_services_email')}}：service@ix.com</p>
+            <p class="footer_ltxt">{{$t('footer_bussness')}}：business@ix.com</p>
+          </div>
+          <div class="bottom-txt bot-lb">
+            <div class="contact-list">
+              <a
+                class="contact-item-wrapper pointer"
+                href='https://www.facebook.com/IXExchange'>
+                <icon
+                  class="contact-item"
+                  name="footer-facebook"/>
+              </a>
+              <a
+                class="contact-item-wrapper pointer"
+                href='https://twitter.com/IXExchange'>
+                <icon
+                  class="contact-item"
+                  name="footer-twitter"/>
+              </a>
+
+              <a
+                href="mailto:service@ix.com"
+                class="contact-item-wrapper pointer">
+                <icon
+                  class="contact-item"
+                  name="footer-email"/>
+              </a>
+              <div class="contact-item-wrapper ">
+                <icon
+                  class="contact-item"
+                  name="footer-wx"/>
+                <img
+                  class="contact-img"
+                  src="../assets/pic-contact-wx.jpg">
+              </div>
+              <a
+                class="contact-item-wrapper pointer"
+                href='https://t.me/ixofficial'>
+                <icon
+                  class="contact-item "
+                  name="footer-telegram"/>
+              </a>
+              <div class="contact-item-wrapper">
+                <icon
+                  class="contact-item"
+                  name="footer-biyong"/>
+                <img
+                  class="contact-img"
+                  src="../assets/pic-contact-biyong.jpg">
+              </div>
+            </div>
+            <p class="copyright">Copyright © 2018 IX.COM</p>
+          </div>
+          
         </div>
       </div>
     </div>
@@ -118,50 +131,94 @@ export default {
   .footer_left{
     float: left;
     width: auto;
-    padding-top: 80px;
+    padding-top: 38px;
     width: 220px;
     .footer_ltxt{
-      float: left;
-      color: #fff;
       font-size: 14px;
-      line-height: 24px;
+      line-height: 40px;
+      color: #C9A96C;
+      display: block;
+      b{
+        font-weight: bold;
+      }
+    }
+    .footer_ewm{
+      width: 140px;
+      height: 140px;
+      display: block;
+      margin-top: 7px;
+    }
+    .footer_ewm_ltxt{
+      width: 140px;
+      height: 40px;
+      line-height: 40px;
+      display: block;
+      text-align: center;
+      color: #999999;
     }
     .footer_logo{
-      width: 141px;
-      height: 46px;
-      @include bg-retina('../assets/nav_logo', 'png', 142px, 46px);
-      float: left;
-      margin-bottom: 18px;
+      width: 196px;
+      height: 45px;
+      @include bg-retina('../assets/footer_logo', 'png', 196px, 45px);
+      display: block;
     }
-    .copyright{
-      float: left;
-      margin-top: 15px;
-      line-height: 25px;
-      font-size: 15px;
-      color: #fff;
-    }
+    
   }
   .footer_right{
     float: right;
-    color: #6C869C;
     font-size: 14px;
+    width: 500px;
     .footer_ct{
       float: left;
-      margin-left: 120px;
+      width: 33%;
       p{
-        line-height: 24px;
-        margin-bottom: 20px;
-        margin-top: 84px;
+        line-height: 30px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        color: #C9A96C;
       }
     }
+    .footer-rt{
+      float: right;
+      margin-left: 0;
+    }
     a{
-      color: #fff;
+      color: #999;
       display: table;
       line-height: 36px;
 
       &:hover {
         color: $primary;
       }
+    }
+    .hg{
+      width: 100%;
+      height: 1px;
+      background: #fff;
+      float: left;
+      margin-top: 35px;
+    }
+    .right-bottom{
+      float: left;
+      width: 100%;
+      padding-top: 30px;
+      .bottom-txt{
+        float: left;
+        line-height: 36px;
+        color: #fff;
+      }
+      .bot-la{
+        width: 60%;
+      }
+      .bot-lb{
+        width: 40%;
+      }
+    }
+    .copyright{
+      float: left;
+      font-size: 15px;
+      color: #fff;
+      width: 100%;
     }
   }
   .footer-container {
@@ -174,8 +231,9 @@ export default {
     display: flex;
     justify-content: space-between;
     .contact-list {
-      margin-top: 30px;
+      margin-top: 15px;
       display: flex;
+      width: 100%;
       float: left;
     }
     .contact-item{
@@ -191,6 +249,10 @@ export default {
       position: relative;
       width: 20px;
       height: 20px;
+      margin-right: 12px;
+      &:last-child{
+        margin-right: 0;
+      }
       .contact-item{
         position: absolute;
         left: 0;
