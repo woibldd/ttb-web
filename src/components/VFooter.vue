@@ -5,11 +5,11 @@
         <router-link
           :to="{name:'home'}"
           class="footer_logo"/>
-        <p class="footer_ltxt"><b>全球首家</b>比特币权益证明交易所</p>
+        <p class="footer_ltxt"><b>{{ $t('first') }}</b>{{ $t('bitcoin_equity_certificate') }}</p>
         <img
           class="footer_ewm"
           src="../assets/ewm.png">
-        <p class="footer_ewm_ltxt">扫一扫 添加在线客服</p>
+        <p class="footer_ewm_ltxt">{{ $t('footer_contract_desc') }}</p>
       </div>
       <div class="footer_right">
         <div class="footer_ct">
@@ -17,29 +17,29 @@
           <router-link :to="{name: 'trading'}">{{ $t('trading') }}</router-link>
           <!-- <a href="#" target="_blank">{{$t('footer_services')}}</a> -->
           <!-- <a href="#" target="_blank">{{$t('footer_help')}}</a> -->
-          <a 
-:href="requestLink"
-             target="_blank">{{ $t('footer_request') }}</a>
+          <a
+            :href="requestLink"
+            target="_blank">{{ $t('footer_request') }}</a>
         </div>
         <div class="footer_ct">
           <p>{{ $t('footer_tools') }}</p>
-          <a 
-:href="announcementLink"
-             target="_blank">{{ $t('footer_notice') }}</a>
-          <a 
-:href="helpLink"
-             target="_blank">{{ $t('user_guide') }}</a>
-             <!-- <a href="#" target="_blank">{{$t('footer_api')}}</a> -->
+          <a
+            :href="announcementLink"
+            target="_blank">{{ $t('footer_notice') }}</a>
+          <a
+            :href="helpLink"
+            target="_blank">{{ $t('user_guide') }}</a>
+            <!-- <a href="#" target="_blank">{{$t('footer_api')}}</a> -->
         </div>
         <div class="footer_ct footer-rt">
-          <p>{{ $t('footer_terms') }}11</p>
-          <router-link 
-:to="{name: 'terms'}"
-                       target="_blank">{{ $t('footer_agreement') }}</router-link>
-          <router-link 
-:to="{name: 'PrivacyPolicy'}"
-                       target="_blank">{{ $t('footer_private') }}</router-link>
-                       <!-- <a href="#" target="_blank">{{$t('footer_fee')}}</a> -->
+          <p>{{ $t('footer_terms') }}</p>
+          <router-link
+            :to="{name: 'terms'}"
+            target="_blank">{{ $t('footer_agreement') }}</router-link>
+          <router-link
+            :to="{name: 'PrivacyPolicy'}"
+            target="_blank">{{ $t('footer_private') }}</router-link>
+            <!-- <a href="#" target="_blank">{{$t('footer_fee')}}</a> -->
         </div>
         <div class="hg"/>
         <div class="right-bottom">
@@ -142,7 +142,7 @@ export default {
     float: left;
     width: auto;
     padding-top: 38px;
-    width: 220px;
+    width: auto;
     .footer_ltxt{
       font-size: 14px;
       line-height: 40px;
@@ -159,12 +159,11 @@ export default {
       margin-top: 7px;
     }
     .footer_ewm_ltxt{
-      width: 140px;
-      height: 40px;
-      line-height: 40px;
+      width: 180px;
+      line-height: 22px;
       display: block;
-      text-align: center;
       color: #999999;
+      margin-top: 15px;
     }
     .footer_logo{
       width: 196px;
