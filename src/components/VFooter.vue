@@ -13,29 +13,39 @@
       </div>
       <div class="footer_right">
         <div class="footer_ct">
-          <p>{{$t('footer_services')}}</p>
-          <router-link :to="{name: 'trading'}">{{$t('trading')}}</router-link>
+          <p>{{ $t('footer_services') }}</p>
+          <router-link :to="{name: 'trading'}">{{ $t('trading') }}</router-link>
           <!-- <a href="#" target="_blank">{{$t('footer_services')}}</a> -->
           <!-- <a href="#" target="_blank">{{$t('footer_help')}}</a> -->
-          <a :href="requestLink" target="_blank">{{$t('footer_request')}}</a>
+          <a 
+:href="requestLink"
+             target="_blank">{{ $t('footer_request') }}</a>
         </div>
         <div class="footer_ct">
-          <p>{{$t('footer_tools')}}</p>
-          <a :href="announcementLink" target="_blank">{{$t('footer_notice')}}</a>
-          <a :href="helpLink" target="_blank">{{$t('user_guide')}}</a>
-          <!-- <a href="#" target="_blank">{{$t('footer_api')}}</a> -->
+          <p>{{ $t('footer_tools') }}</p>
+          <a 
+:href="announcementLink"
+             target="_blank">{{ $t('footer_notice') }}</a>
+          <a 
+:href="helpLink"
+             target="_blank">{{ $t('user_guide') }}</a>
+             <!-- <a href="#" target="_blank">{{$t('footer_api')}}</a> -->
         </div>
         <div class="footer_ct footer-rt">
-          <p>{{$t('footer_terms')}}11</p>
-          <router-link :to="{name: 'terms'}" target="_blank">{{$t('footer_agreement')}}</router-link>
-          <router-link :to="{name: 'PrivacyPolicy'}" target="_blank">{{$t('footer_private')}}</router-link>
-          <!-- <a href="#" target="_blank">{{$t('footer_fee')}}</a> -->
+          <p>{{ $t('footer_terms') }}11</p>
+          <router-link 
+:to="{name: 'terms'}"
+                       target="_blank">{{ $t('footer_agreement') }}</router-link>
+          <router-link 
+:to="{name: 'PrivacyPolicy'}"
+                       target="_blank">{{ $t('footer_private') }}</router-link>
+                       <!-- <a href="#" target="_blank">{{$t('footer_fee')}}</a> -->
         </div>
-        <div class="hg"></div>
+        <div class="hg"/>
         <div class="right-bottom">
           <div class="bottom-txt bot-la">
-            <p class="footer_ltxt">{{$t('footer_services_email')}}：service@ix.com</p>
-            <p class="footer_ltxt">{{$t('footer_bussness')}}：business@ix.com</p>
+            <p class="footer_ltxt">{{ $t('footer_services_email') }}：service@ix.com</p>
+            <p class="footer_ltxt">{{ $t('footer_bussness') }}：business@ix.com</p>
           </div>
           <div class="bottom-txt bot-lb">
             <div class="contact-list">
@@ -231,7 +241,7 @@ export default {
     display: flex;
     justify-content: space-between;
     .contact-list {
-      margin-top: 30px;
+      margin-top: 10px;
       display: flex;
       float: left;
     }
