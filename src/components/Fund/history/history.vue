@@ -367,7 +367,7 @@ export default {
        .el-radio-button__inner {
         background-color: white !important;
         display: inline-block;
-        width: 80px;
+        // width: 80px;
         color: $text-weak !important;
         border: 1px solid $text-weak !important;
         height: 30px;
@@ -375,7 +375,7 @@ export default {
         box-sizing: border-box;
         text-align: center;
         border-radius: 15px !important;
-        padding: 0;
+        padding: 0 10px;
         box-shadow: none !important;
         margin-left: 10px;
        }
