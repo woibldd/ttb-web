@@ -44,7 +44,9 @@
           <div><span/><p>{{ $t('google_validator') }}</p></div>
           <div>{{ $t( !!google_key_bound ? 'Bindings' : 'No_Bindings') }}</div>
           <div>
-            <a v-if="google_key_bound || true">{{ $t('close') }}</a>
+            <a
+              v-if="google_key_bound"
+              @click="closeGoogleBind">{{ $t('close') }}</a>
             <router-link
               v-if="!google_key_bound"
               :to="{name: 'GoogleBind'}">{{ $t('to_bind') }}</router-link>
@@ -62,6 +64,7 @@
     <verify-modal
       :open.sync="showModal"
       :code.sync="verifyCode"
+      :hide-count-down="hideCountDown"
       :ensure-callback="modalEnsureCallback"
       :get-code-func="currentGetCodeFunc"/>
   </div>
@@ -79,6 +82,7 @@ export default {
       currentGetCodeFunc: () => {},
       modalEnsureCallback: () => {},
       verifyCode: '',
+      hideCountDown: false,
       state
     }
   },
@@ -123,6 +127,29 @@ export default {
       this.showModal = !this.showModal
       this.currentGetCodeFunc = this.getCode4switchEmailVerify
       this.modalEnsureCallback = this.ensureCloseEmailBind
+    },
+    closeGoogleBind () {
+      this.showModal = !this.showModal
+      this.hideCountDown = true
+      this.currentGetCodeFunc = this.getCode4switchEmailVerify
+      this.modalEnsureCallback = () => {
+        let params = {
+          verify_google: 1,
+          google_code: this.verifyCode
+        }
+        service.switchBindAction(params).then(res => {
+          console.log(res)
+          if (res.code === 200) {
+            utils.success(this.$i18n.t('already_closed'))
+          } else {
+            utils.alert(res.message || 'error')
+          }
+        }).finally(() => {
+          this.showModal = false
+          this.hideCountDown = false
+          this.verifyCode = ''
+        })
+      }
     },
     getCode4switchEmailVerify () {
       return service.getCode4switchEmailVerify()

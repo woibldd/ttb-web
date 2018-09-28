@@ -17,8 +17,10 @@
                 <input
                   v-model="code"
                   @change="codeChange"
+                  :class="computedHideCountDown && 'google'"
                   class="input-validate mr-14">
                 <count-down
+                  v-if="!computedHideCountDown"
                   :send-text="$t('hq_send')"
                   :send-code-func="getVerifyCode"
                 />
@@ -80,6 +82,10 @@ export default {
       type: Boolean,
       default: true
     },
+    hideCountDown: {
+      type: Boolean,
+      default: false
+    },
     ensureCallback: {
       type: Function,
       default: () => {}
@@ -95,6 +101,9 @@ export default {
   computed: {
     getCode () {
       return this.getCodeFunc
+    },
+    computedHideCountDown () {
+      return this.hideCountDown
     }
   },
   methods: {
