@@ -3,7 +3,7 @@
     <div class="title-box">
       <div> {{ $t('withdraw') }}</div>
       <router-link
-        to="/fund/my/history/withdraw"
+        to="/fund/my/history/deposit"
         class="fund-history"> {{ $t('capital_record') }}</router-link>
     </div>
     <div class="fund-items-content">
@@ -31,11 +31,24 @@
           to="/profile/kyc/"
           class="up-limit pointer">{{ $t("upgrade_quota") }}</router-link>
       </div>
+      <div class="fund-item-other mb-14">
+        <span
+          :class="['quick-btn mr-10', selectCoin.currency === c.currency && 'selected']"
+          @click.prevent="quickSelectCoin(c)"
+          v-for="(c, idx) in allCoins"
+          :key="idx">
+          {{ c.currency }}
+        </span>
+      </div>
       <div class="fund-item-row">
         <div class="row__label">{{ $t('withdraw_addr') }}</div>
         <div class="row__value">
           <div class="withdraw-address">
             <el-select
+              class="select-address"
+              filterable
+              allow-create
+              default-first-option
               v-model="selectAddress"
               :placeholder="$t('please_choose')"
               :no-data-text="$t('no_data')"
@@ -50,7 +63,7 @@
         </div>
       </div>
       <div
-        @click="addNewAddr"
+        @click.prevent="addNewAddr"
         class="fund-item-other withdraw-new-address mt-14 mb-24 default">
         <span class="add-icon mr-10">+</span>{{ $t("add_withdraw_addr") }}
       </div>
@@ -58,18 +71,10 @@
         <div class="row__label">{{ $t('withdraw_amount') }}</div>
         <div class="row__value">
           <div class="withdraw-address border-1 pl-10">
-            <!-- <el-input 
-              class="coin-count"
-              type="number"
-              :min="Number(selectCoin.min_withdraw_amount)"
-              :max="Number(myCoinInfo.available)"
-              :step="Number(selectCoin.min_withdraw_amount)"
-              v-model="withdrawCount"
-            ></el-input> -->
             <input
               class="coin-count"
               type="number"
-              
+
               :min="Number(selectCoin.min_withdraw_amount)"
               :max="Number(myCoinInfo.available)"
               v-model="withdrawCount">
@@ -96,7 +101,7 @@
         <v-btn
           style="width: 200px"
           @click="ensure"
-          :disabled="showLayerModal"
+          :disabled="disableBtn"
           :label="$t('withdraw_confirm')"/>
       </div>
       <ul
@@ -218,7 +223,7 @@ export default {
       }
     },
     coinArrival () {
-      return this.$big(this.withdrawCount) - this.$big(this.selectCoin.withdraw_fee)
+      return this.$big(parseFloat(this.withdrawCount) || 0).minus(this.$big(this.selectCoin.withdraw_fee || 0)).toString()
     },
     google_key_bound () {
       if (this.state.userInfo && this.state.userInfo.google_key_bound) {
@@ -235,6 +240,9 @@ export default {
     all_bound () {
       // kyc > 0 就可以提币
       return this.state.userInfo && this.state.userInfo.lv > 0
+    },
+    disableBtn () {
+      return !this.email_bound || !this.phone_bound || !this.all_bound
     }
   },
   components: {vModal, countDown},
@@ -298,6 +306,9 @@ export default {
         }
       })
     },
+    quickSelectCoin (coin) {
+      this.changeCoinType(coin)
+    },
     getAccountBalanceList () {
       return service.getAccountBalanceList().then(res => {
         this.myCoinInfoList = res.data
@@ -334,12 +345,15 @@ export default {
       })
     },
     ensure () {
-      console.log(this.$big(this.withdrawCount), this.selectCoin.min_withdraw_amount, '0000')
-      if (this.$big(this.withdrawCount).lt(this.$big(this.selectCoin.min_withdraw_amount))) {
+      if (this.disableBtn) {
+        utils.alert('请完善你的资料')
+        return
+      }
+      if (this.$big(this.withdrawCount || 0).lt(this.$big(this.selectCoin.min_withdraw_amount))) {
         utils.alert(this.$t('withdraw_count_min_error'))
         return
       }
-      if (this.$big(this.withdrawCount).gt(this.$big(this.myCoinInfo.available))) {
+      if (this.$big(this.withdrawCount || 0).gt(this.$big(this.myCoinInfo.available || 0))) {
         utils.alert(this.$t('withdraw_count_max_error'))
         return
       }
@@ -354,7 +368,8 @@ export default {
       this.showModal = false
     },
     addNewAddr () {
-      this.$router.push('/fund/address')
+      const url = '/fund/address/' + this.selectCoin.currency
+      this.$router.push(url)
     }
   }
 }

@@ -10,7 +10,10 @@
       class="page-mask"
       v-show="state.loading"/>
     <v-nav2
-      v-if="showNav"
+      v-if="showNav && !isMobile"
+      :class="[navClass]"/>
+    <mobile-nav
+      v-if="showNav && isMobile"
       :class="[navClass]"/>
     <div
       class="main-container"
@@ -25,22 +28,25 @@
       v-show="showFooter"/>
     <mobile-footer
       ref="footer"
-      v-if="footer === 'mobile'"
+      v-if="showFooter && footer === 'mobile'"
       :fixed="fixed"
-      v-show="showFooter"/>
+    />
     <v-notify-list/>
-    <div class="home-ball" @click="toNotice" v-if="zendeskWidget">
-      <icon name="serve"></icon>
-      <span>{{$t('contact_us')}}</span>
+    <div
+      class="home-ball"
+      @click="toNotice"
+      v-if="zendeskWidget">
+      <icon name="serve"/>
+      <span>{{ $t('contact_us') }}</span>
     </div>
   </div>
 </template>
 
 <script>
 import VNav2 from '@/components/VNav3.vue'
-// import VMobileNav from '@/components/VMobileNav.vue'
+import MobileNav from '@/components/Mobile/MobileNav.vue'
 import VFooter from '@/components/VFooter.vue'
-import MobileFooter from '@/components/MobileFooter.vue'
+import MobileFooter from '@/pages/h5/footer'
 import {state, actions} from '@/modules/store'
 import utils from '@/modules/utils'
 import VNotifyList from '@/components/VNotifyList.vue'
@@ -54,7 +60,7 @@ export default {
     VFooter,
     VNotifyList,
     MobileFooter,
-    // VMobileNav
+    MobileNav
   },
   data () {
     return {
@@ -124,7 +130,7 @@ export default {
     },
     zendeskWidget (show) {
       window.zE && window.zE(function () {
-        if (utils.isApp() || utils.isMobile()) {
+        if (utils.isMobile()) {
           return window.zE.hide()
         }
         if (show && zeStyleEl && zeStyleEl.parentNode) {
@@ -141,10 +147,18 @@ export default {
     onclick (e) {
       this.$eh.$emit('app:click')
     },
-    fixPosition () {
+    fixPosition (name) {
       const box = this.$refs.container
       if (box) {
-        box.style.minHeight = window.innerHeight - (this.showFooter ? 110 : 0) - (this.showNav ? 80 : 0) + 'px'
+        if (this.isMobile) {
+          if (name === 'trading') {
+            box.style.minHeight = screen.availHeight - (this.showFooter ? 205 : 0) - (this.showNav ? 60 : 0) + 'px'
+          } else {
+            box.style.minHeight = screen.availHeight - (this.showFooter ? 205 : 0) - (this.showNav ? 60 : 0) + 'px'
+          }
+        } else {
+          box.style.minHeight = window.innerHeight - (this.showFooter ? 110 : 0) - (this.showNav ? 80 : 0) + 'px'
+        }
       }
     },
     async keepSession () {
@@ -156,13 +170,13 @@ export default {
     },
     toNotice () {
       let url = ''
-       if (this.state.userInfo && this.state.theme.themeName === 'default') {
+      if (this.state.userInfo && this.state.theme.themeName === 'default') {
         url = process.env.BASE_API + 'zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
       } else {
         url = this.state.theme.request[this.state.locale] || this.request.theme.help.en
       }
       if (!url) {
-        showContact = false
+        this.showContact = false
       } else {
         window.open(url)
       }
@@ -177,9 +191,12 @@ export default {
     this.state.router = this.$router
     this.$router.afterEach((to, from) => {
       if (from.name === 'trading') {
-        this.fixPosition()
+        this.$nextTick(() => {
+          this.fixPosition(from.name)
+        })
       }
     })
+
     this.keepSession()
     window.onresize = () => {
       this.$eh.$emit('app:resize')

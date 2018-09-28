@@ -87,7 +87,7 @@
             </div>
             <p class="copyright">Copyright © 2018 IX.COM</p>
           </div>
-          
+
         </div>
       </div>
     </div>
@@ -162,7 +162,7 @@ export default {
       @include bg-retina('../assets/footer_logo', 'png', 196px, 45px);
       display: block;
     }
-    
+
   }
   .footer_right{
     float: right;
@@ -231,9 +231,8 @@ export default {
     display: flex;
     justify-content: space-between;
     .contact-list {
-      margin-top: 15px;
+      margin-top: 30px;
       display: flex;
-      width: 100%;
       float: left;
     }
     .contact-item{

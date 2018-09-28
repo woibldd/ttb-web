@@ -40,7 +40,7 @@
           </div>
         </div>
       </div>
-      <div class="invite-container">
+      <div class="invite-container mb-30">
         <!-- 邀请记录 -->
         <div class="invite-wrap left">
           <div class="title-box">{{ $t('invite_history_text') }}</div>
@@ -52,7 +52,7 @@
             <div class="tbody pb-20">
               <div
                 class="empty"
-                v-if="list.length === 0">
+                v-if="invitationList.list.length === 0">
                 <span
                   class="text"
                   @click="goInvite"
@@ -61,11 +61,17 @@
               <div
                 v-else
                 class="row pt-20 pl-20 pr-20"
-                v-for="item in list"
+                v-for="item in invitationList.list"
                 :key="item.id">
                 <div class="td">{{ item.phone || item.email }}</div>
                 <div class="td">{{ item.register_time | ts2date }}</div>
               </div>
+            </div>
+            <div
+              class="pagination mt-10"
+              v-if="!invitationList.isEnd"
+            >
+              <a @click.prevent="getInviteList">[{{ $t('more_record') }}]</a>
             </div>
           </div>
         </div>
@@ -73,15 +79,16 @@
         <div class="invite-wrap right">
           <div class="title-box">{{ $t('commission_history_text') }}</div>
           <div class="invite-list ">
-            <div class="th pd-15">
-              <div class="td">{{ $t('username') }}</div>
-              <div class="td">{{ $t('commission_amount') }}</div>
-              <div class="td">{{ $t('time') }}</div>
+            <div class="th pd-15 pl-20 pr-20">
+              <div class="td username">{{ $t('username') }}</div>
+              <div class="td amount">{{ $t('commission_amount') }}</div>
+              <div class="td time">{{ $t('time') }}</div>
+              <div class="td state">{{ $t('status') }}</div>
             </div>
             <div class="tbody pb-20">
               <div
                 class="empty"
-                v-if="clist.length === 0">
+                v-if="commissionList.list.length === 0">
                 <span
                   class="text"
                   v-html="$t('invite_commission_text')"/>
@@ -89,12 +96,27 @@
               <div
                 v-else
                 class="row pt-20 pl-20 pr-20"
-                v-for="item in clist"
+                v-for="item in commissionList.list"
                 :key="item.id">
-                <div class="td">{{ item.phone || item.email }}</div>
-                <div class="td">{{ item.register_time | ts2date }}</div>
-                <div class="td">{{ item.register_time | ts2date }}</div>
+                <div class="td username">{{ item.phone || item.email }}</div>
+                <div class="td amount"><span class="text">{{ item.amount | round(4) }}</span> IX</div>
+                <div
+                  class="td time"
+                  v-if="item.release_time">
+                  {{ item.release_time | ts2date('M-D H:m') }}</div>
+                <div
+                  class="td time"
+                  v-else>--</div>
+                <div
+                  class="td state"
+                  :class="{done: item.state===1, expect: item.state === 0}">{{ item.state===0 ? $t('waiting_for_release') : $t('done') }}</div>
               </div>
+            </div>
+            <div
+              class="pagination mt-10"
+              v-if="!commissionList.isEnd"
+            >
+              <a @click.prevent="getCommissionList">[{{ $t('more_record') }}]</a>
             </div>
           </div>
         </div>
@@ -110,6 +132,8 @@ import utils from '@/modules/utils'
 import {state} from '@/modules/store'
 const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
 
+const PageSize = 10
+
 export default {
   name: 'Invite',
   components: {
@@ -119,8 +143,20 @@ export default {
       state,
       show: false,
       qrReady: false,
-      list: [],
-      clist: []
+      invitationList: {
+        list: [],
+        page: 1,
+        size: PageSize + 1,
+        isEnd: true
+      },
+      commissionList: {
+        list: [],
+        page: 1,
+        size: PageSize + 1,
+        isEnd: true
+      },
+      isLastInvitation: false,
+      isLastCommission: false
     }
   },
   computed: {
@@ -135,6 +171,7 @@ export default {
   async created () {
     this.setQr(this.inviteLink)
     this.getInviteList()
+    this.getCommissionList()
   },
   methods: {
     showQrcode () {
@@ -149,11 +186,42 @@ export default {
       utils.success(this.$i18n.t('link_copyed'))
     },
     async getInviteList () {
-      let result = await service.getMyInviteList()
+      let result = await service.getMyInviteList({
+        page: this.invitationList.page++,
+        size: PageSize
+      })
       if (result && !result.code) {
-        this.list = result.data
+        if (!result.data || result.data.length < PageSize) {
+          this.invitationList.isEnd = true
+        } else {
+          this.invitationList.isEnd = false
+        }
+        if (this.invitationList.list.length > 0) {
+          this.invitationList.list = this.invitationList.list.concat(result.data)
+        } else {
+          this.invitationList.list = result.data
+        }
       } else {
         utils.alert(result.message)
+      }
+    },
+    async getCommissionList () {
+      let result = await service.getCommissionList({
+        page: this.commissionList.page++,
+        size: PageSize
+      })
+      if (!result.code) {
+        if (!result.data || result.data.length < PageSize) {
+          this.commissionList.isEnd = true
+        } else {
+          this.commissionList.isEnd = false
+        }
+
+        if (this.commissionList.list.length >= 0) {
+          this.commissionList.list = this.commissionList.list.concat(result.data)
+        } else {
+          this.commissionList.list = result.data
+        }
       }
     },
     async setQr (url) {
@@ -179,7 +247,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   @import "../styles/vars";
   @import '../styles/mixins';
 
@@ -323,7 +391,32 @@ export default {
           justify-content: space-between;
           font-size: 14px;
           color: $text-light;
+
+          .username {
+            width: 20%;
+            @include limit(1)
+          }
+          .amount, .time {
+            width: 30%;
+            text-align: center;
+
+            .text {
+              color: $primary;
+            }
+          }
+          .state {
+            width: 20%;
+            text-align: right;
+
+            &.done {
+              color: #09C989;
+            }
+            &.expect {
+              color: #EBB166;
+            }
+          }
         }
+
         .row {
           color: $text-weak;
         }
@@ -343,6 +436,10 @@ export default {
             color: $text-weak;
           }
         }
+      }
+      .pagination {
+        display: flex;
+        justify-content: flex-end;
       }
     }
   }

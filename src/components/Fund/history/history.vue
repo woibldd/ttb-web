@@ -4,24 +4,26 @@
       <div class="fund-total">
         <div class="left">
           <div class="total__label">{{ $t('withdraw_avlb') }}</div>
-          <div class="total__coin">{{ total }} {{ unit }} </div>
+          <div class="total__coin">{{ total | fixed(2) }} {{ unit }} </div>
         </div>
         <el-radio-group
           @change="changeType"
           class="total__switch"
           v-model="type">
           <!-- <el-radio-button label="all">{{ $t('近期交易') }}</el-radio-button> -->
-          <el-radio-button label="deposit">{{ $t('deposit') }}</el-radio-button>
-          <el-radio-button label="withdraw">{{ $t('withdraw') }}</el-radio-button>
-          <!-- <el-radio-button label="reward"> {{ $t('奖励分配') }} </el-radio-button> -->
+          <el-radio-button label="deposit">{{ $t('deposit_record') }}</el-radio-button>
+          <el-radio-button label="withdraw">{{ $t('withdraw_record') }}</el-radio-button>
+          <el-radio-button label="reward"> {{ $t('fund_reward') }} </el-radio-button>
         </el-radio-group>
       </div>
       <el-table
         :data="tableData"
         height="550"
+        v-loading="loading"
+        cell-class-name="unrelease-cell"
         class="fund-coin-pool">
         <el-table-column
-          v-for="(hd, idx) in header"
+          v-for="(hd, idx) in (type==='reward' ? headerReward:header)"
           :key="idx"
           :formatter="formatter"
           :prop="hd.key"
@@ -29,16 +31,41 @@
 
         <el-table-column
           header-align='right'
+          v-if="type!=='reward'"
           align="right"
           width="200px"
           :label="status.title">
           <!-- <span>解锁/锁仓</span> -->
           <template slot-scope="scope">
-            <span :class="['state', hasComplated(scope.row) && 'complete']">{{ hasComplated(scope.row) ? $t('done') : $t('pending') }}</span>
+            <span :class="['state', hasComplated(scope.row) && 'complete']">
+              {{ hasComplated(scope.row) === 1 ? $t('done') : (hasComplated(scope.row) === 1 ? $t('broadcasting') : $t('pending')) }}
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          header-align='left'
+          v-if="type==='reward'"
+          align="left"
+          width="200px"
+          :label="status.title">
+          <!-- <span>解锁/锁仓</span> -->
+          <template slot-scope="scope">
+            <div :class="['state complete', unReleased(scope.row) && 'un-release']">
+              {{ unReleased(scope.row) ? $t('waiting_for_release') : $t('done') }}
+              <icon
+                name="question"
+                v-if="unReleased(scope.row)" />
+            </div>
+            <span
+              class="popover"
+              v-if="unReleased(scope.row)">
+              {{ $t('mine_release_at', {time: formatTime(scope.row.release_time)}) }}
+            </span>
           </template>
         </el-table-column>
         <el-table-column
           header-align='right'
+          v-if="type!=='reward'"
           align="right"
           width="200px"
           :label="operate.title">
@@ -87,32 +114,22 @@ export default {
         {key: 'chain', title: this.$i18n.t('chain')},
         {key: 'amount', title: this.$i18n.t('amount')} // -fee
       ],
+      headerReward: [
+        {key: 'create_time', title: this.$i18n.t('time')},
+        {key: 'currency', title: this.$i18n.t('currency')},
+        {key: 'name', title: this.$i18n.t('order_th_type')},
+        {key: 'amount', title: this.$i18n.t('amount')} // -fee
+      ],
       status: {key: 'state', title: this.$i18n.t('state')},
       operate: {key: 'txid', title: this.$i18n.t('actions')},
       tableData: [],
+      total: 0,
       from: 'all',
       type: this.$route.params.from || 'deposit',
       page: 1,
-      total: 0,
       unit: 'CNY',
+      loading: true,
       state
-    }
-  },
-  computed: {
-    title () {
-      let res
-      switch (this.type) {
-        case 'deposit':
-          res = this.$t('deposit')
-          break
-        case 'withdraw':
-          res = this.$t('withdraw')
-          break
-        default:
-          res = this.$t('asset')
-          break
-      }
-      return res
     }
   },
   async created () {
@@ -128,8 +145,10 @@ export default {
       }
     },
     showCXID (row) {
-      const url = utils.getBlockChainUrl(row.txid, 'tx', row.chain)
-      window.open(url)
+      if (row.txid) {
+        const url = utils.getBlockChainUrl(row.txid, 'tx', row.chain)
+        window.open(url)
+      }
     },
     changeType (type) {
       this.getFundHistory(type)
@@ -137,18 +156,32 @@ export default {
     getPage () {
       this.getFundHistory(this.type)
     },
+    formatTime (time) {
+      if (!time) {
+        return '--'
+      }
+      return utils.dateFormatter(time, 'Y-M-D')
+    },
     hasComplated (row) {
       if (this.type === 'deposit' && row.state === 1) {
-        return true
+        return 1
       }
 
       if (this.type === 'withdraw' && row.state === 4) {
-        return true
+        return 1
       }
 
-      return false
+      if (this.type === 'withdraw' && row.state === 2) {
+        return 2
+      }
+
+      return 0
+    },
+    unReleased (row) {
+      return this.type === 'reward' && row.state === 0// 0 待发放, 1 已完成
     },
     getFundHistory (from = 'deposit') {
+      this.loading = true
       let request = ''
       switch (from) {
         case 'deposit':
@@ -157,34 +190,50 @@ export default {
         case 'withdraw':
           request = service.getWithdrawHistory
           break
+        case 'reward':
+          request = service.getRewardHistory
+          break
         default:
           break
       }
+
       if (!request) { return }
       const param = {
         page: this.page,
         size: 10
       }
+      this.tableData = []
       request(param).then(res => {
-        this.tableData = res.data
+        if (res.data.length === 0) {
+          this.loading = false
+        } else {
+          this.tableData = res.data
+          this.loading = false
+        }
       })
     },
     getAccountBalanceList () {
       return service.getAccountBalanceList().then(res => {
-        let sum = this.$big(0)
-        if (state.locale === 'zh-CN') {
-          this.unit = 'CNY'
-          res.data.forEach(item => {
-            sum = sum.plus(this.$big(item.available).times(this.$big(item.rates.CNY)))
-          })
-        } else if (state.locale === 'en') {
-          this.unit = 'USD'
-          res.data.forEach(item => {
-            sum = sum.plus(this.$big(item.available).times(this.$big(item.rates.USD)))
+        this.total = 0
+        if (!res.code && res.data) {
+          res.data.map(item => {
+            item.rates = item.rates || {}
+            item.locking = this.$big(item.ordering || 0).plus(this.$big(item.withdrawing || 0)).toString()
+            item.amount = this.$big(item.locking).plus(this.$big(item.available)).round(8, this.C.ROUND_DOWN).toString()
+            item.estValue = this.getEstValue(item)
+            this.total = this.$big(this.total).plus(item.estValue)
+            return item
           })
         }
-        this.total = sum.toString()
       })
+    },
+    getEstValue (item) {
+      let res = this.$big(item.amount).times(this.$big(item.rates[this.unit] || 0))
+      let num = 4
+      if (this.unit === 'USD') {
+        num = 8
+      }
+      return res.round(num, this.C.ROUND_DOWN).toString()
     }
   },
   watch: {
@@ -196,7 +245,6 @@ export default {
 </script>
 <style lang="scss">
 .fund-history-container {
-
     .fund-total {
         margin-top: 45px;
         margin-bottom: 58px;
@@ -228,6 +276,40 @@ export default {
 
        &.complete {
             color: #31C78C;
+        }
+
+      &.un-release {
+        color: #9FA9B7;
+      }
+    }
+    .unrelease-cell .cell{
+
+        overflow: visible !important;
+        position: relative !important;
+        cursor: default;
+
+        &:hover {
+          .popover{
+            display: inline-block;
+          }
+        }
+
+        .popover {
+          z-index: 11;
+          line-height: 1.2;
+          position: absolute;
+          padding: 6px 10px;
+          box-sizing: border-box;
+          display: none;
+          font-size: 14px;
+          font-weight: 400;
+          width: 130px;
+          background:rgba(159,169,183,1);
+          border-radius:4px;
+          color: white;
+          left: 50px;
+          top: 30px;
+          word-break: initial;
         }
     }
     .show-address {

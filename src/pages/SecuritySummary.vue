@@ -40,7 +40,7 @@
               :to="{name: 'GoogleBind'}">{{ $t('to_bind') }}</router-link>
           </div>
         </li>
-        <li>
+        <li class="pass">
           <div><span/><p>{{ $t('log_pwd') }}</p></div>
           <div>{{ $t('settinged') }}</div>
           <div>

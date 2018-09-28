@@ -22,6 +22,15 @@
           </el-select>
         </div>
       </div>
+      <div class="fund-item-other mb-14">
+        <span
+          :class="['quick-btn mr-10', selectCoin.currency === c.currency && 'selected']"
+          @click="quickSelectCoin(c)"
+          v-for="(c, idx) in allCoins"
+          :key="idx">
+          {{ c.currency }}
+        </span>
+      </div>
       <div class="fund-item-row mb-24">
         <div class="row__label">{{ $t('deposit_address') }}</div>
         <div class="row__value">
@@ -55,7 +64,6 @@
   </div>
 </template>
 <script>
-import './deposit.scss'
 import copyToClipboard from 'copy-to-clipboard'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
@@ -73,12 +81,10 @@ export default {
     }
   },
   async created () {
-    console.log(this.$route.params, 'allcointype')
-
     this.getDepositHistory()
     await this.getAllCoinTypes()
     await this.getCoinAddress()
-    this.setQr(this.address)// TODO 这个咋整
+    this.setQr(this.address)
   },
   methods: {
     copy () {
@@ -136,6 +142,9 @@ export default {
         }
       })
     },
+    quickSelectCoin (coin) {
+      this.changeCoinType(coin)
+    },
     getDepositHistory () {
       const param = {
         page: 1,
@@ -148,3 +157,6 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+@import './deposit.scss';
+</style>

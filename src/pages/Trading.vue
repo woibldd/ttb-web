@@ -2,10 +2,17 @@
   <div
     class="trading-chart"
     ref="wrap">
-    <v-nav pro="1"/>
+    <v-nav
+      pro="1"
+      v-if="!isMobile"/>
+    <mobile-nav
+      v-if="isMobile"
+      />
     <div class="container-trade-panel">
       <div class="ix-row">
-        <div class="ix-col ix-col-1">
+        <div
+          class="ix-col ix-col-1"
+          v-if="!isMobile">
           <div
             class="ix-grid ix-grid-pairnav"
             ref="gridPairNav">
@@ -28,11 +35,14 @@
             <div
               class="active-box"
               v-if="showCountdown">
-              <p class="text">{{ $t('active_countdown_text') }}<span class="seconds">{{ countdownText }}</span>{{ $t('active_countdown_unit') }}</p>
-              <a
-                class="link"
-                :href="rule_link"
-                target="_blank">{{ $t('active_rules') }}</a>
+              <p class="text"><span v-html="$t('active_countdown_text')"/><span class="seconds">{{ countdownText }}</span>{{ $t('active_countdown_unit') }}</p>
+              <router-link
+                class="line link"
+                :to="{name: 'relay'}"
+                target="_blank">{{ $t('active_rules') }}</router-link>
+              <span
+                class="line totally"
+                v-if="typeof relayTotal[state.pro.pair] != 'undefined'">{{ $t('active_relay_short') }} {{ relayTotal[state.pro.pair]|round(0) }} USDT</span>
             </div>
           </div>
         </div>
@@ -46,6 +56,7 @@
       </div>
       <div class="ix-row">
         <div
+          v-if="!isMobile"
           class="ix-grid ix-grid-order"
           ref="gridOrder">
           <Order ref="Order"/>
@@ -54,6 +65,22 @@
           class="ix-grid ix-grid-operate"
           ref="gridOperate">
           <Operate ref="Operate"/>
+        </div>
+      </div>
+      <div class="ix-row">
+        <div
+          class="ix-col ix-col-1 wd-100"
+          v-if="isMobile">
+          <div
+            class="ix-grid ix-grid-order"
+            ref="gridOrder">
+            <Order ref="Order"/>
+          </div>
+          <div
+            class="ix-grid ix-grid-deal wd-100"
+            ref="gridDeal">
+            <Deal ref="Deal"/>
+          </div>
         </div>
       </div>
       <!-- <div class="ix-row">
@@ -71,8 +98,9 @@ import _ from 'lodash'
 import { local, state } from '@/modules/store'
 import service from '@/modules/service'
 import utils from '@/modules/utils'
-
+import MobileNav from '@/components/Mobile/MobileNav.vue'
 import VNav from '@/components/VNav3'
+
 import TradingView from '@/components/Trading/TradingView'
 import Order from '@/components/Trading/Order'
 import Deal from '@/components/Trading/Deal'
@@ -82,8 +110,10 @@ import PairNav from '@/components/Trading/PairNav'
 import Operate from '@/components/Trading/Operate'
 import OrderDealPopover from '@/components/Trading/OrderDealPopover'
 import Intro from '@/components/Trading/Intro'
+import responsiveScale from '@/mixins/responsiveScale'
 
 export default {
+  mixins: [responsiveScale],
   name: 'Trading',
   components: {
     VNav,
@@ -95,7 +125,8 @@ export default {
     // DepthChart,
     Orderbook,
     PairNav,
-    Operate
+    Operate,
+    MobileNav
   },
   data () {
     return {
@@ -104,15 +135,9 @@ export default {
       showCountdown: false,
       countdownTimer: 0,
       countdownText: '20',
-      lastDealTime: 0
-    }
-  },
-  computed: {
-    rule_link () {
-      return (
-        this.state.theme.activeRule[this.state.locale] ||
-        this.state.theme.activeRule.en
-      )
+      lastDealTime: 0,
+      relayTotal: {},
+      isMobile: utils.isMobile()
     }
   },
   watch: {
@@ -133,6 +158,8 @@ export default {
             this.state.pro.pairInfo = null
           }
           await this.refreshBalance()
+          this.countdownText = '-'
+          // this.stopTimer()
         }
         this.state.pro.lock = false
       },
@@ -202,25 +229,32 @@ export default {
     },
     startTimer () {
       this.stopTimer()
+      this.doCountdown()
       this.countdownTimer = setInterval(this.doCountdown, 1000)
     },
     doCountdown () {
-      let num = parseInt(this.countdownText, 10)
+      let num = parseInt(this.countdownText, 10) || 1
       num--
       if (num < 0) {
         this.stopTimer()
         return
       }
-      this.countdownText = num
+      this.countdownText = num || '-'
     },
     stopTimer () {
       clearInterval(this.countdownTimer)
+    },
+    async getRelayTotal () {
+      let res = await service.getRelayTotal()
+      if (!res.code) {
+        this.relayTotal = res.data
+      }
     },
     dealChanged (data) {
       if (data && data.length > 0) {
         // 第一次进入
         if (!this.showCountdown) {
-          this.lastDealTime = data[data.length - 1].time
+          this.lastDealTime = data[0].time
           let tick = new Date().getTime() - this.lastDealTime
           if (tick < 0) {
             tick = 2000
@@ -231,10 +265,10 @@ export default {
           this.showCountdown = true
           this.startTimer()
         } else {
-          if (data[data.length - 1].time > this.lastDealTime) {
+          if (data[0].time > this.lastDealTime) {
             // 有行情变化
             this.countdownText = '20'
-            this.lastDealTime = data[data.length - 1].time
+            this.lastDealTime = data[0].time
             this.startTimer()
           }
         }
@@ -273,6 +307,10 @@ export default {
       this.$eh.$on('protrade:balance:refresh', this.refreshBalance)
       this.$eh.$on('app:resize', this.onresize)
       this.$eh.$on('deal:update', this.dealChanged)
+      this.getRelayTotal()
+      setInterval(() => {
+        this.getRelayTotal()
+      }, 1e4)
       document.querySelector('.page-loading').classList.remove('show')
     })
   },
@@ -287,6 +325,7 @@ export default {
     this.$eh.$off('app:resize', this.onresize)
     this.$eh.$off('protrade:balance:refresh', this.refreshBalance)
     this.$eh.$off('deal:update', this.dealChanged)
+    this.stopTimer()
     this.state.pro.layout = false
     document.querySelector('.page-loading').classList.remove('show')
     document.documentElement.setAttribute('style', '')
@@ -330,19 +369,20 @@ export default {
   flex: 1;
   display: flex;
   flex-direction: row;
+  background: $protrade-bg;
 }
 .ix-col {
   display: flex;
   flex-direction: column;
 }
 .ix-col-1 {
-  width: 350px;
+  width: 320px;
 }
 .ix-col-2 {
   flex: 1;
 }
 .ix-col-3 {
-  width: 350px;
+  width: 320px;
 }
 .ix-grid {
   position: relative;
@@ -358,7 +398,7 @@ export default {
   height: 275px;
 }
 .ix-grid-deal {
-  flex: 1;
+  // flex: 1;
   height: 256px;
 }
 .ix-grid-orderbook {
@@ -366,7 +406,7 @@ export default {
   // height: 2px;
 }
 .ix-grid-pairnav {
-  flex: 1;
+  // flex: 1;
   height: 268px;
 }
 .ix-grid-operate {
@@ -390,40 +430,61 @@ export default {
   background-size: 100%;
 
   .text {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 14px;
     font-family: MicrosoftYaHei;
     font-weight: 400;
-    color: rgba(250, 248, 239, 1);
+    color: #737373;
     margin-top: 12px;
     margin-left: 14px;
 
     .seconds {
       font-size: 20px;
-      color: #eedc50;
+      color: #A37138;
       width: 22px;
       text-align: right;
       margin-right: 5px;
       display: inline-block;
     }
   }
-  .link {
+  .line {
     position: absolute;
-    bottom: 12px;
-    left: 14px;
+    bottom: 6px;
     padding: 1px 3px;
     box-sizing: content-box;
-    background: #ffd100;
-    border-radius: 3px;
-    color: #2064a2;
     font-size: 12px;
+    color: #737373;
     font-weight: bold;
-    cursor: pointer;
+
+    &.link {
+      cursor: pointer;
+      border: 1px solid #ffffff;
+      background:linear-gradient(0deg,rgba(195,196,196,1) 0%,rgba(255,255,255,1) 100%);
+      border-radius:20px;
+      left: 14px;
+      padding: 2px 8px;
+    }
+    &.totally {
+      right: 55px;
+      bottom: 8px;
+    }
+  }
+
+}
+@media screen and (max-width: 1200px) {
+  .ix-grid-orderbook {
+    height: 500px;
+  }
+  .wd-100 {
+    width: 100%;
   }
 }
-@media screen and (max-width: 1000px) {
-  .ix-col-1 {
-    display: none;
+.mobile {
+  .ix-grid-orderbook {
+    height: 500px;
+  }
+  .wd-100 {
+    width: 100%;
   }
 }
 </style>

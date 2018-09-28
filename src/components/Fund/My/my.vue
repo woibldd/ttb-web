@@ -1,11 +1,12 @@
 <template>
   <div class="fund-container my-fund-container">
     <div class="title-box">
-      <div> {{ $t('wallets_nav_asset') }} <span class="title__second"> <span class="mt-10 mr-10">></span>{{ $t('capital_record') }}</span></div>
+
+      <div>{{ $t('wallets_nav_asset') }}</div>
       <router-link
         v-if="!showHistory"
         class="fund-history"
-        to="/fund/my/history/withdraw"> {{ $t('capital_record') }}</router-link>
+        to="/fund/my/history/deposit"> {{ $t('capital_record') }}</router-link>
     </div>
     <div
       v-if="!showHistory"
@@ -41,7 +42,6 @@
               class="my-fund-operate">{{ $t('asset_trading') }}</router-link>
           </template>
         </el-table-column>
-
       </el-table>
     </div>
     <router-view/>
@@ -84,15 +84,9 @@ export default {
     },
     total () {
       let sum = this.$big(0)
-      if (state.locale === 'zh-CN') {
-        this.tableData.forEach(item => {
-          sum = sum.plus(this.$big(item.available).times(this.$big(item.rates.CNY)))
-        })
-      } else if (state.locale === 'en') {
-        this.tableData.forEach(item => {
-          sum = sum.plus(this.$big(item.available).times(this.$big(item.rates.USD)))
-        })
-      }
+      this.tableData.forEach(item => {
+        sum = sum.plus(this.getEstValue(item))
+      })
       return sum.toString()
     },
     unit () {
@@ -107,15 +101,22 @@ export default {
     getAccountBalanceList () {
       return service.getAccountBalanceList().then(res => {
         this.tableData = (res.data || []).map(item => {
+          item.rates = item.rates || {}
           item.locking = this.$big(item.ordering || 0).plus(this.$big(item.withdrawing || 0)).toString()
-          item.amount = this.$big(item.locking).plus(this.$big(item.available)).toString()
+          item.amount = this.$big(item.locking).plus(this.$big(item.available)).round(8, this.C.ROUND_DOWN).toString()
           item.estValue = this.getEstValue(item)
+          item.available = this.$big(item.available).round(8, this.C.ROUND_DOWN).toString()
           return item
-        }) 
+        })
       })
     },
     getEstValue (item) {
-      return this.$big(item.available).times(this.$big(item.rates[this.unit])).toString()
+      let res = this.$big(item.amount).times(this.$big(item.rates[this.unit] || 0))
+      let num = 4
+      if (this.unit === 'USD') {
+        num = 8
+      }
+      return res.round(num, this.C.ROUND_DOWN).toString()
     }
   }
 }

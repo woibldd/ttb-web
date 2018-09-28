@@ -274,6 +274,10 @@ export const actions = {
       state.fiatMoneySymbol = utils.getFiatMoneySymbolByFiat(fiat)
     }
   },
+  setTitle (locale = 'en') {
+    const { exchangeNameConfig } = process.env.THEME_ENV
+    document.title = exchangeNameConfig[locale]
+  },
   async setLocale (locale) {
     if (!locale) {
       // 初始化时
@@ -291,13 +295,15 @@ export const actions = {
 
     actions.setFiat()
 
+    actions.setTitle(locale)
+
     if (!utils.$i18n.messages[locale]) {
       try {
         const msg = await import(/* webpackChunkName: "lang-[request]" */ `@/libs/languages/${locale}.json`)
 
         utils.$i18n.setLocaleMessage(locale, actions.replaceName(msg))
       } catch (e) {
-        utils.logE('I18n Failed')
+        utils.logE('load language failed')
       }
     }
     if (locale === state.locale) {

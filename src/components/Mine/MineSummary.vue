@@ -1,28 +1,87 @@
 <template>
-  <div
-    class="ind_cen ind_jd">
-    <div class="jd_box">
-      <div
-        class="jd_cen"
-        :style="{ 'width': mineSummary.rate+'%'}">
-        <p class="line">
-          <span class="cursor_arrow">
-            <i class="text">{{ $t('mine_progress') }} : </i>{{ mineSummary.rate | fixed(2) }}<i class="unit">%</i>
-          </span>
-        </p>
+  <div class="mine-summary-container">
+    <div class="ind_left ind_jd">
+      <div class="jd_box">
+        <div
+          class="jd_cen"
+          :style="{ 'width': mineSummary.rate+'%'}">
+          <p class="line">
+            <span class="cursor_arrow">
+              <i class="text">{{ $t('mine_progress') }} : </i>{{ mineSummary.rate | fixed(2) }}<i class="unit">%</i>
+            </span>
+          </p>
+        </div>
+        <em class="cursor cursor_left">0 IX</em>
+        <em class="cursor cursor_right">{{ mineSummary.max_amount | fixed(2) | thousand }} IX</em>
       </div>
-      <em class="cursor cursor_left">0 IX</em>
-      <em class="cursor cursor_right">{{ mineSummary.max_amount | fixed(2) | thousand }} IX</em>
+      <div class="jd_btxt">
+        <div class="row time_range mr-20">{{ mineSummary.range }}</div>
+        <div class="row col left__col mr-20">
+          <p class="text mb-6">{{ $t('mine_total') }} : </p>
+          <p>{{ mineSummary.max_amount | fixed(2) | thousand }}<em class="unit">IX</em></p>
+        </div>
+        <div class="row col left__col mr-20">
+          <p class="text mb-6">{{ $t('mine_mined') }} : </p>
+          <p>{{ mineSummary.amount | fixed(2) | thousand }}<em class="unit">IX</em></p>
+        </div>
+        <div class="row col left__col">
+          <p class="text mb-6">{{ $t('mine_remain') }} : </p>
+          <p>{{ mineSummary.remain | fixed(2) | thousand }}<em class="unit">IX</em></p>
+        </div>
+      </div>
+      <div
+        class="jd_btxt mt-20"
+        v-if="hasMineMy">
+        <div class="row personal mr-20"><span class="text">{{ $t('mine_my_total') }} : </span>
+          <p class="mb-6">{{ mineMy.max_amount | fixed(2) | thousand }}<em class="unit">IX</em></p>
+        </div>
+        <div class="row personal"><span class="text">{{ $t('mine_my_remain') }} : </span>
+          <p class="mb-6">{{ ( mineMy.max_amount - mineMy.amount ) | fixed(2) | thousand }}<em class="unit">IX</em></p>
+        </div>
+        <div class="row personal ml-30"><span class="text">{{ $t('mine_my_reduce') }} : </span>
+          <p class="mb-6">{{ ( mineMy.total ) | fixed(2) | thousand }}<em class="unit">IX</em></p>
+        </div>
+      </div>
     </div>
-    <div class="jd_btxt">
-      <div class="row time_range">{{ mineSummary.range }}</div>
-      <div class="row col"><span class="text">{{ $t('mine_total') }} : </span>{{ mineSummary.max_amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
-      <div class="row col"><span class="text">{{ $t('mine_mined') }} : </span>{{ mineSummary.amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
-      <div class="row col"><span class="text">{{ $t('mine_remain') }} : </span>{{ mineSummary.remain | fixed(2) | thousand }}<em class="unit">IX</em></div>
+    <div
+      v-if="showMiddle"
+      class="jd_c jd_middle ind_jd">
+      <div class="cm-tit">
+        {{ $t('mine_mining_amount') }}
+      </div>
+      <div class="cm-bt">
+        {{ yestodayMine.exchangeMine | round(4) }}
+        <span class="unit">IX</span>
+      </div>
+      <div class="cm-bst">
+        {{ $t('mine_invite_amount') }}
+      </div>
+      <div class="cm-bn">
+        {{ yestodayMine.inviteMine | round(4) }}
+        <span class="unit">IX</span>
+      </div>
     </div>
-    <div class="jd_btxt mt-30" v-if="hasMineMy">
-      <div class="row personal"><span class="text">{{ $t('mine_my_total') }} : </span>{{ mineMy.max_amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
-      <div class="row personal ml-30"><span class="text">{{ $t('mine_my_remain') }} : </span>{{ ( mineMy.max_amount - mineMy.amount ) | fixed(2) | thousand }}<em class="unit">IX</em></div>
+    <div
+      v-if="showRight"
+      class="jd_c jd_right ind_jd">
+      <div class="cm-bst">
+        {{ $t('mine_bonus_today') }}
+      </div>
+      <div class="cm-bn">
+        {{ bonusMine.today | round(8) }}<span class="unit">USDT</span>
+      </div>
+      <div class="cm-bst">
+        {{ $t('mine_bonus_rate') }}
+      </div>
+      <div class="cm-bn">
+        {{ bonusMine.rate | round(8) }}<span class="unit">USDT</span>
+      </div>
+      <div class="cm-bst">
+        {{ $t('mine_bonus_yestoday') }}
+      </div>
+      <div class="cm-bn">
+        {{ bonusMine.yesterday | round(8) }}<span class="unit">USDT</span>
+      </div>
     </div>
   </div>
 </template>
@@ -45,8 +104,19 @@ export default {
         max_amount: '333333333333',
         amount: 0
       },
+      yestodayMine: {
+        exchangeMine: 0,
+        inviteMine: 0
+      },
       mineMy: {},
-      timer: 0
+      bonusMine: {
+        yesterday: 0,
+        today: 0,
+        rate: 0
+      },
+      timer: 0,
+      showMiddle: false,
+      showRight: false
     }
   },
   computed: {
@@ -59,7 +129,7 @@ export default {
   },
   methods: {
     async fetch () {
-      let res = await service.getMineTotal()
+      let res = await service.getMineTotal({offset: 0})
       if (!res.code && !isEmpty(res.data)) {
         this.mineSummary = this.fixData(res.data)
       }
@@ -68,6 +138,25 @@ export default {
         if (!resMy.code && !isEmpty(resMy.data)) {
           this.mineMy = resMy.data
         }
+      }
+    },
+    async getYestoryData () {
+      let [res, resp, resc] = await Promise.all([service.getMineTotal({offset: -1}), service.getInviteMineTotal({offset: -1}), service.getBonusMineTotal()])
+      // 邀请挖矿 全部
+      if (!res.code && !isEmpty(res.data)) {
+        this.showMiddle = true
+        this.yestodayMine.exchangeMine = res.data.amount
+      }
+
+      // 邀请挖矿 个人
+      if (!resp.code && !isEmpty(resp.data)) {
+        this.showMiddle = true
+        this.yestodayMine.inviteMine = resp.data.amount
+      }
+      // 持仓分红
+      if (!resc.code && !isEmpty(resc.data)) {
+        this.showRight = true
+        this.bonusMine = resc.data
       }
     },
     loop () {
@@ -86,88 +175,10 @@ export default {
   created () {
     this.fetch()
     this.loop()
+    this.getYestoryData()
   }
 }
 </script>
-
 <style lang="scss" scoped>
-.ind_jd {
-  border: 1px solid #cbe6fd;
-  margin-bottom: 59px;
-  padding: 75px 6% 50px 6%;
-  .unit {
-    color: #6d869c;
-    margin-left: 5px;
-  }
-  .text {
-    color: #cbe6fd;
-  }
-  .jd_box {
-    width: 100%;
-    background: #6d869c;
-    height: 4px;
-    border-radius: 4px;
-    position: relative;
-
-    .cursor {
-      position: absolute;
-      color: #6d869c;
-      font-size: 14px;
-      line-height: 34px;
-      bottom: -34px;
-
-      &.cursor_left {
-        left: 0;
-      }
-      &:nth-child(3) {
-        right: 0;
-      }
-    }
-    .jd_cen {
-      height: 4px;
-      float: left;
-      position: relative;
-      border-radius: 4px;
-      background: #c9a96e;
-      width: 0px;
-      transition: width 2s;
-
-      .line {
-        display: block;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-top: 6px solid #c9a96e;
-        top: -20px;
-        right: -3px;
-        position: absolute;
-        .cursor_arrow {
-          display: block;
-          width: 300px;
-          height: 33px;
-          position: absolute;
-          top: -33px;
-          text-align: center;
-          left: 50%;
-          margin-left: -150px;
-          color: #c9a96e;
-        }
-      }
-    }
-  }
-  .jd_btxt {
-    font-size: 20px;
-    overflow: hidden;
-    margin-top: 65px;
-    .row {
-      float: left;
-      color: #c9a96e;
-      &.col {
-        width: 25%;
-      }
-      &.time_range {
-        width: 15%;
-      }
-    }
-  }
-}
+@import './mine-summary.scss';
 </style>

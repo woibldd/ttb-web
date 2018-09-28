@@ -2,14 +2,23 @@
   <div
     class="nav_box"
     :class="{dark: dark}">
-    <div class="c_box">
+    <div class="ind_cen">
       <router-link
         :to="{name:'home'}"
         class="nav_logo"/>
       <div class="nav_left">
         <div class="left_options">
-          <router-link :to="{name: 'trading'}" class="nav_link">{{$t('trading')}}</router-link>
-          <!-- <router-link :to="{}" class="nav_link ml-30">asdfasdf</router-link> -->
+          <router-link
+            :to="{name: 'trading'}"
+            class="nav_link">{{ $t('trading') }}</router-link>
+          <a
+            :href="'/docs/The+Declaration+of+IX'+pdfSubfix+'.pdf'"
+            target="_blank"
+            class="nav_link ml-30">{{ $t("declaration") }}</a>
+          <a
+            :href="'/docs/IX+WhitePaper'+pdfSubfix+'.pdf'"
+            target="_blank"
+            class="nav_link ml-30">{{ $t("whitepagger") }}</a>
         </div>
       </div>
       <div class="nav_right">
@@ -33,53 +42,74 @@
             <router-link :to="{name:'fund'}">我的资产</router-link>
           </p> -->
           <div class="fund mr-30">
-              <icon name="fund" ></icon>
-              {{$t('wallets_nav_asset')}}
-              <div class="dropdown-sub-menu">
-                <ul class="dropdown-list pt-10 pb-10">
-                  <li class="dropdown-item pl-24 pr-24">
-                    <router-link :to="{name: 'fund'}" class="link">{{$t('capital_manage')}}</router-link>
-                  </li>
-                  <li class="dropdown-item pl-24 pr-24">
-                    <router-link :to="{name: 'deposit'}" class="link">{{$t('deposit')}}</router-link>
-                  </li>
-                  <li class="dropdown-item pl-24 pr-24">
-                    <router-link :to="{name: 'withdraw'}" class="link">{{$t('withdraw')}}</router-link>
-                  </li>
-                </ul>
-              </div>
+            <icon name="fund" />
+            {{ $t('wallets_nav_asset') }}
+            <div class="dropdown-sub-menu">
+              <ul class="dropdown-list pt-10 pb-10">
+                <li class="dropdown-item pl-24 pr-24">
+                  <router-link
+                    :to="{name: 'fund'}"
+                    class="link">{{ $t('capital_manage') }}</router-link>
+                </li>
+                <li class="dropdown-item pl-24 pr-24">
+                  <router-link
+                    :to="{name: 'deposit'}"
+                    class="link">{{ $t('deposit') }}</router-link>
+                </li>
+                <li class="dropdown-item pl-24 pr-24">
+                  <router-link
+                    :to="{name: 'withdraw'}"
+                    class="link">{{ $t('withdraw') }}</router-link>
+                </li>
+              </ul>
+            </div>
           </div>
           <div class="email mr-30">
             {{ desentInfo }}
             <div class="dropdown-sub-menu">
-                <ul class="dropdown-list pt-10 pb-10">
-                  <li class="dropdown-item pl-24 pr-24 mobile">
-                    <router-link :to="{name: 'fund'}" class="link">{{$t('capital_manage')}}</router-link>
-                  </li>
-                  <li class="dropdown-item pl-24 pr-24">
-                    <router-link :to="{name: 'profile'}" class="link">{{$t('profile_personal_center')}}</router-link>
-                  </li>
-                  <li class="dropdown-item pl-24 pr-24">
-                    <a class="link" @click="logout">{{$t('signout')}}</a>
-                  </li>
-                </ul>
-              </div>
+              <ul class="dropdown-list pt-10 pb-10">
+                <li class="dropdown-item pl-24 pr-24 mobile">
+                  <router-link
+                    :to="{name: 'fund'}"
+                    class="link">{{ $t('capital_manage') }}</router-link>
+                </li>
+                <li class="dropdown-item pl-24 pr-24">
+                  <router-link
+                    :to="{name: 'profile'}"
+                    class="link">{{ $t('profile_personal_center') }}</router-link>
+                </li>
+                <li class="dropdown-item pl-24 pr-24">
+                  <a
+                    class="link"
+                    @click="logout">{{ $t('signout') }}</a>
+                </li>
+              </ul>
+            </div>
           </div>
           <div class="help">
             {{ $t('footer_help') }}
             <div class="dropdown-sub-menu">
-                <ul class="dropdown-list pt-10 pb-10">
-                  <li class="dropdown-item pl-24 pr-24">
-                    <a class="link" target="_blank" :href="announcementLink">{{$t('footer_notice')}}</a>
-                  </li>
-                  <li class="dropdown-item pl-24 pr-24">
-                    <a class="link" target="_blank" :href="helpLink">{{$t('user_guide')}}</a>
-                  </li>
-                  <li class="dropdown-item pl-24 pr-24">
-                    <a class="link" target="_blank" :href="requestLink">{{$t('footer_request')}}</a>
-                  </li>
-                </ul>
-              </div>
+              <ul class="dropdown-list pt-10 pb-10">
+                <li class="dropdown-item pl-24 pr-24">
+                  <a
+                    class="link"
+                    target="_blank"
+                    :href="announcementLink">{{ $t('footer_notice') }}</a>
+                </li>
+                <li class="dropdown-item pl-24 pr-24">
+                  <a
+                    class="link"
+                    target="_blank"
+                    :href="helpLink">{{ $t('user_guide') }}</a>
+                </li>
+                <li class="dropdown-item pl-24 pr-24">
+                  <a
+                    class="link"
+                    target="_blank"
+                    :href="requestLink">{{ $t('footer_request') }}</a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -114,6 +144,12 @@ export default {
   computed: {
     localeText () {
       return utils.getLocaleName(state.locale)
+    },
+    pdfSubfix () {
+      if (state.locale === 'zh-CN') {
+        return '+zh-CN'
+      }
+      return ''
     },
     desentInfo () {
       let userInfo = this.state.userInfo
@@ -171,6 +207,11 @@ export default {
 @import "../styles/mixins";
 
 .nav_box {
+  .ind_cen {
+    position: relative;
+    margin: 0 60px;
+    min-width: 1200px;
+  }
   width: 100%;
   height: 80px;
   line-height: 42px;
@@ -197,23 +238,27 @@ export default {
         &:hover {
           color: $primary;
         }
+
+        &.router-link-active {
+          color: $primary;
+        }
       }
     }
   }
   .nav_right {
     float: right;
     font-size: 14px;
-    
+
     .right_options {
       float: left;
     }
-    
+
     .fund, .email, .help {
       float: left;
       color:#fff;
       padding:19px 0;
       cursor: pointer;
-      
+
       .dropdown-sub-menu {
         opacity: 0;
         display: none;
@@ -250,7 +295,7 @@ export default {
 
       }
     }
-    
+
     .fund:hover, .email:hover, .help:hover {
       color: $primary;
       .dropdown-sub-menu {
@@ -258,7 +303,7 @@ export default {
         opacity: 1;
         visibility: visible;
         display: block;
-        
+
       }
     }
     .quit{
@@ -351,7 +396,7 @@ export default {
       display: block !important;
     }
   }
-  
+
 }
 .dark {
   background: $home-header-bgdark;

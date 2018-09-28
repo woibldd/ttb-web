@@ -10,7 +10,7 @@ const Mock = () => import('./mock')
 
 const service = {
   getBanners (data = {}) {
-    data.platform = 1
+    data.platform = data.platform || 1
     return request('/announcement/list', data)
   },
   resetPassword (data) {
@@ -55,7 +55,6 @@ const service = {
    */
   sendCode (data) {
     let url = `user/register/${data.by}/code`
-    let params = data
     return request(url, data)
   },
   sendVerifyEmail () {
@@ -69,6 +68,22 @@ const service = {
     if (data.phone) {
       return request('user/login/phone', data)
     }
+  },
+  // 获取登录邮箱/手机验证码
+  getLoginVerifyCode (param, type) {
+    let url
+    if (type === 'phone') {
+      url = 'user/login/phone/code'
+    } else {
+      url = 'user/login/email/code'
+    }
+    return request(url, param)
+  },
+  // 验证登录验证码
+  verifyLoginVerifyCode (param, type) {
+    // 新版登录接口后面加2
+    let url = '/user/login/' + type + '2'
+    return request(url, param)
   },
   register (data) {
     rmCache('session')
@@ -341,12 +356,22 @@ const service = {
       rmCache(key)
     }
   },
-  getMyInviteList () {
-    return request('/user/invitation/list')
+  /**
+   * 邀请记录
+   */
+  getMyInviteList (data) {
+    return request('user/invitation/list', data)
+    // .then(resp => {
+    //   resp.data = resp.data.concat(resp.data).concat(resp.data)
+    //   return resp
+    // })
   },
-  getTerminalDate () {
-    return request('get_terminal_date')
+  getCommissionList (data) {
+    return request('mine/invite/list', data)
   },
+  /**
+   * 登录历史
+   */
   getLoginHistory () {
     return request('user/login/history')
   },
@@ -372,6 +397,12 @@ const service = {
   getDepositHistory (param) {
     return request('/account/deposit/list', param)
   },
+
+  // 发放奖励记录
+  getRewardHistory (param) {
+    return request('/account/candy/list', param)
+  },
+
   // 获取添加过的地址列表
   getMyAddressList (param) {
     return request('/account/withdraw/address/list', param)
@@ -406,37 +437,51 @@ const service = {
 
   /* 挖矿 */
   getMineTotal (data) {
-    return getCache('mine_total', () => request('mine/exchange/total'), 1e4)
+    return request('mine/exchange/total', data)
   },
   getPersonalTotal (data) {
     return getCache('mine_my_total', () => request('mine/exchange/me'), 1e4)
-  }
+  },
+  getInviteMineTotal (data) {
+    return request('mine/invite/total', data)
+  },
+  getBonusMineTotal (data) {
+    return request('bonus/btc/total', data)
+  },
+  getRelayTotal () {
+    return request('relay/query')
+  },
   /* 挖矿 end */
+
+  /* 行情 */
+  getDealHistory (pair, data) {
+    return quote(`history/${pair}`, data)
+  }
 
 }
 
 export async function fetch (url, body, options, method = 'post') {
-  /* let mock = false
-  mock = await Mock()
-  if (mock && url.indexOf('quota.ix') > 0) {
-    const find = _.find(mock.list, item => {
-      return item.url && item.url.test(url)
-    })
-    if (find) {
-      const res = await find.res(body)
-      utils.log('Mock', url, body, res)
-      return res
-    }
-  } else {
-    if (mock.filter[url]) {
-      const find = _.find(mock.list, item => item.url && item.url.test(url))
-      if (find) {
-        const res = await find.res(body)
-        utils.log('Mock', url, body, res)
-        return res
-      }
-    }
-  } */
+  // let mock = false
+  // mock = await Mock()
+  // if (mock && url.indexOf('quota.ix') > 0) {
+  //   const find = _.find(mock.list, item => {
+  //     return item.url && item.url.test(url)
+  //   })
+  //   if (find) {
+  //     const res = await find.res(body)
+  //     utils.log('Mock', url, body, res)
+  //     return res
+  //   }
+  // } else {
+  //   if (mock.filter[url]) {
+  //     const find = _.find(mock.list, item => item.url && item.url.test(url))
+  //     if (find) {
+  //       const res = await find.res(body)
+  //       utils.log('Mock', url, body, res)
+  //       return res
+  //     }
+  //   }
+  // }
   try {
     let res
     if (method === 'get') {

@@ -28,6 +28,10 @@ export default {
         return true
       }
     },
+    startWhenLoaded: {
+      type: Boolean,
+      default: false
+    },
     sendCodeFunc: {
       type: Function
     }
@@ -88,8 +92,27 @@ export default {
       }
     }
   },
+  watch: {
+    startWhenLoaded (newVal) {
+      if (newVal) {
+        this.getSmsCode()
+      }
+    }
+  },
+  mounted () {
+    if (this.startWhenLoaded) {
+      this.getSmsCode()
+    }
+  },
   destroyed () {
     clearInterval(this.sms.timer)
   }
 }
 </script>
+<style lang="scss" scoped>
+.mobile {
+  .sms-btn {
+    font-size: 12px;
+  }
+}
+</style>

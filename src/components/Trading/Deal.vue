@@ -26,7 +26,9 @@
                 {{ deal.side === 'buy' ? $t('order_side_buy') : $t('order_side_sell') }}
               </span>
             </td>
-            <td class="right" :class="['side-' + deal.side, sideColor(deal.side)]"><num :num="$big(deal.price).toFixed(state.pro.pairInfo.price_scale)"/></td>
+            <td
+              class="right"
+              :class="['side-' + deal.side, sideColor(deal.side)]"><num :num="$big(deal.price).toFixed(state.pro.pairInfo.price_scale)"/></td>
             <td class="right">{{ deal.amount | fixed(state.pro.pairInfo.amount_scale) }}</td>
             <td>{{ deal.time | date('H:m:s') }}</td>
           </tr>
@@ -48,12 +50,12 @@
 </template>
 
 <script>
-import { state, local } from '@/modules/store';
-import ws from '@/modules/ws';
-import _ from 'lodash';
-import config from '@/libs/config';
-import service from '@/modules/service';
-import { pairfix } from '@/mixins/index';
+import { state, local } from '@/modules/store'
+import ws from '@/modules/ws'
+import _ from 'lodash'
+import config from '@/libs/config'
+import service from '@/modules/service'
+import { pairfix } from '@/mixins/index'
 
 export default {
   name: 'Deal',
@@ -149,8 +151,8 @@ export default {
         ` (${this.state.pro.pair.replace('_', '/')}) ${config.title}`
     },
     onresize: _.debounce(function () {
-      this.$refs.body.style.width = this.container.width + 'px';
-      this.$refs.body.style.height = this.container.height - 32 + 'px';
+      // this.$refs.body.style.width = this.container.width + 'px'
+      this.$refs.body.style.height = this.container.height - 32 + 'px'
     }, 100),
     layout () {
       this.onresize()
@@ -274,21 +276,18 @@ th {
 .fiat {
   padding-right: 12px;
 }
-// .twinkling {
-//   animation:twinkling 2.1s 1 ease-in-out;
-// }
-// @keyframes twinkling {
-//   0% {
-//     background: #788694;
-//     filter:alpha(opacity=20);
-//   }
-//   50% {
-//     background: #333;
-//     filter:alpha(opacity=50);
-//   }
-//   100% {
-//     opacity:0.2;
-//     filter:alpha(opacity=20);
-//   }
-// }
+.twinkling {
+  animation: twinkling 1s ease-in-out;
+}
+@keyframes twinkling {
+  0% {
+    opacity: .2;
+  }
+  50% {
+    opacity: .5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 </style>
