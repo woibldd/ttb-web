@@ -18,7 +18,7 @@ for (let key in config.projects) {
     filename: key + ".html",
     template: config.projects[key].template,
     theme: config.build.THEME_ENV,
-    chunks: [key],
+    chunks: [key, 'manifest', 'vendor'],
     inject: true,
     config: config.projects[key].config
   }));
@@ -74,7 +74,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       filename: "index.html",
       template: "index.html",
       theme: config.build.THEME_ENV,
-      chunks: ["app"],
+      chunks: ["app", "manifest", "vendor"],
       inject: true
     }),
     // copy custom static assets

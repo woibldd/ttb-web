@@ -29,8 +29,6 @@ const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
 const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pages/PrivacyPolicy')
 const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
 const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/ProfileSafety')
-const relay = () => import(/* webpackChunkName: "relay" */ '@/pages/active/relay')
-const creation = () => import(/* webpackChunkName: "creation" */ '@/pages/active/creation')
 const PhoneBind = () => import(/* webpackChunkName: "PhoneBind" */ '@/pages/PhoneBind')
 const SecuritySummary = () => import(/* webpackChunkName: "SecuritySummary" */ '@/pages/SecuritySummary')
 const eBind = () => import(/* webpackChunkName: "EmailBind" */ '@/pages/eBind')
@@ -50,6 +48,11 @@ const FundHistory = () => import(/* webpackChunkName: "FundHistory" */ '@/compon
 // h5相关页面
 const h5login = () => import(/* webpackChunkName: "h5login" */ '@/pages/h5/sign-up')
 const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index')
+
+// 活动页面
+const relay = () => import(/* webpackChunkName: "relay" */ '@/pages/active/relay')
+const creation = () => import(/* webpackChunkName: "creation" */ '@/pages/active/creation')
+const LockWarehouse = () => import(/* webpackChunkName: "LockWarehouse" */ '@/pages/active/LockWarehouse.vue')
 
 async function beforeEach (to, from, next) {
   state.loading = true
@@ -138,6 +141,11 @@ let router = new Router({
       path: '/activity/relay',
       name: 'relay',
       component: relay
+    },
+    {
+      path: '/activity/lock',
+      name: 'LockWarehouse',
+      component: LockWarehouse
     },
     {
       path: '/PrivacyPolicy',
