@@ -103,8 +103,8 @@ export const actions = {
       local.everSignup = true
       window.zE && window.zE(function () {
         window.zE.identify({
-          name: userInfo.email,
-          email: userInfo.email
+          name: userInfo.email || userInfo.phone,
+          email: userInfo.email || userInfo.phone
         })
       })
     } else {
