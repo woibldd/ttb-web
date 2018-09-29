@@ -366,7 +366,7 @@ export default {
         this.google_key_bound = res.data.google_key_bound
         this.phone = res.data.phone
         this.email = res.data.email
-        this.verify_phone = 1// res.data.verify_phone
+        this.verify_phone = res.data.verify_phone
         this.verify_email = res.data.verify_email
         this.verify_google = res.data.verify_google
         this.showModal = true
