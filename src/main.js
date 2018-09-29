@@ -32,6 +32,11 @@ import {
   Loading
 } from 'element-ui'
 
+Sentry.init({
+  dsn: 'https://cb7ce83188954a2d89afa702d5d4fcdf@sentry.io/1291113',
+  integrations: [new Sentry.Integrations.Vue({ Vue })]
+})
+
 Vue.config.productionTip = false
 Vue.use(VueI18n)
 Vue.use(VTooltip)
@@ -96,8 +101,3 @@ if (utils.isMobile()) {
     document.body.classList.add('ios')
   }
 }
-
-Sentry.init({
-  dsn: 'https://61d557d3b0b440dd9a08085d48af6950@sentry.io/1291074',
-  integrations: [new Sentry.Integrations.Vue({ Vue })]
-})
