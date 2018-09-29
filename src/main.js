@@ -13,6 +13,8 @@ import en from '@/libs/languages/en.json'
 import eventHub from '@/modules/eventHub'
 import VTooltip from 'v-tooltip'
 import qs from 'querystring'
+import * as Sentry from '@sentry/browser'
+import 'babel-polyfill'
 
 import 'element-ui/lib/theme-chalk/index.css'
 
@@ -29,6 +31,11 @@ import {
   RadioButton,
   Loading
 } from 'element-ui'
+
+Sentry.init({
+  dsn: 'https://cb7ce83188954a2d89afa702d5d4fcdf@sentry.io/1291113',
+  integrations: [new Sentry.Integrations.Vue({ Vue })]
+})
 
 Vue.config.productionTip = false
 Vue.use(VueI18n)
