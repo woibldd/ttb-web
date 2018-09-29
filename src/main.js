@@ -13,6 +13,8 @@ import en from '@/libs/languages/en.json'
 import eventHub from '@/modules/eventHub'
 import VTooltip from 'v-tooltip'
 import qs from 'querystring'
+import * as Sentry from '@sentry/browser'
+import 'babel-polyfill'
 
 import 'element-ui/lib/theme-chalk/index.css'
 
@@ -94,3 +96,8 @@ if (utils.isMobile()) {
     document.body.classList.add('ios')
   }
 }
+
+Sentry.init({
+  dsn: 'https://61d557d3b0b440dd9a08085d48af6950@sentry.io/1291074',
+  integrations: [new Sentry.Integrations.Vue({ Vue })]
+})
