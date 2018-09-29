@@ -395,7 +395,7 @@ export default {
         } else {
           this.$refs.container.style.minHeight = window.innerHeight - (110) - (80) + 'px'
         }
-      }catch (e) {
+      } catch (e) {
         console.log(e)
       }
     },
