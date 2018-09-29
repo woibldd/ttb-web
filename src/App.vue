@@ -200,7 +200,6 @@ export default {
     window.onresize = () => {
       this.$eh.$emit('app:resize')
     }
-    throw new Error('aaa')
   }
 }
 </script>
