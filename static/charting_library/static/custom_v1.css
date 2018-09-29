@@ -188,20 +188,20 @@ body {
 }
 
 .common-tooltip-wrapper .common-tooltip-body {
-  background-color: hsla(218, 26%, 19%, 1);
+  background-color: #192D3F;
   /* background-color: var(--background); */
   border-color: transparent;
-  box-shadow: #283B4C 0 6px 24px;
+  box-shadow: #192D3F 0 6px 24px;
   /* box-shadow: var(--background-alt) 0 6px 24px; */
 }
 .common-tooltip-wrapper.otr:before,
 .common-tooltip-wrapper.otr:after {
-  border-right-color: hsla(218, 26%, 19%, 1);
+  border-right-color: #192D3F;
   /* border-right-color: var(--background); */
 }
 .common-tooltip-wrapper.below:before,
 .common-tooltip-wrapper.below:after {
-  border-bottom-color: hsla(218, 26%, 19%, 1);
+  border-bottom-color: #192D3F;
   /* border-bottom-color: var(--background); */
 }
 
