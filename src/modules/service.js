@@ -477,8 +477,25 @@ const service = {
   // 开关验证 POST
   switchBindAction (params) {
     return request('/user/bind/switch', params)
-  }
+  },
+  // 申请API 验证码
+  getProfileApiCode (param) {
+    return request('/user/api/phone/code', param)
+  },
+
   // 申请API POST /user/api/create
+  createProfileApi (params) {
+    return request('/user/api/create', params)
+  },
+  // 删除API POST /user/api/delete
+  deleteProfileApi (params) {
+    return request('/user/api/delete', params)
+  },
+  // 获取api列表
+  getProfileApi () {
+    return request('/user/api/list')
+  }
+
   // 发起提币 POST /account/withdraw/create
   // 获取内部划转记录 POST /account/balance/transfer/list
 
