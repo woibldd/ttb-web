@@ -140,12 +140,13 @@
         <div class="modal__content">
           <div
             class="modal__row mt-12 mb-25"
-            v-if="google_key_bound">
+            v-if="verify_google">
             <div class="row__label mb-9">{{ $t('fa2_google_code_mobile') }}</div>
             <div class="row__input" >
               <input
                 v-model="googleCode"
                 @input="keyPress"
+                v-focus
                 maxlength="6"
                 @keydown.enter.stop.prevent="toVerifyCode"
                 class="input-validate google mr-14">
@@ -153,7 +154,7 @@
           </div>
           <div
             class="modal_phone"
-            v-else-if="phone">
+            v-else-if="verify_phone">
             <div class="modal__row" >
               <div class="row__label mb-9">{{ $t('register_by_phone') }}</div>
               <div class="row__input" >{{ phone }} </div>
@@ -177,7 +178,7 @@
           </div>
           <div
             class="modal_phone"
-            v-else-if="email">
+            v-else-if="verify_email">
             <div class="modal__row" >
               <div class="row__label mb-9">{{ $t('register_by_email') }}</div>
               <div class="row__input" >{{ email }} </div>
@@ -245,6 +246,9 @@ export default {
       emailCode: '',
       googleCode: '',
       phone: '',
+      verify_phone: 0,
+      verify_email: 0,
+      verify_google: 0,
       regionOptions: [],
       validateRules: {
         phone: {
@@ -362,6 +366,9 @@ export default {
         this.google_key_bound = res.data.google_key_bound
         this.phone = res.data.phone
         this.email = res.data.email
+        this.verify_phone = res.data.verify_phone
+        this.verify_email = res.data.verify_email
+        this.verify_google = res.data.verify_google
         this.showModal = true
       } else {
       // 未开启二步认证
@@ -392,11 +399,11 @@ export default {
       let type = 'google'
       let params = {
       }
-      if (this.google_key_bound) {
+      if (this.verify_google) {
         params = {
           code: this.googleCode
         }
-      } else if (this.phone) {
+      } else if (this.verify_phone) {
         params = {
           phone: this.phone,
           code: this.phoneCode

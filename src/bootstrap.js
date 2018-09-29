@@ -37,6 +37,16 @@ Vue.filter('thousand', utils.toThousand)
 Vue.filter('p', str => str.match(/^(.*)_/)[1])
 Vue.filter('c', str => str.match(/_(.*)$/)[1])
 
+Vue.directive('focus', {
+  componentUpdated (el) {
+    // 聚焦元素
+    el.focus()
+  },
+  update (el) {
+
+  }
+})
+
 // Vue.filter('money', exRate.getLocaleMoney)
 
 window.Promise.prototype.finally = function (callback) {

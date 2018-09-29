@@ -1,0 +1,123 @@
+@import "~@/styles/mixins";
+
+.verify-modal-container {
+    .verify-modal-layer{
+        position: relative;
+        width:410px;
+        background:rgba(255,255,255,1);
+        border-radius:8px;
+        padding-bottom: 50px;
+        padding-top: 34px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    
+        .layer__title {
+            font-size:20px;
+            font-weight:bold;
+            color:$text-strong;
+        }
+    
+        .modal__row {
+            box-sizing: border-box;
+            .row__label {
+                font-size:14px;
+                font-weight:400;
+                color:$text-weak;
+            }
+            .row__input {
+                box-sizing: border-box;
+                border: 1px solid $text-normal;
+                width: 340px;
+                height: 40px;
+                line-height: 40px;
+                border-radius: 4px;
+                color: $text-weak;
+                padding-left: 10px;
+            }
+            .input-validate {
+                width: 220px;
+                border: 0;
+                border-right: 1px solid $text-normal;
+
+                &.google {
+                    border: 0;
+                }
+
+                &:focus{
+                    outline: none;
+                }
+            }
+
+        }
+        .btns {
+            width: 340px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .modal-vefiry-btn {
+            width: 150px;
+            box-sizing: border-box;
+            line-height: 1;
+            text-align: center;
+
+            &.cancel {
+                background-color: #e6e6e6;
+                border: 0;
+            }
+        }
+    }
+
+    .modal-bg {
+        z-index: 1001;
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        visibility: hidden;
+        background-color: fade-out(black, .5);
+        transition: opacity 300ms, visibility 0s 300ms;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &.open {
+          opacity: 1;
+          visibility: visible;
+          transition: opacity 300ms;
+        }
+        .modal-wrap {
+          position: relative;
+          border-radius: 3px;
+          z-index: 1;
+        }
+        .modal-mask {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          z-index: 2;
+        }
+        .close-btn {
+          @include bg-retina('../../../assets/icon-cancel', 'png', 12px, 12px);
+          width: 40px;
+          height: 40px;
+          position: absolute;
+          right: 22px;
+          top: 12px;
+          filter: grayscale(100%);
+          opacity: .3;
+          transition: opacity 300ms;
+          z-index: 1000;
+          &:hover {
+            opacity: .7;
+          }
+        }
+      }
+}

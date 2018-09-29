@@ -354,6 +354,7 @@
   "my_balance_equal": "总资产折合",
   "contact_us": "在线帮助",
   "fund_reward": "奖励分配",
+  "internal_transfer": "内部划转",
   "exchange_area": "交易区",
   "mine_progress": "挖矿进度",
   "mine_total": "挖矿总量",
@@ -430,5 +431,12 @@
   "activity_max_input": "输入范围：20000-250000",
   "more_record": "更多记录",
   "first": "全球首家",
-  "bitcoin_equity_certificate": "比特币权益证明交易所"
+  "bitcoin_equity_certificate": "比特币权益证明交易所",
+  "transfer_in": "转入",
+  "transfer_out": "转出",
+  "close_verify": "关闭验证",
+  "already_closed": "已关闭",
+  "open_verify": "开启验证",
+  "already_open": "已开启"
+
 }
