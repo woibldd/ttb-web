@@ -15,8 +15,9 @@
         <div class="footer_ct">
           <p>{{ $t('footer_services') }}</p>
           <router-link :to="{name: 'trading'}">{{ $t('trading') }}</router-link>
-          <!-- <a href="#" target="_blank">{{$t('footer_services')}}</a> -->
-          <!-- <a href="#" target="_blank">{{$t('footer_help')}}</a> -->
+          <a
+            :href="aboutLink"
+            target="_blank">{{ $t('footer_about') }}</a>
           <a
             :href="requestLink"
             target="_blank">{{ $t('footer_request') }}</a>
@@ -125,6 +126,9 @@ export default {
     },
     announcementLink () {
       return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
+    },
+    aboutLink () {
+      return `/docs/IX_introduction_${this.state.locale || 'en'}.pdf`
     }
   }
 }

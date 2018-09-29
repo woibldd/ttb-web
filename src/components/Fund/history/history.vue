@@ -14,6 +14,9 @@
           <el-radio-button label="deposit">{{ $t('deposit_record') }}</el-radio-button>
           <el-radio-button label="withdraw">{{ $t('withdraw_record') }}</el-radio-button>
           <el-radio-button label="reward"> {{ $t('fund_reward') }} </el-radio-button>
+          <el-radio-button
+            v-if="hasInternal"
+            label="internal"> {{ $t('internal_transfer') }} </el-radio-button>
         </el-radio-group>
       </div>
       <el-table
@@ -23,15 +26,14 @@
         cell-class-name="unrelease-cell"
         class="fund-coin-pool">
         <el-table-column
-          v-for="(hd, idx) in (type==='reward' ? headerReward:header)"
+          v-for="(hd, idx) in tableHeaders"
           :key="idx"
           :formatter="formatter"
           :prop="hd.key"
           :label="hd.title"/>
-
         <el-table-column
           header-align='right'
-          v-if="type!=='reward'"
+          v-if="type!=='reward' && type !== 'internal'"
           align="right"
           width="200px"
           :label="status.title">
@@ -42,13 +44,13 @@
             </span>
           </template>
         </el-table-column>
+        <!-- 奖励记录 -->
         <el-table-column
           header-align='left'
           v-if="type==='reward'"
           align="left"
           width="200px"
           :label="status.title">
-          <!-- <span>解锁/锁仓</span> -->
           <template slot-scope="scope">
             <div :class="['state complete', unReleased(scope.row) && 'un-release']">
               {{ unReleased(scope.row) ? $t('waiting_for_release') : $t('done') }}
@@ -63,13 +65,25 @@
             </span>
           </template>
         </el-table-column>
+        <!-- 内部划转类型 -->
         <el-table-column
           header-align='right'
-          v-if="type!=='reward'"
+          v-if="type==='internal'"
+          align="right"
+          width="200px"
+          :label="internalType.title">
+          <template slot-scope="scope">
+            <div class="state complete">
+              {{ scope.row.type === 2 ? $t('transfer_in') : $t('transfer_out') }}
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column
+          header-align='right'
+          v-if="type!=='reward' && type !== 'internal'"
           align="right"
           width="200px"
           :label="operate.title">
-          <!-- <span>解锁/锁仓</span> -->
           <template slot-scope="scope">
             <div class="contact-item">
               <icon name="fund-history-copy"/>
@@ -120,7 +134,14 @@ export default {
         {key: 'name', title: this.$i18n.t('order_th_type')},
         {key: 'amount', title: this.$i18n.t('amount')} // -fee
       ],
+      headerInternal: [
+        {key: 'create_time', title: this.$i18n.t('time')},
+        {key: 'currency', title: this.$i18n.t('currency')},
+        {key: 'amount', title: this.$i18n.t('amount')},
+        {key: 'memo', title: this.$i18n.t('note')}
+      ],
       status: {key: 'state', title: this.$i18n.t('state')},
+      internalType: {key: 'internal', title: this.$i18n.t('order_th_type')},
       operate: {key: 'txid', title: this.$i18n.t('actions')},
       tableData: [],
       total: 0,
@@ -129,12 +150,26 @@ export default {
       page: 1,
       unit: 'CNY',
       loading: true,
+      hasInternal: false,
       state
+    }
+  },
+  computed: {
+    tableHeaders () {
+      switch (this.type) {
+        case 'reward':
+          return this.headerReward
+        case 'internal':
+          return this.headerInternal
+        default:
+          return this.header
+      }
     }
   },
   async created () {
     this.getFundHistory(this.type)
     this.getAccountBalanceList()
+    this.getInternalHistory()
   },
   methods: {
     formatter (row, column) {
@@ -180,6 +215,15 @@ export default {
     unReleased (row) {
       return this.type === 'reward' && row.state === 0// 0 待发放, 1 已完成
     },
+    async getInternalHistory () {
+      let res = await service.getInternalHistory({
+        page: 1,
+        size: 1
+      })
+      if (!res.code && res.data && res.data.length > 0) {
+        this.hasInternal = true
+      }
+    },
     getFundHistory (from = 'deposit') {
       this.loading = true
       let request = ''
@@ -192,6 +236,9 @@ export default {
           break
         case 'reward':
           request = service.getRewardHistory
+          break
+        case 'internal':
+          request = service.getInternalHistory
           break
         default:
           break
@@ -320,7 +367,7 @@ export default {
        .el-radio-button__inner {
         background-color: white !important;
         display: inline-block;
-        width: 80px;
+        // width: 80px;
         color: $text-weak !important;
         border: 1px solid $text-weak !important;
         height: 30px;
@@ -328,7 +375,7 @@ export default {
         box-sizing: border-box;
         text-align: center;
         border-radius: 15px !important;
-        padding: 0;
+        padding: 0 10px;
         box-shadow: none !important;
         margin-left: 10px;
        }

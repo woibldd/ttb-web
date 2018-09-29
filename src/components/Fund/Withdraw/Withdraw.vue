@@ -122,7 +122,9 @@
             <div class="row__label mb-9">{{ $t('register_by_phone') }}</div>
             <div class="row__input" >{{ contact }} </div>
           </div>
-          <div class="modal__row mt-12 mb-25">
+          <div
+            class="modal__row mt-12 mb-25"
+            v-if="verify_phone">
             <div class="row__label mb-9">{{ $t('phone_verification_code') }}</div>
             <div class="row__input" >
               <input
@@ -136,7 +138,7 @@
           </div>
           <div
             class="modal__row mt-12 mb-25"
-            v-if="google_key_bound">
+            v-if="verify_google">
             <div class="row__label mb-9">{{ $t('fa2_google_code_mobile') }}</div>
             <div class="row__input" >
               <input
@@ -225,8 +227,14 @@ export default {
     coinArrival () {
       return this.$big(parseFloat(this.withdrawCount) || 0).minus(this.$big(this.selectCoin.withdraw_fee || 0)).toString()
     },
-    google_key_bound () {
-      if (this.state.userInfo && this.state.userInfo.google_key_bound) {
+    verify_google () {
+      if (this.state.userInfo && this.state.userInfo.verify_google) {
+        return true
+      }
+      return false
+    },
+    verify_phone () {
+      if (this.state.userInfo && this.state.userInfo.verify_phone) {
         return true
       }
       return false

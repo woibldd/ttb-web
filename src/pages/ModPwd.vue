@@ -26,15 +26,23 @@
           @focus="focus"
           @blur="blur"
           v-model="form.password_new"/>
-        <div class="pw-helps" :class="{show: atPw}">
-            <div class="title" v-t="'pwcheck_guide'"></div>
-            <ul class="pw-checks">
-            <li v-for="(check, index) in pwCheckList"
-                class="pw-check" :key="index">
-                <span class="pw-state" :class="{pass: check.pass}"></span>
-                <span class="desc">{{ $t(check.desc) }}</span>
+        <div
+          class="pw-helps"
+          :class="{show: atPw}">
+          <div
+            class="title"
+            v-t="'pwcheck_guide'"/>
+          <ul class="pw-checks">
+            <li
+              v-for="(check, index) in pwCheckList"
+              class="pw-check"
+              :key="index">
+              <span
+                class="pw-state"
+                :class="{pass: check.pass}"/>
+              <span class="desc">{{ $t(check.desc) }}</span>
             </li>
-            </ul>
+          </ul>
         </div>
       </el-form-item>
       <el-form-item
@@ -53,6 +61,83 @@
           @click="submit"/>
       </el-form-item>
     </el-form>
+    <v-modal
+      :open.sync="showModal"
+      :backdrop="false"
+      @click="hideModal">
+      <div class="ensure-modal">
+        <div class="modal__title mb-30">{{ $t('security_verification') }}</div>
+        <div class="modal__content">
+          <div
+            class="modal__row mt-12 mb-25"
+            v-if="verify_google">
+            <div class="row__label mb-9">{{ $t('fa2_google_code_mobile') }}</div>
+            <div class="row__input" >
+              <input
+                v-model="googleCode"
+                @input="keyPress"
+                v-focus
+                maxlength="6"
+                @keydown.enter.stop.prevent="toVerifyCode"
+                class="input-validate google mr-14">
+            </div>
+          </div>
+          <div
+            class="modal_phone"
+            v-else-if="verify_phone">
+            <div class="modal__row" >
+              <div class="row__label mb-9">{{ $t('register_by_phone') }}</div>
+              <div class="row__input" >{{ phone }} </div>
+            </div>
+            <div class="modal__row mt-12 mb-25">
+              <div class="row__label mb-9">{{ $t('phone_code') }}</div>
+              <div class="row__input" >
+                <input
+                  v-model="phoneCode"
+                  @input="keyPress"
+                  maxlength="6"
+                  @keydown.enter.stop.prevent="toVerifyCode"
+                  class="input-validate mr-14">
+                <count-down
+                  :send-text="$t('hq_send')"
+                  :start-when-loaded="showModal"
+                  :send-code-func="getPhoneVerifyCode"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="modal_phone"
+            v-else-if="verify_email">
+            <div class="modal__row" >
+              <div class="row__label mb-9">{{ $t('register_by_email') }}</div>
+              <div class="row__input" >{{ email }} </div>
+            </div>
+            <div class="modal__row mt-12 mb-25">
+              <div class="row__label mb-9">{{ $t('email_code') }}</div>
+              <div class="row__input" >
+                <input
+                  v-model="emailCode"
+                  @input="keyPress"
+                  maxlength="6"
+                  @keydown.enter.stop.prevent="toVerifyCode"
+                  class="input-validate mr-14">
+                <count-down
+                  :send-text="$t('hq_send')"
+                  :start-when-loaded="showModal"
+                  :send-code-func="getEmailVerifyCode"
+                />
+              </div>
+            </div>
+          </div>
+
+          <v-btn
+            class="w-340"
+            @click="toVerifyCode"
+            :label="$t('modify')"/>
+        </div>
+      </div>
+    </v-modal>
   </div>
 </template>
 
@@ -60,11 +145,14 @@
 import service from '@/modules/service'
 import VBtn from '@/components/VBtn'
 import pwChecker from '@/modules/pw-checker'
+import utils from '@/modules/utils'
+import countDown from '@/components/common/countdown-code-button'
+import { state, actions} from '@/modules/store'
 
 export default {
   name: 'SafeVerified',
   components: {
-    VBtn
+    VBtn, countDown
   },
   data () {
     const validataPswRepeat = (rule, value, callback) => {
@@ -80,7 +168,7 @@ export default {
     const validataPswStrong = (rule, value, callback) => {
       if (!value) {
         return callback(new Error(this.$i18n.t('err_empty_password')))
-      } 
+      }
       const pwCheckList = pwChecker.getState(value)
       if (_.filter(pwCheckList, r => r.pass).length < 4) {
         return callback(new Error(this.$i18n.t('err_weak_password')))
@@ -102,31 +190,71 @@ export default {
         password_orig: [
           { required: true, message: this.$i18n.t('err_empty_password'), trigger: 'blur' }
         ]
-      }
+      },
+      showModal: false,
+      phoneCode: '',
+      emailCode: '',
+      googleCode: '',
+      state
     }
   },
   computed: {
-    
+    userInfo () {
+      return this.state.userInfo || {}
+    },
+    phone () {
+      return this.userInfo.phone
+    },
+    regionId () {
+      return this.userInfo.region
+    },
+    email () {
+      return this.userInfo.email
+    },
+    verify_email () {
+      return this.userInfo && this.state.userInfo.verify_email
+    },
+    verify_phone () {
+      return this.userInfo && this.state.userInfo.verify_phone
+    },
+    verify_google () {
+      return this.userInfo && this.state.userInfo.verify_google
+    }
   },
   methods: {
+    toLogin () {
+      utils.success(this.$i18n.t('reset_success'))
+      actions.setUserInfo(null)
+      service.signout()
+      this.$router.push({
+        name: 'login'
+      })
+    },
     async submit () {
-      if (this.form.password_new == this.form.password_repeat) {
-        let params = {
-          old_password: this.form.password_orig,
-          new_password: this.form.password_new
-        }
-        let result = await service.changePassword(params)
-        if (result && !result.code) {
-          this.$router.push({
-            name: 'Safety'
-          })
+      if (this.form.password_new === this.form.password_repeat) {
+        if (this.verify_phone || this.verify_email || this.verify_google) {
+          this.showModal = true
         } else {
-          utils.alert(result.message)
+          const verifyObj = this.verifyCode()
+          let params = {
+            old_password: this.form.password_orig,
+            new_password: this.form.password_new
+          }
+          params = Object.assign(verifyObj)
+          let result = await service.changePassword(params)
+          if (result && !result.code) {
+            this.toLogin()
+          } else {
+            utils.alert(result.message)
+          }
         }
       } else {
-        console.log('error submit!!');
-        return false;
+        console.log('error submit!!')
+        return false
       }
+    },
+    hideModal () {
+      this.showModal = false
     },
     pwChange () {
       this.pwCheckList = pwChecker.getState(this.form.password_new || '')
@@ -136,6 +264,65 @@ export default {
     },
     blur () {
       this.atPw = false
+    },
+    getPhoneVerifyCode () {
+      const param = {
+        region: this.regionId,
+        phone: this.phone
+      }
+      service.getCode4modifyPhonePassword(param).then(resp => {
+        if (resp.code) {
+          utils.alert(resp.message)
+        }
+      })
+    },
+    getEmailVerifyCode () {
+      const param = {
+        email: this.email
+      }
+      service.getCode4modifyEmailPassword(param).then(resp => {
+        if (resp.code) {
+          utils.alert(resp.message)
+        }
+      })
+    },
+    keyPress ($event) {
+      let code = $event.srcElement.value
+      if (code && code.length === 6 && /^\d{6}$/.test(code)) {
+        this.toVerifyCode()
+      }
+    },
+    async toVerifyCode () {
+      const verifyObj = this.verifyCode()
+      let params = {
+        old_password: this.form.password_orig,
+        new_password: this.form.password_new
+      }
+      params = Object.assign(params, verifyObj)
+      let result = await service.changePassword(params)
+      if (result && !result.code) {
+        this.toLogin()
+      } else {
+        utils.alert(result.message)
+      }
+    },
+    verifyCode () {
+      let verifyObj = {}
+
+      if (this.google_key_bound) {
+        verifyObj = {
+          google_code: this.googleCode
+        }
+      } else if (this.phone) {
+        verifyObj = {
+          phone_code: this.phoneCode
+        }
+      } else {
+        verifyObj = {
+          email_code: this.emailCode
+        }
+      }
+      return verifyObj
     }
   }
 }
@@ -277,4 +464,57 @@ export default {
         margin-bottom: 4px;
     }
 }
+
+.ensure-modal {
+  width:541px;
+  background:rgba(255,255,255,1);
+  border-radius:8px;
+  padding-bottom: 50px;
+  padding-top: 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .modal__title {
+      font-size:20px;
+      font-weight:bold;
+      color:$text-strong;
+  }
+  .modal__row {
+      box-sizing: border-box;
+      .row__label {
+          font-size:14px;
+          font-weight:400;
+          color:$text-weak;
+      }
+      .row__input {
+          box-sizing: border-box;
+          border: 1px solid $text-normal;
+          width: 340px;
+          height: 40px;
+          line-height: 40px;
+          border-radius: 4px;
+          color: $text-weak;
+          padding-left: 10px;
+      }
+      .input-validate {
+          width: 220px;
+          border: 0;
+          border-right: 1px solid $text-normal;
+
+          &.google {
+              border: 0;
+          }
+
+          &:focus{
+              outline: none;
+          }
+      }
+
+  }
+  .w-340 {
+      width: 340px;
+  }
+
+    }
 </style>

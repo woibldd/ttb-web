@@ -485,6 +485,7 @@
   "app_download_ios": "Guide for IOS",
   "my_balance_equal": "Available balance",
   "fund_reward": "Reward",
+  "internal_transfer": "Internal Transfer",
   "contact_us": "Help",
   "exchange_area": "Transactions Area",
   "mine_progress": "Mining Progress",
@@ -574,5 +575,11 @@
   "t_minutes": "The newly applied API Key/Secret will take effect within 10 minutes.",
   "bq": "IX provides you with a powerful API that allows you to use quotes, automatic trading, and experience more services.",
   "confirm_deletion ": "Please confirm deletion of API key",
-  "stopped_after ": "The key function will be stopped after deletion, continue or quit."
+  "stopped_after ": "The key function will be stopped after deletion, continue or quit.",
+  "close_verify": "Close",
+  "already_closed": "Already Closed",
+  "open_verify": "Open",
+  "already_open": "Already Open",
+  "transfer_in": "In",
+  "transfer_out": "Out"
 }

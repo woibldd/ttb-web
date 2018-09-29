@@ -52,6 +52,9 @@ const FundHistory = () => import(/* webpackChunkName: "FundHistory" */ '@/compon
 const h5login = () => import(/* webpackChunkName: "h5login" */ '@/pages/h5/sign-up')
 const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index')
 
+// 活动页面
+const LockWarehouse = () => import(/* webpackChunkName: "LockWarehouse" */ '@/pages/active/LockWarehouse.vue')
+
 async function beforeEach (to, from, next) {
   state.loading = true
   const auth = utils.getRouteMeta(to, 'auth')
@@ -139,6 +142,11 @@ let router = new Router({
       path: '/activity/relay',
       name: 'relay',
       component: relay
+    },
+    {
+      path: '/activity/lock',
+      name: 'LockWarehouse',
+      component: LockWarehouse
     },
     {
       path: '/PrivacyPolicy',

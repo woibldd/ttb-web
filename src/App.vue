@@ -32,13 +32,13 @@
       :fixed="fixed"
     />
     <v-notify-list/>
-    <div
+    <!-- <div
       class="home-ball"
       @click="toNotice"
       v-if="zendeskWidget">
       <icon name="serve"/>
       <span>{{ $t('contact_us') }}</span>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -196,7 +196,6 @@ export default {
         })
       }
     })
-
     this.keepSession()
     window.onresize = () => {
       this.$eh.$emit('app:resize')
