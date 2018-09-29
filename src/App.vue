@@ -196,7 +196,6 @@ export default {
         })
       }
     })
-
     this.keepSession()
     window.onresize = () => {
       this.$eh.$emit('app:resize')
