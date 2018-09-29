@@ -430,5 +430,17 @@
   "activity_max_input": "输入范围：20000-250000",
   "more_record": "更多记录",
   "first": "全球首家",
-  "bitcoin_equity_certificate": "比特币权益证明交易所"
+  "bitcoin_equity_certificate": "比特币权益证明交易所",
+  "api_management": "API管理",
+  "delete": "删除",
+  "api_doc": "API文档",
+  "no_keys": "暂无API密钥，",
+  "click_update": "点击刷新,",
+  "new_key": "生成新密钥",
+  "key_carefully": "请妥善保管API密钥，此API密钥不会再次展示",
+  "not_less": "API访问间隔不低于100ms",
+  "t_minutes": "新申请的API Key/Secret将于10分钟之内生效",
+  "bq": "IX 为您提供了强大的API，您可以通过 API 使用行情查询、自动交易等服务。通过",
+  "confirm_deletion": "IX 确认删除API密钥",
+  "stopped_after": "删除后将停用密钥，是否删除？"
 }

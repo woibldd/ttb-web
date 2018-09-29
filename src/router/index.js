@@ -29,6 +29,7 @@ const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
 const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pages/PrivacyPolicy')
 const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
 const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/ProfileSafety')
+const ProfileApi = () => import(/* webpackChunkName: "ProfileApi" */ '@/pages/ProfileApi')
 const relay = () => import(/* webpackChunkName: "relay" */ '@/pages/active/relay')
 const creation = () => import(/* webpackChunkName: "creation" */ '@/pages/active/creation')
 const PhoneBind = () => import(/* webpackChunkName: "PhoneBind" */ '@/pages/PhoneBind')
@@ -191,6 +192,11 @@ let router = new Router({
           path: 'info',
           name: 'ProfileInfo',
           component: ProfileInfo
+        },
+        {
+          path: 'api',
+          name: 'ProfileApi',
+          component: ProfileApi
         },
         {
           path: 'security',

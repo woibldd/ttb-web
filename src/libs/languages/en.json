@@ -562,5 +562,17 @@
   "activity_max_input": "range: 20000-250000",
   "more_record": "More",
   "first": "First ",
-  "bitcoin_equity_certificate": "exchange regards  Bitcoin as equity certificate"
+  "bitcoin_equity_certificate": "exchange regards  Bitcoin as equity certificate",
+  "api_management": "API Management",
+  "delete": "Delete",
+  "api_doc": "API Document",
+  "no_keys": "No Keys,click to update",
+  "click_update": "No Keys,",
+  "new_key": "Create new key",
+  "key_carefully": "Please keep this key carefully, it will not be displayed again",
+  "not_less": "API access interval is not less than 100ms",
+  "t_minutes": "The newly applied API Key/Secret will take effect within 10 minutes.",
+  "bq": "IX provides you with a powerful API that allows you to use quotes, automatic trading, and experience more services.",
+  "confirm_deletion ": "Please confirm deletion of API key",
+  "stopped_after ": "The key function will be stopped after deletion, continue or quit."
 }
