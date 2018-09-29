@@ -567,7 +567,7 @@
   "delete": "Delete",
   "api_doc": "API Document",
   "no_keys": "No Keys,click to update",
-  "click_update": "No Keys,",
+  "click_create": "New Keys,",
   "new_key": "Create new key",
   "key_carefully": "Please keep this key carefully, it will not be displayed again",
   "not_less": "API access interval is not less than 100ms",

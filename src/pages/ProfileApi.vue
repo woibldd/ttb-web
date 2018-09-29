@@ -18,13 +18,13 @@
               <p class="api-key">6169e13*****</p>
               <p class="api-secret">3772ace*****</p>
               <p class="api-oper">
-                <a href="">{{ $t('delete') }}</a>
+                <a @click="deleteApi">{{ $t('delete') }}</a>
               </p>
             </li>
           </ul>
           <ul class="tit">
             <li>
-              {{ $t('no_keys') }}<a href="">{{ $t('click_update') }}</a>
+              {{ $t('no_keys') }}<a @click.prevent="createApi">{{ $t('click_create') }}</a>
             </li>
           </ul>
         </div>
@@ -41,12 +41,12 @@
         <input
           type="text"
           class="api-inp"
-          value="88qweoiiasod2214lkjlkaosj3s95sd231">
+          v-model="apiKey">
         <p class="inp-tit">API secret</p>
         <input
           type="text"
           class="api-inp"
-          value="88qweoiiasod2214lkjlkaosj3s95sd231">
+          v-model="apiSecret">
         <div class="bot-prompt">
           <p>{{ $t('tips') }}</p>
           <p class="pro-txt">{{ $t('not_less') }} <br>
@@ -56,7 +56,7 @@
         <div class="modal__content">
           <v-btn
             class="w-340"
-            @click="toVerifyCode"
+            @click="cofirmCreateApi"
             :label="$t('confirm')"/>
         </div>
       </div>
@@ -94,14 +94,29 @@ export default {
   data () {
     return {
       showModal: false,
-      btnconfirm: true
+      btnconfirm: false,
+      apiKey: '',
+      apiSecret: ''
     }
   },
   computed: {
 
   },
   methods: {
-
+    deleteApi (api) {
+      this.btnconfirm = true
+      console.log('delete api')
+    },
+    changeApi (api) {
+      this.showModal = true
+      console.log('delete api')
+    },
+    createApi () {
+      this.showModal = true
+    },
+    cofirmCreateApi () {
+      const params = {}
+    }
   }
 }
 </script>

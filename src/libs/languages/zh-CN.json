@@ -435,7 +435,7 @@
   "delete": "删除",
   "api_doc": "API文档",
   "no_keys": "暂无API密钥，",
-  "click_update": "点击刷新,",
+  "click_create": "点击创建,",
   "new_key": "生成新密钥",
   "key_carefully": "请妥善保管API密钥，此API密钥不会再次展示",
   "not_less": "API访问间隔不低于100ms",
