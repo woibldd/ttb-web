@@ -31,7 +31,7 @@
             :href="helpLink"
             target="_blank">{{ $t('user_guide') }}</a>
           <a
-            href="https://github.com/ix-api/API_Docs"
+            :href="apiDoc"
             target="_blank">{{ $t('footer_api') }}</a>
             <!-- <a href="#" target="_blank">{{$t('footer_api')}}</a> -->
         </div>
@@ -132,6 +132,9 @@ export default {
     },
     aboutLink () {
       return `/docs/IX_introduction_${this.state.locale || 'en'}.pdf`
+    },
+    apiDoc () {
+      return this.state.theme.apiDoc[this.state.locale || 'en']
     }
   }
 }
