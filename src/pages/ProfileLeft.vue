@@ -29,7 +29,7 @@
           <router-link
             class="menu-name"
             active-class="active"
-            :to="{name: 'ProfileApi'}">{{ $t('profile_sec_api') }}</router-link>
+            :to="{name: 'ProfileApi'}">{{ $t('api_management') }}</router-link>
         </li>
         <li class="">
           <router-link

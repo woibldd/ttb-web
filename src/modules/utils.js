@@ -419,9 +419,12 @@ const utils = {
    */
   publicDesensitization () {
     // 先将内置的 arguments 转换为真正的数组
-    var dataArr = Array.prototype.slice.apply(arguments)
-    for (var i = 0; i < dataArr.length; i++) {
-      var data = dataArr[i]
+    let dataArr = Array.prototype.slice.apply(arguments)
+    for (let i = 0; i < dataArr.length; i++) {
+      let data = dataArr[i]
+      if (typeof data !== 'string') {
+        continue
+      }
       // 正则判断返回相应数据
       if (/(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(data) || /^(13[0-9]|16[0-9]|19[0-9]|147|15[0-9]|17[6-8]|18[0-9])\d{8}|17[0-9]\d{8}$/.test(data) || /(^(?:(?![IOZSV])[\dA-Z]){2}\d{6}(?:(?![IOZSV])[\dA-Z]){10}$)|(^\d{15}$)/.test(data)) {
         // 身份证号 || 手机号  ||  营业执照    前三后四
@@ -436,6 +439,11 @@ const utils = {
         // 企业名称  前二后四
         data = data.substr(0, 2) + '****' + data.substr(-4)
       } else {
+        let raw = dataArr[0]
+        let len = dataArr[1] || 6
+        if (raw) {
+          data = data.substr(0, len) + '****'
+        }
       }
       dataArr[i] = data
     }

@@ -2,14 +2,13 @@
   <div class="user-center-right">
     <div class="profile-container">
       <div class="title-box">{{ $t('api_management') }}</div>
-      <div class="api-box">
+      <div class="api-box mb-30">
         <div class="api-ul">
           <ul class="tit">
             <li>
               <p class="api-tit">{{ $t('label') }}</p>
-              <p class="api-key">API_key</p>
-              <p class="api-secret">API_secret</p>
-              <p class="api-oper">{{ $t('create_time') }}</p>
+              <p class="api-key">API key</p>
+              <p class="api-secret">API secret</p>
               <p class="api-oper">{{ $t('operation') }}</p>
             </li>
           </ul>
@@ -17,65 +16,64 @@
             <li
               v-for="api in apiList"
               :key="api.id">
-              <p class="api-tit">{{ api.description }}</p>
-              <p class="api-key">{{ api.api_key }}p>
-              </p><p class="api-secret">{{ api.api_secret }}</p>
-              <p class="api-secret">{{ api.create_time }}</p>
+              <p class="api-tit">{{ api.description || '-' }}</p>
+              <p class="api-key">{{ api.api_key }}</p>
+              <p class="api-secret">{{ api.api_secret }}</p>
               <p class="api-oper">
-                <a @click="deleteApi">{{ $t('delete') }}</a>
+                <a @click="deleteApi(api)">{{ $t('delete') }}</a>
               </p>
             </li>
           </ul>
           <ul class="tit">
-            <li>
-              {{ $t('no_keys') }}<a @click.prevent="createApi">{{ $t('click_create') }}</a>
+            <li v-if="apiList.length < 10">
+              <span v-if="apiList.length === 0">{{ $t('no_keys') }}</span>
+              <a @click.prevent="getVerifyCode">{{ $t('click_create') }}</a>
             </li>
           </ul>
         </div>
       </div>
     </div>
+    <!-- 秘钥框 -->
     <v-modal
       :open.sync="showCreateModal"
       :backdrop="false"
-      @click="hideModal">
+    >
       <div class="api-alt-con">
         <div class="alt-title">{{ $t('new_key') }}</div>
         <p class="prompt">{{ $t('key_carefully') }}</p>
         <p class="inp-tit">API key</p>
         <input
           type="text"
+          disabled
           class="api-inp"
           v-model="apiKey">
         <p class="inp-tit">API secret</p>
         <input
           type="text"
+          disabled
           class="api-inp"
           v-model="apiSecret">
-        <p class="inp-tit">{{ $t('captcha') }}</p>
-        <input
-          type="text"
-          class="api-inp"
-          @click="getVerifyCode"
-          readonly
-          v-model="gotCode">
         <div class="bot-prompt">
           <p>{{ $t('tips') }}</p>
           <p class="pro-txt">{{ $t('not_less') }} <br>
             {{ $t('t_minutes') }}<br>
-            {{ $t('bq') }}<a>{{ $t('api_doc') }}</a>查看如何使用。</p>
+            {{ $t('bq') }}<a
+              :href="apiDoc"
+              target="_blank">{{ $t('api_doc') }}</a>{{ $t('see_api_doc') }}</p>
         </div>
         <div class="modal__content">
           <v-btn
             class="w-340"
-            @click="confirmCreateApi"
+            @click="showCreateModal=false"
             :label="$t('confirm')"/>
         </div>
       </div>
     </v-modal>
+    <!-- 确认删除框 -->
     <v-modal
       :open.sync="btnconfirm"
-      :backdrop="false"
-      @click="hideModal">
+      :backdrop="true"
+    >
       <div class="api-alt-oper">
         <p class="api-oper-tit">{{ $t('confirm_deletion') }}</p>
         <p class="api-oper-txt">{{ $t('stopped_after') }}</p>
@@ -89,10 +87,11 @@
         </div>
       </div>
     </v-modal>
+    <!-- 验证码框 -->
     <v-modal
       :open.sync="showVerifyModal"
-      :backdrop="false"
-      @click="hideVerifyModal">
+      :backdrop="true"
+    >
       <div class="ensure-modal">
         <div class="modal__title mb-30">{{ $t('security_verification') }}</div>
         <div class="modal__content">
@@ -104,7 +103,6 @@
               <input
                 v-model="googleCode"
                 @input="keyPress"
-                v-focus
                 maxlength="6"
                 @keydown.enter.stop.prevent="verifyCode"
                 class="input-validate google mr-14">
@@ -128,7 +126,7 @@
                   class="input-validate mr-14">
                 <count-down
                   :send-text="$t('hq_send')"
-                  :start-when-loaded="showCreateModal"
+                  :start-when-loaded="showVerifyModal"
                   :send-code-func="getPhoneVerifyCode"
                 />
               </div>
@@ -152,9 +150,23 @@
                   class="input-validate mr-14">
                 <count-down
                   :send-text="$t('hq_send')"
-                  :start-when-loaded="showCreateModal"
+                  :start-when-loaded="showVerifyModal"
                   :send-code-func="getEmailVerifyCode"
                 />
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="modal_phone"
+          >
+            <div class="modal__row mt-12 mb-25" >
+              <div class="row__label mb-9">{{ $t('label') }}</div>
+              <div class="row__input">
+                <input
+                  v-model="label"
+                  maxlength="10"
+                  class="input-validate google mr-14">
               </div>
             </div>
           </div>
@@ -177,6 +189,7 @@ import vModal from '@/components/VModal.vue'
 import { state } from '@/modules/store'
 import utils from '@/modules/utils'
 import countDown from '@/components/common/countdown-code-button'
+// import copyToClipboard from 'copy-to-clipboard'
 
 export default {
   name: 'SafeVerified',
@@ -189,16 +202,17 @@ export default {
   },
   data () {
     return {
-      verifyObj: {},
       showCreateModal: false,
       btnconfirm: false,
       apiKey: '',
       apiSecret: '',
       phoneCode: '',
+      googleCode: '',
       showVerifyModal: false,
       gotCode: '',
       deletingApi: {},
       apiList: [],
+      label: '',
       state
     }
   },
@@ -220,19 +234,32 @@ export default {
     },
     verify_google () {
       return this.userInfo && this.state.userInfo.verify_google
+    },
+    apiDoc () {
+      return this.state.theme.apiDoc[this.state.locale || 'en']
     }
   },
   created () {
     this.getProfileApiList()
   },
   methods: {
+    copy (key) {
+      // copyToClipboard(this[key])
+      utils.success(this.$i18n.t('copyed'))
+    },
     getProfileApiList () {
       service.getProfileApi().then(resp => {
         console.log(resp, 'all api list')
         if (resp.code) {
           utils.alert(resp.message)
         } else {
-          this.apiList = resp.data
+          if (resp.data && resp.data.length) {
+            this.apiList = resp.data.map(item => {
+              item.api_key = utils.publicDesensitization(item.api_key, 10)[0]
+              item.api_secret = utils.publicDesensitization(item.api_secret, 10)[0]
+              return item
+            })
+          }
         }
       })
     },
@@ -244,36 +271,27 @@ export default {
     //   this.showCreateModal = true
     //   console.log('delete api')
     // },
-    createApi () {
-      this.showCreateModal = true
-      console.log('点击创建, creatAPI')
-    },
     getVerifyCode () {
       this.showVerifyModal = true
-      const params = this.verifyObj
-      console.log('confirm create api', params)
-    },
-    hideModal () {
-
-    },
-    hideVerifyModal () {
-      this.showVerifyModal = false
     },
     keyPress ($event) {
-      let code = $event.srcElement.value
-      if (code && code.length === 6 && /^\d{6}$/.test(code)) {
-        this.verifyCode()
-      }
+      // let code = $event.srcElement.value
+      // if (code && code.length === 6 && /^\d{6}$/.test(code)) {
+      //   this.verifyCode()
+      // }
     },
-    verifyCode (type) {
-      let verifyObj = {}
+    /**
+     * 提交数据
+     */
+    async verifyCode (type) {
+      let verifyObj = null
 
-      if (this.google_key_bound) {
+      if (this.verify_google) {
         verifyObj = {
           google_code: this.googleCode
         }
         this.gotCode = this.googleCode
-      } else if (this.phone) {
+      } else if (this.verifyCode) {
         verifyObj = {
           phone_code: this.phoneCode
         }
@@ -284,8 +302,22 @@ export default {
         }
         this.gotCode = this.emailCode
       }
-      this.verifyObj = verifyObj
-      this.showVerifyModal = false
+      verifyObj.description = this.label || ''
+
+      if (!this.gotCode) {
+        utils.alert(this.$i18n.t('err_captcha_empty'))
+        return
+      }
+      let res = await service.createProfileApi(verifyObj)
+      if (!res.code) {
+        this.getProfileApiList()
+        this.apiKey = res.data.api_key
+        this.apiSecret = res.data.api_secret
+        this.showVerifyModal = false
+        this.showCreateModal = true
+      } else {
+        utils.alert(res.message)
+      }
     },
     getPhoneVerifyCode () {
       if (!this.regionId || !this.phone || !this.showVerifyModal) {
@@ -301,16 +333,6 @@ export default {
         }
       })
     },
-    confirmCreateApi () {
-      const param = this.verifyObj
-      service.createProfileApi(param).then(resp => {
-        if (resp.code) {
-          utils.alert(resp.message)
-        } else {
-          utils.success('新建成功')
-        }
-      })
-    },
     hideDeleteModal () {
       this.btnconfirm = false
     },
@@ -322,8 +344,11 @@ export default {
         if (resp.code) {
           utils.alert(resp.message)
         } else {
-          utils.success('新建成功')
+          this.getProfileApiList()
+          utils.success('删除成功')
         }
+      }).finally(() => {
+        this.btnconfirm = false
       })
     }
   }
@@ -356,7 +381,7 @@ export default {
       .api-box{
         height: auto;
         width: 100%;
-        color: 14px;
+        font-size: 14px;
         color: #999;
         ul{
           color: #333;
@@ -368,20 +393,23 @@ export default {
             p{
               float: left;
               &.api-tit{
-                width: 28%;
+                width: 18%;
+                @include limit(1);
                 text-align: left;
               }
               &.api-key{
                 width: 28%;
+                @include limit(1);
                 text-align: left;
               }
               &.api-secret{
                 width: 28%;
+                @include limit(1);
                 text-align: left;
               }
               &.api-oper{
                 width: 16%;
-                text-align: center;
+                text-align: right;
               }
               a{
                 color: #C1A538
