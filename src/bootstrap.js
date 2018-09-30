@@ -49,19 +49,30 @@ Vue.directive('focus', {
 
 // Vue.filter('money', exRate.getLocaleMoney)
 
-window.Promise.prototype.finally = function (callback) {
-  let constructor = this.constructor
-  return this.then(function (value) {
-    return constructor.resolve(callback()).then(function () {
-      return value
-    })
-  }, function (reason) {
-    return constructor.resolve(callback()).then(function () {
-      throw reason
-    })
-  })
-};
-
+if ('Promise' in window) {
+  window.Promise.prototype.finally = function (callback) {
+    let constructor = this.constructor
+    return this.then(
+      function (value) {
+        return constructor.resolve(callback()).then(function () {
+          return value
+        })
+      },
+      function (reason) {
+        return constructor.resolve(callback()).then(function () {
+          throw reason
+        })
+      }
+    )
+  }
+} else {
+  window.Promise = function () {
+    console.log('polifill')
+  }
+  window.Promise.prototype.finally = function () {
+    console.log('polifill finally')
+  }
+}
 (function () {
   if (document.scrollingElement) {
     return

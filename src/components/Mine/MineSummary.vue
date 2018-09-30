@@ -12,7 +12,7 @@
           </p>
         </div>
         <em class="cursor cursor_left">0 IX</em>
-        <em class="cursor cursor_right">{{ mineSummary.max_amount | fixed(2) | thousand }} IX</em>
+        <em class="cursor cursor_right">{{ isPersonalShow ? mineMy.max_amount: mineSummary.max_amount | fixed(2) | thousand }} IX</em>
       </div>
       <div class="jd_btxt">
         <div class="row time_range mr-20">{{ mineSummary.range }}</div>
