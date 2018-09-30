@@ -204,14 +204,14 @@
 
 </template>
 <script>
-import slideValidate from '@/components/common/slide-validate/slide-validate.vue';
-import service from '@/modules/service';
-import { state } from '@/modules/store';
-import pwChecker from '@/modules/pw-checker';
-import ixInput from '@/components/common/ix-input/ix-input.vue';
-import utils from '@/modules/utils';
-import _ from 'lodash';
-import responsive from '@/mixins/responsive';
+import slideValidate from '@/components/common/slide-validate/slide-validate.vue'
+import service from '@/modules/service'
+import { state } from '@/modules/store'
+import pwChecker from '@/modules/pw-checker'
+import ixInput from '@/components/common/ix-input/ix-input.vue'
+import utils from '@/modules/utils'
+import _ from 'lodash'
+import responsive from '@/mixins/responsive'
 
 export default {
   mixins: [responsive],
@@ -384,7 +384,7 @@ export default {
       this.atPw = active
     },
     resetError () {
-      this.errmsg = '';
+      this.errmsg = ''
       this.triggerValidate = false
     },
     async getSmsCode () {
@@ -423,7 +423,7 @@ export default {
       if (res.code) {
         this.errmsg = res.message
       } else {
-        this.errmsg = '';
+        this.errmsg = ''
       }
     },
     startCountDown () {
@@ -436,6 +436,10 @@ export default {
           clearInterval(this.sms.timer)
         }
       }, 1000)
+    },
+    clearCountDown () {
+      this.sms.status = 0
+      clearInterval(this.sms.timer)
     }
   },
   watch: {

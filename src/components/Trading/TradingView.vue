@@ -1,8 +1,10 @@
 <template>
   <div class="tv-wrap">
-    <div id="tv_chart_container"></div>
-    <div class="mask" :class="{show: !tvReady}">
-      <v-loading></v-loading>
+    <div id="tv_chart_container"/>
+    <div
+      class="mask"
+      :class="{show: !tvReady}">
+      <v-loading/>
     </div>
   </div>
 </template>
@@ -17,7 +19,7 @@ import {local, state} from '@/modules/store'
 const tvlib = utils.getExtModule('TradingView')
 
 export default {
-  name: 'tradingView',
+  name: 'TradingView',
   data () {
     return {
       state,
@@ -66,16 +68,25 @@ export default {
         }
         vm.tvReady = true
         vm.$emit('chartReady')
-        vm.widget.chart().createStudy('Moving Average', !1, !0, [7], null, {
+
+        // 7 日均线
+        vm.widget.chart().createStudy('Moving Average', !1, !1, [7], null, {
           'Plot.color': '#cccccc',
           'Plot.linewidth': 3,
           precision: 8
         })
-        vm.widget.chart().createStudy('Moving Average', !1, !0, [30], null, {
+        // 30 日均线
+        vm.widget.chart().createStudy('Moving Average', !1, !1, [30], null, {
           'Plot.color': '#fdc52e',
           'Plot.linewidth': 3,
           precision: 8
         })
+        // MACD
+        // vm.widget.chart().createStudy('MACD', !1, !1, [30], null, {
+        //   'Plot.color': '#fdc52e',
+        //   'Plot.linewidth': 3,
+        //   precision: 8
+        // })
         vm.widget.chart().onIntervalChanged().subscribe(null, function (interval) {
           local.interval = interval
         })

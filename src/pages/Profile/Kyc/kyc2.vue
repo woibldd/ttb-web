@@ -268,10 +268,18 @@ export default {
       this[type].loading = true
     },
     uploadProgress ({type, file}) {
-      this.$refs[type + '_mask'].style.transform = 'translateY(' + file.percentage + '%)'
+      try {
+        this.$refs[type + '_mask'].style.transform = 'translateY(' + file.percentage + '%)'
+      } catch (e) {
+        console.log(e)
+      }
     },
     uploadSuccess ({type, file}) {
-      this.$refs[type + '_mask'].style.transform = 'translateY(100%)'
+      try {
+        this.$refs[type + '_mask'].style.transform = 'translateY(100%)'
+      } catch (e) {
+        console.log(e)
+      }
       this[type].loading = false
       this[type].url = `${this.uploadConfig.host}/${this.policy.dir}${this.filedir}_${type}_${file.name}`
       console.log(this[type].url)

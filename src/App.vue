@@ -148,17 +148,21 @@ export default {
       this.$eh.$emit('app:click')
     },
     fixPosition (name) {
-      const box = this.$refs.container
-      if (box) {
-        if (this.isMobile) {
-          if (name === 'trading') {
-            box.style.minHeight = screen.availHeight - (this.showFooter ? 205 : 0) - (this.showNav ? 60 : 0) + 'px'
+      try {
+        const box = this.$refs.container
+        if (box) {
+          if (this.isMobile) {
+            if (name === 'trading') {
+              box.style.minHeight = screen.availHeight - (this.showFooter ? 205 : 0) - (this.showNav ? 60 : 0) + 'px'
+            } else {
+              box.style.minHeight = screen.availHeight - (this.showFooter ? 205 : 0) - (this.showNav ? 60 : 0) + 'px'
+            }
           } else {
-            box.style.minHeight = screen.availHeight - (this.showFooter ? 205 : 0) - (this.showNav ? 60 : 0) + 'px'
+            box.style.minHeight = window.innerHeight - (this.showFooter ? 110 : 0) - (this.showNav ? 80 : 0) + 'px'
           }
-        } else {
-          box.style.minHeight = window.innerHeight - (this.showFooter ? 110 : 0) - (this.showNav ? 80 : 0) + 'px'
         }
+      } catch (e) {
+        console.log(e)
       }
     },
     async keepSession () {
