@@ -4,10 +4,10 @@
       <div class="mine-process">
         <div
           class="process-line"
-          :style="{ 'width': mineSummary.rate+'%'}">
+          :style="{ 'width': rates+'%'}">
           <div class="process-now-info">
             <div class="line-tip-text">
-              <span>{{ $t('mine_progress') }}:</span>{{ mineSummary.rate | fixed(2) }}%
+              <span>{{ isPersonalShow ? $t('personal')+ $t('mine_progress') : $t('mine_progress') }}:</span>{{ rates | fixed(2) }}%
             </div>
             <p
               class="line-tip"
@@ -136,7 +136,8 @@ export default {
       },
       mineMy: {},
       timer: 0,
-      showMiddle: false
+      showMiddle: false,
+      isPersonalShow: false
     }
   },
   computed: {
@@ -145,6 +146,9 @@ export default {
     },
     hasMineMy () {
       return !isEmpty(this.mineMy)
+    },
+    rates () {
+      return this.isPersonalShow ? this.mineMy.rate : this.mineSummary.rate
     }
   },
   methods: {
@@ -157,6 +161,8 @@ export default {
         let resMy = await service.getPersonalTotal()
         if (!resMy.code && !isEmpty(resMy.data)) {
           this.mineMy = resMy.data
+          this.mineMy.rate = this.$big(this.mineMy.total).div(this.mineMy.max_amount).times(100).toString()
+          this.isPersonalShow = true
         }
       }
     },

@@ -450,5 +450,6 @@
   "already_closed": "已关闭",
   "open_verify": "开启验证",
   "already_open": "已开启",
-  "create_time": "创建时间"
+  "create_time": "创建时间",
+  "personal": "个人"
 }

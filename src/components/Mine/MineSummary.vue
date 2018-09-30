@@ -4,10 +4,10 @@
       <div class="jd_box">
         <div
           class="jd_cen"
-          :style="{ 'width': mineSummary.rate+'%'}">
+          :style="{ 'width': (rates)+'%'}">
           <p class="line">
             <span class="cursor_arrow">
-              <i class="text">{{ $t('mine_progress') }} : </i>{{ mineSummary.rate | fixed(2) }}<i class="unit">%</i>
+              <i class="text">{{ isPersonalShow ? $t('personal')+ $t('mine_progress') : $t('mine_progress') }} : </i>{{ rates | fixed(2) }}<i class="unit">%</i>
             </span>
           </p>
         </div>
@@ -116,7 +116,8 @@ export default {
       },
       timer: 0,
       showMiddle: false,
-      showRight: false
+      showRight: false,
+      isPersonalShow: false
     }
   },
   computed: {
@@ -125,6 +126,9 @@ export default {
     },
     hasMineMy () {
       return !isEmpty(this.mineMy)
+    },
+    rates () {
+      return this.isPersonalShow ? this.mineMy.rate : this.mineSummary.rate
     }
   },
   methods: {
@@ -137,6 +141,8 @@ export default {
         let resMy = await service.getPersonalTotal()
         if (!resMy.code && !isEmpty(resMy.data)) {
           this.mineMy = resMy.data
+          this.mineMy.rate = this.$big(this.mineMy.total).div(this.mineMy.max_amount).times(100).toString()
+          this.isPersonalShow = true
         }
       }
     },
