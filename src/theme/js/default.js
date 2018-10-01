@@ -22,8 +22,8 @@ module.exports = {
   supportMail: 'support@ix.com',
   hrMail: 'hr@ix.com',
   apiDoc: {
-    en: 'https://github.com/ix/API_docs_en/wiki',
-    'zh-CN': 'https://github.com/ix/API_docs_zh/wiki'
+    en: 'https://github.com/ix-api/API_Docs',
+    'zh-CN': 'https://github.com/ix-api/API_Docs'
   },
   faq: {
     en: 'https://ixcustomer.zendesk.com/hc/en-us/categories/360000964011',

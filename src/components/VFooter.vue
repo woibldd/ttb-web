@@ -30,9 +30,9 @@
           <a
             :href="helpLink"
             target="_blank">{{ $t('user_guide') }}</a>
-          <a
+            <!-- <a
             :href="apiDoc"
-            target="_blank">{{ $t('footer_api') }}</a>
+            target="_blank">{{ $t('footer_api') }}</a> -->
             <!-- <a href="#" target="_blank">{{$t('footer_api')}}</a> -->
         </div>
         <div class="footer_ct footer-rt">

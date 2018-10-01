@@ -53,9 +53,9 @@
           <a
             :href="helpLink"
             target="_blank">{{ $t('user_guide') }}</a>
-          <a
+            <!-- <a
             :href="apiDoc"
-            target="_blank">{{ $t('footer_api') }}</a>
+            target="_blank">{{ $t('footer_api') }}</a> -->
         </div>
       </div>
       <div class="footer-row">
