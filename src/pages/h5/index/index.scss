@@ -44,7 +44,14 @@
         }
     }
 
-    .mine-info-section {
+    .activity-info-section {
+      padding-left: rem(32);
+      padding-right: rem(32);
+      margin-top: rem(40);
+      margin-bottom: rem(4);
+      background:rgba(51,59,70,1);
+    }
+    .mine-info-section{
         padding-left: rem(32);
         padding-right: rem(32);
         margin-top: rem(4);

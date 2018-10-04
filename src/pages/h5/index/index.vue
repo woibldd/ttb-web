@@ -42,6 +42,9 @@
         </a></div>
       </div>
     </div>
+    <div class="activity-info-section">
+      <kyc/>
+    </div>
     <div
       class="mine-info-section"
     >
@@ -66,6 +69,7 @@ import {state, actions} from '@/modules/store'
 import service from '@/modules/service'
 import responsiveMixin from '@/mixins/responsive'
 import MobileNav from '@/components/Mobile/MobileNav'
+import Kyc from '@/components/Mobile/Kyc'
 
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
@@ -116,7 +120,8 @@ export default {
     // h5Footer,
     swiper,
     swiperSlide,
-    MobileNav
+    MobileNav,
+    Kyc
   }
 }
 </script>

@@ -180,8 +180,17 @@ const service = {
   getRegionList () {
     return getCache('regionList', () => Promise.resolve(require('./region.json')))
   },
+  /**
+   * 获取当前用户kyc信息
+   */
   getKycInfo () {
     return request('user/kyc')
+  },
+  /**
+   * 最近kyc用户
+   */
+  getRecentlyKycList () {
+    return request('user/kyc/recent')
   },
   updateKycInfo (data) {
     return request('user/kyc2', data)

@@ -451,5 +451,9 @@
   "open_verify": "开启验证",
   "already_open": "已开启",
   "create_time": "创建时间",
-  "personal": "个人"
+  "personal": "个人",
+  "activity_kyc_title": "\"注册接力\"活动正在火热进行中：",
+  "activity_kyc_pass": "通过认证",
+  "activity_kyc_rule": "活动详情"
+
 }

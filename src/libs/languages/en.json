@@ -584,5 +584,8 @@
   "transfer_in": "In",
   "transfer_out": "Out",
   "create_time": "Create time",
-  "personal": "Personal "
+  "personal": "Personal ",
+  "activity_kyc_title": "The \"Registration Relay\" Activity is on:",
+  "activity_kyc_pass": "Complete Verification",
+  "activity_kyc_rule": "Details"
 }
