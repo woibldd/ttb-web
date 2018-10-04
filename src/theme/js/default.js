@@ -44,5 +44,9 @@ module.exports = {
   activeRule: {
     en: 'https://ixcustomer.zendesk.com/hc/en-us/articles/360015900832',
     'zh-CN': 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360015900832'
+  },
+  activityKyc: {
+    en: 'https://ixcustomer.zendesk.com/hc/en-us/articles/360016718671',
+    'zh-CN': 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360016718671'
   }
 }
