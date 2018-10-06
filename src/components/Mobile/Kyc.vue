@@ -94,7 +94,7 @@ export default {
 
 .recent-kyc-container {
   text-align: center;
-  font-size: rem(14);
+  font-size: rem(20);
   // height: 60px;
   display: flex;
   justify-content: space-between;
