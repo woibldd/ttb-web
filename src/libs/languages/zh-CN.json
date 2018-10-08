@@ -257,7 +257,7 @@
   "profile_left_invite": "我的邀请",
   "profile_left_invite_qrcode": "我的邀请二维码",
   "profile_left_invite_code": "我的邀请码",
-  "profile_left_invite_link": "注册邀请链接",
+  "profile_left_invite_link": "我的邀请链接",
   "profile_left_invite_safety": "安全认证",
   "profile_left_copy_invite_code": "复制邀请码",
   "profile_left_copy_invite_link": "复制分享链接",
@@ -454,6 +454,22 @@
   "personal": "个人",
   "activity_kyc_title": "\"注册接力\"活动正在火热进行中：",
   "activity_kyc_pass": "通过认证",
-  "activity_kyc_rule": "活动详情"
-
+  "activity_kyc_rule": "活动详情",
+  "activity_kyc_name": "注册接力",
+  "activity_kyc_banner_title": "IX <em style=\"color: #CA9048\">\"注册接力\"</em> 奖励无上限",
+  "activity_kyc_banner_desc": "等你来领",
+  "activity_kyc_reward_title": "奖池金额",
+  "activity_kyc_reward_address": "奖池地址",
+  "activity_kyc_table_title": "注册接力信息",
+  "activity_kyc_table_rule": "活动规则",
+  "activity_kyc_table_rule_detail": "<p>1.活动奖池初始金额：100000USDT；</p><p>2.每增加1个实名注册用户（完成二级认证用户，下同），平台新增加0.001个BTC投放到奖池中，无限累积。</p><p>3.如果2个小时内无新增实名注册用户，最后一位实名注册用户即可拿走奖金池中50%的奖励，另外50%奖励给其邀请人；若无邀请人则另外50%奖励平分给活动期间所有的实名注册用户及邀请人；</p><p>4.活动最终解释权归IX所有。</p>",
+  "activity_kyc_table_col1": "账户信息",
+  "activity_kyc_table_col2": "是否有邀请人",
+  "activity_kyc_table_col3": "认证完成时间",
+  "activity_kyc_invite_now": "立即邀请",
+  "activity_kyc_my_title": "邀请好友注册认证，获取瓜分大奖资格",
+  "have": "有",
+  "none": "无"
+  
+  
 }

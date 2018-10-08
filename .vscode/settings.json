@@ -15,5 +15,6 @@
   "emmet.includeLanguages": {
       "vue-html": "html",
       "vue": "html"
-  }
+  },
+  "workbench.colorTheme": "Night Owl"
 }
