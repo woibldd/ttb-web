@@ -587,5 +587,20 @@
   "personal": "Personal ",
   "activity_kyc_title": "The \"Registration Relay\" Activity is on:",
   "activity_kyc_pass": "Complete Verification",
-  "activity_kyc_rule": "Details"
+  "activity_kyc_rule": "Details",
+  "activity_kyc_name": "Registration Relay",
+  "activity_kyc_banner_title": "IX reward of <em style=\"color: #CA9048\">\"Registered Relay\"</em> activity is not limited",
+  "activity_kyc_banner_desc": "Waiting for your come",
+  "activity_kyc_reward_title": "Jackpot Amount",
+  "activity_kyc_reward_address": " Jackpot Address",
+  "activity_kyc_table_title": "Registration Relay Information",
+  "activity_kyc_table_rule": "Activity Rules",
+  "activity_kyc_table_rule_detail": "<p>1. The initial amount of the activity jackpot prize: 100000USDT;</p><p>2. Everytime add a new real-name registered user (complete the second level verification, the same below), the platform add 0.001 BTC to the jackpot, which is unlimited.</p><p>3. If there is no new real-name user registeration within 2 hours, the last real-name registered user can take 50% of the prize in the jackpot, and another 50% will be </p>awarded to the inviter; if there is no inviter, the other 50% will be awarded equally to all real-name registered users and invitees during this activity;<p>4. The final interpretation of this activity belongs to IX.</p>",
+  "activity_kyc_table_col1": "Account",
+  "activity_kyc_table_col2": "Inviter",
+  "activity_kyc_table_col3": "Time",
+  "activity_kyc_invite_now": "Invite right now",
+  "activity_kyc_my_title": "Invite friends to register to obtain the qualification for winning the prize",
+  "have": "Have",
+  "none": "None"
 }

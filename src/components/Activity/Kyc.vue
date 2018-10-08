@@ -65,7 +65,7 @@ export default {
             this.$refs['marque'].classList.add('marque')
             setTimeout(() => {
               this.$refs['marque'].classList.remove('marque')
-            }, 2e3)
+            }, 30e3)
           }
         }
       } catch (e) {

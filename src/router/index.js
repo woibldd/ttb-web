@@ -53,7 +53,10 @@ const h5login = () => import(/* webpackChunkName: "h5login" */ '@/pages/h5/sign-
 const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index')
 
 // 活动页面
+const ActivityIndex = () => import(/* webpackChunkName: "ActivityIndex" */ '@/pages/active/index.vue')
 const LockWarehouse = () => import(/* webpackChunkName: "LockWarehouse" */ '@/pages/active/LockWarehouse.vue')
+
+const KycRelay = () => import(/* webpackChunkName: "KycRelay" */ '@/pages/active/kycRelay.vue')
 
 async function beforeEach (to, from, next) {
   state.loading = true
@@ -134,6 +137,21 @@ let router = new Router({
       component: h5index
     },
     {
+      path: '/activity',
+      name: 'activity',
+      component: ActivityIndex,
+      meta: {
+        class: 'dark'
+      },
+      children: [
+        {
+          path: 'kyc_relay',
+          name: 'kycRelay',
+          component: KycRelay
+        }
+      ]
+    },
+    {
       path: '/activity/creation',
       name: 'creation',
       component: creation
@@ -161,7 +179,7 @@ let router = new Router({
     {
       path: '/test2',
       name: 'Test2',
-      component: Test2
+      component: Home
     },
     {
       path: '/trading/:pair?',
