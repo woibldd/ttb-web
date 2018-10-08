@@ -163,6 +163,7 @@
             <div class="input-box">
               <ix-input
                 ref="invitor"
+                :disabled="!!$route.query.invitor"
                 v-model.trim="invitorId"
                 @input="invitorId=$event"
                 :rule="validateRules.invitor"

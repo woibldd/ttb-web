@@ -4,6 +4,10 @@
       <div class="title-box">{{ $t('profile_left_invite_perinfo') }}</div>
       <div class="invinfo-box">
         <div class="inv_tl">
+          <p>UID</p>
+          <span>{{ uid }}</span>
+        </div>
+        <div class="inv_tl">
           <p>{{ $t('u_name') }}</p>
           <span v-if="name">{{ name }}</span>
           <span v-else><router-link :to="{name: 'Kyc'}">{{ $t("to_verify") }}</router-link> </span>
@@ -59,6 +63,12 @@ export default {
     }
   },
   computed: {
+    uid () {
+      if (state.userInfo) {
+        return state.userInfo.id
+      }
+      return ''
+    },
     name () {
       if (state.userInfo) {
         return state.userInfo.name
