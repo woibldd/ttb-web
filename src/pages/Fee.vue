@@ -32,12 +32,12 @@
                 <p class="lt rate-t-c">0.02%</p>
               </li>
               <li>
-                <p class="lt rate-t-a">BTC/USTD</p>
+                <p class="lt rate-t-a">ETH/USTD</p>
                 <p class="lt rate-t-b">0.2%</p>
                 <p class="lt rate-t-c">0.02%</p>
               </li>
               <li>
-                <p class="lt rate-t-a">BTC/USTD</p>
+                <p class="lt rate-t-a">ETH/BTC</p>
                 <p class="lt rate-t-b">0.2%</p>
                 <p class="lt rate-t-c">0.02%</p>
               </li>
