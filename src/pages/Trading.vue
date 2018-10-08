@@ -7,7 +7,7 @@
       v-if="!isMobile"/>
     <mobile-nav
       v-if="isMobile"
-      />
+    />
     <div class="container-trade-panel">
       <div class="ix-row">
         <div

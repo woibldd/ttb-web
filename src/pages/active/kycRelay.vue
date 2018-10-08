@@ -116,7 +116,7 @@
           <!-- end邀请好友 -->
           <!-- kyc记录 -->
           <div class="kyc-reward-record">
-            <div class="record_box record">
+            <!-- <div class="record_box record">
               <div class="box_title">{{ $t('activity_kyc_table_title') }}</div>
               <div class="box_body mt-20 pt-18 pb-18 pl-30 pr-30">
                 <div class="tr mb-6">
@@ -142,8 +142,8 @@
                   <div class="td">{{ item.pass_time | ts2date }}</div>
                 </div>
               </div>
-            </div>
-            <div class="record_box rule ml-20">
+            </div> -->
+            <div class="record_box rule">
               <div class="box_title">{{ $t('activity_kyc_table_rule') }}</div>
               <div
                 class="box_body mt-20 pt-18 pb-18 pl-30 pr-30"
@@ -285,15 +285,15 @@ export default {
     if (this.inviteLink) {
       this.setQr(this.inviteLink)
     }
-    this.getRecentList()
+    // this.getRecentList()
     this.getBtcRemain()
-    this.timer = setInterval(() => {
-      this.getRecentList()
-      this.getBtcRemain()
-    }, 30e3)
+    // this.timer = setInterval(() => {
+    //   this.getRecentList()
+    //   this.getBtcRemain()
+    // }, 30e3)
   },
   destroyed () {
-    clearInterval(this.timer)
+    // clearInterval(this.timer)
   },
   components: {
     VBtn
@@ -439,7 +439,7 @@ export default {
           margin-top: 77px;
           font-size: 14px;
           .record_box {
-            width: 550px;
+            width: 1120px;
             .box_title {
               font-size: 18px;
               color: #ffffff;
@@ -456,10 +456,10 @@ export default {
               }
             }
             .box_body {
-              border:1px solid rgba(195,195,195,.4);
+              // border:1px solid rgba(195,195,195,.4);
               // opacity:0.4;
               border-radius:4px;
-              height: 266px;
+              // height: 266px;
               overflow: scroll;
               .tr {
                 display: flex;
