@@ -25,12 +25,9 @@
           <!-- 奖池金额 -->
           <div class="kyc-reward-amount">
             <div class="amount usdt">
-              <div class="block mr-5">1</div>
-              <div class="block mr-5">0</div>
-              <div class="block mr-5">0</div>
-              <div class="block mr-5">0</div>
-              <div class="block mr-5">0</div>
-              <div class="block mr-5">0</div>
+              <div
+                class="block mr-5"
+                v-for="item in remainUSDT">{{ item }}</div>
               <div class="unit mr-5">USDT</div>
             </div>
             <div class="amount btc">
@@ -135,6 +132,8 @@
                 </div>
                 <div
                   class="tr mt-18"
+                  :key="item.id"
+                  :class="{isNewItem: item.isNewItem}"
                   v-for="item in recentList">
                   <div
                     class="td"
@@ -180,6 +179,7 @@ import copyToClipboard from 'copy-to-clipboard'
 import {state, actions} from '@/modules/store'
 import utils from '@/modules/utils'
 import VBtn from '@/components/VBtn'
+import service from '@/modules/service'
 const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
 export default {
   data () {
@@ -189,6 +189,8 @@ export default {
       btcAddress: '38apB9w9AzLXs627YtqUSKRUPqHNKb8XEQ',
       showCode: false,
       recentList: [],
+      btcRemain: '0.000',
+      usdtRemain: '200000',
       timer: 0
     }
   },
@@ -201,7 +203,10 @@ export default {
       return ''
     },
     remainBtc () {
-      return '1000.233'.toString().split('')
+      return this.btcRemain.toString().split('')
+    },
+    remainUSDT () {
+      return this.usdtRemain.toString().split('')
     }
   },
   methods: {
@@ -244,19 +249,36 @@ export default {
         this.showCode = !this.showCode
       }
     },
-    async getRecentList () {
-      let mockData = []
-      let i = 10
-      while (--i) {
-        mockData.push({
-          phone: i % 3 === 0 ? null : '139' + Math.floor(Math.random() * 10000) + '3332',
-          email: 'axxx@' + Math.random() + '.com',
-          hasInvitor: Math.floor(Math.random() * 10) % 2 === 0,
-          pass_time: new Date().getTime()
-        })
+    async getBtcRemain () {
+      let res = await service.getKycRelayBtcRemain()
+      if (!res.code) {
+        this.btcRemain = res.data.BTC
+        this.usdtRemain = res.data.USDT
       }
-      console.log(mockData)
-      this.recentList = mockData
+    },
+    async getRecentList () {
+      let res = await service.getRecentlyKycList(true)
+      if (!res.code && res.data) {
+        if (!this.recentList.length) {
+          this.recentList = res.data
+        } else {
+          for (let i = 0; i < res.data.length; ++i) {
+            if (this.recentList[0].id !== res.data[i].id) {
+              res.data[i].isNewItem = true
+            } else {
+              break
+            }
+          }
+          this.recentList = res.data
+        }
+      }
+
+      // 清除动画状态
+      setTimeout(() => {
+        this.recentList.map((item) => {
+          item.isNewItem = false
+        })
+      }, 2e3)
     }
   },
   created () {
@@ -264,9 +286,11 @@ export default {
       this.setQr(this.inviteLink)
     }
     this.getRecentList()
+    this.getBtcRemain()
     this.timer = setInterval(() => {
       this.getRecentList()
-    }, 2e3)
+      this.getBtcRemain()
+    }, 30e3)
   },
   destroyed () {
     clearInterval(this.timer)
@@ -447,6 +471,35 @@ export default {
                   color: #FFFFFF;
                   font-size: 12px;
                 }
+                &.isNewItem {
+                  animation: marque 1s ease-in-out;
+                }
+                @keyframes marque {
+                    0% {
+                      transform: translateY(-100%);
+                      opacity: 0
+                    }
+                    20% {
+                      // transform: translateY(175%);
+                      opacity: 0.2
+                    }
+                    40% {
+                      // transform: translateY(125%);
+                      opacity: .4
+                    }
+                    60% {
+                      // transform: translateY(75%);
+                      opacity: .6
+                    }
+                    80% {
+                      // transform: translateY(25%);
+                      opacity: .8
+                    }
+                    100%{
+                      // transform: translateY(0%);
+                      opacity: 1
+                    }
+                  }
               }
             }
 
