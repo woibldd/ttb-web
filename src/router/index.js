@@ -30,7 +30,7 @@ const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pa
 const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
 const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/ProfileSafety')
 const ProfileApi = () => import(/* webpackChunkName: "ProfileApi" */ '@/pages/ProfileApi')
-const ProfileRate = () => import(/* webpackChunkName: "ProfileRate" */ '@/pages/ProfileRate')
+const Fee = () => import(/* webpackChunkName: "Fee" */ '@/pages/Fee')
 const relay = () => import(/* webpackChunkName: "relay" */ '@/pages/active/relay')
 const creation = () => import(/* webpackChunkName: "creation" */ '@/pages/active/creation')
 const PhoneBind = () => import(/* webpackChunkName: "PhoneBind" */ '@/pages/PhoneBind')
@@ -226,11 +226,6 @@ let router = new Router({
           component: ProfileApi
         },
         {
-          path: 'rate',
-          name: 'ProfileRate',
-          component: ProfileRate
-        },
-        {
           path: 'security',
           name: 'ProfileSafety',
           component: ProfileSafety,
@@ -378,6 +373,18 @@ let router = new Router({
           component: FundAddress
         }
       ]
+    },
+    {
+      path: '/fee',
+      name: 'Fee',
+      meta: {
+        auth: false,
+        nav: true,
+        footer: true,
+        class: 'dark',
+        mobileNav: isMobile
+      },
+      component: Fee
     }
   ],
   scrollBehavior (to, from, savedPosition) {

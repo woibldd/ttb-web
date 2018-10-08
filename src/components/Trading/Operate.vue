@@ -1,27 +1,43 @@
 <template>
-  <div class="ix-panel" :class="{loading: loading}">
+  <div
+    class="ix-panel"
+    :class="{loading: loading}">
     <div class="ix-header-sub">
-      <a class="ix-header-nav raw limit"
+      <a
+        class="ix-header-nav raw limit"
         :class="{cur: tab === 'limit'}"
         @click.prevent="setTab('limit')">
         {{ $t('operate_limit') }}
       </a>
-      <a class="ix-header-nav raw market"
+
+      <a
+        class="ix-header-nav raw market"
         :class="{cur: tab === 'market'}"
         @click.prevent="setTab('market')">
         {{ $t('operate_market') }}
       </a>
+
+      <router-link
+        class="mr-20"
+        style="float:right;"
+        :to="{name: 'Fee'}">{{ $t('footer_fee') }}</router-link>
     </div>
     <div class="op-container">
-      <ProLimitOrder v-show="tab === 'limit'"></ProLimitOrder>
-      <ProMarketOrder v-show="tab === 'market'"></ProMarketOrder>
+      <ProLimitOrder v-show="tab === 'limit'"/>
+      <ProMarketOrder v-show="tab === 'market'"/>
     </div>
-    <div class="mask" :class="{show: state.userStatus === 0}">
+    <div
+      class="mask"
+      :class="{show: state.userStatus === 0}">
       <div class="mask-front">
         <div class="hint">{{ $t('operate_noauth') }}</div>
         <div class="link-group">
-          <a class="link btn ibt signin theme-bgcolor-up" @click.prevent="signin"><span>{{ $t('signin') }}</span></a>
-          <router-link class="link btn ibt signup theme-bgcolor-down" :to="{name: 'register'}"><span>{{ $t('signup') }}</span></router-link>
+          <a
+            class="link btn ibt signin theme-bgcolor-up"
+            @click.prevent="signin"><span>{{ $t('signin') }}</span></a>
+          <router-link
+            class="link btn ibt signup theme-bgcolor-down"
+            :to="{name: 'register'}"><span>{{ $t('signup') }}</span></router-link>
         </div>
       </div>
     </div>
@@ -35,7 +51,7 @@ import ProMarketOrder from './ProMarketOrder'
 import ProStopOrder from './ProStopOrder'
 
 export default {
-  name: 'operate',
+  name: 'Operate',
   components: {
     ProLimitOrder,
     ProMarketOrder,

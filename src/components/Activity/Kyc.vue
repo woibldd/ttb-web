@@ -19,8 +19,7 @@
           class="see-rules"
           @click="seeRules"
           radius="30"
-          width="100"
-          heigth="45"
+          height="30"
           :label="$t('activity_kyc_rule')"/>
       </div>
     </div>
@@ -65,7 +64,7 @@ export default {
             this.$refs['marque'].classList.add('marque')
             setTimeout(() => {
               this.$refs['marque'].classList.remove('marque')
-            }, 30e3)
+            }, 2e3)
           }
         }
       } catch (e) {
@@ -73,14 +72,16 @@ export default {
       }
     },
     seeRules () {
-      window.open(this.link)
+      this.$router.push({
+        name: 'kycRelay'
+      })
     }
   },
   created () {
     this.fetch()
     this.timer = setInterval(() => {
       this.fetch()
-    }, 10e3)
+    }, 30e3)
   },
   destroyed () {
     clearInterval(this.timer)
@@ -156,7 +157,7 @@ export default {
     }
     .right {
       .see-rules {
-        width: 100px;
+        width: 80px;
       }
     }
   }

@@ -53,6 +53,9 @@
           <a
             :href="helpLink"
             target="_blank">{{ $t('user_guide') }}</a>
+          <router-link
+            :to="{name:'Fee'}"
+            target="_blank">{{ $t('footer_fee') }}</router-link>
             <!-- <a
             :href="apiDoc"
             target="_blank">{{ $t('footer_api') }}</a> -->
