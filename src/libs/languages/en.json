@@ -587,5 +587,14 @@
   "personal": "Personal ",
   "activity_kyc_title": "The \"Registration Relay\" Activity is on:",
   "activity_kyc_pass": "Complete Verification",
-  "activity_kyc_rule": "Details"
+  "activity_kyc_rule": "Details",
+  "transaction_fees": "Transaction Fees",
+  "transaction_pair": "Transaction Pair",
+  "maker": "Maker",
+  "taker": "Taker",
+  "rate_tips_a": "1. Maker fees are paid when you add liquidity to our order book, by placing a limit order under the last trade price for buy and above the last trade price for sell.",
+  "rate_tips_b": "2. Taker fees are paid when you remove liquidity from our order book, by placing any order that is executed against an order of the orderbook. (Please note when your limit order is executed against other user's limit order and his/her order placed earlier than your order, you will pay taker fees.)",
+  "rate_tips_c": "3. Taker means that the limit order or market order you place is executed with the current maker.",
+  "rate_tips_d": "4. When the order you placed is filled by others orders, you need to pay the taker fees.",
+  "rate_tips_e": "5. Trading fees will be deducted from you executed total. If you exchange assets to BTC, you need to pay BTC fees."
 }
