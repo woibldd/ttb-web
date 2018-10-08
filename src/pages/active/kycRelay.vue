@@ -6,7 +6,7 @@
           class="title"
           v-html="$t('activity_kyc_banner_title')"/>
         <p class="desc">
-          <em class="strong">1000</em> + <em class="strong">USDT</em> <span
+          <em class="strong">200000</em> + <em class="strong">USDT</em> <span
             class="sub"
             v-t="'activity_kyc_banner_desc'"/>
         </p>
@@ -459,6 +459,8 @@ export default {
               border:1px solid rgba(195,195,195,.4);
               // opacity:0.4;
               border-radius:4px;
+              height: 266px;
+              overflow: scroll;
               .tr {
                 display: flex;
                 flex-direction: row;
