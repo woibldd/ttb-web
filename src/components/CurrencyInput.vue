@@ -17,12 +17,12 @@
     <!-- <div class="btn bid1" v-show="bid"
       v-tooltip.left="bidTip"
       @click="setBid">
-      <i class="ibt theme-bgcolor-up"></i>
+      <i class="ibt bgcolor-up"></i>
     </div>
     <div class="btn ask1" v-show="ask"
       v-tooltip.left="askTip"
       @click="setAsk">
-      <i class="ibt theme-bgcolor-down"></i>
+      <i class="ibt bgcolor-down"></i>
     </div> -->
   </div>
 </template>

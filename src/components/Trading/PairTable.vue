@@ -24,7 +24,7 @@
           :value="pair.tick.current"/></span></li>
       <li
         class="tc"
-        :class="{'theme-color-up': getDelta(pair.tick) > 0, 'theme-color-down': getDelta(pair.tick) < 0}">
+        :class="{'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}">
         <p v-if="pair.tick">{{ (getDelta(pair.tick) > 0) ? '+' : '' }}{{ getDelta(pair.tick) }}%
         </p>
       <p v-else>...</p></li>
@@ -151,10 +151,10 @@ export default {
       }
       &.tra_cen {
         li {
-          &.theme-color-down {
+          &.color-down {
             color: #F24E4D;
           }
-          &.theme-color-up {
+          &.color-up {
             color: #09C989;
           }
         }

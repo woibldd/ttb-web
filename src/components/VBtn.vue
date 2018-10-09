@@ -3,8 +3,8 @@
     class="ix-button btn"
     @click.prevent="onclick"
     :class="[disabled ? 'disabled' : '', loading ? 'loading' : '', color,
-             color === 'ixbuy' ? 'theme-bgcolor-up' : '',
-             color === 'ixsell' ? 'theme-bgcolor-down' : '']"
+             color === 'ixbuy' ? 'bgcolor-up' : '',
+             color === 'ixsell' ? 'bgcolor-down' : '']"
     :style="{
       height: height + 'px',
       lineHeight: height - 2 * border + 'px',

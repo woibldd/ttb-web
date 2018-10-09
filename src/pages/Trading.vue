@@ -28,9 +28,7 @@
           <div
             class="ix-grid ix-grid-tv"
             ref="gridTradingView">
-            <!-- <div class="grid-title">
-              {{state.pro.pairTick}}
-            </div> -->
+            <pair-title/>
             <TradingView ref="TradingView"/>
             <div
               class="active-box"
@@ -110,6 +108,7 @@ import PairNav from '@/components/Trading/PairNav'
 import Operate from '@/components/Trading/Operate'
 import OrderDealPopover from '@/components/Trading/OrderDealPopover'
 import Intro from '@/components/Trading/Intro'
+import PairTitle from '@/components/Trading/PairTitle'
 import responsiveScale from '@/mixins/responsiveScale'
 
 export default {
@@ -126,7 +125,8 @@ export default {
     Orderbook,
     PairNav,
     Operate,
-    MobileNav
+    MobileNav,
+    PairTitle
   },
   data () {
     return {
@@ -417,12 +417,9 @@ export default {
   flex: 1;
   height: 300px;
 }
-.grid-title {
-  height: 56px;
-}
 .active-box {
   position: absolute;
-  top: 2px;
+  top: 58px;
   right: 2px;
   width: 260px;
   height: 68px;

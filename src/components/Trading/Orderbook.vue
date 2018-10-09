@@ -64,7 +64,7 @@
         <span
           v-if="delta"
           class="delta"
-          :class="{'theme-color-up': delta > 0, 'theme-color-down': delta < 0}">{{ delta > 0 ? '+' : '' }}{{ delta }}%</span>
+          :class="{'color-up': delta > 0, 'color-down': delta < 0}">{{ delta > 0 ? '+' : '' }}{{ delta }}%</span>
       </div>
       <div
         class="side-wrap bid"
@@ -96,10 +96,10 @@
       <div class="group-wrap">
         <span class="group-value">{{ curGroup }}</span>
         <span
-          class="minus theme-bgcolor-down"
+          class="minus bgcolor-down"
           @click="minus"/>
         <span
-          class="plus theme-bgcolor-up"
+          class="plus bgcolor-up"
           @click="plus"/>
       </div>
     </div> -->

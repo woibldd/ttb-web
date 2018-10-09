@@ -33,10 +33,10 @@
         <div class="hint">{{ $t('operate_noauth') }}</div>
         <div class="link-group">
           <a
-            class="link btn ibt signin theme-bgcolor-up"
+            class="link btn ibt signin bgcolor-up"
             @click.prevent="signin"><span>{{ $t('signin') }}</span></a>
           <router-link
-            class="link btn ibt signup theme-bgcolor-down"
+            class="link btn ibt signup bgcolor-down"
             :to="{name: 'register'}"><span>{{ $t('signup') }}</span></router-link>
         </div>
       </div>
