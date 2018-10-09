@@ -25,10 +25,10 @@
           </div>
         </div>
         <div class="ix-col ix-col-2">
+          <pair-title/>
           <div
             class="ix-grid ix-grid-tv"
             ref="gridTradingView">
-            <pair-title/>
             <TradingView ref="TradingView"/>
             <div
               class="active-box"
@@ -419,7 +419,7 @@ export default {
 }
 .active-box {
   position: absolute;
-  top: 58px;
+  top: 2px;
   right: 2px;
   width: 260px;
   height: 68px;

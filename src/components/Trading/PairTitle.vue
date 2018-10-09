@@ -72,9 +72,11 @@ export default {
 .grid-title {
   height: 56px;
   line-height: 56px;
+  overflow: hidden;
   box-sizing: border-box;
   padding-left: 20px;
-  border-bottom: 4px solid #3A444F;
+  border: 4px solid #3A444F;
+  border-bottom: none;
   background-color: $nav;
   .fl {
     float: left;
