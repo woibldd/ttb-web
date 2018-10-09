@@ -259,6 +259,8 @@ export default {
               item.api_secret = utils.publicDesensitization(item.api_secret, 10)[0]
               return item
             })
+          } else {
+            this.apiList = []
           }
         }
       })
