@@ -45,12 +45,10 @@ const vm = {
     // document.body.classList.add(config.id)
 
     const styleList = []
-    styleList.push(`.theme-color-up { color: ${config.up} !important; }`)
-    styleList.push(`.theme-bgcolor-up { background-color: ${config.up} !important; }`)
-    styleList.push(`.theme-bdcolor-up { border-color: ${config.up} !important; }`)
-    styleList.push(`.theme-color-down { color: ${config.down} !important; }`)
-    styleList.push(`.theme-bgcolor-down { background-color: ${config.down} !important; }`)
-    styleList.push(`.theme-bdcolor-down { border-color: ${config.down} !important; }`)
+    styleList.push(`.color-up { color: ${config.up} !important; }`)
+    styleList.push(`.bgcolor-up { background-color: ${config.up} !important; }`)
+    styleList.push(`.color-down { color: ${config.down} !important; }`)
+    styleList.push(`.bgcolor-down { background-color: ${config.down} !important; }`)
     vm.styleEl.innerHTML = styleList.join('\n')
     local.upDown = configs[vm.curIndex].id
   },

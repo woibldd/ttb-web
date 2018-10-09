@@ -270,7 +270,7 @@ export default {
   },
   methods: {
     sideBg (side) {
-      return side.toUpperCase() === 'BUY' ? 'theme-bgcolor-up' : 'theme-bgcolor-down'
+      return side.toUpperCase() === 'BUY' ? 'bgcolor-up' : 'bgcolor-down'
     },
     fixPrice (price, pairName) {
       const scale = _.get(this.pairGroup, `${pairName}.price_scale`, 8)

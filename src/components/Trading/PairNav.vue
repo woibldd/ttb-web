@@ -1,12 +1,16 @@
 <template>
-  <div class="ix-pannel" :class="{loading: loading}">
+  <div
+    class="ix-pannel"
+    :class="{loading: loading}">
     <div class="ix-header">
       {{ $t('pairnav_title') }}
       <div class="input-wrap">
         <span class="search-icon">
-          <icon name="search"></icon>
+          <icon name="search"/>
         </span>
-        <input type="text" ref="input"
+        <input
+          type="text"
+          ref="input"
           class="input search-input"
           :placeholder="$t('search')"
           @keydown.ctrl.prevent
@@ -15,28 +19,51 @@
       </div>
     </div>
     <div class="ix-pannel-body">
-      <div class="no-data" v-if="errmsg">{{ $t(errmsg) }}</div>
-      <div class="err" v-if="!loading && err && !pairList.length">{{ err }}</div>
-      <div class="ix-pair-head tr" v-show="sortedList.length">
-        <div class="th pair" @click="setSort('pair')">
-          <sort :label="$t('pairnav_pair')"
-            :state="stateSortBy('pair')"></sort>
+      <div
+        class="no-data"
+        v-if="errmsg">{{ $t(errmsg) }}</div>
+      <div
+        class="err"
+        v-if="!loading && err && !pairList.length">{{ err }}</div>
+      <div
+        class="ix-pair-head tr"
+        v-show="sortedList.length">
+        <div
+          class="th pair"
+          @click="setSort('pair')">
+          <sort
+            :label="$t('pairnav_pair')"
+            :state="stateSortBy('pair')"/>
         </div>
-        <div class="th price" @click="setSort('price')">
-          <sort :label="$t('pairnav_price')"
-            :state="stateSortBy('price')"></sort>
+        <div
+          class="th price"
+          @click="setSort('price')">
+          <sort
+            :label="$t('pairnav_price')"
+            :state="stateSortBy('price')"/>
         </div>
-        <div class="th delta" @click="setSort('delta')">
-          <sort :label="$t('pairnav_wave')"
-            :state="stateSortBy('delta')"></sort>
+        <div
+          class="th delta"
+          @click="setSort('delta')">
+          <sort
+            :label="$t('pairnav_wave')"
+            :state="stateSortBy('delta')"/>
         </div>
-        <div class="th vol" @click="setSort('vol')">
-          <sort :label="$t('pairnav_vol')"
-            :state="stateSortBy('vol')"></sort>
+        <div
+          class="th vol"
+          @click="setSort('vol')">
+          <sort
+            :label="$t('pairnav_vol')"
+            :state="stateSortBy('vol')"/>
         </div>
       </div>
-      <ul class="ul ix-pair-body tbody" :style="{height: bodyHeight}" v-show="sortedList.length">
-        <li class="tr" v-for="pair in sortedList"
+      <ul
+        class="ul ix-pair-body tbody"
+        :style="{height: bodyHeight}"
+        v-show="sortedList.length">
+        <li
+          class="tr"
+          v-for="pair in sortedList"
           :class="{cur: pair.name === state.pro.pair}"
           :key="pair.id"
           @click="setPair(pair)">
@@ -45,8 +72,10 @@
             <span v-if="pair.tick">{{ pair.tick.current | fixed(pair.price_scale) }}</span>
             <span v-else>...</span>
           </div>
-          <div class="td delta" :class="{'theme-color-up': getDelta(pair.tick) > 0, 'theme-color-down': getDelta(pair.tick) < 0}">
-            <span v-if="pair.tick">{{ (getDelta(pair.tick) > 0) ? '+' : ''}}{{ getDelta(pair.tick) }}%</span>
+          <div
+            class="td delta"
+            :class="{'theme-color-up': getDelta(pair.tick) > 0, 'theme-color-down': getDelta(pair.tick) < 0}">
+            <span v-if="pair.tick">{{ (getDelta(pair.tick) > 0) ? '+' : '' }}{{ getDelta(pair.tick) }}%</span>
             <span v-else>...</span>
           </div>
           <div class="td vol">
@@ -66,7 +95,7 @@ import CollectStar from './CollectStar'
 import tickTableMixin from '@/mixins/tick-table'
 
 export default {
-  name: 'pairNav',
+  name: 'PairNav',
   mixins: [tickTableMixin],
   components: {
     Sort,

@@ -206,10 +206,10 @@ div {
   //     }
   //     &.tra_cen {
   //       li {
-  //         &.theme-color-down {
+  //         &.color-down {
   //           color: #F24E4D;
   //         }
-  //         &.theme-color-up {
+  //         &.color-up {
   //           color: #09C989;
   //         }
   //       }

@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     sideColor (side) {
-      return side.toUpperCase() === 'BUY' ? 'theme-color-up' : 'theme-color-down'
+      return side.toUpperCase() === 'BUY' ? 'color-up' : 'color-down'
     },
     fixAmount (big) {
       if (!big) {

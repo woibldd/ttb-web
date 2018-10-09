@@ -28,15 +28,7 @@
           <div
             class="ix-grid ix-grid-tv"
             ref="gridTradingView">
-            <div class="grid-title">
-              <p class="grid-currency">BTC/USDT</p>
-              <p class="grid-value">6332.47</p>
-              <p class="grid-abt">≈43775.68</p>
-              <p class="grid-increase">{{ $t('increase') }}<i>-0.48%</i></p>
-              <p class="grid-high">{{ $t('secure_level_2') }} 6949.28</p>
-              <p class="grid-low">{{ $t('secure_level_0') }} 6949.28</p>
-              <p class="grid-tf-amount">24H{{ $t('vol') }} 184225 BTC</p>
-            </div>
+            <pair-title/>
             <TradingView ref="TradingView"/>
             <div
               class="active-box"
@@ -116,6 +108,7 @@ import PairNav from '@/components/Trading/PairNav'
 import Operate from '@/components/Trading/Operate'
 import OrderDealPopover from '@/components/Trading/OrderDealPopover'
 import Intro from '@/components/Trading/Intro'
+import PairTitle from '@/components/Trading/PairTitle'
 import responsiveScale from '@/mixins/responsiveScale'
 
 export default {
@@ -132,7 +125,8 @@ export default {
     Orderbook,
     PairNav,
     Operate,
-    MobileNav
+    MobileNav,
+    PairTitle
   },
   data () {
     return {
@@ -423,48 +417,9 @@ export default {
   flex: 1;
   height: 300px;
 }
-.grid-title {
-  height: 56px;
-  line-height: 56px;
-  box-sizing: border-box;
-  padding-left: 20px;
-  p{
-    float: left;
-  }
-  .grid-currency{
-    color: #fff;
-    font-size: 20px;
-    margin-right: 20px;
-    font-weight: bold;
-  }
-  .grid-value{
-    font-size: 20px;
-    color: #09C989;
-    font-weight: bold;
-    margin-right: 10px;
-  }
-  .grid-abt{
-    font-size: 14px;
-    color: #09C989;
-    margin-right: 20px;
-  }
-  .grid-increase{
-    font-size: 14px;
-    color: #fff;
-    margin-right: 20px;
-    i{
-      color: #F24E4D;
-    }
-  }
-  .grid-high,.grid-low,.grid-tf-amount{
-    font-size: 14px;
-    color: #D7D7D7;
-    margin-right: 20px;
-  }
-}
 .active-box {
   position: absolute;
-  top: 2px;
+  top: 58px;
   right: 2px;
   width: 260px;
   height: 68px;

@@ -73,8 +73,8 @@ export default {
   methods: {
     sideColor (side) {
       return side.toUpperCase() === 'BUY'
-        ? 'theme-color-up'
-        : 'theme-color-down'
+        ? 'color-up'
+        : 'color-down'
     },
     clear () {
       this.err = ''
