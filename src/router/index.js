@@ -30,7 +30,7 @@ const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pa
 const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
 const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/ProfileSafety')
 const ProfileApi = () => import(/* webpackChunkName: "ProfileApi" */ '@/pages/ProfileApi')
-const ProfileRate = () => import(/* webpackChunkName: "ProfileRate" */ '@/pages/ProfileRate')
+const Fee = () => import(/* webpackChunkName: "Fee" */ '@/pages/Fee')
 const relay = () => import(/* webpackChunkName: "relay" */ '@/pages/active/relay')
 const creation = () => import(/* webpackChunkName: "creation" */ '@/pages/active/creation')
 const PhoneBind = () => import(/* webpackChunkName: "PhoneBind" */ '@/pages/PhoneBind')
@@ -54,7 +54,10 @@ const h5login = () => import(/* webpackChunkName: "h5login" */ '@/pages/h5/sign-
 const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index')
 
 // 活动页面
+const ActivityIndex = () => import(/* webpackChunkName: "ActivityIndex" */ '@/pages/active/index.vue')
 const LockWarehouse = () => import(/* webpackChunkName: "LockWarehouse" */ '@/pages/active/LockWarehouse.vue')
+
+const KycRelay = () => import(/* webpackChunkName: "KycRelay" */ '@/pages/active/kycRelay.vue')
 
 async function beforeEach (to, from, next) {
   state.loading = true
@@ -135,6 +138,21 @@ let router = new Router({
       component: h5index
     },
     {
+      path: '/activity',
+      name: 'activity',
+      component: ActivityIndex,
+      meta: {
+        class: 'dark'
+      },
+      children: [
+        {
+          path: 'kyc_relay',
+          name: 'kycRelay',
+          component: KycRelay
+        }
+      ]
+    },
+    {
       path: '/activity/creation',
       name: 'creation',
       component: creation
@@ -162,7 +180,7 @@ let router = new Router({
     {
       path: '/test2',
       name: 'Test2',
-      component: Test2
+      component: Home
     },
     {
       path: '/trading/:pair?',
@@ -206,11 +224,6 @@ let router = new Router({
           path: 'api',
           name: 'ProfileApi',
           component: ProfileApi
-        },
-        {
-          path: 'rate',
-          name: 'ProfileRate',
-          component: ProfileRate
         },
         {
           path: 'security',
@@ -360,6 +373,18 @@ let router = new Router({
           component: FundAddress
         }
       ]
+    },
+    {
+      path: '/fee',
+      name: 'Fee',
+      meta: {
+        auth: false,
+        nav: true,
+        footer: true,
+        class: 'dark',
+        mobileNav: isMobile
+      },
+      component: Fee
     }
   ],
   scrollBehavior (to, from, savedPosition) {

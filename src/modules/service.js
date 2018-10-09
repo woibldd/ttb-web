@@ -181,6 +181,12 @@ const service = {
     return getCache('regionList', () => Promise.resolve(require('./region.json')))
   },
   /**
+   * 获取kyc接力btc总量
+   */
+  getKycRelayBtcRemain () {
+    return request('user/kyc/relay/bonus')
+  },
+  /**
    * 获取当前用户kyc信息
    */
   getKycInfo () {
@@ -188,9 +194,10 @@ const service = {
   },
   /**
    * 最近kyc用户
+   * @param list true 要list false 要item
    */
-  getRecentlyKycList () {
-    return request('user/kyc/recent')
+  getRecentlyKycList (list) {
+    return list ? request('user/kyc/relay/list') : request('user/kyc/recent')
   },
   updateKycInfo (data) {
     return request('user/kyc2', data)

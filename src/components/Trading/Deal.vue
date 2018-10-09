@@ -133,6 +133,12 @@ export default {
           amount: item.values[1],
           side: item.side.toLowerCase()
         }
+      }).sort((a, b) => {
+        try {
+          return b.time - a.time
+        } catch (e) {
+          return 0
+        }
       })
       if (
         dealList.length &&

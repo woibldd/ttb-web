@@ -15,7 +15,7 @@
           </div>
         </div>
         <em class="cursor cursor_left">0 IX</em>
-        <em class="cursor cursor_right">{{ mineSummary.max_amount | fixed(2) | thousand }} IX</em>
+        <em class="cursor cursor_right">{{ isPersonalShow ? mineMy.max_amount : mineSummary.max_amount | fixed(2) | thousand }} IX</em>
       </div>
       <!-- line end -->
       <div class="process-mine-left-info">
@@ -161,8 +161,11 @@ export default {
         let resMy = await service.getPersonalTotal()
         if (!resMy.code && !isEmpty(resMy.data)) {
           this.mineMy = resMy.data
-          this.mineMy.rate = this.$big(this.mineMy.total).div(this.mineMy.max_amount).times(100).toString()
-          this.isPersonalShow = true
+          this.mineMy.rate = this.$big(this.mineMy.amount).div(this.mineMy.max_amount).times(100).toString()
+          // 目前没有个人日挖矿 所以当个人超过100%时，展示全部挖矿进度
+          if (this.mineMy.rate <= 100) {
+            this.isPersonalShow = true
+          }
         }
       }
     },

@@ -19,9 +19,8 @@
           class="see-rules"
           @click="seeRules"
           radius="30"
-          width="80"
-          font-size="12"
-          heigth="20"
+          fontsize="12"
+          height="20"
           :label="$t('activity_kyc_rule')"/>
       </div>
     </div>
@@ -81,7 +80,7 @@ export default {
     this.fetch()
     this.timer = setInterval(() => {
       this.fetch()
-    }, 10e3)
+    }, 30e3)
   },
   destroyed () {
     clearInterval(this.timer)
@@ -94,7 +93,7 @@ export default {
 
 .recent-kyc-container {
   text-align: center;
-  font-size: rem(14);
+  font-size: rem(20);
   // height: 60px;
   display: flex;
   justify-content: space-between;
@@ -173,7 +172,7 @@ export default {
     }
     .right {
       .see-rules {
-        width: 100px;
+        width: 80px;
       }
     }
   }

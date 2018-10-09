@@ -19,6 +19,13 @@
             :href="'/docs/IX+WhitePaper'+pdfSubfix+'.pdf'"
             target="_blank"
             class="nav_link ml-30">{{ $t("whitepagger") }}</a>
+          <router-link
+            :to="{name: 'kycRelay'}"
+            class="nav_link ml-30"
+            target="_blank">{{ $t('activity_kyc_name') }}
+            <i class="hot"/>
+          </router-link>
+
         </div>
       </div>
       <div class="nav_right">
@@ -234,13 +241,29 @@ export default {
       .nav_link {
         color: #FFFFFF;
         font-size: 16px;
+        position: relative;
 
         &:hover {
           color: $primary;
+          .hot {
+            background: url(~@/assets/hot-active.png)
+          }
         }
 
         &.router-link-active {
           color: $primary;
+          .hot {
+            background: url(~@/assets/hot-active.png)
+          }
+        }
+
+        .hot {
+          position: absolute;
+          right: -22px;
+          top: -2px;
+          width: 18px;
+          height: 20px;
+          background: url(~@/assets/hot.png)
         }
       }
     }

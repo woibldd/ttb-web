@@ -5,6 +5,7 @@
       class="ix-input__label">{{ label }}</span>
     <input
       class="ix-input__text"
+      :disabled="disabled"
       :class="{'ix-input__error': showErrorTips}"
       v-on="inputListeners"
       :autocomplete="autocomplete"
@@ -15,7 +16,7 @@
       v-show="showErrorTips"
       class="ix-input__err-tips">{{ errTips }}</span>
     <span
-      v-if="canDelete && value && value.length"
+      v-if="canDelete && value && value.length && !disabled"
       @click="clearText"
       class="ix-quick-delete"/>
   </div>
@@ -36,6 +37,7 @@ export default{
     event: 'change'
   },
   props: {
+    disabled: {type: Boolean, default: false},
     value: {type: String, default: ''}, // 这里的value跟上面的model参数配合使用！！！
     triggerValidate: {type: Boolean, default: false}, // 外部触发非空提示
     type: {type: String, default: 'text'}, // 一般是text

@@ -1,24 +1,29 @@
 <template>
-  <div class="ix-button btn"
+  <div
+    class="ix-button btn"
     @click.prevent="onclick"
     :class="[disabled ? 'disabled' : '', loading ? 'loading' : '', color,
-       color === 'ixbuy' ? 'theme-bgcolor-up' : '',
-       color === 'ixsell' ? 'theme-bgcolor-down' : '']"
+             color === 'ixbuy' ? 'theme-bgcolor-up' : '',
+             color === 'ixsell' ? 'theme-bgcolor-down' : '']"
     :style="{
       height: height + 'px',
       lineHeight: height - 2 * border + 'px',
       borderRadius: radius + 'px',
       borderWidth: border + 'px',
       fontSize: fontsize + 'px'
-    }">
-    <span class="text" v-show="!loading">{{ label }}</span>
-    <span class="spinner" v-show="loading"></span>
+  }">
+    <span
+      class="text"
+      v-show="!loading">{{ label }}</span>
+    <span
+      class="spinner"
+      v-show="loading"/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'vBtn',
+  name: 'VBtn',
   props: {
     border: {
       default: 1
