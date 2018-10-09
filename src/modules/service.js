@@ -495,8 +495,8 @@ const service = {
     return request('/user/bind/switch', params)
   },
   // 申请API 验证码
-  getProfileApiCode (param) {
-    return request('/user/api/phone/code', param)
+  getProfileApiCode (param, isEmail) {
+    return request(isEmail ? 'user/api/email/code' : '/user/api/phone/code', param)
   },
 
   // 申请API POST /user/api/create

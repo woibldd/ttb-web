@@ -214,6 +214,7 @@ export default {
       btnconfirm: false,
       apiKey: '',
       apiSecret: '',
+      emailCode: '',
       phoneCode: '',
       googleCode: '',
       showVerifyModal: false,
@@ -233,6 +234,9 @@ export default {
     },
     regionId () {
       return this.userInfo.region
+    },
+    email () {
+      return this.userInfo && this.userInfo.email
     },
     verify_email () {
       return this.userInfo && this.state.userInfo.verify_email
@@ -301,7 +305,7 @@ export default {
           google_code: this.googleCode
         }
         this.gotCode = this.googleCode
-      } else if (this.verifyCode) {
+      } else if (this.verify_phone) {
         verifyObj = {
           phone_code: this.phoneCode
         }
@@ -338,6 +342,19 @@ export default {
         phone: this.phone
       }
       service.getProfileApiCode(param).then(resp => {
+        if (resp.code) {
+          utils.alert(resp.message)
+        }
+      })
+    },
+    getEmailVerifyCode () {
+      if (!this.email || !this.showVerifyModal) {
+        return
+      }
+      const param = {
+        email: this.email
+      }
+      service.getProfileApiCode(param, true).then(resp => {
         if (resp.code) {
           utils.alert(resp.message)
         }
