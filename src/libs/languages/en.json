@@ -573,7 +573,7 @@
   "new_key": "Create new key",
   "key_carefully": "Please keep this key carefully, it will not be displayed again",
   "not_less": "API access interval is not less than 100ms",
-  "t_minutes": "The newly applied API Key/Secret will take effect within 10 minutes.",
+  "t_minutes": "The newly applied API Key/Secret will take effect within <em style=\"color: #CA9048\">10 minutes.</em>",
   "bq": "IX provides you with a powerful API that allows you to use quotes, automatic trading, and experience more services.",
   "confirm_deletion": "Please confirm deletion of API key",
   "stopped_after": "The key function will be stopped after deletion, continue or quit.",

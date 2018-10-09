@@ -440,7 +440,7 @@
   "new_key": "生成新密钥",
   "key_carefully": "请妥善保管API密钥，此API密钥不会再次展示",
   "not_less": "API访问间隔不低于100ms",
-  "t_minutes": "新申请的API Key/Secret将于10分钟之内生效",
+  "t_minutes": "新申请的API Key/Secret将于<em style=\"color: #CA9048\">10分钟</em>之内生效",
   "bq": "IX 为您提供了强大的API，您可以通过 API 使用行情查询、自动交易等服务。通过",
   "confirm_deletion": "确认删除API密钥",
   "stopped_after": "删除后将停用密钥，是否删除？",

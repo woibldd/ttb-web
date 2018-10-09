@@ -42,21 +42,29 @@
         <div class="alt-title">{{ $t('new_key') }}</div>
         <p class="prompt">{{ $t('key_carefully') }}</p>
         <p class="inp-tit">API key</p>
-        <input
-          type="text"
-          disabled
-          class="api-inp"
-          v-model="apiKey">
+        <div class="api-inp">
+          <input
+            type="text"
+            disabled
+            v-model="apiKey">
+          <div
+            class="copy"
+            @click="copy(apiKey)">{{ $t('copy') }}</div>
+        </div>
         <p class="inp-tit">API secret</p>
-        <input
-          type="text"
-          disabled
-          class="api-inp"
-          v-model="apiSecret">
+        <div class="api-inp">
+          <input
+            type="text"
+            disabled
+            v-model="apiSecret">
+          <div
+            class="copy"
+            @click="copy(apiSecret)">{{ $t('copy') }}</div>
+        </div>
         <div class="bot-prompt">
           <p>{{ $t('tips') }}</p>
           <p class="pro-txt">{{ $t('not_less') }} <br>
-            {{ $t('t_minutes') }}<br>
+            <span v-html="$t('t_minutes')"/><br>
             {{ $t('bq') }}<a
               :href="apiDoc"
               target="_blank">{{ $t('api_doc') }}</a>{{ $t('see_api_doc') }}</p>
@@ -189,7 +197,7 @@ import vModal from '@/components/VModal.vue'
 import { state } from '@/modules/store'
 import utils from '@/modules/utils'
 import countDown from '@/components/common/countdown-code-button'
-// import copyToClipboard from 'copy-to-clipboard'
+import copyToClipboard from 'copy-to-clipboard'
 
 export default {
   name: 'SafeVerified',
@@ -244,7 +252,7 @@ export default {
   },
   methods: {
     copy (key) {
-      // copyToClipboard(this[key])
+      copyToClipboard(key)
       utils.success(this.$i18n.t('copyed'))
     },
     getProfileApiList () {
@@ -474,6 +482,22 @@ export default {
       padding-left: 14px;
       box-sizing: border-box;
       border: 1px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+      padding-right: 20px;
+
+      input {
+          flex: 1;
+          border: 0;
+      }
+
+      .copy {
+          color: $primary;
+          font-size: 16px;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+      }
     }
     .bot-prompt{
       color: #999;
