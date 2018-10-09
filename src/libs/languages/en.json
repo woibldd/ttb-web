@@ -596,5 +596,7 @@
   "rate_tips_b": "2. Taker fees are paid when you remove liquidity from our order book, by placing any order that is executed against an order of the orderbook. (Please note when your limit order is executed against other user's limit order and his/her order placed earlier than your order, you will pay taker fees.)",
   "rate_tips_c": "3. Taker means that the limit order or market order you place is executed with the current maker.",
   "rate_tips_d": "4. When the order you placed is filled by others orders, you need to pay the taker fees.",
-  "rate_tips_e": "5. Trading fees will be deducted from you executed total. If you exchange assets to BTC, you need to pay BTC fees."
+  "rate_tips_e": "5. Trading fees will be deducted from you executed total. If you exchange assets to BTC, you need to pay BTC fees.",
+  "increase": "change",
+  "vol": "vol"
 }
