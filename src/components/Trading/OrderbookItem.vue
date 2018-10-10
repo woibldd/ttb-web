@@ -1,5 +1,7 @@
 <template>
-  <tr :style="{lineHeight: height}">
+  <tr
+    :style="{lineHeight: height, overflow:hidden}"
+    class="price-stack-row">
     <td
       class="left btn"
       :class="sideColor(side)"
@@ -20,8 +22,8 @@
       @click="setAmount(item.total);setPrice(item.price)"
       :class="sideBgColor(side)"
       :style="{width: item.deep + '%'}"
-      style="position:absolute;right:0;height:24px;z-index:0;opacity:.2"/>
-  </td></tr>
+      class="price-stack-percent-bg"/>
+  </tr>
 </template>
 
 <script>
@@ -72,5 +74,13 @@ td {
 }
 td:first-child {
   padding-left: 15px;
+}
+.price-stack-percent-bg {
+    position:absolute;right:0;height:24px;z-index:0;opacity:.2
+}
+.price-stack-row {
+    position: relative;
+    display: flex;   // 不能缺少了上面的position属性哈
+    flex-direction: row;
 }
 </style>
