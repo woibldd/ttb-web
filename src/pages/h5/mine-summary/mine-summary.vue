@@ -42,6 +42,7 @@
             v-if="hasMineMy">
             <div class="left__col"><span class="text mr-rem-10">{{ $t('mine_my_total') }}: </span>{{ mineMy.max_amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
             <div class="left__col"><span class="text mr-rem-10">{{ $t('mine_my_remain') }}: </span>{{ ( mineMy.max_amount - mineMy.amount ) | fixed(2) | thousand }}<em class="unit">IX</em></div>
+            <div class="left__col"><span class="text mr-rem-10">{{ $t('mine_my_reduce') }}: </span>{{ ( mineMy.total ) | fixed(2) | thousand }}<em class="unit">IX</em></div>
             <!-- <div class="left__col">
               <span class="text mr-rem-10">{{ $t('mine_my_reduce') }} : </span>
               {{ mineMy.total | fixed(2) | thousand }}<em class="unit">IX</em>

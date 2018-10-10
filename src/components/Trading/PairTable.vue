@@ -14,6 +14,7 @@
     <ul
       class="tra_cen"
       v-for="pair in sortedList"
+      @click="toExchange(pair.name)"
       :key="pair.name"
       v-if="pair.tick">
       <li class="ta">{{ pair.product }} <span>/ {{ pair.currency }}</span></li>

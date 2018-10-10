@@ -102,6 +102,7 @@
 
       .detail--wrapper {
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
       }
     }
@@ -123,7 +124,7 @@
       margin-right: rem(10);
     }
     .process-mine-left-my {
-      text-align: right;
+      text-align: left;
       flex: 1;
       font-size: 12px;
       .left__col {
