@@ -74,7 +74,7 @@
           </div>
           <div
             class="td delta"
-            :class="{'theme-color-up': getDelta(pair.tick) > 0, 'theme-color-down': getDelta(pair.tick) < 0}">
+            :class="{'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}">
             <span v-if="pair.tick">{{ (getDelta(pair.tick) > 0) ? '+' : '' }}{{ getDelta(pair.tick) }}%</span>
             <span v-else>...</span>
           </div>

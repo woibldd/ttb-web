@@ -16,7 +16,7 @@
           </tr>
           <tr
             v-for="(deal, index) in dealList"
-            :key="index"
+            :key="deal.time+''+deal.price+deal.side+index"
             :class="[deal.side, 'twinkling']"
             :style="getStyle(deal, index)">
             <td class="td-dir">
@@ -283,10 +283,11 @@ th {
   padding-right: 12px;
 }
 .twinkling {
-  animation: twinkling 1s ease-in-out;
+  animation: twinkling 0.8s ease-in-out;
 }
 @keyframes twinkling {
   0% {
+    // background: rgba(255, 255, 255, 0.4);
     opacity: .2;
   }
   50% {
