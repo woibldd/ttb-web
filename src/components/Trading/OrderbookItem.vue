@@ -16,7 +16,12 @@
       @click="setAmount(item.total);setPrice(item.price)">
       {{ fixAmount(item.total) }}
     </td>
-  </tr>
+    <td
+      @click="setAmount(item.total);setPrice(item.price)"
+      :class="sideBgColor(side)"
+      :style="{width: item.deep + '%'}"
+      style="position:absolute;right:0;height:24px;z-index:0;opacity:.2"/>
+  </td></tr>
 </template>
 
 <script>
@@ -29,6 +34,9 @@ export default {
   methods: {
     sideColor (side) {
       return side.toUpperCase() === 'BUY' ? 'color-up' : 'color-down'
+    },
+    sideBgColor (side) {
+      return side.toUpperCase() === 'BUY' ? 'bgcolor-up' : 'bgcolor-down'
     },
     fixAmount (big) {
       if (!big) {
