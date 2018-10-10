@@ -48,7 +48,9 @@
           <p class="email">
             <router-link :to="{name:'fund'}">我的资产</router-link>
           </p> -->
-          <div class="fund mr-30">
+          <div
+            class="fund mr-30"
+            @click="openDefault('fund')">
             <icon name="fund" />
             {{ $t('wallets_nav_asset') }}
             <div class="dropdown-sub-menu">
@@ -71,7 +73,9 @@
               </ul>
             </div>
           </div>
-          <div class="email mr-30">
+          <div
+            class="email mr-30"
+            @click="openDefault('profile')">
             {{ desentInfo }}
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
@@ -93,7 +97,9 @@
               </ul>
             </div>
           </div>
-          <div class="help">
+          <div
+            class="help"
+            @click="openDefault('help')">
             {{ $t('footer_help') }}
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
@@ -204,6 +210,23 @@ export default {
     },
     clickStar ($event) {
       this.className = 'active'// console.log($event.currentTarget);
+    },
+    openDefault (type) {
+      switch (type) {
+        case 'fund':
+          this.$router.push({
+            name: 'fund'
+          })
+          break
+        case 'profile':
+          this.$router.push({
+            name: 'profile'
+          })
+          break
+        case 'help':
+          window.open(this.helpLink)
+          break
+      }
     }
   }
 }
