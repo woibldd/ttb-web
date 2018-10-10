@@ -7,11 +7,13 @@
       v-for="pair in sortedList"
       :key="pair.name"
       v-if="pair.tick">
-      <div class="row" @click="toExchange(pair.name)">
+      <div
+        class="row"
+        @click="toExchange(pair.name)">
         <div class="col updown">
           <span
             class="up pair"
-            >{{ pair.product }}/{{ pair.currency }}</span>
+          >{{ pair.product }}/{{ pair.currency }}</span>
           <span class="down">{{ $t('homechart_24h_v') }} {{ pretty(pair.tick.volume_24h) }}</span>
         </div>
         <div class="col col-right">
@@ -135,9 +137,11 @@ div {
         }
         .color-up {
           background: #09C989;
+          color: #ffffff !important;
         }
         .color-down {
           background: #F24E4D;
+          color: #ffffff !important;
         }
       }
     }

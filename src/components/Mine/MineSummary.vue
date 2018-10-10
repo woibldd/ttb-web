@@ -6,7 +6,9 @@
           class="jd_cen"
           :style="{ 'width': (rates)+'%'}">
           <p class="line">
-            <span class="cursor_arrow">
+            <span
+              class="cursor_arrow"
+              :style="rates > 85 ? {right: '0', left: 'auto', 'text-align':'right'} : {}">
               <i class="text">{{ isPersonalShow ? $t('personal')+ $t('mine_progress') : $t('mine_progress') }} : </i>{{ rates | fixed(2) }}<i class="unit">%</i>
             </span>
           </p>

@@ -464,6 +464,7 @@
   "pending": "Pending",
   "broadcasting,": "Broadcasting",
   "done": "Done",
+  "reject": "Rejected",
   "please_choose": "Please Select",
   "no_data": "No Data",
   "footer_services": "Services",

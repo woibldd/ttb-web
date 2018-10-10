@@ -359,6 +359,12 @@ const service = {
   getInternalHistory (data) {
     return request('account/balance/transfer/list', data)
   },
+  /**
+   * 获取推广返佣
+   */
+  getPromoteList (data) {
+    return request('account/balance/promote/list', data)
+  },
   rmCache (key) {
     rmCache(key)
   },

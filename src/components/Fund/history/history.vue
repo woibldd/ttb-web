@@ -15,6 +15,9 @@
           <el-radio-button label="withdraw">{{ $t('withdraw_record') }}</el-radio-button>
           <el-radio-button label="reward"> {{ $t('fund_reward') }} </el-radio-button>
           <el-radio-button
+            v-if="isPromoter"
+            label="promoter"> {{ $t('推广佣金') }} </el-radio-button>
+          <el-radio-button
             v-if="hasInternal"
             label="internal"> {{ $t('internal_transfer') }} </el-radio-button>
         </el-radio-group>
@@ -33,14 +36,14 @@
           :label="hd.title"/>
         <el-table-column
           header-align='right'
-          v-if="type!=='reward' && type !== 'internal'"
+          v-if="type!=='reward' && type !== 'internal' && type !== 'promoter'"
           align="right"
           width="200px"
           :label="status.title">
           <!-- <span>解锁/锁仓</span> -->
           <template slot-scope="scope">
             <span :class="['state', hasComplated(scope.row) && 'complete']">
-              {{ hasComplated(scope.row) === 1 ? $t('done') : (hasComplated(scope.row) === 1 ? $t('broadcasting') : $t('pending')) }}
+              {{ $t(getStateLabel(scope.row)) }}
             </span>
           </template>
         </el-table-column>
@@ -80,7 +83,7 @@
         </el-table-column>
         <el-table-column
           header-align='right'
-          v-if="type!=='reward' && type !== 'internal'"
+          v-if="type!=='reward' && type !== 'internal' && type !== 'promoter'"
           align="right"
           width="200px"
           :label="operate.title">
@@ -140,6 +143,10 @@ export default {
         {key: 'amount', title: this.$i18n.t('amount')},
         {key: 'memo', title: this.$i18n.t('note')}
       ],
+      headerPromoter: [
+        {key: 'currency', title: this.$i18n.t('currency')},
+        {key: 'amount', title: this.$i18n.t('amount')}
+      ],
       status: {key: 'state', title: this.$i18n.t('state')},
       internalType: {key: 'internal', title: this.$i18n.t('order_th_type')},
       operate: {key: 'txid', title: this.$i18n.t('actions')},
@@ -161,9 +168,17 @@ export default {
           return this.headerReward
         case 'internal':
           return this.headerInternal
+        case 'promoter':
+          return this.headerPromoter
         default:
           return this.header
       }
+    },
+    isPromoter () {
+      if (this.state.userInfo) {
+        return this.state.userInfo.promoter
+      }
+      return false
     }
   },
   async created () {
@@ -202,12 +217,14 @@ export default {
         return 1
       }
 
-      if (this.type === 'withdraw' && row.state === 4) {
-        return 1
-      }
-
-      if (this.type === 'withdraw' && row.state === 2) {
-        return 2
+      if (this.type === 'withdraw') {
+        if (row.state === 4) {
+          return 1
+        } else if (row.state === 2) {
+          return 2
+        } else if (row.state === -2) {
+          return -2
+        }
       }
 
       return 0
@@ -240,6 +257,9 @@ export default {
         case 'internal':
           request = service.getInternalHistory
           break
+        case 'promoter':
+          request = service.getPromoteList
+          break
         default:
           break
       }
@@ -251,7 +271,7 @@ export default {
       }
       this.tableData = []
       request(param).then(res => {
-        if (res.data.length === 0) {
+        if (res.code || res.data.length === 0) {
           this.loading = false
         } else {
           this.tableData = res.data
@@ -281,6 +301,22 @@ export default {
         num = 8
       }
       return res.round(num, this.C.ROUND_DOWN).toString()
+    },
+    getStateLabel (row) {
+      let s = this.hasComplated(row)
+      console.log(s)
+      switch (s) {
+        case 0:
+          return 'pending'
+        case 1:
+          return 'done'
+        case 2:
+          return 'broadcasting'
+        case -2:
+          return 'reject'
+        default:
+          return 'pending'
+      }
     }
   },
   watch: {
