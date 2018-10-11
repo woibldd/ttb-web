@@ -302,8 +302,8 @@ export default {
 
       let buyTotal = this.$big(0)
       let sellTotal = this.$big(0)
-      let maxBuyTotal = _.maxBy(this.buy, i => i[1])[1]
-      let maxSellTotal = _.maxBy(this.sell, i => i[1])[1]
+      let maxBuyTotal = _.maxBy(this.buy, i => parseFloat(i[1]))[1]
+      let maxSellTotal = _.maxBy(this.sell, i => parseFloat(i[1]))[1]
       this.buy.forEach((buy) => {
         const amount = this.$big(buy[1])
         buyTotal = buyTotal.plus(amount)

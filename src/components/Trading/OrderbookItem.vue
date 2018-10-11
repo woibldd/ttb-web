@@ -1,6 +1,7 @@
 <template>
   <tr
-    :style="{lineHeight: height, overflow:hidden}"
+    :style="{lineHeight: height}"
+    style="overflow:hidden"
     class="price-stack-row">
     <td
       class="left btn"
@@ -76,7 +77,8 @@ td:first-child {
   padding-left: 15px;
 }
 .price-stack-percent-bg {
-    position:absolute;right:0;height:24px;z-index:0;opacity:.2
+    position:absolute;right:0;height:24px;z-index:0;opacity:.2;
+    cursor: pointer;
 }
 .price-stack-row {
     position: relative;
