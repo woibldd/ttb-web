@@ -304,7 +304,6 @@ export default {
     },
     getStateLabel (row) {
       let s = this.hasComplated(row)
-      console.log(s)
       switch (s) {
         case 0:
           return 'pending'
