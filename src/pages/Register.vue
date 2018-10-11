@@ -163,7 +163,7 @@
             <div class="input-box">
               <ix-input
                 ref="invitor"
-                :disabled="!!$route.query.invitor"
+                :disabled="hasInvitor"
                 v-model.trim="invitorId"
                 @input="invitorId=$event"
                 :rule="validateRules.invitor"
@@ -227,6 +227,7 @@ export default {
       errmsg: '',
       email: '',
       invitorId: '',
+      hasInvitor: false,
       password: '',
       captcha: '',
       password2: '',
@@ -496,7 +497,10 @@ export default {
   },
   async created () {
     let invitorId = this.$route.query.invitor
-    if (!invitorId) {
+    if (invitorId) {
+      utils.setCookie('invitor', invitorId)
+      this.hasInvitor = true
+    } else {
       invitorId = utils.getCookie('invitor')
     }
     if (invitorId && /^[A-Za-z0-9]+$/.test(invitorId)) {
