@@ -1,0 +1,65 @@
+
+.coin-intro-container{
+    color: #ffffff;
+    font-size: 14px;
+    .c-a5{
+        color: #A5B4C5;
+    }
+    .f18{
+        font-size: 18px;
+    }
+    .f14{
+        font-size: 14px;
+    }
+    .c-primary {
+        color: #C9AA6D;
+    }
+    .coin-intro__header {
+        background-color: $nav;
+        height: 32px;
+        line-height: 32px;
+        padding-left: 12px;
+        box-sizing: border-box;
+        color: white;
+    }
+    .coin-intro__body {
+        height: 264px;
+        padding-left: 30px;
+        padding-top: 60px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: flex-start;
+
+        .coin-name {
+            flex: 2;
+            display: flex;
+            padding-right: 40px;
+            box-sizing: border-box;
+            flex-direction: column;
+        }
+        .coin-introduction {
+            flex: 9;
+            box-sizing: border-box;
+            padding-right: 100px;
+        }
+        .coin-issue-info{
+            flex: 8;
+            display: flex;
+            flex-direction: column;
+            .normal-info {
+                display: flex;
+                .left {
+                    margin-right: 40px;
+                }
+            }
+            .issue-info-row {
+                margin-bottom: 15px;
+                .row__label {
+                    width: 100px;
+                    display: inline-block;
+                    color: #A5B4C5;
+                }
+            }
+        }
+    }
+}

@@ -636,5 +636,12 @@
   "req_e": "The Lock Snapshot will be taken every hour; take the basic hash rate of the lock snapshot and the minimum of your transaction fee for that hour as the actual mining amount.",
   "req_f": "Adjust the basic hash rate for the day based on the total mining output and the difficulty value of the previous day; and update the basic hash rate at 24:00 every day.",
   "req_g": "IX reserves the right to interpret the adjustment of trading rules.",
-  "more": "more"
+  "more": "more",
+  "issue_time": "Issue Time",
+  "issue_all": "Total Amount",
+  "issue_circulation": "Circulation",
+  "token_price": "Token Price",
+  "office_website": "Official Website",
+  "chain_info": "Block Explorer",
+  "introduction": "Introduction"
 }
