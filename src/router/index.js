@@ -38,6 +38,7 @@ const SecuritySummary = () => import(/* webpackChunkName: "SecuritySummary" */ '
 const eBind = () => import(/* webpackChunkName: "EmailBind" */ '@/pages/eBind')
 const ModPwd = () => import(/* webpackChunkName: "ModPwd" */ '@/pages/ModPwd')
 const GoogleTitle = () => import(/* webpackChunkName: "GoogleTitle" */ '@/pages/GoogleTitle')
+const lever = () => import(/* webpackChunkName: "lever" */ '@/pages/lever')
 // const ProfileAuthen = () => import(/* webpackChunkName: "ProfileAuthen" */ '@/pages/ProfileAuthen')
 
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
@@ -161,6 +162,11 @@ let router = new Router({
       path: '/activity/relay',
       name: 'relay',
       component: relay
+    },
+    {
+      path: '/lever',
+      name: 'lever',
+      component: lever
     },
     {
       path: '/activity/lock',

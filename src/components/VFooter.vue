@@ -6,10 +6,18 @@
           :to="{name:'home'}"
           class="footer_logo"/>
         <p class="footer_ltxt"><b>{{ $t('first') }}</b>{{ $t('bitcoin_equity_certificate') }}</p>
-        <img
-          class="footer_ewm"
-          src="../assets/ewm.png">
-        <p class="footer_ewm_ltxt">{{ $t('footer_contract_desc') }}</p>
+        <div class="lt">
+          <img
+            class="footer_ewm"
+            src="../assets/ewm.png">
+          <p class="footer_ewm_ltxt">{{ $t('footer_contract_desc') }}</p>
+        </div>
+        <div class="lt">
+          <img
+            class="footer_ewm"
+            src="../assets/ewm_by.png">
+          <p class="footer_ewm_ltxt">{{ $t('footer_contract_jb') }}</p>
+        </div>
       </div>
       <div class="footer_right">
         <div class="footer_ct">
@@ -150,6 +158,10 @@ export default {
     height:350px;
     background-color: $home-header-bgdark;
   }
+  .lt{
+      float: left;
+      margin-right: 24px;
+  }
   .footer_left{
     float: left;
     width: auto;
@@ -160,27 +172,31 @@ export default {
       line-height: 40px;
       color: #C9A96C;
       display: block;
+      letter-spacing:2px;
       b{
         font-weight: bold;
       }
     }
     .footer_ewm{
-      width: 140px;
-      height: 140px;
+      width: 100px;
+      height: 100px;
       display: block;
-      margin-top: 7px;
+      margin-top: 17px;
     }
     .footer_ewm_ltxt{
-      width: 180px;
-      line-height: 22px;
+      min-width: 100px;
       display: block;
-      color: #999999;
+      font-size: 12px;
       margin-top: 15px;
+      color: #999999;
+      line-height: 22px;
+      text-align: center;
     }
     .footer_logo{
-      width: 196px;
-      height: 45px;
-      @include bg-retina('../assets/footer_logo', 'png', 196px, 45px);
+      width: 224px;
+      height: 51px;
+      margin-top: 22px;
+      @include bg-retina('../assets/footer_logo', 'png', 224px, 51px);
       display: block;
     }
 
