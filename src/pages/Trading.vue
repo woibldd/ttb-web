@@ -81,11 +81,13 @@
           </div>
         </div>
       </div>
-      <!-- <div class="ix-row">
-        <div class="ix-grid ix-grid-intro" ref="gridIntro">
-          <intro></intro>
+      <div class="ix-row">
+        <div
+          class="ix-grid ix-grid-intro"
+          ref="gridIntro">
+          <coin-intro/>
         </div>
-      </div> -->
+      </div>
     </div>
     <order-deal-popover />
   </div>
@@ -107,7 +109,7 @@ import Orderbook from '../components/Trading/Orderbook'
 import PairNav from '@/components/Trading/PairNav'
 import Operate from '@/components/Trading/Operate'
 import OrderDealPopover from '@/components/Trading/OrderDealPopover'
-import Intro from '@/components/Trading/Intro'
+import coinIntro from '@/components/Trading/coin-intro'
 import PairTitle from '@/components/Trading/PairTitle'
 import responsiveScale from '@/mixins/responsiveScale'
 
@@ -120,7 +122,7 @@ export default {
     TradingView,
     Order,
     Deal,
-    Intro,
+    coinIntro,
     // DepthChart,
     Orderbook,
     PairNav,

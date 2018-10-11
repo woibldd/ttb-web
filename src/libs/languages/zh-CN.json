@@ -515,6 +515,13 @@
   "req_f": "根据前一天的挖矿产出总量和难度值，调整当天的基准算力；并于每天的0点更新基准算力。",
   "req_g": "IX保留调整交易规则的最终解释权。",
   "more": "更多",
+  "issue_time": "发行时间",
+  "issue_all": "发行总量",
+  "issue_circulation": "流通总量",
+  "token_price": "众筹价格",
+  "office_website": "官网",
+  "chain_info": "区块查询",
+  "introduction": "简介",
   "api_has_obtain": "您已获得限量内测挖矿机器人，<a target=\"_blank\" href=\"%{link}\">查看详情</a>",
   "api_has_no_obtain": "领取限量挖矿机器人"
 }
