@@ -15,7 +15,7 @@
         <div class="lt">
           <img
             class="footer_ewm"
-            src="../assets/ewm.png">
+            src="../assets/ewm_by.png">
           <p class="footer_ewm_ltxt">{{ $t('footer_contract_jb') }}</p>
         </div>
       </div>
@@ -184,7 +184,7 @@ export default {
       margin-top: 17px;
     }
     .footer_ewm_ltxt{
-      width: 100%;
+      min-width: 100px;
       display: block;
       font-size: 12px;
       margin-top: 15px;
