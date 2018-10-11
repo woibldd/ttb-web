@@ -68,7 +68,7 @@
 <script>
 import './coin-intro.scss'
 import coinInfo from './coin-info.js'
-import {state, actions} from '@/modules/store'
+import {state} from '@/modules/store'
 
 export default {
   data () {
@@ -77,14 +77,20 @@ export default {
       coinInfo: {}
     }
   },
-  async created () {
-    console.log(this.state, 'local')
-    await actions.updateSession()
-    const {locale} = this.state
+  methods: {
+    switchContent (coinType) {
+      const {locale} = this.state
+      this.coinInfo = coinInfo[coinType][locale]
+    }
+  },
+  created () {
     const coinType = this.state.pro.product_name
-    this.coinInfo = coinInfo[coinType][locale]
+    this.switchContent(coinType)
   },
   watch: {
+    'state.pro.product_name' (val) {
+      this.switchContent(val)
+    },
     'state.locale' (val) {
       const coinType = this.state.pro.product_name
       this.coinInfo = coinInfo[coinType][val]
