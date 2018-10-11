@@ -1,7 +1,21 @@
 <template>
   <div class="user-center-right">
     <div class="profile-container">
-      <div class="title-box">{{ $t('api_management') }}</div>
+      <div class="title-box">{{ $t('api_management') }}
+        <!-- <div class="pull-right tips">
+          <div
+            v-if="openApi"
+            v-html="$t('api_has_obtain', {link: hasApiLink})"/>
+          <div v-else>
+            <a
+              :href="hasNoApiLink"
+              target="_blank">
+              {{ $t('api_has_no_obtain') }}
+              <icon name='anchor'/>
+            </a>
+          </div>
+        </div> -->
+      </div>
       <div class="api-box mb-30">
         <div class="api-ul">
           <ul class="tit">
@@ -194,7 +208,7 @@ import ProfileLeft from './ProfileLeft'
 import service from '@/modules/service'
 import VBtn from '@/components/VBtn'
 import vModal from '@/components/VModal.vue'
-import { state } from '@/modules/store'
+import { state, actions } from '@/modules/store'
 import utils from '@/modules/utils'
 import countDown from '@/components/common/countdown-code-button'
 import copyToClipboard from 'copy-to-clipboard'
@@ -249,10 +263,29 @@ export default {
     },
     apiDoc () {
       return this.state.theme.apiDoc[this.state.locale || 'en']
+    },
+    openApi () {
+      return this.userInfo.api === 1
+    },
+    hasApiLink () {
+      let link = 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360016718671'
+      if (this.state.locale === 'en') {
+        link = link.replace('zh-cn', 'en-us')
+      }
+      return link
+    },
+    hasNoApiLink () {
+      let link = 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360016718671'
+      if (this.state.locale === 'en') {
+        link = link.replace('zh-cn', 'en-us')
+      }
+      return link
     }
   },
   created () {
     this.getProfileApiList()
+    // 获取列表后服务端会更新session状态，需要重新拉取session
+    actions.updateSession()
   },
   methods: {
     copy (key) {
@@ -398,11 +431,11 @@ export default {
         font-weight: 600;
         color: $text-strong;
         border-bottom: 1px solid #e6e6e6;
-        span{
-          color: #999;
-          font-size: 14px;
-          padding-left: 15px;
-          font-weight: lighter;
+
+        .tips {
+          font-size:16px;
+          font-weight:400;
+          color:#999999
         }
       }
       .api-box{
