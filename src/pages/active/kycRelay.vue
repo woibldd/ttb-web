@@ -339,6 +339,7 @@ export default {
           font-size: 36 / 1920 * $vw;
           color: #FFFFFF;
           font-weight: 200;
+          vertical-align: middle;
         }
       }
     }
