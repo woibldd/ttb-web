@@ -223,3 +223,17 @@ td.right {
 .el-form-item.is-required>.el-form-item__label:before {
     display: none;
 }
+
+$primary-color: #C9A96C;
+.el-select-dropdown__item.selected {
+    color: $primary-color !important;
+}
+
+
+
+.el-select .el-input.is-focus .el-input__inner {
+    border-color: $primary-color !important;
+}
+.el-select .el-input__inner:focus {
+    border-color: $primary-color !important;
+}

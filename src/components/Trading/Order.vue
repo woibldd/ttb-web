@@ -516,6 +516,7 @@ export default {
 .err,
 .no-data {
   line-height: 70px;
+  padding-top: 100px; // 这里先这么写,让它居中;
   text-align: center;
   color: rgba(200,200,200, .2);
 }

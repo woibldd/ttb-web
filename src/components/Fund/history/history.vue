@@ -126,29 +126,10 @@ export default {
   components: {ixPagination},
   data () {
     return {
-      header: [
-        {key: 'create_time', title: this.$i18n.t('time')},
-        {key: 'currency', title: this.$i18n.t('currency')},
-        {key: 'confirm', title: this.$i18n.t('confirm')},
-        {key: 'chain', title: this.$i18n.t('chain')},
-        {key: 'amount', title: this.$i18n.t('amount')} // -fee
-      ],
-      headerReward: [
-        {key: 'create_time', title: this.$i18n.t('time')},
-        {key: 'currency', title: this.$i18n.t('currency')},
-        {key: 'name', title: this.$i18n.t('order_th_type')},
-        {key: 'amount', title: this.$i18n.t('amount')} // -fee
-      ],
-      headerInternal: [
-        {key: 'create_time', title: this.$i18n.t('time')},
-        {key: 'currency', title: this.$i18n.t('currency')},
-        {key: 'amount', title: this.$i18n.t('amount')},
-        {key: 'memo', title: this.$i18n.t('note')}
-      ],
-      headerPromoter: [
-        {key: 'currency', title: this.$i18n.t('currency')},
-        {key: 'amount', title: this.$i18n.t('amount')}
-      ],
+      header: [],
+      headerReward: [],
+      headerInternal: [],
+      headerPromoter: [],
       status: {key: 'state', title: this.$i18n.t('state')},
       internalType: {key: 'internal', title: this.$i18n.t('order_th_type')},
       operate: {key: 'txid', title: this.$i18n.t('actions')},
@@ -184,6 +165,7 @@ export default {
     }
   },
   async created () {
+    this.updateHeaderLabel()
     this.getFundHistory(this.type)
     this.getAccountBalanceList()
     this.getInternalHistory()
@@ -318,11 +300,40 @@ export default {
         default:
           return 'pending'
       }
+    },
+    updateHeaderLabel () {
+      this.header = [
+        {key: 'create_time', title: this.$i18n.t('time')},
+        {key: 'currency', title: this.$i18n.t('currency')},
+        {key: 'confirm', title: this.$i18n.t('confirm')},
+        {key: 'chain', title: this.$i18n.t('chain')},
+        {key: 'amount', title: this.$i18n.t('amount')} // -fee
+      ]
+      this.headerReward = [
+        {key: 'create_time', title: this.$i18n.t('time')},
+        {key: 'currency', title: this.$i18n.t('currency')},
+        {key: 'name', title: this.$i18n.t('order_th_type')},
+        {key: 'amount', title: this.$i18n.t('amount')} // -fee
+      ]
+      this.headerInternal = [
+        {key: 'create_time', title: this.$i18n.t('time')},
+        {key: 'currency', title: this.$i18n.t('currency')},
+        {key: 'amount', title: this.$i18n.t('amount')},
+        {key: 'memo', title: this.$i18n.t('note')}
+      ]
+      this.headerPromoter = [
+        {key: 'currency', title: this.$i18n.t('currency')},
+        {key: 'amount', title: this.$i18n.t('amount')}
+      ]
+      this.status = Object.assign({key: 'state', title: this.$i18n.t('state')})
+      this.operate = Object.assign({key: 'txid', title: this.$i18n.t('actions')})
+      this.internalType = Object.assign({key: 'internal', title: this.$i18n.t('order_th_type')})
     }
   },
   watch: {
     'state.locale' (v) {
       this.getAccountBalanceList()
+      this.updateHeaderLabel()
     }
   }
 }

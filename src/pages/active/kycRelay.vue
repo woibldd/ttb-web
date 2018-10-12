@@ -384,6 +384,7 @@ export default {
               display: inline-block;
               width: 62px;
               height: 94px;
+              line-height: 94px;
               font-size: 50px;
               background:linear-gradient(0deg,rgba(26,24,24,1),rgba(36,36,36,1),rgba(0,0,0,.23));
               border-radius:4px;
@@ -413,6 +414,7 @@ export default {
             text-align: left;
             .desc {
               padding-left: 18px;
+              text-align: right;
             }
             // width: 600px;
             .input_box {
@@ -429,6 +431,7 @@ export default {
               .copy_button {
                 display: inline-block;
                 padding: 0 26px;
+                text-align: center;
                 border-left: 1px solid #29303A;
               }
             }
@@ -560,6 +563,7 @@ export default {
                   .copy_button {
                     display: inline-block;
                     padding: 0 26px;
+                    text-align: center;
                     min-width: 70px;
                     border-left: 1px solid #29303A;
                   }
