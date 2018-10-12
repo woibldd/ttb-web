@@ -2,7 +2,7 @@
   <div class="user-center-right">
     <div class="profile-container">
       <div class="title-box">{{ $t('api_management') }}
-        <!-- <div class="pull-right tips">
+        <div class="pull-right tips">
           <div
             v-if="openApi"
             v-html="$t('api_has_obtain', {link: hasApiLink})"/>
@@ -14,7 +14,7 @@
               <icon name='anchor'/>
             </a>
           </div>
-        </div> -->
+        </div>
       </div>
       <div class="api-box mb-30">
         <div class="api-ul">
@@ -268,14 +268,14 @@ export default {
       return this.userInfo.api === 1
     },
     hasApiLink () {
-      let link = 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360016718671'
+      let link = 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360017842952'
       if (this.state.locale === 'en') {
         link = link.replace('zh-cn', 'en-us')
       }
       return link
     },
     hasNoApiLink () {
-      let link = 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360016718671'
+      let link = 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360017842952'
       if (this.state.locale === 'en') {
         link = link.replace('zh-cn', 'en-us')
       }

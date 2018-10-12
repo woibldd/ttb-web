@@ -12,7 +12,7 @@
       <li class="tg">{{ $t('actions') }}</li>
     </ul>
     <ul
-      class="tra_cen"
+      class="tra_cen btn"
       v-for="pair in sortedList"
       @click="toExchange(pair.name)"
       :key="pair.name"
