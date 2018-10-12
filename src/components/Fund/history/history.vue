@@ -88,7 +88,9 @@
           width="200px"
           :label="operate.title">
           <template slot-scope="scope">
-            <div class="contact-item">
+            <div
+              class="contact-item"
+              v-if="scope.row.txid">
               <icon name="fund-history-copy"/>
               <span
                 class="show-address"
