@@ -64,7 +64,7 @@
             <span class="address-txt">{{ selectCoin.memo }}</span>
             <span
               class="address-copy"
-              @click="copy">{{ $t('copy') }}</span>
+              @click="copyMemo">{{ $t('copy') }}</span>
           </div>
         </div>
       </div>
@@ -109,6 +109,10 @@ export default {
   methods: {
     copy () {
       copyToClipboard(this.address)
+      utils.success(this.$i18n.t('copyed'))
+    },
+    copyMemo () {
+      copyToClipboard(this.selectCoin.memo)
       utils.success(this.$i18n.t('copyed'))
     },
     async getCoinAddress () {

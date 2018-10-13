@@ -232,6 +232,7 @@ export default {
       myCoinInfo: {},
       phoneCode: '',
       googleCode: '',
+      eosMemo: '',
       state
     }
   },
@@ -356,9 +357,12 @@ export default {
         currency: this.selectCoin.currency,
         to_address: this.selectAddress,
         amount: this.withdrawCount,
-        // memo:
         // email_code
         phone_code: this.phoneCode
+      }
+      // eos 需要填memo
+      if (param.currency === 'EOS' && this.eosMemo) {
+        param.memo = this.eosMemo
       }
       if (this.googleCode) {
         param.google_code = this.googleCode
