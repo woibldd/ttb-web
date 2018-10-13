@@ -645,5 +645,11 @@
   "chain_info": "Block Explorer",
   "introduction": "Introduction",
   "api_has_obtain": "You have get the limited testing mining robot, <a target=\"_blank\" href=\"%{link}\">Detail</a>",
-  "api_has_no_obtain": "Get limited Mining Robot"
+  "api_has_no_obtain": "Get limited Mining Robot",
+  "address_tag": "Address Tags ",
+  "eos_deposit_tip_label": "Wrong address will cause lost of assets,please confirm carefully.",
+  "eos_deposit_tip_security_third": "A certain percentage of fee will be charged for getting asset back caused by wrong address tags.；",
+  "orders":"Orders",
+  "my_orders": "My Orders"
+
 }

@@ -74,6 +74,12 @@
             </div>
           </div>
           <div
+            class="fund mr-30"
+            @click="openDefault('orders')">
+            <icon name="order" />
+            {{ $t('orders') }}
+          </div>
+          <div
             class="email mr-30"
             @click="openDefault('profile')">
             {{ desentInfo }}
@@ -225,6 +231,11 @@ export default {
           break
         case 'help':
           window.open(this.helpLink)
+          break
+        case 'orders':
+          this.$router.push({
+            name: 'orders'
+          })
           break
       }
     }

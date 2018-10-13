@@ -49,6 +49,7 @@ const Deposit = () => import(/* webpackChunkName: "FundDeposit" */ '@/components
 const MyFund = () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/My/my.vue')
 const FundAddress = () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/Address/address.vue')
 const FundHistory = () => import(/* webpackChunkName: "FundHistory" */ '@/components/Fund/history/history.vue')
+const MyOrder = () => import(/* webpackChunkName: "FundHistory" */ '@/components/Fund/order')
 
 // h5相关页面
 const h5login = () => import(/* webpackChunkName: "h5login" */ '@/pages/h5/sign-up')
@@ -379,6 +380,17 @@ let router = new Router({
           component: FundAddress
         }
       ]
+    },
+    {
+      path: '/orders',
+      name: 'orders',
+      meta: {
+        auth: false,
+        nav: true,
+        footer: true,
+        class: 'dark'
+      },
+      component: MyOrder
     },
     {
       path: '/fee',
