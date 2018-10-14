@@ -3,7 +3,7 @@
     <!-- <mobile-nav/> -->
     <div
       class="h5-page__banner"
-      v-if="banners && banners.length || true">
+      v-if="banners && banners.length">
       <div class="banner-pic">
         <swiper
           :options="swiperOption"
@@ -44,6 +44,7 @@
         </div>
         <a
           class="more-dots"
+          target="_blank"
           :href="announcementLink">
           <span/>
           <span/>
