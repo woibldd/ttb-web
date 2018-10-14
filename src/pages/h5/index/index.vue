@@ -3,7 +3,7 @@
     <!-- <mobile-nav/> -->
     <div
       class="h5-page__banner"
-      v-if="banners && banners.length">
+      v-if="banners && banners.length || true">
       <div class="banner-pic">
         <swiper
           :options="swiperOption"
@@ -34,12 +34,21 @@
         <div
           class="news"
           v-for="(item) in notices"
-          :key="item.id"><a
+          :key="item.id">
+          <a
             class="text_link"
             :href="item.url || 'javascript:;'"
             target="_blank">
             {{ item.title }}
-        </a></div>
+          </a>
+        </div>
+        <a
+          class="more-dots"
+          :href="announcementLink">
+          <span/>
+          <span/>
+          <span/>
+        </a>
       </div>
     </div>
     <div class="activity-info-section">
@@ -94,6 +103,9 @@ export default {
   computed: {
     swiper: function () {
       return this.$refs.mySwiper.swiper
+    },
+    announcementLink () {
+      return state.theme.announcement[state.locale] || state.theme.announcement.en
     }
   },
   created () {
