@@ -29,7 +29,8 @@ import {
   Upload,
   RadioGroup,
   RadioButton,
-  Loading
+  Loading,
+  MessageBox
 } from 'element-ui'
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
@@ -75,6 +76,8 @@ utils.$i18n = new VueI18n({
 })
 
 Vue.prototype.$eh = eventHub
+Vue.prototype.$msgbox = MessageBox
+Vue.prototype.$confirm = MessageBox.confirm
 
 actions.setLocale()
 
