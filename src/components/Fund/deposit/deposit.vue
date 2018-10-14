@@ -154,6 +154,18 @@ export default {
         this.tableData = []
       })
     }
+  },
+  mounted () {
+    utils.ixConfirm(this, {
+      content: 'content',
+      title: 'title',
+      confirmBtnText: 'confirmBtnText',
+      cancelBtnText: 'cancelBtnText'
+    }).then(() => {
+      console.log('点了确定')
+    }).catch(() => {
+      console.log('点了取消')
+    })
   }
 }
 </script>
