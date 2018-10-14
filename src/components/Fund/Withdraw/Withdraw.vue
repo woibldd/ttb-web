@@ -301,6 +301,7 @@ export default {
 
           if (this.allAddress.length > 0) {
             this.selectAddress = this.allAddress[0]
+            this.memo = this.selectAddress.memo
           }
         }
       })

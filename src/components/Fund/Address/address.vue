@@ -71,7 +71,7 @@
           :label="hd.title"/>
         <el-table-column
           header-align='right'
-          width="100px"
+          width="120px"
           align="right"
           :label="operate.title">
           <!-- <span>解锁/锁仓</span> -->
