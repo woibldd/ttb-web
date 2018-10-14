@@ -298,17 +298,27 @@ export default {
       return service.getMyAddressList(param).then((res) => {
         if (res && res.data) {
           this.allAddress = res.data
-
           if (this.allAddress.length > 0) {
             this.selectAddress = this.allAddress[0]
             this.memo = this.selectAddress.memo
+          } else {
+            this.selectAddress = {
+              address: ''
+            }
+            this.memo = ''
           }
+        } else {
+          this.selectAddress = {}
+          this.memo = ''
         }
       })
     },
     async changeCoinType (coin) {
       this.selectCoin = coin
-      this.selectAddress = {}
+      this.selectAddress = {
+        address: '',
+        memo: ''
+      }
       this.getCoinAddress()
       this.updadeMyCoinInfo() // 更改币种后，重新获取一次自己的钱包状态
     },

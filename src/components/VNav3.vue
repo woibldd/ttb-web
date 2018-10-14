@@ -50,9 +50,10 @@
           </p> -->
           <div
             class="fund mr-30"
-            @click="openDefault('fund')">
+          >
             <icon name="fund" />
-            {{ $t('wallets_nav_asset') }}
+            <span @click="openDefault('fund')">{{ $t('wallets_nav_asset') }}</span>
+
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
@@ -105,8 +106,8 @@
           </div>
           <div
             class="help"
-            @click="openDefault('help')">
-            {{ $t('footer_help') }}
+          >
+            <span @click="openDefault('help')">{{ $t('footer_help') }}</span>
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">

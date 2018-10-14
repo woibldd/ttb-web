@@ -117,6 +117,13 @@ th {
 .btn {
   cursor: pointer;
 }
+.pointer {
+  cursor:pointer;
+}
+.default,
+.cursor-default {
+  cursor: default;
+}
 /*
 .progressing {
   cursor: progress;

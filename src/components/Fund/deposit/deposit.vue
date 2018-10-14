@@ -37,7 +37,7 @@
           <div class="deposit-address">
             <span class="address-txt">{{ address }}</span>
             <span
-              class="address-copy"
+              class="address-copy pointer"
               @click="copy">{{ $t('copy') }}</span>
           </div>
         </div>
@@ -63,7 +63,7 @@
           <div class="deposit-address">
             <span class="address-txt">{{ memo }}</span>
             <span
-              class="address-copy"
+              class="address-copy pointer"
               @click="copyMemo">{{ $t('copy') }}</span>
           </div>
         </div>
@@ -113,7 +113,7 @@ export default {
       utils.success(this.$i18n.t('copyed'))
     },
     copyMemo () {
-      copyToClipboard(this.selectCoin.memo)
+      copyToClipboard(this.memo || '')
       utils.success(this.$i18n.t('copyed'))
     },
     async getCoinAddress () {
