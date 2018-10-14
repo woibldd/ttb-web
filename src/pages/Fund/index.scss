@@ -48,6 +48,11 @@
             display: flex;
             justify-content: space-between;
         }
+        .eos-deposit-tips {
+            color: #FBA917;
+            height: 32px;
+            padding-top: 10px;
+        }
     }
     .fund-items-content{
         margin: 54px auto 0;
@@ -62,12 +67,12 @@
                 font-size: 14px;
                 font-weight: bold;
                 color:$text-strong;
-                width: 88px;
+                width: 100px;
             }
         }
 
         .fund-item-other {
-            padding-left: 88px;
+            padding-left: 100px;
         }
     }
 

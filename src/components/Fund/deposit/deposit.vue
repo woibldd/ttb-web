@@ -54,11 +54,31 @@
             ref="qr"/>
         </div>
       </div>
+      <!-- address_tag -->
+      <div
+        class="fund-item-row"
+        v-if="selectCoin.currency === 'EOS'">
+        <div class="row__label">{{ $t('address_tag') }}</div>
+        <div class="row__value">
+          <div class="deposit-address">
+            <span class="address-txt">{{ selectCoin.memo }}</span>
+            <span
+              class="address-copy"
+              @click="copyMemo">{{ $t('copy') }}</span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="fund-item-other eos-deposit-tips"
+        v-if="selectCoin.currency === 'EOS'">
+        {{ $t('eos_deposit_tip_label') }}
+      </div>
       <ul
         class="fund-item-other mt-10 text-des"
         style="padding-left: 102px">
         <li> {{ $t('deposit_hint_addr', {coin: selectCoin.currency}) }}</li>
-        <li>  {{ $t('deposit_hint_confirm',{confirm: selectCoin.min_confirm, coin: selectCoin.currency}) }}</li>
+        <li> {{ $t('deposit_hint_confirm',{confirm: selectCoin.min_confirm, coin: selectCoin.currency}) }}</li>
+        <li v-if="selectCoin.currency === 'EOS'">{{ $t('eos_deposit_tip_security_third') }}</li>
       </ul>
     </div>
   </div>
@@ -89,6 +109,10 @@ export default {
   methods: {
     copy () {
       copyToClipboard(this.address)
+      utils.success(this.$i18n.t('copyed'))
+    },
+    copyMemo () {
+      copyToClipboard(this.selectCoin.memo)
       utils.success(this.$i18n.t('copyed'))
     },
     async getCoinAddress () {

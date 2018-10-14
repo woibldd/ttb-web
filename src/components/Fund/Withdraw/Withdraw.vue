@@ -67,6 +67,25 @@
         class="fund-item-other withdraw-new-address mt-14 mb-24 default">
         <span class="add-icon mr-10">+</span>{{ $t("add_withdraw_addr") }}
       </div>
+      <!-- address_tag -->
+      <div
+        class="fund-item-row"
+        v-if="selectCoin.currency === 'EOS'">
+        <div class="row__label">{{ $t('address_tag') }}</div>
+        <div class="row__value">
+          <div class="withdraw-address border-1 pl-10">
+            <input
+              class="coin-count"
+              v-model="eosMemo">
+          </div>
+        </div>
+      </div>
+      <!-- address_tag_label -->
+      <div
+        class="fund-item-other eos-deposit-tips"
+        v-if="selectCoin.currency === 'EOS'">
+        {{ $t('eos_deposit_tip_label') }}
+      </div>
       <div class="fund-item-row">
         <div class="row__label">{{ $t('withdraw_amount') }}</div>
         <div class="row__value">
@@ -213,6 +232,7 @@ export default {
       myCoinInfo: {},
       phoneCode: '',
       googleCode: '',
+      eosMemo: '',
       state
     }
   },
@@ -337,9 +357,12 @@ export default {
         currency: this.selectCoin.currency,
         to_address: this.selectAddress,
         amount: this.withdrawCount,
-        // memo:
         // email_code
         phone_code: this.phoneCode
+      }
+      // eos 需要填memo
+      if (param.currency === 'EOS' && this.eosMemo) {
+        param.memo = this.eosMemo
       }
       if (this.googleCode) {
         param.google_code = this.googleCode

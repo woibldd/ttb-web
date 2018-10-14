@@ -523,5 +523,10 @@
   "chain_info": "区块查询",
   "introduction": "简介",
   "api_has_obtain": "您已获得限量内测挖矿机器人，<a target=\"_blank\" href=\"%{link}\">查看详情</a>",
-  "api_has_no_obtain": "领取限量挖矿机器人"
+  "api_has_no_obtain": "领取限量挖矿机器人",
+  "address_tag": "地址标签",
+  "eos_deposit_tip_label": "转帐务必填写正确的 地址标签 ，否则将充值失败",
+  "eos_deposit_tip_security_third": "地址标签填写错误而造成的充值失败，找回将收取一定比例的手续费；",
+  "orders":"订单",
+  "my_orders": "我的订单"
 }
