@@ -26,18 +26,10 @@
               <p class="lt rate-t-c">{{ $t('taker') }}</p>
             </div>
             <ul class="rate-ul">
-              <li>
-                <p class="lt rate-t-a">BTC/USDT</p>
-                <p class="lt rate-t-b">0.2%</p>
-                <p class="lt rate-t-c">0.2%</p>
-              </li>
-              <li>
-                <p class="lt rate-t-a">ETH/USDT</p>
-                <p class="lt rate-t-b">0.2%</p>
-                <p class="lt rate-t-c">0.2%</p>
-              </li>
-              <li>
-                <p class="lt rate-t-a">ETH/BTC</p>
+              <li
+                v-for="pair in pairList"
+                :key="pair.name">
+                <p class="lt rate-t-a">{{ pair.name | pairfix }}</p>
                 <p class="lt rate-t-b">0.2%</p>
                 <p class="lt rate-t-c">0.2%</p>
               </li>
@@ -58,13 +50,22 @@
 </template>
 
 <script>
-
+import service from '@/modules/service'
+import { pairfix } from '@/mixins/index'
 export default {
+  mixins: [pairfix],
   name: 'Fee',
   components: {
   },
   data () {
     return {
+      pairList: []
+    }
+  },
+  async created () {
+    let res = await service.getPairList()
+    if (!res.code) {
+      this.pairList = res.data.items
     }
   }
 }

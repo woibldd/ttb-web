@@ -57,11 +57,11 @@
       <!-- address_tag -->
       <div
         class="fund-item-row"
-        v-if="selectCoin.currency === 'EOS'">
+        v-if="selectCoin.memo_support">
         <div class="row__label">{{ $t('address_tag') }}</div>
         <div class="row__value">
           <div class="deposit-address">
-            <span class="address-txt">{{ selectCoin.memo }}</span>
+            <span class="address-txt">{{ memo }}</span>
             <span
               class="address-copy"
               @click="copyMemo">{{ $t('copy') }}</span>
@@ -70,7 +70,7 @@
       </div>
       <div
         class="fund-item-other eos-deposit-tips"
-        v-if="selectCoin.currency === 'EOS'">
+        v-if="selectCoin.memo_support">
         {{ $t('eos_deposit_tip_label') }}
       </div>
       <ul
@@ -78,7 +78,7 @@
         style="padding-left: 102px">
         <li> {{ $t('deposit_hint_addr', {coin: selectCoin.currency}) }}</li>
         <li> {{ $t('deposit_hint_confirm',{confirm: selectCoin.min_confirm, coin: selectCoin.currency}) }}</li>
-        <li v-if="selectCoin.currency === 'EOS'">{{ $t('eos_deposit_tip_security_third') }}</li>
+        <li v-if="selectCoin.memo_support">{{ $t('eos_deposit_tip_security_third') }}</li>
       </ul>
     </div>
   </div>
@@ -95,6 +95,7 @@ export default {
   data () {
     return {
       address: '',
+      memo: '',
       allCoins: [],
       selectCoin: {},
       tableData: []
@@ -123,6 +124,7 @@ export default {
       return service.getMyCoinAddress(param).then((res) => {
         if (res && res.data) {
           this.address = res.data.address
+          this.memo = res.data.memo
         }
       })
     },
