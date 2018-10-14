@@ -48,6 +48,7 @@
               class="select-address"
               filterable
               allow-create
+              value-key="address"
               default-first-option
               v-model="selectAddress"
               :placeholder="$t('please_choose')"
@@ -56,7 +57,7 @@
               <el-option
                 v-for="item in allAddress"
                 :key="item.id"
-                :label="item.address + '  -  ' + item.description"
+                :label="item.address + (item.description ? '  -  ' + item.description : '')"
                 :value="item"/>
             </el-select>
           </div>
@@ -364,7 +365,16 @@ export default {
       })
     },
     changeAddress (item) {
-      this.memo = item.memo
+      if (typeof item === 'string') {
+        this.allAddress.splice(0, 0, {
+          address: item,
+          memo: ''
+        })
+        this.selectAddress = this.allAddress[0]
+        this.memo = ''
+      } else {
+        this.memo = item.memo
+      }
     },
     async confirmWithdraw () {
       const param = {
