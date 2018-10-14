@@ -369,7 +369,11 @@ export default {
         if (this.memo) {
           param.memo = this.memo
         } else {
-          if (!confirm(this.$i18n.t('eos_deposit_tip_label'))) {
+          const ok = await utils.confirm(this, {
+            content: this.$i18n.t('eos_deposit_tip_label'),
+            title: this.$i18n.t('tips')
+          })
+          if (!ok) {
             return
           }
         }

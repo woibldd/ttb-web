@@ -344,7 +344,7 @@ export default {
         return false
       }
       this.buzy = true
-      const confirm = await utils.confirm({
+      const confirm = await utils.confirm(this, {
         trade: true,
         content: this.$i18n.t('cancel_all_confirm'),
         title: this.$i18n.t('confirm')

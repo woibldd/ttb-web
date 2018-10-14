@@ -176,16 +176,7 @@ const utils = {
       title: msg
     })
   },
-  confirm (options = {}) {
-    options.style = options.style || 'danger'
-    options.title = options.title || ''
-    options.content = options.content || ''
-    return new Promise((resolve) => {
-      options.answer = resolve
-      eventHub.$emit('app:confirmnotify', options)
-    })
-  },
-  ixConfirm (self, options = {}) {
+  confirm (self, options = {}) {
     const {
       title,
       content,
@@ -196,13 +187,13 @@ const utils = {
 
     return new Promise((resolve, reject) => {
       self.$confirm(content, title, {
-        confirmButtonText: confirmBtnText || '确定',
-        cancelButtonText: cancelBtnText || '取消',
+        confirmButtonText: confirmBtnText || self.$i18n.t('confirm'),
+        cancelButtonText: cancelBtnText || self.$i18n.t('cancel'),
         type: 'warning' || type
       }).then(() => {
-        resolve()
+        resolve(true)
       }).catch((e) => {
-        reject(e)
+        resolve(false)
       })
     })
   },
