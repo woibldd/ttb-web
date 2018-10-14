@@ -185,6 +185,27 @@ const utils = {
       eventHub.$emit('app:confirmnotify', options)
     })
   },
+  ixConfirm (self, options = {}) {
+    const {
+      title,
+      content,
+      confirmBtnText,
+      cancelBtnText,
+      type
+    } = options
+
+    return new Promise((resolve, reject) => {
+      self.$confirm(content, title, {
+        confirmButtonText: confirmBtnText || '确定',
+        cancelButtonText: cancelBtnText || '取消',
+        type: 'warning' || type
+      }).then(() => {
+        resolve()
+      }).catch((e) => {
+        reject(e)
+      })
+    })
+  },
   notify (options = {}) {
     if (!options.id) {
       options.id = _.uniqueId()

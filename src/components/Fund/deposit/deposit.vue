@@ -24,7 +24,7 @@
       </div>
       <div class="fund-item-other mb-14">
         <span
-          :class="['quick-btn mr-10', selectCoin.currency === c.currency && 'selected']"
+          :class="['quick-btn mb-10 mr-10', selectCoin.currency === c.currency && 'selected']"
           @click="quickSelectCoin(c)"
           v-for="(c, idx) in allCoins"
           :key="idx">
@@ -180,6 +180,18 @@ export default {
         this.tableData = []
       })
     }
+  },
+  mounted () {
+    // utils.ixConfirm(this, {
+    //   content: 'content',
+    //   title: 'title',
+    //   confirmBtnText: 'confirmBtnText',
+    //   cancelBtnText: 'cancelBtnText'
+    // }).then(() => {
+    //   console.log('点了确定')
+    // }).catch(() => {
+    //   console.log('点了取消')
+    // })
   }
 }
 </script>

@@ -220,6 +220,7 @@ td.right {
 }
 
 // element reset
+
 .el-form-item.is-required>.el-form-item__label:before {
     display: none;
 }
@@ -229,7 +230,25 @@ $primary-color: #C9A96C;
     color: $primary-color !important;
 }
 
+.el-button.el-button--primary {
+    color: #fff;
+    background-color: $primary-color !important;
+    border-color: $primary-color !important;
 
+    &:hover, &:focus {
+        color: #fff !important;
+        background-color: $primary-color !important;
+        border-color: $primary-color !important;
+        opacity: .8;
+    }
+
+}
+.el-button:focus, .el-button:hover{
+    color: $primary-color !important;
+    border-color: $primary-color !important;
+    background-color: #ffffff;
+    opacity: .8;
+}
 
 .el-select .el-input.is-focus .el-input__inner {
     border-color: $primary-color !important;
