@@ -57,7 +57,7 @@
                 v-for="item in allAddress"
                 :key="item.id"
                 :label="item.address + '  -  ' + item.description"
-                :value="item.address"/>
+                :value="item"/>
             </el-select>
           </div>
         </div>
@@ -70,20 +70,20 @@
       <!-- address_tag -->
       <div
         class="fund-item-row"
-        v-if="selectCoin.currency === 'EOS'">
+        v-if="selectCoin.memo_support">
         <div class="row__label">{{ $t('address_tag') }}</div>
         <div class="row__value">
           <div class="withdraw-address border-1 pl-10">
             <input
               class="coin-count"
-              v-model="eosMemo">
+              v-model="memo">
           </div>
         </div>
       </div>
       <!-- address_tag_label -->
       <div
         class="fund-item-other eos-deposit-tips"
-        v-if="selectCoin.currency === 'EOS'">
+        v-if="selectCoin.memo_support">
         {{ $t('eos_deposit_tip_label') }}
       </div>
       <div class="fund-item-row">
@@ -225,14 +225,14 @@ export default {
       allCoins: [],
       selectCoin: {},
       allAddress: [],
-      selectAddress: '',
+      selectAddress: {},
       withdrawCount: 0,
       showModal: false,
       myCoinInfoList: [],
       myCoinInfo: {},
       phoneCode: '',
       googleCode: '',
-      eosMemo: '',
+      memo: '',
       state
     }
   },
@@ -298,15 +298,16 @@ export default {
       return service.getMyAddressList(param).then((res) => {
         if (res && res.data) {
           this.allAddress = res.data
+
           if (this.allAddress.length > 0) {
-            this.selectAddress = this.allAddress[0].address
+            this.selectAddress = this.allAddress[0]
           }
         }
       })
     },
     async changeCoinType (coin) {
       this.selectCoin = coin
-      this.selectAddress = ''
+      this.selectAddress = {}
       this.getCoinAddress()
       this.updadeMyCoinInfo() // 更改币种后，重新获取一次自己的钱包状态
     },
@@ -351,18 +352,27 @@ export default {
         console.log(res)
       })
     },
-    changeAddress () {},
-    confirmWithdraw () {
+    changeAddress (item) {
+      this.memo = item.memo
+    },
+    async confirmWithdraw () {
       const param = {
         currency: this.selectCoin.currency,
-        to_address: this.selectAddress,
+        to_address: this.selectAddress.address,
         amount: this.withdrawCount,
         // email_code
         phone_code: this.phoneCode
       }
+
       // eos 需要填memo
-      if (param.currency === 'EOS' && this.eosMemo) {
-        param.memo = this.eosMemo
+      if (this.selectCoin.memo_support) {
+        if (this.memo) {
+          param.memo = this.memo
+        } else {
+          if (!confirm(this.$i18n.t('eos_deposit_tip_label'))) {
+            return
+          }
+        }
       }
       if (this.googleCode) {
         param.google_code = this.googleCode
@@ -388,7 +398,7 @@ export default {
         utils.alert(this.$t('withdraw_count_max_error'))
         return
       }
-      if (!this.selectAddress) {
+      if (!this.selectAddress.address) {
         utils.alert(this.$t('add_address_error'))
         return
       }

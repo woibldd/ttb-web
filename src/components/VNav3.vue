@@ -73,12 +73,12 @@
               </ul>
             </div>
           </div>
-          <div
+          <!-- <div
             class="fund mr-30"
             @click="openDefault('orders')">
             <icon name="order" />
             {{ $t('orders') }}
-          </div>
+          </div> -->
           <div
             class="email mr-30"
             @click="openDefault('profile')">

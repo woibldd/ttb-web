@@ -28,6 +28,17 @@
               class="input-address pl-10" >
           </div>
         </div>
+        <div
+          class="fund-item-row mb-14"
+          v-if="selectCoin.memo_support">
+          <div class="row__label">{{ $t('address_tag') }}</div>
+          <div class="row__value">
+            <input
+              v-model="memo"
+              placeholder="Memo"
+              class="input-address pl-10" >
+          </div>
+        </div>
         <div class="fund-item-row mb-14">
           <div class="row__label">{{ $t('note') }}</div>
           <div class="row__value">
@@ -60,17 +71,17 @@
           :label="hd.title"/>
         <el-table-column
           header-align='right'
-          width="200px"
+          width="100px"
           align="right"
           :label="operate.title">
           <!-- <span>解锁/锁仓</span> -->
           <template slot-scope="scope">
             <span
               @click="copy(scope.row)"
-              class="my-fund-operate a-copy cursor-default ">{{ $t('copy') }}</span>
+              class="my-fund-operate a-copy pointer">{{ $t('copy') }}</span>
             <span
               @click="deleteAddr(scope.row)"
-              class="my-fund-operate cursor-default ">{{ $t('remove') }}</span>
+              class="my-fund-operate pointer">{{ $t('remove') }}</span>
           </template>
         </el-table-column>
       </el-table>
@@ -88,10 +99,12 @@ export default {
   data () {
     return {
       address: '',
+      memo: '',
       allCoins: [],
       selectCoin: {},
       addressList: [],
       description: '',
+      hasMemo: false,
       header: [
         {key: 'currency', title: this.$t('fees_name')},
         {key: 'address', title: this.$t('withdraw_addr')},
@@ -117,12 +130,15 @@ export default {
       return service.getMyAddressList(param).then((res) => {
         if (res && res.data) {
           this.addressList = res.data
+          this.hasMemo = this.addressList.filter(c => !!c.memo).length
+          if (this.hasMemo) {
+            this.header.splice(2, 0, {key: 'memo', title: this.$t('address_tag')})
+          }
           this.loading = false
         }
       })
     },
     async changeCoinType (coin) {
-      console.log(coin)
       this.selectCoin = coin
       await this.getCoinAddress()
     },
@@ -149,6 +165,9 @@ export default {
         currency: this.selectCoin.currency,
         address: this.address,
         description: this.description
+      }
+      if (this.selectCoin.memo_support) {
+        param.memo = this.memo
       }
       service.addCoinAddress(param).then(res => {
         utils.success(this.$i18n.t('add_withdraw_success'))
