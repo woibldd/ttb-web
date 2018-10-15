@@ -6,16 +6,36 @@
           :to="{name:'home'}"
           class="footer_logo"/>
         <p class="footer_ltxt"><b>{{ $t('first') }}</b>{{ $t('bitcoin_equity_certificate') }}</p>
-        <div class="lt">
+        <div
+          class="lt"
+          v-if="state.locale !== 'en'">
           <img
             class="footer_ewm"
             src="../assets/ewm.png">
           <p class="footer_ewm_ltxt">{{ $t('footer_contract_desc') }}</p>
         </div>
-        <div class="lt">
+        <div
+          class="lt"
+          v-if="state.locale !== 'en'">
           <img
             class="footer_ewm"
             src="../assets/ewm_by.png">
+          <p class="footer_ewm_ltxt">{{ $t('footer_contract_jb') }}</p>
+        </div>
+        <div
+          class="lt"
+          v-if="state.locale === 'en'">
+          <img
+            class="footer_ewm"
+            src="../assets/ewm_en.png">
+          <p class="footer_ewm_ltxt">{{ $t('footer_contract_desc') }}</p>
+        </div>
+        <div
+          class="lt"
+          v-if="state.locale === 'en'">
+          <img
+            class="footer_ewm"
+            src="../assets/ewm_en_by.png">
           <p class="footer_ewm_ltxt">{{ $t('footer_contract_jb') }}</p>
         </div>
       </div>
@@ -60,6 +80,7 @@
           <div class="bottom-txt bot-la">
             <p class="footer_ltxt">{{ $t('footer_services_email') }}：service@ix.com</p>
             <p class="footer_ltxt">{{ $t('footer_bussness') }}：business@ix.com</p>
+            <p class="footer_ltxt show_en">{{ $t('Korean telegram') }}：https://t.me/IXofficial_KR</p>
           </div>
           <div class="bottom-txt bot-lb">
             <div class="contact-list">
@@ -95,12 +116,12 @@
               </div>
               <a
                 class="contact-item-wrapper pointer"
-                href='https://t.me/ixofficial'>
+                :href="state.locale === 'en' ? 'https://t.me/IXofficial_KR' : 'https://t.me/ixofficial'">
                 <icon
                   class="contact-item "
                   name="footer-telegram"/>
               </a>
-              <div class="contact-item-wrapper">
+              <div class="contact-item-wrapper hide_en">
                 <icon
                   class="contact-item"
                   name="footer-biyong"/>
@@ -153,6 +174,17 @@ export default {
 <style scoped lang="scss">
   @import "../styles/vars";
   @import "../styles/mixins";
+  .lang-en {
+    .hide_en {
+      display: none !important;
+    }
+    .show_en {
+      display: block !important;
+    }
+  }
+  .show_en {
+    display: none;
+  }
   footer {
     width: 100%;
     height:350px;

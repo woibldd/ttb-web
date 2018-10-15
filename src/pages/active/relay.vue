@@ -129,6 +129,41 @@
           class="join"
           :to="{name: 'trading', params: {pair: 'ETH_BTC'}}">{{ $t('active_relay_join') }}</router-link>
       </div>
+      <div class="scr-cen scr-l">
+        <p
+          class="scr-txt"
+          v-if="typeof relayTotal[pairs[3]] !== 'undefined'">{{ $t('active_relay_totally') }}<span>{{ relayTotal[pairs[3]] | round(4) }} </span>USDT</p>
+        <div class="scr-box">
+          <p class="scr-tit">{{ pairs[3] | pairfix }}</p>
+          <div class="scr">
+            <div class="scr-title">
+              <p class="scr_l">{{ $t('active_relay_amount') }}</p>
+              <p class="scr_m">{{ $t('active_relay_operator') }}</p>
+              <p class="scr_r">{{ $t('active_relay_time') }}</p>
+            </div>
+            <div
+              class="scr-cen"
+              id="box">
+              <ul
+                id="con1"
+                ref="con1"
+              >
+                <li
+                  :class="ticker.side"
+                  v-for="(ticker, $index) in tickers['EOS_USDT']"
+                  :key="'EOS_USDT'+ ticker.time + $index">
+                  <p class="scr_l">{{ ticker.values[1] | fixed(4) }}</p>
+                  <p class="scr_m">{{ $t(ticker.side === 'buy' ? 'order_side_buy':'order_side_sell') }}</p>
+                  <p class="scr_r">{{ ticker.time | ts2date('Y-M-D H:m:s') }}</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <router-link
+          class="join"
+          :to="{name: 'trading', params: {pair: 'EOS_USDT'}}">{{ $t('active_relay_join') }}</router-link>
+      </div>
     </div>
     <div class="rule">
       <p v-t="'active_relay_rule'"/>
@@ -186,7 +221,7 @@ export default {
   mixins: [ pairfix, responsiveScale ],
   data () {
     return {
-      pairs: ['BTC_USDT', 'ETH_USDT', 'ETH_BTC'],
+      pairs: ['BTC_USDT', 'ETH_USDT', 'ETH_BTC', 'EOS_USDT'],
       sockets: {},
       tickers: {
         BTC_USDT: [],

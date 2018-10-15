@@ -418,7 +418,7 @@ export default {
 }
 .ix-grid-intro {
   flex: 1;
-  height: 300px;
+  // height: 300px;
 }
 .active-box {
   position: absolute;

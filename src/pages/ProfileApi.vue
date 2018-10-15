@@ -1,5 +1,5 @@
 <template>
-  <div class="user-center-right">
+  <div class="user-center-right mb-30">
     <div class="profile-container">
       <div class="title-box">{{ $t('api_management') }}
         <div class="pull-right tips">

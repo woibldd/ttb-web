@@ -1,5 +1,7 @@
 <template>
-  <div class="coin-intro-container">
+  <div
+    class="coin-intro-container"
+    v-if="coinInfo">
     <div class="coin-intro__header">
       {{ $t('coin_intro') }}
     </div>
@@ -44,14 +46,14 @@
             <a
               target="_blank"
               :href="coinInfo.whitepagger"
-              class="row__value c-primary">{{ coinInfo.whitepagger }}</a>
+              class="row__value c-primary line-1">{{ coinInfo.whitepagger }}</a>
           </div>
           <div class="issue-info-row">
             <span class="row__label">{{ $t('office_website') }}</span>
             <a
               target="_blank"
               :href="coinInfo.office_website"
-              class="row__value c-primary">{{ coinInfo.office_website }}</a>
+              class="row__value c-primary line-1">{{ coinInfo.office_website }}</a>
           </div>
           <div class="issue-info-row">
             <span class="row__label">{{ $t('chain_info') }}</span>
@@ -66,7 +68,6 @@
   </div>
 </template>
 <script>
-import './coin-intro.scss'
 import coinInfo from './coin-info.js'
 import {state} from '@/modules/store'
 
@@ -80,7 +81,11 @@ export default {
   methods: {
     switchContent (coinType) {
       const {locale} = this.state
-      this.coinInfo = coinInfo[coinType][locale]
+      if (coinInfo[coinType]) {
+        this.coinInfo = coinInfo[coinType][locale]
+      } else {
+        this.coinInfo = null
+      }
     }
   },
   created () {
@@ -98,3 +103,6 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+@import "./coin-intro.scss";
+</style>

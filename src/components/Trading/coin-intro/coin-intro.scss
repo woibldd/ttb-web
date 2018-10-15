@@ -1,7 +1,10 @@
+@import '~@/styles/_mixins.scss';
+@import '~@/styles/_vars.scss';
 
 .coin-intro-container{
     color: #ffffff;
     font-size: 14px;
+    height: 300px;
     .c-a5{
         color: #A5B4C5;
     }
@@ -58,6 +61,10 @@
                     width: 100px;
                     display: inline-block;
                     color: #A5B4C5;
+                }
+                .row__value {
+                  max-width: 400px;
+                  display: inline-block;
                 }
             }
         }

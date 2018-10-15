@@ -51,6 +51,31 @@ export default{
       office_website: 'https://www.ethereum.org', // 官网
       chain_info: 'https://etherscan.io' // 区块查询
     }
-
+  },
+  EOS: {
+    'zh-CN': {
+      name: 'EOS',
+      full_name: 'Enterprise Operation System（EOS）',
+      brief_info: 'EOS (Enterprise Operation System)是由 Block.one公司主导开发的一种全新的基于区块链智能合约平台，旨在为高性能分布式应用提供底层区块链平台服务。EOS 项目的目标是实现一个类似操作系统的支撑分布式应用程序的区块链架构。该架构可以提供账户，身份认证，数据库，异步通信以及可在数以万计的 CPU/GPU群集上进行程序调度和并行运算。EOS最终可以支持每秒执行数百万个交易，同时普通用户执行智能合约无需支付使用费用。 ',
+      issue_time: '2017-07-02',
+      issue_all: '10亿', // 发行总量
+      issue_circulation: '5.36亿', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://github.com/EOSIO/Documentation/blob/master/zh-CN/TechnicalWhitePaper.md', // 白皮书
+      office_website: 'https://eos.io/', // 官网
+      chain_info: 'https://etherscan.io/token/EOS' // 区块查询
+    },
+    en: {
+      name: 'EOS',
+      full_name: 'Enterprise Operation System（EOS）',
+      brief_info: 'EOS tokens are ERC-20 compatible tokens distributed on the Ethereum blockchain pursuant to a related ERC-20 smart contract (the “EOS Tokens”). EOS featured in powerful infrastructure for decentralized application and token distribution takes place over 341 days.',
+      issue_time: '2017-07-02',
+      issue_all: '1000 million', // 发行总量
+      issue_circulation: '536 million', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://github.com/EOSIO/Documentation/blob/master/zh-CN/TechnicalWhitePaper.md', // 白皮书
+      office_website: 'https://eos.io/', // 官网
+      chain_info: 'https://etherscan.io/token/EOS' // 区块查询
+    }
   }
 }

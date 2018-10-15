@@ -317,6 +317,13 @@
     }
 }
 
+@for $i from 1 through 3 { 
+  .line-#{$i} { 
+      @include limit ($i);
+  } 
+  
+}
+
 @function rem($px){
     $rem : 32;
     @return ($px/$rem) + rem;
