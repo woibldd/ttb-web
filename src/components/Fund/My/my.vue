@@ -38,7 +38,13 @@
               :to="'/fund/withdraw/'+scope.row.currency"
               class="my-fund-operate">{{ $t('withdraw') }}</router-link>
             <router-link
-              to="/trading"
+              v-if="scope.row.pairs"
+              :to="{
+                name: 'trading',
+                params: {
+                  pair: scope.row.pairs
+                }
+              }"
               class="my-fund-operate">{{ $t('asset_trading') }}</router-link>
           </template>
         </el-table-column>
@@ -51,6 +57,10 @@
 import './my.scss'
 import service from '@/modules/service'
 import {state, actions} from '@/modules/store'
+const ExchangePairs = {
+  'BTC': 'BTC_USDT',
+  'ETH': 'ETH_USDT'
+}
 
 /**
  *
@@ -106,6 +116,7 @@ export default {
           item.amount = this.$big(item.locking).plus(this.$big(item.available)).round(4, this.C.ROUND_DOWN).toString()
           item.estValue = this.getEstValue(item)
           item.available = this.$big(item.available).round(4, this.C.ROUND_DOWN).toString()
+          item.pairs = ExchangePairs[item.currency] || ''
           return item
         })
       })

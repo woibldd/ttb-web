@@ -650,6 +650,7 @@
   "address_tag": "Address Tags ",
   "eos_deposit_tip_label": "Wrong address will cause lost of assets,please confirm carefully.",
   "eos_deposit_tip_security_third": "A certain percentage of fee will be charged for getting asset back caused by wrong address tags.；",
+  "eos_not_support_internal_transfer": "Internal EOS transfer is not supported now",
   "orders":"Orders",
   "my_orders": "My Orders"
 

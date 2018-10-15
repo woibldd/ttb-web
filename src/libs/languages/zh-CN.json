@@ -527,6 +527,7 @@
   "address_tag": "地址标签",
   "eos_deposit_tip_label": "转帐务必填写正确的地址标签 ，否则将充值失败",
   "eos_deposit_tip_security_third": "地址标签填写错误而造成的充值失败，找回将收取一定比例的手续费；",
+  "eos_not_support_internal_transfer": "暂不支持交易所内部地址转账",
   "orders":"订单",
   "my_orders": "我的订单"
 }

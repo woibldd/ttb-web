@@ -156,7 +156,7 @@ export default {
         }
       })
     },
-    confirmAdd () {
+    async confirmAdd () {
       if (!this.address) {
         utils.danger(this.$t('add_address_error'))
         return
@@ -169,12 +169,15 @@ export default {
       if (this.selectCoin.memo_support) {
         param.memo = this.memo
       }
-      service.addCoinAddress(param).then(res => {
+      let res = await service.addCoinAddress(param)
+      if (!res.code) {
         utils.success(this.$i18n.t('add_withdraw_success'))
         this.address = ''
         this.description = ''
         this.getCoinAddress()
-      })
+      } else {
+        utils.alert(res.message)
+      }
     },
     deleteAddr (row) {
       service.deleteCoinAddress({id: row.id}).then(() => {

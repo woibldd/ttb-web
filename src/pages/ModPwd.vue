@@ -309,11 +309,11 @@ export default {
     verifyCode () {
       let verifyObj = {}
 
-      if (this.google_key_bound) {
+      if (this.verify_google) {
         verifyObj = {
           google_code: this.googleCode
         }
-      } else if (this.phone) {
+      } else if (this.verify_phone) {
         verifyObj = {
           phone_code: this.phoneCode
         }

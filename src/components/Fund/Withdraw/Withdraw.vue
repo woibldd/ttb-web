@@ -426,6 +426,9 @@ export default {
       if (!this.selectAddress.address) {
         utils.alert(this.$t('add_address_error'))
         return
+      } else if (this.selectAddress.address === 'ixeosdeposit') {
+        utils.alert(this.$t('eos_not_support_internal_transfer'))
+        return
       }
 
       this.showModal = true
