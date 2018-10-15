@@ -116,7 +116,7 @@ export default {
           item.amount = this.$big(item.locking).plus(this.$big(item.available)).round(4, this.C.ROUND_DOWN).toString()
           item.estValue = this.getEstValue(item)
           item.available = this.$big(item.available).round(4, this.C.ROUND_DOWN).toString()
-          item.pairs = ExchangePairs[item.currency] || ''
+          item.pairs = ExchangePairs[item.currency] || 'BTC_USDT'
           return item
         })
       })
