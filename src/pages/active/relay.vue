@@ -229,7 +229,8 @@ export default {
         ETH_BTC: []
       },
       relayTotal: {},
-      isMobile: utils.isMobile()
+      isMobile: utils.isMobile(),
+      timer: 0
     }
   },
   components: {
@@ -243,9 +244,9 @@ export default {
     })
 
     this.getRelayTotal()
-    setInterval(() => {
+    this.timer = setInterval(() => {
       this.getRelayTotal()
-    }, 1e4)
+    }, 6e4)
   },
 
   methods: {
@@ -284,8 +285,10 @@ export default {
         })
       }
     }
+  },
+  destroyed () {
+    clearInterval(this.timer)
   }
-
 }
 </script>
 <style lang="scss" scoped>
