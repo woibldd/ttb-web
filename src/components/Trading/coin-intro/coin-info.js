@@ -23,6 +23,18 @@ export default{
       whitepagger: 'https://bitcoin.org/bitcoin.pdf', // 白皮书
       office_website: 'https://bitcoin.org/en', // 官网
       chain_info: 'https://blockchain.info/' // 区块查询
+    },
+    ko: {
+      name: 'BTC',
+      full_name: 'Bitcoin',
+      brief_info: '암호화폐 중 가장 최초로 구현된 코인 / 중앙관리 주체가 없으며 P2P 네트워크를 이용한 거래 시스템 / 블록체인 기술을 최초로 화폐라는 개념에 융합시킨 암호화폐 / 모든 거래 내역을 사용자들이 공동 관리함으로써 투명도를 최대화시킨 지불 관리 수단의 혁명',
+      issue_time: '2008/11/1',
+      issue_all: '21,000,000', // 发行总量
+      issue_circulation: '16,789,425', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://bitcoin.org/bitcoin.pdf', // 白皮书
+      office_website: 'https://bitcoin.org/en', // 官网
+      chain_info: 'https://blockchain.info/' // 区块查询
     }
 
   },
@@ -50,6 +62,18 @@ export default{
       whitepagger: 'https://github.com/ethereum/wiki/wiki/%5BEnglish%5D-White-Paper', // 白皮书
       office_website: 'https://www.ethereum.org', // 官网
       chain_info: 'https://etherscan.io' // 区块查询
+    },
+    ko: {
+      name: 'ETH',
+      full_name: 'Ethereum',
+      brief_info: '기존 블록체인에 기반해 다양한 앱 개발을 위해 제작된 플랫폼의 성격이 강함 / 기존 비트코인의 블록체인보다 뛰어난 확장성을 보이며 프로그램된 계약을 정확히 실행할 수 있는 ‘스마트 컨트랙트’ 기능 포함 / 유동적인 발행량 조정으로 적절히 가치 변동에 대한 조절 가능',
+      issue_time: '2014-07-24',
+      issue_all: '96,847,288', // 发行总量
+      issue_circulation: '96,847,288', // 流通总量
+      token_price: '$0.308', // 众筹价格
+      whitepagger: 'https://github.com/ethereum/wiki/wiki/%5BEnglish%5D-White-Paper', // 白皮书
+      office_website: 'https://www.ethereum.org', // 官网
+      chain_info: 'https://etherscan.io' // 区块查询
     }
   },
   EOS: {
@@ -69,6 +93,18 @@ export default{
       name: 'EOS',
       full_name: 'Enterprise Operation System（EOS）',
       brief_info: 'EOS tokens are ERC-20 compatible tokens distributed on the Ethereum blockchain pursuant to a related ERC-20 smart contract (the “EOS Tokens”). EOS featured in powerful infrastructure for decentralized application and token distribution takes place over 341 days.',
+      issue_time: '2017-07-02',
+      issue_all: '1000 million', // 发行总量
+      issue_circulation: '536 million', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://github.com/EOSIO/Documentation/blob/master/zh-CN/TechnicalWhitePaper.md', // 白皮书
+      office_website: 'https://eos.io/', // 官网
+      chain_info: 'https://etherscan.io/token/EOS' // 区块查询
+    },
+    ko: {
+      name: 'EOS',
+      full_name: 'Enterprise Operation System（EOS）',
+      brief_info: '탈중앙화를 모토로 하고 있는 컴퓨터, 모바일, 어플 통신 개발용 운영체제 / EOS는 관련 ERC-20 스마트계약(EOS 토큰)에 따라 이더리움 블록체인에 배포된 ERC-20 호환 토큰',
       issue_time: '2017-07-02',
       issue_all: '1000 million', // 发行总量
       issue_circulation: '536 million', // 流通总量

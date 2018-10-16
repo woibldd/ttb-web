@@ -7,8 +7,8 @@ const preloadEl = document.querySelector('.page-loading')
 const externalModule = {}
 const localeName = {
   'en': 'English',
-  'zh-CN': '简体中文',
-  'zh-HK': '繁體中文'
+  'zh-CN': '简体中文'
+  // 'ko': '한국어'
 }
 
 const utils = {
@@ -23,6 +23,7 @@ const utils = {
   isDev: process.env.NODE_ENV === 'development',
   isBeta: process.env.MODE === 'beta',
   isProd: process.env.NODE_ENV === 'production',
+  locales: localeName,
   getLocaleName (locale) {
     return localeName[locale] || 'Unknown'
   },
@@ -364,7 +365,14 @@ const utils = {
     if (typeof num === 'undefined') {
       return 0
     }
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    return (num || 0).toString().replace(/\d+/, function (n) {
+      var len = n.length
+      if (len % 3 === 0) {
+        return n.replace(/(\d{3})/g, ',$1').slice(1)
+      } else {
+        return n.slice(0, len % 3) + n.slice(len % 3).replace(/(\d{3})/g, ',$1')
+      }
+    })
   },
   toBig (num) {
     if (typeof num === 'undefined') {

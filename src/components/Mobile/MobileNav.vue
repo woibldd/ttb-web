@@ -35,10 +35,31 @@
           {{ $t("signup_title") }}
         </router-link>
       </span>
+
+      <span
+        class="operate lang"
+        @click="toggleMenu('lang')">
+        <icon :name="'flag-'+state.locale"/>
+        {{ localeText }}
+      </span>
+      <div
+        class="hide-list"
+        v-if="showLang">
+        <a
+          @click="switchLang(key)"
+          :key="key"
+          v-for="(value, key) in locales"
+        ><icon
+          :name="'flag-'+key"
+          class="mr-5"/>{{ value }}</a>
+      </div>
       <span
         class="operate"
         v-if="state.userInfo"
-        @click="toggleMenu"><icon name="h5-menu"/> </span>
+        @click="toggleMenu">
+        <icon
+          name="h5-menu"
+      /> </span>
       <div
         class="hide-list"
         v-if="showMenu">
@@ -77,7 +98,9 @@ export default {
   data () {
     return {
       state,
-      showMenu: false
+      showMenu: false,
+      showLang: false,
+      locales: utils.locales
     }
   },
   methods: {
@@ -86,8 +109,18 @@ export default {
         name: 'home'
       })
     },
-    toggleMenu () {
-      this.showMenu = !this.showMenu
+    switchLang (lang) {
+      actions.setLocale(lang)
+      this.showLang = false
+    },
+    toggleMenu (type) {
+      if (type === 'lang') {
+        this.showLang = !this.showLang
+        this.showMenu = false
+      } else {
+        this.showMenu = !this.showMenu
+        this.showLang = false
+      }
     },
     logout () {
       actions.setUserInfo(null)
@@ -105,6 +138,9 @@ export default {
     }
   },
   computed: {
+    localeText () {
+      return utils.getLocaleName(state.locale)
+    },
     desentInfo () {
       let userInfo = this.state.userInfo
       if (userInfo) {
@@ -168,7 +204,7 @@ export default {
         position: relative;
         .operate {
             display: inline-block;
-            margin-left: rem(40);
+            margin-left: rem(16);
 
             &.signup {
                 border: 1px solid #ffffff;
@@ -182,16 +218,17 @@ export default {
             text-align: left;
             display: flex;
             flex-direction: column;
-            width: rem(224);
+            min-width: rem(224);
             top: rem(96);
-            z-index: 11;
+            right: 0;
+            z-index: 9999;
 
             .list__item, a {
                 display: inline-block;
                 height: rem(76);
                 color: white;
                 line-height: rem(76);
-                padding-left: rem(31);
+                padding:0 rem(31);
                 border-bottom: 1px solid #43464A;
                 &:hover {
                     background:rgba(33,37,42,1);

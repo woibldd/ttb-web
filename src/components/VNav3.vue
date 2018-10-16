@@ -22,8 +22,11 @@
           <router-link
             :to="{name: 'kycRelay'}"
             class="nav_link ml-30"
-            target="_blank">{{ $t('activity_kyc_name') }}
-            <i class="hot"/>
+            target="_blank">{{ $t('activity_kyc_name') }}<icon
+              name="hot"
+              class="hot"/><icon
+                name="hot-hover"
+                class="hot-hover"/>
           </router-link>
 
         </div>
@@ -133,10 +136,22 @@
           </div>
         </div>
 
-        <div class="lang">{{ localeText }}<b/>
+        <div class="lang">
+          <icon
+            :name="'flag-'+state.locale"
+            class="mr-5"/>
+          {{ localeText }}
+          <icon
+            class="rig"
+            name="arrow-down"/>
           <div class="lang_box">
-            <a @click="langcn">简体中文</a>
-            <a @click="langen">English</a>
+            <a
+              @click="switchLang(key)"
+              :key="key"
+              v-for="(value, key) in locales"
+            > <icon
+              :name="'flag-'+key"
+              class="mr-5"/>{{ value }}</a>
           </div>
         </div>
       </div>
@@ -158,7 +173,8 @@ export default {
   },
   data () {
     return {
-      state
+      state,
+      locales: utils.locales
     }
   },
   computed: {
@@ -198,13 +214,8 @@ export default {
     }
   },
   methods: {
-    langcn () {
-      let lang_cn = 'zh-CN'
-      actions.setLocale(lang_cn)
-    },
-    langen () {
-      let lang_en = 'en'
-      actions.setLocale(lang_en)
+    switchLang (lang) {
+      actions.setLocale(lang)
     },
     logout () {
       actions.setUserInfo(null)
@@ -285,24 +296,31 @@ export default {
         &:hover {
           color: $primary;
           .hot {
-            background: url(~@/assets/hot-active.png)
+            display: none;
+            // background: url(~@/assets/hot-active.png)
+          }
+          .hot-hover {
+            display: inline-block;
           }
         }
 
         &.router-link-active {
           color: $primary;
+          .hot-hover {
+            display: inline-block;
+          }
           .hot {
-            background: url(~@/assets/hot-active.png)
+            display: none;
           }
         }
 
         .hot {
-          position: absolute;
-          right: -22px;
-          top: -2px;
-          width: 18px;
-          height: 20px;
-          background: url(~@/assets/hot.png)
+          font-size: 20px;
+          display: inline-block;
+        }
+        .hot-hover {
+          font-size: 20px;
+          display: none;
         }
       }
     }
@@ -393,20 +411,20 @@ export default {
     border-radius: 20px;
     border: 1px solid #fff;
     margin: 28px 0 0 30px;
-    background: url(../assets/lang.png) no-repeat 12px center;
-    text-indent: 32px;
+    // background: url(../assets/lang.png) no-repeat 12px center;
+    // text-indent: 16px;
     position: relative;
+    text-align: center;
     font-size: 12px;
     cursor: pointer;
     z-index: 1;
-    b {
-      width: 8px;
-      height: 24px;
-      background: url(../assets/xl.png) center center no-repeat;
-      display: block;
-      position: absolute;
-      top: 0;
-      right: 16px;
+    .rig {
+      display: inline-block;
+      // position: absolute;
+      // top: 4px;
+      // right: 10px;
+      vertical-align: middle;
+      font-size: 16px;
     }
     .lang_box{
         display: block;

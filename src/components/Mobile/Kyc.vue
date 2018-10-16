@@ -73,7 +73,9 @@ export default {
       }
     },
     seeRules () {
-      window.open(this.link)
+      this.$router.push({
+        name: 'kycRelay'
+      })
     }
   },
   created () {

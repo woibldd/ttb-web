@@ -10,11 +10,10 @@ Vue.use(Router)
 
 const isMobile = utils.isMobile()
 
-const Home = () => import(/* webpackChunkName: "home" */ '@/pages/home.vue')
 const HomeNew = () => import(/* webpackChunkName: "home" */ '@/pages/home_new.vue')
-const MobileHome = () => import(/* webpackChunkName: "mobilehome" */ '@/pages/Mobile/Home3.vue')
+// const MobileHome = () => import(/* webpackChunkName: "mobilehome" */ '@/pages/Mobile/Home3.vue')
 // const Test1 = () => import(/* webpackChunkName: "Test1" */ '@/pages/test1.vue')
-const Test2 = () => import(/* webpackChunkName: "Test2" */ '@/pages/test2.vue')
+// const Test2 = () => import(/* webpackChunkName: "Test2" */ '@/pages/test2.vue')
 const Trading = () => import(/* webpackChunkName: "Trading" */ '@/pages/Trading')
 const Profile = () => import(/* webpackChunkName: "Profile" */ '@/pages/Profile')
 const Invite = () => import(/* webpackChunkName: "Invite" */ '@/pages/Invite')
@@ -183,11 +182,6 @@ let router = new Router({
       path: '/services',
       name: 'terms',
       component: terms
-    },
-    {
-      path: '/test2',
-      name: 'Test2',
-      component: Home
     },
     {
       path: '/trading/:pair?',

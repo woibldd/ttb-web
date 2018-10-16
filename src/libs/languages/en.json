@@ -388,7 +388,7 @@
   "log_recording": "Login Records",
   "log_recording_prompt": "（The latest 10 records）",
   "invite_history_text": "Referral Record",
-  "slogan": "FREE MAN FREE UNITING",
+  "slogan": "Freedom,Choice & Unification",
   "register_success": "Register successfully",
   "declaration": "Declaration",
   "whitepagger": "WhitePaper",
@@ -492,10 +492,10 @@
   "remove": "Remove",
   "deposit_record": "Top Up",
   "withdraw_record": "Withdraw",
-  "mine_mining_amount": "The Trading&Mining Output in yesterday:",
-  "mine_invite_amount": "The Inviting&Mining Output in yesterday:",
-  "mine_bonus_today": "Today's unassigned income with holding BTC",
-  "mine_bonus_yestoday": "Yesterday's distributed trading fees with holding BTC:",
+  "mine_mining_amount": "The Trading&Mining Output in yesterday: ",
+  "mine_invite_amount": "The Inviting&Mining Output in yesterday: ",
+  "mine_bonus_today": "Today's unassigned income with holding BTC: ",
+  "mine_bonus_yestoday": "Yesterday's distributed trading fees with holding BTC: ",
   "mine_bonus_rate": "Yesterday's dividend with continuously holding 1 BTC: ",
   "active_relay_h1": "You can get <span>40%</span> of transaction fee!",
   "active_relay_h2": "Stare at the screen carefully, you will be the next lucky dog!",
@@ -655,5 +655,6 @@
   "my_orders": "My Orders",
   "api_tips_one": "1. IX.COM provides you with a strong API, through which you can enjoy services such as Market Query, Automatic Trading, etc. View How To Use via API documentation.",
   "api_tips_two": "2. Each user can create 10 API Keys at most.",
-  "api_tips_three": "3. To avoid loss of assets, please do not disclose your API Key to anybody."
+  "api_tips_three": "3. You can use following ways to activate the API key after generate it: <a target=\"_blank\" href=\"%{link}\">Detail</a>;",
+  "api_tips_four": "4. To avoid loss of assets, please do not disclose your API Key to anybody."
 }

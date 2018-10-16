@@ -73,6 +73,7 @@
             .line-tip-text {
               color: #BD813A;
               word-break: keep-all;
+              white-space: nowrap;
               background:linear-gradient(0deg,rgba(193,194,194,1) 0%,rgba(255,255,255,1) 100%);
               border-radius: rem(18);
               height: rem(36);

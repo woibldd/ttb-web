@@ -56,7 +56,10 @@
         <div class="api-tips__lead"><span class="dot"/>{{ $t('note') }}</div>
         <div class="api-tips__row">{{ $t('api_tips_one') }}</div>
         <div class="api-tips__row">{{ $t('api_tips_two') }}</div>
-        <div class="api-tips__row">{{ $t('api_tips_three') }}</div>
+        <div
+          class="api-tips__row"
+          v-html="$t('api_tips_three', {link: hasApiLink})"/>
+        <div class="api-tips__row">{{ $t('api_tips_four') }}</div>
       </div>
     </div>
     <!-- 秘钥框 -->
@@ -498,7 +501,8 @@ export default {
       .api-tips__lead{
           color: #666;
           font-size: 12px;
-          height: 17px;
+          // height: 17px;
+          line-height: 30px;
           display: flex;
           align-items: center;
 
@@ -515,7 +519,7 @@ export default {
           color:#999999;
           font-size: 12px;
           font-weight: 400;
-          line-height: 18px;
+          line-height: 24px;
       }
     }
   }

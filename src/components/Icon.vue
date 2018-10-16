@@ -1,19 +1,22 @@
 <template>
-  <svg class="iconfont" aria-hidden="true" :style="style">
-    <use :xlink:href="'#icon-' + name"></use>
+  <svg
+    class="iconfont"
+    aria-hidden="true"
+    :style="style">
+    <use :xlink:href="'#icon-' + name"/>
   </svg>
 </template>
 
 <script>
 export default {
-  name: 'icon',
+  name: 'Icon',
   props: {
     name: {
+      type: String,
       required: true
     },
-    scale: {
-    },
     color: {
+      type: String,
       default: 'inherit'
     }
   },

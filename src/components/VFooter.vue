@@ -8,7 +8,7 @@
         <p class="footer_ltxt"><b>{{ $t('first') }}</b>{{ $t('bitcoin_equity_certificate') }}</p>
         <div
           class="lt"
-          v-if="state.locale !== 'en'">
+          v-if="!showEnTips">
           <img
             class="footer_ewm"
             src="../assets/ewm.png">
@@ -16,7 +16,7 @@
         </div>
         <div
           class="lt"
-          v-if="state.locale !== 'en'">
+          v-if="!showEnTips">
           <img
             class="footer_ewm"
             src="../assets/ewm_by.png">
@@ -24,7 +24,7 @@
         </div>
         <div
           class="lt"
-          v-if="state.locale === 'en'">
+          v-if="showEnTips">
           <img
             class="footer_ewm"
             src="../assets/ewm_en.png">
@@ -32,7 +32,7 @@
         </div>
         <div
           class="lt"
-          v-if="state.locale === 'en'">
+          v-if="showEnTips">
           <img
             class="footer_ewm"
             src="../assets/ewm_en_by.png">
@@ -115,7 +115,7 @@
               </div>
               <a
                 class="contact-item-wrapper pointer"
-                :href="state.locale === 'en' ? 'https://t.me/IXofficial_KR' : 'https://t.me/ixofficial'">
+                :href="showEnTips ? 'https://t.me/IXofficial_KR' : 'https://t.me/ixofficial'">
                 <icon
                   class="contact-item "
                   name="footer-telegram"/>
@@ -165,6 +165,9 @@ export default {
     },
     apiDoc () {
       return this.state.theme.apiDoc[this.state.locale || 'en']
+    },
+    showEnTips () {
+      return this.state.locale === 'en' || this.state.locale === 'ko'
     }
   }
 }
@@ -173,7 +176,7 @@ export default {
 <style scoped lang="scss">
   @import "../styles/vars";
   @import "../styles/mixins";
-  .lang-en {
+  .lang-en, .lang-ko {
     .hide_en {
       display: none !important;
     }
