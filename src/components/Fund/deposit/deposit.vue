@@ -121,6 +121,8 @@ export default {
         chain: this.selectCoin.chain,
         currency: this.selectCoin.currency
       }
+      this.address = ''
+      this.memo = ''
       return service.getMyCoinAddress(param).then((res) => {
         if (res && res.data) {
           this.address = res.data.address
