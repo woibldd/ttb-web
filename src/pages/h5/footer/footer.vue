@@ -56,9 +56,9 @@
           <router-link
             :to="{name:'Fee'}"
             target="_blank">{{ $t('footer_fee') }}</router-link>
-            <!-- <a
+          <a
             :href="apiDoc"
-            target="_blank">{{ $t('footer_api') }}</a> -->
+            target="_blank">{{ $t('footer_api') }}</a>
         </div>
       </div>
       <div class="footer-row">

@@ -61,10 +61,9 @@
           <router-link
             :to="{name:'Fee'}"
             target="_blank">{{ $t('footer_fee') }}</router-link>
-            <!-- <a
+          <a
             :href="apiDoc"
-            target="_blank">{{ $t('footer_api') }}</a> -->
-            <!-- <a href="#" target="_blank">{{$t('footer_api')}}</a> -->
+            target="_blank">{{ $t('footer_api') }}</a>
         </div>
         <div class="footer_ct footer-rt">
           <p>{{ $t('footer_terms') }}</p>
@@ -254,7 +253,7 @@ export default {
     a{
       color: #999;
       display: table;
-      line-height: 36px;
+      line-height: 30px;
 
       &:hover {
         color: $primary;
@@ -273,7 +272,7 @@ export default {
       padding-top: 30px;
       .bottom-txt{
         float: left;
-        line-height: 36px;
+        line-height: 30px;
         color: #fff;
       }
       .bot-la{

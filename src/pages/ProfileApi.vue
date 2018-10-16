@@ -4,11 +4,11 @@
       <div class="title-box">{{ $t('api_management') }}
         <div class="pull-right tips title-box-right">
           <!-- api文档,先不上 -->
-          <!-- <div class="mr-20">
+          <div class="mr-20">
             <a
               :href="apiDoc"
               target="_blank">{{ $t('api_doc') }}</a>
-          </div> -->
+          </div>
           <div
             v-if="openApi"
             v-html="$t('api_has_obtain', {link: hasApiLink})"/>
