@@ -2,7 +2,13 @@
   <div class="user-center-right mb-30">
     <div class="profile-container">
       <div class="title-box">{{ $t('api_management') }}
-        <div class="pull-right tips">
+        <div class="pull-right tips title-box-right">
+          <!-- api文档,先不上 -->
+          <!-- <div class="mr-20">
+            <a
+              :href="apiDoc"
+              target="_blank">{{ $t('api_doc') }}</a>
+          </div> -->
           <div
             v-if="openApi"
             v-html="$t('api_has_obtain', {link: hasApiLink})"/>
@@ -45,6 +51,12 @@
             </li>
           </ul>
         </div>
+      </div>
+      <div class="api-tips">
+        <div class="api-tips__lead"><span class="dot"/>{{ $t('note') }}</div>
+        <div class="api-tips__row">{{ $t('api_tips_one') }}</div>
+        <div class="api-tips__row">{{ $t('api_tips_two') }}</div>
+        <div class="api-tips__row">{{ $t('api_tips_three') }}</div>
       </div>
     </div>
     <!-- 秘钥框 -->
@@ -435,11 +447,13 @@ export default {
         .tips {
           font-size:16px;
           font-weight:400;
-          color:#999999
+          color:#999999;
+          display: flex;
         }
       }
       .api-box{
-        height: auto;
+        max-height: 500px;
+        overflow-y: scroll;
         width: 100%;
         font-size: 14px;
         color: #999;
@@ -480,6 +494,28 @@ export default {
             color: #999;
           }
         }
+      }
+      .api-tips__lead{
+          color: #666;
+          font-size: 12px;
+          height: 17px;
+          display: flex;
+          align-items: center;
+
+          .dot {
+            width:6px;
+            height:6px;
+            background:rgba(194,163,104,1);
+            border-radius:50%;
+            margin-right: 6px;
+            display: inline-block;
+          }
+      }
+      .api-tips__row {
+          color:#999999;
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 18px;
       }
     }
   }

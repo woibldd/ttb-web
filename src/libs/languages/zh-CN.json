@@ -529,5 +529,8 @@
   "eos_deposit_tip_security_third": "地址标签填写错误而造成的充值失败，找回将收取一定比例的手续费；",
   "eos_not_support_internal_transfer": "暂不支持交易所内部地址转账",
   "orders":"订单",
-  "my_orders": "我的订单"
+  "my_orders": "我的订单",
+  "api_tips_one": "1. IX.COM为您提供了强大的API，您可以通过 API 使用行情查询、自动交易等服务。通过 API 文档 查看如何使用。",
+  "api_tips_two": "2. 每个用户最多创建10组API Key",
+  "api_tips_three": "3. 请不要泄露您的API Key，以免造成资产损失。"
 }

@@ -77,14 +77,6 @@ export default {
   name: 'MyFund',
   data () {
     return {
-      header: [
-        {key: 'currency', title: this.$t('fees_name')},
-        {key: 'available', title: this.$t('avlb')},
-        {key: 'locking', title: this.$t('asset_th_unavlb')},
-        {key: 'amount', title: this.$t('total_count')},
-        {key: 'estValue', title: this.$t('homechart_fiat') + '(' + (state.locale === 'zh-CN' ? 'CNY' : 'USD') + ')'}
-      ],
-      operate: {key: 'operate', title: this.$t('operation')},
       tableData: []
     }
   },
@@ -101,6 +93,18 @@ export default {
     },
     unit () {
       return state.locale === 'zh-CN' ? 'CNY' : 'USD'
+    },
+    header () {
+      return state.locale && [
+        {key: 'currency', title: this.$t('fees_name')},
+        {key: 'available', title: this.$t('avlb')},
+        {key: 'locking', title: this.$t('asset_th_unavlb')},
+        {key: 'amount', title: this.$t('total_count')},
+        {key: 'estValue', title: this.$t('homechart_fiat') + '(' + (state.locale === 'zh-CN' ? 'CNY' : 'USD') + ')'}
+      ]
+    },
+    operate () {
+      return state.locale && {key: 'operate', title: this.$t('operation')}
     }
   },
   async created () {
