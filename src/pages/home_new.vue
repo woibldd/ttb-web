@@ -63,6 +63,80 @@
         </div>
       </div>
     </div>
+    <div class="corperator">
+      <div class="corperator-container">
+        <div class="corp-row row-60">
+          <div
+            class="corp-title"
+            v-t="'footer_investors'"/>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="http://gs.holdings/"
+              target="_blank">
+              <img
+                class="logo gs"
+                src="~@/assets/copr-logo-gs.png" >
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="javascript:;"
+            >
+              <img
+                class="logo may"
+                src="~@/assets/copr-logo-may.png" >
+            </a>
+          </div>
+        </div>
+        <div class="corp-row row-20">
+          <div
+            class="corp-title"
+            v-t="'footer_partners'"/>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="http://www.huoxing24.com/"
+              target="_blank">
+              <img
+                class="logo hx"
+                src="~@/assets/copr-logo-hx.png" >
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="https://www.jinse.com/"
+              target="_blank">
+              <img
+                class="logo js"
+                src="~@/assets/copr-logo-js.png">
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="https://www.hecaijing.com/"
+              target="_blank">
+              <img
+                class="logo he"
+                src="~@/assets/copr-logo-he.png">
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="http://www.youjiatuanjian.com/"
+              target="_blank">
+              <img
+                class="logo blk"
+                src="~@/assets/copr-logo-blk.png">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div>
 
@@ -316,6 +390,62 @@ export default {
             bottom: -70px;
             z-index: 9999;
             border-radius: 5px;
+          }
+        }
+      }
+    }
+  }
+  .lang-en {
+    .corp-title {
+      width: 200px !important;
+    }
+  }
+  // 合作媒体
+  .corperator {
+    display: flex;
+    width: 100%;
+    background: #1A1A1A;
+    height: 300px;
+    border-bottom: 1px solid #3D3D3D;
+    .corperator-container {
+      width: 1200px;
+      margin: 60px auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .corp-row {
+        display: flex;
+        &.row-60 {
+          height: 60px;
+        }
+        .corp-title {
+          width: 100px;
+          font-size:18px;
+          font-weight:bold;
+          color:#929292;
+          display: flex;
+          height: 40px;
+          align-items: center;
+        }
+        .corp-logo {
+          min-width: 140px;
+          padding: 0 26px;
+          border-left: 1px solid #3D3D3D;
+          text-align: center;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          box-sizing: border-box;
+          .link {
+            display: block;
+            width: 100%;
+          }
+          .logo {
+            height: 20px;
+            &.gs {
+              height: 60px;
+            }
           }
         }
       }
