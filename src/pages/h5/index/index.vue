@@ -69,7 +69,25 @@
     <!-- <h5-footer/> -->
     <div class="corperator">
       <div class="corperator-container">
-        <div class="corp-row row-60">
+        <div
+          class="corp-row row-60 mb-rem-20"
+          v-if="isKorean">
+          <div
+            class="corp-title">
+            협력업체
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="https://www.bgbquant.com/"
+              target="_blank">
+              <img
+                class="logo hx"
+                src="~@/assets/copr-logo-bgbquant.png" >
+            </a>
+          </div>
+        </div>
+        <div class="corp-row row-60 mb-rem-20">
           <div
             class="corp-title"
             v-t="'footer_investors'"/>
@@ -159,8 +177,7 @@ import './index.scss'
 import MineSummary from '../mine-summary'
 // import h5Footer from '../footer'
 import PairTable from '@/components/Mobile/PairTable'
-import utils from '@/modules/utils'
-import {state, actions} from '@/modules/store'
+import {state} from '@/modules/store'
 import service from '@/modules/service'
 import responsiveMixin from '@/mixins/responsive'
 import MobileNav from '@/components/Mobile/MobileNav'
@@ -192,6 +209,9 @@ export default {
     },
     announcementLink () {
       return state.theme.announcement[state.locale] || state.theme.announcement.en
+    },
+    isKorean () {
+      return state.locale === 'ko' || true
     }
   },
   created () {

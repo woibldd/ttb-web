@@ -127,13 +127,18 @@
   display: flex;
   width: 100%;
   background: #1A1A1A;
-  height: rem(260);
   border-bottom: 1px solid #3D3D3D;
   .corperator-container {
-    margin: rem(60) auto;
+    margin: 0 auto;
+    padding-top: rem(60);
+    padding-bottom: rem(60);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    .mb-rem-20 {
+        margin-bottom: rem(20);
+    }
 
     .corp-row {
       display: flex;
