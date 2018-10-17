@@ -524,6 +524,19 @@ const service = {
   // 用户订单历史
   getOrderHistory (params) {
     return request('/order/history', params)
+  },
+  // 锁仓开始
+  /**
+   * 锁仓
+   */
+  balanceLock (data) {
+    return request('account/balance/lock', data)
+  },
+  /**
+   * 解锁
+   */
+  balanceUnLock (data) {
+    return request('account/balance/unlock', data)
   }
 
 }

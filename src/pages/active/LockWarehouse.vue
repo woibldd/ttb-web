@@ -45,7 +45,7 @@
           <p class="oper-con-l">
             <span>{{ $t('available_balance') }}</span>
           </p>
-          <p class="balance">888000000  IX</p>
+          <p class="balance">{{ balance.available }} IX</p>
         </div>
         <div class="oper-con">
           <p class="oper-con-l">
@@ -54,11 +54,15 @@
           <input
             type="number"
             min="20000"
+            :max="maxLock"
             step="20000"
+            v-model="lock_amount"
+            @input="lockAmountChanged"
+            @blur="blur('lock')"
             :placeholder="$t('integer_ultiple')"
             class="balance">
           <a
-            href="javascript:void(0)"
+            @click="setMax('lock')"
             class="num-max">{{ $t('maximum') }}</a>
         </div>
         <v-btn
@@ -77,7 +81,7 @@
           <p class="oper-con-l">
             <span>{{ $t('unlock_available') }}</span>
           </p>
-          <p class="balance">888000000  IX</p>
+          <p class="balance">{{ balance.locking }} IX</p>
         </div>
         <div class="oper-con">
           <p class="oper-con-l">
@@ -86,11 +90,15 @@
           <input
             type="number"
             min="20000"
+            :max="maxUnLock"
             step="20000"
+            v-model="unlock_amount"
+            @input="unlockAmountChanged"
+            @blur="blur('unlock')"
             :placeholder="$t('integer_ultiple')"
             class="balance">
           <a
-            href="javascript:void(0)"
+            @click="setMax('unlock')"
             class="num-max">{{ $t('maximum') }}</a>
         </div>
         <v-btn
@@ -106,12 +114,14 @@
       <div class="oper-cen">
         <div class="oper-cen-tit">{{ $t('unlocking') }}</div>
         <div class="oper-wait">
-          <p class="num">20000  IX</p>
+          <p class="num">20000 IX</p>
           <span class="tips">*{{ $t('unlocked') }}</span>
         </div>
       </div>
     </div>
-    <div class="c-box record">
+    <div
+      class="c-box record"
+      v-if="list.length">
       <div class="rec record-l">
         <div class="rec-tit">
           {{ $t('mining_records') }}
@@ -241,7 +251,9 @@
 <script>
 import VNav from '@/components/VNav3'
 import VBtn from '@/components/VBtn'
-import {state, actions, local} from '@/modules/store'
+import {state} from '@/modules/store'
+import service from '@/modules/service'
+const MIN_AMOUNT_UNIT = 20000
 export default {
   data () {
     return {
@@ -250,15 +262,30 @@ export default {
       unlock_loading: false,
       lock_disable: true,
       unlock_disable: true,
+      unlock_amount: '',
+      lock_amount: '',
       balance: {
-        available: 100223,
-        locking: 20000
-      }
+        available: 10020000023.222223,
+        locking: 123120.123
+      },
+      list: []
     }
   },
   computed: {
     isLogin () {
       return this.state.userInfo
+    },
+    maxLock () {
+      if (this.balance.available) {
+        return this.$big(this.balance.available).div(MIN_AMOUNT_UNIT).round(0, this.C.ROUND_DOWN).times(MIN_AMOUNT_UNIT).toString()
+      }
+      return 0
+    },
+    maxUnLock () {
+      if (this.balance.locking) {
+        return this.$big(this.balance.locking).div(MIN_AMOUNT_UNIT).round(0, this.C.ROUND_DOWN).times(MIN_AMOUNT_UNIT).toString()
+      }
+      return 0
     }
   },
   components: {
@@ -266,14 +293,89 @@ export default {
     VBtn
   },
   methods: {
-    doLock () {
-
+    async doLock () {
+      let amount = this.lock_amount
+      this.lock_loading = true
+      let res = await service.balanceLock({
+        amount
+      })
+      this.lock_loading = false
+      if (!res.code) {
+        // todo
+        this.lock_amount = ''
+      }
     },
-    doUnLock () {
-
+    async doUnLock () {
+      let amount = this.unlock_amount
+      this.unlock_loading = true
+      let res = await service.balanceUnLock({
+        amount
+      })
+      this.unlock_loading = false
+      if (!res.code) {
+        // todo
+        this.unlock_amount = ''
+      }
     },
     async fetch () {
 
+    },
+    blur (type) {
+      let amount = 0
+      if (type === 'lock') {
+        if (this.lock_amount === '') {
+          return
+        }
+        amount = this.$big(this.lock_amount)
+        if (amount.mod(MIN_AMOUNT_UNIT) !== 0) {
+          this.lock_amount = amount.div(MIN_AMOUNT_UNIT).round(0, this.C.ROUND_DOWN).times(MIN_AMOUNT_UNIT).toString()
+          if (!parseInt(this.lock_amount)) {
+            this.lock_disable = true
+          }
+        }
+      } else {
+        if (this.unlock_amount === '') {
+          return
+        }
+        amount = this.$big(this.unlock_amount)
+        if (amount.mod(MIN_AMOUNT_UNIT) !== 0) {
+          this.unlock_amount = amount.div(MIN_AMOUNT_UNIT).round(0, this.C.ROUND_DOWN).times(MIN_AMOUNT_UNIT).toString()
+          if (!parseInt(this.unlock_amount)) {
+            this.unlock_disable = true
+          }
+        }
+      }
+    },
+    setMax (type) {
+      if (type === 'lock') {
+        this.lock_amount = this.maxLock
+        this.lockAmountChanged()
+        this.blur(type)
+      } else {
+        this.unlock_amount = this.maxUnLock
+        this.unlockAmountChanged()
+        this.blur(type)
+      }
+    },
+    unlockAmountChanged () {
+      if (parseInt(this.unlock_amount)) {
+        if (this.$big(this.unlock_amount).gt(this.maxUnLock)) {
+          this.unlock_amount = this.maxUnLock
+        }
+        this.unlock_disable = false
+      } else {
+        this.unlock_disable = true
+      }
+    },
+    lockAmountChanged () {
+      if (parseInt(this.lock_amount)) {
+        if (this.$big(this.lock_amount).gt(this.maxLock)) {
+          this.lock_amount = this.maxLock
+        }
+        this.lock_disable = false
+      } else {
+        this.lock_disable = true
+      }
     }
   },
   created () {
@@ -462,7 +564,7 @@ export default {
         width: 100%;
         height: 68px;
         border: none;
-        color: #A6BED3;
+        color: #fff;
         cursor: pointer;
         margin-top: 23px;
         border-radius: 4px;
@@ -471,7 +573,8 @@ export default {
         &.disabled {
           background: #353F4D;
           cursor: default;
-          color: #fff;
+          color: #A6BED3;
+
         }
 
         &:hover {
