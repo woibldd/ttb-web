@@ -68,8 +68,8 @@ export default {
     }
     resolve({
       timezone: utils.getDefaultTimezone(),
-      name: '',
-      exchange: 'IX.COM', // theme.companyName,
+      name: product + '/' + currency,
+      exchange: '', // theme.companyName,
       ticker: ticker,
       description: '', // theme.exchangeName,
       type: 'bitcoin',

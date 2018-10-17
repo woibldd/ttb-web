@@ -204,7 +204,10 @@ body {
   border-bottom-color: #192D3F;
   /* border-bottom-color: var(--background); */
 }
-
+.common-tooltip-wrapper.above:before,
+.common-tooltip-wrapper.above:after {
+  border-top-color: #192D3F;
+}
 .feature-no-touch ._tv-dialog .button:not(.disabled):not(.selected):hover:before,
 .feature-no-touch ._tv-dialog .custom-select .switcher:not(.disabled):not(.selected):hover:before,
 .feature-no-touch ._tv-dialog .favored-list-container span:not(.disabled):not(.selected):hover:before,
