@@ -115,14 +115,17 @@
       <div class="rec record-l">
         <div class="rec-tit">
           {{ $t('mining_records') }}
-          <a href="">{{ $t('more') }}</a>
+          <router-link
+            v-if="isLogin"
+            class="more"
+            :to="{name: 'history'}">{{ $t('more') }}</router-link>
         </div>
         <div class="rec-t">
           <p class="re-a">{{ $t('time') }}</p>
           <p class="re-b">{{ $t('transaction_fee') }}</p>
           <p class="re-c">{{ $t('hash_rate_hour') }}</p>
           <p class="re-d">{{ $t('mining_output') }}</p>
-          <p class="re-e">{{ $t('situation') }}</p>
+          <p class="re-e">{{ $t('status') }}</p>
         </div>
         <div class="scroll-con">
           <ul>
@@ -238,9 +241,11 @@
 <script>
 import VNav from '@/components/VNav3'
 import VBtn from '@/components/VBtn'
+import {state, actions, local} from '@/modules/store'
 export default {
   data () {
     return {
+      state,
       lock_loading: false,
       unlock_loading: false,
       lock_disable: true,
@@ -249,6 +254,11 @@ export default {
         available: 100223,
         locking: 20000
       }
+    }
+  },
+  computed: {
+    isLogin () {
+      return this.state.userInfo
     }
   },
   components: {
@@ -517,7 +527,8 @@ export default {
         font-size: 24px;
         line-height: 45px;
         position: relative;
-        a{
+
+        .more {
           position: absolute;
           color: #fff;
           font-size: 14px;

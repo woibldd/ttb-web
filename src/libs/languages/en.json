@@ -619,7 +619,7 @@
   "unlock": "Unlock",
   "unlock_available": "Unlock is Available",
   "unlocked_amount": "Unlocked Amount",
-  "integer_ultiple": "Please enter an integer multiple of 20,000",
+  "integer_ultiple": "multiple of 20,000",
   "maximum": "Maximum",
   "unlocking": "Unlocking",
   "unlocked": "The unlocked part will be released in 1 hour",
