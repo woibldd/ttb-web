@@ -18,14 +18,16 @@
         </div>
         <div class="top-cen">
           <div class="m-middle">
-            <span class="top-tit">{{ $t('hash_rate') }}</span>
-            <p class="top-txt top-txt-blue">100.XXX<em>IX/H</em></p>
+            <span class="top-s-tit">{{ $t('hash_rate') }}</span>
+            <p class="top-s-txt top-txt-blue mar-bot">{{ myPower.power | round(2) }}<em>IX/H</em></p>
+            <span class="top-s-tit">{{ $t('hash_rate_remain') }}</span>
+            <p class="top-s-txt top-txt-blue">{{ myPower.power - myPower.amount | round(2) }}<em>IX/H</em></p>
           </div>
         </div>
         <div class="top-cen">
           <div class="m-middle">
             <span class="top-tit">{{ $t('td_trad_amount') }}</span>
-            <p class="top-txt top-txt-blue">100.XXX<em>IX/H</em></p>
+            <p class="top-txt top-txt-blue">{{ myPower.power }}<em>IX/H</em></p>
           </div>
         </div>
         <div class="top-cen">
@@ -81,7 +83,7 @@
           <p class="oper-con-l">
             <span>{{ $t('unlock_available') }}</span>
           </p>
-          <p class="balance">{{ balance.locking }} IX</p>
+          <p class="balance">{{ balance.locked }} IX</p>
         </div>
         <div class="oper-con">
           <p class="oper-con-l">
@@ -114,7 +116,7 @@
       <div class="oper-cen">
         <div class="oper-cen-tit">{{ $t('unlocking') }}</div>
         <div class="oper-wait">
-          <p class="num">20000 IX</p>
+          <p class="num">{{ balance.unlocking }} IX</p>
           <span class="tips">*{{ $t('unlocked') }}</span>
         </div>
       </div>
@@ -139,95 +141,19 @@
         </div>
         <div class="scroll-con">
           <ul>
-            <li>
-              <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">0.3</p>
-              <p class="re-c">0.00007</p>
-              <p class="re-d">100</p>
-              <p class="re-e c-yellow">已派发</p>
-            </li>
-            <li>
-              <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">0.3</p>
-              <p class="re-c">0.00007</p>
-              <p class="re-d">100</p>
-              <p class="re-e c-blue">未派发
-                <span>
-                  <em>2018—09—24 发放 <i/> </em>
-                </span>
-              </p>
-            </li>
-            <li>
-              <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">0.3</p>
-              <p class="re-c">0.00007</p>
-              <p class="re-d">100</p>
-              <p class="re-e c-yellow">已派发</p>
-            </li>
-            <li>
-              <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">0.3</p>
-              <p class="re-c">0.00007</p>
-              <p class="re-d">100</p>
-              <p class="re-e c-blue">未派发
-                <span>
-                  <em>2018—09—24 发放 <i/> </em>
-                </span>
-              </p>
-            </li>
-            <li>
-              <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">0.3</p>
-              <p class="re-c">0.00007</p>
-              <p class="re-d">100</p>
-              <p class="re-e c-yellow">已派发</p>
-            </li>
-            <li>
-              <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">0.3</p>
-              <p class="re-c">0.00007</p>
-              <p class="re-d">100</p>
-              <p class="re-e c-blue">未派发
-                <span>
-                  <em>2018—09—24 发放 <i/> </em>
-                </span>
-              </p>
-            </li>
-            <li>
-              <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">0.3</p>
-              <p class="re-c">0.00007</p>
-              <p class="re-d">100</p>
-              <p class="re-e c-yellow">已派发</p>
-            </li>
-            <li>
-              <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">0.3</p>
-              <p class="re-c">0.00007</p>
-              <p class="re-d">100</p>
-              <p class="re-e c-blue">未派发
-                <span>
-                  <em>2018—09—24 发放 <i/> </em>
-                </span>
-              </p>
-            </li>
-            <li>
-              <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">0.3</p>
-              <p class="re-c">0.00007</p>
-              <p class="re-d">100</p>
-              <p class="re-e c-yellow">已派发</p>
-            </li>
-            <li>
-              <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">0.3</p>
-              <p class="re-c">0.00007</p>
-              <p class="re-d">100</p>
-              <p class="re-e c-blue">未派发
-                <span>
-                  <em>2018—09—24 发放 <i/> </em>
-                </span>
-              </p>
+            <li
+              v-for="item in list"
+              :key="item.mine_time">
+              <p class="re-a">{{ item.mine_time | ts2date }}</p>
+              <p class="re-b">{{ item.fee | round(4) | thousand }}</p>
+              <p class="re-c">{{ item.power | thousand }}</p>
+              <p class="re-d">{{ item.amount | round(4) | thousand }}</p>
+              <p
+                class="re-e"
+                :class="{'c-yellow': item.state === 1, 'c-blue': item.state === 0}">{{ item.state === 1 ? $t('has_send') : $t('has_no_send') }}
+                <span v-if="item.state === 0">
+                  <em>{{ item.release_time | ts2date }} {{ $t('has_done') }} <i/> </em>
+              </span></p>
             </li>
           </ul>
         </div>
@@ -251,7 +177,7 @@
 <script>
 import VNav from '@/components/VNav3'
 import VBtn from '@/components/VBtn'
-import {state} from '@/modules/store'
+import {state, actions} from '@/modules/store'
 import service from '@/modules/service'
 const MIN_AMOUNT_UNIT = 20000
 export default {
@@ -265,8 +191,12 @@ export default {
       unlock_amount: '',
       lock_amount: '',
       balance: {
-        available: 10020000023.222223,
-        locking: 123120.123
+        available: 0,
+        unlocking: 0,
+        locked: 0
+      },
+      myPower: {
+
       },
       list: []
     }
@@ -282,8 +212,8 @@ export default {
       return 0
     },
     maxUnLock () {
-      if (this.balance.locking) {
-        return this.$big(this.balance.locking).div(MIN_AMOUNT_UNIT).round(0, this.C.ROUND_DOWN).times(MIN_AMOUNT_UNIT).toString()
+      if (this.balance.locked) {
+        return this.$big(this.balance.locked).div(MIN_AMOUNT_UNIT).round(0, this.C.ROUND_DOWN).times(MIN_AMOUNT_UNIT).toString()
       }
       return 0
     }
@@ -318,7 +248,22 @@ export default {
       }
     },
     async fetch () {
+      if (this.isLogin) {
+        let myPowerRes = await service.getMyPower()
+        if (!myPowerRes.code) {
+          this.myPower = myPowerRes.data
+        }
+        let balanceRes = await service.getIxBalance()
+        if (!balanceRes.code) {
+          this.balance = balanceRes.data
+        }
+        let listRes = await service.getLockMineHistory()
+        if (!listRes.code) {
+          this.list = listRes.data
+        }
+      } else {
 
+      }
     },
     blur (type) {
       let amount = 0
@@ -378,8 +323,9 @@ export default {
       }
     }
   },
-  created () {
-    this.fetch()
+  async created () {
+    await actions.updateSession()
+    await this.fetch()
   }
 
 }
@@ -423,6 +369,7 @@ export default {
       height: 177px;
       display: table;
       padding-left: 30px;
+      padding-right: 30px;
       border-radius: 8px;
       margin-right: 13px;
       background: #2D3540;
@@ -677,7 +624,7 @@ export default {
                   width: 20px;
                 }
                 em{
-                  width: 138px;
+                  width: 160px;
                   height: 43px;
                   line-height: 43px;
                   display: none;
