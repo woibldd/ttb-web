@@ -67,6 +67,91 @@
       <pair-table/>
     </div>
     <!-- <h5-footer/> -->
+    <div class="corperator">
+      <div class="corperator-container">
+        <div class="corp-row row-60">
+          <div
+            class="corp-title"
+            v-t="'footer_investors'"/>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="http://gs.holdings/"
+              target="_blank">
+              <img
+                class="logo gs"
+                src="~@/assets/copr-logo-gs.png" >
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="javascript:;"
+            >
+              <img
+                class="logo may"
+                src="~@/assets/copr-logo-may.png" >
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="https://peckshield.com/"
+              target="_blank"
+            >
+              <img
+                class="logo ps"
+                src="~@/assets/copr_logo_ps.png" >
+            </a>
+          </div>
+        </div>
+        <div class="corp-row row-20">
+          <div
+            class="corp-title"
+            v-t="'footer_partners'"/>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="http://www.huoxing24.com/"
+              target="_blank">
+              <img
+                class="logo hx"
+                src="~@/assets/copr-logo-hx.png" >
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="https://www.jinse.com/"
+              target="_blank">
+              <img
+                class="logo js"
+                src="~@/assets/copr-logo-js.png">
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="https://www.hecaijing.com/"
+              target="_blank">
+              <img
+                class="logo he"
+                src="~@/assets/copr-logo-he.png">
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="http://www.youjiatuanjian.com/"
+              target="_blank">
+              <img
+                class="logo blk"
+                src="~@/assets/copr-logo-blk.png">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>

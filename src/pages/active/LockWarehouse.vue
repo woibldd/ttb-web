@@ -1,10 +1,9 @@
 <template>
   <div class="page-home">
     <div class="header">
-      <v-nav2
+      <v-nav
         is-home="true"
-        :notice="notice"
-        @hide="notice = null"/>
+      />
     </div>
     <div class="banner"/>
     <div class="c-box">
@@ -53,16 +52,24 @@
             <span>{{ $t('lock_amount') }}</span>
           </p>
           <input
-            type="text"
+            type="number"
+            min="20000"
+            step="20000"
             :placeholder="$t('integer_ultiple')"
             class="balance">
           <a
             href="javascript:void(0)"
             class="num-max">{{ $t('maximum') }}</a>
         </div>
-        <button
-          disabled="disabled"
-          class="oper-but change">{{ $t('locked') }}</button>
+        <v-btn
+          class="oper-but"
+          height="70"
+          fontsize="16"
+          :loading="lock_loading"
+          @click="doLock"
+          :disabled="lock_disable"
+          :label="$t('locked')"
+        />
       </div>
       <div class="oper-cen">
         <div class="oper-cen-tit">{{ $t('unlock') }}</div>
@@ -77,16 +84,24 @@
             <span>{{ $t('unlocked_amount') }}</span>
           </p>
           <input
-            type="text"
+            type="number"
+            min="20000"
+            step="20000"
             :placeholder="$t('integer_ultiple')"
             class="balance">
           <a
             href="javascript:void(0)"
             class="num-max">{{ $t('maximum') }}</a>
         </div>
-        <button
-          disabled="disabled"
-          class="oper-but">{{ $t('unlock') }}</button>
+        <v-btn
+          class="oper-but"
+          height="70"
+          fontsize="16"
+          :loading="unlock_loading"
+          @click="doUnLock"
+          :disabled="unlock_disable"
+          :label="$t('unlock')"
+        />
       </div>
       <div class="oper-cen">
         <div class="oper-cen-tit">{{ $t('unlocking') }}</div>
@@ -221,12 +236,38 @@
 
 </template>
 <script>
-import VNav3 from '@/components/VNav3'
+import VNav from '@/components/VNav3'
+import VBtn from '@/components/VBtn'
 export default {
   data () {
+    return {
+      lock_loading: false,
+      unlock_loading: false,
+      lock_disable: true,
+      unlock_disable: true,
+      balance: {
+        available: 100223,
+        locking: 20000
+      }
+    }
   },
   components: {
-    VNav3
+    VNav,
+    VBtn
+  },
+  methods: {
+    doLock () {
+
+    },
+    doUnLock () {
+
+    },
+    async fetch () {
+
+    }
+  },
+  created () {
+    this.fetch()
   }
 
 }
@@ -415,11 +456,17 @@ export default {
         cursor: pointer;
         margin-top: 23px;
         border-radius: 4px;
-        background: #353F4D;
-      }
-      .change{
         background: #CAAA6C;
-        color: #fff;
+
+        &.disabled {
+          background: #353F4D;
+          cursor: default;
+          color: #fff;
+        }
+
+        &:hover {
+          opacity: 0.8;
+        }
       }
       .oper-wait{
         height: 231px;
@@ -615,6 +662,22 @@ export default {
     }
     .condition{
       font-size: 14px;
+    }
+  }
+  input{
+    outline: medium;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #ffffff;
+    appearance: none;
+
+    &::placeholder {
+      // color: #446683;
+    }
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
     }
   }
 </style>

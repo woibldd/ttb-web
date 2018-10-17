@@ -116,3 +116,59 @@
     }
     
 }
+// 合作媒体
+.lang-en {
+  .corp-title {
+    width: rem(160) !important;
+    text-align: center !important;
+  }
+}
+.corperator {
+  display: flex;
+  width: 100%;
+  background: #1A1A1A;
+  height: rem(260);
+  border-bottom: 1px solid #3D3D3D;
+  .corperator-container {
+    margin: rem(60) auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .corp-row {
+      display: flex;
+      &.row-60 {
+        height: rem(60);
+      }
+      .corp-title {
+        width: rem(120);
+        font-size: rem(18);
+        font-weight:bold;
+        color:#929292;
+        display: flex;
+        height: rem(40);
+        align-items: center;
+      }
+      .corp-logo {
+        min-width: rem(140);
+        padding: 0 rem(16);
+        border-left: 1px solid #3D3D3D;
+        text-align: center;
+        height: rem(40);
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        .link {
+          display: block;
+          width: 100%;
+        }
+        .logo {
+          height: rem(20);
+          &.gs {
+            height: rem(60);
+          }
+        }
+      }
+    }
+  }
+}
