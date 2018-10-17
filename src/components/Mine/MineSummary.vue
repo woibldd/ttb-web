@@ -3,7 +3,7 @@
     <!-- one -->
     <div
       v-if="showMiddle"
-      class="jd_c jd_middle mine-ix-box">
+      class="jd_c jd_middle mine-ix-box pr-30">
       <div class="cm-tit">
         {{ $t('mine_mining_amount') }}
       </div>
@@ -24,10 +24,10 @@
       <div class="box__row">
         <div class="fee__pie">
           <p class="cm-tit">
-            {{ $t('will_distribute_btc_today') }}
+            {{ $t('mine_bonus_today') }}
           </p>
           <p class="cm-bt">
-            {{ yestodayMine.exchangeMine | round(4) }}
+            {{ allBonusData.btc_today | round(4) }}
             <span class="unit">BTC</span>
           </p>
         </div>
@@ -45,16 +45,16 @@
             </span> -->
           </p>
           <p class="cm-bn">
-            {{ yestodayMine.exchangeMine | round(4) }}
+            {{ allBonusData.ix_yesterday | round(4) }}
             <span class="unit">BTC</span>
           </p>
         </div>
         <div class="fee__pie">
           <p class="cm-tit">
-            {{ $t('keep_btc_reward_yesterday') }}
+            {{ $t('mine_bonus_yestoday') }}
           </p>
           <p class="cm-bn">
-            {{ yestodayMine.exchangeMine | round(4) }}
+            {{ allBonusData.btc_yesterday | round(4) }}
             <span class="unit">BTC</span>
           </p>
         </div>
@@ -69,7 +69,7 @@
             {{ $t('keep_500_btc_reward_yesterday') }}
           </p>
           <p class="cm-bt">
-            {{ yestodayMine.exchangeMine | round(4) }}
+            {{ allBonusData.btc_yesterday | round(4) }}
             <span class="unit">BTC</span>
           </p>
         </div>
@@ -80,7 +80,7 @@
             {{ $t('keep_million_ix_reward_yesterday') }}
           </p>
           <p class="cm-bt">
-            {{ yestodayMine.exchangeMine | round(4) }}
+            {{ allBonusData.ix_rate | round(4) }}
             <span class="unit">BTC</span>
           </p>
         </div>
@@ -94,7 +94,7 @@
             {{ $t('ix_second_trading_amount') }}
           </p>
           <p class="cm-bt">
-            {{ yestodayMine.exchangeMine | round(4) }}
+            {{ ixMarketData.amount | round(4) }}
             <span class="unit">IX</span>
           </p>
         </div>
@@ -105,7 +105,7 @@
             {{ $t('ix_lock_amount') }}
           </p>
           <p class="cm-bn">
-            {{ yestodayMine.exchangeMine | round(4) }}
+            {{ ixMarketData.locked | round(4) }}
             <span class="unit">IX</span>
           </p>
         </div>
@@ -114,7 +114,7 @@
             {{ $t('ix_trading_amout') }}
           </p>
           <p class="cm-bn">
-            {{ yestodayMine.exchangeMine | round(4) }}
+            {{ ixMarketData.markert_value | round(4) }}
             <span class="unit">BTC</span>
           </p>
         </div>
@@ -143,6 +143,8 @@ export default {
         max_amount: '333333333333',
         amount: 0
       },
+      ixMarketData: {},
+      allBonusData: {},
       yestodayMine: {
         exchangeMine: 0,
         inviteMine: 0
@@ -207,6 +209,21 @@ export default {
         this.bonusMine = resc.data
       }
     },
+
+    // 分红总产出
+    async getAllBonusInfo () {
+      let res = await service.getAllBonusInfo()
+      if (!res.code && !isEmpty(res.data)) {
+        this.allBonusData = Object.assign({}, res.data)
+      }
+    },
+    async getIXMarketData () {
+      // 第四个框
+      let res = await service.getIXMarket()
+      if (!res.code && !isEmpty(res.data)) {
+        this.ixMarketData = Object.assign({}, res.data)
+      }
+    },
     loop () {
       this.timer = setInterval(this.fetch, 6e4)
     },
@@ -224,6 +241,8 @@ export default {
     this.fetch()
     this.loop()
     this.getYestoryData()
+    this.getIXMarketData()
+    this.getAllBonusInfo()
   }
 }
 </script>

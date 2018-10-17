@@ -21,10 +21,29 @@ export const filter = {
   'order/active': 0,
   'favorite/list': 1,
   '/account/candy/list': 1,
-  'account/currency/list': 1
-
+  'account/currency/list': 1,
+  '/market/ix': 1,
+  '/bonus/total': 1
 }
 export const list = [{
+  url: /market\/ix/,
+  res () {
+    return ok({ amount: 11111,
+      locked: 2222,
+      markert_value: 3333 })
+  }
+}, {
+  url: /bonus\/total/,
+  res () {
+    return ok({ btc_today: 11111,
+      btc_yesterday: 2222,
+      btc_rate: 3333,
+      ix_today: 4444,
+      ix_yesterday: 5555,
+      ix_rate: 6666
+    })
+  }
+}, {
   url: /^order\/active/,
   res ({ currency } = {}) {
     return ok({ 'items': [{ 'id': '241867103081484288', 'symbol': 'EOSC_USDT', 'side': 'SELL', 'price': '0.5', 'amount': '52.26', 'unclosed': '52.26', 'create_time': 1535624011000, 'deal_amount': '0', 'total': '0', 'type': 'LIMIT' }, { 'id': '241866968909897728', 'symbol': 'EOSC_USDT', 'side': 'SELL', 'price': '0.1', 'amount': '34.83', 'unclosed': '34.83', 'create_time': 1535623979000, 'deal_amount': '0', 'total': '0', 'type': 'LIMIT' }, { 'id': '241866608841482240', 'symbol': 'EOSC_USDT', 'side': 'SELL', 'price': '0.08', 'amount': '46.45', 'unclosed': '46.45', 'create_time': 1535623893000, 'deal_amount': '0', 'total': '0', 'type': 'LIMIT' }, { 'id': '231368936590299136', 'symbol': 'TB_USDT', 'side': 'SELL', 'price': '0.1', 'amount': '2000', 'unclosed': '2000', 'create_time': 1533121053000, 'deal_amount': '0', 'total': '0', 'type': 'LIMIT' }] })

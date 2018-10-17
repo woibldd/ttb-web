@@ -468,6 +468,17 @@ const service = {
   getRelayTotal () {
     return request('relay/query')
   },
+
+  // ix市场信息
+  getIXMarket () {
+    return request('/market/ix')
+  },
+
+  // 分红信息汇总
+  getAllBonusInfo () {
+    return request('/bonus/total')
+  },
+
   /* 挖矿 end */
 
   /* 行情 */
