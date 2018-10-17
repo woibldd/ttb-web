@@ -113,5 +113,31 @@ export default{
       office_website: 'https://eos.io/', // 官网
       chain_info: 'https://etherscan.io/token/EOS' // 区块查询
     }
+  },
+  IX: {
+    'zh-CN': {
+      name: 'IX',
+      full_name: 'IX Token',
+      brief_info: 'IX（IX Token）是IX交易平台发行的通证，是交易平台自身所有权益的代表。IX的发行是依据“交易即挖矿”的原则逐步释放，上限为200亿，永不增发。IX分配：私募2%、平台启动6%、战略伙伴5%、创始团队20%、基金12%、社区反馈45%、安全保障基金10%。IX作为IX.com的权益证明，用户交易产生的手续费将100%以IX形式返还，除此之外用户还可以通过币币交易的形式购买并持有IX，持有者享有平台收入分配、参与重大决策及社区管理的权利。',
+      issue_time: '2018-10-18',
+      issue_all: '200亿', // 发行总量
+      issue_circulation: '--', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://ix.com/docs/IX+WhitePaper+zh-CN.pdf', // 白皮书
+      office_website: 'https://ix.com/', // 官网
+      chain_info: 'https://etherscan.io/token/0xc7df14a8289efe7a2d3399387302fdf86e7adc4e' // 区块查询
+    },
+    en: {
+      name: 'IX',
+      full_name: 'IX Token',
+      brief_info: 'IX (IX Token) is IX trade platform’s pass certificate, is the representative of trade platform’s ownership equity itself. Launch IX is according to the rule “Trade is mining” release step to step, upper limit is 20 billion, never addition issue. IX’s allocation : private placement 2%, platform boot 6%, Strategic partner 5%, Founding team 20%, Fund 12%, Community feedback 45%, Security fund 10%, As the proof of stake, the fee during trading will return as IX 100%, beyond that, users can buy and own IX by trading, the owner enjoy the right: participate the income, take part in great decision and community management.',
+      issue_time: '2018-10-18',
+      issue_all: '200亿', // 发行总量
+      issue_circulation: '--', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://ix.com/docs/IX+WhitePaper.pdf', // 白皮书
+      office_website: 'https://ix.com/', // 官网
+      chain_info: 'https://etherscan.io/token/0xc7df14a8289efe7a2d3399387302fdf86e7adc4e' // 区块查询
+    }
   }
 }
