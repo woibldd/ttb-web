@@ -658,5 +658,6 @@
   "api_tips_three": "3. You can use following ways to activate the API key after generate it: <a target=\"_blank\" href=\"%{link}\">Detail</a>;",
   "api_tips_four": "4. To avoid loss of assets, please do not disclose your API Key to anybody.",
   "footer_investors": "Institutional Investors",
-  "footer_partners": "Media Partners"
+  "footer_partners": "Media Partners",
+  "promote_brokerage": "Promote Brokerage"
 }

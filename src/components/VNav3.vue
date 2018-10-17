@@ -428,7 +428,7 @@ export default {
     }
     .lang_box{
         display: block;
-        width: 200%;
+        width: 300%;
         height: auto;
         line-height: 40px;
         padding-top: 27px;
@@ -438,7 +438,7 @@ export default {
         a{
             background: #303c47;
             display: block;
-            width: 50%;
+            width: 33%;
             height: 40px;
             float: left;
             color: #fff;

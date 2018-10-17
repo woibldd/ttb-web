@@ -16,7 +16,7 @@
           <el-radio-button label="reward"> {{ $t('fund_reward') }} </el-radio-button>
           <el-radio-button
             v-if="isPromoter"
-            label="promoter"> {{ $t('推广佣金') }} </el-radio-button>
+            label="promoter"> {{ $t('promote_brokerage') }} </el-radio-button>
           <el-radio-button
             v-if="hasInternal"
             label="internal"> {{ $t('internal_transfer') }} </el-radio-button>

@@ -535,5 +535,6 @@
   "api_tips_three": "3. 创建API密钥后，需要激活才可使用，激活方式（<a target=\"_blank\" href=\"%{link}\">查看详情</a>）；",
   "api_tips_four": "4. 请不要泄露您的API Key，以免造成资产损失。",
   "footer_investors": "投资机构",
-  "footer_partners": "合作媒体"
+  "footer_partners": "合作媒体",
+  "promote_brokerage": "推广佣金"
 }
