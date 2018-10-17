@@ -26,11 +26,16 @@ export default function () {
       'header_saveload',
       'compare_symbol',
       'context_menus',
+      'header_screenshot',
+      'display_market_status',
+      'left_toolbar',
       // 'volume_force_overlay',
       'use_localstorage_for_settings'
     ],
     enabled_features: [
       'adaptive_logo'
+      // 'charting_library_debug_mode',
+      // 'seconds_resolution'
     ],
     custom_css_url: 'kline.css',
     studies_access: {
@@ -38,7 +43,7 @@ export default function () {
       tools: []
     },
     overrides: {
-      'symbolWatermarkProperties.color': 'rgba(255,255,255,0.1)',
+      'symbolWatermarkProperties.color': 'rgba(255,255,255,0)',
       'paneProperties.background': '#283B4C',
       'paneProperties.vertGridProperties.color': 'rgba(210, 217, 229, 0.06)',
       'paneProperties.horzGridProperties.color': 'rgba(210, 217, 229, 0.06)',
