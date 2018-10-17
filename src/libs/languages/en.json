@@ -658,5 +658,15 @@
   "api_tips_three": "3. You can use following ways to activate the API key after generate it: <a target=\"_blank\" href=\"%{link}\">Detail</a>;",
   "api_tips_four": "4. To avoid loss of assets, please do not disclose your API Key to anybody.",
   "footer_investors": "Institutional Investors",
-  "footer_partners": "Media Partners"
+  "footer_partners": "Media Partners",
+  "will_distribute_btc_today": "今日待分配收入：",
+  "keep_ix_reward_yesterday": "昨日持IX分配手续费：",
+  "keep_btc_reward_yesterday": "昨日持BTC分配手续费：",
+  "keep_500_btc_reward_yesterday": "Yesterday's dividend with continuously holding 500 BTC:：",
+  "keep_million_ix_reward_yesterday": "昨日连续持有百万IX分配：",
+  "ix_second_trading_amount": "IX二级市场流通量：",
+  "ix_lock_amount": "IX锁仓总量：",
+  "ix_trading_amout": "IX流通市值",
+  "keep_ix_tips": "累计至:%{time}发放, <em style=\"color: #CA9048\"><a target=\"_blank\" href=\"%{link}\">点击查看</a></em> "
+
 }
