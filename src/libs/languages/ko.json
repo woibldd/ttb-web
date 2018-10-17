@@ -488,7 +488,6 @@
   "hash_rate": "나의 계산력",
   "td_trad_amount": "오늘 거래의 광산물.",
   "cum_trad_amount": "누계 거래하다.",
-  "cum_trad_revenue": "누적 거래로 광산 수익을 내다.",
   "improve_hash_rate": "승산력을 높이다.",
   "available_balance": "잔고가 있다",
   "lock_amount": "창고량을 잠그다.",

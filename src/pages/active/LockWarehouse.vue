@@ -9,33 +9,65 @@
     <div class="c-box">
       <div class="top-box">
         <div class="top-cen">
-          <div class="m-middle">
-            <span class="top-s-tit">{{ $t('ystd_trad') }}</span>
-            <p class="top-s-txt top-txt-yellow mar-bot">1BTC≈￥49999.98789</p>
-            <span class="top-s-tit">{{ $t('td_trad') }}</span>
-            <p class="top-s-txt top-txt-yellow">1BTC≈￥49999.98189</p>
+          <div
+            class="m-middle"
+            v-if="isLogin">
+            <span class="top-tit">{{ $t('ystd_trad') }}</span>
+            <p class="top-txt top-txt-blue">{{ myTotal.amount_yesterday | round(2) | thousand }}<em>IX</em></p>
+            <!-- <span class="top-s-tit">{{ $t('td_trad') }}</span>
+            <p class="top-s-txt top-txt-yellow">1BTC≈￥49999.98189</p> -->
+          </div>
+          <div
+            class="m-middle"
+            v-else>
+            <span class="top-tit">{{ $t('ystd_trad_total') }}</span>
+            <p class="top-txt top-txt-blue">{{ basePower.amount_yesterday | round(2) | thousand }}<em>IX</em></p>
+            <!-- <span class="top-s-tit">{{ $t('td_trad') }}</span>
+            <p class="top-s-txt top-txt-yellow">1BTC≈￥49999.98189</p> -->
           </div>
         </div>
         <div class="top-cen">
-          <div class="m-middle">
+          <div
+            class="m-middle"
+            v-if="isLogin">
             <span class="top-s-tit">{{ $t('hash_rate') }}</span>
             <p class="top-s-txt top-txt-blue mar-bot">{{ myPower.power | round(2) }}<em>IX/H</em></p>
             <span class="top-s-tit">{{ $t('hash_rate_remain') }}</span>
-            <p class="top-s-txt top-txt-blue">{{ myPower.power - myPower.amount | round(2) }}<em>IX/H</em></p>
+            <p class="top-s-txt top-txt-blue">{{ myPower.power - myPower.amount | round(2) }}<em>IX</em></p>
+          </div>
+          <div
+            class="m-middle"
+            v-else>
+            <span class="top-tit">{{ $t('current_base_power') }}</span>
+            <p class="top-txt top-txt-blue">{{ basePower.power | round(2) }}<em>IX/H</em></p>
           </div>
         </div>
         <div class="top-cen">
-          <div class="m-middle">
+          <div
+            class="m-middle"
+            v-if="isLogin">
             <span class="top-tit">{{ $t('td_trad_amount') }}</span>
-            <p class="top-txt top-txt-blue">{{ myPower.power }}<em>IX/H</em></p>
+            <p class="top-txt top-txt-blue">{{ myTotal.amount_today | round(2) | thousand }}<em>IX</em></p>
+          </div>
+          <div
+            class="m-middle"
+            v-else>
+            <span class="top-tit">{{ $t('today_trad_total') }}</span>
+            <p class="top-txt top-txt-blue">{{ basePower.amount_today | round(2) | thousand }}<em>IX</em></p>
           </div>
         </div>
         <div class="top-cen">
-          <div class="m-middle">
-            <span class="top-s-tit">{{ $t('cum_trad_amount') }}</span>
-            <p class="top-s-txt top-txt-blue mar-bot">10000.9988<em>IX/H</em></p>
-            <span class="top-s-tit">{{ $t('cum_trad_revenue') }}</span>
-            <p class="top-s-txt top-txt-blue">10000.9988<em>IX/H</em></p>
+          <div
+            class="m-middle"
+            v-if="isLogin">
+            <span class="top-tit">{{ $t('cum_trad_amount') }}</span>
+            <p class="top-txt top-txt-blue">{{ myTotal.total | round(2) | thousand }}<em>IX</em></p>
+          </div>
+          <div
+            class="m-middle"
+            v-else>
+            <span class="top-tit">{{ $t('totally_mine_total') }}</span>
+            <p class="top-txt top-txt-blue">{{ basePower.total | round(2) | thousand }}<em>IX</em></p>
           </div>
         </div>
       </div>
@@ -47,7 +79,7 @@
           <p class="oper-con-l">
             <span>{{ $t('available_balance') }}</span>
           </p>
-          <p class="balance">{{ balance.available }} IX</p>
+          <p class="balance">{{ balance.available | round(4) }} IX</p>
         </div>
         <div class="oper-con">
           <p class="oper-con-l">
@@ -162,7 +194,7 @@
     <div class="c-box condition">
       <p class="cdt-title">{{ $t('requirements') }}</p>
       <ul>
-        <li><i>1.</i>{{ $t('req_a') }}<br >{{ $t('req_a_a') }}</li>
+        <li><i>1.</i>{{ $t('req_a', {power: basePower.power}) }}<br >{{ $t('req_a_a') }}</li>
         <li><i>2.</i>{{ $t('req_b') }}</li>
         <li><i>3.</i>{{ $t('req_c') }}</li>
         <li><i>4.</i>{{ $t('req_d') }}</li>
@@ -179,6 +211,8 @@ import VNav from '@/components/VNav3'
 import VBtn from '@/components/VBtn'
 import {state, actions} from '@/modules/store'
 import service from '@/modules/service'
+import utils from '@/modules/utils'
+
 const MIN_AMOUNT_UNIT = 20000
 export default {
   data () {
@@ -190,15 +224,26 @@ export default {
       unlock_disable: true,
       unlock_amount: '',
       lock_amount: '',
+      // 我的余额
       balance: {
         available: 0,
         unlocking: 0,
         locked: 0
       },
+      // 我的算力
       myPower: {
 
       },
-      list: []
+      // 我的统计
+      myTotal: {
+
+      },
+      // 挖矿记录
+      list: [],
+      basePower: {
+        power: 200
+      }
+
     }
   },
   computed: {
@@ -233,7 +278,15 @@ export default {
       if (!res.code) {
         // todo
         this.lock_amount = ''
+        utils.success(this.$t('lock_success') + amount + ' IX')
+        this.reset('lock')
+        this.fetch()
+      } else {
+        utils.alert(res.message)
       }
+    },
+    reset (type) {
+      this.blur(type)
     },
     async doUnLock () {
       let amount = this.unlock_amount
@@ -245,30 +298,49 @@ export default {
       if (!res.code) {
         // todo
         this.unlock_amount = ''
+        utils.success(this.$t('unlock_success') + amount + ' IX')
+        this.reset('unlock')
+        this.fetch()
+      } else {
+        utils.alert(res.message)
       }
     },
     async fetch () {
       if (this.isLogin) {
-        let myPowerRes = await service.getMyPower()
-        if (!myPowerRes.code) {
-          this.myPower = myPowerRes.data
-        }
-        let balanceRes = await service.getIxBalance()
-        if (!balanceRes.code) {
-          this.balance = balanceRes.data
-        }
-        let listRes = await service.getLockMineHistory()
-        if (!listRes.code) {
-          this.list = listRes.data
-        }
+        Promise.all([service.getMyPower(),
+          service.getIxBalance(),
+          service.getLockMineHistory(),
+          service.getMyLockTotal()]).then(resp => {
+          let myPowerRes = resp[0]
+          if (!myPowerRes.code) {
+            this.myPower = myPowerRes.data
+          }
+          let balanceRes = resp[1]
+          if (!balanceRes.code) {
+            this.balance = balanceRes.data
+          }
+          let listRes = resp[2]
+          if (!listRes.code) {
+            this.list = listRes.data
+          }
+          let myTotalRes = resp[3]
+          if (!myTotalRes.code) {
+            this.myTotal = myTotalRes.data
+          }
+        })
       } else {
 
+      }
+      let basePowerRes = await service.getLockMineTotal()
+      if (!basePowerRes.code) {
+        this.basePower = basePowerRes.data
       }
     },
     blur (type) {
       let amount = 0
       if (type === 'lock') {
         if (this.lock_amount === '') {
+          this.lock_disable = true
           return
         }
         amount = this.$big(this.lock_amount)
@@ -280,6 +352,7 @@ export default {
         }
       } else {
         if (this.unlock_amount === '') {
+          this.unlock_disable = true
           return
         }
         amount = this.$big(this.unlock_amount)
@@ -307,7 +380,11 @@ export default {
         if (this.$big(this.unlock_amount).gt(this.maxUnLock)) {
           this.unlock_amount = this.maxUnLock
         }
-        this.unlock_disable = false
+        if (!this.unlock_amount) {
+          this.unlock_disable = true
+        } else {
+          this.unlock_disable = false
+        }
       } else {
         this.unlock_disable = true
       }
@@ -317,7 +394,11 @@ export default {
         if (this.$big(this.lock_amount).gt(this.maxLock)) {
           this.lock_amount = this.maxLock
         }
-        this.lock_disable = false
+        if (!this.lock_amount) {
+          this.lock_disable = true
+        } else {
+          this.lock_disable = false
+        }
       } else {
         this.lock_disable = true
       }
@@ -368,6 +449,8 @@ export default {
       width: 290px;
       height: 177px;
       display: table;
+      word-wrap:break-word;
+      word-break: break-all;
       padding-left: 30px;
       padding-right: 30px;
       border-radius: 8px;

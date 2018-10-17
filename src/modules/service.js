@@ -555,11 +555,21 @@ const service = {
   getLockMineHistory () {
     return request('mine/exchange/ix/me/history')
   },
+  // 我的ix余额
   getIxBalance () {
     return request('account/balance/ix')
   },
+  // 我的算力
   getMyPower () {
     return request('mine/exchange/ix/me')
+  },
+  // 个人锁仓信息
+  getMyLockTotal () {
+    return request('mine/exchange/ix/me/total')
+  },
+  // 全网挖矿详细 基准算力等
+  getLockMineTotal () {
+    return request('mine/exchange/ix/total')
   }
 
 }
