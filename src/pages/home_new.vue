@@ -89,6 +89,17 @@
                 src="~@/assets/copr-logo-may.png" >
             </a>
           </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="https://peckshield.com/"
+              target="_blank"
+            >
+              <img
+                class="logo ps"
+                src="~@/assets/copr_logo_ps.png" >
+            </a>
+          </div>
         </div>
         <div class="corp-row row-20">
           <div
@@ -405,7 +416,7 @@ export default {
     display: flex;
     width: 100%;
     background: #1A1A1A;
-    height: 300px;
+    height: 260px;
     border-bottom: 1px solid #3D3D3D;
     .corperator-container {
       width: 1200px;

@@ -32,7 +32,7 @@ export default function () {
     enabled_features: [
       'adaptive_logo'
     ],
-    custom_css_url: 'custom_v1.css',
+    custom_css_url: 'kline.css',
     studies_access: {
       type: 'black',
       tools: []
