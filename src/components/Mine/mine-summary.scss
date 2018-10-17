@@ -16,6 +16,10 @@
         min-width: 260px;
         box-sizing: border-box;
 
+        &.grow {
+          flex-grow: 1;
+        }
+
         .box__row {
             display: flex;
 
