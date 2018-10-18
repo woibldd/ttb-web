@@ -130,7 +130,7 @@ export default{
     en: {
       name: 'IX',
       full_name: 'IX Token',
-      brief_info: 'IX（IX Token）is the first bourse support Bitcoin as the proof of stake all over the world， the owner of IX are entitled to the right such as distribute the profit, community governance and so on.',
+      brief_info: 'IX (IX Token) is the first Exchange that support Bitcoin as the proof of stake globally. The owners of IX token are entitled the distribution of profits, the rights to community governance & decision making.',
       issue_time: '2018-10-18',
       issue_all: '2000 million', // 发行总量
       issue_circulation: '--', // 流通总量
