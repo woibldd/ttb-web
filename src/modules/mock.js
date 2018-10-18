@@ -28,9 +28,9 @@ export const filter = {
 export const list = [{
   url: /market\/ix/,
   res () {
-    return ok({ amount: 11111,
-      locked: 2222,
-      markert_value: 3333 })
+    return ok({ amount: 11111.11111,
+      locked: 2222.11111,
+      markert_value: 3333.11111999 })
   }
 }, {
   url: /bonus\/total/,
