@@ -15,7 +15,7 @@
     <p class="fl grid-increase">{{ $t('increase') }} <i :class="{'color-up': delta > 0, 'color-down': delta < 0}">{{ delta > 0 ? '+' : '' }}{{ delta }}%</i></p>
     <p class="fl grid-high">{{ $t('secure_level_2') }} {{ pairTick.highest_24h | fixed(2) }}</p>
     <p class="fl grid-low">{{ $t('secure_level_0') }} {{ pairTick.lowest_24h | fixed(2) }}</p>
-    <p class="fl grid-tf-amount">24H {{ $t('vol') }} {{ pairTick.volume_24h | fixed(2) }} BTC</p>
+    <p class="fl grid-tf-amount">24H {{ $t('vol') }} {{ pairTick.volume_24h | fixed(2) }} {{ state.pro.product_name }}</p>
   </div>
 </template>
 
