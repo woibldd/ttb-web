@@ -20,7 +20,7 @@
       </div>
     </div>
     <!-- two -->
-    <div class="mine-ix-box box-margin-left">
+    <div class="mine-ix-box box-margin-left grow">
       <div class="box__row">
         <div class="fee__pie">
           <p class="cm-tit">
@@ -66,7 +66,7 @@
       <div class="box__row">
         <div class="fee__pie">
           <p class="cm-tit">
-            {{ $t('keep_500_btc_reward_yesterday') }}
+            {{ $t('mine_bonus_rate') }}
           </p>
           <p class="cm-bt">
             {{ allBonusData.btc_yesterday | round(4) }}
@@ -87,7 +87,7 @@
       </div>
     </div>
     <!-- four -->
-    <div class="mine-ix-box box-margin-left">
+    <div class="mine-ix-box box-margin-left grow">
       <div class="box__row">
         <div class="fee__pie">
           <p class="cm-tit">
