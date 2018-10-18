@@ -1,56 +1,6 @@
 <template>
   <div class="mine-summary-container">
-    <div class="mine-process-wrapper ind_jd">
-      <div class="mine-process">
-        <div
-          class="process-line"
-          :style="{ 'width': rates+'%'}">
-          <div class="process-now-info">
-            <div class="line-tip-text">
-              <span>{{ isPersonalShow ? $t('personal')+ $t('mine_progress') : $t('mine_progress') }}:</span>{{ rates | fixed(2) }}%
-            </div>
-            <p
-              class="line-tip"
-              :style="{'left': 'calc('+mineSummary.rate + '% - 50px)'}"/>
-          </div>
-        </div>
-        <em class="cursor cursor_left">0 IX</em>
-        <em class="cursor cursor_right">{{ isPersonalShow ? mineMy.max_amount : mineSummary.max_amount | fixed(2) | thousand }} IX</em>
-      </div>
-      <!-- line end -->
-      <div class="process-mine-left-info">
-        <div class="row time_range">{{ mineSummary.range }}</div>
-        <div class="detail--wrapper">
-          <div class="process-mine-left-all">
-            <div class="all-left-info">
-              <div class="left__col">
-                <span class="text mr-rem-10">{{ $t('mine_total') }} : </span>
-                <span>{{ mineSummary.max_amount | fixed(2) | thousand }}<em class="unit">IX</em></span>
-              </div>
-              <div class="left__col">
-                <span class="text mr-rem-10">{{ $t('mine_mined') }} : </span>
-                <span>{{ mineSummary.amount | fixed(2) | thousand }}<em class="unit">IX</em></span>
-              </div>
-              <div class="left__col">
-                <span class="text mr-rem-10">{{ $t('mine_remain') }} : </span>
-                {{ mineSummary.remain | fixed(2) | thousand }}<em class="unit">IX</em>
-              </div>
-            </div>
-          </div>
-          <div
-            class="process-mine-left-my"
-            v-if="hasMineMy">
-            <div class="left__col"><span class="text mr-rem-10">{{ $t('mine_my_total') }}: </span>{{ mineMy.max_amount | fixed(2) | thousand }}<em class="unit">IX</em></div>
-            <div class="left__col"><span class="text mr-rem-10">{{ $t('mine_my_remain') }}: </span>{{ ( mineMy.max_amount - mineMy.amount ) | fixed(2) | thousand }}<em class="unit">IX</em></div>
-            <div class="left__col"><span class="text mr-rem-10">{{ $t('mine_my_reduce') }}: </span>{{ ( mineMy.total ) | fixed(2) | thousand }}<em class="unit">IX</em></div>
-            <!-- <div class="left__col">
-              <span class="text mr-rem-10">{{ $t('mine_my_reduce') }} : </span>
-              {{ mineMy.total | fixed(2) | thousand }}<em class="unit">IX</em>
-            </div> -->
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- one -->
     <div
       v-if="showMiddle"
       class="mine-info-yesterday ind_jd">
@@ -74,35 +24,93 @@
       </div>
     </div>
 
-    <div
-      class="mine-other-info">
+    <!-- two -->
+    <div class="mine-info-yesterday">
       <div class="mine-info-row">
         <div class="row__label">
           {{ $t('mine_bonus_today') }}
         </div>
         <div class="row__value">
-          {{ bonusMine.today | round(8) }}
-          <span class="unit">USDT</span>
+          {{ allBonusData.btc_today | round(4) }}
+          <span class="unit">BTC</span>
         </div>
       </div>
       <div class="mine-info-row">
-        <div class="row__label">
-          {{ $t('mine_bonus_rate') }}
-        </div>
-        <div class="row__value">
-          {{ bonusMine.rate | round(8) }}<span class="unit">USDT</span>
-        </div>
+        <p class="row__label">
+          {{ $t('keep_ix_reward_yesterday') }}
+          <!-- <span class="fee-tips-wrapper mr-5">
+              <icon name="mine-fee-tips"/>
+              <div class="fee-tips">
+                <span v-html="$t('keep_ix_tips', {time: '11', link: '..'})"/>
+                <div class="tips-arrow"/>
+              </div>
+            </span> -->
+        </p>
+        <p class="row__value">
+          {{ allBonusData.ix_yesterday | round(4) }}
+          <span class="unit">BTC</span>
+        </p>
       </div>
       <div class="mine-info-row">
-        <div class="row__label">
+        <p class="row__label">
           {{ $t('mine_bonus_yestoday') }}
-        </div>
-        <div class="row__value">
-          {{ bonusMine.yesterday | round(8) }}
-          <span class="unit">USDT</span>
-        </div>
+        </p>
+        <p class="row__value">
+          {{ allBonusData.btc_yesterday | round(4) }}
+          <span class="unit">BTC</span>
+        </p>
       </div>
-
+    </div>
+    <!-- three -->
+    <div class="mine-info-yesterday">
+      <div class="mine-info-row">
+        <p class="row__label">
+          {{ $t('mine_bonus_rate') }}
+        </p>
+        <p class="row__value">
+          {{ allBonusData.btc_yesterday | round(4) }}
+          <span class="unit">BTC</span>
+        </p>
+      </div>
+      <div class="mine-info-row">
+        <p class="row__label">
+          {{ $t('keep_million_ix_reward_yesterday') }}
+        </p>
+        <p class="row__value">
+          {{ allBonusData.ix_rate | round(4) }}
+          <span class="unit">BTC</span>
+        </p>
+      </div>
+    </div>
+    <!-- four -->
+    <div class="mine-info-yesterday">
+      <div class="mine-info-row">
+        <p class="row__label">
+          {{ $t('ix_second_trading_amount') }}
+        </p>
+        <p class="row__value">
+          {{ ixMarketData.amount | round(4) }}
+          <span class="unit">IX</span>
+        </p>
+      </div>
+      <div class="mine-info-row">
+        <p class="row__label">
+          {{ $t('ix_lock_amount') }}
+        </p>
+        <p class="row__value">
+          {{ ixMarketData.locked | round(4) }}
+          <span class="unit">IX</span>
+        </p>
+      </div>
+      <div class="mine-info-row">
+        <p class="row__label">
+          {{ $t('ix_trading_amout') }}
+        </p>
+        <p class="row__value">
+          {{ ixMarketData.markert_value | round(4) }}
+          <span class="unit">BTC</span>
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -130,6 +138,8 @@ export default {
         exchangeMine: 0,
         inviteMine: 0
       },
+      ixMarketData: {},
+      allBonusData: {},
       bonusMine: {
         yesterday: 0,
         today: 0,
@@ -189,6 +199,20 @@ export default {
         this.bonusMine = resc.data
       }
     },
+    // 分红总产出
+    async getAllBonusInfo () {
+      let res = await service.getAllBonusInfo()
+      if (!res.code && !isEmpty(res.data)) {
+        this.allBonusData = Object.assign({}, res.data)
+      }
+    },
+    async getIXMarketData () {
+      // 第四个框
+      let res = await service.getIXMarket()
+      if (!res.code && !isEmpty(res.data)) {
+        this.ixMarketData = Object.assign({}, res.data)
+      }
+    },
     loop () {
       this.timer = setInterval(this.fetch, 3e4)
     },
@@ -206,6 +230,8 @@ export default {
     this.fetch()
     this.loop()
     this.getYestoryData()
+    this.getIXMarketData()
+    this.getAllBonusInfo()
   }
 }
 </script>
