@@ -629,7 +629,7 @@
   "mining_output": "Mining Output(IX)",
   "requirements": "Participation Requirements",
   "req_a": "Participate condition: locked position at least 20000IX;",
-  "req_b": "Standard mining speed: beginning value is %{power} IX/H, adjustment as the condition of mining, will take affect next integral point;",
+  "req_b": "Standard mining speed: beginning value is %{power} IX/H. adjustment as the condition of mining, will take affect next integral point;",
   "req_c": "Locked position & unlock:",
   "req_c_a": "Locked position: any time, after locked position, the upper limit of mining speed will take affect at the next integral point;",
   "req_c_b": "Unlock position: any time, after unlock position, the upper limit of mining speed will take affect at the next integral point;",

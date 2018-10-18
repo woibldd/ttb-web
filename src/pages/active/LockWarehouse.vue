@@ -15,7 +15,7 @@
             class="m-middle"
             v-if="isLogin">
             <span class="top-s-tit">{{ $t('ystd_trad') }}</span>
-            <p class="top-s-txt top-txt-blue">{{ myTotal.amount_yesterday | round(2) | thousand }}<em>IX</em></p>
+            <p class="top-s-txt top-txt-blue mar-bot">{{ myTotal.amount_yesterday | round(2) | thousand }}<em>IX</em></p>
             <span class="top-s-tit">{{ $t('td_trad_amount') }}</span>
             <p class="top-s-txt top-txt-blue">{{ myTotal.amount_today | round(2) | thousand }}<em>IX</em></p>
             <!-- <span class="top-s-tit">{{ $t('td_trad') }}</span>
@@ -142,6 +142,7 @@
             @click="setMax('unlock')"
             class="num-max">{{ $t('maximum') }}</a>
         </div>
+        <div class="current-lock-ix"/>
         <v-btn
           class="oper-but"
           height="70"
@@ -453,7 +454,8 @@ export default {
     background: #1A1A1A;
   }
   .current-lock-ix {
-      color: #446683
+      color: #446683;
+      height: 20px;
   }
   .banner{
     height: 500px;

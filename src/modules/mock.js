@@ -72,7 +72,7 @@ export const list = [
     res () {
       return ok({ amount: 11111,
         locked: 2222,
-        markert_value: 3333 })
+        market_value: 3333 })
     }
   }, {
     url: /bonus\/total/,
