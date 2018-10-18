@@ -486,6 +486,7 @@
   "ystd_trad": "전일 채굴 수익",
   "td_trad": "금일 채굴 수익",
   "hash_rate": "나의 헤쉬레이트",
+  "hash_rate_remain": "현재 시간 채굴 가능량",
   "td_trad_amount": "금일 채굴 수량",
   "cum_trad_amount": "누계 채굴 수량",
   "cum_trad_revenue": "누계 채굴 수익",
