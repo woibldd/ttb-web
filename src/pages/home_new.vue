@@ -65,7 +65,25 @@
     </div>
     <div class="corperator">
       <div class="corperator-container">
-        <div class="corp-row row-60">
+        <div
+          class="corp-row row-60 mb-60"
+          v-if="isKorean">
+          <div
+            class="corp-title">
+            협력업체
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="https://www.bgbquant.com/"
+              target="_blank">
+              <img
+                class="logo hx"
+                src="~@/assets/copr-logo-bgbquant.png" >
+            </a>
+          </div>
+        </div>
+        <div class="corp-row row-60 mb-60">
           <div
             class="corp-title"
             v-t="'footer_investors'"/>
@@ -184,6 +202,9 @@ export default {
   computed: {
     announcementLink () {
       return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
+    },
+    isKorean () {
+      return state.locale === 'ko'
     }
   },
   watch: {
@@ -416,14 +437,19 @@ export default {
     display: flex;
     width: 100%;
     background: #1A1A1A;
-    height: 260px;
     border-bottom: 1px solid #3D3D3D;
     .corperator-container {
       width: 1200px;
-      margin: 60px auto;
+      padding-top: 60px;
+      padding-bottom: 60px;
+      margin: 0px auto;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+
+      .mb-60 {
+          margin-bottom: 60px;
+      }
 
       .corp-row {
         display: flex;
