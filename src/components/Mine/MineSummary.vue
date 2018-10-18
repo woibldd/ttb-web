@@ -35,7 +35,7 @@
       <div class="box__row">
         <div
           class="fee__pie"
-          v-if="allBonusData.btc_yesterday">
+          v-if="allBonusData.ix_yesterday != 0">
           <p class="cm-tit">
             {{ $t('keep_ix_reward_yesterday') }}
           </p>
@@ -71,11 +71,13 @@
       <div class="box__row">
         <div
           class="fee__pie"
-          v-if="allBonusData.ix_rate">
+          v-if="allBonusData.ix_rate != '0'">
           <p class="cm-tit">
             {{ $t('keep_million_ix_reward_yesterday') }}
           </p>
-          <p class="cm-bt">
+          <p
+            class="cm-bt"
+            v-if="allBonusData.ix_rate">
             {{ allBonusData.ix_rate | round(4) }}
             <span class="unit">USDT</span>
           </p>
