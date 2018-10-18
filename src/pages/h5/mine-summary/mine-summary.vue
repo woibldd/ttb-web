@@ -65,7 +65,7 @@
     <div class="mine-info-yesterday">
       <div class="mine-info-row">
         <p class="row__label">
-          {{ $t('keep_500_btc_reward_yesterday') }}
+          {{ $t('mine_bonus_rate') }}
         </p>
         <p class="row__value">
           {{ allBonusData.btc_yesterday | round(4) }}
