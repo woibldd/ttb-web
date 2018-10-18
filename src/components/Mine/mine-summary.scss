@@ -2,11 +2,72 @@
     margin: 0 60px;
     margin-top: 40px;
     display: flex;
+    justify-content: space-between;
 
-    .ind_jd {
+    .box-margin-left {
+        margin-left: 1.5%
+    }
+
+    .mine-ix-box {
+        padding-top: 38px;
+        padding-left: 20px;
         border: 1px solid #cbe6fd;
         margin-bottom: 59px;
-        padding: 75px 30px 30px 30px;
+        min-width: 260px;
+        box-sizing: border-box;
+
+        &.grow {
+          flex-grow: 1;
+        }
+
+        .box__row {
+            display: flex;
+
+            .fee__pie {
+                // min-width: 180px;
+                margin-right: 30px;
+            }
+
+            // .fee-tips-wrapper {
+            //     position: relative;
+
+            //     &:hover {
+            //         .fee-tips {
+            //             opacity: 1;
+            //         }
+            //     }
+            // }
+            // .fee-tips {
+            //     display: flex;
+            //     opacity: 0;
+            //     position: absolute;
+            //     top: -37px;
+            //     left: -33px;
+            //     box-sizing: border-box;
+            //     min-width:190px;
+            //     height:30px;
+            //     background:rgba(203,230,253,1);
+            //     border-radius:15px;
+            //     color: #000000;
+            //     align-items: center;
+            //     justify-content: space-around;
+            //     font-size: 14px;
+
+            //     .tips-arrow {
+            //         position: absolute;
+            //         width: 10px;
+            //         height: 10px;
+            //         background:rgba(203,230,253,1);
+            //         bottom: -4px;
+            //         left: 35px;
+            //         transform: rotateZ(45deg);
+            //     }
+            // }
+        }
+    }
+
+    // 下面是之前的样式,懒得改了
+    .mine-ix-box {
         .unit {
           color: $primary;
           margin-left: 5px;
@@ -20,14 +81,14 @@
           height: 4px;
           border-radius: 4px;
           position: relative;
-      
+
           .cursor {
             position: absolute;
             color: #6d869c;
             font-size: 14px;
             line-height: 34px;
             bottom: -34px;
-      
+
             &.cursor_left {
               left: 0;
             }
@@ -43,7 +104,7 @@
             background: #c9a96e;
             width: 0px;
             transition: width 2s;
-      
+
             .line {
               display: block;
               border-left: 5px solid transparent;
@@ -78,39 +139,19 @@
             font-size: 18px;
           }
         }
-    }
-      
-    .ind_left {
-        flex: 1;
 
-        .left__col {
-            display: flex;
-            flex-direction: column;
-            min-width: 25%;
-        }
-
-        .personal {
-          min-width: 20%;
-        }
-    }
-    
-    .jd_middle, .jd_right{
-        margin-left: 1.5%;
-        color: #CBE6FD;
-        padding: 0 20px;
-        min-width: 240px;
-        padding-top: 30px;
         .cm-tit,.cm-bst{
             color: #CBE6FD;
             font-size: 14px;
-            line-height: 30px;
+            line-height: 16px;
+            margin-bottom: 4px;
             max-width: 260px;
-            word-break: break-all;
+            word-break: keep-all;
             word-wrap: break-word;
         }
         .cm-bt{
             font-size: 30px;
-            margin-bottom: 24px;
+            // margin-bottom: 17px;
             color: #C9A96E;
             span{
             font-size: 20px;
@@ -123,21 +164,8 @@
             color: #C9A96E;
             font-size: 16px;
             line-height: 18px;
+            margin-top: 16px;
+            margin-bottom: 16px;
         }
     }
 }
-// @media screen and (max-width: 768px) {
-//     .mine-summary-container {
-//         flex-direction: column;
-//     }
-//     .jd_btxt {
-//         flex-direction: column;
-//     }
-//     .ind_jd,
-//     .ind_left,
-//     .jd_middle,
-//     .jd_right {
-//         display: block;
-//         width: 100%;
-//     }
-//   }

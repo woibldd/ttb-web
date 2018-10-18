@@ -630,11 +630,11 @@ export default {
   }
   .condition{
     color: #CBE6FD;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 14px;
+    line-height: 20px;
     padding-bottom: 130px;
     .cdt-title{
-      font-size: 24px;
+      font-size: 20px;
       line-height: 38px;
       margin-bottom: 17px;
     }
@@ -671,6 +671,7 @@ export default {
     font-size: 18px;
     color: #ffffff;
     appearance: none;
+    -moz-appearance:textfield;
 
     &::placeholder {
       // color: #446683;
