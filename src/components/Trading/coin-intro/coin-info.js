@@ -118,7 +118,7 @@ export default{
     'zh-CN': {
       name: 'IX',
       full_name: 'IX Token',
-      brief_info: 'IX（IX Token）是IX交易平台发行的通证，是交易平台自身所有权益的代表。IX的发行是依据“交易即挖矿”的原则逐步释放，上限为200亿，永不增发。IX分配：私募2%、平台启动6%、战略伙伴5%、创始团队20%、基金12%、社区反馈45%、安全保障基金10%。IX作为IX.com的权益证明，用户交易产生的手续费将100%以IX形式返还，除此之外用户还可以通过币币交易的形式购买并持有IX，持有者享有平台收入分配、参与重大决策及社区管理的权利。',
+      brief_info: 'IX（IX Token）是全球首家支持比特币作为权益证明的交易所交易所IX.com的平台通的平台通证，IX持有者可享有交易所分红、社区治理等多重权益。',
       issue_time: '2018-10-18',
       issue_all: '200亿', // 发行总量
       issue_circulation: '--', // 流通总量
@@ -130,7 +130,7 @@ export default{
     en: {
       name: 'IX',
       full_name: 'IX Token',
-      brief_info: 'IX (IX Token) is IX trade platform’s pass certificate, is the representative of trade platform’s ownership equity itself. Launch IX is according to the rule “Trade is mining” release step to step, upper limit is 20 billion, never addition issue. IX’s allocation : private placement 2%, platform boot 6%, Strategic partner 5%, Founding team 20%, Fund 12%, Community feedback 45%, Security fund 10%, As the proof of stake, the fee during trading will return as IX 100%, beyond that, users can buy and own IX by trading, the owner enjoy the right: participate the income, take part in great decision and community management.',
+      brief_info: 'IX（IX Token）is the first bourse support Bitcoin as the proof of stake all over the world， the owner of IX are entitled to the right such as distribute the profit, community governance and so on.',
       issue_time: '2018-10-18',
       issue_all: '2000 million', // 发行总量
       issue_circulation: '--', // 流通总量
@@ -142,7 +142,7 @@ export default{
     ko: {
       name: 'IX',
       full_name: 'IX Token',
-      brief_info: 'IX（IX Token)는 IX 거래플랫폼 발행의 통과하는 문이다.거래플랫폼은 자신의 모든 권익을 대표할수 있다.IX의 발행은 “거래및채굴”의 원칙에 근거하여 점차 지급될것입니다.상한선은 200억입니다.영원히 오르지 않을것입니다. IX분배:사적으로2% 공모를 한다,플랫폼은 6%로 시작한다,전략파트너는 5%,창시팀원은 20%,자금 12%,지역사회는 45%를 반환한다,안전보장자금10% IX.COM의권익을 증명하는 IX로써 고객거래의 수수료가 100% IX의 형식으로 되돌아 갈것이다.이외에 고객은 코인거래를 통하여 IX를 사거나 가질구 있습니다.IX를 보유하고 있으신 고객분은 플랫폼 배당분배 수입에 합계될뿐만 아니라 중대한 결책에 참여하는것과 지역관리를 하는 권력을 가지게 됩니다.',
+      brief_info: 'IX（IX Token)은 세계최초비트코인 권익증명 거래소를지원하는 ix.com플랫폼을 통과하는 문이다.IX를 보유한 분은 거래소의 배당,지역사회를 관리하는 등등의 여러가지 권리를 가지게 될것입니다.',
       issue_time: '2018-10-18',
       issue_all: '200억', // 发行总量
       issue_circulation: '--', // 流通总量

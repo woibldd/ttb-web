@@ -145,21 +145,21 @@ export default {
         today: 0,
         rate: 0
       },
-      mineMy: {},
+      // mineMy: {},
       timer: 0,
-      showMiddle: false,
-      isPersonalShow: false
+      showMiddle: false
+      // isPersonalShow: false
     }
   },
   computed: {
     hasMineSummary () {
       return !isEmpty(this.mineSummary)
     },
-    hasMineMy () {
-      return !isEmpty(this.mineMy)
-    },
+    // hasMineMy () {
+    //   return !isEmpty(this.mineMy)
+    // },
     rates () {
-      return this.isPersonalShow ? this.mineMy.rate : this.mineSummary.rate
+      return this.mineSummary.rate
     }
   },
   methods: {
@@ -168,17 +168,17 @@ export default {
       if (!res.code && !isEmpty(res.data)) {
         this.mineSummary = this.fixData(res.data)
       }
-      if (this.state.userInfo) {
-        let resMy = await service.getPersonalTotal()
-        if (!resMy.code && !isEmpty(resMy.data)) {
-          this.mineMy = resMy.data
-          this.mineMy.rate = this.$big(this.mineMy.amount).div(this.mineMy.max_amount).times(100).toString()
-          // 目前没有个人日挖矿 所以当个人超过100%时，展示全部挖矿进度
-          if (this.mineMy.rate <= 100) {
-            this.isPersonalShow = true
-          }
-        }
-      }
+      // if (this.state.userInfo) {
+      //   let resMy = await service.getPersonalTotal()
+      //   if (!resMy.code && !isEmpty(resMy.data)) {
+      //     this.mineMy = resMy.data
+      //     this.mineMy.rate = this.$big(this.mineMy.amount).div(this.mineMy.max_amount).times(100).toString()
+      //     // 目前没有个人日挖矿 所以当个人超过100%时，展示全部挖矿进度
+      //     if (this.mineMy.rate <= 100) {
+      //       this.isPersonalShow = true
+      //     }
+      //   }
+      // }
     },
     async getYestoryData () {
       let [res, resp, resc] = await Promise.all([service.getMineTotal({offset: -1}), service.getInviteMineTotal({offset: -1}), service.getBonusMineTotal()])
