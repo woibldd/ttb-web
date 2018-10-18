@@ -303,7 +303,7 @@ export default {
   mixins: [ pairfix, responsiveScale ],
   data () {
     return {
-      pairs: ['BTC_USDT', 'ETH_USDT', 'ETH_BTC', 'EOS_USDT', 'BTC_IX', 'USDT_IX'],
+      pairs: ['BTC_USDT', 'ETH_USDT', 'ETH_BTC', 'EOS_USDT', 'IX_BTC', 'IX_USDT'],
       sockets: {},
       tickers: {
         BTC_USDT: [],

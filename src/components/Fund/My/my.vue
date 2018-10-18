@@ -59,7 +59,8 @@ import service from '@/modules/service'
 import {state, actions} from '@/modules/store'
 const ExchangePairs = {
   'BTC': 'BTC_USDT',
-  'ETH': 'ETH_USDT'
+  'ETH': 'ETH_USDT',
+  'IX': 'IX_USDT'
 }
 
 /**
