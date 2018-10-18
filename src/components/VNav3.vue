@@ -41,7 +41,7 @@
           <router-link
             :to="{name: 'LockWarehouse'}"
             class="nav_link ml-30"
-            target="_blank">{{ $t('mined') }}
+            target="_blank">{{ $t('mining') }}
           </router-link>
 
           <router-link

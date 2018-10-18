@@ -68,6 +68,11 @@
           :to="{name: 'trading'}"
         >{{ $t('trading') }}</router-link>
         <router-link
+          :to="{name: 'LockWarehouse'}"
+          class="link"
+          target="_blank">{{ $t('mining') }}
+        </router-link>
+        <router-link
           :to="{name: 'profile'}"
           @click="toggleMenu"
           class="link">{{ $t('profile_personal_center') }}</router-link>

@@ -5,7 +5,9 @@
         is-home="true"
       />
     </div>
-    <div class="banner"/>
+    <div class="banner">
+      <span class="title">IX {{ $t('mining') }}</span>
+    </div>
     <div class="c-box">
       <div class="top-box">
         <div class="top-cen">
@@ -105,8 +107,8 @@
           fontsize="16"
           :loading="lock_loading"
           @click="doLock"
-          :disabled="lock_disable"
-          :label="$t('locked')"
+          :disabled="lock_disable && isLogin"
+          :label="isLogin ? $t('locked') : $t('lock_login')"
         />
       </div>
       <div class="oper-cen">
@@ -141,8 +143,8 @@
           fontsize="16"
           :loading="unlock_loading"
           @click="doUnLock"
-          :disabled="unlock_disable"
-          :label="$t('unlock')"
+          :disabled="unlock_disable && isLogin"
+          :label="isLogin ? $t('unlock') : $t('unlock_login')"
         />
       </div>
       <div class="oper-cen">
@@ -194,13 +196,17 @@
     <div class="c-box condition">
       <p class="cdt-title">{{ $t('requirements') }}</p>
       <ul>
-        <li><i>1.</i>{{ $t('req_a', {power: basePower.power}) }}<br >{{ $t('req_a_a') }}</li>
-        <li><i>2.</i>{{ $t('req_b') }}</li>
-        <li><i>3.</i>{{ $t('req_c') }}</li>
+        <li><i>1.</i>{{ $t('req_a') }}</li>
+        <li><i>2.</i>{{ $t('req_b', {power: basePower.power}) }}</li>
+        <li><i>3.</i>{{ $t('req_c') }} <br >
+          {{ $t('req_c_a') }} <br>
+          {{ $t('req_c_b') }} <br>
+          {{ $t('req_c_c') }} <br>
+        </li>
         <li><i>4.</i>{{ $t('req_d') }}</li>
         <li><i>5.</i>{{ $t('req_e') }}</li>
         <li><i>6.</i>{{ $t('req_f') }}</li>
-        <li><i>7.</i>{{ $t('req_g') }}</li>
+        <li>{{ $t('req_g') }}</li>
       </ul>
     </div>
   </div>
@@ -269,6 +275,15 @@ export default {
   },
   methods: {
     async doLock () {
+      if (!this.isLogin) {
+        actions.setLoginBack({
+          fullPath: this.$route.fullPath
+        })
+        this.$router.push({
+          name: 'login'
+        })
+        return
+      }
       let amount = this.lock_amount
       this.lock_loading = true
       let res = await service.balanceLock({
@@ -289,6 +304,15 @@ export default {
       this.blur(type)
     },
     async doUnLock () {
+      if (!this.isLogin) {
+        actions.setLoginBack({
+          fullPath: this.$route.fullPath
+        })
+        this.$router.push({
+          name: 'login'
+        })
+        return
+      }
       let amount = this.unlock_amount
       this.unlock_loading = true
       let res = await service.balanceUnLock({
@@ -421,11 +445,20 @@ export default {
     background: #1A1A1A;
   }
   .banner{
-    height: 600px;
+    height: 500px;
     width: 100%;
     background-image: url(/static/active/LockWarehouse/banner.jpg);
     background-repeat: no-repeat;
     background-position: center center;
+    .title {
+      font-size: 40px;
+      color: #fff;
+      width: 100%;
+      padding-top: 350px;
+      display: block;
+      font-weight: bold;
+      text-align: center;
+    }
   }
   .c-box{
     width: 1200px;
@@ -798,14 +831,16 @@ export default {
   .lang-en {
     .top-s-tit{
       font-size: 13px !important;
-      line-height: 24px;
+      line-height: 24px !important;
+      word-break: break-word;
     }
     .top-tit{
       font-size: 13px !important;
-      line-height: 24px;
+      line-height: 24px !important;
+      word-break: break-word;
     }
     .condition{
-      font-size: 14px;
+      font-size: 14px !important;
     }
   }
   input{
