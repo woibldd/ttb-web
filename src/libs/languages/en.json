@@ -629,7 +629,7 @@
   "mining_output": "Mining Output(IX)",
   "requirements": "Participation Requirements",
   "req_a": "Participate condition: locked position at least 20000IX;",
-  "req_b": "Standard mining speed: beginning value is %{power} IX/H, adjustment as the condition of mining.",
+  "req_b": "Standard mining speed: beginning value is %{power} IX/H, adjustment as the condition of mining, will take affect next integral point；.",
   "req_c": "Locked position & unlock:",
   "req_c_a": "Locked position: any time, after locked position, the upper limit of mining speed will take affect at the next integral point;",
   "req_c_b": "Unlock position: any time, after unlock position, the upper limit of mining speed will take affect at the next integral point;",
@@ -678,5 +678,6 @@
   "totally_mine_total": "Community accumulate mining amount",
   "lock_login": "Sign in",
   "unlock_login": "Sign in",
-  "robot_use_tutorial": "Robot Guidebook"
+  "robot_use_tutorial": "Robot Guidebook",
+  "current_lock_ix": "Current locked amount:"
 }

@@ -14,8 +14,10 @@
           <div
             class="m-middle"
             v-if="isLogin">
-            <span class="top-tit">{{ $t('ystd_trad') }}</span>
-            <p class="top-txt top-txt-blue">{{ myTotal.amount_yesterday | round(2) | thousand }}<em>IX</em></p>
+            <span class="top-s-tit">{{ $t('ystd_trad') }}</span>
+            <p class="top-s-txt top-txt-blue">{{ myTotal.amount_yesterday | round(2) | thousand }}<em>IX</em></p>
+            <span class="top-s-tit">{{ $t('td_trad_amount') }}</span>
+            <p class="top-s-txt top-txt-blue">{{ myTotal.amount_today | round(2) | thousand }}<em>IX</em></p>
             <!-- <span class="top-s-tit">{{ $t('td_trad') }}</span>
             <p class="top-s-txt top-txt-yellow">1BTC≈￥49999.98189</p> -->
           </div>
@@ -48,8 +50,8 @@
           <div
             class="m-middle"
             v-if="isLogin">
-            <span class="top-tit">{{ $t('td_trad_amount') }}</span>
-            <p class="top-txt top-txt-blue">{{ myTotal.amount_today | round(2) | thousand }}<em>IX</em></p>
+            <span class="top-tit">{{ $t('current_base_power') }}</span>
+            <p class="top-txt top-txt-blue">{{ basePower.power | round(2) }}<em>IX/H</em></p>
           </div>
           <div
             class="m-middle"
@@ -100,6 +102,9 @@
           <a
             @click="setMax('lock')"
             class="num-max">{{ $t('maximum') }}</a>
+        </div>
+        <div class="current-lock-ix">
+          {{ $t('current_lock_ix') }} {{ balance.locked }}IX
         </div>
         <v-btn
           class="oper-but"
@@ -247,7 +252,7 @@ export default {
       // 挖矿记录
       list: [],
       basePower: {
-        power: 200
+        power: 100
       }
 
     }
@@ -443,6 +448,9 @@ export default {
   }
   .header{
     background: #1A1A1A;
+  }
+  .current-lock-ix {
+      color: #446683
   }
   .banner{
     height: 500px;
