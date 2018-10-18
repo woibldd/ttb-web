@@ -575,27 +575,27 @@ const service = {
 }
 
 export async function fetch (url, body, options, method = 'post') {
-  let mock = false
-  mock = await Mock()
-  if (mock && url.indexOf('quota.ix') > 0) {
-    const find = _.find(mock.list, item => {
-      return item.url && item.url.test(url)
-    })
-    if (find) {
-      const res = await find.res(body)
-      utils.log('Mock', url, body, res)
-      return res
-    }
-  } else {
-    if (mock.filter[url]) {
-      const find = _.find(mock.list, item => item.url && item.url.test(url))
-      if (find) {
-        const res = await find.res(body)
-        utils.log('Mock', url, body, res)
-        return res
-      }
-    }
-  }
+  // let mock = false
+  // mock = await Mock()
+  // if (mock && url.indexOf('quota.ix') > 0) {
+  //   const find = _.find(mock.list, item => {
+  //     return item.url && item.url.test(url)
+  //   })
+  //   if (find) {
+  //     const res = await find.res(body)
+  //     utils.log('Mock', url, body, res)
+  //     return res
+  //   }
+  // } else {
+  //   if (mock.filter[url]) {
+  //     const find = _.find(mock.list, item => item.url && item.url.test(url))
+  //     if (find) {
+  //       const res = await find.res(body)
+  //       utils.log('Mock', url, body, res)
+  //       return res
+  //     }
+  //   }
+  // }
   try {
     let res
     if (method === 'get') {

@@ -132,7 +132,19 @@ export default{
       full_name: 'IX Token',
       brief_info: 'IX (IX Token) is IX trade platform’s pass certificate, is the representative of trade platform’s ownership equity itself. Launch IX is according to the rule “Trade is mining” release step to step, upper limit is 20 billion, never addition issue. IX’s allocation : private placement 2%, platform boot 6%, Strategic partner 5%, Founding team 20%, Fund 12%, Community feedback 45%, Security fund 10%, As the proof of stake, the fee during trading will return as IX 100%, beyond that, users can buy and own IX by trading, the owner enjoy the right: participate the income, take part in great decision and community management.',
       issue_time: '2018-10-18',
-      issue_all: '200亿', // 发行总量
+      issue_all: '2000 million', // 发行总量
+      issue_circulation: '--', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://ix.com/docs/IX+WhitePaper.pdf', // 白皮书
+      office_website: 'https://ix.com/', // 官网
+      chain_info: 'https://etherscan.io/token/0xc7df14a8289efe7a2d3399387302fdf86e7adc4e' // 区块查询
+    },
+    ko: {
+      name: 'IX',
+      full_name: 'IX Token',
+      brief_info: 'IX（IX Token)는 IX 거래플랫폼 발행의 통과하는 문이다.거래플랫폼은 자신의 모든 권익을 대표할수 있다.IX의 발행은 “거래및채굴”의 원칙에 근거하여 점차 지급될것입니다.상한선은 200억입니다.영원히 오르지 않을것입니다. IX분배:사적으로2% 공모를 한다,플랫폼은 6%로 시작한다,전략파트너는 5%,창시팀원은 20%,자금 12%,지역사회는 45%를 반환한다,안전보장자금10% IX.COM의권익을 증명하는 IX로써 고객거래의 수수료가 100% IX의 형식으로 되돌아 갈것이다.이외에 고객은 코인거래를 통하여 IX를 사거나 가질구 있습니다.IX를 보유하고 있으신 고객분은 플랫폼 배당분배 수입에 합계될뿐만 아니라 중대한 결책에 참여하는것과 지역관리를 하는 권력을 가지게 됩니다.',
+      issue_time: '2018-10-18',
+      issue_all: '200억', // 发行总量
       issue_circulation: '--', // 流通总量
       token_price: '--', // 众筹价格
       whitepagger: 'https://ix.com/docs/IX+WhitePaper.pdf', // 白皮书

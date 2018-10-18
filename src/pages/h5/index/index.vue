@@ -74,7 +74,7 @@
           v-if="isKorean">
           <div
             class="corp-title">
-            협력업체
+            {{ $t('footer_copr') }}
           </div>
           <div class="corp-logo">
             <a

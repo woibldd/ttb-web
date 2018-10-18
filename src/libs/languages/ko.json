@@ -533,5 +533,20 @@
   "api_tips_one": "1. IX.COM에서 강 한 API를 제공 합니다. API를 통해 시세 조회, 자동 거래 등의 서비스를 이용 할 수 있습니다.API 문서를 통해 어떻게 사용하 는지 살펴보자。",
   "api_tips_two": "2. 매당 10팀이 제일 많아서API 키를 만들어 낸다",
   "api_tips_three": "3. API 키를 만든 후에는 키를 사용하기 전에 활성화해야합니다.（<a target=\"_blank\" href=\"%{link}\">정보보기</a>）；",
-  "api_tips_four": "4. 자산 손실이 발생 하지 않도록 당신의 API Key를 누설 하지 마세요."
+  "api_tips_four": "4. 자산 손실이 발생 하지 않도록 당신의 API Key를 누설 하지 마세요.",
+  "footer_investors": "투자기관",
+  "footer_partners": "협력매체",
+  "footer_copr": "합동자",
+  "keep_ix_reward_yesterday": "어제 BTC 가 수수료를 분배 했다：",
+  "keep_million_ix_reward_yesterday": "어제 1 백만 IX 분배 가 계속 되었다：",
+  "ix_second_trading_amount": "IX중고시장 유통량：",
+  "ix_lock_amount": "IX락업 총량：",
+  "ix_trading_amout": "IX유통시가：",
+  "lock_success": "已成功锁仓：",
+  "unlock_success": "已成功解锁：",
+  "ystd_trad_total": "지역사회 전일 채굴 총수익",
+  "today_trad_total": "지역사회 금일 채굴 총수익",
+  "current_base_power": "현재 헤쉬레이트",
+  "totally_mine_total": "지역사회 누계 채굴량"
+
 }
