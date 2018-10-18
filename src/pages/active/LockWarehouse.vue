@@ -35,7 +35,7 @@
             <span class="top-s-tit">{{ $t('hash_rate') }}</span>
             <p class="top-s-txt top-txt-blue mar-bot">{{ myPower.power | round(2) }}<em>IX/H</em></p>
             <span class="top-s-tit">{{ $t('hash_rate_remain') }}</span>
-            <p class="top-s-txt top-txt-blue">{{ (myPower.power - myPower.amount >= 0 ? (myPower.power - myPower.amount) : 0) | round(2) }}<em>IX</em></p>
+            <p class="top-s-txt top-txt-blue">{{ (myRemainTotal >= 0 ? myRemainTotal : 0) | round(2) }}<em>IX</em></p>
           </div>
           <div
             class="m-middle"
@@ -267,6 +267,9 @@ export default {
         return this.$big(this.balance.locked).div(MIN_AMOUNT_UNIT).round(0, this.C.ROUND_DOWN).times(MIN_AMOUNT_UNIT).toString()
       }
       return 0
+    },
+    myRemainTotal () {
+      return (this.myPower.power || 0) - (this.myPower.amount || 0)
     }
   },
   components: {
