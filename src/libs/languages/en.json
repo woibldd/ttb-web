@@ -669,7 +669,7 @@
   "keep_million_ix_reward_yesterday": "Yesterday's dividend with continuously holding Million IX:",
   "ix_second_trading_amount": "IX secondary market turnover:",
   "ix_lock_amount": "The gross of IX's locked position:",
-  "ix_trading_amout": "Circulation market value",
+  "ix_trading_amout": "Circulation market value:",
   "lock_success": "Successfully lock:",
   "unlock_success": "Unsuccessfully lock:",
   "ystd_trad_total": "Community mining yesterday’s total amount",
