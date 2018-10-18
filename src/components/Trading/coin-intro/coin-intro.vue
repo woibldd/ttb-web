@@ -60,7 +60,7 @@
             <a
               target="_blank"
               :href="coinInfo.chain_info"
-              class="row__value c-primary">{{ coinInfo.chain_info }}</a>
+              class="row__value c-primary line-1">{{ coinInfo.chain_info }}</a>
           </div>
         </div>
       </div>

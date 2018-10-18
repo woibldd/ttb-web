@@ -24,7 +24,9 @@
         v-html="$t('active_relay_next')"/>
     </div>
     <div class="cen_scr">
-      <div class="scr-cen scr-l">
+      <div
+        class="scr-cen scr-l"
+        v-if="pairs[0]">
         <p
           class="scr-txt"
           v-if="typeof relayTotal[pairs[0]] !== 'undefined'">{{ $t('active_relay_totally') }}<span>{{ relayTotal[pairs[0]] | round(4) }} </span>USDT</p>
@@ -45,8 +47,8 @@
               >
                 <li
                   :class="ticker.side"
-                  v-for="(ticker, $index) in tickers['BTC_USDT']"
-                  :key="'BTC_USDT'+ ticker.time + $index">
+                  v-for="(ticker, $index) in tickers[pairs[0]]"
+                  :key="pairs[0] + ticker.time + $index">
                   <p class="scr_l">{{ ticker.values[1] | fixed(4) }}</p>
                   <p class="scr_m">{{ $t(ticker.side === 'buy' ? 'order_side_buy':'order_side_sell') }}</p>
                   <p class="scr_r">{{ ticker.time | ts2date('Y-M-D H:m:s') }}</p>
@@ -57,9 +59,11 @@
         </div>
         <router-link
           class="join"
-          :to="{name: 'trading', params: {pair: 'BTC_USDT'}}">{{ $t('active_relay_join') }}</router-link>
+          :to="{name: 'trading', params: {pair: pairs[0]}}">{{ $t('active_relay_join') }}</router-link>
       </div>
-      <div class="scr-cen scr-m">
+      <div
+        class="scr-cen scr-m"
+        v-if="pairs[1]">
         <p
           class="scr-txt"
           v-if="typeof relayTotal[pairs[1]] !== 'undefined'">{{ $t('active_relay_totally') }}<span>{{ relayTotal[pairs[1]] | round(4) }} </span>USDT</p>
@@ -80,8 +84,8 @@
               >
                 <li
                   :class="ticker.side"
-                  v-for="(ticker, $index) in tickers['ETH_USDT']"
-                  :key="'ETH_USDT'+ ticker.time + $index">
+                  v-for="(ticker, $index) in tickers[pairs[1]]"
+                  :key="pairs[1] + ticker.time + $index">
                   <p class="scr_l">{{ ticker.values[1] | fixed(4) }}</p>
                   <p class="scr_m">{{ $t(ticker.side === 'buy' ? 'order_side_buy':'order_side_sell') }}</p>
                   <p class="scr_r">{{ ticker.time | ts2date('Y-M-D H:m:s') }}</p>
@@ -92,12 +96,14 @@
         </div>
         <router-link
           class="join"
-          :to="{name: 'trading', params: {pair: 'ETH_USDT'}}">{{ $t('active_relay_join') }}</router-link>
+          :to="{name: 'trading', params: {pair: pairs[1]}}">{{ $t('active_relay_join') }}</router-link>
       </div>
-      <div class="scr-cen scr-r">
+      <div
+        class="scr-cen scr-r"
+        v-if="pairs[2]">
         <p
           class="scr-txt"
-          v-if="typeof relayTotal[pairs[0]] !== 'undefined'">{{ $t('active_relay_totally') }}<span>{{ relayTotal[pairs[2]] | round(4) }} </span>USDT</p>
+          v-if="typeof relayTotal[pairs[2]] !== 'undefined'">{{ $t('active_relay_totally') }}<span>{{ relayTotal[pairs[2]] | round(4) }} </span>USDT</p>
         <div class="scr-box">
           <p class="scr-tit">{{ pairs[2] | pairfix }}</p>
           <div class="scr">
@@ -115,8 +121,8 @@
               >
                 <li
                   :class="ticker.side"
-                  v-for="(ticker, $index) in tickers['ETH_BTC']"
-                  :key="'ETH_BTC'+ ticker.time + $index">
+                  v-for="(ticker, $index) in tickers[pairs[2]]"
+                  :key="pairs[2] + ticker.time + $index">
                   <p class="scr_l">{{ ticker.values[1] | fixed(4) }}</p>
                   <p class="scr_m">{{ $t(ticker.side === 'buy' ? 'order_side_buy':'order_side_sell') }}</p>
                   <p class="scr_r">{{ ticker.time | ts2date('Y-M-D H:m:s') }}</p>
@@ -127,9 +133,11 @@
         </div>
         <router-link
           class="join"
-          :to="{name: 'trading', params: {pair: 'ETH_BTC'}}">{{ $t('active_relay_join') }}</router-link>
+          :to="{name: 'trading', params: {pair: pairs[2]}}">{{ $t('active_relay_join') }}</router-link>
       </div>
-      <div class="scr-cen scr-l">
+      <div
+        class="scr-cen scr-l"
+        v-if="pairs[3]">
         <p
           class="scr-txt"
           v-if="typeof relayTotal[pairs[3]] !== 'undefined'">{{ $t('active_relay_totally') }}<span>{{ relayTotal[pairs[3]] | round(4) }} </span>USDT</p>
@@ -150,8 +158,8 @@
               >
                 <li
                   :class="ticker.side"
-                  v-for="(ticker, $index) in tickers['EOS_USDT']"
-                  :key="'EOS_USDT'+ ticker.time + $index">
+                  v-for="(ticker, $index) in tickers[pairs[3]]"
+                  :key="pairs[3] + ticker.time + $index">
                   <p class="scr_l">{{ ticker.values[1] | fixed(4) }}</p>
                   <p class="scr_m">{{ $t(ticker.side === 'buy' ? 'order_side_buy':'order_side_sell') }}</p>
                   <p class="scr_r">{{ ticker.time | ts2date('Y-M-D H:m:s') }}</p>
@@ -162,7 +170,81 @@
         </div>
         <router-link
           class="join"
-          :to="{name: 'trading', params: {pair: 'EOS_USDT'}}">{{ $t('active_relay_join') }}</router-link>
+          :to="{name: 'trading', params: {pair: pairs[3]}}">{{ $t('active_relay_join') }}</router-link>
+      </div>
+      <div
+        class="scr-cen scr-m"
+        v-if="pairs[4]">
+        <p
+          class="scr-txt"
+          v-if="typeof relayTotal[pairs[4]] !== 'undefined'">{{ $t('active_relay_totally') }}<span>{{ relayTotal[pairs[4]] | round(4) }} </span>USDT</p>
+        <div class="scr-box">
+          <p class="scr-tit">{{ pairs[4] | pairfix }}</p>
+          <div class="scr">
+            <div class="scr-title">
+              <p class="scr_l">{{ $t('active_relay_amount') }}</p>
+              <p class="scr_m">{{ $t('active_relay_operator') }}</p>
+              <p class="scr_r">{{ $t('active_relay_time') }}</p>
+            </div>
+            <div
+              class="scr-cen"
+              id="box">
+              <ul
+                id="con1"
+                ref="con1"
+              >
+                <li
+                  :class="ticker.side"
+                  v-for="(ticker, $index) in tickers[pairs[4]]"
+                  :key="pairs[4] + ticker.time + $index">
+                  <p class="scr_l">{{ ticker.values[1] | fixed(4) }}</p>
+                  <p class="scr_m">{{ $t(ticker.side === 'buy' ? 'order_side_buy':'order_side_sell') }}</p>
+                  <p class="scr_r">{{ ticker.time | ts2date('Y-M-D H:m:s') }}</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <router-link
+          class="join"
+          :to="{name: 'trading', params: {pair: pairs[4]}}">{{ $t('active_relay_join') }}</router-link>
+      </div>
+      <div
+        class="scr-cen scr-r"
+        v-if="pairs[5]">
+        <p
+          class="scr-txt"
+          v-if="typeof relayTotal[pairs[5]] !== 'undefined'">{{ $t('active_relay_totally') }}<span>{{ relayTotal[pairs[5]] | round(4) }} </span>USDT</p>
+        <div class="scr-box">
+          <p class="scr-tit">{{ pairs[5] | pairfix }}</p>
+          <div class="scr">
+            <div class="scr-title">
+              <p class="scr_l">{{ $t('active_relay_amount') }}</p>
+              <p class="scr_m">{{ $t('active_relay_operator') }}</p>
+              <p class="scr_r">{{ $t('active_relay_time') }}</p>
+            </div>
+            <div
+              class="scr-cen"
+              id="box">
+              <ul
+                id="con1"
+                ref="con1"
+              >
+                <li
+                  :class="ticker.side"
+                  v-for="(ticker, $index) in tickers[pairs[5]]"
+                  :key="pairs[5] + ticker.time + $index">
+                  <p class="scr_l">{{ ticker.values[1] | fixed(4) }}</p>
+                  <p class="scr_m">{{ $t(ticker.side === 'buy' ? 'order_side_buy':'order_side_sell') }}</p>
+                  <p class="scr_r">{{ ticker.time | ts2date('Y-M-D H:m:s') }}</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <router-link
+          class="join"
+          :to="{name: 'trading', params: {pair: pairs[5]}}">{{ $t('active_relay_join') }}</router-link>
       </div>
     </div>
     <div class="rule">
@@ -221,7 +303,7 @@ export default {
   mixins: [ pairfix, responsiveScale ],
   data () {
     return {
-      pairs: ['BTC_USDT', 'ETH_USDT', 'ETH_BTC', 'EOS_USDT'],
+      pairs: ['BTC_USDT', 'ETH_USDT', 'ETH_BTC', 'EOS_USDT', 'IX_BTC', 'IX_USDT'],
       sockets: {},
       tickers: {
         BTC_USDT: [],

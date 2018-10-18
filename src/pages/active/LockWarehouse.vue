@@ -5,35 +5,71 @@
         is-home="true"
       />
     </div>
-    <div class="banner"/>
+    <div class="banner">
+      <span class="title">IX {{ $t('mining') }}</span>
+    </div>
     <div class="c-box">
       <div class="top-box">
         <div class="top-cen">
-          <div class="m-middle">
-            <span class="top-s-tit">{{ $t('ystd_trad') }}</span>
-            <p class="top-s-txt top-txt-yellow mar-bot">1BTC≈￥49999.98789</p>
-            <span class="top-s-tit">{{ $t('td_trad') }}</span>
-            <p class="top-s-txt top-txt-yellow">1BTC≈￥49999.98189</p>
+          <div
+            class="m-middle"
+            v-if="isLogin">
+            <span class="top-tit">{{ $t('ystd_trad') }}</span>
+            <p class="top-txt top-txt-blue">{{ myTotal.amount_yesterday | round(2) | thousand }}<em>IX</em></p>
+            <!-- <span class="top-s-tit">{{ $t('td_trad') }}</span>
+            <p class="top-s-txt top-txt-yellow">1BTC≈￥49999.98189</p> -->
+          </div>
+          <div
+            class="m-middle"
+            v-else>
+            <span class="top-tit">{{ $t('ystd_trad_total') }}</span>
+            <p class="top-txt top-txt-blue">{{ basePower.amount_yesterday | round(2) | thousand }}<em>IX</em></p>
+            <!-- <span class="top-s-tit">{{ $t('td_trad') }}</span>
+            <p class="top-s-txt top-txt-yellow">1BTC≈￥49999.98189</p> -->
           </div>
         </div>
         <div class="top-cen">
-          <div class="m-middle">
-            <span class="top-tit">{{ $t('hash_rate') }}</span>
-            <p class="top-txt top-txt-blue">100.XXX<em>IX/H</em></p>
+          <div
+            class="m-middle"
+            v-if="isLogin">
+            <span class="top-s-tit">{{ $t('hash_rate') }}</span>
+            <p class="top-s-txt top-txt-blue mar-bot">{{ myPower.power | round(2) }}<em>IX/H</em></p>
+            <span class="top-s-tit">{{ $t('hash_rate_remain') }}</span>
+            <p class="top-s-txt top-txt-blue">{{ myPower.power - myPower.amount | round(2) }}<em>IX</em></p>
+          </div>
+          <div
+            class="m-middle"
+            v-else>
+            <span class="top-tit">{{ $t('current_base_power') }}</span>
+            <p class="top-txt top-txt-blue">{{ basePower.power | round(2) }}<em>IX/H</em></p>
           </div>
         </div>
         <div class="top-cen">
-          <div class="m-middle">
+          <div
+            class="m-middle"
+            v-if="isLogin">
             <span class="top-tit">{{ $t('td_trad_amount') }}</span>
-            <p class="top-txt top-txt-blue">100.XXX<em>IX/H</em></p>
+            <p class="top-txt top-txt-blue">{{ myTotal.amount_today | round(2) | thousand }}<em>IX</em></p>
+          </div>
+          <div
+            class="m-middle"
+            v-else>
+            <span class="top-tit">{{ $t('today_trad_total') }}</span>
+            <p class="top-txt top-txt-blue">{{ basePower.amount_today | round(2) | thousand }}<em>IX</em></p>
           </div>
         </div>
         <div class="top-cen">
-          <div class="m-middle">
-            <span class="top-s-tit">{{ $t('cum_trad_amount') }}</span>
-            <p class="top-s-txt top-txt-blue mar-bot">10000.9988<em>IX/H</em></p>
-            <span class="top-s-tit">{{ $t('cum_trad_revenue') }}</span>
-            <p class="top-s-txt top-txt-blue">10000.9988<em>IX/H</em></p>
+          <div
+            class="m-middle"
+            v-if="isLogin">
+            <span class="top-tit">{{ $t('cum_trad_amount') }}</span>
+            <p class="top-txt top-txt-blue">{{ myTotal.total | round(2) | thousand }}<em>IX</em></p>
+          </div>
+          <div
+            class="m-middle"
+            v-else>
+            <span class="top-tit">{{ $t('totally_mine_total') }}</span>
+            <p class="top-txt top-txt-blue">{{ basePower.total | round(2) | thousand }}<em>IX</em></p>
           </div>
         </div>
       </div>
@@ -45,7 +81,7 @@
           <p class="oper-con-l">
             <span>{{ $t('available_balance') }}</span>
           </p>
-          <p class="balance">888000000  IX</p>
+          <p class="balance">{{ balance.available | round(4) }} IX</p>
         </div>
         <div class="oper-con">
           <p class="oper-con-l">
@@ -54,11 +90,15 @@
           <input
             type="number"
             min="20000"
+            :max="maxLock"
             step="20000"
+            v-model="lock_amount"
+            @input="lockAmountChanged"
+            @blur="blur('lock')"
             :placeholder="$t('integer_ultiple')"
             class="balance">
           <a
-            href="javascript:void(0)"
+            @click="setMax('lock')"
             class="num-max">{{ $t('maximum') }}</a>
         </div>
         <v-btn
@@ -67,8 +107,8 @@
           fontsize="16"
           :loading="lock_loading"
           @click="doLock"
-          :disabled="lock_disable"
-          :label="$t('locked')"
+          :disabled="lock_disable && isLogin"
+          :label="isLogin ? $t('locked') : $t('lock_login')"
         />
       </div>
       <div class="oper-cen">
@@ -77,7 +117,7 @@
           <p class="oper-con-l">
             <span>{{ $t('unlock_available') }}</span>
           </p>
-          <p class="balance">888000000  IX</p>
+          <p class="balance">{{ balance.locked }} IX</p>
         </div>
         <div class="oper-con">
           <p class="oper-con-l">
@@ -86,11 +126,15 @@
           <input
             type="number"
             min="20000"
+            :max="maxUnLock"
             step="20000"
+            v-model="unlock_amount"
+            @input="unlockAmountChanged"
+            @blur="blur('unlock')"
             :placeholder="$t('integer_ultiple')"
             class="balance">
           <a
-            href="javascript:void(0)"
+            @click="setMax('unlock')"
             class="num-max">{{ $t('maximum') }}</a>
         </div>
         <v-btn
@@ -99,122 +143,51 @@
           fontsize="16"
           :loading="unlock_loading"
           @click="doUnLock"
-          :disabled="unlock_disable"
-          :label="$t('unlock')"
+          :disabled="unlock_disable && isLogin"
+          :label="isLogin ? $t('unlock') : $t('unlock_login')"
         />
       </div>
       <div class="oper-cen">
         <div class="oper-cen-tit">{{ $t('unlocking') }}</div>
         <div class="oper-wait">
-          <p class="num">20000  IX</p>
+          <p class="num">{{ balance.unlocking }} IX</p>
           <span class="tips">*{{ $t('unlocked') }}</span>
         </div>
       </div>
     </div>
-    <div class="c-box record">
+    <div
+      class="c-box record"
+      v-if="list.length">
       <div class="rec record-l">
         <div class="rec-tit">
           {{ $t('mining_records') }}
-          <a href="">{{ $t('more') }}</a>
+          <router-link
+            v-if="isLogin"
+            class="more"
+            :to="{name: 'history'}">{{ $t('more') }}</router-link>
         </div>
         <div class="rec-t">
           <p class="re-a">{{ $t('time') }}</p>
           <p class="re-b">{{ $t('transaction_fee') }}</p>
           <p class="re-c">{{ $t('hash_rate_hour') }}</p>
           <p class="re-d">{{ $t('mining_output') }}</p>
-          <p class="re-e">{{ $t('situation') }}</p>
+          <p class="re-e">{{ $t('status') }}</p>
         </div>
         <div class="scroll-con">
           <ul>
-            <li>
-              <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">0.3</p>
-              <p class="re-c">0.00007</p>
-              <p class="re-d">100</p>
-              <p class="re-e c-yellow">已派发</p>
-            </li>
-            <li>
-              <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">0.3</p>
-              <p class="re-c">0.00007</p>
-              <p class="re-d">100</p>
-              <p class="re-e c-blue">未派发
-                <span>
-                  <em>2018—09—24 发放 <i/> </em>
-                </span>
-              </p>
-            </li>
-            <li>
-              <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">0.3</p>
-              <p class="re-c">0.00007</p>
-              <p class="re-d">100</p>
-              <p class="re-e c-yellow">已派发</p>
-            </li>
-            <li>
-              <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">0.3</p>
-              <p class="re-c">0.00007</p>
-              <p class="re-d">100</p>
-              <p class="re-e c-blue">未派发
-                <span>
-                  <em>2018—09—24 发放 <i/> </em>
-                </span>
-              </p>
-            </li>
-            <li>
-              <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">0.3</p>
-              <p class="re-c">0.00007</p>
-              <p class="re-d">100</p>
-              <p class="re-e c-yellow">已派发</p>
-            </li>
-            <li>
-              <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">0.3</p>
-              <p class="re-c">0.00007</p>
-              <p class="re-d">100</p>
-              <p class="re-e c-blue">未派发
-                <span>
-                  <em>2018—09—24 发放 <i/> </em>
-                </span>
-              </p>
-            </li>
-            <li>
-              <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">0.3</p>
-              <p class="re-c">0.00007</p>
-              <p class="re-d">100</p>
-              <p class="re-e c-yellow">已派发</p>
-            </li>
-            <li>
-              <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">0.3</p>
-              <p class="re-c">0.00007</p>
-              <p class="re-d">100</p>
-              <p class="re-e c-blue">未派发
-                <span>
-                  <em>2018—09—24 发放 <i/> </em>
-                </span>
-              </p>
-            </li>
-            <li>
-              <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">0.3</p>
-              <p class="re-c">0.00007</p>
-              <p class="re-d">100</p>
-              <p class="re-e c-yellow">已派发</p>
-            </li>
-            <li>
-              <p class="re-a">2018.9.09  13:00:00</p>
-              <p class="re-b">0.3</p>
-              <p class="re-c">0.00007</p>
-              <p class="re-d">100</p>
-              <p class="re-e c-blue">未派发
-                <span>
-                  <em>2018—09—24 发放 <i/> </em>
-                </span>
-              </p>
+            <li
+              v-for="item in list"
+              :key="item.mine_time">
+              <p class="re-a">{{ item.mine_time | ts2date }}</p>
+              <p class="re-b">{{ item.fee | round(4) | thousand }}</p>
+              <p class="re-c">{{ item.power | thousand }}</p>
+              <p class="re-d">{{ item.amount | round(4) | thousand }}</p>
+              <p
+                class="re-e"
+                :class="{'c-yellow': item.state === 1, 'c-blue': item.state === 0}">{{ item.state === 1 ? $t('has_send') : $t('has_no_send') }}
+                <span v-if="item.state === 0">
+                  <em>{{ item.release_time | ts2date }} {{ $t('has_done') }} <i/> </em>
+              </span></p>
             </li>
           </ul>
         </div>
@@ -223,13 +196,17 @@
     <div class="c-box condition">
       <p class="cdt-title">{{ $t('requirements') }}</p>
       <ul>
-        <li><i>1.</i>{{ $t('req_a') }}<br >{{ $t('req_a_a') }}</li>
-        <li><i>2.</i>{{ $t('req_b') }}</li>
-        <li><i>3.</i>{{ $t('req_c') }}</li>
+        <li><i>1.</i>{{ $t('req_a') }}</li>
+        <li><i>2.</i>{{ $t('req_b', {power: basePower.power}) }}</li>
+        <li><i>3.</i>{{ $t('req_c') }} <br >
+          {{ $t('req_c_a') }} <br>
+          {{ $t('req_c_b') }} <br>
+          {{ $t('req_c_c') }} <br>
+        </li>
         <li><i>4.</i>{{ $t('req_d') }}</li>
         <li><i>5.</i>{{ $t('req_e') }}</li>
         <li><i>6.</i>{{ $t('req_f') }}</li>
-        <li><i>7.</i>{{ $t('req_g') }}</li>
+        <li>{{ $t('req_g') }}</li>
       </ul>
     </div>
   </div>
@@ -238,17 +215,58 @@
 <script>
 import VNav from '@/components/VNav3'
 import VBtn from '@/components/VBtn'
+import {state, actions} from '@/modules/store'
+import service from '@/modules/service'
+import utils from '@/modules/utils'
+
+const MIN_AMOUNT_UNIT = 20000
 export default {
   data () {
     return {
+      state,
       lock_loading: false,
       unlock_loading: false,
       lock_disable: true,
       unlock_disable: true,
+      unlock_amount: '',
+      lock_amount: '',
+      // 我的余额
       balance: {
-        available: 100223,
-        locking: 20000
+        available: 0,
+        unlocking: 0,
+        locked: 0
+      },
+      // 我的算力
+      myPower: {
+
+      },
+      // 我的统计
+      myTotal: {
+
+      },
+      // 挖矿记录
+      list: [],
+      basePower: {
+        power: 200
       }
+
+    }
+  },
+  computed: {
+    isLogin () {
+      return this.state.userInfo
+    },
+    maxLock () {
+      if (this.balance.available) {
+        return this.$big(this.balance.available).div(MIN_AMOUNT_UNIT).round(0, this.C.ROUND_DOWN).times(MIN_AMOUNT_UNIT).toString()
+      }
+      return 0
+    },
+    maxUnLock () {
+      if (this.balance.locked) {
+        return this.$big(this.balance.locked).div(MIN_AMOUNT_UNIT).round(0, this.C.ROUND_DOWN).times(MIN_AMOUNT_UNIT).toString()
+      }
+      return 0
     }
   },
   components: {
@@ -256,18 +274,163 @@ export default {
     VBtn
   },
   methods: {
-    doLock () {
-
+    async doLock () {
+      if (!this.isLogin) {
+        actions.setLoginBack({
+          fullPath: this.$route.fullPath
+        })
+        this.$router.push({
+          name: 'login'
+        })
+        return
+      }
+      let amount = this.lock_amount
+      this.lock_loading = true
+      let res = await service.balanceLock({
+        amount
+      })
+      this.lock_loading = false
+      if (!res.code) {
+        // todo
+        this.lock_amount = ''
+        utils.success(this.$t('lock_success') + amount + ' IX')
+        this.reset('lock')
+        this.fetch()
+      } else {
+        utils.alert(res.message)
+      }
     },
-    doUnLock () {
-
+    reset (type) {
+      this.blur(type)
+    },
+    async doUnLock () {
+      if (!this.isLogin) {
+        actions.setLoginBack({
+          fullPath: this.$route.fullPath
+        })
+        this.$router.push({
+          name: 'login'
+        })
+        return
+      }
+      let amount = this.unlock_amount
+      this.unlock_loading = true
+      let res = await service.balanceUnLock({
+        amount
+      })
+      this.unlock_loading = false
+      if (!res.code) {
+        // todo
+        this.unlock_amount = ''
+        utils.success(this.$t('unlock_success') + amount + ' IX')
+        this.reset('unlock')
+        this.fetch()
+      } else {
+        utils.alert(res.message)
+      }
     },
     async fetch () {
+      if (this.isLogin) {
+        Promise.all([service.getMyPower(),
+          service.getIxBalance(),
+          service.getLockMineHistory(),
+          service.getMyLockTotal()]).then(resp => {
+          let myPowerRes = resp[0]
+          if (!myPowerRes.code) {
+            this.myPower = myPowerRes.data
+          }
+          let balanceRes = resp[1]
+          if (!balanceRes.code) {
+            this.balance = balanceRes.data
+          }
+          let listRes = resp[2]
+          if (!listRes.code) {
+            this.list = listRes.data
+          }
+          let myTotalRes = resp[3]
+          if (!myTotalRes.code) {
+            this.myTotal = myTotalRes.data
+          }
+        })
+      } else {
 
+      }
+      let basePowerRes = await service.getLockMineTotal()
+      if (!basePowerRes.code) {
+        this.basePower = basePowerRes.data
+      }
+    },
+    blur (type) {
+      let amount = 0
+      if (type === 'lock') {
+        if (this.lock_amount === '') {
+          this.lock_disable = true
+          return
+        }
+        amount = this.$big(this.lock_amount)
+        if (amount.mod(MIN_AMOUNT_UNIT) !== 0) {
+          this.lock_amount = amount.div(MIN_AMOUNT_UNIT).round(0, this.C.ROUND_DOWN).times(MIN_AMOUNT_UNIT).toString()
+          if (!parseInt(this.lock_amount)) {
+            this.lock_disable = true
+          }
+        }
+      } else {
+        if (this.unlock_amount === '') {
+          this.unlock_disable = true
+          return
+        }
+        amount = this.$big(this.unlock_amount)
+        if (amount.mod(MIN_AMOUNT_UNIT) !== 0) {
+          this.unlock_amount = amount.div(MIN_AMOUNT_UNIT).round(0, this.C.ROUND_DOWN).times(MIN_AMOUNT_UNIT).toString()
+          if (!parseInt(this.unlock_amount)) {
+            this.unlock_disable = true
+          }
+        }
+      }
+    },
+    setMax (type) {
+      if (type === 'lock') {
+        this.lock_amount = this.maxLock
+        this.lockAmountChanged()
+        this.blur(type)
+      } else {
+        this.unlock_amount = this.maxUnLock
+        this.unlockAmountChanged()
+        this.blur(type)
+      }
+    },
+    unlockAmountChanged () {
+      if (parseInt(this.unlock_amount)) {
+        if (this.$big(this.unlock_amount).gt(this.maxUnLock)) {
+          this.unlock_amount = this.maxUnLock
+        }
+        if (!this.unlock_amount) {
+          this.unlock_disable = true
+        } else {
+          this.unlock_disable = false
+        }
+      } else {
+        this.unlock_disable = true
+      }
+    },
+    lockAmountChanged () {
+      if (parseInt(this.lock_amount)) {
+        if (this.$big(this.lock_amount).gt(this.maxLock)) {
+          this.lock_amount = this.maxLock
+        }
+        if (!this.lock_amount) {
+          this.lock_disable = true
+        } else {
+          this.lock_disable = false
+        }
+      } else {
+        this.lock_disable = true
+      }
     }
   },
-  created () {
-    this.fetch()
+  async created () {
+    await actions.updateSession()
+    await this.fetch()
   }
 
 }
@@ -282,11 +445,20 @@ export default {
     background: #1A1A1A;
   }
   .banner{
-    height: 600px;
+    height: 500px;
     width: 100%;
     background-image: url(/static/active/LockWarehouse/banner.jpg);
     background-repeat: no-repeat;
     background-position: center center;
+    .title {
+      font-size: 40px;
+      color: #fff;
+      width: 100%;
+      padding-top: 350px;
+      display: block;
+      font-weight: bold;
+      text-align: center;
+    }
   }
   .c-box{
     width: 1200px;
@@ -310,7 +482,10 @@ export default {
       width: 290px;
       height: 177px;
       display: table;
+      word-wrap:break-word;
+      word-break: break-all;
       padding-left: 30px;
+      padding-right: 30px;
       border-radius: 8px;
       margin-right: 13px;
       background: #2D3540;
@@ -332,9 +507,9 @@ export default {
         color: #fff;
       }
       .top-txt{
-        font-size: 36px;
+        font-size: 28px;
         line-height: 60px;
-        em{
+        em {
           color: #6C869C;
           font-size: 18px;
           padding-left: 15px;
@@ -452,7 +627,7 @@ export default {
         width: 100%;
         height: 68px;
         border: none;
-        color: #A6BED3;
+        color: #fff;
         cursor: pointer;
         margin-top: 23px;
         border-radius: 4px;
@@ -461,7 +636,8 @@ export default {
         &.disabled {
           background: #353F4D;
           cursor: default;
-          color: #fff;
+          color: #A6BED3;
+
         }
 
         &:hover {
@@ -517,7 +693,8 @@ export default {
         font-size: 24px;
         line-height: 45px;
         position: relative;
-        a{
+
+        .more {
           position: absolute;
           color: #fff;
           font-size: 14px;
@@ -563,7 +740,7 @@ export default {
                   width: 20px;
                 }
                 em{
-                  width: 138px;
+                  width: 160px;
                   height: 43px;
                   line-height: 43px;
                   display: none;
@@ -654,14 +831,16 @@ export default {
   .lang-en {
     .top-s-tit{
       font-size: 13px !important;
-      line-height: 24px;
+      line-height: 24px !important;
+      word-break: break-word;
     }
     .top-tit{
       font-size: 13px !important;
-      line-height: 24px;
+      line-height: 24px !important;
+      word-break: break-word;
     }
     .condition{
-      font-size: 14px;
+      font-size: 14px !important;
     }
   }
   input{

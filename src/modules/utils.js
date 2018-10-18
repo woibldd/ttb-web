@@ -384,6 +384,9 @@ const utils = {
     if (typeof num === 'undefined') {
       return 0
     }
+    if (isNaN(num)) {
+      return 0
+    }
     return Big(num).round(scale, rm).toString()
   },
   toFixed (num, scale = 8, rm = consts.ROUND_DOWN) {

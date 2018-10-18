@@ -113,5 +113,43 @@ export default{
       office_website: 'https://eos.io/', // 官网
       chain_info: 'https://etherscan.io/token/EOS' // 区块查询
     }
+  },
+  IX: {
+    'zh-CN': {
+      name: 'IX',
+      full_name: 'IX Token',
+      brief_info: 'IX（IX Token）是全球首家支持比特币作为权益证明的交易所交易所IX.com的平台通的平台通证，IX持有者可享有交易所分红、社区治理等多重权益。',
+      issue_time: '2018-10-18',
+      issue_all: '200亿', // 发行总量
+      issue_circulation: '--', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://ix.com/docs/IX+WhitePaper+zh-CN.pdf', // 白皮书
+      office_website: 'https://ix.com/', // 官网
+      chain_info: 'https://etherscan.io/token/0xc7df14a8289efe7a2d3399387302fdf86e7adc4e' // 区块查询
+    },
+    en: {
+      name: 'IX',
+      full_name: 'IX Token',
+      brief_info: 'IX（IX Token）is the first bourse support Bitcoin as the proof of stake all over the world， the owner of IX are entitled to the right such as distribute the profit, community governance and so on.',
+      issue_time: '2018-10-18',
+      issue_all: '2000 million', // 发行总量
+      issue_circulation: '--', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://ix.com/docs/IX+WhitePaper.pdf', // 白皮书
+      office_website: 'https://ix.com/', // 官网
+      chain_info: 'https://etherscan.io/token/0xc7df14a8289efe7a2d3399387302fdf86e7adc4e' // 区块查询
+    },
+    ko: {
+      name: 'IX',
+      full_name: 'IX Token',
+      brief_info: 'IX（IX Token)은 세계최초비트코인 권익증명 거래소를지원하는 ix.com플랫폼을 통과하는 문이다.IX를 보유한 분은 거래소의 배당,지역사회를 관리하는 등등의 여러가지 권리를 가지게 될것입니다.',
+      issue_time: '2018-10-18',
+      issue_all: '200억', // 发行总量
+      issue_circulation: '--', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://ix.com/docs/IX+WhitePaper.pdf', // 白皮书
+      office_website: 'https://ix.com/', // 官网
+      chain_info: 'https://etherscan.io/token/0xc7df14a8289efe7a2d3399387302fdf86e7adc4e' // 区块查询
+    }
   }
 }

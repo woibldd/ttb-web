@@ -468,6 +468,17 @@ const service = {
   getRelayTotal () {
     return request('relay/query')
   },
+
+  // ix市场信息
+  getIXMarket () {
+    return request('/market/ix')
+  },
+
+  // 分红信息汇总
+  getAllBonusInfo () {
+    return request('/bonus/total')
+  },
+
   /* 挖矿 end */
 
   /* 行情 */
@@ -524,32 +535,67 @@ const service = {
   // 用户订单历史
   getOrderHistory (params) {
     return request('/order/history', params)
+  },
+  // 锁仓开始
+  /**
+   * 锁仓
+   */
+  balanceLock (data) {
+    return request('account/balance/lock', data)
+  },
+  /**
+   * 解锁
+   */
+  balanceUnLock (data) {
+    return request('account/balance/unlock', data)
+  },
+  /**
+   * 获取挖矿历史
+   */
+  getLockMineHistory () {
+    return request('mine/exchange/ix/me/history')
+  },
+  // 我的ix余额
+  getIxBalance () {
+    return request('account/balance/ix')
+  },
+  // 我的算力
+  getMyPower () {
+    return request('mine/exchange/ix/me')
+  },
+  // 个人锁仓信息
+  getMyLockTotal () {
+    return request('mine/exchange/ix/me/total')
+  },
+  // 全网挖矿详细 基准算力等
+  getLockMineTotal () {
+    return request('mine/exchange/ix/total')
   }
 
 }
 
 export async function fetch (url, body, options, method = 'post') {
-//   let mock = false
-//   mock = await Mock()
-//   if (mock && url.indexOf('quota.ix') > 0) {
-//     const find = _.find(mock.list, item => {
-//       return item.url && item.url.test(url)
-//     })
-//     if (find) {
-//       const res = await find.res(body)
-//       utils.log('Mock', url, body, res)
-//       return res
-//     }
-//   } else {
-//     if (mock.filter[url]) {
-//       const find = _.find(mock.list, item => item.url && item.url.test(url))
-//       if (find) {
-//         const res = await find.res(body)
-//         utils.log('Mock', url, body, res)
-//         return res
-//       }
-//     }
-//   }
+  // let mock = false
+  // mock = await Mock()
+  // if (mock && url.indexOf('quota.ix') > 0) {
+  //   const find = _.find(mock.list, item => {
+  //     return item.url && item.url.test(url)
+  //   })
+  //   if (find) {
+  //     const res = await find.res(body)
+  //     utils.log('Mock', url, body, res)
+  //     return res
+  //   }
+  // } else {
+  //   if (mock.filter[url]) {
+  //     const find = _.find(mock.list, item => item.url && item.url.test(url))
+  //     if (find) {
+  //       const res = await find.res(body)
+  //       utils.log('Mock', url, body, res)
+  //       return res
+  //     }
+  //   }
+  // }
   try {
     let res
     if (method === 'get') {

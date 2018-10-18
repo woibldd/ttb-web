@@ -11,14 +11,39 @@
           <router-link
             :to="{name: 'trading'}"
             class="nav_link">{{ $t('trading') }}</router-link>
-          <a
-            :href="'/docs/The+Declaration+of+IX'+pdfSubfix+'.pdf'"
-            target="_blank"
-            class="nav_link ml-30">{{ $t("declaration") }}</a>
-          <a
-            :href="'/docs/IX+WhitePaper'+pdfSubfix+'.pdf'"
-            target="_blank"
-            class="nav_link ml-30">{{ $t("whitepagger") }}</a>
+          <div class="nav_link whitepaper">
+            <a
+              :href="'/docs/IX+WhitePaper'+pdfSubfix+'.pdf'"
+              target="_blank"
+              class="nav_link ml-30">{{ $t("whitepagger") }}
+              <icon
+                class="arrow ml-5"
+                name="arrow-down-w"/>
+            </a>
+            <div class="dropdown-sub-menu">
+              <ul class="dropdown-list pt-10 pb-10">
+                <li class="dropdown-item pl-24 pr-24">
+                  <a
+                    :href="'/docs/IX+WhitePaper'+pdfSubfix+'.pdf'"
+                    target="_blank"
+                    class="link">{{ $t("whitepagger") }}</a>
+                </li>
+                <li class="dropdown-item pl-24 pr-24">
+                  <a
+                    :href="'/docs/The+Declaration+of+IX'+pdfSubfix+'.pdf'"
+                    target="_blank"
+                    class="link">{{ $t("declaration") }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <router-link
+            :to="{name: 'LockWarehouse'}"
+            class="nav_link ml-30"
+            target="_blank">{{ $t('mining') }}
+          </router-link>
+
           <router-link
             :to="{name: 'kycRelay'}"
             class="nav_link ml-30"
@@ -287,11 +312,68 @@ export default {
 
     .left_options {
       float: left;
-      margin: 18px 0 18px 40px;
+      margin: 0 0 0 40px;
       .nav_link {
         color: #FFFFFF;
         font-size: 16px;
         position: relative;
+        display: inline-block;
+        padding-top: 19px;
+        padding-bottom: 19px;
+
+        &.whitepaper {
+          display: inline;
+
+          .arrow {
+            font-size:10px;
+            transition: all 0.2s ease-in-out;
+          }
+          &:hover {
+            .dropdown-sub-menu {
+              opacity: 1;
+              display: block;
+              visibility: visible;
+            }
+            .nav_link {
+              color: $primary;
+            }
+            .arrow {
+              transform: rotate(180deg)
+            }
+          }
+
+           .dropdown-sub-menu {
+              background: #283B4C;
+              position: absolute;
+              left: 0;
+              top: 68px;
+              border-radius: 4px;
+              z-index: 999;
+              opacity: 0;
+              display: none;
+              visibility: hidden;;
+
+              .dropdown-list {
+                .dropdown-item {
+                  height: 40px;
+                  white-space: nowrap;
+                  .link {
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                    color: #fff;
+                  }
+
+                  &:hover {
+                    background: #192D3F;
+                    .link {
+                      color: $primary;
+                    }
+                  }
+                }
+              }
+           }
+        }
 
         &:hover {
           color: $primary;
@@ -420,6 +502,7 @@ export default {
     z-index: 1;
     .rig {
       display: inline-block;
+      transition: all 0.2s ease-in-out;
       // position: absolute;
       // top: 4px;
       // right: 10px;
@@ -451,6 +534,9 @@ export default {
     &:hover{
         .lang_box{
             display: block;
+        }
+        .rig {
+          transform: rotate(180deg);
         }
     }
   }

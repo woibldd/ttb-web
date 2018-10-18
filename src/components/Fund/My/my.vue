@@ -40,6 +40,10 @@
               :to="'/fund/withdraw/'+scope.row.currency"
               class="my-fund-operate">{{ $t('withdraw') }}</router-link>
             <router-link
+              v-if="scope.row.currency === 'IX'"
+              :to="{name: 'LockWarehouse'}"
+              class="my-fund-operate">{{ $t('mining') }}</router-link>
+            <router-link
               v-if="scope.row.pairs"
               :to="{
                 name: 'trading',
@@ -61,7 +65,8 @@ import service from '@/modules/service'
 import {state, actions} from '@/modules/store'
 const ExchangePairs = {
   'BTC': 'BTC_USDT',
-  'ETH': 'ETH_USDT'
+  'ETH': 'ETH_USDT',
+  'IX': 'IX_USDT'
 }
 
 /**

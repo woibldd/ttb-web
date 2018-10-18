@@ -53,7 +53,6 @@
             <span class="unit">USDT</span>
           </p>
         </div>
-
       </div>
     </div>
     <!-- three -->
@@ -118,7 +117,6 @@
 
       </div>
     </div>
-
   </div>
 </template>
 <script>
