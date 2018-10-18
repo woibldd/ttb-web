@@ -3,11 +3,10 @@
     <div class="profile-container">
       <div class="title-box">{{ $t('api_management') }}
         <div class="pull-right tips title-box-right">
-          <!-- api文档,先不上 -->
           <div class="mr-20">
             <a
-              :href="apiDoc"
-              target="_blank">{{ $t('api_doc') }}</a>
+              :href="robotUsageUrl"
+              target="_blank">{{ $t('robot_use_tutorial') }}</a>
           </div>
           <div
             v-if="openApi"
@@ -54,7 +53,7 @@
       </div>
       <div class="api-tips">
         <div class="api-tips__lead"><span class="dot"/>{{ $t('note') }}</div>
-        <div class="api-tips__row">{{ $t('api_tips_one') }}</div>
+        <div class="api-tips__row"><span v-html="$t('api_tips_one', {link: apiDoc})"/></div>
         <div class="api-tips__row">{{ $t('api_tips_two') }}</div>
         <div
           class="api-tips__row"
@@ -278,6 +277,11 @@ export default {
     },
     apiDoc () {
       return this.state.theme.apiDoc[this.state.locale || 'en']
+    },
+    robotUsageUrl () {
+      return this.state.locale === 'zh-CN'
+        ? 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360018094072'
+        : 'https://ixcustomer.zendesk.com/hc/en-us/articles/360018094072'
     },
     openApi () {
       return this.userInfo.api === 1

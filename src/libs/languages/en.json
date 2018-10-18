@@ -654,7 +654,7 @@
   "eos_not_support_internal_transfer": "Internal EOS transfer is not supported now",
   "orders":"Orders",
   "my_orders": "My Orders",
-  "api_tips_one": "1. IX.COM provides you with a strong API, through which you can enjoy services such as Market Query, Automatic Trading, etc. View How To Use via API documentation.",
+  "api_tips_one": "1. IX.COM provides you with a strong API, through which you can enjoy services such as Market Query, Automatic Trading, etc. View How To Use via <a target=\"_blank\" href=\"%{link}\">API documentation.</a> ",
   "api_tips_two": "2. Each user can create 10 API Keys at most.",
   "api_tips_three": "3. You can use following ways to activate the API key after generate it: <a target=\"_blank\" href=\"%{link}\">Detail</a>;",
   "api_tips_four": "4. To avoid loss of assets, please do not disclose your API Key to anybody.",
@@ -677,5 +677,6 @@
   "current_base_power": "Standard hashrate",
   "totally_mine_total": "Community accumulate mining amount",
   "lock_login": "Sign in",
-  "unlock_login": "Sign in"
+  "unlock_login": "Sign in",
+  "robot_use_tutorial": "Robot Guidebook"
 }
