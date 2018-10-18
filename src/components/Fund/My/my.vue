@@ -32,9 +32,11 @@
           <!-- <span>解锁/锁仓</span> -->
           <template slot-scope="scope">
             <router-link
+              v-if="scope.row.depositable"
               :to="'/fund/deposit/' + scope.row.currency"
               class="my-fund-operate">{{ $t('deposit') }}</router-link>
             <router-link
+              v-if="scope.row.withdrawable"
               :to="'/fund/withdraw/'+scope.row.currency"
               class="my-fund-operate">{{ $t('withdraw') }}</router-link>
             <router-link

@@ -334,7 +334,7 @@ export default {
     async getAllCoinTypes () {
       await service.getAllCoinTypes().then(res => {
         if (res && res.data) {
-          this.allCoins = res.data
+          this.allCoins = res.data.filter(c => c.withdrawable)
           if (this.$route.params.currency) {
             const currency = this.$route.params.currency.toUpperCase()
 
