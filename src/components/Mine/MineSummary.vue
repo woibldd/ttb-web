@@ -69,7 +69,7 @@
             {{ $t('mine_bonus_rate') }}
           </p>
           <p class="cm-bt">
-            {{ allBonusData.btc_yesterday | round(4) }}
+            {{ allBonusData.btc_rate | round(4) }}
             <span class="unit">USDT</span>
           </p>
         </div>

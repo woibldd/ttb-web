@@ -507,9 +507,9 @@ export default {
         color: #fff;
       }
       .top-txt{
-        font-size: 36px;
+        font-size: 28px;
         line-height: 60px;
-        em{
+        em {
           color: #6C869C;
           font-size: 18px;
           padding-left: 15px;

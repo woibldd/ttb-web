@@ -546,7 +546,7 @@
   "keep_million_ix_reward_yesterday": "昨日连续持有百万IX分配：",
   "ix_second_trading_amount": "IX二级市场流通量：",
   "ix_lock_amount": "IX锁仓总量：",
-  "ix_trading_amout": "IX流通市值",
+  "ix_trading_amout": "IX流通市值：",
   "lock_success": "已成功锁仓：",
   "unlock_success": "已成功解锁：",
   "ystd_trad_total": "社区昨日挖矿总量",
