@@ -32,7 +32,7 @@
         </div>
         <div class="row__value">
           {{ allBonusData.btc_today | round(4) }}
-          <span class="unit">BTC</span>
+          <span class="unit">USDT</span>
         </div>
       </div>
       <div class="mine-info-row">
@@ -48,7 +48,7 @@
         </p>
         <p class="row__value">
           {{ allBonusData.ix_yesterday | round(4) }}
-          <span class="unit">BTC</span>
+          <span class="unit">USDT</span>
         </p>
       </div>
       <div class="mine-info-row">
@@ -57,7 +57,7 @@
         </p>
         <p class="row__value">
           {{ allBonusData.btc_yesterday | round(4) }}
-          <span class="unit">BTC</span>
+          <span class="unit">USDT</span>
         </p>
       </div>
     </div>
@@ -69,7 +69,7 @@
         </p>
         <p class="row__value">
           {{ allBonusData.btc_yesterday | round(4) }}
-          <span class="unit">BTC</span>
+          <span class="unit">USDT</span>
         </p>
       </div>
       <div class="mine-info-row">
@@ -78,7 +78,7 @@
         </p>
         <p class="row__value">
           {{ allBonusData.ix_rate | round(4) }}
-          <span class="unit">BTC</span>
+          <span class="unit">USDT</span>
         </p>
       </div>
     </div>
@@ -108,7 +108,7 @@
         </p>
         <p class="row__value">
           {{ ixMarketData.markert_value | round(4) }}
-          <span class="unit">BTC</span>
+          <span class="unit">USDT</span>
         </p>
       </div>
     </div>
