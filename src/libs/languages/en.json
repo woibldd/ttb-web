@@ -679,5 +679,7 @@
   "lock_login": "Sign in",
   "unlock_login": "Sign in",
   "robot_use_tutorial": "Robot Guidebook",
-  "current_lock_ix": "Current locked amount:"
+  "current_lock_ix": "Current locked amount:",
+  "trading_mine": "交易挖矿",
+  "invite_mine": "邀请挖矿"
 }

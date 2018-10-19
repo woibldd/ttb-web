@@ -553,5 +553,7 @@
   "lock_login": "로그인",
   "unlock_login": "로그인",
   "robot_use_tutorial": "로봇 사용 과정설명서",
-  "current_lock_ix": "현재 락업량："
+  "current_lock_ix": "현재 락업량：",
+  "trading_mine": "交易挖矿",
+  "invite_mine": "邀请挖矿"
 }

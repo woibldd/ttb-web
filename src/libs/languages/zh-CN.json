@@ -556,5 +556,7 @@
   "lock_login": "登录后操作",
   "unlock_login": "登录后操作",
   "robot_use_tutorial": "机器人使用教程",
-  "current_lock_ix": "当前锁仓量："
+  "current_lock_ix": "当前锁仓量：",
+  "trading_mine": "交易挖矿",
+  "invite_mine": "邀请挖矿"
 }

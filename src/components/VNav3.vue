@@ -38,13 +38,31 @@
             </div>
           </div>
 
-          <router-link
-            :to="{name: 'LockWarehouse'}"
-            class="nav_link ml-30"
-            target="_blank">{{ $t('mining') }}<icon
-              name="dig-hover"
-              class="mining-dig ml-5"/>
-          </router-link>
+          <div class="nav_link whitepaper">
+            <router-link
+              :to="{name: 'LockWarehouse'}"
+              class="nav_link ml-30"
+              target="_blank">{{ $t('mining') }}<icon
+                name="dig-hover"
+                class="mining-dig ml-5"/>
+            </router-link>
+            <div class="dropdown-sub-menu">
+              <ul class="dropdown-list pt-10 pb-10">
+                <li class="dropdown-item pl-24 pr-24">
+                  <a
+                    href="https://ix.com/activity/lock"
+                    target="_blank"
+                    class="link">{{ $t("trading_mine") }}</a>
+                </li>
+                <li class="dropdown-item pl-24 pr-24">
+                  <a
+                    href="https://ix.com/profile/invite"
+                    target="_blank"
+                    class="link">{{ $t("邀请挖矿") }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
 
           <router-link
             :to="{name: 'kycRelay'}"
