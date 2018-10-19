@@ -50,10 +50,8 @@
             :to="{name: 'kycRelay'}"
             class="nav_link ml-30"
             target="_blank">{{ $t('activity_kyc_name') }}<icon
-              name="hot"
-              class="hot"/><icon
-                name="hot-hover"
-                class="hot-hover"/>
+              name="hot-reds"
+              class="hot ml-3"/>
           </router-link>
 
         </div>
@@ -379,33 +377,16 @@ export default {
 
         &:hover {
           color: $primary;
-          .hot{
-            display: none;
-            // background: url(~@/assets/hot-active.png)
-          }
-          .hot-hover {
-            display: inline-block;
-          }
         }
 
         &.router-link-active {
           color: $primary;
-          .hot-hover {
-            display: inline-block;
-          }
-          .hot {
-            display: none;
-          }
         }
 
         .hot,.mining-dig {
           font-size: 16px;
           // margin-left:5px;
           display: inline-block;
-        }
-        .hot-hover {
-          font-size: 16px;
-          display: none;
         }
       }
     }
