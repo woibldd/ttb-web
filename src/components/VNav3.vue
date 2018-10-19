@@ -42,10 +42,8 @@
             :to="{name: 'LockWarehouse'}"
             class="nav_link ml-30"
             target="_blank">{{ $t('mining') }}<icon
-              name="dig"
-              class="mining-dig ml-5"/><icon
-                name="dig-hover"
-                class="mining-dig-over ml-5"/>
+              name="dig-hover"
+              class="mining-dig ml-5"/>
           </router-link>
 
           <router-link
@@ -381,21 +379,21 @@ export default {
 
         &:hover {
           color: $primary;
-          .hot, .mining-dig {
+          .hot{
             display: none;
             // background: url(~@/assets/hot-active.png)
           }
-          .hot-hover,.mining-dig-over {
+          .hot-hover {
             display: inline-block;
           }
         }
 
         &.router-link-active {
           color: $primary;
-          .hot-hover, .mining-dig-over {
+          .hot-hover {
             display: inline-block;
           }
-          .hot,.mining-dig {
+          .hot {
             display: none;
           }
         }
@@ -405,7 +403,7 @@ export default {
           // margin-left:5px;
           display: inline-block;
         }
-        .hot-hover, .mining-dig-over {
+        .hot-hover {
           font-size: 16px;
           display: none;
         }
