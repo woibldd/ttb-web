@@ -1,42 +1,64 @@
 <template>
   <div class="ix-trade-op pt-14 market-order">
-    <ul class="ul buy-ul" v-if="pairInfo">
+    <ul
+      class="ul buy-ul"
+      v-if="pairInfo">
       <li class="li-price mb-14">
         <div class="label">{{ $t('price') }}</div>
         <div class="content">
-          <currency-input class="trade"
+          <currency-input
+            class="trade"
             :disabled="true"
             :placeholder="$t('market_ph')"
-            :currency="state.pro.currency_name">
-          </currency-input>
+            :currency="state.pro.currency_name"/>
         </div>
       </li>
       <li class="li-amount mb-14">
         <div class="label">{{ $t('order_value') }}</div>
         <div class="content">
-          <currency-input class="trade"
+          <currency-input
+            class="trade"
             :class="[input.buy_amount.status]"
             v-model="buy_amount"
             :currency="state.pro.currency_name"
-            :scale="pairInfo.amount_scale">
-          </currency-input>
+            :scale="pairInfo.amount_scale"/>
         </div>
       </li>
       <li class="li-volume mb-14">
         <div class="half-wrap left">
           <div class="currency-volume">
             <div class="avbl">
-              <div class="avbl-label">{{ $t('avlb') }} {{ state.pro.currency_name }}</div>
-              <div class="avbl-value" v-if="currency">{{ currency.available | fixed(pairInfo.currency_scale) }}</div>
-              <div class="avbl-value" v-else>...</div>
+              <div class="avbl-label">{{ $t('avlb') }} {{ state.pro.currency_name }}</div> :
+              <div
+                class="avbl-value"
+                v-if="currency">{{ currency.available | fixed(pairInfo.currency_scale) }}</div>
+              <div
+                class="avbl-value"
+                v-else>...</div>
             </div>
             <div class="ix-slider">
-              <ix-slider :disabled="!currencyAvailable" @input="onSliderDragEnd($event, 'buy')" height="4" :dot-size="14" :lazy="true" :min="0" :max="100" :piecewiseLabel="true" :interval="1" :piecewise="false" :show="tabActive">
-                <template slot="label" slot-scope="{ label, active }">
-                  <span :class="['custom-label', { active }]" v-if="label % 25 === 0">
-                  </span>
+              <ix-slider
+                :disabled="!currencyAvailable"
+                @input="onSliderDragEnd($event, 'buy')"
+                height="4"
+                :dot-size="14"
+                :lazy="true"
+                :min="0"
+                :max="100"
+                :piecewise-label="true"
+                :interval="1"
+                :piecewise="false"
+                :show="tabActive">
+                <template
+                  slot="label"
+                  slot-scope="{ label, active }">
+                  <span
+                    :class="['custom-label', { active }]"
+                    v-if="label % 25 === 0"/>
                 </template>
-                <template slot="tooltip" slot-scope="tooltip">
+                <template
+                  slot="tooltip"
+                  slot-scope="tooltip">
                   <div class="custom-tooltip">
                     {{ tooltip.value }}%
                   </div>
@@ -48,54 +70,77 @@
       </li>
       <li class="li-submit">
         <div class="half-wrap left">
-          <v-btn :label="$t('operate_buy', {coin: state.pro.product_name})"
+          <v-btn
+            :label="$t('operate_buy', {coin: state.pro.product_name})"
             class="submit-btn"
             radius="4"
             color="ixbuy"
             height="44"
             :loading="submitting === 'BUY'"
-            @click="submit('BUY')"></v-btn>
+            @click="submit('BUY')"/>
         </div>
       </li>
     </ul>
     <!-- 卖单 -->
-    <ul class="ul buy-ul" v-if="pairInfo">
+    <ul
+      class="ul buy-ul"
+      v-if="pairInfo">
       <li class="li-price mb-14">
         <div class="label">{{ $t('price') }}</div>
         <div class="content">
-          <currency-input class="trade"
+          <currency-input
+            class="trade"
             :disabled="true"
             :placeholder="$t('market_ph')"
-            :currency="state.pro.currency_name">
-          </currency-input>
+            :currency="state.pro.currency_name"/>
         </div>
       </li>
       <li class="li-amount mb-14">
         <div class="label">{{ $t('amount') }}</div>
         <div class="content">
-          <currency-input class="trade"
+          <currency-input
+            class="trade"
             :class="[input.sell_amount.status]"
             v-model="sell_amount"
             :currency="state.pro.product_name"
-            :scale="pairInfo.amount_scale">
-          </currency-input>
+            :scale="pairInfo.amount_scale"/>
         </div>
       </li>
       <li class="li-volume mb-14">
         <div class="half-wrap right">
           <div class="product-volume">
             <div class="avbl">
-              <div class="avbl-label">{{ $t('avlb') }} {{ state.pro.product_name }}</div>
-              <div class="avbl-value" v-if="product">{{ product.available | fixed(pairInfo.product_scale) }}</div>
-              <div class="avbl-value" v-else>...</div>
+              <div class="avbl-label">{{ $t('avlb') }} {{ state.pro.product_name }}</div>:
+              <div
+                class="avbl-value"
+                v-if="product">{{ product.available | fixed(pairInfo.product_scale) }}</div>
+              <div
+                class="avbl-value"
+                v-else>...</div>
             </div>
             <div class="ix-slider">
-              <ix-slider :disabled="!currencyAvailable" @input="onSliderDragEnd($event, 'sell')" height="4" :dot-size="14" :lazy="true" :min="0" :max="100" :piecewiseLabel="true" :interval="1" :piecewise="false" :show="tabActive">
-                <template slot="label" slot-scope="{ label, active }">
-                  <span :class="['custom-label', { active }]" v-if="label % 25 === 0">
-                  </span>
+              <ix-slider
+                :disabled="!currencyAvailable"
+                @input="onSliderDragEnd($event, 'sell')"
+                height="4"
+                :dot-size="14"
+                :lazy="true"
+                :min="0"
+                :max="100"
+                :piecewise-label="true"
+                :interval="1"
+                :piecewise="false"
+                :show="tabActive">
+                <template
+                  slot="label"
+                  slot-scope="{ label, active }">
+                  <span
+                    :class="['custom-label', { active }]"
+                    v-if="label % 25 === 0"/>
                 </template>
-                <template slot="tooltip" slot-scope="tooltip">
+                <template
+                  slot="tooltip"
+                  slot-scope="tooltip">
                   <div class="custom-tooltip">
                     {{ tooltip.value }}%
                   </div>
@@ -107,13 +152,14 @@
       </li>
       <li class="li-submit">
         <div class="half-wrap right">
-          <v-btn :label="$t('operate_sell', {coin: state.pro.product_name})"
+          <v-btn
+            :label="$t('operate_sell', {coin: state.pro.product_name})"
             class="submit-btn"
             radius="4"
             color="ixsell"
             height="44"
             :loading="submitting === 'SELL'"
-            @click="submit('SELL')"></v-btn>
+            @click="submit('SELL')"/>
         </div>
       </li>
     </ul>
@@ -128,7 +174,7 @@ import _ from 'lodash'
 import ixSlider from '@/components/common/ix-slider/'
 
 export default {
-  name: 'proMarketOrder',
+  name: 'ProMarketOrder',
   data () {
     return {
       state,
@@ -136,7 +182,7 @@ export default {
       sell_amount: '',
       buy_amount: '',
       buy_price: '',
-      buy_price: '',
+      sell_price: '',
       input: {
         buy_amount: {
           timer: null,
@@ -209,7 +255,7 @@ export default {
     },
     productAvailable () {
       return this.product && !!this.product.available
-    },
+    }
   },
   watch: {
     'state.pro.pair': {
@@ -299,17 +345,17 @@ export default {
       // if ($amount.gt(this.pairInfo.max_amount)) {
       //   return utils.alert(this.$i18n.t('amount_high', {num: this.pairInfo.max_amount + ' ' + this.pairInfo.product_name}))
       // }
-    //   if ($bid.gt(0) && $ask.gt(0) && $bid.mul(1.05).lt($ask)) {
-    //     // 盘口差价较大，且下单价超过盘口
-    //     const ok = await utils.confirm({
-    //       trade: true,
-    //       content: this.$i18n.t('spread_too_big', {per: 5}),
-    //       title: this.$i18n.t('confirm_your_order')
-    //     })
-    //     if (!ok) {
-    //       return false
-    //     }
-    //   }
+      //   if ($bid.gt(0) && $ask.gt(0) && $bid.mul(1.05).lt($ask)) {
+      //     // 盘口差价较大，且下单价超过盘口
+      //     const ok = await utils.confirm({
+      //       trade: true,
+      //       content: this.$i18n.t('spread_too_big', {per: 5}),
+      //       title: this.$i18n.t('confirm_your_order')
+      //     })
+      //     if (!ok) {
+      //       return false
+      //     }
+      //   }
       this.submitting = side
       const order = {
         type: 2,
@@ -317,13 +363,13 @@ export default {
         price: 0,
         amount: 0,
         locked: $amount.toString(),
-        symbol: this.state.pro.pair,
+        symbol: this.state.pro.pair
       }
 
       // if (side === 'BUY') {
-        // order.locked = order.amount
-        // order.amount = 0
-        // delete order.amount
+      // order.locked = order.amount
+      // order.amount = 0
+      // delete order.amount
       // }
       const res = await service.createOrder(order)
       this.submitting = false
@@ -346,7 +392,7 @@ export default {
       }
     },
     onSliderDragEnd (value, dir) {
-      value = value / 100.0;
+      value = value / 100.0
       if (dir === 'buy') {
         this.setBuyVolumn(value)
       } else {
@@ -428,6 +474,10 @@ export default {
   .avbl-label {
     line-height: 17px;
     height: 17px;
+    display: inline;
+  }
+  .avbl-value {
+    display: inline;
   }
 }
 .checkbox {

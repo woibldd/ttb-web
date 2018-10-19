@@ -14,9 +14,10 @@
             <th class="right">{{ $t('deal_th_amount') }}</th>
             <th>{{ $t('deal_th_time') }}</th>
           </tr>
+          <!-- :key="deal.time+''+deal.price+deal.side+deal.amount" -->
           <tr
             v-for="(deal, index) in dealList"
-            :key="deal.time+''+deal.price+deal.side+deal.amount"
+            :key="index"
             :class="[deal.side, 'twinkling']"
             :style="getStyle(deal, index)">
             <td class="td-dir">

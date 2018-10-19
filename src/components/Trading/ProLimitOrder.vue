@@ -14,6 +14,11 @@
             :ask="state.pro.ask"
             :currency="pairInfo.currency_name"
             :scale="pairInfo.price_scale"/>
+          <div class="estimate">
+            ≈ {{ state.fiatMoneySymbol }} <fiat-money
+              :base="state.pro.currency_name"
+              :value="buy_price" />
+          </div>
         </div>
       </li>
       <li class="li-amount mb-14">
@@ -44,7 +49,7 @@
         <div class="half-wrap left">
           <div class="currency-volume">
             <div class="avbl">
-              <div class="avbl-label">{{ $t('avlb') }} {{ pairInfo.currency_name }}</div>
+              <div class="avbl-label">{{ $t('avlb') }} {{ pairInfo.currency_name }}</div>:
               <div
                 class="avbl-value"
                 v-if="currency">{{ currency.available | fixed(pairInfo.currency_scale) }}</div>
@@ -116,6 +121,11 @@
             :ask="state.pro.ask"
             :currency="pairInfo.currency_name"
             :scale="pairInfo.price_scale"/>
+          <div class="estimate">
+            ≈ {{ state.fiatMoneySymbol }} <fiat-money
+              :base="state.pro.currency_name"
+              :value="sell_price" />
+          </div>
         </div>
       </li>
       <li class="li-amount mb-14">
@@ -146,7 +156,7 @@
         <div class="half-wrap right">
           <div class="product-volume">
             <div class="avbl">
-              <div class="avbl-label">{{ $t('avlb') }} {{ pairInfo.product_name }}</div>
+              <div class="avbl-label">{{ $t('avlb') }} {{ pairInfo.product_name }}</div>:
               <div
                 class="avbl-value"
                 v-if="product">{{ product.available | fixed(pairInfo.product_scale) }}</div>
@@ -622,6 +632,11 @@ export default {
     width: 86%;
     float: left;
     box-sizing: border-box;
+    .estimate {
+      text-align: right;
+      color: #A5B4C5;
+      font-size: 12px;
+    }
   }
 }
 .li-amount,
@@ -670,6 +685,10 @@ export default {
   .avbl-label {
     line-height: 17px;
     height: 17px;
+    display: inline;
+  }
+  .avbl-value {
+    display: inline;
   }
 }
 .checkbox {
