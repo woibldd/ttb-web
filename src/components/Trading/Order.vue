@@ -485,10 +485,10 @@ export default {
       if (outer.scrollTop + outer.clientHeight >= inner.clientHeight - 10 ||
         (inner.clientHeight < outer.clientHeight && !this[tab].over)
       ) {
-        this.fetch(tab)
+        // this.fetch(tab)
       }
       // 有滚动操作时，自动刷新功能延后进行
-      this.loop()
+      // this.loop()
       // 有滚动操作时，通知 deals 浮窗关闭
       this.$eh.$emit('order-deals:hide')
     }, 500)
