@@ -28,7 +28,7 @@
         </a>
       </div>
     </div>
-    <kyc/>
+    <!-- <kyc/> -->
     <mine-summary/>
     <div class="ind_cen ind_tit">
       {{ $t('exchange_area') }}
@@ -176,7 +176,6 @@ import service from '@/modules/service'
 import {state} from '@/modules/store'
 import PairTable from '@/components/Trading/PairTable'
 import MineSummary from '@/components/Mine/MineSummary'
-import Kyc from '@/components/Activity/Kyc'
 
 export default {
   data: function () {
@@ -196,8 +195,8 @@ export default {
   components: {
     kSlider: Slider,
     PairTable,
-    MineSummary,
-    Kyc
+    MineSummary
+    // Kyc
   },
   computed: {
     announcementLink () {

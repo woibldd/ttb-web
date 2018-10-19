@@ -306,7 +306,7 @@ export default {
         {key: 'create_time', title: this.$i18n.t('time')},
         {key: 'currency', title: this.$i18n.t('currency')},
         {key: 'confirm', title: this.$i18n.t('confirm')},
-        {key: 'chain', title: this.$i18n.t('chain')},
+        // {key: 'chain', title: this.$i18n.t('chain')},
         {key: 'amount', title: this.$i18n.t('amount')} // -fee
       ]
       this.headerReward = [
