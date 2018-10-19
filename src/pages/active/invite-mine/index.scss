@@ -41,6 +41,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
+            margin-right: 10px;
 
             .summary {
                 display: flex;
@@ -168,14 +169,21 @@
         height: 210px;
         box-sizing: border-box;
         padding: 30px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        flex-direction: row;
+
+        .head_text {
+            font-size: 18px;
+            color: #FFFFFE;
+        }
+
+        .invite_boxs {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: row;
+        }
 
         
-          
-         
         // 抄的之前代码,懒得改了
         .invite_box {
             &.link {
@@ -194,19 +202,10 @@
             }
             // width: 550px;
             .box_title {
-                font-size: 18px;
+                font-size: 16px;
                 color: #CBE6FD;
                 font-weight:400;
                 line-height: 18px;
-
-            &::before {
-                content: '';
-                display: inline-block;
-                width:2px;
-                margin-right: 12px;
-                height:17px;
-                background:linear-gradient(0deg,rgba(30,28,28,1),rgba(202,170,108,1));
-            }
             }
             .box_body {
                 .input_box {

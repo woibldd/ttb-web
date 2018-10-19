@@ -92,43 +92,52 @@
 
       <!-- 我的邀请信息 -->
       <div class="my-invite-info invite-info-row">
-        <div class="invite_box link">
-          <div class="box_title">{{ $t('profile_left_invite_link') }}</div>
-          <div class="box_body">
-            <div class="input_box mt-18">
-              <div class="link-content">{{ inviteLink }}</div>
-              <a
-                class="copy_button"
-                @click.prevent="copy('inviteLink')">{{ $t('profile_left_copy_invite_link') }}</a>
+        <div class="box-head">
+          <div class="head__stick"/>
+          <div class="head_text">
+            <span>{{ $t('my_invite_solution') }}</span>
+          </div>
+
+        </div>
+        <div class="invite_boxs">
+          <div class="invite_box link">
+            <div class="box_title">{{ $t('profile_left_invite_link') }}</div>
+            <div class="box_body">
+              <div class="input_box mt-18">
+                <div class="link-content">{{ inviteLink }}</div>
+                <a
+                  class="copy_button"
+                  @click.prevent="copy('inviteLink')">{{ $t('profile_left_copy_invite_link') }}</a>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="invite_box code ml-20">
-          <div class="box_title">{{ $t('profile_left_invite_code') }}</div>
-          <div class="box_body">
-            <div class="input_box mt-18">
-              <p class="link-content">{{ inviteCode }}</p>
-              <a
-                class="copy_button"
-                @click.prevent="copy('inviteCode')">{{ $t('profile_left_copy_invite_code') }}</a>
+          <div class="invite_box code ml-20">
+            <div class="box_title">{{ $t('profile_left_invite_code') }}</div>
+            <div class="box_body">
+              <div class="input_box mt-18">
+                <p class="link-content">{{ inviteCode }}</p>
+                <a
+                  class="copy_button"
+                  @click.prevent="copy('inviteCode')">{{ $t('profile_left_copy_invite_code') }}</a>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="invite_box qrcode ml-20">
-          <div class="box_title">{{ $t('profile_left_invite_qrcode') }}</div>
-          <div class="box_body">
-            <div
-              class="btn_select mt-18"
-              @click="showQrCode"
-              @mouseover="showQrCode(true)"
-              @mouseout="showQrCode(false)">{{ $t('profile_left_invite_qrcode') }}</div>
-            <div
-              class="qrcode"
-              v-show="showCode"
-            >
-              <canvas
-                class="qr-img"
-                ref="qr"/>
+          <div class="invite_box qrcode ml-20">
+            <div class="box_title">{{ $t('profile_left_invite_qrcode') }}</div>
+            <div class="box_body">
+              <div
+                class="btn_select mt-18"
+                @click="showQrCode"
+                @mouseover="showQrCode(true)"
+                @mouseout="showQrCode(false)">{{ $t('profile_left_invite_qrcode') }}</div>
+              <div
+                class="qrcode"
+                v-show="showCode"
+              >
+                <canvas
+                  class="qr-img"
+                  ref="qr"/>
+              </div>
             </div>
           </div>
         </div>
