@@ -42,7 +42,7 @@ export const state = {
     price: 0
   },
   rate: {
-    TB: null,
+    IX: null,
     USDT: null,
     BTC: null,
     ETH: null,
@@ -73,7 +73,7 @@ export const local = new Locals('store', {
   orderbookMode: 'both',
   regionId: '',
   timezone: '',
-  interval: '15',
+  interval: '1D',
   supportNum: 129,
   proOnFav: false,
   pairTableTab: 'USDT',

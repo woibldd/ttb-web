@@ -52,6 +52,9 @@ const utils = {
     if (/^zh(-|$)/.test(lang)) {
       return 'zh-CN'
     }
+    if (/^ko(-|$)/.test(lang)) {
+      return 'ko'
+    }
     if (/^zh-(HK|TW)/.test(lang)) {
       return 'zh-HK'
     }
@@ -68,6 +71,18 @@ const utils = {
       return 'zh-tw'
     }
     return 'en'
+  },
+  getStorageValue (key, field) {
+    if ('localStorage' in window) {
+      debugger
+      let item = window.localStorage.getItem(key)
+      debugger
+      if (field) {
+        return JSON.parse(item)[field]
+      }
+      return item
+    }
+    return ''
   },
   getDefaultTimezone () {
     const data = window.localStorage.getItem('tradingview.chartproperties')
@@ -123,6 +138,7 @@ const utils = {
     const map = {
       'zh-CN': 'CNY',
       'zh-HK': 'HKD',
+      'ko': 'KRW',
       'en': 'USD'
     }
     return map[locale] || 'USD'
@@ -131,6 +147,7 @@ const utils = {
     const map = {
       'zh-CN': '¥',
       'zh-HK': 'HK$',
+      'ko': '₩',
       'en': '$'
     }
     return map[locale] || 'US$'
@@ -139,6 +156,7 @@ const utils = {
     const map = {
       'CNY': '¥',
       'USD': '$',
+      'KRW': '₩',
       'HKD': 'HK$',
       'JPY': 'JP¥'
     }

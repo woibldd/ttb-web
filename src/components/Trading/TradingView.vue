@@ -14,7 +14,6 @@ import utils from '@/modules/utils'
 import configIniter from '@/libs/tradingview/config'
 import datafeeder from '@/libs/tradingview/datafeeder'
 import {local, state} from '@/modules/store'
-
 // preload
 const tvlib = utils.getExtModule('TradingView')
 
@@ -48,6 +47,11 @@ export default {
           return 'zh'
         case 'zh-HK':
           return 'zh_TW'
+        case 'ko':
+          return 'ko'
+        case 'en':
+        default:
+          return 'en'
       }
     },
     async init (pair) {
