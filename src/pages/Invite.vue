@@ -3,6 +3,11 @@
     <div class="profile-container">
       <div class="title-box">{{ $t('profile_left_invite') }}</div>
       <div class="invite-wrap">
+        <div class="notice">
+          <p
+            class="title"
+            v-html="$t('invite_notice_title')"/>
+        </div>
         <div class="share_style login_show">
           <div class="post_btn share_div"><p>{{ $t('profile_left_invite_qrcode') }}</p>
             <div
@@ -265,13 +270,6 @@ export default {
 
         .invite-wrap {
           flex: 1;
-
-          &.left {
-
-          }
-          &.right {
-            margin-left: 40px;
-          }
         }
       }
       .title-box {
@@ -283,6 +281,23 @@ export default {
         border-bottom: 1px solid #e6e6e6;
       }
       .invite-wrap {
+         .notice {
+            background-image: url(~@/assets/invite-notice-bg.png);
+            background-size: cover;
+            height: 90 / 980 * 920px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: #ffffff;
+            font-weight: 400;
+            margin-bottom: 40px;
+
+            .title {
+              max-width: 600px;
+            }
+         }
         margin-top: 24px;
         min-height: 150px;
         .share_style .post_btn {

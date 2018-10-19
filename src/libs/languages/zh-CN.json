@@ -543,7 +543,7 @@
   "has_no_send": "未派发",
   "has_done": "发放",
   "keep_ix_reward_yesterday": "昨日持IX分配手续费：",
-  "keep_million_ix_reward_yesterday": "昨日连续持有百万IX分配：",
+  "keep_million_ix_reward_yesterday": "昨日连续持有1BTC等值IX（%{ix}枚）分配：",
   "ix_second_trading_amount": "IX二级市场流通量：",
   "ix_lock_amount": "IX锁仓总量：",
   "ix_trading_amout": "IX流通市值：",
@@ -556,5 +556,6 @@
   "lock_login": "登录后操作",
   "unlock_login": "登录后操作",
   "robot_use_tutorial": "机器人使用教程",
-  "current_lock_ix": "当前锁仓量："
+  "current_lock_ix": "当前锁仓量：",
+  "invite_notice_title": "邀请好友注册，邀请者可<span style=\"color: #FFD426;font-weight: bold;\">连续90天</span>获得被邀请者交易手续费的<span style=\"color: #FFD426;font-weight: bold;\">12%</span>"
 }

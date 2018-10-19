@@ -74,7 +74,7 @@
       </div>
       <div class="mine-info-row">
         <p class="row__label">
-          {{ $t('keep_million_ix_reward_yesterday') }}
+          {{ $t('keep_million_ix_reward_yesterday', {ix: allBonusData.base}) }}
         </p>
         <p class="row__value">
           {{ allBonusData.ix_rate | round(4) }}

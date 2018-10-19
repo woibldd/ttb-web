@@ -540,7 +540,7 @@
   "footer_partners": "협력매체",
   "footer_copr": "합동자",
   "keep_ix_reward_yesterday": "어제 BTC 가 수수료를 분배 했다：",
-  "keep_million_ix_reward_yesterday": "어제 1 백만 IX 분배 가 계속 되었다：",
+  "keep_million_ix_reward_yesterday": "1BTC는 IX를（%{ix}枚）만큼 분배한것과 같다: ",
   "ix_second_trading_amount": "IX중고시장 유통량：",
   "ix_lock_amount": "IX락업 총량：",
   "ix_trading_amout": "IX유통시가：",
@@ -553,5 +553,6 @@
   "lock_login": "로그인",
   "unlock_login": "로그인",
   "robot_use_tutorial": "로봇 사용 과정설명서",
-  "current_lock_ix": "현재 락업량："
+  "current_lock_ix": "현재 락업량：",
+  "invite_notice_title": "친구를 요청하여 가입을 할수있습니다. 친구를 요청한 분은 련속 <span style=\"color: #FFD426;font-weight: bold;\">90일동안</span> 요청자거래 수수료의 <span style=\"color: #FFD426;font-weight: bold;\">12%</span>를획득할수 있습니다"
 }

@@ -73,7 +73,7 @@
           class="fee__pie"
           v-if="allBonusData.ix_rate != '0'">
           <p class="cm-tit">
-            {{ $t('keep_million_ix_reward_yesterday') }}
+            {{ $t('keep_million_ix_reward_yesterday', {ix: allBonusData.base}) }}
           </p>
           <p
             class="cm-bt"

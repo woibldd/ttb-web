@@ -666,7 +666,7 @@
   "has_no_send": "Not Distribute",
   "has_done": "Issue",
   "keep_ix_reward_yesterday": "Yesterday's distributed trading fees with holding BTC: ",
-  "keep_million_ix_reward_yesterday": "Yesterday's dividend with continuously holding Million IX:",
+  "keep_million_ix_reward_yesterday": "1BTC equivalent IX (%{ix} tokens) allocation:",
   "ix_second_trading_amount": "IX secondary market turnover:",
   "ix_lock_amount": "The gross of IX's locked position:",
   "ix_trading_amout": "Circulation market value:",
@@ -679,5 +679,6 @@
   "lock_login": "Sign in",
   "unlock_login": "Sign in",
   "robot_use_tutorial": "Robot Guidebook",
-  "current_lock_ix": "Current locked amount:"
+  "current_lock_ix": "Current locked amount:",
+  "invite_notice_title": "Invite friends to sign up and the invitee can get <span style=\"color: #FFD426;font-weight: bold;\">12%</span> of the trading fee for <span style=\"color: #FFD426;font-weight: bold;\">90 consecutive days</span>"
 }
