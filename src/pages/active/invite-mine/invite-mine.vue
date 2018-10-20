@@ -96,11 +96,11 @@
       v-if="isLogin">
       <div class="invite-summary invite-info-row">
         <div class="invite-item">
-          <span class="num">{{ 995 }}</span>
+          <span class="num">{{ myInvite.invites }}</span>
           {{ $t('invite_all_people') }}
         </div>
         <div class="invite-item">
-          <div class="num">{{ 8838848.233 }} <span class="unit">IX</span></div>
+          <div class="num">{{ myInvite.total }} <span class="unit">IX</span></div>
           {{ $t('invite_all_reward') }}
         </div>
       </div>
@@ -160,12 +160,12 @@
 
       <!-- 邀请记录 -->
       <div class="invite-history-row">
-        <div class="history-box">
+        <div class="history-box record">
           <div class="box-head">
             <div class="head__stick"/>
             <div class="head_text">
               <span>{{ $t('invite_history_text') }}</span>
-              <span class="total-people-num">{{ $t('invite_total_people_num', {num: 99}) }}</span>
+              <span class="total-people-num">{{ $t('invite_total_people_num', {num: myInvite.invites }) }}</span>
             </div>
 
           </div>
@@ -177,9 +177,9 @@
             <div
               class="box-table-tr"
               :key="index"
-              v-for="(item,index) in inviteInfo">
-              <span>{{ item.phone }}</span>
-              <span>{{ item.time }}</span>
+              v-for="(item,index) in invitationList.list">
+              <span class="td">{{ item.phone || item.email }}</span>
+              <span class="td">{{ item.register_time | ts2date }}</span>
             </div>
           </div>
         </div>
@@ -189,25 +189,30 @@
             <div class="head__stick"/>
             <div class="head_text">
               <span>{{ $t('commission_history_text') }}</span>
-              <span class="total-people-num">{{ $t('total_invite_reward', {num: 99}) }}</span>
+              <span class="total-people-num">{{ $t('total_invite_reward', {num: myInvite.total }) }}</span>
             </div>
 
           </div>
           <div class="box-table">
             <div class="box-table-th">
-              <span class="th_td">{{ $t('username') }}</span>
-              <span class="th_td">{{ $t('commission_amount') }}</span>
-              <span class="th_td">{{ $t('time') }}</span>
-              <span class="th_td">{{ $t('status') }}</span>
+              <span class="th_td username">{{ $t('username') }}</span>
+              <span class="th_td amount">{{ $t('commission_amount') }}</span>
+              <span class="th_td time">{{ $t('time') }}</span>
+              <span class="th_td state">{{ $t('status') }}</span>
             </div>
             <div
               class="box-table-tr"
               :key="index"
-              v-for="(item,index) in inviteInfo">
-              <span>{{ item.phone }}</span>
-              <span>{{ item.time }}</span>
-              <span>{{ item.time }}</span>
-              <span>{{ item.time }}</span>
+              v-for="(item,index) in commissionList.list">
+              <span class="username">{{ item.phone || item.email }}</span>
+              <span class="amount">{{ item.amount | round(4) }}</span>
+              <span
+                class="time"
+                v-if="item.release_time">{{ item.release_time | ts2date('M-D H:m') }}</span>
+              <span
+                class="time"
+                v-else>--</span>
+              <span class="state">{{ item.state===0 ? $t('waiting_for_release') : $t('done') }}</span>
             </div>
           </div>
         </div>
@@ -248,13 +253,29 @@ import service from '@/modules/service'
 import utils from '@/modules/utils'
 import copyToClipboard from 'copy-to-clipboard'
 const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
+const PageSize = 10
 
 export default {
   data () {
     return {
       state,
       showCode: false,
-      inviteInfo: [],
+      invitationList: {
+        list: [],
+        page: 1,
+        size: PageSize + 1,
+        isEnd: true
+      },
+      commissionList: {
+        list: [],
+        page: 1,
+        size: PageSize + 1,
+        isEnd: true
+      },
+      myInvite: {
+        total: 0,
+        invites: 0
+      },
       hoveringQuestion: 0
     }
   },
@@ -289,6 +310,51 @@ export default {
       copyToClipboard(this[key])
       utils.success(this.$i18n.t('copyed'))
     },
+    async getInviteList () {
+      let result = await service.getMyInviteList({
+        page: this.invitationList.page++,
+        size: PageSize
+      })
+      if (result && !result.code) {
+        if (!result.data || result.data.length < PageSize) {
+          this.invitationList.isEnd = true
+        } else {
+          this.invitationList.isEnd = false
+        }
+        if (this.invitationList.list.length > 0) {
+          this.invitationList.list = this.invitationList.list.concat(result.data)
+        } else {
+          this.invitationList.list = result.data
+        }
+      } else {
+        utils.alert(result.message)
+      }
+    },
+    async getCommissionList () {
+      let result = await service.getCommissionList({
+        page: this.commissionList.page++,
+        size: PageSize
+      })
+      if (!result.code) {
+        if (!result.data || result.data.length < PageSize) {
+          this.commissionList.isEnd = true
+        } else {
+          this.commissionList.isEnd = false
+        }
+
+        if (this.commissionList.list.length >= 0) {
+          this.commissionList.list = this.commissionList.list.concat(result.data)
+        } else {
+          this.commissionList.list = result.data
+        }
+      }
+    },
+    async getMyInviteSummary () {
+      let result = await service.getMyInviteSummary()
+      if (!result.code) {
+        this.myInvite = result.data
+      }
+    },
     async setQr (url) {
       const QRCode = await qrcode()
       QRCode.toCanvas(
@@ -318,6 +384,14 @@ export default {
     },
     showDetail (num) {
       this.hoveringQuestion = num
+    }
+  },
+  created () {
+    if (this.isLogin && this.inviteLink) {
+      this.getMyInviteSummary()
+      this.setQr(this.inviteLink)
+      this.getInviteList()
+      this.getCommissionList()
     }
   }
 }
