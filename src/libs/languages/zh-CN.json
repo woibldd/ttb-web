@@ -568,7 +568,7 @@
   "activity_invite_mine_question_c": "邀请挖矿如何产生返佣",
   "activity_invite_mine_question_c_expand": "此后该好友每产生一笔真实交易，会在交易手续费基础上产生相应比例的返佣。 返佣的形式以平台通证IX形式发送到用户的交易账户，返佣比例为12%。 返佣额=被邀请人实际产生交易量X手续费比例X返佣比例。 邀请人享受好友交易返佣从平台开放邀请返佣并且双方建立邀请关系开始计算，有效长达90天。",
   "activity_invite_mine_question_d": "返佣额计算方式？",
-  "activity_invite_mine_question_d_expand": "平台对每小时相应币种的市价进行加权平均计算，返佣金额以实际返佣金额为准。 建立起邀请关系后，平台后续推出的多重福利，邀请人均可以享受到。？",
+  "activity_invite_mine_question_d_expand": "平台对每小时相应币种的市价进行加权平均计算，返佣金额以实际返佣金额为准。 建立起邀请关系后，平台后续推出的多重福利，邀请人均可以享受到。",
   "invite_all_people": "累计邀请人数",
   "invite_all_reward": "累计返佣金额",
   "invite_total_people_num": "我的累计邀请人数: %{num} 人",
