@@ -1,7 +1,18 @@
 <template>
   <div class="exchange-rank">
     <div class="exchange-rank-container">
-      <div class="banner"/>
+      <div class="banner">
+        <div class="banner__info">
+          <div class="info-text">
+            <span class="all-people">{{ $t('activity_rank_all_people') }}</span>
+            {{ $t('activity_rank_mine_competition') }}
+          </div>
+          <div class="info-time">
+            <span class="time-label">{{ $t('activity_time') }}</span><!--
+            --><span class="date">{{ activityTime }}</span>
+          </div>
+        </div>
+      </div>
       <div class="body">
         <div class="flex-column">
           <div class="flex-box reward">
@@ -21,37 +32,74 @@
                 class="box-table"
                 v-if="isLogin">
                 <div class="box-table-th">
-                  <span class="th_td username">{{ $t('activity_rank_rank_position') }}</span>
-                  <span class="th_td amount"> UID</span>
-                  <span class="th_td time">{{ $t('mine_mined') }}IX</span>
-                  <span class="th_td state">{{ $t('activity_rank_estimate_reward') }}USDT</span>
+                  <span class="th_td rank_pos">{{ $t('activity_rank_rank_position') }}</span>
+                  <span class="th_td uid">UID</span>
+                  <span class="th_td time">{{ $t('mine_mined') }} IX</span>
+                  <span class="th_td state">{{ $t('activity_rank_estimate_reward') }} USDT</span>
                 </div>
                 <div
                   class="box-table-tr"
                   :key="index"
-                  v-for="(item,index) in rankList">
-                  <span class="username">{{ item.phone || item.email }}</span>
-                  <span class="amount">{{ item.amount | round(4) }}</span>
-                  <span
-                    class="time"
-                    v-if="item.release_time">{{ item.release_time | ts2date('M-D H:m') }}</span>
-                  <span
-                    class="time"
-                    v-else>--</span>
-                  <span class="state">{{ item.state===0 ? $t('waiting_for_release') : $t('done') }}</span>
+                  v-for="(item,index) in 18">
+                  <span class="rank_pos pl-10">
+                    <icon
+                      name="rank-leading"
+                      class="icon-rank-leading"
+                      v-if="index < 6"/>
+                    {{ index }}
+                  </span>
+                  <span class="uid">{{ 15677778888 }}</span>
+                  <span class="mined">{{ 766.99 }}</span>
+                  <span class="state">22222.8</span>
                 </div>
               </div>
-              <div class="box-table">
+              <div
+                class="box-table"
+                v-if="false">
                 {{ $t('activity_rank_no_rank_people') }}
               </div>
+            </div>
+            <div class="rank__bottom">
+              <div class="my_all_mine mr-169">{{ $t('activity_rank_my_mined') }} <span class="unit">{{ 88899 }}IX</span></div>
+              <div class="my_all_mine">{{ $t('activity_rank_rank_position') }}: {{ 99 }}</div>
             </div>
           </div>
 
         </div>
         <div class="flex-column right">
-          <div class="flex-box enroll">enroll</div>
-          <div class="flex-box rule">rule</div>
-          <div class="flex-box desc">desc</div>
+          <div class="flex-box enroll">
+            <div class="box-title">
+              {{ $t('activity_rank_sign') }}
+            </div>
+            <div class="enroll__button">
+              {{ $t('activity_rank_i_signing') }}
+            </div>
+            <div class="box__tips mt-26">
+              <span class="unit">* </span>{{ $t('activity_rank_signing_tips') }}
+            </div>
+          </div>
+          <div class="flex-box rule pt-28">
+            <div class="box-title mb-20">
+              {{ $t('activity_rank_rules') }}
+            </div>
+            <div class="rules__detail">
+              <div v-html="$t('activity_rank_rules_detail')"/>
+            </div>
+          </div>
+          <div class="flex-box desc pt-28">
+            <div class="box-title">
+              {{ $t('activity_rank_reward_intro') }}
+            </div>
+            <div class="desc__intro__lead">{{ $t('activity_rank_intro_title') }}</div>
+            <div class="desc__intro__detail">
+              <div
+                v-for="i in 4"
+                :key="i"> 第一名 活动期间第一名 活动期间</div>
+            </div>
+            <div class="box__tips mt-49">
+              <span class="unit">* </span>{{ $t('activity_rank_signing_tips') }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -62,7 +110,7 @@ import {state} from '@/modules/store'
 export default {
   data () {
     return {
-      rankList: {},
+      rankList: [],
       state
     }
   },
@@ -72,6 +120,9 @@ export default {
         return true
       }
       return true
+    },
+    activityTime () {
+      return '2018年10月21日00:00-2018年10月27日24:00'
     }
   }
 }
