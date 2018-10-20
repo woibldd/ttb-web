@@ -59,6 +59,7 @@ const ActivityIndex = () => import(/* webpackChunkName: "ActivityIndex" */ '@/pa
 const LockWarehouse = () => import(/* webpackChunkName: "LockWarehouse" */ '@/pages/active/LockWarehouse.vue')
 
 const KycRelay = () => import(/* webpackChunkName: "KycRelay" */ '@/pages/active/kycRelay.vue')
+const ExchangeRank = () => import(/* webpackChunkName: "ExchangeRank" */ '@/pages/active/ExchangeRank.vue')
 
 async function beforeEach (to, from, next) {
   state.loading = true
@@ -150,6 +151,11 @@ let router = new Router({
           path: 'kyc_relay',
           name: 'kycRelay',
           component: KycRelay
+        },
+        {
+          path: 'rank',
+          name: 'exchangeRank',
+          component: ExchangeRank
         }
       ]
     },
