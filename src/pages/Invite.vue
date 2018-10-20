@@ -299,7 +299,7 @@ export default {
             }
          }
         margin-top: 24px;
-        min-height: 150px;
+        min-height: 160px;
         .share_style .post_btn {
           padding: 0;
           width: 160px;
