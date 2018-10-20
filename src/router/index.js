@@ -59,7 +59,7 @@ const ActivityIndex = () => import(/* webpackChunkName: "ActivityIndex" */ '@/pa
 const LockWarehouse = () => import(/* webpackChunkName: "LockWarehouse" */ '@/pages/active/LockWarehouse.vue')
 
 const KycRelay = () => import(/* webpackChunkName: "KycRelay" */ '@/pages/active/kycRelay.vue')
-const ExchangeRank = () => import(/* webpackChunkName: "ExchangeRank" */ '@/pages/active/ExchangeRank.vue')
+const ExchangeRank = () => import(/* webpackChunkName: "ExchangeRank" */ '@/pages/active/ExchangeRank')
 
 async function beforeEach (to, from, next) {
   state.loading = true
