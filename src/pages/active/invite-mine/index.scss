@@ -27,6 +27,24 @@
         height:20px;
         font-size:20px;
         margin-bottom: 72px;
+
+        
+        .arrow {
+            width: 60px;
+            height: 4px;
+            display: inline-block;
+            vertical-align: middle;
+
+            &.left {
+              margin-right: 14px;
+              background:linear-gradient(90deg,rgba(30,28,28,1),rgba(202,170,108,1));
+            }
+
+            &.right {
+              background:linear-gradient(-90deg,rgba(30,28,28,1),rgba(202,170,108,1));
+            }
+          }
+          
     }
     .content__questions {
         height: 300px;

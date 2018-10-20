@@ -13,7 +13,6 @@
         <i class="arrow left"/>
         {{ $t('how_to_get_reward') }}
         <i class="arrow right"/>
-
       </div>
       <ul class="content__questions">
         <li
