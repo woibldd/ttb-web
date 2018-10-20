@@ -49,16 +49,17 @@
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
-                  <a
-                    href="https://ix.com/activity/lock"
+                  <router-link
+                    :to="{name: 'LockWarehouse'}"
                     target="_blank"
-                    class="link">{{ $t("trading_mine") }}</a>
+                    class="link">{{ $t("trading_mine") }}
+                  </router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <a
-                    href="https://ix.com/profile/invite"
+                  <router-link
+                    :to="{name: 'InviteMineActivity'}"
                     target="_blank"
-                    class="link">{{ $t("邀请挖矿") }}</a>
+                    class="link">{{ $t("邀请挖矿") }}</router-link>
                 </li>
               </ul>
             </div>
