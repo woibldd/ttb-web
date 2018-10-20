@@ -38,13 +38,14 @@
             </div>
           </div>
 
+          <!-- 挖矿, 炒了白皮书的样式 -->
           <div class="nav_link whitepaper">
             <router-link
               :to="{name: 'LockWarehouse'}"
               class="nav_link ml-30"
               target="_blank">{{ $t('mining') }}<icon
-                name="dig-hover"
-                class="mining-dig ml-5"/>
+                class="arrow ml-5"
+                name="arrow-down-yellow"/>
             </router-link>
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
