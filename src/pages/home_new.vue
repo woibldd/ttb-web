@@ -163,6 +163,16 @@
                 src="~@/assets/copr-logo-blk.png">
             </a>
           </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="http://hangliancj.com"
+              target="_blank">
+              <img
+                class="logo hl"
+                src="~@/assets/copr-logo-hl.png">
+            </a>
+          </div>
         </div>
       </div>
     </div>

@@ -57,6 +57,7 @@ const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index
 // 活动页面
 const ActivityIndex = () => import(/* webpackChunkName: "ActivityIndex" */ '@/pages/active/index.vue')
 const LockWarehouse = () => import(/* webpackChunkName: "LockWarehouse" */ '@/pages/active/LockWarehouse.vue')
+const InviteMineActivity = () => import(/* webpackChunkName: "InviteMineActivity" */ '@/pages/active/invite-mine')
 
 const KycRelay = () => import(/* webpackChunkName: "KycRelay" */ '@/pages/active/kycRelay.vue')
 const ExchangeRank = () => import(/* webpackChunkName: "ExchangeRank" */ '@/pages/active/ExchangeRank')
@@ -178,6 +179,11 @@ let router = new Router({
       path: '/activity/lock',
       name: 'LockWarehouse',
       component: LockWarehouse
+    },
+    {
+      path: '/activity/invite-mine',
+      name: 'InviteMineActivity',
+      component: InviteMineActivity
     },
     {
       path: '/PrivacyPolicy',

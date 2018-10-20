@@ -38,13 +38,32 @@
             </div>
           </div>
 
-          <router-link
-            :to="{name: 'LockWarehouse'}"
-            class="nav_link ml-30"
-            target="_blank">{{ $t('mining') }}<icon
-              name="dig-hover"
-              class="mining-dig ml-5"/>
-          </router-link>
+          <div class="nav_link whitepaper">
+            <router-link
+              :to="{name: 'LockWarehouse'}"
+              class="nav_link ml-30"
+              target="_blank">{{ $t('mining') }}<icon
+                name="dig-hover"
+                class="mining-dig ml-5"/>
+            </router-link>
+            <div class="dropdown-sub-menu">
+              <ul class="dropdown-list pt-10 pb-10">
+                <li class="dropdown-item pl-24 pr-24">
+                  <router-link
+                    :to="{name: 'LockWarehouse'}"
+                    target="_blank"
+                    class="link">{{ $t("trading_mine") }}
+                  </router-link>
+                </li>
+                <li class="dropdown-item pl-24 pr-24">
+                  <router-link
+                    :to="{name: 'InviteMineActivity'}"
+                    target="_blank"
+                    class="link">{{ $t("invite_mine") }}</router-link>
+                </li>
+              </ul>
+            </div>
+          </div>
 
           <router-link
             :to="{name: 'kycRelay'}"

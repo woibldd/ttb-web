@@ -570,6 +570,9 @@ const service = {
   // 全网挖矿详细 基准算力等
   getLockMineTotal () {
     return request('mine/exchange/ix/total')
+  },
+  getMyInviteSummary () {
+    return request('bonus/invite/me')
   }
 
 }
