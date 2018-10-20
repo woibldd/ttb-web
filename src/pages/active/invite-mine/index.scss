@@ -86,13 +86,12 @@
                 }
             }
 
-            &:hover {
+            &.focus {
                 margin-right: 302px;
                 transition: margin .4s linear;
                 .detail {
                     width: 302px;
                     opacity: 1;
-
                 }
             }
         }

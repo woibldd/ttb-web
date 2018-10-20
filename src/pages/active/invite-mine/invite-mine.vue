@@ -16,43 +16,58 @@
 
       </div>
       <ul class="content__questions">
-        <li class="question-item">
+        <li
+          class="question-item"
+          :class="[hoveringQuestion == 0 && 'focus']"
+          @mouseenter="showDetail(0)">
           <div class="summary">
             <div class="symbol">01</div>
             {{ $t('activity_invite_mine_question_a') }}
           </div>
-          <div class="detail">
+          <div
+            class="detail">
             <div class="text">
               {{ $t('activity_invite_mine_question_a_expand') }}
-
             </div>
           </div>
         </li>
-        <li class="question-item">
+        <li
+          class="question-item"
+          :class="[hoveringQuestion == 1 && 'focus']"
+          @mouseenter="showDetail(1)">
           <div class="summary">
             <div class="symbol">02</div>
             {{ $t('activity_invite_mine_question_b') }}
           </div>
-          <div class="detail">
+          <div
+            class="detail">
             <div class="text">
               {{ $t('activity_invite_mine_question_b_expand') }}
 
             </div>
           </div>
         </li>
-        <li class="question-item">
+        <li
+          class="question-item"
+          :class="[hoveringQuestion == 2 && 'focus']"
+
+          @mouseenter="showDetail(2)">
           <div class="summary">
             <div class="symbol">03</div>
             {{ $t('activity_invite_mine_question_c') }}
           </div>
-          <div class="detail">
+          <div
+            class="detail">
             <div class="text">
               {{ $t('activity_invite_mine_question_c_expand') }}
 
             </div>
           </div>
         </li>
-        <li class="question-item">
+        <li
+          class="question-item"
+          :class="[hoveringQuestion == 3 && 'focus']"
+          @mouseenter="showDetail(3)">
           <div class="summary">
             <div class="symbol">04</div>
             {{ $t('activity_invite_mine_question_d') }}
@@ -239,7 +254,8 @@ export default {
     return {
       state,
       showCode: false,
-      inviteInfo: []
+      inviteInfo: [],
+      hoveringQuestion: 0
     }
   },
   components: {
@@ -299,6 +315,9 @@ export default {
       } else {
         this.showCode = !this.showCode
       }
+    },
+    showDetail (num) {
+      this.hoveringQuestion = num
     }
   }
 }
