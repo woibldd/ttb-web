@@ -5,40 +5,14 @@
     }
 
     .mb-90 {
-        margin-bottom: 90px;
+        padding-bottom: 90px;
     }
     .banner{
-        height: 550px;
+        height: 640px;
         width: 100%;
-        background-image: url(/static/active/invite-mine/banner.png);
+        background-image: url(/static/active/invite-mine/banner-unlogin.png);
         background-repeat: no-repeat;
         background-position: center center;
-        color: #ffffff;
-        display: flex;
-        flex-direction: row-reverse;
-        padding-right: 270px;
-        box-sizing: border-box;
-
-        .text-wrapper {
-            width: 50%;
-            text-align: center;
-            height: 100%;
-            padding-top: 100px;
-        }
-
-        .first-floor {
-          font-size: 94px;  
-          font-weight:bold;
-        }
-        .second-floor, .fourth-floor {
-            font-size: 24px;
-            font-weight:400;
-        }
-        .third-floor {
-            color: #ECA22D;
-            font-size: 25px;
-            font-weight:900;
-        }
     }
 
     .content {

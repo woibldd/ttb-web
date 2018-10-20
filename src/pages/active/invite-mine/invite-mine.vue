@@ -5,15 +5,7 @@
         is-home="true"
       />
     </div>
-    <div class="banner mb-90">
-      <div class="text-wrapper">
-        <div class="first-floor mb-10"> <span v-html="$t('activeity_invite_banner_first')"/></div>
-        <div class="second-floor mb-20">{{ $t('activeity_invite_banner_second') }}</div>
-        <div class="third-floor mb-20"><span v-html="$t('activeity_invite_banner_third')"/></div>
-        <div class="fourth-floor f16 ">{{ $t('activeity_invite_banner_fourth') }}</div>
-      </div>
-
-    </div>
+    <div class="banner"/>
     <div
       class="content"
       v-if="!isLogin">
