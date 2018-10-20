@@ -658,13 +658,13 @@ export default {
         }
       }
       .oper-wait{
-        height: 231px;
+        height: 255px;
         background: #24292F;
         border-radius: 8px;
         position: relative;
         .num{
           text-align: center;
-          line-height: 231px;
+          line-height: 255px;
           color: #A6BED3;
           font-size: 30px;
         }
