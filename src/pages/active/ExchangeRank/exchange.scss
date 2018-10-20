@@ -1,5 +1,14 @@
+@import '~@/styles/_vars.scss';
+@import '~@/styles/_mixins.scss';
 .exchange-rank {
     background: linear-gradient(90deg,rgba(43,52,75,1) 0%,rgba(23,30,50,1) 100%);
+    .banner {
+        height: 580px;
+        width: 100%;
+        background-image: url(/static/active/rank/banner.jpg);
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
     .exchange-rank-container {
       .body {
         width: 1200px;
@@ -25,6 +34,78 @@
   
             &.mine {
               // margin-bottom
+            }
+
+            .box-title {
+                font-size:20px;
+                font-weight:400;
+                color:rgba(126,132,175,1);
+            }
+          }
+          .reward {
+            .reward-num {
+                font-size: 50px;
+                color: #cd7b19;
+                margin-top: 12px;
+            }
+            .unit {
+                color: #955333;
+                font-size: 20px;
+            }
+          }
+          .rank{
+              padding-left: 0 !important;
+              padding-right: 0 !important;
+              .box-title {
+                  padding-left: 40px;
+              }
+              .mine-box {
+                  border-top: 1px solid #2D3953;
+                  padding-left: 40px;
+                  padding-right: 40px;
+              }
+
+              .box-table {
+                height: 166px;
+                overflow: auto;
+                padding-left: 12px;
+            }
+            .box-table-th {
+                margin-bottom: 12px;
+                color: #CBE6FD;
+                display: flex;
+                justify-content: space-between;
+            }
+            .box-table-tr {
+                font-size: 12px;
+                margin-top: 12px;
+                display: flex;
+                justify-content: space-between;
+            }
+            .box-table-th, .box-table-tr {
+              .username {
+                width: 20%;
+                @include limit(1)
+              }
+              .amount, .time {
+                width: 30%;
+                text-align: center;
+    
+                .text {
+                  color: $primary;
+                }
+              }
+              .state {
+                width: 20%;
+                text-align: right;
+    
+                &.done {
+                  color: #09C989;
+                }
+                &.expect {
+                  color: #EBB166;
+                }
+              }
             }
           }
         }
