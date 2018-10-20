@@ -1,4 +1,20 @@
-.invite-mine-container{
+@import '~@/styles/_vars.scss';
+@import '~@/styles/_mixins.scss';
+.lang-en {
+  .invite-mine-container {
+    .banner {
+      background-image: url(/static/active/invite-mine/img-background.png);
+    }
+  }
+}
+.lang-ko {
+  .invite-mine-container {
+    .banner {
+      background-image: url(/static/active/invite-mine/banner-unlogin-ko.png);
+    }
+  }
+}
+.invite-mine-container {
     background: #060607;
     .header{
         background: #1A1A1A;
@@ -7,8 +23,8 @@
     .mb-90 {
         padding-bottom: 90px;
     }
-    .banner{
-        height: 640px;
+    .banner {
+        height: 550px;
         width: 100%;
         background-image: url(/static/active/invite-mine/banner-unlogin.png);
         background-repeat: no-repeat;
@@ -22,6 +38,11 @@
         flex-direction: column;
         align-items: center;
         color: #ffffff;
+
+        &.login {
+          margin-top: -80px;
+          padding-top: 0;
+        }
     }
     .content__title {
         height:20px;
@@ -269,7 +290,7 @@
                     width: 140px;
                     height: 140px;
                     margin-top: 10px;
-                    border: 10px solid #D2964A;
+                    border: 10px solid $primary;
                     border-radius: 4px;
                     padding: 12px;
                     position: absolute;
@@ -306,7 +327,34 @@
             }
             .box-table-tr {
                 font-size: 12px;
-                margin-top: 12px
+                margin-top: 12px;
+                display: flex;
+                justify-content: space-between;
+            }
+            .box-table-th, .box-table-tr {
+              .username {
+                width: 20%;
+                @include limit(1)
+              }
+              .amount, .time {
+                width: 30%;
+                text-align: center;
+    
+                .text {
+                  color: $primary;
+                }
+              }
+              .state {
+                width: 20%;
+                text-align: right;
+    
+                &.done {
+                  color: #09C989;
+                }
+                &.expect {
+                  color: #EBB166;
+                }
+              }
             }
         }
     }
