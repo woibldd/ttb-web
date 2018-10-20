@@ -67,13 +67,13 @@
                 background-color: #060607;
                 height: 100%;
                 box-sizing: border-box;
-                width: 302px;
+                width: 0;
+                overflow: hidden;
                 padding-right: 10px;
                 position: absolute;
                 left: 100%;
-                z-index: 1;
                 opacity: 0;
-                transition: opacity .4s linear;
+                transition: width .4s linear;
                 .text {
                     width: 292px;
                     height: 100%;
@@ -87,9 +87,12 @@
             }
 
             &:hover {
-                margin-right: 292px;
+                margin-right: 302px;
+                transition: margin .4s linear;
                 .detail {
+                    width: 302px;
                     opacity: 1;
+
                 }
             }
         }
