@@ -590,7 +590,7 @@ export default {
       } else {
         this.setSellVolumn(value)
       }
-      console.log(value)
+      // console.log(value)
     }
   },
   components: {

@@ -95,12 +95,62 @@ export default {
       if (res.code) {
         return onErrorCallback(new Error())
       }
+      res.data = this._fixData(period, symbolInfo.ticker, res.data)
       const data = _.map(res.data, toTick)
       if (data.length && firstDataRequest) {
         lastTime = _.last(data).time
       }
       onHistoryCallback(data, {noData: !data.length})
     })
+  },
+  _fixData (period, pair, data) {
+    try {
+      if (pair === 'IX_USDT' && data.length) {
+        const keyPair = {
+          '1d': {
+            index: 2,
+            time: 1539964800000
+          },
+          '4h': {
+            index: 13,
+            time: 1540036800000
+          },
+          '1h': {
+            index: 53,
+            time: 1540047600000
+          },
+          '30m': {
+            index: 106,
+            time: 1540049400000
+          },
+          '15m': {
+            index: 212,
+            time: 1540050300000
+          },
+          '5m': {
+            index: 638,
+            time: 1540050900000
+          },
+          '1m': {
+            index: 1347,
+            time: 1540051140000
+          }
+        }
+        if (keyPair[period]) {
+          let item = data.find(item => item.time === keyPair[period].time)
+          if (item && item.values[1] === '0.0343') {
+            // console.log('fake')
+            item.values[1] = '0.0361'
+          }
+          // if (data[item.index].values[1] === '0.0343' && data[item.index].time === item.time) {
+          //   debugger
+          //   data[item.index].values[1] = '0.0361'
+          // }
+        }
+        // debugger
+      }
+    } catch (e) {}
+    return data
   },
   subscribeBars: function (symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback) {
     const period = getPeriod(resolution)
