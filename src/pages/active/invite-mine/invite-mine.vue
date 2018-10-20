@@ -385,7 +385,8 @@ export default {
       this.hoveringQuestion = num
     }
   },
-  created () {
+  async created () {
+    await actions.updateSession()
     if (this.isLogin && this.inviteLink) {
       this.getMyInviteSummary()
       this.setQr(this.inviteLink)

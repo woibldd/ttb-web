@@ -59,7 +59,7 @@
                   <router-link
                     :to="{name: 'InviteMineActivity'}"
                     target="_blank"
-                    class="link">{{ $t("邀请挖矿") }}</router-link>
+                    class="link">{{ $t("invite_mine") }}</router-link>
                 </li>
               </ul>
             </div>
