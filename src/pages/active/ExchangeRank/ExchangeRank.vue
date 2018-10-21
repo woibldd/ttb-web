@@ -61,7 +61,7 @@
             </div>
             <div class="rank__bottom">
               <div class="my_all_mine mr-169">{{ $t('activity_rank_my_mined') }} <span class="unit">{{ 88899 }}IX</span></div>
-              <div class="my_all_mine">{{ $t('activity_rank_rank_position') }}: {{ 99 }}</div>
+              <!-- <div class="my_all_mine">{{ $t('activity_rank_rank_position') }}: {{ 99 }}</div> -->
             </div>
           </div>
 
@@ -83,23 +83,16 @@
               {{ $t('activity_rank_rules') }}
             </div>
             <div class="rules__detail">
-              <div v-html="$t('activity_rank_rules_detail')"/>
-            </div>
-          </div>
-          <div class="flex-box desc pt-28">
-            <div class="box-title">
-              {{ $t('activity_rank_reward_intro') }}
-            </div>
-            <div class="desc__intro__lead">{{ $t('activity_rank_intro_title') }}</div>
-            <div class="desc__intro__detail pl-20">
-              <p v-html="$t('activity_rank_reward_ranking_a')"/>
-              <p v-html="$t('activity_rank_reward_ranking_b')"/>
-              <p v-html="$t('activity_rank_reward_ranking_c')"/>
-              <p v-html="$t('activity_rank_reward_ranking_d')"/>
-              <p v-html="$t('activity_rank_reward_ranking_e')"/>
-            </div>
-            <div class="box__tips mt-30">
-              * {{ $t('activity_rank_reward_pay_time') }}
+              <p v-html="$t('activity_rank_reward_rules_a')"/>
+              <p v-html="$t('activity_rank_reward_rules_b')"/>
+              <p v-html="$t('activity_rank_reward_rules_c')"/>
+              <p v-html="$t('activity_rank_reward_rules_d')"/>
+              <p v-html="$t('activity_rank_reward_rules_e')"/>
+              <p v-html="$t('activity_rank_reward_rules_f')"/>
+              <p v-html="$t('activity_rank_reward_rules_g')"/>
+              <div class="box__tips pb-30">
+                * {{ $t('activity_explaination_ix') }}
+              </div>
             </div>
           </div>
         </div>

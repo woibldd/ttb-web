@@ -593,12 +593,15 @@
   "activity_rank_all_people": "全民",
   "activity_rank_mine_competition": "挖矿大赛",
   "activity_time": "활동시간:",
+  "activity_explaination_ix": "이 활동의 최종해결권은 ix.com이 가지고 있습니다.",
   "activity_rank_time_detail": "2018년10월 20일00:00-2018년 10월 27일 24:00",
   "activity_rank_reward_pay_time": "보상을 분배하는 시간:활동이 끝난 3일내",
   "activity_rank_only_people":"순위20에 드는 사용자만 나타난다",
-  "activity_rank_reward_ranking_a": "1위:활동기간플랫폼거래수수료의<span style=\"color: #c9a96c\"> 1%</span>",
-  "activity_rank_reward_ranking_b": "2위:활동기간플랫폼거래수수료의<span style=\"color: #c9a96c\">0.8%</span>",
-  "activity_rank_reward_ranking_c": "3위:활동기간플랫폼거래수수료의<span style=\"color: #c9a96c\">0.6%</span>",
-  "activity_rank_reward_ranking_d": "4위:활동기간플랫폼거래수수료의<span style=\"color: #c9a96c\">0.4%</span>",
-  "activity_rank_reward_ranking_e": "5위:활동기간플랫폼거래수수료의<span style=\"color: #c9a96c\">0.2%</span>"
+  "activity_rank_reward_rules_a": "1.활동시간:“채굴대회”기간은 7일 최초시간 2018년10월21일 00:00-2018년 10월 27일 24:00 ",
+  "activity_rank_reward_rules_b": "2.참가조건:사용자의 실명으로 가입을 하여야 합니다(2급 사용자 인증을 하여야 합니다)",
+  "activity_rank_reward_rules_c": "3.순위 근거:<span style=\"color: #CD7B19\">매개 계좌의 채굴량(거래 채굴량과 요청 채굴량의 12%를 포함 대회전의 채굴량은 포함하지 않습니다)에 근거하여 순위를 매깁니다.순위는 매 시간마다 업데이트 할것입니다. 순위 근거:매개 계좌의 채굴량(거래 채굴량과 요청 채굴량의 12%를 포함 대회전의 채굴량은 포함하지 않습니다)에 근거하여 순위를 매깁니다.순위는 매 시간마다 업데이트 할것입니다.</span>",
+  "activity_rank_reward_rules_d": "4.잭팟금액:ix.com거래 플랫폼의 매일 수입금액의2%를 잭팟금액에주입될것입니다.이 수입은 플랫폼의 수입에서 단체 운영에게 분배된 부분의 20%에서 지급될것입니다.",
+  "activity_rank_reward_rules_e": "5.잭팟분배:채굴량이 전5위에 드는 사용자만이 이 잭팟을 분배 받을수 있습다.<span style=\"color: #CD7B19\">전 5위가 잭팟을 분배박을수 있는 비례는각각 50% 25% 12.5% 7.5% 5%이다.</span>즉 채굴량이 1위를 차지한 사용자는 플랫폼 총 수익의 1%를 차지할수 있습니다.",
+  "activity_rank_reward_rules_f": "6.지급시간:활동이 끝나는 당일에 지급을 할것입니다.",
+  "activity_rank_reward_rules_g": "7.특별한 설명이 없으면 최초“채굴대회”가 끝난후 두번째“채굴대회”가 자동적으로 진행될것입니다."
 }

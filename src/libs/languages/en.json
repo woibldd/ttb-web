@@ -719,14 +719,15 @@
   "activity_rank_all_people": "全民",
   "activity_rank_mine_competition": "挖矿大赛",
   "activity_time": "Activity time: ",
+  "activity_explaination_ix": "The final interpretation of this contest activity rests with IX.com.",
   "activity_rank_time_detail": "00:00 21 Oct 2018- 24:00 27 Oct 2018",
   "activity_rank_reward_pay_time": "Distribution time: within 3 working days after the activity.",
   "activity_rank_only_people":"Only show top 20",
-  "activity_rank_reward_ranking_a": "<span style=\"width: 50px; display:inline-block\">First </span>  <span style=\"color: #c9a96c\">     1  </span>percent of platform transaction fees during the activity;",
-  "activity_rank_reward_ranking_b": "<span style=\"width: 50px; display:inline-block\">Second</span>  <span style=\"color: #c9a96c\"> 0.8%  </span>percent of platform transaction fees during the activity;",
-  "activity_rank_reward_ranking_c": "<span style=\"width: 50px; display:inline-block\">Third </span>  <span style=\"color: #c9a96c\">  0.6%  </span>percent of platform transaction fees during the activity",
-  "activity_rank_reward_ranking_d": "<span style=\"width: 50px; display:inline-block\">Fourth</span>  <span style=\"color: #c9a96c\"> 0.4%   </span>percent of platform transaction fees during the activity",
-  "activity_rank_reward_ranking_e": "<span style=\"width: 50px; display:inline-block\">Fifth </span>  <span style=\"color: #c9a96c\">  0.2%   </span>percent of platform transaction fees during the activity"
-
-
+  "activity_rank_reward_rules_a": "1.The ”Mining contest \" will last for a period of seven (7) days from: October 21st 00: 00-October 27th 24: 00.",
+  "activity_rank_reward_rules_b": "2.Entry conditions: only for real-name registered account holder (completed level 2 certified holder)；",
+  "activity_rank_reward_rules_c": "3.Ranking is based on: <span style=\"color: #CD7B19\">the number of single account mining ranking (including mining and mining trading invitations, excluding the amount of mining before the competition), and the general update of the ranking；</span>",
+  "activity_rank_reward_rules_d": "4.Prize pool comprises: 2% of the total daily income of the IX.com trading platform, which is paid out by the portion of the platform revenue allocated for the team’s operation (20%).",
+  "activity_rank_reward_rules_e": "5.Prize pool allocation: <span style=\"color: #CD7B19\">the top five mining accounts to divide the prize pool following the following formula of: 50%：25%：12.5%：7.5%：5%.</span> In other words, the first place can get the total platform revenue of 1%.",
+  "activity_rank_reward_rules_f": "6.Distribution schedule: the prizes will be distributed the next day after the event ends;",
+  "activity_rank_reward_rules_g": "7.If not specifically stated, the first \"mining contest\" ends, the second \"mining competition\" will automatically open."
 }

@@ -140,7 +140,7 @@
                 }
 
                 &:nth-child(even) {
-                    background-color:red;
+                    background-color:#1a233c;
                 }
             }
             .box-table-th, .box-table-tr {
@@ -199,33 +199,42 @@
         }
 
         .rule {
-            height:237px;
+            height:646px;
+            padding-bottom: 0 !important;
             box-sizing: border-box;
+            position: relative;
 
             .rules__detail {
-               color: #5A5E7E; 
+               color: #676C8C; 
                line-height:30px;
                font-size: 14px;
             }
-        }
-
-        .desc {
-            height: 366px;
-            box-sizing: border-box;
-            .desc__intro__lead {
-                color: #7E84AF;
-                margin-top: 39px;
-                margin-bottom: 20px;
-            }
-            .desc__intro__detail {
-                color: #5A5E7E;
-                font-size: 14px;
-                line-height: 30px;
-            }
             .box__tips {
                 text-align: center;
+                color: #3C4795 !important;
+                position: absolute;
+                bottom: 0;
+                width: 100%;
             }
         }
+
+        // .desc {
+        //     height: 366px;
+        //     box-sizing: border-box;
+        //     .desc__intro__lead {
+        //         color: #7E84AF;
+        //         margin-top: 39px;
+        //         margin-bottom: 20px;
+        //     }
+        //     .desc__intro__detail {
+        //         color: #5A5E7E;
+        //         font-size: 14px;
+        //         line-height: 30px;
+        //     }
+        //     .box__tips {
+        //         text-align: center;
+        //     }
+        // }
       }
     }
   }
