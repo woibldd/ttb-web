@@ -9,7 +9,7 @@
           </div>
           <div class="info-time">
             <span class="time-label">{{ $t('activity_time') }}</span><!--
-            --><span class="date">{{ activityTime }}</span>
+            --><span class="date">{{ $t('activity_rank_time_detail') }}</span>
           </div>
         </div>
       </div>
@@ -91,13 +91,15 @@
               {{ $t('activity_rank_reward_intro') }}
             </div>
             <div class="desc__intro__lead">{{ $t('activity_rank_intro_title') }}</div>
-            <div class="desc__intro__detail">
-              <div
-                v-for="i in 4"
-                :key="i"> 第一名 活动期间第一名 活动期间</div>
+            <div class="desc__intro__detail pl-20">
+              <p v-html="$t('activity_rank_reward_ranking_a')"/>
+              <p v-html="$t('activity_rank_reward_ranking_b')"/>
+              <p v-html="$t('activity_rank_reward_ranking_c')"/>
+              <p v-html="$t('activity_rank_reward_ranking_d')"/>
+              <p v-html="$t('activity_rank_reward_ranking_e')"/>
             </div>
-            <div class="box__tips mt-49">
-              <span class="unit">* </span>{{ $t('activity_rank_signing_tips') }}
+            <div class="box__tips mt-30">
+              * {{ $t('activity_rank_reward_pay_time') }}
             </div>
           </div>
         </div>
