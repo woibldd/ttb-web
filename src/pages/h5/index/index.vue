@@ -69,7 +69,7 @@
     <!-- <h5-footer/> -->
     <div class="corperator">
       <div class="corperator-container">
-        <div
+        <!-- <div
           class="corp-row row-60"
           v-if="isKorean">
           <div
@@ -88,7 +88,7 @@
               </a>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="corp-row row-60">
           <div
             class="corp-title"
