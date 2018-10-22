@@ -136,18 +136,14 @@ export default {
             time: 1540051140000
           }
         }
+        // fake data
         if (keyPair[period]) {
           let item = data.find(item => item.time === keyPair[period].time)
           if (item && item.values[1] === '0.0343') {
             // console.log('fake')
             item.values[1] = '0.0361'
           }
-          // if (data[item.index].values[1] === '0.0343' && data[item.index].time === item.time) {
-          //   debugger
-          //   data[item.index].values[1] = '0.0361'
-          // }
         }
-        // debugger
       }
     } catch (e) {}
     return data
