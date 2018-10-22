@@ -23,12 +23,23 @@
               {{ total.pool | round(2) | thousand }} <span class="unit">USDT</span>
             </div>
             <div
-              class="reward-recent fadeIn"
-              v-if="recentItem">
-              <span class="col">{{ $t('user') }}</span>
-              <span class="col uid">{{ getEncodeContent(recentItem.user_id) }}</span>
-              <span class="col time">{{ recentItem.join_time | ts2date }}</span>
-              <span class="col">{{ $t('join_match') }}</span>
+              class="reward-recent"
+              v-if="recentList && recentList.length"
+            >
+              <div
+                class="scrollTop"
+                ref="marque"
+              >
+                <div
+                  class="marque"
+                  v-for="recentItem in recentList"
+                  :key="recentItem.user_id">
+                  <span class="col">{{ $t('user') }}</span>
+                  <span class="col uid">{{ getEncodeContent(recentItem.user_id) }}</span>
+                  <span class="col time">{{ recentItem.join_time | ts2date }}</span>
+                  <span class="col">{{ $t('join_match') }}</span>
+                </div>
+              </div>
             </div>
           </div>
           <div class="flex-box rank pt-22">
@@ -38,7 +49,7 @@
             <div class="mine-box">
               <div
                 class="box-table"
-                v-if="isLogin">
+              >
                 <div class="box-table-th">
                   <span class="th_td rank_pos">{{ $t('activity_rank_rank_position') }}</span>
                   <span class="th_td uid">UID</span>
@@ -58,7 +69,7 @@
                     {{ item.rank }}
                   </span>
                   <span class="uid">{{ getEncodeContent(item.user_id) }}</span>
-                  <span class="mined">{{ item.mined_amount | round(2) | thousand }}</span>
+                  <span class="mined">{{ item.mined_amount | round(8) | thousand }}</span>
                   <span class="state">{{ item.reward | round(2) | thousand }}</span>
                 </div>
                 <div
@@ -156,8 +167,10 @@ export default {
       state,
       showDialog: false,
       myInfo: {},
-      recentItem: null,
-      total: {}
+      recentList: [],
+      total: {},
+      timer: 0,
+      time2: 0
     }
   },
   computed: {
@@ -199,14 +212,31 @@ export default {
     async getRecentList () {
       let res = await service.getRecentMatchList()
       if (!res.code && res.data && res.data.length > 0) {
-        this.recentItem = res.data.sort((a, b) => b.join_time - a.join_time)[0]
+        this.recentList = res.data.sort((a, b) => b.join_time - a.join_time)
+        if (this.recentList.length > 0) {
+          this.scrollTop()
+        }
       }
     },
     getEncodeContent (content) {
       return utils.publicDesensitization(content)[0]
+    },
+    scrollTop () {
+      clearInterval(this.timer)
+      let i = 0
+      let down = true
+      this.timer = setInterval(() => {
+        let area = this.$refs['marque']
+        let offset = (down ? ++i : --i) * 40
+        if (offset >= area.scrollHeight - 40 || offset < 0) {
+          down = !down
+        }
+        area.style.transform = 'translateY(-' + offset + 'px)'
+      }, 5e3)
     }
   },
   async created () {
+    await actions.updateSession()
     if (this.isLogin) {
       let res = await service.getMyMatchTotal()
       if (!res.code) {
@@ -222,9 +252,16 @@ export default {
     if (!rankRes.code && rankRes.data && rankRes.data.length) {
       this.rankList = rankRes.data.splice(0, 10)
     }
+    this.timer2 = setInterval(() => {
+      this.getRecentList()
+    }, 60e3)
+  },
+  destroyed () {
+    clearInterval(this.timer)
+    clearInterval(this.timer2)
   }
 }
 </script>
 <style lang="scss" scoped>
-@import './exchange.scss'
+@import './exchange.scss';
 </style>

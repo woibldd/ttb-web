@@ -80,7 +80,7 @@
             }
           }
           .reward {
-            height:218px;
+            // height:218px;
             box-sizing: border-box;
             .reward-num {
                 font-size: 50px;
@@ -99,6 +99,12 @@
               height: 40px;;
               align-items: center;
               color:rgba(126,132,175,1);
+              overflow: hidden;
+              
+              .scrollTop {
+                transition: all ;
+                transition-duration: 2s;
+              }
               .col {
                 display: inline-block;
                 margin-left: 40px;
