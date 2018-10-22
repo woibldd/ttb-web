@@ -118,7 +118,7 @@ export default{
     'zh-CN': {
       name: 'IX',
       full_name: 'IX Token',
-      brief_info: 'IX（IX Token）是全球首家支持比特币作为权益证明的交易所交易所IX.com的平台通证，IX持有者可享有交易所分红、社区治理等多重权益。',
+      brief_info: 'IX（IX Token）是全球首家支持比特币作为权益证明的交易所IX.com的平台通证，IX持有者可享有交易所分红、社区治理等多重权益。',
       issue_time: '2018-10-18',
       issue_all: '200亿', // 发行总量
       issue_circulation: '--', // 流通总量
