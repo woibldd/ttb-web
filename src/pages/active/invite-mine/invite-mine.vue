@@ -399,5 +399,3 @@ export default {
 <style lang="scss" scoped>
 @import './index.scss';
 </style>
-
-// :class="!isLogin && 'mb-90'"

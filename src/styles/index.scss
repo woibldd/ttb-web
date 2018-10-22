@@ -54,9 +54,9 @@ body.router-kyc {
 // }
 body.mobile {
   min-width: 1200px;
-  .home-ball {
-    display: none;
-  }
+  // .home-ball {
+  //   display: none;
+  // }
 }
 body.router-home {
   min-width: auto;
@@ -116,6 +116,7 @@ th {
 }
 .btn {
   cursor: pointer;
+  user-select: none;
 }
 .pointer {
   cursor:pointer;
@@ -210,21 +211,21 @@ td.left {
 td.right {
   text-align: right;
 }
-.home-ball {
-  cursor: pointer;
-  position: fixed;
-  bottom: 40px;
-  width: 140px;
-  right: 60px;
-  border-radius: 30px;
-  background: #C9A96C;
-  padding: 10px 10px;
-  text-align: center;
-  color: #fff;
-  box-sizing: border-box;
-  font-size: 18px;
-  z-index: 99999;
-}
+// .home-ball {
+//   cursor: pointer;
+//   position: fixed;
+//   bottom: 40px;
+//   width: 140px;
+//   right: 60px;
+//   border-radius: 30px;
+//   background: #C9A96C;
+//   padding: 10px 10px;
+//   text-align: center;
+//   color: #fff;
+//   box-sizing: border-box;
+//   font-size: 18px;
+//   z-index: 99999;
+// }
 
 // element reset
 

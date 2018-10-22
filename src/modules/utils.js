@@ -205,11 +205,11 @@ const utils = {
     } = options
 
     return new Promise((resolve, reject) => {
-      self.$confirm(content, title, {
+      self.$confirm(content, title, Object.assign({
         confirmButtonText: confirmBtnText || self.$i18n.t('confirm'),
         cancelButtonText: cancelBtnText || self.$i18n.t('cancel'),
         type: 'warning' || type
-      }).then(() => {
+      }, options)).then(() => {
         resolve(true)
       }).catch((e) => {
         resolve(false)

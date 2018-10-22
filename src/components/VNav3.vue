@@ -11,7 +11,7 @@
           <router-link
             :to="{name: 'trading'}"
             class="nav_link">{{ $t('trading') }}</router-link>
-          <div class="nav_link whitepaper">
+          <div class="nav_link arrow-down">
             <a
               :href="'/docs/IX+WhitePaper'+pdfSubfix+'.pdf'"
               target="_blank"
@@ -38,8 +38,7 @@
             </div>
           </div>
 
-          <!-- 挖矿, 炒了白皮书的样式 -->
-          <div class="nav_link whitepaper">
+          <div class="nav_link arrow-down">
             <router-link
               :to="{name: 'LockWarehouse'}"
               class="nav_link ml-30"
@@ -66,14 +65,42 @@
             </div>
           </div>
 
-          <router-link
-            :to="{name: 'kycRelay'}"
-            class="nav_link ml-30"
-            target="_blank">{{ $t('activity_kyc_name') }}<icon
-              name="hot-reds"
-              class="hot ml-3"/>
-          </router-link>
-
+          <div class="nav_link arrow-down">
+            <router-link
+              :to="{name: 'kycRelay'}"
+              class="nav_link ml-30"
+              target="_blank">{{ $t('header_title_hot_activity') }}
+              <icon
+                class="arrow ml-5"
+                name="arrow-down-w"/>
+            </router-link>
+            <div class="dropdown-sub-menu">
+              <ul class="dropdown-list pt-10 pb-10">
+                <li class="dropdown-item pl-24 pr-24">
+                  <router-link
+                    :to="{name: 'exchangeRank'}"
+                    target="_blank"
+                    class="link">{{ $t("header_title_activity_mine") }}
+                    <icon name="rank-leading"/>
+                  </router-link>
+                </li>
+                <li class="dropdown-item pl-24 pr-24">
+                  <router-link
+                    :to="{name: 'kycRelay'}"
+                    target="_blank"
+                    class="link">{{ $t("activity_kyc_name") }}
+                    <icon name="hot-red"/>
+                  </router-link>
+                </li>
+                <li class="dropdown-item pl-24 pr-24">
+                  <router-link
+                    :to="{name: 'relay'}"
+                    target="_blank"
+                    class="link">{{ $t("header_title_activity_relay") }}</router-link>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
       <div class="nav_right">
@@ -341,7 +368,7 @@ export default {
         padding-top: 19px;
         padding-bottom: 19px;
 
-        &.whitepaper {
+        &.arrow-down {
           display: inline;
 
           .arrow {

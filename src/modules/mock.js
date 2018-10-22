@@ -30,10 +30,128 @@ export const filter = {
   'mine/exchange/ix/me/total': 1,
   'account/balance/unlock': 1,
   'account/balance/lock': 1,
-  'mine/exchange/ix/total': 1
+  'mine/exchange/ix/total': 1,
+  'mine/game/join/list': 1,
+  'mine/game/me': 1,
+  'mine/game/rank': 1,
+  'mine/game/pool': 1,
+  'mine/game/join': 1
 
 }
 export const list = [
+
+  {
+    url: /mine\/game\/join\/list/,
+    res () {
+      return ok([
+        {
+          user_id: 123123,
+          join_time: new Date().getTime()
+        },
+        {
+          join_time: new Date().getTime()
+        }
+      ])
+    }
+  },
+  {
+    url: /mine\/game\/me/,
+    res () {
+      return ok({
+        is_join: 0,
+        mined_amount: '93849.33234'
+      })
+    }
+  },
+  {
+    url: /mine\/game\/rank/,
+    res () {
+      return ok([
+        {
+          rank: 1,
+          user_id: 123123,
+          mined_amount: '23123123',
+          reward: '23492939.0012'
+        },
+        {
+          rank: 2,
+          user_id: 94994,
+          mined_amount: '33',
+          reward: '23492939.0012'
+        },
+        {
+          rank: 3,
+          user_id: 94994,
+          mined_amount: '33',
+          reward: '23492939.0012'
+        },
+        {
+          rank: 4,
+          user_id: 94994,
+          mined_amount: '33',
+          reward: '23492939.0012'
+        },
+        {
+          rank: 5,
+          user_id: 94994,
+          mined_amount: '32378128378173',
+          reward: '23492939.0012'
+        },
+        {
+          rank: 6,
+          user_id: 948994,
+          mined_amount: '33',
+          reward: '23492939.0012'
+        },
+        {
+          rank: 7,
+          user_id: 94994,
+          mined_amount: '3020928283',
+          reward: '23492939.0012'
+        },
+        {
+          rank: 8,
+          user_id: 94994,
+          mined_amount: '33',
+          reward: '23492939.0012'
+        },
+        {
+          rank: 9,
+          user_id: 94994,
+          mined_amount: '33',
+          reward: '23492939.0012'
+        },
+        {
+          rank: 10,
+          user_id: 94994,
+          mined_amount: '32300288383',
+          reward: '23492939.0012'
+        },
+        {
+          rank: 11,
+          user_id: 94994,
+          mined_amount: '33',
+          reward: '23492939.0012'
+        }
+      ])
+    }
+  },
+  {
+    url: /mine\/game\/pool/,
+    res () {
+      return ok({
+        start_time: new Date().getTime(),
+        end_time: new Date().getTime(),
+        pool: '1231231.21239923'
+      })
+    }
+  },
+  {
+    url: /mine\/game\/join/,
+    res () {
+      return ok({})
+    }
+  },
   {
     url: /mine\/exchange\/ix\/total/,
     res () {
