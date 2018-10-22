@@ -23,7 +23,7 @@
               {{ total.pool | round(2) | thousand }} <span class="unit">USDT</span>
             </div>
             <div
-              class="reward-recent"
+              class="reward-recent fadeIn"
               v-if="recentItem">
               <span class="col">{{ $t('user') }}</span>
               <span class="col uid">{{ getEncodeContent(recentItem.user_id) }}</span>
@@ -132,7 +132,7 @@
         <div class="title">{{ $t('tips') }}</div>
         <div
           class="body"
-          v-html="$t('confirm_complete_kyc2', {link: '/kyc'})"/>
+          v-html="$t('confirm_complete_kyc2', {link: '/profile/kyc/'})"/>
         <div class="footer">
           <router-link
             class="btn to_verify mb-8"
@@ -183,13 +183,14 @@ export default {
         this.$router.push({
           name: 'login'
         })
-      } else if (this.state.userInfo.lv !== 2) {
+      } else if (this.state.userInfo.lv < 1 || this.state.userInfo.state !== 2) {
         this.showDialog = true
       } else {
         let res = await service.enrollMineMatch()
         if (!res.code) {
           utils.success(this.$t('activity_rank_already_signed'))
           this.myInfo.is_join = 1
+          this.getRecentList()
         } else {
           utils.alert(res.message)
         }

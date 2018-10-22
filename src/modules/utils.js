@@ -479,6 +479,8 @@ const utils = {
       } else if (data.indexOf('公司') > -1) {
         // 企业名称  前二后四
         data = data.substr(0, 2) + '****' + data.substr(-4)
+      } else if (/^\d{6,7}$/.test(data)) {
+        data = data.substr(0, 2) + '**' + data.substr(-2)
       } else {
         let raw = dataArr[0]
         let len = dataArr[1] || 6

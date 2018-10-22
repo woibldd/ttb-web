@@ -1,5 +1,7 @@
 @import '~@/styles/_vars.scss';
 @import '~@/styles/_mixins.scss';
+@import '~@/styles/animate.scss';
+
 .exchange-rank {
     background: linear-gradient(90deg,rgba(43,52,75,1) 0%,rgba(23,30,50,1) 100%);
     .banner {
