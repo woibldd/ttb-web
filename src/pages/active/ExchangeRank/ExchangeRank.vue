@@ -20,7 +20,15 @@
               {{ $t('activity_rank_total_reward_yet') }}
             </div>
             <div class="reward-num">
-              78,999.9 <span class="unit">USDT</span>
+              {{ total.pool | round(2) | thousand }} <span class="unit">USDT</span>
+            </div>
+            <div
+              class="reward-recent"
+              v-if="recentItem">
+              <span class="col">{{ $t('user') }}</span>
+              <span class="col uid">{{ getEncodeContent(recentItem.user_id) }}</span>
+              <span class="col time">{{ recentItem.join_time | ts2date }}</span>
+              <span class="col">{{ $t('join_match') }}</span>
             </div>
           </div>
           <div class="flex-box rank pt-22">
@@ -40,28 +48,36 @@
                 <div
                   class="box-table-tr"
                   :key="index"
-                  v-for="(item,index) in 18">
+                  v-if="rankList && rankList.length > 0"
+                  v-for="(item,index) in rankList">
                   <span class="rank_pos pl-10">
                     <icon
                       name="rank-leading"
                       class="icon-rank-leading"
-                      v-if="index < 6"/>
-                    {{ index }}
+                      v-if="item.rank < 5"/>
+                    {{ item.rank }}
                   </span>
-                  <span class="uid">{{ 15677778888 }}</span>
-                  <span class="mined">{{ 766.99 }}</span>
-                  <span class="state">22222.8</span>
+                  <span class="uid">{{ getEncodeContent(item.user_id) }}</span>
+                  <span class="mined">{{ item.mined_amount | round(2) | thousand }}</span>
+                  <span class="state">{{ item.reward | round(2) | thousand }}</span>
+                </div>
+                <div
+                  class="box-table"
+                  v-if="!rankList || !rankList.length">
+                  <span class="emtpy">
+                    {{ $t('activity_rank_no_rank_people') }}
+                  </span>
                 </div>
               </div>
-              <div
-                class="box-table"
-                v-if="false">
-                {{ $t('activity_rank_no_rank_people') }}
-              </div>
+
             </div>
-            <div class="rank__bottom">
-              <div class="my_all_mine mr-169">{{ $t('activity_rank_my_mined') }} <span class="unit">{{ 88899 }}IX</span></div>
-              <!-- <div class="my_all_mine">{{ $t('activity_rank_rank_position') }}: {{ 99 }}</div> -->
+            <div
+              class="rank__bottom"
+            >
+              <div
+                class="my_all_mine mr-169"
+                v-show="hasMine">{{ $t('activity_rank_my_mined') }} <span class="unit">{{ myInfo.mined_amount|round(2)|thousand }} IX</span></div>
+                <!-- <div class="my_all_mine">{{ $t('activity_rank_rank_position') }}: {{ 99 }}</div> -->
             </div>
           </div>
 
@@ -71,9 +87,19 @@
             <div class="box-title">
               {{ $t('activity_rank_sign') }}
             </div>
-            <div class="enroll__button">
+            <div
+              v-if="!myInfo.is_join"
+              class="enroll__button btn"
+              @click.prevent="confirmEnroll">
               {{ $t('activity_rank_i_signing') }}
             </div>
+            <div
+              v-else
+              class="enroll__button btn done"
+            >
+              {{ $t('activity_rank_already_signed') }}
+            </div>
+
             <div class="box__tips mt-26">
               <span class="unit">* </span>{{ $t('activity_rank_signing_tips') }}
             </div>
@@ -98,15 +124,40 @@
         </div>
       </div>
     </div>
+    <v-modal
+      :open.sync="showDialog"
+      :backdrop="true"
+    >
+      <div class="ensure-modal">
+        <div class="title">{{ $t('tips') }}</div>
+        <div
+          class="body"
+          v-html="$t('confirm_complete_kyc2', {link: '/kyc'})"/>
+        <div class="footer">
+          <router-link
+            class="btn to_verify mb-8"
+            @click="showDialog = false"
+            :to="{name: 'Kyc'}">{{ $t('to_verify') }}</router-link>
+        </div>
+    </div></v-modal>
+
   </div>
 </template>
 <script>
-import {state} from '@/modules/store'
+import {state, actions} from '@/modules/store'
+import utils from '@/modules/utils'
+import service from '@/modules/service'
+import isEmpty from 'lodash/isEmpty'
+
 export default {
   data () {
     return {
       rankList: [],
-      state
+      state,
+      showDialog: false,
+      myInfo: {},
+      recentItem: null,
+      total: {}
     }
   },
   computed: {
@@ -114,10 +165,61 @@ export default {
       if (this.state.userInfo) {
         return true
       }
-      return true
+      return false
     },
     activityTime () {
       return '2018年10月21日00:00-2018年10月27日24:00'
+    },
+    hasMine () {
+      return !isEmpty(this.myInfo)
+    }
+  },
+  methods: {
+    async confirmEnroll () {
+      if (!this.isLogin) {
+        actions.setLoginBack({
+          fullPath: this.$route.fullPath
+        })
+        this.$router.push({
+          name: 'login'
+        })
+      } else if (this.state.userInfo.lv !== 2) {
+        this.showDialog = true
+      } else {
+        let res = await service.enrollMineMatch()
+        if (!res.code) {
+          utils.success(this.$t('activity_rank_already_signed'))
+          this.myInfo.is_join = 1
+        } else {
+          utils.alert(res.message)
+        }
+      }
+    },
+    async getRecentList () {
+      let res = await service.getRecentMatchList()
+      if (!res.code && res.data && res.data.length > 0) {
+        this.recentItem = res.data.sort((a, b) => b.join_time - a.join_time)[0]
+      }
+    },
+    getEncodeContent (content) {
+      return utils.publicDesensitization(content)[0]
+    }
+  },
+  async created () {
+    if (this.isLogin) {
+      let res = await service.getMyMatchTotal()
+      if (!res.code) {
+        this.myInfo = res.data
+      }
+    }
+    this.getRecentList()
+
+    let [totalRes, rankRes] = await Promise.all([service.getMatchRewardPool(), service.getMatchRewardRank()])
+    if (!totalRes.code) {
+      this.total = totalRes.data
+    }
+    if (!rankRes.code && rankRes.data && rankRes.data.length) {
+      this.rankList = rankRes.data.splice(0, 10)
     }
   }
 }

@@ -573,6 +573,27 @@ const service = {
   },
   getMyInviteSummary () {
     return request('bonus/invite/me')
+  },
+  // 挖矿大赛
+  // 报名
+  enrollMineMatch () {
+    return request('mine/game/join')
+  },
+  // 奖池金额
+  getMatchRewardPool () {
+    return request('mine/game/pool')
+  },
+  // 挖矿排名
+  getMatchRewardRank () {
+    return request('mine/game/rank')
+  },
+  // 我的挖矿信息
+  getMyMatchTotal () {
+    return request('mine/game/me')
+  },
+  // 最近挖矿列表
+  getRecentMatchList () {
+    return request('mine/game/join/list')
   }
 
 }
@@ -606,7 +627,7 @@ export async function fetch (url, body, options, method = 'post') {
     } else {
       res = await api.post(url, body, options)
     }
-    const data = await res // .json()
+    const data = res // .json()
     if (data.code === 401 && state.userInfo) {
       // Session 失效
       actions.setUserInfo(null)
@@ -618,7 +639,6 @@ export async function fetch (url, body, options, method = 'post') {
         return data
       }
     }
-
     if (data.code == 200) {
       data.code = 0
     }

@@ -603,5 +603,11 @@
   "activity_rank_reward_rules_d": "4.잭팟금액:ix.com거래 플랫폼의 매일 수입금액의2%를 잭팟금액에주입될것입니다.이 수입은 플랫폼의 수입에서 단체 운영에게 분배된 부분의 20%에서 지급될것입니다.",
   "activity_rank_reward_rules_e": "5.잭팟분배:채굴량이 전5위에 드는 사용자만이 이 잭팟을 분배 받을수 있습다.<span style=\"color: #CD7B19\">전 5위가 잭팟을 분배박을수 있는 비례는각각 50% 25% 12.5% 7.5% 5%이다.</span>즉 채굴량이 1위를 차지한 사용자는 플랫폼 총 수익의 1%를 차지할수 있습니다.",
   "activity_rank_reward_rules_f": "6.지급시간:활동이 끝나는 당일에 지급을 할것입니다.",
-  "activity_rank_reward_rules_g": "7.특별한 설명이 없으면 최초“채굴대회”가 끝난후 두번째“채굴대회”가 자동적으로 진행될것입니다."
+  "activity_rank_reward_rules_g": "7.특별한 설명이 없으면 최초“채굴대회”가 끝난후 두번째“채굴대회”가 자동적으로 진행될것입니다.",
+  "header_title_hot_activity": "인기하는 활동",
+  "header_title_activity_mine": "전민 채굴",
+  "header_title_activity_relay": "릴레이 거래",
+  "confirm_complete_kyc2": "<a href=\"%{link}\">KYC 2</a>급 인증을 완성한후에 참가하시길 바랍니다",
+  "user": "사용자",
+  "join_match": "가입하다"
 }

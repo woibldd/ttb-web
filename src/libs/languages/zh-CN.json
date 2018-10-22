@@ -606,5 +606,11 @@
   "activity_rank_reward_rules_d": "4、奖池金额：IX.com交易平台每天收入总额的2%注入奖池，该收入由平台收入中分配给团队运营的部分（20%）中进行支出；",
   "activity_rank_reward_rules_e": "5、奖池分配：挖矿量排名前五的账户瓜分该奖池，<span style=\"color: #CD7B19\">前五名分配奖池的比例分别为50%：25%：12.5%：7.5%：5%，</span>即第一名可以取得平台总收入的1%；",
   "activity_rank_reward_rules_f": "6、派发时间：活动结束次日即派发奖金；",
-  "activity_rank_reward_rules_g": "7、如果没有特别说明，首期“挖矿大赛”活动结束后，第二期“挖矿大赛”自动开启。"
+  "activity_rank_reward_rules_g": "7、如果没有特别说明，首期“挖矿大赛”活动结束后，第二期“挖矿大赛”自动开启。",
+  "header_title_hot_activity": "热门活动",
+  "header_title_activity_mine": "全民挖矿",
+  "header_title_activity_relay": "交易接力",
+  "confirm_complete_kyc2": "请完成<a href=\"%{link}\">KYC二级认证</a>后报名",
+  "user": "用户",
+  "join_match": "加入挖矿大赛"
 }

@@ -85,6 +85,26 @@
                 color: #cd7b19;
                 margin-top: 12px;
             }
+            .reward-recent {
+              display: block;
+              width: 100%;
+              justify-content: space-around;
+              font-size:14px;
+              font-weight:400;
+              background:rgba(11,20,41,1);
+              border-radius:6px;
+              line-height: 40px;
+              height: 40px;;
+              align-items: center;
+              color:rgba(126,132,175,1);
+              .col {
+                display: inline-block;
+                margin-left: 40px;
+              }
+              .uid, .time {
+                color: #FDA22D;
+              }
+            }
           }
           .rank{
               box-sizing: border-box;
@@ -119,7 +139,16 @@
 
               .box-table {
                 height: 490px;
-                overflow: auto;
+                overflow: hidden;
+
+                .emtpy {
+                  display: block;
+                  width: 100%;
+                  color: #7E84AF;
+                  font-size: 24px;
+                  text-align: center;
+                  margin-top: 40px;
+                }
             }
             .box-table-th {
                 color: #5E627C;
@@ -195,6 +224,14 @@
                 font-size:18px;
                 font-weight: 400;
                 margin-top: 30px;
+
+                &.done {
+                  background:rgba(33,40,61,1);
+                  border:1px solid rgba(51,59,86,1);
+                  font-size:18px;
+                  font-weight:400;
+                  color:rgba(83,99,138,1);
+                }
            } 
         }
 
@@ -235,6 +272,37 @@
         //         text-align: center;
         //     }
         // }
+      }
+    }
+    .ensure-modal {
+      width: 300px;
+      background: #ffffff;
+      text-align: center;
+      padding: 20px;
+      border-radius: 6px;
+      font-size: 16px;
+      color: #333333;
+
+      .title {
+        font-size: 20px;
+        font-weight: 600;
+      }
+      .body {
+        margin-top: 40px;
+        margin-bottom: 30px;
+      }
+      .footer {
+        .btn {
+          display: block;
+          margin: 0 auto;
+          width:220px;
+          height:36px;
+          font-size: 14px;
+          line-height: 36px;
+          color:#ffffff;
+          background:linear-gradient(90deg,rgba(205,123,25,1) 0%,rgba(255,176,63,1) 100%);
+          border-radius:6px;
+        }
       }
     }
   }
