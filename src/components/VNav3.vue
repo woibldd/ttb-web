@@ -67,7 +67,7 @@
 
           <div class="nav_link arrow-down">
             <router-link
-              :to="{name: 'kycRelay'}"
+              :to="{name: 'exchangeRank'}"
               class="nav_link ml-30"
               target="_blank">{{ $t('header_title_hot_activity') }}
               <icon

@@ -15,6 +15,7 @@
               <el-option
                 v-for="(item, idx) in allCoins"
                 :key="idx"
+                v-if="item.withdrawable"
                 :label="item.currency"
                 :value="item"/>
             </el-select>
