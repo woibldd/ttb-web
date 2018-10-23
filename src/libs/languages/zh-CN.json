@@ -622,6 +622,7 @@
   "activity_lottery_current_market": "当前行情",
   "activity_lottery_open_market": "开盘行情",
   "activity_lottery_check_market": "查看行情",
+  "activity_lottery_cant_bid_now": "当前时间不可投注",
   "activity_lottery_buy_rise": "买涨",
   "activity_lottery_buy_fall": "买跌",
   "activity_lottery_buy_flat": "买平",
@@ -642,4 +643,5 @@
   "activity_lottery_settle":"结算",
   "activity_lottery_result":"开奖结果",
   "activity_lottery_serial":"期"
+
 }
