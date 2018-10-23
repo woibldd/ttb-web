@@ -61,6 +61,7 @@ const InviteMineActivity = () => import(/* webpackChunkName: "InviteMineActivity
 
 const KycRelay = () => import(/* webpackChunkName: "KycRelay" */ '@/pages/active/kycRelay.vue')
 const ExchangeRank = () => import(/* webpackChunkName: "ExchangeRank" */ '@/pages/active/ExchangeRank')
+const Lottery = () => import(/* webpackChunkName: "lottery" */ '@/pages/active/lottery')
 
 async function beforeEach (to, from, next) {
   state.loading = true
@@ -157,7 +158,11 @@ let router = new Router({
           path: 'rank',
           name: 'exchangeRank',
           component: ExchangeRank
-        }
+        },
+        {
+          path: 'lottery',
+          name: 'lottery',
+          component: Lottery}
       ]
     },
     {

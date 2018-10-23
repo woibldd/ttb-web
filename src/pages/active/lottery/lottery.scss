@@ -1,0 +1,364 @@
+@import '~@/styles/_vars.scss';
+@import '~@/styles/_mixins.scss';
+@import '~@/styles/animate.scss';
+
+$color-bids-rise: #09C989;
+$color-bids-fall: #FF1E1D;
+
+.lottery-container {
+    background: #000000;
+    color: white;
+    .banner {
+        height: 534px;
+        width: 100%;
+        background-image: url(/static/active/lottery/banner-lottery.png);
+        background-repeat: no-repeat;
+        background-position: center center;
+
+    }
+    .body {
+        width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .box-title{
+            background-color: #131315;
+            width: 100%;
+            box-sizing: border-box;
+            height:36px;
+            text-align: center;
+            line-height: 36px;
+            .text{
+                font-size: 24px;
+                background-image:linear-gradient(-14deg,rgba(188,145,66,1) 0%, rgba(238,215,119,1) 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+
+        .box-head {
+            margin-bottom: 23px;
+            font-size: 18px;
+            display: flex;
+            
+            .head_text {
+                flex: 1;
+                line-height: 1;
+                display: flex;
+                justify-content: space-between;
+                background-image:linear-gradient(-14deg,rgba(188,145,66,1) 0%, rgba(238,215,119,1) 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+    
+            .head__stick {
+                margin-right: 10px;
+                width: 2px;
+                height: 16px;
+                flex: none;
+                background:linear-gradient(-6deg,rgba(202,170,108,1),rgba(250,222,169,1));
+            }
+        }
+        
+        .border-1{
+            border:1px solid rgba(255,255,255,.2);
+        }
+        .top {
+                height: 285px;
+                display: flex;
+                margin-bottom: 49px;
+            .count-down {
+                flex: 1;
+                min-width: 790px;
+                box-sizing: border-box;
+                padding: 9px;
+            }
+            .count-down__detail {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+
+                .count-down-series {
+                    display: flex;
+                    .time-num-group {
+                        display: flex;
+                    }
+                    .time-num {
+                        display: inline-block;
+                        font-size: 130px;
+                        height: 134px;
+                        line-height: 134px;
+                        text-align: center;
+                        width: 104px;
+                        background: linear-gradient(0deg,rgba(24,24,24,0.23),rgba(180,180,180,0.13)); 
+                        position: relative;
+
+                        .num__mask {
+                            background:rgba(0,0,0,1);
+                            opacity: .49;
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            width: 100%;
+                            height:74px;
+                        }
+                    }
+                    .time-colon {
+                        height: 100%;
+                        width: 16px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        flex-direction: column;
+                        .dot {
+                            display: inline-block;
+                            width:8px;
+                            height:8px;
+                            background:rgba(255,255,255,1);
+                            border-radius:50%;
+                        }
+                    }
+                }
+            }
+            .event-review {
+                box-sizing: border-box;
+                padding: 9px;
+                width: 286px;
+                margin-left: 20px;
+                flex: none;
+                display: flex;
+                flex-direction: column;
+                .box-title{
+                    flex: none;
+                }
+
+                .review__list {
+                    flex: 1;
+                    overflow: scroll;
+                    padding: 0 34px;
+                    box-sizing: border-box;
+                    
+                    .list__head {
+                        display: flex;
+                        justify-content: space-between;
+                        padding-bottom: 10px;
+                        border-bottom: 1px solid rgba(72,72,72,1);
+                    }
+                    .list__row {
+                       display: flex;
+                       justify-content: space-between;
+                       margin-top: 10px;
+                       
+                       .decrease {
+                           color: #FF1E1D;
+                       }
+                       .increase {
+                          color: #09C989; 
+                       }
+                    }
+                }
+            }
+        }
+
+        .middle {
+            display: flex;
+            margin-bottom: 50px;
+            .quiz {
+                padding: 24px 40px;
+                box-sizing: border-box;
+                width: 828px;
+                height: 688px;
+
+                .market-info {
+                    height:71px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    padding-left: 30px;
+
+                    .current-market {
+                        margin-right: 20px;
+                        padding-right: 30px;
+                        border-right: 2px solid red;
+                    }
+                }
+
+                .market-tips {
+                    height:28px;
+                    margin-top: 10px;
+                    line-height: 28px;
+                    text-align: center;
+                    color: $primary;
+                }
+                .bids-row {
+                    margin-top: 40px;
+                    .bids-row__info {
+                        font-size: 12px;
+                        color: #999999;
+                        display: flex;
+                        justify-content: space-between;
+                        
+                        .info__label {
+                            font-size: 18px;
+
+                            &.rise {
+                                color: $color-bids-rise;
+                            }
+                            &.fall {
+                                color: $color-bids-fall;
+                            }
+                        }
+                    }
+                    .bids-row__progress {
+                        margin-top: 5px;
+                        width: 100%;
+                        border-radius: 12px;
+                        height: 24px;
+                        line-height: 24px;
+                        overflow: hidden;
+                        display: flex;
+                        .color-section {
+                            height: 100%;
+                            border-radius: 12px;
+                            background-color: #757575;
+
+                            &.rise {
+                                background-color: $color-bids-rise;
+                            }
+                            &.fall {
+                                background-color: $color-bids-fall;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .current-ticket-num {
+                height: 52px;
+                width: 80%;
+                margin: 60px auto;
+                line-height: 52px;
+                color: #999999;
+                display: flex;
+
+                .num-now{
+                    width: 246px;
+                    text-align: center;
+                    border-right: 1px solid #313131;
+                }
+                .input-ix-num {
+                    input {
+                        background-color: transparent;
+                        height: 30px;
+                        width: 240px;
+                        margin-right: 10px;
+                    }
+                }
+
+            }
+
+            .bids-buttons {
+                height: 52px;
+                line-height: 52px;
+                color: #999;
+                font-size: 18px;
+                display: flex;
+                justify-content: space-between;
+                text-align: center;
+
+                > span {
+                    width: 244px;
+                    background:rgba(37,37,37,1);
+                }
+            }
+
+            .middle-right {
+                flex: 1;
+                margin-left: 30px;
+
+                .rules {
+                    height: 688px;
+                    overflow: scroll;
+                    padding: 30px 30px 0;
+                    box-sizing: border-box;
+                    font-size: 12px;
+    
+                    .rule {
+                        border-bottom: 1px solid #484848;
+                        padding-top: 10px;
+                        padding-bottom: 15px;
+                        min-height: 130px;
+                        box-sizing: border-box;
+                    }
+                }
+            }
+        }
+
+        .bids-history {
+
+            .history__table {
+                padding: 9px;
+            }
+            .box-table-th {
+                color: #5E627C;
+                height: 40px;
+                line-height: 40px;
+                display: flex;
+                justify-content: space-between;
+            }
+            .box-table-tr {
+                font-size: 12px;
+                height: 40px;
+                line-height: 40px;
+                display: flex;
+                color: #ffffff;
+
+                >span {
+                    flex: 1;
+                }
+
+                &:nth-child(even) {
+                    background-color:#1a233c;
+                }
+            }
+            .box-table-th, .box-table-tr {
+                padding-left: 40px;
+                padding-right: 40px;
+
+              .rank_pos {
+                width: 20%;
+                position: relative;
+                box-sizing: border-box;
+
+                .icon-rank-leading {
+                    position: absolute;
+                    left: -20px;
+                    top: 13px;
+                }
+              }
+              .amount, .time {
+                width: 30%;
+                text-align: center;
+    
+                .text {
+                  color: $primary;
+                }
+              }
+              .state {
+                width: 20%;
+                text-align: right;
+    
+                &.done {
+                  color: #09C989;
+                }
+                &.expect {
+                  color: #EBB166;
+                }
+              }
+            }
+        }
+    }
+}
