@@ -391,9 +391,9 @@ export default {
     fixPosition () {
       try {
         if (utils.isMobile) {
-          this.$refs.container.style.minHeight = screen.availHeight - (205) + 'px'
+          this.$refs.container.style.height = screen.availHeight - (205) + 'px'
         } else {
-          this.$refs.container.style.minHeight = window.innerHeight - (110) - (80) + 'px'
+          this.$refs.container.style.height = window.innerHeight - (110) - (80) + 'px'
         }
       } catch (e) {
         console.log(e)

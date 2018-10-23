@@ -65,7 +65,7 @@
                     <icon
                       name="rank-leading"
                       class="icon-rank-leading"
-                      v-if="item.rank < 5"/>
+                      v-if="item.rank <= 5"/>
                     {{ item.rank }}
                   </span>
                   <span class="uid">{{ getEncodeContent(item.user_id) }}</span>

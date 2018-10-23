@@ -270,6 +270,9 @@ export default {
 
         .invite-wrap {
           flex: 1;
+          &.right {
+            margin-left: 40px;
+          }
         }
       }
       .title-box {
@@ -299,7 +302,7 @@ export default {
             }
          }
         margin-top: 24px;
-        min-height: 160px;
+        min-height: 220px;
         .share_style .post_btn {
           padding: 0;
           width: 160px;
