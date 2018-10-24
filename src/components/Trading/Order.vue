@@ -285,7 +285,6 @@ export default {
       return this.fixPrice(this.$big(order.total).div(order.deal_amount), order.symbol)
     },
     orderSts (statusId) {
-      console.log(statusId)
       const context = {
         3: 'order_sts_filled',
         4: 'order_sts_canceled',
