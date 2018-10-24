@@ -7,14 +7,14 @@ $color-bids-fall: #FF1E1D;
 .lang-en {
   .lottery-container {
     .banner {
-      background-image: url(/static/active/lottery/banner-lottery_en.png);
+      background-image: url(/static/active/lottery/banner-lottery_en.jpg);
     }
   }
 }
 .lang-ko {
   .lottery-container {
     .banner {
-      background-image: url(/static/active/lottery/banner-lottery_ko.png);
+      background-image: url(/static/active/lottery/banner-lottery_ko.jpg);
     }
   }
 }
@@ -26,7 +26,7 @@ $color-bids-fall: #FF1E1D;
     .banner {
         height: 534px;
         width: 100%;
-        background-image: url(/static/active/lottery/banner-lottery.png);
+        background-image: url(/static/active/lottery/banner-lottery.jpg);
         background-repeat: no-repeat;
         background-position: center center;
     }
