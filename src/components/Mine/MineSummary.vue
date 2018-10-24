@@ -92,7 +92,7 @@
             {{ $t('ix_second_trading_amount') }}
           </p>
           <p class="cm-bt">
-            {{ ixMarketData.amount | round(4) }}
+            {{ ixMarketData.market_value | round(4) }}
             <span class="unit">IX</span>
           </p>
         </div>
@@ -112,7 +112,7 @@
             {{ $t('ix_trading_amout') }}
           </p>
           <p class="cm-bn">
-            {{ ixMarketData.market_value | round(4) }}
+            {{ ixMarketData.amount | round(4) }}
             <span class="unit">IX</span>
           </p>
         </div>
