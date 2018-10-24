@@ -610,6 +610,7 @@
   "header_title_hot_activity": "热门活动",
   "header_title_activity_mine": "全民挖矿",
   "header_title_activity_relay": "交易接力",
+  "header_title_activity_lottery": "竞猜狂欢",
   "confirm_complete_kyc2": "请完成<a href=\"%{link}\">KYC二级认证</a>后报名",
   "user": "用户",
   "join_match": "加入挖矿大赛",
@@ -636,12 +637,19 @@
   "activity_lottery_rules_b": "24小时一共6轮，每轮竞猜时间为4小时。00:00-4:00 ；4:00-8:00；8:00-12:00；12:00-16:00；16:00-20:00；20:00-24:00；根据BTC/USDT 开盘价和4小时后的收盘价，来判断涨、跌、平；每轮竞猜前2小时为投注时间，2小时后不得进行投票，进行封盘处理；4小时时间达到之后进行结算及活动奖励分配；",
   "activity_lottery_rules_c": "涨、跌、平情况取值当前时刻行情对比这一期开盘价的行情对比，如果低于开盘价，既是跌，如果高于开盘价既是涨，相同就是平；用户买涨、买跌或买平的数据比例是当前买涨、买跌或买平占有当前交易对所有投票的数量比例；",
   "activity_lottery_rules_d": "平台将会在投票竞猜失败的两方投票总额中抽出10%进行销毁处理；竞猜成功的一方，竞猜成功返还全部投票额，并且将按竞猜时投票比例分配输方90% IX 投票总额；竞猜失败的IX数量将作为奖励使用，不作退还；",
-  "activity_lottery_cancel_ix":"IX销毁公示地址",
+  "activity_lottery_cancel_ix":"上期IX销毁公示地址",
   "activity_lottery_bid_history":"投注记录",
   "activity_lottery_issue_no": "期号",
+  "activity_lottery_amount": "投注币量",
   "activity_lottery_bid_direction":"投注方向",
   "activity_lottery_settle":"结算",
   "activity_lottery_result":"开奖结果",
-  "activity_lottery_serial":"期"
-
+  "activity_lottery_serial":"期",
+  "activity_result_0":"未开奖",
+  "activity_result_1":"涨赢",
+  "activity_result_2":"平赢",
+  "activity_result_3":"跌赢",
+  "activity_bet_success": "下注成功",
+  "activity_bet_countdown": "下注倒计时",
+  "activity_bet_more": "查看详情"
 }

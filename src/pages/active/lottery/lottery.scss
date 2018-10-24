@@ -4,17 +4,31 @@
 
 $color-bids-rise: #09C989;
 $color-bids-fall: #FF1E1D;
-
+.lang-en {
+  .lottery-container {
+    .banner {
+      background-image: url(/static/active/lottery/banner-lottery_en.png);
+    }
+  }
+}
+.lang-ko {
+  .lottery-container {
+    .banner {
+      background-image: url(/static/active/lottery/banner-lottery_ko.png);
+    }
+  }
+}
 .lottery-container {
     background: #000000;
     color: white;
+    padding-bottom: 72px;
+
     .banner {
         height: 534px;
         width: 100%;
         background-image: url(/static/active/lottery/banner-lottery.png);
         background-repeat: no-repeat;
         background-position: center center;
-
     }
     .body {
         width: 1200px;
@@ -48,9 +62,11 @@ $color-bids-fall: #FF1E1D;
                 line-height: 1;
                 display: flex;
                 justify-content: space-between;
-                background-image:linear-gradient(-14deg,rgba(188,145,66,1) 0%, rgba(238,215,119,1) 100%);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
+                > span {
+                  background-image:linear-gradient(-14deg,rgba(188,145,66,1) 0%, rgba(238,215,119,1) 100%);
+                  -webkit-background-clip: text;
+                  -webkit-text-fill-color: transparent;
+                }
             }
     
             .head__stick {
@@ -80,6 +96,10 @@ $color-bids-fall: #FF1E1D;
                 align-items: center;
                 justify-content: center;
                 flex-direction: column;
+
+                .proper-time {
+                  color: #999999;
+                }
 
                 .count-down-series {
                     display: flex;
@@ -130,9 +150,12 @@ $color-bids-fall: #FF1E1D;
                 margin-left: 20px;
                 flex: none;
                 display: flex;
+                color: #999999;
+                
                 flex-direction: column;
                 .box-title{
                     flex: none;
+                    color: #A6A6A6;
                 }
 
                 .review__list {
@@ -152,11 +175,15 @@ $color-bids-fall: #FF1E1D;
                        justify-content: space-between;
                        margin-top: 10px;
                        
+                       .flat {
+                         color: #9D9E9E;
+                       }
+
                        .decrease {
-                           color: #FF1E1D;
+                           color: $color-bids-fall;
                        }
                        .increase {
-                          color: #09C989; 
+                          color: $color-bids-rise; 
                        }
                     }
                 }
@@ -176,13 +203,21 @@ $color-bids-fall: #FF1E1D;
                     height:71px;
                     display: flex;
                     align-items: center;
-                    justify-content: flex-start;
-                    padding-left: 30px;
+                    justify-content: space-around;
+                    padding:0 30px;
+                    color: #999999;
 
                     .current-market {
                         margin-right: 20px;
                         padding-right: 30px;
-                        border-right: 2px solid red;
+                        border-right: 1px solid #999999;
+                    }
+                    
+                    .more {
+                      flex: 1;
+                      text-align: right;
+                      color: #999999;
+                      // position: absolute;
                     }
                 }
 
@@ -224,6 +259,8 @@ $color-bids-fall: #FF1E1D;
                             height: 100%;
                             border-radius: 12px;
                             background-color: #757575;
+                            width: 0px;
+                            transition: width 2s;
 
                             &.rise {
                                 background-color: $color-bids-rise;
@@ -250,8 +287,15 @@ $color-bids-fall: #FF1E1D;
                     border-right: 1px solid #313131;
                 }
                 .input-ix-num {
-                    input {
-                        background-color: transparent;
+                  // border: 1px solid #757575;
+                  // width: 348px;
+
+                    .input {
+                        outline: none;
+                        appearance: none;
+                        // color: #3A3A3A;
+                        color: #ffffff;
+                        background-color: #1B1B1B;
                         height: 30px;
                         width: 240px;
                         margin-right: 10px;
@@ -268,29 +312,56 @@ $color-bids-fall: #FF1E1D;
                 display: flex;
                 justify-content: space-between;
                 text-align: center;
-
-                > span {
-                    width: 244px;
-                    background:rgba(37,37,37,1);
+                .btn {
+                  width: 244px;
+                  font-size: 18px;
+                  // line-height:100%;
+                  font-weight:bold;
+                  &:hover {
+                    opacity: 0.8;
+                  }
+                }
+                .rise {
+                  background: #0E1C17;
+                  color:rgba(9,201,137,1);
+                }
+                .fall {
+                  background: #321D1C;
+                  color:$color-bids-fall;
+                }
+                .flat {
+                  background: #1E1D1D;
+                  color:#959595;
+                }
+                .disabled {
+                  background:#252525;
+                  color: #999999;
+                  font-weight: normal;
+                  cursor: default;
                 }
             }
 
             .middle-right {
                 flex: 1;
                 margin-left: 30px;
-
+                max-width: 342px;
                 .rules {
                     height: 688px;
                     overflow: scroll;
                     padding: 30px 30px 0;
                     box-sizing: border-box;
                     font-size: 12px;
+                    color: #D0D0D0;
+                    .normal {
+                      display: inline-block;
+                      width: 280px;
+                      color: #D0D0D0;
+                    }
     
                     .rule {
                         border-bottom: 1px solid #484848;
                         padding-top: 10px;
                         padding-bottom: 15px;
-                        min-height: 130px;
                         box-sizing: border-box;
                     }
                 }
@@ -303,7 +374,7 @@ $color-bids-fall: #FF1E1D;
                 padding: 9px;
             }
             .box-table-th {
-                color: #5E627C;
+                color: #4A4A4A;
                 height: 40px;
                 line-height: 40px;
                 display: flex;
@@ -314,50 +385,39 @@ $color-bids-fall: #FF1E1D;
                 height: 40px;
                 line-height: 40px;
                 display: flex;
-                color: #ffffff;
+                color: #999999;
 
-                >span {
+                > span {
                     flex: 1;
                 }
-
-                &:nth-child(even) {
-                    background-color:#1a233c;
+                    
+                &.rise {
+                  .dir, .result {
+                    color: $color-bids-fall;
+                  }
                 }
+
+                &.flat {
+                  .dir, .result {
+                    color: #959595;
+                  }
+                }
+
+                &.fall {
+                  .dir, .result {
+                    color: $color-bids-rise;
+                  }
+                }
+
             }
             .box-table-th, .box-table-tr {
                 padding-left: 40px;
                 padding-right: 40px;
 
-              .rank_pos {
-                width: 20%;
-                position: relative;
-                box-sizing: border-box;
-
-                .icon-rank-leading {
-                    position: absolute;
-                    left: -20px;
-                    top: 13px;
+                .th_td {
+                  width: 25%;
+                  text-align: center;
                 }
-              }
-              .amount, .time {
-                width: 30%;
-                text-align: center;
-    
-                .text {
-                  color: $primary;
-                }
-              }
-              .state {
-                width: 20%;
-                text-align: right;
-    
-                &.done {
-                  color: #09C989;
-                }
-                &.expect {
-                  color: #EBB166;
-                }
-              }
             }
         }
     }

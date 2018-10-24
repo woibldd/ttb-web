@@ -594,32 +594,48 @@ const service = {
   // 最近挖矿列表
   getRecentMatchList () {
     return request('mine/game/join/list')
+  },
+  // 全民竞猜 历史回顾
+  getGuessHistory () {
+    return request('game/bet/history')
+  },
+  // 全民竞猜 当前期
+  getGuessCurrent () {
+    return request('game/bet/current')
+  },
+  // 我的竞猜历史
+  getGuessMine () {
+    return request('game/bet/me')
+  },
+  // 投注
+  doGuess (data) {
+    return request('game/bet/bet', data)
   }
 
 }
 
 export async function fetch (url, body, options, method = 'post') {
-  // let mock = false
-  // mock = await Mock()
-  // if (mock && url.indexOf('quota.ix') > 0) {
-  //   const find = _.find(mock.list, item => {
-  //     return item.url && item.url.test(url)
-  //   })
-  //   if (find) {
-  //     const res = await find.res(body)
-  //     utils.log('Mock', url, body, res)
-  //     return res
-  //   }
-  // } else {
-  //   if (mock.filter[url]) {
-  //     const find = _.find(mock.list, item => item.url && item.url.test(url))
-  //     if (find) {
-  //       const res = await find.res(body)
-  //       utils.log('Mock', url, body, res)
-  //       return res
-  //     }
-  //   }
-  // }
+  let mock = false
+  mock = await Mock()
+  if (mock && url.indexOf('quota.ix') > 0) {
+    const find = _.find(mock.list, item => {
+      return item.url && item.url.test(url)
+    })
+    if (find) {
+      const res = await find.res(body)
+      utils.log('Mock', url, body, res)
+      return res
+    }
+  } else {
+    if (mock.filter[url]) {
+      const find = _.find(mock.list, item => item.url && item.url.test(url))
+      if (find) {
+        const res = await find.res(body)
+        utils.log('Mock', url, body, res)
+        return res
+      }
+    }
+  }
   try {
     let res
     if (method === 'get') {

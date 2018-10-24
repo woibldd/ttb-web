@@ -3,7 +3,7 @@ import utils from '@/modules/utils'
 
 const coins = ['USDT', 'BTC', 'ETH', 'EOS', 'IOST', 'ADA', 'DTA']
 // const coins = ['USDT', 'BTC', 'ETH', 'EOS', 'IOST', 'ADA', 'AE', 'BCH', 'BNB', 'ETC', 'KCS', 'LTC', 'NEO', 'OMG', 'SC', 'STORJ']
-const rand = n => Math.floor(Math.random() * (n + 1))
+const rand = n => Math.floor(Math.random() * Math.pow(10, n))
 
 const balanceItem = (currency) => {
   let test = { 'currency_name': 'USDT', 'unavailable': '0', 'ordering': '0', 'locking': '0', 'available': '439.3373024886', 'withdrawable_amount': '439.3373024886', 'withdrawing': '0', 'scale': 6, 'priced': true, 'quota_btc': '100', 'full_name': 'Tether(OMNI)', 'confirming': '0', 'quota': '643017.999321', 'equality': '0.068324' }
@@ -35,10 +35,95 @@ export const filter = {
   'mine/game/me': 1,
   'mine/game/rank': 1,
   'mine/game/pool': 1,
-  'mine/game/join': 1
-
+  'mine/game/join': 1,
+  'game/bet/history': 1,
+  'game/bet/current': 1,
+  'game/bet/me': 1,
+  'game/bet/bet': 1
 }
 export const list = [
+  {
+    url: /game\/bet\/bet/,
+    res () {
+      return ok({})
+    }
+  },
+  {
+    url: /game\/bet\/me/,
+    res () {
+      return ok([{
+        game_id: '20181024001',
+        result: 0, // result 0未开奖 1涨 2平 3跌
+        bet_time: new Date().getTime(),
+        bet2_amount: rand(5),
+        bet3_amount: rand(4),
+        win_amount: rand(2)
+      }, {
+        game_id: '20181024002',
+        result: 1, // result 0未开奖 1涨 2平 3跌
+        bet_time: new Date().getTime(),
+        bet3_amount: rand(4),
+        win_amount: rand(2)
+      }, {
+        game_id: '20181024003',
+        result: 2, // result 0未开奖 1涨 2平 3跌
+        bet_time: new Date().getTime(),
+        bet1_amount: rand(9),
+        win_amount: rand(2)
+      }, {
+        game_id: '20181024004',
+        result: 3, // result 0未开奖 1涨 2平 3跌
+        bet_time: new Date().getTime(),
+        bet1_amount: rand(9),
+        bet2_amount: rand(5),
+        bet3_amount: rand(4),
+        win_amount: rand(2)
+      }])
+    }
+  },
+
+  {
+    url: /game\/bet\/current/,
+    res () {
+      return ok({
+        game_id: '20181028002',
+        betover_time: new Date(2018, 12, 13).getTime(),
+        gameover_time: new Date(2019, 8, 30).getTime(),
+        open_price: 6666,
+        current_price: 6888,
+        bet1_amount: rand(4),
+        bet2_amount: rand(3),
+        bet3_amount: rand(4)
+      })
+    }
+  },
+
+  {
+    url: /game\/bet\/history/,
+    res () {
+      return ok([{
+        game_id: '20181024001',
+        result: 0, // result 0未开奖 1涨 2平 3跌
+        destroy_amount: rand(4),
+        destroy_record: 'https://omniexplorer.info/tx/af07d616cacb2cd65b8830ec135be710e1babfa107fca9541d838aef4f056f08'
+      }, {
+        game_id: '20181024002',
+        result: 3, // result 0未开奖 1涨 2平 3跌
+        destroy_amount: rand(4),
+        destroy_record: 'xxxx'
+      }, {
+        game_id: '20181024003',
+        result: 2, // result 0未开奖 1涨 2平 3跌
+        destroy_amount: rand(4),
+        destroy_record: 'xxxx'
+      }, {
+        game_id: '20181024004',
+        result: 1, // result 0未开奖 1涨 2平 3跌
+        destroy_amount: rand(4),
+        destroy_record: 'xxxx'
+      }])
+    }
+  },
 
   {
     url: /mine\/game\/join\/list/,

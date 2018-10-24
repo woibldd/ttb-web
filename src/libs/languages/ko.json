@@ -607,6 +607,7 @@
   "header_title_hot_activity": "인기하는 활동",
   "header_title_activity_mine": "전민 채굴",
   "header_title_activity_relay": "릴레이 거래",
+  "header_title_activity_lottery": "환희를 하면서 맞히다",
   "confirm_complete_kyc2": "<a href=\"%{link}\">KYC 2</a>급 인증을 완성한후에 참가하시길 바랍니다",
   "user": "사용자",
   "join_match": "가입하다",
@@ -639,5 +640,13 @@
   "activity_lottery_bid_direction":"투자방향",
   "activity_lottery_settle":"결제",
   "activity_lottery_result":"보상 결과",
-  "activity_lottery_serial":"기"
+  "activity_lottery_serial":"기",
+  "activity_result_0":"보상 개방안함",
+  "activity_result_1":"많아서 이김",
+  "activity_result_2":"동등하게 이김",
+  "activity_result_3":"동등하게 이김",
+  "activity_bet_success": "투자에 성공하였습니다",
+  "activity_bet_countdown": "투자 카운트시간",
+  "activity_bet_more": "세부 정보",
+  "activity_lottery_amount": "코인 투자량"
 }
