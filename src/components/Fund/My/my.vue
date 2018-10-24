@@ -22,7 +22,12 @@
           v-for="(hd, idx) in header"
           :key="idx"
           :prop="hd.key"
-          :label="hd.title"/>
+          :label="hd.title">
+          <template slot-scope="scope">
+            <span v-if="hd.key === 'currency'"><icon :name="scope.row.currency"/></span>
+            <span>{{ scope.row[hd.key] }}</span>
+          </template>
+        </el-table-column>
 
         <el-table-column
           header-align='right'
