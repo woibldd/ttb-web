@@ -7,7 +7,7 @@
         <div class="count-down border-1">
           <div class="box-title mb-20"><div class="text">{{ $t('activity_lottery_count_down') }}</div></div>
           <div class="count-down__detail">
-            <div class="proper-time mb-25">{{ $t('activity_lottery_next_time') }} 4:00:00</div>
+            <div class="proper-time mb-25">{{ $t('activity_lottery_next_time') }} {{current.gameover_time | ts2date('H:m:s')}}</div>
             <div class="count-down-series">
               <div
                 class="time-num-group"
@@ -352,6 +352,7 @@ export default {
       }
 
       let params = {
+        game_id: this.game_id
       }
       switch (type) {
         case 'rise':
