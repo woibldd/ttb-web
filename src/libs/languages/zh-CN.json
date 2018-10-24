@@ -543,7 +543,7 @@
   "has_no_send": "未派发",
   "has_done": "发放",
   "keep_ix_reward_yesterday": "昨日持IX分配手续费：",
-  "keep_million_ix_reward_yesterday": "昨日连续持有1BTC等值IX（%{ix}枚）分配：",
+  "keep_million_ix_reward_yesterday": "昨日连续持有1BTC等值IX(%{ix}枚)分配：",
   "ix_second_trading_amount": "IX二级市场释放量：",
   "ix_lock_amount": "IX锁仓总量：",
   "ix_trading_amout": "IX二级市场流通量：",
