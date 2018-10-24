@@ -108,7 +108,7 @@
         </p>
         <p class="row__value">
           {{ ixMarketData.market_value | round(4) }}
-          <span class="unit">USDT</span>
+          <span class="unit">IX</span>
         </p>
       </div>
     </div>

@@ -113,7 +113,7 @@
           </p>
           <p class="cm-bn">
             {{ ixMarketData.market_value | round(4) }}
-            <span class="unit">USDT</span>
+            <span class="unit">IX</span>
           </p>
         </div>
 
