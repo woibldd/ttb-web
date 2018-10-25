@@ -12,6 +12,18 @@ export default{
       office_website: 'https://bitcoin.org/en', // 官网
       chain_info: 'https://blockchain.info/' // 区块查询
     },
+    'zh-HK': {
+      name: 'BTC',
+      full_name: '比特幣（Bitcoin）',
+      brief_info: '比特幣（Bitcoin，簡稱BTC）是目前使用最為廣泛的一種數字貨幣，它誕生於2009年1月3日，是一種點對點（P2P）傳輸的數字加密貨幣，總量2100萬枚。比特幣網絡每10分鐘釋放出一定數量幣，預計在2140年達到極限。比特幣被投資者稱為“數字黃金”。比特幣依據特定算法，通過大量的計算產生，不依靠特定貨幣機構發行，其使用整個P2P網絡中眾多節點構成的分佈式數據庫來確認並記錄所有的交易行為，並使用密碼學設計確保貨幣流通各個環節安全性，可確保無法通過大量製造比特幣來人為操控幣值。基於密碼學的設計可以使比特幣只能被真實擁有者轉移、支付及兌現。同樣確保了貨幣所有權與流通交易的匿名性。 ',
+      issue_time: '2008/11/1',
+      issue_all: '2100萬', // 發行總量
+      issue_circulation: '1673.82萬', // 流通總量
+      token_price: '--', // 眾籌價格
+      whitepagger: 'https://bitcoin.org/bitcoin.pdf', // 白皮書
+      office_website: 'https://bitcoin.org/en', // 官網
+      chain_info: 'https://blockchain.info/' // 區塊查詢
+    },
     en: {
       name: 'BTC',
       full_name: 'Bitcoin',
@@ -51,6 +63,18 @@ export default{
       office_website: 'https://www.ethereum.org', // 官网
       chain_info: 'https://etherscan.io' // 区块查询
     },
+    'zh-HK': {
+      name: 'ETH',
+      full_name: '以太坊（Ethereum）',
+      brief_info: '以太坊（Ethereum）是下一代密碼學賬本，可以支持眾多的高級功能，包括用戶發行貨幣，智能協議，去中心化的交易和設立去中心化自治組織(DAOs)或去中心化自治公司（DACs）。以太坊並不是把每一單個類型的功能作為特性來特別支持，相反，以太坊包括一個內置的圖靈完備的腳本語言，允許通過被稱為“合同”的機制來為自己想實現的特性寫代碼。一個合同就像一個自動的代理，每當接收到一筆交易，合同就會運行特定的一段代碼，這段代碼能修改合同內部的數據存儲或者發送交易。 ',
+      issue_time: '2014-07-24',
+      issue_all: '9631.15 萬', // 發行總量
+      issue_circulation: '9631.15 萬', // 流通總量
+      token_price: '$0.31', // 眾籌價格
+      whitepagger: 'https://github.com/ethereum/wiki/wiki/%5BEnglish%5D-White-Paper', // 白皮書
+      office_website: 'https://www.ethereum.org', // 官網
+      chain_info: 'https://etherscan.io' // 區塊查詢
+    },
     en: {
       name: 'ETH',
       full_name: 'Ethereum',
@@ -89,6 +113,18 @@ export default{
       office_website: 'https://eos.io/', // 官网
       chain_info: 'https://etherscan.io/token/EOS' // 区块查询
     },
+    'zh-HK': {
+      name: 'EOS',
+      full_name: 'Enterprise Operation System（EOS）',
+      brief_info: 'EOS (Enterprise Operation System)是由 Block.one公司主導開發的一種全新的基於區塊鏈智能合約平台，旨在為高性能分佈式應用提供底層區塊鏈平台服務。 EOS 項目的目標是實現一個類似操作系統的支撐分佈式應用程序的區塊鏈架構。該架構可以提供賬戶，身份認證，數據庫，異步通信以及可在數以萬計的 CPU/GPU群集上進行程序調度和並行運算。 EOS最終可以支持每秒執行數百萬個交易，同時普通用戶執行智能合約無需支付使用費用。 ',
+      issue_time: '2017-07-02',
+      issue_all: '10億', // 發行總量
+      issue_circulation: '5.36億', // 流通總量
+      token_price: '--', // 眾籌價格
+      whitepagger: 'https://github.com/EOSIO/Documentation/blob/master/zh-CN/TechnicalWhitePaper.md', // 白皮書
+      office_website: 'https://eos.io/', // 官網
+      chain_info: 'https://etherscan.io/token/EOS' // 區塊查詢
+    },
     en: {
       name: 'EOS',
       full_name: 'Enterprise Operation System（EOS）',
@@ -126,6 +162,18 @@ export default{
       whitepagger: 'https://ix.com/docs/IX+WhitePaper+zh-CN.pdf', // 白皮书
       office_website: 'https://ix.com/', // 官网
       chain_info: 'https://etherscan.io/token/0xc7df14a8289efe7a2d3399387302fdf86e7adc4e' // 区块查询
+    },
+    'zh-HK': {
+      name: 'IX',
+      full_name: 'IX Token',
+      brief_info: 'IX（IX Token）是全球首家支持比特幣作為權益證明的交易所IX.com的平台通證，IX持有者可享有交易所分紅、社區治理等多重權益。 ',
+      issue_time: '2018-10-18',
+      issue_all: '200億', // 發行總量
+      issue_circulation: '--', // 流通總量
+      token_price: '--', // 眾籌價格
+      whitepagger: 'https://ix.com/docs/IX+WhitePaper+zh-CN.pdf', // 白皮書
+      office_website: 'https://ix.com/', // 官網
+      chain_info: 'https://etherscan.io/token/0xc7df14a8289efe7a2d3399387302fdf86e7adc4e' // 區塊查詢
     },
     en: {
       name: 'IX',
