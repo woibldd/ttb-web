@@ -32,7 +32,9 @@ function toTick (item) {
     close: +item.values[1],
     low: +item.values[2],
     high: +item.values[3],
-    volume: +item.values[4]
+    volume: +item.values[4],
+    zf: 30,
+    zff: 90
   }
 }
 

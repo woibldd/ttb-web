@@ -69,6 +69,7 @@ export const local = new Locals('store', {
   pair: '',
   fiat: 'AUTO',
   upDown: 'gr',
+  debug: true,
   hideMoney: 0,
   orderbookMode: 'both',
   regionId: '',
