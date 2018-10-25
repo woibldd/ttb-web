@@ -72,6 +72,15 @@
           class="link"
           target="_blank">{{ $t('mining') }}
         </router-link>
+        <!-- <router-link
+          :to="{name: 'LockWarehouse'}"
+          target="_blank"
+          class="link">{{ $t("trading_mine") }}
+        </router-link>
+        <router-link
+          :to="{name: 'InviteMineActivity'}"
+          target="_blank"
+          class="link">{{ $t("invite_mine") }}</router-link> -->
         <router-link
           :to="{name: 'profile'}"
           @click="toggleMenu"
@@ -209,7 +218,7 @@ export default {
         position: relative;
         .operate {
             display: inline-block;
-            margin-left: rem(16);
+            padding-left: rem(16);
 
             &.signup {
                 border: 1px solid #ffffff;

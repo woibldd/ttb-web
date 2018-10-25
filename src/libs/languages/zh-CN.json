@@ -149,7 +149,7 @@
   "withdraw_arrival": "实际到账",
   "withdraw_confirm": "确认提币",
   "withdraw_hint_delay": "提现转出时间为 30 分钟内，具体到账时间以区块链网络速度决定；",
-  "withdraw_hint_check": "为了确保安全，提现数量超过 %{num} %{coin} 时将进行人工审核，请正确填写提现地址。",
+  "withdraw_hint_check": "请正确填写提币地址；为了确保安全，提币时将进行人工审核，请耐心等待。",
   "footer_api": "API 文档",
   "footer_fee": "费率",
   "footer_help": "帮助中心",

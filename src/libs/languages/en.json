@@ -198,7 +198,7 @@
   "withdraw_memo_text": "MEMO",
   "withdraw_hint_title": "Important notice",
   "withdraw_hint_delay": "Withdrawal time will be within 30 minutes, actual time may vary depending on the speed of the blockchain",
-  "withdraw_hint_check": "For security purpose, a manual review will be conducted when the amount of transfer exceeds %{num} %{coin}. Please make sure you enter the correct address",
+  "withdraw_hint_check": "Please fill in the correct address when making BTC withdrawal. Please be paitient as it Is required to do manual review when making withdrawal for the safety purpose.",
   "withdraw_confirmed": "Your withdrawal request has been confirmed.",
   "tip_title_quota": "Remaining balance for withdrawal",
   "tip_content_quota": "Authenticated users can transfer a daily quota of %{num} BTC. If you want to transfer a larger amount, please contact customer service.",

@@ -149,7 +149,7 @@
   "withdraw_arrival": "실제입금될 수량",
   "withdraw_confirm": "출금승인",
   "withdraw_hint_delay": "출금은 30분내로 이루일예정입니다.구체적인 출금완료시간은 블록체인 네트워크속도에 의하여 결정됩니다；",
-  "withdraw_hint_check": "안전보장을 위하여 출금량%{num} %{coin}을 초과할시 수동검사가 진행됩나다. 다시한번 출금주소를 확인하여 주십시오。",
+  "withdraw_hint_check": "정확한 코인거래주소를 입력하여 주세요;안전을 확보하기 위하여,코인거래를 진행할때 인공심사가 있을것입니다,내심히 기다려 주세요",
   "footer_api": " API문건",
   "footer_fees": "수수료",
   "footer_help": "고객센터",

@@ -6,7 +6,7 @@ import api from './request'
 import { quotaApi } from './request'
 import { state, actions } from '@/modules/store'
 
-const Mock = () => import('./mock')
+// const Mock = () => import('./mock')
 
 const service = {
   getBanners (data = {}) {
