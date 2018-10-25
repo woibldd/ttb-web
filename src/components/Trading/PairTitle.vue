@@ -50,7 +50,7 @@ export default {
   data () {
     return {
       state,
-      show: true
+      show: false
     }
   },
   components: {
