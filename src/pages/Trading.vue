@@ -10,22 +10,11 @@
     />
     <div class="container-trade-panel">
       <div class="ix-row">
-        <div
-          class="ix-col ix-col-1"
-          v-if="!isMobile">
-          <div
-            class="ix-grid ix-grid-pairnav"
-            ref="gridPairNav">
-            <PairNav ref="PairNav"/>
-          </div>
-          <div
-            class="ix-grid ix-grid-deal"
-            ref="gridDeal">
-            <Deal ref="Deal"/>
-          </div>
-        </div>
         <div class="ix-col ix-col-2">
+          <!-- 大盘顶部当前交易对信息 -->
           <pair-title/>
+
+          <!-- 倒计时 & 大盘 -->
           <div
             class="ix-grid ix-grid-tv"
             ref="gridTradingView">
@@ -44,30 +33,45 @@
             </div>
           </div>
         </div>
-        <div class="ix-col ix-col-3">
+        <div class="trade-top-right">
+          <div class="ix-col-715 ix-height-317 flex-row">
+            <!-- bids & asks -->
+            <div
+              class="ix-grid ix-grid-orderbook"
+              ref="gridOrderbook">
+              <Orderbook ref="Orderbook"/>
+            </div>
+            <div
+              class="ix-col ix-col-320"
+              v-if="!isMobile">
+              <div
+                class="ix-grid ix-height-317 pb-5"
+                ref="gridDeal">
+                <!-- 最新交易 -->
+                <Deal ref="Deal"/>
+              </div>
+            </div>
+          </div>
+          <!--  限价单 & 市价单 -->
           <div
-            class="ix-grid ix-grid-orderbook"
-            ref="gridOrderbook">
-            <Orderbook ref="Orderbook"/>
+            class="ix-grid ix-grid-operate ix-col-715"
+            ref="gridOperate">
+            <Operate ref="Operate"/>
           </div>
         </div>
       </div>
       <div class="ix-row">
+        <!--  当前委托 & 委托历史 -->
         <div
           v-if="!isMobile"
           class="ix-grid ix-grid-order"
           ref="gridOrder">
           <Order ref="Order"/>
         </div>
-        <div
-          class="ix-grid ix-grid-operate"
-          ref="gridOperate">
-          <Operate ref="Operate"/>
-        </div>
       </div>
       <div class="ix-row">
         <div
-          class="ix-col ix-col-1 wd-100"
+          class="ix-col ix-col-320 wd-100"
           v-if="isMobile">
           <div
             class="ix-grid ix-grid-order"
@@ -75,7 +79,7 @@
             <Order ref="Order"/>
           </div>
           <div
-            class="ix-grid ix-grid-deal wd-100"
+            class="ix-grid ix-grid-deal ix-height-317 wd-100"
             ref="gridDeal">
             <Deal ref="Deal"/>
           </div>
@@ -378,8 +382,14 @@ export default {
   display: flex;
   flex-direction: column;
 }
-.ix-col-1 {
-  width: 320px;
+.ix-col-320 {
+  width: 356px;
+}
+.ix-col-715 {
+    width: 715px;
+}
+.ix-height-317 {
+    height: 317px;;
 }
 .ix-col-2 {
   flex: 1;
@@ -471,9 +481,12 @@ export default {
   }
 
 }
+.flex-row {
+    display: flex;
+}
 @media screen and (max-width: 1200px) {
   .ix-grid-orderbook {
-    height: 500px;
+    height: 310px;
   }
   .wd-100 {
     width: 100%;
@@ -481,7 +494,7 @@ export default {
 }
 .mobile {
   .ix-grid-orderbook {
-    height: 500px;
+    height: 310px;
   }
   .wd-100 {
     width: 100%;
