@@ -214,6 +214,7 @@
   "order_sts_empty_rm": "被撤销",
   "orderdeal_executed": "成交记录",
   "orderdeal_fee": "手续费",
+  "pairnav_no_matched": "没有匹配的交易对",
   "fees_name": "币种",
   "click_to_clear": "点击清除",
   "loading": "加载中",

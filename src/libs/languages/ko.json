@@ -214,6 +214,7 @@
   "order_sts_empty_rm": "취소",
   "orderdeal_executed": "체결내역",
   "orderdeal_fee": "수수료",
+  "pairnav_no_matched": "일치한 거래가 없음",
   "fees_name": "종류",
   "click_to_clear": "클리어",
   "loading": "로딩중",

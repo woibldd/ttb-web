@@ -1,16 +1,23 @@
 <template>
   <span class="sort-label">
     <span>{{ label }}</span>
-    <span class="icons" :class="'state-' + state">
-      <i class="up" :style="{borderColor: color}"></i>
-      <i class="down" :style="{borderColor: color}"></i>
+    <span
+      v-if="sort"
+      class="icons"
+      :class="'state-' + state">
+      <i
+        class="up"
+        :style="{borderColor: color}"/>
+      <i
+        class="down"
+        :style="{borderColor: color}"/>
     </span>
   </span>
 </template>
 
 <script>
 export default {
-  name: 'sort',
+  name: 'Sort',
   props: {
     label: String,
     color: {
@@ -18,6 +25,10 @@ export default {
     },
     state: {
       default: 0
+    },
+    sort: {
+      type: Boolean,
+      default: true
     }
   }
 }

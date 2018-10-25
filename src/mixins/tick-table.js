@@ -39,7 +39,8 @@ export default {
       return this.state.pro.pairList
     },
     showList () {
-      return this.pairList
+      let list = this.pairList
+      return _.filter(list, pair => pair.product_name.indexOf(this.search.toUpperCase()) > -1)
     },
     sortedList () {
       if (!this.sortBy || !this.sortState) {

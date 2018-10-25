@@ -552,7 +552,7 @@ export default {
         a{
             background: #303c47;
             display: block;
-            width: 25%;
+            width: %;
             height: 40px;
             float: left;
             color: #fff;

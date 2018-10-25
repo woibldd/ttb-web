@@ -2,22 +2,6 @@
   <div
     class="ix-pannel"
     :class="{loading: loading}">
-    <div class="ix-header">
-      {{ $t('pairnav_title') }}
-      <div class="input-wrap">
-        <span class="search-icon">
-          <icon name="search"/>
-        </span>
-        <input
-          type="text"
-          ref="input"
-          class="input search-input"
-          :placeholder="$t('search')"
-          @keydown.ctrl.prevent
-          @keydown.meta.prevent
-          v-model="search">
-      </div>
-    </div>
     <div class="ix-pannel-body">
       <div
         class="no-data"
@@ -32,6 +16,7 @@
           class="th pair"
           @click="setSort('pair')">
           <sort
+            :sort="sort"
             :label="$t('pairnav_pair')"
             :state="stateSortBy('pair')"/>
         </div>
@@ -39,6 +24,7 @@
           class="th price"
           @click="setSort('price')">
           <sort
+            :sort="sort"
             :label="$t('pairnav_price')"
             :state="stateSortBy('price')"/>
         </div>
@@ -46,6 +32,7 @@
           class="th delta"
           @click="setSort('delta')">
           <sort
+            :sort="sort"
             :label="$t('pairnav_wave')"
             :state="stateSortBy('delta')"/>
         </div>
@@ -53,13 +40,14 @@
           class="th vol"
           @click="setSort('vol')">
           <sort
+            :sort="sort"
             :label="$t('pairnav_vol')"
             :state="stateSortBy('vol')"/>
         </div>
       </div>
       <ul
         class="ul ix-pair-body tbody"
-        :style="{height: height}"
+        :style="{'max-height': height}"
         v-show="sortedList.length">
         <li
           class="tr"
@@ -105,6 +93,10 @@ export default {
     initHeight: {
       type: Number,
       default: 0
+    },
+    sort: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -129,7 +121,7 @@ export default {
     },
     height () {
       if (this.initHeight) {
-        return `${this.initHeight - 80}px`
+        return `${this.initHeight}px`
       }
       return this.bodyHeight
     }
@@ -167,7 +159,7 @@ export default {
       this.$eh.$on('app:resize', this.onresize)
     },
     onresize () {
-      this.bodyHeight = this.container.height - 88 + 'px'
+      this.bodyHeight = (this.initHeight || (this.container.height - 80)) + 'px'
     },
     async bindHotKey () {
       this.key = await utils.getExtModule('key')
@@ -202,8 +194,8 @@ export default {
 }
 .ix-header-sub {
   padding-left: 12px;
-  height: 24px;
-  line-height: 24px;
+  height: 40px;
+  line-height: 40px;
   background-color: $nav;
   color: white;
 }
@@ -234,17 +226,22 @@ export default {
   }
 }
 .tr {
+  height: 40px;
+  line-height: 40px;
+  display: flex;
+  align-items: center;
   font-size: 0;
   white-space: nowrap;
 }
 .th,
 .td {
-  line-height: 24px;
-  font-size: 12px;
+  line-height: 40px;
+  font-size: 14px;
   display: inline-block;
   vertical-align: top;
   box-sizing: border-box;
   padding: 0 5px;
+  font-weight: 400;
 }
 .th {
   padding: 4px 5px;
@@ -301,16 +298,16 @@ export default {
     border-bottom: 1px solid transparent;
     cursor: pointer;
   }
-  .tr:nth-child(odd) {
-    background-color: rgba(255,255,255, 0.03);
-  }
+  // .tr:nth-child(odd) {
+  //   background-color: rgba(255,255,255, 0.03);
+  // }
   .tr:hover {
-    background-color: #262b3e;
+    background-color: #0F1F2D;
   }
   .tr.cur {
-    background-color: $primary-opacity;
-    border-top: 1px solid rgba($color: #ffffff, $alpha: 0.5);
-    border-bottom: 1px solid rgba($color: #ffffff, $alpha: 0.5);
+    background-color: #203950;
+    // border-top: 1px solid rgba($color: #ffffff, $alpha: 0.5);
+    // border-bottom: 1px solid rgba($color: #ffffff, $alpha: 0.5);
   }
 }
 th {

@@ -287,6 +287,7 @@
   "order_sts_empty_rm": "Cancelled",
   "orderdeal_executed": "History",
   "orderdeal_fee": "Fees",
+  "pairnav_no_matched": "No matched pairs",
   "fees_name": "COIN",
   "click_to_clear": "Click to clear",
   "loading": "Loading",
