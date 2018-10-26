@@ -132,8 +132,9 @@ export default {
 }
 .op-container {
   box-sizing: border-box;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   overflow-y: auto;
+  min-height: 317px;
 }
 .mask {
   width: 100%;

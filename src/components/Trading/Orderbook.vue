@@ -2,22 +2,35 @@
   <div class="ix-panel">
     <div class="ix-header">
       <orderbook-nav :height="navHeight" />
-      <!-- <div class="pull-right">
+      <!-- 深度选择 -->
+      <div
+        class="depth-group-display relative pull-right"
+        @mouseover="showDepthOption = true"
+        @mouseout="showDepthOption = false">
         <span
-          v-show="offset || accuracy !== 1"
-          class="group-display ibt"
-          v-tooltip="clearTip"
-          @click="clearSetting">
-          {{ curGroup }} <span class="has-underline">{{ $t('orderbook_group') }}</span>
+          v-show="offset || accuracy !== 1 || true"
+          class="ibt">
+          <span class="dib mr-5">{{ $t('orderbook_depth_group') }}</span>{{ currentDepth }}
         </span>
-        <div class="header-icons ibt">
-          <a
-            @click.prevent.stop="toggleSetting"
-            class="header-btn btn">
-            <icon name="setting"/>
-          </a>
+        <div
+          class="header-icons relative ibt"
+          @click.prevent.stop="toggleSetting">
+          <icon
+            name="arrow-down-yellow"
+            class="arrow-down-yellow"/>
         </div>
-      </div> -->
+        <div
+          class="depth-options-wrapper"
+          v-show="showDepthOption">
+          <div class="depth-options">
+            <div
+              v-for="(dp, index) in depthGroup"
+              @click="changeDepth(dp)"
+              :key="index"
+              class="depth__row">{{ dp }}</div>
+          </div>
+        </div>
+      </div>
     </div>
     <div
       class="ix-panel-thead"
@@ -158,7 +171,12 @@ export default {
         content () {
           return vm.$i18n.t('click_to_clear')
         }
-      }
+      },
+      showDepthOption: false,
+      depthGroup: [
+        0.000001, 0.00001, 0.0001
+      ],
+      currentDepth: 0.0001
     }
   },
   watch: {
@@ -269,9 +287,11 @@ export default {
     }
   },
   methods: {
-    clearSetting () {
-      this.offset = 0
-      this.accuracy = 1
+    changeDepth (dp) {
+    //   this.offset = 0
+    //   this.accuracy = 1
+      this.currentDepth = dp
+      this.showDepthOption = false
       this.onGroupChange()
     },
     toggleSetting () {
@@ -441,6 +461,32 @@ export default {
   }
 }
 
+.depth-options-wrapper {
+    padding-top: 4px;
+}
+.depth-options {
+    box-sizing: border-box;
+    width:102px;
+    height:110px;
+    background:rgba(25,45,63,1);
+    border-radius:4px;
+    padding-top: 10px;
+
+    .depth__row {
+        box-sizing: border-box;
+        padding-right: 24px;
+        height: 30px;
+        line-height: 30px;
+        width: 100%;
+        text-align: right;
+        color: #C9AA6D;
+
+        &:hover {
+            background-color: #0F1F2D;
+        }
+    }
+}
+
 .mask {
   @include ix-mask();
   &.changing {
@@ -457,12 +503,25 @@ export default {
   color: white;
   font-size: 0;
 }
-.group-display {
+.depth-group-display {
   font-size: 12px;
-  margin-right: 8px;
+  margin-right: 18px;
+  width: 102px;
+  color: #C9AA6D;
+  font-size: 12px;
+  text-align: right;
+}
+.arrow-down-yellow {
+    width: 12px;
+    height: 6px;
+    position: absolute;
+    top: 14px;
 }
 .has-underline {
   border-bottom: 1px dotted #788694;
+}
+.dib {
+    display: inline-block;
 }
 .ix-panel-thead {
   padding-left: 10px;
@@ -504,6 +563,9 @@ th.buy {
 }
 th.sell {
   padding-left: 10px;
+}
+.relative {
+    position: relative;
 }
 .order-split {
   color: white;

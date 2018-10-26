@@ -681,7 +681,7 @@ export default {
   text-align: right;
   font-size: 12px;
   line-height: 17px;
-  height: 34px;
+  height: 26px;
   .avbl-label {
     line-height: 17px;
     height: 17px;
@@ -734,7 +734,7 @@ export default {
   }
 }
 .ix-slider {
-  padding: 7px 0px;
+  padding: 0 0px 7px;
   margin-right: 20px;
   position: relative;
   box-sizing: border-box;

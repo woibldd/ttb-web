@@ -34,10 +34,10 @@
           </div>
         </div>
         <div class="trade-top-right">
-          <div class="ix-col-715 ix-height-317 flex-row">
+          <div class="ix-col-640 ix-height-250 flex-row">
             <!-- bids & asks -->
             <div
-              class="ix-grid ix-grid-orderbook"
+              class="ix-grid ix-grid-orderbook ix-col-320"
               ref="gridOrderbook">
               <Orderbook ref="Orderbook"/>
             </div>
@@ -45,7 +45,7 @@
               class="ix-col ix-col-320"
               v-if="!isMobile">
               <div
-                class="ix-grid ix-height-317 pb-5"
+                class="ix-grid ix-height-250 pb-5"
                 ref="gridDeal">
                 <!-- 最新交易 -->
                 <Deal ref="Deal"/>
@@ -54,7 +54,7 @@
           </div>
           <!--  限价单 & 市价单 -->
           <div
-            class="ix-grid ix-grid-operate ix-col-715"
+            class="ix-grid ix-grid-operate ix-col-640"
             ref="gridOperate">
             <Operate ref="Operate"/>
           </div>
@@ -79,7 +79,7 @@
             <Order ref="Order"/>
           </div>
           <div
-            class="ix-grid ix-grid-deal ix-height-317 wd-100"
+            class="ix-grid ix-grid-deal ix-height-250 wd-100"
             ref="gridDeal">
             <Deal ref="Deal"/>
           </div>
@@ -383,13 +383,13 @@ export default {
   flex-direction: column;
 }
 .ix-col-320 {
-  width: 356px;
+  width: 320px;
 }
-.ix-col-715 {
-    width: 715px;
+.ix-col-640 {
+    width: 640px;
 }
-.ix-height-317 {
-    height: 317px;;
+.ix-height-250 {
+    height: 266px;;
 }
 .ix-col-2 {
   flex: 1;
