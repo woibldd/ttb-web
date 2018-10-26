@@ -43,7 +43,6 @@ export default function () {
       tools: []
     },
     overrides: {
-      'mainSeriesProperties.showCountdown': false,
       'symbolWatermarkProperties.color': 'rgba(255,255,255,0)',
       'paneProperties.background': '#283B4C',
       'paneProperties.vertGridProperties.color': 'rgba(210, 217, 229, 0.06)',
@@ -54,7 +53,7 @@ export default function () {
       'paneProperties.legendProperties.showStudyValues': true,
       'paneProperties.legendProperties.showSeriesTitle': false,
       'paneProperties.legendProperties.showSeriesOHLC': true,
-      'paneProperties.legendProperties.showLegend': false,
+      // 'paneProperties.legendProperties.showLegend': false,
       'paneProperties.topMargin': 8,
       'paneProperties.bottomMargin': 18,
       'scalesProperties.lineColor': 'rgba(210, 217, 229, 0.06)',

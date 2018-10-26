@@ -3728,7 +3728,7 @@ webpackJsonp([4], [function (t, e, i) {
     }
 
     var h, c, d, p, u, _, f, m, g, v, y, b, w, S, T, C, x, P, L, k, I, A, E, M, D, O, V, B, R, N, F, z, W, H, U, j;
-    TradingView.DEFAULT_BAR_COUNT = 300, TradingView.TIME_PLOT = 0, TradingView.OPEN_PLOT = 1, TradingView.HIGH_PLOT = 2, TradingView.LOW_PLOT = 3, TradingView.CLOSE_PLOT = 4, TradingView.ADT_PLOT = 6, TradingView.STYLE_PLOT = 7,TradingView.ZF = 8,TradingView.ZFF = 9, TradingView.SEARCH_FROM_LEFT = -1, TradingView.SEARCH_FROM_RIGHT = 1, h = i(699), c = i(696), d = i(347), p = i(698), u = i(346), _ = u.SeriesAreaPaneView, f = u.SeriesLinePaneView, m = u.SeriesHollowCandlesPaneView, g = u.SeriesCandlesPaneView, v = u.SeriesBarsPaneView, y = u.SeriesHeikenAshiPaneView, b = i(3), w = i(304), S = i(196).SeriesBarColorer, T = i(89).HorzLineRenderer, C = i(685), x = i(48).PriceDataSource, P = i(158), L = i(700).FutureBarsPaneView, k = i(36).Interval, I = i(8), A = i(198), E = i(345), M = i(21), D = i(2), O = i(285), V = i(27).PriceFormatter, B = i(86), R = i(25), N = i(356).SyncModel, F = i(33).trackEvent, z = i(164).translatedIntervalString, W = i(60), H = i(12), U = H.getLogger("Chart.Series"), j = H.getLogger("Chart.Series.Updates", {highRate: !0}), r.prototype.update = function () {
+    TradingView.DEFAULT_BAR_COUNT = 300, TradingView.TIME_PLOT = 0, TradingView.OPEN_PLOT = 1, TradingView.HIGH_PLOT = 2, TradingView.LOW_PLOT = 3, TradingView.CLOSE_PLOT = 4, TradingView.ADT_PLOT = 6, TradingView.STYLE_PLOT = 7, TradingView.SEARCH_FROM_LEFT = -1, TradingView.SEARCH_FROM_RIGHT = 1, h = i(699), c = i(696), d = i(347), p = i(698), u = i(346), _ = u.SeriesAreaPaneView, f = u.SeriesLinePaneView, m = u.SeriesHollowCandlesPaneView, g = u.SeriesCandlesPaneView, v = u.SeriesBarsPaneView, y = u.SeriesHeikenAshiPaneView, b = i(3), w = i(304), S = i(196).SeriesBarColorer, T = i(89).HorzLineRenderer, C = i(685), x = i(48).PriceDataSource, P = i(158), L = i(700).FutureBarsPaneView, k = i(36).Interval, I = i(8), A = i(198), E = i(345), M = i(21), D = i(2), O = i(285), V = i(27).PriceFormatter, B = i(86), R = i(25), N = i(356).SyncModel, F = i(33).trackEvent, z = i(164).translatedIntervalString, W = i(60), H = i(12), U = H.getLogger("Chart.Series"), j = H.getLogger("Chart.Series.Updates", {highRate: !0}), r.prototype.update = function () {
       this._invalidated = !0
     }, r.prototype.updateImpl = function () {
       if (this._visible = !1, this._series.properties().showPriceLine.value()) {
@@ -4115,10 +4115,6 @@ webpackJsonp([4], [function (t, e, i) {
       return this.m_data.valueAt(t)[TradingView.LOW_PLOT]
     },l.prototype.close = function (t) {
       return this.m_data.valueAt(t)[TradingView.CLOSE_PLOT]
-    },l.prototype.zf = function (t) {
-      return 1230;//this.m_data.valueAt(t)[TradingView.ZF]
-    },l.prototype.zff = function (t) {
-      return 4838;//this.m_data.valueAt(t)[TradingView.ZFF]
     },l.prototype.hl2 = function (t) {
       return (this.high(t) + this.low(t)) / 2
     },l.prototype.hlc3 = function (t) {
@@ -15460,7 +15456,6 @@ webpackJsonp([4], [function (t, e, i) {
     }, s.prototype.updateAllViews = function () {
       this._isActualSymbol && this._properties.visible.value() && (m.hideAllDrawings().value() && this.userEditEnabled() || (c.prototype.updateAllViews.call(this), this._entryPriceAxisView.update(), this._stopPriceAxisView.update(), this._profitPriceAxisView.update()))
     }, s.prototype.setPoint = function (t, e) {
-      debugger
       var i, o = this.priceScale();
       switch (o.isPercent() && (i = this.ownerSource().firstValue(), e.price = o.priceRange().convertFromPercent(e.price, i)), t) {
         case 0:
@@ -15830,7 +15825,6 @@ webpackJsonp([4], [function (t, e, i) {
       this._invalidated = !0
     }, o.prototype._updateImpl = function () {
       var e, i, o, n, s, r, a, l, h, c, d, p, u, _, f, m, g, v, y, b = !0;
-      debugger
       for (this._header = this._study.title(b), this._title = this._study.title(), e = this._study.isVisible() ? $.t("n/a") : "", i = 0; i < this._items.length; ++i) this._items[i].setValue(e);
       if (t.enabled("hide_last_na_study_output") && this._items.length && this._items[this._items.length - 1].setValue(""), !this._model.timeScale().isEmpty()) {
         if (o = this._study.metaInfo().plots, n = null, s = {}, o) for (i = 0; i < o.length; i++) (this._study.isSelfColorerPlot(i) || this._study.isOHLCColorerPlot(i)) && (s[o[i].target] = {index: i}, s[o[i].target].palette = this._study.metaInfo().palettes[o[i].palette], s[o[i].target].paletterProps = this._study.properties().palettes[o[i].palette]);
@@ -26581,7 +26575,6 @@ webpackJsonp([4], [function (t, e, i) {
   }
 
   function l(t, e, i) {
-    debugger
     this.m_series = t, this.m_priceSource = e, this.m_model = i, this.m_items = [], this._barGetter = {
       open: function (t) {
         return t[TradingView.OPEN_PLOT]
@@ -26597,10 +26590,6 @@ webpackJsonp([4], [function (t, e, i) {
         return (t[TradingView.HIGH_PLOT] + t[TradingView.LOW_PLOT] + t[TradingView.CLOSE_PLOT]) / 3
       }, ohlc4: function (t) {
         return (t[TradingView.OPEN_PLOT] + t[TradingView.HIGH_PLOT] + t[TradingView.LOW_PLOT] + t[TradingView.CLOSE_PLOT]) / 4
-      }, zf: function (t) {
-        return 111;//t[TradingView.ZF]
-      }, zff: function (t) {
-        return 123;
       }
     }[this.m_priceSource]
   }
@@ -34237,13 +34226,9 @@ webpackJsonp([4], [function (t, e, i) {
       var e, i, o, n, s, r, l, h, c, d;
 
       for (this.updateTitle(), h = this._itemsBinding.length; h--;) if (n = this._itemsBinding[h], e = n.cell, i = n.titleCells, o = n.source.properties().visible.value(), Array.isArray(e)) {
-        console.log(n)
-        console.log('---')
-        // debugger;
         for (n.last || (n.last = {}, n.last.dwView || (n.last.dwView = {})), c = n.last, s = n.value.items(), d = this.valueChanged(c, "sourceVisible", o), r = 0; r < e.length; r++) l = s[r], c[r] || (c[r] = {}), d && this.setItemEnabled(e[r], o), this.valueChanged(c[r], "text", l.text()) && (e[r][0].textContent = l.text()), l.color() && this.valueChanged(c[r], "color", l.color()) && e[r].css("color", a.resetTransparency(l.color())), i && (this.valueChanged(c, "sourceVisible", o) && this.setItemEnabled(i[r], o), this.valueChanged(c[r], "title", l.title()) && (i[r][0].textContent = l.title()));
         n.additional && n.value.additional && this.valueChanged(c, "additional", n.value.additional()) && n.additional.text(n.value.additional() || "")
       }
-      // debugger;
       this._chart.resizeIndicator()
     }, o.prototype.dataSourceAtPoint = function (t, e) {
       return null
@@ -42563,7 +42548,7 @@ webpackJsonp([4], [function (t, e, i) {
   "use strict";
 
   function o(t, e) {
-    c.call(this), this._series = t, this._model = e, this._items.push(new d($.t("O", {context: "in_legend"}), "")), this._items.push(new d($.t("H", {context: "in_legend"}), "")), this._items.push(new d($.t("L", {context: "in_legend"}), "")), this._items.push(new d($.t("C", {context: "in_legend"}), "")),this._items.push(new d($.t("ZF", {context: "in_legend"}), "")), this._items.push(new d($.t("ZFF", {context: "in_legend"}), "")), this._invalidated = !0, this.update()
+    c.call(this), this._series = t, this._model = e, this._items.push(new d($.t("O", {context: "in_legend"}), "")), this._items.push(new d($.t("H", {context: "in_legend"}), "")), this._items.push(new d($.t("L", {context: "in_legend"}), "")), this._items.push(new d($.t("C", {context: "in_legend"}), "")),this._items.push(new d($.t("CHANGE", {context: "in_legend"}), "")), this._items.push(new d($.t("AMPLITUDE", {context: "in_legend"}), "")), this._invalidated = !0, this.update()
   }
 
   var n = i(37), s = n.parseRgb, r = n.distanceRgb, a = n.invertRgb, l = n.rgbToHexString, h = i(146),
@@ -42574,7 +42559,7 @@ webpackJsonp([4], [function (t, e, i) {
 
     var t, e, i, o, n, h, c, d, u, _, f, m, g
     ;
-    if (this._series.symbolInfo() ? (this._header = [this._series.symbolInfo().name, p(this._series.interval()), this._series.symbolInfo().exchange].join(", "), this._title = this._series.symbolInfo().description) : this._header = this._series.symbol(), this._items[0].setValue($.t("n/a")), this._items[1].setValue($.t("n/a")), this._items[2].setValue($.t("n/a")), this._items[3].setValue($.t("n/a")),this._items[4].setValue($.t("n/a")),this._items[5].setValue($.t("n/a")), !this._model.timeScale().isEmpty() && 0 !== this._series.bars().size() && (t = this._series.data().size() - 1, e = this._model.crossHairSource().appliedIndex(), void 0 !== (i = isNumber(e) ? this._series.nearestIndex(e, TradingView.SEARCH_NEAREST_LEFT) : this._series.nearestIndex(t, TradingView.SEARCH_NEAREST_LEFT)))) for (o = this._series.data().valueAt(i), n = this._series.formatter(), this._items[0].setValue(n.format(o[TradingView.OPEN_PLOT])), this._items[1].setValue(n.format(o[TradingView.HIGH_PLOT])), this._items[2].setValue(n.format(o[TradingView.LOW_PLOT])), this._items[3].setValue(n.format(o[TradingView.CLOSE_PLOT])),this._items[4].setValue(n.format(o[TradingView.ZF])),this._items[5].setValue(n.format(o[TradingView.ZFF])), h = this._series.barColorer(), c = h.barStyle(i, !1), d = null != c.barBorderColor ? c.barBorderColor : c.barColor, u = this._series.model().paneForSource(this._series), _ = u._properties.background.value(), f = s(d), m = s(_), r(f, m) < 70 && (d = l(a(f))), g = 0; g < 6; g++) this._items[g].setColor(d)
+    if (this._series.symbolInfo() ? (this._header = [this._series.symbolInfo().name, p(this._series.interval()), this._series.symbolInfo().exchange].join(", "), this._title = this._series.symbolInfo().description) : this._header = this._series.symbol(), this._items[0].setValue($.t("n/a")), this._items[1].setValue($.t("n/a")), this._items[2].setValue($.t("n/a")), this._items[3].setValue($.t("n/a")),this._items[4].setValue($.t("n/a")),this._items[5].setValue($.t("n/a")), !this._model.timeScale().isEmpty() && 0 !== this._series.bars().size() && (t = this._series.data().size() - 1, e = this._model.crossHairSource().appliedIndex(), void 0 !== (i = isNumber(e) ? this._series.nearestIndex(e, TradingView.SEARCH_NEAREST_LEFT) : this._series.nearestIndex(t, TradingView.SEARCH_NEAREST_LEFT)))) for (o = this._series.data().valueAt(i), n = this._series.formatter(), this._items[0].setValue(n.format(o[TradingView.OPEN_PLOT])), this._items[1].setValue(n.format(o[TradingView.HIGH_PLOT])), this._items[2].setValue(n.format(o[TradingView.LOW_PLOT])), this._items[3].setValue(n.format(o[TradingView.CLOSE_PLOT])),this._items[4].setValue(((o[TradingView.CLOSE_PLOT] - o[TradingView.OPEN_PLOT]) / o[TradingView.OPEN_PLOT] * 100).toFixed(2) + '%'),this._items[5].setValue(((o[TradingView.HIGH_PLOT] - o[TradingView.LOW_PLOT]) / o[TradingView.OPEN_PLOT] * 100).toFixed(2) + '%'), h = this._series.barColorer(), c = h.barStyle(i, !1), d = null != c.barBorderColor ? c.barBorderColor : c.barColor, u = this._series.model().paneForSource(this._series), _ = u._properties.background.value(), f = s(d), m = s(_), r(f, m) < 70 && (d = l(a(f))), g = 0; g < 6; g++) this._items[g].setColor(d)
   }, o.prototype.items = function () {
     return this._invalidated && (this._updateImpl(), this._invalidated = !1), this._items
   }, o.prototype.dump = function () {
