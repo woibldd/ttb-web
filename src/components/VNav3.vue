@@ -86,14 +86,6 @@
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
                   <router-link
-                    :to="{name: 'kycRelay'}"
-                    target="_blank"
-                    class="link">{{ $t("activity_kyc_name") }}
-                    <icon name="hot-red"/>
-                  </router-link>
-                </li>
-                <li class="dropdown-item pl-24 pr-24">
-                  <router-link
                     :to="{name: 'relay'}"
                     target="_blank"
                     class="link">{{ $t("header_title_activity_relay") }}</router-link>
