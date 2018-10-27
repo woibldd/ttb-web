@@ -8,8 +8,8 @@
           <div class="box__title pr-20">
             <div class="title-tile"> <icon
               name="lottery-quiz"
-              class="pr-12"/> 竞猜BTC/USDT</div>
-            <div class="text">上期奖励：63,6176,455 ix</div>
+              class="pr-12"/> {{ $t('activity_lottery_quiz') }} BTC/USDT</div>
+            <div class="text"> {{ $t('activity_lottery_last_bonus') }} 63,6176,455 ix</div>
           </div>
           <div class="box__content pb-29 mt-17">
             <div class="quiz-current-info pl-20 pr-14">
@@ -19,19 +19,19 @@
                   name="lottery-btc"/>
                 <div class="ml-13">
                   <p class="mb-15 f18">BTC</p>
-                  <p class="f12 c-999">IX投注</p>
+                  <p class="f12 c-999">{{ $t('activity_lottery_ix_beting') }}</p>
                 </div>
               </div>
               <div class="price flex-column">
                 <div class="f18 mb-15">{{ 6916.6 }} <span class="c-999">USDT</span></div>
                 <div class="f12 c-999">
-                  开盘价 <icon
+                  {{ $t('activity_lottery_opening_price') }} <icon
                     name="lottery-info"
                     class="ml-6"/>
                 </div>
               </div>
               <div class="count-down">
-                <div class="c-primary f18 mb-15">本期倒计时:  05:34</div>
+                <div class="c-primary f18 mb-15">{{ $t('activity_lottery_count_down') }}:  05:34</div>
                 <div class="f12 c-999">12:00-13:00</div>
               </div>
             </div>
@@ -71,15 +71,15 @@
                 </div>
               </div>
               <div class="quiz-input-num mt-20 f14">
-                <div class="c-999 w-64">数量</div>
+                <div class="c-999 w-64">{{ $t('amount') }}</div>
                 <input
                   type="text"
-                  placeholder="投票数量为≥50的整数">
+                  :placeholder="$t('activity_lottery_limit_vote_fifty')">
               </div>
               <div class="quiz-btns pointer">
-                <div class="quiz__btn up">猜涨</div>
-                <div class="quiz__btn flat">猜ping</div>
-                <div class="quiz__btn fall">fall</div>
+                <div class="quiz__btn up">{{ $t('activity_lottery_guess_rise') }}</div>
+                <div class="quiz__btn flat">{{ $t('activity_lottery_guess_flat') }}</div>
+                <div class="quiz__btn fall">{{ $t('activity_lottery_guess_fall') }}</div>
               </div>
             </div>
           </div>
@@ -90,35 +90,35 @@
             <div class="box__title pr-20">
               <div class="title-tile"> <icon
                 name="lottery-quiz"
-                class="pr-12"/> 上期冠军名单</div>
+                class="pr-12"/> {{ $t('activity_lottery_last_champion') }} </div>
             </div>
             <div class="box__content mt-17 f12">
               <div class="last-champion__info border-bottom-1">
                 <div class="uid flex-column">
                   <p class="f14 mb-10">63617673</p>
-                  <p class="c-999">冠军奖用户(uid)</p>
+                  <p class="c-999">{{ $t('activity_lottery_champion_uid') }} </p>
                 </div>
                 <div class="reward_num flex-column">
                   <p class="f14 c-b18 mb-10">63617673</p>
-                  <p class="c-999">冠军奖用户(uid)</p>
+                  <p class="c-999">{{ $t('activity_lottery_reward_amount') }} </p>
                 </div>
                 <div class="votes_num flex-column">
                   <p class="f14 mb-10">63617673IX</p>
-                  <p class="c-999">冠军奖用户(uid)</p>
+                  <p class="c-999">{{ $t('activity_lottery_vote_amount') }} </p>
                 </div>
               </div>
-              <div class="last-champion__info">
+              <div class="last-champion__info border-bottom-1">
                 <div class="uid flex-column">
                   <p class="f14 mb-10">63617673</p>
-                  <p class="c-999">冠军奖用户(uid)</p>
+                  <p class="c-999">{{ $t('activity_lottery_bole') }} </p>
                 </div>
                 <div class="reward_num flex-column">
                   <p class="f14 c-b18 mb-10">63617673</p>
-                  <p class="c-999">冠军奖用户(uid)</p>
+                  <p class="c-999">{{ $t('activity_lottery_reward_amount') }} </p>
                 </div>
                 <div class="votes_num flex-column">
                   <p class="f14 mb-10">63617673IX</p>
-                  <p class="c-999">冠军奖用户(uid)</p>
+                  <p class="c-999">{{ $t('activity_lottery_vote_amount') }} </p>
                 </div>
               </div>
             </div>
@@ -126,7 +126,7 @@
 
           <!-- 邀请 -->
           <div class="invite-cambat">
-            <div class="invite-btn pointer">{{ $t('立即邀请') }}</div>
+            <div class="invite-btn pointer">{{ $t('activity_kyc_invite_now') }}</div>
           </div>
 
           <!-- 本期排行榜 -->
@@ -134,14 +134,14 @@
             <div class="box__title pr-20">
               <div class="title-tile"> <icon
                 name="lottery-ranking"
-                class="pr-12"/> {{ $t('本期排行榜') }}</div>
+                class="pr-12"/> {{ $t('activity_lottery_current_rank') }}</div>
             </div>
             <div class="box__content mt-17 f12 pl-22 pb-16">
               <div class="lottery__table">
                 <div class="table__row">
-                  <div class="table__th"> {{ $t('名次') }} </div>
-                  <div class="table__th"> {{ $t('UID') }} </div>
-                  <div class="table__th align-right"> {{ $t('投票票数') }} </div>
+                  <div class="table__th"> {{ $t('activity_lottery_position') }} </div>
+                  <div class="table__th"> {{ 'UID' }} </div>
+                  <div class="table__th align-right"> {{ $t('activity_lottery_vote_amount') }} </div>
                 </div>
                 <div
                   class="table__row mt-18"
@@ -162,7 +162,7 @@
         <div class="box__title pr-20">
           <div class="title-tile"> <icon
             name="lottery-record"
-            class="pr-12"/> {{ $t('投票记录') }} </div>
+            class="pr-12"/> {{ $t('activity_lottery_vote_history') }} </div>
         </div>
         <div class="box__content pb-29 mt-17">
           <div class="lottery__table">
@@ -192,7 +192,7 @@
         <div class="box__title pr-20">
           <div class="title-tile"> <icon
             name="lottery-rule"
-            class="pr-12"/> {{ $t('活动规则') }} </div>
+            class="pr-12"/> {{ $t('activity_lottery_rules') }} </div>
         </div>
         <div class="box__content rule-content mt-17 f12 c-999">
           <p class="rule"> {{ $t('activity_lottery_rules_a') }} </p>
@@ -205,6 +205,12 @@
           <p class="rule"> {{ $t('activity_lottery_rules_h') }} </p>
           <p class="rule"> {{ $t('activity_lottery_rules_i') }} </p>
         </div>
+      </div>
+      <!-- 最终解释权 -->
+      <div
+        class="lottery_row f-12"
+        style="color: #666;padding-left: 32px">
+        {{ $t('activity_explaination_ix') }}
       </div>
     </div>
 </div></template>
