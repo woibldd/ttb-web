@@ -296,10 +296,9 @@ $color-bids-fall: #FF1E1D;
             position: relative;
 
             .invite-btn{
-                width:110px;
+                padding: 0 30px;
                 height:33px;
                 line-height: 33px;
-                box-sizing: border-box;
                 text-align: center;
                 border:1px solid rgba(255,255,255,.26);
                 border-radius:17px;
@@ -398,6 +397,7 @@ $color-bids-fall: #FF1E1D;
             margin-right: 16px;
         }
         .modal__right {
+            color: #D0D0D0;
             .trading-office-box{
                 text-align: center;
                 color: #FFFFFF;

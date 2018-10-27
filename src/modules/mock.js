@@ -40,13 +40,34 @@ export const filter = {
   'game/bet/last': 1,
   'game/bet/current': 1,
   'game/bet/me': 1,
-  'game/bet/bet': 1
+  'game/bet/bet': 1,
+  'game/bet/btc/price': 1
 }
 export const list = [
   {
     url: /game\/bet\/bet/,
     res () {
       return ok({})
+    }
+  },
+  {
+    url: /game\/bet\/btc\/price/,
+    res () {
+      return ok({
+        game_id: 20181024001, // 活动期号，
+        start_time: '1234', // 开盘时间
+        end_time: '12345', // 封盘时间
+        ix_open_price: 6666, // 开盘价
+        ix_close_price: 9999, // 收盘价，6888
+        binance_open_price: 999, // 开盘价，6666
+        binance_close_price: 8888, // 收盘价，6888
+        ok_open_price: 8888, // 开盘价，6666
+        ok_close_price: 8888, // 收盘价，6888
+        huobi_open_price: 8888, // 开盘价，6666
+        huobi_close_price: 8888, // 收盘价，6888
+        bitfinex_open_price: 8888, // 开盘价，6666
+        bitfinex_close_price: 8888 // 收盘价，6888
+      })
     }
   },
   {
