@@ -8,14 +8,14 @@
         {{ $t('mine_mining_amount') }}
       </div>
       <div class="cm-bt">
-        {{ yestodayMine.exchangeMine | round(4) }}
+        {{ yestodayMine.exchangeMine | round(2) | thousand }}
         <span class="unit">IX</span>
       </div>
       <div class="cm-bst">
         {{ $t('mine_invite_amount') }}
       </div>
       <div class="cm-bn">
-        {{ yestodayMine.inviteMine | round(4) }}
+        {{ yestodayMine.inviteMine | round(2) | thousand }}
         <span class="unit">IX</span>
       </div>
     </div>
@@ -27,7 +27,7 @@
             {{ $t('mine_bonus_today') }}
           </p>
           <p class="cm-bt">
-            {{ allBonusData.btc_today | round(4) }}
+            {{ allBonusData.btc_today | round(2) | thousand }}
             <span class="unit">USDT</span>
           </p>
         </div>
@@ -40,7 +40,7 @@
             {{ $t('keep_ix_reward_yesterday') }}
           </p>
           <p class="cm-bn">
-            {{ allBonusData.ix_yesterday | round(4) }}
+            {{ allBonusData.ix_yesterday | round(2) | thousand }}
             <span class="unit">USDT</span>
           </p>
         </div>
@@ -49,7 +49,7 @@
             {{ $t('mine_bonus_yestoday') }}
           </p>
           <p class="cm-bn">
-            {{ allBonusData.btc_yesterday | round(4) }}
+            {{ allBonusData.btc_yesterday | round(2) | thousand }}
             <span class="unit">USDT</span>
           </p>
         </div>
@@ -63,7 +63,7 @@
             {{ $t('mine_bonus_rate') }}
           </p>
           <p class="cm-bt">
-            {{ allBonusData.btc_rate | round(4) }}
+            {{ allBonusData.btc_rate | round(2) | thousand }}
             <span class="unit">USDT</span>
           </p>
         </div>
@@ -78,7 +78,7 @@
           <p
             class="cm-bt"
             v-if="allBonusData.ix_rate">
-            {{ allBonusData.ix_rate | round(4) }}
+            {{ allBonusData.ix_rate | round(2) | thousand }}
             <span class="unit">USDT</span>
           </p>
         </div>
@@ -89,10 +89,10 @@
       <div class="box__row">
         <div class="fee__pie">
           <p class="cm-tit">
-            {{ $t('ix_second_trading_amount') }}
+            {{ $t('ix_trading_amout') }}
           </p>
           <p class="cm-bt">
-            {{ ixMarketData.amount | round(4) }}
+            {{ ixMarketData.amount | round(2) | thousand }}
             <span class="unit">IX</span>
           </p>
         </div>
@@ -103,17 +103,17 @@
             {{ $t('ix_lock_amount') }}
           </p>
           <p class="cm-bn">
-            {{ ixMarketData.locked | round(4) }}
+            {{ ixMarketData.locked | round(2)|thousand }}
             <span class="unit">IX</span>
           </p>
         </div>
         <div class="fee__pie">
           <p class="cm-tit">
-            {{ $t('ix_trading_amout') }}
+            {{ $t('ix_second_trading_amount') }}
           </p>
           <p class="cm-bn">
-            {{ ixMarketData.market_value | round(4) }}
-            <span class="unit">USDT</span>
+            {{ ixMarketData.market_value | round(2)| thousand }}
+            <span class="unit">IX</span>
           </p>
         </div>
 

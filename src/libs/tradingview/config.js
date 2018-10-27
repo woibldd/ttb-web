@@ -53,6 +53,7 @@ export default function () {
       'paneProperties.legendProperties.showStudyValues': true,
       'paneProperties.legendProperties.showSeriesTitle': false,
       'paneProperties.legendProperties.showSeriesOHLC': true,
+      // 'paneProperties.legendProperties.showLegend': false,
       'paneProperties.topMargin': 8,
       'paneProperties.bottomMargin': 18,
       'scalesProperties.lineColor': 'rgba(210, 217, 229, 0.06)',

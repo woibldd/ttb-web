@@ -47,7 +47,9 @@
             <router-link
               v-if="scope.row.currency === 'IX'"
               :to="{name: 'LockWarehouse'}"
-              class="my-fund-operate">{{ $t('mining') }}</router-link>
+              style="color: #fda22d"
+              class="my-fund-operate"><icon
+              name="anchor"/>{{ $t('mining') }}</router-link>
             <router-link
               v-if="scope.row.pairs"
               :to="{

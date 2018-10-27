@@ -9,7 +9,7 @@
           {{ $t('mine_mining_amount') }}
         </div>
         <div class="row__value">
-          {{ yestodayMine.exchangeMine | round(4) }}
+          {{ yestodayMine.exchangeMine | round(2) | thousand }}
           <span class="unit">IX</span>
         </div>
       </div>
@@ -19,7 +19,7 @@
           {{ $t('mine_invite_amount') }}
         </div>
         <div class="row__value">
-          {{ yestodayMine.inviteMine | round(4) }} <span class="unit">IX</span>
+          {{ yestodayMine.inviteMine | round(2) | thousand }} <span class="unit">IX</span>
         </div>
       </div>
     </div>
@@ -31,7 +31,7 @@
           {{ $t('mine_bonus_today') }}
         </div>
         <div class="row__value">
-          {{ allBonusData.btc_today | round(4) }}
+          {{ allBonusData.btc_today | round(2) | thousand }}
           <span class="unit">USDT</span>
         </div>
       </div>
@@ -47,7 +47,7 @@
             </span> -->
         </p>
         <p class="row__value">
-          {{ allBonusData.ix_yesterday | round(4) }}
+          {{ allBonusData.ix_yesterday | round(2) | thousand }}
           <span class="unit">USDT</span>
         </p>
       </div>
@@ -56,7 +56,7 @@
           {{ $t('mine_bonus_yestoday') }}
         </p>
         <p class="row__value">
-          {{ allBonusData.btc_yesterday | round(4) }}
+          {{ allBonusData.btc_yesterday | round(2) | thousand }}
           <span class="unit">USDT</span>
         </p>
       </div>
@@ -68,7 +68,7 @@
           {{ $t('mine_bonus_rate') }}
         </p>
         <p class="row__value">
-          {{ allBonusData.btc_rate | round(4) }}
+          {{ allBonusData.btc_rate | round(2) | thousand }}
           <span class="unit">USDT</span>
         </p>
       </div>
@@ -77,7 +77,7 @@
           {{ $t('keep_million_ix_reward_yesterday', {ix: allBonusData.base}) }}
         </p>
         <p class="row__value">
-          {{ allBonusData.ix_rate | round(4) }}
+          {{ allBonusData.ix_rate | round(2) | thousand }}
           <span class="unit">USDT</span>
         </p>
       </div>
@@ -86,10 +86,10 @@
     <div class="mine-info-yesterday">
       <div class="mine-info-row">
         <p class="row__label">
-          {{ $t('ix_second_trading_amount') }}
+          {{ $t('ix_trading_amout') }}
         </p>
         <p class="row__value">
-          {{ ixMarketData.amount | round(4) }}
+          {{ ixMarketData.amount | round(2) | thousand }}
           <span class="unit">IX</span>
         </p>
       </div>
@@ -98,17 +98,17 @@
           {{ $t('ix_lock_amount') }}
         </p>
         <p class="row__value">
-          {{ ixMarketData.locked | round(4) }}
+          {{ ixMarketData.locked | round(2) | thousand }}
           <span class="unit">IX</span>
         </p>
       </div>
       <div class="mine-info-row">
         <p class="row__label">
-          {{ $t('ix_trading_amout') }}
+          {{ $t('ix_second_trading_amount') }}
         </p>
         <p class="row__value">
-          {{ ixMarketData.market_value | round(4) }}
-          <span class="unit">USDT</span>
+          {{ ixMarketData.market_value | round(2) | thousand }}
+          <span class="unit">IX</span>
         </p>
       </div>
     </div>

@@ -2,7 +2,27 @@
   <div
     class="grid-title"
     v-if="ready">
-    <p class="fl grid-currency">{{ pair | pairfix }}</p>
+    <div
+      class="fl grid-currency pointer"
+      @click="showPair"
+      @mouseover="showPair(true)"
+      @mouseout="showPair(false)">
+      {{ pair | pairfix }}
+      <icon
+        name="arrow-down"
+        class="arrow"
+        :class="{up: show}"
+      />
+      <div
+        class="grid-pairtable"
+        :class="{show: show}"
+      >
+        <PairNav
+          :init-height="260"
+          :sort="false"
+          ref="PairNav"/>
+      </div>
+    </div>
     <p
       class="fl grid-value"
       :class="{'color-up': delta > 0, 'color-down': delta < 0}">{{ lastPrice }}</p>
@@ -23,12 +43,26 @@
 import {state} from '@/modules/store'
 import { pairfix } from '@/mixins/index'
 import isEmpty from 'lodash/isEmpty'
+import PairNav from '@/components/Trading/PairNavForTitle'
 
 export default {
   mixins: [pairfix],
   data () {
     return {
-      state
+      state,
+      show: false
+    }
+  },
+  components: {
+    PairNav
+  },
+  methods: {
+    showPair (toggle) {
+      if (typeof toggle === 'boolean') {
+        this.show = toggle
+      } else {
+        this.show = !this.show
+      }
     }
   },
   computed: {
@@ -72,12 +106,13 @@ export default {
 .grid-title {
   height: 56px;
   line-height: 56px;
-  overflow: hidden;
+  // overflow-y: hidden;
   box-sizing: border-box;
   padding-left: 20px;
   border: 4px solid #3A444F;
   border-bottom: none;
   background-color: $nav;
+  position: relative;
   .fl {
     float: left;
   }
@@ -86,6 +121,30 @@ export default {
     font-size: 20px;
     margin-right: 20px;
     font-weight: bold;
+    .arrow {
+      transition: all 0.2s ease-in-out;
+
+      &.up {
+        transform: rotate(180deg)
+      }
+
+    }
+  }
+  .grid-pairtable {
+    position: absolute;
+    top: 55px;
+    left: 0;
+    z-index: 99999;
+    width: 480px;
+    height: 300px;
+    background: #192D3F;
+    display: none;
+    opacity: 0;
+    transition: all .5s ease-in-out;
+    &.show {
+      display: block;
+      opacity: 1;
+    }
   }
   .grid-value{
     font-size: 20px;
