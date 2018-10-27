@@ -24,11 +24,12 @@ $color-bids-fall: #FF1E1D;
     padding-bottom: 72px;
 
     .banner {
-        height: 534px;
+        height: 348px;
         width: 100%;
-        background-image: url(/static/active/lottery/banner-lottery.jpg);
+        background-image: url(/static/active/lottery/banner_new.jpeg);
         background-repeat: no-repeat;
         background-position: center center;
+        background-size: 100%;
     }
     .body {
         width: 1200px;
