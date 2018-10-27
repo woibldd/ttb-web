@@ -109,6 +109,11 @@ $color-bids-fall: #FF1E1D;
                         height: 42px;
                     }
                 }
+                .count-down {
+                  .time-range {
+                    text-align: right;
+                  }
+                }
             }
 
             .quiz-operation{
@@ -121,6 +126,7 @@ $color-bids-fall: #FF1E1D;
                     padding-bottom: 28px;
                     padding-left: 166px;
                 }
+                
                 .quiz-choice-strip {
                     display: flex;
                     justify-content: space-between;
@@ -197,7 +203,7 @@ $color-bids-fall: #FF1E1D;
                     padding-left: 22px;
                     border-right: 1px solid #A6A6A6;
                 }
-                input {
+                .input {
                     padding-left: 20px;
                     height: 100%;
                     width: 75%;
@@ -205,6 +211,7 @@ $color-bids-fall: #FF1E1D;
                     background: transparent;
                     border: 0 !important;
                     outline: none !important;
+                    appearance: none;
                 }
                 ::-webkit-input-placeholder { /* WebKit browsers */
                     color:    #999;
@@ -270,6 +277,14 @@ $color-bids-fall: #FF1E1D;
 
             &.border-bottom-1 {
                 border-bottom: 1px solid #303030;
+            }
+            .flex-column {
+              width: 33%;
+              text-align: center;
+
+              &:first-child {
+                text-align: left;
+              }
             }
         }
 
@@ -356,10 +371,19 @@ $color-bids-fall: #FF1E1D;
     .relative {
         position: relative;
     }
-    .opening-price-modal{
+    .open-modal:hover {
+      .opening-price-modal {
+        display: flex;
+        opacity: 1;
+      }
+    }
+    .opening-price-modal {
+        display: none;
+        opacity: 0;
         z-index: 1;
         position: absolute;
-        top:26px;
+        top: 16px;
+        left: -20px;
         width:1009px;
         background:rgba(46,46,46,1);
         border-radius:8px;
