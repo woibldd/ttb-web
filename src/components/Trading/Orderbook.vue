@@ -4,7 +4,7 @@
       <orderbook-nav :height="navHeight" />
       <!-- 深度选择 -->
       <div
-        class="depth-group-display relative pull-right"
+        class="depth-group-display relative pointer pull-right"
         @mouseover="showDepthOption = true"
         @mouseout="showDepthOption = false">
         <span
@@ -17,6 +17,7 @@
           @click.prevent.stop="toggleSetting">
           <icon
             name="arrow-down-yellow"
+            :class="[showDepthOption && 'up']"
             class="arrow-down-yellow"/>
         </div>
         <div
@@ -463,6 +464,7 @@ export default {
 
 .depth-options-wrapper {
     padding-top: 4px;
+    position: absolute;
 }
 .depth-options {
     box-sizing: border-box;
@@ -516,6 +518,10 @@ export default {
     height: 6px;
     position: absolute;
     top: 14px;
+
+    &.up {
+        transform: rotateZ(180deg)
+    }
 }
 .has-underline {
   border-bottom: 1px dotted #788694;
