@@ -44,6 +44,16 @@
             <div
               class="ix-col ix-col-320"
               v-if="!isMobile">
+              <!-- 这是之前版本的交易对信息,改版后不显示了,
+                   但是直接删了会影响大盘顶部的当前交易对信息提示,
+                   所以在这儿占个位置,但是不显示
+              -->
+              <div
+                v-show="false"
+                class="ix-grid ix-grid-pairnav"
+                ref="gridPairNav">
+                <PairNav ref="PairNav"/>
+              </div>
               <div
                 class="ix-grid ix-height-250 pb-5"
                 ref="gridDeal">
