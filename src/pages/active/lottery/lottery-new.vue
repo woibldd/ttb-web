@@ -304,7 +304,6 @@ export default {
       loopTimer: 0,
       balance: {
         available: 0
-      }
       },
       openingPriceGroups4Btc: {}
     }
