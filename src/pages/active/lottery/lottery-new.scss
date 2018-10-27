@@ -200,10 +200,23 @@ $color-bids-fall: #FF1E1D;
                 input {
                     padding-left: 20px;
                     height: 100%;
-                    color: #333;
+                    width: 75%;
+                    color: #ffffff;
                     background: transparent;
                     border: 0 !important;
                     outline: none !important;
+                }
+                ::-webkit-input-placeholder { /* WebKit browsers */
+                    color:    #999;
+                }
+                :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                    color:    #999;
+                }
+                ::-moz-placeholder { /* Mozilla Firefox 19+ */
+                    color:    #999;
+                }
+                :-ms-input-placeholder { /* Internet Explorer 10+ */
+                    color:    #999;
                 }
             }
             .quiz-btns {
@@ -231,6 +244,13 @@ $color-bids-fall: #FF1E1D;
                     &:hover{
                         opacity: .88;
                     }
+
+                    &.disabled {
+                        background:#252525;
+                        color: #999999;
+                        font-weight: normal;
+                        cursor: default;
+                      }
                 }
             }
         }
@@ -280,6 +300,24 @@ $color-bids-fall: #FF1E1D;
 
             .table__row {
                 display: flex;
+
+                &.rise {
+                    .dir, .result {
+                      color: $color-bids-fall;
+                    }
+                  }
+  
+                  &.flat {
+                    .dir, .result {
+                      color: #959595;
+                    }
+                  }
+  
+                  &.fall {
+                    .dir, .result {
+                      color: $color-bids-rise;
+                    }
+                  }
             }
 
             .table__th, .table__td{
@@ -314,7 +352,53 @@ $color-bids-fall: #FF1E1D;
                 margin-bottom: 10px;
             }
         }
+    }
+    .relative {
+        position: relative;
+    }
+    .opening-price-modal{
+        z-index: 1;
+        position: absolute;
+        top:26px;
+        width:1009px;
+        background:rgba(46,46,46,1);
+        border-radius:8px;
+        padding: 0 20px;
+        box-sizing: border-box;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 30px;
 
+        .modal__left{
+            width:70px;
+            margin-right: 16px;
+        }
+        .modal__right {
+            .trading-office-box{
+                text-align: center;
+                color: #FFFFFF;
+                border-radius:4px;
+                background-color: #181717;
 
+                p {
+                    width:174px;
+                    height:41px;
+                    line-height: 41px;
+
+                    &.office-name {
+                        background-color:#363636;                    
+                    }
+                }
+                .bb1 {
+                    border-bottom: 1px solid #363636;
+                }
+            }
+        }
+    }
+}
+
+.lottery-prompt {
+    .el-message-box__message p{
+        text-align: left !important;
     }
 }

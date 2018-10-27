@@ -37,6 +37,7 @@ export const filter = {
   'mine/game/pool': 1,
   'mine/game/join': 1,
   'game/bet/history': 1,
+  'game/bet/last': 1,
   'game/bet/current': 1,
   'game/bet/me': 1,
   'game/bet/bet': 1
@@ -46,6 +47,22 @@ export const list = [
     url: /game\/bet\/bet/,
     res () {
       return ok({})
+    }
+  },
+  {
+    url: /game\/bet\/last/,
+    res () {
+      return ok({
+        game_id: 20181024001, // 活动期号
+        pool: 88776, // 上期奖励，奖池总数量IX
+        jackpots: [{ // 上期冠军奖用户(数组),
+          UID: 'uid123',
+          bet: 'bet123',
+          ix: 'ix1234'
+        }],
+        invite_bet_ix: 9998.8, // 上期伯乐奖所有用户投注IX数量
+        invite_ix: 99999 // 上期伯乐奖所有用户奖励IX数量
+      })
     }
   },
   {
@@ -93,7 +110,12 @@ export const list = [
         current_price: 6888,
         bet1_amount: rand(4),
         bet2_amount: rand(3),
-        bet3_amount: rand(4)
+        bet3_amount: rand(4),
+        bet_rank: [ // 本期投注排行前3，UID+投注IX数量
+          {uid: '12121', ix: 8888.3},
+          {uid: '46583', ix: 36352.13},
+          {uid: '46583', ix: 36352.13}
+        ]
       })
     }
   },

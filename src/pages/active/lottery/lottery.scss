@@ -391,24 +391,6 @@ $color-bids-fall: #FF1E1D;
                 > span {
                     flex: 1;
                 }
-                    
-                &.rise {
-                  .dir, .result {
-                    color: $color-bids-fall;
-                  }
-                }
-
-                &.flat {
-                  .dir, .result {
-                    color: #959595;
-                  }
-                }
-
-                &.fall {
-                  .dir, .result {
-                    color: $color-bids-rise;
-                  }
-                }
 
             }
             .box-table-th, .box-table-tr {

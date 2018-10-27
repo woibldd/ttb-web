@@ -619,6 +619,7 @@
   "activity_lottery_last_bonus": "上期奖励：",
   "activity_lottery_ix_beting": "ix 投注",
   "activity_lottery_opening_price": "开盘价",
+  "activity_lottery_close_price": "收盘价",
   "activity_lottery_cant_bid_now": "当前时间不可投注",
   "activity_lottery_betting_rise": "猜涨票数",
   "activity_lottery_win_rate":"获奖比例",
@@ -646,6 +647,7 @@
   "activity_lottery_rules": "活动规则：",
   "activity_lottery_count_down": "本期倒计时",
   "activity_lottery_warm_tips": "温馨提示",
+  "activity_lottery_warm_content": "数字资产是创新型的投资产品，价格波动较大，请您理性判断自己的投资能力，审慎做出投资决策，祝您交易愉快！",
   "activity_lottery_rules_a": "1、参与者可通过投票IX的形式，竞猜BTC/USDT交易币对在某一竞猜周期的价格变化；竞猜结果正确者，竞猜投票全数返还，并可获得竞猜错误者投票总额的90%作为奖励（按投票比例分配）。如果对应周期没有竞猜正确者，则投票全数返还； ",
   "activity_lottery_rules_b": "2、竞猜内容分为“涨、平、跌”三种：如果在对应竞猜周期中，收盘价高于开盘价，即是涨；价格相同，即是平；收盘价低于开盘价，即是跌；",
   "activity_lottery_rules_c": "3、BTC/USDT价格按Bitfinex、Binance、Huobi、IX、Okex 五家交易所每个小时开盘价和收盘价计算，去掉一个最高价和一个最低价，其余三个价格取平均值且取整数（小数点后按四舍五入计算，例：6656.58取整数为6657；6654.45取整数为6654）;",
@@ -657,7 +659,7 @@
   "activity_lottery_rules_i" :"示例2：竞猜错误者总投票额100万IX，则邀请人总奖励为4%，即4万IX。其中竞猜正确用户只有A和C存在邀请关系，A的投票额是1万，C的投票额是3万，则A的邀请人B和C的邀请人D分别获得1万IX和3万IX奖励。",
   "activity_lottery_cancel_ix":"上期IX销毁公示地址",
   "activity_lottery_bid_history":"投注记录",
-
+  "activity_lottery_trade_office_price": "BTC/USDT价格按Bitfinex、Binance、Huobi、IX、Okex 五家交易所每个小时开盘价和收盘价计算，去掉一个最高价和一个最低价，其余三个价格取平均值且取整数（小数点后按四舍五入计算，例：6656.58取整数为6657；6654.45取整数为6654）,每轮竞猜时间周期为1小时。每轮竞猜前20分钟为投票时间，后40分钟进行封盘处理。",
   
   "activity_lottery_last_split": "----------------------",  
   "activity_lottery_serial":"期",
