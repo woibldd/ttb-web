@@ -426,17 +426,18 @@ export default {
           return
         }
         let params = {
-          game_id: this.game_id
+          game_id: this.game_id,
+          amount: this.amount
         }
         switch (type) {
           case 'rise':
-            params.bet1_amount = this.amount
+            params.type = 1
             break
           case 'fall':
-            params.bet3_amount = this.amount
+            params.type = 3
             break
           case 'flat':
-            params.bet2_amount = this.amount
+            params.type = 2
             break
         }
         let res = await service.doGuess(params)
