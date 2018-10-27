@@ -439,7 +439,7 @@ export default {
   }
   .content {
     position: relative;
-    width: 88%;
+    width: 84%;
     float: left;
     box-sizing: border-box;
   }
@@ -450,7 +450,7 @@ export default {
   .label {
     line-height: 32px;
     color: #A5B4C5;
-    width: 12%
+    width: 16%
   }
 }
 .li-volume {
@@ -470,7 +470,7 @@ export default {
   text-align: right;
   font-size: 12px;
   line-height: 17px;
-  height: 34px;
+  height: 31px;
   .avbl-label {
     line-height: 17px;
     height: 17px;

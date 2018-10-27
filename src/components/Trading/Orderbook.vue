@@ -6,20 +6,15 @@
       <div
         class="depth-group-display relative pointer pull-right"
         @mouseover="showDepthOption = true"
+        @click.prevent.stop="toggleSetting"
         @mouseout="showDepthOption = false">
         <span
-          v-show="offset || accuracy !== 1 || true"
-          class="ibt">
-          <span class="dib mr-5">{{ $t('orderbook_depth_group') }}</span>{{ currentDepth }}
-        </span>
-        <div
-          class="header-icons relative ibt"
-          @click.prevent.stop="toggleSetting">
-          <icon
+          class="ibt depth">
+          <span class="dib mr-5">{{ $t('orderbook_depth_group') }}</span>{{ currentDepth }} <icon
             name="arrow-down-yellow"
             :class="[showDepthOption && 'up']"
             class="arrow-down-yellow"/>
-        </div>
+        </span>
         <div
           class="depth-options-wrapper"
           v-show="showDepthOption">
@@ -28,7 +23,7 @@
               v-for="(dp, index) in depthGroup"
               @click="changeDepth(dp)"
               :key="index"
-              class="depth__row">{{ dp }}</div>
+              class="depth__row">{{ dp.offset }}</div>
           </div>
         </div>
       </div>
@@ -101,22 +96,6 @@
       <!--<div class="no-data" v-show="!err && !orderbookList.length">{{ $t('orderbook_empty') }}</div>-->
       <!--<div class="err" v-show="err">{{ err }}</div>-->
     </div>
-    <!-- <div
-      class="setting-panel"
-      :class="{show: panelShow}"
-      @click.stop>
-      <div class="setting-panel-header">{{ $t('orderbook_options') }}</div>
-      <div class="group-title">{{ $t('orderbook_group') }}</div>
-      <div class="group-wrap">
-        <span class="group-value">{{ curGroup }}</span>
-        <span
-          class="minus bgcolor-down"
-          @click="minus"/>
-        <span
-          class="plus bgcolor-up"
-          @click="plus"/>
-      </div>
-    </div> -->
     <div
       class="mask"
       :class="{show: loading && !bids.length && !asks.length}">
@@ -160,7 +139,7 @@ export default {
       asks: [],
       offset: 0,
       accuracy: 1,
-      itemHeight: 24,
+      itemHeight: 20,
       navHeight: 32,
       splitHeight: 50,
       theadHeight: 30,
@@ -173,11 +152,7 @@ export default {
           return vm.$i18n.t('click_to_clear')
         }
       },
-      showDepthOption: false,
-      depthGroup: [
-        0.000001, 0.00001, 0.0001
-      ],
-      currentDepth: 0.0001
+      showDepthOption: false
     }
   },
   watch: {
@@ -228,6 +203,24 @@ export default {
     },
     amountScale () {
       return _.get(this, 'state.pro.pairInfo.amount_scale', 4)
+    },
+    depthGroup () {
+      const deep = 6
+      let depthArr = []
+      if (!this.state.pro.pairInfo) return []
+      let scale = this.state.pro.pairInfo.price_scale
+      for (let accuracy = scale; accuracy > scale - deep; accuracy--) {
+        let offset = Math.pow(10, -accuracy).toFixed(accuracy >= 0 ? accuracy : 0)
+        if (offset > 1) break
+        depthArr.push({
+          offset,
+          accuracy: scale - accuracy
+        })
+      }
+      return depthArr
+    },
+    currentDepth () {
+      return Math.pow(10, -this.priceScale).toFixed(this.priceScale >= 0 ? this.priceScale : 0)
     },
     curGroup () {
       if (this.state.pro.pairInfo) {
@@ -289,9 +282,7 @@ export default {
   },
   methods: {
     changeDepth (dp) {
-    //   this.offset = 0
-    //   this.accuracy = 1
-      this.currentDepth = dp
+      this.offset = dp.accuracy
       this.showDepthOption = false
       this.onGroupChange()
     },
@@ -345,34 +336,6 @@ export default {
 
       this.asks = asks
       this.bids = bids
-    },
-    plus () {
-      if (this.offset >= 8 || this.priceScale <= 0) {
-        return false
-      }
-      if (this.accuracy === 1) {
-        this.accuracy = 2
-      } else if (this.accuracy === 2) {
-        this.accuracy = 5
-      } else if (this.accuracy === 5) {
-        this.accuracy = 1
-        this.offset += 1
-      }
-      this.onGroupChange()
-    },
-    minus () {
-      if (this.offset === 0 && this.accuracy === 1) {
-        return false
-      }
-      if (this.accuracy === 5) {
-        this.accuracy = 2
-      } else if (this.accuracy === 2) {
-        this.accuracy = 1
-      } else if (this.accuracy === 1) {
-        this.accuracy = 5
-        this.offset -= 1
-      }
-      this.onGroupChange()
     },
     error (msg) {
       this.err = msg
@@ -446,9 +409,6 @@ export default {
 @import "../../styles/vars";
 @import "../../styles/mixins";
 
-.header-icons {
-  padding-right: 8px;
-}
 .header-btn {
   cursor: pointer;
   color: white;
@@ -465,18 +425,18 @@ export default {
 .depth-options-wrapper {
     padding-top: 4px;
     position: absolute;
+    right: -18px;
 }
 .depth-options {
     box-sizing: border-box;
-    width:102px;
-    height:110px;
+    min-width:100px;
     background:rgba(25,45,63,1);
     border-radius:4px;
     padding-top: 10px;
 
     .depth__row {
         box-sizing: border-box;
-        padding-right: 24px;
+        padding: 0 24px;
         height: 30px;
         line-height: 30px;
         width: 100%;
@@ -512,12 +472,17 @@ export default {
   color: #C9AA6D;
   font-size: 12px;
   text-align: right;
+
+  .depth {
+    @include limit(1);
+  }
 }
 .arrow-down-yellow {
     width: 12px;
     height: 6px;
     position: absolute;
     top: 14px;
+    transition: all 0.2s ease-in-out;
 
     &.up {
         transform: rotateZ(180deg)
@@ -603,33 +568,9 @@ th.sell {
     }
   }
 }
-.setting-panel {
-  width: 200px;
-  padding-bottom: 20px;
-  background-color: #232D3D;
-  border: 3px outside rgba(0,0,0, .5);
-  opacity: 0;
-  visibility: hidden;
-  position: absolute;
-  z-index: 10;
-  right: 8px;
-  top: 36px;
-  transition: opacity 300ms, visibility 0s 300ms;
-  &.show {
-    transition: opacity 300ms;
-    opacity: 1;
-    visibility: visible;
-  }
-}
+
 .side-wrap {
   box-sizing: border-box;
-}
-.setting-panel-header {
-  text-align: center;
-  line-height: 28px;
-  height: 30px;
-  border-top: 2px solid $primary;
-  background-color: #303948;
 }
 .group-title {
   text-align: center;
@@ -649,53 +590,6 @@ th.sell {
     padding-right: 80px;
     text-align: right;
     line-height: 26px;
-  }
-  .minus {
-    width: 36px;
-    box-sizing: border-box;
-    border: 1px inset rgba(255,255,255, .1);
-    height: 28px;
-    position: absolute;
-    background-color: $sell;
-    right: 35px;
-    top: -1px;
-  }
-  .plus {
-    width: 36px;
-    box-sizing: border-box;
-    border: 1px inset rgba(255,255,255, .1);
-    height: 28px;
-    position: absolute;
-    background-color: $buy;
-    right: -1px;
-    top: -1px;
-  }
-  .minus, .plus {
-    &:before,
-    &:after {
-      content: ' ';
-      width: 8px;
-      height: 2px;
-      background-color: white;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      margin-left: -4px;
-      margin-top: -1px;
-    }
-  }
-  .minus {
-    &:after {
-      display: none;
-    }
-  }
-  .plus {
-    &:after {
-      height: 8px;
-      width: 2px;
-      margin-left: -1px;
-      margin-top: -4px;
-    }
   }
 }
 </style>

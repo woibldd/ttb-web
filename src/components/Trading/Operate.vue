@@ -134,7 +134,8 @@ export default {
   box-sizing: border-box;
   padding-bottom: 10px;
   overflow-y: auto;
-  min-height: 317px;
+  flex: 1;
+  min-height: 250px;
 }
 .mask {
   width: 100%;
