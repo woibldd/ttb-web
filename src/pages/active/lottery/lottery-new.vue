@@ -40,13 +40,30 @@
                     </div>
                     <div class="modal__right">
                       <div class="flex mb-30">
-                        <div
-                          class="trading-office-box"
-                          v-for="index in 5"
-                          :key="index">
+                        <div class="trading-office-box">
                           <p class="office-name">IX</p>
-                          <p class="btc-price bb1 ">1234</p>
-                          <p class="btc-price">1234</p>
+                          <p class="btc-price bb1 ">{{ openingPriceGroups4Btc.ix_open_price }}</p>
+                          <p class="btc-price">{{ openingPriceGroups4Btc.ix_close_price }}</p>
+                        </div>
+                        <div class="trading-office-box">
+                          <p class="office-name">Binance</p>
+                          <p class="btc-price bb1 ">{{ openingPriceGroups4Btc.binance_open_price }}</p>
+                          <p class="btc-price">{{ openingPriceGroups4Btc.binance_close_price }}</p>
+                        </div>
+                        <div class="trading-office-box">
+                          <p class="office-name">OKEx</p>
+                          <p class="btc-price bb1 ">{{ openingPriceGroups4Btc.ok_open_price }}</p>
+                          <p class="btc-price">{{ openingPriceGroups4Btc.ok_close_price }}</p>
+                        </div>
+                        <div class="trading-office-box">
+                          <p class="office-name">OKEx</p>
+                          <p class="btc-price bb1 ">{{ openingPriceGroups4Btc.huobi_open_price }}</p>
+                          <p class="btc-price">{{ openingPriceGroups4Btc.huobi_close_price }}</p>
+                        </div>
+                        <div class="trading-office-box">
+                          <p class="office-name">Bitfinex</p>
+                          <p class="btc-price bb1 ">{{ openingPriceGroups4Btc.bitfinex_open_price }}</p>
+                          <p class="btc-price">{{ openingPriceGroups4Btc.bitfinex_close_price }}</p>
                         </div>
                       </div>
                       <div>
@@ -283,7 +300,8 @@ export default {
       balance: {
         available: 0
       },
-      showPriceInfoModal: false
+      showPriceInfoModal: false,
+      openingPriceGroups4Btc: {}
     }
   },
   components: {
@@ -380,6 +398,12 @@ export default {
       if (this.$big(value).gt(this.balance.available)) {
         value = this.$big(this.balance.available).div(MIN_AMOUNT_UNIT).round(0, this.C.ROUND_DOWN).times(MIN_AMOUNT_UNIT)
         this.amount = value
+      }
+    },
+    async getAllPlatformBtcPrice () {
+      let res = await service.getAllPlatformBtcPrice()
+      if (!res.code) {
+        this.openingPriceGroups4Btc = res.data
       }
     },
     async fetchMyBalance () {
@@ -513,6 +537,7 @@ export default {
     await actions.updateSession()
 
     this.fetchLastBet()
+    this.getAllPlatformBtcPrice()
 
     this.timer = setInterval(() => {
       this.countdownGameOver()

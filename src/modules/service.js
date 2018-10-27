@@ -614,6 +614,10 @@ const service = {
   // 投注
   doGuess (data) {
     return request('game/bet/bet', data)
+  },
+  //  价格公示（最近一期） 获取比特币的开盘,收盘价格
+  getAllPlatformBtcPrice () {
+    return request('game/bet/btc/price')
   }
 
 }
