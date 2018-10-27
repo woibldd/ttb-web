@@ -25,15 +25,14 @@
               <div class="price flex-column">
                 <div class="f18 mb-15">{{ current.open_price }} <span class="c-999">USDT</span></div>
                 <div
-                  class="f12 c-999 relative pointer"
-                  @mouseout="showPriceInfoModal = false"
-                  @mouseenter="showPriceInfoModal = true">
+                  class="f12 c-999 relative pointer open-modal"
+                >
                   {{ $t('activity_lottery_opening_price') }} <icon
                     name="lottery-info"
                     class="ml-6"/>
                   <div
                     class="opening-price-modal flex"
-                    v-show="showPriceInfoModal">
+                  >
                     <div class="modal__left">
                       <p class="mb-22"> {{ $t('activity_lottery_opening_price') }} </p>
                       <p class="mb-22"> {{ $t('activity_lottery_close_price') }} </p>
@@ -74,8 +73,8 @@
                 </div>
               </div>
               <div class="count-down">
-                <div class="c-primary f18 mb-15">{{ $t('activity_lottery_count_down') }}:  {{ betOverTime }}</div>
-                <div class="f12 c-999">{{ current.betover_time }}- {{ current.gameover_time }}</div>
+                <div class="c-primary f18 mb-15">{{ $t('activity_lottery_count_down') }}:  {{ gameOverTime }}</div>
+                <div class="time-range f12 c-999">{{ timeRange }}</div>
               </div>
             </div>
             <div class="quiz-operation">
@@ -118,6 +117,12 @@
                 <input
                   type="number"
                   v-model="amount"
+                  min="50"
+                  step="10"
+                  :max="balance.available"
+                  @input="valueChanged"
+                  @blur="checkValue"
+                  class="input"
                   :placeholder="$t('activity_lottery_limit_vote_fifty')">
               </div>
               <div class="quiz-btns pointer">
@@ -278,7 +283,9 @@ import service from '@/modules/service'
 import statusLable from './statusLable'
 import utils from '@/modules/utils'
 
-const MIN_AMOUNT_UNIT = 100
+const MIN_AMOUNT_UNIT = 50
+const INCREASE_AMOUNT_UNIT = 10
+const GAME_INTERVAL = 60 * 60 * 1000
 
 export default {
   data () {
@@ -291,16 +298,13 @@ export default {
       amount: '',
       current: {},
       lastBetData: {},
-      gameOverTimeArr: [['0', '0'], ['0', '0'], ['0', '0']],
-      betOverTimeArr: [['0', '0'], ['0', '0'], ['0', '0']],
-      betOverTime: '',
+      gameOverTime: '',
       myHistory: [],
       game_id: '',
       loopTimer: 0,
       balance: {
         available: 0
       },
-      showPriceInfoModal: false,
       openingPriceGroups4Btc: {}
     }
   },
@@ -322,6 +326,11 @@ export default {
         return this.history[0].destroy_record
       }
       return ''
+    },
+    timeRange () {
+      let start = this.current.gameover_time - GAME_INTERVAL
+      let end = this.current.gameover_time
+      return `${utils.dateFormatter(start, 'H:m')}-${utils.dateFormatter(end, 'H:m')}`
     }
   },
   methods: {
@@ -336,10 +345,14 @@ export default {
       })
     },
     getMyStatusLableClass (item) {
-      if (item.bet1_amount) return 'rise'
-      if (item.bet2_amount) return 'flat'
-      if (item.bet3_amount) return 'fall'
-      return 0
+      switch (item.result) {
+        case 1:
+          return 'rise'
+        case 2:
+          return 'flat'
+        case 3:
+          return 'fall'
+      }
     },
     getMyAmount (item) {
       return (item.bet1_amount || 0) + (item.bet2_amount || 0) + (item.bet3_amount || 0)
@@ -348,55 +361,51 @@ export default {
       let now = new Date().getTime()
       let ts = Math.floor(((this.current.gameover_time || now) - now) / 1000)
       if (ts < 0) {
-        let time = '00'
-        this.gameOverTimeArr = [time.split(''), time.split(''), time.split('')]
+        this.gameOverTime = '00:00'
         return
       }
       let s = (ts % 60)
-      let h = Math.floor(ts / (60 * 60))
-      let m = Math.floor((ts - h * 60 * 60) / 60)
-      s = s.toString().padStart(2, '0').split('')
-      h = h.toString().padStart(2, '0').split('')
-      m = m.toString().padStart(2, '0').split('')
-      this.gameOverTimeArr = [h, m, s]
-    },
-    countdownBetOver () {
-      let now = new Date().getTime()
-      let ts = Math.floor(((this.current.betover_time || now) - now) / 1000)
-      if (ts < 0) {
-        let time = '00'
-        this.betOverTimeArr = [time.split(''), time.split(''), time.split('')]
-        return
-      }
-      let s = (ts % 60)
-      let h = Math.floor(ts / (60 * 60))
-      let m = Math.floor((ts - h * 60 * 60) / 60)
+      // let h = Math.floor(ts / (60 * 60))
+      let m = Math.floor((ts) / 60)
       s = s.toString().padStart(2, '0')
-      //   h = h.toString().padStart(2, '0').split('')
+      // h = h.toString().padStart(2, '0').split('')
       m = m.toString().padStart(2, '0')
-      this.betOverTime = m + ':' + s
-    //   this.betOverTimeArr = [h, m, s]
+      this.gameOverTime = m + ':' + s
     },
-
     valueChanged () {
       let value = parseInt(this.amount, 10) || 0
+      // 不做最小值判断，否则用户无法输入,失去焦点时再去纠正用户输入
       if (value < 0) {
         value = 0
         this.amount = value
       }
+      // 超过可用余额， 给接近最大值，最值还超 给0
       if (this.$big(value).gt(this.balance.available)) {
-        value = this.$big(this.balance.available).div(MIN_AMOUNT_UNIT).round(0, this.C.ROUND_DOWN).times(MIN_AMOUNT_UNIT)
+        // 余额不足最小值，给0
+        if (this.$big(this.balance.available) <= MIN_AMOUNT_UNIT) {
+          value = 0
+        } else {
+          value = this.$big(this.balance.available).div(INCREASE_AMOUNT_UNIT).round(0, this.C.ROUND_DOWN).times(INCREASE_AMOUNT_UNIT)
+        }
         this.amount = value
       }
     },
     checkValue () {
       let value = parseInt(this.amount, 10) || 0
-      if (value % MIN_AMOUNT_UNIT !== 0) {
-        value = ((value / MIN_AMOUNT_UNIT).toFixed(0) + 1) * MIN_AMOUNT_UNIT
+      if (value < MIN_AMOUNT_UNIT) {
+        value = MIN_AMOUNT_UNIT
+        this.amount = value
+      }
+      if (value % INCREASE_AMOUNT_UNIT !== 0) {
+        value = (Math.floor(value / INCREASE_AMOUNT_UNIT) + 1) * INCREASE_AMOUNT_UNIT
         this.amount = value
       }
       if (this.$big(value).gt(this.balance.available)) {
-        value = this.$big(this.balance.available).div(MIN_AMOUNT_UNIT).round(0, this.C.ROUND_DOWN).times(MIN_AMOUNT_UNIT)
+        if (this.$big(this.balance.available) <= MIN_AMOUNT_UNIT) {
+          value = 0
+        } else {
+          value = this.$big(this.balance.available).div(INCREASE_AMOUNT_UNIT).round(0, this.C.ROUND_DOWN).times(INCREASE_AMOUNT_UNIT)
+        }
         this.amount = value
       }
     },
@@ -441,17 +450,18 @@ export default {
           return
         }
         let params = {
-          game_id: this.game_id
+          game_id: this.game_id,
+          amount: this.amount
         }
         switch (type) {
           case 'rise':
-            params.bet1_amount = this.amount
+            params.type = 1
             break
           case 'fall':
-            params.bet3_amount = this.amount
+            params.type = 3
             break
           case 'flat':
-            params.bet2_amount = this.amount
+            params.type = 2
             break
         }
         let res = await service.doGuess(params)
@@ -541,7 +551,7 @@ export default {
 
     this.timer = setInterval(() => {
       this.countdownGameOver()
-      this.countdownBetOver()
+      // this.countdownBetOver()
     }, 1000)
     this.fetch()
     this.loopTimer = setInterval(() => {
