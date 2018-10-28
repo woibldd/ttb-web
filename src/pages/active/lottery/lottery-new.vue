@@ -169,7 +169,7 @@
                   <p class="c-999">{{ $t('activity_lottery_vote_amount') }} </p>
                 </div>
               </div>
-              <div class="last-champion__info border-bottom-1">
+              <div class="last-champion__info">
                 <div class="uid flex-column">
                   <p class="f14 mb-10"/>
                   <!-- 伯乐不显示uid -->
