@@ -8,7 +8,7 @@
           <div class="box__title pr-20">
             <div class="title-tile"> <icon
               name="lottery-quiz"
-              class="pr-12"/> {{ $t('activity_lottery_quiz') }} BTC/USDT</div>
+              class="pr-12"/> {{ $t('activity_lottery_quiz') }}</div>
             <div class="text"> {{ $t('activity_lottery_last_bonus') }} {{ lastBetData.pool }} IX</div>
           </div>
           <div class="box__content pb-29 mt-17">
@@ -74,7 +74,9 @@
               </div>
               <div class="count-down">
                 <div class="c-primary f18 mb-15">{{ $t('activity_lottery_count_down') }} {{ gameOverTime }}</div>
-                <div class="time-range f12 c-999">{{ timeRange }}</div>
+                <div
+                  class="time-range f12 c-999"
+                  v-show="timeRange">{{ timeRange }}</div>
               </div>
             </div>
             <div class="quiz-operation">
@@ -170,7 +172,7 @@
                 <div class="uid flex-column">
                   <p class="f14 mb-10"/>
                   <!-- 伯乐不显示uid -->
-                  <p class="c-999">{{ $t('activity_lottery_bole') }} </p>
+                  <p class="c-999"/>
                 </div>
                 <div class="reward_num flex-column">
                   <p class="f14 c-b18 mb-10">{{ lastBetData.invite_ix }}</p>
@@ -215,7 +217,7 @@
                       :class="{'active': index === 0 }">{{ index + 1 }}</p>
                   </div>
                   <div
-                    class="table__td">{{ item.uid }}</p></div>
+                    class="table__td">{{ item.uid }}</div>
                   <div class="table__td align-right"> {{ item.ix }} IX</div>
                 </div>
               </div>
@@ -372,6 +374,9 @@ export default {
       return ''
     },
     timeRange () {
+      if (!this.current.gameover_time) {
+        return ''
+      }
       let start = this.current.gameover_time - GAME_INTERVAL
       let end = this.current.gameover_time
       return `${utils.dateFormatter(start, 'H:m')}-${utils.dateFormatter(end, 'H:m')}`
@@ -532,9 +537,14 @@ export default {
           let current = resp.data
           if (current) {
             let total = this.$big(current.bet1_amount).plus(current.bet2_amount).plus(current.bet3_amount)
-            let bet1Rate = this.$big(current.bet1_amount).div(total).times(100).round(2).toString()
-            let bet2Rate = this.$big(current.bet2_amount).div(total).times(100).round(2).toString()
-            let bet3Rate = this.$big(current.bet3_amount).div(total).times(100).round(2).toString()
+            let bet1Rate = '0'
+            let bet2Rate = '0'
+            let bet3Rate = '0'
+            if (total.gt(0)) {
+              bet1Rate = this.$big(current.bet1_amount).div(total).times(100).round(2).toString()
+              bet2Rate = this.$big(current.bet2_amount).div(total).times(100).round(2).toString()
+              bet3Rate = this.$big(current.bet3_amount).div(total).times(100).round(2).toString()
+            }
 
             if (this.myHistory.length) {
               // 绑定个人投票记录， 前提现获取到个人
@@ -545,6 +555,24 @@ export default {
                 })
               }
             }
+
+            if (!current.bet_rank) {
+              current.bet_rank = []
+            }
+            let betRank = []
+            for (let i = 0; i < 3; i++) {
+              if (current.bet_rank[i]) {
+                betRank.push(current.bet_rank[i])
+              } else {
+                betRank.push({
+                  uid: '--',
+                  ix: '--'
+                })
+              }
+            }
+
+            current.bet_rank = betRank
+
             current = Object.assign(current, {
               bet1Rate, bet2Rate, bet3Rate
             })

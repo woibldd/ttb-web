@@ -313,6 +313,8 @@ $color-bids-fall: #FF1E1D;
         .lottery__table {
             padding-right: 45px;
             padding-top: 18px;
+            height: 166px;
+            box-sizing: border-box;
 
             .table__row {
                 display: flex;
@@ -360,6 +362,7 @@ $color-bids-fall: #FF1E1D;
             .lottery__table{
                 padding-left: 45px;
                 padding-top: 25px;
+                overflow: auto;
             }
         }
         .rule-content {
