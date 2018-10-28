@@ -41,6 +41,10 @@
               <span
                 class="line totally"
                 v-if="typeof relayTotal[state.pro.pair] != 'undefined'">{{ $t('active_relay_short') }} {{ relayTotal[state.pro.pair]|round(0) }} USDT</span>
+              <span
+                class="close pointer"
+                @click.prevent="closeBox"
+              >x</span>
             </div>
           </div>
         </div>
@@ -136,6 +140,7 @@ export default {
       state,
       comps: [],
       showCountdown: false,
+      closeCountdown: false,
       countdownTimer: 0,
       countdownText: '20',
       lastDealTime: 0,
@@ -145,7 +150,7 @@ export default {
   },
   watch: {
     '$route.params.pair': {
-      async handler (pair = '') {
+      async handler (pair = '', last) {
         this.state.pro.lock = true
         const match = pair.match(/^([A-Z]*)_([A-Z]*)$/)
         if (match) {
@@ -162,7 +167,7 @@ export default {
           }
           await this.refreshBalance()
           this.countdownText = '-'
-          // this.stopTimer()
+          this.closeCountdown = false
         }
         this.state.pro.lock = false
       },
@@ -254,7 +259,8 @@ export default {
       }
     },
     dealChanged (data) {
-      if (data && data.length > 0) {
+      // 关闭之后不在显示
+      if (!this.closeCountdown && data && data.length > 0) {
         // 第一次进入
         if (!this.showCountdown) {
           this.lastDealTime = data[0].time
@@ -276,6 +282,11 @@ export default {
           }
         }
       }
+    },
+    closeBox () {
+      this.showCountdown = false
+      this.closeCountdown = true
+      this.stopTimer()
     }
   },
   async created () {
@@ -467,6 +478,25 @@ export default {
     &.totally {
       right: 55px;
       bottom: 8px;
+    }
+  }
+
+  .close {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 14px;
+    display: block;
+
+    width: 16px;
+    height: 16px;
+    color: #000;
+    opacity: 1;
+
+    &:hover {
+      opacity: 0.5;
     }
   }
 

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import qs from 'querystring'
+import {state} from './store'
 
 let _env_ = qs.parse(location.search.replace('?', ''))._env_
 
@@ -16,10 +17,10 @@ export const quotaApi = axios.create({
 
 // request interceptor
 api.interceptors.request.use(config => {
-  // Do something before request is sent
-  // if (store.getters.token) {
-  //   config.headers['X-Token'] = getToken() // 让每个请求携带token-- ['X-Token']为自定义key 请根据实际情况自行修改
-  // }
+  if (state.token) {
+    // 服务端准备好 就可以上token了
+    // config.headers['token'] = state.token
+  }
   return config
 }, error => {
   // Do something with request error

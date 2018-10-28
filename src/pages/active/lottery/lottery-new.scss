@@ -262,6 +262,9 @@ $color-bids-fall: #FF1E1D;
         }
 
         .box-last-champion {
+            .box__content {
+                min-height: 158px;
+            }
         }
 
         .last-champion__info{

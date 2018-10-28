@@ -152,6 +152,7 @@ export default {
         return this.updateValue('')
       }
       try {
+        console.log(this.$big(newValue).round(this.realScale), newValue, this.realScale)
         this.updateValue(this.$big(newValue).round(this.realScale) + '', 'valueChange')
       } catch (e) {
         utils.log('Invalid value changing: ', newValue)
@@ -176,6 +177,10 @@ export default {
       }
       if (typeof value !== 'string') {
         throw new Error('Value must be string.')
+      }
+      // JS超过8位即使用科学计数法，特使用改方案兼容
+      if (value.indexOf('e') > -1) {
+        value = Number(value).toFixed(this.realScale).toString(10)
       }
       if (value === this.lastValue) {
         this.log('Value not change.')

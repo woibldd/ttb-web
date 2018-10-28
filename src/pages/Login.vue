@@ -433,9 +433,11 @@ export default {
         utils.alert(resp.message)
       }
     },
-    loginSuccess (userInfo) {
+    async loginSuccess (userInfo) {
       actions.setUserInfo(userInfo)
       actions.resetStatus()
+      await actions.updateToken()
+
       if (typeof state.loginBack === 'string') {
         location.href = state.loginBack
       } else {
