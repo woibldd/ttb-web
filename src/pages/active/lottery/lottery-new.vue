@@ -242,8 +242,8 @@
               <div class="table__th"> {{ $t('time') }} </div>
               <div class="table__th"> {{ $t('activity_lottery_opening_price') }} </div>
               <div class="table__th"> {{ $t('activity_lottery_close_price') }} </div>
-              <div class="table__th"> {{ $t('deal_th_side') }} </div>
-              <div class="table__th"> {{ $t('activity_lottery_win_rate') }} </div>
+              <!-- <div class="table__th"> {{ $t('deal_th_side') }} </div> -->
+              <!-- <div class="table__th"> {{ $t('activity_lottery_win_rate') }} </div> -->
               <div class="table__th align-right"> {{ $t('status') }} </div>
             </div>
             <div
@@ -254,8 +254,8 @@
               <span class="table__td game_id">{{ item.game_id }}{{ $t('activity_lottery_serial') }}</span>
               <span class="table__td amount">{{ item.open_price | round(0) | thousand }} IX</span>
               <span class="table__td win">{{ item.close_price | round(2) | thousand }} IX</span>
-              <span class="table__td dir"><status-lable :item="item"/></span>
-              <span class="table__td win">{{ item.win_amount | round(2) | thousand }} IX</span>
+              <!-- <span class="table__td dir"><status-lable :item="item"/></span> -->
+              <!-- <span class="table__td win">{{ item.win_amount | round(2) | thousand }} IX</span> -->
               <span class="table__td result align-right">{{ $t('activity_result_'+item.result) }}</span>
             </div>
           </div>
