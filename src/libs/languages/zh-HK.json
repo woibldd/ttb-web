@@ -669,5 +669,7 @@
   "activity_result_1": "漲贏",
   "activity_result_2": "平贏",
   "activity_result_3": "跌贏",
-  "activity_lottery_timeout": "本期競猜投注時間已到，請下期繼續"
+  "activity_lottery_timeout": "本期競猜投注時間已到，請下期繼續",
+  "activity_lottery_reward_history": "開獎記錄"
+
 }

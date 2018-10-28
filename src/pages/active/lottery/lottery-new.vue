@@ -224,6 +224,40 @@
         </div>
 
       </div>
+      <!-- 开奖记录 -->
+      <div
+        v-if="reawrdHistory && reawrdHistory.length"
+        class="lottery_row history">
+        <div class="box__title pr-20">
+          <div class="title-tile"> <icon
+            name="lottery-reward-record"
+            class="pr-12"/> {{ $t('activity_lottery_reward_history') }} </div>
+        </div>
+        <div class="box__content pb-29 mt-17">
+          <div class="lottery__table">
+            <div class="table__row">
+              <div class="table__th"> {{ $t('time') }} </div>
+              <div class="table__th"> {{ $t('activity_lottery_opening_price') }} </div>
+              <div class="table__th"> {{ $t('activity_lottery_close_price') }} </div>
+              <div class="table__th"> {{ $t('deal_th_side') }} </div>
+              <div class="table__th"> {{ $t('activity_lottery_win_rate') }} </div>
+              <div class="table__th align-right"> {{ $t('status') }} </div>
+            </div>
+            <div
+              class="table__row mt-18"
+              :class="[getMyStatusLableClass(item)]"
+              v-for="(item,index) in reawrdHistory"
+              :key="index">
+              <span class="table__td game_id">{{ item.game_id }}{{ $t('activity_lottery_serial') }}</span>
+              <span class="table__td amount">{{ item.amount | round(0) | thousand }} IX</span>
+              <span class="table__td win">{{ item.win_amount | round(2) | thousand }} IX</span>
+              <span class="table__td dir"><status-lable :item="item"/></span>
+              <span class="table__td win">{{ item.win_amount | round(2) | thousand }} IX</span>
+              <span class="table__td result align-right">{{ $t('activity_result_'+item.result) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- 投票记录 -->
       <div
         class="lottery_row history"
@@ -301,6 +335,7 @@ export default {
       product: 'BTC',
       timer: null,
       history: [],
+      reawrdHistory: [],
       amount: '',
       current: {},
       lastBetData: {},

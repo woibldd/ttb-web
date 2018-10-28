@@ -667,5 +667,7 @@
   "activity_result_1":"많아서 이김",
   "activity_result_2":"동등하게 이김",
   "activity_result_3":"동등하게 이김",
-  "activity_lottery_timeout": "이번 활동 투자시간이 이미 지났습니다 다음라운드에 계속해주시길 바랍니다"
+  "activity_lottery_timeout": "이번 활동 투자시간이 이미 지났습니다 다음라운드에 계속해주시길 바랍니다",
+  "activity_lottery_reward_history": "보상기록"
+
 }

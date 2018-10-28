@@ -670,5 +670,7 @@
   "activity_result_1":"涨赢",
   "activity_result_2":"平赢",
   "activity_result_3":"跌赢",
-  "activity_lottery_timeout": "本期竞猜投注时间已到，请下期继续"
+  "activity_lottery_timeout": "本期竞猜投注时间已到，请下期继续",
+  "activity_lottery_reward_history": "开奖记录"
+
 }

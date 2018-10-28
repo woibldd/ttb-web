@@ -793,6 +793,6 @@
   "activity_result_1":"Winning Rise",
   "activity_result_2":"Winning Flat",
   "activity_result_3":"Winning Fall",
-  "activity_lottery_timeout": "Voting time is over for the current draw, please join us again next time"
-
+  "activity_lottery_timeout": "Voting time is over for the current draw, please join us again next time",
+  "activity_lottery_reward_history": "past results"
 }
