@@ -16,10 +16,7 @@ export default {
   computed: {
     status () {
       let item = this.item
-      if (item.bet1_amount) return 1
-      if (item.bet2_amount) return 2
-      if (item.bet3_amount) return 3
-      return 0
+      return item.type
     },
     label () {
       switch (this.status) {

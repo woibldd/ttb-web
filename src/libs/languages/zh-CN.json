@@ -618,7 +618,7 @@
   "activity_bet_success": "下注成功",
   "activity_lottery_quiz":"竞猜BTC/USDT",
   "activity_lottery_last_bonus": "上期奖励：",
-  "activity_lottery_ix_beting": "ix 投注",
+  "activity_lottery_ix_beting": "IX 投注",
   "activity_lottery_opening_price": "开盘价",
   "activity_lottery_close_price": "收盘价",
   "activity_lottery_cant_bid_now": "当前时间不可投注",
@@ -632,6 +632,7 @@
   "activity_lottery_buy_fall": "买跌",
   "activity_lottery_buy_flat": "买平",
   "activity_lottery_limit_vote_fifty": "投票数量为≥50的整数",
+  "activity_lottery_current_ticket": "当前可用票数:",
   "activity_lottery_guess_rise": "猜涨",
   "activity_lottery_guess_fall": "猜跌",
   "activity_lottery_guess_flat": "猜平",
@@ -668,5 +669,6 @@
   "activity_result_0":"未开奖",
   "activity_result_1":"涨赢",
   "activity_result_2":"平赢",
-  "activity_result_3":"跌赢"
+  "activity_result_3":"跌赢",
+  "activity_lottery_timeout": "本期竞猜投注时间已到，请下期继续"
 }

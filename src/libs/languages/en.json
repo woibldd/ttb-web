@@ -755,6 +755,7 @@
   "activity_lottery_buy_fall": "Buy fall",
   "activity_lottery_buy_flat": "Buy flat",
   "activity_lottery_limit_vote_fifty": "total votes are in multiples of ≥50",
+  "activity_lottery_current_ticket": "Current tickets/units:",
   "activity_lottery_guess_rise": "guess of rise",
   "activity_lottery_guess_fall": "guess of fall",
   "activity_lottery_guess_flat": "guess of draw",
@@ -791,6 +792,7 @@
   "activity_result_0":"Unopened",
   "activity_result_1":"Winning Rise",
   "activity_result_2":"Winning Flat",
-  "activity_result_3":"Winning Fall"
+  "activity_result_3":"Winning Fall",
+  "activity_lottery_timeout": "Voting time is over for the current draw, please join us again next time"
 
 }

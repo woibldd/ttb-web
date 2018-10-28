@@ -73,7 +73,7 @@
                 </div>
               </div>
               <div class="count-down">
-                <div class="c-primary f18 mb-15">{{ $t('activity_lottery_count_down') }}:  {{ gameOverTime }}</div>
+                <div class="c-primary f18 mb-15">{{ $t('activity_lottery_count_down') }} {{ gameOverTime }}</div>
                 <div class="time-range f12 c-999">{{ timeRange }}</div>
               </div>
             </div>
@@ -86,9 +86,9 @@
                 </div>
                 <div class="quiz-choice-strip f14">
                   <div class="strip__item quiz__note up">{{ $t('activity_lottery_rise') }}</div>
-                  <div class="strip__item up">{{ current.bet1_amount }} IX</div>
+                  <div class="strip__item up">{{ current.bet1_amount | round(0) | thousand }} IX</div>
                   <div class="strip__item">{{ current.bet1Rate }}</div>
-                  <div class="strip__item">--</div>
+                  <div class="strip__item">{{ current.mybet_1 || '--' }}</div>
                   <div
                     class="proportion up"
                     :style="{width: current.bet1Rate + '%'}"/>
@@ -97,7 +97,7 @@
                   <div class="strip__item quiz__note flat">{{ $t('activity_lottery_flat') }}</div>
                   <div class="strip__item flat">{{ current.bet2_amount }} IX</div>
                   <div class="strip__item">{{ current.bet2Rate }}</div>
-                  <div class="strip__item">--</div>
+                  <div class="strip__item">{{ current.mybet_2 || '--' }}</div>
                   <div
                     class="proportion flat"
                     :style="{width: current.bet2Rate + '%'}"/>
@@ -106,13 +106,14 @@
                   <div class="strip__item quiz__note fall">{{ $t('activity_lottery_fall') }}</div>
                   <div class="strip__item fall">{{ current.bet3_amount }} IX</div>
                   <div class="strip__item">{{ current.bet3Rate }}</div>
-                  <div class="strip__item">--</div>
+                  <div class="strip__item">{{ current.mybet_3 || '--' }}</div>
                   <div
                     class="proportion fall"
                     :style="{width: current.bet3Rate + '%'}"/>
                 </div>
               </div>
-              <div class="quiz-input-num mt-20 f14">
+              <div class="quiz-balance mt-12 f14">{{ $t('activity_lottery_current_ticket') }} {{ balance.available | round(2) }} IX </div>
+              <div class="quiz-input-num mt-12 f14">
                 <div class="c-999 w-64">{{ $t('amount') }}</div>
                 <input
                   type="number"
@@ -128,15 +129,15 @@
               <div class="quiz-btns pointer">
                 <div
                   class="quiz__btn up"
-                  @click.prevent="buy('rise')"
+                  @click.prevent="bet('rise')"
                   :class="{disabled: disabled}">{{ $t('activity_lottery_guess_rise') }}</div>
                 <div
                   class="quiz__btn flat"
-                  @click.prevent="buy('fall')"
+                  @click.prevent="bet('fall')"
                   :class="{disabled: disabled}">{{ $t('activity_lottery_guess_flat') }}</div>
                 <div
                   class="quiz__btn fall"
-                  @click.prevent="buy('flat')"
+                  @click.prevent="bet('flat')"
                   :class="{disabled: disabled}">{{ $t('activity_lottery_guess_fall') }}</div>
               </div>
             </div>
@@ -191,13 +192,13 @@
           </div>
 
           <!-- 本期排行榜 -->
-          <div class="box-rank lottery-box mt-30">
+          <div class="box-rank lottery-box">
             <div class="box__title pr-20">
               <div class="title-tile"> <icon
                 name="lottery-ranking"
                 class="pr-12"/> {{ $t('activity_lottery_current_rank') }}</div>
             </div>
-            <div class="box__content mt-17 f12 pl-22 pb-16">
+            <div class="box__content mt-17 f14 pl-22 pb-30">
               <div class="lottery__table">
                 <div class="table__row">
                   <div class="table__th"> {{ $t('activity_lottery_position') }} </div>
@@ -208,8 +209,13 @@
                   class="table__row mt-18"
                   v-for="(item,index) in current.bet_rank"
                   :key="index">
-                  <div class="table__td"><p class="circle">{{ index + 1 }}</p></div>
-                  <div class="table__td">{{ item.uid }}</div>
+                  <div class="table__td">
+                    <p
+                      class="circle"
+                      :class="{'active': index === 0 }">{{ index + 1 }}</p>
+                  </div>
+                  <div
+                    class="table__td">{{ item.uid }}</p></div>
                   <div class="table__td align-right"> {{ item.ix }} IX</div>
                 </div>
               </div>
@@ -221,7 +227,7 @@
       <!-- 投票记录 -->
       <div
         class="lottery_row history"
-        v-if="isLogin">
+        v-if="isLogin && myHistory && myHistory.length">
         <div class="box__title pr-20">
           <div class="title-tile"> <icon
             name="lottery-record"
@@ -242,7 +248,7 @@
               v-for="(item,index) in myHistory"
               :key="index">
               <span class="table__td game_id">{{ item.game_id }}{{ $t('activity_lottery_serial') }}</span>
-              <span class="table__td amount">{{ getMyAmount(item) | round(2) | thousand }} IX</span>
+              <span class="table__td amount">{{ item.amount | round(0) | thousand }} IX</span>
               <span class="table__td dir"><status-lable :item="item"/></span>
               <span class="table__td win">{{ item.win_amount | round(2) | thousand }} IX</span>
               <span class="table__td result align-right">{{ $t('activity_result_'+item.result) }}</span>
@@ -302,6 +308,7 @@ export default {
       myHistory: [],
       game_id: '',
       loopTimer: 0,
+      betTimeout: false,
       balance: {
         available: 0
       },
@@ -427,7 +434,7 @@ export default {
         this.myHistory = res.data
       }
     },
-    async buy (type) {
+    async bet (type) {
       if (!this.isLogin) {
         actions.setLoginBack({
           fullPath: this.$route.fullPath
@@ -437,6 +444,14 @@ export default {
         })
       }
       if (this.$big(this.amount).lte(0)) {
+        return
+      }
+
+      let now = new Date().getTime()
+      if (now > this.current.betover_time) {
+        utils.alert(this.$t('activity_lottery_timeout'))
+        this.betTimeout = true
+        console.log('time not ok', now, this.current.betover_time)
         return
       }
 
@@ -473,29 +488,6 @@ export default {
           utils.alert(res.message)
         }
       })
-
-    //   let params = {
-    //     game_id: this.game_id
-    //   }
-    //   switch (type) {
-    //     case 'rise':
-    //       params.bet1_amount = this.amount
-    //       break
-    //     case 'fall':
-    //       params.bet3_amount = this.amount
-    //       break
-    //     case 'flat':
-    //       params.bet2_amount = this.amount
-    //       break
-    //   }
-    //   let res = await service.doGuess(params)
-    //   if (!res.code) {
-    //     utils.success(this.$t('activity_bet_success'))
-    //     this.amount = ''
-    //     this.fetch()
-    //   } else {
-    //     utils.alert(res.message)
-    //   }
     },
     fetchCurrent () {
       service.getGuessCurrent().then(resp => {
@@ -506,9 +498,23 @@ export default {
             let bet1Rate = this.$big(current.bet1_amount).div(total).times(100).round(2).toString()
             let bet2Rate = this.$big(current.bet2_amount).div(total).times(100).round(2).toString()
             let bet3Rate = this.$big(current.bet3_amount).div(total).times(100).round(2).toString()
+
+            if (this.myHistory.length) {
+              // 绑定个人投票记录， 前提现获取到个人
+              let matchedMine = this.myHistory.filter(h => h.game_id === current.game_id)
+              if (matchedMine.length) {
+                matchedMine.forEach(m => {
+                  current['mybet_' + m.type] = m.amount
+                })
+              }
+            }
             current = Object.assign(current, {
               bet1Rate, bet2Rate, bet3Rate
             })
+          }
+          if (new Date().getTime() <= current.betover_time) {
+            console.log('time ok', current.betover_time)
+            this.betTimeout = false
           }
           if (this.game_id && this.game_id !== current.game_id) {
             console.log('new match')

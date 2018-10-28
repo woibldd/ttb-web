@@ -629,6 +629,7 @@
   "activity_lottery_buy_fall": "락폭하는것을 사다",
   "activity_lottery_buy_flat": "평균을 사다",
   "activity_lottery_limit_vote_fifty": "투표수>=50의 완수배",
+  "activity_lottery_current_ticket": "현재 득표수:",
   "activity_lottery_guess_rise": "오르는것을 추측",
   "activity_lottery_guess_fall": "락폭하는것을 추측",
   "activity_lottery_guess_flat": "변하지 않는것을 추측",
@@ -665,5 +666,6 @@
   "activity_result_0":"보상 개방안함",
   "activity_result_1":"많아서 이김",
   "activity_result_2":"동등하게 이김",
-  "activity_result_3":"동등하게 이김"
+  "activity_result_3":"동등하게 이김",
+  "activity_lottery_timeout": "이번 활동 투자시간이 이미 지났습니다 다음라운드에 계속해주시길 바랍니다"
 }

@@ -287,6 +287,9 @@ $color-bids-fall: #FF1E1D;
             }
         }
 
+        .box-rank {
+          margin-top: 36px;
+        }
         .invite-cambat {
             background: url('/static/active/lottery/combat.png');
             width:593px;
@@ -309,7 +312,7 @@ $color-bids-fall: #FF1E1D;
 
         .lottery__table {
             padding-right: 45px;
-            padding-top: 10px;
+            padding-top: 18px;
 
             .table__row {
                 display: flex;
@@ -347,7 +350,7 @@ $color-bids-fall: #FF1E1D;
                 background-color: #303030;
                 border-radius:50%;
     
-                &:hover{
+                &.active {
                     background:linear-gradient(92deg,rgba(205,125,41,1),rgba(250,172,73,1));
                 }
             }
