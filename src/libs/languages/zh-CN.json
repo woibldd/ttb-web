@@ -649,7 +649,7 @@
   "activity_lottery_settle":"结算",
   "activity_lottery_result":"开奖结果",
   "activity_lottery_rules": "活动规则：",
-  "activity_lottery_count_down": "本期倒计时",
+  "activity_lottery_count_down": "本期倒计时:",
   "activity_lottery_warm_tips": "温馨提示",
   "activity_lottery_warm_content": "数字资产是创新型的投资产品，价格波动较大，请您理性判断自己的投资能力，审慎做出投资决策，祝您交易愉快！",
   "activity_lottery_rules_a": "1、参与者可通过投票IX的形式，竞猜BTC/USDT交易币对在某一竞猜周期的价格变化；竞猜结果正确者，竞猜投票全数返还，并可获得竞猜错误者投票总额的90%作为奖励（按投票比例分配）。如果对应周期没有竞猜正确者，则投票全数返还； ",
