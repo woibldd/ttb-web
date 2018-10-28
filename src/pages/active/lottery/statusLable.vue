@@ -25,7 +25,7 @@ export default {
         case 2:
           return this.$t('activity_lottery_buy_flat')
         case 3:
-          return this.$t('activity_lottery_buy_flat')
+          return this.$t('activity_lottery_buy_fall')
       }
     }
   },

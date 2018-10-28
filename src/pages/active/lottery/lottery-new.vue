@@ -89,7 +89,7 @@
                 <div class="quiz-choice-strip f14">
                   <div class="strip__item quiz__note up">{{ $t('activity_lottery_rise') }}</div>
                   <div class="strip__item up">{{ current.bet1_amount | round(0) | thousand }} IX</div>
-                  <div class="strip__item">{{ current.bet1Rate }}</div>
+                  <div class="strip__item">{{ current.bet1Rate }}%</div>
                   <div class="strip__item">{{ current.mybet_1 || '--' }}</div>
                   <div
                     class="proportion up"
@@ -98,7 +98,7 @@
                 <div class="quiz-choice-strip f14">
                   <div class="strip__item quiz__note flat">{{ $t('activity_lottery_flat') }}</div>
                   <div class="strip__item flat">{{ current.bet2_amount }} IX</div>
-                  <div class="strip__item">{{ current.bet2Rate }}</div>
+                  <div class="strip__item">{{ current.bet2Rate }}%</div>
                   <div class="strip__item">{{ current.mybet_2 || '--' }}</div>
                   <div
                     class="proportion flat"
@@ -107,7 +107,7 @@
                 <div class="quiz-choice-strip f14">
                   <div class="strip__item quiz__note fall">{{ $t('activity_lottery_fall') }}</div>
                   <div class="strip__item fall">{{ current.bet3_amount }} IX</div>
-                  <div class="strip__item">{{ current.bet3Rate }}</div>
+                  <div class="strip__item">{{ current.bet3Rate }}%</div>
                   <div class="strip__item">{{ current.mybet_3 || '--' }}</div>
                   <div
                     class="proportion fall"
@@ -135,11 +135,11 @@
                   :class="{disabled: disabled}">{{ $t('activity_lottery_guess_rise') }}</div>
                 <div
                   class="quiz__btn flat"
-                  @click.prevent="bet('fall')"
+                  @click.prevent="bet('flat')"
                   :class="{disabled: disabled}">{{ $t('activity_lottery_guess_flat') }}</div>
                 <div
                   class="quiz__btn fall"
-                  @click.prevent="bet('flat')"
+                  @click.prevent="bet('fall')"
                   :class="{disabled: disabled}">{{ $t('activity_lottery_guess_fall') }}</div>
               </div>
             </div>
