@@ -226,13 +226,16 @@
       </div>
       <!-- 开奖记录 -->
       <div
-        v-if="reawrdHistory && reawrdHistory.length"
-        class="lottery_row history">
+        class="lottery_row history"
+        v-if="history && history.length">
         <div class="box__title pr-20">
-          <div class="title-tile"> <icon
-            name="lottery-reward-record"
-            class="pr-12"/> {{ $t('activity_lottery_reward_history') }} </div>
+          <div class="title-tile">
+            <icon
+              name="lottery-reward-record"
+              class="pr-12"/> {{ $t('activity_lottery_reward_history') }}
+          </div>
         </div>
+
         <div class="box__content pb-29 mt-17">
           <div class="lottery__table">
             <div class="table__row">
@@ -246,11 +249,11 @@
             <div
               class="table__row mt-18"
               :class="[getMyStatusLableClass(item)]"
-              v-for="(item,index) in reawrdHistory"
+              v-for="(item,index) in history"
               :key="index">
               <span class="table__td game_id">{{ item.game_id }}{{ $t('activity_lottery_serial') }}</span>
-              <span class="table__td amount">{{ item.amount | round(0) | thousand }} IX</span>
-              <span class="table__td win">{{ item.win_amount | round(2) | thousand }} IX</span>
+              <span class="table__td amount">{{ item.open_price | round(0) | thousand }} IX</span>
+              <span class="table__td win">{{ item.close_price | round(2) | thousand }} IX</span>
               <span class="table__td dir"><status-lable :item="item"/></span>
               <span class="table__td win">{{ item.win_amount | round(2) | thousand }} IX</span>
               <span class="table__td result align-right">{{ $t('activity_result_'+item.result) }}</span>
@@ -335,7 +338,6 @@ export default {
       product: 'BTC',
       timer: null,
       history: [],
-      reawrdHistory: [],
       amount: '',
       current: {},
       lastBetData: {},
