@@ -10,6 +10,7 @@ export const state = {
   router: null,
   locale: 'en',
   locales,
+  token: '',
   progressing: [],
   loading: false,
   page: '',
@@ -95,6 +96,9 @@ export const actions = {
   setPage (page) {
     state.page = page
   },
+  setToken (token) {
+    state.token = token
+  },
   setUserInfo (userInfo) {
     if (userInfo) {
       // 已登录
@@ -111,6 +115,7 @@ export const actions = {
       // 未登录
       state.userStatus = 0
       state.userInfo = null
+      state.token = ''
       state.pro.currency = null
       state.pro.product = null
       actions.clearAssets()
@@ -126,14 +131,21 @@ export const actions = {
   },
   async updateSession () {
     let res = await service.getUserInfo()
-    if (res.code < 0) {
+    if (res.code) {
       // 重试一次
       res = await service.getUserInfo()
     }
-    if (res.code >= 0) {
+    if (!res.code) {
       actions.setUserInfo(res.code ? null : res.data)
+      await this.updateToken()
     }
     return res.code
+  },
+  async updateToken () {
+    let tRes = await service.getUserToken()
+    if (!tRes.code && tRes.data.token) {
+      actions.setToken(tRes.data.token)
+    }
   },
   resetStatus () {
     // 重置 userStatus，进入下一个路由会强制更新 session
