@@ -55,7 +55,7 @@
                           <p class="btc-price">{{ openingPriceGroups4Btc.ok_close_price }}</p>
                         </div>
                         <div class="trading-office-box">
-                          <p class="office-name">OKEx</p>
+                          <p class="office-name">Huobi</p>
                           <p class="btc-price bb1 ">{{ openingPriceGroups4Btc.huobi_open_price }}</p>
                           <p class="btc-price">{{ openingPriceGroups4Btc.huobi_close_price }}</p>
                         </div>
@@ -152,17 +152,20 @@
                 class="pr-12"/> {{ $t('activity_lottery_last_champion') }} </div>
             </div>
             <div class="box__content mt-17 f12">
-              <div class="last-champion__info border-bottom-1">
+              <div
+                class="last-champion__info border-bottom-1"
+                v-for="(jackpot, index) in lastBetData.jackpots"
+                :key="index">
                 <div class="uid flex-column">
-                  <p class="f14 mb-10">63617673</p>
+                  <p class="f14 mb-10">{{ jackpot.uid }}</p>
                   <p class="c-999">{{ $t('activity_lottery_champion_uid') }} </p>
                 </div>
                 <div class="reward_num flex-column">
-                  <p class="f14 c-b18 mb-10">63617673</p>
+                  <p class="f14 c-b18 mb-10">{{ jackpot.bet }}</p>
                   <p class="c-999">{{ $t('activity_lottery_reward_amount') }} </p>
                 </div>
                 <div class="votes_num flex-column">
-                  <p class="f14 mb-10">63617673IX</p>
+                  <p class="f14 mb-10">{{ jackpot.ix }}IX</p>
                   <p class="c-999">{{ $t('activity_lottery_vote_amount') }} </p>
                 </div>
               </div>
