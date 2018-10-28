@@ -252,10 +252,10 @@
               v-for="(item,index) in history"
               :key="index">
               <span class="table__td game_id">{{ item.game_id }}{{ $t('activity_lottery_serial') }}</span>
-              <span class="table__td amount">{{ item.open_price | round(0) | thousand }} IX</span>
-              <span class="table__td win">{{ item.close_price | round(2) | thousand }} IX</span>
+              <span class="table__td amount">{{ item.open_price | round(0) | thousand }}</span>
+              <span class="table__td win">{{ item.close_price | round(2) | thousand }}</span>
               <!-- <span class="table__td dir"><status-lable :item="item"/></span> -->
-              <!-- <span class="table__td win">{{ item.win_amount | round(2) | thousand }} IX</span> -->
+              <!-- <span class="table__td win">{{ item.win_amount | round(2) | thousand }} USDT</span> -->
               <span class="table__td result align-right">{{ $t('activity_result_'+item.result) }}</span>
             </div>
           </div>
