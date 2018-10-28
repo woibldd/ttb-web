@@ -9,7 +9,7 @@
             <div class="title-tile"> <icon
               name="lottery-quiz"
               class="pr-12"/> {{ $t('activity_lottery_quiz') }}</div>
-            <div class="text"> {{ $t('activity_lottery_last_bonus') }} {{ lastBetData.pool }} IX</div>
+            <div class="text"> {{ $t('activity_lottery_last_bonus') }} {{ lastBetData.pool | round(2) | thousand }} IX</div>
           </div>
           <div class="box__content pb-29 mt-17">
             <div class="quiz-current-info pl-20 pr-14">
@@ -83,7 +83,7 @@
               <div class="quiz-operation-wrapper">
                 <div class="operate-table-head c-999 f14">
                   <div class="head-item">{{ $t('activity_lottery_betting_rise') }}</div>
-                  <div class="head-item">{{ $t('activity_lottery_win_rate') }}</div>
+                  <div class="head-item">{{ $t('activity_lottery_win_rate') }}%</div>
                   <div class="head-item">{{ $t('activity_lottery_self_vote') }}</div>
                 </div>
                 <div class="quiz-choice-strip f14">
@@ -160,23 +160,24 @@
                 v-if="index===0"
                 :key="index">
                 <div class="uid flex-column">
-                  <p class="f14 mb-10">{{ jackpot.uid || '--' }}</p>
+                  <p class="f14 mb-10">{{ getEncodeContent(jackpot.uid) }}</p>
                   <p class="c-999">{{ $t('activity_lottery_champion_uid') }} </p>
                 </div>
                 <div class="reward_num flex-column">
-                  <p class="f14 c-b18 mb-10">{{ jackpot.bet || '--' }}</p>
+                  <p class="f14 c-b18 mb-10">{{ jackpot.bet }}</p>
                   <p class="c-999">{{ $t('activity_lottery_reward_amount') }} </p>
                 </div>
                 <div class="votes_num flex-column align-right">
-                  <p class="f14 mb-10">{{ jackpot.ix ? jackpot.ix + 'IX' : '--' }}</p>
+                  <p class="f14 mb-10">{{ jackpot.ix }}</p>
                   <p class="c-999">{{ $t('activity_lottery_vote_amount') }} </p>
                 </div>
               </div>
               <div class="last-champion__info">
                 <div class="uid flex-column">
                   <p class="f14 mb-10"/>
-                  <!-- 伯乐不显示uid -->
-                  <p class="c-999"/>
+                  <p class="c-999">
+                    {{ $t('activity_lottery_bole') }}
+                  </p>
                 </div>
                 <div class="reward_num flex-column">
                   <p class="f14 c-b18 mb-10">{{ lastBetData.invite_ix || '--' }}</p>
@@ -221,8 +222,8 @@
                       :class="{'active': index === 0 }">{{ index + 1 }}</p>
                   </div>
                   <div
-                    class="table__td">{{ item.uid }}</div>
-                  <div class="table__td align-right"> {{ item.ix }} IX</div>
+                    class="table__td">{{ getEncodeContent(item.user_id) }}</div>
+                  <div class="table__td align-right"> {{ item.amount }} IX</div>
                 </div>
               </div>
             </div>
@@ -569,8 +570,8 @@ export default {
                 betRank.push(current.bet_rank[i])
               } else {
                 betRank.push({
-                  uid: '--',
-                  ix: '--'
+                  user_id: '--',
+                  amount: '--'
                 })
               }
             }
@@ -606,7 +607,15 @@ export default {
     fetchLastBet () {
       service.getGuessLast().then(resp => {
         if (!resp.code) {
-          this.lastBetData = resp.data
+          let last = resp.data
+          if (!last.jackpots.length) {
+            last.jackpots = [{
+              uid: '--',
+              bet: '--',
+              ix: '--'
+            }]
+          }
+          this.lastBetData = last
         }
       })
     },
@@ -616,6 +625,9 @@ export default {
         this.fetchMyHistory()
       }
       await Promise.all([this.fetchCurrent(), this.fetchHistory()])
+    },
+    getEncodeContent (content) {
+      return utils.publicDesensitization(content)[0]
     }
   },
   async created () {
