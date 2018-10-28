@@ -667,7 +667,7 @@
   "has_no_send": "Not Distribute",
   "has_done": "Issue",
   "keep_ix_reward_yesterday": "(Yesterday) Trading fees distribution (IX Holders) :",
-  "keep_million_ix_reward_yesterday": "504000.37 IX (1BTC equivalent):",
+  "keep_million_ix_reward_yesterday": "%{ix} IX (1BTC equivalent):",
   "ix_second_trading_amount": "IX released (Secondary market):",
   "ix_lock_amount": "IX (Locked Position) :",
   "ix_trading_amout": "Total IX Circulation (Secondary market):",
