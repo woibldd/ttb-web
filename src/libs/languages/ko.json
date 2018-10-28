@@ -595,7 +595,7 @@
   "activity_rank_mine_competition": "挖矿大赛",
   "activity_time": "활동시간:",
   "activity_explaination_ix": "이 활동의 최종해결권은 ix.com이 가지고 있습니다.",
-  "activity_rank_time_detail": "2018년10월 28일00:00-2018년 11월 3일 24:00",
+  "activity_rank_time_detail": "{start_y}년 {start_m}월 {start_d}일00:00 - {end_y}년 {end_m}월 {end_d}일 24:00",
   "activity_rank_reward_pay_time": "보상을 분배하는 시간:활동이 끝난 3일내",
   "activity_rank_only_people":"순위20에 드는 사용자만 나타난다",
   "activity_rank_reward_rules_a": "1.활동시간:“채굴대회”기간은 7일 최초시간 2018년10월21일 00:00-2018년 10월 27일 24:00 ",

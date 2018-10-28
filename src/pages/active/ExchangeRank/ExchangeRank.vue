@@ -9,7 +9,17 @@
           </div>
           <div class="info-time">
             <span class="time-label">{{ $t('activity_time') }}</span><!--
-            --><span class="date">{{ $t('activity_rank_time_detail') }}</span>
+            --><span class="date">
+                {{ $t('activity_rank_time_detail', {
+                    start_y: activityTime.start.y,
+                    start_m: activityTime.start.m,
+                    start_d: activityTime.start.d,
+                    end_y: activityTime.end.y,
+                    end_m: activityTime.end.m,
+                    end_d: activityTime.end.d,
+                    })
+                }}
+                </span>
           </div>
         </div>
       </div>
@@ -24,8 +34,7 @@
             </div>
             <div
               class="reward-recent"
-              v-if="recentList && recentList.length"
-            >
+              v-if="recentList && recentList.length">
               <div
                 class="scrollTop"
                 ref="marque"
@@ -181,7 +190,10 @@ export default {
       return false
     },
     activityTime () {
-      return '2018年10月21日00:00-2018年10月27日24:00'
+      return {
+        start: this.parseTime(this.total.start_time),
+        end: this.parseTime(this.total.end_time)
+      }
     },
     hasMine () {
       return !isEmpty(this.myInfo)
@@ -233,6 +245,13 @@ export default {
         }
         area.style.transform = 'translateY(-' + offset + 'px)'
       }, 5e3)
+    },
+    parseTime (time) {
+      time = new Date(time)
+      let y = time.getFullYear()
+      let m = time.getMonth()
+      let d = time.getDate()
+      return {y, m, d}
     }
   },
   async created () {
