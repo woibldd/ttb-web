@@ -155,17 +155,18 @@
               <div
                 class="last-champion__info border-bottom-1"
                 v-for="(jackpot, index) in lastBetData.jackpots"
+                v-if="index===0"
                 :key="index">
                 <div class="uid flex-column">
-                  <p class="f14 mb-10">{{ jackpot.uid }}</p>
+                  <p class="f14 mb-10">{{ jackpot.uid || '--' }}</p>
                   <p class="c-999">{{ $t('activity_lottery_champion_uid') }} </p>
                 </div>
                 <div class="reward_num flex-column">
-                  <p class="f14 c-b18 mb-10">{{ jackpot.bet }}</p>
+                  <p class="f14 c-b18 mb-10">{{ jackpot.bet || '--' }}</p>
                   <p class="c-999">{{ $t('activity_lottery_reward_amount') }} </p>
                 </div>
-                <div class="votes_num flex-column">
-                  <p class="f14 mb-10">{{ jackpot.ix }}IX</p>
+                <div class="votes_num flex-column align-right">
+                  <p class="f14 mb-10">{{ jackpot.ix ? jackpot.ix + 'IX' : '--' }}</p>
                   <p class="c-999">{{ $t('activity_lottery_vote_amount') }} </p>
                 </div>
               </div>
@@ -176,11 +177,11 @@
                   <p class="c-999">{{ $t('activity_lottery_bole') }} </p>
                 </div>
                 <div class="reward_num flex-column">
-                  <p class="f14 c-b18 mb-10">{{ lastBetData.invite_ix }}</p>
+                  <p class="f14 c-b18 mb-10">{{ lastBetData.invite_ix || '--' }}</p>
                   <p class="c-999">{{ $t('activity_lottery_reward_amount') }} </p>
                 </div>
-                <div class="votes_num flex-column">
-                  <p class="f14 mb-10">{{ lastBetData.invite_bet_ix }}</p>
+                <div class="votes_num flex-column align-right">
+                  <p class="f14 mb-10">{{ lastBetData.invite_bet_ix || '--' }}</p>
                   <p class="c-999">{{ $t('activity_lottery_vote_amount') }} </p>
                 </div>
               </div>
