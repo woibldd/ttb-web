@@ -177,7 +177,10 @@ export default {
       showDialog: false,
       myInfo: {},
       recentList: [],
-      total: {},
+      total: {
+        start_time: new Date().getTime(),
+        end_time: new Date().getTime()
+      },
       timer: 0,
       time2: 0
     }
@@ -247,10 +250,14 @@ export default {
       }, 5e3)
     },
     parseTime (time) {
-      time = new Date(time)
-      let y = time.getFullYear()
-      let m = time.getMonth()
-      let d = time.getDate()
+      if (time) {
+        time = new Date(time)
+      } else {
+        time = new Date()
+      }
+      let y = time.getFullYear().toString().padStart(2, '0')
+      let m = (time.getMonth() + 1).toString().padStart(2, '0')
+      let d = time.getDate().toString().padStart(2, '0')
       return {y, m, d}
     }
   },

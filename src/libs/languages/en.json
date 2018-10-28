@@ -775,7 +775,7 @@
   "activity_lottery_rules": "rules and regulation:",
   "activity_lottery_count_down": "current quiz countdown:",
   "activity_lottery_warm_tips": "reminder",
-  "activity_lottery_warm_content": "Numbers commodity is the latest investment product and the fluctuation can be huge. Please judge your investment ability rationally and carefully before making any decisions. Hope you have a pleasant investment!",
+  "activity_lottery_warm_content": "Before participating in the quiz, please make a proper assessment of your financial situation. This will help you understand and bear the consequences of any loss of assets that may result from various risks.",
   "activity_lottery_rules_a": "1.Participants will cast their votes in the form of IX to predict price changes in BTC/USDT trading currencies in a certain week. The winner with the accurate prediction will stand to have his votes full returned plus getting 90% of the those votes that were incorrect.If there is no correct guess in that week, then the votes will be returned.",
   "activity_lottery_rules_b": "2.The quiz is divided into three categories: “rising, remaining status quo, and falling” which respectively mean: the closing price is higher than the opening price in the week; the price is the same as before; the closing price is lower than the opening price.",
   "activity_lottery_rules_c": "3.The BTC/USDT price is calculated based on the opening price and closing price of each of the five exchanges of Bitfinex, Binance, Huobi, IX and Okex. Then the highest price and the lowest price data are removed. The remaining three price data are then averaged and the whole number  and rounded to the nearest integer. For example: 6665.58 is rounded to 6657; 6654.45 to 6654.",

@@ -70,7 +70,7 @@
     .mine-ix-box {
         .unit {
           color: $primary;
-          margin-left: 5px;
+          margin-left: 0px;
         }
         .text {
           color: #cbe6fd;
@@ -153,8 +153,9 @@
             font-size: 30px;
             margin-bottom: 17px;
             color: #C9A96E;
+            white-space: nowrap;
             span{
-            font-size: 20px;
+              font-size: 20px;
             }
         }
         .cm-bst{
@@ -166,6 +167,7 @@
             line-height: 18px;
             margin-bottom: 16px;
             margin-top: 16px;
+            white-space: nowrap;
         }
     }
 }

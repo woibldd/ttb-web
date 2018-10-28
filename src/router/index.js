@@ -160,7 +160,7 @@ let router = new Router({
           component: ExchangeRank
         },
         {
-          path: 'lottery',
+          path: 'livermore',
           name: 'lottery',
           component: Lottery}
       ]
