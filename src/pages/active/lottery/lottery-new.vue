@@ -97,7 +97,7 @@
                 </div>
                 <div class="quiz-choice-strip f14">
                   <div class="strip__item quiz__note flat">{{ $t('activity_lottery_flat') }}</div>
-                  <div class="strip__item flat">{{ current.bet2_amount }} IX</div>
+                  <div class="strip__item flat">{{ current.bet2_amount | round(0) | thousand }} IX</div>
                   <div class="strip__item">{{ current.bet2Rate }}%</div>
                   <div class="strip__item">{{ current.mybet_2 || '--' }}</div>
                   <div
@@ -106,7 +106,7 @@
                 </div>
                 <div class="quiz-choice-strip f14">
                   <div class="strip__item quiz__note fall">{{ $t('activity_lottery_fall') }}</div>
-                  <div class="strip__item fall">{{ current.bet3_amount }} IX</div>
+                  <div class="strip__item fall">{{ current.bet3_amount | round(0) | thousand }} IX</div>
                   <div class="strip__item">{{ current.bet3Rate }}%</div>
                   <div class="strip__item">{{ current.mybet_3 || '--' }}</div>
                   <div
@@ -160,15 +160,15 @@
                 v-if="index===0"
                 :key="index">
                 <div class="uid flex-column">
-                  <p class="f14 mb-10">{{ getEncodeContent(jackpot.uid) }}</p>
+                  <p class="f14 mb-10">{{ getEncodeContent(jackpot.user_id) }}</p>
                   <p class="c-999">{{ $t('activity_lottery_champion_uid') }} </p>
                 </div>
                 <div class="reward_num flex-column">
-                  <p class="f14 c-b18 mb-10">{{ jackpot.bet }}</p>
+                  <p class="f14 c-b18 mb-10">{{ jackpot.ix }}</p>
                   <p class="c-999">{{ $t('activity_lottery_reward_amount') }} </p>
                 </div>
                 <div class="votes_num flex-column align-right">
-                  <p class="f14 mb-10">{{ jackpot.ix }}</p>
+                  <p class="f14 mb-10">{{ jackpot.bet }}</p>
                   <p class="c-999">{{ $t('activity_lottery_vote_amount') }} </p>
                 </div>
               </div>
@@ -550,13 +550,17 @@ export default {
               bet2Rate = this.$big(current.bet2_amount).div(total).times(100).round(2).toString()
               bet3Rate = this.$big(current.bet3_amount).div(total).times(100).round(2).toString()
             }
-
             if (this.myHistory.length) {
               // 绑定个人投票记录， 前提现获取到个人
               let matchedMine = this.myHistory.filter(h => h.game_id === current.game_id)
               if (matchedMine.length) {
+                // 多条记录累加
                 matchedMine.forEach(m => {
-                  current['mybet_' + m.type] = m.amount
+                  if (current['mybet_' + m.type]) {
+                    current['mybet_' + m.type] = this.$big(current['mybet_' + m.type]).plus(m.amount).round(0).toString()
+                  } else {
+                    current['mybet_' + m.type] = m.amount
+                  }
                 })
               }
             }
@@ -565,6 +569,7 @@ export default {
               current.bet_rank = []
             }
             let betRank = []
+            // 填充排名数据
             for (let i = 0; i < 3; i++) {
               if (current.bet_rank[i]) {
                 betRank.push(current.bet_rank[i])
@@ -610,7 +615,7 @@ export default {
           let last = resp.data
           if (!last.jackpots.length) {
             last.jackpots = [{
-              uid: '--',
+              user_id: '--',
               bet: '--',
               ix: '--'
             }]
@@ -622,9 +627,13 @@ export default {
     async fetch () {
       if (this.isLogin) {
         this.fetchMyBalance()
-        this.fetchMyHistory()
+        await this.fetchMyHistory()
       }
-      await Promise.all([this.fetchCurrent(), this.fetchHistory()])
+
+      /**
+       * 当前期数据、历史数据、上一期数据、价格数据
+       */
+      await Promise.all([this.fetchCurrent(), this.fetchHistory(), this.fetchLastBet(), this.getAllPlatformBtcPrice()])
     },
     getEncodeContent (content) {
       return utils.publicDesensitization(content)[0]
@@ -633,17 +642,17 @@ export default {
   async created () {
     await actions.updateSession()
 
-    this.fetchLastBet()
-    this.getAllPlatformBtcPrice()
-
-    this.timer = setInterval(() => {
-      this.countdownGameOver()
-      // this.countdownBetOver()
-    }, 1000)
     this.fetch()
+
+    // 1分钟读一次结果
     this.loopTimer = setInterval(() => {
       this.fetch()
-    }, 30e3)
+    }, 60e3)
+
+    // 活动倒计时
+    this.timer = setInterval(() => {
+      this.countdownGameOver()
+    }, 1000)
   }
 }
 </script>

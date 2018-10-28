@@ -90,32 +90,32 @@ export const list = [
     url: /game\/bet\/me/,
     res () {
       return ok([{
-        game_id: '20181028002',
+        game_id: '2018102820',
         result: 0, // result 0未开奖 1涨 2平 3跌
         type: 1,
         amount: rand(2),
         bet_time: new Date().getTime(),
         win_amount: rand(2)
       }, {
-        game_id: '20181024001',
+        game_id: '2018102820',
         result: 1, // result 0未开奖 1涨 2平 3跌
         bet_time: new Date().getTime(),
         type: 2,
-        amoutn: rand(2),
+        amount: rand(2),
         win_amount: rand(2)
       }, {
-        game_id: '20181024000',
+        game_id: '2018102820',
         result: 2, // result 0未开奖 1涨 2平 3跌
         bet_time: new Date().getTime(),
         type: 3,
-        amoutn: rand(2),
+        amount: rand(2),
         win_amount: rand(2)
       }, {
-        game_id: '20181024004',
+        game_id: '2018102820',
         result: 3, // result 0未开奖 1涨 2平 3跌
         bet_time: new Date().getTime(),
-        type: 2,
-        amoutn: rand(2),
+        type: 1,
+        amount: rand(2),
         win_amount: rand(2)
       }])
     }

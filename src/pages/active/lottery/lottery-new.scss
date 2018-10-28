@@ -138,12 +138,13 @@ $color-bids-fall: #FF1E1D;
                     line-height: 36px;
                     margin-bottom: 22px;
                     position: relative;
+                    overflow: hidden;
 
                     .proportion {
                         width: 50%;
                         height: 100%;
                         position: absolute;
-                        opacity: 0.04;
+                        opacity: 0.06;
                         left: 82px;
                         &.up {
                             background-color: #20BFA7;
