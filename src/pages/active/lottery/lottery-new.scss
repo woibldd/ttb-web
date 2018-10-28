@@ -23,6 +23,10 @@ $color-bids-fall: #FF1E1D;
     color: white;
     padding-bottom: 72px;
 
+    .align-right {
+        text-align: right !important;
+    }
+
     .banner {
         height: 348px;
         width: 100%;
@@ -343,9 +347,6 @@ $color-bids-fall: #FF1E1D;
 
             .table__th, .table__td{
                 flex: 1;
-            }
-            .align-right {
-                text-align: right;
             }
             .circle {
                 width:25px;
