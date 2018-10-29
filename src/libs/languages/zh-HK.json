@@ -635,12 +635,13 @@
   "activity_lottery_guess_rise": "猜漲",
   "activity_lottery_guess_fall": "猜跌",
   "activity_lottery_guess_flat": "猜平",
-  "activity_lottery_last_champion": "上期冠軍名單",
-  "activity_lottery_champion_uid": "冠軍獎用戶(uid)",
-  "activity_lottery_bole": "伯樂獎",
-  "activity_lottery_reward_amount": "獲獎數量",
-  "activity_lottery_vote_amount": "投票票數",
-  "activity_lottery_current_rank": "本期排行榜",
+  "activity_lottery_last_champion": "上期獲獎名單",
+  "activity_lottery_champion_uid": "票王用戶（UID）",
+  "activity_lottery_bole": "邀請伯樂獎",
+  "activity_lottery_reward_amount": "獲獎IX數量",
+  "activity_lottery_vote_amount": "票王投票票數",
+  "activity_lottery_self_vote_amount": "個人投票票數（IX）",
+  "activity_lottery_current_rank": "本期票王排行榜",
   "activity_lottery_position": "名次",
   "activity_lottery_vote_history": "投票記錄",
   "activity_lottery_issue_no": "期號",
@@ -670,6 +671,6 @@
   "activity_result_2": "平贏",
   "activity_result_3": "跌贏",
   "activity_lottery_timeout": "本期競猜投注時間已到，請下期繼續",
-  "activity_lottery_reward_history": "開獎記錄"
-
+  "activity_lottery_reward_history": "開獎記錄",
+  "activity_lottery_stop_quiz": "停止競猜，坐等開獎"
 }

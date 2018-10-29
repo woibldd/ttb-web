@@ -759,12 +759,13 @@
   "activity_lottery_guess_rise": "guess of rise",
   "activity_lottery_guess_fall": "guess of fall",
   "activity_lottery_guess_flat": "guess of draw",
-  "activity_lottery_last_champion": "last winners",
-  "activity_lottery_champion_uid": "champion winner’s username(uid)",
-  "activity_lottery_bole": "premium prize winners’ username(uid)",
-  "activity_lottery_reward_amount": "total winners",
-  "activity_lottery_vote_amount": "total votes",
-  "activity_lottery_current_rank": "current ranking",
+  "activity_lottery_last_champion": "Prize winners of previous week’s contest",
+  "activity_lottery_champion_uid": "Supreme user accounts (UID)",
+  "activity_lottery_bole": "Attracting those in consolation award category",
+  "activity_lottery_reward_amount": "Number of awards in IX",
+  "activity_lottery_vote_amount": "Voters in the supreme account",
+  "activity_lottery_self_vote_amount": "Individual votes (IX)",
+  "activity_lottery_current_rank": "This week’s winning list of account holders",
   "activity_lottery_position": "rank",
   "activity_lottery_vote_history": "total votes",
   "activity_lottery_issue_no": "draw no.",
@@ -794,5 +795,7 @@
   "activity_result_2":"Winning Flat",
   "activity_result_3":"Winning Fall",
   "activity_lottery_timeout": "Voting time is over for the current draw, please join us again next time",
-  "activity_lottery_reward_history": "past results"
+  "activity_lottery_reward_history": "past results",
+  "activity_lottery_stop_quiz": "Ending of quiz; awaiting prize announcement"
+
 }

@@ -128,7 +128,18 @@
                   class="input"
                   :placeholder="$t('activity_lottery_limit_vote_fifty')">
               </div>
-              <div class="quiz-btns pointer">
+              <!-- 已停止投注 -->
+              <div
+                class="quiz-btns pointer"
+                v-if="betTimeout">
+                <div class="quiz__btn-stop">
+                  {{ $t('activity_lottery_stop_quiz') }}
+                </div>
+              </div>
+              <!-- 可以投注 -->
+              <div
+                class="quiz-btns pointer"
+                v-if="!betTimeout">
                 <div
                   class="quiz__btn up"
                   @click.prevent="bet('rise')"
@@ -142,6 +153,7 @@
                   @click.prevent="bet('fall')"
                   :class="{disabled: disabled}">{{ $t('activity_lottery_guess_fall') }}</div>
               </div>
+
             </div>
           </div>
         </div>
