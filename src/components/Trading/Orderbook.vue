@@ -231,7 +231,7 @@ export default {
       return ''
     },
     bookHeight () {
-      return this.panelHeight - this.navHeight - this.theadHeight
+      return this.panelHeight - this.navHeight - this.theadHeight - 4
     },
     sideHeight () {
       return this.itemHeight * Math.floor((this.bookHeight - this.splitHeight) / 2 / this.itemHeight)
@@ -314,8 +314,8 @@ export default {
 
       let buyTotal = this.$big(0)
       let sellTotal = this.$big(0)
-      let maxBuyTotal = _.maxBy(this.buy, i => parseFloat(i[1]))[1]
-      let maxSellTotal = _.maxBy(this.sell, i => parseFloat(i[1]))[1]
+      let maxBuyTotal = _.maxBy(this.buy.slice(0, 10), i => parseFloat(i[1]))[1]
+      let maxSellTotal = _.maxBy(this.sell.slice(0, 10), i => parseFloat(i[1]))[1]
       this.buy.forEach((buy) => {
         const amount = this.$big(buy[1])
         buyTotal = buyTotal.plus(amount)
@@ -428,6 +428,7 @@ export default {
     padding-top: 4px;
     position: absolute;
     right: -18px;
+    z-index: 9;
 }
 .depth-options {
     box-sizing: border-box;

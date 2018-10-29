@@ -571,6 +571,7 @@ tbody tr:nth-child(odd) {
   color: white;
 }
 .ix-panel-body {
+  height: 100%;
   overflow-y: auto;
   overflow-scrolling: touch;
   -webkit-overflow-scrolling: touch;

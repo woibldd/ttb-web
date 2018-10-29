@@ -93,16 +93,16 @@ export default {
         })
         let indicators = [
           {
-            name: 'MACD',
-            args: [14, 30, 'close', 9]
+            name: 'MACD'
+            // args: [14, 30, 'close', 9]
           }, {
-            name: 'KDJ',
-            fullname: 'Stochastic',
-            args: [10]
+            name: 'StochRSI',
+            fullname: 'Stochastic RSI'
+            // args: [10]
           }, {
             name: 'BOLL',
-            fullname: 'Bollinger Bands',
-            args: [20]
+            fullname: 'Bollinger Bands'
+            // args: [20]
           }]
         indicators.forEach(indicat => {
           let btn = widget.createButton().on('click', (e) => {
