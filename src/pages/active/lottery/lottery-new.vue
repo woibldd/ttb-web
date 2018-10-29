@@ -196,8 +196,8 @@
                   <p class="c-999">{{ $t('activity_lottery_reward_amount') }} </p>
                 </div>
                 <div class="votes_num flex-column align-right">
-                  <p class="f14 mb-10">{{ lastBetData.invite_bet_ix || '--' }}</p>
-                  <p class="c-999">{{ $t('activity_lottery_vote_amount') }} </p>
+                  <!-- <p class="f14 mb-10">{{ lastBetData.invite_bet_ix || '--' }}</p>
+                  <p class="c-999">{{ $t('activity_lottery_vote_amount') }} </p> -->
                 </div>
               </div>
             </div>
@@ -401,10 +401,10 @@ export default {
   },
   methods: {
     transferBetRate (rate) {
-      if (rate && !isNaN(rate)) {
-        return '1 : ' + (1 / Number(rate)).toFixed(2)
+      if (rate && !isNaN(rate) && rate !== '0') {
+        return '1:' + (1 / Number(rate)).toFixed(2)
       }
-      return '1 : 0'
+      return '1:0'
     },
     invite () {
       if (!this.isLogin) {
