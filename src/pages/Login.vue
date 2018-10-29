@@ -436,7 +436,6 @@ export default {
     async loginSuccess (userInfo) {
       actions.setUserInfo(userInfo)
       actions.resetStatus()
-      await actions.updateToken()
 
       if (typeof state.loginBack === 'string') {
         location.href = state.loginBack

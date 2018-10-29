@@ -1,17 +1,22 @@
 <template>
-  <div class="currency-input" :class="{static: isStatic}">
-    <input type="text" ref="input" class="input"
-      :disabled="disabled"
-      :readonly="readonly"
-      maxlength="32"
-      :placeholder="placeholder"
-      @keydown.up="up"
-      @keydown.down="down"
-      @input="updateValue($event.target.value, 'input')"
-      @focus="focus()"
-      @blur="fixValue();blur()">
-    <div class="currency-input label" v-if="currency"
-      :class="{long: currency.length > 5}">
+  <div class="currency-input" 
+:class="{static: isStatic}">
+    <input 
+type="text" 
+ref="input" class="input"
+           :disabled="disabled"
+           :readonly="readonly"
+           maxlength="32"
+           :placeholder="placeholder"
+           @keydown.up="up"
+           @keydown.down="down"
+           @input="updateValue($event.target.value, 'input')"
+           @focus="focus()"
+           @blur="fixValue();blur()">
+    <div 
+class="currency-input label" 
+v-if="currency"
+         :class="{long: currency.length > 5}">
       {{ currency }}
     </div>
     <!-- <div class="btn bid1" v-show="bid"
@@ -31,7 +36,7 @@
 import utils from '@/modules/utils'
 
 export default {
-  name: 'currencyInput',
+  name: 'CurrencyInput',
   props: {
     disabled: {
       default: false
@@ -152,7 +157,6 @@ export default {
         return this.updateValue('')
       }
       try {
-        console.log(this.$big(newValue).round(this.realScale), newValue, this.realScale)
         this.updateValue(this.$big(newValue).round(this.realScale) + '', 'valueChange')
       } catch (e) {
         utils.log('Invalid value changing: ', newValue)

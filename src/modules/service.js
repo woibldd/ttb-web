@@ -42,9 +42,6 @@ const service = {
     }
     return request('fa2/verify', data)
   },
-  getUserToken () {
-    return request('/user/token')
-  },
   getUserInfo () {
     return getCache('session', () => request('user/session'), 6e4)
   },

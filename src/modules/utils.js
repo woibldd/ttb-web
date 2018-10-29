@@ -75,15 +75,18 @@ const utils = {
   },
   getStorageValue (key, field) {
     if ('localStorage' in window) {
-      debugger
       let item = window.localStorage.getItem(key)
-      debugger
       if (field) {
         return JSON.parse(item)[field]
       }
       return item
     }
     return ''
+  },
+  setStorageValue (key, str) {
+    if ('localStorage' in window) {
+      window.localStorage.setItem(key, str)
+    }
   },
   getDefaultTimezone () {
     const data = window.localStorage.getItem('tradingview.chartproperties')
