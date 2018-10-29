@@ -314,13 +314,15 @@ export default {
 
       let buyTotal = this.$big(0)
       let sellTotal = this.$big(0)
-
+      let maxBuyTotal = _.maxBy(this.buy, i => parseFloat(i[1]))[1]
+      let maxSellTotal = _.maxBy(this.sell, i => parseFloat(i[1]))[1]
       this.buy.forEach((buy) => {
         const amount = this.$big(buy[1])
         buyTotal = buyTotal.plus(amount)
         bids.push({
           price: this.$big(buy[0]),
           amount: this.$big(buy[1]),
+          deep: this.$big(buy[1]).div(maxBuyTotal).times(100).round(4).toString(),
           total: buyTotal
         })
       })
@@ -330,10 +332,10 @@ export default {
         asks.unshift({
           price: this.$big(sell[0]),
           amount: this.$big(sell[1]),
+          deep: this.$big(sell[1]).div(maxSellTotal).times(100).round(4).toString(),
           total: sellTotal
         })
       })
-
       this.asks = asks
       this.bids = bids
     },

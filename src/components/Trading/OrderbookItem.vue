@@ -1,5 +1,8 @@
 <template>
-  <tr :style="{lineHeight: height}">
+  <tr
+    :style="{lineHeight: height}"
+    style="overflow:hidden"
+    class="price-stack-row">
     <td
       class="left btn"
       :class="sideColor(side)"
@@ -16,6 +19,11 @@
       @click="setAmount(item.total);setPrice(item.price)">
       {{ fixAmount(item.total) }}
     </td>
+    <td
+      @click="setAmount(item.total);setPrice(item.price)"
+      :class="sideBgColor(side)"
+      :style="{width: item.deep + '%'}"
+      class="price-stack-percent-bg"/>
   </tr>
 </template>
 
@@ -29,6 +37,9 @@ export default {
   methods: {
     sideColor (side) {
       return side.toUpperCase() === 'BUY' ? 'color-up' : 'color-down'
+    },
+    sideBgColor (side) {
+      return side.toUpperCase() === 'BUY' ? 'bgcolor-up' : 'bgcolor-down'
     },
     fixAmount (big) {
       if (!big) {
@@ -64,5 +75,14 @@ td {
 }
 td:first-child {
   padding-left: 15px;
+}
+.price-stack-percent-bg {
+    position:absolute;right:0;height:24px;z-index:0;opacity:.2;
+    cursor: pointer;
+}
+.price-stack-row {
+    position: relative;
+    display: flex;   // 不能缺少了上面的position属性哈
+    flex-direction: row;
 }
 </style>
