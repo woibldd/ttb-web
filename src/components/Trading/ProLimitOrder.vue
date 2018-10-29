@@ -3,7 +3,7 @@
     <ul
       class="ul buy-ul"
       v-if="pairInfo">
-      <li class="li-price mb-14">
+      <li class="li-price">
         <div class="label">{{ $t('price') }}</div>
         <div class="content">
           <currency-input
@@ -21,7 +21,7 @@
           </div>
         </div>
       </li>
-      <li class="li-amount mb-14">
+      <li class="li-amount mb-12">
         <div class="label">{{ $t('amount') }}</div>
         <div class="content">
           <currency-input
@@ -32,7 +32,7 @@
             :scale="pairInfo.amount_scale"/>
         </div>
       </li>
-      <li class="li-worth mb-14">
+      <li class="li-worth mb-6">
         <div class="label">{{ $t('order_value') }}</div>
         <div class="content">
           <currency-input
@@ -45,10 +45,10 @@
             :scale="pairInfo.amount_scale + pairInfo.price_scale"/>
         </div>
       </li>
-      <li class="li-volume mb-14">
+      <li class="li-volume mb-2">
         <div class="half-wrap left">
           <div class="currency-volume">
-            <div class="avbl">
+            <div class="avbl mb-2">
               <div class="avbl-label">{{ $t('avlb') }} {{ pairInfo.currency_name }}</div>:
               <div
                 class="avbl-value"
@@ -64,6 +64,7 @@
                 height="4"
                 :dot-size="14"
                 :lazy="true"
+                :value="buy_percent"
                 :min="0"
                 :max="100"
                 :piecewise-label="true"
@@ -110,7 +111,7 @@
     <ul
       class="ul sell-ul"
       v-if="pairInfo">
-      <li class="li-price mb-14">
+      <li class="li-price">
         <div class="label">{{ $t('price') }}</div>
         <div class="content">
           <currency-input
@@ -128,7 +129,7 @@
           </div>
         </div>
       </li>
-      <li class="li-amount mb-14">
+      <li class="li-amount mb-12">
         <div class="label">{{ $t('amount') }}</div>
         <div class="content">
           <currency-input
@@ -139,7 +140,7 @@
             :scale="pairInfo.amount_scale"/>
         </div>
       </li>
-      <li class="li-worth mb-14">
+      <li class="li-worth mb-6">
         <div class="label">{{ $t('order_value') }}</div>
         <div class="content">
           <currency-input
@@ -152,10 +153,10 @@
             :scale="pairInfo.amount_scale + pairInfo.price_scale"/>
         </div>
       </li>
-      <li class="li-volume mb-14">
+      <li class="li-volume mb-2">
         <div class="half-wrap right">
           <div class="product-volume">
-            <div class="avbl">
+            <div class="avbl mb-2">
               <div class="avbl-label">{{ $t('avlb') }} {{ pairInfo.product_name }}</div>:
               <div
                 class="avbl-value"
@@ -234,6 +235,8 @@ export default {
       sell_amount: '',
       sell_price: '',
       sell_worth: '',
+      buy_percent: '0',
+      sell_percent: '0',
       worthLock: false,
       input: {
         buy_amount: {
@@ -322,10 +325,10 @@ export default {
       return this.state.pro.pairInfo
     },
     currencyAvailable () {
-      return this.currency && !!this.currency.available
+      return this.currency && this.currency.available > 0
     },
     productAvailable () {
-      return this.product && !!this.product.available
+      return this.product && !!this.product.available > 0
     }
   },
   watch: {
@@ -443,6 +446,7 @@ export default {
       }
     },
     setBuyVolumn (ratio) {
+      if (!this.currency) return
       if (this.buy_price && this.buy_price !== '0') {
         this.buy_amount = this.$big(this.currency.available)
           .mul(ratio)
@@ -454,6 +458,7 @@ export default {
       }
     },
     setSellVolumn (ratio) {
+      if (!this.product) return
       this.sell_amount = this.$big(this.product.available)
         .mul(ratio)
         .round(this.pairInfo.amount_scale, this.C.ROUND_DOWN)
@@ -525,36 +530,37 @@ export default {
       if (side === 'SELL' && $bid.gt(0) && $price.div(0.7).lt($bid)) {
         return utils.alert(this.$i18n.t('price_low', {per: 30}))
       }
-      //   if ($bid.gt(0) && $ask.gt(0) && $bid.mul(1.05).lt($ask) &&
+      // if ($bid.gt(0) && $ask.gt(0) && $bid.mul(1.05).lt($ask) &&
       //     ((side === 'SELL' && $price.lte($bid)) || (side === 'BUY' && $price.gte($ask)))) {
-      //     // 盘口差价较大，且下单价超过盘口
-      //     const ok = await utils.confirm({
-      //       trade: true,
-      //       content: this.$i18n.t('spread_too_big', {per: 5}),
-      //       title: this.$i18n.t('confirm_your_order')
-      //     })
-      //     if (!ok) {
-      //       return false
-      //     }
-      //   } else if (side === 'BUY' && $ask.gt(0) && $price.div(1.05).gt($ask)) {
-      //     const ok = await utils.confirm({
-      //       trade: true,
-      //       content: this.$i18n.t('price_little_high', {per: 5}),
-      //       title: this.$i18n.t('confirm_your_order')
-      //     })
-      //     if (!ok) {
-      //       return false
-      //     }
-      //   } else if (side === 'SELL' && $bid.gt(0) && $price.div(0.95).lt($bid)) {
-      //     const ok = await utils.confirm({
-      //       trade: true,
-      //       content: this.$i18n.t('price_little_low', {per: 5}),
-      //       title: this.$i18n.t('confirm_your_order')
-      //     })
-      //     if (!ok) {
-      //       return false
-      //     }
+      //   // 盘口差价较大，且下单价超过盘口
+      //   const ok = await utils.confirm(this, {
+      //     trade: true,
+      //     content: this.$i18n.t('spread_too_big', {per: 5}),
+      //     title: this.$i18n.t('confirm_your_order')
+      //   })
+      //   if (!ok) {
+      //     return false
       //   }
+      // } else
+      if (side === 'BUY' && $ask.gt(0) && $price.div(1.05).gt($ask)) {
+        const ok = await utils.confirm(this, {
+          trade: true,
+          content: this.$i18n.t('price_little_high', {per: 5}),
+          title: this.$i18n.t('confirm_your_order')
+        })
+        if (!ok) {
+          return false
+        }
+      } else if (side === 'SELL' && $bid.gt(0) && $price.div(0.95).lt($bid)) {
+        const ok = await utils.confirm(this, {
+          trade: true,
+          content: this.$i18n.t('price_little_low', {per: 5}),
+          title: this.$i18n.t('confirm_your_order')
+        })
+        if (!ok) {
+          return false
+        }
+      }
       this.submitting = side
       const order = {
         type: 1,
@@ -629,7 +635,7 @@ export default {
   }
   .content {
     position: relative;
-    width: 86%;
+    width: 84%;
     float: left;
     box-sizing: border-box;
     .estimate {
@@ -642,11 +648,10 @@ export default {
 .li-amount,
 .li-price,
 .li-worth {
-  margin-bottom: 9px;
   .label {
     line-height: 32px;
     color: #A5B4C5;
-    width: 14%;
+    width: 16%;
   }
 }
 .li-volume {
@@ -680,8 +685,8 @@ export default {
   color: white;
   text-align: right;
   font-size: 12px;
-  line-height: 17px;
-  height: 34px;
+  line-height: 16px;
+  height: 16px;
   .avbl-label {
     line-height: 17px;
     height: 17px;
@@ -734,8 +739,8 @@ export default {
   }
 }
 .ix-slider {
-  padding: 7px 0px;
-  margin-right: 20px;
+  padding: 0;
+  margin-right: 30px;
   position: relative;
   box-sizing: border-box;
   @include clearfix();
@@ -754,8 +759,9 @@ export default {
 }
 .custom-tooltip {
   position: absolute;
-  bottom: -44px;
+  bottom: -38px;
   left: -7px;
+  font-size: 10px;
   color: #A5B4C5;
 }
 .custom-label.active {

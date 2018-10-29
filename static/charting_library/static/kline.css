@@ -259,6 +259,15 @@ body {
   border-left: solid 1px hsla(0, 0%, 100%, 0.05);
   /* border-left: solid 1px var(--primary-1); */
 }
+.header-chart-panel .space-single:not(:first-child) .button:hover {
+  color: #C9A96C;
+  opacity: 0.8;
+}
+.header-chart-panel .space-single:not(:first-child) .button.selected {
+  color: #C9A96C;
+  font-weight: bold;
+  opacity: 1;
+}
 .header-chart-panel-content {
   box-shadow: hsla(218, 26%, 86%, 0.25) 0 -1px 0 inset;
   /* box-shadow: var(--primary-2) 0 -1px 0 inset; */

@@ -2,22 +2,31 @@
   <div class="ix-panel">
     <div class="ix-header">
       <orderbook-nav :height="navHeight" />
-      <!-- <div class="pull-right">
+      <!-- 深度选择 -->
+      <div
+        class="depth-group-display relative pointer pull-right"
+        @mouseover="showDepthOption = true"
+        @click.prevent.stop="toggleSetting"
+        @mouseout="showDepthOption = false">
         <span
-          v-show="offset || accuracy !== 1"
-          class="group-display ibt"
-          v-tooltip="clearTip"
-          @click="clearSetting">
-          {{ curGroup }} <span class="has-underline">{{ $t('orderbook_group') }}</span>
+          class="ibt depth">
+          <span class="dib mr-5">{{ $t('orderbook_depth_group') }}</span>{{ currentDepth }} <icon
+            name="arrow-down-yellow"
+            :class="[showDepthOption && 'up']"
+            class="arrow-down-yellow"/>
         </span>
-        <div class="header-icons ibt">
-          <a
-            @click.prevent.stop="toggleSetting"
-            class="header-btn btn">
-            <icon name="setting"/>
-          </a>
+        <div
+          class="depth-options-wrapper"
+          v-show="showDepthOption">
+          <div class="depth-options">
+            <div
+              v-for="(dp, index) in depthGroup"
+              @click="changeDepth(dp)"
+              :key="index"
+              class="depth__row">{{ dp.offset }}</div>
+          </div>
         </div>
-      </div> -->
+      </div>
     </div>
     <div
       class="ix-panel-thead"
@@ -87,22 +96,6 @@
       <!--<div class="no-data" v-show="!err && !orderbookList.length">{{ $t('orderbook_empty') }}</div>-->
       <!--<div class="err" v-show="err">{{ err }}</div>-->
     </div>
-    <!-- <div
-      class="setting-panel"
-      :class="{show: panelShow}"
-      @click.stop>
-      <div class="setting-panel-header">{{ $t('orderbook_options') }}</div>
-      <div class="group-title">{{ $t('orderbook_group') }}</div>
-      <div class="group-wrap">
-        <span class="group-value">{{ curGroup }}</span>
-        <span
-          class="minus bgcolor-down"
-          @click="minus"/>
-        <span
-          class="plus bgcolor-up"
-          @click="plus"/>
-      </div>
-    </div> -->
     <div
       class="mask"
       :class="{show: loading && !bids.length && !asks.length}">
@@ -146,7 +139,7 @@ export default {
       asks: [],
       offset: 0,
       accuracy: 1,
-      itemHeight: 24,
+      itemHeight: 20,
       navHeight: 32,
       splitHeight: 50,
       theadHeight: 30,
@@ -158,7 +151,8 @@ export default {
         content () {
           return vm.$i18n.t('click_to_clear')
         }
-      }
+      },
+      showDepthOption: false
     }
   },
   watch: {
@@ -210,6 +204,24 @@ export default {
     amountScale () {
       return _.get(this, 'state.pro.pairInfo.amount_scale', 4)
     },
+    depthGroup () {
+      const deep = 6
+      let depthArr = []
+      if (!this.state.pro.pairInfo) return []
+      let scale = this.state.pro.pairInfo.price_scale
+      for (let accuracy = scale; accuracy > scale - deep; accuracy--) {
+        let offset = Math.pow(10, -accuracy).toFixed(accuracy >= 0 ? accuracy : 0)
+        if (offset > 1) break
+        depthArr.push({
+          offset,
+          accuracy: scale - accuracy
+        })
+      }
+      return depthArr
+    },
+    currentDepth () {
+      return Math.pow(10, -this.priceScale).toFixed(this.priceScale >= 0 ? this.priceScale : 0)
+    },
     curGroup () {
       if (this.state.pro.pairInfo) {
         const scale = this.state.pro.pairInfo.price_scale
@@ -219,7 +231,7 @@ export default {
       return ''
     },
     bookHeight () {
-      return this.panelHeight - this.navHeight - this.theadHeight
+      return this.panelHeight - this.navHeight - this.theadHeight - 4
     },
     sideHeight () {
       return this.itemHeight * Math.floor((this.bookHeight - this.splitHeight) / 2 / this.itemHeight)
@@ -269,9 +281,9 @@ export default {
     }
   },
   methods: {
-    clearSetting () {
-      this.offset = 0
-      this.accuracy = 1
+    changeDepth (dp) {
+      this.offset = dp.accuracy
+      this.showDepthOption = false
       this.onGroupChange()
     },
     toggleSetting () {
@@ -302,13 +314,15 @@ export default {
 
       let buyTotal = this.$big(0)
       let sellTotal = this.$big(0)
-
+      let maxBuyTotal = _.maxBy(this.buy.slice(0, 10), i => parseFloat(i[1]))[1]
+      let maxSellTotal = _.maxBy(this.sell.slice(0, 10), i => parseFloat(i[1]))[1]
       this.buy.forEach((buy) => {
         const amount = this.$big(buy[1])
         buyTotal = buyTotal.plus(amount)
         bids.push({
           price: this.$big(buy[0]),
           amount: this.$big(buy[1]),
+          deep: this.$big(buy[1]).div(maxBuyTotal).times(100).round(4).toString(),
           total: buyTotal
         })
       })
@@ -318,40 +332,12 @@ export default {
         asks.unshift({
           price: this.$big(sell[0]),
           amount: this.$big(sell[1]),
+          deep: this.$big(sell[1]).div(maxSellTotal).times(100).round(4).toString(),
           total: sellTotal
         })
       })
-
       this.asks = asks
       this.bids = bids
-    },
-    plus () {
-      if (this.offset >= 8 || this.priceScale <= 0) {
-        return false
-      }
-      if (this.accuracy === 1) {
-        this.accuracy = 2
-      } else if (this.accuracy === 2) {
-        this.accuracy = 5
-      } else if (this.accuracy === 5) {
-        this.accuracy = 1
-        this.offset += 1
-      }
-      this.onGroupChange()
-    },
-    minus () {
-      if (this.offset === 0 && this.accuracy === 1) {
-        return false
-      }
-      if (this.accuracy === 5) {
-        this.accuracy = 2
-      } else if (this.accuracy === 2) {
-        this.accuracy = 1
-      } else if (this.accuracy === 1) {
-        this.accuracy = 5
-        this.offset -= 1
-      }
-      this.onGroupChange()
     },
     error (msg) {
       this.err = msg
@@ -425,9 +411,6 @@ export default {
 @import "../../styles/vars";
 @import "../../styles/mixins";
 
-.header-icons {
-  padding-right: 8px;
-}
 .header-btn {
   cursor: pointer;
   color: white;
@@ -439,6 +422,34 @@ export default {
   &:active {
     opacity: 1;
   }
+}
+
+.depth-options-wrapper {
+    padding-top: 4px;
+    position: absolute;
+    right: -18px;
+    z-index: 9;
+}
+.depth-options {
+    box-sizing: border-box;
+    min-width:100px;
+    background:rgba(25,45,63,1);
+    border-radius:4px;
+    padding-top: 10px;
+
+    .depth__row {
+        box-sizing: border-box;
+        padding: 0 24px;
+        height: 30px;
+        line-height: 30px;
+        width: 100%;
+        text-align: right;
+        color: #C9AA6D;
+
+        &:hover {
+            background-color: #0F1F2D;
+        }
+    }
 }
 
 .mask {
@@ -457,12 +468,34 @@ export default {
   color: white;
   font-size: 0;
 }
-.group-display {
+.depth-group-display {
   font-size: 12px;
-  margin-right: 8px;
+  margin-right: 18px;
+  width: 102px;
+  color: #C9AA6D;
+  font-size: 12px;
+  text-align: right;
+
+  .depth {
+    @include limit(1);
+  }
+}
+.arrow-down-yellow {
+    width: 12px;
+    height: 6px;
+    position: absolute;
+    top: 14px;
+    transition: all 0.2s ease-in-out;
+
+    &.up {
+        transform: rotateZ(180deg)
+    }
 }
 .has-underline {
   border-bottom: 1px dotted #788694;
+}
+.dib {
+    display: inline-block;
 }
 .ix-panel-thead {
   padding-left: 10px;
@@ -505,6 +538,9 @@ th.buy {
 th.sell {
   padding-left: 10px;
 }
+.relative {
+    position: relative;
+}
 .order-split {
   color: white;
   padding-left: 12px;
@@ -535,33 +571,9 @@ th.sell {
     }
   }
 }
-.setting-panel {
-  width: 200px;
-  padding-bottom: 20px;
-  background-color: #232D3D;
-  border: 3px outside rgba(0,0,0, .5);
-  opacity: 0;
-  visibility: hidden;
-  position: absolute;
-  z-index: 10;
-  right: 8px;
-  top: 36px;
-  transition: opacity 300ms, visibility 0s 300ms;
-  &.show {
-    transition: opacity 300ms;
-    opacity: 1;
-    visibility: visible;
-  }
-}
+
 .side-wrap {
   box-sizing: border-box;
-}
-.setting-panel-header {
-  text-align: center;
-  line-height: 28px;
-  height: 30px;
-  border-top: 2px solid $primary;
-  background-color: #303948;
 }
 .group-title {
   text-align: center;
@@ -581,53 +593,6 @@ th.sell {
     padding-right: 80px;
     text-align: right;
     line-height: 26px;
-  }
-  .minus {
-    width: 36px;
-    box-sizing: border-box;
-    border: 1px inset rgba(255,255,255, .1);
-    height: 28px;
-    position: absolute;
-    background-color: $sell;
-    right: 35px;
-    top: -1px;
-  }
-  .plus {
-    width: 36px;
-    box-sizing: border-box;
-    border: 1px inset rgba(255,255,255, .1);
-    height: 28px;
-    position: absolute;
-    background-color: $buy;
-    right: -1px;
-    top: -1px;
-  }
-  .minus, .plus {
-    &:before,
-    &:after {
-      content: ' ';
-      width: 8px;
-      height: 2px;
-      background-color: white;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      margin-left: -4px;
-      margin-top: -1px;
-    }
-  }
-  .minus {
-    &:after {
-      display: none;
-    }
-  }
-  .plus {
-    &:after {
-      height: 8px;
-      width: 2px;
-      margin-left: -1px;
-      margin-top: -4px;
-    }
   }
 }
 </style>

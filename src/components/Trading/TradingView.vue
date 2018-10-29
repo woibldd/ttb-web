@@ -16,7 +16,6 @@ import datafeeder from '@/libs/tradingview/datafeeder'
 import {local, state} from '@/modules/store'
 // preload
 const tvlib = utils.getExtModule('TradingView')
-
 export default {
   name: 'TradingView',
   data () {
@@ -25,7 +24,9 @@ export default {
       local,
       widget: null,
       layoutOk: false,
-      tvReady: false
+      tvReady: false,
+      entryId: '',
+      hasIndicator: false
     }
   },
   methods: {
@@ -70,31 +71,74 @@ export default {
         if (vm._isDestroyed) {
           return false
         }
+        let widget = vm.widget
         vm.tvReady = true
         vm.$emit('chartReady')
 
         // 7 日均线
-        vm.widget.chart().createStudy('Moving Average', !1, !1, [7], null, {
+        widget.chart().createStudy('Moving Average', !1, !1, [7], null, {
           'Plot.color': '#cccccc',
           'Plot.linewidth': 3,
           precision: 8
         })
         // 30 日均线
-        vm.widget.chart().createStudy('Moving Average', !1, !1, [30], null, {
+        widget.chart().createStudy('Moving Average', !1, !1, [30], null, {
           'Plot.color': '#fdc52e',
           'Plot.linewidth': 3,
           precision: 8
         })
         // MACD
-        // vm.widget.chart().createStudy('MACD', !1, !1, [30], null, {
-        //   'Plot.color': '#fdc52e',
-        //   'Plot.linewidth': 3,
-        //   precision: 8
-        // })
-        vm.widget.chart().onIntervalChanged().subscribe(null, function (interval) {
+        widget.chart().onIntervalChanged().subscribe(null, function (interval) {
           local.interval = interval
         })
-        vm.widget.chart().executeActionById('drawingToolbarAction')
+        let indicators = [
+          {
+            name: 'MACD'
+            // args: [14, 30, 'close', 9]
+          }, {
+            name: 'StochRSI',
+            fullname: 'Stochastic RSI'
+            // args: [10]
+          }, {
+            name: 'BOLL',
+            fullname: 'Bollinger Bands'
+            // args: [20]
+          }]
+        indicators.forEach(indicat => {
+          let btn = widget.createButton().on('click', (e) => {
+            let element = e.srcElement || e.target
+            let cls = element.classList
+            if (!cls.contains('selected')) {
+              if (this.hasIndicator) {
+                widget.chart().removeEntity(this.entryId)
+                element.parentElement.parentElement.querySelector('.space-single .selected').classList.remove('selected')
+              }
+              widget.chart().createStudy(indicat.fullname || indicat.name, !1, !1, indicat.args, (entryId) => {
+                this.entryId = entryId
+              }, {
+                precision: 8
+              })
+              element.classList.add('selected')
+              this.hasIndicator = true
+            } else {
+              if (!this.entryId) return
+              widget.chart().removeEntity(this.entryId)
+              this.entryId = ''
+              this.hasIndicator = false
+              element.classList.remove('selected')
+            }
+          }).append(indicat.name)
+          if (indicat.name === 'MACD') {
+            btn.trigger('click')
+          }
+        })
+
+        // widget.chart().createStudy(indicators[0].name, !1, !1, indicators[0].args, (entryId) => {
+        //   this.entryId = entryId
+        //   this.hasIndicator = true
+        // })
+
+        widget.chart().executeActionById('drawingToolbarAction')
       })
     }
   },

@@ -278,7 +278,7 @@
   "nav_media": "Community",
   "footer_law": "Legal Statement",
   "orderbook_title": "Orderbook",
-  "orderbook_group": "Grouping",
+  "orderbook_depth_group": "Group",
   "order_sts_active": "Active",
   "order_sts_filled": "Executed",
   "order_sts_partial": "Partially filled",

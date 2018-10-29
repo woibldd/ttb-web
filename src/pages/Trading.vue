@@ -10,22 +10,11 @@
     />
     <div class="container-trade-panel">
       <div class="ix-row">
-        <div
-          class="ix-col ix-col-1"
-          v-if="!isMobile">
-          <div
-            class="ix-grid ix-grid-pairnav"
-            ref="gridPairNav">
-            <PairNav ref="PairNav"/>
-          </div>
-          <div
-            class="ix-grid ix-grid-deal"
-            ref="gridDeal">
-            <Deal ref="Deal"/>
-          </div>
-        </div>
         <div class="ix-col ix-col-2">
+          <!-- 大盘顶部当前交易对信息 -->
           <pair-title/>
+
+          <!-- 倒计时 & 大盘 -->
           <div
             class="ix-grid ix-grid-tv"
             ref="gridTradingView">
@@ -48,41 +37,36 @@
             </div>
           </div>
         </div>
-        <div class="ix-col ix-col-3">
+        <div class="trade-top-right">
+          <div class="ix-col-rb ix-height-rt flex-row">
+            <!-- bids & asks -->
+            <div
+              class="ix-grid ix-grid-orderbook"
+              ref="gridOrderbook">
+              <Orderbook ref="Orderbook"/>
+            </div>
+            <div
+              class="ix-grid ix-grid-deal pb-5"
+              ref="gridDeal">
+              <!-- 最新交易 -->
+              <Deal ref="Deal"/>
+            </div>
+          </div>
+          <!--  限价单 & 市价单 -->
           <div
-            class="ix-grid ix-grid-orderbook"
-            ref="gridOrderbook">
-            <Orderbook ref="Orderbook"/>
+            class="ix-grid ix-grid-operate ix-col-rb"
+            ref="gridOperate">
+            <Operate ref="Operate"/>
           </div>
         </div>
       </div>
       <div class="ix-row">
+        <!--  当前委托 & 委托历史 -->
         <div
-          v-if="!isMobile"
+          v-if="state.userInfo"
           class="ix-grid ix-grid-order"
           ref="gridOrder">
           <Order ref="Order"/>
-        </div>
-        <div
-          class="ix-grid ix-grid-operate"
-          ref="gridOperate">
-          <Operate ref="Operate"/>
-        </div>
-      </div>
-      <div class="ix-row">
-        <div
-          class="ix-col ix-col-1 wd-100"
-          v-if="isMobile">
-          <div
-            class="ix-grid ix-grid-order"
-            ref="gridOrder">
-            <Order ref="Order"/>
-          </div>
-          <div
-            class="ix-grid ix-grid-deal wd-100"
-            ref="gridDeal">
-            <Deal ref="Deal"/>
-          </div>
         </div>
       </div>
       <!-- 币种介绍 -->
@@ -389,8 +373,14 @@ export default {
   display: flex;
   flex-direction: column;
 }
-.ix-col-1 {
-  width: 320px;
+.ix-col-rt {
+  width: 300px;
+}
+.ix-col-rb {
+    width: 600px;
+}
+.ix-height-rt {
+    height: 320px;;
 }
 .ix-col-2 {
   flex: 1;
@@ -412,11 +402,10 @@ export default {
   height: 275px;
 }
 .ix-grid-deal {
-  // flex: 1;
-  height: 256px;
+  flex: 1;
+  height: 320px;
 }
 .ix-grid-orderbook {
-  flex: 2;
   // height: 2px;
 }
 .ix-grid-pairnav {
@@ -501,9 +490,12 @@ export default {
   }
 
 }
+.flex-row {
+    display: flex;
+}
 @media screen and (max-width: 1200px) {
   .ix-grid-orderbook {
-    height: 500px;
+    height: 310px;
   }
   .wd-100 {
     width: 100%;
@@ -511,7 +503,7 @@ export default {
 }
 .mobile {
   .ix-grid-orderbook {
-    height: 500px;
+    height: 310px;
   }
   .wd-100 {
     width: 100%;

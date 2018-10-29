@@ -1,7 +1,7 @@
 <template>
   <div
     class="grid-title"
-    v-if="ready">
+  >
     <div
       class="fl grid-currency pointer"
       @click="showPair"

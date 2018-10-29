@@ -1,19 +1,31 @@
 <template>
   <span>
-    <span @click="setMode('both')" class="ibt ob-nav btn"
+    <span
+      @click="setMode('both')"
+      class="ibt ob-nav btn"
       :style="{height: height + 'px'}"
       :class="{active: local.orderbookMode === 'both'}">
-      <icon name="order-normal" class="lines-wrap ibt"></icon>
+      <icon
+        name="order-normal"
+        class="lines-wrap ibt"/>
     </span>
-    <span @click="setMode('ask')" class="ibt ob-nav btn"
+    <span
+      @click="setMode('ask')"
+      class="ibt ob-nav btn"
       :style="{height: height + 'px'}"
       :class="{active: local.orderbookMode === 'ask'}">
-      <icon name="order-down" class="lines-wrap ibt"></icon>
+      <icon
+        name="order-down"
+        class="lines-wrap ibt"/>
     </span>
-    <span @click="setMode('bid')" class="ibt ob-nav btn"
+    <span
+      @click="setMode('bid')"
+      class="ibt ob-nav btn"
       :style="{height: height + 'px'}"
       :class="{active: local.orderbookMode === 'bid'}">
-      <icon name="order-up" class="lines-wrap ibt"></icon>
+      <icon
+        name="order-up"
+        class="lines-wrap ibt"/>
     </span>
   </span>
 </template>
