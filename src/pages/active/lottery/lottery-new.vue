@@ -262,7 +262,7 @@
               <div class="table__th"> {{ $t('activity_lottery_opening_price') }} </div>
               <div class="table__th"> {{ $t('activity_lottery_close_price') }} </div>
               <!-- <div class="table__th"> {{ $t('deal_th_side') }} </div> -->
-              <!-- <div class="table__th"> {{ $t('activity_lottery_win_rate') }} </div> -->
+              <div class="table__th"> {{ $t('activity_lottery_win_rate') }} </div>
               <div class="table__th align-right"> {{ $t('status') }} </div>
             </div>
             <div
@@ -274,7 +274,7 @@
               <span class="table__td amount">{{ item.open_price | round(0) | thousand }}</span>
               <span class="table__td win">{{ item.close_price | round(2) | thousand }}</span>
               <!-- <span class="table__td dir"><status-lable :item="item"/></span> -->
-              <!-- <span class="table__td win">{{ item.win_amount | round(2) | thousand }} USDT</span> -->
+              <span class="table__td rate">{{ item.rate }} </span>
               <span class="table__td result align-right">{{ $t('activity_result_'+item.result) }}</span>
             </div>
           </div>
@@ -402,9 +402,9 @@ export default {
   methods: {
     transferBetRate (rate) {
       if (rate && !isNaN(rate) && rate !== '0') {
-        return '1:' + (1 / Number(rate)).toFixed(2)
+        return '1 : ' + (1 / Number(rate) * 100).toFixed(2)
       }
-      return '1:0'
+      return '1 : 0.00'
     },
     invite () {
       if (!this.isLogin) {
@@ -448,7 +448,7 @@ export default {
       if (now > this.current.betover_time) {
         this.betTimeout = true
         this.$forceUpdate()
-        console.log('time not ok', now, this.current.betover_time)
+        // console.log('time not ok', now, this.current.betover_time)
       }
     },
     valueChanged () {
@@ -613,11 +613,11 @@ export default {
             })
           }
           if (new Date().getTime() <= current.betover_time) {
-            console.log('time ok', current.betover_time)
+            // console.log('time ok', current.betover_time)
             this.betTimeout = false
           }
           if (this.game_id && this.game_id !== current.game_id) {
-            console.log('new match')
+            // console.log('new match')
             // location.reload()
           }
           this.game_id = current.game_id
@@ -629,6 +629,19 @@ export default {
     fetchHistory () {
       service.getGuessHistory().then(resp => {
         if (!resp.code) {
+          if (resp.data && resp.data.length) {
+            resp.data = resp.data.map(h => {
+              let bet1_amount = parseInt(h.bet1_amount) || 0
+              let bet2_amount = parseInt(h.bet2_amount) || 0
+              let bet3_amount = parseInt(h.bet3_amount) || 0
+              let amount = bet1_amount + bet2_amount + bet3_amount
+              let rate1 = bet1_amount !== 0 ? (amount / bet1_amount) : 0
+              let rate2 = bet2_amount !== 0 ? (amount / bet2_amount) : 0
+              let rate3 = bet3_amount !== 0 ? (amount / bet3_amount) : 0
+              h.rate = `${rate1.toFixed(2)} : ${rate2.toFixed(2)} : ${rate3.toFixed(2)}`
+              return h
+            })
+          }
           this.history = resp.data
         }
         return resp
