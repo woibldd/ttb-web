@@ -651,7 +651,7 @@
   "activity_lottery_rules": "活動規則",
   "activity_lottery_count_down": "本期倒计时",
   "activity_lottery_warm_tips": "温馨提示",
-  "activity_lottery_warm_content": "數字資產是創新型的投資產品，價格波動較大，請您理性判斷自己的投資能力，審慎做出投資決策，祝您交易愉快！",
+  "activity_lottery_warm_content": "參加活動前，請您務必評估自己的財務狀況，瞭解並自我承擔各項風險可能導致的資產損失。",
   "activity_lottery_rules_a": "1、參與者可通過投票IX的形式，競猜BTC/USDT交易幣對在某一競猜週期的價格變化；競猜結果正確者，競猜投票全數返還，並可獲得競猜錯誤者投票總額的90%作為獎勵（按投票比例分配）。如果對應週期沒有競猜正確者，則投票全數返還； ",
   "activity_lottery_rules_b": "2、競猜內容分為“漲、平、跌”三種：如果在對應競猜週期中，收盤價高於開盤價，即是漲；價格相同，即是平；收盤價低於開盤價，即是跌；",
   "activity_lottery_rules_c": "3、BTC/USDT價格按Bitfinex、Binance、Huobi、IX、Okex 五家交易所每個小時開盤價和收盤價計算，去掉一個最高價和一個最低價，其餘三個價格取平均值且取整數（小數點後按四捨五入計算，例：6656.58取整數為6657；6654.45取整數為6654）;",
