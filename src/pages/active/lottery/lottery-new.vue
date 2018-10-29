@@ -83,13 +83,13 @@
               <div class="quiz-operation-wrapper">
                 <div class="operate-table-head c-999 f14">
                   <div class="head-item">{{ $t('activity_lottery_betting_rise') }}</div>
-                  <div class="head-item">{{ $t('activity_lottery_win_rate') }}%</div>
+                  <div class="head-item">{{ $t('activity_lottery_win_rate') }}</div>
                   <div class="head-item">{{ $t('activity_lottery_self_vote') }}</div>
                 </div>
                 <div class="quiz-choice-strip f14">
                   <div class="strip__item quiz__note up">{{ $t('activity_lottery_rise') }}</div>
                   <div class="strip__item up">{{ current.bet1_amount | round(0) | thousand }} IX</div>
-                  <div class="strip__item">{{ current.bet1Rate }}%</div>
+                  <div class="strip__item">{{ transferBetRate(current.bet1Rate) }}</div>
                   <div class="strip__item">{{ current.mybet_1 || '--' }}</div>
                   <div
                     class="proportion up"
@@ -98,7 +98,7 @@
                 <div class="quiz-choice-strip f14">
                   <div class="strip__item quiz__note flat">{{ $t('activity_lottery_flat') }}</div>
                   <div class="strip__item flat">{{ current.bet2_amount | round(0) | thousand }} IX</div>
-                  <div class="strip__item">{{ current.bet2Rate }}%</div>
+                  <div class="strip__item">{{ transferBetRate(current.bet2Rate) }}</div>
                   <div class="strip__item">{{ current.mybet_2 || '--' }}</div>
                   <div
                     class="proportion flat"
@@ -107,7 +107,7 @@
                 <div class="quiz-choice-strip f14">
                   <div class="strip__item quiz__note fall">{{ $t('activity_lottery_fall') }}</div>
                   <div class="strip__item fall">{{ current.bet3_amount | round(0) | thousand }} IX</div>
-                  <div class="strip__item">{{ current.bet3Rate }}%</div>
+                  <div class="strip__item">{{ transferBetRate(current.bet3Rate) }}</div>
                   <div class="strip__item">{{ current.mybet_3 || '--' }}</div>
                   <div
                     class="proportion fall"
@@ -400,6 +400,12 @@ export default {
     }
   },
   methods: {
+    transferBetRate (rate) {
+      if (rate && !isNaN(rate)) {
+        return '1 : ' + (1 / Number(rate)).toFixed(2)
+      }
+      return '1 : 0'
+    },
     invite () {
       if (!this.isLogin) {
         actions.setLoginBack({
