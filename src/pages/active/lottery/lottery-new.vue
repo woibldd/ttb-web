@@ -437,6 +437,13 @@ export default {
       // h = h.toString().padStart(2, '0').split('')
       m = m.toString().padStart(2, '0')
       this.gameOverTime = m + ':' + s
+
+      // 更新betTimeout 值
+      if (now > this.current.betover_time) {
+        this.betTimeout = true
+        this.$forceUpdate()
+        console.log('time not ok', now, this.current.betover_time)
+      }
     },
     valueChanged () {
       let value = parseInt(this.amount, 10) || 0
