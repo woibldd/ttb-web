@@ -19,7 +19,7 @@
             class="ix-grid ix-grid-tv"
             ref="gridTradingView">
             <TradingView ref="TradingView"/>
-            <div
+            <!-- <div
               class="active-box"
               v-if="showCountdown">
               <p class="text"><span v-html="$t('active_countdown_text')"/><span class="seconds">{{ countdownText }}</span>{{ $t('active_countdown_unit') }}</p>
@@ -34,7 +34,7 @@
                 class="close pointer"
                 @click.prevent="closeBox"
               >x</span>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="trade-top-right">
@@ -123,12 +123,6 @@ export default {
     return {
       state,
       comps: [],
-      showCountdown: false,
-      closeCountdown: false,
-      countdownTimer: 0,
-      countdownText: '20',
-      lastDealTime: 0,
-      relayTotal: {},
       isMobile: utils.isMobile()
     }
   },
@@ -150,8 +144,8 @@ export default {
             this.state.pro.pairInfo = null
           }
           await this.refreshBalance()
-          this.countdownText = '-'
-          this.closeCountdown = false
+          // this.countdownText = '-'
+          // this.closeCountdown = false
         }
         this.state.pro.lock = false
       },
@@ -218,59 +212,6 @@ export default {
     },
     async onresize () {
       this.setGridContainers()
-    },
-    startTimer () {
-      this.stopTimer()
-      this.doCountdown()
-      this.countdownTimer = setInterval(this.doCountdown, 1000)
-    },
-    doCountdown () {
-      let num = parseInt(this.countdownText, 10) || 1
-      num--
-      if (num < 0) {
-        this.stopTimer()
-        return
-      }
-      this.countdownText = num || '-'
-    },
-    stopTimer () {
-      clearInterval(this.countdownTimer)
-    },
-    async getRelayTotal () {
-      let res = await service.getRelayTotal()
-      if (!res.code) {
-        this.relayTotal = res.data
-      }
-    },
-    dealChanged (data) {
-      // 关闭之后不在显示
-      if (!this.closeCountdown && data && data.length > 0) {
-        // 第一次进入
-        if (!this.showCountdown) {
-          this.lastDealTime = data[0].time
-          let tick = new Date().getTime() - this.lastDealTime
-          if (tick < 0) {
-            tick = 2000
-          } else if (tick > 20000) {
-            tick = 0
-          }
-          this.countdownText = Math.floor(tick / 1000) + ''
-          this.showCountdown = true
-          this.startTimer()
-        } else {
-          if (data[0].time > this.lastDealTime) {
-            // 有行情变化
-            this.countdownText = '20'
-            this.lastDealTime = data[0].time
-            this.startTimer()
-          }
-        }
-      }
-    },
-    closeBox () {
-      this.showCountdown = false
-      this.closeCountdown = true
-      this.stopTimer()
     }
   },
   async created () {
@@ -304,11 +245,7 @@ export default {
 
       this.$eh.$on('protrade:balance:refresh', this.refreshBalance)
       this.$eh.$on('app:resize', this.onresize)
-      this.$eh.$on('deal:update', this.dealChanged)
-      this.getRelayTotal()
-      setInterval(() => {
-        this.getRelayTotal()
-      }, 1e4)
+      // this.$eh.$on('deal:update', this.dealChanged)
       document.querySelector('.page-loading').classList.remove('show')
     })
   },
@@ -322,8 +259,8 @@ export default {
   destroyed () {
     this.$eh.$off('app:resize', this.onresize)
     this.$eh.$off('protrade:balance:refresh', this.refreshBalance)
-    this.$eh.$off('deal:update', this.dealChanged)
-    this.stopTimer()
+    // this.$eh.$off('deal:update', this.dealChanged)
+    // this.stopTimer()
     this.state.pro.layout = false
     document.querySelector('.page-loading').classList.remove('show')
     document.documentElement.setAttribute('style', '')

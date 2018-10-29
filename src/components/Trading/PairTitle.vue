@@ -111,6 +111,7 @@ export default {
   padding-left: 20px;
   border: 4px solid #3A444F;
   border-bottom: none;
+  border-right: none;
   background-color: $nav;
   position: relative;
   .fl {

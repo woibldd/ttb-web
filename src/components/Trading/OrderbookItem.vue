@@ -79,6 +79,8 @@ td:first-child {
 .price-stack-percent-bg {
     position:absolute;right:0;height:24px;z-index:0;opacity:.1;
     cursor: pointer;
+    width: 0%;
+    transition: width 0.5s ease-in-out;
 }
 .price-stack-row {
     position: relative;
