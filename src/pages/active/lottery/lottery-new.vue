@@ -253,6 +253,11 @@
               name="lottery-reward-record"
               class="pr-12"/> {{ $t('activity_lottery_reward_history') }}
           </div>
+          <div
+            class="ix-will-destroy"
+            v-show="current.destory">
+            {{ $t('activity_lottery_destroy_ix_amount') }} {{ current.destory | round(2) | thousand }} IX
+          </div>
         </div>
 
         <div class="box__content pb-29 mt-17">

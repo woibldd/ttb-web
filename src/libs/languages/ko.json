@@ -501,7 +501,7 @@
   "integer_ultiple": "20000의 배수로 입력하십시오.",
   "maximum": "최대",
   "unlocking": "언락중",
-  "unlocked": "언락중인 부분은 한시간후에 지급됩니다.",
+  "unlocked": "보통 24시간후에 석방하게 될것입니다.",
   "mining_records": "채굴 내역",
   "transaction_fee": "수수료 수치（평가IX）",
   "hash_rate_hour": "나의 헤쉬레이트（IX/시간당）",
@@ -512,7 +512,7 @@
   "req_c": "락업과언락:",
   "req_c_a": "락업:수시로 락업가능，락업후 개인 채굴속도가 한시간의 살한선을 넘지않을때 실시를 할것입니다.",
   "req_c_b": "언락:수시로 언락가능,언락후 개인 채굴속도가 한시간의 살한선을 넘지않을때 실시를 할것입니다.",
-  "req_c_c": "언락중인 IX부분은 한시간후에 지급됩니다.",
+  "req_c_c": "보통 24시간후에 석방하게 될것입니다.",
   "req_d": "락업 최소금액은20000IX,락업/언락 총금액은20000의 배수여야 합니다.",
   "req_e": "락업한IX부분은 거래수수료 배당에 정상적으로 참여 됩니다.",
   "req_f": "채굴보상은 매시간마다 정산을 할것입니다.이튿날에 대응되는 매 시간마다 IX.COM 사용자의 계좌에 지급될것입니다.",
@@ -628,7 +628,7 @@
   "activity_lottery_buy_rise": "오르는것을 사다",
   "activity_lottery_buy_fall": "락폭하는것을 사다",
   "activity_lottery_buy_flat": "평균을 사다",
-  "activity_lottery_limit_vote_fifty": "투표수>=50의 완수배",
+  "activity_lottery_limit_vote_fifty": "최소 트표수량50ix,동시에 10의 완수배여야 합니다.",
   "activity_lottery_current_ticket": "현재 득표수:",
   "activity_lottery_guess_rise": "오르는것을 추측",
   "activity_lottery_guess_fall": "락폭하는것을 추측",
@@ -670,5 +670,6 @@
   "activity_result_3":"동등하게 이김",
   "activity_lottery_timeout": "이번 활동 투자시간이 이미 지났습니다 다음라운드에 계속해주시길 바랍니다",
   "activity_lottery_reward_history": "보상기록",
-  "activity_lottery_stop_quiz": "퀴즈를 정지하고 보상을 받기를 기다린다"
+  "activity_lottery_stop_quiz": "퀴즈를 정지하고 보상을 받기를 기다린다",
+  "activity_lottery_destroy_ix_amount": "활동생산 회손수량:"
 }

@@ -623,7 +623,7 @@
   "integer_ultiple": "multiple of 20,000",
   "maximum": "Maximum",
   "unlocking": "Unlocking",
-  "unlocked": "The unlocked part will be released in 1 hour",
+  "unlocked": "Locked portions will be released after 24 hours.",
   "mining_records": "Mining Records",
   "transaction_fee": "Transaction Fee (valuation IX)",
   "hash_rate_hour": "My Hashrate (IX/hour)",
@@ -634,7 +634,7 @@
   "req_c": "Locked position & unlock:",
   "req_c_a": "Locked position: any time, after locked position, the upper limit of mining speed will take affect at the next integral point;",
   "req_c_b": "Unlock position: any time, after unlock position, the upper limit of mining speed will take affect at the next integral point;",
-  "req_c_c": "After unlock position IX will release reach 1 hours.",
+  "req_c_c": "After unlock position IX will release reach 24 hours.",
   "req_d": "The least limit of locked position is 20000IX, total amount is 20000IX’s integral multiple.",
   "req_e": "The locked position IX can participation in profit.  ",
   "req_f": "The incentives will calculate integral point, the next day according to every hour give out to the user's ix.com account on a regular basis.",
@@ -754,7 +754,7 @@
   "activity_lottery_buy_rise": "Buy rise",
   "activity_lottery_buy_fall": "Buy fall",
   "activity_lottery_buy_flat": "Buy flat",
-  "activity_lottery_limit_vote_fifty": "total votes are in multiples of ≥50",
+  "activity_lottery_limit_vote_fifty": "The minimum amount of votes is 50IX, in multiples of 10.",
   "activity_lottery_current_ticket": "Current tickets/units:",
   "activity_lottery_guess_rise": "guess of rise",
   "activity_lottery_guess_fall": "guess of fall",
@@ -796,6 +796,7 @@
   "activity_result_3":"Winning Fall",
   "activity_lottery_timeout": "Voting time is over for the current draw, please join us again next time",
   "activity_lottery_reward_history": "past results",
-  "activity_lottery_stop_quiz": "Ending of quiz; awaiting prize announcement"
+  "activity_lottery_stop_quiz": "Ending of quiz; awaiting prize announcement",
+  "activity_lottery_destroy_ix_amount": "Amount to be void generated from the event:"
 
 }
