@@ -501,7 +501,7 @@
   "integer_ultiple": "请输入20000的整数倍",
   "maximum": "最大",
   "unlocking": "解锁中",
-  "unlocked": "解锁部分于一个小时后释放",
+  "unlocked": "解锁部分于二十四小时后释放",
   "mining_records": "挖矿记录",
   "transaction_fee": "手续费值（估值IX）",
   "hash_rate_hour": "我的算力（IX/每小时）",
@@ -512,7 +512,7 @@
   "req_c": "锁仓与解锁：",
   "req_c_a": "锁仓：随时锁仓，锁仓后个人挖矿速度上限下一小时整点生效；",
   "req_c_b": "解锁：随时解锁，解锁后个人挖矿速度上限下一小时整点生效；",
-  "req_c_c": "解锁后的IX满1小时之后释放。",
+  "req_c_c": "解锁后的IX满24小时之后释放。",
   "req_d": "锁仓最小额为20,000 IX，总额必须是20,000 IX的整数倍；",
   "req_e": "锁仓部分的IX可正常参与分红；",
   "req_f": "挖矿奖励每小时整点计算，次日按对应的每个小时段发放至用户的用户的IX.com账户。",
@@ -632,7 +632,7 @@
   "activity_lottery_buy_rise": "买涨",
   "activity_lottery_buy_fall": "买跌",
   "activity_lottery_buy_flat": "买平",
-  "activity_lottery_limit_vote_fifty": "投票数量为≥50的整数",
+  "activity_lottery_limit_vote_fifty": "最小投票数量为50IX，且为10的倍数",
   "activity_lottery_current_ticket": "当前可用票数:",
   "activity_lottery_guess_rise": "猜涨",
   "activity_lottery_guess_fall": "猜跌",
@@ -674,6 +674,7 @@
   "activity_result_3":"跌赢",
   "activity_lottery_timeout": "本期竞猜投注时间已到，请下期继续",
   "activity_lottery_reward_history": "开奖记录",
-  "activity_lottery_stop_quiz": "停止竞猜，坐等开奖"
+  "activity_lottery_stop_quiz": "停止竞猜，坐等开奖",
+  "activity_lottery_destroy_ix_amount": "活动产生待销毁数量:"
 
 }

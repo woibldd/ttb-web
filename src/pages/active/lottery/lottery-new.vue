@@ -253,6 +253,9 @@
               name="lottery-reward-record"
               class="pr-12"/> {{ $t('activity_lottery_reward_history') }}
           </div>
+          <div class="ix-will-destroy">
+            {{ $t('activity_lottery_destroy_ix_amount') }} {{ ixWillDestroy }} IX
+          </div>
         </div>
 
         <div class="box__content pb-29 mt-17">
@@ -361,6 +364,7 @@ export default {
       current: {},
       lastBetData: {},
       gameOverTime: '',
+      ixWillDestroy: 0,
       myHistory: [],
       game_id: '',
       loopTimer: 0,
