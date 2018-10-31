@@ -1,6 +1,10 @@
 <template>
   <div class="lottery-container">
-    <div class="banner"/>
+    <div class="banner">
+      <div class="banner-text animated fadeInLeft delay-1s"/>
+      <div class="light animated zoomIn delay-2s"/>
+      <div class="banner-text__2  animated fadeInLeft delay-1s"/>
+    </div>
     <div class="body">
       <div class="lottery_row flex">
         <!-- 竞猜BTC/USDT -->
@@ -14,9 +18,11 @@
           <div class="box__content pb-29 mt-17">
             <div class="quiz-current-info pl-20 pr-14">
               <div class="coin">
-                <icon
-                  class="icon-coin"
-                  name="lottery-btc"/>
+                <div class="bling-icon-body">
+                  <icon
+                    class="icon-coin "
+                    name="lottery-btc"/>
+                </div>
                 <div class="ml-13">
                   <p class="mb-15 f18">BTC</p>
                   <p class="f12 c-999">{{ $t('activity_lottery_ix_beting') }}</p>
@@ -162,7 +168,7 @@
           <div class="lottery-box mb-12 box-last-champion">
             <div class="box__title pr-20">
               <div class="title-tile"> <icon
-                name="lottery-quiz"
+                name="lottery-cup"
                 class="pr-12"/> {{ $t('activity_lottery_last_champion') }} </div>
             </div>
             <div class="box__content mt-17 f12">
@@ -172,7 +178,7 @@
                 v-if="index===0"
                 :key="index">
                 <div class="uid flex-column">
-                  <p class="f14 mb-10">{{ getEncodeContent(jackpot.user_id) }}</p>
+                  <p class="f14 mb-10">{{ getEncodeContent(jackpot.user_id) }} <span class="icon-crown"/></p>
                   <p class="c-999">{{ $t('activity_lottery_champion_uid') }} </p>
                 </div>
                 <div class="reward_num flex-column">

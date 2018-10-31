@@ -6,16 +6,27 @@ $color-bids-rise: #09C989;
 $color-bids-fall: #FF1E1D;
 .lang-en {
   .lottery-container {
-    .banner {
-      background-image: url(/static/active/lottery/banner-lottery_en.jpg);
+    .banner-text {
+      width: 889px;
+      height: 155px;
+      background-image: url(/static/active/lottery/banner-text-en.png);
     }
+    .banner-text__2 {
+        width: 694px;
+        height: 34px;
+        background-image: url(/static/active/lottery/banner-text__2-en.png);
+    }
+
   }
 }
 .lang-ko {
   .lottery-container {
-    .banner {
-      background-image: url(/static/active/lottery/banner-lottery_ko.jpg);
+    .banner-text {
+      background-image: url(/static/active/lottery/banner-text-ko.png);
     }
+    .banner-text__2 {
+        background-image: url(/static/active/lottery/banner-text__2-ko.png);
+      }
   }
 }
 .lottery-container {
@@ -27,13 +38,43 @@ $color-bids-fall: #FF1E1D;
         text-align: right !important;
     }
 
-    .banner {
-        height: 348px;
-        width: 100%;
-        background-image: url(/static/active/lottery/banner-lottery.jpg);
+    .banner-text {
+        width: 952px;
+        height: 122px;
+        background-image: url(/static/active/lottery/banner-text.png);
         background-repeat: no-repeat;
         background-position: center center;
         background-size: 100%;
+    }
+    .banner-text__2 {
+        width: 322px;
+        height: 65px;
+        background-image: url(/static/active/lottery/banner-text__2.png);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 100%;
+    }
+
+    .banner {
+        height: 348px;
+        width: 100%;
+        background-image: url(/static/active/lottery/lottery-banner-background.png);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .light {
+        width: 100%;
+        height: 75px;
+        background-image: url(/static/active/lottery/light.png);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 100%;
+        margin-top: -36px;
     }
 
     .flex {
@@ -141,7 +182,7 @@ $color-bids-fall: #FF1E1D;
                     overflow: hidden;
 
                     .proportion {
-                        width: 50%;
+                        width: 0;
                         height: 100%;
                         position: absolute;
                         opacity: 0.06;
@@ -155,6 +196,7 @@ $color-bids-fall: #FF1E1D;
                         &.flat {
                             background-color: #1AA0CA;
                         }
+                        transition: width 2s ease-in 1s;
                     }
 
                     .strip__item {
@@ -325,6 +367,10 @@ $color-bids-fall: #FF1E1D;
                 position: absolute;
                 right: 38px;
                 top:22px;
+
+                &:hover {
+                    background:linear-gradient(90deg,rgba(205,123,25,1) 0%,rgba(255,176,63,1) 100%);
+                }
             }
         }
 
@@ -445,5 +491,75 @@ $color-bids-fall: #FF1E1D;
 .lottery-prompt {
     .el-message-box__message p{
         text-align: left !important;
+    }
+}
+
+
+
+// 针对icon的bling-bling 效果
+@keyframes blingbling {
+    0%{
+        margin-left:0;
+    }
+    100% {
+        margin-left:42px;
+    }
+}
+
+@keyframes bodyRotate {
+    0%{
+        transform: rotate(0)
+    }
+    50%{
+        transform: rotate(180deg);  
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.bling-icon-body {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    border-radius: 21px;
+    overflow: hidden;
+    animation:bodyRotate 2.4s ease-in-out infinite;
+
+    &:before{
+        content:'';
+        position:absolute;
+        width:8px;
+        height:42px;
+        display: inline-block;
+        overflow: hidden;
+        background: url('/static/active/lottery/lottery-blings.png');
+        background-size: 100% 100%;
+        // background: linear-gradient(to right,rgba(255,255,255,0) 0,rgba(255,255,255,.2) 50%,rgba(255,255,255,0) 100%);  
+        transform: skewX(-25deg);
+        animation:blingbling 2.4s ease-in-out infinite;
+    }
+}
+
+.icon-crown {
+    display: inline-block;
+    width: 13px;
+    height: 14px;
+    background: url('/static/active/lottery/crown-yellow.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%;
+    animation: iconcrown 1.8s ease-in-out infinite;
+}
+
+@keyframes iconcrown {
+    0%{
+        background: url('/static/active/lottery/crown-yellow.png');
+    }
+    50% {
+        background: url('/static/active/lottery/crown-red.png');
+    }
+    100%{
+        background: url('/static/active/lottery/crown-yellow.png');
     }
 }
