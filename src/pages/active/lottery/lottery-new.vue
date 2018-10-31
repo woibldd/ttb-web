@@ -1,9 +1,10 @@
 <template>
   <div class="lottery-container">
     <div class="banner">
-      <div class="banner-text animated fadeInLeft delay-1s"/>
-      <div class="light animated zoomIn delay-2s"/>
-      <div class="banner-text__2  animated fadeInLeft delay-1s"/>
+      <div class="banner-text animated fadeInLeft"/>
+      <div class="light animated zoomIn delay-1s"/>
+      <div class="banner-text__2 animated fadeInLeft"/>
+      <!-- <div class="whitelight"/> -->
     </div>
     <div class="body">
       <div class="lottery_row flex">

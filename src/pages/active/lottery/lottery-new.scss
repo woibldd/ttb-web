@@ -66,6 +66,7 @@ $color-bids-fall: #FF1E1D;
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        transform: translate3d(0,0,0);
     }
     .light {
         width: 100%;
@@ -75,6 +76,30 @@ $color-bids-fall: #FF1E1D;
         background-position: center center;
         background-size: 100%;
         margin-top: -36px;
+    }
+    .whitelight {
+      position: absolute;
+      left: 0;
+      width: 100px;
+      height: 348px;
+      opacity: 0;
+      transform: skewX(-30deg);
+      transition: left 1s linear 0s;
+      background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0)0, rgba(255, 255, 255, .8)50%, rgba(255, 255, 255, 0)100%);
+      animation: faderight .4s cubic-bezier(0.47, 0, 0.745, 0.715) 2s;
+    }
+    @keyframes faderight {
+      10% {
+        opacity: 0.2;
+      }
+      50% {
+        opacity: 1;
+        left: 50%;
+      }
+      100% {
+        opacity: 0;
+        left: 100%;
+      }
     }
 
     .flex {
@@ -148,7 +173,7 @@ $color-bids-fall: #FF1E1D;
                 .coin {
                     display: flex;
                     align-items: center;
-                    
+
                     .icon-coin {
                         width: 42px;
                         height: 42px;
@@ -171,7 +196,7 @@ $color-bids-fall: #FF1E1D;
                     padding-bottom: 28px;
                     padding-left: 166px;
                 }
-                
+
                 .quiz-choice-strip {
                     display: flex;
                     justify-content: space-between;
@@ -196,7 +221,7 @@ $color-bids-fall: #FF1E1D;
                         &.flat {
                             background-color: #1AA0CA;
                         }
-                        transition: width 2s ease-in 1s;
+                        transition: width 1s ease-in-out .2s;
                     }
 
                     .strip__item {
@@ -388,13 +413,13 @@ $color-bids-fall: #FF1E1D;
                       color: $color-bids-rise;
                     }
                   }
-  
+
                   &.flat {
                     .dir, .result {
                       color: #959595;
                     }
                   }
-  
+
                   &.fall {
                     .dir, .result {
                       color: $color-bids-fall;
@@ -412,7 +437,7 @@ $color-bids-fall: #FF1E1D;
                 line-height: 25px;
                 background-color: #303030;
                 border-radius:50%;
-    
+
                 &.active {
                     background:linear-gradient(92deg,rgba(205,125,41,1),rgba(250,172,73,1));
                 }
@@ -477,7 +502,7 @@ $color-bids-fall: #FF1E1D;
                     line-height: 41px;
 
                     &.office-name {
-                        background-color:#363636;                    
+                        background-color:#363636;
                     }
                 }
                 .bb1 {
@@ -511,7 +536,7 @@ $color-bids-fall: #FF1E1D;
         transform: rotate(0)
     }
     50%{
-        transform: rotate(180deg);  
+        transform: rotate(180deg);
     }
     100% {
         transform: rotate(360deg);
@@ -524,7 +549,7 @@ $color-bids-fall: #FF1E1D;
     height: 42px;
     border-radius: 21px;
     overflow: hidden;
-    animation:bodyRotate 2.4s ease-in-out infinite;
+    animation:bodyRotate 3s linear infinite;
 
     &:before{
         content:'';
@@ -535,7 +560,7 @@ $color-bids-fall: #FF1E1D;
         overflow: hidden;
         background: url('/static/active/lottery/lottery-blings.png');
         background-size: 100% 100%;
-        // background: linear-gradient(to right,rgba(255,255,255,0) 0,rgba(255,255,255,.2) 50%,rgba(255,255,255,0) 100%);  
+        // background: linear-gradient(to right,rgba(255,255,255,0) 0,rgba(255,255,255,.2) 50%,rgba(255,255,255,0) 100%);
         transform: skewX(-25deg);
         animation:blingbling 2.4s ease-in-out infinite;
     }
