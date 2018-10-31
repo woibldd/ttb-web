@@ -22,9 +22,7 @@
           class="more"
           :href="announcementLink"
           target="_blank">
-          <i/>
-          <i/>
-          <i/>
+          <icon :name="hasNewNotice ? 'notice-new' :'notice'"/>
         </a>
       </div>
     </div>
@@ -186,6 +184,7 @@ import service from '@/modules/service'
 import {state} from '@/modules/store'
 import PairTable from '@/components/Trading/PairTable'
 import MineSummary from '@/components/Mine/MineSummary'
+import maxBy from 'lodash/maxBy'
 
 export default {
   data: function () {
@@ -199,7 +198,8 @@ export default {
         autoplay: 1000,
         paginationType: 'fraction',
         pagination: '.swiper-pagination'
-      }
+      },
+      hasNewNotice: false
     }
   },
   components: {
@@ -231,6 +231,13 @@ export default {
           this.notices = list.filter(b => b.slot === 2)
           if (this.notices.length > 3) {
             this.notices.splice(3)
+            // 判断最新公告是否小于4小时
+            const freshAlive = 4 * 3600 * 1000
+            let recentTime = maxBy(this.notices, i => i.create_time).create_time
+            recentTime = recentTime < 1e10 ? recentTime * 1000 : recentTime
+            if (recentTime > new Date().getTime() - freshAlive) {
+              this.hasNewNotice = true
+            }
           }
         }
       }
@@ -308,34 +315,7 @@ export default {
       width: 15px;
       height: 15px;
       right: 0;
-      top: 23px;
-
-      i {
-        display: block;
-        position: absolute;
-        height: 3px;
-        right: 0;
-        background: #6C869C;
-        width: 70%;
-        top: 6px;
-      }
-      &::before, &::after {
-        position: absolute;
-        display: block;
-        position: absolute;
-        height: 3px;
-        right: 0;
-        background: #6C869C;
-        content: "";
-      }
-      &::before {
-        width: 100%;
-        top: 0;
-      }
-      &::after {
-        width: 40%;
-        bottom: 0;
-      }
+      top: 0;
     }
   }
 
