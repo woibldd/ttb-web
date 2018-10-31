@@ -155,6 +155,8 @@ export default {
           return vm.$i18n.t('click_to_clear')
         }
       },
+      // 第一次纠正滚动条位置
+      isFristAdultScrolling: true,
       showDepthOption: false
     }
   },
@@ -166,6 +168,15 @@ export default {
           this.clear()
           this.sub()
         }
+      }
+    },
+    'local.orderbookMode': {
+      // 切换标签后重新计算
+      immediate: true,
+      async handler (mode) {
+        // 切换标签强制指定滚动条位置
+        this.isFristAdultScrolling = true
+        this.computedScrollPosition()
       }
     }
   },
@@ -253,17 +264,14 @@ export default {
     askStyle () {
       if (this.local.orderbookMode === 'both') {
         return {
-          minHeight: this.sideHeight + 'px',
-          paddingTop: Math.max(this.sideHeight - this.asks.length * this.itemHeight, 0) + 'px',
-          marginTop: 0 - Math.max(0, this.asks.length * this.itemHeight - this.sideHeight) + 'px'
+          minHeight: this.sideHeight + 'px'
+          // paddingTop: Math.max(this.sideHeight - this.asks.length * this.itemHeight, 0) + 'px',
+          // marginTop: 0 - Math.max(0, this.asks.length * this.itemHeight - this.sideHeight) + 'px'
         }
       }
       if (this.local.orderbookMode === 'ask') {
         return {
-          overflow: 'hidden',
-          // paddingTop: Math.max(this.bookHeight - this.splitHeight - this.asks.length * this.itemHeight, 0) + 'px',
           minHeight: this.bookHeight - this.splitHeight + 'px'
-          // marginTop: 0 - Math.max(0, this.asks.length * this.itemHeight - this.bookHeight + this.splitHeight) + 'px'
         }
       }
       return {}
@@ -341,6 +349,11 @@ export default {
       })
       this.asks = asks
       this.bids = bids
+      // 获取数据后强制指定滚动条位置，并重置状态，否则用户滚动会被纠正
+      this.computedScrollPosition()
+      if (this.isFristAdultScrolling) {
+        this.isFristAdultScrolling = false
+      }
     },
     error (msg) {
       this.err = msg
@@ -393,6 +406,28 @@ export default {
     layout () {
       this.onresize()
       this.$eh.$on('app:resize', this.onresize)
+    },
+    /**
+     * 计算滚动条位置，强制滚动
+     */
+    computedScrollPosition () {
+      // 已经纠正过的不在纠正
+      if (!this.isFristAdultScrolling) return
+      let mode = this.local.orderbookMode
+      if (mode === 'ask') {
+        this.$nextTick(() => {
+          this.$refs['body'].scrollTop = 200
+        })
+      } else if (mode === 'bid') {
+        this.$nextTick(() => {
+          this.$refs['body'].scrollTop = 0
+        })
+      } else {
+        // mode === 'both'
+        this.$nextTick(() => {
+          this.$refs['body'].scrollTop = 300
+        })
+      }
     }
   },
   created () {
@@ -407,6 +442,10 @@ export default {
       this.socket.$destroy()
     }
   }
+  // updated () {
+  //   console.log(new Date())
+  //   this.computedScrollPosition()
+  // }
 }
 </script>
 
@@ -506,6 +545,15 @@ export default {
 }
 .ix-panel-body {
   overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: block;
+    width: 2px;
+    height: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #192D3F;
+    border: none;
+  }
 }
 .err,
 .no-data {
@@ -554,6 +602,8 @@ th.sell {
   justify-content: space-between;
   align-items: center;
   position: sticky;
+  top: 0;
+  bottom:0;
   background: $protrade-bg;
   z-index: 100;
 
