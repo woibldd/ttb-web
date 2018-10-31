@@ -61,7 +61,10 @@
           </tbody>
         </table>
       </div>
-      <div class="order-split">
+      <div
+        class="order-split"
+        :class="{bid: local.orderbookMode === 'bid', ask: local.orderbookMode === 'ask'}"
+      >
         <div class="left-part">
           <div class="last-price">{{ lastPrice }}</div>
           <div class="estimate">
@@ -258,9 +261,9 @@ export default {
       if (this.local.orderbookMode === 'ask') {
         return {
           overflow: 'hidden',
-          paddingTop: Math.max(this.bookHeight - this.splitHeight - this.asks.length * this.itemHeight, 0) + 'px',
-          minHeight: this.bookHeight - this.splitHeight + 'px',
-          marginTop: 0 - Math.max(0, this.asks.length * this.itemHeight - this.bookHeight + this.splitHeight) + 'px'
+          // paddingTop: Math.max(this.bookHeight - this.splitHeight - this.asks.length * this.itemHeight, 0) + 'px',
+          minHeight: this.bookHeight - this.splitHeight + 'px'
+          // marginTop: 0 - Math.max(0, this.asks.length * this.itemHeight - this.bookHeight + this.splitHeight) + 'px'
         }
       }
       return {}
@@ -269,12 +272,12 @@ export default {
       if (this.local.orderbookMode === 'both') {
         return {
           overflow: 'hidden',
-          height: Math.floor((this.bookHeight - this.splitHeight - this.sideHeight) / this.itemHeight) * this.itemHeight + 'px'
+          minHeight: Math.floor((this.bookHeight - this.splitHeight - this.sideHeight) / this.itemHeight) * this.itemHeight + 'px'
         }
       }
       if (this.local.orderbookMode === 'bid') {
         return {
-          height: this.bookHeight - this.splitHeight + 'px'
+          minHeight: this.bookHeight - this.splitHeight + 'px'
         }
       }
       return {}
@@ -502,7 +505,7 @@ export default {
   height: 30px;
 }
 .ix-panel-body {
-  overflow-y: hidden;
+  overflow-y: scroll;
 }
 .err,
 .no-data {
@@ -550,6 +553,18 @@ th.sell {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  background: $protrade-bg;
+  z-index: 100;
+
+  &.bid {
+    top: 0;
+    bottom: auto;
+  }
+  &.ask {
+    bottom: 0;
+    top: auto;
+  }
   .left-part {
     .last-price {
       line-height: 24px;
