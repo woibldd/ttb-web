@@ -171,6 +171,7 @@
           <div class="box-table">
             <div class="box-table-th">
               <span class="th_td">{{ $t('username') }}</span>
+              <span class="th_td">{{ $t('invite_kyc2') }}</span>
               <span class="invite-time">{{ $t('time') }}</span>
             </div>
             <div
@@ -178,6 +179,7 @@
               :key="index"
               v-for="(item,index) in invitationList.list">
               <span class="td">{{ item.phone || item.email }}</span>
+              <span class="td">{{ item.state === 2 ? $t('invite_kyc2_pass') : $t('invite_kyc2_deniel') }}</span>
               <span class="td">{{ item.register_time | ts2date }}</span>
             </div>
           </div>
