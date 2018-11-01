@@ -210,10 +210,12 @@
           </div>
 
           <!-- 邀请 -->
-          <div class="invite-cambat">
-            <div
-              @click="invite"
-              class="invite-btn pointer">{{ $t('activity_kyc_invite_now') }}</div>
+          <div class="invite-cambat-wrapper">
+            <div class="invite-cambat">
+              <div
+                @click="invite"
+                class="invite-btn pointer">{{ $t('activity_kyc_invite_now') }}</div>
+            </div>
           </div>
 
           <!-- 本期排行榜 -->
@@ -408,6 +410,26 @@ export default {
       let start = this.current.gameover_time - GAME_INTERVAL
       let end = this.current.gameover_time
       return `${utils.dateFormatter(start, 'H:m')}-${utils.dateFormatter(end, 'H:m')}`
+    },
+    star1 () {
+      switch (this.state.locale) {
+        case 'en':
+          return '/static/active/lottery/star-1-en.gif'
+        case 'ko':
+          return '/static/active/lottery/star-1-ko.gif'
+        default:
+          return '/static/active/lottery/star-1.gif'
+      }
+    },
+    star2 () {
+      switch (this.state.locale) {
+        case 'en':
+          return '/static/active/lottery/star-2-en.gif'
+        case 'ko':
+          return '/static/active/lottery/star-2-ko.gif'
+        default:
+          return '/static/active/lottery/star-2.gif'
+      }
     }
   },
   methods: {
