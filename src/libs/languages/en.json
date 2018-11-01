@@ -7,6 +7,8 @@
   "asset": "Assets",
   "mining_robot": "Mining Robot",
   "help": "Help",
+  "buy": "BUY",
+  "sell": "SELL",
   "userCenter": "User center",
   "total": "Total",
   "operation": "Operation",

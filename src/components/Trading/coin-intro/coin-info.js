@@ -111,7 +111,7 @@ export default{
       token_price: '--', // 众筹价格
       whitepagger: 'https://github.com/EOSIO/Documentation/blob/master/zh-CN/TechnicalWhitePaper.md', // 白皮书
       office_website: 'https://eos.io/', // 官网
-      chain_info: 'https://etherscan.io/token/EOS' // 区块查询
+      chain_info: 'https://eosflare.io/' // 区块查询
     },
     'zh-HK': {
       name: 'EOS',
@@ -123,7 +123,7 @@ export default{
       token_price: '--', // 眾籌價格
       whitepagger: 'https://github.com/EOSIO/Documentation/blob/master/zh-CN/TechnicalWhitePaper.md', // 白皮書
       office_website: 'https://eos.io/', // 官網
-      chain_info: 'https://etherscan.io/token/EOS' // 區塊查詢
+      chain_info: 'https://eosflare.io/' // 區塊查詢
     },
     en: {
       name: 'EOS',
@@ -135,7 +135,7 @@ export default{
       token_price: '--', // 众筹价格
       whitepagger: 'https://github.com/EOSIO/Documentation/blob/master/zh-CN/TechnicalWhitePaper.md', // 白皮书
       office_website: 'https://eos.io/', // 官网
-      chain_info: 'https://etherscan.io/token/EOS' // 区块查询
+      chain_info: 'https://eosflare.io/' // 区块查询
     },
     ko: {
       name: 'EOS',
@@ -147,7 +147,7 @@ export default{
       token_price: '--', // 众筹价格
       whitepagger: 'https://github.com/EOSIO/Documentation/blob/master/zh-CN/TechnicalWhitePaper.md', // 白皮书
       office_website: 'https://eos.io/', // 官网
-      chain_info: 'https://etherscan.io/token/EOS' // 区块查询
+      chain_info: 'https://eosflare.io/' // 区块查询
     }
   },
   IX: {

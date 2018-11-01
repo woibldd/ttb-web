@@ -33,6 +33,7 @@
       :style="{paddingRight: hasScrollBar ? '14px' : '4px'}">
       <div class="table table-ix-orderbook">
         <div class="thead">
+          <div class="th ibt left" />
           <div class="th ibt left">{{ $t('price') }}</div>
           <div class="th ibt right">{{ $t('amount_unit', {unit: state.pro.product_name}) }}</div>
           <div class="th ibt right">{{ $t('total', {unit: state.pro.product_name}) }}</div>
@@ -53,6 +54,7 @@
               is="OrderbookItem"
               v-for="(item, index) in asks"
               :key="index"
+              :rank="asks.length - index"
               :height="itemHeight + 'px'"
               side="sell"
               :item="item"
@@ -88,6 +90,7 @@
               is="OrderbookItem"
               v-for="(item, index) in bids"
               :key="index"
+              :rank="index + 1"
               :height="itemHeight + 'px'"
               side="buy"
               :item="item"
@@ -146,7 +149,7 @@ export default {
       navHeight: 32,
       splitHeight: 50,
       theadHeight: 30,
-      panelHeight: 200,
+      panelHeight: 316,
       loading: false,
       changing: false,
       clearTip: {
@@ -167,6 +170,9 @@ export default {
         if (pair) {
           this.clear()
           this.sub()
+          // 切换币种前置纠正
+          this.isFristAdultScrolling = true
+          this.computedScrollPosition()
         }
       }
     },
@@ -325,8 +331,8 @@ export default {
 
       let buyTotal = this.$big(0)
       let sellTotal = this.$big(0)
-      let maxBuyTotal = _.maxBy(this.buy.slice(0, 10), i => parseFloat(i[1]))[1]
-      let maxSellTotal = _.maxBy(this.sell.slice(0, 10), i => parseFloat(i[1]))[1]
+      let maxBuyTotal = _.maxBy(this.buy, i => parseFloat(i[1]))[1]
+      let maxSellTotal = _.maxBy(this.sell, i => parseFloat(i[1]))[1]
       this.buy.forEach((buy) => {
         const amount = this.$big(buy[1])
         buyTotal = buyTotal.plus(amount)
@@ -574,10 +580,14 @@ export default {
   color: #A5B4C5;
   line-height: 30px;
   padding: 0 5px;
-  width: 33.33%;
+  width: 28%;
   box-sizing: border-box;
   &.right {
     text-align: right;
+  }
+  &:first-child {
+    max-width: 46px;
+    padding-left: 5px;
   }
 }
 .table tbody tr:hover {

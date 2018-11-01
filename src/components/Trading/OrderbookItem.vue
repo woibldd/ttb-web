@@ -5,6 +5,13 @@
     class="price-stack-row">
     <td
       class="left btn"
+      style="max-width: 46px;padding-left:5px"
+      :class="sideColor(side)"
+      @click="setPrice(item.price);setAmount(item.amount)">
+      {{ $t(side === 'buy' ? 'buy' : 'sell') + ' '+ rank }}
+    </td>
+    <td
+      class="left btn"
       :class="sideColor(side)"
       @click="setPrice(item.price);setAmount(item.amount)">
       <num :num="fixPrice(item.price)"/>
@@ -30,7 +37,7 @@
 <script>
 export default {
   name: 'OrderbookItem',
-  props: ['item', 'side', 'priceScale', 'amountScale', 'height'],
+  props: ['item', 'side', 'priceScale', 'amountScale', 'height', 'rank'],
   data () {
     return {}
   },
