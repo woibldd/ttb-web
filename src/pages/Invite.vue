@@ -444,7 +444,7 @@ export default {
           background: #FAF8EF;
           border: 1px solid $text-normal;
           border-radius:4px;
-          min-height: 140px;
+          min-height: 161px;
           box-sizing: border-box;
         }
         .empty {

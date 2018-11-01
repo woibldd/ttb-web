@@ -65,13 +65,17 @@
             class="m-middle"
             v-if="isLogin">
             <span class="top-tit">{{ $t('cum_trad_amount') }}</span>
-            <p class="top-txt top-txt-blue">{{ myTotal.total | round(2) | thousand }}<em>IX</em></p>
+            <p
+              class="top-txt top-txt-blue"
+              :style="{fontSize: basePower.total && basePower.total.toString().length > 10 && '22px'}">{{ myTotal.total | round(2) | thousand }}<em>IX</em></p>
           </div>
           <div
             class="m-middle"
             v-else>
             <span class="top-tit">{{ $t('totally_mine_total') }}</span>
-            <p class="top-txt top-txt-blue">{{ basePower.total | round(2) | thousand }}<em>IX</em></p>
+            <p
+              class="top-txt top-txt-blue"
+              :style="{fontSize: basePower.total && basePower.total.toString().length > 10 && '22px'}">{{ basePower.total | round(2) | thousand }}<em>IX</em></p>
           </div>
         </div>
       </div>
@@ -600,6 +604,7 @@ export default {
           }
         }
         .balance{
+          font-size: 14px;
           float: left;
           width: 235px;
           line-height: 58px;
