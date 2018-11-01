@@ -41,26 +41,26 @@
         </div>
 
         <div class="info-width-url">
-          <div class="issue-info-row">
+          <div class="issue-info-row line-1">
             <span class="row__label">{{ $t('whitepagger') }}</span>
             <a
               target="_blank"
               :href="coinInfo.whitepagger"
-              class="row__value c-primary line-1">{{ coinInfo.whitepagger }}</a>
+              class="row__value c-primary">{{ coinInfo.whitepagger }}</a>
           </div>
-          <div class="issue-info-row">
+          <div class="issue-info-row ine-1">
             <span class="row__label">{{ $t('office_website') }}</span>
             <a
               target="_blank"
               :href="coinInfo.office_website"
-              class="row__value c-primary line-1">{{ coinInfo.office_website }}</a>
+              class="row__value c-primary l">{{ coinInfo.office_website }}</a>
           </div>
-          <div class="issue-info-row">
+          <div class="issue-info-row line-1">
             <span class="row__label">{{ $t('chain_info') }}</span>
             <a
               target="_blank"
               :href="coinInfo.chain_info"
-              class="row__value c-primary line-1">{{ coinInfo.chain_info }}</a>
+              class="row__value c-primary">{{ coinInfo.chain_info }}</a>
           </div>
         </div>
       </div>

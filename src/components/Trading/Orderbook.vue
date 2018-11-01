@@ -33,6 +33,7 @@
       :style="{paddingRight: hasScrollBar ? '14px' : '4px'}">
       <div class="table table-ix-orderbook">
         <div class="thead">
+          <div class="th ibt left" />
           <div class="th ibt left">{{ $t('price') }}</div>
           <div class="th ibt right">{{ $t('amount_unit', {unit: state.pro.product_name}) }}</div>
           <div class="th ibt right">{{ $t('total', {unit: state.pro.product_name}) }}</div>
@@ -53,6 +54,7 @@
               is="OrderbookItem"
               v-for="(item, index) in asks"
               :key="index"
+              :rank="asks.length - index"
               :height="itemHeight + 'px'"
               side="sell"
               :item="item"
@@ -61,7 +63,10 @@
           </tbody>
         </table>
       </div>
-      <div class="order-split">
+      <div
+        class="order-split"
+        :class="{bid: local.orderbookMode === 'bid', ask: local.orderbookMode === 'ask'}"
+      >
         <div class="left-part">
           <div class="last-price">{{ lastPrice }}</div>
           <div class="estimate">
@@ -85,6 +90,7 @@
               is="OrderbookItem"
               v-for="(item, index) in bids"
               :key="index"
+              :rank="index + 1"
               :height="itemHeight + 'px'"
               side="buy"
               :item="item"
@@ -143,7 +149,7 @@ export default {
       navHeight: 32,
       splitHeight: 50,
       theadHeight: 30,
-      panelHeight: 200,
+      panelHeight: 316,
       loading: false,
       changing: false,
       clearTip: {
@@ -152,6 +158,8 @@ export default {
           return vm.$i18n.t('click_to_clear')
         }
       },
+      // 第一次纠正滚动条位置
+      isFristAdultScrolling: true,
       showDepthOption: false
     }
   },
@@ -162,7 +170,19 @@ export default {
         if (pair) {
           this.clear()
           this.sub()
+          // 切换币种前置纠正
+          this.isFristAdultScrolling = true
+          this.computedScrollPosition()
         }
+      }
+    },
+    'local.orderbookMode': {
+      // 切换标签后重新计算
+      immediate: true,
+      async handler (mode) {
+        // 切换标签强制指定滚动条位置
+        this.isFristAdultScrolling = true
+        this.computedScrollPosition()
       }
     }
   },
@@ -250,17 +270,14 @@ export default {
     askStyle () {
       if (this.local.orderbookMode === 'both') {
         return {
-          minHeight: this.sideHeight + 'px',
-          paddingTop: Math.max(this.sideHeight - this.asks.length * this.itemHeight, 0) + 'px',
-          marginTop: 0 - Math.max(0, this.asks.length * this.itemHeight - this.sideHeight) + 'px'
+          minHeight: this.sideHeight + 'px'
+          // paddingTop: Math.max(this.sideHeight - this.asks.length * this.itemHeight, 0) + 'px',
+          // marginTop: 0 - Math.max(0, this.asks.length * this.itemHeight - this.sideHeight) + 'px'
         }
       }
       if (this.local.orderbookMode === 'ask') {
         return {
-          overflow: 'hidden',
-          paddingTop: Math.max(this.bookHeight - this.splitHeight - this.asks.length * this.itemHeight, 0) + 'px',
-          minHeight: this.bookHeight - this.splitHeight + 'px',
-          marginTop: 0 - Math.max(0, this.asks.length * this.itemHeight - this.bookHeight + this.splitHeight) + 'px'
+          minHeight: this.bookHeight - this.splitHeight + 'px'
         }
       }
       return {}
@@ -269,12 +286,12 @@ export default {
       if (this.local.orderbookMode === 'both') {
         return {
           overflow: 'hidden',
-          height: Math.floor((this.bookHeight - this.splitHeight - this.sideHeight) / this.itemHeight) * this.itemHeight + 'px'
+          minHeight: Math.floor((this.bookHeight - this.splitHeight - this.sideHeight) / this.itemHeight) * this.itemHeight + 'px'
         }
       }
       if (this.local.orderbookMode === 'bid') {
         return {
-          height: this.bookHeight - this.splitHeight + 'px'
+          minHeight: this.bookHeight - this.splitHeight + 'px'
         }
       }
       return {}
@@ -314,8 +331,8 @@ export default {
 
       let buyTotal = this.$big(0)
       let sellTotal = this.$big(0)
-      let maxBuyTotal = _.maxBy(this.buy.slice(0, 10), i => parseFloat(i[1]))[1]
-      let maxSellTotal = _.maxBy(this.sell.slice(0, 10), i => parseFloat(i[1]))[1]
+      let maxBuyTotal = _.maxBy(this.buy, i => parseFloat(i[1]))[1]
+      let maxSellTotal = _.maxBy(this.sell, i => parseFloat(i[1]))[1]
       this.buy.forEach((buy) => {
         const amount = this.$big(buy[1])
         buyTotal = buyTotal.plus(amount)
@@ -338,6 +355,11 @@ export default {
       })
       this.asks = asks
       this.bids = bids
+      // 获取数据后强制指定滚动条位置，并重置状态，否则用户滚动会被纠正
+      this.computedScrollPosition()
+      if (this.isFristAdultScrolling) {
+        this.isFristAdultScrolling = false
+      }
     },
     error (msg) {
       this.err = msg
@@ -390,6 +412,28 @@ export default {
     layout () {
       this.onresize()
       this.$eh.$on('app:resize', this.onresize)
+    },
+    /**
+     * 计算滚动条位置，强制滚动
+     */
+    computedScrollPosition () {
+      // 已经纠正过的不在纠正
+      if (!this.isFristAdultScrolling) return
+      let mode = this.local.orderbookMode
+      if (mode === 'ask') {
+        this.$nextTick(() => {
+          this.$refs['body'].scrollTop = 200
+        })
+      } else if (mode === 'bid') {
+        this.$nextTick(() => {
+          this.$refs['body'].scrollTop = 0
+        })
+      } else {
+        // mode === 'both'
+        this.$nextTick(() => {
+          this.$refs['body'].scrollTop = 300
+        })
+      }
     }
   },
   created () {
@@ -404,6 +448,10 @@ export default {
       this.socket.$destroy()
     }
   }
+  // updated () {
+  //   console.log(new Date())
+  //   this.computedScrollPosition()
+  // }
 }
 </script>
 
@@ -502,7 +550,16 @@ export default {
   height: 30px;
 }
 .ix-panel-body {
-  overflow-y: hidden;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: block;
+    width: 2px;
+    height: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #192D3F;
+    border: none;
+  }
 }
 .err,
 .no-data {
@@ -523,10 +580,14 @@ export default {
   color: #A5B4C5;
   line-height: 30px;
   padding: 0 5px;
-  width: 33.33%;
+  width: 28%;
   box-sizing: border-box;
   &.right {
     text-align: right;
+  }
+  &:first-child {
+    max-width: 46px;
+    padding-left: 5px;
   }
 }
 .table tbody tr:hover {
@@ -550,6 +611,20 @@ th.sell {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  bottom:0;
+  background: $protrade-bg;
+  z-index: 100;
+
+  &.bid {
+    top: 0;
+    bottom: auto;
+  }
+  &.ask {
+    bottom: 0;
+    top: auto;
+  }
   .left-part {
     .last-price {
       line-height: 24px;

@@ -6,6 +6,8 @@
   "mining": "挖礦",
   "asset": "資產",
   "help": "幫助",
+  "buy": "買",
+  "sell": "賣",
   "userCenter": "用戶中心",
   "total": "累計(%{unit})",
   "operation": "操作",

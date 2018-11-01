@@ -6,6 +6,8 @@
   "mining": "락업채굴",
   "asset": "자산",
   "help": "도움",
+  "buy": "매수",
+  "sell": "매도",
   "userCenter": "고객센터",
   "total": "누계(%{unit})",
   "operation": "조작",

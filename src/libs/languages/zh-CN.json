@@ -6,6 +6,8 @@
   "mining": "挖矿",
   "asset": "资产",
   "help": "帮助",
+  "buy": "买",
+  "sell": "卖",
   "userCenter": "用户中心",
   "total": "累计(%{unit})",
   "operation": "操作",
