@@ -9,12 +9,12 @@ $color-bids-fall: #FF1E1D;
     .banner-text {
       width: 889px;
       height: 155px;
-      background-image: url(/static/active/lottery/banner-text-en.gif);
+      background-image: url(/static/active/lottery/banner-text-en.png);
     }
     .banner-text__2 {
         width: 694px;
         height: 34px;
-        background-image: url(/static/active/lottery/banner-text__2-en.gif);
+        background-image: url(/static/active/lottery/banner-text__2-en.png);
     }
     .invite-cambat {
         background: url('/static/active/lottery/combat_en.png') !important;
@@ -25,10 +25,10 @@ $color-bids-fall: #FF1E1D;
 .lang-ko {
   .lottery-container {
     .banner-text {
-      background-image: url(/static/active/lottery/banner-text-ko.gif);
+      background-image: url(/static/active/lottery/banner-text-ko.png);
     }
     .banner-text__2 {
-        background-image: url(/static/active/lottery/banner-text__2-ko.gif);
+        background-image: url(/static/active/lottery/banner-text__2-ko.png);
       }
   }
   .invite-cambat {
@@ -47,7 +47,7 @@ $color-bids-fall: #FF1E1D;
     .banner-text {
         width: 952px;
         height: 122px;
-        background-image: url(/static/active/lottery/banner-text.gif);
+        background-image: url(/static/active/lottery/banner-text.png);
         background-repeat: no-repeat;
         background-position: center center;
         background-size: 100%;
@@ -55,7 +55,7 @@ $color-bids-fall: #FF1E1D;
     .banner-text__2 {
         width: 322px;
         height: 65px;
-        background-image: url(/static/active/lottery/banner-text__2.gif);
+        background-image: url(/static/active/lottery/banner-text__2.png);
         background-repeat: no-repeat;
         background-position: center center;
         background-size: 100%;
