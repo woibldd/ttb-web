@@ -407,8 +407,8 @@ const service = {
     return request('account/balance/list')
   },
   // 提币记录
-  getWithdrawHistory () {
-    return request('/account/withdraw/list')
+  getWithdrawHistory (param) {
+    return request('/account/withdraw/list', param)
   },
   // 充币记录
   getDepositHistory (param) {

@@ -185,6 +185,7 @@ export default {
       }
     },
     changeType (type) {
+      this.page = 1
       this.getFundHistory(type)
     },
     getPage () {
