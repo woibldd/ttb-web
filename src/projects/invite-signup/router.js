@@ -7,7 +7,7 @@ let router = new Router({
   // mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/:source?',
       name: 'index',
       component: Index
     }

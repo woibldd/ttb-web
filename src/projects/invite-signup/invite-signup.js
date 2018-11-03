@@ -8,6 +8,8 @@ import router from './router'
 import utils from '@/modules/utils'
 import en from '@/libs/languages/zh-CN.json'
 
+import { Toast } from 'mint-ui'
+Vue.component(Toast.name, Toast)
 Vue.use(VueI18n)
 theme.set()
 
