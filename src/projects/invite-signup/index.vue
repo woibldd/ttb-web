@@ -15,10 +15,12 @@
         autocomplete="off">
         <div class="invite__field">
           <div class="input-box input-box__with-btn">
-            <ix-input
+            <input
+              class="input_invite"
+              readonly
               v-model.trim="inviteLink"
-              :label="$t('captcha')"
-            />
+              placeholder="邀请地址"
+            >
 
             <span
               class="sms-btn"
@@ -292,7 +294,7 @@ export default {
 
       // 手机注册相关
       phone: '',
-      regionId: '',
+      regionId: 86,
       regionOptions: [],
       sms: {
         // 0:可以发送, 1:倒计时, 2:重新发送
@@ -342,12 +344,32 @@ export default {
     ixInput
   },
   computed: {
+    // 表单数据
+    params () {
+      const params = {
+        email: this.email,
+        password: this.password,
+        code: this.captcha
+      }
+      if (this.by === 'phone') {
+        params.region = this.regionId
+        params.phone = this.phone
+      }
+      if (this.invitorId) {
+        params.invitor_id = this.invitorId
+      }
+      return params
+    },
     inviteLink () {
       return `${location.protocol}//${location.host}/user/register/?invitor=${this.inviteCode}`
     },
     inviteCode () {
       if (this.state.userInfo) { return this.state.userInfo.id }
       return ''
+    },
+    // 密码强度值
+    pwLevel () {
+      return _.filter(this.pwCheckList, r => r.pass).length
     },
     smsBtnText () {
       if (this.sms.status === 0) {
@@ -365,7 +387,15 @@ export default {
   methods: {
     copyLink (key) {
       copyToClipboard(this[key])
-      Toast('已复制')
+      Toast({
+        message: '提示',
+        position: 'bottom',
+        duration: 5000
+      })
+    },
+    resetError () {
+      this.errmsg = ''
+      this.triggerValidate = false
     },
     switchRegister () {
       this.by = this.by === 'phone' ? 'email' : 'phone'
@@ -498,6 +528,7 @@ export default {
   async created () {
     const res = await service.getRegionList()
     if (!res.code) {
+      console.log(res, 'ooo')
       this.regionOptions = res.data
     }
   }

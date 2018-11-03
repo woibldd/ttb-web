@@ -61,7 +61,6 @@ textarea {
     display: flex;
     align-items: center;
     flex-direction: column;
-    border: 1px solid red;
 
 
     .banner-top{
@@ -307,4 +306,25 @@ textarea {
     color: #8171F1;
     width: rem(190);
     text-align: center;
+}
+
+.input_invite {
+    flex: 1;
+    height:rem(80);
+    background:rgba(255,255,255,1);
+    box-shadow:0px rem(3) rem(24) 0px rgba(88,98,239,0.3);
+    border-radius:rem(12);
+    overflow: hidden;
+    padding-left: rem(20);
+
+    &:hover {
+        // border-bottom: 1px solid $primary;
+        // transition: border-bottom .7s;
+    }
+    &:focus {
+        font-size: 14px;
+    }
+    &::-webkit-input-placeholder {
+        color:#999999
+    }
 }
