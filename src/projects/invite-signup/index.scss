@@ -73,7 +73,6 @@ textarea {
         border:rem(4) solid rgba(32,0,68,1);
         background:linear-gradient(-90deg,rgba(140,0,64,1),rgba(32,0,68,1),rgba(140,0,64,1),rgba(32,0,68,1),rgba(140,0,64,1),rgba(30,0,68,1));
         -webkit-background-clip: text;
-        color: transparent;
         border-radius:rem(25);
         box-sizing: border-box;
         display: flex;
@@ -121,9 +120,10 @@ textarea {
     }
 
     .sms-btn {
+        font-size: rem(28);
         flex: none;
         margin-left: rem(20);
-        width: rem(190);
+        min-width: rem(190);
         height:rem(80);
         line-height: rem(80);
         text-align: center;
