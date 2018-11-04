@@ -1,5 +1,11 @@
 .invite-signup-container {
-    
+    background-image: url('~@/assets/invite-signup/bg.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    &.invite-con {
+        background-image: url('~@/assets/invite-signup/bg2.png');
+    }
 }
 ::-webkit-input-placeholder {
     color: #C1C1C1;
@@ -48,6 +54,9 @@ textarea {
 .mt-10 {
     margin-top: rem(10);
 }
+.mt-20 {
+    margin-top: rem(20);
+}
 .mb-40 {
     margin-bottom: rem(40);
 }
@@ -64,7 +73,6 @@ textarea {
     display: flex;
     align-items: center;
     flex-direction: column;
-
 
     .banner-top{
         margin-bottom: rem(26);
@@ -269,7 +277,8 @@ textarea {
 .activity-detail {
     width: 100%;
     text-align: center;
-    margin-top: rem(80);
+    margin-top: rem(60);
+    padding-bottom: rem(40);
     color: #351B78;
     font-size: rem(20);
 }

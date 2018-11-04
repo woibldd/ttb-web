@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="invite-signup-container"
+      class="invite-signup-container mt-20 invite-con"
       v-if="isInvite">
       <div class="banner">
         <div class="banner-text">
@@ -57,7 +57,7 @@
       </form>
     </div>
     <div
-      class="invite-signup-container"
+      class="invite-signup-container mt-20 "
       v-if="!isInvite">
       <div class="banner">
         <div class="banner-top">
