@@ -269,6 +269,7 @@ import utils from '@/modules/utils'
 import copyToClipboard from 'copy-to-clipboard'
 import { Toast, MessageBox } from 'mint-ui'
 import {state} from '@/modules/store'
+import 'mint-ui/lib/style.css'
 
 import _ from 'lodash'
 
@@ -340,7 +341,9 @@ export default {
     }
   },
   components: {
-    ixInput
+    ixInput,
+    Toast,
+    MessageBox
   },
   computed: {
     // 表单数据

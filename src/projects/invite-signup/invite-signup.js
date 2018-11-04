@@ -7,12 +7,7 @@ import eventHub from '@/modules/eventHub'
 import router from './router'
 import utils from '@/modules/utils'
 import en from '@/libs/languages/zh-CN.json'
-import 'mint-ui/lib/style.css'
 
-import { Toast,MessageBox } from 'mint-ui'
-
-Vue.component(Toast.name, Toast)
-Vue.component(MessageBox.name, MessageBox)
 Vue.use(VueI18n)
 theme.set()
 
