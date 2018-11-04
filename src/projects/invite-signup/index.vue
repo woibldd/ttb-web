@@ -4,8 +4,8 @@
       class="invite-signup-container"
       v-if="isInvite">
       <div class="banner">
-        <div class="banner-text invite-text ">
-          <p class="f71">你敢邀请我敢送！</p>
+        <div class="banner-text">
+          <p class="f71">你敢邀请我敢送!</p>
           <p class="mt-10 f44">邀请好友注册比特币随你拿</p>
         </div>
       </div>
