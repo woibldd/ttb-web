@@ -13,6 +13,9 @@ const service = {
     data.platform = data.platform || 1
     return request('/announcement/list', data)
   },
+  hasNewBanner () {
+    return request('announcement/has_new')
+  },
   resetPassword (data) {
     let uri = 'user/reset/password/email'
     if (data.by === 'phone') {

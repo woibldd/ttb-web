@@ -231,14 +231,19 @@ export default {
           this.notices = list.filter(b => b.slot === 2)
           if (this.notices.length > 3) {
             this.notices.splice(3)
-            // 判断最新公告是否小于4小时
-            const freshAlive = 4 * 3600 * 1000
-            let recentTime = maxBy(this.notices, i => i.create_time).create_time
-            recentTime = recentTime < 1e10 ? recentTime * 1000 : recentTime
-            if (recentTime > new Date().getTime() - freshAlive) {
-              this.hasNewNotice = true
-            }
           }
+          // 判断最新公告是否小于4小时
+          let resp = await service.hasNewBanner()
+          if (!resp.code && resp.data) {
+            this.hasNewNotice = resp.data['new']
+          }
+          // this.hasNewNotice = true
+          // const freshAlive = 4 * 3600 * 1000
+          // let recentTime = maxBy(this.notices, i => i.create_time).create_time
+          // recentTime = recentTime < 1e10 ? recentTime * 1000 : recentTime
+          // if (recentTime > new Date().getTime() - freshAlive) {
+          //   this.hasNewNotice = true
+          // }
         }
       }
     }
