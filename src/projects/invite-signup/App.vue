@@ -47,9 +47,10 @@ export default {
     width: 100%;
     background-color: #E9EBF8;
 }
-
+html,
 body {
     background-color: #E9EBF8;
+    height: 100%;
 }
 
 body::-webkit-scrollbar {

@@ -10,7 +10,7 @@
         </div>
       </div>
       <form
-        class="form"
+        class="form form_invite"
         onsubmit="return false"
         autocomplete="off">
         <div class="invite__field">
@@ -41,7 +41,7 @@
         <div class="invite__field">
           <div
             class="sign-up__btn"
-            @click="submit">
+            @click="sharePage">
             马上邀请好友加入
           </div>
         </div>
@@ -267,10 +267,8 @@ import pwChecker from '@/modules/pw-checker'
 import service from '@/modules/service'
 import utils from '@/modules/utils'
 import copyToClipboard from 'copy-to-clipboard'
-import { Toast } from 'mint-ui'
+import { Toast, MessageBox } from 'mint-ui'
 import {state} from '@/modules/store'
-
-// import {state} from '@/modules/store'
 
 import _ from 'lodash'
 
@@ -304,6 +302,7 @@ export default {
         timer: null
       },
       form: {},
+      inviteCodeBySignup: '',
       validateRules: {
         phone: {
           errTips: this.$t('bind_phone_err_format'),
@@ -365,7 +364,7 @@ export default {
     },
     inviteCode () {
       if (this.state.userInfo) { return this.state.userInfo.id }
-      return ''
+      return this.inviteCodeBySignup
     },
     // 密码强度值
     pwLevel () {
@@ -388,9 +387,9 @@ export default {
     copyLink (key) {
       copyToClipboard(this[key])
       Toast({
-        message: '提示',
-        position: 'bottom',
-        duration: 5000
+        message: '已复制',
+        position: 'middle',
+        duration: 15000
       })
     },
     resetError () {
@@ -459,7 +458,7 @@ export default {
       const check = this.checkParams()
       if (!check.ok || !!this.triggerValidate) {
         if (check.em) {
-          utils.alert(check.em)
+          Toast(check.em)
         }
         // this.errmsg = check.em
         return false
@@ -471,17 +470,16 @@ export default {
       if (res.code) {
       // 错误信息
       // this.errmsg = res.message
-        utils.alert(res.message)
+        Toast(res.message)
         this.loading = false
         return false
+      } else {
+        this.inviteCodeBySignup = res.data.id
       }
       utils.eraseCookie('invitor')
-      utils.success(this.$i18n.t('register_success'))
       // 激活邮箱
       // this.state.verifyEmail = this.email
-      this.$router.push({
-        name: 'login'
-      })
+      this.$router.push('/invite')
     },
     async getSmsCode () {
       if (this.sms.status === 1 || this.sms.loading || this.loading) {
@@ -489,11 +487,11 @@ export default {
       }
       if (this.by === 'phone') {
         if (!this.regionId) {
-          utils.alert(this.$i18n.t('region_ph'))
+          Toast(this.$i18n.t('region_ph'))
           return false
         }
         if (!this.phone) {
-          utils.alert(this.$i18n.t('bind_phone_err_empty'))
+          Toast(this.$i18n.t('bind_phone_err_empty'))
           // this.triggerValidate = true
           // this.errmsg = this.$i18n.t('bind_phone_err_empty')
           return false
@@ -501,7 +499,7 @@ export default {
       } else {
         if (!this.email) {
           // this.triggerValidate = true
-          utils.alert(this.$i18n.t('err_empty_email'))
+          Toast(this.$i18n.t('err_empty_email'))
           // this.errmsg = this.$i18n.t('err_empty_email')
           return false
         }
@@ -517,18 +515,25 @@ export default {
         lang: 'zh-CN'
       })
       if (res.code) {
-        utils.alert(res.message)
+        Toast(res.message)
         // this.errmsg = res.message
       } else {
         this.errmsg = ''
       }
+    },
+    sharePage () {
+      MessageBox.confirm('复制邀请链接并发送给好友').then(action => {
+        this.copyLink('inviteLink')
+      }).catch(err => {
+        console.log(err)
+        Toast('已取消')
+      })
     }
 
   },
   async created () {
     const res = await service.getRegionList()
     if (!res.code) {
-      console.log(res, 'ooo')
       this.regionOptions = res.data
     }
   }

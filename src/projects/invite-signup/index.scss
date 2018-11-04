@@ -4,11 +4,14 @@
 ::-webkit-input-placeholder {
     color: #C1C1C1;
 }
-a {
-    text-decoration: none;
+* {
+    outline: none;
     &:focus {
         outline: none;
     }
+}
+a {
+    text-decoration: none;
     &:active,
     &:visited, {
         color: #1e2865;
@@ -316,6 +319,7 @@ textarea {
     border-radius:rem(12);
     overflow: hidden;
     padding-left: rem(20);
+    padding-right: rem(20);
 
     &:hover {
         // border-bottom: 1px solid $primary;
@@ -326,5 +330,13 @@ textarea {
     }
     &::-webkit-input-placeholder {
         color:#999999
+    }
+}
+
+.form_invite {
+    margin-top: rem(80);
+
+    .activity-detail{
+        margin-top: rem(200);
     }
 }
