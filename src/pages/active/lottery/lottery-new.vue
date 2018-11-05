@@ -263,8 +263,8 @@
           </div>
           <div
             class="ix-will-destroy"
-            v-show="current.destory">
-            {{ $t('activity_lottery_destroy_ix_amount') }} {{ current.destory | round(2) | thousand }} IX
+            v-show="current.destroy">
+            {{ $t('activity_lottery_destroy_ix_amount') }} {{ current.destroy | round(2) | thousand }} IX
           </div>
         </div>
 
