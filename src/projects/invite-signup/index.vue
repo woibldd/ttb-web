@@ -4,10 +4,12 @@
       class="invite-signup-container mt-20 invite-con"
       v-if="isInvite">
       <div class="banner">
+        <!--
         <div class="banner-text">
           <p class="f71">你敢邀请我敢送!</p>
           <p class="mt-10 f44">邀请好友注册比特币随你拿</p>
         </div>
+        -->
       </div>
       <form
         class="form form_invite"
@@ -60,6 +62,7 @@
       class="invite-signup-container mt-20 "
       v-if="!isInvite">
       <div class="banner">
+        <!--
         <div class="banner-top">
           IX 大狂欢
         </div>
@@ -67,6 +70,7 @@
           <p>注册邀请</p>
           <p class="mt-10">BTC红包撒不停</p>
         </div>
+        -->
       </div>
       <form
         class="form"
@@ -244,13 +248,13 @@
         </div>
       </form>
       <div class="activity-note">
-        <p class="mb-40">活动时间：2018年11月6日00:00——11月25日24:00</p>
+        <p class="mb-40">活动时间：2018年11月6日00:00——11月11日24:00</p>
         <p>活动规则：</p>
         <p>1. 用户通过两种方式可以获得“BTC碎片”；</p>
         <p class="pl-10">方式一：邀请好友注册IX.com并完成KYC2高级认证，建立邀请关系的双方（邀请人和被邀请人）可分别获得0.5个“BTC碎片”作为奖励；</p>
         <p class="pl-10">方式二：被邀请者当日注册并完成5000个IX的当日净买入量（当日买入量减去当日卖出量），建立邀请关系的双方可分别获得0.5个“BTC碎片”作为奖励；</p>
         <p>2. 收集10个“BTC碎片”可兑换0.01个BTC；</p>
-        <p>3. 单个用户最多可获得10个”BTC碎片”；</p>
+        <p>3. 邀请人需要完成KYC2高级认证后才能获得“BTC碎片”，单个用户最多可获得10个“BTC碎片”；</p>
         <p>4. 活动期间未集齐10个“BTC碎片”的用户，可在活动结束时兑换IX，1个“BTC碎片”可兑换200个IX；</p>
         <div class="activity-detail">
           （详情请查看<a

@@ -2,9 +2,11 @@
     background-image: url('~@/assets/invite-signup/bg.png');
     background-repeat: no-repeat;
     background-size: contain;
+    padding-top: rem(680);
 
     &.invite-con {
         background-image: url('~@/assets/invite-signup/bg2.png');
+        padding-top: rem(600);
     }
 }
 ::-webkit-input-placeholder {
