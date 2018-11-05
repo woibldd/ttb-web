@@ -398,7 +398,7 @@ export default {
       Toast({
         message: '已复制',
         position: 'middle',
-        duration: 15000
+        duration: 3000
       })
     },
     resetError () {
