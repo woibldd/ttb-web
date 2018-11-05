@@ -1,3 +1,3 @@
 module.exports = {
-  title: '邀请注册'
+  title: ' IX注册送BTC红包'
 }
