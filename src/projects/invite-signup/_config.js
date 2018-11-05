@@ -1,3 +1,5 @@
 module.exports = {
-  title: '邀请注册'
+  title: 'IX注册送BTC红包',
+  description: '',
+  shortcut: '/static/img/bg.186ea1d.png'
 }
