@@ -476,7 +476,7 @@ export default {
     padding-top: 4px;
     position: absolute;
     right: -18px;
-    z-index: 9;
+    z-index: 9999;
 }
 .depth-options {
     box-sizing: border-box;

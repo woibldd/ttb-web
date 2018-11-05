@@ -271,9 +271,10 @@ import copyToClipboard from 'copy-to-clipboard'
 import { Toast, MessageBox } from 'mint-ui'
 import {state} from '@/modules/store'
 import 'mint-ui/lib/style.css'
-
+import qs from 'query-string'
 import _ from 'lodash'
 
+const { telebox } = qs.parse(location.search)
 export default {
   data () {
     return {
@@ -526,12 +527,22 @@ export default {
       }
     },
     sharePage () {
-      MessageBox.confirm('复制邀请链接并发送给好友').then(action => {
-        this.copyLink('inviteLink')
-      }).catch(err => {
-        console.log(err)
-        Toast('已取消')
-      })
+      if (telebox) {
+        if (utils.isIos) {
+          location.href = `tbox://action?api=share&title=${encodeURI('IX注册送BTC红包')}&text=${encodeURI('来IX.com，实现一个亿的小目标不是梦')}&url=https://ix.com/invite-signup.html`
+          console.log(`tbox://action?api=share&title=${encodeURI('IX注册送BTC红包')}&text=${encodeURI('来IX.com，实现一个亿的小目标不是梦')}&url=https://ix.com/invite-signup.html`)
+        } else {
+          location.href = `tbox://share?api=share&title=${encodeURI('IX注册送BTC红包')}&text=${encodeURI('来IX.com，实现一个亿的小目标不是梦')}&url=https://ix.com/invite-signup.html`
+          console.log(`tbox://action?api=share&title=${encodeURI('IX注册送BTC红包')}&text=${encodeURI('来IX.com，实现一个亿的小目标不是梦')}&url=https://ix.com/invite-signup.html`)
+        }
+      } else {
+        MessageBox.confirm('复制邀请链接并发送给好友').then(action => {
+          this.copyLink('inviteLink')
+        }).catch(err => {
+          console.log(err)
+          Toast('已取消')
+        })
+      }
     }
 
   },
