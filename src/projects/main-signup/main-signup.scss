@@ -55,12 +55,12 @@
 
             .hold-coin {
                 color: #fff;
-                font-weight:100;
+                font-weight: bold;
             }
             .hold-share {
                 color: #A4723B;
                 line-height: rem(83);
-                font-weight: Medium;
+                font-weight: bold;
             }
         }
 
@@ -373,9 +373,11 @@
 
         width:100%;
         text-align: center;
-        font-size:rem(38);
-        font-weight:rem(300);
-        color:rgba(255,255,255,1);
-        line-height:rem(72);
+        > p{
+            font-size:rem(38);
+            font-weight:400;
+            color:rgba(255,255,255,1);
+            line-height:rem(72);
+        }
     }
 }

@@ -180,7 +180,7 @@
         </div>
         <div class="field submit">
           <v-btn
-            :label="$t('signup_submit')"
+            label="立即注册"
             :loading="loading"
             height="40"
             width="390"
