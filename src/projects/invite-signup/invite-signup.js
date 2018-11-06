@@ -20,6 +20,9 @@ utils.$i18n = new VueI18n({
   }
 })
 
+// 设置默认语言中文
+utils.setCookie('lang', 'zh-CN', 1000)
+
 Vue.prototype.$eh = eventHub
 
 new Vue({
