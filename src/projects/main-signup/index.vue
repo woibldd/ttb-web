@@ -213,6 +213,7 @@ import resbg from '@/components/resbg'
 import ixInput from '@/components/common/ix-input/ix-input.vue'
 import 'mint-ui/lib/style.css'
 import { Toast } from 'mint-ui'
+import responsiveMixin from '@/mixins/responsive'
 
 // import { MdField } from 'vue-material/dist/components'
 // import gtMixin from '@/mixins/gt'
@@ -225,6 +226,7 @@ export default {
     ixInput,
     Toast
   },
+  mixins: [responsiveMixin],
   data () {
     return {
       state,
@@ -302,7 +304,7 @@ export default {
     meta.content = 'webkit'
     ele.appendChild(meta)
     let title = document.createElement('title')
-    title.append('IX | 持BTC躺赚30%高额分红！')
+    title.append('IX | 持BTC躺赚20%高额分红！')
     ele.getElementsByTagName('title')[0].remove()
     ele.appendChild(title)
     next()
@@ -366,11 +368,7 @@ export default {
       if (res.code) {
         // 错误信息
         // this.errmsg = res.message
-        Toast({
-          message: res.message,
-          position: 'middle',
-          duration: 13000
-        })
+        Toast(res.message)
         this.loading = false
         return false
       }
