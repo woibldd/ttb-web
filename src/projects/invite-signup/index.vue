@@ -469,6 +469,7 @@ export default {
         if (check.em) {
           Toast(check.em)
         }
+        Toast('请按照提示修改表单内容')
         // this.errmsg = check.em
         return false
       }
