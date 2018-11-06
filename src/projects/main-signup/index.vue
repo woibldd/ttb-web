@@ -42,6 +42,7 @@
               ref="phone"
               v-model.trim="phone"
               @input="phone=$event"
+              @focus="resetError"
               :trigger-validate="triggerValidate"
               :required='true'
               :empty-err-tips="$t('bind_phone_err_empty')"
@@ -60,6 +61,7 @@
               ref="email"
               v-model.trim="email"
               @input="email=$event"
+              @focus="resetError"
               :trigger-validate="triggerValidate"
               :required='true'
               :empty-err-tips="$t('err_empty_email')"
@@ -78,6 +80,7 @@
               :trigger-validate="triggerValidate"
               :required='true'
               @input="captcha=$event"
+              @focus="resetError"
               :empty-err-tips="$t('err_captcha_empty')"
               :rule="validateRules.captcha"
               :placeholder="$t('captcha')"
@@ -134,6 +137,7 @@
               ref="password2"
               v-model.trim="password2"
               @input="password2=$event"
+              @focus="resetError"
               :trigger-validate="triggerValidate"
               :required='true'
               type="password"
@@ -150,6 +154,7 @@
               ref="invitor"
               v-model.trim="invitorId"
               @input="invitorId=$event"
+              @focus="resetError"
               :rule="validateRules.invitor"
               :placeholder="$t('invitor_ph')"
               :label="$t('invitor')"
@@ -377,6 +382,7 @@ export default {
     },
     active (active) {
       this.atPw = active
+      this.resetError()
     },
     input (field, value) {
       this[field] = value
@@ -485,9 +491,6 @@ export default {
     }
   },
   async created () {
-    document.title = 'IX | 持BTC躺赚平台收入30%'
-    // this.gtInit()
-
     let invitorId = this.$route.query.invitor
     if (!invitorId) {
       invitorId = utils.getCookie('invitor')

@@ -1,3 +1,3 @@
 module.exports = {
-  title: 'IX注册送BTC红包'
+  title: 'IX | 持BTC躺赚平台收入20%'
 }
