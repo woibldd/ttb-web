@@ -106,7 +106,9 @@
               :required='true'
               :empty-err-tips="$t('bind_phone_err_empty')"
               :rule="validateRules.phone"
+              @focus="resetError"
               placeholder="请输入手机号码"
+              type="tel"
               :label="$t('phone_number')"
             />
           </div>
@@ -122,6 +124,7 @@
               @input="email=$event"
               :trigger-validate="triggerValidate"
               :required='true'
+              @focus="resetError"
               :empty-err-tips="$t('err_empty_email')"
               :rule="validateRules.email"
               placeholder="请输入邮箱账号"
@@ -137,7 +140,9 @@
               v-model.trim="captcha"
               :trigger-validate="triggerValidate"
               :required='true'
+              type="number"
               @input="captcha=$event"
+              @focus="resetError"
               :empty-err-tips="$t('err_captcha_empty')"
               :rule="validateRules.captcha"
               :placeholder="$t('captcha')"
@@ -193,6 +198,7 @@
               ref="password2"
               v-model.trim="password2"
               @input="password2=$event"
+              @focus="resetError"
               :trigger-validate="triggerValidate"
               :required='true'
               type="password"
@@ -277,9 +283,11 @@ import {state} from '@/modules/store'
 import 'mint-ui/lib/style.css'
 import qs from 'query-string'
 import _ from 'lodash'
+import responsiveMixin from '@/mixins/responsive'
 
 const { telebox } = qs.parse(location.search)
 export default {
+  mixins: [responsiveMixin],
   data () {
     return {
       state,
@@ -412,6 +420,7 @@ export default {
     },
     active (active) {
       this.atPw = active
+      this.resetError()
     },
     pwChange (password) {
       // this.password 比 时间传过来的password 更新慢一些
