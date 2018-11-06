@@ -46,6 +46,10 @@ export default {
     height: 100%;
     width: 100%;
     background-color: #E9EBF8;
+
+    &:hover {
+        outline: none;
+    }
 }
 html,
 body {
