@@ -22,7 +22,6 @@
   </div>
 </template>
 <script>
-import './ix-input.scss'
 export default{
   data () {
     return {
@@ -128,3 +127,6 @@ export default{
   }
 }
 </script>
+<style lang="scss" scoped>
+@import './ix-input.scss';
+</style>
