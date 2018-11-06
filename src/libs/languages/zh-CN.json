@@ -716,6 +716,13 @@
   "lever_accrual": "利息",
   "lever_accrual_unpaid": "未还利息",
   "lever_accrual__unpaid_amount": "未还数量",
-  "lever_repayment": "还款"
+  "lever_repayment": "还款",
+  "activity_peace_amount": "BTC碎片数量",
+  "activity_peace_btn": "碎片兑换",
+  "activity_peace_invite_text": "邀请好友认证KYC2获得",
+  "activity_peace_buy_text": "净买入5000 IX 获得",
+  "activity_peace_obtain": "%{amount}个碎片"
+  
+
 
 }
