@@ -214,7 +214,8 @@ import ixInput from '@/components/common/ix-input/ix-input.vue'
 import 'mint-ui/lib/style.css'
 import { Toast } from 'mint-ui'
 import responsiveMixin from '@/mixins/responsive'
-
+import qs from 'query-string'
+const {mytoken} = qs.parse(location.search)
 // import { MdField } from 'vue-material/dist/components'
 // import gtMixin from '@/mixins/gt'
 
@@ -374,9 +375,11 @@ export default {
       }
       utils.eraseCookie('invitor')
       Toast(this.$i18n.t('register_success'))
-      // 激活邮箱
-      // this.state.verifyEmail = this.email
-      window.location.href = 'https://www.ix.com'
+      if (mytoken) {
+        location.href = 'https://h5-cn-east.mytokenapi.com/activity/d11/?channel=20181111_ix'
+      } else {
+        location.href = 'https://ix.com/user/login/email'
+      }
     },
     active (active) {
       this.atPw = active
