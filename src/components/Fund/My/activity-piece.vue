@@ -46,8 +46,8 @@ export default {
   data () {
     return {
       data: {
-        invite_value: '23',
-        balance_value: '2'
+        invite_value: '0',
+        balance_value: '0'
       }
     }
   },
