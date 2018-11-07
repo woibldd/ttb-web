@@ -838,7 +838,13 @@
   "lever_accrual": "interest", 
   "lever_accrual_unpaid": "unpaid interest", 
   "lever_accrual__unpaid_amount": "unpaid amount", 
-  "lever_repayment": "repayment "
+  "lever_repayment": "repayment ",
+  "activity_piece_amount": "BTC fragments amount",
+  "activity_piece_btn": "Exchange",
+  "activity_piece_invite_text": "Inviting a friend with completed level 2 KYC certification",
+  "activity_piece_buy_text": "Rewards after hold 5000 IX tokens net purchased",
+  "activity_piece_obtain": "%{amount} fragments",
+  "activity_piece_exchange_successfully": "exchange completed"
 
 
 }

@@ -14,6 +14,9 @@
       <div class="fund-total">
         <div class="total__label">{{ $t('my_balance_equal') }}</div>
         <div class="total__coin">{{ total }} {{ unit }} </div>
+        <div
+          is="ActivityPiece"
+          @afterExchange="getAccountBalanceList"/>
       </div>
       <el-table
         :data="tableData"
@@ -67,9 +70,10 @@
   </div>
 </template>
 <script>
-import './my.scss'
 import service from '@/modules/service'
 import {state, actions} from '@/modules/store'
+import ActivityPiece from './activity-piece'
+
 const ExchangePairs = {
   'BTC': 'BTC_USDT',
   'ETH': 'ETH_USDT',
@@ -123,7 +127,6 @@ export default {
   },
   async created () {
     this.getAccountBalanceList()
-    actions.updateSession()
   },
   methods: {
     getAccountBalanceList () {
@@ -147,6 +150,13 @@ export default {
       }
       return res.round(num, this.C.ROUND_DOWN).toString()
     }
+  },
+  components: {
+    ActivityPiece
   }
 }
 </script>
+<style lang="scss">
+@import './my.scss';
+@import '~@/styles/tooltip';
+</style>

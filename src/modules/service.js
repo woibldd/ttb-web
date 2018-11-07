@@ -621,6 +621,12 @@ const service = {
   //  价格公示（最近一期） 获取比特币的开盘,收盘价格
   getAllPlatformBtcPrice () {
     return request('game/bet/btc/price')
+  },
+  getPieceCurrent () {
+    return request('mine/chip/current')
+  },
+  doExchangePiece () {
+    return request('mine/chip/exchange')
   }
 
 }

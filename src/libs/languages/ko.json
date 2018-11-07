@@ -712,6 +712,11 @@
   "lever_accrual": "리자",
   "lever_accrual_unpaid": "환불하지 않은 금액",
   "lever_accrual__unpaid_amount": "환불하지 않은 수량",
-  "lever_repayment": "금액 환불"
-
+  "lever_repayment": "금액 환불",
+  "activity_piece_amount": "BTC조각 수량",
+  "activity_piece_btn": "조각환전",
+  "activity_piece_invite_text": "친구요청인증을 통하여KYC2를 획득",
+  "activity_piece_buy_text": "수입5000 IX 획득",
+  "activity_piece_obtain": "%{amount} 개인 조각",
+  "activity_piece_exchange_successfully": "환전 성공"
 }
