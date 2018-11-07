@@ -714,5 +714,11 @@
   "lever_accrual": "利息",
   "lever_accrual_unpaid": "未還利息",
   "lever_accrual__unpaid_amount": "未還數量",
-  "lever_repayment": "還款"
+  "lever_repayment": "還款",
+  "activity_piece_amount": "BTC碎片數量",
+  "activity_piece_btn": "碎片兌換",
+  "activity_piece_invite_text": "邀請好友認證KYC2獲得",
+  "activity_piece_buy_text": "淨買入5000 IX 獲得",
+  "activity_piece_obtain": "%{amount} 個碎片",
+  "activity_piece_exchange_successfully": "兌換成功"
 }

@@ -1,12 +1,12 @@
 <template>
-  <div class="peaces">
+  <div class="pieces">
     <i class="coin"/>
     <span class="amount">
-      {{ $t('activity_peace_amount') }}:
+      {{ $t('activity_piece_amount') }}:
       <span class="number">{{ amount|thousand }}</span>
       <v-popover
         class="popover pointer"
-        :popover-inner-class="['popover-inner', 'my-peace-popover-cont']"
+        :popover-inner-class="['popover-inner', 'my-piece-popover-cont']"
         trigger="hover"
         placement="bottom"
       >
@@ -17,12 +17,12 @@
           class="popover-content"
           slot="popover">
           <p class="block">
-            <span class="desc">{{ $t('activity_peace_invite_text') }}</span>
-            <span class="value">{{ $t('activity_peace_obtain', {amount: 2}) }}</span>
+            <span class="desc">{{ $t('activity_piece_invite_text') }}</span>
+            <span class="value">{{ $t('activity_piece_obtain', {amount: data.invite_value || 0}) }}</span>
           </p>
           <p class="block">
-            <span class="desc">{{ $t('activity_peace_buy_text') }}</span>
-            <span class="value">{{ $t('activity_peace_obtain', {amount: 30}) }}</span>
+            <span class="desc">{{ $t('activity_piece_buy_text') }}</span>
+            <span class="value">{{ $t('activity_piece_obtain', {amount: data.balance_value || 0}) }}</span>
           </p>
         </div>
       </v-popover>
@@ -34,30 +34,48 @@
       radius="14"
       border="0"
       height="28"
-      :label="$t('activity_peace_btn')"/>
+      :label="$t('activity_piece_btn')"/>
 
   </div>
 </template>
 <script>
+import service from '@/modules/service'
+import utils from '@/modules/utils'
+import isEmtpy from 'lodash/isEmpty'
 export default {
   data () {
     return {
-      data: {}
+      data: {
+        invite_value: '23',
+        balance_value: '2'
+      }
     }
   },
   computed: {
     amount () {
-      return this.data.amount || 20
+      if (!isEmtpy(this.data)) {
+        return this.$big(this.data.invite_value).plus(this.data.balance_value).toString()
+      }
+      return 0
     },
     canExchange () {
-      return this.amount >= 10
+      return this.data.state && this.amount > 10
     }
   },
   methods: {
-    fetch () {
-
+    async fetch () {
+      let res = await service.getPieceCurrent()
+      if (!res.code) {
+        this.data = res.data || {}
+      }
     },
-    doExchange () {
+    async doExchange () {
+      let res = await service.doExchangePiece()
+      if (!res.code) {
+        utils.success(this.$t('activity_piece_exchange_successfully'))
+      } else {
+        utils.alert(res.message)
+      }
       this.fetch()
       this.$emit('afterExchange')
     }
@@ -69,7 +87,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.peaces {
+.pieces {
   position: absolute;
   right: 0;
   display: flex;
@@ -116,7 +134,7 @@ export default {
 }
 </style>
 <style lang="scss">
-.my-peace-popover-cont {
+.my-piece-popover-cont {
   padding: 14px;
   .popover-content {
     .block {

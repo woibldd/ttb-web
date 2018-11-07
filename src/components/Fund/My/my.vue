@@ -15,7 +15,7 @@
         <div class="total__label">{{ $t('my_balance_equal') }}</div>
         <div class="total__coin">{{ total }} {{ unit }} </div>
         <div
-          is="ActivityPeace"
+          is="ActivityPiece"
           @afterExchange="getAccountBalanceList"/>
       </div>
       <el-table
@@ -72,7 +72,7 @@
 <script>
 import service from '@/modules/service'
 import {state, actions} from '@/modules/store'
-import ActivityPeace from './activity-peace'
+import ActivityPiece from './activity-piece'
 
 const ExchangePairs = {
   'BTC': 'BTC_USDT',
@@ -152,7 +152,7 @@ export default {
     }
   },
   components: {
-    ActivityPeace
+    ActivityPiece
   }
 }
 </script>
