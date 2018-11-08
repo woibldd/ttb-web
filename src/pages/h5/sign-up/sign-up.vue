@@ -289,7 +289,7 @@ export default {
     meta.content = 'webkit'
     ele.appendChild(meta)
     let title = document.createElement('title')
-    title.append('IX | 持BTC躺赚30%高额分红！')
+    title.append('IX | 持BTC躺赚20%高额分红！')
     ele.getElementsByTagName('title')[0].remove()
     ele.appendChild(title)
     next()
