@@ -196,11 +196,15 @@
             width="390"
             class="submit-btn"
             @click="submit"/>
-          <div
-            class="switch-btn"
-            @click="switchRegister">
-            {{ by === 'phone' ? '邮箱': '手机' }}注册
+          <div class="to-others">
+            <a :href="loginLink"><span class="white">已有账号,去</span>登录</a>
+            <div
+              class="by-links"
+              @click="switchRegister">
+              {{ by === 'phone' ? '邮箱': '手机' }}注册
+            </div>
           </div>
+
         </div>
       </form>
     </div>
@@ -354,6 +358,9 @@ export default {
     },
     isLoginPage () {
       return this.$route.params.action === 'login'
+    },
+    loginLink () {
+      return location.origin + '/main-signup.html#/login'
     }
   },
   watch: {

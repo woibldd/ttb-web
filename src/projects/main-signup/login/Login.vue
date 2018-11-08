@@ -199,6 +199,7 @@
 </template>
 
 <script>
+import qs from 'query-string'
 import service from '@/modules/service'
 import VBtn from '@/components/VBtn'
 import {state, actions, local} from '@/modules/store'
@@ -206,6 +207,7 @@ import utils from '@/modules/utils'
 import ixInput from '@/components/common/ix-input/ix-input.vue'
 import countDown from '@/components/common/countdown-code-button'
 import responsive from '@/mixins/responsive'
+const {mytoken} = qs.parse(location.search)
 
 export default {
   mixins: [responsive],
@@ -219,7 +221,7 @@ export default {
     return {
       local,
       state,
-      regionId: '',
+      regionId: 86,
       errmsg: '',
       email: '',
       password: '',
@@ -344,7 +346,6 @@ export default {
       // 未开启二步认证
         this.loginSuccess(res.data)
       }
-      location.href = 'https://h5-cn-east.mytokenapi.com/activity/d11/?channel=20181111_ix'
       // 无二步验证
       // if (!res.data.phone && !res.data.google) {
       // actions.resetStatus()
@@ -407,16 +408,11 @@ export default {
     async loginSuccess (userInfo) {
       actions.setUserInfo(userInfo)
       actions.resetStatus()
-
-      if (typeof state.loginBack === 'string') {
-        location.href = state.loginBack
+      if (mytoken) {
+        location.href = 'https://h5-cn-east.mytokenapi.com/activity/d11/?channel=20181111_ix'
       } else {
-        this.$router.push(state.loginBack)
+        location.href = 'https://ix.com/user/login/email'
       }
-      actions.setLoginBack(null)
-      // this.$router.push({
-      //   name: 'profile'
-      // })
     },
     getPhoneVerifyCode () {
       const param = {

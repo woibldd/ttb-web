@@ -339,11 +339,31 @@
         }
     }
     .field.submit {
+        .white {
+            color: #ffffff;
+        }
         .submit-btn {
             height: rem(70) !important;
             border-radius: rem(35) !important;
             margin-top: 0;
             margin-bottom: rem(14)
+        }
+        .to-others {
+            font-size: 0;
+            display: flex;
+            color: #A4723B;
+            justify-content: space-between;
+            a {
+              font-size: 14px;
+              display: inline-block;
+              color: #A4723B;
+            }
+          }
+        .by-links {
+            font-size: 14px;
+            cursor: pointer;
+            color: #A4723B;
+            display: inline-block;
         }
     }
     .agreement {
@@ -355,17 +375,6 @@
         .checkbox {
             vertical-align: sub;
         }
-    }
-    .switch-btn {
-        box-sizing: border-box;
-        width:100%;
-        text-align: right;
-        height: rem(23);
-        font-size:rem(24);
-        font-family:PingFangSC-Light;
-        font-weight: bold;
-        color:rgba(164,114,59,1);
-        line-height:rem(25);
     }
 
     .h5__panel-next {
