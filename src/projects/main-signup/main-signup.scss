@@ -22,10 +22,11 @@
         box-sizing: border-box;
         background-image: url('~@/assets/h5/h5-bg-project-1.png');
         background-repeat: no-repeat;
-        background-size: 100% 100%;
+        background-size: contain;
         border-radius: rem(4);
         width: 100%;
         min-height: 100vh;
+        background-color: #181719;
         input,
         select,
         textarea {
