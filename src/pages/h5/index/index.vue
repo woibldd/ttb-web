@@ -182,6 +182,16 @@
                   src="~@/assets/copr-logo-hl.png">
               </a>
             </div>
+            <div class="corp-logo">
+              <a
+                class="link"
+                href="https://www.bishijie.com"
+                target="_blank">
+                <img
+                  class="logo cw"
+                  src="~@/assets/copr-logo-cw.png">
+              </a>
+            </div>
           </div>
         </div>
       </div>
