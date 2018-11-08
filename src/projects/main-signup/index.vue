@@ -4,11 +4,21 @@
       <div class="title-wrap">
         <div class="panel-title"/>
         <div class="panel-head-text">
+          {{ isLoginPage ? '登录' : '注册' }}后领取镰刀割大庄，666万奖励等你拿！
+        </div>
+        <!--
+        <div class="panel-head-text">
           <p class="hold-coin">持有比特币</p>
           <p class="hold-share">每天分平台收入20%</p>
         </div>
+        -->
+      </div>
+      <div
+        v-if="isLoginPage">
+        <login/>
       </div>
       <form
+        v-if="!isLoginPage"
         class="form"
         onsubmit="return false"
         autocomplete="off">
@@ -186,11 +196,15 @@
             width="390"
             class="submit-btn"
             @click="submit"/>
-          <div
-            class="switch-btn"
-            @click="switchRegister">
-            {{ by === 'phone' ? '邮箱': '手机' }}注册
+          <div class="to-others">
+            <a :href="loginLink"><span class="white">已有账号,去</span>登录</a>
+            <div
+              class="by-links"
+              @click="switchRegister">
+              {{ by === 'phone' ? '邮箱': '手机' }}注册
+            </div>
           </div>
+
         </div>
       </form>
     </div>
@@ -215,6 +229,7 @@ import 'mint-ui/lib/style.css'
 import { Toast } from 'mint-ui'
 import responsiveMixin from '@/mixins/responsive'
 import qs from 'query-string'
+import Login from './login/Login.vue'
 const {mytoken} = qs.parse(location.search)
 // import { MdField } from 'vue-material/dist/components'
 // import gtMixin from '@/mixins/gt'
@@ -225,7 +240,8 @@ export default {
     VBtn,
     resbg,
     ixInput,
-    Toast
+    Toast,
+    Login
   },
   mixins: [responsiveMixin],
   data () {
@@ -339,6 +355,12 @@ export default {
         return this.$i18n.t('sms_retry')
       }
       return `${this.$i18n.t('sms_retry')}(${this.sms.countDown})`
+    },
+    isLoginPage () {
+      return this.$route.params.action === 'login'
+    },
+    loginLink () {
+      return location.origin + '/main-signup.html#/login'
     }
   },
   watch: {

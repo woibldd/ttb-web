@@ -8,6 +8,7 @@ import router from './router'
 import utils from '@/modules/utils'
 import en from '@/libs/languages/zh-CN.json'
 import VLoading from '@/components/VLoading'
+import VModal from '@/components/VModal'
 
 Vue.use(VueI18n)
 theme.set()
@@ -25,6 +26,7 @@ utils.$i18n = new VueI18n({
 utils.setCookie('lang', 'zh-CN', 1000)
 Vue.prototype.$eh = eventHub
 Vue.component('v-loading', VLoading)
+Vue.component('v-modal', VModal)
 
 new Vue({
   el: '#app',
