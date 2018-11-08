@@ -360,7 +360,7 @@ export default {
       return this.$route.params.action === 'login'
     },
     loginLink () {
-      return location.origin + '/main-signup.html#/login'
+      return location.origin + `/main-signup.html${mytoken ? '?mytoken=1' : ''}#/login`
     }
   },
   watch: {

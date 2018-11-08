@@ -267,7 +267,7 @@ export default {
       return params
     },
     signupLink () {
-      return location.origin + '/main-signup.html'
+      return location.origin + `/main-signup.html${mytoken ? '?mytoken=1' : ''}`
     }
   },
   watch: {
