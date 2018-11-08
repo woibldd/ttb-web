@@ -1,16 +1,24 @@
 <template>
   <div class="h5-login-container ">
-    <div
-      class="panel"
-      v-if="!isLogin">
+    <div class="panel">
       <div class="title-wrap">
         <div class="panel-title"/>
+        <div class="panel-head-text">
+          {{ isLoginPage ? '登录' : '注册' }}后领取镰刀割大庄，666万奖励等你拿！
+        </div>
+        <!--
         <div class="panel-head-text">
           <p class="hold-coin">持有比特币</p>
           <p class="hold-share">每天分平台收入20%</p>
         </div>
+        -->
+      </div>
+      <div
+        v-if="isLoginPage">
+        <login/>
       </div>
       <form
+        v-if="!isLoginPage"
         class="form"
         onsubmit="return false"
         autocomplete="off">
@@ -196,11 +204,6 @@
         </div>
       </form>
     </div>
-    <div
-      class="panel"
-      v-if="isLogin">
-      <login/>
-    </div>
     <div class="h5__panel-next">
       <p>IX-全球首家</p>
       <p>支持比特币作为平台权益证明</p>
@@ -349,7 +352,7 @@ export default {
       }
       return `${this.$i18n.t('sms_retry')}(${this.sms.countDown})`
     },
-    isLogin () {
+    isLoginPage () {
       return this.$route.params.action === 'login'
     }
   },

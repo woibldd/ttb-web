@@ -1,72 +1,54 @@
 <template>
   <div class="page page-login">
-    <resbg/>
     <div
       class="panel_box"
       ref="container">
-      <div class="panel">
-        <div class="title-wrap">
-          <div
-            class="panel-title"
-            v-t="'signin'"/>
-          <div
-            class="by-links"
-            v-if="state.enablePhoneSignup">
-            <span
-              class="by-link ibt"
-              @click="by = 'email'">{{ $t('login_by_email') }}</span>
-            <span class="sp-line"/>
-            <span
-              class="by-link ibt"
-              @click="by = 'phone'">{{ $t('login_by_phone') }}</span>
+      <form
+        class="form"
+        onsubmit="return false"
+        @keydown.enter.stop.prevent="submit"
+        autocomplete="off">
+        <div
+          :class="['field']"
+          v-show="by === 'phone'">
+          <div class="input-box">
+            <div class="label">{{ $t('region_label') }}</div>
+            <v-loading
+              v-if="!regionOptions.length"
+              color="gray"/>
+            <select
+              class="select"
+              v-else
+              v-model="regionId"
+              tabindex="1"
+            >
+              <option value="">{{ $t('region_ph') }}</option>
+              <option
+                :value="option.id"
+                v-for="option in regionOptions"
+                :key="option.id">
+                <span>+{{ option.id }}</span>
+                <template >{{ option.cname }}</template>
+              </option>
+            </select>
           </div>
         </div>
-        <form
-          class="form"
-          onsubmit="return false"
-          @keydown.enter.stop.prevent="submit"
-          autocomplete="off">
-          <div
-            :class="['field']"
-            v-show="by === 'phone'">
-            <div class="input-box">
-              <div class="label">{{ $t('region_label') }}</div>
-              <v-loading
-                v-if="!regionOptions.length"
-                color="gray"/>
-              <select
-                class="select"
-                v-else
-                v-model="regionId"
-                tabindex="1"
-              >
-                <option value="">{{ $t('region_ph') }}</option>
-                <option
-                  :value="option.id"
-                  v-for="option in regionOptions"
-                  :key="option.id">
-                  <span>+{{ option.id }}</span>
-                  <template >{{ option.cname }}</template>
-                </option>
-              </select>
-            </div>
-          </div>
-          <div
-            class="field"
-            v-show="by === 'phone'">
-            <div class="input-box">
-              <!-- <div class="label">{{ $t('phone_number') }}</div> -->
-              <ix-input
-                class=""
-                ref="phone"
-                tabindex="2"
-                v-model.trim="phone"
-                :required='true'
-                :empty-err-tips="$t('bind_phone_err_empty')"
-                :rule="validateRules.phone"
-                :placeholder="$t('bind_phone_input')"
-                :label="$t('phone_number')"
-              />
+        <div
+          class="field"
+          v-show="by === 'phone'">
+          <div class="input-box">
+            <!-- <div class="label">{{ $t('phone_number') }}</div> -->
+            <ix-input
+              class=""
+              ref="phone"
+              tabindex="2"
+              v-model.trim="phone"
+              :required='true'
+              :empty-err-tips="$t('bind_phone_err_empty')"
+              :rule="validateRules.phone"
+              :placeholder="$t('bind_phone_input')"
+              :label="$t('phone_number')"
+            />
             <!-- <input class="input item" type="text"
               name="phone"
               @focus="active('phone', true)" @blur="active('phone', false)"
@@ -74,61 +56,67 @@
               :placeholder="$t('bind_phone_input')"
               :disabled="loading"
               v-model.trim="phone" /> -->
+          </div>
+        </div>
+        <div
+          :class="['field']"
+          v-show="by === 'email'">
+          <div class="input-box">
+            <!-- <div class="label" v-t="'login_label_mail'"></div> -->
+            <ix-input
+              class=""
+              tabindex="2"
+              ref="email"
+              v-model.trim="email"
+              :required='true'
+              :empty-err-tips="$t('err_empty_email')"
+              :rule="validateRules.email"
+              :placeholder="$t('err_empty_email')"
+              :label="$t('login_label_mail')"
+            />
+          </div>
+        </div>
+        <div :class="['field']">
+          <div class="input-box">
+            <!-- <div class="label" v-t="'login_label_pw'"></div> -->
+            <ix-input
+              class=""
+              ref="password"
+              tabindex="3"
+              v-model.trim="password"
+              :required='true'
+              type="password"
+              :empty-err-tips="$t('err_empty_password')"
+              :rule="validateRules.password"
+              :placeholder="$t('err_empty_password')"
+              :label="$t('login_label_pw')"
+            />
+          </div>
+        </div>
+        <div class="field submit">
+          <v-btn
+            tabindex="4"
+            class="submit-btn"
+            :label="$t('signin')"
+            height="40"
+            width="290"
+            :loading="loading"
+            @click="submit"/>
+          <div class="to-others">
+            <a :href="signupLink"><span class="white">新用户</span>注册</a>
+            <div class="by-links">
+              <span
+                class="by-link"
+                v-if="by === 'phone'"
+                @click="by = 'email'">{{ $t('login_by_email') }}</span>
+              <span
+                v-if="by === 'email'"
+                class="by-link"
+                @click="by = 'phone'">{{ $t('login_by_phone') }}</span>
             </div>
           </div>
-          <div
-            :class="['field']"
-            v-show="by === 'email'">
-            <div class="input-box">
-              <!-- <div class="label" v-t="'login_label_mail'"></div> -->
-              <ix-input
-                class=""
-                tabindex="2"
-                ref="email"
-                v-model.trim="email"
-                :required='true'
-                :empty-err-tips="$t('err_empty_email')"
-                :rule="validateRules.email"
-                :placeholder="$t('err_empty_email')"
-                :label="$t('login_label_mail')"
-              />
-            </div>
-          </div>
-          <div :class="['field']">
-            <div class="input-box">
-              <!-- <div class="label" v-t="'login_label_pw'"></div> -->
-              <ix-input
-                class=""
-                ref="password"
-                tabindex="3"
-                v-model.trim="password"
-                :required='true'
-                type="password"
-                :empty-err-tips="$t('err_empty_password')"
-                :rule="validateRules.password"
-                :placeholder="$t('err_empty_password')"
-                :label="$t('login_label_pw')"
-              />
-            </div>
-          </div>
-          <div class="field submit">
-            <v-btn
-              tabindex="4"
-              class="submit-btn"
-              :label="$t('signin')"
-              height="40"
-              width="290"
-              :loading="loading"
-              @click="submit"/>
-            <div class="to-others">
-              <router-link :to="{name: 'registerBy', params: $route.params, query: $route.query}">{{ $t('signup') }}</router-link>
-              <router-link
-                class="ml-5"
-                :to="{name: 'recover'}">{{ $t('if_forgot') }}?</router-link>
-            </div>
-          </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
     <v-modal
       :open.sync="showModal"
@@ -275,6 +263,9 @@ export default {
         params.region = this.regionId
       }
       return params
+    },
+    signupLink () {
+      return location.origin + '/main-signup.html'
     }
   },
   watch: {
@@ -353,6 +344,7 @@ export default {
       // 未开启二步认证
         this.loginSuccess(res.data)
       }
+      location.href = 'https://h5-cn-east.mytokenapi.com/activity/d11/?channel=20181111_ix'
       // 无二步验证
       // if (!res.data.phone && !res.data.google) {
       // actions.resetStatus()

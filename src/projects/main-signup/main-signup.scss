@@ -35,8 +35,7 @@
             box-shadow: none;
             border-radius: 0;
         }
-        padding-top: 3.7vh;
-        padding-bottom: 5.6vh;
+        padding-top: rem(40);
     }
     .title-wrap {
         padding-left: rem(34);
@@ -48,25 +47,32 @@
             width: rem(164);
             height: rem(38);
         }
-        .panel-head-text {
-            width: 100%;
-            text-align: center;
-            font-size: rem(54);
+        // .panel-head-text {
+        //     width: 100%;
+        //     text-align: center;
+        //     font-size: rem(54);
 
-            .hold-coin {
-                color: #fff;
-                font-weight: bold;
-            }
-            .hold-share {
-                color: #A4723B;
-                line-height: rem(83);
-                font-weight: bold;
-            }
+        //     .hold-coin {
+        //         color: #fff;
+        //         font-weight: bold;
+        //     }
+        //     .hold-share {
+        //         color: #A4723B;
+        //         line-height: rem(83);
+        //         font-weight: bold;
+        //     }
+        // }
+        .panel-head-text {
+            font-size: rem(32);
+            font-weight:400;
+            color:rgba(164,114,59,1);
+            line-height:rem(25);
+            text-align: center;
+            margin-top: rem(318);
         }
 
     }
     .form {
-        margin-top: rem(10);
         display: flex;
         flex-direction: column;
     }
@@ -336,14 +342,14 @@
         .submit-btn {
             height: rem(70) !important;
             border-radius: rem(35) !important;
-            margin-top: rem(42);
-            margin-bottom: rem(34)
+            margin-top: 0;
+            margin-bottom: rem(14)
         }
     }
     .agreement {
-        margin-top: rem(40);
+        margin-top: rem(16);
         font-size: rem(24);
-        margin-bottom: rem(21);
+        margin-bottom: rem(16);
         color: #ffffff;
         padding-left: rem(86);
         .checkbox {
