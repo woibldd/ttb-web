@@ -5,7 +5,7 @@
         <div class="panel-title"/>
         <div class="panel-head-text">
           <p class="hold-coin">持有比特币</p>
-          <p class="hold-share">每天分平台收入30%</p>
+          <p class="hold-share">每天分平台收入20%</p>
         </div>
       </div>
       <!-- <div class="error-block" v-show="errmsg">{{ errmsg }}</div> -->
@@ -482,7 +482,7 @@ export default {
   mounted () {
   },
   async created () {
-    document.title = 'IX | 持BTC躺赚平台收入30%'
+    document.title = 'IX | 持BTC躺赚平台收入20%'
     // this.gtInit()
 
     let invitorId = this.$route.query.invitor
