@@ -1,0 +1,354 @@
+@import "~@/styles/vars";
+@import "~@/styles/mixins";
+
+.lang-ja {
+  .panel {
+    width: 420px;
+  }
+  .field {
+    .label {
+      width: 116px;
+    }
+  }
+}
+.page-login {
+  color: $primary;
+  position:relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+}
+.logo {
+  width: 200px;
+  height: 39px;
+  margin: 0 auto 28px;
+  font-size: 24px;
+  color: #FFFFFF;
+}
+.panel_box {
+    display: table;
+    width: auto;
+    margin: 0 auto;
+}
+.panel {
+  background: none;
+  border-radius: 4px;
+  width: 360px;
+  display: table-cell;
+  vertical-align: middle;
+  input, select, textarea {
+    resize: none;
+    border: none;
+    outline: 0;
+    box-shadow: none;
+    border-radius: 0;
+  }
+}
+.title-wrap {
+  padding: 0 40px;
+  text-align: center;
+  margin-bottom: 28px;
+  z-index: 999;
+  position: relative;
+  .panel-title {
+    font-size: 24px;
+    line-height: 1.5;
+    color: $primary;
+    float: left;
+    // letter-spacing: 10px;
+  }
+  .by-links {
+    line-height: 36px;
+    font-size: 14px;
+    float: right;
+    text-align: center;
+    cursor: pointer;
+    color: hsla(0,0%,100%,.43);
+    display: inline-block;
+
+    &:focus {
+        outline: none;
+    }
+    .sp-line {
+      width: 1px;
+      height: 14px;
+      background-color: $primary;
+      margin: 0 10px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .by-link {
+      font-size: 14px;
+      line-height: 36px;
+      color: #aaa49b;
+    }
+  }
+
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+.error-block {
+  font-weight: bold;
+  border-radius: 3px;
+  border: 2px solid $state-text-red;
+  margin: 0 10px;
+  padding: 11px 14px;
+  font-size: 12px;
+  color: $state-text-red;
+}
+.field {
+  @include clearfix();
+  position: relative;
+  height: 60px;
+
+  .input-box {
+    width: 100%;
+    height: 60px;
+    padding: 0 38px;
+    top: 0;
+    left: 0;
+  }
+  .error-tips {
+    color: $state-text-red;
+    font-size: 12px;
+  }
+  .label {
+    color: $primary;
+    float: left;
+    font-size: 12px;
+    line-height: 12px;
+    width: 96px;
+    position: absolute;
+    display: none;
+  }
+  .quick-delete {
+    display: inline-block;
+    position: absolute;
+    top: 32px;
+    right: 54px;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 98;
+
+    &[data-enable=true] {
+        pointer-events: auto;
+        opacity: 1;
+        transition: all .7s;
+    }
+
+    &::after {
+      z-index: 99;
+      content: "\2715";
+      font-size: 14px;
+      font-weight: bolder;
+      color: #999999;
+      display: block;
+      width: 14px;
+      height: 14px;
+      line-height: 14px;
+      text-align: center;
+      // transform: scale(.7);
+    }
+  }
+
+  &.active {
+    .label {
+      display: block;
+    }
+    .input {
+      border-bottom: 1px solid $primary;
+      transition: border-bottom .7s;
+      font-size: 14px
+    }
+  }
+  .item {
+    float: left;
+    margin-top: 10px;
+    &.name {
+      width: 60px;
+    }
+  }
+  .input {
+    height: 36px;
+    padding: 10px 0 10px 5px;
+    line-height: 20px;
+    background-color: transparent;
+    box-sizing: border-box;
+    position: absolute;
+    color: #fff;
+    border-bottom: 1px solid #ffffff;
+    font-size: 16px;
+    appreance: none;
+    -webkit-appearance: none;
+    background-color: transparent;
+    // padding: 8px;
+    width: 280px;
+
+    &:hover {
+      border-bottom: 1px solid $primary;
+      transition: border-bottom .7s;
+    }
+    &::-webkit-input-placeholder {
+      color:#999999
+    }
+  }
+
+  .select {
+    appearance: none;
+    -webkit-appearance: none;
+    background: inherit;
+    color: #fff;
+    border-bottom: 1px solid #ffffff;
+    outline: none;
+    font-size: 16px;
+    line-height: 18px;
+    padding: 8px;
+    height: 36px;
+    box-sizing: border-box;
+    width: 280px;
+    position: absolute;
+    bottom: 0;
+    &:hover {
+      border-bottom: 1px solid $primary;
+      transition: border-bottom .7s;
+    }
+    option {
+      color:#000;
+    }
+  }
+  .split {
+    height: 36px;
+    float: left;
+    width: 1px;
+    background-color: #DDDDDD;
+    margin-right: 10px;
+  }
+  .ix-loading {
+    float: left;
+    width: 40px;
+    margin-top: 14px;
+  }
+  .input.captcha {
+    width: 170px;
+    // border-right: 1px solid #DDDDDD;
+  }
+  .sms-btn {
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 20px;
+    margin-left: 10px;
+    margin-right: 40px;
+    border: 1px $primary solid;
+    // background-color: #3075ee;
+    color: $primary;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    &.disabled {
+      @include a() {
+        color: #AAAAAA;
+      }
+    }
+  }
+  &.captcha {
+    padding-right: 0;
+  }
+}
+.field.submit {
+  padding: 33px 26px 11px;
+  border-bottom: none;
+}
+.error-block {
+  margin-top: 18px;
+}
+.agreement {
+  font-size: 12px;
+  margin-bottom: 21px;
+}
+.to-others {
+  font-size: 0;
+  text-align: right;
+  a {
+    font-size: 14px;
+    display: inline-block;
+  }
+  i {
+    &:after {
+      content: '·'
+    }
+    font-size: 14px;
+    vertical-align: top;
+    display: inline-block;
+    width: 18px;
+    text-align: center;
+    color: #CCCCCC;
+    user-select: none;
+  }
+}
+.submit-btn {
+  margin: 0 auto 13px;
+  width: 290px;
+  box-sizing: border-box;
+}
+
+.ensure-modal {
+  width:541px;
+  background:rgba(255,255,255,1);
+  border-radius:8px;
+  padding-bottom: 50px;
+  padding-top: 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .modal__title {
+      font-size:20px;
+      font-weight:bold;
+      color:$text-strong;
+  }
+  .modal__row {
+      box-sizing: border-box;
+      .row__label {
+          font-size:14px;
+          font-weight:400;
+          color:$text-weak;
+      }
+      .row__input {
+          box-sizing: border-box;
+          border: 1px solid $text-normal;
+          width: 340px;
+          height: 40px;
+          line-height: 40px;
+          border-radius: 4px;
+          color: $text-weak;
+          padding-left: 10px;
+      }
+      .input-validate {
+          width: 220px;
+          border: 0;
+          border-right: 1px solid $text-normal;
+
+          &.google {
+              border: 0;
+          }
+
+          &:focus{
+              outline: none;
+          }
+      }
+
+  }
+  .w-340 {
+      width: 340px;
+  }
+
+    }

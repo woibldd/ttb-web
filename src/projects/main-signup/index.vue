@@ -1,6 +1,8 @@
 <template>
   <div class="h5-login-container ">
-    <div class="panel">
+    <div
+      class="panel"
+      v-if="!isLogin">
       <div class="title-wrap">
         <div class="panel-title"/>
         <div class="panel-head-text">
@@ -194,6 +196,11 @@
         </div>
       </form>
     </div>
+    <div
+      class="panel"
+      v-if="isLogin">
+      <login/>
+    </div>
     <div class="h5__panel-next">
       <p>IX-全球首家</p>
       <p>支持比特币作为平台权益证明</p>
@@ -215,6 +222,7 @@ import 'mint-ui/lib/style.css'
 import { Toast } from 'mint-ui'
 import responsiveMixin from '@/mixins/responsive'
 import qs from 'query-string'
+import Login from './login/Login.vue'
 const {mytoken} = qs.parse(location.search)
 // import { MdField } from 'vue-material/dist/components'
 // import gtMixin from '@/mixins/gt'
@@ -225,7 +233,8 @@ export default {
     VBtn,
     resbg,
     ixInput,
-    Toast
+    Toast,
+    Login
   },
   mixins: [responsiveMixin],
   data () {
@@ -339,6 +348,9 @@ export default {
         return this.$i18n.t('sms_retry')
       }
       return `${this.$i18n.t('sms_retry')}(${this.sms.countDown})`
+    },
+    isLogin () {
+      return this.$route.params.action === 'login'
     }
   },
   watch: {
