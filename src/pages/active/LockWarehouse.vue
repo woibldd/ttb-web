@@ -7,6 +7,7 @@
     </div>
     <div class="banner">
       <span class="title">IX {{ $t('mining') }}</span>
+      <span class="tips">{{ $t('activity_lottery_warm_tips') }}: {{ $t('rate_tips_g') }}</span>
     </div>
     <div class="c-box">
       <div class="top-box">
@@ -472,10 +473,17 @@ export default {
       font-size: 40px;
       color: #fff;
       width: 100%;
-      padding-top: 350px;
+      padding-top: 345px;
       display: block;
       font-weight: bold;
       text-align: center;
+    }
+    .tips {
+      font-size:12px;
+      display: block;
+      color: #CAAA6C;
+      text-align: center;
+      width: 100%;
     }
   }
   .c-box{
