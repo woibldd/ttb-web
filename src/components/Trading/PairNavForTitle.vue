@@ -160,23 +160,14 @@ export default {
     },
     onresize () {
       this.bodyHeight = (this.initHeight || (this.container.height - 80)) + 'px'
-    },
-    async bindHotKey () {
-      this.key = await utils.getExtModule('key')
-      this.key((this.isMac ? '⌘+f' : 'ctrl+f'), () => {
-        this.$refs.input.focus()
-        return false
-      })
     }
   },
   destroyed () {
     this.$eh.$off('app:resize', this.onresize)
     this.$eh.$off('protrade:layout:init', this.layoutInit)
-    this.key.unbind(this.isMac ? '⌘+f' : 'ctrl+f')
   },
   async created () {
     this.$eh.$on('protrade:layout:init', this.layoutInit)
-    this.bindHotKey()
   }
 }
 </script>

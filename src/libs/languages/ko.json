@@ -718,5 +718,26 @@
   "activity_piece_invite_text": "친구요청인증을 통하여KYC2를 획득",
   "activity_piece_buy_text": "수입5000 IX 획득",
   "activity_piece_obtain": "%{amount} 개인 조각",
-  "activity_piece_exchange_successfully": "환전 성공"
+  "activity_piece_exchange_successfully": "환전 성공",
+  "exchange_mode_mine": "채굴모드",
+  "exchange_mode_fee": "수수료모드",
+  "exchange_mode_open": "현재 모드를 개최",
+  "exchange_mode_close": "현재 모드를 폐쇄하다",
+  "exchnage_mode_switch_prompt": "개최를 할것입니까<span style=\"color:#C9A96C\">%{mode}</span>，만약 개최를 한다면 수수료는<br />현재 모드로 정산을 할것입니다。",
+  "exchange_fee_maker": "등기증표 수수료",
+  "exchange_fee_taker": "먹는 증표 수수료",
+  "exchange_mode_setting": "거래모드 설정",
+  "exchange_user_level": "사용자계급",
+  "exchange_user_level_mine": "나의 계급",
+  "exchange_user_level_all": "전원 계급",
+  "all_pairs": "전부 거래쌍",
+  "exchange_user_amount": "30일 거래량（합산btc)",
+  "rate_tips_f": "이번 모드에서는 우의 표의 코인이 수수료에 근거하여 수수료를 받을것입니다.하지만 거래가 소비한 수수료는 매 시간의 거래량과 락업량에 근거하여 ix의 방식으로 사용자에게 되돌아 갈것입니다.",
+  "rate_tips_f_n": "현재 모드하에서는 사용자가 최근 30일 거래량으로 수수료의 등급을 계산합니다，조건에 부합되면 등급 수수료의  혜택을 받을것입니다，현재 모드에서 사용한 수수료는 ix를 통하여 사용자에게 되돌아 가지 않을것입니다 。",
+  "rate_tips_g": "“IX/BTC”、“IX/USDT”의 거래는 채굴모드하에서에서는 ix를 통하여 사용자에게 되돌아 가지 않을것입니다",
+  "rate_tips_g_n": "거래를 할때 BTC의 가격을 BTC로 합산할것입니다，또 매일의UTC시간0시에 결산을 할것입니다，30일전의 모든 비코인 종류의 누적거래량을 계산할것입니다,례를 들어 사용자가 지난30일 동안 BTC、EOS、ETH，IX이 네가지를 거래하면，시스템은 이 네가지 코인의 매개 거래를 btc애 가격을 btc거래량으로 합산을 할것입니다 （USDT거래구역에서도 거래를 합산할것입니다），그리고 매일의UTC 0시에 지난 30일동안의 누적된 거래량을 계산할것입니다。",
+  "gentle_hint": "힌트",
+  "no_alert_again": "힌트를 다시는 드리지 않습니다"
+
+
 }

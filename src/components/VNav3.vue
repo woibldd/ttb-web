@@ -151,8 +151,8 @@
           </div> -->
           <div
             class="email mr-30"
-            @click="openDefault('profile')">
-            {{ desentInfo }}
+          >
+            <span @click="openDefault('profile')">{{ desentInfo }}</span>
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24 mobile">

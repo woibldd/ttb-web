@@ -37,11 +37,13 @@
           </div>
           <div class="rate-tips">
             <p class="rate-tips-title">{{ $t('tips') }}</p>
-            <p>{{ $t('rate_tips_a') }}</p>
-            <p>{{ $t('rate_tips_b') }}</p>
-            <p>{{ $t('rate_tips_c') }}</p>
-            <p>{{ $t('rate_tips_d') }}</p>
-            <p>{{ $t('rate_tips_e') }}</p>
+            <p>1. {{ $t('rate_tips_a') }}</p>
+            <p>2. {{ $t('rate_tips_b') }}</p>
+            <p>3. {{ $t('rate_tips_c') }}</p>
+            <p>4. {{ $t('rate_tips_d') }}</p>
+            <p>5. {{ $t('rate_tips_e') }}</p>
+            <p>6. {{ $t('rate_tips_f') }}</p>
+            <p>7. {{ $t('rate_tips_g') }}</p>
           </div>
         </div>
       </div>

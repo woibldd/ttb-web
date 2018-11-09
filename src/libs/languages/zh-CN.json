@@ -483,11 +483,11 @@
   "transaction_pair": "交易对",
   "maker": "挂单",
   "taker": "吃单",
-  "rate_tips_a": "1.挂单是你所下的限价单并未与当前挂单成交，并被放在买卖盘中等待成交的摆单，它增加了买卖盘的流动性。",
-  "rate_tips_b": "2.当其他人的摆单主动与你所下的摆单成交，你将支付挂单交易手续费（请注意当其他人的限价单与你的限价单成交，而下单时间又早于你时，你将支付吃单费）。",
-  "rate_tips_c": "3.吃单是你所下的限价单或市价单与当前的挂单直接成交。",
-  "rate_tips_d": "4.当你所下的摆单主动与其他人的摆单成交，你将支付吃单交易手续费。",
-  "rate_tips_e": "5.交易手续费将从您的成交总额中扣除。若成交后获得比特币资产，则支付比特币交易手续费。",
+  "rate_tips_a": "挂单是你所下的限价单并未与当前挂单成交，并被放在买卖盘中等待成交的摆单，它增加了买卖盘的流动性；",
+  "rate_tips_b": "当其他人的摆单主动与你所下的摆单成交，你将支付挂单交易手续费（请注意当其他人的限价单与你的限价单成交，而下单时间又早于你时，你将支付吃单费）；",
+  "rate_tips_c": "吃单是你所下的限价单或市价单与当前的挂单直接成交；",
+  "rate_tips_d": "当你所下的摆单主动与其他人的摆单成交，你将支付吃单交易手续费；",
+  "rate_tips_e": "交易手续费将从您的成交总额中扣除。若成交后获得比特币资产，则支付比特币交易手续费；",
   "increase": "涨幅",
   "vol": "量",
   "ystd_trad": "昨日挖矿量",
@@ -722,8 +722,30 @@
   "activity_piece_invite_text": "邀请好友认证KYC2获得",
   "activity_piece_buy_text": "净买入5000 IX 获得",
   "activity_piece_obtain": "%{amount}个碎片",
-  "activity_piece_exchange_successfully": "兑换成功"
-  
+  "activity_piece_exchange_successfully": "兑换成功",
+  "exchange_mode_mine": "挖矿模式",
+  "exchange_mode_fee": "手续费模式",
+  "exchange_mode_open": "开启当前模式",
+  "exchange_mode_close": "模式已开启",
+  "exchnage_mode_switch_prompt": "是否开启<span style=\"color:#C9A96C\">%{mode}</span>，如果开启后交易费率<br />按照当前模式计算。",
+  "exchange_fee_maker": "挂单手续费",
+  "exchange_fee_taker": "吃单手续费",
+  "exchange_mode_setting": "交易模式设置",
+  "exchange_user_level": "用户等级",
+  "exchange_user_level_mine": "我的等级",
+  "exchange_user_level_all": "全员等级",
+  "all_pairs": "全部交易对",
+  "exchange_user_amount": "30天交易量（折合btc)",
+  "rate_tips_f": "此模式下将根据上方表格各币对手续费率收取手续费，但交易花费的手续费将会根据每小时交易量和锁仓量的大小以IX通证返还给用户；",
+  "rate_tips_f_n": "此模式下将用户最近30天交易量计算手续费等级，满足条件即可享受该等级手续费优惠，此模式花费的手续费将不会以IX通证返还给用户；",
+  "rate_tips_g": "“IX/BTC”、“IX/USDT”的交易对在挖矿模式下不会以IX通证返还给用户。",
+  "rate_tips_g_n": "以交易时该币种对BTC的价格折算成BTC，并在每天的 UTC时间0点进行结算，计算出前30天所有币币交易币种的累计交易量，比如用户在过去30天交易了BTC、EOS、ETH，IX这4个币种，那么系统会把这4个币种的每笔交易都按交易时对BTC的价格折算成BTC交易量（在USDT交易区的交易也会进行折算），然后每天的UTC 0点计算前30天的累计交易量。",
+  "gentle_hint": "温馨提示",
+  "no_alert_again": "不再提示"
+
+
+
+
 
 
 }

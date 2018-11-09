@@ -13,12 +13,13 @@
         <div class="ix-col ix-col-2">
           <!-- 大盘顶部当前交易对信息 -->
           <pair-title/>
-
           <!-- 倒计时 & 大盘 -->
           <div
             class="ix-grid ix-grid-tv"
             ref="gridTradingView">
-            <TradingView ref="TradingView"/>
+            <TradingView
+              ref="TradingView"
+            />
             <!-- <div
               class="active-box"
               v-if="showCountdown">
@@ -79,6 +80,7 @@
       </div>
     </div>
     <order-deal-popover />
+    <NoMiningAlert :pair="state.pro.pair"/>
   </div>
 </template>
 
@@ -100,6 +102,7 @@ import Operate from '@/components/Trading/Operate'
 import OrderDealPopover from '@/components/Trading/OrderDealPopover'
 import coinIntro from '@/components/Trading/coin-intro'
 import PairTitle from '@/components/Trading/PairTitle'
+import NoMiningAlert from '@/components/Trading/NoMiningAlert'
 import responsiveScale from '@/mixins/responsiveScale'
 
 export default {
@@ -117,7 +120,8 @@ export default {
     PairNav,
     Operate,
     MobileNav,
-    PairTitle
+    PairTitle,
+    NoMiningAlert
   },
   data () {
     return {

@@ -78,7 +78,8 @@ export const local = new Locals('store', {
   proOnFav: false,
   pairTableTab: 'USDT',
   everSignup: false,
-  hideOthers: false
+  hideOthers: false,
+  ixAlert: false
 })
 
 export const actions = {

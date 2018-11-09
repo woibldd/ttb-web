@@ -8,9 +8,11 @@
       class="modal-wrap"
       :style="{backgroundColor: bgColor}">
       <slot/>
-      <a
-        class="close-btn"
-        @click.prevent="close"/>
+      <slot name="close">
+        <a
+          class="close-btn"
+          @click.prevent="close"/>
+      </slot>
     </div>
     <div
       class="modal-mask"

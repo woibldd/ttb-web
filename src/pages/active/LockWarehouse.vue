@@ -216,6 +216,7 @@
         <li><i>4.</i>{{ $t('req_d') }}</li>
         <li><i>5.</i>{{ $t('req_e') }}</li>
         <li><i>6.</i>{{ $t('req_f') }}</li>
+        <li><i>7.</i>{{ $t('rate_tips_g') }}</li>
         <li>{{ $t('req_g') }}</li>
       </ul>
     </div>
