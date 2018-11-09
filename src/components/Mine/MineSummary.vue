@@ -200,6 +200,7 @@ export default {
       // 第四个框
       let res = await service.getIXMarket()
       if (!res.code && !isEmpty(res.data)) {
+        res.data.amount = this.$big(res.data.market_value).minus(res.data.locked)
         this.ixMarketData = Object.assign({}, res.data)
       }
     },
