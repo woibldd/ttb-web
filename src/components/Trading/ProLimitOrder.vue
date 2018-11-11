@@ -495,7 +495,9 @@ export default {
         return false
       }
 
-      const $price = this.$big(this.getValues('price', side) || 0)
+      const $$price = this.getValues('price', side)
+      const $price = this.$big($$price || 0)
+
       const $amount = this.$big(this.getValues('amount', side) || 0)
       const $bid = this.$big(this.state.pro.bid || 0)
       const $ask = this.$big(this.state.pro.ask || 0)
@@ -565,7 +567,7 @@ export default {
       const order = {
         type: 1,
         side: side === 'SELL' ? 2 : 1,
-        price: $price.toString(),
+        price: $$price,
         amount: $amount.toString(),
         symbol: this.state.pro.pair
       }
