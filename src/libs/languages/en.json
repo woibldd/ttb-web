@@ -860,7 +860,7 @@
   "exchange_user_amount": "30-day trading volume (btc equivalent)",
   "rate_tips_f": "In this mode, a handling fee will be charged according to the above table for each trading currency, but handling fee for the transaction based on hourly transaction volume and the lock-in volume will be returned to the user with IX tokens.",
   "rate_tips_f_n": "In this mode, the calculation of the level of handling fee is based on the last 30 days of trading volume. If certain conditions are met, rebates will be enjoyed. The handling fee for this mode will not be returned to the user using IX tokens. ",
-  "rate_tips_g": "For \"IX/BTC\",\"IX/USDT\" transactions against the mining mode, nothing will be returned to the user with IX tokens.",
+  "rate_tips_g": "The “IX/BTC” and “IX/USDT” pairs are  no longer supported by  the ”Mining Transaction” modules.",
   "rate_tips_g_n": "Based on the currency trading against BTC, the price will be converted to BTC value, and settled at 0.00 UTC every day, and on the basis of the prior 30 days of transactions. For example, if the user has traded in the past 30 days on BTC, EOS, ETH, IX, then the system will convert each of these four currencies into BTC trading volume according to the prevailing price of the BTC (the transaction in the USDT trading area will also be converted), and then calculate the cumulative volume of the prior 30 days at 0.00 UTC every day.",
   "gentle_hint": "Gentle hint",
   "no_alert_again": "No more prompts"
