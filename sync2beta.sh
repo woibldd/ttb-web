@@ -4,4 +4,4 @@ npm run build:beta
 
 sleep 2
 
-rsync -e "ssh" -rcvPz dist/* root@ix-test.com:~/www
+rsync -e "ssh" -rcvPz dist/* root@ix-test.com:~/ixx

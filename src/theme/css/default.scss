@@ -1,7 +1,7 @@
 /* primary */
-$primary: #C9A96C; // base -主色
+$primary: #01CED1; // base -主色
 $primary-hover: #aa8b61; // hover
-$primary-active: #C9A96C; // active
+$primary-active: #01CED1; // active
 $primary-disabled: rgba(0,0,0,0.2); // disabled
 $primary-opacity: #293443; // background 交易品种列表选中的背景色，主色25%透明度
 
@@ -11,9 +11,9 @@ $normal-nav: #252838; // 资产个人中心导航颜色 -nav bg
 $nav-2: #303E4B; // 副导航颜色 -nav-2
 
 /* link */
-$text-link: #C9A96C; // base -文字链
-$text-link-hover: #C9A96C; // hover
-$text-link-active: #C9A96C; // active
+$text-link: #00CED2; // base -文字链
+$text-link-hover: #01CED1; // hover
+$text-link-active: #00CED2; // active
 $text-link-disabled: rgba(0,0,0,0.3); // disabled
 
 /* trade */
@@ -75,7 +75,7 @@ $text-weak: #999999; // 重要文字
 $text-normal: #cccccc; // 一般
 
 /* hover */
-$hover-bg: #C9A96C; // 首页按钮hover
+$hover-bg: #01CED1; // 首页按钮hover
 $dropdown-bg: rgba(0,0,0,0.1); // 下拉列表hover
 
 /* home header background */

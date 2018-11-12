@@ -723,7 +723,7 @@
   "exchange_mode_fee": "수수료모드",
   "exchange_mode_open": "현재 모드를 개최",
   "exchange_mode_close": "현재 모드를 폐쇄하다",
-  "exchnage_mode_switch_prompt": "개최를 할것입니까<span style=\"color:#C9A96C\">%{mode}</span>，만약 개최를 한다면 수수료는<br />현재 모드로 정산을 할것입니다。",
+  "exchnage_mode_switch_prompt": "개최를 할것입니까<span style=\"color:#01CED1\">%{mode}</span>，만약 개최를 한다면 수수료는<br />현재 모드로 정산을 할것입니다。",
   "exchange_fee_maker": "등기증표 수수료",
   "exchange_fee_taker": "먹는 증표 수수료",
   "exchange_mode_setting": "거래모드 설정",

@@ -506,7 +506,7 @@ export default {
     font-size: 14px;
     &:hover,
     &.router-link-active {
-      color: #c9a96c;
+      color: $primary;
     }
   }
   .lang {
@@ -552,7 +552,7 @@ export default {
             color: #fff;
             &:hover{
                 background:#273440;
-                color: #c9a96c;
+                color: #01CED1;
             }
         }
     }

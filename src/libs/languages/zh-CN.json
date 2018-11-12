@@ -727,7 +727,7 @@
   "exchange_mode_fee": "手续费模式",
   "exchange_mode_open": "开启当前模式",
   "exchange_mode_close": "模式已开启",
-  "exchnage_mode_switch_prompt": "是否开启<span style=\"color:#C9A96C\">%{mode}</span>，如果开启后交易费率<br />按照当前模式计算。",
+  "exchnage_mode_switch_prompt": "是否开启<span style=\"color:#01CED1\">%{mode}</span>，如果开启后交易费率<br />按照当前模式计算。",
   "exchange_fee_maker": "挂单手续费",
   "exchange_fee_taker": "吃单手续费",
   "exchange_mode_setting": "交易模式设置",

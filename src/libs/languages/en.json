@@ -849,7 +849,7 @@
   "exchange_mode_fee": "Fee structure mode",
   "exchange_mode_open": "Current opening/initializing mode",
   "exchange_mode_close": "Current termination mode",
-  "exchnage_mode_switch_prompt": "Whether to open or not <span style=\"color:#C9A96C\">%{mode}</span>，Having opened, the transaction rate<br />is calculated according to the current mode。",
+  "exchnage_mode_switch_prompt": "Whether to open or not <span style=\"color:#01CED1\">%{mode}</span>，Having opened, the transaction rate<br />is calculated according to the current mode。",
   "exchange_fee_maker": "Pending order fee",
   "exchange_fee_taker": "Completing a deal fee",
   "exchange_mode_setting": "Trading Setting",

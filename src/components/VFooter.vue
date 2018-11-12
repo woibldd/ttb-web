@@ -204,7 +204,7 @@ export default {
     .footer_ltxt{
       font-size: 14px;
       line-height: 40px;
-      color: #C9A96C;
+      color: #01CED1;
       display: block;
       letter-spacing:2px;
       b{
@@ -246,7 +246,7 @@ export default {
         line-height: 30px;
         margin-top: 15px;
         margin-bottom: 15px;
-        color: #C9A96C;
+        color: #01CED1;
       }
     }
     .footer-rt{

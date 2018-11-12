@@ -725,7 +725,7 @@
   "exchange_mode_fee": "手續費模式",
   "exchange_mode_open": "開啟當前模式",
   "exchange_mode_close": "關閉當前模式",
-  "exchnage_mode_switch_prompt": "是否開啟<span style=\"color:#C9A96C\">%{mode}</span>，如果開啟後交易費率<br />按照當前模式計算。",
+  "exchnage_mode_switch_prompt": "是否開啟<span style=\"color:#01CED1\">%{mode}</span>，如果開啟後交易費率<br />按照當前模式計算。",
   "exchange_fee_maker": "掛單手續費",
   "exchange_fee_taker": "吃單手續費",
   "exchange_mode_setting": "交易模式設置",
