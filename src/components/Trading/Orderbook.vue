@@ -424,6 +424,10 @@ export default {
         this.$nextTick(() => {
           this.$refs['body'].scrollTop = 200
         })
+        // 数据更新不及时可能会带来问题
+        setTimeout(() => {
+          this.$refs['body'].scrollTop = 200
+        }, 300)
       } else if (mode === 'bid') {
         this.$nextTick(() => {
           this.$refs['body'].scrollTop = 0
@@ -433,6 +437,10 @@ export default {
         this.$nextTick(() => {
           this.$refs['body'].scrollTop = 300
         })
+        // 数据更新不及时可能会带来问题
+        setTimeout(() => {
+          this.$refs['body'].scrollTop = 300
+        }, 300)
       }
     }
   },

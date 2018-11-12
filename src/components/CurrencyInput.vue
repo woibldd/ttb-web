@@ -1,22 +1,24 @@
 <template>
-  <div class="currency-input" 
-:class="{static: isStatic}">
-    <input 
-type="text" 
-ref="input" class="input"
-           :disabled="disabled"
-           :readonly="readonly"
-           maxlength="32"
-           :placeholder="placeholder"
-           @keydown.up="up"
-           @keydown.down="down"
-           @input="updateValue($event.target.value, 'input')"
-           @focus="focus()"
-           @blur="fixValue();blur()">
-    <div 
-class="currency-input label" 
-v-if="currency"
-         :class="{long: currency.length > 5}">
+  <div
+    class="currency-input"
+    :class="{static: isStatic}">
+    <input
+      type="text"
+      ref="input"
+      class="input"
+      :disabled="disabled"
+      :readonly="readonly"
+      maxlength="32"
+      :placeholder="placeholder"
+      @keydown.up="up"
+      @keydown.down="down"
+      @input="updateValue($event.target.value, 'input')"
+      @focus="focus()"
+      @blur="fixValue();blur()">
+    <div
+      class="currency-input label"
+      v-if="currency"
+      :class="{long: currency.length > 5}">
       {{ currency }}
     </div>
     <!-- <div class="btn bid1" v-show="bid"
@@ -175,6 +177,7 @@ export default {
       this.updateValue(this.$big(this.$refs.input.value || '0').plus(this.step.mul(delta)).round(this.stepScale || this.realScale) + '', 'fixValue')
     },
     updateValue (value, src) {
+      let isE = false
       this.log(`updateValue: ${value} @${src}`)
       if (this.isStatic) {
         return false
@@ -184,6 +187,7 @@ export default {
       }
       // JS超过8位即使用科学计数法，特使用改方案兼容
       if (value.indexOf('e') > -1) {
+        isE = true
         value = Number(value).toFixed(this.realScale).toString(10)
       }
       if (value === this.lastValue) {
@@ -203,10 +207,15 @@ export default {
       }
       this.lastValue = value
       this.log(`Set input val to ${value}`)
-
-      if (value === '' || this.$big(value) + '' === value) {
+      // 是否输入格式正确，当是科学计数法时，要转行为标准10进制数字
+      // 该方法为了防止输入内容为 "9.", ".9", "9.90", "09", "" 等数字
+      let formatCorrect = this.$big(value) + '' === value
+      if (!formatCorrect && isE) {
+        formatCorrect = this.$big(value).toFixed(this.realScale).toString() === value
+      }
+      if (value === '' || formatCorrect) {
         // Emit the number value through the input event
-        utils.log(`Input: ${value}`)
+        // utils.log(`Input: ${value}`)
         this.$emit('input', value)
       } else {
         // Input is not ready, E.g.

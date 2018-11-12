@@ -124,6 +124,26 @@
           <div class="corp-logo">
             <a
               class="link"
+              href="https://www.bishijie.com"
+              target="_blank">
+              <img
+                class="logo cw"
+                src="~@/assets/copr-logo-cw.png">
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="http://hangliancj.com"
+              target="_blank">
+              <img
+                class="logo hl"
+                src="~@/assets/copr-logo-hl.png">
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
               href="http://www.huoxing24.com/"
               target="_blank">
               <img
@@ -159,26 +179,6 @@
               <img
                 class="logo blk"
                 src="~@/assets/copr-logo-blk.png">
-            </a>
-          </div>
-          <div class="corp-logo">
-            <a
-              class="link"
-              href="http://hangliancj.com"
-              target="_blank">
-              <img
-                class="logo hl"
-                src="~@/assets/copr-logo-hl.png">
-            </a>
-          </div>
-          <div class="corp-logo">
-            <a
-              class="link"
-              href="https://www.bishijie.com"
-              target="_blank">
-              <img
-                class="logo cw"
-                src="~@/assets/copr-logo-cw.png">
             </a>
           </div>
         </div>

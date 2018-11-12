@@ -341,10 +341,10 @@ export default {
       immediate: true
     },
     buy_amount (newval) {
-      console.log('value_' + newval)
       this.calcWorth('buy')
     },
-    buy_price () {
+    buy_price (val) {
+      // console.log('buy_price_' + val)
       this.calcWorth('buy')
     },
     buy_worth () {
@@ -567,10 +567,12 @@ export default {
       const order = {
         type: 1,
         side: side === 'SELL' ? 2 : 1,
-        price: $$price,
+        price: $price.toString(),
         amount: $amount.toString(),
         symbol: this.state.pro.pair
       }
+      console.log($price.toFixed(this.pairInfo.price_scale))
+      return
       const res = await service.createOrder(order)
       this.submitting = false
       if (res.code > 0) {
