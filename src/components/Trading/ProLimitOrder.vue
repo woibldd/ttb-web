@@ -572,7 +572,6 @@ export default {
         symbol: this.state.pro.pair
       }
       console.log($price.toFixed(this.pairInfo.price_scale))
-      return
       const res = await service.createOrder(order)
       this.submitting = false
       if (res.code > 0) {
