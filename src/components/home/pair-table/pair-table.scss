@@ -6,6 +6,18 @@
         display: flex;
         justify-content: space-between;
     }
+    .pair-title {
+        color: #606060;
+        font-size: 24px;
+        margin-bottom: 17px;
+        font-weight: bold;
+    }
+    .c-999 {
+        color: #999999 !important;
+    }
+    .inline-block {
+        display: inline-block;
+    }
 
     .pairs-search {
         .search-box {
@@ -69,7 +81,14 @@
 
         .row__item{
             text-align: right;
+            padding-right: 10px;
             box-sizing: border-box;
+            &.color-down {
+            color: #F24E4D;
+                }
+            &.color-up {
+                color: #09C989;
+            }
         }
     }
     .percent9{

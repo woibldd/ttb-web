@@ -1,7 +1,7 @@
 <template>
   <div class="newest-coin-pairs">
     <div class="flex">
-      <div class="c-60 f24 mb-17 bold">{{ $t('newest_coin_pairs') }}</div>
+      <div class="pair-title">{{ $t('newest_coin_pairs') }}</div>
       <div class="pairs-search">
         <div class="search-box">
           <input
@@ -46,7 +46,7 @@
           {{ pair.product }} <span>/ {{ pair.currency }}</span>
         </div>
         <div class="row__item percent14_8">
-          {{ pair.tick.current | fixed(pair.price_scale) }} <span> ≈ {{ state.fiatMoneySymbol }} <fiat-money
+          {{ pair.tick.current | fixed(pair.price_scale) }} <span class="ml-10 inline-block c-999">{{ state.fiatMoneySymbol }}<fiat-money
             :base="pair.currency"
             :value="pair.tick.current"/></span>
         </div>
