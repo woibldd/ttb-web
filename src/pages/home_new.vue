@@ -27,160 +27,61 @@
       </div>
     </div>
     <!-- <kyc/> -->
-    <mine-summary/>
-    <div class="ind_cen ind_tit">
-      {{ $t('exchange_area') }}
-    </div>
-    <pair-table/>
-    <div class="ind_cena">
-      <div class="ind_bot">
-        <div class="ind_bot_tit">{{ $t('app_download_sologan') }}</div>
-        <div class="ind_bot_cen">
-          <div class="photo iphone"/>
-          <p>{{ $t('app_download_ios') }}
-            <span>{{ $t('coming_soon') }}</span>
-          </p>
-        </div>
-        <div class="ind_bot_cen">
-          <div class="photo android"/>
-          <p>Android
-            <span>{{ $t('coming_soon') }}</span>
-          </p>
-        </div>
-        <div class="ind_bot_cen">
-          <div class="photo windows"/>
-          <p>Windows
-            <span>{{ $t('coming_soon') }}</span>
-          </p>
-        </div>
-        <div class="ind_bot_cen">
-          <div class="photo mac"/>
-          <p>Mac
-            <span>{{ $t('coming_soon') }}</span>
-          </p>
+    <div class="ixx-home-items">
+      <!-- 交易对列表 -->
+      <div class="coin-list-section">
+        <div
+          class="coin-info-box"
+          v-for="index in 5"
+          :class="{'mr-13': index < 5}"
+          :key="index">
+          <div class="coin__left">
+            <p class="f17 c-00 mb-10 bold">BTC/USDT</p>
+            <p class="f28 c-09 mb-6 bold">6355.53</p>
+            <p class="f13 c-8a mb-6">≈ 43598.53 CNY</p>
+            <p class="f13 c-b0 "><span class="inline-block mr-14">24H</span><span>15771.14</span></p>
+          </div>
+          <div class="coin__right c-09">
+            +0.22%
+          </div>
         </div>
       </div>
-    </div>
-    <div class="corperator">
-      <div class="corperator-container">
-        <div
-          class="corp-row row-60 mb-60"
-          v-if="isKorean">
-          <div
-            class="corp-title">
-            {{ $t('footer_copr') }}
-          </div>
-          <div class="corp-logo">
-            <a
-              class="link"
-              href="https://www.bgbquant.com/"
-              target="_blank">
-              <img
-                class="logo hx"
-                src="~@/assets/copr-logo-bgbquant.png" >
-            </a>
-          </div>
+      <!-- 最新上线 -->
+      <pair-table/>
+
+      <!-- 倒数第二层的图标 -->
+      <div class="compony-intro-section">
+        <div class="intro-item">
+          <img
+            src="../assets/home/home-intro-1.png"
+            alt="">
+          <p class="short-txt">{{ $t('home_intro_safe') }}</p>
+          <p class="long-text">{{ $t('home_intro_long_a') }}</p>
+
         </div>
-        <div class="corp-row row-60 mb-60">
-          <div
-            class="corp-title"
-            v-t="'footer_investors'"/>
-          <div class="corp-logo">
-            <a
-              class="link"
-              href="http://gs.holdings/"
-              target="_blank">
-              <img
-                class="logo gs"
-                src="~@/assets/copr-logo-gs.png" >
-            </a>
-          </div>
-          <div class="corp-logo">
-            <a
-              class="link"
-              href="javascript:;"
-            >
-              <img
-                class="logo may"
-                src="~@/assets/copr-logo-may.png" >
-            </a>
-          </div>
-          <div class="corp-logo">
-            <a
-              class="link"
-              href="https://peckshield.com/"
-              target="_blank"
-            >
-              <img
-                class="logo ps"
-                src="~@/assets/copr_logo_ps.png" >
-            </a>
-          </div>
+        <div class="intro-item">
+          <img
+            src="../assets/home/home-intro-2.png"
+            alt="">
+          <p class="short-txt">{{ $t('home_intro_prefessor') }}</p>
+          <p class="long-text">{{ $t('home_intro_long_b') }}</p>
+
         </div>
-        <div class="corp-row row-20">
-          <div
-            class="corp-title"
-            v-t="'footer_partners'"/>
-          <div class="corp-logo">
-            <a
-              class="link"
-              href="https://www.bishijie.com"
-              target="_blank">
-              <img
-                class="logo cw"
-                src="~@/assets/copr-logo-cw.png">
-            </a>
-          </div>
-          <div class="corp-logo">
-            <a
-              class="link"
-              href="http://hangliancj.com"
-              target="_blank">
-              <img
-                class="logo hl"
-                src="~@/assets/copr-logo-hl.png">
-            </a>
-          </div>
-          <div class="corp-logo">
-            <a
-              class="link"
-              href="http://www.huoxing24.com/"
-              target="_blank">
-              <img
-                class="logo hx"
-                src="~@/assets/copr-logo-hx.png" >
-            </a>
-          </div>
-          <div class="corp-logo">
-            <a
-              class="link"
-              href="https://www.jinse.com/"
-              target="_blank">
-              <img
-                class="logo js"
-                src="~@/assets/copr-logo-js.png">
-            </a>
-          </div>
-          <div class="corp-logo">
-            <a
-              class="link"
-              href="https://www.hecaijing.com/"
-              target="_blank">
-              <img
-                class="logo he"
-                src="~@/assets/copr-logo-he.png">
-            </a>
-          </div>
-          <div class="corp-logo">
-            <a
-              class="link"
-              href="http://www.youjiatuanjian.com/"
-              target="_blank">
-              <img
-                class="logo blk"
-                src="~@/assets/copr-logo-blk.png">
-            </a>
-          </div>
+        <div class="intro-item">
+          <img
+            src="../assets/home/home-intro-3.png"
+            alt="">
+          <p class="short-txt">{{ $t('home_intro_experience') }}</p>
+          <p class="long-text">{{ $t('home_intro_long_c') }}</p>
+
+        </div>
+        <div class="intro-item">
+          <img
+            src="../assets/home/home-intro-4.png"
+            alt="">
+          <p class="short-txt">{{ $t('home_intro_efficiency') }}</p>
+          <p class="long-text">{{ $t('home_intro_long_d') }}</p>
+
         </div>
       </div>
     </div>
@@ -192,9 +93,8 @@
 import Slider from '@/components/slider.vue'
 import service from '@/modules/service'
 import {state} from '@/modules/store'
-import PairTable from '@/components/Trading/PairTable'
+import PairTable from '@/components/home/pair-table'
 import MineSummary from '@/components/Mine/MineSummary'
-import maxBy from 'lodash/maxBy'
 
 export default {
   data: function () {
@@ -209,7 +109,16 @@ export default {
         paginationType: 'fraction',
         pagination: '.swiper-pagination'
       },
-      hasNewNotice: false
+      hasNewNotice: false,
+      pairsHead: [
+        {key: 'currency', name: this.$t('currency')},
+        {key: 'homechart_price', name: this.$t('homechart_price')},
+        {key: 'homechart_24h_chg', name: this.$t('homechart_24h_chg')},
+        {key: 'homechart_24h_l', name: this.$t('homechart_24h_l')},
+        {key: 'homechart_24h_h', name: this.$t('homechart_24h_h')},
+        {key: 'homechart_24h_v', name: this.$t('homechart_24h_v')},
+        {key: 'actions', name: this.$t('actions')}
+      ]
     }
   },
   components: {
@@ -264,235 +173,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  @import "../styles/vars";
-  @import "../styles/mixins";
-
-  .ind_cen {
-    position: relative;
-    margin: 0 60px;
-  }
-
-  .page-home {
-    background: linear-gradient(0deg, #222931, #3A444F);
-  }
-
-  .ind_cena {
-    position: relative;
-    padding: 0 60px;
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-image: url(../assets/bg_qx.png);
-    padding-top: 35px;
-    margin-top: 80px;
-    padding-bottom: 110px;
-  }
-
-  .ind_txt {
-    width: 100%;
-    height: 60px;
-    line-height: 60px;
-    background: #23282E;
-    // margin-bottom: 60px;
-    .ind_c {
-      text-align: center;
-      font-size: 14px;
-      float: left;
-      width: 33.33%;
-      color: #6C869C;
-      .text_link {
-        color: #6C869C;
-        &:hover {
-          color: $primary;
-        }
-      }
-      &:nth-child(2) {
-        position: relative;
-        &:before, &:after {
-          content: "";
-          position: absolute;
-          width: 2px;
-          height: 24px;
-          background: #6C869C;
-          display: block;
-          left: 0;
-          top: 50%;
-          margin-top: -12px;
-        }
-        &:after {
-          right: 0;
-          left: auto;
-        }
-      }
-    }
-    .more {
-      display: block;
-      position: absolute;
-      width: 15px;
-      height: 15px;
-      right: 0;
-      top: 0;
-    }
-  }
-
-  .ind_tit {
-    height: 35px;
-    line-height: 35px;
-    font-size: 28px;
-    color: #CBE6FD;
-    margin-bottom: 37px;
-    text-indent: 25px;
-    position: relative;
-    &:before {
-      content: "";
-      position: absolute;
-      display: block;
-      width: 4px;
-      height: 28px;
-      top: 50%;
-      left: 0;
-      background: #CBE6FD;
-      margin-top: -14px;
-    }
-  }
-
-  .ind_bot {
-    &:after {
-      content: "";
-      clear: both;
-      width: 100%;
-      height: 1px;
-      display: block;
-    }
-    .ind_bot_tit {
-      color: #fff;
-      font-size: 24px;
-      text-align: center;
-      height: 35px;
-      margin-bottom: 55px;
-      line-height: 35px;
-    }
-    .ind_bot_cen {
-      width: 20%;
-      text-align: center;
-      float: left;
-      margin: 0 2%;
-      .photo {
-        width: 100%;
-        height: 201px;
-        background-size: auto auto;
-        background-repeat: no-repeat;
-        background-position: center center;
-      }
-      .iphone {
-        background-image: url(../assets/iphone.png);
-      }
-      .android {
-        background-image: url(../assets/Android.png);
-      }
-      .windows {
-        background-image: url(../assets/Windows.png);
-      }
-      .mac {
-        background-image: url(../assets/Mac.png);
-      }
-      p {
-        background: #151e25;
-        color: #CBE6FD;
-        font-size: 20px;
-        width: 195px;
-        height: 40px;
-        line-height: 40px;
-        border-radius: 40px;
-        margin: 44px auto;
-        cursor: pointer;
-        position: relative;
-        span {
-          display: none;
-          position: absolute;
-        }
-        &:hover {
-          background: #caaa6c;
-          color: #232A32;
-          span {
-            display: block;
-            width: 210px;
-            height: 50px;
-            line-height: 50px;
-            color: #C9A96E;
-            border: 1px solid #C9A96E;
-            position: absolute;
-            left: 50%;
-            margin-left: -105px;
-            bottom: -70px;
-            z-index: 9999;
-            border-radius: 5px;
-          }
-        }
-      }
-    }
-  }
-  .lang-en {
-    .corp-title {
-      width: 200px !important;
-    }
-  }
-  // 合作媒体
-  .corperator {
-    display: flex;
-    width: 100%;
-    background: #1A1A1A;
-    border-bottom: 1px solid #3D3D3D;
-    .corperator-container {
-      width: 1200px;
-      padding-top: 60px;
-      padding-bottom: 60px;
-      margin: 0px auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      .mb-60 {
-          margin-bottom: 60px;
-      }
-
-      .corp-row {
-        display: flex;
-        &.row-60 {
-          height: 60px;
-        }
-        .corp-title {
-          width: 100px;
-          font-size:18px;
-          font-weight:bold;
-          color:#929292;
-          display: flex;
-          height: 40px;
-          align-items: center;
-        }
-        .corp-logo {
-          min-width: 140px;
-          padding: 0 26px;
-          border-left: 1px solid #3D3D3D;
-          text-align: center;
-          height: 40px;
-          display: flex;
-          align-items: center;
-          box-sizing: border-box;
-          .link {
-            display: block;
-            width: 100%;
-          }
-          .logo {
-            height: 20px;
-            &.gs {
-              height: 60px;
-            }
-            &.cw {
-              height: 35px;
-            }
-          }
-        }
-      }
-    }
-  }
+ @import './home/home.scss';
 </style>

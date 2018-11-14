@@ -741,7 +741,17 @@
   "rate_tips_g": "“IX/BTC”以及“IX/USDT” 交易对不支持“交易挖矿”模式",
   "rate_tips_g_n": "以交易时该币种对BTC的价格折算成BTC，并在每天的 UTC时间0点进行结算，计算出前30天所有币币交易币种的累计交易量，比如用户在过去30天交易了BTC、EOS、ETH，IX这4个币种，那么系统会把这4个币种的每笔交易都按交易时对BTC的价格折算成BTC交易量（在USDT交易区的交易也会进行折算），然后每天的UTC 0点计算前30天的累计交易量。",
   "gentle_hint": "温馨提示",
-  "no_alert_again": "不再提示"
+  "no_alert_again": "不再提示",
+  "----": "----ixx首页--------",
+  "newest_coin_pairs": "最新上线",
+  "home_intro_safe": "安全",
+  "home_intro_prefessor": "专业",
+  "home_intro_experience": "体验",
+  "home_intro_efficiency": "高效",
+  "home_intro_long_a": "区块链安全专家、顶级技术团队、风控管理团队共同打造的数字资产交易平台，我们始终将用户的资金安全放在第一位。",
+  "home_intro_long_b": "我们的团队成员来自知名互联网公司、金融机构、投资机构、区块链领域，共同打造高品质的产品、服务。",
+  "home_intro_long_c": "致力打造“最简单”的数字资产交易平台；不断的产品打磨，提高用户在平台的体验。",
+  "home_intro_long_d": "强大的技术支持以及完善的客服系统，使整个交易系统在交易中保持处理高效，响应迅速。"
 
 
 
