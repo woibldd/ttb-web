@@ -802,7 +802,7 @@
   "activity_lottery_timeout": "Voting time is over for the current draw, please join us again next time",
   "activity_lottery_reward_history": "past results",
   "activity_lottery_stop_quiz": "Ending of quiz; awaiting prize announcement",
-  "activity_lottery_destroy_ix_amount": "Amount had been void generated from the event:",
+  "activity_lottery_destroy_ix_amount": "Void by the quiz event:",
   "lever_transfer_in": " deposit fund ",
   "lever_transfer_out": "withdraw fund",
   "lever_transfer_from": "from",

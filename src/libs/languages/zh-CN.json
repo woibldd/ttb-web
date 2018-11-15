@@ -680,7 +680,7 @@
   "activity_lottery_timeout": "本期竞猜投注时间已到，请下期继续",
   "activity_lottery_reward_history": "开奖记录",
   "activity_lottery_stop_quiz": "停止竞猜，坐等开奖",
-  "activity_lottery_destroy_ix_amount": "活动产生已销毁数量:",
+  "activity_lottery_destroy_ix_amount": "竞猜活动已销毁：",
   "lever_transfer_in": "转入本金",
   "lever_transfer_out": "转出本金",
   "lever_transfer_from": "从",

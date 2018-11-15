@@ -676,7 +676,7 @@
   "activity_lottery_timeout": "이번 활동 투자시간이 이미 지났습니다 다음라운드에 계속해주시길 바랍니다",
   "activity_lottery_reward_history": "보상기록",
   "activity_lottery_stop_quiz": "퀴즈를 정지하고 보상을 받기를 기다린다",
-  "activity_lottery_destroy_ix_amount": "활동생산 회손수량:",
+  "activity_lottery_destroy_ix_amount": "경매활동이 정지 되였습니다:",
   "lever_transfer_in": "본금을 입금한다",
   "lever_transfer_out": "본금을 출금한다",
   "lever_transfer_from": "로부터",

@@ -678,7 +678,7 @@
   "activity_lottery_timeout": "本期競猜投注時間已到，請下期繼續",
   "activity_lottery_reward_history": "開獎記錄",
   "activity_lottery_stop_quiz": "停止競猜，坐等開獎",
-  "activity_lottery_destroy_ix_amount": "活動產生已銷毀數量:",
+  "activity_lottery_destroy_ix_amount": "競猜活動已銷毀:",
   "lever_transfer_in": "轉入本金",
   "lever_transfer_out": "轉出本金",
   "lever_transfer_from": "從",
