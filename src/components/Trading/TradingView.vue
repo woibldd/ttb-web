@@ -77,13 +77,13 @@ export default {
 
         // 7 日均线
         widget.chart().createStudy('Moving Average', !1, !1, [7], null, {
-          'Plot.color': '#cccccc',
+          'Plot.color': '#ff9500',
           'Plot.linewidth': 3,
           precision: 8
         })
         // 30 日均线
         widget.chart().createStudy('Moving Average', !1, !1, [30], null, {
-          'Plot.color': '#fdc52e',
+          'Plot.color': '#107efa',
           'Plot.linewidth': 3,
           precision: 8
         })

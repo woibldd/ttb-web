@@ -252,9 +252,9 @@ export default {
         }
         }
         &.yy{
-          color: #C1A538;
+          color: $primary-hover;
           &:before{
-            background: #C1A538;
+            background: $primary-hover;
           }
         }
     }
@@ -266,7 +266,7 @@ export default {
         float: left;
         margin-top: 9px;
         &.jd{
-            background: #C1A538;
+            background: $primary-hover;
         }
     }
   }

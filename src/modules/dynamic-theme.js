@@ -4,7 +4,7 @@ import {local} from '@/modules/store'
 const configs = [{
   id: 'gr',
   up: '#09C989',
-  down: '#F24E4D'
+  down: '#FF4E4E'
 }, {
   id: 'rg',
   up: '#F24E4D',

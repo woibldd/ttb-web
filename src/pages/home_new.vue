@@ -63,24 +63,6 @@
     </div>
     <div class="corperator">
       <div class="corperator-container">
-        <div
-          class="corp-row row-60 mb-60"
-          v-if="isKorean">
-          <div
-            class="corp-title">
-            {{ $t('footer_copr') }}
-          </div>
-          <div class="corp-logo">
-            <a
-              class="link"
-              href="https://www.bgbquant.com/"
-              target="_blank">
-              <img
-                class="logo hx"
-                src="~@/assets/copr-logo-bgbquant.png" >
-            </a>
-          </div>
-        </div>
         <div class="corp-row row-60 mb-60">
           <div
             class="corp-title"
@@ -179,6 +161,24 @@
               <img
                 class="logo blk"
                 src="~@/assets/copr-logo-blk.png">
+            </a>
+          </div>
+        </div>
+        <div
+          class="corp-row row-60 mb-60"
+          v-if="isKorean">
+          <div
+            class="corp-title">
+            {{ $t('footer_copr') }}
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="https://www.bgbquant.com/"
+              target="_blank">
+              <img
+                class="logo hx"
+                src="~@/assets/copr-logo-bgbquant.png" >
             </a>
           </div>
         </div>

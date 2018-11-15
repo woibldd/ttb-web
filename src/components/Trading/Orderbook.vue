@@ -11,9 +11,9 @@
         <span
           class="ibt depth">
           <span class="dib mr-5">{{ $t('orderbook_depth_group') }}</span>{{ currentDepth }} <icon
-            name="arrow-down-yellow"
+            name="arrow-down-blue"
             :class="[showDepthOption && 'up']"
-            class="arrow-down-yellow"/>
+            class="arrow-down-blue"/>
         </span>
         <div
           class="depth-options-wrapper"
@@ -500,7 +500,7 @@ export default {
         line-height: 30px;
         width: 100%;
         text-align: right;
-        color: #C9AA6D;
+        color: $text-link;
 
         &:hover {
             background-color: #0F1F2D;
@@ -528,7 +528,7 @@ export default {
   font-size: 12px;
   margin-right: 18px;
   width: 102px;
-  color: #C9AA6D;
+  color: $text-link;
   font-size: 12px;
   text-align: right;
 
@@ -536,11 +536,12 @@ export default {
     @include limit(1);
   }
 }
-.arrow-down-yellow {
+.arrow-down-blue {
     width: 12px;
     height: 6px;
     position: absolute;
     top: 14px;
+    color: $text-link;
     transition: all 0.2s ease-in-out;
 
     &.up {

@@ -44,7 +44,7 @@
               class="nav_link ml-30"
               target="_blank">{{ $t('mining') }}<icon
                 class="arrow ml-5"
-                name="arrow-down-yellow"/>
+                name="arrow-down-blue"/>
             </router-link>
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">

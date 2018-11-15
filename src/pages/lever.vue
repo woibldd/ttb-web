@@ -83,7 +83,7 @@ export default {
       margin-bottom: 60px;
       border-bottom: 1px solid #ccc;
       a{
-        color: #C1A538;
+        color: $primary-hover;
         position: relative;
         margin-right: 30px;
         &::after{
@@ -134,7 +134,7 @@ export default {
           color: #666;
         }
         &.clk,&:hover{
-          color: #C1A538;
+          color: $primary-hover;
           position: relative;
           background:#f3edd7;
           &::before{

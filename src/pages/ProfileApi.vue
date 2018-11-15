@@ -491,7 +491,7 @@ export default {
                 text-align: right;
               }
               a{
-                color: #C1A538
+                color: $primary-hover
               }
             }
           }
@@ -667,12 +667,12 @@ export default {
         border-radius: 4px;
         box-sizing: border-box;
         &.qx{
-          border: 1px solid #C1A538;
-          color: #C1A538;
+          border: 1px solid $primary-hover;
+          color: $primary-hover;
           background: none;
         }
         &.qr{
-          background: #C1A538;
+          background: $primary-hover;
           color: #fff;
           border: none;
         }

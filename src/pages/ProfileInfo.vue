@@ -145,7 +145,7 @@ export default {
                 color: #333;
                 font-weight: bold;
                 a{
-                    color:#C1A538;
+                    color:$primary-hover;
                     font-weight: lighter;
                 }
             }

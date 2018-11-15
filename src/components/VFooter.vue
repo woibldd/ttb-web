@@ -312,7 +312,7 @@ export default {
       height: 20px;
       color: #999999 !important;
       &:hover {
-         color: #C1A538 !important;
+         color: $primary-hover !important;
       }
     }
     .contact-item-wrapper {
