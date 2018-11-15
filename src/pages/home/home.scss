@@ -1,0 +1,283 @@
+@import "../../styles/vars";
+@import "../../styles/mixins";
+
+.ind_cen {
+  position: relative;
+  margin: 0 60px;
+}
+
+.page-home {
+  background: linear-gradient(0deg, #222931, #3A444F);
+}
+
+.ind_cena {
+  position: relative;
+  padding: 0 60px;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-image: url(../assets/bg_qx.png);
+  padding-top: 35px;
+  margin-top: 80px;
+  padding-bottom: 110px;
+}
+
+.ind_txt {
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  background: #23282E;
+  // margin-bottom: 60px;
+  .ind_c {
+    text-align: center;
+    font-size: 14px;
+    float: left;
+    width: 33.33%;
+    color: #6C869C;
+    .text_link {
+      color: #6C869C;
+      &:hover {
+        color: $primary;
+      }
+    }
+    &:nth-child(2) {
+      position: relative;
+      &:before, &:after {
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 24px;
+        background: #6C869C;
+        display: block;
+        left: 0;
+        top: 50%;
+        margin-top: -12px;
+      }
+      &:after {
+        right: 0;
+        left: auto;
+      }
+    }
+  }
+  .more {
+    display: block;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    right: 0;
+    top: 0;
+  }
+}
+
+.ind_tit {
+  height: 35px;
+  line-height: 35px;
+  font-size: 28px;
+  color: #CBE6FD;
+  margin-bottom: 37px;
+  text-indent: 25px;
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 4px;
+    height: 28px;
+    top: 50%;
+    left: 0;
+    background: #CBE6FD;
+    margin-top: -14px;
+  }
+}
+
+.ind_bot {
+  &:after {
+    content: "";
+    clear: both;
+    width: 100%;
+    height: 1px;
+    display: block;
+  }
+  .ind_bot_tit {
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+    height: 35px;
+    margin-bottom: 55px;
+    line-height: 35px;
+  }
+  .ind_bot_cen {
+    width: 20%;
+    text-align: center;
+    float: left;
+    margin: 0 2%;
+    .photo {
+      width: 100%;
+      height: 201px;
+      background-size: auto auto;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+    .iphone {
+      background-image: url(../assets/iphone.png);
+    }
+    .android {
+      background-image: url(../assets/Android.png);
+    }
+    .windows {
+      background-image: url(../assets/Windows.png);
+    }
+    .mac {
+      background-image: url(../assets/Mac.png);
+    }
+    p {
+      background: #151e25;
+      color: #CBE6FD;
+      font-size: 20px;
+      width: 195px;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 40px;
+      margin: 44px auto;
+      cursor: pointer;
+      position: relative;
+      span {
+        display: none;
+        position: absolute;
+      }
+      &:hover {
+        background: #caaa6c;
+        color: #232A32;
+        span {
+          display: block;
+          width: 210px;
+          height: 50px;
+          line-height: 50px;
+          color: #C9A96E;
+          border: 1px solid #C9A96E;
+          position: absolute;
+          left: 50%;
+          margin-left: -105px;
+          bottom: -70px;
+          z-index: 9999;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+}
+.lang-en {
+  .corp-title {
+    width: 200px !important;
+  }
+}
+
+
+.ixx-home-items {
+    width: 100%;
+    background-color: #F7F7F7;
+    padding-top: 22px;
+
+    .f13 {
+        font-size: 13px;
+    }
+    .f17{
+        font-size: 17px;
+    }
+    .f28 {
+        font-size: 28px;
+    }
+    .f24{
+        font-size: 24px;
+    }
+    .bold{
+        font-weight: bold;
+    }
+    .c-00 {
+        color: #000000;
+    }
+    .c-primary{
+        color: $primary;
+    }
+    .c-8a {
+        color: #8A8A8A;
+    }
+    .c-b0 {
+        color: #B0B0B0
+    }
+    .c-09 {
+        color: #09C989;
+    }
+    .c-60{
+        color: #606060;
+    }
+    .c-21{
+        color: #212121;
+    }
+    .c-f24{
+        color: #F24E4D;
+    }
+    .c-999{
+        color: #999999;
+    }
+    .inline-block{
+        display: inline-block;
+
+    }
+}
+.coin-list-section{
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+
+    .coin-info-box {
+        background-image: url('~@/assets/home/home-coin-bg.png');
+        background-position:0 100%;
+        background-size: contain; 
+        background-repeat: no-repeat;
+        width: 256px;
+        height: 130px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        padding: 16px 22px;
+        border: 1px solid #DCDCDC;
+        line-height: 1;
+    }
+    
+}
+
+.compony-intro-section{
+    width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 100px;
+
+    .intro-item {
+        width: 203px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .short-txt {
+            width: 100%;
+            text-align: left;
+            padding-left: 112px;
+            margin-top: 27px;
+            margin-bottom: 23px;
+            font-size:16px;
+            font-weight:500;
+            color:rgba(33,33,33,1);
+        }
+        .long-text {
+            color: #999999;
+        }
+
+        img {
+            width: 114px;
+            height: 101px;
+            margin-left: 10px;
+        }
+    }
+}

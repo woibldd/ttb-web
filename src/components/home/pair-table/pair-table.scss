@@ -1,0 +1,108 @@
+.newest-coin-pairs {
+    width: 1100px;
+    margin: 70px auto 54px;
+
+    .flex {
+        display: flex;
+        justify-content: space-between;
+    }
+    .pair-title {
+        color: #606060;
+        font-size: 24px;
+        margin-bottom: 17px;
+        font-weight: bold;
+    }
+    .c-999 {
+        color: #999999 !important;
+    }
+    .inline-block {
+        display: inline-block;
+    }
+
+    .pairs-search {
+        .search-box {
+            width:166px;
+            height:29px;
+            background:rgba(255,255,255,1);
+            border:1px solid rgba(160,160,160,1);
+            border-radius: 14px;
+            padding-left: 10px;
+            padding-right: 10px;
+            box-sizing: border-box;
+            overflow: hidden;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            display: flex;
+            align-items: center;
+
+            input {
+                width: 120px;
+                border: 0;
+                height: 16px;
+                border-right: 1px solid rgba(160,160,160,1);
+
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+    }
+
+    .pairs-table {
+        height: 430px;
+        overflow-y: scroll;
+        background-color: #ffffff;
+    }
+
+    .pairs-table__head {
+        background:linear-gradient(0deg,rgba(230,230,230,1) 0%,rgba(255,255,255,1) 100%);
+        display: flex;
+        align-items: center;
+        height: 33px;
+        font-size: 12px;
+        color: #999999;
+        font-weight:bold;
+
+        .head-item {
+            box-sizing: border-box;
+            text-align: right;
+            border-right: 1px solid #C9C9C9;
+            padding-right: 10px;
+            height: 11px;
+            line-height: 11px;
+        }
+    }
+    .pairs-table__row{
+        font-size: 14px;
+        display: flex;
+        height: 80px;
+        line-height: 80px;
+        border-bottom: 1px solid #E6E6E6;
+
+        .row__item{
+            text-align: right;
+            padding-right: 10px;
+            box-sizing: border-box;
+            &.color-down {
+            color: #F24E4D;
+                }
+            &.color-up {
+                color: #09C989;
+            }
+        }
+    }
+    .percent9{
+        width: 9%;
+    }
+    .percent14_8{
+        width: 14.8%; 
+        text-align: right;           
+    }
+    .percent18_8{
+        width: 18.8%; 
+        text-align: right;           
+    }
+    .percent8{
+        width: 8%;
+    }
+}
