@@ -43,9 +43,9 @@
         <div class="footer_ct">
           <p>{{ $t('footer_services') }}</p>
           <router-link :to="{name: 'trading'}">{{ $t('trading') }}</router-link>
-          <a
+          <!-- <a
             :href="aboutLink"
-            target="_blank">{{ $t('footer_about') }}</a>
+            target="_blank">{{ $t('footer_about') }}</a> -->
           <a
             :href="requestLink"
             target="_blank">{{ $t('footer_request') }}</a>
@@ -77,8 +77,8 @@
         <div class="hg"/>
         <div class="right-bottom">
           <div class="bottom-txt bot-la">
-            <p class="footer_ltxt">{{ $t('footer_services_email') }}：service@ix.com</p>
-            <p class="footer_ltxt">{{ $t('footer_bussness') }}：business@ix.com</p>
+            <p class="footer_ltxt">{{ $t('footer_services_email') }}：service@ixx.com</p>
+            <p class="footer_ltxt">{{ $t('footer_bussness') }}：business@ixx.com</p>
             <p class="footer_ltxt show_en">{{ $t('Korean telegram') }}：https://t.me/IXofficial_KR</p>
           </div>
           <div class="bottom-txt bot-lb">
@@ -99,7 +99,7 @@
               </a>
 
               <a
-                href="mailto:service@ix.com"
+                href="mailto:service@ixx.com"
                 class="contact-item-wrapper pointer">
                 <icon
                   class="contact-item"
@@ -129,7 +129,7 @@
                   src="../assets/pic-contact-biyong.jpg">
               </div>
             </div>
-            <p class="copyright">Copyright © 2018 IX.COM</p>
+            <p class="copyright">Copyright © 2018 ixx.com</p>
           </div>
 
         </div>

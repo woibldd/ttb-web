@@ -52,8 +52,8 @@
           <div class="activity-detail">
             （详情请查看<a
               class="c-ff7"
-              href="https://www.ix.com"
-              target="_blank">IX.com</a>官方公告）
+              href="https://www.ixx.com"
+              target="_blank">IXX.com</a>官方公告）
           </div>
         </div>
       </form>
@@ -231,10 +231,10 @@
           <label for="accept">
             我已阅读并同意
             <a
-              href="https://www.ix.com/services"
+              href="https://www.ixx.com/services"
               target="_blank">《服务条款》</a>
             <a
-              href="https://www.ix.com/PrivacyPolicy"
+              href="https://www.ixx.com/PrivacyPolicy"
               target="_blank">《隐私协议》</a>
           </label>
         </div>
@@ -257,7 +257,7 @@
         <p class="mb-40">活动时间：2018年11月6日00:00——11月11日24:00</p>
         <p>活动规则：</p>
         <p>1. 用户通过两种方式可以获得“BTC碎片”；</p>
-        <p class="pl-10">方式一：邀请好友注册IX.com并完成KYC2高级认证，建立邀请关系的双方（邀请人和被邀请人）可分别获得0.5个“BTC碎片”作为奖励；</p>
+        <p class="pl-10">方式一：邀请好友注册IXX.com并完成KYC2高级认证，建立邀请关系的双方（邀请人和被邀请人）可分别获得0.5个“BTC碎片”作为奖励；</p>
         <p class="pl-10">方式二：被邀请者当日注册并完成5000个IX的当日净买入量（当日买入量减去当日卖出量），建立邀请关系的双方可分别获得0.5个“BTC碎片”作为奖励；</p>
         <p>2. 收集10个“BTC碎片”可兑换0.01个BTC；</p>
         <p>3. 邀请人需要完成KYC2高级认证后才能获得“BTC碎片”，单个用户最多可获得10个“BTC碎片”；</p>
@@ -265,8 +265,8 @@
         <div class="activity-detail">
           （详情请查看<a
             class="c-ff7"
-            href="https://www.ix.com"
-            target="_blank">IX.com</a>官方公告）
+            href="https://www.ixx.com"
+            target="_blank">IXX.com</a>官方公告）
         </div>
       </div>
     </div>
@@ -543,11 +543,11 @@ export default {
     sharePage () {
       if (telebox) {
         if (utils.isIos) {
-          location.href = `tbox://action?api=share&title=${encodeURI('IX注册送BTC红包')}&text=${encodeURI('来IX.com，实现一个亿的小目标不是梦')}&url=https://ix.com/invite-signup.html`
-          console.log(`tbox://action?api=share&title=${encodeURI('IX注册送BTC红包')}&text=${encodeURI('来IX.com，实现一个亿的小目标不是梦')}&url=https://ix.com/invite-signup.html`)
+          location.href = `tbox://action?api=share&title=${encodeURI('IX注册送BTC红包')}&text=${encodeURI('来IXX.com，实现一个亿的小目标不是梦')}&url=https://ixx.com/invite-signup.html`
+          console.log(`tbox://action?api=share&title=${encodeURI('IX注册送BTC红包')}&text=${encodeURI('来IXX.com，实现一个亿的小目标不是梦')}&url=https://ixx.com/invite-signup.html`)
         } else {
-          location.href = `tbox://share?api=share&title=${encodeURI('IX注册送BTC红包')}&text=${encodeURI('来IX.com，实现一个亿的小目标不是梦')}&url=https://ix.com/invite-signup.html`
-          console.log(`tbox://action?api=share&title=${encodeURI('IX注册送BTC红包')}&text=${encodeURI('来IX.com，实现一个亿的小目标不是梦')}&url=https://ix.com/invite-signup.html`)
+          location.href = `tbox://share?api=share&title=${encodeURI('IX注册送BTC红包')}&text=${encodeURI('来IXX.com，实现一个亿的小目标不是梦')}&url=https://ixx.com/invite-signup.html`
+          console.log(`tbox://action?api=share&title=${encodeURI('IX注册送BTC红包')}&text=${encodeURI('来IXX.com，实现一个亿的小目标不是梦')}&url=https://ixx.com/invite-signup.html`)
         }
       } else {
         MessageBox.confirm('复制邀请链接并发送给好友').then(action => {

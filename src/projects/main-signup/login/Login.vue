@@ -411,7 +411,7 @@ export default {
       if (mytoken) {
         location.href = 'https://h5-cn-east.mytokenapi.com/activity/d11/?channel=20181111_ix'
       } else {
-        location.href = 'https://ix.com/user/login/email'
+        location.href = 'https://ixx.com/user/login/email'
       }
     },
     getPhoneVerifyCode () {

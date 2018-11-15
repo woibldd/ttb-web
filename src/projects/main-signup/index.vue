@@ -181,10 +181,10 @@
           <label for="accept">
             我已阅读并同意
             <a
-              href="https://www.ix.com/services"
+              href="https://www.ixx.com/services"
               target="_blank">服务条款</a>
             <a
-              href="https://www.ix.com/PrivacyPolicy"
+              href="https://www.ixx.com/PrivacyPolicy"
               target="_blank">隐私协议</a>
           </label>
         </div>
@@ -400,7 +400,7 @@ export default {
       if (mytoken) {
         location.href = 'https://h5-cn-east.mytokenapi.com/activity/d11/?channel=20181111_ix'
       } else {
-        location.href = 'https://ix.com/user/login/email'
+        location.href = 'https://ixx.com/user/login/email'
       }
     },
     active (active) {

@@ -25,12 +25,12 @@
             active-class="active"
             :to="kycRouter">{{ $t('profile_sec_kyc') }}</router-link>
         </li>
-        <li class="">
+        <!-- <li class="">
           <router-link
             class="menu-name"
             active-class="active"
             :to="{name: 'ProfileApi'}">{{ $t('api_management') }}</router-link>
-        </li>
+        </li> -->
         <li class="">
           <router-link
             class="menu-name"

@@ -11,7 +11,7 @@
           <router-link
             :to="{name: 'trading'}"
             class="nav_link">{{ $t('trading') }}</router-link>
-          <div class="nav_link arrow-down">
+            <!-- <div class="nav_link arrow-down">
             <a
               :href="'/docs/IX+WhitePaper'+pdfSubfix+'.pdf'"
               target="_blank"
@@ -94,7 +94,7 @@
                 </li>
               </ul>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="nav_right">

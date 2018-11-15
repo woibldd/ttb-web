@@ -132,7 +132,7 @@
         </a>
 
         <a
-          href="mailto:service@ix.com"
+          href="mailto:service@IXX.COM"
           class="contact-item-wrapper mr-20 pointer">
           <icon
             class="contact-item"
@@ -162,7 +162,7 @@
             src="../../../assets/pic-contact-biyong.jpg">
         </div>
       </div>
-      <p class="copyright">Copyright © 2018 IX.COM</p>
+      <p class="copyright">Copyright © 2018 IXX.COM</p>
     </div>
   </section>
 </template>

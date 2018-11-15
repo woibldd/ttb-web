@@ -42,8 +42,8 @@
             <p>3. {{ $t('rate_tips_c') }}</p>
             <p>4. {{ $t('rate_tips_d') }}</p>
             <p>5. {{ $t('rate_tips_e') }}</p>
-            <p>6. {{ $t('rate_tips_f') }}</p>
-            <p>7. {{ $t('rate_tips_g') }}</p>
+            <!-- <p>6. {{ $t('rate_tips_f') }}</p>
+            <p>7. {{ $t('rate_tips_g') }}</p> -->
           </div>
         </div>
       </div>

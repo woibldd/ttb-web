@@ -14,9 +14,9 @@
       <div class="fund-total">
         <div class="total__label">{{ $t('my_balance_equal') }}</div>
         <div class="total__coin">{{ total }} {{ unit }} </div>
-        <div
+        <!-- <div
           is="ActivityPiece"
-          @afterExchange="getAccountBalanceList"/>
+          @afterExchange="getAccountBalanceList"/> -->
       </div>
       <el-table
         :data="tableData"
@@ -47,12 +47,12 @@
               v-if="scope.row.withdrawable"
               :to="'/fund/withdraw/'+scope.row.currency"
               class="my-fund-operate">{{ $t('withdraw') }}</router-link>
-            <router-link
+            <!-- <router-link
               v-if="scope.row.currency === 'IX'"
               :to="{name: 'LockWarehouse'}"
               style="color: #fda22d"
               class="my-fund-operate"><icon
-              name="anchor"/>{{ $t('mining') }}</router-link>
+              name="anchor"/>{{ $t('mining') }}</router-link> -->
             <router-link
               v-if="scope.row.pairs"
               :to="{

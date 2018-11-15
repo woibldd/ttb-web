@@ -3,11 +3,6 @@
     <div class="profile-container">
       <div class="title-box">{{ $t('profile_left_invite') }}</div>
       <div class="invite-wrap">
-        <div class="notice">
-          <p
-            class="title"
-            v-html="$t('invite_notice_title')"/>
-        </div>
         <div class="share_style login_show">
           <div class="post_btn share_div"><p>{{ $t('profile_left_invite_qrcode') }}</p>
             <div
@@ -82,7 +77,7 @@
             </div>
           </div>
         </div>
-        <!-- 返佣记录 -->
+        <!-- 返佣记录
         <div class="invite-wrap right">
           <div class="title-box">{{ $t('commission_history_text') }}</div>
           <div class="invite-list ">
@@ -126,7 +121,7 @@
               <a @click.prevent="getCommissionList">[{{ $t('more_record') }}]</a>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -304,7 +299,7 @@ export default {
             }
          }
         margin-top: 24px;
-        min-height: 220px;
+        min-height: 100px;
         .share_style .post_btn {
           padding: 0;
           width: 160px;

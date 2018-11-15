@@ -122,7 +122,7 @@ export const actions = {
       window.zE && window.zE(function () {
         window.zE.identify({
           name: 'Guest',
-          email: 'guest@ix.com'
+          email: 'guest@IXX.COM'
         })
       })
     }
@@ -263,7 +263,7 @@ export const actions = {
     const obj = {}
     // for (const key in msg) {
     //   if (msg.hasOwnProperty(key)) {
-    //     obj[key] = msg[key].replace('IX.COM', exchangeName).replace('IX', companyName)
+    //     obj[key] = msg[key].replace('IXX.COM', exchangeName).replace('IX', companyName)
     //   }
     // }
     return {...msg, ...obj}

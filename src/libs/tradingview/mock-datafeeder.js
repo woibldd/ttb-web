@@ -23,7 +23,7 @@ export default {
     setTimeout(function () {
       resolve({
         name,
-        exchange: 'IX.com',
+        exchange: 'IXX.COM',
         ticker: name,
         description: name,
         type: 'bitcoin',

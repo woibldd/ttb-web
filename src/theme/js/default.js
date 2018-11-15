@@ -5,7 +5,7 @@ module.exports = {
   googleAnalyticsId: 'UA-125390817-2',
   locales: ['en', 'zh-CN', 'zh-HK', 'ko'],
   themeName: 'default',
-  companyName: 'IX.COM',
+  companyName: 'IXX.COM',
   exchangeName: 'IX | 自由人的自由联合',
   exchangeNameConfig: {
     'zh-CN': 'IX | 自由人的自由联合',
