@@ -6,7 +6,8 @@
         <div class="search-box">
           <input
             type="text"
-            v-model="searchCoin">
+            @keyup.enter="filterPair()"
+            v-model="search">
           <icon
             class="ml-5"
             name="home-search"/>
@@ -115,6 +116,9 @@ export default {
           pair: pair
         }
       })
+    },
+    filterPair () {
+      this.sortBy = null
     }
   }
 }

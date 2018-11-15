@@ -103,7 +103,7 @@
           class="right_options">
           <router-link
             :to="{name:'login'}"
-            class="nav_log_res">{{ $t("signin") }}</router-link>
+            class="nav_log_res border-right-1 pr-14 mr-14">{{ $t("signin") }}</router-link>
           <router-link
             :to="{name:'register'}"
             class="nav_log_res">{{ $t("signup_title") }}</router-link>
@@ -330,22 +330,26 @@ export default {
 @import "../styles/mixins";
 
 .nav_box {
+    width: 100%;
+    height: 60px;
+
+    .border-right-1 {
+        border-right: 1px solid #ffffff;
+    }
+
   .ind_cen {
     position: relative;
     margin: 0 60px;
     min-width: 1200px;
   }
-  width: 100%;
-  height: 80px;
-  line-height: 42px;
+
   .nav_logo {
     float: left;
     width: 142px;
     height: 46px;
+    margin-top: 8px;
     display: block;
     @include bg-retina('../assets/nav_logo', 'png', 142px, 46px);
-    float: left;
-    margin: 17px 0;
   }
   .nav_left {
     float: left;
@@ -435,9 +439,15 @@ export default {
   .nav_right {
     float: right;
     font-size: 14px;
+    height: 100%;
+    display: flex;
+    align-items: center;
 
     .right_options {
-      float: left;
+      height: 60px;
+      line-height: 60px;
+      display: flex;
+      align-items: center;
     }
 
     .fund, .email, .help {
@@ -499,10 +509,10 @@ export default {
     }
   }
   .nav_right .nav_log_res, .nav_right .quit {
-    float: left;
-    margin: 19px 0 19px 40px;
     color: #fff;
-    height: 42px;
+    display: inline-block;
+    height: 14px;
+    line-height: 14px;
     font-size: 14px;
     &:hover,
     &.router-link-active {
@@ -512,12 +522,11 @@ export default {
   .lang {
     width: 110px;
     height: 24px;
-    float: left;
+    margin-left: 20px;
     color: #fff;
     line-height: 24px;
     border-radius: 20px;
     border: 1px solid #fff;
-    margin: 28px 0 0 30px;
     // background: url(../assets/lang.png) no-repeat 12px center;
     // text-indent: 16px;
     position: relative;
@@ -536,17 +545,18 @@ export default {
     }
     .lang_box{
         display: block;
-        width: 400%;
+        width: 100%;
         height: auto;
         line-height: 40px;
         padding-top: 27px;
         right:0;
         position: absolute;
         display: none;
+        flex-direction: column;
         a{
             background: #303c47;
             display: block;
-            width: 25%;
+            width: 100%;
             height: 40px;
             float: left;
             color: #fff;
@@ -558,7 +568,7 @@ export default {
     }
     &:hover{
         .lang_box{
-            display: block;
+            display: flex;
         }
         .rig {
           transform: rotate(180deg);
