@@ -742,7 +742,6 @@
   "rate_tips_g_n": "以交易时该币种对BTC的价格折算成BTC，并在每天的 UTC时间0点进行结算，计算出前30天所有币币交易币种的累计交易量，比如用户在过去30天交易了BTC、EOS、ETH，IX这4个币种，那么系统会把这4个币种的每笔交易都按交易时对BTC的价格折算成BTC交易量（在USDT交易区的交易也会进行折算），然后每天的UTC 0点计算前30天的累计交易量。",
   "gentle_hint": "温馨提示",
   "no_alert_again": "不再提示",
-  "----": "----ixx首页--------",
   "newest_coin_pairs": "最新上线",
   "home_intro_safe": "安全",
   "home_intro_prefessor": "专业",

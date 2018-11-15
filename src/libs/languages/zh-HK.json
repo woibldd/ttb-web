@@ -739,5 +739,14 @@
   "rate_tips_g": "“IX/BTC”以及“IX/USDT”交易對不支持“交易挖礦”模式",
   "rate_tips_g_n": "以交易時該幣種對BTC的價格折算成BTC，並在每天的UTC時間0點進行結算，計算出前30天所有幣幣交易幣種的累計交易量，比如用戶在過去30天交易了BTC、EOS、ETH，IX這4個幣種，那麼系統會把這4個幣種的每筆交易都按交易時對BTC的價格折算成BTC交易量（在USDT交易區的交易也會進行折算），然後每天的UTC 0點計算前30天的累計交易量。",
   "gentle_hint": "溫馨提示",
-  "no_alert_again": "不再提示"
+  "no_alert_again": "不再提示",
+  "newest_coin_pairs": "最新上線",
+  "home_intro_safe": "安全",
+  "home_intro_prefessor": "專業",
+  "home_intro_experience": "體驗",
+  "home_intro_efficiency": "高效",
+  "home_intro_long_a": "區塊鏈安全專家、頂級技術團隊、風控管理團隊共同打造的數字資產交易平台，我們始終將用戶的資金安全放在第一位。",
+  "home_intro_long_b": "我們的團隊成員來自知名互聯網公司、金融機構、投資機構、區塊鏈領域，共同打造高品質的產品、服務。",
+  "home_intro_long_c": "致力打造“最簡單”的數字資產交易平台；不斷的產品打磨，提高用戶在平台的體驗。",
+  "home_intro_long_d": "強大的技術支持以及完善的客服系統，使整個交易系統在交易中保持處理高效，響應迅速。"
 }
