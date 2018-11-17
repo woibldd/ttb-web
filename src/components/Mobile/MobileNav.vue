@@ -194,10 +194,10 @@ export default {
     color: #ffffff;
 
     .title-pic {
-        background-image: url('~@/assets/h5/h5-logo@2x.png');
+        background-image: url('~@/assets/ixx/ixx_logo.png');
         background-repeat: no-repeat;
         background-size: 100% 100%;
-        width: rem(164);
+        width: rem(176);
         height: rem(38);
     }
 
