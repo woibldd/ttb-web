@@ -22,6 +22,7 @@ api.interceptors.request.use(config => {
     // 服务端准备好 就可以上token了
     config.headers['token'] = token
   }
+  config.headers['from'] = 'ixx'
   return config
 }, error => {
   // Do something with request error

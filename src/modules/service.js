@@ -11,10 +11,10 @@ import { state, actions } from '@/modules/store'
 const service = {
   getBanners (data = {}) {
     data.platform = data.platform || 1
-    return request('/announcement/list', data)
+    return request('ixx/announcement/list', data)
   },
   hasNewBanner () {
-    return request('announcement/has_new')
+    return request('ixx/announcement/has_new')
   },
   resetPassword (data) {
     let uri = 'user/reset/password/email'
