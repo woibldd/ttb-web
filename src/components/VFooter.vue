@@ -92,7 +92,7 @@
               </a>
               <a
                 class="contact-item-wrapper pointer"
-                href='https://twitter.com/IXExchange'>
+                href='https://twitter.com/IXX73784665'>
                 <icon
                   class="contact-item"
                   name="footer-twitter"/>
@@ -111,11 +111,11 @@
                   name="footer-wx"/>
                 <img
                   class="contact-img"
-                  src="../assets/pic-contact-wx.jpg">
+                  src="../assets/pic-contact-wx.png">
               </div>
               <a
                 class="contact-item-wrapper pointer"
-                :href="showEnTips ? 'https://t.me/IXofficial_KR' : 'https://t.me/ixofficial'">
+                :href="showEnTips ? 'https://t.me/ixxofficial' : 'https://t.me/ixxofficial'">
                 <icon
                   class="contact-item "
                   name="footer-telegram"/>
@@ -126,7 +126,7 @@
                   name="footer-biyong"/>
                 <img
                   class="contact-img"
-                  src="../assets/pic-contact-biyong.jpg">
+                  src="../assets/pic-contact-biyong.png">
               </div>
             </div>
             <p class="copyright">Copyright © 2018 ixx.com</p>
@@ -338,6 +338,8 @@ export default {
         position: absolute;
         top: -130px;
         right: -50px;
+        width: 120px;
+        height: 120px;
       }
       &:hover {
         .contact-img {

@@ -125,7 +125,7 @@
         </a>
         <a
           class="contact-item-wrapper mr-20 pointer"
-          href='https://twitter.com/IXExchange'>
+          href='https://twitter.com/IXX73784665'>
           <icon
             class="contact-item"
             name="footer-twitter"/>
@@ -144,11 +144,11 @@
             name="footer-wx"/>
           <img
             class="contact-img"
-            src="../../../assets/pic-contact-wx.jpg">
+            src="../../../assets/pic-contact-wx.png">
         </div>
         <a
           class="contact-item-wrapper mr-20 pointer"
-          href='https://t.me/ixofficial'>
+          href='https://t.me/ixxofficial'>
           <icon
             class="contact-item "
             name="footer-telegram"/>
@@ -159,7 +159,7 @@
             name="footer-biyong"/>
           <img
             class="contact-img"
-            src="../../../assets/pic-contact-biyong.jpg">
+            src="../../../assets/pic-contact-biyong.png">
         </div>
       </div>
       <p class="copyright">Copyright © 2018 IXX.COM</p>
