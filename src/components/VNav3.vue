@@ -8,10 +8,10 @@
         class="nav_logo"/>
       <div class="nav_left">
         <div class="left_options">
-          <!-- <router-link
+          <router-link
             :to="{name: 'trading'}"
-            class="nav_link">{{ $t('trading') }}</router-link> -->
-          <!-- <div class="nav_link arrow-down">
+            class="nav_link">{{ $t('trading') }}</router-link>
+            <!-- <div class="nav_link arrow-down">
             <a
               :href="'/docs/IX+WhitePaper'+pdfSubfix+'.pdf'"
               target="_blank"
@@ -468,13 +468,14 @@ export default {
     .dropdown-sub-menu {
       background: #283B4C;
       position: absolute;
-      top: 80px;
+      top: 60px;
       border-radius: 4px;
       z-index: 999;
 
       .dropdown-list {
         .dropdown-item {
           height: 40px;
+          line-height: 40px;
           &.mobile {
             display: none;
           }
