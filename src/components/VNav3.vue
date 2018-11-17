@@ -8,10 +8,10 @@
         class="nav_logo"/>
       <div class="nav_left">
         <div class="left_options">
-          <router-link
+          <!-- <router-link
             :to="{name: 'trading'}"
-            class="nav_link">{{ $t('trading') }}</router-link>
-            <!-- <div class="nav_link arrow-down">
+            class="nav_link">{{ $t('trading') }}</router-link> -->
+          <!-- <div class="nav_link arrow-down">
             <a
               :href="'/docs/IX+WhitePaper'+pdfSubfix+'.pdf'"
               target="_blank"
@@ -345,11 +345,14 @@ export default {
 
   .nav_logo {
     float: left;
-    width: 142px;
-    height: 46px;
-    margin-top: 8px;
+    width: 176px;
+    height: 38px;
+    margin-top: 11px;
     display: block;
-    @include bg-retina('../assets/nav_logo', 'png', 142px, 46px);
+    background-image: url('../assets/ixx/ixx_logo.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    // @include bg-retina('../assets/nav_logo', 'png', 142px, 46px);
   }
   .nav_left {
     float: left;

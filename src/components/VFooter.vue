@@ -6,7 +6,7 @@
           :to="{name:'home'}"
           class="footer_logo"/>
         <p class="footer_ltxt"><b>{{ $t('first') }}</b>{{ $t('bitcoin_equity_certificate') }}</p>
-        <div
+        <!-- <div
           class="lt"
           v-if="!showEnTips">
           <img
@@ -37,7 +37,7 @@
             class="footer_ewm"
             src="../assets/ewm_en_by.png">
           <p class="footer_ewm_ltxt">{{ $t('footer_contract_jb') }}</p>
-        </div>
+        </div> -->
       </div>
       <div class="footer_right">
         <div class="footer_ct">
@@ -204,7 +204,9 @@ export default {
     .footer_ltxt{
       font-size: 14px;
       line-height: 40px;
-      color: #01CED1;
+    //   color: #01CED1;
+    color: #ffffff;
+    opacity:0.32;
       display: block;
       letter-spacing:2px;
       b{
@@ -227,10 +229,13 @@ export default {
       text-align: center;
     }
     .footer_logo{
-      width: 224px;
-      height: 51px;
+      width: 176px;
+      height: 38px;
       margin-top: 22px;
-      @include bg-retina('../assets/footer_logo', 'png', 224px, 51px);
+      background-image: url('../assets/ixx/ixx_logo.png');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    //   @include bg-retina('../assets/footer_logo', 'png', 224px, 51px);
       display: block;
     }
 
