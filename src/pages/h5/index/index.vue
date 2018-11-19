@@ -55,19 +55,17 @@
     <!-- <div class="activity-info-section">
       <kyc/>
     </div> -->
-    <div
-      class="mine-info-section"
-    >
-      <mine-summary/>
-    </div>
     <div class="h5-trading-summary">
       <div class="trading__title">
         {{ $t('exchange_area') }}
       </div>
       <pair-table/>
     </div>
+    <ixx-feature/>
     <!-- <h5-footer/> -->
-    <div class="corperator">
+    <div
+      class="corperator"
+      v-if="false">
       <div class="corperator-container">
         <!-- <div
           class="corp-row row-60"
@@ -201,12 +199,12 @@
 <script>
 import './index.scss'
 import MineSummary from '../mine-summary'
-// import h5Footer from '../footer'
 import PairTable from '@/components/Mobile/PairTable'
 import {state} from '@/modules/store'
 import service from '@/modules/service'
 import responsiveMixin from '@/mixins/responsive'
 import MobileNav from '@/components/Mobile/MobileNav'
+import ixxFeature from '@/components/Mobile/ixx-feature.vue'
 // import Kyc from '@/components/Mobile/Kyc'
 
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
@@ -217,8 +215,8 @@ export default {
   data () {
     return {
       state,
-      banners: [],
-      notices: [],
+      banners: [{picture: 'https://n.sinaimg.cn/tech/transform/199/w600h399/20181113/bKLb-hnstwwr3715828.jpg'}, {picture: 'https://n.sinaimg.cn/tech/transform/54/w494h360/20181119/Urfv-hnyuqhi0533113.jpg'}],
+      notices: [{title: 'notice-title'}],
       swiperOption: {
         autoplay: true,
         delay: 5000,
@@ -261,10 +259,10 @@ export default {
   components: {
     MineSummary,
     PairTable,
-    // h5Footer,
     swiper,
     swiperSlide,
-    MobileNav
+    MobileNav,
+    ixxFeature
     // Kyc
   }
 }

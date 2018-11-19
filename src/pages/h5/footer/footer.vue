@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="h5-footer-container">
-      <div class="footer-row">
+      <div class="footer-row border-top-1">
         <div
           class="row-pick-up"
           @click="pickUp('service')">
