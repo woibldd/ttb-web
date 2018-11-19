@@ -83,7 +83,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../styles/mixins";
+
 
 .order-deals {
   display: inline-block;

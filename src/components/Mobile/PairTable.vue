@@ -80,8 +80,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~@/styles/vars";
-@import "~@/styles/mixins";
+
+
 div {
   display: flex;
   background: #fff;

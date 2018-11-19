@@ -63,8 +63,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  @import "~@/styles/vars";
-  @import "~@/styles/mixins";
+  
+  
   .header{
     background: #1A1A1A;
   }
@@ -145,7 +145,7 @@ export default {
             height: 40px;
             display: block;
             position: absolute;
-            background: #C9AA6D;
+            background: $primary;
           }
         }
       }

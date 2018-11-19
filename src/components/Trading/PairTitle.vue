@@ -109,7 +109,7 @@ export default {
   // overflow-y: hidden;
   box-sizing: border-box;
   padding-left: 20px;
-  border: 4px solid #3A444F;
+  border: 4px solid $splitter;
   border-bottom: none;
   border-right: none;
   background-color: $nav;

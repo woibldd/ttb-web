@@ -145,7 +145,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../styles/mixins";
+
 
 .order-deals-popover {
   background-color: #232D3D;

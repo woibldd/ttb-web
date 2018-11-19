@@ -453,7 +453,7 @@ export default {
 </style>
 
 <style lang="scss">
-@import "../styles/mixins";
+
 
 .ix-panel {
   width: 100%;

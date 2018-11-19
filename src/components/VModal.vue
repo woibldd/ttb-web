@@ -52,7 +52,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-@import "../styles/mixins";
+
 
 .modal-bg {
   z-index: 1001;

@@ -1091,8 +1091,7 @@ export default {
   }
 }
 </script>
-
-<style>
+<style lang="scss" scoped>
   .vue-slider-component {
     position: relative;
     box-sizing: border-box;
@@ -1131,7 +1130,7 @@ export default {
   .vue-slider-component .vue-slider-process {
     position: absolute;
     border-radius: 15px;
-    background-color: #C9AA6D;
+    background-color: $primary;
     transition: all 0s;
     z-index: 1;
   }
@@ -1169,7 +1168,7 @@ export default {
     position: absolute;
     border-radius: 50%;
     background:rgba(255,255,255,1);
-    border:4px solid rgba(201,170,109,1);
+    border: 4px solid $primary;
     box-sizing: border-box;
     border-radius:50%;
     box-shadow: 0.5px 0.5px 2px 1px rgba(0, 0, 0, 0.32);
@@ -1179,7 +1178,7 @@ export default {
     z-index: 5;
   }
   .vue-slider-component .vue-slider-dot.vue-slider-dot-focus {
-    box-shadow: 0 0 2px 1px #C9AA6D;
+    box-shadow: 0 0 2px 1px $primary;
   }
   .vue-slider-component .vue-slider-dot.vue-slider-dot-dragging {
     z-index: 5;
@@ -1213,8 +1212,8 @@ export default {
     text-align: center;
     color: #fff;
     border-radius: 5px;
-    border: 1px solid #C9AA6D;
-    background-color: #C9AA6D;
+    border: 1px solid $primary;
+    background-color: $primary;
   }
   .vue-slider-component .vue-slider-tooltip-wrap.vue-slider-tooltip-top {
     top: -9px;

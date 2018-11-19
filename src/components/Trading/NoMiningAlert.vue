@@ -1,7 +1,7 @@
 <template>
   <v-modal
     :open.sync="open"
-    bg-color="#283B4C">
+    bg-color="#0C1222">
     <template>
       <div class="modal-container">
         <div class="title">

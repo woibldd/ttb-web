@@ -326,8 +326,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../styles/vars";
-@import "../styles/mixins";
+
+
 
 .nav_box {
     width: 100%;
@@ -391,7 +391,7 @@ export default {
           }
 
            .dropdown-sub-menu {
-              background: #283B4C;
+              background: $protrade-bg;
               position: absolute;
               left: 0;
               top: 68px;
@@ -466,7 +466,7 @@ export default {
       }
     }
     .dropdown-sub-menu {
-      background: #283B4C;
+      background: $protrade-bg;
       position: absolute;
       top: 60px;
       border-radius: 4px;

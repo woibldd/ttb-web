@@ -464,8 +464,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../styles/vars";
-@import "../../styles/mixins";
+
+
 
 .header-btn {
   cursor: pointer;

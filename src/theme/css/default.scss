@@ -6,7 +6,7 @@ $primary-disabled: rgba(0,0,0,0.2); // disabled
 $primary-opacity: #293443; // background 交易品种列表选中的背景色，主色25%透明度
 
 /* nav */
-$nav: #192D3F; // 主导航颜色 -nav bg
+$nav: #1C2435; // 主导航颜色 -nav bg
 $normal-nav: #252838; // 资产个人中心导航颜色 -nav bg
 $nav-2: #303E4B; // 副导航颜色 -nav-2
 
@@ -35,7 +35,7 @@ $down-price: #f46c53; // base 下降数字 -跌文字
 $down-price-hover: #f46c53; // hover
 $down-price-active: #f46c53; // active
 
-$search-bar-bg: #283B4C; // search bg 搜索框背景
+$search-bar-bg: #0C1222; // search bg 搜索框背景
 $search-bar-border: #666666; // search border 搜索框border
 
 $up-candle: #6ba583; // 蜡烛图涨色
@@ -84,8 +84,8 @@ $home-header-bgdark: #3E3E3E;
 $home-header-login: #303E4B;
 
 /* const */
-$splitter:#3A444F; // trade split line 交易页面分割线
-$loading-mask: #283B4C; // 交易页面loading背景
+$splitter:#272837; // trade split line 交易页面分割线
+$loading-mask: #0C1222; // 交易页面loading背景
 $order-input-label: #666666; //订单填写 input 右侧币种的背景色
 
 /* logo pic */
@@ -98,7 +98,7 @@ $kyc-pic: '../assets/kyc-example';
 
 $page-width: 1200px;
 
-$protrade-bg: #283B4C;
+$protrade-bg: #0C1222;
 
 /* font family */
 $hex: monaco, monospace, arial;

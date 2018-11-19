@@ -229,7 +229,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../styles/vars";
+
 
 .currency-input {
   position: relative;

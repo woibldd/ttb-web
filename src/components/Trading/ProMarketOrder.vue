@@ -413,7 +413,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../styles/mixins";
+
 .ix-trade-op {
   display: flex;
 }
@@ -550,11 +550,11 @@ export default {
   color: #A5B4C5;
 }
 .custom-label.active {
-  background-color: #C9AA6D;
+  background-color: $primary;
   font-weight: bold;
 }
 .custom-label.active::after {
-  background-color: #C9AA6D;
+  background-color: $primary;
   width: 2px;
 }
 </style>

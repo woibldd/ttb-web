@@ -97,8 +97,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../styles/vars";
-@import "../../styles/mixins";
+
+
 
 .ix-header-sub {
   height: 32px;
@@ -149,7 +149,7 @@ export default {
   transition: opacity 300ms, visibility 0s 300ms;
   box-sizing: border-box;
   text-align: center;
-  background-color: RGBA(35, 56, 75, 0.8);
+  background-color: RGBA(12, 18, 34, .8);
   &.show {
     transition: none;
     visibility: visible;

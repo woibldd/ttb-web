@@ -174,8 +174,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "../styles/vars";
-  @import "../styles/mixins";
   .lang-en, .lang-ko {
     .hide_en {
       display: none !important;

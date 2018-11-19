@@ -44,7 +44,7 @@ export default function () {
     },
     overrides: {
       'symbolWatermarkProperties.color': 'rgba(255,255,255,0)',
-      'paneProperties.background': '#283B4C',
+      'paneProperties.background': '#0C1222',
       'paneProperties.vertGridProperties.color': 'rgba(210, 217, 229, 0.06)',
       'paneProperties.horzGridProperties.color': 'rgba(210, 217, 229, 0.06)',
       'paneProperties.crossHairProperties.color': 'rgb(210, 217, 229)',

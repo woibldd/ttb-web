@@ -190,8 +190,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../styles/vars";
-@import "../../styles/mixins";
+
+
 
 .ix-header {
   height: 32px;

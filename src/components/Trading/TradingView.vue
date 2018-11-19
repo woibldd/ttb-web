@@ -204,8 +204,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../styles/mixins";
-
 #tv_chart_container {
   width: 100%;
   height: 100%;

@@ -19,8 +19,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../styles/vars";
-@import "../styles/mixins";
+
+
 
 .header {
   height: auto;

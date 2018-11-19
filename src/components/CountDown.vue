@@ -63,7 +63,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-@import "../styles/vars";
+
 .countdown-wrap {
   font-size: 44px;
   color: $primary;

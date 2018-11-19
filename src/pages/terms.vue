@@ -440,8 +440,8 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-    @import "../styles/vars";
-    @import "../styles/mixins";
+    
+    
     .page-home{background:#303E4B;}
 
 </style>
