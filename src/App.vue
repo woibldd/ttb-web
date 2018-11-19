@@ -87,6 +87,9 @@ export default {
       if (!this.$route.name) {
         return false
       }
+      if (this.$route.name === 'trading') {
+        return false
+      }
       return !(utils.getRouteMeta(this.$route, 'footer') === false)
     },
     zendeskWidget () {
