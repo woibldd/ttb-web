@@ -252,7 +252,8 @@ export default {
     }
 }
 .dark {
-  background: $home-header-bgdark;
+//   background: $home-header-bgdark;
+    background-color: #1a1a1a;
 }
 .login {
   background: $home-header-login;

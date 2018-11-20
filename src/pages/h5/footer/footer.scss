@@ -3,11 +3,16 @@
 .h5-footer-container {
     box-sizing: border-box;
     width: 100%;
+    padding-top: rem(60);
     padding-left: rem(32);
     padding-right: rem(32);
     color: #ffffff;
     background-color: #1a1a1a;
     // border-bottom: 1px  solid rgba(204,204,204,1);
+
+    .border-top-1 {
+        border-top: 1px solid #CCCCCC;
+    }
 
     .footer-row {
         border-bottom: 1px solid #CCCCCC;

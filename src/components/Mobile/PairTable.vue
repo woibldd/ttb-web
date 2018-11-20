@@ -81,17 +81,18 @@ export default {
 
 <style lang="scss" scoped>
 
-
 div {
   display: flex;
-  background: #fff;
 }
 .pairtable_box {
+  border:1px solid rgba(67,87,149,1);
+  box-shadow:0px rem(10) rem(20) 0px rgba(51,59,70,0.4);
   border-radius: rem(4);
   padding: rem(25) 0;
   flex-direction: column;
   .trading_row {
     flex: 1;
+    padding: 0 rem(25);
 
     &:last-child {
       .row {
@@ -100,7 +101,7 @@ div {
     }
     .row {
       border-bottom: 1px solid #566573;
-      padding: rem(40) rem(25);
+      padding: rem(20) 0;
       flex: 1;
       justify-content: space-between;
       font-weight: 400;
@@ -113,13 +114,15 @@ div {
             color: $primary;
           }
           &.current {
-            color: #484F59;
+            color: #ffffff;
             text-align: right;
           }
         }
         .down {
           font-size: rem(20);
           color: #446683;
+          line-height: 1;
+          padding-top: rem(6);
         }
       }
       .full {
