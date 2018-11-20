@@ -396,7 +396,7 @@ export default {
       }
       ctx.fetchId += 1
       ctx.fetching = true
-      const pageSize = 200
+      const pageSize = 1000
       const fetchId = ctx.fetchId
       const params = {
         size: pageSize,
@@ -509,8 +509,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-
 
 .err,
 .no-data {
