@@ -77,6 +77,11 @@
         height: 80px;
         line-height: 80px;
         border-bottom: 1px solid #E6E6E6;
+        cursor: pointer;
+
+        &:hover{
+            background:linear-gradient(0deg,rgba(230,230,230,1) 0%,rgba(255,255,255,1) 100%);
+        }
 
         .row__item{
             text-align: right;
@@ -89,6 +94,10 @@
                 color: #09C989;
             }
         }
+    }
+    .newest_price {
+        display: flex;
+        flex-direction: row-reverse;
     }
     .percent9{
         width: 9%;
@@ -104,4 +113,9 @@
     .percent8{
         width: 8%;
     }
+    .tg {
+        &:hover {
+          color: $primary;
+        }
+      }
 }

@@ -215,8 +215,8 @@ export default {
   data () {
     return {
       state,
-      banners: [{picture: 'https://n.sinaimg.cn/tech/transform/199/w600h399/20181113/bKLb-hnstwwr3715828.jpg'}, {picture: 'https://n.sinaimg.cn/tech/transform/54/w494h360/20181119/Urfv-hnyuqhi0533113.jpg'}],
-      notices: [{title: 'notice-title'}],
+      banners: [],
+      notices: [],
       swiperOption: {
         autoplay: true,
         delay: 5000,

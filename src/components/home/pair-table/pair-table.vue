@@ -19,10 +19,10 @@
         <div class="head-item percent9">
           {{ $t('currency') }}
         </div>
-        <div class="head-item percent14_8">
+        <div class="head-item percent18_8">
           {{ $t('homechart_price') }}
         </div>
-        <div class="head-item percent18_8">
+        <div class="head-item percent14_8">
           {{ $t('homechart_24h_chg') }}
         </div>
         <div class="head-item percent14_8">
@@ -41,18 +41,21 @@
       <div
         class="pairs-table__row c-21"
         v-for="(pair,index) in sortedList"
+        @click="toExchange(pair.name)"
         v-if="pair.tick"
         :key="index">
         <div class="row__item percent9">
           {{ pair.product }} <span>/ {{ pair.currency }}</span>
         </div>
-        <div class="row__item percent14_8">
-          {{ pair.tick.current | fixed(pair.price_scale) }} <span class="ml-10 inline-block c-999">{{ state.fiatMoneySymbol }}<fiat-money
+        <div class="row__item percent18_8 newest_price">
+          <span class="ml-10 inline-block c-999">{{ state.fiatMoneySymbol }}<fiat-money
             :base="pair.currency"
-            :value="pair.tick.current"/></span>
+            :value="pair.tick.current"/>
+          </span>
+          {{ pair.tick.current | fixed(pair.price_scale) }}
         </div>
         <div
-          class="row__item percent18_8 c-f24"
+          class="row__item percent14_8 c-f24"
           :class="{'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}">
           <p v-if="pair.tick">{{ (getDelta(pair.tick) > 0) ? '+' : '' }}{{ getDelta(pair.tick) }}%
           </p>
@@ -69,7 +72,7 @@
           {{ pretty(pair.tick.volume_24h) }}<span> {{ pair.product }}</span>
         </div>
         <div
-          class="row__item percent8"
+          class="row__item percent8 tg"
           @click="toExchange(pair.name)">
           <icon name="handle"/>
         </div>
