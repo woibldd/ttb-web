@@ -105,44 +105,147 @@ export default {
   },
   _fixData (period, pair, data) {
     try {
-      if (pair === 'IX_USDT' && data.length) {
+      if (pair === 'IX_BTC' && data.length) {
         const keyPair = {
-          '1d': {
-            index: 2,
-            time: 1539964800000
-          },
-          '4h': {
-            index: 13,
-            time: 1540036800000
-          },
-          '1h': {
-            index: 53,
-            time: 1540047600000
-          },
-          '30m': {
-            index: 106,
-            time: 1540049400000
-          },
-          '15m': {
-            index: 212,
-            time: 1540050300000
-          },
-          '5m': {
-            index: 638,
-            time: 1540050900000
-          },
-          '1m': {
-            index: 1347,
-            time: 1540051140000
-          }
+          '1d': [
+            {
+              time: 1539792000000,
+              expect: '0.0000044',
+              actual: '0.0000022',
+              index: 0
+            },
+            {
+              time: 1541952000000,
+              expect: '0.0000098999',
+              actual: '0.0000012',
+              index: 3
+            }
+          ],
+          '4h': [
+            {
+              time: 1539849600000,
+              expect: '0.0000044',
+              actual: '0.0000022',
+              index: 0
+            },
+            {
+              time: 1542024000000,
+              expect: '0.0000098999',
+              actual: '0.0000012',
+              index: 3
+            }
+          ],
+          '1h': [
+            {
+              time: 1539856800000,
+              expect: '0.0000044',
+              actual: '0.0000022',
+              index: 0
+            },
+            {
+              time: 1542027600000,
+              expect: '0.0000098999',
+              actual: '0.0000012',
+              index: 3
+            }
+          ],
+          '30m': [
+            {
+              time: 1542027600000,
+              expect: '0.0000098999',
+              actual: '0.0000012',
+              index: 3
+            }
+          ],
+          '15m': [
+            {
+              time: 1542027600000,
+              expect: '0.0000098999',
+              actual: '0.0000012',
+              index: 3
+            }
+          ],
+          '5m': [
+            {
+              time: 1542027600000,
+              expect: '0.0000098999',
+              actual: '0.0000012',
+              index: 3
+            },
+            {
+              time: 1542027600000,
+              expect: '0.0000098999',
+              actual: '0.0000012',
+              index: 1
+            },
+            {
+              time: 1542027900000,
+              expect: '0.0000098999',
+              actual: '0.0000012',
+              index: 3
+            }
+          ],
+          '1m': [
+            {
+              time: 1542027840000,
+              expect: '0.0000098999',
+              actual: '0.0000012',
+              index: 3
+            },
+            {
+              time: 1542027840000,
+              expect: '0.0000098999',
+              actual: '0.0000012',
+              index: 1
+            },
+            {
+              time: 1542027900000,
+              expect: '0.0000098999',
+              actual: '0.0000012',
+              index: 3
+            },
+            {
+              time: 1542027900000,
+              expect: '0.0000098999',
+              actual: '0.0000012',
+              index: 1
+            },
+            {
+              time: 1542027960000,
+              expect: '0.0000098999',
+              actual: '0.0000012',
+              index: 0
+            },
+            {
+              time: 1542027960000,
+              expect: '0.0000098999',
+              actual: '0.0000012',
+              index: 1
+            },
+            {
+              time: 1542027960000,
+              expect: '0.0000098999',
+              actual: '0.0000012',
+              index: 2
+            },
+            {
+              time: 1542027960000,
+              expect: '0.0000098999',
+              actual: '0.0000012',
+              index: 3
+            }
+          ]
         }
         // fake data
         if (keyPair[period]) {
-          let item = data.find(item => item.time === keyPair[period].time)
-          if (item && item.values[1] === '0.0343') {
-            // console.log('fake')
-            item.values[1] = '0.0361'
-          }
+          let targets = keyPair[period]
+          targets.forEach(target => {
+            let item = data.find(item => item.time === target.time)
+            if (item && item.values[target.index] === target.expect) {
+              // console.log('fake')
+              item.values[target.index] = target.actual
+            }
+          })
         }
       }
     } catch (e) {}
