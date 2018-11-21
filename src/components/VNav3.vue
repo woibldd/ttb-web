@@ -270,7 +270,7 @@ export default {
     },
     requestLink () {
       if (this.state.userInfo && this.state.theme.themeName === 'default') {
-        return process.env.BASE_API + 'zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
+        return process.env.BASE_API + 'ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
       } else {
         return this.state.theme.request[this.state.locale] || this.request.theme.help.en
       }
@@ -326,8 +326,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
-
 
 .nav_box {
     width: 100%;

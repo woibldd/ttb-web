@@ -2,7 +2,7 @@ const getSassVariables = require('./getSassVariables')
 
 module.exports = {
   styleVar: getSassVariables(),
-  googleAnalyticsId: 'UA-125390817-2',
+  googleAnalyticsId: 'UA-125390817-4',
   locales: ['en', 'zh-CN', 'zh-HK', 'ko'],
   themeName: 'default',
   companyName: 'IXX.COM',
@@ -26,39 +26,39 @@ module.exports = {
     'zh-HK': 'https://github.com/ix-api/API_Docs'
   },
   faq: {
-    en: 'https://ixcustomer.zendesk.com/hc/en-us/categories/360000964011',
-    ko: 'https://ixcustomer.zendesk.com/hc/en-us/categories/360000964011',
-    'zh-CN': 'https://ixcustomer.zendesk.com/hc/zh-cn/categories/360000964011',
-    'zh-HK': 'https://ixcustomer.zendesk.com/hc/zh-cn/categories/360000964011'
+    en: 'https://ixxcustomer.zendesk.com/hc/en-us/',
+    ko: 'https://ixxcustomer.zendesk.com/hc/en-us/',
+    'zh-CN': 'https://ixxcustomer.zendesk.com/hc/zh-cn/',
+    'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/'
   },
   announcement: {
-    en: 'https://ixcustomer.zendesk.com/hc/en-us/categories/360000964031',
-    ko: 'https://ixcustomer.zendesk.com/hc/en-us/categories/360000964031',
-    'zh-CN': 'https://ixcustomer.zendesk.com/hc/zh-cn/categories/360000964031',
-    'zh-HK': 'https://ixcustomer.zendesk.com/hc/zh-cn/categories/360000964031'
+    en: 'https://ixxcustomer.zendesk.com/hc/en-us/sections/360002955371',
+    ko: 'https://ixxcustomer.zendesk.com/hc/en-us/sections/360002955371',
+    'zh-CN': 'https://ixxcustomer.zendesk.com/hc/zh-cn/sections/360002955371',
+    'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/sections/360002955371'
   },
   help: {
-    en: 'https://ixcustomer.zendesk.com/hc/en-us/categories/360000964011',
-    ko: 'https://ixcustomer.zendesk.com/hc/en-us/categories/360000964011',
-    'zh-CN': 'https://ixcustomer.zendesk.com/hc/zh-cn/categories/360000964011',
-    'zh-HK': 'https://ixcustomer.zendesk.com/hc/zh-cn/categories/360000964011'
+    en: 'https://ixxcustomer.zendesk.com/hc/en-us/',
+    ko: 'https://ixxcustomer.zendesk.com/hc/en-us/',
+    'zh-CN': 'https://ixxcustomer.zendesk.com/hc/zh-cn/',
+    'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/'
   },
   request: {
-    en: 'https://ixcustomer.zendesk.com/hc/en-us/requests/new',
-    ko: 'https://ixcustomer.zendesk.com/hc/en-us/requests/new',
-    'zh-CN': 'https://ixcustomer.zendesk.com/hc/zh-cn/requests/new',
-    'zh-HK': 'https://ixcustomer.zendesk.com/hc/zh-cn/requests/new'
+    en: 'https://ixxcustomer.zendesk.com/hc/en-us/requests/new',
+    ko: 'https://ixxcustomer.zendesk.com/hc/en-us/requests/new',
+    'zh-CN': 'https://ixxcustomer.zendesk.com/hc/zh-cn/requests/new',
+    'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/requests/new'
   },
   activeRule: {
-    en: 'https://ixcustomer.zendesk.com/hc/en-us/articles/360015900832',
-    ko: 'https://ixcustomer.zendesk.com/hc/en-us/articles/360015900832',
-    'zh-CN': 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360015900832',
-    'zh-HK': 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360015900832'
+    en: 'https://ixxcustomer.zendesk.com/hc/en-us/articles/360015900832',
+    ko: 'https://ixxcustomer.zendesk.com/hc/en-us/articles/360015900832',
+    'zh-CN': 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360015900832',
+    'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360015900832'
   },
   activityKyc: {
-    en: 'https://ixcustomer.zendesk.com/hc/en-us/articles/360016718671',
-    ko: 'https://ixcustomer.zendesk.com/hc/en-us/articles/360016718671',
-    'zh-CN': 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360016718671',
-    'zh-HK': 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360016718671'
+    en: 'https://ixxcustomer.zendesk.com/hc/en-us/articles/360016718671',
+    ko: 'https://ixxcustomer.zendesk.com/hc/en-us/articles/360016718671',
+    'zh-CN': 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360016718671',
+    'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360016718671'
   }
 }
