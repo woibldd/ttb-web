@@ -17,8 +17,8 @@ module.exports = {
   description:
     'IX致力于打造一家回归区块链精神的数字资产交易所，公开、公正、透明',
   shortcut: '',
-  supportMail: 'support@ix.com',
-  hrMail: 'hr@ix.com',
+  supportMail: 'support@ixx.com',
+  hrMail: 'hr@ixx.com',
   apiDoc: {
     en: 'https://github.com/ix-api/API_Docs',
     ko: 'https://github.com/ix-api/API_Docs',

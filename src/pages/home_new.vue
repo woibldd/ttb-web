@@ -29,26 +29,19 @@
     <!-- <kyc/> -->
     <div class="ixx-home-items">
       <!-- 交易对列表 -->
-      <div class="coin-list-section">
-        <div
-          class="coin-info-box"
-          v-for="index in 5"
-          :class="{'mr-13': index < 5}"
-          :key="index">
-          <div class="coin__left">
-            <p class="f17 c-00 mb-10 bold">BTC/USDT</p>
-            <p class="f28 c-09 mb-6 bold">6355.53</p>
-            <p class="f13 c-8a mb-6">≈ 43598.53 CNY</p>
-            <p class="f13 c-b0 "><span class="inline-block mr-14">24H</span><span>15771.14</span></p>
-          </div>
-          <div class="coin__right c-09">
-            +0.22%
-          </div>
-        </div>
-      </div>
+      <pair-rank-table
+        :sorted-list="changeRankList"
+        :get-delta="getDelta"/>
       <!-- 最新上线 -->
-      <pair-table/>
-
+      <pair-table
+        :sorted-list="sortedList"
+        @searching="onSearching"
+        :get-delta="getDelta"/>
+      <div
+        class="mask"
+        :class="{show: loading}">
+        <v-loading/>
+      </div>
       <!-- 倒数第二层的图标 -->
       <div class="compony-intro-section">
         <div class="intro-item">
@@ -92,14 +85,15 @@
 <script>
 import Slider from '@/components/slider.vue'
 import service from '@/modules/service'
-import {state} from '@/modules/store'
 import PairTable from '@/components/home/pair-table'
+import PairRankTable from '@/components/home/pair-rank-table'
 import MineSummary from '@/components/Mine/MineSummary'
+import tickTableMixin from '@/mixins/tick-table'
 
 export default {
+  mixins: [tickTableMixin],
   data: function () {
     return {
-      state,
       banners: [],
       notices: [],
       swiperOption: {
@@ -124,6 +118,7 @@ export default {
   components: {
     kSlider: Slider,
     PairTable,
+    PairRankTable,
     MineSummary
     // Kyc
   },
@@ -156,15 +151,11 @@ export default {
           if (!resp.code && resp.data) {
             this.hasNewNotice = resp.data['new']
           }
-          // this.hasNewNotice = true
-          // const freshAlive = 4 * 3600 * 1000
-          // let recentTime = maxBy(this.notices, i => i.create_time).create_time
-          // recentTime = recentTime < 1e10 ? recentTime * 1000 : recentTime
-          // if (recentTime > new Date().getTime() - freshAlive) {
-          //   this.hasNewNotice = true
-          // }
         }
       }
+    },
+    onSearching (kw) {
+      this.search = kw
     }
   },
   created () {

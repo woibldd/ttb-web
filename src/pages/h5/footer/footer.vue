@@ -118,7 +118,7 @@
       <div class="contact-list">
         <a
           class="contact-item-wrapper mr-20 pointer"
-          href='https://www.facebook.com/IXExchange'>
+          href='https://www.facebook.com/IXXExchange'>
           <icon
             class="contact-item"
             name="footer-facebook"/>
