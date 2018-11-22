@@ -1,53 +1,67 @@
 <template>
-    <div class="swiper-box" rel="swiperBox">
-        <swiper :options="swiperOption" class="swiper-container" ref="mySwiper">
-            <!-- 轮播项 -->
-            <swiper-slide v-for="banner in banners" :key="banner.id">
-              <a class="link" target="_blank" :href="banner.url">
-                <img :src="banner.picture" class="swiper-image">
-              </a>
+  <div 
+class="swiper-box"
+       rel="swiperBox">
+    <swiper 
+:options="swiperOption"
+            class="swiper-container" 
+ref="mySwiper">
+      <!-- 轮播项 -->
+      <swiper-slide 
+v-for="banner in banners"
+                    :key="banner.id">
+        <a 
+class="link"
+           target="_blank" 
+:href="banner.url">
+          <img 
+:src="banner.picture"
+               class="swiper-image">
+        </a>
 
-            </swiper-slide>
-            <!-- 轮播的小圆点 -->
-            <div class="swiper-pagination" slot="pagination"></div>
-        </swiper>
-    </div>
+      </swiper-slide>
+      <!-- 轮播的小圆点 -->
+      <div 
+class="swiper-pagination"
+           slot="pagination"/>
+    </swiper>
+  </div>
 </template>
 <script>
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 
-    export default {
-      data:function() {
-        return {
-        swiperOption:{
-          autoplay: true,
-          delay: 5000,
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true
-          }
+export default {
+  data: function () {
+    return {
+      swiperOption: {
+        autoplay: true,
+        delay: 5000,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
         }
-        }
-      },
-      props:{
-        banners:{
-          type:Array
-        }
-      },
-      components:{
-        swiper,
-        swiperSlide
-      },
-      //定义这个sweiper对象
-      computed: {
-        swiper:function() {
-          return this.$refs.mySwiper.swiper
-        }
-      },
-      created() {
       }
     }
+  },
+  props: {
+    banners: {
+      type: Array
+    }
+  },
+  components: {
+    swiper,
+    swiperSlide
+  },
+  // 定义这个sweiper对象
+  computed: {
+    swiper: function () {
+      return this.$refs.mySwiper.swiper
+    }
+  },
+  created () {
+  }
+}
 </script>
 <style lang="scss" scoped>
     /* @import "swiper.css"; */
@@ -87,7 +101,7 @@ import 'swiper/dist/css/swiper.css'
       height: 400px;
       overflow: hidden;
     }
-    
+
     .link {
       display: flex;
       height: 100%;
@@ -111,7 +125,7 @@ import 'swiper/dist/css/swiper.css'
   background: rgba(255, 255, 255, .4) !important;
 }
 .swiper-pagination-bullet-active{
-  background: rgba(201, 169, 108, 1) !important;
+  background: #01CED1 !important;
 }
 .swiper-container{
     z-index: 0 !important;
