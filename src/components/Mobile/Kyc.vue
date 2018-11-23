@@ -90,8 +90,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/styles/_mixins.scss';
-@import '~@/styles/_vars.scss';
 
 .recent-kyc-container {
   text-align: center;

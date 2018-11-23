@@ -177,8 +177,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/styles/_mixins.scss';
-@import '~@/styles/_vars.scss';
 
 .h5-page-header {
     background-color: #1a1a1a;
