@@ -6,7 +6,7 @@
       />
     </div>
     <div class="banner">
-      <span class="title">IX {{ $t('mining') }}</span>
+      <span class="title">IXX {{ $t('mining') }}</span>
       <span class="tips">{{ $t('activity_lottery_warm_tips') }}: {{ $t('rate_tips_g') }}</span>
     </div>
     <div class="c-box">
@@ -16,9 +16,9 @@
             class="m-middle"
             v-if="isLogin">
             <span class="top-s-tit">{{ $t('ystd_trad') }}</span>
-            <p class="top-s-txt top-txt-blue mar-bot">{{ myTotal.amount_yesterday | round(2) | thousand }}<em>IX</em></p>
+            <p class="top-s-txt top-txt-blue mar-bot">{{ myTotal.amount_yesterday | round(2) | thousand }}<em>IXX</em></p>
             <span class="top-s-tit">{{ $t('td_trad_amount') }}</span>
-            <p class="top-s-txt top-txt-blue">{{ myTotal.amount_today | round(2) | thousand }}<em>IX</em></p>
+            <p class="top-s-txt top-txt-blue">{{ myTotal.amount_today | round(2) | thousand }}<em>IXX</em></p>
             <!-- <span class="top-s-tit">{{ $t('td_trad') }}</span>
             <p class="top-s-txt top-txt-yellow">1BTC≈￥49999.98189</p> -->
           </div>
@@ -26,7 +26,7 @@
             class="m-middle"
             v-else>
             <span class="top-tit">{{ $t('ystd_trad_total') }}</span>
-            <p class="top-txt top-txt-blue">{{ basePower.amount_yesterday | round(2) | thousand }}<em>IX</em></p>
+            <p class="top-txt top-txt-blue">{{ basePower.amount_yesterday | round(2) | thousand }}<em>IXX</em></p>
             <!-- <span class="top-s-tit">{{ $t('td_trad') }}</span>
             <p class="top-s-txt top-txt-yellow">1BTC≈￥49999.98189</p> -->
           </div>
@@ -36,15 +36,15 @@
             class="m-middle"
             v-if="isLogin">
             <span class="top-s-tit">{{ $t('hash_rate') }}</span>
-            <p class="top-s-txt top-txt-blue mar-bot">{{ myPower.power | round(2) }}<em>IX/H</em></p>
+            <p class="top-s-txt top-txt-blue mar-bot">{{ myPower.power | round(2) }}<em>IXX/H</em></p>
             <span class="top-s-tit">{{ $t('hash_rate_remain') }}</span>
-            <p class="top-s-txt top-txt-blue">{{ (myRemainTotal >= 0 ? myRemainTotal : 0) | round(2) }}<em>IX</em></p>
+            <p class="top-s-txt top-txt-blue">{{ (myRemainTotal >= 0 ? myRemainTotal : 0) | round(2) }}<em>IXX</em></p>
           </div>
           <div
             class="m-middle"
             v-else>
             <span class="top-tit">{{ $t('current_base_power') }}</span>
-            <p class="top-txt top-txt-blue">{{ basePower.power | round(2) }}<em>IX/H</em></p>
+            <p class="top-txt top-txt-blue">{{ basePower.power | round(2) }}<em>IXX/H</em></p>
           </div>
         </div>
         <div class="top-cen">
@@ -52,13 +52,13 @@
             class="m-middle"
             v-if="isLogin">
             <span class="top-tit">{{ $t('current_base_power') }}</span>
-            <p class="top-txt top-txt-blue">{{ basePower.power | round(2) }}<em>IX/H</em></p>
+            <p class="top-txt top-txt-blue">{{ basePower.power | round(2) }}<em>IXX/H</em></p>
           </div>
           <div
             class="m-middle"
             v-else>
             <span class="top-tit">{{ $t('today_trad_total') }}</span>
-            <p class="top-txt top-txt-blue">{{ basePower.amount_today | round(2) | thousand }}<em>IX</em></p>
+            <p class="top-txt top-txt-blue">{{ basePower.amount_today | round(2) | thousand }}<em>IXX</em></p>
           </div>
         </div>
         <div class="top-cen">
@@ -68,7 +68,7 @@
             <span class="top-tit">{{ $t('cum_trad_amount') }}</span>
             <p
               class="top-txt top-txt-blue"
-              :style="{fontSize: basePower.total && basePower.total.toString().length > 10 && '22px'}">{{ myTotal.total | round(2) | thousand }}<em>IX</em></p>
+              :style="{fontSize: basePower.total && basePower.total.toString().length > 10 && '22px'}">{{ myTotal.total | round(2) | thousand }}<em>IXX</em></p>
           </div>
           <div
             class="m-middle"
@@ -76,7 +76,7 @@
             <span class="top-tit">{{ $t('totally_mine_total') }}</span>
             <p
               class="top-txt top-txt-blue"
-              :style="{fontSize: basePower.total && basePower.total.toString().length > 10 && '22px'}">{{ basePower.total | round(2) | thousand }}<em>IX</em></p>
+              :style="{fontSize: basePower.total && basePower.total.toString().length > 10 && '22px'}">{{ basePower.total | round(2) | thousand }}<em>IXX</em></p>
           </div>
         </div>
       </div>
@@ -88,7 +88,7 @@
           <p class="oper-con-l">
             <span>{{ $t('available_balance') }}</span>
           </p>
-          <p class="balance">{{ balance.available | round(4) }} IX</p>
+          <p class="balance">{{ balance.available | round(4) }} IXX</p>
         </div>
         <div class="oper-con">
           <p class="oper-con-l">
@@ -109,7 +109,7 @@
             class="num-max">{{ $t('maximum') }}</a>
         </div>
         <div class="current-lock-ix">
-          {{ $t('current_lock_ix') }} {{ balance.locked }}IX
+          {{ $t('current_lock_ix') }} {{ balance.locked }}IXX
         </div>
         <v-btn
           class="oper-but"
@@ -127,7 +127,7 @@
           <p class="oper-con-l">
             <span>{{ $t('unlock_available') }}</span>
           </p>
-          <p class="balance">{{ balance.locked }} IX</p>
+          <p class="balance">{{ balance.locked }} IXX</p>
         </div>
         <div class="oper-con">
           <p class="oper-con-l">
@@ -161,7 +161,7 @@
       <div class="oper-cen">
         <div class="oper-cen-tit">{{ $t('unlocking') }}</div>
         <div class="oper-wait">
-          <p class="num">{{ balance.unlocking }} IX</p>
+          <p class="num">{{ balance.unlocking }} IXX</p>
           <span class="tips">*{{ $t('unlocked') }}</span>
         </div>
       </div>
@@ -308,7 +308,7 @@ export default {
       if (!res.code) {
         // todo
         this.lock_amount = ''
-        utils.success(this.$t('lock_success') + amount + ' IX')
+        utils.success(this.$t('lock_success') + amount + ' IXX')
         this.reset('lock')
         this.fetch()
       } else {
@@ -337,7 +337,7 @@ export default {
       if (!res.code) {
         // todo
         this.unlock_amount = ''
-        utils.success(this.$t('unlock_success') + amount + ' IX')
+        utils.success(this.$t('unlock_success') + amount + ' IXX')
         this.reset('unlock')
         this.fetch()
       } else {
@@ -451,8 +451,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  
-  
+
+
   .page-home{
     background: #262D36;
   }

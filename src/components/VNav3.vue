@@ -13,7 +13,7 @@
             class="nav_link">{{ $t('trading') }}</router-link>
             <!-- <div class="nav_link arrow-down">
             <a
-              :href="'/docs/IX+WhitePaper'+pdfSubfix+'.pdf'"
+              :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"
               target="_blank"
               class="nav_link ml-30">{{ $t("whitepagger") }}
               <icon
@@ -24,13 +24,13 @@
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
                   <a
-                    :href="'/docs/IX+WhitePaper'+pdfSubfix+'.pdf'"
+                    :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"
                     target="_blank"
                     class="link">{{ $t("whitepagger") }}</a>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
                   <a
-                    :href="'/docs/The+Declaration+of+IX'+pdfSubfix+'.pdf'"
+                    :href="'/docs/The+Declaration+of+IXX'+pdfSubfix+'.pdf'"
                     target="_blank"
                     class="link">{{ $t("declaration") }}</a>
                 </li>

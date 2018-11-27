@@ -57,7 +57,7 @@
     watch: {
       pair: {
         handler () {
-          if (this.pair && this.pair.indexOf('IX') === 0 && !local.ixAlert) {
+          if (this.pair && this.pair.indexOf('IXX') === 0 && !local.ixAlert) {
             this.open = true
           }
         },

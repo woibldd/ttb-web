@@ -90,11 +90,11 @@
           class="link">{{ $t('capital_manage') }}</router-link>
         <a
           @click="toggleMenu"
-          :href="'/docs/The+Declaration+of+IX'+pdfSubfix+'.pdf'"
+          :href="'/docs/The+Declaration+of+IXX'+pdfSubfix+'.pdf'"
           target="_blank">{{ $t("declaration") }}</a>
         <a
           @click="toggleMenu"
-          :href="'/docs/IX+WhitePaper'+pdfSubfix+'.pdf'"
+          :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"
           target="_blank">{{ $t("whitepagger") }}</a>
         <a
           @click="toggleMenu();logout()">{{ $t('signout') }}</a>

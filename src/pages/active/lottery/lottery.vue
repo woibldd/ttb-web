@@ -78,7 +78,7 @@
             <div class="bids-row">
               <div class="bids-row__info">
                 <div class="info__label rise"> {{ $t('activity_lottery_buy_rise') }} </div>
-                <div class="buy-rise-total"> {{ $t('activity_lottery_buy_total_rise') }} {{ current.bet1_amount | round(2) }} IX </div>
+                <div class="buy-rise-total"> {{ $t('activity_lottery_buy_total_rise') }} {{ current.bet1_amount | round(2) }} IXX </div>
               </div>
               <div class="bids-row__progress border-1">
                 <div
@@ -91,7 +91,7 @@
             <div class="bids-row">
               <div class="bids-row__info">
                 <div class="info__label fall"> {{ $t('activity_lottery_buy_fall') }} </div>
-                <div class="buy-rise-total"> {{ $t('activity_lottery_buy_total_fall') }} {{ current.bet3_amount | round(2) }} IX</div>
+                <div class="buy-rise-total"> {{ $t('activity_lottery_buy_total_fall') }} {{ current.bet3_amount | round(2) }} IXX</div>
               </div>
               <div class="bids-row__progress border-1">
                 <div
@@ -105,7 +105,7 @@
             <div class="bids-row">
               <div class="bids-row__info">
                 <div class="info__label"> {{ $t('activity_lottery_buy_flat') }} </div>
-                <div class="buy-rise-total"> {{ $t('activity_lottery_buy_total_flat') }} {{ current.bet2_amount | round(2) }} IX</div>
+                <div class="buy-rise-total"> {{ $t('activity_lottery_buy_total_flat') }} {{ current.bet2_amount | round(2) }} IXX</div>
               </div>
               <div class="bids-row__progress border-1">
                 <div
@@ -116,7 +116,7 @@
             </div>
             <!-- 当前票数 -->
             <div class="current-ticket-num border-1">
-              <div class="num-now"> {{ $t('activity_lottery_current_ticket') }} {{ balance.available | round(2) }} IX </div>
+              <div class="num-now"> {{ $t('activity_lottery_current_ticket') }} {{ balance.available | round(2) }} IXX </div>
               <div class="input-ix-num pl-20">
                 <input
                   type="number"
@@ -127,7 +127,7 @@
                   @blur="checkValue"
                   :placeholder="$t('activity_lottery_limit_ix')"
                   v-model="amount"
-                  class="input pl-20 border-1"> IX
+                  class="input pl-20 border-1"> IXX
               </div>
             </div>
 
@@ -197,9 +197,9 @@
               :key="index"
               v-for="(item,index) in myHistory">
               <span class="th_td game_id">{{ item.game_id }}{{ $t('activity_lottery_serial') }}</span>
-              <span class="th_td amount">{{ getMyAmount(item) | round(2) | thousand }} IX</span>
+              <span class="th_td amount">{{ getMyAmount(item) | round(2) | thousand }} IXX</span>
               <span class="th_td dir"><status-lable :item="item"/></span>
-              <span class="th_td win">{{ item.win_amount | round(2) | thousand }} IX</span>
+              <span class="th_td win">{{ item.win_amount | round(2) | thousand }} IXX</span>
               <span class="th_td result">{{ $t('activity_result_'+item.result) }}</span>
             </div>
           </div>

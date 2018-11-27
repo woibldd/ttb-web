@@ -99,7 +99,7 @@
           {{ $t('invite_all_people') }}
         </div>
         <div class="invite-item">
-          <div class="num">{{ myInvite.total }} <span class="unit">IX</span></div>
+          <div class="num">{{ myInvite.total }} <span class="unit">IXX</span></div>
           {{ $t('invite_all_reward') }}
         </div>
       </div>

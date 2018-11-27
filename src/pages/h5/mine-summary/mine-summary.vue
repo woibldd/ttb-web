@@ -10,7 +10,7 @@
         </div>
         <div class="row__value">
           {{ yestodayMine.exchangeMine | round(2) | thousand }}
-          <span class="unit">IX</span>
+          <span class="unit">IXX</span>
         </div>
       </div>
 
@@ -19,7 +19,7 @@
           {{ $t('mine_invite_amount') }}
         </div>
         <div class="row__value">
-          {{ yestodayMine.inviteMine | round(2) | thousand }} <span class="unit">IX</span>
+          {{ yestodayMine.inviteMine | round(2) | thousand }} <span class="unit">IXX</span>
         </div>
       </div>
     </div>
@@ -90,7 +90,7 @@
         </p>
         <p class="row__value">
           {{ ixMarketData.amount | round(2) | thousand }}
-          <span class="unit">IX</span>
+          <span class="unit">IXX</span>
         </p>
       </div>
       <div class="mine-info-row">
@@ -99,7 +99,7 @@
         </p>
         <p class="row__value">
           {{ ixMarketData.locked | round(2) | thousand }}
-          <span class="unit">IX</span>
+          <span class="unit">IXX</span>
         </p>
       </div>
       <div class="mine-info-row">
@@ -108,7 +108,7 @@
         </p>
         <p class="row__value">
           {{ ixMarketData.market_value | round(2) | thousand }}
-          <span class="unit">IX</span>
+          <span class="unit">IXX</span>
         </p>
       </div>
     </div>

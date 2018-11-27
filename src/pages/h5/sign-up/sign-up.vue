@@ -185,7 +185,7 @@
       </form>
     </div>
     <div class="h5__panel-next">
-      <p>IX-全球首家</p>
+      <p>IXX-全球首家</p>
       <p>支持比特币作为平台权益证明</p>
       <p>数字货币交易平台</p>
     </div>
@@ -289,7 +289,7 @@ export default {
     meta.content = 'webkit'
     ele.appendChild(meta)
     let title = document.createElement('title')
-    title.append('IX | 持BTC躺赚20%高额分红！')
+    title.append('IXX | 持BTC躺赚20%高额分红！')
     ele.getElementsByTagName('title')[0].remove()
     ele.appendChild(title)
     next()
@@ -482,7 +482,7 @@ export default {
   mounted () {
   },
   async created () {
-    document.title = 'IX | 持BTC躺赚平台收入20%'
+    document.title = 'IXX | 持BTC躺赚平台收入20%'
     // this.gtInit()
 
     let invitorId = this.$route.query.invitor

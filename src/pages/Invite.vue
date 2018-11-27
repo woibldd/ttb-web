@@ -101,7 +101,7 @@
                 v-for="item in commissionList.list"
                 :key="item.id">
                 <div class="td username">{{ item.phone || item.email }}</div>
-                <div class="td amount"><span class="text">{{ item.amount | round(4) }}</span> IX</div>
+                <div class="td amount"><span class="text">{{ item.amount | round(4) }}</span> IXX</div>
                 <div
                   class="td time"
                   v-if="item.release_time">
@@ -250,7 +250,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  
+
   @import '../styles/mixins';
 
   .user-center-right {

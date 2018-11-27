@@ -14,7 +14,7 @@
       <div class="tl">
         <div class="tlt">
           <p class="tl-tt">{{ $t('imta') }}</p>
-          <p class="tl-ct">1000,000,000 IX</p>
+          <p class="tl-ct">1000,000,000 IXX</p>
         </div>
         <div class="cre_jd">
           <div
@@ -36,7 +36,7 @@
           <p><span>{{ $t('distime') }}</span> {{ $t('distimea') }}</p>
         </div>
         <div class="cre_jdt cr_jd_rt">
-          <p><span>{{ $t('sinin') }}</span> 10-250000 IX</p>
+          <p><span>{{ $t('sinin') }}</span> 10-250000 IXX</p>
           <p><span>{{ $t('Priceof') }}</span> 1IX = 0.00289855USDT = 0.00000045BTC</p>
         </div>
       </div>
@@ -55,7 +55,7 @@
               :placeholder="$t('activity_max_input')"
               v-model="params.amount"
               class="tr-inp-t" >
-            <span class="tr-tlt">IX</span>
+            <span class="tr-tlt">IXX</span>
           </div>
           <div
             class="tr-ts"
@@ -259,8 +259,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  
-  
+
+
 
   .page-home{
     background-color: #262D36;

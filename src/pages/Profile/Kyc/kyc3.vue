@@ -92,9 +92,9 @@ export default {
         204: 'Hand-held white paper and ID photo with watermark or Logo;',
         205: 'Hands with blank paper and ID photo without certificate;',
         206: 'Hands with white paper and ID photos using others’ certificate;',
-        207: 'Hands with blank paper and ID photos without IX on a white paper and date for verification;',
+        207: 'Hands with blank paper and ID photos without IXX on a white paper and date for verification;',
         208: 'Hand-held white paper and ID photo ID are not the same as previously uploaded certificate;',
-        209: 'Hand-held white paper and ID photo paper without “IX”;',
+        209: 'Hand-held white paper and ID photo paper without “IXX”;',
         210: 'Hand-held white paper and ID photo papers without date for verification;',
         211: 'The date on the hand-held white paper and the paper of ID photo does not match;'
       },
@@ -158,7 +158,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  
+
   @import '../../../styles/mixins';
 
   .title-box {

@@ -62,7 +62,7 @@
                 <div class="box-table-th">
                   <span class="th_td rank_pos">{{ $t('activity_rank_rank_position') }}</span>
                   <span class="th_td uid">UID</span>
-                  <span class="th_td time">{{ $t('mine_mined') }} IX</span>
+                  <span class="th_td time">{{ $t('mine_mined') }} IXX</span>
                   <span class="th_td state">{{ $t('activity_rank_estimate_reward') }} USDT</span>
                 </div>
                 <div
@@ -96,7 +96,7 @@
             >
               <div
                 class="my_all_mine mr-169"
-                v-show="hasMine">{{ $t('activity_rank_my_mined') }} <span class="unit">{{ myInfo.mined_amount|round(2)|thousand }} IX</span></div>
+                v-show="hasMine">{{ $t('activity_rank_my_mined') }} <span class="unit">{{ myInfo.mined_amount|round(2)|thousand }} IXX</span></div>
                 <!-- <div class="my_all_mine">{{ $t('activity_rank_rank_position') }}: {{ 99 }}</div> -->
             </div>
           </div>

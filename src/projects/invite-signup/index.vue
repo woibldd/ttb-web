@@ -64,7 +64,7 @@
       <div class="banner">
         <!--
         <div class="banner-top">
-          IX 大狂欢
+          IXX 大狂欢
         </div>
         <div class="banner-text">
           <p>注册邀请</p>

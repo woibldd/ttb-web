@@ -13,7 +13,7 @@
             <div class="title-tile"> <icon
               name="lottery-quiz"
               class="pr-12"/> {{ $t('activity_lottery_quiz') }}</div>
-            <div class="text"> {{ $t('activity_lottery_last_bonus') }} {{ lastBetData.pool | round(2) | thousand }} IX</div>
+            <div class="text"> {{ $t('activity_lottery_last_bonus') }} {{ lastBetData.pool | round(2) | thousand }} IXX</div>
           </div>
           <div class="box__content pb-29 mt-17">
             <div class="quiz-current-info pl-20 pr-14">
@@ -46,7 +46,7 @@
                     <div class="modal__right">
                       <div class="flex mb-30">
                         <div class="trading-office-box">
-                          <p class="office-name">IX</p>
+                          <p class="office-name">IXX</p>
                           <p class="btc-price bb1 ">{{ openingPriceGroups4Btc.ix_open_price }}</p>
                           <p class="btc-price">{{ openingPriceGroups4Btc.ix_close_price }}</p>
                         </div>
@@ -94,7 +94,7 @@
                 </div>
                 <div class="quiz-choice-strip f14">
                   <div class="strip__item quiz__note up">{{ $t('activity_lottery_rise') }}</div>
-                  <div class="strip__item up">{{ current.bet1_amount | round(0) | thousand }} IX</div>
+                  <div class="strip__item up">{{ current.bet1_amount | round(0) | thousand }} IXX</div>
                   <div class="strip__item">{{ transferBetRate(current.bet1Rate) }}</div>
                   <div class="strip__item">{{ current.mybet_1 || '--' }}</div>
                   <div
@@ -103,7 +103,7 @@
                 </div>
                 <div class="quiz-choice-strip f14">
                   <div class="strip__item quiz__note flat">{{ $t('activity_lottery_flat') }}</div>
-                  <div class="strip__item flat">{{ current.bet2_amount | round(0) | thousand }} IX</div>
+                  <div class="strip__item flat">{{ current.bet2_amount | round(0) | thousand }} IXX</div>
                   <div class="strip__item">{{ transferBetRate(current.bet2Rate) }}</div>
                   <div class="strip__item">{{ current.mybet_2 || '--' }}</div>
                   <div
@@ -112,7 +112,7 @@
                 </div>
                 <div class="quiz-choice-strip f14">
                   <div class="strip__item quiz__note fall">{{ $t('activity_lottery_fall') }}</div>
-                  <div class="strip__item fall">{{ current.bet3_amount | round(0) | thousand }} IX</div>
+                  <div class="strip__item fall">{{ current.bet3_amount | round(0) | thousand }} IXX</div>
                   <div class="strip__item">{{ transferBetRate(current.bet3Rate) }}</div>
                   <div class="strip__item">{{ current.mybet_3 || '--' }}</div>
                   <div
@@ -120,7 +120,7 @@
                     :style="{width: current.bet3Rate + '%'}"/>
                 </div>
               </div>
-              <div class="quiz-balance mt-12 f14">{{ $t('activity_lottery_current_ticket') }} {{ balance.available | round(2) }} IX </div>
+              <div class="quiz-balance mt-12 f14">{{ $t('activity_lottery_current_ticket') }} {{ balance.available | round(2) }} IXX </div>
               <div class="quiz-input-num mt-12 f14">
                 <div class="c-999 w-64">{{ $t('amount') }}</div>
                 <input
@@ -243,7 +243,7 @@
                   </div>
                   <div
                     class="table__td">{{ getEncodeContent(item.user_id) }}</div>
-                  <div class="table__td align-right"> {{ item.amount }} IX</div>
+                  <div class="table__td align-right"> {{ item.amount }} IXX</div>
                 </div>
               </div>
             </div>
@@ -264,7 +264,7 @@
           <div
             class="ix-will-destroy"
             v-show="current.destroy">
-            {{ $t('activity_lottery_destroy_ix_amount') }} {{ current.destroy | round(2) | thousand }} IX
+            {{ $t('activity_lottery_destroy_ix_amount') }} {{ current.destroy | round(2) | thousand }} IXX
           </div>
         </div>
 
@@ -317,9 +317,9 @@
               v-for="(item,index) in myHistory"
               :key="index">
               <span class="table__td game_id">{{ item.game_id }}{{ $t('activity_lottery_serial') }}</span>
-              <span class="table__td amount">{{ item.amount | round(0) | thousand }} IX</span>
+              <span class="table__td amount">{{ item.amount | round(0) | thousand }} IXX</span>
               <span class="table__td dir"><status-lable :item="item"/></span>
-              <span class="table__td win">{{ item.win_amount | round(2) | thousand }} IX</span>
+              <span class="table__td win">{{ item.win_amount | round(2) | thousand }} IXX</span>
               <span class="table__td result align-right">{{ $t('activity_result_'+item.result) }}</span>
             </div>
           </div>

@@ -48,7 +48,7 @@
               :to="'/fund/withdraw/'+scope.row.currency"
               class="my-fund-operate">{{ $t('withdraw') }}</router-link>
             <!-- <router-link
-              v-if="scope.row.currency === 'IX'"
+              v-if="scope.row.currency === 'IXX'"
               :to="{name: 'LockWarehouse'}"
               style="color: #fda22d"
               class="my-fund-operate"><icon
@@ -77,7 +77,7 @@ import ActivityPiece from './activity-piece'
 const ExchangePairs = {
   'BTC': 'BTC_USDT',
   'ETH': 'ETH_USDT',
-  'IX': 'IX_USDT'
+  'IXX': 'IX_USDT'
 }
 
 /**
