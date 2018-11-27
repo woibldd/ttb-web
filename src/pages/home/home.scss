@@ -176,75 +176,20 @@
     width: 100%;
     background-color: #F7F7F7;
     padding-top: 22px;
-
-    .f13 {
-        font-size: 13px;
-    }
-    .f17{
-        font-size: 17px;
-    }
-    .f28 {
-        font-size: 28px;
-    }
-    .f24{
-        font-size: 24px;
-    }
-    .bold{
-        font-weight: bold;
-    }
-    .c-00 {
-        color: #000000;
-    }
-    .c-primary{
-        color: $primary;
-    }
-    .c-8a {
-        color: #8A8A8A;
-    }
-    .c-b0 {
-        color: #B0B0B0
-    }
-    .c-09 {
-        color: #09C989;
-    }
-    .c-60{
-        color: #606060;
-    }
-    .c-21{
-        color: #212121;
-    }
-    .c-f24{
-        color: #F24E4D;
-    }
-    .c-999{
-        color: #999999;
-    }
-    .inline-block{
-        display: inline-block;
-
-    }
-}
-.coin-list-section{
-    width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-
-    .coin-info-box {
-        background-image: url('~@/assets/home/home-coin-bg.png');
-        background-position:0 100%;
-        background-size: contain; 
-        background-repeat: no-repeat;
-        width: 256px;
-        height: 130px;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: space-between;
-        padding: 16px 22px;
-        border: 1px solid #DCDCDC;
-        line-height: 1;
-    }
+    .mask {
+      background: transparent;
+      z-index: 10;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 500ms, visibility 0s 500ms;
+      text-align: center;
     
+      &.show {
+        transition: none;
+        visibility: visible;
+        opacity: 1;
+      }
+    }
 }
 
 .compony-intro-section{

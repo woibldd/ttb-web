@@ -6,7 +6,7 @@
         <div class="search-box">
           <input
             type="text"
-            @keyup.enter="filterPair()"
+            @input="filterPair()"
             v-model="search">
           <icon
             class="ml-5"
@@ -45,7 +45,7 @@
         v-if="pair.tick"
         :key="index">
         <div class="row__item percent9">
-          {{ pair.product }} <span>/ {{ pair.currency }}</span>
+          {{ pair.name | pairfix }}
         </div>
         <div class="row__item percent18_8 newest_price">
           <span class="ml-10 inline-block c-999">{{ state.fiatMoneySymbol }}<fiat-money
@@ -82,16 +82,32 @@
   </div>
 </template>
 <script>
-import './pair-table.scss'
-import tickTableMixin from '@/mixins/tick-table'
+import {state} from '@/modules/store'
+import { pairfix } from '@/mixins/index'
 export default {
+  mixins: [pairfix],
   data () {
     return {
-      searchCoin: ''
-
+      state,
+      searchCoin: '',
+      search: ''
     }
   },
-  mixins: [tickTableMixin],
+  props: {
+    sortedList: {
+      type: Array,
+      default () {
+        return []
+      }
+    },
+    getDelta: {
+      type: Function,
+      default () {
+        return v => v
+      }
+    }
+
+  },
   methods: {
     pretty (num) {
       num = this.$big(num || 0)
@@ -121,8 +137,11 @@ export default {
       })
     },
     filterPair () {
-      this.sortBy = null
+      this.$emit('searching', this.search)
     }
   }
 }
 </script>
+<style lang="scss" scoped>
+@import './pair-table.scss'
+</style>

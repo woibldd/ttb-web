@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
-import {state, local, actions} from '@/modules/store'
+import {state, local} from '@/modules/store'
 import ws from '@/modules/ws'
 
 export default {
@@ -41,6 +41,12 @@ export default {
     showList () {
       let list = this.pairList
       return _.filter(list, pair => pair.product_name.indexOf(this.search.toUpperCase()) > -1)
+    },
+    changeRankList () {
+      return _.sortBy(this.pairList, (item) => {
+        let value = this.getDelta(item.tick) || 0
+        return value * -1
+      })
     },
     sortedList () {
       if (!this.sortBy || !this.sortState) {

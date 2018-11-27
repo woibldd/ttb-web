@@ -115,6 +115,12 @@ export default {
               index: 0
             },
             {
+              time: 1539792000000,
+              expect: '0.00000397',
+              actual: '0.0000021',
+              index: 2
+            },
+            {
               time: 1541952000000,
               expect: '0.0000098999',
               actual: '0.0000012',

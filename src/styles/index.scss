@@ -264,3 +264,48 @@ $primary-color: #01CED1;
 .el-select .el-input__inner:focus {
     border-color: $primary-color !important;
 }
+.f13 {
+  font-size: 13px;
+}
+.f17{
+  font-size: 17px;
+}
+.f28 {
+  font-size: 28px;
+}
+.f24{
+  font-size: 24px;
+}
+.bold{
+  font-weight: bold;
+}
+.c-00 {
+  color: #000000;
+}
+.c-primary{
+  color: $primary;
+}
+.c-8a {
+  color: #8A8A8A;
+}
+.c-b0 {
+  color: #B0B0B0
+}
+.c-09 {
+  color: #09C989;
+}
+.c-60{
+  color: #606060;
+}
+.c-21{
+  color: #212121;
+}
+.c-f24{
+  color: #F24E4D;
+}
+.c-999{
+  color: #999999;
+}
+.inline-block{
+  display: inline-block;
+}
