@@ -61,7 +61,7 @@
           <router-link
             :to="{name:'Fee'}"
             target="_blank">{{ $t('footer_fee') }}</router-link>
-          <!-- <a
+            <!-- <a
             :href="apiDoc"
             target="_blank">{{ $t('footer_api') }}</a> -->
         </div>
@@ -85,7 +85,7 @@
             <div class="contact-list">
               <a
                 class="contact-item-wrapper pointer"
-                href='https://www.facebook.com/IXExchange'>
+                href='https://www.facebook.com/IXX-301038947404383'>
                 <icon
                   class="contact-item"
                   name="footer-facebook"/>
