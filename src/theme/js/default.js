@@ -6,16 +6,15 @@ module.exports = {
   locales: ['en', 'zh-CN', 'zh-HK', 'ko'],
   themeName: 'default',
   companyName: 'IXX.COM',
-  exchangeName: 'IX | 自由人的自由联合',
+  exchangeName: 'IXX | 数字资产交易共同体',
   exchangeNameConfig: {
-    'zh-CN': 'IX | 自由人的自由联合',
-    'zh-HK': 'IX | 自由人的自由聯合',
-    en: 'IX | Freedom,Choice & Unification',
-    ko: 'IX | 자유인의 자유 연합  번역'
+    'zh-CN': 'IXX | 数字资产交易共同体',
+    'zh-HK': 'IX | 數字資產交易共同體',
+    en: 'IX | Digital assets trading community',
+    ko: 'IX | 수자 재산 거래 공동체'
   },
-  keywords: 'IX,比特币,比特币交易,以太坊,区块链,共识,自由联合,数字资产交易所',
-  description:
-    'IX致力于打造一家回归区块链精神的数字资产交易所，公开、公正、透明',
+  keywords: 'IXX,比特币,比特币交易,以太坊,区块链,共识,自由联合,数字资产交易所',
+  description: 'IXX全球首家一站式免费上币数字资产服务中心，安全、公正、透明',
   shortcut: '',
   supportMail: 'support@ixx.com',
   hrMail: 'hr@ixx.com',

@@ -1,7 +1,8 @@
 <template>
   <div class="coin-list-section">
     <div
-      class="coin-info-box"
+      @click="toExchange(pair.name)"
+      class="coin-info-box pointer"
       v-for="(pair,index) in sortedList"
       :class="{'mr-13': index < 5}"
       :key="pair.name"

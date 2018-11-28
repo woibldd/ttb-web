@@ -14,7 +14,7 @@ const service = {
     return request('ixx/announcement/list', data)
   },
   hasNewBanner () {
-    return request('ixx/announcement/has_new')
+    return request('announcement/has_new')
   },
   resetPassword (data) {
     let uri = 'user/reset/password/email'

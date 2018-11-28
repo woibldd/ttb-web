@@ -1,137 +1,148 @@
 <template>
   <div class="profile-container">
-    <div class="title-box">{{$t('profile_left_invite_safety')}}<span>{{$t('bind_google_title')}}</span></div>
+    <div class="title-box">{{ $t('profile_left_invite_safety') }}<span>{{ $t('bind_google_title') }}</span></div>
     <div class="invinfo-box">
-        <p class="gt_txt">{{$t('bind_google_title')}}</p>
-        <div class="gt_ewm">
-          <div class="pd-10" style="background:#fff; height: 160px; box-sizing: border-box">
-            <canvas
-                class="qr-img"
-                ref="qr"/>
-          </div>
+      <p class="gt_txt">{{ $t('bind_google_title') }}</p>
+      <div class="gt_ewm">
+        <div 
+class="pd-10"
+             style="background:#fff; height: 160px; box-sizing: border-box">
+          <canvas
+            class="qr-img"
+            ref="qr"/>
         </div>
-        <p class="gt_t">{{$t('google_skey')}}</p>
-        <span class="gt_yz">{{google_key}}</span>
-        <ul>
-            <li><i>1</i>{{$t('bind_google_hint_1')}}</li>
-            <li><i>2</i>{{$t('bind_google_hint_2')}}</li>
-            <li><i>3</i>{{$t('bind_google_hint_3')}}</li>
-            <li><i>4</i>{{$t('bind_google_hint_4')}}</li>
-        </ul>
-        <p class="gt_btxt">{{$t('confirm_please')}}</p>
-        <div class="gt_lb">
-            <input type="checkbox" v-model="checkbox1">
-            <label for="asda">{{$t('bind_google_confirm_1')}}</label>
-        </div>
-        <div class="gt_lb">
-            <input type="checkbox" v-model="checkbox2">
-            <label for="asd">{{$t('bind_google_confirm_2')}}</label>
-        </div>
+      </div>
+      <p class="gt_t">{{ $t('google_skey') }}</p>
+      <span class="gt_yz">{{ google_key }}</span>
+      <ul>
+        <li><i>1</i>{{ $t('bind_google_hint_1') }}</li>
+        <li><i>2</i>{{ $t('bind_google_hint_2') }}</li>
+        <li><i>3</i>{{ $t('bind_google_hint_3') }}</li>
+        <li><i>4</i>{{ $t('bind_google_hint_4') }}</li>
+      </ul>
+      <p class="gt_btxt">{{ $t('confirm_please') }}</p>
+      <div class="gt_lb">
+        <input 
+type="checkbox"
+               v-model="checkbox1">
+        <label for="asda">{{ $t('bind_google_confirm_1') }}</label>
+      </div>
+      <div class="gt_lb">
+        <input 
+type="checkbox"
+               v-model="checkbox2">
+        <label for="asd">{{ $t('bind_google_confirm_2') }}</label>
+      </div>
     </div>
     <div class="inp_box">
-        <input type="text" v-model="code" :placeholder="$t('bind_google_ph')" />
+      <input 
+type="text"
+             v-model="code" 
+:placeholder="$t('bind_google_ph')" >
     </div>
     <div class="inp_box">
-        <v-btn class="submit-btn" :label="$t('bind')"
+      <v-btn
+        class="submit-btn"
+        :label="$t('bind')"
         :loading="loading"
-        @click="submit"></v-btn>
+        @click="submit"/>
     </div>
   </div>
 </template>
 
 <script>
-  import service from '@/modules/service'
-  import VBtn from '@/components/VBtn'
-  import {state, actions} from '@/modules/store'
-  import utils from '@/modules/utils'
-  const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
+import service from '@/modules/service'
+import VBtn from '@/components/VBtn'
+import {state, actions} from '@/modules/store'
+import utils from '@/modules/utils'
+const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
 
-  export default {
-    name: 'SafeVerified',
-    components: {
-      VBtn
-    },
-    data () {
-      return {
-        state,
-        google_key: '',
-        code: '',
-        checkbox1: false,
-        checkbox2: false
+export default {
+  name: 'SafeVerified',
+  components: {
+    VBtn
+  },
+  data () {
+    return {
+      state,
+      google_key: '',
+      code: '',
+      checkbox1: false,
+      checkbox2: false
+    }
+  },
+  computed: {
+    username () {
+      if (this.state.userInfo) {
+        return this.state.userInfo.phone || this.state.userInfo.email
+      }
+      return ''
+    }
+  },
+  async created () {
+    this.getGoogleKey()
+  },
+  methods: {
+    async getGoogleKey () {
+      let result = await service.getGoogleKey()
+      if (result && !result.code) {
+        this.google_key = result.data.google_key
+        let qrurl = 'otpauth://totp/' + this.username + '?secret=' + this.google_key + '&issuer=' + location.hostname
+        this.setQr(qrurl)
+      } else {
+        utils.alert(result.message)
       }
     },
-    computed: {
-      username () {
-        if (this.state.userInfo) {
-          return this.state.userInfo.phone || this.state.userInfo.email
-        }
-        return ''
-      },
-    },
-    async created () {
-      this.getGoogleKey()
-    },
-    methods: {
-      async getGoogleKey() {
-        let result = await service.getGoogleKey()
-        if (result && !result.code) {
-          this.google_key = result.data.google_key
-          let qrurl = "otpauth://totp/"+this.username+"?secret="+this.google_key+"&issuer="+location.hostname
-          this.setQr(qrurl)
-        } else {
-          utils.alert(result.message)
-        }
-      },
-      async setQr (url) {
-        const QRCode = await qrcode()
-        QRCode.toCanvas(
-          this.$refs.qr,
-          url,
-          {
-            margin: 0,
-            width: 140,
-            height: 140,
-            errorCorrectionLevel: 'H'
-          },
-          (err) => {
-            if (err) {
-              // @improve
-              return utils.log('qrcode error')
-            }
-            this.qrReady = true
+    async setQr (url) {
+      const QRCode = await qrcode()
+      QRCode.toCanvas(
+        this.$refs.qr,
+        url,
+        {
+          margin: 0,
+          width: 140,
+          height: 140,
+          errorCorrectionLevel: 'H'
+        },
+        (err) => {
+          if (err) {
+            // @improve
+            return utils.log('qrcode error')
           }
-        )
-      },
-      async submit () {
-        if (this.checkbox1 && this.checkbox2) {
-          if (this.code.length == 6) {
-            let params = {
-              google_key: this.google_key,
-              code: this.code
-            }
-            let result = await service.bindGoogleKey(params)
-            if (result && !result.code) {
-              await actions.updateSession()
-              this.$router.push({
-                name: 'Safety'
-              })
-            } else {
-              utils.alert(result.message)
-            }
+          this.qrReady = true
+        }
+      )
+    },
+    async submit () {
+      if (this.checkbox1 && this.checkbox2) {
+        if (this.code.length == 6) {
+          let params = {
+            google_key: this.google_key,
+            code: this.code
+          }
+          let result = await service.bindGoogleKey(params)
+          if (result && !result.code) {
+            await actions.updateSession()
+            this.$router.push({
+              name: 'Safety'
+            })
           } else {
-            utils.alert(this.$i18n.t('invalid_google_code'))
-            return false;
+            utils.alert(result.message)
           }
         } else {
-          utils.alert(this.$i18n.t('err_check_google_code'))
+          utils.alert(this.$i18n.t('invalid_google_code'))
           return false
         }
+      } else {
+        utils.alert(this.$i18n.t('err_check_google_code'))
+        return false
       }
     }
   }
+}
 </script>
 <style lang="scss" scoped>
-  
+
   @import '../styles/mixins';
 
   .user-center-right {
@@ -179,7 +190,7 @@
               width: 180px;
               height: 180px;
               margin: 0 auto;
-              background: #C2A538;
+              background: $primary;
               padding: 10px;
               box-sizing: border-box;
           }
@@ -194,8 +205,8 @@
           .gt_yz{
               height: 30px;
               line-height: 30px;
-              color: #C2A538;
-              border-bottom: 1px solid #C2A538;
+              color: $primary;
+              border-bottom: 1px solid $primary;
               margin: 0 auto;
               display: table;
               font-size: 16px;
