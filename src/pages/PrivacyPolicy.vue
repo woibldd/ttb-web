@@ -140,7 +140,7 @@ export default {
     messages: {
       en: {
         title: 'Privacy Agreement Of IXX',
-        p1: 'This clause only applies to DVPP. LTD (hereinafter referred to as "IXX"), a company registered in Singapore under the relevant laws of the Republic Of Singapore, which provides digital asset transaction and related services that include currency transaction, contract or other derivatives, digital asset information, etc.',
+        p1: 'This clause only applies to IXX DIGITAL PRIVATE LIMITED (hereinafter referred to as "IXX"), a company registered in Singapore under the relevant laws of the Republic Of Singapore, which provides digital asset transaction and related services that include currency transaction, contract or other derivatives, digital asset information, etc.',
         subtitle11: 'Updated date: September 12, 2018',
         p3: 'If you have any questions, comments or suggestions, please contact us through the following contact information:',
         p4: 'Online customer service and email:[service@IXX.COM]',
@@ -243,7 +243,7 @@ export default {
       },
       'zh-CN': {
         title: '《隐私条款》',
-        p1: '本条款仅适用于DVPP. LTD（以下简称“IXX”），一家根据新加坡共和国相关法律在新加坡注册成立的公司的数字资产交易及相关服务，包括币币交易、合约或其他衍生品、数字资产资讯等。',
+        p1: '本条款仅适用于IXX DIGITAL PRIVATE LIMITED（以下简称“IXX”），一家根据新加坡共和国相关法律在新加坡注册成立的公司的数字资产交易及相关服务，包括币币交易、合约或其他衍生品、数字资产资讯等。',
         subtitle11: '最近更新日期：2018年9月12日',
         p3: '如果您有任何疑问、意见或建议，请通过以下联系方式与我们联系：',
         p4: '在线客服及电子邮件：【service@IXX.COM】',
@@ -346,7 +346,7 @@ export default {
       }
     //   'ko': {
     //     title: '<프라이버시 조항>',
-    //     p1: 'DVPP. LTD에 적용하며 (이하“IXX”이라 한다), 싱가포르 공화국의 법에 따라 싱가포르에 등록된 회사로서, 디지털 자산 거래 및 관련 서비스를 제공합니다. 가상화폐간 거래, 계약및 기타 파생상품, 그리고 디지털 자산 정보 등 각종 서비스를 제공합니다. ',
+    //     p1: 'IXX DIGITAL PRIVATE LIMITED에 적용하며 (이하“IXX”이라 한다), 싱가포르 공화국의 법에 따라 싱가포르에 등록된 회사로서, 디지털 자산 거래 및 관련 서비스를 제공합니다. 가상화폐간 거래, 계약및 기타 파생상품, 그리고 디지털 자산 정보 등 각종 서비스를 제공합니다. ',
     //     subtitle11: '최신 업데이트 날짜: 2018년9월12일',
     //     p3: '궁금하시는 사항, 의견 혹은 건의가 있으시면,아래 연락처로 문의해주시길 바랍니다.',
     //     p4: '온라인 고객센터 및 메일주소:【service@IXX.COM】',
