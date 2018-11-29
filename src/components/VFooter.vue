@@ -79,7 +79,6 @@
           <div class="bottom-txt bot-la">
             <p class="footer_ltxt">{{ $t('footer_services_email') }}：service@ixx.com</p>
             <p class="footer_ltxt">{{ $t('footer_bussness') }}：business@ixx.com</p>
-            <p class="footer_ltxt show_en">{{ $t('Korean telegram') }}：https://t.me/IXofficial_KR</p>
           </div>
           <div class="bottom-txt bot-lb">
             <div class="contact-list">
@@ -135,6 +134,12 @@
         </div>
       </div>
     </div>
+    <div class="footer_info">
+      <strong class="strong mr-10">{{$t('footer_company_info_title')}}</strong>
+      <span class="company_name mr-10">{{$t('footer_company_info_name')}}</span>
+      <span class="company_registion mr-10">{{$t('footer_company_info_registion')}}</span>
+      <span class="company_address">{{$t('footer_company_info_address')}}</span>
+    </div>
   </footer>
 </template>
 
@@ -187,7 +192,6 @@ export default {
   }
   footer {
     width: 100%;
-    height:350px;
     background-color: $home-header-bgdark;
   }
   .lt{
@@ -239,7 +243,6 @@ export default {
 
   }
   .footer_right{
-    float: right;
     font-size: 14px;
     width: 500px;
     .footer_ct{
@@ -295,7 +298,21 @@ export default {
       width: 100%;
     }
   }
+  .footer_info {
+    @include clearfix();
+    width: $page-width;
+    padding: 24px 0;
+    margin: 0 auto;
+    font-size: 12px;
+    color: #bbbbbb;
+    border-top: 1px solid #3E3E3E;
+    .strong {
+      font-weight: bold;
+    }
+  }
+
   .footer-container {
+    padding-bottom: 30px;
     .pointer {
       cursor: pointer;
     }

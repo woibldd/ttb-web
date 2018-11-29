@@ -43,6 +43,10 @@
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          img {
+            width: 194px;
+            height: 194px;
+          }
           .contact_desc {
             color: #999999;
             font-size: rem(12);

@@ -89,6 +89,32 @@
       <div class="footer-row">
         <div
           class="row-pick-up"
+          @click="pickUp('company')">
+          <div
+            class="row__title"
+            v-t="'footer_company_info_title'"/>
+          <div
+            class="row__pick__arrow">
+            <icon
+              name="arrow-down"
+              :class="[list.company && 'up']"/>
+          </div>
+        </div>
+        <div
+          class="row-content pb-10"
+          style="display: inline-block;"
+          v-if="list.company">
+          <a v-t="$t('footer_company_info_name')"/>
+          <a
+            class="ml-10 mr-10"
+            v-t="$t('footer_company_info_registion')"/>
+          <a
+            v-t="$t('footer_company_info_address')"/>
+        </div>
+      </div>
+      <div class="footer-row">
+        <div
+          class="row-pick-up"
           @click="pickUp('qrcode')">
           <div
             class="row__title"
@@ -105,7 +131,7 @@
           v-if="list.qrcode">
           <div class="qrcode">
             <img
-              src="~@/assets/contact.png"
+              src="~@/assets/pic-contact-wx.png"
             >
             <p
               class="contact_desc mt-10 mb-10"
@@ -176,7 +202,8 @@ export default {
         service: false,
         tool: false,
         intro: false,
-        qrcode: false
+        qrcode: false,
+        company: false
       },
       state
     }
