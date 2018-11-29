@@ -1,7 +1,6 @@
 import axios from 'axios'
 import qs from 'querystring'
-import { actions} from './store'
-
+import { state, actions} from './store'
 let _env_ = qs.parse(location.search.replace('?', ''))._env_
 
 const api = axios.create({
@@ -23,6 +22,7 @@ api.interceptors.request.use(config => {
     config.headers['token'] = token
   }
   config.headers['from'] = 'ixx'
+  config.headers['lang'] = state.locale
   return config
 }, error => {
   // Do something with request error
