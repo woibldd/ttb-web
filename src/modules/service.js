@@ -11,7 +11,7 @@ import { state, actions } from '@/modules/store'
 const service = {
   getBanners (data = {}) {
     data.platform = data.platform || 1
-    return request('ixx/announcement/list', data)
+    return request('announcement/list', data)
   },
   hasNewBanner () {
     return request('announcement/has_new')

@@ -54,6 +54,14 @@
         </div>
         <div class="intro-item">
           <img
+            src="../assets/home/home-intro-4.png"
+            alt="">
+          <p class="short-txt">{{ $t('home_intro_efficiency') }}</p>
+          <p class="long-text">{{ $t('home_intro_long_d') }}</p>
+
+        </div>
+        <div class="intro-item">
+          <img
             src="../assets/home/home-intro-2.png"
             alt="">
           <p class="short-txt">{{ $t('home_intro_prefessor') }}</p>
@@ -68,14 +76,7 @@
           <p class="long-text">{{ $t('home_intro_long_c') }}</p>
 
         </div>
-        <div class="intro-item">
-          <img
-            src="../assets/home/home-intro-4.png"
-            alt="">
-          <p class="short-txt">{{ $t('home_intro_efficiency') }}</p>
-          <p class="long-text">{{ $t('home_intro_long_d') }}</p>
 
-        </div>
       </div>
     </div>
 

@@ -31,16 +31,16 @@ module.exports = {
     'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/'
   },
   announcement: {
-    en: 'https://ixxcustomer.zendesk.com/hc/en-us/sections/360002955371',
-    ko: 'https://ixxcustomer.zendesk.com/hc/en-us/sections/360002955371',
-    'zh-CN': 'https://ixxcustomer.zendesk.com/hc/zh-cn/sections/360002955371',
-    'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/sections/360002955371'
+    en: 'https://ixxcustomer.zendesk.com/hc/en-us/categories/360001229791',
+    ko: 'https://ixxcustomer.zendesk.com/hc/en-us/categories/360001229791',
+    'zh-CN': 'https://ixxcustomer.zendesk.com/hc/zh-cn/categories/360001229791',
+    'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/categories/360001229791'
   },
   help: {
-    en: 'https://ixxcustomer.zendesk.com/hc/en-us/',
-    ko: 'https://ixxcustomer.zendesk.com/hc/en-us/',
-    'zh-CN': 'https://ixxcustomer.zendesk.com/hc/zh-cn/',
-    'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/'
+    en: 'https://ixxcustomer.zendesk.com/hc/en-us/categories/360001229751',
+    ko: 'https://ixxcustomer.zendesk.com/hc/en-us/categories/360001229751',
+    'zh-CN': 'https://ixxcustomer.zendesk.com/hc/zh-cn/categories/360001229751',
+    'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/categories/360001229751'
   },
   request: {
     en: 'https://ixxcustomer.zendesk.com/hc/en-us/requests/new',
