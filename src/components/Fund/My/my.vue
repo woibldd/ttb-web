@@ -77,7 +77,8 @@ import ActivityPiece from './activity-piece'
 const ExchangePairs = {
   'BTC': 'BTC_USDT',
   'ETH': 'ETH_USDT',
-  'IXX': 'IX_USDT'
+  'IXX': 'IX_USDT',
+  'IMCC': 'IMCC_USDT'
 }
 
 /**
