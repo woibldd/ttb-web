@@ -266,6 +266,9 @@ export default {
     },
     uploadStart ({type}) {
       this[type].loading = true
+      try {
+        this.$refs[type + '_mask'].innerHTML = '0.00%'
+      } catch (e) {}
     },
     uploadProgress ({type, file}) {
       try {
