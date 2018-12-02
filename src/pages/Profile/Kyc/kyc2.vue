@@ -270,6 +270,7 @@ export default {
     uploadProgress ({type, file}) {
       try {
         this.$refs[type + '_mask'].style.transform = 'translateY(' + file.percentage + '%)'
+        this.$refs[type + '_mask'].innerHTML = file.percentage.toFixed(2) + '%'
       } catch (e) {
         console.log(e)
       }
@@ -338,7 +339,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  
+
   @import '../../../styles/mixins';
 
   .title-box {
@@ -497,7 +498,11 @@ export default {
                         background: #eee;
                         transform: translateY(0%);
                         transition: translateY 2s;
-                        opacity: 0.5;
+                        opacity: 0.8;
+                        display: table-cell;
+                        vertical-align: middle;
+                        font-size: 18px;
+                        color: $primary;
                       }
 
                       .upload_desc {

@@ -1,7 +1,18 @@
 <template>
-  <el-upload class="upload" :action="host" :data="config" :show-file-list="false" :drag="true" accept="image/*" :on-success="handleSuccess" :on-progress="handleProgress" :before-upload="beforeUpload">
-    <slot :file="file" :dataUrl="dataUrl">
-    </slot>
+  <el-upload
+    class="upload"
+    :action="host"
+    :data="config"
+    :show-file-list="false"
+    :drag="true"
+    accept="image/*"
+    :on-success="handleSuccess"
+    :on-progress="handleProgress"
+    :on-error="handleError"
+    :before-upload="beforeUpload">
+    <slot
+      :file="file"
+      :dataUrl="dataUrl"/>
   </el-upload>
 </template>
 <script>
@@ -53,7 +64,7 @@ export default {
         // data.blob.lastModifiedDate = new Date()
         // data.blob.name = this.id + '.jpeg'
         if (this.maxSize && data.blob.size > this.maxSize) {
-          this.$emit('uploadError', {type: this.type, message:this.$i18n.t('err_upload_oversize')})
+          this.$emit('uploadError', {type: this.type, message: this.$i18n.t('err_upload_oversize')})
           return false
         }
         this.file = data.blob
@@ -61,6 +72,10 @@ export default {
         this.$emit('uploadStart', {type: this.type, dataUrl: this.dataUrl, file: this.file})
         return true
       })
+    },
+    handleError (err, file) {
+      console.log(err)
+      this.$emit('uploadError', {type: this.type, message: this.$i18n.t('sth_went_wrong')})
     }
   }
 }
