@@ -791,5 +791,7 @@
   "home_intro_long_a": "Security experts, top block chain risk control management team create multiple security mechanisms from inside out, multilayer encryption, multi-level firewall, mult-isignature, ensure users assets security extremely.",
   "home_intro_long_b": "The real-time asset and transaction data query and verification mechanism can provide users with 24-hour real-time transaction records to achieve a high degree of openness and transparency.",
   "home_intro_long_c": "Committed to creating a one-stop digital asset trading platform, support multi-currency transactions, 24-hour exclusive customer service with rapid response, multi-language services, communication without borders.",
-  "home_intro_long_d": "With advanced memory algorithm, fast reading and writing, distributed information transmission framework, it can match large-scale transactions in real time and charge accounts in seconds."
+  "home_intro_long_d": "With advanced memory algorithm, fast reading and writing, distributed information transmission framework, it can match large-scale transactions in real time and charge accounts in seconds.",
+  "rate_tips_h":"IX/BTC trading has been suspended for the time being. Resumption of trading will be notified by announcement. Please see the relevant announcement for details.",
+  "rate_tips_i":"Topping up EOS requires a coin address and an EOS address tag. Warning: you will lost your coins If you don’t follow the correct steps to top up EOS!"
 }

@@ -1,20 +1,20 @@
 <template>
   <v-modal
-    :open.sync="open"
-    bg-color="#0C1222">
+    :open="canOpen"
+    :bg-color="bgColor">
     <template>
       <div class="modal-container">
         <div class="title">
           {{ $t('gentle_hint') }}
         </div>
         <div class="body">
-          {{ $t('rate_tips_g') }}
+          {{ $t(content) }}
         </div>
         <v-btn
           class="btn"
           fontsize="14"
           height="40"
-          @click="open=false"
+          @click="close"
           :label="$t('confirm')"/>
       </div>
     </template>
@@ -22,7 +22,7 @@
     <template slot="close">
       <a
         class="custom-close-btn"
-        @click.prevent="close">
+        @click.prevent="closeLong">
         <input
           type="checkbox"
           class="ckbox">
@@ -34,37 +34,42 @@
 </template>
 
 <script>
-  import {local} from '@/modules/store'
-  export default {
-    name: 'NoMiningAlert',
-    data () {
-      return {
-        open: false
-      }
+import { local } from '@/modules/store'
+export default {
+  name: 'RememeberAlert',
+  props: {
+    open: {
+      type: Boolean,
+      default: false
     },
-    props: {
-      pair: {
-        type: String,
-        default: 'BTC_USDT'
-      }
+    content: {
+      type: String,
+      default: 'rate_tips_g'
     },
-    methods: {
-      close () {
-        this.open = false
-        local.ixAlert = true
-      }
+    bgColor: {
+      type: String,
+      default: '#283B4C'
     },
-    watch: {
-      pair: {
-        handler () {
-          if (this.pair && this.pair.indexOf('IXX') === 0 && !local.ixAlert) {
-            this.open = true
-          }
-        },
-        immediate: true
-      }
+    localKey: {
+      type: String,
+      default: 'ixAlert'
+    }
+  },
+  computed: {
+    canOpen () {
+      return this.open && !local[this.localKey]
+    }
+  },
+  methods: {
+    close () {
+      this.$emit('update:open', false)
+    },
+    closeLong () {
+      local[this.localKey] = true
+      this.close()
     }
   }
+}
 </script>
 <style scoped lang="scss">
 
@@ -83,7 +88,9 @@
     .ckbox {
       outline: none;
       // appearance: none;
-      display: inline;
+      display: inline-block;
+      vertical-align: middle;
+      margin-bottom: 2px;
     }
     &:hover {
       opacity: .7;

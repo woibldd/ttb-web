@@ -72,5 +72,18 @@
             display: inline-block;
         }
     }
+    .remember {
+      /deep/ {
+        .modal-container 
+        {
+          .body, .title {
+            color: #000000 !important;
+          }
+        }
+        .custom-close-btn {
+          color: #000000 !important;
+        }
+      }
+    }
         
 }

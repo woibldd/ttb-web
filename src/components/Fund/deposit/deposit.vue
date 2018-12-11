@@ -81,12 +81,20 @@
         <li v-if="selectCoin.memo_support">{{ $t('eos_deposit_tip_security_third') }}</li>
       </ul>
     </div>
+    <remember-alert
+      class="remember"
+      bg-color="#fff"
+      :open.sync="openEosAlert"
+      :local-key="'eosAlert'"
+      :content="'rate_tips_i'"
+    />
   </div>
 </template>
 <script>
 import copyToClipboard from 'copy-to-clipboard'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
+import RememberAlert from '@/components/Trading/RememberAlert'
 
 const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
 
@@ -98,7 +106,8 @@ export default {
       memo: '',
       allCoins: [],
       selectCoin: {},
-      tableData: []
+      tableData: [],
+      openEosAlert: false
     }
   },
   async created () {
@@ -154,6 +163,9 @@ export default {
       this.selectCoin = coin
       await this.getCoinAddress()
       this.setQr(this.address)
+      if (coin.chain === 'EOS') {
+        this.openEosAlert = true
+      }
     },
     async getAllCoinTypes () {
       await service.getAllCoinTypes().then(res => {
@@ -182,6 +194,9 @@ export default {
         this.tableData = []
       })
     }
+  },  
+  components: {
+    RememberAlert
   }
 }
 </script>

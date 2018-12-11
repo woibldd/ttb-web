@@ -80,7 +80,6 @@
       </div>
     </div>
     <order-deal-popover />
-    <NoMiningAlert :pair="state.pro.pair"/>
   </div>
 </template>
 
@@ -102,7 +101,6 @@ import Operate from '@/components/Trading/Operate'
 import OrderDealPopover from '@/components/Trading/OrderDealPopover'
 import coinIntro from '@/components/Trading/coin-intro'
 import PairTitle from '@/components/Trading/PairTitle'
-import NoMiningAlert from '@/components/Trading/NoMiningAlert'
 import responsiveScale from '@/mixins/responsiveScale'
 
 export default {
@@ -120,8 +118,7 @@ export default {
     PairNav,
     Operate,
     MobileNav,
-    PairTitle,
-    NoMiningAlert
+    PairTitle
   },
   data () {
     return {
@@ -453,7 +450,6 @@ export default {
 </style>
 
 <style lang="scss">
-
 
 .ix-panel {
   width: 100%;
