@@ -467,6 +467,9 @@ export default {
       }
       service.getLoginVerifyCode(param, 'email').then(res => {
         console.log(res)
+        if (res.code) {
+          utils.alert(res.message)
+        }
       })
     }
   },
