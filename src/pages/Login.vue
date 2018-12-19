@@ -455,6 +455,9 @@ export default {
       }
       service.getLoginVerifyCode(param, 'phone').then(res => {
         console.log(res)
+        if (res.code) {
+          utils.alert(res.message)
+        }
       })
     },
     getEmailVerifyCode () {
