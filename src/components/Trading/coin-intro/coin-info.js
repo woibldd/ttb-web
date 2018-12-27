@@ -199,5 +199,31 @@ export default{
       office_website: 'https://ix.com/', // 官网
       chain_info: 'https://etherscan.io/token/0xc7df14a8289efe7a2d3399387302fdf86e7adc4e' // 区块查询
     }
+  },
+  GBC: {
+    'zh-CN': {
+      name: 'GBC',
+      full_name: '钻石币(GBC)',
+      brief_info: 'GemBitCoin，缩写GBC，是由亚太珠宝产业协会倡导设计发布的基于最新区块链技术、构建于以太坊ERC2.0基础上的点对点加密数字货币。亚太区珠宝产业协会推出GBC的目的是为了大宗珠宝交易交割便捷性。珠宝产地与珠宝商都存在跨地域交易的支付障碍。由各地区接受的传统币种不同、兑换费率不一致以及不同国家税收比例问题，都给珠宝商在跨境交易中带来的巨大的不便，严重影响了珠宝交易的效率性及增长性。亚太地区部分地区的珠宝协会是为了通过设计创建GBC，旨在为东南亚地区的珠宝交易提供一个更快、更安全、成本更低的交易支付方式。GBC全球发行4000万枚，GBC于2018年4月20日开始全球分三个联盟区块进行公测运行，其稀缺性让GBC能更为快速的实现全球流通。目前GBC持币人数达到11400多人，所挖出的币正逐步由联盟内部锁定之挖矿系统转出到公有链。尚有近70000会员等候挖矿或买入',
+      issue_time: '2018年8月20日',
+      issue_all: '4000万', // 发行总量
+      issue_circulation: '3300万', // 流通总量
+      token_price: '0.05USD', // 众筹价格
+      whitepagger: 'https://www.gembitcoin.org/gbcwhitepaper.pdf', // 白皮书
+      office_website: 'https://www.gembitcoin.org', // 官网
+      chain_info: 'https://etherscan.io/token/0x9e34d49d3d92b23da48102f9d6b1462f63017551' // 区块查询
+    },
+    'en': {
+      name: 'GBC',
+      full_name: '钻石币(GBC)',
+      brief_info: 'GemBitCoin，缩写GBC，是由亚太珠宝产业协会倡导设计发布的基于最新区块链技术、构建于以太坊ERC2.0基础上的点对点加密数字货币。亚太区珠宝产业协会推出GBC的目的是为了大宗珠宝交易交割便捷性。珠宝产地与珠宝商都存在跨地域交易的支付障碍。由各地区接受的传统币种不同、兑换费率不一致以及不同国家税收比例问题，都给珠宝商在跨境交易中带来的巨大的不便，严重影响了珠宝交易的效率性及增长性。亚太地区部分地区的珠宝协会是为了通过设计创建GBC，旨在为东南亚地区的珠宝交易提供一个更快、更安全、成本更低的交易支付方式。GBC全球发行4000万枚，GBC于2018年4月20日开始全球分三个联盟区块进行公测运行，其稀缺性让GBC能更为快速的实现全球流通。目前GBC持币人数达到11400多人，所挖出的币正逐步由联盟内部锁定之挖矿系统转出到公有链。尚有近70000会员等候挖矿或买入',
+      issue_time: '2018年8月20日',
+      issue_all: '4000万', // 发行总量
+      issue_circulation: '3300万', // 流通总量
+      token_price: '0.05USD', // 众筹价格
+      whitepagger: 'https://www.gembitcoin.org/gbcwhitepaper.pdf', // 白皮书
+      office_website: 'https://www.gembitcoin.org', // 官网
+      chain_info: 'https://etherscan.io/token/0x9e34d49d3d92b23da48102f9d6b1462f63017551' // 区块查询
+    }
   }
 }
