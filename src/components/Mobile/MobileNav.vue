@@ -67,11 +67,6 @@
           @click="toggleMenu"
           :to="{name: 'trading'}"
         >{{ $t('trading') }}</router-link>
-        <router-link
-          :to="{name: 'LockWarehouse'}"
-          class="link"
-          target="_blank">{{ $t('mining') }}
-        </router-link>
         <!-- <router-link
           :to="{name: 'LockWarehouse'}"
           target="_blank"
@@ -88,14 +83,6 @@
         <router-link
           :to="{name: 'fund'}"
           class="link">{{ $t('capital_manage') }}</router-link>
-        <a
-          @click="toggleMenu"
-          :href="'/docs/The+Declaration+of+IXX'+pdfSubfix+'.pdf'"
-          target="_blank">{{ $t("declaration") }}</a>
-        <a
-          @click="toggleMenu"
-          :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"
-          target="_blank">{{ $t("whitepagger") }}</a>
         <a
           @click="toggleMenu();logout()">{{ $t('signout') }}</a>
       </div>

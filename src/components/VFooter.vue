@@ -43,9 +43,9 @@
         <div class="footer_ct">
           <p>{{ $t('footer_services') }}</p>
           <router-link :to="{name: 'trading'}">{{ $t('trading') }}</router-link>
-          <!-- <a
+          <a
             :href="aboutLink"
-            target="_blank">{{ $t('footer_about') }}</a> -->
+            target="_blank">{{ $t('footer_about') }}</a>
           <a
             :href="requestLink"
             target="_blank">{{ $t('footer_request') }}</a>
@@ -135,10 +135,10 @@
       </div>
     </div>
     <div class="footer_info">
-      <strong class="strong mr-10">{{$t('footer_company_info_title')}}</strong>
-      <span class="company_name mr-10">{{$t('footer_company_info_name')}}</span>
-      <span class="company_registion mr-10">{{$t('footer_company_info_registion')}}</span>
-      <span class="company_address">{{$t('footer_company_info_address')}}</span>
+      <strong class="strong mr-10">{{ $t('footer_company_info_title') }}</strong>
+      <span class="company_name mr-10">{{ $t('footer_company_info_name') }}</span>
+      <span class="company_registion mr-10">{{ $t('footer_company_info_registion') }}</span>
+      <span class="company_address">{{ $t('footer_company_info_address') }}</span>
     </div>
   </footer>
 </template>
@@ -166,7 +166,7 @@ export default {
       return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
     },
     aboutLink () {
-      return `/docs/IX_introduction_${this.state.locale || 'en'}.pdf`
+      return `/docs/IXX_introduction_${this.state.locale || 'en'}.pdf`
     },
     apiDoc () {
       return this.state.theme.apiDoc[this.state.locale || 'en']
