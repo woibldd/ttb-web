@@ -5,15 +5,17 @@
         <router-link
           :to="{name:'home'}"
           class="footer_logo"/>
-        <p class="footer_ltxt"><b>{{ $t('first') }}</b>{{ $t('bitcoin_equity_certificate') }}</p>
-        <!-- <div
-          class="lt"
-          v-if="!showEnTips">
+        <p class="footer_ltxt">
+          <b>{{ $t('first') }}</b>
+          {{ $t('bitcoin_equity_certificate') }}
+        </p>
+        <div
+          class="lt">
           <img
             class="footer_ewm"
-            src="../assets/ewm.png">
-          <p class="footer_ewm_ltxt">{{ $t('footer_contract_desc') }}</p>
+            src="../assets/ixx_kefu_big.jpg">
         </div>
+        <!--
         <div
           class="lt"
           v-if="!showEnTips">
