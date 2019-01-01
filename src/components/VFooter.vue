@@ -14,6 +14,7 @@
           <img
             class="footer_ewm"
             src="../assets/ixx_kefu_big.jpg">
+          <p class="footer_ewm_ltxt">{{ $t('footer_contract_desc') }}</p>
         </div>
         <!--
         <div
