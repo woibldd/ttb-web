@@ -225,5 +225,57 @@ export default{
       office_website: 'https://www.gembitcoin.org', // 官网
       chain_info: 'https://etherscan.io/token/0x9e34d49d3d92b23da48102f9d6b1462f63017551' // 区块查询
     }
+  },
+  BEB: {
+    'zh-CN': {
+      name: 'BEB',
+      full_name: '比易宝（BEB）',
+      brief_info: '比易宝（简称BEB）是由香港比易宝集团有限公司研发的，基于区块链技术应用于金融领域的最新一代的数字资产服务平台，是一个以数字货币钱包+支付应用+币圈商城+理财为主要服务方向的区块链综合生态体系，是开创人类首款真正意义上的全球去中心化金融产品。并且，BEB已经成为（币商圈www.openmall.vip）币圈商城首个结算币种。',
+      issue_time: '2019年1月7日',
+      issue_all: '--', // 发行总量
+      issue_circulation: '3300万', // 流通总量
+      token_price: '0.015~0.02USD', // 众筹价格
+      whitepagger: 'http://www.beb.world/BEB-Chinese%20.pdf', // 白皮书
+      office_website: 'www.bitbeb.com', // 官网
+      chain_info: 'https://etherscan.io/token/0x995ff3562692349e78001c9e37414919e65ff04b' // 区块查询
+    },
+    'en': {
+      name: 'BEB',
+      full_name: '比易宝（BEB）',
+      brief_info: '比易宝（简称BEB）是由香港比易宝集团有限公司研发的，基于区块链技术应用于金融领域的最新一代的数字资产服务平台，是一个以数字货币钱包+支付应用+币圈商城+理财为主要服务方向的区块链综合生态体系，是开创人类首款真正意义上的全球去中心化金融产品。并且，BEB已经成为（币商圈www.openmall.vip）币圈商城首个结算币种。',
+      issue_time: '2019年1月7日',
+      issue_all: '--', // 发行总量
+      issue_circulation: '--', // 流通总量
+      token_price: '0.015~0.02USD', // 众筹价格
+      whitepagger: 'http://www.beb.world/BEB-Chinese%20.pdf', // 白皮书
+      office_website: 'www.bitbeb.com', // 官网
+      chain_info: 'https://etherscan.io/token/0x995ff3562692349e78001c9e37414919e65ff04b' // 区块查询
+    }
+  },
+  IMCC: {
+    'zh-CN': {
+      name: 'IMCC',
+      full_name: 'IMCC（艾媒链）',
+      brief_info: '以互动广告形式为基础，运用区块链技术和互动广告特征，以智能可信设备为 载体，创建IMCC（Interactive Media Consortium Chain，中文名称为：艾媒链）。 将IMCC作为互动广告内的行业代币和数据追溯的基本单位，借助区块链技术特 性，打造全新的媒体广告生态系统。 IMCC的核心价值在于广告业态的环流生态布局以及通证社区的发展与建设。利 用闲置媒体资源共享作为切入点，形成去中心化的广告媒体运营体系，利用社 区内成员各司其职的工作与贡献，进行透明化、合理化的价值分配。项目目前已在大连、沈阳、哈尔滨、长春、杭州、成都、太原、烟台、本溪、徐州等地落地应用场景。',
+      issue_time: '2018年8月20日',
+      issue_all: '95亿', // 发行总量
+      issue_circulation: '1.05亿', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://imcc.io/zh-cn#whitepaper', // 白皮书
+      office_website: 'https://imcc.io/', // 官网
+      chain_info: 'https://etherscan.io/' // 区块查询
+    },
+    'en': {
+      name: 'IMCC',
+      full_name: 'IMCC（艾媒链）',
+      brief_info: '以互动广告形式为基础，运用区块链技术和互动广告特征，以智能可信设备为 载体，创建IMCC（Interactive Media Consortium Chain，中文名称为：艾媒链）。 将IMCC作为互动广告内的行业代币和数据追溯的基本单位，借助区块链技术特 性，打造全新的媒体广告生态系统。 IMCC的核心价值在于广告业态的环流生态布局以及通证社区的发展与建设。利 用闲置媒体资源共享作为切入点，形成去中心化的广告媒体运营体系，利用社 区内成员各司其职的工作与贡献，进行透明化、合理化的价值分配。项目目前已在大连、沈阳、哈尔滨、长春、杭州、成都、太原、烟台、本溪、徐州等地落地应用场景。',
+      issue_time: '2018年8月20日',
+      issue_all: '95亿', // 发行总量
+      issue_circulation: '1.05亿', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://imcc.io/zh-cn#whitepaper', // 白皮书
+      office_website: 'https://imcc.io/', // 官网
+      chain_info: 'https://etherscan.io/' // 区块查询
+    }
   }
 }
