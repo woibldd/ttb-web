@@ -13,7 +13,7 @@ import responsiveScale from '@/mixins/responsiveScale'
 export default {
   mixins: [responsiveScale],
   name: 'Profile',
-  components: {
+  components: { 
     ProfileLeft
   }
 }
