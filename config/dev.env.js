@@ -5,6 +5,7 @@ const prodEnv = require('./prod.env').default
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
   STATIC: '"/"',
-  BASE_API: '"http://i.ix-test.com:8080"',
+  //BASE_API: '"http://i.ix-test.com:8080"',
+  BASE_API: '"https://i.ixx.com"',
   ...require("./theme.env")
 })
