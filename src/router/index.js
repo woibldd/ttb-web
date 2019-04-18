@@ -62,7 +62,6 @@ const InviteMineActivity = () => import(/* webpackChunkName: "InviteMineActivity
 const KycRelay = () => import(/* webpackChunkName: "KycRelay" */ '@/pages/active/kycRelay.vue')
 const ExchangeRank = () => import(/* webpackChunkName: "ExchangeRank" */ '@/pages/active/ExchangeRank')
 const Lottery = () => import(/* webpackChunkName: "lottery" */ '@/pages/active/lottery')
-const RushBuy = () => import(/* webpackChunkName: "home" */ '@/pages/rushBuy.vue')
 
 async function beforeEach (to, from, next) {
   state.loading = true
@@ -130,17 +129,6 @@ let router = new Router({
         zendeskWidget: false
       },
       component: h5login
-    },
-    {
-        path: '/RushBuy',
-        name: 'RushBuy',
-        meta: {
-          auth: false,
-          nav: true,
-          footer: false,
-          class: 'absolute'
-        },
-        component: RushBuy,
     },
     {
       path: '/h5-index',
