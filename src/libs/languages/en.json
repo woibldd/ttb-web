@@ -94,6 +94,7 @@
   "change_password_success": "Change password successful",
   "change_password_orig": "Old Password",
   "change_password_new": "New",
+  "FrenzySaleZone": "Frenzy sale zone",
   "change_password_repeat": "Confirm",
   "change_password_diff": "Input password incorrectly",
   "secure_level": "Security level",
