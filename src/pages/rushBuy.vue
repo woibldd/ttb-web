@@ -122,9 +122,9 @@ export default {
   watch:{
     type(val){
       if(val === 'USDT'){
-        this.typeNumber = this.number * this.data.usdt_price
+        this.typeNumber =  this.mul(this.number , this.data.usdt_price)
       } else {
-        this.typeNumber = this.number * this.data.ix_price
+        this.typeNumber =  this.mul(this.number , this.data.ix_price)
       }
     },
     number(val,old){
@@ -186,7 +186,11 @@ export default {
       service.spPageInfo().then(resp => {
         if (!resp.code) {
           this.data = resp.data
-          this.percentage = Math.ceil(this.data.executed  /  (this.data.total_amount + this.data.executed)*100)
+          console.log(this.data.total_amount)
+          console.log(this.data.executed)
+          console.log(this.data.total_amount + this.data.executed)
+
+          this.percentage = Math.ceil(this.data.executed  /  (this.data.total_amount*1 + this.data.executed*1)*100)
           switch(this.data.day){
           case "1":
             this.day = '一'
