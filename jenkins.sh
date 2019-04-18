@@ -1,7 +1,8 @@
 #!/bin/sh
 
 echo "\nixx.com building...\n"
-npm install
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+cnpm install
 npm run build
 
 sleep 2
