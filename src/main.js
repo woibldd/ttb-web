@@ -15,6 +15,7 @@ import VTooltip from 'v-tooltip'
 import qs from 'querystring'
 import * as Sentry from '@sentry/browser'
 import 'babel-polyfill'
+import moment from 'moment'
 
 import 'element-ui/lib/theme-chalk/index.css'
 
@@ -78,6 +79,7 @@ utils.$i18n = new VueI18n({
 Vue.prototype.$eh = eventHub
 Vue.prototype.$msgbox = MessageBox
 Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$moment = moment
 
 actions.setLocale()
 
