@@ -482,6 +482,13 @@ const service = {
     return request('/bonus/total')
   },
 
+  // Sp 活动
+  spPageInfo (params) {
+    return request('/future/activity/sp_info', params)
+  },
+  rushToBuy (params) {
+    return request('/future/activity/buy_sp', params)
+  },
   /* 挖矿 end */
 
   /* 行情 */
