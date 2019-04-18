@@ -13,7 +13,7 @@
               SP{{ $t('RushBuy_text_list_1') }}
               <h1>{{data.total_amount | number}} SP</h1>
             </div>
-            <div class="rushBuy-slider">
+            <div class="rushBuy-slider" :class="{'hidden': percentage!==0}">
               <span :style="{width:percentage+'%'}"><em>{{percentage}}%</em></span>
             </div>
             <div class="grab-more-text">
@@ -297,6 +297,14 @@ export default {
         top: -25px;
         left: 0;
         font-size: 16px;
+      }
+      &.hidden{
+        &:after{
+          display: none;
+        }
+        &:before{
+          display: none;
+        }
       }
       &:after{
         content: '100%';
