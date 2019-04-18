@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "\nixx.com building...\n"
-
+npm install
 npm run build
 
 sleep 2
