@@ -1,6 +1,9 @@
 <template>
   <div id="RushBuy">
-      <div class="RushBuy-banner">
+      <div class="RushBuy-banner" :class="{
+      'fz':state.locale === 'zh-HK',
+      'ko':state.locale === 'ko',
+      'en':state.locale === 'en'}"  >
         <!-- <img src="@/assets/sprushbuy.jpg" alt=""> -->
       </div>
       <div class="RushBuy-content">
@@ -8,7 +11,7 @@
           <div class="RushBuy-main-left">
             <div class="grab-more">
               SP{{ $t('RushBuy_text_list_1') }}
-              <h1>{{data. total_amount | number}} SP</h1>
+              <h1>{{data.total_amount | number}} SP</h1>
             </div>
             <div class="rushBuy-slider">
               <span :style="{width:percentage+'%'}"><em>{{percentage}}%</em></span>
@@ -25,7 +28,7 @@
               <div class="rushbuy-form">
                 <div class="input-box">
                   <label for="">{{ $t('RushBuy_text_list_6') }}</label>
-                    <input type="text" placeholder="输入抢购数量" maxlength="4" v-model="number">
+                    <input type="text" :placeholder="$t('RushBuy_text_list_34')" maxlength="4" v-model="number">
                   <span class="poa-input-text">SP</span>
                 </div>
                 <div class="rushbuy-error-info" >
@@ -47,15 +50,15 @@
                 <li>{{$t('available')}} {{data.ix_available | number}} IX <a href="/fund/deposit/IX" class="text-right">{{$t('TopUp')}}</a></li>
               </ul>
               <button v-if="isLogin" class="submit" @click="submit">{{$t('RushBuy_text_list_10')}}</button>
-              <router-link v-else :to="'/user/login/email'" style="background:#01CED1" class="submit">登录/注册</router-link>
+              <router-link v-else :to="'/user/login/email'" style="background:#01CED1;color:#fff;" class="submit">{{$t('signin')}}/{{$t('signup_title')}}</router-link>
           </div>
         </div>
         <div class="RushBuy-flow">
           <h2>sp{{$t('RushBuy_text_list_11')}}</h2>
           <ul>
             <li><span>01</span>{{$t('RushBuy_text_list_12')}}</li>
-            <li><span class="avtive">02</span>sp{{$t('RushBuy_text_list_13')}}</li>
-            <li><span>03</span>{{$t('RushBuy_text_list_14')}}</li>
+            <li><span :class="{avtive:data.total_amount != 0}">02</span>sp{{$t('RushBuy_text_list_13')}}</li>
+            <li><span :class="{avtive:data.total_amount == 0}">03</span>{{$t('RushBuy_text_list_14')}}</li>
           </ul>
         </div>
         <div class="RushBuy-lsit-text">
@@ -128,13 +131,15 @@ export default {
       if(isNaN(val)){
           this.number = old
       }
+
       this.errorText = val>(this.data.sp_remaining_amount)*1 ?  true :  false
+
       if(this.type === 'USDT'){
-        this.typeNumber = this.number * this.data.usdt_price
+        this.typeNumber =  this.mul(this.number , this.data.usdt_price)
       } else {
-        this.typeNumber = this.number * this.data.ix_price
+        this.typeNumber =  this.mul(this.number , this.data.ix_price)
       }
-      console.log(val,String(val),String(val).indexOf("."),String(val).indexOf("-"))
+
       if(String(val).indexOf(".") !== -1 ){
           this.number = String(val).replace('.','')
       }
@@ -158,9 +163,6 @@ export default {
   },
   created() {
     this.getSpPageInfo()
-    setInterval(() => {
-      this.getSpPageInfo()
-    }, 1000)
   },
   computed: {
     isLogin () {
@@ -168,11 +170,22 @@ export default {
     }
   },
   methods: {
+    mul(a, b) {
+        var c = 0,
+            d = a.toString(),
+            e = b.toString();
+        try {
+            c += d.split(".")[1].length;
+        } catch (f) {}
+        try {
+            c += e.split(".")[1].length;
+        } catch (f) {}
+        return Number(d.replace(".", "")) * Number(e.replace(".", "")) / Math.pow(10, c);
+    },
     getSpPageInfo(){
       service.spPageInfo().then(resp => {
         if (!resp.code) {
           this.data = resp.data
-          console.log(this.data.executed,this.data.total_amount,this.data.executed)
           this.percentage = Math.ceil(this.data.executed  /  (this.data.total_amount + this.data.executed)*100)
           switch(this.data.day){
           case "1":
@@ -187,6 +200,14 @@ export default {
           }
           this.starTime = this.timer(this.data.begin_time)
           this.endTime = this.timer(this.data.end_time,true)
+
+          let timeIf = this.$moment(this.$moment().format('YYYY-MM-DD HH:mm:ss')).isAfter(this.$moment.unix(this.data.begin_time/1000).format('YYYY-MM-DD HH:mm:ss'))
+          let ifTime = this.$moment(this.$moment().format('YYYY-MM-DD HH:mm:ss')).isBefore(this.$moment.unix(this.data.end_time/1000).format('YYYY-MM-DD HH:mm:ss'))
+          if(timeIf&&ifTime){
+            setinterval(()=>{
+              this.getSpPageInfo()
+            },1000)
+          }
         }
       })
     },
@@ -226,12 +247,22 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style>
 .RushBuy-banner{
   background-size: 1920px;
   background-position: center;
   height: 747px;
   background-image: url(~@/assets/sprushbuy.jpg)
+
+}
+.RushBuy-banner.en{
+  background-image: url(~@/assets/banner-en.jpg)
+}
+.RushBuy-banner.fz{
+  background-image: url(~@/assets/banner-ft.jpg)
+}
+.RushBuy-banner.ko{
+  background-image: url(~@/assets/banner-ko.jpg)
 }
 .router-RushBuy{
   background: #262d37;
@@ -243,8 +274,7 @@ export default {
   z-index: 9;
 }
 </style>
-<style lang="scss" scoped>
-.RushBuy-content{
+<style lang="scss">.RushBuy-content{
   width: 1200px;
   margin: 0 auto;
 }
@@ -287,9 +317,10 @@ export default {
           right: -13px;
           background: #262d37;
           top: -25px;
+          z-index: 9999;
           color: #19fcff;
           width: 30px;
-          right: -17px;
+          right: -26px;
           display: block;
           text-align: center;
         }
@@ -300,7 +331,7 @@ export default {
           border-radius: 15px;
           background: #19fcff;
           position: absolute;
-          right: -9px;
+          right: -16px;
           top: -3px;
         }
       }
@@ -355,6 +386,8 @@ export default {
     label{
       font-size: 18px;
       color:#fff;
+      width: 72px;
+      display: inline-block;
     }
     .input-box{
       position: relative;
@@ -364,7 +397,7 @@ export default {
         border: none;
         background-color: #24292f;
         color: #fff;
-        width: 355px;
+        width: 360px;
         margin-left: 20px;
         height: 75px;
         padding-left: 20px;
@@ -486,8 +519,11 @@ export default {
   border-radius: 3px;
   margin-top: 20px;
   cursor: pointer;
+  color:#fff;
+
   &:hover{
     opacity: .9;
+    color:#fff;
   }
 }
 .rushbuy-error-info{
