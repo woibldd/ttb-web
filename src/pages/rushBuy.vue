@@ -399,20 +399,23 @@ export default {
       font-size: 18px;
       color:#fff;
       width: 72px;
+      line-height: 75px;
       display: inline-block;
     }
     .input-box{
       position: relative;
+      overflow: hidden;
       input{
         height: 50px;
         line-height: 75px;
         border: none;
         background-color: #24292f;
         color: #fff;
-        width: 360px;
+        width: 355px;
         margin-left: 20px;
         height: 75px;
         padding-left: 20px;
+        float: right;
         border-radius: 3px;
         font-size: 18px;
       }
