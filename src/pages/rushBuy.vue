@@ -274,7 +274,8 @@ export default {
   z-index: 9;
 }
 </style>
-<style lang="scss">.RushBuy-content{
+<style lang="scss"  scoped>
+.RushBuy-content{
   width: 1200px;
   margin: 0 auto;
 }
