@@ -11,9 +11,10 @@
           <router-link
             :to="{name: 'trading'}"
             class="nav_link">{{ $t('trading') }}</router-link>
-            <router-link
-              :to="{name: 'RushBuy'}"
-              class="nav_link" style="padding-left:10px;">{{ $t('FrenzySaleZone') }}(SP)<img src="@/assets/hot.png" alt="" style="position: relative;top: 5px;left: 5px;"></router-link>
+          <router-link
+            v-if="false"
+            :to="{name: 'RushBuy'}"
+            class="nav_link" style="padding-left:10px;">{{ $t('FrenzySaleZone') }}(SP)<img src="@/assets/hot.png" alt="" style="position: relative;top: 5px;left: 5px;"></router-link>
             <!-- <div class="nav_link arrow-down">
             <a
               :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"
