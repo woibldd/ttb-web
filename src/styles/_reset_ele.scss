@@ -1,0 +1,122 @@
+
+// reset radio 单选
+.el-radio-button__inner{
+    height: 34px;
+    line-height: 34px;
+    box-sizing: border-box;
+    padding: 0;
+    width: 100px;
+}
+.el-radio-button__orig-radio:checked+.el-radio-button__inner {
+    color: #fff;
+    background-color: $primary-active;
+    border-color: $primary-active;
+    -webkit-box-shadow: -1px 0 0 0 $primary-active;
+    box-shadow: -1px 0 0 0 $primary-active;
+}
+.el-radio-button__inner:hover {
+    color: $primary-active;
+}
+
+// 圆形的
+.el-radio__input.is-checked+.el-radio__label {
+    color: $primary-active;
+}
+.el-radio__input.is-checked .el-radio__inner {
+    border-color: $primary-active;;
+    background: $primary-active;;
+}
+
+.el-radio__inner:hover {
+    border-color: $primary-active;
+}
+
+// reset 下拉框
+.el-input__inner {
+    height: 30px;
+    line-height: 30px;
+    padding: 0;
+    padding-left: 10px;
+    width: 100%;
+}
+.el-select .el-input__inner:focus,
+.el-select .el-input.is-focus .el-input__inner {
+    border-color: $primary-active;
+}
+.el-input__icon {
+    line-height: 30px;
+}
+.el-select-dropdown__item.selected {
+    color: $primary-active;
+}
+.el-select:hover .el-input__inner,
+.el-input__inner,
+.el-radio-button__inner {
+    border-color: #cccccc;
+    font-size: 12px;
+}
+
+.el-input.is-active .el-input__inner, .el-input__inner:focus {
+    border-color: #C9A96C;
+}
+
+// 日期选择器
+.el-date-table td.end-date span, .el-date-table td.start-date span {
+    background: #C9A96C !important;
+}
+.el-date-table td.in-range div, .el-date-table td.in-range div:hover, .el-date-table.is-week-mode .el-date-table__row.current div, .el-date-table.is-week-mode .el-date-table__row:hover div {
+    background: rgba(201,169,108,0.2) !important;
+}
+.el-date-table td.today span,
+.el-picker-panel__icon-btn:hover,
+.el-date-table td.available:hover {
+    color: #C9A96C !important;
+}
+.el-range-editor.is-active, .el-range-editor.is-active:hover {
+    border-color: #C9A96C !important;
+}
+
+
+
+// messageBox,下的 按钮
+.ix-message-box-wrapper{
+    .btn--confirm {
+        width:104px;
+        height:36px;
+        background:rgba(201,169,108,1);
+        border-radius:6px;
+        border-width: 0;
+
+        &:hover,
+        &:focus {
+            opacity: 0.8
+        }
+    }
+
+    .btn--cancel {
+        width:104px;
+        height:36px;
+        background:#fff;
+        border-radius:6px;
+        border-width: 0;
+        color: #393D4D;
+    }
+
+    .el-message-box__title {
+        text-align: center;
+    }
+    .el-message-box__status {
+        display: none;
+    }
+    .el-message-box__message{
+        padding-left: 12px;
+    }
+}
+
+.el-checkbox__inner:hover {
+    border-color: $primary;
+}
+.el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+    background-color: $primary;
+    border-color: $primary;
+}
