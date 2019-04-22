@@ -11,6 +11,10 @@
           <router-link
             :to="{name: 'trading'}"
             class="nav_link">{{ $t('trading') }}</router-link>
+          <a
+            href="/contract.html"
+            :class="{'router-link-active': from === 'contract'}"
+            class="nav_link ml-30">{{ $t('contract') }}</a>  
             <!-- <div class="nav_link arrow-down">
             <a
               :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"
@@ -235,6 +239,10 @@ export default {
     dark: {
       type: Boolean,
       default: false
+    },
+    from: {
+      type: String,
+      default: ''
     }
   },
   data () {

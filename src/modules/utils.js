@@ -402,6 +402,26 @@ const utils = {
     }
     return Big(num).toString()
   },
+  toPretty (num) {
+    num = Big(num || 0)
+    Big.RM = 0 // rm = 0,向下截取
+    if (num < 100) {
+      return num.toFixed(2)
+    }
+    if (num < 1e6) {
+      return num.toFixed(0)
+    }
+    if (num < 1e7) {
+      return num.div(1e6).toFixed(1) + ' M'
+    }
+    if (num < 1e9) {
+      return num.div(1e6).toFixed(0) + ' M'
+    }
+    if (num < 1e10) {
+      return num.div(1e9).toFixed(1) + ' B'
+    }
+    return num.div(1e9).toFixed(0) + ' B'
+  },
   toRound (num, scale = 20, rm = consts.ROUND_DOWN) {
     if (typeof num === 'undefined') {
       return 0
@@ -516,6 +536,64 @@ const utils = {
         break
     }
     return url
+  },
+  getBlockChainUrl (tx, type, chainName) {
+    let url = ''
+    switch (chainName) {
+      case 'BTC':
+        url = `https://blockchain.info/${type}/${tx}`
+        break
+      case 'ETH':
+        url = `https://etherscan.io/${type}/${tx}`
+        break
+      case 'EOS':
+        type = type === 'address' ? 'account' : type
+        url = `https://eosflare.io/${type}/${tx}`
+        break
+      case 'OMNI':
+        url = `https://omniexplorer.info/${type}/${tx}`
+        break
+    }
+    return url
+  },
+  getComputedStyle (el, prop) {
+    if (!el) return {}
+    let styles = document.defaultView.getComputedStyle(el, null) || {}
+    if (prop) {
+      return styles[prop]
+    }
+    return styles
+  },
+  getGbLength (str) {
+    if (!str) {
+      return 0
+    }
+    if (typeof str !== 'string') {
+      str += ''
+    }
+    return str.replace(/[^\x00-\xff]/g, 'xx').length
+  },
+  pretty (num, accuracy = 2) {
+    num = Big(num || 0)
+    if (num < 100) {
+      return num.toFixed(accuracy)
+    }
+    if (num < 1e4) {
+      return num.toFixed(0)
+    }
+    if (num < 1e6) {
+      return num.div(1e3).toFixed(1) + ' K'
+    }
+    if (num < 1e7) {
+      return num.div(1e6).toFixed(2) + ' M'
+    }
+    if (num < 1e9) {
+      return num.div(1e6).toFixed(0) + ' M'
+    }
+    if (num < 1e10) {
+      return num.div(1e9).toFixed(1) + ' B'
+    }
+    return num.div(1e9).toFixed(0) + ' B'
   }
 }
 

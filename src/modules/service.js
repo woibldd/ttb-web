@@ -640,7 +640,224 @@ const service = {
   },
   doExchangePiece () {
     return request('mine/chip/exchange')
-  }
+  },
+  doExchangePiece () {
+    return request('mine/chip/exchange')
+  },
+  getCurrentIxPrice () {
+    return request('mine/ix/price')
+  },
+  getMillionInfo () {
+    return request('million/data')
+  },
+  getMillionInfoMine () {
+    return request('million/me')
+  },
+  getMillionReward (params) {
+    return request('million/reward', params)
+  },
+  startMillion () {
+    return request('million/start')
+  },
+  // 开启/关闭手续费抵扣
+  setFeeDiscount (params) {
+    return request('fee/discount/switch', params)
+  },
+  // 查询当前手续费开关状态
+  getFeeDiscountStatus () {
+    return request('fee/discount/get')
+  },
+  // 我的订单 > 币币交易
+  getBiBiOrders (params) {
+    return request('fee/transaction/history', params)
+  },
+  // ix累计抵扣
+  getIxTotalDiscount () {
+    return request('fee/discount/total')
+  },
+
+  // contract 接口
+  getContractSymList () {
+    return getCache('cpairList', () => request('contract/symbol/list').then(res => {
+      if (res && res.data) {
+        res.data = res.data.map(item => {
+          item.amount_scale = parseInt(item.amount_scale, 10)
+          item.currency_scale = parseInt(item.price_scale, 10) || 0
+          item.price_scale = parseInt(item.price_scale, 10) || 2
+          item.value_scale = parseInt(item.value_scale, 10) || 4
+          item.fee_rate = item.fee_rate || 0
+          item.accuracy = item.accuracy || 5
+          if (item.name.indexOf('FUTURE_') < 0) {
+            item.name = `FUTURE_${item.name.replace('_', '')}`
+          }
+
+          // USD
+          item.currency_name = item.name.substr(-3)
+          // BTCUSD
+          item.symbol = item.name.split('_')[1]
+          // BTC
+          item.product_name = item.symbol.substr(0, 3)
+          return item
+        })
+        res.data = { items: res.data }
+        return res
+      }
+    }))
+  },
+  async getContractPairInfo ({symbol}) {
+    const res = await this.getContractSymList()
+    if (!res.code) {
+      // if (res.data && res.data.length) {
+      //   res.data = res.data.map (item => {
+      //     item.amount_scale = parseInt(item.amount_scale, 10)
+      //     item.price_scale = parseInt(item.price_scale, 10)
+      //     return item
+      //   })
+      // }
+      const find = _.find(res.data.items, item => item.name === symbol)
+
+      return {
+        code: find ? 0 : 100001,
+        data: find,
+        message: find ? '' : utils.$i18n.t('sth_went_wrong')
+      }
+    }
+    return res
+  },
+  getContractSymInfo (params) {
+    return request('future/account/symbol/info', params)
+  },
+  getContractBalanceList () {
+    return getCache('contractBalance', () => request('future/account/balance/list'), 1e3)
+  },
+  async getContractBalanceByPair (symbol) {
+    if (!symbol || !symbol.symbol) {
+      symbol = {
+        symbol: 'BTCUSD'
+      }
+    } else {
+      symbol.symbol = symbol.symbol + 'USD'
+    }
+    let result = await service.getContractBalanceList()
+    // let resp = []
+    if (!result.code) {
+      let list = result.data
+      let balance = list ? list.filter(l => symbol.symbol === l.currency)[0] || {} : {
+        available: '0',
+        holding: '0',
+        available_balance: '0',
+        leverage: 100
+      }
+      return {
+        code: 0,
+        data: balance
+      }
+    }
+    return null
+  },
+  changePromiseFund (params) {
+    return request('future/account/transfer_margin', params)
+  },
+  setRiskLimit (params) {
+    return request('contract/risklimit/set', params)
+  },
+  getRiskLimit (params) {
+    return request('contract/risklimit/get', params)
+  },
+  transferContractFund (params) {
+    return request('future/account/transfer', params)
+  },
+  orderContract (params) {
+    return request('contract/order', params)
+  },
+  orderContractClose (params) {
+    return request('contract/close', params)
+  },
+
+  // 仓位
+  // getContractHolding (params) {
+  //   return request('contract/holding', params)
+  // },
+  // 已平仓table
+  getClosedposition (params) {
+    return request('contract/closedposition', params)
+  },
+  // 当前委托
+  getActiveorders (params) {
+    return getCache('c_activeList', () => request('contract/activeorders', params), 1e3)
+  },
+  // 止损委托
+  getStoplossOrder(params) {
+    return getCache('c_stoploss', () => request('contract/activetriggers', params), 1e3)
+  },
+  // 委托历史
+  getOrderhistory (params) {
+    return getCache('c_orderhisotry', () => request('contract/orderhistory', params), 1e3)
+  },
+  // 已成交
+  getOrderfills (params) {
+    return getCache('c_orderfill', () => request('future/account/orderfills', params), 1e3)
+  },
+  // 已成交列表
+  getOrderfillList (params) {
+    return getCache('c_orderfilllist', () => request('future/account/orderfills', params), 1e3)
+  },
+  // 我的资产,contract专用
+  // 交易历史
+  getContractTradeHistory (params) {
+    return request('future/account/trade_history', params)
+  },
+  // 财务记录
+  getContractFundHistory (params) {
+    return request('future/account/fund/history', params)
+  },
+  // 资金费率历史
+  getFundFeeRateHistory (params) {
+    return request('future/account/feerate/history', params)
+  },
+  // 保险基金
+  getEnsuranceFund (params) {
+    return request('future/account/ensurance', params)
+  },
+  // 合约是否开通
+  checkContractActive (currency, isSimulation) {
+    return request(`/future/account/is_activated${isSimulation ? '_simulation' : ''}`, {
+      currency
+    })
+  },
+  // 激活合约
+  activeContract (currency, isSimulation) {
+    return request(`future/account/activate${isSimulation ? '_simulation' : ''}`, {
+      currency
+    })
+  },
+  // 设置杠杆倍数
+  setContractlever (params) {
+    return request('future/account/leverage', params)
+  },
+  previewContractlever (params) {
+    return request('future/account/leverage_preview', params)
+  },
+  //   撤销合约
+  revertContract (params) {
+    return request('contract/remove', params)
+  },
+  cancelAllContractOrder (params) {
+    return request('contract/remove_all', params)
+  },
+
+  // 创建战队
+  createTeam(params) {
+    return request('future/activity/team_create', params)
+  },
+  // 报名参赛交易大赛
+  enrollMatch(params) {
+    return request('future/activity/enter_for', params)
+  },
+  // 交易大赛排行榜
+  getRankList(params) {
+    return getCache('c_ranklist', () => request('future/activity/rank_list', params), 1e3)
+  },
 
 }
 

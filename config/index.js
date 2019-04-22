@@ -14,12 +14,18 @@ const dir = fs.readdirSync(resolve("src/projects"));
 let projects = {
 };
 
+const page = process.env.PAGE
+
 dir.forEach(dir => {
-  projects[dir] = {};
-  projects[dir].entry = ["./src/projects/" + dir + "/" + dir + ".js"];
-  projects[dir].name = dir;
-  projects[dir].config = require("../src/projects/" + dir + "/_config.js"),
+    if (page && dir !== page) {
+        return
+    }
+    projects[dir] = {};
+    projects[dir].entry = ["./src/projects/" + dir + "/" + dir + ".js"];
+    projects[dir].name = dir;
+    projects[dir].config = require("../src/projects/" + dir + "/_config.js"),
     projects[dir].template = 'template.html'
+
 });
 
 module.exports = {
@@ -39,7 +45,7 @@ module.exports = {
 
     // Various Dev Server settings
     host: process.env.HOST || "0.0.0.0", // can be overwritten by process.env.HOST
-    port: 8081, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
