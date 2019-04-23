@@ -37,17 +37,15 @@
         class="fl grid-tf-amount"
       >24H {{ $t('vol') }} {{ pairTick.volume_24h | round(2) }} {{ state.pro.product_name }}</p>
     </div>
-    <div class="row clearfix" v-if="showCountDown"> 
-      <p class="fl grid-increase">
-        {{ $t('trading_title_start_time', {startTime: $moment.unix(startTime).format('hh:mm:ss')}) }} 
-      </p>
-      <p class="fl grid-increase"
+    <div class="row clearfix" v-if="showCountDown">
+      <p
+        class="fl grid-increase"
+      >{{ $t('trading_title_start_time', {startTime: $moment.unix(startTime).format('hh:mm:ss')}) }}</p>
+      <p
+        class="fl grid-increase"
         v-html="$t('trading_title_end_time', {endTime: $moment.unix(endTime).format('hh:mm:ss'), countDownText: $t('trading_title_count_down', {countdown:countDown}) }) "
-        >
-      </p> 
-      <p class="fl grid-increase">
-        {{ $t('trading_title_start_price', {price: state.price_open}) }} 
-      </p>
+      ></p>
+      <p class="fl grid-increase">{{ $t('trading_title_start_price', {price: state.price_open}) }}</p>
     </div>
   </div>
 </template>
@@ -56,7 +54,7 @@
 import { state } from "@/modules/store";
 import { pairfix } from "@/mixins/index";
 import isEmpty from "lodash/isEmpty";
-import PairNav from "@/components/Trading/PairNavForTitle"; 
+import PairNav from "@/components/Trading/PairNavForTitle";
 
 export default {
   mixins: [pairfix],
@@ -92,13 +90,12 @@ export default {
         return this.state.pro.pair;
       } else {
         return "";
-      } 
-    }, 
-    showCountDown(){
+      }
+    },
+    showCountDown() {
       if (this.state.pro.pair === "SP_USDT") {
         return true;
-      }
-      else {
+      } else {
         return false;
       }
     },
@@ -125,62 +122,74 @@ export default {
         .div(this.$big(tick.current).minus(tick.increment_24h))
         .round(2, this.C.ROUND_HALF_UP)
         .toFixed(2);
-    }
-  },
-  created() {
-    
-  },
-  watch: {
-    pair() { 
-      let pairList = this.state.close_time 
-      if (this.pair === "SP_USDT") { 
-        let closelist = []
-        if(this.state.close_time){
-          closelist = this.state.close_time.match(/\[[\d\S]\]|\[[\d\S]*\-[\d\S]*\]/g)
+    },
+    startCountDown() {
+      debugger
+        if(this.pair === "SP_USDT"){
+        let closelist = [];
+        if (this.state.close_time) {
+          closelist = this.state.close_time.match(
+            /\[[\d\S]\]|\[[\d\S]*\-[\d\S]*\]/g
+          );
         }
-        let date = new Date()
-        let year =  date.getFullYear()
-        let month = date.getMonth() + 1
-        let day = date.getDate()
-        let timeReg = closelist[3].replace("[","").replace("]","")
-        let end = timeReg.split("-")[0]
-        let start = timeReg.split("-")[1]
+        else {
+          closelist =  "[*][*][*][9:59-10:00]".match(
+            /\[[\d\S]\]|\[[\d\S]*\-[\d\S]*\]/g
+          );
+        }
+        let date = new Date();
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        let timeReg = closelist[3].replace("[", "").replace("]", "");
+        let end = timeReg.split("-")[0];
+        let start = timeReg.split("-")[1];
 
-        let tickEnd = this.$moment(`${year}-${month}-${day + 1} ${end}`)
-        let tickStart = this.$moment(`${year}-${month}-${day} ${start}`)
- 
-        this.startTime = tickStart.unix()
-        this.endTime = tickEnd.unix()
- 
-        // console.log({tickEnd,tickStart})
-        var $this = this
-        setTimeout(function(){
-          var startTime=Math.round(new Date() / 1000);//开始时间  
-          this.interval = setInterval(function(){ 
-            var ts =$this.endTime-startTime;//计算剩余的毫秒数
-            var hh = parseInt(ts  / 60 / 60 % 24, 10);//计算剩余的小时数
-            var mm = parseInt(ts  / 60 % 60, 10);//计算剩余的分钟数
-            var ss = parseInt(ts  % 60, 10);//计算剩余的秒数
+        let tickEnd = this.$moment(`${year}-${month}-${day} ${end}`);
+        let tickStart = this.$moment(`${year}-${month}-${day} ${start}`);
+
+        this.startTime = tickStart.unix();
+        this.endTime = tickEnd.unix();
+
+        var $this = this;
+        setTimeout(function() {
+          let curTime = Math.round(new Date() / 1000); //开始时间
+          this.interval = setInterval(function() {
+            var ts = $this.endTime - curTime; //计算剩余的毫秒数
+            var hh = parseInt((ts / 60 / 60) % 24, 10); //计算剩余的小时数
+            var mm = parseInt((ts / 60) % 60, 10); //计算剩余的分钟数
+            var ss = parseInt(ts % 60, 10); //计算剩余的秒数
             hh = checkTime(hh);
             mm = checkTime(mm);
             ss = checkTime(ss);
-            if(ts>0){ 
-              $this.countDown =` ${hh}:${mm}:${ss}`
-              startTime=Math.round(new Date() / 1000); 
+            if (ts > 0) {
+              $this.countDown = ` ${hh}:${mm}:${ss}`;
+              curTime = Math.round(new Date() / 1000);
+            } else {
+              $this.endTime += 86400;
             }
-        },1000);
-          function checkTime(i){
-              if (i < 10) {
-                  i = "0" + i;
-              }
-              return i;
+          }, 1000);
+          function checkTime(i) {
+            if (i < 10) {
+              i = "0" + i;
+            }
+            return i;
           }
-        },3000) 
+        }, 3000);
       }
       else {
         clearInterval(this.interval)
       }
-    },
+    }
+  },
+  created() {
+    this.startCountDown()
+    //  this.$eh.$on("trading:countDown", this.startCountDown);
+  },
+  watch: {
+    pair() {
+      this.startCountDown()
+    }
   }
 };
 </script>
@@ -249,10 +258,10 @@ export default {
     color: #d7d7d7;
     margin-right: 20px;
   }
-  .clearfix:after{
-    display:block;
-    content:"";
-    clear:both;
+  .clearfix:after {
+    display: block;
+    content: "";
+    clear: both;
   }
 }
 </style>
