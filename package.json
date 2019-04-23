@@ -14,6 +14,7 @@
     "build:beta": "NODE_ENV=beta node build/build.js"
   },
   "dependencies": {
+    "@amcharts/amcharts4": "^4.4.0",
     "@sentry/browser": "^4.0.6",
     "animate.css": "^3.7.0",
     "axios": "^0.18.0",
@@ -26,6 +27,7 @@
     "node-sass": "^4.9.3",
     "qrcode": "^1.2.2",
     "sass-resources-loader": "^1.3.3",
+    "v-depth-chart": "^0.1.5",
     "v-tooltip": "^2.0.0-rc.33",
     "vue": "^2.5.2",
     "vue-awesome-swiper": "^3.1.3",

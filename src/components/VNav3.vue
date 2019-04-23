@@ -239,6 +239,10 @@ export default {
     dark: {
       type: Boolean,
       default: false
+    },
+    from: {
+      type: String,
+      default: ''
     }
   },
   data () {

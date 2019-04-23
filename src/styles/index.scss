@@ -82,6 +82,11 @@ body.router-trading {
     }
   }
 }
+body.router-spa_contract {
+  min-width: auto;
+  background-color: $protrade-bg;
+  overflow-x: auto;
+}
 
 /* 路由相关 end */
 table tr td,
