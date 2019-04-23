@@ -521,8 +521,7 @@ export default {
                 // let holding = this.state.ct.holding
                 // holding = res.data
                 let holding = res.data
-                this.state.ct.holding = holding
-                debugger
+                this.state.ct.holding = holding 
                 if (holding && holding.holding && holding.holding != 0) {
                   this.setTabDataCount(tab, 1)
                 }

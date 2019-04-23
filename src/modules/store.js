@@ -39,7 +39,9 @@ export const state = {
     product: null,
     pairInfo: null,
     pairList: [],
-    price: 0
+    price: 0,
+    close_time: 0,
+    price_open: 0,
   },
   ct: {
     pair: '',

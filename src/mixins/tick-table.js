@@ -48,7 +48,7 @@ export default {
         return value * -1
       })
     },
-    sortedList () {
+    sortedList () { 
       if (!this.sortBy || !this.sortState) {
         return this.showList
       }

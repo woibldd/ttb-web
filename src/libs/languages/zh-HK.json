@@ -703,5 +703,11 @@
 "RushBuy_text_list_31":"1. 美國、中國、新加坡等國家與地區用戶，鑒於全球監管環境的可能變化，請在參與交易之前咨詢所在國家和地區律師，以便嚴格遵守當地法律。IXX交易所保留隨時終止向可能違反所在國家和地區相關法律的用戶提供服務的權利。",
 "RushBuy_text_list_32":"2. IXX交易所僅提供壹個自由的數字貨幣交易平臺，不對其發行價值做任何的審核或擔保，亦不承擔賠償責任，如果您不能接受，請勿參與。",
 "RushBuy_text_list_33":"3. 由於參與此類項目面臨包括但不限於項目方不發幣的可能性及上述風險，請在詳細了解項目內容並理解上述風險後，在個人的風險承擔能力範圍內謹慎參與。",
-"RushBuy_text_list_34":"輸入搶購數量"
+"RushBuy_text_list_34":"輸入搶購數量",
+
+"trading_title_start_time":"每日开盘时间 %{startTime}",
+"trading_title_end_time":"每日停盘时间 %{endTime}",
+"trading_title_count_down":"停盘倒计时 %{countdown}",
+"trading_title_start_price":"今日开盘价格", 
+"":""
 }
