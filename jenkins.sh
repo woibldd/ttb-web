@@ -2,6 +2,7 @@
 
 echo "\nixx.com building...\n"
 
+cnpm i -S @amcharts/amcharts4 v-depth-chart
 
 npm run build
 
