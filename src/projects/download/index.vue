@@ -23,7 +23,7 @@
     </div>
     <div class="content">
       <div class="ix-logo"/>
-      <div class="ix-txt">IX</div>
+      <div class="ix-txt">IXX</div>
       <div
         class="download__btn"
         @click="download('android')">
