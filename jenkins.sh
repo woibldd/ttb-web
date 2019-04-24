@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "\nixx.com building...\n"
-
+ 
 
 npm run build
 

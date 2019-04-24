@@ -121,6 +121,9 @@ export default {
         }
       },
       immediate: true
+    },
+    pairList() {
+      console.log(this.pairList)
     }
   },
   computed: {
@@ -135,7 +138,7 @@ export default {
     }
   },
   methods: {
-    setPair (pair) {
+    setPair (pair) { 
       this.$router.replace({
         name: 'trading',
         params: {

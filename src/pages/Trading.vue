@@ -4,7 +4,7 @@
     ref="wrap">
     <v-nav
       pro="1"
-      v-if="!isMobile"/>
+      v-if="!isMobile"/> 
     <mobile-nav
       v-if="isMobile"
     />
@@ -12,14 +12,14 @@
       <div class="ix-row">
         <div class="ix-col ix-col-2">
           <!-- 大盘顶部当前交易对信息 -->
-          <pair-title/>
+          <pair-title/> 
           <!-- 倒计时 & 大盘 -->
           <div
             class="ix-grid ix-grid-tv"
             ref="gridTradingView">
             <TradingView
               ref="TradingView"
-            />
+            /> 
             <!-- <div
               class="active-box"
               v-if="showCountdown">
@@ -38,6 +38,7 @@
             </div> -->
           </div>
         </div>
+
         <div class="trade-top-right">
           <div class="ix-col-rb ix-height-rt flex-row">
             <!-- bids & asks -->
@@ -230,6 +231,7 @@ export default {
             : res.data.items[0].name
         }
       })
+      
     }
     this.state.loading = true
 

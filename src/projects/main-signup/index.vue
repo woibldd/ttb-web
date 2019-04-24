@@ -181,10 +181,10 @@
           <label for="accept">
             我已阅读并同意
             <a
-              href="https://www.ixx.com/services"
+              href="https://www.ix.com/services"
               target="_blank">服务条款</a>
             <a
-              href="https://www.ixx.com/PrivacyPolicy"
+              href="https://www.ix.com/PrivacyPolicy"
               target="_blank">隐私协议</a>
           </label>
         </div>
@@ -209,7 +209,7 @@
       </form>
     </div>
     <div class="h5__panel-next">
-      <p>IXX-全球首家</p>
+      <p>IX-全球首家</p>
       <p>支持比特币作为平台权益证明</p>
       <p>数字货币交易平台</p>
     </div>
@@ -321,7 +321,7 @@ export default {
     meta.content = 'webkit'
     ele.appendChild(meta)
     let title = document.createElement('title')
-    title.append('IXX | 持BTC躺赚20%高额分红！')
+    title.append('IX | 持BTC躺赚20%高额分红！')
     ele.getElementsByTagName('title')[0].remove()
     ele.appendChild(title)
     next()
@@ -400,7 +400,7 @@ export default {
       if (mytoken) {
         location.href = 'https://h5-cn-east.mytokenapi.com/activity/d11/?channel=20181111_ix'
       } else {
-        location.href = 'https://ixx.com/user/login/email'
+        location.href = 'https://ix.com/user/login/email'
       }
     },
     active (active) {

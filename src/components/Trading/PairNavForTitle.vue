@@ -78,6 +78,7 @@
 
 <script>
 import utils from '@/modules/utils'
+import { state } from "@/modules/store";
 import Sort from './Sort'
 import CollectStar from './CollectStar'
 import tickTableMixin from '@/mixins/tick-table'
@@ -134,6 +135,10 @@ export default {
           pair: pair.name
         }
       })
+      state.close_time = pair.close_time || "[*][*][*][9:59-10:00]"
+      state.price_open = pair.price_open || 0.017
+      
+     //this.$eh.$emit("trading:countDown", this.startCountDown);
     },
     pretty (num) {
       num = this.$big(num || 0)

@@ -107,327 +107,319 @@ function onError (err) {
   utils.alert(utils.$app.$i18n.t('page_error'))
 }
 
+export const routes = [
+  {
+    path: '/',
+    name: 'home',
+    meta: {
+      nav: true,
+      class: 'dark',
+      auth: false
+    },
+    component: isMobile ? h5index : HomeNew
+  },
+  {
+    path: '/h5',
+    name: 'hlogin',
+    meta: {
+      auth: false,
+      nav: false,
+      footer: false,
+      zendeskWidget: false
+    },
+    component: h5login
+  },
+  {
+    path: '/h5-index',
+    name: 'h5index',
+    meta: {
+      auth: false,
+      nav: false,
+      footer: false,
+      zendeskWidget: false
+    },
+    component: h5index
+  },
+  {
+    path: '/activity',
+    name: 'activity',
+    component: ActivityIndex,
+    meta: {
+      class: 'dark'
+    },
+    children: [
+      {
+        path: 'kyc_relay',
+        name: 'kycRelay',
+        component: KycRelay
+      },
+      {
+        path: 'rank',
+        name: 'exchangeRank',
+        component: ExchangeRank
+      },
+      {
+        path: 'livermore',
+        name: 'lottery',
+        component: Lottery}
+    ]
+  },
+  {
+    path: '/activity/creation',
+    name: 'creation',
+    component: creation
+  },
+  {
+    path: '/activity/relay',
+    name: 'relay',
+    component: relay
+  },
+  {
+    path: '/lever',
+    name: 'lever',
+    component: lever
+  },
+  {
+    path: '/activity/lock',
+    name: 'LockWarehouse',
+    component: LockWarehouse
+  },
+  {
+    path: '/activity/invite-mine',
+    name: 'InviteMineActivity',
+    component: InviteMineActivity
+  },
+  {
+    path: '/PrivacyPolicy',
+    name: 'PrivacyPolicy',
+    component: PrivacyPolicy
+  },
+  {
+    path: '/services',
+    name: 'terms',
+    component: terms
+  },
+  {
+    path: '/trading/:pair?',
+    name: 'trading',
+    meta: {
+      zendeskWidget: false,
+      auth: false,
+      footer: true,
+      nav: false
+    },
+    component: Trading
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    meta: {
+      auth: true,
+      nav: true,
+      footer: true,
+      class: 'dark',
+      mobileNav: isMobile
+    },
+    redirect: 'profile/info',
+    // redirect: 'profile/ProfileInfo',
+    // redirect: 'profile/ProfileSafety',
+
+    // component: (isMobile && process.env.MODE === 'beta') ? MobileProfile : Profile
+    component: Profile,
+    children: [
+      {
+        path: 'invite',
+        name: 'invite',
+        component: Invite
+      },
+      {
+        path: 'info',
+        name: 'ProfileInfo',
+        component: ProfileInfo
+      },
+      {
+        path: 'api',
+        name: 'ProfileApi',
+        component: ProfileApi
+      },
+      {
+        path: 'security',
+        name: 'ProfileSafety',
+        component: ProfileSafety,
+        redirect: 'security/summary',
+        children: [
+          {
+            path: 'summary',
+            name: 'Safety',
+            component: SecuritySummary
+          },
+          {
+            path: 'phone',
+            name: 'PhoneBind',
+            component: PhoneBind
+          },
+          {
+            path: 'email',
+            name: 'EmailBind',
+            component: eBind
+          },
+          {
+            path: 'change_password',
+            name: 'ModPwd',
+            component: ModPwd
+          },
+          {
+            path: '2fa',
+            name: 'GoogleBind',
+            component: GoogleTitle
+          }
+        ]
+      },
+      {
+        path: 'kyc',
+        name: 'Kyc',
+        component: Kyc,
+        redirect: 'kyc/kyc_step1',
+        children: [
+          {
+            path: 'kyc_step1',
+            name: 'KycStep1',
+            component: Kyc1
+          },
+          {
+            path: 'kyc_step2',
+            name: 'KycStep2',
+            component: Kyc2
+          },
+          {
+            path: 'kyc_step3',
+            name: 'KycStep3',
+            component: Kyc3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    path: '/user',
+    name: 'account',
+    meta: {
+      auth: false,
+      nav: true,
+      class: 'login'
+    },
+    component: Account,
+    children: [
+      {
+        path: 'login',
+        name: 'login',
+        component: Login,
+        redirect: 'login/email'
+      },
+      {
+        path: 'login/:by',
+        name: 'loginBy',
+        component: Login,
+        props: true
+      },
+      {
+        path: 'register',
+        name: 'register',
+        component: Register,
+        redirect: 'register/email'
+      },
+      {
+        path: 'register/:by',
+        name: 'registerBy',
+        component: Register,
+        props: true
+      },
+      {
+        path: 'recover',
+        name: 'recover',
+        component: Recover,
+        redirect: 'recover/email',
+        props: true
+      },
+      {
+        path: 'recover/:by?',
+        name: 'recoverBy',
+        component: Recover,
+        props: true
+      }
+    ]
+  },
+  {
+    path: '/fund',
+    name: 'fund',
+    component: Fund,
+    redirect: { name: 'my' },
+    meta: {
+      auth: true,
+      footer: true,
+      nav: true,
+      class: 'dark'
+    },
+    children: [
+      {
+        path: 'withdraw/:currency?',
+        name: 'withdraw',
+        component: Withdraw
+      },
+      {
+        path: 'deposit/:currency?',
+        name: 'deposit',
+        component: Deposit
+      },
+      {
+        path: 'my',
+        name: 'my',
+        component: MyFund,
+        children: [
+          {
+            path: 'history/:from',
+            name: 'history',
+            alias: 'deposit/:currency/history',
+            component: FundHistory
+          }
+        ]
+      },
+      {
+        path: 'address/:currency?',
+        name: 'address',
+        component: FundAddress
+      }
+    ]
+  },
+  {
+    path: '/orders',
+    name: 'orders',
+    meta: {
+      auth: false,
+      nav: true,
+      footer: true,
+      class: 'dark'
+    },
+    component: MyOrder
+  },
+  {
+    path: '/fee',
+    name: 'Fee',
+    meta: {
+      auth: false,
+      nav: true,
+      footer: true,
+      class: 'dark',
+      mobileNav: isMobile
+    },
+    component: Fee
+  }
+]
+
+
 let router = new Router({
   mode: process.env.NODE_ENV === 'development' ? 'history' : 'history',
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      meta: {
-        nav: true,
-        class: 'dark',
-        auth: false
-      },
-      component: isMobile ? h5index : HomeNew
-    },
-    {
-      path: '/h5',
-      name: 'hlogin',
-      meta: {
-        auth: false,
-        nav: false,
-        footer: false,
-        zendeskWidget: false
-      },
-      component: h5login
-    },
-    {
-        path: '/RushBuy',
-        name: 'RushBuy',
-        meta: {
-          auth: false,
-          nav: true,
-          footer: false,
-          class: 'absolute'
-        },
-        component: RushBuy,
-    },
-    {
-      path: '/h5-index',
-      name: 'h5index',
-      meta: {
-        auth: false,
-        nav: false,
-        footer: false,
-        zendeskWidget: false
-      },
-      component: h5index
-    },
-    {
-      path: '/activity',
-      name: 'activity',
-      component: ActivityIndex,
-      meta: {
-        class: 'dark'
-      },
-      children: [
-        {
-          path: 'kyc_relay',
-          name: 'kycRelay',
-          component: KycRelay
-        },
-        {
-          path: 'rank',
-          name: 'exchangeRank',
-          component: ExchangeRank
-        },
-        {
-          path: 'livermore',
-          name: 'lottery',
-          component: Lottery}
-      ]
-    },
-    {
-      path: '/activity/creation',
-      name: 'creation',
-      component: creation
-    },
-    {
-      path: '/activity/relay',
-      name: 'relay',
-      component: relay
-    },
-    {
-      path: '/lever',
-      name: 'lever',
-      component: lever
-    },
-    {
-      path: '/activity/lock',
-      name: 'LockWarehouse',
-      component: LockWarehouse
-    },
-    {
-      path: '/activity/invite-mine',
-      name: 'InviteMineActivity',
-      component: InviteMineActivity
-    },
-    {
-      path: '/PrivacyPolicy',
-      name: 'PrivacyPolicy',
-      component: PrivacyPolicy
-    },
-    {
-      path: '/services',
-      name: 'terms',
-      component: terms
-    },
-    {
-      path: '/trading/:pair?',
-      name: 'trading',
-      meta: {
-        zendeskWidget: false,
-        auth: false,
-        footer: true,
-        nav: false
-      },
-      component: Trading
-    },
-    {
-      path: '/profile',
-      name: 'profile',
-      meta: {
-        auth: true,
-        nav: true,
-        footer: true,
-        class: 'dark',
-        mobileNav: isMobile
-      },
-      redirect: 'profile/info',
-      // redirect: 'profile/ProfileInfo',
-      // redirect: 'profile/ProfileSafety',
-
-      // component: (isMobile && process.env.MODE === 'beta') ? MobileProfile : Profile
-      component: Profile,
-      children: [
-        {
-          path: 'invite',
-          name: 'invite',
-          component: Invite
-        },
-        {
-          path: 'info',
-          name: 'ProfileInfo',
-          component: ProfileInfo
-        },
-        {
-          path: 'api',
-          name: 'ProfileApi',
-          component: ProfileApi
-        },
-        {
-          path: 'security',
-          name: 'ProfileSafety',
-          component: ProfileSafety,
-          redirect: 'security/summary',
-          children: [
-            {
-              path: 'summary',
-              name: 'Safety',
-              component: SecuritySummary
-            },
-            {
-              path: 'phone',
-              name: 'PhoneBind',
-              component: PhoneBind
-            },
-            {
-              path: 'email',
-              name: 'EmailBind',
-              component: eBind
-            },
-            {
-              path: 'change_password',
-              name: 'ModPwd',
-              component: ModPwd
-            },
-            {
-              path: '2fa',
-              name: 'GoogleBind',
-              component: GoogleTitle
-            }
-          ]
-        },
-        {
-          path: 'kyc',
-          name: 'Kyc',
-          component: Kyc,
-          redirect: 'kyc/kyc_step1',
-          children: [
-            {
-              path: 'kyc_step1',
-              name: 'KycStep1',
-              component: Kyc1
-            },
-            {
-              path: 'kyc_step2',
-              name: 'KycStep2',
-              component: Kyc2
-            },
-            {
-              path: 'kyc_step3',
-              name: 'KycStep3',
-              component: Kyc3
-            }
-          ]
-        }
-      ]
-    },
-    {
-      path: '/user',
-      name: 'account',
-      meta: {
-        auth: false,
-        nav: true,
-        class: 'login'
-      },
-      component: Account,
-      children: [
-        {
-          path: 'login',
-          name: 'login',
-          component: Login,
-          redirect: 'login/email'
-        },
-        {
-          path: 'login/:by',
-          name: 'loginBy',
-          component: Login,
-          props: true
-        },
-        {
-          path: 'register',
-          name: 'register',
-          component: Register,
-          redirect: 'register/email'
-        },
-        {
-          path: 'register/:by',
-          name: 'registerBy',
-          component: Register,
-          props: true
-        },
-        {
-          path: 'recover',
-          name: 'recover',
-          component: Recover,
-          redirect: 'recover/email',
-          props: true
-        },
-        {
-          path: 'recover/:by?',
-          name: 'recoverBy',
-          component: Recover,
-          props: true
-        }
-      ]
-    },
-    {
-      path: '/fund',
-      name: 'fund',
-      component: Fund,
-      redirect: { name: 'my' },
-      meta: {
-        auth: true,
-        footer: true,
-        nav: true,
-        class: 'dark'
-      },
-      children: [
-        {
-          path: 'withdraw/:currency?',
-          name: 'withdraw',
-          component: Withdraw
-        },
-        {
-          path: 'deposit/:currency?',
-          name: 'deposit',
-          component: Deposit
-        },
-        {
-          path: 'my',
-          name: 'my',
-          component: MyFund,
-          children: [
-            {
-              path: 'history/:from',
-              name: 'history',
-              alias: 'deposit/:currency/history',
-              component: FundHistory
-            }
-          ]
-        },
-        {
-          path: 'address/:currency?',
-          name: 'address',
-          component: FundAddress
-        }
-      ]
-    },
-    {
-      path: '/orders',
-      name: 'orders',
-      meta: {
-        auth: false,
-        nav: true,
-        footer: true,
-        class: 'dark'
-      },
-      component: MyOrder
-    },
-    {
-      path: '/fee',
-      name: 'Fee',
-      meta: {
-        auth: false,
-        nav: true,
-        footer: true,
-        class: 'dark',
-        mobileNav: isMobile
-      },
-      component: Fee
-    }
-  ],
+  routes: routes,
   scrollBehavior (to, from, savedPosition) {
     // if (to.name === 'trading') {
     return { x: 0, y: 0 }
