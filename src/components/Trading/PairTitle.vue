@@ -42,10 +42,19 @@
         class="fl grid-increase"
       >{{ $t('trading_title_start_time', {startTime: $moment.unix(startTime).format('hh:mm:ss')}) }}</p>
       <p
-        class="fl grid-increase"
-        v-html="$t('trading_title_end_time', {endTime: $moment.unix(endTime).format('hh:mm:ss'), countDownText: $t('trading_title_count_down', {countdown:countDown}) }) "
-      ></p>
-      <p class="fl grid-increase">{{ $t('trading_title_start_price', {price: state.price_open || "0.017"}) }}</p>
+        class="fl grid-increase" 
+      >
+        {{$t('trading_title_end_time', {endTime: $moment.unix(endTime).format('hh:mm:ss')})}}
+        <span
+          v-show="countDownStatus===1"
+          v-html="$t('trading_title_count_downE', {countdown:countDown})"> 
+        </span>  
+        <span
+          v-show="countDownStatus===2"
+          v-html="$t('trading_title_count_downS', {countdown:countDown})"> 
+        </span> 
+      </p>
+      <p class="fl grid-increase">{{ $t('trading_title_start_price', {price: state.price_open}) }}</p>
     </div>
   </div>
 </template>
@@ -65,7 +74,8 @@ export default {
       startTime: 0,
       endTime: 0,
       countDown: "", 
-      interval: 0
+      interval: 0,
+      countDownStatus: 1,
     };
   },
   components: {
@@ -127,7 +137,7 @@ export default {
     },
     startCountDown() {
       //debugger
-        if(this.pair === "SP_USDT"){
+      if(this.pair === "SP_USDT"){
         let closelist = [];
         if (this.state.close_time) {
           closelist = this.state.close_time.match(
@@ -144,6 +154,7 @@ export default {
         let month = date.getMonth() + 1;
         let day = date.getDate();
         let timeReg = closelist[3].replace("[", "").replace("]", "");
+        //timeReg = "16:50-17:06"
         let end = timeReg.split("-")[0];
         let start = timeReg.split("-")[1];
 
@@ -156,8 +167,36 @@ export default {
         var $this = this;
         setTimeout(function() {
           let curTime = Math.round(new Date() / 1000); //开始时间
+
+          if(curTime > $this.endTime && curTime > $this.startTime) {
+            $this.endTime += 86400
+            //停盘倒计时
+            $this.countDownStatus = 1
+          }
+          else if(curTime < $this.endTime && curTime < $this.startTime) {
+            $this.startTime -= 86400
+            //停盘倒计时
+            $this.countDownStatus = 1
+          }
+          else { 
+            //开盘倒计时
+            $this.countDownStatus = 2
+          }
+
           this.interval = setInterval(function() {
             var ts = $this.endTime - curTime; //计算剩余的毫秒数
+            if($this.endTime > $this.startTime) {
+              ts = $this.endTime - curTime; 
+              //console.log("停盘倒计时")
+              //停盘倒计时
+              $this.countDownStatus = 1
+            }
+            else {
+              ts = $this.startTime - curTime; 
+              //console.log("开盘倒计时")
+              //开盘倒计时
+              $this.countDownStatus = 2
+            } 
             var hh = parseInt((ts / 60 / 60) % 24, 10); //计算剩余的小时数
             var mm = parseInt((ts / 60) % 60, 10); //计算剩余的分钟数
             var ss = parseInt(ts % 60, 10); //计算剩余的秒数
@@ -168,7 +207,15 @@ export default {
               $this.countDown = ` ${hh}:${mm}:${ss}`;
               curTime = Math.round(new Date() / 1000);
             } else {
-              $this.endTime += 86400;
+              if($this.endTime > $this.startTime) {
+                $this.startTime += 86400 //一天的秒数
+                //转到开盘倒计时
+              }
+              else {
+                $this.endTime += 86400;
+                //转到停盘倒计时
+              }
+
             }
           }, 1000);
           function checkTime(i) {
@@ -185,12 +232,23 @@ export default {
     }
   },
   created() {
-    this.startCountDown()
     //  this.$eh.$on("trading:countDown", this.startCountDown);
+  },
+  mounted() {
+    if(!!this.startCountDown) {
+      this.startCountDown()
+    }
   },
   watch: {
     pair() {
-      this.startCountDown()
+      if(!!this.startCountDown) {
+        this.startCountDown()
+      }
+    },
+    countDownStatus(v){
+      if(v = 2){
+        this.state.price_open = this.state.pro.lastPrice;
+      }
     }
   }
 };

@@ -173,7 +173,7 @@ export default {
   },
   async created () {
     this.$eh.$on('protrade:layout:init', this.layoutInit)
-  }
+  }, 
 }
 </script>
 
