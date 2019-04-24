@@ -14,6 +14,7 @@
             <router-link
               :to="{name: 'RushBuy'}"
               class="nav_link" style="padding-left:10px;">{{ $t('FrenzySaleZone') }}(SP)<img src="@/assets/hot.png" alt="" style="position: relative;top: 5px;left: 5px;"></router-link>
+ 
             <!-- <div class="nav_link arrow-down">
             <a
               :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"
