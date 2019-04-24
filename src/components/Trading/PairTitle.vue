@@ -124,7 +124,7 @@ export default {
         .toFixed(2);
     },
     startCountDown() {
-      debugger
+      //debugger
         if(this.pair === "SP_USDT"){
         let closelist = [];
         if (this.state.close_time) {

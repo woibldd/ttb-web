@@ -426,6 +426,7 @@ export default {
       if (!res.code) {
         this.assignData(res.data)
       }
+      debugger
       this.socket = ws.create(`orderbook/${this.pair}/${this.offset}/${this.accuracy}/20`)
       this.socket.$on('message', (data) => {
         this.deepthData = data

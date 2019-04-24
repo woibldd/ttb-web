@@ -267,6 +267,7 @@ const service = {
     }))
   },
   getQuoteOrderbook ({ pair, accuracy, offset, size }) {
+    debugger
     return quote(`orderbook/${pair}`, { offset, accuracy, size })
   },
   getQuoteDeal ({ pair, size }) {

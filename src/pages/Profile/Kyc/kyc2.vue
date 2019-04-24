@@ -232,7 +232,7 @@ export default {
     },
     async submit () {
       if (this.front.loading || this.back.loading || this.hold.loading) {
-        debugger
+        //debugger
         utils.alert(this.$i18n.t('kyc_image_uploading'))
         return
       }
