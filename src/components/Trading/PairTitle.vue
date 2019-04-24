@@ -45,7 +45,7 @@
         class="fl grid-increase"
         v-html="$t('trading_title_end_time', {endTime: $moment.unix(endTime).format('hh:mm:ss'), countDownText: $t('trading_title_count_down', {countdown:countDown}) }) "
       ></p>
-      <p class="fl grid-increase">{{ $t('trading_title_start_price', {price: state.price_open}) }}</p>
+      <p class="fl grid-increase">{{ $t('trading_title_start_price', {price: state.price_open || "0.017"}) }}</p>
     </div>
   </div>
 </template>

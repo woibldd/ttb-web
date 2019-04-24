@@ -136,7 +136,7 @@ export default {
         }
       })
       state.close_time = pair.close_time || "[*][*][*][9:59-10:00]"
-      state.price_open = pair.price_open || 0
+      state.price_open = pair.price_open || 0.017
       
      //this.$eh.$emit("trading:countDown", this.startCountDown);
     },
