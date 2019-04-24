@@ -25,7 +25,7 @@
         {{ $t('increase') }}
         <i
           :class="{'color-up': delta > 0, 'color-down': delta < 0}"
-        >{{ delta > 0 ? '+' : '' }}{{ delta }}%</i>
+        >{{ delta > 0 ? '+' : '' }}{{ delta }}% </i>
       </p>
       <p
         class="fl grid-high"
@@ -64,8 +64,7 @@ export default {
       show: false,
       startTime: 0,
       endTime: 0,
-      countDown: "",
-      openPrice: 123,
+      countDown: "", 
       interval: 0
     };
   },
@@ -112,10 +111,13 @@ export default {
       }
       return {};
     },
-    delta() {
+    delta() { 
       const tick = this.state.pro.pairTick;
       if (!tick || tick.increment_24h === tick.current) {
         return 0;
+      } 
+      if(this.pair === "SP_USDT"){
+        tick.increment_24h = this.$big(tick.current).minus(this.state.price_open || 0.017);
       }
       return this.$big(tick.increment_24h)
         .mul(100)
