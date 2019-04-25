@@ -283,7 +283,7 @@ export default{
       name: 'SP',
       full_name: '光元(SunPower)',
       brief_info: '光元(SunPower)区块链是太阳能光伏发电与区块链技术的完美结合，利用分布式光伏发电解决了区块链去中心化和能源问题。光元区块链更关注区块链底层技术和长远发展，通过三层式区块链构架，致力于发展高 TPS 支付应用体系，实体太阳能电池为区块链系统做价值支撑，并为未来留下充分的升级扩展可能性，以求最大程度解决区块链不可能三角问题。',
-      issue_time: '2019-4-23',
+      issue_time: '2019-4-18',
       issue_all: '6亿', // 发行总量
       issue_circulation: '1亿', // 流通总量 
       token_price:'--',
@@ -295,7 +295,7 @@ export default{
       name: 'SP',
       full_name: '光元(SunPower)',
       brief_info: '光元（SunPower）區塊鏈是太陽能光伏發電與區塊鏈科技的完美結合，利用分佈式光伏發電解决了區塊鏈去中心化和能源問題。光元區塊鏈更關注區塊鏈底層科技和長遠發展，通過三層式區塊鏈構架，致力於發展高TPS支付應用體系，實體太陽能電池為區塊鏈系統做價值支撐，並為未來留下充分的陞級擴展可能性，以求最大程度解决區塊鏈不可能三角問題。',
-      issue_time: '2019-4-23',
+      issue_time: '2019-4-18',
       issue_all: '6億', // 发行总量
       issue_circulation: '1億', // 流通总量  
       token_price:'--',
@@ -307,7 +307,7 @@ export default{
       name: 'SP',
       full_name: 'SunPower',
       brief_info: 'The SunPower blockchain is the perfect combination of solar photovoltaic power generation and blockchain technology, using distributed photovoltaic power generation to solve blockchain decentralization and energy issues.  The optical element blockchain pays more attention to the underlying technology and long-term development of the blockchain. Through the three-tier blockchain architecture, it is committed to developing a high TPS payment application system. The physical solar cells support the value of the blockchain system and remain for the future.  Under the full upgrade expansion possibilities, in order to maximize the resolution of the blockchain impossible triangle problem.',
-      issue_time: '2019-4-23',
+      issue_time: '2019-4-18',
       issue_all: '600 million', // 发行总量
       issue_circulation: '100 million', // 流通总量 
       token_price:'--',
@@ -319,7 +319,7 @@ export default{
       name: 'SP',
       full_name: 'SunPower',
       brief_info: '광원 (SunPower) 블록쇠는 태양광볼트발전과 블록쇠사슬기술의 완벽한 결합으로서 분산식광볼트발전으로 블록쇠의 중심화와 에너지 문제를 해결하는데 리롭다.광 위안 사슬 에 더 큰 관심 사슬 밑바닥 기술 과 장기적 인 발전 을 통 해 3 층 식 사슬 프레임 을 발 전시 켜 나 가 고 TPS 지급 응용 체계, 실물 태양 전지를 가치 사슬 시스템 을 지탱 하 고 미래 의 업그레이드 를 남 기고 충분히 확장 에 나 서고 최대한 해결 가능성 区块 사슬 불가능 삼각 물 문제 다.',
-      issue_time: '2019-4-23',
+      issue_time: '2019-4-18',
       issue_all: '600 million', // 发行总量
       issue_circulation: '100 million', // 流通总量 
       token_price:'--',
