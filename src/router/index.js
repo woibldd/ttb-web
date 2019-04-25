@@ -63,7 +63,8 @@ const KycRelay = () => import(/* webpackChunkName: "KycRelay" */ '@/pages/active
 const ExchangeRank = () => import(/* webpackChunkName: "ExchangeRank" */ '@/pages/active/ExchangeRank')
 const Lottery = () => import(/* webpackChunkName: "lottery" */ '@/pages/active/lottery')
 const RushBuy = () => import(/* webpackChunkName: "home" */ '@/pages/rushBuy.vue')
-
+// 下载
+const Download = () => import(/* webpackChunkName: "Download" */ '@/pages/download/download.vue')
 async function beforeEach (to, from, next) {
   state.loading = true
   const auth = utils.getRouteMeta(to, 'auth')
@@ -163,6 +164,17 @@ export const routes = [
         name: 'lottery',
         component: Lottery}
     ]
+  },
+ {
+    path: '/download',
+    name: 'Download',
+     meta: {
+      auth: false,
+      nav: true,
+      footer: true,
+      class: 'dark'
+    },
+    component: Download   
   },
   {
     path: '/activity/creation',
