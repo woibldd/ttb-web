@@ -830,8 +830,9 @@
   "RushBuy_text_list_33":"3. Since participation in such projects is subject to, but not limited to, the possibility of the project party not issuing coins and the above risks, please carefully participate in the individual's risk-taking ability after understanding the project content and understanding the above risks。",
   "RushBuy_text_list_34":"Input Buy Quantity",
   
-  "trading_title_start_time":"每日开盘时间 %{startTime}",
-  "trading_title_end_time":"每日停盘时间 %{endTime}",
-  "trading_title_count_down":"停盘倒计时 %{countdown}",
-  "trading_title_start_price":"今日开盘价格"
+  "trading_title_start_time":"daily opening time %{startTime}",
+"trading_title_end_time":"daily closing time %{endTime}",
+"trading_title_count_downE":"( <span style='color:#FF4E4E;'> countdown to closing  %{countdown}</span>)",
+"trading_title_count_downS":"( <span style='color:#22CED0;'>countdown to opening %{countdown}</span>)",
+"trading_title_start_price":" today’s opening price %{price}"
 }

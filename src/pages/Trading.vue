@@ -142,12 +142,12 @@ export default {
           const res = await service.getPairInfo({ symbol: pair })
           if (!res.code) {
             this.state.pro.pairInfo = res.data
+            this.state.close_time = res.data.close_time
+            this.state.price_open = res.data.price_open || 0.017
           } else {
             this.state.pro.pairInfo = null
           }
-          await this.refreshBalance()
-          // this.countdownText = '-'
-          // this.closeCountdown = false
+          await this.refreshBalance() 
         }
         this.state.pro.lock = false
       },
