@@ -21,11 +21,11 @@
         <section class="order-section" style='width:500px;'>
           <div class="only-orders">
             <!-- 委托列表 -->
-            <div class="ix-col ix-col-2 ml-4 relative" style='width:50%;'>
+            <div class="ix-col ix-col-2 ml-4 mt-4 relative" style='width:50%;'>
               <order-book/>
             </div>
             <!--  最新成交 -->
-            <div class="ix-col ix-col-3 ml-4 relative" style='width:50%;'>
+            <div class="ix-col ix-col-3 ml-4 mt-4 relative" style='width:50%;'>
               <order-deal/>
             </div>
           </div>
@@ -36,7 +36,7 @@
         </section>
         <!-- 操作 -->
         <!-- 交易委托， 杠杆 -->
-        <div class="ix-col ix-col-4 ml-4">
+        <div class="ix-col ix-col-4 ml-4 mt-4">
           <order-action/>
         </div>
       </div>

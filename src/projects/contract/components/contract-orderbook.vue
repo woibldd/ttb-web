@@ -1,6 +1,6 @@
 <template>
   <div class="orderbook-container">
-    <div class="ix-pannel flex">
+    <div class="ix-pannel flex ">
       <div class="ix-header">
         {{ $t('contract_block_orderbook') }}
         <div

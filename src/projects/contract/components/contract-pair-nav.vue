@@ -1,6 +1,6 @@
 <template>
   <div class="contract-pair-table">
-    <div class="pair-tab flex-lr">
+    <div class="pair-tab flex-lr mt-4">
       <div
         class="pair-tab-item pointer"
         @click="changePair(pair)"
