@@ -54,7 +54,7 @@
           v-html="$t('trading_title_count_downS', {countdown:countDown})"> 
         </span> 
       </p>
-      <p class="fl grid-increase">{{ $t('trading_title_start_price', {price: pairTick.lowest_24h}) }}</p>
+      <p class="fl grid-increase">{{ $t('trading_title_start_price', {price: state.price_open}) }}</p>
     </div>
   </div>
 </template>
@@ -134,13 +134,7 @@ export default {
         .div(this.$big(tick.current).minus(tick.increment_24h))
         .round(2, this.C.ROUND_HALF_UP)
         .toFixed(2);
-    },
-    // openPrice() {
-    //   const tick = this.state.pro.pairTick;
-    //   if (!tick || tick.lowest_24h || tick.lowest_24h > 0) {
-    //     return tick.lowest_24h;
-    //   } 
-    // },
+    }, 
     startCountDown() {
       //debugger
       if(this.pair === "SP_USDT"){

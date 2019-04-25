@@ -704,8 +704,9 @@
   "RushBuy_text_list_34":"수량 을 입력 하다",
 
   
-"trading_title_start_time":"每日开盘时间 %{startTime}",
-"trading_title_end_time":"每日停盘时间 %{endTime}",
-"trading_title_count_down":"停盘倒计时 %{countdown}",
-"trading_title_start_price":"今日开盘价格"
+  "trading_title_start_time":"일일 개장 시간 %{startTime}",
+  "trading_title_end_time":"일일 마감 시간 %{endTime}",
+  "trading_title_count_downE":"( <span style='color:#FF4E4E;'>카운트 다운 %{countdown}</span>)",
+  "trading_title_count_downS":"( <span style='color:#22CED0;'>개방 카운트다운%{countdown}</span>)",
+  "trading_title_start_price":"오늘 개장가격%{price}"
 }
