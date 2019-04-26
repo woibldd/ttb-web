@@ -710,9 +710,9 @@
 
 
   "contract": "合约交易",
-  
-    
-   
+
+
+
    "activity_rank_total_reward_yet": "当前奖池共累计",
     "activity_rank_people": "挖矿大赛排行榜",
     "activity_rank_sign": "挖矿大赛报名",
@@ -728,7 +728,7 @@
     "activity_rank_rules_detail": "<p>1、参赛条件：用户需注册成为IX用户，并点击“我要报名”加入挖矿大赛；<\/p><p>2、活动期间个人挖矿量及邀请人挖矿量8%计入参与者挖矿量排行榜；挖矿排行榜数据每小时更新一次；<\/p><p>3、活动截止，挖矿量排名前五用户获得百万大奖；<\/p><p>4、本次活动期限7天，7天后重新开启下一轮。<\/p>",
     "activity_rank_intro_title": "平台手续费奖池奖励，活动截止时，挖矿量排名前五的用户，分别获得：",
     "activity_rank_all_people": "全民",
-    "activity_rank_mine_competition": "挖矿大赛", 
+    "activity_rank_mine_competition": "挖矿大赛",
     "activity_rank_time_detail": "{start_y}年{start_m}月{start_d}日00:00-{end_y}年{end_m}月{end_d}日00:00",
     "activity_rank_reward_pay_time": "奖励派发时间：活动结束后3个工作日内",
     "activity_rank_only_people":"仅展示排名前20的用户",
@@ -739,7 +739,7 @@
     "activity_rank_reward_rules_e": "5、奖池分配：挖矿量排名前五的账户瓜分该奖池，<span style=\"color: #CD7B19\">前五名分配奖池的比例分别为50%：25%：12.5%：7.5%：5%，</span>即第一名可以取得平台总收入的1%；",
     "activity_rank_reward_rules_f": "6、派发时间：活动结束次日即派发奖金；",
     "activity_rank_reward_rules_g": "7、如果没有特别说明，首期“挖矿大赛”活动结束后，第二期“挖矿大赛”自动开启。",
-    
+
     "activity_lottery_quiz":"竞猜BTC/USDT",
     "activity_lottery_last_bonus": "上期奖励：",
     "activity_lottery_ix_beting": "IX 投票",
@@ -791,12 +791,12 @@
     "activity_lottery_bid_history":"投注记录",
     "activity_lottery_trade_office_price": "BTC/USDT价格按Bitfinex、Binance、Huobi、IX、Okex 五家交易所每个小时开盘价和收盘价计算，去掉一个最高价和一个最低价，其余三个价格取平均值且取整数（小数点后按四舍五入计算，例：6656.58取整数为6657；6654.45取整数为6654）,每轮竞猜时间周期为1小时。每轮竞猜前20分钟为投票时间，后40分钟进行封盘处理。",
     "activity_lottery_serial":"期",
-    
+
     "activity_lottery_timeout": "本期竞猜投注时间已到，请下期继续",
     "activity_lottery_reward_history": "开奖记录",
     "activity_lottery_stop_quiz": "停止竞猜，坐等开奖",
     "activity_lottery_destroy_ix_amount": "竞猜活动已销毁：",
-   
+
     "mine_current_ix_price": "当前IX挖矿价格",
     "mine_current_ix_desc": "IX分红于2018-12-13日起累积至IX/BTC交易对复牌后发放",
     "mine_rule": "挖矿规则",
@@ -943,7 +943,7 @@
     "about_eos_address_label":"关于地址标签",
     "about_eos_address_label_a":"EOS 充币时同时需要一个充值地址和 EOS 地址标签(又名Tag/memo等)。地址标签是一种保证您的充币地址唯一性的数字串，与充币地址成对出现并一一对应。",
     "about_eos_address_label_b":"请您务必遵守正确的EOS充值步骤，在提币时输入完整信息，否则将面临丢失币的风险！",
-    "nav_get_robot":"领机器人", 
+    "nav_get_robot":"领机器人",
     "activity_lock_title_a":"如需使用机器人挖矿，需要优先创建API Key",
     "activity_lock_title_b":"创建API Key后，可以开始使用机器人进行挖矿",
     "activity_lock_fenhong":"锁仓分红",
@@ -961,8 +961,8 @@
     "order_ix_total_discount":"累计抵扣",
     "trading_lever":"合约交易",
     "activity_lock_share":"锁仓分红规则：",
-  
-    "contract_account": "合约账户", 
+
+    "contract_account": "合约账户",
     "account_balance": "账户余额",
     "transaction_record": "交易记录",
     "warehouse_margin": "仓位保证金",
@@ -1014,7 +1014,7 @@
     "contract_history_plan_current": "计划委托",
     "contract_history_plan_history": "计划历史",
     "contract_history_stop_loss": "止损委托",
-  
+
     "contract_history_deal_fills": "已成交",
     "contract_history_deal_fills_tips": "这里显示了最近的100个交易记录。如需查看完整交易历史，请进入您的账户页面。",
     "contract_history_fund_info": "资产信息",
@@ -1236,8 +1236,8 @@
     "contract_order_repeat": "您已有平仓订单，请撤销对应订单后操作",
     "contract_order_success": "下单成功",
     "contract_order_success_type": "您%{orderType}保证金成功",
-  
-  
+
+
     "contract_simple_success":"成功",
     "contract_simple_fail":"失败",
     "contract_operate_default":"未确认",
@@ -1276,7 +1276,7 @@
     "contract_trigger_close":"触发后平仓",
     "contract_deal_type_5":"限价止盈",
     "contract_deal_type_6":"市价止盈",
-  
+
     "contract_trigger_price_rule":"触发价格",
     "mine_bonus_volume_business": "昨日全站交易量折合：",
     "contract_commission":  "合约返佣",
@@ -1286,7 +1286,7 @@
     "warn_confirm_text":"请点击确认此操作",
     "stop_loss_apply":"提交止损委托",
     "stop_win_apply":"提交止盈委托",
-  
+
     "activity_notice_titla_a":"IX老客户邀请活动",
     "activity_notice_describe_a":"在2019年3月1日24:00（UTC+8，以下同）前成功注册IX.com的老用户，通过专属邀请链接邀请新用户注册，推荐人将连续365天获得其推荐用户合约交易手续费不同比例的推荐奖励，具体奖励比例取决于被推荐用户的合约总交易量，如下：",
     "acitvity_notice_content_a":"被推荐人总交易量",
@@ -1303,7 +1303,7 @@
     "activity_notice_annotation_a":"注： 返佣主要来源于被推荐用户交易产生的Taker手续费。",
     "activity_notice_annotation_b":"奖励发放时间：当天推荐奖励数据每日24:00更新一次，将在次日12:00发放至推荐人的平台账户。",
     "dialog_never_show":"一天内不再显示",
-  
+
     "guide_title_index0_step0":"交互式教程",
     "guide_title_index0_step1":"简单三步，了解IX合约玩法",
     "guide_title_index0_step2":"什么是买入开多？",
@@ -1313,94 +1313,94 @@
     "guide_title_index0_step6":"为什么会爆仓？",
     "guide_title_index0_step7":"进入教程",
     "guide_title_index0_step8":"我很了解IX合约，直接跳过",
-  
+
     "guide_title_index0_step9":"赚钱区",
     "guide_title_index0_step10":"赔钱区",
     "guide_title_index0_step11":"爆仓区",
-  
+
     "guide_title_index1_step0":"Hi，欢迎来到IX合约交互教程，为了方便您计算和理解，教程中所有的数据均为虚拟",
     "guide_title_index1_step1":"一起来学习吧！",
     "guide_title_index1_step2":"开始学习",
-  
+
     "guide_title_index2_step0":"假设今天BTC的价格是$4000，请您判断BTC价格今后是上涨还是下跌？",
     "guide_title_index2_step1":"目测会涨",
     "guide_title_index2_step2":"认为会跌",
-  
+
     "guide_title_index3_step0":"低买高卖",
     "guide_title_index3_step1":"当您认为后市会涨时，您就可以以$4000<span style=\"color:#09C989\">买入BTC</span>等待价格上涨后<span style=\"color:#F24E4D\">卖出BTC</span>获利",
     "guide_title_index3_step2":"立即买入BTC <span>也成为“买入开多”</span>",
-  
+
     "guide_title_index4_step0":"请您输入买入数量（教程数据最多支持10BTC）",
     "guide_title_index4_step1":"=$%{number}=%{number}张",
     "guide_title_index4_step2":"1张=$1",
     "guide_title_index4_step3":"确认买入数量",
-  
+
     "guide_title_index5_step0":"你买入的数量：%{number}BTC=$%{number1}=%{number1}张（1张=$1）",
     "guide_title_index5_step1":"杠杆倍数：10倍（意味着您只需要$400就可以买到价值$4,000的BTC）",
     "guide_title_index5_step2":"实际开仓所属资金=<span class=\"guide-math-color\">买入数量<br>杠杆倍数</span> = <span>%{guide_number2}BTC<br>10倍</span> = <strong>%{guide_number}BTC≈$%{guide_number1}</strong><b>俗称“保证金”</b>",
     "guide_title_index5_step3":"立即开仓<span>支付%{guide_number2}BTC",
-  
+
     "guide_title_index6_step0":"开仓成功，让我们看看行情......",
-  
+
     "guide_title_index7_step0":"恭喜，您的判断正确！您的判断正确！现在BTC已经涨到$5000，您现在可以",
     "guide_title_index7_step1":"继续持有，博取更高收益",
     "guide_title_index7_step2":"立即卖出，锁定收益(卖出平仓)",
-  
+
     "guide_title_index8_step0":"明智之选！下面我们来计算收益：",
     "guide_title_index8_step1":"第一步 计算美元收益：当前价 - 开仓价 = $5,000 - $4,000 = $1,000",
     "guide_title_index8_step2":"第二步 收益折算成BTC：<span class=\"guide-math-color\">美元收益×交易数量<br>当前BTC价格</span> = <span>$1,000<br>$5,000</span> × %{guide_number3} ≈ %{guide_number4}BTC",
     "guide_title_index8_step3":"本次模拟开仓，您实现盈利 %{guide_number5}BTC",
     "guide_title_index8_step4":"隐藏关 - “套期保值”已解锁",
     "guide_title_index8_step5":"立即进入",
-  
+
     "guide_title_index9_step0":"其实，合约在专业金融领域中有很(zui)大用途，是用来\"套期保值\"",
     "guide_title_index9_step1":"<p>某矿工根据当前的算力产出效率预测自己在一个月后可以获得10BTC的挖矿收入，当前BTC的价格为500美元/个。若以当前价格卖出挖矿所得的BTC，则矿工的挖矿所得将会超过挖矿成本，若BTC价格下跌，则可能导致矿工亏损。因此，矿工需要用比特币虚拟合约来锁定最终的挖矿收益。 </p><p>假设当前的btc价格是500美元/个，btc虚拟合约的价格同样为500美元/个。矿工需要锁定的收益=10BTC*500美元/BTC=5000美元，而每张合约的市值是1美元，因此该矿工需要开空的合约数量=5000美元/1美元=5000张。 </p><p>假设在一个月后，BTC的实际价格为600美元/个。 </p><p>虚拟合约的收益为【（1美元（合约面值）/600美元（平仓价格）-1美元（合约面值）/500美元（开仓价格））】*5000（合约数量）=-1.6667个，即btc期的亏损为1.6667个btc，则该矿工实际可以卖出的btc数量为10-1.66667=8.3333个btc，按照600美元/个的价格卖出后，其实际效益=600*8.3333≈5000美元。 </p><p>假设在一个月后，BTC的实际价格为400美金/个， </p><p>虚拟合约的收益为（100/400-100/500）*50=2.5BTC，即虚拟合约的盈利为2.5btc，矿工可以卖出的总量10+2.5=12.5btc，卖出价格为400usd/个，卖出后的收益为12.5*400=5000美元。 </p><p>如上所述，通过提前建立对应的虚拟合约仓位，矿工可以通过套期保值锁定自己的最终美元收益。 </p>",
     "guide_title_index9_step2":"退出教程",
-  
+
     "guide_title_index10_step0":"让我们继续.....",
     "guide_title_index10_step1":"似乎情况不妙......",
-  
+
     "guide_title_index11_step0":"糟糕！价格下跌，您已经出现了亏损！要现在卖出吗 ? <br>您可以选择：",
     "guide_title_index11_step1":"继续持有，等一波反弹",
     "guide_title_index11_step2":"立即卖出止损（卖出平仓）",
-  
+
     "guide_title_index12_step0":"不好，因市场行情波动剧烈，您的保证金已亏为零，您已爆仓",
     "guide_title_index12_step1":"怎样才算爆仓",
-  
+
     "guide_title_index13_step0":"第一步 计算美亏损： 开仓价-当前价=$3636-$4,000=-$364",
     "guide_title_index13_step1":"第二步 收益折算成BTC： <span class=\"guide-math-color\">美元收益×交易数量<br>当前BTC价格</span> = <span>-$364<br>$3636</span>× %{guide_number6} ≈ - %{guide_number7}BTC 开仓保证金",
     "guide_title_index13_step2":"第三步 与保证金进行比较：保证金 - 亏损金额 = %{guide_number8} BTC - %{guide_number8} BTC = 0",
     "guide_title_index13_step3":"重新选择",
     "guide_title_index13_step4":"再玩一次",
-  
+
     "guide_title_index14_step0":"高卖低买",
     "guide_title_index14_step1":"当您认为后市会跌时，您可以先以$4000卖出BTC，假设价格下跌至$3000再买回BTC，此时可获利",
     "guide_title_index14_step2":"这里的卖出BTC并不是指卖出您现有账户中的BTC，而是意味着您向平台无利息地借了一个BTC去卖",
     "guide_title_index14_step3":"立即卖出BTC <span>也称为“卖出开空”</span>",
-  
+
     "guide_title_index15_step0":"请您输入买入数量（教程数据最多支持10BTC）",
     "guide_title_index15_step1":"=$%{guide_number9} = %{guide_number9}张",
     "guide_title_index15_step2":"确认卖出数量",
-  
-  
+
+
     "guide_title_index16_step0":"您的开仓数量：%{guide_number11}张 = $%{guide_number11} = %{guide_number12}BTC",
     "guide_title_index16_step1":"开仓倍数： 10 <span class=\"guide-smail-text\">（意味着您只需要$400的保证金就可以提前卖掉价值$4,000的1BTC）</span>",
     "guide_title_index16_step2":"实际所需开仓资金=<span class=\"guide-math-color\">买入数量<br>杠杆倍数</span> =  <span>%{guide_number20}BTC<br>10倍</span> = <strong>%{guide_number13}BTC ≈ $%{guide_number14}</strong> <b>俗称“保证金”</b>",
     "guide_title_index16_step3":"立即开仓<span>支付%{guide_number10}BTC</span>",
-  
+
     "guide_title_index17_step0":"开仓成功让我们看看行情",
-  
+
     "guide_title_index18_step0":"啊哦，BTC价格已经涨到$4200，您已亏损…",
     "guide_title_index18_step1":"继续持有，坚信自己的判断",
     "guide_title_index18_step2":"立即卖出止损（卖出平仓）",
-  
+
     "guide_title_index19_step0":"第一步 计算美亏损： 开仓价-当前价= $ 4,000 - $ 4,200= - $200",
     "guide_title_index19_step1":"第二步 收益折算成BTC：<span class=\"guide-math-color\">美元收益×交易数量<br>当前BTC价格</span> = <span>-$200<br>$4,200</span> × %{guide_number16} ≈ -%{guide_number15}BTC 开仓保证金",
     "guide_title_index19_step2":"本次模拟开仓，您不幸亏损%{guide_number17}BTC",
     "guide_title_index19_step3":"结束教程",
-  
+
     "guide_title_index20_step0":"让我们继续......<br />似乎情况有所好转......",
-  
+
     "guide_title_index21_step0":"Great！我们已经由亏转盈了！",
     "guide_title_index21_step1":"继续持有，期待后市",
     "guide_title_index21_step2":"立即卖出，锁住收益（卖出平仓）",
@@ -1467,11 +1467,11 @@
     "contract_fee_rate_current_tips": "<a>当前费率：</a><br/>当前时间段资金费率为%{feeRate}，该数值是正数，代表多仓需要支付给空仓，如果该数值是负数，代表空仓要付给多仓。",
     "contract_fee_rate_estimate_tips": "<a>预测费率：</a><br/>下一个时间段预计的资金费率为%{feeRate}，该数值是正数，代表多仓需要支付给空仓，如果该数值是负数，代表空仓要付给多仓。",
     "header_title_contract_competition": "合约大赛",
-  
+
     "ix_indxe_tips": "<a>IX指数：</a><br/>IX 指数是跟踪 比特币 价格设定，频率为每 5秒钟，该指数是综合指数，目前由相同权重的 BITSTAMP, GDAX 、KRAKEN,GEMINI 组成。该指数的组成可能会因为交易所不可预见的不稳定因素而改变。",
     "post_only_tips": "<a>被动委托：</a><br/>被动委托不会立刻在市场上成交，使用该类型来确保获得做市返佣，如果委托会立刻与已有委托成交，那么该委托将会取消。",
-  
-  
+
+
     "contract_close_limit":"限价平仓",
     "contract_close_limit_buy":"限价买入平仓",
     "contract_close_limit_sell":"限价卖出平仓",
@@ -1482,7 +1482,7 @@
     "contract_close_tips4":"在最优价格%{amount}张BTC合约。",
     "contract_close_tips2":"在执行时，将平掉你的整个仓位。",
     "contract_close_tips3":"这是假设你市价平仓后预测的盈亏，它根据目前的委托列表来计算",
-  
+
     "contract_Competition_banner_1":"报名参与",
     "contract_Competition_banner_2":"创建战队",
     "contract_Competition_banner_3":"您已成功报名实盘大赛",
@@ -1575,7 +1575,7 @@
     "contract_competition_explain_37":"【程序交易特别奖】",
     "contract_competition_explain_38":"（仅针对程序化交易者）",
     "contract_competition_explain_39":"针对大赛交易绩效突出的优秀程序交易量化团队，IX Fund将进行深度合作并提供至少30BTC起的投资。其中，绩效主要从以下几方面进行评估：①交易策略；②资金量；③收益率；④收益回撤比。",
-  
+
     "contract_competition_explain_40":"活动细则",
     "contract_competition_explain_41":"（1）注册并开通合约账户的用户均可报名参赛，并可自主选择加入战队；",
     "contract_competition_explain_42":"（2）每个战队需达到2位及以上成员方为有效战队，队员数量无上限；",
@@ -1588,12 +1588,12 @@
     "contract_competition_explain_49":"本次大赛IX.com拥有最终解释权",
     "contract_competition_message_success":"报名成功。",
     "contract_competition_message_failed":"报名失败。",
-  
-  
+
+
     "contract_order_enter_tips1": "请输入数量",
     "contract_order_enter_tips2": "请输入价格",
     "contract_order_enter_tips3": "最优价格",
-  
+
     "contract_action_position": "仓位",
     "contract_action_limit_price":"限价",
     "contract_action_market_price":"市价",
@@ -1603,7 +1603,7 @@
     "contract_market_button_sell": "市价卖出",
     "contract_limit_button_buy": "买入 / 做多",
     "contract_limit_button_sell": "卖出 / 做空",
-  
+
     "homechart_24h_change_range":"涨跌幅",
     "homechart_24h_change_value":"涨跌额",
     "profile_left_message_setting":"消息设置",
@@ -1611,7 +1611,7 @@
     "contract_stop_out_order":"强平单",
     "contract_adl_reduce":"ADL减仓",
     "count_down_value":"%{hour} 时 %{minute} 分 %{second} 秒",
-  
+
     "message_setting_safety":"安全认证",
     "message_setting_notice":"网站通知",
     "message_setting_content_01":"IX 会在以下情况下通知您。 如果浏览器支持的话，我们也会发送系统通知。如果不希望系统通知，可以在浏览器授权时取消或点选浏览器URL的锁扣图像并取消授权。你也可以在下方停用个别通知。",
@@ -1621,7 +1621,7 @@
     "message_setting_content_05":"止损已触发",
     "message_setting_content_06":"强制平仓",
     "message_setting_content_07":"自动减仓",
-  
+
     "successful_closing": "平仓设置成功",
     "delegate_cancellation": "委托已取消",
     "delegation_cancellation_failed": "委托取消失败",
@@ -1632,11 +1632,11 @@
     "successfully_body_text_reduce": "已成功,在%{price}价格买入的%{amount}张BTC永续合约，已被系统自动减仓",
     "answer_the_question": "亲，请您认真答完题之后再提交哦",
     "successful_purchase_of_contracts": "已成功%{language}%{amount}张合约",
-  
-  
+
+
     "orderbook_depth_title": "深度图",
     "contract_exit_price": "平仓价格",
-  
+
     "h5_index_list_0": "技术优势，省心放心",
     "h5_index_list_1": "高响应高吞吐高并发，百万+/秒/交易撮合速度；多权限API，即时行情自动交易",
     "h5_index_list_2": "全网最优费率，挂单即赚",
@@ -1648,35 +1648,35 @@
     "h5_index_list_8": "投资机构，信任背书",
     "h5_index_list_9": "GrandShores（雄岸资本）、PeckShield（派盾科技）、Mayflower Capital（五月花资本）重磅投资",
     "h5_index_list_10": "让IX.com加速您的币圈财富自由之路",
-  
+
     "reg_msg_phone": "让IX.com加速您的币圈财富自由之路",
-  
+
     "contract_loading":"系统加载数据失败...",
     "contract_reload":"重新加载",
     "contract_competition_my_team": "我的战队",
     "contract_competition_explain_51": "每日（UTC+8）12:00排名更新",
     "contract_competition_tab_41":"收益额",
 
-        
+
     "trading_title_start_time":"每日开盘时间 %{startTime}",
     "trading_title_end_time":"每日停盘时间 %{endTime}",
     "trading_title_count_downE":"( <span style='color:#FF4E4E;'>停盘倒计时 %{countdown}</span>)",
     "trading_title_count_downS":"( <span style='color:#22CED0;'>开盘倒计时 %{countdown}</span>)",
     "trading_title_start_price":"今日开盘价格 %{price}",
-    
+
     "dowload_text_1":"全球首家",
     "dowload_text_2":"一站式上币数字资产服务中心",
     "dowload_text_3":"随时随地看行情，做交易",
     "dowload_text_4":"实时交易：便捷交易，快速买卖; 随身钱包：资产充提，安全储存",
     "dowload_text_5":"交易高效",
     "dowload_text_6":"200万+/秒撮合速度",
-    "dowload_text_7":"采用CDN多地域多线路加速及高性能撮合引擎，200万+/秒/交易对撮合速度，确保服务不间断，操作无卡顿！}",
+    "dowload_text_7":"采用CDN多地域多线路加速及高性能撮合引擎，200万+/秒/交易对撮合速度，确保服务不间断，操作无卡顿！",
     "dowload_text_8":"资产安全",
     "dowload_text_9":"100%冷钱包存放机制",
     "dowload_text_10":"采用全球首创100%冷钱包存放机制，完全隔离公网，极限保障用户资产安全。",
     "dowload_text_11":"主流币对交易",
     "dowload_text_12":"支持主流币对交易功能，提供BTC/USDT、EOS/BTC、EOS/USDT、ETH/BTC、ETH/USDT等，多币种轻松自由选择",
-    
-    "":"" 
-   
+
+    "":""
+
 }

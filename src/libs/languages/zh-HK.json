@@ -711,14 +711,14 @@
 "trading_title_count_downE":"( <span style='color:#FF4E4E;'>停盤倒數計時 %{countdown}</span>)",
 "trading_title_count_downS":"( <span style='color:#22CED0;'>開盤倒數計時 %{countdown}</span>)",
 "trading_title_start_price":"今日開盤價格 %{price}",
-    
+
 "dowload_text_1":"全球首家",
 "dowload_text_2":"壹站式上幣數字資產服務中心",
 "dowload_text_3":"隨時隨地看行情，做交易",
 "dowload_text_4":"實時交易：便捷交易，快速買賣; 隨身錢包：資產充提，安全儲存",
 "dowload_text_5":"交易高效",
 "dowload_text_6":"200萬+/秒撮合速度",
-"dowload_text_7":"采用CDN多地域多線路加速及高性能撮合引擎，200萬+/秒/交易對撮合速度，確保服務不間斷，操作無卡頓！}",
+"dowload_text_7":"采用CDN多地域多線路加速及高性能撮合引擎，200萬+/秒/交易對撮合速度，確保服務不間斷，操作無卡頓！",
 "dowload_text_8":"資產安全",
 "dowload_text_9":"100%冷錢包存放機制",
 "dowload_text_10":"采用全球首創100%冷錢包存放機制，完全隔離公網，極限保障用戶資產安全。",

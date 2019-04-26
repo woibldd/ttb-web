@@ -17,7 +17,7 @@
             <img v-else
               src="../../assets/download/ixex.io.png"
               alt="dl">
-          </div>  
+          </div>
           <div class="btns">
             <div
               class="download__btn">
@@ -91,13 +91,13 @@
       <div class="bg bg-three">
         <div class="feature--txt">
           <div class="txt-1">
-            {{ $t('dowload_text_8') }}
+            {{ $t('download_pc_txt_3_1') }}
           </div>
           <div class="txt-2">
-            {{ $t('dowload_text_9') }}
+            {{ $t('download_pc_txt_3_2') }}
           </div>
           <div class="txt-3">
-            {{ $t('dowload_text_10') }}
+            {{ $t('download_pc_txt_3_3') }}
           </div>
         </div>
         <div class="phone phone-three"/>
