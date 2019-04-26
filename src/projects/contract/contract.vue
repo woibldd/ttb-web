@@ -18,7 +18,7 @@
           </div>
         </div>
         <!-- 挂单簿 -->
-        <section class="order-section" style='width:500px;'>
+        <section class="order-section mt-4" style='width:500px;'>
           <div class="only-orders">
             <!-- 委托列表 -->
             <div class="ix-col ix-col-2 ml-4 relative" style='width:50%;'>
@@ -36,7 +36,7 @@
         </section>
         <!-- 操作 -->
         <!-- 交易委托， 杠杆 -->
-        <div class="ix-col ix-col-4 ml-4">
+        <div class="ix-col ix-col-4 ml-4 mt-4">
           <order-action/>
         </div>
       </div>
@@ -239,13 +239,10 @@ export default {
     }
   },
   async created() {
-    let newOrder = {};
-
-    const $this = this
-
+    let newOrder = {}; 
+    const $this = this 
     setInterval(function(){
-      console.log(this.problemError)
-
+      console.log(this.problemError) 
       service.getOrderfills({page: 1,size: 10,symbol: "FUTURE_BTCUSD"}).then(res => {
         if (!res.code) {
           let number = 0
@@ -255,20 +252,17 @@ export default {
           }
 
           let newOrderList = []
-          let oneListObj = newOrder[0]
-
+          let oneListObj = newOrder[0] 
           if (JSON.stringify(newOrder) !== JSON.stringify(res.data.data)){
             for (var i in res.data.data) {
               if(JSON.stringify(res.data.data[i]) === JSON.stringify(oneListObj)){
                 break;
               }
               newOrderList.push(res.data.data[i])
-            }
-
+            } 
             console.log(newOrderList)
             $this.toast(newOrderList)
-            newOrder = res.data.data
-
+            newOrder = res.data.data 
             $this.$eh.$emit("protrade:order:refresh", 1)
           }
         }
@@ -302,7 +296,7 @@ export default {
       this.$eh.$emit("protrade:layout:init");
       utils.log("Layout inited");
 
-      // this.$eh.$on('app:resize', this.onresize)
+      this.$eh.$on('app:resize', this.onresize)
       // this.$eh.$on('deal:update', this.dealChanged)
       document.querySelector(".page-loading").classList.remove("show");
     });
@@ -313,8 +307,7 @@ export default {
     //   this.loopFetch();
     // }, 30e3);
   },
-  computed: {
-
+  computed: { 
     isLogin () {
       return !!this.state.userInfo
     },
@@ -326,6 +319,10 @@ export default {
     }
   },
   methods: {
+    onresize () {
+      // debugger
+      // let bodyHeight = this.container.height - 88 + 'px'
+    },
     /**
      * 激活
      */
@@ -669,7 +666,7 @@ export default {
   }
 
   .tradingview-container {
-    height: 508px;
+    height: 570px;
   }
   .contract-active-modal {
     width: 674px;
