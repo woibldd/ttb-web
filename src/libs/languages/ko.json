@@ -702,7 +702,10 @@
   "RushBuy_text_list_32":"2. IXX거래소는 하나의 자유로운 디지털 화폐 거래 플랫폼을 제공하며, 발행 가치에 대한 어떠한 심사나 담보도 제공하지 않으며, 배상책임을 지지 않습니다.。",
   "RushBuy_text_list_33":"3. 이러한 유형의 사업에는 포괄되지만, 사업자가 지급하지 않는 유형의 가능성 및 상술한 위험에만 제한되지 않으므로, 상세한 항목과 이해의 위험 후 개인의 위험 부담능력 범위 내에서 신중하게 참여하시기 바랍니다。",
   "RushBuy_text_list_34":"수량 을 입력 하다",
-
+  "download_android":"android 다운로드",
+  "download_ios":"iPhone 다운로드",
+  "download_ios_tutorial":"iOS 다운로드 설치 교정 >>",
+  "download_scan_qr":"차원 코드 스 캐 닝 해서 APP 다운로드",
   "download_down_imme":"즉시 다운로드",
   "trading_title_start_time":"일일 개장 시간 %{startTime}",
   "trading_title_end_time":"일일 마감 시간 %{endTime}",
