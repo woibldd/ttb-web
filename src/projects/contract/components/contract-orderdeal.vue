@@ -105,7 +105,7 @@ export default {
     getStyle (deal, index) {
       if (index % 2 === 0) {
         return {
-          backgroundColor: '#373737'
+          backgroundColor: '#10172a'
         }
       }
       // const { styleVar: { $buyRGB, $sellRGB } } = process.env.THEME_ENV

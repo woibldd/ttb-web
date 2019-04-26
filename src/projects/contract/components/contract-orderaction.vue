@@ -311,7 +311,9 @@
           </div>
         </div>
         <!-- 红绿条 -->
-        <div class="profit-risk-row mb-27">
+        <div class="profit-risk-row mb-27"
+          :style="{width: profitRiskWidth }"
+          >
           <div
             :style="{left: outerTimesLeft}"
             class="response-times"
@@ -325,13 +327,13 @@
             v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}"
           />
         </div>
-        <div class="outer-slider mb-10">
+        <div class="outer-slider mb-10" ref="divlever" >
           <!-- 滑块 外面-->
           <leverOperate
             v-if="language"
             @change="changeHoldingLeverTimes"
             :timers-map="timersMap"
-            :stick-len="26"
+            :stick-len="stickLen"
             :real-value.sync="holdingLever.inputLeverTime"
             :slider-value.sync="holdingLever.sliderLeverTime"
           />
@@ -739,6 +741,8 @@ export default {
       confirm_txt: "",
       enter_tips: this.currentDealType === "market" ? "--" : this.$t('contract_order_enter_tips2'),
       empty: "--",
+      stickLen: 23,
+      profitRiskWidth: "316px",
 
     };
   },
@@ -1230,7 +1234,7 @@ export default {
       utils.setStorageValue("LoginBack", "/contract.html")
       actions.setLoginBack( "/contract.html")
       this.$router.push({
-        name: 'login'
+        name: 'login' 
       })
 
     },
@@ -2110,11 +2114,35 @@ export default {
       }
       return "--";
     },
+    layoutInit () { 
+      this.onresize()
+      this.$eh.$on('app:resize', this.onresize)
+    },
+    onresize () { 
+      //调整杠杆宽度
+      let width = this.$refs.divlever.offsetWidth
+      if(width < 300 ) {
+        this.stickLen = 22
+      } else if(width >= 300 && width < 310){
+        this.stickLen = 23
+      } else if(width >= 310 && width < 320){
+        this.stickLen = 24
+      } else if(width >= 320 && width < 330){
+        this.stickLen = 25
+      }  else if(width >= 330){
+        this.stickLen = 26
+      }  
+      this.profitRiskWidth = (width - 14) + "px"
+    },
   },
   watch: {
+    "refs.div_lever.length"() {
+      console.log(this.refs.div_lever.length)
+    },
     // 止损止盈 * 1 限价 2市价 3 限价止损 4 市价止损 5 限价止赢 6 市价止盈
     trigger_price() {
       this.setButtonState();
+  
     },
     "state.locale"(){
       this.timersMap[0] = this.$t("contract_all_in")
@@ -2161,12 +2189,13 @@ export default {
           }
         })  //查询用户设置
       }
-    }
+    }  
     this.$eh.$on("protrade:exchange:set", this.set);
     this.$eh.$on("protrade:order:refresh", () => {
       this.fetchData();
     });
     this.$eh.$on("protrade:balance:refresh", this.fetchData);
+    this.$eh.$on('protrade:layout:init', this.layoutInit)
     //this.$eh.$on("protrade:exchange:setOnePrice", this.setOnePrice)
     await actions.updateSession();
     if (this.isLogin) {
@@ -2176,6 +2205,7 @@ export default {
   destroyed() {
     this.$eh.$off("protrade:order:refresh");
     this.$eh.$off("protrade:balance:refresh", this.fetchData);
+    this.$eh.$off('protrade:layout:init', this.layoutInit)
   },
 };
 </script>

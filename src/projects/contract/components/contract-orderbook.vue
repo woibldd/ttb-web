@@ -425,8 +425,7 @@ export default {
       }
       if (!res.code) {
         this.assignData(res.data)
-      }
-      debugger
+      } 
       this.socket = ws.create(`orderbook/${this.pair}/${this.offset}/${this.accuracy}/20`)
       this.socket.$on('message', (data) => {
         this.deepthData = data
@@ -478,7 +477,7 @@ export default {
     closePanels () {
       this.panelShow = false
     },
-    onresize: _.debounce(function () {
+    onresize: _.debounce(function () { 
       // this.panelHeight = this.container.height
     }, 100),
     layout () {
