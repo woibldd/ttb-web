@@ -116,7 +116,7 @@ export default {
       }
 
       if (this.isSafari) {
-        let url = 'itms-services://?action=download-manifest&url=https://ixx.com/app/ixx.plist'
+        let url = 'itms-services://?action=download-manifest&url=https://ixx.com/app/IXX.plist'
         window.open(url, '_blank')
       }
     }
