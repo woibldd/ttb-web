@@ -703,10 +703,22 @@
   "RushBuy_text_list_33":"3. 이러한 유형의 사업에는 포괄되지만, 사업자가 지급하지 않는 유형의 가능성 및 상술한 위험에만 제한되지 않으므로, 상세한 항목과 이해의 위험 후 개인의 위험 부담능력 범위 내에서 신중하게 참여하시기 바랍니다。",
   "RushBuy_text_list_34":"수량 을 입력 하다",
 
-  
+  "download_down_imme":"즉시 다운로드",
   "trading_title_start_time":"일일 개장 시간 %{startTime}",
   "trading_title_end_time":"일일 마감 시간 %{endTime}",
   "trading_title_count_downE":"( <span style='color:#FF4E4E;'>카운트 다운 %{countdown}</span>)",
   "trading_title_count_downS":"( <span style='color:#22CED0;'>개방 카운트다운%{countdown}</span>)",
-  "trading_title_start_price":"오늘 개장가격%{price}"
+  "trading_title_start_price":"오늘 개장가격%{price}",
+    "dowload_text_1":"全球首家",
+    "dowload_text_2":"壹站式上幣數字資產服務中心",
+    "dowload_text_3":"隨時隨地看行情，做交易",
+    "dowload_text_4":"實時交易：便捷交易，快速買賣; 隨身錢包：資產充提，安全儲存",
+    "dowload_text_5":"交易高效",
+    "dowload_text_6":"200萬+/秒撮合速度",
+    "dowload_text_7":"采用CDN多地域多線路加速及高性能撮合引擎，200萬+/秒/交易對撮合速度，確保服務不間斷，操作無卡頓！}",
+    "dowload_text_8":"資產安全",
+    "dowload_text_9":"100%冷錢包存放機制",
+    "dowload_text_10":"采用全球首創100%冷錢包存放機制，完全隔離公網，極限保障用戶資產安全。",
+    "dowload_text_11":"主流幣對交易",
+    "dowload_text_12":"支持主流幣對交易功能，提供BTC/USDT、EOS/BTC、EOS/USDT、ETH/BTC、ETH/USDT等，多幣種輕松自由選擇"
 }

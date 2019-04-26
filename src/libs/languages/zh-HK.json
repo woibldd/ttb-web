@@ -705,11 +705,24 @@
 "RushBuy_text_list_32":"2. IXX交易所僅提供壹個自由的數字貨幣交易平臺，不對其發行價值做任何的審核或擔保，亦不承擔賠償責任，如果您不能接受，請勿參與。",
 "RushBuy_text_list_33":"3. 由於參與此類項目面臨包括但不限於項目方不發幣的可能性及上述風險，請在詳細了解項目內容並理解上述風險後，在個人的風險承擔能力範圍內謹慎參與。",
 "RushBuy_text_list_34":"輸入搶購數量",
-
+"download_down_imme":"立即下载",
 "trading_title_start_time":"每日開盤時間 %{startTime}",
 "trading_title_end_time":"每日停盤時間 %{endTime}",
 "trading_title_count_downE":"( <span style='color:#FF4E4E;'>停盤倒數計時 %{countdown}</span>)",
 "trading_title_count_downS":"( <span style='color:#22CED0;'>開盤倒數計時 %{countdown}</span>)",
-"trading_title_start_price":"今日開盤價格 %{price}", 
+"trading_title_start_price":"今日開盤價格 %{price}",
+    
+"dowload_text_1":"全球首家",
+"dowload_text_2":"壹站式上幣數字資產服務中心",
+"dowload_text_3":"隨時隨地看行情，做交易",
+"dowload_text_4":"實時交易：便捷交易，快速買賣; 隨身錢包：資產充提，安全儲存",
+"dowload_text_5":"交易高效",
+"dowload_text_6":"200萬+/秒撮合速度",
+"dowload_text_7":"采用CDN多地域多線路加速及高性能撮合引擎，200萬+/秒/交易對撮合速度，確保服務不間斷，操作無卡頓！}",
+"dowload_text_8":"資產安全",
+"dowload_text_9":"100%冷錢包存放機制",
+"dowload_text_10":"采用全球首創100%冷錢包存放機制，完全隔離公網，極限保障用戶資產安全。",
+"dowload_text_11":"主流幣對交易",
+"dowload_text_12":"支持主流幣對交易功能，提供BTC/USDT、EOS/BTC、EOS/USDT、ETH/BTC、ETH/USDT等，多幣種輕松自由選擇",
 "":""
 }

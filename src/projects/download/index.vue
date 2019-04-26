@@ -110,13 +110,13 @@ export default {
       }
 
       if (type === 'android') {
-        let url = 'https://ix.com/app/ix.apk'
+        let url = 'https://ixx.com/app/ixx.apk'
         window.open(url, '_blank')
         return
       }
 
       if (this.isSafari) {
-        let url = 'itms-services://?action=download-manifest&url=https://ix.com/app/IX.plist'
+        let url = 'itms-services://?action=download-manifest&url=https://ixx.com/app/IXX.plist'
         window.open(url, '_blank')
       }
     }
