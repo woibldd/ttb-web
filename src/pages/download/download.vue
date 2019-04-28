@@ -5,8 +5,8 @@
     <div class="banner">
       <div class="main-info">
         <div class="slogan-txt">
-          <p>{{ $t('全球首家') }}</p>
-          <p>{{ $t('一站式上币数字资产服务中心') }}</p>
+          <p>{{ $t('dowload_text_1') }}</p>
+          <p>{{ $t('dowload_text_2') }}</p>
         </div>
         <div class="qr-note-row">{{ $t('download_scan_qr') }}</div>
         <div class="download-btns">
@@ -17,7 +17,7 @@
             <img v-else
               src="../../assets/download/ixex.io.png"
               alt="dl">
-          </div>  
+          </div>
           <div class="btns">
             <div
               class="download__btn">
@@ -65,10 +65,10 @@
         <div class="feature--txt mr-30">
           <div class="txt-1">IXX APP</div>
           <div class="txt-2">
-            {{ $t('随时随地看行情，做交易') }}
+            {{ $t('dowload_text_3') }}
           </div>
           <div class="txt-3">
-            {{ $t('实时交易：便捷交易，快速买卖; 随身钱包：资产充提，安全储存') }}
+            {{ $t('dowload_text_4') }}
           </div>
         </div>
         <div class="phone phone-one"/>
@@ -78,26 +78,26 @@
 
         <div class="feature--txt">
           <div class="txt-1">
-            {{ $t('交易高效') }}
+            {{ $t('dowload_text_5') }}
           </div>
           <div class="txt-2">
-            {{ $t('200万+/秒撮合速度') }}
+            {{ $t('dowload_text_6') }}
           </div>
           <div class="txt-3">
-            {{ $t('采用CDN多地域多线路加速及高性能撮合引擎，200万+/秒/交易对撮合速度，确保服务不间断，操作无卡顿！') }}
+            {{ $t('dowload_text_7') }}
           </div>
         </div>
       </div>
       <div class="bg bg-three">
         <div class="feature--txt">
           <div class="txt-1">
-            {{ $t('资产安全') }}
+            {{ $t('download_pc_txt_3_1') }}
           </div>
           <div class="txt-2">
-            {{ $t('100%冷钱包存放机制') }}
+            {{ $t('download_pc_txt_3_2') }}
           </div>
           <div class="txt-3">
-            {{ $t('采用全球首创100%冷钱包存放机制，完全隔离公网，极限保障用户资产安全。') }}
+            {{ $t('download_pc_txt_3_3') }}
           </div>
         </div>
         <div class="phone phone-three"/>
@@ -106,11 +106,11 @@
         <div class="phone phone-four mr-30"/>
         <div class="feature--txt">
           <div class="txt-1">
-            {{ $t('主流币对交易') }}
+            {{ $t('dowload_text_11') }}
 
           </div>
           <div class="txt-3">
-            {{ $t('支持主流币对交易功能，提供BTC/USDT、EOS/BTC、EOS/USDT、ETH/BTC、ETH/USDT等，多币种轻松自由选择') }}
+            {{ $t('dowload_text_12') }}
           </div>
         </div>
       </div>
@@ -131,7 +131,8 @@
     <div
       class="download-immediate"
       @click="downloadImme">
-      {{ $t('download_down_imme') }}
+            {{ $t('download_down_imme') }}
+
     </div>
   </div>
 </template>
@@ -144,15 +145,15 @@ export default {
     }
   },
   created(){
-    if(location.origin === 'https://ix.com'){
-      this.ix = true
+    if(location.origin === 'https://ixx.com'){
+      this.ixx = true
     }
    },
   methods: {
     download (type) {
-      let url = 'https://ix.com/app/ix.apk'
+      let url = 'https://ixx.com/app/ixx.apk'
       if (type === 'ios') {
-        url = 'itms-services://?action=download-manifest&url=https://ix.com/app/IX.plist'
+        url = 'itms-services://?action=download-manifest&url=https://ixx.com/app/IXX.plist'
       }
       window.open(url, '_blank')
     },

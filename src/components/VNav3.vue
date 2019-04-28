@@ -102,6 +102,17 @@
         </div>
       </div>
       <div class="nav_right">
+    <div class="set-app-dl right_options" style="margin-right: 40px;">
+          <router-link
+            class="nav_log_res"
+            :to="{name: 'Download'}"
+          >
+            <div class="app-dl">
+              <icon
+                class="mr-3"
+                name="topbar-dl-phone"/> APP
+            </div>
+        </router-link></div>
         <div
           v-if="!state.userInfo"
           class="right_options">
