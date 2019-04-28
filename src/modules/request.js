@@ -1,13 +1,27 @@
 import axios from 'axios'
 import qs from 'querystring'
 import { state, actions} from './store'
-let _env_ = qs.parse(location.search.replace('?', ''))._env_
+// let _env_ = qs.parse(location.search.replace('?', ''))._env_
 
+// const api = axios.create({
+//   baseURL: _env_ || process.env.BASE_API, // api的base_url
+//   timeout: 30000, // request timeout
+//   withCredentials: true
+// })
+let _env_ = ''
+
+if(process.env.NODE_ENV != 'development'){
+  let val = location.host.split('.')
+  _env_ = val.slice(val.length - 2, val.length).join('.')
+  _env_ = `https://i.${_env_}/`
+} 
 const api = axios.create({
   baseURL: _env_ || process.env.BASE_API, // api的base_url
   timeout: 30000, // request timeout
   withCredentials: true
-})
+}) 
+console.log("_env_:" + _env_)
+ 
 export const quotaApi = axios.create({
   baseURL: _env_ || process.env.BASE_API, // api的base_url
   timeout: 30000, // request timeout

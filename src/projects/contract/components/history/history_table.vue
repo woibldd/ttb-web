@@ -305,7 +305,7 @@
 </template>
 <script>
 import service from '@/modules/service'
-import {state} from '@/modules/store'
+import {state, actions} from '@/modules/store'
 import utils from '@/modules/utils'
 import stateHoldingMixins from '../stateHoldingComputedMixins'
 import pairInfoMixins from '../statePairInfoComputedMixins'
