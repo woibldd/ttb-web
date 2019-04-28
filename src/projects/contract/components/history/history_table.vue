@@ -325,7 +325,7 @@ export default {
       unwindPrice: this.markPrice,
       bindMarkPrice: true,
       clearWarehouseLoading: false,
-      showupm: true,
+      showupm: true, 
     }
   },
   mixins: [
@@ -503,7 +503,7 @@ export default {
           title = this.$t('contract_close_market_buy')
         }
         price = this.lastPrice
-      }
+      } 
       if(this.holding.amount > 0) {
         side = this.$t('order_side_sell')
       } else if (this.holding.amount < 0) {
@@ -539,7 +539,8 @@ export default {
         this.clearWarehouseLoading = false
         return
       }
-      let $price = this.unwindPrice.toString()
+      //let $price = this.unwindPrice.toString()
+      let $price = price
       if (this.$big($price).lt(0)) {
         this.unwindPrice = 0
         $price = '0'
