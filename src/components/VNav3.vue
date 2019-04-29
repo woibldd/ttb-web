@@ -12,6 +12,7 @@
             :to="{name: 'trading'}"
             class="nav_link">{{ $t('trading') }}</router-link>
           <a 
+            v-if='isTestnet'
             href="/contract.html"
             :class="{'router-link-active': from === 'contract'}"
             class="nav_link ml-30">{{ $t('contract') }} 
@@ -301,6 +302,9 @@ export default {
     },
     announcementLink () {
       return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
+    },
+    isTestnet() {
+      return location.hostname.indexOf("ixex.pro") >= 0
     }
   },
   methods: {
