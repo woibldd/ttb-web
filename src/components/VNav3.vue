@@ -12,11 +12,11 @@
             :to="{name: 'trading'}"
             class="nav_link">{{ $t('trading') }}</router-link>
           <a
-              v-if="false"
-              href="/contract.html"
-              :class="{'router-link-active': from === 'contract'}"
-              class="nav_link ml-30">{{ $t('contract') }} 
-            </a>
+            v-if="false"
+            href="/contract.html"
+            :class="{'router-link-active': from === 'contract'}"
+            class="nav_link ml-30">{{ $t('contract') }} 
+          </a>
           <router-link
             v-if="false"
             :to="{name: 'RushBuy'}"
