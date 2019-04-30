@@ -344,7 +344,7 @@ export default {
       this.buy.forEach((buy) => {
         const amount = this.$big(buy[1])
         buyTotal = buyTotal.plus(amount)
-        console.log(buy[1],maxBuyTotal)
+        // console.log(buy[1],maxBuyTotal)
      bids.push({
           price: this.$big(buy[0]),
           amount: this.$big(buy[1]),

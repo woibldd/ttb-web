@@ -66,13 +66,20 @@ export default {
       const TradingView = await tvlib
       const Widget = TradingView.widget
       this.widget = new Widget(config)
+      console.log(1,this.widget,config,vm._isDestroyed)
+        this.widget.onChartReady(function () {
+        console.log(2)
 
-      this.widget.onChartReady(function () {
         if (vm._isDestroyed) {
           return false
         }
+        console.log(3)
+
         let widget = vm.widget
+        console.log(4)
+
         vm.tvReady = true
+        console.log(vm.tvReady)
         vm.$emit('chartReady')
 
         // 7 日均线

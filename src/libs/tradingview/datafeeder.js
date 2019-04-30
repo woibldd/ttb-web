@@ -86,6 +86,8 @@ export default {
   },
   getBars: function (symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
     const period = getPeriod(resolution)
+    console.log(location.pathname)
+    alert(location.pathname)
     service.getQuoteHistory({
       period: period,
       pair: symbolInfo.ticker,
