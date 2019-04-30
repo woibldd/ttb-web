@@ -133,7 +133,7 @@ export default {
       async handler (pair = '', last) {
         // debugger
         this.state.pro.lock = true
-        const match = pair.match(/^([A-Za-z]*)_([A-Z]*)$/)
+        const match = pair.match(/^([A-Za-z]*)_([A-Za-z]*)$/)
         if (match) {
           this.state.pro.pair = pair
           local.pair = pair

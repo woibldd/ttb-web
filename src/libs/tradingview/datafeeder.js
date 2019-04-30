@@ -51,7 +51,7 @@ export default {
     let product
     let currency
     // @check
-    const match = name.match(/([A-Z]*)[/_]([A-Z]*)$/)
+    const match = name.match(/([A-Za-z]*)[/_]([A-Za-z]*)$/)
     if (match) {
       product = match[1]
       currency = match[2]
@@ -86,8 +86,8 @@ export default {
   },
   getBars: function (symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
     const period = getPeriod(resolution)
-    console.log(location.pathname)
-    alert(location.pathname)
+    // console.log(location.pathname)
+    // alert(location.pathname)
     service.getQuoteHistory({
       period: period,
       pair: symbolInfo.ticker,
