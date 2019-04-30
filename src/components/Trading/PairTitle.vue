@@ -37,7 +37,7 @@
         class="fl grid-tf-amount"
       >24H {{ $t('vol') }} {{ pairTick.volume_24h | round(2) }} {{ state.pro.product_name }}</p>
     </div>
-    <div class="row clearfix" v-if="showCountDown">
+    <div class="row clearfix" v-if="state.showCountDown">
       <p
         class="fl grid-increase"
       >{{ $t('trading_title_start_time', {startTime: $moment.unix(startTime).format('hh:mm:ss')}) }}</p>

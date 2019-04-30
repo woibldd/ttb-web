@@ -42,6 +42,7 @@ export const state = {
     price: 0,
     close_time: 0,
     price_open: 0,
+    showCountDown: false,
   },
   ct: {
     pair: '',

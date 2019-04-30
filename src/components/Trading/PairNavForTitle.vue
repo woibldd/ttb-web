@@ -44,7 +44,7 @@
             :label="$t('pairnav_vol')"
             :state="stateSortBy('vol')"/>
         </div>
-      </div>
+      </div>  
       <ul
         class="ul ix-pair-body tbody"
         :style="{'max-height': height}"
@@ -134,8 +134,9 @@ export default {
         params: {
           pair: pair.name
         }
-      })
-      state.close_time = pair.close_time || "[*][*][*][9:59-10:00]"
+      }) 
+      //debugger
+      state.close_time = pair.close_time  || "[*][*][*][9:59-10:00]"
       state.price_open = pair.price_open || 0.017
       
      //this.$eh.$emit("trading:countDown", this.startCountDown);
@@ -166,7 +167,7 @@ export default {
     onresize () {
       this.bodyHeight = (this.initHeight || (this.container.height - 80)) + 'px'
     }
-  },
+  }, 
   destroyed () {
     this.$eh.$off('app:resize', this.onresize)
     this.$eh.$off('protrade:layout:init', this.layoutInit)
@@ -177,9 +178,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
-
+<style lang="scss" scoped> 
 
 .ix-header {
   height: 32px;
