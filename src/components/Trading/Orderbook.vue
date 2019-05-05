@@ -344,10 +344,11 @@ export default {
       this.buy.forEach((buy) => {
         const amount = this.$big(buy[1])
         buyTotal = buyTotal.plus(amount)
-        bids.push({
+        // console.log(buy[1],maxBuyTotal)
+     bids.push({
           price: this.$big(buy[0]),
           amount: this.$big(buy[1]),
-          deep: this.$big(buy[1]).div(maxBuyTotal).times(100).round(4).toString(),
+          deep: this.$big(buy[1]).times(100).round(4).toString(),
           total: buyTotal
         })
       })
@@ -357,7 +358,7 @@ export default {
         asks.unshift({
           price: this.$big(sell[0]),
           amount: this.$big(sell[1]),
-          deep: this.$big(sell[1]).div(maxSellTotal).times(100).round(4).toString(),
+          deep: this.$big(sell[1]).times(100).round(4).toString(),
           total: sellTotal
         })
       })
@@ -372,7 +373,7 @@ export default {
     error (msg) {
       this.err = msg
     },
-    async sub () { 
+    async sub () {
       this.loading = true
       if (this.socket) {
         this.socket.$destroy()
