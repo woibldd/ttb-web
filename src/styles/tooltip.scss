@@ -1,15 +1,251 @@
-.tooltip {
-  display: block !important;
-  z-index: 10000;
+// .tooltip {
+//   display: block !important;
+//   z-index: 10000;
 
-  &.trading {
+//   &.trading {
+//     .tooltip-inner {
+//       background:rgba(255,255,255,1);
+//       box-shadow:0px 3px 8px 0px rgba(28,41,53,1);
+//       color: white;
+//       background: #314D65;
+//       border-radius:4px;
+//       padding: 5px 10px 4px;
+//     }
+  
+//     .tooltip-arrow {
+//       width: 0;
+//       height: 0;
+//       border-style: solid;
+//       position: absolute;
+//       margin: 5px;
+//       border-color: #314D65;
+//       z-index: 1;
+//     }
+    
+//   }
+//   .tooltip-inner {
+//     background:rgba(255,255,255,1);
+//     box-shadow:0px 3px 8px 0px rgba(196,196,196,1);
+//     border-radius:4px;
+//     color: #333333;
+//     border-radius: 4px;
+//     padding: 5px 10px 4px;
+//   }
+
+//   .tooltip-arrow {
+//     width: 0;
+//     height: 0;
+//     border-style: solid;
+//     position: absolute;
+//     margin: 5px;
+//     border-color: rgba(255,255,255,1);;
+//     z-index: 1;
+//   }
+
+//   &[x-placement^="top"] {
+//     margin-bottom: 5px;
+
+//     .tooltip-arrow {
+//       border-width: 5px 5px 0 5px;
+//       border-left-color: transparent !important;
+//       border-right-color: transparent !important;
+//       border-bottom-color: transparent !important;
+//       bottom: -5px;
+//       left: calc(50% - 5px);
+//       margin-top: 0;
+//       margin-bottom: 0;
+//     }
+//   }
+
+//   &[x-placement^="bottom"] {
+//     margin-top: 5px;
+
+//     .tooltip-arrow {
+//       border-width: 0 5px 5px 5px;
+//       border-left-color: transparent !important;
+//       border-right-color: transparent !important;
+//       border-top-color: transparent !important;
+//       top: -5px;
+//       left: calc(50% - 5px);
+//       margin-top: 0;
+//       margin-bottom: 0;
+//     }
+//   }
+
+//   &[x-placement^="right"] {
+//     margin-left: 5px;
+
+//     .tooltip-arrow {
+//       border-width: 5px 5px 5px 0;
+//       border-left-color: transparent !important;
+//       border-top-color: transparent !important;
+//       border-bottom-color: transparent !important;
+//       left: -5px;
+//       top: calc(50% - 5px);
+//       margin-left: 0;
+//       margin-right: 0;
+//     }
+//   }
+
+//   &[x-placement^="left"] {
+//     margin-right: 5px;
+
+//     .tooltip-arrow {
+//       border-width: 5px 0 5px 5px;
+//       border-top-color: transparent !important;
+//       border-right-color: transparent !important;
+//       border-bottom-color: transparent !important;
+//       right: -5px;
+//       top: calc(50% - 5px);
+//       margin-left: 0;
+//       margin-right: 0;
+//     }
+//   }
+
+//   &.popover {
+//     $color: #f9f9f9;
+
+//     .popover-inner {
+//       background: $color;
+//       color: black;
+//       padding: 24px;
+//       border-radius: 5px;
+//       box-shadow: 0 5px 30px rgba(black, .25);
+//     }
+
+//     .popover-arrow {
+//       border-color: $color;
+//     }
+//   }
+
+//   &[aria-hidden='true'] {
+//     visibility: hidden;
+//     opacity: 0;
+//     transition: opacity .15s, visibility .15s;
+//   }
+
+//   &[aria-hidden='false'] {
+//     visibility: visible;
+//     opacity: 1;
+//     transition: opacity .15s;
+//   }
+// }
+.tooltip {
+    display: block !important;
+    z-index: 10000;
+  
+    &.myfund{
+        .tooltip-arrow {
+            border-color: #ceab66;
+        }
+        .tooltip-inner{
+            width:410px;
+            min-height: 165px;
+            background: #ceab66;
+          border-radius:6px;
+          font-size: 14px;
+          color: #fff;
+          padding: 15px 18px;
+          box-sizing: border-box;
+  
+          .title {
+              font-weight: bold;
+          }
+        }
+    }
+  
+    &.trading {
+      .tooltip-inner {
+        box-shadow:0px 3px 8px 0px rgba(28,41,53,1);
+        color: white;
+        background: #314D65;
+        border-radius:4px;
+        padding: 5px 10px 4px;
+      }
+  
+      .tooltip-arrow {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        position: absolute;
+        margin: 5px;
+        border-color: #314D65;
+        z-index: 1;
+      }
+  
+    }
+    &.contract {
+      .tooltip-inner {
+        background:#1B1B1B;
+        box-shadow:0px 0px 8px 0px rgba(28,41,53,1);
+        color: white;
+        font-size: 12px;
+        line-height: 20px;
+        /deep/ p {
+          padding: 5px;
+        }
+      }
+  
+      .tooltip-arrow {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        position: absolute;
+        margin: 5px;
+        border-color: #1B1B1B;
+        z-index: 1;
+      }
+    }
+    &.contract_fund {
+      .tooltip-inner {
+        background:#F4EEE2;
+        box-shadow:0px 0px 0px 0px;
+  
+        color: #C9A96C;
+        font-size: 12px;
+        line-height: 14px;
+        /deep/ p {
+          padding: 5px;
+        }
+      }
+  
+      .tooltip-arrow {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        position: absolute;
+        margin: 5px;
+        border: none;
+        z-index: 1;
+      }
+    }
+    &.profile {
+      .tooltip-inner {
+        color: white;
+        background: rgba(159,169,183,1);
+        border-radius:4px;
+        padding: 6px 10px;
+        width: 130px;
+      }
+  
+      .tooltip-arrow {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        position: absolute;
+        margin: 5px;
+        border-color: rgba(159,169,183,1);
+        z-index: 1;
+      }
+    }
     .tooltip-inner {
       background:rgba(255,255,255,1);
-      box-shadow:0px 3px 8px 0px rgba(28,41,53,1);
-      color: white;
-      background: #314D65;
+      box-shadow:0px 3px 8px 0px rgba(196,196,196,1);
       border-radius:4px;
-      padding: 5px 10px 4px;
+      color: #333333;
+      border-radius: 4px;
+      padding: 10px;
+      max-width: 250px;;
     }
   
     .tooltip-arrow {
@@ -18,115 +254,102 @@
       border-style: solid;
       position: absolute;
       margin: 5px;
-      border-color: #314D65;
+      border-color: rgba(255,255,255,1);;
       z-index: 1;
     }
-    
-  }
-  .tooltip-inner {
-    background:rgba(255,255,255,1);
-    box-shadow:0px 3px 8px 0px rgba(196,196,196,1);
-    border-radius:4px;
-    color: #333333;
-    border-radius: 4px;
-    padding: 5px 10px 4px;
-  }
-
-  .tooltip-arrow {
-    width: 0;
-    height: 0;
-    border-style: solid;
-    position: absolute;
-    margin: 5px;
-    border-color: rgba(255,255,255,1);;
-    z-index: 1;
-  }
-
-  &[x-placement^="top"] {
-    margin-bottom: 5px;
-
-    .tooltip-arrow {
-      border-width: 5px 5px 0 5px;
-      border-left-color: transparent !important;
-      border-right-color: transparent !important;
-      border-bottom-color: transparent !important;
-      bottom: -5px;
-      left: calc(50% - 5px);
-      margin-top: 0;
-      margin-bottom: 0;
+  
+    &[x-placement^="top"] {
+      margin-bottom: 5px;
+  
+      .tooltip-arrow {
+        border-width: 5px 5px 0 5px;
+        border-left-color: transparent !important;
+        border-right-color: transparent !important;
+        border-bottom-color: transparent !important;
+        bottom: -5px;
+        left: calc(50% - 5px);
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+  
+    &[x-placement^="bottom"] {
+      margin-top: 5px;
+  
+      .tooltip-arrow {
+        border-width: 0 5px 5px 5px;
+        border-left-color: transparent !important;
+        border-right-color: transparent !important;
+        border-top-color: transparent !important;
+        top: -5px;
+        left: calc(50% - 5px);
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+  
+    &[x-placement^="right"] {
+      margin-left: 5px;
+  
+      .tooltip-arrow {
+        border-width: 5px 5px 5px 0;
+        border-left-color: transparent !important;
+        border-top-color: transparent !important;
+        border-bottom-color: transparent !important;
+        left: -5px;
+        top: calc(50% - 5px);
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+  
+    &[x-placement^="left"] {
+      margin-right: 5px;
+  
+      .tooltip-arrow {
+        border-width: 5px 0 5px 5px;
+        border-top-color: transparent !important;
+        border-right-color: transparent !important;
+        border-bottom-color: transparent !important;
+        right: -5px;
+        top: calc(50% - 5px);
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+  
+    &.popover {
+      $color: #f9f9f9;
+  
+      .popover-inner {
+        background: $color;
+        color: black;
+        padding: 24px;
+        border-radius: 5px;
+        box-shadow: 0 5px 30px rgba(black, .25);
+  
+        &.homepage {
+          background: #CBE6FD;
+          max-width: 250px;
+  
+        }
+      }
+  
+      .popover-arrow {
+        border-color: $color;
+      }
+    }
+  
+    &[aria-hidden='true'] {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity .15s, visibility .15s;
+    }
+  
+    &[aria-hidden='false'] {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity .15s;
     }
   }
-
-  &[x-placement^="bottom"] {
-    margin-top: 5px;
-
-    .tooltip-arrow {
-      border-width: 0 5px 5px 5px;
-      border-left-color: transparent !important;
-      border-right-color: transparent !important;
-      border-top-color: transparent !important;
-      top: -5px;
-      left: calc(50% - 5px);
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-  }
-
-  &[x-placement^="right"] {
-    margin-left: 5px;
-
-    .tooltip-arrow {
-      border-width: 5px 5px 5px 0;
-      border-left-color: transparent !important;
-      border-top-color: transparent !important;
-      border-bottom-color: transparent !important;
-      left: -5px;
-      top: calc(50% - 5px);
-      margin-left: 0;
-      margin-right: 0;
-    }
-  }
-
-  &[x-placement^="left"] {
-    margin-right: 5px;
-
-    .tooltip-arrow {
-      border-width: 5px 0 5px 5px;
-      border-top-color: transparent !important;
-      border-right-color: transparent !important;
-      border-bottom-color: transparent !important;
-      right: -5px;
-      top: calc(50% - 5px);
-      margin-left: 0;
-      margin-right: 0;
-    }
-  }
-
-  &.popover {
-    $color: #f9f9f9;
-
-    .popover-inner {
-      background: $color;
-      color: black;
-      padding: 24px;
-      border-radius: 5px;
-      box-shadow: 0 5px 30px rgba(black, .25);
-    }
-
-    .popover-arrow {
-      border-color: $color;
-    }
-  }
-
-  &[aria-hidden='true'] {
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity .15s, visibility .15s;
-  }
-
-  &[aria-hidden='false'] {
-    visibility: visible;
-    opacity: 1;
-    transition: opacity .15s;
-  }
-}
+  

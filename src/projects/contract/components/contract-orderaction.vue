@@ -48,7 +48,7 @@
             class="button-limit-other relative"
             :class="['ml-10', {active: currentDealType === currentOrderTypeExt}]"
             :label="$t(currentOrderTypeExt)"
-          >
+          > 
             <icon slot="btn-right" name="arrow-down-yellow" class="arrow-down-yellow"/>
             <div class="dropdown-menus ul" slot="btn-right">
               <div
@@ -61,6 +61,7 @@
               >{{ $t(item) }}</div>
             </div>
           </v-btn>
+          
         </div>
         <!-- 委托单 -->
         <!-- <div class="row flex-lr delegate-row mt-10"> -->
