@@ -763,6 +763,7 @@ export default {
 </style>
 <style lang="scss" scoped>
 .history-container {
+  
   .tab {
     .tab__header {
       display: flex;

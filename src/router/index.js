@@ -45,10 +45,25 @@ const lever = () => import(/* webpackChunkName: "lever" */ '@/pages/lever')
 const Fund = () => import(/* webpackChunkName: "Fund" */ '@/pages/Fund')
 const Withdraw = () => import(/* webpackChunkName: "FundWithdraw" */ '@/components/Fund/Withdraw/Withdraw.vue')
 const Deposit = () => import(/* webpackChunkName: "FundDeposit" */ '@/components/Fund/deposit/deposit.vue')
-const MyFund = () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/My/my.vue')
+const MyFund = () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/My/my-template.vue')
 const FundAddress = () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/Address/address.vue')
 const FundHistory = () => import(/* webpackChunkName: "FundHistory" */ '@/components/Fund/history/history.vue')
 const MyOrder = () => import(/* webpackChunkName: "FundHistory" */ '@/components/Fund/order')
+
+const MyFundAssets = () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/My/my.vue')
+const MyFundContract = () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contract')
+const ContractIndex = () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contract/contract.vue')
+const ContractHistory = () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contract/history')
+const AssetsHistory = () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contract/assets-history')
+const Transfer = () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/Transfer/transfer.vue')
+
+
+
+// 合约历史资料
+const ContractMaterial = () => import(/* webpackChunkName: "ContractMaterial" */ '@/pages/material')
+const MaterialFeeHistory = () => import(/* webpackChunkName: "ContractMaterial" */ '@/components/Material/fee-history')
+const EnsuranceFund = () => import(/* webpackChunkName: "ContractMaterial" */ '@/components/Material/ensurance')
+const TradeIndex = () => import(/* webpackChunkName: "ContractMaterial" */ '@/components/Material/trade-index')
 
 // h5相关页面
 const h5login = () => import(/* webpackChunkName: "h5login" */ '@/pages/h5/sign-up')
@@ -379,6 +394,11 @@ export const routes = [
         component: Withdraw
       },
       {
+        path: 'Transfer',
+        name: 'transfer',
+        component: Transfer
+      },
+      {
         path: 'deposit/:currency?',
         name: 'deposit',
         component: Deposit
@@ -389,10 +409,40 @@ export const routes = [
         component: MyFund,
         children: [
           {
-            path: 'history/:from',
-            name: 'history',
-            alias: 'deposit/:currency/history',
-            component: FundHistory
+            path: 'contract',
+            name: 'contract',
+            redirect: 'contract/index',
+            component: MyFundContract,
+            children: [
+              {
+                path: 'index/:currency?',
+                name: 'contractIndex',
+                component: ContractIndex
+              },
+              {
+                path: 'history',
+                name: 'ContractHistory',
+                component: ContractHistory
+              },
+              {
+                path: 'assets-history',
+                name: 'AssetsHistory',
+                component: AssetsHistory
+              }
+            ]
+          },
+          {
+            path: 'assets',
+            name: 'myAssets',
+            component: MyFundAssets,
+            children: [
+              {
+                path: 'history/:from',
+                name: 'assetsHistory',
+                alias: 'deposit/:currency/history',
+                component: FundHistory
+              }
+            ]
           }
         ]
       },
@@ -400,6 +450,35 @@ export const routes = [
         path: 'address/:currency?',
         name: 'address',
         component: FundAddress
+      }
+    ]
+  },
+  {
+    path: '/material',
+    name: 'Material',
+    component: ContractMaterial,
+    redirect: 'material/fee-history',
+    meta: {
+      auth: false,
+      footer: true,
+      nav: true,
+      class: 'dark'
+    },
+    children: [
+      {
+        path: 'fee-history',
+        name: 'MaterialFeeHistory',
+        component: MaterialFeeHistory
+      },
+      {
+        path: 'ensurance-fund',
+        name: 'EnsuranceFund',
+        component: EnsuranceFund
+      },
+      {
+        path: 'trade-index/:pair?',
+        name: 'TradeIndex',
+        component: TradeIndex
       }
     ]
   },

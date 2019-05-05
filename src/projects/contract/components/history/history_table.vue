@@ -806,7 +806,9 @@ export default {
         background-color: #1B1B1B;
         padding-left: 7px;
         margin-left: -7px;
-        box-sizing: border-box;
+        box-sizing: border-box; 
+        border-width: 0;
+  
     }
     .input-lab {
         color: $primary;

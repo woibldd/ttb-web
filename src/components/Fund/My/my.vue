@@ -1,13 +1,12 @@
 <template>
   <div class="fund-container my-fund-container">
-    <div class="title-box">
-
-      <div>{{ $t('wallets_nav_asset') }}</div>
+    <div class="title-box"> 
+      <div>{{ $t('wallets_nav_asset') }}</div> 
       <router-link
         v-if="!showHistory"
         class="fund-history"
         to="/fund/my/history/deposit"> {{ $t('capital_record') }}</router-link>
-    </div>
+    </div> 
     <div
       v-if="!showHistory"
       class="my-fund-content">
@@ -31,7 +30,7 @@
             <span>{{ scope.row[hd.key] }}</span>
           </template>
         </el-table-column>
-
+        
         <el-table-column
           header-align='right'
           align="right"
@@ -64,7 +63,7 @@
               class="my-fund-operate">{{ $t('asset_trading') }}</router-link>
           </template>
         </el-table-column>
-      </el-table>
+      </el-table> 
     </div>
     <router-view/>
   </div>
