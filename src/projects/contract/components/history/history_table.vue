@@ -172,6 +172,7 @@
           <!-- 限价平仓 -->
           <div
             class="btn"
+            :class="{'btn-disabled': btnDisabled }"
             @click.prevent="submitOrder()">
             {{ $t('contract_action_open_short') }}
           </div>
@@ -360,6 +361,9 @@ export default {
         return this.state.ct.lastPrice.toString()
       }
     },
+    btnDisabled () {
+      return !this.unwindPrice || this.unwindPrice == "0"
+    },
 
   },
   methods: {
@@ -472,6 +476,7 @@ export default {
     },
     async submitOrder (type) {
       if (!this.holding.amount) return
+      if (this.btnDisabled) return
       if (!type) {
         type = 'limit'
       }
@@ -857,6 +862,12 @@ export default {
                 background-color: rgba(9,201,137,1);
                 color: #252525;
             }
+        }
+        
+        .btn-disabled{
+          color: #177757;
+          border-color:#177757;
+          cursor: not-allowed;
         }
     }
 }

@@ -27,8 +27,8 @@
           :prop="hd.key"
           :label="hd.title">
           <template slot-scope="scope">
-            <span v-if="hd.key === 'currency'"><icon :name="scope.row.currency"/></span>
-            <span>{{ scope.row[hd.key] | round(2) }}</span>
+            <span v-if="hd.key === 'currency'"><icon :name="scope.row.currency"/> <span>{{ scope.row[hd.key] }}</span></span>
+            <span v-else>{{ scope.row[hd.key] || 0 | fixed(8) }}</span>
           </template>
         </el-table-column> 
         <el-table-column

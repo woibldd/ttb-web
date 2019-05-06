@@ -48,7 +48,7 @@
             class="button-limit-other relative"
             :class="['ml-10', {active: currentDealType === currentOrderTypeExt}]"
             :label="$t(currentOrderTypeExt)"
-          > 
+          >
             <icon slot="btn-right" name="arrow-down-yellow" class="arrow-down-yellow"/>
             <div class="dropdown-menus ul" slot="btn-right">
               <div
@@ -61,7 +61,6 @@
               >{{ $t(item) }}</div>
             </div>
           </v-btn>
-          
         </div>
         <!-- 委托单 -->
         <!-- <div class="row flex-lr delegate-row mt-10"> -->
@@ -296,13 +295,13 @@
             class="iconfont strong pointer ml-6"
             v-tooltip.top-end="{html: true, content: $t('contract_click_to_wallet'), classes: 'contract'}"
           />
-        </span>
+        </span> 
       </div>
       <div class="ix-pannel-body risk-limit-wrap">
         <div class="hold__info mb-7">
           <!-- 合约 -->
           <div>
-            <p class="mb-8" :class="{'color-up': holding.amount > 0, 'color-down':holding.amount < 0}">{{ holding.amount || 0 }}</p>
+            <p class="mb-8" :class="{'color-up': holding.holding > 0, 'color-down':holding.holding < 0}">{{ holding.holding || 0 }}</p>
             <p>{{ $t('contract') }}</p>
           </div>
           <!-- 回报率 -->
@@ -327,7 +326,7 @@
             v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}"
           />
         </div>
-        <div class="outer-slider mb-10" ref="divlever" >
+        <div class="outer-slider mb-10"  ref="divlever">
           <!-- 滑块 外面-->
           <leverOperate
             v-if="language"
@@ -432,8 +431,7 @@
       <div class="modal-make-more pd-24">
         <div
           class="modal-title mb-10"
-          :class="{'color-up': exchangeDir === 'BUY', 'color-down': exchangeDir === 'SELL'}"
-        >
+          :class="{'color-up': exchangeDir === 'BUY', 'color-down': exchangeDir === 'SELL'}">
           <p
             class="mb-10"
           >{{ $t(exchangeDir === 'BUY' ? 'contract_action_button_up' : 'contract_action_button_down') }} {{ $t(isExtOrderType ? currentDealType : (currentDealType === 'limit' ? 'contract_limit_price': 'contract_market_price')) }}</p>
@@ -611,6 +609,25 @@
         </div>
       </div>
     </v-modal>
+   <v-modal    :open.sync="state.isLoginOverdue"  @close="logoutClose">
+     <div class="loginStatus">
+        <div>
+          <div class="mask-logout" >
+            <div class="hint header">{{ $t('contract_login_overdue') }}</div>
+            <div class="link-group"> 
+              <span
+                class="link btn ibt signin bgcolor-up"
+                @click="tologin"
+                >{{ $t('signin') }}</span>
+              <span
+                class="link btn ibt signin bgcolor-down"
+                @click="logoutClose"
+                >{{ $t('close') }}</span> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </v-modal>   
   </div>
 </template>
 <script>
@@ -649,7 +666,7 @@ export default {
   mixins: [pairInfoMixins, priceInfoMixins, stateHoldingMixins, currentDelMixins],
   components: { simpleSlider, leverOperate, transferModal },
   data() {
-    return {
+    return { 
       state,
       local,
       language: true,
@@ -741,9 +758,9 @@ export default {
       confirm_txt: "",
       enter_tips: this.currentDealType === "market" ? "--" : this.$t('contract_order_enter_tips2'),
       empty: "--",
+      test: false,
       stickLen: 23,
       profitRiskWidth: "316px",
-
     };
   },
   computed: {
@@ -820,6 +837,9 @@ export default {
     isLogin() {
       return !!this.state.userInfo;
     },
+    isLoginOut() {
+      return !this.state.userInfo;
+    },
     balance() {
       return this.holding;
     },
@@ -852,8 +872,8 @@ export default {
     costValueBuyNew() {
       // console.log({holding:this.holding})
        let amount = this.amount;
-      if (amount > 0 && this.balance && this.$big(this.balance.amount).plus(this.buyDelAmount).plus(this.sellDelAmount) < 0) {
-        amount = -(-amount - this.balance.amount - this.buyDelAmount - this.sellDelAmount);
+      if (amount > 0 && this.balance && this.$big(this.balance.amount).plus(this.buyDelAmount) < 0) {
+        amount = -(-amount - this.balance.amount - this.buyDelAmount)
         if (amount < 0) {
           amount = 0;
         }
@@ -886,8 +906,8 @@ export default {
 
       let amount = this.amount;
       // 有已持仓，做对手时，判断持仓是否可以对冲，不可对冲部分算成本
-      if (amount > 0 && this.balance && this.$big(this.balance.amount).plus(this.buyDelAmount).plus(this.sellDelAmount) > 0) {
-        amount = amount - this.balance.amount - this.buyDelAmount - this.sellDelAmount ;
+      if (amount > 0 && this.balance && this.$big(this.balance.amount).plus(this.sellDelAmount) > 0) {
+        amount = amount - this.balance.amount - this.sellDelAmount ;
         if (amount < 0) {
           amount = 0;
         }
@@ -987,7 +1007,6 @@ export default {
       //this.log("costvalue sell...");
       let amount = this.amount;
       // 有已持仓，做对手时，判断持仓是否可以对冲，不可对冲部分算成本
-      //debugger;
       if (amount > 0 && this.balance && this.$big(this.balance.amount).plus(this.buyDelAmount).plus(this.sellDelAmount) > 0) {
         amount = amount - this.balance.amount - this.buyDelAmount - this.sellDelAmount ;
         if (amount < 0) {
@@ -1234,7 +1253,7 @@ export default {
       utils.setStorageValue("LoginBack", "/contract.html")
       actions.setLoginBack( "/contract.html")
       this.$router.push({
-        name: 'login' 
+        name: 'login'
       })
 
     },
@@ -1655,6 +1674,9 @@ export default {
         console.log("is submitting");
         return false;
       }
+      
+      //更新用户session
+      actions.updateSession()
 
       const side = type === "make_more" ? "BUY" : "SELL";
       //置灰的时候禁用事件
@@ -1814,15 +1836,12 @@ export default {
         // 做空
         this.mmModal.label = this.$t("order_side_sell");
         this.btnShortLoading = true;
-      }
-
+      } 
       // 先打开弹窗
       if (!local.mmNeverShow) {
         this.showMakeMoreModal = true;
         return;
-      }
-
-
+      } 
       const order = {
         type: this._getOrderType(),
         side: side === "SELL" ? 2 : 1,
@@ -1834,8 +1853,7 @@ export default {
       };
       this.doSubmit(order);
 
-      // service.orderContract(order)
-
+      // service.orderContract(order) 
       /*
       const res = await service.createOrder(order)
       this.submitting = false
@@ -1845,8 +1863,7 @@ export default {
         this.$eh.$emit('protrade:order:refresh')
         this.$eh.$emit('protrade:balance:refresh')
       }
-      */
-
+      */ 
       // alert(this.currentOpenMode)
     },
     async doSubmit(order) {
@@ -1860,7 +1877,8 @@ export default {
       if (!res.code) {
         this._resetLoadingState();
         // 通知所有组件，有数据更新，需要强制刷新数据
-        this.$eh.$emit("protrade:order:refresh", order.type);
+        //console.log("doSubmit")
+        this.$eh.$emit("protrade:order:refresh", "doSubmit");
         // utils.success(this.$t("contract_order_success"));
         let side =''
         res.data.side === 2 ? side = '买入' :side = '卖出'
@@ -1875,13 +1893,7 @@ export default {
         //  ---------------
       } else {
         utils.alert(res.message);
-        // let toastText = {
-        //   title: '委托已提交',
-        //   body: `在${res.data.price}价格买入${res.data.amount}张BTC永续合约。`,
-        //   color: 'red',
-        //   time: '下午6:12:40'
-        // }
-        // this.$toast(toastText)
+        
         this._resetLoadingState();
       }
     },
@@ -2113,14 +2125,21 @@ export default {
         return calculator.getMargin(amount, price, lever, totalValue, im)
       }
       return "--";
+    }, 
+    logoutClose(){ 
+      this.state.isLoginOverdue = false; 
+      utils.setSessionStorageValue('LoginStatus', 0)
+      //  if(utils.getSessionStorageValue("LoginStatus") == 1){
+      //     this.state.isLoginOverdue = true;
+      //   }
     },
     layoutInit () { 
       this.onresize()
       this.$eh.$on('app:resize', this.onresize)
     },
     onresize () { 
-      //调整杠杆宽度
-      let width = this.$refs.divlever.offsetWidth
+      //调整杠杆宽度 
+       let width = this.$refs.divlever.offsetWidth
       if(width < 300 ) {
         this.stickLen = 21
       } else if(width >= 300 && width < 310){
@@ -2136,13 +2155,9 @@ export default {
     },
   },
   watch: {
-    "refs.div_lever.length"() {
-      console.log(this.refs.div_lever.length)
-    },
     // 止损止盈 * 1 限价 2市价 3 限价止损 4 市价止损 5 限价止赢 6 市价止盈
     trigger_price() {
       this.setButtonState();
-  
     },
     "state.locale"(){
       this.timersMap[0] = this.$t("contract_all_in")
@@ -2189,7 +2204,7 @@ export default {
           }
         })  //查询用户设置
       }
-    }  
+    }
     this.$eh.$on("protrade:exchange:set", this.set);
     this.$eh.$on("protrade:order:refresh", () => {
       this.fetchData();
@@ -2211,6 +2226,52 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.loginStatus {
+    display: block; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(51,51,51,0.7);
+    background: radial-gradient(ellipse farthest-side at 50% 50%, rgba(51,51,51,0.7), rgba(0,0,0,0.7));
+    -webkit-box-shadow: 0px 2px 10px 5px rgba(164,140,66,0.4) inset;
+    box-shadow: 0px 2px 10px 5px rgba(164,140,66,0.4) inset;
+    z-index: 9999;
+
+    .mask-logout{
+      position:absolute;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -50px -175px;
+      width:350px;
+      padding:6px;
+      text-align: center;
+      color: #fff;
+      background-color: #1e1e1e; 
+      .header {
+        height: 60px;
+        line-height: 60px;
+        font-size: 1.2em; 
+      }
+      .close-btn{
+        display:none !important;
+      }
+    }
+    .link {
+      font-size: 12px;
+      text-align: center;
+      padding: 0 20px;
+      min-width: 84px;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      margin: 0 4px 8px;
+      color: white;
+      border-radius: 3px;
+      line-height: 32px;
+    } 
+}
 .modal-exchange-wrapper {
   font-size: 14px;
   width: 480px;
