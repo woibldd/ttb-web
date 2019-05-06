@@ -140,7 +140,7 @@
         <div class="modal__content">
           <div
             class="modal__row mt-12 mb-25"
-            v-if="verify_google">
+            v-if="verify_type==='google'">
             <div class="row__label mb-9">{{ $t('fa2_google_code_mobile') }}</div>
             <div class="row__input" >
               <input
@@ -154,7 +154,7 @@
           </div>
           <div
             class="modal_phone"
-            v-else-if="verify_phone">
+            v-else-if="verify_type==='phone'">
             <div class="modal__row" >
               <div class="row__label mb-9">{{ $t('register_by_phone') }}</div>
               <div class="row__input" >{{ phone }} </div>
@@ -178,7 +178,7 @@
           </div>
           <div
             class="modal_phone"
-            v-else-if="verify_email">
+            v-else-if="verify_type==='email'">
             <div class="modal__row" >
               <div class="row__label mb-9">{{ $t('register_by_email') }}</div>
               <div class="row__input" >{{ email }} </div>
@@ -266,7 +266,8 @@ export default {
         password: {
 
         }
-      }
+      },
+      prevent: false, 
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -296,7 +297,33 @@ export default {
         params.region = this.regionId
       }
       return params
-    }
+    },
+    verify_type () {
+      let type = 'email'
+      if (this.by === 'email') {
+        if(this.verify_email){
+          type = 'email'
+        }
+        else if(this.verify_google){
+          type = 'google'
+        }
+        else if(this.verify_phone){
+          type = 'phone'
+        }
+      }
+      else if  (this.by === 'phone') {
+        if(this.verify_phone){
+          type = 'phone'
+        }
+        else if(this.verify_google){
+          type = 'google'
+        }
+        else if(this.verify_email){
+          type = 'email'
+        }
+      }
+      return type
+    },
   },
   watch: {
     params () {
@@ -400,25 +427,30 @@ export default {
       }
     },
     async toVerifyCode () {
-      let type = 'google'
+      if(this.prevent == true) return;
+      setTimeout(()=>{ this.prevent = false;},  2000 )
+      this.prevent = true;
+
+      //let type = 'google'
+      let type = this.verify_type
       let params = {
       }
-      if (this.verify_google) {
+      if (type === 'google') {
         params = {
           code: this.googleCode
         }
-      } else if (this.verify_phone) {
+      } else if (type === 'phone') {
         params = {
           phone: this.phone,
           code: this.phoneCode
         }
-        type = 'phone'
+        //type = 'phone'
       } else {
         params = {
           email: this.email,
           code: this.emailCode
         }
-        type = 'email'
+        //type = 'email'
       }
       if (!params.code) {
         utils.alert(this.$i18n.t('err_captcha_empty'))
