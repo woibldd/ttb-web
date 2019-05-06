@@ -1142,7 +1142,6 @@
     "contract_price_tips":"你希望买入或卖出的价格",
     "contract_limit_price_tips":"限价委托用于在指定的（或更好的）价格买入或卖出。这是最常用的委托类型。",
     "contract_buy_on_price_piece":"在%{price}价格%{amount}张%{symbol}。",
-    "contract_buy_on_price_piece1":"在市价%{amount}张%{symbol}。",
     "contract_cost_10_times":"成本@{lever}x",
     "contract_pos_after_deal":"成交后的仓位大小",
     "contract_expect_equal_price":"预期强平价格",
@@ -1677,6 +1676,7 @@
     "dowload_text_11":"主流币对交易",
     "dowload_text_12":"支持主流币对交易功能，提供BTC/USDT、EOS/BTC、EOS/USDT、ETH/BTC、ETH/USDT等，多币种轻松自由选择",
 
+    "contract_buy_on_price_piece1":"在市价%{amount}张%{symbol}。", 
     "":""
-
+    
 }

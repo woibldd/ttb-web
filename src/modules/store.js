@@ -99,7 +99,7 @@ export const local = new Locals('store', {
   orderbookMode: 'both',
   regionId: '',
   timezone: '',
-  interval: '1D',
+  interval: '1h',
   supportNum: 129,
   proOnFav: false,
   pairTableTab: 'USDT',

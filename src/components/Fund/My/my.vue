@@ -12,12 +12,11 @@
       class="my-fund-content">
       <div class="fund-total">
         <div class="total__label">{{ $t('my_balance_equal') }}</div>
-        <div class="total__coin">{{ total }} {{ unit }} </div>
+        <div class="total__coin">{{ total || 0 | fixed(valueScale) }} {{ unit }} </div>
         <!-- <div
           is="ActivityPiece"
           @afterExchange="getAccountBalanceList"/> -->
-      </div>
- 
+      </div> 
       <el-table
         :data="tableData"
         class="fund-coin-pool">
@@ -112,6 +111,9 @@ export default {
     unit () {
       return state.locale === 'zh-CN' ? 'CNY' : 'USD'
     },
+    valueScale() { 
+      return state.locale === 'zh-CN' ? 2 : 4
+    },
     header () {
       return state.locale && [
         {key: 'currency', title: this.$t('fees_name')},
@@ -149,6 +151,11 @@ export default {
         num = 8
       }
       return res.round(num, this.C.ROUND_DOWN).toString()
+    }
+  },
+  watch:{ 
+    valueScale() {
+      this.getAccountBalanceList()
     }
   },
   components: {

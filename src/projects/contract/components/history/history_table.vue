@@ -260,6 +260,7 @@
               @click="showPromiseFundModal = false">{{ $t('cancel') }}</div>
             <v-btn
               class="btn"
+              :class="{'btn-disabled': btnEnsuranceDisabled }"
               @click="changePromiseFund"
               :label="modal.radio === '1' ? $t('contract_add_ensurance') : $t('contract_increase_ensurance')"/>
               <!-- 此处需要根据modal是弹出操作源头,显示增减 -->
@@ -364,6 +365,9 @@ export default {
     btnDisabled () {
       return !this.unwindPrice || this.unwindPrice == "0"
     },
+    btnEnsuranceDisabled() {
+      return !this.modal.amount || this.modal.amount == "0" 
+    }
 
   },
   methods: {
@@ -438,7 +442,8 @@ export default {
       if(this.holding.leverage != 0)
         this.showPromiseFundModal = true
     },
-    changePromiseFund () {
+    changePromiseFund () {  
+      if(this.btnEnsuranceDisabled) return;
       let max = this.modal.radio === '1' ? this.holding.canAddMargin : this.holding.canRemoveMargin
       let amount = this.modal.amount
       if (!amount || this.$big(amount).lte(0)) {
@@ -488,7 +493,7 @@ export default {
       let price = 0
       //限价
       let msg = 'contract_close_tips1';
-
+      debugger
       if (type === 'limit'){
         confirmText = this.$t('contract_close_limit')
         if(this.holding.amount > 0) {
@@ -501,9 +506,9 @@ export default {
       //市价
       else {
         confirmText = this.$t('contract_close_market')
+        msg = 'contract_close_tips4'
         if(this.holding.amount > 0) {
           title = this.$t('contract_close_market_sell')
-          msg = 'contract_close_tips4'
         } else if (this.holding.amount < 0) {
           title = this.$t('contract_close_market_buy')
         }
@@ -864,11 +869,7 @@ export default {
             }
         }
         
-        .btn-disabled{
-          color: #177757;
-          border-color:#177757;
-          cursor: not-allowed;
-        }
+        
     }
 }
 .modal-operate-ensurance {
@@ -979,4 +980,15 @@ export default {
   .nowrap {
     white-space: nowrap;
   }
+.btn-disabled{
+  -webkit-filter: grayscale(60%);
+  -moz-filter: grayscale(60%);
+  -ms-filter: grayscale(60%);
+  -o-filter: grayscale(60%);
+  filter: grayscale(60%);
+  // filter: gray;
+  filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1); 
+  // border-color:#177757;
+  cursor: not-allowed;
+}
 </style>
