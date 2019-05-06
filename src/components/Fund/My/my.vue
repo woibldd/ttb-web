@@ -17,6 +17,7 @@
           is="ActivityPiece"
           @afterExchange="getAccountBalanceList"/> -->
       </div>
+ 
       <el-table
         :data="tableData"
         class="fund-coin-pool">
@@ -27,10 +28,9 @@
           :label="hd.title">
           <template slot-scope="scope">
             <span v-if="hd.key === 'currency'"><icon :name="scope.row.currency"/></span>
-            <span>{{ scope.row[hd.key] }}</span>
+            <span>{{ scope.row[hd.key] | round(2) }}</span>
           </template>
-        </el-table-column>
-        
+        </el-table-column> 
         <el-table-column
           header-align='right'
           align="right"
@@ -63,7 +63,7 @@
               class="my-fund-operate">{{ $t('asset_trading') }}</router-link>
           </template>
         </el-table-column>
-      </el-table> 
+      </el-table>  
     </div>
     <router-view/>
   </div>

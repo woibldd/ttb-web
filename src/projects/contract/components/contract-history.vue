@@ -655,6 +655,7 @@ export default {
           })
       }
     },
+    
     setTabDataCount (name, count) {
       let item = this.nav.find(item => item.name === name)
       if (item) {
@@ -701,21 +702,71 @@ export default {
       }
     },
     //获取当前所有委托数据
-    async refreshCurrentDelegation(){
-      let params = {
+    async refreshCurrentDelegation() {
+      let tab = "contract_history_del_current";
+      // 
+      setTimeout(() => {
+        let params = {
           symbol: this.state.ct.pair,
           page: 1,
           size: 200
+        };
+        service.getActiveorders(params).then(res => {
+          if (!res.code) {
+            this.state.ct.currentDel = res.data.data;
+            this.setTabDataCount(tab, res.data.total);
+          }
+        });
+        return this.state.ct.currentDel; 
+      }, 1000);
+    },
+    //刷新委托历史数量
+    async refreshOrderHistory() {
+      let tab = "contract_history_del_history";
+      if(tab === this.current){
+        return
+      }
+      let params = {
+        symbol: this.state.ct.pair,
+        page: 1,
+        size: 1
+      };
+      await service.getOrderhistory(params).then(res => {
+        if (!res.code) { 
+          this.setTabDataCount(tab, res.data.total);
         }
-      await service.getActiveorders(params)
+      }); 
+    },
+    refreshHolding() {
+      let holdingTag = "contract_history_position";
+      if(holdingTag === this.current){
+        return
+      }
+      let params = {
+        symbol: this.state.ct.product_name
+      };  
+      service.getContractBalanceByPair(params)
       .then(res => {
-        if (!res.code) {
-          this.state.ct.currentDel = res.data.data
+        if (!res){
+          return
         }
+        if (res.message != "OK" && res.data == null) {
+          state.loadingfailed = true;
+        } else  if (!res.code) {
+          holdingTag = "contract_history_position"; 
+          if (res.data && res.data.holding && res.data.holding != 0) {
+            console.log("this.setTabDataCount(holdingTag, 1)")
+            this.setTabDataCount(holdingTag, 1);
+          } else if (res.data) {
+            this.setTabDataCount(holdingTag, 0);
+            console.log("this.setTabDataCount(holdingTag, 0)", {res})
+          }
+        }
+      }).catch((msg)=>{
+        console.log(1)
       })
-      return this.state.ct.currentDel
-      console.log('testtestsetsets',  this.state.ct.currentDel)
-    }
+      ; 
+    },
   },
   async created () {
     await actions.updateSession()
@@ -734,22 +785,24 @@ export default {
     this.$eh.$on('protrade:order:refresh', (type) => {
       this.size = this.page * this.size
       this.page = 1
-      this.fetchData()
-      console.log({type})
+      this.fetchData()  
+      this.refreshCurrentDelegation(); 
+      this.refreshOrderHistory()
 
-      if(!isNaN(Number(type))){
-        this.refreshTabData(type)
-        this.refreshCurrentDelegation()
-        // if (type == 1) {
-        // }
+      if(!isNaN(Number(type))){ 
+        this.refreshHolding()
       }
     })
     this.$nextTick(function () {
       this.$eh.$emit("protrade:order:refresh", 1)
     })
+    this.$eh.$on("setOrderfill:count", count => {
+      this.setTabDataCount("contract_history_deal_fills", count)
+    })
   },
   destroyed () {
     this.$eh.$off('protrade:order:refresh','destroyed')
+    this.$eh.$off("setOrderfill:count","destroyed");
     this.clearTimer()
   }
 }

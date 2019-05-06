@@ -207,7 +207,7 @@ export default {
     "$route.query.pair": {
       async handler(pair) {
         if (!pair) return;
-        const match = pair.match(/^([A-Z]*)_([A-Z]*)$/);
+        const match = pair.match(/^([A-Za-z]*)_([A-Za-z]*)$/);
         if (match) {
           this.state.ct.pair = pair;
           local.future = pair;
@@ -265,6 +265,9 @@ export default {
             newOrder = res.data.data 
             $this.$eh.$emit("protrade:order:refresh", 1)
           }
+          
+          //刷新已成交表头的数量
+          $this.$eh.$emit("setOrderfill:count", res.data.total)
         }
       })
     },5000)
