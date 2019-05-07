@@ -12,7 +12,7 @@
             :to="{name: 'trading'}"
             class="nav_link">{{ $t('trading') }}</router-link>
           <a 
-            v-if='isTestnet'
+            v-if='showContract'
             href="/contract.html"
             :class="{'router-link-active': from === 'contract'}"
             class="nav_link ml-30">{{ $t('contract') }} 
@@ -305,7 +305,12 @@ export default {
     },
     isTestnet() {
       return location.hostname.indexOf("ixex.pro") >= 0
-    }
+    },
+    showContract() {
+      let time1 = new Date()
+      let time2 = new Date(2019, 4, 7, 14)
+      return this.isTestnet || time1 > time2
+    },
   },
   methods: {
     switchLang (lang) {
