@@ -242,7 +242,7 @@ export default {
     let newOrder = {}; 
     const $this = this 
     setInterval(function(){
-      console.log(this.problemError) 
+      //console.log(this.problemError) 
       service.getOrderfills({page: 1,size: 10,symbol: "FUTURE_BTCUSD"}).then(res => {
         if (!res.code) {
           let number = 0
