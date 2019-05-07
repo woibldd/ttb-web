@@ -277,7 +277,7 @@
               </span>-->
             </div>
             <div class="op-balance flex-lr mt-10" v-else-if="currentDealType === 'limit'">
-              <span v-tooltip.top-center="{content: $t('post_only_tips'), classes: 'contract'}" :style="{color:(local.passiveDelegate ? '#c9a96c':'')}">
+              <span v-tooltip.top-center="{content: $t('post_only_tips'), classes: 'contract'}" :style="{color:(local.passiveDelegate ? '#22ced0':'')}">
                 {{ $t('contract_action_passive_delegate') }}
                 <el-checkbox class="ml-4" v-model="local.passiveDelegate"/>
               </span>
@@ -2855,7 +2855,7 @@ export default {
   font-weight: bold !important;
 }
 .c-primary {
-  color: #c9a96c !important;
+  color: #22ced0 !important;
 }
 .icon {
   background-repeat: no-repeat;

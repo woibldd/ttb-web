@@ -7,7 +7,7 @@
           :to="{name: 'LockWarehouse'}"
           class="c-mine mr-30 dib pointer"><icon
           name="anchor"/>{{ $t('mining') }}</router-link> -->
-        <span
+        <!-- <span
           @click="showLockModal = true"
           class="c-mine pointer mr-30 dib">
           {{ $t('locked') }}
@@ -16,7 +16,7 @@
           @click="showUnlockModal = true"
           class="c-mine pointer mr-30 dib">
           {{ $t('unlock') }}
-        </span>
+        </span> -->
         <router-link
           v-if="!showHistory"
           class="fund-history"
@@ -430,10 +430,10 @@ export default {
     },
     getEstValue (item) {
       let res = this.$big(item.amount).times(this.$big(item.rates[this.unit] || 0))
-      let num = 4
-      if (this.unit === 'USD') {
-        num = 8
-      }
+      let num = 8
+      // if (this.unit === 'USD') {
+      //   num = 8
+      // }
       return res.round(num, this.C.ROUND_DOWN).toString()
     },
     async getMine () {

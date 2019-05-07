@@ -29,9 +29,9 @@
       <a
         class="look-tutorial pointer"
         target="_blank"
-        :href="'https://ixcustomer.zendesk.com/hc/zh-cn/sections/360003431092-永续合约'">
+        :href="'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360027994431'">
         <div class="icon-wrapper mr-16">
-        <span class="icon icon-ques"/><span/></div>{{ $t('contract_look_tutorial') }}</span>
+        <span class="icon icon-ques"/><span/></div><span>{{ $t('contract_look_tutorial') }}</span>
       </a>
 
       <div class="index-chart-wrapper">
@@ -227,7 +227,7 @@ export default {
 }
 
 .look-tutorial{
-    background:rgba(201,169,108,1);
+    background:rgba(34,206,208,1);
     color: #fff;
     font-size: 16px;
     line-height: 16px;
@@ -323,7 +323,7 @@ export default {
             border: 0;
 
             &.active {
-                background-color: #C9A96C;
+                background-color: #22ced0;
                 color: #fff;
             }
 

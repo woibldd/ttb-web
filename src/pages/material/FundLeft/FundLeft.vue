@@ -18,7 +18,7 @@
           class="menu-name"
           target="_blank"
           active-class="active"
-          href="https://ixcustomer.zendesk.com/hc/zh-cn/sections/360003431092-永续合约">{{ $t('ensurance_contract_tutorial') }}</a></li>
+          href="https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360027994471">{{ $t('ensurance_contract_tutorial') }}</a></li>
       </ul>
       <!-- 指数 -->
       <p class="left-menu-title mt-20">
@@ -47,14 +47,14 @@
                 <li class="dropdown-item pl-34 pr-24">
                   <a
                     target="_blank"
-                    href="https://ixcustomer.zendesk.com/hc/zh-cn/sections/360003431092-永续合约"
+                    href="https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360027994431-BTC永续 指南"
                     class="index__sub__link">{{ $t("ensurance_btc_future_tutorial") }}
                   </a>
                 </li>
                 <li class="dropdown-item pl-34 pr-24">
                   <a
                     target="_blank"
-                    href="https://ixcustomer.zendesk.com/hc/zh-cn/sections/360003415251-合约公告"
+                    href="https://ixxcustomer.zendesk.com/hc/zh-cn"
                     class="index__sub__link">{{ $t("ensurance_btc_future_rule") }}
                   </a>
                 </li>
@@ -156,7 +156,7 @@ export default{
 
           &:hover,
           &.active {
-              color: #C9AA6D;
+              color: #01CED1;
           }
       }
       li {

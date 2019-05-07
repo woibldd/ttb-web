@@ -462,7 +462,7 @@ export default {
 .contract-btn{
   width: 200px;
   height: 35px;
-  background: #c9aa6d;
+  background: #01CED1;
   border-radius: 24px;
   color: #fff;
   text-align: center;
@@ -494,7 +494,7 @@ export default {
       color:rgba(201, 170, 109, 1);
       position: relative;
       span{
-        background-color: #c9aa6d
+        background-color: #01CED1
       }
       &:after{
         content: '';
@@ -503,7 +503,7 @@ export default {
         left: 70px;
         display: block;
         height: 2px;
-        background-color: #c9aa6d;
+        background-color: #01CED1;
         width: 60px;
       }
     }
@@ -583,7 +583,7 @@ export default {
           height: 6px;
           background-color: #fff;
           border-radius: 10px;
-          border: 6px solid #c9aa6d;
+          border: 6px solid #01CED1;
           color: #fff;
           text-align: center;
           font-size: 30px;

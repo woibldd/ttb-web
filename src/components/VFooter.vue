@@ -131,7 +131,7 @@
                   src="../assets/pic-contact-biyong.png">
               </div>
             </div>
-            <p class="copyright">Copyright © 2018 ixx.com</p>
+            <p class="copyright">Copyright © 2019 ixx.com</p>
           </div>
 
         </div>
