@@ -326,6 +326,11 @@ export default {
     },
   },
   watch: {
+    showModal(val){
+      if (!val) {
+        this.loading = val
+      }
+    },
     params () {
       this.errmsg = ''
     }
@@ -357,8 +362,8 @@ export default {
 
       return false
     },
-    hideModal () {
-      this.showModal = false
+    hideModal () { 
+      this.showModal = false  
     },
     keyPress ($event) {
       let code = $event.srcElement.value
@@ -372,8 +377,7 @@ export default {
       if (!check) {
         return false
       }
-      this.errmsg = ''
-
+      this.errmsg = '' 
       this.loading = true
 
       const res = await service.login(this.params)
