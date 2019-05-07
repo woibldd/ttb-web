@@ -1119,7 +1119,7 @@
 "contract_fee_rate_tips": "Forecasting of fee rates - The number shown here is the predicted rate of funds for the next funding period. This is the rate at which multiple positions need to pay to short positions. If the value is negative, it means that the short position has to pay to the multiple positions.",
 "day_fee_": "daily fund rates",
 "every_eight_hour": "every eight hours",
-"ensurance_rules_a": "IX using insurance funds to ensure the smooth completion of the process of trading. When the loss of the position is greater than the insured amount, the insurance funds will kick in to cover the loss.。",
+"ensurance_rules_a": "IXX using insurance funds to ensure the smooth completion of the process of trading. When the loss of the position is greater than the insured amount, the insurance funds will kick in to cover the loss.。",
 "ensurance_rules_b": "The increase in the amount of insurance comes from the price of forced liquidation in the market which is the price at the point of bankruptcy.。",
 "ensurance_rules_c": "Here are the current and historical data of the insurance funds.。",
 "ensurance_fund_amount": "Insurance fund amount balance",

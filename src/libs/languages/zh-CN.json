@@ -991,7 +991,7 @@
     "contract_fee_rate_tips":"<a>预测费率</a><br/>这里显示的数字是预测的下一个资金时段的资金费率。这是多仓需要付给空仓的费率。如果该数值是负数，代表空仓要付给多仓。",
     "day_fee_rate":"日化资金费率",
     "every_eight_hour":"每 8 小时",
-    "ensurance_rules_a":"IX.COM  使用保险基金来避免投资者的仓位被<span style=\"color:#01CED1\">自动减仓</span>。该基金用来改进未被执行的<span style=\"color:#01CED1\">强平</span>委托的价格,",
+    "ensurance_rules_a":"IXX.COM  使用保险基金来避免投资者的仓位被<span style=\"color:#01CED1\">自动减仓</span>。该基金用来改进未被执行的<span style=\"color:#01CED1\">强平</span>委托的价格,",
     "ensurance_rules_b":"以避免它们被自动减仓系统接管。保险基金额的增长来自强平委托在市场上于优于破产价的价格成交。",
     "ensurance_rules_c":"你可以查看下面的保险基金的当前和历史余额。",
     "ensurance_fund_amount":"保险基金余额",
