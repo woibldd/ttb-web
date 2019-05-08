@@ -300,13 +300,14 @@ export default {
     },
     verify_type () {
       let type = 'email'
-      if (this.by === 'email') {
+      //优先google验证
+      if(this.verify_google){
+          type = 'google'
+      }
+      else if (this.by === 'email') {
         if(this.verify_email){
           type = 'email'
-        }
-        else if(this.verify_google){
-          type = 'google'
-        }
+        } 
         else if(this.verify_phone){
           type = 'phone'
         }
@@ -314,10 +315,7 @@ export default {
       else if  (this.by === 'phone') {
         if(this.verify_phone){
           type = 'phone'
-        }
-        else if(this.verify_google){
-          type = 'google'
-        }
+        } 
         else if(this.verify_email){
           type = 'email'
         }
