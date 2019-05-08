@@ -18,8 +18,7 @@ let router = new Router({
       name: 'spa_contract',
       component: Index,
       meta: {
-        nav: true,  
-        zendeskWidget: true,
+        nav: true,   
       }
     }
   ].concat(routeWhiteList)
