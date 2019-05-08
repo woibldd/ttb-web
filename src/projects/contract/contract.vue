@@ -444,9 +444,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-div.zopim {
-    top: auto!important;
-}
 .contract-eqcode{
   width: 100px;
   float: right;
