@@ -21,6 +21,8 @@ import {state, actions} from '@/modules/store'
 import utils from '@/modules/utils'
 import VNotifyList from '@/components/VNotifyList.vue'
 
+let zeStyleEl = document.querySelector('#ze-style')
+
 export default {
   name: 'App',
   components: {
@@ -48,6 +50,19 @@ export default {
       this.keepSession()
     }
   },
+  watch: { 
+    zendeskWidget (show) {  
+      window.zE && window.zE(function () {
+        if (utils.isMobile()) {
+          return window.zE.hide()
+        }
+        if (show && zeStyleEl && zeStyleEl.parentNode) {
+          zeStyleEl.parentNode.removeChild(zeStyleEl)
+        }
+        return show ? window.zE.show() : window.zE.hide()
+      })
+    }
+  },
   computed: {
     showNav () {
       if (!this.$route.name) {
@@ -60,7 +75,13 @@ export default {
         return false
       }
       return utils.getRouteMeta(this.$route, 'class')
-    }
+    },
+    zendeskWidget () { 
+      if (!this.$route.name) {
+        return false
+      }
+      return !(utils.getRouteMeta(this.$route, 'zendeskWidget') === false) && this.showContact
+    },
   },
   created () {
     this.keepSession()

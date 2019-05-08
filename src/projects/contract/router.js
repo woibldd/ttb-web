@@ -18,7 +18,7 @@ let router = new Router({
       name: 'spa_contract',
       component: Index,
       meta: {
-        nav: true, 
+        nav: true,   
       }
     }
   ].concat(routeWhiteList)

@@ -229,8 +229,7 @@ export const routes = [
   {
     path: '/trading/:pair?',
     name: 'trading',
-    meta: {
-      zendeskWidget: false,
+    meta: { 
       auth: false,
       footer: true,
       nav: false
