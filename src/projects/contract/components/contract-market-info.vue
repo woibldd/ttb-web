@@ -82,7 +82,7 @@
           <div class="row__label">{{ $t('contract_fee_rate') }}</div>
           <div class="row__value">
             <span>{{time}}</span>
-            <router-link to="/material/fee-history">  {{ ( (pairInfo.fee_rate * 100).toFixed(4) || 0) + '%' }}</router-link>
+            <router-link to="/material/fee-history"> {{(pairInfo.fee_rate * 100) || 0 | fixed(4) }}%</router-link>
             <!-- {{ ((pairInfo.fee_rate * 100).toFixed(4) || 0) + '%' }} -->
           </div>
         </div>
@@ -144,7 +144,10 @@ export default {
            //$this.time = + hh + "时" + mm + "分" + ss + "秒"
            $this.time = $this.$t('count_down_value', { hour: hh, minute: mm, second: ss})
     				 startTime++;
-    		 }
+         }
+         else {
+           endTime = endTime + 60 * 60 * 8
+         }
      },1000);
      function checkTime(i){
     		 if (i < 10) {

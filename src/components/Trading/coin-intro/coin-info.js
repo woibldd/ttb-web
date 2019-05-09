@@ -327,5 +327,55 @@ export default{
       office_website: 'https://www.sunpower.io/', // 官网 
       chain_info: 'https://etherscan.io/address/0x33ad8ccd192c2b1782b0d3e557e32a54771e16f1' // 区块查询
     }
+  },
+  AIRx: {
+    'zh-CN': {
+      name: 'Aircoins',
+      full_name: '艾客币（aircoins）',
+      brief_info: '艾客币（aircoins）为世界第一个结合虚拟货币和增强实景（ AR）平台创立并发行的数字货币。Airсoins是一个兼苹果和安卓移动应用程序允许用户可以使用的AR平台。类似于游戏Pоkéman, 根据用户的地理位置收集AR中的数字货币。Aircoins可以将人流量引入感兴趣的区域，协助全球化公司产品推广， 同时能够在社区范围内宣传并在该位置使用。',
+      issue_time: '2019-4-30',
+      issue_all: '100亿', // 发行总量
+      issue_circulation: '12亿', // 流通总量 
+      token_price:'--',
+      whitepagger: 'https://doc-10-2k-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/htffpsv8ku16pcq7qoap83d7lr7v1559/1553299200000/17611552596875814148/*/1eZ739U_5LK50RSQNShizb45tRdO93K-o?e=download', // 白皮书
+      office_website: 'https://aircoins.co/', // 官网 
+      chain_info: 'https://etherscan.io/token/0x8cb1d155a5a1d5d667611b7710920fd9d1cd727f' // 区块查询
+    },
+    'zh-HK': { 
+      name: 'Aircoins',
+      full_name: '艾客幣（aircoins）',
+      brief_info: '艾客幣（aircoins）為世界第一個結合虛擬貨幣和增強實景（ AR）平台創立並發行的數字貨幣。Airсoins是一個兼蘋果和安卓移動應用程序允許用戶可以使用的AR平台。類似於遊戲Pоkéman, 根據用戶的地理位置收集AR中的數字貨幣。 Aircoins可以將人流量引入感興趣的區域，協助全球化公司產品推廣， 同時能夠在社區範圍內宣傳並在該位置使用。',
+      issue_time: '2019-4-30',
+      issue_all: '100億', // 发行总量
+      issue_circulation: '12億', // 流通总量 
+      token_price:'--',
+      whitepagger: 'https://doc-10-2k-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/htffpsv8ku16pcq7qoap83d7lr7v1559/1553299200000/17611552596875814148/*/1eZ739U_5LK50RSQNShizb45tRdO93K-o?e=download', // 白皮书
+      office_website: 'https://aircoins.co/', // 官网 
+      chain_info: 'https://etherscan.io/token/0x8cb1d155a5a1d5d667611b7710920fd9d1cd727f' // 区块查询
+    }, 
+    'en': {
+      name: 'Aircoins',
+      full_name: 'Aircoins',
+      brief_info: 'Aircoins is the first in the world combine virtual currency and enhance real-life (AR). The digital currency created and distributed by the platform.  Aircoins is an AR platform that allows users to use IOS and Android mobile apps.  Similar to the game Pokeman, the digital currency in the AR is collected according to the geographic location of the user.  Aircoins can bring people traffic to areas of interest and help global companies push products wide and able to promote within the community and use it at this location.',
+      issue_time: '2019-4-30',
+      issue_all: '10 billion', // 发行总量
+      issue_circulation: '1200 million', // 流通总量 
+      token_price:'--',
+      whitepagger: 'https://doc-10-2k-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/htffpsv8ku16pcq7qoap83d7lr7v1559/1553299200000/17611552596875814148/*/1eZ739U_5LK50RSQNShizb45tRdO93K-o?e=download', // 白皮书
+      office_website: 'https://aircoins.co/', // 官网 
+      chain_info: 'https://etherscan.io/token/0x8cb1d155a5a1d5d667611b7710920fd9d1cd727f' // 区块查询
+    },
+    ko: {
+      name: 'Aircoins',
+      full_name: '에어 컨즈 (aircoins)', 
+      brief_info: '에어 컨즈 (aircoins)는 세계 최초로 가상화폐와 증강현실 (AR) 플랫폼을 결합시켜 만든 디지털화폐이다.Airсoins는 애플과 안드로이드 를 겸한 모바일 애플리케이션으로 누구나 이용할 수 있는 AR 플랫폼이다.AR의 디지털 화폐는 게임 pokeman과 같이 사용자의 지리적 위치에 따라 수집한다.Aircoins는 흥미로운 지역에 많은 사람을 유치해 글로벌 회사의 제품 보급을 돕는 동시에 지역사회 내에서 홍보하고 사용할 수 있다.',
+      issue_time: '2019-4-30',
+      issue_all: '10 billion', // 发行总量
+      issue_circulation: '1200 million', // 流通总量 
+      token_price:'--',
+      whitepagger: 'https://doc-10-2k-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/htffpsv8ku16pcq7qoap83d7lr7v1559/1553299200000/17611552596875814148/*/1eZ739U_5LK50RSQNShizb45tRdO93K-o?e=download', // 白皮书
+      office_website: 'https://aircoins.co/', // 官网 
+      chain_info: 'https://etherscan.io/token/0x8cb1d155a5a1d5d667611b7710920fd9d1cd727f' // 区块查询
+    }
   }
 }
