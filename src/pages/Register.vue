@@ -1,6 +1,7 @@
 <template>
   <div class="page page-register">
     <resbg/>
+    <bubble/> 
     <div
       class="panel_box"
       ref="container">
@@ -208,6 +209,7 @@ import {state} from '@/modules/store'
 import resbg from '@/components/resbg'
 import ixInput from '@/components/common/ix-input/ix-input.vue'
 import responsive from '@/mixins/responsive'
+import bubble from '@/components/Bubble'
 
 // import { MdField } from 'vue-material/dist/components'
 // import gtMixin from '@/mixins/gt'
@@ -218,7 +220,8 @@ export default {
   components: {
     VBtn,
     resbg,
-    ixInput
+    ixInput,
+    bubble
   },
   props: ['by'],
   data () {
@@ -482,9 +485,9 @@ export default {
     fixPosition () {
       try {
         if (utils.isMobile) {
-          this.$refs.container.style.minHeight = screen.availHeight - (205) + 'px'
+          this.$refs.container.style.minHeight = screen.availHeight + (82) - (205) + 'px'
         } else {
-          this.$refs.container.style.minHeight = window.innerHeight - (110) - (80) + 'px'
+          this.$refs.container.style.minHeight = window.innerHeight + (82) - (110) - (80) + 'px'
         }
       } catch (e) {
         console.log(e)

@@ -377,5 +377,107 @@ export default{
       office_website: 'https://aircoins.co/', // 官网 
       chain_info: 'https://etherscan.io/token/0x8cb1d155a5a1d5d667611b7710920fd9d1cd727f' // 区块查询
     }
-  }
+  },
+  BCH: {
+    'zh-CN': {
+      name: 'BCH',
+      full_name: '比特币现金（Bitcoin Cash (BCH)）',
+      brief_info: '比特币现金（Bitcoin Cash (BCH)）是比特币的硬分叉币，通过升级协议修复链上容量，不包含SegWit功能。比特币现金（BCH）于2017年8月1日发布，作为原始比特币核心软件的升级版本，支持大区块（将区块大小提升至8M），有效提高支付处理速度，实现更快、更便宜的交易以及更流畅的用户体',
+      issue_time: '2017-07-24',
+      issue_all: '2100万', // 发行总量
+      issue_circulation: '1763.17万', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://www.bitcoincash.org/bitcoin.pdf', // 白皮书
+      office_website: 'https://www.bitcoincash.org/', // 官网
+      chain_info: '' // 区块查询
+    },
+    'zh-HK': {
+      name: 'BCH',
+      full_name: '比特幣現金（Bitcoin Cash (BCH)）',
+      brief_info: '比特幣現金（Bitcoin Cash (BCH)）是比特幣的硬分叉幣，通過升級協議修復鏈上容量，不包含SegWit功能。比特幣現金（BCH）於2017年8月1日發布，作為原始比特幣核心軟件的升級版本，支持大區塊（將區塊大小提升至8M），有效提高支付處理速度，實現更快、更便宜的交易以及更流暢的用戶體',
+      issue_time: '2017-07-24',
+      issue_all: '2100萬', // 发行总量
+      issue_circulation: '1763.17萬', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://www.bitcoincash.org/bitcoin.pdf', // 白皮书
+      office_website: 'https://www.bitcoincash.org/', // 官网
+      chain_info: '' // 区块查询
+    },
+    'en': {
+      name: 'BCH',
+      full_name: 'Bitcoin Cash (BCH)',
+      brief_info: 'Bitcoin is a digital asset and a payment system invented by Satoshi Nakamoto who published a related paper in 2008 and released it as open-source software in 2009. The system featured as peer-to-peer; users can transact directly without an intermediary.',
+      issue_time: '2017-07-24',
+      issue_all: '21,000,000', // 发行总量
+      issue_circulation: '17,631,788', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://www.bitcoincash.org/bitcoin.pdf', // 白皮书
+      office_website: 'https://www.bitcoincash.org/', // 官网
+      chain_info: '' // 区块查询
+    },
+    'ko': {
+      name: 'BCH',
+      full_name: '비트코인 캐시 (BCH)',
+      brief_info: '비트코인 캐시 (BCH)는 비트코인의 하드 하드 세그먼트 기능을 포함하지 않고 업데이트 계약을 통해 체인의 용량을 개선한 것이다.비트코인 현금 (BCH)은 2017년 8월 1일, 원시 비트코인 핵심 소프트웨어의 업그레이드 버전으로 블록 (블록 크기를 8M로 높이는 것)을 지원하며 지불 처리 속도를 효율적으로 높여보다 빠르고 저렴한 거래 및 유창한 사용자를 확보한다고 발표했다',
+      issue_time: '2017-07-24',
+      issue_all: '21,000,000', // 发行总量
+      issue_circulation: '17,631,788', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://www.bitcoincash.org/bitcoin.pdf', // 白皮书
+      office_website: 'https://www.bitcoincash.org/', // 官网
+      chain_info: '' // 区块查询
+    }
+
+  },
+  LTC: {
+    'zh-CN': {
+      name: 'LTC',
+      full_name: '莱特币',
+      brief_info: '莱特币诞生于2011年11月9日，被称为是“数字白银”。莱特币在技术上和比特币具有相同的实现原理。它是第一个基于Scrypt算法的网络数字货币，与比特币相比，莱特币拥有更快的交易确认时间，更高的网络交易容量和效率。莱特币现在拥有完整的产业链，充分的流动性，足以证明其是成熟、安全、稳定的商用金融系统。',
+      issue_time: '2011-11-9',
+      issue_all: '8400万', // 发行总量
+      issue_circulation: '5428.26万', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: '', // 白皮书
+      office_website: 'https://litecoin.com/', // 官网
+      chain_info: '' // 区块查询
+    },
+    'zh-HK': {
+      name: 'LTC',
+      full_name: '莱特币',
+      brief_info: '萊特幣誕生於2011年11月9日，被稱為是“數字白銀”。萊特幣在技術上和比特幣具有相同的實現原理。它是第一個基於Scrypt算法的網絡數字貨幣，與比特幣相比，萊特幣擁有更快的交易確認時間，更高的網絡交易容量和效率。萊特幣現在擁有完整的產業鏈，充分的流動性，足以證明其是成熟、安全、穩定的商用金融系統。',
+      issue_time: '2011-11-9',
+      issue_all: '8400萬', // 发行总量
+      issue_circulation: '5428.26萬', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: '', // 白皮书
+      office_website: 'https://litecoin.com/', // 官网
+      chain_info: '' // 区块查询
+    },
+    'en': {
+      name: 'LTC',
+      full_name: 'Litecoin',
+      brief_info: 'Litecoin is a peer-to-peer Internet currency that enables instant, near-zero cost payments to anyone in the world. Litecoin is an open source, global payment network that is fully decentralized without any central authorities.',
+      issue_time: '2011-11-9',
+      issue_all: '84,000,000', // 发行总量
+      issue_circulation: '54,282,600', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: '', // 白皮书
+      office_website: 'https://litecoin.com/', // 官网
+      chain_info: '' // 区块查询
+    },
+    'ko': {
+      name: 'LTC',
+      full_name: '래트코인은',
+      brief_info: '래트코인은 2011년 11월 9일 탄생해\'디지털 실버\'로 불린다.라이트코인은 비트코인과 기술적으로 동일한 실현원리를 가지고있다.이는 처음으로 Scrypt 알고리즘에 기초한 네트워크 디지털 화폐로 비트코인에 비해 더 빠른 거래 확인 시간, 더 높은 용량과 효율성을 갖고 있다.레티코인은 현재 완전하고 안전한 상업용 금융시스템임을 입증할만큼 유동성이 충분한 산업 사슬을 갖고 있다.',
+      issue_time: '2011-11-9',
+      issue_all: '84,000,000', // 发行总量
+      issue_circulation: '54,282,600', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: '', // 白皮书
+      office_website: 'https://litecoin.com/', // 官网
+      chain_info: '' // 区块查询
+    }
+
+  },
 }

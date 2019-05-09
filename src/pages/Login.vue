@@ -1,6 +1,7 @@
 <template>
   <div class="page page-login">
-    <resbg/>
+    <bubble/> 
+    <resbg/>  
     <div
       class="panel_box"
       ref="container">
@@ -220,6 +221,7 @@ import resbg from '@/components/resbg'
 import ixInput from '@/components/common/ix-input/ix-input.vue'
 import countDown from '@/components/common/countdown-code-button'
 import responsive from '@/mixins/responsive'
+import bubble from '@/components/Bubble'
 
 export default {
   mixins: [responsive],
@@ -228,7 +230,8 @@ export default {
     VBtn,
     resbg,
     ixInput,
-    countDown
+    countDown,
+    bubble
   },
   props: ['by'],
   data () {
