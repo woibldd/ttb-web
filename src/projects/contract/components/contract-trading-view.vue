@@ -194,7 +194,7 @@ export default {
               }
             } 
         }).append(utils.$i18n.t("tradingview_line"))
-        widget.btnFS[0].style.display = 'none'
+        //widget.btnFS[0].style.display = 'none'
         //debugger
         // widget.chart().createStudy(indicators[0].name, !1, !1, indicators[0].args, (entryId) => {
         //   this.entryId = entryId

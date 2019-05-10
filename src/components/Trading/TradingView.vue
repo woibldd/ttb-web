@@ -204,7 +204,7 @@ export default {
               }
             } 
         }).append(utils.$i18n.t("tradingview_line"))
-        widget.btnFS[0].style.display = 'none'
+        //widget.btnFS[0].style.display = 'none'
         
 
         widget.chart().executeActionById('drawingToolbarAction')
