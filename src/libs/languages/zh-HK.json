@@ -1637,6 +1637,10 @@
   
   "contract_close_tips4":"在最優價格%{amount}張BTC合約。",
   "contract_login_overdue":"登入狀態已過期，請重新登入",
+  "bubble_ix_team":"IXX 團隊",
+  "bubble_site_tips":"請您登入時認准下方IXX的標準功能變數名稱：",
+  "tradingview_line":"分時綫",
+  "footer_application_coin":"上幣申請",
   "":""
 
 }

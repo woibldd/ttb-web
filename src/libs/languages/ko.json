@@ -1663,5 +1663,9 @@
     "contract_competition_my_team": "我的战队",
     "contract_close_tips4":"가장 우수한 가격에%{amount}장BTC계약。",
     "contract_login_overdue":"로그인상태가 기한이 지남，다시 로그인 하세요",
-    "":""
+    "bubble_ix_team":"IXX 팀",
+    "bubble_site_tips":"로그인할 때 아래 IXX의 표준 도메인을 확인하십시오：",
+    "tradingview_line":"분 시간",
+    "footer_application_coin":"화폐발행신청",
+    "":"" 
 }

@@ -7,7 +7,7 @@ import _ from 'lodash'
 let lastTime
 
 function getPeriod (interval) {
-  return {
+  return {  
     1: '1m',
     5: '5m',
     15: '15m',
@@ -44,6 +44,7 @@ export default {
         supports_group_request: false,
         supports_marks: false,
         supported_resolutions: ['1', '5', '15', '30', '60', '240', '1D', '1W', '1M']
+        
       })
     })
   },
@@ -198,51 +199,21 @@ export default {
               time: 1542027840000,
               expect: '0.0000098999',
               actual: '0.0000012',
-              index: 3
-            },
-            {
-              time: 1542027840000,
-              expect: '0.0000098999',
-              actual: '0.0000012',
-              index: 1
-            },
-            {
-              time: 1542027900000,
-              expect: '0.0000098999',
-              actual: '0.0000012',
-              index: 3
-            },
-            {
-              time: 1542027900000,
-              expect: '0.0000098999',
-              actual: '0.0000012',
-              index: 1
-            },
-            {
-              time: 1542027960000,
-              expect: '0.0000098999',
-              actual: '0.0000012',
               index: 0
-            },
+            }, 
             {
-              time: 1542027960000,
+              time: 1542027900000,
               expect: '0.0000098999',
               actual: '0.0000012',
               index: 1
-            },
+            }, 
             {
               time: 1542027960000,
               expect: '0.0000098999',
               actual: '0.0000012',
               index: 2
-            },
-            {
-              time: 1542027960000,
-              expect: '0.0000098999',
-              actual: '0.0000012',
-              index: 3
-            }
-          ]
+            },  
+          ], 
         }
         // fake data
         if (keyPair[period]) {

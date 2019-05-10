@@ -7,7 +7,7 @@ import _ from 'lodash'
 let lastTime
 
 function getPeriod (interval) {
-  return {
+  return { 
     1: '1m',
     3: '3m',
     5: '5m',
@@ -44,6 +44,7 @@ export default {
         supports_search: true,
         supports_group_request: false,
         supports_marks: false,
+        //supported_resolutions: ['1', '3', '5', '15', '30', '60', '120', '240', '360', '720', '1D', '1W', '1M']
         supported_resolutions: ['1', '3', '5', '15', '30', '60', '120', '240', '360', '720', '1D', '1W', '1M']
       })
     })
@@ -52,7 +53,7 @@ export default {
     let product
     let currency
     // @check
-    const match = name.match(/([A-Z]*)[/_]([A-Z]*)$/)
+    const match = name.match(/([A-Za-z]*)[/_]([A-Za-z]*)$/)
     if (match) {
       product = match[1]
       currency = match[2]

@@ -8,6 +8,7 @@ let lastTime
 
 function getPeriod (interval) {
   return {
+    '1m':'1m',
     1: '1m',
     5: '5m',
     15: '15m',
@@ -42,7 +43,7 @@ export default {
       resolve({
         supports_search: true,
         supports_group_request: false,
-        supports_marks: false,
+        supports_marks: false, 
         supported_resolutions: ['1', '3', '5', '15', '30', '60', '120', '240', '360', '720', '1D', '1W', '1M']
       })
     })

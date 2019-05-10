@@ -1676,7 +1676,12 @@
     "dowload_text_11":"主流币对交易",
     "dowload_text_12":"支持主流币对交易功能，提供BTC/USDT、EOS/BTC、EOS/USDT、ETH/BTC、ETH/USDT等，多币种轻松自由选择",
 
-    "contract_buy_on_price_piece1":"在市价%{amount}张%{symbol}。", 
-    "":""
+    "contract_buy_on_price_piece1":"在市价%{amount}张%{symbol}。",  
+
+    "bubble_ix_team":"IXX 团队",
+    "bubble_site_tips":"请您登录时认准下方IXX的标准域名：",
+    "tradingview_line":"分时线",
+    "footer_application_coin":"上币申请",
+    "":"" 
     
 }

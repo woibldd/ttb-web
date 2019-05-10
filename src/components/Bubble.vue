@@ -2,8 +2,8 @@
   <div class="container">
     <div class="wrap">
       <div class="text-box">
-        <div class="title">IXX 团队</div>
-        <div class="sub-text">请您登录时认准下方IXX的标准域名：</div>
+        <div class="title">{{ $t('bubble_ix_team')}}</div>
+        <div class="sub-text">{{ $t('bubble_site_tips')}}</div>
         <div class="content">  
           <!-- <i class="icon warn-icon"></i> -->
           <a href="https://ixx.com" class="domain-text">
@@ -33,7 +33,7 @@ export default {}
     -webkit-box-shadow: 0 1px 6px 0 rgba(0,0,0,.15);
     box-shadow: 0 1px 6px 0 rgba(0,0,0,.15);
     top: 0;
-    right: 108px;
+    right: 175px;
     border-radius: 6px;
     padding: 10px 30px;
     -webkit-box-sizing: border-box;

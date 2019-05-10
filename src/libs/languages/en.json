@@ -1784,6 +1784,10 @@
 "contract_competition_tab_41":"Yield",
 "contract_close_tips4":" Buying %{amount} BTC contract at the best price 。",
 "contract_login_overdue":" The login has expired,please login again",
+"bubble_ix_team":" IXX Team",
+"bubble_site_tips":"Please identify the standard domain name IXX below when you log in：",
+"tradingview_line":"Time-share Line",
+"footer_application_coin":"Coin listing application",
 "":""
 
 }
