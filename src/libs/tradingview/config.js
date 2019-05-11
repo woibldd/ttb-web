@@ -31,12 +31,11 @@ export default function () {
       //'left_toolbar',
       // 'volume_force_overlay',
       'use_localstorage_for_settings',
-      'hide_left_toolbar_by_default',
      
     ],
     enabled_features: [
       'adaptive_logo',
-      'side_toolbar_in_fullscreen_mode', 
+      'side_toolbar_in_fullscreen_mode',  
       // 'charting_library_debug_mode',
       // 'seconds_resolution'
     ],

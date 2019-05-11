@@ -389,7 +389,7 @@ export default{
       token_price: '--', // 众筹价格
       whitepagger: 'https://www.bitcoincash.org/bitcoin.pdf', // 白皮书
       office_website: 'https://www.bitcoincash.org/', // 官网
-      chain_info: '' // 区块查询
+      chain_info: 'https://bch.btc.com' // 区块查询
     },
     'zh-HK': {
       name: 'BCH',
@@ -401,7 +401,7 @@ export default{
       token_price: '--', // 众筹价格
       whitepagger: 'https://www.bitcoincash.org/bitcoin.pdf', // 白皮书
       office_website: 'https://www.bitcoincash.org/', // 官网
-      chain_info: '' // 区块查询
+      chain_info: 'https://bch.btc.com' // 区块查询
     },
     'en': {
       name: 'BCH',
@@ -413,7 +413,7 @@ export default{
       token_price: '--', // 众筹价格
       whitepagger: 'https://www.bitcoincash.org/bitcoin.pdf', // 白皮书
       office_website: 'https://www.bitcoincash.org/', // 官网
-      chain_info: '' // 区块查询
+      chain_info: 'https://bch.btc.com' // 区块查询
     },
     'ko': {
       name: 'BCH',
@@ -425,7 +425,7 @@ export default{
       token_price: '--', // 众筹价格
       whitepagger: 'https://www.bitcoincash.org/bitcoin.pdf', // 白皮书
       office_website: 'https://www.bitcoincash.org/', // 官网
-      chain_info: '' // 区块查询
+      chain_info: 'https://bch.btc.com' // 区块查询
     }
 
   },
@@ -440,7 +440,7 @@ export default{
       token_price: '--', // 众筹价格
       whitepagger: '', // 白皮书
       office_website: 'https://litecoin.com/', // 官网
-      chain_info: '' // 区块查询
+      chain_info: 'https://live.blockcypher.com/ltc/' // 区块查询
     },
     'zh-HK': {
       name: 'LTC',
@@ -452,7 +452,7 @@ export default{
       token_price: '--', // 众筹价格
       whitepagger: '', // 白皮书
       office_website: 'https://litecoin.com/', // 官网
-      chain_info: '' // 区块查询
+      chain_info: 'https://live.blockcypher.com/ltc/' // 区块查询
     },
     'en': {
       name: 'LTC',
@@ -464,7 +464,7 @@ export default{
       token_price: '--', // 众筹价格
       whitepagger: '', // 白皮书
       office_website: 'https://litecoin.com/', // 官网
-      chain_info: '' // 区块查询
+      chain_info: 'https://live.blockcypher.com/ltc/' // 区块查询
     },
     'ko': {
       name: 'LTC',
@@ -476,7 +476,7 @@ export default{
       token_price: '--', // 众筹价格
       whitepagger: '', // 白皮书
       office_website: 'https://litecoin.com/', // 官网
-      chain_info: '' // 区块查询
+      chain_info: 'https://live.blockcypher.com/ltc/' // 区块查询
     }
 
   },

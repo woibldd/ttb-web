@@ -105,22 +105,8 @@ export default {
           local.interval = interval
           if(interval !='1') { 
             widget.chart().setChartType(local.lineType)   
-            if(ida === 0) {
-                widget.chart().createStudy('Moving Average', !1, !1, [7], 
-                  (entryId) => { ida = entryId }, {
-                    'Plot.color': '#ff9500',
-                    'Plot.linewidth': 3,
-                    precision: 8
-                  })
-              }
-              if(idb === 0) {
-                widget.chart().createStudy('Moving Average', !1, !1, [30], 
-                  (entryId) => { idb = entryId }, {
-                    'Plot.color': '#107efa',
-                    'Plot.linewidth': 3,
-                    precision: 8
-                  })
-              }
+            widget.chart().setEntityVisibility(ida, true) //显示7 日平均线
+            widget.chart().setEntityVisibility(idb, true) //显示30 日平均线 
               //移除分时线高亮
               if(widget.btnFS[0].classList.contains('selected')) {
                 widget.btnFS[0].classList.remove('selected') 
@@ -169,39 +155,24 @@ export default {
           if (indicat.name === 'MACD') {
             btn.trigger('click')
           }
-        })
- 
+        }) 
         widget.btnFS = widget.createButton().on('click', (e, vm)=>{
           let element = e.srcElement || e.target
           let cls = element.classList
+          debugger
           if (!cls.contains('selected')) { 
               element.classList.add('selected')
               local.lineType = widget.chart().chartType() //记录当前的K线样式
               widget.chart().setChartType(2)  //K线样式切換到线形图
               widget.chart().setResolution('1', null) //周期切换到一分钟 
-              widget.chart().removeEntity(ida) //移除7 日平均线
-              widget.chart().removeEntity(idb) //移除30 日平均线
-              ida = 0
-              idb = 0
+              widget.chart().setEntityVisibility(ida, false) //隐藏7 日平均线
+              widget.chart().setEntityVisibility(idb, false) //隐藏30 日平均线 
             } else { 
               element.classList.remove('selected') 
               widget.chart().setChartType(local.lineType)   
-              if(ida === 0) {  //添加7 日平均线
-                widget.chart().createStudy('Moving Average', !1, !1, [7], 
-                  (entryId) => { ida = entryId }, {
-                    'Plot.color': '#ff9500',
-                    'Plot.linewidth': 3,
-                    precision: 8
-                  })
-              }
-              if(idb === 0) { //添加30 日平均线
-                widget.chart().createStudy('Moving Average', !1, !1, [30], 
-                  (entryId) => { idb = entryId }, {
-                    'Plot.color': '#107efa',
-                    'Plot.linewidth': 3,
-                    precision: 8
-                  })
-              }
+              widget.chart().setEntityVisibility(ida, true) //显示7 日平均线
+              widget.chart().setEntityVisibility(idb, true) //显示30 日平均线
+              
             } 
         }).append(utils.$i18n.t("tradingview_line"))
         //widget.btnFS[0].style.display = 'none'
