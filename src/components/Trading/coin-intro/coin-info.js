@@ -277,5 +277,207 @@ export default{
       office_website: 'https://imcc.io/', // 官网
       chain_info: 'https://etherscan.io/' // 区块查询
     }
-  }
+  },
+  SP: {
+    'zh-CN': {
+      name: 'SP',
+      full_name: '光元(SunPower)',
+      brief_info: '光元(SunPower)区块链是太阳能光伏发电与区块链技术的完美结合，利用分布式光伏发电解决了区块链去中心化和能源问题。光元区块链更关注区块链底层技术和长远发展，通过三层式区块链构架，致力于发展高 TPS 支付应用体系，实体太阳能电池为区块链系统做价值支撑，并为未来留下充分的升级扩展可能性，以求最大程度解决区块链不可能三角问题。',
+      issue_time: '2019-4-18',
+      issue_all: '6亿', // 发行总量
+      issue_circulation: '1亿', // 流通总量 
+      token_price:'--',
+      whitepagger: 'https://www.sunpower.io/wp.pdf', // 白皮书
+      office_website: 'https://www.sunpower.io/', // 官网 
+      chain_info: 'https://etherscan.io/address/0x33ad8ccd192c2b1782b0d3e557e32a54771e16f1' // 区块查询
+    },
+    'zh-HK': {
+      name: 'SP',
+      full_name: '光元(SunPower)',
+      brief_info: '光元（SunPower）區塊鏈是太陽能光伏發電與區塊鏈科技的完美結合，利用分佈式光伏發電解决了區塊鏈去中心化和能源問題。光元區塊鏈更關注區塊鏈底層科技和長遠發展，通過三層式區塊鏈構架，致力於發展高TPS支付應用體系，實體太陽能電池為區塊鏈系統做價值支撐，並為未來留下充分的陞級擴展可能性，以求最大程度解决區塊鏈不可能三角問題。',
+      issue_time: '2019-4-18',
+      issue_all: '6億', // 发行总量
+      issue_circulation: '1億', // 流通总量  
+      token_price:'--',
+      whitepagger: 'https://www.sunpower.io/wp.pdf', // 白皮书
+      office_website: 'https://www.sunpower.io/', // 官网 
+      chain_info: 'https://etherscan.io/address/0x33ad8ccd192c2b1782b0d3e557e32a54771e16f1' // 区块查询
+    }, 
+    'en': {
+      name: 'SP',
+      full_name: 'SunPower',
+      brief_info: 'The SunPower blockchain is the perfect combination of solar photovoltaic power generation and blockchain technology, using distributed photovoltaic power generation to solve blockchain decentralization and energy issues.  The optical element blockchain pays more attention to the underlying technology and long-term development of the blockchain. Through the three-tier blockchain architecture, it is committed to developing a high TPS payment application system. The physical solar cells support the value of the blockchain system and remain for the future.  Under the full upgrade expansion possibilities, in order to maximize the resolution of the blockchain impossible triangle problem.',
+      issue_time: '2019-4-18',
+      issue_all: '600 million', // 发行总量
+      issue_circulation: '100 million', // 流通总量 
+      token_price:'--',
+      whitepagger: 'https://www.sunpower.io/wp.pdf', // 白皮书
+      office_website: 'https://www.sunpower.io/', // 官网 
+      chain_info: 'https://etherscan.io/address/0x33ad8ccd192c2b1782b0d3e557e32a54771e16f1' // 区块查询
+    },
+    ko: {
+      name: 'SP',
+      full_name: 'SunPower',
+      brief_info: '광원 (SunPower) 블록쇠는 태양광볼트발전과 블록쇠사슬기술의 완벽한 결합으로서 분산식광볼트발전으로 블록쇠의 중심화와 에너지 문제를 해결하는데 리롭다.광 위안 사슬 에 더 큰 관심 사슬 밑바닥 기술 과 장기적 인 발전 을 통 해 3 층 식 사슬 프레임 을 발 전시 켜 나 가 고 TPS 지급 응용 체계, 실물 태양 전지를 가치 사슬 시스템 을 지탱 하 고 미래 의 업그레이드 를 남 기고 충분히 확장 에 나 서고 최대한 해결 가능성 区块 사슬 불가능 삼각 물 문제 다.',
+      issue_time: '2019-4-18',
+      issue_all: '600 million', // 发行总量
+      issue_circulation: '100 million', // 流通总量 
+      token_price:'--',
+      whitepagger: 'https://www.sunpower.io/wp.pdf', // 白皮书
+      office_website: 'https://www.sunpower.io/', // 官网 
+      chain_info: 'https://etherscan.io/address/0x33ad8ccd192c2b1782b0d3e557e32a54771e16f1' // 区块查询
+    }
+  },
+  AIRx: {
+    'zh-CN': {
+      name: 'Aircoins',
+      full_name: '艾客币（aircoins）',
+      brief_info: '艾客币（aircoins）为世界第一个结合虚拟货币和增强实景（ AR）平台创立并发行的数字货币。Airсoins是一个兼苹果和安卓移动应用程序允许用户可以使用的AR平台。类似于游戏Pоkéman, 根据用户的地理位置收集AR中的数字货币。Aircoins可以将人流量引入感兴趣的区域，协助全球化公司产品推广， 同时能够在社区范围内宣传并在该位置使用。',
+      issue_time: '2019-4-30',
+      issue_all: '100亿', // 发行总量
+      issue_circulation: '12亿', // 流通总量 
+      token_price:'--',
+      whitepagger: 'https://doc-10-2k-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/htffpsv8ku16pcq7qoap83d7lr7v1559/1553299200000/17611552596875814148/*/1eZ739U_5LK50RSQNShizb45tRdO93K-o?e=download', // 白皮书
+      office_website: 'https://aircoins.co/', // 官网 
+      chain_info: 'https://etherscan.io/token/0x8cb1d155a5a1d5d667611b7710920fd9d1cd727f' // 区块查询
+    },
+    'zh-HK': { 
+      name: 'Aircoins',
+      full_name: '艾客幣（aircoins）',
+      brief_info: '艾客幣（aircoins）為世界第一個結合虛擬貨幣和增強實景（ AR）平台創立並發行的數字貨幣。Airсoins是一個兼蘋果和安卓移動應用程序允許用戶可以使用的AR平台。類似於遊戲Pоkéman, 根據用戶的地理位置收集AR中的數字貨幣。 Aircoins可以將人流量引入感興趣的區域，協助全球化公司產品推廣， 同時能夠在社區範圍內宣傳並在該位置使用。',
+      issue_time: '2019-4-30',
+      issue_all: '100億', // 发行总量
+      issue_circulation: '12億', // 流通总量 
+      token_price:'--',
+      whitepagger: 'https://doc-10-2k-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/htffpsv8ku16pcq7qoap83d7lr7v1559/1553299200000/17611552596875814148/*/1eZ739U_5LK50RSQNShizb45tRdO93K-o?e=download', // 白皮书
+      office_website: 'https://aircoins.co/', // 官网 
+      chain_info: 'https://etherscan.io/token/0x8cb1d155a5a1d5d667611b7710920fd9d1cd727f' // 区块查询
+    }, 
+    'en': {
+      name: 'Aircoins',
+      full_name: 'Aircoins',
+      brief_info: 'Aircoins is the first in the world combine virtual currency and enhance real-life (AR). The digital currency created and distributed by the platform.  Aircoins is an AR platform that allows users to use IOS and Android mobile apps.  Similar to the game Pokeman, the digital currency in the AR is collected according to the geographic location of the user.  Aircoins can bring people traffic to areas of interest and help global companies push products wide and able to promote within the community and use it at this location.',
+      issue_time: '2019-4-30',
+      issue_all: '10 billion', // 发行总量
+      issue_circulation: '1200 million', // 流通总量 
+      token_price:'--',
+      whitepagger: 'https://doc-10-2k-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/htffpsv8ku16pcq7qoap83d7lr7v1559/1553299200000/17611552596875814148/*/1eZ739U_5LK50RSQNShizb45tRdO93K-o?e=download', // 白皮书
+      office_website: 'https://aircoins.co/', // 官网 
+      chain_info: 'https://etherscan.io/token/0x8cb1d155a5a1d5d667611b7710920fd9d1cd727f' // 区块查询
+    },
+    ko: {
+      name: 'Aircoins',
+      full_name: '에어 컨즈 (aircoins)', 
+      brief_info: '에어 컨즈 (aircoins)는 세계 최초로 가상화폐와 증강현실 (AR) 플랫폼을 결합시켜 만든 디지털화폐이다.Airсoins는 애플과 안드로이드 를 겸한 모바일 애플리케이션으로 누구나 이용할 수 있는 AR 플랫폼이다.AR의 디지털 화폐는 게임 pokeman과 같이 사용자의 지리적 위치에 따라 수집한다.Aircoins는 흥미로운 지역에 많은 사람을 유치해 글로벌 회사의 제품 보급을 돕는 동시에 지역사회 내에서 홍보하고 사용할 수 있다.',
+      issue_time: '2019-4-30',
+      issue_all: '10 billion', // 发行总量
+      issue_circulation: '1200 million', // 流通总量 
+      token_price:'--',
+      whitepagger: 'https://doc-10-2k-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/htffpsv8ku16pcq7qoap83d7lr7v1559/1553299200000/17611552596875814148/*/1eZ739U_5LK50RSQNShizb45tRdO93K-o?e=download', // 白皮书
+      office_website: 'https://aircoins.co/', // 官网 
+      chain_info: 'https://etherscan.io/token/0x8cb1d155a5a1d5d667611b7710920fd9d1cd727f' // 区块查询
+    }
+  },
+  BCH: {
+    'zh-CN': {
+      name: 'BCH',
+      full_name: '比特币现金（Bitcoin Cash (BCH)）',
+      brief_info: '比特币现金（Bitcoin Cash (BCH)）是比特币的硬分叉币，通过升级协议修复链上容量，不包含SegWit功能。比特币现金（BCH）于2017年8月1日发布，作为原始比特币核心软件的升级版本，支持大区块（将区块大小提升至8M），有效提高支付处理速度，实现更快、更便宜的交易以及更流畅的用户体',
+      issue_time: '2017-07-24',
+      issue_all: '2100万', // 发行总量
+      issue_circulation: '1763.17万', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://www.bitcoincash.org/bitcoin.pdf', // 白皮书
+      office_website: 'https://www.bitcoincash.org/', // 官网
+      chain_info: 'https://bch.btc.com' // 区块查询
+    },
+    'zh-HK': {
+      name: 'BCH',
+      full_name: '比特幣現金（Bitcoin Cash (BCH)）',
+      brief_info: '比特幣現金（Bitcoin Cash (BCH)）是比特幣的硬分叉幣，通過升級協議修復鏈上容量，不包含SegWit功能。比特幣現金（BCH）於2017年8月1日發布，作為原始比特幣核心軟件的升級版本，支持大區塊（將區塊大小提升至8M），有效提高支付處理速度，實現更快、更便宜的交易以及更流暢的用戶體',
+      issue_time: '2017-07-24',
+      issue_all: '2100萬', // 发行总量
+      issue_circulation: '1763.17萬', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://www.bitcoincash.org/bitcoin.pdf', // 白皮书
+      office_website: 'https://www.bitcoincash.org/', // 官网
+      chain_info: 'https://bch.btc.com' // 区块查询
+    },
+    'en': {
+      name: 'BCH',
+      full_name: 'Bitcoin Cash (BCH)',
+      brief_info: 'Bitcoin is a digital asset and a payment system invented by Satoshi Nakamoto who published a related paper in 2008 and released it as open-source software in 2009. The system featured as peer-to-peer; users can transact directly without an intermediary.',
+      issue_time: '2017-07-24',
+      issue_all: '21,000,000', // 发行总量
+      issue_circulation: '17,631,788', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://www.bitcoincash.org/bitcoin.pdf', // 白皮书
+      office_website: 'https://www.bitcoincash.org/', // 官网
+      chain_info: 'https://bch.btc.com' // 区块查询
+    },
+    'ko': {
+      name: 'BCH',
+      full_name: '비트코인 캐시 (BCH)',
+      brief_info: '비트코인 캐시 (BCH)는 비트코인의 하드 하드 세그먼트 기능을 포함하지 않고 업데이트 계약을 통해 체인의 용량을 개선한 것이다.비트코인 현금 (BCH)은 2017년 8월 1일, 원시 비트코인 핵심 소프트웨어의 업그레이드 버전으로 블록 (블록 크기를 8M로 높이는 것)을 지원하며 지불 처리 속도를 효율적으로 높여보다 빠르고 저렴한 거래 및 유창한 사용자를 확보한다고 발표했다',
+      issue_time: '2017-07-24',
+      issue_all: '21,000,000', // 发行总量
+      issue_circulation: '17,631,788', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://www.bitcoincash.org/bitcoin.pdf', // 白皮书
+      office_website: 'https://www.bitcoincash.org/', // 官网
+      chain_info: 'https://bch.btc.com' // 区块查询
+    }
+
+  },
+  LTC: {
+    'zh-CN': {
+      name: 'LTC',
+      full_name: '莱特币',
+      brief_info: '莱特币诞生于2011年11月9日，被称为是“数字白银”。莱特币在技术上和比特币具有相同的实现原理。它是第一个基于Scrypt算法的网络数字货币，与比特币相比，莱特币拥有更快的交易确认时间，更高的网络交易容量和效率。莱特币现在拥有完整的产业链，充分的流动性，足以证明其是成熟、安全、稳定的商用金融系统。',
+      issue_time: '2011-11-9',
+      issue_all: '8400万', // 发行总量
+      issue_circulation: '5428.26万', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: '', // 白皮书
+      office_website: 'https://litecoin.com/', // 官网
+      chain_info: 'https://live.blockcypher.com/ltc/' // 区块查询
+    },
+    'zh-HK': {
+      name: 'LTC',
+      full_name: '莱特币',
+      brief_info: '萊特幣誕生於2011年11月9日，被稱為是“數字白銀”。萊特幣在技術上和比特幣具有相同的實現原理。它是第一個基於Scrypt算法的網絡數字貨幣，與比特幣相比，萊特幣擁有更快的交易確認時間，更高的網絡交易容量和效率。萊特幣現在擁有完整的產業鏈，充分的流動性，足以證明其是成熟、安全、穩定的商用金融系統。',
+      issue_time: '2011-11-9',
+      issue_all: '8400萬', // 发行总量
+      issue_circulation: '5428.26萬', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: '', // 白皮书
+      office_website: 'https://litecoin.com/', // 官网
+      chain_info: 'https://live.blockcypher.com/ltc/' // 区块查询
+    },
+    'en': {
+      name: 'LTC',
+      full_name: 'Litecoin',
+      brief_info: 'Litecoin is a peer-to-peer Internet currency that enables instant, near-zero cost payments to anyone in the world. Litecoin is an open source, global payment network that is fully decentralized without any central authorities.',
+      issue_time: '2011-11-9',
+      issue_all: '84,000,000', // 发行总量
+      issue_circulation: '54,282,600', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: '', // 白皮书
+      office_website: 'https://litecoin.com/', // 官网
+      chain_info: 'https://live.blockcypher.com/ltc/' // 区块查询
+    },
+    'ko': {
+      name: 'LTC',
+      full_name: '래트코인은',
+      brief_info: '래트코인은 2011년 11월 9일 탄생해\'디지털 실버\'로 불린다.라이트코인은 비트코인과 기술적으로 동일한 실현원리를 가지고있다.이는 처음으로 Scrypt 알고리즘에 기초한 네트워크 디지털 화폐로 비트코인에 비해 더 빠른 거래 확인 시간, 더 높은 용량과 효율성을 갖고 있다.레티코인은 현재 완전하고 안전한 상업용 금융시스템임을 입증할만큼 유동성이 충분한 산업 사슬을 갖고 있다.',
+      issue_time: '2011-11-9',
+      issue_all: '84,000,000', // 发行总量
+      issue_circulation: '54,282,600', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: '', // 白皮书
+      office_website: 'https://litecoin.com/', // 官网
+      chain_info: 'https://live.blockcypher.com/ltc/' // 区块查询
+    }
+
+  },
 }

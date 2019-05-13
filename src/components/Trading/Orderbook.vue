@@ -331,15 +331,24 @@ export default {
 
       let buyTotal = this.$big(0)
       let sellTotal = this.$big(0)
-      let maxBuyTotal = _.maxBy(this.buy, i => parseFloat(i[1]))[1]
-      let maxSellTotal = _.maxBy(this.sell, i => parseFloat(i[1]))[1]
+      let maxBuyTotal = 0
+      let maxSellTotal = 0
+
+      if(this.buy.length > 1){
+        maxBuyTotal = _.maxBy(this.buy, i => parseFloat(i[1]))[1]
+      }
+      if(this.sell.length > 1){
+         maxSellTotal = _.maxBy(this.sell, i => parseFloat(i[1]))[1]
+      }
+
       this.buy.forEach((buy) => {
         const amount = this.$big(buy[1])
         buyTotal = buyTotal.plus(amount)
-        bids.push({
+        // console.log(buy[1],maxBuyTotal)
+     bids.push({
           price: this.$big(buy[0]),
           amount: this.$big(buy[1]),
-          deep: this.$big(buy[1]).div(maxBuyTotal).times(100).round(4).toString(),
+          deep: this.$big(buy[1]).times(100).round(4).toString(),
           total: buyTotal
         })
       })
@@ -349,7 +358,7 @@ export default {
         asks.unshift({
           price: this.$big(sell[0]),
           amount: this.$big(sell[1]),
-          deep: this.$big(sell[1]).div(maxSellTotal).times(100).round(4).toString(),
+          deep: this.$big(sell[1]).times(100).round(4).toString(),
           total: sellTotal
         })
       })
@@ -382,6 +391,7 @@ export default {
       if (!res.code) {
         this.assignData(res.data)
       }
+
       this.socket = ws.create(`orderbook/${this.pair}/${this.offset}/${this.accuracy}/20`)
       this.socket.$on('message', (data) => {
         this.assignData(data)
