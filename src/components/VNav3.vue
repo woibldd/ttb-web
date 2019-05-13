@@ -20,8 +20,10 @@
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-qrcode pl-12 pr-12">
                   <img src="~@/assets/otc-qrcode.jpg" width="114" height="114" alt> 
-                   <span>{{$t('otc_tips')}}</span>
-                   <i>{{$t('otc_trade')}}</i>
+                  <div class="content">
+                    <span>{{$t('otc_tips')}}</span> <br/>
+                    <i>{{$t('otc_trade')}}</i>
+                  </div>
                 </li>
               </ul>
             </div>

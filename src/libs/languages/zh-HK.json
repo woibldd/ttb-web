@@ -1631,19 +1631,16 @@
   "contract_loading":"系統加載數據失敗...",
   "contract_reload":"重新加載",
   "contract_competition_my_team": "我的戰隊",
-  "contract_competition_explain_51": "每日（UTC+8）12:00排名更新",
-  
-  "contract_competition_tab_41":"收益額",
-  
+  "contract_competition_explain_51": "每日（UTC+8）12:00排名更新", 
+  "contract_competition_tab_41":"收益額", 
   "contract_close_tips4":"在最優價格%{amount}張BTC合約。",
   "contract_login_overdue":"登入狀態已過期，請重新登入",
   "bubble_ix_team":"IXX 團隊",
   "bubble_site_tips":"請您登入時認准下方IXX的標準功能變數名稱：",
   "tradingview_line":"分時綫",
-  "footer_application_coin":"上幣申請",
-  
-  "otc_trade":"法币交易",
-  "otc_tips":"添加微信请备注",
+  "footer_application_coin":"上幣申請", 
+  "otc_trade":"法幣交易",
+  "otc_tips":"添加微信請備註",
   "":""
 
 }
