@@ -11,7 +11,7 @@
             :class="{'router-link-active': from === 'contract'}"
             class="nav_link ml-30"
           >{{ $t('contract') }}</a>
-          <div class="nav_link arrow-down" v-if="!isTestnet">
+          <div class="nav_link arrow-down">
             <span class="nav_link ml-30">
               {{ $t('otc_trade') }}
               <icon class="arrow ml-5" name="arrow-down-yellow"/>
