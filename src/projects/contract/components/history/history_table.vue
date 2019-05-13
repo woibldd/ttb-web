@@ -172,6 +172,7 @@
           <!-- 限价平仓 -->
           <div
             class="btn"
+            :class="{'btn-disabled': btnDisabled }"
             @click.prevent="submitOrder()">
             {{ $t('contract_action_open_short') }}
           </div>
@@ -259,6 +260,7 @@
               @click="showPromiseFundModal = false">{{ $t('cancel') }}</div>
             <v-btn
               class="btn"
+              :class="{'btn-disabled': btnEnsuranceDisabled }"
               @click="changePromiseFund"
               :label="modal.radio === '1' ? $t('contract_add_ensurance') : $t('contract_increase_ensurance')"/>
               <!-- 此处需要根据modal是弹出操作源头,显示增减 -->
@@ -305,7 +307,7 @@
 </template>
 <script>
 import service from '@/modules/service'
-import {state} from '@/modules/store'
+import {state, actions} from '@/modules/store'
 import utils from '@/modules/utils'
 import stateHoldingMixins from '../stateHoldingComputedMixins'
 import pairInfoMixins from '../statePairInfoComputedMixins'
@@ -325,7 +327,7 @@ export default {
       unwindPrice: this.markPrice,
       bindMarkPrice: true,
       clearWarehouseLoading: false,
-      showupm: true,
+      showupm: true, 
     }
   },
   mixins: [
@@ -360,6 +362,12 @@ export default {
         return this.state.ct.lastPrice.toString()
       }
     },
+    btnDisabled () {
+      return !this.unwindPrice || this.unwindPrice == "0"
+    },
+    btnEnsuranceDisabled() {
+      return !this.modal.amount || this.modal.amount == "0" 
+    }
 
   },
   methods: {
@@ -434,7 +442,8 @@ export default {
       if(this.holding.leverage != 0)
         this.showPromiseFundModal = true
     },
-    changePromiseFund () {
+    changePromiseFund () {  
+      if(this.btnEnsuranceDisabled) return;
       let max = this.modal.radio === '1' ? this.holding.canAddMargin : this.holding.canRemoveMargin
       let amount = this.modal.amount
       if (!amount || this.$big(amount).lte(0)) {
@@ -472,6 +481,7 @@ export default {
     },
     async submitOrder (type) {
       if (!this.holding.amount) return
+      if (this.btnDisabled) return
       if (!type) {
         type = 'limit'
       }
@@ -483,7 +493,7 @@ export default {
       let price = 0
       //限价
       let msg = 'contract_close_tips1';
-
+      debugger
       if (type === 'limit'){
         confirmText = this.$t('contract_close_limit')
         if(this.holding.amount > 0) {
@@ -496,14 +506,14 @@ export default {
       //市价
       else {
         confirmText = this.$t('contract_close_market')
+        msg = 'contract_close_tips4'
         if(this.holding.amount > 0) {
           title = this.$t('contract_close_market_sell')
-          msg = 'contract_close_tips4'
         } else if (this.holding.amount < 0) {
           title = this.$t('contract_close_market_buy')
         }
         price = this.lastPrice
-      }
+      } 
       if(this.holding.amount > 0) {
         side = this.$t('order_side_sell')
       } else if (this.holding.amount < 0) {
@@ -539,7 +549,8 @@ export default {
         this.clearWarehouseLoading = false
         return
       }
-      let $price = this.unwindPrice.toString()
+      //let $price = this.unwindPrice.toString()
+      let $price = price
       if (this.$big($price).lt(0)) {
         this.unwindPrice = 0
         $price = '0'
@@ -725,7 +736,7 @@ export default {
     // border: 1px solid #0F0F0F;
     .tr {
       &:nth-of-type(even){
-        background: #373737;
+        background: #10172A;
       }
       &.th {
         color: #ACACAC;
@@ -805,7 +816,9 @@ export default {
         background-color: #1B1B1B;
         padding-left: 7px;
         margin-left: -7px;
-        box-sizing: border-box;
+        box-sizing: border-box; 
+        border-width: 0;
+  
     }
     .input-lab {
         color: $primary;
@@ -855,6 +868,8 @@ export default {
                 color: #252525;
             }
         }
+        
+        
     }
 }
 .modal-operate-ensurance {
@@ -965,4 +980,15 @@ export default {
   .nowrap {
     white-space: nowrap;
   }
+.btn-disabled{
+  -webkit-filter: grayscale(60%);
+  -moz-filter: grayscale(60%);
+  -ms-filter: grayscale(60%);
+  -o-filter: grayscale(60%);
+  filter: grayscale(60%);
+  // filter: gray;
+  filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1); 
+  // border-color:#177757;
+  cursor: not-allowed;
+}
 </style>

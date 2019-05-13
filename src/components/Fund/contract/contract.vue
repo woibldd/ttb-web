@@ -331,7 +331,7 @@ export default {
         position: absolute;
         right: 15px;
         top: 20px;
-        color: #C9A96C;
+        color: #22ced0;
         cursor: pointer;
       }
     }
@@ -364,7 +364,7 @@ export default {
           padding:10px 20px;
         }
         .popover-hz{
-          background: #C9A96C;
+          background: #22ced0;
           color: #fff;
           padding: 7px 15px;
           border:none;

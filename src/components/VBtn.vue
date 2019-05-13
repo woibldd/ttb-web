@@ -18,6 +18,8 @@
     <span
       class="spinner"
       v-show="loading"/>
+    
+    <slot name="btn-right"/>
   </div>
 </template>
 

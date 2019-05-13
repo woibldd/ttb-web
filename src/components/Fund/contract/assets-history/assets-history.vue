@@ -199,17 +199,17 @@ export default {
 </style>
 <style lang="scss">
 .el-date-table td.end-date span, .el-date-table td.start-date span {
-        background: #C9A96C !important;
+        background: #22ced0 !important;
     }
     .el-date-table td.in-range div, .el-date-table td.in-range div:hover, .el-date-table.is-week-mode .el-date-table__row.current div, .el-date-table.is-week-mode .el-date-table__row:hover div {
-        background: rgba(201,169,108,0.2) !important;
+        background: rgba(34,206,208,0.2) !important;
     }
     .el-date-table td.today span,
     .el-picker-panel__icon-btn:hover,
     .el-date-table td.available:hover {
-        color: #C9A96C !important;
+        color: #22ced0 !important;
     }
     .el-range-editor.is-active, .el-range-editor.is-active:hover {
-        border-color: #C9A96C !important;
+        border-color: #22ced0 !important;
     }
 </style>

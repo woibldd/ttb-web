@@ -1,6 +1,6 @@
 <template>
   <div class="orderbook-container">
-    <div class="ix-pannel flex">
+    <div class="ix-pannel flex ">
       <div class="ix-header">
         {{ $t('contract_block_orderbook') }}
         <div
@@ -425,7 +425,7 @@ export default {
       }
       if (!res.code) {
         this.assignData(res.data)
-      }
+      } 
       this.socket = ws.create(`orderbook/${this.pair}/${this.offset}/${this.accuracy}/20`)
       this.socket.$on('message', (data) => {
         this.deepthData = data
@@ -477,7 +477,7 @@ export default {
     closePanels () {
       this.panelShow = false
     },
-    onresize: _.debounce(function () {
+    onresize: _.debounce(function () { 
       // this.panelHeight = this.container.height
     }, 100),
     layout () {

@@ -11,11 +11,16 @@
           <router-link
             :to="{name: 'trading'}"
             class="nav_link">{{ $t('trading') }}</router-link>
-          <a
-            v-if="false"
+          <a 
+            v-if='showContract'
             href="/contract.html"
             :class="{'router-link-active': from === 'contract'}"
-            class="nav_link ml-30">{{ $t('contract') }}</a>  
+            class="nav_link ml-30">{{ $t('contract') }} 
+          </a>
+          <router-link
+            v-if="false"
+            :to="{name: 'RushBuy'}"
+            class="nav_link" style="padding-left:10px;">{{ $t('FrenzySaleZone') }}(SP)<img src="@/assets/hot.png" alt="" style="position: relative;top: 5px;left: 5px;"></router-link>
             <!-- <div class="nav_link arrow-down">
             <a
               :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"
@@ -103,6 +108,17 @@
         </div>
       </div>
       <div class="nav_right">
+    <div class="set-app-dl right_options" style="margin-right: 40px;">
+          <router-link
+            class="nav_log_res"
+            :to="{name: 'Download'}"
+          >
+            <div class="app-dl">
+              <icon
+                class="mr-3"
+                name="topbar-dl-phone"/> APP
+            </div>
+        </router-link></div>
         <div
           v-if="!state.userInfo"
           class="right_options">
@@ -286,7 +302,15 @@ export default {
     },
     announcementLink () {
       return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
-    }
+    },
+    isTestnet() {
+      return location.hostname.indexOf("ixex.pro") >= 0
+    },
+    showContract() {
+      let time1 = new Date()
+      let time2 = new Date(2019, 4, 7, 14)
+      return this.isTestnet || time1 > time2
+    },
   },
   methods: {
     switchLang (lang) {

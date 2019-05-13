@@ -148,7 +148,7 @@ export default {
       return
     },
     totalBalance () {
-      return this.$big(this.exchangeAvai || 0).plus(this.contractAvai || 0).round(8, this.C.ROUND_DOWN).toString()
+      return this.$big(this.exchangeAvai || 0).plus(this.contractAvai || 0).round(8, this.C.ROUND_DOWN).toFixed(8).toString()
     },
     fromAmount () {
       if (this.accountFrom === 'exchange') {
@@ -168,14 +168,14 @@ export default {
       if (!this.exchangeBalance) {
         return 0
       } else {
-        return (this.exchangeBalance.available*1).toFixed(8)
+        return this.$big(this.exchangeBalance.available || 0).round(8, this.C.ROUND_DOWN).toFixed(8).toString()
       }
     },
     contractAvai () {
       if (!this.contractBalance) {
         return 0
       } else {
-        return this.$big(this.contractBalance.available_balance || 0).round(8, this.C.ROUND_DOWN).toString()
+        return this.$big(this.contractBalance.available_balance || 0).round(8, this.C.ROUND_DOWN).toFixed(8).toString()
       }
     }
   },

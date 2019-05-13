@@ -78,7 +78,7 @@ export default{
     color: #fff;
     text-align: center;
     line-height: rem(50);
-    background:linear-gradient(0deg,rgba(185,131,26,1) 0%,rgba(255,204,106,1) 100%);
+    background:linear-gradient(0deg,#23CED0 0%,#9FFEFF 100%);
     margin-bottom: rem(61);
 }
 .mr-63 {

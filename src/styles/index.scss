@@ -1,7 +1,9 @@
 @import "./vars";
 @import "./mixins";
 // @import "./tooltip";
-
+div.zopim {
+  top: auto !important;
+}
 html {
   background-color: #ffffff;
 }

@@ -26,7 +26,8 @@ export default {
       layoutOk: false,
       tvReady: false,
       entryId: '',
-      hasIndicator: false
+      hasIndicator: false,
+      lineType: 1,
     }
   },
   methods: {
@@ -59,43 +60,66 @@ export default {
       if (!this.pair || !this.layoutOk || this._isDestroyed) {
         return false
       }
-      const vm = this
-
-      const config = this.configure()
-
+      const vm = this 
+      const config = this.configure() 
       const TradingView = await tvlib
       const Widget = TradingView.widget
       this.widget = new Widget(config)
+      console.log(1,this.widget,config,vm._isDestroyed)
+        this.widget.onChartReady(function () {
+        console.log(2)
 
-      this.widget.onChartReady(function () {
         if (vm._isDestroyed) {
           return false
-        }
-        let widget = vm.widget
-        vm.tvReady = true
-        vm.$emit('chartReady')
+        } 
 
+        let widget = vm.widget 
+
+        vm.tvReady = true
+        console.log(vm.tvReady)
+        vm.$emit('chartReady') 
+        // widget.chart().createStudy('Moving Average', !1, !1, [1], null, {
+        //   'Plot.color': '#ff9500',
+        //   'Plot.linewidth': 3,
+        //   precision: 8
+        // })
         // 7 日均线
-        widget.chart().createStudy('Moving Average', !1, !1, [7], null, {
+        let ida = 0
+        let idb = 0
+        widget.chart().createStudy('Moving Average', !1, !1, [7], 
+         (entryId) => { ida = entryId }, {
           'Plot.color': '#ff9500',
           'Plot.linewidth': 3,
           precision: 8
         })
         // 30 日均线
-        widget.chart().createStudy('Moving Average', !1, !1, [30], null, {
+        widget.chart().createStudy('Moving Average', !1, !1, [30], 
+        (entryId) => { idb = entryId }, {
           'Plot.color': '#107efa',
           'Plot.linewidth': 3,
           precision: 8
         })
+ 
         // MACD
         widget.chart().onIntervalChanged().subscribe(null, function (interval) {
           local.interval = interval
+          if(interval !='1') { 
+            widget.chart().setChartType(local.lineType)   
+            widget.chart().setEntityVisibility(ida, true) //显示7 日平均线
+            widget.chart().setEntityVisibility(idb, true) //显示30 日平均线 
+              //移除分时线高亮
+              if(widget.btnFS[0].classList.contains('selected')) {
+                widget.btnFS[0].classList.remove('selected') 
+              } 
+              //console.log(widget.btnFS)
+          }
         })
         let indicators = [
           {
             name: 'MACD'
             // args: [14, 30, 'close', 9]
-          }, {
+          }, 
+          {
             name: 'StochRSI',
             fullname: 'Stochastic RSI'
             // args: [10]
@@ -131,12 +155,28 @@ export default {
           if (indicat.name === 'MACD') {
             btn.trigger('click')
           }
-        })
-
-        // widget.chart().createStudy(indicators[0].name, !1, !1, indicators[0].args, (entryId) => {
-        //   this.entryId = entryId
-        //   this.hasIndicator = true
-        // })
+        }) 
+        widget.btnFS = widget.createButton().on('click', (e, vm)=>{
+          let element = e.srcElement || e.target
+          let cls = element.classList
+          debugger
+          if (!cls.contains('selected')) { 
+              element.classList.add('selected')
+              local.lineType = widget.chart().chartType() //记录当前的K线样式
+              widget.chart().setChartType(2)  //K线样式切換到线形图
+              widget.chart().setResolution('1', null) //周期切换到一分钟 
+              widget.chart().setEntityVisibility(ida, false) //隐藏7 日平均线
+              widget.chart().setEntityVisibility(idb, false) //隐藏30 日平均线 
+            } else { 
+              element.classList.remove('selected') 
+              widget.chart().setChartType(local.lineType)   
+              widget.chart().setEntityVisibility(ida, true) //显示7 日平均线
+              widget.chart().setEntityVisibility(idb, true) //显示30 日平均线
+              
+            } 
+        }).append(utils.$i18n.t("tradingview_line"))
+        //widget.btnFS[0].style.display = 'none'
+        
 
         widget.chart().executeActionById('drawingToolbarAction')
       })

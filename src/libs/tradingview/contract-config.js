@@ -29,7 +29,7 @@ export default function () {
       'context_menus',
       'header_screenshot',
       'display_market_status',
-      'left_toolbar',
+      //'left_toolbar',
       'use_localstorage_for_settings'
 
       // 'volume_force_overlay',

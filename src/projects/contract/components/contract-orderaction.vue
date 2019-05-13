@@ -277,7 +277,7 @@
               </span>-->
             </div>
             <div class="op-balance flex-lr mt-10" v-else-if="currentDealType === 'limit'">
-              <span v-tooltip.top-center="{content: $t('post_only_tips'), classes: 'contract'}" :style="{color:(local.passiveDelegate ? '#c9a96c':'')}">
+              <span v-tooltip.top-center="{content: $t('post_only_tips'), classes: 'contract'}" :style="{color:(local.passiveDelegate ? '#22ced0':'')}">
                 {{ $t('contract_action_passive_delegate') }}
                 <el-checkbox class="ml-4" v-model="local.passiveDelegate"/>
               </span>
@@ -295,13 +295,13 @@
             class="iconfont strong pointer ml-6"
             v-tooltip.top-end="{html: true, content: $t('contract_click_to_wallet'), classes: 'contract'}"
           />
-        </span>
+        </span> 
       </div>
       <div class="ix-pannel-body risk-limit-wrap">
         <div class="hold__info mb-7">
           <!-- 合约 -->
           <div>
-            <p class="mb-8" :class="{'color-up': holding.amount > 0, 'color-down':holding.amount < 0}">{{ holding.amount || 0 }}</p>
+            <p class="mb-8" :class="{'color-up': holding.holding > 0, 'color-down':holding.holding < 0}">{{ holding.holding || 0 }}</p>
             <p>{{ $t('contract') }}</p>
           </div>
           <!-- 回报率 -->
@@ -311,7 +311,8 @@
           </div>
         </div>
         <!-- 红绿条 -->
-        <div class="profit-risk-row mb-27">
+        <div class="profit-risk-row mb-27"
+          :style="{width: profitRiskWidth }" >
           <div
             :style="{left: outerTimesLeft}"
             class="response-times"
@@ -325,13 +326,13 @@
             v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}"
           />
         </div>
-        <div class="outer-slider mb-10">
+        <div class="outer-slider mb-10"  ref="divlever">
           <!-- 滑块 外面-->
           <leverOperate
             v-if="language"
             @change="changeHoldingLeverTimes"
             :timers-map="timersMap"
-            :stick-len="26"
+            :stick-len="stickLen"
             :real-value.sync="holdingLever.inputLeverTime"
             :slider-value.sync="holdingLever.sliderLeverTime"
           />
@@ -430,8 +431,7 @@
       <div class="modal-make-more pd-24">
         <div
           class="modal-title mb-10"
-          :class="{'color-up': exchangeDir === 'BUY', 'color-down': exchangeDir === 'SELL'}"
-        >
+          :class="{'color-up': exchangeDir === 'BUY', 'color-down': exchangeDir === 'SELL'}">
           <p
             class="mb-10"
           >{{ $t(exchangeDir === 'BUY' ? 'contract_action_button_up' : 'contract_action_button_down') }} {{ $t(isExtOrderType ? currentDealType : (currentDealType === 'limit' ? 'contract_limit_price': 'contract_market_price')) }}</p>
@@ -609,6 +609,25 @@
         </div>
       </div>
     </v-modal>
+   <v-modal    :open.sync="state.isLoginOverdue"  @close="logoutClose">
+     <div class="loginStatus">
+        <div>
+          <div class="mask-logout" >
+            <div class="hint header">{{ $t('contract_login_overdue') }}</div>
+            <div class="link-group"> 
+              <span
+                class="link btn ibt signin bgcolor-up"
+                @click="tologin"
+                >{{ $t('signin') }}</span>
+              <span
+                class="link btn ibt signin bgcolor-down"
+                @click="logoutClose"
+                >{{ $t('close') }}</span> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </v-modal>   
   </div>
 </template>
 <script>
@@ -647,7 +666,7 @@ export default {
   mixins: [pairInfoMixins, priceInfoMixins, stateHoldingMixins, currentDelMixins],
   components: { simpleSlider, leverOperate, transferModal },
   data() {
-    return {
+    return { 
       state,
       local,
       language: true,
@@ -739,7 +758,9 @@ export default {
       confirm_txt: "",
       enter_tips: this.currentDealType === "market" ? "--" : this.$t('contract_order_enter_tips2'),
       empty: "--",
-
+      test: false,
+      stickLen: 23,
+      profitRiskWidth: "316px",
     };
   },
   computed: {
@@ -816,6 +837,9 @@ export default {
     isLogin() {
       return !!this.state.userInfo;
     },
+    isLoginOut() {
+      return !this.state.userInfo;
+    },
     balance() {
       return this.holding;
     },
@@ -848,8 +872,8 @@ export default {
     costValueBuyNew() {
       // console.log({holding:this.holding})
        let amount = this.amount;
-      if (amount > 0 && this.balance && this.$big(this.balance.amount).plus(this.buyDelAmount).plus(this.sellDelAmount) < 0) {
-        amount = -(-amount - this.balance.amount - this.buyDelAmount - this.sellDelAmount);
+      if (amount > 0 && this.balance && this.$big(this.balance.amount).plus(this.buyDelAmount) < 0) {
+        amount = -(-amount - this.balance.amount - this.buyDelAmount)
         if (amount < 0) {
           amount = 0;
         }
@@ -882,8 +906,8 @@ export default {
 
       let amount = this.amount;
       // 有已持仓，做对手时，判断持仓是否可以对冲，不可对冲部分算成本
-      if (amount > 0 && this.balance && this.$big(this.balance.amount).plus(this.buyDelAmount).plus(this.sellDelAmount) > 0) {
-        amount = amount - this.balance.amount - this.buyDelAmount - this.sellDelAmount ;
+      if (amount > 0 && this.balance && this.$big(this.balance.amount).plus(this.sellDelAmount) > 0) {
+        amount = amount - this.balance.amount - this.sellDelAmount ;
         if (amount < 0) {
           amount = 0;
         }
@@ -983,7 +1007,6 @@ export default {
       //this.log("costvalue sell...");
       let amount = this.amount;
       // 有已持仓，做对手时，判断持仓是否可以对冲，不可对冲部分算成本
-      //debugger;
       if (amount > 0 && this.balance && this.$big(this.balance.amount).plus(this.buyDelAmount).plus(this.sellDelAmount) > 0) {
         amount = amount - this.balance.amount - this.buyDelAmount - this.sellDelAmount ;
         if (amount < 0) {
@@ -1651,6 +1674,9 @@ export default {
         console.log("is submitting");
         return false;
       }
+      
+      //更新用户session
+      actions.updateSession()
 
       const side = type === "make_more" ? "BUY" : "SELL";
       //置灰的时候禁用事件
@@ -1810,15 +1836,12 @@ export default {
         // 做空
         this.mmModal.label = this.$t("order_side_sell");
         this.btnShortLoading = true;
-      }
-
+      } 
       // 先打开弹窗
       if (!local.mmNeverShow) {
         this.showMakeMoreModal = true;
         return;
-      }
-
-
+      } 
       const order = {
         type: this._getOrderType(),
         side: side === "SELL" ? 2 : 1,
@@ -1830,8 +1853,7 @@ export default {
       };
       this.doSubmit(order);
 
-      // service.orderContract(order)
-
+      // service.orderContract(order) 
       /*
       const res = await service.createOrder(order)
       this.submitting = false
@@ -1841,8 +1863,7 @@ export default {
         this.$eh.$emit('protrade:order:refresh')
         this.$eh.$emit('protrade:balance:refresh')
       }
-      */
-
+      */ 
       // alert(this.currentOpenMode)
     },
     async doSubmit(order) {
@@ -1856,7 +1877,8 @@ export default {
       if (!res.code) {
         this._resetLoadingState();
         // 通知所有组件，有数据更新，需要强制刷新数据
-        this.$eh.$emit("protrade:order:refresh", order.type);
+        //console.log("doSubmit")
+        this.$eh.$emit("protrade:order:refresh", "doSubmit");
         // utils.success(this.$t("contract_order_success"));
         let side =''
         res.data.side === 2 ? side = '买入' :side = '卖出'
@@ -1871,13 +1893,7 @@ export default {
         //  ---------------
       } else {
         utils.alert(res.message);
-        // let toastText = {
-        //   title: '委托已提交',
-        //   body: `在${res.data.price}价格买入${res.data.amount}张BTC永续合约。`,
-        //   color: 'red',
-        //   time: '下午6:12:40'
-        // }
-        // this.$toast(toastText)
+        
         this._resetLoadingState();
       }
     },
@@ -2109,6 +2125,33 @@ export default {
         return calculator.getMargin(amount, price, lever, totalValue, im)
       }
       return "--";
+    }, 
+    logoutClose(){ 
+      this.state.isLoginOverdue = false; 
+      utils.setSessionStorageValue('LoginStatus', 0)
+      //  if(utils.getSessionStorageValue("LoginStatus") == 1){
+      //     this.state.isLoginOverdue = true;
+      //   }
+    },
+    layoutInit () { 
+      this.onresize()
+      this.$eh.$on('app:resize', this.onresize)
+    },
+    onresize () { 
+      //调整杠杆宽度 
+       let width = this.$refs.divlever.offsetWidth
+      if(width < 300 ) {
+        this.stickLen = 21
+      } else if(width >= 300 && width < 310){
+        this.stickLen = 22
+      } else if(width >= 310 && width < 320){
+        this.stickLen = 23
+      } else if(width >= 320 && width < 330){
+        this.stickLen = 25
+      }  else if(width >= 330){
+        this.stickLen = 26
+      }  
+      this.profitRiskWidth = (width - 10) + "px"
     },
   },
   watch: {
@@ -2167,6 +2210,7 @@ export default {
       this.fetchData();
     });
     this.$eh.$on("protrade:balance:refresh", this.fetchData);
+    this.$eh.$on('protrade:layout:init', this.layoutInit)
     //this.$eh.$on("protrade:exchange:setOnePrice", this.setOnePrice)
     await actions.updateSession();
     if (this.isLogin) {
@@ -2176,11 +2220,58 @@ export default {
   destroyed() {
     this.$eh.$off("protrade:order:refresh");
     this.$eh.$off("protrade:balance:refresh", this.fetchData);
+    this.$eh.$off('protrade:layout:init', this.layoutInit);
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.loginStatus {
+    display: block; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(51,51,51,0.7);
+    background: radial-gradient(ellipse farthest-side at 50% 50%, rgba(51,51,51,0.7), rgba(0,0,0,0.7));
+    -webkit-box-shadow: 0px 2px 10px 5px rgba(164,140,66,0.4) inset;
+    box-shadow: 0px 2px 10px 5px rgba(164,140,66,0.4) inset;
+    z-index: 9999;
+
+    .mask-logout{
+      position:absolute;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -50px -175px;
+      width:350px;
+      padding:6px;
+      text-align: center;
+      color: #fff;
+      background-color: #1e1e1e; 
+      .header {
+        height: 60px;
+        line-height: 60px;
+        font-size: 1.2em; 
+      }
+      .close-btn{
+        display:none !important;
+      }
+    }
+    .link {
+      font-size: 12px;
+      text-align: center;
+      padding: 0 20px;
+      min-width: 84px;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      margin: 0 4px 8px;
+      color: white;
+      border-radius: 3px;
+      line-height: 32px;
+    } 
+}
 .modal-exchange-wrapper {
   font-size: 14px;
   width: 480px;
@@ -2764,7 +2855,7 @@ export default {
   font-weight: bold !important;
 }
 .c-primary {
-  color: #c9a96c !important;
+  color: #22ced0 !important;
 }
 .icon {
   background-repeat: no-repeat;

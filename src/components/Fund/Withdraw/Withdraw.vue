@@ -3,7 +3,7 @@
     <div class="title-box">
       <div> {{ $t('withdraw') }}</div>
       <router-link
-        to="/fund/my/history/deposit"
+        to="/fund/my/assets/history/deposit"
         class="fund-history"> {{ $t('capital_record') }}</router-link>
     </div>
     <div class="fund-items-content">
@@ -134,7 +134,7 @@
     </div>
     <v-modal
       :open.sync="showModal"
-      @click="hideModal">
+      @click="hideModal"> 
       <div class="ensure-modal">
         <div class="modal__title mb-30">{{ $t('security_verification') }}</div>
         <div class="modal__content">

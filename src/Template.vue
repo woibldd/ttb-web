@@ -31,5 +31,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import "styles/reset.scss";
+@import "styles/reset.scss"; 
 </style>

@@ -139,6 +139,7 @@ export default {
   },
   methods: {
     setPair (pair) { 
+      console.log(pair.name)
       this.$router.replace({
         name: 'trading',
         params: {

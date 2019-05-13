@@ -1,13 +1,29 @@
 import axios from 'axios'
 import qs from 'querystring'
 import { state, actions} from './store'
-let _env_ = qs.parse(location.search.replace('?', ''))._env_
+// let _env_ = qs.parse(location.search.replace('?', ''))._env_
+
+// const api = axios.create({
+//   baseURL: _env_ || process.env.BASE_API, // api的base_url
+//   timeout: 30000, // request timeout
+//   withCredentials: true
+// })
+
+let _env_ = ''
+if(process.env.NODE_ENV != 'development'){
+  debugger
+  let val = location.host.split('.')
+  _env_ = val.slice(val.length - 2, val.length).join('.')
+  _env_ = `https://i.${_env_}/`
+} 
 
 const api = axios.create({
   baseURL: _env_ || process.env.BASE_API, // api的base_url
   timeout: 30000, // request timeout
   withCredentials: true
-})
+}) 
+console.log("_env_:" + _env_)
+ 
 export const quotaApi = axios.create({
   baseURL: _env_ || process.env.BASE_API, // api的base_url
   timeout: 30000, // request timeout
@@ -20,11 +36,11 @@ api.interceptors.request.use(config => {
   if (token) {
     // 服务端准备好 就可以上token了
     config.headers['token'] = token
-  }
+  } 
   config.headers['from'] = 'ixx'
-  config.headers['lang'] = state.locale
+  config.headers['lang'] = state.locale 
   return config
-}, error => {
+}, error => { 
   // Do something with request error
   // console.log(error) // for debug
   Promise.reject(error)

@@ -32,13 +32,13 @@
     }
   }
   &.yellow {
-    border-color: #C9A96C;
+    border-color: #22ced0;
     background:rgba(244,238,226,1);
     span{
-      background:#C9A96C;
+      background:#22ced0;
     }
     h1,p{
-      color:#C9A96C
+      color:#22ced0
     }
   }
   &.green {

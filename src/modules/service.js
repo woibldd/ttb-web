@@ -266,7 +266,7 @@ const service = {
       }
     }))
   },
-  getQuoteOrderbook ({ pair, accuracy, offset, size }) {
+  getQuoteOrderbook ({ pair, accuracy, offset, size }) { 
     return quote(`orderbook/${pair}`, { offset, accuracy, size })
   },
   getQuoteDeal ({ pair, size }) {
@@ -490,7 +490,10 @@ const service = {
     return request('/future/activity/buy_sp', params)
   },
   /* 挖矿 end */
-
+ //  用户个人设置
+  MessageSettings (params) {
+    return request('/future/account/notify_switch', params)
+  },
   /* 行情 */
   getDealHistory (pair, data) {
     return quote(`history/${pair}`, data)

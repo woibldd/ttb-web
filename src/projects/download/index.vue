@@ -23,7 +23,7 @@
     </div>
     <div class="content">
       <div class="ix-logo"/>
-      <div class="ix-txt">IX</div>
+      <div class="ix-txt">IXX</div>
       <div
         class="download__btn"
         @click="download('android')">
@@ -46,7 +46,9 @@
     </div>
     <div
       class="tt-mask"
-      v-if="showTutorialArrow">
+      v-if="showTutorialArrow"
+      @click="touch"
+      >
       <div
         class="tutorial-arrow">
         <img
@@ -86,7 +88,10 @@ export default {
     },
     isSafari () {
       return this.isIos && /safari/ig.test(navigator.userAgent)
-    }
+    },
+    isWeiXin () {
+      return utils.isWeiXin()
+    },
   },
   methods: {
     switchLang (lang) {
@@ -104,21 +109,29 @@ export default {
     //   window.open(`${window.location.origin}/download.html#/tutorial`, '_self')
     },
     download (type) {
-      if (type === 'ios' && !this.isSafari) {
+      if (this.isWeiXin) {
         this.showTutorialArrow = true
         return
       }
 
       if (type === 'android') {
-        let url = 'https://ix.com/app/ix.apk'
+        let url = 'https://ixx.com/app/ixx.apk'
         window.open(url, '_blank')
         return
       }
 
       if (this.isSafari) {
-        let url = 'itms-services://?action=download-manifest&url=https://ix.com/app/IX.plist'
+        let url = 'itms-services://?action=download-manifest&url=https://ixx.com/app/IXX.plist'
         window.open(url, '_blank')
       }
+    },
+    touch() {
+      this.showTutorialArrow = false
+    }
+  },
+  created() {
+    if (this.isWeiXin) {
+      this.showTutorialArrow = true 
     }
   }
 }

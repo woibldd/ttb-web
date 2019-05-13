@@ -17,7 +17,7 @@ export default function () {
       type: 'black',
       tools: [ { name: 'Regression Trend' } ]
     },
-    disabled_features: [
+    disabled_features: [ 
       'header_symbol_search',
       'header_interval_dialog_button',
       'header_settings',
@@ -28,12 +28,14 @@ export default function () {
       'context_menus',
       'header_screenshot',
       'display_market_status',
-      'left_toolbar',
+      //'left_toolbar',
       // 'volume_force_overlay',
-      'use_localstorage_for_settings'
+      'use_localstorage_for_settings',
+     
     ],
     enabled_features: [
-      'adaptive_logo'
+      'adaptive_logo',
+      'side_toolbar_in_fullscreen_mode',  
       // 'charting_library_debug_mode',
       // 'seconds_resolution'
     ],

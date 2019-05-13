@@ -13,7 +13,7 @@
               SP{{ $t('RushBuy_text_list_1') }}
               <h1>{{data.total_amount | number}} SP</h1>
             </div>
-            <div class="rushBuy-slider">
+            <div class="rushBuy-slider" :class="{'hidden': percentage!==0}">
               <span :style="{width:percentage+'%'}"><em>{{percentage}}%</em></span>
             </div>
             <div class="grab-more-text">
@@ -122,9 +122,9 @@ export default {
   watch:{
     type(val){
       if(val === 'USDT'){
-        this.typeNumber = this.number * this.data.usdt_price
+        this.typeNumber =  this.mul(this.number , this.data.usdt_price)
       } else {
-        this.typeNumber = this.number * this.data.ix_price
+        this.typeNumber =  this.mul(this.number , this.data.ix_price)
       }
     },
     number(val,old){
@@ -186,7 +186,11 @@ export default {
       service.spPageInfo().then(resp => {
         if (!resp.code) {
           this.data = resp.data
-          this.percentage = Math.ceil(this.data.executed  /  (this.data.total_amount + this.data.executed)*100)
+          console.log(this.data.total_amount)
+          console.log(this.data.executed)
+          console.log(this.data.total_amount + this.data.executed)
+
+          this.percentage = Math.ceil(this.data.executed  /  (this.data.total_amount*1 + this.data.executed*1)*100)
           switch(this.data.day){
           case "1":
             this.day = '一'
@@ -299,6 +303,14 @@ export default {
         left: 0;
         font-size: 16px;
       }
+      &.hidden{
+        &:after{
+          display: none;
+        }
+        &:before{
+          display: none;
+        }
+      }
       &:after{
         content: '100%';
         position: absolute;
@@ -388,20 +400,23 @@ export default {
       font-size: 18px;
       color:#fff;
       width: 72px;
+      line-height: 75px;
       display: inline-block;
     }
     .input-box{
       position: relative;
+      overflow: hidden;
       input{
         height: 50px;
         line-height: 75px;
         border: none;
         background-color: #24292f;
         color: #fff;
-        width: 360px;
+        width: 355px;
         margin-left: 20px;
         height: 75px;
         padding-left: 20px;
+        float: right;
         border-radius: 3px;
         font-size: 18px;
       }

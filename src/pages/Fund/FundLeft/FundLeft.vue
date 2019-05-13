@@ -6,10 +6,26 @@
         <span class="menu-title">{{ $t('wallets_nav_asset') }}</span>
       </p>
       <ul class="left-menu-list">
-        <li class="active"><router-link
+        <li class="active">
+          <router-link
           class="menu-name"
           active-class="active"
-          to="/fund/my">{{ $t('capital_manage') }}</router-link></li>
+          to="/fund/my">{{ $t('capital_manage') }}
+          </router-link>
+          <div class="sub-menu-group">
+            <router-link
+              class="sub-menu-item"
+              active-class="active"
+              to="/fund/my/assets">{{ $t('trading_account') }}
+            </router-link>
+
+            <router-link
+              class="sub-menu-item"
+              active-class="active"
+              to="/fund/my/contract">{{ $t('contract_account') }}
+            </router-link>
+          </div>
+        </li>
         <li class=""><router-link
           class="menu-name"
           active-class="active"
@@ -78,6 +94,20 @@ export default{
           background: $profile-menu-bg;
           box-shadow: inset 3px 0 0 0 $primary;
         }
+      }
+      .sub-menu-group {
+          margin-top: 10px;
+      }
+      .sub-menu-item {
+          padding-top: 15px;
+          padding-bottom: 15px;
+          padding-left: 50px;
+          color: #333333;
+
+          &:hover,
+          &.active {
+              color: #01CED1;
+          }
       }
       li {
         width: 100%;

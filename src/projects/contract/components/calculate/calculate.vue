@@ -134,7 +134,8 @@
         <!-- 杠杆 -->
         <div class="input-row mb-27">
           <div class="row__label mr-10">{{ $t('lever') }}</div>
-          <el-select
+          <el-select 
+            :disabled="force.mode=='cross'" 
             class="row__oprate"
             v-model="force.lever">
             <el-option
@@ -333,7 +334,7 @@ export default {
           // roe_percent: 0
         }
 
-      } // 目标收益率
+      }, // 目标收益率 
     }
   },
   computed: {
@@ -382,6 +383,13 @@ export default {
         result[key] = result[key].round(4).toString()
       }
       this.aim.result = result
+    }
+  },
+  watch: {
+    "force.mode"(value) {
+      if(value == "cross") {
+        this.force.lever = 100 
+      }
     }
   }
 }

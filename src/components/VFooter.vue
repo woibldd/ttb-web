@@ -52,6 +52,9 @@
           <a
             :href="requestLink"
             target="_blank">{{ $t('footer_request') }}</a>
+          <a
+            href="http://ixofficial.mikecrm.com/kl7CuJZ"
+            target="_blank">{{ $t('footer_application_coin') }}</a>
         </div>
         <div class="footer_ct">
           <p>{{ $t('footer_tools') }}</p>
@@ -131,7 +134,7 @@
                   src="../assets/pic-contact-biyong.png">
               </div>
             </div>
-            <p class="copyright">Copyright © 2018 ixx.com</p>
+            <p class="copyright">Copyright © 2019 ixx.com</p>
           </div>
 
         </div>

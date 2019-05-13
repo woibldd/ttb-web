@@ -194,6 +194,24 @@
         </div>
       </div>
     </div>
+  <div class="download-mask">
+      <div class="flex">
+        <div class="dl-icon">
+          <img
+            src="../../../assets/h5/h5_download@3x.png"
+            alt="">
+        </div>
+        <div class="dl__txt">
+          <p>IXX.COM</p>
+          <p class="f16">{{ $t('download_app_dl') }}</p>
+        </div>
+      </div>
+      <div
+        class="dl__btn"
+        @click="download">
+        {{ $t('download_dl_app') }}
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -205,6 +223,7 @@ import service from '@/modules/service'
 import responsiveMixin from '@/mixins/responsive'
 import MobileNav from '@/components/Mobile/MobileNav'
 import ixxFeature from '@/components/Mobile/ixx-feature.vue'
+    import utils from '@/modules/utils'
 // import Kyc from '@/components/Mobile/Kyc'
 
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
@@ -228,6 +247,7 @@ export default {
     }
   },
   computed: {
+
     swiper: function () {
       return this.$refs.mySwiper.swiper
     },
@@ -254,7 +274,16 @@ export default {
           }
         }
       }
-    }
+    } ,
+  download(){
+      let url = location.href + 'app/ixx.apk'
+      if (utils.isIos()) {
+        url = `itms-services://?action=download-manifest&url=${location.href}app/IXX.plist`
+      }
+      window.open(url, '_blank')
+
+  }
+      
   },
   components: {
     MineSummary,
@@ -267,3 +296,55 @@ export default {
   }
 }
 </script>
+<style>
+.zopim{
+        top: 80%!important;
+        position: fixed!important;
+    }</style>
+<style lang="scss" scoped>
+    
+// 下载浮层
+.download-mask {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width:100%;
+    height:5.375rem;
+    background:rgba(19,24,31,.9);
+    padding: rem(43) rem(55);
+    box-sizing: border-box;
+    font-size: rem(24);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+    z-index: 11;
+    .flex {
+        display: flex;
+        align-items: center;
+    }
+    .dl-icon{
+        width: rem(77);
+        height: rem(77);
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .dl__txt{
+        margin-left: rem(19);
+        .f16 {
+            font-size: rem(16);
+        }
+    }
+    .dl__btn {
+        width:rem(160);
+        height:rem(60);
+        background:#00bbbd;
+        border-radius:rem(30);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+</style>

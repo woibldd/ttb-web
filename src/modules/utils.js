@@ -478,6 +478,12 @@ const utils = {
   isIos () {
     return navigator.userAgent.match(/(iPhone|iPod|ios|iPad)/i)
   },
+  isAndroid () {
+    return navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1;
+  },
+  isWeiXin(){ 
+    return navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger' 
+  },
   /**
    * 脱敏
    * @param arguments 多个要脱敏数据

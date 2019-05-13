@@ -42,6 +42,7 @@ export const state = {
     price: 0,
     close_time: 0,
     price_open: 0,
+    showCountDown: false,
   },
   ct: {
     pair: '',
@@ -98,13 +99,14 @@ export const local = new Locals('store', {
   orderbookMode: 'both',
   regionId: '',
   timezone: '',
-  interval: '1D',
+  interval: '60',
   supportNum: 129,
   proOnFav: false,
   pairTableTab: 'USDT',
   everSignup: false,
   hideOthers: false,
-  ixAlert: false
+  ixAlert: false,
+  lineType : 1, 
 })
 
 export const actions = {
