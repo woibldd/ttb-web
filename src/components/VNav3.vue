@@ -1,27 +1,43 @@
 <template>
-  <div
-    class="nav_box"
-    :class="{dark: dark}">
+  <div class="nav_box" :class="{dark: dark}">
     <div class="ind_cen">
-      <router-link
-        :to="{name:'home'}"
-        class="nav_logo"/>
+      <router-link :to="{name:'home'}" class="nav_logo"/>
       <div class="nav_left">
         <div class="left_options">
-          <router-link
-            :to="{name: 'trading'}"
-            class="nav_link">{{ $t('trading') }}</router-link>
-          <a 
-            v-if='showContract'
+          <router-link :to="{name: 'trading'}" class="nav_link">{{ $t('trading') }}</router-link>
+          <a
+            v-if="showContract"
             href="/contract.html"
             :class="{'router-link-active': from === 'contract'}"
-            class="nav_link ml-30">{{ $t('contract') }} 
-          </a>
+            class="nav_link ml-30"
+          >{{ $t('contract') }}</a>
+          <div class="nav_link arrow-down" v-if="!isTestnet">
+            <span class="nav_link ml-30">
+              {{ $t('otc_trade') }}
+              <icon class="arrow ml-5" name="arrow-down-yellow"/>
+            </span>
+            <div class="dropdown-sub-menu">
+              <ul class="dropdown-list pt-10 pb-10">
+                <li class="dropdown-qrcode pl-12 pr-12">
+                  <img src="~@/assets/otc-qrcode.jpg" width="114" height="114" alt> 
+                   <span>{{$t('otc_tips')}}</span>
+                   <i>{{$t('otc_trade')}}</i>
+                </li>
+              </ul>
+            </div>
+          </div>
+
           <router-link
             v-if="false"
             :to="{name: 'RushBuy'}"
-            class="nav_link" style="padding-left:10px;">{{ $t('FrenzySaleZone') }}(SP)<img src="@/assets/hot.png" alt="" style="position: relative;top: 5px;left: 5px;"></router-link>
-            <!-- <div class="nav_link arrow-down">
+            class="nav_link"
+            style="padding-left:10px;"
+          >
+            {{ $t('FrenzySaleZone') }}(SP)
+            <img src="@/assets/hot.png" alt style="position: relative;top: 5px;left: 5px;">
+          </router-link>
+
+          <!-- <div class="nav_link arrow-down">
             <a
               :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"
               target="_blank"
@@ -104,62 +120,45 @@
                 </li>
               </ul>
             </div>
-          </div> -->
+          </div>-->
         </div>
       </div>
       <div class="nav_right">
-    <div class="set-app-dl right_options" style="margin-right: 40px;">
-          <router-link
-            class="nav_log_res"
-            :to="{name: 'Download'}"
-          >
+        <div class="set-app-dl right_options" style="margin-right: 40px;">
+          <router-link class="nav_log_res" :to="{name: 'Download'}">
             <div class="app-dl">
-              <icon
-                class="mr-3"
-                name="topbar-dl-phone"/> APP
+              <icon class="mr-3" name="topbar-dl-phone"/>APP
             </div>
-        </router-link></div>
-        <div
-          v-if="!state.userInfo"
-          class="right_options">
+          </router-link>
+        </div>
+        <div v-if="!state.userInfo" class="right_options">
           <router-link
             :to="{name:'login'}"
-            class="nav_log_res border-right-1 pr-14 mr-14">{{ $t("signin") }}</router-link>
-          <router-link
-            :to="{name:'register'}"
-            class="nav_log_res">{{ $t("signup_title") }}</router-link>
+            class="nav_log_res border-right-1 pr-14 mr-14"
+          >{{ $t("signin") }}</router-link>
+          <router-link :to="{name:'register'}" class="nav_log_res">{{ $t("signup_title") }}</router-link>
         </div>
-        <div
-          class="right_options"
-          v-else>
+        <div class="right_options" v-else>
           <!-- <p class="email">
             <router-link :to="{name:'trading'}">币币交易</router-link>
           </p>
           <p class="email">
             <router-link :to="{name:'fund'}">我的资产</router-link>
-          </p> -->
-          <div
-            class="fund mr-30"
-          >
-            <icon name="fund" />
+          </p>-->
+          <div class="fund mr-30">
+            <icon name="fund"/>
             <span @click="openDefault('fund')">{{ $t('wallets_nav_asset') }}</span>
 
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
-                  <router-link
-                    :to="{name: 'fund'}"
-                    class="link">{{ $t('capital_manage') }}</router-link>
+                  <router-link :to="{name: 'fund'}" class="link">{{ $t('capital_manage') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <router-link
-                    :to="{name: 'deposit'}"
-                    class="link">{{ $t('deposit') }}</router-link>
+                  <router-link :to="{name: 'deposit'}" class="link">{{ $t('deposit') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <router-link
-                    :to="{name: 'withdraw'}"
-                    class="link">{{ $t('withdraw') }}</router-link>
+                  <router-link :to="{name: 'withdraw'}" class="link">{{ $t('withdraw') }}</router-link>
                 </li>
               </ul>
             </div>
@@ -169,54 +168,38 @@
             @click="openDefault('orders')">
             <icon name="order" />
             {{ $t('orders') }}
-          </div> -->
-          <div
-            class="email mr-30"
-          >
+          </div>-->
+          <div class="email mr-30">
             <span @click="openDefault('profile')">{{ desentInfo }}</span>
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24 mobile">
-                  <router-link
-                    :to="{name: 'fund'}"
-                    class="link">{{ $t('capital_manage') }}</router-link>
+                  <router-link :to="{name: 'fund'}" class="link">{{ $t('capital_manage') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
                   <router-link
                     :to="{name: 'profile'}"
-                    class="link">{{ $t('profile_personal_center') }}</router-link>
+                    class="link"
+                  >{{ $t('profile_personal_center') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <a
-                    class="link"
-                    @click="logout">{{ $t('signout') }}</a>
+                  <a class="link" @click="logout">{{ $t('signout') }}</a>
                 </li>
               </ul>
             </div>
           </div>
-          <div
-            class="help"
-          >
+          <div class="help">
             <span @click="openDefault('help')">{{ $t('footer_help') }}</span>
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
-                  <a
-                    class="link"
-                    target="_blank"
-                    :href="announcementLink">{{ $t('footer_notice') }}</a>
+                  <a class="link" target="_blank" :href="announcementLink">{{ $t('footer_notice') }}</a>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <a
-                    class="link"
-                    target="_blank"
-                    :href="helpLink">{{ $t('user_guide') }}</a>
+                  <a class="link" target="_blank" :href="helpLink">{{ $t('user_guide') }}</a>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <a
-                    class="link"
-                    target="_blank"
-                    :href="requestLink">{{ $t('footer_request') }}</a>
+                  <a class="link" target="_blank" :href="requestLink">{{ $t('footer_request') }}</a>
                 </li>
               </ul>
             </div>
@@ -224,21 +207,14 @@
         </div>
 
         <div class="lang">
-          <icon
-            :name="'flag-'+state.locale"
-            class="mr-5"/>
+          <icon :name="'flag-'+state.locale" class="mr-5"/>
           {{ localeText }}
-          <icon
-            class="rig"
-            name="arrow-down"/>
+          <icon class="rig" name="arrow-down"/>
           <div class="lang_box">
-            <a
-              @click="switchLang(key)"
-              :key="key"
-              v-for="(value, key) in locales"
-            > <icon
-              :name="'flag-'+key"
-              class="mr-5"/>{{ value }}</a>
+            <a @click="switchLang(key)" :key="key" v-for="(value, key) in locales">
+              <icon :name="'flag-'+key" class="mr-5"/>
+              {{ value }}
+            </a>
           </div>
         </div>
       </div>
@@ -247,9 +223,9 @@
 </template>
 
 <script>
-import { state, actions } from '@/modules/store'
-import service from '@/modules/service'
-import utils from '@/modules/utils'
+import { state, actions } from "@/modules/store";
+import service from "@/modules/service";
+import utils from "@/modules/utils";
 
 export default {
   props: {
@@ -259,114 +235,128 @@ export default {
     },
     from: {
       type: String,
-      default: ''
+      default: ""
     }
   },
-  data () {
+  data() {
     return {
       state,
       locales: utils.locales
-    }
+    };
   },
   computed: {
-    localeText () {
-      return utils.getLocaleName(state.locale)
+    localeText() {
+      return utils.getLocaleName(state.locale);
     },
-    pdfSubfix () {
-      if (state.locale === 'zh-CN') {
-        return '+zh-CN'
+    pdfSubfix() {
+      if (state.locale === "zh-CN") {
+        return "+zh-CN";
       }
-      return ''
+      return "";
     },
-    desentInfo () {
-      let userInfo = this.state.userInfo
+    desentInfo() {
+      let userInfo = this.state.userInfo;
       if (userInfo) {
         if (userInfo.phone) {
-          return utils.publicDesensitization(userInfo.phone)[0]
+          return utils.publicDesensitization(userInfo.phone)[0];
           // return utils.publicDesensitization('91418865')[0]
         } else if (userInfo.email) {
-          return utils.publicDesensitization(userInfo.email)[0]
+          return utils.publicDesensitization(userInfo.email)[0];
         }
       }
-      return ''
+      return "";
     },
-    helpLink () {
-      return this.state.theme.help[this.state.locale] || this.state.theme.help.en
+    helpLink() {
+      return (
+        this.state.theme.help[this.state.locale] || this.state.theme.help.en
+      );
     },
-    requestLink () {
-      if (this.state.userInfo && this.state.theme.themeName === 'default') {
-        return process.env.BASE_API + 'ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
+    requestLink() {
+      if (this.state.userInfo && this.state.theme.themeName === "default") {
+        return (
+          process.env.BASE_API +
+          "ixx/zendesk/sso?return_to=" +
+          encodeURIComponent(
+            this.state.theme.request[this.state.locale] ||
+              this.state.theme.request.en
+          )
+        );
       } else {
-        return this.state.theme.request[this.state.locale] || this.request.theme.help.en
+        return (
+          this.state.theme.request[this.state.locale] ||
+          this.request.theme.help.en
+        );
       }
     },
-    announcementLink () {
-      return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
+    announcementLink() {
+      return (
+        this.state.theme.announcement[this.state.locale] ||
+        this.state.theme.announcement.en
+      );
     },
     isTestnet() {
-      return location.hostname.indexOf("ixex.pro") >= 0
+      return location.hostname.indexOf("ixex.pro") >= 0;
     },
     showContract() {
-      let time1 = new Date()
-      let time2 = new Date(2019, 4, 7, 14)
-      return this.isTestnet || time1 > time2
-    },
+      let time1 = new Date();
+      let time2 = new Date(2019, 4, 7, 14);
+      return this.isTestnet || time1 > time2;
+    }
   },
   methods: {
-    switchLang (lang) {
-      actions.setLocale(lang)
+    switchLang(lang) {
+      actions.setLocale(lang);
     },
-    logout () {
-      actions.setUserInfo(null)
-      service.signout()
-      if (utils.getRouteMeta(this.$route, 'auth')) {
+    logout() {
+      actions.setUserInfo(null);
+      service.signout();
+      if (utils.getRouteMeta(this.$route, "auth")) {
         this.$router.push({
-          name: 'login'
-        })
+          name: "login"
+        });
       }
 
       this.$nextTick(() => {
-        location.reload()
-      })
+        location.reload();
+      });
     },
-    clickStar ($event) {
-      this.className = 'active'// console.log($event.currentTarget);
+    clickStar($event) {
+      this.className = "active"; // console.log($event.currentTarget);
     },
-    openDefault (type) {
+    openDefault(type) {
       switch (type) {
-        case 'fund':
+        case "fund":
           this.$router.push({
-            name: 'fund'
-          })
-          break
-        case 'profile':
+            name: "fund"
+          });
+          break;
+        case "profile":
           this.$router.push({
-            name: 'profile'
-          })
-          break
-        case 'help':
-          window.open(this.helpLink)
-          break
-        case 'orders':
+            name: "profile"
+          });
+          break;
+        case "help":
+          window.open(this.helpLink);
+          break;
+        case "orders":
           this.$router.push({
-            name: 'orders'
-          })
-          break
+            name: "orders"
+          });
+          break;
       }
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-
 .nav_box {
-    width: 100%;
-    height: 60px;
+  width: 100%;
+  height: 60px;
 
-    .border-right-1 {
-        border-right: 1px solid #ffffff;
-    }
+  .border-right-1 {
+    border-right: 1px solid #ffffff;
+  }
 
   .ind_cen {
     position: relative;
@@ -380,7 +370,7 @@ export default {
     height: 38px;
     margin-top: 11px;
     display: block;
-    background-image: url('../assets/ixx/ixx_logo.png');
+    background-image: url("../assets/ixx/ixx_logo.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     // @include bg-retina('../assets/nav_logo', 'png', 142px, 46px);
@@ -393,7 +383,7 @@ export default {
       float: left;
       margin: 0 0 0 40px;
       .nav_link {
-        color: #FFFFFF;
+        color: #ffffff;
         font-size: 16px;
         position: relative;
         display: inline-block;
@@ -404,7 +394,7 @@ export default {
           display: inline;
 
           .arrow {
-            font-size:10px;
+            font-size: 10px;
             transition: all 0.2s ease-in-out;
           }
           &:hover {
@@ -417,41 +407,52 @@ export default {
               color: $primary;
             }
             .arrow {
-              transform: rotate(180deg)
+              transform: rotate(180deg);
             }
           }
 
-           .dropdown-sub-menu {
-              background: $protrade-bg;
-              position: absolute;
-              left: 0;
-              top: 68px;
-              border-radius: 4px;
-              z-index: 999;
-              opacity: 0;
-              display: none;
-              visibility: hidden;;
+          .dropdown-sub-menu {
+            background: $protrade-bg;
+            position: absolute;
+            left: 0;
+            top: 68px;
+            border-radius: 4px;
+            z-index: 999;
+            opacity: 0;
+            display: none;
+            visibility: hidden;
 
-              .dropdown-list {
-                .dropdown-item {
-                  height: 40px;
-                  white-space: nowrap;
+            .dropdown-list {
+              .dropdown-item {
+                height: 40px;
+                white-space: nowrap;
+                .link {
+                  width: 100%;
+                  height: 100%;
+                  display: block;
+                  color: #fff;
+                }
+
+                &:hover {
+                  background: #192d3f;
                   .link {
-                    width: 100%;
-                    height: 100%;
-                    display: block;
-                    color: #fff;
-                  }
-
-                  &:hover {
-                    background: #192D3F;
-                    .link {
-                      color: $primary;
-                    }
+                    color: $primary;
                   }
                 }
               }
-           }
+              
+              .dropdown-qrcode {
+                line-height: 1.2em !important;
+                text-align:center !important; 
+                span {
+                  color: #fff;
+                }
+                i {
+                  color: $primary;
+                }
+              }
+            }
+          }
         }
 
         &:hover {
@@ -462,7 +463,8 @@ export default {
           color: $primary;
         }
 
-        .hot,.mining-dig {
+        .hot,
+        .mining-dig {
           font-size: 16px;
           // margin-left:5px;
           display: inline-block;
@@ -484,10 +486,12 @@ export default {
       align-items: center;
     }
 
-    .fund, .email, .help {
+    .fund,
+    .email,
+    .help {
       float: left;
-      color:#fff;
-      padding:19px 0;
+      color: #fff;
+      padding: 19px 0;
       cursor: pointer;
 
       .dropdown-sub-menu {
@@ -518,32 +522,33 @@ export default {
           }
 
           &:hover {
-            background: #192D3F;
+            background: #192d3f;
             .link {
               color: $primary;
             }
           }
         }
-
       }
     }
 
-    .fund:hover, .email:hover, .help:hover {
+    .fund:hover,
+    .email:hover,
+    .help:hover {
       color: $primary;
       .dropdown-sub-menu {
         // transition: opacity .3s,visibility 0s;
         opacity: 1;
         visibility: visible;
         display: block;
-
       }
     }
-    .quit{
+    .quit {
       float: left;
-      color:#fff;
+      color: #fff;
     }
   }
-  .nav_right .nav_log_res, .nav_right .quit {
+  .nav_right .nav_log_res,
+  .nav_right .quit {
     color: #fff;
     display: inline-block;
     height: 14px;
@@ -578,40 +583,40 @@ export default {
       vertical-align: middle;
       font-size: 16px;
     }
-    .lang_box{
+    .lang_box {
+      display: block;
+      width: 100%;
+      height: auto;
+      line-height: 40px;
+      padding-top: 27px;
+      right: 0;
+      position: absolute;
+      display: none;
+      flex-direction: column;
+      a {
+        background: #303c47;
         display: block;
         width: 100%;
-        height: auto;
-        line-height: 40px;
-        padding-top: 27px;
-        right:0;
-        position: absolute;
-        display: none;
-        flex-direction: column;
-        a{
-            background: #303c47;
-            display: block;
-            width: 100%;
-            height: 40px;
-            float: left;
-            color: #fff;
-            &:hover{
-                background:#273440;
-                color: #01CED1;
-            }
+        height: 40px;
+        float: left;
+        color: #fff;
+        &:hover {
+          background: #273440;
+          color: #01ced1;
         }
+      }
     }
-    &:hover{
-        .lang_box{
-            display: flex;
-        }
-        .rig {
-          transform: rotate(180deg);
-        }
+    &:hover {
+      .lang_box {
+        display: flex;
+      }
+      .rig {
+        transform: rotate(180deg);
+      }
     }
   }
 
-  @media screen and (max-width: 768px){
+  @media screen and (max-width: 768px) {
     .c_box {
       padding: 0 10px;
     }
@@ -620,11 +625,14 @@ export default {
       visibility: hidden;
     }
     .right_options {
-      .fund, .help {
+      .fund,
+      .help {
         display: none;
         margin: 0;
       }
-      .nav_log_res, .email,.quit {
+      .nav_log_res,
+      .email,
+      .quit {
         margin-left: 10px;
       }
     }
@@ -632,7 +640,6 @@ export default {
       display: block !important;
     }
   }
-
 }
 .dark {
   background: $home-header-bgdark;

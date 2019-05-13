@@ -297,10 +297,11 @@ export default {
 }
 </script>
 <style>
-.zopim{
+/* .zopim{
         top: 80%!important;
         position: fixed!important;
-    }</style>
+    } */
+</style>
 <style lang="scss" scoped>
     
 // 下载浮层
