@@ -447,6 +447,7 @@ export default {
                 line-height: 1.2em !important;
                 text-align:center !important; 
                 span {
+                  font-size: 0.9em;
                   color: #fff;
                 }
                 i {
