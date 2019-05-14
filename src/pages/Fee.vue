@@ -8,17 +8,29 @@
         <div class="left-menu-container left-menu-nobottom">
           <ul class="left-menu-list">
             <li class="">
-              <router-link
+              <!-- <router-link
                 class="menu-name"
                 active-class="active"
-                :to="{name: 'Fee'}">{{ $t('transaction_fees') }}</router-link>
+                :to="{name: 'Fee'}">{{ $t('trading_fees') }}</router-link> -->
+              <span class="menu-name"
+                :class="{'active': active=='trading'}"
+                @click="active='trading'">{{ $t('trading_fees') }}</span>
+            </li> 
+            <li class="">
+              <!-- <router-link
+                class="menu-name" 
+                :to="{name: 'Fee'}">{{ $t('contract_fees') }}</router-link> --> 
+              <span class="menu-name"
+                :class="{'active': active=='contract'}"
+                @click="active='contract'"
+                >{{ $t('contract_fees') }}</span>
             </li>
           </ul>
         </div>
       </div>
       <div class="user-center-right">
-        <div class="profile-container">
-          <div class="title-box rate-tit">{{ $t('transaction_fees') }}</div>
+        <div class="profile-container" v-show="active=='trading'">
+          <div class="title-box rate-tit">{{ $t('trading_fees') }}</div>
           <div class="rate-tab">
             <div class="rate-tab-tit">
               <p class="lt rate-t-a">{{ $t('transaction_pair') }}</p>
@@ -46,6 +58,36 @@
             <p>7. {{ $t('rate_tips_g') }}</p> -->
           </div>
         </div>
+        <div class="profile-container" v-show="active=='contract'">
+          <div class="title-box rate-tit">{{ $t('contract_fees') }}</div>
+          <div class="rate-tab">
+            <div class="rate-tab-tit">
+              <p class="lt rate-t-a">{{ $t('transaction_pair') }}</p>
+              <p class="lt rate-t-b">{{ $t('maker') }}</p>
+              <p class="lt rate-t-c">{{ $t('taker') }}</p>
+            </div>
+            <ul class="rate-ul">
+              <!-- <li
+                v-for="pair in pairList"
+                :key="pair.name"> -->
+              <li>
+                <p class="lt rate-t-a">{{ $t('contract_FUTURE_BTCUSD') }}</p>
+                <p class="lt rate-t-b">-0.0350%</p>
+                <p class="lt rate-t-c">-0.0700%</p>
+              </li>
+            </ul>
+          </div>
+          <div class="rate-tips">
+            <p class="rate-tips-title">{{ $t('tips') }}</p>
+            
+            <p>1. {{ $t('rate_tips_a') }}</p>
+            <p>2. {{ $t('rate_tips_b') }}</p>
+            <p>3. {{ $t('rate_tips_c') }}</p>
+            <p>4. {{ $t('rate_tips_d') }}</p> 
+            <!-- <p>6. {{ $t('rate_tips_f') }}</p>
+            <p>7. {{ $t('rate_tips_g') }}</p> -->
+          </div>
+        </div>
       </div>
   </div></div>
 
@@ -61,7 +103,8 @@ export default {
   },
   data () {
     return {
-      pairList: []
+      pairList: [],
+      active: 'trading'
     }
   },
   async created () {

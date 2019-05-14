@@ -91,13 +91,18 @@
         <div class="row__label">{{ $t('withdraw_amount') }}</div>
         <div class="row__value">
           <div class="withdraw-address border-1 pl-10">
-            <input
+            <!-- <input
               class="coin-count"
-              type="number"
-
+              type="number" 
               :min="Number(selectCoin.min_withdraw_amount)"
               :max="Number(myCoinInfo.available)"
-              v-model="withdrawCount">
+              v-model="withdrawCount"> -->
+            <number-input 
+              class="coin-count"
+              :scale="8" 
+              :max="Number(myCoinInfo.available)" 
+              :min="Number(selectCoin.min_withdraw_amount)"
+              v-model="withdrawCount" />
             <span class="coin-type">{{ selectCoin.currency }}</span>
           </div>
         </div>
@@ -227,7 +232,7 @@ export default {
       selectCoin: {},
       allAddress: [],
       selectAddress: {},
-      withdrawCount: 0,
+      withdrawCount: '',
       showModal: false,
       myCoinInfoList: [],
       myCoinInfo: {},

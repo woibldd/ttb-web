@@ -1641,6 +1641,9 @@
   "footer_application_coin":"上幣申請", 
   "otc_trade":"法幣交易",
   "otc_tips":"添加微信請備註",
+  
+  "trading_fees": "币币手续费",
+  "contract_fees": "合约手续费",
   "":""
 
 }

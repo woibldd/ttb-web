@@ -1686,6 +1686,9 @@
     
     "otc_trade":"法币交易",
     "otc_tips":"添加微信请备注",
+    
+    "trading_fees": "币币手续费",
+    "contract_fees": "合约手续费",  
     "":"" 
     
 }
