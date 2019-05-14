@@ -7,10 +7,10 @@ if (process.env.NODE_ENV === 'development') {
   wsUrl = 'wss://ws.ixex.io/v1/'
   quoteUrl = 'https://q.ixex.io/v1/'
 } else if (process.env.NODE_ENV === 'beta') {
-  wsUrl = 'wss://ws.ixex.com/v1/'
+  wsUrl = 'wss://ws.ixex.io/v1/'
   quoteUrl = 'https://q.ixex.io/v1/'
 } else {
-  wsUrl = 'wss://ws.ixex.com/v1/'
+  wsUrl = 'wss://ws.ixex.io/v1/'
   quoteUrl = 'https://q.ixex.io/v1/'
 }
 
