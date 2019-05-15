@@ -480,4 +480,54 @@ export default{
     }
 
   },
+  ITD: {
+    'zh-CN': {
+      name: 'ITD',
+      full_name: 'International Tourism DAPP',
+      brief_info: 'ITD是旨在打造旅游结算通证，为了让 ITD 项目生态系统更加完美运行，团队发行权益通证（ITD）以奖励为生态系统的信息建设做出贡献的用户，系统Token（即ITD）前期是基于以太公网发行的权益通证，后期待ITD公链开发完成后，都可以与公有链网络按照 1：1 的比例实行兑换。前期以太坊区块链是基于区块链技术实现的，开源的、公共维护的分布式计算底层系统，另外提供的去中心化的虚拟机，来支持图灵完备的智能合约运行。总计发放权益通证数量1亿枚。应用在全球区块链旅游生态系统中',
+      issue_time: '2018-7-1',
+      issue_all: '1亿', // 发行总量
+      issue_circulation: '3500万', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.itdapp.org/en.html', // 白皮书
+      office_website: 'http://www.itdapp.org/en.html', // 官网
+      chain_info: 'https://etherscan.io/token/0x8df333fe2116929df10025c0c0facc1be7a44cbc#writeContract' // 区块查询
+    },
+    'zh-HK': { 
+      name: 'ITD',
+      full_name: 'International Tourism DAPP',      
+      brief_info: 'ITD是旨在打造旅遊結算通證，為了讓 ITD 項目生態系統更加完美運行，團隊發行權益通證（ITD）以獎勵為生態系統的信息建設做出貢獻的用戶，系統Token（即ITD）前期是基於以太公網發行的權益通證，後期待ITD公鏈開發完成後，都可以與公有鏈網絡按照 1：1 的比例實行兌換。前期以太坊區塊鏈是基於區塊鏈技術實現的，開源的、公共維護的分布式計算底層系統，另外提供的去中心化的虛擬機，來支持圖靈完備的智能合約運行。總計發放權益通證數量1億枚。應用在全球區塊鏈旅遊生態系統中',
+      issue_time: '2018-7-1',
+      issue_all: '1億', // 发行总量
+      issue_circulation: '3500萬', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.itdapp.org/en.html', // 白皮书
+      office_website: 'http://www.itdapp.org/en.html', // 官网
+      chain_info: 'https://etherscan.io/token/0x8df333fe2116929df10025c0c0facc1be7a44cbc#writeContract' // 区块查询
+    },
+    'en': { 
+      name: 'ITD',
+      full_name: 'International Tourism DAPP',
+      brief_info: 'ITD is designed to create a tourism settlement certificate. In order to make the ITD project ecosystem run better, the team issues the rights and benefits certificate (ITD) to reward users who contribute to the information construction of the ecosystem.  ITD) was based on the Equity Pass issued by Ethernet. After the completion of the ITD public chain development, it can be exchanged with the public chain network in a 1:1 ratio. The previous Ethereum blockchain is based on blockchain technology, open source, public maintained distributed computing underlying system, and a decentralized virtual machine to support complete smart contract operation. A total of 100 million certificates were issued.  Applied in the global blockchain tourism ecosystem.',
+      issue_time: '2018-7-1',
+      issue_all: '100 million', // 发行总量
+      issue_circulation: '35 million', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.itdapp.org/en.html', // 白皮书
+      office_website: 'http://www.itdapp.org/en.html', // 官网
+      chain_info: 'https://etherscan.io/token/0x8df333fe2116929df10025c0c0facc1be7a44cbc#writeContract' // 区块查询
+    },
+    'ko': { 
+      name: 'ITD',
+      full_name: 'International Tourism DAPP',
+      brief_info: '코인종류 소개:  ITD 는 이기성 만 관광 결제 통증을 지원할수  있도록 ITD 사업 생태 시스템 보다 월등하다 .운행을 팀 발행 권익 통 증 (ITD) 포상 을 생태 시스템 은 정보 건설 에 기여 한 사용자 를 시스템 TOKEN (즉 ITD) 용 전기 가 깔 려 있다 인터넷 발행의 권익 통증 후 기대 ITD 공 사슬 개발 이 완료 된 뒤 할 수도 있다 는 지적 과 공유 사슬 인터넷 대로 1 대 1 무승부 는 비례 교환 했 다.전기 에타이팡 블록슬은 블록슬의 기술을 기반으로, 오픈 소스, 공공 수호의 하부 시스템, 또한 제공된 센터링 가상 머신, 완벽한 지적 계약 운영을 지원합니다.권익증서발급총량은 1억개이다.전 세계 관광 생태계에 응용되다',
+      issue_time: '2018-7-1',
+      issue_all: '100 million', // 发行总量
+      issue_circulation: '35 million', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.itdapp.org/en.html', // 白皮书
+      office_website: 'http://www.itdapp.org/en.html', // 官网
+      chain_info: 'https://etherscan.io/token/0x8df333fe2116929df10025c0c0facc1be7a44cbc#writeContract' // 区块查询
+    }
+  }
 }

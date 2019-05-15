@@ -288,14 +288,17 @@
     </div>
     <!-- 持有仓位, btc永续 -->
     <div class="ix-pannel flex mt-4">
-      <div class="ix-header flex-row-center">
-        <div>{{ $t('contract_hold_pos') }} : {{ $t('contract_' + symbol.name) }}</div>
-        <span class="risk-alert">
+      <div class="ix-header">
+        <span>{{ $t('contract_hold_pos') }} : {{ $t('contract_' + symbol.name) }}</span>
+        <!-- <span class="risk-alert">
           <i
             class="iconfont strong pointer ml-6"
             v-tooltip.top-end="{html: true, content: $t('contract_click_to_wallet'), classes: 'contract'}"
           />
-        </span> 
+        </span>  -->
+        <router-link 
+          style="float:right;"
+          :to="{name: 'ContractFee'}">{{ $t('footer_fee') }}</router-link>
       </div>
       <div class="ix-pannel-body risk-limit-wrap">
         <div class="hold__info mb-7">

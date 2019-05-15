@@ -29,7 +29,6 @@ const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pa
 const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
 const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/ProfileSafety')
 const ProfileApi = () => import(/* webpackChunkName: "ProfileApi" */ '@/pages/ProfileApi')
-const Fee = () => import(/* webpackChunkName: "Fee" */ '@/pages/Fee')
 const relay = () => import(/* webpackChunkName: "relay" */ '@/pages/active/relay')
 const creation = () => import(/* webpackChunkName: "creation" */ '@/pages/active/creation')
 const PhoneBind = () => import(/* webpackChunkName: "PhoneBind" */ '@/pages/PhoneBind')
@@ -40,6 +39,9 @@ const GoogleTitle = () => import(/* webpackChunkName: "GoogleTitle" */ '@/pages/
 const lever = () => import(/* webpackChunkName: "lever" */ '@/pages/lever')
 // const ProfileAuthen = () => import(/* webpackChunkName: "ProfileAuthen" */ '@/pages/ProfileAuthen')
 
+const Fee = () => import(/* webpackChunkName: "Fee" */ '@/pages/Fee')
+const ContractFee = () => import(/* webpackChunkName: "ContractFee" */ '@/components/Fee/contractFee')
+const TradingFee = () => import(/* webpackChunkName: "tradingFee" */ '@/components/Fee/tradingFee')
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
 
 const Fund = () => import(/* webpackChunkName: "Fund" */ '@/pages/Fund')
@@ -503,8 +505,21 @@ export const routes = [
       class: 'dark',
       mobileNav: isMobile
     },
-    component: Fee
-  }
+    component: Fee,
+    redirect: '/fee/tradingFee',
+    children: [
+      {
+        path: 'tradingFee',
+        name: 'TradingFee',
+        component: TradingFee, 
+      },
+      { 
+        path: 'contractFee',
+        name: 'ContractFee',
+        component: ContractFee, 
+      }
+    ]
+  },
 ]
 
 

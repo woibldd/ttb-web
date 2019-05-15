@@ -5,7 +5,8 @@
       class="mask"
       :class="{show: !tvReady}">
       <v-loading/>
-    </div>
+    </div> 
+    <i class='k-line-logo icon'></i>
   </div>
 </template>
 
@@ -80,7 +81,7 @@ export default {
          (entryId) => { ida = entryId }, {
           'Plot.color': '#ff9500',
           'Plot.linewidth': 3,
-          precision: 8
+          precision: 1
         })
         // 30 日均线
         let idb = 0
@@ -88,7 +89,7 @@ export default {
         (entryId) => { idb = entryId }, {
           'Plot.color': '#107efa',
           'Plot.linewidth': 3,
-          precision: 8
+          precision: 1
         })
 
         // MACD
@@ -130,7 +131,7 @@ export default {
               widget.chart().createStudy(indicat.fullname || indicat.name, !1, !1, indicat.args, (entryId) => {
                 this.entryId = entryId
               }, {
-                precision: 8
+                precision: 1
               })
               element.classList.add('selected')
               this.hasIndicator = true
@@ -173,7 +174,7 @@ export default {
         //   this.hasIndicator = true
         // })
 
-        widget.chart().executeActionById('drawingToolbarAction')
+        //widget.chart().executeActionById('drawingToolbarAction')
       })
     }
   },
@@ -250,6 +251,17 @@ export default {
   height: 100%;
   .mask {
     @include ix-mask();
+  } 
+  .icon {
+    position: absolute;
+    bottom: 57px;
+    left: 250px;
+    width: 85px;
+    height: 22px;
+    background-image: url('~@/assets/ixx-k.png');
+    background-position: 0 0; 
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 }
 </style>

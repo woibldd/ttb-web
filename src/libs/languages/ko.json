@@ -1670,8 +1670,7 @@
     "otc_trade":"프랑스코인거래",
     "otc_tips":"위쳇추가할때 이름을 밝히세요",
 
-    
-    "trading_fees": "币币手续费",
-    "contract_fees": "合约手续费",
+    "trading_fees": "코인수수료",
+    "contract_fees": "계약수수료",
     "":"" 
 }

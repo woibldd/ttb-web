@@ -1791,9 +1791,8 @@
 "otc_trade":"Fiat",
 "otc_tips":"Add WeChat Please note",
 
-
-"trading_fees": "币币手续费",
-"contract_fees": "合约手续费",
+"trading_fees": "trading fee ",
+"contract_fees": "contract fee",
 "":""
 
 }
