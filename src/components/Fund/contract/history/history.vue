@@ -356,6 +356,13 @@ export default {
 </style>
 <style lang="scss" scoped>
 @import './history.scss';
+
+.table__th {
+  text-align: center;
+}
+.table__td {
+  white-space: nowrap;
+}
 .history__footer {
         width: 100%;
         border-top: 1px solid #CCCCCC;
