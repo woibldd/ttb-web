@@ -2,15 +2,14 @@
     .filter-list {
         display: flex;
     }
-    .filter-item {
-        width:90px;
+    .filter-item { 
         height:32px;
         border-radius:6px;
         line-height: 32px;
         text-align: center;
         cursor: pointer;
         margin-right: 50px;
-
+        padding: 0 20px;
         &.select {
             background:rgba(34,206,208,1);
             color: #fff;
