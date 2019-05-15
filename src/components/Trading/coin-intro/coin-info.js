@@ -529,5 +529,55 @@ export default{
       office_website: 'http://www.itdapp.org/en.html', // 官网
       chain_info: 'https://etherscan.io/token/0x8df333fe2116929df10025c0c0facc1be7a44cbc#writeContract' // 区块查询
     }
+  },
+  HDN: {
+    'zh-CN': {
+      name: 'HDN',
+      full_name: 'HALADINAR (HDN)',
+      brief_info: 'HALADINAR (HDN)是一个环球去中心化在线商城，旨在为世界各地的穆斯林和非穆斯林社区提供服务。  HALADINAR在线的所有商品和服务都是具有清真标志的。',
+      issue_time: '2018-7-1',
+      issue_all: '10亿', // 发行总量
+      issue_circulation: '4500万', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://haladinar.io/hdn/resources.html', // 白皮书
+      office_website: 'https://haladinar.io/hdn/index.html', // 官网
+      chain_info: 'https://etherscan.io/token/0xfe73a07fa11ba0a8480159f405d35d0b55f826e8' // 区块查询
+    },
+    'zh-HK': {   
+        name: 'HDN',
+        full_name: 'HALADINAR (HDN)',
+        brief_info: 'HALADINAR（HDN）是壹個環球去中心化在線商城，旨在為世界各地的穆斯林和非穆斯林社區提供服務。  HALADINAR在線的所有商品和服務都是具有清真標誌的。',
+        issue_time: '2018-7-1',
+        issue_all: '10億', // 发行总量
+        issue_circulation: '4500萬', // 流通总量
+        token_price: '--', // 众筹价格
+        whitepagger: 'https://haladinar.io/hdn/resources.html', // 白皮书
+        office_website: 'https://haladinar.io/hdn/index.html', // 官网
+        chain_info: 'https://etherscan.io/token/0xfe73a07fa11ba0a8480159f405d35d0b55f826e8' // 区块查询
+    },
+    'en': {  
+        name: 'HDN',
+        full_name: 'HALADINAR (HDN)',
+        brief_info: 'HALADINAR is a global platform and online decentralized marketplace designed to serve both the Muslim and non-Muslim communities anywhere in the world. Goods and services in the HALADINAR Marketplace are Halal, Thoyyiban and Mubarakan.',
+        issue_time: '2018-7-1',
+        issue_all: '1000 million', // 发行总量
+        issue_circulation: '45 million', // 流通总量
+        token_price: '--', // 众筹价格
+        whitepagger: 'https://haladinar.io/hdn/resources.html', // 白皮书
+        office_website: 'https://haladinar.io/hdn/index.html', // 官网
+        chain_info: 'https://etherscan.io/token/0xfe73a07fa11ba0a8480159f405d35d0b55f826e8' // 区块查询
+       },
+    'ko': {  
+        name: 'HDN',
+        full_name: 'HALADINAR (HDN)',
+        brief_info: 'HALADINAR (HDN)는 세계 각지의 무슬림과 비무슬림 지역사회에 서비스를 제공하기 위하여 전 세계에서 중심 쇼핑몰을 가는 것이다.HALADINAR 온라인 모든 상품과 서비스는 리얼 마크가 들어가 있습니다.',
+        issue_time: '2018-7-1',
+        issue_all: '1000 million', // 发行总量
+        issue_circulation: '45 million', // 流通总量
+        token_price: '--', // 众筹价格
+        whitepagger: 'https://haladinar.io/hdn/resources.html', // 白皮书
+        office_website: 'https://haladinar.io/hdn/index.html', // 官网
+        chain_info: 'https://etherscan.io/token/0xfe73a07fa11ba0a8480159f405d35d0b55f826e8' // 区块查询
+    }
   }
 }
