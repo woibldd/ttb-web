@@ -45,7 +45,13 @@
           :prop="hd.key"
           :label="hd.title">
           <template slot-scope="scope">
-            <span v-if="hd.key === 'currency'"><icon :name="scope.row.currency"/> {{scope.row[hd.key]}}</span>
+            <span v-if="hd.key === 'currency'">
+              <icon :name="scope.row.currency"/> 
+              <i v-if="scope.row[hd.key] === 'ITD'" 
+                style='background-color:#BAE2F7;cursor: help;' 
+                v-tooltip.top-start='{html: true, content: $t("idt_tips"), classes: "assets"}'  > {{scope.row[hd.key]}}</i>
+              <i v-else>{{scope.row[hd.key]}}</i>
+            </span>
             <div v-else-if="hd.key === 'locking'">
               {{ scope.row.currency.toUpperCase() === 'USDT' && plusMillionUsdt? $big(scope.row[hd.key]).plus(millionUsdtAmount).toString() : scope.row[hd.key]  | fixed(8) }}
             </div>  
@@ -458,6 +464,10 @@ export default {
   },
 }
 </script>
+<style lang="scss">
+@import '~@/styles/tooltip.scss'; 
+</style>
 <style lang="scss" scoped>
 @import './my.scss';
+ 
 </style>

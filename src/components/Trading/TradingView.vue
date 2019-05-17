@@ -100,7 +100,14 @@ export default {
           'Plot.linewidth': 3,
           precision: 1
         })
- 
+        // 60 日均线
+        let idc = 0
+        widget.chart().createStudy('Moving Average', !1, !1, [60], 
+        (entryId) => { idb = entryId }, {
+          'Plot.color': '#92d5f7',
+          'Plot.linewidth': 3,
+          precision: 1
+        }) 
         // MACD
         widget.chart().onIntervalChanged().subscribe(null, function (interval) {
           local.interval = interval
@@ -108,6 +115,7 @@ export default {
             widget.chart().setChartType(local.lineType)   
             widget.chart().setEntityVisibility(ida, true) //显示7 日平均线
             widget.chart().setEntityVisibility(idb, true) //显示30 日平均线 
+            widget.chart().setEntityVisibility(idc, true) //显示60 日平均线   
               //移除分时线高亮
               if(widget.btnFS[0].classList.contains('selected')) {
                 widget.btnFS[0].classList.remove('selected') 
@@ -168,12 +176,13 @@ export default {
               widget.chart().setResolution('1', null) //周期切换到一分钟 
               widget.chart().setEntityVisibility(ida, false) //隐藏7 日平均线
               widget.chart().setEntityVisibility(idb, false) //隐藏30 日平均线 
+               widget.chart().setEntityVisibility(idc, false) //隐藏60 日平均线  
             } else { 
               element.classList.remove('selected') 
               widget.chart().setChartType(local.lineType)   
               widget.chart().setEntityVisibility(ida, true) //显示7 日平均线
-              widget.chart().setEntityVisibility(idb, true) //显示30 日平均线
-              
+              widget.chart().setEntityVisibility(idb, true) //显示30 日平均线  
+              widget.chart().setEntityVisibility(idc, true) //显示60 日平均线 
             } 
         }).append(utils.$i18n.t("tradingview_line"))
         //widget.btnFS[0].style.display = 'none'

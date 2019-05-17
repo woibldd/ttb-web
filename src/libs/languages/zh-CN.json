@@ -1462,8 +1462,7 @@
     "contract_content7": "六、“套期保值”交易同投机交易一样，同样面临价格波动引起的风险。",
     "contract_content8": "七、如果您没有进行KYC2（实名认证）或者未绑定Google验证，或者将账号借给非本人操作，将可能会影响您的合约保证金的安全性",
     "novice_img":"<img src=\"../assets/zhongwen.png\" alt=\"dl\" width=\"60\">",
-    "contract_action_button_low_tips": "当前余额不足，无法提交委托！",
-    "contract_fee_rate_current_tips": "<a>当前费率：</a><br/>当前时间段资金费率为%{feeRate}，该数值是正数，代表多仓需要支付给空仓，如果该数值是负数，代表空仓要付给多仓。",
+    "contract_action_button_low_tips": "当前余额不足，无法提交委托！", 
     "contract_fee_rate_estimate_tips": "<a>预测费率：</a><br/>下一个时间段预计的资金费率为%{feeRate}，该数值是正数，代表多仓需要支付给空仓，如果该数值是负数，代表空仓要付给多仓。",
     "header_title_contract_competition": "合约大赛",
 
@@ -1685,10 +1684,29 @@
 
     
     "otc_trade":"法币交易",
-    "otc_tips":"添加微信请备注",
-    
+    "otc_tips":"添加微信请备注", 
     "trading_fees": "币币手续费",
     "contract_fees": "合约手续费",  
+
+    
+    "contract_fee_rate_current_tips": "<a>当前费率：</a><br/>当前时间段资金费率为%{feeRate}，该数值是正数，代表多仓需要支付给空仓，如果该数值是负数，代表空仓要付给多仓。",
+    "transfer_side":"划转方向",
+    "transfer_amount":"划转数量",  
+    "transfer_enter_amount":"请输入划转金额",   
+    "transfer_able_amount":"可划转数量：",
+    "transfer_btc_history":"BTC划转记录",
+    "transfer_currency":"划转币种",
+    "transfer_from_a":"转自",
+    "transfer_to_a":"转至",
+    "transfer_time":"划转时间",
+    "transfer_enter_error":"输入数字不合法", 
+    "transfer_success":"划转成功",
+    "transfer_fail":"失败",
+    "transfer_complete":"完成",
+    "transfer_day_liquidation":"当日清算",
+    "transfer_all":"全部", 
+    "withdraw_tips1":"请完善你的资料",
+    "idt_tips": "空投部分ITD每日系统解冻释放2%",
     "":"" 
     
 }
