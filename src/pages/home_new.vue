@@ -79,7 +79,103 @@
 
       </div>
     </div>
+    <div class="corperator">
+      <div class="corperator-container">
+         
+        <div class="corp-row row-60 mb-60">
+          <div
+            class="corp-title"
+            v-t="'footer_partners'"/>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="https://www.bishijie.com"
+              target="_blank">
+              <img
+                class="logo cw"
+                src="~@/assets/copr-logo-cw.png">
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="http://hangliancj.com"
+              target="_blank">
+              <img
+                class="logo hl"
+                src="~@/assets/copr-logo-hl.png">
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="http://www.huoxing24.com/"
+              target="_blank">
+              <img
+                class="logo hx"
+                src="~@/assets/copr-logo-hx.png" >
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="https://www.jinse.com/"
+              target="_blank">
+              <img
+                class="logo js"
+                src="~@/assets/copr-logo-js.png">
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="https://www.hecaijing.com/"
+              target="_blank">
+              <img
+                class="logo he"
+                src="~@/assets/copr-logo-he.png">
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="http://www.youjiatuanjian.com/"
+              target="_blank">
+              <img
+                class="logo blk"
+                src="~@/assets/copr-logo-blk.png">
+            </a>
+          </div>
+        </div>
 
+        <div class="corp-row row-20">
+          <div
+            class="corp-title">
+            {{ $t('footer_copr') }}
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="https://dvpnet.io/"
+              target="_blank">
+              <img
+                class="logo dvp"
+                src="~@/assets/copr-logo-dvp.png" >
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="http://www.csi.link/"
+              target="_blank">
+              <img
+                class="logo hx"
+                src="~@/assets/copr-logo-cs.png" >
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 </template>
