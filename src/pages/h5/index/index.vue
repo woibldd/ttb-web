@@ -95,6 +95,7 @@
             <div class="corp-logo">
               <a
                 class="link"
+                disabled
                 href="http://gs.holdings/"
                 target="_blank">
                 <img
@@ -131,64 +132,58 @@
             v-t="'footer_partners'"/>
           <div class="corp-wrap">
             <div class="corp-logo">
-              <a
+              <span 
                 class="link"
-                href="https://www.bishijie.com"
-                target="_blank">
+                >
                 <img
                   class="logo cw"
                   src="~@/assets/copr-logo-cw.png">
-              </a>
+              </span>
             </div>
             <div class="corp-logo">
-              <a
+              <span
                 class="link"
-                href="http://hangliancj.com"
                 target="_blank">
                 <img
                   class="logo hl"
                   src="~@/assets/copr-logo-hl.png">
-              </a>
+              </span>
             </div>
             <div class="corp-logo">
-              <a
+              <span
                 class="link"
-                href="http://www.huoxing24.com/"
                 target="_blank">
                 <img
                   class="logo hx"
                   src="~@/assets/copr-logo-hx.png" >
-              </a>
+              </span>
             </div>
             <div class="corp-logo">
-              <a
+              <span
                 class="link"
-                href="https://www.jinse.com/"
                 target="_blank">
                 <img
                   class="logo js"
                   src="~@/assets/copr-logo-js.png">
-              </a>
+              </span>
             </div>
             <div class="corp-logo">
-              <a
+              <span
                 class="link"
-                href="https://www.hecaijing.com/"
                 target="_blank">
                 <img
                   class="logo he"
                   src="~@/assets/copr-logo-he.png">
-              </a>
+              </span>
             </div>
             <div class="corp-logo">
-              <a
+              <span
                 class="link"
-                href="http://www.youjiatuanjian.com/"
                 target="_blank">
                 <img
                   class="logo blk"
                   src="~@/assets/copr-logo-blk.png">
-              </a>
+              </span>
             </div>
           </div>
         </div>

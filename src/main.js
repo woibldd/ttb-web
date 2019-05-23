@@ -31,7 +31,9 @@ import {
   RadioGroup,
   RadioButton,
   Loading,
-  MessageBox
+  MessageBox,
+  Tabs,
+  TabPane,
 } from 'element-ui'
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
@@ -55,6 +57,8 @@ Vue.use(Upload)
 Vue.use(RadioGroup)
 Vue.use(RadioButton)
 Vue.use(Loading)
+Vue.use(Tabs);
+Vue.use(TabPane);
 
 const request = require.context('./assets/svg', true, /\.svg$/)
 /* console.log('request', request)

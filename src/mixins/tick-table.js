@@ -13,6 +13,7 @@ export default {
       err: '',
       search: '',
       tab: '',
+      tabSelected: '',
       sortBy: '',
       sortState: 0 // 0:不排序 1:降序 2:升序
     }
@@ -40,7 +41,18 @@ export default {
     },
     showList () {
       let list = this.pairList
-      return _.filter(list, pair => pair.product_name.indexOf(this.search.toUpperCase()) > -1)
+      if (this.tabSelected === 'like') {
+        return _.filter(list, pair => {
+          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 &&
+            (pair.like || false)
+        })
+      }
+      else {
+        return _.filter(list, pair => {
+          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 &&
+            pair.currency.indexOf(this.tabSelected) > -1
+        })
+      }
     },
     changeRankList () {
       return _.sortBy(this.pairList, (item) => {

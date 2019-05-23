@@ -36,6 +36,7 @@
       <pair-table
         :sorted-list="sortedList"
         @searching="onSearching"
+        @switchTab="onSwitchTab"
         :get-delta="getDelta"/>
       <div
         class="mask"
@@ -80,71 +81,64 @@
       </div>
     </div>
     <div class="corperator">
-      <div class="corperator-container">
-         
+      <div class="corperator-container"> 
         <div class="corp-row row-60 mb-60">
           <div
             class="corp-title"
             v-t="'footer_partners'"/>
           <div class="corp-logo">
-            <a
-              class="link"
-              href="https://www.bishijie.com"
+            <span
+              class="link" 
               target="_blank">
               <img
                 class="logo cw"
                 src="~@/assets/copr-logo-cw.png">
-            </a>
+            </span>
           </div>
           <div class="corp-logo">
-            <a
-              class="link"
-              href="http://hangliancj.com"
+            <span
+              class="link" 
               target="_blank">
               <img
                 class="logo hl"
                 src="~@/assets/copr-logo-hl.png">
-            </a>
+            </span>
           </div>
           <div class="corp-logo">
-            <a
-              class="link"
-              href="http://www.huoxing24.com/"
+            <span
+              class="link" 
               target="_blank">
               <img
                 class="logo hx"
                 src="~@/assets/copr-logo-hx.png" >
-            </a>
+            </span>
           </div>
           <div class="corp-logo">
-            <a
-              class="link"
-              href="https://www.jinse.com/"
+            <span
+              class="link" 
               target="_blank">
               <img
                 class="logo js"
                 src="~@/assets/copr-logo-js.png">
-            </a>
+            </span>
           </div>
           <div class="corp-logo">
-            <a
-              class="link"
-              href="https://www.hecaijing.com/"
+            <span
+              class="link" 
               target="_blank">
               <img
                 class="logo he"
                 src="~@/assets/copr-logo-he.png">
-            </a>
+            </span>
           </div>
           <div class="corp-logo">
-            <a
-              class="link"
-              href="http://www.youjiatuanjian.com/"
+            <span
+              class="link" 
               target="_blank">
               <img
                 class="logo blk"
                 src="~@/assets/copr-logo-blk.png">
-            </a>
+            </span>
           </div>
         </div>
 
@@ -154,24 +148,22 @@
             {{ $t('footer_copr') }}
           </div>
           <div class="corp-logo">
-            <a
-              class="link"
-              href="https://dvpnet.io/"
+            <span
+              class="link" 
               target="_blank">
               <img
                 class="logo dvp"
                 src="~@/assets/copr-logo-dvp.png" >
-            </a>
+            </span>
           </div>
           <div class="corp-logo">
-            <a
-              class="link"
-              href="http://www.csi.link/"
+            <span
+              class="link" 
               target="_blank">
               <img
                 class="logo hx"
                 src="~@/assets/copr-logo-cs.png" >
-            </a>
+            </span>
           </div>
         </div>
       </div>
@@ -253,6 +245,9 @@ export default {
     },
     onSearching (kw) {
       this.search = kw
+    },
+    onSwitchTab (val) {
+      this.tabSelected = val
     }
   },
   created () {

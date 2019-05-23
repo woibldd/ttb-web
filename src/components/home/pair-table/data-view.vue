@@ -1,34 +1,6 @@
 <template>
-  <div class="newest-coin-pairs">
-    <div class="relative">
-      <!-- <div class="pair-title">{{ $t('newest_coin_pairs') }}</div> -->
-      <div class="pair-title"> 
-        <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-          <el-tab-pane label="自选" name="like"> 
-          </el-tab-pane>
-          <el-tab-pane label="USDT" name="USDT">  
-          </el-tab-pane>
-          <el-tab-pane label="BTC" name="BTC"></el-tab-pane>
-          <el-tab-pane label="ETH" name="ETH"></el-tab-pane>
-        </el-tabs>
-      </div>
-      <div class="pairs-search">
-        <div class="search-box">
-          <input
-            type="text"
-            @input="filterPair()"
-            v-model="search">
-          <icon
-            class="ml-5"
-            name="home-search"/>
-        </div>
-      </div>
-    </div>
-    <div class="pairs-table">
+  <div class="pairs-table">
       <div class="pairs-table__head">
-        <div class="head-item percent5">
-           
-        </div>
         <div class="head-item percent9">
           {{ $t('currency') }}
         </div>
@@ -57,17 +29,7 @@
         @click="toExchange(pair.name)"
         v-if="pair.tick"
         :key="index">
-        <div 
-          @click.stop="collection(pair)"
-          class="row__item percent5">
-          <icon 
-            v-show="pair.like"
-            name='like' style='color:red;'/>
-          <icon 
-            v-show="!pair.like"
-            name='dislike'/>
-        </div>
-        <div class="row__item percent9"> 
+        <div class="row__item percent9">
           {{ pair.name | pairfix }}
         </div>
         <div class="row__item percent18_8 newest_price">
@@ -101,25 +63,19 @@
         </div>
       </div>
     </div>
-
-  </div>
 </template>
+
 <script>
 import {state} from '@/modules/store'
 import { pairfix } from '@/mixins/index'
-import dataView from './data-view'
 export default {
   mixins: [pairfix],
   data () {
     return {
       state,
-      searchCoin: '',
-      search: '',
+      searchCoin: '', 
       activeName: 'first'
     }
-  },
-  components: {
-    dataView,
   },
   props: {
     sortedList: {
@@ -167,25 +123,15 @@ export default {
     filterPair () {
       this.$emit('searching', this.search)
     }, 
-    handleClick(tab, event) {
-      // console.log(tab, event);
-      this.$emit('switchTab', tab.name)
-    },
-    collection(pair) {
-      pair.like = !(pair.like || false)
-      // console.log()
-    }
-  }, 
+  },
+  created() {
+    console.log('test')
+  }
 }
 </script>
-<style lang="scss">
-.newest-coin-pairs {
-  .el-tabs__header {
-    margin: 0;
-  } 
-}
-</style>
-<style lang="scss" scoped>
-@import './pair-table.scss';
 
+
+<style lang="scss" scoped>
+@import './pair-table.scss'
 </style>
+

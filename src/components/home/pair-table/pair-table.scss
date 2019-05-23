@@ -8,9 +8,9 @@
     }
     .pair-title {
         color: #606060;
-        font-size: 24px;
-        margin-bottom: 17px;
+        font-size: 24px; 
         font-weight: bold;
+         
     }
     .c-999 {
         color: #999999 !important;
@@ -99,6 +99,9 @@
         display: flex;
         flex-direction: row-reverse;
     }
+    .percent5{
+      width: 5%;
+    }
     .percent9{
         width: 9%;
     }
@@ -118,4 +121,15 @@
           color: $primary;
         }
       }
+  
+  .relative {
+    position: relative;
+  }
+  
+  .pairs-search {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  
 }
