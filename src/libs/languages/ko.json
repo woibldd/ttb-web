@@ -545,7 +545,7 @@
   "api_tips_one": "1. IXX.COM은 좋은 기능을 가진API를 제공 하였습니다. 고객님은 <a target=\"_blank\" href=\"%{link}\">API를</a> 사용하여 시세조회、자동 거래등 업무를 할수있습니다.",
   "api_tips_two": "2. 한계정당 최대 열개의 API Key를 생성할수 있습니다.",
   "api_tips_three": "3. 고객님의 API Key를 노출하지 마십시오.",
-  "api_tips_four": "4. 자산 손실이 발생 하지 않도록 당신의 API Key를 누설 하지 마세요.",
+  "api_tips_four": "3. 자산 손실이 발생 하지 않도록 당신의 API Key를 누설 하지 마세요.",
   "footer_investors": "투자기관",
   "footer_partners": "협력매체",
   "footer_copr": "합동자",
