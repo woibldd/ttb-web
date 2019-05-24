@@ -1,8 +1,8 @@
 <template>
   <div class="newest-coin-pairs">
     <div class="relative">
-      <!-- <div class="pair-title">{{ $t('newest_coin_pairs') }}</div> -->
-      <div class="pair-title"> 
+      <div class="pair-title">{{ $t('newest_coin_pairs') }}</div>
+      <!-- <div class="pair-title"> 
         <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
           <el-tab-pane label="自选" name="like"> 
           </el-tab-pane>
@@ -11,7 +11,7 @@
           <el-tab-pane label="BTC" name="BTC"></el-tab-pane>
           <el-tab-pane label="ETH" name="ETH"></el-tab-pane>
         </el-tabs>
-      </div>
+      </div> -->
       <div class="pairs-search">
         <div class="search-box">
           <input
@@ -26,9 +26,9 @@
     </div>
     <div class="pairs-table">
       <div class="pairs-table__head">
-        <div class="head-item percent5">
+        <!-- <div class="head-item percent5">
            
-        </div>
+        </div> -->
         <div class="head-item percent9">
           {{ $t('currency') }}
         </div>
@@ -57,7 +57,7 @@
         @click="toExchange(pair.name)"
         v-if="pair.tick"
         :key="index">
-        <div 
+        <!-- <div 
           @click.stop="collection(pair)"
           class="row__item percent5">
           <icon 
@@ -66,7 +66,7 @@
           <icon 
             v-show="!pair.like"
             name='dislike'/>
-        </div>
+        </div> -->
         <div class="row__item percent9"> 
           {{ pair.name | pairfix }}
         </div>
