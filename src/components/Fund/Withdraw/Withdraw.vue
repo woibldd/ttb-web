@@ -411,7 +411,7 @@ export default {
         if (res.code) {
           utils.alert(res.message)
         } else {
-          this.$router.push('/fund/my/history/withdraw')
+          this.$router.push('/fund/my/assets/history/withdraw')
         }
       })
     },
