@@ -1,17 +1,17 @@
 <template>
   <div class="newest-coin-pairs">
     <div class="relative">
-      <div class="pair-title">{{ $t('newest_coin_pairs') }}</div>
-      <!-- <div class="pair-title"> 
+      <!-- <div class="pair-title">{{ $t('newest_coin_pairs') }}</div> -->
+      <div class="pair-title"> 
         <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-          <el-tab-pane label="自选" name="like"> 
+          <el-tab-pane :label="$t('home_optional')" name="like"> 
           </el-tab-pane>
           <el-tab-pane label="USDT" name="USDT">  
           </el-tab-pane>
           <el-tab-pane label="BTC" name="BTC"></el-tab-pane>
           <el-tab-pane label="ETH" name="ETH"></el-tab-pane>
         </el-tabs>
-      </div> -->
+      </div>
       <div class="pairs-search">
         <div class="search-box">
           <input
@@ -26,9 +26,8 @@
     </div>
     <div class="pairs-table">
       <div class="pairs-table__head">
-        <!-- <div class="head-item percent5">
-           
-        </div> -->
+        <div class="head-item percent5"> 
+        </div>
         <div class="head-item percent9">
           {{ $t('currency') }}
         </div>
@@ -57,16 +56,16 @@
         @click="toExchange(pair.name)"
         v-if="pair.tick"
         :key="index">
-        <!-- <div 
+        <div 
           @click.stop="collection(pair)"
           class="row__item percent5">
           <icon 
             v-show="pair.like"
-            name='like' style='color:red;'/>
+            name='sc-x' style='color:red;'/>
           <icon 
             v-show="!pair.like"
-            name='dislike'/>
-        </div> -->
+            name='sc-w'/>
+        </div>
         <div class="row__item percent9"> 
           {{ pair.name | pairfix }}
         </div>
@@ -100,12 +99,12 @@
           <icon name="handle"/>
         </div>
       </div>
-    </div>
-
+    </div> 
   </div>
 </template>
 <script>
 import {state} from '@/modules/store'
+import service from '@/modules/service'
 import { pairfix } from '@/mixins/index'
 import dataView from './data-view'
 export default {
@@ -115,7 +114,7 @@ export default {
       state,
       searchCoin: '',
       search: '',
-      activeName: 'first'
+      activeName: 'like'
     }
   },
   components: {
@@ -172,10 +171,25 @@ export default {
       this.$emit('switchTab', tab.name)
     },
     collection(pair) {
-      pair.like = !(pair.like || false)
-      // console.log()
+      if(pair.like) { 
+        pair.like = false;
+        service.delOptional({
+          site: 2,
+          id: pair.id
+        })
+      }
+      else { 
+        pair.like = true; 
+        service.addOptional({
+          site: 2,
+          id: pair.id
+        })
+      }
+      // pair.like = !(pair.like || false) 
     }
   }, 
+  created(){  
+  }
 }
 </script>
 <style lang="scss">
