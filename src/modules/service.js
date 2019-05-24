@@ -869,6 +869,23 @@ const service = {
     return getCache('c_ranklist', () => request('future/activity/rank_list', params), 1e3)
   },
 
+  //自选列表 
+  getOptionalList (params) {
+    //site (int 非必须,默认1) 1-ix 2-ixx
+    return getCache('c_optional', () => request('account/currency/optionalList', params), 1e3)
+  },
+  // 增加自选
+  addOptional(params) { 
+    //site (int 非必须,默认1) 1-ix 2-ixx
+    // id 币对id
+    return request('account/currency/optional/add', params)
+  },
+  //删除自选
+  delOptional(params) { 
+    //site (int 非必须,默认1) 1-ix 2-ixx
+    // id 币对id
+    return request('account/currency/optional/del', params)
+  },
 }
 
 export async function fetch (url, body, options, method = 'post') {
