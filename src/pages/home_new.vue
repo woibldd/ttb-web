@@ -190,7 +190,7 @@ export default {
         loop: true,
         autoplay: 1000,
         paginationType: 'fraction',
-        pagination: '.swiper-pagination'
+        pagination: '.swiper-pagination',
       },
       hasNewNotice: false,
       pairsHead: [
@@ -201,14 +201,14 @@ export default {
         {key: 'homechart_24h_h', name: this.$t('homechart_24h_h')},
         {key: 'homechart_24h_v', name: this.$t('homechart_24h_v')},
         {key: 'actions', name: this.$t('actions')}
-      ]
+      ], 
     }
   },
   components: {
     kSlider: Slider,
     PairTable,
     PairRankTable,
-    MineSummary
+    MineSummary, 
     // Kyc
   },
   computed: {
@@ -217,7 +217,10 @@ export default {
     },
     isKorean () {
       return state.locale === 'ko'
-    }
+    },
+    tabSelected () {
+      return state.tabSelected
+    },
   },
   watch: {
     'state.locale' (locale) {
@@ -247,7 +250,8 @@ export default {
       this.search = kw
     },
     onSwitchTab (val) {
-      this.tabSelected = val
+      console.log('switchTab')
+      this.state.tabSelected = val
     }
   },
   created () {

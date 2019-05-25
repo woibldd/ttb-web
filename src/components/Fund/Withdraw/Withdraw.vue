@@ -109,6 +109,7 @@
       </div>
       <div class="fund-item-other withdraw-least mt-14 mb-22">
         {{ $t("withdraw_min") }} {{ selectCoin.min_withdraw_amount }} {{ selectCoin.currency }}
+        <a @click="input_all" class="up-limit pointer ml-30">{{$t('transfer_all')}}</a>
       </div>
       <div class="fund-item-other withdraw-fee mb-23">
         <p> <span class="fee__label">{{ $t('withdraw_fee') }} </span> <span class="fee__coin">{{ selectCoin.withdraw_fee }}{{ selectCoin.currency }}</span> </p>
@@ -287,7 +288,10 @@ export default {
     this.updadeMyCoinInfo()
     this.getCoinAddress()
   },
-  methods: {
+  methods: { 
+    input_all() {
+      this.withdrawCount = this.myCoinInfo.available
+    },
     clickVerifyRow (v) {
       this.$router.push({
         name: v

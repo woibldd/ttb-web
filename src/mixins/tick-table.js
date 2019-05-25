@@ -13,12 +13,14 @@ export default {
       err: '',
       search: '',
       tab: '',
-      tabSelected: '',
       sortBy: '',
       sortState: 0 // 0:不排序 1:降序 2:升序
     }
   },
   computed: {
+    tabSelected () {
+      return state.tabSelected
+    },
     errmsg () {
       if (this.loading || this.err) {
         return ''
@@ -157,15 +159,15 @@ export default {
         this.$set(item, 'delta', item.delta || false)
         this.$set(item, 'vol', item.vol || false)
       })
-      // let optional = await service.getOptionalList({site: 2})
-      // if(!!optional && optional.data != null)
-      // for (const item of optional.data) {
-      //   let id = item.id
-      //   let pair = _.filter(res.data.items, item => { return item.id===id})
-      //   if (pair.length > 0) {
-      //     pair[0].like = true;
-      //   }
-      // } 
+      let optional = await service.getOptionalList({site: 2})
+      if(!!optional && optional.data != null)
+      for (const item of optional.data) {
+        let id = item.id
+        let pair = _.filter(res.data.items, item => { return item.id===id})
+        if (pair.length > 0) {
+          pair[0].like = true;
+        }
+      } 
       
       this.state.pro.pairList = res.data.items
       //this.showList

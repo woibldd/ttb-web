@@ -34,6 +34,7 @@ import {
   MessageBox,
   Tabs,
   TabPane,
+  Button
 } from 'element-ui'
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
@@ -59,6 +60,7 @@ Vue.use(RadioButton)
 Vue.use(Loading)
 Vue.use(Tabs);
 Vue.use(TabPane);
+Vue.use(Button)
 
 const request = require.context('./assets/svg', true, /\.svg$/)
 /* console.log('request', request)

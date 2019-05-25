@@ -17,6 +17,8 @@ export const state = {
   userInfo: null,
   loginBack: {name: 'home'}, // 默认登录返回页
   verifyEmail: '', // 注册、找回密码使用的邮箱
+  
+  tabSelected: 'like', //币对列表
   assets: {
     ready: false,
     total: 0,

@@ -1,69 +1,69 @@
 <template>
-  <div
-    class="ix-pannel"
-    :class="{loading: loading}">
+  <div class="ix-pannel" :class="{loading: loading}">
     <div class="ix-pannel-body">
-      <div
-        class="no-data"
-        v-if="errmsg">{{ $t(errmsg) }}</div>
-      <div
-        class="err"
-        v-if="!loading && err && !pairList.length">{{ err }}</div>
-      <div
-        class="ix-pair-head tr"
-        v-show="sortedList.length">
-        <div
-          class="th pair"
-          @click="setSort('pair')">
-          <sort
-            :sort="sort"
-            :label="$t('pairnav_pair')"
-            :state="stateSortBy('pair')"/>
+      <div class="no-data" v-if="errmsg">{{ $t(errmsg) }}</div>
+      <div class="err" v-if="!loading && err && !pairList.length">{{ err }}</div>
+      <!-- 索引 -->
+      <div class="ix-pair-head tr">
+        <!-- <el-input placeholder="搜索" v-model="search" > 
+          <el-button slot="append" icon="el-icon-search"></el-button>
+        </el-input>-->
+        <div class="pairs-search">
+          <div class="search-box">
+            <input placeholder="搜索" type="text" v-model="search">
+            <icon name="home-search"/>
+          </div>
         </div>
-        <div
-          class="th price"
-          @click="setSort('price')">
-          <sort
-            :sort="sort"
-            :label="$t('pairnav_price')"
-            :state="stateSortBy('price')"/>
+      </div>
+      <!-- tabs -->
+      <div class="ix-pair-head">
+        <el-tabs v-model="tabSelected" >
+          <el-tab-pane :label="$t('home_optional')" name="like"></el-tab-pane>
+          <el-tab-pane label="USDT" name="USDT"></el-tab-pane>
+          <el-tab-pane label="BTC" name="BTC"></el-tab-pane>
+          <el-tab-pane label="ETH" name="ETH"></el-tab-pane>
+        </el-tabs>
+      </div>
+      <div class="ix-pair-head tr" v-show="sortedList.length">
+        <div class="th pair" @click="setSort('pair')">
+          <sort :sort="sort" :label="$t('pairnav_pair')" :state="stateSortBy('pair')"/>
         </div>
-        <div
-          class="th delta"
-          @click="setSort('delta')">
-          <sort
-            :sort="sort"
-            :label="$t('pairnav_wave')"
-            :state="stateSortBy('delta')"/>
+        <div class="th price" @click="setSort('price')">
+          <sort :sort="sort" :label="$t('pairnav_price')" :state="stateSortBy('price')"/>
         </div>
-        <div
-          class="th vol"
-          @click="setSort('vol')">
-          <sort
-            :sort="sort"
-            :label="$t('pairnav_vol')"
-            :state="stateSortBy('vol')"/>
+        <div class="th delta" @click="setSort('delta')">
+          <sort :sort="sort" :label="$t('pairnav_wave')" :state="stateSortBy('delta')"/>
         </div>
-      </div>  
-      <ul
-        class="ul ix-pair-body tbody"
-        :style="{'max-height': height}"
-        v-show="sortedList.length">
+        <div class="th vol" @click="setSort('vol')">
+          <sort :sort="sort" :label="$t('pairnav_vol')" :state="stateSortBy('vol')"/>
+        </div>
+      </div>
+      <ul class="ul ix-pair-body tbody" :style="{'max-height': height}" v-show="sortedList.length">
         <li
           class="tr"
           v-for="pair in sortedList"
           :class="{cur: pair.name === state.pro.pair}"
           :key="pair.id"
-          @click="setPair(pair)">
-          <div class="td pair">{{ pair.product_name }}/{{ pair.currency_name }}</div>
+          @click="setPair(pair)"
+        >
+          <div class="td pair">
+            <span @click.stop="collection(pair)" class="row__item percent5">
+              <icon v-show="pair.like" name="sc-x"/>
+              <icon v-show="!pair.like" name="sc-w"/>
+            </span>
+            {{ pair.product_name }}/{{ pair.currency_name }}
+          </div>
           <div class="td price">
             <span v-if="pair.tick">{{ pair.tick.current | fixed(pair.price_scale) }}</span>
             <span v-else>...</span>
           </div>
           <div
             class="td delta"
-            :class="{'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}">
-            <span v-if="pair.tick">{{ (getDelta(pair.tick) > 0) ? '+' : '' }}{{ getDelta(pair.tick) }}%</span>
+            :class="{'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}"
+          >
+            <span
+              v-if="pair.tick"
+            >{{ (getDelta(pair.tick) > 0) ? '+' : '' }}{{ getDelta(pair.tick) }}%</span>
             <span v-else>...</span>
           </div>
           <div class="td vol">
@@ -77,14 +77,15 @@
 </template>
 
 <script>
-import utils from '@/modules/utils'
+import utils from "@/modules/utils";
 import { state } from "@/modules/store";
-import Sort from './Sort'
-import CollectStar from './CollectStar'
-import tickTableMixin from '@/mixins/tick-table'
+import Sort from "./Sort";
+import CollectStar from "./CollectStar";
+import tickTableMixin from "@/mixins/tick-table";
+import service from "@/modules/service";
 
 export default {
-  name: 'PairNav',
+  name: "PairNav",
   mixins: [tickTableMixin],
   components: {
     Sort,
@@ -100,86 +101,119 @@ export default {
       default: true
     }
   },
-  data () {
+  data() {
     return {
       bodyHeight: 0,
-      isMac: /Macintosh/.test(navigator.userAgent)
-    }
+      isMac: /Macintosh/.test(navigator.userAgent),
+      activeName: "like"
+    };
   },
   watch: {
-    'state.pro.currency_name': {
-      handler (currency) {
+    "state.pro.currency_name": {
+      handler(currency) {
         if (currency && !this.local.proOnFav) {
-          this.setTab(currency)
+          this.setTab(currency);
         }
       },
       immediate: true
     }
   },
   computed: {
-    hotKey () {
-      return this.isMac ? ' (Cmd+F)' : ' (Ctrl+F)'
+    hotKey() {
+      return this.isMac ? " (Cmd+F)" : " (Ctrl+F)";
     },
-    height () {
+    height() {
       if (this.initHeight) {
-        return `${this.initHeight}px`
+        return `${this.initHeight}px`;
       }
-      return this.bodyHeight
+      return this.bodyHeight;
+    },
+    tabSelected: { 
+      get() { 
+        return this.state.tabSelected
+      },
+      set(val) {
+        this.state.tabSelected = val
+      }
     }
   },
   methods: {
-    setPair (pair) {
+    setPair(pair) {
       this.$router.replace({
-        name: 'trading',
+        name: "trading",
         params: {
           pair: pair.name
         }
-      }) 
+      });
       //debugger
-      state.close_time = pair.close_time  || "[*][*][*][9:59-10:00]"
-      state.price_open = pair.price_open || 0.017
+      state.close_time = pair.close_time || "[*][*][*][9:59-10:00]";
+      state.price_open = pair.price_open || 0.017;
       
-     //this.$eh.$emit("trading:countDown", this.startCountDown);
+      //this.$eh.$emit("switchPair");
+      //this.$eh.$emit("trading:countDown", this.startCountDown);
     },
-    pretty (num) {
-      num = this.$big(num || 0)
+    pretty(num) {
+      num = this.$big(num || 0);
       if (num < 100) {
-        return num.toFixed(2)
+        return num.toFixed(2);
       }
       if (num < 1e6) {
-        return num.toFixed(0)
+        return num.toFixed(0);
       }
       if (num < 1e7) {
-        return num.div(1e6).toFixed(1) + ' M'
+        return num.div(1e6).toFixed(1) + " M";
       }
       if (num < 1e9) {
-        return num.div(1e6).toFixed(0) + ' M'
+        return num.div(1e6).toFixed(0) + " M";
       }
       if (num < 1e10) {
-        return num.div(1e9).toFixed(1) + ' B'
+        return num.div(1e9).toFixed(1) + " B";
       }
-      return num.div(1e9).toFixed(0) + ' B'
+      return num.div(1e9).toFixed(0) + " B";
     },
-    layoutInit () {
-      this.onresize()
-      this.$eh.$on('app:resize', this.onresize)
+    layoutInit() {
+      this.onresize();
+      this.$eh.$on("app:resize", this.onresize);
     },
-    onresize () {
-      this.bodyHeight = (this.initHeight || (this.container.height - 80)) + 'px'
+    onresize() {
+      this.bodyHeight = (this.initHeight || this.container.height - 80) + "px";
+    },
+    // tabsClick(tab) {
+    //   this.state.tabSelected = tab.name;
+    // },
+    collection(pair) {
+      //debugger
+      if (pair.like) {
+        pair.like = false;
+        service.delOptional({
+          site: 2,
+          id: pair.id
+        });
+      } else {
+        pair.like = true;
+        service.addOptional({
+          site: 2,
+          id: pair.id
+        });
+      }
+      // pair.like = !(pair.like || false)
     }
-  }, 
-  destroyed () {
-    this.$eh.$off('app:resize', this.onresize)
-    this.$eh.$off('protrade:layout:init', this.layoutInit)
   },
-  async created () {
-    this.$eh.$on('protrade:layout:init', this.layoutInit)
-  }, 
-}
+  created() {
+
+  },
+
+  destroyed() {
+    this.$eh.$off("app:resize", this.onresize);
+    this.$eh.$off("protrade:layout:init", this.layoutInit);
+  },
+  async created() {
+    this.$eh.$on("protrade:layout:init", this.layoutInit);
+  }
+};
 </script>
 
-<style lang="scss" scoped> 
-
+<style lang="scss" scoped>
 .ix-header {
   height: 32px;
   line-height: 32px;
@@ -196,7 +230,7 @@ export default {
 }
 .ix-header-nav {
   font-size: 12px;
-  opacity: .4;
+  opacity: 0.4;
   margin-right: 12px;
   transition: opacity 300ms;
   color: white;
@@ -284,7 +318,59 @@ export default {
   }
 }
 .ix-pair-head {
+  .pairs-search {
+    width: 100%;
+    padding: 2px 10px;
+    .search-box {
+      font-size: 20px;
+      width: 100%;
+      height: 29px;
+      // background:rgba(255,255,255,1);
+      border: 1px solid #4880b3;
+      //border-radius: 14px;
+      // padding-left: 10px;
+      // padding-right: 10px;
+      box-sizing: border-box;
+      overflow: hidden;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      display: flex;
+      align-items: center;
 
+      input {
+        padding-left: 10px;
+        width: 100%;
+        border: 0;
+        height: 16px;
+        color:#fff;
+        //border-right: 1px solid rgba(160,160,160,1);
+        background: #192d3f;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+  .el-input /deep/ .el-input__inner {
+    background-color: $nav !important;
+    border-radius: 0;
+    border-color: #4880b3;
+
+    .el-input-group__append {
+      background-color: #4880b3;
+    }
+  }
+  .el-tabs /deep/ .el-tabs__nav-wrap {
+    &::after {
+      background-color: #203950;
+    }
+    .el-tabs__item {
+      color: white;
+      &.is-top:nth-child(2) {
+        padding-left: 20px;
+      }
+    }
+  }
 }
 .ix-pair-body {
   overflow-y: auto;
@@ -297,7 +383,7 @@ export default {
   //   background-color: rgba(255,255,255, 0.03);
   // }
   .tr:hover {
-    background-color: #0F1F2D;
+    background-color: #0f1f2d;
   }
   .tr.cur {
     background-color: #203950;
@@ -309,19 +395,20 @@ th {
   color: #788694;
   line-height: 30px;
 }
-th, td {
+th,
+td {
   text-align: center;
   padding: 0 5px;
 }
 td {
-  color: #BCBFCE;
+  color: #bcbfce;
   line-height: 24px;
 }
 .icon-collect {
-  @include retina('../../assets/icon-collect-white', 'png', 10px, 10px);
+  @include retina("../../assets/icon-collect-white", "png", 10px, 10px);
   width: 24px;
   height: 24px;
-  opacity: .2;
+  opacity: 0.2;
   display: inline-block;
   vertical-align: top;
   &.collected {
@@ -337,7 +424,7 @@ td {
   display: inline-block;
   vertical-align: top;
   &:after {
-    content: ' ';
+    content: " ";
     @include spinner(5px);
   }
 }
@@ -345,7 +432,7 @@ td {
 .err {
   line-height: 70px;
   text-align: center;
-  color: rgba(200,200,200, .2);
+  color: rgba(200, 200, 200, 0.2);
 }
 .input-wrap {
   position: absolute;
@@ -375,10 +462,10 @@ td {
   padding-left: 24px;
   line-height: 22px;
   width: 100%;
-  color: fade-out(white, .5);
+  color: fade-out(white, 0.5);
   z-index: 1;
 }
 ::placeholder {
-  color: fade-out(white, .6);
+  color: fade-out(white, 0.6);
 }
 </style>
