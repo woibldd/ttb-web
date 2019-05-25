@@ -282,7 +282,7 @@ export default {
         transform: rotate(180deg);
       }
     }
-  }
+  } 
   .grid-pairtable {
     position: absolute;
     top: 28px;

@@ -3,7 +3,11 @@
     <div class="relative">
       <!-- <div class="pair-title">{{ $t('newest_coin_pairs') }}</div> -->
       <div class="pair-title"> 
+<<<<<<< HEAD
         <el-tabs v-model="tabSelected" type="card" @tab-click="tabsClick">
+=======
+        <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+>>>>>>> parent of 1f1f3d2... 隐藏自选
           <el-tab-pane :label="$t('home_optional')" name="like"> 
           </el-tab-pane>
           <el-tab-pane label="USDT" name="USDT">  
@@ -186,11 +190,16 @@ export default {
       }
       // pair.like = !(pair.like || false) 
     }
+<<<<<<< HEAD
   },  
   computed: { 
     tabSelected () {
       return state.tabSelected
     },
+=======
+  }, 
+  created(){  
+>>>>>>> parent of 1f1f3d2... 隐藏自选
   }
 }
 </script>
