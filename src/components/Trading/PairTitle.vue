@@ -290,8 +290,8 @@ export default {
     z-index: 99999;
     width: 480px;
     background: #192d3f;
-    // display: none;
-    // opacity: 0;
+    display: none;
+    opacity: 0;
     transition: all 0.5s ease-in-out;
     &.show {
       display: block;
