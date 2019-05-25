@@ -13,10 +13,6 @@ export default {
       err: '',
       search: '',
       tab: '',
-<<<<<<< HEAD
-=======
-      tabSelected: 'like',
->>>>>>> parent of 1f1f3d2... 隐藏自选
       sortBy: '',
       sortState: 0 // 0:不排序 1:降序 2:升序
     }

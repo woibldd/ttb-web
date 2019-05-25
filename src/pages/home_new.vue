@@ -218,9 +218,9 @@ export default {
     isKorean () {
       return state.locale === 'ko'
     },
-    tabSelected () {
-      return state.tabSelected
-    },
+    // tabSelected () {
+    //   return state.tabSelected
+    // },
   },
   watch: {
     'state.locale' (locale) {
