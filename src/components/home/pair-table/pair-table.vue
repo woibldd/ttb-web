@@ -3,7 +3,7 @@
     <div class="relative">
       <!-- <div class="pair-title">{{ $t('newest_coin_pairs') }}</div> -->
       <div class="pair-title"> 
-        <el-tabs v-model="activeName" type="card">
+        <el-tabs v-model="tabSelected" type="card">
           <el-tab-pane :label="$t('home_optional')" name="like"> 
           </el-tab-pane>
           <el-tab-pane label="USDT" name="USDT">  
@@ -188,8 +188,13 @@ export default {
     }
   },  
   computed: { 
-    tabSelected () {
+    tabSelected:{
+      get() {
       return state.tabSelected
+      },
+      set(val) {
+        state.tabSelected = val
+      }
     },
   }
 }
