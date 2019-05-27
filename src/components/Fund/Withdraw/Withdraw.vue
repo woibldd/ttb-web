@@ -99,7 +99,7 @@
               v-model="withdrawCount"> -->
             <number-input 
               class="coin-count"
-              :scale="8" 
+              :scale="myCoinInfo.withdraw_scales" 
               :max="Number(myCoinInfo.available)" 
               :min="Number(selectCoin.min_withdraw_amount)"
               v-model="withdrawCount" />
