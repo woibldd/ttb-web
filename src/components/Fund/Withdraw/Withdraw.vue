@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="fund-item-other mt-13 mb-23 withdraw-remain">
-        <span>{{ $t("withdraw_avlb") }}:  {{ myCoinInfo.available }}</span>
+        <span>{{ $t("withdraw_avlb") }}:  {{ myCoinInfo.available | fixed(8) }}</span>
         <span class="ml-29 mr-29">{{ $t("quota") }}: {{ myCoinInfo.quota }}</span>
         <router-link
           to="/profile/kyc/"
@@ -103,13 +103,16 @@
               :max="Number(myCoinInfo.available)" 
               :min="Number(selectCoin.min_withdraw_amount)"
               v-model="withdrawCount" />
-            <span class="coin-type">{{ selectCoin.currency }}</span>
+            <span class="coin-type">
+              <i> {{ selectCoin.currency }}</i> 
+              <a @click="input_all" class="up-limit pointer ml-5">{{$t('transfer_all')}}</a>
+            </span>
           </div>
         </div>
       </div>
       <div class="fund-item-other withdraw-least mt-14 mb-22">
         {{ $t("withdraw_min") }} {{ selectCoin.min_withdraw_amount }} {{ selectCoin.currency }}
-        <a @click="input_all" class="up-limit pointer ml-30">{{$t('transfer_all')}}</a>
+        <!-- <a @click="input_all" class="up-limit pointer ml-30">{{$t('transfer_all')}}</a> -->
       </div>
       <div class="fund-item-other withdraw-fee mb-23">
         <p> <span class="fee__label">{{ $t('withdraw_fee') }} </span> <span class="fee__coin">{{ selectCoin.withdraw_fee }}{{ selectCoin.currency }}</span> </p>
@@ -290,6 +293,7 @@ export default {
   },
   methods: { 
     input_all() {
+      debugger
       this.withdrawCount = this.myCoinInfo.available
     },
     clickVerifyRow (v) {

@@ -169,8 +169,7 @@ export default {
         }
       } 
       
-      this.state.pro.pairList = res.data.items
-      //this.showList
+      this.state.pro.pairList = res.data.items 
     },
     subMarket () {
       if (this.socket) {

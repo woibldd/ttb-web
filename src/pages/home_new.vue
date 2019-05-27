@@ -250,8 +250,8 @@ export default {
       this.search = kw
     },
     onSwitchTab (val) {
-      console.log('switchTab')
-      this.state.tabSelected = val
+      // console.log('switchTab')
+      // this.state.tabSelected = val
     }
   },
   created () {

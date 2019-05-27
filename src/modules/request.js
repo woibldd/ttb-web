@@ -10,8 +10,7 @@ import { state, actions} from './store'
 // })
 
 let _env_ = ''
-if(process.env.NODE_ENV != 'development'){
-  debugger
+if(process.env.NODE_ENV != 'development'){ 
   let val = location.host.split('.')
   _env_ = val.slice(val.length - 2, val.length).join('.')
   _env_ = `https://i.${_env_}/`

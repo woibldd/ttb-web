@@ -1,7 +1,7 @@
 <template>
   <div class="page page-register">
     <resbg/>
-    <bubble/> 
+    <bubble  v-if='!isMobile'/> 
     <div
       class="panel_box"
       ref="container">
@@ -200,7 +200,7 @@
 </template>
 
 <script>
-import _ from 'lodash'
+import _ from 'lodash'  
 import utils from '@/modules/utils'
 import service from '@/modules/service'
 import pwChecker from '@/modules/pw-checker'
@@ -210,7 +210,7 @@ import resbg from '@/components/resbg'
 import ixInput from '@/components/common/ix-input/ix-input.vue'
 import responsive from '@/mixins/responsive'
 import bubble from '@/components/Bubble'
-
+  
 // import { MdField } from 'vue-material/dist/components'
 // import gtMixin from '@/mixins/gt'
 
@@ -285,7 +285,8 @@ export default {
           }
         }
       },
-      triggerValidate: false
+      triggerValidate: false,  
+      isMobile: utils.isMobile(),
     }
   },
   /* beforeRouteEnter (to, from, next) {
@@ -309,7 +310,7 @@ export default {
       const params = {
         email: this.email,
         password: this.password,
-        code: this.captcha
+        code: this.captcha, 
       }
       if (this.by === 'phone') {
         params.region = this.regionId
@@ -318,7 +319,16 @@ export default {
       if (this.invitorId) {
         params.invitor_id = this.invitorId
       }
+      if(this.utm_source) {
+        params.utm_source = this.utm_source
+      }
       return params
+    },
+    utm_source () {
+      if(location.search.length > 0) {
+        let para = utils.parseQueryString(location.search) 
+        return para['utm_source'] || ''
+      }
     },
     // 密码强度值
     pwLevel () {
@@ -345,6 +355,7 @@ export default {
   },
   methods: {
     async submit (e) {
+      debugger
       // 本地校验
       const check = this.checkParams()
       if (!check.ok || !!this.triggerValidate) {
@@ -376,7 +387,7 @@ export default {
     active (active) {
       this.atPw = active
     },
-    input (field, value) {
+    input (field, value) { 
       this[field] = value
     },
     checkParams () {
@@ -492,9 +503,10 @@ export default {
       } catch (e) {
         console.log(e)
       }
-    }
+    },
+    
   },
-  mounted () {
+  mounted () { 
     this.$eh.$on('app:resize', () => this.fixPosition())
     this.$nextTick(this.fixPosition)
   },

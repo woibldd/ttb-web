@@ -16,6 +16,14 @@
       v-show="showErrorTips"
       class="ix-input__err-tips">{{ errTips }}</span>
     <span
+      v-if="showEye && value && value.length && !disabled"
+      @click="eyeSwitch"
+      class="ix-eye-switch">
+      <icon
+        :name="eyeOff ? 'eye-off' :'eye-on' "
+      />
+    </span>
+    <span
       v-if="canDelete && value && value.length && !disabled"
       @click="clearText"
       class="ix-quick-delete"/>
@@ -28,7 +36,8 @@ export default{
     return {
       validateSuccess: false,
       errTips: '',
-      isFocus: false,
+      isFocus: false, 
+      eyeOff: true,
       touched: false // 组件挂载后，没有被点击过
     }
   },
@@ -47,6 +56,7 @@ export default{
     autocomplete: {type: String, default: 'off'},
     required: {type: Boolean, default: false}, // 是否必须， 提示字段为 emptyErrTips
     canDelete: {type: Boolean, default: true},
+    showEye: {type: Boolean, default: false},
     rule: { // 校验提示语和规则
       type: Object,
       default () {
@@ -124,7 +134,15 @@ export default{
     },
     clearText () {
       this.$emit('change', '')
-    }
+    },
+    eyeSwitch () {
+      this.eyeOff = !this.eyeOff
+      if (!this.eyeOff) {
+        this.$emit('update:type', 'text')
+      } else {
+        this.$emit('update:type', 'password')
+      }
+    },
   }
 }
 </script>

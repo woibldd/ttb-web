@@ -629,5 +629,56 @@ export default{
         office_website: 'www.bnlio.io', // 官网
         chain_info: 'https://etherscan.io/token/0x7109eca95daa8f04ddeef3a941fc9bd85bd1510f' // 区块查询
       }
+  },
+  DSA: {
+    'zh-CN': {
+      name: 'DSA',
+      full_name: ' DSA(Distributed Survey Accelerator)',
+      brief_info: '分布式众调加速器 DSA（Distributed Survey Accelerator）是一个匿名的分布式民意调查平台，致力于为全球的区块链项目提供去中心化的众调评级服务。DSA 将始终秉持 “匿名”、“自治”、“不作恶” 精神，通过人工智能和区块链技术，为投资者提供一个中立的信息披露平台，净化区块链行业投资环境，保护投资者利益。独有的社区激励机制和 DSA 指数，促进投资方、项目方、用户之间共识互助，重塑区块链协调关系，打造共享信息新方式。 ',
+      issue_time: '2018-10',
+      issue_all: '10亿', // 发行总量
+      issue_circulation: '8000万', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: '', // 白皮书
+      office_website: 'https://www.dsaglobal.io/ ', // 官网
+      chain_info: 'https://etherscan.io/token/0xbbdbccb13d09975fa9e3e9c8fa129b61065c84f3' // 区块查询
+    },
+    'zh-HK': {   
+        name: 'DSA',
+        full_name: ' DSA(Distributed Survey Accelerator)',
+        brief_info: '分布式眾調加速器 DSA（Distributed Survey Accelerator）是壹個匿名的分布式民意調查平臺，致力於為全球的區塊鏈項目提供去中心化的眾調評級服務。DSA 將始終秉持 “匿名”、“自治”、“不作惡” 精神，通過人工智能和區塊鏈技術，為投資者提供壹個中立的信息披露平臺，凈化區塊鏈行業投資環境，保護投資者利益。獨有的社區激勵機制和 DSA 指數，促進投資方、項目方、用戶之間共識互助，重塑區塊鏈協調關系，打造共享信息新方式。',
+        brief_info: '',
+        issue_time: '2018-10',
+        issue_all: '10億', // 发行总量
+        issue_circulation: '8000萬', // 流通总量
+        token_price: '--', // 众筹价格
+        whitepagger: '', // 白皮书
+        office_website: 'https://www.dsaglobal.io/ ', // 官网
+        chain_info: 'https://etherscan.io/token/0xbbdbccb13d09975fa9e3e9c8fa129b61065c84f3' // 区块查询
+      },
+    'en': {  
+        name: 'DSA',
+        full_name: ' DSA(Distributed Survey Accelerator)',
+        brief_info: 'Currency Description: Distributed Tribune Accelerator DSA (Distributed Survey Accelerator) is an anonymous distributed polling platform dedicated to providing decentralized rating services for blockchain projects around the world.DSA will always adhere to the spirit of “anonymity”, “autonomy” and “do not be evil”. Through artificial intelligence and blockchain technology, DSA will provide investors with a neutral information disclosure platform to purify the investment environment of the blockchain industry and protect the interests of investors. The unique community incentive mechanism and DSA index promote mutual understanding and mutual assistance among investors, project parties and users, reshape the blockchain coordination relationship, and create a new way of sharing information.',
+        issue_time: '2018-9-19',
+        issue_all: '1000 million', // 发行总量
+        issue_circulation: '80 million', // 流通总量
+        token_price: '--', // 众筹价格
+        whitepagger: '', // 白皮书
+        office_website: 'https://www.dsaglobal.io/ ', // 官网
+        chain_info: 'https://etherscan.io/token/0xbbdbccb13d09975fa9e3e9c8fa129b61065c84f3' // 区块查询
+         },
+    'ko': {  
+        name: 'DSA',
+        full_name: ' DSA(Distributed Survey Accelerator)',
+        brief_info: '코인종류소개:분류식가속기DSA（Distributed Survey Accelerator)는 익명의 디스카운트식 여론조사 플랫폼이다. 전 세계의 지역분할 프로젝트를 위해 중심적인 다중조정 서비스를 제공하는 것이다.DSA는\'익명\'과\'자치\',\'악행하지 않는다\'의 정신으로 일관하고 인공지능과 블록 기술을 통해 투자자들에게 중립적인 정보 공개 플랫폼을 제공하고 블록 업종의 투자 환경을 정화하고 투자자의 이익을 보호할 것이다. 독자적 커뮤니티 인센티브와 DSA 지수, 투자자, 프로젝트자, 사용자 간 공동 호조 촉진, 지역-블록-체인 조정 관계를 재구축, 정보 공유 새로운 방식의 구축.',
+        issue_time: '2018-10',
+        issue_all: '1000 million', // 发行总量
+        issue_circulation: '80 million', // 流通总量
+        token_price: '--', // 众筹价格
+        whitepagger: '', // 白皮书
+        office_website: 'https://www.dsaglobal.io/ ', // 官网
+        chain_info: 'https://etherscan.io/token/0xbbdbccb13d09975fa9e3e9c8fa129b61065c84f3' // 区块查询
+      }
   }
 }

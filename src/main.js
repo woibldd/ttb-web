@@ -89,7 +89,7 @@ Vue.prototype.$moment = moment
 
 actions.setLocale()
 
-/* eslint-disable no-new */
+/* eslint-disable no-new */ 
 const release = qs.parse(location.search.replace('?', '')).release
 if (release || !window.grayline) {
   new Vue({

@@ -167,8 +167,7 @@ export default {
         }) 
         widget.btnFS = widget.createButton().on('click', (e, vm)=>{
           let element = e.srcElement || e.target
-          let cls = element.classList
-          debugger
+          let cls = element.classList 
           if (!cls.contains('selected')) { 
               element.classList.add('selected')
               local.lineType = widget.chart().chartType() //记录当前的K线样式
