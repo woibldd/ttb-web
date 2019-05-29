@@ -64,8 +64,6 @@
                 tabindex="2"
                 v-model.trim="phone"
                 :required='true'
-                :type.sync="pwdType"
-                :show-eye="true"
                 :empty-err-tips="$t('bind_phone_err_empty')"
                 :rule="validateRules.phone"
                 :placeholder="$t('bind_phone_input')"
