@@ -48,9 +48,16 @@
             <span v-if="hd.key === 'currency'">
               <icon :name="scope.row.currency"/> 
               <i v-if="scope.row[hd.key] === 'ITD'" 
-                style='background-color:#BAE2F7;cursor: help;' 
-                v-tooltip.top-start='{html: true, content: $t("idt_tips"), classes: "assets"}'  > {{scope.row[hd.key]}}</i>
-              <i v-else>{{scope.row[hd.key]}}</i>
+                class="airdrop" 
+                v-tooltip.top-start='{html: true, content: $t("idt_tips"), classes: "assets"}'  > 
+                {{scope.row[hd.key]}} <icon class='question' name='question-x' />
+              </i>
+               <i v-else-if="scope.row[hd.key] === 'BNL'" 
+                class="airdrop" 
+                v-tooltip.top-start='{html: true, content: $t("bnl_tips"), classes: "assets"}'  > 
+                {{scope.row[hd.key]}} <icon class='question' name='question-x' />
+              </i>
+              <i v-else>{{scope.row[hd.key]}} </i>
             </span>
             <div v-else-if="hd.key === 'locking'">
               {{ scope.row.currency.toUpperCase() === 'USDT' && plusMillionUsdt? $big(scope.row[hd.key]).plus(millionUsdtAmount).toString() : scope.row[hd.key]  | fixed(8) }}

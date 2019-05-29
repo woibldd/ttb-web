@@ -2,7 +2,7 @@
   <div class="user-center-right mb-30">
     <div class="profile-container">
       <div class="title-box">{{ $t('api_management') }}
-        <div class="pull-right tips title-box-right">
+        <!-- <div class="pull-right tips title-box-right">
           <div class="mr-20">
             <a
               :href="robotUsageUrl"
@@ -19,7 +19,7 @@
               <icon name='anchor'/>
             </a>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="api-box mb-30">
         <div class="api-ul">
