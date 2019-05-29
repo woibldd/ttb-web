@@ -104,6 +104,7 @@
                 ref="password"
                 tabindex="3"
                 v-model.trim="password"
+                @input="password=$event"
                 :required='true' 
                 :type.sync="pwdType"
                 :show-eye="true"
