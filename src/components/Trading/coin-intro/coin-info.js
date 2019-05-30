@@ -732,4 +732,54 @@ export default{
     }
 
   },
+  BHD: {
+    'zh-CN': {
+      name: 'BHD',
+      full_name: 'BitcoinHD',
+      brief_info: 'BitcoinHD（比特硬盘，简称BHD）是基于 Conditioned Proof Of Capacity (简称：CPOC） 的新型加密货币。其主要的特点是使用硬盘作为共识的参与者，降低加密货币对电力资源的消耗， 降低参与门槛，让其生产方式更趋向去中心化方式，并更加安全可信，让人人都能参与到加密货币 的开采，通过数学算法以及分布式开采产生信用和价值。',
+      issue_time: '2018-8-3',
+      issue_all: '2100万', // 发行总量
+      issue_circulation: '429.06', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://btchd.org/BHD-Whitepaper-1.0_zh.pdf', // 白皮书
+      office_website: ' https://btchd.org/', // 官网
+      chain_info: 'https://btchd.org/explorer/' // 区块查询
+    },
+    'zh-HK': {
+      name: 'BHD',
+      full_name: 'BitcoinHD',
+      brief_info: 'BitcoinHD（比特硬盤，簡稱BHD）是基於 Conditioned Proof Of Capacity (簡稱：CPOC） 的新型加密貨幣。其主要的特點是使用硬盤作為共識的參與者，降低加密貨幣對電力資源的消耗， 降低參與門檻，讓其生產方式更趨向去中心化方式，並更加安全可信，讓人人都能參與到加密貨幣 的開采，通過數學算法以及分布式開采產生信用和價值。',
+      issue_time: '2018-8-3',
+      issue_all: '2100萬', // 发行总量
+      issue_circulation: '429.06萬', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://btchd.org/BHD-Whitepaper-1.0_zh.pdf', // 白皮书
+      office_website: ' https://btchd.org/', // 官网
+      chain_info: 'https://btchd.org/explorer/' // 区块查询
+    },
+    'en': {
+      name: 'BHD',
+      full_name: 'BitcoinHD',
+      brief_info: 'BHD is a new type of crypto currency based on Proof of Capacity.BHD uses an upgraded version of cPOC mining (Conditioned Proof of Capacity), with a perfect economic model and consensus algorithm.It uses hard disk as the participant of consensus, which reduces power consumption.BHD mining lowers the entry barriers, and makes the coin generation process more decentralized, secure and reliable. BHD also lowered the cost of credit, increased the strength and breadth of consensus, and improved the security of the consensus architecture.',
+      issue_time: '2018-8-3',
+      issue_all: '21,000,000', // 发行总量
+      issue_circulation: '4,290,600', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://btchd.org/BHD-Whitepaper-1.0_zh.pdf', // 白皮书
+      office_website: ' https://btchd.org/', // 官网
+      chain_info: 'https://btchd.org/explorer/' // 区块查询
+    },
+    'ko': {
+      name: 'BHD',
+      full_name: 'BitcoinHD',
+      brief_info: 'BitcoinHD (비트하드디스크약칭 BHD)는 Conditioned Proof Of Capacity (CPOC)를 기반으로 한 새로운 암호화된 화폐이다.그 의 특징 은 주로 사용 하드디스크 으로서 공감 대 를 형성 하는 가담자 를 낮 춰 암호 화해 통화 에 대한 전력 소모 를 낮 춰 자원 의 참여 문턱 을 가 르 치 도록 생산 방식 을 더욱 분열 에 中心化 방식 을 더욱 안 전하 게 신빙성 을 누 구나 이용 할 수 있 도록 암호화 통화 채광 을 통 해 수학 셈 법 및 디 도스 채취 에 신용 과 가치 를 지 닌 다.',
+      issue_time: '2018-8-3',
+      issue_all: '21,000,000', // 发行总量
+      issue_circulation: '4,290,600', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://btchd.org/BHD-Whitepaper-1.0_zh.pdf', // 白皮书
+      office_website: ' https://btchd.org/', // 官网
+      chain_info: 'https://btchd.org/explorer/' // 区块查询
+    }
+  },
 }
