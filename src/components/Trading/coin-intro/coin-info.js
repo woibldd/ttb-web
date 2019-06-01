@@ -236,8 +236,8 @@ export default{
       issue_circulation: '3300万', // 流通总量
       token_price: '0.015~0.02USD', // 众筹价格
       whitepagger: 'http://www.beb.world/BEB-Chinese%20.pdf', // 白皮书
-      office_website: 'www.bitbeb.com', // 官网
-      chain_info: 'https://etherscan.io/token/0x995ff3562692349e78001c9e37414919e65ff04b' // 区块查询
+      office_website: 'http://www.bitbeb.com/', // 官网
+      chain_info: 'https://etherscan.io/address/0x6798cc8ad079a7e663536f83ee26d63aabe03da9' // 区块查询
     },
     'en': {
       name: 'BEB',
@@ -248,8 +248,8 @@ export default{
       issue_circulation: '--', // 流通总量
       token_price: '0.015~0.02USD', // 众筹价格
       whitepagger: 'http://www.beb.world/BEB-Chinese%20.pdf', // 白皮书
-      office_website: 'www.bitbeb.com', // 官网
-      chain_info: 'https://etherscan.io/token/0x995ff3562692349e78001c9e37414919e65ff04b' // 区块查询
+      office_website: 'http://www.bitbeb.com/', // 官网
+      chain_info: 'https://etherscan.io/address/0x6798cc8ad079a7e663536f83ee26d63aabe03da9' // 区块查询
     }
   },
   IMCC: {
