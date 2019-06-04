@@ -587,7 +587,7 @@ export default{
       brief_info: 'BNL商务链，是全球首个智能、透明、开放、诚信的“商务领域泛交易生态平台”的基础公链，是区块链技术、AI技术及AR技术在“智能商务传媒”与“智能商务泛交易全体系”等商务领域的创新应用。BNL商务领域公链将创造性地运用AI及AR技术 和GAN算法混合共识机制的挖矿方式，在主网上线后落地首个去中介化区块链AR广告的DAPP，率先打破现有公链没有大规模商业应用的局面。',
       issue_time: '2018-9-19',
       issue_all: '10亿', // 发行总量
-      issue_circulation: '500万', // 流通总量
+      issue_circulation: '700万', // 流通总量
       token_price: '--', // 众筹价格
       whitepagger: 'http://www.bnlio.io/upload/Plupload/File_616/20180817131656671.pdf', // 白皮书
       office_website: 'www.bnlio.io', // 官网
@@ -599,7 +599,7 @@ export default{
         brief_info: 'BNL商務鏈，是全球首個智能、透明、開放、誠信的“商務領域泛交易生態平臺”的基礎公鏈，是區塊鏈技術、AI技術及AR技術在“智能商務傳媒”與“智能商務泛交易全體系”等商務領域的創新應用。BNL商務領域公鏈將創造性地運用AI及AR技術 和GAN算法混合共識機制的挖礦方式，在主網上線後落地首個去中介化區塊鏈AR廣告的DAPP，率先打破現有公鏈沒有大規模商業應用的局面。 ',
         issue_time: '2018-9-19',
         issue_all: '10億', // 发行总量
-        issue_circulation: '500萬', // 流通总量
+        issue_circulation: '700萬', // 流通总量
         token_price: '--', // 众筹价格
         whitepagger: 'http://www.bnlio.io/upload/Plupload/File_616/20180817131656671.pdf', // 白皮书
         office_website: 'www.bnlio.io', // 官网
@@ -611,7 +611,7 @@ export default{
         brief_info: 'BNL Business Chain is the world\'s first intelligent, transparent, open and honest "business platform pan-transaction eco-platform" basic public chain, blockchain technology, AI technology and AR technology in "smart business media" and "smart business"  Innovative applications in the business sector such as the Pan-Transaction System.  BNL business domain public chain will creatively use the mining method of and AR technology and GAN algorithm mixed consensus mechanism. After the main line launched, the first DAPP to de-intermediate blockchain AR advertisement will be the first to break the existing public chain.  The situation of large-scale commercial applications.',
         issue_time: '2018-9-19',
         issue_all: '1000 million', // 发行总量
-        issue_circulation: '5,000,000', // 流通总量
+        issue_circulation: '7,000,000', // 流通总量
         token_price: '--', // 众筹价格
         whitepagger: 'http://www.bnlio.io/upload/Plupload/File_616/20180817131656671.pdf', // 白皮书
         office_website: 'www.bnlio.io', // 官网
@@ -623,7 +623,7 @@ export default{
         brief_info: 'BNL 비즈니스 체인, 전 세계 최초의 지능, 투명, 개방, 성실의"비즈니스 분야 범거래 생태 플랫폼"의 기초 공공 체인, 지역 체인 기술, AI 기술 및 AR 기술은"스마트 비즈니스 커뮤니케이션"과"스마트 비즈니스 범거래 시스템"등 비즈니스 분야에서 혁신적인 응용이다.BNL 비즈니스 영역의 공사슬은 창조적으로 AI 및 AR 기술과 GAN 알고리즘이 혼재된 공동 인식기제를 운용하는 채광 방식을 운용하여, 주망에 접속하고 최초로 블록체인 AR 광고의 DAPP를  중개하고, 먼저 기존 공사슬이 대규모 상업이 적용되지 않는 국면을 타파할 것이다.',
         issue_time: '2018-9-19',
         issue_all: '1000 million', // 发行总量
-        issue_circulation: '5,000,000', // 流通总量
+        issue_circulation: '7,000,000', // 流通总量
         token_price: '--', // 众筹价格
         whitepagger: 'http://www.bnlio.io/upload/Plupload/File_616/20180817131656671.pdf', // 白皮书
         office_website: 'www.bnlio.io', // 官网

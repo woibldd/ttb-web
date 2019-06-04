@@ -886,6 +886,10 @@ const service = {
     // id 币对id
     return request('account/currency/optional/del', params)
   },
+  //获取币对信息
+  getCurrencyList(params) {
+    return request('/future/account/currency_list',params)
+  }
 }
 
 export async function fetch (url, body, options, method = 'post') {
