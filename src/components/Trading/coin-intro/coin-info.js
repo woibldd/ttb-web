@@ -739,7 +739,7 @@ export default{
       brief_info: 'BitcoinHD（比特硬盘，简称BHD）是基于 Conditioned Proof Of Capacity (简称：CPOC） 的新型加密货币。其主要的特点是使用硬盘作为共识的参与者，降低加密货币对电力资源的消耗， 降低参与门槛，让其生产方式更趋向去中心化方式，并更加安全可信，让人人都能参与到加密货币 的开采，通过数学算法以及分布式开采产生信用和价值。',
       issue_time: '2018-8-3',
       issue_all: '2100万', // 发行总量
-      issue_circulation: '429.06', // 流通总量
+      issue_circulation: '429.06万', // 流通总量
       token_price: '--', // 众筹价格
       whitepagger: 'https://btchd.org/BHD-Whitepaper-1.0_zh.pdf', // 白皮书
       office_website: ' https://btchd.org/', // 官网
@@ -780,6 +780,56 @@ export default{
       whitepagger: 'https://btchd.org/BHD-Whitepaper-1.0_zh.pdf', // 白皮书
       office_website: ' https://btchd.org/', // 官网
       chain_info: 'https://btchd.org/explorer/' // 区块查询
+    }
+  },
+  XRP: {
+    'zh-CN': {
+      name: 'XRP',
+      full_name: '瑞波币（Ripple/XRP）',
+      brief_info: '瑞波币（Ripple/XRP）提供一个无阻碍的利用区块链技术的全球支付网络，是世界上第一个开放的支付网络，通过加入Ripple正在成长的全球支付网络可以转账任意一种货币，包括美元、欧元、人民币、日元或者比特币，简便易行快捷，交易确认在几秒以内完成，交易费用几乎是零，没有所谓的跨行异地以及跨国支付费用。 Ripple是开放源码的点到点支付网络，它可以使任何机构或个人轻松、廉价并安全的把金钱转账到互联网上的任何机构或个人，无论在世界的哪个地方。Ripple是p2p软件，没有任何个人、公司，或政府操控，任何人可以创建一个ripple账户。',
+      issue_time: '2011/4/18',
+      issue_all: '1000亿', // 发行总量
+      issue_circulation: '387.3914亿', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://ripple.com/files/ripple_consensus_whitepaper.pdf', // 白皮书
+      office_website: 'https://ripple.com/', // 官网
+      chain_info: '' // 区块查询
+    },
+    'zh-HK': {
+      name: 'XRP',
+      full_name: '瑞波幣（Ripple/XRP）',
+      brief_info: '瑞波幣（Ripple/XRP）提供壹個無阻礙的利用區塊鏈技術的全球支付網絡，是世界上第壹個開放的支付網絡，通過加入Ripple正在成長的全球支付網絡可以轉賬任意壹種貨幣，包括美元、歐元、人民幣、日元或者比特幣，簡便易行快捷，交易確認在幾秒以內完成，交易費用幾乎是零，沒有所謂的跨行異地以及跨國支付費用。 Ripple是開放源碼的點到點支付網絡，它可以使任何機構或個人輕松、廉價並安全的把金錢轉賬到互聯網上的任何機構或個人，無論在世界的哪個地方。Ripple是p2p軟件，沒有任何個人、公司，或政府操控，任何人可以創建壹個ripple賬戶。',
+      issue_time: '2011/4/18',
+      issue_all: '1000億', // 发行总量
+      issue_circulation: '387.3914億', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://ripple.com/files/ripple_consensus_whitepaper.pdf', // 白皮书
+      office_website: 'https://ripple.com/', // 官网
+      chain_info: '' // 区块查询
+    },
+    'en': {
+      name: 'XRP',
+      full_name: 'XRP',
+      brief_info: 'RippleNet delivers a single, frictionless experience for global payments. Rather than a constellation of disparate technologies, unstandardized communications, and centralized networks, RippleNet is a single, global network of banks that send and receive payments via Ripple’s distributed financial technology -- providing real-time messaging, clearing and settlement of transactions.',
+      issue_time: '2011/4/18',
+      issue_all: '100 billion', // 发行总量
+      issue_circulation: '38.73 billion', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://ripple.com/files/ripple_consensus_whitepaper.pdf', // 白皮书
+      office_website: 'https://ripple.com/', // 官网
+      chain_info: '' // 区块查询
+    },
+    'ko': {
+      name: 'XRP',
+      full_name: 'XRP',
+      brief_info: '리플은 금융거래를 위해 개발된 프로토콜인 ‘리플 프로토콜’에서 사용되는 암호화폐 / 본 프로토콜을 사용함으로 전세계에서 몇 초 내로 화폐를 송금 / 일반적으로 모두에게 공개된 블록체인과는 달리 한정된 참여자만 네트워크를 구성한다는 의미에서 ‘프라이빗 블록체인’ 이라고도 불림 / 비트코인 블록체인과는 달리 채굴 방식으로 코인 발행이 이루어지는 것이 아니며 이미 정해진 수량의 코인이 모두 발행되어 있는 상태로 중앙집권식으로 운영되는 네트워크.',
+      issue_time: '2011/4/18',
+      issue_all: '100 billion', // 发行总量
+      issue_circulation: '38.73 billion', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://ripple.com/files/ripple_consensus_whitepaper.pdf', // 白皮书
+      office_website: 'https://ripple.com/', // 官网
+      chain_info: '' // 区块查询
     }
   },
 }
