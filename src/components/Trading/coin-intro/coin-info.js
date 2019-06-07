@@ -832,4 +832,55 @@ export default{
       chain_info: '' // 区块查询
     }
   },
+  ANTBT: {
+    'zh-CN': {
+      name: 'ANTBT',
+      full_name: 'ANTBT',
+      brief_info: 'ANTBT是最新一代知识产权协议保护基础架构，并利用区块链去中心化不可篡改的属性确保了每个数据的唯一性，完整性，实现对原创产品的确保。建立以版权所有者为中心的保护机制.信息共享，实现ANTBT作为未来知识产权的守护者。',
+      issue_time: '2019-6-4',
+      issue_all: '2100万', // 发行总量
+      issue_circulation: '21万', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.antbit.io/statics/upload/baipishu/w1.pdf', // 白皮书
+      office_website: 'http://www.antbit.io/', // 官网
+      chain_info: 'https://etherscan.io/address/0x35Be52655551029d8B8B3B51Ffdb76Ec9993dD47?locale=zh-CN&utm_source=imtoken' // 区块查询
+    },
+    'zh-HK': {
+      name: 'ANTBT',
+      full_name: 'ANTBT',
+      brief_info: 'ANTBT是最新一代知識產權協定保護基礎架構，並利用區塊鏈去中心化不可篡改的内容確保了每個數據的唯一性，完整性，實現對原創產品的確保。建立以版權所有者為中心的保護機制.資訊共用，實現ANTBT作為未來知識產權的守護者。',
+      issue_time: '2019-6-4',
+      issue_all: '2100萬', // 发行总量
+      issue_circulation: '21萬', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.antbit.io/statics/upload/baipishu/w1.pdf', // 白皮书
+      office_website: 'http://www.antbit.io/', // 官网
+      chain_info: 'https://etherscan.io/address/0x35Be52655551029d8B8B3B51Ffdb76Ec9993dD47?locale=zh-CN&utm_source=imtoken' // 区块查询
+    },
+    'en': {
+      name: 'ANTBT',
+      full_name: 'ANTBT',
+      brief_info: 'ANTBT is the latest generation of intellectual property rights protocol protection infrastructure, and USES the blockchain\'s decentralized, tamper-proof properties to ensure the uniqueness and integrity of each data, to ensure the original products. We will establish a protection mechanism centered on copyright owners, share information and realize ANTBT as the guardian of intellectual property in the future.',
+      issue_time: '2019-6-4',
+      issue_all: '21,000,000', // 发行总量
+      issue_circulation: '210,000', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.antbit.io/statics/upload/baipishu/w1.pdf', // 白皮书
+      office_website: 'http://www.antbit.io/', // 官网
+      chain_info: 'https://etherscan.io/address/0x35Be52655551029d8B8B3B51Ffdb76Ec9993dD47?locale=zh-CN&utm_source=imtoken' // 区块查询
+    },
+    'ko': {
+      name: 'ANTBT',
+      full_name: 'ANTBT',
+      brief_info: 'ANTBT는 최신 지적재산권협정 보호기초구조로 되며 지역 사슬을 리용하여 외곡할수 없는 중심화를 실현하는 속성으로 매 데터의 유일성, 완정성을 확보하고 원창제품에 대한 확보를 실현한다.저작권 소유자 중심의 보호 메커니즘 구축. 정보 공유, ANTBT 실현, 미래 지식 재산권의 수호자.',
+      issue_time: '2019-6-4',
+      issue_all: '21,000,000', // 发行总量
+      issue_circulation: '210,000', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.antbit.io/statics/upload/baipishu/w1.pdf', // 白皮书
+      office_website: 'http://www.antbit.io/', // 官网
+      chain_info: 'https://etherscan.io/address/0x35Be52655551029d8B8B3B51Ffdb76Ec9993dD47?locale=zh-CN&utm_source=imtoken' // 区块查询
+    }
+
+  },
 }
