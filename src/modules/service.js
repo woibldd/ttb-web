@@ -889,7 +889,41 @@ const service = {
   //获取币对信息
   getCurrencyList(params) {
     return request('/future/account/currency_list',params)
-  }
+  },
+
+   /**
+   * 用户可用余额
+   * @param {
+    * user_id} params
+    */
+   getOtcBalance(params) {
+     return getCache('c_otc_balance', () => request('otc/account/balance/list', params), 1e3)
+   },
+ 
+   async getOtctBalanceByPair (symbol) {
+     if (!symbol || !symbol.symbol) {
+       symbol = {
+         symbol: 'BTC'
+       }
+     }  
+     let result = await service.getOtcBalance()
+     console.log(result)
+     // let resp = []
+     if (!result.code) {
+       let list = result.data
+       let balance = list ? list.filter(l => symbol.symbol === l.currency)[0] || {} : {
+         available: '0',
+         holding: '0',
+         available_balance: '0',
+         leverage: 100
+       }
+       return {
+         code: 0,
+         data: balance
+       }
+     }
+     return null
+   },
 }
 
 export async function fetch (url, body, options, method = 'post') {
