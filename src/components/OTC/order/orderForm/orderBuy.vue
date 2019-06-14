@@ -1,0 +1,775 @@
+
+<template>
+  <div class="order-otcaction">
+    <!-- 挂单 -->
+    <div class="action-box">
+      <div class="release">
+        <!-- 标题 -->
+        <div
+          :class="{'buy': side===1, 'sell': side===2}"
+          class="action-title title buy item"
+        >{{$t(titleText, {currency})}}</div>
+        <div v-if="step===0">
+          <!-- 买卖切换 -->
+          <div class="sideTab tr item" style="margin-bottom: 15px;">
+            <div class="btn-left td">
+              <v-btn
+                :class="{'active': side===1}"
+                class="w-110 buy"
+                radius="15"
+                height="30"
+                @click="side=1,flag = false,awitFlag =false"
+                :label="$t('otc_buy_currency', {currency: currency})"
+              />
+            </div>
+            <div class="btn-left td">
+              <v-btn
+                :class="{'active': side===2}"
+                class="w-110 sell"
+                radius="15"
+                height="30"
+                @click="side=2,flag = false,awitFlag =false"
+                :label="$t('otc_sell_currency', {currency: currency})"
+              />
+            </div>
+          </div>
+          <!-- 订单设置 -->
+          <div class="action-input-group item">
+            <div class="order-buy">
+              <div class="action-order">
+                <ul>
+                  <li>
+                    <div class="label">{{$t('otc_current_index')}}</div>
+                    <div class="content">
+                      <span class="text">{{indexPrice || 0 | fixed(2)}} CNY</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="label">
+                      {{$t('otc_transaction_type')}}
+                      <span class="red">*</span>
+                    </div>
+                    <div class="content">
+                      <el-select v-model="type" :placeholder="$t('please_choose')">
+                        <el-option :label="$t('otc_fixed_price')" :value="1"></el-option>
+                        <el-option :label="$t('otc_float_price')" :value="2"></el-option>
+                      </el-select>
+                    </div>
+                  </li>
+                  <li v-if="type===2">
+                    <div class="label">
+                      {{$t('otc_float_ratio')}}
+                      <span class="red">*</span>
+                    </div>
+                    <div class="content">
+                      <div class="el-number-input">
+                        <el-input-number
+                          :max="130"
+                          :min="70"
+                          :controls="false"
+                          :placeholder="$t('otc_placeholder_a')"
+                          v-model="float_rate"
+                          step-strictly
+                        ></el-input-number>
+                        <div class="unit-label long" v-html="'%'"></div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="label">
+                      {{$t('price')}}
+                      <span class="red">*</span>
+                    </div>
+                    <div class="content" v-if="type===1">
+                      <div class="el-number-input">
+                        <el-input
+                          type="number"
+                          :placeholder="$t('otc_placeholder_b')"
+                          v-model="inputPrice"
+                          @input="computeTotal"
+                          step-strictly
+                        ></el-input>
+                        <div class="unit-label long" v-html="legal_currency"></div>
+                      </div>
+                    </div>
+                    <div class="content" v-else-if="type===2">
+                      <div class="el-number-input">
+                        <div class="label">{{ price }}</div>
+                        <div class="unit-label long" v-html="legal_currency"></div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="label">
+                      {{$t('amount')}}
+                      <span class="red">*</span>
+                    </div>
+                    <div class="content">
+                      <div class="el-number-input">
+                        <el-input v-model="amount" 
+                        @input="computeTotal"  
+                        :placeholder="$t('contract_order_enter_tips1')"
+                        type="number"></el-input>
+                        <div class="unit-label long" v-html="currency"></div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="label">
+                      {{$t('otc_total',{legal_currency})}}
+                      <span class="red">*</span>
+                    </div>
+                    <div class="content">
+                      <div class="el-number-input">
+                        <span class="UNA">{{total || 0 | fixed(2)}}</span>
+                        <div class="unit-label long" v-html="legal_currency"></div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="more-setting">
+                <span class="MoreSettings">
+                  <a>{{$t('otc_more_setting')}}</a>
+                </span>
+              </div>
+              <div class="action-order">
+                <ul>
+                  <li v-if="side===2">
+                    <div class="label">
+                      {{$t('otc_payment_time_limit')}}
+                      <span class="red">*</span>
+                    </div>
+                    <div class="content">
+                      <el-select v-model="limitedTime" :placeholder="$t('please_choose')" disabled>
+                        <el-option :label="$t('otc_sell_tips_l')" value="15"></el-option>
+                      </el-select>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="label">
+                      {{$t('otc_opponent_kyc_level')}}
+
+                    </div>
+                    <div class="content">
+                      <el-select v-model="order.kyc_level" :placeholder="$t('please_choose')">
+                        <el-option label="KYC1" :value="1"></el-option>
+                        <el-option label="KYC2" :value="2"></el-option>
+                      </el-select>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="label">{{$t('otc_register_time')}}</div>
+                    <div class="content">
+                      <!-- <el-input :max="130" :min="70"  v-model="order.register_time" placeholder="请输入内容"></el-input> -->
+                      <el-date-picker
+                        v-model="order.register_time"
+                        format="yyyy-MM-dd"
+                        value-format="timestamp"
+                        type="date"
+                      />
+                    </div>
+                  </li>
+                  <li>
+                    <div class="label">{{$t('otc_order_remarks')}}</div>
+                    <div class="content"  >
+                      <el-input    class="coadawm"
+
+                        :max="130"
+                        :min="70"
+                        type="textarea"
+                     :autosize="{ minRows: 2, maxRows: 4}"
+                        v-model="order.remark"
+                      ></el-input>
+                      <!-- 请输入内容
+                      :placeholder="$t('otc_placeholder_enter')"-->
+                    </div>
+                  </li>
+                  <li v-if="flag">
+                    <el-alert :title="alertTitle" :closable="alertFlag" type="warning"></el-alert>
+                  </li>
+                  <li v-if="awitFlag">
+                    <el-alert
+                      title="委托单发布价格偏离指数价格20%以上时，提示：偏离指数价格过多，确定要以此价格下单交易？"
+                      :closable="alertFlag"
+                      type="warning"
+                    ></el-alert>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="order-info" v-if="step===1">
+          <!-- 订单信息 -->
+          <div class="action-order-info wrap item">
+            <v-list v-if="step===1" :header="orderBuyHeader" :table="orderData"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- footer做一个吸底盒 -->
+    <!-- 按钮 -->
+    <div class="footer">
+      <div class="tr message-box">
+        <div v-if="!!message_success" class="msg success">
+          <icon name="true"/>
+          {{message_success}}
+        </div>
+        <div v-if="!!message_failed" class="msg failed">
+          <icon name="false"/>
+          {{message_failed}}
+        </div>
+      </div>
+      <div class="action-button-group">
+        <!--挂卖单-->
+        <!-- 取消/发布卖单 -->
+        <div v-if="step<1" class="tr">
+          <div class="btn-left td">
+            <v-btn
+              class="btn-cancel cancel"
+              radius="3"
+              height="52"
+              @click="closeSideBar"
+              :label="$t('cancel')"
+            />
+          </div>
+          <div class="btn-left td">
+            <v-btn
+              :class="{'buy': side===1, 'sell':side===2}"
+              class="btn-apply"
+              radius="3"
+              height="52"
+              @click="craeteOrder"
+              :label="$t(confirmText)"
+            />
+          </div>
+        </div>
+        <!-- 撤单/关闭 -->
+        <div v-else-if="step===1" class="tr">
+          <div class="btn-left td">
+            <v-btn
+              class="btn-cancel cancel"
+              radius="3"
+              height="52"
+              @click="revokeOrder"
+              :label="$t('cancel_order')"
+            />
+          </div>
+          <div class="btn-left td">
+            <v-btn
+              class="btn-apply close"
+              radius="3"
+              height="52"
+              @click="closeSideBar"
+              :label="$t('close')"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import service from "@/modules/service.js";
+import { state } from "@/modules/store.js";
+import vList from "@/components/OTC/vlist/vertical-table";
+import utils from "@/modules/utils.js";
+import _ from "lodash";
+//import otcWatch from "@/mixins/otc-watcher.js"
+export default {
+  data() {
+    return {
+      state,
+      side: 1,
+      limitedTime: "15",
+      sideTitle: "发布购买委托单 BTC",
+      message: "您的委托单已发布成功",
+      message_success: "",
+      message_failed: "",
+      amount: "",
+      operation: 1, // 操作 1: 买/卖, 2: 发布委托
+      operSide: 1, // 操作类型 1: 买 ,2: 卖
+      step: 0, //步骤, 根据操作 和 类型 的不同,展示不同的结果
+      inputPrice: 0,
+      float_rate: 100, //浮动比例
+      total: 0,
+      type: 1,
+      order: {
+        currency: "BTC",
+        side: 1,
+        type: 1,
+        float_rate: 1,
+        price: 0,
+        amount: 0,
+        total: 0,
+        kyc_level: 2,
+        register_time: new Date().getTime(),
+        remark: ""
+      },
+      orderBuyHeader: {
+        name: "委托单详情",
+        count: 0,
+        headers: [
+          {
+            title: "type", //交易类型
+            text: "交易类型",
+            width: "",
+            key: "type"
+          },
+          {
+            title: "currency", //币种
+            text: "币种",
+            width: "",
+            key: "currency"
+          },
+          {
+            title: "price", //单价(CNY)
+            text: "单价(CNY)",
+            width: "",
+            key: "price"
+          },
+          {
+            title: "amount", //数量(CNY)
+            text: "数量",
+            width: "",
+            key: "amount"
+          },
+          {
+            title: "total", //总金额(CNY)
+            text: "总金额(CNY)",
+            width: "",
+            key: "total"
+          },
+          {
+            title: "fee", //平台服务费
+            text: "平台服务费",
+            width: "",
+            key: "fee"
+          },
+          {
+            title: "kyc_level", //对手认证等级
+            text: "对手认证等级",
+            width: "",
+            key: "kyc_level"
+          }
+        ]
+      },
+      orderData: {},
+      alertTitle: "",
+      flag: false,
+      alertFlag: false,
+      awitFlag: false
+    };
+  },
+  // mixins: {
+  //   otcWatch
+  // },
+  props: {
+    active_id: {
+      type: Number,
+      default: 0
+    },
+    view: {
+      type: Object,
+      defalut: {}
+    },
+    show: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    currency: {
+      get() {
+        return this.state.otc.currency;
+      },
+      set(value) {
+        this.state.otc.currency = value;
+      }
+    },
+    legal_currency: {
+      get() {
+        return state.otc.legal_currency;
+      }
+    },
+    symbolInfo() {
+      //let otc = this.state.otc;
+      // if (!otc.symbolInfo || otc.symbolInfo.currency != this.currency) {
+      //   for (const symbol of otc.symbolList) {
+      //     if (symbol.currency == this.currency) {
+      //       otc.symbolInfo = symbol;
+      //       return symbol;
+      //     }
+      //   }
+      // }
+      return this.state.otc.symbolInfo;
+    },
+    indexPrice() {
+      if (this.symbolInfo && this.symbolInfo.cny_rate)
+        return this.symbolInfo.cny_rate;
+      else return 0;
+    },
+    titleText() {
+      if (this.side === 1) {
+        return "otc_publish_buy_order";
+      } else if (this.side === 2) {
+        return "otc_publish_sell_order";
+      }
+    },
+    confirmText() {
+      if (this.side === 1) {
+        return "otc_order_confirm_buy";
+      } else if (this.side === 2) {
+        return "otc_order_confirm_sell";
+      }
+    },
+    price() {
+      if (this.type === 1) {
+        return this.inputPrice;
+      } else {
+        return this.$big(this.float_rate || 0)
+          .mul(0.01)
+          .mul(this.indexPrice || 0)
+          .toFixed(2);
+      }
+    },
+    isLogin() {
+      return state.userInfo !== null;
+    }
+  },
+  components: {
+    vList
+  },
+  methods: {
+    openSideBar() {
+      this.step = 0;
+      this.active_id = 0;
+      this.show = true;
+    },
+    closeSideBar() {
+      this.step = 0;
+      this.active_id = 0;
+      this.$emit("closeSide");
+    },
+    async craeteOrder() {
+      if (!this.isLogin) {
+        this.$router.push({
+          name: "login"
+        });
+        return;
+      }
+
+      this.order.currency = this.currency;
+      this.order.total = this.total.round(2, 0); //Number(this.$big(this.amount).mul(this.price).toFixed(2));
+      this.order.type = this.type;
+      this.order.side = this.side;
+      this.order.price = this.price;
+      this.order.amount = this.amount;
+      this.order.float_rate = Number(this.$big(this.float_rate).mul(0.01));
+
+      console.log({total: this.total})
+      service.createOtcOrder(this.order).then(res => {
+        if (!res.code) {
+          this.step = 1;
+          this.orderData = res.data;
+          this.orderData.fee = "限时免费";
+          this.orderData.type =
+            this.orderData.type == 1 ? "otc_fixed_price" : "otc_float_price";
+          this.orderData.total = this.total;
+          //this.$big(this.orderData.price).mul(this.orderData.amount)
+          this.active_id = res.data.active_id;
+
+          this.message_success = "您的委托单已发布成功";
+          this.message_failed = "";
+
+          this.$eh.$emit("otc:assets:balance");
+        } else if (res.message) {
+          utils.alert(res.message);
+          this.message_success = "";
+          this.message_failed = "发布失败:" + res.message;
+        }
+      });
+    },
+    revokeOrder() {
+      let params = {
+        type: 1,
+        trans_id: this.active_id
+      };
+      service.otcOrderRemove(params);
+      this.step = 0;
+      this.$emit("closeSide");
+    },
+    computeTotal() {
+      this.total = this.$big(this.amount || 0).mul(this.price || 0);
+    }
+  },
+  watch: {
+    inputPrice() {
+      this.flag = false;
+      this.alertTitle = "";
+      this.awitFlag = false;
+      if (this.currency === this.symbolInfo.currency) {
+        let min_buy_price = Number(this.symbolInfo.buy_price_one) * 0.8;
+        let min_sell_price = Number(this.symbolInfo.sell_price_one) * 0.8;
+        let awit_buyPrice = Number(
+          Number(min_buy_price) - Number(this.inputPrice)
+        );
+        let awit_sellPrice = Number(
+          Number(min_sell_price) - Number(this.inputPrice)
+        );
+        if (this.side === 1) {
+          if (this.$big(this.inputPrice).gt(this.symbolInfo.sell_price_one)) {
+            this.flag = true;
+            this.alertTitle = `您发布的购买${this.currency}的交易单，价格为${
+              this.inputPrice
+            }CNY高于卖一价${
+              this.symbolInfo.sell_price_one
+            }CNY，以该价格发布可能给您带来损失`;
+          } else {
+            this.flag = false;
+            if (awit_buyPrice > 0) {
+              console.log({awit_buyPrice})
+              this.awitFlag = true;
+            } else {
+              this.awitFlag = false;
+            }
+          }
+        } else {
+          if (this.$big(this.inputPrice).lt(this.symbolInfo.buy_price_one)) {
+            this.flag = true;
+            this.alertTitle = `您发布的出售${this.currency}的交易单，价格为${
+              this.inputPrice
+            }CNY低于买一价${
+              this.symbolInfo.buy_price_one
+            }CNY，以该价格发布可能给您带来损失`;
+          } else {
+            this.flag = false;
+            if (awit_sellPrice > 0) { 
+              //console.log({awit_sellPrice})
+              this.awitFlag = true;
+            } else {
+              this.awitFlag = false;
+            }
+          }
+        }
+      }
+    },
+    view() {
+      if (JSON.stringify(this.view) != "{}") {
+        this.orderData = this.view;
+        this.step = 1;
+      }
+    },
+    show() {
+      this.total = "";
+      this.amount = "";
+      this.orderData = [];
+      this.step = 0;
+      this.active_id = 0;
+      this.message_success = "";
+      this.message_failed = "";
+      if (this.show === false) {
+        this.view = {};
+      }
+    },
+    currency() {
+      for (const symbol of this.state.otc.symbolList) {
+        if (symbol.currency == this.currency) {
+          this.state.otc.symbolInfo = symbol;
+          return;
+        }
+      }
+    },
+    side() {
+      console.log(this.side)
+      this.order.remark="";
+      this.inputPrice="";
+      this.amount="";
+      this.total="";
+      this.message_success = "";
+      this.message_failed = "";
+    }
+
+  }
+};
+</script>
+
+<style lang="scss" scope>
+.tr {
+  @include clearfix();
+  .td {
+    float: left;
+
+  }
+}
+
+.order-otcaction {
+  height: 100%;
+  .action-box {
+    height: calc(100% - 140px);
+    padding: 0 38px;
+    overflow: scroll;
+    .title {
+      &.buy {
+        color: $otc-buy-bg;
+      }
+      &.sell {
+        color: $otc-sell-bg;
+      }
+    }
+    .action-title {
+      margin-bottom: 20px;
+      //color: $otc-buy-bg;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .sideTab {
+      .btn-left {
+        margin: 0 20px;
+        .btn {
+          color: #b1b1b1;
+          background-color: #fff;
+        }
+        .active {
+          color: #fff;
+          &.buy {
+            background-color: $otc-buy-bg;
+          }
+          &.sell {
+            background-color: $otc-sell-bg;
+          }
+        }
+      }
+    }
+    .item {
+      .el-number-input,
+      .el-input__inner,
+      .el-textarea__inner {
+        position: relative;
+        width: 200px;
+      }
+    }
+    ul {
+      li {
+        margin: 10px 0;
+        line-height: 40px;
+        .label {
+          width: 100px;
+          margin-bottom: 15px;
+          font-size: 14px;
+          font-family: MicrosoftYaHei;
+          font-weight: 400;
+          color: rgba(153, 153, 153, 1);
+        }
+        .content {
+          .el-input__inner {
+            text-align: left;
+
+          }
+          .coadawm{
+            height: 100px!important;;
+          }
+        }
+        @include clearfix();
+        & > div {
+          float: left;
+        }
+      }
+    }
+    .ix-button {
+      padding: 0 20px;
+    }
+  }
+  .footer {
+    box-shadow: 0px 0px 50px #aaaaaa;
+    height: 140px;
+    .btn {
+      &.buy {
+        background-color: $otc-buy-bg;
+      }
+      &.sell {
+        background-color: $otc-sell-bg;
+      }
+      &.cancel,
+      &.close {
+        background-color: #fff;
+        color: #333;
+      }
+    }
+    .tr.message-box {
+      position: absolute;
+      top: 8px;
+      left: 0;
+      width: 100%;
+    }
+    .msg {
+      padding-left: 24px;
+      font-size: 14px;
+      color: #333;
+      &.success {
+        background-color: rgba(9, 201, 137, 0.1);
+      }
+      &.failed {
+        background-color: rgba(244, 81, 81, 0.1);
+      }
+      .iconfont {
+        vertical-align: middle;
+      }
+    }
+  }
+  .action-button-group {
+    margin-top: 20px;
+    padding: 30px 40px;
+    .btn-left {
+      float: left;
+      .btn {
+        &.btn-cancel {
+          width: 100px;
+          margin-right: 19px;
+        }
+        &.btn-apply {
+          width: 190px;
+        }
+      }
+    }
+  }
+  .wrap {
+    margin: 10px 0;
+    table {
+      width: 100%;
+      font-size: 14px;
+      th {
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+        &.status {
+          text-align: right;
+
+        }
+      }
+      tr {
+        line-height: 25px;
+      }
+    }
+  }
+}
+.MoreSettings {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 14px;
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
+  color: rgba(41, 91, 220, 1);
+  margin-bottom: 15px;
+  > a {
+    color: rgba(41, 91, 220, 1);
+    font-size: 14px;
+    margin-right: 23px;
+  }
+}
+.UNA{
+  display: inline-block;width: 162px;
+  overflow: hidden;
+}
+</style>
+

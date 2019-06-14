@@ -90,7 +90,19 @@ export const state = {
     google: false,
     phone: false,
     task: ''
-  }
+  },
+  otc: {
+    currency: "BTC", 
+    legal_currency: "CNY",
+    showSide: 1, //1: 买，2：卖
+    symbolList: [],
+    userInfo: null,
+    symbolInfo: null,
+    currency_name: '',
+    indexPrice: 0,
+    bid: 0,
+    ask: 0
+  },
 }
 
 export const local = new Locals('store', {

@@ -9,26 +9,13 @@
             v-if="showContract"
             href="/contract.html"
             :class="{'router-link-active': from === 'contract'}"
-            class="nav_link ml-30"
-          >{{ $t('contract') }}</a>
-          <div class="nav_link arrow-down">
-            <span class="nav_link ml-30">
-              {{ $t('otc_trade') }}
-              <icon class="arrow ml-5" name="arrow-down-yellow"/>
-            </span>
-            <div class="dropdown-sub-menu">
-              <ul class="dropdown-list pt-10 pb-10">
-                <li class="dropdown-qrcode pl-12 pr-12">
-                  <img src="~@/assets/otc-qrcode.jpg" width="114" height="114" alt> 
-                  <div class="content">
-                    <span>{{$t('otc_tips')}}</span> <br/>
-                    <i>{{$t('otc_trade')}}</i>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-
+            class="nav_link ml-30">{{ $t('contract') }} 
+          </a>
+           <router-link
+            v-if='!isTestnet'
+            :to="{name: 'OTC'}"
+            class="nav_link  ml-30">{{ $t('otc_trade') }}</router-link>
+       
           <router-link
             v-if="false"
             :to="{name: 'RushBuy'}"

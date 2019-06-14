@@ -12,7 +12,7 @@ const isMobile = utils.isMobile()
 
 const HomeNew = () => import(/* webpackChunkName: "home" */ '@/pages/home_new.vue')
 // const MobileHome = () => import(/* webpackChunkName: "mobilehome" */ '@/pages/Mobile/Home3.vue')
-// const Test1 = () => import(/* webpackChunkName: "Test1" */ '@/pages/test1.vue')
+const Test1 = () => import(/* webpackChunkName: "Test1" */ '@/pages/test1.vue')
 // const Test2 = () => import(/* webpackChunkName: "Test2" */ '@/pages/test2.vue')
 const Trading = () => import(/* webpackChunkName: "Trading" */ '@/pages/Trading')
 const Profile = () => import(/* webpackChunkName: "Profile" */ '@/pages/Profile')
@@ -58,8 +58,11 @@ const ContractIndex = () => import(/* webpackChunkName: "Myfund" */ '@/component
 const ContractHistory = () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contract/history')
 const AssetsHistory = () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contract/assets-history')
 const Transfer = () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/Transfer/transfer.vue')
+const TransferModal = () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/contract/transfer-modal.vue') 
 
-
+// 我的订单
+const MyOrderNew = () => import(/* webpackChunkName: "MyOrderNew" */ '@/pages/MyOrderNew')
+const OrderBiBi = () => import(/* webpackChunkName: "MyOrderNew" */ '@/components/MyOrderNew/bibi')
 
 // 合约历史资料
 const ContractMaterial = () => import(/* webpackChunkName: "ContractMaterial" */ '@/pages/material')
@@ -71,6 +74,8 @@ const TradeIndex = () => import(/* webpackChunkName: "ContractMaterial" */ '@/co
 const h5login = () => import(/* webpackChunkName: "h5login" */ '@/pages/h5/sign-up')
 const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index')
 
+
+//合约大赛 
 // 活动页面
 const ActivityIndex = () => import(/* webpackChunkName: "ActivityIndex" */ '@/pages/active/index.vue')
 const LockWarehouse = () => import(/* webpackChunkName: "LockWarehouse" */ '@/pages/active/LockWarehouse.vue')
@@ -79,7 +84,22 @@ const InviteMineActivity = () => import(/* webpackChunkName: "InviteMineActivity
 const KycRelay = () => import(/* webpackChunkName: "KycRelay" */ '@/pages/active/kycRelay.vue')
 const ExchangeRank = () => import(/* webpackChunkName: "ExchangeRank" */ '@/pages/active/ExchangeRank')
 const Lottery = () => import(/* webpackChunkName: "lottery" */ '@/pages/active/lottery')
-const RushBuy = () => import(/* webpackChunkName: "home" */ '@/pages/rushBuy.vue')
+const RushBuy = () => import(/* webpackChunkName: "home" */ '@/pages/RushBuy.vue') 
+
+// const Guide = () => import(/* webpackChunkName: "home" */ '@/pages/guide.vue')
+const MessageSettings = () => import(/* webpackChunkName: "home" */ '@/pages/Profile/MessageSettings.vue')
+const Collection = () => import(/* webpackChunkName: "home" */ '@/pages/Profile/collection.vue')
+const ServiceFeeSet = () => import(/* webpackChunkName: ServiceFeeSet */ '@/pages/Profile/ServiceFeeSet')
+
+
+
+// OTC
+const OTC = () => import(/* webpackChunkName: "OTC" */ '@/pages/OTC')
+const Trade = () => import(/* webpackChunkName: "Trade" */ '@/components/OTC/Trade.vue')
+const textTrade = () => import(/* webpackChunkName: "Hir" */ '@/pages/StepTable/index.vue')
+
+ 
+
 // 下载
 const Download = () => import(/* webpackChunkName: "Download" */ '@/pages/download/download.vue')
 async function beforeEach (to, from, next) {
@@ -166,6 +186,7 @@ export const routes = [
       class: 'dark'
     },
     children: [
+        
       {
         path: 'kyc_relay',
         name: 'kycRelay',
@@ -238,6 +259,7 @@ export const routes = [
     },
     component: Trading
   },
+ 
   {
     path: '/profile',
     name: 'profile',
@@ -505,13 +527,139 @@ export const routes = [
       class: 'dark',
       mobileNav: isMobile
     },
+    component: Fee
+  },
+  // {
+  //   path: '/Guide',
+  //   name: 'Guide',
+  //   meta: {
+  //     zendeskWidget: true,
+  //     auth: false,
+  //     footer: true,
+  //     class: 'dark',
+  //     nav: true
+  //   },
+  //   component: Guide
+  // },
+   {
+    path: '/RushBuy',
+    name: 'RushBuy',
+    meta: {
+      auth: false,
+      nav: true,
+      footer: false,
+      class: 'absolute'
+    },
+    component: RushBuy,
+  },
+  {
+    path: 'MessageSettings',
+    name: 'MessageSettings',
+    component: MessageSettings
+  },
+  {
+    path: 'collection',
+    name: 'collection',
+    component: Collection
+  },
+  {
+    path: '/test',
+    name: 'test',
+    meta: {
+      auth: false,
+      nav: true,
+      footer: true,
+      class: 'dark'
+    },
+    component: Test1
+  },{
+    path: '/fee-set',
+    name: 'ServiceFeeSet',
+    component: ServiceFeeSet
+  },
+  {
+    path: '/fee',
+    name: 'Fee',
+    meta: {
+      auth: false,
+      nav: true,
+      footer: true,
+      class: 'dark',
+      mobileNav: isMobile
+    },
     component: Fee,
     redirect: '/fee/tradingFee',
     children: [
       {
         path: 'tradingFee',
         name: 'TradingFee',
-        component: TradingFee, 
+        component: TradingFee,
+      },
+      {
+        path: 'contractFee',
+        name: 'ContractFee',
+        component: ContractFee,
+      }
+    ]
+  },{
+    path: 'TransferModal',
+    name: 'transferModal',
+    component: TransferModal
+  },
+  {
+    path: '/myorder-new',
+    name: 'MyOrderNew',
+    component: MyOrderNew,
+    redirect: {name: 'OrderBiBi'},
+    meta: {
+      auth: false,
+      nav: true,
+      footer: true,
+      class: 'dark'
+    },
+    children: [
+      {
+        path: 'pairs',
+        name: 'OrderBiBi',
+        component: OrderBiBi
+      }
+    ]
+  },  
+   {
+    path: '/OTC',
+    name: 'OTC',
+    redirect: '/OTC/Trade',
+    meta: {
+      nav: true,
+      footer: true,
+      class: 'dark'
+    },
+    component: OTC,
+    children: [
+        {
+            path: 'FrenchBill',
+            name: 'FrenchBill',
+            component: () => import(/* webpackChunkName: "FundAddress" */ '@/pages/Capital/FrenchBill.vue')
+          },
+      {
+        path: 'trade',
+        name: 'trade',
+        component: Trade
+      },
+      {
+        path: 'Transfer',
+        name: 'Transfer',
+        component: Transfer
+      },
+      {
+        path: 'collection',
+        name: 'collection',
+        component: Collection
+      },
+      {
+        path: 'Hir',
+        name: 'Hir',
+        component: textTrade 
       },
       { 
         path: 'contractFee',
