@@ -1,2 +1,2 @@
-npm install --save v-depth-chart      
-npm install --save vue-clipboard2         
+cnpm install --save v-depth-chart      
+cnpm install --save vue-clipboard2         
