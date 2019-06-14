@@ -1850,21 +1850,17 @@
   "my_orders": "我的订单",
   "footer_hreseqgslp": "帮助中心",
   "footer_hreseqgslp1": "新手指导",
-  "footer_hreseqgslp2": "常见问题",
-
-
-
-
-
-
- 
-  "otc_side_35": "法币账单",
-
+  "footer_hreseqgslp2": "常见问题", 
+  "otc_side_35": "法币账单", 
   "otc_side_1": "购买",
   "otc_side_2": "出售",
   "otc_side_3": "  交易总额(CNY)",
   "otc_need_verify": "法币交易需完成以下认证",
   "otc_bind_bankCard":"绑定本人实名银行卡",
-  "otc_kyc_verified":"身份认证 <i style='color:#ccc;'>（认证等级：KYC1）</i>"
+  "otc_kyc_verified":"身份认证 <i style='color:#ccc;'>（认证等级：KYC1）</i>",
     
+  "collection": "收款方式",
+  "collection_cs": "选择交易币种",
+  "collection_add": "添加收款信息",
+  "collection_all": "所有"
 }
