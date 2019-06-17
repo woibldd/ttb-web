@@ -118,6 +118,16 @@ async function beforeEach (to, from, next) {
   if (state.userStatus === -1) {
     actions.updateSession()
   }
+  if (to.meta.require) {
+    if (window.localStorage.getItem('X-TOKEN')) {
+      next()
+    } else {
+      next({
+        name: 'login',
+        query: {redirect: to.fullPath}
+      })
+    }
+  }
   next()
 }
 
@@ -649,17 +659,26 @@ export const routes = [
       {
         path: 'Transfer',
         name: 'Transfer',
-        component: Transfer
+        component: Transfer,
+        meta: {
+          require: true
+        }
       },
       {
         path: 'collection',
         name: 'collection',
-        component: Collection
+        component: Collection,
+        meta: {
+          require: true
+        }
       },
       {
         path: 'Hir',
         name: 'Hir',
-        component: textTrade 
+        component: textTrade ,
+        meta: {
+          require: true
+        }
       },
       { 
         path: 'contractFee',
