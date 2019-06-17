@@ -19,7 +19,7 @@
       <el-table-column prop="amount" :label="$t('otc_amount',{currency})">
         <template slot-scope="scope">
           <div>
-            {{ $big(scope.row.amount).minus(scope.row.freezed).toString() }}
+            {{ $big(scope.row.amount).minus(scope.row.freezed) }}
           </div>
         </template>
       </el-table-column>
@@ -36,22 +36,22 @@
 
           <div v-for="(item, index) in scope.row.pay_ment_data" :key="index" style="display: inline-block;margin-right: 4px;">
             <!--<template v-if="item === '1'">-->
-              <!--<icon-->
-                <!--class="card active"-->
-                <!--name="bank-card"-->
-              <!--/>-->
+            <!--<icon-->
+            <!--class="card active"-->
+            <!--name="bank-card"-->
+            <!--/>-->
             <!--</template>-->
             <!--<template v-if="item === '2'">-->
-              <!--<icon-->
-                <!--class="alipay active"-->
-                <!--name="alipay"-->
-              <!--/>-->
+            <!--<icon-->
+            <!--class="alipay active"-->
+            <!--name="alipay"-->
+            <!--/>-->
             <!--</template>-->
             <!--<template v-if="item === '3'">-->
-              <!--<icon-->
-                <!--class="wechat active"-->
-                <!--name="wechat"-->
-              <!--/>-->
+            <!--<icon-->
+            <!--class="wechat active"-->
+            <!--name="wechat"-->
+            <!--/>-->
             <!--</template>-->
             <icon
               :class="item === '1' ? 'card active' : item === '2' ? 'alipay active' : 'wechat active'"
@@ -59,27 +59,27 @@
             />
           </div>
           <!--<icon-->
-            <!--v-for="(item, index) in scope.row.pay_ment_data"-->
-            <!--:key="index"-->
-            <!--:class="item === 1 ? 'card' : item === 1 ? 'alipay' : 'wechat'"-->
-            <!--:name="item === 1 ? 'bank-card' : item === 1 ? 'alipay' : 'wechat'"-->
+          <!--v-for="(item, index) in scope.row.pay_ment_data"-->
+          <!--:key="index"-->
+          <!--:class="item === 1 ? 'card' : item === 1 ? 'alipay' : 'wechat'"-->
+          <!--:name="item === 1 ? 'bank-card' : item === 1 ? 'alipay' : 'wechat'"-->
           <!--/>-->
 
           <!--<icon-->
-            <!--class="card"-->
-            <!--name="bank-card"-->
+          <!--class="card"-->
+          <!--name="bank-card"-->
           <!--/>-->
 
           <!--&lt;!&ndash; 银行卡 &ndash;&gt;-->
           <!--<icon-->
-            <!--class="alipay"-->
-            <!--name="alipay"-->
+          <!--class="alipay"-->
+          <!--name="alipay"-->
           <!--/>-->
           <!--&lt;!&ndash; 支付宝 &ndash;&gt;-->
           <!--<icon-->
-            <!--:class="{'active': scope.row.payment_type.indexOf('3') > -1,}"-->
-            <!--class="wechat"-->
-            <!--name="wechat"-->
+          <!--:class="{'active': scope.row.payment_type.indexOf('3') > -1,}"-->
+          <!--class="wechat"-->
+          <!--name="wechat"-->
           <!--/>-->
 
 
@@ -290,7 +290,7 @@ export default {
       }
     },
     refreshCurrency(vm) {
-       service.otcSymbolList().then(res => {
+      service.otcSymbolList().then(res => {
         if (!res.code) {
           vm.symbolList = res.data;
           for (const symbol of vm.symbolList) {
@@ -309,10 +309,10 @@ export default {
     this.switchCurrency(this.currency, this.side);
     this.$eh.$on("otc:currency:change", (arg1, arg2) => {
       // this.loading = true
-       setTimeout(() => {
-         // this.loading = false
-         this.switchCurrency(arg1, arg2);
-       }, 200)
+      setTimeout(() => {
+        // this.loading = false
+        this.switchCurrency(arg1, arg2);
+      }, 200)
     })
 
     let $this = this
@@ -371,224 +371,227 @@ export default {
 };
 </script>
 <style lang="scss">
-.entrust-order-container {
-  margin-top: 20px;
-  .btn {
-    border: none;
-    border-radius: 3px;
-    background: rgba(0, 0, 0, 0);
-    color: #fff;
-    padding: 7px 14px;
-    cursor: pointer;
-    &.buy {
-      background-color: $otc-buy-bg;
-      &:hover {
-        background-color: $otc-buy-bg-light;
-      }
-    }
-    &.sell {
-      background-color: $otc-sell-bg;
-      &:hover {
-        background-color: $otc-sell-bg-light;
-      }
-    }
-    &.cancel {
-      border: 1px solid #ccc;
-      background-color: #fff;
-      color: #333;
-      &:hover {
-        background-color: #ccc;
-      }
-    }
-    &.my {
-      color: $primary;
-      border: 1px solid $primary;
-    }
-  }
-  .title {
-    &.buy {
-      color: $otc-buy-bg;
-    }
-    &.sell {
-      color: $otc-sell-bg;
-    }
-  }
-  .pagination {
-    padding-top: 20px;
-    text-align: center;
-    &.el-pagination.is-background .el-pager li:not(.disabled).active {
-      background-color: $primary !important;
+  .entrust-order-container {
+    margin-top: 20px;
+    .btn {
+      border: none;
+      border-radius: 3px;
+      background: rgba(0, 0, 0, 0);
       color: #fff;
-    }
-  }
-  .otcaction {
-    padding: 0;
-    .message {
-      margin: 10px 40px;
-      padding: 8px 12px;
-      background-color: rgba(253, 162, 45, 0.1);
-      .iconfont {
-        font-size: 1em;
-      }
-      &.count-down {
-        margin: 0 40px;
-        color: #5d82e1;
-        background-color: rgba(237, 246, 255, 0.5);
-      }
-    }
-
-    .action-title {
-      padding: 0 40px;
-      margin-bottom: 20px;
-      //color: $otc-buy-bg;
-      font-size: 24px;
-      font-weight: bold;
-    }
-    .action-steps {
-      margin: 10px 40px;
-      background-color: #f9fafc;
-    }
-    .wrap {
-      margin: 10px 40px;
-      table {
-        width: 100%;
-        font-size: 14px;
-        th {
-          text-align: left;
-          border-bottom: 1px solid #ccc;
-          &.status {
-            text-align: right;
-          }
-        }
-        tr {
-          line-height: 25px;
+      padding: 7px 14px;
+      cursor: pointer;
+      &.buy {
+        background-color: $otc-buy-bg;
+        &:hover {
+          background-color: $otc-buy-bg-light;
         }
       }
+      &.sell {
+        background-color: $otc-sell-bg;
+        &:hover {
+          background-color: $otc-sell-bg-light;
+        }
+      }
+      &.pay {
+        background-color: #FDA22D;
+      }
+      &.cancel {
+        border: 1px solid #ccc;
+        background-color: #fff;
+        color: #333;
+        &:hover {
+          background-color: #ccc;
+        }
+      }
+      &.my {
+        color: #c9a96c;
+        border: 1px solid #c9a96c;
+      }
     }
-    .action-order {
-      padding: 0 40px;
-      margin-top: 20px;
-      border-top: 10px solid #f7f9fb;
+    .title {
+      &.buy {
+        color: $otc-buy-bg;
+      }
+      &.sell {
+        color: $otc-sell-bg;
+      }
+    }
+    .pagination {
       padding-top: 20px;
-      ul {
-        margin: 0;
-        flex: 1;
-        li {
-          @include clearfix();
-          line-height: 40px;
-          margin: 5px 0;
+      text-align: center;
+      &.el-pagination.is-background .el-pager li:not(.disabled).active {
+        background-color: $primary !important;
+        color: #fff;
+      }
+    }
+    .otcaction {
+      padding: 0;
+      .message {
+        margin: 10px 40px;
+        padding: 8px 12px;
+        background-color: rgba(253, 162, 45, 0.1);
+        .iconfont {
+          font-size: 1em;
         }
-        .label {
-          //color: #acacac;
-          float: left;
-          box-sizing: border-box;
-          min-height: 20px;
-          width: 30%;
-        }
-        .content {
-          position: relative;
-          width: 65%;
-          float: right;
-          box-sizing: border-box;
-          .number-input {
-            &.input {
-              font-family: monaco Trebuchet MS, Tahoma, Arial, sans-serif;
-              outline: none;
-              border: 1px solid #666666;
-              border-radius: 3px;
-              background-color: transparent;
-              width: 100%;
-              height: 40px;
-              -webkit-box-sizing: border-box;
-              box-sizing: border-box;
-              line-height: 20px;
-              font-size: 14px;
-              padding: 9px 60px 9px 9px;
-              //color: #ffffff;
-            }
-            .label {
-              color: #d7d7d7;
-            }
-          }
-          .btn-all {
-            display: inline-block;
-            position: absolute;
-            padding-right: 6px;
-            bottom: 2px;
-            right: 2px;
-            background: #ffffff;
-            line-height: 37px;
-            font-size: 14px;
-            cursor: pointer;
-            color: #5d82e1;
-          }
-
-          .estimate {
-            text-align: right;
-            color: #acacac;
-            font-size: 12px;
-          }
+        &.count-down {
+          margin: 0 40px;
+          color: #5d82e1;
+          background-color: rgba(237, 246, 255, 0.5);
         }
       }
 
-      .action-button-group {
+      .action-title {
+        padding: 0 40px;
+        margin-bottom: 20px;
+        //color: $otc-buy-bg;
+        font-size: 24px;
+        font-weight: bold;
+      }
+      .action-steps {
+        margin: 10px 40px;
+        background-color: #f9fafc;
+      }
+      .wrap {
+        margin: 10px 40px;
+        table {
+          width: 100%;
+          font-size: 14px;
+          th {
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+            &.status {
+              text-align: right;
+            }
+          }
+          tr {
+            line-height: 25px;
+          }
+        }
+      }
+      .action-order {
+        padding: 0 40px;
         margin-top: 20px;
-        .btn-left {
-          float: left;
-          .btn {
-            &.w-110 {
-              width: 75px;
-              margin-right: 19px;
+        border-top: 10px solid #f7f9fb;
+        padding-top: 20px;
+        ul {
+          margin: 0;
+          flex: 1;
+          li {
+            @include clearfix();
+            line-height: 40px;
+            margin: 5px 0;
+          }
+          .label {
+            //color: #acacac;
+            float: left;
+            box-sizing: border-box;
+            min-height: 20px;
+            width: 30%;
+          }
+          .content {
+            position: relative;
+            width: 65%;
+            float: right;
+            box-sizing: border-box;
+            .number-input {
+              &.input {
+                font-family: monaco Trebuchet MS, Tahoma, Arial, sans-serif;
+                outline: none;
+                border: 1px solid #666666;
+                border-radius: 3px;
+                background-color: transparent;
+                width: 100%;
+                height: 40px;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+                line-height: 20px;
+                font-size: 14px;
+                padding: 9px 60px 9px 9px;
+                //color: #ffffff;
+              }
+              .label {
+                color: #d7d7d7;
+              }
             }
-            &.w-208 {
-              width: 165px;
+            .btn-all {
+              display: inline-block;
+              position: absolute;
+              padding-right: 6px;
+              bottom: 2px;
+              right: 2px;
+              background: #ffffff;
+              line-height: 37px;
+              font-size: 14px;
+              cursor: pointer;
+              color: #5d82e1;
+            }
+
+            .estimate {
+              text-align: right;
+              color: #acacac;
+              font-size: 12px;
+            }
+          }
+        }
+
+        .action-button-group {
+          margin-top: 20px;
+          .btn-left {
+            float: left;
+            .btn {
+              &.w-110 {
+                width: 75px;
+                margin-right: 19px;
+              }
+              &.w-208 {
+                width: 165px;
+              }
             }
           }
         }
       }
+      .footer {
+        // background: #333;
+        flex: 0 0 auto;
+        height: 100px;
+      }
     }
-    .footer {
-      // background: #333;
-      flex: 0 0 auto;
-      height: 100px;
+
+    .el-number-input,
+    .el-input__inner,
+    .el-textarea__inner {
+      position: relative;
+      width: 217px;
+      .el-input-number {
+        width: 100%;
+      }
+      .el-input-number /deep/ .el-input__inner {
+        text-align: left !important;
+      }
     }
   }
-
-  .el-number-input,
-  .el-input__inner,
-  .el-textarea__inner {
-    position: relative;
-    width: 217px;
-    .el-input-number {
-      width: 100%;
-    }
-    .el-input-number /deep/ .el-input__inner {
-      text-align: left !important;
-    }
+  span.red {
+    color: red;
   }
-}
-span.red {
-  color: red;
-}
-span.orange {
-  color: orange;
-}
+  span.orange {
+    color: orange;
+  }
 
-.unit-label {
-  position: absolute;
-  right: 0;
-  top: 0;
-  line-height: 40px;
-  height: 40px;
-  width: 40px;
-  // border-right: 1px solid #DDDDDD;
-  text-align: center;
-  user-select: none;
-  font-size: 13px;
-}
+  .unit-label {
+    position: absolute;
+    right: 0;
+    top: 0;
+    line-height: 40px;
+    height: 40px;
+    width: 40px;
+    // border-right: 1px solid #DDDDDD;
+    text-align: center;
+    user-select: none;
+    font-size: 13px;
+  }
 
   .footer {
-	  box-shadow:0px 0px 50px #aaaaaa;
+    box-shadow:0px 0px 50px #aaaaaa;
     height: 140px;
     position: relative;
     .btn {

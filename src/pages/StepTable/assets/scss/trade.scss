@@ -427,3 +427,35 @@ $high-color: #333;
   position: absolute!important;
   padding: 20px 20px;
 }
+@media (max-width: 1378px) {
+  .tips1 {
+    padding: 6px 24px;
+  }
+  .trade-container {
+    .message-con {
+      font-size: 13px;
+    }
+  }
+  .model-container {
+    .tips {
+      margin-top: 10px;
+      padding: 6px!important;
+    }
+    .table-con {
+      font-size: 13px;
+      dt {
+        em {
+          font-size: 13px;
+        }
+      }
+    }
+    .step-btn {
+      a {
+        font-size: 14px;
+      }
+      .btn_t {
+        width: 156px!important;
+      }
+    }
+  }
+}

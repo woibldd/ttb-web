@@ -215,6 +215,10 @@ button {
   outline: none!important;
   box-shadow: none!important;
 }
+*{
+  outline:none;
+  scrollbar-width: none;
+}
 @import "styles/reset.scss";
 @import "styles/index.scss";
 </style>
