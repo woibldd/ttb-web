@@ -4,27 +4,27 @@
       <div class="tab-left pull-left">
         <div  class="side-buy tab ">
           <label>{{$t('otc_side_1')}}</label>
+          <button class='btn_left'
+                  :class="{'active' : currency==='USDT','active-side': side===1  }"
+                  @click="setCurrency('USDT', 1)"
+          >USDT</button>
           <button
             class='btn_left'
             :class="{'active' : currency==='BTC','active-side': side===1 }"
             @click="setCurrency('BTC', 1)"
           >BTC</button>
-          <button class='btn_left'
-            :class="{'active' : currency==='USDT','active-side': side===1  }"
-          @click="setCurrency('USDT', 1)"
-          >USDT</button>
         </div>
         <div class="side-sell tab">
           <label>{{$t('otc_side_2')}}</label>
+          <button class='btn_left'
+                  :class="{'active' : currency==='USDT','active-side': side===2  }"
+                  @click="setCurrency('USDT', 2)"
+          >USDT</button>
           <button
             class='btn_left'
             :class="{'active' : currency==='BTC','active-side': side===2  }"
             @click="setCurrency('BTC', 2)"
           >BTC</button>
-          <button class='btn_left'
-            :class="{'active' : currency==='USDT','active-side': side===2  }"
-          @click="setCurrency('USDT', 2)"
-          >USDT</button>
         </div>
       </div>
       <div class="tab-right pull-right">
@@ -144,7 +144,7 @@ color:rgba(51,51,51,1);
           }
           .btn_left {
             &.active.active-side {
-              color:#09C989;
+              color:#01CED1;
               text-decoration: underline;
               font-weight: bold;
               font-size: 14px;

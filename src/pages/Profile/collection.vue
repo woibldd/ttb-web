@@ -1,6 +1,6 @@
 
 <template>
-  <div class="profile-container">
+  <div class="profile-container" style="margin-left: 0px">
     <div class="title-box">
       {{ $t('collection') }}
       <span class="chose_txt"> {{ $t('collection_cs') }}</span>
@@ -82,7 +82,7 @@
             </template>
           </div>
           <div class="btn">
-            <el-switch v-model="item.state" @change="change(item)"></el-switch>
+            <el-switch v-model="item.state" @change="change(item)" size="small"></el-switch>
             <!--<span class="close cs" @click="handle('update')">修改</span>-->
             <span class="close cs" @click="handleCol(item, 'remove')">删除</span>
           </div>
@@ -90,7 +90,7 @@
       </ul>
     </div>
     <!--弹出框-->
-    <el-dialog   @close="bock()"  
+    <el-dialog   @close="bock()"
       :title="type"
       :visible.sync="dialogVisible"
       :close-on-click-modal="modal"
@@ -392,12 +392,12 @@ export default {
             })
           }
         } else {
-          setTimeout(() => {
-             this.$refs[formName].resetFields()
-          }, 300)
           return false
         }
       })
+    },
+    bankHanle () {
+      this.$refs['ruleForm'].resetFields()
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()

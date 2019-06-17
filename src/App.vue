@@ -211,6 +211,10 @@ export default {
 }
 </script>
 <style lang="scss">
+button {
+  outline: none!important;
+  box-shadow: none!important;
+}
 @import "styles/reset.scss";
 @import "styles/index.scss";
 </style>

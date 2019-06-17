@@ -11,12 +11,12 @@
             <router-link
               to="/OTC/Trade"
               class="menu-name"
-              :class="{'active': currency === 'BTC' &&  from === 'trade'}"
+              :class="{'active': currency === 'USDT'  &&  from === 'trade' }"
             >
-              <div @click="setCurrency('BTC')">
+              <div @click="setCurrency('USDT')">
                 <p>
-                  {{$t('BTC')}}
-                  <span class="text-idx">{{ '￥' + user.btcCount}}</span>
+                  {{$t('USDT')}}
+                  <span class="text-idx">{{ '￥' + user.usdtCount}}</span>
                   <!--<span class="text-ixo">{{'-0.24%'}}</span>-->
                 </p>
               </div>
@@ -26,12 +26,12 @@
             <router-link
               to="/OTC/Trade"
               class="menu-name"
-              :class="{'active': currency === 'USDT'  &&  from === 'trade' }"
+              :class="{'active': currency === 'BTC' &&  from === 'trade'}"
             >
-              <div @click="setCurrency('USDT')">
+              <div @click="setCurrency('BTC')">
                 <p>
-                  {{$t('USDT')}}
-                  <span class="text-idx">{{ '￥' + user.usdtCount}}</span>
+                  {{$t('BTC')}}
+                  <span class="text-idx">{{ '￥' + user.btcCount}}</span>
                   <!--<span class="text-ixo">{{'-0.24%'}}</span>-->
                 </p>
               </div>
@@ -296,6 +296,9 @@ export default {
           color: $primary;
           background: $profile-menu-bg;
           box-shadow: inset 3px 0 0 0 $primary;
+          span {
+            color: $primary;
+          }
         }
       }
       .sub-menu-group {

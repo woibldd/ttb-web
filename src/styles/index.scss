@@ -315,3 +315,10 @@ $primary-color: #01CED1;
 .inline-block{
   display: inline-block;
 }
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+  background: $primary!important;
+}
+.el-switch.is-checked .el-switch__core {
+  border-color: $primary!important;
+  background-color: $primary!important;
+}

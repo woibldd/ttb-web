@@ -67,7 +67,7 @@ export default {
       transition: opacity 300ms;
     }
     .sideBar {
-      width: 480px;
+      width: 400px;
       background: black;
       position: absolute;
       top: 0px;
@@ -79,7 +79,7 @@ export default {
       font-size: 16px;
       transition: right 300ms;
       &.hide {
-        right: -480px;
+        right: -400px;
       }
     }
     .modal-wrap {

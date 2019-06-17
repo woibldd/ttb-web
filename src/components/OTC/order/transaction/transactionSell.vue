@@ -3,7 +3,7 @@
   <div class="otcaction">
     <!-- 吃单 -->
     <div v-if="operation===1" class="action-box"
-      :class="{'status_0': status === 0, 'status_1': status > 0}"
+         :class="{'status_0': status === 0, 'status_1': status > 0}"
     >
       <!-- 标题 -->
       <div class="action-title title sell">{{$t(sideTitle, {currency})}}</div>
@@ -23,9 +23,9 @@
         <!-- <span class="iconfont">&#xe72c;</span> -->
         <!-- 倒计时 -->
         <icon name="timer" />
-          {{$t('otc_overtime_tips_a1')}}
-          <count-down :terminal="interval" />，
-          {{$t('otc_overtime_tips_a2')}}取消订单
+        {{$t('otc_overtime_tips_a1')}}
+        <count-down :terminal="interval" />，
+        {{$t('otc_overtime_tips_a2')}}取消订单
       </div>
       <!-- 订单信息 -->
       <div v-if="step===0" class="action-order-info wrap">
@@ -75,8 +75,8 @@
                 :placeholder="$t('otc_amount_sale')"
               />
               <span class="btn-all"
-                @click="inputAll"
-                >{{$t('input_all')}}</span>
+                    @click="inputAll"
+              >{{$t('input_all')}}</span>
             </div>
           </li>
         </ul>
@@ -116,7 +116,6 @@ import countDown from "@/components/CountDown"
 import processValue from '@/mixins/process-otc-value'
 import { state } from "@/modules/store"
 import utils from "@/modules/utils.js"
-
 export default {
   data() {
     return {
@@ -130,7 +129,7 @@ export default {
       operation: 1, // 操作 1: 买/卖, 2: 发布委托
       operSide: 2, // 操作类型 1: 买 ,2: 卖
       step: 0, //步骤, 根据操作 和 类型 的不同,展示不同的结果
-     // timeEnd:  new Date(new Date() * 1 + 1000 * 60 * 20),// this.$moment().add(6,'minutes'),
+      // timeEnd:  new Date(new Date() * 1 + 1000 * 60 * 20),// this.$moment().add(6,'minutes'),
       selectPayIndex: -1,
       selectPayment: "",
       interval: 0,
@@ -335,7 +334,7 @@ export default {
       if(!this.view.price || this.view.price == ''){
         this.total = 0
       }
-      else {  
+      else {
         if (this.$big(this.amount).gt(this.$big(this.view.amount).minus(this.view.freezed))) {
           this.inputAll()
         } else {
@@ -361,9 +360,9 @@ export default {
   },
   watch: {
     show() {
-        this.total= ""
-        this.amount= ""
-        if (this.show === true) {
+      this.total= ""
+      this.amount= ""
+      if (this.show === true) {
         this.active_id = this.view.active_id;
         this.price = this.view.price;
       } else if(this.show === false) {
@@ -393,23 +392,22 @@ export default {
 </script>
 
 <style lang='scss'>
-.otcaction {
-  height: 100%;
-  .action-box {
-    &.status_0 {
-      height: calc(100% - 230px);
+  .otcaction {
+    height: 100%;
+    .action-box {
+      &.status_0 {
+        height: calc(100% - 230px);
+      }
+      &.status_1 {
+        height: 100%;
+      }
+      overflow: scroll;
     }
-    &.status_1 {
-      height: 100%;
+    .action-order{
+      &.footer {
+        z-index: 99999;
+        height: 180px;
+      }
     }
-    overflow: scroll;
   }
-  .action-order{
-    &.footer {
-      z-index: 99999;
-      height: 180px;
-    }
-  }
-}
- </style>
-
+</style>
