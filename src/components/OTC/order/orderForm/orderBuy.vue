@@ -894,6 +894,9 @@ export default {
     .order-otcaction .action-box ul li .label {
       margin-bottom: 0!important;
     }
+    .order-otcaction .action-box .ix-button {
+      border-radius: 8px!important;
+    }
     .UNA_li {
       line-height: 24px!important;
       margin: 0!important;
