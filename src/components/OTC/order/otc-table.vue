@@ -635,8 +635,8 @@ span.orange {
     font-size: 12px!important;
   }
   .entrust-order-container .otcaction .action-order ul .content .number-input.input {
-    height: 30px!important;
-    line-height: 30px!important;
+    height: 36px!important;
+    line-height: 36px!important;
   }
   .entrust-order-container .otcaction .action-order ul .label {
     font-size: 13px!important;
