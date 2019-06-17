@@ -221,4 +221,9 @@ button {
 }
 @import "styles/reset.scss";
 @import "styles/index.scss";
+@media (max-width: 1378px) {
+  .el-table td, .el-table th {
+    font-size: 12px!important;
+  }
+}
 </style>

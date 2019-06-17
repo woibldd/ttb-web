@@ -624,4 +624,26 @@ span.orange {
       }
     }
   }
+@media (max-width: 1378px) {
+  .entrust-order-container .otcaction .action-title{
+    font-size: 16px!important;
+  }
+  .entrust-order-container .otcaction .wrap table {
+    font-size: 12px!important;
+  }
+  .entrust-order-container .el-step__title{
+    font-size: 12px!important;
+  }
+  .entrust-order-container .otcaction .action-order ul .content .number-input.input {
+    height: 30px!important;
+    line-height: 30px!important;
+  }
+  .entrust-order-container .otcaction .action-order ul .label {
+    font-size: 13px!important;
+  }
+  .entrust-order-container .otcaction .action-order ul .content .btn-all {
+    bottom: 5px!important;
+    line-height: 28px!important;
+  }
+}
 </style>
