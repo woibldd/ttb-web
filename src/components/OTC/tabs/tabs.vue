@@ -166,4 +166,15 @@ color:rgba(51,51,51,1);
         }
       }
     }
+ @media (max-width: 1378px) {
+   .main-tabs-container .main-tabs-box .tab-right .btn {
+     padding: 7px 16px!important;
+   }
+   .main-tabs-container .main-tabs-box .tab-right .currency {
+     font-size: 12px!important;
+   }
+   .main-tabs-container .main-tabs-box label {
+     font-size: 12px!important;
+   }
+ }
 </style>

@@ -104,7 +104,8 @@
           style="  margin-left: 12px;margin-right: 8px;height: 14px;width: 14px;color: inherit;font-size: 0px;"
           name="inhsdgbnljkarf"
         />
-        {{ $t('otc_buy_tips_a') }} ！ {{ $t('otc_buy_tips_c') }}
+        <span v-html="$t('otc_buy_tips_a')"></span>！
+        <span v-html="$t('otc_buy_tips_c')"></span>
       </div>
       <div class="table-con">
         <template v-if="active === 0">
@@ -174,8 +175,8 @@
               <li>
                 <dl>
                   <dt>
-                    <b v-if="item.side === 1">卖手</b>
-                    <b v-else>买手</b>
+                    <b v-if="item.side === 1">卖家：</b>
+                    <b v-else>买家：</b>
                     <span>{{ item.name }}</span>
                   </dt>
                   <dd>
@@ -207,12 +208,12 @@
                     <template v-if="item.state !== 1">
                       <span v-if="item.otc_collection.alipay_account">{{ $t('payment_namezfb') }}</span>
                       <span
-                        v-if="item.otc_collection.we_chat_account"
+                        v-else-if="item.otc_collection.we_chat_account"
                       >{{ $t('payment_weChat_adasunt') }}</span>
-                      <span v-if="item.otc_collection.card_number">{{ $t('payment_nameyhk') }}</span>
+                      <span v-else-if="item.otc_collection.card_number">{{ $t('payment_nameyhk') }}</span>
                     </template>
                   </dt>
-                  <dd>
+                  <!-- <dd>
                     {{ $t('payment_name') }}：
                     <span>{{ item.otc_collection.name || '--' }}</span>
                   </dd>
@@ -236,12 +237,74 @@
                       {{ $t('payment_nameyhk') }}：
                       <span>{{ item.otc_collection.card_number }}</span>
                     </template>
-                  </dd>
+                  </dd> -->
+                  <div v-if='item.otc_collection'>
+                    <dd v-for='(payItem, index) in paymentHeaderList[item.otc_collection.payment_type]'
+                        :key='index'>
+                      <span>{{ $t(payItem.text) }}</span>
+                      <span>
+                        <span
+                          style="cursor: pointer;"
+                          v-if="payItem.key==='collection_img'"
+                          @click="openQR(item.otc_collection)">
+                          <icon name="qrcode" />
+                        </span>
+                        <span v-else>{{ processValue(payItem.key, item.otc_collection) }}</span>
+                      </span>
+                    </dd>
+                  </div>
                   <dd>
                     <a
                       href="javascript:;"
                       @click="detailHandle(item)">详情 ></a>
                   </dd>
+                </dl>
+                <dl v-if="item.state === 1 && item.side === 1 && !item.appeal && !item.other_appeal">
+                  <dt>
+                    <span>支付方式</span>
+                    <!-- <el-select v-model="item.bankId" size="small" style="width: 140px" @change="paySetHandle(item, item.bankId)">
+                      <el-option v-for="(bank, i) in item.bankArray" :key="i" :label="bank.name" :value="bank.id"></el-option>
+                    </el-select> -->
+                    <el-select
+                      style="width: 140px;"
+                      size="small"
+                      v-model="item.selectPayment"
+                      @change="changePayType(item)"
+                      value-key="collection_id">
+                      <el-option
+                        v-for="(bank, index) in item.otc_collection_list"
+                        :key="index"
+                        :label="processValue('payment_type', bank)"
+                        :value="bank"/>
+                    </el-select>
+                  </dt>
+                  <div v-if='item.selectPayment'>
+                    <dd v-for='(payItem, index) in paymentHeaderList[item.selectPayment.payment_type]'
+                        :key='index'>
+                      <span>{{ $t(payItem.text) }}</span>
+                      <span>
+                        <span
+                          style="cursor: pointer;"
+                          v-if="payItem.key==='collection_img'"
+                          @click="openQR(item.selectPayment)">
+                          <icon name="qrcode" />
+                        </span>
+                        <span v-else>{{ processValue(payItem.key, item.selectPayment) }}</span>
+                      </span>
+                    </dd>
+                  </div>
+                  <!-- <dd v-if="item.bankId">
+                    姓名:
+                    <span>{{ item.realName }}</span>
+                  </dd>
+                  <dd v-if="item.bankId">
+                    账号:
+                    <span>{{ item.pAccount }}</span>
+                  </dd>
+                  <dd v-if="item.bankId && item.paySet === 1">
+                    银行卡
+                    {{item.bankAccount}}
+                  </dd> -->
                 </dl>
                 <div
                   class="btn btn1"
@@ -266,12 +329,12 @@
                     <count-down
                       :terminal="item.time"
                       style="font-size: 12px;"/>
-                  </p>超时自动
-                  <b v-if="item.side === 1 && item.state === 1">取消订单</b>
-                  <b v-if="item.side === 2 && item.state === 1">取消订单</b>
-                  <b v-if="item.side === 1 && item.state === 2">放币</b>
-                  <b v-if="item.side === 2 && item.state === 2">放币</b>
-                  <b v-if="item.side === 1 && item.state === 7">放币</b>
+                  </p>
+                  <!--<b v-if="item.side === 1 && item.state === 1"></b>-->
+                  <b v-if="item.side === 2 && item.state === 1">超时自动取消订单</b>
+                  <b v-if="item.side === 1 && item.state === 2">超时自动放币</b>
+                  <b v-if="item.side === 2 && item.state === 2">超时自动放币</b>
+                  <b v-if="item.side === 1 && item.state === 7">超时自动放币</b>
                   <!--<span v-html="item.side === 1 && ? '取消订单' : '放币'"></span>-->
                 </div>
               </li>
@@ -304,12 +367,21 @@
         :text-code="active"
         :step-active="stepActive"
         :bank-data="bankData"
+        :bank-id="bankId"
         :close="closeFlag"
         @step-change="stepChange"
         @close-change="closeChange"
         @bank-change="bankChange"
       />
     </slide-model>
+    <v-modal :open.sync="showQRcode">
+      <div class="qr" >
+        <img
+          :src="qrsrc"
+          alt=""
+          style="max-height:600px;">
+      </div>
+    </v-modal>
   </div>
 </template>
 
@@ -338,7 +410,7 @@ export default {
           count: 0
         },
         {
-        name: this.$t('otc_tab_lisetr1'),
+          name: this.$t('otc_tab_lisetr1'),
           count: 0
         },
         {
@@ -346,7 +418,7 @@ export default {
           count: 0
         },
         {
-              name: this.$t('my_order'),
+          name: this.$t('my_order'),
           count: 0
         }
       ],
@@ -367,7 +439,63 @@ export default {
       bankId: '',
       timer: null,
       timers: null,
-      stepActive: false
+      stepActive: false,
+      paymentHeaderList: {
+        // 银行卡
+        1: [
+          {
+            title: 'name', // 姓名
+            text: 'payment_name',
+            width: '',
+            key: 'name'
+          },
+          {
+            title: 'card_number', // 银行卡号
+            text: 'payment_card_number',
+            width: '',
+            key: 'card_number'
+          },
+          {
+            title: 'deposit_bank', // 开卡行
+            text: 'payment_deposit_bank',
+            width: '',
+            key: 'deposit_bank'
+          }
+        ],
+        // 支付宝
+        2: [
+          {
+            title: 'alipay_account', // 支付宝账号
+            text: 'payment_alipay_account',
+            width: '',
+            key: 'alipay_account'
+          },
+          {
+            title: 'collection_img', // 收款二维码
+            text: 'payment_collection_img',
+            width: '',
+            key: 'collection_img'
+          }
+        ],
+        // 微信
+        3: [
+          {
+            title: 'we_chat_account', // 微信账号
+            text: 'payment_weChat_account',
+            width: '',
+            key: 'we_chat_account'
+          },
+          {
+            title: 'collection_img', // 收款二维码
+            text: 'payment_collection_img',
+            width: '',
+            key: 'collection_img'
+          }
+        ]
+      },
+      selectPayment: {},
+      qrsrc: '',
+      showQRcode: false,
     }
   },
   // computed: {
@@ -387,6 +515,13 @@ export default {
   //   }
   // },
   methods: {
+    changePayType (e) {
+      console.log(e)
+    },
+    openQR (pay) {
+      this.qrsrc = pay.collection_img
+      this.showQRcode = true
+    },
     orderSwtich (index) {
       if (this.data.length > 0) {
         this.orderActive = index
@@ -421,6 +556,7 @@ export default {
     },
     closeHadle (item) {
       this.detail = item
+      console.log(item)
       this.closeFlag = true
       this.stepActive = true
       this.dialogVisible = true
@@ -428,7 +564,12 @@ export default {
     bankChange (bank) {
       this.bankId = bank
     },
+    // Todo 待开发
+    paySetHandle (item, index) {
+      console.log(item, index)
+    },
     detailHandle (item) {
+      console.log({item})
       this.stepActive = false
       this.bankData = []
       this.closeFlag = false
@@ -442,8 +583,8 @@ export default {
             item.payment_type === 1
               ? item.deposit_bank
               : item.payment_type === 2
-                ? '支付宝'
-                : '微信'
+              ? '支付宝'
+              : '微信'
           const payAccount = item.alipay_account
             ? item.alipay_account
             : item.card_number
@@ -455,10 +596,11 @@ export default {
             obj: item
           })
         })
-        console.log(payData)
         this.bankData = payData
+        if (item.selectPayment) {
+          this.bankId = item.selectPayment.collection_id
+        }
       }
-      console.log(this.bankData)
       this.dialogVisible = true
     },
     closeChange () {
@@ -572,6 +714,7 @@ export default {
             that.data = rec.data.data
             that.total = rec.data.total
             let noCount = []
+            let bankData = []
             that.data.forEach((item) => {
               if (item.state === 1) {
                 Vue.set(item, 'time', item.create_time + 15 * 60 * 1000)
@@ -587,7 +730,51 @@ export default {
               }
               //
               if (item.otc_collection_list && !item.other_appeal && !item.appeal) noCount.push(item)
+              //
+              if (item.state === 1 && item.side === 1 && !item.appeal && !item.other_appeal) {
+                item.otc_collection_list.forEach((child) => {
+                  if (child.payment_type === 1) {
+                    bankData.push({
+                      id: child.collection_id,
+                      realName: child.name,
+                      name: child.deposit_bank + '/' + child.card_number
+                    })
+                  } else if (child.payment_type === 2) {
+                    bankData.push({
+                      id: child.collection_id,
+                      realName: child.name,
+                      name: '支付宝' + '/' + child.alipay_account,
+                      img: child.collection_img
+                    })
+                  } else {
+                    bankData.push({
+                      id: child.collection_id,
+                      realName: child.name,
+                      name: '微信' + '/' + child.we_chat_account,
+                      img: child.collection_img
+                    })
+                  }
+                  Vue.set(item, 'paySet', child.payment_type)
+                })
+                //支付方式默认选择银行卡
+                let paylist = item.otc_collection_list
+                if (paylist.length > 0) {
+                  let arr = paylist.filter(arg => arg.payment_type===1)
+                  if (arr.length > 0) {
+                    //this.selectPayment = arr[0]
+                    Vue.set(item, 'selectPayment', arr[0])
+                  }
+                }
+                console.log({item})
+
+                Vue.set(item, 'bankArray', bankData)
+                Vue.set(item, 'bankId', '')
+                Vue.set(item, 'pAccount', '')
+                Vue.set(item, 'realName', '')
+                Vue.set(item, 'bankAccount', '')
+              }
             })
+            console.log(that.data[0])
           }
           break
         case 1:
@@ -641,7 +828,7 @@ export default {
     setTimeInit () {
       this.timer = setInterval(() => {
         if (this.active === 0 || this.active === 3) {
-          this.init(this.active)
+          // this.init(this.active)
         }
       }, 3000)
     }
@@ -660,10 +847,10 @@ export default {
     // 定时器
     this.timers = setInterval(() => {
       service.getUnDonefills({
-        page: 1,
-        side: 0,
-        size: 999
-      }
+          page: 1,
+          side: 0,
+          size: 999
+        }
       ).then(res => {
         if (res.code === 0) {
           if (res.data.data.length > 0) {
@@ -680,7 +867,7 @@ export default {
           let noCount = []
           if (res.data.data.length > 0) {
             res.data.data.forEach((item) => {
-              if (item.state === 2) noCount.push(item)
+              noCount.push(item)
             })
           }
           Vue.set(this.tab[3], 'count', noCount.length)
@@ -691,5 +878,5 @@ export default {
 }
 </script>
 <style lang="scss" rel="stylesheet/scss" scoped>
-@import "./assets/scss/trade.scss";
+  @import "./assets/scss/trade.scss";
 </style>

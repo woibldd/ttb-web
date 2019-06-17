@@ -80,7 +80,10 @@
                 <span>订单号</span> <em>{{ textDetail.trans_id || '--' }}</em>
               </dd>
               <dd>
-                <span>下单时间</span><em>{{ textDetail.create_time || '--' }}</em>
+                <span>下单时间</span><em>
+                <!--{{ textDetail.create_time || '&#45;&#45;' }}-->
+                {{ processValue('create_time', textDetail) || '--' }}
+              </em>
               </dd>
               <dd>
                 <span>订单金额（CNY）</span><em style="color: #FDA22D">{{ textDetail.total || '--' }}</em>
@@ -121,7 +124,7 @@
               <dd>
                 <span>平均放币时间</span>
                 <em>{{ processValue('issue_time_avg', textDetail) || '--' }}</em>
-              <!--<em>{{textDetail.issue_time_avg || '&#45;&#45;'}}</em>-->
+                <!--<em>{{textDetail.issue_time_avg || '&#45;&#45;'}}</em>-->
               </dd>
               <dd>
                 <span><b v-html="textDetail.side === 1 ? '卖' : '买'"/>家提示</span>
@@ -140,21 +143,21 @@
                   <span>{{ textDetail.otc_collection.alipay_account ? '支付宝' : textDetail.otc_collection.we_chat_account ? '微信' : '银行卡' }}姓名</span>
                   <em>{{ textDetail.otc_collection.name || '--' }}</em>
                 </dd>
-              <!--<template v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0">-->
-              <!--<dd>-->
-              <!--<span>银行卡</span>-->
-              <!--<em>-->
-              <!--<el-select size="small" placeholder="请选择" v-model="form.bankId" @change="bankHandle">-->
-              <!--<el-option v-for="(item, index) in bankData" :key="index" :label="item.deposit_bank" :value="item.collection_id"></el-option>-->
-              <!--</el-select>-->
-              <!--</em>-->
-              <!--</dd>-->
-              <!--<template v-if="changeFlag">-->
-              <!--<dd>-->
-              <!--<span></span>-->
-              <!--</dd>-->
-              <!--</template>-->
-              <!--</template>-->
+                <!--<template v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0">-->
+                <!--<dd>-->
+                <!--<span>银行卡</span>-->
+                <!--<em>-->
+                <!--<el-select size="small" placeholder="请选择" v-model="form.bankId" @change="bankHandle">-->
+                <!--<el-option v-for="(item, index) in bankData" :key="index" :label="item.deposit_bank" :value="item.collection_id"></el-option>-->
+                <!--</el-select>-->
+                <!--</em>-->
+                <!--</dd>-->
+                <!--<template v-if="changeFlag">-->
+                <!--<dd>-->
+                <!--<span></span>-->
+                <!--</dd>-->
+                <!--</template>-->
+                <!--</template>-->
               </template>
             </dl>
           </div>
@@ -205,10 +208,15 @@
               <dd v-if="activeItem.img">
                 <span>支付图片</span>
                 <em>
-                  <img
+                  <!-- <img
                     :src="activeItem.img"
                     alt=""
-                    style="width: 60px;height: 60px;zoom: 1">
+                    style="width: 60px;height: 60px;zoom: 1"> -->
+                  <span
+                    style="cursor: pointer;"
+                    @click="openQR(activeItem.img)">
+                    <icon name="qrcode" />
+                  </span>
                 </em>
               </dd>
             </template>
@@ -219,7 +227,6 @@
             <dl>
               <dt>
                 <em>委托单信息</em>
-
               </dt>
               <dd>
                 <span>类型</span> <em>{{ textDetail.type === 1 ? '固定价格' : '浮动价格' }}</em>
@@ -234,7 +241,13 @@
                 <span>数量</span><em>{{ textDetail.amount || '--' }}</em>
               </dd>
               <dd>
-                <span>对手认证等级</span><em style="color: #FDA22D">{{ textDetail.kyc_level || '--' }}</em>
+                <span>总金额(CNY)</span><em>{{ textDetail.total || '--' }}</em>
+              </dd>
+              <dd>
+                <span>平台服务费</span><em>限时免费</em>
+              </dd>
+              <dd>
+                <span>对手认证等级</span><em style="color: #FDA22D">{{ 'KYC' + textDetail.kyc_level || '--' }}</em>
               </dd>
             </dl>
           </div>
@@ -268,7 +281,7 @@
                 <dd>
                   <span>平均放币时间</span>
                   <em>{{ processValue('issue_time_avg', textDetail) || '--' }}</em>
-                <!--<em>{{textDetail.issue_time_avg || '&#45;&#45;'}}</em>-->
+                  <!--<em>{{textDetail.issue_time_avg || '&#45;&#45;'}}</em>-->
                 </dd>
                 <dd>
                   <span><b v-html="textDetail.side === 1 ? '卖' : '买'"/>家提示</span>
@@ -287,21 +300,21 @@
                     <span>{{ textDetail.otc_collection.alipay_account ? '支付宝' : textDetail.otc_collection.we_chat_account ? '微信' : '银行卡' }}姓名</span>
                     <em>{{ textDetail.otc_collection.name || '--' }}</em>
                   </dd>
-                <!--<template v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0">-->
-                <!--<dd>-->
-                <!--<span>银行卡</span>-->
-                <!--<em>-->
-                <!--<el-select size="small" placeholder="请选择" v-model="form.bankId" @change="bankHandle">-->
-                <!--<el-option v-for="(item, index) in bankData" :key="index" :label="item.deposit_bank" :value="item.collection_id"></el-option>-->
-                <!--</el-select>-->
-                <!--</em>-->
-                <!--</dd>-->
-                <!--<template v-if="changeFlag">-->
-                <!--<dd>-->
-                <!--<span></span>-->
-                <!--</dd>-->
-                <!--</template>-->
-                <!--</template>-->
+                  <!--<template v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0">-->
+                  <!--<dd>-->
+                  <!--<span>银行卡</span>-->
+                  <!--<em>-->
+                  <!--<el-select size="small" placeholder="请选择" v-model="form.bankId" @change="bankHandle">-->
+                  <!--<el-option v-for="(item, index) in bankData" :key="index" :label="item.deposit_bank" :value="item.collection_id"></el-option>-->
+                  <!--</el-select>-->
+                  <!--</em>-->
+                  <!--</dd>-->
+                  <!--<template v-if="changeFlag">-->
+                  <!--<dd>-->
+                  <!--<span></span>-->
+                  <!--</dd>-->
+                  <!--</template>-->
+                  <!--</template>-->
                 </template>
               </dl>
             </div>
@@ -350,7 +363,7 @@
           <a
             href="javascript:;"
             class="btn_t"
-            @click="stepHandle('money')">我已付款</a>
+            @click="stepHandle('money')">确认付款</a>
         </template>
         <template v-if="textDetail.side === 2 && textDetail.state === 2 && textDetail.state !== 7 && !textDetail.appeal && !textDetail.other_appeal && textCode === 0">
           <!--<div class="tips">确认收到买家付款后请及时点击【确认放币】，否则请勿点击</div>-->
@@ -364,6 +377,13 @@
         <!--</template>-->
       </template>
     </div>
+    <v-modal :open.sync="showQRcode">
+      <div class="qr" >
+        <img
+          :src="qrsrc"
+          style="max-height:600px;">
+      </div>
+    </v-modal>
   </div>
 </template>
 
@@ -372,7 +392,7 @@ import {tradeMixins} from './mixins'
 import countDown from '@/components/CountDown'
 import processValue from '@/mixins/process-otc-value.js'
 export default {
-  props: ['textDetail', 'bankData', 'textCode', 'close', 'stepActive'],
+  props: ['textDetail', 'bankData', 'textCode', 'close', 'stepActive', 'bankId'],
   mixins: [tradeMixins, processValue],
   data () {
     return {
@@ -380,13 +400,19 @@ export default {
       form: {
         bankId: '',
         activeItem: {}
-      }
+      },
+      qrsrc: '',
+      showQRcode: false,
     }
   },
   components: {
     countDown
   },
   methods: {
+    openQR (collection_img) {
+      this.qrsrc = collection_img
+      this.showQRcode = true
+    },
     stepHandle (type) {
       this.$emit('step-change', type)
     },
@@ -414,7 +440,22 @@ export default {
       this.$emit('bank-change', this.form.bankId)
     }
   },
-  created () {
+  watch: {
+    bankData() {
+      console.log(this.bankData)
+      //默认选择银行卡支付
+      if (this.bankId) {
+        this.form.bankId = this.bankId
+        this.bankHandle()
+      }
+      else if (this.bankData && this.bankData.length > 0) {
+        let arr = this.bankData.filter(arg => arg.obj.payment_type===1)
+        if (arr.length > 0) {
+          this.form.bankId = arr[0].collection_id
+        }
+        this.bankHandle()
+      }
+    }
   }
 }
 </script>

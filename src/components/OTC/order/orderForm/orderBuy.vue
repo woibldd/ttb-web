@@ -841,7 +841,7 @@ export default {
     font-family: PingFangSC-Regular;
     font-weight: 400;
     color: rgba(41, 91, 220, 1);
-    margin-bottom: 15px;
+    /*margin-bottom: 15px;*/
     > a {
       color: rgba(41, 91, 220, 1);
       font-size: 14px;
@@ -853,6 +853,12 @@ export default {
     overflow: hidden;
   }
   @media (max-width: 1378px) {
+    .MoreSettings {
+      > a {
+        font-size: 12px;
+        margin-right: 0!important;
+      }
+    }
     .order-otcaction {
       .action-title {
         font-size: 16px!important;
@@ -861,8 +867,13 @@ export default {
         height: 40px!important;
         line-height: 40px!important;
       }
+      .btn-left {
+        /*margin-right: 20px!important;*/
+        border-radius: 8px;
+        font-size: 12px;
+      }
       .action-box ul li .label {
-        font-size: 13px;
+        font-size: 12px;
       }
     }
     .ix-button {
@@ -871,6 +882,7 @@ export default {
     .el-input__inner {
       height: 32px!important;
       line-height: 32px!important;
+      font-size: 12px!important;
     }
     .order-otcaction .action-button-group {
       margin-top: 16px!important;
@@ -883,7 +895,11 @@ export default {
       margin-bottom: 0!important;
     }
     .UNA_li {
-      line-height: 1;
+      line-height: 24px!important;
+      margin: 0!important;
+      .unit-label {
+        line-height: 24px!important;
+      }
     }
   }
 </style>
