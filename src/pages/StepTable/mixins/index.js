@@ -16,11 +16,11 @@ export const tradeMixins = {
       detail: {},
       orderHeader: [
         {
-          label: '订单号',
+          label: this.$t('otc_trans_id'),
           prop: 'trans_id'
         },
         {
-          label: '类型',
+            label: this.$t('order_th_type'),
           prop: 'side',
           render: (h, params) => {
             const state = params.row.side
@@ -34,18 +34,18 @@ export const tradeMixins = {
           }
         },
         {
-          label: '状态',
+            label: this.$t('state'),
           prop: 'state',
           render: (h, params) => {
             return h('div', this.state(params.row.state))
           }
         },
         {
-          label: '币种',
+            label: this.$t('otc_currency'),
           prop: 'symbol'
         },
         {
-          label: '价格',
+            label: this.$t('price'),
           prop: 'price',
           render: (h, params) => {
             let spiltName = params.row.symbol.split('/')
@@ -54,7 +54,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: '数量',
+            label: this.$t('amount'),
           prop: 'amount',
           render: (h, params) => {
             let name = params.row.amount + '   ' + params.row.currency
@@ -62,7 +62,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: '金额',
+            label: this.$t('order_value'),
           prop: 'total',
           render: (h, params) => {
             let spiltName = params.row.symbol.split('/')
@@ -71,7 +71,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: '下单时间',
+            label: this.$t('otc_create_time'),
           prop: 'create_time',
           width: 180,
           render: (h, params) => {
@@ -79,18 +79,18 @@ export const tradeMixins = {
           }
         },
         {
-          label: '操作',
+            label: this.$t('actions'),
           prop: 'trans_id',
           render: this.tradeActions
         }
       ],
       tradeHeader: [
         {
-          label: '委托单号',
+            label: this.$t('otc_active_id'),
           prop: 'active_id'
         },
         {
-          label: '类型',
+            label: this.$t('order_th_type'),
           prop: 'side',
           render: (h, params) => {
             const state = params.row.side
@@ -104,7 +104,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: '委托单价',
+            label: this.$t('order_th_capedasda'),
           prop: 'price',
           render: (h, params) => {
             let spiltName = params.row.symbol.split('/')
@@ -113,7 +113,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: '委托数量/成交数量',
+            label: this.$t('order_th_capeaxcvb'),
           prop: 'side',
           width: 160,
           render: (h, params) => {
@@ -122,7 +122,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: '委托金额/成交金额',
+            label: this.$t('order_th_capehjiky'),
           width: 160,
           prop: 'side',
           render: (h, params) => {
@@ -132,14 +132,14 @@ export const tradeMixins = {
           }
         },
         {
-          label: '状态',
+            label: this.$t('order_th_status'),
           prop: 'state',
           render: (h, params) => {
             return h('div', this.orderState(params.row.state))
           }
         },
         {
-          label: '发布时间',
+            label: this.$t('order_th_capeqqewc'),
           prop: 'create_time',
           width: 180,
           render: (h, params) => {
@@ -147,7 +147,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: '操作',
+            label: this.$t('actions'),
           prop: 'id',
           width: 140,
           render: this.tradeActions
