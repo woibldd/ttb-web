@@ -36,6 +36,7 @@
       <pair-table
         :sorted-list="sortedList"
         @searching="onSearching"
+        @switchTab="onSwitchTab"
         :get-delta="getDelta"/>
       <div
         class="mask"
@@ -79,7 +80,94 @@
 
       </div>
     </div>
+    <div class="corperator">
+      <div class="corperator-container"> 
+        <div class="corp-row row-60 mb-60">
+          <div
+            class="corp-title"
+            v-t="'footer_partners'"/>
+          <div class="corp-logo">
+            <span
+              class="link" 
+              target="_blank">
+              <img
+                class="logo cw"
+                src="~@/assets/copr-logo-cw.png">
+            </span>
+          </div>
+          <div class="corp-logo">
+            <span
+              class="link" 
+              target="_blank">
+              <img
+                class="logo hl"
+                src="~@/assets/copr-logo-hl.png">
+            </span>
+          </div>
+          <div class="corp-logo">
+            <span
+              class="link" 
+              target="_blank">
+              <img
+                class="logo hx"
+                src="~@/assets/copr-logo-hx.png" >
+            </span>
+          </div>
+          <div class="corp-logo">
+            <span
+              class="link" 
+              target="_blank">
+              <img
+                class="logo js"
+                src="~@/assets/copr-logo-js.png">
+            </span>
+          </div>
+          <div class="corp-logo">
+            <span
+              class="link" 
+              target="_blank">
+              <img
+                class="logo he"
+                src="~@/assets/copr-logo-he.png">
+            </span>
+          </div>
+          <div class="corp-logo">
+            <span
+              class="link" 
+              target="_blank">
+              <img
+                class="logo blk"
+                src="~@/assets/copr-logo-blk.png">
+            </span>
+          </div>
+        </div>
 
+        <div class="corp-row row-20">
+          <div
+            class="corp-title">
+            {{ $t('footer_copr') }}
+          </div>
+          <div class="corp-logo">
+            <span
+              class="link" 
+              target="_blank">
+              <img
+                class="logo dvp"
+                src="~@/assets/copr-logo-dvp.png" >
+            </span>
+          </div>
+          <div class="corp-logo">
+            <span
+              class="link" 
+              target="_blank">
+              <img
+                class="logo hx"
+                src="~@/assets/copr-logo-cs.png" >
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 </template>
@@ -102,7 +190,7 @@ export default {
         loop: true,
         autoplay: 1000,
         paginationType: 'fraction',
-        pagination: '.swiper-pagination'
+        pagination: '.swiper-pagination',
       },
       hasNewNotice: false,
       pairsHead: [
@@ -113,14 +201,14 @@ export default {
         {key: 'homechart_24h_h', name: this.$t('homechart_24h_h')},
         {key: 'homechart_24h_v', name: this.$t('homechart_24h_v')},
         {key: 'actions', name: this.$t('actions')}
-      ]
+      ], 
     }
   },
   components: {
     kSlider: Slider,
     PairTable,
     PairRankTable,
-    MineSummary
+    MineSummary, 
     // Kyc
   },
   computed: {
@@ -129,7 +217,10 @@ export default {
     },
     isKorean () {
       return state.locale === 'ko'
-    }
+    },
+    // tabSelected () {
+    //   return state.tabSelected
+    // },
   },
   watch: {
     'state.locale' (locale) {
@@ -157,6 +248,10 @@ export default {
     },
     onSearching (kw) {
       this.search = kw
+    },
+    onSwitchTab (val) {
+      // console.log('switchTab')
+      // this.state.tabSelected = val
     }
   },
   created () {

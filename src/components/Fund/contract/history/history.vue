@@ -94,7 +94,8 @@
             {{ $t('contract_assign_price') }}
           </th>
           <th class="table__th">
-            已实现盈亏
+            <!-- 已实现盈亏 -->
+            {{ $t('contract_result_yet')}}
           </th>
           <!-- 委托ID -->
           <th class="table__th">
@@ -355,6 +356,13 @@ export default {
 </style>
 <style lang="scss" scoped>
 @import './history.scss';
+
+.table__th {
+  text-align: center;
+}
+.table__td {
+  white-space: nowrap;
+}
 .history__footer {
         width: 100%;
         border-top: 1px solid #CCCCCC;

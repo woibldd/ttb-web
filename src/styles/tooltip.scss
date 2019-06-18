@@ -107,6 +107,18 @@
         z-index: 1;
       }
     }
+    &.assets {
+      .tooltip-inner {
+        color: #23CED0;
+        background: rgba(211, 245, 246, .9); 
+        border-radius:4px;
+        padding: 6px 10px;
+        width: 130px;
+      }
+      .tooltip-arrow { 
+        border-color: rgba(211, 245, 246, .9); 
+      }
+    }
     .tooltip-inner {
       background:rgba(255,255,255,1);
       box-shadow:0px 3px 8px 0px rgba(196,196,196,1);

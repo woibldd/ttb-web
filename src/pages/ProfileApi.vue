@@ -2,7 +2,7 @@
   <div class="user-center-right mb-30">
     <div class="profile-container">
       <div class="title-box">{{ $t('api_management') }}
-        <div class="pull-right tips title-box-right">
+        <!-- <div class="pull-right tips title-box-right">
           <div class="mr-20">
             <a
               :href="robotUsageUrl"
@@ -19,7 +19,7 @@
               <icon name='anchor'/>
             </a>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="api-box mb-30">
         <div class="api-ul">
@@ -55,9 +55,9 @@
         <div class="api-tips__lead"><span class="dot"/>{{ $t('note') }}</div>
         <div class="api-tips__row"><span v-html="$t('api_tips_one', {link: apiDoc})"/></div>
         <div class="api-tips__row">{{ $t('api_tips_two') }}</div>
-        <div
+        <!-- <div
           class="api-tips__row"
-          v-html="$t('api_tips_three', {link: hasApiLink})"/>
+          v-html="$t('api_tips_three', {link: hasApiLink})"/> -->
         <div class="api-tips__row">{{ $t('api_tips_four') }}</div>
       </div>
     </div>

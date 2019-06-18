@@ -259,7 +259,11 @@ export default {
         if (res.code || res.data.length === 0) {
           this.loading = false
         } else {
-          this.tableData = res.data
+          if(this.type === 'all' || from === 'reward') { 
+            this.tableData = res.data.data
+          } else {
+            this.tableData = res.data
+          }
           this.loading = false
         }
       })

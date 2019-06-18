@@ -236,8 +236,8 @@ export default{
       issue_circulation: '3300万', // 流通总量
       token_price: '0.015~0.02USD', // 众筹价格
       whitepagger: 'http://www.beb.world/BEB-Chinese%20.pdf', // 白皮书
-      office_website: 'www.bitbeb.com', // 官网
-      chain_info: 'https://etherscan.io/token/0x995ff3562692349e78001c9e37414919e65ff04b' // 区块查询
+      office_website: 'http://www.bitbeb.com/', // 官网
+      chain_info: 'https://etherscan.io/address/0x6798cc8ad079a7e663536f83ee26d63aabe03da9' // 区块查询
     },
     'en': {
       name: 'BEB',
@@ -248,8 +248,8 @@ export default{
       issue_circulation: '--', // 流通总量
       token_price: '0.015~0.02USD', // 众筹价格
       whitepagger: 'http://www.beb.world/BEB-Chinese%20.pdf', // 白皮书
-      office_website: 'www.bitbeb.com', // 官网
-      chain_info: 'https://etherscan.io/token/0x995ff3562692349e78001c9e37414919e65ff04b' // 区块查询
+      office_website: 'http://www.bitbeb.com/', // 官网
+      chain_info: 'https://etherscan.io/address/0x6798cc8ad079a7e663536f83ee26d63aabe03da9' // 区块查询
     }
   },
   IMCC: {
@@ -477,6 +477,409 @@ export default{
       whitepagger: '', // 白皮书
       office_website: 'https://litecoin.com/', // 官网
       chain_info: 'https://live.blockcypher.com/ltc/' // 区块查询
+    }
+
+  },
+  ITD: {
+    'zh-CN': {
+      name: 'ITD',
+      full_name: 'International Tourism DAPP',
+      brief_info: 'ITD是旨在打造旅游结算通证，为了让 ITD 项目生态系统更加完美运行，团队发行权益通证（ITD）以奖励为生态系统的信息建设做出贡献的用户，系统Token（即ITD）前期是基于以太公网发行的权益通证，后期待ITD公链开发完成后，都可以与公有链网络按照 1：1 的比例实行兑换。前期以太坊区块链是基于区块链技术实现的，开源的、公共维护的分布式计算底层系统，另外提供的去中心化的虚拟机，来支持图灵完备的智能合约运行。总计发放权益通证数量1亿枚。应用在全球区块链旅游生态系统中',
+      issue_time: '2018-7-1',
+      issue_all: '1亿', // 发行总量
+      issue_circulation: '3500万', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.itdapp.org/en.html', // 白皮书
+      office_website: 'http://www.itdapp.org/en.html', // 官网
+      chain_info: 'https://etherscan.io/token/0x8df333fe2116929df10025c0c0facc1be7a44cbc#writeContract' // 区块查询
+    },
+    'zh-HK': { 
+      name: 'ITD',
+      full_name: 'International Tourism DAPP',      
+      brief_info: 'ITD是旨在打造旅遊結算通證，為了讓 ITD 項目生態系統更加完美運行，團隊發行權益通證（ITD）以獎勵為生態系統的信息建設做出貢獻的用戶，系統Token（即ITD）前期是基於以太公網發行的權益通證，後期待ITD公鏈開發完成後，都可以與公有鏈網絡按照 1：1 的比例實行兌換。前期以太坊區塊鏈是基於區塊鏈技術實現的，開源的、公共維護的分布式計算底層系統，另外提供的去中心化的虛擬機，來支持圖靈完備的智能合約運行。總計發放權益通證數量1億枚。應用在全球區塊鏈旅遊生態系統中',
+      issue_time: '2018-7-1',
+      issue_all: '1億', // 发行总量
+      issue_circulation: '3500萬', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.itdapp.org/en.html', // 白皮书
+      office_website: 'http://www.itdapp.org/en.html', // 官网
+      chain_info: 'https://etherscan.io/token/0x8df333fe2116929df10025c0c0facc1be7a44cbc#writeContract' // 区块查询
+    },
+    'en': { 
+      name: 'ITD',
+      full_name: 'International Tourism DAPP',
+      brief_info: 'ITD is designed to create a tourism settlement certificate. In order to make the ITD project ecosystem run better, the team issues the rights and benefits certificate (ITD) to reward users who contribute to the information construction of the ecosystem.  ITD) was based on the Equity Pass issued by Ethernet. After the completion of the ITD public chain development, it can be exchanged with the public chain network in a 1:1 ratio. The previous Ethereum blockchain is based on blockchain technology, open source, public maintained distributed computing underlying system, and a decentralized virtual machine to support complete smart contract operation. A total of 100 million certificates were issued.  Applied in the global blockchain tourism ecosystem.',
+      issue_time: '2018-7-1',
+      issue_all: '100 million', // 发行总量
+      issue_circulation: '35 million', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.itdapp.org/en.html', // 白皮书
+      office_website: 'http://www.itdapp.org/en.html', // 官网
+      chain_info: 'https://etherscan.io/token/0x8df333fe2116929df10025c0c0facc1be7a44cbc#writeContract' // 区块查询
+    },
+    'ko': { 
+      name: 'ITD',
+      full_name: 'International Tourism DAPP',
+      brief_info: '코인종류 소개:  ITD 는 이기성 만 관광 결제 통증을 지원할수  있도록 ITD 사업 생태 시스템 보다 월등하다 .운행을 팀 발행 권익 통 증 (ITD) 포상 을 생태 시스템 은 정보 건설 에 기여 한 사용자 를 시스템 TOKEN (즉 ITD) 용 전기 가 깔 려 있다 인터넷 발행의 권익 통증 후 기대 ITD 공 사슬 개발 이 완료 된 뒤 할 수도 있다 는 지적 과 공유 사슬 인터넷 대로 1 대 1 무승부 는 비례 교환 했 다.전기 에타이팡 블록슬은 블록슬의 기술을 기반으로, 오픈 소스, 공공 수호의 하부 시스템, 또한 제공된 센터링 가상 머신, 완벽한 지적 계약 운영을 지원합니다.권익증서발급총량은 1억개이다.전 세계 관광 생태계에 응용되다',
+      issue_time: '2018-7-1',
+      issue_all: '100 million', // 发行总量
+      issue_circulation: '35 million', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.itdapp.org/en.html', // 白皮书
+      office_website: 'http://www.itdapp.org/en.html', // 官网
+      chain_info: 'https://etherscan.io/token/0x8df333fe2116929df10025c0c0facc1be7a44cbc#writeContract' // 区块查询
+    }
+  },
+  HDN: {
+    'zh-CN': {
+      name: 'HDN',
+      full_name: 'HALADINAR (HDN)',
+      brief_info: 'HALADINAR (HDN)是一个环球去中心化在线商城，旨在为世界各地的穆斯林和非穆斯林社区提供服务。  HALADINAR在线的所有商品和服务都是具有清真标志的。',
+      issue_time: '2018-7-1',
+      issue_all: '10亿', // 发行总量
+      issue_circulation: '4500万', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://haladinar.io/hdn/resources.html', // 白皮书
+      office_website: 'https://haladinar.io/hdn/index.html', // 官网
+      chain_info: 'https://etherscan.io/token/0xfe73a07fa11ba0a8480159f405d35d0b55f826e8' // 区块查询
+    },
+    'zh-HK': {   
+        name: 'HDN',
+        full_name: 'HALADINAR (HDN)',
+        brief_info: 'HALADINAR（HDN）是壹個環球去中心化在線商城，旨在為世界各地的穆斯林和非穆斯林社區提供服務。  HALADINAR在線的所有商品和服務都是具有清真標誌的。',
+        issue_time: '2018-7-1',
+        issue_all: '10億', // 发行总量
+        issue_circulation: '4500萬', // 流通总量
+        token_price: '--', // 众筹价格
+        whitepagger: 'https://haladinar.io/hdn/resources.html', // 白皮书
+        office_website: 'https://haladinar.io/hdn/index.html', // 官网
+        chain_info: 'https://etherscan.io/token/0xfe73a07fa11ba0a8480159f405d35d0b55f826e8' // 区块查询
+    },
+    'en': {  
+        name: 'HDN',
+        full_name: 'HALADINAR (HDN)',
+        brief_info: 'HALADINAR is a global platform and online decentralized marketplace designed to serve both the Muslim and non-Muslim communities anywhere in the world. Goods and services in the HALADINAR Marketplace are Halal, Thoyyiban and Mubarakan.',
+        issue_time: '2018-7-1',
+        issue_all: '1000 million', // 发行总量
+        issue_circulation: '45 million', // 流通总量
+        token_price: '--', // 众筹价格
+        whitepagger: 'https://haladinar.io/hdn/resources.html', // 白皮书
+        office_website: 'https://haladinar.io/hdn/index.html', // 官网
+        chain_info: 'https://etherscan.io/token/0xfe73a07fa11ba0a8480159f405d35d0b55f826e8' // 区块查询
+       },
+    'ko': {  
+        name: 'HDN',
+        full_name: 'HALADINAR (HDN)',
+        brief_info: 'HALADINAR (HDN)는 세계 각지의 무슬림과 비무슬림 지역사회에 서비스를 제공하기 위하여 전 세계에서 중심 쇼핑몰을 가는 것이다.HALADINAR 온라인 모든 상품과 서비스는 리얼 마크가 들어가 있습니다.',
+        issue_time: '2018-7-1',
+        issue_all: '1000 million', // 发行总量
+        issue_circulation: '45 million', // 流通总量
+        token_price: '--', // 众筹价格
+        whitepagger: 'https://haladinar.io/hdn/resources.html', // 白皮书
+        office_website: 'https://haladinar.io/hdn/index.html', // 官网
+        chain_info: 'https://etherscan.io/token/0xfe73a07fa11ba0a8480159f405d35d0b55f826e8' // 区块查询
+    }
+  },
+  BNL: {
+    'zh-CN': {
+      name: 'BNL',
+      full_name: 'BNL商务链',
+      brief_info: 'BNL商务链，是全球首个智能、透明、开放、诚信的“商务领域泛交易生态平台”的基础公链，是区块链技术、AI技术及AR技术在“智能商务传媒”与“智能商务泛交易全体系”等商务领域的创新应用。BNL商务领域公链将创造性地运用AI及AR技术 和GAN算法混合共识机制的挖矿方式，在主网上线后落地首个去中介化区块链AR广告的DAPP，率先打破现有公链没有大规模商业应用的局面。',
+      issue_time: '2018-9-19',
+      issue_all: '10亿', // 发行总量
+      issue_circulation: '700万', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.bnlio.io/upload/Plupload/File_616/20180817131656671.pdf', // 白皮书
+      office_website: 'www.bnlio.io', // 官网
+      chain_info: 'https://etherscan.io/token/0x7109eca95daa8f04ddeef3a941fc9bd85bd1510f' // 区块查询
+    },
+    'zh-HK': {   
+        name: 'BNL',
+        full_name: 'BNL商務鏈',
+        brief_info: 'BNL商務鏈，是全球首個智能、透明、開放、誠信的“商務領域泛交易生態平臺”的基礎公鏈，是區塊鏈技術、AI技術及AR技術在“智能商務傳媒”與“智能商務泛交易全體系”等商務領域的創新應用。BNL商務領域公鏈將創造性地運用AI及AR技術 和GAN算法混合共識機制的挖礦方式，在主網上線後落地首個去中介化區塊鏈AR廣告的DAPP，率先打破現有公鏈沒有大規模商業應用的局面。 ',
+        issue_time: '2018-9-19',
+        issue_all: '10億', // 发行总量
+        issue_circulation: '700萬', // 流通总量
+        token_price: '--', // 众筹价格
+        whitepagger: 'http://www.bnlio.io/upload/Plupload/File_616/20180817131656671.pdf', // 白皮书
+        office_website: 'www.bnlio.io', // 官网
+        chain_info: 'https://etherscan.io/token/0x7109eca95daa8f04ddeef3a941fc9bd85bd1510f' // 区块查询
+      },
+    'en': {  
+        name: 'BNL',
+        full_name: 'BNL Business Chain',
+        brief_info: 'BNL Business Chain is the world\'s first intelligent, transparent, open and honest "business platform pan-transaction eco-platform" basic public chain, blockchain technology, AI technology and AR technology in "smart business media" and "smart business"  Innovative applications in the business sector such as the Pan-Transaction System.  BNL business domain public chain will creatively use the mining method of and AR technology and GAN algorithm mixed consensus mechanism. After the main line launched, the first DAPP to de-intermediate blockchain AR advertisement will be the first to break the existing public chain.  The situation of large-scale commercial applications.',
+        issue_time: '2018-9-19',
+        issue_all: '1000 million', // 发行总量
+        issue_circulation: '7,000,000', // 流通总量
+        token_price: '--', // 众筹价格
+        whitepagger: 'http://www.bnlio.io/upload/Plupload/File_616/20180817131656671.pdf', // 白皮书
+        office_website: 'www.bnlio.io', // 官网
+        chain_info: 'https://etherscan.io/token/0x7109eca95daa8f04ddeef3a941fc9bd85bd1510f' // 区块查询
+         },
+    'ko': {  
+        name: 'BNL',
+        full_name: 'BNL 비즈니스 체인',
+        brief_info: 'BNL 비즈니스 체인, 전 세계 최초의 지능, 투명, 개방, 성실의"비즈니스 분야 범거래 생태 플랫폼"의 기초 공공 체인, 지역 체인 기술, AI 기술 및 AR 기술은"스마트 비즈니스 커뮤니케이션"과"스마트 비즈니스 범거래 시스템"등 비즈니스 분야에서 혁신적인 응용이다.BNL 비즈니스 영역의 공사슬은 창조적으로 AI 및 AR 기술과 GAN 알고리즘이 혼재된 공동 인식기제를 운용하는 채광 방식을 운용하여, 주망에 접속하고 최초로 블록체인 AR 광고의 DAPP를  중개하고, 먼저 기존 공사슬이 대규모 상업이 적용되지 않는 국면을 타파할 것이다.',
+        issue_time: '2018-9-19',
+        issue_all: '1000 million', // 发行总量
+        issue_circulation: '7,000,000', // 流通总量
+        token_price: '--', // 众筹价格
+        whitepagger: 'http://www.bnlio.io/upload/Plupload/File_616/20180817131656671.pdf', // 白皮书
+        office_website: 'www.bnlio.io', // 官网
+        chain_info: 'https://etherscan.io/token/0x7109eca95daa8f04ddeef3a941fc9bd85bd1510f' // 区块查询
+      }
+  },
+  DSA: {
+    'zh-CN': {
+      name: 'DSA',
+      full_name: ' DSA(Distributed Survey Accelerator)',
+      brief_info: '分布式众调加速器 DSA（Distributed Survey Accelerator）是一个匿名的分布式民意调查平台，致力于为全球的区块链项目提供去中心化的众调评级服务。DSA 将始终秉持 “匿名”、“自治”、“不作恶” 精神，通过人工智能和区块链技术，为投资者提供一个中立的信息披露平台，净化区块链行业投资环境，保护投资者利益。独有的社区激励机制和 DSA 指数，促进投资方、项目方、用户之间共识互助，重塑区块链协调关系，打造共享信息新方式。 ',
+      issue_time: '2018-10',
+      issue_all: '10亿', // 发行总量
+      issue_circulation: '8000万', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: '', // 白皮书
+      office_website: 'https://www.dsaglobal.io/ ', // 官网
+      chain_info: 'https://etherscan.io/token/0xbbdbccb13d09975fa9e3e9c8fa129b61065c84f3' // 区块查询
+    },
+    'zh-HK': {   
+        name: 'DSA',
+        full_name: ' DSA(Distributed Survey Accelerator)',
+        brief_info: '分布式眾調加速器 DSA（Distributed Survey Accelerator）是壹個匿名的分布式民意調查平臺，致力於為全球的區塊鏈項目提供去中心化的眾調評級服務。DSA 將始終秉持 “匿名”、“自治”、“不作惡” 精神，通過人工智能和區塊鏈技術，為投資者提供壹個中立的信息披露平臺，凈化區塊鏈行業投資環境，保護投資者利益。獨有的社區激勵機制和 DSA 指數，促進投資方、項目方、用戶之間共識互助，重塑區塊鏈協調關系，打造共享信息新方式。',
+        brief_info: '',
+        issue_time: '2018-10',
+        issue_all: '10億', // 发行总量
+        issue_circulation: '8000萬', // 流通总量
+        token_price: '--', // 众筹价格
+        whitepagger: '', // 白皮书
+        office_website: 'https://www.dsaglobal.io/ ', // 官网
+        chain_info: 'https://etherscan.io/token/0xbbdbccb13d09975fa9e3e9c8fa129b61065c84f3' // 区块查询
+      },
+    'en': {  
+        name: 'DSA',
+        full_name: ' DSA(Distributed Survey Accelerator)',
+        brief_info: 'Currency Description: Distributed Tribune Accelerator DSA (Distributed Survey Accelerator) is an anonymous distributed polling platform dedicated to providing decentralized rating services for blockchain projects around the world.DSA will always adhere to the spirit of “anonymity”, “autonomy” and “do not be evil”. Through artificial intelligence and blockchain technology, DSA will provide investors with a neutral information disclosure platform to purify the investment environment of the blockchain industry and protect the interests of investors. The unique community incentive mechanism and DSA index promote mutual understanding and mutual assistance among investors, project parties and users, reshape the blockchain coordination relationship, and create a new way of sharing information.',
+        issue_time: '2018-9-19',
+        issue_all: '1000 million', // 发行总量
+        issue_circulation: '80 million', // 流通总量
+        token_price: '--', // 众筹价格
+        whitepagger: '', // 白皮书
+        office_website: 'https://www.dsaglobal.io/ ', // 官网
+        chain_info: 'https://etherscan.io/token/0xbbdbccb13d09975fa9e3e9c8fa129b61065c84f3' // 区块查询
+         },
+    'ko': {  
+        name: 'DSA',
+        full_name: ' DSA(Distributed Survey Accelerator)',
+        brief_info: '코인종류소개:분류식가속기DSA（Distributed Survey Accelerator)는 익명의 디스카운트식 여론조사 플랫폼이다. 전 세계의 지역분할 프로젝트를 위해 중심적인 다중조정 서비스를 제공하는 것이다.DSA는\'익명\'과\'자치\',\'악행하지 않는다\'의 정신으로 일관하고 인공지능과 블록 기술을 통해 투자자들에게 중립적인 정보 공개 플랫폼을 제공하고 블록 업종의 투자 환경을 정화하고 투자자의 이익을 보호할 것이다. 독자적 커뮤니티 인센티브와 DSA 지수, 투자자, 프로젝트자, 사용자 간 공동 호조 촉진, 지역-블록-체인 조정 관계를 재구축, 정보 공유 새로운 방식의 구축.',
+        issue_time: '2018-10',
+        issue_all: '1000 million', // 发行总量
+        issue_circulation: '80 million', // 流通总量
+        token_price: '--', // 众筹价格
+        whitepagger: '', // 白皮书
+        office_website: 'https://www.dsaglobal.io/ ', // 官网
+        chain_info: 'https://etherscan.io/token/0xbbdbccb13d09975fa9e3e9c8fa129b61065c84f3' // 区块查询
+      }
+  },
+  BCH: {
+    'zh-CN': {
+      name: 'BCH',
+      full_name: 'BitcoinHD',
+      brief_info: 'BitcoinHD（比特硬盘，简称BHD）是基于 Conditioned Proof Of Capacity (简称：CPOC） 的新型加密货币。其主要的特点是使用硬盘作为共识的参与者，降低加密货币对电力资源的消耗， 降低参与门槛，让其生产方式更趋向去中心化方式，并更加安全可信，让人人都能参与到加密货币 的开采，通过数学算法以及分布式开采产生信用和价值。',
+      issue_time: '2018-8-3',
+      issue_all: '2100万', // 发行总量
+      issue_circulation: '429.06', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://btchd.org/BHD-Whitepaper-1.0_zh.pdf', // 白皮书
+      office_website: ' https://btchd.org/', // 官网
+      chain_info: 'https://btchd.org/explorer/' // 区块查询
+    },
+    'zh-HK': {
+      name: 'BCH',
+      full_name: 'BitcoinHD',
+      brief_info: 'BitcoinHD（比特硬盤，簡稱BHD）是基於 Conditioned Proof Of Capacity (簡稱：CPOC） 的新型加密貨幣。其主要的特點是使用硬盤作為共識的參與者，降低加密貨幣對電力資源的消耗， 降低參與門檻，讓其生產方式更趨向去中心化方式，並更加安全可信，讓人人都能參與到加密貨幣 的開采，通過數學算法以及分布式開采產生信用和價值。',
+      issue_time: '2018-8-3',
+      issue_all: '2100萬', // 发行总量
+      issue_circulation: '429.06萬', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://btchd.org/BHD-Whitepaper-1.0_zh.pdf', // 白皮书
+      office_website: ' https://btchd.org/', // 官网
+      chain_info: 'https://btchd.org/explorer/' // 区块查询
+    },
+    'en': {
+      name: 'BCH',
+      full_name: 'BitcoinHD',
+      brief_info: 'BHD is a new type of crypto currency based on Proof of Capacity.BHD uses an upgraded version of cPOC mining (Conditioned Proof of Capacity), with a perfect economic model and consensus algorithm.It uses hard disk as the participant of consensus, which reduces power consumption.BHD mining lowers the entry barriers, and makes the coin generation process more decentralized, secure and reliable. BHD also lowered the cost of credit, increased the strength and breadth of consensus, and improved the security of the consensus architecture.',
+      issue_time: '2018-8-3',
+      issue_all: '21,000,000', // 发行总量
+      issue_circulation: '4,290,600', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://btchd.org/BHD-Whitepaper-1.0_zh.pdf', // 白皮书
+      office_website: ' https://btchd.org/', // 官网
+      chain_info: 'https://btchd.org/explorer/' // 区块查询
+    },
+    'ko': {
+      name: 'BCH',
+      full_name: 'BitcoinHD',
+      brief_info: 'BitcoinHD (비트하드디스크약칭 BHD)는 Conditioned Proof Of Capacity (CPOC)를 기반으로 한 새로운 암호화된 화폐이다.그 의 특징 은 주로 사용 하드디스크 으로서 공감 대 를 형성 하는 가담자 를 낮 춰 암호 화해 통화 에 대한 전력 소모 를 낮 춰 자원 의 참여 문턱 을 가 르 치 도록 생산 방식 을 더욱 분열 에 中心化 방식 을 더욱 안 전하 게 신빙성 을 누 구나 이용 할 수 있 도록 암호화 통화 채광 을 통 해 수학 셈 법 및 디 도스 채취 에 신용 과 가치 를 지 닌 다.',
+      issue_time: '2018-8-3',
+      issue_all: '21,000,000', // 发行总量
+      issue_circulation: '4,290,600', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://btchd.org/BHD-Whitepaper-1.0_zh.pdf', // 白皮书
+      office_website: ' https://btchd.org/', // 官网
+      chain_info: 'https://btchd.org/explorer/' // 区块查询
+    }
+
+  },
+  BHD: {
+    'zh-CN': {
+      name: 'BHD',
+      full_name: 'BitcoinHD',
+      brief_info: 'BitcoinHD（比特硬盘，简称BHD）是基于 Conditioned Proof Of Capacity (简称：CPOC） 的新型加密货币。其主要的特点是使用硬盘作为共识的参与者，降低加密货币对电力资源的消耗， 降低参与门槛，让其生产方式更趋向去中心化方式，并更加安全可信，让人人都能参与到加密货币 的开采，通过数学算法以及分布式开采产生信用和价值。',
+      issue_time: '2018-8-3',
+      issue_all: '2100万', // 发行总量
+      issue_circulation: '429.06万', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://btchd.org/BHD-Whitepaper-1.0_zh.pdf', // 白皮书
+      office_website: ' https://btchd.org/', // 官网
+      chain_info: 'https://btchd.org/explorer/' // 区块查询
+    },
+    'zh-HK': {
+      name: 'BHD',
+      full_name: 'BitcoinHD',
+      brief_info: 'BitcoinHD（比特硬盤，簡稱BHD）是基於 Conditioned Proof Of Capacity (簡稱：CPOC） 的新型加密貨幣。其主要的特點是使用硬盤作為共識的參與者，降低加密貨幣對電力資源的消耗， 降低參與門檻，讓其生產方式更趨向去中心化方式，並更加安全可信，讓人人都能參與到加密貨幣 的開采，通過數學算法以及分布式開采產生信用和價值。',
+      issue_time: '2018-8-3',
+      issue_all: '2100萬', // 发行总量
+      issue_circulation: '429.06萬', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://btchd.org/BHD-Whitepaper-1.0_zh.pdf', // 白皮书
+      office_website: ' https://btchd.org/', // 官网
+      chain_info: 'https://btchd.org/explorer/' // 区块查询
+    },
+    'en': {
+      name: 'BHD',
+      full_name: 'BitcoinHD',
+      brief_info: 'BHD is a new type of crypto currency based on Proof of Capacity.BHD uses an upgraded version of cPOC mining (Conditioned Proof of Capacity), with a perfect economic model and consensus algorithm.It uses hard disk as the participant of consensus, which reduces power consumption.BHD mining lowers the entry barriers, and makes the coin generation process more decentralized, secure and reliable. BHD also lowered the cost of credit, increased the strength and breadth of consensus, and improved the security of the consensus architecture.',
+      issue_time: '2018-8-3',
+      issue_all: '21,000,000', // 发行总量
+      issue_circulation: '4,290,600', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://btchd.org/BHD-Whitepaper-1.0_zh.pdf', // 白皮书
+      office_website: ' https://btchd.org/', // 官网
+      chain_info: 'https://btchd.org/explorer/' // 区块查询
+    },
+    'ko': {
+      name: 'BHD',
+      full_name: 'BitcoinHD',
+      brief_info: 'BitcoinHD (비트하드디스크약칭 BHD)는 Conditioned Proof Of Capacity (CPOC)를 기반으로 한 새로운 암호화된 화폐이다.그 의 특징 은 주로 사용 하드디스크 으로서 공감 대 를 형성 하는 가담자 를 낮 춰 암호 화해 통화 에 대한 전력 소모 를 낮 춰 자원 의 참여 문턱 을 가 르 치 도록 생산 방식 을 더욱 분열 에 中心化 방식 을 더욱 안 전하 게 신빙성 을 누 구나 이용 할 수 있 도록 암호화 통화 채광 을 통 해 수학 셈 법 및 디 도스 채취 에 신용 과 가치 를 지 닌 다.',
+      issue_time: '2018-8-3',
+      issue_all: '21,000,000', // 发行总量
+      issue_circulation: '4,290,600', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://btchd.org/BHD-Whitepaper-1.0_zh.pdf', // 白皮书
+      office_website: ' https://btchd.org/', // 官网
+      chain_info: 'https://btchd.org/explorer/' // 区块查询
+    }
+  },
+  XRP: {
+    'zh-CN': {
+      name: 'XRP',
+      full_name: '瑞波币（Ripple/XRP）',
+      brief_info: '瑞波币（Ripple/XRP）提供一个无阻碍的利用区块链技术的全球支付网络，是世界上第一个开放的支付网络，通过加入Ripple正在成长的全球支付网络可以转账任意一种货币，包括美元、欧元、人民币、日元或者比特币，简便易行快捷，交易确认在几秒以内完成，交易费用几乎是零，没有所谓的跨行异地以及跨国支付费用。 Ripple是开放源码的点到点支付网络，它可以使任何机构或个人轻松、廉价并安全的把金钱转账到互联网上的任何机构或个人，无论在世界的哪个地方。Ripple是p2p软件，没有任何个人、公司，或政府操控，任何人可以创建一个ripple账户。',
+      issue_time: '2011/4/18',
+      issue_all: '1000亿', // 发行总量
+      issue_circulation: '387.3914亿', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://ripple.com/files/ripple_consensus_whitepaper.pdf', // 白皮书
+      office_website: 'https://ripple.com/', // 官网
+      chain_info: '' // 区块查询
+    },
+    'zh-HK': {
+      name: 'XRP',
+      full_name: '瑞波幣（Ripple/XRP）',
+      brief_info: '瑞波幣（Ripple/XRP）提供壹個無阻礙的利用區塊鏈技術的全球支付網絡，是世界上第壹個開放的支付網絡，通過加入Ripple正在成長的全球支付網絡可以轉賬任意壹種貨幣，包括美元、歐元、人民幣、日元或者比特幣，簡便易行快捷，交易確認在幾秒以內完成，交易費用幾乎是零，沒有所謂的跨行異地以及跨國支付費用。 Ripple是開放源碼的點到點支付網絡，它可以使任何機構或個人輕松、廉價並安全的把金錢轉賬到互聯網上的任何機構或個人，無論在世界的哪個地方。Ripple是p2p軟件，沒有任何個人、公司，或政府操控，任何人可以創建壹個ripple賬戶。',
+      issue_time: '2011/4/18',
+      issue_all: '1000億', // 发行总量
+      issue_circulation: '387.3914億', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://ripple.com/files/ripple_consensus_whitepaper.pdf', // 白皮书
+      office_website: 'https://ripple.com/', // 官网
+      chain_info: '' // 区块查询
+    },
+    'en': {
+      name: 'XRP',
+      full_name: 'XRP',
+      brief_info: 'RippleNet delivers a single, frictionless experience for global payments. Rather than a constellation of disparate technologies, unstandardized communications, and centralized networks, RippleNet is a single, global network of banks that send and receive payments via Ripple’s distributed financial technology -- providing real-time messaging, clearing and settlement of transactions.',
+      issue_time: '2011/4/18',
+      issue_all: '100 billion', // 发行总量
+      issue_circulation: '38.73 billion', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://ripple.com/files/ripple_consensus_whitepaper.pdf', // 白皮书
+      office_website: 'https://ripple.com/', // 官网
+      chain_info: '' // 区块查询
+    },
+    'ko': {
+      name: 'XRP',
+      full_name: 'XRP',
+      brief_info: '리플은 금융거래를 위해 개발된 프로토콜인 ‘리플 프로토콜’에서 사용되는 암호화폐 / 본 프로토콜을 사용함으로 전세계에서 몇 초 내로 화폐를 송금 / 일반적으로 모두에게 공개된 블록체인과는 달리 한정된 참여자만 네트워크를 구성한다는 의미에서 ‘프라이빗 블록체인’ 이라고도 불림 / 비트코인 블록체인과는 달리 채굴 방식으로 코인 발행이 이루어지는 것이 아니며 이미 정해진 수량의 코인이 모두 발행되어 있는 상태로 중앙집권식으로 운영되는 네트워크.',
+      issue_time: '2011/4/18',
+      issue_all: '100 billion', // 发行总量
+      issue_circulation: '38.73 billion', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://ripple.com/files/ripple_consensus_whitepaper.pdf', // 白皮书
+      office_website: 'https://ripple.com/', // 官网
+      chain_info: '' // 区块查询
+    }
+  },
+  ANTBT: {
+    'zh-CN': {
+      name: 'ANTBT',
+      full_name: 'ANTBT',
+      brief_info: 'ANTBT是最新一代知识产权协议保护基础架构，并利用区块链去中心化不可篡改的属性确保了每个数据的唯一性，完整性，实现对原创产品的确保。建立以版权所有者为中心的保护机制.信息共享，实现ANTBT作为未来知识产权的守护者。',
+      issue_time: '2019-6-4',
+      issue_all: '2100万', // 发行总量
+      issue_circulation: '21万', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.antbit.io/statics/upload/baipishu/w1.pdf', // 白皮书
+      office_website: 'http://www.antbit.io/', // 官网
+      chain_info: 'https://etherscan.io/address/0x35Be52655551029d8B8B3B51Ffdb76Ec9993dD47?locale=zh-CN&utm_source=imtoken' // 区块查询
+    },
+    'zh-HK': {
+      name: 'ANTBT',
+      full_name: 'ANTBT',
+      brief_info: 'ANTBT是最新一代知識產權協定保護基礎架構，並利用區塊鏈去中心化不可篡改的内容確保了每個數據的唯一性，完整性，實現對原創產品的確保。建立以版權所有者為中心的保護機制.資訊共用，實現ANTBT作為未來知識產權的守護者。',
+      issue_time: '2019-6-4',
+      issue_all: '2100萬', // 发行总量
+      issue_circulation: '21萬', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.antbit.io/statics/upload/baipishu/w1.pdf', // 白皮书
+      office_website: 'http://www.antbit.io/', // 官网
+      chain_info: 'https://etherscan.io/address/0x35Be52655551029d8B8B3B51Ffdb76Ec9993dD47?locale=zh-CN&utm_source=imtoken' // 区块查询
+    },
+    'en': {
+      name: 'ANTBT',
+      full_name: 'ANTBT',
+      brief_info: 'ANTBT is the latest generation of intellectual property rights protocol protection infrastructure, and USES the blockchain\'s decentralized, tamper-proof properties to ensure the uniqueness and integrity of each data, to ensure the original products. We will establish a protection mechanism centered on copyright owners, share information and realize ANTBT as the guardian of intellectual property in the future.',
+      issue_time: '2019-6-4',
+      issue_all: '21,000,000', // 发行总量
+      issue_circulation: '210,000', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.antbit.io/statics/upload/baipishu/w1.pdf', // 白皮书
+      office_website: 'http://www.antbit.io/', // 官网
+      chain_info: 'https://etherscan.io/address/0x35Be52655551029d8B8B3B51Ffdb76Ec9993dD47?locale=zh-CN&utm_source=imtoken' // 区块查询
+    },
+    'ko': {
+      name: 'ANTBT',
+      full_name: 'ANTBT',
+      brief_info: 'ANTBT는 최신 지적재산권협정 보호기초구조로 되며 지역 사슬을 리용하여 외곡할수 없는 중심화를 실현하는 속성으로 매 데터의 유일성, 완정성을 확보하고 원창제품에 대한 확보를 실현한다.저작권 소유자 중심의 보호 메커니즘 구축. 정보 공유, ANTBT 실현, 미래 지식 재산권의 수호자.',
+      issue_time: '2019-6-4',
+      issue_all: '21,000,000', // 发行总量
+      issue_circulation: '210,000', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.antbit.io/statics/upload/baipishu/w1.pdf', // 白皮书
+      office_website: 'http://www.antbit.io/', // 官网
+      chain_info: 'https://etherscan.io/address/0x35Be52655551029d8B8B3B51Ffdb76Ec9993dD47?locale=zh-CN&utm_source=imtoken' // 区块查询
     }
 
   },

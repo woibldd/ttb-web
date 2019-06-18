@@ -163,6 +163,15 @@ export default {
   }
 }
 </script>
+
+<style> 
+  @media screen and ( max-width: 800px){ 
+    .zopim{
+      top: 82%!important;
+      position: fixed!important;
+    }
+  }
+</style>
 <style lang="scss" scoped>
 
 .h5-page-header {

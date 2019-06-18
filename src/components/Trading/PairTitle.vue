@@ -1,9 +1,10 @@
 <template>
   <div class="grid-title">
     <div class="row clearfix">
+      <!-- @click="showPair" -->
       <div
         class="fl grid-currency pointer"
-        @click="showPair"
+        @switchPair="showPair(false)"
         @mouseover="showPair(true)"
         @mouseout="showPair(false)"
       >
@@ -82,7 +83,7 @@ export default {
     PairNav
   },
   methods: {
-    showPair(toggle) {
+    showPair(toggle) { 
       if (typeof toggle === "boolean") {
         this.show = toggle;
       } else {
@@ -281,7 +282,7 @@ export default {
         transform: rotate(180deg);
       }
     }
-  }
+  } 
   .grid-pairtable {
     position: absolute;
     top: 28px;

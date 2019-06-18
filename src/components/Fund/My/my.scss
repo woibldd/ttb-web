@@ -22,4 +22,23 @@
         cursor: pointer;
         margin-left: 21px;
     }
+    .el-table /deep/ .el-table__row{
+      td {
+        padding: 5px 0;
+        .cell {
+          line-height: 33px;
+          .airdrop {
+            background-color:#BAE2F7;
+            //cursor: help;
+            position: relative;
+            .question {
+              position: absolute;
+              top: -5px;
+              right: -12px;
+            }
+          }
+        }
+      }
+    }
+
 }

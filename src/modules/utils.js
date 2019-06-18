@@ -600,7 +600,23 @@ const utils = {
       return num.div(1e9).toFixed(1) + ' B'
     }
     return num.div(1e9).toFixed(0) + ' B'
+  },
+  parseQueryString (url) {
+    let result = {}
+    if(url && url.indexOf('?')>-1) {
+      let str=url.split("?")[1],
+      items=str.split("&");
+      let arr,name,value;
+      for(let i = 0, l = items.length; i < l; i++){
+          arr=items[i].split("=");
+          name= arr[0];
+          value= arr[1];
+          result[name]=value;
+      }
+    }
+    return result;
   }
+
 }
 
 if (process.env.NODE_ENV === 'development') {

@@ -1,7 +1,17 @@
 <template>
   <div class="newest-coin-pairs">
-    <div class="flex">
-      <div class="pair-title">{{ $t('newest_coin_pairs') }}</div>
+    <div class="relative">
+      <!-- <div class="pair-title">{{ $t('newest_coin_pairs') }}</div> -->
+      <div class="pair-title"> 
+        <el-tabs v-model="tabSelected" type="card">
+          <el-tab-pane :label="$t('home_optional')" name="like"> 
+          </el-tab-pane>
+          <el-tab-pane label="USDT" name="USDT">  
+          </el-tab-pane>
+          <el-tab-pane label="BTC" name="BTC"></el-tab-pane>
+          <el-tab-pane label="ETH" name="ETH"></el-tab-pane>
+        </el-tabs>
+      </div>
       <div class="pairs-search">
         <div class="search-box">
           <input
@@ -16,6 +26,8 @@
     </div>
     <div class="pairs-table">
       <div class="pairs-table__head">
+        <div class="head-item percent5"> 
+        </div>
         <div class="head-item percent9">
           {{ $t('currency') }}
         </div>
@@ -44,7 +56,17 @@
         @click="toExchange(pair.name)"
         v-if="pair.tick"
         :key="index">
-        <div class="row__item percent9">
+        <div 
+          @click.stop="collection(pair)"
+          class="row__item percent5">
+          <icon 
+            v-show="pair.like"
+            name='sc-x' style='color:red;'/>
+          <icon 
+            v-show="!pair.like"
+            name='sc-w'/>
+        </div>
+        <div class="row__item percent9"> 
           {{ pair.name | pairfix }}
         </div>
         <div class="row__item percent18_8 newest_price">
@@ -77,21 +99,26 @@
           <icon name="handle"/>
         </div>
       </div>
-    </div>
-
+    </div> 
   </div>
 </template>
 <script>
 import {state} from '@/modules/store'
+import service from '@/modules/service'
 import { pairfix } from '@/mixins/index'
+import dataView from './data-view'
 export default {
   mixins: [pairfix],
   data () {
     return {
       state,
       searchCoin: '',
-      search: ''
+      search: '',
+      activeName: 'like'
     }
+  },
+  components: {
+    dataView,
   },
   props: {
     sortedList: {
@@ -138,10 +165,48 @@ export default {
     },
     filterPair () {
       this.$emit('searching', this.search)
+    }, 
+    tabsClick(tab, event) { 
+      this.$emit('switchTab', tab.name)
+    },
+    collection(pair) {
+      if(pair.like) { 
+        pair.like = false;
+        service.delOptional({
+          site: 2,
+          id: pair.id
+        })
+      }
+      else { 
+        pair.like = true; 
+        service.addOptional({
+          site: 2,
+          id: pair.id
+        })
+      }
+      // pair.like = !(pair.like || false) 
     }
+  },  
+  computed: { 
+    tabSelected:{
+      get() {
+      return state.tabSelected
+      },
+      set(val) {
+        state.tabSelected = val
+      }
+    },
   }
 }
 </script>
+<style lang="scss">
+.newest-coin-pairs {
+  .el-tabs__header {
+    margin: 0;
+  } 
+}
+</style>
 <style lang="scss" scoped>
-@import './pair-table.scss'
+@import './pair-table.scss';
+
 </style>

@@ -311,7 +311,7 @@ export default {
         this.toVerifyCode()
       }
     },
-    async submit (e) {
+    async submit (e) { 
       // 本地校验
       const check = this.checkParams()
       if (!check) {
@@ -438,7 +438,7 @@ export default {
     this.$eh.$on('app:resize', () => this.fixPosition())
     this.$nextTick(this.fixPosition)
   },
-  created () {
+  created () { 
     this.fetchRegion()
 
     const returnTo = this.$route.query.return_to
