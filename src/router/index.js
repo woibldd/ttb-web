@@ -7,7 +7,7 @@ import _ from 'lodash'
 // import HelloWorld from '@/components/HelloWorld'
 let loaded = false
 Vue.use(Router)
-
+// 测试上传是否正常
 const isMobile = utils.isMobile()
 
 const HomeNew = () => import(/* webpackChunkName: "home" */ '@/pages/home_new.vue')
