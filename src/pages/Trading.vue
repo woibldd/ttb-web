@@ -145,7 +145,7 @@ export default {
             this.state.pro.pairInfo = res.data
             this.state.close_time = res.data.close_time
             this.state.price_open = res.data.price_open || 0.017
-            this.state.showCountDown = !!this.state.close_time && this.state.close_time != ""
+            this.state.showCountDown = false // !!this.state.close_time && this.state.close_time != ""
           } else {
             this.state.pro.pairInfo = null
           }
