@@ -492,8 +492,7 @@ export default {
       let side = ""
       let price = 0
       //限价
-      let msg = 'contract_close_tips1';
-      debugger
+      let msg = 'contract_close_tips1'; 
       if (type === 'limit'){
         confirmText = this.$t('contract_close_limit')
         if(this.holding.amount > 0) {

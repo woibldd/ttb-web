@@ -88,7 +88,7 @@
           </div>
           <div class="bottom-txt bot-lb">
             <div class="contact-list">
-              <a
+              <!-- <a
                 class="contact-item-wrapper pointer"
                 href='https://www.facebook.com/IXX-301038947404383'>
                 <icon
@@ -101,8 +101,7 @@
                 <icon
                   class="contact-item"
                   name="footer-twitter"/>
-              </a>
-
+              </a> --> 
               <a
                 href="mailto:service@ixx.com"
                 class="contact-item-wrapper pointer">

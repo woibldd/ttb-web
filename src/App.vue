@@ -211,6 +211,19 @@ export default {
 }
 </script>
 <style lang="scss">
+button {
+  outline: none!important;
+  box-shadow: none!important;
+}
+*{
+  outline:none;
+  scrollbar-width: none;
+}
 @import "styles/reset.scss";
 @import "styles/index.scss";
+@media (max-width: 1378px) {
+  .el-table td, .el-table th {
+    font-size: 12px!important;
+  }
+}
 </style>

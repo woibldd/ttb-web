@@ -17,13 +17,19 @@
       v-if="editing">
       <div class="mr-50 c-fff">{{ $t('lever') }}</div>
       <div class="op-wrapper">
-        <input
+        <!-- <input
           type="number"
           step="0.1"
           max="100"
           min="0"
           v-model="inputLeverTime"
-          class="input-num pl-8" >
+          class="input-num pl-8" > -->
+        <number-input 
+          :scale="2" 
+          :max="100" 
+          :min="0"
+          class="input-num pl-8" 
+          v-model="inputLeverTime"/> 
         <div class="ops">
           <span
             class="op op_cancel"

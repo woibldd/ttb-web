@@ -16,8 +16,7 @@
 </div>
 </template>
 <script>
-import {state} from '@/modules/store'
-import VNav2 from '@/components/VNav2.vue'
+import {state} from '@/modules/store' 
 import CountDown from '@/components/CountDown.vue'
 
 export default {
@@ -29,8 +28,7 @@ export default {
       date: new Date(2018, 8, 20)
     }
   },
-  components: {
-    VNav2,
+  components: { 
     CountDown
   }
 }

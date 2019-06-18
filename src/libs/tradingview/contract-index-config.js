@@ -36,8 +36,7 @@ export default function () {
     ],
     enabled_features: [
       'adaptive_logo',
-      'save_chart_properties_to_local_storage'
-
+      'save_chart_properties_to_local_storage' 
       // 'charting_library_debug_mode',
       // 'seconds_resolution'
     ],

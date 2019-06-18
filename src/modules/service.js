@@ -869,6 +869,303 @@ const service = {
     return getCache('c_ranklist', () => request('future/activity/rank_list', params), 1e3)
   },
 
+  //自选列表 
+  getOptionalList (params) {
+    //site (int 非必须,默认1) 1-ix 2-ixx
+    return getCache('c_optional', () => request('account/currency/optionalList', params), 1e3)
+  },
+  // 增加自选
+  addOptional(params) { 
+    //site (int 非必须,默认1) 1-ix 2-ixx
+    // id 币对id
+    return request('account/currency/optional/add', params)
+  },
+  //删除自选
+  delOptional(params) { 
+    //site (int 非必须,默认1) 1-ix 2-ixx
+    // id 币对id
+    return request('account/currency/optional/del', params)
+  },
+  //获取币对信息
+  getCurrencyList(params) {
+    return request('/future/account/currency_list',params)
+  },
+
+   /**
+   * 用户可用余额
+   * @param {
+    * user_id} params
+    */
+   getOtcBalance(params) {
+     return getCache('c_otc_balance', () => request('otc/account/balance/list', params), 1e3)
+   },
+  
+       //*************************  OTC 接口  ************************//
+    /**
+     * 查询是否满足交易条件
+     * @param {
+      * user_id} params
+      * kyc_level 0-未认证 1-绑定手机 2-绑定本人实名银行卡 3-身份认证
+      */
+    isQualified(params) {
+        return request('otc/account/is_qualified', params)
+    },
+    /**
+     * 用户可用余额
+     * @param {
+     * user_id} params
+     */
+    getOtcBalance(params) {
+        return getCache('c_otc_balance', () => request('otc/account/balance/list', params), 1e3)
+    },
+
+    async getOtctBalanceByPair(symbol) {
+        if (!symbol || !symbol.symbol) {
+            symbol = {
+                symbol: 'BTC'
+            }
+        }
+        let result = await service.getOtcBalance()
+        console.log(result)
+        // let resp = []
+        if (!result.code) {
+            let list = result.data
+            let balance = list ? list.filter(l => symbol.symbol === l.currency)[0] || {} : {
+                available: '0',
+                holding: '0',
+                available_balance: '0',
+                leverage: 100
+            }
+            return {
+                code: 0,
+                data: balance
+            }
+        }
+        return null
+    },
+    /**
+     * 委托单列表
+     * @param {
+     * currency,
+     * side,
+     * page ,
+     * size  } params
+     * currency 币种
+     * page 页码
+     * size 页面条数
+     */
+    getOtcOrderList(params) {
+        return request('otc/account/orderlist', params)
+    },
+    /**
+     * 成交单详情
+     * @param {
+     * trans_id,
+     * user_id } params
+     */
+    getOtcOrderInfo(params) {
+        return getCache('c_otc_orderinfo', () => request('otc/account/orderinfo', params), 1e3)
+    },
+    /**
+     * 我的委托单列表
+     * @param {
+     * user_id,
+     * page,
+     * size } params
+     */
+    getOtcActivefills(params) {
+        return getCache('c_otc_activefills', () => request('otc/account/activefills', params), 1e3)
+    },
+    /**
+     * 已取消订单
+     * @param {
+     * user_id,
+     * page,
+     * size,
+     * side ,
+     * currency} params
+     * side (非必须,默认0) 0-全部 1-购买 2-出售
+     * currency(非必须,默认全部)
+     */
+    getOtcRemovefills(params) {
+        return getCache('c_otc_removefills', () => request('otc/account/removefills', params), 1e3)
+    },
+    /**
+     * 已完成订单
+     * user_id 用户id
+     * page 页码
+     * size 页面条数
+     * side (非必须,默认0) 0-全部 1-购买 2-出售
+     * currency(非必须,默认全部)
+     */
+    getDonefills(params) {
+        return getCache('c_otc_donefills', () => request('otc/account/donefills', params), 1e3)
+    },
+    /**
+     * 未完成订单
+     * @param {
+     * user_id,
+     * page,
+     * size,
+     * side,
+     * currency } params
+     */
+    getUnDonefills(params) {
+        return getCache('c_otc_undonefills', () => request('otc/account/unDonefills', params), 1e3)
+    },
+    /**
+     * 用户信息
+     * @param {
+     * user_id} params
+     */
+    getOtcUserinfo(params) {
+        return getCache('c_otc_userinfo', () => request('otc/account/userinfo', params), 1e3)
+    },
+    /**
+     * 支付方式列表
+     * @param {
+     * user_id,
+     * currency}
+     */
+    getOtcCollection(params) {
+        return getCache('c_otc_collection', () => request('otc/account/collection/list', params), 1e3)
+    },
+    /**
+     * 支付方式添加
+     * @param {
+     * user_id ,
+     * payment_type ,
+     * name,
+     * currency,
+     * deposit_bank,
+     * sub_branch,
+     * card_number,
+     * alipay_account,
+     * weChat_account,
+     * collection_img} params
+     * payment_type 收款方式 1-银行卡 2-支付宝 3-微信支付
+     */
+    addOtcCollection(params) {
+        return request('otc/account/collection/add', params)
+    },
+    orderBind(params) {
+        return request('otc/order/bind', params)
+    },
+    orderUnbind(params) {
+        return request('otc/order/unbind', params)
+    },
+    /**
+     * 支付方式删除
+     * @param {
+     * collection_id } params
+     */
+    delOtcCollection(params) {
+        return request('otc/account/collection/del', params)
+    },
+    /**
+     * 发布委托单
+     * @param {
+     * user_id,
+     * currency,
+     * side,
+     * type,
+     * float_rate,
+     * price,
+     * amount,
+     * total,
+     * kyc_level,
+     * register_time,
+     * remark,
+     * site} params
+     * type 1固定价格 2浮动价格
+     * remark 备注
+     * site (非必须 ,默认1)1-个人 2-商户
+     */
+    createOtcOrder(params) {
+        return request('otc/order/create', params)
+    },
+    /**
+     * 发布成交单
+     * @param {
+     * user_id,
+     * active_id,
+     * side,
+     * amount,
+     * total } params
+     * active_id 委托单ID
+     */
+    createOtcTransaction(params) {
+        return request('otc/order/transaction', params)
+    },
+    /**
+     * 我已付款
+     * @param {user_id, trans_id, collection_id} params
+     * trans_id  成交单id
+     * collection_id 收款方式id
+     */
+    otcOrderPaymentDone(params) {
+        return request('otc/order/paymentDone', params)
+    },
+    /**
+     * 我已放币
+     * @param {
+     * user_id,
+     * trans_id } params
+     * trans_id 成交单id
+     */
+    otcOrderIssueDone(params) {
+        return request('otc/order/issueDone', params)
+    },
+    /**
+     * 撤销订单
+     * @param {
+     * user_id,
+     * type,
+     * trans_id } params
+     * type 1-委托单 2-成交单
+     * trans_id 委托单/成交单id
+     */
+    otcOrderRemove(params) {
+        return request('otc/order/remove', params)
+    },
+    /**
+     * 全部订单操作
+     * @param {
+     * user_id,
+     * type} params
+     * type 1-委托单全部撤销 2-委托单全部开始 3-委托单全部暂停
+     */
+    otcOrderOperateAll(params) {
+        return request('otc/order/operateAll', params)
+    },
+    /**
+     * 申述
+     * @param {
+     *  user_id,
+     *  trans_id} params
+     * trans_id 成交单id
+     */
+    otcAppeal(params) {
+        return request('otc/order/appeal', params)
+    },
+    /**
+     * 取消申述
+     * @param {
+     *  user_id,
+     *  trans_id} params
+     * trans_id 成交单id
+     */
+    otcUnAppeal(params) {
+        return request('otc/order/unAppeal', params)
+    },
+    /**
+     * 交易对详情
+     */
+    otcSymbolList() {
+        return getCache('c_otc_symbol_list', () => request('otc/account/symbol/list'), 5e3)
+    }
+
+
 }
 
 export async function fetch (url, body, options, method = 'post') {

@@ -8,7 +8,7 @@
       </div>
       <div class="RushBuy-content">
         <div class="RushBuy-main">
-          <div class="RushBuy-main-left">
+          <div class="RushBuy-main-left"> 
             <div class="grab-more">
               SP{{ $t('RushBuy_text_list_1') }}
               <h1>{{data.total_amount | number}} SP</h1>

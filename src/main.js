@@ -16,6 +16,7 @@ import qs from 'querystring'
 import * as Sentry from '@sentry/browser'
 import 'babel-polyfill'
 import moment from 'moment'
+
 import 'element-ui/lib/theme-chalk/index.css'
 
 import {
@@ -30,7 +31,17 @@ import {
   RadioGroup,
   RadioButton,
   Loading,
-  MessageBox
+  MessageBox,
+  Tabs,
+  TabPane,
+  Button,
+  Steps,
+  Step,
+  Switch,
+  DatePicker,
+  Pagination,
+  Dialog,
+  Message
 } from 'element-ui'
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
@@ -51,10 +62,19 @@ Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
 Vue.use(Upload)
+
 Vue.use(RadioGroup)
 Vue.use(RadioButton)
 Vue.use(Loading)
-
+Vue.use(Tabs)
+Vue.use(TabPane)
+Vue.use(Button)
+Vue.use(Steps)
+Vue.use(Step)
+Vue.use(Dialog)
+Vue.use(Switch)
+Vue.use(DatePicker)
+Vue.use(Pagination)
 const request = require.context('./assets/svg', true, /\.svg$/)
 /* console.log('request', request)
 console.log('request.keys', request.keys())
@@ -78,6 +98,7 @@ utils.$i18n = new VueI18n({
 Vue.prototype.$eh = eventHub
 Vue.prototype.$msgbox = MessageBox
 Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$message = Message
 Vue.prototype.$moment = moment
 
 actions.setLocale()

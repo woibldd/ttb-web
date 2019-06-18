@@ -601,7 +601,7 @@ export default {
         height: 15px;
         border-radius: 20px;
         border: 1px solid #999999;
-        margin-right: 8px;
+        margin-right: 5px;
       }
     }
 }

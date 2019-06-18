@@ -226,3 +226,63 @@
         }
     }
 }
+
+ // 合作媒体
+ .corperator {
+  display: flex;
+  width: 100%;
+  background: #3e3e3e;
+  border-bottom: 1px solid #dfdfdf;
+  .corperator-container {
+    width: 1200px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .mb-60 {
+        margin-bottom: 60px;
+    }
+
+    .corp-row {
+      display: flex;
+      &.row-60 {
+        height: 60px;
+      }
+      .corp-title {
+        width: 100px;
+        font-size:18px;
+        font-weight:bold;
+        color:#929292;
+        display: flex;
+        height: 40px;
+        align-items: center;
+      }
+      .corp-logo {
+        min-width: 140px;
+        padding: 0 26px;
+        border-left: 1px solid #3D3D3D;
+        text-align: center;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        .link {
+          display: block;
+          width: 100%;
+        }
+        .logo {
+          height: 20px;
+          &.gs {
+            height: 60px;
+          }
+          &.cw {
+            height: 35px;
+          }
+        }
+      }
+    }
+  }
+}

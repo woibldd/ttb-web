@@ -17,6 +17,8 @@ export const state = {
   userInfo: null,
   loginBack: {name: 'home'}, // 默认登录返回页
   verifyEmail: '', // 注册、找回密码使用的邮箱
+  
+  tabSelected: 'USDT', //币对列表
   assets: {
     ready: false,
     total: 0,
@@ -88,7 +90,19 @@ export const state = {
     google: false,
     phone: false,
     task: ''
-  }
+  },
+  otc: {
+    currency: "BTC", 
+    legal_currency: "CNY",
+    showSide: 1, //1: 买，2：卖
+    symbolList: [],
+    userInfo: null,
+    symbolInfo: null,
+    currency_name: '',
+    indexPrice: 0,
+    bid: 0,
+    ask: 0
+  },
 }
 
 export const local = new Locals('store', {

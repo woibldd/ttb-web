@@ -18,6 +18,9 @@ export default {
     }
   },
   computed: {
+    tabSelected () {
+      return state.tabSelected
+    },
     errmsg () {
       if (this.loading || this.err) {
         return ''
@@ -40,7 +43,18 @@ export default {
     },
     showList () {
       let list = this.pairList
-      return _.filter(list, pair => pair.product_name.indexOf(this.search.toUpperCase()) > -1)
+      if (this.tabSelected === 'like') {
+        return _.filter(list, pair => {
+          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 &&
+            (pair.like || false)
+        })
+      }
+      else {
+        return _.filter(list, pair => {
+          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 &&
+            pair.currency.indexOf(this.tabSelected) > -1
+        })
+      }
     },
     changeRankList () {
       return _.sortBy(this.pairList, (item) => {
@@ -145,7 +159,17 @@ export default {
         this.$set(item, 'delta', item.delta || false)
         this.$set(item, 'vol', item.vol || false)
       })
-      this.state.pro.pairList = res.data.items
+      let optional = await service.getOptionalList({site: 2})
+      if(!!optional && optional.data != null)
+      for (const item of optional.data) {
+        let id = item.id
+        let pair = _.filter(res.data.items, item => { return item.id===id})
+        if (pair.length > 0) {
+          pair[0].like = true;
+        }
+      } 
+      
+      this.state.pro.pairList = res.data.items 
     },
     subMarket () {
       if (this.socket) {

@@ -11,13 +11,21 @@
               <router-link
                 class="menu-name"
                 active-class="active"
-                :to="{name: 'Fee'}">{{ $t('transaction_fees') }}</router-link>
+                :to="{name: 'TradingFee'}">{{ $t('trading_fees') }}</router-link>
+            </li> 
+            <li class="">
+              <router-link
+                class="menu-name" 
+                active-class="active"
+                :to="{name: 'ContractFee'}">{{ $t('contract_fees') }}</router-link>
             </li>
+            
           </ul>
         </div>
       </div>
       <div class="user-center-right">
-        <div class="profile-container">
+        <router-view/>
+        <!-- <div class="profile-container" v-show="active=='trading'">
           <div class="title-box rate-tit">{{ $t('transaction_fees') }}</div>
           <div class="rate-tab">
             <div class="rate-tab-tit">
@@ -42,39 +50,64 @@
             <p>3. {{ $t('rate_tips_c') }}</p>
             <p>4. {{ $t('rate_tips_d') }}</p>
             <p>5. {{ $t('rate_tips_e') }}</p>
-            <!-- <p>6. {{ $t('rate_tips_f') }}</p>
-            <p>7. {{ $t('rate_tips_g') }}</p> -->
+            <p>6. {{ $t('rate_tips_f') }}</p>
+            <p>7. {{ $t('rate_tips_g') }}</p>
           </div>
         </div>
+        <div class="profile-container" v-show="active=='contract'">
+          <div class="title-box rate-tit">{{ $t('contract_fees') }}</div>
+          <div class="rate-tab">
+            <div class="rate-tab-tit">
+              <p class="lt rate-t-a">{{ $t('transaction_pair') }}</p>
+              <p class="lt rate-t-b">{{ $t('maker') }}</p>
+              <p class="lt rate-t-c">{{ $t('taker') }}</p>
+            </div>
+            <ul class="rate-ul"> 
+              <li>
+                <p class="lt rate-t-a">{{ $t('contract_FUTURE_BTCUSD') }}</p>
+                <p class="lt rate-t-b">-0.0350%</p>
+                <p class="lt rate-t-c">-0.0700%</p>
+              </li>
+            </ul>
+          </div>
+          <div class="rate-tips">
+            <p class="rate-tips-title">{{ $t('tips') }}</p> 
+            <p>1. {{ $t('rate_tips_a') }}</p>
+            <p>2. {{ $t('rate_tips_b') }}</p>
+            <p>3. {{ $t('rate_tips_c') }}</p>
+            <p>4. {{ $t('rate_tips_d') }}</p>  
+          </div>
+        </div> -->
       </div>
-  </div></div>
+    </div>
+  </div>
 
 </template>
 
 <script>
-import service from '@/modules/service'
-import { pairfix } from '@/mixins/index'
+// import service from '@/modules/service'
+// import { pairfix } from '@/mixins/index'
 export default {
-  mixins: [pairfix],
-  name: 'Fee',
-  components: {
-  },
-  data () {
-    return {
-      pairList: []
-    }
-  },
-  async created () {
-    let res = await service.getPairList()
-    if (!res.code) {
-      this.pairList = res.data.items
-    }
-  }
+  // mixins: [pairfix],
+  // name: 'Fee',
+  // components: {
+  // },
+  // data () {
+  //   return {
+  //     pairList: []
+  //   }
+  // },
+  // async created () {
+  //   let res = await service.getPairList()
+  //   if (!res.code) {
+  //     this.pairList = res.data.items
+  //   }
+  // }
 }
 </script>
 <style lang="scss" scoped>
   
-  @import '../styles/mixins';
+  
 
   .page-fee {
     background: #ffffff;
@@ -222,7 +255,7 @@ export default {
             height: 4px;
             position: absolute;
             border-radius: 4px;
-            background: $primary-hover;
+            background: #C1A538;
             left: 0;
             top: 50%;
             margin-top: -2px;

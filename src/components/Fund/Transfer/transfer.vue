@@ -7,9 +7,13 @@
     </div>
     <div class="fund-items-content" style="margin-left:0">
       <div class="fund-item-row mb-14">
-        <div class="row__label">币种</div>
+        <div class="row__label">{{$t('currency')}}</div> 
         <div>
-          <el-select v-model="selectCoin" placeholder="请选择" class="max-input">
+          <el-select v-model="selectCoin" 
+          :placeholder="$t('please_choose')" 
+          class="max-input"
+          @change="changeCoin"
+          >
             <el-option
               v-for="(item, idx) in allCoins"
               :key="idx"
@@ -18,37 +22,37 @@
             </el-option>
           </el-select>
         </div>
-      </div>
+      </div> 
       <div class="fund-item-row mb-14">
-        <div class="row__label">划转方向</div>
-            <el-select v-model="value" placeholder="请选择" class="min-input" @change="transferType(1)">
+        <div class="row__label">{{ $t('transfer_side')}}</div>
+            <el-select v-model="accountFrom" :placeholder="$t('please_choose')" class="min-input" @change="transferType(1)">
               <el-option
-                v-for="item in oneOpt"
+                v-for="item in accountTypes"
                 :key="item.value"
-                :label="item.label"
+                :label="$t(item.label)"
                 :value="item.value">
               </el-option>
             </el-select>
-            <span style="padding:0 10px ">转至</span>
-            <el-select v-model="valuea" placeholder="请选择" class="min-input" @change="transferType(2)">
-              <el-option
-                v-for="item in twoOpt"
+            <span style="padding:0 10px ">{{$t('transfer_to_a')}}</span>
+            <el-select v-model="accountTo" :placeholder="$t('please_choose')" class="min-input" @change="transferType(2)">
+              <el-option  
+                v-for="item in accountTypes2"
                 :key="item.value"
-                :label="item.label"
+                :label="$t(item.label)"
                 :value="item.value">
               </el-option>
             </el-select>
       </div>
       <div class="fund-item-row mb-14">
-        <div class="row__label">划转数量</div>
+        <div class="row__label">{{$t('transfer_amount')}}</div>
         <div>
-          <el-input v-model="number" type="number" placeholder="请输入划转金额" class="max-input"></el-input>
+          <el-input v-model="number" type="number" :placeholder="$t('transfer_enter_amount')"  class="max-input"></el-input>
         </div>
       </div>
       <div class="fund-item-row mb-14">
         <div class="row__label"></div>
         <div>
-           可划转数量：{{availableBalance}} <button @click="all" class="all">全部</button>
+           {{$t('transfer_able_amount')}}{{availableBalance | fixed(8) }} <button @click="all" class="all">{{$t('transfer_all')}}</button>
         </div>
       </div>
       <div class="fund-item-row mb-14">
@@ -58,129 +62,139 @@
             style="width: 200px"
             class="max-input"
             @click="submit"
-            :label="'确定'"/>
+            :label="$t('confirm')"/>
           <!-- <el-input v-model="number" placeholder="请输入内容" class="max-input"></el-input> -->
         </div>
       </div>
-    </div>
+    </div> 
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="BTC划转记录" name="first"></el-tab-pane>
+      <el-tab-pane :label="$t('transfer_btc_history')" name="first"></el-tab-pane>
       <!-- <el-tab-pane label="全部划转记录" name="second"></el-tab-pane> -->
-        <el-table
-         :data="tableData"
+        <el-table  
+         :data="tableData"  :empty-text="$t('no_data')"
          style="width: 100%">
          <el-table-column
+         prop="currency"
+         :label="$t('transfer_currency')"/>
+         <el-table-column
+         prop="from_balance"
+         :label="$t('transfer_from_a')"/>
+         <el-table-column
+         prop="to_balance"
+         :label="$t('transfer_to_a')"/> 
+         <el-table-column
+         prop="amount"
+         :label="$t('transfer_amount')"/>
+         <el-table-column
+           prop="available"
+           :label="$t('balance')" />
+         <el-table-column
            prop="create_time"
-           label="时间"/>
-           <el-table-column
-           prop="currency"
-           label="币种"/>
-           <el-table-column
-           prop="opetate"
-           label="操作"/>
-           <el-table-column
-           prop="amount"
-           label="数额"/>
-           <el-table-column
-             prop="available"
-             label="余额"/>
-           <el-table-column
-             prop="status"
-             label="状态"/>
-
-         </el-table-column>
+           width="240"
+           :label="$t('transfer_time')"/>
+         <el-table-column
+           prop="status"
+           :label="$t('status')"/>
        </el-table>
     </el-tabs>
+    <div class="history__footer pt-10">
+      <ix-pagination
+      style="float:right"
+        :page.sync="pages"
+        :is-end="isLastPage"
+        :func="getPage"/>
+    
+    </div>
   </div>
 </template>
 <script>
 import { tabs } from 'element-ui';
 import service from '@/modules/service'
+import utils from '@/modules/utils'
 import { state, actions, local } from "@/modules/store";
+import Big from 'big.js'
+import ixPagination from '@/components/common/ix-pagination'
+
 
 export default {
   name: 'MyAddress',
+  components: {ixPagination},
+  props:[],
   data () {
     return  {
       number: '',
       selectCoin:'BTC',
       activeName: 'second',
-      allCoins : [{chain: "BTC",
-        currency: "BTC",
-        depositable: true,
-        full_name: "Bitcoin",
-        id: "1",
-        memo_support: false,
-        min_confirm: 3,
-        min_deposit_amount: "0.001",
-        min_review_amount: "0",
-        min_withdraw_amount: "0.002",
-        scan_url: "https://explorer.bitcoin.com/btc/tx/${txid}",
-        withdraw_fee: "0.001"
-        }
-      ],
-      valuea:1,
-      value:2,
+      pages:1,
+      text: 'mmm',
+      isLastPage:false,
+      allCoins : [],
+      accountTo: '',
+      accountFrom: 2,
       availableBalance:0,
-      exchangeBalance:'',
-      contractBalance:'',
+      tradingBalance: null,
+      contractBalance: null, 
+      otcBalance: null,
       tableData: [],
-      oneOpt: [{
-        value: 1,
-        label: '币币账户'
-      }, {
+      accountTypes: [{
         value: 2,
-        label: '合约账户'
+        label: 'trading_account'
+      },{
+        value: 3,
+        label: 'contract_account'
+      }, {
+        value: 4,
+        label: 'otc_account'
       }],
-      twoOpt: [{
-        value: 1,
-        label: '币币账户'
-      }, {
-        value: 2,
-        label: '合约账户'
-      }]
+      accountTypes2: []
     }
   },
   async created () {
-  },
-  watch:{
-    value(newVal){
-      this.value  === 1 ? this.availableBalance = (this.exchangeBalance.available *1).toFixed(8) : this.availableBalance = (this.contractBalance.available* 1).toFixed(8)
-    }
-  },
+  }, 
   methods: {
     transferType(type){
+      this.number = ""
+      let arr = {}
       this.availableBalance = 0
       if (type === 1) {
-        this.value  === 1 ? this.valuea = 2 : this.valuea = 1
-      } else {
-        this.valuea === 1 ? this.value  = 2 : this.value  = 1
-      }
+        this.accountTypes2 = []
+        this.accountTo = ''
+        this.accountTypes.forEach((item) => {
+          if(item.value !== this.accountFrom) {
+            this.accountTypes2.push(item)
+          }
+        })
+        
+      }  
+      this.updateAvailable()
     },
     all(){
-      this.number = this.availableBalance
+      Big.RM = 0
+      this.number = new Big(this.availableBalance).toFixed(8)
     },
-    async submit(){
-      if (0>= this.number || this.number === '') {
-        utils.alert('输入数字不合法')
+    async submit(){ 
+      if (0 >= this.number || this.number === '') {
+        utils.alert(this.$t('transfer_enter_error'))
         return
       }
-      if (this.number > this.availableBalance) {
-        utils.alert('余额不足')
+      if (this.$big(this.number).gt(this.availableBalance)) {
+        utils.alert(this.$t('amount_over'))
         return
       }
       let $this = this
       let res = await service.transferContractFund({
         amount: this.number,
-        currency: "BTC",
-        type: this.value
+        currency: this.selectCoin,
+        from: this.accountFrom,
+        to: this.accountTo,
+        type: 1
       })
       if (!res.code) {
-        utils.success('划转成功')
-        this.balance()
+        utils.success(this.$t('transfer_success'))
+        this.getBalance()
         this.page()
         service.getContractBalanceByPair({
-          symbol: 'BTC'
+          symbol: this.selectCoin
         }).then(res => {
           state.ct.holding = res.data
         })
@@ -189,65 +203,160 @@ export default {
       }
     },
     handleClick(tab, event) {
-      console.log(tab, event);
+
     },
-    async balance(){
-      let [exchangeBalance, contractBalance] = await Promise.all([service.getBalanceByPair('BTC'), service.getContractBalanceByPair({
-        symbol: 'BTC'
-      })])
-      if (exchangeBalance && exchangeBalance.length) {
-        this.exchangeBalance = exchangeBalance[0]
+    async getBalance(){ 
+      let [tradingBalance, contractBalance, otcBalance] = await Promise.all([
+        service.getBalanceByPair(this.selectCoin),
+        service.getContractBalanceByPair({ symbol:this.selectCoin}),
+        service.getOtctBalanceByPair({symbol: this.selectCoin})
+      ]);
+
+      //console.log({tradingBalance, contractBalance, otcBalance})
+      if (tradingBalance && tradingBalance.length) {
+        this.tradingBalance = tradingBalance[0]
       }
-      if (contractBalance) {
+      if (contractBalance) { 
         this.contractBalance = contractBalance.data
       }
-      this.value  === 1 ? this.availableBalance = (this.exchangeBalance.available *1).toFixed(8) : this.availableBalance = (this.contractBalance.available* 1).toFixed(8)
+      if (otcBalance) {
+        this.otcBalance = otcBalance.data
+      }  
+      this.updateAvailable()
     },
-    page(){
-      service.getBalanceList({page:1,size:10}).then(res => {
+    getPage(){
+      this.page(this.pages)
+    },
+    page(page = 1){
+      service.getBalanceList({page:page,size:10}).then(res => {
+       
         if (res.code || res.data.length === 0) {
           this.loading = false
         } else {
-          // res.data = res.data.map(r => {
-          //   if (r.type === 7) {
-          //     r.state = 0
-          //   }
-          //   return r
-          // })
-          this.tableData = res.data
+           
+          this.tableData = res.data.data
           this.loading = false
+          if(this.tableData.length < 10){
+            this.isLastPage = true
+          } else {
+            this.isLastPage = false
+          }
           for (let i in this.tableData){
             let text = ''
             let text1 = ''
-            switch  (this.tableData[i].opetate ) {
-            case 1:
-              text="转入";
-              break;
-            case 2:
-              text="传出";
-              break;
-            case 3:
-              text="当日清算";
-              break;
+            //let opetate = this.tableData[i].balance
+
+            let balanceList = {
+              1 :  this.$t(""),
+              2 : this.$t("trading_account"),
+              3 : this.$t("contract_account"),
+              4 : this.$t("otc_account"),
             }
+
+            this.tableData[i].from_balance = balanceList[this.tableData[i].from_balance]
+            this.tableData[i].to_balance = balanceList[this.tableData[i].to_balance]
+ 
             switch  (this.tableData[i].status ) {
             case 0:
-              text1="失败";
+              text1=this.$t("transfer_fail"); //失败
               break;
             case 1:
-              text1="成功";
+              text1=this.$t("transfer_complete"); //完成
               break;
             }
-            this.tableData[i].opetate = text
+             
+            this.tableData[i].available = (this.tableData[i].available*1).toFixed(8) 
             this.tableData[i].status = text1
           }
         }
       })
-    }
+    },
+    changeCoin(val) { 
+      this.accountTypes = []
+      if (val === 'USDT') {
+        this.accountTypes = [{
+            value: 2,
+            label: 'trading_account'
+          }, {
+            value: 4,
+            label: 'otc_account'
+          }] 
+      }
+      else if(val === 'BTC') {
+         this.accountTypes = [{
+            value: 2,
+            label: 'trading_account'
+          },{
+            value: 3,
+            label: 'contract_account'
+          }, {
+            value: 4,
+            label: 'otc_account'
+          }] 
+      } 
+      //改变币种的时候重新获取数据  
+      //this.transferType(1)
+      this.getBalance() 
+      this.value = 2
+      this.transferType(1)
+    },
+    updateAvailable() {
+      console.log({value : this.accountFrom})
+      if (this.accountFrom === 1) { //钱包账户
+      }
+      else if (this.accountFrom === 2) {  //币币账户 
+        this.availableBalance = this.$big(this.tradingBalance.available || 0)
+      }
+      else if (this.accountFrom === 3) {  //合约账户
+      console.log({contractBalance:this.contractBalance})
+        this.availableBalance = this.$big(this.contractBalance.available_balance || 0)
+      }
+      else if (this.accountFrom === 4) {  //OTC账户
+        this.availableBalance = this.$big(this.otcBalance.available || 0)
+      }
+    },
+    getAllCoinTypes() {
+      this.allCoins = [
+        {
+          chain: "BTC",
+          currency: "BTC",
+          depositable: true,
+          full_name: "Bitcoin",
+          id: "1",
+          memo_support: false,
+          min_confirm: 3,
+          min_deposit_amount: "0.001",
+          min_review_amount: "0",
+          min_withdraw_amount: "0.002",
+          scan_url: "https://explorer.bitcoin.com/btc/tx/${txid}",
+          withdraw_fee: "0.001"
+        },{
+          chain: "USDT",
+          currency: "USDT",
+          depositable: true,
+          full_name: "USDT",
+          id: "2",
+          memo_support: false,
+          min_confirm: 3,
+          min_deposit_amount: "0.001",
+          min_review_amount: "0",
+          min_withdraw_amount: "0.002", 
+          withdraw_fee: "0.001"
+        }
+      ],
+      this.getBalance(); 
+    },
   },
   created(){
-    this.balance()
+    // this.getBalance()
+    this.getAllCoinTypes()
     this.page()
+    this.accountTo = ''
+    this.accountTypes.forEach((item) => {
+      if(item.accountFrom !== this.accountFrom) {
+        this.accountTypes2.push(item)
+      }
+    })
   }
 }
 </script>

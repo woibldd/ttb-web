@@ -52,6 +52,20 @@
         font-size: 10px;
         color:$state-text-red;
     }
+    .ix-eye-switch {
+      pointer-events: auto;
+      transition: all .7s;
+      cursor: pointer;
+      display: inline-block;
+      position: absolute;
+      top: 32px;
+      right: 26px;
+      z-index: 98;
+      width: 14px;
+      height: 14px;
+      vertical-align: middle;
+      line-height: 14px;
+    }
     .ix-quick-delete{
         pointer-events: auto;
         -webkit-transition: all .7s;

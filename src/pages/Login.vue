@@ -1,6 +1,6 @@
 <template>
   <div class="page page-login">
-    <bubble/> 
+    <bubble  v-if='!isMobile'/> 
     <resbg/>  
     <div
       class="panel_box"
@@ -88,7 +88,7 @@
                 tabindex="2"
                 ref="email"
                 v-model.trim="email"
-                :required='true'
+                :required='true' 
                 :empty-err-tips="$t('err_empty_email')"
                 :rule="validateRules.email"
                 :placeholder="$t('err_empty_email')"
@@ -104,8 +104,10 @@
                 ref="password"
                 tabindex="3"
                 v-model.trim="password"
-                :required='true'
-                type="password"
+                @input="password=$event"
+                :required='true' 
+                :type.sync="pwdType"
+                :show-eye="true"
                 :empty-err-tips="$t('err_empty_password')"
                 :rule="validateRules.password"
                 :placeholder="$t('err_empty_password')"
@@ -238,6 +240,7 @@ export default {
     return {
       local,
       state,
+      pwdType: 'password',
       regionId: '',
       errmsg: '',
       email: '',
@@ -270,7 +273,8 @@ export default {
 
         }
       },
-      prevent: false, 
+      prevent: false,  
+      isMobile: utils.isMobile()
     }
   },
   beforeRouteEnter (to, from, next) {

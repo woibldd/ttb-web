@@ -1,10 +1,10 @@
 <template>
   <section class="countdown-wrap">
-    <div class="countdown">
-      <span class="day">{{ day }}</span>
-      <span class="split">:</span>
-      <span class="day">{{ hour }}</span>
-      <span class="split">:</span>
+    <div class="countdown" :style="{'font-size': size}">
+      <!-- <span class="day">{{ day }}</span>
+      <span class="split">:</span>-->
+      <span v-if="hour!='00'" class="day">{{ hour }}</span>
+      <span v-if="hour!='00'" class="split">:</span>
       <span class="day">{{ minutes }}</span>
       <span class="split">:</span>
       <span class="day">{{ seconds }}</span>
@@ -14,8 +14,15 @@
 <script>
 export default {
   props: {
+    //结束时的时间戳
     terminal: {
-      type: Date
+      type: Number
+    },
+    size: {
+      type: Number,
+      default: function () {
+        return 12
+      }
     }
   },
   data () {
@@ -44,7 +51,7 @@ export default {
     },
     getRemainSecond () {
       let remain = Math.floor(
-        (this.terminal.getTime() - new Date().getTime()) / 1000
+        (this.terminal - new Date().getTime()) / 1000
       )
       if (remain < 0) {
         remain = 0
@@ -65,16 +72,17 @@ export default {
 <style scoped lang="scss">
 
 .countdown-wrap {
-  font-size: 44px;
+  display:inline-block;
+  font-size: 12px;
   color: $primary;
 }
 .countdown{
-  font-size: 58px;
+  font-size: 12px;
 }
 
 @media screen and (max-width: 768px) {
   .countdown {
-    font-size: 40px;
+    font-size: 12px;
   }
 
 }

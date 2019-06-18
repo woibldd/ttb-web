@@ -7,11 +7,11 @@ if (process.env.NODE_ENV === 'development') {
   wsUrl = 'wss://ws.ixex.io/v1/'
   quoteUrl = 'https://q.ixex.io/v1/'
 } else if (process.env.NODE_ENV === 'beta') {
-  wsUrl = 'wss://ws.ix.com/v1/'
-  quoteUrl = 'https://q.ix.com/v1/'
+  wsUrl = 'wss://ws.ixex.io/v1/'
+  quoteUrl = 'https://q.ixex.io/v1/'
 } else {
-  wsUrl = 'wss://ws.ix.com/v1/'
-  quoteUrl = 'https://q.ix.com/v1/'
+  wsUrl = 'wss://ws.ixex.io/v1/'
+  quoteUrl = 'https://q.ixex.io/v1/'
 }
 
 const { exchangeName } = process.env.THEME_ENV

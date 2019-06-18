@@ -42,7 +42,7 @@
             <span class="info-field">{{ $t('last_price') }}： </span>
             <span
               class="info-value"
-            >{{ tick.current }}</span>
+            >{{ tick.current | fixed(1) }}</span>
           </div>
           <div class="info-row">
             <span class="info-field">{{ $t('contract_mark_price') }}： </span>
@@ -63,7 +63,7 @@
             <span class="info-field">{{ $t('homechart_24h_change_value') }}： </span>
             <span
               class="info-value"
-            >{{ tick.increment_24h }}</span>
+            >{{ tick.increment_24h | fixed(1) }}</span>
           </div>
         </div>
         <!-- BLOCK 4 -->
