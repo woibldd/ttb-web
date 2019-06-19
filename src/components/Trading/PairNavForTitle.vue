@@ -10,7 +10,10 @@
         </el-input>-->
         <div class="pairs-search">
           <div class="search-box">
-            <input placeholder="搜索" type="text" v-model="search">
+            <input placeholder="搜索" 
+              @input="filterPair()" 
+              type="text" 
+              v-model="search">
             <icon name="home-search"/>
           </div>
         </div>
@@ -22,6 +25,7 @@
           <el-tab-pane label="USDT" name="USDT"></el-tab-pane>
           <el-tab-pane label="BTC" name="BTC"></el-tab-pane>
           <el-tab-pane label="ETH" name="ETH"></el-tab-pane>
+          <el-tab-pane label="ALL" name="all"></el-tab-pane>
         </el-tabs>
       </div>
       <div class="ix-pair-head tr" v-show="sortedList.length">
@@ -197,7 +201,10 @@ export default {
         });
       }
       // pair.like = !(pair.like || false)
-    }
+    },
+    filterPair () {
+      state.tabSelected = 'all' 
+    }, 
   },
   created() {
 

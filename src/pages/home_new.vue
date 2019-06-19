@@ -83,6 +83,15 @@
     <div class="corperator">
       <div class="corperator-container"> 
         <div class="corp-row row-60 mb-60">
+          <div class="corp-title" v-t="'footer_investors'"/>
+       
+            <div class="corp-logo">
+              <a class="link" href="javascript:;" @click.prevent>
+                <img class="logo may" src="~@/assets/copr-logo-may.png">
+              </a> 
+            </div>
+          </div>
+        <div class="corp-row row-60 mb-60">
           <div
             class="corp-title"
             v-t="'footer_partners'"/>

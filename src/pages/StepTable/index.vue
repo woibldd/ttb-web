@@ -423,7 +423,7 @@ export default {
         }
       ],
       token: window.localStorage.getItem('X-TOKEN'),
-      orderBtn: ['全部撤销', '全部开始', '全部暂停'],
+      orderBtn: [this.$t('contract_cancel_all'), this.$t('otc_tab_lisetr3'), this.$t('otc_tab_lisetr4')],
       orderActive: -1,
       tableDataUname: [],
       count: 0,

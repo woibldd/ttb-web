@@ -133,17 +133,18 @@ export default{
       margin-top: 20px;
 
       .menu-name {
-          box-sizing: border-box;
-          width: 100%;
-          display: inline-block;
-          padding-left: 34px;
-          color: $text-strong;
+        box-sizing: border-box;
+        width: 100%;
+        display: inline-block;
+        padding-left: 34px;
+        color: $text-strong;
 
-          &.active, &:hover {
+        &.active {
           color: $primary;
           background: $profile-menu-bg;
           box-shadow: inset 3px 0 0 0 $primary;
-        }
+        } 
+
       }
       .sub-menu-group {
           margin-top: 10px;

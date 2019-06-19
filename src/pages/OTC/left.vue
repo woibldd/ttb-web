@@ -297,7 +297,7 @@ export default {
           background: $profile-menu-bg;
           box-shadow: inset 3px 0 0 0 $primary;
           span {
-            color: $primary;
+            color: #fff;
           }
         }
       }

@@ -43,7 +43,12 @@ export default {
     },
     showList () {
       let list = this.pairList
-      if (this.tabSelected === 'like') {
+      if (this.tabSelected === 'all') {
+        return  _.filter(list, pair => {
+          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1  
+        })
+      }
+      else if (this.tabSelected === 'like') {
         return _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 &&
             (pair.like || false)
