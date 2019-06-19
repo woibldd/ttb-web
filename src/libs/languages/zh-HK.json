@@ -1661,10 +1661,9 @@
   "transfer_day_liquidation":"當日清算",
   "transfer_all":"全部",
   "withdraw_tips1":"請完善你的資料",
-  "idt_tips": "空投部分ITD每日系统解冻释放2%",
-  
+  "idt_tips": "空投部分ITD每日系统解冻释放2%", 
   "bnl_tips": "空投部分BNL每日系统解冻释放3%", 
-  "home_optional": "自选",
+  "home_optional": "自選",
   
   "contract_competition_Jump_1": "個人錦標獎",
   "contract_competition_Jump_2": "收益因子賽總排名(全​​體參賽個人用戶)",
