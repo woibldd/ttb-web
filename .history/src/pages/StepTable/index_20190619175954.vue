@@ -85,18 +85,6 @@
           <span v-if="item.count > 0 && token">{{ item.count }}</span>
         </div>
         <div
-          class="slot-down"
-          v-if="active === 0"
-        >
-          <i
-            class="iconfont"
-            v-for="(item, index) in icons"
-            :key="index"
-            v-html="item"
-            :class="{iconActive: iconActive === index}"
-            @click="iconTab(index)"/>
-        </div>
-        <div
           class="order-btn"
           v-if="active === 3">
           <span
@@ -116,8 +104,8 @@
           style="  margin-left: 12px;margin-right: 8px;height: 14px;width: 14px;color: inherit;font-size: 0px;"
           name="inhsdgbnljkarf"
         />
-        <span v-html="$t('otc_buy_tips_a')"/>！
-        <span v-html="$t('otc_buy_tips_c')"/>
+        <span v-html="$t('otc_buy_tips_a')"></span>！
+        <span v-html="$t('otc_buy_tips_c')"></span>
       </div>
       <div class="table-con">
         <template v-if="active === 0">
@@ -251,9 +239,8 @@
                     </template>
                   </dd> -->
                   <div v-if='item.otc_collection'>
-                    <dd
-                      v-for='(payItem, index) in paymentHeaderList[item.otc_collection.payment_type]'
-                      :key='index'>
+                    <dd v-for='(payItem, index) in paymentHeaderList[item.otc_collection.payment_type]'
+                        :key='index'>
                       <span>{{ $t(payItem.text) }}</span>
                       <span>
                         <span
@@ -292,9 +279,8 @@
                     </el-select>
                   </dt>
                   <div v-if='item.selectPayment'>
-                    <dd
-                      v-for='(payItem, index) in paymentHeaderList[item.selectPayment.payment_type]'
-                      :key='index'>
+                    <dd v-for='(payItem, index) in paymentHeaderList[item.selectPayment.payment_type]'
+                        :key='index'>
                       <span>{{ $t(payItem.text) }}</span>
                       <span>
                         <span
@@ -305,13 +291,6 @@
                         </span>
                         <span v-else>{{ processValue(payItem.key, item.selectPayment) }}</span>
                       </span>
-                    </dd>
-                    <dd>
-                      <a
-                        href="javascript:;"
-                        @click="closeHadle(item)"
-                        style="font-size: 12px;"
-                      >{{ $t('otc_cancel_order') }}</a>
                     </dd>
                   </div>
                   <!-- <dd v-if="item.bankId">
@@ -332,23 +311,16 @@
                   v-if="item.side === 1 && item.state === 1 && !item.appeal && !item.other_appeal"
                   @click="detailHandle(item)"
                 >{{ $t('otc_already_paid') }}</div>
-                <!--<div-->
-                <!--class="btn btn2"-->
-                <!--v-if="item.side === 1 && item.state === 1 && !item.appeal && !item.other_appeal"-->
-                <!--@click="closeHadle(item)"-->
-                <!--&gt;{{ $t('otc_cancel_order') }}</div>-->
-                <template>
-                  <div
-                    class="btn"
-                    v-if="item.side === 2 && item.state === 2 && !item.appeal && !item.other_appeal"
-                    @click="detailHandle(item)"
-                  >确认放币</div>
-                  <div
-                    class="btn"
-                    v-if="item.side === 2 && item.state === 7 && !item.appeal && !item.other_appeal"
-                    @click="detailHandle(item)"
-                  >确认放币</div>
-                </template>
+                <div
+                  class="btn btn2"
+                  v-if="item.side === 1 && item.state === 1 && !item.appeal && !item.other_appeal"
+                  @click="closeHadle(item)"
+                >{{ $t('otc_cancel_order') }}</div>
+                <div
+                  class="btn"
+                  v-if="item.side === 2 && item.state === 2 && !item.appeal && !item.other_appeal"
+                  @click="detailHandle(item)"
+                >确认放币</div>
                 <div
                   class="time-ago"
                   v-if="item.time && !item.appeal && !item.other_appeal">
@@ -365,13 +337,6 @@
                   <b v-if="item.side === 1 && item.state === 7">超时自动放币</b>
                   <!--<span v-html="item.side === 1 && ? '取消订单' : '放币'"></span>-->
                 </div>
-                <dd
-                  v-if="item.side === 1 && item.state === 1 && item.other_appeal"
-                  style="position: absolute;right: 0;bottom: 0;">
-                  <a
-                    href="javascript:;"
-                    @click="detailHandle(item)">详情 ></a>
-                </dd>
               </li>
             </ul>
           </div>
@@ -439,8 +404,6 @@ export default {
   mixins: [tradeMixins, processValue],
   data () {
     return {
-      icons: ['&#xe618;', '&#xe654;'],
-      iconActive: 0,
       tab: [
         {
           name: this.$t('otc_tab_lisetr'),
@@ -471,12 +434,6 @@ export default {
         page: 1,
         side: 0,
         size: 10
-      },
-      params1: {
-        page: 1,
-        side: 0,
-        size: 10,
-        currency: ''
       },
       bankData: [],
       bankId: '',
@@ -538,7 +495,7 @@ export default {
       },
       selectPayment: {},
       qrsrc: '',
-      showQRcode: false
+      showQRcode: false,
     }
   },
   // computed: {
@@ -558,24 +515,6 @@ export default {
   //   }
   // },
   methods: {
-    compareDown (property) {
-      return function (a, b) {
-        return a[property] - b[property]
-      }
-    },
-    compareUp (property) {
-      return function (a, b) {
-        return b[property] - a[property]
-      }
-    },
-    iconTab (index) {
-      this.iconActive = index
-      if (index === 0) {
-        return this.data.sort(this.compareDown('create_time'))
-      } else {
-        return this.data.sort(this.compareUp('create_time'))
-      }
-    },
     changePayType (e) {
       console.log(e)
     },
@@ -601,18 +540,9 @@ export default {
             service.otcOrderOperateAll(obj).then(res => {
               if (res.code === 0) {
                 this.init(this.active)
-                this.$message({
-                  type: 'success',
-                  message: `${orderName}成功`,
-                  duration: 1000
-                })
+                this.$message.success(`${orderName}成功`)
               } else {
-                // this.$message.warning(`${res.message}`)
-                this.$message({
-                  type: 'warning',
-                  message: `${res.message}`,
-                  duration: 1000
-                })
+                this.$message.warning(`${res.message}`)
               }
             })
             this.orderActive = -1
@@ -621,11 +551,7 @@ export default {
             this.orderActive = -1
           })
       } else {
-        this.$message({
-          type: 'warning',
-          message: `无数据`,
-          duration: 1000
-        })
+        this.$message.warning(`无数据`)
       }
     },
     closeHadle (item) {
@@ -657,8 +583,8 @@ export default {
             item.payment_type === 1
               ? item.deposit_bank
               : item.payment_type === 2
-                ? '支付宝'
-                : '微信'
+              ? '支付宝'
+              : '微信'
           const payAccount = item.alipay_account
             ? item.alipay_account
             : item.card_number
@@ -693,20 +619,10 @@ export default {
         service.otcOrderIssueDone(params).then(res => {
           console.log(res)
           if (!res.code) {
-            // this.$message.success('提交成功')
-            this.$message({
-              type: 'success',
-              message: '提交成功',
-              duration: 1000
-            })
+            this.$message.success('提交成功')
             this.init(this.active)
           } else {
-            // this.$message.error(res.message)
-            this.$message({
-              type: 'error',
-              message: `${res.message}`,
-              duration: 1000
-            })
+            this.$message.error(res.message)
           }
         })
       } else if (type === 'close') {
@@ -719,28 +635,17 @@ export default {
           if (!res.code) {
             this.$message({
               type: 'success',
-              message: '取消成功!',
-              duration: 1000
+              message: '取消成功!'
             })
           } else {
-            // this.$message.error(`${res.message}`)
-            this.$message({
-              type: 'error',
-              message: `${res.message}`,
-              duration: 1000
-            })
+            this.$message.error(`${res.message}`)
           }
         })
       } else {
         // todo request api
         if (!this.bankId) {
           // utils.alert('请选择支付方式!')
-          // this.$message.warning('请选择支付方式!')
-          this.$message({
-            type: 'warning',
-            message: `请选择支付方式!`,
-            duration: 1000
-          })
+          this.$message.warning('请选择支付方式!')
           return
         }
         let $this = this
@@ -750,20 +655,10 @@ export default {
         }
         service.otcOrderPaymentDone(params).then(res => {
           if (!res.code) {
-            // this.$message.success('提交成功')
-            this.$message({
-              type: 'success',
-              message: `提交成功`,
-              duration: 1000
-            })
+            this.$message.success('提交成功')
             this.init(this.active)
           } else {
-            // this.$message.error(res.message)
-            this.$message({
-              type: 'error',
-              message: `${res.message}`,
-              duration: 1000
-            })
+            this.$message.error(res.message)
           }
         })
       }
@@ -780,19 +675,12 @@ export default {
       })
     },
     switchTab: utils.debounce(function (index) {
-      this.tableHeader = []
       let that = this
       // 数据初始化
       that.params = {
         page: 1,
         side: 0,
         size: 10
-      }
-      that.params1 = {
-        page: 1,
-        side: 0,
-        size: 10,
-        currency: ''
       }
       that.loading = true
       that.active = index
@@ -811,6 +699,7 @@ export default {
         }
         // 防止抖动
         this.loading = false
+
         // 切换数据
         this.init(index)
         this.setTimeInit()
@@ -867,15 +756,16 @@ export default {
                   }
                   Vue.set(item, 'paySet', child.payment_type)
                 })
-                // 支付方式默认选择银行卡
+                //支付方式默认选择银行卡
                 let paylist = item.otc_collection_list
                 if (paylist.length > 0) {
-                  let arr = paylist.filter(arg => arg.payment_type === 1)
+                  let arr = paylist.filter(arg => arg.payment_type===1)
                   if (arr.length > 0) {
-                    // this.selectPayment = arr[0]
+                    //this.selectPayment = arr[0]
                     Vue.set(item, 'selectPayment', arr[0])
                   }
                 }
+                console.log({item})
 
                 Vue.set(item, 'bankArray', bankData)
                 Vue.set(item, 'bankId', '')
@@ -884,17 +774,18 @@ export default {
                 Vue.set(item, 'bankAccount', '')
               }
             })
+            console.log(that.data[0])
           }
           break
         case 1:
-          let rer = await service.getDonefills(that.params1)
+          let rer = await service.getDonefills(that.params)
           if (!rer.code) {
             that.data = rer.data.data
             that.total = rer.data.total
           }
           break
         case 2:
-          let res = await service.getOtcRemovefills(that.params1)
+          let res = await service.getOtcRemovefills(that.params)
           if (!res.code) {
             that.data = res.data.data
             that.total = res.data.total
@@ -921,36 +812,18 @@ export default {
           }
           service.otcAppeal(params).then(res => {
             if (!res) {
-              // this.$message.success('申诉成功，请等待客服处理')
-              this.$message({
-                type: 'success',
-                message: `申诉成功，请等待客服处理`,
-                duration: 1000
-              })
+              this.$message.success('申诉成功，请等待客服处理')
               this.init(this.active)
             } else {
-              // this.$message.warning(`${res.message}`)
-              this.$message({
-                type: 'warning',
-                message: `${res.message}`,
-                duration: 1000
-              })
+              this.$message.warning(`${res.message}`)
             }
           })
         })
         .catch(() => {})
     },
     handleCurrentChange (e) {
-      console.log(this.active)
-      if (this.active === 1 || this.active === 2) {
-        this.params1.page = e
-        console.log(this.params1.page, '1')
-        this.init(this.active)
-      } else {
-        this.params.page = e
-        console.log(this.params.page, '2')
-        this.init(this.active)
-      }
+      this.params.page = e
+      this.init(this.active)
     },
     setTimeInit () {
       this.timer = setInterval(() => {
@@ -974,10 +847,10 @@ export default {
     // 定时器
     this.timers = setInterval(() => {
       service.getUnDonefills({
-        page: 1,
-        side: 0,
-        size: 999
-      }
+          page: 1,
+          side: 0,
+          size: 999
+        }
       ).then(res => {
         if (res.code === 0) {
           if (res.data.data.length > 0) {
@@ -1005,40 +878,5 @@ export default {
 }
 </script>
 <style lang="scss" rel="stylesheet/scss" scoped>
-@import "./assets/scss/trade.scss";
-@font-face {
-  font-family: 'iconfont';  /* project id 1244642 */
-  src: url('https://at.alicdn.com/t/font_1244642_widppyjmvhh.eot');
-  src: url('https://at.alicdn.com/t/font_1244642_widppyjmvhh.eot?#iefix') format('embedded-opentype'),
-  url('https://at.alicdn.com/t/font_1244642_widppyjmvhh.woff2') format('woff2'),
-  url('https://at.alicdn.com/t/font_1244642_widppyjmvhh.woff') format('woff'),
-  url('https://at.alicdn.com/t/font_1244642_widppyjmvhh.ttf') format('truetype'),
-  url('https://at.alicdn.com/t/font_1244642_widppyjmvhh.svg#iconfont') format('svg');
-}
-.iconfont{
-  font-family:"iconfont" !important;
-  font-size:16px;font-style:normal;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-stroke-width: 0.2px;
-  -moz-osx-font-smoothing: grayscale;
-}
-.slot-down {
-  position: absolute;
-  right: 4px;
-  top: 14px;
-  width: 16px;
-  height: 32px;
-  line-height: 0.5;
-  color: #999;
-  i {
-    cursor: pointer;
-    display:inherit;
-    &:last-child {
-      margin-top: -8px;
-    }
-  }
-  .iconActive {
-    color: #c9a96c
-  }
-}
+  @import "./assets/scss/trade.scss";
 </style>
