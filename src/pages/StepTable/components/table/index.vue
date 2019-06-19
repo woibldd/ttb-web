@@ -4,7 +4,7 @@
       <el-table-column v-for="(item,index) in gridConfig" :key="index" :prop="item.prop" :label="item.label"
                        :width="item.width?item.width:''" show-overflow-tooltip>
         <template slot-scope="scope">
-          <Cell v-if="item.render" :row="scope.row" :column="item" :index="scope.$index" :render="item.render">
+          <Cell v-if="item.render" :row="scope.row" :column="item" :index="scope.$index" :render="item.render" :render-header="item.renderHeader">
             <!---->
           </Cell>
           <span v-else>{{ scope.row[item.prop] }}</span>
@@ -53,13 +53,12 @@ export default {
       this.showGridData = this.showGridData
     }
   },
-  methods: {
-  }
+  methods: {}
 }
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-  .el-table thead {
-    color: #999!important;
-  }
+.el-table thead {
+  color: #999 !important;
+}
 </style>
