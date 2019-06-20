@@ -14,6 +14,7 @@
         <el-select
           v-model="formInline.currency"
           placeholder="币种"
+          @change="changeCurreny"
           clearable>
           <el-option
             v-for="(item, index) in currencyData"
@@ -27,6 +28,7 @@
         <el-select
           v-model="formInline.type"
           placeholder="交易类型"
+          @change="changeType"
           clearable>
           <el-option
             v-for="(item, index) in sideData"
@@ -85,6 +87,7 @@ page"
         background
         layout="prev, pager, next"
         :total="total"
+        :current-page.sync="formInline.page"
         @current-change="handleCurrentChange"
       />
     </div>
@@ -182,11 +185,22 @@ export default {
           this.loading = false
           this.tableData = res.data.data
           this.total = res.data.total
-          console.log(this.total)
         } else {
           this.$message.warning(`${res.message}`)
         }
       })
+    },
+    changeCurreny (e) {
+      this.formInline.currency = e
+      this.formInline.page = 1
+      this.formInline.size = 10
+      this.init()
+    },
+    changeType (e) {
+      this.formInline.type = e
+      this.formInline.page = 1
+      this.formInline.size = 10
+      this.init()
     }
 
   },
@@ -194,12 +208,6 @@ export default {
     this.init()
   },
   watch: {
-    'formInline.currency': function () {
-      this.init()
-    },
-    'formInline.type': function () {
-      this.init()
-    }
   }
 }
 </script>
