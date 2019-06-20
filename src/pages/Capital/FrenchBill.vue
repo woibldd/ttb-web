@@ -83,12 +83,10 @@ page"
       v-if="tableData.length > 0">
       <el-pagination
         background
-        @size-change="handleSizeChange"
+        layout="prev, pager, next"
+        :total="total"
         @current-change="handleCurrentChange"
-        :current-page.sync="formInline.size"
-        :page-size="10"
-        layout="total, prev, pager, next"
-        :total="total"/>
+      />
     </div>
   </div>
 </template>
@@ -109,8 +107,7 @@ export default {
         begin_stamp: '',
         end_stamp: '',
         page: 1,
-        size: 10,
-        user_id: ''
+        size: 10
       },
       total: 0,
       loading: true,
@@ -155,14 +152,6 @@ export default {
       end: ''
     }
   },
-  computed: {
-    userInfo () {
-      return state.userInfo || {}
-    },
-    id () {
-      return this.userInfo.id
-    }
-  },
   methods: {
     dateHandle (time) {
       if (time) {
@@ -179,26 +168,27 @@ export default {
       this.init()
     },
     handleSizeChange (e) {
-      this.formInline.page = e
-      this.init()
-    },
-    handleCurrentChange (e) {
       this.formInline.size = e
       this.init()
     },
+    handleCurrentChange (e) {
+      this.formInline.page = e
+      this.init()
+    },
     init () {
-      this.formInline.user_id = state.userInfo.id
       this.loading = true
       service.balancefills(this.formInline).then(res => {
         if (res.code === 0) {
           this.loading = false
           this.tableData = res.data.data
-          this.total = res.data.data.total
+          this.total = res.data.total
+          console.log(this.total)
         } else {
           this.$message.warning(`${res.message}`)
         }
       })
     }
+
   },
   created () {
     this.init()
