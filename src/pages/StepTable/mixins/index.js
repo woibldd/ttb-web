@@ -67,7 +67,7 @@ export const tradeMixins = {
               props: {
                 dropData: {
                     name: this.$t('otc_currency'),
-                    data: [this.$t('otc_trans_idjg'),'USDT', 'BTC']
+                    data: [this.$t('allin'),'USDT', 'BTC']
                 }
               },
               on: {
