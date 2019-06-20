@@ -91,9 +91,12 @@
           min-width="230px"
           :label="operate.title">
           <template >
-            <span 
+            <!-- <span 
               @click="showModal = true"
-              class="my-fund-operate">{{ $t('account_exchange') }}</span>  
+              class="my-fund-operate">{{ $t('account_exchange') }}</span>   -->
+              <router-link 
+              :to="{name: 'OTC'}"
+              class="my-fund-operate">{{ $t('asset_trading') }}</router-link>
           </template>
         </el-table-column>
       </el-table>

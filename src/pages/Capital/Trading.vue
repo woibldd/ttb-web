@@ -84,10 +84,10 @@
           min-width="230px"
           :label="operate.title">
           <template slot-scope="scope">
-            <span
+            <!-- <span
               v-if="scope.row.currency === 'BTC'"
               @click="showModal = true"
-              class="my-fund-operate">{{ $t('account_exchange') }}</span>
+              class="my-fund-operate">{{ $t('account_exchange') }}</span> -->
             <!--<router-link-->
               <!--v-if="scope.row.depositable"-->
               <!--:to="'/fund/deposit/' + scope.row.currency"-->
