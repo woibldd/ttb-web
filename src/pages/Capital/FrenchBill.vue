@@ -14,6 +14,7 @@
         <el-select
           v-model="formInline.currency"
           placeholder="币种"
+          @change="changeCurreny"
           clearable>
           <el-option
             v-for="(item, index) in currencyData"
@@ -27,6 +28,7 @@
         <el-select
           v-model="formInline.type"
           placeholder="交易类型"
+          @change="changeType"
           clearable>
           <el-option
             v-for="(item, index) in sideData"
@@ -187,19 +189,24 @@ export default {
           this.$message.warning(`${res.message}`)
         }
       })
+    },
+    changeCurreny (e) {
+      this.formInline.currency = e
+      this.formInline.page = 1
+      this.formInline.size = 10
+      this.init()
+    },
+    changeType (e) {
+      this.formInline.type = e
+      this.formInline.page = 1
+      this.formInline.size = 10
+      this.init()
     }
-
   },
   created () {
     this.init()
   },
   watch: {
-    'formInline.currency': function () {
-      this.init()
-    },
-    'formInline.type': function () {
-      this.init()
-    }
   }
 }
 </script>
