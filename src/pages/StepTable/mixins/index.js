@@ -140,7 +140,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: this.$t('order_th_capedasda'),
+          label: '委托价格',
           prop: 'price',
           render: (h, params) => {
             let spiltName = params.row.symbol.split('/')
@@ -149,7 +149,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: this.$t('order_th_capeaxcvb'),
+          label: '委托数量/成交数量',
           prop: 'side',
           width: 160,
           render: (h, params) => {
@@ -158,7 +158,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: this.$t('order_th_capehjiky'),
+          label: '委托价格/成交金额',
           width: 160,
           prop: 'side',
           render: (h, params) => {
@@ -175,7 +175,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: this.$t('order_th_capeqqewc'),
+          label: '发布日期',
           prop: 'create_time',
           width: 180,
           render: (h, params) => {
