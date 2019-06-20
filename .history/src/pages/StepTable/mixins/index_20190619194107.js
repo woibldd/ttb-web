@@ -8,21 +8,12 @@ import SlideModel from '../components/StepModel'
 import utils from '../../../modules/utils'
 import service from '@/modules/service'
 import {state} from '@/modules/store'
-import STepSelect from '../components/StepSelect'
 export const tradeMixins = {
-  components: {
-    StepTable,
-    SlideModel,
-    STepSelect
-  },
   data () {
     return {
       active: 0,
       side: 0,
       detail: {},
-      currentType: {
-        currency: ''
-      },
       orderHeader: [
         {
           label: this.$t('otc_trans_id'),
@@ -31,16 +22,6 @@ export const tradeMixins = {
         {
           label: this.$t('order_th_type'),
           prop: 'side',
-          renderHeader: (h, params) => {
-            return h(STepSelect, {
-              on: {
-                'dropdown-slect': (e) => {
-                  this.params1.side = e
-                  this.init(this.active)
-                }
-              }
-            })
-          },
           render: (h, params) => {
             const state = params.row.side
             const name = state === 1 ? '买入' : '卖出'
@@ -53,32 +34,15 @@ export const tradeMixins = {
           }
         },
         {
-          label: this.$t('order_th_status'),
+          label: this.$t('state'),
           prop: 'state',
           render: (h, params) => {
             return h('div', this.state(params.row.state))
           }
         },
         {
-          label: '币种',
-          prop: 'symbol',
-          renderHeader: (h, params) => {
-            return h(STepSelect, {
-              props: {
-                dropData: {
-                  name: '币种',
-                  data: ['全部', 'USDT', 'BTC']
-                }
-              },
-              on: {
-                'dropdown-slect': (e) => {
-                  const selectName = e === 0 ? '' : e === 1 ? 'USDT' : 'BTC'
-                  this.params1.currency = selectName
-                  this.init(this.active)
-                }
-              }
-            })
-          }
+          label: this.$t('otc_currency'),
+          prop: 'symbol'
         },
         {
           label: this.$t('price'),
@@ -115,7 +79,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: this.$t('operation'),
+          label: this.$t('actions'),
           prop: 'trans_id',
           render: this.tradeActions
         }
@@ -168,7 +132,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: this.$t('state'),
+          label: this.$t('order_th_status'),
           prop: 'state',
           render: (h, params) => {
             return h('div', this.orderState(params.row.state))
@@ -183,7 +147,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: this.$t('active_relay_operator'),
+          label: this.$t('actions'),
           prop: 'id',
           width: 140,
           render: this.tradeActions
@@ -212,9 +176,13 @@ export const tradeMixins = {
       return this.userInfo.id
     }
   },
+  components: {
+    StepTable,
+    SlideModel
+  },
   filters: {
     side (state) {
-      return state === 1 ? '买入' : '出售'
+      return state === 1 ? '买入' : '售出'
     },
     state (code) {
       switch (code) {
@@ -291,23 +259,16 @@ export const tradeMixins = {
           },
           on: {
             click: () => {
-              if (this.active === 3) {
-                this.dialogVisible = true
-                this.detail = params.row
-                this.side = 0
-                this.bankData = []
-              } else {
-                let p = {
-                  trans_id: params.row.trans_id,
-                  user_id: this.id
-                }
-                service.getOtcOrderInfo(p).then(res => {
-                  this.dialogVisible = true
-                  this.detail = res.data
-                  this.side = 0
-                  this.bankData = []
-                })
+              let p = {
+                trans_id: params.row.trans_id,
+                user_id: this.id
               }
+              service.getOtcOrderInfo(p).then(res => {
+                console.log(res, 1)
+              })
+              this.dialogVisible = true
+              this.detail = params.row
+              this.side = 0
             }
           }
         }, '详情')
@@ -320,7 +281,7 @@ export const tradeMixins = {
                 marginRight: '5px',
                 width: '40px',
                 height: '20px',
-                background: 'rgba(201,169,108,1)',
+                background: '#01CED1',
                 borderRadius: '10px',
                 color: '#fff',
                 fontSize: '12px',
@@ -332,35 +293,18 @@ export const tradeMixins = {
               },
               on: {
                 click: () => {
-                  this.$confirm('你确定要撤销该笔委托单？', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    type: 'warning'
-                  }).then(() => {
-                    service.otcOrderRemove(
-                      {
-                        type: 1,
-                        trans_id: params.row.active_id
-                      }
-                    ).then(res => {
-                      if (!res.code) {
-                        // this.$message.success('撤销成功')
-                        this.$message({
-                          type: 'success',
-                          message: `撤销成功`,
-                          duration: 1000
-                        })
-                        this.init(this.active)
-                      } else {
-                        // this.$message.error(`${res.message}`)
-                        this.$message({
-                          type: 'error',
-                          message: `${res.message}`,
-                          duration: 1000
-                        })
-                      }
-                    })
-                  }).catch(() => {
+                  service.otcOrderRemove(
+                    {
+                      type: 1,
+                      trans_id: params.row.active_id
+                    }
+                  ).then(res => {
+                    if (!res.code) {
+                      this.$message.success('撤销成功')
+                      this.init(this.active)
+                    } else {
+                      this.$message.error(`${res.message}`)
+                    }
                   })
                 }
               }

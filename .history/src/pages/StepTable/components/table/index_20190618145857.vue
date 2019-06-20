@@ -1,15 +1,10 @@
 <template>
   <div class="crud">
-    <el-table :data="showGridData" 
-v-loading="loading" :empty-text="$t('no_data')">
-      <el-table-column 
-v-for="(item,index) in gridConfig" 
-:key="index" :prop="item.prop" :label="item.label"
-                       :width="item.width?item.width:''" 
-:render-header="item.renderHeader" show-overflow-tooltip>
+    <el-table :data="showGridData" v-loading="loading" :empty-text="$t('no_data')">
+      <el-table-column v-for="(item,index) in gridConfig" :key="index" :prop="item.prop" :label="item.label"
+                       :width="item.width?item.width:''" show-overflow-tooltip>
         <template slot-scope="scope">
-          <Cell v-if="item.render" 
-:row="scope.row" :column="item" :index="scope.$index" :render="item.render">
+          <Cell v-if="item.render" :row="scope.row" :column="item" :index="scope.$index" :render="item.render" :render-header="item.renderHeader">
             <!---->
           </Cell>
           <span v-else>{{ scope.row[item.prop] }}</span>
@@ -58,16 +53,12 @@ export default {
       this.showGridData = this.showGridData
     }
   },
-  methods: {
-  }
+  methods: {}
 }
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-  .el-table thead {
-    color: #999!important;
-  }
-  .el-table th div {
-    line-height: 0;
-  }
+.el-table thead {
+  color: #999 !important;
+}
 </style>

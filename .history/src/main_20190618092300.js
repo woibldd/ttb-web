@@ -32,9 +32,6 @@ import {
   RadioButton,
   Loading,
   MessageBox,
-  Dropdown,
-  DropdownMenu,
-  DropdownItem,
   Tabs,
   TabPane,
   Button,
@@ -65,9 +62,7 @@ Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
 Vue.use(Upload)
-Vue.use(Dropdown)
-Vue.use(DropdownMenu)
-Vue.use(DropdownItem)
+
 Vue.use(RadioGroup)
 Vue.use(RadioButton)
 Vue.use(Loading)
