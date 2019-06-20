@@ -320,7 +320,7 @@ export const tradeMixins = {
                 marginRight: '5px',
                 width: '40px',
                 height: '20px',
-                background: 'rgba(201,169,108,1)',
+                background: '$primary',
                 borderRadius: '10px',
                 color: '#fff',
                 fontSize: '12px',

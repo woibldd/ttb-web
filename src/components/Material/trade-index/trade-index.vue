@@ -248,7 +248,7 @@ export default {
 }
 
 .note-back {
-    background-color: #F4EEE2;
+    background-color: #F6FDFD;
     line-height: 16px;
     color: $primary;
     border: 1px solid #CCCCCC;

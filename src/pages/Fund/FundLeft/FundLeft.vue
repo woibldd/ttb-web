@@ -1,7 +1,7 @@
 <template>
   <div class="fund-left-container">
     <div class="left-menu-container left-menu-nobottom">
-      <p class="left-menu-title">
+      <!-- <p class="left-menu-title">
         <icon name="fund-history-money"/>
         <span class="menu-title">{{ $t('wallets_nav_asset') }}</span>
       </p>
@@ -17,8 +17,7 @@
               class="sub-menu-item"
               active-class="active"
               to="/fund/my/assets">{{ $t('trading_account') }}
-            </router-link>
-
+            </router-link> 
             <router-link
               class="sub-menu-item"
               active-class="active"
@@ -38,7 +37,84 @@
           class="menu-name"
           to="/fund/address"
           active-class="active">{{ $t('address_manage') }}</router-link></li>
-      </ul>
+      </ul> -->
+         <!--资金纵览-->
+      <dl>
+        <dt>
+          <icon name="fund-history-money"/>
+          <span class="menu-title">{{ $t('wallets_nav_asset') }} </span>
+        </dt>
+        <dd>
+          <router-link
+            to="/fund/capital">{{ $t('capital_manage') }}
+          </router-link>
+        </dd>
+      </dl>
+      <!--资金账户-->
+      <dl>
+        <dt>
+          <icon name="wallet"/>
+          <span class="menu-title"> 资金账户 </span>
+        </dt>
+        <dd>
+          <router-link
+            class="menu-name"
+            to="/fund/my/assets">资金账户
+          </router-link>
+        </dd>
+        <dd>
+          <router-link
+            class="menu-name"
+            to="/fund/deposit">{{ $t('deposit') }}
+          </router-link>
+        </dd>
+        <dd>
+          <router-link
+            class="menu-name"
+            to="/fund/withdraw">{{ $t('withdraw') }}
+          </router-link>
+        </dd>
+        <dd>
+          <router-link
+            class="menu-name"
+            :to="'/fund/transfer'">{{ $t('account_exchange') }}
+          </router-link>
+        </dd>
+      </dl>
+      <!--交易账户-->
+       <dl>
+        <dt>
+          <icon name="transaction"/>
+          <span class="menu-title"> 交易账户 </span>
+        </dt>
+        <dd>
+          <router-link
+            class="sub-menu-item"
+            to="/fund/fTrade">{{ $t('otc_account') }}
+          </router-link>
+        </dd>
+        <dd>
+          <router-link
+            class="sub-menu-item"
+            to="/fund/bTrade">{{ $t('trading_account') }}
+          </router-link>
+        </dd>
+        <dd>
+          <router-link
+            class="sub-menu-item"
+            to="/fund/hyTrade">{{ $t('contract_account') }}
+          </router-link>
+        </dd> 
+       </dl>
+      <dl class="address_dl">
+        <dd>
+          <router-link
+            class="menu-name"
+            to="/fund/address"
+          >{{ $t('address_manage') }}
+          </router-link>
+        </dd>
+      </dl>
     </div>
   </div>
 </template>
@@ -48,41 +124,82 @@ export default{
 }
 </script>
 <style lang="scss" scoped>
-.fund-left-container {
-  float: left;
-  .left-menu-nobottom {
-    border-bottom: 0;
-    margin-bottom: 0;
-  }
-  .left-menu-container {
-    background: #fff;
-    position: relative;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    border: 1px solid #e9e9e9;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    width: 160px;
+  .fund-left-container {
+    float: left;
 
-    .left-menu-title {
-      width: 100%;
-      font-size: 14px;
-      margin-left: 12px;
-      text-align: left;
-      color: $text-weak;
-      box-sizing: border-box;
-
-      .menu-title {
-        margin-left: 6px;
-      }
+    .left-menu-nobottom {
+      border-bottom: 0;
+      margin-bottom: 0;
+      padding-top:10px;
     }
 
-    .left-menu-list {
-      width: 100%;
-      margin-top: 20px;
+    .left-menu-container {
+      dt {
+        padding: 12px 6px;
+        font-weight: 400;
+      }
+      dd {
+        .router-link-active {
+          background: $profile-menu-bg;
+          color: $primary;
+          &::after {
+            background: $primary;
+          }
+        }
+        a {
+          padding: 8px 0 8px 40px;
+          position: relative;
+          color: #333;
+          display: block;
+          &::after {
+            content: '';
+            width: 4px;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: transparent;
+          }
+          &:hover {
+            background: $profile-menu-bg;
+            color: $primary;
+            &::after {
+              background: $primary;
+            }
+          }
+        }
+        &:last-child {
+          border-bottom: 1px solid #ececec
+        }
+      }
+      background: #fff;
+      position: relative;
+      /*padding-top: 20px;*/
+      /*padding-bottom: 20px;*/
+      border: 1px solid #e9e9e9;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-bottom: 16px;
+      width: 160px;
 
-      .menu-name {
+      .left-menu-title {
+        width: 100%;
+        font-size: 14px;
+        margin-left: 12px;
+        text-align: left;
+        color: $text-weak;
+        box-sizing: border-box;
+
+        .menu-title {
+          margin-left: 6px;
+        }
+      }
+
+      .left-menu-list {
+        width: 100%;
+        margin-top: 20px;
+
+        .menu-name {
           box-sizing: border-box;
           width: 100%;
           display: inline-block;
@@ -90,15 +207,17 @@ export default{
           color: $text-strong;
 
           &.active, &:hover {
-          color: $primary;
-          background: $profile-menu-bg;
-          box-shadow: inset 3px 0 0 0 $primary;
+            color: $primary;
+            background: $profile-menu-bg;
+            box-shadow: inset 3px 0 0 0 $primary;
+          }
         }
-      }
-      .sub-menu-group {
+
+        .sub-menu-group {
           margin-top: 10px;
-      }
-      .sub-menu-item {
+        }
+
+        .sub-menu-item {
           padding-top: 15px;
           padding-bottom: 15px;
           padding-left: 50px;
@@ -106,19 +225,20 @@ export default{
 
           &:hover,
           &.active {
-              color: #01CED1;
+            color: #C9AA6D;
           }
-      }
-      li {
-        width: 100%;
-        text-align: left;
-        line-height: 36px;
-        font-size: 14px;
-        color: #333;
-        cursor: pointer;
-        margin-bottom: 5px;
+        }
+
+        li {
+          width: 100%;
+          text-align: left;
+          line-height: 36px;
+          font-size: 14px;
+          color: #333;
+          cursor: pointer;
+          margin-bottom: 5px;
+        }
       }
     }
   }
-}
 </style>
