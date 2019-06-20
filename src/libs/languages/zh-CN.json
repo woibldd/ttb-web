@@ -1632,7 +1632,10 @@
 
     "orderbook_depth_title": "深度图",
     "contract_exit_price": "平仓价格",
-
+    "collection": "收款方式",
+    "collection_cs": "选择交易币种",
+    "collection_add": "添加收款信息",
+    "collection_all": "所有",
     "h5_index_list_0": "技术优势，省心放心",
     "h5_index_list_1": "高响应高吞吐高并发，百万+/秒/交易撮合速度；多权限API，即时行情自动交易",
     "h5_index_list_2": "全网最优费率，挂单即赚",
@@ -1921,5 +1924,8 @@
   "otc_side_3": "  交易总额(CNY)",
   "otc_need_verify": "法币交易需完成以下认证",
   "otc_bind_bankCard":"绑定本人实名银行卡",
-  "otc_kyc_verified":"身份认证 <i style='color:#ccc;'>（认证等级：KYC1）</i>"
+  "otc_kyc_verified":"身份认证 <i style='color:#ccc;'>（认证等级：KYC1）</i>",
+  "otc_side_99": "开户行", 
+  "otc_side_98": "开户支行"
+
 }

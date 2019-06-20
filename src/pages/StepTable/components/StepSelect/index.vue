@@ -19,8 +19,8 @@ export default {
       type: Object,
       default: function () {
         return {
-          name: '类型',
-          data: ['全部', '买入', '卖出']
+          name: this.$t('order_th_type'),
+          data: [this.$t('allin'), this.$t('contract_action_button_up'), this.$t('contract_action_button_down')]
         }
       }
     }

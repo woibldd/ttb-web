@@ -1564,6 +1564,10 @@
 "ix_indxe_tips": "<a>IXX Index:</a><br/> The  IXX Index tracks the Bitcoin price every 5 seconds. This index  is composite,It is an equally weighted index using the BITSTAMP, GDAX 、KRAKEN and GEMINI BTC/USD prices. The composition is subject to change due to unprecedented instability.",
 "post_only_tips": "<a>Post-only：</a><br/>A Post-only Order Will execute immediately against the market. Use to ensure a Maker Rebate.If it would execute against resting orders，it will cancel instead.",
 
+"collection": " payment method ",
+"collection_cs": " Choosing the currency to trade ",
+"collection_add": " Adding Receipt Information ",
+"collection_all": "All",
 "contract_simple_success":"successful",
 "contract_simple_fail":"fail",
 "contract_operate_default":"not confirmed",
@@ -2011,6 +2015,7 @@
 "otc_order_quota": "  Quota(%{legal_currency})",
 "otc_side_1":"purchase",
 "otc_side_2": "Sell",
-"":""
+"otc_side_99": "Account-opening Bank", 
+"otc_side_98": "Account-opening Branch"
 
 }

@@ -66,8 +66,8 @@ export const tradeMixins = {
             return h(STepSelect, {
               props: {
                 dropData: {
-                  name: '币种',
-                  data: ['全部', 'USDT', 'BTC']
+                    name: this.$t('otc_currency'),
+                    data: [this.$t('otc_trans_idjg'),'USDT', 'BTC']
                 }
               },
               on: {

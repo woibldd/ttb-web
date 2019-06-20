@@ -109,36 +109,36 @@ type="text"
       <el-form :model="ruleForm" 
 :rules="rules" ref="ruleForm" class="demo-ruleForm">
         <template v-if="type === '添加收款方式'">
-          <el-form-item label="收款方式" 
+          <el-form-item :label="this.$t('collection')" 
 prop="payment_type">
             <el-select v-model="ruleForm.payment_type" 
 style="width: 100%;" size="small" @change="bankHanle">
               <el-option value="1" 
-label="银行卡"/>
+:label="this.$t('payment_nameyhk')"/>
               <el-option value="2" 
-label="支付宝"/>
+:label="this.$t('payment_namezfb')"/>
               <el-option value="3" 
-label="微信"/>
+:label="this.$t('payment_weChat_adasunt')"/>
             </el-select>
             <!--<el-input v-model="ruleForm.payment_type"></el-input>-->
           </el-form-item>
-          <el-form-item label="姓名" 
+          <el-form-item :label="this.$t('name')" 
 prop="name">
             <el-input v-model="ruleForm.name" 
 size="small"/>
           </el-form-item>
           <template v-if="ruleForm.payment_type === '1'">
-            <el-form-item label="开户行" 
+            <el-form-item :label="this.$t('otc_side_99')" 
 prop="deposit_bank">
               <el-input v-model="ruleForm.deposit_bank" 
 size="small"/>
             </el-form-item>
-            <el-form-item label="开户支行" 
+            <el-form-item :label="this.$t('otc_side_98')" 
 prop="sub_branch">
               <el-input v-model="ruleForm.sub_branch" 
 size="small"/>
             </el-form-item>
-            <el-form-item label="银行卡号" 
+            <el-form-item :label="this.$t('payment_card_number')" 
 prop="card_number">
               <el-input v-model="ruleForm.card_number" 
 size="small"/>

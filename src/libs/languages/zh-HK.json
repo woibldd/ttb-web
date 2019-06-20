@@ -7,6 +7,10 @@
   "asset": "資產",
   "help": "幫助",
   "buy": "買",
+  "collection": "收款管道",
+  "collection_cs": "選擇交易幣種",
+  "collection_add": "添加收款資訊",
+  "collection_all": "所有",
   "sell": "賣",
   "userCenter": "用戶中心",
   "total": "累計(%{unit})",
@@ -1867,6 +1871,11 @@
   "otc_sidees7": "撤單全部",
   "otc_sidees8": "撤單部分成交",
   "otc_sidees9": "暫停",
+  
+  "otc_side_99": "開戶行", 
+  "otc_side_98": "開戶支行",
+
+
 
   "otc_sidees10": "詳情",
   "otc_sidees11": "撤銷成功",
