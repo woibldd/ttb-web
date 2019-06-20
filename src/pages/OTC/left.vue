@@ -51,7 +51,7 @@
               to="/OTC/Hir"
               active-class="active"
             >{{ $t('otc_my_order') }}
-            <span class="count" 
+            <span class="count"
 v-if="token && count > 0">{{ count }}</span></router-link>
           </li>
           <!--<li class="">-->
@@ -62,7 +62,7 @@ v-if="token && count > 0">{{ count }}</span></router-link>
           <!--{{$t('account_exchange')}}-->
           <!--</router-link>-->
           <!--</li>-->
-          <li v-if="false">
+          <li>
             <router-link
               class='menu-name'
               to="/OTC/FrenchBill"
@@ -86,11 +86,11 @@ v-if="token && count > 0">{{ count }}</span></router-link>
         </p>
         <ul class="left-menu-list">
           <li class>
-            <a class="menu-name" 
+            <a class="menu-name"
 :href="guidanceLink">{{ $t('footer_hreseqgslp1') }}</a>
           </li>
           <li class>
-            <a class="menu-name" 
+            <a class="menu-name"
 :href="commonProblemLink">{{ $t('footer_hreseqgslp2') }}</a>
           </li>
         </ul>

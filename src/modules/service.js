@@ -990,6 +990,13 @@ const service = {
     getOtcRemovefills(params) {
         return getCache('c_otc_removefills', () => request('otc/account/removefills', params), 1e3)
     },
+    balancefills(params) {
+      return request('otc/account/balancefills', params)
+    },
+    // 划转记录
+    getBalanceList (param) {
+      return request('/account/balance/finance/list', param)
+    },
     /**
      * 已完成订单
      * user_id 用户id

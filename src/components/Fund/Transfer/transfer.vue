@@ -7,10 +7,10 @@
     </div>
     <div class="fund-items-content" style="margin-left:0">
       <div class="fund-item-row mb-14">
-        <div class="row__label">{{$t('currency')}}</div> 
+        <div class="row__label">{{$t('currency')}}</div>
         <div>
-          <el-select v-model="selectCoin" 
-          :placeholder="$t('please_choose')" 
+          <el-select v-model="selectCoin"
+          :placeholder="$t('please_choose')"
           class="max-input"
           @change="changeCoin"
           >
@@ -22,7 +22,7 @@
             </el-option>
           </el-select>
         </div>
-      </div> 
+      </div>
       <div class="fund-item-row mb-14">
         <div class="row__label">{{ $t('transfer_side')}}</div>
             <el-select v-model="accountFrom" :placeholder="$t('please_choose')" class="min-input" @change="transferType(1)">
@@ -35,7 +35,7 @@
             </el-select>
             <span style="padding:0 10px ">{{$t('transfer_to_a')}}</span>
             <el-select v-model="accountTo" :placeholder="$t('please_choose')" class="min-input" @change="transferType(2)">
-              <el-option  
+              <el-option
                 v-for="item in accountTypes2"
                 :key="item.value"
                 :label="$t(item.label)"
@@ -46,7 +46,12 @@
       <div class="fund-item-row mb-14">
         <div class="row__label">{{$t('transfer_amount')}}</div>
         <div>
-          <el-input v-model="number" type="number" :placeholder="$t('transfer_enter_amount')"  class="max-input"></el-input>
+          <number-input
+            class="number-input"
+            v-model="number"
+            :placeholder="$t('transfer_enter_amount')"
+          />
+          <!--<el-input v-model="number" type="number" :placeholder="$t('transfer_enter_amount')"  class="max-input"></el-input>-->
         </div>
       </div>
       <div class="fund-item-row mb-14">
@@ -66,11 +71,11 @@
           <!-- <el-input v-model="number" placeholder="请输入内容" class="max-input"></el-input> -->
         </div>
       </div>
-    </div> 
+    </div>
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane :label="$t('transfer_btc_history')" name="first"></el-tab-pane>
       <!-- <el-tab-pane label="全部划转记录" name="second"></el-tab-pane> -->
-        <el-table  
+        <el-table
          :data="tableData"  :empty-text="$t('no_data')"
          style="width: 100%">
          <el-table-column
@@ -81,7 +86,7 @@
          :label="$t('transfer_from_a')"/>
          <el-table-column
          prop="to_balance"
-         :label="$t('transfer_to_a')"/> 
+         :label="$t('transfer_to_a')"/>
          <el-table-column
          prop="amount"
          :label="$t('transfer_amount')"/>
@@ -103,7 +108,7 @@
         :page.sync="pages"
         :is-end="isLastPage"
         :func="getPage"/>
-    
+
     </div>
   </div>
 </template>
@@ -133,7 +138,7 @@ export default {
       accountFrom: 2,
       availableBalance:0,
       tradingBalance: null,
-      contractBalance: null, 
+      contractBalance: null,
       otcBalance: null,
       tableData: [],
       accountTypes: [{
@@ -149,8 +154,8 @@ export default {
       accountTypes2: []
     }
   },
-  async created () {
-  }, 
+  computed: {
+  },
   methods: {
     transferType(type){
       this.number = ""
@@ -164,15 +169,15 @@ export default {
             this.accountTypes2.push(item)
           }
         })
-        
-      }  
+
+      }
       this.updateAvailable()
     },
     all(){
       Big.RM = 0
       this.number = new Big(this.availableBalance).toFixed(8)
     },
-    async submit(){ 
+    async submit(){
       if (0 >= this.number || this.number === '') {
         utils.alert(this.$t('transfer_enter_error'))
         return
@@ -205,7 +210,7 @@ export default {
     handleClick(tab, event) {
 
     },
-    async getBalance(){ 
+    async getBalance(){
       let [tradingBalance, contractBalance, otcBalance] = await Promise.all([
         service.getBalanceByPair(this.selectCoin),
         service.getContractBalanceByPair({ symbol:this.selectCoin}),
@@ -216,12 +221,12 @@ export default {
       if (tradingBalance && tradingBalance.length) {
         this.tradingBalance = tradingBalance[0]
       }
-      if (contractBalance) { 
+      if (contractBalance) {
         this.contractBalance = contractBalance.data
       }
       if (otcBalance) {
         this.otcBalance = otcBalance.data
-      }  
+      }
       this.updateAvailable()
     },
     getPage(){
@@ -229,11 +234,11 @@ export default {
     },
     page(page = 1){
       service.getBalanceList({page:page,size:10}).then(res => {
-       
+
         if (res.code || res.data.length === 0) {
           this.loading = false
         } else {
-           
+
           this.tableData = res.data.data
           this.loading = false
           if(this.tableData.length < 10){
@@ -255,7 +260,7 @@ export default {
 
             this.tableData[i].from_balance = balanceList[this.tableData[i].from_balance]
             this.tableData[i].to_balance = balanceList[this.tableData[i].to_balance]
- 
+
             switch  (this.tableData[i].status ) {
             case 0:
               text1=this.$t("transfer_fail"); //失败
@@ -264,14 +269,14 @@ export default {
               text1=this.$t("transfer_complete"); //完成
               break;
             }
-             
-            this.tableData[i].available = (this.tableData[i].available*1).toFixed(8) 
+
+            this.tableData[i].available = (this.tableData[i].available*1).toFixed(8)
             this.tableData[i].status = text1
           }
         }
       })
     },
-    changeCoin(val) { 
+    changeCoin(val) {
       this.accountTypes = []
       if (val === 'USDT') {
         this.accountTypes = [{
@@ -280,7 +285,7 @@ export default {
           }, {
             value: 4,
             label: 'otc_account'
-          }] 
+          }]
       }
       else if(val === 'BTC') {
          this.accountTypes = [{
@@ -292,11 +297,11 @@ export default {
           }, {
             value: 4,
             label: 'otc_account'
-          }] 
-      } 
-      //改变币种的时候重新获取数据  
+          }]
+      }
+      //改变币种的时候重新获取数据
       //this.transferType(1)
-      this.getBalance() 
+      this.getBalance()
       this.value = 2
       this.transferType(1)
     },
@@ -304,7 +309,7 @@ export default {
       console.log({value : this.accountFrom})
       if (this.accountFrom === 1) { //钱包账户
       }
-      else if (this.accountFrom === 2) {  //币币账户 
+      else if (this.accountFrom === 2) {  //币币账户
         this.availableBalance = this.$big(this.tradingBalance.available || 0)
       }
       else if (this.accountFrom === 3) {  //合约账户
@@ -340,11 +345,11 @@ export default {
           min_confirm: 3,
           min_deposit_amount: "0.001",
           min_review_amount: "0",
-          min_withdraw_amount: "0.002", 
+          min_withdraw_amount: "0.002",
           withdraw_fee: "0.001"
         }
       ],
-      this.getBalance(); 
+      this.getBalance();
     },
   },
   created(){
@@ -377,5 +382,24 @@ export default {
   cursor: pointer;
   border:none;
   color:#aa8b61
+}
+.number-input {
+  -webkit-appearance: none;
+  background-color: #fff;
+  background-image: none;
+  border-radius: 4px;
+  border: 1px solid #dcdfe6;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #606266;
+  display: inline-block;
+  font-size: inherit;
+  height: 40px;
+  line-height: 40px;
+  outline: 0;
+  padding: 0 15px;
+  -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+  transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+  width: 288px;
 }
 </style>
