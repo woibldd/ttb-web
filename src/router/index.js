@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import { state, actions } from '@/modules/store'
 import utils from '@/modules/utils'
 import Account from '@/pages/Account'
+import { capitalRouter } from './module/assets'
 import _ from 'lodash'
 // import HelloWorld from '@/components/HelloWorld'
 let loaded = false
@@ -440,7 +441,7 @@ export const routes = [
         path: 'my',
         name: 'my',
         component: MyFund,
-        redirect: 'my/assets',
+        redirect: 'capital',
         children: [
           {
             path: 'contract',
@@ -486,7 +487,8 @@ export const routes = [
         component: FundAddress
       }
     ]
-  },
+  }, 
+  ...capitalRouter,
   {
     path: '/material',
     name: 'Material',

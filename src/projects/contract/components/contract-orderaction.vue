@@ -2820,7 +2820,7 @@ export default {
   border: 1px solid #ccc;
   border-right: 0;
   .row {
-    background: rgba(201, 169, 108, 0.2);
+    background: $profile-menu-bg;
     width: 424px;
     height: 39px;
     display: flex;

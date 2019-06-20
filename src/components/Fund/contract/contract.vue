@@ -1,13 +1,43 @@
 <template>
-  <div class="fund-container my-fund-container contract-container">
-
-    <div class="my-fund-content pt-40">
+  <div class="fund-container my-fund-container contract-container"> 
+     <div class="title-box"> 
+      <div>
+        {{ $t('contract_account') }} 
+         <span class="ml-30">
+          <el-select  
+            v-model="unit" 
+            value-key="name">
+            <el-option
+              v-for="(item, idx) in currencyList"
+              :key="idx"
+              :label="item.name"
+              :value="item"/>
+          </el-select> 
+        </span> 
+      </div>
+      <div>
+        <router-link
+          class="fund-history mr-22 "
+          to="/fund/hyTrade/index"> {{ $t('account_balance') }}</router-link>
+        <router-link
+          class="fund-history mr-22"
+          to="/fund/my/contract/history"> {{ $t('transaction_record') }}</router-link>
+        <router-link
+          class="fund-history"
+          to="/fund/my/contract/assets-history"> {{ $t('capital_record') }}</router-link>
+      </div>
+    </div>
+    <div class="my-fund-content">
+      <div  class="gz-wrapper clearfix">
+        <span>合约资产估值</span>
+        <h1> <icon :name="unit.name+'-unit'" /> {{total | fixed(unit.scale)}}</h1>
+      </div>
       <div class="account-row">
         <div class="row__box pl-6">
           <!-- <div
             id="contract-summary-chart"
             class="chart-dom"/> -->
-          <div>
+          <div v-if="false">
             <div class="currency-row">
               <div class="row__label">{{ $t('account') }}</div>
               <div class="row__value">
@@ -38,7 +68,7 @@
               </p>
             </div> -->
           </div>
-        </div>
+        </div> 
         <div class="row__box">
           <div class="currency-row">
             <div class="row__label"/>
@@ -195,7 +225,26 @@ export default {
       plusMillionUsdt: false,
       millionUsdtAmount: 1000000,
       accountInfo: {},
-      pair: 'FUTURE_BTCUSD'
+      pair: 'FUTURE_BTCUSD',
+      rates: {},
+      currencyList: [
+        {
+          name: 'CNY',
+          symbol: '￥',
+          scale: 2
+        },
+        {
+          name: 'USD',
+          symbol: '$',
+          scale: 4
+        },
+        {
+          name: 'BTC',
+          symbol: 'B',
+          scale: 8
+        },
+      ],
+      unit: null,
     }
   },
   computed: {
@@ -220,16 +269,24 @@ export default {
     showHistory () {
       return this.$route.name === 'history'
     },
-    total () {
+    total () {   
       let sum = this.$big(0)
       this.tableData.forEach(item => {
         sum = sum.plus(this.getEstValue(item))
       })
       return sum.toString()
-    },
-    unit () {
-      return state.locale === 'zh-CN' ? 'CNY' : 'USD'
-    },
+    }, 
+    // unit () {
+    //   return state.locale === 'zh-CN' ? 'CNY' : 'USD'
+    // },
+    // symbol () {
+    //   switch (this.unit) {
+    //     case 'CNY': 
+    //       return '￥' 
+    //     case 'USD':
+    //       return '$'
+    //   }
+    // },
     header () {
       return state.locale && [
         {key: 'currency', title: this.$t('fees_name')},
@@ -248,11 +305,17 @@ export default {
     marginBalance() {
       //保证金余额 = 可用余额 + 未实现盈亏
       return this.$big(this.holding.available_balance || 0).plus(this.holding.unrealized || 0)
-    }
+    },
+    currencyChange(e) { 
+      //this.getContractBalanceList()
+    },
 
   },
-  async created () {
+  async created () { 
+    this.unit = this.currencyList[0]
+    await this.getAllRate() 
     await this.getPairs()
+    this.getContractBalanceByPair()
     this.getContractBalanceList()
   },
   watch:{
@@ -262,6 +325,9 @@ export default {
   },
   mounted () {
     // this.initChart()
+    if(this.holding === undefined){
+      utils.alert(this.$t('网络加载失败，请检查网络重试'))
+    }
   },
   methods: {
     amounts(){
@@ -282,19 +348,75 @@ export default {
       await service.getContractSymList().then(res => {
         if (res && res.data) {
           this.allPairs = res.data.items
-          this.selectPair = this.allPairs[0]
+          //this.selectPair = this.allPairs[0]
+          this.selectPair = res.data.items.filter(arg => arg.product_name === 'BTC')[0]
         }
       })
     },
     hideModal () {
       this.showModal = false
     },
+    async getAllRate() {
+      let res = await service.getAllRate() 
+      if (!res.code && !!res.data) {
+        this.rates = res.data;
+      }
+    },
+    // getEstValue (item) {
+    //   // console.log('asjdlfkjaskldfjasldjflasdjfl;ajsdfljkasdlfk')
+    //   let coin = item.currency.replace("USD","")
+    //   let rate = this.rates[coin]
+    //   if (!!rate) { 
+    //     let res = this.$big(item.available).times(this.$big(rate[this.unit.name] || 0))
+    //     let num = 8 
+    //     return res.round(num, this.C.ROUND_DOWN).toString()
+    //   } 
+    //   return '0';
+    // }, 
+    getEstValue (item) {
+      let res = this.$big(0)
+      let unit = this.unit.name
+      let {currency,camount} = item  
+      if (unit === 'BTC'){
+        if(currency === 'BTC') {
+          res = this.$big(camount) 
+        }
+        else {
+          if (this.$big(camount).gt(0) && !!this.rates[currency]) {
+            res = this.$big(camount).times(this.rates[currency]['USD'] || 0).div(this.rates['BTC']['USD'])
+          }
+        }
+      }
+      else if (item.rates) {
+        res = this.$big(camount).times(this.$big(item.rates[unit] || 0))
+      }
+      else {
+        if (this.rates[currency]) {
+          res = this.$big(camount).times(this.$big(this.rates[currency][unit] || 0))
+        }
+      } 
+      return res
+    },
     getContractBalanceList () {
+      service.getContractBalanceList().then(res => { 
+         if (!res.code && !!res.data) {
+            this.tableData = (res.data || []).map(item => { 
+            item.currency = item.currency.replace("USD","")
+            item.camount = item.available
+            item.estValue = this.getEstValue(item) 
+            console.log({item})
+            return item
+          })
+        }
+      })
+    },
+    getContractBalanceByPair () { 
       service.getContractBalanceByPair({
         symbol: this.currency
       }).then(res => {
         this.accountInfo = res.data
-        this.state.ct.holding = res.data
+        this.state.ct.holding = res.data 
+        // this.tableData = res.data
       })
     }
   },
@@ -331,7 +453,7 @@ export default {
         position: absolute;
         right: 15px;
         top: 20px;
-        color: #22ced0;
+        color: $primary;
         cursor: pointer;
       }
     }
@@ -364,7 +486,7 @@ export default {
           padding:10px 20px;
         }
         .popover-hz{
-          background: #22ced0;
+          background: $primary;
           color: #fff;
           padding: 7px 15px;
           border:none;
@@ -387,6 +509,39 @@ export default {
         display: block;
         margin-bottom: 30px;
       }
+    }
+  }
+  .gz-wrapper {
+    width: 520px;
+    height: 176px;
+    background: #F6F1FD;
+    border-radius: 4px;
+    position: relative;
+    text-align: center;
+    margin: 30px 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 6px;
+      background: #A572E9;
+      border-radius: 4px;
+    }
+
+    span {
+      padding: 30px 0;
+      font-size: 18px;
+      display: block;
+      font-weight: 400;
+      color: #A572E9;
+    }
+
+    h1 {
+      font-size: 30px;
+      color: #A572E9;
     }
   }
 </style>

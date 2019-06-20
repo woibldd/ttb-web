@@ -202,6 +202,7 @@ export default {
       this.formInline.size = 10
       this.init()
     }
+
   },
   created () {
     this.init()

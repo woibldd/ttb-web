@@ -322,6 +322,9 @@ const service = {
     // return getCache(name + 'FiatRate', () => request('currency/query', { name }), 1e4)
     return getCache(currency + 'FiatRate', () => request('account/currency/rates', { currency }), 1e4)
   },
+  getAllRate () {
+    return  getCache('ALLFiatRate', () => request('account/currency/rates'), 1e4)
+  },
   getCoins () {
     return getCache('currencyList', () => request('account/currency/list'))
   },
@@ -900,6 +903,30 @@ const service = {
      return getCache('c_otc_balance', () => request('otc/account/balance/list', params), 1e3)
    },
 
+   async getOtcBalanceByPair (symbol) {
+    if (!symbol || !symbol.symbol) {
+      symbol = {
+        symbol: 'BTC'
+      }
+    }
+    let result = await service.getOtcBalance()
+    console.log(result)
+    // let resp = []
+    if (!result.code) {
+      let list = result.data
+      let balance = list ? list.filter(l => symbol.symbol === l.currency)[0] || {} : {
+        available: '0',
+        holding: '0',
+        available_balance: '0',
+        leverage: 100
+      }
+      return {
+        code: 0,
+        data: balance
+      }
+    }
+    return null
+  },
        //*************************  OTC 接口  ************************//
     /**
      * 查询是否满足交易条件
@@ -1172,6 +1199,31 @@ const service = {
      */
     otcSymbolList() {
         return getCache('c_otc_symbol_list', () => request('otc/account/symbol/list'), 5e3)
+    },
+    //获取余额（总账户）
+    getAccountWalletList() { 
+      return  getCache('c_wallet_list', () => request('account/wallet/list'), 1e3)
+    },
+    async getwalletBalanceByPair(symbol) {
+      if (!symbol || !symbol.symbol) {
+        symbol = {
+          symbol: 'BTC'
+        }
+      }
+      let result = await service.getAccountWalletList() 
+      if (!result.code) {
+        let list = result.data
+        let balance = list ? list.filter(l => symbol.symbol === l.currency)[0] || {} : {
+          available: '0',
+          holding: '0',
+          available_balance: '0',
+          leverage: 100
+        }
+        return {
+          code: 0,
+          data: balance
+        }
+      }
     }
 
 
