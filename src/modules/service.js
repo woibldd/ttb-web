@@ -266,7 +266,7 @@ const service = {
       }
     }))
   },
-  getQuoteOrderbook ({ pair, accuracy, offset, size }) { 
+  getQuoteOrderbook ({ pair, accuracy, offset, size }) {
     return quote(`orderbook/${pair}`, { offset, accuracy, size })
   },
   getQuoteDeal ({ pair, size }) {
@@ -869,19 +869,19 @@ const service = {
     return getCache('c_ranklist', () => request('future/activity/rank_list', params), 1e3)
   },
 
-  //自选列表 
+  //自选列表
   getOptionalList (params) {
     //site (int 非必须,默认1) 1-ix 2-ixx
     return getCache('c_optional', () => request('account/currency/optionalList', params), 1e3)
   },
   // 增加自选
-  addOptional(params) { 
+  addOptional(params) {
     //site (int 非必须,默认1) 1-ix 2-ixx
     // id 币对id
     return request('account/currency/optional/add', params)
   },
   //删除自选
-  delOptional(params) { 
+  delOptional(params) {
     //site (int 非必须,默认1) 1-ix 2-ixx
     // id 币对id
     return request('account/currency/optional/del', params)
@@ -899,7 +899,7 @@ const service = {
    getOtcBalance(params) {
      return getCache('c_otc_balance', () => request('otc/account/balance/list', params), 1e3)
    },
-  
+
        //*************************  OTC 接口  ************************//
     /**
      * 查询是否满足交易条件
@@ -1082,7 +1082,8 @@ const service = {
      * site (非必须 ,默认1)1-个人 2-商户
      */
     createOtcOrder(params) {
-        return request('otc/order/create', params)
+      return getCache('c_otc_createOrder', () => request('otc/order/create', params), 1e3)
+      //return request('otc/order/create', params)
     },
     /**
      * 发布成交单
@@ -1094,8 +1095,9 @@ const service = {
      * total } params
      * active_id 委托单ID
      */
-    createOtcTransaction(params) {
-        return request('otc/order/transaction', params)
+    createOtcTransaction (params) {
+      return getCache('c_otc_transaction', () => request('otc/order/transaction', params), 1e3)
+      //return request('otc/order/transaction', params)
     },
     /**
      * 我已付款

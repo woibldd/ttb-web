@@ -43,6 +43,7 @@ import {
   Switch,
   DatePicker,
   Pagination,
+  InputNumber,
   Dialog,
   Message
 } from 'element-ui'
@@ -80,6 +81,7 @@ Vue.use(Dialog)
 Vue.use(Switch)
 Vue.use(DatePicker)
 Vue.use(Pagination)
+Vue.use(InputNumber)
 const request = require.context('./assets/svg', true, /\.svg$/)
 /* console.log('request', request)
 console.log('request.keys', request.keys())
