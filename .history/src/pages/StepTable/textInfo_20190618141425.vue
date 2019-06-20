@@ -46,18 +46,6 @@
           </div>
         </div>
         <div
-          v-if="textDetail.side === 1 && textCode === 0 && !textDetail.appeal && !textDetail.text_appeal"
-          class="step-tip">
-          <div style="width: 90%;margin:0 auto">
-            <el-steps :active="textDetail.state">
-              <el-step title="下订单"/>
-              <el-step title="线下付款"/>
-              <el-step title="点击已付款"/>
-              <el-step title="等待放币"/>
-            </el-steps>
-          </div>
-        </div>
-        <div
           class="tips"
           v-if="textDetail.time && textCode === 0 && !textDetail.appeal && !textDetail.other_appeal">
           <!--<icon/>-->
@@ -106,22 +94,6 @@
               <dd>
                 <span>出售数量</span><em>{{ textDetail.amount || '--' }}</em>
               </dd>
-              <template v-if="textDetail.otc_collection">
-                <template v-if="textDetail.state !== 1 && textDetail.state !== 6 && textDetail.state !== 4">
-                  <dd>
-                    <span>{{ textDetail.otc_collection.alipay_account ? '支付宝' : textDetail.otc_collection.we_chat_account ? '微信' : '银行卡' }}</span>
-                    <em>{{ textDetail.otc_collection.alipay_account ? textDetail.otc_collection.alipay_account : textDetail.otc_collection.we_chat_account ? textDetail.otc_collection.we_chat_account : textDetail.otc_collection.card_number }}</em>
-                  </dd>
-                  <dd v-if="textDetail.otc_collection.card_number">
-                    <span>银行类型</span>
-                    <em>{{ textDetail.otc_collection.deposit_bank }}</em>
-                  </dd>
-                  <dd>
-                    <span>{{ textDetail.otc_collection.alipay_account ? '支付宝' : textDetail.otc_collection.we_chat_account ? '微信' : '银行卡' }}姓名</span>
-                    <em>{{ textDetail.otc_collection.name || '--' }}</em>
-                  </dd>
-                </template>
-              </template>
             </dl>
           </div>
           <div class="table-con">
@@ -131,7 +103,7 @@
               </dt>
               <dd>
                 <span><b v-html="textDetail.side === 1 ? '卖' : '买'"/>家姓名</span>
-                <em>{{ textDetail.name || '--' }}</em>
+                <em>{{ textDetail.other_name || '--' }}</em>
               </dd>
               <dd>
                 <span>注册时间</span>
@@ -158,11 +130,40 @@
                 <span><b v-html="textDetail.side === 1 ? '卖' : '买'"/>家提示</span>
                 <em>{{ textDetail.remark || '--' }}</em>
               </dd>
+              <template v-if="textDetail.state !== 1 && textDetail.state !== 6 && textDetail.state !== 4">
+                <dd>
+                  <span>{{ textDetail.otc_collection.alipay_account ? '支付宝' : textDetail.otc_collection.we_chat_account ? '微信' : '银行卡' }}</span>
+                  <em>{{ textDetail.otc_collection.alipay_account ? textDetail.otc_collection.alipay_account : textDetail.otc_collection.we_chat_account ? textDetail.otc_collection.alipay_account : textDetail.otc_collection.card_number }}</em>
+                </dd>
+                <dd v-if="textDetail.otc_collection.card_number">
+                  <span>银行类型</span>
+                  <em>{{ textDetail.otc_collection.deposit_bank }}</em>
+                </dd>
+                <dd>
+                  <span>{{ textDetail.otc_collection.alipay_account ? '支付宝' : textDetail.otc_collection.we_chat_account ? '微信' : '银行卡' }}姓名</span>
+                  <em>{{ textDetail.otc_collection.name || '--' }}</em>
+                </dd>
+                <!--<template v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0">-->
+                <!--<dd>-->
+                <!--<span>银行卡</span>-->
+                <!--<em>-->
+                <!--<el-select size="small" placeholder="请选择" v-model="form.bankId" @change="bankHandle">-->
+                <!--<el-option v-for="(item, index) in bankData" :key="index" :label="item.deposit_bank" :value="item.collection_id"></el-option>-->
+                <!--</el-select>-->
+                <!--</em>-->
+                <!--</dd>-->
+                <!--<template v-if="changeFlag">-->
+                <!--<dd>-->
+                <!--<span></span>-->
+                <!--</dd>-->
+                <!--</template>-->
+                <!--</template>-->
+              </template>
             </dl>
           </div>
           <div
             class="table-con"
-            v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0 && !textDetail.appeal && !textDetail.other_appeal">
+            v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0">
             <dd>
               <span>支付类型</span>
               <em>
@@ -259,8 +260,7 @@
                 </dt>
                 <dd>
                   <span><b v-html="textDetail.side === 1 ? '卖' : '买'"/>家姓名</span>
-                  <em v-if="textCode === 0">{{ textDetail.name || '--' }}</em>
-                  <em v-else>{{ textDetail.other_name || '--' }}</em>
+                  <em>{{ textDetail.name || '--' }}</em>
                 </dd>
                 <dd>
                   <span>注册时间</span>
@@ -323,10 +323,10 @@
       </template>
       <div
         class="tips"
-        v-if="textDetail.side === 2 && textDetail.state === 2 && textDetail.state !== 7 && !textDetail.appeal && textCode === 0 && !textDetail.other_appeal">确认收到买家付款后请及时点击【确认放币】，否则请勿点击</div>
+        v-if="textDetail.side === 2 && textDetail.state === 2 && textDetail.state !== 7 && textDetail.appeal && textCode === 0 && textDetail.textDetail.appeal">确认收到买家付款后请及时点击【确认放币】，否则请勿点击</div>
       <div
         class="tips1"
-        v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0 && !close && !textDetail.appeal && !textDetail.other_appeal">
+        v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0 && !close">
         <div class="tips-con">
           <p>线下转账请注意</p>
           <ul>
@@ -344,22 +344,12 @@
       class="step-btn"
       :class="{stepActive: stepActive}">
       <p
-        v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0 && !close && !textDetail.appeal && !textDetail.other_appeal"
-        style="color: #999;font-size: 13px;line-height: 24px;padding: 8px 0;margin-bottom: 10px;">付款完成后请及时点击“已付款”按钮，本平台不提供自动扣款， 请自行付款！</p>
+        v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0 && !close"
+        style="color: #999;font-size: 13px;line-height: 24px;padding: 8px 0">付款完成后请及时点击“已付款”按钮，本平台不提供自动扣款， 请自行付款！</p>
       <a
         href="javascript:;"
         class="close_btn"
-        v-if="textCode === 0 && !textDetail.appeal && !textDetail.other_appeal && textDetail.side === 1 && textDetail.state === 1"
-        @click="closeHandle">关闭</a>
-      <a
-        href="javascript:;"
-        class="close_btn"
-        v-if="textCode === 0 && !textDetail.appeal && !textDetail.other_appeal && textDetail.side === 2 && textDetail.state === 2"
-        @click="closeHandle">关闭</a>
-      <a
-        href="javascript:;"
-        class="close_btn"
-        v-if="textCode === 0 && !textDetail.appeal && !textDetail.other_appeal && textDetail.side === 2 && textDetail.state === 7"
+        v-if="textCode === 0"
         @click="closeHandle">关闭</a>
       <template v-if="close">
         <a
@@ -368,21 +358,14 @@
           @click="stepHandle('close')">取消订单</a>
       </template>
       <template v-else>
-        <template v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0 && !textDetail.appeal && !textDetail.other_appeal">
+        <template v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0">
           <!--<div class="tips">付款完成后请及时点击“已付款”按钮，本平台不提供自动扣款， 请自行付款！</div>-->
           <a
             href="javascript:;"
             class="btn_t"
             @click="stepHandle('money')">确认付款</a>
         </template>
-        <template v-if="textDetail.side === 2 && textDetail.state === 2 && !textDetail.appeal && !textDetail.other_appeal && textCode === 0">
-          <!--<div class="tips">确认收到买家付款后请及时点击【确认放币】，否则请勿点击</div>-->
-          <a
-            href="javascript:;"
-            class="btn_t"
-            @click="stepHandle('down')">确认放币</a>
-        </template>
-        <template v-if="textDetail.side === 2 && textDetail.state === 7 && !textDetail.appeal && !textDetail.other_appeal && textCode === 0">
+        <template v-if="textDetail.side === 2 && textDetail.state === 2 && textDetail.state !== 7 && !textDetail.appeal && !textDetail.other_appeal && textCode === 0">
           <!--<div class="tips">确认收到买家付款后请及时点击【确认放币】，否则请勿点击</div>-->
           <a
             href="javascript:;"
@@ -405,73 +388,76 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {tradeMixins} from './mixins'
-  import countDown from '@/components/CountDown'
-  import processValue from '@/mixins/process-otc-value.js'
-  export default {
-    props: ['textDetail', 'bankData', 'textCode', 'close', 'stepActive', 'bankId'],
-    mixins: [tradeMixins, processValue],
-    data () {
-      return {
-        changeFlag: false,
-        form: {
-          bankId: '',
-          activeItem: {}
-        },
-        qrsrc: '',
-        showQRcode: false
-      }
+import {tradeMixins} from './mixins'
+import countDown from '@/components/CountDown'
+import processValue from '@/mixins/process-otc-value.js'
+export default {
+  props: ['textDetail', 'bankData', 'textCode', 'close', 'stepActive', 'bankId'],
+  mixins: [tradeMixins, processValue],
+  data () {
+    return {
+      changeFlag: false,
+      form: {
+        bankId: '',
+        activeItem: {}
+      },
+      qrsrc: '',
+      showQRcode: false,
+    }
+  },
+  components: {
+    countDown
+  },
+  methods: {
+    openQR (collection_img) {
+      this.qrsrc = collection_img
+      this.showQRcode = true
     },
-    components: {
-      countDown
+    stepHandle (type) {
+      this.$emit('step-change', type)
     },
-    methods: {
-      openQR (collection_img) {
-        this.qrsrc = collection_img
-        this.showQRcode = true
-      },
-      stepHandle (type) {
-        this.$emit('step-change', type)
-      },
-      closeHandle () {
-        this.$emit('close-change')
-      },
-      bankHandle () {
-        this.changeFlag = true
-        this.activeItem = {}
-        if (this.bankData.length > 0) {
-          this.bankData.forEach((item) => {
-            if (this.form.bankId === item.collection_id) {
-              const payType = item.obj.payment_type === 1 ? item.obj.deposit_bank : item.obj.payment_type === 2 ? '支付宝' : '微信'
-              const payAccount = item.obj.alipay_account ? item.obj.alipay_account : item.obj.card_number ? item.obj.card_number : item.obj.we_chat_account
-              this.activeItem = {
-                name: item.obj.name,
-                img: item.obj.collection_img,
-                type: payType,
-                a_t: item.obj.payment_type,
-                account: payAccount
-              }
+    closeHandle () {
+      this.$emit('close-change')
+    },
+    bankHandle () {
+      this.changeFlag = true
+      this.activeItem = {}
+      if (this.bankData.length > 0) {
+        this.bankData.forEach((item) => {
+          if (this.form.bankId === item.collection_id) {
+            const payType = item.obj.payment_type === 1 ? item.obj.deposit_bank : item.obj.payment_type === 2 ? '支付宝' : '微信'
+            const payAccount = item.obj.alipay_account ? item.obj.alipay_account : item.obj.card_number ? item.obj.card_number : item.obj.we_chat_account
+            this.activeItem = {
+              name: item.obj.name,
+              img: item.obj.collection_img,
+              type: payType,
+              a_t: item.obj.payment_type,
+              account: payAccount
             }
-          })
-        }
-        this.$emit('bank-change', this.form.bankId)
-      }
-    },
-    watch: {
-      bankData () {
-        if (this.bankId) {
-          this.form.bankId = this.bankId
-          this.bankHandle()
-        } else if (this.bankData && this.bankData.length > 0) {
-          let arr = this.bankData.filter(arg => arg.obj.payment_type === 1)
-          if (arr.length > 0) {
-            this.form.bankId = arr[0].collection_id
           }
-          this.bankHandle()
+        })
+      }
+      this.$emit('bank-change', this.form.bankId)
+    }
+  },
+  watch: {
+    bankData() {
+      console.log(this.bankData)
+      //默认选择银行卡支付
+      if (this.bankId) {
+        this.form.bankId = this.bankId
+        this.bankHandle()
+      }
+      else if (this.bankData && this.bankData.length > 0) {
+        let arr = this.bankData.filter(arg => arg.obj.payment_type===1)
+        if (arr.length > 0) {
+          this.form.bankId = arr[0].collection_id
         }
+        this.bankHandle()
       }
     }
   }
+}
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>

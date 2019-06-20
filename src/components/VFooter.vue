@@ -6,8 +6,8 @@
           :to="{name:'home'}"
           class="footer_logo"/>
         <p class="footer_ltxt">
-          <b>{{ $t('first') }}</b>
-          {{ $t('bitcoin_equity_certificate') }}
+          <!-- <b>{{ $t('first') }}</b> -->
+          {{ exchangeNameConfig }}
         </p>
         <div
           class="lt">
@@ -140,10 +140,10 @@
       </div>
     </div>
     <div class="footer_info">
-      <strong class="strong mr-10">{{ $t('footer_company_info_title') }}</strong>
+      <!-- <strong class="strong mr-10">{{ $t('footer_company_info_title') }}</strong>
       <span class="company_name mr-10">{{ $t('footer_company_info_name') }}</span>
       <span class="company_registion mr-10">{{ $t('footer_company_info_registion') }}</span>
-      <span class="company_address">{{ $t('footer_company_info_address') }}</span>
+      <span class="company_address">{{ $t('footer_company_info_address') }}</span> -->
     </div>
   </footer>
 </template>
@@ -178,7 +178,10 @@ export default {
     },
     showEnTips () {
       return this.state.locale === 'en' || this.state.locale === 'ko'
-    }
+    },
+    exchangeNameConfig () {
+      return this.state.theme.exchangeNameConfig[this.state.locale || 'en']
+    },
   }
 }
 </script>

@@ -6,10 +6,10 @@
         <el-tabs v-model="tabSelected" type="card">
           <el-tab-pane :label="$t('home_optional')" name="like"> 
           </el-tab-pane>
-          <el-tab-pane label="USDT" name="USDT">  
-          </el-tab-pane>
+          <el-tab-pane label="USDT" name="USDT"></el-tab-pane>
           <el-tab-pane label="BTC" name="BTC"></el-tab-pane>
           <el-tab-pane label="ETH" name="ETH"></el-tab-pane>
+          <el-tab-pane label="ALL" name="all"></el-tab-pane>
         </el-tabs>
       </div>
       <div class="pairs-search">
@@ -164,6 +164,7 @@ export default {
       })
     },
     filterPair () {
+      state.tabSelected = 'all'
       this.$emit('searching', this.search)
     }, 
     tabsClick(tab, event) { 

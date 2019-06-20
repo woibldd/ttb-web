@@ -46,8 +46,8 @@
           </div>
         </div>
         <div
-          v-if="textDetail.side === 1 && textCode === 0 && !textDetail.appeal && !textDetail.text_appeal"
-          class="step-tip">
+v-if="textDetail.side === 1 && textCode === 0 && !textDetail.appeal && !textDetail.text_appeal"
+             class="step-tip">
           <div style="width: 90%;margin:0 auto">
             <el-steps :active="textDetail.state">
               <el-step title="下订单"/>
@@ -93,9 +93,9 @@
               </dd>
               <dd>
                 <span>下单时间</span><em>
-                <!--{{ textDetail.create_time || '&#45;&#45;' }}-->
-                {{ processValue('create_time', textDetail) || '--' }}
-              </em>
+                  <!--{{ textDetail.create_time || '&#45;&#45;' }}-->
+                  {{ processValue('create_time', textDetail) || '--' }}
+                </em>
               </dd>
               <dd>
                 <span>订单金额（CNY）</span><em style="color: #FDA22D">{{ textDetail.total || '--' }}</em>
@@ -152,7 +152,7 @@
               <dd>
                 <span>平均放币时间</span>
                 <em>{{ processValue('issue_time_avg', textDetail) || '--' }}</em>
-                <!--<em>{{textDetail.issue_time_avg || '&#45;&#45;'}}</em>-->
+              <!--<em>{{textDetail.issue_time_avg || '&#45;&#45;'}}</em>-->
               </dd>
               <dd>
                 <span><b v-html="textDetail.side === 1 ? '卖' : '买'"/>家提示</span>
@@ -281,7 +281,7 @@
                 <dd>
                   <span>平均放币时间</span>
                   <em>{{ processValue('issue_time_avg', textDetail) || '--' }}</em>
-                  <!--<em>{{textDetail.issue_time_avg || '&#45;&#45;'}}</em>-->
+                <!--<em>{{textDetail.issue_time_avg || '&#45;&#45;'}}</em>-->
                 </dd>
                 <dd>
                   <span><b v-html="textDetail.side === 1 ? '卖' : '买'"/>家提示</span>
@@ -300,21 +300,21 @@
                     <span>{{ textDetail.otc_collection.alipay_account ? '支付宝' : textDetail.otc_collection.we_chat_account ? '微信' : '银行卡' }}姓名</span>
                     <em>{{ textDetail.otc_collection.name || '--' }}</em>
                   </dd>
-                  <!--<template v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0">-->
-                  <!--<dd>-->
-                  <!--<span>银行卡</span>-->
-                  <!--<em>-->
-                  <!--<el-select size="small" placeholder="请选择" v-model="form.bankId" @change="bankHandle">-->
-                  <!--<el-option v-for="(item, index) in bankData" :key="index" :label="item.deposit_bank" :value="item.collection_id"></el-option>-->
-                  <!--</el-select>-->
-                  <!--</em>-->
-                  <!--</dd>-->
-                  <!--<template v-if="changeFlag">-->
-                  <!--<dd>-->
-                  <!--<span></span>-->
-                  <!--</dd>-->
-                  <!--</template>-->
-                  <!--</template>-->
+                <!--<template v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0">-->
+                <!--<dd>-->
+                <!--<span>银行卡</span>-->
+                <!--<em>-->
+                <!--<el-select size="small" placeholder="请选择" v-model="form.bankId" @change="bankHandle">-->
+                <!--<el-option v-for="(item, index) in bankData" :key="index" :label="item.deposit_bank" :value="item.collection_id"></el-option>-->
+                <!--</el-select>-->
+                <!--</em>-->
+                <!--</dd>-->
+                <!--<template v-if="changeFlag">-->
+                <!--<dd>-->
+                <!--<span></span>-->
+                <!--</dd>-->
+                <!--</template>-->
+                <!--</template>-->
                 </template>
               </dl>
             </div>
@@ -405,73 +405,73 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {tradeMixins} from './mixins'
-  import countDown from '@/components/CountDown'
-  import processValue from '@/mixins/process-otc-value.js'
-  export default {
-    props: ['textDetail', 'bankData', 'textCode', 'close', 'stepActive', 'bankId'],
-    mixins: [tradeMixins, processValue],
-    data () {
-      return {
-        changeFlag: false,
-        form: {
-          bankId: '',
-          activeItem: {}
-        },
-        qrsrc: '',
-        showQRcode: false
-      }
+import {tradeMixins} from './mixins'
+import countDown from '@/components/CountDown'
+import processValue from '@/mixins/process-otc-value.js'
+export default {
+  props: ['textDetail', 'bankData', 'textCode', 'close', 'stepActive', 'bankId'],
+  mixins: [tradeMixins, processValue],
+  data () {
+    return {
+      changeFlag: false,
+      form: {
+        bankId: '',
+        activeItem: {}
+      },
+      qrsrc: '',
+      showQRcode: false
+    }
+  },
+  components: {
+    countDown
+  },
+  methods: {
+    openQR (collection_img) {
+      this.qrsrc = collection_img
+      this.showQRcode = true
     },
-    components: {
-      countDown
+    stepHandle (type) {
+      this.$emit('step-change', type)
     },
-    methods: {
-      openQR (collection_img) {
-        this.qrsrc = collection_img
-        this.showQRcode = true
-      },
-      stepHandle (type) {
-        this.$emit('step-change', type)
-      },
-      closeHandle () {
-        this.$emit('close-change')
-      },
-      bankHandle () {
-        this.changeFlag = true
-        this.activeItem = {}
-        if (this.bankData.length > 0) {
-          this.bankData.forEach((item) => {
-            if (this.form.bankId === item.collection_id) {
-              const payType = item.obj.payment_type === 1 ? item.obj.deposit_bank : item.obj.payment_type === 2 ? '支付宝' : '微信'
-              const payAccount = item.obj.alipay_account ? item.obj.alipay_account : item.obj.card_number ? item.obj.card_number : item.obj.we_chat_account
-              this.activeItem = {
-                name: item.obj.name,
-                img: item.obj.collection_img,
-                type: payType,
-                a_t: item.obj.payment_type,
-                account: payAccount
-              }
+    closeHandle () {
+      this.$emit('close-change')
+    },
+    bankHandle () {
+      this.changeFlag = true
+      this.activeItem = {}
+      if (this.bankData.length > 0) {
+        this.bankData.forEach((item) => {
+          if (this.form.bankId === item.collection_id) {
+            const payType = item.obj.payment_type === 1 ? item.obj.deposit_bank : item.obj.payment_type === 2 ? '支付宝' : '微信'
+            const payAccount = item.obj.alipay_account ? item.obj.alipay_account : item.obj.card_number ? item.obj.card_number : item.obj.we_chat_account
+            this.activeItem = {
+              name: item.obj.name,
+              img: item.obj.collection_img,
+              type: payType,
+              a_t: item.obj.payment_type,
+              account: payAccount
             }
-          })
-        }
-        this.$emit('bank-change', this.form.bankId)
-      }
-    },
-    watch: {
-      bankData () {
-        if (this.bankId) {
-          this.form.bankId = this.bankId
-          this.bankHandle()
-        } else if (this.bankData && this.bankData.length > 0) {
-          let arr = this.bankData.filter(arg => arg.obj.payment_type === 1)
-          if (arr.length > 0) {
-            this.form.bankId = arr[0].collection_id
           }
-          this.bankHandle()
+        })
+      }
+      this.$emit('bank-change', this.form.bankId)
+    }
+  },
+  watch: {
+    bankData () {
+      if (this.bankId) {
+        this.form.bankId = this.bankId
+        this.bankHandle()
+      } else if (this.bankData && this.bankData.length > 0) {
+        let arr = this.bankData.filter(arg => arg.obj.payment_type === 1)
+        if (arr.length > 0) {
+          this.form.bankId = arr[0].collection_id
         }
+        this.bankHandle()
       }
     }
   }
+}
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
