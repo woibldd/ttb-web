@@ -441,7 +441,7 @@ export const routes = [
         path: 'my',
         name: 'my',
         component: MyFund,
-        redirect: 'my/assets',
+        redirect: 'capital',
         children: [
           {
             path: 'contract',
