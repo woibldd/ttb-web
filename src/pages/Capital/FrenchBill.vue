@@ -87,6 +87,7 @@ page"
         background
         layout="prev, pager, next"
         :total="total"
+        :current-page.sync="formInline.page"
         @current-change="handleCurrentChange"
       />
     </div>
@@ -184,7 +185,6 @@ export default {
           this.loading = false
           this.tableData = res.data.data
           this.total = res.data.total
-          console.log(this.total)
         } else {
           this.$message.warning(`${res.message}`)
         }
