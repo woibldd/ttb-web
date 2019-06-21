@@ -2,8 +2,15 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { state, actions } from '@/modules/store'
 import utils from '@/modules/utils'
-import Account from '@/pages/Account'
+import { accountRouter } from './module/account'
+import { activityRouter } from './module/activity'
 import { capitalRouter } from './module/assets'
+import {feeRouter} from './module/fee'
+import { materialRouter } from './module/material'
+import { profileRouter } from './module/profile'
+import { tradeRouter } from './module/trade'
+import { fundRouter } from './module/fund'
+import { otherRouter } from './module/other'
 import _ from 'lodash'
 // import HelloWorld from '@/components/HelloWorld'
 let loaded = false
@@ -26,7 +33,7 @@ const Kyc3 = () => import(/* webpackChunkName: "Authen" */ '@/pages/Profile/Kyc/
 const Register = () => import(/* webpackChunkName: "Register" */ '@/pages/Register')
 const Recover = () => import(/* webpackChunkName: "Register" */ '@/pages/user/recover/recover.vue')
 const Login = () => import(/* webpackChunkName: "Login" */ '@/pages/Login')
-const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pages/PrivacyPolicy')  
+const PrivacyPolicy = () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pages/PrivacyPolicy')
 const terms = () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
 const ProfileSafety = () => import(/* webpackChunkName: "ProfileSafety" */ '@/pages/ProfileSafety')
 const ProfileApi = () => import(/* webpackChunkName: "ProfileApi" */ '@/pages/ProfileApi')
@@ -59,7 +66,7 @@ const ContractIndex = () => import(/* webpackChunkName: "Myfund" */ '@/component
 const ContractHistory = () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contract/history')
 const AssetsHistory = () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contract/assets-history')
 const Transfer = () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/Transfer/transfer.vue')
-const TransferModal = () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/contract/transfer-modal.vue') 
+const TransferModal = () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/contract/transfer-modal.vue')
 
 // 我的订单
 const MyOrderNew = () => import(/* webpackChunkName: "MyOrderNew" */ '@/pages/MyOrderNew')
@@ -76,7 +83,7 @@ const h5login = () => import(/* webpackChunkName: "h5login" */ '@/pages/h5/sign-
 const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index')
 
 
-//合约大赛 
+//合约大赛
 // 活动页面
 const ActivityIndex = () => import(/* webpackChunkName: "ActivityIndex" */ '@/pages/active/index.vue')
 const LockWarehouse = () => import(/* webpackChunkName: "LockWarehouse" */ '@/pages/active/LockWarehouse.vue')
@@ -85,7 +92,7 @@ const InviteMineActivity = () => import(/* webpackChunkName: "InviteMineActivity
 const KycRelay = () => import(/* webpackChunkName: "KycRelay" */ '@/pages/active/kycRelay.vue')
 const ExchangeRank = () => import(/* webpackChunkName: "ExchangeRank" */ '@/pages/active/ExchangeRank')
 const Lottery = () => import(/* webpackChunkName: "lottery" */ '@/pages/active/lottery')
-const RushBuy = () => import(/* webpackChunkName: "home" */ '@/pages/RushBuy.vue') 
+const RushBuy = () => import(/* webpackChunkName: "home" */ '@/pages/RushBuy.vue')
 
 // const Guide = () => import(/* webpackChunkName: "home" */ '@/pages/guide.vue')
 const MessageSettings = () => import(/* webpackChunkName: "home" */ '@/pages/Profile/MessageSettings.vue')
@@ -99,7 +106,7 @@ const OTC = () => import(/* webpackChunkName: "OTC" */ '@/pages/OTC')
 const Trade = () => import(/* webpackChunkName: "Trade" */ '@/components/OTC/Trade.vue')
 const textTrade = () => import(/* webpackChunkName: "Hir" */ '@/pages/StepTable/index.vue')
 
- 
+
 
 // 下载
 const Download = () => import(/* webpackChunkName: "Download" */ '@/pages/download/download.vue')
@@ -189,31 +196,6 @@ export const routes = [
     },
     component: h5index
   },
-  {
-    path: '/activity',
-    name: 'activity',
-    component: ActivityIndex,
-    meta: {
-      class: 'dark'
-    },
-    children: [
-        
-      {
-        path: 'kyc_relay',
-        name: 'kycRelay',
-        component: KycRelay
-      },
-      {
-        path: 'rank',
-        name: 'exchangeRank',
-        component: ExchangeRank
-      },
-      {
-        path: 'livermore',
-        name: 'lottery',
-        component: Lottery}
-    ]
-  },
  {
     path: '/download',
     name: 'Download',
@@ -223,7 +205,7 @@ export const routes = [
       footer: true,
       class: 'dark'
     },
-    component: Download   
+    component: Download
   },
   {
     path: '/activity/creation',
@@ -263,260 +245,12 @@ export const routes = [
   {
     path: '/trading/:pair?',
     name: 'trading',
-    meta: { 
+    meta: {
       auth: false,
       footer: true,
       nav: false
     },
     component: Trading
-  },
- 
-  {
-    path: '/profile',
-    name: 'profile',
-    meta: {
-      auth: true,
-      nav: true,
-      footer: true,
-      class: 'dark',
-      mobileNav: isMobile
-    },
-    redirect: 'profile/info',
-    // redirect: 'profile/ProfileInfo',
-    // redirect: 'profile/ProfileSafety',
-
-    // component: (isMobile && process.env.MODE === 'beta') ? MobileProfile : Profile
-    component: Profile,
-    children: [
-      {
-        path: 'invite',
-        name: 'invite',
-        component: Invite
-      },
-      {
-        path: 'info',
-        name: 'ProfileInfo',
-        component: ProfileInfo
-      },
-      {
-        path: 'api',
-        name: 'ProfileApi',
-        component: ProfileApi
-      },
-      {
-        path: 'security',
-        name: 'ProfileSafety',
-        component: ProfileSafety,
-        redirect: 'security/summary',
-        children: [
-          {
-            path: 'summary',
-            name: 'Safety',
-            component: SecuritySummary
-          },
-          {
-            path: 'phone',
-            name: 'PhoneBind',
-            component: PhoneBind
-          },
-          {
-            path: 'email',
-            name: 'EmailBind',
-            component: eBind
-          },
-          {
-            path: 'change_password',
-            name: 'ModPwd',
-            component: ModPwd
-          },
-          {
-            path: '2fa',
-            name: 'GoogleBind',
-            component: GoogleTitle
-          }
-        ]
-      },
-      {
-        path: 'kyc',
-        name: 'Kyc',
-        component: Kyc,
-        redirect: 'kyc/kyc_step1',
-        children: [
-          {
-            path: 'kyc_step1',
-            name: 'KycStep1',
-            component: Kyc1
-          },
-          {
-            path: 'kyc_step2',
-            name: 'KycStep2',
-            component: Kyc2
-          },
-          {
-            path: 'kyc_step3',
-            name: 'KycStep3',
-            component: Kyc3
-          }
-        ]
-      }
-    ]
-  },
-  {
-    path: '/user',
-    name: 'account',
-    meta: {
-      auth: false,
-      nav: true,
-      class: 'login'
-    },
-    component: Account,
-    children: [
-      {
-        path: 'login',
-        name: 'login',
-        component: Login,
-        redirect: 'login/email'
-      },
-      {
-        path: 'login/:by',
-        name: 'loginBy',
-        component: Login,
-        props: true
-      },
-      {
-        path: 'register',
-        name: 'register',
-        component: Register,
-        redirect: 'register/email'
-      },
-      {
-        path: 'register/:by',
-        name: 'registerBy',
-        component: Register,
-        props: true
-      },
-      {
-        path: 'recover',
-        name: 'recover',
-        component: Recover,
-        redirect: 'recover/email',
-        props: true
-      },
-      {
-        path: 'recover/:by?',
-        name: 'recoverBy',
-        component: Recover,
-        props: true
-      }
-    ]
-  },
-  {
-    path: '/fund',
-    name: 'fund',
-    component: Fund,
-    redirect: { name: 'my' },
-    meta: {
-      auth: true,
-      footer: true,
-      nav: true,
-      class: 'dark'
-    },
-    children: [
-      {
-        path: 'withdraw/:currency?',
-        name: 'withdraw',
-        component: Withdraw
-      },
-      {
-        path: 'Transfer',
-        name: 'transfer',
-        component: Transfer
-      },
-      {
-        path: 'deposit/:currency?',
-        name: 'deposit',
-        component: Deposit
-      },
-      {
-        path: 'my',
-        name: 'my',
-        component: MyFund,
-        redirect: 'capital',
-        children: [
-          {
-            path: 'contract',
-            name: 'contract',
-            redirect: 'contract/index',
-            component: MyFundContract,
-            children: [
-              {
-                path: 'index/:currency?',
-                name: 'contractIndex',
-                component: ContractIndex
-              },
-              {
-                path: 'history',
-                name: 'ContractHistory',
-                component: ContractHistory
-              },
-              {
-                path: 'assets-history',
-                name: 'AssetsHistory',
-                component: AssetsHistory
-              }
-            ]
-          },
-          {
-            path: 'assets',
-            name: 'myAssets',
-            component: MyFundAssets,
-            children: [
-              {
-                path: 'history/:from',
-                name: 'assetsHistory',
-                alias: 'deposit/:currency/history',
-                component: FundHistory
-              }
-            ]
-          }
-        ]
-      },
-      {
-        path: 'address/:currency?',
-        name: 'address',
-        component: FundAddress
-      }
-    ]
-  }, 
-  ...capitalRouter,
-  {
-    path: '/material',
-    name: 'Material',
-    component: ContractMaterial,
-    redirect: 'material/fee-history',
-    meta: {
-      auth: false,
-      footer: true,
-      nav: true,
-      class: 'dark'
-    },
-    children: [
-      {
-        path: 'fee-history',
-        name: 'MaterialFeeHistory',
-        component: MaterialFeeHistory
-      },
-      {
-        path: 'ensurance-fund',
-        name: 'EnsuranceFund',
-        component: EnsuranceFund
-      },
-      {
-        path: 'trade-index/:pair?',
-        name: 'TradeIndex',
-        component: TradeIndex
-      }
-    ]
   },
   {
     path: '/orders',
@@ -590,30 +324,6 @@ export const routes = [
     component: ServiceFeeSet
   },
   {
-    path: '/fee',
-    name: 'Fee',
-    meta: {
-      auth: false,
-      nav: true,
-      footer: true,
-      class: 'dark',
-      mobileNav: isMobile
-    },
-    component: Fee,
-    redirect: '/fee/tradingFee',
-    children: [
-      {
-        path: 'tradingFee',
-        name: 'TradingFee',
-        component: TradingFee,
-      },
-      {
-        path: 'contractFee',
-        name: 'ContractFee',
-        component: ContractFee,
-      }
-    ]
-  },{
     path: 'TransferModal',
     name: 'transferModal',
     component: TransferModal
@@ -636,61 +346,16 @@ export const routes = [
         component: OrderBiBi
       }
     ]
-  },  
-   {
-    path: '/OTC',
-    name: 'OTC',
-    redirect: '/OTC/Trade',
-    meta: {
-      nav: true,
-      footer: true,
-      class: 'dark'
-    },
-    component: OTC,
-    children: [
-        {
-            path: 'FrenchBill',
-            name: 'FrenchBill',
-            component: () => import(/* webpackChunkName: "FundAddress" */ '@/pages/Capital/FrenchBill.vue')
-          },
-      {
-        path: 'trade',
-        name: 'trade',
-        component: Trade
-      },
-      {
-        path: 'Transfer',
-        name: 'Transfer',
-        component: Transfer,
-        meta: {
-          require: true
-        }
-      },
-      {
-        path: 'collection',
-        name: 'collection',
-        component: Collection,
-        meta: {
-          require: true
-        }
-      },
-      {
-        path: 'Hir',
-        name: 'Hir',
-        component: textTrade ,
-        meta: {
-          require: true
-        }
-      },
-      { 
-        path: 'contractFee',
-        name: 'ContractFee',
-        component: ContractFee, 
-      }
-    ]
   },
+  ...accountRouter,
+  ...activityRouter,
+  ...feeRouter,
+  ...materialRouter,
+  ...profileRouter,
+  ...tradeRouter,
+  ...capitalRouter,
+  ...fundRouter
 ]
-
 
 let router = new Router({
   mode: process.env.NODE_ENV === 'development' ? 'history' : 'history',
