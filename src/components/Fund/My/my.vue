@@ -81,6 +81,7 @@
             <div v-else-if="hd.key === 'locking'">
               {{ scope.row.currency.toUpperCase() === 'USDT' && plusMillionUsdt? $big(scope.row[hd.key]).plus(millionUsdtAmount).toString() : scope.row[hd.key]  | fixed(8) }}
             </div>  
+            <span v-else-if="hd.key==='estValue'">{{ scope.row[hd.key] || 0 | fixed(unit.scale)}}</span>
             <span v-else>{{ scope.row[hd.key] || 0 | fixed(8)}}</span>
           </template>
         </el-table-column>
