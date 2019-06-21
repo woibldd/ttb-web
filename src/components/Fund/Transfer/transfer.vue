@@ -90,9 +90,9 @@
          <el-table-column
          prop="amount"
          :label="$t('transfer_amount')"/>
-         <!-- <el-table-column
+         <el-table-column
            prop="available"
-           :label="$t('balance')" /> -->
+           :label="$t('balance')" />
          <el-table-column
            prop="create_time"
            width="240"
