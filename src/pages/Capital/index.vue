@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="tip">
-      <h1>IX 总净资产估值</h1>
+      <h1>IXX 总净资产估值</h1>
       <p><b>≈ {{ixTotal | fixed(unit.scale || 2)}}</b> {{unit.name}}</p>
     </div>
     <div class="capital-wrapper clearfix">
