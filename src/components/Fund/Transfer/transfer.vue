@@ -258,6 +258,7 @@ export default {
       //this.updateAvailable()
     },
     all(){
+      console.log(1)
       Big.RM = 0
       this.number = new Big(this.fromAmount).toFixed(8)
     },
