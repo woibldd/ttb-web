@@ -7,10 +7,10 @@
     </div>
     <div class="fund-items-content" style="margin-left:0">
       <div class="fund-item-row mb-14">
-        <div class="row__label">{{$t('currency')}}</div> 
+        <div class="row__label">{{$t('currency')}}</div>
         <div>
-          <el-select v-model="selectCoin" 
-          :placeholder="$t('please_choose')" 
+          <el-select v-model="selectCoin"
+          :placeholder="$t('please_choose')"
           class="max-input"
           @change="changeCoin"
           >
@@ -22,7 +22,7 @@
             </el-option>
           </el-select>
         </div>
-      </div> 
+      </div>
       <div class="fund-item-row mb-14">
         <div class="row__label">{{ $t('transfer_side')}}</div>
             <el-select v-model="accountFrom" :placeholder="$t('please_choose')" class="min-input" @change="transferType(1)">
@@ -35,7 +35,7 @@
             </el-select>
             <span style="padding:0 10px ">{{$t('transfer_to_a')}}</span>
             <el-select v-model="accountTo" :placeholder="$t('please_choose')" class="min-input" @change="transferType(2)">
-              <el-option  
+              <el-option
                 v-for="item in accountTypes2"
                 :key="item.value"
                 :label="$t(item.label)"
@@ -46,9 +46,9 @@
       <div class="fund-item-row mb-14">
         <div class="row__label">{{$t('transfer_amount')}}</div>
         <div>
-          <number-input 
+          <number-input
               class="number-input"
-              v-model="number" 
+              v-model="number"
               :scale="8"
               :placeholder="$t('transfer_enter_amount')"
             />
@@ -71,11 +71,11 @@
           <!-- <el-input v-model="number" placeholder="请输入内容" class="max-input"></el-input> -->
         </div>
       </div>
-    </div> 
+    </div>
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane :label="$t('transfer_btc_history')" name="first"></el-tab-pane>
       <!-- <el-tab-pane label="全部划转记录" name="second"></el-tab-pane> -->
-        <el-table  
+        <el-table
          :data="tableData"  :empty-text="$t('no_data')"
          style="width: 100%">
          <el-table-column
@@ -86,7 +86,7 @@
          :label="$t('transfer_from_a')"/>
          <el-table-column
          prop="to_balance"
-         :label="$t('transfer_to_a')"/> 
+         :label="$t('transfer_to_a')"/>
          <el-table-column
          prop="amount"
          :label="$t('transfer_amount')"/>
@@ -108,7 +108,7 @@
         :page.sync="pages"
         :is-end="isLastPage"
         :func="getPage"/>
-    
+
     </div>
   </div>
 </template>
@@ -138,8 +138,8 @@ export default {
       accountFrom: 1,
       availableBalance:0,
       tradingBalance: null,
-      contractBalance: null, 
-      walletBalance: null, 
+      contractBalance: null,
+      walletBalance: null,
       otcBalance: null,
       tableData: [],
       accountTypes: [{
@@ -159,7 +159,7 @@ export default {
     }
   },
   async created () {
-  }, 
+  },
   computed: {
     totalBalance() {
       return this.$big(this.tradingAvai || 0)
@@ -169,10 +169,10 @@ export default {
         .toFixed(8)
         .toString();
     },
-    fromAmount() {  
+    fromAmount() {
       let amount = 0
       switch (this.accountFrom) {
-        case 1: 
+        case 1:
           amount = this.walletAvai
           break
         case 2:
@@ -185,15 +185,15 @@ export default {
           amount = this.otcAvai
           break
         default:
-          amount = 0 
+          amount = 0
       }
       console.log(amount)
-      return amount 
+      return amount
     },
-    toAmount() { 
+    toAmount() {
       let amount = 0
       switch (this.accountTo) {
-        case 1: 
+        case 1:
           amount = this.walletAvai
           break
         case 2:
@@ -206,42 +206,43 @@ export default {
           amount = this.otcAvai
           break
         default:
-          amount = 0 
+          amount = 0
       }
-      return amount 
+      return amount
     },
     tradingAvai() {
       if (!this.tradingBalance) {
         return 0;
       } else {
-        return new Big(this.tradingBalance.available || 0).toFixed(8); 
+        return new Big(this.tradingBalance.available || 0).toFixed(8);
       }
     },
     contractAvai() {
       if (!this.contractBalance) {
         return 0;
       } else {
-        return new Big(this.contractBalance.available_balance || 0).toFixed(8); 
+        return new Big(this.contractBalance.available_balance || 0).toFixed(8);
       }
     },
     otcAvai() {
       if (!this.otcBalance) {
         return 0;
       } else {
-        return new Big(this.otcBalance.available || 0).toFixed(8); 
+        return new Big(this.otcBalance.available || 0).toFixed(8);
       }
     },
     walletAvai() {
       if (!this.walletBalance) {
         return 0;
       } else {
-        return new Big(this.walletBalance.available || 0).toFixed(8); 
+        return new Big(this.walletBalance.available || 0).toFixed(8);
       }
     }
 
   },
   methods: {
     transferType(type){
+      console.log(1)
       this.number = ""
       let arr = {}
       // this.availableBalance = 0
@@ -253,15 +254,15 @@ export default {
             this.accountTypes2.push(item)
           }
         })
-        
-      }  
+
+      }
       //this.updateAvailable()
     },
     all(){
       Big.RM = 0
       this.number = new Big(this.fromAmount).toFixed(8)
     },
-    async submit(){ 
+    async submit(){
       if (0 >= this.number || this.number === '') {
         utils.alert(this.$t('transfer_enter_error'))
         return
@@ -295,7 +296,7 @@ export default {
     handleClick(tab, event) {
 
     },
-    async getBalance(){ 
+    async getBalance(){
       let [tradingBalance, contractBalance, otcBalance, walletBalance] = await Promise.all([
         service.getBalanceByPair(this.selectCoin),
         service.getContractBalanceByPair({ symbol:this.selectCoin}),
@@ -307,12 +308,12 @@ export default {
       if (tradingBalance && tradingBalance.length) {
         this.tradingBalance = tradingBalance[0]
       }
-      if (contractBalance) { 
+      if (contractBalance) {
         this.contractBalance = contractBalance.data
       }
       if (otcBalance) {
         this.otcBalance = otcBalance.data
-      }  
+      }
       if (walletBalance) {
         this.walletBalance = walletBalance.data
       }
@@ -323,11 +324,11 @@ export default {
     },
     page(page = 1){
       service.getBalanceList({page:page,size:10}).then(res => {
-       
+
         if (res.code || res.data.length === 0) {
           this.loading = false
         } else {
-           
+
           this.tableData = res.data.data
           this.loading = false
           if(this.tableData.length < 10){
@@ -349,7 +350,7 @@ export default {
 
             this.tableData[i].from_balance = balanceList[this.tableData[i].from_balance]
             this.tableData[i].to_balance = balanceList[this.tableData[i].to_balance]
- 
+
             switch  (this.tableData[i].status ) {
             case 0:
               text1=this.$t("transfer_fail"); //失败
@@ -358,14 +359,14 @@ export default {
               text1=this.$t("transfer_complete"); //完成
               break;
             }
-             
-            this.tableData[i].available = (this.tableData[i].available*1).toFixed(8) 
+
+            this.tableData[i].available = (this.tableData[i].available*1).toFixed(8)
             this.tableData[i].status = text1
           }
         }
       })
     },
-    changeCoin(val) { 
+    changeCoin(val) {
       this.accountTypes = []
       if (val === 'USDT') {
         this.accountTypes = [{
@@ -377,7 +378,7 @@ export default {
           }, {
             value: 4,
             label: 'otc_account'
-          }] 
+          }]
       }
       else if(val === 'BTC') {
          this.accountTypes = [{
@@ -392,9 +393,9 @@ export default {
           }, {
             value: 4,
             label: 'otc_account'
-          }] 
+          }]
       }
-      else { 
+      else {
         this.accountTypes = [{
           value: 1,
           label: 'wallet_account'
@@ -402,19 +403,19 @@ export default {
           value: 2,
           label: 'trading_account'
         }]
-      } 
-      //改变币种的时候重新获取数据  
+      }
+      //改变币种的时候重新获取数据
       //this.transferType(1)
-      this.getBalance() 
+      this.getBalance()
       this.value = 2
       this.transferType(1)
     },
     updateAvailable() {
       // console.log({value : this.accountFrom})
-      // if (this.accountFrom === 1) { //钱包账户 
+      // if (this.accountFrom === 1) { //钱包账户
       //   this.availableBalance = this.$big(this.walletBalance.available || 0)
       // }
-      // else if (this.accountFrom === 2) {  //币币账户 
+      // else if (this.accountFrom === 2) {  //币币账户
       //   this.availableBalance = this.$big(this.tradingBalance.available || 0)
       // }
       // else if (this.accountFrom === 3) {  //合约账户
@@ -450,13 +451,13 @@ export default {
       //     min_confirm: 3,
       //     min_deposit_amount: "0.001",
       //     min_review_amount: "0",
-      //     min_withdraw_amount: "0.002", 
+      //     min_withdraw_amount: "0.002",
       //     withdraw_fee: "0.001"
       //   }
-      // ], 
-      this.getBalance(); 
+      // ],
+      this.getBalance();
     },
-    getAccountBalanceList() { 
+    getAccountBalanceList() {
       service.getAccountBalanceList().then(res => {
         if(!res.code && !!res.data) {
           console.log({data:res.data})
@@ -487,11 +488,11 @@ export default {
 .max-input{
   width: 288px;
 }
-  .number-input { 
+  .number-input {
     width: 286px;
     line-height: 37px;
     border: 1px solid #DCDFE6;
-    border-radius: 5px; 
+    border-radius: 5px;
     text-indent: 15px;
   }
 .page-fund-container .fund-items-content .fund-item-row .row__label{
