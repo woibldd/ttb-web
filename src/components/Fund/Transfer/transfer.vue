@@ -242,6 +242,7 @@ export default {
   },
   methods: {
     transferType(type){
+      console.log(1)
       this.number = ""
       let arr = {}
       // this.availableBalance = 0
