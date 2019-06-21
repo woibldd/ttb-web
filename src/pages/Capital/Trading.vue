@@ -298,8 +298,8 @@
         return state.locale && [
           {key: 'currency', title: this.$t('fees_name')},
           {key: 'available', title: this.$t('avlb')},
-          // {key: 'locking', title: this.$t('asset_th_unavlb')},
-          {key: 'amount', title: this.$t('total_count')},
+          {key: 'locking', title: this.$t('asset_th_unavlb')},
+          // {key: 'amount', title: this.$t('total_count')},
           {key: 'estValue', title: this.$t('homechart_fiat') + '(' + this.unit.name + ')'}
         ]
       },
