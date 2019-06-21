@@ -883,4 +883,61 @@ export default{
     }
 
   },
+
+
+
+
+
+
+  NEWOS: {
+    'zh-CN': {
+      name: 'NEWOS',
+      full_name: '传播链NEWS CHAIN（NEWOS）',
+      brief_info: 'NEWS CHAIN (传播链)是基于区块链的流量传播生态系统，其目标是建立一个利用区块链技术，使用去中心化的共识方式为内容生产领域进行贡献定价和权益回报的网络，使内容生产者、内容投资者、内容消费者都能得到合理的激励与回报，广告商也能在平台上实现精准营销。',
+      issue_time: '2017-11',
+      issue_all: '100亿', // 发行总量
+      issue_circulation: '25亿', // 流通总量 
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://ne.ws/img/NewsChain-whitepaper.EN.pdf', // 白皮书
+      office_website: 'http://ne.ws/', // 官网
+      chain_info: 'https://etherscan.io/token/0x29536b7ca7029b5cddeb03c0451715615aca35ba' // 区块查询
+    },
+    'zh-HK': {
+        name: 'NEWOS',
+        full_name: '傳播鏈NEWS CHAIN（NEWOS）',
+        brief_info: 'NEWS CHAIN（傳播鏈）是基於區塊鏈的流量傳播生態系統，其目標是建立一個利用區塊鏈科技，使用去中心化的共識管道為內容生產領域進行貢獻定價和權益回報的網絡，使內容生產者、內容投資者、內容消費者都能得到合理的激勵與回報，廣告商也能在平臺上實現精准行銷。',
+        issue_time: '2017-11',
+        issue_all: '100億', // 发行总量10,000,000,000
+        issue_circulation: '25億', // 流通总量 250,000,000
+        token_price: '--', // 众筹价格
+        whitepagger: 'http://ne.ws/img/NewsChain-whitepaper.EN.pdf', // 白皮书
+        office_website: 'http://ne.ws/', // 官网
+        chain_info: 'https://etherscan.io/token/0x29536b7ca7029b5cddeb03c0451715615aca35ba' // 区块查询
+      },
+      en: {
+        name: 'NEWOS',
+        full_name: 'NewsChain NEWS CHAIN（NEWOS）',
+        brief_info: 'NewsChain (propagation chain) is a blockchain-based traffic dissemination ecosystem. Its goal is to establish a network that uses blockchain technology to use decentralized consensus methods to contribute to pricing and equity returns for content production. Producers, content investors and content consumers all have reasonable incentives and rewards. Advertisers can also achieve accurate marketing on the platform.',
+        issue_time: '2017-11',
+        issue_all: '100Billion', // 发行总量10,000,000,000
+        issue_circulation: '25Billion', // 流通总量 250,000,000
+        token_price: '--', // 众筹价格
+        whitepagger: 'http://ne.ws/img/NewsChain-whitepaper.EN.pdf', // 白皮书
+        office_website: 'http://ne.ws/', // 官网
+        chain_info: 'https://etherscan.io/token/0x29536b7ca7029b5cddeb03c0451715615aca35ba' // 区块查询
+      },
+      ko: {
+        name: 'NEWOS',
+        full_name: '전파 사슬NEWS CHAIN（NEWOS）',
+        brief_info: '전파 사슬 NEWS CHAIN (NEWOS) 안내문: NEWS CHAIN (사슬전파)가 깔 려 있다  사슬 을 방류 전파 생태 시스템 을 만 드 는 게 목적 이용 사슬 기술 을 사용 하는 방식 을 찾 中心化 공감 대 내용 생산 분야 에 대한 공헌 정가 와 권익 보답 하는 인터넷 으로 내용 생산자, 내용 투자자, 내용 소비자 모두 합리 격려 와 보람 광고주 가 많이 나 올 수 있 도록 플랫폼 에서 실현 에 정확 하 게 마케팅 을 벌 여 왔 다.',
+        issue_time: '2017-11',
+        issue_all: '100억', // 发行总量10,000,000,000
+        issue_circulation: '25억', // 流通总量 250,000,000
+        token_price: '--', // 众筹价格
+        whitepagger: 'http://ne.ws/img/NewsChain-whitepaper.EN.pdf', // 白皮书
+        office_website: 'http://ne.ws/', // 官网
+        chain_info: 'https://etherscan.io/token/0x29536b7ca7029b5cddeb03c0451715615aca35ba' // 区块查询
+      }
+  
+  }
 }
