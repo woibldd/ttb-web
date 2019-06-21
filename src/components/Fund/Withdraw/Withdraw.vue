@@ -31,7 +31,7 @@
           to="/profile/kyc/"
           class="up-limit pointer">{{ $t("upgrade_quota") }}</router-link>
       </div>
-      <div class="fund-item-other mb-14">
+      <div class="fund-item-other mb-14 withdraw-list">
         <span
           :class="['quick-btn mb-10 mr-10', selectCoin.currency === c.currency && 'selected']"
           @click.prevent="quickSelectCoin(c)"
