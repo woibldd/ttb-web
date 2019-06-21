@@ -6,9 +6,16 @@
         法币账单
       </div>
     </div>
-    <el-form :inline="true" :model="formInline" class="demo-form-inline">
+    <el-form
+      :inline="true"
+      :model="formInline"
+      class="demo-form-inline">
       <el-form-item>
-        <el-select v-model="formInline.currency" placeholder="币种" clearable>
+        <el-select
+          v-model="formInline.currency"
+          placeholder="币种"
+          @change="changeCurreny"
+          clearable>
           <el-option
             v-for="(item, index) in currencyData"
             :key="index"
@@ -18,7 +25,11 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-select v-model="formInline.type" placeholder="交易类型" clearable>
+        <el-select
+          v-model="formInline.type"
+          placeholder="交易类型"
+          @change="changeType"
+          clearable>
           <el-option
             v-for="(item, index) in sideData"
             :key="index"
@@ -44,44 +55,50 @@
       style="width: 100%">
       <el-table-column
         prop="currency"
-        :label="$t('fees_name')" />
+        :label="$t('fees_name')"/>
       <el-table-column
         prop="create_time"
         label="成交时间"/>
-      <template slot-scope="scope">
-        {{ scope.row.create_time | date }}
-      </template>
       <el-table-column
         prop="opetate"
         :label="$t('order_th_type')">
         <template slot-scope="scope">
-          <span v-html="scope.row.opetate === 1 ? '转出' : scope.row.opetate === 2 ? '转入' : scope.row.opetate === 3 ? '当日清算' : scope.row.opetate === 4 ? '买入' : '卖出'" />
+          <span
+            v-html="scope.row.opetate === 1 ? '转出' : scope.row.opetate === 2 ? '转入' : scope.row.opetate === 3 ? '当日清算' : scope.row.opetate === 4 ? '买入' : '卖出'"/>
         </template>
       </el-table-column>
       <el-table-column
         prop="amount"
-        :label="$t('deal_amount')"/>
+        label="数量"/>
       <el-table-column
         prop="available"
-        :label="$t('deal_value')"/>
+        :label="$t('order_value')">
+        <template slot-scope="scope">
+          <span
+            v-html="scope.row.available === 0 ? 0 : Number(scope.row.available).toFixed(8)"/>
+        </template>
+      </el-table-column>
     </el-table>
-    <div class="page" v-if="tableData.length > 0">
+    <div
+      class="
+page"
+      v-if="tableData.length > 0">
       <el-pagination
         background
-        @size-change="handleSizeChange"
+        layout="prev, pager, next"
+        :total="total"
+        :current-page.sync="formInline.page"
         @current-change="handleCurrentChange"
-        :current-page.sync="formInline.size"
-        :page-size="10"
-        layout="total, prev, pager, next"
-        :total="total" />
+      />
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import service from "@/modules/service";
+import service from '@/modules/service'
 import {state} from '@/modules/store'
-import processValue from "@/mixins/process-otc-value.js";
+import processValue from '@/mixins/process-otc-value.js'
+
 export default {
   mixins: [processValue],
   data () {
@@ -92,9 +109,8 @@ export default {
         type: '',
         begin_stamp: '',
         end_stamp: '',
-        page: 10,
-        size: 1,
-        user_id: ''
+        page: 1,
+        size: 10
       },
       total: 0,
       loading: true,
@@ -114,16 +130,16 @@ export default {
       ],
       sideData: [
         {
-          name: '转出',
-          id: 1
+          name: '全部',
+          id: ''
         },
         {
           name: '转入',
-          id: 2
+          id: 1
         },
         {
-          name: '当日清算',
-          id: 3
+          name: '转出',
+          id: 2
         },
         {
           name: '买入',
@@ -134,19 +150,10 @@ export default {
           id: 5
         }
       ],
-      tableData: [
-      ],
+      tableData: [],
       start: '',
       end: ''
     }
-  },
-  computed: {
-    userInfo () {
-      return state.userInfo || {}
-    },
-    id () {
-      return this.userInfo.id
-    },
   },
   methods: {
     dateHandle (time) {
@@ -164,37 +171,43 @@ export default {
       this.init()
     },
     handleSizeChange (e) {
-      this.formInline.page = e
-      this.init()
-    },
-    handleCurrentChange (e) {
       this.formInline.size = e
       this.init()
     },
+    handleCurrentChange (e) {
+      this.formInline.page = e
+      this.init()
+    },
     init () {
-      this.formInline.user_id = state.userInfo.id
       this.loading = true
       service.balancefills(this.formInline).then(res => {
         if (res.code === 0) {
           this.loading = false
           this.tableData = res.data.data
-          this.total = res.data.data.total
+          this.total = res.data.total
         } else {
           this.$message.warning(`${res.message}`)
         }
       })
+    },
+    changeCurreny (e) {
+      this.formInline.currency = e
+      this.formInline.page = 1
+      this.formInline.size = 10
+      this.init()
+    },
+    changeType (e) {
+      this.formInline.type = e
+      this.formInline.page = 1
+      this.formInline.size = 10
+      this.init()
     }
+
   },
-  created() {
+  created () {
     this.init()
   },
   watch: {
-    'formInline.currency': function () {
-      this.init()
-    },
-    'formInline.type': function () {
-      this.init()
-    }
   }
 }
 </script>

@@ -1038,7 +1038,7 @@
       }
     }
     .iconActive {
-      color: #c9a96c
+      color: $primary
     }
   }
 </style>

@@ -2016,6 +2016,8 @@
 "otc_side_1":"purchase",
 "otc_side_2": "Sell",
 "otc_side_99": "Account-opening Bank", 
-"otc_side_98": "Account-opening Branch"
+"otc_side_98": "Account-opening Branch",
+
+"wallet_account": "资金账户" 
 
 }

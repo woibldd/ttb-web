@@ -429,7 +429,7 @@ export default {
       }
     },
     getAccountBalanceList () {
-      return service.getAccountBalanceList().then(res => {
+      return service.getAccountWalletList().then(res => {
         this.tableData = (res.data || []).map(item => {
           item.rates = item.rates || {}
           item.locking = this.$big(item.locking || 0).plus(this.$big(item.ordering || 0).plus(this.$big(item.withdrawing || 0))).toString()

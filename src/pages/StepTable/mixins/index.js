@@ -67,7 +67,7 @@ export const tradeMixins = {
               props: {
                 dropData: {
                     name: this.$t('otc_currency'),
-                    data: [this.$t('otc_trans_idjg'),'USDT', 'BTC']
+                    data: [this.$t('allin'),'USDT', 'BTC']
                 }
               },
               on: {
@@ -140,7 +140,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: this.$t('order_th_capedasda'),
+          label: '委托价格',
           prop: 'price',
           render: (h, params) => {
             let spiltName = params.row.symbol.split('/')
@@ -149,7 +149,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: this.$t('order_th_capeaxcvb'),
+          label: '委托数量/成交数量',
           prop: 'side',
           width: 160,
           render: (h, params) => {
@@ -158,7 +158,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: this.$t('order_th_capehjiky'),
+          label: '委托价格/成交金额',
           width: 160,
           prop: 'side',
           render: (h, params) => {
@@ -175,7 +175,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: this.$t('order_th_capeqqewc'),
+          label: '发布日期',
           prop: 'create_time',
           width: 180,
           render: (h, params) => {
@@ -320,7 +320,7 @@ export const tradeMixins = {
                 marginRight: '5px',
                 width: '40px',
                 height: '20px',
-                background: 'rgba(201,169,108,1)',
+                background: '$primary',
                 borderRadius: '10px',
                 color: '#fff',
                 fontSize: '12px',

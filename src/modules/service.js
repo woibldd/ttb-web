@@ -266,7 +266,7 @@ const service = {
       }
     }))
   },
-  getQuoteOrderbook ({ pair, accuracy, offset, size }) { 
+  getQuoteOrderbook ({ pair, accuracy, offset, size }) {
     return quote(`orderbook/${pair}`, { offset, accuracy, size })
   },
   getQuoteDeal ({ pair, size }) {
@@ -321,6 +321,9 @@ const service = {
   getRate (currency = 'USDT') {
     // return getCache(name + 'FiatRate', () => request('currency/query', { name }), 1e4)
     return getCache(currency + 'FiatRate', () => request('account/currency/rates', { currency }), 1e4)
+  },
+  getAllRate () {
+    return  getCache('ALLFiatRate', () => request('account/currency/rates'), 1e4)
   },
   getCoins () {
     return getCache('currencyList', () => request('account/currency/list'))
@@ -869,19 +872,19 @@ const service = {
     return getCache('c_ranklist', () => request('future/activity/rank_list', params), 1e3)
   },
 
-  //自选列表 
+  //自选列表
   getOptionalList (params) {
     //site (int 非必须,默认1) 1-ix 2-ixx
     return getCache('c_optional', () => request('account/currency/optionalList', params), 1e3)
   },
   // 增加自选
-  addOptional(params) { 
+  addOptional(params) {
     //site (int 非必须,默认1) 1-ix 2-ixx
     // id 币对id
     return request('account/currency/optional/add', params)
   },
   //删除自选
-  delOptional(params) { 
+  delOptional(params) {
     //site (int 非必须,默认1) 1-ix 2-ixx
     // id 币对id
     return request('account/currency/optional/del', params)
@@ -899,7 +902,31 @@ const service = {
    getOtcBalance(params) {
      return getCache('c_otc_balance', () => request('otc/account/balance/list', params), 1e3)
    },
-  
+
+   async getOtcBalanceByPair (symbol) {
+    if (!symbol || !symbol.symbol) {
+      symbol = {
+        symbol: 'BTC'
+      }
+    }
+    let result = await service.getOtcBalance()
+    console.log(result)
+    // let resp = []
+    if (!result.code) {
+      let list = result.data
+      let balance = list ? list.filter(l => symbol.symbol === l.currency)[0] || {} : {
+        available: '0',
+        holding: '0',
+        available_balance: '0',
+        leverage: 100
+      }
+      return {
+        code: 0,
+        data: balance
+      }
+    }
+    return null
+  },
        //*************************  OTC 接口  ************************//
     /**
      * 查询是否满足交易条件
@@ -989,6 +1016,13 @@ const service = {
      */
     getOtcRemovefills(params) {
         return getCache('c_otc_removefills', () => request('otc/account/removefills', params), 1e3)
+    },
+    balancefills(params) {
+      return request('otc/account/balancefills', params)
+    },
+    // 划转记录
+    getBalanceList (param) {
+      return request('/account/balance/finance/list', param)
     },
     /**
      * 已完成订单
@@ -1082,7 +1116,8 @@ const service = {
      * site (非必须 ,默认1)1-个人 2-商户
      */
     createOtcOrder(params) {
-        return request('otc/order/create', params)
+      return getCache('c_otc_createOrder', () => request('otc/order/create', params), 1e3)
+      //return request('otc/order/create', params)
     },
     /**
      * 发布成交单
@@ -1094,8 +1129,9 @@ const service = {
      * total } params
      * active_id 委托单ID
      */
-    createOtcTransaction(params) {
-        return request('otc/order/transaction', params)
+    createOtcTransaction (params) {
+      return getCache('c_otc_transaction', () => request('otc/order/transaction', params), 1e3)
+      //return request('otc/order/transaction', params)
     },
     /**
      * 我已付款
@@ -1163,6 +1199,31 @@ const service = {
      */
     otcSymbolList() {
         return getCache('c_otc_symbol_list', () => request('otc/account/symbol/list'), 5e3)
+    },
+    //获取余额（总账户）
+    getAccountWalletList() { 
+      return  getCache('c_wallet_list', () => request('account/wallet/list'), 1e3)
+    },
+    async getwalletBalanceByPair(symbol) {
+      if (!symbol || !symbol.symbol) {
+        symbol = {
+          symbol: 'BTC'
+        }
+      }
+      let result = await service.getAccountWalletList() 
+      if (!result.code) {
+        let list = result.data
+        let balance = list ? list.filter(l => symbol.symbol === l.currency)[0] || {} : {
+          available: '0',
+          holding: '0',
+          available_balance: '0',
+          leverage: 100
+        }
+        return {
+          code: 0,
+          data: balance
+        }
+      }
     }
 
 

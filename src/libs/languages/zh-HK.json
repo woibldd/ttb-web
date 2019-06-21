@@ -1845,7 +1845,7 @@
   "otc_order_quota": "限額(%{legal_currency})",
   "otc_completed_infadwo": " 成交單數 / 完成率",
   "otc_completed_info": "商家(成單 | 完成率)",
-  "otc_need_authentication": "%{side} 需 <span style='color:#C9A96C;'>高級認證</span>",
+  "otc_need_authentication": "%{side} 需 <span style='color:$primary;'>高級認證</span>",
   "otc_confirm_payment": "確認付款",
   "otc_side_1": "購買",
   "otc_side_2": "出售",
@@ -1881,6 +1881,7 @@
   "otc_sidees11": "撤銷成功",
   "otc_side_35": " 法幣帳單",
 
+  "wallet_account": "资金账户" ,
   "":""
 
 }

@@ -227,7 +227,7 @@ export default {
 }
 
 .look-tutorial{
-    background:rgba(201,169,108,1);
+    background:$primary;
     color: #fff;
     font-size: 16px;
     line-height: 16px;
@@ -248,7 +248,7 @@ export default {
 }
 
 .note-back {
-    background-color: #F4EEE2;
+    background-color: #F6FDFD;
     line-height: 16px;
     color: $primary;
     border: 1px solid #CCCCCC;
@@ -323,7 +323,7 @@ export default {
             border: 0;
 
             &.active {
-                background-color: #C9A96C;
+                background-color: $primary;
                 color: #fff;
             }
 
