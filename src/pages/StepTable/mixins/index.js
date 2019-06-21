@@ -23,7 +23,31 @@ export const tradeMixins = {
       currentType: {
         currency: ''
       },
-      orderHeader: [
+
+      tableHeader: [],
+      data: [],
+      tradeData: [
+        {
+          create_time: '2019-12-1',
+          state: 1
+        },
+        {
+          create_time: '2019-12-1',
+          state: 2
+        }
+      ],
+      dialogVisible: false
+    }
+  },
+  computed: {
+    userInfo () {
+      return state.userInfo || {}
+    },
+    id () {
+      return this.userInfo.id
+    },
+    orderHeader () {
+      return [
         {
           label: this.$t('otc_trans_id'),
           prop: 'trans_id'
@@ -66,8 +90,8 @@ export const tradeMixins = {
             return h(STepSelect, {
               props: {
                 dropData: {
-                  name: this.$t('otc_currency'),
-                  data: [this.$t('allin'),'USDT', 'BTC']
+                  name: '币种',
+                  data: ['全部', 'USDT', 'BTC']
                 }
               },
               on: {
@@ -119,8 +143,10 @@ export const tradeMixins = {
           prop: 'trans_id',
           render: this.tradeActions
         }
-      ],
-      tradeHeader: [
+      ]
+    },
+    tradeHeader () {
+      return [
         {
           label: this.$t('otc_active_id'),
           prop: 'active_id'
@@ -140,7 +166,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: '委托价格',
+          label: this.$t('order_th_capedasda'),
           prop: 'price',
           render: (h, params) => {
             let spiltName = params.row.symbol.split('/')
@@ -149,7 +175,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: '委托数量/成交数量',
+          label: this.$t('order_th_capeaxcvb'),
           prop: 'side',
           width: 160,
           render: (h, params) => {
@@ -158,7 +184,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: '委托价格/成交金额',
+          label: this.$t('order_th_capehjiky'),
           width: 160,
           prop: 'side',
           render: (h, params) => {
@@ -175,7 +201,7 @@ export const tradeMixins = {
           }
         },
         {
-          label: '发布日期',
+          label: this.$t('order_th_capeqqewc'),
           prop: 'create_time',
           width: 180,
           render: (h, params) => {
@@ -188,28 +214,7 @@ export const tradeMixins = {
           width: 140,
           render: this.tradeActions
         }
-      ],
-      tableHeader: [],
-      data: [],
-      tradeData: [
-        {
-          create_time: '2019-12-1',
-          state: 1
-        },
-        {
-          create_time: '2019-12-1',
-          state: 2
-        }
-      ],
-      dialogVisible: false
-    }
-  },
-  computed: {
-    userInfo () {
-      return state.userInfo || {}
-    },
-    id () {
-      return this.userInfo.id
+      ]
     }
   },
   filters: {
@@ -320,7 +325,7 @@ export const tradeMixins = {
                 marginRight: '5px',
                 width: '40px',
                 height: '20px',
-                background: '$primary',
+                background: 'rgba(201,169,108,1)',
                 borderRadius: '10px',
                 color: '#fff',
                 fontSize: '12px',
