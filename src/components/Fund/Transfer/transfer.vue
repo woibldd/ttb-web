@@ -107,8 +107,7 @@
       style="float:right"
         :page.sync="pages"
         :is-end="isLastPage"
-        :func="getPage"/>
-
+        :func="getPage"/> 
     </div>
   </div>
 </template>
@@ -134,7 +133,7 @@ export default {
       text: 'mmm',
       isLastPage:false,
       allCoins : [],
-      accountTo: '',
+      accountTo: 2,
       accountFrom: 1,
       availableBalance:0,
       tradingBalance: null,
@@ -472,7 +471,7 @@ export default {
     this.getBalance()
     // this.getAllCoinTypes()
     this.page()
-    this.accountTo = ''
+    // this.accountTo = ''
     this.accountTypes.forEach((item) => {
       if(item.value !== this.accountFrom) {
         this.accountTypes2.push(item)

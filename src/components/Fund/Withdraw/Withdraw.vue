@@ -337,7 +337,7 @@ export default {
       this.updadeMyCoinInfo() // 更改币种后，重新获取一次自己的钱包状态
     },
     async updadeMyCoinInfo () {
-      await this.getAccountBalanceList()
+      await this.getAccountWalletList()
       this.myCoinInfoList.forEach(mc => {
         if (mc.currency === this.selectCoin.currency) {
           this.myCoinInfo = mc
@@ -363,8 +363,8 @@ export default {
     quickSelectCoin (coin) {
       this.changeCoinType(coin)
     },
-    getAccountBalanceList () {
-      return service.getAccountBalanceList().then(res => {
+    getAccountWalletList () {
+      return service.getAccountWalletList().then(res => {
         this.myCoinInfoList = res.data
       })
     },
