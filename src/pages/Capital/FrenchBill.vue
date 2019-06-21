@@ -3,7 +3,7 @@
     <div class="trade-message-box">
       <div class="link">
         <!--{{ $t('otc_account') }}-->
-        法币账单
+        {{$t('otc_side_35')}}
       </div>
     </div>
     <el-form
@@ -42,10 +42,11 @@
         <el-date-picker
           v-model="time"
           type="datetimerange"
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
+         :range-separator="$t('otc_sideoc_9')"
+         :start-placeholder="$t('otc_sideoc_50')"
+          :end-placeholder="$t('otc_sideoc_51')"
           value-format="timestamp"
+          size="large"
           @change="dateHandle"/>
       </el-form-item>
     </el-form>
@@ -58,18 +59,18 @@
         :label="$t('fees_name')"/>
       <el-table-column
         prop="create_time"
-        label="成交时间"/>
+        :label="this.$t('contract_deal_time')"/>
       <el-table-column
         prop="opetate"
         :label="$t('order_th_type')">
         <template slot-scope="scope">
           <span
-            v-html="scope.row.opetate === 1 ? '转出' : scope.row.opetate === 2 ? '转入' : scope.row.opetate === 3 ? '当日清算' : scope.row.opetate === 4 ? '买入' : '卖出'"/>
+            v-html="scope.row.opetate === 1 ? $t('transfer_out') : scope.row.opetate === 2 ? $t('transfer_in') : scope.row.opetate === 3 ? '当日清算' : scope.row.opetate === 4 ? '买入' : '卖出'"/>
         </template>
       </el-table-column>
       <el-table-column
         prop="amount"
-        label="数量"/>
+        :label="this.$t('otc_trans_idsl')"/>
       <el-table-column
         prop="available"
         :label="$t('order_value')">
@@ -116,7 +117,7 @@ export default {
       loading: true,
       currencyData: [
         {
-          name: '全部',
+          name: this.$t('allin'),
           id: ''
         },
         {
@@ -130,23 +131,23 @@ export default {
       ],
       sideData: [
         {
-          name: '全部',
+          name: this.$t('allin'),
           id: ''
         },
         {
-          name: '转入',
+          name: this.$t('transfer_in'),
           id: 1
         },
         {
-          name: '转出',
+          name: this.$t('transfer_out'),
           id: 2
         },
         {
-          name: '买入',
+          name: this.$t('contract_action_button_up'),
           id: 4
         },
         {
-          name: '卖出',
+          name: this.$t('contract_action_button_down'),
           id: 5
         }
       ],
@@ -202,7 +203,6 @@ export default {
       this.formInline.size = 10
       this.init()
     }
-
   },
   created () {
     this.init()
