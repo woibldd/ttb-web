@@ -871,10 +871,12 @@ export default {
                 let paylist = item.otc_collection_list
                 if (paylist.length > 0) {
                   let arr = paylist.filter(arg => arg.payment_type === 1)
-                  if (arr.length > 0) {
-                    // this.selectPayment = arr[0]
-                    Vue.set(item, 'selectPayment', arr[0])
-                  }
+                  // console.log(arr)
+                  // if (arr.length > 0) {
+                  //   // this.selectPayment = arr[0]
+                  //   Vue.set(item, 'selectPayment', arr[0].payment_type)
+                  // }
+                  Vue.set(item, 'selectPayment', arr[0])
                 }
 
                 Vue.set(item, 'bankArray', bankData)

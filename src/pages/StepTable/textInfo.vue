@@ -215,7 +215,7 @@ v-if="textDetail.side === 1 && textCode === 0 && !textDetail.appeal && !textDeta
                     style="width: 60px;height: 60px;zoom: 1"> -->
                   <span
                     style="cursor: pointer;"
-                    @click="openQR(activeItem.img)">
+                    @click="openQR(activeItem)">
                     <icon name="qrcode" />
                   </span>
                 </em>
@@ -421,12 +421,13 @@ export default {
         activeItem: {}
       },
       qrsrc: '',
+      activeItem: {},
       showQRcode: false
     }
   },
   methods: {
     openQR (pay) {
-      this.qrsrc = pay.collection_img
+      this.qrsrc = pay.img
       this.showQRcode = true
     },
     stepHandle (type) {
@@ -452,9 +453,13 @@ export default {
             }
           }
         })
+        console.log(this.activeItem)
       }
       this.$emit('bank-change', this.form.bankId)
     }
+  },
+  components: {
+    countDown
   },
   watch: {
     bankData () {
