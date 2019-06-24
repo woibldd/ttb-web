@@ -24,7 +24,9 @@
           class="action-title"
           v-if="textCode !== 3"
         >
-          {{ textDetail.side | side }} {{ textDetail.currency }}
+          <!-- {{ textDetail.side | side }} {{ textDetail.currency }} -->
+          <!-- {{ $t(textDetail.side ===1 ? 'otc_sideoc_1' : 'otc_sideoc_2')}} -->
+          {{textDetail.side ===1 ? $t('order_side_buy') : $t('order_side_sell') }}{{ textDetail.currency }}
         </div>
         <div
           v-else
@@ -72,7 +74,7 @@
           <div class="table-con">
             <dl>
               <dt>
-                <em>订单信息</em>
+                <em>{{$t('otc_transaction_info')}}</em>
                 <span
                   style="color: #5D82E1"
                   v-if="textCode === 0">
@@ -89,27 +91,27 @@
                 </span>
               </dt>
               <dd>
-                <span>订单号</span> <em>{{ textDetail.trans_id || '--' }}</em>
+                <span>{{$t('otc_trans_id')}}</span> <em>{{ textDetail.trans_id || '--' }}</em>
               </dd>
               <dd>
-                <span>下单时间</span><em>
+                <span>{{$t('otc_create_time')}}</span><em>
                 <!--{{ textDetail.create_time || '&#45;&#45;' }}-->
                 {{ processValue('create_time', textDetail) || '--' }}
               </em>
               </dd>
               <dd>
-                <span>订单金额（CNY）</span><em style="color: #FDA22D">{{ textDetail.total || '--' }}</em>
+                <span>{{$t('orders')}}{{$t('otc_amount_money')}}（CNY）</span><em style="color: #FDA22D">{{ textDetail.total || '--' }}</em>
               </dd>
               <dd>
-                <span>单价(CNY)</span><em style="color: #FDA22D">{{ textDetail.price || '--' }}</em>
+                <span>{{$t('otc_trans_idjg')}}(CNY)</span><em style="color: #FDA22D">{{ textDetail.price || '--' }}</em>
               </dd>
               <dd>
-                <span>出售数量</span><em>{{ textDetail.amount || '--' }}</em>
+                <span>{{$t('otc_side_2')}}{{$t('amount')}}</span><em>{{ textDetail.amount || '--' }}</em>
               </dd>
               <template v-if="textDetail.otc_collection">
                 <template v-if="textDetail.state !== 1 && textDetail.state !== 6 && textDetail.state !== 4">
                   <dd>
-                    <span>{{ textDetail.otc_collection.alipay_account ? '支付宝' : textDetail.otc_collection.we_chat_account ? '微信' : '银行卡' }}</span>
+                    <span>{{ textDetail.otc_collection.alipay_account ? $t('payment_namezfb') : textDetail.otc_collection.we_chat_account ? $t('payment_weChat_adasunt') : $t('payment_nameyhk') }}</span>
                     <em>{{ textDetail.otc_collection.alipay_account ? textDetail.otc_collection.alipay_account : textDetail.otc_collection.we_chat_account ? textDetail.otc_collection.we_chat_account : textDetail.otc_collection.card_number }}</em>
                   </dd>
                   <dd v-if="textDetail.otc_collection.card_number">
@@ -117,7 +119,7 @@
                     <em>{{ textDetail.otc_collection.deposit_bank }}</em>
                   </dd>
                   <dd>
-                    <span>{{ textDetail.otc_collection.alipay_account ? '支付宝' : textDetail.otc_collection.we_chat_account ? '微信' : '银行卡' }}姓名</span>
+                    <span>{{ textDetail.otc_collection.alipay_account ?  $t('payment_namezfb') : textDetail.otc_collection.we_chat_account ? $t('payment_weChat_adasunt') : $t('payment_nameyhk') }}{{$t('name')}}</span>
                     <em>{{ textDetail.otc_collection.name || '--' }}</em>
                   </dd>
                 </template>
@@ -127,35 +129,35 @@
           <div class="table-con">
             <dl>
               <dt>
-                <em><b v-html="textDetail.side === 1 ? '卖' : '买'"/>家信息</em>
+                <em><b v-html="textDetail.side === 1 ? $t('otc_sideoc_2') : $t('otc_sideoc_1')"/>{{$t('otc_sideoc_3')}}</em>
               </dt>
               <dd>
-                <span><b v-html="textDetail.side === 1 ? '卖' : '买'"/>家姓名</span>
+                <span><b v-html="textDetail.side === 1 ? $t('otc_sideoc_2') : $t('otc_sideoc_1')"/>{{$t('otc_sideoc_4')}}</span>
                 <em>{{ textDetail.name || '--' }}</em>
               </dd>
               <dd>
-                <span>注册时间</span>
+                <span>{{$t('otc_register_time')}}</span>
                 <em>{{ processValue('register_time', textDetail) || '--' }}</em>
               </dd>
               <dd>
-                <span>认证等级</span>
+                <span>{{$t('otc_kyc_level')}}</span>
                 <em style="color: #FDA22D">{{ 'Kyc' + textDetail.kyc_level || '--' }}</em>
               </dd>
               <dd>
-                <span>成交单数</span>
+                <span>{{$t('thirty_day_orders')}}</span>
                 <em>{{ textDetail.orders_complete || '0' }}</em>
               </dd>
               <dd>
-                <span>完成率</span>
+                <span>{{$t('thirty_day_orders_rate')}}</span>
                 <em>{{ textDetail.orders_rate ? (Number(textDetail.orders_rate) * 100).toFixed(2) + '%' : '0%' }}</em>
               </dd>
               <dd>
-                <span>平均放币时间</span>
+                <span>{{$t('issue_time_avg')}}</span>
                 <em>{{ processValue('issue_time_avg', textDetail) || '--' }}</em>
                 <!--<em>{{textDetail.issue_time_avg || '&#45;&#45;'}}</em>-->
               </dd>
               <dd>
-                <span><b v-html="textDetail.side === 1 ? '卖' : '买'"/>家提示</span>
+                <span><b v-html="textDetail.side === 1 ? $t('otc_sideoc_2') : $t('otc_sideoc_1')"/>{{$t('otc_sideoc_5')}}</span>
                 <em>{{ textDetail.remark || '--' }}</em>
               </dd>
             </dl>
@@ -405,10 +407,10 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {tradeMixins} from './mixins'
-  import countDown from '@/components/CountDown'
-  import processValue from '@/mixins/process-otc-value.js'
-  export default {
+import {tradeMixins} from './mixins'
+import countDown from '@/components/CountDown'
+import processValue from '@/mixins/process-otc-value.js'
+export default {
     props: ['textDetail', 'bankData', 'textCode', 'close', 'stepActive', 'bankId'],
     mixins: [tradeMixins, processValue],
     data () {
