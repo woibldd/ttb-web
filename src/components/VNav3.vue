@@ -9,13 +9,13 @@
             v-if="showContract"
             href="/contract.html"
             :class="{'router-link-active': from === 'contract'}"
-            class="nav_link ml-30">{{ $t('contract') }} 
+            class="nav_link ml-30">{{ $t('contract') }}
           </a>
            <router-link
             v-if='!isTestnet'
             :to="{name: 'OTC'}"
             class="nav_link  ml-30">{{ $t('otc_trade') }}</router-link>
-       
+
           <router-link
             v-if="false"
             :to="{name: 'RushBuy'}"
@@ -294,7 +294,10 @@ export default {
   },
   methods: {
     switchLang(lang) {
-      actions.setLocale(lang);
+      actions.setLocale(lang)
+      this.$nextTick(() => {
+        location.reload()
+      })
     },
     logout() {
       actions.setUserInfo(null);
@@ -429,10 +432,10 @@ export default {
                   }
                 }
               }
-              
+
               .dropdown-qrcode {
                 line-height: 1.2em !important;
-                text-align:center !important; 
+                text-align:center !important;
                 span {
                   font-size: 0.9em;
                   color: #fff;

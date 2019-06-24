@@ -67,7 +67,7 @@ export const tradeMixins = {
           },
           render: (h, params) => {
             const state = params.row.side
-            const name = state === 1 ? '买入' : '卖出'
+            const name = state === 1 ? this.$t('order_side_buy') : this.$t('order_side_sell')
             const color = state === 1 ? '#09C989' : '#F45151'
             return h('div', {
               style: {
@@ -246,19 +246,19 @@ export const tradeMixins = {
     state (code) {
       switch (code) {
         case 1:
-          return '待支付'
+          return this.$t('otc_sideoc_6')
         case 2:
-          return '等待放币'
+          return this.$t('otc_buy_step_4')
         case 3:
-          return '已完成'
+          return this.$t('done')
         case 4:
-          return '买家取消'
+          return this.$t('otc_sidees2')
         case 5:
-          return '卖家取消'
+          return this.$t('otc_sidees3')
         case 6:
-          return '买家超时取消'
+          return this.$t('otc_sidees4')
         case 7:
-          return '卖家超时放币'
+          return this.$t('otc_sideoc_7')
         default:
           return ''
       }
@@ -266,17 +266,17 @@ export const tradeMixins = {
     orderState (code) {
       switch (code) {
         case 1:
-          return '委托中未成交'
-        case 2:
-          return '委托中部分成交'
-        case 3:
-          return '成交完了'
-        case 4:
-          return '撤单全部'
-        case 5:
-          return '撤单部分成交'
-        case 6:
-          return '暂停'
+            return this.$t('contract_assigning_undeal')
+          case 2:
+            return this.$t('contract_assigning_deal_part')
+          case 3:
+            return this.$t('otc_sidees6')
+          case 4:
+            return this.$t('otc_sidees7')
+          case 5:
+            return this.$t('otc_sidees8')
+          case 6:
+            return this.$t('otc_sidees9')
         default:
           return ''
       }

@@ -16,7 +16,7 @@ style="margin-left: 0px">
           <!--</el-dropdown-menu>-->
         <!--</el-dropdown>-->
 
-      </em>
+      <!-- </em> -->
       <div class="add_collection" 
 @click="handle('add')">
         {{ $t('collection_add') }}
@@ -112,7 +112,7 @@ type="text"
           <el-form-item :label="this.$t('collection')" 
 prop="payment_type">
             <el-select v-model="ruleForm.payment_type" 
-style="width: 100%;" size="small" @change="bankHanle">
+style="width: 100%;" size="small" @change="bankHandle">
               <el-option value="1" 
 :label="this.$t('payment_nameyhk')"/>
               <el-option value="2" 
@@ -430,10 +430,7 @@ export default {
           return false
         }
       })
-    },
-    bankHanle () {
-      this.$refs['ruleForm'].resetFields()
-    },
+    }, 
     resetForm (formName) {
       this.$refs[formName].resetFields()
       this.dialogVisible = false
