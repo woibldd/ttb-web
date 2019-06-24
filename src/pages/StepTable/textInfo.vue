@@ -425,6 +425,10 @@ export default {
     }
   },
   methods: {
+    openQR (pay) {
+      this.qrsrc = pay.collection_img
+      this.showQRcode = true
+    },
     stepHandle (type) {
       this.$emit('step-change', type)
     },
@@ -464,6 +468,18 @@ export default {
         }
         this.bankHandle()
       }
+    }
+  },
+  created () {
+    if (this.bankId) {
+      this.form.bankId = this.bankId
+      this.bankHandle()
+    } else if (this.bankData && this.bankData.length > 0) {
+      let arr = this.bankData.filter(arg => arg.obj.payment_type === 1)
+      if (arr.length > 0) {
+        this.form.bankId = arr[0].collection_id
+      }
+      this.bankHandle()
     }
   }
 }
