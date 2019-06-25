@@ -23,7 +23,7 @@
       <div>
         {{ $t('otc_account') }}
         <span class="ml-30">
-          <el-select  
+          <el-select
             v-model="unit"
             @change="currencyChange"
             value-key="name">
@@ -32,33 +32,33 @@
               :key="idx"
               :label="item.name"
               :value="item"/>
-          </el-select> 
+          </el-select>
         </span>
       </div>
-      <div class="title__right"> 
+      <div class="title__right">
         <!-- <router-link
           :to="{name: 'LockWarehouse'}"
           class="c-mine mr-30 dib pointer"><icon
           name="anchor"/>{{ $t('mining') }}</router-link> -->
         <!--<span-->
-          <!--@click="showLockModal = true"-->
-          <!--class="c-mine pointer mr-30 dib">-->
-          <!--{{ $t('locked') }}-->
+        <!--@click="showLockModal = true"-->
+        <!--class="c-mine pointer mr-30 dib">-->
+        <!--{{ $t('locked') }}-->
         <!--</span>-->
         <!--<span-->
-          <!--@click="showUnlockModal = true"-->
-          <!--class="c-mine pointer mr-30 dib">-->
-          <!--{{ $t('unlock') }}-->
+        <!--@click="showUnlockModal = true"-->
+        <!--class="c-mine pointer mr-30 dib">-->
+        <!--{{ $t('unlock') }}-->
         <!--</span>-->
         <!--<router-link-->
-          <!--v-if="!showHistory"-->
-          <!--class="fund-history"-->
-          <!--:to="{name:'assetsHistory', params: {from: 'deposit'}}"> {{ $t('capital_record') }}</router-link>-->
+        <!--v-if="!showHistory"-->
+        <!--class="fund-history"-->
+        <!--:to="{name:'assetsHistory', params: {from: 'deposit'}}"> {{ $t('capital_record') }}</router-link>-->
       </div>
     </div>
     <div class="gz-wrapper clearfix">
       <span>法币资产估值</span>
-      
+
       <h1>
         <icon :name="unit.name+'-unit'" />
         {{ total | fixed(unit.scale)}}</h1>
@@ -66,7 +66,7 @@
     <div
       v-if="!showHistory"
       class="my-fund-content">
-      
+
       <el-table :empty-text=" $t('no_data') "
                 :data="tableData"
                 class="fund-coin-pool">
@@ -77,9 +77,9 @@
           :label="hd.title">
           <template slot-scope="scope">
             <span v-if="hd.key === 'currency'">
-              <icon :name="scope.row.currency"/> 
+              <icon :name="scope.row.currency"/>
               <i>{{scope.row[hd.key]}} </i>
-            </span> 
+            </span>
             <span v-else-if="hd.key === 'estValue'">{{ scope.row[hd.key] || 0 | fixed(unit.scale) }}</span>
             <span v-else>{{ scope.row[hd.key] || 0 }}</span>
           </template>
@@ -90,17 +90,17 @@
           align="right"
           min-width="230px"
           :label="operate.title">
-          <template >
-            <!-- <span 
+          <template slot-scope="scope">
+            <!-- <span
               @click="showModal = true"
               class="my-fund-operate">{{ $t('account_exchange') }}</span>   -->
-              <router-link 
+            <router-link
               :to="{name: 'OTC'}"
               class="my-fund-operate">{{ $t('asset_trading') }}</router-link>
           </template>
         </el-table-column>
       </el-table>
-    </div> 
+    </div>
     <transfer-modal
       :show-modal.sync="showModal"
       :showModal="showModal"
@@ -137,8 +137,8 @@
     name: 'MyFund',
     data () {
       return {
-        tableData: [],  
-        showModal:false, 
+        tableData: [],
+        showModal:false,
         rates: {},
         // 我的余额
         balance: {
@@ -183,7 +183,7 @@
       showHistory () {
         return this.$route.name === 'history'
       },
-      total () { 
+      total () {
         let sum = this.$big(0)
         this.tableData.forEach(item => {
           sum = sum.plus(item.estValue)
@@ -199,15 +199,15 @@
       header () {
         return state.locale && [
           {key: 'currency', title: this.$t('fees_name')},
-          {key: 'available', title: this.$t('avlb')}, 
+          {key: 'available', title: this.$t('avlb')},
           {key: 'ordering', title: this.$t('asset_th_unavlb')},
-          {key: 'estValue', title: this.$t('homechart_fiat') + '(' + this.unit.name + ')'}, 
+          {key: 'estValue', title: this.$t('homechart_fiat') + '(' + this.unit.name + ')'},
         ]
       },
       operate () {
         return state.locale && {key: 'operate', title: this.$t('operation')}
       },
-      
+
       // ix锁仓/解锁
       maxLock () {
         if (this.balance.available) {
@@ -223,11 +223,11 @@
       },
       myRemainTotal () {
         return (this.myPower.power || 0) - (this.myPower.amount || 0)
-      }, 
+      },
     },
-    async created () { 
+    async created () {
       this.unit = this.currencyList[0]
-      let res = await service.getAllRate() 
+      let res = await service.getAllRate()
       if (!res.code && !!res.data) {
         this.rates = res.data;
       }
@@ -238,20 +238,20 @@
         console.log(this.header)
       )
     },
-    methods: { 
+    methods: {
       hideModal () {
         this.showModal = false
-      },  
+      },
       currencyChange(e) {
         //console.log({e})
         this.getOtcBalance()
       },
-      getOtcBalance () { 
+      getOtcBalance () {
         return service.getOtcBalance().then(res => {
           this.tableData = (res.data || []).map(item => {
             //item.rates = item.rates || {}
             // item.locking = this.$big(item.locking || 0).plus(item.ordering || 0).toString()
-            let scale = 8 
+            let scale = 8
             if (item.currency === 'BTC') {
               scale = 8
             }
@@ -262,22 +262,22 @@
             item.estValue = this.getEstValue(item)
             item.ordering = this.$big(item.ordering).round(scale, this.C.ROUND_DOWN).toFixed(scale).toString()
             item.available = this.$big(item.available).round(scale, this.C.ROUND_DOWN).toFixed(scale).toString()
-            // item.pairs = ExchangePairs[item.currency] || 'BTC_USDT' 
+            // item.pairs = ExchangePairs[item.currency] || 'BTC_USDT'
             return item
           })
         })
       },
-      getEstValue (item) { 
-        
+      getEstValue (item) {
+
         let res = this.$big(0)
         let unit = this.unit.name
-        let {currency,camount} = item 
+        let {currency,camount} = item
         if (unit === 'BTC'){
           if(currency === 'BTC') {
-            res = this.$big(camount) 
+            res = this.$big(camount)
           }
           else {
-            if (this.$big(camount).gt(0) && !!this.rates[currency]) { 
+            if (this.$big(camount).gt(0) && !!this.rates[currency]) {
               res = this.$big(camount).times(this.rates[currency]['USD'] || 0).div(this.rates['BTC']['USD'])
             }
           }
@@ -290,11 +290,11 @@
             res = this.$big(camount).times(this.$big(this.rates[currency][unit] || 0))
           }
         }
-        //let num = 8 
+        //let num = 8
         //return res.round(num, this.C.ROUND_DOWN).toString()
         return res
-      }, 
-      
+      },
+
     }
   }
 </script>
