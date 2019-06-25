@@ -130,8 +130,8 @@
           </div>
           <div class="content">
             <ul style="font-size: 14px;list-style-type: disc;padding-left: 20px;" >
-              <li ><span v-html="$t('otc_buy_tips_b')"></span></li>
-              <li><span v-html="$t('otc_buy_tips_c')"></span></li>
+              <li ><span v-html="$t('otc_buy_tips_b')"/></li>
+              <li><span v-html="$t('otc_buy_tips_c')"/></li>
             </ul>
           </div>
         </div>
@@ -156,8 +156,9 @@
       </div>
     </div>
     <!-- 操作部分 -->
-    <div class="action-order footer"
-         :class="{'status_2': status > 0}"
+    <div
+      class="action-order footer"
+      :class="{'status_2': status > 0}"
     >
       <!-- 输入框 -->
       <div
@@ -171,11 +172,12 @@
             </div>
             <div class="content">
               <number-input
-                type="number"
                 class="number-input"
                 v-model="amount"
                 @input="amountInput"
-                :scale="8"
+                @blur="changeTarget('')"
+                @focus="changeTarget('amount')"
+                :scale="symbolInfo.amount_scale || 6"
                 :placeholder="$t('amount')"
               />
               <span
@@ -192,7 +194,10 @@
               <number-input
                 class="number-input"
                 v-model="total"
-                :scale="8"
+                @input="totalInput"
+                @blur="changeTarget('')"
+                @focus="changeTarget('total')"
+                :scale="symbolInfo.price_scale || 2"
                 :placeholder="$t('otc_purchase_amount')"
               />
               <span
@@ -246,12 +251,9 @@
           </div>
         </div>
         <div v-else-if="step===2 && option===1 ">
-          <div
-            class="bottom"
-            style="    background: #EDF6FF;color: #5D82E1;font-size: 12px;padding: 8px;border-radius: 4px;margin-top: -30px!important;margin-bottom: 10px;">
-            <icon
-              name="timer"
-              style="font-size: 12px!important;vertical-align: middle;" />
+          <div class="bottom"
+               style="    background: #EDF6FF;color: #5D82E1;font-size: 12px;padding: 8px;border-radius: 4px;margin-top: -30px!important;margin-bottom: 10px;">
+            <icon name="timer" style="font-size: 12px!important;vertical-align: middle;" />
             {{ $t('otc_overtime_tips_a1') }}
             <count-down :terminal="interval" />，
             {{ $t('otc_overtime_tips_a2') }}取消
@@ -523,6 +525,7 @@ export default {
       },
       paylist: [],
       paymentInfo: [],
+      inputTarget: ''
     }
   },
   computed: {
@@ -532,16 +535,7 @@ export default {
       }
     },
     symbolInfo () {
-      let otc = this.state.otc
-      if (!otc.symbolInfo || otc.symbolInfo.currency != this.currency) {
-        for (const symbol of otc.symbolList) {
-          if (symbol.currency == this.currency) {
-            otc.symbolInfo = symbol
-            return symbol
-          }
-        }
-      }
-      return otc.symbolInfo
+      return this.state.otc.symbolInfo
     },
     sideTitle () {
       let title = ''
@@ -625,7 +619,7 @@ export default {
       service.getOtcOrderInfo(params).then(res => {
         this.paylist = res.data.otc_collection_list
         if (this.paylist.length > 0) {
-          let arr = this.paylist.filter(arg => arg.payment_type===1)
+          let arr = this.paylist.filter(arg => arg.payment_type === 1)
           if (arr.length > 0) {
             this.selectPayment = arr[0]
           }
@@ -636,14 +630,31 @@ export default {
       if (this.active_id <= 0) {}
     },
     amountInput () {
-      console.log(this.view)
+      // console.log(this.view)
       if (!this.amount || this.amount == '') {
-        this.total = 0
+        this.total = ''
       } else {
         if (this.$big(this.amount).gt(this.$big(this.view.amount).minus(this.view.freezed))) {
           this.inputAll()
         } else {
-          this.total = this.$big(this.view.price).mul(this.amount).round(2, 0)
+          let total = this.$big(this.view.price).mul(this.amount).round(2, 0)
+          if (this.inputTarget === 'amount') {
+            if (this.total != total) {
+              this.total = total
+            }
+          }
+        }
+      }
+    },
+    totalInput () {
+      if (!this.total || this.total == '') {
+        this.amount = ''
+      } else {
+        let amount = this.$big(this.total).div(this.view.price).round(this.symbolInfo.amount_scale, 0)
+        if (this.inputTarget === 'total') {
+          if (this.amount != amount) {
+            this.amount = amount
+          }
         }
       }
     },
@@ -664,6 +675,7 @@ export default {
       }
       service.otcOrderRemove(params)
       this.option = 0
+      this.status = 0
       this.step = 0
       this.$emit('closeSide')
     },
@@ -695,6 +707,7 @@ export default {
     },
     cancelOption () {
       this.option = 0
+      this.status = 0
     },
     getCllectionList () {
       let params = {
@@ -728,6 +741,9 @@ export default {
           this.qrReady = true
         }
       )
+    },
+    changeTarget (target) {
+      this.inputTarget = target
     }
   },
   props: {
@@ -741,7 +757,6 @@ export default {
     }
   },
   created () {
-
   },
   watch: {
     show () {
@@ -805,7 +820,7 @@ export default {
   }
   // 购买BTC行高
   .entrust-order-container .otcaction .wrap table tr{
-    line-height: 32px;
+    line-height: 25px;
   }
   // 修改字体大小
   .el-step__title.is-process{

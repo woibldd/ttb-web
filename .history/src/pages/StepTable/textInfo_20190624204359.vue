@@ -215,7 +215,7 @@ v-if="textDetail.side === 1 && textCode === 0 && !textDetail.appeal && !textDeta
                     style="width: 60px;height: 60px;zoom: 1"> -->
                   <span
                     style="cursor: pointer;"
-                    @click="openQR(activeItem)">
+                    @click="openQR(activeItem.img)">
                     <icon name="qrcode" />
                   </span>
                 </em>
@@ -421,15 +421,10 @@ export default {
         activeItem: {}
       },
       qrsrc: '',
-      activeItem: {},
       showQRcode: false
     }
   },
   methods: {
-    openQR (pay) {
-      this.qrsrc = pay.img
-      this.showQRcode = true
-    },
     stepHandle (type) {
       this.$emit('step-change', type)
     },
@@ -453,13 +448,9 @@ export default {
             }
           }
         })
-        console.log(this.activeItem)
       }
       this.$emit('bank-change', this.form.bankId)
     }
-  },
-  components: {
-    countDown
   },
   watch: {
     bankData () {
@@ -473,18 +464,6 @@ export default {
         }
         this.bankHandle()
       }
-    }
-  },
-  created () {
-    if (this.bankId) {
-      this.form.bankId = this.bankId
-      this.bankHandle()
-    } else if (this.bankData && this.bankData.length > 0) {
-      let arr = this.bankData.filter(arg => arg.obj.payment_type === 1)
-      if (arr.length > 0) {
-        this.form.bankId = arr[0].collection_id
-      }
-      this.bankHandle()
     }
   }
 }

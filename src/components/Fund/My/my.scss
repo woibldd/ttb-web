@@ -1,4 +1,14 @@
 .my-fund-container {
+  .my-fund-content {
+    .information {
+      margin: 6px 0;
+      color: #999;
+      background-color: #F6FDFD;
+      .iconfont {
+        color:$primary !important;
+      }
+    }
+  }
     .fund-total {
         margin-top: 45px;
         margin-bottom: 58px;

@@ -376,7 +376,7 @@ export default {
   .btn {
     border: none;
     border-radius: 3px;
-    background: rgba(0, 0, 0, 0);
+    /*background: rgba(0, 0, 0, 0);*/
     color: #fff;
     padding: 7px 14px;
     cursor: pointer;

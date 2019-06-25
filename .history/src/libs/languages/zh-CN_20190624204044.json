@@ -1463,7 +1463,7 @@
     "contract_content7": "六、“套期保值”交易同投机交易一样，同样面临价格波动引起的风险。",
     "contract_content8": "七、如果您没有进行KYC2（实名认证）或者未绑定Google验证，或者将账号借给非本人操作，将可能会影响您的合约保证金的安全性",
     "novice_img":"<img src=\"../assets/zhongwen.png\" alt=\"dl\" width=\"60\">",
-    "contract_action_button_low_tips": "当前余额不足，无法提交委托！",
+    "contract_action_button_low_tips": "当前余额不足，无法提交委托！", 
     "contract_fee_rate_estimate_tips": "<a>预测费率：</a><br/>下一个时间段预计的资金费率为%{feeRate}，该数值是正数，代表多仓需要支付给空仓，如果该数值是负数，代表空仓要付给多仓。",
     "header_title_contract_competition": "合约大赛",
 
@@ -1679,44 +1679,44 @@
     "dowload_text_11":"主流币对交易",
     "dowload_text_12":"支持主流币对交易功能，提供BTC/USDT、EOS/BTC、EOS/USDT、ETH/BTC、ETH/USDT等，多币种轻松自由选择",
 
-    "contract_buy_on_price_piece1":"在市价%{amount}张%{symbol}。",
+    "contract_buy_on_price_piece1":"在市价%{amount}张%{symbol}。",  
 
     "bubble_ix_team":"IXX 团队",
     "bubble_site_tips":"请您登录时认准下方IXX的标准域名：",
     "tradingview_line":"分时线",
     "footer_application_coin":"上币申请",
 
-
+    
     "otc_trade":"法币交易",
-    "otc_tips":"添加微信请备注",
+    "otc_tips":"添加微信请备注", 
     "trading_fees": "币币手续费",
-    "contract_fees": "合约手续费",
-
-
-
+    "contract_fees": "合约手续费",  
+ 
+   
+     
   "contract_fee_rate_current_tips": "<a>当前费率：</a><br/>当前时间段资金费率为%{feeRate}，该数值是正数，代表多仓需要支付给空仓，如果该数值是负数，代表空仓要付给多仓。",
   "transfer_side":"划转方向",
-  "transfer_amount":"划转数量",
-  "transfer_enter_amount":"请输入划转金额",
+  "transfer_amount":"划转数量",  
+  "transfer_enter_amount":"请输入划转金额",   
   "transfer_able_amount":"可划转数量：",
   "transfer_btc_history":"BTC划转记录",
   "transfer_currency":"划转币种",
   "transfer_from_a":"转自",
   "transfer_to_a":"转至",
   "transfer_time":"划转时间",
-  "transfer_enter_error":"输入数字不合法",
+  "transfer_enter_error":"输入数字不合法", 
   "transfer_success":"划转成功",
   "transfer_fail":"失败",
   "transfer_complete":"完成",
   "transfer_day_liquidation":"当日清算",
-  "transfer_all":"全部",
+  "transfer_all":"全部", 
   "withdraw_tips1":"请完善你的资料",
   "idt_tips":"空投部分ITD每日系統解凍釋放2%",
-
+  
   "home_optional": "自选",
   "bnl_tips": "空投部分BNL每日系統解凍釋放3%",
     "":"" ,
-
+    
   "contract_competition_Jump_1": "个人锦标奖",
   "contract_competition_Jump_2": "收益因子赛总排名(全体参赛个人用户)",
   "contract_competition_Jump_3": "社群争霸赛",
@@ -1807,7 +1807,7 @@
   "otc_buy_tips_d": "1.如果您已支付完成请点击下方【我已付款】，卖家确认收款后会及时为您放币",
   "otc_buy_tips_e": "2. 对于未支付完成，却点击【我已支付】的用户将会降低信用权重，甚至冻结账户使用权限，请您知晓；",
   "otc_buy_tips_f": "如果您已向卖家付款，请千万不要取消订单。",
-  "otc_buy_tips_g": "取消规则：每天自主取消订单达到3次或恶意取消订单2次将被冻结当日无法交易，当月累计超时/恶意取消10单后每取消一单将冻结2小时无法交易。",
+  "otc_buy_tips_g": "取消规则：每天自主取消订单达到3次或恶意取消订单将被冻结当日无法交易，当月累计超时/恶意取消10单后每取消一单将冻结2小时无法交易。",
   "otc_buy_tips_h": "是否确定取消？",
   "otc_buy_tips_i": "请选择支付方式",
   "otc_buy_tips_j": "付款完成后请及时点击“已付款”按钮，本平台不提供自动扣款，请自行付款！",
@@ -1852,7 +1852,7 @@
   "pay_fangbi": "放币",
   "otc_remark": "卖家提示",
   "payment_name": "姓名",
-  "payment_nameid": "账号",
+  "payment_nameid": "账号", 
   "payment_card_number": "银行卡号",
   "payment_deposit_bank": "开卡行",
   "payment_alipay_account": "支付宝账号",
@@ -1894,335 +1894,335 @@
   "otc_transaction_manage": "交易管理",
   "otc_collection_payment_setting": "收付款设置",
   "otc_my_order": "我的订单/委托单",
-  "otc_position": "排位",
-  "my_order": "我的委托单",
+  "otc_position": "排位", 
+  "my_order": "我的委托单", 
   "otc_order_quota": "限额(%{legal_currency})",
   "otc_completed_infadwo": " 成交单数 / 完成率",
-  "otc_completed_info": "商家(成单 | 完成率)",
+  "otc_completed_info": "商家(成单 | 完成率)", 
   "otc_need_authentication": "%{side} 需 <span style='color:$primary;'>高级认证</span>",
-  "otc_confirm_payment": "确认付款",
+  "otc_confirm_payment": "确认付款", 
   "otc_sidees1": "等待对方付款",
   "otc_sidees2": "买家取消",
    "otc_sidees3": "卖家取消",
   "otc_sidees4": "买家超时取消",
-  "otc_sidees5": "卖家超时取消",
+  "otc_sidees5": "卖家超时取消", 
   "otc_sidees6": "成交完了",
   "otc_sidees7": "撤单全部",
   "otc_sidees8": "撤单部分成交",
-  "otc_sidees9": "暂停",
+  "otc_sidees9": "暂停", 
   "otc_sidees10": "详情",
-  "otc_sidees11": "撤销成功",
+  "otc_sidees11": "撤销成功", 
   "otc_tab_lisetr":"未完成订单",
   "otc_tab_lisetr1":"已完成订单",
   "otc_tab_lisetr2":"已取消订单",
   "contract_cancel_all": "全部撤销",
   "otc_tab_lisetr3":"全部开始",
-  "otc_tab_lisetr4":"全部暂停",
+  "otc_tab_lisetr4":"全部暂停", 
   "footer_hreseqgslp": "帮助中心",
   "footer_hreseqgslp1": "新手指导",
-  "footer_hreseqgslp2": "常见问题",
-  "otc_side_35": "法币账单",
+  "footer_hreseqgslp2": "常见问题", 
+  "otc_side_35": "法币账单", 
   "otc_side_1": "购买",
   "otc_side_2": "出售",
   "otc_side_3": "  交易总额(CNY)",
   "otc_need_verify": "法币交易需完成以下认证",
   "otc_bind_bankCard":"绑定本人实名银行卡",
   "otc_kyc_verified":"身份认证 <i style='color:#ccc;'>（认证等级：KYC1）</i>",
-  "otc_side_99": "开户行",
+  "otc_side_99": "开户行", 
   "otc_side_98": "开户支行",
   "wallet_account": "资金账户" ,
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+  
+   
+   
+   
+   
+  
+  
+  
+  
+  
+  
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+   
+   
+   
+   
+   
+   
+   
+   
+  
+  
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+  
+  
+  
+  
+  
+  
+   
+  
+  
+  
+   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+ 
     "persoal_rank": "个人锦标赛排行榜",
     "profit_rank": "收益赛排行榜",
     "transaction": "交易量排行榜",
-
-
-
-
-
+   
+  
+    
+ 
+  
     "otc_sideoc_1": "买",
     "otc_sideoc_2": "卖",
     "otc_sideoc_3": "家信息",
@@ -2233,11 +2233,12 @@
     "otc_sideoc_7": "卖家超时放币",
     "otc_sideoc_50": "开始日期",
     "otc_sideoc_51": "结束日期"
-
-
+  
+    
   }
-
-
-
-
-
+  
+  
+  
+  
+  
+  

@@ -32,6 +32,7 @@ import {
   RadioButton,
   Loading,
   MessageBox,
+  Alert,
   Dropdown,
   DropdownMenu,
   DropdownItem,
@@ -79,6 +80,7 @@ Vue.use(Steps)
 Vue.use(Step)
 Vue.use(Dialog)
 Vue.use(Switch)
+Vue.use(Alert)
 Vue.use(DatePicker)
 Vue.use(Pagination)
 Vue.use(InputNumber)
