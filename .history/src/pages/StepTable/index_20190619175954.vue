@@ -1,6 +1,7 @@
 <template>
   <div class="trade-container">
     <div class="trade-message-box">
+      
       <div class="link">{{ $t('otc_my_order') }}</div>
       <div class="message-con">
         <dl>
@@ -85,6 +86,18 @@
           <span v-if="item.count > 0 && token">{{ item.count }}</span>
         </div>
         <div
+          class="slot-down"
+          v-if="active === 0"
+        >
+          <i
+            class="iconfont"
+            v-for="(item, index) in icons"
+            :key="index"
+            v-html="item"
+            :class="{iconActive: iconActive === index}"
+            @click="iconTab(index)"/>
+        </div>
+        <div
           class="order-btn"
           v-if="active === 3">
           <span
@@ -104,8 +117,8 @@
           style="  margin-left: 12px;margin-right: 8px;height: 14px;width: 14px;color: inherit;font-size: 0px;"
           name="inhsdgbnljkarf"
         />
-        <span v-html="$t('otc_buy_tips_a')"></span>！
-        <span v-html="$t('otc_buy_tips_c')"></span>
+        <span v-html="$t('otc_buy_tips_a')"/>！
+        <span v-html="$t('otc_buy_tips_c')"/>
       </div>
       <div class="table-con">
         <template v-if="active === 0">
@@ -124,22 +137,24 @@
               </div>
               <div class="state">
                 <template v-if="!item.appeal">
-                  <span v-if="!item.other_appeal">{{ item.state | state }}</span>
-                  <span v-else-if="item.side === 2 && item.state === 1">待对方付款</span>
-                  <span v-else>对方已申诉</span>
+                  <!-- {{ item.state | state }} -->
+                  <span v-if="!item.other_appeal">{{$t('otc_sideoc_6')}}</span>
+                  <span v-else-if="item.side === 2 && item.state === 1">{{$t('otc_seiitm_6')}}</span>
+                  <span v-else>{{$t('otc_seiitm_7')}}</span>
+                  
                   <b
                     v-if="item.state === 2 || item.state === 7 || item.state === 6"
                     @click="sq(item)"
-                  >申诉</b>
+                  >{{$t('otc_seiitm_8')}}</b>
                 </template>
-                <template v-else>已申诉</template>
+                <template v-else>{{$t('otc_seiitm_9')}}</template>
                 <!--（没收到对方付款？-->
               </div>
             </div>
             <ul class="inner">
               <li class="first">
                 <div class="type">
-                  <em :style="{color: item.side === 1 ? '#23C88B' : '#F24E4D'}">{{ item.side | side }}</em>
+                  <em :style="{color: item.side === 1 ? '#23C88B' : '#F24E4D'}">{{ Order(item.side)}}</em>
                   <div
                     class="cur"
                     :style="{color: item.side === 1 ? '#23C88B' : '#F24E4D'}">
@@ -162,11 +177,11 @@
                   </dd>
                   <template v-if="item.side === 2">
                     <dd>
-                      平台服务费：
-                      <span>限时免费</span>
+                      {{$t('otc_ziurec_13')}}：
+                      <span> {{$t('otc_ziurec_16')}}</span>
                     </dd>
                     <dd>
-                      实付：
+                     {{$t('otc_seiitm_10')}}：
                       <span>{{ '¥' + item.total }}</span>
                     </dd>
                   </template>
@@ -175,8 +190,8 @@
               <li>
                 <dl>
                   <dt>
-                    <b v-if="item.side === 1">卖家：</b>
-                    <b v-else>买家：</b>
+                    <b v-if="item.side === 1">  {{$t('otc_seller_nameacer')}}：</b>
+                    <b v-else>  {{$t('otc_seiitm_11')}}：</b>
                     <span>{{ item.name }}</span>
                   </dt>
                   <dd>
@@ -185,7 +200,7 @@
                   </dd>
                   <dd>
                     {{ $t('otc_kyc_level') }}：
-                    <span>级别{{ item.kyc_level }}</span>
+                    <span>{{$t('otc_seiitm_12')}}{{ item.kyc_level }}</span>
                   </dd>
                   <dd>
                     {{ $t('pay_time_avg') }}：
@@ -239,8 +254,9 @@
                     </template>
                   </dd> -->
                   <div v-if='item.otc_collection'>
-                    <dd v-for='(payItem, index) in paymentHeaderList[item.otc_collection.payment_type]'
-                        :key='index'>
+                    <dd
+                      v-for='(payItem, index) in paymentHeaderList[item.otc_collection.payment_type]'
+                      :key='index'>
                       <span>{{ $t(payItem.text) }}</span>
                       <span>
                         <span
@@ -256,12 +272,12 @@
                   <dd>
                     <a
                       href="javascript:;"
-                      @click="detailHandle(item)">详情 ></a>
+                      @click="detailHandle(item)">{{$t('otc_sidees10')}} ></a>
                   </dd>
                 </dl>
                 <dl v-if="item.state === 1 && item.side === 1 && !item.appeal && !item.other_appeal">
                   <dt>
-                    <span>支付方式</span>
+                    <span>{{$t('otc_payment_method')}}</span>
                     <!-- <el-select v-model="item.bankId" size="small" style="width: 140px" @change="paySetHandle(item, item.bankId)">
                       <el-option v-for="(bank, i) in item.bankArray" :key="i" :label="bank.name" :value="bank.id"></el-option>
                     </el-select> -->
@@ -279,8 +295,9 @@
                     </el-select>
                   </dt>
                   <div v-if='item.selectPayment'>
-                    <dd v-for='(payItem, index) in paymentHeaderList[item.selectPayment.payment_type]'
-                        :key='index'>
+                    <dd
+                      v-for='(payItem, index) in paymentHeaderList[item.selectPayment.payment_type]'
+                      :key='index'>
                       <span>{{ $t(payItem.text) }}</span>
                       <span>
                         <span
@@ -291,6 +308,13 @@
                         </span>
                         <span v-else>{{ processValue(payItem.key, item.selectPayment) }}</span>
                       </span>
+                    </dd>
+                    <dd>
+                      <a
+                        href="javascript:;"
+                        @click="closeHadle(item)"
+                        style="font-size: 12px;"
+                      >{{ $t('otc_cancel_order') }}</a>
                     </dd>
                   </div>
                   <!-- <dd v-if="item.bankId">
@@ -311,32 +335,46 @@
                   v-if="item.side === 1 && item.state === 1 && !item.appeal && !item.other_appeal"
                   @click="detailHandle(item)"
                 >{{ $t('otc_already_paid') }}</div>
-                <div
-                  class="btn btn2"
-                  v-if="item.side === 1 && item.state === 1 && !item.appeal && !item.other_appeal"
-                  @click="closeHadle(item)"
-                >{{ $t('otc_cancel_order') }}</div>
-                <div
-                  class="btn"
-                  v-if="item.side === 2 && item.state === 2 && !item.appeal && !item.other_appeal"
-                  @click="detailHandle(item)"
-                >确认放币</div>
+                <!--<div-->
+                <!--class="btn btn2"-->
+                <!--v-if="item.side === 1 && item.state === 1 && !item.appeal && !item.other_appeal"-->
+                <!--@click="closeHadle(item)"-->
+                <!--&gt;{{ $t('otc_cancel_order') }}</div>-->
+                <template>
+                  <div
+                    class="btn"
+                    v-if="item.side === 2 && item.state === 2 && !item.appeal && !item.other_appeal"
+                    @click="detailHandle(item)"
+                  >{{$t('otc_confirm_issued')}}</div>
+                  <div
+                    class="btn"
+                    v-if="item.side === 2 && item.state === 7 && !item.appeal && !item.other_appeal"
+                    @click="detailHandle(item)"
+                  >{{$t('otc_confirm_issued')}}</div>
+                </template>
                 <div
                   class="time-ago"
                   v-if="item.time && !item.appeal && !item.other_appeal">
                   <p>
-                    还剩
+                    {{$t('otc_overtime_tips_a1')}}
                     <count-down
                       :terminal="item.time"
                       style="font-size: 12px;"/>
                   </p>
                   <!--<b v-if="item.side === 1 && item.state === 1"></b>-->
-                  <b v-if="item.side === 2 && item.state === 1">超时自动取消订单</b>
-                  <b v-if="item.side === 1 && item.state === 2">超时自动放币</b>
-                  <b v-if="item.side === 2 && item.state === 2">超时自动放币</b>
-                  <b v-if="item.side === 1 && item.state === 7">超时自动放币</b>
+                  <b v-if="item.side === 2 && item.state === 1">  {{$t('otc_seiitm_13')}}</b>
+                  <b v-if="item.side === 1 && item.state === 2">  {{$t('otc_seiitm_14')}}</b>
+                  <b v-if="item.side === 2 && item.state === 2">  {{$t('otc_seiitm_14')}}</b>
+                  <b v-if="item.side === 1 && item.state === 7">  {{$t('otc_seiitm_14')}}</b>
                   <!--<span v-html="item.side === 1 && ? '取消订单' : '放币'"></span>-->
                 </div>
+                <dd
+                  v-if="item.side === 1 && item.state === 1 && item.other_appeal"
+                  style="position: absolute;right: 0;bottom: 0;">
+                  <a
+                    href="javascript:;"
+                    @click="detailHandle(item)">{{$t('otc_sidees10')}} ></a>
+                </dd>
               </li>
             </ul>
           </div>
@@ -404,6 +442,8 @@ export default {
   mixins: [tradeMixins, processValue],
   data () {
     return {
+      icons: ['&#xe618;', '&#xe654;'],
+      iconActive: 0,
       tab: [
         {
           name: this.$t('otc_tab_lisetr'),
@@ -434,6 +474,12 @@ export default {
         page: 1,
         side: 0,
         size: 10
+      },
+      params1: {
+        page: 1,
+        side: 0,
+        size: 10,
+        currency: ''
       },
       bankData: [],
       bankId: '',
@@ -495,7 +541,7 @@ export default {
       },
       selectPayment: {},
       qrsrc: '',
-      showQRcode: false,
+      showQRcode: false
     }
   },
   // computed: {
@@ -515,6 +561,24 @@ export default {
   //   }
   // },
   methods: {
+    compareDown (property) {
+      return function (a, b) {
+        return a[property] - b[property]
+      }
+    },
+    compareUp (property) {
+      return function (a, b) {
+        return b[property] - a[property]
+      }
+    },
+    iconTab (index) {
+      this.iconActive = index
+      if (index === 0) {
+        return this.data.sort(this.compareDown('create_time'))
+      } else {
+        return this.data.sort(this.compareUp('create_time'))
+      }
+    },
     changePayType (e) {
       console.log(e)
     },
@@ -523,13 +587,14 @@ export default {
       this.showQRcode = true
     },
     orderSwtich (index) {
+      
       if (this.data.length > 0) {
         this.orderActive = index
         const orderName =
-          index === 0 ? '撤销全部' : index === 1 ? '全部开始' : '全部暂停'
-        this.$confirm(`确定${orderName}订单？`, '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
+          index === 0 ? this.$t('otc_seiitm_15') : index === 1 ? this.$t('otc_tab_lisetr3') : this.$t('otc_tab_lisetr4')
+        this.$confirm(this.$t('otc_otutcol_18',{orderName}), this.$t('tips'), {
+         confirmButtonText: this.$t('otc_ziurec_20'),
+          cancelButtonText:  this.$t('cancel'),
           type: 'warning'
         })
           .then(() => {
@@ -540,9 +605,18 @@ export default {
             service.otcOrderOperateAll(obj).then(res => {
               if (res.code === 0) {
                 this.init(this.active)
-                this.$message.success(`${orderName}成功`)
+                this.$message({
+                  type: 'success',
+                  message: `${orderName}成功`,
+                  duration: 1000
+                })
               } else {
-                this.$message.warning(`${res.message}`)
+                // this.$message.warning(`${res.message}`)
+                this.$message({
+                  type: 'warning',
+                  message: `${res.message}`,
+                  duration: 1000
+                })
               }
             })
             this.orderActive = -1
@@ -551,7 +625,11 @@ export default {
             this.orderActive = -1
           })
       } else {
-        this.$message.warning(`无数据`)
+        this.$message({
+          type: 'warning',
+          message: this.$t('no_data'),
+          duration: 1000
+        })
       }
     },
     closeHadle (item) {
@@ -583,8 +661,8 @@ export default {
             item.payment_type === 1
               ? item.deposit_bank
               : item.payment_type === 2
-              ? '支付宝'
-              : '微信'
+                ? this.$t('payment_namezfb')
+                : this.$t('payment_weChat_adasunt')
           const payAccount = item.alipay_account
             ? item.alipay_account
             : item.card_number
@@ -619,10 +697,20 @@ export default {
         service.otcOrderIssueDone(params).then(res => {
           console.log(res)
           if (!res.code) {
-            this.$message.success('提交成功')
+            // this.$message.success('提交成功')
+            this.$message({
+              type: 'success',
+              message: this.$t('otc_seiitm_16'),
+              duration: 1000
+            })
             this.init(this.active)
           } else {
-            this.$message.error(res.message)
+            // this.$message.error(res.message)
+            this.$message({
+              type: 'error',
+              message: `${res.message}`,
+              duration: 1000
+            })
           }
         })
       } else if (type === 'close') {
@@ -635,17 +723,28 @@ export default {
           if (!res.code) {
             this.$message({
               type: 'success',
-              message: '取消成功!'
+              message: this.$t('otc_seiitm_17'),
+              duration: 1000
             })
           } else {
-            this.$message.error(`${res.message}`)
+            // this.$message.error(`${res.message}`)
+            this.$message({
+              type: 'error',
+              message: `${res.message}`,
+              duration: 1000
+            })
           }
         })
       } else {
         // todo request api
         if (!this.bankId) {
           // utils.alert('请选择支付方式!')
-          this.$message.warning('请选择支付方式!')
+          // this.$message.warning('请选择支付方式!')
+          this.$message({
+            type: 'warning',
+              message: this.$t('otc_buy_tips_i'),
+            duration: 1000
+          })
           return
         }
         let $this = this
@@ -655,10 +754,20 @@ export default {
         }
         service.otcOrderPaymentDone(params).then(res => {
           if (!res.code) {
-            this.$message.success('提交成功')
+            // this.$message.success('提交成功')
+            this.$message({
+              type: 'success',
+               message: this.$t('otc_seiitm_16'),
+              duration: 1000
+            })
             this.init(this.active)
           } else {
-            this.$message.error(res.message)
+            // this.$message.error(res.message)
+            this.$message({
+              type: 'error',
+              message: `${res.message}`,
+              duration: 1000
+            })
           }
         })
       }
@@ -675,12 +784,19 @@ export default {
       })
     },
     switchTab: utils.debounce(function (index) {
+      this.tableHeader = []
       let that = this
       // 数据初始化
       that.params = {
         page: 1,
         side: 0,
         size: 10
+      }
+      that.params1 = {
+        page: 1,
+        side: 0,
+        size: 10,
+        currency: ''
       }
       that.loading = true
       that.active = index
@@ -699,7 +815,6 @@ export default {
         }
         // 防止抖动
         this.loading = false
-
         // 切换数据
         this.init(index)
         this.setTimeInit()
@@ -756,16 +871,15 @@ export default {
                   }
                   Vue.set(item, 'paySet', child.payment_type)
                 })
-                //支付方式默认选择银行卡
+                // 支付方式默认选择银行卡
                 let paylist = item.otc_collection_list
                 if (paylist.length > 0) {
-                  let arr = paylist.filter(arg => arg.payment_type===1)
+                  let arr = paylist.filter(arg => arg.payment_type === 1)
                   if (arr.length > 0) {
-                    //this.selectPayment = arr[0]
+                    // this.selectPayment = arr[0]
                     Vue.set(item, 'selectPayment', arr[0])
                   }
                 }
-                console.log({item})
 
                 Vue.set(item, 'bankArray', bankData)
                 Vue.set(item, 'bankId', '')
@@ -774,18 +888,17 @@ export default {
                 Vue.set(item, 'bankAccount', '')
               }
             })
-            console.log(that.data[0])
           }
           break
         case 1:
-          let rer = await service.getDonefills(that.params)
+          let rer = await service.getDonefills(that.params1)
           if (!rer.code) {
             that.data = rer.data.data
             that.total = rer.data.total
           }
           break
         case 2:
-          let res = await service.getOtcRemovefills(that.params)
+          let res = await service.getOtcRemovefills(that.params1)
           if (!res.code) {
             that.data = res.data.data
             that.total = res.data.total
@@ -800,9 +913,9 @@ export default {
       }
     },
     sq (item) {
-      this.$confirm('你确定要申诉？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm(this.$t('otc_otutcol_19'), this.$t('tips'), {
+        confirmButtonText: this.$t('otc_ziurec_20'),
+        cancelButtonText: this.$t('cancel'),
         type: 'warning'
       })
         .then(() => {
@@ -812,18 +925,36 @@ export default {
           }
           service.otcAppeal(params).then(res => {
             if (!res) {
-              this.$message.success('申诉成功，请等待客服处理')
+              // this.$message.success('申诉成功，请等待客服处理')
+              this.$message({
+                type: 'success',
+                message: this.$t('otc_otutcol_20'),
+                duration: 1000
+              })
               this.init(this.active)
             } else {
-              this.$message.warning(`${res.message}`)
+              // this.$message.warning(`${res.message}`)
+              this.$message({
+                type: 'warning',
+                message: `${res.message}`,
+                duration: 1000
+              })
             }
           })
         })
         .catch(() => {})
     },
     handleCurrentChange (e) {
-      this.params.page = e
-      this.init(this.active)
+      console.log(this.active)
+      if (this.active === 1 || this.active === 2) {
+        this.params1.page = e
+        console.log(this.params1.page, '1')
+        this.init(this.active)
+      } else {
+        this.params.page = e
+        console.log(this.params.page, '2')
+        this.init(this.active)
+      }
     },
     setTimeInit () {
       this.timer = setInterval(() => {
@@ -847,10 +978,10 @@ export default {
     // 定时器
     this.timers = setInterval(() => {
       service.getUnDonefills({
-          page: 1,
-          side: 0,
-          size: 999
-        }
+        page: 1,
+        side: 0,
+        size: 999
+      }
       ).then(res => {
         if (res.code === 0) {
           if (res.data.data.length > 0) {

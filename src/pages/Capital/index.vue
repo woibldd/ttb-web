@@ -1,10 +1,10 @@
 <template>
   <div class="fund-container my-fund-container">
     <div class="title-box">
-      <div>{{ $t('wallets_nav_asset') }}
+      <div>{{ $t('wallets_nav_asset') }} 
         <span class="ml-30">
-          <el-select
-            v-model="unit"
+          <el-select   
+            v-model="unit" 
             @change="currencyChange"
             value-key="name">
             <el-option
@@ -12,24 +12,24 @@
               :key="idx"
               :label="item.name"
               :value="item"/>
-          </el-select>
+          </el-select> 
         </span>
       </div>
     </div>
     <div class="tip">
-      <h1>IXX 总净资产估值</h1>
+      <h1>{{$t('otc_otutcol_11')}}</h1>
       <p><b>≈ {{ixTotal | fixed(unit.scale || 2)}}</b> {{unit.name}}</p>
     </div>
     <div class="capital-wrapper clearfix">
       <div class="capital-inner">
-        <div class="title">资金账户</div>
+        <div class="title">{{$t('wallet_account')}}</div>
         <div class="money">
           <p><b>{{walletTotal | fixed(unit.scale || 2)}}</b> {{unit.name}}</p>
         </div>
         <div class="capital-area clearfix">
           <ul>
             <li>
-              <icon name='charging' />
+              <icon name='charging' />  
               <router-link
                 class="menu-name"
                 to="/fund/deposit"
@@ -56,7 +56,7 @@
         </div>
       </div>
       <div class="capital-inner">
-        <div class="title">交易账户</div>
+        <div class="title">{{$t('otc_otutcol_12')}}</div>
         <div class="money">
           <p><b>{{accountTotal | fixed(unit.scale || 2)}}</b> {{unit.name}}</p>
         </div>
@@ -73,7 +73,7 @@
                 <b>{{otcTotal | fixed(unit.scale || 2)}}</b>
                 {{unit.name}}
               </div>
-              <em>
+              <em> 
                 <router-link
                   class="sub-menu-item"
                   to="/fund/fTrade">
@@ -89,10 +89,10 @@
                 </router-link>
               </span>
               <div>
-                <b>{{tradingTotal | fixed(unit.scale || 2)}}</b>
+                <b>{{tradingTotal | fixed(unit.scale || 2)}}</b>  
                 {{unit.name}}
               </div>
-              <em>
+              <em> 
                 <router-link
                   class="sub-menu-item"
                   to="/fund/bTrade">
@@ -130,7 +130,7 @@
 import service from '@/modules/service'
 export default {
   data() {
-    return {
+    return { 
       otcTable: [],
       tradingTable: [],
       contractTable: [],
@@ -179,14 +179,14 @@ export default {
       })
       return sum.toString()
     },
-    walletTotal() {
-      let sum = this.$big(0)
+    walletTotal() { 
+      let sum = this.$big(0) 
       this.walletTable.forEach(item => {
         sum = sum.plus(item.estValue)
       })
       return sum.toString()
     },
-    accountTotal() {
+    accountTotal() { 
       let sum = this.$big(0)
       debugger
       sum = sum.plus(this.otcTotal).plus(this.tradingTotal).plus(this.contractTotal)
@@ -200,12 +200,12 @@ export default {
     }
   },
   methods: {
-    getAccountBalanceList () {
+    getAccountBalanceList () { 
       service.getAccountBalanceList().then(res => {
         if(!res.code && !!res.data) {
-          this.tradingTable = (res.data || []).map(item => {
+          this.tradingTable = (res.data || []).map(item => {  
             item.camount = this.$big(item.locking).plus(item.available).round(8, this.C.ROUND_DOWN).toString()
-            item.estValue = this.getEstValue(item)
+            item.estValue = this.getEstValue(item) 
             return item
           })
         }
@@ -214,24 +214,24 @@ export default {
     getContractBalanceList () {
        service.getContractBalanceList().then(res => {
         if (!res.code && !!res.data) {
-            this.contractTable = (res.data || []).map(item => {
+            this.contractTable = (res.data || []).map(item => { 
             item.currency = item.currency.replace("USD","")
             item.camount = item.available
-            item.estValue = this.getEstValue(item)
+            item.estValue = this.getEstValue(item) 
             console.log({item})
             return item
           })
         }
       })
     },
-    getOtcBalanceList () {
+    getOtcBalanceList () { 
       service.getOtcBalance().then(res => {
         if (!res.code && !!res.data) {
-          this.otcTable = (res.data || []).map(item => {
+          this.otcTable = (res.data || []).map(item => {   
             item.camount = this.$big(item.ordering).plus(this.$big(item.available)).toString()
-            item.estValue = this.getEstValue(item)
-            return item
-          })
+            item.estValue = this.getEstValue(item) 
+            return item 
+          })  
         }
       })
     },
@@ -239,30 +239,30 @@ export default {
       service.getAccountWalletList().then(res => {
         if(!res.code && !!res.data) {
           console.log({data:res.data})
-          this.walletTable = (res.data || []).map(item => {
+          this.walletTable = (res.data || []).map(item => {  
             item.camount = this.$big(item.available).plus(item.withdrawing)
             item.estValue = this.getEstValue(item)
             return item
-          })
+          }) 
         }
       })
     },
     flushBalance() {
       this.getAccountBalanceList()
       this.getContractBalanceList()
-      this.getOtcBalanceList()
+      this.getOtcBalanceList()  
       this.getAccountWalletList()
     },
     getEstValue (item) {
       let res = this.$big(0)
       let unit = this.unit.name
-      let {currency,camount} = item
+      let {currency,camount} = item 
       if (unit === 'BTC'){
         if(currency === 'BTC') {
-          res = this.$big(camount)
+          res = this.$big(camount) 
         }
-        else {
-          if (this.$big(camount).gt(0) && !!this.rates[currency]) {
+        else { 
+          if (this.$big(camount).gt(0) && !!this.rates[currency]) { 
             res = this.$big(camount).times(this.rates[currency]['USD'] || 0).div(this.rates['BTC']['USD'])
           }
         }
@@ -275,7 +275,7 @@ export default {
           res = this.$big(camount).times(this.$big(this.rates[currency][unit] || 0))
         }
       }
-      //let num = 8
+      //let num = 8 
       //return res.round(num, this.C.ROUND_DOWN).toString()
       return res
     },
@@ -283,15 +283,15 @@ export default {
       // console.log('asjdlfkjaskldfjasldjflasdjfl;ajsdfljkasdlfk')
       let coin = item.currency.replace("USD","")
       let rate = this.rates[coin]
-      if (!!rate) {
+      if (!!rate) { 
         let res = this.$big(item.available).times(this.$big(rate[this.unit.name] || 0))
-        let num = 8
+        let num = 8 
         return res.round(num, this.C.ROUND_DOWN).toString()
-      }
+      } 
       return '0';
     },
     async getAllRate() {
-      let res = await service.getAllRate()
+      let res = await service.getAllRate() 
       if (!res.code && !!res.data) {
         this.rates = res.data;
       }
@@ -307,7 +307,6 @@ export default {
   }
 }
 </script>
-
 <style lang="scss" rel="stylesheet/scss" scoped>
 .tip{
   h1 {
@@ -409,7 +408,7 @@ export default {
         span {
           flex: 110px 0 0 0;
           display: block;
-          width: 100px;
+          width: 170px;
           padding-left: 10px;
           position: relative;
           &::after {
