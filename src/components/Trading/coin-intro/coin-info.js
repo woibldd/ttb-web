@@ -883,4 +883,61 @@ export default{
     }
 
   },
+
+
+
+
+
+
+  YTA: {
+    'zh-CN': {
+      name: 'YTA',
+      full_name: 'Yotta coin',
+      brief_info: 'YottaChain是由中国十大青年科学家王东临带队打造的区块链存储公链，YottaChain通过连接全球分散的存储资源，打造一个规模浩瀚的星际存储池，能确保每个人的数据主权，比现有中心化存储具有压倒性优势（可靠性提升万倍、成本降低数倍，并具备抗DDoS和容灾等特性）。YottaChain掌握区块链存储核心科技，拥有200多项国内外专利技术，其核心TruPrivacy技术是全球唯一能实现加密后去重的技术，并荣获全球专利，从而改变存储行业格局。',
+      issue_time: '',
+      issue_all: '50亿', // 发行总量
+      issue_circulation: '40亿', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.yottachain.io/static/pdf/YottaChain', // 白皮书
+      office_website: 'www.yottachain.io', // 官网
+      chain_info: 'https://etherscan.io/token/0x5edc1a266e8b2c5e8086d373725df0690af7e3ea' // 区块查询
+    },
+    'zh-HK': {
+      name: 'YTA',
+      full_name: 'Yotta coin',
+      brief_info: 'YottaChain是由中國十大青年科學家王東臨帶隊打造的區塊鏈存儲公鏈，YottaChain通過連接全球分散的存儲資源，打造一個規模浩瀚的星際存儲池，能確保每個人的數據主權，比現有中心化存儲具有壓倒性優勢（可靠性提升萬倍、成本降低數倍，並具備抗DDoS和容灾等特性）。YottaChain掌握區塊鏈存儲覈心科技，擁有200多項國內外專利技術，其覈心TruPrivacy科技是全球唯一能實現加密後去重的科技，並榮獲全球專利，從而改變存儲行業格局。',
+      issue_time: '',
+      issue_all: '50億', // 發行總量
+      issue_circulation: '40億', // 流通總量
+      token_price: '--', // 眾籌價格
+      whitepagger: 'http://www.yottachain.io/static/pdf/YottaChain', // 白皮書
+      office_website: 'www.yottachain.io', // 官網
+      chain_info: 'https://etherscan.io/token/0x5edc1a266e8b2c5e8086d373725df0690af7e3ea' // 區塊查詢
+    },
+    en: {
+      name: 'YTA',
+      full_name: 'Yotta coin',
+      brief_info: 'YottaChain is a blockchain storage chain led by Wang Donglin, one of China s top ten young scientists, to create a vast interstellar storage pool that ensures everyone s data sovereignty by connecting the world s scattered storage resources.Over-the-counter, centralized storage (10,000 times more reliable, cost reductions, and features such as resistance to DDoS and disaster tolerance). YottaChain master blockchain storage core technology, with more than 200 domestic and foreign patented technology, its core TruPrivacy technology is the world s only technology to that can realize encryption and de-weight, and has won a global patent, thereby changing the storage industry landscape.',
+      issue_time: '',
+      issue_all: '50 Billion ', // 发行总量
+      issue_circulation: '40 Billion ', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.yottachain.io/static/pdf/YottaChain', // 白皮书
+      office_website: 'www.yottachain.io', // 官网
+      chain_info: 'https://etherscan.io/token/0x5edc1a266e8b2c5e8086d373725df0690af7e3ea' // 区块查询
+    },
+    ko: {
+      name: 'YTA',
+      full_name: 'Yotta coin',
+      brief_info: 'YottaChain 은 중국 의 10 대 청년 과학자 왕동림 끌 만 한 사슬 저장 공 을 통 해 글 로 벌 연결 고리 YottaChain 분산 의 메모리 자원 을 하나의 규모 혹 한의 스타 저장 지 만 확보 해도 개개 인의 데이터 주권 을 기존 보다 중심화 저장 이 압도적 인 우위 (신빙성 높 만 배, 비용 절약 몇 배 를 갖 게 된 항 디 도스 와 용 재난 등 특성) 다.Yottachain은 블록체인 저장 핵심 기술을 장악하고 200여 개의 국내외 특허 기술을 보유하고 있으며, 그 핵심 TruPrivacy 기술은 전 세계에서 유일하게 암호화된 후 재처리될 수 있는 기술이며, 또한 전 세계 특허를 획득하여 저장 업계의 판도를 변화시켰다.',
+      issue_time: '',
+      issue_all: '50억', // 发行总量
+      issue_circulation: '40억', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.yottachain.io/static/pdf/YottaChain', // 白皮书
+      office_website: 'www.yottachain.io', // 官网
+      chain_info: 'https://etherscan.io/token/0x5edc1a266e8b2c5e8086d373725df0690af7e3ea' // 区块查询
+    }
+
+  },
 }
