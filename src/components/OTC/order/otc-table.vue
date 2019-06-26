@@ -491,11 +491,10 @@ export default {
           float: right;
           box-sizing: border-box;
           .number-input {
-              
             &.input {
               font-family: monaco Trebuchet MS, Tahoma, Arial, sans-serif;
               outline: none;
-              border: 0px solid #666666;
+              border: 1px solid #666666;
               border-radius: 3px;
               background-color: transparent;
               width: 100%;
@@ -636,7 +635,6 @@ span.orange {
     font-size: 12px!important;
   }
   .entrust-order-container .otcaction .action-order ul .content .number-input.input {
-    
     height: 36px!important;
     line-height: 36px!important;
   }

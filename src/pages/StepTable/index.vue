@@ -1,7 +1,6 @@
 <template>
   <div class="trade-container">
     <div class="trade-message-box">
-      
       <div class="link">{{ $t('otc_my_order') }}</div>
       <div class="message-con">
         <dl>
@@ -137,24 +136,22 @@
               </div>
               <div class="state">
                 <template v-if="!item.appeal">
-                  <!-- {{ item.state | state }} -->
-                  <span v-if="!item.other_appeal">{{$t('otc_sideoc_6')}}</span>
-                  <span v-else-if="item.side === 2 && item.state === 1">{{$t('otc_seiitm_6')}}</span>
-                  <span v-else>{{$t('otc_seiitm_7')}}</span>
-                  
+                  <span v-if="!item.other_appeal">{{ item.state | state }}</span>
+                  <span v-else-if="item.side === 2 && item.state === 1">待对方付款</span>
+                  <span v-else>对方已申诉</span>
                   <b
                     v-if="item.state === 2 || item.state === 7 || item.state === 6"
                     @click="sq(item)"
-                  >{{$t('otc_seiitm_8')}}</b>
+                  >申诉</b>
                 </template>
-                <template v-else>{{$t('otc_seiitm_9')}}</template>
+                <template v-else>已申诉</template>
                 <!--（没收到对方付款？-->
               </div>
             </div>
             <ul class="inner">
               <li class="first">
                 <div class="type">
-                  <em :style="{color: item.side === 1 ? '#23C88B' : '#F24E4D'}">{{ Order(item.side)}}</em>
+                  <em :style="{color: item.side === 1 ? '#23C88B' : '#F24E4D'}">{{ item.side | side }}</em>
                   <div
                     class="cur"
                     :style="{color: item.side === 1 ? '#23C88B' : '#F24E4D'}">
@@ -177,11 +174,11 @@
                   </dd>
                   <template v-if="item.side === 2">
                     <dd>
-                      {{$t('otc_ziurec_13')}}：
-                      <span> {{$t('otc_ziurec_16')}}</span>
+                      平台服务费：
+                      <span>限时免费</span>
                     </dd>
                     <dd>
-                     {{$t('otc_seiitm_10')}}：
+                      实付：
                       <span>{{ '¥' + item.total }}</span>
                     </dd>
                   </template>
@@ -190,8 +187,8 @@
               <li>
                 <dl>
                   <dt>
-                    <b v-if="item.side === 1">  {{$t('otc_seller_nameacer')}}：</b>
-                    <b v-else>  {{$t('otc_seiitm_11')}}：</b>
+                    <b v-if="item.side === 1">卖家：</b>
+                    <b v-else>买家：</b>
                     <span>{{ item.name }}</span>
                   </dt>
                   <dd>
@@ -200,7 +197,7 @@
                   </dd>
                   <dd>
                     {{ $t('otc_kyc_level') }}：
-                    <span>{{$t('otc_seiitm_12')}}{{ item.kyc_level }}</span>
+                    <span>级别{{ item.kyc_level }}</span>
                   </dd>
                   <dd>
                     {{ $t('pay_time_avg') }}：
@@ -272,12 +269,12 @@
                   <dd>
                     <a
                       href="javascript:;"
-                      @click="detailHandle(item)">{{$t('otc_sidees10')}} ></a>
+                      @click="detailHandle(item)">详情 ></a>
                   </dd>
                 </dl>
                 <dl v-if="item.state === 1 && item.side === 1 && !item.appeal && !item.other_appeal">
                   <dt>
-                    <span>{{$t('otc_payment_method')}}</span>
+                    <span>支付方式</span>
                     <!-- <el-select v-model="item.bankId" size="small" style="width: 140px" @change="paySetHandle(item, item.bankId)">
                       <el-option v-for="(bank, i) in item.bankArray" :key="i" :label="bank.name" :value="bank.id"></el-option>
                     </el-select> -->
@@ -345,27 +342,27 @@
                     class="btn"
                     v-if="item.side === 2 && item.state === 2 && !item.appeal && !item.other_appeal"
                     @click="detailHandle(item)"
-                  >{{$t('otc_confirm_issued')}}</div>
+                  >确认放币</div>
                   <div
                     class="btn"
                     v-if="item.side === 2 && item.state === 7 && !item.appeal && !item.other_appeal"
                     @click="detailHandle(item)"
-                  >{{$t('otc_confirm_issued')}}</div>
+                  >确认放币</div>
                 </template>
                 <div
                   class="time-ago"
                   v-if="item.time && !item.appeal && !item.other_appeal">
                   <p>
-                    {{$t('otc_overtime_tips_a1')}}
+                    还剩
                     <count-down
                       :terminal="item.time"
                       style="font-size: 12px;"/>
                   </p>
                   <!--<b v-if="item.side === 1 && item.state === 1"></b>-->
-                  <b v-if="item.side === 2 && item.state === 1">  {{$t('otc_seiitm_13')}}</b>
-                  <b v-if="item.side === 1 && item.state === 2">  {{$t('otc_seiitm_14')}}</b>
-                  <b v-if="item.side === 2 && item.state === 2">  {{$t('otc_seiitm_14')}}</b>
-                  <b v-if="item.side === 1 && item.state === 7">  {{$t('otc_seiitm_14')}}</b>
+                  <b v-if="item.side === 2 && item.state === 1">超时自动取消订单</b>
+                  <b v-if="item.side === 1 && item.state === 2">超时自动放币</b>
+                  <b v-if="item.side === 2 && item.state === 2">超时自动放币</b>
+                  <b v-if="item.side === 1 && item.state === 7">超时自动放币</b>
                   <!--<span v-html="item.side === 1 && ? '取消订单' : '放币'"></span>-->
                 </div>
                 <dd
@@ -373,7 +370,7 @@
                   style="position: absolute;right: 0;bottom: 0;">
                   <a
                     href="javascript:;"
-                    @click="detailHandle(item)">{{$t('otc_sidees10')}} ></a>
+                    @click="detailHandle(item)">详情 ></a>
                 </dd>
               </li>
             </ul>
@@ -587,14 +584,13 @@ export default {
       this.showQRcode = true
     },
     orderSwtich (index) {
-      
       if (this.data.length > 0) {
         this.orderActive = index
         const orderName =
-          index === 0 ? this.$t('otc_seiitm_15') : index === 1 ? this.$t('otc_tab_lisetr3') : this.$t('otc_tab_lisetr4')
-        this.$confirm(this.$t('otc_otutcol_18',{orderName}), this.$t('tips'), {
-         confirmButtonText: this.$t('otc_ziurec_20'),
-          cancelButtonText:  this.$t('cancel'),
+          index === 0 ? '撤销全部' : index === 1 ? '全部开始' : '全部暂停'
+        this.$confirm(`确定${orderName}订单？`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
           type: 'warning'
         })
           .then(() => {
@@ -627,7 +623,7 @@ export default {
       } else {
         this.$message({
           type: 'warning',
-          message: this.$t('no_data'),
+          message: `无数据`,
           duration: 1000
         })
       }
@@ -661,8 +657,8 @@ export default {
             item.payment_type === 1
               ? item.deposit_bank
               : item.payment_type === 2
-                ? this.$t('payment_namezfb')
-                : this.$t('payment_weChat_adasunt')
+              ? '支付宝'
+              : '微信'
           const payAccount = item.alipay_account
             ? item.alipay_account
             : item.card_number
@@ -700,7 +696,7 @@ export default {
             // this.$message.success('提交成功')
             this.$message({
               type: 'success',
-              message: this.$t('otc_seiitm_16'),
+              message: '提交成功',
               duration: 1000
             })
             this.init(this.active)
@@ -723,7 +719,7 @@ export default {
           if (!res.code) {
             this.$message({
               type: 'success',
-              message: this.$t('otc_seiitm_17'),
+              message: '取消成功!',
               duration: 1000
             })
           } else {
@@ -742,7 +738,7 @@ export default {
           // this.$message.warning('请选择支付方式!')
           this.$message({
             type: 'warning',
-              message: this.$t('otc_buy_tips_i'),
+            message: `请选择支付方式!`,
             duration: 1000
           })
           return
@@ -757,7 +753,7 @@ export default {
             // this.$message.success('提交成功')
             this.$message({
               type: 'success',
-               message: this.$t('otc_seiitm_16'),
+              message: `提交成功`,
               duration: 1000
             })
             this.init(this.active)
@@ -875,10 +871,12 @@ export default {
                 let paylist = item.otc_collection_list
                 if (paylist.length > 0) {
                   let arr = paylist.filter(arg => arg.payment_type === 1)
-                  if (arr.length > 0) {
-                    // this.selectPayment = arr[0]
-                    Vue.set(item, 'selectPayment', arr[0])
-                  }
+                  // console.log(arr)
+                  // if (arr.length > 0) {
+                  //   // this.selectPayment = arr[0]
+                  //   Vue.set(item, 'selectPayment', arr[0].payment_type)
+                  // }
+                  Vue.set(item, 'selectPayment', arr[0])
                 }
 
                 Vue.set(item, 'bankArray', bankData)
@@ -913,9 +911,9 @@ export default {
       }
     },
     sq (item) {
-      this.$confirm(this.$t('otc_otutcol_19'), this.$t('tips'), {
-        confirmButtonText: this.$t('otc_ziurec_20'),
-        cancelButtonText: this.$t('cancel'),
+      this.$confirm('你确定要申诉？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
         type: 'warning'
       })
         .then(() => {
@@ -928,7 +926,7 @@ export default {
               // this.$message.success('申诉成功，请等待客服处理')
               this.$message({
                 type: 'success',
-                message: this.$t('otc_otutcol_20'),
+                message: `申诉成功，请等待客服处理`,
                 duration: 1000
               })
               this.init(this.active)
@@ -978,10 +976,10 @@ export default {
     // 定时器
     this.timers = setInterval(() => {
       service.getUnDonefills({
-        page: 1,
-        side: 0,
-        size: 999
-      }
+          page: 1,
+          side: 0,
+          size: 999
+        }
       ).then(res => {
         if (res.code === 0) {
           if (res.data.data.length > 0) {
@@ -1008,23 +1006,6 @@ export default {
   }
 }
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <style lang="scss" rel="stylesheet/scss" scoped>
   @import "./assets/scss/trade.scss";
   @font-face {

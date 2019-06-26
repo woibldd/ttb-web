@@ -84,14 +84,14 @@ export const tradeMixins = {
           }
         },
         {
-          label: this.$t('currency'),
+          label: '币种',
           prop: 'symbol',
           renderHeader: (h, params) => {
             return h(STepSelect, {
               props: {
                 dropData: {
-                  name: this.$t('otc_currency'),
-                  data: [this.$t('allin'), 'USDT', 'BTC']
+                  name: '币种',
+                  data: ['全部', 'USDT', 'BTC']
                 }
               },
               on: {
@@ -156,7 +156,7 @@ export const tradeMixins = {
           prop: 'side',
           render: (h, params) => {
             const state = params.row.side
-            const name = state === 1 ? this.$t('order_side_buy') : this.$t('order_side_sell')
+            const name = state === 1 ? '买入' : '卖出'
             const color = state === 1 ? '#09C989' : '#F45151'
             return h('div', {
               style: {
@@ -217,32 +217,31 @@ export const tradeMixins = {
       ]
     }
   },
-  // filters: {
-
-  //   //  side (state) {
-  //   //   return state === 1 ?'otc_side_1' :'otc_side_2'
-  //   // },
-  //   state (code) {
-  //     switch (code) {
-  //       case 1:
-  //         return this.$t('otc_sideoc_6')
-  //       case 2:
-  //         return this.$t('otc_buy_step_4')
-  //       case 3:
-  //         return this.$t('done')
-  //       case 4:
-  //         return this.$t('otc_sidees2')
-  //       case 5:
-  //         return this.$t('otc_sidees3')
-  //       case 6:
-  //         return this.$t('otc_sidees4')
-  //       case 7:
-  //         return this.$t('otc_sideoc_7')
-  //       default:
-  //         return ''
-  //     }
-  //   }
-  // },
+  filters: {
+    side (state) {
+      return state === 1 ? '买入' : '出售'
+    },
+    state (code) {
+      switch (code) {
+        case 1:
+          return '待支付'
+        case 2:
+          return '等待放币'
+        case 3:
+          return '已完成'
+        case 4:
+          return '买家取消'
+        case 5:
+          return '卖家取消'
+        case 6:
+          return '买家超时取消'
+        case 7:
+          return '卖家超时放币'
+        default:
+          return ''
+      }
+    }
+  },
   methods: {
     state (code) {
       switch (code) {
@@ -267,17 +266,17 @@ export const tradeMixins = {
     orderState (code) {
       switch (code) {
         case 1:
-          return this.$t('contract_assigning_undeal')
-        case 2:
-          return this.$t('contract_assigning_deal_part')
-        case 3:
-          return this.$t('otc_sidees6')
-        case 4:
-          return this.$t('otc_sidees7')
-        case 5:
-          return this.$t('otc_sidees8')
-        case 6:
-          return this.$t('otc_sidees9')
+            return this.$t('contract_assigning_undeal')
+          case 2:
+            return this.$t('contract_assigning_deal_part')
+          case 3:
+            return this.$t('otc_sidees6')
+          case 4:
+            return this.$t('otc_sidees7')
+          case 5:
+            return this.$t('otc_sidees8')
+          case 6:
+            return this.$t('otc_sidees9')
         default:
           return ''
       }
@@ -316,7 +315,7 @@ export const tradeMixins = {
               }
             }
           }
-        }, this.$t('otc_sidees10'))
+        }, '详情')
       )
       if (this.active === 3) {
         if (params.row.state === 1 || params.row.state === 2) {
@@ -338,9 +337,9 @@ export const tradeMixins = {
               },
               on: {
                 click: () => {
-                  this.$confirm(this.$t('otc_ziurec_18'), {
-                    confirmButtonText: this.$t('otc_ziurec_20'),
-                    cancelButtonText: this.$t('cancel'),
+                  this.$confirm('你确定要撤销该笔委托单？', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
                     type: 'warning'
                   }).then(() => {
                     service.otcOrderRemove(
@@ -353,7 +352,7 @@ export const tradeMixins = {
                         // this.$message.success('撤销成功')
                         this.$message({
                           type: 'success',
-                          message: this.$t('otc_sidees11'),
+                          message: `撤销成功`,
                           duration: 1000
                         })
                         this.init(this.active)
@@ -370,17 +369,12 @@ export const tradeMixins = {
                   })
                 }
               }
-            }, this.$t('contract_assign_revert'))
+            }, '撤销')
           )
         }
       }
       return h('div', btns)
-    },
-    Order (state) {
-        return state === 1 ? this.$t('otc_side_1') : this.$t('otc_side_2')
-
-        
-      }
+    }
   },
   created () {
     // 初始化第一条数据

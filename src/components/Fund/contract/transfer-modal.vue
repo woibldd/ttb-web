@@ -69,7 +69,6 @@
             v-model="transferAmount"
           /> -->
            <number-input 
-           
               class="number-input ex-row__value"
               v-model="transferAmount" 
               @input="inputText"

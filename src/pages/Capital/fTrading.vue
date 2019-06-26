@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="gz-wrapper clearfix">
-      <span>{{$t('otc_otutcol_13')}}</span>
+      <span>法币资产估值</span>
 
       <h1>
         <icon :name="unit.name+'-unit'" />

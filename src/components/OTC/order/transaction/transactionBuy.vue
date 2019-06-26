@@ -1,3 +1,4 @@
+
 <template>
   <div class="otcaction">
     <!-- 吃单 -->
@@ -33,7 +34,7 @@
           <icon name="timer" />
           {{ $t('otc_overtime_tips_a1') }}
           <count-down :terminal="interval" />，
-          {{ $t('otc_overtime_tips_a2') }}{{$t('otc_overtime_tips_a3')}}
+          {{ $t('otc_overtime_tips_a2') }}取消订单
         </div>
         <!-- 委托单信息 -->
         <div
@@ -87,11 +88,11 @@
                 </td>
               </tr>
               <tbody >
-                <tr
-                  v-for='(item, index) in paymentHeaderList[selectPayment.payment_type]'
-                  :key='index'>
-                  <td>{{ $t(item.text) }}</td>
-                  <td>
+              <tr
+                v-for='(item, index) in paymentHeaderList[selectPayment.payment_type]'
+                :key='index'>
+                <td>{{ $t(item.text) }}</td>
+                <td>
 
                     <span
                       style="cursor: pointer;"
@@ -99,17 +100,17 @@
                       @click="openQR(selectPayment)">
                       <icon name="qrcode" />
                     </span>
-                    <!-- <img
-                      v-if="item.key==='collection_img'"
-                      :src="processValue(item.key, selectPayment)"
-                      alt=""
-                      srcset=""
-                      style="max-height:100px;vertical-align:top;"
-                      @click="openQR(selectPayment)"
-                    > -->
-                    <span v-else>{{ processValue(item.key, selectPayment) }}</span>
-                  </td>
-                </tr>
+                  <!-- <img
+                    v-if="item.key==='collection_img'"
+                    :src="processValue(item.key, selectPayment)"
+                    alt=""
+                    srcset=""
+                    style="max-height:100px;vertical-align:top;"
+                    @click="openQR(selectPayment)"
+                  > -->
+                  <span v-else>{{ processValue(item.key, selectPayment) }}</span>
+                </td>
+              </tr>
 
               </tbody>
             </table>
@@ -155,9 +156,9 @@
       </div>
     </div>
     <!-- 操作部分 -->
-    <div 
-class="action-order footer"
-         :class="{'status_2': status > 0}"
+    <div
+      class="action-order footer"
+      :class="{'status_2': status > 0}"
     >
       <!-- 输入框 -->
       <div
@@ -170,8 +171,7 @@ class="action-order footer"
               <span class="red">*</span>
             </div>
             <div class="content">
-              <number-input 
-             
+              <number-input
                 class="number-input"
                 v-model="amount"
                 @input="amountInput"
@@ -180,7 +180,6 @@ class="action-order footer"
                 :scale="symbolInfo.amount_scale || 6"
                 :placeholder="$t('amount')"
               />
-             
               <span
                 class="btn-all"
                 @click="inputAll">{{ $t('input_all') }}</span>
@@ -257,7 +256,7 @@ class="action-order footer"
             <icon name="timer" style="font-size: 12px!important;vertical-align: middle;" />
             {{ $t('otc_overtime_tips_a1') }}
             <count-down :terminal="interval" />，
-            {{ $t('otc_overtime_tips_a2') }}{{$t('cancel')}}
+            {{ $t('otc_overtime_tips_a2') }}取消
           </div>
           <div class="btn-left">
             <v-btn
@@ -318,9 +317,7 @@ import processValue from '@/mixins/process-otc-value'
 import utils from '@/modules/utils.js'
 import countDown from '@/components/CountDown'
 import { state } from '@/modules/store'
-
 const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
-
 export default {
   data () {
     return {
@@ -698,7 +695,7 @@ export default {
       }
       service.otcOrderPaymentDone(params).then(res => {
         if (!res.code) {
-          utils.success(this.$t('otc_seiitm_16'))
+          utils.success('提交成功')
           this.option = 0
           this.show = false
           this.$emit('closeSide')

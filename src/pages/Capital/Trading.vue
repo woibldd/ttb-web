@@ -39,7 +39,7 @@
       </div>
     </div>
     <div class="gz-wrapper clearfix">
-      <span>{{$t('otc_otutcol_14')}}</span>
+      <span>币币资产估值</span>
       <h1>
         <icon :name="unit.name+'-unit'" /> {{total | fixed(unit.scale)}}</h1>
     </div>

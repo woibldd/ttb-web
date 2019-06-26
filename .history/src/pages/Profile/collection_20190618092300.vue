@@ -1,192 +1,136 @@
 
 <template>
-  <div class="profile-container">
+  <div class="profile-container" style="margin-left: 0px">
     <div class="title-box">
-      
       {{ $t('collection') }}
-      <!-- <span class="chose_txt"> {{ $t('collection_cs') }}</span>
+      <span class="chose_txt"> {{ $t('collection_cs') }}</span>
       <em class="cs">
         {{ $t('collection_all') }}
-      </em> -->
-      <div
-        class="add_collection"
-        @click="handle('add')">
+        <!--<el-dropdown @command="handleCommand">-->
+  <!--<span class="el-dropdown-link">-->
+    <!--{{currency}}<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
+  <!--</span>-->
+          <!--<el-dropdown-menu slot="dropdown">-->
+            <!--<el-dropdown-item v-for="(item, index) in dropList" :key="index" :command="item.currency">{{item.currency}}</el-dropdown-item>-->
+          <!--</el-dropdown-menu>-->
+        <!--</el-dropdown>-->
+
+      </em>
+      <div class="add_collection" @click="handle('add')">
         {{ $t('collection_add') }}
       </div>
     </div>
     <div class="invinfo-box">
       <ul>
-        <li
-          v-for="(item, index) in list"
-          :key="index">
+        <li v-for="(item, index) in list" :key="index">
           <div class="type">
             <icon
               class="icon"
               :class="'type-' + item.payment_type"
               :name="item.payment_type === 1 ? 'bank-card' : item.payment_type === 2 ? 'alipay' : 'wechat'"/>
-            <!-- {{ item.payment_type | type }} -->
-            {{typeState(item.payment_type)}}
+            {{ item.payment_type | type}}
           </div>
           <div class="mes">
             <template v-if="item.payment_type === 1">
               <dl>
-                <dd class="cs">{{ item.currency }}</dd>
-                <dd>{{ item.name }}</dd>
-                <dd>{{ item.bank }}</dd>
-                <dd>{{ item.deposit_bank }}</dd>
+                <dd class="cs">{{item.currency}}</dd>
+                <dd>{{item.name}}</dd>
+                <dd>{{item.bank}}</dd>
+                <dd>{{item.deposit_bank}}</dd>
                 <dd v-if="item.card_number">
-                  {{ item.card_number }}
-                  <button
-                    type="text"
-                    v-clipboard:copy="item.card_number"
-                    v-clipboard:success="onCopy"
-                    v-clipboard:error="onError">
-                    <icon name="fund-history-copy"/>
+                  {{item.card_number}}
+                  <button type="text"
+                          v-clipboard:copy="item.card_number"
+                          v-clipboard:success="onCopy"
+                          v-clipboard:error="onError">
+                    <icon name="fund-history-copy"></icon>
                   </button>
+                </dd>
+              </dl>
+            </template>
+            <template v-else-if="item.payment_type === 2">
+              <dl>
+                <dd class="cs">{{item.currency}}</dd>
+                <dd>{{item.name}}</dd>
+                <dd>{{item.alipay_account}}</dd>
+                <dd v-if="item.collection_img">
+                  <button type="text"
+                        v-clipboard:copy="item.alipay_account"
+                        v-clipboard:success="onCopy"
+                        v-clipboard:error="onError">
+                    <icon name="fund-history-copy"></icon>
+                  </button>
+                  <i class="el-icon-picture" @click="handleCol(item, 'img')"></i>
                 </dd>
               </dl>
             </template>
             <template v-else>
               <dl>
-                <dd class="cs">{{ item.currency }}</dd>
-                <dd>{{ item.name }}</dd>
-                <dd>{{ item.alipay_account }}</dd>
+                <dd class="cs">{{item.currency}}</dd>
+                <dd>{{item.name}}</dd>
+                <dd>{{item.weChat_account}}</dd>
                 <dd v-if="item.collection_img">
-                  <button
-                    type="text"
-                    v-clipboard:copy="item.alipay_account"
-                    v-clipboard:success="onCopy"
-                    v-clipboard:error="onError">
-                    <icon name="fund-history-copy"/>
+                  <button type="text"
+                          v-clipboard:copy="item.weChat_account"
+                          v-clipboard:success="onCopy"
+                          v-clipboard:error="onError">
+                    <icon name="fund-history-copy" @click="handleCol(item, 'img')"></icon>
                   </button>
-                  <i
-                    class="el-icon-picture"
-                    @click="handleCol(item, 'img')"/>
-                </dd>
-              </dl>
-            </template>
-            <template v-else>
-              <dl>
-                <dd class="cs">{{ item.currency }}</dd>
-                <dd>{{ item.name }}</dd>
-                <dd>{{ item.weChat_account }}</dd>
-                <dd v-if="item.collection_img">
-                  <button
-                    type="text"
-                    v-clipboard:copy="item.weChat_account"
-                    v-clipboard:success="onCopy"
-                    v-clipboard:error="onError">
-                    <icon
-                      name="fund-history-copy"
-                      @click="handleCol(item, 'img')"/>
-                  </button>
-                  <i class="el-icon-picture"/>
+                  <i class="el-icon-picture"></i>
                 </dd>
               </dl>
             </template>
           </div>
           <div class="btn">
-            <el-switch
-              v-model="item.state"
-              @change="change(item)"/>
+            <el-switch v-model="item.state" @change="change(item)" size="small"></el-switch>
             <!--<span class="close cs" @click="handle('update')">修改</span>-->
-            <span
-              class="close cs"
-              @click="handleCol(item, 'remove')">{{$t('remove')}}</span>
+            <span class="close cs" @click="handleCol(item, 'remove')">删除</span>
           </div>
         </li>
       </ul>
     </div>
     <!--弹出框-->
-    <el-dialog
-      @close="bock()"
+    <el-dialog   @close="bock()"
       :title="type"
       :visible.sync="dialogVisible"
       :close-on-click-modal="modal"
       width="426px">
-      <el-form
-        :model="ruleForm"
-        :rules="rules"
-        ref="ruleForm"
-        class="demo-ruleForm">
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
         <template v-if="type === '添加收款方式'">
-          <el-form-item
-            :label="this.$t('collection')"
-            prop="payment_type">
-            <el-select
-              v-model="ruleForm.payment_type"
-              style="width: 100%;"
-              size="small"
-              @change="bankHanle">
-              <el-option
-                value="1"
-                :label="this.$t('payment_nameyhk')"/>
-              <el-option
-                value="2"
-               :label="this.$t('payment_namezfb')"/>
-              <el-option
-                value="3"
-                :label="this.$t('payment_weChat_adasunt')"/>
+          <el-form-item label="收款方式" prop="payment_type">
+            <el-select v-model="ruleForm.payment_type" style="width: 100%;" size="small"  @change="bankHanle">
+              <el-option value="1" label="银行卡"/>
+              <el-option value="2" label="支付宝"/>
+              <el-option value="3" label="微信"/>
             </el-select>
             <!--<el-input v-model="ruleForm.payment_type"></el-input>-->
           </el-form-item>
-          <el-form-item
-           :label="this.$t('name')"
-            prop="name">
-            <el-input
-              v-model="ruleForm.name"
-              size="small"/>
+          <el-form-item label="姓名" prop="name">
+            <el-input v-model="ruleForm.name" size="small"/>
           </el-form-item>
           <template v-if="ruleForm.payment_type === '1'">
-            <el-form-item
-             :label="this.$t('otc_kvcoc_2')"
-              prop="deposit_bank"> 
-              <el-input
-                v-model="ruleForm.deposit_bank"
-                size="small"/>
+            <el-form-item label="开户行" prop="deposit_bank">
+              <el-input v-model="ruleForm.deposit_bank" size="small"/>
             </el-form-item>
-            <el-form-item
-             :label="this.$t('otc_kvcoc_3')"
-              prop="sub_branch">
-              <el-input
-                v-model="ruleForm.sub_branch"
-                size="small"/>
+            <el-form-item label="开户支行" prop="sub_branch">
+              <el-input v-model="ruleForm.sub_branch" size="small"/>
             </el-form-item>
-            <el-form-item
-              :label="this.$t('payment_card_number')"
-              prop="card_number">
-                   <br>
-              <number-input  
-              
-               class="inputc"  
-                v-model="ruleForm.card_number" 
-                 size="small"/>
-               
-
+            <el-form-item label="银行卡号" prop="card_number">
+              <el-input v-model="ruleForm.card_number" size="small"/>
             </el-form-item>
           </template>
           <template v-if="ruleForm.payment_type !== '1'">
             <template v-if="ruleForm.payment_type === '2'">
-              <el-form-item
-               :label="this.$t('payment_alipay_account')"
-                prop="alipay_account">
-                <el-input
-                  v-model="ruleForm.alipay_account"
-                  size="small"/>
+              <el-form-item label="支付宝账号" prop="alipay_account">
+                <el-input v-model="ruleForm.alipay_account" size="small"/>
               </el-form-item>
             </template>
             <template v-if="ruleForm.payment_type === '3'">
-              <el-form-item
-                       :label="this.$t('payment_weChat_account')"
-                prop="weChat_account">
-                <el-input
-                  v-model="ruleForm.weChat_account"
-                  size="small"/>
+              <el-form-item label="微信账号" prop="weChat_account">
+                <el-input v-model="ruleForm.weChat_account" size="small"/>
               </el-form-item>
             </template>
-            <el-form-item
-                :label="this.$t('payment_collection_img')"
-              prop="collection_img">
+            <el-form-item label="收款二维码" prop="collection_img">
               <image-upload
                 type="hold"
                 :url="hold.url"
@@ -196,37 +140,24 @@
                 @uploadError="uploadError"
                 @uploadStart="uploadStart">
                 <template v-if="hold.url">
-                  <img
-                    :src="hold.url"
-                    alt=""
-                    style="width: 100%;height: 90px;">
+                  <img :src="hold.url" alt="" style="width: 100%;height: 90px;">
                 </template>
                 <template v-else>
-                  <i class="el-icon-upload"/>
-                  <div class="el-upload__text">{{$t('otc_kvcoc_4')}}<em>{{$t('otc_kvcoc_5')}}</em></div>
-                  <div
-                    class="el-upload__tip"
-                    slot="tip">{{$t('otc_kvcoc_6')}}</div>
+                  <i class="el-icon-upload"></i>
+                  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                  <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
                 </template>
               </image-upload>
             </el-form-item>
           </template>
         </template>
         <template v-else-if="type === '查看图片'">
-          <img
-            :src="url"
-            alt=""
-            style="width: 386px;height: 423px;zoom: 1">
+          <img :src="url" alt="" style="width: 386px;height: 423px;zoom: 1">
         </template>
-        <template v-else>{{$t('otc_seiitm_1')}}</template>
-        <el-form-item
-          style="text-align: right"
-          v-if="type !== '查看图片'">
-          <el-button @click="resetForm('ruleForm')">{{$t('cancel')}}</el-button>
-          <el-button
-            @click="submitForm('ruleForm')"
-            type="primary"
-            v-html="type !== this.$t('otc_seiitm_2') ? this.$t('otc_ziurec_20') : this.$t('remove')"/>
+        <template v-else>您确定要删除收款方式？</template>
+        <el-form-item style="text-align: right" v-if="type !== '查看图片'">
+          <el-button @click="resetForm('ruleForm')">取消</el-button>
+          <el-button @click="submitForm('ruleForm')" type="primary" v-html="type !== '删除收款方式' ? '确定设置' : '删除'"></el-button>
         </el-form-item>
       </el-form>
       <!--<span class="dialog-footer" slot="footer" >-->
@@ -234,7 +165,6 @@
       <!--<el-button type="primary" @click="dialogVisible = false">确 定</el-button>-->
       <!--</span>-->
     </el-dialog>
-  
   </div>
 </template>
 
@@ -245,8 +175,7 @@ import Vue from 'vue'
 import VueClipboards from 'vue-clipboard2'
 import utils from '@/modules/utils'
 import ImageUpload from '@/components/common/ix-upload'
-import { setTimeout } from 'timers'
-
+import { setTimeout } from 'timers';
 Vue.use(VueClipboards)
 export default {
   components: {
@@ -276,25 +205,25 @@ export default {
       id_type: '1',
       rules: {
         payment_type: [
-          {required: true, message: this.$t('otc_kvcoc_8'), trigger: 'change'}
+          {required: true, message: '请选择收款方式', trigger: 'change'}
         ],
         name: [
-          {required: true, message: this.$t('otc_kvcoc_9'), trigger: 'blur'}
+          {required: true, message: '姓名不能为空', trigger: 'blur'}
         ],
         deposit_bank: [
-          {required: true, message: this.$t('otc_kvcoc_10'), trigger: 'blur'}
+          {required: true, message: '开户银行不能为空', trigger: 'blur'}
         ],
         card_number: [
-          {required: true, message: this.$t('otc_kvcec_11'), trigger: 'blur'}
+          {required: true, message: '银行卡号不能为空', trigger: 'blur'}
         ],
         alipay_account: [
-          {required: true, message: this.$t('otc_kvcoc_12'), trigger: 'blur'}
+          {required: true, message: '支付宝账号不能为空', trigger: 'blur'}
         ],
         weChat_account: [
-          {required: true, message: this.$t('otc_kvcoc_13'), trigger: 'blur'}
+          {required: true, message: '微信账号不能为空', trigger: 'blur'}
         ],
         collection_img: [
-          {required: true, message: this.$t('otc_kvcoc_14'), trigger: 'blur'}
+          {required: true, message: '收款二维码不能为空', trigger: 'blur'}
         ]
       },
       dialogVisible: false,
@@ -309,7 +238,11 @@ export default {
       }
     }
   },
- 
+  filters: {
+    type (e) {
+      return e === 1 ? '银行卡' : e === 2 ? '支付宝' : '微信'
+    }
+  },
   computed: {
     userInfo () {
       return state.userInfo || {}
@@ -329,10 +262,7 @@ export default {
     }
   },
   methods: {
-    typeState (e) {
-      return e === 1 ?this.$t('payment_nameyhk') : e === 2 ? this.$t('payment_namezfb') : this.$t('payment_weChat_adasunt')
-    },
-    bock () {
+    bock(){
       this.ruleForm = {
         payment_type: '1',
         name: '',
@@ -344,12 +274,12 @@ export default {
         collection_img: '',
         currency: ''
       }
-      this.$refs['ruleForm'].resetFields()
+       this.$refs['ruleForm'].resetFields()
     },
-    bankHandle (code) {
+    bankHandle(code) {
       let codeName = code
-      this.$refs['ruleForm'].resetFields()
-      this.ruleForm.payment_type = codeName
+       this.$refs['ruleForm'].resetFields()
+       this.ruleForm.payment_type = codeName
     },
     uploadStart ({type}) {
     },
@@ -373,7 +303,7 @@ export default {
           if (res.code === 0) {
             this.$message({
               type: 'success',
-              message: this.$t('otc_seiitm_4')
+              message: '绑定成功'
             })
             this.init()
           } else {
@@ -388,7 +318,7 @@ export default {
           if (res.code === 0) {
             this.$message({
               type: 'success',
-              message: this.$t('otc_seiitm_5')
+              message: '解绑成功'
             })
             this.init()
           } else {
@@ -403,11 +333,11 @@ export default {
     },
     onCopy: function (e) {
       console.log(e)
-      alert(this.$t('otc_otutcol_9'))
+      alert('复制成功')
     },
     onError: function (e) {
       console.log(e)
-     alert(this.$t('otc_otutcol_10'))
+      alert('复制失败')
     },
     handleCommand (command) {
       this.currency = command
@@ -436,7 +366,7 @@ export default {
                 // this.$message.success('添加成功')
                 this.$message({
                   type: 'success',
-                  message: this.$t('add_withdraw_success')
+                  message: '添加成功'
                 })
                 this.dialogVisible = false
               } else {
@@ -453,7 +383,7 @@ export default {
                 // this.$message.success('删除成功')
                 this.$message({
                   type: 'success',
-                   message: this.$t('del_withdraw_success')
+                  message: '删除成功'
                 })
                 this.dialogVisible = false
               } else {
@@ -462,12 +392,12 @@ export default {
             })
           }
         } else {
-          setTimeout(() => {
-            this.$refs[formName].resetFields()
-          }, 300)
           return false
         }
       })
+    },
+    bankHanle () {
+      this.$refs['ruleForm'].resetFields()
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()
@@ -475,12 +405,12 @@ export default {
     },
     handle (even) {
       this.dialogVisible = true
-      this.type = even === 'update' ? '编辑' : even === 'add' ? '添加收款方式' : even === 'remove' ? '删除收款方式' : this.$t('otc_kvcoc_7')
+      this.type = even === 'update' ? '编辑' : even === 'add' ? '添加收款方式' : even === 'remove' ? '删除收款方式' : '查看图片'
     },
     handleCol (item, even) {
       this.dialogVisible = true
       this.collection_id = item.collection_id
-      this.type = even === 'remove' ? this.$t('otc_seiitm_2') : this.$t('otc_kvcoc_7')
+      this.type = even === 'remove' ? '删除收款方式' : '查看图片'
       if (even === 'img') {
         this.url = item.collection_img
       }
@@ -539,9 +469,9 @@ export default {
 }
 </script>
 
-<style lang="scss" rel="stylesheet/scss" scoped >
+<style lang="scss" rel="stylesheet/scss" scoped>
   .cs {
-    color: #C9A96C
+    color: $primary
   }
 
   .type-1 {
@@ -558,6 +488,7 @@ export default {
 
   .profile-container {
     width: 960px;
+    margin-left: 60px;
     float: left;
 
     .title-box {
@@ -573,7 +504,7 @@ export default {
         position: absolute;
         right: 0;
         padding-left: 30px;
-        color: #C9A96C;
+        color: $primary;
         top: 0;
       }
 
@@ -610,12 +541,10 @@ export default {
           flex: 0 0 0 200px;
           width: 200px;
           text-align: right;
-            
-        
+
           .close {
             padding-left: 16px;
-          
-         }
+          }
         }
 
         .mes {
@@ -629,34 +558,4 @@ export default {
       }
     }
   }
-  .inputc{
-   
-  
-    -webkit-appearance: none;
-background-color: #FFF;
-background-image: none;
-border-radius: 4px;
-border: 1px solid #DCDFE6;
-    border-top-color: rgb(220, 223, 230);
-    border-right-color: rgb(220, 223, 230);
-    border-bottom-color: rgb(220, 223, 230);
-    border-left-color: rgb(220, 223, 230);
--webkit-box-sizing: border-box;
-box-sizing: border-box;
-color: #606266;
-display: inline-block;
-font-size: inherit;
-height: 32px;
-line-height: 40px;
-outline: 0;
-padding: 0 15px;
--webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-width: 100%;
-  }
-  .inputc:hover {
-    border-color: #C0C4CC;
-  }
-
-    
 </style>

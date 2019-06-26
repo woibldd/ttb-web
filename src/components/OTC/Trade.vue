@@ -40,7 +40,6 @@ export default {
 </script>
 
 <style lang='scss'>
-input{border: 0px}
 .trade-container {
   width: 926px;
   .iconfont {
