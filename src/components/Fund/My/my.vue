@@ -42,7 +42,7 @@
       <div class="information">
         <icon name='information' />
         <span >
-          充币成功后，若想进行”币币交易/法币交易/合约交易，需操作“资金划转”，将“资金账户”的币转移到该账户上。
+         {{$t('otc_otutcol_16')}}
         </span> 
       </div>
       <div class="fund-total">
@@ -95,7 +95,7 @@
             <span
               v-if="scope.row.currency === 'BTC'"
               @click="showModal = true"
-              class="my-fund-operate">划转</span>
+              class="my-fund-operate">{{$t('contract_fadsaees')}}</span>
             <router-link
               v-if="scope.row.depositable"
               :to="'/fund/deposit/' + scope.row.currency"

@@ -109,7 +109,7 @@
         :rules="rules"
         ref="ruleForm"
         class="demo-ruleForm">
-        <template v-if="type === '添加收款方式'">
+        <template v-if="type == '添加收款方式'">
           <el-form-item
             :label="this.$t('collection')"
             prop="payment_type">
@@ -416,7 +416,7 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          if (this.type === '添加收款方式') {
+          if (this.type == '添加收款方式') {
             let params = {
               user_id: state.userInfo.id,
               payment_type: this.ruleForm.payment_type,
