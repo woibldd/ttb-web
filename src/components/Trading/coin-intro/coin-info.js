@@ -882,13 +882,7 @@ export default{
       chain_info: 'https://etherscan.io/address/0x35Be52655551029d8B8B3B51Ffdb76Ec9993dD47?locale=zh-CN&utm_source=imtoken' // 区块查询
     }
 
-  },
-
-
-
-
-
-
+  }, 
   YTA: {
     'zh-CN': {
       name: 'YTA',
