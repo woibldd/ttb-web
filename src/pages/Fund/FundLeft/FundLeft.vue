@@ -1,44 +1,62 @@
 <template>
   <div class="fund-left-container">
     <div class="left-menu-container left-menu-nobottom">
-      <!-- <p class="left-menu-title">
-        <icon name="fund-history-money"/>
-        <span class="menu-title">{{ $t('wallets_nav_asset') }}</span>
-      </p>
-      <ul class="left-menu-list">
-        <li class="active">
-          <router-link
-          class="menu-name"
-          active-class="active"
-          to="/fund/my">{{ $t('capital_manage') }}
-          </router-link>
-          <div class="sub-menu-group">
-            <router-link
-              class="sub-menu-item"
-              active-class="active"
-              to="/fund/my/assets">{{ $t('trading_account') }}
-            </router-link> 
-            <router-link
-              class="sub-menu-item"
-              active-class="active"
-              to="/fund/my/contract">{{ $t('contract_account') }}
-            </router-link>
-          </div>
-        </li>
-        <li class=""><router-link
-          class="menu-name"
-          active-class="active"
-          to="/fund/deposit">{{ $t('deposit') }}</router-link></li>
-        <li class=""><router-link
-          class="menu-name"
-          active-class="active"
-          to="/fund/withdraw">{{ $t('withdraw') }}</router-link></li>
-        <li class=""><router-link
-          class="menu-name"
-          to="/fund/address"
-          active-class="active">{{ $t('address_manage') }}</router-link></li>
-      </ul> -->
-         <!--资金纵览-->
+<!--      <p class="left-menu-title">-->
+<!--        <icon name="fund-history-money"/>-->
+<!--        <span class="menu-title">{{ $t('wallets_nav_asset') }} </span>-->
+<!--      </p>-->
+<!--      <ul class="left-menu-list">-->
+<!--        <li class="active">-->
+<!--          <router-link-->
+<!--            class="menu-name"-->
+<!--            active-class="active"-->
+<!--            to="/fund/my">{{ $t('capital_manage') }}-->
+<!--          </router-link>-->
+<!--          <div class="sub-menu-group">-->
+<!--            <router-link-->
+<!--              class="sub-menu-item"-->
+<!--              active-class="active"-->
+<!--              to="/fund/my/assets">{{ $t('trading_account') }}-->
+<!--            </router-link>-->
+
+<!--            <router-link-->
+<!--              class="sub-menu-item"-->
+<!--              active-class="active"-->
+<!--              to="/fund/my/contract">{{ $t('contract_account') }}-->
+<!--            </router-link>-->
+<!--          </div>-->
+<!--        </li>-->
+<!--        <li class="">-->
+<!--          <router-link-->
+<!--            class="menu-name"-->
+<!--            active-class="active"-->
+<!--            to="/fund/deposit">{{ $t('deposit') }}-->
+<!--          </router-link>-->
+<!--        </li>-->
+<!--        <li class="">-->
+<!--          <router-link-->
+<!--            class="menu-name"-->
+<!--            active-class="active"-->
+<!--            to="/fund/withdraw">{{ $t('withdraw') }}-->
+<!--          </router-link>-->
+<!--        </li>-->
+<!--        <li class="">-->
+<!--          <router-link-->
+<!--            class="menu-name"-->
+<!--            active-class="active"-->
+<!--            :to="'/fund/transfer'">{{ $t('account_exchange') }}-->
+<!--          </router-link>-->
+<!--        </li>-->
+<!--        <li class="">-->
+<!--          <router-link-->
+<!--            class="menu-name"-->
+<!--            to="/fund/address"-->
+<!--            active-class="active">{{ $t('address_manage') }}-->
+<!--          </router-link>-->
+<!--        </li>-->
+<!--      </ul>-->
+
+      <!--资金纵览-->
       <dl>
         <dt>
           <icon name="fund-history-money"/>
@@ -54,12 +72,12 @@
       <dl>
         <dt>
           <icon name="wallet"/>
-          <span class="menu-title"> 资金账户 </span>
+          <span class="menu-title"> {{$t('wallet_account')}} </span>
         </dt>
         <dd>
           <router-link
             class="menu-name"
-            to="/fund/my/assets">资金账户
+            to="/fund/my/assets">{{$t('wallet_account')}}
           </router-link>
         </dd>
         <dd>
@@ -85,7 +103,7 @@
        <dl>
         <dt>
           <icon name="transaction"/>
-          <span class="menu-title"> 交易账户 </span>
+          <span class="menu-title"> {{ $t('otc_otutcol_12') }} </span>
         </dt>
         <dd>
           <router-link

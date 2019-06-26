@@ -1,4 +1,3 @@
-
 <template>
   <div class="order-otcaction">
     <!-- 挂单 -->
@@ -15,7 +14,7 @@
           <div
             class="sideTab tr item"
             style="margin-bottom: 15px;">
-            <div class="btn-left td">
+            <div class="btn-left td"  style="margin: 0px 15px;" >
               <v-btn
                 :class="{'active': side===1}"
                 class="w-110 buy"
@@ -25,7 +24,7 @@
                 :label="$t('otc_buy_currency', {currency: currency})"
               />
             </div>
-            <div class="btn-left td">
+            <div class="btn-left td"  style="margin: 0px 15px;">
               <v-btn
                 :class="{'active': side===2}"
                 class="w-110 sell"
@@ -109,7 +108,6 @@
                           v-model="inputPrice"
                           :scale="symbolInfo.price_scale || 2"
                           :placeholder="$t('otc_placeholder_b')"
-                          style="border-color: transparent!important;"
                         />
                         <div
                           class="unit-label long"
@@ -117,7 +115,7 @@
                       </div>
                       <div
                         class="tips"
-                        v-if="nodata">价格不能为空</div>
+                        v-if="nodata">{{$t('otc_ziurec_1')}}</div>
                     </div>
                     <div
                       class="content"
@@ -142,7 +140,6 @@
                           v-model="amount"
                           :scale="symbolInfo.amount_scale || 6"
                           :placeholder="$t('contract_order_enter_tips1')"
-                          style="border-color: transparent!important;"
                         />
                         <div
                           class="unit-label long"
@@ -150,7 +147,7 @@
                       </div>
                       <div
                         class="tips"
-                        v-if="nodata1">数量不能为空</div>
+                        v-if="nodata1">{{$t('otc_ziurec_2')}}</div>
                     </div>
                   </li>
                   <li>
@@ -249,7 +246,7 @@
                   </li>
                   <li v-if="awitFlag">
                     <el-alert
-                      title="偏离指数价格过多，确定要以此价格下单交易？"
+                      :title="$t('otc_ziurec_12')"
                       :closable="alertFlag"
                       type="warning"
                     />
@@ -343,341 +340,337 @@
   </div>
 </template>
 <script>
-  import service from '@/modules/service.js'
-  import { state } from '@/modules/store.js'
-  import vList from '@/components/OTC/vlist/vertical-table'
-  import utils from '@/modules/utils.js'
-  import _ from 'lodash'
-  // import otcWatch from "@/mixins/otc-watcher.js"
-  export default {
-    data () {
-      return {
-        state,
+import service from '@/modules/service.js'
+import { state } from '@/modules/store.js'
+import vList from '@/components/OTC/vlist/vertical-table'
+import utils from '@/modules/utils.js'
+import _ from 'lodash'
+// import otcWatch from "@/mixins/otc-watcher.js"
+export default {
+  data () {
+    return {
+      state,
+      side: 1,
+      limitedTime: '15',
+      sideTitle: '发布购买委托单 BTC',
+      message: this.$t('otc_tips_success'),
+      message_success: '',
+      message_failed: '',
+      amount: '',
+      operation: 1, // 操作 1: 买/卖, 2: 发布委托
+      operSide: 1, // 操作类型 1: 买 ,2: 卖
+      step: 0, // 步骤, 根据操作 和 类型 的不同,展示不同的结果
+      inputPrice: "",
+      float_rate: 100, // 浮动比例
+      // total: 0,
+      type: 1,
+      nodata: false,
+      nodata1: false,
+      order: {
+        currency: 'BTC',
         side: 1,
-        limitedTime: '15',
-        sideTitle: '发布购买委托单 BTC',
-        message: '您的委托单已发布成功',
-        message_success: '',
-        message_failed: '',
-        amount: '',
-        operation: 1, // 操作 1: 买/卖, 2: 发布委托
-        operSide: 1, // 操作类型 1: 买 ,2: 卖
-        step: 0, // 步骤, 根据操作 和 类型 的不同,展示不同的结果
-        inputPrice: "",
-        float_rate: 100, // 浮动比例
-        // total: 0,
         type: 1,
-        nodata: false,
-        nodata1: false,
-        order: {
-          currency: 'BTC',
-          side: 1,
-          type: 1,
-          float_rate: 1,
-          price: 0,
-          amount: 0,
-          total: 0,
-          kyc_level: 2,
-          register_time: new Date().getTime(),
-          remark: ''
-        },
-        orderBuyHeader: {
-          name: '委托单详情',
-          count: 0,
-          headers: [
-            {
-              title: 'type', // 交易类型
-              text: '交易类型',
-              width: '',
-              key: 'type'
-            },
-            {
-              title: 'currency', // 币种
-              text: '币种',
-              width: '',
-              key: 'currency'
-            },
-            {
-              title: 'price', // 单价(CNY)
-              text: '单价(CNY)',
-              width: '',
-              key: 'price'
-            },
-            {
-              title: 'amount', // 数量(CNY)
-              text: '数量',
-              width: '',
-              key: 'amount'
-            },
-            {
-              title: 'total', // 总金额(CNY)
-              text: '总金额(CNY)',
-              width: '',
-              key: 'total'
-            },
-            {
-              title: 'fee', // 平台服务费
-              text: '平台服务费',
-              width: '',
-              key: 'fee'
-            },
-            {
-              title: 'kyc_level', // 对手认证等级
-              text: '对手认证等级',
-              width: '',
-              key: 'kyc_level'
-            }
-          ]
-        },
-        orderData: {},
-        alertTitle: '',
-        flag: false,
-        alertFlag: false,
-        awitFlag: false
-      }
-    },
-    // mixins: {
-    //   otcWatch
-    // },
-    props: {
-      active_id: {
-        type: Number,
-        default: 0
+        float_rate: 1,
+        price: 0,
+        amount: 0,
+        total: 0,
+        kyc_level: 2,
+        register_time: new Date().getTime(),
+        remark: ''
       },
-      view: {
-        type: Object,
-        defalut: {}
-      },
-      show: {
-        type: Boolean,
-        default: false
-      }
-    },
-    computed: {
-      currency: {
-        get () {
-          return this.state.otc.currency
-        },
-        set (value) {
-          this.state.otc.currency = value
-        }
-      },
-      legal_currency: {
-        get () {
-          return state.otc.legal_currency
-        }
-      },
-      symbolInfo () {
-        return this.state.otc.symbolInfo
-      },
-      indexPrice () {
-        if (this.symbolInfo && this.symbolInfo.cny_rate) { return this.symbolInfo.cny_rate } else return 0
-      },
-      titleText () {
-        if (this.side === 1) {
-          return 'otc_publish_buy_order'
-        } else if (this.side === 2) {
-          return 'otc_publish_sell_order'
-        }
-      },
-      confirmText () {
-        if (this.side === 1) {
-          return 'otc_order_confirm_buy'
-        } else if (this.side === 2) {
-          return 'otc_order_confirm_sell'
-        }
-      },
-      price () {
-        if (this.type === 1) {
-          return this.inputPrice
-        } else {
-          return this.$big(this.float_rate || 0)
-            .mul(0.01)
-            .mul(this.indexPrice || 0)
-            .toFixed(2)
-        }
-      },
-      isLogin () {
-        return state.userInfo !== null
-      },
-      total () {
-        return this.$big(this.amount || 0).mul(this.price || 0)
-      }
-    },
-    components: {
-      vList
-    },
-    methods: {
-      openSideBar () {
-        this.step = 0
-        this.active_id = 0
-        this.show = true
-      },
-      closeSideBar () {
-        this.step = 0
-        this.active_id = 0
-        this.$emit('closeSide')
-      },
-      async craeteOrder () {
-        this.nodata = false
-        this.nodata1 = false
-        if (!this.isLogin) {
-          this.$router.push({
-            name: 'login'
-          })
-          return
-        }
-        if (!this.price) {
-          this.nodata = true
-          if (!this.amount) {
-            this.nodata1 = true
+      orderBuyHeader: {
+        name: this.$t('otc_kvcoc_1'),
+        count: 0,
+        headers: [
+          {
+            title: 'type', // 交易类型
+            text: this.$t('otc_transaction_type'),
+            width: '',
+            key: 'type'
+          },
+          {
+            title: 'currency', // 币种
+              text: this.$t('currency'),
+            width: '',
+            key: 'currency'
+          },
+          {
+            title: 'price', // 单价(CNY)
+             text: this.$t('otc_trans_idjg'),
+            width: '',
+            key: 'price'
+          },
+          {
+            title: 'amount', // 数量(CNY)
+            text: this.$t('amount'),
+            width: '',
+            key: 'amount'
+          },
+          {
+            title: 'total', // 总金额(CNY)
+            text: this.$t('otc_ziurec_19'),
+            width: '',
+            key: 'total'
+          },
+          {
+            title: 'fee', // 平台服务费
+             text: this.$t('otc_ziurec_13'),
+            width: '',
+            key: 'fee'
+          },
+          {
+            title: 'kyc_level', // 对手认证等级
+            text: this.$t('otc_opponent_kyc_level'),
+            width: '',
+            key: 'kyc_level'
           }
-        } else if (!this.amount) {
+        ]
+      },
+      orderData: {},
+      alertTitle: '',
+      flag: false,
+      alertFlag: false,
+      awitFlag: false
+    }
+  },
+  // mixins: {
+  //   otcWatch
+  // },
+  props: {
+    active_id: {
+      type: Number,
+      default: 0
+    },
+    view: {
+      type: Object,
+      defalut: {}
+    },
+    show: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    currency: {
+      get () {
+        return this.state.otc.currency
+      },
+      set (value) {
+        this.state.otc.currency = value
+      }
+    },
+    legal_currency: {
+      get () {
+        return state.otc.legal_currency
+      }
+    },
+
+    symbolInfo () {
+      return this.state.otc.symbolInfo
+    },
+    indexPrice () {
+      if (this.symbolInfo && this.symbolInfo.cny_rate) { return this.symbolInfo.cny_rate } else return 0
+    },
+    titleText () {
+      if (this.side === 1) {
+        return 'otc_publish_buy_order'
+      } else if (this.side === 2) {
+        return 'otc_publish_sell_order'
+      }
+    },
+    confirmText () {
+      if (this.side === 1) {
+        return 'otc_order_confirm_buy'
+      } else if (this.side === 2) {
+        return 'otc_order_confirm_sell'
+      }
+    },
+    price () {
+      if (this.type === 1) {
+        return this.inputPrice
+      } else {
+        return this.$big(this.float_rate || 0)
+          .mul(0.01)
+          .mul(this.indexPrice || 0)
+          .toFixed(2)
+      }
+    },
+    isLogin () {
+      return state.userInfo !== null
+    },
+    total () {
+      return this.$big(this.amount || 0).mul(this.price || 0)
+    }
+  },
+  components: {
+    vList
+  },
+  methods: {
+    openSideBar () {
+      this.step = 0
+      this.active_id = 0
+      this.show = true
+    },
+    closeSideBar () {
+      this.step = 0
+      this.active_id = 0
+      this.$emit('closeSide')
+    },
+    async craeteOrder () {
+      this.nodata = false
+      this.nodata1 = false
+      if (!this.isLogin) {
+        this.$router.push({
+          name: 'login'
+        })
+        return
+      }
+      if (!this.price) {
+        this.nodata = true
+        if (!this.amount) {
           this.nodata1 = true
-        } else {
-          this.order.currency = this.currency
-          this.order.total = this.total.round(2, 0) // Number(this.$big(this.amount).mul(this.price).toFixed(2));
-          this.order.type = this.type
-          this.order.side = this.side
-          this.order.price = this.price
-          this.order.amount = this.amount
-          this.order.float_rate = Number(this.$big(this.float_rate).mul(0.01))
+        }
+      } else if (!this.amount) {
+        this.nodata1 = true
+      } else {
+        this.order.currency = this.currency
+        this.order.total = this.total.round(2, 0) // Number(this.$big(this.amount).mul(this.price).toFixed(2));
+        this.order.type = this.type
+        this.order.side = this.side
+        this.order.price = this.price
+        this.order.amount = this.amount
+        this.order.float_rate = Number(this.$big(this.float_rate).mul(0.01))
 
-          console.log({total: this.total})
-          service.createOtcOrder(this.order).then(res => {
-            this.nodata = false
-            this.nodata1 = false
-            if (!res.code) {
-              this.step = 1
-              this.orderData = res.data
-              this.orderData.fee = '限时免费'
-              this.orderData.type =
-                this.orderData.type == 1 ? 'otc_fixed_price' : 'otc_float_price'
-              this.orderData.total = this.total
-              // this.$big(this.orderData.price).mul(this.orderData.amount)
-              this.active_id = res.data.active_id
+        console.log({total: this.total})
+        service.createOtcOrder(this.order).then(res => {
+          this.nodata = false
+          this.nodata1 = false
+          if (!res.code) {
+            this.step = 1
+            this.orderData = res.data
+            this.orderData.fee = this.$t('otc_ziurec_16')
+            this.orderData.type =
+              this.orderData.type == 1 ? 'otc_fixed_price' : 'otc_float_price'
+            this.orderData.total = this.total
+            // this.$big(this.orderData.price).mul(this.orderData.amount)
+            this.active_id = res.data.active_id
 
-              this.message_success = '您的委托单已发布成功'
-              this.message_failed = ''
+            this.message_success = this.$t('otc_tips_success')
+            this.message_failed = ''
 
-              this.$eh.$emit('otc:assets:balance')
-            } else if (res.message) {
-              utils.alert(res.message)
-              this.message_success = ''
-              this.message_failed = '发布失败:' + res.message
+            this.$eh.$emit('otc:assets:balance')
+          } else if (res.message) {
+            utils.alert(res.message)
+            this.message_success = ''
+            this.message_failed = this.$t('otc_tips_failed_a') + res.message
+          }
+        })
+      }
+    },
+    revokeOrder () {
+      let params = {
+        type: 1,
+        trans_id: this.active_id
+      }
+      service.otcOrderRemove(params)
+      this.step = 0
+      this.$emit('closeSide')
+    },
+    // computeTotal () {
+    //   if (this.$big(this.amount).lt(0)) {
+    //     this.amount = "0"
+    //   }
+    //   if (this.$big(this.inputPrice).lt(0)) {
+    //     this.inputPrice = "0"
+    //   }
+    //   this.total = this.$big(this.amount || 0).mul(this.price || 0)
+    // }
+  },
+  watch: {
+    inputPrice () {
+      this.flag = false
+      this.alertTitle = ''
+      this.awitFlag = false
+      console.log({flag: this.flag})
+      if (this.currency === this.symbolInfo.currency) {
+        let min_buy_price = Number(this.symbolInfo.buy_price_one) * 0.8
+        let min_sell_price = Number(this.symbolInfo.sell_price_one) * 0.8
+        let awit_buyPrice = Number(
+          Number(min_buy_price) - Number(this.inputPrice)
+        )
+        let awit_sellPrice = Number(
+          Number(min_sell_price) - Number(this.inputPrice)
+        )
+        if (this.side === 1) {
+          if (this.$big(this.inputPrice).gt(this.symbolInfo.sell_price_one)) {
+            this.flag = true
+             this.alertTitle =this.$t('otc_ziurec_3',{currency:this.currency,inputPrice:this.inputPrice,symbolInfo:this.symbolInfo.sell_price_one})
+           // `您发布的购买${this.currency}的交易单，价格为${this.inputPrice}CNY高于卖一价${this.symbolInfo.sell_price_one}CNY，以该价格发布可能给您带来损失`
+          } else {
+            this.flag = false
+            if (awit_buyPrice > 0) {
+              console.log({awit_buyPrice})
+              this.awitFlag = true
+            } else {
+              this.awitFlag = false
             }
-          })
+          }
+        } else {
+          if (this.$big(this.inputPrice).lt(this.symbolInfo.buy_price_one)) {
+            this.flag = true
+         
+              this.alertTitle =this.$t('otc_ziurec_15',{currency:this.currency,inputPrice:this.inputPrice,symbolInfo:this.symbolInfo.sell_price_one})
+  // `您发布的出售${this.currency}的交易单，价格为${this.inputPrice}CNY低于买一价${ this.symbolInfo.buy_price_one}CNY，以该价格发布可能给您带来损失`
+          } else {
+            this.flag = false
+            if (awit_sellPrice > 0) {
+              // console.log({awit_sellPrice})
+              this.awitFlag = true
+            } else {
+              this.awitFlag = false
+            }
+          }
         }
-      },
-      revokeOrder () {
-        let params = {
-          type: 1,
-          trans_id: this.active_id
-        }
-        service.otcOrderRemove(params)
-        this.step = 0
-        this.$emit('closeSide')
-      },
-      // computeTotal () {
-      //   if (this.$big(this.amount).lt(0)) {
-      //     this.amount = "0"
-      //   }
-      //   if (this.$big(this.inputPrice).lt(0)) {
-      //     this.inputPrice = "0"
-      //   }
-      //   this.total = this.$big(this.amount || 0).mul(this.price || 0)
+      }
+    },
+    view () {
+      if (JSON.stringify(this.view) != '{}') {
+        this.orderData = this.view
+        this.step = 1
+      }
+    },
+    show () {
+      //this.total = ''
+      this.amount = ''
+      this.orderData = []
+      this.step = 0
+      this.active_id = 0
+      this.message_success = ''
+      this.message_failed = ''
+      // if (this.show === false) {
+      //   this.view = {}
       // }
     },
-    watch: {
-      inputPrice () {
-        this.flag = false
-        this.alertTitle = ''
-        this.awitFlag = false
-        console.log({flag: this.flag})
-        if (this.currency === this.symbolInfo.currency) {
-          let min_buy_price = Number(this.symbolInfo.buy_price_one) * 0.8
-          let min_sell_price = Number(this.symbolInfo.sell_price_one) * 0.8
-          let awit_buyPrice = Number(
-            Number(min_buy_price) - Number(this.inputPrice)
-          )
-          let awit_sellPrice = Number(
-            Number(min_sell_price) - Number(this.inputPrice)
-          )
-          if (this.side === 1) {
-            if (this.$big(this.inputPrice).gt(this.symbolInfo.sell_price_one)) {
-              this.flag = true
-              this.alertTitle = `您发布的购买${this.currency}的交易单，价格为${
-                this.inputPrice
-                }CNY高于卖一价${
-                this.symbolInfo.sell_price_one
-                }CNY，以该价格发布可能给您带来损失`
-            } else {
-              this.flag = false
-              if (awit_buyPrice > 0) {
-                console.log({awit_buyPrice})
-                this.awitFlag = true
-              } else {
-                this.awitFlag = false
-              }
-            }
-          } else {
-            if (this.$big(this.inputPrice).lt(this.symbolInfo.buy_price_one)) {
-              this.flag = true
-              this.alertTitle = `您发布的出售${this.currency}的交易单，价格为${
-                this.inputPrice
-                }CNY低于买一价${
-                this.symbolInfo.buy_price_one
-                }CNY，以该价格发布可能给您带来损失`
-            } else {
-              this.flag = false
-              if (awit_sellPrice > 0) {
-                // console.log({awit_sellPrice})
-                this.awitFlag = true
-              } else {
-                this.awitFlag = false
-              }
-            }
-          }
+    currency () {
+      for (const symbol of this.state.otc.symbolList) {
+        if (symbol.currency == this.currency) {
+          this.state.otc.symbolInfo = symbol
+          return
         }
-      },
-      view () {
-        if (JSON.stringify(this.view) != '{}') {
-          this.orderData = this.view
-          this.step = 1
-        }
-      },
-      show () {
-        //this.total = ''
-        this.amount = ''
-        this.orderData = []
-        this.step = 0
-        this.active_id = 0
-        this.message_success = ''
-        this.message_failed = ''
-        // if (this.show === false) {
-        //   this.view = {}
-        // }
-      },
-      currency () {
-        for (const symbol of this.state.otc.symbolList) {
-          if (symbol.currency == this.currency) {
-            this.state.otc.symbolInfo = symbol
-            return
-          }
-        }
-      },
-      side () {
-        console.log(this.side)
-        this.order.remark = ''
-        this.inputPrice = ''
-        this.amount = ''
-        //this.total = ''
-        this.message_success = ''
-        this.message_failed = ''
       }
-
+    },
+    side () {
+      console.log(this.side)
+      this.order.remark = ''
+      this.inputPrice = ''
+      this.amount = ''
+      //this.total = ''
+      this.message_success = ''
+      this.message_failed = ''
     }
+
   }
+}
 </script>
 
 <style lang="scss" scope>

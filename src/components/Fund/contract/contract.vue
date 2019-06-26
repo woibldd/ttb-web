@@ -29,7 +29,7 @@
     </div>
     <div class="my-fund-content">
       <div  class="gz-wrapper clearfix">
-        <span>合约资产估值</span>
+        <span>{{$t('otc_otutcol_15')}}</span>
         <h1> <icon :name="unit.name+'-unit'" /> {{total | fixed(unit.scale)}}</h1>
       </div>
       <div class="account-row">
