@@ -1,0 +1,331 @@
+.title-box {
+  width: 100%;
+  height: 40px;
+  font-size: 18px;
+  font-weight: 600;
+  color: $text-strong;
+  border-bottom: 1px solid #e6e6e6;
+  span{
+      color: #666;
+      font-size: 18px;
+      font-weight: lighter;
+      padding-left: 10px;
+      i{
+          color: #EB5757;
+      }
+      &:before{
+          content: ">";
+          color: #333;
+          font-size: 18px;
+          margin-right: 10px;
+      }
+  }
+}
+.invinfo-box {
+  width: 960px;
+  margin: 20px auto 100px;
+  .option-title {
+    margin: 60px 0 40px;
+    h3 { 
+      font-size: 20px;
+      font-weight: bold;
+      .iconfont {
+        font-size: 25px;
+      }
+      i, label {
+        padding: 0 6px;
+        color:$primary;
+        border:1px solid $primary;
+        border-radius: 13px;
+      }
+      label {    
+        margin: 0 10px;
+        font-size: 14px;
+        &.finish {
+          color: #30C78C;
+          border-color: #30C78C;
+        }
+      } 
+      b {
+        font-size: 14px;
+      }
+    }
+  }
+  .option-notice {
+    margin:20px 0;
+    .notice {
+      color: #999;
+      font-size:18px;
+    }
+  }
+  .option-button {
+    margin: 60px 0;
+  }
+  .form {
+    width: 445px;
+    // margin: 50px auto;
+  }
+  div.inp_box{
+      width:100%;
+      height: 40px;
+      position: relative;
+
+      .el-select{
+          width: 100%;
+      }
+      .submit-btn{
+          width: 340px;
+          height: 40px;
+      }
+      span.tips{
+          display: block;
+          width: 300px;
+          height: 30px;
+          line-height: 20px;
+          position: absolute;
+          left: 104px;
+          top: 40px;
+          font-size: 10px;
+          color: #EB5757;
+      }
+  }
+  .router-btn {
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    width: 140px;
+    text-align: center;
+    border: 1px solid $primary;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: #fff;
+    color:$primary;
+    
+    &:hover {
+      background-color:#fff;
+    }
+    &.light {
+      color: #fff;
+      background-color: $primary;
+    }
+  }
+}
+.authen_top{
+  width: 50%;
+  height: 30px;
+  padding: 5px 0;
+  margin-bottom: 40px;
+  box-sizing: border-box;
+  position: relative;
+  p{
+      width: 180px;
+      height: 40px;
+      font-size: 14px;
+      line-height: 40px;
+      //text-indent: 25px;
+      position: absolute;
+      text-align: center;
+      background: #DEDEDE;
+      color:#999;
+      border-radius: 20px; 
+      &:nth-child(2){
+          left: 0; 
+      }
+      &:nth-child(3){
+          left: 100%;
+          margin-left: -45px; 
+      }
+      &:nth-child(4){
+          right: 0; 
+      }
+      &.yy{
+        color: #fff;
+        background-color: $primary;
+        &:before{
+          background: $primary;
+        }
+      }
+  }
+  i{
+      width: 40%;
+      height: 2px;
+      background: #ccc;
+      display: block;
+      float: left;
+      margin-left: 210px;
+      margin-top: 19px;
+      &.jd{
+          background: $primary;
+      }
+  }
+}
+.el-form-item__label {
+    color: $text-weak
+}
+.submit-btn {
+  width: 260px;
+}
+.gt_ewm {
+  width: 180px;
+  height: 180px;
+  background: #c2a538;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.router-btn {
+  width: 280px !important;
+}
+.message {
+  color: red;
+}
+
+.option-content {
+  width: 100%;
+  margin: 20px auto 50px auto;
+
+  &.id_type_2 {
+    .aut_box .aut_rt div.aut_up .upload .up_face {
+      background-image: url(../../../assets/id-passport.png);
+    }
+  }
+}
+
+.aut_box {
+  width: 620px;
+  // margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  .aut_lt {
+    width: 110px;
+    height: auto;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    position: absolute;
+    height: 24px;
+    font-size: 14px;
+    font-weight: bold;
+    left: 0;
+    top: 0;
+  }
+  .aut_rt {
+    // padding-left: 110px;
+    width: 620px;
+    float: left;
+    box-sizing: border-box;
+    margin-bottom: 24px;
+    div {
+      float: left;
+      &.aut_up {
+        width: 600px;
+        height: auto;
+        float: left;
+        // color: #666;
+        .upload {
+          width: 260px;
+          height: 190px;
+          float: left;
+          @include clearfix();
+          /deep/ .el-upload-dragger {
+            width: 100%;
+          }
+          .upload_box {
+            float: left;
+            width: 260px;
+            height: 100%;
+            @include clearfix();
+            background-repeat: no-repeat;
+            background-position: center 32px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            background-color: #f7f7f7;
+
+            .mask {
+              position: absolute;
+              width: 100%;
+              top: 0;
+              height: 100%;
+              // background: #eee;
+              transform: translateY(0%);
+              transition: translateY 2s;
+              opacity: 0.8;
+              display: table-cell;
+              vertical-align: middle;
+              font-size: 18px;
+              color: $primary;
+            }
+            .upload_desc {
+              position: absolute;
+              bottom: 20px;
+              color: $primary;
+              display: block;
+              width: 260px;
+            }
+          }
+          .up_face {
+            background-image: url(../../../assets/id-up.png);
+          }
+          .up_emblem {
+            background-image: url(../../../assets/id-down.png);
+          }
+          .up_take {
+            background-image: url(../../../assets/id-people.png);
+          }
+        } 
+        .show_box {
+          position: relative;
+          float: left;
+          margin-left: 80px;
+          width: 260px;
+          height: 190px;
+          overflow: hidden;
+          box-sizing: border-box;
+          border-radius: 4px;
+          border: 1px solid #ccc;
+          background-color: #f7f7f7;
+          .upload_desc {
+            position: absolute;
+            bottom: 20px;
+            font-size: 20px;
+            color: $primary;
+            display: block;
+            width: 260px;
+            .iconfont {
+              margin: 0 20px;
+            } 
+            .tools { 
+              padding-left: 70px; 
+            }
+          }
+          .img {
+            display: block;
+            width: 80%;
+            height: 60%;
+            margin: 20px auto;
+          }
+        }
+        p {
+          float: left;
+          width: 100%;
+          font-size: 12px;
+          line-height: 18px;
+          margin-top: 14px;
+        }
+      }
+      &.aut_up_txt {
+        font-size: 14px;
+        color: #333;
+        padding-left: 20px;
+        box-sizing: border-box;
+        p {
+          margin-bottom: 12px;
+        }
+      }
+    }
+  }
+  .aut_rta {
+    width: 260px;
+    margin-left: 110px;
+  }
+}

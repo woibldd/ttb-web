@@ -119,7 +119,7 @@ export default {
         height: 4px;
         position: absolute;
         border-radius: 4px;
-        background: #C1A538;
+        background: $primary;
         left: 0;
         top: 50%;
         margin-top: -2px;
