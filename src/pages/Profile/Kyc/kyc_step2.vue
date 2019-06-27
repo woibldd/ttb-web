@@ -572,7 +572,7 @@ export default {
 
 <style lang="scss">
 .el-upload-dragger {
-  width: 600px !important;
+  width: 260px !important;
   height: 190px !important;
   border: none !important;
   background: transparent !important;

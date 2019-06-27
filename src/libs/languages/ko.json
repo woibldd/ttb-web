@@ -1919,7 +1919,7 @@
 "otc_otutcol_18": "확인{orderName}주문？", 
 "kyc_cf_id": "증몀서 번호",
 "kyc_top_authen_1": "1 급 인증 기본 정보 인증",
-"kyc_top_authen_2": "1 급 인증 고급 정보 인증",
+"kyc_top_authen_2": "2 급 인증 고급 정보 인증",
 "kyc_title_info":"기본 정보인증",
 "kyc_title_state_padding":"완성을 기다리다",
 "kyc_title_state_complete":"이미 완성",
