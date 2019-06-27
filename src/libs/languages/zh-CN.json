@@ -1927,7 +1927,7 @@
   "otc_side_3": "  交易总额(CNY)",
   "otc_need_verify": "法币交易需完成以下认证",
   "otc_bind_bankCard":"绑定本人实名银行卡",
-  "otc_kyc_verified":"身份认证 <i style='color:#ccc;'>（认证等级：KYC1）</i>",
+  "otc_kyc_verified":"身份认证 <i style='color:#ccc;'>（认证等级：KYC2）</i>",
   "otc_side_99": "开户行",
   "otc_side_98": "开户支行",
   "wallet_account": "资金账户" ,

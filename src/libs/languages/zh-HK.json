@@ -1880,8 +1880,10 @@
   "otc_sidees10": "詳情",
   "otc_sidees11": "撤銷成功",
   "otc_side_35": " 法幣帳單",
-
-  "wallet_account": "资金账户" ,
+  "otc_account": "法幣帳戶",
+  "otc_otutcol_11": "IX  總淨資產估值",
+  "otc_otutcol_12": "交易帳戶",
+  "wallet_account": "資金帳戶" ,
   "":""
 
 }

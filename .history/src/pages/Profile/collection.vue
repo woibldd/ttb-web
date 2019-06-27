@@ -199,7 +199,7 @@
                   <img
                     :src="hold.url"
                     alt=""
-                    style="width: 100%;height: 90px;">
+                    style="width: 100%;height: 285px;">
                 </template>
                 <template v-else>
                   <i class="el-icon-upload"/>

@@ -187,6 +187,7 @@
                 :label="this.$t('payment_collection_img')"
               prop="collection_img">
               <image-upload
+            
                 type="hold"
                 :url="hold.url"
                 :host="uploadConfig.host"
@@ -194,11 +195,11 @@
                 @uploadSuccess="uploadSuccess"
                 @uploadError="uploadError"
                 @uploadStart="uploadStart">
-                <template v-if="hold.url">
+                <template v-if="hold.url" >
                   <img
                     :src="hold.url"
                     alt=""
-                    style="width: 100%;height: 90px;">
+                    style="width: 100%;height: 285px;">
                 </template>
                 <template v-else>
                   <i class="el-icon-upload"/>
