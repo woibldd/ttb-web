@@ -1,4 +1,200 @@
 .my-fund-container {
+    .my-fund-content {
+      .information {
+        margin: 6px 0;
+        color: #999;
+        background-color: #F4EEE2;
+        // .iconfont {
+        //   color:#C9A96C !important;
+        // }
+      }
+    }
+    .fund-total {
+        margin-top: 45px;
+        margin-bottom: 38px;
+        display: flex;
+        align-items: center;
+        height: 30px;
+        position: relative;
+    }
+    .total__label {
+        margin-right: 50px;
+    }
+    .total__coin {
+        color: $primary;
+    }
+    .fund-with-usdt {
+        font-size: 14px;
+        // color: #FDA22D;
+        margin-left: 22px;
+    }
+    .coin-rmb {
+        display: inline-block;
+        color: $text-weak;
+    }
+    .my-fund-operate {
+        color: $primary;
+        cursor: pointer;
+        margin-left: 21px;
+    }
+    .dib {
+        display: inline-block;
+    }
+    // .c-mine {
+    //     color: #fda22d;
+    // }
+    .title__right {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+    }
+
+    .lock-modal {
+        width:480px;
+        background:rgba(255,255,255,1);
+        border-radius:8px;
+        padding: 30px 39px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
+        color:$primary;
+
+        .c-999 {
+            color: #999 !important;
+            font-weight: normal;
+        }
+
+        .modal__title {
+            font-size:24px;
+            font-weight:bold;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            .sub {
+                font-size: 12px;
+            }
+        }
+        .modal__row {
+            box-sizing: border-box;
+            width:400px;
+            height:48px;
+            border:1px solid rgba(204,204,204,1);
+            border-radius:6px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            .row__label {
+                font-size:14px;
+                font-weight:400;
+                margin-right: 40px;
+                width: 60px;
+                text-align: right;
+            }
+            .row__input {
+                flex: 1;
+                color: #212121;
+                box-sizing: border-box;
+
+                input {
+                    border: 0;
+                    color: #212121;
+                    font-size: 14px;
+                    width: 86%;
+                    &:focus{
+                        outline: none;
+                    }
+                }
+            }
+            .maximum {
+                position: absolute;
+                right: 24px;
+                top: 16px;
+                cursor: pointer
+            }
+        } 
+        .unlocking {
+            color: #FDA22D;
+            font-size: 14px;
+            width: 100%;
+            margin-bottom: 24px;
+        }
+
+    }
+    
+    .el-table /deep/ .el-table__row{
+      td {
+        padding: 5px 0;
+        .cell {
+          line-height: 33px;
+          .airdrop {
+            background-color:#BAE2F7;
+            //cursor: help;
+            position: relative;
+            .question {
+              position: absolute;
+              top: -5px;
+              right: -12px;
+            }
+          }
+        }
+      }
+    }
+}
+
+
+
+
+
+.fund-history{
+    display: inline-block;
+    padding-left: 10px;
+padding-right: 10px;
+height: 28px;
+line-height: 28px;
+text-align: center;
+border: 1px solid #01CED1;
+border-radius: 14px;
+color: #01CED1;
+font-size: 14px;
+cursor: pointer;
+    
+    color: #999999 !important;
+  border: 1px solid #999999 !important;}
+
+.fund-historc{
+    display: inline-block;
+    padding-left: 10px;
+padding-right: 10px;
+height: 28px;
+line-height: 28px;
+text-align: center;
+border: 1px solid #01CED1;
+border-radius: 14px;
+color: #01CED1;
+font-size: 14px;
+cursor: pointer;
+    
+    
+    color: #01CED1 !important;
+  border: 1px solid #01CED1 !important;}
+
+
+
+
+
+
+
+
+
+
+
+
+.my-fund-container {
   .my-fund-content {
     .information {
       margin: 6px 0;

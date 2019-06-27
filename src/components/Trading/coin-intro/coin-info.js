@@ -934,4 +934,55 @@ export default{
     }
 
   },
+  FLTC: {
+    'zh-CN': {
+      name: 'FLTC',
+      full_name: 'FLTC',
+      brief_info: '自2017年「Flint Studio」品牌正式创立以来，公司迅速成为广受欢迎与尊敬的游戏开发商。 Flint Studio 自创立以来即强调精益求精的游戏设计，乐趣无穷的娱乐体验，和区块链公开透明不可篡改的游戏方式，在品质上一直享有令人望尘莫及的声誉。推出了以太贪吃龙等区块链竞技手游。Flint团队发行股权类通证FLTC，总量为21亿;智能合约自带黑洞销毁机制。通过通货紧缩的方式将金融自由还给每个人。每笔链上交易，都会有1% 的通证会被销毁，FLTC剩余2100万枚时智能合约自动停止，保证FLTC最终余下2100万枚保值。',
+      issue_time: '2019/6/23', 
+      issue_all: ' 21亿', // 发行总量
+      issue_circulation: '0', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'Flintgame.com', // 白皮书
+      office_website: 'Flintgame.com', // 官网
+      chain_info: '0xa133fc7de1649b686cea17c074ba2812d40700f7' // 区块查询
+    },
+    'zh-HK': {
+      name: 'FLTC',
+      full_name: 'FLTC',
+      brief_info: '自2017年「Flint Studio」品牌正式創立以來，公司迅速成為廣受歡迎與尊敬的遊戲開發商。 Flint Studio 自創立以來即強調精益求精的遊戲設計，樂趣無窮的娛樂體驗，和區塊鏈公開透明不可篡改的遊戲方式，在品質上一直享有令人望塵莫及的聲譽。推出了以太貪吃龍等區塊鏈競技手游。 Flint團隊發行股權類通證FLTC，總量為21億;智能合約自帶黑洞銷毀機制。通過通貨緊縮的方式將金融自由還給每個人。每筆鏈上交易，都會有1% 的通證會被銷毀，FLTC剩餘2100萬枚時智能合約自動停止，保證FLTC最終餘下2100萬枚保值。',
+      issue_time: '2019/6/23', 
+      issue_all: '21億', // 發行總量
+      issue_circulation: '0', // 流通總量
+      token_price: '--', // 眾籌價格
+      whitepagger: 'Flintgame.com', // 白皮書
+      office_website: 'Flintgame.com', // 官網
+      chain_info: '0xa133fc7de1649b686cea17c074ba2812d40700f7' // 區塊查詢
+    },
+    en: {
+      name: 'FLTC',
+      full_name: 'FLTC',
+      brief_info: 'Since the "Flint Studio" brand was officially launched in 2017, the company has quickly become a popular and respected game developer. Since its inception, Flint Studio has enjoyed an impressive reputation for quality with its emphasis on game design, fun entertainment experiences, and blockchain openness and untamperable gaming. Launched ether greedy dragon and other blockchain competitive hand tour. The Flint team issued a total of 2.1 billion share certificates for THE FLTC; smart contracts came with a black hole destruction mechanism. Give financial freedom back to everyone through deflation. For each chain transaction, 1% of the tokens will be destroyed, and the 21 million remaining smart contracts for the FLTC will automatically stop, ensuring the value of the remaining 21 million tokens of FLTC.',
+      issue_time: '2019/6/23', 
+      issue_all: '21 Billion ', // 发行总量
+      issue_circulation: ' 0', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'Flintgame.com', // 白皮书
+      office_website: 'Flintgame.com', // 官网
+      chain_info: '0xa133fc7de1649b686cea17c074ba2812d40700f7' // 区块查询
+    },
+    ko: {
+      name: 'FLTC',
+      full_name: 'FLTC',
+      brief_info: '2017년 (Flint Studio)브랜드가 정식으로 창립된 이래, 회사는 신속히 많은 사람들이 환영하고 존경하는 게임 개발업체가 되었다.Flint Studio는 창립이래 더욱 공을 들일 게임 설계, 무한한 즐거움 오락 체험, 공개적이고 투명한 게임 방식 및 변조할 수 없는 품질 측면에서 줄곧 명성과 명성을 얻고 있다.대식용 등을 구경하는 테리 체인스 게임을 선보였다.Flint 팀 주주권류 통용증서 FLTC 발행 총량은 21억명,블랙홀 자동 소각기 스마트계약.금융 자유는 디플레이션으로 모든 사람에게 돌려준다.각 체인 거래시, 1%의 거래 증명서가 소각, FLTC 잔여 2100만개시 스마트 계약 자동 정지, FLTC 잔여 2100만개 가치 보장.',
+      issue_time: '2019/6/23', 
+      issue_all: '21억', // 发行总量
+      issue_circulation: '0', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'Flintgame.com', // 白皮书
+      office_website: 'Flintgame.com', // 官网
+      chain_info: '0xa133fc7de1649b686cea17c074ba2812d40700f7' // 区块查询
+    }
+
+  },
 }

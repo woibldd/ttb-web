@@ -6,11 +6,12 @@
           <div class="total__label">{{ $t('withdraw_avlb') }}</div>
           <div class="total__coin">{{ total | fixed(2) }} {{ unit }} </div>
         </div>
-        <el-radio-group
+        
+        <el-radio-group  :empty-text="$t('no_data')"
           @change="changeType"
           class="total__switch"
           v-model="type">
-          <!-- <el-radio-button label="all">{{ $t('近期交易') }}</el-radio-button> -->
+          <el-radio-button label="all">{{ $t('teansdasda') }}</el-radio-button>
           <el-radio-button label="deposit">{{ $t('deposit_record') }}</el-radio-button>
           <el-radio-button label="withdraw">{{ $t('withdraw_record') }}</el-radio-button>
           <el-radio-button label="reward"> {{ $t('fund_reward') }} </el-radio-button>
@@ -21,19 +22,56 @@
             v-if="hasInternal"
             label="internal"> {{ $t('internal_transfer') }} </el-radio-button>
         </el-radio-group>
+        
       </div>
-      <el-table
+      <el-table       :empty-text="$t('no_data')"
         :data="tableData"
         height="550"
+        v-show="type === 'all'"
         v-loading="loading"
         cell-class-name="unrelease-cell"
         class="fund-coin-pool">
+
+          <el-table-column
+          prop="currency"
+          :label="this.$t('transfer_currency')"/>
+          <el-table-column
+          prop="form"
+            :label="this.$t('transfer_from_a')"/>
+          <el-table-column
+          prop="to"
+             :label="this.$t('transfer_to_a')"/>
+          <el-table-column
+          prop="amount"
+            :label="this.$t('transfer_amount')"/>
+          <el-table-column
+            prop="available"
+         :label="this.$t('balance')"/>
+          <el-table-column
+            width="240"
+            prop="create_time"
+               :label="this.$t('transfer_time')"/>
+          <el-table-column
+            prop="status"
+          :label="this.$t('status')"/>
+            
+
+      </el-table>
+      <el-table   :empty-text="$t('no_data')"
+        :data="tableData"
+        height="550"
+        v-show="type !== 'all'"
+        v-loading="loading"
+        cell-class-name="unrelease-cell"
+        class="fund-coin-pool">
+
         <el-table-column
           v-for="(hd, idx) in tableHeaders"
           :key="idx"
           :formatter="formatter"
           :prop="hd.key"
           :label="hd.title"/>
+
         <el-table-column
           header-align='right'
           v-if="type!=='reward' && type !== 'internal' && type !== 'promoter'"
@@ -59,13 +97,10 @@
               {{ unReleased(scope.row) ? $t('waiting_for_release') : $t('done') }}
               <icon
                 name="question"
+                class="pointer"
+                v-tooltip.left="{content: getText(scope.row), classes: 'profile'} "
                 v-if="unReleased(scope.row)" />
             </div>
-            <span
-              class="popover"
-              v-if="unReleased(scope.row)">
-              {{ $t('mine_release_at', {time: formatTime(scope.row.release_time)}) }}
-            </span>
           </template>
         </el-table-column>
         <!-- 内部划转类型 -->
@@ -81,12 +116,14 @@
             </div>
           </template>
         </el-table-column>
+        
         <el-table-column
           header-align='right'
           v-if="type!=='reward' && type !== 'internal' && type !== 'promoter'"
           align="right"
           width="200px"
-          :label="operate.title">
+          :label="operate.title" >
+
           <template slot-scope="scope">
             <div
               class="contact-item"
@@ -95,7 +132,10 @@
               <span
                 class="show-address"
                 @click="showCXID(scope.row)">{{ $t('view_txid') }}</span>
+               
             </div>
+            <!-- <el-button type="text" @click="open"><a v-if="scope.row.state==-1" >撤销</a></el-button> -->
+            <!-- 撤销按钮 -->
           </template>
         </el-table-column>
       </el-table>
@@ -112,6 +152,7 @@ import service from '@/modules/service'
 import utils from '@/modules/utils'
 import {state} from '@/modules/store'
 import ixPagination from '@/components/common/ix-pagination'
+
 /**
  *
 currency 币名
@@ -164,13 +205,27 @@ export default {
       return false
     }
   },
-  async created () {
+  async created () { 
     this.updateHeaderLabel()
     this.getFundHistory(this.type)
     this.getAccountBalanceList()
     this.getInternalHistory()
   },
   methods: {
+    // 撤销订单按钮
+      //  open() {
+      //   this.$confirm('此操作将撤销订单, 是否继续?', '提示', {
+      //     confirmButtonText: '确定',
+      //     cancelButtonText: '取消',
+      //     type: 'warning',
+      //     center: true
+      //   }).then(() => {
+      //     this.$message({
+      //       type: 'success',
+      //       message: '撤销成功!'
+      //     });
+      //   })
+      // },
     formatter (row, column) {
       if (column.property === 'create_time') {
         return utils.dateFormatter(row.create_time)
@@ -227,6 +282,7 @@ export default {
       }
     },
     getFundHistory (from = 'deposit') {
+      console.log(this.tableData)
       this.loading = true
       let request = ''
       switch (from) {
@@ -242,29 +298,74 @@ export default {
         case 'internal':
           request = service.getInternalHistory
           break
+        case 'all':
+          request = service.getBalanceList
+          break
         case 'promoter':
           request = service.getPromoteList
           break
         default:
           break
-      }
-
+      } 
       if (!request) { return }
       const param = {
         page: this.page,
         size: 10
       }
       this.tableData = []
-      request(param).then(res => {
+      request(param).then(res => { 
+         
         if (res.code || res.data.length === 0) {
           this.loading = false
-        } else {
+        } 
+        else {
+          // res.data = res.data.map(r => {
+          //   if (r.type === 7) {
+          //     r.state = 0
+          //   }
+          //   return r
+          // })
+          this.tableData = res.data
           if(this.type === 'all' || from === 'reward') { 
             this.tableData = res.data.data
-          } else {
-            this.tableData = res.data
           }
           this.loading = false
+          if (this.type === 'all' || from === 'reward') {
+            for (let i in this.tableData){
+              let text = ''
+              let text1 = ''
+              switch  (this.tableData[i].opetate ) {
+              case 1:
+                text=this.$t('trading_account');
+                break;
+              case 2:
+                text=this.$t('contract_account');
+                break;
+              case 3:
+           text=this.$t('day_liquidation');
+                break;
+              }
+              switch  (this.tableData[i].status ) {
+              case 0:
+                text1=this.$t('transfer_fail');
+                break;
+              case 1:
+                text1=this.$t('transfer_complete');
+                break;
+              }
+              if(text === this.$t('trading_account')){
+                this.tableData[i].form = text
+                this.tableData[i].to = this.$t('contract_account')
+              }
+              if(text === this.$t('contract_account')) {
+                this.tableData[i].form = this.$t('contract_account')
+                this.tableData[i].to = this.$t('trading_account')
+              }
+              this.tableData[i].available = (this.tableData[i].available*1).toFixed(8)
+
+              this.tableData[i].status = text1
+            }
+          }
         }
       })
     },
@@ -282,6 +383,13 @@ export default {
           })
         }
       })
+    },
+    getText (item) {
+      // IX持仓分红给独立提示
+      // if (item.type === 7 && item.state === 0) {
+      // return this.$t('mine_current_ix_desc')
+      // }
+      return this.$t('mine_release_at', {time: this.formatTime(item.release_time)})
     },
     getEstValue (item) {
       let res = this.$big(item.amount).times(this.$big(item.rates[this.unit] || 0))
@@ -331,7 +439,8 @@ export default {
         {key: 'amount', title: this.$i18n.t('amount')}
       ]
       this.status = Object.assign({key: 'state', title: this.$i18n.t('state')})
-      this.operate = Object.assign({key: 'txid', title: this.$i18n.t('actions')})
+
+      this.operate = Object.assign({key: 'txid', title: this.$i18n.t('actions')}) 
       this.internalType = Object.assign({key: 'internal', title: this.$i18n.t('order_th_type')})
     }
   },
