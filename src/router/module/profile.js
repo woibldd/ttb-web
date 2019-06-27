@@ -88,12 +88,12 @@ export const profileRouter = [
           {
             path: 'kyc_step1',
             name: 'KycStep1',
-            component: () => import(/* webpackChunkName: "SafeVerified" */ '@/pages/Profile/Kyc/kyc1')
+            component: () => import(/* webpackChunkName: "SafeVerified" */ '@/pages/Profile/Kyc/kyc_step1')
           },
           {
             path: 'kyc_step2',
             name: 'KycStep2',
-            component: () => import(/* webpackChunkName: "Authen" */ '@/pages/Profile/Kyc/kyc2')
+            component: () => import(/* webpackChunkName: "Authen" */ '@/pages/Profile/Kyc/kyc_step2')
           },
           {
             path: 'kyc_step3',

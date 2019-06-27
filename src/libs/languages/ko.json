@@ -1916,5 +1916,6 @@
 "otc_otutcol_17": "개인 자산",
 "otc_otutcol_19": " 이의를 제기 하시겠습니까?",
 "otc_account": "법폐 계좌 ",
-"otc_otutcol_18": "확인{orderName}주문？"
+"otc_otutcol_18": "확인{orderName}주문？", 
+"kyc_cf_id": "证件号码"
 }

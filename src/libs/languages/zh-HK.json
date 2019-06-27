@@ -1891,6 +1891,7 @@
   "otc_otutcol_11": "IX  總淨資產估值",
   "otc_otutcol_12": "交易帳戶",
   "wallet_account": "資金帳戶" ,
+  "kyc_cf_id": "证件号码",
   "":""
 
 }

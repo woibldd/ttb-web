@@ -2086,6 +2086,7 @@
 "otc_otutcol_14": "Valuation of trading assets",
 "otc_otutcol_16": "After successful deposition, if want to conduct  any coin, fiat or contract trading, you  need to transfer funds from  Fund account to the corresponding account",
 "otc_otutcol_17": "Personal asset",
-"otc_otutcol_18": "Confirm {orderName} Orders？"
+"otc_otutcol_18": "Confirm {orderName} Orders？", 
+"kyc_cf_id": "证件号码"
 
 }

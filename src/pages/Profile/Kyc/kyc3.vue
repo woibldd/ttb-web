@@ -4,16 +4,8 @@
     <div class="invinfo-box">
       <div class="authen_top">
         <i class="jd"/>
-        <p class="yy">
-          {{ $t('identity_authentication1') }}
-        </p>
-        <p class="yy">
-          {{ $t('kyc_upload') }}
-        </p>
-        <p :class="{yy: kycState === 2}">
-          {{ $t('kyc_complete') }}
-        </p>
-        <i class="jd"/>
+        <p class="yy">{{ $t('1级认证 基本信息认证') }}</p>
+        <p class="yy">{{ $t('2级认证 高级认证') }}</p>
       </div>
       <div class="notify">
         <div
@@ -25,6 +17,14 @@
           </p>
           <p class="p2 mt-24">
             {{ $t('profile_kyc_ing_desc') }}
+          </p>
+        </div>
+        <div
+          class="content mb-30"
+          v-else-if="kycState === 1 && kyclv === 2">
+          <p class="p1">
+            <icon name="kyc_pass"/>
+            {{ $t('profile_kyc_success') }}
           </p>
         </div>
         <div
@@ -92,9 +92,9 @@ export default {
         204: 'Hand-held white paper and ID photo with watermark or Logo;',
         205: 'Hands with blank paper and ID photo without certificate;',
         206: 'Hands with white paper and ID photos using others’ certificate;',
-        207: 'Hands with blank paper and ID photos without IXX on a white paper and date for verification;',
+        207: 'Hands with blank paper and ID photos without IX on a white paper and date for verification;',
         208: 'Hand-held white paper and ID photo ID are not the same as previously uploaded certificate;',
-        209: 'Hand-held white paper and ID photo paper without “IXX”;',
+        209: 'Hand-held white paper and ID photo paper without “IX”;',
         210: 'Hand-held white paper and ID photo papers without date for verification;',
         211: 'The date on the hand-held white paper and the paper of ID photo does not match;'
       },
@@ -139,6 +139,11 @@ export default {
       }
       return -2
     },
+    kyclv () {
+      if (this.kycInfo) {
+        return this.kycInfo.lv
+      }
+    },
     rejectReasons () {
       if (this.kycInfo && this.kycInfo.reason) {
         return this.kycInfo.reason.split(',')
@@ -159,7 +164,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 
-  @import '../../../styles/mixins';
+
 
   .title-box {
     width: 100%;
@@ -190,71 +195,52 @@ export default {
 
   }
   .authen_top{
-    width: 100%;
+    width: 50%;
     height: 30px;
     padding: 5px 0;
     margin-bottom: 40px;
     box-sizing: border-box;
     position: relative;
-    p {
-        width: 90px;
-        height: 20px;
-        font-size: 12px;
-        line-height: 20px;
-        text-indent: 25px;
-        position: absolute;
-        text-align: center;
-        background: #fff;
-        &:before{
-        content: "";
-        width: 20px;
-        height: 20px;
-        line-height: 20px;
-        display: block;
-        border-radius: 10px;
-        position: absolute;
-        left: 6px;
-        text-indent: 0;
-        background: #B6B6B6;
+    p{
+      width: 180px;
+      height: 40px;
+      font-size: 14px;
+      line-height: 40px;
+      //text-indent: 25px;
+      position: absolute;
+      text-align: center;
+      background: #DEDEDE;
+      color:#999;
+      border-radius: 20px;
+      &:nth-child(2){
+        left: 0;
+      }
+      &:nth-child(3){
+        left: 100%;
+        margin-left: -45px;
+      }
+      &:nth-child(4){
+        right: 0;
+      }
+      &.yy{
         color: #fff;
-        font-size: 14px;
-        }
-        &:nth-child(2){
-            left: 0;
+        background-color: $primary;
         &:before{
-            content: "1";
+          background: $primary;
         }
-        }
-        &:nth-child(3){
-            left: 50%;
-            margin-left: -45px;
-        &:before{
-            content: "2";
-        }
-        }
-        &:nth-child(4){
-            right: 0;
-        &:before{
-            content: "3";
-        }
-        }
-        &.yy{
-          color: $primary-hover;
-          &:before{
-            background: $primary-hover;
-          }
-        }
+      }
     }
     i{
-        width: 50%;
-        height: 2px;
-        background: #ccc;
-        display: block;
-        float: left;
-        margin-top: 9px;
-        &.jd{
-            background: $primary-hover;
-        }
+      width: 40%;
+      height: 2px;
+      background: #ccc;
+      display: block;
+      float: left;
+      margin-left: 210px;
+      margin-top: 19px;
+      &.jd{
+        background: $primary;
+      }
     }
   }
   .notify {

@@ -2312,7 +2312,8 @@
     "order_th_typecsef1": "输入金额不合法",
     "order_th_typecsef2": "抢购成功",
     "del_withdraw_successqe": "修改成功",
-    "otc_otutcol_18": "确定{orderName}订单？"
+    "otc_otutcol_18": "确定{orderName}订单？", 
+    "kyc_cf_id": "证件号码"
 
 
   }

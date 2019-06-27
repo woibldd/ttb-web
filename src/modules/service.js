@@ -224,6 +224,12 @@ const service = {
     })
     return handler
   },
+  getFaceToken (params) {
+    return request('user/kyc/face/token', params)
+  },
+  faceComplete (params) {
+    return request('user/kyc/face/complete', params)
+  }, 
   getRecommend () {
     return request('pair/recommends')
   },
