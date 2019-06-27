@@ -167,6 +167,14 @@ export const actions = {
         })
       })
     }
+  }, 
+  async getKycLv () {
+    if (state.userInfo) {
+      let res = await service.getKycInfo();
+      if (!res.code && !!res.data) {
+        state.userInfo.lv = res.data.lv
+      }
+    }
   },
   getToken () {
     if (state.userInfo) {

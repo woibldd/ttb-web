@@ -59,7 +59,7 @@
     <div class="gz-wrapper clearfix">
       <span>{{$t('otc_otutcol_13')}}</span>
 
-      <h1>
+      <h1> 
         <icon :name="unit.name+'-unit'" />
         {{ total | fixed(unit.scale)}}</h1>
     </div>

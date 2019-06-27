@@ -529,7 +529,14 @@ export default {
   },
   async created() {
     await this.getKycInfo();
-    if (kycInfo.lv === 1 && kycInfo.state === 1 && kycInfo.region !== 86) {
+    
+    if (kycInfo.lv === 2) {
+      console.log("goto:: step3");
+      next({
+        name: "KycStep3"
+      });
+    }
+    else if (kycInfo.lv === 1 && kycInfo.state === 1 && kycInfo.region !== 86) {
       this.$router.replace({
         name: "KycStep3"
       }); 
