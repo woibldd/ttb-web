@@ -1891,7 +1891,24 @@
   "otc_otutcol_11": "IX  總淨資產估值",
   "otc_otutcol_12": "交易帳戶",
   "wallet_account": "資金帳戶" ,
-  "kyc_cf_id": "证件号码",
+  "kyc_cf_id":"證件號碼",
+
+  "kyc_top_authen_1":"1級認證基本資訊認證",
+  "kyc_top_authen_2":"1級認證高級認證",
+  "kyc_title_info":"基本資訊認證",
+  "kyc_title_state_padding":"待完成",
+  "kyc_title_state_complete":"已完成",
+  "kyc_form_nationality":"國籍",
+  "kyc_form_submit":"提交認證",
+  "kyc_complete_kyc1":"1級認證完成",
+  "kyc_complete_kyc2":"2級認證完成",
+  "kyc_notice_1":"1級認證成功！您可以進行幣幣交易、合約交易；24小時提幣額度為2 BTC",
+  "kyc_notice_2":"如需提升24小時提幣額度至100 BTC,請您完成身份認證【2級】",
+  "kyc_to_kyc2":"2級認證",
+  "kyc_advanced":"高級認證",
+  "kyc_notice_3":"請使用微信掃描上方二維碼,打開人臉識別頁面,識別成功後完成認證",
+  "kyc_btn_face_recognition":"我已在手機上完成人臉識別驗證",
+  "kyc_btn_failure":"認證失敗,重新提交認證",
   "":""
 
 }

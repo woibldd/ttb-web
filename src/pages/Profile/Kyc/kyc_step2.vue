@@ -8,21 +8,21 @@ show_box
     <div class="invinfo-box">
       <div class="authen_top">
         <i class="jd"/>
-        <p class="yy">{{ $t('1级认证 基本信息认证') }}</p>
-        <p class="yy">{{ $t('2级认证 高级认证') }}</p>
+        <p class="yy">{{ $t('kyc_top_authen_1') }}</p>
+        <p class="yy">{{ $t('kyc_top_authen_2') }}</p>
       </div>
       <div class="option-title">
         <h3>
           <i>1</i>
-          <span>基本信息认证</span>
-          <label class="finish">已完成</label> 
+          <span>{{$t('kyc_title_info')}} </span>
+          <label class="finish">{{$t('kyc_title_state_complete')}}</label> 
           <b v-if="!!userName">{{ userName }},</b>
           <b>{{ userNumber }}</b>
         </h3>
         <h3>
           <i>2</i>
-          <span>高级认证</span>
-          <label class="pending">待完成</label>
+          <span>{{$t('kyc_advanced')}}</span>
+          <label class="pending">{{$t('kyc_title_state_padding')}}</label>
         </h3>
       </div>
       <div v-if="step===1" class="option-content" :class="['id_type_' + id_type]">
@@ -191,19 +191,19 @@ show_box
             <canvas class="qr-img" ref="qr"/>
           </div>
         </div>
-        <p class="mt-20">请使用微信扫描上方二维码，打开人脸识别页面，识别成功后完成认证</p>
+        <p class="mt-20">{{$t('kyc_notice_3')}}</p>
         <div class="option-button">
           <p class="message">
             {{message}}
           </p>
-          <v-btn class="mr-22 router-btn light" :label="$t('我已在手机上完成人脸识别验证')" @click="isFaceComplete"></v-btn>
+          <v-btn class="mr-22 router-btn light" :label="$t('kyc_btn_face_recognition')" @click="isFaceComplete"></v-btn>
           <!-- <router-link class="mr-22 router-btn" :to="{ name:'KycStep3'}">{{ $t('我已在手机上完成人脸识别验证') }}</router-link> --> 
-          <v-btn class="mr-22 router-btn " :label="$t('认证失败，重新提交认证')" @click="revalidation"></v-btn>
+          <v-btn class="mr-22 router-btn " :label="$t('kyc_btn_failure')" @click="revalidation"></v-btn>
         </div>
       </div>
       <div v-if="step===3" class="option-content">
          <div class="option-button">
-            <v-btn class="mr-22 router-btn " :label="$t('认证失败，重新提交认证')" @click="revalidation"></v-btn>
+            <v-btn class="mr-22 router-btn " :label="$t('kyc_btn_failure')" @click="revalidation"></v-btn>
         </div>
       </div>
     </div>

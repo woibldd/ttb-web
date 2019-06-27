@@ -5,18 +5,18 @@
       <div class="authen_top">
         <i class=""/>
         <p class="yy">
-          {{ $t('1级认证 基本信息认证') }}
+          {{ $t('kyc_top_authen_1') }}
         </p>
         <p class="">
-          {{ $t('2级认证 高级认证') }}
+          {{ $t('kyc_top_authen_2') }}
         </p>  
       </div>
       <div class="invinfo-content" v-if="step===1">
         <div class="option-title">
           <h3>
             <i>1</i>
-            <span>基本信息认证</span>
-            <label>待完成</label>
+            <span>{{ $t('kyc_title_info') }}</span>
+            <label>{{ $t('kyc_title_state_padding')}}</label>
           </h3> 
         </div>
         <el-form
@@ -30,7 +30,7 @@
           <el-form-item
             prop="nationality"
             class="inp_box"
-            :label="$t('国籍')"> 
+            :label="$t('kyc_form_nationality')"> 
             <v-loading
               v-if="!regionOptions.length"
               color="gray"/>  
@@ -86,16 +86,16 @@
         </div>
         <div class="option-notice">
           <p class="notice">
-            1级认证成功！您可以进行币币交易、合约交易；24小时提币额度为 2 BTC
+            {{ $t('kyc_notice_1')}}
           </p>
-          <p class="notice"> 
-            如需提升24小时提币额度至 100 BTC，请您完成身份认证【2级】
+          <p class="notice">  
+            {{ $t('kyc_notice_2')}}
           </p>
         </div>
         <div class="option-button"> 
           <router-link
             class=" mr-22 router-btn light"
-            to="/profile/kyc/kyc_step2"> {{ $t('2级认证') }}</router-link>
+            to="/profile/kyc/kyc_step2"> {{ $t('kyc_to_kyc2') }}</router-link>
           <router-link
             class=" mr-22 router-btn"
             :to="{ name:'trading'}"> {{ $t('trading') }}</router-link>

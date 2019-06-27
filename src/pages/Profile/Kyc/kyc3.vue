@@ -4,8 +4,8 @@
     <div class="invinfo-box">
       <div class="authen_top">
         <i class="jd"/>
-        <p class="yy">{{ $t('1级认证 基本信息认证') }}</p>
-        <p class="yy">{{ $t('2级认证 高级认证') }}</p>
+        <p class="yy">{{ $t('kyc_top_authen_1') }}</p>
+        <p class="yy">{{ $t('kyc_top_authen_2') }}</p>
       </div>
       <div class="notify">
         <div
