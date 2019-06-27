@@ -219,10 +219,20 @@ export default {
         this.form.regionId = res.data.region || 86
         this.form.id_type = res.data.id_type || 1
         this.form.id_number = res.data.id_number || ""
-      } 
-      else if (res.data.lv > 0) { 
+      }  
+      else if (kycInfo.lv === 1 && kycInfo.state === 1 && kycInfo.region !== 86) {
+        this.$router.replace({
+          name: "KycStep3"
+        }); 
+      }
+      else if (res.data.lv = 1) { 
         this.$router.replace({
           name: 'KycStep2',
+        })
+      }
+      else if (res.data.lv = 2) { 
+        this.$router.replace({
+          name: 'KycStep3',
         })
       }
     }
