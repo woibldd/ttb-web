@@ -945,7 +945,7 @@ export default{
       token_price: '--', // 众筹价格
       whitepagger: 'Flintgame.com', // 白皮书
       office_website: 'Flintgame.com', // 官网
-      chain_info: '0xa133fc7de1649b686cea17c074ba2812d40700f7' // 区块查询
+      chain_info: 'https://etherscan.io/token/0xa133fc7de1649b686cea17c074ba2812d40700f7' // 区块查询
     },
     'zh-HK': {
       name: 'FLTC',
@@ -957,7 +957,7 @@ export default{
       token_price: '--', // 眾籌價格
       whitepagger: 'Flintgame.com', // 白皮書
       office_website: 'Flintgame.com', // 官網
-      chain_info: '0xa133fc7de1649b686cea17c074ba2812d40700f7' // 區塊查詢
+      chain_info: 'https://etherscan.io/token/0xa133fc7de1649b686cea17c074ba2812d40700f7' // 區塊查詢
     },
     en: {
       name: 'FLTC',
@@ -969,7 +969,7 @@ export default{
       token_price: '--', // 众筹价格
       whitepagger: 'Flintgame.com', // 白皮书
       office_website: 'Flintgame.com', // 官网
-      chain_info: '0xa133fc7de1649b686cea17c074ba2812d40700f7' // 区块查询
+      chain_info: 'https://etherscan.io/token/0xa133fc7de1649b686cea17c074ba2812d40700f7' // 区块查询
     },
     ko: {
       name: 'FLTC',
@@ -981,7 +981,7 @@ export default{
       token_price: '--', // 众筹价格
       whitepagger: 'Flintgame.com', // 白皮书
       office_website: 'Flintgame.com', // 官网
-      chain_info: '0xa133fc7de1649b686cea17c074ba2812d40700f7' // 区块查询
+      chain_info: 'https://etherscan.io/token/0xa133fc7de1649b686cea17c074ba2812d40700f7' // 区块查询
     }
 
   },
