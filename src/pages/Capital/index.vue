@@ -23,6 +23,7 @@
     <div class="capital-wrapper clearfix">
       <div class="capital-inner">
         <div class="title">{{$t('wallet_account')}}</div>
+         <a style="float:right;margin-top: -55px;margin-right: 5px;" href="https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360029651652">{{$t('wallet_accosaada')}}></a>
         <div class="money">
           <p><b>{{walletTotal | fixed(unit.scale || 2)}}</b> {{unit.name}}</p>
         </div>
