@@ -486,23 +486,6 @@
       })
       this.accountTo = this.accountTypes2[0].value
     }
-<<<<<<< HEAD
-  },
-  created(){
-    // this.getBalance()
-    this.getAccountBalanceList()
-    this.getBalance()
-    // this.getAllCoinTypes()
-    this.page()
-    this.accountTo = ''
-    this.accountTypes.forEach((item) => {
-      if(item.value !== this.accountFrom) {
-        this.accountTypes2.push(item)
-      }
-    })
-    this.accountTo = this.accountTypes2[0].value
-=======
->>>>>>> otc
   }
 </script>
 <style lang="scss" scoped>
