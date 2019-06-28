@@ -32,6 +32,7 @@ import {
   RadioButton,
   Loading,
   MessageBox,
+  Alert,
   Dropdown,
   DropdownMenu,
   DropdownItem,
@@ -45,7 +46,8 @@ import {
   Pagination,
   InputNumber,
   Dialog,
-  Message
+  Message,
+  Autocomplete,
 } from 'element-ui'
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
@@ -79,9 +81,11 @@ Vue.use(Steps)
 Vue.use(Step)
 Vue.use(Dialog)
 Vue.use(Switch)
+Vue.use(Alert)
 Vue.use(DatePicker)
 Vue.use(Pagination)
 Vue.use(InputNumber)
+Vue.use(Autocomplete)
 const request = require.context('./assets/svg', true, /\.svg$/)
 /* console.log('request', request)
 console.log('request.keys', request.keys())

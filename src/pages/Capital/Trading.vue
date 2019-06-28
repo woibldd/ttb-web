@@ -39,7 +39,7 @@
       </div>
     </div>
     <div class="gz-wrapper clearfix">
-      <span>币币资产估值</span>
+      <span>{{$t('otc_otutcol_14')}}</span>
       <h1>
         <icon :name="unit.name+'-unit'" /> {{total | fixed(unit.scale)}}</h1>
     </div>
@@ -254,11 +254,11 @@
             symbol: '$',
             scale: 4
           },
-          {
-            name: 'BTC',
-            symbol: 'B',
-            scale: 8
-          },
+          // {
+          //   name: 'BTC',
+          //   symbol: 'B',
+          //   scale: 8
+          // },
         ],
         unit: {},
         rates: {},

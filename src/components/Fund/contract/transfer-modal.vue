@@ -62,12 +62,20 @@
         </div>
         <div class="relative">
           <div class="all c-primary" @click="fillAll">{{ $t('allin') }}</div>
-          <el-input
+          <!-- <el-input
             class="ex-row__value"
             type="number"
             @input="inputText"
             v-model="transferAmount"
-          />
+          /> -->
+           <number-input 
+           
+              class="number-input ex-row__value"
+              v-model="transferAmount" 
+              @input="inputText"
+              :scale="8"
+              :placeholder="$t('transfer_enter_amount')"
+            />
         </div>
       </div>
       <div class="flex-end">
@@ -90,12 +98,16 @@ export default {
       allCoins: [],
       selectCoin: "BTC", 
       transferAmount: "",
-      accountFrom: 2,
-      accountTo: "",
+      accountFrom: 1,
+      accountTo: 2,
       tradingBalance: null,
       contractBalance: null, 
       otcBalance: null,
+      walletBalance: null,
       accountTypes: [{
+        value: 1,
+        label: 'wallet_account'
+      },{
         value: 2,
         label: 'trading_account'
       },{
@@ -104,8 +116,7 @@ export default {
       }, {
         value: 4,
         label: 'otc_account'
-      }
-      ],
+      }],
       accountTypes2: []
     };
   },
@@ -129,7 +140,8 @@ export default {
     //   }
     // }, 
   },
-  computed: { 
+  computed: {
+     
     totalBalance() {
       return this.$big(this.tradingAvai || 0)
         .plus(this.contractAvai || 0)
@@ -141,7 +153,7 @@ export default {
       let amount = 0
       switch (this.accountFrom) {
         case 1: 
-          amount = 0
+          amount = this.walletAvai
           break
         case 2:
           amount = this.tradingAvai
@@ -162,7 +174,7 @@ export default {
       let amount = 0
       switch (this.accountTo) {
         case 1: 
-          amount = 0
+          amount =  this.walletAvai
           break
         case 2:
           amount = this.tradingAvai
@@ -201,6 +213,13 @@ export default {
       } else {
         return new Big(this.otcBalance.available || 0).toFixed(8); 
       }
+    },
+    walletAvai() {
+      if (!this.walletBalance) {
+        return 0;
+      } else {
+        return new Big(this.walletBalance.available || 0).toFixed(8); 
+      }
     }
   },
   methods: {
@@ -223,10 +242,10 @@ export default {
         amount: this.transferAmount
       });
       if (!res.code) {
+        this.transferAmount = ''
         this.$emit("update:showModal", false);
         this.$emit("close");
         utils.success("划转成功");
-        this.transferAmount = ""
         this.getBalance();
         service
           .getContractBalanceByPair({
@@ -256,10 +275,11 @@ export default {
     async getBalance() {
       if (this.selectCoin) {
         // this.currency
-        let [tradingBalance, contractBalance, otcBalance] = await Promise.all([
+        let [tradingBalance, contractBalance, otcBalance, walletBalance] = await Promise.all([
           service.getBalanceByPair(this.selectCoin),
           service.getContractBalanceByPair({ symbol:this.selectCoin}),
-          service.getOtctBalanceByPair({symbol: this.selectCoin})
+          service.getOtcBalanceByPair({symbol: this.selectCoin}),
+          service.getwalletBalanceByPair({symbol: this.selectCoin})
         ]);
          if (tradingBalance && tradingBalance.length) {
           this.tradingBalance = tradingBalance[0]
@@ -270,37 +290,46 @@ export default {
         if (otcBalance) {
           this.otcBalance = otcBalance.data
         }  
+        if (walletBalance) {
+          this.walletBalance = walletBalance.data
+        }
       }
     },
     getAllCoinTypes() {
-      this.allCoins = [
-        {
-          chain: "BTC",
-          currency: "BTC",
-          depositable: true,
-          full_name: "Bitcoin",
-          id: "1",
-          memo_support: false,
-          min_confirm: 3,
-          min_deposit_amount: "0.001",
-          min_review_amount: "0",
-          min_withdraw_amount: "0.002",
-          scan_url: "https://explorer.bitcoin.com/btc/tx/${txid}",
-          withdraw_fee: "0.001"
-        },{
-          chain: "USDT",
-          currency: "USDT",
-          depositable: true,
-          full_name: "USDT",
-          id: "2",
-          memo_support: false,
-          min_confirm: 3,
-          min_deposit_amount: "0.001",
-          min_review_amount: "0",
-          min_withdraw_amount: "0.002", 
-          withdraw_fee: "0.001"
+      // this.allCoins = [
+      //   {
+      //     chain: "BTC",
+      //     currency: "BTC",
+      //     depositable: true,
+      //     full_name: "Bitcoin",
+      //     id: "1",
+      //     memo_support: false,
+      //     min_confirm: 3,
+      //     min_deposit_amount: "0.001",
+      //     min_review_amount: "0",
+      //     min_withdraw_amount: "0.002",
+      //     scan_url: "https://explorer.bitcoin.com/btc/tx/${txid}",
+      //     withdraw_fee: "0.001"
+      //   },{
+      //     chain: "USDT",
+      //     currency: "USDT",
+      //     depositable: true,
+      //     full_name: "USDT",
+      //     id: "2",
+      //     memo_support: false,
+      //     min_confirm: 3,
+      //     min_deposit_amount: "0.001",
+      //     min_review_amount: "0",
+      //     min_withdraw_amount: "0.002", 
+      //     withdraw_fee: "0.001"
+      //   }
+      // ],
+      service.getAccountBalanceList().then(res => {
+        if(!res.code && !!res.data) {
+          console.log({data:res.data})
+          this.allCoins = (res.data || []).map(item => item)
         }
-      ],
+      })
       this.getBalance(); 
     },
     transferType(type) {
@@ -325,6 +354,9 @@ export default {
       console.log(val)
       if (val === 'USDT') {
         this.accountTypes = [{
+            value: 1,
+            label: 'wallet_account'
+          },{
             value: 2,
             label: 'trading_account'
           }, {
@@ -334,6 +366,9 @@ export default {
       }
       else if(val === 'BTC') {
          this.accountTypes = [{
+            value: 1,
+            label: 'wallet_account'
+          },{
             value: 2,
             label: 'trading_account'
           },{
@@ -343,6 +378,15 @@ export default {
             value: 4,
             label: 'otc_account'
           }] 
+      } 
+      else { 
+        this.accountTypes = [{
+          value: 1,
+          label: 'wallet_account'
+        },{
+          value: 2,
+          label: 'trading_account'
+        }]
       } 
       //改变币种的时候重新获取数据  
       //this.transferType(1)
@@ -354,10 +398,10 @@ export default {
   async created() {
     this.getAllCoinTypes();
     Big.RM = 0;
-    this.accountTo = "";
     this.accountTypes2 = [];
+    // this.accountTo = 2;
     this.accountTypes.forEach(item => {
-      if (item.key !== this.accountFrom) {
+      if (item.value !== this.accountFrom) {
         this.accountTypes2.push(item);
       }
     });
@@ -401,6 +445,12 @@ export default {
   }
   .ex-row__value {
     width: 100%;
+  } 
+  .number-input {  
+    line-height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-indent: 10px;
   }
   .flex-end {
     display: flex;

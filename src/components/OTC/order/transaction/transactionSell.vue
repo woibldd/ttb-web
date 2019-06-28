@@ -54,7 +54,9 @@
                 class="number-input"
                 v-model="amount"
                 @input="amountInput"
-                :scale="8"
+                @blur="changeTarget('')"
+                @focus="changeTarget('amount')"
+                :scale="symbolInfo.amount_scale || 6"
                 :placeholder="$t('amount')"
               />
               <span
@@ -71,7 +73,10 @@
               <number-input
                 class="number-input"
                 v-model="total"
-                :scale="8"
+                @input="totalInput"
+                @blur="changeTarget('')"
+                @focus="changeTarget('total')"
+                :scale="symbolInfo.price_scale || 2"
                 :placeholder="$t('otc_amount_sale')"
               />
               <span class="btn-all"
@@ -256,6 +261,7 @@ export default {
           }]
       },
       tranTable: {},
+      inputTarget: "",
     };
   },
   components: {
@@ -263,6 +269,9 @@ export default {
     countDown
   },
   computed: {
+    symbolInfo () {
+      return this.state.otc.symbolInfo
+    },
     currency: {
       get() {
         return state.otc.currency
@@ -322,23 +331,37 @@ export default {
           this.step = 1;
           this.tranTable = res.data
           this.$eh.$emit('otc:assets:balance')
-          // this.step = 1;
         }
         else if(res.message){
           utils.alert(res.message)
         }
       });
-
     },
-    amountInput() {
-      if(!this.view.price || this.view.price == ''){
-        this.total = 0
-      }
-      else {
+    amountInput () {
+      if (!this.amount || this.amount == '') {
+        this.total = ''
+      } else {
         if (this.$big(this.amount).gt(this.$big(this.view.amount).minus(this.view.freezed))) {
           this.inputAll()
         } else {
-          this.total = this.$big(this.view.price).mul(this.amount).round(2, 0)
+          let total =  this.$big(this.view.price).mul(this.amount).round(2, 0)
+          if (this.inputTarget === 'amount') {
+            if (this.total != total) {
+              this.total = total
+            }
+          }
+        }
+      }
+    },
+    totalInput() {
+      if (!this.total || this.total == '') {
+        this.amount = ''
+      } else {
+        let amount = this.$big(this.total).div(this.view.price).round(this.symbolInfo.amount_scale, 0)
+        if (this.inputTarget === 'total') {
+          if (this.amount != amount) {
+            this.amount = amount
+          }
         }
       }
     },
@@ -355,6 +378,9 @@ export default {
       service.otcOrderRemove(params)
       this.step = 0
       this.$emit('closeSide')
+    },
+    changeTarget (target) {
+      this.inputTarget = target
     },
 
   },
@@ -411,3 +437,4 @@ export default {
     }
   }
 </style>
+

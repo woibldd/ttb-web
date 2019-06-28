@@ -882,5 +882,107 @@ export default{
       chain_info: 'https://etherscan.io/address/0x35Be52655551029d8B8B3B51Ffdb76Ec9993dD47?locale=zh-CN&utm_source=imtoken' // 区块查询
     }
 
+  }, 
+  YTA: {
+    'zh-CN': {
+      name: 'YTA',
+      full_name: 'Yotta coin',
+      brief_info: 'YottaChain是由中国十大青年科学家王东临带队打造的区块链存储公链，YottaChain通过连接全球分散的存储资源，打造一个规模浩瀚的星际存储池，能确保每个人的数据主权，比现有中心化存储具有压倒性优势（可靠性提升万倍、成本降低数倍，并具备抗DDoS和容灾等特性）。YottaChain掌握区块链存储核心科技，拥有200多项国内外专利技术，其核心TruPrivacy技术是全球唯一能实现加密后去重的技术，并荣获全球专利，从而改变存储行业格局。',
+      issue_time: '2019/5/12',
+      issue_all: '50亿', // 发行总量
+      issue_circulation: '40亿', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.yottachain.io/static/pdf/YottaChain', // 白皮书
+      office_website: 'www.yottachain.io', // 官网
+      chain_info: 'https://etherscan.io/token/0x5edc1a266e8b2c5e8086d373725df0690af7e3ea' // 区块查询
+    },
+    'zh-HK': {
+      name: 'YTA',
+      full_name: 'Yotta coin',
+      brief_info: 'YottaChain是由中國十大青年科學家王東臨帶隊打造的區塊鏈存儲公鏈，YottaChain通過連接全球分散的存儲資源，打造一個規模浩瀚的星際存儲池，能確保每個人的數據主權，比現有中心化存儲具有壓倒性優勢（可靠性提升萬倍、成本降低數倍，並具備抗DDoS和容灾等特性）。YottaChain掌握區塊鏈存儲覈心科技，擁有200多項國內外專利技術，其覈心TruPrivacy科技是全球唯一能實現加密後去重的科技，並榮獲全球專利，從而改變存儲行業格局。',
+      issue_time: '2019/5/12',
+      issue_all: '50億', // 發行總量
+      issue_circulation: '40億', // 流通總量
+      token_price: '--', // 眾籌價格
+      whitepagger: 'http://www.yottachain.io/static/pdf/YottaChain', // 白皮書
+      office_website: 'www.yottachain.io', // 官網
+      chain_info: 'https://etherscan.io/token/0x5edc1a266e8b2c5e8086d373725df0690af7e3ea' // 區塊查詢
+    },
+    en: {
+      name: 'YTA',
+      full_name: 'Yotta coin',
+      brief_info: 'YottaChain is a blockchain storage chain led by Wang Donglin, one of China s top ten young scientists, to create a vast interstellar storage pool that ensures everyone s data sovereignty by connecting the world s scattered storage resources.Over-the-counter, centralized storage (10,000 times more reliable, cost reductions, and features such as resistance to DDoS and disaster tolerance). YottaChain master blockchain storage core technology, with more than 200 domestic and foreign patented technology, its core TruPrivacy technology is the world s only technology to that can realize encryption and de-weight, and has won a global patent, thereby changing the storage industry landscape.',
+      issue_time: '2019/5/12',
+      issue_all: '50 Billion ', // 发行总量
+      issue_circulation: '40 Billion ', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.yottachain.io/static/pdf/YottaChain', // 白皮书
+      office_website: 'www.yottachain.io', // 官网
+      chain_info: 'https://etherscan.io/token/0x5edc1a266e8b2c5e8086d373725df0690af7e3ea' // 区块查询
+    },
+    ko: {
+      name: 'YTA',
+      full_name: 'Yotta coin',
+      brief_info: 'YottaChain 은 중국 의 10 대 청년 과학자 왕동림 끌 만 한 사슬 저장 공 을 통 해 글 로 벌 연결 고리 YottaChain 분산 의 메모리 자원 을 하나의 규모 혹 한의 스타 저장 지 만 확보 해도 개개 인의 데이터 주권 을 기존 보다 중심화 저장 이 압도적 인 우위 (신빙성 높 만 배, 비용 절약 몇 배 를 갖 게 된 항 디 도스 와 용 재난 등 특성) 다.Yottachain은 블록체인 저장 핵심 기술을 장악하고 200여 개의 국내외 특허 기술을 보유하고 있으며, 그 핵심 TruPrivacy 기술은 전 세계에서 유일하게 암호화된 후 재처리될 수 있는 기술이며, 또한 전 세계 특허를 획득하여 저장 업계의 판도를 변화시켰다.',
+      issue_time: '2019/5/12',
+      issue_all: '50억', // 发行总量
+      issue_circulation: '40억', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.yottachain.io/static/pdf/YottaChain', // 白皮书
+      office_website: 'www.yottachain.io', // 官网
+      chain_info: 'https://etherscan.io/token/0x5edc1a266e8b2c5e8086d373725df0690af7e3ea' // 区块查询
+    }
+
+  },
+  FLTC: {
+    'zh-CN': {
+      name: 'FLTC',
+      full_name: 'FLTC',
+      brief_info: '自2017年「Flint Studio」品牌正式创立以来，公司迅速成为广受欢迎与尊敬的游戏开发商。 Flint Studio 自创立以来即强调精益求精的游戏设计，乐趣无穷的娱乐体验，和区块链公开透明不可篡改的游戏方式，在品质上一直享有令人望尘莫及的声誉。推出了以太贪吃龙等区块链竞技手游。Flint团队发行股权类通证FLTC，总量为21亿;智能合约自带黑洞销毁机制。通过通货紧缩的方式将金融自由还给每个人。每笔链上交易，都会有1% 的通证会被销毁，FLTC剩余2100万枚时智能合约自动停止，保证FLTC最终余下2100万枚保值。',
+      issue_time: '2019/6/23', 
+      issue_all: ' 21亿', // 发行总量
+      issue_circulation: '0', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'Flintgame.com', // 白皮书
+      office_website: 'Flintgame.com', // 官网
+      chain_info: 'https://etherscan.io/token/0xa133fc7de1649b686cea17c074ba2812d40700f7' // 区块查询
+    },
+    'zh-HK': {
+      name: 'FLTC',
+      full_name: 'FLTC',
+      brief_info: '自2017年「Flint Studio」品牌正式創立以來，公司迅速成為廣受歡迎與尊敬的遊戲開發商。 Flint Studio 自創立以來即強調精益求精的遊戲設計，樂趣無窮的娛樂體驗，和區塊鏈公開透明不可篡改的遊戲方式，在品質上一直享有令人望塵莫及的聲譽。推出了以太貪吃龍等區塊鏈競技手游。 Flint團隊發行股權類通證FLTC，總量為21億;智能合約自帶黑洞銷毀機制。通過通貨緊縮的方式將金融自由還給每個人。每筆鏈上交易，都會有1% 的通證會被銷毀，FLTC剩餘2100萬枚時智能合約自動停止，保證FLTC最終餘下2100萬枚保值。',
+      issue_time: '2019/6/23', 
+      issue_all: '21億', // 發行總量
+      issue_circulation: '0', // 流通總量
+      token_price: '--', // 眾籌價格
+      whitepagger: 'Flintgame.com', // 白皮書
+      office_website: 'Flintgame.com', // 官網
+      chain_info: 'https://etherscan.io/token/0xa133fc7de1649b686cea17c074ba2812d40700f7' // 區塊查詢
+    },
+    en: {
+      name: 'FLTC',
+      full_name: 'FLTC',
+      brief_info: 'Since the "Flint Studio" brand was officially launched in 2017, the company has quickly become a popular and respected game developer. Since its inception, Flint Studio has enjoyed an impressive reputation for quality with its emphasis on game design, fun entertainment experiences, and blockchain openness and untamperable gaming. Launched ether greedy dragon and other blockchain competitive hand tour. The Flint team issued a total of 2.1 billion share certificates for THE FLTC; smart contracts came with a black hole destruction mechanism. Give financial freedom back to everyone through deflation. For each chain transaction, 1% of the tokens will be destroyed, and the 21 million remaining smart contracts for the FLTC will automatically stop, ensuring the value of the remaining 21 million tokens of FLTC.',
+      issue_time: '2019/6/23', 
+      issue_all: '21 Billion ', // 发行总量
+      issue_circulation: ' 0', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'Flintgame.com', // 白皮书
+      office_website: 'Flintgame.com', // 官网
+      chain_info: 'https://etherscan.io/token/0xa133fc7de1649b686cea17c074ba2812d40700f7' // 区块查询
+    },
+    ko: {
+      name: 'FLTC',
+      full_name: 'FLTC',
+      brief_info: '2017년 (Flint Studio)브랜드가 정식으로 창립된 이래, 회사는 신속히 많은 사람들이 환영하고 존경하는 게임 개발업체가 되었다.Flint Studio는 창립이래 더욱 공을 들일 게임 설계, 무한한 즐거움 오락 체험, 공개적이고 투명한 게임 방식 및 변조할 수 없는 품질 측면에서 줄곧 명성과 명성을 얻고 있다.대식용 등을 구경하는 테리 체인스 게임을 선보였다.Flint 팀 주주권류 통용증서 FLTC 발행 총량은 21억명,블랙홀 자동 소각기 스마트계약.금융 자유는 디플레이션으로 모든 사람에게 돌려준다.각 체인 거래시, 1%의 거래 증명서가 소각, FLTC 잔여 2100만개시 스마트 계약 자동 정지, FLTC 잔여 2100만개 가치 보장.',
+      issue_time: '2019/6/23', 
+      issue_all: '21억', // 发行总量
+      issue_circulation: '0', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'Flintgame.com', // 白皮书
+      office_website: 'Flintgame.com', // 官网
+      chain_info: 'https://etherscan.io/token/0xa133fc7de1649b686cea17c074ba2812d40700f7' // 区块查询
+    }
+
   },
 }
