@@ -238,35 +238,6 @@
           return new Big(this.walletBalance.available || 0).toFixed(8);
         }
       }
-<<<<<<< HEAD
-    }
-
-  },
-  methods: {
-    transferType(type){
-      console.log(1)
-      this.number = ""
-      let arr = {}
-      // this.availableBalance = 0
-      if (type === 1) {
-        this.accountTypes2 = []
-        this.accountTo = ''
-        this.accountTypes.forEach((item) => {
-          if(item.value !== this.accountFrom) {
-            this.accountTypes2.push(item)
-          }
-        })
-        this.accountTo = this.accountTypes2[0].value
-      }
-      //this.updateAvailable()
-    },
-    all(){
-      console.log(1)
-      Big.RM = 0
-      this.number = new Big(this.fromAmount).toFixed(8)
-=======
-
->>>>>>> otc
     },
     methods: {
       transferType(type){
