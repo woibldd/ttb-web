@@ -238,11 +238,11 @@ export default {
           symbol: '$',
           scale: 4
         },
-        {
-          name: 'BTC',
-          symbol: 'B',
-          scale: 8
-        },
+        // {
+        //   name: 'BTC',
+        //   symbol: 'B',
+        //   scale: 8
+        // },
       ],
       unit: null,
     }
