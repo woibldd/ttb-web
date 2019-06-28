@@ -9,7 +9,7 @@
         </p>
         <p class="">
           {{ $t('kyc_top_authen_2') }}
-        </p>  
+        </p>
       </div>
       <div class="invinfo-content" v-if="step===1">
         <div class="option-title">
@@ -17,7 +17,7 @@
             <i>1</i>
             <span>{{ $t('kyc_title_info') }}</span>
             <label>{{ $t('kyc_title_state_padding')}}</label>
-          </h3> 
+          </h3>
         </div>
         <el-form
           class="form"
@@ -26,20 +26,20 @@
           label-position="left"
           :model="form"
           label-width="104px">
-          
+
           <el-form-item
             prop="nationality"
             class="inp_box"
-            :label="$t('kyc_form_nationality')"> 
+            :label="$t('kyc_form_nationality')">
             <v-loading
               v-if="!regionOptions.length"
-              color="gray"/>  
+              color="gray"/>
             <el-select v-model="form.regionId" filterable>
               <el-option
                 v-for="option in regionOptions"
                 :value="option.id"
                 :label="state.locale === 'zh-CN' ? option.cname : option.fullname "
-                :key="option.id">  
+                :key="option.id">
               </el-option>
             </el-select>
           </el-form-item>
@@ -81,18 +81,18 @@
         <div class="option-title">
           <h3>
             <icon name="true" />
-            <span>1级认证完成</span> 
-          </h3> 
+            <span>1级认证完成</span>
+          </h3>
         </div>
         <div class="option-notice">
           <p class="notice">
             {{ $t('kyc_notice_1')}}
           </p>
-          <p class="notice">  
+          <p class="notice">
             {{ $t('kyc_notice_2')}}
           </p>
         </div>
-        <div class="option-button"> 
+        <div class="option-button">
           <router-link
             class=" mr-22 router-btn light"
             to="/profile/kyc/kyc_step2"> {{ $t('kyc_to_kyc2') }}</router-link>
@@ -124,15 +124,15 @@ export default {
           callback(new Error(this.$i18n.t('kyc_id_no_err')))
         }
       } else {
-        if (!/^[a-zA-Z0-9]{1,9}$/.test(value)) {
+        if (!/^[0-9A-Za-z]{6,32}$/.test(value)) {
           callback(new Error(this.$i18n.t('kyc_passport_err')))
         }
       }
       callback()
-    } 
-    return { 
+    }
+    return {
       regionId: '',
-      regionOptions: [], 
+      regionOptions: [],
       state,
       loading: false,
       form: {
@@ -152,14 +152,14 @@ export default {
       step: 1, //1：填写基本信息， 2：前往kyc2 或 前往币币
     }
   },
-  async beforeRouteEnter (to, from, next) { 
+  async beforeRouteEnter (to, from, next) {
     // await actions.updateSession()
     // if (state.userInfo.lv) {
     //   if (state.userInfo.lv > 1) {
     //     console.log('goto:: step2')
     //     next({name: 'KycStep2'})
     //   }
-    // }  
+    // }
     console.log('sdjfklajdslkfjlasdjflasjdfkljskdl')
     let res = await service.getKycInfo();
     if (!res.code && !!res.data) {
@@ -175,10 +175,10 @@ export default {
     async fetchRegion () {
       const res = await service.getRegionList()
       if (!res.code) {
-        this.regionOptions = res.data 
+        this.regionOptions = res.data
       }
     },
-    async submit () { 
+    async submit () {
       this.$refs['form'].validate(async (valid) => {
         if (!valid) return
         let params = {
@@ -199,11 +199,11 @@ export default {
           this.step = 2
         }
       })
-    },  
+    },
     async getKycInfo() {
       let res = await service.getKycInfo();
       if (!res.code) {
-        kycInfo = res.data; 
+        kycInfo = res.data;
       }
     },
   },
@@ -211,7 +211,7 @@ export default {
     // if(state.userInfo.lv === 1) {
     //   this.step = 2
     // }
-    this.fetchRegion() 
+    this.fetchRegion()
     let res = await service.getKycInfo();
     if (!res.code && !!res.data) {
       if (res.data.lv === 0) {
@@ -219,18 +219,18 @@ export default {
         this.form.regionId = res.data.region || 86
         this.form.id_type = res.data.id_type || 1
         this.form.id_number = res.data.id_number || ""
-      }  
+      }
       else if (kycInfo.lv === 1 && kycInfo.state === 1 && kycInfo.region !== 86) {
         this.$router.replace({
           name: "KycStep3"
-        }); 
+        });
       }
-      else if (res.data.lv = 1) { 
+      else if (res.data.lv = 1) {
         this.$router.replace({
           name: 'KycStep2',
         })
       }
-      else if (res.data.lv = 2) { 
+      else if (res.data.lv = 2) {
         this.$router.replace({
           name: 'KycStep3',
         })
@@ -244,5 +244,5 @@ export default {
 <style lang="scss" scoped>
 
 @import "./index.scss";
-  
+
 </style>
