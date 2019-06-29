@@ -93,7 +93,7 @@
               v-if="isLogin && scope.row.user_id == userInfo.id"
               class="btn my"
             >{{$t('my_order')}}</button>
-            <div v-else-if="isLogin && scope.row.kyc_level > userInfo.state">
+            <div v-else-if="isLogin && scope.row.kyc_level > userInfo.lv">
               <div
                 @click="clickVerifyRow('Kyc')"
                 v-html="$t('otc_need_authentication', {side: $t('otc_side_'+side)} )"
