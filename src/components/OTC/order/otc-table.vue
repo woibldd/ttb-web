@@ -495,7 +495,7 @@ export default {
             &.input {
               font-family: monaco Trebuchet MS, Tahoma, Arial, sans-serif;
               outline: none;
-              border: 0px solid #666666;
+              border: 1px solid #666666;
               border-radius: 3px;
               background-color: transparent;
               width: 100%;
