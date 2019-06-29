@@ -22,6 +22,9 @@
             <span v-if="viewtype==='order' && item.key === 'amount'">
               {{ processValue('order_amount', table) }}
             </span>
+            <span v-else-if="item.key === 'total'">
+              {{table['total'] | fixed(2)}}
+            </span>
             <span v-else>{{ processValue(item.key, table) }}</span>
           </td>
           <!-- <td> {{ table[item.key]}} </td> -->

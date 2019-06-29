@@ -12,7 +12,7 @@
       <el-table-column prop="price" :label="$t('otc_price',{legal_currency})">
         <template slot-scope="scope">
           <div>
-            {{ $big(scope.row.price || 0).toFixed(2) }}
+            {{ $big(scope.row.price || 0) | fixed(2) }}
           </div>
         </template>
       </el-table-column>
@@ -26,7 +26,7 @@
       <el-table-column prop="total" :label="$t('otc_total',{legal_currency})">
         <template slot-scope="scope">
           <div>
-            {{ $big(scope.row.amount).minus(scope.row.freezed).mul(scope.row.price).toFixed(2) }}
+            {{ $big(scope.row.amount).minus(scope.row.freezed).mul(scope.row.price) | fixed(2)  }}
           </div>
         </template>
       </el-table-column>

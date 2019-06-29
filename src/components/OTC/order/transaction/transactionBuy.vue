@@ -170,8 +170,7 @@ class="action-order footer"
               <span class="red">*</span>
             </div>
             <div class="content">
-              <number-input 
-             
+              <number-input  
                 class="number-input"
                 v-model="amount"
                 @input="amountInput"

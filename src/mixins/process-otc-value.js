@@ -17,8 +17,8 @@ const processValue = {
       }
 
       if (key === 'order_amount') {
-        value = '0'
-          if(!row.amount || !row.freezed){
+        if(!row.amount || !row.freezed){
+          value = '0'
         }
         else {
           return this.$big(row.amount).minus(row.freezed).toString()
