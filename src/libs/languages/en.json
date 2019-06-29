@@ -14,8 +14,10 @@
   "operation": "Operation",
   "deposit": "Deposit",
   "withdraw": "Withdraw",
+  "wallet_accosaada": "About the fund account",
   "copy": "Copy",
-  "otc_account": " French currency account ",
+
+  "otc_account": "Legal currency account ",
   "label": "Label",
   "cancel": "Cancel",
   "close": "Close",
@@ -2035,7 +2037,7 @@
 "otc_side_98": "Account-opening Branch",
 
 "wallet_account": " Funds account " ,
-
+"otc_otutcol_15": "Contract asset valuation",
 "otc_ziurec_1": "The price cannot be empty",
 "otc_ziurec_2": "The quantity cannot be empty",
 "otc_ziurec_12": "Too much deviation from the index price, are you sure want to place order at this price?",
