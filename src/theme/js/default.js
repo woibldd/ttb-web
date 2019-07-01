@@ -19,10 +19,10 @@ module.exports = {
   supportMail: 'support@ixx.com',
   hrMail: 'hr@ixx.com',
   apiDoc: {
-    en: 'https://github.com/ix-api/API_Docs',
-    ko: 'https://github.com/ix-api/API_Docs',
-    'zh-CN': 'https://github.com/ix-api/API_Docs',
-    'zh-HK': 'https://github.com/ix-api/API_Docs'
+    en: 'https://github.com/sonsea/ix-API-Docs',
+    ko: 'https://github.com/sonsea/ix-API-Docs',
+    'zh-CN': 'https://github.com/sonsea/ix-API-Docs',
+    'zh-HK': 'https://github.com/sonsea/ix-API-Docs'
   },
   faq: {
     en: 'https://ixxcustomer.zendesk.com/hc/en-us/',
