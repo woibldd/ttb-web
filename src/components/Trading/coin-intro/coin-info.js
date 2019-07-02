@@ -985,4 +985,62 @@ export default{
     }
 
   },
+
+
+
+
+
+
+
+  GOLD: {
+    'zh-CN': {
+      name: 'GOLD',
+      full_name: 'Goldchain',
+      brief_info: 'Gold chain是基于区块链的游戏金币管理平台。作为采用分布式智能合约和去中心化的结构的游戏生态平台，它直接将整个游戏生态链上的组成分子有机地链接起来，实现个体价值的直接对接、无损流通和安全存储。每一个平台玩家和用户都能参与其中。',
+      issue_time: '2019/03/01', 
+      issue_all: ' 100,000,000,000', // 发行总量
+      issue_circulation: '10,000,000', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.goldchains.io/goldchainswhitepaper.pdf', // 白皮书
+      office_website: ' http://www.goldchains.io/', // 官网
+      chain_info: 'https://etherscan.io/token/0x12565fd1436926beb0fff522d63be551240a4594' // 区块查询
+    },
+    'zh-HK': {
+      name: 'FLTC',
+      full_name: 'FLTC',
+      brief_info: 'Gold chain是基於區塊鏈的遊戲金幣管理平台。作為採用分佈式智能合約和去中心化的結構的遊戲生態平台，它直接將整個遊戲生態鏈上的組成分子有機地鏈接起來，實現個體價值的直接對接、無損流通和安全存儲。每一個平台玩家和用戶都能參與其中。',
+      issue_time: '2019/03/01', 
+      issue_all: '100,000,000,000', // 發行總量
+      issue_circulation: '10,000,000', // 流通總量
+      token_price: '--', // 眾籌價格
+      whitepagger: 'http://www.goldchains.io/goldchainswhitepaper.pdf', // 白皮書
+      office_website: ' http://www.goldchains.io/',  // 官網
+      chain_info: 'https://etherscan.io/token/0x12565fd1436926beb0fff522d63be551240a4594' // 區塊查詢
+    },
+    en: {
+      name: 'FLTC',
+      full_name: 'FLTC',
+      brief_info: 'Gold chain is a blockchain-based game coin management platform. While using distributed smart contracts and a decentralized structure, this game platform directly links each participant in the entire game eco-chain and achieves direct docking, non-destructive circulation and secure storage of individual values. The game platform also allows all platform players and users to participate in the ecosystem.',
+      issue_time: '2019/03/01', 
+      issue_all: '100,000,000,000 ', // 发行总量
+      issue_circulation: ' 10,000,000', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.goldchains.io/goldchainswhitepaper.pdf', // 白皮书
+      office_website: ' http://www.goldchains.io/',  // 官网
+      chain_info: 'https://etherscan.io/token/0x12565fd1436926beb0fff522d63be551240a4594' // 区块查询
+    },
+    ko: {
+      name: 'FLTC',
+      full_name: 'FLTC',
+      brief_info: 'Gold chain은 지역 체인을 기반으로 한 게임 금화 관리 플랫폼이다.분산 스마트 계약과 중심성을 무너뜨리는 구조를 적용한 게임 생태계 플랫폼으로, 전체 게임 생태계 사슬의 구성 분자들을 유기적으로 연결하여 개체 가치의 직접 도킹, 유통, 안전한 저장을 실현한다.각 플랫폼의 플레이어와 사용자가 참여할 수 있습니다.',
+      issue_time: '2019/03/01', 
+      issue_all: '100,000,000,000', // 发行总量
+      issue_circulation: '10,000,000', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.goldchains.io/goldchainswhitepaper.pdf', // 白皮书
+      office_website: ' http://www.goldchains.io/',  // 官网
+      chain_info: 'https://etherscan.io/token/0x12565fd1436926beb0fff522d63be551240a4594' // 区块查询
+    }
+
+  },
 }

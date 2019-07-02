@@ -12,7 +12,7 @@
       <el-table-column prop="price" :label="$t('otc_price',{legal_currency})">
         <template slot-scope="scope">
           <div>
-            {{ $big(scope.row.price || 0).toFixed(2) }}
+            {{ $big(scope.row.price || 0) | fixed(2) }}
           </div>
         </template>
       </el-table-column>
@@ -26,7 +26,7 @@
       <el-table-column prop="total" :label="$t('otc_total',{legal_currency})">
         <template slot-scope="scope">
           <div>
-            {{ $big(scope.row.amount).minus(scope.row.freezed).mul(scope.row.price).toFixed(2) }}
+            {{ $big(scope.row.amount).minus(scope.row.freezed).mul(scope.row.price) | fixed(2)  }}
           </div>
         </template>
       </el-table-column>
@@ -93,7 +93,7 @@
               v-if="isLogin && scope.row.user_id == userInfo.id"
               class="btn my"
             >{{$t('my_order')}}</button>
-            <div v-else-if="isLogin && scope.row.kyc_level > userInfo.state">
+            <div v-else-if="isLogin && scope.row.kyc_level > userInfo.lv">
               <div
                 @click="clickVerifyRow('Kyc')"
                 v-html="$t('otc_need_authentication', {side: $t('otc_side_'+side)} )"
@@ -495,7 +495,7 @@ export default {
             &.input {
               font-family: monaco Trebuchet MS, Tahoma, Arial, sans-serif;
               outline: none;
-              border: 0px solid #666666;
+              border: 1px solid #666666;
               border-radius: 3px;
               background-color: transparent;
               width: 100%;

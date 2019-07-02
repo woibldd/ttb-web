@@ -10,7 +10,7 @@
       <div class="notify">
         <div
           class="content mb-30"
-          v-if="kycState === 1">
+          v-if="kycState === 1 && kyclv === 1">
           <p class="p1">
             <icon name="kyc_review"/>
             {{ $t('profile_kyc_ing') }}

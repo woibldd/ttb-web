@@ -170,8 +170,7 @@ class="action-order footer"
               <span class="red">*</span>
             </div>
             <div class="content">
-              <number-input 
-             
+              <number-input  
                 class="number-input"
                 v-model="amount"
                 @input="amountInput"
@@ -640,7 +639,7 @@ export default {
         if (this.$big(this.amount).gt(this.$big(this.view.amount).minus(this.view.freezed))) {
           this.inputAll()
         } else {
-          let total = this.$big(this.view.price).mul(this.amount).round(2, 0)
+          let total = this.$big(this.view.price).mul(this.amount).round(2, 3)
           if (this.inputTarget === 'amount') {
             if (this.total != total) {
               this.total = total
