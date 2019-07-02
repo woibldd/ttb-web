@@ -11,6 +11,8 @@ import { profileRouter } from './module/profile'
 import { tradeRouter } from './module/trade'
 import { fundRouter } from './module/fund'
 import { otherRouter } from './module/other'
+import Bid from '@/pages/Bid/index.vue'
+import BidDetail from '@/pages/Bid/detail.vue'
 import _ from 'lodash'
 // import HelloWorld from '@/components/HelloWorld'
 let loaded = false
@@ -354,7 +356,20 @@ export const routes = [
   ...profileRouter,
   ...tradeRouter,
   ...capitalRouter,
-  ...fundRouter
+  ...fundRouter,
+  {
+    path: '/bid',
+    name: 'Bid',
+    component: Bid
+  },
+  {
+    path: '/bidDetail',
+    name: 'BidDetail',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: BidDetail
+  }
 ]
 
 let router = new Router({
