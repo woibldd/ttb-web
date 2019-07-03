@@ -6,7 +6,7 @@
     </div>
     <div class="title-box">
       <div class="logo"></div>
-      <h1>IXX</h1>
+      <h1>{{cell.currency}}</h1>
       <h2>{{cell.moneyDays}}{{$t('bby_shouy4')}}</h2>
     </div>
     <div class="bid-detail-area">
@@ -32,19 +32,19 @@
           <dl>
             <dd>
               <span>{{$t('bby_shouy11')}}</span>
-              <em>{{cell.total}} ix</em>
+              <em>{{cell.total}} {{cell.currency}}</em>
             </dd>
             <dd>
               <span>{{$t('bby_shouy12')}}</span>
-              <em>{{ cell.remaining_amount }} ix</em>
+              <em>{{ cell.remaining_amount }} {{cell.currency}}</em>
             </dd>
             <dd>
               <span>{{$t('bby_shouy13')}}</span>
-              <em>{{ cell.maxLimit }} ix</em>
+              <em>{{ cell.maxLimit }} {{cell.currency}}</em>
             </dd>
             <dd>
               <span>{{$t('bby_shouy14')}}</span>
-              <em>{{ cell.minLimit }} ixx</em>
+              <em>{{ cell.minLimit }} {{cell.currency}}</em>
             </dd>
           </dl>
           <div class="time-line">
@@ -62,7 +62,7 @@
       </div>
       <div class="ipt">
         <div class="buy-area">
-          <span>{{$t('account_balance')}} {{accountBalance}} ix</span>
+          <span>{{$t('account_balance')}} {{accountBalance}} {{cell.currency}}</span>
           <em class="pay">
             <router-link to="/fund/deposit" tag="a">{{$t('bby_shouy15')}}</router-link>
             <!--<a href="http://127.0.0.1:8080/fund/deposit">{{$t('bby_shouy15')}}</a></em>-->
@@ -79,8 +79,8 @@
             <el-input-number v-model.number="count" :min="Number(cell.minLimit)" @change="inputKeyBoard"
                              :max="Number(cell.maxLimit)" label="请输入存币数量"  :controls="controls"></el-input-number>
             <div class="rage">
-              <span class="cell">ixx</span>
-              <em>{{$t('allin')}}</em>
+              <span class="cell">{{cell.currency}}</span>
+              <em @click="allMoney">{{$t('allin')}}</em>
             </div>
           </div>
           <div class="tip">{{$t('bby_shouy18')}}<em>{{ money }}</em>ix</div>
@@ -118,7 +118,7 @@ export default {
       count: 0,
       controls: false,
       // 账户余额
-      accountBalance: 1000,
+      accountBalance: 0,
       // 预计收益
       money: 0,
       detail: {
@@ -162,9 +162,10 @@ export default {
           res.data.forEach((item) => {
             if (item.currency === this.cell.currency) {
               this.accountBalance = Number(item.available)
+            } else {
+              this.accountBalance = 0
             }
           })
-          console.log(this.accountBalance)
         }
       })
     },
@@ -174,6 +175,11 @@ export default {
     inputKeyBoard (e) {
       if (e > this.accountBalance) {
         this.count = this.accountBalance
+      }
+    },
+    allMoney () {
+      if (this.accountBalance < Number(this.cell.minLimit)) {
+        this.$message.warning('余额不足，请充值')
       }
     },
     submit () {
@@ -195,20 +201,13 @@ export default {
               name: '/bid'
             })
           } else {
-            if (res.data.code === 401) {
-              this.$router.push({
-                name: 'login'
-              })
-              console.log('请登录')
-            } else {
-              this.$message.warning(`${res.data.message}`)
-            }
+            this.$message.warning(`${res.data.message}`)
           }
         })
       } else if (this.accountBalance < this.account) {
-        this.$message.success(this.$t('bby_shouy32'))
+        this.$message.warning(this.$t('bby_shouy32'))
       } else {
-        this.$message.success(this.$t('bby_shouy32'))
+        this.$message.warning(this.$t('bby_shouy32'))
       }
     }
   },
