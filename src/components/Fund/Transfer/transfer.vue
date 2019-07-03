@@ -238,7 +238,6 @@
           return new Big(this.walletBalance.available || 0).toFixed(8);
         }
       }
-
     },
     methods: {
       transferType(type){
