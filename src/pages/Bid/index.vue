@@ -106,7 +106,7 @@ export default {
                 if(item.beginTime > timestamp) {
                     Vue.set(item,'isTrue', true)
                 }
-             } 
+             }
             })
           }
         }
@@ -133,20 +133,8 @@ $disabled-color: #B0B4B9;
   .bid-banner {
     position: relative;
     height: 540px;
-    background: url("./assets/banner.png") center center no-repeat;
+    background: url("./assets/zhongwen_bj.png") center center no-repeat;
     background-size: cover;
-    .bid-text {
-      width: 648px;
-      height: 288px;
-      background: url("./assets/font.png") center center no-repeat;
-      background-clip: border-box;
-      background-size: auto;
-      position: absolute;
-      top: 50%;
-      margin-top: -144px;
-      left: 50%;
-      margin-left: -324px;
-    }
   }
   .bid-list {
     width: 1080px;
@@ -204,7 +192,7 @@ $disabled-color: #B0B4B9;
           outline: none;
           box-shadow: none;
           transition: all .3s;
-    
+
           &:disabled {
             background: $disabled-bg!important;
             color: $disabled-color!important;
