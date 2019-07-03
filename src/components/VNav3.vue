@@ -11,8 +11,7 @@
             :class="{'router-link-active': from === 'contract'}"
             class="nav_link ml-30">{{ $t('contract') }}
           </a>
-           <router-link
-            v-if='!isTestnet'
+           <router-link 
             :to="{name: 'OTC'}"
             class="nav_link  ml-30">{{ $t('otc_trade') }}</router-link>
 
@@ -26,6 +25,9 @@
             <img src="@/assets/hot.png" alt style="position: relative;top: 5px;left: 5px;">
           </router-link>
 
+          <router-link
+            to="/bid"
+            class="nav_link  ml-30">币币盈</router-link>
           <!-- <div class="nav_link arrow-down">
             <a
               :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"
@@ -110,9 +112,6 @@
               </ul>
             </div>
           </div>-->
-          <router-link
-            to="/bid"
-            class="nav_link  ml-30">币币盈</router-link>
         </div>
       </div>
       <div class="nav_right">
