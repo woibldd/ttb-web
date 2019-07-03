@@ -229,7 +229,10 @@ const service = {
   },
   faceComplete (params) {
     return request('user/kyc/face/complete', params)
-  }, 
+  },
+  findPage (params) {
+    return request('api/moneyManage/findPage', params)
+  },
   getRecommend () {
     return request('pair/recommends')
   },
@@ -1207,7 +1210,7 @@ const service = {
         return getCache('c_otc_symbol_list', () => request('otc/account/symbol/list'), 5e3)
     },
     //获取余额（总账户）
-    getAccountWalletList() { 
+    getAccountWalletList() {
       return  getCache('c_wallet_list', () => request('account/wallet/list'), 1e3)
     },
     async getwalletBalanceByPair(symbol) {
@@ -1216,7 +1219,7 @@ const service = {
           symbol: 'BTC'
         }
       }
-      let result = await service.getAccountWalletList() 
+      let result = await service.getAccountWalletList()
       if (!result.code) {
         let list = result.data
         let balance = list ? list.filter(l => symbol.symbol === l.currency)[0] || {} : {

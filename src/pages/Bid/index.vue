@@ -45,6 +45,7 @@
 import { getLocalTime } from './mixins'
 import Vue from 'vue'
 import axios from 'axios'
+import service from '@/modules/service'
 // import { envApi } from '../../modules/request'
 export default {
   data () {
@@ -58,6 +59,20 @@ export default {
     }
   },
   methods: {
+
+    // testHeader(){
+    //   return axios.get(url, {
+    //     params: data,
+    //     headers: {'yl-authorization': this.token}//设置header信息
+    //   }).then((res) => {
+    //     this.plList = res.data;
+    //     if (this.plList.length < this.size) {
+    //       this.jiazai = '没有更多数据啦~~~'
+    //     }else {
+    //       this.jiazai = '点击加载更多'
+    //     }
+    //   })
+    // },
     handleCurrentChange (e) {
       this.params.start = e
       this.init(this.params)
@@ -74,16 +89,12 @@ export default {
     init (params) {
       let timestamp = Date.parse(new Date())
       console.log(timestamp)
-      axios.post('https://i.ixex.pro/api/moneyManage/findPage', {
+      service.findPage({
         ...params
-      }, {
-        headers: {
-          from: 'ixx'
-        }
       }).then((res) => {
-        if (res.data.code === 200) {
-          this.list = res.data.data.data
-          this.total = res.data.data.total
+        if (res.code === 0) {
+          this.list = res.data.data
+          this.total = res.data.total
           if (this.list.length > 0) {
             this.list.forEach((item) => {
               Vue.set(item, 'startTime', getLocalTime(item.beginTime))
@@ -101,6 +112,7 @@ export default {
   },
   created () {
     this.init(this.params)
+
   }
 }
 </script>
