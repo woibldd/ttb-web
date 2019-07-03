@@ -178,7 +178,7 @@ export default {
     },
     submit () {
       if (this.accountBalance !== 0) {
-        axios.post(envApi + '/api/manageRecord/buy', qs.stringify({
+        axios.post('https://i.ixex.pro/api/manageRecord/buy', qs.stringify({
           site: this.cell.site,
           currency: this.cell.currency,
           userId: '99999999',
