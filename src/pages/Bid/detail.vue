@@ -168,7 +168,7 @@ export default {
       })
     },
     backTop () {
-      this.$router.push('/')
+      this.$router.push('/bid')
     },
     inputKeyBoard (e) {
       if (e > this.accountBalance) {
