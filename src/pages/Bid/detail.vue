@@ -110,6 +110,7 @@ import {getLocalTime} from './mixins'
 import Vue from 'vue'
 import qs from 'qs'
 import service from '@/modules/service'
+import { envApi } from '../../modules/request'
 
 export default {
   data () {
@@ -177,7 +178,7 @@ export default {
     },
     submit () {
       if (this.accountBalance !== 0) {
-        axios.post(process.env.BASE_API + '/api/manageRecord/buy', qs.stringify({
+        axios.post(envApi + '/api/manageRecord/buy', qs.stringify({
           site: this.cell.site,
           currency: this.cell.currency,
           userId: '99999999',
