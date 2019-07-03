@@ -110,6 +110,10 @@
               </ul>
             </div>
           </div>-->
+          <router-link
+            v-if='!isTestnet'
+            to="/bid"
+            class="nav_link  ml-30">币币盈</router-link>
         </div>
       </div>
       <div class="nav_right">
