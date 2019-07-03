@@ -45,6 +45,8 @@
 import { getLocalTime } from './mixins'
 import Vue from 'vue'
 import axios from 'axios'
+import { envApi } from '../../modules/request'
+
 export default {
   data () {
     return {
@@ -73,7 +75,7 @@ export default {
     init (params) {
       let timestamp = Date.parse(new Date())
       console.log(timestamp)
-      axios.get(process.env.BASE_API + '/api/moneyManage/findPage', {
+      axios.get(envApi + '/api/moneyManage/findPage', {
         params: {
           ...params
         }
