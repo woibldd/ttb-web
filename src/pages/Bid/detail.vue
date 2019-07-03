@@ -157,6 +157,7 @@ export default {
   },
   methods: {
     getAccountWalletList () {
+        this.accountBalance  = 0
       service.getAccountWalletList().then(res => {
         if (res.code === 0) {
           res.data.forEach((item) => {
