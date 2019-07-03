@@ -233,6 +233,9 @@ const service = {
   findPage (params) {
     return request('api/moneyManage/findPage', params)
   },
+  manageRecord (params) {
+    return request('/api/manageRecord/buy', params)
+  },
   getRecommend () {
     return request('pair/recommends')
   },
