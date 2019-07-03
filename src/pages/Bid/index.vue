@@ -46,7 +46,6 @@ import { getLocalTime } from './mixins'
 import Vue from 'vue'
 import axios from 'axios'
 // import { envApi } from '../../modules/request'
-
 export default {
   data () {
     return {
@@ -75,9 +74,11 @@ export default {
     init (params) {
       let timestamp = Date.parse(new Date())
       console.log(timestamp)
-      axios.get('https://i.ixex.pro/api/moneyManage/findPage', {
-        params: {
-          ...params
+      axios.post('https://i.ixex.pro/api/moneyManage/findPage', {
+        ...params
+      }, {
+        headers: {
+          from: 'ixx'
         }
       }).then((res) => {
         if (res.data.code === 200) {
