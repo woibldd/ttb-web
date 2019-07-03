@@ -8,8 +8,7 @@ export function globalState (type, state) {
   let action = types.GLOBAL__MESSAGE.get(type)
   return action[state]
 }
-export function getLocalTime(nS) {
-  nS = nS * 1000
+export function getLocalTime (nS) {
   let date = new Date(nS)
   let year = date.getFullYear()
   let month = date.getMonth() + 1

@@ -360,11 +360,23 @@ export const routes = [
   {
     path: '/bid',
     name: 'Bid',
+    meta: {
+      require: true,
+      nav: true,
+      footer: true,
+      class: 'dark'
+    },
     component: Bid
   },
   {
     path: '/bidDetail',
     name: 'BidDetail',
+    meta: {
+      require: true,
+      nav: true,
+      footer: true,
+      class: 'dark'
+    },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
