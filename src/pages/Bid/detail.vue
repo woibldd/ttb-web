@@ -6,7 +6,7 @@
     </div>
     <div class="title-box">
       <div class="logo"></div>
-      <h1>IX</h1>
+      <h1>IXX</h1>
       <h2>{{cell.moneyDays}}{{$t('bby_shouy4')}}</h2>
     </div>
     <div class="bid-detail-area">
@@ -44,7 +44,7 @@
             </dd>
             <dd>
               <span>{{$t('bby_shouy14')}}</span>
-              <em>{{ cell.minLimit }} ix</em>
+              <em>{{ cell.minLimit }} ixx</em>
             </dd>
           </dl>
           <div class="time-line">
@@ -79,7 +79,7 @@
             <el-input-number v-model.number="count" :min="Number(cell.minLimit)" @change="inputKeyBoard"
                              :max="Number(cell.maxLimit)" label="请输入存币数量"  :controls="controls"></el-input-number>
             <div class="rage">
-              <span class="cell">ix</span>
+              <span class="cell">ixx</span>
               <em>{{$t('allin')}}</em>
             </div>
           </div>
@@ -159,7 +159,7 @@ export default {
       service.getAccountWalletList().then(res => {
         if (res.code === 0) {
           res.data.forEach((item) => {
-            if (item.currency === 'IX') {
+            if (item.currency === this.cell.currency) {
               this.accountBalance = Number(item.available)
             }
           })
@@ -225,6 +225,7 @@ export default {
     this.count = 0
     this.getAccountWalletList()
     this.money = (Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * this.count).toFixed(2)
+    console.log(Number(this.cell.annualizedReturns) / 365)
   },
   watch: {
     count () {
@@ -240,7 +241,7 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
-  $main-bg: #C9A96C;
+  $main-bg: #00CED2;
   $disabled-bg: #F2F3F5;
   $white-color: #fff;
   $disabled-color: #B0B4B9;

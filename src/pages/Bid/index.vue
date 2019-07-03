@@ -103,7 +103,7 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
-$main-bg: #C9A96C;
+$main-bg: #00CED2;
 $disabled-bg: #F2F3F5;
 $white-color: #fff;
 $disabled-color: #B0B4B9;
