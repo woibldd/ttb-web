@@ -134,6 +134,7 @@ $disabled-color: #B0B4B9;
     position: relative;
     height: 540px;
     background: url("./assets/zhongwen_bj.png") center center no-repeat;
+    /*background: url("./assets/zhongwen_bj.png") center center no-repeat;*/
     background-size: cover;
   }
   .bid-list {
