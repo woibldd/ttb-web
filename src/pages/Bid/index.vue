@@ -63,7 +63,7 @@ export default {
       list: [],
       total: 0,
       state,
-      img: require('./assets/banner-' + state.locale + '.png')
+      img: require('./assets/banner-zh-CN.png')
     }
   },
   methods: {
@@ -121,7 +121,7 @@ export default {
   },
   created () {
     this.init(this.params)
-    this.img = require('./assets/banner-' + state.locale + '.png')
+    // this.img = require('./assets/banner-' + state.locale + '.png')
   },
   mounted () {
   }
