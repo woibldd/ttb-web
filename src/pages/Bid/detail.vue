@@ -8,6 +8,7 @@
       <div class="logo"></div>
       <h1>{{cell.currency}}</h1>
       <h2>{{cell.product}}</h2>
+      <em class="jl" @click="jl">币盈盈记录</em>
     </div>
     <div class="bid-detail-area">
       <div class="message-box">
@@ -50,16 +51,25 @@
           <div class="time-line">
             <el-timeline>
               <el-timeline-item
-                v-for="(activity, index) in detail.timeLine"
-                :key="index"
-                :color="activity.color">
-                {{activity.content}}
-                <span style="padding-left: 10px;color: #333">{{ activity.timestamp }}</span>
+                color="#C9A96C">
+                {{$t('bby_shouy28')}}
+                <span style="padding-left: 10px;color: #333">{{ detail.timeLine[0].timestamp }}</span>
+              </el-timeline-item>
+              <el-timeline-item
+                color="#C9A96C">
+                 {{$t('bby_shouy29')}}
+                <span style="padding-left: 10px;color: #333">{{ detail.timeLine[1].timestamp }}</span>
+              </el-timeline-item>
+              <el-timeline-item
+                color="#C9A96C">
+                {{$t('bby_shouy30')}}
+                <span style="padding-left: 10px;color: #333">{{ detail.timeLine[2].timestamp }}</span>
               </el-timeline-item>
             </el-timeline>
           </div>
         </div>
       </div>
+  
       <div class="ipt">
         <div class="buy-area">
           <span>{{$t('account_balance')}} {{accountBalance}} {{cell.currency}}</span>
@@ -68,7 +78,7 @@
             <!--<a href="http://127.0.0.1:8080/fund/deposit">{{$t('bby_shouy15')}}</a></em>-->
           </em>
           <em class="buy">
-            <router-link to="/fund/deposit" tag="a">{{$t('bby_shouy16')}}</router-link>
+            <router-link to="/trading/BTC_USDT" tag="a">{{$t('bby_shouy16')}}</router-link>
             <!--<a href="http://127.0.0.1:8080/fund/deposit">{{$t('bby_shouy16')}}</a>-->
           </em>
         </div>
@@ -98,7 +108,7 @@
         <dd>{{$t('bby_shouy24')}}</dd>
         <dd>{{$t('bby_shouy25')}}</dd>
         <dd>{{$t('bby_shouy26')}}</dd>
-        <dd>{{$t('bby_shouy27')}}</dd>
+        <!-- <dd>{{$t('bby_shouy27')}}</dd> -->
       </dl>
     </div>
   </div>
@@ -155,7 +165,11 @@ export default {
       cell: {}
     }
   },
-  methods: {
+  mounted() {
+     
+  },
+methods: {
+    //   manageResopetate
     getAccountWalletList () {
       this.accountBalance  = 0
       service.getAccountWalletList().then(res => {
@@ -180,12 +194,21 @@ export default {
     },
     allMoney () {
       if (this.accountBalance < Number(this.cell.minLimit)) {
-        this.$message.warning('余额不足，请充值')
+        // this.$message.warning('余额不足，请充值')
+         this.$message({
+                  type: 'warning',
+                   message: this.$t('bby_shouy32')
+                })
       } else {
           if(this.accountBalance >= this.cell.maxLimit) {
               this.count = this.cell.maxLimit
           }
       }
+    },
+    jl() {
+        this.$router.push({
+            name: 'bidtable'
+        })
     },
     submit () {
       if (this.accountBalance !== 0) {
@@ -200,7 +223,11 @@ export default {
           }
         }).then((res) => {
           if (res.code === 0) {
-            this.$message.success('购买成功')
+            // this.$message.success('购买成功')
+             this.$message({
+                  type: 'success',
+                   message: this.$t('bby_shouy31')
+                })
             this.$router.push({
               path: '/bid'
             })
@@ -214,6 +241,21 @@ export default {
         this.$message.warning(this.$t('bby_shouy32'))
       }
     }
+  },
+  mounted() {
+       this.timeLine = [{
+        content: this.$t('bby_shouy28'),
+        timestamp: '2018-04-15',
+        color: '#C9A96C'
+    }, {
+        content: this.$t('bby_shouy29'),
+        timestamp: '2018-04-13',
+        color: '#C9A96C'
+    }, {
+        content: this.$t('bby_shouy30'),
+        timestamp: '2018-04-11',
+        color: '#C9A96C'
+    }]
   },
   created () {
     this.cell = JSON.parse(window.localStorage.getItem('detail'))
@@ -232,8 +274,14 @@ export default {
     this.detail.timeLine[2].timestamp = getLocalTime(this.cell.unlockTime)
     this.count = 0
     this.getAccountWalletList()
-    this.money = (Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * this.count).toFixed(2)
-    console.log(Number(this.cell.annualizedReturns) / 365)
+    if(this.cell.minLimit.indexOf('.') > 0) {
+         let minArr = this.cell.minLimit.split('.')
+         this.money = (Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * this.count).toFixed(minArr[1].length + 2)
+         console.log(Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * Number(this.count), 1)
+    } else {
+        this.money = (Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * this.count).toFixed(2)
+         console.log(this.money, 2)
+    }
     let timestamp = Date.parse(new Date())
     if (this.cell.state === 1) {
         this.disabled = false
@@ -246,7 +294,14 @@ export default {
     if (this.cell.state === 1) {
         if (this.count) {
             this.disabled = false
-            this.money = (Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * this.count).toFixed(2)
+           if(this.cell.minLimit.indexOf('.') > 0) {
+                let minArr = this.cell.minLimit.split('.')
+                this.money = (Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * this.count).toFixed(minArr[1].length + 2)
+                console.log(Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * Number(this.count), 1)
+            } else {
+                this.money = (Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * this.count).toFixed(2)
+                console.log(this.money, 2)
+            }
         } else {
             this.disabled = true
         }
@@ -297,6 +352,16 @@ export default {
     .title-box {
       padding: 12px 0;
       border-bottom: 2px solid #ececec;
+      position: relative;
+      width: 100%;
+      .jl {
+        color: $main-bg;
+        position: absolute;
+        right: 0;
+        top: 24px;
+        cursor: pointer;
+        display: block;
+    }
       .logo {
         width: 36px;
         height: 36px;

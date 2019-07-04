@@ -236,6 +236,9 @@ const service = {
   manageRecord (params) {
     return request('/api/manageRecord/buy', params)
   },
+  manageResopetate (params) {
+    return request('/api/manageRecord/opetate', params)
+  },
   getRecommend () {
     return request('pair/recommends')
   },

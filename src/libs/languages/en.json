@@ -1578,7 +1578,7 @@
 "contract_cal_rate":"Interest Quote Index",
 "contract_over_price":"premium index",
 "contract_undefined":"unknown",
-"contract_cancel_all":"Cancel all",
+
 "contract_history_deal_dan": "fill",
 "contract_ix_index_source":"IXX Index",
 "contract_deal_type_0":"Funding Rate distribution",
@@ -2133,11 +2133,11 @@
 "bby_shouy30":"unlock time ",
 "bby_shouy31":"purchased successful",
 "bby_shouy32":"Insufficient balance, Please deposit top-up",
-"bby_shouy22":"1.Deposit & Earn is financial products based on digital assets, each project has a corresponding lock cycle and interest rate, you can choose to buy, lock the principal after the purchase, and calculate the interest according to the agreed time.",
-"bby_shouy23":"2.Log in the official website of IXX.COM, click the link, select the coin  you need to lock according to your own situation, click “ Buy” to participate in the project of depositing COINS. Currently, depositing COINS does not support unlocking in advance, and the system will automatically unlock the amount you locked after the end of the lock period and pay the interest.",
-"bby_shouy24":"3.All participating projects have a fixed start and end time for interest calculation, during which time you can calculate your income. The interest calculating time can be viewed on the page.",
-"bby_shouy25":"4.After the end of the project, the system will start to issue the returns of successively. Due to the large number of participants, your income may be delayed to issue. Please be patient. You can view interest income in Asset Records.",
-"bby_shouy26":"5.The assets which have participated with Deposit & Earn, will not participate in other rewards.",
-"bby_shouy27":"6. Calculation of return: days  /365* annual return * amount of deposit = gain from deposit this time", "bidImg": "zhongwen_bj",
+
+"bby_shouy22":"",
+"bby_shouy23":"",
+"bby_shouy24":"",
+"bby_shouy25":"",
+"bby_shouy26":"",
 "bidTitle": "Deposit&earn"
 }

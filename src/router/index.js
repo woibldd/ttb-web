@@ -13,6 +13,7 @@ import { fundRouter } from './module/fund'
 import { otherRouter } from './module/other'
 import Bid from '@/pages/Bid/index.vue'
 import BidDetail from '@/pages/Bid/detail.vue'
+import BidTable from '@/pages/Bid/table.vue'
 import _ from 'lodash'
 // import HelloWorld from '@/components/HelloWorld'
 let loaded = false
@@ -380,6 +381,19 @@ export const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: BidDetail
+  },
+  {
+    path: '/bidtable',
+    name: 'bidtable',
+    meta: {
+      nav: true,
+      footer: true,
+      class: 'dark'
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: BidTable
   }
 ]
 
