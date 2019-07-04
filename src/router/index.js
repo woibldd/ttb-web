@@ -361,7 +361,6 @@ export const routes = [
     path: '/bid',
     name: 'Bid',
     meta: {
-      require: true,
       nav: true,
       footer: true,
       class: 'dark'
