@@ -1,9 +1,27 @@
 <template>
   <div class="bid-container">
     <div class="bid-banner">
-      <img :src="img">
+      <div class="bid-con clearfix">
+        <div class="banner-item-list">
+          <img src="./assets/item-banner.png">
+        </div>
+        <div class="banner-item-text" v-for="(item, index) in hotList" :key="index">
+          <div class="title">
+            热门推荐
+          </div>
+          <p style="font-size: 16px;">{{ item.currency }} {{ item.product }}</p>
+          <p style="font-size: 13px;">限期 {{ item.moneyDays }}天</p>
+          <div class="rate">
+            <h1>{{ item.annualizedReturns > 0 ? (Number(item.annualizedReturns)).toFixed(2) : 0 }}%</h1>
+            <em>预计年化收益率</em>
+          </div>
+          <div class="btn">
+            <el-button class="bid-btn"v-html="item.state === 1 ? '参与' : item.state === 2 ? '结束' : item.state === 3 ? '已售罄' : '抢购时间未到'"></el-button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="bid-list">
+    <div class="bid-list clearfix">
       <div class="bid-list-item" v-for="(item, index) in list" :key="index" :data-id="'dataId-'+ item.id">
         <div class="week-day">
           <div class="title">
@@ -26,7 +44,14 @@
           <p class="join">{{ item.joinAmount }} {{$t('bby_shouy5')}}</p>
         </div>
         <div class="btn">
-          <el-button class="bid-btn" :disabled="item.isTrue" @click="detail(item)">{{$t('bby_shouy6')}}</el-button>
+          <el-button
+            class="bid-btn"
+            :disabled="item.isTrue"
+            @click="detail(item)"
+            v-html="item.state === 1 ? '参与' : item.state === 2 ? '结束' : item.state === 3 ? '已售罄' : '抢购时间未到'"
+          >
+            {{$t('bby_shouy6')}}
+          </el-button>
         </div>
       </div>
     </div>
@@ -38,21 +63,17 @@
         @current-change="handleCurrentChange"
       />
     </div>
-    <router-view />
+    <router-view/>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import { getLocalTime } from './mixins'
+import {getLocalTime} from './mixins'
 import Vue from 'vue'
 import axios from 'axios'
-import { state } from '../../modules/store'
+import {state} from '../../modules/store'
 import service from '@/modules/service'
 // import { envApi } from '../../modules/request'
-
-
-
-
 export default {
   data () {
     return {
@@ -62,29 +83,11 @@ export default {
       },
       list: [],
       total: 0,
-      state,
-      img: require('./assets/banner-zh-CN.png')
+      hotList: [],
+      state
     }
   },
-  // computed: {
-  //    img() {
-  //      return require('./assets/banner-' + state.locale + '.png')
-  //    }
-  // },
   methods: {
-    // testHeader(){
-    //   return axios.get(url, {
-    //     params: data,
-    //     headers: {'yl-authorization': this.token}//设置header信息
-    //   }).then((res) => {
-    //     this.plList = res.data;
-    //     if (this.plList.length < this.size) {
-    //       this.jiazai = '没有更多数据啦~~~'
-    //     }else {
-    //       this.jiazai = '点击加载更多'
-    //     }
-    //   })
-    // },
     handleCurrentChange (e) {
       this.params.start = e
       this.init(this.params)
@@ -99,6 +102,7 @@ export default {
       window.localStorage.setItem('detail', JSON.stringify(item))
     },
     init (params) {
+      this.hotList = []
       let timestamp = Date.parse(new Date())
       console.log(timestamp)
       service.findPage({
@@ -111,15 +115,16 @@ export default {
             this.list.forEach((item) => {
               Vue.set(item, 'startTime', getLocalTime(item.beginTime))
               Vue.set(item, 'end_time', getLocalTime(item.endTime))
-              Vue.set(item,'isTrue', true)
-             if(item.endTime > timestamp) {
-                Vue.set(item,'isTrue', false)
-                if(item.beginTime > timestamp) {
-                    Vue.set(item,'isTrue', true)
+              Vue.set(item, 'isTrue', true)
+              if (item.endTime > timestamp) {
+                Vue.set(item, 'isTrue', false)
+                if (item.beginTime > timestamp) {
+                  Vue.set(item, 'isTrue', true)
                 }
-             }
+              }
             })
           }
+          this.hotList.push(this.list[0])
         }
       })
     }
@@ -133,92 +138,91 @@ export default {
 }
 </script>
 
-<style lang="scss" rel="stylesheet/scss" scoped>
-$main-bg: #00CED2;
-$disabled-bg: #F2F3F5;
-$white-color: #fff;
-$disabled-color: #B0B4B9;
-.bid-container {
-  min-width: 1080px;
-  overflow: hidden;
-  color: #333;
-  width: 100%;
-  font-size: 14px;
-  .bid-banner {
-    position: relative;
-    height: 400px;
-    background-size: cover;
-  }
-  .bid-list {
-    width: 1080px;
+<style lang="scss" rel="stylesheet/scss">
+  $main-bg: #00CED2;
+  $disabled-bg: #F2F3F5;
+  $white-color: #fff;
+  $disabled-color: #B0B4B9;
+  .bid-container {
+    min-width: 1080px;
     overflow: hidden;
-    margin: 0 auto;
-    .bid-list-item {
-      padding: 40px 0;
-      display: flex;
-      border-bottom: 1px solid #ececec;
-      background: #fff;
-      transition: all .3s;
-      justify-items: center;
-      align-items: center;
-      span {
-        color: $disabled-color;
-      }
-      h1 {
-        color: $main-bg;
-        font-weight: bold;
-        font-size: 22px;
-        margin-bottom: 10px;
-      }
-      .week-day {
-        flex: 460px 0 0 0;
-        width: 460px;
-        .title {
-          overflow: hidden;
-          margin-top: 12px;
-          margin-bottom: 12px
+    color: #333;
+    width: 100%;
+    font-size: 14px;
+    .bid-banner {
+      position: relative;
+      height: 400px;
+      background-size: cover;
+    }
+    .bid-list {
+      width: 1080px;
+      overflow: hidden;
+      margin: 0 auto;
+      .bid-list-item {
+        padding: 40px 0;
+        display: flex;
+        border-bottom: 1px solid #ececec;
+        background: #fff;
+        transition: all .3s;
+        justify-items: center;
+        align-items: center;
+        span {
+          color: $disabled-color;
         }
-      }
-      .rate,.num {
-        flex: 220px 0 0 0;
-        width: 220px;
-      }
-      .num {
-        .lock {
-          overflow: hidden;
-          margin-top: 12px;
-          margin-bottom: 12px
+        h1 {
+          color: $main-bg;
+          font-weight: bold;
+          font-size: 22px;
+          margin-bottom: 10px;
         }
-      }
-      .btn {
-        flex: 1;
-        .bid-btn {
-          width: 100%;
-          height: 40px;
-          background: $main-bg;
-          color: $white-color!important;
-          display: block;
-          box-sizing: border-box;
-          font-size: 14px;
-          border-color: $main-bg;
-          cursor: pointer;
-          outline: none;
-          box-shadow: none;
-          transition: all .3s;
+        .week-day {
+          flex: 460px 0 0 0;
+          width: 460px;
+          .title {
+            overflow: hidden;
+            margin-top: 12px;
+            margin-bottom: 12px
+          }
+        }
+        .rate,.num {
+          flex: 220px 0 0 0;
+          width: 220px;
+        }
+        .num {
+          .lock {
+            overflow: hidden;
+            margin-top: 12px;
+            margin-bottom: 12px
+          }
+        }
+        .btn {
+          flex: 1;
+          .bid-btn {
+            width: 100%;
+            height: 40px;
+            background: $main-bg;
+            color: $white-color!important;
+            display: block;
+            box-sizing: border-box;
+            font-size: 14px;
+            border-color: $main-bg;
+            cursor: pointer;
+            outline: none;
+            box-shadow: none;
+            transition: all .3s;
 
-          &:disabled {
-            background: $disabled-bg!important;
-            color: $disabled-color!important;
-            border-color: $disabled-bg;
-            cursor: not-allowed;
-            &:hover {
+            &:disabled {
+              background: $disabled-bg!important;
+              color: $disabled-color!important;
+              border-color: $disabled-bg;
+              cursor: not-allowed;
+              &:hover {
                 border-color: transparent!important;;
+              }
             }
           }
         }
       }
     }
   }
-}
 </style>
-
