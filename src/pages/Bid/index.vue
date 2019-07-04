@@ -22,8 +22,7 @@
       <!--</div>-->
     <!--</div>-->
     <div class="bid-banner">
-      <img :src="img">
-      <img src="@/assets/guide-bg.jpg" alt="">
+      <img :src="img"> 
     </div>
     <div class="bid-list clearfix">
       <div class="bid-list-item" v-for="(item, index) in list" :key="index" :data-id="'dataId-'+ item.id">
