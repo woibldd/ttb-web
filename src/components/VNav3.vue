@@ -24,7 +24,6 @@
             {{ $t('FrenzySaleZone') }}(SP)
             <img src="@/assets/hot.png" alt style="position: relative;top: 5px;left: 5px;">
           </router-link>
-
           <router-link
             to="/bid"
             class="nav_link  ml-30">
@@ -318,6 +317,9 @@ export default {
     },
     clickStar($event) {
       this.className = "active"; // console.log($event.currentTarget);
+    },
+    alert () {
+      alert(1)
     },
     openDefault(type) {
       switch (type) {

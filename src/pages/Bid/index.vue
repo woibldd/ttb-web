@@ -49,6 +49,10 @@ import axios from 'axios'
 import { state } from '../../modules/store'
 import service from '@/modules/service'
 // import { envApi } from '../../modules/request'
+
+
+
+
 export default {
   data () {
     return {
@@ -58,9 +62,15 @@ export default {
       },
       list: [],
       total: 0,
-      img: require('./assets/banner-' + state.locale + '.png')
+      state,
+      img: require('./assets/banner-zh-CN.png')
     }
   },
+  // computed: {
+  //    img() {
+  //      return require('./assets/banner-' + state.locale + '.png')
+  //    }
+  // },
   methods: {
     // testHeader(){
     //   return axios.get(url, {
@@ -116,7 +126,7 @@ export default {
   },
   created () {
     this.init(this.params)
-    this.img = require('./assets/banner-' + state.locale + '.png')
+    // this.img = require('./assets/banner-' + state.locale + '.png')
   },
   mounted () {
   }
