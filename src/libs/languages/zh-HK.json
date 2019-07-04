@@ -605,7 +605,7 @@
   "eos_deposit_tip_security_third": "地址標籤填寫錯誤而造成的充值失敗，找回將收取一定比例的手續費；",
   "eos_not_support_internal_transfer": "暫不支持交易所內部地址轉賬",
   "orders": "訂單",
-  "my_orders": "我的訂單",
+
   "api_tips_one": "1. IX.COM為您提供了強大的API，您可以通過API 使用行情查詢、自動交易等服務。通過<a target=\"_blank\" href=\"%{link}\">API 文檔</a> 查看如何使用。",
   "api_tips_two": "2. 每個用戶最多創建10組API Key",
   "api_tips_four": "3. 請不要洩露您的API Key，以免造成資產損失。",
@@ -1403,7 +1403,7 @@
   "contract_cal_rate": "計價貨幣利率",
   "contract_over_price": "溢價指數",
   "contract_undefined": "未知",
-  "contract_cancel_all": "全部撤銷",
+ 
   "contract_history_deal_dan": "成交單",
   "contract_ix_index_source": "IXX指數",
   "contract_deal_type_0": "資金費率分配",
