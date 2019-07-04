@@ -9,7 +9,8 @@
           <div class="title">
             <div class="icon"><i></i></div>
             <em>{{ item.currency }}</em>
-            {{ item.moneyDays }}{{$t('bby_shouy4')}}
+            {{ item.product }}
+
           </div>
           <div class="time">
             <span>{{$t('bby_shouy1')}}:</span>
@@ -25,7 +26,7 @@
           <p class="join">{{ item.joinAmount }} {{$t('bby_shouy5')}}</p>
         </div>
         <div class="btn">
-          <button class="bid-btn" :disabled="item.isTrue" @click="detail(item)">{{$t('bby_shouy6')}}</button>
+          <el-button class="bid-btn" :disabled="item.isTrue" @click="detail(item)">{{$t('bby_shouy6')}}</el-button>
         </div>
       </div>
     </div>
@@ -99,11 +100,13 @@ export default {
             this.list.forEach((item) => {
               Vue.set(item, 'startTime', getLocalTime(item.beginTime))
               Vue.set(item, 'end_time', getLocalTime(item.endTime))
-              if (item.endTime > timestamp) {
-                Vue.set(item, 'isTrue', false)
-              } else {
-                Vue.set(item, 'isTrue', true)
-              }
+              Vue.set(item,'isTrue', true)
+             if(item.endTime > timestamp) {
+                Vue.set(item,'isTrue', false)
+                if(item.beginTime > timestamp) {
+                    Vue.set(item,'isTrue', true)
+                }
+             } 
             })
           }
         }
@@ -145,16 +148,6 @@ $disabled-color: #B0B4B9;
       transition: all .3s;
       justify-items: center;
       align-items: center;
-      &:hover {
-        transition: all .3s;
-        .btn {
-          .bid-btn {
-            background: $main-bg;
-            color: $white-color;
-          }
-        }
-        /*background: rgba(176, 180, 185, .06);*/
-      }
       span {
         color: $disabled-color;
       }
@@ -189,8 +182,8 @@ $disabled-color: #B0B4B9;
         .bid-btn {
           width: 100%;
           height: 40px;
-          background: $white-color;
-          color: $main-bg;
+          background: $main-bg;
+          color: $white-color!important;
           display: block;
           box-sizing: border-box;
           font-size: 14px;
@@ -199,11 +192,15 @@ $disabled-color: #B0B4B9;
           outline: none;
           box-shadow: none;
           transition: all .3s;
+    
           &:disabled {
-            background: $disabled-bg;
-            color: $disabled-color;
+            background: $disabled-bg!important;
+            color: $disabled-color!important;
             border-color: $disabled-bg;
             cursor: not-allowed;
+            &:hover {
+                border-color: transparent!important;;
+            }
           }
         }
       }

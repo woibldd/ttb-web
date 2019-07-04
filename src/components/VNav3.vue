@@ -27,7 +27,7 @@
 
           <router-link
             to="/bid"
-            class="nav_link  ml-30">币币盈</router-link>
+            class="nav_link  ml-30">币盈盈</router-link>
           <!-- <div class="nav_link arrow-down">
             <a
               :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"

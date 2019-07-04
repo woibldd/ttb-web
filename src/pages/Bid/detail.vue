@@ -2,12 +2,12 @@
   <div class="bid-detail-container">
     <div class="backTop" @click="backTop">
       <i class="iconfont">&#xe64e;</i>
-      <span>{{$t('bby_shouy7')}}</span>
+      <span>币盈盈</span>
     </div>
     <div class="title-box">
       <div class="logo"></div>
       <h1>{{cell.currency}}</h1>
-      <h2>{{cell.moneyDays}}{{$t('bby_shouy4')}}</h2>
+      <h2>{{cell.product}}</h2>
     </div>
     <div class="bid-detail-area">
       <div class="message-box">
@@ -23,7 +23,7 @@
         </div>
         <div class="range-box">
           <div class="range">
-            <el-progress :text-inside="true" :stroke-width="12" :percentage="cell.downAmount" status="warning"/>
+            <el-progress :text-inside="true" :stroke-width="12" :percentage="cell.down_amount" status="warning"/>
           </div>
           <div class="range-txt">
             <span class="lock">{{$t('bby_shouy3')}} {{cell.lockedAmount}}</span>
@@ -118,7 +118,7 @@ export default {
       count: 0,
       controls: false,
       // 账户余额
-      accountBalance: 0,
+      accountBalance: 100,
       // 预计收益
       money: 0,
       detail: {
@@ -157,13 +157,14 @@ export default {
   },
   methods: {
     getAccountWalletList () {
+        this.accountBalance  = 0
       service.getAccountWalletList().then(res => {
         if (res.code === 0) {
           res.data.forEach((item) => {
             if (item.currency === this.cell.currency) {
-              this.accountBalance = Number(item.available)
-            } else {
-              this.accountBalance = 0
+                console.log(item.currency)
+                console.log(this.cell.currency)
+                this.accountBalance = Number(item.available)
             }
           })
         }
@@ -180,28 +181,31 @@ export default {
     allMoney () {
       if (this.accountBalance < Number(this.cell.minLimit)) {
         this.$message.warning('余额不足，请充值')
+      } else {
+          if(this.accountBalance >= this.cell.maxLimit) {
+              this.count = this.cell.maxLimit
+          }
       }
     },
     submit () {
       if (this.accountBalance !== 0) {
-        axios.post('https://i.ixex.pro/api/manageRecord/buy', qs.stringify({
+        service.manageRecord(qs.stringify({
           site: this.cell.site,
           currency: this.cell.currency,
-          userId: '99999999',
           amount: this.count,
-          manageId: this.cell.manage_id
+          manageId: this.cell.manageId
         }), {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
           }
         }).then((res) => {
-          if (res.data.code === 200) {
-            this.$message.success(this.$t('bby_shouy31'))
+          if (res.code === 0) {
+            this.$message.success('购买成功')
             this.$router.push({
-              name: '/bid'
+              path: '/bid'
             })
           } else {
-            this.$message.warning(`${res.data.message}`)
+            this.$message.warning(`${res.message}`)
           }
         })
       } else if (this.accountBalance < this.account) {
@@ -226,16 +230,26 @@ export default {
     this.getAccountWalletList()
     this.money = (Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * this.count).toFixed(2)
     console.log(Number(this.cell.annualizedReturns) / 365)
+    let timestamp = Date.parse(new Date())
+    if (this.cell.state === 1) {
+        this.disabled = false
+    } else {
+         this.disabled = true
+    }
   },
   watch: {
     count () {
-      if (this.count) {
-        this.disabled = false
-        this.money = (Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * this.count).toFixed(2)
-      } else {
+    if (this.cell.state === 1) {
+        if (this.count) {
+            this.disabled = false
+            this.money = (Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * this.count).toFixed(2)
+        } else {
+            this.disabled = true
+        }
+    } else {
         this.disabled = true
-      }
     }
+  }
   }
 }
 </script>
