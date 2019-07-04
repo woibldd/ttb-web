@@ -132,6 +132,7 @@ $disabled-color: #B0B4B9;
   min-width: 1080px;
   overflow: hidden;
   color: #333;
+  width: 100%;
   font-size: 14px;
   .bid-banner {
     position: relative;
