@@ -2,7 +2,7 @@
   <div class="bid-detail-container">
     <div class="backTop" @click="backTop">
       <i class="iconfont">&#xe64e;</i>
-      <span>币盈盈</span>
+      <span>{{$t('bby_shouy7')}}</span>
     </div>
     <div class="title-box">
       <div class="logo"></div>

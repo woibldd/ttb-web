@@ -11,7 +11,7 @@
             :class="{'router-link-active': from === 'contract'}"
             class="nav_link ml-30">{{ $t('contract') }}
           </a>
-           <router-link 
+           <router-link
             :to="{name: 'OTC'}"
             class="nav_link  ml-30">{{ $t('otc_trade') }}</router-link>
 
@@ -27,7 +27,9 @@
 
           <router-link
             to="/bid"
-            class="nav_link  ml-30">币盈盈</router-link>
+            class="nav_link  ml-30">
+            {{$t('bidTitle')}}
+          </router-link>
           <!-- <div class="nav_link arrow-down">
             <a
               :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"

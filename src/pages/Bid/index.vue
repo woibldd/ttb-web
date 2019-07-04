@@ -1,7 +1,7 @@
 <template>
   <div class="bid-container">
     <div class="bid-banner">
-      <div class="bid-text"></div>
+      <img :src="img">
     </div>
     <div class="bid-list">
       <div class="bid-list-item" v-for="(item, index) in list" :key="index" :data-id="'dataId-'+ item.id">
@@ -46,6 +46,7 @@
 import { getLocalTime } from './mixins'
 import Vue from 'vue'
 import axios from 'axios'
+import { state } from '../../modules/store'
 import service from '@/modules/service'
 // import { envApi } from '../../modules/request'
 export default {
@@ -56,11 +57,11 @@ export default {
         pageSize: 8
       },
       list: [],
-      total: 0
+      total: 0,
+      img: require('./assets/banner-' + state.locale + '.png')
     }
   },
   methods: {
-
     // testHeader(){
     //   return axios.get(url, {
     //     params: data,
@@ -115,7 +116,9 @@ export default {
   },
   created () {
     this.init(this.params)
-
+    this.img = require('./assets/banner-' + state.locale + '.png')
+  },
+  mounted () {
   }
 }
 </script>
@@ -133,7 +136,6 @@ $disabled-color: #B0B4B9;
   .bid-banner {
     position: relative;
     height: 400px;
-    background: url("./assets/zhongwen.png") center center no-repeat;
     background-size: cover;
   }
   .bid-list {
