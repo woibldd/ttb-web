@@ -1,25 +1,28 @@
 <template>
   <div class="bid-container">
+    <!--<div class="bid-banner">-->
+      <!--<div class="bid-con clearfix">-->
+        <!--<div class="banner-item-list">-->
+          <!--<img src="./assets/item-banner.png">-->
+        <!--</div>-->
+        <!--<div class="banner-item-text" v-for="(item, index) in hotList" :key="index">-->
+          <!--<div class="title">-->
+            <!--热门推荐-->
+          <!--</div>-->
+          <!--<p style="font-size: 16px;">{{ item.currency }} {{ item.product }}</p>-->
+          <!--<p style="font-size: 13px;">限期 {{ item.moneyDays }}天</p>-->
+          <!--<div class="rate">-->
+            <!--<h1>{{ item.annualizedReturns > 0 ? (Number(item.annualizedReturns)).toFixed(2) : 0 }}%</h1>-->
+            <!--<em>预计年化收益率</em>-->
+          <!--</div>-->
+          <!--<div class="btn">-->
+            <!--<el-button class="bid-btn"v-html="item.state === 1 ? '参与' : item.state === 2 ? '结束' : item.state === 3 ? '已售罄' : '抢购时间未到'"></el-button>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
     <div class="bid-banner">
-      <div class="bid-con clearfix">
-        <div class="banner-item-list">
-          <img src="./assets/item-banner.png">
-        </div>
-        <div class="banner-item-text" v-for="(item, index) in hotList" :key="index">
-          <div class="title">
-            热门推荐
-          </div>
-          <p style="font-size: 16px;">{{ item.currency }} {{ item.product }}</p>
-          <p style="font-size: 13px;">限期 {{ item.moneyDays }}天</p>
-          <div class="rate">
-            <h1>{{ item.annualizedReturns > 0 ? (Number(item.annualizedReturns)).toFixed(2) : 0 }}%</h1>
-            <em>预计年化收益率</em>
-          </div>
-          <div class="btn">
-            <el-button class="bid-btn"v-html="item.state === 1 ? '参与' : item.state === 2 ? '结束' : item.state === 3 ? '已售罄' : '抢购时间未到'"></el-button>
-          </div>
-        </div>
-      </div>
+      <img :src="img">
     </div>
     <div class="bid-list clearfix">
       <div class="bid-list-item" v-for="(item, index) in list" :key="index" :data-id="'dataId-'+ item.id">
@@ -84,7 +87,8 @@ export default {
       list: [],
       total: 0,
       hotList: [],
-      state
+      state,
+      img: require('./assets/banner-zh-CN.png')
     }
   },
   methods: {
