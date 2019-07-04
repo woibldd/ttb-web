@@ -63,7 +63,7 @@ export default {
       list: [],
       total: 0,
       state,
-     
+      // img: require('./assets/banner-zh-CN.png')
     }
   },
   computed: {
