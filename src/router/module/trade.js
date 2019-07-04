@@ -8,6 +8,7 @@ export const tradeRouter = [
     name: 'OTC',
     redirect: '/OTC/Trade',
     meta: {
+      require: true,
       nav: true,
       footer: true,
       class: 'dark'
