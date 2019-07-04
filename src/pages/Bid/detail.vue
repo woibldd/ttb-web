@@ -157,14 +157,14 @@ export default {
   },
   methods: {
     getAccountWalletList () {
-        this.accountBalance  = 0
+      this.accountBalance  = 0
       service.getAccountWalletList().then(res => {
         if (res.code === 0) {
           res.data.forEach((item) => {
             if (item.currency === this.cell.currency) {
-                console.log(item.currency)
-                console.log(this.cell.currency)
-                this.accountBalance = Number(item.available)
+              console.log(item.currency)
+              console.log(this.cell.currency)
+              this.accountBalance = Number(item.available)
             }
           })
         }
@@ -219,7 +219,11 @@ export default {
     this.cell = JSON.parse(window.localStorage.getItem('detail'))
     const remaining_amount = Number(this.cell.total) - Number(this.cell.lockedAmount)
     let c = Number(this.cell.lockedAmount) / (Number(this.cell.total) / 100)
-    Vue.set(this.cell, 'remaining_amount', remaining_amount)
+    if (this.cell.minLimit.indexOf('.') > 0) {
+      Vue.set(this.cell, 'remaining_amount', remaining_amount.toFixed(2))
+    } else {
+      Vue.set(this.cell, 'remaining_amount', remaining_amount)
+    }
     Vue.set(this.cell, 'down_amount', c)
     Vue.set(this.cell, 'max_limit', Number(this.cell.maxLimit))
     Vue.set(this.cell, 'min_limit', Number(this.cell.minLimit))
@@ -410,6 +414,9 @@ export default {
     }
     .el-timeline-item__content {
       font-size: 12px;
+    }
+    .el-progress.is-warning .el-progress-bar__inner {
+      background: $main-bg;
     }
     .buy-area {
       float: right;
