@@ -2,6 +2,7 @@
   <div class="bid-container">
     <div class="bid-banner">
       <img :src="img">
+      <img src="@/assets/guide-bg.jpg" alt="">
     </div>
     <div class="bid-list">
       <div class="bid-list-item" v-for="(item, index) in list" :key="index" :data-id="'dataId-'+ item.id">
@@ -63,14 +64,14 @@ export default {
       list: [],
       total: 0,
       state,
-      img: require('./assets/banner-zh-CN.png')
+      //img: require('./assets/banner-zh-CN.png')
     }
   },
-  // computed: {
-  //    img() {
-  //      return require('./assets/banner-' + state.locale + '.png')
-  //    }
-  // },
+  computed: {
+     img() {
+       return require('./assets/banner-' + state.locale + '.png')
+     }
+  },
   methods: {
     // testHeader(){
     //   return axios.get(url, {

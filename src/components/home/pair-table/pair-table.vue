@@ -9,6 +9,7 @@
           <el-tab-pane label="USDT" name="USDT"></el-tab-pane>
           <el-tab-pane label="BTC" name="BTC"></el-tab-pane>
           <el-tab-pane label="ETH" name="ETH"></el-tab-pane>
+          <el-tab-pane label="创新区" name="new"></el-tab-pane>
           <el-tab-pane label="ALL" name="all"></el-tab-pane>
         </el-tabs>
       </div>
