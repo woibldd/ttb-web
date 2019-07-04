@@ -97,7 +97,7 @@ export default {
       total: 0,
       hotList: [],
       state,
-      img: require('./assets/banner-zh-CN.png')
+      //img: require('./assets/banner-zh-CN.png')
     }
   },
   methods: {

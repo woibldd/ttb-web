@@ -48,9 +48,28 @@ export default {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1  
         })
       }
+      else if (this.tabSelected === 'new') { 
+        let excludeList = [
+          "BTC_USDT",
+          "EOS_BTC",
+          "EOS_USDT",
+          "ETH_BTC",
+          "ETH_USDT",
+        ]
+        let a = _.filter(list, pair => {
+          return excludeList.indexOf(pair.name) < 0 && pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
+        })
+        
+        a = _.sortBy(a, (item) => {
+          let value = this.getDelta(item.tick) || 0
+          return value * -1
+        })
+
+        return a
+      }
       else if (this.tabSelected === 'like') {
         return _.filter(list, pair => {
-          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 &&
+          return excludeList.toUpperCase().indexOf(this.search.toUpperCase()) > -1 &&
             (pair.like || false)
         })
       }
