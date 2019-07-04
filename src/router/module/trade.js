@@ -8,7 +8,6 @@ export const tradeRouter = [
     name: 'OTC',
     redirect: '/OTC/Trade',
     meta: {
-      require: true,
       nav: true,
       footer: true,
       class: 'dark'
@@ -20,6 +19,9 @@ export const tradeRouter = [
         path: 'trade',
         name: 'trade',
         component: () => import(/* webpackChunkName: "Fund" */ '@/components/OTC/Trade'),
+        meta: {
+          require: true
+        }
       },
       {
         path: 'FrenchBill',
