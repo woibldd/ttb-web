@@ -83,7 +83,7 @@
               <em @click="allMoney">{{$t('allin')}}</em>
             </div>
           </div>
-          <div class="tip">{{$t('bby_shouy18')}}<em>{{ money }}</em>ix</div>
+          <div class="tip">{{$t('bby_shouy18')}}<em>{{ money }}</em>{{cell.currency}}</div>
         </div>
         <button class="join-btn" :disabled="disabled" @click="submit">
           {{$t('bby_shouy20')}}
