@@ -49,6 +49,10 @@ import axios from 'axios'
 import { state } from '../../modules/store'
 import service from '@/modules/service'
 // import { envApi } from '../../modules/request'
+
+
+
+
 export default {
   data () {
     return {
