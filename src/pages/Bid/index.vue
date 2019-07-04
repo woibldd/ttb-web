@@ -234,8 +234,21 @@ $disabled-color: #B0B4B9;
       margin-top: 20px;
       transition: all .3s;
       background: #fff url("./assets/yuan.png") no-repeat;
-      background-position: 100% 20px;
+      background-position: 108% 20px;
       margin-right: 10px;
+      position: relative;
+      overflow: hidden;
+      &::after {
+          content: '';
+          width: 80px;
+          height: 80px;
+          position: absolute;
+          right: -30px;
+          bottom: -30px;
+          background:rgba(91, 203, 207, .1);
+          border-radius: 50%;
+          z-index: 1;
+      }
     //   span {
     //     color: $disabled-color;
     //   }
@@ -250,6 +263,8 @@ $disabled-color: #B0B4B9;
       .week-day {
         padding: 0 20px;
         color: #333;
+         position: relative;
+        z-index: 2;
         .title {
           overflow: hidden;
           font-size: 18px;
@@ -262,6 +277,8 @@ $disabled-color: #B0B4B9;
         }
       }
       .bottom {
+          position: relative;
+          z-index: 2;
           width: 100%;
           display: flex;
           align-content: center;
