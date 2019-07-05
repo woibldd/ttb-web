@@ -431,14 +431,14 @@ const utils = {
     }
     return Big(num).round(scale, rm).toString()
   },
-  toFixed (num, scale = 8, rm = consts.ROUND_DOWN) {
-    if (typeof num === 'undefined') {
+  toFixed (num, scale = 8, rm = consts.ROUND_DOWN) { 
+    if (isNaN(Number(num))) {
       return 0
     }
     return Big(num).round(scale, rm).toFixed(scale)
   },
   toNum (num) {
-    if (typeof num === 'undefined') {
+    if (isNaN(Number(num))) {
       return 0
     }
     return +Big(num).toFixed(12)
