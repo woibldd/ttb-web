@@ -86,8 +86,14 @@
           <div class="title">{{$t('bby_shouy17')}}</div>
           <div class="ipt-inner">
             <!--<input type="number" :placeholder="$t('bby_shouy19')" @input="inputKeyBoard" />-->
-            <el-input-number v-model.number="count" :min="Number(cell.minLimit)" @change="inputKeyBoard"
-                             :max="Number(cell.maxLimit)" label="请输入存币数量"  :controls="controls"></el-input-number>
+            <!-- <el-input-number v-model.number="count" :min="Number(cell.minLimit)" @change="inputKeyBoard"
+                             :max="Number(cell.maxLimit)" label="请输入存币数量"  :controls="controls"></el-input-number> -->
+                             <number-input
+                    class="number-input"
+                    v-model="count"
+                    :scale="point"
+                    placeholder="请输入存币数量"
+                />
             <div class="rage">
               <span class="cell">{{cell.currency}}</span>
               <em @click="allMoney">{{$t('allin')}}</em>
@@ -162,7 +168,8 @@ export default {
         }]
       },
       disabled: true,
-      cell: {}
+      cell: {},
+      point: 0
     }
   },
   mounted() {
@@ -277,11 +284,14 @@ methods: {
     this.getAccountWalletList()
     if(this.cell.minLimit.indexOf('.') > 0) {
          let minArr = this.cell.minLimit.split('.')
-         this.money = (Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * this.count).toFixed(minArr[1].length + 2)
-         console.log(Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * Number(this.count), 1)
+         console.log('888888888888888888888888888888888888888')
+         this.money =  this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(minArr[1].length + 2, 0).toString()
+        //  this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(minArr[1].length + 2, 0)
+        //  console.log(Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * Number(this.count), 1)
+         this.point = minArr[1].length
     } else {
-        this.money = (Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * this.count).toFixed(2)
-         console.log(this.money, 2)
+        this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
+        //  console.log(this.money, 2)
     }
     let timestamp = Date.parse(new Date())
     if (this.cell.state === 1) {
