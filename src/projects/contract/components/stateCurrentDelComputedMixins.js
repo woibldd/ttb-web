@@ -27,6 +27,6 @@ export default {
     },
     currentDel () { 
       return this.state.ct.currentDelList[this.symbol] || []
-    },
+    }, 
   }
 }
