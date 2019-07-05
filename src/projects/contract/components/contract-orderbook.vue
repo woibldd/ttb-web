@@ -79,7 +79,7 @@
               <em
                 class="pointer"
                 v-tooltip.top-center="{html: true, content: $t('contract_index_price_tips'), classes: 'contract'}"
-                @click="jumpToHistory">{{ indexPrice }}</em>
+                @click="jumpToHistory">{{ indexPrice   }}</em>
               /
               <em
                 class="pointer"
@@ -201,7 +201,7 @@ export default {
     },
     pair () {
       return this.state.ct.pair
-    },
+    }, 
     priceScale () {
       let scale = _.get(this, 'state.ct.pairInfo.price_scale', 4) - this.offset
       if (this.offset !== 0 && this.accuracy === 2) {
@@ -268,8 +268,7 @@ export default {
       this.onGroupChange()
       this.changeDepthNumber(this.deepthData)
     },
-    changeDepthNumber (data){
-      console.log({data})
+    changeDepthNumber (data){ 
       let bidsOne = []
       let asksOne = []
       if (this.pair === 'FUTURE_BTCUSD') {

@@ -584,56 +584,8 @@ export default {
             if (res.message != "OK" && res.data == null) {
               state.loadingfailed = true;
             } else if (!res.code) {
-              //console.log(res.data.data, params)
-              if (tab === "contract_history_position") { 
-                // 持仓数据存储到state中
-                // let holding = this.state.ct.holding
-                // holding = res.data
-                // res.data = [
-                //   {
-                //     adl: 1,
-                //     available: "88.022514586509356366",
-                //     available_balance: "74.853137557081356366",
-                //     buy: true,
-                //     currency: "BTCUSD",
-                //     future_close_id: 0,
-                //     holding: "1000000",
-                //     leverage: "10",
-                //     liq_price: "6994.5",
-                //     margin_delegation: "0.02",
-                //     margin_position: "13.057832204",
-                //     margin_user: "0",
-                //     price: "7658.23901204",
-                //     realized: "-0.05490974277195137",
-                //     realized_last: "-0.052155673135018327",
-                //     risk_limit: 200,
-                //     sell: false,
-                //     state: 0,
-                //     unrealized: "4.82111906",
-                //     user_id: "940951",
-                //   }, 
-                //   {
-                //     adl: 1,
-                //     available: "88.022514586509356366",
-                //     available_balance: "74.853137557081356366",
-                //     buy: false,
-                //     currency: "VDSUSD",
-                //     future_close_id: 0,
-                //     holding: "-666666",
-                //     leverage: "10",
-                //     liq_price: "6994.5",
-                //     margin_delegation: "0.02",
-                //     margin_position: "30.057832204",
-                //     margin_user: "0",
-                //     price: "7658.23901204",
-                //     realized: "-0.05490974277195137",
-                //     realized_last: "-0.052155673135018327",
-                //     risk_limit: 200,
-                //     sell: true,
-                //     state: 0,
-                //     unrealized: "4.82111906",
-                //     user_id: "940951"}
-                //   ]
+              console.log('res.data.data, paramsfffffffffffffffffffffffffffffffffff')
+              if (tab === "contract_history_position") {  
                 let holdingList = null; 
                 let cholding = {}
                 if(res.data && res.data.length > 0){ 
@@ -698,7 +650,8 @@ export default {
       let pairInfoList = this.state.ct.pairInfoList
 
       let holdingList = list.map(holding => {
-        //币种不同算法不一样， 
+        //币种不同算法不一样，
+       
         if (holding.currency === 'BTCUSD') {
           holding.unit = '1 USD'
           holding.symbol = 'BTC' 
