@@ -906,8 +906,7 @@ export default {
     font-size: 14px;
     color: white;
   }
-  .link-group {
-  }
+ 
   .link {
     font-size: 12px;
     text-align: center;
@@ -951,8 +950,7 @@ export default {
           }
         }
       }
-      tr:nth-of-type(odd) {
-      }
+ 
 
       .tab__button {
         color: $primary;

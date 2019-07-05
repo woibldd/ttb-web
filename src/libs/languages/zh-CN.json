@@ -973,7 +973,7 @@
     "account_transfer_come_on": "划入划出",
     "wallet_balance":"钱包余额",
     "unrealized_profit_and_loss":"未实现盈亏",
-    "transfer_to_bibi_account":"提币请划转至币币交易账户",
+    "transfer_to_bibi_account":"提币请划转至资金账户",
     "transfer_from":"从",
     "transfer_to":"转至",
     "account_fund_remained":"（余额为： %{amount} %{unit}）",

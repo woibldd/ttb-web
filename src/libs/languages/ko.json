@@ -977,7 +977,7 @@
     "account_transfer_come_on": "수입과 지출을 구분",
     "wallet_balance": "지갑 잔액",
     "unrealized_profit_and_loss": "미 실현 손익",
-    "transfer_to_bibi_account": "인출은 화폐 거래 계좌로 이체해 주십시오",
+    "transfer_to_bibi_account": "자금을 자금 계좌로 이체하십시오.",
     "transfer_from": "에서",
     "transfer_to": "옮기다",
     "account_fund_remained": "（잔액은 ： %{amount} %{unit}）",

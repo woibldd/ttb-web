@@ -261,8 +261,9 @@ methods: {
     this.cell = JSON.parse(window.localStorage.getItem('detail'))
     const remaining_amount = Number(this.cell.total) - Number(this.cell.lockedAmount)
     let c = Number(this.cell.lockedAmount) / (Number(this.cell.total) / 100)
-    if (this.cell.minLimit.indexOf('.') > 0) {
-      Vue.set(this.cell, 'remaining_amount', remaining_amount.toFixed(2))
+    if (this.cell.lockedAmount.indexOf('.') > 0) {
+        let minArr = this.cell.lockedAmount.split('.')
+      Vue.set(this.cell, 'remaining_amount', remaining_amount.toFixed(minArr[1].length))
     } else {
       Vue.set(this.cell, 'remaining_amount', remaining_amount)
     }

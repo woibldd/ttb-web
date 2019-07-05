@@ -1100,7 +1100,7 @@
 "account_transfer_come_on": "draw in/out",
 "wallet_balance": "wallet balance",
 "unrealized_profit_and_loss": "Yet to be realized profit and loss",
-"transfer_to_bibi_account": "Transferred to coin-to-coin account when making withdrawal",
+"transfer_to_bibi_account": "Please transfer the funds to the fund account",
 "transfer_from": "Transferred from",
 "transfer_to": "Transferred to",
 "account_fund_remained": "（Balance is： %{amount} %{unit}）",

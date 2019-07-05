@@ -967,7 +967,7 @@
   "account_transfer_come_on": "劃入劃出",
   "wallet_balance": "錢包餘額",
   "unrealized_profit_and_loss": "未實現盈虧",
-  "transfer_to_bibi_account": "提幣請劃轉至幣幣交易賬戶",
+  "transfer_to_bibi_account": "提幣請劃轉至資金賬戶",
   "transfer_from": "從",
   "transfer_to": "轉至",
   "account_fund_remained": "（餘額為： %{amount} %{unit}）",
