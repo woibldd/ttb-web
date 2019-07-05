@@ -81,7 +81,7 @@
              <i
                 v-else-if="scope.row[hd.key] === 'NEWOS'"
                 class="airdrop"
-                v-tooltip.top-start="{html: true, content: $t('bnl_tips'), classes: 'assets'}"
+                v-tooltip.top-start="{html: true, content: $t('newos_tips'), classes: 'assets'}"
               >
                 {{scope.row[hd.key]}}
                 <icon class="question" name="question-x"/>

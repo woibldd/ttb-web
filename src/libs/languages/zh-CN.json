@@ -1714,7 +1714,10 @@
   "transfer_all":"全部",
   "withdraw_tips1":"请完善你的资料",
   "idt_tips":"空投部分ITD每日系統解凍釋放2%",
-  "dfd_tips":"空投部分ITD每日系統解凍釋放5%",
+  "dfd_tips":"空投部分DFD每日系統解凍釋放5%",
+
+  "newos_tips": "空投部分NEWOS每日系統解凍釋放3%",
+  
   "home_optional": "自选",
   "bnl_tips": "空投部分BNL每日系統解凍釋放3%",
  

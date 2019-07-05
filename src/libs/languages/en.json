@@ -1815,9 +1815,12 @@
 "transfer_all":" all",
 "withdraw_tips1":"Please complete your particulars",
 "idt_tips":  "System will releases 2% daily of ITD  airdrop amounts ",
-"dfd_tips":  "System will releases 5% daily of ITD  airdrop amounts ",
+"dfd_tips":  "System will releases 5% daily of DFD  airdrop amounts ",
 "home_optional": "Optional",
 "bnl_tips": "System will releases 3% daily of BNL  airdrop amounts ",
+
+"newos_tips": "System will releases 3% daily of NEWOS  airdrop amounts ",
+
 "suvbanean":"Transfer",
 "teansdasda": "transaction history",
 "otc_buy_step_1": "Place an order",
