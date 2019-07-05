@@ -25,7 +25,7 @@
             <img src="@/assets/hot.png" alt style="position: relative;top: 5px;left: 5px;">
           </router-link>
           <router-link
-            to="/bid"
+            to="/snowball"
             class="nav_link  ml-30">
             {{$t('bidTitle')}}
           </router-link>
