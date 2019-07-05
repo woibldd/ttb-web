@@ -1100,7 +1100,7 @@
 "account_transfer_come_on": "draw in/out",
 "wallet_balance": "wallet balance",
 "unrealized_profit_and_loss": "Yet to be realized profit and loss",
-"transfer_to_bibi_account": "Transferred to coin-to-coin account when making withdrawal",
+"transfer_to_bibi_account": "Please transfer the funds to the fund account",
 "transfer_from": "Transferred from",
 "transfer_to": "Transferred to",
 "account_fund_remained": "（Balance is： %{amount} %{unit}）",
@@ -1815,9 +1815,12 @@
 "transfer_all":" all",
 "withdraw_tips1":"Please complete your particulars",
 "idt_tips":  "System will releases 2% daily of ITD  airdrop amounts ",
-
+"dfd_tips":  "System will releases 5% daily of DFD  airdrop amounts ",
 "home_optional": "Optional",
 "bnl_tips": "System will releases 3% daily of BNL  airdrop amounts ",
+
+"newos_tips": "System will releases 3% daily of NEWOS  airdrop amounts ",
+
 "suvbanean":"Transfer",
 "teansdasda": "transaction history",
 "otc_buy_step_1": "Place an order",
@@ -2134,11 +2137,11 @@
 "bby_shouy31":"purchased successful",
 "bby_shouy32":"Insufficient balance, Please deposit top-up",
 
-"bby_shouy22":"1.Deposit & Earn is financial products based on digital assets, each project has a corresponding lock cycle and interest rate, you can choose to buy, lock the principal after the purchase, and calculate the interest according to the agreed time.",
-"bby_shouy23":"2.Log in the official website of IXX.COM, click the link, select the coin  you need to lock according to your own situation, click “ Buy” to participate in the project of depositing COINS. Currently, depositing COINS does not support unlocking in advance, and the system will automatically unlock the amount you locked after the end of the lock period and pay the interest.",
-"bby_shouy24":"3.All participating projects have a fixed start and end time for interest calculation, during which time you can calculate your income. The interest calculating time can be viewed on the page.",
-"bby_shouy25":"4.After the end of the project, the system will start to issue the returns of successively. Due to the large number of participants, your income may be delayed to issue. Please be patient. You can view interest income in Asset Records.",
-"bby_shouy26":"5.The assets which have participated with Deposit & Earn, will not participate in other rewards.",
-"bby_shouy27":"6. Calculation of return: days  /365* annual return * amount of deposit = gain from deposit this time", "bidImg": "zhongwen_bj",
+"bby_shouy22":"1.“Deposit & Earn“ (D&E) is financial products based on digital assets, each project has a corresponding lock cycle and interest rate, you can choose to buy, lock the principal after the purchase, and calculate the interest according to the agreed time.",
+"bby_shouy23":"2. Log in the official website of IXX.COM, click the link, select the coin  you need to lock according to your own situation, click “ Buy” to participate in the project of depositing COINS. Currently, depositing COINS does not support unlocking in advance, and the system will automatically unlock the amount you locked after the end of the lock period and pay the interest.",
+"bby_shouy24":"3. All participating projects have a fixed start and end time for interest calculation, during which time you can calculate your income. The interest calculating time can be viewed on the page.",
+"bby_shouy25":"4. After the end of the project, the system will start to issue the returns of successively. Due to the large number of participants, your income may be delayed to issue. Please be patient. You can view interest income in Asset Records.",
+"bby_shouy26":"5. Calculation of returns: days  /365* annual return * amount of deposit = gain from deposit this time.",
+
 "bidTitle": "Deposit&earn"
 }
