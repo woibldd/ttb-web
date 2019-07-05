@@ -2080,7 +2080,10 @@
     "bby_shouy99":"币币返佣金额",
     "bby_shouy98":"合约返佣金额",
     "bby_shouy32":"余额不足，请充币",
-    "bidTitle": "币盈盈"
+    "bidTitle": "币盈盈",
+
+     
+    "contract_FUTURE_BHDUSD":"BHD永续" 
   }
 
 

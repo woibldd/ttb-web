@@ -114,13 +114,28 @@ export default {
         find.tick = item
       }
       if (item.pair === this.state.ct.pair) {  
-        this.state.ct.pairTick = item
-        // this.state.ct.indexTick = Object.assign({...item}, {
-        //   current: (Number(item.current) * 1.1).toFixed(2).toString()
-        // })
-        // this.state.ct.markTick = Object.assign({...item}, {
-        //   current: (Number(item.current) * 0.9).toFixed(2).toString()
-        // })
+        this.state.ct.pairTick = item 
+      }
+
+      if (item.pair.indexOf('INDEX') > -1) {
+        if (item.pair.indexOf(this.state.ct.symbol) > -1) { 
+          this.state.ct.indexTick = {
+            current: item.current
+          }  
+        } 
+        this.state.ct.indexTickList[item.pair.replace('INDEX_','')] =  item.current
+      } else if (item.pair.indexOf('FUTURE') > -1) { 
+        this.state.ct.lastPriceList[item.pair.replace('FUTURE_','')] =  item.current
+        
+        this.$eh.$emit("socket:price:update", item)
+      } else if (item.pair.indexOf('MARKET') > -1) {
+        if (item.pair.indexOf(this.state.ct.symbol) > -1) {
+          this.state.ct.markTick = {
+            current: item.current
+          }   
+        }  
+        this.$eh.$emit("socket:price:update", item)
+        this.state.ct.markTickList[item.pair.replace('MARKET_','')] =  item.current
       }
     },
     stateSortBy (key) {

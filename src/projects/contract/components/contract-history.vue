@@ -464,14 +464,16 @@ export default {
         //   }, {
         //     title: 'contract_freezing_quota',
         //     width: '',
-        //     key: '---'
-
+        //     key: '---' 
         //   }]
         // }
       ],
       activeList: [],
       refreshTime: 0,
-      isLoginOverdue: false
+      isLoginOverdue: false,
+      indexList: {},
+      lastList: {},
+      marketList: {},
     };
   },
   computed: {
@@ -480,7 +482,17 @@ export default {
     },
     isLogin() {
       return !!this.state.userInfo;
+    },
+    // currentDel() {
+    //   return this.state.ct.currentDelList["BTCUSD"]
+    // },
+    holdingValue() {
+
+    },
+    markTickList() {
+      return this.state.ct.markTickList
     }
+    
   },
   components: {
     historyTable
@@ -534,16 +546,18 @@ export default {
       const tab = this.current;
       let func = null;
       let params = {
-        symbol: this.state.ct.pair,
+        // symbol: this.state.ct.pair,
         page: this.page,
         size: this.size
       };
       switch (tab) {
         case "contract_history_position":
-          params = {
-            symbol: this.state.ct.product_name
-          };
-          func = service.getContractBalanceByPair;
+          //这里需要获取全部的币对持仓
+          // params = {
+          //   symbol: this.state.ct.product_name
+          // };
+          // func = service.getContractBalanceByPair;
+          func = service.getContractBalanceList 
           break;
         case "contract_has_equal_pos":
           func = service.getClosedposition;
@@ -571,21 +585,78 @@ export default {
               state.loadingfailed = true;
             } else if (!res.code) {
               //console.log(res.data.data, params)
-              if (tab === "contract_history_position") {
+              if (tab === "contract_history_position") { 
                 // 持仓数据存储到state中
                 // let holding = this.state.ct.holding
                 // holding = res.data
-                let holding = res.data;
-                this.state.ct.holding = holding;
-                if (holding && holding.holding && holding.holding != 0) {
+                // res.data = [
+                //   {
+                //     adl: 1,
+                //     available: "88.022514586509356366",
+                //     available_balance: "74.853137557081356366",
+                //     buy: true,
+                //     currency: "BTCUSD",
+                //     future_close_id: 0,
+                //     holding: "1000000",
+                //     leverage: "10",
+                //     liq_price: "6994.5",
+                //     margin_delegation: "0.02",
+                //     margin_position: "13.057832204",
+                //     margin_user: "0",
+                //     price: "7658.23901204",
+                //     realized: "-0.05490974277195137",
+                //     realized_last: "-0.052155673135018327",
+                //     risk_limit: 200,
+                //     sell: false,
+                //     state: 0,
+                //     unrealized: "4.82111906",
+                //     user_id: "940951",
+                //   }, 
+                //   {
+                //     adl: 1,
+                //     available: "88.022514586509356366",
+                //     available_balance: "74.853137557081356366",
+                //     buy: false,
+                //     currency: "VDSUSD",
+                //     future_close_id: 0,
+                //     holding: "-666666",
+                //     leverage: "10",
+                //     liq_price: "6994.5",
+                //     margin_delegation: "0.02",
+                //     margin_position: "30.057832204",
+                //     margin_user: "0",
+                //     price: "7658.23901204",
+                //     realized: "-0.05490974277195137",
+                //     realized_last: "-0.052155673135018327",
+                //     risk_limit: 200,
+                //     sell: true,
+                //     state: 0,
+                //     unrealized: "4.82111906",
+                //     user_id: "940951"}
+                //   ]
+                let holdingList = null; 
+                let cholding = {}
+                if(res.data && res.data.length > 0){ 
+                  holdingList = res.data 
+                  holdingList.map(item => {
+                    if (item.currency === state.ct.symbol) {
+                      cholding = item
+                    } 
+                  }) 
+                  state.ct.holding = cholding
+                  state.ct.holdingList = holdingList
+                  state.ct.computeHoldingList = this.computeHoldingList(holdingList)
+                } 
+                this.tableData = res.data
+                if (holdingList && holdingList.length) {
                   this.setTabDataCount(tab, 1);
                 } else {
                   this.setTabDataCount(tab, 0);
                 }
-                // //如果存在future_close_id，则更新平仓价格
-                if (!!holding.future_close_id) {
+                // 如果存在future_close_id，则更新平仓价格
+                if (!!cholding.future_close_id) {
                   //this.setClearCommitPrice(holding.future_close_id)
-                  this.state.ct.curCommitPrice = holding.close_position_price;
+                  this.state.ct.curCommitPrice = cholding.close_position_price;
                 }
               }
               // 当前委托, 委托历史, 已成交需要分页,返回值不同;
@@ -610,7 +681,8 @@ export default {
               this.tableData = res.data;
             }
           })
-          .catch(() => {
+          .catch((err) => {
+            console.log({err})
             state.loadingfailed = true;
           })
           .finally(() => {
@@ -619,6 +691,172 @@ export default {
           });
       }
       // this.fetchActiveList()
+    }, 
+    computeHoldingList(list) { 
+      let markPriceList = this.state.ct.markTickList
+      let lastPriceList = this.state.ct.lastPriceList
+      let pairInfoList = this.state.ct.pairInfoList
+
+      let holdingList = list.map(holding => {
+        //币种不同算法不一样， 
+        if (holding.currency === 'BTCUSD') {
+          holding.unit = '1 USD'
+          holding.symbol = 'BTC' 
+        // } else if (holding.currency === 'VDSUSD') {
+        //   holding.unit =  this.$big(this.lastPrice).mul(this.currencyMul).toString() + ' BTC'
+        //   holding.symbol = 'VDS'
+        } else if (!!holding.currency) { 
+          let pair = pairInfoList['FUTURE_'+holding.currency]
+          if (!pair) { 
+            holding.unit = ''
+            holding.symbol = ''
+            return holding
+          } 
+          let last = lastPriceList[holding.currency] || 0 
+          holding.unit = this.$big(last).mul(pair.multiplier || 0).toString() + ' BTC'
+          holding.symbol = holding.currency.replace('USD','')
+        } else {
+          holding.unit = ''
+          holding.symbol = ''
+        }
+        let symbol = holding.symbol  
+        let currency = holding.currency
+        let unitPrice = 1 //单价 先写死
+        if (holding) {
+          // hack
+          holding.amount = holding.holding || '0'
+          holding.value = '0'
+        } else {
+          holding = {
+            amount: '0',
+            available_balance: '0',
+            value: '0'
+          }
+        }
+        //console.log('asdflasdjflksjdflj')
+        if (holding && holding.holding && lastPriceList[holding.currency] !== '--' && lastPriceList[holding.currency] != 0) { 
+          //console.log({test: this.pairInfoList})
+          let pairInfo = pairInfoList['FUTURE_'+holding.currency]  
+          if (!pairInfo) {
+            return holding
+          }
+          let lastPrice = lastPriceList[holding.currency]// this.lastPrice
+          let markPrice = markPriceList[holding.currency]  // this.markPrice  
+          let mul = pairInfo.multiplier
+          holding.pairInfo = pairInfo
+          holding.lastPrice = lastPrice
+          holding.markPrice = markPrice
+          holding.product_name = pairInfo.product_name
+          holding.value_scale = pairInfo.value_scale
+          holding.price_scale = pairInfo.price_scale
+
+          if (!holding.changeUnwindPrice) { 
+            //最小步算法
+            let accuracy = pairInfo.accuracy || 1
+            let scale = pairInfo.price_scale || 4
+            const minStep = Math.pow(10, -scale) * accuracy
+            let $newValue = this.$big( markPrice || 0)
+            if (!$newValue.mod(minStep).eq(0)) {
+              $newValue = $newValue.div(minStep).round(scale >= 1 ? scale - 1 : 0, 0).mul(minStep)
+            }
+            holding.unwindPrice = $newValue
+          }  
+          //unrealized 未实现盈亏
+          //roe 回报率
+          //unrealizedlp预测未实现盈亏
+          //rowlp 预测回报率
+          //BTC 
+          // let {amount, price} = holding
+          // if (currency === 'BTCUSD') {
+          //   if(holding.amount > '0' ){ 
+          //     holding.unrealized = this.$big(amount).div(price).minus(this.$big(amount).div(markPrice))
+          //     holding.unrealizedlp = this.$big(amount).div(price).minus(this.$big(amount).div(lastPrice))
+          //   } else if (holding.amount < 0) { 
+          //     holding.unrealized = this.$big(amount).abs().div(markPrice).minus(amount.abs().div(price))
+          //     holding.unrealizedlp = this.$big(amount).abs().div(lastPrice).minus(amount.abs().div(price))
+          //   } else {
+          //     holding.unrealized = this.$big('0')
+          //     holding.unrealizedlp = this.$big('0')
+          //   }
+
+          //   if (this.$big(amount || 0).eq(0) || this.$big(price || 0).eq(0)) {
+          //     holding.roe = this.$big('0')
+          //     holding.roelp = this.$big('0')
+          //   }
+          //   else {
+          //     holding.roe = holding.unrealized
+          //         .div((this.$big(amount).abs()).div(price))
+          //         .mul(holding.leverage == 0 ? 100 : holding.leverage)
+          //         .mul(100)
+          //         .toFixed(2) 
+          //     holding.roelp = holding.unrealizedlp
+          //         .div((this.$big(amount).abs()).div(price))
+          //         .mul(holding.leverage == 0 ? 100 : holding.leverage)
+          //         .mul(100)
+          //         .toFixed(2) 
+          //   } 
+          // }
+          // //VDS BHD
+          // else {
+          //   //VDS未实现盈亏计算   //乘数（0.0001BTC）
+          //   //多：（VDSUSD 标记价格 - VDSUSD 开仓价格）* 比特币乘数 * 合约数量  
+          //   //空：（ VDSUSD 开仓价格- VDSUSD 标记价格）* 比特币乘数 * 合约数量 
+          //   if(amount > 0) { 
+          //     holding.unrealized = this.$big(markPrice).minus(price).mul(mul).mul(amount)
+          //     holding.unrealizedlp = this.$big(lastPrice).minus(price).mul(mul).mul(amount)
+          //   } else if (amount < 0) {
+          //     holding.unrealized = this.$big(price).minus(markPrice).mul(mul).mul(amount)
+          //     holding.unrealizedlp = this.$big(price).minus(lastPrice).mul(mul).mul(amount)
+          //   } else {
+          //     holding.unrealized = this.$big('0')
+          //     holding.unrealizedlp = this.$big('0')
+          //   } 
+
+            
+          //   if (this.$big(amount || 0).eq(0) || this.$big(price || 0).eq(0)) {
+          //     holding.roe = this.$big('0')
+          //     holding.roelp = this.$big('0')
+          //   }
+          //   else { 
+          //     holding.roe = holding.unrealized
+          //         .div((this.$big(amount).abs()).div(price))
+          //         .mul(holding.leverage == 0 ? 20 : holding.leverage)
+          //         .mul(100)
+          //         .toFixed(2) 
+          //     holding.roelp = holding.unrealizedlp
+          //         .div((this.$big(amount).abs()).div(price))
+          //         .mul(holding.leverage == 0 ? 20 : holding.leverage)
+          //         .mul(100)
+          //         .toFixed(2) 
+          //   }
+          // } 
+
+
+          // //value 价值
+          // if(!isNaN(Number(markPrice))) { 
+          //   if (currency === 'BTCUSD') {
+          //     holding.value = this.$big(amount).div(markPrice || 0).mul(unitPrice).round(pairInfo.value_scale || 4).abs().toString()
+          //   }
+          //   else {
+          //     holding.value = this.$big(price || 0).mul(mul).toString()
+          //   }
+          // }
+  
+          holding.margin_position = this.$big(holding.margin_position || 0).round(pairInfo.value_scale || 4).toString()
+          // 动态保证金
+          holding.margin = this.$big(holding.margin_position || 0).plus(holding.unrealized).round(pairInfo.value_scale || 4).toString()
+          // 保证金余额=用户当前还可用于开仓的保证金数量=账户权益-仓位保证金-委托保证金。
+          holding.margin_available = this.$big(holding.available || 0).minus(holding.margin_position || 0).minus(holding.margin_delegation || 0).round(pairInfo.value_scale || 4, this.C.ROUND_DOWN).toString()
+  
+          holding.canRemoveMargin = holding.margin_user
+          holding.canAddMargin = holding.available_balance
+          // 保证金占比
+          holding.marginPercent = holding.available == 0 ? '0.00' : this.$big(holding.margin_delegation || 0).div(holding.available).mul(100).round(2).toString()
+  
+        }
+        return holding
+      }) 
+      return holdingList
     },
     //更新平仓价格
     async setClearCommitPrice(commitid) {
@@ -701,8 +939,7 @@ export default {
     },
     setTabDataCount(name, count) {
       let item = this.nav.find(item => item.name === name);
-      if (item) {
-        console.log(item);
+      if (item) { 
         item.dataCount = count;
       }
     },
@@ -770,12 +1007,23 @@ export default {
           size: 200
         };
         service.getActiveorders(params).then(res => {
-          if (!res.code) {
-            this.state.ct.currentDel = res.data.data;
+          if (!res.code && !!res.data) {
+            // console.log({res: res.data})
+            // this.state.ct.currentDel = res.data.data;
+            this.state.ct.currentDelList = {}
+            res.data.data.map(item => {
+              if (this.state.ct.currentDelList[item.currency]) {
+                this.state.ct.currentDelList[item.currency].push(item)
+              } else {
+                this.state.ct.currentDelList[item.currency] = []
+                this.state.ct.currentDelList[item.currency].push(item)
+              }
+            })
             this.setTabDataCount(tab, res.data.total);
           }
         });
-        return this.state.ct.currentDel; 
+        // return this.state.ct.currentDel; 
+        return this.state.ct.currentDelList; 
       }, 1000);
     },
     //刷新委托历史数量
@@ -790,7 +1038,7 @@ export default {
         size: 1
       };
       await service.getOrderhistory(params).then(res => {
-        if (!res.code) { 
+        if (!res.code && !!res.data) { 
           this.setTabDataCount(tab, res.data.total);
         }
       }); 
@@ -825,7 +1073,159 @@ export default {
       })
       ; 
     },
+    //holding更换成list之后使用computed属性会导致无限循环的问题；
+    //所以这里是用method来处理原先的计算属性
+    holdingComputedData(item) {
+      // console.log({item})
+      let type = item.pair.split('_')[0]
+      let name = item.pair.split('_')[1]
+      let hlist = this.state.ct.computeHoldingList
+      // if (type.indexOf("INDEX") > -1) {
+      //   if (this.indexList[name] === item.current) {
+      //     return
+      //   }
+      //   this.indexList[name] = item.current 
+      //   hlist.map(holding => {
+      //     if(holding.currency === 'BTCUSD') {  
+      //     }
+      //   })
+      // console.log({hlist})
+      // } else 
+      if (type.indexOf("MARKET")) {
+        //值没有发生变化的时候直接跳出
+        if (this.marketList[name] === item.current) return
+        
+        this.marketList[name] = item.current 
+        if (!!this.lastList[name]) {
+          hlist.map(holding => {
+            if (holding.currency === name) { 
+              if (!!holding.pairInfo){
+                this.holdingModify(holding, this.marketList[name], this.lastList[name])
+              }
+            }
+          }) 
+        } 
+      } else if (type.indexOf("FUTURE")) {
+        //值没有发生变化的时候直接跳出
+        if (this.lastList[name] === item.current) return 
+        this.lastList[name] = item.current 
+        if (!!this.marketList[name]) {
+          hlist.map(holding => {
+            if (holding.currency === name) {
+              if (!!holding.pairInfo){
+                this.holdingModify(holding, this.marketList[name], this.lastList[name])
+              }
+            }
+          }) 
+        } 
+      } 
+    },
+    holdingModify(holding, markPrice, lastPrice) {
+      let {amount, price, currency} = holding
+      let mul = holding.pairInfo.multiplier
+      //计算价值
+      let value = "0"
+      if(currency === 'BTCUSD') {  
+        let unitPrice = 1 //单价 先写死
+        value = this.$big(amount).div(markPrice || 0).mul(unitPrice).round(holding.pairInfo.value_scale || 4).abs().toString()
+        this.$set(holding, "value", value)
+      }
+      else {
+        value = this.$big(holding.price || 0).mul(mul).toString()
+        this.$set(holding, "value", value)
+      }
+      //计算未实现盈亏/预测盈亏
+      let unrealized, unrealizedlp, roe, roelp
+      if (currency === 'BTCUSD') {
+        if(holding.amount > '0' ){ 
+          unrealized = this.$big(amount).div(price).minus(this.$big(amount).div(markPrice))
+          unrealizedlp = this.$big(amount).div(price).minus(this.$big(amount).div(lastPrice))
+          
+        this.$set(holding, "unrealized", unrealized)
+        this.$set(holding, "unrealizedlp", unrealizedlp)
+        } else if (holding.amount < 0) { 
+          unrealized = this.$big(amount).abs().div(markPrice).minus(amount.abs().div(price))
+          unrealizedlp = this.$big(amount).abs().div(lastPrice).minus(amount.abs().div(price))
+          this.$set(holding, "unrealized", unrealized)
+          this.$set(holding, "unrealizedlp", unrealizedlp)
+        } else {
+          unrealized = this.$big('0')
+          unrealizedlp = this.$big('0')
+          this.$set(holding, "unrealized", unrealized)
+          this.$set(holding, "unrealizedlp", unrealizedlp)
+        }
 
+        if (this.$big(amount || 0).eq(0) || this.$big(price || 0).eq(0)) {
+          roe = this.$big('0')
+          roelp = this.$big('0')
+          this.$set(holding, "roe", roe)
+          this.$set(holding, "roelp", roelp)
+        }
+        else {
+          roe = holding.unrealized
+              .div((this.$big(amount).abs()).div(price))
+              .mul(holding.leverage == 0 ? 100 : holding.leverage)
+              .mul(100)
+              .toFixed(2) 
+          roelp = holding.unrealizedlp
+              .div((this.$big(amount).abs()).div(price))
+              .mul(holding.leverage == 0 ? 100 : holding.leverage)
+              .mul(100)
+              .toFixed(2) 
+          
+          this.$set(holding, "roe", roe)
+          this.$set(holding, "roelp", roelp)
+        } 
+      }
+      //VDS BHD
+      else {
+        //VDS未实现盈亏计算   //乘数（0.0001BTC）
+        //多：（VDSUSD 标记价格 - VDSUSD 开仓价格）* 比特币乘数 * 合约数量  
+        //空：（ VDSUSD 开仓价格- VDSUSD 标记价格）* 比特币乘数 * 合约数量 
+        if(amount > 0) { 
+          holding.unrealized = this.$big(markPrice).minus(price).mul(mul).mul(amount)
+          holding.unrealizedlp = this.$big(lastPrice).minus(price).mul(mul).mul(amount)
+        } else if (amount < 0) {
+          holding.unrealized = this.$big(price).minus(markPrice).mul(mul).mul(amount)
+          holding.unrealizedlp = this.$big(price).minus(lastPrice).mul(mul).mul(amount)
+        } else {
+          holding.unrealized = this.$big('0')
+          holding.unrealizedlp = this.$big('0')
+        } 
+
+        
+        if (this.$big(amount || 0).eq(0) || this.$big(price || 0).eq(0)) {
+          holding.roe = this.$big('0')
+          holding.roelp = this.$big('0')
+        }
+        else { 
+          holding.roe = holding.unrealized
+              .div((this.$big(amount).abs()).div(price))
+              .mul(holding.leverage == 0 ? 20 : holding.leverage)
+              .mul(100)
+              .toFixed(2) 
+          holding.roelp = holding.unrealizedlp
+              .div((this.$big(amount).abs()).div(price))
+              .mul(holding.leverage == 0 ? 20 : holding.leverage)
+              .mul(100)
+              .toFixed(2) 
+        }
+      } 
+
+      //平仓价格
+      if (!holding.changeUnwindPrice) { 
+        //最小步算法
+        let accuracy = holding.pairInfo.accuracy || 1
+        let scale = holding.pairInfo.price_scale || 4
+        const minStep = Math.pow(10, -scale) * accuracy
+        let $newValue = this.$big( markPrice || 0)
+        if (!$newValue.mod(minStep).eq(0)) {
+          $newValue = $newValue.div(minStep).round(scale >= 1 ? scale - 1 : 0, 0).mul(minStep)
+        }
+        let unwindPrice = $newValue
+        this.$set(holding, "unwindPrice", unwindPrice)
+      }
+    }
   },
   async created() {
     await actions.updateSession();
@@ -841,8 +1241,7 @@ export default {
     } //查询用户设置
     this.switchTab({ name: "contract_history_position" });
     this.$eh.$once("protrade:order:refresh", this.refreshCurrentDelegation);
-    this.$eh.$on("protrade:order:refresh", type => {
-
+    this.$eh.$on("protrade:order:refresh", type => { 
       this.size = this.page * this.size;
       this.page = 1;
       this.fetchData(); 
@@ -859,11 +1258,24 @@ export default {
     this.$eh.$on("setOrderfill:count", count => {
       this.setTabDataCount("contract_history_deal_fills", count)
     })
+    this.$eh.$on("socket:price:update", item => {
+      this.holdingComputedData(item)  
+    })
   },
   destroyed() {
     this.$eh.$off("protrade:order:refresh", "destroyed");
     this.$eh.$off("setOrderfill:count","destroyed");
+    this.$eh.$off("socket:price:update","destroyed");
     this.clearTimer();
+  },
+  watch: {
+    // "state.ct.markTickList": {
+    //   deep: true,
+    //   header: function(newVal,oldVal) {
+    //     console.log('11111111111111111111111111111111111111112222222222222222222222222222222222222')
+    //     console.log({marklist: this.markTickList})
+    //   } 
+    // }
   }
 };
 </script>

@@ -17,13 +17,13 @@ export default {
     },
     indexPrice () {
       if (this.state.ct.indexTick) {
-        return parseFloat(this.state.ct.indexTick.current).toFixed(2)
+        return parseFloat(this.state.ct.indexTick.current).toFixed(this.state.ct.pairInfo.price_scale || 2)
       }
       return '--'
     },
     markPrice () {
-      if (this.state.ct.markTick) { 
-        return  parseFloat(this.state.ct.markTick.current).toFixed(2)
+      if (this.state.ct.markTick) {  
+        return  parseFloat(this.state.ct.markTick.current).toFixed(this.state.ct.pairInfo.price_scale || 2)
       }
       return '--'
     },

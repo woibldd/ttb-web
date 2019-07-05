@@ -73,29 +73,29 @@ export default {
         return
       }
       this.socket = ws.create(`deal/${this.pair}`)
-      this.socketIndex = ws.create(`deal/${this.pair.replace('FUTURE_', 'INDEX_')}`)
-      this.socketMarket = ws.create(`deal/${this.pair.replace('FUTURE_', 'MARKET_')}`)
+      // this.socketIndex = ws.create(`deal/${this.pair.replace('FUTURE_', 'INDEX_')}`)
+      // this.socketMarket = ws.create(`deal/${this.pair.replace('FUTURE_', 'MARKET_')}`)
       // this.socketIndex = ws.create(`deal/INDEX_BTCUSD`)
-      this.socketIndex.$on('message', data => {
-        // console.log('index...')
-        // console.log(data)
-        if (data && data.length) {
-          if (data[0] && data[0].values && data[0].values.length) {
-            this.state.ct.indexTick = {
-              current: data[0].values[0]
-            }
-          }
-        }
-      })
-      this.socketMarket.$on('message', data => {
-        if (data && data.length) {
-          if (data[0] && data[0].values && data[0].values.length) {  
-            this.state.ct.markTick = {
-              current: data[0].values[0]
-            }
-          }
-        }
-      })
+      // this.socketIndex.$on('message', data => {
+      //   // console.log('index...')
+      //   // console.log(data)
+      //   if (data && data.length) {
+      //     if (data[0] && data[0].values && data[0].values.length) {
+      //       this.state.ct.indexTick = {
+      //         current: data[0].values[0]
+      //       }
+      //     }
+      //   }
+      // })
+      // this.socketMarket.$on('message', data => {
+      //   if (data && data.length) {
+      //     if (data[0] && data[0].values && data[0].values.length) {  
+      //       this.state.ct.markTick = {
+      //         current: data[0].values[0]
+      //       }
+      //     }
+      //   }
+      // })
       this.socket.$on('message', data => {
         this.update(data)
         this.loading = false

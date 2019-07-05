@@ -1,7 +1,6 @@
 <template>
   <div class="contract-pair-table">
-    <div class="pair-tab flex-lr mt-4" 
-      v-if="false"
+    <div class="pair-tab flex-lr mt-4"  
     >
       <div
         class="pair-tab-item pointer"
@@ -14,7 +13,7 @@
         <p class="price mt-10">{{ pair.price || '--' }} <i
           class="iconfont arrow"
           :class="{'arrow-up': getDelta(pair.tick) > 0, 'arrow-down': getDelta(pair.tick) < 0}"
-        /></p>
+        /></p> 
       </div>
     </div>
     <div class="pair-info flex mt-4" style="position:relative">

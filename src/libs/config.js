@@ -4,8 +4,8 @@ let quoteUrl
 if (process.env.NODE_ENV === 'development') {
   // wsUrl = 'ws://ws.ix-test.com:9090/v1/'
   // quoteUrl = 'http://q.ix-test.com:8080/v1/'
-  wsUrl = 'wss://ws.ixex.io/v1/'
-  quoteUrl = 'https://q.ixex.io/v1/'
+  wsUrl = 'wss://ws.ixex.pro/v1/'
+  quoteUrl = 'https://q.ixex.pro/v1/'
 } else if (process.env.NODE_ENV === 'beta') {
   wsUrl = 'wss://ws.ixex.io/v1/'
   quoteUrl = 'https://q.ixex.io/v1/'

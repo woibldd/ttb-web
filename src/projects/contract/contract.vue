@@ -206,7 +206,7 @@ export default {
     },
     "$route.query.pair": {
       async handler(pair) {
-        if (!pair) return;
+        if (!pair) return; 
         const match = pair.match(/^([A-Za-z]*)_([A-Za-z]*)$/);
         if (match) {
           this.state.ct.pair = pair;
@@ -271,7 +271,7 @@ export default {
         }
       })
     },5000)
-
+ 
     await actions.updateSession();
     document.querySelector(".page-loading").classList.add("show");
     if (!this.$route.params.pair) {
@@ -282,6 +282,14 @@ export default {
       let pair = res.data.items.filter(item => item.name === local.pair).length
         ? local.pair
         : res.data.items[0].name;
+
+       //console.log({pair, data: res.data})
+      //保存所有币对的基本信息
+      this.state.ct.pairInfoList = {}
+      res.data.items.forEach(element => {
+        this.state.ct.pairInfoList[element.name] = element
+      });
+      
       this.$router.replace({
         name: "spa_contract",
         query: {
@@ -424,8 +432,10 @@ export default {
       service
         .checkContractActive(this.pairInfo.symbol, this.state.isSimulation)
         .then(res => {
-          this.contractNotActive = !res.data.state;
-          window.localStorage["contract"] = this.contractNotActive
+          if (!res.code){
+            this.contractNotActive = !res.data.state;
+            window.localStorage["contract"] = this.contractNotActive
+          }
         });
     }
   },
@@ -669,7 +679,7 @@ export default {
   }
 
   .tradingview-container {
-    height: 570px;
+    height: 507px;
   }
   .contract-active-modal {
     width: 674px;

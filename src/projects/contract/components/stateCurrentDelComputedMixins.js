@@ -21,6 +21,12 @@ export default {
         }
       }) 
       return 0 - count
-    }
+    },
+    symbol () {
+      return this.state.ct.symbol
+    },
+    currentDel () { 
+      return this.state.ct.currentDelList[this.symbol] || []
+    },
   }
 }
