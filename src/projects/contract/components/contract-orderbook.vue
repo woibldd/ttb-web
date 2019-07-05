@@ -269,8 +269,10 @@ export default {
       this.changeDepthNumber(this.deepthData)
     },
     changeDepthNumber (data){
+      console.log({data})
       let bidsOne = []
       let asksOne = []
+      if (this.pair === 'FUTURE_BTCUSD') {
         if (this.offset === 1) {
           for (let i in data.bids){
             let number = i-1
@@ -306,6 +308,10 @@ export default {
         } else {
           this.assignData(data)
         }
+      }
+      else {
+        this.assignData(data)
+      }
     },
     toggleSetting () {
       this.panelShow = !this.panelShow
@@ -384,10 +390,10 @@ export default {
       //console.log(asks,asks)
       let asksRepair = []
       if (asks.length < 8) {
-        for (var i = 0 ; i > (8-asks.length) ; i++ ){
+        for (var i = 0 ; i < (8-asks.length) ; i++ ){
           asksRepair.push({})
-          asksRepair.concat(asks)
         }
+        asksRepair = asksRepair.concat(asks)
       } else {
         asksRepair = asks
       }

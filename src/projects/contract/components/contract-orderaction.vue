@@ -3,12 +3,11 @@
     <div class="ix-pannel">
       <div class="ix-header relative">
         {{ $t('contract_block_orderaction') }}
-        <a
-          v-if="!isTestnet"
+        <a 
           class="primary-text pull-right btn"
           @click="transfer"
         >
-          <icon name="exchange"/>
+          <icon name="exchange" style="fontSize: 16px;"/>
           {{ $t('account_transfer_come_on') }}
         </a>
         <!-- <div class="ibm pull-right arrow-down pointer">
