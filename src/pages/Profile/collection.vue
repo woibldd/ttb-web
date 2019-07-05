@@ -2,7 +2,7 @@
 <template>
   <div class="profile-container">
     <div class="title-box">
-      
+
       {{ $t('collection') }}
       <!-- <span class="chose_txt"> {{ $t('collection_cs') }}</span>
       <em class="cs">
@@ -140,7 +140,7 @@
           <template v-if="ruleForm.payment_type === '1'">
             <el-form-item
              :label="this.$t('otc_kvcoc_2')"
-              prop="deposit_bank"> 
+              prop="deposit_bank">
               <el-input
                 v-model="ruleForm.deposit_bank"
                 size="small"/>
@@ -156,11 +156,11 @@
               :label="this.$t('payment_card_number')"
               prop="card_number">
                    <br>
-              <number-input  
-               class="inputc"  
-                v-model="ruleForm.card_number" 
+              <number-input
+               class="inputc"
+                v-model="ruleForm.card_number"
                  size="small"/>
-               
+
 
             </el-form-item>
           </template>
@@ -187,7 +187,7 @@
                 :label="this.$t('payment_collection_img')"
               prop="collection_img">
               <image-upload
-            
+
                 type="hold"
                 :url="hold.url"
                 :host="uploadConfig.host"
@@ -234,7 +234,7 @@
       <!--<el-button type="primary" @click="dialogVisible = false">确 定</el-button>-->
       <!--</span>-->
     </el-dialog>
-  
+
   </div>
 </template>
 
@@ -309,7 +309,7 @@ export default {
       }
     }
   },
- 
+
   computed: {
     userInfo () {
       return state.userInfo || {}
@@ -515,6 +515,7 @@ export default {
     }
   },
   async created () {
+    console.log(this.id)
     this.init()
     this.symbolList()
     this.filedir = this.id + '_' + utils.generateToken(32)
@@ -541,8 +542,8 @@ export default {
 
 <style lang="scss" rel="stylesheet/scss" scoped>
   .inputc{
-   
-  
+
+
     -webkit-appearance: none;
 background-color: #FFF;
 background-image: none;

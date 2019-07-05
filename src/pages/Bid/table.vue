@@ -66,9 +66,9 @@ export default {
     },
     methods: {
          backTop () {
-            this.$router.push('/bid')
+            this.$router.push('/snowball')
         },
-        manageResopetate (params) { 
+        manageResopetate (params) {
         service.manageResopetate(params).then(res => {
             console.log(res)
             if (res.code === 0) {

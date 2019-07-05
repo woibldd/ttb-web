@@ -69,7 +69,7 @@
           </div>
         </div>
       </div>
-  
+
       <div class="ipt">
         <div class="buy-area">
           <span>{{$t('account_balance')}} {{accountBalance}} {{cell.currency}}</span>
@@ -173,7 +173,7 @@ export default {
     }
   },
   mounted() {
-     
+
   },
 methods: {
     //   manageResopetate
@@ -192,7 +192,7 @@ methods: {
       })
     },
     backTop () {
-      this.$router.push('/bid')
+      this.$router.push('/snowball')
     },
     inputKeyBoard (e) {
       if (e > this.accountBalance) {

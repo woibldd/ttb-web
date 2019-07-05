@@ -359,7 +359,7 @@ export const routes = [
   ...capitalRouter,
   ...fundRouter,
   {
-    path: '/bid',
+    path: '/snowball',
     name: 'Bid',
     meta: {
       nav: true,
@@ -369,7 +369,7 @@ export const routes = [
     component: Bid
   },
   {
-    path: '/bidDetail',
+    path: '/snowballDetail',
     name: 'BidDetail',
     meta: {
       require: true,
