@@ -1,6 +1,8 @@
 let wsUrl
 let quoteUrl
 
+let ws = ''
+let quote = ''
 
 if(process.env.NODE_ENV != 'development'){
   let val = location.host.split('.')
