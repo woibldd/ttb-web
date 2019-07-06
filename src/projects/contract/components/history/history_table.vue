@@ -79,7 +79,7 @@
                 class="label"
                 v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_value_tips'), classes: 'contract'}">
                 {{ $t('contract_history_postion_header_value') }}</span>
-                <span class="value">{{ cholding.value }}</span>
+                <span class="value">{{ cholding.value  | fixed(cholding.pairInfo.value_scale || 4) }}</span>
             </div>
             <div class="col__row">
               <!-- 开仓价格 -->
@@ -136,13 +136,13 @@
                   <span 
                     class="value val1" 
                     :class="{'color-up': cholding.unrealized > 0, 'color-down': cholding.unrealized < 0}">
-                    {{ cholding.unrealized | fixed(4) }} ({{ cholding.roe }}%) 
+                    {{ cholding.unrealized | fixed(cholding.pairInfo.value_scale || 4) }} ({{ cholding.roe }}%) 
                   </span>
                   <span
                     class="value val2"
                     :class="{ 'bgcolor-unp': cholding.unrealizedlp > 0,  'bgcolor-dnp': cholding.unrealizedlp < 0}">
-                    {{ cholding.unrealizedlp | fixed(4) }} ({{ cholding.roelp }}%) 
-                  </span>
+                    {{ cholding.unrealizedlp | fixed(cholding.pairInfo.price_scale || 4) }} ({{ cholding.roelp }}%) 
+                  </span> 
 
                 </i>
             </div>
@@ -151,7 +151,7 @@
                 class="label"
                 v-tooltip.top-center="{html: true, content: $t('contract_result_yet_tips'), classes: 'contract'}">{{ $t('contract_result_yet') }}</span> <span
                   class="value"
-                  :class="{'color-up': cholding.realized > 0, 'color-down': cholding.realized < 0}">{{ cholding.realized | round(pairInfo.value_scale || 4) }}</span>
+                  :class="{'color-up': cholding.realized > 0, 'color-down': cholding.realized < 0}">{{ cholding.realized | round(cholding.pairInfo.value_scale || 4) }}</span>
             </div>
           </div>
           <!-- 平仓/市价全平 -->

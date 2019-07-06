@@ -944,7 +944,7 @@ export default {
     this.amount : 输入框数量
     */
     costValueBuyNew() { 
-       console.log({holding:this.holding})
+      //  console.log({holding:this.holding})
        let amount = this.amount;
       if (amount > 0 && this.balance && this.$big(this.balance.amount).plus(this.buyDelAmount) < 0) {
         amount = -(-amount - this.balance.amount - this.buyDelAmount)
