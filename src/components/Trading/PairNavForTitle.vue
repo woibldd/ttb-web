@@ -149,8 +149,7 @@ export default {
         params: {
           pair: pair.name
         }
-      });
-      //debugger
+      }); 
       state.close_time = pair.close_time || "[*][*][*][9:59-10:00]";
       state.price_open = pair.price_open || 0.017;
       
@@ -186,8 +185,7 @@ export default {
     // tabsClick(tab) {
     //   this.state.tabSelected = tab.name;
     // },
-    collection(pair) {
-      //debugger
+    collection(pair) { 
       if (pair.like) {
         pair.like = false;
         service.delOptional({

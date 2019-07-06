@@ -176,8 +176,7 @@ export default {
               widget.chart().setEntityVisibility(idc, true) //显示60 日平均线 
             } 
         }).append(utils.$i18n.t("tradingview_line"))
-        //widget.btnFS[0].style.display = 'none'
-        //debugger
+        //widget.btnFS[0].style.display = 'none' 
         // widget.chart().createStudy(indicators[0].name, !1, !1, indicators[0].args, (entryId) => {
         //   this.entryId = entryId
         //   this.hasIndicator = true

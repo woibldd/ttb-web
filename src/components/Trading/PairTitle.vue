@@ -136,8 +136,7 @@ export default {
         .round(2, this.C.ROUND_HALF_UP)
         .toFixed(2);
     }, 
-    startCountDown() {
-      //debugger
+    startCountDown() { 
       if(this.pair === "SP_USDT"){
         let closelist = [];
         if (this.state.close_time) {

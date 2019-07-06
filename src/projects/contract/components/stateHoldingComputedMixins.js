@@ -2,8 +2,7 @@ import calculator from '../calculator'
 
 export default {
   computed: {
-    holding () {
-      // debugger
+    holding () { 
       let holding = this.state.ct.holding
       let unitPrice = 1 //单价 先写死
       if (holding) {

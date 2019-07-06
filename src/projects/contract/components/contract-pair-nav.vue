@@ -41,13 +41,12 @@
             <span class="info-field">{{ $t('last_price') }}： </span>
             <span
               class="info-value"
-            >{{ tick.current | fixed(1) }}</span>
+            >{{ tick.current | fixed(pairInfo.price_scale || 2) }}</span>
           </div>
           <div class="info-row">
             <span class="info-field">{{ $t('contract_mark_price') }}： </span>
-            <span
-              class="info-value default"
-            >{{ markPrice }}</span>
+            <span v-if="pairInfo.currency==='BTCUSD'" class="info-value default" >{{ markPrice | fixed(2)  }}</span>
+            <span v-else class="info-value default" >{{ markPrice | fixed(pairInfo.price_scale || 2)  }}</span>
           </div>
         </div>
         <!-- BLOCK 3 -->
@@ -62,7 +61,7 @@
             <span class="info-field">{{ $t('homechart_24h_change_value') }}： </span>
             <span
               class="info-value"
-            >{{ tick.increment_24h | fixed(1) }}</span>
+            >{{ tick.increment_24h  | fixed(pairInfo.price_scale || 2)  }}</span>
           </div>
         </div>
         <!-- BLOCK 4 -->
@@ -73,7 +72,7 @@
           </div>
           <div class="info-row">
             <span
-              class="info-value default"> ≈{{ volumnValue | thousand }} {{ pairInfo.product_name }}</span>
+              class="info-value default"> ≈{{ volumnValue | thousand }} BTC</span>
           </div>
         </div>
         <div  class="guide-link" v-show="link">
@@ -153,13 +152,18 @@ export default {
   computed: {
     markPrice () {
       if (this.state.ct.markTick) {
-        return  parseFloat(this.state.ct.markTick.current).toFixed(2)
+        return  this.state.ct.markTick.current
       }
       return '--'
     },
     volumnValue () {
-      if (this.tick && this.tick.volume_24h) {
-        return this.$big(this.tick.volume_24h).div(this.tick.current).round(this.pairInfo.currency_scale || 2).toString()
+      if (this.tick && this.tick.volume_24h) { 
+        if (this.pairInfo.currency === 'BTCUSD') {
+          return this.$big(this.tick.volume_24h).div(this.tick.current).round(this.pairInfo.currency_scale || 2).toString()
+        }
+        else {
+          return this.$big(this.tick.volume_24h).times(this.tick.current).times(this.pairInfo.multiplier).round(this.pairInfo.currency_scale || 2).toString()
+        }
       }
       return '--'
     }

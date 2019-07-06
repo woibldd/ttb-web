@@ -330,8 +330,7 @@ export default {
     }
   },
   methods: {
-    onresize () {
-      // debugger
+    onresize () { 
       // let bodyHeight = this.container.height - 88 + 'px'
     },
     /**

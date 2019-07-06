@@ -231,8 +231,7 @@ export default {
       return {}
     },
     async submit () {
-      if (this.front.loading || this.back.loading || this.hold.loading) {
-        //debugger
+      if (this.front.loading || this.back.loading || this.hold.loading) { 
         utils.alert(this.$i18n.t('kyc_image_uploading'))
         return
       }
