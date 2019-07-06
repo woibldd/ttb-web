@@ -1035,11 +1035,10 @@ export default {
       let type = item.pair.split('_')[0]
       let name = item.pair.split('_')[1]
       let hlist = this.state.ct.computeHoldingList
-      
-      if (type.indexOf("MARKET")) {
+       
+      if (type.indexOf("MARKET") > -1) {
         //值没有发生变化的时候直接跳出
-        if (this.marketList[name] === item.current) return
-        
+        if (this.marketList[name] === item.current) return 
         this.marketList[name] = item.current 
         if (!!this.lastList[name]) {
           hlist.map(holding => {
@@ -1050,7 +1049,7 @@ export default {
             }
           }) 
         } 
-      } else if (type.indexOf("FUTURE")) {
+      } else if (type.indexOf("FUTURE") > -1) {
         //值没有发生变化的时候直接跳出
         if (this.lastList[name] === item.current) return 
         this.lastList[name] = item.current 

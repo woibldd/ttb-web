@@ -279,8 +279,8 @@ export default {
       if (res.code) {
         return utils.alert(res.message);
       }
-      let pair = res.data.items.filter(item => item.name === local.pair).length
-        ? local.pair
+      let pair = res.data.items.filter(item => item.name === local.future).length
+        ? local.future
         : res.data.items[0].name;
 
        //console.log({pair, data: res.data})
