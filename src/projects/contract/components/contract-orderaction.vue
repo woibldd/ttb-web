@@ -138,11 +138,11 @@
                   <currency-input
                     v-show="!isMarketOrderType"
                     class="trade"
-                    v-model="price"
-                    @keyup.native="decimal(price)"
+                    v-model="price" 
                     :readonly="currentDealType === 'market' || isExtMarketOrderType"
                     :class="[input.price.status]"
                     :currency="pairInfo.currency_name"
+                    :accuracy="5"
                     :scale="pairInfo.price_scale"
                     :placeholder="$t('contract_order_enter_tips2')"
                   />

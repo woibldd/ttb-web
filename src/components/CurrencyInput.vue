@@ -131,8 +131,9 @@ export default {
       console.log('scaleChange')
       this.updateValue(this.$refs.input.value, 'scaleChange')
     },
-    value (newValue) {
-      this.onValueChange(newValue)
+    value (newValue, oldValue) {
+      if (newValue !== oldValue)
+        this.onValueChange(newValue)
     }
   },
   mounted () {
@@ -166,7 +167,8 @@ export default {
       }
       try {
         // 最小进步 accuracy 参与运算 
-        const minStep = Math.pow(10, -this.realScale) * this.accuracy
+        const minStep = this.$big(10).pow(-this.realScale).times(this.accuracy)
+        // const minStep = Math.pow(10, -this.realScale) * this.accuracy
         let $newValue = this.$big(newValue)
         if (!$newValue.mod(minStep).eq(0)) {
           $newValue = $newValue.div(minStep).round(this.realScale >= 1 ? this.realScale - 1 : 0, 0).mul(minStep)
@@ -190,6 +192,7 @@ export default {
       this.updateValue(this.$big(this.$refs.input.value || '0').plus(this.step.mul(delta)).round(this.stepScale || this.realScale) + '', 'fixValue')
     },
     updateValue (value, src) {
+      console.log('bugbugubugubugbugubgubugbugubugbugubugbugubugubgubugb')
       let isE = false
       this.log(`updateValue..: ${value} @${src}`)
 

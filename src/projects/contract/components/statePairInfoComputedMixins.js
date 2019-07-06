@@ -11,7 +11,7 @@ export default {
         }
         else {
           let lastPrice = this.lastPrice == "--" ? 0 : this.lastPrice 
-          pair.unitPrice = this.$big(lastPrice || 0).mul(pair.multiplier || 0).found(pair.price_scale, this.C.ROUND_DOWN).toFixed(pair.price_scale).toString() + ' BTC'
+          pair.unitPrice = this.$big(lastPrice || 0).mul(pair.multiplier || 0).round(pair.price_scale, this.C.ROUND_DOWN).toFixed(pair.price_scale).toString() + ' BTC'
         }
         return pair
       }
