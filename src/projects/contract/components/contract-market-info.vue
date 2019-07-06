@@ -24,7 +24,7 @@
           <div class="sub-price"> 
             <router-link
               class="c-666 pointer"
-              v-tooltip.top-center="{html: true, content: $t('contract_index_price_tips'), classes: 'contract'}"
+              v-tooltip.top-center="{html: true, content: indexPriceTips, classes: 'contract'}"
               :to="{name: 'TradeIndex', params: {pair: state.ct.pair}}">{{ indexPrice }}</router-link>
             &nbsp;/ &nbsp;
             <router-link
@@ -125,7 +125,13 @@ export default {
         link = link.replace('zh-cn', 'en-us')
       }
       return link
-    } 
+    },
+    indexPriceTips () {
+      if (!!state.ct.pairInfo) {
+        return this.$t('contract_index_price_tips' , {product_name : state.ct.pairInfo.product_name || 'BTC'})
+      }
+      return this.$t('contract_index_price_tips' , {product_name : 'BTC'})
+    }
   },
   created(){
     var $this = this

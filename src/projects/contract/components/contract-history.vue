@@ -583,8 +583,7 @@ export default {
           .then(res => {
             if (res.message != "OK" && res.data == null) {
               state.loadingfailed = true;
-            } else if (!res.code) {
-              console.log('res.data.data, paramsfffffffffffffffffffffffffffffffffff')
+            } else if (!res.code) { 
               if (tab === "contract_history_position") {  
                 let holdingList = null; 
                 let cholding = {}
@@ -601,7 +600,10 @@ export default {
                 } 
                 this.tableData = res.data
                 if (holdingList && holdingList.length) {
-                  this.setTabDataCount(tab, 1);
+                  let count = holdingList.reduce((a,b) => { 
+                    let c = b.holding * 1 > 0 ? 1 : 0 
+                    return a + c }, 0) 
+                  this.setTabDataCount(tab, count);
                 } else {
                   this.setTabDataCount(tab, 0);
                 }

@@ -1047,7 +1047,7 @@
     "contract_index_resource":"价格来源",
     "contract_index_resource_tips":"<a>价格来源</a><br/>价格资料来源。",
     "contract_ix_index_price":"IXX 指数价格",
-    "contract_index_price_tips":"<a>指数价格</a><br/>标的资产的价格这是BTC合约的价格，点此查看历史价格。",
+    "contract_index_price_tips":"<a>指数价格</a><br/>标的资产的价格这是 %{product_name} 合约的价格，点此查看历史价格。",
     "contract_face_value":"合约面值",
     "contract_fee_rate":"资金费率",
     "contract_holding":"持仓量",

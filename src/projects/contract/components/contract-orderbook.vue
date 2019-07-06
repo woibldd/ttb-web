@@ -78,7 +78,7 @@
             <span class="last-price">
               <em
                 class="pointer"
-                v-tooltip.top-center="{html: true, content: $t('contract_index_price_tips'), classes: 'contract'}"
+                v-tooltip.top-center="{html: true, content: indexPriceTips, classes: 'contract'}"
                 @click="jumpToHistory">{{ indexPrice   }}</em>
               /
               <em
@@ -259,6 +259,12 @@ export default {
         overflow: 'hidden',
         minHeight: Math.floor((this.bookHeight - this.splitHeight - this.sideHeight) / this.itemHeight) * this.itemHeight + 'px'
       }
+    },
+    indexPriceTips () {
+      if (!!state.ct.pairInfo) {
+        return this.$t('contract_index_price_tips' , {product_name : state.ct.pairInfo.product_name || 'BTC'})
+      }
+      return this.$t('contract_index_price_tips' , {product_name : 'BTC'})
     }
   },
   methods: {

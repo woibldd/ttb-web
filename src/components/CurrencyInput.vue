@@ -191,8 +191,7 @@ export default {
       }
       this.updateValue(this.$big(this.$refs.input.value || '0').plus(this.step.mul(delta)).round(this.stepScale || this.realScale) + '', 'fixValue')
     },
-    updateValue (value, src) {
-      console.log('bugbugubugubugbugubgubugbugubugbugubugbugubugubgubugb')
+    updateValue (value, src) { 
       let isE = false
       this.log(`updateValue..: ${value} @${src}`)
 

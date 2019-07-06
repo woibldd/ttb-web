@@ -231,7 +231,7 @@
           </div>
           <div class="current-info sp_container">
             <p class="mb-10"> <span class="dib mr-5">{{ $t('contract_your_current_werehouse') }} </span> {{ $t('contract_many_piece_con', {amount: selectedHolding.amount}) }} ({{ selectedHolding.leverage }}x)</p>
-            <p class="mb-10"> <span class="dib mr-5">{{ $t('contract_have_apply_yet') }}</span> {{ selectedHolding.margin_position | round(selectedHolding.value_scale || 4) }} BTC</p>
+            <p class="mb-10"> <span class="dib mr-5">{{ $t('contract_have_apply_yet') }}</span> {{ selectedHolding.margin_position  | round( 4) }} BTC</p>
             <p>
               <span
                 class="dib mr-5"
@@ -241,7 +241,7 @@
                 v-tooltip.left-start="{html: true, content: $t('contract_max_remove_account_tips'), classes: 'contract', placement:'.sp_container'}"
                 v-if="modal.radio !== '1'">{{ $t('contract_max_remove_account') }} </span>
 
-              {{ modal.radio === '1' ? selectedHolding.canAddMargin : selectedHolding.canRemoveMargin | round(selectedHolding.value_scale || 4) }} 
+              {{ modal.radio === '1' ? selectedHolding.canAddMargin : selectedHolding.canRemoveMargin  | round( 4) }} 
               <!-- {{ selectedHolding.product_name }} -->
               BTC
             </p>
