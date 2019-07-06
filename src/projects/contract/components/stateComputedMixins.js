@@ -21,9 +21,9 @@ export default {
         if (this.state.ct.pair === 'FUTURE_BTCUSD') { 
           return this.$big(this.state.ct.indexTick.current).round(2, this.C.ROUND_DOWN).toFixed(2).toString()
         }
-        return this.$big(this.state.ct.indexTick.current).
-          round(this.state.ct.pairInfo.price_scale || 2, this.C.ROUND_DOWN).
-          toFixed(this.state.ct.pairInfo.price_scale || 2) 
+        return this.$big(this.state.ct.indexTick.current)
+          .round(this.state.ct.pairInfo.price_scale || 2, this.C.ROUND_DOWN)
+          .toFixed(this.state.ct.pairInfo.price_scale || 2) 
       }
       return '--'
     },
@@ -33,9 +33,9 @@ export default {
         if (this.state.ct.pair === 'FUTURE_BTCUSD') { 
           return this.$big(this.state.ct.markTick.current).round(2, this.C.ROUND_DOWN).toFixed(2).toString()
         }
-        return  parseFloat(this.state.ct.markTick.current)
-        .round(this.state.ct.pairInfo.price_scale || 2, this.C.ROUND_DOWN)
-        .toFixed(this.state.ct.pairInfo.price_scale || 2)
+        return  this.$big(this.state.ct.markTick.current)
+          .round(this.state.ct.pairInfo.price_scale || 2, this.C.ROUND_DOWN)
+          .toFixed(this.state.ct.pairInfo.price_scale || 2)
       }
       return '--'
     },
