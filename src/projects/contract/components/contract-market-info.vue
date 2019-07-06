@@ -108,7 +108,7 @@ export default {
   },
   computed: {
     title () {
-      return this.$t('contract_FUTURE_BTCUSD')
+      return this.$t('contract_' + this.pairInfo.name)
     },
     moreInfoUrl () {
       return ''

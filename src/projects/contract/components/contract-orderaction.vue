@@ -476,19 +476,19 @@
             <div class="col col1">{{ $t('contract_assign_value_raw') }}</div>
             <div
               class="col"
-            >{{ orderValue | round(pairInfo.value_scale || 4) }}{{ pairInfo.product_name }}</div>
+            >{{ orderValue | round(pairInfo.value_scale || 4) }} BTC</div>
           </div>
           <div class="table__tr c-fff">
             <div class="col col1">{{ $t('contract_cost_10_times', {lever: userLeverTime==0 ? 100 : userLeverTime}) }}</div>
             <div
               class="col"
-            >{{ mmModal.label === $t('order_side_buy') ? costValueBuyNew : costValueSellNew }}{{ pairInfo.product_name }}</div>
+            >{{ mmModal.label === $t('order_side_buy') ? costValueBuyNew : costValueSellNew }} BTC</div>
           </div>
           <div class="table__tr c-fff">
             <div class="col col1">{{ $t('withdraw_avlb') }}</div>
             <div
               class="col"
-            >{{ balance.available_balance | round(pairInfo.value_scale || 4) }}{{ pairInfo.product_name }}</div>
+            >{{ balance.available_balance | round(pairInfo.value_scale || 4) }} BTC</div>
           </div>
           <div class="table__tr c-fff">
             <div class="col col1">{{ $t('contract_pos_after_deal') }}</div>
@@ -501,14 +501,14 @@
           <div class="table__tr c-fff">
             <!-- 预计强平价格 -->
             <div class="col col1">{{ $t('contract_expect_equal_price') }}</div>
-            <div class="col">{{ exchangeDir === 'BUY' ? liqBuyPrice : liqSellPrice }}</div>
+            <div class="col">{{ exchangeDir === 'BUY' ? liqBuyPrice : liqSellPrice | fixed(pairInfo.value_scale || 4) }}</div>
           </div>
           <div class="table__tr c-fff">
             <!-- 差异 -->
             <div class="col col1">{{ $t('contract_diff_expect_force') }}</div>
             <div class="col">
               <span class="c-primary">{{ liqDiffRate + '%' }}</span>
-              ({{ liqDiff }})
+              ({{ liqDiff | fixed(pairInfo.value_scale || 4)  }})
             </div>
           </div>
         </div>
