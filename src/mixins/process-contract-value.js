@@ -128,8 +128,14 @@ const processValue = {
         }
       }
       //委托价值
-      if (key === 'contract_assign_value') {
-        value = this.$big(row.amount).div(row.price).abs().round(4, down).toString()
+      if (key === 'contract_assign_value') { 
+        if (row.symbol === 'FUTURE_BTCUSD') {
+          value = this.$big(row.amount).div(row.price).abs().round(4, down).toString()
+        }
+        else {
+          value = this.$big(row.amount).times(row.price).times(0.0001).round(8, down).toString()
+        }
+          
       }
 
       if (key === 'fee_rate') {

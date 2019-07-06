@@ -74,7 +74,8 @@
           class="info__row"
           v-tooltip.top-center="{html: true, content: $t('contract_total_werehouse_value_tips'), classes: 'contract'}">
           <div class="row__label">{{ $t('contract_total_werehouse_value') }}</div>
-          <div class="row__value">{{ '1 USD' }}</div>
+          <!-- <div class="row__value">{{ '1 USD' }}</div> -->
+          <div class="row__value">{{ pairInfo.unitPrice }}</div>
         </div>
         <div
           class="info__row"
