@@ -51,9 +51,14 @@ export default {
           holding.unrealized = '0'
           holding.roe = '0.00'
         }
-
-        if(!isNaN(Number(markPrice))) {
-          holding.value = this.$big(holding.amount).div(markPrice || 0).mul(unitPrice).round(this.pairInfo.value_scale || 4).abs().toString()
+ 
+        let mul = this.pairInfo.multiplier 
+        if(holding.currency === 'BTCUSD') {  
+          let unitPrice = 1 //单价 先写死
+          holding.value = this.$big(holding.amount).div(markPrice || 0).mul(unitPrice).round(this.pairInfo.value_scale || 4).abs().toString() 
+        }
+        else {
+          holding.value = this.$big(holding.price || 0).times(holding.amount).times(mul).round(this.pairInfo.value_scale || 4).abs().toString() 
         }
 
         holding.margin_position = this.$big(holding.margin_position || 0).round(this.pairInfo.value_scale || 4).toString()

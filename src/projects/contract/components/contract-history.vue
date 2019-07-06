@@ -1035,17 +1035,7 @@ export default {
       let type = item.pair.split('_')[0]
       let name = item.pair.split('_')[1]
       let hlist = this.state.ct.computeHoldingList
-      // if (type.indexOf("INDEX") > -1) {
-      //   if (this.indexList[name] === item.current) {
-      //     return
-      //   }
-      //   this.indexList[name] = item.current 
-      //   hlist.map(holding => {
-      //     if(holding.currency === 'BTCUSD') {  
-      //     }
-      //   })
-      // console.log({hlist})
-      // } else 
+      
       if (type.indexOf("MARKET")) {
         //值没有发生变化的时候直接跳出
         if (this.marketList[name] === item.current) return
@@ -1082,11 +1072,11 @@ export default {
       let value = "0"
       if(currency === 'BTCUSD') {  
         let unitPrice = 1 //单价 先写死
-        value = this.$big(amount).div(markPrice || 0).mul(unitPrice).round(holding.pairInfo.value_scale || 4).abs().toString()
+        value = this.$big(amount).div(markPrice || 0).times(unitPrice).round(holding.pairInfo.value_scale || 4).abs().toString()
         this.$set(holding, "value", value)
       }
       else {
-        value = this.$big(holding.price || 0).mul(mul).toString()
+        value = this.$big(holding.price || 0).times(holding.holding).times(mul).toString()
         this.$set(holding, "value", value)
       }
       //计算未实现盈亏/预测盈亏

@@ -1379,7 +1379,7 @@ export default {
 
       console.log(this.mmModal.inputLeverTime, this.mmModal.sliderLeverTime)
       console.log(item, "mmModalLeverChange");
-      if (this.maxTimes && item > this.maxTimes) {
+      if (this.maxTimes && this.$big(item).gt(this.maxTimes)) {
         // 纠正输入
         utils.alert(`最大${this.maxTimes}倍杠杆`);
         item = this.maxTimes;
@@ -1569,6 +1569,8 @@ export default {
     },
     changeHoldingLeverTimes(item) {
       //return this.mmModalLeverChange(item);
+      
+      console.log({item},'11111111111111111111111111111111111111111')
       return this.mmChangeConfirm(item);
     },
     // 单机编辑
