@@ -132,8 +132,14 @@ const processValue = {
         if (row.symbol === 'FUTURE_BTCUSD') {
           value = this.$big(row.amount).div(row.price).abs().round(4, down).toString()
         }
-        else {
-          value = this.$big(row.amount).times(row.price).times(0.0001).round(8, down).toString()
+        else { 
+          let pairlist = this.state.ct.pairInfoList
+          if (!!pairlist && !!pairlist[row.symbol]) {
+            value = this.$big(row.amount).times(row.price).times(pairlist[row.symbol].multiplier).round(8, down).toString()
+          }
+          else {
+            value = "--"
+          }
         }
           
       }
