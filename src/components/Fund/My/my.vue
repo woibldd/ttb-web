@@ -1,9 +1,9 @@
 <template>
   <div class="fund-container my-fund-container">
     <div class="title-box">
-      <div>{{ $t('wallets_nav_asset') }} 
+      <div>{{ $t('wallets_nav_asset') }}
         <span class="ml-30">
-          <el-select  
+          <el-select
             v-model="unit"
             @change="currencyChange"
             value-key="name">
@@ -12,8 +12,8 @@
               :key="idx"
               :label="item.name"
               :value="item"/>
-          </el-select> 
-        </span> 
+          </el-select>
+        </span>
       </div>
       <div class="title__right">
         <!-- <router-link
@@ -45,7 +45,7 @@
       <div class="information">
         <icon name='information' />
         <span >
-{{$t('otc_otutcol_16')}}        </span> 
+{{$t('otc_otutcol_16')}}        </span>
       </div>
       <div class="fund-total">
         <div class="total__label">{{ $t('my_balance_equal') }}</div>
@@ -69,6 +69,23 @@
                 {{scope.row[hd.key]}}
                 <icon class="question" name="question-x"/>
               </i>
+
+              <i
+                v-else-if="scope.row[hd.key] === 'DFD'"
+                class="airdrop"
+                v-tooltip.top-start="{html: true, content: $t('dfd_tips'), classes: 'assets'}"
+              >
+                {{scope.row[hd.key]}}
+                <icon class="question" name="question-x"/>
+              </i> 
+             <i
+                v-else-if="scope.row[hd.key] === 'NEWOS'"
+                class="airdrop"
+                v-tooltip.top-start="{html: true, content: $t('newos_tips'), classes: 'assets'}"
+              >
+                {{scope.row[hd.key]}}
+                <icon class="question" name="question-x"/>
+              </i>
               <i
                 v-else-if="scope.row[hd.key] === 'BNL'"
                 class="airdrop"
@@ -78,7 +95,7 @@
                 <icon class="question" name="question-x"/>
               </i>
               <i v-else>{{scope.row[hd.key]}}</i>
-            </span> 
+            </span>
             <span v-else-if="hd.key==='estValue'">{{ scope.row[hd.key] || 0 | fixed(unit.scale)}}</span>
             <span v-else>{{ scope.row[hd.key] || 0 | fixed(8)}}</span>
           </template>
@@ -94,7 +111,7 @@
             <span
               v-if="scope.row.currency === 'BTC'"
               @click="showModal = true"
-              class="my-fund-operate"> 
+              class="my-fund-operate">
               <router-link
                 class="menu-name"
                 tag="a"
@@ -291,7 +308,7 @@ export default {
       return this.$route.name === "history";
     },
     total() {
-      let sum = this.$big(0); 
+      let sum = this.$big(0);
       this.tableData.forEach(item => {
         sum = sum.plus(this.getEstValue(item));
       });
@@ -314,7 +331,7 @@ export default {
             key: "estValue",
             title:
               this.$t("homechart_fiat") + this.unit.name
-               
+
           }
         ]
       );
@@ -365,7 +382,7 @@ export default {
   },
   async created() {
     this.unit = this.currencyList[0]
-    let res = await service.getAllRate() 
+    let res = await service.getAllRate()
     if (!res.code && !!res.data) {
       this.rates = res.data;
     }
@@ -504,7 +521,7 @@ export default {
       return service.getAccountWalletList().then(res => {
         this.tableData = (res.data || []).map(item => {
           item.rates = item.rates || {};
-          item.locking = this.$big(item.withdrawing || 0).toString();
+          item.locking = this.$big(item.locking || 0).toString();
           item.amount = this.$big(item.withdrawing)
             .plus(this.$big(item.available))
             .round(8, this.C.ROUND_DOWN)
@@ -531,10 +548,10 @@ export default {
     getEstValue (item) {
       let res = this.$big(0)
       let unit = this.unit.name
-      let {currency,amount} = item 
+      let {currency,amount} = item
       if (unit === 'BTC'){
         if(currency === 'BTC') {
-          res = this.$big(amount) 
+          res = this.$big(amount)
         }
         else {
           if (this.$big(amount).gt(0)) {
@@ -549,7 +566,7 @@ export default {
         if (this.rates[currency]) {
           res = this.$big(amount).times(this.$big(this.rates[currency][unit] || 0))
         }
-      } 
+      }
       return res
     },
     async getMine() {
@@ -568,8 +585,8 @@ export default {
       if (!res.code && res.data) {
         this.balance = res.data;
       }
-    }, 
-    currencyChange(e) { 
+    },
+    currencyChange(e) {
       this.getAccountBalanceList()
     },
   },
@@ -583,5 +600,5 @@ export default {
 
 <style lang="scss" scoped>
 @import './my.scss';
- 
+
 </style>

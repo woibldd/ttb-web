@@ -73,7 +73,7 @@
         :label="this.$t('otc_trans_idsl')"/>
       <el-table-column
         prop="available"
-        :label="$t('order_value')">
+        :label="$t('balance')">
         <template slot-scope="scope">
           <span
             v-html="scope.row.available === 0 ? 0 : Number(scope.row.available).toFixed(8)"/>

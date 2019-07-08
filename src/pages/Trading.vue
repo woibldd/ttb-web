@@ -131,7 +131,7 @@ export default {
   watch: {
     '$route.params.pair': {
       async handler (pair = '', last) {
-        // debugger
+        debugger
         this.state.pro.lock = true
         const match = pair.match(/^([A-Za-z]*)_([A-Za-z]*)$/)
         if (match) {

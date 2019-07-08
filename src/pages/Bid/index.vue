@@ -1,32 +1,69 @@
 <template>
   <div class="bid-container">
-    <div class="bid-banner">
-      <div class="bid-text"></div>
+   <div class="bid-banner">
+      <div class="bid-con clearfix">
+        <div class="banner-item-list">
+          <img src="./assets/item-banner.png">
+        </div>
+        <div class="banner-item-text">
+            <div v-for="(item, index) in hotList" :key="index">
+                 <div class="title">
+                    热门推荐
+                </div>
+                <p style="font-size: 16px;">{{ item.currency }} {{ item.product }}</p >
+                <p style="font-size: 13px;">限期 {{ item.moneyDays }}天</p >
+                <div class="rate">
+                    <h1>{{ item.annualizedReturns > 0 ? (Number(item.annualizedReturns)).toFixed(2) : 0 }}%</h1>
+                    <em>{{$t('bby_shouy2')}}</em>
+                </div>
+                <div class="btn">
+                    <el-button class="bid-btn" v-html="item.state === 1 ? $t('bby_shouy6') : item.state === 2 ? '结束' : item.state === 3 ? '已售罄' : '抢购时间未到'" :disabled="item.isTrue"
+                    @click="detail(item)"></el-button>
+                </div>
+            </div>
+        </div>
+      </div>
     </div>
-    <div class="bid-list">
+    <!-- <div class="bid-banner">
+      <img :src="img">
+    </div> -->
+    <div class="bid-list clearfix">
       <div class="bid-list-item" v-for="(item, index) in list" :key="index" :data-id="'dataId-'+ item.id">
-        <div class="week-day">
-          <div class="title">
-            <div class="icon"><i></i></div>
-            <em>{{ item.currency }}</em>
-            {{ item.product }}
+        <div class="left">
+            <div class="week-day">
+                <div class="title">
+                    <div class="icon"><i></i></div>
+                    <em>{{ item.currency }}</em>
+                    {{ item.product }}
 
-          </div>
-          <div class="time">
-            <span>{{$t('bby_shouy1')}}:</span>
-            <b>{{ item.startTime }}~{{ item.end_time }}</b>
-          </div>
+                </div>
+                <div class="time">
+                    <span>{{$t('bby_shouy1')}}:</span>
+                    <b>{{ item.startTime }}~{{ item.end_time }}</b>
+                </div>
+            </div>
+                
         </div>
-        <div class="rate">
-          <h1>{{ item.annualizedReturns > 0 ? (Number(item.annualizedReturns)).toFixed(2) : 0 }}%</h1>
-          <span>{{$t('bby_shouy2')}}</span>
-        </div>
-        <div class="num">
-          <p class="lock">{{$t('bby_shouy3')}} {{ item.lockedAmount }}</p>
-          <p class="join">{{ item.joinAmount }} {{$t('bby_shouy5')}}</p>
-        </div>
-        <div class="btn">
-          <el-button class="bid-btn" :disabled="item.isTrue" @click="detail(item)">{{$t('bby_shouy6')}}</el-button>
+        <div class="bottom">
+            <div class="rate" :style={}>
+                <h1>{{ item.annualizedReturns > 0 ? (Number(item.annualizedReturns)).toFixed(2) : 0 }}%</h1>
+                <span>{{$t('bby_shouy2')}}</span>
+            </div>
+            <div class="right">
+                <div class="num">
+                    <p class="lock">{{$t('bby_shouy3')}} {{ item.lockedAmount }}</p>
+                    <p class="join">{{ item.joinAmount }} {{$t('bby_shouy5')}}</p>
+                </div>
+                <div class="btn">
+                    <el-button
+                        class="bid-btn"
+                        :disabled="item.isTrue"
+                        @click="detail(item)"
+                        v-html="item.state === 1 ?  $t('bby_shouy6') : item.state === 2 ? '结束' : item.state === 3 ? '已售罄' : '抢购时间未到'"
+                    >
+                    </el-button>
+                </div>
+            </div>
         </div>
       </div>
     </div>
@@ -38,14 +75,15 @@
         @current-change="handleCurrentChange"
       />
     </div>
-    <router-view />
+    <router-view/>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import { getLocalTime } from './mixins'
+import {getLocalTime1} from './mixins'
 import Vue from 'vue'
 import axios from 'axios'
+import {state} from '../../modules/store'
 import service from '@/modules/service'
 // import { envApi } from '../../modules/request'
 export default {
@@ -56,24 +94,13 @@ export default {
         pageSize: 8
       },
       list: [],
-      total: 0
+      total: 0,
+      hotList: [],
+      state,
+      //img: require('./assets/banner-zh-CN.png')
     }
   },
   methods: {
-
-    // testHeader(){
-    //   return axios.get(url, {
-    //     params: data,
-    //     headers: {'yl-authorization': this.token}//设置header信息
-    //   }).then((res) => {
-    //     this.plList = res.data;
-    //     if (this.plList.length < this.size) {
-    //       this.jiazai = '没有更多数据啦~~~'
-    //     }else {
-    //       this.jiazai = '点击加载更多'
-    //     }
-    //   })
-    // },
     handleCurrentChange (e) {
       this.params.start = e
       this.init(this.params)
@@ -88,6 +115,7 @@ export default {
       window.localStorage.setItem('detail', JSON.stringify(item))
     },
     init (params) {
+      this.hotList = []
       let timestamp = Date.parse(new Date())
       console.log(timestamp)
       service.findPage({
@@ -98,38 +126,48 @@ export default {
           this.total = res.data.total
           if (this.list.length > 0) {
             this.list.forEach((item) => {
-              Vue.set(item, 'startTime', getLocalTime(item.beginTime))
-              Vue.set(item, 'end_time', getLocalTime(item.endTime))
-              Vue.set(item,'isTrue', true)
-             if(item.endTime > timestamp) {
-                Vue.set(item,'isTrue', false)
-                if(item.beginTime > timestamp) {
-                    Vue.set(item,'isTrue', true)
+              Vue.set(item, 'startTime', getLocalTime1(item.beginTime))
+              Vue.set(item, 'end_time', getLocalTime1(item.endTime))
+              Vue.set(item, 'isTrue', true)
+              if (item.endTime > timestamp) {
+                Vue.set(item, 'isTrue', false)
+                if (item.beginTime > timestamp) {
+                  Vue.set(item, 'isTrue', true)
                 }
              }
             })
           }
+          this.hotList.push(this.list[0])
         }
       })
     }
   },
   created () {
     this.init(this.params)
-
+    // this.img = require('./assets/banner-' + state.locale + '.png')
+  },
+  mounted () {
   }
 }
 </script>
 
-<style lang="scss" rel="stylesheet/scss" scoped>
-$main-bg: #00CED2;
+<style lang="scss" rel="stylesheet/scss">
+ $main-bg: #00CED2;
 $disabled-bg: #F2F3F5;
 $white-color: #fff;
 $disabled-color: #B0B4B9;
 .bid-container {
-  min-width: 1080px;
+  min-width: 1200px;
   overflow: hidden;
   color: #333;
+  width: 100%;
   font-size: 14px;
+  background: url("./assets/bj.png");
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: 122%;
+  padding: 20px 0;
+
   .bid-banner {
     position: relative;
     height: 540px;
@@ -137,54 +175,120 @@ $disabled-color: #B0B4B9;
     /*background: url("./assets/zhongwen_bj.png") center center no-repeat;*/
     background-size: cover;
   }
+
   .bid-list {
-    width: 1080px;
+    width: 1200px;
     overflow: hidden;
-    margin: 0 auto;
+    margin: -40px auto 0;
     .bid-list-item {
-      padding: 40px 0;
-      display: flex;
-      border-bottom: 1px solid #ececec;
-      background: #fff;
+      padding: 20px 0;
+      float: left;
+      width:390px;
+      box-sizing: border-box;
+      border: 1px solid #ececec;
+      margin-top: 20px;
       transition: all .3s;
-      justify-items: center;
-      align-items: center;
-      span {
-        color: $disabled-color;
+      background: #fff url("./assets/yuan.png") no-repeat;
+      background-position: 108% 20px;
+      margin-right: 10px;
+      position: relative;
+      overflow: hidden;
+      &::after {
+          content: '';
+          width: 80px;
+          height: 80px;
+          position: absolute;
+          right: -30px;
+          bottom: -30px;
+          background:rgba(91, 203, 207, .1);
+          border-radius: 50%;
+          z-index: 1;
       }
-      h1 {
-        color: $main-bg;
-        font-weight: bold;
-        font-size: 22px;
-        margin-bottom: 10px;
-      }
+    //   span {
+    //     color: $disabled-color;
+    //   }
+
+    //   h1 {
+    //     color: $main-bg;
+    //     font-weight: bold;
+    //     font-size: 22px;
+    //     margin-bottom: 10px;
+    //   }
+
       .week-day {
-        flex: 460px 0 0 0;
-        width: 460px;
+        padding: 0 20px;
+        color: #333;
+         position: relative;
+        z-index: 2;
         .title {
           overflow: hidden;
-          margin-top: 12px;
-          margin-bottom: 12px
+          font-size: 18px;
+        }
+        .time {
+            font-size: 12px;
+            span {
+                color: #B0B4B9
+            }
         }
       }
-      .rate,.num {
-        flex: 220px 0 0 0;
-        width: 220px;
+      .bottom {
+          position: relative;
+          z-index: 2;
+          width: 100%;
+          display: flex;
+          align-content: center;
+          align-items: center;
+          margin-top: 20px;
+          .rate {
+              width: 36%;
+              text-align: center;
+              flex: 36% 0 0 0;
+              h1 {
+                  font-size: 28px;
+                //   margin-bottom: 8px;
+                  color: $main-bg;
+                  font-weight: bold;
+              }
+              span {
+                  color: $disabled-color;
+                  font-size: 12px;
+              }
+          }
+          .right{
+              flex: 1;
+              margin-right: 20px;
+          }
       }
+    //   .rate, .num {
+    //     flex: 220px 0 0 0;
+    //     width: 220px;
+    //   }
+
       .num {
+          display: flex;
+          font-size: 12px;
+          text-align: right;
+        p {
+            flex: 1;
+        }
         .lock {
-          overflow: hidden;
-          margin-top: 12px;
-          margin-bottom: 12px
+            text-align: left;
+            margin-bottom: 12px
         }
       }
+      .zhCn {
+          width: 48%;
+          flex: 48% 0 0 0;
+      }
+
       .btn {
         flex: 1;
+
         .bid-btn {
           width: 100%;
-          height: 40px;
+          height: 36px;
           background: $main-bg;
-          color: $white-color!important;
+          color: $white-color !important;
           display: block;
           box-sizing: border-box;
           font-size: 14px;
@@ -195,12 +299,13 @@ $disabled-color: #B0B4B9;
           transition: all .3s;
 
           &:disabled {
-            background: $disabled-bg!important;
-            color: $disabled-color!important;
+            background: $disabled-bg !important;
+            color: $disabled-color !important;
             border-color: $disabled-bg;
             cursor: not-allowed;
+
             &:hover {
-                border-color: transparent!important;;
+              border-color: transparent !important;;
             }
           }
         }
@@ -209,4 +314,3 @@ $disabled-color: #B0B4B9;
   }
 }
 </style>
-

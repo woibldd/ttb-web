@@ -1,6 +1,6 @@
 <template>
   <div class="contract-pair-table">
-    <div class="pair-tab flex-lr mt-4" 
+    <div class="pair-tab flex-lr mt-4"
       v-if="false"
     >
       <div
@@ -9,7 +9,7 @@
         :class="{active: pair.name === state.ct.pair, 'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}"
         v-for="pair in list"
         :key="pair.name"
-      > 
+      >
         <span class="pair-name">{{ $t('contract_'+pair.name) }}</span>
         <p class="price mt-10">{{ pair.price || '--' }} <i
           class="iconfont arrow"

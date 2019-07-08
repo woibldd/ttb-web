@@ -25,6 +25,23 @@ export function getLocalTime (nS) {
   return date
 }
 
+export function getLocalTime1 (nS) {
+    let date = new Date(nS)
+    let year = date.getFullYear()
+    let month = date.getMonth() + 1
+    let day = date.getDate()
+    let h = date.getHours()
+    let mm = date.getMinutes()
+    let s = date.getSeconds()
+    month = month < 10 ? '0' + month : month
+    day = day < 10 ? '0' + day : day
+    h = h < 10 ? '0' + h : h
+    mm = mm < 10 ? '0' + mm : mm
+    s = s < 10 ? '0' + s : s
+    date = month + '/' + day +' '+ h +':'+ mm
+    return date
+  }
+
 export function timeFormat(time) {
   var d = new Date(time)
 

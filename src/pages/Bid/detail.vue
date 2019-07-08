@@ -2,12 +2,13 @@
   <div class="bid-detail-container">
     <div class="backTop" @click="backTop">
       <i class="iconfont">&#xe64e;</i>
-      <span>币盈盈</span>
+      <span>{{$t('bby_shouy7')}}</span>
     </div>
     <div class="title-box">
       <div class="logo"></div>
       <h1>{{cell.currency}}</h1>
       <h2>{{cell.product}}</h2>
+      <em class="jl" @click="jl">币盈盈记录</em>
     </div>
     <div class="bid-detail-area">
       <div class="message-box">
@@ -50,16 +51,25 @@
           <div class="time-line">
             <el-timeline>
               <el-timeline-item
-                v-for="(activity, index) in detail.timeLine"
-                :key="index"
-                :color="activity.color">
-                {{activity.content}}
-                <span style="padding-left: 10px;color: #333">{{ activity.timestamp }}</span>
+                color="#C9A96C">
+                {{$t('bby_shouy28')}}
+                <span style="padding-left: 10px;color: #333">{{ detail.timeLine[0].timestamp }}</span>
+              </el-timeline-item>
+              <el-timeline-item
+                color="#C9A96C">
+                 {{$t('bby_shouy29')}}
+                <span style="padding-left: 10px;color: #333">{{ detail.timeLine[1].timestamp }}</span>
+              </el-timeline-item>
+              <el-timeline-item
+                color="#C9A96C">
+                {{$t('bby_shouy30')}}
+                <span style="padding-left: 10px;color: #333">{{ detail.timeLine[2].timestamp }}</span>
               </el-timeline-item>
             </el-timeline>
           </div>
         </div>
       </div>
+
       <div class="ipt">
         <div class="buy-area">
           <span>{{$t('account_balance')}} {{accountBalance}} {{cell.currency}}</span>
@@ -68,7 +78,7 @@
             <!--<a href="http://127.0.0.1:8080/fund/deposit">{{$t('bby_shouy15')}}</a></em>-->
           </em>
           <em class="buy">
-            <router-link to="/fund/deposit" tag="a">{{$t('bby_shouy16')}}</router-link>
+            <router-link to="/trading/BTC_USDT" tag="a">{{$t('bby_shouy16')}}</router-link>
             <!--<a href="http://127.0.0.1:8080/fund/deposit">{{$t('bby_shouy16')}}</a>-->
           </em>
         </div>
@@ -76,14 +86,20 @@
           <div class="title">{{$t('bby_shouy17')}}</div>
           <div class="ipt-inner">
             <!--<input type="number" :placeholder="$t('bby_shouy19')" @input="inputKeyBoard" />-->
-            <el-input-number v-model.number="count" :min="Number(cell.minLimit)" @change="inputKeyBoard"
-                             :max="Number(cell.maxLimit)" label="请输入存币数量"  :controls="controls"></el-input-number>
+            <!-- <el-input-number v-model.number="count" :min="Number(cell.minLimit)" @change="inputKeyBoard"
+                             :max="Number(cell.maxLimit)" label="请输入存币数量"  :controls="controls"></el-input-number> -->
+                             <number-input
+                    class="number-input"
+                    v-model="count"
+                    :scale="point"
+                    placeholder="请输入存币数量"
+                />
             <div class="rage">
               <span class="cell">{{cell.currency}}</span>
               <em @click="allMoney">{{$t('allin')}}</em>
             </div>
           </div>
-          <div class="tip">{{$t('bby_shouy18')}}<em>{{ money }}</em>ix</div>
+          <div class="tip">{{$t('bby_shouy18')}}<em>{{ money }}</em>{{cell.currency}}</div>
         </div>
         <button class="join-btn" :disabled="disabled" @click="submit">
           {{$t('bby_shouy20')}}
@@ -98,7 +114,7 @@
         <dd>{{$t('bby_shouy24')}}</dd>
         <dd>{{$t('bby_shouy25')}}</dd>
         <dd>{{$t('bby_shouy26')}}</dd>
-        <dd>{{$t('bby_shouy27')}}</dd>
+        <!-- <dd>{{$t('bby_shouy27')}}</dd> -->
       </dl>
     </div>
   </div>
@@ -118,7 +134,7 @@ export default {
       count: 0,
       controls: false,
       // 账户余额
-      accountBalance: 100,
+      accountBalance: 10000,
       // 预计收益
       money: 0,
       detail: {
@@ -152,26 +168,31 @@ export default {
         }]
       },
       disabled: true,
-      cell: {}
+      cell: {},
+      point: 0
     }
   },
-  methods: {
+  mounted() {
+
+  },
+methods: {
+    //   manageResopetate
     getAccountWalletList () {
-        this.accountBalance  = 0
+      this.accountBalance  = 0
       service.getAccountWalletList().then(res => {
         if (res.code === 0) {
           res.data.forEach((item) => {
             if (item.currency === this.cell.currency) {
-                console.log(item.currency)
-                console.log(this.cell.currency)
-                this.accountBalance = Number(item.available)
+              console.log(item.currency)
+              console.log(this.cell.currency)
+              this.accountBalance = Number(item.available)
             }
           })
         }
       })
     },
     backTop () {
-      this.$router.push('/bid')
+      this.$router.push('/snowball')
     },
     inputKeyBoard (e) {
       if (e > this.accountBalance) {
@@ -179,13 +200,36 @@ export default {
       }
     },
     allMoney () {
-      if (this.accountBalance < Number(this.cell.minLimit)) {
-        this.$message.warning('余额不足，请充值')
+    //   if (this.accountBalance < Number(this.cell.minLimit)) {
+    //     // this.$message.warning('余额不足，请充值')
+    //      this.$message({
+    //               type: 'warning',
+    //                message: this.$t('bby_shouy32')
+    //             })
+    //   } else {
+    //       if(this.accountBalance >= this.cell.maxLimit) {
+    //           this.count = this.cell.maxLimit
+    //       }
+    //   }
+      this.disabled = false
+      let towTotal = Number(this.cell.maxLimit) -Number(this.cell.lockedAmount)
+      if (towTotal > 0) {
+         if (this.accountBalance < towTotal) {
+             this.$message.warning(`${this.$t('bby_shouy32')}`)
+             this.disabled = true
+         } else {
+            this.count = towTotal
+            this.disabled = false
+         }
       } else {
-          if(this.accountBalance >= this.cell.maxLimit) {
-              this.count = this.cell.maxLimit
-          }
+           this.$message.warning(`可用数量不足`)
+           this.disabled = true
       }
+    },
+    jl() {
+        this.$router.push({
+            name: 'bidtable'
+        })
     },
     submit () {
       if (this.accountBalance !== 0) {
@@ -200,7 +244,11 @@ export default {
           }
         }).then((res) => {
           if (res.code === 0) {
-            this.$message.success('购买成功')
+            // this.$message.success('购买成功')
+             this.$message({
+                  type: 'success',
+                   message: this.$t('bby_shouy31')
+                })
             this.$router.push({
               path: '/bid'
             })
@@ -215,11 +263,31 @@ export default {
       }
     }
   },
+  mounted() {
+       this.timeLine = [{
+        content: this.$t('bby_shouy28'),
+        timestamp: '2018-04-15',
+        color: '#C9A96C'
+    }, {
+        content: this.$t('bby_shouy29'),
+        timestamp: '2018-04-13',
+        color: '#C9A96C'
+    }, {
+        content: this.$t('bby_shouy30'),
+        timestamp: '2018-04-11',
+        color: '#C9A96C'
+    }]
+  },
   created () {
     this.cell = JSON.parse(window.localStorage.getItem('detail'))
     const remaining_amount = Number(this.cell.total) - Number(this.cell.lockedAmount)
     let c = Number(this.cell.lockedAmount) / (Number(this.cell.total) / 100)
-    Vue.set(this.cell, 'remaining_amount', remaining_amount)
+    if (this.cell.lockedAmount.indexOf('.') > 0) {
+        let minArr = this.cell.lockedAmount.split('.')
+      Vue.set(this.cell, 'remaining_amount', remaining_amount.toFixed(minArr[1].length))
+    } else {
+      Vue.set(this.cell, 'remaining_amount', remaining_amount)
+    }
     Vue.set(this.cell, 'down_amount', c)
     Vue.set(this.cell, 'max_limit', Number(this.cell.maxLimit))
     Vue.set(this.cell, 'min_limit', Number(this.cell.minLimit))
@@ -228,8 +296,39 @@ export default {
     this.detail.timeLine[2].timestamp = getLocalTime(this.cell.unlockTime)
     this.count = 0
     this.getAccountWalletList()
-    this.money = (Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * this.count).toFixed(2)
-    console.log(Number(this.cell.annualizedReturns) / 365)
+    if(this.cell.minLimit.indexOf('.') > 0) {
+         let minArr = this.cell.minLimit.split('.')
+         this.point = minArr[1].length
+         let towTotal = Number(this.cell.maxLimit) -Number(this.cell.lockedAmount)
+         if (towTotal > 0) {
+            if (this.accountBalance < towTotal) {
+                this.disabled = true
+                this.money = 0
+                this.count = 0
+            } else {
+                this.money =  this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
+                this.disabled = false
+            }
+        } else {
+            this.disabled = true
+            this.money = 0
+        }
+    } else {
+        let towTotal = Number(this.cell.maxLimit) - Number(this.cell.lockedAmount)
+         if (towTotal > 0) {
+            if (this.accountBalance < towTotal) {
+                this.disabled = true
+                this.money = 0
+                this.count = 0
+            } else {
+                this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
+                this.disabled = false
+            }
+        } else {
+            this.disabled = true
+            this.money = 0
+        }
+    }
     let timestamp = Date.parse(new Date())
     if (this.cell.state === 1) {
         this.disabled = false
@@ -241,8 +340,39 @@ export default {
     count () {
     if (this.cell.state === 1) {
         if (this.count) {
-            this.disabled = false
-            this.money = (Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * this.count).toFixed(2)
+            if(this.cell.minLimit.indexOf('.') > 0) {
+                let minArr = this.cell.minLimit.split('.')
+                
+                this.point = minArr[1].length
+                let towTotal = Number(this.cell.maxLimit) -Number(this.cell.lockedAmount)
+                if (towTotal > 0) {
+                    if (this.accountBalance < towTotal) {
+                        this.disabled = true
+                        this.money = 0
+                        this.count = 0
+                    } else {
+                        this.money =  this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
+                        this.disabled = false
+                    }
+                } else {
+                    this.disabled = true
+                    this.money = 0
+                }
+            } else {
+                if (towTotal > 0) {
+                    if (this.accountBalance < towTotal) {
+                        this.disabled = true
+                        this.money = 0
+                        this.count = 0
+                    } else {
+                        this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
+                        this.disabled = false
+                    }
+                } else {
+                    this.disabled = true
+                    this.money = 0
+                }
+            }
         } else {
             this.disabled = true
         }
@@ -293,6 +423,16 @@ export default {
     .title-box {
       padding: 12px 0;
       border-bottom: 2px solid #ececec;
+      position: relative;
+      width: 100%;
+      .jl {
+        color: $main-bg;
+        position: absolute;
+        right: 0;
+        top: 24px;
+        cursor: pointer;
+        display: block;
+    }
       .logo {
         width: 36px;
         height: 36px;
@@ -410,6 +550,9 @@ export default {
     }
     .el-timeline-item__content {
       font-size: 12px;
+    }
+    .el-progress.is-warning .el-progress-bar__inner {
+      background: $main-bg;
     }
     .buy-area {
       float: right;

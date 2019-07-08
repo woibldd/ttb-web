@@ -11,7 +11,7 @@
             :class="{'router-link-active': from === 'contract'}"
             class="nav_link ml-30">{{ $t('contract') }}
           </a>
-           <router-link 
+           <router-link
             :to="{name: 'OTC'}"
             class="nav_link  ml-30">{{ $t('otc_trade') }}</router-link>
 
@@ -24,10 +24,11 @@
             {{ $t('FrenzySaleZone') }}(SP)
             <img src="@/assets/hot.png" alt style="position: relative;top: 5px;left: 5px;">
           </router-link>
-
           <router-link
-            to="/bid"
-            class="nav_link  ml-30">币盈盈</router-link>
+            to="/snowball"
+            class="nav_link  ml-30">
+            {{$t('bidTitle')}}
+          </router-link>
           <!-- <div class="nav_link arrow-down">
             <a
               :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"
@@ -302,8 +303,10 @@ export default {
       })
     },
     logout() {
-      actions.setUserInfo(null);
-      service.signout();
+      actions.setUserInfo(null)
+      utils.setSessionStorageValue('LoginStatus', 0)
+      utils.setSessionStorageValue('markTime', 9999999999)
+      service.signout()
       if (utils.getRouteMeta(this.$route, "auth")) {
         this.$router.push({
           name: "login"
@@ -316,6 +319,9 @@ export default {
     },
     clickStar($event) {
       this.className = "active"; // console.log($event.currentTarget);
+    },
+    alert () {
+      alert(1)
     },
     openDefault(type) {
       switch (type) {
