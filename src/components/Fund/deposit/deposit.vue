@@ -231,7 +231,7 @@ export default {
             background: transparent;
             // min-height: 30px;
             height: auto;
-            padding: 12px 0;
+             line-height: 1;
             word-wrap:break-word;
             overflow: hidden;
             position: relative;

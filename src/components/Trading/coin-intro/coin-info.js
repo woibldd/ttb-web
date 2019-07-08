@@ -1191,5 +1191,56 @@ export default{
       chain_info: 'https://etherscan.io/token/0xc0d9da090194d62b2027e4009d9123de399ea7bf' // 区块查询
     }
 
+  },
+  DFD: {
+    'zh-CN': {
+      name: 'DFD',
+      full_name: 'DFD',
+      brief_info: 'DFD 暗力数据致力于研究开发基于AI深度发掘暗数据的潜在价值，并构建一个基于区块链技术的去中心化的大数据价值经济生态。作为用户、数据购 买方、数据供应商之间的交流单位，对数据价值进行量化。DFD 暗力数据平台对贡献匿名大 数据的广大用户进行奖励，并为数据购买方提供更有效率的消费方案，致力于改变普通用户处 于生物链底端的现状，打造一个更加公正透明的数据交易环境。',
+      issue_time: '2019.6.8',
+      issue_all: ' 100000000', // 发行总量
+      issue_circulation: '20000000', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: ' http://www.darkforcedata.network/pdf/DFD_whitepaper_zh.pdf', // 白皮书
+      office_website: 'http://www.darkforcedata.network ', // 官网
+      chain_info: 'https://etherscan.io/token/0x4bc41fcca33c08a0756911b6908cf65d72b85f52' // 区块查询
+    },
+    'zh-HK': {
+      name: 'DFD',
+      full_name: 'DFD',
+      brief_info: 'DFD 暗力數據致力於研究開發基於AI深度發掘暗數據的潛在價值，並構建一個基於區塊鏈技術的去中心化的大數據價值經濟生態。作為用戶、數據購 買方、數據供應商之間的交流單位，對數據價值進行量化。 DFD 暗力數據平台對貢獻匿名大數據的廣大用戶進行獎勵，並為數據購買方提供更有效率的消費方案，致力於改變普通用戶處於生物鏈底端的現狀，打造一個更加公正透明的數據交易環境。',
+      issue_time: '2019.6.8',
+      issue_all: '100000000', // 發行總量
+      issue_circulation: '20000000', // 流通總量
+      token_price: '--', // 眾籌價格
+      whitepagger: ' http://www.darkforcedata.network/pdf/DFD_whitepaper_zh.pdf', // 白皮書
+      office_website: 'http://www.darkforcedata.network ', // 官网
+      chain_info: 'https://etherscan.io/token/0x4bc41fcca33c08a0756911b6908cf65d72b85f52' // 區塊查詢
+    },
+    en: {
+      name: 'DFD',
+      full_name: 'DFD',
+      brief_info: 'DFD Darkforce Data is dedicated to research and development of the potential value of deep data mining based on AI depth, and to build a decentralized big data value economic ecology based on blockchain technology. As a communication unit between users, data purchasers, and data providers, the value of data is quantified. The DFD Darkforce Data Platform rewards users who contribute anonymous big data and provides a more efficient consumption plan for data buyers. It is committed to changing the status quo of ordinary users at the bottom of the bio-chain to create a more fair and transparent data transaction environment.',
+      issue_time: '2019.6.8',
+      issue_all: '100000000 ', // 发行总量
+      issue_circulation: ' 20000000', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: '  http://www.darkforcedata.network/pdf/DFD_whitepaper_zh.pdf', // 白皮书
+      office_website: 'http://www.darkforcedata.network ', // 官网
+      chain_info: 'https://etherscan.io/token/0x4bc41fcca33c08a0756911b6908cf65d72b85f52' // 区块查询
+    },
+    ko: {
+      name: 'DFD',
+      full_name: 'DFD',
+      brief_info: 'DFD 암력 데이터는 AI에 기반한 암데이터의 잠재적 가치를 심도 있게 발굴하고 지역 분할 체인 기술에 기반한 메가 데이터 경제 생태계를 구축하는 데 주력한다.사용자, 데이터 구매자, 데이터 공급자 사이의 교류 단위로서 데이터 가치의 양화를 진행한다.Dfd 암력 데이터 플랫폼은 익명의 큰 데이터에 기여하는 많은 사용자들을 장려하고, 데이터 구매자에게 더욱 효율적인 소비 방안을 제공하며, 일반 사용자들이 생물 사슬의 하단에 위치한 현황을 개선하여 더욱 공정하고 투명한 데이터 거래 환경을 조성한다.',
+      issue_time: '2019.6.8',
+      issue_all: '100000000', // 发行总量
+      issue_circulation: '20000000', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: ' http://www.darkforcedata.network/pdf/DFD_whitepaper_zh.pdf', // 白皮书
+      office_website: 'http://www.darkforcedata.network ', // 官网
+      chain_info: 'https://etherscan.io/token/0x4bc41fcca33c08a0756911b6908cf65d72b85f52' // 区块查询
+    }
+
   }
 }
