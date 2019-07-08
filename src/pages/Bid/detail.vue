@@ -134,7 +134,7 @@ export default {
       count: 0,
       controls: false,
       // 账户余额
-      accountBalance: 100,
+      accountBalance: 10000,
       // 预计收益
       money: 0,
       detail: {
@@ -200,16 +200,30 @@ methods: {
       }
     },
     allMoney () {
-      if (this.accountBalance < Number(this.cell.minLimit)) {
-        // this.$message.warning('余额不足，请充值')
-         this.$message({
-                  type: 'warning',
-                   message: this.$t('bby_shouy32')
-                })
+    //   if (this.accountBalance < Number(this.cell.minLimit)) {
+    //     // this.$message.warning('余额不足，请充值')
+    //      this.$message({
+    //               type: 'warning',
+    //                message: this.$t('bby_shouy32')
+    //             })
+    //   } else {
+    //       if(this.accountBalance >= this.cell.maxLimit) {
+    //           this.count = this.cell.maxLimit
+    //       }
+    //   }
+      this.disabled = false
+      let towTotal = Number(this.cell.maxLimit) -Number(this.cell.lockedAmount)
+      if (towTotal) {
+         if (this.accountBalance < towTotal) {
+             this.$message.warning(`${this.$t('bby_shouy32')}`)
+             this.disabled = true
+         } else {
+            this.count = towTotal
+            this.disabled = false
+         }
       } else {
-          if(this.accountBalance >= this.cell.maxLimit) {
-              this.count = this.cell.maxLimit
-          }
+           this.$message.warning(`可用数量不足`)
+           this.disabled = true
       }
     },
     jl() {
@@ -283,14 +297,35 @@ methods: {
     this.count = 0
     this.getAccountWalletList()
     if(this.cell.minLimit.indexOf('.') > 0) {
-         let minArr = this.cell.minLimit.split('.')
-          console.log(this.$big(this.cell.annualizedReturns).div(100).times(this.count), 'bigs')
-         this.money =  this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
-        //  this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(minArr[1].length + 2, 0)
-        //  console.log(Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * Number(this.count), 1)
-         this.point = minArr[1].length
+        let minArr = this.cell.minLimit.split('.')
+        this.point = minArr[1].length
+        let towTotal = Number(this.cell.maxLimit) -Number(this.cell.lockedAmount)
+        if (towTotal) {
+            if (this.accountBalance < towTotal) {
+                this.disabled = true
+                this.money = 0
+            } else {
+                this.money =  this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
+                this.disabled = false
+            }
+        } else {
+            this.disabled = true
+            this.money = 0
+        }
     } else {
-        this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
+        let towTotal = Number(this.cell.maxLimit) -Number(this.cell.lockedAmount)
+        if (towTotal) {
+            if (this.accountBalance < towTotal) {
+                this.disabled = true
+                this.money = 0
+            } else {
+                this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
+                this.disabled = false
+            }
+        } else {
+            this.disabled = true
+            this.money = 0
+        }
         //  console.log(this.money, 2)
     }
     let timestamp = Date.parse(new Date())
@@ -306,13 +341,38 @@ methods: {
         if (this.count) {
             if(this.cell.minLimit.indexOf('.') > 0) {
                 let minArr = this.cell.minLimit.split('.')
-                
-                this.money =  this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
-                //  this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(minArr[1].length + 2, 0)
-                //  console.log(Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * Number(this.count), 1)
                 this.point = minArr[1].length
+                let towTotal = Number(this.cell.maxLimit) -Number(this.cell.lockedAmount)
+                if (towTotal) {
+                    if (this.accountBalance < towTotal) {
+                        this.$message.warning(`${this.$t('bby_shouy32')}`)
+                        this.disabled = true
+                        this.money = 0
+                    } else {
+                        this.money =  this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
+                        this.disabled = false
+                    }
+                } else {
+                    this.$message.warning(`可用数量不足`)
+                    this.disabled = true
+                    this.money = 0
+                }
             } else {
-                this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
+                let towTotal = Number(this.cell.maxLimit) -Number(this.cell.lockedAmount)
+                if (towTotal) {
+                    if (this.accountBalance < towTotal) {
+                        this.$message.warning(`${this.$t('bby_shouy32')}`)
+                        this.disabled = true
+                        this.money = 0
+                    } else {
+                        this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
+                        this.disabled = false
+                    }
+                } else {
+                    this.$message.warning(`可用数量不足`)
+                    this.disabled = true
+                    this.money = 0
+                }
                 //  console.log(this.money, 2)
             }
         } else {

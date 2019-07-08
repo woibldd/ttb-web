@@ -42,12 +42,12 @@
           </div>
         </div>
       </div> -->
-       <div class="fund-item-row mb-24">
+       <div class="fund-item-row mb-24" style="height: auto">
         <div class="row__label">{{ $t('deposit_address') }}</div>
         <div class="row__value">
           <div class="deposit-address-textarea">
-            <div style="padding:">
-                <textarea v-model="address" class="address-textare" disabled />
+            <div class="text-info">
+                {{ address }}
             </div>
             <span
               class="address-copy pointer"
@@ -224,22 +224,32 @@ export default {
         overflow: hidden;
         justify-items: center;
         align-items: center;
-        textarea{
+        .text-info{
             flex: 366px 0 0 0;
             width: 366px;
             border-color: transparent;
             background: transparent;
             // min-height: 30px;
-            resize: none;
-            height: 0;
-            padding: 12px 0
+            height: auto;
+            padding: 12px 0;
+            word-wrap:break-word;
+            overflow: hidden;
+            position: relative;
+            &::after {
+                content: '';
+                position: absolute;
+                height: 100%;
+                width: 1px;
+                background: #cccccc;
+                right: 0;
+                top: 0
+            }
         }
         span {
             flex: 1;
             text-align: center;
-            color: #01CED1;
             vertical-align: middle;
-            border-left: 1px solid #cccccc;
+            color:#01CED1
         }
     }
 </style>
