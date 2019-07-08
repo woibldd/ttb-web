@@ -156,7 +156,7 @@
           </div>
           <!-- 平仓/市价全平 -->
           <div class="operate-col pl-16 pt-16 close"
-            v-loading='clearWarehouseLoading'> 
+            v-loading='cholding.clearLoading'> 
             <div
               class="equal mr-21 "
               v-if='!cholding.future_close_id'> 
@@ -214,8 +214,7 @@
             </div>
           </div> 
         </div> 
-      </div>
-      
+      </div> 
     </div> 
     <!-- 增加/减少保证金 modal -->
     <v-modal :open.sync="showPromiseFundModal">
@@ -513,6 +512,7 @@ export default {
         return
       }
 
+      console.log('9999999999999999999999999999999999999999999999999999999999999999999999999999999')
       let title = ""
       // let content = ""
       let confirmText = ""
@@ -555,7 +555,8 @@ export default {
           h('div', {style: 'font-size: 16px;'},  this.$t('contract_close_tips2'))
         ])
  
-      this.clearWarehouseLoading = true
+      // this.clearWarehouseLoading = true
+      holding.clearLoading = true
       const ok = await utils.confirm(this, {
         customClass: "ix-message-box-wrapper",
         confirmBtnText: confirmText,
@@ -565,15 +566,18 @@ export default {
         message
       });
 
+      
       if (!ok) {
-        this.clearWarehouseLoading = false
+        // this.clearWarehouseLoading = false 
+        holding.clearLoading = false
         return;
       }
 
       //已有平仓订单
       if (holding.future_close_id) {
         utils.alert(this.$t('contract_order_repeat'))
-        this.clearWarehouseLoading = false
+        // this.clearWarehouseLoading = false
+        holding.clearLoading = false
         return
       }
       //let $price = this.unwindPrice.toString()
@@ -595,10 +599,12 @@ export default {
 
         this.$eh.$emit('protrade:order:refresh', 1 )
         //this.$eh.$emit('protrade:order:refresh', 'submitOrder' )
-        this.clearWarehouseLoading = false
+        //this.clearWarehouseLoading = false
+        holding.clearLoading = false
       } else {
         utils.alert(res.message)
-        this.clearWarehouseLoading = false
+        //this.clearWarehouseLoading = false
+        holding.clearLoading = false
       }
     },
     set ({price, amount, dontOveride, side}) {
@@ -627,7 +633,8 @@ export default {
     },
     cancel (holding) {
       console.log('close current Entrust', this.pairInfo.name, this.holding.future_close_id)
-      this.clearWarehouseLoading = true
+      //this.clearWarehouseLoading = true
+      holding.clearLoading = true
       const params = {
           symbol: holding.pairInfo.name,
           order_id: holding.future_close_id
@@ -637,10 +644,12 @@ export default {
             utils.success(this.$t('contract_revert_success'))
             // 刷新所有订单
             this.$eh.$emit('protrade:order:refresh', 1)
-            this.clearWarehouseLoading = false
+            //this.clearWarehouseLoading = false
+            holding.clearLoading = false
           } else {
             utils.alert(res.message)
-            this.clearWarehouseLoading = false
+            //this.clearWarehouseLoading = false
+            holding.clearLoading = false
           }
         })
     },

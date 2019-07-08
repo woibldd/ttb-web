@@ -1430,6 +1430,7 @@ export default {
         if (!res.code) {
           // 重新拉下持仓数据
           this.getBalance();
+          this.$eh.$emit("protrade:order:refresh");
         } else {
           utils.alert(res.message);
         }
@@ -1452,8 +1453,9 @@ export default {
         let res = await service.setContractlever(params);
         if (!res.code) {
           this._setLeverage(item);
-          // 重新拉下持仓数据
-          this.getBalance();
+          // 重新拉下持仓数据 
+          this.getBalance(); 
+          this.$eh.$emit("protrade:order:refresh");
         } else {
           utils.alert(res.message);
         }
@@ -1465,8 +1467,9 @@ export default {
         };
         let res = await service.setContractlever(params);
         if (!res.code) {
-          // 重新拉下持仓数据
+          // 重新拉下持仓数据 
           this.getBalance();
+          this.$eh.$emit("protrade:order:refresh");
         } else {
           utils.alert(res.message);
         }
@@ -2019,7 +2022,6 @@ export default {
             if (res.data && res.data.leverage != null && res.data.leverage != undefined ) {
               this._setLeverage(res.data.leverage);
             }
-            this.$eh.$emit("protrade:order:refresh");
           }
         });
     },
@@ -2033,6 +2035,7 @@ export default {
     //   })
     // }, 
     async fetchData() {
+      console.log('3333333333333333333333333333333333333333333333333333333')
       await this.getBalance();
       if (!isEmpty(this.holding)) { 
         const $value = this.$big(this.holding.value);

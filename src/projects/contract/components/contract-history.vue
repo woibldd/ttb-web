@@ -897,6 +897,7 @@ export default {
           // hack
           holding.amount = holding.holding || '0'
           holding.value = '0'
+          holding.clearLoading = false
         } else {
           holding = {
             amount: '0',
