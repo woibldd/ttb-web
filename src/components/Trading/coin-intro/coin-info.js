@@ -286,7 +286,7 @@ export default{
       issue_time: '2019-4-18',
       issue_all: '6亿', // 发行总量
       issue_circulation: '1亿', // 流通总量
-      token_price:'--',
+      token_price: '--',
       whitepagger: 'https://www.sunpower.io/wp.pdf', // 白皮书
       office_website: 'https://www.sunpower.io/', // 官网
       chain_info: 'https://etherscan.io/address/0x33ad8ccd192c2b1782b0d3e557e32a54771e16f1' // 区块查询
@@ -298,7 +298,7 @@ export default{
       issue_time: '2019-4-18',
       issue_all: '6億', // 发行总量
       issue_circulation: '1億', // 流通总量
-      token_price:'--',
+      token_price: '--',
       whitepagger: 'https://www.sunpower.io/wp.pdf', // 白皮书
       office_website: 'https://www.sunpower.io/', // 官网
       chain_info: 'https://etherscan.io/address/0x33ad8ccd192c2b1782b0d3e557e32a54771e16f1' // 区块查询
@@ -310,7 +310,7 @@ export default{
       issue_time: '2019-4-18',
       issue_all: '600 million', // 发行总量
       issue_circulation: '100 million', // 流通总量
-      token_price:'--',
+      token_price: '--',
       whitepagger: 'https://www.sunpower.io/wp.pdf', // 白皮书
       office_website: 'https://www.sunpower.io/', // 官网
       chain_info: 'https://etherscan.io/address/0x33ad8ccd192c2b1782b0d3e557e32a54771e16f1' // 区块查询
@@ -322,7 +322,7 @@ export default{
       issue_time: '2019-4-18',
       issue_all: '600 million', // 发行总量
       issue_circulation: '100 million', // 流通总量
-      token_price:'--',
+      token_price: '--',
       whitepagger: 'https://www.sunpower.io/wp.pdf', // 白皮书
       office_website: 'https://www.sunpower.io/', // 官网
       chain_info: 'https://etherscan.io/address/0x33ad8ccd192c2b1782b0d3e557e32a54771e16f1' // 区块查询
@@ -336,7 +336,7 @@ export default{
       issue_time: '2019-4-30',
       issue_all: '100亿', // 发行总量
       issue_circulation: '12亿', // 流通总量
-      token_price:'--',
+      token_price: '--',
       whitepagger: 'https://doc-10-2k-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/htffpsv8ku16pcq7qoap83d7lr7v1559/1553299200000/17611552596875814148/*/1eZ739U_5LK50RSQNShizb45tRdO93K-o?e=download', // 白皮书
       office_website: 'https://aircoins.co/', // 官网
       chain_info: 'https://etherscan.io/token/0x8cb1d155a5a1d5d667611b7710920fd9d1cd727f' // 区块查询
@@ -348,7 +348,7 @@ export default{
       issue_time: '2019-4-30',
       issue_all: '100億', // 发行总量
       issue_circulation: '12億', // 流通总量
-      token_price:'--',
+      token_price: '--',
       whitepagger: 'https://doc-10-2k-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/htffpsv8ku16pcq7qoap83d7lr7v1559/1553299200000/17611552596875814148/*/1eZ739U_5LK50RSQNShizb45tRdO93K-o?e=download', // 白皮书
       office_website: 'https://aircoins.co/', // 官网
       chain_info: 'https://etherscan.io/token/0x8cb1d155a5a1d5d667611b7710920fd9d1cd727f' // 区块查询
@@ -360,7 +360,7 @@ export default{
       issue_time: '2019-4-30',
       issue_all: '10 billion', // 发行总量
       issue_circulation: '1200 million', // 流通总量
-      token_price:'--',
+      token_price: '--',
       whitepagger: 'https://doc-10-2k-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/htffpsv8ku16pcq7qoap83d7lr7v1559/1553299200000/17611552596875814148/*/1eZ739U_5LK50RSQNShizb45tRdO93K-o?e=download', // 白皮书
       office_website: 'https://aircoins.co/', // 官网
       chain_info: 'https://etherscan.io/token/0x8cb1d155a5a1d5d667611b7710920fd9d1cd727f' // 区块查询
@@ -372,7 +372,7 @@ export default{
       issue_time: '2019-4-30',
       issue_all: '10 billion', // 发行总量
       issue_circulation: '1200 million', // 流通总量
-      token_price:'--',
+      token_price: '--',
       whitepagger: 'https://doc-10-2k-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/htffpsv8ku16pcq7qoap83d7lr7v1559/1553299200000/17611552596875814148/*/1eZ739U_5LK50RSQNShizb45tRdO93K-o?e=download', // 白皮书
       office_website: 'https://aircoins.co/', // 官网
       chain_info: 'https://etherscan.io/token/0x8cb1d155a5a1d5d667611b7710920fd9d1cd727f' // 区块查询
@@ -544,40 +544,40 @@ export default{
       chain_info: 'https://etherscan.io/token/0xfe73a07fa11ba0a8480159f405d35d0b55f826e8' // 区块查询
     },
     'zh-HK': {
-        name: 'HDN',
-        full_name: 'HALADINAR (HDN)',
-        brief_info: 'HALADINAR（HDN）是壹個環球去中心化在線商城，旨在為世界各地的穆斯林和非穆斯林社區提供服務。  HALADINAR在線的所有商品和服務都是具有清真標誌的。',
-        issue_time: '2018-7-1',
-        issue_all: '10億', // 发行总量
-        issue_circulation: '4500萬', // 流通总量
-        token_price: '--', // 众筹价格
-        whitepagger: 'https://haladinar.io/hdn/resources.html', // 白皮书
-        office_website: 'https://haladinar.io/hdn/index.html', // 官网
-        chain_info: 'https://etherscan.io/token/0xfe73a07fa11ba0a8480159f405d35d0b55f826e8' // 区块查询
+      name: 'HDN',
+      full_name: 'HALADINAR (HDN)',
+      brief_info: 'HALADINAR（HDN）是壹個環球去中心化在線商城，旨在為世界各地的穆斯林和非穆斯林社區提供服務。  HALADINAR在線的所有商品和服務都是具有清真標誌的。',
+      issue_time: '2018-7-1',
+      issue_all: '10億', // 发行总量
+      issue_circulation: '4500萬', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://haladinar.io/hdn/resources.html', // 白皮书
+      office_website: 'https://haladinar.io/hdn/index.html', // 官网
+      chain_info: 'https://etherscan.io/token/0xfe73a07fa11ba0a8480159f405d35d0b55f826e8' // 区块查询
     },
     'en': {
-        name: 'HDN',
-        full_name: 'HALADINAR (HDN)',
-        brief_info: 'HALADINAR is a global platform and online decentralized marketplace designed to serve both the Muslim and non-Muslim communities anywhere in the world. Goods and services in the HALADINAR Marketplace are Halal, Thoyyiban and Mubarakan.',
-        issue_time: '2018-7-1',
-        issue_all: '1000 million', // 发行总量
-        issue_circulation: '45 million', // 流通总量
-        token_price: '--', // 众筹价格
-        whitepagger: 'https://haladinar.io/hdn/resources.html', // 白皮书
-        office_website: 'https://haladinar.io/hdn/index.html', // 官网
-        chain_info: 'https://etherscan.io/token/0xfe73a07fa11ba0a8480159f405d35d0b55f826e8' // 区块查询
-       },
+      name: 'HDN',
+      full_name: 'HALADINAR (HDN)',
+      brief_info: 'HALADINAR is a global platform and online decentralized marketplace designed to serve both the Muslim and non-Muslim communities anywhere in the world. Goods and services in the HALADINAR Marketplace are Halal, Thoyyiban and Mubarakan.',
+      issue_time: '2018-7-1',
+      issue_all: '1000 million', // 发行总量
+      issue_circulation: '45 million', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://haladinar.io/hdn/resources.html', // 白皮书
+      office_website: 'https://haladinar.io/hdn/index.html', // 官网
+      chain_info: 'https://etherscan.io/token/0xfe73a07fa11ba0a8480159f405d35d0b55f826e8' // 区块查询
+    },
     'ko': {
-        name: 'HDN',
-        full_name: 'HALADINAR (HDN)',
-        brief_info: 'HALADINAR (HDN)는 세계 각지의 무슬림과 비무슬림 지역사회에 서비스를 제공하기 위하여 전 세계에서 중심 쇼핑몰을 가는 것이다.HALADINAR 온라인 모든 상품과 서비스는 리얼 마크가 들어가 있습니다.',
-        issue_time: '2018-7-1',
-        issue_all: '1000 million', // 发行总量
-        issue_circulation: '45 million', // 流通总量
-        token_price: '--', // 众筹价格
-        whitepagger: 'https://haladinar.io/hdn/resources.html', // 白皮书
-        office_website: 'https://haladinar.io/hdn/index.html', // 官网
-        chain_info: 'https://etherscan.io/token/0xfe73a07fa11ba0a8480159f405d35d0b55f826e8' // 区块查询
+      name: 'HDN',
+      full_name: 'HALADINAR (HDN)',
+      brief_info: 'HALADINAR (HDN)는 세계 각지의 무슬림과 비무슬림 지역사회에 서비스를 제공하기 위하여 전 세계에서 중심 쇼핑몰을 가는 것이다.HALADINAR 온라인 모든 상품과 서비스는 리얼 마크가 들어가 있습니다.',
+      issue_time: '2018-7-1',
+      issue_all: '1000 million', // 发行总量
+      issue_circulation: '45 million', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'https://haladinar.io/hdn/resources.html', // 白皮书
+      office_website: 'https://haladinar.io/hdn/index.html', // 官网
+      chain_info: 'https://etherscan.io/token/0xfe73a07fa11ba0a8480159f405d35d0b55f826e8' // 区块查询
     }
   },
   BNL: {
@@ -594,41 +594,41 @@ export default{
       chain_info: 'https://etherscan.io/token/0x7109eca95daa8f04ddeef3a941fc9bd85bd1510f' // 区块查询
     },
     'zh-HK': {
-        name: 'BNL',
-        full_name: 'BNL商務鏈',
-        brief_info: 'BNL商務鏈，是全球首個智能、透明、開放、誠信的“商務領域泛交易生態平臺”的基礎公鏈，是區塊鏈技術、AI技術及AR技術在“智能商務傳媒”與“智能商務泛交易全體系”等商務領域的創新應用。BNL商務領域公鏈將創造性地運用AI及AR技術 和GAN算法混合共識機制的挖礦方式，在主網上線後落地首個去中介化區塊鏈AR廣告的DAPP，率先打破現有公鏈沒有大規模商業應用的局面。 ',
-        issue_time: '2018-9-19',
-        issue_all: '10億', // 发行总量
-        issue_circulation: '700萬', // 流通总量
-        token_price: '--', // 众筹价格
-        whitepagger: 'http://www.bnlio.io/upload/Plupload/File_616/20180817131656671.pdf', // 白皮书
-        office_website: 'www.bnlio.io', // 官网
-        chain_info: 'https://etherscan.io/token/0x7109eca95daa8f04ddeef3a941fc9bd85bd1510f' // 区块查询
-      },
+      name: 'BNL',
+      full_name: 'BNL商務鏈',
+      brief_info: 'BNL商務鏈，是全球首個智能、透明、開放、誠信的“商務領域泛交易生態平臺”的基礎公鏈，是區塊鏈技術、AI技術及AR技術在“智能商務傳媒”與“智能商務泛交易全體系”等商務領域的創新應用。BNL商務領域公鏈將創造性地運用AI及AR技術 和GAN算法混合共識機制的挖礦方式，在主網上線後落地首個去中介化區塊鏈AR廣告的DAPP，率先打破現有公鏈沒有大規模商業應用的局面。 ',
+      issue_time: '2018-9-19',
+      issue_all: '10億', // 发行总量
+      issue_circulation: '700萬', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.bnlio.io/upload/Plupload/File_616/20180817131656671.pdf', // 白皮书
+      office_website: 'www.bnlio.io', // 官网
+      chain_info: 'https://etherscan.io/token/0x7109eca95daa8f04ddeef3a941fc9bd85bd1510f' // 区块查询
+    },
     'en': {
-        name: 'BNL',
-        full_name: 'BNL Business Chain',
-        brief_info: 'BNL Business Chain is the world\'s first intelligent, transparent, open and honest "business platform pan-transaction eco-platform" basic public chain, blockchain technology, AI technology and AR technology in "smart business media" and "smart business"  Innovative applications in the business sector such as the Pan-Transaction System.  BNL business domain public chain will creatively use the mining method of and AR technology and GAN algorithm mixed consensus mechanism. After the main line launched, the first DAPP to de-intermediate blockchain AR advertisement will be the first to break the existing public chain.  The situation of large-scale commercial applications.',
-        issue_time: '2018-9-19',
-        issue_all: '1000 million', // 发行总量
-        issue_circulation: '7,000,000', // 流通总量
-        token_price: '--', // 众筹价格
-        whitepagger: 'http://www.bnlio.io/upload/Plupload/File_616/20180817131656671.pdf', // 白皮书
-        office_website: 'www.bnlio.io', // 官网
-        chain_info: 'https://etherscan.io/token/0x7109eca95daa8f04ddeef3a941fc9bd85bd1510f' // 区块查询
-         },
+      name: 'BNL',
+      full_name: 'BNL Business Chain',
+      brief_info: 'BNL Business Chain is the world\'s first intelligent, transparent, open and honest "business platform pan-transaction eco-platform" basic public chain, blockchain technology, AI technology and AR technology in "smart business media" and "smart business"  Innovative applications in the business sector such as the Pan-Transaction System.  BNL business domain public chain will creatively use the mining method of and AR technology and GAN algorithm mixed consensus mechanism. After the main line launched, the first DAPP to de-intermediate blockchain AR advertisement will be the first to break the existing public chain.  The situation of large-scale commercial applications.',
+      issue_time: '2018-9-19',
+      issue_all: '1000 million', // 发行总量
+      issue_circulation: '7,000,000', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.bnlio.io/upload/Plupload/File_616/20180817131656671.pdf', // 白皮书
+      office_website: 'www.bnlio.io', // 官网
+      chain_info: 'https://etherscan.io/token/0x7109eca95daa8f04ddeef3a941fc9bd85bd1510f' // 区块查询
+    },
     'ko': {
-        name: 'BNL',
-        full_name: 'BNL 비즈니스 체인',
-        brief_info: 'BNL 비즈니스 체인, 전 세계 최초의 지능, 투명, 개방, 성실의"비즈니스 분야 범거래 생태 플랫폼"의 기초 공공 체인, 지역 체인 기술, AI 기술 및 AR 기술은"스마트 비즈니스 커뮤니케이션"과"스마트 비즈니스 범거래 시스템"등 비즈니스 분야에서 혁신적인 응용이다.BNL 비즈니스 영역의 공사슬은 창조적으로 AI 및 AR 기술과 GAN 알고리즘이 혼재된 공동 인식기제를 운용하는 채광 방식을 운용하여, 주망에 접속하고 최초로 블록체인 AR 광고의 DAPP를  중개하고, 먼저 기존 공사슬이 대규모 상업이 적용되지 않는 국면을 타파할 것이다.',
-        issue_time: '2018-9-19',
-        issue_all: '1000 million', // 发行总量
-        issue_circulation: '7,000,000', // 流通总量
-        token_price: '--', // 众筹价格
-        whitepagger: 'http://www.bnlio.io/upload/Plupload/File_616/20180817131656671.pdf', // 白皮书
-        office_website: 'www.bnlio.io', // 官网
-        chain_info: 'https://etherscan.io/token/0x7109eca95daa8f04ddeef3a941fc9bd85bd1510f' // 区块查询
-      }
+      name: 'BNL',
+      full_name: 'BNL 비즈니스 체인',
+      brief_info: 'BNL 비즈니스 체인, 전 세계 최초의 지능, 투명, 개방, 성실의"비즈니스 분야 범거래 생태 플랫폼"의 기초 공공 체인, 지역 체인 기술, AI 기술 및 AR 기술은"스마트 비즈니스 커뮤니케이션"과"스마트 비즈니스 범거래 시스템"등 비즈니스 분야에서 혁신적인 응용이다.BNL 비즈니스 영역의 공사슬은 창조적으로 AI 및 AR 기술과 GAN 알고리즘이 혼재된 공동 인식기제를 운용하는 채광 방식을 운용하여, 주망에 접속하고 최초로 블록체인 AR 광고의 DAPP를  중개하고, 먼저 기존 공사슬이 대규모 상업이 적용되지 않는 국면을 타파할 것이다.',
+      issue_time: '2018-9-19',
+      issue_all: '1000 million', // 发行总量
+      issue_circulation: '7,000,000', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.bnlio.io/upload/Plupload/File_616/20180817131656671.pdf', // 白皮书
+      office_website: 'www.bnlio.io', // 官网
+      chain_info: 'https://etherscan.io/token/0x7109eca95daa8f04ddeef3a941fc9bd85bd1510f' // 区块查询
+    }
   },
   DSA: {
     'zh-CN': {
@@ -644,42 +644,42 @@ export default{
       chain_info: 'https://etherscan.io/token/0xbbdbccb13d09975fa9e3e9c8fa129b61065c84f3' // 区块查询
     },
     'zh-HK': {
-        name: 'DSA',
-        full_name: ' DSA(Distributed Survey Accelerator)',
-        brief_info: '分布式眾調加速器 DSA（Distributed Survey Accelerator）是壹個匿名的分布式民意調查平臺，致力於為全球的區塊鏈項目提供去中心化的眾調評級服務。DSA 將始終秉持 “匿名”、“自治”、“不作惡” 精神，通過人工智能和區塊鏈技術，為投資者提供壹個中立的信息披露平臺，凈化區塊鏈行業投資環境，保護投資者利益。獨有的社區激勵機制和 DSA 指數，促進投資方、項目方、用戶之間共識互助，重塑區塊鏈協調關系，打造共享信息新方式。',
-        brief_info: '',
-        issue_time: '2018-10',
-        issue_all: '10億', // 发行总量
-        issue_circulation: '8000萬', // 流通总量
-        token_price: '--', // 众筹价格
-        whitepagger: '', // 白皮书
-        office_website: 'https://www.dsaglobal.io/ ', // 官网
-        chain_info: 'https://etherscan.io/token/0xbbdbccb13d09975fa9e3e9c8fa129b61065c84f3' // 区块查询
-      },
+      name: 'DSA',
+      full_name: ' DSA(Distributed Survey Accelerator)',
+      brief_info: '分布式眾調加速器 DSA（Distributed Survey Accelerator）是壹個匿名的分布式民意調查平臺，致力於為全球的區塊鏈項目提供去中心化的眾調評級服務。DSA 將始終秉持 “匿名”、“自治”、“不作惡” 精神，通過人工智能和區塊鏈技術，為投資者提供壹個中立的信息披露平臺，凈化區塊鏈行業投資環境，保護投資者利益。獨有的社區激勵機制和 DSA 指數，促進投資方、項目方、用戶之間共識互助，重塑區塊鏈協調關系，打造共享信息新方式。',
+      brief_info: '',
+      issue_time: '2018-10',
+      issue_all: '10億', // 发行总量
+      issue_circulation: '8000萬', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: '', // 白皮书
+      office_website: 'https://www.dsaglobal.io/ ', // 官网
+      chain_info: 'https://etherscan.io/token/0xbbdbccb13d09975fa9e3e9c8fa129b61065c84f3' // 区块查询
+    },
     'en': {
-        name: 'DSA',
-        full_name: ' DSA(Distributed Survey Accelerator)',
-        brief_info: 'Currency Description: Distributed Tribune Accelerator DSA (Distributed Survey Accelerator) is an anonymous distributed polling platform dedicated to providing decentralized rating services for blockchain projects around the world.DSA will always adhere to the spirit of “anonymity”, “autonomy” and “do not be evil”. Through artificial intelligence and blockchain technology, DSA will provide investors with a neutral information disclosure platform to purify the investment environment of the blockchain industry and protect the interests of investors. The unique community incentive mechanism and DSA index promote mutual understanding and mutual assistance among investors, project parties and users, reshape the blockchain coordination relationship, and create a new way of sharing information.',
-        issue_time: '2018-9-19',
-        issue_all: '1000 million', // 发行总量
-        issue_circulation: '80 million', // 流通总量
-        token_price: '--', // 众筹价格
-        whitepagger: '', // 白皮书
-        office_website: 'https://www.dsaglobal.io/ ', // 官网
-        chain_info: 'https://etherscan.io/token/0xbbdbccb13d09975fa9e3e9c8fa129b61065c84f3' // 区块查询
-         },
+      name: 'DSA',
+      full_name: ' DSA(Distributed Survey Accelerator)',
+      brief_info: 'Currency Description: Distributed Tribune Accelerator DSA (Distributed Survey Accelerator) is an anonymous distributed polling platform dedicated to providing decentralized rating services for blockchain projects around the world.DSA will always adhere to the spirit of “anonymity”, “autonomy” and “do not be evil”. Through artificial intelligence and blockchain technology, DSA will provide investors with a neutral information disclosure platform to purify the investment environment of the blockchain industry and protect the interests of investors. The unique community incentive mechanism and DSA index promote mutual understanding and mutual assistance among investors, project parties and users, reshape the blockchain coordination relationship, and create a new way of sharing information.',
+      issue_time: '2018-9-19',
+      issue_all: '1000 million', // 发行总量
+      issue_circulation: '80 million', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: '', // 白皮书
+      office_website: 'https://www.dsaglobal.io/ ', // 官网
+      chain_info: 'https://etherscan.io/token/0xbbdbccb13d09975fa9e3e9c8fa129b61065c84f3' // 区块查询
+    },
     'ko': {
-        name: 'DSA',
-        full_name: ' DSA(Distributed Survey Accelerator)',
-        brief_info: '코인종류소개:분류식가속기DSA（Distributed Survey Accelerator)는 익명의 디스카운트식 여론조사 플랫폼이다. 전 세계의 지역분할 프로젝트를 위해 중심적인 다중조정 서비스를 제공하는 것이다.DSA는\'익명\'과\'자치\',\'악행하지 않는다\'의 정신으로 일관하고 인공지능과 블록 기술을 통해 투자자들에게 중립적인 정보 공개 플랫폼을 제공하고 블록 업종의 투자 환경을 정화하고 투자자의 이익을 보호할 것이다. 독자적 커뮤니티 인센티브와 DSA 지수, 투자자, 프로젝트자, 사용자 간 공동 호조 촉진, 지역-블록-체인 조정 관계를 재구축, 정보 공유 새로운 방식의 구축.',
-        issue_time: '2018-10',
-        issue_all: '1000 million', // 发行总量
-        issue_circulation: '80 million', // 流通总量
-        token_price: '--', // 众筹价格
-        whitepagger: '', // 白皮书
-        office_website: 'https://www.dsaglobal.io/ ', // 官网
-        chain_info: 'https://etherscan.io/token/0xbbdbccb13d09975fa9e3e9c8fa129b61065c84f3' // 区块查询
-      }
+      name: 'DSA',
+      full_name: ' DSA(Distributed Survey Accelerator)',
+      brief_info: '코인종류소개:분류식가속기DSA（Distributed Survey Accelerator)는 익명의 디스카운트식 여론조사 플랫폼이다. 전 세계의 지역분할 프로젝트를 위해 중심적인 다중조정 서비스를 제공하는 것이다.DSA는\'익명\'과\'자치\',\'악행하지 않는다\'의 정신으로 일관하고 인공지능과 블록 기술을 통해 투자자들에게 중립적인 정보 공개 플랫폼을 제공하고 블록 업종의 투자 환경을 정화하고 투자자의 이익을 보호할 것이다. 독자적 커뮤니티 인센티브와 DSA 지수, 투자자, 프로젝트자, 사용자 간 공동 호조 촉진, 지역-블록-체인 조정 관계를 재구축, 정보 공유 새로운 방식의 구축.',
+      issue_time: '2018-10',
+      issue_all: '1000 million', // 发行总量
+      issue_circulation: '80 million', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: '', // 白皮书
+      office_website: 'https://www.dsaglobal.io/ ', // 官网
+      chain_info: 'https://etherscan.io/token/0xbbdbccb13d09975fa9e3e9c8fa129b61065c84f3' // 区块查询
+    }
   },
   BCH: {
     'zh-CN': {
@@ -986,12 +986,6 @@ export default{
 
   },
 
-
-
-
-
-
-
   GOLD: {
     'zh-CN': {
       name: 'GOLD',
@@ -1014,7 +1008,7 @@ export default{
       issue_circulation: '10,000,000', // 流通總量
       token_price: '--', // 眾籌價格
       whitepagger: 'http://www.goldchains.io/goldchainswhitepaper.pdf', // 白皮書
-      office_website: ' http://www.goldchains.io/',  // 官網
+      office_website: ' http://www.goldchains.io/', // 官網
       chain_info: 'https://etherscan.io/token/0x12565fd1436926beb0fff522d63be551240a4594' // 區塊查詢
     },
     en: {
@@ -1026,7 +1020,7 @@ export default{
       issue_circulation: ' 10,000,000', // 流通总量
       token_price: '--', // 众筹价格
       whitepagger: 'http://www.goldchains.io/goldchainswhitepaper.pdf', // 白皮书
-      office_website: ' http://www.goldchains.io/',  // 官网
+      office_website: ' http://www.goldchains.io/', // 官网
       chain_info: 'https://etherscan.io/token/0x12565fd1436926beb0fff522d63be551240a4594' // 区块查询
     },
     ko: {
@@ -1038,17 +1032,11 @@ export default{
       issue_circulation: '10,000,000', // 流通总量
       token_price: '--', // 众筹价格
       whitepagger: 'http://www.goldchains.io/goldchainswhitepaper.pdf', // 白皮书
-      office_website: ' http://www.goldchains.io/',  // 官网
+      office_website: ' http://www.goldchains.io/', // 官网
       chain_info: 'https://etherscan.io/token/0x12565fd1436926beb0fff522d63be551240a4594' // 区块查询
     }
 
   },
-
-
-
-
-
-
 
   HSN: {
     'zh-CN': {
@@ -1072,7 +1060,7 @@ export default{
       issue_circulation: '30,000,000', // 流通總量
       token_price: '--', // 眾籌價格
       whitepagger: 'https://cn.hsn.link/upload/files/2019/5/HSNWhitePaper_CN_V1.0.pdf', // 白皮書
-      office_website: 'www.hsn.link',  // 官網
+      office_website: 'www.hsn.link', // 官網
       chain_info: 'https://etherscan.io/token/0x365542df3c8c9d096c5f0de24a0d8cf33c19c8fd' // 區塊查詢
     },
     en: {
@@ -1084,7 +1072,7 @@ export default{
       issue_circulation: ' 30,000,000', // 流通总量
       token_price: '--', // 众筹价格
       whitepagger: 'https://cn.hsn.link/upload/files/2019/5/HSNWhitePaper_CN_V1.0.pdf', // 白皮书
-      office_website: 'www.hsn.link',  // 官网
+      office_website: 'www.hsn.link', // 官网
       chain_info: 'https://etherscan.io/token/0x365542df3c8c9d096c5f0de24a0d8cf33c19c8fd' // 区块查询
     },
     ko: {
@@ -1096,13 +1084,11 @@ export default{
       issue_circulation: '30,000,000', // 流通总量
       token_price: '--', // 众筹价格
       whitepagger: 'https://cn.hsn.link/upload/files/2019/5/HSNWhitePaper_CN_V1.0.pdf', // 白皮书
-      office_website: 'www.hsn.link',  // 官网
+      office_website: 'www.hsn.link', // 官网
       chain_info: 'https://etherscan.io/token/0x365542df3c8c9d096c5f0de24a0d8cf33c19c8fd' // 区块查询
     }
 
   },
-
-
 
   GTS: {
     'zh-CN': {
@@ -1114,7 +1100,7 @@ export default{
       issue_circulation: '200000000', // 流通总量
       token_price: '--', // 众筹价格
       whitepagger: 'https://gtstoken.com/GTS%E7%99%BD%E7%9A%AE%E4%B9%A6v2.5.pdf', // 白皮书
-      office_website: 'https://gtstoken.com/',  // 官网
+      office_website: 'https://gtstoken.com/', // 官网
       chain_info: 'https://etherscan.io/address/0x87cab68b76fc0cef303726404958ef56de4bb49a' // 区块查询
     },
     'zh-HK': {
@@ -1126,7 +1112,7 @@ export default{
       issue_circulation: '200000000', // 流通總量
       token_price: '--', // 眾籌價格
       whitepagger: 'https://gtstoken.com/GTS%E7%99%BD%E7%9A%AE%E4%B9%A6v2.5.pdf', // 白皮書
-      office_website: 'https://gtstoken.com/',  // 官网
+      office_website: 'https://gtstoken.com/', // 官网
       chain_info: 'https://etherscan.io/address/0x87cab68b76fc0cef303726404958ef56de4bb49a' // 區塊查詢
     },
     en: {
@@ -1137,8 +1123,8 @@ export default{
       issue_all: '1000000000 ', // 发行总量
       issue_circulation: ' 200000000', // 流通总量
       token_price: '--', // 众筹价格
-      whitepagger: 'https://gtstoken.com/GTS%E7%99%BD%E7%9A%AE%E4%B9%A6v2.5.pdf',  // 白皮书
-      office_website: 'https://gtstoken.com/',  // 官网
+      whitepagger: 'https://gtstoken.com/GTS%E7%99%BD%E7%9A%AE%E4%B9%A6v2.5.pdf', // 白皮书
+      office_website: 'https://gtstoken.com/', // 官网
       chain_info: 'https://etherscan.io/address/0x87cab68b76fc0cef303726404958ef56de4bb49a' // 区块查询
     },
     ko: {
@@ -1150,9 +1136,60 @@ export default{
       issue_circulation: '200000000', // 流通总量
       token_price: '--', // 众筹价格
       whitepagger: 'https://gtstoken.com/GTS%E7%99%BD%E7%9A%AE%E4%B9%A6v2.5.pdf', // 白皮书
-      office_website: 'https://gtstoken.com/',  // 官网
+      office_website: 'https://gtstoken.com/', // 官网
       chain_info: 'https://etherscan.io/address/0x87cab68b76fc0cef303726404958ef56de4bb49a' // 区块查询
     }
 
   },
+  VIP: {
+    'zh-CN': {
+      name: 'VIP',
+      full_name: 'VIP',
+      brief_info: 'VIP chain 是基于区块链的企业投融资平台VIPchain是基于区块链技术的投融资管理平台，致力于为企业和投资者搭建一个高效快捷方便的信息撮合去中心化平台。对于参与平台项目的投资者来说我们会赠送等额的VIP通证，投资者可以用这些VIP通证购买平台内所有融资项目所提供的产品和服务。对于所需融资的项目方来说，VIP通证一方面可以抵扣平台的融资服务费，另一方面可用于平台融资的抵押。',
+      issue_time: '2019.06.20',
+      issue_all: ' 9900000000', // 发行总量
+      issue_circulation: '500000000', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: ' http://www.vipchains.org/whitepaper/VIPCHINAEN.pdf', // 白皮书
+      office_website: 'vipchains.org', // 官网
+      chain_info: 'https://etherscan.io/token/0xc0d9da090194d62b2027e4009d9123de399ea7bf' // 区块查询
+    },
+    'zh-HK': {
+      name: 'VIP',
+      full_name: 'VIP',
+      brief_info: 'VIP chain 是基於區塊鏈的企業投融資平台VIPchain是基於區塊鏈技術的投融​​資管理平台，致力於為企業和投資者搭建一個高效快捷方便的信息撮合去中心化平台。對於參與平台項目的投資者來說我們會贈送等額的VIP通證，投資者可以用這些VIP通證購買平台內所有融資項目所提供的產品和服務。對於所需融資的項目方來說，VIP通證一方面可以抵扣平台的融資服務費，另一方面可用於平台融資的抵押。',
+      issue_time: '2019.06.20',
+      issue_all: '9900000000', // 發行總量
+      issue_circulation: '500000000', // 流通總量
+      token_price: '--', // 眾籌價格
+      whitepagger: ' http://www.vipchains.org/whitepaper/VIPCHINAEN.pdf', // 白皮書
+      office_website: 'vipchains.org', // 官网
+      chain_info: 'https://etherscan.io/token/0xc0d9da090194d62b2027e4009d9123de399ea7bf' // 區塊查詢
+    },
+    en: {
+      name: 'VIP',
+      full_name: 'VIP',
+      brief_info: 'VIPChain is a blockchain-based enterprise investment and financing platformVIPchain is a platform based on blockchain technology, specializing in lending and loan management, and investment and financing as well. It is committed to building an efficient, fast and convenient information-match decentralized platform for enterprises and investors.For investors participating in the platform projects, we will give the same amount of VIP chain, investors can use these VIP chain to purchase the products and services provided by all financing projects in the platform.',
+      issue_time: '2019.06.20',
+      issue_all: '9900000000 ', // 发行总量
+      issue_circulation: ' 500000000', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: ' http://www.vipchains.org/whitepaper/VIPCHINAEN.pdf', // 白皮书
+      office_website: 'vipchains.org', // 官网
+      chain_info: 'https://etherscan.io/token/0xc0d9da090194d62b2027e4009d9123de399ea7bf' // 区块查询
+    },
+    ko: {
+      name: 'VIP',
+      full_name: 'VIP',
+      brief_info: 'VIPchain은 지역 블록 기술의 투융자 관리 플랫폼을 기반으로 기업과 투자자를 위해 효율적이고 빠르고 편리한 정보 중추적 플랫폼을 구축하는 데 힘을 쏟고 있다.플랫폼에 참여하는 투자자에게 우리는 같은 액수의 VIP 통증을 증정하며, 투자자는이 VIP 통증으로 플랫폼내의 모든 융자항목에 제공된 제품과 서비스를 구매할 수 있다.융자를 필요로 하는 프로젝트 측을 놓고 말하면, VIP 통신 증권은 한편으로는 플랫폼의 융자 서비스 비용을 상계할 수 있고, 다른 한편으로는 플랫폼 융자의 저당에 이용할 수 있다.',
+      issue_time: '2019.06.20',
+      issue_all: '9900000000', // 发行总量
+      issue_circulation: '500000000', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: ' http://www.vipchains.org/whitepaper/VIPCHINAEN.pdf', // 白皮书
+      office_website: 'vipchains.org', // 官网
+      chain_info: 'https://etherscan.io/token/0xc0d9da090194d62b2027e4009d9123de399ea7bf' // 区块查询
+    }
+
+  }
 }

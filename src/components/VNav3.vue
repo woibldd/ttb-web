@@ -303,8 +303,10 @@ export default {
       })
     },
     logout() {
-      actions.setUserInfo(null);
-      service.signout();
+      actions.setUserInfo(null)
+      utils.setSessionStorageValue('LoginStatus', 0)
+      utils.setSessionStorageValue('markTime', 9999999999)
+      service.signout()
       if (utils.getRouteMeta(this.$route, "auth")) {
         this.$router.push({
           name: "login"
