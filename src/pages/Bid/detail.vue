@@ -178,18 +178,18 @@ export default {
 methods: {
     //   manageResopetate
     getAccountWalletList () {
-    //   this.accountBalance  = 0
-    //   service.getAccountWalletList().then(res => {
-    //     if (res.code === 0) {
-    //       res.data.forEach((item) => {
-    //         if (item.currency === this.cell.currency) {
-    //           console.log(item.currency)
-    //           console.log(this.cell.currency)
-    //           this.accountBalance = Number(item.available)
-    //         }
-    //       })
-    //     }
-    //   })
+      this.accountBalance  = 0
+      service.getAccountWalletList().then(res => {
+        if (res.code === 0) {
+          res.data.forEach((item) => {
+            if (item.currency === this.cell.currency) {
+              console.log(item.currency)
+              console.log(this.cell.currency)
+              this.accountBalance = Number(item.available)
+            }
+          })
+        }
+      })
     },
     backTop () {
       this.$router.push('/snowball')
