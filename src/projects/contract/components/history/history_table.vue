@@ -97,7 +97,7 @@
             <div class="col__row mb-10">
               <span
                 class="label"
-                v-tooltip.top-center="{html: true, content: $t('contract_mark_price_tips_table'), classes: 'contract'}">{{ $t('contract_mark_price') }}</span> <span class="value">{{ state.ct.markTickList[cholding.currency]  }}</span>
+                v-tooltip.top-center="{html: true, content: $t('contract_mark_price_tips_table'), classes: 'contract'}">{{ $t('contract_mark_price') }}</span> <span class="value">{{ markTickList[cholding.currency]  }}</span>
             </div>
             <div class="col__row">
               <span
@@ -385,6 +385,12 @@ export default {
     },
     holdingData() {
       return this.state.ct.computeHoldingList
+    },
+    markTickList() {
+      return state.ct.markTickList
+    },
+    lastPriceList() {
+      return state.ct.lastPriceList
     }
   },
   methods: {
@@ -687,6 +693,16 @@ export default {
     }
   },
   watch: {  
+    markTickList:{
+      handler:function(val,oldval){
+        console.log('markTickListmarkTickListmarkTickListmarkTickListmarkTickListmarkTickListmarkTickList')
+      },
+      deep:true//对象内部的属性监听，也叫深度监听
+    },
+    
+    lastPriceList() {
+      console.log('lastPriceListlastPriceListlastPriceListlastPriceListlastPriceListlastPriceListlastPriceList')
+    },
     // unwindPrice(v){
     //   let accuracy = this.pairInfo.accuracy || 1
     //   let scale = this.pairInfo.price_scale || 4
