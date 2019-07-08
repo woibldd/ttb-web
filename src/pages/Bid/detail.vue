@@ -134,7 +134,7 @@ export default {
       count: 0,
       controls: false,
       // 账户余额
-      accountBalance: 10000,
+      accountBalance: 0.006,
       // 预计收益
       money: 0,
       detail: {
@@ -214,12 +214,17 @@ methods: {
       this.disabled = false
       let towTotal = Number(this.cell.maxLimit) -Number(this.cell.lockedAmount)
       if (towTotal > 0) {
-         if (this.accountBalance < towTotal) {
-             this.$message.warning(`${this.$t('bby_shouy32')}`)
-             this.disabled = true
+         if (Number(this.accountBalance) > 0) {
+            if (Number(this.accountBalance) < towTotal) {
+                console.log('sss', this.accountBalance)
+                this.count = this.accountBalance
+                this.disabled = false
+            } else {
+                this.count = towTotal
+                this.disabled = false
+            }
          } else {
-            this.count = towTotal
-            this.disabled = false
+             this.$message.warning(this.$t('bby_shouy32'))
          }
       } else {
            this.$message.warning(`可用数量不足`)
@@ -294,40 +299,33 @@ methods: {
     this.detail.timeLine[0].timestamp = getLocalTime(this.cell.deadlineTime)
     this.detail.timeLine[1].timestamp = getLocalTime(this.cell.bearingTime)
     this.detail.timeLine[2].timestamp = getLocalTime(this.cell.unlockTime)
-    this.count = 0
     this.getAccountWalletList()
     if(this.cell.minLimit.indexOf('.') > 0) {
          let minArr = this.cell.minLimit.split('.')
          this.point = minArr[1].length
-         let towTotal = Number(this.cell.maxLimit) -Number(this.cell.lockedAmount)
-         if (towTotal > 0) {
-            if (this.accountBalance < towTotal) {
-                this.disabled = true
-                this.money = 0
-                this.count = 0
-            } else {
+          let towTotal = Number(this.cell.maxLimit) - Number(this.cell.lockedAmount)
+        if (Number(this.accountBalance) > 0) {
+            if (Number(this.accountBalance) < towTotal) {
+                console.log('sss', this.accountBalance)
                 this.money =  this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
                 this.disabled = false
-            }
-        } else {
-            this.disabled = true
-            this.money = 0
-        }
-    } else {
-        let towTotal = Number(this.cell.maxLimit) - Number(this.cell.lockedAmount)
-         if (towTotal > 0) {
-            if (this.accountBalance < towTotal) {
-                this.disabled = true
-                this.money = 0
-                this.count = 0
             } else {
-                this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
+                 this.money =  this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
                 this.disabled = false
             }
-        } else {
-            this.disabled = true
-            this.money = 0
-        }
+         }
+    } else {
+        let towTotal = Number(this.cell.maxLimit) - Number(this.cell.lockedAmount)
+        if (Number(this.accountBalance) > 0) {
+            if (Number(this.accountBalance) < towTotal) {
+                console.log('sss', this.accountBalance)
+                this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
+                this.disabled = false
+            } else {
+                 this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
+                this.disabled = false
+            }
+         }
     }
     let timestamp = Date.parse(new Date())
     if (this.cell.state === 1) {
@@ -339,48 +337,40 @@ methods: {
   watch: {
     count () {
     if (this.cell.state === 1) {
-        if (this.count) {
-            if(this.cell.minLimit.indexOf('.') > 0) {
-                let minArr = this.cell.minLimit.split('.')
-                
-                this.point = minArr[1].length
-                let towTotal = Number(this.cell.maxLimit) -Number(this.cell.lockedAmount)
-                if (towTotal > 0) {
-                    if (this.accountBalance < towTotal) {
-                        this.disabled = true
-                        this.money = 0
-                        this.count = 0
-                    } else {
-                        this.money =  this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
-                        this.disabled = false
-                    }
-                } else {
-                    this.disabled = true
-                    this.money = 0
-                }
+    if (this.count) {
+        if(this.cell.minLimit.indexOf('.') > 0) {
+         let minArr = this.cell.minLimit.split('.')
+         this.point = minArr[1].length
+          let towTotal = Number(this.cell.maxLimit) - Number(this.cell.lockedAmount)
+        if (Number(this.accountBalance) > 0) {
+            if (Number(this.accountBalance) < towTotal) {
+                console.log('sss', this.accountBalance)
+                this.money =  this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
+                this.disabled = false
             } else {
-                if (towTotal > 0) {
-                    if (this.accountBalance < towTotal) {
-                        this.disabled = true
-                        this.money = 0
-                        this.count = 0
-                    } else {
-                        this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
-                        this.disabled = false
-                    }
-                } else {
-                    this.disabled = true
-                    this.money = 0
-                }
+                 this.money =  this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
+                this.disabled = false
             }
-        } else {
-            this.disabled = true
-        }
+         }
+    } else {
+        let towTotal = Number(this.cell.maxLimit) - Number(this.cell.lockedAmount)
+        if (Number(this.accountBalance) > 0) {
+            if (Number(this.accountBalance) < towTotal) {
+                console.log('sss', this.accountBalance)
+                this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
+                this.disabled = false
+            } else {
+                 this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
+                this.disabled = false
+            }
+         }
+    }
     } else {
         this.disabled = true
     }
   }
   }
+}
 }
 </script>
 
