@@ -311,69 +311,7 @@ export default {
               key: "update_time"
             }
           ]
-        },
-        // 计划委托
-        // {
-        //   name: 'contract_history_plan_current',
-        //   headers: [{
-        //     title: 'contract_name',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'deal_th_side',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'contract_trigger_plan',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'contract_assign_price',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'order_th_status',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'contract_deadline',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'actions',
-        //     width: '',
-        //     key: '---'
-        //   }]
-        // },
-        // 计划历史
-        // {
-        //   name: 'contract_history_plan_history',
-        //   headers: [{
-        //     title: 'contract_name',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'deal_th_side',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'contract_trigger_plan',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'contract_assign_price',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'contract_deadline',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'actions',
-        //     width: '',
-        //     key: '---'
-        //   }]
-        // },
+        }, 
         // 已成交, 之前叫成交历史
         {
           name: "contract_history_deal_fills",
@@ -411,7 +349,7 @@ export default {
               key: "price"
             },
             {
-              title: "contract_assign_price", //委托价值
+              title: "contract_assign_price", //委托价格
               width: "",
               key: "price"
             },

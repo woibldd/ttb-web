@@ -33,7 +33,7 @@
             </span>
             <span v-else-if="header.title==='contract_deal_price' ||
                 header.title === 'contract_assign_price'"
-                v-html=" Number.parseFloat(processValue(header.key, row)).toFixed(1) "/>
+                v-html="processValue(header.key, row)"/>
             <span v-else-if="header.title=== 'contract_assign_value'"
                 v-html="processValue('contract_assign_value', row)"/>
             <span v-else v-html="processValue(header.key, row) "/>
@@ -85,14 +85,14 @@
               <!-- 开仓价格 -->
               <span
                 class="label"
-                v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_avg_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_avg') }}</span> <span class="value">{{ cholding.price | round(pairInfo.price_scale || 2) }}</span>
+                v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_avg_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_avg') }}</span> <span class="value">{{ cholding.price | round(cholding.pairInfo.price_scale || 2) }}</span>
             </div>
           </div>
           <div class="equal-col">
             <div class="col__row mb-10">
               <span
                 class="label"
-                v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_force_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_force') }}</span> <span class="value">{{ (cholding.liq_price || 0) | round(pairInfo.price_scale || 2) }}</span>
+                v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_force_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_force') }}</span> <span class="value">{{ (cholding.liq_price || 0) | round(cholding.pairInfo.price_scale || 2) }}</span>
             </div>
             <div class="col__row mb-10">
               <span

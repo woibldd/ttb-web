@@ -6,6 +6,7 @@ const processValue = {
     processValue (key, row) {
       let value = row[key] 
       let down = 0
+      let pairlist = null
 
       // 格式化时间
       if (key === 'deal_create_time') {
@@ -133,15 +134,27 @@ const processValue = {
           value = this.$big(row.amount).div(row.price).abs().round(4, down).toString()
         }
         else { 
-          let pairlist = this.state.ct.pairInfoList
+          pairlist = this.state.ct.pairInfoList
           if (!!pairlist && !!pairlist[row.symbol]) {
             value = this.$big(row.amount).times(row.price).times(pairlist[row.symbol].multiplier).round(8, down).toString()
           }
           else {
             value = "--"
           }
+        } 
+      }
+      if (key === 'price' ||
+        key === 'executed_price') {   
+        pairlist = this.state.ct.pairInfoList
+        console.log({pairlist})
+        if (!!pairlist && !!pairlist[row.symbol]) {  
+          let price_scales =  pairlist[row.symbol].price_scale || 4
+          console.log(price_scales, { test: pairlist[row.symbol]})
+          value = this.$big(row.price).round(price_scales, down).toFixed(price_scales).toString() 
         }
-          
+        else {
+          value = this.$big(row.price).round(4, down).toString().toString() 
+        }
       }
 
       if (key === 'fee_rate') {
@@ -155,8 +168,15 @@ const processValue = {
         }
       }
       // history-table > 已成交 > 价值
-      if (key === 'history_table_contract_value' && row.amount_total) {
-        value = this.$big(row.amount_total).div(row.price).toFixed(4)
+      if (key === 'history_table_contract_value' && row.amount_total) { 
+        pairlist = this.state.ct.pairInfoList
+        if (!!pairlist && !!pairlist[row.symbol]) { 
+          let value_scales =  pairlist[row.symbol].value_scale || 4
+          value = this.$big(row.amount_total).div(row.price).round(value_scales, down).toFixed(value_scales).toString() 
+        }
+        else {
+          value = this.$big(row.amount_total).div(row.price).toFixed(4).toString() 
+        }
       }
 
       // 处理委托id, 取id中哈希值的前5位

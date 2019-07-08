@@ -17,8 +17,8 @@ export default {
         }
       }
       if (holding && holding.holding && this.lastPrice !== '--' && this.lastPrice != 0) {
-        let lastPrice = this.lastPrice
-        let markPrice = this.markPrice
+        let lastPrice = this.lastPrice == '--' ? 0 : this.lastPrice;
+        let markPrice = this.markPrice == '--' ? 0 : this.markPrice;
         // let $diff = this.$big(this.lastPrice).minus(holding.price)
         // let $value = this.$big(holding.amount).div(Number(holding.price) || 1)
         // let $newValue = this.$big(holding.amount).div(lastPrice)
