@@ -1,17 +1,20 @@
 <template>
-  <div class="nav_box" :class="{dark: dark}">
+  <div class="nav_box" 
+:class="{dark: dark}">
     <div class="ind_cen">
-      <router-link :to="{name:'home'}" class="nav_logo"/>
+      <router-link :to="{name:'home'}" 
+class="nav_logo"/>
       <div class="nav_left">
         <div class="left_options">
-          <router-link :to="{name: 'trading'}" class="nav_link">{{ $t('trading') }}</router-link>
+          <router-link :to="{name: 'trading'}" 
+class="nav_link">{{ $t('trading') }}</router-link>
           <a
             v-if="showContract"
             href="/contract.html"
             :class="{'router-link-active': from === 'contract'}"
             class="nav_link ml-30">{{ $t('contract') }}
           </a>
-           <router-link
+          <router-link
             :to="{name: 'OTC'}"
             class="nav_link  ml-30">{{ $t('otc_trade') }}</router-link>
 
@@ -22,12 +25,13 @@
             style="padding-left:10px;"
           >
             {{ $t('FrenzySaleZone') }}(SP)
-            <img src="@/assets/hot.png" alt style="position: relative;top: 5px;left: 5px;">
+            <img src="@/assets/hot.png" 
+alt style="position: relative;top: 5px;left: 5px;">
           </router-link>
           <router-link
             to="/snowball"
             class="nav_link  ml-30">
-            {{$t('bidTitle')}}
+            {{ $t('bidTitle') }}
           </router-link>
           <!-- <div class="nav_link arrow-down">
             <a
@@ -116,21 +120,27 @@
         </div>
       </div>
       <div class="nav_right">
-        <div class="set-app-dl right_options" style="margin-right: 40px;">
-          <router-link class="nav_log_res" :to="{name: 'Download'}">
+        <div class="set-app-dl right_options" 
+style="margin-right: 40px;">
+          <router-link class="nav_log_res" 
+:to="{name: 'Download'}">
             <div class="app-dl">
-              <icon class="mr-3" name="topbar-dl-phone"/>APP
+              <icon class="mr-3" 
+name="topbar-dl-phone"/>APP
             </div>
           </router-link>
         </div>
-        <div v-if="!state.userInfo" class="right_options">
+        <div v-if="!state.userInfo" 
+class="right_options">
           <router-link
             :to="{name:'login'}"
             class="nav_log_res border-right-1 pr-14 mr-14"
           >{{ $t("signin") }}</router-link>
-          <router-link :to="{name:'register'}" class="nav_log_res">{{ $t("signup_title") }}</router-link>
+          <router-link :to="{name:'register'}" 
+class="nav_log_res">{{ $t("signup_title") }}</router-link>
         </div>
-        <div class="right_options" v-else>
+        <div class="right_options" 
+v-else>
           <!-- <p class="email">
             <router-link :to="{name:'trading'}">币币交易</router-link>
           </p>
@@ -144,13 +154,16 @@
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
-                  <router-link :to="{name: 'fund'}" class="link">{{ $t('capital_manage') }}</router-link>
+                  <router-link :to="{name: 'fund'}" 
+class="link">{{ $t('capital_manage') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <router-link :to="{name: 'deposit'}" class="link">{{ $t('deposit') }}</router-link>
+                  <router-link :to="{name: 'deposit'}" 
+class="link">{{ $t('deposit') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <router-link :to="{name: 'withdraw'}" class="link">{{ $t('withdraw') }}</router-link>
+                  <router-link :to="{name: 'withdraw'}" 
+class="link">{{ $t('withdraw') }}</router-link>
                 </li>
               </ul>
             </div>
@@ -166,7 +179,8 @@
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24 mobile">
-                  <router-link :to="{name: 'fund'}" class="link">{{ $t('capital_manage') }}</router-link>
+                  <router-link :to="{name: 'fund'}" 
+class="link">{{ $t('capital_manage') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
                   <router-link
@@ -175,7 +189,8 @@
                   >{{ $t('profile_personal_center') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <a class="link" @click="logout">{{ $t('signout') }}</a>
+                  <a class="link" 
+@click="logout">{{ $t('signout') }}</a>
                 </li>
               </ul>
             </div>
@@ -185,13 +200,16 @@
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
-                  <a class="link" target="_blank" :href="announcementLink">{{ $t('footer_notice') }}</a>
+                  <a class="link" 
+target="_blank" :href="announcementLink">{{ $t('footer_notice') }}</a>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <a class="link" target="_blank" :href="helpLink">{{ $t('user_guide') }}</a>
+                  <a class="link" 
+target="_blank" :href="helpLink">{{ $t('user_guide') }}</a>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <a class="link" target="_blank" :href="requestLink">{{ $t('footer_request') }}</a>
+                  <a class="link" 
+target="_blank" :href="requestLink">{{ $t('footer_request') }}</a>
                 </li>
               </ul>
             </div>
@@ -199,12 +217,16 @@
         </div>
 
         <div class="lang">
-          <icon :name="'flag-'+state.locale" class="mr-5"/>
+          <icon :name="'flag-'+state.locale" 
+class="mr-5"/>
           {{ localeText }}
-          <icon class="rig" name="arrow-down"/>
+          <icon class="rig" 
+name="arrow-down"/>
           <div class="lang_box">
-            <a @click="switchLang(key)" :key="key" v-for="(value, key) in locales">
-              <icon :name="'flag-'+key" class="mr-5"/>
+            <a @click="switchLang(key)" 
+:key="key" v-for="(value, key) in locales">
+              <icon :name="'flag-'+key" 
+class="mr-5"/>
               {{ value }}
             </a>
           </div>
@@ -215,9 +237,9 @@
 </template>
 
 <script>
-import { state, actions } from "@/modules/store";
-import service from "@/modules/service";
-import utils from "@/modules/utils";
+import { state, actions } from '@/modules/store';
+import service from '@/modules/service';
+import utils from '@/modules/utils';
 
 export default {
   props: {
@@ -227,126 +249,126 @@ export default {
     },
     from: {
       type: String,
-      default: ""
+      default: ''
     }
   },
-  data() {
+  data () {
     return {
       state,
       locales: utils.locales
-    };
+    }
   },
   computed: {
-    localeText() {
-      return utils.getLocaleName(state.locale);
+    localeText () {
+      return utils.getLocaleName(state.locale)
     },
-    pdfSubfix() {
-      if (state.locale === "zh-CN") {
-        return "+zh-CN";
+    pdfSubfix () {
+      if (state.locale === 'zh-CN') {
+        return '+zh-CN';
       }
-      return "";
+      return '';
     },
-    desentInfo() {
-      let userInfo = this.state.userInfo;
+    desentInfo () {
+      let userInfo = this.state.userInfo
       if (userInfo) {
         if (userInfo.phone) {
-          return utils.publicDesensitization(userInfo.phone)[0];
+          return utils.publicDesensitization(userInfo.phone)[0]
           // return utils.publicDesensitization('91418865')[0]
         } else if (userInfo.email) {
-          return utils.publicDesensitization(userInfo.email)[0];
+          return utils.publicDesensitization(userInfo.email)[0]
         }
       }
-      return "";
+      return '';
     },
-    helpLink() {
+    helpLink () {
       return (
         this.state.theme.help[this.state.locale] || this.state.theme.help.en
-      );
+      )
     },
-    requestLink() {
-      if (this.state.userInfo && this.state.theme.themeName === "default") {
+    requestLink () {
+      if (this.state.userInfo && this.state.theme.themeName === 'default') {
         return (
           process.env.BASE_API +
-          "ixx/zendesk/sso?return_to=" +
+          'ixx/zendesk/sso?return_to=' +
           encodeURIComponent(
             this.state.theme.request[this.state.locale] ||
               this.state.theme.request.en
           )
-        );
+        )
       } else {
         return (
           this.state.theme.request[this.state.locale] ||
           this.request.theme.help.en
-        );
+        )
       }
     },
-    announcementLink() {
+    announcementLink () {
       return (
         this.state.theme.announcement[this.state.locale] ||
         this.state.theme.announcement.en
-      );
+      )
     },
-    isTestnet() {
-      return location.hostname.indexOf("ixex.pro") >= 0;
+    isTestnet () {
+      return location.hostname.indexOf('ixex.pro') >= 0
     },
-    showContract() {
-      let time1 = new Date();
-      let time2 = new Date(2019, 4, 7, 14);
-      return this.isTestnet || time1 > time2;
+    showContract () {
+      let time1 = new Date()
+      let time2 = new Date(2019, 4, 7, 14)
+      return this.isTestnet || time1 > time2
     }
   },
   methods: {
-    switchLang(lang) {
+    switchLang (lang) {
       actions.setLocale(lang)
       this.$nextTick(() => {
         location.reload()
       })
     },
-    logout()
+    logout () {
       actions.setUserInfo(null)
       utils.setSessionStorageValue('LoginStatus', 0)
       utils.setSessionStorageValue('markTime', 9999999999)
       service.signout()
-      if (utils.getRouteMeta(this.$route, "auth")) {
+      if (utils.getRouteMeta(this.$route, 'auth')) {
         this.$router.push({
-          name: "login"
-        });
+          name: 'login'
+        })
       }
 
       this.$nextTick(() => {
-        location.reload();
-      });
+        location.reload()
+      })
     },
-    clickStar($event) {
-      this.className = "active"; // console.log($event.currentTarget);
+    clickStar ($event) {
+      this.className = 'active'; // console.log($event.currentTarget);
     },
     alert () {
       alert(1)
     },
-    openDefault(type) {
+    openDefault (type) {
       switch (type) {
-        case "fund":
+        case 'fund':
           this.$router.push({
-            name: "fund"
-          });
+            name: 'fund'
+          })
           break;
-        case "profile":
+        case 'profile':
           this.$router.push({
-            name: "profile"
-          });
+            name: 'profile'
+          })
           break;
-        case "help":
-          window.open(this.helpLink);
+        case 'help':
+          window.open(this.helpLink)
           break;
-        case "orders":
+        case 'orders':
           this.$router.push({
-            name: "orders"
-          });
+            name: 'orders'
+          })
           break;
       }
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
