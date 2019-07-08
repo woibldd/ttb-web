@@ -980,7 +980,7 @@ export default {
       let down = 0
 
       if (totalValue && amount) {
-        let margin = calculator.getMargin(amount, price, lever, totalValue, im, mm, takeRate, this.state.ct.pair)
+        let margin = calculator.getMargin(amount, price, lever, totalValue, im, mm, takeRate, pairInfo)
         return margin.cost.round(this.pairInfo.value_scale || 4, down).toString()
       }
       return "--"
@@ -1023,7 +1023,7 @@ export default {
       let down = 0
 
       if (totalValue && amount) {
-        let margin = calculator.getMargin(amount, price, lever, totalValue, im, mm, takeRate,this.state.ct.pair)
+        let margin = calculator.getMargin(amount, price, lever, totalValue, im, mm, takeRate, pairInfo)
         return margin.cost.round(this.pairInfo.value_scale || 4, down).toString()
       }
       return "--"
@@ -2176,7 +2176,7 @@ export default {
 
         // let totalValue = 0 
         let totalValue = calculator.getTotalValue(future, this.holding, pairInfo, mul);
-        return calculator.getMargin(amount, price, lever, totalValue, im, mm, takeRate, this.state.ct.pair)
+        return calculator.getMargin(amount, price, lever, totalValue, im, mm, takeRate, pairInfo)
       }
       return "--";
     }, 

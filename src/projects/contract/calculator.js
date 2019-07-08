@@ -8,7 +8,7 @@ export default {
    * IX算法 100 / 当前杠杆
    * @param {Object}
    */
-  getMargin(amount, price, lever, totalValue, im, mm, take_rate, pair){ 
+  getMargin(amount, price, lever, totalValue, im, mm, take_rate, pairInfo){ 
     if(amount == 0 || price == 0 || price == '--')
       return {
         margin: Big(0), //起始保证金
@@ -22,8 +22,8 @@ export default {
     // if (this.state.ct.pair === 'FUTURE_VDSUSD') {
     let value = (Big(amount).div(price)).round(6, down)
     let ix = Big(100).div(Big(lever).eq(0) ? 100 : lever).round(6, down)
-    if (pair !== 'FUTURE_BTCUSD') { 
-      let mul = Big(0.0001) //乘数
+    if (pairInfo.name !== 'FUTURE_BTCUSD') { 
+      let mul = Big(pairInfo.multiplier) //乘数
       value = mul.times(price).times(amount)
       ix = Big(20).div(Big(lever).eq(0) ? 20 : lever).round(6, down)
     }
