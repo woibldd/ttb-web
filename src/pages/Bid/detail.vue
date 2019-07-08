@@ -57,7 +57,7 @@
               </el-timeline-item>
               <el-timeline-item
                 color="#C9A96C">
-                 {{$t('bby_shouy29')}}
+                {{$t('bby_shouy29')}}
                 <span style="padding-left: 10px;color: #333">{{ detail.timeLine[1].timestamp }}</span>
               </el-timeline-item>
               <el-timeline-item
@@ -88,12 +88,12 @@
             <!--<input type="number" :placeholder="$t('bby_shouy19')" @input="inputKeyBoard" />-->
             <!-- <el-input-number v-model.number="count" :min="Number(cell.minLimit)" @change="inputKeyBoard"
                              :max="Number(cell.maxLimit)" label="请输入存币数量"  :controls="controls"></el-input-number> -->
-                             <number-input
-                    class="number-input"
-                    v-model="count"
-                    :scale="point"
-                    placeholder="请输入存币数量"
-                />
+            <number-input
+              class="number-input"
+              v-model="count"
+              :scale="point"
+              placeholder="请输入存币数量"
+            />
             <div class="rage">
               <span class="cell">{{cell.currency}}</span>
               <em @click="allMoney">{{$t('allin')}}</em>
@@ -121,267 +121,257 @@
 </template>
 
 <script type="text/ecmascript-6">
-import axios from 'axios'
-import {getLocalTime} from './mixins'
-import Vue from 'vue'
-import qs from 'qs'
-import service from '@/modules/service'
-import { envApi } from '../../modules/request'
+  import axios from 'axios'
+  import {getLocalTime} from './mixins'
+  import Vue from 'vue'
+  import qs from 'qs'
+  import service from '@/modules/service'
+  import { envApi } from '../../modules/request'
 
-export default {
-  data () {
-    return {
-      count: 0,
-      controls: false,
-      // 账户余额
-      accountBalance: 10000,
-      // 预计收益
-      money: 0,
-      detail: {
-        id: 2,
-        lock: 40,
-        join: 100,
-        rate: 0.09,
-        term: 30,
-        currency: 'USDT',
-        snap_all_amount: 50000,
-        join_amount: 36000,
-        remaining_amount: 46000,
-        save_max_money: 1000,
-        step_money: 100,
-        time_limit: 30,
-        cycle: 40,
-        startTime: '05/14 10:00',
-        endTime: '05/15 13:00',
-        timeLine: [{
-          content: this.$t('bby_shouy28'),
-          timestamp: '2018-04-15',
-          color: '#C9A96C'
-        }, {
-          content: this.$t('bby_shouy29'),
-          timestamp: '2018-04-13',
-          color: '#C9A96C'
-        }, {
-          content: this.$t('bby_shouy30'),
-          timestamp: '2018-04-11',
-          color: '#C9A96C'
-        }]
+  export default {
+    data () {
+      return {
+        count: 0,
+        controls: false,
+        // 账户余额
+        accountBalance: 0.006,
+        // 预计收益
+        money: 0,
+        detail: {
+          id: 2,
+          lock: 40,
+          join: 100,
+          rate: 0.09,
+          term: 30,
+          currency: 'USDT',
+          snap_all_amount: 50000,
+          join_amount: 36000,
+          remaining_amount: 46000,
+          save_max_money: 1000,
+          step_money: 100,
+          time_limit: 30,
+          cycle: 40,
+          startTime: '05/14 10:00',
+          endTime: '05/15 13:00',
+          timeLine: [{
+            content: this.$t('bby_shouy28'),
+            timestamp: '2018-04-15',
+            color: '#C9A96C'
+          }, {
+            content: this.$t('bby_shouy29'),
+            timestamp: '2018-04-13',
+            color: '#C9A96C'
+          }, {
+            content: this.$t('bby_shouy30'),
+            timestamp: '2018-04-11',
+            color: '#C9A96C'
+          }]
+        },
+        disabled: true,
+        cell: {},
+        point: 0
+      }
+    },
+    mounted() {
+
+    },
+    methods: {
+      //   manageResopetate
+      getAccountWalletList () {
+        this.accountBalance  = 0
+        service.getAccountWalletList().then(res => {
+          if (res.code === 0) {
+            res.data.forEach((item) => {
+              if (item.currency === this.cell.currency) {
+                console.log(item.currency)
+                console.log(this.cell.currency)
+                this.accountBalance = Number(item.available)
+              }
+            })
+          }
+        })
       },
-      disabled: true,
-      cell: {},
-      point: 0
-    }
-  },
-  mounted() {
-
-  },
-methods: {
-    //   manageResopetate
-    getAccountWalletList () {
-      this.accountBalance  = 0
-      service.getAccountWalletList().then(res => {
-        if (res.code === 0) {
-          res.data.forEach((item) => {
-            if (item.currency === this.cell.currency) {
-              console.log(item.currency)
-              console.log(this.cell.currency)
-              this.accountBalance = Number(item.available)
+      backTop () {
+        this.$router.push('/snowball')
+      },
+      inputKeyBoard (e) {
+        if (e > this.accountBalance) {
+          this.count = this.accountBalance
+        }
+      },
+      allMoney () {
+        //   if (this.accountBalance < Number(this.cell.minLimit)) {
+        //     // this.$message.warning('余额不足，请充值')
+        //      this.$message({
+        //               type: 'warning',
+        //                message: this.$t('bby_shouy32')
+        //             })
+        //   } else {
+        //       if(this.accountBalance >= this.cell.maxLimit) {
+        //           this.count = this.cell.maxLimit
+        //       }
+        //   }
+        this.disabled = false
+        let towTotal = Number(this.cell.maxLimit) -Number(this.cell.lockedAmount)
+        if (towTotal > 0) {
+          if (Number(this.accountBalance) > 0) {
+            if (Number(this.accountBalance) < towTotal) {
+              console.log('sss', this.accountBalance)
+              this.count = this.accountBalance
+              this.disabled = false
+            } else {
+              this.count = towTotal
+              this.disabled = false
+            }
+          } else {
+            this.$message.warning(this.$t('bby_shouy32'))
+          }
+        } else {
+          this.$message.warning(`可用数量不足`)
+          this.disabled = true
+        }
+      },
+      jl() {
+        this.$router.push({
+          name: 'bidtable'
+        })
+      },
+      submit () {
+        if (this.accountBalance !== 0) {
+          service.manageRecord(qs.stringify({
+            site: this.cell.site,
+            currency: this.cell.currency,
+            amount: this.count,
+            manageId: this.cell.manageId
+          }), {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+            }
+          }).then((res) => {
+            if (res.code === 0) {
+              // this.$message.success('购买成功')
+              this.$message({
+                type: 'success',
+                message: this.$t('bby_shouy31')
+              })
+              this.$router.push({
+                path: '/bidtable'
+              })
+            } else {
+              this.$message.warning(`${res.message}`)
             }
           })
+        } else if (this.accountBalance < this.account) {
+          this.$message.warning(this.$t('bby_shouy32'))
+        } else {
+          this.$message.warning(this.$t('bby_shouy32'))
         }
-      })
-    },
-    backTop () {
-      this.$router.push('/snowball')
-    },
-    inputKeyBoard (e) {
-      if (e > this.accountBalance) {
-        this.count = this.accountBalance
       }
     },
-    allMoney () {
-    //   if (this.accountBalance < Number(this.cell.minLimit)) {
-    //     // this.$message.warning('余额不足，请充值')
-    //      this.$message({
-    //               type: 'warning',
-    //                message: this.$t('bby_shouy32')
-    //             })
-    //   } else {
-    //       if(this.accountBalance >= this.cell.maxLimit) {
-    //           this.count = this.cell.maxLimit
-    //       }
-    //   }
-      this.disabled = false
-      let towTotal = Number(this.cell.maxLimit) -Number(this.cell.lockedAmount)
-      if (towTotal > 0) {
-         if (this.accountBalance < towTotal) {
-             this.$message.warning(`${this.$t('bby_shouy32')}`)
-             this.disabled = true
-         } else {
-            this.count = towTotal
-            this.disabled = false
-         }
-      } else {
-           this.$message.warning(`可用数量不足`)
-           this.disabled = true
-      }
-    },
-    jl() {
-        this.$router.push({
-            name: 'bidtable'
-        })
-    },
-    submit () {
-      if (this.accountBalance !== 0) {
-        service.manageRecord(qs.stringify({
-          site: this.cell.site,
-          currency: this.cell.currency,
-          amount: this.count,
-          manageId: this.cell.manageId
-        }), {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-          }
-        }).then((res) => {
-          if (res.code === 0) {
-            // this.$message.success('购买成功')
-             this.$message({
-                  type: 'success',
-                   message: this.$t('bby_shouy31')
-                })
-            this.$router.push({
-              path: '/bid'
-            })
-          } else {
-            this.$message.warning(`${res.message}`)
-          }
-        })
-      } else if (this.accountBalance < this.account) {
-        this.$message.warning(this.$t('bby_shouy32'))
-      } else {
-        this.$message.warning(this.$t('bby_shouy32'))
-      }
-    }
-  },
-  mounted() {
-       this.timeLine = [{
+    mounted() {
+      this.timeLine = [{
         content: this.$t('bby_shouy28'),
         timestamp: '2018-04-15',
         color: '#C9A96C'
-    }, {
+      }, {
         content: this.$t('bby_shouy29'),
         timestamp: '2018-04-13',
         color: '#C9A96C'
-    }, {
+      }, {
         content: this.$t('bby_shouy30'),
         timestamp: '2018-04-11',
         color: '#C9A96C'
-    }]
-  },
-  created () {
-    this.cell = JSON.parse(window.localStorage.getItem('detail'))
-    const remaining_amount = Number(this.cell.total) - Number(this.cell.lockedAmount)
-    let c = Number(this.cell.lockedAmount) / (Number(this.cell.total) / 100)
-    if (this.cell.lockedAmount.indexOf('.') > 0) {
+      }]
+    },
+    created () {
+      this.cell = JSON.parse(window.localStorage.getItem('detail'))
+      const remaining_amount = Number(this.cell.total) - Number(this.cell.lockedAmount)
+      let c = Number(this.cell.lockedAmount) / (Number(this.cell.total) / 100)
+      if (this.cell.lockedAmount.indexOf('.') > 0) {
         let minArr = this.cell.lockedAmount.split('.')
-      Vue.set(this.cell, 'remaining_amount', remaining_amount.toFixed(minArr[1].length))
-    } else {
-      Vue.set(this.cell, 'remaining_amount', remaining_amount)
-    }
-    Vue.set(this.cell, 'down_amount', c)
-    Vue.set(this.cell, 'max_limit', Number(this.cell.maxLimit))
-    Vue.set(this.cell, 'min_limit', Number(this.cell.minLimit))
-    this.detail.timeLine[0].timestamp = getLocalTime(this.cell.deadlineTime)
-    this.detail.timeLine[1].timestamp = getLocalTime(this.cell.bearingTime)
-    this.detail.timeLine[2].timestamp = getLocalTime(this.cell.unlockTime)
-    this.count = 0
-    this.getAccountWalletList()
-    if(this.cell.minLimit.indexOf('.') > 0) {
-         let minArr = this.cell.minLimit.split('.')
-         this.point = minArr[1].length
-         let towTotal = Number(this.cell.maxLimit) -Number(this.cell.lockedAmount)
-         if (towTotal > 0) {
-            if (this.accountBalance < towTotal) {
-                this.disabled = true
-                this.money = 0
-                this.count = 0
-            } else {
-                this.money =  this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
-                this.disabled = false
-            }
-        } else {
-            this.disabled = true
-            this.money = 0
-        }
-    } else {
+        Vue.set(this.cell, 'remaining_amount', remaining_amount.toFixed(minArr[1].length))
+      } else {
+        Vue.set(this.cell, 'remaining_amount', remaining_amount)
+      }
+      Vue.set(this.cell, 'down_amount', c)
+      Vue.set(this.cell, 'max_limit', Number(this.cell.maxLimit))
+      Vue.set(this.cell, 'min_limit', Number(this.cell.minLimit))
+      this.detail.timeLine[0].timestamp = getLocalTime(this.cell.deadlineTime)
+      this.detail.timeLine[1].timestamp = getLocalTime(this.cell.bearingTime)
+      this.detail.timeLine[2].timestamp = getLocalTime(this.cell.unlockTime)
+      this.getAccountWalletList()
+      if(this.cell.minLimit.indexOf('.') > 0) {
+        let minArr = this.cell.minLimit.split('.')
+        this.point = minArr[1].length
         let towTotal = Number(this.cell.maxLimit) - Number(this.cell.lockedAmount)
-         if (towTotal > 0) {
-            if (this.accountBalance < towTotal) {
-                this.disabled = true
-                this.money = 0
-                this.count = 0
-            } else {
-                this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
-                this.disabled = false
-            }
-        } else {
-            this.disabled = true
-            this.money = 0
+        if (Number(this.accountBalance) > 0) {
+          if (Number(this.accountBalance) < towTotal) {
+            console.log('sss', this.accountBalance)
+            this.money =  this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
+            this.disabled = false
+          } else {
+            this.money =  this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
+            this.disabled = false
+          }
         }
-    }
-    let timestamp = Date.parse(new Date())
-    if (this.cell.state === 1) {
+      } else {
+        let towTotal = Number(this.cell.maxLimit) - Number(this.cell.lockedAmount)
+        if (Number(this.accountBalance) > 0) {
+          if (Number(this.accountBalance) < towTotal) {
+            console.log('sss', this.accountBalance)
+            this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
+            this.disabled = false
+          } else {
+            this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
+            this.disabled = false
+          }
+        }
+      }
+      let timestamp = Date.parse(new Date())
+      if (this.cell.state === 1) {
         this.disabled = false
-    } else {
-         this.disabled = true
-    }
-  },
-  watch: {
-    count () {
-    if (this.cell.state === 1) {
-        if (this.count) {
-            if(this.cell.minLimit.indexOf('.') > 0) {
-                let minArr = this.cell.minLimit.split('.')
-                
-                this.point = minArr[1].length
-                let towTotal = Number(this.cell.maxLimit) -Number(this.cell.lockedAmount)
-                if (towTotal > 0) {
-                    if (this.accountBalance < towTotal) {
-                        this.disabled = true
-                        this.money = 0
-                        this.count = 0
-                    } else {
-                        this.money =  this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
-                        this.disabled = false
-                    }
-                } else {
-                    this.disabled = true
-                    this.money = 0
-                }
-            } else {
-                if (towTotal > 0) {
-                    if (this.accountBalance < towTotal) {
-                        this.disabled = true
-                        this.money = 0
-                        this.count = 0
-                    } else {
-                        this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
-                        this.disabled = false
-                    }
-                } else {
-                    this.disabled = true
-                    this.money = 0
-                }
-            }
-        } else {
-            this.disabled = true
-        }
-    } else {
+      } else {
         this.disabled = true
+      }
+    },
+    watch: {
+      count () {
+        if (this.cell.state === 1) {
+          if (this.count) {
+            if(this.cell.minLimit.indexOf('.') > 0) {
+              let minArr = this.cell.minLimit.split('.')
+              this.point = minArr[1].length
+              let towTotal = Number(this.cell.maxLimit) - Number(this.cell.lockedAmount)
+              if (Number(this.accountBalance) > 0) {
+                if (Number(this.accountBalance) < towTotal) {
+                  console.log('sss', this.accountBalance)
+                  this.money =  this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
+                  this.disabled = false
+                } else {
+                  this.money =  this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
+                  this.disabled = false
+                }
+              }
+            } else {
+              let towTotal = Number(this.cell.maxLimit) - Number(this.cell.lockedAmount)
+              if (Number(this.accountBalance) > 0) {
+                if (Number(this.accountBalance) < towTotal) {
+                  console.log('sss', this.accountBalance)
+                  this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
+                  this.disabled = false
+                } else {
+                  this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
+                  this.disabled = false
+                }
+              }
+            }
+          } else {
+            this.disabled = true
+          }
+        }
+      }
     }
   }
-  }
-}
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
@@ -432,7 +422,7 @@ methods: {
         top: 24px;
         cursor: pointer;
         display: block;
-    }
+      }
       .logo {
         width: 36px;
         height: 36px;
