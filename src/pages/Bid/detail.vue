@@ -255,7 +255,7 @@ methods: {
                    message: this.$t('bby_shouy31')
                 })
             this.$router.push({
-              path: '/bid'
+              path: '/bidtable'
             })
           } else {
             this.$message.warning(`${res.message}`)
