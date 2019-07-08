@@ -302,7 +302,7 @@ export default {
         location.reload()
       })
     },
-    logout() {
+    logout()
       actions.setUserInfo(null)
       utils.setSessionStorageValue('LoginStatus', 0)
       utils.setSessionStorageValue('markTime', 9999999999)
