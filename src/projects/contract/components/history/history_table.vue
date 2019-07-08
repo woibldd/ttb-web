@@ -141,7 +141,7 @@
                   <span
                     class="value val2"
                     :class="{ 'bgcolor-unp': cholding.unrealizedlp > 0,  'bgcolor-dnp': cholding.unrealizedlp < 0}">
-                    {{ cholding.unrealizedlp | fixed(cholding.pairInfo.price_scale || 4) }} ({{ cholding.roelp }}%) 
+                    {{ cholding.unrealizedlp | fixed(cholding.pairInfo.value_scale || 4) }} ({{ cholding.roelp }}%) 
                   </span> 
 
                 </i>
