@@ -1479,8 +1479,8 @@
     "contract_close_market":"市价平仓",
     "contract_close_market_buy":"市价买入平仓",
     "contract_close_market_sell":"市价卖出平仓",
-    "contract_close_tips1":"在%{price}价格%{amount}张BTC合约。",
-    "contract_close_tips4":"在最优价格%{amount}张BTC合约。",
+    "contract_close_tips1":"在%{price}价格%{amount}张%{currency}合约。",
+    "contract_close_tips4":"在最优价格%{amount}张%{currency}合约。",
     "contract_close_tips2":"在执行时，将平掉你的整个仓位。",
     "contract_close_tips3":"这是假设你市价平仓后预测的盈亏，它根据目前的委托列表来计算",
 

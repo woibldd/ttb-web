@@ -1471,76 +1471,7 @@ export default {
           utils.alert(res.message);
         }
       }
-    },
-    // async mmModalLeverChange(item) {
-    //   console.log(item, "mmModalLeverChange");
-    //   if (this.maxTimes && item > this.maxTimes) {
-    //     // 纠正输入
-    //     utils.alert(`最大${this.maxTimes}倍杠杆`);
-    //     item = this.maxTimes;
-    //   }
-
-    //   if (this.holding.amount != 0) {
-    //     console.log(1);
-    //     let params = {
-    //       currency: this.pairInfo.symbol,
-    //       leverage: item
-    //     };
-    //     let pRes = await service.previewContractlever(params);
-    //     let pData = null;
-    //     if (!pRes.code) {
-    //       pData = Object.create(pRes.data);
-    //       pData.margin_position = this.$big(pData.margin_position || 0)
-    //         .round(4)
-    //         .toString();
-    //       pData.margin_delegation = this.$big(pData.margin_delegation || 0)
-    //         .round(4)
-    //         .toString();
-    //     } else {
-    //       return utils.alert(pRes.message);
-    //     }
-
-    //     console.log(12345);
-    //     let content = this.$t("contract_confirm_txt", {
-    //       y: item,
-    //       m: pData.margin_position,
-    //       n: pData.margin_delegation
-    //     });
-
-    //     let cRes = await utils.confirm(this, {
-    //       customClass: "ix-message-box-wrapper",
-    //       confirmButtonClass: "btn--confirm",
-    //       cancelButtonClass: "btn--cancel",
-    //       title: this.$t("contract_confirm_change"),
-    //       content
-    //     });
-    //     if (cRes) {
-    //       // 确定
-    //       let res = await service.setContractlever(params);
-    //       if (!res.code) {
-    //         this._setLeverage(item);
-    //         // 重新拉下持仓数据
-    //         this.getBalance();
-    //       } else {
-    //         utils.alert(res.message);
-    //       }
-    //     }
-    //   } else {
-    //     console.log(2);
-    //     this._setLeverage(item);
-    //     let params = {
-    //       currency: this.pairInfo.symbol,
-    //       leverage: item
-    //     };
-    //     let res = await service.setContractlever(params);
-    //     if (!res.code) {
-    //       // 重新拉下持仓数据
-    //       this.getBalance();
-    //     } else {
-    //       utils.alert(res.message);
-    //     }
-    //   }
-    // },
+    }, 
     setCookie(cname,cvalue,exdays){
       var d = new Date();
       d.setTime(d.getTime()+(exdays * 24 * 60 * 60 * 1000));
@@ -1568,9 +1499,7 @@ export default {
       this.userLeverTime = value;
     },
     changeHoldingLeverTimes(item) {
-      //return this.mmModalLeverChange(item);
-      
-      console.log({item},'11111111111111111111111111111111111111111')
+      //return this.mmModalLeverChange(item); 
       return this.mmChangeConfirm(item);
     },
     // 单机编辑
@@ -2090,17 +2019,19 @@ export default {
             if (res.data && res.data.leverage != null && res.data.leverage != undefined ) {
               this._setLeverage(res.data.leverage);
             }
+            this.$eh.$emit("protrade:order:refresh");
           }
         });
     },
-    // async getRiskLimit () {
-    //   let res = await service.getRiskLimit({
-    //     symbol: this.pairInfo.name
-    //   })
-    //   if (!res.code) {
-    //     this.riskModal.currentValue = res.data.current
+    // getBalanceList() { 
+    //   if (!this.isLogin) {
+    //     return;
     //   }
-    // },
+    //   service.getContractBalanceList()
+    //   .then(res => {
+
+    //   })
+    // }, 
     async fetchData() {
       await this.getBalance();
       if (!isEmpty(this.holding)) { 

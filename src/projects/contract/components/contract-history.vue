@@ -646,173 +646,6 @@ export default {
       }
       // this.fetchActiveList()
     }, 
-    computeHoldingList(list) { 
-      let markPriceList = this.state.ct.markTickList
-      let lastPriceList = this.state.ct.lastPriceList
-      let pairInfoList = this.state.ct.pairInfoList
-
-      let holdingList = list.map(holding => {
-        //币种不同算法不一样，
-       
-        if (holding.currency === 'BTCUSD') {
-          holding.unit = '1 USD'
-          holding.symbol = 'BTC' 
-        // } else if (holding.currency === 'VDSUSD') {
-        //   holding.unit =  this.$big(this.lastPrice).mul(this.currencyMul).toString() + ' BTC'
-        //   holding.symbol = 'VDS'
-        } else if (!!holding.currency) { 
-          let pair = pairInfoList['FUTURE_'+holding.currency]
-          if (!pair) { 
-            holding.unit = ''
-            holding.symbol = ''
-            return holding
-          } 
-          let last = lastPriceList[holding.currency] || 0 
-          holding.unit = this.$big(last).mul(pair.multiplier || 0).toString() + ' BTC'
-          holding.symbol = holding.currency.replace('USD','')
-        } else {
-          holding.unit = ''
-          holding.symbol = ''
-        }
-        let symbol = holding.symbol  
-        let currency = holding.currency
-        let unitPrice = 1 //单价 先写死
-        if (holding) {
-          // hack
-          holding.amount = holding.holding || '0'
-          holding.value = '0'
-        } else {
-          holding = {
-            amount: '0',
-            available_balance: '0',
-            value: '0'
-          }
-        }
-        //console.log('asdflasdjflksjdflj')
-        if (holding && holding.holding && lastPriceList[holding.currency] !== '--' && lastPriceList[holding.currency] != 0) { 
-          //console.log({test: this.pairInfoList})
-          let pairInfo = pairInfoList['FUTURE_'+holding.currency]  
-          if (!pairInfo) {
-            return holding
-          }
-          let lastPrice = lastPriceList[holding.currency]// this.lastPrice
-          let markPrice = markPriceList[holding.currency]  // this.markPrice  
-          let mul = pairInfo.multiplier
-          holding.pairInfo = pairInfo
-          holding.lastPrice = lastPrice
-          holding.markPrice = markPrice
-          holding.product_name = pairInfo.product_name
-          holding.value_scale = pairInfo.value_scale
-          holding.price_scale = pairInfo.price_scale
-
-          if (!holding.changeUnwindPrice) { 
-            //最小步算法
-            let accuracy = pairInfo.accuracy || 1
-            let scale = pairInfo.price_scale || 4
-            const minStep = Math.pow(10, -scale) * accuracy
-            let $newValue = this.$big( markPrice || 0)
-            if (!$newValue.mod(minStep).eq(0)) {
-              $newValue = $newValue.div(minStep).round(scale >= 1 ? scale - 1 : 0, 0).mul(minStep)
-            }
-            holding.unwindPrice = $newValue
-          }  
-          //unrealized 未实现盈亏
-          //roe 回报率
-          //unrealizedlp预测未实现盈亏
-          //rowlp 预测回报率
-          //BTC 
-          // let {amount, price} = holding
-          // if (currency === 'BTCUSD') {
-          //   if(holding.amount > '0' ){ 
-          //     holding.unrealized = this.$big(amount).div(price).minus(this.$big(amount).div(markPrice))
-          //     holding.unrealizedlp = this.$big(amount).div(price).minus(this.$big(amount).div(lastPrice))
-          //   } else if (holding.amount < 0) { 
-          //     holding.unrealized = this.$big(amount).abs().div(markPrice).minus(amount.abs().div(price))
-          //     holding.unrealizedlp = this.$big(amount).abs().div(lastPrice).minus(amount.abs().div(price))
-          //   } else {
-          //     holding.unrealized = this.$big('0')
-          //     holding.unrealizedlp = this.$big('0')
-          //   }
-
-          //   if (this.$big(amount || 0).eq(0) || this.$big(price || 0).eq(0)) {
-          //     holding.roe = this.$big('0')
-          //     holding.roelp = this.$big('0')
-          //   }
-          //   else {
-          //     holding.roe = holding.unrealized
-          //         .div((this.$big(amount).abs()).div(price))
-          //         .mul(holding.leverage == 0 ? 100 : holding.leverage)
-          //         .mul(100)
-          //         .toFixed(2) 
-          //     holding.roelp = holding.unrealizedlp
-          //         .div((this.$big(amount).abs()).div(price))
-          //         .mul(holding.leverage == 0 ? 100 : holding.leverage)
-          //         .mul(100)
-          //         .toFixed(2) 
-          //   } 
-          // }
-          // //VDS BHD
-          // else {
-          //   //VDS未实现盈亏计算   //乘数（0.0001BTC）
-          //   //多：（VDSUSD 标记价格 - VDSUSD 开仓价格）* 比特币乘数 * 合约数量  
-          //   //空：（ VDSUSD 开仓价格- VDSUSD 标记价格）* 比特币乘数 * 合约数量 
-          //   if(amount > 0) { 
-          //     holding.unrealized = this.$big(markPrice).minus(price).mul(mul).mul(amount)
-          //     holding.unrealizedlp = this.$big(lastPrice).minus(price).mul(mul).mul(amount)
-          //   } else if (amount < 0) {
-          //     holding.unrealized = this.$big(price).minus(markPrice).mul(mul).mul(amount)
-          //     holding.unrealizedlp = this.$big(price).minus(lastPrice).mul(mul).mul(amount)
-          //   } else {
-          //     holding.unrealized = this.$big('0')
-          //     holding.unrealizedlp = this.$big('0')
-          //   } 
-
-            
-          //   if (this.$big(amount || 0).eq(0) || this.$big(price || 0).eq(0)) {
-          //     holding.roe = this.$big('0')
-          //     holding.roelp = this.$big('0')
-          //   }
-          //   else { 
-          //     holding.roe = holding.unrealized
-          //         .div((this.$big(amount).abs()).div(price))
-          //         .mul(holding.leverage == 0 ? 20 : holding.leverage)
-          //         .mul(100)
-          //         .toFixed(2) 
-          //     holding.roelp = holding.unrealizedlp
-          //         .div((this.$big(amount).abs()).div(price))
-          //         .mul(holding.leverage == 0 ? 20 : holding.leverage)
-          //         .mul(100)
-          //         .toFixed(2) 
-          //   }
-          // } 
-
-
-          // //value 价值
-          // if(!isNaN(Number(markPrice))) { 
-          //   if (currency === 'BTCUSD') {
-          //     holding.value = this.$big(amount).div(markPrice || 0).mul(unitPrice).round(pairInfo.value_scale || 4).abs().toString()
-          //   }
-          //   else {
-          //     holding.value = this.$big(price || 0).mul(mul).toString()
-          //   }
-          // }
-  
-          holding.margin_position = this.$big(holding.margin_position || 0).round(pairInfo.value_scale || 4).toString()
-          // 动态保证金
-          holding.margin = this.$big(holding.margin_position || 0).plus(holding.unrealized).round(pairInfo.value_scale || 4).toString()
-          // 保证金余额=用户当前还可用于开仓的保证金数量=账户权益-仓位保证金-委托保证金。
-          holding.margin_available = this.$big(holding.available || 0).minus(holding.margin_position || 0).minus(holding.margin_delegation || 0).round(pairInfo.value_scale || 4, this.C.ROUND_DOWN).toString()
-  
-          holding.canRemoveMargin = holding.margin_user
-          holding.canAddMargin = holding.available_balance
-          // 保证金占比
-          holding.marginPercent = holding.available == 0 ? '0.00' : this.$big(holding.margin_delegation || 0).div(holding.available).mul(100).round(2).toString()
-  
-        }
-        return holding
-      }) 
-      return holdingList
-    },
     //更新平仓价格
     async setClearCommitPrice(commitid) {
       if (!commitid) {
@@ -998,7 +831,7 @@ export default {
         }
       }); 
     },
-    refreshHolding() {
+    refreshHoldingCount() {
       let holdingTag = "contract_history_position";
       if(holdingTag === this.current){
         return
@@ -1016,17 +849,105 @@ export default {
         } else  if (!res.code) {
           holdingTag = "contract_history_position"; 
           if (res.data && res.data.holding && res.data.holding != 0) {
-            console.log("this.setTabDataCount(holdingTag, 1)")
+            //console.log("this.setTabDataCount(holdingTag, 1)")
             this.setTabDataCount(holdingTag, 1);
           } else if (res.data) {
             this.setTabDataCount(holdingTag, 0);
-            console.log("this.setTabDataCount(holdingTag, 0)", {res})
+            //console.log("this.setTabDataCount(holdingTag, 0)", {res})
           }
         }
       }).catch((msg)=>{
         console.log(1)
       })
       ; 
+    },
+    
+    computeHoldingList(list) { 
+      let markPriceList = this.state.ct.markTickList
+      let lastPriceList = this.state.ct.lastPriceList
+      let pairInfoList = this.state.ct.pairInfoList
+
+      let holdingList = list.map(holding => {
+        //币种不同算法不一样，
+       
+        if (holding.currency === 'BTCUSD') {
+          holding.unit = '1 USD'
+          holding.symbol = 'BTC' 
+        // } else if (holding.currency === 'VDSUSD') {
+        //   holding.unit =  this.$big(this.lastPrice).mul(this.currencyMul).toString() + ' BTC'
+        //   holding.symbol = 'VDS'
+        } else if (!!holding.currency) { 
+          let pair = pairInfoList['FUTURE_'+holding.currency]
+          if (!pair) { 
+            holding.unit = ''
+            holding.symbol = ''
+            return holding
+          } 
+          let last = lastPriceList[holding.currency] || 0 
+          holding.unit = this.$big(last).mul(pair.multiplier || 0).toString() + ' BTC'
+          holding.symbol = holding.currency.replace('USD','')
+        } else {
+          holding.unit = ''
+          holding.symbol = ''
+        }
+        let symbol = holding.symbol  
+        let currency = holding.currency
+        let unitPrice = 1 //单价 先写死
+        if (holding) {
+          // hack
+          holding.amount = holding.holding || '0'
+          holding.value = '0'
+        } else {
+          holding = {
+            amount: '0',
+            available_balance: '0',
+            value: '0'
+          }
+        }
+        //console.log('asdflasdjflksjdflj')
+        if (holding && holding.holding && lastPriceList[holding.currency] !== '--' && lastPriceList[holding.currency] != 0) { 
+          //console.log({test: this.pairInfoList})
+          let pairInfo = pairInfoList['FUTURE_'+holding.currency]  
+          if (!pairInfo) {
+            return holding
+          }
+          let lastPrice = lastPriceList[holding.currency]// this.lastPrice
+          let markPrice = markPriceList[holding.currency]  // this.markPrice  
+          let mul = pairInfo.multiplier
+          holding.pairInfo = pairInfo
+          holding.lastPrice = lastPrice
+          holding.markPrice = markPrice
+          holding.product_name = pairInfo.product_name
+          holding.value_scale = pairInfo.value_scale
+          holding.price_scale = pairInfo.price_scale
+
+          if (!holding.changeUnwindPrice) { 
+            //最小步算法
+            let accuracy = pairInfo.accuracy || 1
+            let scale = pairInfo.price_scale || 4
+            const minStep = Math.pow(10, -scale) * accuracy
+            let $newValue = this.$big( markPrice || 0)
+            if (!$newValue.mod(minStep).eq(0)) {
+              $newValue = $newValue.div(minStep).round(scale >= 1 ? scale - 1 : 0, 0).mul(minStep)
+            }
+            holding.unwindPrice = $newValue
+          }  
+           
+          holding.margin_position = this.$big(holding.margin_position || 0).round(pairInfo.value_scale || 4).toString()
+          // 动态保证金
+          holding.margin = this.$big(holding.margin_position || 0).plus(holding.unrealized).round(pairInfo.value_scale || 4).toString()
+          // 保证金余额=用户当前还可用于开仓的保证金数量=账户权益-仓位保证金-委托保证金。
+          holding.margin_available = this.$big(holding.available || 0).minus(holding.margin_position || 0).minus(holding.margin_delegation || 0).round(pairInfo.value_scale || 4, this.C.ROUND_DOWN).toString()
+  
+          holding.canRemoveMargin = holding.margin_user
+          holding.canAddMargin = holding.available_balance
+          // 保证金占比
+          holding.marginPercent = holding.available == 0 ? '0.00' : this.$big(holding.margin_delegation || 0).div(holding.available).mul(100).round(2).toString()
+  
+        }
+        return holding
+      }) 
+      return holdingList
     },
     //holding更换成list之后使用computed属性会导致无限循环的问题；
     //所以这里是用method来处理原先的计算属性
@@ -1193,7 +1114,7 @@ export default {
       this.refreshOrderHistory()
       if (!isNaN(Number(type))) { 
         //console.log({type})
-        this.refreshHolding()
+        this.refreshHoldingCount()
       }
     });
     this.$nextTick(function() {
