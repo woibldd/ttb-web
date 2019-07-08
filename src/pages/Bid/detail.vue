@@ -306,6 +306,7 @@ methods: {
         if (this.count) {
             if(this.cell.minLimit.indexOf('.') > 0) {
                 let minArr = this.cell.minLimit.split('.')
+                
                 this.money =  this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
                 //  this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(minArr[1].length + 2, 0)
                 //  console.log(Number(this.cell.annualizedReturns) / 365 * this.cell.moneyDays * Number(this.count), 1)
