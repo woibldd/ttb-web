@@ -511,8 +511,7 @@ export default {
       if (type === 'limit' && (!holding.unwindPrice || holding.unwindPrice == "0")) {
         return
       }
-
-      console.log('9999999999999999999999999999999999999999999999999999999999999999999999999999999')
+ 
       let title = ""
       // let content = ""
       let confirmText = ""
