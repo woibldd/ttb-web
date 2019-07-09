@@ -171,8 +171,14 @@ const processValue = {
       if (key === 'history_table_contract_value' && row.amount_total) { 
         pairlist = this.state.ct.pairInfoList
         if (!!pairlist && !!pairlist[row.symbol]) { 
-          let value_scales =  pairlist[row.symbol].value_scale || 4
-          value = this.$big(row.amount_total).div(row.price).round(value_scales, down).toFixed(value_scales).toString() 
+          let pair =  pairlist[row.symbol]
+          let value_scales =  pair.value_scale || 4 
+          if (row.symbol === 'FUTURE_BTCUSD') {
+            value = this.$big(row.amount_total).div(row.price).round(value_scales, down).toFixed(value_scales || 4).toString() 
+          } else { 
+            let mul = pair.multiplier
+            value = this.$big(row.amount_total).times(row.price).times(mul).round(value_scales, down).toFixed(value_scales || 4).toString() 
+          }
         }
         else {
           value = this.$big(row.amount_total).div(row.price).toFixed(4).toString() 

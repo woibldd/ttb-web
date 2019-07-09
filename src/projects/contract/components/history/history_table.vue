@@ -642,7 +642,7 @@ export default {
       console.log(this.bindMarkPrice)
     },
     cancel (holding) {
-      console.log('close current Entrust', this.pairInfo.name, this.holding.future_close_id)
+      console.log('close current Entrust', this.pairInfo.name, holding.future_close_id)
       //this.clearWarehouseLoading = true
       holding.clearLoading = true
       const params = {

@@ -104,7 +104,7 @@ export default {
         let amount = holding.holding
         let currency = holding.currency
         let price = holding.price
-        console.log({ lastPrice, markPrice, mul })
+        console.log({ lastPrice, markPrice, mul, price })
 
         holding.product_name = pairInfo.product_name
         holding.value_scale = pairInfo.value_scale || 4
@@ -161,11 +161,11 @@ export default {
           //多：（VDSUSD 标记价格 - VDSUSD 开仓价格）* 比特币乘数 * 合约数量  
           //空：（ VDSUSD 开仓价格- VDSUSD 标记价格）* 比特币乘数 * 合约数量 
           if (amount > 0) {
-            unrealized = this.$big(holding.markPrice || 0).minus(price).mul(mul).mul(amount)
-            unrealizedlp = this.$big(holding.lastPrice || 0).minus(price).mul(mul).mul(amount)
+            unrealized = (this.$big(holding.markPrice || 0).minus(price)).times(mul).times(amount)
+            unrealizedlp = (this.$big(holding.lastPrice || 0).minus(price)).times(mul).times(amount)
           } else if (amount < 0) {
-            unrealized = this.$big(price).minus(holding.markPrice || 0).mul(mul).mul(amount)
-            unrealizedlp = this.$big(price).minus(holding.lastPrice || 0).mul(mul).mul(amount)
+            unrealized = (this.$big(price).minus(holding.markPrice || 0)).times(mul).times(amount)
+            unrealizedlp = (this.$big(price).minus(holding.lastPrice || 0)).times(mul).times(amount)
           } else {
             unrealized = this.$big('0')
             unrealizedlp = this.$big('0')
@@ -191,7 +191,7 @@ export default {
           //     .toFixed(2)
           // }
         }
-        console.log(holding.value)
+        //console.log(holding.value)
         if (this.$big(amount || 0).eq(0) || this.$big(price || 0).eq(0) || !holding.value || holding.value ==='0') {
           holding.roe = this.$big('0')
           holding.roelp = this.$big('0')
@@ -203,13 +203,13 @@ export default {
             .mul(100)
             .toFixed(2)
             
-          console.log(holding.roe)
+          //console.log(holding.roe)
           holding.roelp = unrealizedlp
             .div(holding.value)
             .mul(holding.leverage == 0 ? 100 : holding.leverage)
             .mul(100)
             .toFixed(2)
-            console.log(holding.roelp)
+            //console.log(holding.roelp)
         }
 
         //平仓价格
@@ -236,8 +236,8 @@ export default {
         holding.canAddMargin = holding.available_balance
         // 保证金占比
         holding.marginPercent = holding.available == 0 ? '0.00' : this.$big(holding.margin_delegation || 0).div(holding.available).mul(100).round(2).toString()
-        console.log('无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限')
-        holding.test = 0;
+        //console.log('无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限')
+        //holding.test = 0;
         return holding
       })
       return list
