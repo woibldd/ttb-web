@@ -501,14 +501,14 @@
           <div class="table__tr c-fff">
             <!-- 预计强平价格 -->
             <div class="col col1">{{ $t('contract_expect_equal_price') }}</div>
-            <div class="col">{{ exchangeDir === 'BUY' ? liqBuyPrice : liqSellPrice | fixed(pairInfo.value_scale || 4) }}</div>
+            <div class="col">{{ exchangeDir === 'BUY' ? liqBuyPrice : liqSellPrice | fixed(pairInfo.price_scale || 4) }}</div>
           </div>
           <div class="table__tr c-fff">
             <!-- 差异 -->
             <div class="col col1">{{ $t('contract_diff_expect_force') }}</div>
             <div class="col">
-              <span class="c-primary">{{ liqDiffRate + '%' }}</span>
-              ({{ liqDiff | fixed(pairInfo.value_scale || 4)  }})
+              <span class="c-primary">{{ liqDiffRate | fixed(2) }}%</span>
+              ({{ liqDiff | fixed(pairInfo.price_scale || 4)  }})
             </div>
           </div>
         </div>
@@ -964,7 +964,7 @@ export default {
         }
       }
 
-      let lever = this.userLeverTime == 0 ? 100 : this.userLeverTime; // local.userLeverTime
+      let lever = this.userLeverTime == 0 ? this.maxTimes : this.userLeverTime; // local.userLeverTime
       // let im = this.$big(this.riskModalInitPercent || 0).div(100);
       let pairInfo = this.state.ct.pairInfo
       if (amount === 0 || !pairInfo) {
@@ -1012,8 +1012,8 @@ export default {
       if (amount === 0 || !pairInfo) {
         return "0";
       }
-
-      let lever = this.userLeverTime == 0 ? 100 : this.userLeverTime; // local.userLeverTime
+  
+      let lever = this.userLeverTime == 0 ? this.maxTimes : this.userLeverTime; // local.userLeverTime
       // let im = this.$big(this.riskModalInitPercent).div(100);
       
       let im = pairInfo.im
@@ -1183,7 +1183,7 @@ export default {
         typeof this.pairInfo.fee_rate !== "undefined"
       ) {
         // 当前杠杆 20倍
-        let lever = this.userLeverTime == 0 ? 100 : this.userLeverTime; // local.userLeverTime
+        let lever = this.userLeverTime == 0 ? this.maxTimes : this.userLeverTime; // local.userLeverTime
         // 限额
         let im = this.$big(this.riskModalInitPercent).div(100); // local.riskLimit
         // // 保证金
@@ -2165,7 +2165,7 @@ export default {
         typeof this.pairInfo.fee_rate !== "undefined" 
       ) {
         //杠杆
-        let lever = this.userLeverTime == 0 ? 100 : this.userLeverTime; // local.userLeverTime
+        let lever = this.userLeverTime == 0 ? this.maxTimes : this.userLeverTime; // local.userLeverTime
         // // 限额
         // let im = this.$big(this.riskModalInitPercent).div(100); // local.riskLimit
         let pairInfo = this.state.ct.pairInfo

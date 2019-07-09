@@ -92,7 +92,10 @@
             <div class="col__row mb-10">
               <span
                 class="label"
-                v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_force_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_force') }}</span> <span class="value">{{ (cholding.liq_price || 0) | round(cholding.pairInfo.price_scale || 2) }}</span>
+                v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_force_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_force') }}</span> 
+                <span class="value" >  
+                  {{ (cholding.liq_price || 0) | round(cholding.pairInfo.price_scale || 2) }}
+                </span>
             </div>
             <div class="col__row mb-10">
               <span
@@ -108,6 +111,7 @@
                   type="number"
                   v-model="cholding.margin_position"
                   @click="showEnsModal(cholding)"
+                  v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_promise_tips'), classes: 'contract'}"
                   readonly
                   class="input-num "
                   :class="cholding.leverage == 0 ? '' : 'pointer'"
@@ -172,23 +176,24 @@
               <div
                 class="btn"
                 :class="{'btn-disabled': !cholding.unwindPrice  }"
+                
                 @click.prevent="submitOrder('limit', cholding)">
-                {{ $t('contract_action_open_short') }}
+                {{ $t('contract_action_open_short') }}  
               </div>
-            </div>
+            </div> 
             <div
               class="equal"
               v-if='!cholding.future_close_id'>
               <!-- <div class="label mb-6 t-a-center">{{ $t('contract_equal_werehouse_amount') }}</div> --> 
-              <!-- v-model="state.ct.markTickList[cholding.currency]" -->
+              <!-- v-model="state.ct.markTickList[cholding.currency]" --> 
               <input
-                type="number"
                 v-model="cholding.unwindPrice"
                 min=0
                 step="0.5"
                 @input="checkInput(cholding)"
                 ref='input_price'
-                class="input-num mb-10">
+                v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}"
+                class="input-num mb-10"/> 
               <div
                 class="btn full"
                 @click.prevent="submitOrder('market', cholding)"
@@ -205,7 +210,7 @@
               </div>
               <div>
                 <label class='label'
-                  v-html="$t('contract_history_close_content', { price: $big(state.ct.curCommitPrice || 0).toFixed(pairInfo.price_scale || 2)})">
+                  v-html="$t('contract_history_close_content', { price: $big(cholding.close_position_price || 0).toFixed(cholding.pairInfo.price_scale || 2)})">
                 </label>
                 <span
                   class="op op_cancel"
@@ -600,7 +605,7 @@ export default {
       if (!res.code) {
         utils.success(this.$t('successful_closing'))
         //平仓订单提交后 更新平仓价格，之后刷新会从接口中重新获取，但是会有延迟
-        this.state.ct.curCommitPrice = $price
+        // this.state.ct.curCommitPrice = $price
 
         this.$eh.$emit('protrade:order:refresh', 1 )
         //this.$eh.$emit('protrade:order:refresh', 'submitOrder' )

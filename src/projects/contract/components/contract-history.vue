@@ -545,11 +545,11 @@ export default {
                 } else {
                   this.setTabDataCount(tab, 0);
                 }
-                // 如果存在future_close_id，则更新平仓价格
-                if (!!cholding.future_close_id) {
-                  //this.setClearCommitPrice(holding.future_close_id)
-                  this.state.ct.curCommitPrice = cholding.close_position_price;
-                }
+                // // 如果存在future_close_id，则更新平仓价格
+                // if (!!cholding.future_close_id) {
+                //   //this.setClearCommitPrice(holding.future_close_id)
+                //   this.state.ct.curCommitPrice = cholding.close_position_price;
+                // }
               }
               // 当前委托, 委托历史, 已成交需要分页,返回值不同;
               // 在这里只取前10个了
@@ -585,45 +585,45 @@ export default {
       // this.fetchActiveList()
     }, 
     //更新平仓价格
-    async setClearCommitPrice(commitid) {
-      if (!commitid) {
-        console.log("commitid:" + commitid);
-        return;
-      }
+    // async setClearCommitPrice(commitid) {
+    //   if (!commitid) {
+    //     console.log("commitid:" + commitid);
+    //     return;
+    //   }
 
-      this.state.ct.curCommitPrice = 0;
-      let currentDel = this.state.ct.currentDel;
-      if (currentDel) {
-        currentDel.map((val, index) => {
-          if (val.id == commitid) {
-            this.state.ct.curCommitPrice = val.price;
-            return this.state.ct.curCommitPrice;
-          }
-        });
-      }
-      // //如果currentDel位空或者没找到这条委托，那么重新取抓一次数据
+    //   this.state.ct.curCommitPrice = 0;
+    //   let currentDel = this.state.ct.currentDel;
+    //   if (currentDel) {
+    //     currentDel.map((val, index) => {
+    //       if (val.id == commitid) {
+    //         this.state.ct.curCommitPrice = val.price;
+    //         return this.state.ct.curCommitPrice;
+    //       }
+    //     });
+    //   }
+    //   // //如果currentDel位空或者没找到这条委托，那么重新取抓一次数据
 
-      if (!this.state.ct.curCommitPrice) {
-        let params = {
-          symbol: this.state.ct.pair,
-          page: 1,
-          size: 200
-        };
-        currentDel = [];
-        await service.getActiveorders(params).then(res => {
-          if (!res.code) {
-            currentDel = res.data.data;
-          }
-          if (currentDel) {
-            currentDel.map((val, index) => {
-              if (val.id == commitid) {
-                this.state.ct.curCommitPrice = val.price;
-              }
-            });
-          }
-        });
-      }
-    },
+    //   if (!this.state.ct.curCommitPrice) {
+    //     let params = {
+    //       symbol: this.state.ct.pair,
+    //       page: 1,
+    //       size: 200
+    //     };
+    //     currentDel = [];
+    //     await service.getActiveorders(params).then(res => {
+    //       if (!res.code) {
+    //         currentDel = res.data.data;
+    //       }
+    //       if (currentDel) {
+    //         currentDel.map((val, index) => {
+    //           if (val.id == commitid) {
+    //             this.state.ct.curCommitPrice = val.price;
+    //           }
+    //         });
+    //       }
+    //     });
+    //   }
+    // },
     refreshTabData(type) { 
       let func = null;
       let tab = null;
