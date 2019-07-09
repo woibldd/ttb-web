@@ -139,7 +139,7 @@ export default {
         // holding.value = value
 
         if (currency === 'BTCUSD') {
-          if (holding.amount > '0' && !!markPrice && !!holding.lastPrice) {
+          if (holding.amount > '0' && !!holding.markPrice && !!holding.lastPrice) {
             unrealized = this.$big(amount).div(price).minus(this.$big(amount).div(holding.markPrice))
             unrealizedlp = this.$big(amount).div(price).minus(this.$big(amount).div(holding.lastPrice))
           } else if (holding.amount < 0 && !!holding.markPrice && !!holding.lastPrice) {
@@ -236,7 +236,7 @@ export default {
         holding.canAddMargin = holding.available_balance
         // 保证金占比
         holding.marginPercent = holding.available == 0 ? '0.00' : this.$big(holding.margin_delegation || 0).div(holding.available).mul(100).round(2).toString()
-        //console.log('无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限')
+        console.log('无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限')
         //holding.test = 0;
         return holding
       })
