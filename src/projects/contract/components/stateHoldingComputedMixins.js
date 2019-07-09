@@ -30,8 +30,8 @@ export default {
             open_price: holding.price,
             close_price: lastPrice
           })
-          holding.unrealized = result.realized.round(this.pairInfo.value_scale || 4).toString()
-          holding.roe = result.roe.round(2).toString()
+          // holding.unrealized = result.realized.round(this.pairInfo.value_scale || 4).toString()
+          // holding.roe = result.roe.round(2).toString()
           // 做多
           // holding.unrealized = $value.minus($newValue).round(this.pairInfo.value_scale || 4).toString()
           // holding.roe = this.$big(holding.unrealized).div(holding.margin_position).mul(100).round(2).toString()
@@ -56,9 +56,11 @@ export default {
         if(holding.currency === 'BTCUSD') {  
           let unitPrice = 1 //单价 先写死
           holding.value = this.$big(holding.amount).div(markPrice || 0).mul(unitPrice).round(this.pairInfo.value_scale || 4).abs().toString() 
+          console.log(holding.value)
         }
         else {
           holding.value = this.$big(holding.price || 0).times(holding.amount).times(mul).round(this.pairInfo.value_scale || 4).abs().toString() 
+          console.log(holding.value)
         }
 
         holding.margin_position = this.$big(holding.margin_position || 0).round(this.pairInfo.value_scale || 4).toString()
@@ -73,6 +75,7 @@ export default {
         holding.marginPercent = holding.available == 0 ? '0.00' : this.$big(holding.margin_delegation || 0).div(holding.available).mul(100).round(2).toString()
 
       }
+      console.log('holdingholdingholdingholdingholdingholdingholdingholdingholdingholdingholdingholdingholding')
       return holding
     },
     holdingList() {
@@ -124,16 +127,16 @@ export default {
         if (currency === 'BTCUSD') {
           let unitPrice = 1 //单价 先写死
           if (!!markPrice) {
-            value = this.$big(amount).div(markPrice || 0).times(unitPrice).round(value_scale || 4).abs().toString()
+            holding.value = this.$big(amount).div(markPrice || 0).times(unitPrice).round(value_scale || 4).abs().toString()
           }
           else {
-            value = "0"
+            holding.value = "0"
           }
         }
         else {
-          value = this.$big(holding.price || 0).times(amount).times(mul).toString()
+          holding.value = this.$big(holding.price || 0).times(amount).times(mul).toString()
         }
-        holding.value = value
+        // holding.value = value
 
         if (currency === 'BTCUSD') {
           if (holding.amount > '0' && !!markPrice && !!lastPrice) {
@@ -188,6 +191,7 @@ export default {
           //     .toFixed(2)
           // }
         }
+        console.log(holding.value)
         if (this.$big(amount || 0).eq(0) || this.$big(price || 0).eq(0) || !value || value ==='0') {
           holding.roe = this.$big('0')
           holding.roelp = this.$big('0')
@@ -198,11 +202,14 @@ export default {
             .mul(holding.leverage == 0 ? 100 : holding.leverage)
             .mul(100)
             .toFixed(2)
+            
+          console.log(holding.roe)
           holding.roelp = unrealizedlp
             .div(value)
             .mul(holding.leverage == 0 ? 100 : holding.leverage)
             .mul(100)
             .toFixed(2)
+            console.log(holding.roelp)
         }
 
         //平仓价格

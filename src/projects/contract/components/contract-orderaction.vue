@@ -281,12 +281,12 @@
         <div class="hold__info mb-7">
           <!-- 合约 -->
           <div>
-            <p class="mb-8" :class="{'color-up': holding.holding > 0, 'color-down':holding.holding < 0}">{{ holding.holding || 0 }}</p>
+            <p class="mb-8" :class="{'color-up': currentHolding.holding > 0, 'color-down':currentHolding.holding < 0}">{{ currentHolding.holding || 0 }}</p>
             <p>{{ $t('contract') }}</p>
           </div>
           <!-- 回报率 -->
           <div v-tooltip.top-center="{content: $t('contract_repay_percent'), classes: 'contract'}">
-            <p class="mb-8">{{ holding.roe || 0 }} %</p>
+            <p class="mb-8">{{ currentHolding.roe || 0 }} %</p>
             <p>{{ $t('contract_return_rate') }}</p>
           </div>
         </div>
@@ -327,7 +327,7 @@
             />
           </span>
           <span>
-            {{ (holding.value || 0) | abs }}/{{ riskModal.currentValue }}BTC
+            {{ (currentHolding.value || 0) | abs }}/{{ riskModal.currentValue }}BTC
             <!-- {{ pairInfo.product_name }}  -->
             <!-- <span
               @click="editRiskLimit"
@@ -762,6 +762,17 @@ export default {
     pair () {
       return this.state.ct.pair
     },
+    currentHolding() {
+      let holdingList = this.state.ct.holdingList
+      let obj = {}
+      holdingList.map(h => {
+        if(h.currency === this.state.ct.symbol) {
+          console.log('11111')
+          obj = h
+        }
+      })
+      return obj
+    },
     //风险限额字典
     RiskLimitDict() { 
       let pair = this.state.ct.pair
@@ -893,8 +904,8 @@ export default {
         amount: this.amount,
         price: this.price,
         method: this.$t("contract_action_button_up_r"),
-        raw: this.holding.amount || 0,
-        now: Number(this.amount) + Number(this.holding.amount || 0),
+        raw: this.currentHolding.amount || 0,
+        now: Number(this.amount) + Number(this.currentHolding.amount || 0),
         boom: this.liqBuyPrice || "--"
       });
     },
@@ -903,8 +914,8 @@ export default {
         amount: this.amount | "?",
         price: this.price || "?",
         method: this.$t("contract_action_button_down_r"),
-        raw: this.holding.amount || 0,
-        now: Number(this.amount) - Number(this.holding.amount || 0),
+        raw: this.currentHolding.amount || 0,
+        now: Number(this.amount) - Number(this.currentHolding.amount || 0),
         boom: this.liqSellPrice || "--"
       });
     },
@@ -1281,8 +1292,8 @@ export default {
      * 最新持仓数量
      */
     currentHodingAmount() {
-      if (!isEmpty(this.holding)) {
-        return this.$big(this.holding.amount || "0")
+      if (!isEmpty(this.currentHolding)) {
+        return this.$big(this.currentHolding.amount || "0")
           .plus(
             this.$big(this.amount || "0").mul(
               this.exchangeDir === "BUY" ? 1 : -1
@@ -1390,7 +1401,7 @@ export default {
       //   this.dialogModalClosed()
       // }
 
-      if (this.holding.amount != 0) {
+      if (this.currentHolding.amount != 0) {
         console.log(1);
         let params = {
           currency: this.pairInfo.symbol,
@@ -1443,7 +1454,7 @@ export default {
         this.neverShowOneDay = false;
       }
 
-      if (this.holding.amount != 0) {
+      if (this.currentHolding.amount != 0) {
         const item = this.selectedTime
         // 确定
         let params = {
@@ -1561,7 +1572,7 @@ export default {
       const type = this._getOrderType();
       let showWarn = false;
       //console.log(type, this.lastPrice, this.trigger_price, showWarn)
-      console.log(typeof this.holding.amount, typeof ($amount * 1));
+      console.log(typeof this.currentHolding.amount, typeof ($amount * 1));
       if ([3, 4, 5, 6].indexOf(type) >= 0) {
         if (side === "BUY") {
           //买入止损，盘口价格大于等于触发价格，系统自动生产委托订单
@@ -1597,13 +1608,13 @@ export default {
         if (showWarn) {
           let confirmbtn =
             type > 4 ? this.$t("stop_win_apply") : this.$t("stop_loss_apply");
-          const hold = this.holding.amount;
+          const hold = this.currentHolding.amount;
           const willhold =
             side === "BUY"
-              ? this.holding.amount * 1 + $amount * 1
-              : this.holding.amount * 1 - $amount * 1;
+              ? this.currentHolding.amount * 1 + $amount * 1
+              : this.currentHolding.amount * 1 - $amount * 1;
           const content = `${this.$t("stop_win_loss_warn_content", {
-            hold: this.holding.amount,
+            hold: this.currentHolding.amount,
             willhold
           })}`;
           //${this.$t('warn_confirm_text')}
@@ -2012,6 +2023,7 @@ export default {
       if (!this.isLogin) {
         return;
       }
+      console.log('666666666666666666')
       return service
         .getContractBalanceByPair({
           symbol: this.pairInfo.product_name
@@ -2034,11 +2046,10 @@ export default {
 
     //   })
     // }, 
-    async fetchData() {
-      console.log('3333333333333333333333333333333333333333333333333333333')
+    async fetchData() { 
       await this.getBalance();
       if (!isEmpty(this.holding)) { 
-        const $value = this.$big(this.holding.value);
+        const $value = this.$big(this.currentHolding.value);
         if ($value.gte(this.RiskLimitDict[this.RiskLimitDict.length - 1].r)) {
           this.riskModal.currentValue = String(
             this.RiskLimitDict[this.RiskLimitDict.length - 1].r
@@ -2058,7 +2069,7 @@ export default {
         } else {
           for (let i = 0; i < this.RiskLimitDict.length; i++) {
             let limit = this.RiskLimitDict[i];
-            if (this.$big(this.holding.value).lte(limit.r)) {
+            if (this.$big(this.currentHolding.value).lte(limit.r)) {
               this.riskModal.currentValue = String(limit.r);
               this.maxTimes = limit.m;
               break;

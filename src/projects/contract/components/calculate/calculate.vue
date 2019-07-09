@@ -352,6 +352,7 @@ export default {
     },
     holding () {
       if (this.state.ct.holding) {
+        console.log('99999999999999999999999999')
         return this.state.ct.holding
       }
     },
