@@ -75,6 +75,165 @@ export default {
       }
       return holding
     },
+    holdingList() {
+      let list = this.state.ct.holdingList
+      let pairInfoList = this.state.ct.pairInfoList
+      list = list.map((holding) => {
+        if (holding) {
+          // hack
+          holding.amount = holding.holding || '0'
+          holding.value = '0'
+        } else {
+          holding = {
+            amount: '0',
+            available_balance: '0',
+            value: '0'
+          }
+        }
+        let pairInfo = pairInfoList['FUTURE_' + holding.currency]
+        if (!pairInfo) {
+          return holding
+        }
+        holding.pairInfo = pairInfo
+        let lastPrice = pairInfo.lastPrice// this.lastPrice
+        let markPrice = pairInfo.markTick  // this.markPrice  
+        let mul = pairInfo.multiplier
+        let value_scale = pairInfo.value_scale
+
+        let amount = holding.holding
+        let currency = holding.currency
+        let price = holding.price
+        console.log({ lastPrice, markPrice, mul })
+
+        holding.product_name = pairInfo.product_name
+        holding.value_scale = pairInfo.value_scale || 4
+        holding.price_scale = pairInfo.price_scale
+
+        holding.lastPrice = lastPrice
+        holding.markPrice = markPrice
+
+        holding.unrealized = "0"
+        holding.unrealizedlp = "0"
+        holding.roe = "0"
+        holding.roelp = "0"
+
+        //计算价值
+        let value = "0"
+        let unrealized = "0"
+        let unrealizedlp = "0"
+        if (currency === 'BTCUSD') {
+          let unitPrice = 1 //单价 先写死
+          if (!!markPrice) {
+            value = this.$big(amount).div(markPrice || 0).times(unitPrice).round(value_scale || 4).abs().toString()
+          }
+          else {
+            value = "0"
+          }
+        }
+        else {
+          value = this.$big(holding.price || 0).times(amount).times(mul).toString()
+        }
+        holding.value = value
+
+        if (currency === 'BTCUSD') {
+          if (holding.amount > '0' && !!markPrice && !!lastPrice) {
+            unrealized = this.$big(amount).div(price).minus(this.$big(amount).div(markPrice))
+            unrealizedlp = this.$big(amount).div(price).minus(this.$big(amount).div(lastPrice))
+          } else if (holding.amount < 0 && !!markPrice && !!lastPrice) {
+            unrealized = this.$big(amount).abs().div(markPrice).minus(amount.abs().div(price))
+            unrealizedlp = this.$big(amount).abs().div(lastPrice).minus(amount.abs().div(price))
+          } else {
+            unrealized = this.$big('0')
+            unrealizedlp = this.$big('0')
+          }
+
+          holding.unrealized = unrealized
+          holding.unrealizedlp = unrealizedlp
+
+         
+        }
+        //VDS BHD
+        else {
+          //VDS未实现盈亏计算   //乘数（0.0001BTC）
+          //多：（VDSUSD 标记价格 - VDSUSD 开仓价格）* 比特币乘数 * 合约数量  
+          //空：（ VDSUSD 开仓价格- VDSUSD 标记价格）* 比特币乘数 * 合约数量 
+          if (amount > 0) {
+            unrealized = this.$big(markPrice || 0).minus(price).mul(mul).mul(amount)
+            unrealizedlp = this.$big(lastPrice || 0).minus(price).mul(mul).mul(amount)
+          } else if (amount < 0) {
+            unrealized = this.$big(price).minus(markPrice || 0).mul(mul).mul(amount)
+            unrealizedlp = this.$big(price).minus(lastPrice || 0).mul(mul).mul(amount)
+          } else {
+            unrealized = this.$big('0')
+            unrealizedlp = this.$big('0')
+          }
+
+          holding.unrealized = unrealized
+          holding.unrealizedlp = unrealizedlp
+
+          // if (this.$big(amount || 0).eq(0) || this.$big(price || 0).eq(0)) {
+          //   holding.roe = this.$big('0')
+          //   holding.roelp = this.$big('0')
+          // }
+          // else {
+          //   holding.roe = unrealized
+          //     // .div((this.$big(amount).abs()).div(price))
+          //     .mul(holding.leverage == 0 ? 20 : holding.leverage)
+          //     .mul(100)
+          //     .toFixed(2)
+          //   holding.roelp = unrealizedlp
+          //     .div((this.$big(amount).abs()).div(price))
+          //     .mul(holding.leverage == 0 ? 20 : holding.leverage)
+          //     .mul(100)
+          //     .toFixed(2)
+          // }
+        }
+        if (this.$big(amount || 0).eq(0) || this.$big(price || 0).eq(0) || !value || value ==='0') {
+          holding.roe = this.$big('0')
+          holding.roelp = this.$big('0')
+        }
+        else {
+          holding.roe = unrealized
+            .div(value)
+            .mul(holding.leverage == 0 ? 100 : holding.leverage)
+            .mul(100)
+            .toFixed(2)
+          holding.roelp = unrealizedlp
+            .div(value)
+            .mul(holding.leverage == 0 ? 100 : holding.leverage)
+            .mul(100)
+            .toFixed(2)
+        }
+
+        //平仓价格
+        if (!holding.changeUnwindPrice) {
+          //最小步算法
+          let accuracy = holding.pairInfo.accuracy || 1
+          let scale = holding.pairInfo.price_scale || 4
+          const minStep = Math.pow(10, -scale) * accuracy
+          let $newValue = this.$big(markPrice || 0)
+          if (!$newValue.mod(minStep).eq(0)) {
+            $newValue = $newValue.div(minStep).round(scale >= 1 ? scale - 1 : 0, 0).mul(minStep)
+          }
+          let unwindPrice = $newValue
+          this.$set(holding, "unwindPrice", unwindPrice)
+        }
+
+        holding.margin_position = this.$big(holding.margin_position || 0).round(value_scale || 4).toString()
+        // 动态保证金
+        // holding.margin = this.$big(holding.margin_position || 0).plus(holding.unrealized).round(pairInfo.value_scale || 4).toString()
+        // 保证金余额=用户当前还可用于开仓的保证金数量=账户权益-仓位保证金-委托保证金。
+        holding.margin_available = this.$big(holding.available || 0).minus(holding.margin_position || 0).minus(holding.margin_delegation || 0).round(value_scale || 4, this.C.ROUND_DOWN).toString()
+        holding.canRemoveMargin = holding.margin_user
+        holding.canAddMargin = holding.available_balance
+        // 保证金占比
+        holding.marginPercent = holding.available == 0 ? '0.00' : this.$big(holding.margin_delegation || 0).div(holding.available).mul(100).round(2).toString()
+        console.log('无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限')
+        holding.test = 0;
+        return holding
+      })
+      return list
+    },
     //未实现盈亏计算
     //多仓：未实现盈亏 = 面值 * 数量 / 开仓均价 - 面值 * 张数 / 最新标记价格
     //空仓：未实现盈亏 = 面值 * 张数 / 最新标记价格 - 面值 * 张数 / 开仓均价

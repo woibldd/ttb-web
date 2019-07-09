@@ -53,8 +53,8 @@
     </table>
     <!-- 仓位tab -->
     <div 
-      v-if="isFirst && isLogin && holdingData">
-      <div v-for="(cholding,idx) in holdingData" :key="idx" class="holding-box"> 
+      v-if="isFirst && isLogin && holdingList">
+      <div v-for="(cholding,idx) in holdingList" :key="idx" class="holding-box"> 
         <div 
           v-if="cholding.holding && cholding.holding != 0"
           class="werehouse-box"
