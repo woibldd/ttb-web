@@ -3,7 +3,7 @@ import utils from '@/modules/utils'
 import service from '@/modules/service'
 import {state, local, actions} from '@/modules/store'
 import ws from '@/modules/ws'
-
+import Vue from 'vue'
 export default {
   data () {
     return {
@@ -113,6 +113,8 @@ export default {
         find.vol = item.volume_24h
         find.tick = item
       }
+      
+      let ct = this.state.ct
       if (item.pair === this.state.ct.pair) {  
         this.state.ct.pairTick = item 
       }
@@ -127,6 +129,12 @@ export default {
       } else if (item.pair.indexOf('FUTURE') > -1) { 
         this.state.ct.lastPriceList[item.pair.replace('FUTURE_','')] =  item.current
         
+        if (!!ct.pairInfoList[item.pair]) {
+          // ct.pairInfoList[item.pair].lastPrice = item.current 
+          this.$set(ct.pairInfoList[item.pair], 'lastPrice', item.current )
+        }
+        
+        
         this.$eh.$emit("socket:price:update", item)
       } else if (item.pair.indexOf('MARKET') > -1) {
         if (item.pair.indexOf(this.state.ct.symbol) > -1) {
@@ -136,6 +144,17 @@ export default {
         }  
         this.$eh.$emit("socket:price:update", item)
         this.state.ct.markTickList[item.pair.replace('MARKET_','')] =  item.current
+        if (!!ct.pairInfoList[item.pair.replace('MARKET','FUTURE')]) { 
+          // ct.pairInfoList[item.pair.replace('MARKET','FUTURE')].markTick = item.current 
+          this.$set(ct.pairInfoList[item.pair.replace('MARKET','FUTURE')], 'markTick', item.current )
+          // console.log(item.current, this.pairList, 'sdsd')
+          // console.log(this.state.ct.holdingList[0].currency, item, 'sss')
+          this.state.ct.holdingList.forEach((skt) => {
+            if ('MARKET_' + skt.currency === item.pair) {
+              Vue.set(skt, 'markPrice', item.current)
+            }
+          })
+        }
       }
     },
     stateSortBy (key) {

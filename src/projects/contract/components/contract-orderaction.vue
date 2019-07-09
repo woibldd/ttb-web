@@ -926,7 +926,7 @@ export default {
       return !this.state.userInfo;
     },
     balance() {
-      return this.holding;
+      return this.currentHolding;
     },
     // 订单价值
     orderValue() {
@@ -987,7 +987,7 @@ export default {
       }
       // let futures = [...this.state.ct.currentDel, userInput]
       let futures = [...this.currentDel, userInput] 
-      let totalValue = calculator.getTotalValue(futures, this.holding, pairInfo, mul)
+      let totalValue = calculator.getTotalValue(futures, this.balance, pairInfo, mul)
       let down = 0
 
       if (totalValue && amount) {
@@ -1030,7 +1030,7 @@ export default {
       }
       // let futures = [...this.state.ct.currentDel, userInput]
       let futures = [...this.currentDel, userInput] 
-      let totalValue = calculator.getTotalValue(futures, this.holding, pairInfo, mul)
+      let totalValue = calculator.getTotalValue(futures, this.balance, pairInfo, mul)
       let down = 0
 
       if (totalValue && amount) {
@@ -1260,7 +1260,7 @@ export default {
             amount,
             open_price: price
           },
-          this.holding,
+          this.balance,
           this.pairInfo
         );
         return liqPrice.force_price;
@@ -1281,7 +1281,7 @@ export default {
             amount,
             open_price: price
           },
-          this.holding,
+          this.balance,
           this.pairInfo
         );
         return liqPrice.force_price;
@@ -2048,7 +2048,7 @@ export default {
     // }, 
     async fetchData() { 
       await this.getBalance();
-      if (!isEmpty(this.holding)) { 
+      if (!isEmpty(this.balance)) { 
         const $value = this.$big(this.currentHolding.value);
         if ($value.gte(this.RiskLimitDict[this.RiskLimitDict.length - 1].r)) {
           this.riskModal.currentValue = String(
@@ -2186,7 +2186,7 @@ export default {
         let future = [...this.state.ct.currentDel, userInput]
 
         // let totalValue = 0 
-        let totalValue = calculator.getTotalValue(future, this.holding, pairInfo, mul);
+        let totalValue = calculator.getTotalValue(future, this.balance, pairInfo, mul);
         return calculator.getMargin(amount, price, lever, totalValue, im, mm, takeRate, pairInfo)
       }
       return "--";

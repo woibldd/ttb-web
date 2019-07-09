@@ -1073,13 +1073,15 @@ export default {
     this.clearTimer();
   },
   watch: {
-    // "state.ct.markTickList": {
-    //   deep: true,
-    //   header: function(newVal,oldVal) {
-    //     console.log('11111111111111111111111111111111111111112222222222222222222222222222222222222')
-    //     console.log({marklist: this.markTickList})
-    //   } 
-    // }
+
+  markTickList:{
+      handler:function(val,oldval){
+        console.log('markTickListmarkTickListmarkTickListmarkTickListmarkTickListmarkTickListmarkTickList')
+        this.holdingList[0].test = 1
+        console.log(this.markTickList.handler, 'markTickList')
+      },
+      deep:true//对象内部的属性监听，也叫深度监听
+    }
   }
 };
 </script>
