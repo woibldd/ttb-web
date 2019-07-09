@@ -83,7 +83,7 @@
                     class="trade"
                     v-model="amount"
                     :class="[input.amount.status]"
-                    :currency=" $t('contract_min_unit')"
+                    :currency="$t(unit)"
                     :scale="pairInfo.amount_scale"
                     :placeholder="$t('contract_order_enter_tips1')"
                   />
@@ -766,12 +766,19 @@ export default {
       let holdingList = this.state.ct.holdingList
       let obj = {}
       holdingList.map(h => {
-        if(h.currency === this.state.ct.symbol) {
-          console.log('11111')
+        if(h.currency === this.state.ct.symbol) { 
           obj = h
         }
       })
       return obj
+    },
+    unit() { 
+      if (this.pair === 'FUTURE_BTCUSD') {
+        return 'USD'
+      }
+      else {
+        return 'contract_min_unit'
+      }
     },
     //风险限额字典
     RiskLimitDict() { 

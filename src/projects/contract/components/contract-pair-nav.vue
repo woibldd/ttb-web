@@ -10,7 +10,7 @@
         :key="pair.name"
       > 
         <span class="pair-name">{{ $t('contract_'+pair.name) }}</span>
-        <p class="price mt-10">{{ pair.price || '--' }} <i
+        <p class="price mt-10">{{ pair.price || '0' | fixed(pair.price_scale) }} <i
           class="iconfont arrow"
           :class="{'arrow-up': getDelta(pair.tick) > 0, 'arrow-down': getDelta(pair.tick) < 0}"
         /></p> 
