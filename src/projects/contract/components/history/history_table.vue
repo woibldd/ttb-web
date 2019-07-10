@@ -140,12 +140,12 @@
                   <span 
                     class="value val1" 
                     :class="{'color-up': cholding.unrealized > 0, 'color-down': cholding.unrealized < 0}">
-                    {{ cholding.unrealized | fixed(cholding.pairInfo.value_scale || 4) }} ({{ cholding.roe }}%) 
+                    {{ cholding.unrealized | fixed(cholding.pairInfo.value_scale || 4) }} ({{ cholding.roe | fixed(2) }}%) 
                   </span>
                   <span
                     class="value val2"
                     :class="{ 'bgcolor-unp': cholding.unrealizedlp > 0,  'bgcolor-dnp': cholding.unrealizedlp < 0}">
-                    {{ cholding.unrealizedlp | fixed(cholding.pairInfo.value_scale || 4) }} ({{ cholding.roelp }}%) 
+                    {{ cholding.unrealizedlp | fixed(cholding.pairInfo.value_scale || 4) }} ({{ cholding.roelp | fixed(2) }}%) 
                   </span> 
 
                 </i>

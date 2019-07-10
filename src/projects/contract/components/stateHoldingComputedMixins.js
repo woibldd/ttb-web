@@ -144,8 +144,8 @@ export default {
             unrealized = this.$big(amount).div(price).minus(this.$big(amount).div(holding.markPrice))
             unrealizedlp = this.$big(amount).div(price).minus(this.$big(amount).div(holding.lastPrice))
           } else if (holding.amount < 0 && !!holding.markPrice && !!holding.lastPrice) {
-            unrealized = this.$big(amount).abs().div(holding.markPrice).minus(amount.abs().div(price))
-            unrealizedlp = this.$big(amount).abs().div(holding.lastPrice).minus(amount.abs().div(price))
+            unrealized = this.$big(amount).abs().div(holding.markPrice).minus(this.$big(amount).div(price))
+            unrealizedlp = this.$big(amount).abs().div(holding.lastPrice).minus(this.$big(amount).div(price))
           } else {
             unrealized = this.$big('0')
             unrealizedlp = this.$big('0')
