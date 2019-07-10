@@ -8,7 +8,7 @@
         :class="{active: pair.name === state.ct.pair, 'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}"
         v-for="pair in list"
         :key="pair.name"
-      > 
+      >
         <span class="pair-name">{{ $t('contract_'+pair.name) }}</span>
         <p class="price mt-10">{{ pair.price || '0' | fixed(pair.price_scale) }} <i
           class="iconfont arrow"

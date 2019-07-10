@@ -380,6 +380,10 @@ const service = {
   getInternalHistory (data) {
     return request('account/balance/transfer/list', data)
   },
+   //  撤销订单
+   Cancellationoforders  (data) {
+    return request('/account/withdraw/cancel', data)
+  },
   /**
    * 获取推广返佣
    */

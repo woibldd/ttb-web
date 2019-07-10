@@ -14,6 +14,8 @@ import { otherRouter } from './module/other'
 import Bid from '@/pages/Bid/index.vue'
 import BidDetail from '@/pages/Bid/detail.vue'
 import BidTable from '@/pages/Bid/table.vue'
+import Superzis from '@/pages/Superzis/index.vue'
+
 import _ from 'lodash'
 // import HelloWorld from '@/components/HelloWorld'
 let loaded = false
@@ -85,8 +87,7 @@ const TradeIndex = () => import(/* webpackChunkName: "ContractMaterial" */ '@/co
 const h5login = () => import(/* webpackChunkName: "h5login" */ '@/pages/h5/sign-up')
 const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index')
 
-
-//合约大赛
+// 合约大赛
 // 活动页面
 const ActivityIndex = () => import(/* webpackChunkName: "ActivityIndex" */ '@/pages/active/index.vue')
 const LockWarehouse = () => import(/* webpackChunkName: "LockWarehouse" */ '@/pages/active/LockWarehouse.vue')
@@ -102,14 +103,10 @@ const MessageSettings = () => import(/* webpackChunkName: "home" */ '@/pages/Pro
 const Collection = () => import(/* webpackChunkName: "home" */ '@/pages/Profile/collection.vue')
 const ServiceFeeSet = () => import(/* webpackChunkName: ServiceFeeSet */ '@/pages/Profile/ServiceFeeSet')
 
-
-
 // OTC
 const OTC = () => import(/* webpackChunkName: "OTC" */ '@/pages/OTC')
 const Trade = () => import(/* webpackChunkName: "Trade" */ '@/components/OTC/Trade.vue')
 const textTrade = () => import(/* webpackChunkName: "Hir" */ '@/pages/StepTable/index.vue')
-
-
 
 // 下载
 const Download = () => import(/* webpackChunkName: "Download" */ '@/pages/download/download.vue')
@@ -199,10 +196,10 @@ export const routes = [
     },
     component: h5index
   },
- {
+  {
     path: '/download',
     name: 'Download',
-     meta: {
+    meta: {
       auth: false,
       nav: true,
       footer: true,
@@ -290,7 +287,7 @@ export const routes = [
   //   },
   //   component: Guide
   // },
-   {
+  {
     path: '/RushBuy',
     name: 'RushBuy',
     meta: {
@@ -299,7 +296,7 @@ export const routes = [
       footer: false,
       class: 'absolute'
     },
-    component: RushBuy,
+    component: RushBuy
   },
   {
     path: 'MessageSettings',
@@ -321,7 +318,7 @@ export const routes = [
       class: 'dark'
     },
     component: Test1
-  },{
+  }, {
     path: '/fee-set',
     name: 'ServiceFeeSet',
     component: ServiceFeeSet
@@ -359,7 +356,7 @@ export const routes = [
   ...capitalRouter,
   ...fundRouter,
   {
-    path: '/bid',
+    path: '/snowball',
     name: 'Bid',
     meta: {
       nav: true,
@@ -369,7 +366,7 @@ export const routes = [
     component: Bid
   },
   {
-    path: '/bidDetail',
+    path: '/snowballDetail',
     name: 'BidDetail',
     meta: {
       require: true,
@@ -394,6 +391,19 @@ export const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: BidTable
+  },
+  {
+    path: '/Superzis',
+    name: 'Superzis',
+    meta: {
+      nav: true,
+      footer: true,
+      class: 'fuss'
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: Superzis
   }
 ]
 

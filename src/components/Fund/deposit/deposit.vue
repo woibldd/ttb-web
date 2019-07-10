@@ -31,11 +31,24 @@
           {{ c.currency }}
         </span>
       </div>
-      <div class="fund-item-row mb-24">
+      <!-- <div class="fund-item-row mb-24">
         <div class="row__label">{{ $t('deposit_address') }}</div>
         <div class="row__value">
           <div class="deposit-address">
             <span class="address-txt">{{ address }}</span>
+            <span
+              class="address-copy pointer"
+              @click="copy">{{ $t('copy') }}</span>
+          </div>
+        </div>
+      </div> -->
+       <div class="fund-item-row mb-24" style="height: auto">
+        <div class="row__label">{{ $t('deposit_address') }}</div>
+        <div class="row__value">
+          <div class="deposit-address-textarea">
+            <div class="text-info">
+                {{ address }}
+            </div>
             <span
               class="address-copy pointer"
               @click="copy">{{ $t('copy') }}</span>
@@ -202,4 +215,41 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import './deposit.scss';
+.deposit-address-textarea {
+        width: 440px;
+        display: flex;
+        border: 1px solid #cccccc;
+        box-sizing: border-box;
+        border-radius: 4px;
+        overflow: hidden;
+        justify-items: center;
+        align-items: center;
+        .text-info{
+            flex: 366px 0 0 0;
+            width: 366px;
+            border-color: transparent;
+            background: transparent;
+            // min-height: 30px;
+            height: auto;
+             line-height: 1;
+            word-wrap:break-word;
+            overflow: hidden;
+            position: relative;
+            &::after {
+                content: '';
+                position: absolute;
+                height: 100%;
+                width: 1px;
+                background: #cccccc;
+                right: 0;
+                top: 0
+            }
+        }
+        span {
+            flex: 1;
+            text-align: center;
+            vertical-align: middle;
+            color:#01CED1
+        }
+    }
 </style>

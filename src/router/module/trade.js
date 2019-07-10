@@ -18,15 +18,15 @@ export const tradeRouter = [
       {
         path: 'trade',
         name: 'trade',
-        component: () => import(/* webpackChunkName: "Fund" */ '@/components/OTC/Trade'),
-        meta: {
-          require: true
-        }
+        component: () => import(/* webpackChunkName: "Fund" */ '@/components/OTC/Trade')
       },
       {
         path: 'FrenchBill',
         name: 'FrenchBill',
         component: () => import(/* webpackChunkName: "Fund" */ '@/pages/Capital/FrenchBill'),
+        meta: {
+          require: true
+        }
       },
       {
         path: 'Transfer',

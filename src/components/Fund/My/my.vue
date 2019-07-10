@@ -69,6 +69,23 @@
                 {{scope.row[hd.key]}}
                 <icon class="question" name="question-x"/>
               </i>
+
+              <i
+                v-else-if="scope.row[hd.key] === 'DFD'"
+                class="airdrop"
+                v-tooltip.top-start="{html: true, content: $t('dfd_tips'), classes: 'assets'}"
+              >
+                {{scope.row[hd.key]}}
+                <icon class="question" name="question-x"/>
+              </i> 
+             <i
+                v-else-if="scope.row[hd.key] === 'NEWOS'"
+                class="airdrop"
+                v-tooltip.top-start="{html: true, content: $t('newos_tips'), classes: 'assets'}"
+              >
+                {{scope.row[hd.key]}}
+                <icon class="question" name="question-x"/>
+              </i>
               <i
                 v-else-if="scope.row[hd.key] === 'BNL'"
                 class="airdrop"
