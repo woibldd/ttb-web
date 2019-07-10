@@ -286,7 +286,7 @@
           </div>
           <!-- 回报率 -->
           <div v-tooltip.top-center="{content: $t('contract_repay_percent'), classes: 'contract'}">
-            <p class="mb-8">{{ currentHolding.roe || 0 }} %</p>
+            <p class="mb-8">{{ currentHolding.roe.toString() || 0 }} %</p>
             <p>{{ $t('contract_return_rate') }}</p>
           </div>
         </div>
