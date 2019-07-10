@@ -78,6 +78,7 @@ export default {
     // },
     holdingList() {
       let list = this.state.ct.holdingList
+      console.log('6666666666666666666666666666666666666666666666666666666666666666666666')
       let pairInfoList = this.state.ct.pairInfoList
       list = list.map((holding) => {
         if (holding) {
@@ -236,7 +237,7 @@ export default {
         holding.canAddMargin = holding.available_balance
         // 保证金占比
         holding.marginPercent = holding.available == 0 ? '0.00' : this.$big(holding.margin_delegation || 0).div(holding.available).mul(100).round(2).toString()
-        //console.log('无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限')
+        console.log('无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限')
         //holding.test = 0;
         return holding
       })

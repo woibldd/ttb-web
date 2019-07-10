@@ -26,7 +26,7 @@
           class="fund-history"
           to="/fund/my/contract/assets-history"> {{ $t('capital_record') }}</router-link>
       </div>
-    </div>
+    </div> 
     <div class="my-fund-content">
       <div  class="gz-wrapper clearfix">
         <span>{{$t('otc_otutcol_15')}}</span>
@@ -98,7 +98,7 @@
               <span
                 class="c-999 cursor_help border_bottom_dash"
                 v-tooltip.top-center="{html: true, content: $t('contract_margin_balance_tips'), classes: 'contract_fund'}">{{ $t('contract_margin_balance') }}</span>
-              <span class="c-333">{{ (marginBalance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
+              <span class="c-333">{{ (holding.marginBalance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
             </div>
             <!-- 可用余额 -->
             <div class="table__tr">
@@ -148,7 +148,7 @@
               <span
                 class="c-999 cursor_help"
                 v-tooltip.top-center="{html: true, content: $t('contract_margin_balance_tips'), classes: 'contract_fund'}">{{ $t('contract_margin_balance') }}</span>
-              <span class="c-333">{{ (marginBalance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
+              <span class="c-333">{{ (holding.marginBalance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
             </div>
             <div class="table__tr right">
               <span
@@ -171,15 +171,27 @@
               <span class="c-333">{{ (holding.available_balance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
             </div>
             <!-- 杠杆倍数 -->
-            <div
+            <!-- <div
               class="table__tr right c-999"
               v-if="holding.margin_delegation">
               {{ $t('contract_fund_usee_lever', {per: (this.state.ct.holding.margin_position/this.state.ct.holding.available*100).toFixed(priceScale) + '%', lever: $big(holding.leverage || 0).toFixed(2)}) }}
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
-    </div>
+      
+      <div class="account__row  mt-40"> 
+        <div class="row__box card-list">
+          <div class="card-detail"  v-for="(holding,index) in holdingList" :key="index">
+            <contractCard 
+            v-if="(holding.amount || 0) != 0"
+              :holding="holding"
+              />
+          </div>
+        
+        </div>
+      </div>
+    </div> 
     <transfer-modal
       :show-modal.sync="showModal"
       @click="hideModal"/>
@@ -190,8 +202,10 @@ import service from '@/modules/service'
 import {state} from '@/modules/store'
 import utils from '@/modules/utils'
 import holdingMixins from '@/projects/contract/components/stateHoldingComputedMixins'
-import dealSocketMixins from '@/mixins/deal-socket-mixins'
+import dealSocketMixins from '@/mixins/deal-socket-mixins' 
+import tickTableMixin from "@/mixins/contract-tick-table";
 import transferModal from './transfer-modal'
+import contractCard from './contract-card'
 /**
  *
 currency 币名
@@ -205,7 +219,7 @@ max_quota 当前提币总额度
  */
 export default {
   name: 'MyFund',
-  mixins: [holdingMixins, dealSocketMixins],
+  mixins: [holdingMixins, dealSocketMixins, tickTableMixin],
   data () {
     return {
       state,
@@ -248,6 +262,31 @@ export default {
     }
   },
   computed: {
+    holding () {
+      let obj = {}
+      let list = this.holdingList
+      if (!!list && list.length > 0) {
+        let item = list[0]
+        obj.available = item.available //账户权益
+        obj.marginBalance = this.$big(item.available_balance || 0) //保证金余额
+        obj.available_balance = item.available_balance //可用余额
+        obj.unrealized = this.$big(0) //未实现盈亏
+        obj.margin_position = this.$big(0) //仓位保证金 
+        obj.margin_delegation = this.$big(0) //委托保证金
+
+        //保证金余额 = 可用余额 + 未实现盈亏
+        list.map(arg => {
+          if (obj.marginBalance.eq(0)) { 
+            obj.marginBalance= obj.marginBalance.plus(arg.available_balance || 0)
+          }
+          obj.marginBalance = obj.marginBalance.plus(arg.unrealized || 0) 
+          obj.unrealized = obj.unrealized.plus(arg.unrealized || 0)
+          obj.margin_position = obj.margin_position.plus(arg.margin_position || 0) 
+          obj.margin_delegation = obj.margin_delegation.plus(arg.margin_delegation || 0)
+        })
+      }
+      return obj
+    },
     // lastPrice () {
     //   return this.state.ct.lastPrice
     // },
@@ -304,14 +343,26 @@ export default {
     },
     marginBalance() {
       //保证金余额 = 可用余额 + 未实现盈亏
-      return this.$big(this.holding.available_balance || 0).plus(this.holding.unrealized || 0)
+      // return this.$big(this.holding.available_balance || 0).plus(this.holding.unrealized || 0)
+      console.log({holdingList : this.holdingList})
+      let holdingList = this.holdingList
+      let balance = this.$big(0)
+      if (!!holdingList) {
+        holdingList.map(holding => {
+          if (balance.eq(0)) { 
+            balance.plus(holding.available_blance || 0)
+          }
+          balance.plus(holding.unrealized || 0) 
+        })
+      }
+      return balance.toString()
     },
     currencyChange(e) { 
       //this.getContractBalanceList()
     },
 
   },
-  async created () { 
+  async created () {  
     this.unit = this.currencyList[0]
     await this.getAllRate() 
     await this.getPairs()
@@ -349,6 +400,10 @@ export default {
         if (res && res.data) {
           this.allPairs = res.data.items
           //this.selectPair = this.allPairs[0]
+          this.state.ct.pairInfoList = {}
+          res.data.items.forEach(element => {
+            this.state.ct.pairInfoList[element.name] = element
+          });
           this.selectPair = res.data.items.filter(arg => arg.product_name === 'BTC')[0]
         }
       })
@@ -376,14 +431,14 @@ export default {
     getEstValue (item) {
       let res = this.$big(0)
       let unit = this.unit.name
-      let {currency,camount} = item  
+      let {currencyName,camount} = item  
       if (unit === 'BTC'){
-        if(currency === 'BTC') {
+        if(currencyName === 'BTC') {
           res = this.$big(camount) 
         }
         else {
-          if (this.$big(camount).gt(0) && !!this.rates[currency]) {
-            res = this.$big(camount).times(this.rates[currency]['USD'] || 0).div(this.rates['BTC']['USD'])
+          if (this.$big(camount).gt(0) && !!this.rates[currencyName]) {
+            res = this.$big(camount).times(this.rates[currencyName]['USD'] || 0).div(this.rates['BTC']['USD'])
           }
         }
       }
@@ -391,8 +446,8 @@ export default {
         res = this.$big(camount).times(this.$big(item.rates[unit] || 0))
       }
       else {
-        if (this.rates[currency]) {
-          res = this.$big(camount).times(this.$big(this.rates[currency][unit] || 0))
+        if (this.rates[currencyName]) {
+          res = this.$big(camount).times(this.$big(this.rates[currencyName][unit] || 0))
         }
       } 
       return res
@@ -400,8 +455,9 @@ export default {
     getContractBalanceList () {
       service.getContractBalanceList().then(res => { 
          if (!res.code && !!res.data) {
-            this.tableData = (res.data || []).map(item => { 
-            item.currency = item.currency.replace("USD","")
+            this.state.ct.holdingList= res.data
+            this.tableData = (res.data || []).map(item => {  
+            item.currencyName = item.currency.replace("USD","")
             item.camount = item.available
             item.estValue = this.getEstValue(item) 
             console.log({item})
@@ -411,17 +467,22 @@ export default {
       })
     },
     getContractBalanceByPair () { 
-      service.getContractBalanceByPair({
-        symbol: this.currency
-      }).then(res => {
-        this.accountInfo = res.data
-        this.state.ct.holding = res.data 
-        // this.tableData = res.data
-      })
+      // service.getContractBalanceByPair({
+      //   symbol: this.currency
+      // }).then(res => {
+      //   this.accountInfo = res.data
+      //   this.state.ct.holding = res.data 
+      //   // this.tableData = res.data
+      // })
+      // service.getContractBalanceList()
+      //   .then(res => {
+      //     this.state.ct.holdingList= res.data
+      //   })
     }
   },
   components: {
-    transferModal
+    transferModal,
+    contractCard,
   }
 }
 </script>
@@ -542,6 +603,16 @@ export default {
     h1 {
       font-size: 30px;
       color: #A572E9;
+    }
+  }
+  .card-list {
+    @include clearfix;
+    .card-detail {
+      float: left;
+      margin-right: 40px;
+      &:nth-child(3),&:nth-child(6),&:nth-child(9) { 
+        margin-right: 0;
+      }
     }
   }
 </style>
