@@ -286,7 +286,7 @@
           </div>
           <!-- 回报率 -->
           <div v-tooltip.top-center="{content: $t('contract_repay_percent'), classes: 'contract'}">
-            <p class="mb-8">{{ currentHolding.roe.toString() || 0 }} %</p>
+            <p class="mb-8">{{ currentHolding.roe || 0 | round(2)}} %</p>
             <p>{{ $t('contract_return_rate') }}</p>
           </div>
         </div>
@@ -2029,8 +2029,7 @@ export default {
       }
       if (!this.isLogin) {
         return;
-      }
-      console.log('666666666666666666')
+      } 
       return service
         .getContractBalanceByPair({
           symbol: this.pairInfo.product_name
@@ -2056,7 +2055,7 @@ export default {
     async fetchData() { 
       await this.getBalance();
       if (!isEmpty(this.balance)) { 
-        const $value = this.$big(this.currentHolding.value);
+        const $value = this.$big(this.currentHolding.value || 0);
         if ($value.gte(this.RiskLimitDict[this.RiskLimitDict.length - 1].r)) {
           this.riskModal.currentValue = String(
             this.RiskLimitDict[this.RiskLimitDict.length - 1].r

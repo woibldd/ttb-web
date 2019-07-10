@@ -60,18 +60,18 @@ export const otherRouter = [
     name: 'LockWarehouse',
     component: () => import(/* webpackChunkName: "LockWarehouse" */ '@/pages/active/LockWarehouse.vue')
   },
-  // {
-  //   path: '/Guide',
-  //   name: 'Guide',
-  //   meta: {
-  //     zendeskWidget: true,
-  //     auth: false,
-  //     footer: true,
-  //     class: 'dark',
-  //     nav: true
-  //   },
-  //   component: () => import(/* webpackChunkName: "home" */ '@/pages/guide.vue')
-  // },
+  {
+    path: '/Guide',
+    name: 'Guide',
+    meta: {
+      zendeskWidget: true,
+      auth: false,
+      footer: true,
+      class: 'dark',
+      nav: true
+    },
+    component: () => import(/* webpackChunkName: "home" */ '@/pages/guide.vue')
+  },
   {
     path: '/activity/invite-mine',
     name: 'InviteMineActivity',
