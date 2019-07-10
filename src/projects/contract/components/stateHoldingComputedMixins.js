@@ -138,14 +138,13 @@ export default {
           holding.value = this.$big(holding.price || 0).times(amount).times(mul).toString()
         }
         // holding.value = value
-        
         if (currency === 'BTCUSD') {
-          if (holding.amount > '0' && !!holding.markPrice && !!holding.lastPrice) {
+          if (holding.amount > '0' && !!holding.markPrice && !!holding.lastPrice) { 
             unrealized = this.$big(amount).div(price).minus(this.$big(amount).div(holding.markPrice))
             unrealizedlp = this.$big(amount).div(price).minus(this.$big(amount).div(holding.lastPrice))
-          } else if (holding.amount < 0 && !!holding.markPrice && !!holding.lastPrice) {
-            unrealized = this.$big(amount).abs().div(holding.markPrice).minus(this.$big(amount).div(price))
-            unrealizedlp = this.$big(amount).abs().div(holding.lastPrice).minus(this.$big(amount).div(price))
+          } else if (holding.amount < 0 && !!holding.markPrice && !!holding.lastPrice) { 
+            unrealized = (this.$big(amount).abs().div(holding.markPrice)).minus(this.$big(amount).abs().div(price))
+            unrealizedlp = (this.$big(amount).abs().div(holding.lastPrice)).minus(this.$big(amount).abs().div(price))
           } else {
             unrealized = this.$big('0')
             unrealizedlp = this.$big('0')
