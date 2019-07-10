@@ -390,13 +390,7 @@ export default {
     },
     holdingData() {
       return this.state.ct.computeHoldingList
-    },
-    markTickList() {
-      return state.ct.markTickList
-    },
-    lastPriceList() {
-      return state.ct.lastPriceList
-    }
+    }, 
   },
   methods: {
     tologin() {
@@ -561,7 +555,7 @@ export default {
       let message = h('div', {style: 'text-align: center;'}, [
           h('div', { style: 'margin:10px; font-size: 16px;'}, [
           h('span', { style: holding.amount > 0 ? 'color: #F24E4D' : 'color: #09C989' }, side ),
-          h('span', null, this.$t(msg,{ price, amount: Math.abs(holding.amount), currency: holding.symbol}))]),
+          h('span', null, this.$t(msg,{ price, amount: Math.abs(holding.amount), currency: holding.product_name}))]),
           h('div', {style: 'font-size: 16px;'},  this.$t('contract_close_tips2'))
         ])
  
@@ -697,17 +691,7 @@ export default {
       }
     }
   },
-  watch: {  
-    markTickList:{
-      handler:function(val,oldval){
-        console.log('markTickListmarkTickListmarkTickListmarkTickListmarkTickListmarkTickListmarkTickList')
-      },
-      deep:true//对象内部的属性监听，也叫深度监听
-    },
-    
-    lastPriceList() {
-      console.log('lastPriceListlastPriceListlastPriceListlastPriceListlastPriceListlastPriceListlastPriceList')
-    },
+  watch: {   
     // unwindPrice(v){
     //   let accuracy = this.pairInfo.accuracy || 1
     //   let scale = this.pairInfo.price_scale || 4
