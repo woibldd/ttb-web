@@ -4,39 +4,40 @@
             <i class="iconfont">&#xe64e;</i>
             <span>{{$t('bby_shouy7')}}</span>
         </div>
-        <el-table
+        <el-table  
         :data="tableData"
+        :empty-text="$t('no_data')"
         border
         scripe
         style="width: 100%">
 
       <el-table-column
         prop="createTime"
-        label="时间"
+       :label="$t('time')"
         width="180">
       </el-table-column>
 
       <el-table-column
         prop="currency"
-        label="币种"
+       :label="$t('currency')"
         width="180">
       </el-table-column>
 
       <el-table-column
         prop="amount"
-        label="数量">
+       :label="$t('otc_trans_idsl')">
       </el-table-column>
       <el-table-column
         prop="income"
-        label="预计收益" >
+     :label="$t('bby_shouy18')" >
       </el-table-column>
        <el-table-column
         prop="opetate"
-        label="操作" >
+      :label="$t('operation')">
       </el-table-column>
       <el-table-column
         prop="state"
-        label="状态" >
+      :label="$t('status')" >
       </el-table-column>
    </el-table>
    <div style="text-align:center;margin-top: 20px;">
@@ -52,6 +53,7 @@
 
 <script>
 import Vue from 'vue'
+import service from '@/modules/service'
 export default {
     data() {
         return {
@@ -76,9 +78,9 @@ export default {
                 this.total = res.data.total
                 if (this.tableData.length > 0) {
                     this.tableData.forEach((item) => {
-                        const stateName = item.state === 1 ? "完成" : item.state === 2 ? '待发放' : item.state === 3 ? '待发放' : '已发放'
+                        const stateName = item.state === 1 ?  $t('qrcode_close') : item.state === 2 ? $t('waiting_for_release') : item.state === 3 ? $t('waiting_for_release') : $t('bby_shise6')
                         const siteName = item.site === 1 ? "ix" : 'ixx'
-                        const opetateName = item.opetate === 1 ? "币盈盈购买" : '本息归还'
+                        const opetateName = item.opetate === 1 ? $t('bby_shise7') : $t('bby_shise8')
                         Vue.set(item, 'state', stateName)
                         Vue.set(item, 'site', siteName)
                         Vue.set(item, 'opetate', opetateName)
@@ -86,13 +88,17 @@ export default {
                 }
             }
         })
-    },
-    currentChange(e) {
-        this.history.start = e
-        this.manageResopetate(this.history)
-    }
+      },
+
+      
+      currentChange(e) {
+          this.history.start = e
+      console.log('1111111111111111111111111111111111111111111111111111111111111')
+          this.manageResopetate(this.history)
+      }
     },
     created() {
+      console.log('ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss')
         this.manageResopetate(this.history)
     }
 }

@@ -8,7 +8,7 @@
       <div class="logo"></div>
       <h1>{{cell.currency}}</h1>
       <h2>{{cell.product}}</h2>
-      <em class="jl" @click="jl">币盈盈记录</em>
+    <em class="jl" @click="jl">{{$t('bby_shise1')}}</em>
     </div>
     <div class="bid-detail-area">
       <div class="message-box">
@@ -92,7 +92,7 @@
               class="number-input"
               v-model="count"
               :scale="point"
-              placeholder="请输入存币数量"
+          :placeholder="$t('bby_shouy19')"
             />
             <div class="rage">
               <span class="cell">{{cell.currency}}</span>
@@ -227,7 +227,7 @@
             this.$message.warning(this.$t('bby_shouy32'))
           }
         } else {
-          this.$message.warning(`可用数量不足`)
+         this.$message.warning(this.$t('bby_shise2'))
           this.disabled = true
         }
       },
