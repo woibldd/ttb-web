@@ -8,16 +8,16 @@
         <div class="banner-item-text">
             <div v-for="(item, index) in hotList" :key="index">
                  <div class="title">
-                    热门推荐
+                    {{$t('bby_shise9')}}
                 </div>
                 <p style="font-size: 16px;">{{ item.currency }} {{ item.product }}</p >
-                <p style="font-size: 13px;">限期 {{ item.moneyDays }}天</p >
+                <p style="font-size: 13px;">{{$t('bby_shise10')}} {{ item.moneyDays }}{{$t('bby_shouy9')}}</p >
                 <div class="rate">
                     <h1>{{ item.annualizedReturns > 0 ? (Number(item.annualizedReturns)).toFixed(2) : 0 }}%</h1>
                     <em>{{$t('bby_shouy2')}}</em>
                 </div>
                 <div class="btn">
-                    <el-button class="bid-btn" v-html="item.state === 1 ? $t('bby_shouy6') : item.state === 2 ? '结束' : item.state === 3 ? '已售罄' : '抢购时间未到'" :disabled="item.isTrue"
+                    <el-button class="bid-btn" v-html="item.state === 1 ? $t('bby_shouy6') : item.state === 2 ? $t('bby_shise3') : item.state === 3 ?  $t('bby_shise4') : $t('bby_shise5')" :disabled="item.isTrue"
                     @click="detail(item)"></el-button>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                         class="bid-btn"
                         :disabled="item.isTrue"
                         @click="detail(item)"
-                        v-html="item.state === 1 ?  $t('bby_shouy6') : item.state === 2 ? '结束' : item.state === 3 ? '已售罄' : '抢购时间未到'"
+                        v-html="item.state === 1 ?  $t('bby_shouy6') : item.state === 2 ? $t('bby_shise3') : item.state === 3 ?  $t('bby_shise4') : $t('bby_shise5')"
                     >
                     </el-button>
                 </div>

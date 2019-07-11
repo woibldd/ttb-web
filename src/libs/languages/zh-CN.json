@@ -2084,6 +2084,17 @@
     "bby_shouy99":"币币返佣金额",
     "bby_shouy98":"合约返佣金额",
     "bby_shouy32":"余额不足，请充币",
+    "bby_shise1":"币盈盈记录",
+    "bby_shise2":"可用数量不足",
+    "bby_shise3":"结束",
+    "bby_shise4":"已售罄",
+    "bby_shise5":"抢购时间未到",
+    "bby_shise6":"已发放",
+    "bby_shise7":"币盈盈购买",
+    "bby_shise8":"本息归还",
+    "bby_shise9":"热门推荐",
+    "bby_shise10":"限期",
+ 
     "bidTitle": "币盈盈"
   }
 

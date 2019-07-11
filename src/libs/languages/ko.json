@@ -1972,5 +1972,15 @@
 "bby_shouy99":"코인되돌린금액",
 "bby_shouy98":"계약되돌린금액",
 "bby_shouy32":"잔고가 부족하니 돈을 충전해 주십시오",
+"bby_shise1":"코인 리익 기록",
+"bby_shise2":"사용가능한 수량 부족",
+"bby_shise3":"끝",
+"bby_shise4":"이미 다 팔림",
+"bby_shise5":"먼저 사는 시간이 안됨",
+"bby_shise6":"이미 발부",
+"bby_shise7":"코인리익 구매",
+"bby_shise8":"원금과 리자를 돌려주다",
+"bby_shise9":"대중의 추천",
+"bby_shise10":"기간",
 "bidTitle": "코인리윤"
 }
