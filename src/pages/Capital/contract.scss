@@ -1,0 +1,214 @@
+.contract-container {
+    .cursor_help {
+        cursor: help;
+    }
+    .pt-40 {
+        padding-top: 40px;
+    }
+    .mt-40 {
+        margin-top: 40px;
+    }
+    .mr-40 {
+        margin-right: 40px;
+    }
+    .mb-39 {
+        margin-bottom: 39px;
+    }
+    .c-333 {
+        color: #333;
+    }
+    .c-666 {
+        color: #666;
+    }
+    .c-999 {
+        color: #999;
+    }
+    .c-primary {
+        color: #22ced0
+    }
+    .flex-end {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+    .account-row {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        .chart-dom {
+            margin-right: 40px;
+        }
+        .row__box {
+            display: flex;
+            justify-content: space-between;
+            width: 430px;
+            box-sizing: border-box;
+        }
+        .currency-row {
+            height: 32px;
+            display: flex;
+            align-items: center;
+            .row__label {
+                color: #666;
+                font-size: 14px;
+                margin-right: 20px;
+            }
+        }
+        .chart-note {
+            margin-top: 40px;
+            > p{
+                display: flex;
+                align-items: center;
+                margin-bottom: 12px;
+            }
+        }
+        .money-spot{
+            display: inline-block;
+            width:14px;
+            height:14px;
+            border-radius: 7px;
+            margin-right: 10px;
+
+            &.red {
+                background-color: #FF6A5C;
+            }
+            &.yellow {
+                background-color: #FFD549;
+            }
+            &.blue {
+                background-color: #00A0FF;
+            }
+        }
+        .account-exchange {
+            cursor: pointer;
+        }
+    }
+    .box__table {
+        width: 100%;
+        height: 100%;
+        border-radius:6px;
+        .border-bottom-1 {
+            border-bottom: 1px solid #CCCCCC;
+
+            &.yellow {
+                border-color: $primary;
+            }
+        }
+        
+        .table__tr {
+            height: 68px;
+            padding: 0 70px 0 40px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &.right {
+                height: 35px;
+            }
+
+            &:nth-child(odd){
+                background-color: #FAFAFA;
+            }
+        }
+        .table__btns {
+            height: 50px;
+            display: flex;
+            .icon {
+                display: inline-block;
+                background-repeat: no-repeat;
+                background-size: contain;
+                width: 24px;
+                height: 24px;
+            }
+            .icon-fund_coin{
+                background-image: url('../../../assets/contract/icon-fund_coin.png')
+            }
+            .icon-fund_out{
+                width: 16px;
+                height: 16px;
+                background-image: url('../../../assets/contract/icon-fund_out.png')
+            }
+
+            .btn{
+                flex: 1;
+                height: 100%;
+                background:$primary;
+                color: #fff;
+                font-size: 16px;
+                line-height: 16px;
+                padding: 3px 29px 3px 0;
+                width: fit-content;
+                box-sizing: border-box;
+                margin-bottom: 29px;
+                display: flex;
+                align-items: center;
+                .icon-wrapper {
+                    height: 34px;
+                    width: 45px;
+                    border-right: 1px solid #fff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex: none;
+                }
+
+                &.out {
+                    background-color: #F6FDFD;
+                    color: $primary;
+                    .icon-wrapper{
+                        border-color: $primary;
+                    }
+                }
+                .flex1 {
+                    flex: 1;
+                    display: flex;
+                    justify-content: center;
+                }
+            }
+        }
+    }
+
+    .table-wrapper {
+        width: 100%;
+        .table__th ,
+        .table__td {
+            text-align: left;
+            padding-left: 5px;
+        }
+        .table__tr {
+            height: 40px;
+            line-height: 40px;
+            border-bottom: 1px solid #EFEFEF;
+
+            &.header {
+                border-bottom: 1px solid #ccc;     
+            }
+            &.body {
+                &:nth-child(odd) {
+                    background-color: #FAFAFA;
+                }
+            }
+        }
+        .buy-in {
+            color: #09C989;
+        }
+        .sale-out {
+            color: #F24E4D;
+        }
+        .text-align-right {
+            text-align: right;
+        }
+    }
+    .border_bottom_dash {
+        border-bottom: 1px dashed #999;
+    }
+    .special {
+        background-color: #F6FDFD;
+    }
+
+}
+.el-input.is-active .el-input__inner, .el-input__inner:focus {
+    border-color: #22ced0;
+}
