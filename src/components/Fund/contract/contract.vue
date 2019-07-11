@@ -546,14 +546,14 @@ export default {
     getEstValue (item) {
       let res = this.$big(0)
       let unit = this.unit.name
-      let {currency,camount} = item  
+      let {currencyName,camount} = item  
       if (unit === 'BTC'){
-        if(currency === 'BTC') {
+        if(currencyName === 'BTC') {
           res = this.$big(camount) 
         }
         else {
-          if (this.$big(camount).gt(0) && !!this.rates[currency]) {
-            res = this.$big(camount).times(this.rates[currency]['USD'] || 0).div(this.rates['BTC']['USD'])
+          if (this.$big(camount).gt(0) && !!this.rates[currencyName]) {
+            res = this.$big(camount).times(this.rates[currencyName]['USD'] || 0).div(this.rates['BTC']['USD'])
           }
         }
       }
@@ -561,8 +561,8 @@ export default {
         res = this.$big(camount).times(this.$big(item.rates[unit] || 0))
       }
       else {
-        if (this.rates[currency]) {
-          res = this.$big(camount).times(this.$big(this.rates[currency][unit] || 0))
+        if (this.rates[currencyName]) {
+          res = this.$big(camount).times(this.$big(this.rates[currencyName][unit] || 0))
         }
       } 
       return res
@@ -572,7 +572,7 @@ export default {
          if (!res.code && !!res.data) {
             state.ct.holdingList = res.data.slice()
             this.tableData = (res.data || []).map(item => { 
-            item.currency = item.currency.replace("USD","")
+            item.currencyName = item.currency.replace("USD","")
             item.camount = item.available
             item.estValue = this.getEstValue(item) 
             console.log({item})
