@@ -187,8 +187,7 @@
             v-if="(holding.amount || 0) != 0"
               :holding="holding"
               />
-          </div>
-        
+          </div> 
         </div>
       </div>
     </div> 

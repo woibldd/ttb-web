@@ -202,6 +202,7 @@ export default {
           holding.roe = unrealized
             .div(holding.value)
             .mul(holding.leverage == 0 ? maxLever : holding.leverage)
+            .mul(2)
             .mul(100)
             .toFixed(2)
             
@@ -209,6 +210,7 @@ export default {
           holding.roelp = unrealizedlp
             .div(holding.value)
             .mul(holding.leverage == 0 ? maxLever : holding.leverage)
+            .mul(2)
             .mul(100)
             .toFixed(2)
             //console.log(holding.roelp)

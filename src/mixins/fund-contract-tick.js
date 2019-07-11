@@ -1,6 +1,6 @@
 import _ from 'lodash' 
 import service from '@/modules/service'
-import {state, } from '@/modules/store'
+import {state} from '@/modules/store'
 import ws from '@/modules/ws'
 import Vue from 'vue'
 export default {
@@ -49,7 +49,7 @@ export default {
         }  
         state.ct.markTickList[item.pair.replace('MARKET_','')] =  item.current
         if (!!ct.pairInfoList[item.pair.replace('MARKET','FUTURE')]) {  
-          this.$set(ct.pairInfoList[item.pair.replace('MARKET','FUTURE')], 'markTick', item.current ) 
+          // this.$set(ct.pairInfoList[item.pair.replace('MARKET','FUTURE')], 'markTick', item.current ) 
           state.ct.holdingList.forEach((skt) => {
             if ('MARKET_' + skt.currency === item.pair) {
               Vue.set(skt, 'markPrice', item.current)

@@ -179,6 +179,17 @@
           </div>
         </div>
       </div>
+      
+      <div class="account__row  mt-40"> 
+        <div class="row__box card-list">
+          <div class="card-detail"  v-for="(holding,index) in holdingList" :key="index">
+            <contractCard 
+            v-if="(holding.amount || 0) != 0"
+              :holding="holding"
+              />
+          </div> 
+        </div>
+      </div>
     </div>
     <!-- <transfer-modal
       :show-modal.sync="showModal"
@@ -189,8 +200,9 @@
 import service from '@/modules/service'
 import {state} from '@/modules/store'
 import utils from '@/modules/utils'
-import tickTableMixin from "@/mixins/fund-contract-tick";  
+// import tickTableMixin from "@/mixins/fund-contract-tick";  
 import dealSocketMixins from '@/mixins/deal-socket-mixins'
+import contractCard from './contract-card'
 // import transferModal from './transfer-modal'
 /**
  *
@@ -205,8 +217,9 @@ max_quota 当前提币总额度
  */
 export default {
   name: 'MyFund',
-  //mixins: [ dealSocketMixins],
-  mixins: [tickTableMixin, dealSocketMixins],
+  mixins: [ dealSocketMixins],
+  // mixins: [tickTableMixin, dealSocketMixins],
+  components: {contractCard,},
   data () {
     return {
       state,
@@ -246,6 +259,7 @@ export default {
         // },
       ],
       unit: null, 
+      loading: false,
     }
   },
   computed: {
@@ -715,6 +729,16 @@ export default {
     h1 {
       font-size: 30px;
       color: #A572E9;
+    }
+  }
+  .card-list {
+    @include clearfix;
+    .card-detail {
+      float: left;
+      margin-right: 40px;
+      &:nth-child(3),&:nth-child(6),&:nth-child(9) { 
+        margin-right: 0;
+      }
     }
   }
 </style>
