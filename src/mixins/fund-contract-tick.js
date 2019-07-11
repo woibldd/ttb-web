@@ -21,9 +21,9 @@ export default {
       //   find.vol = item.volume_24h
       //   find.tick = item
       // }
-      
+      console.log('00000000000000000000000000000000000000000000000000000000000000000000000000000000')
       let ct = state.ct
-      if (item.pair === this.state.ct.pair) {  
+      if (item.pair === state.ct.pair) {  
         state.ct.pairTick = item 
       }
 
@@ -59,6 +59,7 @@ export default {
       }
     }, 
     async fetch () {
+      console.log('00000000000000000000000000000000000000000000000000000000000000000000000000000000')
       this.loading = true
       let res = await service.getContractSymList()
       this.loading = false
@@ -80,6 +81,7 @@ export default {
       });
     },
     subMarket () {
+      console.log('00000000000000000000000000000000000000000000000000000000000000000000000000000000')
       if (this.socket) {
         this.socket.$destroy()
       }
