@@ -8,7 +8,7 @@
             v-model="unit" 
             value-key="name">
             <el-option
-              v-for="(item, idx) in currencyList"
+              v-for="(item, idx) in coinList"
               :key="idx"
               :label="item.name"
               :value="item"/>
@@ -241,7 +241,7 @@ export default {
       accountInfo: {},
       pair: 'FUTURE_BTCUSD',
       rates: {},
-      currencyList: [
+      coinList: [
         {
           name: 'CNY',
           symbol: '￥',
@@ -364,7 +364,21 @@ export default {
   },
   async beforeMount () {  
     console.log('9090909090woyouyitouxiaomaolvwo conglaiyebuqi')
-    this.unit = this.currencyList[0]
+    if (!this.coinList) {
+      this.coinList = [
+        {
+          name: 'CNY',
+          symbol: '￥',
+          scale: 2
+        },
+        {
+          name: 'USD',
+          symbol: '$',
+          scale: 4
+        }, 
+      ]
+    }
+    this.unit = this.coinList[0]
     await this.getAllRate() 
     await this.getPairs()
     this.getContractBalanceByPair()
