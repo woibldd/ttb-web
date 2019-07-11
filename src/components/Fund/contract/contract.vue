@@ -189,7 +189,7 @@
 import service from '@/modules/service'
 import {state} from '@/modules/store'
 import utils from '@/modules/utils'
-import tickTableMixin from "@/mixins/fund-contract-tick";  
+// import tickTableMixin from "@/mixins/fund-contract-tick";  
 import dealSocketMixins from '@/mixins/deal-socket-mixins'
 // import transferModal from './transfer-modal'
 /**
@@ -205,7 +205,8 @@ max_quota 当前提币总额度
  */
 export default {
   name: 'MyFund',
-  mixins: [tickTableMixin, dealSocketMixins],
+  mixins: [ dealSocketMixins],
+  // mixins: [tickTableMixin, dealSocketMixins],
   data () {
     return {
       state,
