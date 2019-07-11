@@ -276,27 +276,7 @@ export default {
         sum = sum.plus(this.getEstValue(item))
       })
       return sum.toString()
-    }, 
-    // unit () {
-    //   return state.locale === 'zh-CN' ? 'CNY' : 'USD'
-    // },
-    // symbol () {
-    //   switch (this.unit) {
-    //     case 'CNY': 
-    //       return '￥' 
-    //     case 'USD':
-    //       return '$'
-    //   }
-    // },
-    header () {
-      return state.locale && [
-        {key: 'currency', title: this.$t('fees_name')},
-        {key: 'available', title: this.$t('avlb')},
-        {key: 'locking', title: this.$t('asset_th_unavlb')},
-        {key: 'amount', title: this.$t('total_count')},
-        {key: 'estValue', title: this.$t('homechart_fiat') + '(' + (state.locale === 'zh-CN' ? 'CNY' : 'USD') + ')'}
-      ]
-    },
+    },   
     operate () {
       return state.locale && {key: 'operate', title: this.$t('operation')}
     },
@@ -306,9 +286,30 @@ export default {
     marginBalance() {
       //保证金余额 = 可用余额 + 未实现盈亏
       return this.$big(this.holding.available_balance || 0).plus(this.holding.unrealized || 0)
-    },
-    currencyChange(e) { 
-      //this.getContractBalanceList()
+    }, 
+    holding () {
+      let obj = {}
+      let list = this.holdingList
+      if (!!list && list.length > 0) {
+        let item = list[0]
+        obj.available = item.available //账户权益
+        obj.marginBalance = this.$big(item.available_balance || 0) //保证金余额
+        obj.available_balance = item.available_balance //可用余额
+        obj.unrealized = this.$big(0) //未实现盈亏
+        obj.margin_position = this.$big(0) //仓位保证金 
+        obj.margin_delegation = this.$big(0) //委托保证金 
+        list.map(arg => { 
+          //保证金余额 = 可用余额 + 未实现盈亏
+          if (obj.marginBalance.eq(0)) { 
+            obj.marginBalance= obj.marginBalance.plus(arg.available_balance || 0)
+          }
+          obj.marginBalance = obj.marginBalance.plus(arg.unrealized || 0) 
+          obj.unrealized = obj.unrealized.plus(arg.unrealized || 0)
+          obj.margin_position = obj.margin_position.plus(arg.margin_position || 0) 
+          obj.margin_delegation = obj.margin_delegation.plus(arg.margin_delegation || 0)
+        })
+      }
+      return obj
     },
 
   },
@@ -351,6 +352,11 @@ export default {
           this.allPairs = res.data.items
           //this.selectPair = this.allPairs[0]
           this.selectPair = res.data.items.filter(arg => arg.product_name === 'BTC')[0]
+          
+          state.ct.pairInfoList = {}
+          res.data.items.forEach(element => {
+            state.ct.pairInfoList[element.name] = element
+          });
         }
       })
     },
