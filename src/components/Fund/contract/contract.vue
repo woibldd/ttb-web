@@ -91,21 +91,21 @@
               <span
                 class="c-999 cursor_help border_bottom_dash special"
                 v-tooltip.top-center="{html: true, content: $t('contract_account_rights_tips'), classes: 'contract_fund'}">{{ $t('contract_account_rights') }}</span>
-              <span class="c-333">{{ (holding.available || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
+              <span class="c-333">{{ (holding.available || 0) | fixed(valueScale) }} BTC</span>
             </div>
             <!-- 保证金余额 -->
             <div class="table__tr border-bottom-1">
               <span
                 class="c-999 cursor_help border_bottom_dash"
                 v-tooltip.top-center="{html: true, content: $t('contract_margin_balance_tips'), classes: 'contract_fund'}">{{ $t('contract_margin_balance') }}</span>
-              <span class="c-333">{{ (holding.marginBalance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
+              <span class="c-333">{{ (holding.marginBalance || 0) | fixed(valueScale) }} BTC</span>
             </div>
             <!-- 可用余额 -->
             <div class="table__tr">
               <span
                 class="c-999 cursor_help border_bottom_dash"
                 v-tooltip.top-center="{html: true, content: $t('contract_avab_tips'), classes: 'contract_fund'}">{{ $t('withdraw_avlb') }}</span>
-              <span class="c-333">{{ (holding.available_balance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
+              <span class="c-333">{{ (holding.available_balance || 0) | fixed(valueScale) }} BTC</span>
             </div>
             <div class="table__btns">
               <div
@@ -134,41 +134,41 @@
               <span
                 class="c-999 cursor_help special"
                 v-tooltip.top-center="{html: true, content: $t('contract_account_rights_tips'), classes: 'contract_fund'}">{{ $t('contract_account_rights') }}</span>
-              <span class="c-333">{{ holding.available | fixed(valueScale) }} {{ selectPair.product_name }}</span>
+              <span class="c-333">{{ holding.available | fixed(valueScale) }} BTC</span>
             </div>
             <div class="table__tr right">
               <!-- 未实现盈亏 -->
               <span
                 class="c-999 cursor_help"
                 v-tooltip.top-center="{html: true, content: $t('contract_unrealized_profit_and_loss_tips'), classes: 'contract_fund'}">{{ $t('unrealized_profit_and_loss') }}</span>
-              <span class="c-333">{{ (holding.unrealized || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
+              <span class="c-333">{{ (holding.unrealized || 0) | fixed(valueScale) }} BTC</span>
             </div>
             <!-- 保证金余额 -->
             <div class="table__tr right border-bottom-1 yellow">
               <span
                 class="c-999 cursor_help"
                 v-tooltip.top-center="{html: true, content: $t('contract_margin_balance_tips'), classes: 'contract_fund'}">{{ $t('contract_margin_balance') }}</span>
-              <span class="c-333">{{ (holding.marginBalance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
+              <span class="c-333">{{ (holding.marginBalance || 0) | fixed(valueScale) }} BTC</span>
             </div>
             <div class="table__tr right">
               <span
                 class="c-999 cursor_help"
                 v-tooltip.top-center="{html: true, content: $t('contract_were_margin_tips'), classes: 'contract_fund'}">{{ $t('warehouse_margin') }}</span>
-              <span class="c-333">{{ (holding.margin_position || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
+              <span class="c-333">{{ (holding.margin_position || 0) | fixed(valueScale) }} BTC</span>
             </div>
             <!-- 委托保证金 -->
             <div class="table__tr right">
               <span
                 class="c-999 cursor_help"
                 v-tooltip.top-center="{html: true, content: $t('contract_entrust_margin_tips'), classes: 'contract_fund'}">{{ $t('entrust_margin') }}</span>
-              <span class="c-333">{{ (holding.margin_delegation || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
+              <span class="c-333">{{ (holding.margin_delegation || 0) | fixed(valueScale) }} BTC</span>
             </div>
             <!-- 可用余额 -->
             <div class="table__tr right border-bottom-1 yellow">
               <span
                 class="c-999 cursor_help"
                 v-tooltip.top-center="{html: true, content: $t('contract_avab_tips'), classes: 'contract_fund'}">{{ $t('withdraw_avlb') }}</span>
-              <span class="c-333">{{ (holding.available_balance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
+              <span class="c-333">{{ (holding.available_balance || 0) | fixed(valueScale) }} BTC</span>
             </div>
             <!-- 杠杆倍数 -->
             <!-- <div
@@ -300,10 +300,10 @@ export default {
       return this.selectPair
     },
     priceScale () {
-      return this.pairInfo.price_scale || 2
+      return 2 
     },
     valueScale () {
-      return this.pairInfo.value_scale || 4
+      return  4
     },
     showHistory () {
       return this.$route.name === 'history'
@@ -338,9 +338,9 @@ export default {
     operate () {
       return state.locale && {key: 'operate', title: this.$t('operation')}
     },
-    currency () {
-      return this.pairInfo.product_name
-    },
+    // currency () {
+    //   return this.pairInfo.product_name
+    // },
     marginBalance() {
       //保证金余额 = 可用余额 + 未实现盈亏
       // return this.$big(this.holding.available_balance || 0).plus(this.holding.unrealized || 0)
@@ -362,7 +362,7 @@ export default {
     },
 
   },
-  async beforeMount () {  
+  async created () {  
     console.log('9090909090woyouyitouxiaomaolvwo conglaiyebuqi')
     if (!this.coinList) {
       this.coinList = [
@@ -380,8 +380,7 @@ export default {
     }
     this.unit = this.coinList[0]
     await this.getAllRate() 
-    await this.getPairs()
-    this.getContractBalanceByPair()
+    await this.getPairs() 
     this.getContractBalanceList()
   },
   watch:{
@@ -414,13 +413,14 @@ export default {
     async getPairs () {
       await service.getContractSymList().then(res => {
         if (res && res.data) {
+          console.log({data:res.data})
           this.allPairs = res.data.items
           //this.selectPair = this.allPairs[0]
           state.ct.pairInfoList = {}
           res.data.items.forEach(element => {
             state.ct.pairInfoList[element.name] = element
           });
-          this.selectPair = res.data.items.filter(arg => arg.product_name === 'BTC')[0]
+          // this.selectPair = res.data.items.filter(arg => arg.product_name === 'BTC')[0]
         }
       })
     },
