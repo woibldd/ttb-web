@@ -161,11 +161,11 @@ export default {
           //多：（VDSUSD 标记价格 - VDSUSD 开仓价格）* 比特币乘数 * 合约数量  
           //空：（ VDSUSD 开仓价格- VDSUSD 标记价格）* 比特币乘数 * 合约数量 
           if (amount > 0) {
-            unrealized = (this.$big(holding.markPrice || 0).minus(price)).times(mul).times(amount)
-            unrealizedlp = (this.$big(holding.lastPrice || 0).minus(price)).times(mul).times(amount)
+            unrealized = (this.$big(holding.markPrice || 0).minus(price)).times(mul).times(this.$big(amount).abs())
+            unrealizedlp = (this.$big(holding.lastPrice || 0).minus(price)).times(mul).times(this.$big(amount).abs())
           } else if (amount < 0) {
-            unrealized = (this.$big(price).minus(holding.markPrice || 0)).times(mul).times(amount)
-            unrealizedlp = (this.$big(price).minus(holding.lastPrice || 0)).times(mul).times(amount)
+            unrealized = (this.$big(price).minus(holding.markPrice || 0)).times(mul).times(this.$big(amount).abs())
+            unrealizedlp = (this.$big(price).minus(holding.lastPrice || 0)).times(mul).times(this.$big(amount).abs())
           } else {
             unrealized = this.$big('0')
             unrealizedlp = this.$big('0')

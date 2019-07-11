@@ -19,7 +19,7 @@ for (let key in config.projects) {
       template: config.projects[key].template,
       theme: config.build.THEME_ENV,
       chunks: [key, 'manifest','vendor'],
-      inject: true,
+      inject: false,
       config: config.projects[key].config
     })
   );
@@ -32,7 +32,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
       extract: false,
-      usePostCSS: true
+      usePostCSS: false
     })
   },
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
@@ -78,7 +78,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       NODE_ENV: process.env.NODE_ENV,
       filename: config.build.index,
       template: "index.html",
-      inject: true,
+      inject: false,
       chunks: ["app", "manifest", "vendor"],
       theme: config.build.THEME_ENV,
       minify: {
