@@ -7,7 +7,7 @@ export default {
   data () {
     return {
       state, 
-      socket: null,
+      socketPrice: null,
       loading: false,
       err: "",
     }
@@ -82,11 +82,11 @@ export default {
     },
     subMarket () {
       console.log('00000000000000000000000000000000000000000000000000000000000000000000000000000000')
-      if (this.socket) {
-        this.socket.$destroy()
+      if (this.socketPrice) {
+        this.socketPrice.$destroy()
       }
-      this.socket = ws.create('market/tickers')
-      this.socket.$on('message', (datas) => {
+      this.socketPrice = ws.create('market/tickers')
+      this.socketPrice.$on('message', (datas) => {
         datas.forEach(data => {
           this.patch(data)
         })
@@ -94,8 +94,8 @@ export default {
     }
   },
   destroyed () {
-    if (this.socket) {
-      this.socket.$destroy()
+    if (this.socketPrice) {
+      this.socketPrice.$destroy()
     }
   },
   async created () { 
