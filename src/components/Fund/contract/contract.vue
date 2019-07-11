@@ -362,7 +362,7 @@ export default {
     },
 
   },
-  async created () {  
+  async mounted () {  
     console.log('9090909090woyouyitouxiaomaolvwo conglaiyebuqi')
     this.unit = this.currencyList[0]
     await this.getAllRate() 

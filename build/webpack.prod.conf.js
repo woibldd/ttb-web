@@ -44,7 +44,11 @@ const webpackConfig = merge(baseWebpackConfig, {
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
-      "process.env": env
+      // "process.env": env
+      'process.env': {
+        //注意一个单引号一个双引号…… 这里是要将 "production" 替换到文件里面
+        NODE_ENV: '"dev"'
+      }
     }),
     // new UglifyJsPlugin({
     //   uglifyOptions: {
