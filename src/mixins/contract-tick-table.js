@@ -31,12 +31,12 @@ export default {
       return ''
     },
     group () {
-      return _.sortBy(_.uniq(_.map(this.state.ct.pairList, 'currency_name')), name => {
+      return _.sortBy(_.uniq(_.map(state.ct.pairList, 'currency_name')), name => {
         return (_.indexOf(['USDT', 'BTC', 'ETH', 'EOS'], name) + 1) || 100
       })
     },
     pairList () {
-      return this.state.ct.pairList
+      return state.ct.pairList
     },
     showList () {
       let list = this.pairList
@@ -72,7 +72,7 @@ export default {
   methods: {
     setTab (tab) {
       this.tab = tab
-      this.local.proOnFav = tab === '*'
+      local.proOnFav = tab === '*'
     },
     setPair (pair) {
       // need implement
@@ -95,7 +95,7 @@ export default {
       return utils.getSign(num)
     },
     isCollect (pair) {
-      return _.find(this.state.favorite.list, item => item.symbol === pair.name)
+      return _.find(state.favorite.list, item => item.symbol === pair.name)
     },
     setSort (key) {
       if (this.sortBy === key) {
@@ -114,20 +114,20 @@ export default {
         find.tick = item
       }
       
-      let ct = this.state.ct
+      let ct = state.ct
       if (item.pair === this.state.ct.pair) {  
-        this.state.ct.pairTick = item 
+        state.ct.pairTick = item 
       }
 
       if (item.pair.indexOf('INDEX') > -1) {
-        if (item.pair.indexOf(this.state.ct.symbol) > -1) { 
-          this.state.ct.indexTick = {
+        if (item.pair.indexOf(state.ct.symbol) > -1) { 
+          state.ct.indexTick = {
             current: item.current
           }  
         } 
-        this.state.ct.indexTickList[item.pair.replace('INDEX_','')] =  item.current
+        state.ct.indexTickList[item.pair.replace('INDEX_','')] =  item.current
       } else if (item.pair.indexOf('FUTURE') > -1) { 
-        this.state.ct.lastPriceList[item.pair.replace('FUTURE_','')] =  item.current
+        state.ct.lastPriceList[item.pair.replace('FUTURE_','')] =  item.current
         
         if (!!ct.pairInfoList[item.pair]) {
           // ct.pairInfoList[item.pair].lastPrice = item.current 
@@ -137,19 +137,19 @@ export default {
         
         this.$eh.$emit("socket:price:update", item)
       } else if (item.pair.indexOf('MARKET') > -1) {
-        if (item.pair.indexOf(this.state.ct.symbol) > -1) {
-          this.state.ct.markTick = {
+        if (item.pair.indexOf(state.ct.symbol) > -1) {
+          state.ct.markTick = {
             current: item.current
           }   
         }  
         this.$eh.$emit("socket:price:update", item)
-        this.state.ct.markTickList[item.pair.replace('MARKET_','')] =  item.current
+        state.ct.markTickList[item.pair.replace('MARKET_','')] =  item.current
         if (!!ct.pairInfoList[item.pair.replace('MARKET','FUTURE')]) { 
           // ct.pairInfoList[item.pair.replace('MARKET','FUTURE')].markTick = item.current 
           this.$set(ct.pairInfoList[item.pair.replace('MARKET','FUTURE')], 'markTick', item.current )
           // console.log(item.current, this.pairList, 'sdsd')
           // console.log(this.state.ct.holdingList[0].currency, item, 'sss') 
-          this.state.ct.holdingList.forEach((skt) => {
+          state.ct.holdingList.forEach((skt) => {
             if ('MARKET_' + skt.currency === item.pair) {
               Vue.set(skt, 'markPrice', item.current)
             }
@@ -179,7 +179,7 @@ export default {
         this.$set(item, 'delta', item.delta || false)
         this.$set(item, 'vol', item.vol || false)
       })
-      this.state.ct.pairList = res.data.items
+      state.ct.pairList = res.data.items
     },
     subMarket () {
       if (this.socket) {
@@ -199,7 +199,7 @@ export default {
     }
   },
   async created () {
-    if (this.local.proOnFav) {
+    if (local.proOnFav) {
       this.setTab('*')
     }
     await this.fetch()

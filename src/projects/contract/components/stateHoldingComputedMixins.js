@@ -135,7 +135,7 @@ export default {
           }
         }
         else {
-          holding.value = this.$big(holding.price || 0).times(amount).times(mul).toString()
+          holding.value = this.$big(holding.price || 0).times(amount).times(mul).abs().toString()
         }
         // holding.value = value
         if (currency === 'BTCUSD') {
