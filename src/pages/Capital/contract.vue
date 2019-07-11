@@ -189,6 +189,7 @@
 import service from '@/modules/service'
 import {state} from '@/modules/store'
 import utils from '@/modules/utils'
+import tickTableMixin from "@/mixins/contract-tick-table"; 
 import holdingMixins from '@/projects/contract/components/stateHoldingComputedMixins'
 import dealSocketMixins from '@/mixins/deal-socket-mixins'
 // import transferModal from './transfer-modal'
@@ -352,7 +353,7 @@ export default {
           this.allPairs = res.data.items
           //this.selectPair = this.allPairs[0]
           this.selectPair = res.data.items.filter(arg => arg.product_name === 'BTC')[0]
-          
+
           state.ct.pairInfoList = {}
           res.data.items.forEach(element => {
             state.ct.pairInfoList[element.name] = element
@@ -412,6 +413,7 @@ export default {
             item.camount = item.available
             item.estValue = this.getEstValue(item) 
             console.log({item})
+            console.log({holding: this.holding})
             return item
           })
         }
