@@ -64,8 +64,7 @@
         {{ total | fixed(unit.scale)}}</h1>
     </div>
     <div 
-      class="my-fund-content">
-
+      class="my-fund-content"> 
       <el-table :empty-text=" $t('no_data') "
                 :data="tableData"
                 class="fund-coin-pool">
