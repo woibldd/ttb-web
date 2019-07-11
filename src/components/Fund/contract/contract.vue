@@ -464,6 +464,16 @@ export default {
   },
   async created () {  
     console.log('666666666666666666666666666666666666666666666666666')
+    this.currencyList = [{
+          name: 'CNY',
+          symbol: '￥',
+          scale: 2
+        },
+        {
+          name: 'USD',
+          symbol: '$',
+          scale: 4
+        },]
     this.unit = this.currencyList[0]
     await this.getAllRate() 
     await this.getPairs()
