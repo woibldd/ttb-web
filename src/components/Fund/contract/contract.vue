@@ -402,10 +402,10 @@ export default {
     },
     exchange (number) {
       this.popover = true
-      this.state.stateType = number
+      state.stateType = number
       // console.log(number,this.stateType)
 
-       if (this.state.isSimulation) {
+       if (state.isSimulation) {
         utils.alert(this.$t('contract_simulation_exchange_limit'))
       } else {
         this.showModal = true
@@ -416,9 +416,9 @@ export default {
         if (res && res.data) {
           this.allPairs = res.data.items
           //this.selectPair = this.allPairs[0]
-          this.state.ct.pairInfoList = {}
+          state.ct.pairInfoList = {}
           res.data.items.forEach(element => {
-            this.state.ct.pairInfoList[element.name] = element
+            state.ct.pairInfoList[element.name] = element
           });
           this.selectPair = res.data.items.filter(arg => arg.product_name === 'BTC')[0]
         }
@@ -471,7 +471,7 @@ export default {
     getContractBalanceList () {
       service.getContractBalanceList().then(res => { 
          if (!res.code && !!res.data) {
-            this.state.ct.holdingList= res.data
+            state.ct.holdingList= res.data
             this.tableData = (res.data || []).map(item => {  
             item.currencyName = item.currency.replace("USD","")
             item.camount = item.available
