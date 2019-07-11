@@ -202,8 +202,7 @@ import service from '@/modules/service'
 import {state} from '@/modules/store'
 import utils from '@/modules/utils'
 import dealSocketMixins from '@/mixins/deal-socket-mixins' 
-import tickTableMixin from "@/mixins/contract-tick-table";
-import holdingMixins from '@/projects/contract/components/stateHoldingComputedMixins'
+import tickTableMixin from "@/mixins/contract-tick-table"; 
 import transferModal from './transfer-modal'
 import contractCard from './contract-card'
 /**
@@ -219,7 +218,7 @@ max_quota 当前提币总额度
  */
 export default {
   name: 'MyFund',
-  mixins: [holdingMixins, dealSocketMixins, tickTableMixin],
+  mixins: [dealSocketMixins, tickTableMixin],
   data () {
     return {
       state,
@@ -262,6 +261,172 @@ export default {
     }
   },
   computed: {
+      holdingList() {
+      let list = state.ct.holdingList 
+      let pairInfoList = state.ct.pairInfoList
+      list = list.map((holding) => {
+        if (holding) {
+          // hack
+          holding.amount = holding.holding || '0'
+          holding.value = '0'
+        } else {
+          holding = {
+            amount: '0',
+            available_balance: '0',
+            value: '0'
+          }
+        }
+        let pairInfo = pairInfoList['FUTURE_' + holding.currency]
+        if (!pairInfo) {
+          return holding
+        }
+        holding.pairInfo = pairInfo
+        let lastPrice = pairInfo.lastPrice// this.lastPrice
+        let markPrice = pairInfo.markTick  // this.markPrice  
+        let mul = pairInfo.multiplier
+        let value_scale = pairInfo.value_scale
+
+        let amount = holding.holding
+        let currency = holding.currency
+        let price = holding.price
+        console.log({ lastPrice, markPrice, mul, price })
+
+        holding.product_name = pairInfo.product_name
+        holding.value_scale = pairInfo.value_scale || 4
+        holding.price_scale = pairInfo.price_scale
+
+        // holding.lastPrice = lastPrice
+        // holding.markPrice = markPrice
+        Vue.set(holding, 'lastPrice', lastPrice)
+        Vue.set(holding, 'markPrice', markPrice)
+        console.log(holding, 'vue-set')
+        holding.unrealized = "0"
+        holding.unrealizedlp = "0"
+        holding.roe = "0"
+        holding.roelp = "0"
+
+        //计算价值
+        let value = "0"
+        let unrealized = "0"
+        let unrealizedlp = "0"
+        if (currency === 'BTCUSD') {
+          let unitPrice = 1 //单价 先写死
+          if (!!markPrice) {
+            holding.value = this.$big(amount).div(holding.markPrice || 0).times(unitPrice).round(value_scale || 4).abs().toString()
+          }
+          else {
+            holding.value = "0"
+          }
+        }
+        else {
+          holding.value = this.$big(holding.price || 0).times(amount).times(mul).abs().toString()
+        }
+        // holding.value = value
+        if (currency === 'BTCUSD') {
+          if (holding.amount > '0' && !!holding.markPrice && !!holding.lastPrice) { 
+            unrealized = this.$big(amount).div(price).minus(this.$big(amount).div(holding.markPrice))
+            unrealizedlp = this.$big(amount).div(price).minus(this.$big(amount).div(holding.lastPrice))
+          } else if (holding.amount < 0 && !!holding.markPrice && !!holding.lastPrice) { 
+            unrealized = (this.$big(amount).abs().div(holding.markPrice)).minus(this.$big(amount).abs().div(price))
+            unrealizedlp = (this.$big(amount).abs().div(holding.lastPrice)).minus(this.$big(amount).abs().div(price))
+          } else {
+            unrealized = this.$big('0')
+            unrealizedlp = this.$big('0')
+          }
+
+          holding.unrealized = unrealized
+          holding.unrealizedlp = unrealizedlp
+
+         
+        }
+        //VDS BHD
+        else {
+          //VDS未实现盈亏计算   //乘数（0.0001BTC）
+          //多：（VDSUSD 标记价格 - VDSUSD 开仓价格）* 比特币乘数 * 合约数量  
+          //空：（ VDSUSD 开仓价格- VDSUSD 标记价格）* 比特币乘数 * 合约数量 
+          if (amount > 0) {
+            unrealized = (this.$big(holding.markPrice || 0).minus(price)).times(mul).times(this.$big(amount).abs())
+            unrealizedlp = (this.$big(holding.lastPrice || 0).minus(price)).times(mul).times(this.$big(amount).abs())
+          } else if (amount < 0) {
+            unrealized = (this.$big(price).minus(holding.markPrice || 0)).times(mul).times(this.$big(amount).abs())
+            unrealizedlp = (this.$big(price).minus(holding.lastPrice || 0)).times(mul).times(this.$big(amount).abs())
+          } else {
+            unrealized = this.$big('0')
+            unrealizedlp = this.$big('0')
+          }
+
+          holding.unrealized = unrealized
+          holding.unrealizedlp = unrealizedlp
+
+          // if (this.$big(amount || 0).eq(0) || this.$big(price || 0).eq(0)) {
+          //   holding.roe = this.$big('0')
+          //   holding.roelp = this.$big('0')
+          // }
+          // else {
+          //   holding.roe = unrealized
+          //     // .div((this.$big(amount).abs()).div(price))
+          //     .mul(holding.leverage == 0 ? 20 : holding.leverage)
+          //     .mul(100)
+          //     .toFixed(2)
+          //   holding.roelp = unrealizedlp
+          //     .div((this.$big(amount).abs()).div(price))
+          //     .mul(holding.leverage == 0 ? 20 : holding.leverage)
+          //     .mul(100)
+          //     .toFixed(2)
+          // }
+        }
+        //console.log(holding.value)
+        if (this.$big(amount || 0).eq(0) || this.$big(price || 0).eq(0) || !holding.value || holding.value ==='0') {
+          holding.roe = this.$big('0')
+          holding.roelp = this.$big('0')
+        }
+        else {
+          let maxLever = pairInfo.max_leverage || 100
+           
+          holding.roe = unrealized
+            .div(holding.value)
+            .mul(holding.leverage == 0 ? maxLever : holding.leverage)
+            .mul(100)
+            .toFixed(2)
+            
+          //console.log(holding.roe)
+          holding.roelp = unrealizedlp
+            .div(holding.value)
+            .mul(holding.leverage == 0 ? maxLever : holding.leverage)
+            .mul(100)
+            .toFixed(2)
+            //console.log(holding.roelp)
+        }
+
+        //平仓价格
+        if (!holding.changeUnwindPrice) {
+          //最小步算法
+          let accuracy = holding.pairInfo.accuracy || 1
+          let scale = holding.pairInfo.price_scale || 4
+          const minStep = Math.pow(10, -scale) * accuracy
+          let $newValue = this.$big(markPrice || 0)
+          if (!$newValue.mod(minStep).eq(0)) {
+            $newValue = $newValue.div(minStep).round(scale >= 1 ? scale - 1 : 0, 0).mul(minStep)
+          }
+          let unwindPrice = $newValue
+          this.$set(holding, "unwindPrice", unwindPrice)
+        }
+
+        holding.margin = "0"
+        holding.margin_position = this.$big(holding.margin_position || 0).round(value_scale || 4).toString()
+        // 动态保证金
+        holding.margin = this.$big(holding.margin_position || 0).plus(holding.unrealized).round(pairInfo.value_scale || 4).toString()
+        // 保证金余额=用户当前还可用于开仓的保证金数量=账户权益-仓位保证金-委托保证金。
+        holding.margin_available = this.$big(holding.available || 0).minus(holding.margin_position || 0).minus(holding.margin_delegation || 0).round(value_scale || 4, this.C.ROUND_DOWN).toString()
+        holding.canRemoveMargin = holding.margin_user
+        holding.canAddMargin = holding.available_balance
+        // 保证金占比
+        holding.marginPercent = holding.available == 0 ? '0.00' : this.$big(holding.margin_delegation || 0).div(holding.available).mul(100).round(2).toString() 
+        //holding.test = 0;
+        return holding
+      })
+      return list
+    },
     holding () {
       let obj = {}
       let list = this.holdingList
