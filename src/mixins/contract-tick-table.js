@@ -148,8 +148,7 @@ export default {
           // ct.pairInfoList[item.pair.replace('MARKET','FUTURE')].markTick = item.current 
           this.$set(ct.pairInfoList[item.pair.replace('MARKET','FUTURE')], 'markTick', item.current )
           // console.log(item.current, this.pairList, 'sdsd')
-          // console.log(this.state.ct.holdingList[0].currency, item, 'sss')
-          console.log('999999999999999999999999999999999999999999')
+          // console.log(this.state.ct.holdingList[0].currency, item, 'sss') 
           this.state.ct.holdingList.forEach((skt) => {
             if ('MARKET_' + skt.currency === item.pair) {
               Vue.set(skt, 'markPrice', item.current)
