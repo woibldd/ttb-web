@@ -237,8 +237,7 @@ export default {
         holding.canRemoveMargin = holding.margin_user
         holding.canAddMargin = holding.available_balance
         // 保证金占比
-        holding.marginPercent = holding.available == 0 ? '0.00' : this.$big(holding.margin_delegation || 0).div(holding.available).mul(100).round(2).toString()
-        console.log('无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限')
+        holding.marginPercent = holding.available == 0 ? '0.00' : this.$big(holding.margin_delegation || 0).div(holding.available).mul(100).round(2).toString() 
         //holding.test = 0;
         return holding
       })

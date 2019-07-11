@@ -70,7 +70,7 @@ export const otherRouter = [
       class: 'dark',
       nav: true
     },
-    component: () => import(/* webpackChunkName: "home" */ '@/pages/guide.vue')
+    component: () => import(/* webpackChunkName: "home" */ '@/pages/Guide.vue')
   },
   {
     path: '/activity/invite-mine',

@@ -201,9 +201,9 @@
 import service from '@/modules/service'
 import {state} from '@/modules/store'
 import utils from '@/modules/utils'
-import holdingMixins from '@/projects/contract/components/stateHoldingComputedMixins'
 import dealSocketMixins from '@/mixins/deal-socket-mixins' 
 import tickTableMixin from "@/mixins/contract-tick-table";
+import holdingMixins from '@/projects/contract/components/stateHoldingComputedMixins'
 import transferModal from './transfer-modal'
 import contractCard from './contract-card'
 /**
