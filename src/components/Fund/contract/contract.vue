@@ -362,7 +362,7 @@ export default {
     },
 
   },
-  async mounted () {  
+  async beforeMount () {  
     console.log('9090909090woyouyitouxiaomaolvwo conglaiyebuqi')
     this.unit = this.currencyList[0]
     await this.getAllRate() 
@@ -375,6 +375,7 @@ export default {
     //   this.layer = !val
     // }
   },
+  
   mounted () {
     // this.initChart()
     if(this.holding === undefined){
