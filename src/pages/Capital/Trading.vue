@@ -43,8 +43,7 @@
       <h1>
         <icon :name="unit.name+'-unit'" /> {{total | fixed(unit.scale)}}</h1>
     </div>
-    <div
-      v-if="!showHistory"
+    <div 
       class="my-fund-content"> 
       <el-table :empty-text=" $t('no_data') "
                 :data="tableData"
