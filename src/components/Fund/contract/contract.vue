@@ -315,6 +315,7 @@ export default {
       return obj
     },
     holdingList() {
+      console.log('999999999991111111111111111122222222222222222223333333333333333333333333334444444444444444444444444')
       let list = state.ct.holdingList 
       let pairInfoList = state.ct.pairInfoList
       list = list.map((holding) => {
@@ -432,6 +433,7 @@ export default {
             .toFixed(2)
             //console.log(holding.roelp)
         }
+        console.log('无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限')
 
         //平仓价格
         if (!holding.changeUnwindPrice) {
