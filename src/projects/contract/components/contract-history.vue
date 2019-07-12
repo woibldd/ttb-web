@@ -539,7 +539,7 @@ export default {
                 this.tableData = res.data
                 if (holdingList && holdingList.length) {
                   let count = holdingList.reduce((a,b) => { 
-                    let c = b.holding * 1 > 0 ? 1 : 0 
+                    let c = b.holding * 1 != 0 ? 1 : 0  //多仓大于0， 空仓小于0
                     return a + c }, 0) 
                   this.setTabDataCount(tab, count);
                 } else {
@@ -1075,8 +1075,7 @@ export default {
   watch: {
 
   markTickList:{
-      handler:function(val,oldval){
-        console.log('markTickListmarkTickListmarkTickListmarkTickListmarkTickListmarkTickListmarkTickList')
+      handler:function(val,oldval){ 
         this.holdingList[0].test = 1
         console.log(this.markTickList.handler, 'markTickList')
       },
