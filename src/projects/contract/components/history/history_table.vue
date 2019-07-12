@@ -152,7 +152,7 @@
             class="label"
             v-tooltip.top-center="{html: true, content: $t('contract_result_yet_tips'), classes: 'contract'}">{{ $t('contract_result_yet') }}</span> <span
               class="value"
-              :class="{'color-up': holding.realized > 0, 'color-down': holding.realized < 0}">{{ holding.realized | round(pairInfo.value_scale || 4) }}</span>
+              :class="{'color-up': holding.realized > 0, 'color-down': holding.realized < 0}">{{ holding.realized | round(pairInfo.value_scale || 8) }}</span>
         </div>
       </div>
       <!-- 平仓/市价全平 -->
