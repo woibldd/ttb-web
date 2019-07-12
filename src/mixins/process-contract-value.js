@@ -88,7 +88,21 @@ const processValue = {
       }
       // 转换百分比
       if (key === 'realized') {
-        value = this.$big(value || 0).round(4).toString()
+        
+        if (row.symbol === 'BTCUSD') {
+          value = this.$big(value || 0).round(4).toString()
+        }
+        else {
+          console.log({pairlist})
+          pairlist = this.state.ct.pairInfoList
+          if (!!pairlist && !!pairlist['FUTURE_'+row.symbol]) {
+            value = this.$big(value).round(pairlist['FUTURE_'+row.symbol].value_scale, down).toString()
+          }
+          else {
+            value = "--" 
+          }
+
+        }
       }
       // 成交类型(type) 1限价 2市价 3止盈 4止损
       if (key === 'type') {
