@@ -7,10 +7,10 @@ let quote = ''
 if(process.env.NODE_ENV != 'development'){
   let val = location.host.split('.')
   let host = val.slice(val.length - 2, val.length).join('.')
-  ws = `wss://ws.${host}/v1/` 
-  quote = `https://q.${host}/v1/` 
-  // ws = 'wss://ws.ixex.io/v1/'
-  // quote = 'https://q.ixex.io/v1/'
+  // ws = `wss://ws.${host}/v1/` 
+  // quote = `https://q.${host}/v1/` 
+  ws = 'wss://ws.ixex.io/v1/'
+  quote = 'https://q.ixex.io/v1/'
 }
 if (process.env.NODE_ENV === 'development') { 
   wsUrl = 'wss://ws.ixex.pro/v1/'
