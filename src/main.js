@@ -50,7 +50,10 @@ import {
   Autocomplete,
   Timeline,
   TimelineItem,
-  Progress
+  Progress,
+  Row,
+  Col,
+  Tooltip
 } from 'element-ui'
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
@@ -62,7 +65,8 @@ if (process.env.NODE_ENV === 'production') {
 Vue.config.productionTip = false
 Vue.use(VueI18n)
 Vue.use(VTooltip)
-
+Vue.use(Row)
+Vue.use(Col)
 Vue.use(Select) // 引入element单个组件
 Vue.use(Option)
 Vue.use(Table)
@@ -78,6 +82,7 @@ Vue.use(RadioGroup)
 Vue.use(RadioButton)
 Vue.use(Loading)
 Vue.use(Tabs)
+Vue.use(Tooltip)
 Vue.use(TabPane)
 Vue.use(Button)
 Vue.use(Steps)
