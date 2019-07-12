@@ -399,7 +399,7 @@ export const routes = [
     meta: {
       nav: true,
       footer: true,
-      class: 'fuss'
+      class: 'dark'
     },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

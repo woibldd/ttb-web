@@ -1279,6 +1279,7 @@
 "contract_diff_expect_force": "Targeted price/forecast of liquidation price price difference",
 "contract_lever_times": " Multiple leverage",
 "contract_FUTURE_BTCUSD": " BTC Perpetual",
+"contract_FUTURE_BHDUSD":"BHD Perpetual",
 "contract_complete_deal": "Completed transactions",
 "contract_deal_price": "Transacted price",
 "contract_value": "Value",
@@ -1724,7 +1725,7 @@
 "contract_close_market":"Close Market",
 "contract_close_market_buy":" Close Market Buying",
 "contract_close_market_sell":"Close Market Selling",
-"contract_close_tips1":" %{amount} BTC Contract at %{price} 。",
+"contract_close_tips1":" %{amount} %{currency} Contract at %{price} 。",
 "contract_close_tips2":"Your whole position will be liquidated during execution.",
 "contract_close_tips3":"This is the profit and loss forecast after assuming that you have liquidated your position at the market price. It is calculated according to the current order list",
 
@@ -1785,7 +1786,7 @@
 "contract_competition_my_team": "My Team",
 "contract_competition_explain_51": "Ranking will be updated daily at 12:00  (UTC+8)",
 "contract_competition_tab_41":"Yield",
-"contract_close_tips4":" Buying %{amount} BTC contract at the best price 。",
+"contract_close_tips4":" Buying %{amount} %{currency} contract at the best price 。",
 "contract_login_overdue":" The login has expired,please login again",
 "bubble_ix_team":" IXX Team",
 "bubble_site_tips":"Please identify the standard domain name IXX below when you log in：",
@@ -2142,6 +2143,16 @@
 "bby_shouy24":"3. All participating projects have a fixed start and end time for interest calculation, during which time you can calculate your income. The interest calculating time can be viewed on the page.",
 "bby_shouy25":"4. After the end of the project, the system will start to issue the returns of successively. Due to the large number of participants, your income may be delayed to issue. Please be patient. You can view interest income in Asset Records.",
 "bby_shouy26":"5. Calculation of returns: days  /365* annual return * amount of deposit = gain from deposit this time.",
+"bby_shise1":" D&E Record",
 
+"bby_shise2":" insufficient balance",
+"bby_shise3":" End",
+"bby_shise4":" Sold out",
+"bby_shise5":" Not yet buying time",
+"bby_shise6":" Released",
+"bby_shise7":" D&E purchased",
+"bby_shise8":" Interest return",
+"bby_shise9":"Popular recommendation",
+    "bby_shise10":"Deadline",
 "bidTitle": "Deposit&earn"
 }
