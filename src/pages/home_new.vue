@@ -1,10 +1,12 @@
 <template>
   <div class="page-home">
-    <div class="home2">
+    <!-- <div class="home2">
       <k-slider
         :banners="banners"
         :swiper-option="swiperOption"/>
-    </div>
+       
+    </div> -->
+    <home-banner v-on:buy-handle=buySubmit />
     <div class="ind_txt">
       <div class="ind_cen">
         <div
@@ -187,7 +189,7 @@ import PairTable from '@/components/home/pair-table'
 import PairRankTable from '@/components/home/pair-rank-table'
 import MineSummary from '@/components/Mine/MineSummary'
 import tickTableMixin from '@/mixins/tick-table'
-
+import HomeBanner from './banner/index'
 export default {
   mixins: [tickTableMixin],
   data: function () {
@@ -217,7 +219,8 @@ export default {
     kSlider: Slider,
     PairTable,
     PairRankTable,
-    MineSummary, 
+    MineSummary,
+    HomeBanner
     // Kyc
   },
   computed: {
@@ -237,6 +240,12 @@ export default {
     }
   },
   methods: {
+    buySubmit(item) {
+        this.$router.push({
+            path: '/Superzis',
+            query: item
+        })
+    },
     async getBanners () {
       const res = await service.getBanners()
       if (!res.code) {

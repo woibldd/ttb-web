@@ -475,6 +475,10 @@ const service = {
   cancelWithdraw (param) {
     return request('/account/withdraw/cancel', param)
   },
+//   一键买币
+canbullWithdraw (param) {
+    return request('/otcactive//keyByCoins', param)
+  },
   /* -- 资金管理 end  -- */
 
   /* 挖矿 */
