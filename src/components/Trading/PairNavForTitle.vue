@@ -46,7 +46,7 @@
       <ul class="ul ix-pair-body tbody" :style="{'max-height': height}" v-show="sortedList.length">
         <li
           class="tr"
-          v-for="pair in sortedList"
+          v-for="(pair,index) in sortedList"
           :class="{cur: pair.name === state.pro.pair}"
           :key="pair.id"
           @click="setPair(pair)"
@@ -57,6 +57,7 @@
               <icon v-show="!pair.like" name="sc-w"/>
             </span>
             {{ pair.product_name }}/{{ pair.currency_name }}
+            <icon v-show="index < 3 && tabSelected==='new' " name='hot-red'/>   
           </div>
           <div class="td price">
             <span v-if="pair.tick">{{ pair.tick.current | fixed(pair.price_scale) }}</span>

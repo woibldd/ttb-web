@@ -42,6 +42,7 @@ export default {
       return this.state.pro.pairList
     },
     showList () {
+      console.log('2222222222222')
       let list = this.pairList
       if (this.tabSelected === 'all') {
         return  _.filter(list, pair => {
@@ -62,20 +63,23 @@ export default {
           "XRP_USDT",
           "LTC_BTC",
         ]
-        let a = _.filter(list, pair => {
-          return excludeList.indexOf(pair.name) < 0 && pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
-        })
-        
-        a = _.sortBy(a, (item) => {
-          let value = this.getDelta(item.tick) || 0
+        let res = _.filter(list, (pair) => { 
+          return excludeList.indexOf(pair.name) < 0 
+        })   
+        res = _.sortBy(res, (pair) => {
+          let value = this.getDelta(pair.tick) || 0
           return value * -1
-        })
+        })  
+        console.log('111111111111111111111111111111111111111111111111111111111111')
+        res = _.filter(res, (pair, index) => {  
+          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
+        })   
 
-        return a
+        return res
       }
       else if (this.tabSelected === 'like') {
         return _.filter(list, pair => {
-          return excludeList.toUpperCase().indexOf(this.search.toUpperCase()) > -1 &&
+          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 &&
             (pair.like || false)
         })
       }

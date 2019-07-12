@@ -27,9 +27,15 @@ export default {
       value = mul.times(price).times(amount)
       ix = Big(20).div(Big(lever).eq(0) ? 20 : lever).round(6, down)
     }
-    // console.log({value:value.toString()})
+    console.log({value:value.toString()})
     totalValue = (totalValue == null || totalValue.eq(0)) ? value : totalValue
-    let count = (Big(totalValue).minus(200).div(100)).round(0, up)
+    let count = 0
+    if (pairInfo.name === 'FUTURE_BTCUSD') {
+      count = (Big(totalValue).minus(200)).div(100).round(0, up)
+    } else {
+      count = (Big(totalValue).minus(50)).div(50).round(0, up)
+    } 
+
     if(Big(count).lte(1)){
       count = Big(0)
     }

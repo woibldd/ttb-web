@@ -69,6 +69,7 @@
         </div>
         <div class="row__item percent9"> 
           {{ pair.name | pairfix }}
+          <icon v-show="index < 3 && tabSelected==='new' " name='hot-red'/>  
         </div>
         <div class="row__item percent18_8 newest_price">
           <span class="ml-10 inline-block c-999">{{ state.fiatMoneySymbol }}<fiat-money
