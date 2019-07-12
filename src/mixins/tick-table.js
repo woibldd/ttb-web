@@ -55,6 +55,12 @@ export default {
           "EOS_USDT",
           "ETH_BTC",
           "ETH_USDT",
+          "LTC_USDT",
+          "BCH_BTC",
+          "BCH_USDT",
+          "XRP_BTC",
+          "XRP_USDT",
+          "LTC_BTC",
         ]
         let a = _.filter(list, pair => {
           return excludeList.indexOf(pair.name) < 0 && pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
