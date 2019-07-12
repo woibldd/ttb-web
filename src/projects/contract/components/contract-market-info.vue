@@ -61,14 +61,14 @@
           <div
             class="row__label"
             v-tooltip.top-center="{html: true, content: $t('contract_24_hour_trade_tips'), classes: 'contract'}">{{ $t('contract_24_hour_trade') }}</div>
-          <div class="row__value">{{ pairTick.volume_24h | thousand }} USD</div>
+          <div class="row__value">{{ pairTick.volume_24h | thousand }} {{ $t(unit)}}</div>
         </div>
         <div
           v-show='false'
           class="info__row"
           v-tooltip.top-center="{html: true, content: $t('contract_unequal_pos_amount_tips'), classes: 'contract'}">
           <div class="row__label">{{ $t('contract_unequal_pos_amount') }}</div>
-          <div class="row__value">{{ pairInfo.holding | thousand }} USD</div>
+          <div class="row__value">{{ pairInfo.holding | thousand }}  {{ $t(unit)}}</div>
         </div>
         <div
           class="info__row"
@@ -132,14 +132,21 @@ export default {
         return this.$t('contract_index_price_tips' , {product_name : state.ct.pairInfo.product_name || 'BTC'})
       }
       return this.$t('contract_index_price_tips' , {product_name : 'BTC'})
-    }
+    },
+    unit() { 
+      if (this.state.ct.pair === 'FUTURE_BTCUSD') { 
+        return 'USD'
+      }
+      else { 
+        return 'contract_min_unit'
+      }
+    },
   },
   created(){
     var $this = this
     setTimeout(function(){
      var startTime=Math.round(new Date() / 1000);//开始时间
-     var endTime= $this.pairInfo.next_fee_time/ 1000; //结束时间
-     console.log(endTime,1111111111111111,$this.pairInfo)
+     var endTime= $this.pairInfo.next_fee_time/ 1000; //结束时间 
      setInterval(function(){
     		 var ts =endTime-startTime;//计算剩余的毫秒数
     		 var hh = parseInt(ts  / 60 / 60 % 24, 10);//计算剩余的小时数

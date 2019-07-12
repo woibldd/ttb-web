@@ -68,7 +68,7 @@
         <div class="column flex flex-start ml-15">
           <div class="info-row">
             <span class="info-field">{{ $t('homechart_24h_v') }}： </span>
-            <span class="info-value default" >{{ tick.volume_24h | pretty }} {{ pairInfo.currency_name }}</span>
+            <span class="info-value default" >{{ tick.volume_24h | pretty }} {{ $t(unit) }}</span>
           </div>
           <div class="info-row">
             <span
@@ -166,7 +166,15 @@ export default {
         }
       }
       return '--'
-    }
+    },
+    unit() { 
+      if (this.state.ct.pair === 'FUTURE_BTCUSD') { 
+        return 'USD'
+      }
+      else { 
+        return 'contract_min_unit'
+      }
+    },
   },
   methods: {
     changePair (pair) {
