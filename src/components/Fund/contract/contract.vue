@@ -191,9 +191,9 @@
         </div>
       </div>
     </div>
-    <!-- <transfer-modal
+    <transfer-modal
       :show-modal.sync="showModal"
-      @click="hideModal"/> -->
+      @click="hideModal"/>
   </div>
 </template>
 <script>
@@ -203,7 +203,7 @@ import utils from '@/modules/utils'
 // import tickTableMixin from "@/mixins/fund-contract-tick";  
 import dealSocketMixins from '@/mixins/deal-socket-mixins'
 import contractCard from './contract-card'
-// import transferModal from './transfer-modal'
+import transferModal from './transfer-modal'
 /**
  *
 currency 币名
@@ -219,7 +219,7 @@ export default {
   name: 'MyFund',
   mixins: [ dealSocketMixins],
   // mixins: [tickTableMixin, dealSocketMixins],
-  components: {contractCard,},
+  components: {contractCard,transferModal},
   data () {
     return {
       state,
@@ -328,8 +328,7 @@ export default {
       console.log({obj})
       return obj
     },
-    holdingList() {
-      console.log('999999999991111111111111111122222222222222222223333333333333333333333333334444444444444444444444444')
+    holdingList() { 
       let list = state.ct.holdingList 
       let pairInfoList = state.ct.pairInfoList
       list = list.map((holding) => {
@@ -436,14 +435,14 @@ export default {
           holding.roe = unrealized
             .div(holding.value)
             .mul(holding.leverage == 0 ? maxLever : holding.leverage)
-            .mul(100)
+            .mul(100).mul(2)
             .toFixed(2)
             
           //console.log(holding.roe)
           holding.roelp = unrealizedlp
             .div(holding.value)
             .mul(holding.leverage == 0 ? maxLever : holding.leverage)
-            .mul(100)
+            .mul(100).mul(2)
             .toFixed(2)
             //console.log(holding.roelp)
         }

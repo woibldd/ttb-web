@@ -512,8 +512,7 @@ export default {
     },
 
   },
-  async created () {  
-    console.log('9090909090woyouyitouxiaomaolvwo conglaiyebuqi')
+  async created () {   
     if (!this.coinList) {
       this.coinList = [
         {

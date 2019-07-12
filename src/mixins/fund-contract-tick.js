@@ -20,8 +20,7 @@ export default {
       //   find.delta = this.$big(item.increment_24h).mul(100).div(this.$big(item.current).minus(item.increment_24h)).round(2, this.C.ROUND_HALF_UP).toFixed(2)
       //   find.vol = item.volume_24h
       //   find.tick = item
-      // }
-      console.log('00000000000000000000000000000000000000000000000000000000000000000000000000000000')
+      // } 
       let ct = state.ct
       if (item.pair === state.ct.pair) {  
         state.ct.pairTick = item 
@@ -58,8 +57,7 @@ export default {
         }
       }
     }, 
-    async fetch () {
-      console.log('00000000000000000000000000000000000000000000000000000000000000000000000000000000')
+    async fetch () { 
       this.loading = true
       let res = await service.getContractSymList()
       this.loading = false
