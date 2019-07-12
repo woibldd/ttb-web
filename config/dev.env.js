@@ -6,7 +6,7 @@ module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
   STATIC: '"/"',
   //BASE_API: '"http://i.ix-test.com:8080"',
-  BASE_API: '"https://i.ixex.io"',
-  // BASE_API: '"https://i.ixex.pro"',
+  // BASE_API: '"https://i.ixex.io"',
+  BASE_API: '"https://i.ixex.pro"',
   ...require("./theme.env")
 })
