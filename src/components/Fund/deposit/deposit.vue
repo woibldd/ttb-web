@@ -249,6 +249,7 @@ export default {
             flex: 1;
             text-align: center;
             vertical-align: middle;
+            
             color:#01CED1
         }
     }
