@@ -432,12 +432,12 @@ export default {
             width: '',
             key: 'name'
           },
-          {
-            title: 'register_time', // 注册时间
-            text: 'otc_register_time',
-            width: '',
-            key: 'register_time'
-          },
+          // {
+          //   title: 'register_time', // 注册时间
+          //   text: 'otc_register_time',
+          //   width: '',
+          //   key: 'register_time'
+          // },
           {
             title: 'kyc_level', // 认证等级
             text: 'otc_kyc_level',
