@@ -148,8 +148,7 @@
             <div class="row__input" >
               <input
                 v-model="googleCode"
-                @input="keyPress"
-                v-focus="verify_type==='google'"
+                @input="keyPress"  
                 maxlength="6"
                 ref="googleCode"
                 @keydown.enter.stop.prevent="toVerifyCode"
@@ -169,7 +168,7 @@
                 <input
                   v-model="phoneCode"
                   @input="keyPress"
-                  maxlength="6"
+                  maxlength="6" 
                   ref="phoneCode"
                   @keydown.enter.stop.prevent="toVerifyCode"
                   class="input-validate mr-14">
@@ -193,7 +192,7 @@
               <div class="row__input" >
                 <input
                   v-model="emailCode"
-                  @input="keyPress"
+                  @input="keyPress" 
                   maxlength="6"
                   ref="emailCode"
                   @keydown.enter.stop.prevent="toVerifyCode"
@@ -379,9 +378,7 @@ export default {
         this.toVerifyCode()
       }
     },
-    async submit (e) {
-      
-      console.log('00000000000000000000000000000000000000000000000000000')
+    async submit (e) { 
       // 本地校验
       const check = this.checkParams()
       if (!check) {
@@ -411,6 +408,17 @@ export default {
         this.verify_email = res.data.verify_email
         this.verify_google = res.data.verify_google
         this.showModal = true
+        this.$nextTick(()=>{ 
+          let type = this.verify_type
+            console.log(type)
+          if (type === 'google') { 
+            this.$refs.googleCode.focus()
+          } else if (type === 'phone') { 
+            this.$refs.phoneCode.focus() 
+          } else { 
+            this.$refs.emailCode.focus() 
+          }
+        }) 
       } else {
       // 未开启二步认证
         this.loginSuccess(res.data)

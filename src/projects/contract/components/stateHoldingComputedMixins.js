@@ -128,7 +128,7 @@ export default {
         if (currency === 'BTCUSD') {
           let unitPrice = 1 //单价 先写死
           if (!!markPrice) {
-            holding.value = this.$big(amount).div(holding.markPrice || 0).times(unitPrice).round(value_scale || 4).abs().toString()
+            holding.value = this.$big(amount).div(holding.markPrice || 0).times(unitPrice).abs().toString()
           }
           else {
             holding.value = "0"
@@ -198,11 +198,15 @@ export default {
         }
         else {
           let maxLever = pairInfo.max_leverage || 100
+          let roeMul = 2 
+          if (currency === 'BTCUSD') {
+            roeMul = 1
+          }
            
           holding.roe = unrealized
             .div(holding.value)
             .mul(holding.leverage == 0 ? maxLever : holding.leverage)
-            .mul(2)
+            .mul(roeMul)
             .mul(100)
             .toFixed(2)
             
@@ -210,7 +214,7 @@ export default {
           holding.roelp = unrealizedlp
             .div(holding.value)
             .mul(holding.leverage == 0 ? maxLever : holding.leverage)
-            .mul(2)
+            .mul(roeMul)
             .mul(100)
             .toFixed(2)
             //console.log(holding.roelp)
