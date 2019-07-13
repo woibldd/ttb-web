@@ -149,8 +149,9 @@
               <input
                 v-model="googleCode"
                 @input="keyPress"
-                v-focus
+                v-focus="verify_type==='google'"
                 maxlength="6"
+                ref="googleCode"
                 @keydown.enter.stop.prevent="toVerifyCode"
                 class="input-validate google mr-14">
             </div>
@@ -169,6 +170,7 @@
                   v-model="phoneCode"
                   @input="keyPress"
                   maxlength="6"
+                  ref="phoneCode"
                   @keydown.enter.stop.prevent="toVerifyCode"
                   class="input-validate mr-14">
                 <count-down
@@ -193,6 +195,7 @@
                   v-model="emailCode"
                   @input="keyPress"
                   maxlength="6"
+                  ref="emailCode"
                   @keydown.enter.stop.prevent="toVerifyCode"
                   class="input-validate mr-14">
                 <count-down
@@ -377,6 +380,8 @@ export default {
       }
     },
     async submit (e) {
+      
+      console.log('00000000000000000000000000000000000000000000000000000')
       // 本地校验
       const check = this.checkParams()
       if (!check) {
@@ -444,21 +449,25 @@ export default {
       let type = this.verify_type
       let params = {
       }
+      console.log({verify_type: this.verify_type})
       if (type === 'google') {
         params = {
           code: this.googleCode
         }
+        this.$refs.googleCode.focus()
       } else if (type === 'phone') {
         params = {
           phone: this.phone,
           code: this.phoneCode
         }
+        this.$refs.phoneCode.focus()
         //type = 'phone'
       } else {
         params = {
           email: this.email,
           code: this.emailCode
         }
+        this.$refs.emailCode.focus()
         //type = 'email'
       }
       if (!params.code) {
