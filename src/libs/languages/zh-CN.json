@@ -1700,6 +1700,7 @@
   "transfer_side":"划转方向",
   "transfer_amount":"划转数量",
   "transfer_enter_amount":"请输入划转金额",
+  "transfer_enter_amountor": "请输入划转数量",
   "transfer_able_amount":"可划转数量：",
   "transfer_btc_history":"划转记录",
   "transfer_currency":"划转币种",

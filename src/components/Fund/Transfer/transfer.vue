@@ -50,7 +50,7 @@
             class="number-input"
             v-model="number"
             :scale="8"
-            :placeholder="$t('transfer_enter_amount')"
+            :placeholder="$t('transfer_enter_amountor')"
           />
         </div>
       </div>
