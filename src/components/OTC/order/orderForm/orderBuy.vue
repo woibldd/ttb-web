@@ -106,8 +106,8 @@
                         <number-input
                           class="number-input"
                           v-model="inputPrice"
-                          :scale="symbolInfo.price_scale || 2"
-                          :placeholder="$t('otc_placeholder_b')"
+                          :scale="price_scale || 2"
+                          :placeholder="side===1 ? $t('otc_placeholder_c') : $t('otc_placeholder_b')"
                         />
                         <div
                           class="unit-label long"
@@ -138,7 +138,7 @@
                         <number-input
                           class="number-input"
                           v-model="amount"
-                          :scale="symbolInfo.amount_scale || 6" 
+                          :scale="amount_scale || 6" 
                           :placeholder="placeholder"
                         />
                         <div
@@ -504,9 +504,14 @@ export default {
     },
     placeholder () {
       let plt = '0' 
-      if (JSON.stringify(this.balance) !== "{}")
-        plt = this.balance[this.currency].available
-      return '可用数量：' + plt
+      if (this.side === 1) {
+        return this.$t('contract_order_enter_tips1')
+      }
+      else {
+        if (JSON.stringify(this.balance) !== "{}")
+          plt = this.balance[this.currency].available
+        return '可用数量：' + plt
+      }
     },
     price_scale () {
       if (!!this.symbolInfo) {
@@ -698,8 +703,7 @@ export default {
         }
       }
     },
-    side () {
-      console.log(this.side)
+    side () { 
       this.order.remark = ''
       this.inputPrice = ''
       this.amount = ''

@@ -326,8 +326,8 @@
               v-tooltip.bottom-end="{html: true, content: $t('contract_risk_limit_tips1'), classes: 'contract'}"
             />
           </span>
-          <span>
-            {{ (currentHolding.value || 0) | abs }}/{{ riskModal.currentValue }}BTC
+          <span> 
+            {{ (currentHolding.value || 0)  | round(pairInfo.value_scale || 4) | abs }}/{{ riskModal.currentValue }}BTC
             <!-- {{ pairInfo.product_name }}  -->
             <!-- <span
               @click="editRiskLimit"
