@@ -91,10 +91,10 @@
             <span class="info-field">{{ $t('contract_fee_rate') }}： </span>
             <span class="info-value default">
 
-            <router-link to="/material/fee-history">  {{ ( (pairInfo.fee_rate * 100).toFixed(4) || 0) + '%' }}</router-link>
+            <router-link to="/material/fee-history">  {{ (pairInfo.fee_rate * 100 || 0) | round(4)   }} % </router-link>
             <!-- {{ ( (pairInfo.fee_rate * 100).toFixed(4) || 0) + '%' }}  -->
             <i class="iconfont strong pointer"
-               v-tooltip.top-center="{content: $t('contract_fee_rate_current_tips', { feeRate: ((pairInfo.fee_rate * 100).toFixed(4) || 0) + '%' }), classes: 'contract'}"/>  </span>
+               v-tooltip.top-center="{content: $t('contract_fee_rate_current_tips', { feeRate: ($big(pairInfo.fee_rate * 100 || 0).round(4, 0).toFixed(4) || 0) + '%' }), classes: 'contract'}"/>  </span>
           </div>
           <div v-if='false' class="info-row ml-30">
             <span class="info-field">{{ $t('contract_holding') }}： </span>

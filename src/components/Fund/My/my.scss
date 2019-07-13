@@ -131,14 +131,14 @@
         padding: 5px 0;
         .cell {
           line-height: 33px;
-          .airdrop {
-            background-color:#BAE2F7;
+          .airdrop { 
             //cursor: help;
             position: relative;
             .question {
-              position: absolute;
-              top: -5px;
-              right: -12px;
+              color: #38D3D4;
+              // position: absolute;
+              // top: -5px;
+              // right: -12px;
             }
           }
         }
@@ -177,23 +177,10 @@ border: 1px solid #01CED1;
 border-radius: 14px;
 color: #01CED1;
 font-size: 14px;
-cursor: pointer;
-    
-    
-    color: #01CED1 !important;
+cursor: pointer; 
+  color: #01CED1 !important;
   border: 1px solid #01CED1 !important;}
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 .my-fund-container {
   .my-fund-content {
     .information {
@@ -233,14 +220,11 @@ cursor: pointer;
         padding: 5px 0;
         .cell {
           line-height: 33px;
-          .airdrop {
-            background-color:#BAE2F7;
+          .airdrop { 
             //cursor: help;
             position: relative;
             .question {
-              position: absolute;
-              top: -5px;
-              right: -12px;
+              color: #38D3D4 !important;
             }
           }
         }

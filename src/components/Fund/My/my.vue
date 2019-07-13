@@ -67,7 +67,7 @@
                 v-tooltip.top-start="{html: true, content: $t('idt_tips'), classes: 'assets'}"
               >
                 {{scope.row[hd.key]}}
-                <icon class="question" name="question-x"/>
+                <icon class="question" name="question-n"/>
               </i>
 
               <i
@@ -76,7 +76,7 @@
                 v-tooltip.top-start="{html: true, content: $t('dfd_tips'), classes: 'assets'}"
               >
                 {{scope.row[hd.key]}}
-                <icon class="question" name="question-x"/>
+                <icon class="question" name="question-n"/>
               </i> 
              <i
                 v-else-if="scope.row[hd.key] === 'NEWOS'"
@@ -84,7 +84,7 @@
                 v-tooltip.top-start="{html: true, content: $t('newos_tips'), classes: 'assets'}"
               >
                 {{scope.row[hd.key]}}
-                <icon class="question" name="question-x"/>
+                <icon class="question" name="question-n"/>
               </i>
               <i
                 v-else-if="scope.row[hd.key] === 'BNL'"
@@ -92,7 +92,7 @@
                 v-tooltip.top-start="{html: true, content: $t('bnl_tips'), classes: 'assets'}"
               >
                 {{scope.row[hd.key]}}
-                <icon class="question" name="question-x"/>
+                <icon class="question" name="question-n"/>
               </i>
               <i v-else>{{scope.row[hd.key]}}</i>
             </span>
