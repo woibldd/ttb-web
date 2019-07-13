@@ -1803,7 +1803,7 @@
 "transfer_amount":" transfer  amount",
 "transfer_enter_amount":" Please enter the transfer amount",
 "transfer_able_amount":"Transferable amount：",
-"transfer_btc_history":" BTC transaction history",
+"transfer_btc_history":"transaction history",
 "transfer_currency":" transfer currency",
 "transfer_from_a":" transfer from",
 "transfer_to_a":"transfer to",

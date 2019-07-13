@@ -1635,7 +1635,7 @@
     "transfer_amount": "전입수량을 바꾸다",
     "transfer_enter_amount": "금액을 입력하세요",
     "transfer_able_amount": "전입가능한 수량：",
-    "transfer_btc_history": "BTC전입기록",
+    "transfer_btc_history": "전입기록",
     "transfer_currency": "전입코인종류",
     "transfer_from_a": "어디로",
     "transfer_to_a": "어디에게",
