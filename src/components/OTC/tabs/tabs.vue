@@ -27,8 +27,8 @@
           >BTC</button>
         </div>
       </div>
-      <div class="tab-right pull-right">
-        <label class='label'>{{$t('otc_legal_currency')}}</label>
+      <div class="tab-right pull-right" style="margin-top:-5px!important;" >
+        <label  class='label'>{{$t('otc_legal_currency')}}</label>
         <span class='currency'>CNY</span>
         <button
           class="btn"
@@ -120,10 +120,11 @@ export default {
           cursor: pointer;
         }
         label {
-          padding: 5px 15px 5px 0;
+             font-size: 16px!important;
+         padding: 5px 15px 5px 0;
           font-family:MicrosoftYaHei;
-font-weight:400;
-color:rgba(51,51,51,1);
+            font-weight:400;
+            color:rgba(51,51,51,1);
         }
         .tab-left {
           width: 50%;
@@ -135,9 +136,9 @@ color:rgba(51,51,51,1);
               label {
                 padding: 5px 15px;
                 font-size:16px;
-font-family:MicrosoftYaHei;
-font-weight:400;
-color:rgba(51,51,51,1);
+              font-family:MicrosoftYaHei;
+              font-weight:400;
+              color:rgba(51,51,51,1);
               }
               border-left: 1px solid #999;
             }
@@ -174,7 +175,7 @@ color:rgba(51,51,51,1);
      font-size: 12px!important;
    }
    .main-tabs-container .main-tabs-box label {
-     font-size: 12px!important;
+     font-size: 16px!important;
    }
  }
 </style>

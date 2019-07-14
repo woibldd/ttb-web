@@ -1279,6 +1279,7 @@
 "contract_diff_expect_force": "Targeted price/forecast of liquidation price price difference",
 "contract_lever_times": " Multiple leverage",
 "contract_FUTURE_BTCUSD": " BTC Perpetual",
+"contract_FUTURE_BHDUSD":"BHD Perpetual",
 "contract_complete_deal": "Completed transactions",
 "contract_deal_price": "Transacted price",
 "contract_value": "Value",
@@ -1724,7 +1725,7 @@
 "contract_close_market":"Close Market",
 "contract_close_market_buy":" Close Market Buying",
 "contract_close_market_sell":"Close Market Selling",
-"contract_close_tips1":" %{amount} BTC Contract at %{price} 。",
+"contract_close_tips1":" %{amount} %{currency} Contract at %{price} 。",
 "contract_close_tips2":"Your whole position will be liquidated during execution.",
 "contract_close_tips3":"This is the profit and loss forecast after assuming that you have liquidated your position at the market price. It is calculated according to the current order list",
 
@@ -1785,7 +1786,7 @@
 "contract_competition_my_team": "My Team",
 "contract_competition_explain_51": "Ranking will be updated daily at 12:00  (UTC+8)",
 "contract_competition_tab_41":"Yield",
-"contract_close_tips4":" Buying %{amount} BTC contract at the best price 。",
+"contract_close_tips4":" Buying %{amount} %{currency} contract at the best price 。",
 "contract_login_overdue":" The login has expired,please login again",
 "bubble_ix_team":" IXX Team",
 "bubble_site_tips":"Please identify the standard domain name IXX below when you log in：",
@@ -1802,7 +1803,7 @@
 "transfer_amount":" transfer  amount",
 "transfer_enter_amount":" Please enter the transfer amount",
 "transfer_able_amount":"Transferable amount：",
-"transfer_btc_history":" BTC transaction history",
+"transfer_btc_history":"transaction history",
 "transfer_currency":" transfer currency",
 "transfer_from_a":" transfer from",
 "transfer_to_a":"transfer to",
@@ -2153,5 +2154,6 @@
 "bby_shise8":" Interest return",
 "bby_shise9":"Popular recommendation",
     "bby_shise10":"Deadline",
-"bidTitle": "Deposit&earn"
+"bidTitle": "Deposit&earn",
+"otc_placeholder_c": "Please enter the price you expect to buy"
 }

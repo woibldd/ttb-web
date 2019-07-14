@@ -1242,5 +1242,55 @@ export default{
       chain_info: 'https://etherscan.io/token/0x4bc41fcca33c08a0756911b6908cf65d72b85f52' // 区块查询
     }
 
-  }
+  },
+  BHT: {
+    'zh-CN': {
+      name: 'BHT',
+      full_name: 'BeeStore',
+      brief_info: 'BeeStore是新一代的区块链分布式应用程序商店，对标苹果应用商店和安卓市场，赋能开发者和用户，专注于构建与区块链相关 的应用程序和服务，未来致力于建立一个全球范围内的以应用分发为 核心的去中心化、高度自治的内容分发生态。这是一个全新的、革命性、又具有超级现实意义的平台，这即是一座此岸到彼岸的桥、更是 一个全新世界的内容分发中心。在这里，用户消费内容不仅不需要支 付费用，还能获得收益，每个人的隐私还能收到尊重和保护。一个全 新的，自由的时代即将登场。',
+      issue_time: '2018/5',
+      issue_all: '100亿', // 发行总量
+      issue_circulation: '184,000,000', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.beestore.io/onepaper', // 白皮书
+      office_website: 'http://www.beestore.io/', // 官网
+      chain_info: 'https://etherscan.io/token/0xa4fb385820a9eef842a419e08f8540fd7d1bf6e8#balances' // 区块查询
+    },
+    'zh-HK': {
+      name: 'BHT',
+      full_name: 'BeeStore',
+      brief_info: 'BeeStore是新一代的區塊鏈分佈式應用程序商店，對標蘋果應用商店和安卓市場，賦能開發者和用戶，專注於構建與區塊鏈相關的應用程序和服務，未來致力於建立一個全球範圍內的以應用分發為覈心的去中心化、高度自治的內容分發生態。這是一個全新的、革命性、又具有超級現實意義的平臺，這即是一座此岸到彼岸的橋、更是一個全新世界的內容分發中心。在這裡，用戶消費內容不僅不需要支付費用，還能獲得收益，每個人的隱私還能收到尊重和保護。一個全新的，自由的時代即將登場。',
+      issue_time: '2018/5',
+      issue_all: '100億', // 发行总量
+      issue_circulation: '184,000,000', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.beestore.io/onepaper', // 白皮书
+      office_website: 'http://www.beestore.io/', // 官网
+      chain_info: 'https://etherscan.io/token/0xa4fb385820a9eef842a419e08f8540fd7d1bf6e8#balances' // 区块查询
+    },
+    'en': {
+      name: 'BHT',
+      full_name: 'BeeStore',
+      brief_info: 'As the biggest blockchain-related application store, BeeStore.io is committed to providing global users with the best blockchain-related application download experience. The store has already listed over 1430 apps. BeeStore.io now is the only app store that connect developers with users through token, and it has integrated into digital wallet like MEET.ONE, TP, allowing users to pay with token and download all ETH, EOS and TRX dApp on BeeStore.io.',
+      issue_time: '2018/5',
+      issue_all: '10 billion', // 发行总量
+      issue_circulation: '184 million', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.beestore.io/onepaper', // 白皮书
+      office_website: 'http://www.beestore.io/', // 官网
+      chain_info: 'https://etherscan.io/token/0xa4fb385820a9eef842a419e08f8540fd7d1bf6e8#balances' // 区块查询
+    },
+    'ko': {
+      name: 'BHT',
+      full_name: 'BeeStore',
+      brief_info: 'BeeStore 은 차세대 의 고리 디 도스 앱 스 토 어 를 표기 앱 스 토 어 (apple시장과Android시장 을 부여하다 개발자 와 가입자 수 있 기에 몰두 해 구축 과 관련 한 사슬 앱 과 서비스, 미래 인 교 육체 제의 건립 에 진력 한 세계적 인 응용 배포 를 핵심 으로 하는가 중심화, 고 도의 자치 내용 배포 생태 이다.이것은 새롭고 혁명적이며, 또한 초현실적인 의의가 있는 플랫폼이다. 이것은 차안에서 저쪽으로 향하는 다리이며, 게다가 전혀 새로운 세계의 컨텐츠배포센터이다.이곳에서 사용자의 소비내용은 비용을 지불할 필요가 없을 뿐만 아니라 수익을 얻을 수 있으며 개개인의 프라이버시는 존중과 보호를 받을 수 있다.새로운 자유 시대가 곧 등장할 것이다',
+      issue_time: '2018/5',
+      issue_all: '10 billion', // 发行总量
+      issue_circulation: '184 million', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://www.beestore.io/onepaper', // 白皮书
+      office_website: 'http://www.beestore.io/', // 官网
+      chain_info: 'https://etherscan.io/token/0xa4fb385820a9eef842a419e08f8540fd7d1bf6e8#balances' // 区块查询
+    }
+  },
 }

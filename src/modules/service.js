@@ -720,7 +720,13 @@ canbullWithdraw (param) {
           item.amount_scale = parseInt(item.amount_scale, 10)
           item.currency_scale = parseInt(item.price_scale, 10) || 0
           item.price_scale = parseInt(item.price_scale, 10) || 2
-          item.value_scale = parseInt(item.value_scale, 10) || 4
+          if (item.currency === 'BTCUSD') {
+            item.value_scale = 4
+          }
+          else {
+            item.value_scale = 8
+          }
+          //item.value_scale = parseInt(item.value_scale, 10) || 4
           item.fee_rate = item.fee_rate || 0
           item.accuracy = item.accuracy || 5
           if (item.name.indexOf('FUTURE_') < 0) {

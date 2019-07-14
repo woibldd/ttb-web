@@ -10,10 +10,10 @@
           class="menu-name"
           active-class="active"
           to="/material/fee-history">{{ $t('assets_fee_history') }}</router-link></li>
-        <li class=""><router-link
+        <!-- <li class=""><router-link
           class="menu-name"
           active-class="active"
-          to="/material/ensurance-fund">{{ $t('ensurance_fund') }}</router-link></li>
+          to="/material/ensurance-fund">{{ $t('ensurance_fund') }}</router-link></li> -->
         <li class=""><a
           class="menu-name"
           target="_blank"

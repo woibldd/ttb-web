@@ -2,7 +2,7 @@
 .tooltip {
     display: block !important;
     z-index: 10000;
-  
+  background-color: red;
     &.myfund{
         .tooltip-arrow {
             border-color: #ceab66;

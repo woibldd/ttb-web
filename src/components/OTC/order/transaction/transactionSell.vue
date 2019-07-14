@@ -56,7 +56,7 @@
                 @input="amountInput"
                 @blur="changeTarget('')"
                 @focus="changeTarget('amount')"
-                :scale="symbolInfo.amount_scale || 6"
+                :scale="amount_scale || 6"
                 :placeholder="$t('amount')"
               />
               <span
@@ -76,7 +76,7 @@
                 @input="totalInput"
                 @blur="changeTarget('')"
                 @focus="changeTarget('total')"
-                :scale="symbolInfo.price_scale || 2"
+                :scale="price_scale || 2"
                 :placeholder="$t('otc_amount_sale')"
               />
               <span class="btn-all"
@@ -192,12 +192,12 @@ export default {
             width: "",
             key: "name"
           },
-          {
-            title: "register_time", //注册时间
-            text: "otc_register_time",
-            width: "",
-            key: "register_time"
-          },
+          // {
+          //   title: "register_time", //注册时间
+          //   text: "otc_register_time",
+          //   width: "",
+          //   key: "register_time"
+          // },
           {
             title: "kyc_level", //认证等级
             text: "otc_kyc_level",
@@ -287,6 +287,18 @@ export default {
     isLogin () {
       return state.userInfo !== null
     },
+    price_scale () {
+      if (!!this.symbolInfo) {
+        return this.symbolInfo.price_scale || 2
+      }
+      return 2
+    },
+    amount_scale() {
+      if (!!this.symbolInfo) {
+        return this.symbolInfo.amount_scale || 6
+      }
+      return 2
+    }
   },
   props: {
     view: {

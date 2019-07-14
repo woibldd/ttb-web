@@ -1047,7 +1047,7 @@
     "contract_index_resource":"价格来源",
     "contract_index_resource_tips":"<a>价格来源</a><br/>价格资料来源。",
     "contract_ix_index_price":"IXX 指数价格",
-    "contract_index_price_tips":"<a>指数价格</a><br/>标的资产的价格这是BTC合约的价格，点此查看历史价格。",
+    "contract_index_price_tips":"<a>指数价格</a><br/>标的资产的价格这是 %{product_name} 合约的价格，点此查看历史价格。",
     "contract_face_value":"合约面值",
     "contract_fee_rate":"资金费率",
     "contract_holding":"持仓量",
@@ -1479,8 +1479,8 @@
     "contract_close_market":"市价平仓",
     "contract_close_market_buy":"市价买入平仓",
     "contract_close_market_sell":"市价卖出平仓",
-    "contract_close_tips1":"在%{price}价格%{amount}张BTC合约。",
-    "contract_close_tips4":"在最优价格%{amount}张BTC合约。",
+    "contract_close_tips1":"在%{price}价格%{amount}张%{currency}合约。",
+    "contract_close_tips4":"在最优价格%{amount}张%{currency}合约。",
     "contract_close_tips2":"在执行时，将平掉你的整个仓位。",
     "contract_close_tips3":"这是假设你市价平仓后预测的盈亏，它根据目前的委托列表来计算",
 
@@ -1700,8 +1700,9 @@
   "transfer_side":"划转方向",
   "transfer_amount":"划转数量",
   "transfer_enter_amount":"请输入划转金额",
+  "transfer_enter_amountor": "请输入划转数量",
   "transfer_able_amount":"可划转数量：",
-  "transfer_btc_history":"BTC划转记录",
+  "transfer_btc_history":"划转记录",
   "transfer_currency":"划转币种",
   "transfer_from_a":"转自",
   "transfer_to_a":"转至",
@@ -2083,7 +2084,10 @@
     "bby_shouy31":"购买成功",
     "bby_shouy99":"币币返佣金额",
     "bby_shouy98":"合约返佣金额",
-    "bby_shouy32":"余额不足，请充币",
+    "bby_shouy32":"余额不足，请充币", 
+
+     
+    "contract_FUTURE_BHDUSD":"BHD永续",
     "bby_shise1":"币盈盈记录",
     "bby_shise2":"可用数量不足",
     "bby_shise3":"结束",
@@ -2095,7 +2099,8 @@
     "bby_shise9":"热门推荐",
     "bby_shise10":"限期",
  
-    "bidTitle": "币盈盈"
+    "bidTitle": "币盈盈",
+    "otc_placeholder_c": "请输入您预期购买单价"
   }
 
 

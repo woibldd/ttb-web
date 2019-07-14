@@ -1146,6 +1146,7 @@
   "contract_diff_expect_force": "標記價格/預期強平價格 差異",
   "contract_lever_times": "槓桿倍數",
   "contract_FUTURE_BTCUSD": "BTC永續",
+  "contract_FUTURE_BHDUSD":"BHD永續",
   "contract_complete_deal": "完全成交",
   "contract_deal_price": "成交價格",
   "contract_value": "價值",
@@ -1547,7 +1548,7 @@
   "contract_close_market": "市價平倉",
   "contract_close_market_buy": "市價買入平倉",
   "contract_close_market_sell": "市價賣出平倉",
-  "contract_close_tips1": "在%{price}價格%{amount}張BTC合約。",
+  "contract_close_tips1": "在%{price}價格%{amount}張%{currency}合約。",
   "contract_close_tips2": "在執行時，將平掉你的整個倉位。",
   "contract_close_tips3": "這是假設你市價平倉後預測的盈虧，它根據現時的委託清單來計算",
   "contract_action_position": "倉位",
@@ -1605,7 +1606,7 @@
   "contract_competition_my_team": "我的戰隊",
   "contract_competition_explain_51": "每日（UTC+8）12:00排名更新",
   "contract_competition_tab_41": "收益額",
-  "contract_close_tips4": "在最優價格%{amount}張BTC合約。",
+  "contract_close_tips4": "在最優價格%{amount}張%{currency}合約。",
   "contract_login_overdue": "登入狀態已過期，請重新登入",
   "bubble_ix_team": "IXX 團隊",
   "bubble_site_tips": "請您登入時認准下方IXX的標準功能變數名稱：",
@@ -1620,7 +1621,7 @@
   "transfer_amount": "劃轉數量",
   "transfer_enter_amount": "請輸入劃轉金額",
   "transfer_able_amount": "可劃轉數量:",
-  "transfer_btc_history": "BTC劃轉記錄",
+  "transfer_btc_history": "劃轉記錄",
   "transfer_currency": "劃轉幣種",
   "transfer_from_a": "轉自",
   "transfer_to_a": "轉至",
@@ -1912,5 +1913,6 @@
   "bby_shise9":"熱門推薦",
     "bby_shise10":"限期",
  
-  "bidTitle": "弊盈盈"
+  "bidTitle": "弊盈盈",
+  "otc_placeholder_c": "請輸入您預期購買單價"
 }

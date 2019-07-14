@@ -115,12 +115,10 @@ export default {
           amount: item[1],
           total: total
         }
-      })
-      // debugger
+      }) 
       data.sell = data.sell.sort((a, b) => {
         return b.price - a.price
-      })
-      // debugger
+      }) 
       this.loading = false
       return data
     },

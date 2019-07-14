@@ -148,9 +148,9 @@
             <div class="row__input" >
               <input
                 v-model="googleCode"
-                @input="keyPress"
-                v-focus
+                @input="keyPress"  
                 maxlength="6"
+                ref="googleCode"
                 @keydown.enter.stop.prevent="toVerifyCode"
                 class="input-validate google mr-14">
             </div>
@@ -168,7 +168,8 @@
                 <input
                   v-model="phoneCode"
                   @input="keyPress"
-                  maxlength="6"
+                  maxlength="6" 
+                  ref="phoneCode"
                   @keydown.enter.stop.prevent="toVerifyCode"
                   class="input-validate mr-14">
                 <count-down
@@ -191,8 +192,9 @@
               <div class="row__input" >
                 <input
                   v-model="emailCode"
-                  @input="keyPress"
+                  @input="keyPress" 
                   maxlength="6"
+                  ref="emailCode"
                   @keydown.enter.stop.prevent="toVerifyCode"
                   class="input-validate mr-14">
                 <count-down
@@ -376,7 +378,7 @@ export default {
         this.toVerifyCode()
       }
     },
-    async submit (e) {
+    async submit (e) { 
       // 本地校验
       const check = this.checkParams()
       if (!check) {
@@ -406,6 +408,17 @@ export default {
         this.verify_email = res.data.verify_email
         this.verify_google = res.data.verify_google
         this.showModal = true
+        this.$nextTick(()=>{ 
+          let type = this.verify_type
+            console.log(type)
+          if (type === 'google') { 
+            this.$refs.googleCode.focus()
+          } else if (type === 'phone') { 
+            this.$refs.phoneCode.focus() 
+          } else { 
+            this.$refs.emailCode.focus() 
+          }
+        }) 
       } else {
       // 未开启二步认证
         this.loginSuccess(res.data)
@@ -444,21 +457,25 @@ export default {
       let type = this.verify_type
       let params = {
       }
+      console.log({verify_type: this.verify_type})
       if (type === 'google') {
         params = {
           code: this.googleCode
         }
+        this.$refs.googleCode.focus()
       } else if (type === 'phone') {
         params = {
           phone: this.phone,
           code: this.phoneCode
         }
+        this.$refs.phoneCode.focus()
         //type = 'phone'
       } else {
         params = {
           email: this.email,
           code: this.emailCode
         }
+        this.$refs.emailCode.focus()
         //type = 'email'
       }
       if (!params.code) {

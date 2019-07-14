@@ -63,10 +63,8 @@
         <icon :name="unit.name+'-unit'" />
         {{ total | fixed(unit.scale)}}</h1>
     </div>
-    <div
-      v-if="!showHistory"
-      class="my-fund-content">
-
+    <div 
+      class="my-fund-content"> 
       <el-table :empty-text=" $t('no_data') "
                 :data="tableData"
                 class="fund-coin-pool">

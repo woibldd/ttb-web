@@ -1,38 +1,42 @@
 <template>
-  <div style="height: 400px;" 
-class="ixx_banner_container">
+  <div style=" height: 400px;" class="ixx_banner_container">
     <swiper :options="swiperOption">
       <swiper-slide>
         <div class="dot-item-list">
           <div class="item-list-banner">
-            <img src="./img/1.png" 
+            <img src="./img/1.png"
 alt="">
           </div>
           <div class="item-list-banner">
-            <img src="./img/2.png" 
+            <img src="./img/2.png"
 alt="">
           </div>
           <div class="item-list-banner">
-            <img src="./img/3.png" 
+            <img src="./img/3.png"
 alt="">
           </div>
           <div class="item-list-banner">
-            <img src="./img/4.png" 
+            <img src="./img/4.png"
 alt="">
           </div>
         </div>
       </swiper-slide>
       <swiper-slide>
         <div class="normal-item-list">
-          <img src="./img/changhaibao.png" 
+          <img src="./img/changhaibao.png"
 alt="">
         </div>
       </swiper-slide>
-      <div class="swiper-pagination" 
+      <div class="swiper-pagination"
 slot="pagination"/>
     </swiper>
+<<<<<<< HEAD
     <!-- <div class="buy-currency-container"> -->
     <!-- <div class="currency-inner">
+=======
+    <!-- <div class="buy-currency-container">
+      <div class="currency-inner">
+>>>>>>> origin/newcontract
         <el-row>
           <el-col :span="6">
             <div class="tips">
@@ -68,8 +72,8 @@ slot="pagination"/>
             </el-row>
           </el-col>
         </el-row>
-      </div> -->
-    <!-- </div> -->
+      </div>
+    </div> -->
   </div>
 </template>
 
@@ -123,9 +127,9 @@ export default {
           this.arr = res.data
         }
       })
-      }
-  }, 
-created () {
+    }
+  },
+  created () {
     this.bicher()
   }
 }

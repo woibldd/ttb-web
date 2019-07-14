@@ -68,6 +68,13 @@ export const state = {
     curCommitPrice: 0,
     orderFills: [],
     lastSide: 0,
+    pairInfoList: {},
+    holdingList: [],
+    computeHoldingList: [],
+    lastPriceList: {},
+    markTickList: {},
+    indexTickList: {},
+    currentDelList: {},
   },
   rate: {
     IX: null,
