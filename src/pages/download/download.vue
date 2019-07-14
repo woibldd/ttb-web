@@ -11,14 +11,14 @@
         <div class="qr-note-row">{{ $t('download_scan_qr') }}</div>
         <div class="download-btns">
           <div class="qr-img">
-            <img 
-v-if="ix"
-                 src="../../assets/download/ix_download_qr.png"
-                 alt="dl">
-            <img 
-v-else
-                 src="../../assets/download/ixex.io.png"
-                 alt="dl">
+            <img
+              v-if="ix"
+              src="../../assets/download/ix_download_qr.png"
+              alt="dl">
+            <img
+              v-else
+              src="../../assets/download/ixex.io.png"
+              alt="dl">
           </div>
           <div class="btns">
             <div
