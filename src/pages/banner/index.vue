@@ -1,5 +1,5 @@
 <template>
-  <div class="ixx_banner_container">
+  <div style="height: 400px;" class="ixx_banner_container">
     <swiper :options="swiperOption">
       <swiper-slide>
         <div class="dot-item-list">
@@ -24,8 +24,8 @@
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
-    <div class="buy-currency-container">
-      <div class="currency-inner">
+    <!-- <div class="buy-currency-container"> -->
+      <!-- <div class="currency-inner">
         <el-row>
           <el-col :span="6">
             <div class="tips">
@@ -61,8 +61,8 @@
             </el-row>
           </el-col>
         </el-row>
-      </div>
-    </div>
+      </div> -->
+    <!-- </div> -->
   </div>
 </template>
 
