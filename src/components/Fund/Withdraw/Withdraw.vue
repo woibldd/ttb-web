@@ -64,11 +64,12 @@
           <div class="withdraw-address">
             <el-autocomplete
               class="select-address"
-              v-model="selectItem"
+             v-model="selectItem"
               :fetch-suggestions="querySearch" 
               @select="handleSelect"
               @blur="onBlur"
               :highlight-first-item="highlight"
+          cols="1" rows="1" style="vertical-align:top;outline:none;"
             ></el-autocomplete>
           </div> 
         </div>

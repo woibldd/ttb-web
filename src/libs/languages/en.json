@@ -2142,6 +2142,16 @@
 "bby_shouy24":"3. All participating projects have a fixed start and end time for interest calculation, during which time you can calculate your income. The interest calculating time can be viewed on the page.",
 "bby_shouy25":"4. After the end of the project, the system will start to issue the returns of successively. Due to the large number of participants, your income may be delayed to issue. Please be patient. You can view interest income in Asset Records.",
 "bby_shouy26":"5. Calculation of returns: days  /365* annual return * amount of deposit = gain from deposit this time.",
+"bby_shise1":" D&E Record",
 
+"bby_shise2":" insufficient balance",
+"bby_shise3":" End",
+"bby_shise4":" Sold out",
+"bby_shise5":" Not yet buying time",
+"bby_shise6":" Released",
+"bby_shise7":" D&E purchased",
+"bby_shise8":" Interest return",
+"bby_shise9":"Popular recommendation",
+    "bby_shise10":"Deadline",
 "bidTitle": "Deposit&earn"
 }

@@ -1,68 +1,71 @@
 <template>
   <div class="bid-detail-container">
-    <div class="backTop" @click="backTop">
+    <div class="backTop" 
+@click="backTop">
       <i class="iconfont">&#xe64e;</i>
-      <span>{{$t('bby_shouy7')}}</span>
+      <span>{{ $t('bby_shouy7') }}</span>
     </div>
     <div class="title-box">
-      <div class="logo"></div>
-      <h1>{{cell.currency}}</h1>
-      <h2>{{cell.product}}</h2>
-      <em class="jl" @click="jl">币盈盈记录</em>
+      <div class="logo"/>
+      <h1>{{ cell.currency }}</h1>
+      <h2>{{ cell.product }}</h2>
+      <em class="jl" 
+@click="jl">{{ $t('bby_shise1') }}</em>
     </div>
     <div class="bid-detail-area">
       <div class="message-box">
         <div class="tips">
           <div class="rate">
             <h1>{{ cell.annualizedReturns > 0 ? (Number(cell.annualizedReturns)).toFixed(2) : 0 }}%</h1>
-            <span>{{$t('bby_shouy8')}}</span>
+            <span>{{ $t('bby_shouy8') }}</span>
           </div>
           <div class="week">
-            <h1>{{ cell.moneyDays }}{{$t('bby_shouy9')}}</h1>
-            <span>{{$t('bby_shouy10')}}</span>
+            <h1>{{ cell.moneyDays }}{{ $t('bby_shouy9') }}</h1>
+            <span>{{ $t('bby_shouy10') }}</span>
           </div>
         </div>
         <div class="range-box">
           <div class="range">
-            <el-progress :text-inside="true" :stroke-width="12" :percentage="cell.down_amount" status="warning"/>
+            <el-progress :text-inside="true" 
+:stroke-width="12" :percentage="cell.down_amount" status="warning"/>
           </div>
           <div class="range-txt">
-            <span class="lock">{{$t('bby_shouy3')}} {{cell.lockedAmount}}</span>
-            <span class="join">{{ cell.joinAmount }} {{$t('bby_shouy5')}}</span>
+            <span class="lock">{{ $t('bby_shouy3') }} {{ cell.lockedAmount }}</span>
+            <span class="join">{{ cell.joinAmount }} {{ $t('bby_shouy5') }}</span>
           </div>
           <dl>
             <dd>
-              <span>{{$t('bby_shouy11')}}</span>
-              <em>{{cell.total}} {{cell.currency}}</em>
+              <span>{{ $t('bby_shouy11') }}</span>
+              <em>{{ cell.total }} {{ cell.currency }}</em>
             </dd>
             <dd>
-              <span>{{$t('bby_shouy12')}}</span>
-              <em>{{ cell.remaining_amount }} {{cell.currency}}</em>
+              <span>{{ $t('bby_shouy12') }}</span>
+              <em>{{ cell.remaining_amount }} {{ cell.currency }}</em>
             </dd>
             <dd>
-              <span>{{$t('bby_shouy13')}}</span>
-              <em>{{ cell.maxLimit }} {{cell.currency}}</em>
+              <span>{{ $t('bby_shouy13') }}</span>
+              <em>{{ cell.maxLimit }} {{ cell.currency }}</em>
             </dd>
             <dd>
-              <span>{{$t('bby_shouy14')}}</span>
-              <em>{{ cell.minLimit }} {{cell.currency}}</em>
+              <span>{{ $t('bby_shouy14') }}</span>
+              <em>{{ cell.minLimit }} {{ cell.currency }}</em>
             </dd>
           </dl>
           <div class="time-line">
             <el-timeline>
               <el-timeline-item
                 color="#C9A96C">
-                {{$t('bby_shouy28')}}
+                {{ $t('bby_shouy28') }}
                 <span style="padding-left: 10px;color: #333">{{ detail.timeLine[0].timestamp }}</span>
               </el-timeline-item>
               <el-timeline-item
                 color="#C9A96C">
-                {{$t('bby_shouy29')}}
+                {{ $t('bby_shouy29') }}
                 <span style="padding-left: 10px;color: #333">{{ detail.timeLine[1].timestamp }}</span>
               </el-timeline-item>
               <el-timeline-item
                 color="#C9A96C">
-                {{$t('bby_shouy30')}}
+                {{ $t('bby_shouy30') }}
                 <span style="padding-left: 10px;color: #333">{{ detail.timeLine[2].timestamp }}</span>
               </el-timeline-item>
             </el-timeline>
@@ -72,18 +75,20 @@
 
       <div class="ipt">
         <div class="buy-area">
-          <span>{{$t('account_balance')}} {{accountBalance}} {{cell.currency}}</span>
+          <span>{{ $t('account_balance') }} {{ accountBalance }} {{ cell.currency }}</span>
           <em class="pay">
-            <router-link to="/fund/deposit" tag="a">{{$t('bby_shouy15')}}</router-link>
+            <router-link to="/fund/deposit" 
+tag="a">{{ $t('bby_shouy15') }}</router-link>
             <!--<a href="http://127.0.0.1:8080/fund/deposit">{{$t('bby_shouy15')}}</a></em>-->
           </em>
           <em class="buy">
-            <router-link to="/trading/BTC_USDT" tag="a">{{$t('bby_shouy16')}}</router-link>
+            <router-link to="/trading/BTC_USDT" 
+tag="a">{{ $t('bby_shouy16') }}</router-link>
             <!--<a href="http://127.0.0.1:8080/fund/deposit">{{$t('bby_shouy16')}}</a>-->
           </em>
         </div>
         <div class="buy-ipt">
-          <div class="title">{{$t('bby_shouy17')}}</div>
+          <div class="title">{{ $t('bby_shouy17') }}</div>
           <div class="ipt-inner">
             <!--<input type="number" :placeholder="$t('bby_shouy19')" @input="inputKeyBoard" />-->
             <!-- <el-input-number v-model.number="count" :min="Number(cell.minLimit)" @change="inputKeyBoard"
@@ -92,28 +97,29 @@
               class="number-input"
               v-model="count"
               :scale="point"
-              placeholder="请输入存币数量"
+              :placeholder="$t('bby_shouy19')"
             />
             <div class="rage">
-              <span class="cell">{{cell.currency}}</span>
-              <em @click="allMoney">{{$t('allin')}}</em>
+              <span class="cell">{{ cell.currency }}</span>
+              <em @click="allMoney">{{ $t('allin') }}</em>
             </div>
           </div>
-          <div class="tip">{{$t('bby_shouy18')}}<em>{{ money }}</em>{{cell.currency}}</div>
+          <div class="tip">{{ $t('bby_shouy18') }}<em>{{ money }}</em>{{ cell.currency }}</div>
         </div>
-        <button class="join-btn" :disabled="disabled" @click="submit">
-          {{$t('bby_shouy20')}}
+        <button class="join-btn" 
+:disabled="disabled" @click="submit">
+          {{ $t('bby_shouy20') }}
         </button>
       </div>
     </div>
     <div class="rule-msg">
       <dl>
-        <dt>{{$t('bby_shouy21')}}<i class="iconfont">&#xe62e;</i></dt>
-        <dd>{{$t('bby_shouy22')}}</dd>
-        <dd>{{$t('bby_shouy23')}}</dd>
-        <dd>{{$t('bby_shouy24')}}</dd>
-        <dd>{{$t('bby_shouy25')}}</dd>
-        <dd>{{$t('bby_shouy26')}}</dd>
+        <dt>{{ $t('bby_shouy21') }}<i class="iconfont">&#xe62e;</i></dt>
+        <dd>{{ $t('bby_shouy22') }}</dd>
+        <dd>{{ $t('bby_shouy23') }}</dd>
+        <dd>{{ $t('bby_shouy24') }}</dd>
+        <dd>{{ $t('bby_shouy25') }}</dd>
+        <dd>{{ $t('bby_shouy26') }}</dd>
         <!-- <dd>{{$t('bby_shouy27')}}</dd> -->
       </dl>
     </div>

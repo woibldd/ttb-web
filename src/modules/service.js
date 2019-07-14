@@ -380,6 +380,10 @@ const service = {
   getInternalHistory (data) {
     return request('account/balance/transfer/list', data)
   },
+   //  撤销订单
+   Cancellationoforders  (data) {
+    return request('/account/withdraw/cancel', data)
+  },
   /**
    * 获取推广返佣
    */
@@ -470,6 +474,10 @@ const service = {
   // 取消提币
   cancelWithdraw (param) {
     return request('/account/withdraw/cancel', param)
+  },
+//   一键买币
+canbullWithdraw (param) {
+    return request('/otcactive//keyByCoins', param)
   },
   /* -- 资金管理 end  -- */
 

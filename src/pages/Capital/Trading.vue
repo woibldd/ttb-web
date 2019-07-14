@@ -46,6 +46,7 @@
     <div
       v-if="!showHistory"
       class="my-fund-content"> 
+
       <el-table :empty-text=" $t('no_data') "
                 :data="tableData"
                 class="fund-coin-pool">
@@ -62,7 +63,24 @@
                  v-tooltip.top-start='{html: true, content: $t("idt_tips"), classes: "assets"}'  >
                 {{scope.row[hd.key]}} <icon class='question' name='question-x' />
               </i>
-              <i v-else-if="scope.row[hd.key] === 'BNL'"
+              
+               <i
+                v-else-if="scope.row[hd.key] === 'DFD'"
+                class="airdrop"
+                v-tooltip.top-start="{html: true, content: $t('dfd_tips'), classes: 'assets'}"
+              >
+                {{scope.row[hd.key]}}
+                <icon class="question" name="question-x"/>
+              </i> 
+             <i
+                v-else-if="scope.row[hd.key] === 'NEWOS'"
+                class="airdrop"
+                v-tooltip.top-start="{html: true, content: $t('newos_tips'), classes: 'assets'}"
+              >
+                {{scope.row[hd.key]}}
+                <icon class="question" name="question-x"/>
+              </i>
+               <i v-else-if="scope.row[hd.key] === 'BNL'"
                  class="airdrop"
                  v-tooltip.top-start='{html: true, content: $t("bnl_tips"), classes: "assets"}'  >
                 {{scope.row[hd.key]}} <icon class='question' name='question-x' />
@@ -108,6 +126,7 @@
           </template>
         </el-table-column>
       </el-table>
+
     </div>
     <v-modal :open.sync="showLockModal">
       <div class="lock-modal">

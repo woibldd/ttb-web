@@ -134,7 +134,7 @@
                 @click="showCXID(scope.row)">{{ $t('view_txid') }}</span>
                
             </div>
-            <!-- <el-button type="text" @click="open"><a v-if="scope.row.state==-1" >撤销</a></el-button> -->
+            <el-button class="chexiao" type="text" @click="open(scope.row.id)"><a v-if="scope.row.state==-1|scope.row.state==-100" >{{$t('contract_assign_revert')}}</a></el-button>
             <!-- 撤销按钮 -->
           </template>
         </el-table-column>
@@ -212,6 +212,28 @@ export default {
     this.getInternalHistory()
   },
   methods: {
+          open(param) {
+        this.$confirm(this.$t('otc_ziurec_18'), {
+                    confirmButtonText: this.$t('otc_ziurec_20'),
+                    cancelButtonText: this.$t('cancel'),
+                    type: 'warning'
+        }).then(() => {
+          service.Cancellationoforders( {id:param}).then(res => {
+            if(res.code===0){
+              this.getFundHistory(this.type)
+              this.$message({
+                type: 'success',
+                message: this.$t('otc_sidees11'),
+              });
+            } else {
+              this.$message({
+                type: 'warning',
+                message: `${res.message}`
+              })
+            }
+          })
+        })
+    },
     // 撤销订单按钮
       //  open() {
       //   this.$confirm('此操作将撤销订单, 是否继续?', '提示', {
