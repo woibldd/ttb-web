@@ -41,8 +41,7 @@ export default {
     pairList () {
       return this.state.pro.pairList
     },
-    showList () {
-      console.log('2222222222222')
+    showList () { 
       let list = this.pairList
       if (this.tabSelected === 'all') {
         return  _.filter(list, pair => {
@@ -69,8 +68,7 @@ export default {
         res = _.sortBy(res, (pair) => {
           let value = this.getDelta(pair.tick) || 0
           return value * -1
-        })  
-        console.log('111111111111111111111111111111111111111111111111111111111111')
+        })   
         res = _.filter(res, (pair, index) => {  
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
         })   
