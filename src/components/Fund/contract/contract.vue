@@ -446,7 +446,7 @@ export default {
             .toFixed(2)
             //console.log(holding.roelp)
         }
-        console.log('无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限')
+        // console.log('无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限')
 
         //平仓价格
         if (!holding.changeUnwindPrice) {
@@ -519,7 +519,13 @@ export default {
        if (this.state.isSimulation) {
         utils.alert(this.$t('contract_simulation_exchange_limit'))
       } else {
-        this.showModal = true
+        // this.showModal = true
+        this.$router.push({
+          path:'/fund/transfer',
+          query: {
+            currency: "BTC"
+          }
+        })
       }
     },
     async getPairs () {

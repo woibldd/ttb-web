@@ -1343,4 +1343,54 @@ export default{
       chain_info: 'https://cardanoexplorer.com' // 区块查询
     }
   },
+  PAN: {
+    'zh-CN': {
+      name: 'PAN',
+      full_name: '潘多拉',
+      brief_info: 'PAN作为潘多拉星球的通行证也是星球居民权益证明，PAN的发行总量恒定20亿，永不増发。潘多拉星球将大部分利润分配给PAN的持有者，同时PAN的持有者享有星球治理各类权益。潘多拉星球全球第一款区块链同性恋社交软件，潘多拉星球运用区块链技术解决目前中心化同性恋社交软件的诟病与痛点，目前中心化的同性恋社交软件，都存在用户隐私安全问题。用户需要牺牲自己创造的价值来获取相应的社交功能。潘多拉星球，基于EOS进行开发，分布式储存与点对点聊天，最大化保护星球居民隐私。token的激励机制，让星球居民获得自己应有的价值。',
+      issue_time: '2019-06-10',
+      issue_all: '20 亿', // 发行总量
+      issue_circulation: '2000 万', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://apelord.cn/images/pandla.pdf', // 白皮书
+      office_website: 'http://pandla.io/', // 官网
+      chain_info: 'https://eospark.com/account/depositofpan' // 区块查询
+    },
+    'zh-HK': {
+      name: 'PAN',
+      full_name: '潘多拉',
+      brief_info: 'PAN作為潘朵拉星球的通行證也是星球居民權益證明，PAN的發行總量恒定20億，永不増發。潘朵拉星球將大部分利潤分配給PAN的持有者，同時PAN的持有者享有星球治理各類權益。潘朵拉星球全球第一款區塊鏈同志社交軟件，潘朵拉星球運用區塊鏈科技解决現時中心化同志社交軟件的詬病與痛點，現時中心化的同志社交軟件，都存在用戶隱私安全問題。用戶需要犧牲自己創造的價值來獲取相應的社交功能。潘朵拉星球，基於EOS進行開發，分佈式儲存與點對點聊天，最大化保護星球居民隱私。token的激勵機制，讓星球居民獲得自己應有的價值。',
+      issue_time: '2019-06-10',
+      issue_all: '20 亿', // 发行总量
+      issue_circulation: '2000 万', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://apelord.cn/images/pandla.pdf', // 白皮书
+      office_website: 'http://pandla.io/', // 官网
+      chain_info: 'https://eospark.com/account/depositofpan' // 区块查询
+    },
+    'en': {
+      name: 'PAN',
+      full_name: 'PAN',
+      brief_info: 'PAN is the token of our project, also the only certificate of interest. The total issuance is 2 billion, and will never be increased. Pandla distributes most interests to the PAN holders. In the meanwhile, the PAN holders enjoy the many rights including management of planet. Pandla Planet, as the world\'s first blockchain gay social networking app，applies blockchain technology to solve the problems of present centralised gay social networking app. There are many privacy and security problems existing from those centralised gay social networking app where users passively sacrifice the value they created to get corresponding socializing function. Pandla Planet, R&D based on EOS, maximizes the protection of privacy of users with distributed storage and p2p chatting. Furthermore, the incentive mechanism of token also makes the users get their deserved values.',
+      issue_time: '2019-06-10',
+      issue_all: '2 billion', // 发行总量
+      issue_circulation: '20 million', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://apelord.cn/images/pandla.pdf', // 白皮书
+      office_website: 'http://pandla.io/', // 官网
+      chain_info: 'https://eospark.com/account/depositofpan' // 区块查询
+    },
+    'ko': {
+      name: 'PAN',
+      full_name: '판도라',
+      brief_info: '판도라 행성의 통행증이자 행성 주민 권익 증명인 판도 발행 총량이 20억 위안으로 절대 보고되지 않는다.판도라 행성은 대부분의 이윤을 팬의 소유자들에게 분배하고, 팬의 소유자들은 행성의 통치권을 누린다. 판도라의 지구 최초의 구분할련애자사교소프트웨어, 판도라의 별은 구분할련애자사교소프트웨어를 리용하여 현재 중심화동성애자사교소프트웨어의 비난과 통증을 해결하고 현재 중심화된 동성애자사교소프트웨어는 모두 사용자의 사생활안전문제가 존재한다.사용자는 자신이 창조한 가치를 희생하여 상응하는 사회적 기능을 획득해야 한다.판도라 별은 EOS에 기반한 개발로 분할저장과 지점 대 지점 대화를 통해 별주민의 프라이버시를 최대한 보호한다.토큰의 동기부여 시스템은 지구 주민들로 하여금 자신의 가치를 가지게 했다.',
+      issue_time: '2019-06-10',
+      issue_all: '2 billion', // 发行总量
+      issue_circulation: '20 million', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://apelord.cn/images/pandla.pdf', // 白皮书
+      office_website: 'http://pandla.io/', // 官网
+      chain_info: 'https://eospark.com/account/depositofpan' // 区块查询
+    }
+  },
 }
