@@ -1293,4 +1293,54 @@ export default{
       chain_info: 'https://etherscan.io/token/0xa4fb385820a9eef842a419e08f8540fd7d1bf6e8#balances' // 区块查询
     }
   },
+  ADA: {
+    'zh-CN': {
+      name: 'ADA',
+      full_name: '艾达币 ',
+      brief_info: '卡尔达诺是一个分散且公开的区块链，也是一个加密货币项目，而且是完全开源的。卡尔达诺正在开发一个智能合约平台，旨在提供比以前开发的任何协议更先进的功能。它是第一个从科学哲学和以研究为首驱使导向，进而演变而来的区块链平台。开发团队由全球专业工程师和研究人员组成。',
+      issue_time: '2017-10-02',
+      issue_all: '450 亿', // 发行总量
+      issue_circulation: '311.1248 亿', // 流通总量
+      token_price: '0.0026', // 众筹价格
+      whitepagger: 'https://whycardano.com', // 白皮书
+      office_website: 'https://www.cardanohub.org', // 官网
+      chain_info: 'https://cardanoexplorer.com' // 区块查询
+    },
+    'zh-HK': {
+      name: 'ADA',
+      full_name: '艾達幣 ',
+      brief_info: '卡爾達諾是一個分散且公開的區塊鏈，也是一個加密貨幣項目，而且是完全開源的。卡爾達諾正在開發一個智能合約平台，旨在提供比以前開發的任何協議更先進的功能。它是第一個從科學哲學和以研究為首驅使導向，進而演變而來的區塊鏈平台。開發團隊由全球專業工程師和研究人員組成。',
+      issue_time: '2017-10-02',
+      issue_all: '450 億', // 发行总量
+      issue_circulation: '311.1248 億', // 流通总量
+      token_price: '0.0026', // 众筹价格
+      whitepagger: 'https://whycardano.com', // 白皮书
+      office_website: 'https://www.cardanohub.org', // 官网
+      chain_info: 'https://cardanoexplorer.com' // 区块查询
+    },
+    'en': {
+      name: 'ADA',
+      full_name: 'ADA ',
+      brief_info: 'Cardano is a decentralised public blockchain and cryptocurrency project and is fully open source. Cardano is developing a smart contract platform which seeks to deliver more advanced features than any protocol previously developed. It is the first blockchain platform to evolve out of a scientific philosophy and a research-first driven approach. The development team consists of a large global collective of expert engineers and researchers.',
+      issue_time: '2017-10-02',
+      issue_all: '45 billion', // 发行总量
+      issue_circulation: '31.11 billion', // 流通总量
+      token_price: '0.0026', // 众筹价格
+      whitepagger: 'https://whycardano.com', // 白皮书
+      office_website: 'https://www.cardanohub.org', // 官网
+      chain_info: 'https://cardanoexplorer.com' // 区块查询
+    },
+    'ko': {
+      name: 'ADA',
+      full_name: '아이다 ',
+      brief_info: '블록체인 기반의 응용 플랫폼으로 금융 및 다양한 분야에 적용 가능 / 하스켈 프로그래밍 언어로 구현된 최초의 블록체인으로 향후 양자 컴퓨터 개발 완료에도 해킹에 대한 취약점을 보완 / 실물 자산에 대한 제휴에 적극적인 사업모델을 가지고 있음.',
+      issue_time: '2017-10-02',
+      issue_all: '45 billion', // 发行总量
+      issue_circulation: '31.11 billion', // 流通总量
+      token_price: '0.0026', // 众筹价格
+      whitepagger: 'https://whycardano.com', // 白皮书
+      office_website: 'https://www.cardanohub.org', // 官网
+      chain_info: 'https://cardanoexplorer.com' // 区块查询
+    }
+  },
 }

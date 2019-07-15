@@ -39,13 +39,11 @@
           >{{ $t('capital_record') }}</router-link>
         </span>
       </div>
-    </div>
-
+    </div> 
     <div v-if="one==1" class="my-fund-content">
       <div class="information">
         <icon name='information' />
-        <span >
-{{$t('otc_otutcol_16')}}        </span>
+        <span >{{$t('otc_otutcol_16')}}        </span>
       </div>
       <div class="fund-total">
         <div class="total__label">{{ $t('my_balance_equal') }}</div>
@@ -55,6 +53,22 @@
           class="fund-with-usdt"
           v-if="plusMillionUsdt"
         >+{{ millionUsdtAmount }} USDT≈ {{ $big(total).plus($big(plusUsdtEst)).toString() }} {{ unit.name }}</div>
+      </div>
+      <div v-if="false">
+        <div class="pairs-search">
+          <div class="search-box">
+            <input
+              type="text"
+              @input="filterPair()"
+              v-model="search">
+            <icon
+              class="ml-5"
+              name="home-search"/>
+          </div>
+          <div>
+            <el-checkbox v-model="checked">隐藏小额币种</el-checkbox>
+          </div>
+        </div> 
       </div>
       <el-table :empty-text=" $t('no_data') " :data="tableData" class="fund-coin-pool">
         <el-table-column v-for="(hd, idx) in header" :key="idx" :prop="hd.key" :label="hd.title">
@@ -288,6 +302,8 @@ export default {
       ],
       unit: {},
       rates: {},
+      search: "",
+      checked: false,
     };
   },
   components: {
@@ -398,6 +414,9 @@ export default {
     dianjs(res) {
       this.one = res;
     },
+    
+    filterPair () { 
+    }, 
     reset(type) {
       this.blur(type);
       this.unlock_amount = 0;
