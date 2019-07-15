@@ -670,4 +670,13 @@ export default {
 .login {
   background: $home-header-login;
 }
+@media screen and (min-width: 1280px){ // 1280是英文状态下nav正常显示的最小宽度
+    .nav_box {
+        .ind_cen {
+            width: auto;
+            min-width: 1200px;
+            margin: 0 60px;
+        }
+   }
+}
 </style>

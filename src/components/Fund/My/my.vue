@@ -39,14 +39,11 @@
           >{{ $t('capital_record') }}</router-link>
         </span>
       </div>
-    </div>
-
-    <div v-if="one==1" 
-class="my-fund-content">
+    </div> 
+    <div v-if="one==1" class="my-fund-content">
       <div class="information">
         <icon name='information' />
-        <span >
-          {{ $t('otc_otutcol_16') }}        </span>
+        <span >{{$t('otc_otutcol_16')}}        </span>
       </div>
       <div class="fund-total">
         <div class="total__label">{{ $t('my_balance_equal') }}</div>
@@ -57,10 +54,24 @@ class="my-fund-content">
           v-if="plusMillionUsdt"
         >+{{ millionUsdtAmount }} USDT≈ {{ $big(total).plus($big(plusUsdtEst)).toString() }} {{ unit.name }}</div>
       </div>
-      <el-table :empty-text=" $t('no_data') " 
-:data="tableData" class="fund-coin-pool">
-        <el-table-column v-for="(hd, idx) in header" 
-:key="idx" :prop="hd.key" :label="hd.title">
+      <div v-if="false">
+        <div class="pairs-search">
+          <div class="search-box">
+            <input
+              type="text"
+              @input="filterPair()"
+              v-model="search">
+            <icon
+              class="ml-5"
+              name="home-search"/>
+          </div>
+          <div>
+            <el-checkbox v-model="checked">隐藏小额币种</el-checkbox>
+          </div>
+        </div> 
+      </div>
+      <el-table :empty-text=" $t('no_data') " :data="tableData" class="fund-coin-pool">
+        <el-table-column v-for="(hd, idx) in header" :key="idx" :prop="hd.key" :label="hd.title">
           <template slot-scope="scope">
             <span v-if="hd.key === 'currency'">
               <icon :name="scope.row.currency"/>
@@ -297,8 +308,10 @@ export default {
         // }
       ],
       unit: {},
-      rates: {}
-    }
+      rates: {},
+      search: "",
+      checked: false,
+    };
   },
   components: {
     transferModal
@@ -408,11 +421,14 @@ export default {
     dianjs (res) {
       this.one = res
     },
-    reset (type) {
-      this.blur(type)
-      this.unlock_amount = 0
-      this.lock_amount = 0
-      this.getIxBalance()
+    
+    filterPair () { 
+    }, 
+    reset(type) {
+      this.blur(type);
+      this.unlock_amount = 0;
+      this.lock_amount = 0;
+      this.getIxBalance();
     },
     hideModal () {
       this.showModal = false
