@@ -2155,5 +2155,9 @@
 "bby_shise9":"Popular recommendation",
     "bby_shise10":"Deadline",
 "bidTitle": "Deposit&earn",
-"otc_placeholder_c": "Please enter the price you expect to buy"
+"otc_placeholder_c": "Please enter the price you expect to buy",
+    
+"pair_list_all": "All",
+"pair_list_option": "Option",
+"pair_list_new": "Innovation Zone"
 }

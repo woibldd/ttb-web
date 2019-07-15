@@ -145,6 +145,8 @@
       }
     }
     .pairs-search {
+      display: flex;
+      line-height: 29px;
       .search-box {
           width:166px;
           height:29px;
@@ -195,17 +197,17 @@ cursor: pointer;
   border: 1px solid #999999 !important;}
 
 .fund-historc{
-    display: inline-block;
-    padding-left: 10px;
-padding-right: 10px;
-height: 28px;
-line-height: 28px;
-text-align: center;
-border: 1px solid #01CED1;
-border-radius: 14px;
-color: #01CED1;
-font-size: 14px;
-cursor: pointer; 
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  border: 1px solid #01CED1;
+  border-radius: 14px;
+  color: #01CED1;
+  font-size: 14px;
+  cursor: pointer; 
   color: #01CED1 !important;
   border: 1px solid #01CED1 !important;}
  
@@ -222,7 +224,7 @@ cursor: pointer;
   }
     .fund-total {
         margin-top: 45px;
-        margin-bottom: 58px;
+        margin-bottom: 30px;
         display: flex;
         align-items: center;
         height: 30px;
