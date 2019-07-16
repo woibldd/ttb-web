@@ -100,7 +100,7 @@
             <div class="col__row mb-10">
               <span
                 class="label"
-                v-tooltip.top-center="{html: true, content: $t('contract_mark_price_tips_table'), classes: 'contract'}">{{ $t('contract_mark_price') }}</span> <span class="value">{{ cholding.markPrice  }}</span>
+                v-tooltip.top-center="{html: true, content: $t('contract_mark_price_tips_table'), classes: 'contract'}">{{ $t('contract_mark_price') }}</span> <span class="value">{{ cholding.markPrice  | round(cholding.pairInfo.price_scale || 2) }}</span>
             </div>
             <div class="col__row">
               <span
@@ -155,7 +155,7 @@
                 class="label"
                 v-tooltip.top-center="{html: true, content: $t('contract_result_yet_tips'), classes: 'contract'}">{{ $t('contract_result_yet') }}</span> <span
                   class="value"
-                  :class="{'color-up': cholding.realized > 0, 'color-down': cholding.realized < 0}">{{ cholding.realized | round(cholding.pairInfo.value_scale || 4) }}</span>
+                  :class="{'color-up': cholding.realized > 0, 'color-down': cholding.realized < 0}">{{ cholding.realized | fixed(cholding.pairInfo.value_scale || 4) }}</span>
             </div>
           </div>
           <!-- 平仓/市价全平 -->

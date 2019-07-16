@@ -30,12 +30,12 @@
             v-model="local.hideOthers">
           {{ $t('hide_others', {pair: pair}) }}
         </span>
-        <a
+        <!-- <a
           v-if="tab === 'active'"
           @click.prevent="cancelAll"
-          class="header-btn btn">
-          {{ $t('otc_seiitm_15')}}
-        </a>
+          class="">
+          {{ $t('trading_order_cancel_all')}}
+        </a> -->
         <a
           @click.prevent="update"
           class="header-btn btn">
@@ -359,7 +359,7 @@ export default {
         return false
       }
       let res
-      this.progressing = true
+      this.progressing = true 
       if (this.local.hideOthers) {
         const params = _.map(this.active.list, order => {
           return {
