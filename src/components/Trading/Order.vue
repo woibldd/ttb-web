@@ -31,6 +31,7 @@
           {{ $t('hide_others', {pair: pair}) }}
         </span>
         <a
+          v-if="tab === 'active'"
           @click.prevent="cancelAll"
           class="header-btn btn">
           {{ $t('otc_seiitm_15')}}
