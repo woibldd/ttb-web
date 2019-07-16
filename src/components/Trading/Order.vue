@@ -31,6 +31,11 @@
           {{ $t('hide_others', {pair: pair}) }}
         </span>
         <a
+          @click.prevent="cancelAll"
+          class="header-btn btn">
+          {{ $t('otc_seiitm_15')}}
+        </a>
+        <a
           @click.prevent="update"
           class="header-btn btn">
           <icon name="refresh"/>
@@ -376,10 +381,12 @@ export default {
       this.$eh.$emit('protrade:balance:refresh')
     },
     async fetch (tab) {
+      console.log('00000000')
       const ctx = this[tab]
       if (this._isDestroyed) {
         return false
       }
+      console.log('1111111111')
 
       await actions.updateSession()
       if (this.state.userStatus === 0) {

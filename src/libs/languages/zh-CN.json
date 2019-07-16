@@ -2097,14 +2097,17 @@
     "bby_shise7":"币盈盈购买",
     "bby_shise8":"本息归还",
     "bby_shise9":"热门推荐",
-    "bby_shise10":"限期",
- 
+    "bby_shise10":"限期", 
     "bidTitle": "币盈盈",
-    "otc_placeholder_c": "请输入您预期购买单价",
-    
+    "otc_placeholder_c": "请输入您预期购买单价", 
     "pair_list_all": "全部",
     "pair_list_option": "自选",
-    "pair_list_new": "创新区"
+    "pair_list_new": "创新区",
+    "fund_my_assets_hide": "隐藏小额币种",
+    "fund_my_assets_hide_tip": "小于",
+    
+    "trading_order_cancel_all": "撤销全部"
+
   }
 
 

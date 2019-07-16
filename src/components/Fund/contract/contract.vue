@@ -17,7 +17,7 @@
       </div>
       <div>
         <router-link
-          class="fund-history mr-22 "
+          class="fund-history mr-22 " 
           to="/fund/hyTrade/index"> {{ $t('account_balance') }}</router-link>
         <router-link
           class="fund-history mr-22"
@@ -551,37 +551,27 @@ export default {
         this.rates = res.data;
       }
     },
-    // getEstValue (item) {
-    //   // console.log('asjdlfkjaskldfjasldjflasdjfl;ajsdfljkasdlfk')
-    //   let coin = item.currency.replace("USD","")
-    //   let rate = this.rates[coin]
-    //   if (!!rate) { 
-    //     let res = this.$big(item.available).times(this.$big(rate[this.unit.name] || 0))
-    //     let num = 8 
-    //     return res.round(num, this.C.ROUND_DOWN).toString()
-    //   } 
-    //   return '0';
-    // }, 
+    
     getEstValue (item) {
       let res = this.$big(0)
       let unit = this.unit.name
       let {currencyName,camount} = item  
       if (unit === 'BTC'){
-        if(currencyName === 'BTC') {
-          res = this.$big(camount) 
+        if(currencyName === 'BTC') { //折合与账户币种都是BTC，不进行换算
+          res = this.$big(camount)
         }
-        else {
-          if (this.$big(camount).gt(0) && !!this.rates[currencyName]) {
-            res = this.$big(camount).times(this.rates[currencyName]['USD'] || 0).div(this.rates['BTC']['USD'])
+        else { 
+          if (!!this.rates[currencyName]) {
+            res = this.$big(camount || 0).times(this.rates[currencyName]['USD'] || 0).div(this.rates['BTC']['USD'])
           }
         }
       }
-      else if (item.rates) {
+      else if (item.rates) { //优先使用账户信息中自带的汇率
         res = this.$big(camount).times(this.$big(item.rates[unit] || 0))
       }
       else {
         if (this.rates[currencyName]) {
-          res = this.$big(camount).times(this.$big(this.rates[currencyName][unit] || 0))
+          res = this.$big(camount || 0).times(this.$big(this.rates[currencyName][unit] || 0))
         }
       } 
       return res
@@ -745,5 +735,13 @@ export default {
         margin-right: 0;
       }
     }
+  }
+  .fund-history {
+      color: #999;
+      border-color: #999;
+      &.router-link-active {
+          color: $primary;
+          border-color: $primary;
+      }
   }
 </style>

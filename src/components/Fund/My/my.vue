@@ -66,7 +66,10 @@
               name="home-search"/>
           </div>
           <div class="ml-20">
-            <el-checkbox v-model="hideSmall">隐藏小额币种</el-checkbox>
+            <el-tooltip :content="tipContent" placement="bottom-start">
+              <el-checkbox 
+                v-model="hideSmall">隐藏小额币种</el-checkbox> 
+            </el-tooltip>
           </div>
         </div> 
       </div>
@@ -79,7 +82,7 @@
               <i
                 v-if="scope.row[hd.key] === 'ITD'"
                 class="airdrop"
-                v-tooltip.top-start="{html: true, content: $t('idt_tips'), classes: 'assets'}"
+                v-tooltip.top-start="{html: true, content: $t('idt_tips'), classes: 'assets-tip'}"
               >
                 {{ scope.row[hd.key] }}
                 <icon class="question" name="question-n"/>
@@ -88,7 +91,7 @@
               <i
                 v-else-if="scope.row[hd.key] === 'DFD'"
                 class="airdrop"
-                v-tooltip.top-start="{html: true, content: $t('dfd_tips'), classes: 'assets'}"
+                v-tooltip.top-start="{html: true, content: $t('dfd_tips'), classes: 'assets-tip'}"
               >
                 {{ scope.row[hd.key] }}
                 <icon class="question" name="question-n"/>
@@ -96,7 +99,7 @@
               <i
                 v-else-if="scope.row[hd.key] === 'NEWOS'"
                 class="airdrop"
-                v-tooltip.top-start="{html: true, content: $t('newos_tips'), classes: 'assets'}"
+                v-tooltip.top-start="{html: true, content: $t('newos_tips'), classes: 'assets-tip'}"
               >
                 {{ scope.row[hd.key] }}
                 <icon class="question" name="question-n"/>
@@ -104,7 +107,7 @@
               <i
                 v-else-if="scope.row[hd.key] === 'BNL'"
                 class="airdrop"
-                v-tooltip.top-start="{html: true, content: $t('bnl_tips'), classes: 'assets'}"
+                v-tooltip.top-start="{html: true, content: $t('bnl_tips'), classes: 'assets-tip'}"
               >
                 {{ scope.row[hd.key] }}
                 <icon class="question" name="question-n"/>
@@ -326,7 +329,12 @@ export default {
       }) 
       if (this.hideSmall) { 
         list =  _.filter(list, pair => { 
-          return this.$big(pair.estValue || 0).gt(50)
+          if (this.unit === 'CNY'){
+            return this.$big(pair.estValue || 0).gt(50)
+          }
+          else {
+            return this.$big(pair.estValue || 0).gt(10)
+          }
         }) 
       }
       return list
@@ -405,6 +413,14 @@ export default {
     },
     myRemainTotal () {
       return (this.myPower.power || 0) - (this.myPower.amount || 0)
+    },
+    tipContent() {
+      if (this.unit.name === 'CNY') {
+        return '小于50CNY'
+      }
+      else {
+        return '小于10USD'
+      }
     }
   },
   async created () {
@@ -562,6 +578,7 @@ export default {
           item.locking = this.$big(item.locking || 0).toString()
           item.amount = this.$big(item.withdrawing)
             .plus(this.$big(item.available))
+            .plus(item.locking)
             .round(8, this.C.ROUND_DOWN)
             .toString()
           item.estValue = this.getEstValue(item)
@@ -591,7 +608,7 @@ export default {
         if (currency === 'BTC') {
           res = this.$big(amount)
         } else {
-          if (this.$big(amount).gt(0)) {
+          if (this.rates[currency]) {
             res = this.$big(amount).times(this.rates[currency]['USD'] || 0).div(this.rates['BTC']['USD'])
           }
         }
@@ -633,7 +650,17 @@ export default {
 }
 </script>
 
+  
 <style lang="scss" scoped>
 @import './my.scss';
 
+</style>
+
+<style>
+  .assets-tip {
+    padding: 0 10px;
+    line-height: 25px;
+    border-radius: 3px;
+    box-shadow: 0px 2px 5px #999;
+  }
 </style>

@@ -1650,7 +1650,6 @@
     "idt_tips": "공백부분ITD매일 시스템이 자동으로 해동2%",
     "dfd_tips": "공백부분DFD매일 시스템이 자동으로 해동5%",
     "contract_fee_rate_estimate_tips": "<a>预测费率：</a><br/>下一个时间段预计的资金费率为%{feeRate}，该数值是正数，代表多仓需要支付给空仓，如果该数值是负数，代表空仓要付给多仓。",
-    "home_optional": "Optional",
     "persoal_rank": "개인 선수권대회 순위표",
     "profit_rank": "수익대회 순위표",
     "transaction": "거래량 순위표",
@@ -1987,5 +1986,6 @@
 "otc_placeholder_c": "예약 판매 단가를 입력하십시오",
 "pair_list_all": "전부",
 "pair_list_option": "절루 선택",
-"pair_list_new": "창신구역"
+"pair_list_new": "창신구역",
+"trading_order_cancel_all": "모두 해제"
 }

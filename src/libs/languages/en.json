@@ -2068,7 +2068,7 @@
 "otc_seiitm_12": "level",
 "otc_seiitm_13": "automatically cancels the order when timeout",
 "otc_seiitm_14": "Automatic timeout",
-"otc_seiitm_15": "cancelled all",
+"otc_seiitm_15": "Cancelled all",
 "otc_seiitm_16": "Submitted successfully",
 "otc_seiitm_17": "Cancelled successfully!",
 "otc_otutcol_1": "Confirm to cancel",
@@ -2159,5 +2159,6 @@
     
 "pair_list_all": "ALL",
 "pair_list_option": "Option",
-"pair_list_new": "Innovation Zone"
+"pair_list_new": "Innovation Zone", 
+"trading_order_cancel_all": "Cancelled all"
 }

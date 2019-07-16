@@ -920,7 +920,7 @@ canbullWithdraw (param) {
   },
   //获取币对信息
   getCurrencyList(params) {
-    return request('/future/account/currency_list',params)
+    return request('future/account/currency_list',params)
   },
 
    /**

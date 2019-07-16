@@ -1901,8 +1901,7 @@
   "bby_shouy98": "合約返佣金額",
   "bby_shouy32": "餘額不足，請充幣",
  
-  "bby_shise1":"幣盈盈記錄",
- 
+  "bby_shise1":"幣盈盈記錄", 
   "bby_shise2":"可用數量不足",
   "bby_shise3":"結束",
   "bby_shise4":"已售罄",
@@ -1911,11 +1910,12 @@
   "bby_shise7":"幣盈盈購買",
   "bby_shise8":"本息歸還",
   "bby_shise9":"熱門推薦",
-    "bby_shise10":"限期",
- 
+    "bby_shise10":"限期", 
   "bidTitle": "弊盈盈",
   "otc_placeholder_c": "請輸入您預期購買單價",
   "pair_list_all": "全部",
   "pair_list_option": "自選",
-  "pair_list_new": "創新區"
+  "pair_list_new": "創新區", 
+  "otc_seiitm_15": "撤銷全部",
+  "trading_order_cancel_all": "撤銷全部"
 }
