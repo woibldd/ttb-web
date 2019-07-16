@@ -20,7 +20,7 @@
         {{ $t('order_history') }}
       </div>
        
-      <div class="currency-row">
+      <div class="currency-row" v-if="false">
         <div class="c-999 mr-13">
           {{ $t('contract') }}
         </div>
