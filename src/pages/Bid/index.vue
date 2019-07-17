@@ -3,8 +3,10 @@
    <div class="bid-banner">
       <div class="bid-con clearfix">
         <div class="banner-item-list">
-          <!-- <img src="./assets/item-banner.png"> -->
-          <img :src="bannerPath">
+          <img v-if='state.locale === "en"' src="./assets/item-banner-en.png">
+          <img v-if='state.locale === "ko"' src="./assets/item-banner-ko.png">
+          <img v-if='state.locale === "zh-CN"' src="./assets/item-banner-zh-CN.png">
+          <img v-if='state.locale === "zh-HK"' src="./assets/item-banner-zh-HK.png"> 
         </div>
         <div class="banner-item-text">
             <div v-for="(item, index) in hotList" :key="index">
