@@ -721,14 +721,15 @@ canbullWithdraw (param) {
           item.currency_scale = parseInt(item.price_scale, 10) || 0
           item.price_scale = parseInt(item.price_scale, 10) || 2
           if (item.currency === 'BTCUSD') {
-            item.value_scale = 4
+            item.value_scale = 4 
+            item.accuracy = item.accuracy || 5
           }
           else {
             item.value_scale = 8
+            item.accuracy = item.accuracy || 1
           }
           //item.value_scale = parseInt(item.value_scale, 10) || 4
           item.fee_rate = item.fee_rate || 0
-          item.accuracy = item.accuracy || 5
           if (item.name.indexOf('FUTURE_') < 0) {
             item.name = `FUTURE_${item.name.replace('_', '')}`
           }

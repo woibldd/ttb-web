@@ -649,11 +649,10 @@ export default {
               this.awitFlag = false
             }
           }
-        } else {
+        } else { 
           if (this.$big(this.inputPrice).lt(this.symbolInfo.buy_price_one)) {
-            this.flag = true
-         
-              this.alertTitle =this.$t('otc_ziurec_15',{currency:this.currency,inputPrice:this.inputPrice,symbolInfo:this.symbolInfo.sell_price_one})
+            this.flag = true 
+              this.alertTitle =this.$t('otc_ziurec_15',{currency:this.currency,inputPrice:this.inputPrice,symbolInfo:this.symbolInfo.buy_price_one})
           // `您发布的出售${this.currency}的交易单，价格为${this.inputPrice}CNY低于买一价${ this.symbolInfo.buy_price_one}CNY，以该价格发布可能给您带来损失`
           } else {
             this.flag = false
