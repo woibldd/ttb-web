@@ -810,8 +810,8 @@ canbullWithdraw (param) {
   transferContractFund (params) {
     return request('future/account/transfer', params)
   },
-  orderContract (params) {
-    return request('contract/order', params)
+  orderContract (params) { 
+    return getCache('c_orderContract', () => request('contract/order', params), 1e3) 
   },
   orderContractClose (params) {
     return request('contract/close', params)
