@@ -479,6 +479,10 @@
       this.getBalance()
       // this.getAllCoinTypes()
       this.page()
+      
+      if (!!this.$route.query.currency) {
+        this.selectCoin = this.$route.query.currency
+      }
       this.accountTo = ''
       this.accountTypes.forEach((item) => {
         if(item.value !== this.accountFrom) {
