@@ -88,6 +88,21 @@ const utils = {
       window.localStorage.setItem(key, str)
     }
   },
+  setSessionStorageValue (key, str) {
+    if ('sessionStorage' in window) {
+      window.sessionStorage.setItem(key, str)
+    }
+  },
+  getSessionStorageValue (key, field) {
+    if ('sessionStorage' in window) {
+      let item = window.sessionStorage.getItem(key)
+      if (field) {
+        return JSON.parse(item)[field]
+      }
+      return item
+    }
+    return ''
+  },
   getDefaultTimezone () {
     const data = window.localStorage.getItem('tradingview.chartproperties')
     if (data) {

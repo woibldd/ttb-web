@@ -148,7 +148,9 @@ v-else>
             <router-link :to="{name:'fund'}">我的资产</router-link>
           </p>-->
           <div class="fund mr-30">
-            <icon name="fund"/>
+            <icon 
+              :name="fund"
+            />
             <span @click="openDefault('fund')">{{ $t('wallets_nav_asset') }}</span>
 
             <div class="dropdown-sub-menu">
@@ -268,6 +270,12 @@ export default {
       }
       return ''
     },
+    fund() { 
+      if (state.locale === 'zh-CN') {
+        return 'fund'
+      }
+      return 'fund-en'
+    },
     desentInfo () {
       let userInfo = this.state.userInfo
       if (userInfo) {
@@ -328,16 +336,18 @@ export default {
       actions.setUserInfo(null)
       utils.setSessionStorageValue('LoginStatus', 0)
       utils.setSessionStorageValue('markTime', 9999999999)
-      service.signout()
-      if (utils.getRouteMeta(this.$route, 'auth')) {
-        this.$router.push({
-          name: 'login'
-        })
-      }
-
-      this.$nextTick(() => {
-        location.reload()
+      service.signout().then(res => {
+        console.log({res})
       })
+      // if (utils.getRouteMeta(this.$route, 'auth')) {
+      //   this.$router.push({
+      //     name: 'login'
+      //   })
+      // }
+
+      // this.$nextTick(() => {
+      //   location.reload()
+      // })
     },
     clickStar ($event) {
       this.className = 'active'; // console.log($event.currentTarget);

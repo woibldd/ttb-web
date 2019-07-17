@@ -3,7 +3,8 @@
    <div class="bid-banner">
       <div class="bid-con clearfix">
         <div class="banner-item-list">
-          <img src="./assets/item-banner.png">
+          <!-- <img src="./assets/item-banner.png"> -->
+          <img :src="bannerPath">
         </div>
         <div class="banner-item-text">
             <div v-for="(item, index) in hotList" :key="index">
@@ -99,6 +100,12 @@ export default {
       state,
       //img: require('./assets/banner-zh-CN.png')
     }
+  },
+  computed: {
+    bannerPath () {
+      return require(`./assets/item-banner-${state.locale}.png`)
+    },
+
   },
   methods: {
     handleCurrentChange (e) {

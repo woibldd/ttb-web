@@ -223,15 +223,17 @@ export default {
         //平仓价格
         if (!holding.changeUnwindPrice) {
           //最小步算法
-          // let accuracy = holding.pairInfo.accuracy || 1
-          let accuracy = 1 //先不走这个最小步的算法
-          let scale = holding.pairInfo.price_scale || 4
-          const minStep = Math.pow(10, -scale) * accuracy
+          // let accuracy = holding.pairInfo.accuracy || 1 
           let $newValue = this.$big(markPrice || 0)
-          if (!$newValue.mod(minStep).eq(0)) {
-            //$newValue = $newValue.div(minStep).round(scale >= 1 ? scale - 1 : 0, 0).mul(minStep)
-            $newValue = $newValue.div(minStep).round(0, 0).mul(minStep)
-          }
+          if (currency === 'BTCUSD') {
+            let accuracy = holding.pairInfo.accuracy || 1 //先不走这个最小步的算法
+            let scale = holding.pairInfo.price_scale || 4
+            const minStep = Math.pow(10, -scale) * accuracy
+            if (!$newValue.mod(minStep).eq(0)) {
+              //$newValue = $newValue.div(minStep).round(scale >= 1 ? scale - 1 : 0, 0).mul(minStep)
+              $newValue = $newValue.div(minStep).round(0, 0).mul(minStep)
+            }
+          } 
           let unwindPrice = $newValue
           this.$set(holding, "unwindPrice", unwindPrice)
         }

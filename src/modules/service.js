@@ -96,10 +96,12 @@ const service = {
     return request('user/register/email', data)
   },
   signout () {
+    debugger
     rmCache('session')
     rmCache('balanceList')
     state.pro.currency = null
     state.pro.product = null
+    console.log('signoutsignoutsignoutsignoutsignoutsignoutsignoutsignoutsignoutsignoutsignoutsignoutsignoutsignout')
     return request('user/logout')
   },
   async getBalanceByPair (...currencys) {

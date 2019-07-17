@@ -1250,14 +1250,14 @@
     "contract_commission": "계약을 마치다.",
     "spot_return": "현물.",
     "guide_title_index0_step0": "교류식 교과 과정",
-    "guide_title_index0_step1": "3단계, IX 계약 노하우 알아보기",
+    "guide_title_index0_step1": "3단계, IXX 계약 노하우 알아보기",
     "guide_title_index0_step2": "매입량이 많은것은 무엇인가？",
     "guide_title_index0_step3": "지렛대가 무엇인지？",
     "guide_title_index0_step4": "계약서의\"장\"은 무슨 뜻인가？",
     "guide_title_index0_step5": "보증금이란 무엇인가?？",
     "guide_title_index0_step6": "무엇때문에 창고가 터지는가？",
     "guide_title_index0_step7": "교과 과정에 들어가다",
-    "guide_title_index0_step8": "나는 IX 계약을 잘 알아, 그냥 건너뛰세요",
+    "guide_title_index0_step8": "나는 IXX 계약을 잘 알아, 그냥 건너뛰세요",
     "guide_title_index0_step9": "돈벌이 지역",
     "guide_title_index0_step10": "배상지역",
     "guide_title_index0_step11": " 폭파지역,",
@@ -1987,5 +1987,7 @@
 "pair_list_all": "전부",
 "pair_list_option": "절루 선택",
 "pair_list_new": "창신구역",
-"trading_order_cancel_all": "모두 해제"
+"trading_order_cancel_all": "모두 해제",
+"done_verified": "완료",
+"otc_trans_time": "거래시간"
 }

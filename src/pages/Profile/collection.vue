@@ -100,7 +100,7 @@
     <!--弹出框-->
     <el-dialog
       @close="bock()"
-      :title="type"
+      :title="type_text"
       :visible.sync="dialogVisible"
       :close-on-click-modal="modal"
       width="426px">
@@ -109,7 +109,7 @@
         :rules="rules"
         ref="ruleForm"
         class="demo-ruleForm">
-        <template v-if="type === '添加收款方式'">
+        <template v-if="type === 'add'">
           <el-form-item
             :label="this.$t('collection')"
             prop="payment_type">
@@ -212,7 +212,7 @@
             </el-form-item>
           </template>
         </template>
-        <template v-else-if="type === '查看图片'">
+        <template v-else-if="type === 'img'">
           <img
             :src="url"
             alt=""
@@ -221,7 +221,7 @@
         <template v-else>{{$t('otc_seiitm_1')}}</template>
         <el-form-item
           style="text-align: right"
-          v-if="type !== '查看图片'">
+          v-if="type !== 'img'">
           <el-button @click="resetForm('ruleForm')">{{$t('cancel')}}</el-button>
           <el-button
             @click="submitForm('ruleForm')"
@@ -299,6 +299,7 @@ export default {
       },
       dialogVisible: false,
       type: '',
+      type_text: '',
       filedir: '',
       policy: {},
       list: [],
@@ -416,7 +417,7 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          if (this.type === '添加收款方式') {
+          if (this.type === 'add') {
             let params = {
               user_id: state.userInfo.id,
               payment_type: this.ruleForm.payment_type,
@@ -474,13 +475,28 @@ export default {
       this.dialogVisible = false
     },
     handle (even) {
-      this.dialogVisible = true
-      this.type = even === 'update' ? '编辑' : even === 'add' ? '添加收款方式' : even === 'remove' ? '删除收款方式' : this.$t('otc_kvcoc_7')
+      this.dialogVisible = true 
+      //this.type = even === 'update' ? '编辑' : even === 'add' ? '添加收款方式' : even === 'remove' ? '删除收款方式' : this.$t('otc_kvcoc_7') 
+      this.type = even
+      switch (even) {
+        case 'update':
+          this.type_text = this.$t('modify')
+          break
+        case 'add':
+          this.type_text = this.$t('otc_seiitm_3') 
+          break
+        case 'remove':
+          this.type_text = this.$t('otc_seiitm_2')  
+          break
+        default:
+          this.type_text = this.$t('otc_kvcoc_7') 
+      }
     },
     handleCol (item, even) {
       this.dialogVisible = true
       this.collection_id = item.collection_id
-      this.type = even === 'remove' ? this.$t('otc_seiitm_2') : this.$t('otc_kvcoc_7')
+      //this.type = even === 'remove' ? this.$t('otc_seiitm_2') : this.$t('otc_kvcoc_7')
+      this.handle(even)
       if (even === 'img') {
         this.url = item.collection_img
       }
@@ -530,8 +546,7 @@ export default {
         'success_action_status': '200', // 让服务端返回200,不然，默认会返回204
         'signature': this.policy.signature,
         'dir': this.policy.dir
-      }
-
+      } 
       this.policy = obj
     } else {
       utils.alert('获取服务端签名失败')

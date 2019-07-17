@@ -628,15 +628,25 @@ export default {
     },
     checkInput (cholding) {  
       cholding.changeUnwindPrice = true
-      if (cholding.unwindPrice){
+      // console.log({cholding})
+      let $oldValue = this.$big(cholding.unwindPrice || 0)
+      let $newValue = this.$big(cholding.unwindPrice || 0)
+      if (cholding.unwindPrice && cholding.currency === 'BTCUSD'){
         let accuracy = cholding.pairInfo.accuracy || 1
         let scale = cholding.pairInfo.price_scale || 4
         const minStep = Math.pow(10, -scale) * accuracy
-        let $newValue = this.$big(cholding.unwindPrice || 0)
         if (!$newValue.mod(minStep).eq(0)) {
           $newValue = $newValue.div(minStep).round(scale >= 1 ? scale - 1 : 0, 0).mul(minStep)
         }
-        cholding.unwindPrice = $newValue.toString()
+        if (!$oldValue.eq($newValue)){
+          cholding.unwindPrice = $newValue.toString()
+        }
+      }
+      else {
+        $newValue = this.$big(cholding.unwindPrice).round(cholding.pairInfo.price_scale || 2, 0)
+        if (!$oldValue.eq($newValue)){
+          cholding.unwindPrice = $newValue.toString()
+        }
       }
     },
     inputPriceOnfocus(){

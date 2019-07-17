@@ -71,7 +71,7 @@
           <el-form-item class="inp_box">
             <v-btn
               class="submit-btn"
-              :label="$t('提交认证')"
+              :label="$t('kyc_form_submit')"
               :loading="loading"
               @click="submit"/>
           </el-form-item>
