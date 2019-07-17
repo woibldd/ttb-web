@@ -234,7 +234,7 @@ export default {
               $newValue = $newValue.div(minStep).round(0, 0).mul(minStep)
             }
           } 
-          let unwindPrice = $newValue
+          let unwindPrice = this.$big($newValue).round(holding.pairInfo.price_scale || 2, 0)
           this.$set(holding, "unwindPrice", unwindPrice)
         }
 
