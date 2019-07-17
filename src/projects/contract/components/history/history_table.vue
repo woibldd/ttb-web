@@ -186,22 +186,22 @@
               v-if='!cholding.future_close_id'>
               <!-- <div class="label mb-6 t-a-center">{{ $t('contract_equal_werehouse_amount') }}</div> --> 
               <!-- v-model="state.ct.markTickList[cholding.currency]" --> 
-              <!-- <input
+              <input
                 v-model="cholding.unwindPrice"
                 min=0
                 step="0.5"
                 @input="checkInput(cholding)"
                 ref='input_price'
                 v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}"
-                class="input-num mb-10"/>  -->
-               <number-input  
+                class="input-num mb-10"/> 
+               <!-- <number-input  
                 class="input-num mb-10"  
                 ref='input_price'
                 @focus="checkInput(cholding)"
                 :accuracy="cholding.pairInfo.accuracy"
                 v-model="cholding.unwindPrice"  
                 :scale="cholding.pairInfo.price_scale" 
-              />
+              /> -->
               <div
                 class="btn full"
                 @click.prevent="submitOrder('market', cholding)"
