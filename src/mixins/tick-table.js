@@ -61,6 +61,8 @@ export default {
           "XRP_BTC",
           "XRP_USDT",
           "LTC_BTC",
+          "ADA_BTC",
+          "ADA_USDT"
         ]
         let res = _.filter(list, (pair) => { 
           return excludeList.indexOf(pair.name) < 0 
