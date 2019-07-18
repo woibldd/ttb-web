@@ -3,10 +3,11 @@
    <div class="bid-banner">
       <div class="bid-con clearfix">
         <div class="banner-item-list">
-          <img v-if='state.locale === "en"' src="./assets/item-banner-en.png">
+          <!-- <img v-if='state.locale === "en"' src="./assets/item-banner-en.png">
           <img v-if='state.locale === "ko"' src="./assets/item-banner-ko.png">
           <img v-if='state.locale === "zh-CN"' src="./assets/item-banner-zh-CN.png">
-          <img v-if='state.locale === "zh-HK"' src="./assets/item-banner-zh-HK.png"> 
+          <img v-if='state.locale === "zh-HK"' src="./assets/item-banner-zh-HK.png">  -->
+          <img :src="bannerPath">
         </div>
         <div class="banner-item-text">
             <div v-for="(item, index) in hotList" :key="index">
@@ -88,6 +89,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import {state} from '../../modules/store'
 import service from '@/modules/service'
+
 // import { envApi } from '../../modules/request'
 export default {
   data () {
@@ -105,7 +107,10 @@ export default {
   },
   computed: {
     bannerPath () {
-      return require(`./assets/item-banner-${state.locale}.png`)
+      console.log('pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp')
+      let path = require(`./assets/item-banner-${state.locale}.png`)
+      console.log({path})
+      return path
     },
 
   },
@@ -152,7 +157,7 @@ export default {
     }
   },
   created () {
-    this.init(this.params)
+    this.init(this.params) 
     // this.img = require('./assets/banner-' + state.locale + '.png')
   },
   mounted () {
