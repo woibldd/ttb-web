@@ -327,9 +327,9 @@ export default {
       list =  _.filter(list, pair => { 
         return pair.currency.toUpperCase().indexOf(this.search.toUpperCase()) > -1  
       }) 
-      if (this.hideSmall) { 
+      if (this.hideSmall) {  
         list =  _.filter(list, pair => { 
-          if (this.unit === 'CNY'){
+          if (this.unit.name === 'CNY'){
             return this.$big(pair.estValue || 0).gt(50)
           }
           else {

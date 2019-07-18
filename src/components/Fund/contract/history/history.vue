@@ -26,7 +26,6 @@
         </div>
         <el-select
           class="opetion"
-          style="height:30px"
           v-model="selectPair"
           @change="pairChange"
           value-key="currency">

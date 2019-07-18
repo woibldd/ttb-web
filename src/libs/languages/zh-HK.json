@@ -1921,5 +1921,21 @@
   "done_verified": "已完成",
   "otc_trans_time": "成交時間",
   "coin_FUTURE_BTCUSD":"BTC",
-  "coin_FUTURE_BHDUSD":"BHD"
+  "coin_FUTURE_BHDUSD":"BHD",
+  "otc_seiitm_1": "您確定要删除收款管道？",
+  "otc_seiitm_2": "删除收款管道",
+  "otc_seiitm_3": "添加收款管道",
+  "otc_seiitm_4": "綁定成功",
+  "otc_seiitm_5": "解綁成功",
+  "otc_seiitm_6": "待對方付款",
+  "otc_seiitm_7": "對方已申訴",
+  "otc_seiitm_8": "申訴",
+  "otc_seiitm_9": "已申訴",
+  "otc_seiitm_10": "實付",
+  "otc_seiitm_11": "買家",
+  "otc_seiitm_12": "級別",
+  "otc_seiitm_13": "超時自動取消訂單",
+  "otc_seiitm_14": "超時自動放幣", 
+  "otc_seiitm_16": "提交成功",
+  "otc_seiitm_17": "取消成功!"
 }
