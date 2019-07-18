@@ -21,9 +21,23 @@
         height: 32px;
         align-items: center;
         .opetion {
-            width:160px;
-            height:32px;
-            border-radius:6px;
+          
+          width:160px;
+          height:32px;
+          border-radius:6px;
+          background:red;
+          /deep/ .el-input {
+            .el-input__inner {
+              height: 32px;
+            }
+            .el-input__suffix {
+              .el-input__suffix-inner {
+                .el-select__caret {
+                  line-height: 32px;
+                }
+              }
+            }
+          }
         }
     }
     .table-wrapper {

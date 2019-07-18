@@ -31,7 +31,7 @@
         target="_blank"
         :href="'https://ixcustomer.zendesk.com/hc/zh-cn/sections/360003431092-永续合约'">
         <div class="icon-wrapper mr-16">
-        <span class="icon icon-ques"/><span/></div>{{ $t('contract_look_tutorial') }}</span>
+        <span class="icon icon-ques"/><span/></div>{{ $t('contract_look_tutorial') }} 
       </a>
 
       <div class="index-chart-wrapper">

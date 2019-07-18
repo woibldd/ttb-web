@@ -11,6 +11,7 @@
         <div class="row__label">{{ $t('currency') }}</div>
         <div class="row__value">
           <el-select
+            filterable
             v-model="selectCoin"
             @change="changeCoinType"
             :placeholder="$t('please_choose')"
@@ -64,20 +65,21 @@
           <div class="withdraw-address">
             <el-autocomplete
               class="select-address"
-             v-model="selectItem"
+              v-model="selectItem"
               :fetch-suggestions="querySearch" 
               @select="handleSelect"
               @blur="onBlur"
               :highlight-first-item="highlight"
-          cols="1" rows="1" style="vertical-align:top;outline:none;"
+              cols="1" rows="1" style="vertical-align:top;outline:none;"
             ></el-autocomplete>
           </div> 
         </div>
       </div>
       <div
-        @click.prevent="addNewAddr"
         class="fund-item-other withdraw-new-address mt-14 mb-24 default">
-        <span class="add-icon mr-10">+</span>{{ $t("add_withdraw_addr") }}
+        <label @click.prevent="addNewAddr">
+          <span class="add-icon mr-10">+</span>{{ $t("add_withdraw_addr") }}
+        </label>
       </div>
       <!-- address_tag -->
       <div
@@ -401,6 +403,7 @@ export default {
     },
     async changeCoinType (coin) {
       this.selectCoin = coin
+      this.selectItem = ''
       this.selectAddress = {
         address: '',
         memo: ''

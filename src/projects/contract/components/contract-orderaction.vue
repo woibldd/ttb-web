@@ -878,9 +878,9 @@ export default {
         return this.$t(`contract_trigger_${tag}_buy`);
       }
 
-      if (state.locale === 'en') {
-        return this.$t('contract_action_button_up')
-      }
+      // if (state.locale === 'en') {
+      //   return this.$t('contract_action_button_up')
+      // }
       return `${this.$t("contract_action_button_up")}/${this.$t(
         "contract_action_button_up_r"
       )}`;
@@ -890,9 +890,9 @@ export default {
         let tag = this.currentOrderTypeExt.indexOf("win") > -1 ? "win" : "lose";
         return this.$t(`contract_trigger_${tag}_sell`);
       }
-      if (state.locale === 'en') {
-        return this.$t('contract_action_button_down')
-      }
+      // if (state.locale === 'en') {
+      //   return this.$t('contract_action_button_down')
+      // }
       return `${this.$t("contract_action_button_down")}/${this.$t(
         "contract_action_button_down_r"
       )}`;

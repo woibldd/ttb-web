@@ -20,12 +20,13 @@
         {{ $t('order_history') }}
       </div>
        
-      <div class="currency-row" v-if="false">
+      <div class="currency-row" >
         <div class="c-999 mr-13">
           {{ $t('contract') }}
         </div>
         <el-select
           class="opetion"
+          style="height:30px"
           v-model="selectPair"
           @change="pairChange"
           value-key="currency">
@@ -225,7 +226,7 @@ export default {
   data () {
     return {
       pairList: [],
-      selectPair: 'FUTURE_BTCUSD',
+      selectPair: 'BTCUSD',
       tabName: 'history',
       tableData: [],
       page: 1, // page 都是从1 开始的,

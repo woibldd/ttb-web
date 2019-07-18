@@ -7,7 +7,7 @@
       <div class="mt-29 mb-30">
         <p class="mb-15 c-primary f26">{{ symbol }}</p>
         <p class="flex-avg">
-          <span>{{ $t('contract_trade_index_base') }}</span>
+          <span>{{ $t('contract_trade_index_base',{currency: coin} ) }}</span>
           <span>{{ $t('contract_trade_index_value') }}</span>
         </p>
       </div>
@@ -17,7 +17,7 @@
       <div class="tips-section mb-21">
         <p
           class="mb-26"
-          v-html=" $t('contract_how_price_tip_a', {'symbol': symbol, coin: 'BTC'})"/>
+          v-html=" $t('contract_how_price_tip_a', {'symbol': symbol, coin: coin})"/>
         <p class="mb-26">{{ $t('contract_how_price_tip_b', {next_pay_time: nextPayTime}) }}</p>
         <p
           class="mb-26"
@@ -29,9 +29,9 @@
       <a
         class="look-tutorial pointer"
         target="_blank"
-        :href="'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360027994431'">
+        :href="tutorialUrl">
         <div class="icon-wrapper mr-16">
-        <span class="icon icon-ques"/><span/></div><span>{{ $t('contract_look_tutorial') }}</span>
+        <span class="icon icon-ques"/><span/></div><span>{{ $t('contract_look_tutorial', {currency: coin}) }}</span>
       </a>
 
       <div class="index-chart-wrapper">
@@ -146,6 +146,20 @@ export default {
       //   default:
       //     return this.$t('contract_btc_forever')
       // }
+    },
+    coin () {
+      return this.$t('coin_' + this.pair)
+    },
+    tutorialUrl () {
+      if (this.pair === 'FUTURE_BTCUSD') {
+        return 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360027994431'
+      }
+      else if (this.pair === 'FUTURE_BHDUSD') {
+        return 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360030485092-BHD'
+      }
+      else {
+        return ''
+      }
     },
     nextPayTime () {
       const date = Number(this.symbolInfo.next_fee_time) // + 8 * 60 * 60 * 1000// 前端加8小时

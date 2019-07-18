@@ -81,7 +81,7 @@
         <div class="option-title">
           <h3>
             <icon name="true" />
-            <span>1级认证完成</span>
+            <span>{{$t('kyc_complete_kyc1')}}</span>
           </h3>
         </div>
         <div class="option-notice">

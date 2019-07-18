@@ -1170,14 +1170,14 @@
     "order_th_capeqqewc": "发布时间",
     "contract_amount_value":"数额",
     "contract_symbol_detail":"合约明细",
-    "contract_trade_index_base":"1.基础货币是BTC。",
+    "contract_trade_index_base":"1.基础货币是%{currency}。",
     "contract_how_price":"合约是如何报价的？",
-    "contract_how_price_tip_a":"<span style=\"color:#01CED1\"> %{symbol} </span>是根据<span style=\"color:#01CED1\"> %{coin} </span>指数 定价的 BTC永续 合约。每张合约价值 1 USD 的比特币。",
+    "contract_how_price_tip_a":"<span style=\"color:#01CED1\"> %{symbol} </span>是根据<span style=\"color:#01CED1\"> %{coin} </span>指数 定价的 %{symbol} 合约。每张合约价值 1 USD 的比特币。",
     "contract_how_price_tip_b":"每 8 小时 支付或收取资金费用。下一个支付将发生在 %{next_pay_time}",
     "contract_how_price_tip_c":"<span style=\"color:#01CED1\"> %{symbol} </span>利用溢价指数计算资金费率。<span style=\"color:#01CED1\"> %{id1} </span>以及<span style=\"color:#01CED1\"> %{id2} </span>，<span style=\"color:#01CED1\"> %{id3} </span>。它们在 <span style=\"color:#01CED1\"> 计算最终的资金费率</span>中被使用。",
-    "contract_how_price_tip_d":"在 %{next_pay_time} 时，多仓将会获得 %{feerate}%，同时空仓将会支付%{feerate}% 的费率。IX.COM 不会收取任何资金费用。",
+    "contract_how_price_tip_d":"在 %{next_pay_time} 时，多仓将会获得 %{feerate}%，同时空仓将会支付%{feerate}% 的费率。IXX.COM 不会收取任何资金费用。",
     "contract_how_price_tip_e":"到期: 此合约为永续合约，不会到期。",
-    "contract_look_tutorial":"查看BTC永续指南",
+    "contract_look_tutorial":"查看%{currency}永续指南",
     "contract_fee_formula":"资金费率计算公式",
     "contract_refer_tu":"关于资金费率的更多信息参阅<span style=\"color:#01CED1\">永续合约</span>指南",
     "contract_tb_symbol":"符号",
@@ -1233,8 +1233,8 @@
     "contract_margin_over_amount":"超过最大可操作数量",
     "contract_FUTURE_XBTUSD":"XBT模拟",
     "ensurance_contract_tutorial":"合约指南",
-    "ensurance_btc_future_tutorial":"BTC永续指南",
-    "ensurance_btc_future_rule": "BTC永续规则",
+    "ensurance_btc_future_tutorial":"%{coin}永续指南",
+    "ensurance_btc_future_rule": "%{coin}永续规则",
     "contract_order_repeat": "您已有平仓订单，请撤销对应订单后操作",
     "contract_order_success": "下单成功",
     "contract_order_success_type": "您%{orderType}保证金成功",
@@ -1714,13 +1714,12 @@
   "transfer_day_liquidation":"当日清算",
   "transfer_all":"全部",
   "withdraw_tips1":"请完善你的资料",
-  "idt_tips":"空投部分ITD每日系統解凍釋放2%",
-  "dfd_tips":"空投部分DFD每日系統解凍釋放5%",
-
-  "newos_tips": "空投部分NEWOS每日系統解凍釋放3%",
+  "idt_tips": "空投部分ITD每日系统解冻释放2%",
+  "dfd_tips":"空投部分DFD每日系统解冻释放5%",
+  "bnl_tips": "空投部分BNL每日系统解冻释放3%",
+  "newos_tips": "空投部分NEWOS每日系统解冻释放3%",
   
   "home_optional": "自选",
-  "bnl_tips": "空投部分BNL每日系統解凍釋放3%",
  
     "":"" ,
 
@@ -2099,17 +2098,21 @@
     "bby_shise9":"热门推荐",
     "bby_shise10":"限期", 
     "bidTitle": "币盈盈",
-    "otc_placeholder_c": "请输入您预期购买单价", 
     "pair_list_all": "全部",
     "pair_list_option": "自选",
     "pair_list_new": "创新区",
-    "fund_my_assets_hide": "隐藏小额币种",
-    "fund_my_assets_hide_tip": "小于",
-    
-    "trading_order_cancel_all": "撤销全部",
     "done_verified": "已完成",
+    "otc_trans_time": "成交时间",
+    
+    "coin_FUTURE_BTCUSD":"BTC",
+    "coin_FUTURE_BHDUSD":"BHD",
+    
+    "fund_my_assets_hide": "隐藏小额币种",
+    "fund_my_assets_hide_tip": "小于", 
+    "trading_order_cancel_all": "撤销全部",
     "otc_collection_update": "编辑",
-    "otc_trans_time": "成交时间"
+    "otc_placeholder_c": "请输入您预期购买单价"
+    
 
   }
 

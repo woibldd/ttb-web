@@ -66,7 +66,7 @@
               name="home-search"/>
           </div>
           <div class="ml-20">
-            <el-tooltip :content="tipContent" placement="bottom-start">
+            <el-tooltip :content="tipContent" placement="bottom">
               <el-checkbox 
                 v-model="hideSmall">隐藏小额币种</el-checkbox> 
             </el-tooltip>
@@ -82,7 +82,7 @@
               <i
                 v-if="scope.row[hd.key] === 'ITD'"
                 class="airdrop"
-                v-tooltip.top-start="{html: true, content: $t('idt_tips'), classes: 'assets-tip'}"
+                v-tooltip.top-start="{html: true, content: $t('idt_tips'), classes: 'assets'}"
               >
                 {{ scope.row[hd.key] }}
                 <icon class="question" name="question-n"/>
@@ -91,7 +91,7 @@
               <i
                 v-else-if="scope.row[hd.key] === 'DFD'"
                 class="airdrop"
-                v-tooltip.top-start="{html: true, content: $t('dfd_tips'), classes: 'assets-tip'}"
+                v-tooltip.top-start="{html: true, content: $t('dfd_tips'), classes: 'assets'}"
               >
                 {{ scope.row[hd.key] }}
                 <icon class="question" name="question-n"/>
@@ -99,7 +99,7 @@
               <i
                 v-else-if="scope.row[hd.key] === 'NEWOS'"
                 class="airdrop"
-                v-tooltip.top-start="{html: true, content: $t('newos_tips'), classes: 'assets-tip'}"
+                v-tooltip.top-start="{html: true, content: $t('newos_tips'), classes: 'assets'}"
               >
                 {{ scope.row[hd.key] }}
                 <icon class="question" name="question-n"/>
@@ -107,7 +107,7 @@
               <i
                 v-else-if="scope.row[hd.key] === 'BNL'"
                 class="airdrop"
-                v-tooltip.top-start="{html: true, content: $t('bnl_tips'), classes: 'assets-tip'}"
+                v-tooltip.top-start="{html: true, content: $t('bnl_tips'), classes: 'assets'}"
               >
                 {{ scope.row[hd.key] }}
                 <icon class="question" name="question-n"/>
@@ -656,11 +656,24 @@ export default {
 
 </style>
 
-<style>
-  .assets-tip {
-    padding: 0 10px;
-    line-height: 25px;
-    border-radius: 3px;
-    box-shadow: 0px 2px 5px #999;
-  }
+<style  lang="scss" >
+  // .assets-tip {
+  //   // padding: 0 10px;
+  //   // line-height: 25px;
+  //   // border-radius: 3px;
+  //   // box-shadow: 0px 2px 5px #999;
+  //     .tooltip-inner {
+  //       color: #23CED0;
+  //       background: rgba(211, 245, 246, .9); 
+  //       border-radius:4px;
+  //       padding: 6px 10px;
+  //       width: 130px;
+  //     }
+  //     .tooltip-arrow { 
+  //       height: 10px;
+  //       width: 10px;
+  //       background: red;
+  //       border-color: rgba(211, 245, 246, .9); 
+  //     }
+  // }
 </style>
