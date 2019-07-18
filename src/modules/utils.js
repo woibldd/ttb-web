@@ -558,26 +558,7 @@ const utils = {
         break
     }
     return url
-  },
-  getBlockChainUrl (tx, type, chainName) {
-    let url = ''
-    switch (chainName) {
-      case 'BTC':
-        url = `https://blockchain.info/${type}/${tx}`
-        break
-      case 'ETH':
-        url = `https://etherscan.io/${type}/${tx}`
-        break
-      case 'EOS':
-        type = type === 'address' ? 'account' : type
-        url = `https://eosflare.io/${type}/${tx}`
-        break
-      case 'OMNI':
-        url = `https://omniexplorer.info/${type}/${tx}`
-        break
-    }
-    return url
-  },
+  }, 
   getComputedStyle (el, prop) {
     if (!el) return {}
     let styles = document.defaultView.getComputedStyle(el, null) || {}
