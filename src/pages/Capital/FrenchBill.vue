@@ -51,8 +51,7 @@
       </el-form-item>
     </el-form>
     <el-table
-      :data="tableData"
-      
+      :data="tableData" 
       :empty-text="$t('no_data')"
       v-loading="loading"
       style="width: 100%">
@@ -185,7 +184,7 @@ export default {
       service.balancefills(this.formInline).then(res => {
         if (res.code === 0) {
           this.loading = false
-          this.tableData = [] // res.data.data
+          this.tableData = res.data.data
           this.total = res.data.total
         } else {
           this.$message.warning(`${res.message}`)
