@@ -106,10 +106,8 @@ export default {
     }
   },
   computed: {
-    bannerPath () {
-      console.log('pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp')
-      let path = require(`./assets/item-banner-${state.locale}.png`)
-      console.log({path})
+    bannerPath () { 
+      let path = require(`./assets/item-banner-${this.state.locale}.png`) 
       return path
     },
 
