@@ -117,7 +117,7 @@
               v-model="ruleForm.payment_type"
               style="width: 100%;"
               size="small"
-              @change="bankHanle">
+              @change="bankHandle">
               <el-option
                 value="1"
                 :label="this.$t('payment_nameyhk')"/>
@@ -155,13 +155,12 @@
             <el-form-item
               :label="this.$t('payment_card_number')"
               prop="card_number">
-                   <br>
+              <br>
               <number-input
-               class="inputc"
+                class="inputc"
+                style="border: 1px solid #DCDFE6 !important;"
                 v-model="ruleForm.card_number"
-                 size="small"/>
-
-
+                size="small"/> 
             </el-form-item>
           </template>
           <template v-if="ruleForm.payment_type !== '1'">
@@ -226,7 +225,7 @@
           <el-button
             @click="submitForm('ruleForm')"
             type="primary"
-            v-html="type !== this.$t('otc_seiitm_2') ? this.$t('otc_ziurec_20') : this.$t('remove')"/>
+            v-html="type !== 'remove' ? this.$t('otc_ziurec_20') : this.$t('remove')"/>
         </el-form-item>
       </el-form>
       <!--<span class="dialog-footer" slot="footer" >-->
@@ -495,6 +494,7 @@ export default {
     handleCol (item, even) {
       this.dialogVisible = true
       this.collection_id = item.collection_id
+      console.log({item, even})
       //this.type = even === 'remove' ? this.$t('otc_seiitm_2') : this.$t('otc_kvcoc_7')
       this.handle(even)
       if (even === 'img') {

@@ -181,6 +181,7 @@ export default {
     },
     init () {
       this.loading = true
+      console.log('4444444444444444444444444444444444')
       service.balancefills(this.formInline).then(res => {
         if (res.code === 0) {
           this.loading = false

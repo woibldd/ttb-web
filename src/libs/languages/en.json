@@ -2027,6 +2027,8 @@
 "otc_ziurec_18": "Are you sure you want to cancel this order？",
 "otc_ziurec_20": "Confirm",
 "otc_ziurec_21": "Failed to publish",
+"otc_seiitm_1": "Are you sure you want to delete the payment method？",
+"otc_seiitm_2": "Delete payment method", 
 "otc_seiitm_3": "Add payment method",
 "otc_seiitm_4": "Bound successful",
 "otc_seiitm_5": "Unbundling successful",
@@ -2155,5 +2157,17 @@
 "otc_legal_currency": "Fiat Currency",
 
 "coin_FUTURE_BTCUSD":"BTC",
-"coin_FUTURE_BHDUSD":"BHD"
+"coin_FUTURE_BHDUSD":"BHD",
+"otc_kvcoc_1": "The order details", 
+"otc_kvcoc_4": "Drag the file to here, or",
+"otc_kvcoc_5": "Click on the upload",
+"otc_kvcoc_6": "Only JPG/PNG files can be uploaded, and no more than 500kb",
+"otc_kvcoc_7": "View images",
+"otc_kvcoc_8": "Please select payment method",
+"otc_kvcoc_9": "The name cannot be empty",
+"otc_kvcoc_10": "The opening bank cannot be empty",
+"otc_kvcec_11": "The bank card number cannot be empty",
+"otc_kvcec_12": "Alipay account cannot be empty",
+"otc_kvcec_13": "WeChat account cannot be empty",
+"otc_kvcec_14": "The receipt QR code cannot be empty"
 }
