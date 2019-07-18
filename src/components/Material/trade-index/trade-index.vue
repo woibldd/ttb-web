@@ -132,6 +132,13 @@ export default {
         if (match) {
           this.pair = pair
           this.tempPair = this._formatPair('index')
+
+          let res = await service.getContractSymInfo({
+            symbol: this.pair
+          })
+          if (!res.code) {
+            Object.assign(this.symbolInfo, res.data)
+          }
         }
       },
       immediate: true
