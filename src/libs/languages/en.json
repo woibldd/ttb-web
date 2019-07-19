@@ -2127,9 +2127,7 @@
 "bby_shise8":" Interest return",
 "bby_shise9":"Popular recommendation",
     "bby_shise10":"Deadline",
-"bidTitle": "Deposit&Earn",
-"otc_placeholder_c": "Please enter the price you expect to buy",
-    
+"bidTitle": "Deposit&Earn", 
 "pair_list_all": "ALL",
 "pair_list_option": "Option",
 "pair_list_new": "Innovation Zone", 
@@ -2158,16 +2156,23 @@
 
 "coin_FUTURE_BTCUSD":"BTC",
 "coin_FUTURE_BHDUSD":"BHD",
-"otc_kvcoc_1": "The order details", 
-"otc_kvcoc_4": "Drag the file to here, or",
-"otc_kvcoc_5": "Click on the upload",
+
+
+"fund_my_assets_hide": " Hide small balances ",
+"fund_my_assets_hide_tip": " <",  
+"otc_collection_update": " edit ",
+"otc_placeholder_c": "Please enter your expected  price",
+
+"otc_kvcoc_1": " Orders", 
+"otc_kvcoc_4": "Drag the file here, or",
+"otc_kvcoc_5": "Upload",
 "otc_kvcoc_6": "Only JPG/PNG files can be uploaded, and no more than 500kb",
-"otc_kvcoc_7": "View images",
+"otc_kvcoc_7": "Review images",
 "otc_kvcoc_8": "Please select payment method",
-"otc_kvcoc_9": "The name cannot be empty",
-"otc_kvcoc_10": "The opening bank cannot be empty",
-"otc_kvcec_11": "The bank card number cannot be empty",
-"otc_kvcec_12": "Alipay account cannot be empty",
-"otc_kvcec_13": "WeChat account cannot be empty",
-"otc_kvcec_14": "The receipt QR code cannot be empty"
+"otc_kvcoc_9": "Please enter your real name",
+"otc_kvcoc_10": "Please enter bank info",
+"otc_kvcec_11": " Please enter Bank account",
+"otc_kvcec_12": " Please enter Alipay",
+"otc_kvcec_13": " Please enter Wechat",
+"otc_kvcec_14": "Please enter payment QR code"
 }
