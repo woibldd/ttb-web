@@ -68,7 +68,7 @@
           <div class="ml-20">
             <el-tooltip :content="tipContent" placement="bottom">
               <el-checkbox 
-                v-model="hideSmall">隐藏小额币种</el-checkbox> 
+                v-model="hideSmall">{{ $t('fund_my_assets_hide')}}</el-checkbox> 
             </el-tooltip>
           </div>
         </div> 

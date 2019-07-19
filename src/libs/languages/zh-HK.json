@@ -1937,5 +1937,9 @@
   "otc_seiitm_13": "超時自動取消訂單",
   "otc_seiitm_14": "超時自動放幣", 
   "otc_seiitm_16": "提交成功",
-  "otc_seiitm_17": "取消成功!"
+  "otc_seiitm_17": "取消成功!",
+  
+  "fund_my_assets_hide": "隱藏小額幣種",
+  "fund_my_assets_hide_tip": "小於",  
+  "otc_collection_update": "編輯"
 }
