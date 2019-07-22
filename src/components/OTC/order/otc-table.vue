@@ -41,7 +41,7 @@
           </div> 
         </template>
       </el-table-column>
-      <el-table-column :label="$t('operation')" width="130">
+      <el-table-column :label="$t('otc_order_trade')" width="130">
         <template slot-scope="scope">
           <div>
             <button
@@ -320,6 +320,13 @@ export default {
 <style lang="scss">
 .entrust-order-container {
   margin-top: 20px;
+  .el-table {
+    th {
+      .cell  {
+        word-break: break-word;
+      }
+    }
+  }
   .btn {
     border: none;
     border-radius: 3px;
