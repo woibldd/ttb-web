@@ -28,8 +28,24 @@
         </div>
       </div>
       <div class="tab-right pull-right" style="margin-top:-5px!important;" >
-        <label  class='label'>{{$t('otc_legal_currency')}}</label>
-        <span class='currency'>CNY</span>
+        <label  class='label'>{{$t('otc_legal_currency')}}</label> 
+        <span class="el-dropdown-link currency">
+          {{legal_currency}} 
+        </span>
+        <!-- <el-dropdown @command="changeCoin">
+          <span class="el-dropdown-link currency">
+            {{legal_currency}}<i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown"> 
+            <el-dropdown-item 
+              v-for="(item,idx) in dataList"
+              :key="idx" 
+              :command="item.name"
+              > 
+              {{item.name}}
+            </el-dropdown-item> 
+          </el-dropdown-menu>
+        </el-dropdown> -->
         <button
           class="btn"
           @click="openSideBar()"
@@ -49,6 +65,9 @@
 import { state } from "@/modules/store";
 import sideBar from "@/components/VSideBar";
 import orderBuy from "@/components/OTC/order/orderForm/orderBuy"
+import otcComputed from '@/components/OTC/mixins/index.js'
+
+
 export default {
   data() {
     return {
@@ -56,8 +75,21 @@ export default {
       showSide: false,
       operation: 1, // 操作 1: 买/卖, 2: 发布委托
       operSide: 1,
+      dataList: [
+        {
+          name: "CNY",
+          rate: "cny_rate",
+          symbol: '￥'
+        },
+        { 
+          name: "SGD",
+          rate: "sgd_rate",
+          symbol: 'S$'
+        }
+      ]
     }
   },
+  mixins: [otcComputed],
   components: {
     sideBar,
     orderBuy,
@@ -70,15 +102,15 @@ export default {
       set(value) {
         this.state.otc.showSide = value
       }
-    },
-    currency: {
-      get() {
-        return this.state.otc.currency
+    }, 
+    legal_currency: {
+      get () {
+        return state.otc.legal_currency
       },
-      set(value) {
-        this.state.otc.currency = value
+      set (value) {
+        state.otc.legal_currency = value
       }
-    }
+    }, 
   },
   methods: {
     setCurrency(coin, side) {
@@ -99,6 +131,9 @@ export default {
     },
     colseSideBar() {
       this.showSide = false;
+    },
+    changeCoin(command) {
+      this.legal_currency = command
     }
   }
 }

@@ -417,8 +417,7 @@ const utils = {
     }
     return Big(num).toString()
   },
-  toPretty (num) {
-    console.log('9999999999999999999999999')
+  toPretty (num) { 
     num = Big(num || 0)
     Big.RM = 0 // rm = 0,向下截取
     if (num < 100) {

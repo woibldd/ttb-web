@@ -16,7 +16,7 @@
               <div @click="setCurrency('USDT')">
                 <p>
                   {{ $t('USDT') }}
-                  <span class="text-idx">{{ '￥' + user.usdtCount }}</span>
+                  <span class="text-idx">{{ coin.symbol + user.usdtCount }}</span>
                   <!--<span class="text-ixo">{{'-0.24%'}}</span>-->
                 </p>
               </div>
@@ -31,7 +31,7 @@
               <div @click="setCurrency('BTC')">
                 <p>
                   {{ $t('BTC') }}
-                  <span class="text-idx">{{ '￥' + user.btcCount }}</span>
+                  <span class="text-idx">{{ coin.symbol + user.btcCount }}</span>
                   <!--<span class="text-ixo">{{'-0.24%'}}</span>-->
                 </p>
               </div>
@@ -113,6 +113,16 @@ export default {
         btcCount: 0,
         usdtCount: 0
       },
+      symbolList: {
+        CNY: {
+          rate: "cny_rate",
+          symbol: '￥'
+        },
+        SGD: { 
+          rate: "sgd_rate",
+          symbol: 'S$'
+        }
+      },
       count: 0
     }
   },
@@ -123,9 +133,9 @@ export default {
     },
     init () {
       service.otcSymbolList({}).then(res => {
-        if (res.code === 0) {
-          this.user.btcCount = this.$big(res.data[1].cny_rate).round(2, 0)
-          this.user.usdtCount = this.$big(res.data[0].cny_rate).round(2, 0)
+        if (res.code === 0) { 
+          this.user.btcCount = this.$big(res.data[1][this.coin.rate]).round(2, 0)
+          this.user.usdtCount = this.$big(res.data[0][this.coin.rate]).round(2, 0)
         }
       })
       // 委托
@@ -167,9 +177,10 @@ export default {
     this.init()
     this.timer = setInterval(() => {
       service.otcSymbolList({}).then(res => {
-        if (res.code === 0) {
-          Vue.set(this.user, 'btcCount', this.$big(res.data[1].cny_rate).round(2, 0))
-          Vue.set(this.user, 'usdtCount', this.$big(res.data[0].cny_rate).round(2, 0))
+        if (res.code === 0) { 
+          //let rate = this.legal_currency.toLowerCase() + '_rate'  
+          Vue.set(this.user, 'btcCount', this.$big(res.data[1][this.coin.rate]).round(2, 0))
+          Vue.set(this.user, 'usdtCount', this.$big(res.data[0][this.coin.rate]).round(2, 0))
         }
       })
       service.getUnDonefills({
@@ -241,6 +252,17 @@ export default {
     },
     from () {
       return this.$route.name
+    },
+    legal_currency() {
+      return this.state.otc.legal_currency;
+    },
+    coin() {
+      return this.symbolList[this.legal_currency]
+    }
+  },
+  watch: {
+    legal_currency() {
+      this.init()
     }
   }
 }

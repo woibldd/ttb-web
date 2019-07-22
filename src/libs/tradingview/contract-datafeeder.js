@@ -2,6 +2,7 @@ import utils from '@/modules/utils'
 import service from '@/modules/service'
 import ws from '@/modules/ws'
 import _ from 'lodash'
+import 'element-ui/lib/theme-chalk/index.css'
 // const theme = process.env.THEME_ENV
 
 let lastTime
@@ -18,6 +19,7 @@ function getPeriod (interval) {
     240: '4h',
     360: '6h',
     720: '12h',
+    'fs': '1m',
     'D': '1d',
     '1D': '1d',
     'W': '1w',
@@ -45,7 +47,7 @@ export default {
         supports_group_request: false,
         supports_marks: false,
         //supported_resolutions: ['1', '3', '5', '15', '30', '60', '120', '240', '360', '720', '1D', '1W', '1M']
-        supported_resolutions: ['1', '3', '5', '15', '30', '60', '120', '240', '360', '720', '1D', '1W', '1M']
+        supported_resolutions: ['1', '3', '5', '15', '30', '60', '120', '240', '360', '720',  '1D', '1W', '1M']
       })
     })
   },

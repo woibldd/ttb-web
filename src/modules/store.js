@@ -100,7 +100,7 @@ export const state = {
   },
   otc: {
     currency: "USDT",
-    legal_currency: "CNY",
+    legal_currency: "CNY", // CNY,SGD 
     showSide: 1, //1: 买，2：卖
     symbolList: [],
     userInfo: null,
