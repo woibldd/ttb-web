@@ -521,8 +521,9 @@ export default {
       return service.getAccountWalletList().then(res => {
         this.tableData = (res.data || []).map(item => {
           item.rates = item.rates || {};
-          item.locking = this.$big(item.locking || 0).toString();
-          item.amount = this.$big(item.withdrawing)
+          item.locking = this.$big(item.locking || 0).plus(item.withdrawing || 0).toString();
+          item.amount = this.$big(item.withdrawing) 
+            .plus(item.locking)
             .plus(this.$big(item.available))
             .round(8, this.C.ROUND_DOWN)
             .toString();

@@ -158,9 +158,9 @@
       <!-- 平仓/市价全平 -->
       <div class="operate-col pl-16 pt-16 close"
         v-loading='clearWarehouseLoading'
-      >
+        >
         <div
-          class="equal mr-21 "
+          class="equal mr-21"
           v-if='!holding.future_close_id'>
 
           <div
@@ -203,7 +203,7 @@
             class="label mb-10 t-a-left nowrap"
             v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}">{{ $t('contract_action_open_short') }}
           </div>
-          <div>
+        <div>
             <label class='label'
               v-html="$t('contract_history_close_content', { price: $big(state.ct.curCommitPrice || 0).toFixed(pairInfo.price_scale || 2)})">
             </label>

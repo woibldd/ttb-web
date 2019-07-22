@@ -1910,7 +1910,8 @@
   "bby_shise7":"幣盈盈購買",
   "bby_shise8":"本息歸還",
   "bby_shise9":"熱門推薦",
-    "bby_shise10":"限期",
- 
-  "bidTitle": "弊盈盈"
+    "bby_shise10":"限期", 
+  "bidTitle": "弊盈盈",
+  
+  "otc_order_trade": "操作"
 }

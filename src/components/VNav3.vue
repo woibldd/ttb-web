@@ -596,7 +596,7 @@ export default {
     text-align: center;
     font-size: 12px;
     cursor: pointer;
-    z-index: 1;
+    z-index: 2;
     .rig {
       display: inline-block;
       transition: all 0.2s ease-in-out;
@@ -611,7 +611,7 @@ export default {
       width: 100%;
       height: auto;
       line-height: 40px;
-      padding-top: 27px;
+      padding-top: 17px;
       right: 0;
       position: absolute;
       display: none;
@@ -631,7 +631,7 @@ export default {
     }
     &:hover {
       .lang_box {
-        display: flex;
+        display: flex; 
       }
       .rig {
         transform: rotate(180deg);
