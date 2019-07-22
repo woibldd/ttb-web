@@ -2095,7 +2095,9 @@
     "bby_shise6":"已发放",
     "bby_shise7":"币盈盈购买",
     "bby_shise8":"本息归还",
-    "bby_shise9":"热门推荐",
+    "bby_shise9":"热门推荐", 
+  
+    "otc_order_trade": "操作",
     "bby_shise10":"限期", 
     "bidTitle": "币盈盈",
     "pair_list_all": "全部",

@@ -2126,7 +2126,9 @@
 "bby_shise7":" D&E purchased",
 "bby_shise8":" Interest return",
 "bby_shise9":"Popular recommendation",
-    "bby_shise10":"Deadline",
+    "bby_shise10":"Deadline", 
+
+"otc_order_trade": "Trade",
 "bidTitle": "Deposit&Earn", 
 "pair_list_all": "ALL",
 "pair_list_option": "Option",
