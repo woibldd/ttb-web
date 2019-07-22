@@ -35,8 +35,8 @@
         <template slot-scope="scope"> 
           <div v-for="(item, index) in scope.row.pay_ment_data" :key="index" style="display: inline-block;margin-right: 4px;">
             <icon
-              :class="item === '1' ? 'card active' : item === '2' ? 'alipay active' : 'wechat active'"
-              :name="item === '1' ? 'bank-card' : item === '2' ? 'alipay' : 'wechat'"
+              :class="item === '1' ? 'card active' : item === '2' ? 'alipay active' :  item === '3' ? 'wechat active' : ''"
+              :name="item === '1' ? 'bank-card' : item === '2' ? 'alipay' :  item === '3' ? 'wechat' : ''"
             />
           </div> 
         </template>

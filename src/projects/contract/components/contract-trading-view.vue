@@ -145,8 +145,8 @@ export default {
         let span = document.createElement('span')
         span.innerText = '1分'
         resolutions.appendChild(span) 
-        let list = ['1', '3', '5', '15', '30', '60', '120', '240', '360', '720',  '1D', '1W', '1M'] 
-
+  
+        let list = ['1', '3', '5', '15', '30', '60', '120', '240', '360', '720',  '1D', '1W', '1M']  
         let ul = document.createElement('ul')
         let lia = document.createElement('li')
         lia.innerText = utils.$i18n.t("tradingview_line") //分时线
@@ -176,8 +176,7 @@ export default {
           } else if (!!Number(item)) {
             li.innerText = item / 60 + '小时' 
           }  
-          li.addEventListener('click', function() {  
-            console.log('asdfsdfadf00000000000000000000000000000000000000000000000000')
+          li.addEventListener('click', function() {   
             widget.chart().setResolution(item, null); //周期切换到一分钟 
             resolutions.parentElement.classList.remove('selected')
             if (!!local.lineType) {
