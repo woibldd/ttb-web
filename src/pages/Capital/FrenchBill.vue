@@ -51,7 +51,8 @@
       </el-form-item>
     </el-form>
     <el-table
-      :data="tableData"
+      :data="tableData" 
+      :empty-text="$t('no_data')"
       v-loading="loading"
       style="width: 100%">
       <el-table-column
@@ -59,7 +60,7 @@
         :label="$t('fees_name')"/>
       <el-table-column
         prop="create_time"
-        :label="this.$t('contract_deal_time')"/>
+        :label="this.$t('otc_trans_time')"/>
       <el-table-column
         prop="opetate"
         :label="$t('order_th_type')">
@@ -81,8 +82,7 @@
       </el-table-column>
     </el-table>
     <div
-      class="
-page"
+      class="page"
       v-if="tableData.length > 0">
       <el-pagination
         background
@@ -181,6 +181,7 @@ export default {
     },
     init () {
       this.loading = true
+      console.log('4444444444444444444444444444444444')
       service.balancefills(this.formInline).then(res => {
         if (res.code === 0) {
           this.loading = false

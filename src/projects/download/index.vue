@@ -48,7 +48,7 @@
       class="tt-mask"
       v-if="showTutorialArrow"
       @click="touch"
-      >
+    >
       <div
         class="tutorial-arrow">
         <img
@@ -91,7 +91,7 @@ export default {
     },
     isWeiXin () {
       return utils.isWeiXin()
-    },
+    }
   },
   methods: {
     switchLang (lang) {
@@ -115,23 +115,23 @@ export default {
       }
 
       if (type === 'android') {
-        let url = 'https://ixx.com/app/ixx.apk'
+        let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
         window.open(url, '_blank')
         return
       }
 
       if (this.isSafari) {
-        let url = 'itms-services://?action=download-manifest&url=https://ixx.com/app/IXX.plist'
+        let url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
         window.open(url, '_blank')
       }
     },
-    touch() {
+    touch () {
       this.showTutorialArrow = false
     }
   },
-  created() {
+  created () {
     if (this.isWeiXin) {
-      this.showTutorialArrow = true 
+      this.showTutorialArrow = true
     }
   }
 }

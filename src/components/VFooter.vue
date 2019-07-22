@@ -171,7 +171,13 @@ export default {
       return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
     },
     aboutLink () {
-      return `/docs/IXX_introduction_${this.state.locale || 'en'}.pdf`
+      // return `/docs/IXX_introduction_${this.state.locale || 'en'}.pdf`
+      if (this.state.locale === 'zh-CN') {
+        return `https://ix-static.oss-ap-southeast-1.aliyuncs.com/IXX_introduction_zh-CN.pdf`
+      }
+      else {
+        return `https://ix-static.oss-ap-southeast-1.aliyuncs.com/IXX_introduction_en.pdf`
+      }
     },
     apiDoc () {
       return this.state.theme.apiDoc[this.state.locale || 'en']

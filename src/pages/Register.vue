@@ -354,8 +354,7 @@ export default {
     }
   },
   methods: {
-    async submit (e) {
-      debugger
+    async submit (e) { 
       // 本地校验
       const check = this.checkParams()
       if (!check.ok || !!this.triggerValidate) {

@@ -106,8 +106,8 @@
                         <number-input
                           class="number-input"
                           v-model="inputPrice"
-                          :scale="symbolInfo.price_scale || 2"
-                          :placeholder="$t('otc_placeholder_b')"
+                          :scale="price_scale || 2"
+                          :placeholder="side===1 ? $t('otc_placeholder_c') : $t('otc_placeholder_b')"
                         />
                         <div
                           class="unit-label long"
@@ -138,8 +138,8 @@
                         <number-input
                           class="number-input"
                           v-model="amount"
-                          :scale="symbolInfo.amount_scale || 6"
-                          :placeholder="$t('contract_order_enter_tips1')"
+                          :scale="amount_scale || 6" 
+                          :placeholder="placeholder"
                         />
                         <div
                           class="unit-label long"
@@ -208,20 +208,20 @@
                           :value="2"/>
                       </el-select>
                     </div>
-                  </li>
-                  <li>
-                    <div class="label">{{ $t('otc_register_time') }}</div>
-                    <div class="content">
-                      <!-- <el-input :max="130" :min="70"  v-model="order.register_time" placeholder="请输入内容"></el-input> -->
-                      <el-date-picker
-                        v-model="order.register_time"
-                        format="yyyy-MM-dd"
-                        value-format="timestamp"
-                        type="date"
-                        style="width: 100%!important"
-                      />
-                    </div>
-                  </li>
+                  </li> 
+                   <!--<li>-->
+                    <!--<div class="label">{{ $t('otc_register_time') }}</div>-->
+                    <!--<div class="content">-->
+                      <!--&lt;!&ndash; <el-input :max="130" :min="70"  v-model="order.register_time" placeholder="请输入内容"></el-input> &ndash;&gt;-->
+                      <!--<el-date-picker-->
+                        <!--v-model="order.register_time"-->
+                        <!--format="yyyy-MM-dd"-->
+                        <!--value-format="timestamp"-->
+                        <!--type="date"-->
+                        <!--style="width: 100%!important"-->
+                      <!--/>-->
+                    <!--</div>-->
+                  <!--</li>-->
                   <li>
                     <div class="label">{{ $t('otc_order_remarks') }}</div>
                     <div class="content" >
@@ -430,7 +430,8 @@ export default {
       alertTitle: '',
       flag: false,
       alertFlag: false,
-      awitFlag: false
+      awitFlag: false,
+      balance: {},
     }
   },
   // mixins: {
@@ -500,6 +501,29 @@ export default {
     },
     total () {
       return this.$big(this.amount || 0).mul(this.price || 0)
+    },
+    placeholder () {
+      let plt = '0' 
+      if (this.side === 1) {
+        return this.$t('contract_order_enter_tips1')
+      }
+      else {
+        if (JSON.stringify(this.balance) !== "{}")
+          plt = this.balance[this.currency].available
+        return '可用数量：' + plt
+      }
+    },
+    price_scale () {
+      if (!!this.symbolInfo) {
+        return this.symbolInfo.price_scale || 2
+      }
+      return 2
+    },
+    amount_scale() {
+      if (!!this.symbolInfo) {
+        return this.symbolInfo.amount_scale || 6
+      }
+      return 2
     }
   },
   components: {
@@ -586,6 +610,16 @@ export default {
     //   this.total = this.$big(this.amount || 0).mul(this.price || 0)
     // }
   },
+  created() {    
+    this.balance = {} 
+    service.getOtcBalance().then(res => {
+      if(res.code === 0) {  
+        res.data.map(row => { 
+          this.$set(this.balance, row.currency, row )
+        }) 
+      }
+    })  
+  },
   watch: {
     inputPrice () {
       this.flag = false
@@ -615,12 +649,11 @@ export default {
               this.awitFlag = false
             }
           }
-        } else {
+        } else { 
           if (this.$big(this.inputPrice).lt(this.symbolInfo.buy_price_one)) {
-            this.flag = true
-         
-              this.alertTitle =this.$t('otc_ziurec_15',{currency:this.currency,inputPrice:this.inputPrice,symbolInfo:this.symbolInfo.sell_price_one})
-  // `您发布的出售${this.currency}的交易单，价格为${this.inputPrice}CNY低于买一价${ this.symbolInfo.buy_price_one}CNY，以该价格发布可能给您带来损失`
+            this.flag = true 
+              this.alertTitle =this.$t('otc_ziurec_15',{currency:this.currency,inputPrice:this.inputPrice,symbolInfo:this.symbolInfo.buy_price_one})
+          // `您发布的出售${this.currency}的交易单，价格为${this.inputPrice}CNY低于买一价${ this.symbolInfo.buy_price_one}CNY，以该价格发布可能给您带来损失`
           } else {
             this.flag = false
             if (awit_sellPrice > 0) {
@@ -641,6 +674,16 @@ export default {
     },
     show () {
       //this.total = ''
+       if (this.show) { 
+        this.balance = {} 
+        service.getOtcBalance().then(res => {
+          if(res.code === 0) {  
+            res.data.map(row => { 
+              this.$set(this.balance, row.currency, row )
+            }) 
+          }
+        })  
+      }
       this.amount = ''
       this.orderData = []
       this.step = 0
@@ -659,8 +702,7 @@ export default {
         }
       }
     },
-    side () {
-      console.log(this.side)
+    side () { 
       this.order.remark = ''
       this.inputPrice = ''
       this.amount = ''

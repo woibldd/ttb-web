@@ -1,31 +1,42 @@
 <template>
-  <div class="ixx_banner_container">
+  <div style=" height: 400px;" class="ixx_banner_container">
     <swiper :options="swiperOption">
       <swiper-slide>
         <div class="dot-item-list">
           <div class="item-list-banner">
-            <img src="./img/1.png" alt="">
+            <img src="./img/1.png"
+alt="">
           </div>
           <div class="item-list-banner">
-            <img src="./img/2.png" alt="">
+            <img src="./img/2.png"
+alt="">
           </div>
           <div class="item-list-banner">
-            <img src="./img/3.png" alt="">
+            <img src="./img/3.png"
+alt="">
           </div>
           <div class="item-list-banner">
-            <img src="./img/4.png" alt="">
+            <img src="./img/4.png"
+alt="">
           </div>
         </div>
       </swiper-slide>
       <swiper-slide>
         <div class="normal-item-list">
-          <img src="./img/changhaibao.png" alt="">
+          <img src="./img/changhaibao.png"
+alt="">
         </div>
       </swiper-slide>
-      <div class="swiper-pagination" slot="pagination"></div>
+      <div class="swiper-pagination"
+slot="pagination"/>
     </swiper>
-    <div class="buy-currency-container">
+<<<<<<< HEAD
+    <!-- <div class="buy-currency-container"> -->
+    <!-- <div class="currency-inner">
+=======
+    <!-- <div class="buy-currency-container">
       <div class="currency-inner">
+>>>>>>> origin/newcontract
         <el-row>
           <el-col :span="6">
             <div class="tips">
@@ -62,67 +73,66 @@
           </el-col>
         </el-row>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import Vue from 'vue'
-  import VueAwesomeSwiper from 'vue-awesome-swiper'
-  import service from "@/modules/service";
-  import 'swiper/dist/css/swiper.css'
-  Vue.use(VueAwesomeSwiper, /* { default global options } */)
-  export default {
-    data () {
-      return {
-        buy: {
-          amount: '',
-          currency: 'BTC'
+import Vue from 'vue'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import service from '@/modules/service';
+import 'swiper/dist/css/swiper.css'
+Vue.use(VueAwesomeSwiper /* { default global options } */)
+export default {
+  data () {
+    return {
+      buy: {
+        amount: '',
+        currency: 'BTC'
+      },
+      currencyData: [
+        {
+          currency: 'USDT',
+          template: `<i class="currency-icon">&#xe61a;</i> USDT`
         },
-        currencyData: [
-          {
-            currency: 'USDT',
-            template: `<i class="currency-icon">&#xe61a;</i> USDT`
-          },
-          {
-            currency: 'BTC',
-            template: `<i class="currency-icon">&#xe60c;</i> BTC`
-          }
-        ],
-        swiperOption: {
-          slidesPerView: 1,
-          spaceBetween: 30,
-          autoplay: true,
-          speed: 600,
-          loop: true,
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true
-          }
-        },
-        arr:[],
-        money: 0
+        {
+          currency: 'BTC',
+          template: `<i class="currency-icon">&#xe60c;</i> BTC`
+        }
+      ],
+      swiperOption: {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        autoplay: true,
+        speed: 600,
+        loop: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        }
+      },
+      arr: [],
+      money: 0
+    }
+  },
+  methods: {
+    buyHandle () {
+      if (this.buy.amount) {
+        this.$emit('buy-handle', this.buy)
       }
     },
-    methods: {
-      buyHandle() {
-          if(this.buy.amount) {
-            this.$emit('buy-handle', this.buy)
-          }
-      },
-      bicher(){
-             service.otcSymbolList().then(res => {
-                if(res.code===0){
-                     this.arr=res.data
-                    
-                }
-              });
-      }
-    },created(){
-        this.bicher()
-
+    bicher () {
+      service.otcSymbolList().then(res => {
+        if (res.code === 0) {
+          this.arr = res.data
+        }
+      })
     }
+  },
+  created () {
+    this.bicher()
   }
+}
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
@@ -222,7 +232,7 @@
     }
     .swiper-pagination-bullet-active {
       opacity: 1;
-      background: rgb(95, 76, 76);
+      background: #09C989 !important;
     }
   }
 </style>

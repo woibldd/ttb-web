@@ -19,21 +19,23 @@
         @click="filter('executed')">
         {{ $t('order_history') }}
       </div>
-      <!-- <div class="currency-row">
+       
+      <div class="currency-row" >
         <div class="c-999 mr-13">
-          {{ $t('pair') }}
+          {{ $t('contract') }}
         </div>
         <el-select
           class="opetion"
           v-model="selectPair"
+          @change="pairChange"
           value-key="currency">
           <el-option
             v-for="(item, idx) in pairList"
             :key="idx"
-            :label="item.name | pairfix"
-            :value="item"/>
+            :label="item.product_name +'/'+ item.currency_name"
+            :value="item.currency"/>
         </el-select>
-      </div> -->
+      </div>
     </div>
     <div
       class="table-wrapper"
@@ -223,14 +225,14 @@ export default {
   data () {
     return {
       pairList: [],
-      selectPair: '',
+      selectPair: 'BTCUSD',
       tabName: 'history',
       tableData: [],
       page: 1, // page 都是从1 开始的,
       size: 10,
       isLoading: true,
       totalItems: 0,
-      state
+      state,  
     }
   },
   computed: {
@@ -263,21 +265,23 @@ export default {
     assignValue (item) {
       // return this.$big(item.amount).div(item.price).toFixed(4)
       return item.total;
-    },
+    }, 
     async getPairs () {
-      let res = await service.getPairList()
+      let res = await service.getContractSymList()
       if (!res.code) {
+        console.log({data: res.code})
         this.pairList = res.data.items
-        this.selectPair = this.pairList[0]
+        this.selectPair = this.pairList[0].currency
       }
     },
-    getData () {
-      const params = {
-        symbol: this.selectPair,
-        page: this.page,
-        size: this.size
+    getData (params) {
+      if (!params) {
+        params = {
+          currency: this.selectPair,
+          page: this.page,
+          size: this.size
+        }  
       }
-
       if (this.tabName === 'executed') {
         // 订单历史
         this.getOrderhistory(params)
@@ -290,6 +294,7 @@ export default {
       this.tabName = type
       this.page = 1
       const params = {
+        currency: this.selectPair,
         page: this.page,
         size: this.size
       }
@@ -305,12 +310,12 @@ export default {
       this.page = 1
     },
     // 订单历史
-    getOrderhistory () {
+    getOrderhistory (params) {
       this.isLoading = true
-      const params = {
-        page: this.page,
-        size: this.size
-      }
+      // const params = {
+      //   page: this.page,
+      //   size: this.size
+      // }
       service.getOrderhistory(params).then(res => {
         this.tableData = res.data.data
         this.totalItems = res.data.total
@@ -320,13 +325,12 @@ export default {
       })
     },
     // 已成交
-    getContractTradeHistory () {
-      this.isLoading = true
-
-      const params = {
-        page: this.page,
-        size: 10
-      }
+    getContractTradeHistory (params) {
+      this.isLoading = true 
+      // const params = {
+      //   page: this.page,
+      //   size: 10
+      // }
       service.getContractTradeHistory(params).then(res => {
         this.tableData = res.data.data
         this.totalItems = res.data.total
@@ -334,7 +338,11 @@ export default {
       }).finally(res => {
         this.isLoading = false
       })
-    }
+    },
+    pairChange() {
+      console.log({test: this.pairList})
+      this.getData()
+    },
   },
   created () {
     this.getPairs()

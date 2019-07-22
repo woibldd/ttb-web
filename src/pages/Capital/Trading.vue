@@ -43,8 +43,7 @@
       <h1>
         <icon :name="unit.name+'-unit'" /> {{total | fixed(unit.scale)}}</h1>
     </div>
-    <div
-      v-if="!showHistory"
+    <div 
       class="my-fund-content"> 
 
       <el-table :empty-text=" $t('no_data') "
@@ -114,6 +113,13 @@
               <!--v-if="scope.row.withdrawable"-->
               <!--:to="'/fund/withdraw/'+scope.row.currency"-->
               <!--class="my-fund-operate">{{ $t('withdraw') }}</router-link>-->
+              
+            <span 
+              class="my-fund-operate"> 
+               <a href="javascript:;" class="menu-name" @click="routerTransFer(scope.row)">
+                  {{ $t('account_exchange') }}
+              </a>
+            </span>
             <router-link
               v-if="scope.row.pairs"
               :to="{
@@ -372,6 +378,14 @@
       )
     },
     methods: {
+      routerTransFer(item) {
+        this.$router.push({
+          path:'/fund/transfer',
+          query: {
+            currency: item.currency
+          }
+        })
+      },
       reset (type) {
         this.blur(type)
         this.unlock_amount = 0

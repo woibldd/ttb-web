@@ -88,6 +88,21 @@ const utils = {
       window.localStorage.setItem(key, str)
     }
   },
+  setSessionStorageValue (key, str) {
+    if ('sessionStorage' in window) {
+      window.sessionStorage.setItem(key, str)
+    }
+  },
+  getSessionStorageValue (key, field) {
+    if ('sessionStorage' in window) {
+      let item = window.sessionStorage.getItem(key)
+      if (field) {
+        return JSON.parse(item)[field]
+      }
+      return item
+    }
+    return ''
+  },
   getDefaultTimezone () {
     const data = window.localStorage.getItem('tradingview.chartproperties')
     if (data) {
@@ -403,6 +418,7 @@ const utils = {
     return Big(num).toString()
   },
   toPretty (num) {
+    console.log('9999999999999999999999999')
     num = Big(num || 0)
     Big.RM = 0 // rm = 0,向下截取
     if (num < 100) {
@@ -431,14 +447,14 @@ const utils = {
     }
     return Big(num).round(scale, rm).toString()
   },
-  toFixed (num, scale = 8, rm = consts.ROUND_DOWN) {
-    if (typeof num === 'undefined') {
+  toFixed (num, scale = 8, rm = consts.ROUND_DOWN) { 
+    if (isNaN(Number(num))) {
       return 0
     }
     return Big(num).round(scale, rm).toFixed(scale)
   },
   toNum (num) {
-    if (typeof num === 'undefined') {
+    if (isNaN(Number(num))) {
       return 0
     }
     return +Big(num).toFixed(12)
@@ -542,26 +558,7 @@ const utils = {
         break
     }
     return url
-  },
-  getBlockChainUrl (tx, type, chainName) {
-    let url = ''
-    switch (chainName) {
-      case 'BTC':
-        url = `https://blockchain.info/${type}/${tx}`
-        break
-      case 'ETH':
-        url = `https://etherscan.io/${type}/${tx}`
-        break
-      case 'EOS':
-        type = type === 'address' ? 'account' : type
-        url = `https://eosflare.io/${type}/${tx}`
-        break
-      case 'OMNI':
-        url = `https://omniexplorer.info/${type}/${tx}`
-        break
-    }
-    return url
-  },
+  }, 
   getComputedStyle (el, prop) {
     if (!el) return {}
     let styles = document.defaultView.getComputedStyle(el, null) || {}

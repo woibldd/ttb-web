@@ -1,12 +1,12 @@
 <template>
   <div class="page-home">
-    <!-- <div class="home2">
+    <div class="home2">
       <k-slider
         :banners="banners"
         :swiper-option="swiperOption"/>
-       
-    </div> -->
-    <home-banner v-on:buy-handle=buySubmit />
+
+    </div>
+    <!--<home-banner v-on:buy-handle=buySubmit />-->
     <div class="ind_txt">
       <div class="ind_cen">
         <div
@@ -83,14 +83,14 @@
       </div>
     </div>
     <div class="corperator">
-      <div class="corperator-container"> 
+      <div class="corperator-container">
         <div class="corp-row row-60 mb-60">
           <div class="corp-title" v-t="'footer_investors'"/>
-       
+
             <div class="corp-logo">
               <a class="link" href="javascript:;" @click.prevent>
                 <img class="logo may" src="~@/assets/copr-logo-may.png">
-              </a> 
+              </a>
             </div>
           </div>
         <div class="corp-row row-60 mb-60">
@@ -99,7 +99,7 @@
             v-t="'footer_partners'"/>
           <div class="corp-logo">
             <span
-              class="link" 
+              class="link"
               target="_blank">
               <img
                 class="logo cw"
@@ -108,7 +108,7 @@
           </div>
           <div class="corp-logo">
             <span
-              class="link" 
+              class="link"
               target="_blank">
               <img
                 class="logo hl"
@@ -117,7 +117,7 @@
           </div>
           <div class="corp-logo">
             <span
-              class="link" 
+              class="link"
               target="_blank">
               <img
                 class="logo hx"
@@ -126,7 +126,7 @@
           </div>
           <div class="corp-logo">
             <span
-              class="link" 
+              class="link"
               target="_blank">
               <img
                 class="logo js"
@@ -135,7 +135,7 @@
           </div>
           <div class="corp-logo">
             <span
-              class="link" 
+              class="link"
               target="_blank">
               <img
                 class="logo he"
@@ -144,7 +144,7 @@
           </div>
           <div class="corp-logo">
             <span
-              class="link" 
+              class="link"
               target="_blank">
               <img
                 class="logo blk"
@@ -160,7 +160,7 @@
           </div>
           <div class="corp-logo">
             <span
-              class="link" 
+              class="link"
               target="_blank">
               <img
                 class="logo dvp"
@@ -169,7 +169,7 @@
           </div>
           <div class="corp-logo">
             <span
-              class="link" 
+              class="link"
               target="_blank">
               <img
                 class="logo hx"
@@ -212,7 +212,7 @@ export default {
         {key: 'homechart_24h_h', name: this.$t('homechart_24h_h')},
         {key: 'homechart_24h_v', name: this.$t('homechart_24h_v')},
         {key: 'actions', name: this.$t('actions')}
-      ], 
+      ],
     }
   },
   components: {

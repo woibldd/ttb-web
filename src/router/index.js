@@ -355,6 +355,7 @@ export const routes = [
   ...tradeRouter,
   ...capitalRouter,
   ...fundRouter,
+  ...otherRouter,
   {
     path: '/snowball',
     name: 'Bid',

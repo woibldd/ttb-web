@@ -32,8 +32,7 @@
       </el-table-column>
       <el-table-column prop="quota" :label="$t('otc_order_quota',{legal_currency})"></el-table-column>
       <el-table-column prop="payment_type" :label="$t('otc_payment_method')">
-        <template slot-scope="scope">
-
+        <template slot-scope="scope"> 
           <div v-for="(item, index) in scope.row.pay_ment_data" :key="index" style="display: inline-block;margin-right: 4px;">
             <!--<template v-if="item === '1'">-->
               <!--<icon-->
@@ -80,9 +79,7 @@
             <!--:class="{'active': scope.row.payment_type.indexOf('3') > -1,}"-->
             <!--class="wechat"-->
             <!--name="wechat"-->
-          <!--/>-->
-
-
+          <!--/>--> 
           <!-- 微信 -->
         </template>
       </el-table-column>

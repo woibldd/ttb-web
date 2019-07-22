@@ -1,7 +1,6 @@
 <template>
   <div class="contract-pair-table">
-    <div class="pair-tab flex-lr mt-4"
-      v-if="false"
+    <div class="pair-tab flex-lr mt-4"  
     >
       <div
         class="pair-tab-item pointer"
@@ -11,10 +10,10 @@
         :key="pair.name"
       >
         <span class="pair-name">{{ $t('contract_'+pair.name) }}</span>
-        <p class="price mt-10">{{ pair.price || '--' }} <i
+        <p class="price mt-10">{{ pair.price || '0' | fixed(pair.price_scale) }} <i
           class="iconfont arrow"
           :class="{'arrow-up': getDelta(pair.tick) > 0, 'arrow-down': getDelta(pair.tick) < 0}"
-        /></p>
+        /></p> 
       </div>
     </div>
     <div class="pair-info flex mt-4" style="position:relative">
@@ -42,13 +41,12 @@
             <span class="info-field">{{ $t('last_price') }}： </span>
             <span
               class="info-value"
-            >{{ tick.current | fixed(1) }}</span>
+            >{{ tick.current | fixed(pairInfo.price_scale || 2) }}</span>
           </div>
           <div class="info-row">
             <span class="info-field">{{ $t('contract_mark_price') }}： </span>
-            <span
-              class="info-value default"
-            >{{ markPrice }}</span>
+            <span v-if="pairInfo.currency==='BTCUSD'" class="info-value default" >{{ markPrice | fixed(2)  }}</span>
+            <span v-else class="info-value default" >{{ markPrice | fixed(pairInfo.price_scale || 2)  }}</span>
           </div>
         </div>
         <!-- BLOCK 3 -->
@@ -63,18 +61,18 @@
             <span class="info-field">{{ $t('homechart_24h_change_value') }}： </span>
             <span
               class="info-value"
-            >{{ tick.increment_24h | fixed(1) }}</span>
+            >{{ tick.increment_24h  | fixed(pairInfo.price_scale || 2)  }}</span>
           </div>
         </div>
         <!-- BLOCK 4 -->
         <div class="column flex flex-start ml-15">
           <div class="info-row">
             <span class="info-field">{{ $t('homechart_24h_v') }}： </span>
-            <span class="info-value default" >{{ tick.volume_24h | pretty }} {{ pairInfo.currency_name }}</span>
+            <span class="info-value default" >{{ tick.volume_24h | pretty }} {{ $t(unit) }}</span>
           </div>
           <div class="info-row">
             <span
-              class="info-value default"> ≈{{ volumnValue | thousand }} {{ pairInfo.product_name }}</span>
+              class="info-value default"> ≈{{ volumnValue | thousand }} BTC</span>
           </div>
         </div>
         <div  class="guide-link" v-show="link">
@@ -93,10 +91,10 @@
             <span class="info-field">{{ $t('contract_fee_rate') }}： </span>
             <span class="info-value default">
 
-            <router-link to="/material/fee-history">  {{ ( (pairInfo.fee_rate * 100).toFixed(4) || 0) + '%' }}</router-link>
+            <router-link to="/material/fee-history">  {{ (pairInfo.fee_rate * 100 || 0) | round(4)   }} % </router-link>
             <!-- {{ ( (pairInfo.fee_rate * 100).toFixed(4) || 0) + '%' }}  -->
             <i class="iconfont strong pointer"
-               v-tooltip.top-center="{content: $t('contract_fee_rate_current_tips', { feeRate: ((pairInfo.fee_rate * 100).toFixed(4) || 0) + '%' }), classes: 'contract'}"/>  </span>
+               v-tooltip.top-center="{content: $t('contract_fee_rate_current_tips', { feeRate: ($big(pairInfo.fee_rate * 100 || 0).round(4, 0).toFixed(4) || 0) + '%' }), classes: 'contract'}"/>  </span>
           </div>
           <div v-if='false' class="info-row ml-30">
             <span class="info-field">{{ $t('contract_holding') }}： </span>
@@ -154,16 +152,29 @@ export default {
   computed: {
     markPrice () {
       if (this.state.ct.markTick) {
-        return  parseFloat(this.state.ct.markTick.current).toFixed(2)
+        return  this.state.ct.markTick.current
       }
       return '--'
     },
     volumnValue () {
-      if (this.tick && this.tick.volume_24h) {
-        return this.$big(this.tick.volume_24h).div(this.tick.current).round(this.pairInfo.currency_scale || 2).toString()
+      if (this.tick && this.tick.volume_24h) { 
+        if (this.pairInfo.currency === 'BTCUSD') {
+          return this.$big(this.tick.volume_24h).div(this.tick.current).round(this.pairInfo.currency_scale || 2).toString()
+        }
+        else {
+          return this.$big(this.tick.volume_24h).times(this.tick.current).times(this.pairInfo.multiplier).round(this.pairInfo.currency_scale || 2).toString()
+        }
       }
       return '--'
-    }
+    },
+    unit() { 
+      if (this.state.ct.pair === 'FUTURE_BTCUSD') { 
+        return 'USD'
+      }
+      else { 
+        return 'contract_min_unit'
+      }
+    },
   },
   methods: {
     changePair (pair) {

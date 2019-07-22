@@ -71,7 +71,7 @@
           <el-form-item class="inp_box">
             <v-btn
               class="submit-btn"
-              :label="$t('提交认证')"
+              :label="$t('kyc_form_submit')"
               :loading="loading"
               @click="submit"/>
           </el-form-item>
@@ -81,7 +81,7 @@
         <div class="option-title">
           <h3>
             <icon name="true" />
-            <span>1级认证完成</span>
+            <span>{{$t('kyc_complete_kyc1')}}</span>
           </h3>
         </div>
         <div class="option-notice">

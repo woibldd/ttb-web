@@ -63,10 +63,8 @@
         <icon :name="unit.name+'-unit'" />
         {{ total | fixed(unit.scale)}}</h1>
     </div>
-    <div
-      v-if="!showHistory"
-      class="my-fund-content">
-
+    <div 
+      class="my-fund-content"> 
       <el-table :empty-text=" $t('no_data') "
                 :data="tableData"
                 class="fund-coin-pool">
@@ -94,6 +92,12 @@
             <!-- <span
               @click="showModal = true"
               class="my-fund-operate">{{ $t('account_exchange') }}</span>   -->
+            <span 
+              class="my-fund-operate"> 
+               <a href="javascript:;" class="menu-name" @click="routerTransFer(scope.row)">
+                  {{ $t('account_exchange') }}
+              </a>
+            </span>
             <router-link
               :to="{name: 'OTC'}"
               class="my-fund-operate">{{ $t('asset_trading') }}</router-link>
@@ -239,6 +243,14 @@
       )
     },
     methods: {
+      routerTransFer(item) {
+        this.$router.push({
+          path:'/fund/transfer',
+          query: {
+            currency: item.currency
+          }
+        })
+      },
       hideModal () {
         this.showModal = false
       },

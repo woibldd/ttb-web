@@ -5,7 +5,15 @@ export default {
   computed: {
     pairInfo () {
       if (this.state.ct.pairInfo) {
-        return this.state.ct.pairInfo
+        let pair = this.state.ct.pairInfo
+        if (pair.currency === "BTCUSD") {
+          pair.unitPrice = "1 USD"
+        }
+        else {
+          let lastPrice = this.lastPrice == "--" ? 0 : this.lastPrice 
+          pair.unitPrice = this.$big(lastPrice || 0).mul(pair.multiplier || 0).round(4, this.C.ROUND_DOWN).toFixed(4).toString() + ' BTC'
+        }
+        return pair
       }
       return {}
     },

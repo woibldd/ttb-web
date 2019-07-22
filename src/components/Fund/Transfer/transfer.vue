@@ -10,9 +10,9 @@
         <div class="row__label">{{$t('currency')}}</div>
         <div>
           <el-select v-model="selectCoin"
-                     :placeholder="$t('please_choose')"
-                     class="max-input"
-                     @change="changeCoin"
+            :placeholder="$t('please_choose')"
+            class="max-input"
+            @change="changeCoin"
           >
             <el-option
               v-for="(item, idx) in allCoins"
@@ -50,7 +50,7 @@
             class="number-input"
             v-model="number"
             :scale="8"
-            :placeholder="$t('transfer_enter_amount')"
+            :placeholder="$t('transfer_enter_amountor')"
           />
         </div>
       </div>
@@ -479,6 +479,11 @@
       this.getBalance()
       // this.getAllCoinTypes()
       this.page()
+      
+      if (!!this.$route.query.currency) {
+        this.selectCoin = this.$route.query.currency
+        this.changeCoin(this.selectCoin)
+      }
       this.accountTo = ''
       this.accountTypes.forEach((item) => {
         if(item.value !== this.accountFrom) {

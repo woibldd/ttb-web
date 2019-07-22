@@ -1,12 +1,12 @@
 <template>
-  <div class="nav_box" 
+  <div class="nav_box"
 :class="{dark: dark}">
     <div class="ind_cen">
-      <router-link :to="{name:'home'}" 
+      <router-link :to="{name:'home'}"
 class="nav_logo"/>
       <div class="nav_left">
         <div class="left_options">
-          <router-link :to="{name: 'trading'}" 
+          <router-link :to="{name: 'trading'}"
 class="nav_link">{{ $t('trading') }}</router-link>
           <a
             v-if="showContract"
@@ -25,7 +25,7 @@ class="nav_link">{{ $t('trading') }}</router-link>
             style="padding-left:10px;"
           >
             {{ $t('FrenzySaleZone') }}(SP)
-            <img src="@/assets/hot.png" 
+            <img src="@/assets/hot.png"
 alt style="position: relative;top: 5px;left: 5px;">
           </router-link>
           <router-link
@@ -120,26 +120,26 @@ alt style="position: relative;top: 5px;left: 5px;">
         </div>
       </div>
       <div class="nav_right">
-        <div class="set-app-dl right_options" 
+        <div class="set-app-dl right_options"
 style="margin-right: 40px;">
-          <router-link class="nav_log_res" 
+          <router-link class="nav_log_res"
 :to="{name: 'Download'}">
             <div class="app-dl">
-              <icon class="mr-3" 
+              <icon class="mr-3"
 name="topbar-dl-phone"/>APP
             </div>
           </router-link>
         </div>
-        <div v-if="!state.userInfo" 
+        <div v-if="!state.userInfo"
 class="right_options">
           <router-link
             :to="{name:'login'}"
             class="nav_log_res border-right-1 pr-14 mr-14"
           >{{ $t("signin") }}</router-link>
-          <router-link :to="{name:'register'}" 
+          <router-link :to="{name:'register'}"
 class="nav_log_res">{{ $t("signup_title") }}</router-link>
         </div>
-        <div class="right_options" 
+        <div class="right_options"
 v-else>
           <!-- <p class="email">
             <router-link :to="{name:'trading'}">币币交易</router-link>
@@ -148,21 +148,23 @@ v-else>
             <router-link :to="{name:'fund'}">我的资产</router-link>
           </p>-->
           <div class="fund mr-30">
-            <icon name="fund"/>
+            <icon 
+              :name="fund"
+            />
             <span @click="openDefault('fund')">{{ $t('wallets_nav_asset') }}</span>
 
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
-                  <router-link :to="{name: 'fund'}" 
+                  <router-link :to="{name: 'fund'}"
 class="link">{{ $t('capital_manage') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <router-link :to="{name: 'deposit'}" 
+                  <router-link :to="{name: 'deposit'}"
 class="link">{{ $t('deposit') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <router-link :to="{name: 'withdraw'}" 
+                  <router-link :to="{name: 'withdraw'}"
 class="link">{{ $t('withdraw') }}</router-link>
                 </li>
               </ul>
@@ -179,7 +181,7 @@ class="link">{{ $t('withdraw') }}</router-link>
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24 mobile">
-                  <router-link :to="{name: 'fund'}" 
+                  <router-link :to="{name: 'fund'}"
 class="link">{{ $t('capital_manage') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
@@ -189,7 +191,7 @@ class="link">{{ $t('capital_manage') }}</router-link>
                   >{{ $t('profile_personal_center') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <a class="link" 
+                  <a class="link"
 @click="logout">{{ $t('signout') }}</a>
                 </li>
               </ul>
@@ -200,15 +202,15 @@ class="link">{{ $t('capital_manage') }}</router-link>
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
-                  <a class="link" 
+                  <a class="link"
 target="_blank" :href="announcementLink">{{ $t('footer_notice') }}</a>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <a class="link" 
+                  <a class="link"
 target="_blank" :href="helpLink">{{ $t('user_guide') }}</a>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <a class="link" 
+                  <a class="link"
 target="_blank" :href="requestLink">{{ $t('footer_request') }}</a>
                 </li>
               </ul>
@@ -217,15 +219,15 @@ target="_blank" :href="requestLink">{{ $t('footer_request') }}</a>
         </div>
 
         <div class="lang">
-          <icon :name="'flag-'+state.locale" 
+          <icon :name="'flag-'+state.locale"
 class="mr-5"/>
           {{ localeText }}
-          <icon class="rig" 
+          <icon class="rig"
 name="arrow-down"/>
           <div class="lang_box">
-            <a @click="switchLang(key)" 
+            <a @click="switchLang(key)"
 :key="key" v-for="(value, key) in locales">
-              <icon :name="'flag-'+key" 
+              <icon :name="'flag-'+key"
 class="mr-5"/>
               {{ value }}
             </a>
@@ -264,9 +266,15 @@ export default {
     },
     pdfSubfix () {
       if (state.locale === 'zh-CN') {
-        return '+zh-CN';
+        return '+zh-CN'
       }
-      return '';
+      return ''
+    },
+    fund() { 
+      if (state.locale === 'zh-CN') {
+        return 'fund'
+      }
+      return 'fund-en'
     },
     desentInfo () {
       let userInfo = this.state.userInfo
@@ -328,16 +336,18 @@ export default {
       actions.setUserInfo(null)
       utils.setSessionStorageValue('LoginStatus', 0)
       utils.setSessionStorageValue('markTime', 9999999999)
-      service.signout()
-      if (utils.getRouteMeta(this.$route, 'auth')) {
-        this.$router.push({
-          name: 'login'
-        })
-      }
-
-      this.$nextTick(() => {
-        location.reload()
+      service.signout().then(res => {
+        console.log({res})
       })
+      // if (utils.getRouteMeta(this.$route, 'auth')) {
+      //   this.$router.push({
+      //     name: 'login'
+      //   })
+      // }
+
+      // this.$nextTick(() => {
+      //   location.reload()
+      // })
     },
     clickStar ($event) {
       this.className = 'active'; // console.log($event.currentTarget);
@@ -669,5 +679,14 @@ export default {
 }
 .login {
   background: $home-header-login;
+}
+@media screen and (min-width: 1280px){ // 1280是英文状态下nav正常显示的最小宽度
+    .nav_box {
+        .ind_cen {
+            width: auto;
+            min-width: 1200px;
+            margin: 0 60px;
+        }
+   }
 }
 </style>

@@ -4,18 +4,26 @@
       <div class="homelayout">
         <h1>一键买币</h1>
         <p class="reference">
-          <icon class="log" name="logug" />参考单价：
-          <span>1233132 {{$t('CNY/USDT')}}</span>
+          <icon 
+class="log"
+                name="logug" />参考单价：
+          <span>1233132 {{ $t('CNY/USDT') }}</span>
         </p>
         <!-- <span class="tips">非最终交易单价，仅供参考</span -->
         <p class="price">
           <span @click="swietch()">按金额购买</span>|<span @click="swictch()">按数量购买</span>
         </p>
 
-        <br />
-        <number-input v-if="(count==1)" v-model="TransactionAmount" class="number-input" size="medium" placeholder="请输入金额" />
+        <br >
+        <number-input 
+v-if="(count==1)"
+                      v-model="TransactionAmount" 
+class="number-input" size="medium" placeholder="请输入金额" />
 
-        <number-input v-if="(count==2)" class="number-input" placeholder="请输入数量" />
+        <number-input 
+v-if="(count==2)"
+                      class="number-input" 
+placeholder="请输入数量" />
 
         <span class="posn">CNY</span>
         <h3 class="paymentmethod">选择付款方式</h3>
@@ -33,7 +41,7 @@
         </div>
         <p class="Transactiondetails">
           成交单价：
-          <span style="color: #FDA22D">{{active}}</span>
+          <span style="color: #FDA22D">{{ active }}</span>
         </p>
         <p class="Transactiondetails">
           成交数量：
@@ -41,9 +49,12 @@
         </p>
         <p class="Transactiondetails">
           成交总额：
-          <span>{{TransactionAmount}}</span>
+          <span>{{ TransactionAmount }}</span>
         </p>
-        <el-button v-if="btn" class="buttom" type="primary">
+        <el-button 
+v-if="btn"
+                   class="buttom" 
+type="primary">
           <span>购买USDT</span>
         </el-button>
         <el-button
@@ -59,73 +70,71 @@
   </div>
 </template>
 
-
 <script>
-import Vue from "vue";
-import axios from "axios";
-import service from "@/modules/service";
-import qs from "qs";
+import Vue from 'vue'
+import axios from 'axios'
+import service from '@/modules/service'
+import qs from 'qs'
 // import Tooltip from 'element-ui'
 // Vue.use(Tooltip)
 export default {
-  data() {
+  data () {
     return {
       count: 1,
       btn: true,
       index_via: 0,
       index_vib: 0,
       index_vic: 0,
-       TransactionAmount:0,
-      taldata: ["支付宝", "银行卡", "微信"],
+      TransactionAmount: 0,
+      taldata: ['支付宝', '银行卡', '微信'],
       active: 0,
       user_id: 941238,
-      currency: "BTC",
+      currency: 'BTC',
       by_cny: 50000,
       active_id: 10000
-    };
+    }
   },
-  created() {
-    this.item();
+  created () {
+    this.item()
 
     // this.getAllCoinTypes();
   },
   methods: {
-    swictch() {
-        this.TransactionAmount=0;
-      this.count = 2;
+    swictch () {
+      this.TransactionAmount = 0
+      this.count = 2
     },
-    swietch() {
-      this.count = 1;
-     
+    swietch () {
+      this.count = 1
     },
-    payHandle(item, index) {
+    payHandle (item, index) {
       //   this.active = index;
       if (index === 0) {
-        this.active = this.index_via;
+        this.active = this.index_via
       } else if (index === 1) {
-        this.active = this.index_vib;
+        this.active = this.index_vib
       } else if (index === 2) {
-        this.active = this.index_vic;
+        this.active = this.index_vic
       }
     },
-    item() {
+    item () {
       let data = {
         currency: this.currency
-      };
+      }
       axios.post(
-          "http://192.168.0.124:8889/otcactive/findMinactive",
-          qs.stringify(data),
-          {
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            }
+        'http://192.168.0.124:8889/otcactive/findMinactive',
+        qs.stringify(data),
+        {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
           }
-        )
+        }
+      )
         .then(res => {
-          this.index_via = res.data.data[0].otc_active.price;
-          this.index_vib = res.data.data[1].otc_active.price;
-          this.index_vic = res.data.data[2].otc_active.price;
-        });
+          this.index_via = res.data.data[0].otc_active.price
+          this.index_vib = res.data.data[1].otc_active.price
+          this.index_vic = res.data.data[2].otc_active.price
+        })
     }
     // getAllCoinTypes() {
     //   const param = {
@@ -138,7 +147,7 @@ export default {
     //   });
     // }
   }
-};
+}
 </script>
 <style  lang="scss" >
 @font-face {
@@ -369,4 +378,3 @@ export default {
   }
 }
 </style>
-

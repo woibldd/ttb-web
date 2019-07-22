@@ -132,9 +132,9 @@
             v-t="'footer_partners'"/>
           <div class="corp-wrap">
             <div class="corp-logo">
-              <span 
+              <span
                 class="link"
-                >
+              >
                 <img
                   class="logo cw"
                   src="~@/assets/copr-logo-cw.png">
@@ -189,7 +189,7 @@
         </div>
       </div>
     </div>
-  <div class="download-mask">
+    <div class="download-mask">
       <div class="flex">
         <div class="dl-icon">
           <img
@@ -218,7 +218,7 @@ import service from '@/modules/service'
 import responsiveMixin from '@/mixins/responsive'
 import MobileNav from '@/components/Mobile/MobileNav'
 import ixxFeature from '@/components/Mobile/ixx-feature.vue'
-    import utils from '@/modules/utils'
+import utils from '@/modules/utils'
 // import Kyc from '@/components/Mobile/Kyc'
 
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
@@ -269,16 +269,15 @@ export default {
           }
         }
       }
-    } ,
-  download(){
-      let url = location.href + 'app/ixx.apk'
+    },
+    download () {
+      let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
       if (utils.isIos()) {
-        url = `itms-services://?action=download-manifest&url=${location.href}app/IXX.plist`
+        url = `itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist`
       }
       window.open(url, '_blank')
+    }
 
-  }
-      
   },
   components: {
     MineSummary,
@@ -298,7 +297,7 @@ export default {
     } */
 </style>
 <style lang="scss" scoped>
-    
+
 // 下载浮层
 .download-mask {
     position: fixed;

@@ -11,7 +11,8 @@
         <div class="row__label">{{ $t('currency') }}</div>
         <div class="row__value">
           <el-select
-            v-model="selectCoin"
+            filterable
+            v-model="selectCoin" 
             @change="changeCoinType"
             value-key="currency">
             <el-option

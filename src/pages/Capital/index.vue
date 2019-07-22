@@ -188,14 +188,12 @@ export default {
       return sum.toString()
     },
     accountTotal() { 
-      let sum = this.$big(0)
-      debugger
+      let sum = this.$big(0) 
       sum = sum.plus(this.otcTotal).plus(this.tradingTotal).plus(this.contractTotal)
       return sum.toString()
     },
     ixTotal() {
-      let sum = this.$big(0)
-      debugger
+      let sum = this.$big(0) 
       sum = sum.plus(this.accountTotal).plus(this.walletTotal)
       return sum.toString()
     }
@@ -241,7 +239,7 @@ export default {
         if(!res.code && !!res.data) {
           console.log({data:res.data})
           this.walletTable = (res.data || []).map(item => {  
-            item.camount = this.$big(item.available).plus(item.withdrawing)
+            item.camount = this.$big(item.available).plus(item.withdrawing).plus(item.locking)
             item.estValue = this.getEstValue(item)
             return item
           }) 
