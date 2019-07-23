@@ -148,7 +148,9 @@ v-else>
             <router-link :to="{name:'fund'}">我的资产</router-link>
           </p>-->
           <div class="fund mr-30">
-            <icon name="fund"/>
+            <icon 
+              :name="fund"
+            />
             <span @click="openDefault('fund')">{{ $t('wallets_nav_asset') }}</span>
 
             <div class="dropdown-sub-menu">
@@ -268,6 +270,12 @@ export default {
       }
       return ''
     },
+    fund() { 
+      if (state.locale === 'zh-CN') {
+        return 'fund'
+      }
+      return 'fund-en'
+    },
     desentInfo () {
       let userInfo = this.state.userInfo
       if (userInfo) {
@@ -328,16 +336,18 @@ export default {
       actions.setUserInfo(null)
       utils.setSessionStorageValue('LoginStatus', 0)
       utils.setSessionStorageValue('markTime', 9999999999)
-      service.signout()
-      if (utils.getRouteMeta(this.$route, 'auth')) {
-        this.$router.push({
-          name: 'login'
-        })
-      }
-
-      this.$nextTick(() => {
-        location.reload()
+      service.signout().then(res => {
+        console.log({res})
       })
+      // if (utils.getRouteMeta(this.$route, 'auth')) {
+      //   this.$router.push({
+      //     name: 'login'
+      //   })
+      // }
+
+      // this.$nextTick(() => {
+      //   location.reload()
+      // })
     },
     clickStar ($event) {
       this.className = 'active'; // console.log($event.currentTarget);
@@ -596,7 +606,7 @@ export default {
     text-align: center;
     font-size: 12px;
     cursor: pointer;
-    z-index: 1;
+    z-index: 2;
     .rig {
       display: inline-block;
       transition: all 0.2s ease-in-out;
@@ -611,7 +621,7 @@ export default {
       width: 100%;
       height: auto;
       line-height: 40px;
-      padding-top: 27px;
+      padding-top: 17px;
       right: 0;
       position: absolute;
       display: none;
@@ -631,7 +641,7 @@ export default {
     }
     &:hover {
       .lang_box {
-        display: flex;
+        display: flex; 
       }
       .rig {
         transform: rotate(180deg);
@@ -669,5 +679,14 @@ export default {
 }
 .login {
   background: $home-header-login;
+}
+@media screen and (min-width: 1280px){ // 1280是英文状态下nav正常显示的最小宽度
+    .nav_box {
+        .ind_cen {
+            width: auto;
+            min-width: 1200px;
+            margin: 0 60px;
+        }
+   }
 }
 </style>

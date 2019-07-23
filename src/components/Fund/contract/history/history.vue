@@ -20,7 +20,7 @@
         {{ $t('order_history') }}
       </div>
        
-      <!-- <div class="currency-row">
+      <div class="currency-row" >
         <div class="c-999 mr-13">
           {{ $t('contract') }}
         </div>
@@ -33,9 +33,9 @@
             v-for="(item, idx) in pairList"
             :key="idx"
             :label="item.product_name +'/'+ item.currency_name"
-            :value="item.name"/>
+            :value="item.currency"/>
         </el-select>
-      </div> -->
+      </div>
     </div>
     <div
       class="table-wrapper"
@@ -225,7 +225,7 @@ export default {
   data () {
     return {
       pairList: [],
-      selectPair: 'FUTURE_BTCUSD',
+      selectPair: 'BTCUSD',
       tabName: 'history',
       tableData: [],
       page: 1, // page 都是从1 开始的,
@@ -265,23 +265,23 @@ export default {
     assignValue (item) {
       // return this.$big(item.amount).div(item.price).toFixed(4)
       return item.total;
-    },
-
+    }, 
     async getPairs () {
       let res = await service.getContractSymList()
       if (!res.code) {
         console.log({data: res.code})
         this.pairList = res.data.items
-        this.selectPair = this.pairList[0]
+        this.selectPair = this.pairList[0].currency
       }
     },
-    getData () {
-      const params = {
-        symbol: this.selectPair,
-        page: this.page,
-        size: this.size
+    getData (params) {
+      if (!params) {
+        params = {
+          currency: this.selectPair,
+          page: this.page,
+          size: this.size
+        }  
       }
-
       if (this.tabName === 'executed') {
         // 订单历史
         this.getOrderhistory(params)
@@ -294,7 +294,7 @@ export default {
       this.tabName = type
       this.page = 1
       const params = {
-        symbol: this.selectPair,
+        currency: this.selectPair,
         page: this.page,
         size: this.size
       }
@@ -325,12 +325,12 @@ export default {
       })
     },
     // 已成交
-    getContractTradeHistory () {
+    getContractTradeHistory (params) {
       this.isLoading = true 
-      const params = {
-        page: this.page,
-        size: 10
-      }
+      // const params = {
+      //   page: this.page,
+      //   size: 10
+      // }
       service.getContractTradeHistory(params).then(res => {
         this.tableData = res.data.data
         this.totalItems = res.data.total
@@ -340,6 +340,7 @@ export default {
       })
     },
     pairChange() {
+      console.log({test: this.pairList})
       this.getData()
     },
   },

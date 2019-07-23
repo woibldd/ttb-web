@@ -180,7 +180,7 @@ show_box
         <div class="aut_box">
           <!-- <div class="aut_lt"/> -->
           <div class="aut_rt">
-            <v-btn class="submit-btn" :label="'下一步'" :loading="loading" @click="submit"/>
+            <v-btn class="submit-btn" :label="$t('nextstep')" :loading="loading" @click="submit"/>
           </div>
           <div class="aut_rta"></div>
         </div>

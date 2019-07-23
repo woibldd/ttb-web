@@ -334,22 +334,7 @@
             class="icon icon-edit pointer"/> -->
           </span>
         </div>
-
-        <!--
-        <div class="risk-alert-value flex">
-          <p class="value split">0/200000 BTC ({{ $t('contract_action_button_up_r') }})
-            <i
-              class="iconfont strong pointer ml-6"
-              v-tooltip.top-end="{html: true, content: $t('contract_risk_limit_tips2'), classes: 'contract'}"
-            />
-          </p>
-          <p class="value">0/200000 BTC ({{ $t('contract_action_button_down_r') }})
-            <i
-              class="iconfont strong pointer ml-6"
-              v-tooltip.top-end="{html: true, content: $t('contract_risk_limit_tips2'), classes: 'contract'}"
-            />
-          </p>
-        </div>-->
+ 
       </div>
     </div>
     <!-- 资产划转modal -->
@@ -889,10 +874,13 @@ export default {
     },
     buyTipsButton() {
       if (this.isExtOrderType) {
-        let tag = this.currentOrderTypeExt.indexOf("win") > -1 ? "win" : "lose";
-        //console.log(this.currentOrderTypeExt, tag)
+        let tag = this.currentOrderTypeExt.indexOf("win") > -1 ? "win" : "lose"; 
         return this.$t(`contract_trigger_${tag}_buy`);
       }
+
+      // if (state.locale === 'en') {
+      //   return this.$t('contract_action_button_up')
+      // }
       return `${this.$t("contract_action_button_up")}/${this.$t(
         "contract_action_button_up_r"
       )}`;
@@ -902,6 +890,9 @@ export default {
         let tag = this.currentOrderTypeExt.indexOf("win") > -1 ? "win" : "lose";
         return this.$t(`contract_trigger_${tag}_sell`);
       }
+      // if (state.locale === 'en') {
+      //   return this.$t('contract_action_button_down')
+      // }
       return `${this.$t("contract_action_button_down")}/${this.$t(
         "contract_action_button_down_r"
       )}`;

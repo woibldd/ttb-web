@@ -1293,4 +1293,104 @@ export default{
       chain_info: 'https://etherscan.io/token/0xa4fb385820a9eef842a419e08f8540fd7d1bf6e8#balances' // 区块查询
     }
   },
+  ADA: {
+    'zh-CN': {
+      name: 'ADA',
+      full_name: '艾达币 ',
+      brief_info: '卡尔达诺是一个分散且公开的区块链，也是一个加密货币项目，而且是完全开源的。卡尔达诺正在开发一个智能合约平台，旨在提供比以前开发的任何协议更先进的功能。它是第一个从科学哲学和以研究为首驱使导向，进而演变而来的区块链平台。开发团队由全球专业工程师和研究人员组成。',
+      issue_time: '2017-10-02',
+      issue_all: '450 亿', // 发行总量
+      issue_circulation: '311.1248 亿', // 流通总量
+      token_price: '0.0026', // 众筹价格
+      whitepagger: 'https://whycardano.com', // 白皮书
+      office_website: 'https://www.cardanohub.org', // 官网
+      chain_info: 'https://cardanoexplorer.com' // 区块查询
+    },
+    'zh-HK': {
+      name: 'ADA',
+      full_name: '艾達幣 ',
+      brief_info: '卡爾達諾是一個分散且公開的區塊鏈，也是一個加密貨幣項目，而且是完全開源的。卡爾達諾正在開發一個智能合約平台，旨在提供比以前開發的任何協議更先進的功能。它是第一個從科學哲學和以研究為首驅使導向，進而演變而來的區塊鏈平台。開發團隊由全球專業工程師和研究人員組成。',
+      issue_time: '2017-10-02',
+      issue_all: '450 億', // 发行总量
+      issue_circulation: '311.1248 億', // 流通总量
+      token_price: '0.0026', // 众筹价格
+      whitepagger: 'https://whycardano.com', // 白皮书
+      office_website: 'https://www.cardanohub.org', // 官网
+      chain_info: 'https://cardanoexplorer.com' // 区块查询
+    },
+    'en': {
+      name: 'ADA',
+      full_name: 'ADA ',
+      brief_info: 'Cardano is a decentralised public blockchain and cryptocurrency project and is fully open source. Cardano is developing a smart contract platform which seeks to deliver more advanced features than any protocol previously developed. It is the first blockchain platform to evolve out of a scientific philosophy and a research-first driven approach. The development team consists of a large global collective of expert engineers and researchers.',
+      issue_time: '2017-10-02',
+      issue_all: '45 billion', // 发行总量
+      issue_circulation: '31.11 billion', // 流通总量
+      token_price: '0.0026', // 众筹价格
+      whitepagger: 'https://whycardano.com', // 白皮书
+      office_website: 'https://www.cardanohub.org', // 官网
+      chain_info: 'https://cardanoexplorer.com' // 区块查询
+    },
+    'ko': {
+      name: 'ADA',
+      full_name: '아이다 ',
+      brief_info: '블록체인 기반의 응용 플랫폼으로 금융 및 다양한 분야에 적용 가능 / 하스켈 프로그래밍 언어로 구현된 최초의 블록체인으로 향후 양자 컴퓨터 개발 완료에도 해킹에 대한 취약점을 보완 / 실물 자산에 대한 제휴에 적극적인 사업모델을 가지고 있음.',
+      issue_time: '2017-10-02',
+      issue_all: '45 billion', // 发行总量
+      issue_circulation: '31.11 billion', // 流通总量
+      token_price: '0.0026', // 众筹价格
+      whitepagger: 'https://whycardano.com', // 白皮书
+      office_website: 'https://www.cardanohub.org', // 官网
+      chain_info: 'https://cardanoexplorer.com' // 区块查询
+    }
+  },
+  PAN: {
+    'zh-CN': {
+      name: 'PAN',
+      full_name: '潘多拉',
+      brief_info: 'PAN作为潘多拉星球的通行证也是星球居民权益证明，PAN的发行总量恒定20亿，永不増发。潘多拉星球将大部分利润分配给PAN的持有者，同时PAN的持有者享有星球治理各类权益。潘多拉星球全球第一款区块链同性恋社交软件，潘多拉星球运用区块链技术解决目前中心化同性恋社交软件的诟病与痛点，目前中心化的同性恋社交软件，都存在用户隐私安全问题。用户需要牺牲自己创造的价值来获取相应的社交功能。潘多拉星球，基于EOS进行开发，分布式储存与点对点聊天，最大化保护星球居民隐私。token的激励机制，让星球居民获得自己应有的价值。',
+      issue_time: '2019-06-10',
+      issue_all: '20 亿', // 发行总量
+      issue_circulation: '2000 万', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://apelord.cn/images/pandla.pdf', // 白皮书
+      office_website: 'http://pandla.io/', // 官网
+      chain_info: 'https://eospark.com/account/depositofpan' // 区块查询
+    },
+    'zh-HK': {
+      name: 'PAN',
+      full_name: '潘多拉',
+      brief_info: 'PAN作為潘朵拉星球的通行證也是星球居民權益證明，PAN的發行總量恒定20億，永不増發。潘朵拉星球將大部分利潤分配給PAN的持有者，同時PAN的持有者享有星球治理各類權益。潘朵拉星球全球第一款區塊鏈同志社交軟件，潘朵拉星球運用區塊鏈科技解决現時中心化同志社交軟件的詬病與痛點，現時中心化的同志社交軟件，都存在用戶隱私安全問題。用戶需要犧牲自己創造的價值來獲取相應的社交功能。潘朵拉星球，基於EOS進行開發，分佈式儲存與點對點聊天，最大化保護星球居民隱私。token的激勵機制，讓星球居民獲得自己應有的價值。',
+      issue_time: '2019-06-10',
+      issue_all: '20 亿', // 发行总量
+      issue_circulation: '2000 万', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://apelord.cn/images/pandla.pdf', // 白皮书
+      office_website: 'http://pandla.io/', // 官网
+      chain_info: 'https://eospark.com/account/depositofpan' // 区块查询
+    },
+    'en': {
+      name: 'PAN',
+      full_name: 'PAN',
+      brief_info: 'PAN is the token of our project, also the only certificate of interest. The total issuance is 2 billion, and will never be increased. Pandla distributes most interests to the PAN holders. In the meanwhile, the PAN holders enjoy the many rights including management of planet. Pandla Planet, as the world\'s first blockchain gay social networking app，applies blockchain technology to solve the problems of present centralised gay social networking app. There are many privacy and security problems existing from those centralised gay social networking app where users passively sacrifice the value they created to get corresponding socializing function. Pandla Planet, R&D based on EOS, maximizes the protection of privacy of users with distributed storage and p2p chatting. Furthermore, the incentive mechanism of token also makes the users get their deserved values.',
+      issue_time: '2019-06-10',
+      issue_all: '2 billion', // 发行总量
+      issue_circulation: '20 million', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://apelord.cn/images/pandla.pdf', // 白皮书
+      office_website: 'http://pandla.io/', // 官网
+      chain_info: 'https://eospark.com/account/depositofpan' // 区块查询
+    },
+    'ko': {
+      name: 'PAN',
+      full_name: '판도라',
+      brief_info: '판도라 행성의 통행증이자 행성 주민 권익 증명인 판도 발행 총량이 20억 위안으로 절대 보고되지 않는다.판도라 행성은 대부분의 이윤을 팬의 소유자들에게 분배하고, 팬의 소유자들은 행성의 통치권을 누린다. 판도라의 지구 최초의 구분할련애자사교소프트웨어, 판도라의 별은 구분할련애자사교소프트웨어를 리용하여 현재 중심화동성애자사교소프트웨어의 비난과 통증을 해결하고 현재 중심화된 동성애자사교소프트웨어는 모두 사용자의 사생활안전문제가 존재한다.사용자는 자신이 창조한 가치를 희생하여 상응하는 사회적 기능을 획득해야 한다.판도라 별은 EOS에 기반한 개발로 분할저장과 지점 대 지점 대화를 통해 별주민의 프라이버시를 최대한 보호한다.토큰의 동기부여 시스템은 지구 주민들로 하여금 자신의 가치를 가지게 했다.',
+      issue_time: '2019-06-10',
+      issue_all: '2 billion', // 发行总量
+      issue_circulation: '20 million', // 流通总量
+      token_price: '--', // 众筹价格
+      whitepagger: 'http://apelord.cn/images/pandla.pdf', // 白皮书
+      office_website: 'http://pandla.io/', // 官网
+      chain_info: 'https://eospark.com/account/depositofpan' // 区块查询
+    }
+  },
 }

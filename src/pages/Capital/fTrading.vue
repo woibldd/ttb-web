@@ -92,6 +92,12 @@
             <!-- <span
               @click="showModal = true"
               class="my-fund-operate">{{ $t('account_exchange') }}</span>   -->
+            <span 
+              class="my-fund-operate"> 
+               <a href="javascript:;" class="menu-name" @click="routerTransFer(scope.row)">
+                  {{ $t('account_exchange') }}
+              </a>
+            </span>
             <router-link
               :to="{name: 'OTC'}"
               class="my-fund-operate">{{ $t('asset_trading') }}</router-link>
@@ -237,6 +243,14 @@
       )
     },
     methods: {
+      routerTransFer(item) {
+        this.$router.push({
+          path:'/fund/transfer',
+          query: {
+            currency: item.currency
+          }
+        })
+      },
       hideModal () {
         this.showModal = false
       },

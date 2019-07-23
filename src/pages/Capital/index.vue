@@ -239,7 +239,7 @@ export default {
         if(!res.code && !!res.data) {
           console.log({data:res.data})
           this.walletTable = (res.data || []).map(item => {  
-            item.camount = this.$big(item.available).plus(item.withdrawing)
+            item.camount = this.$big(item.available).plus(item.withdrawing).plus(item.locking)
             item.estValue = this.getEstValue(item)
             return item
           }) 

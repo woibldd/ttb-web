@@ -43,7 +43,7 @@
                   <li>
                     <div class="label">{{ $t('otc_current_index') }}</div>
                     <div class="content">
-                      <span class="text">{{ indexPrice || 0 | fixed(2) }} CNY</span>
+                      <span class="text">{{ indexPrice || 0 | fixed(2) }} {{legal_currency}}</span>
                     </div>
                   </li>
                   <li>
@@ -344,6 +344,7 @@ import service from '@/modules/service.js'
 import { state } from '@/modules/store.js'
 import vList from '@/components/OTC/vlist/vertical-table'
 import utils from '@/modules/utils.js'
+import otcComputed from '@/components/OTC/mixins/index.js'
 import _ from 'lodash'
 // import otcWatch from "@/mixins/otc-watcher.js"
 export default {
@@ -434,9 +435,7 @@ export default {
       balance: {},
     }
   },
-  // mixins: {
-  //   otcWatch
-  // },
+  mixins: [otcComputed],
   props: {
     active_id: {
       type: Number,
@@ -451,27 +450,7 @@ export default {
       default: false
     }
   },
-  computed: {
-    currency: {
-      get () {
-        return this.state.otc.currency
-      },
-      set (value) {
-        this.state.otc.currency = value
-      }
-    },
-    legal_currency: {
-      get () {
-        return state.otc.legal_currency
-      }
-    },
-
-    symbolInfo () {
-      return this.state.otc.symbolInfo
-    },
-    indexPrice () {
-      if (this.symbolInfo && this.symbolInfo.cny_rate) { return this.symbolInfo.cny_rate } else return 0
-    },
+  computed: { 
     titleText () {
       if (this.side === 1) {
         return 'otc_publish_buy_order'
@@ -495,10 +474,7 @@ export default {
           .mul(this.indexPrice || 0)
           .toFixed(2)
       }
-    },
-    isLogin () {
-      return state.userInfo !== null
-    },
+    }, 
     total () {
       return this.$big(this.amount || 0).mul(this.price || 0)
     },
@@ -513,18 +489,6 @@ export default {
         return '可用数量：' + plt
       }
     },
-    price_scale () {
-      if (!!this.symbolInfo) {
-        return this.symbolInfo.price_scale || 2
-      }
-      return 2
-    },
-    amount_scale() {
-      if (!!this.symbolInfo) {
-        return this.symbolInfo.amount_scale || 6
-      }
-      return 2
-    }
   },
   components: {
     vList
@@ -649,11 +613,10 @@ export default {
               this.awitFlag = false
             }
           }
-        } else {
+        } else { 
           if (this.$big(this.inputPrice).lt(this.symbolInfo.buy_price_one)) {
-            this.flag = true
-         
-              this.alertTitle =this.$t('otc_ziurec_15',{currency:this.currency,inputPrice:this.inputPrice,symbolInfo:this.symbolInfo.sell_price_one})
+            this.flag = true 
+              this.alertTitle =this.$t('otc_ziurec_15',{currency:this.currency,inputPrice:this.inputPrice,symbolInfo:this.symbolInfo.buy_price_one})
           // `您发布的出售${this.currency}的交易单，价格为${this.inputPrice}CNY低于买一价${ this.symbolInfo.buy_price_one}CNY，以该价格发布可能给您带来损失`
           } else {
             this.flag = false
@@ -777,13 +740,15 @@ export default {
       }
       ul {
         li {
-          margin: 0;
-          line-height: 40px;
+          margin: 15px 0;
+          //line-height: 40px;
           display: flex;
           .label {
+            display: flex;
+            align-items: center;
             flex: 100px 0 0 0;
             width: 100px;
-            margin-bottom: 15px;
+           // margin-bottom: 15px;
             font-size: 14px;
             font-family: MicrosoftYaHei;
             font-weight: 400;
@@ -791,9 +756,9 @@ export default {
           }
           .content {
             flex: 1;
+            line-height: 40px;
             .el-input__inner {
-              text-align: left;
-
+              text-align: left; 
             }
             .coadawm{
               height: 80px!important;;

@@ -11,6 +11,7 @@
         <div class="row__label">{{ $t('currency') }}</div>
         <div class="row__value">
           <el-select
+            filterable
             v-model="selectCoin"
             @change="changeCoinType"
             :placeholder="$t('please_choose')"
@@ -25,7 +26,7 @@
         </div>
       </div>
       <div class="fund-item-other mt-13 mb-23 withdraw-remain">
-        <span>{{ $t("withdraw_avlb") }}:  {{ myCoinInfo.available | fixed(8)  }}</span>
+        <span>{{ $t("withdraw_avlb") }}:  {{ myCoinInfo.available | fixed(8) }}</span>
         <span class="ml-29 mr-29">{{ $t("quota") }}: {{ myCoinInfo.quota }}</span>
         <router-link
           to="/profile/kyc/"
@@ -64,20 +65,22 @@
           <div class="withdraw-address">
             <el-autocomplete
               class="select-address"
-             v-model="selectItem"
+              v-model="selectItem"
               :fetch-suggestions="querySearch"
               @select="handleSelect"
               @blur="onBlur"
               :highlight-first-item="highlight"
-          cols="1" rows="1" style="vertical-align:top;outline:none;"
-            ></el-autocomplete>
+              cols="1" 
+rows="1" style="vertical-align:top;outline:none;"
+            />
           </div>
         </div>
       </div>
       <div
-        @click.prevent="addNewAddr"
         class="fund-item-other withdraw-new-address mt-14 mb-24 default">
-        <span class="add-icon mr-10">+</span>{{ $t("add_withdraw_addr") }}
+        <label @click.prevent="addNewAddr">
+          <span class="add-icon mr-10">+</span>{{ $t("add_withdraw_addr") }}
+        </label>
       </div>
       <!-- address_tag -->
       <div
@@ -118,7 +121,7 @@
               v-model="withdrawCount"
               @input='checkInput'
              >   -->
-             <number-input
+            <number-input
               class="amount-input"
               :scale="myCoinInfo.withdraw_scales"
               :max="Number(myCoinInfo.available)"
@@ -127,7 +130,8 @@
             />
             <span class="coin-type">
               <i> {{ selectCoin.currency }}</i>
-              <a @click="input_all" class="up-limit pointer ml-5">{{$t('transfer_all')}}</a>
+              <a @click="input_all" 
+class="up-limit pointer ml-5">{{ $t('transfer_all') }}</a>
             </span>
           </div>
           <!-- @input='checkInput' -->
@@ -229,7 +233,7 @@
           </div>
           <div class="layer__row mt-20">
             <span class="row__label">3.
-              <span v-html="$t('complete_verified')"></span>
+              <span v-html="$t('complete_verified')"/>
             </span>
             <span
               class="row__status"
@@ -269,10 +273,10 @@ export default {
       googleCode: '',
       memo: '',
       state,
-      myitem:'',
-      selectItem:'',
+      myitem: '',
+      selectItem: '',
       restaurants: [],
-      highlight:true,
+      highlight: true
     }
   },
   computed: {
@@ -320,7 +324,7 @@ export default {
       return !this.email_bound || !this.phone_bound || !this.all_bound
     }
   },
-  components: {vModal, countDown,},
+  components: {vModal, countDown },
   async created () {
     await actions.getKycLv()
     await actions.updateSession()
@@ -330,8 +334,8 @@ export default {
     this.getCoinAddress()
   },
   methods: {
-    onBlur(e) {
-      let arr =  this.restaurants.filter(item => item.value===this.selectItem)
+    onBlur (e) {
+      let arr = this.restaurants.filter(item => item.value === this.selectItem)
       if (arr.length === 0) {
         let obj = {
           value: this.selectItem,
@@ -339,13 +343,12 @@ export default {
           memo: ''
         }
         if (this.restaurants)
-          this.restaurants.push(obj)
+          {this.restaurants.push(obj)}
 
         this.selectItem = obj.value
         this.selectAddress = obj
         this.memo = ''
-      }
-      else {
+      } else {
         this.selectItem = arr[0].value
         this.selectAddress = arr[0]
         this.memo = arr[0].memo
@@ -353,7 +356,7 @@ export default {
     },
     checkInput () {
     },
-    input_all() {
+    input_all () {
       this.withdrawCount = this.myCoinInfo.available
     },
     clickVerifyRow (v) {
@@ -402,6 +405,7 @@ export default {
     },
     async changeCoinType (coin) {
       this.selectCoin = coin
+      this.selectItem = ''
       this.selectAddress = {
         address: '',
         memo: ''
@@ -420,7 +424,7 @@ export default {
     async getAllCoinTypes () {
       await service.getAllCoinTypes().then(res => {
         if (res && res.data) {
-          console.log({data:res.data})
+          console.log({data: res.data})
           this.allCoins = res.data.filter(c => c.withdrawable)
           if (this.$route.params.currency) {
             const currency = this.$route.params.currency.toUpperCase()
@@ -499,7 +503,7 @@ export default {
     },
     ensure () {
       if (this.disableBtn) {
-        utils.alert(this.$t('withdraw_tips1')) //请完善你的资料
+        utils.alert(this.$t('withdraw_tips1')) // 请完善你的资料
         return
       }
       if (this.$big(this.withdrawCount || 0).lt(this.$big(this.selectCoin.min_withdraw_amount))) {
@@ -527,24 +531,24 @@ export default {
       const url = '/fund/address/' + this.selectCoin.currency
       this.$router.push(url)
     },
-    querySearch(queryString, cb) {
-        var restaurants = this.restaurants;
-        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
+    querySearch (queryString, cb) {
+      var restaurants = this.restaurants
+        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants
         // 调用 callback 返回建议列表的数据
-        cb(results);
+        cb(results)
     },
-    createFilter(queryString) {
+    createFilter (queryString) {
       return (restaurant) => {
-        return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+        return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
       };
     },
-    handleSelect(item) {
-      //console.log(item);
+    handleSelect (item) {
+      // console.log(item);
       this.selectAddress = item
       this.memo = item.memo
-      console.log(this.selectAddress, this.memo);
+      console.log(this.selectAddress, this.memo)
     }
-  },
+  }
   // watch: {
   //   withdrawCount(newVal, oldVal) {
   //     let val = newVal
@@ -556,6 +560,6 @@ export default {
   //       val = oldVal
   //     }
   //   }
-  //}
+  // }
 }
 </script>

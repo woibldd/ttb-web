@@ -182,7 +182,8 @@ export default {
       unit: 'CNY',
       loading: true,
       hasInternal: false,
-      state
+      state,
+      coinList: {},
     }
   },
   computed: {
@@ -206,6 +207,7 @@ export default {
     }
   },
   async created () { 
+    await this.getCoins()
     this.updateHeaderLabel()
     this.getFundHistory(this.type)
     this.getAccountBalanceList()
@@ -256,8 +258,9 @@ export default {
       }
     },
     showCXID (row) {
-      if (row.txid) {
-        const url = utils.getBlockChainUrl(row.txid, 'tx', row.chain)
+      //console.log({row,cc: this.coinList})
+      if (!!row.txid && !!this.coinList[row.currency]) { 
+        const url = this.coinList[row.currency].scan_url.replace('${txid}',row.txid)
         window.open(url)
       }
     },
@@ -464,7 +467,16 @@ export default {
 
       this.operate = Object.assign({key: 'txid', title: this.$i18n.t('actions')}) 
       this.internalType = Object.assign({key: 'internal', title: this.$i18n.t('order_th_type')})
+    },
+    async getCoins() {
+      let res = await service.getCoins()
+      if (!res.code && !!res.data) {
+        res.data.map(item => {
+          this.coinList[item.currency] = item
+        })
+      }
     }
+
   },
   watch: {
     'state.locale' (v) {

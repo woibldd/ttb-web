@@ -4,7 +4,7 @@
       <p class="left-menu-title">
         <span class="icon icon-his"/>
         <span class="menu-title">{{ $t('history_material') }}</span>
-      </p>
+      </p> 
       <ul class="left-menu-list">
         <li class=""><router-link
           class="menu-name"
@@ -19,12 +19,12 @@
           target="_blank"
           active-class="active"
           href="https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360027994471">{{ $t('ensurance_contract_tutorial') }}</a></li>
-      </ul>
+      </ul> 
       <!-- 指数 -->
       <p class="left-menu-title mt-20">
         <span class="icon icon-index"/>
         <span class="menu-title">{{ $t('coin_trade_index') }}</span>
-      </p>
+      </p> 
       <ul class="left-menu-list">
         <li
           v-for="(pair, index) in coinIndexArray"
@@ -47,15 +47,15 @@
                 <li class="dropdown-item pl-34 pr-24">
                   <a
                     target="_blank"
-                    href="https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360027994431-BTC永续 指南"
-                    class="index__sub__link">{{ $t("ensurance_btc_future_tutorial") }}
+                    :href="tutorialUrl(pair)"
+                    class="index__sub__link">{{ $t("ensurance_btc_future_tutorial", {coin: $t("coin_"+pair)}) }}
                   </a>
                 </li>
                 <li class="dropdown-item pl-34 pr-24">
                   <a
                     target="_blank"
                     href="https://ixxcustomer.zendesk.com/hc/zh-cn"
-                    class="index__sub__link">{{ $t("ensurance_btc_future_rule") }}
+                    class="index__sub__link">{{ $t("ensurance_btc_future_rule", {coin: $t("coin_"+pair)})}}
                   </a>
                 </li>
               </ul>
@@ -75,6 +75,20 @@ export default{
       coinIndexArray: [
       ]
     }
+  },
+  methods: {
+    tutorialUrl (pair) {
+      if (pair === 'FUTURE_BTCUSD') {
+        return 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360027994431'
+      }
+      else if (pair === 'FUTURE_BHDUSD') {
+        return 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360030485092-BHD'
+      }
+      else {
+        return ''
+      }
+    }, 
+
   },
   async created () {
     let res = await service.getContractSymList()

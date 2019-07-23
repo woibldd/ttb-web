@@ -39,14 +39,11 @@
           >{{ $t('capital_record') }}</router-link>
         </span>
       </div>
-    </div>
-
-    <div v-if="one==1" 
-class="my-fund-content">
+    </div> 
+    <div v-if="one==1" class="my-fund-content">
       <div class="information">
         <icon name='information' />
-        <span >
-          {{ $t('otc_otutcol_16') }}        </span>
+        <span >{{$t('otc_otutcol_16')}}        </span>
       </div>
       <div class="fund-total">
         <div class="total__label">{{ $t('my_balance_equal') }}</div>
@@ -57,10 +54,28 @@ class="my-fund-content">
           v-if="plusMillionUsdt"
         >+{{ millionUsdtAmount }} USDT≈ {{ $big(total).plus($big(plusUsdtEst)).toString() }} {{ unit.name }}</div>
       </div>
-      <el-table :empty-text=" $t('no_data') " 
-:data="tableData" class="fund-coin-pool">
-        <el-table-column v-for="(hd, idx) in header" 
-:key="idx" :prop="hd.key" :label="hd.title">
+      <div>
+        <div class="pairs-search">
+          <div class="search-box">
+            <input
+              type="text"
+              @input="filterPair()"
+              v-model="search">
+            <icon
+              class="ml-5"
+              name="home-search"/>
+          </div>
+          <div class="ml-20">
+            <el-tooltip :content="tipContent" placement="bottom">
+              <el-checkbox 
+                v-model="hideSmall">{{ $t('fund_my_assets_hide')}}</el-checkbox> 
+            </el-tooltip>
+          </div>
+        </div> 
+      </div>
+      <el-table :empty-text=" $t('no_data') " :data="showList" class="fund-coin-pool">
+        <el-table-column v-for="(hd, idx) in header" :key="idx" :prop="hd.key" 
+          :label="hd.title">
           <template slot-scope="scope">
             <span v-if="hd.key === 'currency'">
               <icon :name="scope.row.currency"/>
@@ -70,8 +85,7 @@ class="my-fund-content">
                 v-tooltip.top-start="{html: true, content: $t('idt_tips'), classes: 'assets'}"
               >
                 {{ scope.row[hd.key] }}
-                <icon class="question" 
-name="question-n"/>
+                <icon class="question" name="question-n"/>
               </i>
 
               <i
@@ -80,8 +94,7 @@ name="question-n"/>
                 v-tooltip.top-start="{html: true, content: $t('dfd_tips'), classes: 'assets'}"
               >
                 {{ scope.row[hd.key] }}
-                <icon class="question" 
-name="question-n"/>
+                <icon class="question" name="question-n"/>
               </i>
               <i
                 v-else-if="scope.row[hd.key] === 'NEWOS'"
@@ -89,8 +102,7 @@ name="question-n"/>
                 v-tooltip.top-start="{html: true, content: $t('newos_tips'), classes: 'assets'}"
               >
                 {{ scope.row[hd.key] }}
-                <icon class="question" 
-name="question-n"/>
+                <icon class="question" name="question-n"/>
               </i>
               <i
                 v-else-if="scope.row[hd.key] === 'BNL'"
@@ -98,8 +110,7 @@ name="question-n"/>
                 v-tooltip.top-start="{html: true, content: $t('bnl_tips'), classes: 'assets'}"
               >
                 {{ scope.row[hd.key] }}
-                <icon class="question" 
-name="question-n"/>
+                <icon class="question" name="question-n"/>
               </i>
               <i v-else>{{ scope.row[hd.key] }}</i>
             </span>
@@ -116,14 +127,11 @@ name="question-n"/>
         >
           <template slot-scope="scope">
             <span
-              v-if="scope.row.currency === 'BTC'"
               @click="showModal = true"
-              class="my-fund-operate">
-              <router-link
-                class="menu-name"
-                tag="a"
-                :to="'/fund/transfer'">{{ $t('suvbanean') }}
-              </router-link>
+              class="my-fund-operate"> 
+               <a href="javascript:;" class="menu-name" @click="routerTransFer(scope.row)">
+                  {{ $t('suvbanean') }}
+              </a>
             </span>
             <router-link
               v-if="scope.row.depositable"
@@ -173,8 +181,7 @@ name="question-n"/>
                   v-model="lock_amount"
                 >
               </div>
-              <span class="maximum" 
-@click="setMax('lock')">{{ $t('maximum') }}</span>
+              <span class="maximum" @click="setMax('lock')">{{ $t('maximum') }}</span>
             </div>
             <v-btn
               @click="doLock"
@@ -211,8 +218,7 @@ name="question-n"/>
                   v-model="unlock_amount"
                 >
               </div>
-              <span class="maximum" 
-@click="setMax('unlock')">{{ $t('maximum') }}</span>
+              <span class="maximum" @click="setMax('unlock')">{{ $t('maximum') }}</span>
             </div>
             <div class="unlocking">{{ $t('unlocking') }}: {{ balance.unlocking }} IX</div>
             <v-btn
@@ -226,8 +232,7 @@ name="question-n"/>
         </div>
       </v-modal>
       <router-view/>
-      <transfer-modal :show-modal.sync="showModal" 
-@click="hideModal"/>
+      <transfer-modal :show-modal.sync="showModal" @click="hideModal"/>
     </div>
   </div>
 </template>
@@ -236,6 +241,7 @@ import service from '@/modules/service';
 import { state } from '@/modules/store';
 import utils from '@/modules/utils';
 import transferModal from '../contract/transfer-modal';
+import _ from 'lodash'
 
 const ExchangePairs = {
   BTC: 'BTC_USDT',
@@ -260,7 +266,7 @@ const MIN_AMOUNT_UNIT = 20000
 export default {
   name: 'MyFund',
   data () {
-    return {
+    return { 
       tableData: [],
       plusMillionUsdt: false,
       millionUsdtAmount: 1000000,
@@ -297,8 +303,10 @@ export default {
         // }
       ],
       unit: {},
-      rates: {}
-    }
+      rates: {},
+      search: "",
+      hideSmall: false,
+    };
   },
   components: {
     transferModal
@@ -314,6 +322,23 @@ export default {
     }
   },
   computed: {
+    showList() {
+      let list = this.tableData 
+      list =  _.filter(list, pair => { 
+        return pair.currency.toUpperCase().indexOf(this.search.toUpperCase()) > -1  
+      }) 
+      if (this.hideSmall) {  
+        list =  _.filter(list, pair => { 
+          if (this.unit.name === 'CNY'){
+            return this.$big(pair.estValue || 0).gt(50)
+          }
+          else {
+            return this.$big(pair.estValue || 0).gt(10)
+          }
+        }) 
+      }
+      return list
+    },
     showHistory () {
       return this.$route.name === 'history';
     },
@@ -388,6 +413,14 @@ export default {
     },
     myRemainTotal () {
       return (this.myPower.power || 0) - (this.myPower.amount || 0)
+    },
+    tipContent() {
+      if (this.unit.name === 'CNY') {
+        return '小于50CNY'
+      }
+      else {
+        return '小于10USD'
+      }
     }
   },
   async created () {
@@ -408,11 +441,22 @@ export default {
     dianjs (res) {
       this.one = res
     },
-    reset (type) {
-      this.blur(type)
-      this.unlock_amount = 0
-      this.lock_amount = 0
-      this.getIxBalance()
+    routerTransFer(item) {
+      this.$router.push({
+        path:'/fund/transfer',
+        query: {
+          currency: item.currency
+        }
+      })
+    }, 
+    filterPair () { 
+
+    }, 
+    reset(type) {
+      this.blur(type);
+      this.unlock_amount = 0;
+      this.lock_amount = 0;
+      this.getIxBalance();
     },
     hideModal () {
       this.showModal = false
@@ -530,10 +574,10 @@ export default {
       // return service.getAccountBalanceList().then(res => {
       return service.getAccountWalletList().then(res => {
         this.tableData = (res.data || []).map(item => {
-          item.rates = item.rates || {}
-          item.locking = this.$big(item.locking || 0).toString()
-          item.amount = this.$big(item.withdrawing)
-            .plus(this.$big(item.available))
+          item.rates = item.rates || {};
+          item.locking = this.$big(item.locking || 0).plus(item.withdrawing || 0).toString();
+          item.amount = this.$big(item.locking)
+            .plus(this.$big(item.available)) 
             .round(8, this.C.ROUND_DOWN)
             .toString()
           item.estValue = this.getEstValue(item)
@@ -543,7 +587,7 @@ export default {
           item.pairs = ExchangePairs[item.currency] || 'BTC_USDT';
           return item
         })
-      })
+      }) 
     },
     // getEstValue(item) {
     //   let res = this.$big(item.amount).times(
@@ -563,7 +607,7 @@ export default {
         if (currency === 'BTC') {
           res = this.$big(amount)
         } else {
-          if (this.$big(amount).gt(0)) {
+          if (this.rates[currency]) {
             res = this.$big(amount).times(this.rates[currency]['USD'] || 0).div(this.rates['BTC']['USD'])
           }
         }
@@ -605,7 +649,30 @@ export default {
 }
 </script>
 
+  
 <style lang="scss" scoped>
 @import './my.scss';
 
+</style>
+
+<style  lang="scss" >
+  // .assets-tip {
+  //   // padding: 0 10px;
+  //   // line-height: 25px;
+  //   // border-radius: 3px;
+  //   // box-shadow: 0px 2px 5px #999;
+  //     .tooltip-inner {
+  //       color: #23CED0;
+  //       background: rgba(211, 245, 246, .9); 
+  //       border-radius:4px;
+  //       padding: 6px 10px;
+  //       width: 130px;
+  //     }
+  //     .tooltip-arrow { 
+  //       height: 10px;
+  //       width: 10px;
+  //       background: red;
+  //       border-color: rgba(211, 245, 246, .9); 
+  //     }
+  // }
 </style>

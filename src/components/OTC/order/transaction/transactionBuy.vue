@@ -317,6 +317,7 @@ import processValue from '@/mixins/process-otc-value'
 import utils from '@/modules/utils.js'
 import countDown from '@/components/CountDown'
 import { state } from '@/modules/store'
+import otcComputed from '@/components/OTC/mixins/index.js'
 
 const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
 
@@ -530,15 +531,7 @@ export default {
       inputTarget: ''
     }
   },
-  computed: {
-    currency: {
-      get () {
-        return this.state.otc.currency
-      }
-    },
-    symbolInfo () {
-      return this.state.otc.symbolInfo
-    },
+  computed: { 
     sideTitle () {
       let title = ''
       if (this.option === 0) {
@@ -550,22 +543,7 @@ export default {
         title = `otc_confirm_cancel` // `确认取消`
       }
       return title
-    },
-    isLogin () {
-      return state.userInfo !== null
-    },
-    price_scale () {
-      if (!!this.symbolInfo) {
-        return this.symbolInfo.price_scale || 2
-      }
-      return 2
-    },
-    amount_scale() {
-      if (!!this.symbolInfo) {
-        return this.symbolInfo.amount_scale || 6
-      }
-      return 2
-    }
+    }, 
   },
   components: {
     vList,
@@ -800,9 +778,7 @@ export default {
       }
     }
   },
-  mixins: [
-    processValue
-  ]
+  mixins: [ processValue,otcComputed ]
 
 }
 </script>

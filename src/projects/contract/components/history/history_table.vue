@@ -100,7 +100,7 @@
             <div class="col__row mb-10">
               <span
                 class="label"
-                v-tooltip.top-center="{html: true, content: $t('contract_mark_price_tips_table'), classes: 'contract'}">{{ $t('contract_mark_price') }}</span> <span class="value">{{ cholding.markPrice  }}</span>
+                v-tooltip.top-center="{html: true, content: $t('contract_mark_price_tips_table'), classes: 'contract'}">{{ $t('contract_mark_price') }}</span> <span class="value">{{ cholding.markPrice  | round(cholding.pairInfo.price_scale || 2) }}</span>
             </div>
             <div class="col__row">
               <span
@@ -155,7 +155,7 @@
                 class="label"
                 v-tooltip.top-center="{html: true, content: $t('contract_result_yet_tips'), classes: 'contract'}">{{ $t('contract_result_yet') }}</span> <span
                   class="value"
-                  :class="{'color-up': cholding.realized > 0, 'color-down': cholding.realized < 0}">{{ cholding.realized | round(cholding.pairInfo.value_scale || 4) }}</span>
+                  :class="{'color-up': cholding.realized > 0, 'color-down': cholding.realized < 0}">{{ cholding.realized | fixed(cholding.pairInfo.value_scale || 4) }}</span>
             </div>
           </div>
           <!-- 平仓/市价全平 -->
@@ -194,6 +194,14 @@
                 ref='input_price'
                 v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}"
                 class="input-num mb-10"/> 
+               <!-- <number-input  
+                class="input-num mb-10"  
+                ref='input_price'
+                @focus="checkInput(cholding)"
+                :accuracy="cholding.pairInfo.accuracy"
+                v-model="cholding.unwindPrice"  
+                :scale="cholding.pairInfo.price_scale" 
+              /> -->
               <div
                 class="btn full"
                 @click.prevent="submitOrder('market', cholding)"
@@ -618,17 +626,27 @@ export default {
       //   }
       // }
     },
-    checkInput (cholding) { 
+    checkInput (cholding) {  
       cholding.changeUnwindPrice = true
-      if (cholding.unwindPrice){
+      // console.log({cholding})
+      let $oldValue = this.$big(cholding.unwindPrice || 0)
+      let $newValue = this.$big(cholding.unwindPrice || 0)
+      if (cholding.unwindPrice && cholding.currency === 'BTCUSD'){
         let accuracy = cholding.pairInfo.accuracy || 1
         let scale = cholding.pairInfo.price_scale || 4
         const minStep = Math.pow(10, -scale) * accuracy
-        let $newValue = this.$big(cholding.unwindPrice || 0)
         if (!$newValue.mod(minStep).eq(0)) {
           $newValue = $newValue.div(minStep).round(scale >= 1 ? scale - 1 : 0, 0).mul(minStep)
         }
-        cholding.unwindPrice = $newValue.toString()
+        if (!$oldValue.eq($newValue)){
+          cholding.unwindPrice = $newValue.toString()
+        }
+      }
+      else {
+        $newValue = this.$big(cholding.unwindPrice).round(cholding.pairInfo.price_scale || 2, 0)
+        if (!$oldValue.eq($newValue)){
+          cholding.unwindPrice = $newValue.toString()
+        }
       }
     },
     inputPriceOnfocus(){

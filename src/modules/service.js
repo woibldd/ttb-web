@@ -96,10 +96,12 @@ const service = {
     return request('user/register/email', data)
   },
   signout () {
+    debugger
     rmCache('session')
     rmCache('balanceList')
     state.pro.currency = null
     state.pro.product = null
+    console.log('signoutsignoutsignoutsignoutsignoutsignoutsignoutsignoutsignoutsignoutsignoutsignoutsignoutsignout')
     return request('user/logout')
   },
   async getBalanceByPair (...currencys) {
@@ -721,14 +723,15 @@ canbullWithdraw (param) {
           item.currency_scale = parseInt(item.price_scale, 10) || 0
           item.price_scale = parseInt(item.price_scale, 10) || 2
           if (item.currency === 'BTCUSD') {
-            item.value_scale = 4
+            item.value_scale = 4 
+            item.accuracy = item.accuracy || 5
           }
           else {
             item.value_scale = 8
+            item.accuracy = item.accuracy || 1
           }
           //item.value_scale = parseInt(item.value_scale, 10) || 4
           item.fee_rate = item.fee_rate || 0
-          item.accuracy = item.accuracy || 5
           if (item.name.indexOf('FUTURE_') < 0) {
             item.name = `FUTURE_${item.name.replace('_', '')}`
           }
@@ -809,8 +812,8 @@ canbullWithdraw (param) {
   transferContractFund (params) {
     return request('future/account/transfer', params)
   },
-  orderContract (params) {
-    return request('contract/order', params)
+  orderContract (params) { 
+    return getCache('c_orderContract', () => request('contract/order', params), 1e3) 
   },
   orderContractClose (params) {
     return request('contract/close', params)
@@ -920,7 +923,7 @@ canbullWithdraw (param) {
   },
   //获取币对信息
   getCurrencyList(params) {
-    return request('/future/account/currency_list',params)
+    return request('future/account/currency_list',params)
   },
 
    /**
