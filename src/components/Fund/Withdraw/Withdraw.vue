@@ -60,18 +60,18 @@
                 :label="item.address + (item.description ? '  -  ' + item.description : '')"
                 :value="item"/>
             </el-select>
-          </div> --> 
+          </div> -->
           <div class="withdraw-address">
             <el-autocomplete
               class="select-address"
              v-model="selectItem"
-              :fetch-suggestions="querySearch" 
+              :fetch-suggestions="querySearch"
               @select="handleSelect"
               @blur="onBlur"
               :highlight-first-item="highlight"
           cols="1" rows="1" style="vertical-align:top;outline:none;"
             ></el-autocomplete>
-          </div> 
+          </div>
         </div>
       </div>
       <div
@@ -118,7 +118,7 @@
               v-model="withdrawCount"
               @input='checkInput'
              >   -->
-             <number-input 
+             <number-input
               class="amount-input"
               :scale="myCoinInfo.withdraw_scales"
               :max="Number(myCoinInfo.available)"
@@ -161,6 +161,7 @@
         style="padding-left: 102px">
         <li>  {{ $t('withdraw_hint_delay') }}</li>
         <li>  {{ $t('withdraw_hint_check',{num: selectCoin.min_review_amount ,coin: selectCoin.currency}) }}</li>
+        <li>  {{ $t('watch_tips') }}</li>
       </ul>
 
     </div>
@@ -224,11 +225,11 @@
             <span
               class="row__status"
               @click="clickVerifyRow('PhoneBind')"
-              :class="{'done': phone_bound}">{{ phone_bound ? $t('done') : $t('to_bind') }}</span> 
+              :class="{'done': phone_bound}">{{ phone_bound ? $t('done') : $t('to_bind') }}</span>
           </div>
           <div class="layer__row mt-20">
-            <span class="row__label">3. 
-              <span v-html="$t('complete_verified')"></span> 
+            <span class="row__label">3.
+              <span v-html="$t('complete_verified')"></span>
             </span>
             <span
               class="row__status"
@@ -248,7 +249,7 @@ import vModal from '@/components/VModal.vue'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
 import countDown from '@/components/common/countdown-code-button'
-import { state, actions } from '@/modules/store' 
+import { state, actions } from '@/modules/store'
 
 export default {
   name: 'Withdraw',
@@ -320,7 +321,7 @@ export default {
     }
   },
   components: {vModal, countDown,},
-  async created () { 
+  async created () {
     await actions.getKycLv()
     await actions.updateSession()
     this.showLayerModal = !this.email_bound || !this.phone_bound || !this.all_bound
@@ -329,30 +330,30 @@ export default {
     this.getCoinAddress()
   },
   methods: {
-    onBlur(e) {   
+    onBlur(e) {
       let arr =  this.restaurants.filter(item => item.value===this.selectItem)
       if (arr.length === 0) {
         let obj = {
           value: this.selectItem,
-          address: this.selectItem, 
+          address: this.selectItem,
           memo: ''
         }
         if (this.restaurants)
-          this.restaurants.push(obj) 
- 
+          this.restaurants.push(obj)
+
         this.selectItem = obj.value
         this.selectAddress = obj
         this.memo = ''
       }
-      else { 
+      else {
         this.selectItem = arr[0].value
         this.selectAddress = arr[0]
         this.memo = arr[0].memo
       }
-    }, 
+    },
     checkInput () {
     },
-    input_all() { 
+    input_all() {
       this.withdrawCount = this.myCoinInfo.available
     },
     clickVerifyRow (v) {
@@ -450,7 +451,7 @@ export default {
       // .then(res => {console.log(res)})
       return res
     },
-    changeAddress (item) { 
+    changeAddress (item) {
       if (typeof item === 'string') {
         this.allAddress.splice(0, 0, {
           address: item,
@@ -470,7 +471,7 @@ export default {
         // email_code
         phone_code: this.phoneCode
       }
-      
+
       // eos 需要填memo
       if (this.selectCoin.memo_support) {
         if (this.memo) {
@@ -525,8 +526,8 @@ export default {
     addNewAddr () {
       const url = '/fund/address/' + this.selectCoin.currency
       this.$router.push(url)
-    }, 
-    querySearch(queryString, cb) { 
+    },
+    querySearch(queryString, cb) {
         var restaurants = this.restaurants;
         var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
         // 调用 callback 返回建议列表的数据
@@ -543,7 +544,7 @@ export default {
       this.memo = item.memo
       console.log(this.selectAddress, this.memo);
     }
-  }, 
+  },
   // watch: {
   //   withdrawCount(newVal, oldVal) {
   //     let val = newVal

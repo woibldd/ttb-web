@@ -2155,5 +2155,6 @@
 "bby_shise9":"Popular recommendation",
     "bby_shise10":"Deadline",
 "bidTitle": "Deposit&earn",
-"otc_placeholder_c": "Please enter the price you expect to buy"
+"otc_placeholder_c": "Please enter the price you expect to buy",
+"watch_tips": "Please ensure that deposit address is correct, if not will result in failure to deposit or assets can not be recovered ."
 }

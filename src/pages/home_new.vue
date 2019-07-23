@@ -1,12 +1,12 @@
 <template>
   <div class="page-home">
-    <div class="home2">
-      <k-slider
-        :banners="banners"
-        :swiper-option="swiperOption"/>
+    <!--<div class="home2">-->
+      <!--<k-slider-->
+        <!--:banners="banners"-->
+        <!--:swiper-option="swiperOption"/>-->
 
-    </div>
-    <!--<home-banner v-on:buy-handle=buySubmit />-->
+    <!--</div>-->
+    <home-banner :banner="banner1" :swipe-banner="notices"/>
     <div class="ind_txt">
       <div class="ind_cen">
         <div
@@ -196,6 +196,7 @@ export default {
     return {
       banners: [],
       notices: [],
+      banner1: [],
       swiperOption: {
         direction: 'horizontal',
         loop: true,
@@ -248,11 +249,14 @@ export default {
     },
     async getBanners () {
       const res = await service.getBanners()
+      console.log(res)
       if (!res.code) {
         let list = res.data
         if (list.length > 0) {
           this.banners = list.filter(b => b.slot === 1)
           this.notices = list.filter(b => b.slot === 2)
+          this.banner1 = list.filter(b => b.slot === 3)
+          console.log(this.banner1)
           if (this.notices.length > 3) {
             this.notices.splice(3)
           }
