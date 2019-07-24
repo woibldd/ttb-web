@@ -23,7 +23,7 @@ export default function () {
       'header_settings',
       'header_chart_type', //K线样式
       'header_indicators', //技术指标
-      'header_fullscreen_button', //全屏
+      //'header_fullscreen_button', //全屏
       'header_resolutions', //时间周期
       'header_compare',
       'header_undo_redo',
