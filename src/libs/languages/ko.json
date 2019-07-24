@@ -1157,7 +1157,7 @@
     "contract_expect_equal_price": "예상물가",
     "contract_diff_expect_force": "예상가격차이",
     "contract_lever_times": "레버리지 개수",
-    "contract_FUTURE_BTCUSD": "BTC계속유지", 
+    "contract_FUTURE_BTCUSD": "BTC계속유지",
     "contract_FUTURE_BHDUSD":"BHD계속유지",
     "contract_complete_deal": "완전거래",
     "contract_deal_price": "거래 가격",
@@ -1983,18 +1983,17 @@
 "bby_shise9":"대중의 추천",
 "bby_shise10":"기간",
 "bidTitle": "코인리윤",
-  
+
 "otc_order_trade": "조작",
 "pair_list_all": "전부",
 "pair_list_option": "절루 선택",
-"pair_list_new": "창신구역", 
+"pair_list_new": "창신구역",
 "done_verified": "완료",
 "otc_trans_time": "거래시간",
 "coin_FUTURE_BTCUSD":"BTC",
 "coin_FUTURE_BHDUSD":"BHD",
-
 "fund_my_assets_hide": "소액코인종류를 숨기다",
-"fund_my_assets_hide_tip": "작다", 
+"fund_my_assets_hide_tip": "작다",
 "trading_order_cancel_all": "전부철회",
 "otc_collection_update": "편집",
 "otc_placeholder_c": "당신이 예상한 구매 단가를 입력하세요",
@@ -2011,5 +2010,6 @@
 "otc_kvcec_11":"은행카드번호는 비여서는 안된다",
 "otc_kvcec_12":"보석계정은 비여서는 안된다",
 "otc_kvcec_13":"위챗계정은 비여서는 안된다",
-"otc_kvcec_14":"수납QR코드가 비어서는  안된다"
+"otc_kvcec_14":"수납QR코드가 비어서는  안된다",
+"watch_tips": "충전 주소가 정확히 일치하는지 확인하시고, 일치하지 않으면 충전 불능 또는 자산 회수에 실패할 수 있습니다."
 }

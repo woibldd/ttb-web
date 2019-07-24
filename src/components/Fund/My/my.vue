@@ -576,10 +576,8 @@ export default {
         this.tableData = (res.data || []).map(item => {
           item.rates = item.rates || {};
           item.locking = this.$big(item.locking || 0).plus(item.withdrawing || 0).toString();
-          item.amount = this.$big(item.withdrawing) 
-            .plus(item.locking)
-            .plus(this.$big(item.available))
-            .plus(item.locking)
+          item.amount = this.$big(item.locking)
+            .plus(this.$big(item.available)) 
             .round(8, this.C.ROUND_DOWN)
             .toString()
           item.estValue = this.getEstValue(item)
@@ -589,7 +587,7 @@ export default {
           item.pairs = ExchangePairs[item.currency] || 'BTC_USDT';
           return item
         })
-      })
+      }) 
     },
     // getEstValue(item) {
     //   let res = this.$big(item.amount).times(
