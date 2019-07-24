@@ -65,7 +65,7 @@
                 </dd>
               </dl>
             </template>
-            <template v-else>
+            <!-- <template v-else>
               <dl>
                 <dd class="cs">{{ item.currency }}</dd>
                 <dd>{{ item.name }}</dd>
@@ -83,7 +83,7 @@
                   <i class="el-icon-picture"/>
                 </dd>
               </dl>
-            </template>
+            </template> -->
           </div>
           <div class="btn">
             <el-switch
@@ -110,6 +110,21 @@
         ref="ruleForm"
         class="demo-ruleForm">
         <template v-if="type === 'add'">
+          <el-form-item
+            :label="'币种'"
+            prop='currency'>
+            <el-select
+              v-model="ruleForm.currency"
+              style="width: 100%;"
+              size="small">
+              <el-option
+                value="CNY"
+                :label="this.$t('CNY')"/>
+              <el-option
+                value="SGD"
+               :label="this.$t('SGD')"/> 
+            </el-select>
+          </el-form-item>
           <el-form-item
             :label="this.$t('collection')"
             prop="payment_type">
@@ -268,7 +283,7 @@ export default {
         alipay_account: '',
         weChat_account: '',
         collection_img: '',
-        currency: ''
+        currency: 'CNY'
       },
       currency: 'CNY',
       dropList: [],
@@ -348,8 +363,10 @@ export default {
     },
     bankHandle (code) {
       let codeName = code
+      let currency = this.ruleForm.currency 
       this.$refs['ruleForm'].resetFields()
       this.ruleForm.payment_type = codeName
+      this.ruleForm.currency = currency
     },
     uploadStart ({type}) {
     },
@@ -556,30 +573,28 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
-  .inputc{
-
-
+  .inputc{ 
     -webkit-appearance: none;
-background-color: #FFF;
-background-image: none;
-border-radius: 4px;
-border: 1px solid #DCDFE6;
+    background-color: #FFF;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #DCDFE6;
     border-top-color: rgb(220, 223, 230);
     border-right-color: rgb(220, 223, 230);
     border-bottom-color: rgb(220, 223, 230);
     border-left-color: rgb(220, 223, 230);
--webkit-box-sizing: border-box;
-box-sizing: border-box;
-color: #606266;
-display: inline-block;
-font-size: inherit;
-height: 32px;
-line-height: 40px;
-outline: 0;
-padding: 0 15px;
--webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-width: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 32px;
+    line-height: 40px;
+    outline: 0;
+    padding: 0 15px;
+    -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    width: 100%;
   }
   .inputc:hover {
     border-color: #C0C4CC;
@@ -618,9 +633,10 @@ width: 100%;
       .add_collection {
         position: absolute;
         right: 0;
-        padding-left: 30px;
-        color: $primary;
         top: 0;
+        padding-left: 30px;
+        color: $primary; 
+        cursor: pointer;
       }
 
       span, .cs {
@@ -672,5 +688,8 @@ width: 100%;
         }
       }
     }
+  }
+  .el-form-item {
+    margin-bottom: 0;
   }
 </style>

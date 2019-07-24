@@ -30,12 +30,12 @@
             v-model="local.hideOthers">
           {{ $t('hide_others', {pair: pair}) }}
         </span>
-        <!-- <a
+        <a
           v-if="tab === 'active'"
           @click.prevent="cancelAll"
           class="">
           {{ $t('trading_order_cancel_all')}}
-        </a> -->
+        </a>
         <a
           @click.prevent="update"
           class="header-btn btn">

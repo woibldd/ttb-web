@@ -1941,5 +1941,7 @@
   "fund_my_assets_hide": "隱藏小額幣種",
   "fund_my_assets_hide_tip": "小於",
   "otc_collection_update": "編輯",
-  "watch_tips": "請認真核對充幣地址是否正確壹致，如果不壹致將導致無法成功充值或資產不可找回"
+  "watch_tips": "請認真核對充幣地址是否正確壹致，如果不壹致將導致無法成功充值或資產不可找回",
+    
+  "contract_FUTURE_ETHUSD":"ETH永續"
 }

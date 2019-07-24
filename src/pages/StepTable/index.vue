@@ -158,18 +158,18 @@
                   <div
                     class="cur"
                     :style="{color: item.side === 1 ? '#23C88B' : '#F24E4D'}">
-                    <p>/CNY</p>
+                    <p>/{{item.currency_type}}</p>
                     {{ item.currency }}
                   </div>
                 </div>
                 <dl>
                   <dt>
-                    <em>￥</em>
+                    <em>{{ getCurrencySymbol(item.currency_type) }}</em>
                     <span>{{ item.total }}</span>
                   </dt>
                   <dd>
                     {{ $t('otc_trans_idjg') }}：
-                    <span>{{ '¥' + item.price }}</span>
+                    <span>{{ getCurrencySymbol(item.currency_type) + item.price }}</span>
                   </dd>
                   <dd>
                     {{ $t('otc_trans_idsl') }}：
@@ -182,7 +182,7 @@
                     </dd>
                     <dd>
                      {{$t('otc_seiitm_10')}}：
-                      <span>{{ '¥' + item.total }}</span>
+                      <span>{{ getCurrencySymbol(item.currency_type) + item.total }}</span>
                     </dd>
                   </template>
                 </dl>
@@ -561,6 +561,12 @@ export default {
   //   }
   // },
   methods: {
+    getCurrencySymbol(type) {
+      return {
+        "CNY": "￥",
+        "SGD": "S$",
+      }[type]
+    },
     compareDown (property) {
       return function (a, b) {
         return a[property] - b[property]

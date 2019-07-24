@@ -29,10 +29,10 @@
       </div>
       <div class="tab-right pull-right" style="margin-top:-5px!important;" >
         <label  class='label'>{{$t('otc_legal_currency')}}</label> 
-        <span class="el-dropdown-link currency">
+        <!-- <span class="el-dropdown-link currency">
           {{legal_currency}} 
-        </span>
-        <!-- <el-dropdown @command="changeCoin">
+        </span> -->
+        <el-dropdown @command="changeCoin">
           <span class="el-dropdown-link currency">
             {{legal_currency}}<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
@@ -45,7 +45,7 @@
               {{item.name}}
             </el-dropdown-item> 
           </el-dropdown-menu>
-        </el-dropdown> -->
+        </el-dropdown>
         <button
           class="btn"
           @click="openSideBar()"

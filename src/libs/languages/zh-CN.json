@@ -2107,7 +2107,9 @@
     "trading_order_cancel_all": "撤销全部",
     "otc_collection_update": "编辑",
     "otc_placeholder_c": "请输入您预期购买单价",
-    "watch_tips": "请认真核对充币地址是否正确一致，如果不一致将导致无法成功充值或资产不可找回"
+    "watch_tips": "请认真核对充币地址是否正确一致，如果不一致将导致无法成功充值或资产不可找回",
+    
+    "contract_FUTURE_ETHUSD":"ETH永续"
 
   }
 

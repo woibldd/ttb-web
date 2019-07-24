@@ -132,7 +132,7 @@ const service = {
     }, 0)
   },
   removeAllOrder () {
-    return request('order/removeall')
+    return request('order/remove_all', {site: 2})
   },
   queryOrder ({ id, finished }) {
     if (finished) {
@@ -1111,8 +1111,8 @@ canbullWithdraw (param) {
      * collection_img} params
      * payment_type 收款方式 1-银行卡 2-支付宝 3-微信支付
      */
-    addOtcCollection(params) {
-        return request('otc/account/collection/add', params)
+    addOtcCollection(params) { 
+        return getCache('c_otc_collection_add', () => request('otc/account/collection/add', params), 1e3)
     },
     orderBind(params) {
         return request('otc/order/bind', params)

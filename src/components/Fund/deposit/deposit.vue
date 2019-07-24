@@ -23,7 +23,7 @@
           </el-select>
         </div>
       </div>
-      <div class="fund-item-other mb-14">
+      <div class="fund-item-other mb-14 coin-list">
         <span
           :class="['quick-btn mb-10 mr-10', selectCoin.currency === c.currency && 'selected']"
           @click="quickSelectCoin(c)"
