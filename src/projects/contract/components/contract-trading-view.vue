@@ -122,82 +122,95 @@ export default {
           }
         );
  
-        // local.lineType = 1 //默认蜡烛线
-        // let resolutions = document.createElement('div') //时间周期菜单
-        // //时间周期下拉菜单
-        // widget.btnFS = widget.createButton().on("click", (e, vm) => {
-        //   let element = e.srcElement || e.target;
-        //   if(element.tagName === 'SPAN') {
-        //     element = element.parentElement.parentElement
-        //   }
-        //   else if(element.tagName === 'DIV' && !element.classList.contains('button')){
-        //     element = element.parentElement
-        //   } 
-        //   let cls = element.classList;
-        //   if (!cls.contains("selected")) {
-        //     element.classList.add("selected"); 
-        //   } else {
-        //     element.classList.remove("selected");  
-        //   }   
-        // }) 
-        // .append(resolutions) 
-        // widget.btnFS.addClass('charts-popup-d')
-        // let span = document.createElement('span')
-        // span.innerText = '1分'
-        // resolutions.appendChild(span) 
-  
-        // let list = ['1', '3', '5', '15', '30', '60', '120', '240', '360', '720',  '1D', '1W', '1M']  
-        // let ul = document.createElement('ul')
-        // let lia = document.createElement('li')
-        // lia.innerText = utils.$i18n.t("tradingview_line") //分时线
-        // lia.addEventListener('click', function() {  
-        //   widget.chart().setResolution('1', null); //周期切换到一分钟
-        //   local.lineType = widget.chart().chartType(); //记录当前的K线样式
-        //   widget.chart().setChartType(2); //K线样式切換到线形图 
-        //   widget.chart().setEntityVisibility(ida, false); //隐藏7 日平均线
-        //   widget.chart().setEntityVisibility(idb, false); //隐藏30 日平均线
-        //   widget.chart().setEntityVisibility(idc, false); //隐藏60 日平均线
-        //   resolutions.parentElement.classList.remove('selected')
-        //   span.innerText = lia.innerText
-        // })
-        // ul.appendChild(lia) 
 
-        // list.map((item) => {
-        //   let li = document.createElement('li')
-        //   let text = ''
-        //   if (item === '1D') {
-        //     li.innerText = '1 日' 
-        //   } else if(item === '1W') {
-        //     li.innerText = '1 周' 
-        //   } else if(item === '1M') {
-        //     li.innerText = '1 月' 
-        //   } else if (!!Number(item) && Number(item) < 60) { 
-        //     li.innerText = item + '分'
-        //   } else if (!!Number(item)) {
-        //     li.innerText = item / 60 + '小时' 
-        //   }  
-        //   li.addEventListener('click', function() {   
-        //     widget.chart().setResolution(item, null); //周期切换到一分钟 
-        //     resolutions.parentElement.classList.remove('selected')
-        //     if (!!local.lineType) {
-        //       widget.chart().setChartType(local.lineType);
-        //     }
-        //     widget.chart().setEntityVisibility(ida, true); //显示7 日平均线
-        //     widget.chart().setEntityVisibility(idb, true); //显示30 日平均线
-        //     widget.chart().setEntityVisibility(idc, true); //显示60 日平均线
-        //     span.innerText = li.innerText
-        //   })
-        //   ul.appendChild(li)
-        // })
-        // resolutions.appendChild(ul) 
+
+        let [fs,zb,ys] = [0,0,0]
+        local.lineType = 1 //默认蜡烛线
+        let resolutions = document.createElement('div') //时间周期菜单
+        //时间周期下拉菜单
+        widget.btnFS = widget.createButton().on("click", (e, vm) => {
+          let element = e.srcElement || e.target;
+          if(element.tagName === 'SPAN') {
+            element = element.parentElement.parentElement
+          }
+          else if(element.tagName === 'DIV' && !element.classList.contains('button')){
+            element = element.parentElement
+          } 
+          let cls = element.classList;
+          if (!cls.contains("selected")) {
+            
+            widget.closePopupsAndDialogs() 
+            element.classList.add("selected"); 
+          } else {
+            fs = 0
+            element.classList.remove("selected");  
+          }   
+        }) 
+        .append(resolutions) 
+        widget.btnFS.addClass('charts-popup-d')
+        let span = document.createElement('span')
+        span.innerText = '1分'
+        resolutions.appendChild(span) 
+  
+        let list = ['1', '3', '5', '15', '30', '60', '120', '240', '360', '720',  '1D', '1W', '1M']  
+        let ul = document.createElement('ul')
+        let lia = document.createElement('li')
+        lia.innerText = utils.$i18n.t("tradingview_line") //分时线
+        lia.addEventListener('click', function() {  
+          widget.chart().setResolution('1', null); //周期切换到一分钟
+          local.lineType = widget.chart().chartType(); //记录当前的K线样式
+          widget.chart().setChartType(2); //K线样式切換到线形图 
+          widget.chart().setEntityVisibility(ida, false); //隐藏7 日平均线
+          widget.chart().setEntityVisibility(idb, false); //隐藏30 日平均线
+          widget.chart().setEntityVisibility(idc, false); //隐藏60 日平均线
+          resolutions.parentElement.classList.remove('selected')
+          fs = 0
+          span.innerText = lia.innerText
+        })
+        ul.appendChild(lia)  
+        list.map((item) => {
+          let li = document.createElement('li')
+          let text = ''
+          if (item === '1D') {
+            li.innerText = '1 日' 
+          } else if(item === '1W') {
+            li.innerText = '1 周' 
+          } else if(item === '1M') {
+            li.innerText = '1 月' 
+          } else if (!!Number(item) && Number(item) < 60) { 
+            li.innerText = item + '分'
+          } else if (!!Number(item)) {
+            li.innerText = item / 60 + '小时' 
+          }  
+          li.addEventListener('click', function() {   
+            widget.chart().setResolution(item, null); //周期切换到一分钟 
+            resolutions.parentElement.classList.remove('selected') 
+            fs = 0
+            if (!!local.lineType) {
+              widget.chart().setChartType(local.lineType);
+            }
+            widget.chart().setEntityVisibility(ida, true); //显示7 日平均线
+            widget.chart().setEntityVisibility(idb, true); //显示30 日平均线
+            widget.chart().setEntityVisibility(idc, true); //显示60 日平均线
+            span.innerText = li.innerText
+          })
+          ul.appendChild(li)
+        })
+        resolutions.appendChild(ul) 
        
-        // // .append(utils.$i18n.t("tradingview_line")) 
-        // widget.btnIndicator = widget.createButton().on("click", (e, vm) => {
-        //   widget.chart().executeActionById("insertIndicator") //技术指标
-        // }).append('技术指标')
-        // widget.btnProperties = widget.createButton().on("click", (e, vm) => { 
-        //   widget.chart().executeActionById("chartProperties") //样式设置 
-        // }).append('样式设置')
+        // .append(utils.$i18n.t("tradingview_line")) 
+        widget.btnIndicator = widget.createButton().on("click", (e, vm) => {
+          //隐藏周期列表
+          resolutions.parentElement.classList.remove('selected')  
+          widget.closePopupsAndDialogs() 
+          widget.chart().executeActionById("insertIndicator") //技术指标
+        }).append('技术指标')
+        widget.btnProperties = widget.createButton().on("click", (e, vm) => { 
+          //隐藏周期列表
+          resolutions.parentElement.classList.remove('selected') 
+          widget.closePopupsAndDialogs() 
+          widget.chart().executeActionById("chartProperties") //样式设置 
+        }).append('样式设置')
 
 
         // MACD
