@@ -6,7 +6,7 @@
         <!--:swiper-option="swiperOption"/>-->
 
     <!--</div>-->
-    <home-banner :banner="banner1" :swipe-banner="notices"/>
+    <home-banner :banner="banner1" :swipe-banner="notices1"/>
     <div class="ind_txt">
       <div class="ind_cen">
         <div
@@ -197,12 +197,13 @@ export default {
       banners: [],
       notices: [],
       banner1: [],
+      notices1: [],
       swiperOption: {
         direction: 'horizontal',
         loop: true,
         autoplay: 1000,
         paginationType: 'fraction',
-        pagination: '.swiper-pagination',
+        pagination: '.swiper-pagination'
       },
       hasNewNotice: false,
       pairsHead: [
@@ -213,7 +214,7 @@ export default {
         {key: 'homechart_24h_h', name: this.$t('homechart_24h_h')},
         {key: 'homechart_24h_v', name: this.$t('homechart_24h_v')},
         {key: 'actions', name: this.$t('actions')}
-      ],
+      ]
     }
   },
   components: {
@@ -256,7 +257,7 @@ export default {
           this.banners = list.filter(b => b.slot === 1)
           this.notices = list.filter(b => b.slot === 2)
           this.banner1 = list.filter(b => b.slot === 3)
-          console.log(this.banner1)
+          this.notices1.push(this.notices[0])
           if (this.notices.length > 3) {
             this.notices.splice(3)
           }

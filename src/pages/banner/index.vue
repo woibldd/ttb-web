@@ -13,7 +13,7 @@
       <swiper-slide>
         <div class="normal-item-list" v-for="(item, index) in swipeBanner" :key="index">
           <a :href="item.url" target="_blank">
-            <img :src="item.picture">
+            <img :src="item.picture" style="border-radius: 8px;border:1px solid #01393c">
           </a>
         </div>
       </swiper-slide>
@@ -48,11 +48,9 @@ export default {
         }
       ],
       swiperOption: {
-        slidesPerView: 1,
         spaceBetween: 30,
         autoplay: true,
-        speed: 600,
-        loop: true,
+        speed: 500,
         pagination: {
           el: '.swiper-pagination',
           clickable: true
@@ -143,7 +141,7 @@ export default {
 
         .tips {
           text-align: center;
-          color: #02FFFF;
+          color: #01393c;
           font-size: 14px;
           vertical-align: middle;
 
