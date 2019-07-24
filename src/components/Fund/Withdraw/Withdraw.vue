@@ -70,7 +70,7 @@
               @select="handleSelect"
               @blur="onBlur"
               :highlight-first-item="highlight"
-              cols="1" 
+              cols="1"
 rows="1" style="vertical-align:top;outline:none;"
             />
           </div>
@@ -130,7 +130,7 @@ rows="1" style="vertical-align:top;outline:none;"
             />
             <span class="coin-type">
               <i> {{ selectCoin.currency }}</i>
-              <a @click="input_all" 
+              <a @click="input_all"
 class="up-limit pointer ml-5">{{ $t('transfer_all') }}</a>
             </span>
           </div>
@@ -165,7 +165,7 @@ class="up-limit pointer ml-5">{{ $t('transfer_all') }}</a>
         style="padding-left: 102px">
         <li>  {{ $t('withdraw_hint_delay') }}</li>
         <li>  {{ $t('withdraw_hint_check',{num: selectCoin.min_review_amount ,coin: selectCoin.currency}) }}</li>
-        <li>  {{ $t('watch_tips') }}</li>
+        <li v-if="selectCoin.currency === 'EOS'">  {{ $t('watch_tips') }}</li>
       </ul>
 
     </div>

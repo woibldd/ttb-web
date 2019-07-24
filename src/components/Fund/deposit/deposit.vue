@@ -12,7 +12,7 @@
         <div class="row__value">
           <el-select
             filterable
-            v-model="selectCoin" 
+            v-model="selectCoin"
             @change="changeCoinType"
             value-key="currency">
             <el-option
@@ -93,7 +93,7 @@
         <li> {{ $t('deposit_hint_addr', {coin: selectCoin.currency}) }}</li>
         <li> {{ $t('deposit_hint_confirm',{confirm: selectCoin.min_confirm, coin: selectCoin.currency}) }}</li>
         <li v-if="selectCoin.memo_support">{{ $t('eos_deposit_tip_security_third') }}</li>
-        <li>  {{ $t('watch_tips') }}</li>
+        <li v-if="selectCoin.currency === 'EOS'">  {{ $t('watch_tips') }}</li>
       </ul>
     </div>
     <remember-alert

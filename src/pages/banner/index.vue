@@ -8,22 +8,6 @@
               <img :src="item.picture" style="border: 1px solid #01CED1;border-radius: 8px;height: 124px;width: 266px;overflow: hidden;zoom: 1;">
             </a>
           </div>
-          <!--<div class="item-list-banner">-->
-            <!--<img src="./img/1.png"-->
-                 <!--alt="">-->
-          <!--</div>-->
-          <!--<div class="item-list-banner">-->
-            <!--<img src="./img/2.png"-->
-                 <!--alt="">-->
-          <!--</div>-->
-          <!--<div class="item-list-banner">-->
-            <!--<img src="./img/3.png"-->
-                 <!--alt="">-->
-          <!--</div>-->
-          <!--<div class="item-list-banner">-->
-            <!--<img src="./img/4.png"-->
-                 <!--alt="">-->
-          <!--</div>-->
         </div>
       </swiper-slide>
       <swiper-slide>
