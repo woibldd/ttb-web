@@ -1068,4 +1068,6 @@ export default {
       color: #c9a96c
     }
   }
+
+  
 </style>

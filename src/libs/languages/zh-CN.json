@@ -1164,6 +1164,7 @@
     "contract_undeal_amount":"未成交数量",
     "contract_deal_type":"成交类型",
     "contract_assign_time":"委托时间",
+    "order_th_capedasda": "委托单价",
     "order_th_capeaxcvb": "委托数量/成交数量",
     "contract_all_dealed":"完全成交",
     "order_th_capehjiky": "委托金额/成交金额",

@@ -1829,7 +1829,7 @@
 "otc_close": "closed",
 "otc_confirm_cancel": "Confirm Cancel",
 "otc_order_info": "Order Information",
-"otc_active_id": "order number",
+"otc_active_id": "Order number",
 "otc_quota": "single limit",
 "otc_currency": "Currency",
 "otc_price": "Unit Price (%{legal_currency})",
@@ -1896,8 +1896,8 @@
 
 
 "order_th_capedasda": "Order price",
-"order_th_capeaxcvb": "Number of orders/transactions",
-"order_th_capehjiky": "Order amount/Executed amount",
+"order_th_capeaxcvb": "Number of orders/ transactions",
+"order_th_capehjiky": "Order amount/ Executed amount",
 "order_th_capeqqewc": "Release time",
 "otc_sidees1": "Waiting for payment",
 "otc_sidees2": " Cancelled by buyer",
