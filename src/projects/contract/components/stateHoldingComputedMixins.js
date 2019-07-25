@@ -77,8 +77,7 @@ export default {
     //   return holding
     // },
     holdingList() {
-      let list = this.state.ct.holdingList
-      console.log('6666666666666666666666666666666666666666666666666666666666666666666666')
+      let list = this.state.ct.holdingList 
       let pairInfoList = this.state.ct.pairInfoList
       list = list.map((holding) => {
         if (holding) {
@@ -105,7 +104,7 @@ export default {
         let amount = holding.holding
         let currency = holding.currency
         let price = holding.price
-        console.log({ lastPrice, markPrice, mul, price })
+        // console.log({ lastPrice, markPrice, mul, price })
 
         holding.product_name = pairInfo.product_name
         holding.value_scale = pairInfo.value_scale || 4
@@ -115,7 +114,7 @@ export default {
         // holding.markPrice = markPrice
         Vue.set(holding, 'lastPrice', lastPrice)
         Vue.set(holding, 'markPrice', markPrice)
-        console.log(holding, 'vue-set')
+        // console.log(holding, 'vue-set')
         holding.unrealized = "0"
         holding.unrealizedlp = "0"
         holding.roe = "0"

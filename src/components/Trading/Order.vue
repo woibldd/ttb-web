@@ -31,7 +31,7 @@
           {{ $t('hide_others', {pair: pair}) }}
         </span>
         <a
-          v-if="tab === 'active'"
+          v-if="tab === 'active'  && local.hideOthers"
           @click.prevent="cancelAll"
           class="">
           {{ $t('trading_order_cancel_all')}}

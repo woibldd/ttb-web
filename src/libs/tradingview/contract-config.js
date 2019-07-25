@@ -45,7 +45,7 @@ export default function () {
       // 'charting_library_debug_mode',
       // 'seconds_resolution'
     ],
-    custom_css_url: 'ckline.css',
+    custom_css_url: 'cklinev1.css',
     studies_access: {
       type: 'black',
       tools: []

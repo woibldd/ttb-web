@@ -2105,12 +2105,22 @@
     "coin_FUTURE_BHDUSD":"BHD",
     "fund_my_assets_hide": "隐藏小额币种",
     "fund_my_assets_hide_tip": "小于",
-    "trading_order_cancel_all": "撤销全部",
     "otc_collection_update": "编辑",
     "otc_placeholder_c": "请输入您预期购买单价",
     "watch_tips": "请认真核对充币地址是否正确一致，如果不一致将导致无法成功充值或资产不可找回",
     
-    "contract_FUTURE_ETHUSD":"ETH永续"
+    "contract_FUTURE_ETHUSD":"ETH永续",
+    "trading_order_cancel_all": "批量撤销",
+    "tv_technical_indicators": "技术指标",
+    "tv_style":"样式",
+    "tv_down_minute":"分", 
+    "tv_down_hour": "小时",
+    "tv_down_day": "日",
+    "tv_down_week": "周",
+    "tv_down_month": "月",
+    "fund_assets_node_buy": "节点认购",
+    "fund_assets_node_buy_tip": "是否确定认购并升级为IXX全球节点？"
+
 
   }
 

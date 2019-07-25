@@ -1994,7 +1994,6 @@
 "coin_FUTURE_BHDUSD":"BHD",
 "fund_my_assets_hide": "소액코인종류를 숨기다",
 "fund_my_assets_hide_tip": "작다",
-"trading_order_cancel_all": "전부철회",
 "otc_collection_update": "편집",
 "otc_placeholder_c": "당신이 예상한 구매 단가를 입력하세요",
 "otc_kvcoc_1":"위임장에 대한 상세한 정보",
@@ -2013,5 +2012,6 @@
 "otc_kvcec_14":"수납QR코드가 비어서는  안된다",
 "watch_tips": "충전 주소가 정확히 일치하는지 확인하시고, 일치하지 않으면 충전 불능 또는 자산 회수에 실패할 수 있습니다.",
     
-"contract_FUTURE_ETHUSD":"ETH계속유지"
+"contract_FUTURE_ETHUSD":"ETH계속유지",
+"trading_order_cancel_all": "批量撤销"
 }

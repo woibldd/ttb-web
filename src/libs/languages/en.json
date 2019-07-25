@@ -2132,7 +2132,6 @@
 "pair_list_all": "ALL",
 "pair_list_option": "Option",
 "pair_list_new": "Innovation Zone",
-"trading_order_cancel_all": "Cancelled all",
 "otc_bind_bankCard": "Bank Card",
 "otc_kyc_verified": "ID Verification",
 "otc_need_verify": "Verification",
@@ -2178,5 +2177,6 @@
 "otc_kvcec_14": "Please enter payment QR code",
 "watch_tips": "Please ensure that deposit address is correct, if not will result in failure to deposit or assets can not be recovered .",
     
-"contract_FUTURE_ETHUSD":"ETH Perpetual"
+"contract_FUTURE_ETHUSD":"ETH Perpetual",
+"trading_order_cancel_all": "批量撤销"
 }

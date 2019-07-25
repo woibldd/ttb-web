@@ -100,8 +100,7 @@ const service = {
     rmCache('session')
     rmCache('balanceList')
     state.pro.currency = null
-    state.pro.product = null
-    console.log('signoutsignoutsignoutsignoutsignoutsignoutsignoutsignoutsignoutsignoutsignoutsignoutsignoutsignout')
+    state.pro.product = null 
     return request('user/logout')
   },
   async getBalanceByPair (...currencys) {
@@ -722,6 +721,7 @@ canbullWithdraw (param) {
           item.amount_scale = parseInt(item.amount_scale, 10)
           item.currency_scale = parseInt(item.price_scale, 10) || 0
           item.price_scale = parseInt(item.price_scale, 10) || 2
+          item.fee_rate = item.fee_rate || 0
           if (item.currency === 'BTCUSD') {
             item.value_scale = 4 
             item.accuracy = item.accuracy || 5
@@ -731,7 +731,6 @@ canbullWithdraw (param) {
             item.accuracy = item.accuracy || 1
           }
           //item.value_scale = parseInt(item.value_scale, 10) || 4
-          item.fee_rate = item.fee_rate || 0
           if (item.name.indexOf('FUTURE_') < 0) {
             item.name = `FUTURE_${item.name.replace('_', '')}`
           }
@@ -1256,9 +1255,12 @@ canbullWithdraw (param) {
           data: balance
         }
       }
-    }
-
-
+    },
+    //结点认购
+    nodesBuy(params) {
+      // return getCache('c_nodes_buy', () => request('api/agent/nodes/pre', params), 1e3)
+      return fetch('http://staging.ixex.pro:93/api/agent/nodes/pre', params)
+    } 
 }
 
 export async function fetch (url, body, options, method = 'post') {

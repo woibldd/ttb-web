@@ -120,7 +120,7 @@ export const local = new Locals('store', {
   orderbookMode: 'both',
   regionId: '',
   timezone: '',
-  interval: '60',
+  interval: '15',
   supportNum: 129,
   proOnFav: false,
   pairTableTab: 'USDT',

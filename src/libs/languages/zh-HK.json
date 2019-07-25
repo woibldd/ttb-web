@@ -1917,7 +1917,7 @@
   "pair_list_option": "自選",
   "pair_list_new": "創新區",
   "otc_seiitm_15": "撤銷全部",
-  "trading_order_cancel_all": "撤銷全部",
+  "trading_order_cancel_all": "批量撤銷",
   "done_verified": "已完成",
   "otc_trans_time": "成交時間",
   "coin_FUTURE_BTCUSD":"BTC",
