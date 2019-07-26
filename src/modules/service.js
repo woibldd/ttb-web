@@ -1111,7 +1111,7 @@ canbullWithdraw (param) {
      * payment_type 收款方式 1-银行卡 2-支付宝 3-微信支付
      */
     addOtcCollection(params) { 
-        return getCache('c_otc_collection_add', () => request('otc/account/collection/add', params), 1e3)
+        return getCache('c_otc_collection_add', () => request('otc/account/collection/add', params), 2e3)
     },
     orderBind(params) {
         return request('otc/order/bind', params)

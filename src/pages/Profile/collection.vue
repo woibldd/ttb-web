@@ -239,6 +239,7 @@
           <el-button @click="resetForm('ruleForm')">{{$t('cancel')}}</el-button>
           <el-button
             @click="submitForm('ruleForm')"
+            v-loading="loading"
             type="primary"
             v-html="type !== 'remove' ? this.$t('otc_ziurec_20') : this.$t('remove')"/>
         </el-form-item>
@@ -321,7 +322,8 @@ export default {
         loading: false,
         error: false,
         url: ''
-      }
+      },
+      loading: false,
     }
   },
 
@@ -433,6 +435,7 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          this.loading = true
           if (this.type === 'add') {
             let params = {
               user_id: state.userInfo.id,
@@ -446,11 +449,10 @@ export default {
               collection_img: this.ruleForm.collection_img,
               currency: this.ruleForm.currency
             }
-            service.addOtcCollection(params).then(res => {
-              console.log(res)
+            service.addOtcCollection(params).then(res => { 
+              this.loading = false
               if (res.code === 0) {
-                this.init()
-                // this.$message.success('添加成功')
+                this.init() 
                 this.$message({
                   type: 'success',
                   message: this.$t('add_withdraw_success')
@@ -463,7 +465,8 @@ export default {
           } else {
             service.delOtcCollection({
               collection_id: this.collection_id
-            }).then(res => {
+            }).then(res => { 
+              this.loading = false
               console.log(res)
               if (res.code === 0) {
                 this.init()
