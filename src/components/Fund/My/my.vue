@@ -483,7 +483,7 @@ export default {
 
       service.nodesBuy({uid: state.userInfo.id}).then(res=> {
         if (res.code === 0) {
-          utils.alert('认购成功。')
+          utils.success('认购成功。')
         } else {
           if (res.message) {
             utils.alert(res.message)

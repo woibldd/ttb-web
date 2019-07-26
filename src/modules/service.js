@@ -1258,8 +1258,8 @@ canbullWithdraw (param) {
     },
     //结点认购
     nodesBuy(params) {
-      // return getCache('c_nodes_buy', () => request('api/agent/nodes/pre', params), 1e3)
-      return fetch('http://staging.ixex.pro:93/api/agent/nodes/pre', params)
+      return getCache('c_nodes_buy', () => request('api/agent/nodes/pre', params), 1e3)
+      //return fetch('http://staging.ixex.pro:93/api/agent/nodes/pre', params)
     } 
 }
 
