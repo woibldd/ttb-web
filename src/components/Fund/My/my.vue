@@ -461,10 +461,10 @@ export default {
       const h = this.$createElement;
       let message = h('div', {style: 'text-align: center;'}, [
           h('div', { style: 'margin:10px; font-size: 16px;'}, [
-              h('span', null, '是否确定认购并升级为IXX全球节点？' ), 
+              h('span', null, this.$t('fund_assets_node_buy_tip') ), 
             ]),
           h('div', {style: 'font-size: 16px;'}, [ 
-            h('span', null, '本次认购升级将扣除您' ), 
+            h('span', null, this.$t('fund_assets_node_buy_tip2') ), 
             h('span', {style: 'color:#00CED0;'}, this.nodePrice ), 
             h('span', null, 'USDT' )
           ])

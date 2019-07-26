@@ -2112,15 +2112,17 @@
     "contract_FUTURE_ETHUSD":"ETH永续",
     "trading_order_cancel_all": "批量撤销",
     "tv_technical_indicators": "技术指标",
-    "tv_style":"样式",
+    "tv_style":"样式设置",
     "tv_down_minute":"分", 
     "tv_down_hour": "小时",
     "tv_down_day": "日",
     "tv_down_week": "周",
     "tv_down_month": "月",
     "fund_assets_node_buy": "节点认购",
-    "fund_assets_node_buy_tip": "是否确定认购并升级为IXX全球节点？"
-
+    "fund_assets_node_buy_tip": "是否确定认购并升级为IXX全球节点？",
+   
+    "fund_assets_node_buy_tip2": "本次认购升级将扣除您",
+    "fund_node_buy_success": "认购成功"
 
   }
 

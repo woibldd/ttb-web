@@ -111,7 +111,7 @@ export default {
 
         
         local.lineType = 1 //默认蜡烛线
-        let resolutions = document.createElement('div') //时间周期菜单
+        let resolutions = document.createElement('div') //时间周期菜单 
         //时间周期下拉菜单
         widget.btnFS = widget.createButton().on("click", (e, vm) => {
           let element = e.srcElement || e.target;
@@ -139,7 +139,7 @@ export default {
         let list = ['1', '3', '5', '15', '30', '60', '120', '240', '360', '720',  '1D', '1W', '1M']  
         let ul = document.createElement('ul')
         let lia = document.createElement('li')
-        lia.innerText = utils.$i18n.t("tradingview_line") //分时线
+        lia.innerText = t("tradingview_line") //分时线
         lia.addEventListener('click', function() {  
           widget.chart().setResolution('1', null); //周期切换到一分钟
           local.lineType = widget.chart().chartType(); //记录当前的K线样式
@@ -156,15 +156,15 @@ export default {
           let li = document.createElement('li')
           let text = ''
           if (item === '1D') {
-            li.innerText = '1 日' 
+            li.innerText = '1 ' + utils.$i18n.t('tv_down_day') 
           } else if(item === '1W') {
-            li.innerText = '1 周' 
+            li.innerText = '1 ' + utils.$i18n.t('tv_down_week') 
           } else if(item === '1M') {
-            li.innerText = '1 月' 
+            li.innerText = '1 ' + utils.$i18n.t('tv_down_month') 
           } else if (!!Number(item) && Number(item) < 60) { 
-            li.innerText = item + '分'
+            li.innerText = item + ' ' + utils.$i18n.t('tv_down_minute') 
           } else if (!!Number(item)) {
-            li.innerText = item / 60 + '小时' 
+            li.innerText = item / 60 + ' '  + utils.$i18n.t('tv_down_hour')  
           }  
           if (item === config.interval) {
             span.innerText = li.innerText
@@ -191,13 +191,13 @@ export default {
           resolutions.parentElement.classList.remove('selected')  
           widget.closePopupsAndDialogs() 
           widget.chart().executeActionById("insertIndicator") //技术指标
-        }).append('技术指标')
+        }).append(utils.$i18n.t('tv_technical_indicators'))
         widget.btnProperties = widget.createButton().on("click", (e, vm) => { 
           //隐藏周期列表
           resolutions.parentElement.classList.remove('selected') 
           widget.closePopupsAndDialogs() 
           widget.chart().executeActionById("chartProperties") //样式设置 
-        }).append('样式设置')
+        }).append(utils.$i18n.t('tv_style'))
 
 
         // MACD
@@ -281,7 +281,8 @@ export default {
 
         //widget.chart().executeActionById('drawingToolbarAction')
       })
-    }
+    },
+    
   },
   computed: {
     pair () {
