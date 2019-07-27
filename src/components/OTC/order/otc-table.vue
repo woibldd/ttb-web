@@ -34,10 +34,11 @@
       <el-table-column prop="payment_type" :label="$t('otc_payment_method')">
         <template slot-scope="scope"> 
           <div v-for="(item, index) in scope.row.pay_ment_data" :key="index" style="display: inline-block;margin-right: 4px;">
-            <icon
+            <!-- <icon
               :class="item === '1' ? 'card active' : item === '2' ? 'alipay active' :  item === '3' ? 'wechat active' : ''"
               :name="item === '1' ? 'bank-card' : item === '2' ? 'alipay' :  item === '3' ? 'wechat' : ''"
-            />
+            /> -->
+            <icon v-if="index < 3" :name="paytype(item)" />
           </div> 
         </template>
       </el-table-column>
@@ -128,7 +129,7 @@ export default {
       selectedRow: {},
       inter1: 0,
       inter2: 0,
-      dis: false, 
+      dis: false,  
     };
   },
   mixins: [otcComputed],
@@ -147,6 +148,15 @@ export default {
     transactionSell
   },
   methods: {
+    paytype(type) {
+      return {
+        1: "bank-card",
+        2: "alipay",
+        3: "wechat",
+        4: "paynow",
+        5: "paylah"
+      }[type]
+    },
     openSideBar (row) {
       if (window.localStorage.getItem('X-TOKEN')) {
         this.operation = 1
@@ -317,6 +327,7 @@ export default {
   }
 };
 </script>
+
 <style lang="scss">
 .entrust-order-container {
   margin-top: 20px;

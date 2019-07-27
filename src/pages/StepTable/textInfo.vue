@@ -81,7 +81,7 @@ v-if="textDetail.side === 1 && textCode === 0 && !textDetail.appeal && !textDeta
                   <em
                     v-if="!textDetail.other_appeal"
                     style="color: #FDA22D">
-                    {{ textDetail.state | state }}
+                    {{ state(textDetail.state)  }}
                   </em>
                   <em
                     v-else
@@ -95,15 +95,15 @@ v-if="textDetail.side === 1 && textCode === 0 && !textDetail.appeal && !textDeta
               </dd>
               <dd>
                 <span>{{$t('otc_create_time')}}</span><em>
-                  <!--{{ textDetail.create_time || '&#45;&#45;' }}-->
+                  <!--{{ textDetail.create_time || '&#45;&#45;' }}--> 
                   {{ processValue('create_time', textDetail) || '--' }}
                 </em>
               </dd>
-              <dd>
-                <span>{{$t('orders')}}{{$t('otc_amount_money')}}（CNY）</span><em style="color: #FDA22D">{{ textDetail.total || '--' }}</em>
+              <dd> 
+                <span>{{$t('orders')}}{{$t('otc_amount_money')}}（{{textDetail.currency_type}}）</span><em style="color: #FDA22D">{{ textDetail.total || '--' }}</em>
               </dd>
               <dd>
-                <span>{{$t('otc_trans_idjg')}}(CNY)</span><em style="color: #FDA22D">{{ textDetail.price || '--' }}</em>
+                <span>{{$t('otc_trans_idjg')}}({{textDetail.currency_type}})</span><em style="color: #FDA22D">{{ textDetail.price || '--' }}</em>
               </dd>
               <dd>
                 <span>{{$t('otc_side_2')}}{{$t('amount')}}</span><em>{{ textDetail.amount || '--' }}</em>
@@ -236,13 +236,13 @@ v-if="textDetail.side === 1 && textCode === 0 && !textDetail.appeal && !textDeta
                 <span>{{$t('fees_name')}}</span><em>{{ textDetail.currency }}</em>
               </dd>
               <dd>
-                <span>{{$t('otc_trans_idjg')}}(CNY)</span><em style="color: #FDA22D">{{ textDetail.price || '--' }}</em>
+                <span>{{$t('otc_trans_idjg')}}({{textDetail.currency_type}})</span><em style="color: #FDA22D">{{ textDetail.price || '--' }}</em>
               </dd>
               <dd>
                 <span>{{$t('otc_trans_idsl')}}</span><em>{{ textDetail.amount || '--' }}</em>
               </dd>
               <dd>
-                <span>{{$t('otc_ziurec_19')}}(CNY)</span><em>{{ textDetail.total || '--' }}</em>
+                <span>{{$t('otc_ziurec_19')}}({{textDetail.currency_type}})</span><em>{{ textDetail.total || '--' }}</em>
               </dd>
               <dd>
                 <span>{{$t('otc_ziurec_13')}}</span><em>{{$t('otc_ziurec_16')}}</em>
@@ -429,7 +429,7 @@ export default {
     countDown
   },
   filters: {
-    formatBankNumber (bankNumber) {
+    formatBankNumber (bankNumber) { 
       return bankNumber.substr(0, 4) + '****' + bankNumber.substr(-4)
     },
     otherCount (e) {

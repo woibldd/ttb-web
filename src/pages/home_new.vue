@@ -6,7 +6,7 @@
         <!--:swiper-option="swiperOption"/>-->
 
     <!--</div>-->
-    <home-banner :banner="banner1" :swipe-banner="notices1"/>
+    <home-banner :banner="banner1" :swipe-banner="notices1" v-on:buy-handle="buySubmit"/>
     <div class="ind_txt">
       <div class="ind_cen">
         <div
@@ -243,10 +243,10 @@ export default {
   },
   methods: {
     buySubmit(item) {
-        this.$router.push({
-            path: '/Superzis',
-            query: item
-        })
+      this.$router.push({
+        path: '/Superzis',
+        query: item
+      })
     },
     async getBanners () {
       const res = await service.getBanners()

@@ -91,8 +91,7 @@
                   v-for='(item, index) in paymentHeaderList[selectPayment.payment_type]'
                   :key='index'>
                   <td>{{ $t(item.text) }}</td>
-                  <td>
-
+                  <td> 
                     <span
                       style="cursor: pointer;"
                       v-if="item.key==='collection_img'"
@@ -155,10 +154,8 @@
       </div>
     </div>
     <!-- 操作部分 -->
-    <div 
-class="action-order footer"
-         :class="{'status_2': status > 0}"
-    >
+    <div class="action-order footer"
+         :class="{'status_2': status > 0}">
       <!-- 输入框 -->
       <div
         v-if="step<1"
@@ -524,6 +521,36 @@ export default {
             width: '',
             key: 'collection_img'
           }
+        ],
+        //paynow
+        4: [
+          {
+            title: 'name', // 姓名
+            text: 'payment_name',
+            width: '',
+            key: 'name'
+          },
+          {
+            title: 'card_number', // 银行卡号
+            text: 'payment_card_number',
+            width: '',
+            key: 'card_number'
+          }, 
+        ], 
+        //paylah
+        5: [
+          {
+            title: 'name', // 姓名
+            text: 'payment_name',
+            width: '',
+            key: 'name'
+          },
+          {
+            title: 'card_number', // 银行卡号
+            text: 'payment_card_number',
+            width: '',
+            key: 'card_number'
+          }, 
         ]
       },
       paylist: [],
@@ -615,6 +642,9 @@ export default {
           if (arr.length > 0) {
             this.selectPayment = arr[0]
           }
+          else {
+            this.selectPayment = this.paylist[0] 
+          } 
         }
       })
     },
@@ -783,7 +813,22 @@ export default {
 }
 </script>
 
+<style lang="scss" scope>
+  .v-list-container {
+    th {
+      padding-bottom: 5px;
+    }
+    tbody {
+      tr:first-child {
+        td {
+          padding-top:13px;
+        } 
+      }
+    }
+  }
+</style>
 <style lang='scss'>
+
   .otcaction {
     height: 100%;
     .action-box {
@@ -813,15 +858,21 @@ export default {
     line-height: 25px;
   }
   // 修改字体大小
-  .el-step__title.is-process{
+  .el-step__title.is-process,.el-step__head.is-process{
     font-size: 14px;
+    color: #999999;
+    border-color: #999999;
   }
-  .el-step__title.is-wait{
+  .el-step__title.is-process,.el-step__head.is-wait{
     font-size: 14px;
+    color: #999999;
+    border-color: #999999;
   }
-  .el-step__title.is-success{
+  .el-step__title.is-success,.el-step__head.is-success{
     font-size: 14px;
-
+    color: #09C989;
+    border-color: #09C989;
   }
+   
 
 </style>

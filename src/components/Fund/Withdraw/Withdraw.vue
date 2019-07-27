@@ -93,8 +93,7 @@ rows="1" style="vertical-align:top;outline:none;"
               class="coin-count"
               v-model="memo">
           </div>
-        </div>
-
+        </div> 
         <div class="attention">
           <icon
             name="robot-info"

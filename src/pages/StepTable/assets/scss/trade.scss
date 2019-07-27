@@ -159,7 +159,7 @@ $high-color: #333;
     font-size: $font-small;
     color: #999;
   }
-  .table-con {
+  .table-con { 
     margin-top: 20px;
     .table-list {
       padding:0 20px;
@@ -290,6 +290,11 @@ $high-color: #333;
             color: #666;
           }
         }
+      }
+    }
+    .crud /deep/ .el-table {
+      th>.cell {
+        word-break: break-word;
       }
     }
   }
@@ -441,7 +446,7 @@ $high-color: #333;
       margin-top: 10px;
       padding: 6px!important;
     }
-    .table-con {
+    .table-con { 
       font-size: 13px;
       dt {
         em {

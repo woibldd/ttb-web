@@ -23,7 +23,7 @@
           </el-select>
         </div>
       </div>
-      <div class="fund-item-other mb-14">
+      <div class="fund-item-other mb-14 coin-list">
         <span
           :class="['quick-btn mb-10 mr-10', selectCoin.currency === c.currency && 'selected']"
           @click="quickSelectCoin(c)"
@@ -80,6 +80,13 @@
               class="address-copy pointer"
               @click="copyMemo">{{ $t('copy') }}</span>
           </div>
+        </div>
+        <div class="attention">
+          <icon
+            name="robot-info"
+            class="icon-eos ml-5 pointer"
+            v-tooltip.top-center="{html: true,content: robotAttention, classes: 'myfund'} "
+          />
         </div>
       </div>
       <div
@@ -212,6 +219,16 @@ export default {
   },
   components: {
     RememberAlert
+  },
+  computed: {
+    robotAttention () {
+      return ` <div
+            class="attention__tips">
+            <p class="title mb-8">${this.$t('about_eos_address_label')}</p>
+            <p class="mb-4">${this.$t('about_eos_address_label_a')}</p>
+            <p >${this.$t('about_eos_address_label_b')}</p>
+          </div>`
+    },
   }
 }
 </script>

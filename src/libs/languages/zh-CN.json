@@ -65,9 +65,9 @@
   "add_address_error": "地址不能为空",
   "copyed": "已复制",
   "link_copyed": "分享链接已复制",
-  "deposit_hint_addr": "禁止向 %{coin} 地址充值除 %{coin} 之外的资产，任何充入 %{coin} 地址的非 %{coin} 资产将不可找回。",
+  "deposit_hint_addr": "禁止向 %{coin} 地址充值除 %{coin} 之外的资产，任何充入 %{coin} 地址的非 %{coin} 资产将不可找回",
   "deposit_hint_min": "最低充值数量为 %{min}",
-  "deposit_hint_confirm": "使用 %{coin} 地址充值需要 %{confirm} 个网络确认才能到账。",
+  "deposit_hint_confirm": "使用 %{coin} 地址充值需要 %{confirm} 个网络确认才能到账",
   "kyc_ph_id": "请填写证件号码",
   "kyc_passport": "护照",
   "kyc_idcard": "身份证",
@@ -536,7 +536,7 @@
   "api_has_no_obtain": "领取限量挖矿机器人",
   "address_tag": "地址标签",
   "eos_deposit_tip_label": "转帐务必填写正确的地址标签 ，否则将充值失败",
-  "eos_deposit_tip_security_third": "地址标签填写错误而造成的充值失败，找回将收取一定比例的手续费；",
+  "eos_deposit_tip_security_third": "地址标签填写错误而造成的充值失败，找回将收取一定比例的手续费",
   "eos_not_support_internal_transfer": "暂不支持交易所内部地址转账",
   "orders":"订单",
   "my_orders": "我的订单",
@@ -1164,6 +1164,7 @@
     "contract_undeal_amount":"未成交数量",
     "contract_deal_type":"成交类型",
     "contract_assign_time":"委托时间",
+    "order_th_capedasda": "委托单价",
     "order_th_capeaxcvb": "委托数量/成交数量",
     "contract_all_dealed":"完全成交",
     "order_th_capehjiky": "委托金额/成交金额",
@@ -2104,10 +2105,24 @@
     "coin_FUTURE_BHDUSD":"BHD",
     "fund_my_assets_hide": "隐藏小额币种",
     "fund_my_assets_hide_tip": "小于",
-    "trading_order_cancel_all": "撤销全部",
     "otc_collection_update": "编辑",
     "otc_placeholder_c": "请输入您预期购买单价",
-    "watch_tips": "请认真核对充币地址是否正确一致，如果不一致将导致无法成功充值或资产不可找回"
+    "watch_tips": "请认真核对充币地址是否正确一致，如果不一致将导致无法成功充值或资产不可找回",
+    
+    "contract_FUTURE_ETHUSD":"ETH永续",
+    "trading_order_cancel_all": "批量撤销",
+    "tv_technical_indicators": "技术指标",
+    "tv_style":"样式设置",
+    "tv_down_minute":"分", 
+    "tv_down_hour": "小时",
+    "tv_down_day": "日",
+    "tv_down_week": "周",
+    "tv_down_month": "月",
+    "fund_assets_node_buy": "节点认购",
+    "fund_assets_node_buy_tip": "是否确定认购并升级为IXX全球节点？",
+   
+    "fund_assets_node_buy_tip2": "本次认购升级将扣除您",
+    "fund_node_buy_success": "认购成功"
 
   }
 
