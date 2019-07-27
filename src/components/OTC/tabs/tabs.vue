@@ -93,6 +93,9 @@
                 <el-option label="按数量出售" value="1"></el-option>
               </el-select>
             </el-input>
+            <div
+              class="unit-label" style='right:120px'
+              v-html="legal_currency"/>
 
           </el-col>
           <el-col :span="3">
