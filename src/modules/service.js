@@ -924,12 +924,13 @@ const service = {
     return request('/otc/active/find/minactive', params)
   },
 // 一键买币(按金额购买CNY)
-  bycoins (params) {
-    return request('/otc/active/key/bycoins', params)
+  bycoins (params) { 
+    return getCache('c_otc_bycoins', () => request('/otc/active/key/bycoins', params), 2e3)
   },
 // 一键买币(按数量购买)
   byamount (params) {
-    return request('/otc/active/key/byamount', params)
+    //return request('/otc/active/key/byamount', params)
+    return getCache('c_otc_byamount', () => request('/otc/active/key/byamount', params), 2e3)
   },
 // POST /otc/active/key/sell/coins
   sellCoins (params) {

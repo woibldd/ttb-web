@@ -49,7 +49,9 @@
                    </template>
                    <template v-else>
                        <div class="result-no-msg">
-                           <i class="iconfont">&#xe61c;</i>未找到合适报价，修改条件或<span>查看所有报价</span>
+                           <i class="iconfont">&#xe61c;</i>未找到合适报价，修改条件或
+                           <router-link 
+                            to="/OTC/Trade"> {{ $t('查看所有报价') }}</router-link> 
                        </div>
                    </template>
                </template>
@@ -79,7 +81,9 @@
          </div>
          <div class="result-btn" v-if="purchase">
            <!--购买-->
-           <el-button class="res-btn" @click="purchaseHandle" style="width: 100%;" :disabled="buyDisabled">购买</el-button>
+           <el-button
+            v-loading="loading"
+            class="res-btn" @click="purchaseHandle" style="width: 100%;" :disabled="buyDisabled">购买</el-button>
          </div>
          <div class="result-btn" v-if="overdue">
            <el-button class="err-btn" @click="overdueHandle" style="width: 100%;">报价已过期，点击获取最新价格</el-button>
@@ -142,7 +146,8 @@ export default {
             data: {}
         }
       ],
-      payTypeData: ['按金额购买', '按数量购买']
+      payTypeData: ['按金额购买', '按数量购买'],
+      loading: false,
     }
   },
   computed: {
@@ -188,6 +193,7 @@ export default {
     },
     purchaseHandle() {
         console.log(this.paySelect)
+        this.loading = true
         if (window.localStorage.getItem('X-TOKEN')) {
             if (this.paySelect === 0) {
                 service.bycoins(qs.stringify({
@@ -199,9 +205,10 @@ export default {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
-            }).then((res) => {
+            }).then((res) => { 
+              this.loading = false
                if (res.code === 0) {
-                   this.$message.success('购买成功')
+                   this.$message.success('提交成功')
                    this.$router.push('/OTC/Hir')
                } else {
                    this.$message.warning(res.message)
@@ -217,13 +224,14 @@ export default {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
-                }).then((res) => {
-                if (res.code === 0) {
-                    this.$message.success('购买成功')
-                    this.$router.push('/OTC/Hir')
-                } else {
-                    this.$message.warning(res.message)
-                }
+                }).then((res) => { 
+                  this.loading = false
+                  if (res.code === 0) {
+                      this.$message.success('提交成功')
+                      this.$router.push('/OTC/Hir')
+                  } else {
+                      this.$message.warning(res.message)
+                  }
                 })
             }
         } else {

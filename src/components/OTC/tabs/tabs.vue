@@ -52,7 +52,7 @@
         >{{$t('otc_publish_order')}}</button>
       </div>
     </div>
-    <div class="otc-buy-ac" v-if="side === 1 && currency==='USDT'">
+    <div class="otc-buy-ac" v-if="side === 1 && currency==='USDT' && legal_currency==='CNY'">
       <div class="line"></div>
       <div class="select-item">
         <el-row>
@@ -67,6 +67,9 @@
                 <el-option label="按数量购买" value="1"></el-option>
               </el-select>
             </el-input>
+            <div
+              class="unit-label" style='right:120px'
+              v-html="legal_currency"/>
           </el-col>
           <el-col :span="3">
             <el-button style="width: 90%;margin-left: 10%" type="primary" @click="buySubmit">购买USDT</el-button>
@@ -75,7 +78,7 @@
       </div>
       <div class="line"></div>
     </div>
-    <div class="otc-buy-ac" v-if="side === 2 && currency==='USDT'">
+    <div class="otc-buy-ac" v-if="side === 2 && currency==='USDT' && legal_currency==='CNY'">
       <div class="line"></div>
       <div class="select-item">
         <el-row>
