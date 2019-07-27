@@ -81,7 +81,7 @@ v-if="textDetail.side === 1 && textCode === 0 && !textDetail.appeal && !textDeta
                   <em
                     v-if="!textDetail.other_appeal"
                     style="color: #FDA22D">
-                    {{ textDetail.state | state }}
+                    {{ state(textDetail.state)  }}
                   </em>
                   <em
                     v-else
@@ -429,7 +429,7 @@ export default {
     countDown
   },
   filters: {
-    formatBankNumber (bankNumber) {
+    formatBankNumber (bankNumber) { 
       return bankNumber.substr(0, 4) + '****' + bankNumber.substr(-4)
     },
     otherCount (e) {

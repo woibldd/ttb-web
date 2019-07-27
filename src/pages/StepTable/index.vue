@@ -221,11 +221,12 @@
                   <dt>
                     {{ $t('otc_payment_method') }}：
                     <template v-if="item.state !== 1">
-                      <span v-if="item.otc_collection.alipay_account">{{ $t('payment_namezfb') }}</span>
+                      <span>{{ $t(payName(item.otc_collection.payment_type)) }}</span>
+                      <!-- <span v-if="item.otc_collection.alipay_account">{{ $t('payment_namezfb') }}</span>
                       <span
                         v-else-if="item.otc_collection.we_chat_account"
                       >{{ $t('payment_weChat_adasunt') }}</span>
-                      <span v-else-if="item.otc_collection.card_number">{{ $t('payment_nameyhk') }}</span>
+                      <span v-else-if="item.otc_collection.card_number">{{ $t('payment_nameyhk') }}</span> -->
                     </template>
                   </dt>
                   <!-- <dd>
@@ -537,13 +538,44 @@ export default {
             width: '',
             key: 'collection_img'
           }
+        ],
+        //paynow
+        4: [
+          {
+            title: 'name', // 姓名
+            text: 'payment_name',
+            width: '',
+            key: 'name'
+          },
+          {
+            title: 'card_number', // 银行卡号
+            text: 'payment_card_number',
+            width: '',
+            key: 'card_number'
+          }, 
+        ], 
+        //paylah
+        5: [
+          {
+            title: 'name', // 姓名
+            text: 'payment_name',
+            width: '',
+            key: 'name'
+          },
+          {
+            title: 'card_number', // 银行卡号
+            text: 'payment_card_number',
+            width: '',
+            key: 'card_number'
+          }, 
         ]
       },
       selectPayment: {},
       qrsrc: '',
-      showQRcode: false
+      showQRcode: false,
+      
     }
-  },
+  }, 
   // computed: {
   //   userInfo () {
   //     return state.userInfo || {}
@@ -560,7 +592,16 @@ export default {
   //     return 0
   //   }
   // },
-  methods: {
+  methods: { 
+    payName(type){
+      return {
+          1: "payment_nameyhk",
+          2: "payment_namezfb",
+          3: "payment_weChat_adasunt",
+          4: "Paynow",
+          5: "Paylah",
+        }[type]
+    },
     getCurrencySymbol(type) {
       return {
         "CNY": "￥",
@@ -884,6 +925,9 @@ export default {
                   if (arr.length > 0) {
                     // this.selectPayment = arr[0]
                     Vue.set(item, 'selectPayment', arr[0])
+                  }
+                  else {
+                    Vue.set(item, 'selectPayment', paylist[0])
                   }
                 }
 

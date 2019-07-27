@@ -91,8 +91,7 @@
                   v-for='(item, index) in paymentHeaderList[selectPayment.payment_type]'
                   :key='index'>
                   <td>{{ $t(item.text) }}</td>
-                  <td>
-
+                  <td> 
                     <span
                       style="cursor: pointer;"
                       v-if="item.key==='collection_img'"
@@ -522,6 +521,36 @@ export default {
             width: '',
             key: 'collection_img'
           }
+        ],
+        //paynow
+        4: [
+          {
+            title: 'name', // 姓名
+            text: 'payment_name',
+            width: '',
+            key: 'name'
+          },
+          {
+            title: 'card_number', // 银行卡号
+            text: 'payment_card_number',
+            width: '',
+            key: 'card_number'
+          }, 
+        ], 
+        //paylah
+        5: [
+          {
+            title: 'name', // 姓名
+            text: 'payment_name',
+            width: '',
+            key: 'name'
+          },
+          {
+            title: 'card_number', // 银行卡号
+            text: 'payment_card_number',
+            width: '',
+            key: 'card_number'
+          }, 
         ]
       },
       paylist: [],
@@ -613,6 +642,9 @@ export default {
           if (arr.length > 0) {
             this.selectPayment = arr[0]
           }
+          else {
+            this.selectPayment = this.paylist[0] 
+          } 
         }
       })
     },
