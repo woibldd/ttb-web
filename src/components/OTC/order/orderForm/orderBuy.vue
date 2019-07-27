@@ -72,14 +72,20 @@
                     </div>
                     <div class="content">
                       <div class="el-number-input">
-                        <el-input-number
+                        <!-- <el-input-number
                           :max="130"
                           :min="70"
                           :controls="false"
                           :placeholder="$t('otc_placeholder_a')"
                           v-model="float_rate"
-                          step-strictly
                           style="border: 1px solid #fff!important"
+                        /> -->
+                        <number-input
+                          class="number-input"
+                          v-model="float_rate"
+                          :scale="2"
+                          :placeholder="$t('otc_placeholder_a')"
+                          @blur="floatRateWatcher"
                         />
                         <div
                           class="unit-label long"
@@ -494,6 +500,17 @@ export default {
     vList
   },
   methods: {
+    floatRateWatcher() {
+      let val = this.float_rate
+      if (!isNaN(Number(val))) {
+        if (Number(val) > 130) {
+          this.float_rate = 130
+        }
+        else if(Number(val) < 70) {
+          this.float_rate = 70
+        } 
+      } 
+    },
     openSideBar () {
       this.step = 0
       this.active_id = 0
@@ -682,7 +699,17 @@ export default {
       //this.total = ''
       this.message_success = ''
       this.message_failed = ''
-    }
+    },
+    // float_rate(val) {
+    //   if (!isNaN(Number(val))) {
+    //     if (Number(val) > 130) {
+    //       this.float_rate = 130
+    //     }
+    //     else if(Number(val) < 70) {
+    //       this.float_rate = 70
+    //     } 
+    //   } 
+    // }
 
   }
 }
