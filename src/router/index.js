@@ -304,11 +304,11 @@ export const routes = [
     name: 'MessageSettings',
     component: MessageSettings
   },
-  {
-    path: 'collection',
-    name: 'collection',
-    component: Collection
-  },
+  // {
+  //   path: 'collection',
+  //   name: 'collection',
+  //   component: Collection
+  // },
   {
     path: '/test',
     name: 'test',
