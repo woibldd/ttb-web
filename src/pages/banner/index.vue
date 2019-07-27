@@ -70,6 +70,7 @@ export default {
       service.otcSymbolList().then(res => {
         if (res.code === 0) {
           this.arr = res.data
+
         }
       })
     }
