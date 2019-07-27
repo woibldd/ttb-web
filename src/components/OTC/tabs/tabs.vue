@@ -114,6 +114,7 @@
 import { state } from "@/modules/store";
 import sideBar from "@/components/VSideBar";
 import orderBuy from "@/components/OTC/order/orderForm/orderBuy"
+import utils from '@/modules/utils'
 export default {
   data() {
     return {
