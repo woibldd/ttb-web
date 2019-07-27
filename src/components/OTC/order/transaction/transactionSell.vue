@@ -425,5 +425,23 @@ export default {
       }
     }
   }
+
+  // 修改字体大小
+  .el-step__title.is-process,.el-step__head.is-process{
+    font-size: 14px;
+    color: #999999;
+    border-color: #999999;
+  }
+  .el-step__title.is-process,.el-step__head.is-wait{
+    font-size: 14px;
+    color: #999999;
+    border-color: #999999;
+  }
+  .el-step__title.is-success,.el-step__head.is-success{
+    font-size: 14px;
+    color: #09C989;
+    border-color: #09C989;
+  }
+   
 </style>
 

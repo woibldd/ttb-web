@@ -23,7 +23,7 @@
             <icon
               class="icon"
               :class="'type-' + item.payment_type"
-              :name="item.payment_type === 1 ? 'bank-card' : item.payment_type === 2 ? 'alipay' : 'wechat'"/>
+              :name="paytype[item.payment_type]"/>
             <!-- {{ item.payment_type | type }} -->
             {{typeState(item.payment_type)}}
           </div>
@@ -142,6 +142,12 @@
               <el-option
                 value="3"
                 :label="this.$t('payment_weChat_adasunt')"/>
+              <el-option
+                value="4"
+                :label="this.$t('Paynow')"/>
+              <el-option
+                value="5"
+                :label="this.$t('Paylah')"/>
             </el-select>
             <!--<el-input v-model="ruleForm.payment_type"></el-input>-->
           </el-form-item>
@@ -178,7 +184,7 @@
                 size="small"/> 
             </el-form-item>
           </template>
-          <template v-if="ruleForm.payment_type !== '1'">
+          <template v-if="ruleForm.payment_type === '2' || ruleForm.payment_type === '3'">
             <template v-if="ruleForm.payment_type === '2'">
               <el-form-item
                :label="this.$t('payment_alipay_account')"
@@ -189,19 +195,16 @@
               </el-form-item>
             </template>
             <template v-if="ruleForm.payment_type === '3'">
-              <el-form-item
-                       :label="this.$t('payment_weChat_account')"
+              <el-form-item :label="this.$t('payment_weChat_account')"
                 prop="weChat_account">
                 <el-input
                   v-model="ruleForm.weChat_account"
                   size="small"/>
               </el-form-item>
             </template>
-            <el-form-item
-                :label="this.$t('payment_collection_img')"
+            <el-form-item :label="this.$t('payment_collection_img')"
               prop="collection_img">
-              <image-upload
-
+              <image-upload 
                 type="hold"
                 :url="hold.url"
                 :host="uploadConfig.host"
@@ -223,6 +226,18 @@
                     slot="tip">{{$t('otc_kvcoc_6')}}</div>
                 </template>
               </image-upload>
+            </el-form-item>
+          </template>
+          <template v-if="ruleForm.payment_type === '4' || ruleForm.payment_type === '5'">
+            <el-form-item
+              :label="this.$t('payment_card_number')"
+              prop="card_number">
+              <br>
+              <number-input
+                class="inputc"
+                style="border: 1px solid #DCDFE6 !important;"
+                v-model="ruleForm.card_number"
+                size="small"/> 
             </el-form-item>
           </template>
         </template>
@@ -323,7 +338,14 @@ export default {
         error: false,
         url: ''
       },
-      loading: false,
+      loading: false, 
+      paytype: {
+        1: "bank-card",
+        2: "alipay",
+        3: "wechat",
+        4: "paynow",
+        5: "paylah"
+      }
     }
   },
 

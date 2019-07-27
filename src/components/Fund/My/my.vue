@@ -126,13 +126,13 @@
           :label="operate.title"
         >
           <template slot-scope="scope">
-            <label class="my-fund-label"
+            <!-- <label class="my-fund-label"
               v-if="scope.row.currency==='USDT'"
               @click="nodeBuy"
               v-tooltip.top="{html: true, content: $t('fund_assets_node_buy_tip'), classes: 'assets'}" 
               >
               {{$t('fund_assets_node_buy')}}
-            </label>
+            </label> -->
             <span 
               class="my-fund-operate"> 
                <a href="javascript:;" class="menu-name" @click="routerTransFer(scope.row)">

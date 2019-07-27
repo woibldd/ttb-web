@@ -155,10 +155,8 @@
       </div>
     </div>
     <!-- 操作部分 -->
-    <div 
-class="action-order footer"
-         :class="{'status_2': status > 0}"
-    >
+    <div class="action-order footer"
+         :class="{'status_2': status > 0}">
       <!-- 输入框 -->
       <div
         v-if="step<1"
@@ -783,7 +781,22 @@ export default {
 }
 </script>
 
+<style lang="scss" scope>
+  .v-list-container {
+    th {
+      padding-bottom: 5px;
+    }
+    tbody {
+      tr:first-child {
+        td {
+          padding-top:13px;
+        } 
+      }
+    }
+  }
+</style>
 <style lang='scss'>
+
   .otcaction {
     height: 100%;
     .action-box {
@@ -813,15 +826,21 @@ export default {
     line-height: 25px;
   }
   // 修改字体大小
-  .el-step__title.is-process{
+  .el-step__title.is-process,.el-step__head.is-process{
     font-size: 14px;
+    color: #999999;
+    border-color: #999999;
   }
-  .el-step__title.is-wait{
+  .el-step__title.is-process,.el-step__head.is-wait{
     font-size: 14px;
+    color: #999999;
+    border-color: #999999;
   }
-  .el-step__title.is-success{
+  .el-step__title.is-success,.el-step__head.is-success{
     font-size: 14px;
-
+    color: #09C989;
+    border-color: #09C989;
   }
+   
 
 </style>
