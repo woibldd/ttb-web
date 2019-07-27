@@ -80,7 +80,7 @@
               </el-col>
               <el-col :span="7">
                 <div class="currency-btn">
-                  <el-button style="width: 100%;" @click="buyHandle">一键购买</el-button>
+                  <el-button style="width: 100%;" @click="buyHandle">一键买币</el-button>
                 </div>
               </el-col>
             </el-row>
@@ -95,6 +95,7 @@
 import Vue from "vue";
 import VueAwesomeSwiper from "vue-awesome-swiper";
 import service from "@/modules/service";
+import utils from "@/modules/utils"
 import "swiper/dist/css/swiper.css";
 
 Vue.use(VueAwesomeSwiper /* { default global options } */);
@@ -277,7 +278,7 @@ export default {
         color: #fff;
         font-weight: bold;
         border-color: transparent;
-        &:hover {
+        &:hover, &:focus {
           color: #fff !important;
         }
       }

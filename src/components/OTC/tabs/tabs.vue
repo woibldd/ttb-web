@@ -159,8 +159,7 @@ export default {
     change(code) {
       this.ipt = ''
     },
-    buySubmit() {
-      console.log('aksdjfksjdkfjakjsdkfjaskdjfkajsdlfjalsdjf;asd')
+    buySubmit() { 
       if (this.active === "0") {//金额
         if (this.$big(this.ipt).lt(100)) {
           utils.warning('购买量低于最低限额')
