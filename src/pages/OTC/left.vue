@@ -319,6 +319,10 @@ export default {
     box-sizing: border-box;
     margin-bottom: 16px;
     width: 210px;
+    &:first-child {
+      
+      padding-top: 0;
+    }
 
     .left-menu-box {
       &:not(:first-child) {
