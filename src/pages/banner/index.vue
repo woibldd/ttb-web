@@ -32,7 +32,7 @@
                 <el-tooltip content="非最终交易单价，仅供参考" placement="top" effect="light">
                   <i class="currency-icon">&#xe61c;</i>
                 </el-tooltip>
-                <span>7.03 CNY/USDT</span>
+                <span>{{downPrice}} CNY/USDT</span>
               </p>
             </div>
           </el-col>
@@ -51,14 +51,14 @@
               </el-col>
               <el-col :span="6">
                 <div class="currency-ipt">
-                  <el-select v-model="buy.currency" style="width: 100%">
+                  <el-select v-model="buy.currency"  style="width: 100%">
                     <el-option v-for="(item, index) in currencyData" :key="index" :value="item.currency" v-html="item.template"></el-option>
                   </el-select>
                 </div>
               </el-col>
               <el-col :span="7">
                 <div class="currency-btn">
-                  <el-button style="width: 100%;" @click="buyHandle()">立即购买</el-button>
+                  <el-button style="width: 100%;" @click="buyHandle">一键购买</el-button>
                 </div>
               </el-col>
             </el-row>
@@ -101,20 +101,37 @@ export default {
         }
       },
       arr: [],
-      money: 0
+      money: 0, 
+      downPrice: '',
     }
   },
   methods: {
-    buyHandle () {
-      if (this.buy.amount) {
+    buyHandle () { 
+      if (this.$big(this.buy.amount).lt(100)) {
+        utils.warning('购买量低于最低限额')
+      }
+      else if (this.$big(this.buy.amount).gt(50000)) {
+        utils.warning('购买量大于最大限额')
+      }
+      else if (this.buy.amount) {
         this.$emit('buy-handle', this.buy)
       }
     },
     bicher () {
       service.otcSymbolList().then(res => {
-        if (res.code === 0) {
-          this.arr = res.data
-        }
+         if (res.code === 0) {
+            for(var i = 0; i <= res.data.length; i++) {
+            if (res.data[i].currency === 'USDT') {
+                this.downPrice = res.data[i].cny_rate
+                break;
+              } else {
+                this.downPrice = '--'
+              }
+            }
+          }
+        // if (res.code === 0) {
+        //   this.arr = res.data
+        // }
       })
     }
   },

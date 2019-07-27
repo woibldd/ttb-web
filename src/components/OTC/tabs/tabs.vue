@@ -61,7 +61,7 @@
             <span class="font-gray">小额快速交易，0手续费，单笔50000以下</span>
           </el-col>
           <el-col :span="11">
-            <el-input v-model="ipt">
+            <el-input v-model="ipt" :placeholder="active=='0' ? '请输入需要购买的总金额' : '请输入需要购买的数量'">
               <el-select v-model="active" slot="prepend" placeholder="请选择" style="width: 120px" @change="change">
                 <el-option label="按金额购买" value="0"></el-option>
                 <el-option label="按数量购买" value="1"></el-option>
@@ -84,12 +84,13 @@
             <span class="font-gray">小额快速交易，0手续费，单笔50000以下</span>
           </el-col>
           <el-col :span="11">
-            <el-input placeholder="请输入内容" v-model="ipt">
+            <el-input :placeholder="active=='0' ? '请输入需要出售的总金额' : '请输入需要出售的数量'" v-model="ipt">
               <el-select v-model="active" slot="prepend" placeholder="请选择" style="width: 120px" @change="change">
                 <el-option label="按金额出售" value="0"></el-option>
                 <el-option label="按数量出售" value="1"></el-option>
               </el-select>
             </el-input>
+
           </el-col>
           <el-col :span="3">
             <el-button style="width: 90%;margin-left: 10%" type="danger" @click="sellSubmit">出售USDT</el-button>
@@ -156,6 +157,21 @@ export default {
       this.ipt = ''
     },
     buySubmit() {
+      console.log('aksdjfksjdkfjakjsdkfjaskdjfkajsdlfjalsdjf;asd')
+      if (this.active === "0") {//金额
+        if (this.$big(this.ipt).lt(100)) {
+          utils.warning('购买量低于最低限额')
+          return
+        }
+        else if (this.$big(this.ipt).gt(50000)) {
+          utils.warning('购买量大于最大限额')
+          return
+        } 
+      } else if (this.active === "1") { //数量
+        if (!this.ipt || isNaN(Number(this.ipt)) || this.$big(this.ipt).lte(0)) { 
+          return
+        }
+      }
       this.$router.push({
         path: '/Superzis',
         query: {
@@ -166,6 +182,20 @@ export default {
       })
     },
     sellSubmit() {
+      if (this.active === 0) {//金额
+        if (this.$big(this.ipt).lt(100)) {
+          utils.warning('购买量低于最低限额')
+          return
+        }
+        else if (this.$big(this.ipt).gt(50000)) {
+          utils.warning('购买量大于最大限额')
+          return
+        } 
+      } else if (this.active === 1) { //数量
+        if (!this.ipt || isNaN(Number(this.ipt)) || this.$big(this.ipt).lte(0)) { 
+          return
+        }
+      }
       this.$router.push({
         path: '/byamount',
         query: {
