@@ -141,7 +141,15 @@ export default {
       set(value) {
         this.state.otc.currency = value
       }
-    }
+    },
+    legal_currency: {
+      get () {
+        return state.otc.legal_currency
+      },
+      set (value) {
+        state.otc.legal_currency = value
+      }
+    }, 
   },
   methods: {
     change(code) {
