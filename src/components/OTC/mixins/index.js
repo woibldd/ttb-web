@@ -7,7 +7,7 @@ export default {
           rate: "cny_rate",
           symbol: '￥'
         },
-        SGD: { 
+        SGD: {  
           rate: "sgd_rate",
           symbol: 'S$'
         }

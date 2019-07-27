@@ -1,6 +1,32 @@
 <template>
   <div class="otc-left-container">
     <div class="left-menu-container left-menu-nobottom">
+      <div class="left-menu-box"> 
+        <ul class="left-menu-list">
+          <li class>  
+            <div @click="changeCoin('CNY')"
+              :class="{'active': coin.name === 'CNY' }"
+              class="menu-name">
+              <p>
+                {{ $t('CNY/￥') }}
+                <span class="text-idx">{{ '人民币' }}</span> 
+              </p>
+            </div>
+          </li>
+          <li class> 
+            <div @click="changeCoin('SGD')"
+              :class="{'active': coin.name === 'SGD' }"
+              class="menu-name">
+              <p>
+                {{ $t('SGD/S$') }}
+                <span class="text-idx">{{ '新加坡币' }}</span> 
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div> 
+    </div>
+    <div class="left-menu-container left-menu-nobottom">
       <div class="left-menu-box">
         <p class="left-menu-title">
           <icon name="handle"/>
@@ -39,6 +65,8 @@
           </li>
         </ul>
       </div>
+    </div>
+    <div class="left-menu-container left-menu-nobottom">
       <div class="left-menu-box">
         <p class="left-menu-title">
           <icon name="manager"/>
@@ -51,8 +79,7 @@
               to="/OTC/Hir"
               active-class="active"
             >{{ $t('otc_my_order') }}
-            <span class="count"
-v-if="token && count > 0">{{ count }}</span></router-link>
+            <span class="count" v-if="token && count > 0">{{ count }}</span></router-link>
           </li>
           <!--<li class="">-->
           <!--<router-link-->
@@ -86,12 +113,10 @@ v-if="token && count > 0">{{ count }}</span></router-link>
         </p>
         <ul class="left-menu-list">
           <li class>
-            <a class="menu-name"
-:href="guidanceLink">{{ $t('footer_hreseqgslp1') }}</a>
+            <a class="menu-name" :href="guidanceLink">{{ $t('footer_hreseqgslp1') }}</a>
           </li>
           <li class>
-            <a class="menu-name"
-:href="commonProblemLink">{{ $t('footer_hreseqgslp2') }}</a>
+            <a class="menu-name" :href="commonProblemLink">{{ $t('footer_hreseqgslp2') }}</a>
           </li>
         </ul>
       </div>
@@ -115,10 +140,12 @@ export default {
       },
       symbolList: {
         CNY: {
+          name: "CNY",
           rate: "cny_rate",
           symbol: '￥'
         },
         SGD: { 
+          name: "SGD",
           rate: "sgd_rate",
           symbol: 'S$'
         }
@@ -171,6 +198,9 @@ export default {
           }
         }
       })
+    }, 
+    changeCoin(command) {
+      this.legal_currency = command
     }
   },
   created () {
@@ -253,9 +283,14 @@ export default {
     from () {
       return this.$route.name
     },
-    legal_currency() {
-      return this.state.otc.legal_currency;
-    },
+    legal_currency: {
+      get () {
+        return state.otc.legal_currency
+      },
+      set (value) {
+        state.otc.legal_currency = value
+      }
+    }, 
     coin() {
       return this.symbolList[this.legal_currency]
     }
