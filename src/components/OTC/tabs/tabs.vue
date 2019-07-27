@@ -69,7 +69,7 @@
             </el-input>
             <div
               class="unit-label" style='right:120px'
-              v-html="legal_currency"/>
+              v-html="active=='0' ? 'CNY' : 'USDT'"/>
           </el-col>
           <el-col :span="3">
             <el-button style="width: 90%;margin-left: 10%" type="primary" @click="buySubmit">购买USDT</el-button>
@@ -95,7 +95,7 @@
             </el-input>
             <div
               class="unit-label" style='right:120px'
-              v-html="legal_currency"/>
+              v-html="active=='0' ? 'CNY' : 'USDT'"/>
 
           </el-col>
           <el-col :span="3">
