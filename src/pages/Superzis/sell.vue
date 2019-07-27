@@ -337,7 +337,7 @@ export default {
   }
 }
 </script>
-<style lang="scss" scope>
+<style lang="scss" scoped>
   @font-face {
     font-family: 'iconfont';  /* project id 1244642 */
     src: url('//at.alicdn.com/t/font_1244642_hlgiygo2x14.eot');
