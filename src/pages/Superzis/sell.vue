@@ -2,7 +2,7 @@
   <div class="otc-buy-container">
     <div class="otc-buy-inner">
       <div class="title">
-        <span class="font24 font-weight font-base title-text">一键买币</span>
+        <span class="font24 font-weight font-base title-text">一键卖币</span>
         <span class="font-gray">小额快速交易，单笔50000以下</span>
       </div>
      <div class="but-form">
@@ -36,7 +36,7 @@
          </div>
          <div class="tip">选择付款方式</div>
          <div class="pay-list-con">
-           <div class="pay-list" v-for="(item, index) in payData" :key="index" :data-pay="item.name" :class="{active: active === index, 'excellent': item.excellent}" @click="tabHanlde(item, index)">{{ item.name }}</div>
+           <div class="pay-list" v-for="(item, index) in payData" :key="index" :data-pay="item.name" :class="{active: active === index}" @click="tabHanlde(item, index)">{{ item.name }}</div>
          </div>
          <div class="result-msg">
            <dl>
@@ -77,12 +77,9 @@
              </dd>
            </dl>
          </div>
-         <div class="result-btn" v-if="purchase">
+         <div class="result-btn">
            <!--购买-->
-           <el-button class="res-btn" @click="purchaseHandle" style="width: 100%;" :disabled="buyDisabled">购买</el-button>
-         </div>
-         <div class="result-btn" v-if="overdue">
-           <el-button class="err-btn" @click="overdueHandle" style="width: 100%;">报价已过期，点击获取最新价格</el-button>
+           <el-button class="res-btn" @click="purchaseHandle" style="width: 100%;" :disabled="buyDisabled">出售USDT</el-button>
          </div>
        </div>
      </div>
@@ -107,7 +104,7 @@ export default {
       purchase: true,
       err: false,
       pricePoint: 2,
-      amountPoint: 2,
+      amountPoint: 6,
       price: '',
       type: '金额',
       amount: '',
@@ -115,8 +112,8 @@ export default {
       priceFlag: true,
       amountFlag: false,
       min_amount: 0,
-      buyDisabled: false,
       active_id: '',
+      buyDisabled: false,
       result: {
         amount: 0,
         unitPrice: 0,
@@ -183,14 +180,14 @@ export default {
         this.type = index === 0 ? '金额' : '数量'
         this.priceFlag = index === 0 ? true : false
         this.amountFlag = index === 0 ? false : true
-        this.price = 0
+         this.price = 0
         this.amount = 0
     },
     purchaseHandle() {
         console.log(this.paySelect)
         if (window.localStorage.getItem('X-TOKEN')) {
             if (this.paySelect === 0) {
-                service.bycoins(qs.stringify({
+                service.sellCoins(qs.stringify({
                     currency: this.currency,
                     user_id: this.id,
                     by_cny: this.price,
@@ -201,14 +198,14 @@ export default {
                 }
             }).then((res) => {
                if (res.code === 0) {
-                   this.$message.success('购买成功')
+                   this.$message.success('出售成功')
                    this.$router.push('/OTC/Hir')
                } else {
                    this.$message.warning(res.message)
                }
             })
             } else {
-                service.byamount(qs.stringify({
+                service.sellAmount(qs.stringify({
                         currency: this.currency,
                         user_id: this.id,
                         by_amount : this.amount,
@@ -219,8 +216,8 @@ export default {
                     }
                 }).then((res) => {
                 if (res.code === 0) {
-                    this.$message.success('购买成功')
-                    this.$router.push('/OTC/Hir')
+                    this.$message.success('出售成功')
+                     this.$router.push('/OTC/Hir')
                 } else {
                     this.$message.warning(res.message)
                 }
@@ -239,7 +236,7 @@ export default {
         this.result.unitPrice = 0
         service.minactive(qs.stringify({
             currency: this.currency,
-             isBuy: true
+             isBuy: false
         }), {
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -267,7 +264,7 @@ export default {
                             }
                         })
                     })
-                     if(this.$route.query.active) {
+                   if(this.$route.query.active) {
                         this.paySelect = Number(this.$route.query.active)
                         if(this.$route.query.active === '0') {
                             this.price = this.$route.query.amount
@@ -306,12 +303,14 @@ export default {
     }
   },
   created() {
-    this.getPairList()
-    this.init()
-     if(this.$route.query.active) {
-    } else {
-        this.price = this.$route.query.amount
-    }
+    this.$nextTick(() => {
+        this.getPairList()
+        this.init()
+        if(this.$route.query.active) {
+        } else {
+            this.price = this.$route.query.amount
+        }
+    })
   },
   mounted() {//页面加载后执行方法
 　　clearInterval(this.timer)
@@ -334,7 +333,7 @@ export default {
                 this.price =this.$big(e).times(this.result.unitPrice).round(6, 0).toString()
             }
         }
-    }, 300)
+    }, 500)
   }
 }
 </script>
@@ -409,7 +408,7 @@ export default {
         color: #333;
         font-size: 12px;
         i {
-          color: #23CED0;
+          color: #F45151;
           font-size: 18px;
           vertical-align: middle;
         }
@@ -513,8 +512,8 @@ export default {
           }
         }
         .active {
-          border-color: #23CED0;
-          color: #23CED0;
+          border-color: #F45151;
+          color: #F45151;
           &::after {
             font-family: 'iconfont';
             content: '\e615';
@@ -586,14 +585,11 @@ export default {
           }
         }
         .res-btn {
-          background: #23CED0!important;
+          background: #F45151!important;
           color: #fff!important;
           font-size: 16px;
           &:focus, &:hover {
-            background: #23CED0!important;
-          }
-          &:disabled {
-              background: #ccc!important
+            background: #e13c13!important;
           }
         }
         .err-btn {
