@@ -25,7 +25,8 @@
               :class="'type-' + item.payment_type"
               :name="paytype[item.payment_type]"/>
             <!-- {{ item.payment_type | type }} -->
-            {{typeState(item.payment_type)}}
+            <!-- {{typeState(item.payment_type)}} -->
+            {{$t(payName( item.payment_type))}}
           </div>
           <div class="mes">
             <template v-if="item.payment_type === 1">
@@ -347,8 +348,7 @@ export default {
         5: "paylah"
       }
     }
-  },
-
+  }, 
   computed: {
     userInfo () {
       return state.userInfo || {}
@@ -368,9 +368,19 @@ export default {
     }
   },
   methods: {
-    typeState (e) {
-      return e === 1 ?this.$t('payment_nameyhk') : e === 2 ? this.$t('payment_namezfb') : this.$t('payment_weChat_adasunt')
+    
+    payName(type){
+      return {
+          1: "payment_nameyhk",
+          2: "payment_namezfb",
+          3: "payment_weChat_adasunt",
+          4: "Paynow",
+          5: "Paylah",
+        }[type]
     },
+    // typeState (e) {
+    //   return e === 1 ?this.$t('payment_nameyhk') : e === 2 ? this.$t('payment_namezfb') : this.$t('payment_weChat_adasunt')
+    // },
     bock () {
       this.ruleForm = {
         payment_type: '1',
