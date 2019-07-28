@@ -109,6 +109,7 @@ export default {
           precision: 1
         }) 
 
+        console.log('0000000000000000000000000000000000000000001111111111111')
         
         local.lineType = 1 //默认蜡烛线
         let resolutions = document.createElement('div') //时间周期菜单 
@@ -139,7 +140,7 @@ export default {
         let list = ['1', '3', '5', '15', '30', '60', '120', '240', '360', '720',  '1D', '1W', '1M']  
         let ul = document.createElement('ul')
         let lia = document.createElement('li')
-        lia.innerText = t("tradingview_line") //分时线
+        lia.innerText = utils.$i18n.t("tradingview_line") //分时线
         lia.addEventListener('click', function() {  
           widget.chart().setResolution('1', null); //周期切换到一分钟
           local.lineType = widget.chart().chartType(); //记录当前的K线样式
