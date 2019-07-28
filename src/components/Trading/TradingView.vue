@@ -148,8 +148,7 @@ export default {
           widget.chart().setEntityVisibility(ida, false); //隐藏7 日平均线
           widget.chart().setEntityVisibility(idb, false); //隐藏30 日平均线
           widget.chart().setEntityVisibility(idc, false); //隐藏60 日平均线
-          resolutions.parentElement.classList.remove('selected')
-          fs = 0
+          resolutions.parentElement.classList.remove('selected') 
           span.innerText = lia.innerText
         })
         ul.appendChild(lia)  
