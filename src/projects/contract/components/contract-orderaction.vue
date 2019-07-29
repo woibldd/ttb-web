@@ -990,12 +990,12 @@ export default {
 
       if (totalValue && amount) {
         let margin = calculator.getMargin(amount, price, lever, totalValue, im, mm, takeRate, pairInfo)
-        return margin.cost.round(this.pairInfo.value_scale || 4, down).toString()
+        // return margin.cost.round(this.pairInfo.value_scale || 4, down).toString() 
+        return utils.toFixed(margin.cost, this.pairInfo.value_scale || 4) 
       }
       return "--"
     },
-    costValueSellNew() {
-
+    costValueSellNew() { 
       // console.log({holding:this.holding})
       let amount = this.amount;
        
@@ -1030,10 +1030,11 @@ export default {
       let futures = [...this.currentDel, userInput] 
       let totalValue = calculator.getTotalValue(futures, this.balance, pairInfo, mul)
       let down = 0
-
+ 
       if (totalValue && amount) {
         let margin = calculator.getMargin(amount, price, lever, totalValue, im, mm, takeRate, pairInfo)
-        return margin.cost.round(this.pairInfo.value_scale || 4, down).toString()
+        //return margin.cost.round(this.pairInfo.value_scale || 4, down).toString()
+        return utils.toFixed(margin.cost, this.pairInfo.value_scale || 4) 
       }
       return "--"
     },
@@ -1871,6 +1872,7 @@ export default {
         this.mmModal.label = this.$t("order_side_sell");
         this.btnShortLoading = true;
       } 
+      this.showMakeMoreModal = true;
       // 先打开弹窗
       if (!local.mmNeverShow) {
         this.showMakeMoreModal = true;

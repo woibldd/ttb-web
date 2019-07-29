@@ -126,8 +126,14 @@
           :label="operate.title"
         >
           <template slot-scope="scope">
-            <span
-              @click="showModal = true"
+            <label class="my-fund-label"
+              v-if="scope.row.currency==='USDT'"
+              @click="nodeBuy"
+              v-tooltip.top="{html: true, content: $t('fund_assets_node_buy_tip'), classes: 'assets'}" 
+              >
+              {{$t('fund_assets_node_buy')}}
+            </label>
+            <span 
               class="my-fund-operate"> 
                <a href="javascript:;" class="menu-name" @click="routerTransFer(scope.row)">
                   {{ $t('suvbanean') }}
@@ -306,6 +312,7 @@ export default {
       rates: {},
       search: "",
       hideSmall: false,
+      nodePrice: 1000,
     };
   },
   components: {
@@ -440,6 +447,49 @@ export default {
     },
     dianjs (res) {
       this.one = res
+    },
+    async nodeBuy() {
+      //  const confirm = await utils.confirm(this, { 
+      //   customClass: "ix-message-box-wrapper", 
+      //   content: this.$i18n.t('是否确定认购并升级为IXX全球节点？本次认购升级将扣除您1000USDT'),
+      //   title: this.$i18n.t('confirm')
+      // }) 
+ 
+      // if (!confirm) {
+      //   return false
+      // }
+      const h = this.$createElement;
+      let message = h('div', {style: 'text-align: center;'}, [
+          h('div', { style: 'margin:10px; font-size: 16px;'}, [
+              h('span', null, this.$t('fund_assets_node_buy_tip') ), 
+            ]),
+          h('div', {style: 'font-size: 16px;'}, [ 
+            h('span', null, this.$t('fund_assets_node_buy_tip2') ), 
+            h('span', {style: 'color:#00CED0;'}, this.nodePrice ), 
+            h('span', null, 'USDT' )
+          ])
+        ])
+
+      const confirm = await utils.confirm(this, {
+        customClass: "ix-message-box-wrapper",  
+        title: this.$i18n.t('confirm'),
+        type: '',
+        message 
+      });
+
+      if (!confirm) {
+        return false
+      } 
+
+      service.nodesBuy({uid: state.userInfo.id}).then(res=> {
+        if (res.code === 0) {
+          utils.success('认购成功。')
+        } else {
+          if (res.message) {
+            utils.alert(res.message)
+          }
+        }
+      }) 
     },
     routerTransFer(item) {
       this.$router.push({
@@ -576,10 +626,8 @@ export default {
         this.tableData = (res.data || []).map(item => {
           item.rates = item.rates || {};
           item.locking = this.$big(item.locking || 0).plus(item.withdrawing || 0).toString();
-          item.amount = this.$big(item.withdrawing) 
-            .plus(item.locking)
-            .plus(this.$big(item.available))
-            .plus(item.locking)
+          item.amount = this.$big(item.locking)
+            .plus(this.$big(item.available)) 
             .round(8, this.C.ROUND_DOWN)
             .toString()
           item.estValue = this.getEstValue(item)
@@ -589,7 +637,7 @@ export default {
           item.pairs = ExchangePairs[item.currency] || 'BTC_USDT';
           return item
         })
-      })
+      }) 
     },
     // getEstValue(item) {
     //   let res = this.$big(item.amount).times(
@@ -658,6 +706,16 @@ export default {
 </style>
 
 <style  lang="scss" >
+  .ix-message-box-wrapper {
+    .el-message-box__title {
+      text-align:center;
+    }
+    .el-message-box__btns {
+      .el-button {
+        width: 100px;
+      }
+    }
+  }
   // .assets-tip {
   //   // padding: 0 10px;
   //   // line-height: 25px;

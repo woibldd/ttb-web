@@ -100,7 +100,7 @@ export const state = {
   },
   otc: {
     currency: "USDT",
-    legal_currency: "CNY",
+    legal_currency: "CNY", // CNY,SGD 
     showSide: 1, //1: 买，2：卖
     symbolList: [],
     userInfo: null,
@@ -120,7 +120,7 @@ export const local = new Locals('store', {
   orderbookMode: 'both',
   regionId: '',
   timezone: '',
-  interval: '60',
+  interval: '15',
   supportNum: 129,
   proOnFav: false,
   pairTableTab: 'USDT',

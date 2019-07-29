@@ -75,9 +75,9 @@
   "add_address_error": "地址不能為空",
   "copyed": "已復制",
   "link_copyed": "分享鏈接已復制",
-  "deposit_hint_addr": "禁止向 %{coin} 地址充值除 %{coin} 之外的資產，任何充入 %{coin} 地址的非 %{coin} 資產將不可找回。",
+  "deposit_hint_addr": "禁止向 %{coin} 地址充值除 %{coin} 之外的資產，任何充入 %{coin} 地址的非 %{coin} 資產將不可找回",
   "deposit_hint_min": "最低充值數量為 %{min}",
-  "deposit_hint_confirm": "使用 %{coin} 地址充值需要 %{confirm} 個網絡確認才能到賬。",
+  "deposit_hint_confirm": "使用 %{coin} 地址充值需要 %{confirm} 個網絡確認才能到賬",
   "kyc_ph_id": "請填寫證件號碼",
   "kyc_passport": "護照",
   "kyc_idcard": "身份證",
@@ -602,7 +602,7 @@
   "api_has_no_obtain": "領取限量挖礦機器人",
   "address_tag": "地址標籤",
   "eos_deposit_tip_label": "轉帳務必填寫正確的地址標籤 ，否則將充值失敗",
-  "eos_deposit_tip_security_third": "地址標籤填寫錯誤而造成的充值失敗，找回將收取一定比例的手續費；",
+  "eos_deposit_tip_security_third": "地址標籤填寫錯誤而造成的充值失敗，找回將收取一定比例的手續費",
   "eos_not_support_internal_transfer": "暫不支持交易所內部地址轉賬",
   "orders": "訂單",
 
@@ -1404,7 +1404,7 @@
   "contract_cal_rate": "計價貨幣利率",
   "contract_over_price": "溢價指數",
   "contract_undefined": "未知",
- 
+
   "contract_history_deal_dan": "成交單",
   "contract_ix_index_source": "IXX指數",
   "contract_deal_type_0": "資金費率分配",
@@ -1634,7 +1634,7 @@
   "transfer_all": "全部",
   "withdraw_tips1": "請完善你的資料",
   "idt_tips":"空投部分ITD每日系統解凍釋放2%",
-  "dfd_tips":"空投部分DFD每日系統解凍釋放5%", 
+  "dfd_tips":"空投部分DFD每日系統解凍釋放5%",
   "newos_tips": "空投部分NEWOS每日系統解凍釋放3%",
   "bnl_tips": "空投部分BNL每日系統解凍釋放3%",
 
@@ -1886,7 +1886,7 @@
   "bby_shouy19": "請輸入存幣數量",
   "bby_shouy20": "參加",
   "bby_shouy21": "規則說明",
-  
+
   "bby_shouy22": "1.“幣盈盈”是基於數字資產的理財產品，每個項目有相應的鎖定週期和利率，您可以自由選擇購買，購買後本金鎖定，根據約定時間開始計算利息，項目到期後本息解鎖轉入賬戶，您即可獲得約定的本息收益。",
   "bby_shouy23": "2.登錄IXX.COM官網，點擊“幣盈盈”鏈接，依據您自身的情況選擇需要鎖定的幣種，點擊“點此搶購”，即可參與“幣盈盈”計劃,“幣盈盈”目前不支持提前解鎖，系統會在鎖定期結束後自動解鎖您鎖定的部分並支付利息。",
   "bby_shouy24": "3.參與“幣盈盈”的項目均有固定的計息開始和結束時間，在此時間週期內計算您可獲得的收益。每個項目的計息時間可以在頁面查看。",
@@ -1900,8 +1900,7 @@
   "bby_shouy99": "幣幣返佣金額",
   "bby_shouy98": "合約返佣金額",
   "bby_shouy32": "餘額不足，請充幣",
- 
-  "bby_shise1":"幣盈盈記錄", 
+  "bby_shise1":"幣盈盈記錄",
   "bby_shise2":"可用數量不足",
   "bby_shise3":"結束",
   "bby_shise4":"已售罄",
@@ -1910,16 +1909,14 @@
   "bby_shise7":"幣盈盈購買",
   "bby_shise8":"本息歸還",
   "bby_shise9":"熱門推薦",
-    "bby_shise10":"限期", 
+  "bby_shise10":"限期",
   "bidTitle": "弊盈盈",
-  
   "otc_order_trade": "操作",
   "otc_placeholder_c": "請輸入您預期購買單價",
   "pair_list_all": "全部",
   "pair_list_option": "自選",
-  "pair_list_new": "創新區", 
-  "otc_seiitm_15": "撤銷全部",
-  "trading_order_cancel_all": "撤銷全部", 
+  "pair_list_new": "創新區",
+  "otc_seiitm_15": "撤銷全部", 
   "done_verified": "已完成",
   "otc_trans_time": "成交時間",
   "coin_FUTURE_BTCUSD":"BTC",
@@ -1937,11 +1934,25 @@
   "otc_seiitm_11": "買家",
   "otc_seiitm_12": "級別",
   "otc_seiitm_13": "超時自動取消訂單",
-  "otc_seiitm_14": "超時自動放幣", 
+  "otc_seiitm_14": "超時自動放幣",
   "otc_seiitm_16": "提交成功",
   "otc_seiitm_17": "取消成功!",
-  
   "fund_my_assets_hide": "隱藏小額幣種",
-  "fund_my_assets_hide_tip": "小於",  
-  "otc_collection_update": "編輯"
+  "fund_my_assets_hide_tip": "小於",
+  "otc_collection_update": "編輯",
+  "watch_tips": "請認真核對充幣地址是否正確壹致，如果不壹致將導致無法成功充值或資產不可找回",
+    
+  "contract_FUTURE_ETHUSD":"ETH永續", 
+  "trading_order_cancel_all": "批量撤銷",
+  "tv_technical_indicators": "技術指標",
+  "tv_style":"樣式設定",
+  "tv_down_minute":"分", 
+  "tv_down_hour": "小時",
+  "tv_down_day": "日",
+  "tv_down_week": "周",
+  "tv_down_month": "月",
+  "fund_assets_node_buy": "節點認購",
+  "fund_assets_node_buy_tip": "是否確定認購並陞級為IXX全球節點？", 
+  "fund_assets_node_buy_tip2": "本次認購陞級將扣除您",
+  "fund_node_buy_success": "認購成功"
 }

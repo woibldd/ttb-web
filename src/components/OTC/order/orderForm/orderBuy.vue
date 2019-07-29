@@ -43,7 +43,7 @@
                   <li>
                     <div class="label">{{ $t('otc_current_index') }}</div>
                     <div class="content">
-                      <span class="text">{{ indexPrice || 0 | fixed(2) }} CNY</span>
+                      <span class="text">{{ indexPrice || 0 | fixed(2) }} {{legal_currency}}</span>
                     </div>
                   </li>
                   <li>
@@ -72,14 +72,20 @@
                     </div>
                     <div class="content">
                       <div class="el-number-input">
-                        <el-input-number
+                        <!-- <el-input-number
                           :max="130"
                           :min="70"
                           :controls="false"
                           :placeholder="$t('otc_placeholder_a')"
                           v-model="float_rate"
-                          step-strictly
                           style="border: 1px solid #fff!important"
+                        /> -->
+                        <number-input
+                          class="number-input"
+                          v-model="float_rate"
+                          :scale="2"
+                          :placeholder="$t('otc_placeholder_a')"
+                          @blur="floatRateWatcher"
                         />
                         <div
                           class="unit-label long"
@@ -344,6 +350,7 @@ import service from '@/modules/service.js'
 import { state } from '@/modules/store.js'
 import vList from '@/components/OTC/vlist/vertical-table'
 import utils from '@/modules/utils.js'
+import otcComputed from '@/components/OTC/mixins/index.js'
 import _ from 'lodash'
 // import otcWatch from "@/mixins/otc-watcher.js"
 export default {
@@ -434,9 +441,7 @@ export default {
       balance: {},
     }
   },
-  // mixins: {
-  //   otcWatch
-  // },
+  mixins: [otcComputed],
   props: {
     active_id: {
       type: Number,
@@ -451,27 +456,7 @@ export default {
       default: false
     }
   },
-  computed: {
-    currency: {
-      get () {
-        return this.state.otc.currency
-      },
-      set (value) {
-        this.state.otc.currency = value
-      }
-    },
-    legal_currency: {
-      get () {
-        return state.otc.legal_currency
-      }
-    },
-
-    symbolInfo () {
-      return this.state.otc.symbolInfo
-    },
-    indexPrice () {
-      if (this.symbolInfo && this.symbolInfo.cny_rate) { return this.symbolInfo.cny_rate } else return 0
-    },
+  computed: { 
     titleText () {
       if (this.side === 1) {
         return 'otc_publish_buy_order'
@@ -495,10 +480,7 @@ export default {
           .mul(this.indexPrice || 0)
           .toFixed(2)
       }
-    },
-    isLogin () {
-      return state.userInfo !== null
-    },
+    }, 
     total () {
       return this.$big(this.amount || 0).mul(this.price || 0)
     },
@@ -513,23 +495,22 @@ export default {
         return '可用数量：' + plt
       }
     },
-    price_scale () {
-      if (!!this.symbolInfo) {
-        return this.symbolInfo.price_scale || 2
-      }
-      return 2
-    },
-    amount_scale() {
-      if (!!this.symbolInfo) {
-        return this.symbolInfo.amount_scale || 6
-      }
-      return 2
-    }
   },
   components: {
     vList
   },
   methods: {
+    floatRateWatcher() {
+      let val = this.float_rate
+      if (!isNaN(Number(val))) {
+        if (Number(val) > 130) {
+          this.float_rate = 130
+        }
+        else if(Number(val) < 70) {
+          this.float_rate = 70
+        } 
+      } 
+    },
     openSideBar () {
       this.step = 0
       this.active_id = 0
@@ -564,6 +545,7 @@ export default {
         this.order.price = this.price
         this.order.amount = this.amount
         this.order.float_rate = Number(this.$big(this.float_rate).mul(0.01))
+        this.order.currency_type = this.legal_currency
 
         console.log({total: this.total})
         service.createOtcOrder(this.order).then(res => {
@@ -624,11 +606,19 @@ export default {
     inputPrice () {
       this.flag = false
       this.alertTitle = ''
-      this.awitFlag = false
-      console.log({flag: this.flag})
+      this.awitFlag = false 
+      console.log({symbolInfo:this.symbolInfo})
+      let buy_price_one = this.symbolInfo.buy_price_one
+      let sell_price_one = this.symbolInfo.sell_price_one
+      if (this.legal_currency.toUpperCase() === 'SGD') {
+        buy_price_one = this.symbolInfo.sgd_buy_price_one
+        sell_price_one = this.symbolInfo.sgd_sell_price_one
+      }
+
+
       if (this.currency === this.symbolInfo.currency) {
-        let min_buy_price = Number(this.symbolInfo.buy_price_one) * 0.8
-        let min_sell_price = Number(this.symbolInfo.sell_price_one) * 0.8
+        let min_buy_price = Number(buy_price_one) * 0.8
+        let min_sell_price = Number(sell_price_one) * 0.8
         let awit_buyPrice = Number(
           Number(min_buy_price) - Number(this.inputPrice)
         )
@@ -636,9 +626,9 @@ export default {
           Number(min_sell_price) - Number(this.inputPrice)
         )
         if (this.side === 1) {
-          if (this.$big(this.inputPrice).gt(this.symbolInfo.sell_price_one)) {
+          if (this.$big(this.inputPrice).gt(sell_price_one)) {
             this.flag = true
-             this.alertTitle =this.$t('otc_ziurec_3',{currency:this.currency,inputPrice:this.inputPrice,symbolInfo:this.symbolInfo.sell_price_one})
+             this.alertTitle =this.$t('otc_ziurec_3',{currency:this.currency,inputPrice:this.inputPrice,symbolInfo:sell_price_one})
            // `您发布的购买${this.currency}的交易单，价格为${this.inputPrice}CNY高于卖一价${this.symbolInfo.sell_price_one}CNY，以该价格发布可能给您带来损失`
           } else {
             this.flag = false
@@ -650,9 +640,9 @@ export default {
             }
           }
         } else { 
-          if (this.$big(this.inputPrice).lt(this.symbolInfo.buy_price_one)) {
+          if (this.$big(this.inputPrice).lt(buy_price_one)) {
             this.flag = true 
-              this.alertTitle =this.$t('otc_ziurec_15',{currency:this.currency,inputPrice:this.inputPrice,symbolInfo:this.symbolInfo.buy_price_one})
+              this.alertTitle =this.$t('otc_ziurec_15',{currency:this.currency,inputPrice:this.inputPrice,symbolInfo:buy_price_one})
           // `您发布的出售${this.currency}的交易单，价格为${this.inputPrice}CNY低于买一价${ this.symbolInfo.buy_price_one}CNY，以该价格发布可能给您带来损失`
           } else {
             this.flag = false
@@ -709,7 +699,17 @@ export default {
       //this.total = ''
       this.message_success = ''
       this.message_failed = ''
-    }
+    },
+    // float_rate(val) {
+    //   if (!isNaN(Number(val))) {
+    //     if (Number(val) > 130) {
+    //       this.float_rate = 130
+    //     }
+    //     else if(Number(val) < 70) {
+    //       this.float_rate = 70
+    //     } 
+    //   } 
+    // }
 
   }
 }
@@ -776,13 +776,15 @@ export default {
       }
       ul {
         li {
-          margin: 0;
-          line-height: 40px;
+          margin: 15px 0;
+          //line-height: 40px;
           display: flex;
           .label {
+            display: flex;
+            align-items: center;
             flex: 100px 0 0 0;
             width: 100px;
-            margin-bottom: 15px;
+           // margin-bottom: 15px;
             font-size: 14px;
             font-family: MicrosoftYaHei;
             font-weight: 400;
@@ -790,13 +792,13 @@ export default {
           }
           .content {
             flex: 1;
+            line-height: 40px;
             .el-input__inner {
-              text-align: left;
-
+              text-align: left; 
             }
-            .coadawm{
-              height: 80px!important;;
-            }
+            // .coadawm{
+            //   height: 80px!important;;
+            // }
 
             .unit-label {
               right: 10px;
@@ -804,6 +806,7 @@ export default {
             .text-total {
               position: relative;
               text-indent: 8px;
+              height: 40px;
             }
             .el-number-input {
               text-indent: 15px;

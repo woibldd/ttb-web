@@ -15,6 +15,7 @@ import Bid from '@/pages/Bid/index.vue'
 import BidDetail from '@/pages/Bid/detail.vue'
 import BidTable from '@/pages/Bid/table.vue'
 import Superzis from '@/pages/Superzis/index.vue'
+import ByAmount from '@/pages/Superzis/sell.vue'
 
 import _ from 'lodash'
 // import HelloWorld from '@/components/HelloWorld'
@@ -303,11 +304,11 @@ export const routes = [
     name: 'MessageSettings',
     component: MessageSettings
   },
-  {
-    path: 'collection',
-    name: 'collection',
-    component: Collection
-  },
+  // {
+  //   path: 'collection',
+  //   name: 'collection',
+  //   component: Collection
+  // },
   {
     path: '/test',
     name: 'test',
@@ -405,6 +406,19 @@ export const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: Superzis
+  },
+  {
+    path: '/byamount',
+    name: 'byamount',
+    meta: {
+      nav: true,
+      footer: true,
+      class: 'dark'
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: ByAmount
   }
 ]
 

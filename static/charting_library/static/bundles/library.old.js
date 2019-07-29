@@ -10655,52 +10655,54 @@ webpackJsonp([4], [function (t, e, i) {
         return this._context = t, this._input = e, i = this.f_0(o.Std.close(this._context), o.Std.high(this._context), o.Std.low(this._context), o.Std.volume(this._context)), n = o.Std.cum(i, this._context), s = n, [s]
       }
     }
-  }, {
-    name: "Accumulative Swing Index",
-    metainfo: {
-      _metainfoVersion: 27,
-      isTVScript: !1,
-      isTVScriptStub: !1,
-      is_hidden_study: !1,
-      defaults: {
-        styles: {
-          plot_0: {
-            linestyle: 0,
-            linewidth: 1,
-            plottype: 0,
-            trackPrice: !1,
-            transparency: 35,
-            visible: !0,
-            color: "#3C78D8"
-          }
-        }, precision: 4, inputs: {in_0: 10}
-      },
-      plots: [{id: "plot_0", type: "line"}],
-      styles: {plot_0: {title: "ASI", histogramBase: 0, joinPoints: !1}},
-      description: "Accumulative Swing Index",
-      shortDescription: "ASI",
-      is_price_study: !1,
-      inputs: [{id: "in_0", name: "Limit Move Value", defval: 10, type: "float", min: .1, max: 1e5}],
-      id: "Accumulative Swing Index@tv-basicstudies-1",
-      scriptIdPart: "",
-      name: "Accumulative Swing Index"
-    },
-    constructor: function () {
-      this.f_0 = function (t, e) {
-        var i = e.new_var(o.Std.open(e)), n = e.new_var(o.Std.high(e)), s = e.new_var(o.Std.low(e)),
-          r = e.new_var(o.Std.close(e)), a = o.Std.abs(n - r.get(1)), l = o.Std.abs(s - r.get(1)), h = o.Std.abs(n - s),
-          c = o.Std.abs(r.get(1) - i.get(1)), d = o.Std.max(a, l),
-          p = o.Std.iff(a >= o.Std.max(l, h), a - .5 * l + .25 * c, o.Std.iff(l >= o.Std.max(a, h), l - .5 * a + .25 * c, h + .25 * c));
-        return o.Std.iff(0 === p, 0, (r - r.get(1) + .5 * (r - i) + .25 * (r.get(1) - i.get(1))) / p * d / t * 50)
-      }, this.f_1 = function (t, e) {
-        var i = this.f_0(t, e);
-        return o.Std.cum(i, e)
-      }, this.main = function (t, e) {
-        var i, o;
-        return this._context = t, this._input = e, i = this._input(0), o = this.f_1(i, this._context), [o]
-      }
-    }
-  }, {
+  }, 
+  // {
+  //   name: "Accumulative Swing Index",
+  //   metainfo: {
+  //     _metainfoVersion: 27,
+  //     isTVScript: !1,
+  //     isTVScriptStub: !1,
+  //     is_hidden_study: !1,
+  //     defaults: {
+  //       styles: {
+  //         plot_0: {
+  //           linestyle: 0,
+  //           linewidth: 1,
+  //           plottype: 0,
+  //           trackPrice: !1,
+  //           transparency: 35,
+  //           visible: !0,
+  //           color: "#3C78D8"
+  //         }
+  //       }, precision: 4, inputs: {in_0: 10}
+  //     },
+  //     plots: [{id: "plot_0", type: "line"}],
+  //     styles: {plot_0: {title: "ASI", histogramBase: 0, joinPoints: !1}},
+  //     description: "Accumulative Swing Index",
+  //     shortDescription: "ASI",
+  //     is_price_study: !1,
+  //     inputs: [{id: "in_0", name: "Limit Move Value", defval: 10, type: "float", min: .1, max: 1e5}],
+  //     id: "Accumulative Swing Index@tv-basicstudies-1",
+  //     scriptIdPart: "",
+  //     name: "Accumulative Swing Index"
+  //   },
+  //   constructor: function () {
+  //     this.f_0 = function (t, e) {
+  //       var i = e.new_var(o.Std.open(e)), n = e.new_var(o.Std.high(e)), s = e.new_var(o.Std.low(e)),
+  //         r = e.new_var(o.Std.close(e)), a = o.Std.abs(n - r.get(1)), l = o.Std.abs(s - r.get(1)), h = o.Std.abs(n - s),
+  //         c = o.Std.abs(r.get(1) - i.get(1)), d = o.Std.max(a, l),
+  //         p = o.Std.iff(a >= o.Std.max(l, h), a - .5 * l + .25 * c, o.Std.iff(l >= o.Std.max(a, h), l - .5 * a + .25 * c, h + .25 * c));
+  //       return o.Std.iff(0 === p, 0, (r - r.get(1) + .5 * (r - i) + .25 * (r.get(1) - i.get(1))) / p * d / t * 50)
+  //     }, this.f_1 = function (t, e) {
+  //       var i = this.f_0(t, e);
+  //       return o.Std.cum(i, e)
+  //     }, this.main = function (t, e) {
+  //       var i, o;
+  //       return this._context = t, this._input = e, i = this._input(0), o = this.f_1(i, this._context), [o]
+  //     }
+  //   }
+  // },
+   {
     name: "Advance/Decline",
     metainfo: {
       _metainfoVersion: 27,

@@ -158,18 +158,18 @@
                   <div
                     class="cur"
                     :style="{color: item.side === 1 ? '#23C88B' : '#F24E4D'}">
-                    <p>/CNY</p>
+                    <p>/{{item.currency_type}}</p>
                     {{ item.currency }}
                   </div>
                 </div>
                 <dl>
                   <dt>
-                    <em>￥</em>
+                    <em>{{ getCurrencySymbol(item.currency_type) }}</em>
                     <span>{{ item.total }}</span>
                   </dt>
                   <dd>
                     {{ $t('otc_trans_idjg') }}：
-                    <span>{{ '¥' + item.price }}</span>
+                    <span>{{ getCurrencySymbol(item.currency_type) + item.price }}</span>
                   </dd>
                   <dd>
                     {{ $t('otc_trans_idsl') }}：
@@ -182,7 +182,7 @@
                     </dd>
                     <dd>
                      {{$t('otc_seiitm_10')}}：
-                      <span>{{ '¥' + item.total }}</span>
+                      <span>{{ getCurrencySymbol(item.currency_type) + item.total }}</span>
                     </dd>
                   </template>
                 </dl>
@@ -221,11 +221,12 @@
                   <dt>
                     {{ $t('otc_payment_method') }}：
                     <template v-if="item.state !== 1">
-                      <span v-if="item.otc_collection.alipay_account">{{ $t('payment_namezfb') }}</span>
+                      <span>{{ $t(payName(item.otc_collection.payment_type)) }}</span>
+                      <!-- <span v-if="item.otc_collection.alipay_account">{{ $t('payment_namezfb') }}</span>
                       <span
                         v-else-if="item.otc_collection.we_chat_account"
                       >{{ $t('payment_weChat_adasunt') }}</span>
-                      <span v-else-if="item.otc_collection.card_number">{{ $t('payment_nameyhk') }}</span>
+                      <span v-else-if="item.otc_collection.card_number">{{ $t('payment_nameyhk') }}</span> -->
                     </template>
                   </dt>
                   <!-- <dd>
@@ -537,13 +538,44 @@ export default {
             width: '',
             key: 'collection_img'
           }
+        ],
+        //paynow
+        4: [
+          {
+            title: 'name', // 姓名
+            text: 'payment_name',
+            width: '',
+            key: 'name'
+          },
+          {
+            title: 'card_number', // 银行卡号
+            text: 'payment_card_number',
+            width: '',
+            key: 'card_number'
+          }, 
+        ], 
+        //paylah
+        5: [
+          {
+            title: 'name', // 姓名
+            text: 'payment_name',
+            width: '',
+            key: 'name'
+          },
+          {
+            title: 'card_number', // 银行卡号
+            text: 'payment_card_number',
+            width: '',
+            key: 'card_number'
+          }, 
         ]
       },
       selectPayment: {},
       qrsrc: '',
-      showQRcode: false
+      showQRcode: false,
+      
     }
-  },
+  }, 
   // computed: {
   //   userInfo () {
   //     return state.userInfo || {}
@@ -560,7 +592,22 @@ export default {
   //     return 0
   //   }
   // },
-  methods: {
+  methods: { 
+    payName(type){
+      return {
+          1: "payment_nameyhk",
+          2: "payment_namezfb",
+          3: "payment_weChat_adasunt",
+          4: "Paynow",
+          5: "Paylah",
+        }[type]
+    },
+    getCurrencySymbol(type) {
+      return {
+        "CNY": "￥",
+        "SGD": "S$",
+      }[type]
+    },
     compareDown (property) {
       return function (a, b) {
         return a[property] - b[property]
@@ -879,6 +926,9 @@ export default {
                     // this.selectPayment = arr[0]
                     Vue.set(item, 'selectPayment', arr[0])
                   }
+                  else {
+                    Vue.set(item, 'selectPayment', paylist[0])
+                  }
                 }
 
                 Vue.set(item, 'bankArray', bankData)
@@ -1062,4 +1112,6 @@ export default {
       color: #c9a96c
     }
   }
+
+  
 </style>

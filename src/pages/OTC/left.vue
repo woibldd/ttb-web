@@ -1,6 +1,32 @@
 <template>
   <div class="otc-left-container">
     <div class="left-menu-container left-menu-nobottom">
+      <div class="left-menu-box"> 
+        <ul class="left-menu-list">
+          <li class>  
+            <div @click="changeCoin('CNY')"
+              :class="{'active': coin.name === 'CNY' }"
+              class="menu-name">
+              <p>
+                {{ $t('CNY/￥') }}
+                <span class="text-idx">{{ '人民币' }}</span> 
+              </p>
+            </div>
+          </li>
+          <li class> 
+            <div @click="changeCoin('SGD')"
+              :class="{'active': coin.name === 'SGD' }"
+              class="menu-name">
+              <p>
+                {{ $t('SGD/S$') }}
+                <span class="text-idx">{{ '新加坡币' }}</span> 
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div> 
+    </div>
+    <div class="left-menu-container left-menu-nobottom">
       <div class="left-menu-box">
         <p class="left-menu-title">
           <icon name="handle"/>
@@ -16,7 +42,7 @@
               <div @click="setCurrency('USDT')">
                 <p>
                   {{ $t('USDT') }}
-                  <span class="text-idx">{{ '￥' + user.usdtCount }}</span>
+                  <span class="text-idx">{{ coin.symbol + user.usdtCount }}</span>
                   <!--<span class="text-ixo">{{'-0.24%'}}</span>-->
                 </p>
               </div>
@@ -31,7 +57,7 @@
               <div @click="setCurrency('BTC')">
                 <p>
                   {{ $t('BTC') }}
-                  <span class="text-idx">{{ '￥' + user.btcCount }}</span>
+                  <span class="text-idx">{{ coin.symbol + user.btcCount }}</span>
                   <!--<span class="text-ixo">{{'-0.24%'}}</span>-->
                 </p>
               </div>
@@ -39,6 +65,8 @@
           </li>
         </ul>
       </div>
+    </div>
+    <div class="left-menu-container left-menu-nobottom">
       <div class="left-menu-box">
         <p class="left-menu-title">
           <icon name="manager"/>
@@ -51,8 +79,7 @@
               to="/OTC/Hir"
               active-class="active"
             >{{ $t('otc_my_order') }}
-            <span class="count"
-v-if="token && count > 0">{{ count }}</span></router-link>
+            <span class="count" v-if="token && count > 0">{{ count }}</span></router-link>
           </li>
           <!--<li class="">-->
           <!--<router-link-->
@@ -86,12 +113,10 @@ v-if="token && count > 0">{{ count }}</span></router-link>
         </p>
         <ul class="left-menu-list">
           <li class>
-            <a class="menu-name"
-:href="guidanceLink">{{ $t('footer_hreseqgslp1') }}</a>
+            <a class="menu-name" :href="guidanceLink">{{ $t('footer_hreseqgslp1') }}</a>
           </li>
           <li class>
-            <a class="menu-name"
-:href="commonProblemLink">{{ $t('footer_hreseqgslp2') }}</a>
+            <a class="menu-name" :href="commonProblemLink">{{ $t('footer_hreseqgslp2') }}</a>
           </li>
         </ul>
       </div>
@@ -113,6 +138,18 @@ export default {
         btcCount: 0,
         usdtCount: 0
       },
+      symbolList: {
+        CNY: {
+          name: "CNY",
+          rate: "cny_rate",
+          symbol: '￥'
+        },
+        SGD: { 
+          name: "SGD",
+          rate: "sgd_rate",
+          symbol: 'S$'
+        }
+      },
       count: 0
     }
   },
@@ -123,9 +160,9 @@ export default {
     },
     init () {
       service.otcSymbolList({}).then(res => {
-        if (res.code === 0) {
-          this.user.btcCount = this.$big(res.data[1].cny_rate).round(2, 0)
-          this.user.usdtCount = this.$big(res.data[0].cny_rate).round(2, 0)
+        if (res.code === 0) { 
+          this.user.btcCount = this.$big(res.data[1][this.coin.rate]).round(2, 0)
+          this.user.usdtCount = this.$big(res.data[0][this.coin.rate]).round(2, 0)
         }
       })
       // 委托
@@ -161,15 +198,19 @@ export default {
           }
         }
       })
+    }, 
+    changeCoin(command) {
+      this.legal_currency = command
     }
   },
   created () {
     this.init()
     this.timer = setInterval(() => {
       service.otcSymbolList({}).then(res => {
-        if (res.code === 0) {
-          Vue.set(this.user, 'btcCount', this.$big(res.data[1].cny_rate).round(2, 0))
-          Vue.set(this.user, 'usdtCount', this.$big(res.data[0].cny_rate).round(2, 0))
+        if (res.code === 0) { 
+          //let rate = this.legal_currency.toLowerCase() + '_rate'  
+          Vue.set(this.user, 'btcCount', this.$big(res.data[1][this.coin.rate]).round(2, 0))
+          Vue.set(this.user, 'usdtCount', this.$big(res.data[0][this.coin.rate]).round(2, 0))
         }
       })
       service.getUnDonefills({
@@ -241,6 +282,22 @@ export default {
     },
     from () {
       return this.$route.name
+    },
+    legal_currency: {
+      get () {
+        return state.otc.legal_currency
+      },
+      set (value) {
+        state.otc.legal_currency = value
+      }
+    }, 
+    coin() {
+      return this.symbolList[this.legal_currency]
+    }
+  },
+  watch: {
+    legal_currency() {
+      this.init()
     }
   }
 }
@@ -262,6 +319,10 @@ export default {
     box-sizing: border-box;
     margin-bottom: 16px;
     width: 210px;
+    &:first-child {
+      
+      padding-top: 0;
+    }
 
     .left-menu-box {
       &:not(:first-child) {

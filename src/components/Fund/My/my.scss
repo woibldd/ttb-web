@@ -36,6 +36,12 @@
         color: $primary;
         cursor: pointer;
         margin-left: 21px;
+    } 
+    .my-fund-label {
+      padding: 5px 22px;
+      border:1px solid $primary;
+      border-radius: 15px;
+      color: $primary;
     }
     .dib {
         display: inline-block;

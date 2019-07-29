@@ -17,7 +17,7 @@ export default {
         im      //计算后的im值
       } 
     let down = 0
-    let up = 3
+    let up = 3 
     // 下单委托价值 -200/100， 小于等于1取0，向上取整
     // if (this.state.ct.pair === 'FUTURE_VDSUSD') {
     let value = (Big(amount).div(price)).round(6, down)

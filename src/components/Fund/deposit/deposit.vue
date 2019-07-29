@@ -12,7 +12,7 @@
         <div class="row__value">
           <el-select
             filterable
-            v-model="selectCoin" 
+            v-model="selectCoin"
             @change="changeCoinType"
             value-key="currency">
             <el-option
@@ -23,7 +23,7 @@
           </el-select>
         </div>
       </div>
-      <div class="fund-item-other mb-14">
+      <div class="fund-item-other mb-14 coin-list">
         <span
           :class="['quick-btn mb-10 mr-10', selectCoin.currency === c.currency && 'selected']"
           @click="quickSelectCoin(c)"
@@ -81,6 +81,13 @@
               @click="copyMemo">{{ $t('copy') }}</span>
           </div>
         </div>
+        <div class="attention">
+          <icon
+            name="robot-info"
+            class="icon-eos ml-5 pointer"
+            v-tooltip.top-center="{html: true,content: robotAttention, classes: 'myfund'} "
+          />
+        </div>
       </div>
       <div
         class="fund-item-other eos-deposit-tips"
@@ -93,6 +100,7 @@
         <li> {{ $t('deposit_hint_addr', {coin: selectCoin.currency}) }}</li>
         <li> {{ $t('deposit_hint_confirm',{confirm: selectCoin.min_confirm, coin: selectCoin.currency}) }}</li>
         <li v-if="selectCoin.memo_support">{{ $t('eos_deposit_tip_security_third') }}</li>
+        <li v-if="selectCoin.currency === 'EOS'">  {{ $t('watch_tips') }}</li>
       </ul>
     </div>
     <remember-alert
@@ -208,9 +216,19 @@ export default {
         this.tableData = []
       })
     }
-  },  
+  },
   components: {
     RememberAlert
+  },
+  computed: {
+    robotAttention () {
+      return ` <div
+            class="attention__tips">
+            <p class="title mb-8">${this.$t('about_eos_address_label')}</p>
+            <p class="mb-4">${this.$t('about_eos_address_label_a')}</p>
+            <p >${this.$t('about_eos_address_label_b')}</p>
+          </div>`
+    },
   }
 }
 </script>
@@ -250,7 +268,7 @@ export default {
             flex: 1;
             text-align: center;
             vertical-align: middle;
-            
+
             color:#01CED1
         }
     }

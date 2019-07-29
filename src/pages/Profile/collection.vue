@@ -23,9 +23,10 @@
             <icon
               class="icon"
               :class="'type-' + item.payment_type"
-              :name="item.payment_type === 1 ? 'bank-card' : item.payment_type === 2 ? 'alipay' : 'wechat'"/>
+              :name="paytype[item.payment_type]"/>
             <!-- {{ item.payment_type | type }} -->
-            {{typeState(item.payment_type)}}
+            <!-- {{typeState(item.payment_type)}} -->
+            {{$t(payName( item.payment_type))}}
           </div>
           <div class="mes">
             <template v-if="item.payment_type === 1">
@@ -65,7 +66,7 @@
                 </dd>
               </dl>
             </template>
-            <template v-else>
+            <!-- <template v-else>
               <dl>
                 <dd class="cs">{{ item.currency }}</dd>
                 <dd>{{ item.name }}</dd>
@@ -83,7 +84,7 @@
                   <i class="el-icon-picture"/>
                 </dd>
               </dl>
-            </template>
+            </template> -->
           </div>
           <div class="btn">
             <el-switch
@@ -111,6 +112,21 @@
         class="demo-ruleForm">
         <template v-if="type === 'add'">
           <el-form-item
+            :label="'币种'"
+            prop='currency'>
+            <el-select
+              v-model="ruleForm.currency"
+              style="width: 100%;"
+              size="small">
+              <el-option
+                value="CNY"
+                :label="this.$t('CNY')"/>
+              <el-option
+                value="SGD"
+               :label="this.$t('SGD')"/> 
+            </el-select>
+          </el-form-item>
+          <el-form-item
             :label="this.$t('collection')"
             prop="payment_type">
             <el-select
@@ -127,6 +143,12 @@
               <el-option
                 value="3"
                 :label="this.$t('payment_weChat_adasunt')"/>
+              <el-option
+                value="4"
+                :label="this.$t('Paynow')"/>
+              <el-option
+                value="5"
+                :label="this.$t('Paylah')"/>
             </el-select>
             <!--<el-input v-model="ruleForm.payment_type"></el-input>-->
           </el-form-item>
@@ -163,7 +185,7 @@
                 size="small"/> 
             </el-form-item>
           </template>
-          <template v-if="ruleForm.payment_type !== '1'">
+          <template v-if="ruleForm.payment_type === '2' || ruleForm.payment_type === '3'">
             <template v-if="ruleForm.payment_type === '2'">
               <el-form-item
                :label="this.$t('payment_alipay_account')"
@@ -174,19 +196,16 @@
               </el-form-item>
             </template>
             <template v-if="ruleForm.payment_type === '3'">
-              <el-form-item
-                       :label="this.$t('payment_weChat_account')"
+              <el-form-item :label="this.$t('payment_weChat_account')"
                 prop="weChat_account">
                 <el-input
                   v-model="ruleForm.weChat_account"
                   size="small"/>
               </el-form-item>
             </template>
-            <el-form-item
-                :label="this.$t('payment_collection_img')"
+            <el-form-item :label="this.$t('payment_collection_img')"
               prop="collection_img">
-              <image-upload
-
+              <image-upload 
                 type="hold"
                 :url="hold.url"
                 :host="uploadConfig.host"
@@ -210,6 +229,18 @@
               </image-upload>
             </el-form-item>
           </template>
+          <template v-if="ruleForm.payment_type === '4' || ruleForm.payment_type === '5'">
+            <el-form-item
+              :label="this.$t('payment_card_number')"
+              prop="card_number">
+              <br>
+              <number-input
+                class="inputc"
+                style="border: 1px solid #DCDFE6 !important;"
+                v-model="ruleForm.card_number"
+                size="small"/> 
+            </el-form-item>
+          </template>
         </template>
         <template v-else-if="type === 'img'">
           <img
@@ -224,6 +255,7 @@
           <el-button @click="resetForm('ruleForm')">{{$t('cancel')}}</el-button>
           <el-button
             @click="submitForm('ruleForm')"
+            v-loading="loading"
             type="primary"
             v-html="type !== 'remove' ? this.$t('otc_ziurec_20') : this.$t('remove')"/>
         </el-form-item>
@@ -268,7 +300,7 @@ export default {
         alipay_account: '',
         weChat_account: '',
         collection_img: '',
-        currency: ''
+        currency: 'CNY'
       },
       currency: 'CNY',
       dropList: [],
@@ -306,10 +338,17 @@ export default {
         loading: false,
         error: false,
         url: ''
+      },
+      loading: false, 
+      paytype: {
+        1: "bank-card",
+        2: "alipay",
+        3: "wechat",
+        4: "paynow",
+        5: "paylah"
       }
     }
-  },
-
+  }, 
   computed: {
     userInfo () {
       return state.userInfo || {}
@@ -329,9 +368,19 @@ export default {
     }
   },
   methods: {
-    typeState (e) {
-      return e === 1 ?this.$t('payment_nameyhk') : e === 2 ? this.$t('payment_namezfb') : this.$t('payment_weChat_adasunt')
+    
+    payName(type){
+      return {
+          1: "payment_nameyhk",
+          2: "payment_namezfb",
+          3: "payment_weChat_adasunt",
+          4: "Paynow",
+          5: "Paylah",
+        }[type]
     },
+    // typeState (e) {
+    //   return e === 1 ?this.$t('payment_nameyhk') : e === 2 ? this.$t('payment_namezfb') : this.$t('payment_weChat_adasunt')
+    // },
     bock () {
       this.ruleForm = {
         payment_type: '1',
@@ -348,8 +397,10 @@ export default {
     },
     bankHandle (code) {
       let codeName = code
+      let currency = this.ruleForm.currency 
       this.$refs['ruleForm'].resetFields()
       this.ruleForm.payment_type = codeName
+      this.ruleForm.currency = currency
     },
     uploadStart ({type}) {
     },
@@ -416,6 +467,7 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          this.loading = true
           if (this.type === 'add') {
             let params = {
               user_id: state.userInfo.id,
@@ -429,11 +481,10 @@ export default {
               collection_img: this.ruleForm.collection_img,
               currency: this.ruleForm.currency
             }
-            service.addOtcCollection(params).then(res => {
-              console.log(res)
+            service.addOtcCollection(params).then(res => { 
+              this.loading = false
               if (res.code === 0) {
-                this.init()
-                // this.$message.success('添加成功')
+                this.init() 
                 this.$message({
                   type: 'success',
                   message: this.$t('add_withdraw_success')
@@ -446,7 +497,8 @@ export default {
           } else {
             service.delOtcCollection({
               collection_id: this.collection_id
-            }).then(res => {
+            }).then(res => { 
+              this.loading = false
               console.log(res)
               if (res.code === 0) {
                 this.init()
@@ -556,30 +608,28 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
-  .inputc{
-
-
+  .inputc{ 
     -webkit-appearance: none;
-background-color: #FFF;
-background-image: none;
-border-radius: 4px;
-border: 1px solid #DCDFE6;
+    background-color: #FFF;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #DCDFE6;
     border-top-color: rgb(220, 223, 230);
     border-right-color: rgb(220, 223, 230);
     border-bottom-color: rgb(220, 223, 230);
     border-left-color: rgb(220, 223, 230);
--webkit-box-sizing: border-box;
-box-sizing: border-box;
-color: #606266;
-display: inline-block;
-font-size: inherit;
-height: 32px;
-line-height: 40px;
-outline: 0;
-padding: 0 15px;
--webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-width: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 32px;
+    line-height: 40px;
+    outline: 0;
+    padding: 0 15px;
+    -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    width: 100%;
   }
   .inputc:hover {
     border-color: #C0C4CC;
@@ -618,9 +668,10 @@ width: 100%;
       .add_collection {
         position: absolute;
         right: 0;
-        padding-left: 30px;
-        color: $primary;
         top: 0;
+        padding-left: 30px;
+        color: $primary; 
+        cursor: pointer;
       }
 
       span, .cs {
@@ -672,5 +723,8 @@ width: 100%;
         }
       }
     }
+  }
+  .el-form-item {
+    margin-bottom: 0;
   }
 </style>

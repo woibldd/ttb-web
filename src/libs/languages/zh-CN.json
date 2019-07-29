@@ -65,9 +65,9 @@
   "add_address_error": "地址不能为空",
   "copyed": "已复制",
   "link_copyed": "分享链接已复制",
-  "deposit_hint_addr": "禁止向 %{coin} 地址充值除 %{coin} 之外的资产，任何充入 %{coin} 地址的非 %{coin} 资产将不可找回。",
+  "deposit_hint_addr": "禁止向 %{coin} 地址充值除 %{coin} 之外的资产，任何充入 %{coin} 地址的非 %{coin} 资产将不可找回",
   "deposit_hint_min": "最低充值数量为 %{min}",
-  "deposit_hint_confirm": "使用 %{coin} 地址充值需要 %{confirm} 个网络确认才能到账。",
+  "deposit_hint_confirm": "使用 %{coin} 地址充值需要 %{confirm} 个网络确认才能到账",
   "kyc_ph_id": "请填写证件号码",
   "kyc_passport": "护照",
   "kyc_idcard": "身份证",
@@ -536,7 +536,7 @@
   "api_has_no_obtain": "领取限量挖矿机器人",
   "address_tag": "地址标签",
   "eos_deposit_tip_label": "转帐务必填写正确的地址标签 ，否则将充值失败",
-  "eos_deposit_tip_security_third": "地址标签填写错误而造成的充值失败，找回将收取一定比例的手续费；",
+  "eos_deposit_tip_security_third": "地址标签填写错误而造成的充值失败，找回将收取一定比例的手续费",
   "eos_not_support_internal_transfer": "暂不支持交易所内部地址转账",
   "orders":"订单",
   "my_orders": "我的订单",
@@ -1164,6 +1164,7 @@
     "contract_undeal_amount":"未成交数量",
     "contract_deal_type":"成交类型",
     "contract_assign_time":"委托时间",
+    "order_th_capedasda": "委托单价",
     "order_th_capeaxcvb": "委托数量/成交数量",
     "contract_all_dealed":"完全成交",
     "order_th_capehjiky": "委托金额/成交金额",
@@ -1718,11 +1719,7 @@
   "dfd_tips":"空投部分DFD每日系统解冻释放5%",
   "bnl_tips": "空投部分BNL每日系统解冻释放3%",
   "newos_tips": "空投部分NEWOS每日系统解冻释放3%",
-  
   "home_optional": "自选",
- 
-    "":"" ,
-
   "contract_competition_Jump_1": "个人锦标奖",
   "contract_competition_Jump_2": "收益因子赛总排名(全体参赛个人用户)",
   "contract_competition_Jump_3": "社群争霸赛",
@@ -2016,7 +2013,7 @@
     "otc_otutcol_8": "支付图片",
     "otc_otutcol_9": "复制成功",
     "otc_otutcol_10": "复制失败",
-    "otc_otutcol_11": "IX  总净资产估值",
+    "otc_otutcol_11": "IXX 总净资产估值",
     "otc_otutcol_12": "交易账户",
     "otc_otutcol_13": "法币资产估值",
     "otc_otutcol_14": "币币资产估值",
@@ -2070,22 +2067,22 @@
     "bby_shouy19":"请输入存币数量",
     "bby_shouy20":"参加",
     "bby_shouy21":"规则说明",
-    
+
     "bby_shouy22":"1.“币盈盈”是基于数字资产的理财产品，每个项目有相应的锁定周期和利率，您可以自由选择购买，购买后本金锁定，根据约定时间开始计算利息，项目到期后本息解锁转入账户，您即可获得约定的本息收益。",
     "bby_shouy23":"2.登录IXX.COM官网，点击“币盈盈”链接，依据您自身的情况选择需要锁定的币种，点击“点此抢购”，即可参与“币盈盈”计划,“币盈盈”目前不支持提前解锁，系统会在锁定期结束后自动解锁您锁定的部分并支付利息。",
     "bby_shouy24":"3.参与“币盈盈”的项目均有固定的计息开始和结束时间，在此时间周期内计算您可获得的收益。每个项目的计息时间可以在页面查看。",
     "bby_shouy25":"4.项目锁定期到期后，系统开始陆续发放参与用户的利息收益，可能会因为人数众多原因导致您的收益延迟到账，请耐心等待。您可至“财务记录”查看“币盈盈”利息收益。",
     "bby_shouy26":"5.“币盈盈”收益计算：标期天数/365*年化收益*存币数量=本次存币获得收益。",
-   
+
     "bby_shouy28":"存币截止时间",
     "bby_shouy29":"计息时间",
     "bby_shouy30":"解锁时间",
     "bby_shouy31":"购买成功",
     "bby_shouy99":"币币返佣金额",
     "bby_shouy98":"合约返佣金额",
-    "bby_shouy32":"余额不足，请充币", 
+    "bby_shouy32":"余额不足，请充币",
 
-     
+
     "contract_FUTURE_BHDUSD":"BHD永续",
     "bby_shise1":"币盈盈记录",
     "bby_shise2":"可用数量不足",
@@ -2095,26 +2092,37 @@
     "bby_shise6":"已发放",
     "bby_shise7":"币盈盈购买",
     "bby_shise8":"本息归还",
-    "bby_shise9":"热门推荐", 
-  
+    "bby_shise9":"热门推荐",
     "otc_order_trade": "操作",
-    "bby_shise10":"限期", 
+    "bby_shise10":"限期",
     "bidTitle": "币盈盈",
     "pair_list_all": "全部",
     "pair_list_option": "自选",
     "pair_list_new": "创新区",
     "done_verified": "已完成",
     "otc_trans_time": "成交时间",
-    
     "coin_FUTURE_BTCUSD":"BTC",
     "coin_FUTURE_BHDUSD":"BHD",
-    
     "fund_my_assets_hide": "隐藏小额币种",
-    "fund_my_assets_hide_tip": "小于", 
-    "trading_order_cancel_all": "撤销全部",
+    "fund_my_assets_hide_tip": "小于",
     "otc_collection_update": "编辑",
-    "otc_placeholder_c": "请输入您预期购买单价"
+    "otc_placeholder_c": "请输入您预期购买单价",
+    "watch_tips": "请认真核对充币地址是否正确一致，如果不一致将导致无法成功充值或资产不可找回",
     
+    "contract_FUTURE_ETHUSD":"ETH永续",
+    "trading_order_cancel_all": "批量撤销",
+    "tv_technical_indicators": "技术指标",
+    "tv_style":"样式设置",
+    "tv_down_minute":"分", 
+    "tv_down_hour": "小时",
+    "tv_down_day": "日",
+    "tv_down_week": "周",
+    "tv_down_month": "月",
+    "fund_assets_node_buy": "节点认购",
+    "fund_assets_node_buy_tip": "是否确定认购并升级为IXX全球节点？",
+   
+    "fund_assets_node_buy_tip2": "本次认购升级将扣除您",
+    "fund_node_buy_success": "认购成功"
 
   }
 

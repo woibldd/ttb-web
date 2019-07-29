@@ -121,6 +121,8 @@ import countDown from "@/components/CountDown"
 import processValue from '@/mixins/process-otc-value'
 import { state } from "@/modules/store"
 import utils from "@/modules/utils.js"
+import otcComputed from '@/components/OTC/mixins/index.js'
+
 export default {
   data() {
     return {
@@ -268,37 +270,14 @@ export default {
     vList,
     countDown
   },
-  computed: {
-    symbolInfo () {
-      return this.state.otc.symbolInfo
-    },
-    currency: {
-      get() {
-        return state.otc.currency
-      }
-    },
+  computed: { 
     sideTitle() {
       let title = "otc_sell_currency"
       if (this.option === 1) {
         title =  `otc_confirm_issued`
       }
       return title
-    },
-    isLogin () {
-      return state.userInfo !== null
-    },
-    price_scale () {
-      if (!!this.symbolInfo) {
-        return this.symbolInfo.price_scale || 2
-      }
-      return 2
-    },
-    amount_scale() {
-      if (!!this.symbolInfo) {
-        return this.symbolInfo.amount_scale || 6
-      }
-      return 2
-    }
+    }, 
   },
   props: {
     view: {
@@ -423,9 +402,7 @@ export default {
       }
     }
   },
-  mixins: [
-    processValue
-  ],
+  mixins: [ processValue,otcComputed ]
 };
 </script>
 
@@ -448,5 +425,23 @@ export default {
       }
     }
   }
+
+  // 修改字体大小
+  .el-step__title.is-process,.el-step__head.is-process{
+    font-size: 14px;
+    color: #999999;
+    border-color: #999999;
+  }
+  .el-step__title.is-process,.el-step__head.is-wait{
+    font-size: 14px;
+    color: #999999;
+    border-color: #999999;
+  }
+  .el-step__title.is-success,.el-step__head.is-success{
+    font-size: 14px;
+    color: #09C989;
+    border-color: #09C989;
+  }
+   
 </style>
 
