@@ -2178,7 +2178,7 @@
 "watch_tips": "Please ensure that deposit address is correct, if not will result in failure to deposit or assets can not be recovered",
     
 "contract_FUTURE_ETHUSD":"ETH Perpetual", 
-"trading_order_cancel_all": "Bulk cancel",
+"trading_order_cancel_all": "Cancelled all",
 "tv_technical_indicators": "Technical Indicator",
 "tv_style":"Style",
 "tv_down_minute":"minute", 
