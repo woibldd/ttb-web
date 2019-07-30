@@ -17,7 +17,7 @@
       <div class="tips-section mb-21">
         <p
           class="mb-26"
-          v-html=" $t('contract_how_price_tip_a', {'symbol': symbol, coin: coin})"/>
+          v-html=" $t('contract_how_price_tip_a', {'symbol': symbol, coin: coin, 'value': value})"/>
         <p class="mb-26">{{ $t('contract_how_price_tip_b', {next_pay_time: nextPayTime}) }}</p>
         <p
           class="mb-26"
@@ -109,6 +109,7 @@ import ixPagination from '@/components/common/ix-pagination'
 import TradingView from '../contract-trading-view'
 import service from '@/modules/service'
 import utils from '@/modules/utils'
+import Big from "big.js";
 
 export default {
   components: {ixPagination, TradingView},
@@ -121,7 +122,8 @@ export default {
       chartType: 'index',
       symbolInfo: {
         fee_rate: 0,
-        next_fee_time: new Date().getTime()
+        next_fee_time: new Date().getTime(),
+        mark_price: 0,
       }
     }
   },
@@ -153,7 +155,7 @@ export default {
       //   default:
       //     return this.$t('contract_btc_forever')
       // }
-    },
+    }, 
     coin () {
       return this.$t('coin_' + this.pair)
     },
@@ -166,6 +168,21 @@ export default {
       }
       else if (this.pair === 'FUTURE_ETHUSD') {
         return 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360031397811'
+      }
+      else {
+        return ''
+      }
+    },
+
+    value() { 
+      if (this.pair === 'FUTURE_BTCUSD') {
+        return '1 USD'
+      }
+      else if (this.pair === 'FUTURE_BHDUSD') { 
+        return new Big(this.symbolInfo.mark_price || 0).times(this.symbolInfo.multiplier || 0.00001)
+      }
+      else if (this.pair === 'FUTURE_ETHUSD') {
+        return new Big(this.symbolInfo.mark_price || 0).times(this.symbolInfo.multiplier || 0.000001)
       }
       else {
         return ''

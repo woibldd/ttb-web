@@ -1173,7 +1173,7 @@
     "contract_symbol_detail":"合约明细",
     "contract_trade_index_base":"1.基础货币是%{currency}。",
     "contract_how_price":"合约是如何报价的？",
-    "contract_how_price_tip_a":"<span style=\"color:#01CED1\"> %{symbol} </span>是根据<span style=\"color:#01CED1\"> %{coin} </span>指数 定价的 %{symbol} 合约。每张合约价值 1 USD 的比特币。",
+    "contract_how_price_tip_a":"<span style=\"color:#01CED1\"> %{symbol} </span>是根据<span style=\"color:#01CED1\"> %{coin} </span>指数 定价的 %{symbol} 合约。每张合约价值 %{value} 的比特币。",
     "contract_how_price_tip_b":"每 8 小时 支付或收取资金费用。下一个支付将发生在 %{next_pay_time}",
     "contract_how_price_tip_c":"<span style=\"color:#01CED1\"> %{symbol} </span>利用溢价指数计算资金费率。<span style=\"color:#01CED1\"> %{id1} </span>以及<span style=\"color:#01CED1\"> %{id2} </span>，<span style=\"color:#01CED1\"> %{id3} </span>。它们在 <span style=\"color:#01CED1\"> 计算最终的资金费率</span>中被使用。",
     "contract_how_price_tip_d":"在 %{next_pay_time} 时，多仓将会获得 %{feerate}%，同时空仓将会支付%{feerate}% 的费率。IXX.COM 不会收取任何资金费用。",

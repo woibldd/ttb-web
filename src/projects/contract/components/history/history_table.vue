@@ -426,7 +426,9 @@ export default {
     triggerPrice (trgPrice, type = 0) {
         let diffPrice = this.lastPrice - trgPrice
         let triggerPriceStr = ''
-        if (type === 0) {
+        if (trgPrice == 0) {
+          triggerPriceStr = '--'
+        } else if (type === 0) {
            if (diffPrice > 0){
               triggerPriceStr = `<=${trgPrice}`
           }

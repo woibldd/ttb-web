@@ -1437,8 +1437,7 @@ export default {
       //   this.dialogModalClosed()
       // }
 
-      if (this.currentHolding.amount != 0) {
-        console.log(1);
+      if (this.currentHolding.amount != 0) { 
         let params = {
           currency: this.pairInfo.symbol,
           leverage: item
@@ -2083,8 +2082,7 @@ export default {
     //   })
     // }, 
     async fetchData() { 
-      await this.getBalance();
-      console.log('9999999999999999999999999999999999999999999999999999999996')
+      await this.getBalance(); 
       if (!isEmpty(this.balance)) { 
         const $value = this.$big(this.currentHolding.value || 0);
         if ($value.gte(this.RiskLimitDict[this.RiskLimitDict.length - 1].r)) {

@@ -299,11 +299,11 @@ export const routes = [
     },
     component: RushBuy
   },
-  {
-    path: 'MessageSettings',
-    name: 'MessageSettings',
-    component: MessageSettings
-  },
+  // {
+  //   path: 'MessageSettings',
+  //   name: 'MessageSettings',
+  //   component: MessageSettings
+  // },
   // {
   //   path: 'collection',
   //   name: 'collection',

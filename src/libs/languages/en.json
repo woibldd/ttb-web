@@ -1291,7 +1291,7 @@
 "contract_trade_index_base": "1.Base currency is %{currency}。",
 "contract_trade_index_value": "2.Pricing currency is USD",
 "contract_how_price": "How is the perpetual contact qupted？ ",
-"contract_how_price_tip_a": "<span style=\"color:#22ced0\"> %{symbol} </span> </span> is based on <span style=\"color:#22ced0\"> %{coin} </span>index pricing of %{symbol} contracts.Each contract is worth 1 USD of Bitcoin. ",
+"contract_how_price_tip_a": "<span style=\"color:#22ced0\"> %{symbol} </span> </span> is based on <span style=\"color:#22ced0\"> %{coin} </span>index pricing of %{symbol} contracts.Each contract is worth %{value} of Bitcoin. ",
 "contract_how_price_tip_b": " Funding is paid and received every 8 hours. The next payout event is %{next_pay_time}。",
 "contract_how_price_tip_c": "<span style=\"color:#22ced0\"> %{symbol} </span> Use the premium index to calculate the fund rate。<span style=\"color:#22ced0\"> %{id1} </span>以及<span style=\"color:#22ced0\"> %{id2} </span> is the underlying rate，<span style=\"color:#22ced0\"> %{id3} </span> is the premium rate。They are at <span style=\"color:#22ced0\"> to calculate the final fund rate </span> being used。",
 "contract_how_price_tip_d": " Today at %{next_pay_time}, longs will pay %{feerate}%, and shorts will receive%{feerate}%. IXX.COM will not charge fees on funding payments。",
