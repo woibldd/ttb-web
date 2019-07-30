@@ -721,7 +721,7 @@ export default{
       float: left;
       width: 33.33%;
       height: 30px;
-      background: #806c46;
+      background: rgba(30, 106, 109, 1);
       border-radius: 0px 20px 20px 0px;
       text-align: center;
       line-height: 30px;

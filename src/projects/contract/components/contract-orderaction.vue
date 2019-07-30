@@ -783,6 +783,21 @@ export default {
           { r: 1100, m: 18.1 }
         ];
       }
+      else if (this.maxLeverage==50) {
+        return [
+          { r: 0, m: 50 },
+          { r: 50, m: 50 },
+          { r: 100, m: 33.3 },
+          { r: 150, m: 25 },
+          { r: 200, m: 20 },
+          { r: 250, m: 16.6 },
+          { r: 300, m: 14.2 },
+          { r: 350, m: 12.5 },
+          { r: 400, m: 11.1 },
+          { r: 450, m: 10 } ,
+          { r: 500, m: 9 } 
+        ]
+      } 
       else if (this.maxLeverage==20) {
         return [
           { r: 0, m: 20 },
@@ -804,8 +819,20 @@ export default {
     },
     //杠杆字典
     timersMap() {
-      let pair = this.state.ct.pair
-      if (pair==='FUTURE_BTCUSD') {
+      let pair = this.state.ct.pair  
+      let pairInfo = this.state.ct.pairInfo
+      let max_leverage = "100"
+      if (!!pairInfo) {
+        max_leverage = pairInfo.max_leverage
+      }
+      else {
+        max_leverage = {
+          "FUTURE_BTCUSD": "100",
+          "FUTURE_BHDUSD": "20",
+          "FUTURE_ETHUSD": "50"
+        }[pair] || "100"
+      }
+      if (max_leverage==='100') {
         return {  
           // 倍数 ; 1x 2x....100x 
           0: this.$t("contract_all_in"), 
@@ -818,9 +845,19 @@ export default {
           50: "50x", 
           100: "100x" 
         }
-      } else 
-      // if (pair==='FUTURE_VDSUSD') {
-      {
+      } else if (max_leverage==='50') { 
+        return {
+          0: this.$t("contract_all_in"), 
+          1: "1x", 
+          2: "2x",  
+          3: "3x", 
+          4: "5x", 
+          5: "10x", 
+          10: "25x", 
+          15: "35x", 
+          20: "50x"
+        }
+      } else if (max_leverage==='20') { 
         return {
           0: this.$t("contract_all_in"), 
           1: "1x", 

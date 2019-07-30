@@ -1943,7 +1943,7 @@
   "watch_tips": "請認真核對充幣地址是否正確壹致，如果不壹致將導致無法成功充值或資產不可找回",
     
   "contract_FUTURE_ETHUSD":"ETH永續", 
-  "trading_order_cancel_all": "批量撤銷",
+  "trading_order_cancel_all": "全部撤銷",
   "tv_technical_indicators": "技術指標",
   "tv_style":"樣式設定",
   "tv_down_minute":"分", 
@@ -1954,5 +1954,6 @@
   "fund_assets_node_buy": "節點認購",
   "fund_assets_node_buy_tip": "是否確定認購並陞級為IXX全球節點？", 
   "fund_assets_node_buy_tip2": "本次認購陞級將扣除您",
-  "fund_node_buy_success": "認購成功"
+  "fund_node_buy_success": "認購成功", 
+    "coin_FUTURE_ETHUSD":"ETH"
 }

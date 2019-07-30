@@ -78,8 +78,7 @@ export default {
         state.ct.pairInfoList[element.name] = element
       });
     },
-    subMarket () {
-      console.log('00000000000000000000000000000000000000000000000000000000000000000000000000000000')
+    subMarket () { 
       if (this.socketPrice) {
         this.socketPrice.$destroy()
       }

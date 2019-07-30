@@ -248,7 +248,7 @@ export default {
 }
 
 .look-tutorial{
-    background:rgba(34,206,208,1);
+    background:$primary;
     color: #fff;
     font-size: 16px;
     line-height: 16px;
@@ -339,12 +339,12 @@ export default {
         button {
             width:90px;
             height:40px;
-            background:rgba(244,238,226,1);
+            background:rgba(220,248,236,1);
             color: $primary;
             border: 0;
 
             &.active {
-                background-color: #22ced0;
+                background-color: $primary;
                 color: #fff;
             }
 

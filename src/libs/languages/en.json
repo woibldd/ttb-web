@@ -2189,5 +2189,6 @@
 "fund_assets_node_buy": "Node purchase",
 "fund_assets_node_buy_tip": "Are you confirm to purchase and upgrade to IXX global node？",
 "fund_assets_node_buy_tip2": "You will be deducted on purchase and upgrade",
-"fund_node_buy_success": "Purchase success"
+"fund_node_buy_success": "Purchase success", 
+"coin_FUTURE_ETHUSD":"ETH"
 }

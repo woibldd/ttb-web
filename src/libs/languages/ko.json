@@ -2013,7 +2013,7 @@
 "watch_tips": "충전 주소가 정확히 일치하는지 확인하시고, 일치하지 않으면 충전 불능 또는 자산 회수에 실패할 수 있습니다",
     
 "contract_FUTURE_ETHUSD":"ETH계속유지",
-"trading_order_cancel_all": "대량철회",
+"trading_order_cancel_all": "전부철회",
 "tv_technical_indicators": "기술수치",
 "tv_style":"표본형식",
 "tv_down_minute":"분", 
@@ -2024,5 +2024,6 @@
 "fund_assets_node_buy": "인정하여 구매",
 "fund_assets_node_buy_tip": "아이스 글로벌 노드로 인수 및 업그레이드 여부를 알수있습니까？" ,
 "fund_assets_node_buy_tip2": "이번 인수 업그레이드가 당신의",
-"fund_node_buy_success": "인수성공"
+"fund_node_buy_success": "인수성공", 
+"coin_FUTURE_ETHUSD":"ETH"
 }
