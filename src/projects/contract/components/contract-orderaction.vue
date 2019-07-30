@@ -1457,7 +1457,7 @@ export default {
           return utils.alert(pRes.message);
         }
         this.confirm_txt = this.$t("contract_confirm_txt", {
-          y: item == 0 ? 100 : item,
+          y: item == 0 ? this.maxTimes : item,
           m: pData.margin_position,
           n: pData.margin_delegation
         });
