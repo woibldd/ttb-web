@@ -84,6 +84,9 @@ export default{
       else if (pair === 'FUTURE_BHDUSD') {
         return 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360030485092-BHD'
       }
+      else if (pair === 'FUTURE_ETHUSD') {
+        return 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360031397811'
+      }
       else {
         return ''
       }

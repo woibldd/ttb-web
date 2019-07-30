@@ -85,11 +85,25 @@
     <div class="corperator">
       <div class="corperator-container">
         <div class="corp-row row-60 mb-60">
-          <div class="corp-title" v-t="'footer_investors'"/>
-
+          <div class="corp-title" v-t="'footer_investors'"/> 
             <div class="corp-logo">
               <a class="link" href="javascript:;" @click.prevent>
                 <img class="logo may" src="~@/assets/copr-logo-may.png">
+              </a>
+            </div>
+            <div class="corp-logo">
+              <a class="link" href="javascript:;" @click.prevent>
+                <img class="logo may" src="~@/assets/copr-logo-bah.png">
+              </a>
+            </div>
+            <div class="corp-logo">
+              <a class="link" href="javascript:;" @click.prevent>
+                <img class="logo may" src="~@/assets/copr-logo-jlzb.png">
+              </a>
+            </div>
+            <div class="corp-logo">
+              <a class="link" href="javascript:;" @click.prevent>
+                <img class="logo may" src="~@/assets/copr-logo-yxzb.png">
               </a>
             </div>
           </div>
@@ -174,6 +188,15 @@
               <img
                 class="logo hx"
                 src="~@/assets/copr-logo-cs.png" >
+            </span>
+          </div>
+          <div class="corp-logo">
+            <span
+              class="link"
+              target="_blank">
+              <img
+                class="logo hx"
+                src="~@/assets/copr-logo-pdkj.png" >
             </span>
           </div>
         </div>

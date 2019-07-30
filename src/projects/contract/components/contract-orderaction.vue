@@ -851,11 +851,11 @@ export default {
           1: "1x", 
           2: "2x",  
           3: "3x", 
-          4: "5x", 
-          5: "10x", 
-          10: "25x", 
-          15: "35x", 
-          20: "50x"
+          5: "5x", 
+          10: "10x", 
+          25: "25x", 
+          35: "35x", 
+          50: "50x"
         }
       } else if (max_leverage==='20') { 
         return {
@@ -2084,6 +2084,7 @@ export default {
     // }, 
     async fetchData() { 
       await this.getBalance();
+      console.log('9999999999999999999999999999999999999999999999999999999996')
       if (!isEmpty(this.balance)) { 
         const $value = this.$big(this.currentHolding.value || 0);
         if ($value.gte(this.RiskLimitDict[this.RiskLimitDict.length - 1].r)) {

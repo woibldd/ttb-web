@@ -99,7 +99,7 @@
 
           </el-col>
           <el-col :span="3">
-            <el-button style="width: 90%;margin-left: 10%" type="danger" @click="sellSubmit">出售USDT</el-button>
+            <el-button style="width: 90%;margin-left: 10%" type="sell" @click="sellSubmit">出售USDT</el-button>
           </el-col>
         </el-row>
       </div>
