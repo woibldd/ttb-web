@@ -2192,5 +2192,6 @@
 "fund_node_buy_success": "Purchase success", 
 "coin_FUTURE_ETHUSD":"ETH",
 "CNY": "人民币",
-"SGD": "新加坡币"
+"SGD": "新加坡币",
+"otc_menu_title_price": "现价"
 }

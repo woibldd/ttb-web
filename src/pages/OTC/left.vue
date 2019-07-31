@@ -1,31 +1,7 @@
 <template>
   <div class="otc-left-container">
     <div class="left-menu-container left-menu-nobottom">
-      <!-- <div class="left-menu-box"> 
-        <ul class="left-menu-list">
-          <li class>  
-            <div @click="changeCoin('CNY')"
-              :class="{'active': coin.name === 'CNY' }"
-              class="menu-name">
-              <p>
-                {{ $t('CNY/￥') }}
-                <span class="text-idx">{{ '人民币' }}</span> 
-              </p>
-            </div>
-          </li>
-          <li class> 
-            <div @click="changeCoin('SGD')"
-              :class="{'active': coin.name === 'SGD' }"
-              class="menu-name">
-              <p>
-                {{ $t('SGD/S$') }}
-                <span class="text-idx">{{ '新加坡币' }}</span> 
-              </p>
-            </div>
-          </li>
-        </ul>
-      </div>-->
-
+     
       <div class="coin_link arrow-down">
         <dl>
           <dt>{{coin.name +'/' + coin.symbol}}</dt>
@@ -54,12 +30,12 @@
     </div>
     <div class="left-menu-container left-menu-nobottom">
       <div class="left-menu-box">
-        <div class="left-menu-title">
+        <div class="left-menu-title col">
           <!-- <icon name="handle"/>
           <span class="menu-title">{{ $t('otc_trade') }}</span>-->
           <dl>
-            <dt>币种</dt>
-            <dd>现价</dd>
+            <dt>{{$t('currency')}}</dt>
+            <dd><span class="text-idx">{{$t('otc_menu_title_price')}}</span></dd>
           </dl>
         </div>
         <ul class="left-menu-list">
@@ -68,14 +44,11 @@
               to="/OTC/Trade"
               class="menu-name"
               :class="{'active': currency === 'USDT' && from === 'trade' }"
-            >
-              <div @click="setCurrency('USDT')">
-                <p>
-                  {{ $t('USDT') }}
-                  <span class="text-idx">{{ coin.symbol + user.usdtCount }}</span>
-                  <!--<span class="text-ixo">{{'-0.24%'}}</span>-->
-                </p>
-              </div>
+            > 
+              <dl @click="setCurrency('USDT')">
+                <dt>{{ $t('USDT') }}</dt>
+                <dd><span class="text-idx">{{ coin.symbol + user.usdtCount }}</span> </dd>
+              </dl>
             </router-link>
           </li>
           <li class>
@@ -83,14 +56,11 @@
               to="/OTC/Trade"
               class="menu-name"
               :class="{'active': currency === 'BTC' && from === 'trade'}"
-            >
-              <div @click="setCurrency('BTC')">
-                <p>
-                  {{ $t('BTC') }}
-                  <span class="text-idx">{{ coin.symbol + user.btcCount }}</span>
-                  <!--<span class="text-ixo">{{'-0.24%'}}</span>-->
-                </p>
-              </div>
+            > 
+              <dl @click="setCurrency('BTC')">
+                <dt>{{ $t('BTC') }}</dt>
+                <dd><span class="text-idx">{{ coin.symbol + user.btcCount }}</span> </dd>
+              </dl>
             </router-link>
           </li>
         </ul>
@@ -386,11 +356,17 @@ export default {
       .menu-title {
         margin-left: 6px;
       }
+      &.col { 
+        margin-left: 0;
+        dl {
+          padding-left: 25px; 
+        }
+      }
     }
 
     .left-menu-list {
       width: 100%;
-      margin-top: 20px;
+      margin-top: 5px;
 
       .menu-name {
         box-sizing: border-box;
@@ -431,6 +407,10 @@ export default {
         color: #333;
         cursor: pointer;
         margin-bottom: 5px;
+      }
+      dt {
+        font-size: 14px; 
+        font-weight:400;
       }
     }
 
