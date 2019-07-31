@@ -28,22 +28,22 @@
         </div>
       </div>
       <div class="tab-right pull-right" style="margin-top:-5px!important;" >
-        <label  class='label'>{{$t('otc_legal_currency')}}</label> 
+        <label  class='label'>{{$t('otc_legal_currency')}}</label>
         <span class="el-dropdown-link currency">
-          {{legal_currency}} 
+          {{legal_currency}}
         </span>
         <!-- <el-dropdown @command="changeCoin">
           <span class="el-dropdown-link currency">
             {{legal_currency}}<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
-          <el-dropdown-menu slot="dropdown"> 
-            <el-dropdown-item 
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item
               v-for="(item,idx) in dataList"
-              :key="idx" 
+              :key="idx"
               :command="item.name"
-              > 
+              >
               {{item.name}}
-            </el-dropdown-item> 
+            </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown> -->
         <button
@@ -157,13 +157,13 @@ export default {
       set (value) {
         state.otc.legal_currency = value
       }
-    }, 
+    },
   },
   methods: {
     change(code) {
       this.ipt = ''
     },
-    buySubmit() { 
+    buySubmit() {
       if (this.active === "0") {//金额
         if (this.$big(this.ipt).lt(100)) {
           utils.warning('购买量低于最低限额')
@@ -172,9 +172,9 @@ export default {
         else if (this.$big(this.ipt).gt(50000)) {
           utils.warning('购买量大于最大限额')
           return
-        } 
+        }
       } else if (this.active === "1") { //数量
-        if (!this.ipt || isNaN(Number(this.ipt)) || this.$big(this.ipt).lte(0)) { 
+        if (!this.ipt || isNaN(Number(this.ipt)) || this.$big(this.ipt).lte(0)) {
           return
         }
       }
@@ -196,9 +196,9 @@ export default {
         else if (this.$big(this.ipt).gt(50000)) {
           utils.warning('购买量大于最大限额')
           return
-        } 
+        }
       } else if (this.active === 1) { //数量
-        if (!this.ipt || isNaN(Number(this.ipt)) || this.$big(this.ipt).lte(0)) { 
+        if (!this.ipt || isNaN(Number(this.ipt)) || this.$big(this.ipt).lte(0)) {
           return
         }
       }
@@ -312,6 +312,7 @@ export default {
   }
   .otc-buy-ac {
     overflow: hidden;
+    padding: 0 36px;
     .line {
       height:6px;
       background:rgba(245,246,248,1);

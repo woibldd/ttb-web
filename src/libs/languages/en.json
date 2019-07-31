@@ -2176,12 +2176,12 @@
 "otc_kvcec_13": " Please enter Wechat",
 "otc_kvcec_14": "Please enter payment QR code",
 "watch_tips": "Please ensure that deposit address is correct, if not will result in failure to deposit or assets can not be recovered",
-    
-"contract_FUTURE_ETHUSD":"ETH Perpetual", 
+
+"contract_FUTURE_ETHUSD":"ETH Perpetual",
 "trading_order_cancel_all": "Bulk cancel",
 "tv_technical_indicators": "Technical Indicator",
 "tv_style":"Style",
-"tv_down_minute":"minute", 
+"tv_down_minute":"minute",
 "tv_down_hour": "hour",
 "tv_down_day": "day",
 "tv_down_week": "week",
@@ -2189,5 +2189,6 @@
 "fund_assets_node_buy": "Node purchase",
 "fund_assets_node_buy_tip": "Are you confirm to purchase and upgrade to IXX global node？",
 "fund_assets_node_buy_tip2": "You will be deducted on purchase and upgrade",
-"fund_node_buy_success": "Purchase success"
+"fund_node_buy_success": "Purchase success",
+"dep_tip": "USDT-Omni is the USDT issued by Tether based on the BTC network. The currency deposit address is the BTC address; the recharge and withdrawal will be taking place on the BTC network. The protocol used by USDT-Omni is the Omni layer protocol built on the BTC blockchain network.USDT-ERC20 is the USDT issued by Tether based on the ETH network. Its deposit address is the ETH address and its deposit and withdrawal use the ETH network. The protocol of USDT-ERC20 is the ERC20 protocol."
 }
