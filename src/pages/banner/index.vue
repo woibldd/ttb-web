@@ -52,21 +52,16 @@
                   />
                 </div>
               </el-col>
-              <el-col :span="6">
-                <!-- <div class="currency-ipt">
-                  <el-select v-model="buy.currency"  style="width: 100%">
-                    <el-option v-for="(item, index) in currencyData" :key="index" :value="item.currency" v-html="item.template"></el-option>
-                  </el-select>
-                </div>-->
+              <el-col :span="6"> 
                 <div class="mynav_link arrow-down">
                   <span class="label">
                     <icon name="USDT" />
                     {{buy.currency}}
-                    <icon
+                    <!-- <icon
                       class="arrow ml-5"
-                      name="arrow-down-w"/>
+                      name="arrow-down-w"/> -->
                   </span>
-                  <div class="dropdown-sub-menu">
+                  <!-- <div class="dropdown-sub-menu">
                     <ul class="dropdown-list pt-10 pb-10">
                       <li class="dropdown-item pl-24 pr-24">
                         <span>
@@ -75,7 +70,7 @@
                         </span>
                       </li>
                     </ul>
-                  </div>
+                  </div> -->
                 </div>
               </el-col>
               <el-col :span="7">

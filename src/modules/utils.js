@@ -445,6 +445,7 @@ const utils = {
     if (isNaN(num)) {
       return 0
     }
+    Big.NE = -16 //当小数超过16位时使用科学计数法
     return Big(num).round(scale, rm).toString()
   },
   toFixed (num, scale = 8, rm = consts.ROUND_DOWN) { 
