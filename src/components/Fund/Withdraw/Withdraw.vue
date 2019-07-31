@@ -11,6 +11,7 @@
         <div class="row__label">{{ $t('currency') }}</div>
         <div class="row__value">
           <el-select
+            style="width: 440px;"
             filterable
             v-model="selectCoin"
             @change="changeCoinType"
@@ -21,7 +22,12 @@
               v-for="item in allCoins"
               :key="item.id"
               :label="item.currency"
-              :value="item"/>
+              :value="item">
+              <b style="display: inline-block;width: 40px">{{ item.currency }}</b>
+              <span style="color: #CCC;font-size: 12px;padding-left: 20px;">
+                {{item.full_name}}
+              </span>
+            </el-option>
           </el-select>
         </div>
       </div>
@@ -40,6 +46,31 @@
           :key="idx">
           {{ c.currency }}
         </span>
+      </div>
+      <div class="fund-item-row mb-24" v-if="selectCoin.currency === 'USDT'">
+        <div class="row__label">
+          <el-popover
+            placement="bottom-start"
+            title=""
+            width="240"
+            trigger="hover"
+            effect="dark" :content="depTip">
+            <el-button type="text" slot="reference" class="lian">链地址</el-button>
+          </el-popover>
+        </div>
+        <div class="row__value">
+          <el-select
+            @change="lianSelect"
+            style="width: 440px;"
+            v-model="selectLian"
+            value-key="chain">
+            <el-option
+              v-for="(item, idx) in lianData"
+              :key="idx"
+              :label="item.currencyName"
+              :value="item"/>
+          </el-select>
+        </div>
       </div>
       <div class="fund-item-row">
         <div class="row__label">{{ $t('withdraw_addr') }}</div>
@@ -93,7 +124,7 @@ rows="1" style="vertical-align:top;outline:none;"
               class="coin-count"
               v-model="memo">
           </div>
-        </div> 
+        </div>
         <div class="attention">
           <icon
             name="robot-info"
@@ -252,6 +283,7 @@ import vModal from '@/components/VModal.vue'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
 import countDown from '@/components/common/countdown-code-button'
+import Vue from 'vue'
 import { state, actions } from '@/modules/store'
 
 export default {
@@ -275,10 +307,15 @@ export default {
       myitem: '',
       selectItem: '',
       restaurants: [],
-      highlight: true
+      highlight: true,
+      lianData: [],
+      selectLian: {}
     }
   },
   computed: {
+    depTip () {
+      return state.locale && this.$t('dep_tip')
+    },
     robotAttention () {
       return ` <div
             class="attention__tips">
@@ -333,6 +370,11 @@ export default {
     this.getCoinAddress()
   },
   methods: {
+    async lianSelect (coin) {
+      this.selectCoin = coin
+      await this.getCoinAddress()
+      this.updadeMyCoinInfo()
+    },
     onBlur (e) {
       let arr = this.restaurants.filter(item => item.value === this.selectItem)
       if (arr.length === 0) {
@@ -423,8 +465,28 @@ export default {
     async getAllCoinTypes () {
       await service.getAllCoinTypes().then(res => {
         if (res && res.data) {
-          console.log({data: res.data})
-          this.allCoins = res.data.filter(c => c.withdrawable)
+          this.lianData = []
+          res.data.forEach((item) => {
+            if(item.currency === 'USDT') {
+              this.lianData.push(item)
+            }
+          })
+          this.lianData.forEach((item) => {
+            if (item.chain === 'OMNI') {
+              Vue.set(item, 'currencyName', item.currency + '-' + 'Omni')
+            } else {
+              Vue.set(item, 'currencyName', item.currency + '-' + 'ERC20')
+            }
+          })
+          this.selectLian = this.lianData[0]
+          this.allCoins = this.removalData(res.data.filter(c => c.withdrawable))
+          this.allCoins.forEach((item) => {
+            if(state.locale === 'zh-CN') {
+              Vue.set(item, 'full_name', item.zh_name)
+            } else {
+              Vue.set(item, 'full_name', item.full_name)
+            }
+          })
           if (this.$route.params.currency) {
             const currency = this.$route.params.currency.toUpperCase()
 
@@ -439,6 +501,16 @@ export default {
     },
     quickSelectCoin (coin) {
       this.changeCoinType(coin)
+      this.selectLian = this.lianData[0]
+    },
+    removalData(arrData) {
+      var hash = {};
+      arrData= arrData.reduce(function(item, next) {
+        //num_iid是你要以什么属性去重
+        hash[next.currency] ? '' : hash[next.currency] = true && item.push(next);
+        return item
+      }, [])
+      return arrData;
     },
     getAccountWalletList () {
       return service.getAccountWalletList().then(res => {
@@ -562,3 +634,14 @@ export default {
   // }
 }
 </script>
+<style lang="scss">
+  .lian {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333333;
+    &:hover, &:focus {
+      border-color: transparent!important;
+      color: #333333!important;
+    }
+  }
+</style>

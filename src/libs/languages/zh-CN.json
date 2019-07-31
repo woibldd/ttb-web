@@ -2108,21 +2108,22 @@
     "otc_collection_update": "编辑",
     "otc_placeholder_c": "请输入您预期购买单价",
     "watch_tips": "请认真核对充币地址是否正确一致，如果不一致将导致无法成功充值或资产不可找回",
-    
+
     "contract_FUTURE_ETHUSD":"ETH永续",
     "trading_order_cancel_all": "全部撤销",
     "tv_technical_indicators": "技术指标",
     "tv_style":"样式设置",
-    "tv_down_minute":"分", 
+    "tv_down_minute":"分",
     "tv_down_hour": "小时",
     "tv_down_day": "日",
     "tv_down_week": "周",
     "tv_down_month": "月",
     "fund_assets_node_buy": "节点认购",
     "fund_assets_node_buy_tip": "是否确定认购并升级为IXX全球节点？",
-   
+
     "fund_assets_node_buy_tip2": "本次认购升级将扣除您",
-    "fund_node_buy_success": "认购成功", 
+    "fund_node_buy_success": "认购成功",
+    "dep_tip": "USDT-Omni是Tether泰达公司基于BTC网络发行的USDT，充币地址是BTC地址，充提币走BTC网络，USDT-Omni使用的协议是建立在BTC区块链网络上的omni layer 协议。USDT-ERC20是Tether泰达公司基于ETH网络发行的USDT，充币地址是ETH地址，充提币走ETH网络，USDT-ERC20使用的是ERC20协议。",
     "coin_FUTURE_ETHUSD":"ETH",
     "CNY": "人民币",
     "SGD": "新加坡币",

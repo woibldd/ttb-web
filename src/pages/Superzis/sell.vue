@@ -34,10 +34,10 @@
             />
            <span class="company"> {{ currency }} </span>
          </div>
-         <div class="tip">选择付款方式</div>
-         <div class="pay-list-con">
-           <div class="pay-list" v-for="(item, index) in payData" :key="index" :data-pay="item.name" :class="{active: active === index}" @click="tabHanlde(item, index)">{{ item.name }}</div>
-         </div>
+         <!--<div class="tip">选择付款方式</div>-->
+         <!--<div class="pay-list-con">-->
+           <!--<div class="pay-list" v-for="(item, index) in payData" :key="index" :data-pay="item.name" :class="{active: active === index}" @click="tabHanlde(item, index)">{{ item.name }}</div>-->
+         <!--</div>-->
          <div class="result-msg">
            <dl>
              <dt></dt>
@@ -112,6 +112,7 @@ export default {
       priceFlag: true,
       amountFlag: false,
       min_amount: 0,
+      max_amount: 0,
       active_id: '',
       buyDisabled: false,
       result: {
@@ -191,7 +192,8 @@ export default {
                     currency: this.currency,
                     user_id: this.id,
                     by_cny: this.price,
-                    active_id: this.active_id
+                    active_id: this.active_id,
+                    price: this.result.unitPrice
                 }), {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -243,43 +245,44 @@ export default {
             }
         }).then((res) => {
             if (res.code === 0) {
-                if (res.data.length > 0) {
-                    this.purchase = true
-                    this.overdue = false
-                    // 拿到单价最小
-                    this.min_amount = Math.min.apply(Math, res.data.map(function(o){ return Number(o.otc_active.price )}))
-                    res.data.forEach((item) => {
-                        this.payData.forEach((child, index) => {
-                            if(child.pay === item.payment_type) {
-                                child.data = item.otc_active
-                                if(Number(item.otc_active.price) === this.min_amount) {
-                                    child.excellent = true
-                                    this.active = index
-                                    this.active_id = item.otc_active.active_id
-                                    this.result.unitPrice = item.otc_active.price
-                                    if (this.downPrice >= 100) {
-                                         this.amount =this.$big(this.price).div(this.result.unitPrice).round(6, 0).toString()
-                                    }
-                                }
-                            }
-                        })
-                    })
-                   if(this.$route.query.active) {
-                        this.paySelect = Number(this.$route.query.active)
-                        if(this.$route.query.active === '0') {
-                            this.price = this.$route.query.amount
-                        }
-                        else {
-                            this.amount = this.$route.query.amount
-                            this.price =this.$big(Number(this.amount)).times(this.result.unitPrice).round(6, 0).toString()
-                            console.log(this.amount, this.result.unitPrice)
-                        }
-                    }
-                } else {
-                    this.purchase = false
-                    this.overdue = true
-                }
-            }
+              if (res.data.length > 0) {
+                  this.purchase = true
+                  this.overdue = false
+                  // 拿到单价最小
+                  this.min_amount = Math.min.apply(Math, res.data.map(function(o){ return Number(o.otc_active.price )}))
+                this.max_amount = Math.max.apply(Math, res.data.map(function(o){ return Number(o.otc_active.price )}))
+                  res.data.forEach((item) => {
+                      this.payData.forEach((child, index) => {
+                          if(child.pay === item.payment_type) {
+                              child.data = item.otc_active
+                              if(Number(item.otc_active.price) === this.max_amount) {
+                                  child.excellent = true
+                                  this.active = index
+                                  this.active_id = item.otc_active.active_id
+                                  this.result.unitPrice = item.otc_active.price
+                                  if (this.downPrice >= 100) {
+                                       this.amount =this.$big(this.price).div(this.result.unitPrice).round(6, 0).toString()
+                                  }
+                              }
+                          }
+                      })
+                  })
+                 if(this.$route.query.active) {
+                      this.paySelect = Number(this.$route.query.active)
+                      if(this.$route.query.active === '0') {
+                          this.price = this.$route.query.amount
+                      }
+                      else {
+                          this.amount = this.$route.query.amount
+                          this.price =this.$big(Number(this.amount)).times(this.result.unitPrice).round(6, 0).toString()
+                          console.log(this.amount, this.result.unitPrice)
+                      }
+                  }
+              } else {
+                  this.purchase = false
+                  this.overdue = true
+              }
+          }
         })
     },
     getPairList() {

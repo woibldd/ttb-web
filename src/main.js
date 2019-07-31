@@ -54,7 +54,8 @@ import {
   Row,
   Col,
   Tooltip,
-  Checkbox,
+  Popover,
+  Checkbox
 } from 'element-ui'
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
@@ -99,6 +100,7 @@ Vue.use(Timeline)
 Vue.use(TimelineItem)
 Vue.use(Progress)
 Vue.use(Checkbox)
+Vue.use(Popover)
 const request = require.context('./assets/svg', true, /\.svg$/)
 /* console.log('request', request)
 console.log('request.keys', request.keys())

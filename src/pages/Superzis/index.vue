@@ -50,8 +50,8 @@
                    <template v-else>
                        <div class="result-no-msg">
                            <i class="iconfont">&#xe61c;</i>未找到合适报价，修改条件或
-                           <router-link 
-                            to="/OTC/Trade"> {{ $t('查看所有报价') }}</router-link> 
+                           <router-link
+                            to="/OTC/Trade"> {{ $t('查看所有报价') }}</router-link>
                        </div>
                    </template>
                </template>
@@ -79,7 +79,7 @@
              </dd>
            </dl>
          </div>
-         <div class="result-btn" v-if="purchase">
+         <div class="result-btn" v-if="purchase">deposit
            <!--购买-->
            <el-button
             v-loading="loading"
@@ -200,12 +200,13 @@ export default {
                     currency: this.currency,
                     user_id: this.id,
                     by_cny: this.price,
-                    active_id: this.active_id
+                    active_id: this.active_id,
+                    price: this.result.unitPrice
                 }), {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
-            }).then((res) => { 
+            }).then((res) => {
               this.loading = false
                if (res.code === 0) {
                    this.$message.success('提交成功')
@@ -224,7 +225,7 @@ export default {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
-                }).then((res) => { 
+                }).then((res) => {
                   this.loading = false
                   if (res.code === 0) {
                       this.$message.success('提交成功')
