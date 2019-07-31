@@ -328,9 +328,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  
   @import '../styles/mixins';
-
   .user-center-right {
     float: left;
     .profile-container {
