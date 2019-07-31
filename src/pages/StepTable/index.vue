@@ -141,7 +141,8 @@
                   <!-- <span v-if="!item.other_appeal">{{$t('otc_sideoc_6')}}</span>
                   <span v-else-if="item.side === 2 && item.state === 1">{{$t('otc_seiitm_6')}}</span>
                   <span v-else>{{$t('otc_seiitm_7')}}</span> -->
-                   <span>{{ state(item.state) }}</span> 
+                  <span v-if="item.side === 2 && item.state === 1">{{$t('otc_seiitm_6')}}</span>
+                  <span  v-else>{{ state(item.state) }}</span> 
                   <b
                     v-if="item.state === 2 || item.state === 7 || item.state === 6"
                     @click="sq(item)"
