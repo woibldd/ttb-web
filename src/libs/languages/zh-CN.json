@@ -2123,7 +2123,9 @@
    
     "fund_assets_node_buy_tip2": "本次认购升级将扣除您",
     "fund_node_buy_success": "认购成功", 
-    "coin_FUTURE_ETHUSD":"ETH"
+    "coin_FUTURE_ETHUSD":"ETH",
+    "CNY": "人民币",
+    "SGD": "新加坡币"
   }
 
 

@@ -1,7 +1,7 @@
 <template>
   <div class="otc-left-container">
     <div class="left-menu-container left-menu-nobottom">
-      <div class="left-menu-box"> 
+      <!-- <div class="left-menu-box"> 
         <ul class="left-menu-list">
           <li class>  
             <div @click="changeCoin('CNY')"
@@ -24,14 +24,44 @@
             </div>
           </li>
         </ul>
-      </div> 
+      </div>-->
+
+      <div class="coin_link arrow-down">
+        <dl>
+          <dt>{{coin.name +'/' + coin.symbol}}</dt>
+          <dd>
+            {{ $t(coin.name)}}
+            <icon class="arrow ml-5" name="arrow-down-w" />
+          </dd>
+        </dl>
+
+        <div class="dropdown-sub-menu">
+          <ul class="dropdown-list pt-1 pb-1">
+            <li
+              v-for="(item,index) in symbolList"
+              class="dropdown-item link pl-24 pr-24"
+              @click="changeCoin(item.name)"
+              :key="index"
+            >
+              <dl>
+                <dt>{{item.name +'/' + item.symbol}}</dt>
+                <dd>{{ $t(item.name)}}</dd>
+              </dl>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="left-menu-container left-menu-nobottom">
       <div class="left-menu-box">
-        <p class="left-menu-title">
-          <icon name="handle"/>
-          <span class="menu-title">{{ $t('otc_trade') }}</span>
-        </p>
+        <div class="left-menu-title">
+          <!-- <icon name="handle"/>
+          <span class="menu-title">{{ $t('otc_trade') }}</span>-->
+          <dl>
+            <dt>币种</dt>
+            <dd>现价</dd>
+          </dl>
+        </div>
         <ul class="left-menu-list">
           <li class>
             <router-link
@@ -69,17 +99,15 @@
     <div class="left-menu-container left-menu-nobottom">
       <div class="left-menu-box">
         <p class="left-menu-title">
-          <icon name="manager"/>
+          <icon name="manager" />
           <span class="menu-title">{{ $t('otc_transaction_manage') }}</span>
         </p>
         <ul class="left-menu-list">
           <li class>
-            <router-link
-              class="menu-name"
-              to="/OTC/Hir"
-              active-class="active"
-            >{{ $t('otc_my_order') }}
-            <span class="count" v-if="token && count > 0">{{ count }}</span></router-link>
+            <router-link class="menu-name" to="/OTC/Hir" active-class="active">
+              {{ $t('otc_my_order') }}
+              <span class="count" v-if="token && count > 0">{{ count }}</span>
+            </router-link>
           </li>
           <!--<li class="">-->
           <!--<router-link-->
@@ -91,11 +119,10 @@
           <!--</li>-->
           <li>
             <router-link
-              class='menu-name'
+              class="menu-name"
               to="/OTC/FrenchBill"
-              active-class="active">
-              {{ $t('otc_side_35') }}
-            </router-link>
+              active-class="active"
+            >{{ $t('otc_side_35') }}</router-link>
           </li>
           <li class>
             <router-link
@@ -108,7 +135,7 @@
       </div>
       <div class="left-menu-box">
         <p class="left-menu-title">
-          <icon name="help"/>
+          <icon name="help" />
           <span class="menu-title">{{ $t('footer_help') }}</span>
         </p>
         <ul class="left-menu-list">
@@ -125,15 +152,15 @@
 </template>
 
 <script>
-import { state } from '@/modules/store'
-import service from '@/modules/service';
-import Vue from 'vue'
+import { state } from "@/modules/store";
+import service from "@/modules/service";
+import Vue from "vue";
 export default {
-  data () {
+  data() {
     return {
       state,
       timer: null,
-      token: window.localStorage.getItem('X-TOKEN'),
+      token: window.localStorage.getItem("X-TOKEN"),
       user: {
         btcCount: 0,
         usdtCount: 0
@@ -142,165 +169,183 @@ export default {
         CNY: {
           name: "CNY",
           rate: "cny_rate",
-          symbol: '￥'
+          symbol: "￥"
         },
-        SGD: { 
+        SGD: {
           name: "SGD",
           rate: "sgd_rate",
-          symbol: 'S$'
+          symbol: "S$"
         }
       },
       count: 0
-    }
+    };
   },
   methods: {
-    setCurrency (coin) {
-      this.currency = coin
-      this.$eh.$emit('otc:currency:change', coin, this.side)
+    setCurrency(coin) {
+      this.currency = coin;
+      this.$eh.$emit("otc:currency:change", coin, this.side);
     },
-    init () {
+    init() {
       service.otcSymbolList({}).then(res => {
-        if (res.code === 0) { 
-          this.user.btcCount = this.$big(res.data[1][this.coin.rate]).round(2, 0)
-          this.user.usdtCount = this.$big(res.data[0][this.coin.rate]).round(2, 0)
-        }
-      })
-      // 委托
-      service.getUnDonefills({
-        page: 1,
-        side: 0,
-        size: 9999
-      }).then((res) => {
         if (res.code === 0) {
-          let countData = []
-          let orderData = []
-          let orderData1 = []
-          let oneData = []
-          res.data.data.forEach((item) => {
-            orderData.push(item)
-          })
-          this.count = orderData.length
-          if (this.count <= 0) {
-            service.getOtcActivefills(
-              {
-                page: 1,
-                side: 0,
-                size: 9999
-              }
-            ).then((res) => {
-              if (res.code === 0) {
-                res.data.data.forEach((item) => {
-                  if (item.state === 2) countData.push(item)
-                })
-                this.count = countData.length
-              }
-            })
-          }
+          this.user.btcCount = this.$big(res.data[1][this.coin.rate]).round(
+            2,
+            0
+          );
+          this.user.usdtCount = this.$big(res.data[0][this.coin.rate]).round(
+            2,
+            0
+          );
         }
-      })
-    }, 
+      });
+      // 委托
+      service
+        .getUnDonefills({
+          page: 1,
+          side: 0,
+          size: 9999
+        })
+        .then(res => {
+          if (res.code === 0) {
+            let countData = [];
+            let orderData = [];
+            let orderData1 = [];
+            let oneData = [];
+            res.data.data.forEach(item => {
+              orderData.push(item);
+            });
+            this.count = orderData.length;
+            if (this.count <= 0) {
+              service
+                .getOtcActivefills({
+                  page: 1,
+                  side: 0,
+                  size: 9999
+                })
+                .then(res => {
+                  if (res.code === 0) {
+                    res.data.data.forEach(item => {
+                      if (item.state === 2) countData.push(item);
+                    });
+                    this.count = countData.length;
+                  }
+                });
+            }
+          }
+        });
+    },
     changeCoin(command) {
-      this.legal_currency = command
+      this.legal_currency = command;
     }
   },
-  created () {
-    this.init()
+  created() {
+    this.init();
     this.timer = setInterval(() => {
       service.otcSymbolList({}).then(res => {
-        if (res.code === 0) { 
-          //let rate = this.legal_currency.toLowerCase() + '_rate'  
-          Vue.set(this.user, 'btcCount', this.$big(res.data[1][this.coin.rate]).round(2, 0))
-          Vue.set(this.user, 'usdtCount', this.$big(res.data[0][this.coin.rate]).round(2, 0))
-        }
-      })
-      service.getUnDonefills({
-        page: 1,
-        side: 0,
-        size: 9999
-      }).then((res) => {
         if (res.code === 0) {
-          let countData = []
-          let orderData = []
-          let orderData1 = []
-          let oneData = []
-          res.data.data.forEach((item) => {
-            orderData.push(item)
-          })
-          this.count = orderData.length
-          if (this.count <= 0) {
-            service.getOtcActivefills(
-              {
-                page: 1,
-                side: 0,
-                size: 9999
-              }
-            ).then((res) => {
-              if (res.code === 0) {
-                res.data.data.forEach((item) => {
-                  if (item.state === 2) countData.push(item)
-                })
-                this.count = countData.length
-              }
-            })
-          }
+          //let rate = this.legal_currency.toLowerCase() + '_rate'
+          Vue.set(
+            this.user,
+            "btcCount",
+            this.$big(res.data[1][this.coin.rate]).round(2, 0)
+          );
+          Vue.set(
+            this.user,
+            "usdtCount",
+            this.$big(res.data[0][this.coin.rate]).round(2, 0)
+          );
         }
-      })
-    }, 5000)
+      });
+      service
+        .getUnDonefills({
+          page: 1,
+          side: 0,
+          size: 9999
+        })
+        .then(res => {
+          if (res.code === 0) {
+            let countData = [];
+            let orderData = [];
+            let orderData1 = [];
+            let oneData = [];
+            res.data.data.forEach(item => {
+              orderData.push(item);
+            });
+            this.count = orderData.length;
+            if (this.count <= 0) {
+              service
+                .getOtcActivefills({
+                  page: 1,
+                  side: 0,
+                  size: 9999
+                })
+                .then(res => {
+                  if (res.code === 0) {
+                    res.data.data.forEach(item => {
+                      if (item.state === 2) countData.push(item);
+                    });
+                    this.count = countData.length;
+                  }
+                });
+            }
+          }
+        });
+    }, 5000);
   },
-  beforeDestroy () {
-    clearInterval(this.timer)
+  beforeDestroy() {
+    clearInterval(this.timer);
   },
   computed: {
     currency: {
-      get () {
-        return this.state.otc.currency
+      get() {
+        return this.state.otc.currency;
       },
-      set (value) {
-        this.state.otc.currency = value
+      set(value) {
+        this.state.otc.currency = value;
       }
     },
     side: {
-      get () {
-        return this.state.otc.showSide
+      get() {
+        return this.state.otc.showSide;
       }
     },
-    commonProblemLink () {
+    commonProblemLink() {
       let link =
-        'https://ixxcustomer.zendesk.com/hc/zh-cn/categories/360001229751';
-      if (this.state.locale === 'en') {
-        link = link.replace('zh-cn', 'en-us')
+        "https://ixxcustomer.zendesk.com/hc/zh-cn/categories/360001229751";
+      if (this.state.locale === "en") {
+        link = link.replace("zh-cn", "en-us");
       }
-      return link
+      return link;
     },
-    guidanceLink () {
+    guidanceLink() {
       let link =
-        'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360029413991';
-      if (this.state.locale === 'en') {
-        link = link.replace('zh-cn', 'en-us')
+        "https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360029413991";
+      if (this.state.locale === "en") {
+        link = link.replace("zh-cn", "en-us");
       }
-      return link
+      return link;
     },
-    from () {
-      return this.$route.name
+    from() {
+      return this.$route.name;
     },
     legal_currency: {
-      get () {
-        return state.otc.legal_currency
+      get() {
+        return state.otc.legal_currency;
       },
-      set (value) {
-        state.otc.legal_currency = value
+      set(value) {
+        state.otc.legal_currency = value;
       }
-    }, 
+    },
     coin() {
-      return this.symbolList[this.legal_currency]
+      return this.symbolList[this.legal_currency];
     }
   },
   watch: {
     legal_currency() {
-      this.init()
+      this.init();
     }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 .otc-left-container {
@@ -313,14 +358,13 @@ export default {
     background: #fff;
     position: relative;
     padding-top: 20px;
-    padding-bottom: 20px;
+    // padding-bottom: 20px;
     border: 1px solid #e9e9e9;
     border-radius: 4px;
     box-sizing: border-box;
     margin-bottom: 16px;
     width: 210px;
     &:first-child {
-      
       padding-top: 0;
     }
 
@@ -389,6 +433,123 @@ export default {
         margin-bottom: 5px;
       }
     }
+
+    dl {
+      display: flex;
+      dt,
+      dd {
+        flex: 1;
+      }
+      dt {
+        font-size: 14px;
+        font-weight: bold;
+      }
+      dd {
+        font-size: 12px;
+        color: #999;
+      }
+    }
+
+    .coin_link {
+      font-size: 16px;
+      position: relative;
+      background-color: #fefefe;
+      border-radius: 5px;
+      margin-top: 4px;
+      text-align: center;
+      vertical-align: middle;
+
+      height: 40px;
+      line-height: 40px;
+
+      cursor: pointer;
+      &.arrow-down {
+        width: 100%;
+        .label {
+          line-height: 40px;
+        }
+        .arrow {
+          font-size: 10px;
+          transition: all 0.2s ease-in-out;
+        }
+        .dropdown-sub-menu {
+          background: #fff;
+        }
+        &:hover {
+          .dropdown-sub-menu {
+            opacity: 1;
+            display: block;
+            visibility: visible;
+          }
+          .nav_link {
+            // color: $primary;
+          }
+          .arrow {
+            transform: rotate(180deg);
+          }
+        }
+
+        .dropdown-sub-menu {
+          background: transparent;
+          position: absolute;
+          left: 0;
+          top: 40px;
+          width: 100%;
+          z-index: 999;
+          opacity: 0;
+          display: none;
+          visibility: hidden;
+
+          .dropdown-list {
+            margin-top: 3px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            .dropdown-item {
+              white-space: nowrap;
+              .link {
+                width: 100%;
+                height: 100%;
+                display: block;
+                color: #fff;
+              }
+              &:hover {
+                background: #b0edef;
+                .link {
+                  color: #fff;
+                }
+              }
+            }
+            .dropdown-qrcode {
+              line-height: 1.2em !important;
+              text-align: center !important;
+              span {
+                font-size: 0.9em;
+                color: #fff;
+              }
+              i {
+                //color: $primary;
+              }
+            }
+          }
+        }
+      }
+
+      // &:hover {
+      //   color: $primary;
+      // }
+
+      &.router-link-active {
+        color: $primary;
+      }
+
+      .hot,
+      .mining-dig {
+        font-size: 16px;
+        // margin-left:5px;
+        display: inline-block;
+      }
+    }
   }
 }
 .text-idx {
@@ -406,7 +567,7 @@ export default {
   color: rgba(244, 81, 81, 1);
 }
 .count {
-  background:  rgba(244, 81, 81, 1);
+  background: rgba(244, 81, 81, 1);
   display: inline-block;
   padding: 0 6px;
   height: 14px;

@@ -1955,5 +1955,7 @@
   "fund_assets_node_buy_tip": "是否確定認購並陞級為IXX全球節點？", 
   "fund_assets_node_buy_tip2": "本次認購陞級將扣除您",
   "fund_node_buy_success": "認購成功", 
-    "coin_FUTURE_ETHUSD":"ETH"
+    "coin_FUTURE_ETHUSD":"ETH",
+    "CNY": "人民币",
+    "SGD": "新加坡币"
 }
