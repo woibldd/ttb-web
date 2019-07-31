@@ -324,7 +324,9 @@ export default {
         this.amount = this.$route.query.amount 
         this.paySelect = 1
       } 
-    }  
+    } else {
+      this.price = this.$route.query.amount 
+    }     
   },
   mounted() {//页面加载后执行方法
 　　clearInterval(this.timer)
