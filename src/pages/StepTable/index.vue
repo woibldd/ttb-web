@@ -138,10 +138,11 @@
               <div class="state">
                 <template v-if="!item.appeal">
                   <!-- {{ item.state | state }} -->
-                  <span v-if="!item.other_appeal">{{$t('otc_sideoc_6')}}</span>
+                  <!-- <span v-if="!item.other_appeal">{{$t('otc_sideoc_6')}}</span>
                   <span v-else-if="item.side === 2 && item.state === 1">{{$t('otc_seiitm_6')}}</span>
-                  <span v-else>{{$t('otc_seiitm_7')}}</span>
-                  
+                  <span v-else>{{$t('otc_seiitm_7')}}</span> -->
+                  <span v-if="item.side === 2 && item.state === 1">{{$t('otc_seiitm_6')}}</span>
+                  <span  v-else>{{ state(item.state) }}</span> 
                   <b
                     v-if="item.state === 2 || item.state === 7 || item.state === 6"
                     @click="sq(item)"
@@ -704,20 +705,23 @@ export default {
         this.bankData.push(item.otc_collection)
       } else {
         item.otc_collection_list.forEach(item => {
-          const payType =
-            item.payment_type === 1
-              ? item.deposit_bank
-              : item.payment_type === 2
-                ? this.$t('payment_namezfb')
-                : this.$t('payment_weChat_adasunt')
-          const payAccount = item.alipay_account
-            ? item.alipay_account
-            : item.card_number
-              ? item.card_number
-              : item.we_chat_account
+          // const payType =
+          //   item.payment_type === 1
+          //     ? item.deposit_bank
+          //     : item.payment_type === 2
+          //       ? this.$t('payment_namezfb')
+          //       : this.$t('payment_weChat_adasunt')
+          // const payAccount = item.alipay_account
+          //   ? item.alipay_account
+          //   : item.card_number
+          //     ? item.card_number
+          //     : item.we_chat_account
+          
+          const payAccount = this.processValue('payment_type', item)
           payData.push({
             collection_id: item.collection_id,
-            deposit_bank: payType + payAccount,
+            // deposit_bank: payType + payAccount,
+            deposit_bank: payAccount,
             obj: item
           })
         })
@@ -908,11 +912,25 @@ export default {
                       name: '支付宝' + '/' + child.alipay_account,
                       img: child.collection_img
                     })
-                  } else {
+                  } else  if (child.payment_type === 3) {
                     bankData.push({
                       id: child.collection_id,
                       realName: child.name,
                       name: '微信' + '/' + child.we_chat_account,
+                      img: child.collection_img
+                    })
+                  }  else if (child.payment_type === 4) {
+                    bankData.push({
+                      id: child.collection_id,
+                      realName: child.name,
+                      name: 'Paynow'  + '/' + child.card_number,
+                      img: child.collection_img
+                    })
+                  }  else if (child.payment_type === 5) {
+                    bankData.push({
+                      id: child.collection_id,
+                      realName: child.name,
+                      name: 'Paylah' + '/' + child.card_number,
                       img: child.collection_img
                     })
                   }

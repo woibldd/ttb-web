@@ -310,9 +310,14 @@ export default {
         this.getPairList()
         this.init()
         if(this.$route.query.active) {
-        } else {
-            this.price = this.$route.query.amount
-        }
+          if (this.$route.query.active === '0'){
+            this.price = this.$route.query.amount 
+            this.paySelect = 0
+          } else if (this.$route.query.active === '1') { 
+            this.amount = this.$route.query.amount 
+            this.paySelect = 1
+          } 
+        }  
     })
   },
   mounted() {//页面加载后执行方法

@@ -1169,7 +1169,7 @@
   "contract_trade_index_base": "1.基礎貨幣是%{currency}。",
   "contract_trade_index_value": "2.計價貨幣是USD。",
   "contract_how_price": "合約是如何報價的？",
-  "contract_how_price_tip_a": "<span style=\"color:#22ced0\"> %{symbol} </span>是根據<span style=\"color:#22ced0\"> %{coin} </span>指數定價的%{symbol}合約。每張合約價值1 USD 的比特幣。",
+  "contract_how_price_tip_a": "<span style=\"color:#22ced0\"> %{symbol} </span>是根據<span style=\"color:#22ced0\"> %{coin} </span>指數定價的%{symbol}合約。每張合約價值%{value} 的比特幣。",
   "contract_how_price_tip_b": "每 8 小時 支付或收取資金費用。下一個支付將發生在 %{next_pay_time}。",
   "contract_how_price_tip_c": "<span style=\"color:#22ced0\"> %{symbol} </span>利用溢價指數計算資金費率。<span style=\"color:#22ced0\"> %{id1 } </span>以及<span style=\"color:#22ced0\"> %{id2} </span>是標的費率，<span style=\"color:#22ced0\"> %{id3} < /span>是溢價率。它們在<span style=\"color:#22ced0\"> 計算最終的資金費率</span>中被使用。",
   "contract_how_price_tip_d": "在 %{next_pay_time}時，多倉將會獲得%{feerate}%，同時空倉將會支付%{feerate}% 的費率。IXX.COM 不會收取任何資金費用。",
@@ -1943,7 +1943,7 @@
   "watch_tips": "請認真核對充幣地址是否正確壹致，如果不壹致將導致無法成功充值或資產不可找回",
 
   "contract_FUTURE_ETHUSD":"ETH永續",
-  "trading_order_cancel_all": "批量撤銷",
+  "trading_order_cancel_all": "全部撤銷",
   "tv_technical_indicators": "技術指標",
   "tv_style":"樣式設定",
   "tv_down_minute":"分",
@@ -1955,5 +1955,9 @@
   "fund_assets_node_buy_tip": "是否確定認購並陞級為IXX全球節點？",
   "fund_assets_node_buy_tip2": "本次認購陞級將扣除您",
   "fund_node_buy_success": "認購成功",
-  "dep_tip": "USDT-Omni is the USDT issued by Tether based on the BTC network. The currency deposit address is the BTC address; the recharge and withdrawal will be taking place on the BTC network. The protocol used by USDT-Omni is the Omni layer protocol built on the BTC blockchain network.USDT-ERC20 is the USDT issued by Tether based on the ETH network. Its deposit address is the ETH address and its deposit and withdrawal use the ETH network. The protocol of USDT-ERC20 is the ERC20 protocol."
+  "dep_tip": "USDT-Omni is the USDT issued by Tether based on the BTC network. The currency deposit address is the BTC address; the recharge and withdrawal will be taking place on the BTC network. The protocol used by USDT-Omni is the Omni layer protocol built on the BTC blockchain network.USDT-ERC20 is the USDT issued by Tether based on the ETH network. Its deposit address is the ETH address and its deposit and withdrawal use the ETH network. The protocol of USDT-ERC20 is the ERC20 protocol.",
+  "coin_FUTURE_ETHUSD":"ETH",
+  "CNY": "人民币",
+  "SGD": "新加坡币",
+  "otc_menu_title_price": "现价"
 }

@@ -420,24 +420,23 @@ const utils = {
   },
   toPretty (num) { 
     num = Big(num || 0)
-    Big.RM = 0 // rm = 0,向下截取
-    return num
-    // if (num < 100) {
-    //   return num.toFixed(2)
-    // }
-    // if (num < 1e6) {
-    //   return num.toFixed(0)
-    // }
-    // if (num < 1e7) {
-    //   return num.div(1e6).toFixed(1) + ' M'
-    // }
-    // if (num < 1e9) {
-    //   return num.div(1e6).toFixed(0) + ' M'
-    // }
-    // if (num < 1e10) {
-    //   return num.div(1e9).toFixed(1) + ' B'
-    // }
-    // return num.div(1e9).toFixed(0) + ' B'
+    Big.RM = 0 // rm = 0,向下截取 
+    if (num < 100) {
+      return num.toFixed(2)
+    }
+    if (num < 1e6) {
+      return num.toFixed(0)
+    }
+    if (num < 1e7) {
+      return num.div(1e6).toFixed(1) + ' M'
+    }
+    if (num < 1e9) {
+      return num.div(1e6).toFixed(0) + ' M'
+    }
+    if (num < 1e10) {
+      return num.div(1e9).toFixed(1) + ' B'
+    }
+    return num.div(1e9).toFixed(0) + ' B'
   },
   toRound (num, scale = 20, rm = consts.ROUND_DOWN) {
     if (typeof num === 'undefined') {
@@ -446,6 +445,7 @@ const utils = {
     if (isNaN(num)) {
       return 0
     }
+    Big.NE = -16 //当小数超过16位时使用科学计数法
     return Big(num).round(scale, rm).toString()
   },
   toFixed (num, scale = 8, rm = consts.ROUND_DOWN) { 

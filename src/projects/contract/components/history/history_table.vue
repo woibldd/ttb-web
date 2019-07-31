@@ -243,7 +243,7 @@
           </div>
           <div class="current-info sp_container">
             <p class="mb-10"> <span class="dib mr-5">{{ $t('contract_your_current_werehouse') }} </span> {{ $t('contract_many_piece_con', {amount: selectedHolding.amount}) }} ({{ selectedHolding.leverage }}x)</p>
-            <p class="mb-10"> <span class="dib mr-5">{{ $t('contract_have_apply_yet') }}</span> {{ selectedHolding.margin_position  | round( 4) }} BTC</p>
+            <p class="mb-10"> <span class="dib mr-5">{{ $t('contract_have_apply_yet') }}</span> {{ selectedHolding.margin_position  | round(selectedHolding.value_scale || 4) }} BTC</p>
             <p>
               <span
                 class="dib mr-5"
@@ -253,7 +253,7 @@
                 v-tooltip.left-start="{html: true, content: $t('contract_max_remove_account_tips'), classes: 'contract', placement:'.sp_container'}"
                 v-if="modal.radio !== '1'">{{ $t('contract_max_remove_account') }} </span>
 
-              {{ modal.radio === '1' ? selectedHolding.canAddMargin : selectedHolding.canRemoveMargin  | round( 4) }} 
+              {{ modal.radio === '1' ? selectedHolding.canAddMargin : selectedHolding.canRemoveMargin  | round(selectedHolding.value_scale || 4) }} 
               <!-- {{ selectedHolding.product_name }} -->
               BTC
             </p>
@@ -426,7 +426,9 @@ export default {
     triggerPrice (trgPrice, type = 0) {
         let diffPrice = this.lastPrice - trgPrice
         let triggerPriceStr = ''
-        if (type === 0) {
+        if (trgPrice == 0) {
+          triggerPriceStr = '--'
+        } else if (type === 0) {
            if (diffPrice > 0){
               triggerPriceStr = `<=${trgPrice}`
           }
@@ -798,7 +800,7 @@ export default {
     // border: 1px solid #0F0F0F;
     .tr {
       &:nth-of-type(even){
-        background: #10172A;
+        background: #373737;
       }
       &.th {
         color: #ACACAC;
@@ -872,7 +874,7 @@ export default {
         justify-content: center;
     }
     .input-num {
-        width: 62px;
+        width: 80px;
         height: 18px;
         color: $primary;
         background-color: #1B1B1B;

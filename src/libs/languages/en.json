@@ -1291,7 +1291,7 @@
 "contract_trade_index_base": "1.Base currency is %{currency}。",
 "contract_trade_index_value": "2.Pricing currency is USD",
 "contract_how_price": "How is the perpetual contact qupted？ ",
-"contract_how_price_tip_a": "<span style=\"color:#22ced0\"> %{symbol} </span> </span> is based on <span style=\"color:#22ced0\"> %{coin} </span>index pricing of %{symbol} contracts.Each contract is worth 1 USD of Bitcoin. ",
+"contract_how_price_tip_a": "<span style=\"color:#22ced0\"> %{symbol} </span> </span> is based on <span style=\"color:#22ced0\"> %{coin} </span>index pricing of %{symbol} contracts.Each contract is worth %{value} of Bitcoin. ",
 "contract_how_price_tip_b": " Funding is paid and received every 8 hours. The next payout event is %{next_pay_time}。",
 "contract_how_price_tip_c": "<span style=\"color:#22ced0\"> %{symbol} </span> Use the premium index to calculate the fund rate。<span style=\"color:#22ced0\"> %{id1} </span>以及<span style=\"color:#22ced0\"> %{id2} </span> is the underlying rate，<span style=\"color:#22ced0\"> %{id3} </span> is the premium rate。They are at <span style=\"color:#22ced0\"> to calculate the final fund rate </span> being used。",
 "contract_how_price_tip_d": " Today at %{next_pay_time}, longs will pay %{feerate}%, and shorts will receive%{feerate}%. IXX.COM will not charge fees on funding payments。",
@@ -2176,9 +2176,8 @@
 "otc_kvcec_13": " Please enter Wechat",
 "otc_kvcec_14": "Please enter payment QR code",
 "watch_tips": "Please ensure that deposit address is correct, if not will result in failure to deposit or assets can not be recovered",
-
 "contract_FUTURE_ETHUSD":"ETH Perpetual",
-"trading_order_cancel_all": "Bulk cancel",
+"trading_order_cancel_all": "Cancelled all",
 "tv_technical_indicators": "Technical Indicator",
 "tv_style":"Style",
 "tv_down_minute":"minute",
@@ -2190,5 +2189,9 @@
 "fund_assets_node_buy_tip": "Are you confirm to purchase and upgrade to IXX global node？",
 "fund_assets_node_buy_tip2": "You will be deducted on purchase and upgrade",
 "fund_node_buy_success": "Purchase success",
-"dep_tip": "USDT-Omni is the USDT issued by Tether based on the BTC network. The currency deposit address is the BTC address; the recharge and withdrawal will be taking place on the BTC network. The protocol used by USDT-Omni is the Omni layer protocol built on the BTC blockchain network.USDT-ERC20 is the USDT issued by Tether based on the ETH network. Its deposit address is the ETH address and its deposit and withdrawal use the ETH network. The protocol of USDT-ERC20 is the ERC20 protocol."
+"dep_tip": "USDT-Omni is the USDT issued by Tether based on the BTC network. The currency deposit address is the BTC address; the recharge and withdrawal will be taking place on the BTC network. The protocol used by USDT-Omni is the Omni layer protocol built on the BTC blockchain network.USDT-ERC20 is the USDT issued by Tether based on the ETH network. Its deposit address is the ETH address and its deposit and withdrawal use the ETH network. The protocol of USDT-ERC20 is the ERC20 protocol.",
+"coin_FUTURE_ETHUSD":"ETH",
+"CNY": "人民币",
+"SGD": "新加坡币",
+"otc_menu_title_price": "现价"
 }

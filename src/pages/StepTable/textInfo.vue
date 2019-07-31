@@ -192,7 +192,8 @@ v-if="textDetail.side === 1 && textCode === 0 && !textDetail.appeal && !textDeta
             <template v-if="changeFlag">
               <dd>
                 <span>{{$t('otc_otutcol_5')}}</span>
-                <em>{{ activeItem.a_t === 1 ? this.$t('payment_nameyhk') : activeItem.a_t === 2 ? this.$t('payment_namezfb') : this.$t('payment_weChat_adasunt') }}</em>
+                <!-- <em>{{ activeItem.a_t === 1 ? this.$t('payment_nameyhk') : activeItem.a_t === 2 ? this.$t('payment_namezfb') : this.$t('payment_weChat_adasunt') }}</em> -->
+                <em>{{$t(payName(activeItem.a_t).text)}}</em>
               </dd>
               <dd v-if="activeItem.a_t !== 1">
                 <span>{{$t('otc_otutcol_6')}}</span>
@@ -448,14 +449,25 @@ export default {
     closeHandle () {
       this.$emit('close-change')
     },
+    payName(type){
+      return {
+          1: { text:"payment_nameyhk", account:"card_number"},
+          2: { text:"payment_namezfb", account:"alipay_account"},
+          3: { text:"payment_weChat_adasunt", account:"alipay_account"},
+          4: { text:"Paynow", account:"card_number"},
+          5: { text:"Paylah", account:"card_number"},
+        }[type]
+    },
     bankHandle () {
       this.changeFlag = true
       this.activeItem = {}
       if (this.bankData.length > 0) {
         this.bankData.forEach((item) => {
           if (this.form.bankId === item.collection_id) {
-            const payType = item.obj.payment_type === 1 ? item.obj.deposit_bank : item.obj.payment_type === 2 ?this.$t('payment_namezfb') : this.$t('payment_weChat_adasunt')
-            const payAccount = item.obj.alipay_account ? item.obj.alipay_account : item.obj.card_number ? item.obj.card_number : item.obj.we_chat_account
+            // const payType = item.obj.payment_type === 1 ? item.obj.deposit_bank : item.obj.payment_type === 2 ?this.$t('payment_namezfb') : this.$t('payment_weChat_adasunt')
+            // const payAccount = item.obj.alipay_account ? item.obj.alipay_account : item.obj.card_number ? item.obj.card_number : item.obj.we_chat_account
+            const payType = this.payName(item.obj.payment_type).text 
+            const payAccount = item.obj[this.payName(item.obj.payment_type).account] 
             this.activeItem = {
               name: item.obj.name,
               img: item.obj.collection_img,

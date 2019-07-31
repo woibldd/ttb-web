@@ -47,32 +47,33 @@ export default {
         return  _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1  
         })
-      }
+      } 
       else if (this.tabSelected === 'new') { 
-        let excludeList = [
-          "BTC_USDT",
-          "EOS_BTC",
-          "EOS_USDT",
-          "ETH_BTC",
-          "ETH_USDT",
-          "LTC_USDT",
-          "BCH_BTC",
-          "BCH_USDT",
-          "XRP_BTC",
-          "XRP_USDT",
-          "LTC_BTC",
-          "ADA_BTC",
-          "ADA_USDT"
-        ]
-        let res = _.filter(list, (pair) => { 
-          return excludeList.indexOf(pair.name) < 0 
-        })   
-        res = _.sortBy(res, (pair) => {
+        // let excludeList = [
+        //   "BTC_USDT",
+        //   "EOS_BTC",
+        //   "EOS_USDT",
+        //   "ETH_BTC",
+        //   "ETH_USDT",
+        //   "LTC_USDT",
+        //   "BCH_BTC",
+        //   "BCH_USDT",
+        //   "XRP_BTC",
+        //   "XRP_USDT",
+        //   "LTC_BTC",
+        //   "ADA_BTC",
+        //   "ADA_USDT"
+        // ]
+        // let res = _.filter(list, (pair) => { 
+        //   return excludeList.indexOf(pair.name) < 0 
+        // })    
+        let res = _.sortBy(list, (pair) => {
           let value = this.getDelta(pair.tick) || 0
           return value * -1
         })   
         res = _.filter(res, (pair, index) => {  
-          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
+          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 &&
+                pair.type === 2 
         })   
 
         return res
@@ -83,10 +84,11 @@ export default {
             (pair.like || false)
         })
       }
-      else {
+      else { 
         return _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 &&
-            pair.currency.indexOf(this.tabSelected) > -1
+            pair.currency.indexOf(this.tabSelected) > -1 &&
+            pair.type === 1
         })
       }
     },

@@ -156,7 +156,7 @@ export default {
         4: "paynow",
         5: "paylah"
       }[type]
-    },
+    }, 
     openSideBar (row) {
       if (window.localStorage.getItem('X-TOKEN')) {
         this.operation = 1

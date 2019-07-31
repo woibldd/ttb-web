@@ -1173,7 +1173,7 @@
     "contract_symbol_detail":"合约明细",
     "contract_trade_index_base":"1.基础货币是%{currency}。",
     "contract_how_price":"合约是如何报价的？",
-    "contract_how_price_tip_a":"<span style=\"color:#01CED1\"> %{symbol} </span>是根据<span style=\"color:#01CED1\"> %{coin} </span>指数 定价的 %{symbol} 合约。每张合约价值 1 USD 的比特币。",
+    "contract_how_price_tip_a":"<span style=\"color:#01CED1\"> %{symbol} </span>是根据<span style=\"color:#01CED1\"> %{coin} </span>指数 定价的 %{symbol} 合约。每张合约价值 %{value} 的比特币。",
     "contract_how_price_tip_b":"每 8 小时 支付或收取资金费用。下一个支付将发生在 %{next_pay_time}",
     "contract_how_price_tip_c":"<span style=\"color:#01CED1\"> %{symbol} </span>利用溢价指数计算资金费率。<span style=\"color:#01CED1\"> %{id1} </span>以及<span style=\"color:#01CED1\"> %{id2} </span>，<span style=\"color:#01CED1\"> %{id3} </span>。它们在 <span style=\"color:#01CED1\"> 计算最终的资金费率</span>中被使用。",
     "contract_how_price_tip_d":"在 %{next_pay_time} 时，多仓将会获得 %{feerate}%，同时空仓将会支付%{feerate}% 的费率。IXX.COM 不会收取任何资金费用。",
@@ -2110,7 +2110,7 @@
     "watch_tips": "请认真核对充币地址是否正确一致，如果不一致将导致无法成功充值或资产不可找回",
 
     "contract_FUTURE_ETHUSD":"ETH永续",
-    "trading_order_cancel_all": "批量撤销",
+    "trading_order_cancel_all": "全部撤销",
     "tv_technical_indicators": "技术指标",
     "tv_style":"样式设置",
     "tv_down_minute":"分",
@@ -2123,9 +2123,12 @@
 
     "fund_assets_node_buy_tip2": "本次认购升级将扣除您",
     "fund_node_buy_success": "认购成功",
-    "dep_tip": "USDT-Omni是Tether泰达公司基于BTC网络发行的USDT，充币地址是BTC地址，充提币走BTC网络，USDT-Omni使用的协议是建立在BTC区块链网络上的omni layer 协议。USDT-ERC20是Tether泰达公司基于ETH网络发行的USDT，充币地址是ETH地址，充提币走ETH网络，USDT-ERC20使用的是ERC20协议。"
-
-}
+    "dep_tip": "USDT-Omni是Tether泰达公司基于BTC网络发行的USDT，充币地址是BTC地址，充提币走BTC网络，USDT-Omni使用的协议是建立在BTC区块链网络上的omni layer 协议。USDT-ERC20是Tether泰达公司基于ETH网络发行的USDT，充币地址是ETH地址，充提币走ETH网络，USDT-ERC20使用的是ERC20协议。",
+    "coin_FUTURE_ETHUSD":"ETH",
+    "CNY": "人民币",
+    "SGD": "新加坡币",
+    "otc_menu_title_price": "现价"
+  }
 
 
 

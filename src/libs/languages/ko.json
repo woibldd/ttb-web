@@ -1180,7 +1180,7 @@
     "contract_symbol_detail": "상세한 계약내영",
     "contract_trade_index_base": "1.기본화폐는%{currency}。",
     "contract_how_price": "계약은 어떻게 가격을 제시합니까？",
-    "contract_how_price_tip_a": "<span style=\"color:#C9A96C\"> %{symbol} </span>에 근거하여<span style=\"color:#C9A96C\"> %{coin} </span>지수가격 책정 %{symbol} 계약。1 USD의 비트 코인 한 장의 계약 가치。",
+    "contract_how_price_tip_a": "<span style=\"color:#C9A96C\"> %{symbol} </span>에 근거하여<span style=\"color:#C9A96C\"> %{coin} </span>지수가격 책정 %{symbol} 계약。%{value}의 비트 코인 한 장의 계약 가치。",
     "contract_how_price_tip_b": "。",
     "contract_how_price_tip_c": "<span style=\"color:#C9A96C\"> %{symbol} </span>할증 가 지수를 이용 하여 자금 비율을 계산하다。<span style=\"color:#C9A96C\"> %{id1} </span>또<span style=\"color:#C9A96C\"> %{id2} </span>기본률이다，<span style=\"color:#C9A96C\"> %{id3} </span>익장률이다:그들은<span style=\"color:#C9A96C\"> 최종 자금률을 계산한다</span>에서 사용가능하다。",
     "contract_how_price_tip_d": "",
@@ -2013,7 +2013,7 @@
 "watch_tips": "충전 주소가 정확히 일치하는지 확인하시고, 일치하지 않으면 충전 불능 또는 자산 회수에 실패할 수 있습니다",
 
 "contract_FUTURE_ETHUSD":"ETH계속유지",
-"trading_order_cancel_all": "대량철회",
+"trading_order_cancel_all": "전부철회",
 "tv_technical_indicators": "기술수치",
 "tv_style":"표본형식",
 "tv_down_minute":"분",
@@ -2025,5 +2025,9 @@
 "fund_assets_node_buy_tip": "아이스 글로벌 노드로 인수 및 업그레이드 여부를 알수있습니까？" ,
 "fund_assets_node_buy_tip2": "이번 인수 업그레이드가 당신의",
 "fund_node_buy_success": "인수성공",
-"dep_tip": "USDT-Omni is the USDT issued by Tether based on the BTC network. The currency deposit address is the BTC address; the recharge and withdrawal will be taking place on the BTC network. The protocol used by USDT-Omni is the Omni layer protocol built on the BTC blockchain network.USDT-ERC20 is the USDT issued by Tether based on the ETH network. Its deposit address is the ETH address and its deposit and withdrawal use the ETH network. The protocol of USDT-ERC20 is the ERC20 protocol."
+"dep_tip": "USDT-Omni is the USDT issued by Tether based on the BTC network. The currency deposit address is the BTC address; the recharge and withdrawal will be taking place on the BTC network. The protocol used by USDT-Omni is the Omni layer protocol built on the BTC blockchain network.USDT-ERC20 is the USDT issued by Tether based on the ETH network. Its deposit address is the ETH address and its deposit and withdrawal use the ETH network. The protocol of USDT-ERC20 is the ERC20 protocol.",
+"coin_FUTURE_ETHUSD":"ETH",
+"CNY": "人民币",
+"SGD": "新加坡币",
+"otc_menu_title_price": "现价"
 }

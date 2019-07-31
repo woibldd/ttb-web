@@ -296,6 +296,11 @@ export default {
               key: "executed_price"
             },
             {
+              title: "contract_trigger_price", //触发价格
+              width: "",
+              key: "trigger_price"
+            },
+            {
               title: "contract_action_delegate_type", //委托类型
               width: "",
               key: "type"
