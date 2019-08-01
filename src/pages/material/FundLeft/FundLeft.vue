@@ -180,7 +180,7 @@ export default{
       li {
         width: 100%;
         text-align: left;
-        line-height: 36px;
+        line-height: 48px;
         font-size: 14px;
         color: #333;
         cursor: pointer;

@@ -203,7 +203,6 @@
       </div>
     </div>
   </div>
-
 </template>
 <script>
 import Slider from '@/components/slider.vue'

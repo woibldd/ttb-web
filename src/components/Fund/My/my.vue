@@ -423,10 +423,10 @@ export default {
     },
     tipContent() {
       if (this.unit.name === 'CNY') {
-        return '小于50CNY'
+        return  this.$t('fund_my_assets_hide_tip') + '50CNY'
       }
       else {
-        return '小于10USD'
+        return this.$t('fund_my_assets_hide_tip') + '10USD'
       }
     }
   },

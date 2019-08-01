@@ -61,7 +61,7 @@
               />
               <span
                 class="btn-all"
-                @click="inputAll">{{$t('input_all')}}</span>
+                @click="inputAll('amount')">{{$t('input_all')}}</span>
             </div>
           </li>
           <li>
@@ -80,7 +80,7 @@
                 :placeholder="$t('otc_amount_sale')"
               />
               <span class="btn-all"
-                    @click="inputAll"
+                    @click="inputAll('total')"
               >{{$t('input_all')}}</span>
             </div>
           </li>
@@ -329,13 +329,14 @@ export default {
       });
     },
     amountInput () {
+      console.log('amount')
       if (!this.amount || this.amount == '') {
         this.total = ''
       } else {
         if (this.$big(this.amount).gt(this.$big(this.view.amount).minus(this.view.freezed))) {
           this.inputAll()
         } else {
-          let total =  this.$big(this.view.price).mul(this.amount).round(2, 3)
+          let total =  this.$big(this.view.price).mul(this.amount).round(2, 0)
           if (this.inputTarget === 'amount') {
             if (this.total != total) {
               this.total = total
@@ -344,7 +345,8 @@ export default {
         }
       }
     },
-    totalInput() {
+    totalInput() { 
+      console.log('total')
       if (!this.total || this.total == '') {
         this.amount = ''
       } else {
@@ -356,9 +358,17 @@ export default {
         }
       }
     },
-    inputAll() {
-      this.amount = this.$big(this.view.amount).minus(this.view.freezed)
-      this.total = this.$big(this.view.price).mul(this.amount)
+    inputAll(arg) {  
+      if (arg === 'total') {
+        this.inputTarget = 'total'
+        this.total = this.view.total
+        //this.amount = this.$big(this.total).div(this.view.price).round(2, 0)
+      }
+      else {
+        this.inputTarget = 'amount'
+        this.amount = this.$big(this.view.amount).minus(this.view.freezed)
+        //this.total = this.$big(this.amount).times(this.view.price)
+      }
     },
     // 撤销订单
     revokeOrder() {

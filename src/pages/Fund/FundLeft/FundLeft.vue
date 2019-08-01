@@ -165,7 +165,7 @@ export default{
           }
         }
         a {
-          padding: 8px 0 8px 40px;
+          padding: 12px 0 12px 40px;
           position: relative;
           color: #333;
           display: block;
