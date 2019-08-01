@@ -1,7 +1,7 @@
 <template>
   <div class="trade-container">
     <div class="trade-message-box">
-      
+
       <div class="link">{{ $t('otc_my_order') }}</div>
       <div class="message-con">
         <dl>
@@ -137,12 +137,8 @@
               </div>
               <div class="state">
                 <template v-if="!item.appeal">
-                  <!-- {{ item.state | state }} -->
-                  <!-- <span v-if="!item.other_appeal">{{$t('otc_sideoc_6')}}</span>
-                  <span v-else-if="item.side === 2 && item.state === 1">{{$t('otc_seiitm_6')}}</span>
-                  <span v-else>{{$t('otc_seiitm_7')}}</span> -->
                   <span v-if="item.side === 2 && item.state === 1">{{$t('otc_seiitm_6')}}</span>
-                  <span  v-else>{{ state(item.state) }}</span> 
+                  <span  v-else>{{ state(item.state) }}</span>
                   <b
                     v-if="item.state === 2 || item.state === 7 || item.state === 6"
                     @click="sq(item)"
@@ -553,8 +549,8 @@ export default {
             text: 'payment_card_number',
             width: '',
             key: 'card_number'
-          }, 
-        ], 
+          },
+        ],
         //paylah
         5: [
           {
@@ -568,15 +564,15 @@ export default {
             text: 'payment_card_number',
             width: '',
             key: 'card_number'
-          }, 
+          },
         ]
       },
       selectPayment: {},
       qrsrc: '',
       showQRcode: false,
-      
+
     }
-  }, 
+  },
   // computed: {
   //   userInfo () {
   //     return state.userInfo || {}
@@ -593,7 +589,7 @@ export default {
   //     return 0
   //   }
   // },
-  methods: { 
+  methods: {
     payName(type){
       return {
           1: "payment_nameyhk",
@@ -635,7 +631,7 @@ export default {
       this.showQRcode = true
     },
     orderSwtich (index) {
-      
+
       if (this.data.length > 0) {
         this.orderActive = index
         const orderName =
@@ -716,7 +712,7 @@ export default {
           //   : item.card_number
           //     ? item.card_number
           //     : item.we_chat_account
-          
+
           const payAccount = this.processValue('payment_type', item)
           payData.push({
             collection_id: item.collection_id,
@@ -1131,5 +1127,5 @@ export default {
     }
   }
 
-  
+
 </style>

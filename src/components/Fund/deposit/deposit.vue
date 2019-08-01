@@ -45,7 +45,7 @@
             trigger="hover"
             width="240"
             effect="dark" :content="depTip">
-            <el-button type="text" slot="reference" class="lian">链地址</el-button>
+            <el-button type="text" slot="reference" class="lian">链名称</el-button>
           </el-popover>
         </div>
         <div class="row__value">
@@ -243,7 +243,7 @@ export default {
               Vue.set(item, 'currencyName', item.currency + '-' + 'ERC20')
             }
           })
-          this.selectLian = this.lianData[0]
+          this.selectLian = this.lianData[1]
           this.allCoins = this.removalData(res.data.filter(c => c.depositable))
           this.allCoins.forEach((item) => {
             if(state.locale === 'zh-CN') {
@@ -273,7 +273,7 @@ export default {
       return arrData
     },
     quickSelectCoin (coin) {
-      this.selectLian = this.lianData[0]
+      this.selectLian = this.lianData[1]
       this.changeCoinType(coin)
     },
     getDepositHistory () {

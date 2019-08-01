@@ -79,7 +79,7 @@
              </dd>
            </dl>
          </div>
-         <div class="result-btn" v-if="purchase">deposit
+         <div class="result-btn" v-if="purchase">
            <!--购买-->
            <el-button
             v-loading="loading"
@@ -192,55 +192,54 @@ export default {
         this.amount = 0
     },
     purchaseHandle() {
-        console.log(this.paySelect)
-        this.loading = true
-        if (window.localStorage.getItem('X-TOKEN')) {
-            if (this.paySelect === 0) {
-                service.bycoins(qs.stringify({
-                    currency: this.currency,
-                    user_id: this.id,
-                    by_cny: this.price,
-                    active_id: this.active_id,
-                    price: this.result.unitPrice
-                }), {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            }).then((res) => {
-              this.loading = false
-               if (res.code === 0) {
-                   this.$message.success('提交成功')
-                   this.$router.push('/OTC/Hir')
-               } else {
-                   this.$message.warning(res.message)
-               }
-            })
-            } else {
-                service.byamount(qs.stringify({
-                        currency: this.currency,
-                        user_id: this.id,
-                        by_amount : this.amount,
-                        active_id: this.active_id
-                    }), {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                }).then((res) => {
-                  this.loading = false
-                  if (res.code === 0) {
-                      this.$message.success('提交成功')
-                      this.$router.push('/OTC/Hir')
-                  } else {
-                      this.$message.warning(res.message)
+      this.loading = true
+      if (window.localStorage.getItem('X-TOKEN')) {
+          if (this.paySelect === 0) {
+              service.bycoins(qs.stringify({
+                  currency: this.currency,
+                  user_id: this.id,
+                  by_cny: this.price,
+                  active_id: this.active_id,
+                  price: this.result.unitPrice
+              }), {
+              headers: {
+                  'Content-Type': 'multipart/form-data'
+              }
+          }).then((res) => {
+            this.loading = false
+             if (res.code === 0) {
+                 this.$message.success('提交成功')
+                 this.$router.push('/OTC/Hir')
+             } else {
+                 this.$message.warning(res.message)
+             }
+          })
+          } else {
+              service.byamount(qs.stringify({
+                      currency: this.currency,
+                      user_id: this.id,
+                      by_amount : this.amount,
+                      active_id: this.active_id
+                  }), {
+                  headers: {
+                      'Content-Type': 'multipart/form-data'
                   }
-                })
-            }
-        } else {
-            this.$router.push({
-                name: 'login',
-                query: {redirect: this.$route.fullPath}
-            })
-        }
+              }).then((res) => {
+                this.loading = false
+                if (res.code === 0) {
+                    this.$message.success('提交成功')
+                    this.$router.push('/OTC/Hir')
+                } else {
+                    this.$message.warning(res.message)
+                }
+              })
+          }
+      } else {
+          this.$router.push({
+              name: 'login',
+              query: {redirect: this.$route.fullPath}
+          })
+      }
     },
     overdueHandle() {},
     init() {
@@ -319,10 +318,10 @@ export default {
     this.init()
     if(this.$route.query.active) {
       if (this.$route.query.active === '0'){
-        this.price = this.$route.query.amount 
+        this.price = this.$route.query.amount
         this.paySelect = 0
-      } else if (this.$route.query.active === '1') { 
-        this.amount = this.$route.query.amount 
+      } else if (this.$route.query.active === '1') {
+        this.amount = this.$route.query.amount
         this.paySelect = 1
       } 
     } else {
