@@ -94,12 +94,12 @@
               </el-select>
             </el-input>
             <div
-              class="unit-label" style='right:148px'
+              class="unit-label" style='right:158px'
               v-html="active=='0' ? 'CNY' : 'USDT'"/>
 
           </el-col>
           <el-col :span="4">
-            <el-button style="width: 118px;float: right" type="sell" @click="sellSubmit">出售USDT</el-button>
+            <el-button style="width: 112px;float: right" type="sell" @click="sellSubmit">出售USDT</el-button>
           </el-col>
         </el-row>
       </div>
