@@ -99,7 +99,14 @@
           v-for="(hd, idx) in header"
           :key="idx"
           :prop="hd.key"
-          :label="hd.title"/>
+          :label="hd.title"> 
+          <template slot-scope="scope">
+            <span>{{scope.row[hd.key]}}</span>
+            <label class='chain' v-if="hd.key==='currency' && scope.row[hd.key]==='USDT'">
+              {{scope.row['chain']}}
+            </label>
+          </template>
+        </el-table-column>
         <el-table-column
           header-align='right'
           width="120px"
@@ -230,7 +237,9 @@ export default {
         utils.danger(this.$t('add_address_error'))
         return
       }
+      
       const param = {
+        chain: this.selectCoin.currency === 'USDT' ? this.selectLian.chain : '',
         currency: this.selectCoin.currency,
         address: this.address,
         description: this.description
@@ -272,5 +281,10 @@ export default {
     border-color: transparent !important;
     color: #333333 !important;
   }
+}
+.chain {
+  background-color: #b0edef;
+  padding: 3px 8px;
+  border-radius: 5px;
 }
 </style>

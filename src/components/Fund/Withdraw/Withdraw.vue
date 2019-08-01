@@ -102,7 +102,7 @@
               @blur="onBlur"
               :highlight-first-item="highlight"
               cols="1"
-rows="1" style="vertical-align:top;outline:none;"
+              rows="1" style="vertical-align:top;outline:none;"
             />
           </div>
         </div>
@@ -383,8 +383,8 @@ export default {
           address: this.selectItem,
           memo: ''
         }
-        if (this.restaurants)
-          {this.restaurants.push(obj)}
+        // if (this.restaurants)
+        //   {this.restaurants.push(obj)}
 
         this.selectItem = obj.value
         this.selectAddress = obj
@@ -414,8 +414,13 @@ export default {
         currency: this.selectCoin.currency
       }
       return service.getMyAddressList(param).then((res) => {
-        if (res && res.data) {
+        if (res && res.data) { 
+          this.restaurants = []
           this.allAddress = res.data
+          if (this.selectCoin.currency === 'USDT') {
+            this.allAddress = this.allAddress.filter(item => item.chain === this.selectLian.chain)
+          }
+           
           // console.log(this.allAddress)
           for (const item of this.allAddress) {
             this.restaurants.push({
@@ -545,6 +550,10 @@ export default {
         amount: this.withdrawCount,
         // email_code
         phone_code: this.phoneCode
+      }
+
+      if (this.selectCoin === 'USDT') {
+        param.chain = this.selectLian.chain
       }
 
       // eos 需要填memo
