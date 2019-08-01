@@ -503,14 +503,14 @@ export default {
       this.changeCoinType(coin)
       this.selectLian = this.lianData[1]
     },
-    removalData(arrData) {
-      var hash = {};
-      arrData= arrData.reduce(function(item, next) {
+    removalData (arrData) {
+      var hash = {}
+      arrData = arrData.reduce(function (item, next) {
         //num_iid是你要以什么属性去重
-        hash[next.currency] ? '' : hash[next.currency] = true && item.push(next);
+        hash[next.currency] ? '' : hash[next.currency] = true && item.push(next)
         return item
       }, [])
-      return arrData;
+      return arrData
     },
     getAccountWalletList () {
       return service.getAccountWalletList().then(res => {
@@ -604,9 +604,9 @@ export default {
     },
     querySearch (queryString, cb) {
       var restaurants = this.restaurants
-        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants
-        // 调用 callback 返回建议列表的数据
-        cb(results)
+      var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants
+      // 调用 callback 返回建议列表的数据
+      cb(results)
     },
     createFilter (queryString) {
       return (restaurant) => {
