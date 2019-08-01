@@ -2,12 +2,14 @@
   <div class="otc-buy-container">
     <div class="otc-buy-inner">
       <div class="title">
-        <span class="font24 font-weight font-base title-text">一键买币</span>
+        <span class="font24 font-weight font-base title-text">一键键币</span>
         <span class="font-gray">小额快速交易，单笔50000以下</span>
       </div>
      <div class="but-form">
        <div class="tip">
-         <i class="iconfont">&#xe62e;</i>
+         <el-tooltip content="非最终交易单价，仅供参考" placement="top" effect="light">
+        <i class="iconfont">&#xe62e;</i>
+        </el-tooltip>
         <span> {{currency}}参考单价：</span> {{ downPrice }} CNY/{{ currency }}
        </div>
        <div class="amount-btn-con">
@@ -146,7 +148,7 @@ export default {
             data: {}
         }
       ],
-      payTypeData: ['按金额购买', '按数量购买'],
+      payTypeData: ['按金额出售', '按数量出售'],
       loading: false,
     }
   },
@@ -191,8 +193,8 @@ export default {
         this.price = 0
         this.amount = 0
     },
-    purchaseHandle() {
-      this.loading = true
+    purchaseHandle: Debounce(function () {
+        this.loading = true
       if (window.localStorage.getItem('X-TOKEN')) {
           if (this.paySelect === 0) {
               service.bycoins(qs.stringify({
@@ -240,7 +242,7 @@ export default {
               query: {redirect: this.$route.fullPath}
           })
       }
-    },
+    }, 300),
     overdueHandle() {},
     init() {
         this.min_amount = 0
@@ -281,7 +283,7 @@ export default {
                             this.price = this.$route.query.amount
                         }
                         else {
-                            this.amount = this.$route.query.amount
+                            this.amount =  this.$route.query.amount.toString()
                             this.price =this.$big(Number(this.amount)).times(this.result.unitPrice).round(6, 0).toString()
                             console.log(this.amount, this.result.unitPrice)
                         }
@@ -318,15 +320,16 @@ export default {
     this.init()
     if(this.$route.query.active) {
       if (this.$route.query.active === '0'){
-        this.price = this.$route.query.amount
+        this.price = this.$route.query.amount.toString()
         this.paySelect = 0
       } else if (this.$route.query.active === '1') {
-        this.amount = this.$route.query.amount
+        this.amount = this.$route.query.amount.toString()
         this.paySelect = 1
-      } 
+      }
     } else {
-      this.price = this.$route.query.amount 
-    }     
+        this.price = this.$route.query.amount.toString()
+        this.paySelect = 0
+    }
   },
   mounted() {//页面加载后执行方法
 　　clearInterval(this.timer)
