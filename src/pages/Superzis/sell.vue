@@ -24,7 +24,6 @@
             />
            <span class="company"> CNY </span>
          </div>
-         <div class="err-msg" v-if="err">最小下单金额为100CNY</div>
           <div class="btn-ipt" v-show="paySelect === 1">
            <number-input
               class="number-input"
@@ -140,7 +139,7 @@ export default {
             data: {}
         }
       ],
-      payTypeData: ['按金额购买', '按数量购买']
+      payTypeData: ['按金额出售', '按数量出售']
     }
   },
   computed: {

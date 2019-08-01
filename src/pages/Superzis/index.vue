@@ -2,7 +2,7 @@
   <div class="otc-buy-container">
     <div class="otc-buy-inner">
       <div class="title">
-        <span class="font24 font-weight font-base title-text">一键键币</span>
+        <span class="font24 font-weight font-base title-text">一键买币</span>
         <span class="font-gray">小额快速交易，单笔50000以下</span>
       </div>
      <div class="but-form">
@@ -85,7 +85,7 @@
            <!--购买-->
            <el-button
             v-loading="loading"
-            class="res-btn" @click="purchaseHandle" style="width: 100%;" :disabled="buyDisabled">购买</el-button>
+            class="res-btn" @click="purchaseHandle" style="width: 100%;" :disabled="buyDisabled">购买USDT</el-button>
          </div>
          <div class="result-btn" v-if="overdue">
            <el-button class="err-btn" @click="overdueHandle" style="width: 100%;">报价已过期，点击获取最新价格</el-button>
@@ -148,7 +148,7 @@ export default {
             data: {}
         }
       ],
-      payTypeData: ['按金额出售', '按数量出售'],
+      payTypeData: ['按金额买入', '按数量买入'],
       loading: false,
     }
   },
