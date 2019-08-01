@@ -1774,6 +1774,7 @@
 "transfer_side":" transfer direction",
 "transfer_amount":" transfer  amount",
 "transfer_enter_amount":" Please enter the transfer amount",
+"transfer_enter_amountor":" Please enter the transfer amount",
 "transfer_able_amount":"Transferable amount：",
 "transfer_btc_history":"transaction history",
 "transfer_currency":" transfer currency",
