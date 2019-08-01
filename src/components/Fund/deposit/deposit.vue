@@ -12,6 +12,7 @@
         <div class="row__value">
           <el-select
             style="width: 440px;"
+            filterable
             v-model="selectCoin"
             filterable
             @change="changeCoinType"
@@ -263,8 +264,12 @@ export default {
             return
           }
           if (this.allCoins[0].currency === "USDT") {
-            this.selectLian = this.lianData[1]  
-            this.selectCoin = this.lianData[1]
+            this.lianData.forEach((item) => {
+               if(item.currencyName === 'USDT-Omni') {
+                this.selectLian = item
+                this.selectCoin = item
+               }
+            })
           } else {
             this.selectCoin = this.allCoins[0]
           }
@@ -282,8 +287,12 @@ export default {
     },
     quickSelectCoin (coin) {
       if(coin.currency === "USDT") {
-        this.selectLian = this.lianData[1]
-        this.selectCoin = this.lianData[1]
+       this.lianData.forEach((item) => {
+            if(item.currencyName === 'USDT-Omni') {
+            this.selectLian = item
+            this.selectCoin = item
+            }
+        })
       } else {
           this.selectCoin = coin
       }
