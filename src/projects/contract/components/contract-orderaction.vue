@@ -1447,10 +1447,10 @@ export default {
         if (!pRes.code) {
           pData = Object.create(pRes.data);
           pData.margin_position = this.$big(pData.margin_position || 0)
-            .round(4)
+            .round(this.pairInfo.value_scale || 4)
             .toString();
           pData.margin_delegation = this.$big(pData.margin_delegation || 0)
-            .round(4)
+            .round(this.pairInfo.value_scale || 4)
             .toString();
         } else {
           return utils.alert(pRes.message);

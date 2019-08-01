@@ -1715,7 +1715,7 @@
 "contract_stop_out_order":"Liquidated Order",
 "contract_adl_reduce":" ADL Deleverage",
 "count_down_value":" %{hour}:%{minute}:%{second}",
-"Message_setting_safety":"Security Authentication",
+"message_setting_safety":"Security Authentication",
 "message_setting_notice": "Site Notification",
 "message_setting_content_01":"IX will notify you on the following events. If supported, IX will use your native Browser/Operating System notifications. You can disable that and use in-page notifications by clicking the lock icon in the URL bar and disabling notifications. You may also disable individual notifications below.",
 "message_setting_content_02":" Order has been submitted",
