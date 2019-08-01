@@ -11,6 +11,7 @@
            <el-select
                 style="width: 440px;"
                 v-model="selectCoin"
+                filterable
                 @change="changeCoinType"
                 value-key="currency">
                 <el-option
@@ -26,7 +27,7 @@
             </el-select>
           </div>
         </div>
-        <div class="fund-item-row mb-24" v-if="selectCoin.currency === 'USDT'">
+        <div class="fund-item-row mb-14" v-if="selectCoin.currency === 'USDT'">
             <div class="row__label">
             <el-popover
                 placement="bottom-start"
@@ -103,7 +104,7 @@
           <template slot-scope="scope">
             <span>{{scope.row[hd.key]}}</span>
             <label class='chain' v-if="hd.key==='currency' && scope.row[hd.key]==='USDT'">
-              {{scope.row['chain']}}
+              {{scope.row['chain'] === 'ETH' ? "ERC20" : scope.row['chain']}}
             </label>
           </template>
         </el-table-column>
