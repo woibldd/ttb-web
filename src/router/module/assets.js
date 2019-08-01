@@ -103,7 +103,7 @@ export const capitalRouter = [
         path: 'hyTrade',
         name: 'hyTrade',
         redirect: 'hyTrade/index',
-        component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contract'),
+        component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contract/contract.vue'),
         children: [
           {
             path: 'index/:currency?',

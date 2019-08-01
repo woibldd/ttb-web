@@ -81,7 +81,7 @@ v-if="textDetail.side === 1 && textCode === 0 && !textDetail.appeal && !textDeta
                   <em
                     v-if="!textDetail.other_appeal"
                     style="color: #FDA22D">
-                    {{ textDetail.state | state }}
+                    {{ state(textDetail.state)  }}
                   </em>
                   <em
                     v-else
@@ -95,15 +95,15 @@ v-if="textDetail.side === 1 && textCode === 0 && !textDetail.appeal && !textDeta
               </dd>
               <dd>
                 <span>{{$t('otc_create_time')}}</span><em>
-                  <!--{{ textDetail.create_time || '&#45;&#45;' }}-->
+                  <!--{{ textDetail.create_time || '&#45;&#45;' }}--> 
                   {{ processValue('create_time', textDetail) || '--' }}
                 </em>
               </dd>
-              <dd>
-                <span>{{$t('orders')}}{{$t('otc_amount_money')}}（CNY）</span><em style="color: #FDA22D">{{ textDetail.total || '--' }}</em>
+              <dd> 
+                <span>{{$t('orders')}}{{$t('otc_amount_money')}}（{{textDetail.currency_type}}）</span><em style="color: #FDA22D">{{ textDetail.total || '--' }}</em>
               </dd>
               <dd>
-                <span>{{$t('otc_trans_idjg')}}(CNY)</span><em style="color: #FDA22D">{{ textDetail.price || '--' }}</em>
+                <span>{{$t('otc_trans_idjg')}}({{textDetail.currency_type}})</span><em style="color: #FDA22D">{{ textDetail.price || '--' }}</em>
               </dd>
               <dd>
                 <span>{{$t('otc_side_2')}}{{$t('amount')}}</span><em>{{ textDetail.amount || '--' }}</em>
@@ -192,7 +192,8 @@ v-if="textDetail.side === 1 && textCode === 0 && !textDetail.appeal && !textDeta
             <template v-if="changeFlag">
               <dd>
                 <span>{{$t('otc_otutcol_5')}}</span>
-                <em>{{ activeItem.a_t === 1 ? this.$t('payment_nameyhk') : activeItem.a_t === 2 ? this.$t('payment_namezfb') : this.$t('payment_weChat_adasunt') }}</em>
+                <!-- <em>{{ activeItem.a_t === 1 ? this.$t('payment_nameyhk') : activeItem.a_t === 2 ? this.$t('payment_namezfb') : this.$t('payment_weChat_adasunt') }}</em> -->
+                <em>{{$t(payName(activeItem.a_t).text)}}</em>
               </dd>
               <dd v-if="activeItem.a_t !== 1">
                 <span>{{$t('otc_otutcol_6')}}</span>
@@ -236,13 +237,13 @@ v-if="textDetail.side === 1 && textCode === 0 && !textDetail.appeal && !textDeta
                 <span>{{$t('fees_name')}}</span><em>{{ textDetail.currency }}</em>
               </dd>
               <dd>
-                <span>{{$t('otc_trans_idjg')}}(CNY)</span><em style="color: #FDA22D">{{ textDetail.price || '--' }}</em>
+                <span>{{$t('otc_trans_idjg')}}({{textDetail.currency_type}})</span><em style="color: #FDA22D">{{ textDetail.price || '--' }}</em>
               </dd>
               <dd>
                 <span>{{$t('otc_trans_idsl')}}</span><em>{{ textDetail.amount || '--' }}</em>
               </dd>
               <dd>
-                <span>{{$t('otc_ziurec_19')}}(CNY)</span><em>{{ textDetail.total || '--' }}</em>
+                <span>{{$t('otc_ziurec_19')}}({{textDetail.currency_type}})</span><em>{{ textDetail.total || '--' }}</em>
               </dd>
               <dd>
                 <span>{{$t('otc_ziurec_13')}}</span><em>{{$t('otc_ziurec_16')}}</em>
@@ -429,7 +430,7 @@ export default {
     countDown
   },
   filters: {
-    formatBankNumber (bankNumber) {
+    formatBankNumber (bankNumber) { 
       return bankNumber.substr(0, 4) + '****' + bankNumber.substr(-4)
     },
     otherCount (e) {
@@ -448,14 +449,25 @@ export default {
     closeHandle () {
       this.$emit('close-change')
     },
+    payName(type){
+      return {
+          1: { text:"payment_nameyhk", account:"card_number"},
+          2: { text:"payment_namezfb", account:"alipay_account"},
+          3: { text:"payment_weChat_adasunt", account:"alipay_account"},
+          4: { text:"Paynow", account:"card_number"},
+          5: { text:"Paylah", account:"card_number"},
+        }[type]
+    },
     bankHandle () {
       this.changeFlag = true
       this.activeItem = {}
       if (this.bankData.length > 0) {
         this.bankData.forEach((item) => {
           if (this.form.bankId === item.collection_id) {
-            const payType = item.obj.payment_type === 1 ? item.obj.deposit_bank : item.obj.payment_type === 2 ?this.$t('payment_namezfb') : this.$t('payment_weChat_adasunt')
-            const payAccount = item.obj.alipay_account ? item.obj.alipay_account : item.obj.card_number ? item.obj.card_number : item.obj.we_chat_account
+            // const payType = item.obj.payment_type === 1 ? item.obj.deposit_bank : item.obj.payment_type === 2 ?this.$t('payment_namezfb') : this.$t('payment_weChat_adasunt')
+            // const payAccount = item.obj.alipay_account ? item.obj.alipay_account : item.obj.card_number ? item.obj.card_number : item.obj.we_chat_account
+            const payType = this.payName(item.obj.payment_type).text 
+            const payAccount = item.obj[this.payName(item.obj.payment_type).account] 
             this.activeItem = {
               name: item.obj.name,
               img: item.obj.collection_img,

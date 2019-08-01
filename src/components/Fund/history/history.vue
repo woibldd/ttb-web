@@ -134,7 +134,7 @@
                 @click="showCXID(scope.row)">{{ $t('view_txid') }}</span>
                
             </div>
-            <!-- <el-button type="text" @click="open"><a v-if="scope.row.state==-1" >撤销</a></el-button> -->
+            <el-button class="chexiao" type="text" @click="open(scope.row.id)"><a v-if="scope.row.state==-1|scope.row.state==-100" >{{$t('contract_assign_revert')}}</a></el-button>
             <!-- 撤销按钮 -->
           </template>
         </el-table-column>
@@ -182,7 +182,8 @@ export default {
       unit: 'CNY',
       loading: true,
       hasInternal: false,
-      state
+      state,
+      coinList: {},
     }
   },
   computed: {
@@ -206,12 +207,35 @@ export default {
     }
   },
   async created () { 
+    await this.getCoins()
     this.updateHeaderLabel()
     this.getFundHistory(this.type)
     this.getAccountBalanceList()
     this.getInternalHistory()
   },
   methods: {
+          open(param) {
+        this.$confirm(this.$t('otc_ziurec_18'), {
+                    confirmButtonText: this.$t('otc_ziurec_20'),
+                    cancelButtonText: this.$t('cancel'),
+                    type: 'warning'
+        }).then(() => {
+          service.Cancellationoforders( {id:param}).then(res => {
+            if(res.code===0){
+              this.getFundHistory(this.type)
+              this.$message({
+                type: 'success',
+                message: this.$t('otc_sidees11'),
+              });
+            } else {
+              this.$message({
+                type: 'warning',
+                message: `${res.message}`
+              })
+            }
+          })
+        })
+    },
     // 撤销订单按钮
       //  open() {
       //   this.$confirm('此操作将撤销订单, 是否继续?', '提示', {
@@ -234,8 +258,9 @@ export default {
       }
     },
     showCXID (row) {
-      if (row.txid) {
-        const url = utils.getBlockChainUrl(row.txid, 'tx', row.chain)
+      //console.log({row,cc: this.coinList})
+      if (!!row.txid && !!this.coinList[row.currency]) { 
+        const url = this.coinList[row.currency].scan_url.replace('${txid}',row.txid)
         window.open(url)
       }
     },
@@ -442,7 +467,16 @@ export default {
 
       this.operate = Object.assign({key: 'txid', title: this.$i18n.t('actions')}) 
       this.internalType = Object.assign({key: 'internal', title: this.$i18n.t('order_th_type')})
+    },
+    async getCoins() {
+      let res = await service.getCoins()
+      if (!res.code && !!res.data) {
+        res.data.map(item => {
+          this.coinList[item.currency] = item
+        })
+      }
     }
+
   },
   watch: {
     'state.locale' (v) {

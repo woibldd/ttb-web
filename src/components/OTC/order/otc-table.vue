@@ -32,61 +32,17 @@
       </el-table-column>
       <el-table-column prop="quota" :label="$t('otc_order_quota',{legal_currency})"></el-table-column>
       <el-table-column prop="payment_type" :label="$t('otc_payment_method')">
-        <template slot-scope="scope">
-
+        <template slot-scope="scope"> 
           <div v-for="(item, index) in scope.row.pay_ment_data" :key="index" style="display: inline-block;margin-right: 4px;">
-            <!--<template v-if="item === '1'">-->
-              <!--<icon-->
-                <!--class="card active"-->
-                <!--name="bank-card"-->
-              <!--/>-->
-            <!--</template>-->
-            <!--<template v-if="item === '2'">-->
-              <!--<icon-->
-                <!--class="alipay active"-->
-                <!--name="alipay"-->
-              <!--/>-->
-            <!--</template>-->
-            <!--<template v-if="item === '3'">-->
-              <!--<icon-->
-                <!--class="wechat active"-->
-                <!--name="wechat"-->
-              <!--/>-->
-            <!--</template>-->
-            <icon
-              :class="item === '1' ? 'card active' : item === '2' ? 'alipay active' : 'wechat active'"
-              :name="item === '1' ? 'bank-card' : item === '2' ? 'alipay' : 'wechat'"
-            />
-          </div>
-          <!--<icon-->
-            <!--v-for="(item, index) in scope.row.pay_ment_data"-->
-            <!--:key="index"-->
-            <!--:class="item === 1 ? 'card' : item === 1 ? 'alipay' : 'wechat'"-->
-            <!--:name="item === 1 ? 'bank-card' : item === 1 ? 'alipay' : 'wechat'"-->
-          <!--/>-->
-
-          <!--<icon-->
-            <!--class="card"-->
-            <!--name="bank-card"-->
-          <!--/>-->
-
-          <!--&lt;!&ndash; 银行卡 &ndash;&gt;-->
-          <!--<icon-->
-            <!--class="alipay"-->
-            <!--name="alipay"-->
-          <!--/>-->
-          <!--&lt;!&ndash; 支付宝 &ndash;&gt;-->
-          <!--<icon-->
-            <!--:class="{'active': scope.row.payment_type.indexOf('3') > -1,}"-->
-            <!--class="wechat"-->
-            <!--name="wechat"-->
-          <!--/>-->
-
-
-          <!-- 微信 -->
+            <!-- <icon
+              :class="item === '1' ? 'card active' : item === '2' ? 'alipay active' :  item === '3' ? 'wechat active' : ''"
+              :name="item === '1' ? 'bank-card' : item === '2' ? 'alipay' :  item === '3' ? 'wechat' : ''"
+            /> -->
+            <icon v-if="index < 3" :name="paytype(item)" />
+          </div> 
         </template>
       </el-table-column>
-      <el-table-column :label="$t('operation')" width="130">
+      <el-table-column :label="$t('otc_order_trade')" width="130">
         <template slot-scope="scope">
           <div>
             <button
@@ -151,6 +107,7 @@ import transactionBuy from "@/components/OTC/order/transaction/transactionBuy";
 import transactionSell from "@/components/OTC/order/transaction/transactionSell";
 import Vue from "vue";
 import { setInterval, clearInterval } from "timers";
+import otcComputed from '@/components/OTC/mixins/index.js'
 import _ from "lodash";
 
 export default {
@@ -172,33 +129,17 @@ export default {
       selectedRow: {},
       inter1: 0,
       inter2: 0,
-      dis: false
+      dis: false,  
     };
   },
+  mixins: [otcComputed],
   computed: {
     side() {
       return this.state.otc.showSide;
     },
-    currency() {
-      return this.state.otc.currency;
-    },
-    legal_currency() {
-      return this.state.otc.legal_currency;
-    },
     userInfo() {
       return this.state.userInfo;
-    },
-    symbolList: {
-      get() {
-        return this.state.otc.symbolList;
-      },
-      set(val) {
-        this.state.otc.symbolList = val;
-      }
-    },
-    isLogin() {
-      return state.userInfo !== null;
-    }
+    }, 
   },
   components: {
     sideBar,
@@ -207,6 +148,15 @@ export default {
     transactionSell
   },
   methods: {
+    paytype(type) {
+      return {
+        1: "bank-card",
+        2: "alipay",
+        3: "wechat",
+        4: "paynow",
+        5: "paylah"
+      }[type]
+    }, 
     openSideBar (row) {
       if (window.localStorage.getItem('X-TOKEN')) {
         this.operation = 1
@@ -228,6 +178,7 @@ export default {
       try {
         let orderSide = side == 1 ? 2 : 1;
         let res = await service.getOtcOrderList({
+          currency_type: this.legal_currency,
           currency,
           side: orderSide,
           page: this.page,
@@ -273,6 +224,7 @@ export default {
         let orderSide = side == 1 ? 2 : 1;
         service
           .getOtcOrderList({
+            currency_type: this.legal_currency,
             currency,
             side: orderSide,
             page: this.page,
@@ -325,6 +277,7 @@ export default {
       let orderSide = this.side == 1 ? 2 : 1;
       service
         .getOtcOrderList({
+          currency_type: this.legal_currency,
           currency: this.currency,
           side: orderSide,
           page: this.page,
@@ -366,13 +319,25 @@ export default {
           return;
         }
       }
+    },
+    legal_currency() { 
+      this.switchCurrency(this.currency, this.side);
     }
+
   }
 };
 </script>
+
 <style lang="scss">
 .entrust-order-container {
   margin-top: 20px;
+  .el-table {
+    th {
+      .cell  {
+        word-break: break-word;
+      }
+    }
+  }
   .btn {
     border: none;
     border-radius: 3px;

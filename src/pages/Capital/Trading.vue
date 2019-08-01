@@ -43,9 +43,9 @@
       <h1>
         <icon :name="unit.name+'-unit'" /> {{total | fixed(unit.scale)}}</h1>
     </div>
-    <div
-      v-if="!showHistory"
+    <div 
       class="my-fund-content"> 
+
       <el-table :empty-text=" $t('no_data') "
                 :data="tableData"
                 class="fund-coin-pool">
@@ -62,7 +62,24 @@
                  v-tooltip.top-start='{html: true, content: $t("idt_tips"), classes: "assets"}'  >
                 {{scope.row[hd.key]}} <icon class='question' name='question-x' />
               </i>
-              <i v-else-if="scope.row[hd.key] === 'BNL'"
+              
+               <i
+                v-else-if="scope.row[hd.key] === 'DFD'"
+                class="airdrop"
+                v-tooltip.top-start="{html: true, content: $t('dfd_tips'), classes: 'assets'}"
+              >
+                {{scope.row[hd.key]}}
+                <icon class="question" name="question-x"/>
+              </i> 
+             <i
+                v-else-if="scope.row[hd.key] === 'NEWOS'"
+                class="airdrop"
+                v-tooltip.top-start="{html: true, content: $t('newos_tips'), classes: 'assets'}"
+              >
+                {{scope.row[hd.key]}}
+                <icon class="question" name="question-x"/>
+              </i>
+               <i v-else-if="scope.row[hd.key] === 'BNL'"
                  class="airdrop"
                  v-tooltip.top-start='{html: true, content: $t("bnl_tips"), classes: "assets"}'  >
                 {{scope.row[hd.key]}} <icon class='question' name='question-x' />
@@ -96,6 +113,13 @@
               <!--v-if="scope.row.withdrawable"-->
               <!--:to="'/fund/withdraw/'+scope.row.currency"-->
               <!--class="my-fund-operate">{{ $t('withdraw') }}</router-link>-->
+              
+            <span 
+              class="my-fund-operate"> 
+               <a href="javascript:;" class="menu-name" @click="routerTransFer(scope.row)">
+                  {{ $t('account_exchange') }}
+              </a>
+            </span>
             <router-link
               v-if="scope.row.pairs"
               :to="{
@@ -108,6 +132,7 @@
           </template>
         </el-table-column>
       </el-table>
+
     </div>
     <v-modal :open.sync="showLockModal">
       <div class="lock-modal">
@@ -353,6 +378,14 @@
       )
     },
     methods: {
+      routerTransFer(item) {
+        this.$router.push({
+          path:'/fund/transfer',
+          query: {
+            currency: item.currency
+          }
+        })
+      },
       reset (type) {
         this.blur(type)
         this.unlock_amount = 0

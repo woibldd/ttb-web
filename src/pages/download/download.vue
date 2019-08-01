@@ -11,10 +11,12 @@
         <div class="qr-note-row">{{ $t('download_scan_qr') }}</div>
         <div class="download-btns">
           <div class="qr-img">
-            <img v-if="ix"
+            <img
+              v-if="ix"
               src="../../assets/download/ix_download_qr.png"
               alt="dl">
-            <img v-else
+            <img
+              v-else
               src="../../assets/download/ixex.io.png"
               alt="dl">
           </div>
@@ -26,11 +28,11 @@
                 src="../../assets/download/ix_download_qr.png"
                 alt=""
                 class="qr__img">
-                <img
-                  v-else
-                  src="../../assets/download/ixex.io.png"
-                  alt=""
-                  class="qr__img">
+              <img
+                v-else
+                src="../../assets/download/ixex.io.png"
+                alt=""
+                class="qr__img">
               <icon
                 name="android"
                 class="download__icon"/> {{ $t('download_android') }}
@@ -42,11 +44,11 @@
                 src="../../assets/download/ix_download_qr.png"
                 alt=""
                 class="qr__img">
-                <img
-                  v-else
-                  src="../../assets/download/ixex.io.png"
-                  alt=""
-                  class="qr__img">
+              <img
+                v-else
+                src="../../assets/download/ixex.io.png"
+                alt=""
+                class="qr__img">
               <icon
                 name="iphone"
                 class="download__icon"/> {{ $t('download_ios') }}
@@ -114,7 +116,7 @@
           </div>
         </div>
       </div>
-<!--
+      <!--
       <div class="bg bg-five">
         <div class="feature--txt">
           <div class="txt-1">
@@ -131,7 +133,7 @@
     <div
       class="download-immediate"
       @click="downloadImme">
-            {{ $t('download_down_imme') }}
+      {{ $t('download_down_imme') }}
 
     </div>
   </div>
@@ -140,20 +142,20 @@
 export default {
   data () {
     return {
-      href : location.origin,
+      href: location.origin,
       ix: false
     }
   },
-  created(){
-    if(location.origin === 'https://ixx.com'){
+  created () {
+    if (location.origin === 'https://ixx.com') {
       this.ixx = true
     }
-   },
+  },
   methods: {
     download (type) {
-      let url = 'https://ixx.com/app/ixx.apk'
+      let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
       if (type === 'ios') {
-        url = 'itms-services://?action=download-manifest&url=https://ixx.com/app/IXX.plist'
+        url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
       }
       window.open(url, '_blank')
     },

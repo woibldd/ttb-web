@@ -244,7 +244,7 @@ export const tradeMixins = {
   //   }
   // },
   methods: {
-    state (code) {
+    state (code) { 
       switch (code) {
         case 1:
           return this.$t('otc_sideoc_6')

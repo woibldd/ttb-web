@@ -3,21 +3,25 @@
    <div class="bid-banner">
       <div class="bid-con clearfix">
         <div class="banner-item-list">
-          <img src="./assets/item-banner.png">
+          <!-- <img v-if='state.locale === "en"' src="./assets/item-banner-en.png">
+          <img v-if='state.locale === "ko"' src="./assets/item-banner-ko.png">
+          <img v-if='state.locale === "zh-CN"' src="./assets/item-banner-zh-CN.png">
+          <img v-if='state.locale === "zh-HK"' src="./assets/item-banner-zh-HK.png">  -->
+          <img :src="bannerPath">
         </div>
         <div class="banner-item-text">
             <div v-for="(item, index) in hotList" :key="index">
                  <div class="title">
-                    热门推荐
+                    {{$t('bby_shise9')}}
                 </div>
                 <p style="font-size: 16px;">{{ item.currency }} {{ item.product }}</p >
-                <p style="font-size: 13px;">限期 {{ item.moneyDays }}天</p >
+                <p style="font-size: 13px;">{{$t('bby_shise10')}} {{ item.moneyDays }}{{$t('bby_shouy9')}}</p >
                 <div class="rate">
                     <h1>{{ item.annualizedReturns > 0 ? (Number(item.annualizedReturns)).toFixed(2) : 0 }}%</h1>
                     <em>{{$t('bby_shouy2')}}</em>
                 </div>
                 <div class="btn">
-                    <el-button class="bid-btn" v-html="item.state === 1 ? $t('bby_shouy6') : item.state === 2 ? '结束' : item.state === 3 ? '已售罄' : '抢购时间未到'" :disabled="item.isTrue"
+                    <el-button class="bid-btn" v-html="item.state === 1 ? $t('bby_shouy6') : item.state === 2 ? $t('bby_shise3') : item.state === 3 ?  $t('bby_shise4') : $t('bby_shise5')" :disabled="item.isTrue"
                     @click="detail(item)"></el-button>
                 </div>
             </div>
@@ -59,7 +63,7 @@
                         class="bid-btn"
                         :disabled="item.isTrue"
                         @click="detail(item)"
-                        v-html="item.state === 1 ?  $t('bby_shouy6') : item.state === 2 ? '结束' : item.state === 3 ? '已售罄' : '抢购时间未到'"
+                        v-html="item.state === 1 ?  $t('bby_shouy6') : item.state === 2 ? $t('bby_shise3') : item.state === 3 ?  $t('bby_shise4') : $t('bby_shise5')"
                     >
                     </el-button>
                 </div>
@@ -85,6 +89,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import {state} from '../../modules/store'
 import service from '@/modules/service'
+
 // import { envApi } from '../../modules/request'
 export default {
   data () {
@@ -99,6 +104,13 @@ export default {
       state,
       //img: require('./assets/banner-zh-CN.png')
     }
+  },
+  computed: {
+    bannerPath () { 
+      let path = require(`./assets/item-banner-${this.state.locale}.png`) 
+      return path
+    },
+
   },
   methods: {
     handleCurrentChange (e) {
@@ -143,7 +155,7 @@ export default {
     }
   },
   created () {
-    this.init(this.params)
+    this.init(this.params) 
     // this.img = require('./assets/banner-' + state.locale + '.png')
   },
   mounted () {

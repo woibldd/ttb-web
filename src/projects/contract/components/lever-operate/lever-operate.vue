@@ -127,7 +127,7 @@ export default {
     cancel () {
       this.editing = false
     },
-    changeTimes (item) {
+    changeTimes (item) { 
       this.$emit('change', item)
     },
     filter(v) {

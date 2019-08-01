@@ -31,6 +31,12 @@
           {{ $t('hide_others', {pair: pair}) }}
         </span>
         <a
+          v-if="tab === 'active'  && local.hideOthers"
+          @click.prevent="cancelAll"
+          class="">
+          {{ $t('trading_order_cancel_all')}}
+        </a>
+        <a
           @click.prevent="update"
           class="header-btn btn">
           <icon name="refresh"/>
@@ -353,7 +359,7 @@ export default {
         return false
       }
       let res
-      this.progressing = true
+      this.progressing = true 
       if (this.local.hideOthers) {
         const params = _.map(this.active.list, order => {
           return {
@@ -376,10 +382,12 @@ export default {
       this.$eh.$emit('protrade:balance:refresh')
     },
     async fetch (tab) {
+      console.log('00000000')
       const ctx = this[tab]
       if (this._isDestroyed) {
         return false
       }
+      console.log('1111111111')
 
       await actions.updateSession()
       if (this.state.userStatus === 0) {

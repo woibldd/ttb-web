@@ -36,6 +36,12 @@
         color: $primary;
         cursor: pointer;
         margin-left: 21px;
+    } 
+    .my-fund-label {
+      padding: 5px 22px;
+      border:1px solid $primary;
+      border-radius: 15px;
+      color: $primary;
     }
     .dib {
         display: inline-block;
@@ -131,19 +137,49 @@
         padding: 5px 0;
         .cell {
           line-height: 33px;
-          .airdrop {
-            background-color:#BAE2F7;
+          .airdrop { 
             //cursor: help;
             position: relative;
             .question {
-              position: absolute;
-              top: -5px;
-              right: -12px;
+              color: #38D3D4;
+              // position: absolute;
+              // top: -5px;
+              // right: -12px;
             }
           }
         }
       }
     }
+    .pairs-search {
+      display: flex;
+      line-height: 29px;
+      .search-box {
+          width:166px;
+          height:29px;
+          background:rgba(255,255,255,1);
+          border:1px solid rgba(160,160,160,1);
+          border-radius: 14px;
+          padding-left: 10px;
+          padding-right: 10px;
+          box-sizing: border-box;
+          overflow: hidden;
+          padding-top: 2px;
+          padding-bottom: 2px;
+          display: flex;
+          align-items: center;
+
+          input {
+              width: 123px;
+              border: 0;
+              height: 16px;
+              border-right: 1px solid rgba(160,160,160,1);
+
+              &:focus {
+                  outline: none;
+              }
+          }
+      }
+  }
 }
 
 
@@ -167,33 +203,20 @@ cursor: pointer;
   border: 1px solid #999999 !important;}
 
 .fund-historc{
-    display: inline-block;
-    padding-left: 10px;
-padding-right: 10px;
-height: 28px;
-line-height: 28px;
-text-align: center;
-border: 1px solid #01CED1;
-border-radius: 14px;
-color: #01CED1;
-font-size: 14px;
-cursor: pointer;
-    
-    
-    color: #01CED1 !important;
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  border: 1px solid #01CED1;
+  border-radius: 14px;
+  color: #01CED1;
+  font-size: 14px;
+  cursor: pointer; 
+  color: #01CED1 !important;
   border: 1px solid #01CED1 !important;}
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 .my-fund-container {
   .my-fund-content {
     .information {
@@ -207,7 +230,7 @@ cursor: pointer;
   }
     .fund-total {
         margin-top: 45px;
-        margin-bottom: 58px;
+        margin-bottom: 30px;
         display: flex;
         align-items: center;
         height: 30px;
@@ -233,14 +256,11 @@ cursor: pointer;
         padding: 5px 0;
         .cell {
           line-height: 33px;
-          .airdrop {
-            background-color:#BAE2F7;
+          .airdrop { 
             //cursor: help;
             position: relative;
             .question {
-              position: absolute;
-              top: -5px;
-              right: -12px;
+              color: #38D3D4 !important;
             }
           }
         }

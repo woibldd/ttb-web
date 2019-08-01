@@ -1,7 +1,7 @@
 <template>
   <div class="trade-container">
     <div class="trade-message-box">
-      
+
       <div class="link">{{ $t('otc_my_order') }}</div>
       <div class="message-con">
         <dl>
@@ -137,11 +137,8 @@
               </div>
               <div class="state">
                 <template v-if="!item.appeal">
-                  <!-- {{ item.state | state }} -->
-                  <span v-if="!item.other_appeal">{{$t('otc_sideoc_6')}}</span>
-                  <span v-else-if="item.side === 2 && item.state === 1">{{$t('otc_seiitm_6')}}</span>
-                  <span v-else>{{$t('otc_seiitm_7')}}</span>
-                  
+                  <span v-if="item.side === 2 && item.state === 1">{{$t('otc_seiitm_6')}}</span>
+                  <span  v-else>{{ state(item.state) }}</span>
                   <b
                     v-if="item.state === 2 || item.state === 7 || item.state === 6"
                     @click="sq(item)"
@@ -158,18 +155,18 @@
                   <div
                     class="cur"
                     :style="{color: item.side === 1 ? '#23C88B' : '#F24E4D'}">
-                    <p>/CNY</p>
+                    <p>/{{item.currency_type}}</p>
                     {{ item.currency }}
                   </div>
                 </div>
                 <dl>
                   <dt>
-                    <em>￥</em>
+                    <em>{{ getCurrencySymbol(item.currency_type) }}</em>
                     <span>{{ item.total }}</span>
                   </dt>
                   <dd>
                     {{ $t('otc_trans_idjg') }}：
-                    <span>{{ '¥' + item.price }}</span>
+                    <span>{{ getCurrencySymbol(item.currency_type) + item.price }}</span>
                   </dd>
                   <dd>
                     {{ $t('otc_trans_idsl') }}：
@@ -182,7 +179,7 @@
                     </dd>
                     <dd>
                      {{$t('otc_seiitm_10')}}：
-                      <span>{{ '¥' + item.total }}</span>
+                      <span>{{ getCurrencySymbol(item.currency_type) + item.total }}</span>
                     </dd>
                   </template>
                 </dl>
@@ -221,11 +218,12 @@
                   <dt>
                     {{ $t('otc_payment_method') }}：
                     <template v-if="item.state !== 1">
-                      <span v-if="item.otc_collection.alipay_account">{{ $t('payment_namezfb') }}</span>
+                      <span>{{ $t(payName(item.otc_collection.payment_type)) }}</span>
+                      <!-- <span v-if="item.otc_collection.alipay_account">{{ $t('payment_namezfb') }}</span>
                       <span
                         v-else-if="item.otc_collection.we_chat_account"
                       >{{ $t('payment_weChat_adasunt') }}</span>
-                      <span v-else-if="item.otc_collection.card_number">{{ $t('payment_nameyhk') }}</span>
+                      <span v-else-if="item.otc_collection.card_number">{{ $t('payment_nameyhk') }}</span> -->
                     </template>
                   </dt>
                   <!-- <dd>
@@ -537,11 +535,42 @@ export default {
             width: '',
             key: 'collection_img'
           }
+        ],
+        //paynow
+        4: [
+          {
+            title: 'name', // 姓名
+            text: 'payment_name',
+            width: '',
+            key: 'name'
+          },
+          {
+            title: 'card_number', // 银行卡号
+            text: 'payment_card_number',
+            width: '',
+            key: 'card_number'
+          },
+        ],
+        //paylah
+        5: [
+          {
+            title: 'name', // 姓名
+            text: 'payment_name',
+            width: '',
+            key: 'name'
+          },
+          {
+            title: 'card_number', // 银行卡号
+            text: 'payment_card_number',
+            width: '',
+            key: 'card_number'
+          },
         ]
       },
       selectPayment: {},
       qrsrc: '',
-      showQRcode: false
+      showQRcode: false,
+
     }
   },
   // computed: {
@@ -561,6 +590,21 @@ export default {
   //   }
   // },
   methods: {
+    payName(type){
+      return {
+          1: "payment_nameyhk",
+          2: "payment_namezfb",
+          3: "payment_weChat_adasunt",
+          4: "Paynow",
+          5: "Paylah",
+        }[type]
+    },
+    getCurrencySymbol(type) {
+      return {
+        "CNY": "￥",
+        "SGD": "S$",
+      }[type]
+    },
     compareDown (property) {
       return function (a, b) {
         return a[property] - b[property]
@@ -587,7 +631,7 @@ export default {
       this.showQRcode = true
     },
     orderSwtich (index) {
-      
+
       if (this.data.length > 0) {
         this.orderActive = index
         const orderName =
@@ -657,20 +701,23 @@ export default {
         this.bankData.push(item.otc_collection)
       } else {
         item.otc_collection_list.forEach(item => {
-          const payType =
-            item.payment_type === 1
-              ? item.deposit_bank
-              : item.payment_type === 2
-                ? this.$t('payment_namezfb')
-                : this.$t('payment_weChat_adasunt')
-          const payAccount = item.alipay_account
-            ? item.alipay_account
-            : item.card_number
-              ? item.card_number
-              : item.we_chat_account
+          // const payType =
+          //   item.payment_type === 1
+          //     ? item.deposit_bank
+          //     : item.payment_type === 2
+          //       ? this.$t('payment_namezfb')
+          //       : this.$t('payment_weChat_adasunt')
+          // const payAccount = item.alipay_account
+          //   ? item.alipay_account
+          //   : item.card_number
+          //     ? item.card_number
+          //     : item.we_chat_account
+
+          const payAccount = this.processValue('payment_type', item)
           payData.push({
             collection_id: item.collection_id,
-            deposit_bank: payType + payAccount,
+            // deposit_bank: payType + payAccount,
+            deposit_bank: payAccount,
             obj: item
           })
         })
@@ -861,11 +908,25 @@ export default {
                       name: '支付宝' + '/' + child.alipay_account,
                       img: child.collection_img
                     })
-                  } else {
+                  } else  if (child.payment_type === 3) {
                     bankData.push({
                       id: child.collection_id,
                       realName: child.name,
                       name: '微信' + '/' + child.we_chat_account,
+                      img: child.collection_img
+                    })
+                  }  else if (child.payment_type === 4) {
+                    bankData.push({
+                      id: child.collection_id,
+                      realName: child.name,
+                      name: 'Paynow'  + '/' + child.card_number,
+                      img: child.collection_img
+                    })
+                  }  else if (child.payment_type === 5) {
+                    bankData.push({
+                      id: child.collection_id,
+                      realName: child.name,
+                      name: 'Paylah' + '/' + child.card_number,
                       img: child.collection_img
                     })
                   }
@@ -878,6 +939,9 @@ export default {
                   if (arr.length > 0) {
                     // this.selectPayment = arr[0]
                     Vue.set(item, 'selectPayment', arr[0])
+                  }
+                  else {
+                    Vue.set(item, 'selectPayment', paylist[0])
                   }
                 }
 
@@ -1062,4 +1126,6 @@ export default {
       color: #c9a96c
     }
   }
+
+
 </style>

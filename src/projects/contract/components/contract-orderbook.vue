@@ -78,8 +78,8 @@
             <span class="last-price">
               <em
                 class="pointer"
-                v-tooltip.top-center="{html: true, content: $t('contract_index_price_tips'), classes: 'contract'}"
-                @click="jumpToHistory">{{ indexPrice }}</em>
+                v-tooltip.top-center="{html: true, content: indexPriceTips, classes: 'contract'}"
+                @click="jumpToHistory">{{ indexPrice   }}</em>
               /
               <em
                 class="pointer"
@@ -201,7 +201,7 @@ export default {
     },
     pair () {
       return this.state.ct.pair
-    },
+    }, 
     priceScale () {
       let scale = _.get(this, 'state.ct.pairInfo.price_scale', 4) - this.offset
       if (this.offset !== 0 && this.accuracy === 2) {
@@ -259,6 +259,12 @@ export default {
         overflow: 'hidden',
         minHeight: Math.floor((this.bookHeight - this.splitHeight - this.sideHeight) / this.itemHeight) * this.itemHeight + 'px'
       }
+    },
+    indexPriceTips () {
+      if (!!state.ct.pairInfo) {
+        return this.$t('contract_index_price_tips' , {product_name : state.ct.pairInfo.product_name || 'BTC'})
+      }
+      return this.$t('contract_index_price_tips' , {product_name : 'BTC'})
     }
   },
   methods: {
@@ -268,9 +274,10 @@ export default {
       this.onGroupChange()
       this.changeDepthNumber(this.deepthData)
     },
-    changeDepthNumber (data){
+    changeDepthNumber (data){ 
       let bidsOne = []
       let asksOne = []
+      if (this.pair === 'FUTURE_BTCUSD') {
         if (this.offset === 1) {
           for (let i in data.bids){
             let number = i-1
@@ -306,6 +313,10 @@ export default {
         } else {
           this.assignData(data)
         }
+      }
+      else {
+        this.assignData(data)
+      }
     },
     toggleSetting () {
       this.panelShow = !this.panelShow
@@ -384,10 +395,10 @@ export default {
       //console.log(asks,asks)
       let asksRepair = []
       if (asks.length < 8) {
-        for (var i = 0 ; i > (8-asks.length) ; i++ ){
+        for (var i = 0 ; i < (8-asks.length) ; i++ ){
           asksRepair.push({})
-          asksRepair.concat(asks)
         }
+        asksRepair = asksRepair.concat(asks)
       } else {
         asksRepair = asks
       }

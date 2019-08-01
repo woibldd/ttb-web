@@ -39,16 +39,21 @@ const processValue = {
       }
 
       if (key === 'payment_type') {
+        console.log({key})
         switch (value) {
-          case 1:
+          case 1: 
             // return `银行卡(${row['card_number']})`
             return row['card_number'].substr(0, 4) + '****' + row['card_number'].substr(-4)
           case 2:
             // return `支付宝(${row['alipay_account']})`
-            return '支付宝' + row['alipay_account'].substr(0, 3) + '****'
+            return '支付宝 ' + row['alipay_account'].substr(0, 3) + '****'
           case 3:
             // return `微信支付(${row['we_chat_account']})`
-            return '微信支付' + row['we_chat_account'].substr(0, 3) + '****'
+            return '微信支付 ' + row['we_chat_account'].substr(0, 3) + '****' 
+          case 4: 
+            return 'Paynow ' + row['card_number'].substr(0, 4) + '****' + row['card_number'].substr(-4)
+          case 5:
+            return 'Paylah ' + row['card_number'].substr(0, 4) + '****' + row['card_number'].substr(-4)
           default:
             return ''
         }

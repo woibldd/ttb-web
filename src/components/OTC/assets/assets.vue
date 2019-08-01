@@ -88,7 +88,7 @@
               class="row__status"
               @click="clickVerifyRow('PhoneBind')"
               :class="{'done': phone_bound}"
-            >{{ phone_bound ? $t('done') : $t('to_bind') }}</span>
+            >{{ phone_bound ? $t('done_verified') : $t('to_bind') }}</span>
           </div>
         </div>
         <div class="layer__row mt-20">
@@ -97,7 +97,7 @@
             class="row__status"
             @click="clickVerifyRow('collection')"
             :class="{'done': card_bound}"
-          >{{ card_bound ? $t('done') : $t('to_bind') }}</span>
+          >{{ card_bound ? $t('done_verified') : $t('to_bind') }}</span>
         </div>
         <div class="layer__row mt-20">
           <span class="row__label">
@@ -108,7 +108,7 @@
             class="row__status"
             @click="clickVerifyRow('Kyc')"
             :class="{'done': kyc_bound}"
-          >{{ kyc_bound ? $t('done') : $t('to_bind') }}</span>
+          >{{ kyc_bound ? $t('done_verified') : $t('to_verify') }}</span>
         </div>
       </div>
     </v-modal>

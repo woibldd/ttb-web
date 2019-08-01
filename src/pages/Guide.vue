@@ -577,9 +577,9 @@ export default{
       position: relative;
       top: 15px;
       &.guide-math-color{
-        color:#C9AA6D;
+        color:$primary;
         &:after{
-          background: #C9AA6D;
+          background: $primary;
         }
       }
       &:after{
@@ -635,7 +635,7 @@ export default{
       background:rgba(242,78,77,1);
     }
     &.yellow{
-      background:rgba(201,170,109,1);
+      background:$primary;
       color:#fff;
       font-size: 14px;
     }
@@ -647,7 +647,7 @@ export default{
   .guide-back-btn{
     width: 320px;
     height: 40px;
-    background: #c9aa6d;
+    background: $primary;
     border-radius: 3px;
     text-align: center;
     color: #fff;
@@ -668,7 +668,7 @@ export default{
     .guide-right-btn-yellow{
       width: 110px;
       height: 34px;
-      background: #c9aa6d;
+      background: $primary;
       border-radius: 3px;
       color: #fff;
       display: block;
@@ -721,7 +721,7 @@ export default{
       float: left;
       width: 33.33%;
       height: 30px;
-      background: #806c46;
+      background: rgba(30, 106, 109, 1);
       border-radius: 0px 20px 20px 0px;
       text-align: center;
       line-height: 30px;
@@ -732,7 +732,7 @@ export default{
       color: white;
       font-size: 12px;
       &.avtive{
-        background:rgba(201,170,109,1);
+        background:$primary;
       }
       &:after{
         position: absolute;
@@ -796,7 +796,7 @@ export default{
     .guide-index-btn{
       width: 350px;
       height: 44px;
-      background: #c9aa6d;
+      background: $primary;
       border-radius: 3px;
       text-align: center;
       color: #fff;
@@ -819,7 +819,7 @@ export default{
       margin-left: 65%;
       width:100px;
       height:28px;
-      background:rgba(201,170,109,1);
+      background: $primary;
       border-radius:3px;
       border-radius: 4px;
       &:after{
@@ -830,7 +830,7 @@ export default{
         bottom: -14px;
         width: 0;
         height: 0;
-        border: 8px solid #c9aa6d;
+        border: 8px solid $primary;
         border-right-color: transparent;
         border-bottom-color: transparent;
       }

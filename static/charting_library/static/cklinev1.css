@@ -20,13 +20,16 @@ body {
   border: none;
   
 }
-
 .chart-controls-bar {
   background: transparent;
 }
 .layout__area--top {
     background: #1C2435;
 }
+.layout__area--top.header-chart-panel .header-chart-panel-sizer {
+  overflow: visible;
+}
+
 .chart-controls-bar-buttons a {
   color: hsla(218, 26%, 86%, 0.5);
   
@@ -261,7 +264,7 @@ body {
 }
 .header-chart-panel .space-single:not(:first-child) .button:hover {
   color: #01CED1;
-  opacity: 0.8;
+  /* opacity: 0.8; */
 }
 .header-chart-panel .space-single:not(:first-child) .button.selected {
   color: #01CED1;
@@ -326,4 +329,32 @@ body {
   transform-origin: bottom left;
   bottom: 20px;
   left: 0;
+}
+
+.charts-popup-d {
+  position: relative;
+  z-index: 4;
+}
+.charts-popup-d ul {
+  display: none;
+} 
+.charts-popup-d.selected ul {
+  display: block;
+} 
+ul { 
+  position: absolute;
+  top: 29px;
+  left: 0; 
+  background-color: #1C2435;
+  list-style: none;
+}
+li {
+  width:193px;
+  height:28px;
+  line-height: 28px;
+  text-indent: 12px;
+  color: hsla(218, 26%, 86%, 1);
+}
+li:hover {
+  background-color: hsla(218, 26%, 86%, 0.06);
 }
