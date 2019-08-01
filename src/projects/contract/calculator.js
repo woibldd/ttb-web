@@ -235,10 +235,11 @@ export default {
     let vol = amount
     let current = holding.holding || 0
     let r = pairInfo.take_rate || 0
-    let mul = Big(pairInfo.multiplier)
+    let mul = Big(pairInfo.multiplier) 
+    let max_leverage = pairInfo.max_leverage || 50 //最带杠杆倍数
     
     if (lever === 0){
-      lever = 20
+      lever = max_leverage 
     }
     //console.log({pairInfo})
     let im = pairInfo.im
@@ -251,10 +252,11 @@ export default {
       }
     } 
     let value = mul.times(hp).times(vol) 
-    let fee = Big(r).times(value)
-    im = Big(im).times(value).times(20).div(lever)
+    let fee = Big(r).times(value) 
+    // im = Big(im).times(value).times(max_leverage).div(lever) 
+    im = value.div(lever).times(Big(1).plus(im))
     mm = Big(mm).times(value)
-
+ 
     let mulvol = mul.times(vol)
     let imDiff = im.minus(mm)
     let force_price

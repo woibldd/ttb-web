@@ -179,7 +179,7 @@
              
               <span
                 class="btn-all"
-                @click="inputAll">{{ $t('input_all') }}</span>
+                @click="inputAll('amount')">{{ $t('input_all') }}</span>
             </div>
           </li>
           <li>
@@ -199,7 +199,7 @@
               />
               <span
                 class="btn-all"
-                @click="inputAll"
+                @click="inputAll('total')"
               >{{ $t('input_all') }}</span>
             </div>
           </li>
@@ -680,9 +680,17 @@ export default {
         }
       }
     },
-    inputAll () {
-      this.amount = this.$big(this.view.amount).minus(this.view.freezed)
-      this.total = this.$big(this.view.price).mul(this.amount)
+    inputAll (arg) {
+      if (arg === 'total') {
+        this.inputTarget = 'total'
+        this.total = this.view.total
+        //this.amount = this.$big(this.total).div(this.view.price).round(2, 0)
+      }
+      else {
+        this.inputTarget = 'amount'
+        this.amount = this.$big(this.view.amount).minus(this.view.freezed)
+        //this.total = this.$big(this.amount).times(this.view.price)
+      } 
     },
     // 撤销成交单
     revokeOrder () {
