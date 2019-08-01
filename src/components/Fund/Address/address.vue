@@ -8,18 +8,48 @@
         <div class="fund-item-row mb-14">
           <div class="row__label">{{ $t('currency') }}</div>
           <div class="row__value">
-            <el-select
-              v-model="selectCoin"
-              @change="changeCoinType"
-              value-key="currency">
-              <el-option
+           <el-select
+                style="width: 440px;"
+                v-model="selectCoin"
+                @change="changeCoinType"
+                value-key="currency">
+                <el-option
                 v-for="(item, idx) in allCoins"
                 :key="idx"
-                v-if="item.withdrawable"
                 :label="item.currency"
-                :value="item"/>
+                :value="item">
+                <b style="display: inline-block;width: 40px">{{ item.currency }}</b>
+                <span style="color: #CCC;font-size: 12px;padding-left: 20px;">
+                    {{ item.full_name }}
+                </span>
+                </el-option>
             </el-select>
           </div>
+        </div>
+        <div class="fund-item-row mb-24" v-if="selectCoin.currency === 'USDT'">
+            <div class="row__label">
+            <el-popover
+                placement="bottom-start"
+                title=""
+                trigger="hover"
+                width="240"
+                effect="dark" :content="depTip">
+                <el-button type="text" slot="reference" class="lian">链名称</el-button>
+            </el-popover>
+            </div>
+            <div class="row__value">
+            <el-select
+                @change="lianSelect"
+                style="width: 440px;"
+                v-model="selectLian"
+                value-key="chain">
+                <el-option
+                v-for="(item, idx) in lianData"
+                :key="idx"
+                :label="item.currencyName"
+                :value="item"/>
+            </el-select>
+            </div>
         </div>
         <div class="fund-item-row mb-14">
           <div class="row__label">{{ $t('withdraw_addr') }}</div>
@@ -94,7 +124,7 @@ import './address.scss'
 import copyToClipboard from 'copy-to-clipboard'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
-
+import Vue from 'vue'
 export default {
   name: 'MyAddress',
   data () {
@@ -112,7 +142,10 @@ export default {
         {key: 'description', title: this.$t('note')}
       ],
       operate: {key: 'operate', title: this.$t('operation')},
-      loading: false
+      loading: false,
+      lianData: [],
+      curreryCoin: '',
+      selectLian: {}
     }
   },
   async created () {
@@ -120,6 +153,10 @@ export default {
     await this.getCoinAddress()
   },
   methods: {
+    async lianSelect (coin) {
+      this.selectCoin = coin
+      await this.getCoinAddress()
+    },
     copy (row) {
       copyToClipboard(row.address)
       utils.success(this.$i18n.t('copyed'))
@@ -145,17 +182,48 @@ export default {
     },
     async getAllCoinTypes () {
       await service.getAllCoinTypes().then(res => {
-        if (res && res.data) {
-          this.allCoins = res.data
+         if (res && res.data) {
+          this.lianData = []
+          res.data.forEach((item) => {
+            if(item.currency === 'USDT') {
+              this.lianData.push(item)
+            }
+          })
+          this.lianData.forEach((item) => {
+            if (item.chain === 'OMNI') {
+              Vue.set(item, 'currencyName', item.currency + '-' + 'Omni')
+            } else {
+              Vue.set(item, 'currencyName', item.currency + '-' + 'ERC20')
+            }
+          })
+          this.selectLian = this.lianData[1]
+          this.allCoins = this.removalData(res.data.filter(c => c.depositable))
+          this.allCoins.forEach((item) => {
+            if(state.locale === 'zh-CN') {
+              Vue.set(item, 'full_name', item.zh_name)
+            } else {
+              Vue.set(item, 'full_name', item.full_name)
+            }
+          })
           if (this.$route.params.currency) {
+            const currency = this.$route.params.currency.toUpperCase()
             this.selectCoin = this.allCoins.find(item => {
-              return item.currency === this.$route.params.currency
+              return item.currency.toUpperCase() === currency
             })
-          } else {
-            this.selectCoin = this.allCoins[0]
+            return
           }
+          this.selectCoin = this.allCoins[0]
         }
       })
+    },
+    removalData (arrData) {
+      var hash = {}
+      arrData = arrData.reduce(function (item, next) {
+        // num_iid是你要以什么属性去重
+        hash[next.currency] ? '' : hash[next.currency] = true && item.push(next)
+        return item
+      }, [])
+      return arrData
     },
     async confirmAdd () {
       if (!this.address) {
@@ -186,6 +254,23 @@ export default {
         this.getCoinAddress()
       })
     }
+  },
+  computed: {
+    depTip () {
+      return state.locale && this.$t('dep_tip')
+    }
   }
 }
 </script>
+<style lang="scss">
+.lian {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333333;
+
+  &:hover, &:focus {
+    border-color: transparent !important;
+    color: #333333 !important;
+  }
+}
+</style>
