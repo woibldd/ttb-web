@@ -552,7 +552,7 @@ export default {
         phone_code: this.phoneCode
       }
 
-      if (this.selectCoin === 'USDT') {
+      if (this.selectCoin.currency === 'USDT') {
         param.chain = this.selectLian.chain
       }
 
