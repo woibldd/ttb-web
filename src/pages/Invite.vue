@@ -406,7 +406,15 @@ export default {
           justify-content: space-between;
           font-size: 14px;
           color: $text-light;
-
+          .td {
+            flex: 1;
+            &.center {
+              text-align: center;
+            }
+            &.right {
+              text-align: right;
+            }
+          }
           .username {
             width: 20%;
             @include limit(1)

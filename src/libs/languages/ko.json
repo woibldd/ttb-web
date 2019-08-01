@@ -1634,6 +1634,7 @@
     "transfer_side": "전입방향을 바꾸다",
     "transfer_amount": "전입수량을 바꾸다",
     "transfer_enter_amount": "금액을 입력하세요",
+    "transfer_enter_amountor": "수량을 입력하세요", 
     "transfer_able_amount": "전입가능한 수량：",
     "transfer_btc_history": "전입기록",
     "transfer_currency": "전입코인종류",

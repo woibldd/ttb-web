@@ -52,7 +52,7 @@ export default {
     //mm = Big(mm).plus(count.mul(mm)).round(8, down) //维持保证金也要提升挡位，这里用不到，先注释
  
     //let margin = Big(im).mul(value).round(8, down) 
-    let margin = Big(value).div(lever).times(Big(1).plus(im))  //其实保证金
+    let margin = Big(value).div(lever).times(Big(1).plus(im))  //起始保证金
     // console.log({margin:margin.toString()}) 
     //平仓手续费 
     let fee = value.mul(take_rate).mul(2) 

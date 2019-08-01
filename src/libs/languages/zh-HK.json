@@ -1620,6 +1620,7 @@
   "transfer_side": "劃轉方向",
   "transfer_amount": "劃轉數量",
   "transfer_enter_amount": "請輸入劃轉金額",
+  "transfer_enter_amountor": "請輸入劃轉數量",
   "transfer_able_amount": "可劃轉數量:",
   "transfer_btc_history": "劃轉記錄",
   "transfer_currency": "劃轉幣種",
