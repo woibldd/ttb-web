@@ -217,7 +217,6 @@ export default {
       )
     },
     async changeCoinType (coin) {
-      this.selectCoin = coin
       this.curreryCoin = ''
       await this.getCoinAddress()
       this.setQr(this.address)
@@ -247,7 +246,6 @@ export default {
               Vue.set(item, 'currencyName', item.currency + '-' + 'ERC20')
             }
           })
-          this.selectLian = this.lianData[1]
           this.allCoins = this.removalData(res.data.filter(c => c.depositable))
           this.allCoins.forEach((item) => {
             if(state.locale === 'zh-CN') {
@@ -263,7 +261,12 @@ export default {
             })
             return
           }
-          this.selectCoin = this.allCoins[0]
+          if (this.allCoins[0].currency === "USDT") {
+            this.selectLian = this.lianData[1]  
+            this.selectCoin = this.lianData[1]
+          } else {
+            this.selectCoin = this.allCoins[0]
+          }
         }
       })
     },
@@ -277,7 +280,12 @@ export default {
       return arrData
     },
     quickSelectCoin (coin) {
-      this.selectLian = this.lianData[1]
+      if(coin.currency === "USDT") {
+        this.selectLian = this.lianData[1]
+        this.selectCoin = this.lianData[1]
+      } else {
+          this.selectCoin = coin
+      }
       this.changeCoinType(coin)
     },
     getDepositHistory () {
