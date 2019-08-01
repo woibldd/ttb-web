@@ -104,7 +104,7 @@
           <template slot-scope="scope">
             <span>{{scope.row[hd.key]}}</span>
             <label class='chain' v-if="hd.key==='currency' && scope.row[hd.key]==='USDT'">
-              {{scope.row['chain'] === 'ETH' ? "ERC20" : scope.row['chain']}}
+              {{scope.row['chain'] === 'ETH' ? "ERC20" : 'OMNI'}}
             </label>
           </template>
         </el-table-column>

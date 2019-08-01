@@ -418,7 +418,7 @@ export default {
           this.restaurants = []
           this.allAddress = res.data
           if (this.selectCoin.currency === 'USDT') {
-            this.allAddress = this.allAddress.filter(item => item.chain === this.selectLian.chain)
+            this.allAddress = this.allAddress.filter(item => item.chain === this.selectLian.chain || (!item.chain &&  this.selectLian.chain === 'OMNI' ))
           }
            
           // console.log(this.allAddress)
