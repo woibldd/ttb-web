@@ -45,7 +45,7 @@ export default {
     sortedList () {
       // if (!this.sortBy || !this.sortState) {
       //   return this.showList
-      // } 
+      // }  
       return _.sortBy(this.showList, (item) => {
         let value
         switch (this.sortBy) {
