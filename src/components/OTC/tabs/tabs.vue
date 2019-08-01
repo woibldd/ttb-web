@@ -165,16 +165,17 @@ export default {
     },
     buySubmit() {
       if (this.active === "0") {//金额
-        if (this.$big(this.ipt).lt(100)) {
-          utils.warning('购买量低于最低限额')
+        if (this.$big(Number(this.ipt)).lt(100)) {
+          this.$message.warning('购买量低于最低限额')
           return
         }
-        else if (this.$big(this.ipt).gt(50000)) {
-          utils.warning('购买量大于最大限额')
+        else if (this.$big(Number(this.ipt)).gt(50000)) {
+          this.$message.warning('购买量大于最大限额')
           return
         }
       } else if (this.active === "1") { //数量
-        if (!this.ipt || isNaN(Number(this.ipt)) || this.$big(this.ipt).lte(0)) {
+        if (!Number(this.ipt) || isNaN(Number(this.ipt)) || this.$big(Number(this.ipt)).lte(0)) {
+          this.$message.warning('数量不能为空')
           return
         }
       }
@@ -188,17 +189,18 @@ export default {
       })
     },
     sellSubmit() {
-      if (this.active === 0) {//金额
-        if (this.$big(this.ipt).lt(100)) {
-          utils.warning('购买量低于最低限额')
+      if (this.active === "0") {//金额
+        if (this.$big(Number(this.ipt)).lt(100)) {
+          this.$message.warning('购买量低于最低限额')
           return
         }
-        else if (this.$big(this.ipt).gt(50000)) {
-          utils.warning('购买量大于最大限额')
+        else if (this.$big(Number(this.ipt)).gt(50000)) {
+          this.$message.warning('购买量大于最大限额')
           return
         }
-      } else if (this.active === 1) { //数量
-        if (!this.ipt || isNaN(Number(this.ipt)) || this.$big(this.ipt).lte(0)) {
+      } else if (this.active === "1") { //数量
+        if (!Number(this.ipt) || isNaN(Number(this.ipt)) || this.$big(Number(this.ipt)).lte(0)) {
+            this.$message.warning('数量不能为空')
           return
         }
       }

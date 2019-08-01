@@ -125,10 +125,10 @@ export default {
   },
   methods: {
     buyHandle() {
-      if (this.$big(this.buy.amount).lt(100)) {
-        utils.warning("购买量低于最低限额");
-      } else if (this.$big(this.buy.amount).gt(50000)) {
-        utils.warning("购买量大于最大限额");
+      if (this.$big(Number(this.buy.amount)).lt(100)) {
+        this.$message.warning("购买量低于最低100限额");
+      } else if (this.$big(Number(this.buy.amount)).gt(50000)) {
+        this.$message.warning("购买量大于最大50000限额");
       } else if (this.buy.amount) {
         this.$emit("buy-handle", this.buy);
       }
