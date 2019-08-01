@@ -97,7 +97,7 @@ export default {
           // $newValue = $newValue.div(minStep).round(0, 0).mul(minStep)
         }
         // this.updateValue(this.$big(newValue).round(this.realScale) + '', 'valueChange')
-        this.updateValue($newValue.round(this.realScale) + '', 'valueChange')
+        this.updateValue($newValue.round(this.realScale, 0) + '', 'valueChange')
       } catch (e) {
         utils.log('Invalid value changing: ', newValue)
         this.log(e)
@@ -109,7 +109,7 @@ export default {
       if (this.$refs.input.value === '' && delta === 0) {
         return this.updateValue('')
       }
-      this.updateValue(this.$big(this.$refs.input.value || '0').plus(this.step.mul(delta)).round(this.stepScale || this.realScale) + '', 'fixValue')
+      this.updateValue(this.$big(this.$refs.input.value || '0').plus(this.step.mul(delta)).round(this.stepScale || this.realScale, 0) + '', 'fixValue')
     },
     updateValue (value, src) {
       this.log(`updateValue: ${value} @${src}`)
