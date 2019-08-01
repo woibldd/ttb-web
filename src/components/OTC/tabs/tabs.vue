@@ -60,7 +60,7 @@
             <span class="font24 font-weight font-base title-text">一键买币</span>
             <span class="font-gray">小额快速交易，0手续费，单笔50000以下</span>
           </el-col>
-          <el-col :span="11">
+          <el-col :span="10">
             <el-input v-model="ipt" :placeholder="active=='0' ? '请输入需要购买的总金额' : '请输入需要购买的数量'">
               <el-select v-model="active" slot="prepend" placeholder="请选择" style="width: 120px" @change="change">
                 <el-option label="按金额购买" value="0"></el-option>
@@ -68,11 +68,11 @@
               </el-select>
             </el-input>
             <div
-              class="unit-label" style='right:120px'
+              class="unit-label" style='right:148px'
               v-html="active=='0' ? 'CNY' : 'USDT'"/>
           </el-col>
-          <el-col :span="3">
-            <el-button style="width: 90%;margin-left: 10%" type="primary" @click="buySubmit">购买USDT</el-button>
+          <el-col :span="4">
+            <el-button style="width: 118px;float: right" type="primary" @click="buySubmit">购买USDT</el-button>
           </el-col>
         </el-row>
       </div>
@@ -86,7 +86,7 @@
             <span class="font24 font-weight font-base title-text">一键卖币</span>
             <span class="font-gray">小额快速交易，0手续费，单笔50000以下</span>
           </el-col>
-          <el-col :span="11">
+          <el-col :span="10">
             <el-input :placeholder="active=='0' ? '请输入需要出售的总金额' : '请输入需要出售的数量'" v-model="ipt">
               <el-select v-model="active" slot="prepend" placeholder="请选择" style="width: 120px" @change="change">
                 <el-option label="按金额出售" value="0"></el-option>
@@ -94,12 +94,12 @@
               </el-select>
             </el-input>
             <div
-              class="unit-label" style='right:120px'
+              class="unit-label" style='right:148px'
               v-html="active=='0' ? 'CNY' : 'USDT'"/>
 
           </el-col>
-          <el-col :span="3">
-            <el-button style="width: 90%;margin-left: 10%" type="sell" @click="sellSubmit">出售USDT</el-button>
+          <el-col :span="4">
+            <el-button style="width: 118px;float: right" type="sell" @click="sellSubmit">出售USDT</el-button>
           </el-col>
         </el-row>
       </div>

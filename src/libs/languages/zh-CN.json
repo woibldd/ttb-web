@@ -673,7 +673,7 @@
   "home_intro_long_c": "致力打造一站式数字资产交易平台，支持多币种交易，24小时专属客服快速响应、多语言服务、沟通无国界。",
   "home_intro_long_d": "采用先进的内存算法、快速读写、分布式信息传输框架，能够实时撮合大规模交易、秒速充提到账。",
   "rate_tips_h":"IX/BTC暂已停牌，复牌时间将以公告通知，详见公告。",
-  "rate_tips_i":"充值EOS同时需要一个充币地址和EOS地址标签。警告：如果未遵守正确的EOS充币步骤，币将丢失！",
+  "rate_tips_i":"充值{currery}同时需要一个充币地址和{currery}地址标签。警告：如果未遵守正确的{currery}充币步骤，币将丢失！",
   "FrenzySaleZone": "抢购专区",
   "RushBuy_text_list_1":"抢购总额",
   "RushBuy_text_list_2":"新加坡时间",

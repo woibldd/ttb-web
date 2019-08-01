@@ -8,7 +8,7 @@
           {{ $t('gentle_hint') }}
         </div>
         <div class="body">
-          {{ $t(content) }}
+          {{ $t('rate_tips_i', {currery: curreryCoin}) }}
         </div>
         <v-btn
           class="btn"
@@ -33,6 +33,7 @@
   </v-modal>
 </template>
 
+
 <script>
 import { local } from '@/modules/store'
 export default {
@@ -53,6 +54,10 @@ export default {
     localKey: {
       type: String,
       default: 'ixAlert'
+    },
+    curreryCoin: {
+        type: String,
+        default: ''
     }
   },
   computed: {

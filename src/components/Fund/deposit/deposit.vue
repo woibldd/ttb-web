@@ -138,6 +138,7 @@
       bg-color="#fff"
       :open.sync="openEosAlert"
       :local-key="'eosAlert'"
+      :curreryCoin="curreryCoin"
       :content="'rate_tips_i'"
     />
   </div>
@@ -162,6 +163,7 @@ export default {
       tableData: [],
       openEosAlert: false,
       lianData: [],
+      curreryCoin: '',
       selectLian: {}
     }
   },
@@ -216,10 +218,12 @@ export default {
     },
     async changeCoinType (coin) {
       this.selectCoin = coin
+      this.curreryCoin = ''
       await this.getCoinAddress()
       this.setQr(this.address)
-      if (coin.chain === 'EOS') {
+      if (coin.currency === 'EOS' || coin.currency === 'PAN') {
         this.openEosAlert = true
+         this.curreryCoin = coin.currency
       }
     },
     async lianSelect (coin) {
