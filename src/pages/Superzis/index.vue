@@ -148,7 +148,7 @@ export default {
             data: {}
         }
       ],
-      payTypeData: ['按金额买入', '按数量买入'],
+      payTypeData: ['按金额购买', '按数量购买'],
       loading: false,
     }
   },
@@ -178,7 +178,7 @@ export default {
             this.buyDisabled = false
             this.active_id = item.data.active_id
             this.result.unitPrice = item.data.price
-            this.amount =this.$big(this.price).div(this.result.unitPrice).round(6, 0).toString()
+            this.amount =this.$big(this.price).div(this.result.unitPrice).round(2, 0).toString()
         } else {
             this.result.unitPrice = 0
             this.amount = ''

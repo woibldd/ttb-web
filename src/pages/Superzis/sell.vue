@@ -103,7 +103,7 @@ export default {
       purchase: true,
       err: false,
       pricePoint: 2,
-      amountPoint: 6,
+      amountPoint: 2,
       price: '',
       type: '金额',
       amount: '',
@@ -168,7 +168,7 @@ export default {
             this.buyDisabled = false
             this.active_id = item.data.active_id
             this.result.unitPrice = item.data.price
-            this.amount =this.$big(this.price).div(this.result.unitPrice).round(6, 0).toString()
+            this.amount =this.$big(this.price).div(this.result.unitPrice).round(2, 0).toString()
         } else {
             this.result.unitPrice = 0
             this.amount = ''
