@@ -20,9 +20,9 @@
                 :label="item.currency"
                 :value="item">
                 <b style="display: inline-block;width: 40px">{{ item.currency }}</b>
-                <span style="color: #CCC;font-size: 12px;padding-left: 20px;">
+                <!-- <span style="color: #CCC;font-size: 12px;padding-left: 20px;">
                     {{ item.full_name }}
-                </span>
+                </span> -->
                 </el-option>
             </el-select>
           </div>
@@ -132,6 +132,7 @@ import './address.scss'
 import copyToClipboard from 'copy-to-clipboard'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
+import { state } from '@/modules/store'
 import Vue from 'vue'
 export default {
   name: 'MyAddress',
@@ -153,7 +154,8 @@ export default {
       loading: false,
       lianData: [],
       curreryCoin: '',
-      selectLian: {}
+      selectLian: {},
+      state
     }
   },
   async created () {
@@ -170,6 +172,7 @@ export default {
       utils.success(this.$i18n.t('copyed'))
     },
     async getCoinAddress () {
+      console.log('getCoinAddressgetCoinAddressgetCoinAddressgetCoinAddressgetCoinAddress')
       const param = {
         currency: this.selectCoin.currency
       }
@@ -205,7 +208,8 @@ export default {
             }
           })
           this.selectLian = this.lianData[1]
-          this.allCoins = this.removalData(res.data.filter(c => c.depositable))
+          //this.allCoins = this.removalData(res.data.filter(c => c.depositable)) 
+          this.allCoins =  _.uniqBy(res.data.filter(c => c.depositable), "currency");
           this.allCoins.forEach((item) => {
             if(state.locale === 'zh-CN') {
               Vue.set(item, 'full_name', item.zh_name)
@@ -267,7 +271,7 @@ export default {
   },
   computed: {
     depTip () {
-      return state.locale && this.$t('dep_tip')
+      return this.state.locale && this.$t('dep_tip')
     }
   }
 }
