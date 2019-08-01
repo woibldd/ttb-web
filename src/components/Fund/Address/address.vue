@@ -26,7 +26,7 @@
             </el-select>
           </div>
         </div>
-        <div class="fund-item-row mb-24" v-if="selectCoin.currency === 'USDT'">
+        <div class="fund-item-row mb-14" v-if="selectCoin.currency === 'USDT'">
             <div class="row__label">
             <el-popover
                 placement="bottom-start"
