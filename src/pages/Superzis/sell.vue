@@ -24,7 +24,6 @@
             />
            <span class="company"> CNY </span>
          </div>
-         <div class="err-msg" v-if="err">最小下单金额为100CNY</div>
           <div class="btn-ipt" v-show="paySelect === 1">
            <number-input
               class="number-input"
@@ -104,7 +103,7 @@ export default {
       purchase: true,
       err: false,
       pricePoint: 2,
-      amountPoint: 6,
+      amountPoint: 2,
       price: '',
       type: '金额',
       amount: '',
@@ -140,7 +139,7 @@ export default {
             data: {}
         }
       ],
-      payTypeData: ['按金额购买', '按数量购买']
+      payTypeData: ['按金额出售', '按数量出售']
     }
   },
   computed: {
@@ -169,7 +168,7 @@ export default {
             this.buyDisabled = false
             this.active_id = item.data.active_id
             this.result.unitPrice = item.data.price
-            this.amount =this.$big(this.price).div(this.result.unitPrice).round(6, 0).toString()
+            this.amount =this.$big(this.price).div(this.result.unitPrice).round(2, 0).toString()
         } else {
             this.result.unitPrice = 0
             this.amount = ''
@@ -317,7 +316,9 @@ export default {
             this.amount = this.$route.query.amount 
             this.paySelect = 1
           } 
-        }  
+        } else {
+          this.price = this.$route.query.amount 
+        }    
     })
   },
   mounted() {//页面加载后执行方法

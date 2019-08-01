@@ -1,7 +1,6 @@
 <template>
   <div class="otc-left-container">
-    <div class="left-menu-container left-menu-nobottom">
-     
+    <div class="left-menu-container left-menu-nobottom"> 
       <div class="coin_link arrow-down">
         <dl>
           <dt>{{coin.name +'/' + coin.symbol}}</dt>
@@ -9,8 +8,7 @@
             {{ $t(coin.name)}}
             <icon class="arrow ml-5" name="arrow-down-w" />
           </dd>
-        </dl>
-
+        </dl> 
         <div class="dropdown-sub-menu">
           <ul class="dropdown-list pt-1 pb-1">
             <li

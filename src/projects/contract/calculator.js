@@ -18,35 +18,41 @@ export default {
       } 
     let down = 0
     let up = 3 
+    
+    let base_risk = pairInfo.base_risk || 200 //起始风险限额
+    let gap_risk = pairInfo.gap_risk || 100 //每100BTC加一档
+    let max_leverage = pairInfo.max_leverage || 100 //最带杠杆倍数 
+
     // 下单委托价值 -200/100， 小于等于1取0，向上取整
     // if (this.state.ct.pair === 'FUTURE_VDSUSD') {
     let value = (Big(amount).div(price)).round(6, down)
-    let ix = Big(100).div(Big(lever).eq(0) ? 100 : lever).round(6, down)
+    let ix = Big(max_leverage).div(Big(lever).eq(0) ? max_leverage : lever).round(6, down)
     if (pairInfo.name !== 'FUTURE_BTCUSD') { 
       let mul = Big(pairInfo.multiplier) //乘数
       value = mul.times(price).times(amount)
-      ix = Big(20).div(Big(lever).eq(0) ? 20 : lever).round(6, down)
+      // ix = Big(max_leverage).div(Big(lever).eq(0) ? max_leverage : lever).round(6, down)
     }
     console.log({value:value.toString()})
     totalValue = (totalValue == null || totalValue.eq(0)) ? value : totalValue
+    // let count = 0
+    // if (pairInfo.name === 'FUTURE_BTCUSD') {
+    //   count = (Big(totalValue).minus(200)).div(100).round(0, up)
+    // } else {
+    //   count = (Big(totalValue).minus(50)).div(50).round(0, up)
+    // }  
+    //挡位
     let count = 0
-    if (pairInfo.name === 'FUTURE_BTCUSD') {
-      count = (Big(totalValue).minus(200)).div(100).round(0, up)
-    } else {
-      count = (Big(totalValue).minus(50)).div(50).round(0, up)
-    } 
+    count  = (Big(totalValue).minus(base_risk)).div(gap_risk).round(0, up)
 
     if(Big(count).lte(1)){
       count = Big(0)
     }
     // let mm = Big(0.005)
     im = Big(im).plus(count.mul(mm)).round(8, down)
-    // console.log({im:im.toString()})
-    let margin = Big(im).mul(value).round(8, down)
-    // console.log({margin:margin.toString()})
-    //IX算法 100 / 当前杠杆，杠杆位0是取100
-    // let ix = Big(100).div(Big(lever).eq(0) ? 100 : lever).round(6, down)
-    margin = Big(margin).mul(ix).round(8, down) 
+    //mm = Big(mm).plus(count.mul(mm)).round(8, down) //维持保证金也要提升挡位，这里用不到，先注释
+ 
+    //let margin = Big(im).mul(value).round(8, down) 
+    let margin = Big(value).div(lever).times(Big(1).plus(im))  //起始保证金
     // console.log({margin:margin.toString()}) 
     //平仓手续费 
     let fee = value.mul(take_rate).mul(2) 
@@ -164,6 +170,8 @@ export default {
         force_price: '--'
       }
     } 
+
+    //let totalValue = this.getTotalValue()
     let value = Big(vol).div(hp)
     let im = this.getCostValue({lever, im: 0.01, value, r}).margin//margin = Big(value).mul(100 / lever).mul(im)
     let mm = Big(value).mul(0.005) // this.getCostValue({lever, im: 0.005, value, r}).margin
@@ -235,10 +243,11 @@ export default {
     let vol = amount
     let current = holding.holding || 0
     let r = pairInfo.take_rate || 0
-    let mul = Big(pairInfo.multiplier)
+    let mul = Big(pairInfo.multiplier) 
+    let max_leverage = pairInfo.max_leverage || 50 //最带杠杆倍数
     
     if (lever === 0){
-      lever = 20
+      lever = max_leverage 
     }
     //console.log({pairInfo})
     let im = pairInfo.im
@@ -251,10 +260,11 @@ export default {
       }
     } 
     let value = mul.times(hp).times(vol) 
-    let fee = Big(r).times(value)
-    im = Big(im).times(value).times(20).div(lever)
+    let fee = Big(r).times(value) 
+    // im = Big(im).times(value).times(max_leverage).div(lever) 
+    im = value.div(lever).times(Big(1).plus(im))
     mm = Big(mm).times(value)
-
+ 
     let mulvol = mul.times(vol)
     let imDiff = im.minus(mm)
     let force_price
