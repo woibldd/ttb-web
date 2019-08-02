@@ -287,11 +287,11 @@ export default {
     quickSelectCoin (coin) {
       if(coin.currency === "USDT") {
        this.lianData.forEach((item) => {
-            if(item.currencyName === 'USDT-Omni') {
-            this.selectLian = item
-            this.selectCoin = item
-            }
-        })
+               if(item.currencyName === 'USDT-Omni') {
+                this.selectLian = item
+                this.selectCoin = item
+               }
+            })
       } else {
           this.selectCoin = coin
       }
