@@ -22,7 +22,7 @@
         <p
           class="mb-26"
           v-html=" $t('contract_how_price_tip_c', {'symbol': symbol, id1: $t('contract_base_rate'),id2: $t('contract_cal_rate'),id3: $t('contract_over_price'),})"/>
-        <p class="mb-26">{{ $t('contract_how_price_tip_d', {feerate: feeRate, next_pay_time:nextPayTime}) }}</p>
+        <p class="mb-26">{{ $t('contract_how_price_tip_d', {feerate: ($big(feeRate).round(4)), next_pay_time:nextPayTime}) }}</p>
         <p>{{ $t('contract_how_price_tip_e') }}</p>
       </div>
       <!-- 查看btc永续指南 -->
@@ -96,7 +96,7 @@
           <div class="label">{{ $t('contract_label_result') }}</div>
           <div class="note-back">
             <p class="flex">{{ $t('contract_label_result_a') }} <span>I = 0.0100%</span></p>
-            <p class="flex">{{ $t('contract_label_result_b') }} <span>F = -0.3750%</span></p>
+             <p class="flex">{{ $t('contract_label_result_b',{premium}) }} <span>F = {{feeRate | fixed(8)}}%</span></p>
           </div>
         </div>
       </div>
@@ -124,7 +124,8 @@ export default {
         fee_rate: 0,
         next_fee_time: new Date().getTime(),
         mark_price: 0,
-      }
+      },
+      selectPair: {}
     }
   },
   watch: {
@@ -172,17 +173,16 @@ export default {
       else {
         return ''
       }
-    },
-
+    }, 
     value() { 
       if (this.pair === 'FUTURE_BTCUSD') {
         return '1 USD'
       }
       else if (this.pair === 'FUTURE_BHDUSD') { 
-        return new Big(this.symbolInfo.mark_price || 0).times(this.symbolInfo.multiplier || 0.00001)
+        return this.$big(this.symbolInfo.mark_price || 0).times(this.symbolInfo.multiplier || 0.00001)
       }
       else if (this.pair === 'FUTURE_ETHUSD') {
-        return new Big(this.symbolInfo.mark_price || 0).times(this.symbolInfo.multiplier || 0.000001)
+        return this.$big(this.symbolInfo.mark_price || 0).times(this.symbolInfo.multiplier || 0.000001)
       }
       else {
         return ''
@@ -194,9 +194,24 @@ export default {
     },
     feeRate () {
       return Math.abs(this.symbolInfo.fee_rate * 100)
-    }
+    }, 
+    premium() { 
+      return this.$big(this.symbolInfo.premium_price || 0).mul(100).toString()
+    } 
   },
   methods: {
+    async getPairs () {
+      await service.getContractSymList().then(res => {
+        if (res && res.data) {
+          let allPairs = res.data.items
+          allPairs.map(e => {
+            if (e.name === this.pair) {
+              this.selectPair = e
+            }
+          })  
+        }
+      })
+    },
     _formatPair (type = 'index') {
       return this.pair.replace('FUTURE', type.toUpperCase())
     },
@@ -214,6 +229,18 @@ export default {
           pair
         }
       })
+    },
+     async refresh() { 
+      try {
+        let res = await service.getContractSymInfo({
+          symbol: this.pair
+        })
+        if (!res.code) { 
+          this.$set(this, "symbolInfo" , res.data)
+        }
+      } 
+      catch (e) {
+      }
     }
   },
   async created () {
@@ -225,16 +252,10 @@ export default {
         }
       })
     }
-    try {
-      let res = await service.getContractSymInfo({
-        symbol: this.pair
-      })
-      if (!res.code) {
-        Object.assign(this.symbolInfo, res.data)
-      }
-    } catch (e) {
-
-    }
+    let $this = this
+    setInterval(() => {
+      $this.refresh()
+    }, 5000); 
   }
 }
 </script>
