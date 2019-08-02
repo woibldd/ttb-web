@@ -3,10 +3,6 @@
    <div class="bid-banner">
       <div class="bid-con clearfix">
         <div class="banner-item-list">
-          <!-- <img v-if='state.locale === "en"' src="./assets/item-banner-en.png">
-          <img v-if='state.locale === "ko"' src="./assets/item-banner-ko.png">
-          <img v-if='state.locale === "zh-CN"' src="./assets/item-banner-zh-CN.png">
-          <img v-if='state.locale === "zh-HK"' src="./assets/item-banner-zh-HK.png">  -->
           <img :src="bannerPath">
         </div>
         <div class="banner-item-text">
@@ -182,10 +178,55 @@ $disabled-color: #B0B4B9;
 
   .bid-banner {
     position: relative;
-    height: 540px;
-    background: url("./assets/zhongwen_bj.png") center center no-repeat;
-    /*background: url("./assets/zhongwen_bj.png") center center no-repeat;*/
-    background-size: cover;
+    height: 400px;
+
+    .bid-con {
+      width: 1200px;
+      margin: 0 auto 20px;
+      position: relative;
+
+      .banner-item-list {
+        width: 790px;
+        height: 400px;
+        float: left;
+
+        img {
+          display: block;
+          zoom: 1
+        }
+      }
+
+      .banner-item-text {
+        width: 380px;
+        height: 400px;
+        float: left;
+        margin-left: 20px;
+        color: #fff;
+        text-align: center;
+        background: linear-gradient(-48deg, rgba(65, 132, 254, 1), rgba(153, 77, 246, 1));
+        .title {
+          font-size: 20px;
+          padding: 40px 0 20px 0;
+        }
+        p {
+          line-height: 30px;
+        }
+        h1 {
+          font-size: 54px;
+        }
+        .rate {
+          margin: 30px;
+        }
+        .btn {
+          .el-button {
+            width: 80%;
+            border-radius: 0;
+            background: transparent;
+            color: #fff
+          }
+        }
+      }
+    }
   }
 
   .bid-list {
