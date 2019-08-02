@@ -63,9 +63,9 @@ const processValue = {
         value = row['state']
         switch (value) {
           case 1:
-            return "待支付"
+            return "等待对方付款"
           case 2:
-            return "等待放币"
+            return "对方付款"
           case 3:
             return "已完成"
           case 4:

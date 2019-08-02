@@ -133,7 +133,7 @@
         </el-table-column>
         <el-table-column width="180" label="委托金额/成交金额">
           <template slot-scope="scope">
-            <div>{{scope.row.total +'/'+ scope.row.executed * scope.row.price}}</div>
+            <div>{{scope.row.total +'/'+ (scope.row.executed * scope.row.price).toFiexd(2)}}</div>
           </template>
         </el-table-column>
         <el-table-column prop="amount" label="状态">

@@ -184,7 +184,6 @@ export default {
         this.amount = 0
     },
     purchaseHandle() {
-        console.log(this.paySelect)
         if (window.localStorage.getItem('X-TOKEN')) {
             if (this.paySelect === 0) {
                 service.sellCoins(qs.stringify({
