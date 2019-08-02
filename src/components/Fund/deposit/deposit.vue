@@ -14,6 +14,7 @@
             style="width: 440px;"
             filterable
             v-model="selectCoin"
+            filterable
             @change="changeCoinType"
             value-key="currency">
             <el-option
