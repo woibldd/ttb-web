@@ -43,9 +43,9 @@ export default {
       return _.filter(list, pair => pair.product_name.indexOf(this.search.toUpperCase()) > -1)
     },
     sortedList () {
-      // if (!this.sortBy || !this.sortState) {
-      //   return this.showList
-      // }  
+      if ( !this.sortState) {
+        return this.showList
+      }  
       return _.sortBy(this.showList, (item) => {
         let value
         switch (this.sortBy) {
