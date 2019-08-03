@@ -266,7 +266,7 @@
     <!-- 持有仓位, btc永续 -->
     <div class="ix-pannel flex mt-4">
       <div class="ix-header">
-        <span>{{ $t('contract_hold_pos') }} : {{ $t('contract_' + state.ct.pair) }}</span>
+        <span>{{ $t('contract_hold_pos') }} : {{$t('FUTURE_&USD', {currency: state.ct.product_name} )}}</span>
         <!-- <span class="risk-alert">
           <i
             class="iconfont strong pointer ml-6"
@@ -407,13 +407,13 @@
               <span v-if="currentDealType == 'limit'||
                 currentDealType == 'contract_lose_stopLimit'||
                 currentDealType == 'contract_lose_stopLimit'
-              ">{{ $t('contract_buy_on_price_piece', {price: price, amount: amount, symbol: $t('contract_' + state.ct.pair)}) }}</span>
-              <span else>{{ $t('contract_buy_on_price_piece1', {price: price, amount: amount, symbol: $t('contract_' + state.ct.pair)}) }}</span>
+              ">{{ $t('contract_buy_on_price_piece', {price: price, amount: amount, symbol: $t('FUTURE_&USD', {currency: state.ct.product_name} )}) }}</span>
+              <span else>{{ $t('contract_buy_on_price_piece1', {price: price, amount: amount, symbol: $t('FUTURE_&USD', {currency: state.ct.product_name} )}) }}</span>
             </span>
             <span
               v-else
               class="c-666"
-            >{{ $t('contract_buy_on_price_piece', {price: price, amount: amount, symbol: $t('contract_' + state.ct.pair)}) }}</span>
+            >{{ $t('contract_buy_on_price_piece', {price: price, amount: amount, symbol: $t('FUTURE_&USD', {currency: state.ct.product_name} )}) }}</span>
           </p>
           <p class="mt-8" v-if="isExtOrderType">
             <span
@@ -425,7 +425,7 @@
           <!-- 持有仓位 -->
           <div
             class="mb-17 c-fff"
-          >{{ $t('contract_hold_pos') }} : {{ $t('contract_' + state.ct.pair) }}</div>
+          >{{ $t('contract_hold_pos') }} : {{ $t('FUTURE_&USD', {currency: state.ct.product_name} ) }}</div>
           <!-- 红绿条 -->
           <div class="profit-risk-row mb-20">
             <div
@@ -501,7 +501,7 @@
         <div
           class="stopmarket_tips c-primary"
           v-if="isExtOrderType && local.closeAfterTrigger"
-          v-html="$t('contract_win_stopMarket_sell.tips', {symbol: $t('contract_' + state.ct.pair)})"/>
+          v-html="$t('contract_win_stopMarket_sell.tips', {symbol: $t('FUTURE_&USD', {currency: state.ct.product_name} )})"/>
         <div class="never-show pt-10 mb-10">
           <input type="checkbox" v-model="mmModal.neverShow">
           {{ $t('contract_never_show') }}

@@ -9,7 +9,7 @@
         v-for="pair in list"
         :key="pair.name"
       >
-        <span class="pair-name">{{ $t('contract_'+pair.name) }}</span>
+        <span class="pair-name">{{ $t('FUTURE_&USD', {currency: pair.product_name} ) }}</span>
         <p class="price mt-10">{{ pair.price || '0' | fixed(pair.price_scale) }} <i
           class="iconfont arrow"
           :class="{'arrow-up': getDelta(pair.tick) > 0, 'arrow-down': getDelta(pair.tick) < 0}"
@@ -23,10 +23,11 @@
       >
         <div class="column info-title flex-center">
           <div class="info-title-block pd-10 ibt">
-            <p class='nowrap'>
+            <p class='nowrap'> 
               <i class="iconfont pointer ibm"/>
               <span class="info-title-value ml-3 mr-3">
-                {{ $t('contract_' + symbol.name) }}
+                <!-- {{ $t('contract_' + symbol.name) }} --> 
+                {{$t('FUTURE_&USD', {currency: symbol.product_name})}}
               </span>
               <i
                 class="iconfont arrow"

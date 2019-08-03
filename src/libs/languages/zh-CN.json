@@ -2129,7 +2129,8 @@
     "coin_FUTURE_ETHUSD":"ETH",
     "CNY": "人民币",
     "SGD": "新加坡币",
-    "otc_menu_title_price": "现价"
+    "otc_menu_title_price": "现价", 
+    "FUTURE_&USD":"%{currency}永续"
   }
 
 

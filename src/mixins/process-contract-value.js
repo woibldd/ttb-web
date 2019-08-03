@@ -84,7 +84,8 @@ const processValue = {
         if (value && value.indexOf('FUTURE_') === -1) {
           value = 'FUTURE_' + value
         }
-        value = this.$t('contract_' + value)
+        // value = this.$t('contract_' + value)
+        value = this.$t('FUTURE_&USD', {currency: value.replace('FUTURE_','').replace('USD','')} )
       }
       // 转换百分比
       if (key === 'realized') {
