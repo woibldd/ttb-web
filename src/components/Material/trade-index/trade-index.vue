@@ -149,7 +149,7 @@ export default {
   },
   computed: {
     symbol () {
-      return this.$t('contract_' + this.pair)
+      return this.$t('FUTURE_&USD', {currency: this.pair.replace('FUTURE_','').replace('USD','')} )
       // switch (this.$route.params.pair) {
       //   case 'xx':
       //     return ''
@@ -158,7 +158,8 @@ export default {
       // }
     }, 
     coin () {
-      return this.$t('coin_' + this.pair)
+      // return this.$t('coin_' + this.pair)
+      return this.pair.replace('FUTURE_','').replace('USD','')
     },
     tutorialUrl () {
       if (this.pair === 'FUTURE_BTCUSD') {

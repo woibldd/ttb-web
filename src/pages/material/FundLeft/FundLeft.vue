@@ -48,14 +48,14 @@
                   <a
                     target="_blank"
                     :href="tutorialUrl(pair)"
-                    class="index__sub__link">{{ $t("ensurance_btc_future_tutorial", {coin: $t("coin_"+pair)}) }}
+                    class="index__sub__link">{{ $t("ensurance_btc_future_tutorial", {coin: pair.replace('FUTURE_','').replace('USD','')}) }}
                   </a>
                 </li>
                 <li class="dropdown-item pl-34 pr-24">
                   <a
                     target="_blank"
                     href="https://ixxcustomer.zendesk.com/hc/zh-cn"
-                    class="index__sub__link">{{ $t("ensurance_btc_future_rule", {coin: $t("coin_"+pair)})}}
+                    class="index__sub__link">{{ $t("ensurance_btc_future_rule", {coin: pair.replace('FUTURE_','').replace('USD','')})}}
                   </a>
                 </li>
               </ul>
