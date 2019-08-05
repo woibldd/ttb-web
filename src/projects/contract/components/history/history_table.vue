@@ -53,20 +53,20 @@
     </table>
     <!-- 仓位tab -->
     <div 
-      v-if="isFirst && isLogin && holdingList">
+      v-if="isFirst && isLogin && holdingList"> 
       <div v-for="(cholding,idx) in holdingList" :key="idx" class="holding-box"> 
         <div 
           v-if="cholding.holding && cholding.holding != 0"
           class="werehouse-box"
-          >
+          > 
           <div class="currency-col flex-column">
             <!-- <p>{{ $t('contract_' + symbol.name) }} </p> -->
             <!-- <p>{{ $t('contract_FUTURE_' + cholding.currency) }} </p> --> 
-            <p> {{$t('FUTURE_&USD', {currency: symbol.name.replace('FUTURE_','').replace('USD','')} )}}</p>
+            <p> {{$t('FUTURE_&USD', {currency: cholding.currency.replace('USD','')} )}}</p>
             <p
               class="mt-9"
               :class="{'color-up': cholding.holding > 0, 'color-down':cholding.holding < 0}"> {{ cholding.holding > 0 ? $t('contract_action_button_up_r') : $t('contract_action_button_down_r') }} </p>
-          </div>
+          </div> 
           <div class="equal-col">
             <div class="col__row mb-10">
               <span

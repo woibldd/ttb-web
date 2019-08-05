@@ -1958,7 +1958,9 @@
   "fund_node_buy_success": "認購成功",
   "dep_tip": "USDT-Omni is the USDT issued by Tether based on the BTC network. The currency deposit address is the BTC address; the recharge and withdrawal will be taking place on the BTC network. The protocol used by USDT-Omni is the Omni layer protocol built on the BTC blockchain network.USDT-ERC20 is the USDT issued by Tether based on the ETH network. Its deposit address is the ETH address and its deposit and withdrawal use the ETH network. The protocol of USDT-ERC20 is the ERC20 protocol.",
   "coin_FUTURE_ETHUSD":"ETH",
+  "FUTURE_&USD":"%{currency}永續",
   "CNY": "人民币",
   "SGD": "新加坡币",
   "otc_menu_title_price": "现价"
+
 }
