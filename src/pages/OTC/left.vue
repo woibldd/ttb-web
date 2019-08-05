@@ -349,8 +349,7 @@ export default {
       margin-left: 12px;
       text-align: left;
       color: $text-weak;
-      box-sizing: border-box;
-
+      box-sizing: border-box; 
       .menu-title {
         margin-left: 6px;
       }
@@ -364,8 +363,7 @@ export default {
 
     .left-menu-list {
       width: 100%;
-      margin-top: 5px;
-
+      margin-top: 5px; 
       .menu-name {
         box-sizing: border-box;
         width: 100%;
@@ -420,7 +418,7 @@ export default {
       }
       dt {
         font-size: 14px;
-        font-weight: bold;
+        //font-weight: bold;
       }
       dd {
         font-size: 12px;

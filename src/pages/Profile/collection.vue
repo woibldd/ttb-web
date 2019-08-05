@@ -231,7 +231,7 @@
           </template>
           <template v-if="ruleForm.payment_type === '4' || ruleForm.payment_type === '5'">
             <el-form-item
-              :label="this.$t('payment_card_number')"
+              :label="ruleForm.payment_type === '4' ? this.$t('Paynow') + ' ' + this.$t('account') : this.$t('Paylah')  + ' ' + this.$t('account')"
               prop="card_number">
               <br>
               <number-input

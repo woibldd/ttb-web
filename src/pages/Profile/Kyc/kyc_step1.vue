@@ -34,7 +34,7 @@
             <v-loading
               v-if="!regionOptions.length"
               color="gray"/>
-            <el-select v-model="form.regionId" filterable>
+            <el-select v-model="form.regionId" filterable  @change="selectChange">
               <el-option
                 v-for="option in regionOptions"
                 :value="option.id"
@@ -172,6 +172,14 @@ export default {
     next()
   },
   methods: {
+    selectChange(coin) {
+      this.form.id_number = ''
+      if (coin === 86) {
+        this.form.id_type = 1
+      } else {
+        this.form.id_type = 2
+      }
+    },
     async fetchRegion () {
       const res = await service.getRegionList()
       if (!res.code) {

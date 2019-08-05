@@ -109,8 +109,8 @@
           v-for="(item,index) in tableData"
           :key="index">
           <td class="table__td">{{ processValue('create_time_stamp',item) }}</td>
-          <td
-            class="table__td">{{ $t('contract_' + item.symbol) }}</td>
+          <!-- <td class="table__td">{{ $t('contract_' + item.symbol) }}</td> -->
+          <td class="table__td">{{$t('FUTURE_&USD', {currency: item.symbol.replace('FUTURE_','').replace('USD','')} )}}</td>
           <td class="table__td">{{ processValue('origin', item) }}</td> <!--成交类型-->
           <td class="table__td"> <span v-html="processValue('side', item)"/></td>
           <td class="table__td">{{ (item.amount || 0)  }}</td>
@@ -186,8 +186,9 @@
           class="table__tr body c-666"
           v-for="(item,index) in tableData"
           :key="index">
-          <td class="table__td">{{ processValue('create_time',item) }}</td>
-          <td class="table__td">{{ $t('contract_' + item.symbol) }}</td>
+          <td class="table__td">{{ processValue('create_time',item) }}</td> 
+          <!-- <td class="table__td">{{ $t('contract_' + item.symbol) }}</td> -->
+          <td class="table__td">{{$t('FUTURE_&USD', {currency: item.symbol.replace('FUTURE_','').replace('USD','')} )}}</td>
           <td class="table__td"><span v-html="processValue('side', item)"/></td>
           <td class="table__td">{{ item.amount }}</td>
           <td class="table__td">{{ $big(item.price || 0) | fixed(valueScale)}}</td>

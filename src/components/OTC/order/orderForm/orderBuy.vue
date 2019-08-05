@@ -628,7 +628,7 @@ export default {
         if (this.side === 1) {
           if (this.$big(this.inputPrice).gt(sell_price_one)) {
             this.flag = true
-             this.alertTitle =this.$t('otc_ziurec_3',{currency:this.currency,inputPrice:this.inputPrice,symbolInfo:sell_price_one})
+             this.alertTitle =this.$t('otc_ziurec_3',{currency:this.currency,inputPrice:this.inputPrice,symbolInfo:sell_price_one, legal_currency:this.legal_currency})
            // `您发布的购买${this.currency}的交易单，价格为${this.inputPrice}CNY高于卖一价${this.symbolInfo.sell_price_one}CNY，以该价格发布可能给您带来损失`
           } else {
             this.flag = false
@@ -642,7 +642,7 @@ export default {
         } else { 
           if (this.$big(this.inputPrice).lt(buy_price_one)) {
             this.flag = true 
-              this.alertTitle =this.$t('otc_ziurec_15',{currency:this.currency,inputPrice:this.inputPrice,symbolInfo:buy_price_one})
+              this.alertTitle =this.$t('otc_ziurec_15',{currency:this.currency,inputPrice:Number(this.inputPrice).toFixed(2),symbolInfo: Number(buy_price_one).toFixed(2), legal_currency:this.legal_currency})
           // `您发布的出售${this.currency}的交易单，价格为${this.inputPrice}CNY低于买一价${ this.symbolInfo.buy_price_one}CNY，以该价格发布可能给您带来损失`
           } else {
             this.flag = false
@@ -680,6 +680,7 @@ export default {
       this.active_id = 0
       this.message_success = ''
       this.message_failed = ''
+      this.inputPrice = ''
       // if (this.show === false) {
       //   this.view = {}
       // }
