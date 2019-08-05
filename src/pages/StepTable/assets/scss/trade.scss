@@ -36,18 +36,21 @@ $high-color: #333;
         flex: 1;
         em {
           flex: 100px 0 0 0;
-          width: 100px;
           display: inline-block;
           font-style: normal;
+          padding-right: 10px;
           margin-bottom: 12px;
         }
       }
-      .user-info,.time {
+      .user-info,.time, .acount-info {
         flex: 225px 0 0 0;
         width: 225px;
         padding-left: 20px;
         color: #999999;
         font-weight: 400;
+      }
+      .acount-info {
+          flex-grow: 1.5
       }
       .text {
         flex: 1;

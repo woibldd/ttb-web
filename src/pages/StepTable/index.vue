@@ -25,7 +25,7 @@
             </div>
             <!--<div class="user">{{ tableDataUname.name }}</div-->
           </dd>
-          <dd>
+          <dd class="acount-info">
             <div class="trade">
               <div class="number">
                 <em>{{ $t('otc_side_3') }}:</em>
@@ -1126,6 +1126,4 @@ export default {
       color: #c9a96c
     }
   }
-
-
 </style>
