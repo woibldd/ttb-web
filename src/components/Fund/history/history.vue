@@ -214,27 +214,27 @@ export default {
     this.getInternalHistory()
   },
   methods: {
-          open(param) {
-        this.$confirm(this.$t('otc_ziurec_18'), {
-                    confirmButtonText: this.$t('otc_ziurec_20'),
-                    cancelButtonText: this.$t('cancel'),
-                    type: 'warning'
-        }).then(() => {
-          service.Cancellationoforders( {id:param}).then(res => {
-            if(res.code===0){
-              this.getFundHistory(this.type)
-              this.$message({
-                type: 'success',
-                message: this.$t('otc_sidees11'),
-              });
-            } else {
-              this.$message({
-                type: 'warning',
-                message: `${res.message}`
-              })
-            }
-          })
+    open(param) {
+      this.$confirm(this.$t('otc_ziurec_18'), {
+        confirmButtonText: this.$t('otc_ziurec_20'),
+        cancelButtonText: this.$t('cancel'),
+        type: 'warning'
+      }).then(() => {
+        service.Cancellationoforders( {id:param}).then(res => {
+          if(res.code===0){
+            this.getFundHistory(this.type)
+            this.$message({
+              type: 'success',
+              message: this.$t('otc_sidees11'),
+            });
+          } else {
+            this.$message({
+              type: 'warning',
+              message: `${res.message}`
+            })
+          }
         })
+      })
     },
     // 撤销订单按钮
       //  open() {
@@ -426,18 +426,40 @@ export default {
     },
     getStateLabel (row) {
       let s = this.hasComplated(row)
-      switch (s) {
-        case 0:
-          return 'pending'
-        case 1:
-          return 'done'
-        case 2:
-          return 'broadcasting'
-        case -2:
-          return 'reject'
-        default:
-          return 'pending'
+      if (this.type === 'withdraw') {
+         switch (s) {
+           case -1:
+            return 'withdraw_state_unAudited' 
+          case -100:
+            return 'withdraw_state_padding'
+          case -2:
+            return 'withdraw_state_canceled'
+          case 0:
+            return 'withdraw_state_audited_unsigned'
+          case 1:
+            return 'withdraw_state_signed'
+          case 2:
+            return 'withdraw_state_broadcast_send'
+          case 3:
+            return 'withdraw_state_broadcast_failed'
+          case 4:
+            return 'withdraw_state_broadcast_success'
+        }
       }
+      else {
+        switch (s) {
+          case 0:
+            return 'pending'
+          case 1:
+            return 'done'
+          case 2:
+            return 'broadcasting'
+          case -2:
+            return 'canceled'
+          default:
+            return 'pending'
+        }
+      } 
     },
     updateHeaderLabel () {
       this.header = [

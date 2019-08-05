@@ -2130,7 +2130,16 @@
     "CNY": "人民币",
     "SGD": "新加坡币",
     "otc_menu_title_price": "现价", 
-    "FUTURE_&USD":"%{currency}永续"
+    "FUTURE_&USD":"%{currency}永续",  
+    "withdraw_state_canceled":"已取消",
+    "withdraw_state_unAudited":"未审核",
+    "withdraw_state_padding":"等待中",
+    "withdraw_state_audited_unsigned":"已审核未签名",
+    "withdraw_state_signed":"已签名",
+    "withdraw_state_broadcast_send":"广播已发出",
+    "withdraw_state_broadcast_success":"广播完成",
+    "withdraw_state_broadcast_failed":"广播失败"
+
   }
 
 

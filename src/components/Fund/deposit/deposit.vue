@@ -5,7 +5,7 @@
       <router-link
         to="/fund/my/assets/history/deposit"
         class="fund-history"> {{ $t('capital_record') }}</router-link>
-    </div>
+    </div> 
     <div class="fund-items-content">
       <div class="fund-item-row mb-24">
         <div class="row__label">{{ $t('currency') }}</div>
@@ -13,8 +13,7 @@
           <el-select
             style="width: 440px;"
             filterable
-            v-model="selectCoin"
-            filterable
+            v-model="selectCoin" 
             @change="changeCoinType"
             value-key="currency">
             <el-option
@@ -63,7 +62,7 @@
               :value="item"/>
           </el-select>
         </div>
-      </div>
+      </div> 
       <!-- <div class="fund-item-row mb-24">
         <div class="row__label">{{ $t('deposit_address') }}</div>
         <div class="row__value">
@@ -99,7 +98,7 @@
             class="qr-img"
             ref="qr"/>
         </div>
-      </div>
+      </div> 
       <!-- address_tag -->
       <div
         class="fund-item-row"

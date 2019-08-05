@@ -214,28 +214,28 @@
         if (!this.tradingBalance) {
           return 0;
         } else {
-          return new Big(this.tradingBalance.available || 0).toFixed(8);
+          return new Big(this.tradingBalance.available || 0).round(8, 0).toFixed(8);
         }
       },
       contractAvai() {
         if (!this.contractBalance) {
           return 0;
         } else {
-          return new Big(this.contractBalance.available_balance || 0).toFixed(8);
+          return new Big(this.contractBalance.available_balance || 0).round(8, 0).toFixed(8);
         }
       },
       otcAvai() {
         if (!this.otcBalance) {
           return 0;
         } else {
-          return new Big(this.otcBalance.available || 0).toFixed(8);
+          return new Big(this.otcBalance.available || 0).round(8, 0).toFixed(8);
         }
       },
       walletAvai() {
         if (!this.walletBalance) {
           return 0;
         } else {
-          return new Big(this.walletBalance.available || 0).toFixed(8);
+          return new Big(this.walletBalance.available || 0).round(8, 0).toFixed(8);
         }
       }
     },

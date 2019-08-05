@@ -131,7 +131,7 @@
       </table>
       <!-- 委托历史 -->
       <table
-        v-if=" !isLoading && tabName==='executed'">
+        v-if="!isLoading && tabName==='executed'">
         <tr class="table__tr header c-999">
           <!-- 委托时间 -->
           <th class="table__th">
@@ -165,6 +165,10 @@
           <th class="table__th">
             {{ $t('contract_deal_price') }}
           </th>
+          <!-- 触发价格 -->
+          <th class="table__th">
+            {{ $t('contract_trigger_price') }}
+          </th>
           <!-- 委托价值 -->
           <th class="table__th">
             {{ $t('contract_assign_value_raw')  }}
@@ -195,6 +199,7 @@
           <td class="table__td">{{ item.executed }}</td>
           <td class="table__td">{{ surplus(item) }}</td><!-- 剩余 -->
           <td class="table__td">{{  $big(item.price || 0) | fixed(valueScale) }}</td>
+          <td class="table__th"> {{ (item.trigger_price || "0") == "0" ? "--" : $big(item.trigger_price).round(valueScale || 0).toFixed(valueScale) }} </td>
           <td class="table__td">{{  $big(assignValue(item) || 0) | fixed(valueScale) }}</td> <!-- 委托价值 -->
           <td class="table__td">{{ processValue('type', item) }}</td>
           <!-- <td class="table__td">{{ processValue('state',item) }}</td>
