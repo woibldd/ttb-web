@@ -330,7 +330,7 @@ export default {
       font-size: 18px;
       color: #1a1a1a;
       line-height: 40px;
-      padding-right:20px;
+      padding-right:10px;
     }
     .font-gray {
       color: #bbb;
