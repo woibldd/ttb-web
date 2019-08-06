@@ -85,30 +85,41 @@
           <div class="layer__row">
             <span class="row__label">1. {{ $t('bind_phone') }}</span>
             <span
-              class="row__status"
-              @click="clickVerifyRow('PhoneBind')"
-              :class="{'done': phone_bound}"
-            >{{ phone_bound ? $t('done_verified') : $t('to_bind') }}</span>
+              v-if="!phone_bound"
+              class="row__status "
+              @click="clickVerifyRow('PhoneBind')" 
+            >{{ $t('to_bind') }}</span>
+            <span
+              class="row__status done"  
+            >{{ $t('done_verified') }}</span>
           </div>
         </div>
         <div class="layer__row mt-20">
-          <span class="row__label">2. {{ $t('otc_bind_bankCard') }}</span>
+          <span class="row__label">2. {{ $t('otc_bind_bankCard') }}</span> 
           <span
-            class="row__status"
-            @click="clickVerifyRow('collection')"
-            :class="{'done': card_bound}"
-          >{{ card_bound ? $t('done_verified') : $t('to_bind') }}</span>
+            v-if="!card_bound"
+            class="row__status "
+            @click="clickVerifyRow('collection')" 
+            >{{ $t('to_bind') }}</span>
+          <span
+            v-if="card_bound"
+            class="row__status done"  
+            >{{ $t('done_verified') }}</span>
         </div>
         <div class="layer__row mt-20">
           <span class="row__label">
             3.
             <span v-html="$t('otc_kyc_verified')"></span>
-          </span>
+          </span> 
           <span
-            class="row__status"
-            @click="clickVerifyRow('Kyc')"
-            :class="{'done': kyc_bound}"
-          >{{ kyc_bound ? $t('done_verified') : $t('to_verify') }}</span>
+            v-if="!kyc_bound"
+            class="row__status "
+            @click="clickVerifyRow('Kyc')" 
+            >{{ $t('to_verify') }}</span>
+          <span
+            v-if="kyc_bound"
+            class="row__status done"  
+            >{{ $t('done_verified') }}</span>
         </div>
       </div>
     </v-modal>

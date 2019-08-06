@@ -2138,8 +2138,10 @@
     "withdraw_state_signed":"已签名",
     "withdraw_state_broadcast_send":"广播已发出",
     "withdraw_state_broadcast_success":"广播完成",
-    "withdraw_state_broadcast_failed":"广播失败"
+    "withdraw_state_broadcast_failed":"广播失败",
 
+    "contract-cancel-all-title": "撤销委托单",
+    "contract-cancel-all-content": "是否撤销全部委托单？"
   }
 
 

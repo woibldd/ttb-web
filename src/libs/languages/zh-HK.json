@@ -1960,16 +1960,20 @@
   "coin_FUTURE_ETHUSD":"ETH",
   "FUTURE_&USD":"%{currency}永續",
   "canceled":"已取消",
-  "CNY": "人民币",
-  "SGD": "新加坡币",
-  "otc_menu_title_price": "现价",
+  "CNY": "人民幣",
+  "SGD": "新加坡幣",
+  "otc_menu_title_price": "現價",
+  "contract_fee_rate_estimate_tips": "<a>預測費率：</a><br/>下一個時間段預計的資金費率為%{feeRate}，該數值是正數，代表多倉需要支付給空倉，如果該數值是負數，代表空倉要付給多倉。",
   "withdraw_state_canceled":"已取消",
-  "withdraw_state_unAudited":"未审核",
+  "withdraw_state_unAudited":"未稽核",
   "withdraw_state_padding":"等待中",
-  "withdraw_state_audited_unsigned":"已审核未签名",
-  "withdraw_state_signed":"已签名",
-  "withdraw_state_broadcast_send":"广播已发出",
-  "withdraw_state_broadcast_success":"广播完成",
-  "withdraw_state_broadcast_failed":"广播失败"
+  "withdraw_state_audited_unsigned":"已稽核未簽名",
+  "withdraw_state_signed":"已簽名",
+  "withdraw_state_broadcast_send":"廣播已發出",
+  "withdraw_state_broadcast_success":"廣播完成",
+  "withdraw_state_broadcast_failed":"廣播失敗",
+
+  "contract-cancel-all-title": "撤销委托单",
+  "contract-cancel-all-content": "是否撤销全部委托单？"
 
 }
