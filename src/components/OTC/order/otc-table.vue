@@ -570,10 +570,7 @@ span.orange {
       }
     }
     .tr.message-box {
-      position: absolute;
-      top: 8px;
-      left: 0;
-      width: 100%;
+     overflow: hidden;
     }
     .msg {
       padding-left: 24px;
