@@ -391,43 +391,43 @@ export default {
         headers: [
           {
             title: 'type', // 交易类型
-            text: this.$t('otc_transaction_type'),
+            text: 'otc_transaction_type',
             width: '',
             key: 'type'
           },
           {
             title: 'currency', // 币种
-              text: this.$t('currency'),
+            text: 'currency' ,
             width: '',
             key: 'currency'
           },
           {
             title: 'price', // 单价(CNY)
-             text: this.$t('otc_trans_idjg'),
+            text: 'otc_price' ,
             width: '',
             key: 'price'
           },
           {
-            title: 'amount', // 数量(CNY)
-            text: this.$t('amount'),
+            title: 'amount', // 数量(BTC)
+            text: 'otc_amount' ,
             width: '',
             key: 'amount'
           },
           {
             title: 'total', // 总金额(CNY)
-            text: this.$t('otc_ziurec_19'),
+            text: 'otc_total' ,
             width: '',
             key: 'total'
           },
           {
             title: 'fee', // 平台服务费
-             text: this.$t('otc_ziurec_13'),
+             text: 'otc_ziurec_13',
             width: '',
             key: 'fee'
           },
           {
             title: 'kyc_level', // 对手认证等级
-            text: this.$t('otc_opponent_kyc_level'),
+            text: 'otc_opponent_kyc_level',
             width: '',
             key: 'kyc_level'
           }
