@@ -1,5 +1,5 @@
 <template>
-  <div class="page-contract">
+  <div class="page-contract" style="clear:both">
     <div class="container-trade-panel">
       <!-- 1-1 -->
       <div class="ix-row mt-0 overflow-hidden">
