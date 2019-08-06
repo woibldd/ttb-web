@@ -53,7 +53,7 @@
           <el-form-item
             class="inp_box"
             :label="$t('kyc_id_type')">
-            <el-select v-model="form.id_type">
+            <el-select v-model="form.id_type" disabled>
               <el-option
                 :label="$t('kyc_idcard')"
                 :value="1"/>
