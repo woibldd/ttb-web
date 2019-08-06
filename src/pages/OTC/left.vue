@@ -1,7 +1,10 @@
 <template>
   <div class="otc-left-container">
     <div class="left-menu-container left-menu-nobottom"> 
-      <div class="coin_link arrow-down">
+      <div class="coin_link arrow-down"
+        :class="{hover: down}"
+        @click="down=!down"
+        >
         <dl>
           <dt>{{coin.name +'/' + coin.symbol}}</dt>
           <dd>
@@ -145,7 +148,8 @@ export default {
           symbol: "S$"
         }
       },
-      count: 0
+      count: 0,
+      down: false
     };
   },
   methods: {
@@ -451,15 +455,15 @@ export default {
         .dropdown-sub-menu {
           background: #fff;
         }
-        &:hover {
+        &.hover {
           .dropdown-sub-menu {
             opacity: 1;
             display: block;
             visibility: visible;
           }
-          .nav_link {
-            // color: $primary;
-          }
+          // .nav_link {
+          //   color: $primary;
+          // }
           .arrow {
             transform: rotate(180deg);
           }

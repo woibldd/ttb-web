@@ -149,7 +149,8 @@
                 class="c-999 cursor_help"
                 v-tooltip.top-center="{html: true, content: $t('contract_margin_balance_tips'), classes: 'contract_fund'}">{{ $t('contract_margin_balance') }}</span>
               <span class="c-333">{{ (marginBalance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
-            </div>
+            </div> 
+            <!-- 仓位保证金 -->
             <div class="table__tr right">
               <span
                 class="c-999 cursor_help"
@@ -174,7 +175,8 @@
             <div
               class="table__tr right c-999"
               v-if="holding.margin_delegation">
-              {{ $t('contract_fund_usee_lever', {per: (holding.margin_position/holding.available*100).toFixed(priceScale) + '%', lever: $big(holding.leverage || 0).toFixed(2)}) }}
+              {{ $t('contract_fund_usee_lever', {per: margin + '%', lever: $big(holding.leverage || 0).toFixed(2)}) }}
+              <!-- (holding.margin_position/holding.available*100).toFixed(priceScale)  -->
             </div>
           </div>
         </div>
@@ -182,9 +184,11 @@
       
       <div class="account__row  mt-40"> 
         <div class="row__box card-list">
-          <div class="card-detail"  v-for="(holding,index) in holdingList" :key="index">
-            <contractCard 
-            v-if="(holding.amount || 0) != 0"
+          <div class="card-detail"  
+          v-for="(holding,index) in holdingList" 
+          :key="index"
+          v-if="(holding.holding || 0) != 0">
+            <contractCard  
               :holding="holding"
               />
           </div> 
@@ -297,12 +301,20 @@ export default {
     currency () {
       return this.pairInfo.product_name
     },
+    //保证金余额
     marginBalance() {
       //保证金余额 = 可用余额 + 未实现盈亏
       return this.$big(this.holding.available_balance || 0).plus(this.holding.unrealized || 0)
     }, 
-    holding () {
-
+    //保证金=【（仓位保证金+委托保证金）/保证金余额】*100%（四舍五入，取整）
+    margin() {
+      return this.$big(this.holding.margin_position)
+        .plus(this.holding.margin_delegation)
+        .div(this.marginBalance)
+        .times(100)
+        .round(0)
+    },
+    holding () { 
       let obj = {}
       console.log({obj})
       let list = this.holdingList
@@ -478,8 +490,7 @@ export default {
       return list
     },
   },
-  async created () {  
-    console.log('666666666666666666666666666666666666666666666666666')
+  async created () {   
     this.currencyList = [{
           name: 'CNY',
           symbol: '￥',

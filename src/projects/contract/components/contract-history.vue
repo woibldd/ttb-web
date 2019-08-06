@@ -718,7 +718,7 @@ export default {
             if (this.userSetting) {
               //根据用户设置判断
               this.$toast({
-                title: "所有委托已被取消",
+                title: this.$t("delegate_cancellation"),
                 body: this.$t("contract_revert_success"),
                 color: "yellow"
               });
@@ -729,7 +729,7 @@ export default {
             if (this.userSetting) {
               //根据用户设置判断
               this.$toast({
-                title: "取消失败",
+                title:  this.$t("delegation_cancellation_failed"),
                 body: res.message,
                 color: "red"
               });
