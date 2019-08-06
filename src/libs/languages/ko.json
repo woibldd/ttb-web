@@ -1806,7 +1806,7 @@
     "otc_active_id": "위임장 정보",
     "otc_quota": "단일 한도액",
     "otc_currency": "코인종류",
-    "otc_price": "단가（%{legal_currency}）",
+    "otc_price": "단가%{legal_currency}）",
     "otc_total": "총금액(%{legal_currency})",
     "otc_amount": "수량(%{currency})",
     "otc_transaction_info": "주문서 정보",

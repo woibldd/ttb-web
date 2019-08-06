@@ -1835,7 +1835,7 @@
   "otc_currency": "币种",
   "otc_trans_idjg": "单价",
   "otc_trans_idsl": "数量",
-  "otc_price": "单价（%{legal_currency}）",
+  "otc_price": "单价%{legal_currency}）",
   "otc_total": "总金额(%{legal_currency})",
   "otc_amount": "数量(%{currency})",
   "otc_transaction_info": "订单信息",
