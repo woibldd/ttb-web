@@ -183,7 +183,7 @@ export default {
          this.price = 0
         this.amount = 0
     },
-    purchaseHandle() {
+    purchaseHandle: Debounce(function () {
         if (window.localStorage.getItem('X-TOKEN')) {
             if (this.paySelect === 0) {
                 service.sellCoins(qs.stringify({
@@ -229,7 +229,7 @@ export default {
                 query: {redirect: this.$route.fullPath}
             })
         }
-    },
+    }),
     overdueHandle() {},
     init() {
         this.min_amount = 0
