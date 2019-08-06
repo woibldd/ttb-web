@@ -62,22 +62,22 @@ const processValue = {
       if (key === 'transaction_state') {
         value = row['state']
         switch (value) {
-          case 1:
-            return "等待对方付款"
-          case 2:
-            return "对方付款"
-          case 3:
-            return "已完成"
-          case 4:
-            return "买家取消"
-          case 5:
-            return "卖家取消"
-          case 6:
-            return "买家超时取消"
-          case 7:
-            return "卖家超时发币"
-          default:
-            return ""
+            case 1:
+                return "待支付"
+            case 2:
+                return "等待放币"
+            case 3:
+                return "已完成"
+            case 4:
+                return "买家取消"
+            case 5:
+                return "卖家取消"
+            case 6:
+                return "买家超时取消"
+            case 7:
+                return "卖家超时放币"
+            default:
+                return ""
         }
       }
 

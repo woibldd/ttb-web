@@ -33,6 +33,16 @@ alt style="position: relative;top: 5px;left: 5px;">
             class="nav_link  ml-30">
             {{ $t('bidTitle') }}
           </router-link>
+          <a
+            href="javascript:;"
+            class="nav_link"
+            @click="subscribeHandle"
+            style="padding-left:30px;"
+          >
+            节点认购
+            <img src="@/assets/hot.png"
+alt style="position: relative;top: 5px;left: 5px;">
+          </a>
           <!-- <div class="nav_link arrow-down">
             <a
               :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"
@@ -326,6 +336,17 @@ export default {
     }
   },
   methods: {
+    subscribeHandle() {
+        if (window.localStorage.getItem('X-TOKEN')) {
+            this.$router.push('/fund/capital')
+        } else {
+            this.$router.push(
+                {
+                    name: 'login'
+                }
+            )
+        }
+    },
     switchLang (lang) {
       actions.setLocale(lang)
       this.$nextTick(() => {
