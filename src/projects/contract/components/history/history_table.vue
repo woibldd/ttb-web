@@ -160,7 +160,7 @@
             </div>
           </div>
           <!-- 平仓/市价全平 -->
-          <div class="operate-col pl-16 pt-16 close"
+          <!-- <div class="operate-col pl-16 pt-16 close"
             v-loading='cholding.clearLoading'> 
             <div
               class="operate-r "
@@ -178,8 +178,7 @@
                 ref='input_price'
                 v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}"
                 class="input-num"/> 
-              </div>
-              <!-- 限价平仓 -->  
+              </div> 
               <div
                 class="btn col2"
                 :class="{'btn-disabled': !cholding.unwindPrice  }"
@@ -190,9 +189,7 @@
             </div> 
             <div
               class="operate-r pt-10"
-              v-if='!cholding.future_close_id'>
-              <!-- <div class="label mb-6 t-a-center">{{ $t('contract_equal_werehouse_amount') }}</div> --> 
-              <!-- v-model="state.ct.markTickList[cholding.currency]" --> 
+              v-if='!cholding.future_close_id'> 
               <div
                 class="col1 label t-a-center nowrap"
                 v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}">{{ $t('amount') }}
@@ -209,6 +206,72 @@
               </div> 
               <div
                 class="btn  col2 full"
+                @click.prevent="submitOrder('market', cholding)"
+              >
+                {{ $t('contract_market_price') }}
+              </div>
+            </div> 
+            <div class="equal"
+              v-if='!!cholding.future_close_id'>
+              <div
+                class="label mb-10 t-a-left nowrap"
+                v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}">{{ $t('contract_action_open_short') }}
+              </div>
+              <div>
+                <label class='label'
+                  v-html="$t('contract_history_close_content', { price: $big(cholding.close_position_price || 0).toFixed(cholding.pairInfo.price_scale || 2)})">
+                </label>
+                <span
+                  class="op op_cancel"
+                  @click="cancel(cholding)"/>
+              </div>
+            </div>
+          </div>  -->
+            <div class="operate-col pl-16 pt-16 close"
+            v-loading='cholding.clearLoading'> 
+            <div
+              class="equal mr-21 "
+              v-if='!cholding.future_close_id'> 
+              <div
+                class="label mb-10 t-a-center nowrap"
+                v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}">{{ $t('contract_equal_werehouse_price') }}</div>
+              <!-- <input
+                type="number"
+                class="input-num mb-10"> -->
+                
+              <!-- :class="{'btn-disabled': btnDisabled }" -->
+              <!-- 限价平仓 -->  
+              <div
+                class="btn"
+                :class="{'btn-disabled': !cholding.unwindPrice  }"
+                
+                @click.prevent="submitOrder('limit', cholding)">
+                {{ $t('contract_action_open_short') }}  
+              </div>
+            </div> 
+            <div
+              class="equal"
+              v-if='!cholding.future_close_id'>
+              <!-- <div class="label mb-6 t-a-center">{{ $t('contract_equal_werehouse_amount') }}</div> --> 
+              <!-- v-model="state.ct.markTickList[cholding.currency]" --> 
+              <input
+                v-model="cholding.unwindPrice"
+                min=0
+                step="0.5"
+                @input="checkInput(cholding)"
+                ref='input_price'
+                v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}"
+                class="input-num mb-10"/> 
+               <!-- <number-input  
+                class="input-num mb-10"  
+                ref='input_price'
+                @focus="checkInput(cholding)"
+                :accuracy="cholding.pairInfo.accuracy"
+                v-model="cholding.unwindPrice"  
+                :scale="cholding.pairInfo.price_scale" 
+              /> -->
+              <div
+                class="btn full"
                 @click.prevent="submitOrder('market', cholding)"
               >
                 {{ $t('contract_market_price') }}
@@ -915,13 +978,50 @@ export default {
     .t-a-center {
         text-align: center;
     }
-    .operate-col {
-      flex: 2;
-        border-left: 1px solid #0F0F0F; 
+    // .operate-col {
+    //   flex: 2;
+    //     border-left: 1px solid #0F0F0F; 
+    //     .label {
+    //         height: 18px;
+    //         line-height: 18px;
+    //     } 
+    //     .btn {
+    //         width:70px;
+    //         height:24px;
+    //         line-height: 24px;
+    //         text-align: center;
+    //         border:1px solid rgba(9,201,137,1);
+    //         color: rgba(9,201,137,1);
+
+    //         &.full {
+    //             background-color: rgba(9,201,137,1);
+    //             color: #252525;
+    //         }
+    //     } 
+    //     .operate-r {
+    //       display: flex;
+    //       align-items: center;
+    //       .col1{
+    //         flex:1;
+    //       }
+    //       .col2{
+    //         flex:2;
+    //       }
+    //       .col3{
+    //         flex:3;
+    //       }
+    //     }
+        
+    // }
+      .operate-col {
+        border-left: 1px solid #0F0F0F;
+        display: flex;
+
         .label {
             height: 18px;
             line-height: 18px;
-        } 
+        }
+
         .btn {
             width:70px;
             height:24px;
@@ -934,20 +1034,8 @@ export default {
                 background-color: rgba(9,201,137,1);
                 color: #252525;
             }
-        } 
-        .operate-r {
-          display: flex;
-          align-items: center;
-          .col1{
-            flex:1;
-          }
-          .col2{
-            flex:2;
-          }
-          .col3{
-            flex:3;
-          }
         }
+        
         
     }
 }
