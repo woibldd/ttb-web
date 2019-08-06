@@ -732,7 +732,7 @@ export default {
       color: red
     }
     .action-box {
-      height: calc(100% - 140px);
+      height: calc(100% - 120px);
       padding: 0 38px;
       overflow: scroll;
       .title {
@@ -831,7 +831,12 @@ export default {
     }
     .footer {
       box-shadow: 0px 0px 50px #aaaaaa;
-      height: 140px;
+      height: auto;
+      position: absolute;
+      width: 100%;
+      overflow: hidden;
+      left: 0;
+      bottom: 0;
       .btn {
         &.buy {
           background-color: $otc-buy-bg;
@@ -845,12 +850,12 @@ export default {
           color: #333;
         }
       }
-      .tr.message-box {
-        position: absolute;
-        top: 8px;
-        left: 0;
-        width: 100%;
-      }
+    //   .tr.message-box {
+    //     position: absolute;
+    //     top: 8px;
+    //     left: 0;
+    //     width: 100%;
+    //   }
       .msg {
         padding-left: 24px;
         font-size: 14px;
@@ -867,8 +872,7 @@ export default {
       }
     }
     .action-button-group {
-      margin-top: 20px;
-      padding: 30px 40px;
+      padding: 20px 40px;
       .btn-left {
         float: left;
         .btn {
