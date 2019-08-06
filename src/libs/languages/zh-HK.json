@@ -1973,7 +1973,7 @@
   "withdraw_state_broadcast_success":"廣播完成",
   "withdraw_state_broadcast_failed":"廣播失敗",
 
-  "contract-cancel-all-title": "撤销委托单",
-  "contract-cancel-all-content": "是否撤销全部委托单？"
+  "contract-cancel-all-title": "撤銷委託單",
+  "contract-cancel-all-content": "是否撤銷全部委託單？"
 
 }

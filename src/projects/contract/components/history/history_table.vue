@@ -163,19 +163,25 @@
           <div class="operate-col pl-16 pt-16 close"
             v-loading='cholding.clearLoading'> 
             <div
-              class="equal mr-21 "
+              class="operate-r "
               v-if='!cholding.future_close_id'> 
               <div
-                class="label mb-10 t-a-center nowrap"
-                v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}">{{ $t('contract_equal_werehouse_price') }}</div>
-              <!-- <input
-                type="number"
-                class="input-num mb-10"> -->
-                
-              <!-- :class="{'btn-disabled': btnDisabled }" -->
+                class="col1 label t-a-center nowrap"
+                v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}">{{ $t('平仓') }}
+              </div>
+              <div class="col2" >
+                <input
+                v-model="cholding.unwindPrice"
+                min=0
+                step="0.5"
+                @input="checkInput(cholding)"
+                ref='input_price'
+                v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}"
+                class="input-num"/> 
+              </div>
               <!-- 限价平仓 -->  
               <div
-                class="btn"
+                class="btn col2"
                 :class="{'btn-disabled': !cholding.unwindPrice  }"
                 
                 @click.prevent="submitOrder('limit', cholding)">
@@ -183,28 +189,26 @@
               </div>
             </div> 
             <div
-              class="equal"
+              class="operate-r pt-10"
               v-if='!cholding.future_close_id'>
               <!-- <div class="label mb-6 t-a-center">{{ $t('contract_equal_werehouse_amount') }}</div> --> 
               <!-- v-model="state.ct.markTickList[cholding.currency]" --> 
-              <input
-                v-model="cholding.unwindPrice"
-                min=0
-                step="0.5"
-                @input="checkInput(cholding)"
-                ref='input_price'
-                v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}"
-                class="input-num mb-10"/> 
-               <!-- <number-input  
-                class="input-num mb-10"  
-                ref='input_price'
-                @focus="checkInput(cholding)"
-                :accuracy="cholding.pairInfo.accuracy"
-                v-model="cholding.unwindPrice"  
-                :scale="cholding.pairInfo.price_scale" 
-              /> -->
               <div
-                class="btn full"
+                class="col1 label t-a-center nowrap"
+                v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}">{{ $t('amount') }}
+              </div>
+              <div class="col2" >
+                <input
+                  v-model="cholding.unwindAmount"
+                  min=0
+                  step="0.5"
+                  @input="checkInput(cholding)"
+                  ref='input_price'
+                  v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}"
+                  class="input-num"/> 
+              </div> 
+              <div
+                class="btn  col2 full"
                 @click.prevent="submitOrder('market', cholding)"
               >
                 {{ $t('contract_market_price') }}
@@ -867,6 +871,7 @@ export default {
       }
     }
     .currency-col {
+      flex: 1;
         color: $primary;
         font-size: 20px;
         height: 100%;
@@ -877,13 +882,11 @@ export default {
     .input-num {
         width: 80px;
         height: 18px;
+        text-indent: 8px;
         color: $primary;
-        background-color: #1B1B1B;
-        padding-left: 7px;
-        margin-left: -7px;
+        background-color: #1B1B1B; 
         box-sizing: border-box; 
-        border-width: 0;
-  
+        border-width: 0; 
     }
     .input-lab {
         color: $primary;
@@ -891,6 +894,7 @@ export default {
         margin-left: -7px;
     }
     .equal-col {
+      flex: 2;
         padding-top: 14px;
         display: flex;
         flex-direction: column;
@@ -899,7 +903,7 @@ export default {
             width: 100%;
             display: flex;
             .label{
-                flex: 3
+                flex: 1;
             }
             .value {
                 flex: 1;
@@ -912,14 +916,12 @@ export default {
         text-align: center;
     }
     .operate-col {
-        border-left: 1px solid #0F0F0F;
-        display: flex;
-
+      flex: 2;
+        border-left: 1px solid #0F0F0F; 
         .label {
             height: 18px;
             line-height: 18px;
-        }
-
+        } 
         .btn {
             width:70px;
             height:24px;
@@ -932,8 +934,20 @@ export default {
                 background-color: rgba(9,201,137,1);
                 color: #252525;
             }
+        } 
+        .operate-r {
+          display: flex;
+          align-items: center;
+          .col1{
+            flex:1;
+          }
+          .col2{
+            flex:2;
+          }
+          .col3{
+            flex:3;
+          }
         }
-        
         
     }
 }

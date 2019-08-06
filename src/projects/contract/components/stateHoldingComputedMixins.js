@@ -237,6 +237,10 @@ export default {
           this.$set(holding, "unwindPrice", unwindPrice)
         }
 
+        if (!holding.changeUnwindAmount) {
+          this.$set(holding, "unwindAmount", amount)
+        }
+
         holding.margin = "0"
         holding.margin_position = this.$big(holding.margin_position || 0).round(value_scale || 4).toString()
         // 动态保证金
