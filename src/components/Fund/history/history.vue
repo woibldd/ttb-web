@@ -277,19 +277,20 @@ export default {
       }
       return utils.dateFormatter(time, 'Y-M-D')
     },
-    hasComplated (row) {
+    hasComplated (row) { 
       if (this.type === 'deposit' && row.state === 1) {
         return 1
       }
 
       if (this.type === 'withdraw') {
-        if (row.state === 4) {
-          return 1
-        } else if (row.state === 2) {
-          return 2
-        } else if (row.state === -2) {
-          return -2
-        }
+        // if (row.state === 4) {
+        //   return 1
+        // } else if (row.state === 2) {
+        //   return 2
+        // } else if (row.state === -2) {
+        //   return -2
+        // }
+        return row.state
       }
 
       return 0
