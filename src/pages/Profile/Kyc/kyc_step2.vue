@@ -196,14 +196,14 @@ show_box
           <p class="message">
             {{message}}
           </p>
-          <v-btn class="mr-22 router-btn light" :label="$t('kyc_btn_face_recognition')" @click="isFaceComplete"></v-btn>
+          <v-btn class="mr-22 router-btn light kyc-btn" :label="$t('kyc_btn_face_recognition')" @click="isFaceComplete"></v-btn>
           <!-- <router-link class="mr-22 router-btn" :to="{ name:'KycStep3'}">{{ $t('我已在手机上完成人脸识别验证') }}</router-link> --> 
           <v-btn class="mr-22 router-btn " :label="$t('kyc_btn_failure')" @click="revalidation"></v-btn>
         </div>
       </div>
       <div v-if="step===3" class="option-content">
          <div class="option-button">
-            <v-btn class="mr-22 router-btn " :label="$t('kyc_btn_failure')" @click="revalidation"></v-btn>
+            <v-btn class="mr-22 router-btn  kyc-btn" :label="$t('kyc_btn_failure')" @click="revalidation"></v-btn>
         </div>
       </div>
     </div>

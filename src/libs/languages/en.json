@@ -1770,7 +1770,7 @@
 "trading_fees": "trading fee ",
 "contract_fees": "contract fee",
 
-"contract_fee_rate_current_tips": "<a>Current rate：</ a><br/>Current  funding rate is % {feeRate}，When the Funding Rate is positive, longs pay shorts. When it is negative, shorts pay longs。",
+"contract_fee_rate_current_tips": "<a>Current rate：</ a><br/>Current funding rate is %{feeRate}，When the Funding Rate is positive, longs pay shorts. When it is negative, shorts pay longs。",
 "transfer_side":" transfer direction",
 "transfer_amount":" transfer  amount",
 "transfer_enter_amount":" Please enter the transfer amount",
@@ -2197,6 +2197,7 @@
 "CNY": "人民币",
 "SGD": "新加坡币",
 "otc_menu_title_price": "现价",
+"contract_fee_rate_estimate_tips": "<a>预测费率：</a><br/>下一个时间段预计的资金费率为%{feeRate}，该数值是正数，代表多仓需要支付给空仓，如果该数值是负数，代表空仓要付给多仓。",
 "withdraw_state_canceled":"已取消",
 "withdraw_state_unAudited":"未审核",
 "withdraw_state_padding":"等待中",
@@ -2204,5 +2205,8 @@
 "withdraw_state_signed":"已签名",
 "withdraw_state_broadcast_send":"广播已发出",
 "withdraw_state_broadcast_success":"广播完成",
-"withdraw_state_broadcast_failed":"广播失败"
+"withdraw_state_broadcast_failed":"广播失败",
+
+"contract-cancel-all-title": "撤销委托单",
+"contract-cancel-all-content": "是否撤销全部委托单？"
 }

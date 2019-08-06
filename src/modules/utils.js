@@ -228,7 +228,7 @@ const utils = {
       self.$confirm(content, title, Object.assign({
         confirmButtonText: confirmBtnText || self.$i18n.t('confirm'),
         cancelButtonText: cancelBtnText || self.$i18n.t('cancel'),
-        type: 'warning' || type
+        type: 'warning' || type, 
       }, options)).then(() => {
         resolve(true)
       }).catch((e) => {
@@ -245,7 +245,7 @@ const utils = {
     options.title = options.title || ''
     options.content = options.content || ''
     options.duration = options.duration || 3000
-    options.active = true
+    options.active = true 
     return new Promise((resolve) => {
       options.answer = resolve
       eventHub.$emit('app:notify', options)
