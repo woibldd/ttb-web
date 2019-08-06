@@ -470,7 +470,8 @@ const service = {
   },
   // 发起提币
   confirmWithdraw (param) {
-    return request('/account/withdraw/create', param)
+    // return request('/account/withdraw/create', param)
+    return getCache('withdraw_create', () => request('/account/withdraw/create', param), 2e3)
   },
   // 取消提币
   cancelWithdraw (param) {

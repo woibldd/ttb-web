@@ -555,7 +555,7 @@ export default {
       if (this.selectCoin.currency === 'USDT') {
         param.chain = this.selectLian.chain
       }
-
+ 
       // eos 需要填memo
       if (this.selectCoin.memo_support) {
         if (this.memo) {
@@ -600,6 +600,12 @@ export default {
       } else if (this.selectAddress.address === 'ixeosdeposit') {
         utils.alert(this.$t('eos_not_support_internal_transfer'))
         return
+      }
+      if (this.selectCoin.memo_support) {
+        if (this.memo.trim() == '') {  
+          utils.alert(this.$t('eos_deposit_tip_label'))
+          return
+        }
       }
 
       this.showModal = true
