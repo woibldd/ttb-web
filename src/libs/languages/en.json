@@ -1818,7 +1818,7 @@
 "otc_sell_tips_l": "Complete payment within 15 minutes",
 "otc_assets_tips_m": "Average payment time, average time of money release is updated at 24:00 daily",
 "otc_tips_success": "Your order has been successfully posted",
-"otc_tips_failed_a": "Publish failed: You can post the total amount of the order within the range of 400 - 50000CNY",
+"otc_tips_failed_a": "Publish failed: ",
 "input_all": "All",
 "otc_amount_money": "Amount",
 

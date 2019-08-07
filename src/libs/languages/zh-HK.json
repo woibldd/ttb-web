@@ -1729,7 +1729,7 @@
   "otc_sell_tips_l": "15分鐘內完成付款",
   "otc_assets_tips_m": "平均付款時間、平均放幣時間每日24:00更新",
   "otc_tips_success": "您的委託單已發布成功",
-  "otc_tips_failed_a": "發布失敗：您可發布委託單總金額需在400 - 50000CNY範圍內",
+  "otc_tips_failed_a": "發布失敗：",
   "input_all": "全部",
   "otc_amount_money": "金額",
   "otc_purchase_amount": "購買金額",
