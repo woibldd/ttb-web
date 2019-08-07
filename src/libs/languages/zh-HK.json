@@ -1974,6 +1974,27 @@
   "withdraw_state_broadcast_failed":"廣播失敗",
 
   "contract-cancel-all-title": "撤銷委託單",
-  "contract-cancel-all-content": "是否撤銷全部委託單？"
-
+  "contract-cancel-all-content": "是否撤銷全部委託單？",
+  "otcState_1": "待支付",
+    "otcState_2": "等待放幣",
+    "otcState_3": "已完成",
+    "otcState_4": "買家取消",
+    "otcState_5": "賣家取消",
+    "otcState_6": "買家超時取消",
+    "otcState_7": "賣家超時放幣",
+    "node_sub": "節點認購",
+    "a_1": "按金額出售",
+    "a_2": "按數量出售",
+    "b_1": "按金額購買",
+    "b_2": "按數量購買",
+    "a_account_i": "請輸入需要出售的總數量",
+    "a_price_i": "請輸入需要出售的總金額",
+    "c_usdt": "出售usdt",
+    "b_usdt": "購買usdt",
+    "b_account_i": "請輸入需要購買的總數量",
+    "b_price_i": "請輸入需要購買的總金額",
+    "cj_jg": "成交單價",
+    "cj_sl": "成交數量",
+    "cj_ze": "成交總額",
+    "ck_jg": "USDT參考單價"
 }

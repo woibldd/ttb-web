@@ -2208,5 +2208,27 @@
 "withdraw_state_broadcast_failed":"Broadcast failed",
 
 "contract-cancel-all-title": "撤销委托单",
-"contract-cancel-all-content": "是否撤销全部委托单？"
+"contract-cancel-all-content": "是否撤销全部委托单？",
+"otcState_1": "Pending payment",
+"otcState_2": "Waiting for release",
+"otcState_3": "Completed",
+"otcState_4": "Buyer Cancel",
+"otcState_5": "Seller Cancele",
+"otcState_6": "Buyer timeout cancel",
+"otcState_7": "Seller late release",
+"node_sub": "node purchase",
+"a_1": "按金额出售",
+"a_2": "按数量出售",
+"b_1": "按金额购买",
+"b_2": "按数量购买",
+"a_account_i": "请输入需要出售的总数量",
+"a_price_i": "请输入需要出售的总金额",
+"c_usdt": "出售usdt",
+"b_usdt": "购买usdt",
+"b_account_i": "请输入需要购买的总数量",
+"b_price_i": "请输入需要购买的总金额",
+"cj_jg": "成交单价",
+"cj_sl": "成交数量",
+"cj_ze": "成交总额",
+"ck_jg": "USDT参考单价"
 }
