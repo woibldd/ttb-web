@@ -338,7 +338,7 @@ export default {
   methods: {
     subscribeHandle() {
         if (window.localStorage.getItem('X-TOKEN')) {
-            this.$router.push('/fund/capital')
+            this.$router.push('/fund/my/assets')
         } else {
             this.$router.push(
                 {
