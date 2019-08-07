@@ -506,7 +506,7 @@ export default {
         }
         else {
           if (diffPrice > 0){
-              triggerPriceStr = `${this.lastPrice}(<span class='font-color-sell'>+${ diffPrice.toFixed(1) }</span>)`
+              triggerPriceStr = `${this.lastPrice}(<span class='font-color-sell'>+${ diffPrice }</span>)`
           }
           else{
               triggerPriceStr = `${this.lastPrice}(<span class='font-color-buy'>${diffPrice}</span>)`

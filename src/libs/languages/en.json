@@ -1770,7 +1770,7 @@
 "trading_fees": "trading fee ",
 "contract_fees": "contract fee",
 
-"contract_fee_rate_current_tips": "<a>Current rate：</ a><br/>Current funding rate is %{feeRate}，When the Funding Rate is positive, longs pay shorts. When it is negative, shorts pay longs。",
+"contract_fee_rate_current_tips": "<a>Current rate：</a><br/>Current funding rate is %{feeRate}，When the Funding Rate is positive, longs pay shorts. When it is negative, shorts pay longs。",
 "transfer_side":" transfer direction",
 "transfer_amount":" transfer  amount",
 "transfer_enter_amount":" Please enter the transfer amount",
@@ -1818,7 +1818,7 @@
 "otc_sell_tips_l": "Complete payment within 15 minutes",
 "otc_assets_tips_m": "Average payment time, average time of money release is updated at 24:00 daily",
 "otc_tips_success": "Your order has been successfully posted",
-"otc_tips_failed_a": "Publish failed: You can post the total amount of the order within the range of 400 - 50000CNY",
+"otc_tips_failed_a": "Publish failed: ",
 "input_all": "All",
 "otc_amount_money": "Amount",
 
@@ -2197,7 +2197,7 @@
 "CNY": "CNY",
 "SGD": "SGD",
 "otc_menu_title_price": "Current price",
-"contract_fee_rate_estimate_tips": "<a>Forecast rate：</ a><br/>the expected fee for the next time period is %{feeRate}，which means that long position need to be paid to the short position, If the value is a negative, which means that the short position is paid to long positions.",
+"contract_fee_rate_estimate_tips": "<a>Forecast rate：</a><br/>the expected fee for the next time period is %{feeRate}，which means that long position need to be paid to the short position, If the value is a negative, which means that the short position is paid to long positions.",
 "withdraw_state_canceled":"cancelled",
 "withdraw_state_unAudited":"pending",
 "withdraw_state_padding":"Waiting",

@@ -1792,7 +1792,7 @@
     "otc_sell_tips_l": "15분 내에 결제 완료하겠습니다",
     "otc_assets_tips_m": "평균 지불 시간, 평균 방화 시간 매일 24:00으로 업데이트",
     "otc_tips_success": "당신의 위탁서는 이미 공포에 성공했습니다",
-    "otc_tips_failed_a": "배포에 실패했습니다:위임장 배포에 필요한 총 금액은 400-50000CNY입니다",
+    "otc_tips_failed_a": "배포에 실패했습니다:",
     "input_all": "전부",
     "otc_amount_money": "금액",
     "otc_purchase_amount": "금액구매",

@@ -322,7 +322,7 @@
       },
       page(page = 1){
         service.getBalanceList({page:page,size:10}).then(res => {
-
+          this.tableData = []
           if (res.code || res.data.length === 0) {
             this.loading = false
           } else {

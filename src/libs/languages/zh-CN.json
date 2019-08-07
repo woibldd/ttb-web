@@ -1818,7 +1818,7 @@
   "otc_sell_tips_l": "15分钟内完成付款",
   "otc_assets_tips_m": "平均付款时间、平均放币时间每日24:00更新",
   "otc_tips_success": "您的委托单已发布成功",
-  "otc_tips_failed_a": "发布失败：您可发布委托单总金额需在400 - 50000CNY范围内",
+  "otc_tips_failed_a": "发布失败：",
   "input_all": "全部",
   "otc_amount_money": "金额",
   "otc_purchase_amount": "购买金额",

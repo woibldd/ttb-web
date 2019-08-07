@@ -14,7 +14,7 @@
               @input="filterPair()" 
               type="text" 
               v-model="search">
-            <icon name="home-search"/>
+            <icon name="home-search-t"/>
           </div>
         </div>
       </div>

@@ -204,7 +204,7 @@ export default {
   .pair-tab {
     background-color: $contract-block-bg;
     .pair-tab-item {
-      padding: 8px 38px 10px;
+      padding: 8px 18px 10px;
       font-size:14px;
       text-align: center;
       .pair-name {
