@@ -265,7 +265,7 @@ export default {
       }
     },
     changeType (type) {
-      this.page = 1
+      this.page = 1 
       this.getFundHistory(type)
     },
     getPage () {
@@ -277,7 +277,7 @@ export default {
       }
       return utils.dateFormatter(time, 'Y-M-D')
     },
-    hasComplated (row) { 
+    hasComplated (row) {  
       if (this.type === 'deposit' && row.state === 1) {
         return 1
       }
@@ -425,7 +425,7 @@ export default {
       }
       return res.round(num, this.C.ROUND_DOWN).toString()
     },
-    getStateLabel (row) {
+    getStateLabel (row) { 
       let s = this.hasComplated(row)
       if (this.type === 'withdraw') {
          switch (s) {

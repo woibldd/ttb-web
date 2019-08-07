@@ -90,6 +90,7 @@
               @click="clickVerifyRow('PhoneBind')" 
             >{{ $t('to_bind') }}</span>
             <span
+              v-if="phone_bound"
               class="row__status done"  
             >{{ $t('done_verified') }}</span>
           </div>
