@@ -46,7 +46,7 @@
             trigger="hover"
             width="240"
             effect="dark" :content="depTip">
-            <el-button type="text" slot="reference" class="lian">链名称</el-button>
+            <el-button type="text" slot="reference" class="lian">链名称</el-button> 
           </el-popover>
         </div>
         <div class="row__value">

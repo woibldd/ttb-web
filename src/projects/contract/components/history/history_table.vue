@@ -28,8 +28,8 @@
             :class="[{'pointer': header.key==='revert'}]"
             :style="{width: header.width ? header.width: 'auto'}"
           >
-            <span v-if="header.title === 'contract_trigger_price'" v-html="triggerPrice(processValue('trigger_price', row))"></span>
-            <span v-else-if="header.title === 'contract_trigger_price_rule'" v-html="triggerPrice(processValue('trigger_price', row), 1)" >
+            <span v-if="header.title === 'contract_trigger_price'" v-html="triggerPrice('trigger_price', row)"></span>
+            <span v-else-if="header.title === 'contract_trigger_price_rule'" v-html="triggerPrice('trigger_price', row, 1)" >
             </span>
             <span v-else-if="header.title==='contract_deal_price' ||
                 header.title === 'contract_assign_price'"
@@ -491,8 +491,11 @@ export default {
         return $newValue
       }
     },
-    triggerPrice (trgPrice, type = 0) {
-        let diffPrice = this.lastPrice - trgPrice
+    triggerPrice (key, row, type = 0) { 
+        // this.state.ct.lastPriceList
+        let trgPrice = row[key] 
+        let lastPrice = this.state.ct.lastPriceList[row.currency] || 0
+        let diffPrice = lastPrice - trgPrice
         let triggerPriceStr = ''
         if (trgPrice == 0) {
           triggerPriceStr = '--'
@@ -506,10 +509,10 @@ export default {
         }
         else {
           if (diffPrice > 0){
-              triggerPriceStr = `${this.lastPrice}(<span class='font-color-sell'>+${ diffPrice }</span>)`
+              triggerPriceStr = `${lastPrice}(<span class='font-color-sell'>+${ diffPrice }</span>)`
           }
           else{
-              triggerPriceStr = `${this.lastPrice}(<span class='font-color-buy'>${diffPrice}</span>)`
+              triggerPriceStr = `${lastPrice}(<span class='font-color-buy'>${diffPrice}</span>)`
           }
         }
         return triggerPriceStr;
