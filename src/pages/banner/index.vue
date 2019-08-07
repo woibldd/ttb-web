@@ -35,7 +35,7 @@
                 <el-tooltip content="非最终交易单价，仅供参考" placement="top" effect="light">
                   <i class="currency-icon">&#xe61c;</i>
                 </el-tooltip>
-                <span>{{downPrice}} CNY/USDT</span>
+                <span>{{Number(downPrice).toFixed(2)}} CNY/USDT</span>
               </p>
             </div>
           </el-col>

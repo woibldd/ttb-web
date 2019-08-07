@@ -230,7 +230,7 @@ export default {
 
   .assets-box {
     display: flex;
-    padding: 17px 38px;
+    padding: 10px 38px;
     .user-info {
       > a {
         padding-left: 10px !important;

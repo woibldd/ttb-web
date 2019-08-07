@@ -70,18 +70,18 @@
             <span class="font24 font-weight font-base title-text">一键买币</span>
             <span class="font-gray">小额快速交易，0手续费，单笔50000以下</span>
           </el-col>
-          <el-col :span="10">
-            <el-input v-model="ipt" :placeholder="active=='0' ? '请输入需要购买的总金额' : '请输入需要购买的数量'">
+          <el-col :span="11">
+            <el-input v-model="ipt" :placeholder="active=='0' ? '请输入需要购买的总金额' : '请输入需要购买的数量'" style="width: 98%">
               <el-select v-model="active" slot="prepend" placeholder="请选择" style="width: 120px" @change="change">
                 <el-option label="按金额购买" value="0"></el-option>
                 <el-option label="按数量购买" value="1"></el-option>
               </el-select>
             </el-input>
             <div
-              class="unit-label" style='right:148px'
+              class="unit-label" style='right:68px'
               v-html="active=='0' ? 'CNY' : 'USDT'"/>
           </el-col>
-          <el-col :span="4">
+          <el-col :span="3">
             <el-button style="width: 118px;float: right" type="primary" @click="buySubmit">购买USDT</el-button>
           </el-col>
         </el-row>
@@ -96,20 +96,20 @@
             <span class="font24 font-weight font-base title-text">一键卖币</span>
             <span class="font-gray">小额快速交易，0手续费，单笔50000以下</span>
           </el-col>
-          <el-col :span="10">
-            <el-input :placeholder="active=='0' ? '请输入需要出售的总金额' : '请输入需要出售的数量'" v-model="ipt">
+          <el-col :span="11">
+            <el-input :placeholder="active=='0' ? '请输入需要出售的总金额' : '请输入需要出售的数量'" v-model="ipt" style="width: 98%">
               <el-select v-model="active" slot="prepend" placeholder="请选择" style="width: 120px" @change="change">
                 <el-option label="按金额出售" value="0"></el-option>
                 <el-option label="按数量出售" value="1"></el-option>
               </el-select>
             </el-input>
             <div
-              class="unit-label" style='right:158px'
+              class="unit-label" style='right:68px'
               v-html="active=='0' ? 'CNY' : 'USDT'"/>
 
           </el-col>
-          <el-col :span="4">
-            <el-button style="width: 112px;float: right" type="sell" @click="sellSubmit">出售USDT</el-button>
+          <el-col :span="3">
+            <el-button style="width: 118px;float: right" type="sell" @click="sellSubmit">出售USDT</el-button>
           </el-col>
         </el-row>
       </div>
@@ -256,7 +256,7 @@ export default {
     margin-top: 20px;
     .main-tabs-box {
       font-size: 16px;
-      padding: 18px 36px;
+      padding: 10px 0 10px 0;
       vertical-align: middle;
       overflow: hidden;
       // background-color: #80b1b4;
@@ -264,7 +264,7 @@ export default {
         border: none;
         background: rgba(0,0,0,0);
         color: #999999;
-        padding: 5px 15px;
+        padding: 5px 20px 0 0;
         cursor: pointer;
       }
       label {
@@ -278,7 +278,6 @@ export default {
         width: 50%;
         display: flex;
         .tab {
-          flex: 1;
           &:last-child {
             padding-left: 20px;
             label {
@@ -328,7 +327,6 @@ export default {
   }
   .otc-buy-ac {
     overflow: hidden;
-    padding: 0 36px;
     .line {
       height:6px;
       background:rgba(245,246,248,1);
