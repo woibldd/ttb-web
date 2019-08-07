@@ -495,7 +495,7 @@ export default {
         // this.state.ct.lastPriceList 
         let trgPrice = row[key] 
         let lastPrice = this.state.ct.lastPriceList[row.currency] || 0
-        let diffPrice = lastPrice - trgPrice
+        let diffPrice = this.$big(lastPrice).minus(trgPrice)
         let triggerPriceStr = ''
         if (trgPrice == 0) {
           triggerPriceStr = '--'
@@ -529,11 +529,11 @@ export default {
           }
         }
         else {
-          if (diffPrice > 0){
-              triggerPriceStr = `${lastPrice}(<span class='font-color-sell'>+${ diffPrice }</span>)`
+          if (diffPrice.gt(0)){
+              triggerPriceStr = `${lastPrice}(<span class='font-color-sell'>+${ diffPrice.toString() }</span>)`
           }
           else{
-              triggerPriceStr = `${lastPrice}(<span class='font-color-buy'>${diffPrice}</span>)`
+              triggerPriceStr = `${lastPrice}(<span class='font-color-buy'>${diffPrice.toString()}</span>)`
           }
         }
         return triggerPriceStr;
