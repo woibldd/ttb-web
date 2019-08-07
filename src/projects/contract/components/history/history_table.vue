@@ -492,7 +492,7 @@ export default {
       }
     },
     triggerPrice (key, row, type = 0) { 
-        // this.state.ct.lastPriceList
+        // this.state.ct.lastPriceList 
         let trgPrice = row[key] 
         let lastPrice = this.state.ct.lastPriceList[row.currency] || 0
         let diffPrice = lastPrice - trgPrice
@@ -500,11 +500,32 @@ export default {
         if (trgPrice == 0) {
           triggerPriceStr = '--'
         } else if (type === 0) {
-           if (diffPrice > 0){
-              triggerPriceStr = `<=${trgPrice}`
-          }
-          else{
+          // if (diffPrice > 0){
+          //     triggerPriceStr = `<=${trgPrice}`
+          // }
+          // else{
+          //     triggerPriceStr = `>=${trgPrice}`
+          // }
+          if (row.side == 1) {
+            //止损
+            if (row.type == 3 || row.type == 4) { 
               triggerPriceStr = `>=${trgPrice}`
+            } 
+            //止盈
+            else if (row.type == 5 || row.type == 6) { 
+              triggerPriceStr = `<=${trgPrice}`
+            }
+          } 
+          //卖出
+          else if (row.side == 2) {
+            //止损
+            if (row.type == 3 || row.type == 4) { 
+              triggerPriceStr = `<=${trgPrice}`
+            } 
+            //止盈
+            else if (row.type == 5 || row.type == 6) { 
+              triggerPriceStr = `>=${trgPrice}`
+            }
           }
         }
         else {
