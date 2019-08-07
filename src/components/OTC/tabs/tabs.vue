@@ -3,8 +3,8 @@
     <div class="main-tabs-box  clear-fix">
       <div class="tab-left pull-left">
         <div  class="side-buy tab ">
-          <label>{{$t('otc_side_1')}}</label>
-          <button class='btn_left'
+          <!-- <label>{{$t('otc_side_1')}}</label> -->
+          <!-- <button class='btn_left'
                   :class="{'active' : currency==='USDT','active-side': side===1  }"
                   @click="setCurrency('USDT', 1)"
           >USDT</button>
@@ -12,11 +12,21 @@
             class='btn_left'
             :class="{'active' : currency==='BTC','active-side': side===1 }"
             @click="setCurrency('BTC', 1)"
-          >BTC</button>
+          >BTC</button> -->
+          <button
+            class='btn_left'
+            :class="{'active' : currency==='BTC','active-side': side===1  }"
+            @click="changeSide(1)"
+          >{{$t('otc_side_1')}}</button>
         </div>
         <div class="side-sell tab">
-          <label>{{$t('otc_side_2')}}</label>
-          <button class='btn_left'
+          <!-- <label>{{$t('otc_side_2')}}</label> -->
+          <button
+            class='btn_left'
+            :class="{'active' : currency==='BTC','active-side': side===2  }"
+            @click="changeSide(2)"
+          >{{$t('otc_side_2')}}</button>
+          <!-- <button class='btn_left'
                   :class="{'active' : currency==='USDT','active-side': side===2  }"
                   @click="setCurrency('USDT', 2)"
           >USDT</button>
@@ -24,7 +34,7 @@
             class='btn_left'
             :class="{'active' : currency==='BTC','active-side': side===2  }"
             @click="setCurrency('BTC', 2)"
-          >BTC</button>
+          >BTC</button> -->
         </div>
       </div>
       <div class="tab-right pull-right" style="margin-top:-5px!important;" >
@@ -218,6 +228,10 @@ export default {
       this.currency = coin
       this.state.otc.showSide = side
       this.$eh.$emit('otc:currency:change', coin, side)
+    },
+    changeSide(side) {
+      this.state.otc.showSide = side
+      this.$eh.$emit('otc:currency:change', this.currency, side)
     },
     openSideBar () {
       if (window.localStorage.getItem('X-TOKEN')) {
