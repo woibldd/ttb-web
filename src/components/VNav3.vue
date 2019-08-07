@@ -39,7 +39,7 @@ alt style="position: relative;top: 5px;left: 5px;">
             @click="subscribeHandle"
             style="padding-left:30px;"
           >
-            节点认购
+            {{ this.$t('node_sub') }}
             <img src="@/assets/hot.png"
 alt style="position: relative;top: 5px;left: 5px;">
           </a>

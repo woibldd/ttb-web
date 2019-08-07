@@ -63,19 +63,19 @@ const processValue = {
         value = row['state']
         switch (value) {
             case 1:
-                return "待支付"
+                return this.$t('otcState_1')
             case 2:
-                return "等待放币"
+                return this.$t('otcState_2')
             case 3:
-                return "已完成"
+                return this.$t('otcState_3')
             case 4:
-                return "买家取消"
+                return this.$t('otcState_4')
             case 5:
-                return "卖家取消"
+                return this.$t('otcState_5')
             case 6:
-                return "买家超时取消"
+                return this.$t('otcState_6')
             case 7:
-                return "卖家超时放币"
+                return this.$t('otcState_7')
             default:
                 return ""
         }

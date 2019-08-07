@@ -42,20 +42,6 @@
         <span class="el-dropdown-link currency">
           {{legal_currency}}
         </span>
-        <!-- <el-dropdown @command="changeCoin">
-          <span class="el-dropdown-link currency">
-            {{legal_currency}}<i class="el-icon-arrow-down el-icon--right"></i>
-          </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item
-              v-for="(item,idx) in dataList"
-              :key="idx"
-              :command="item.name"
-              >
-              {{item.name}}
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown> -->
         <button
           class="btn"
           @click="openSideBar()"
@@ -78,7 +64,7 @@
               </el-select>
             </el-input>
             <div
-              class="unit-label" style='right:68px'
+              class="unit-label" style='right:130px'
               v-html="active=='0' ? 'CNY' : 'USDT'"/>
           </el-col>
           <el-col :span="3">
@@ -104,7 +90,7 @@
               </el-select>
             </el-input>
             <div
-              class="unit-label" style='right:68px'
+              class="unit-label" style='right:130px'
               v-html="active=='0' ? 'CNY' : 'USDT'"/>
 
           </el-col>

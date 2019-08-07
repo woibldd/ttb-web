@@ -2044,5 +2044,27 @@
 "withdraw_state_broadcast_failed":"방송실패",
 
 "contract-cancel-all-title": "撤销委托单",
-"contract-cancel-all-content": "是否撤销全部委托单？"
+"contract-cancel-all-content": "是否撤销全部委托单？",
+"otcState_1": "지불중",
+"otcState_2": "코인 내놓기를 기다리다",
+"otcState_3": "이미 완성",
+"otcState_4": "구매자취소",
+"otcState_5": "판매자취소",
+"otcState_6": "구매자시간취소",
+"otcState_7": "판매자 시간 취소",
+"node_sub": "노드 세일",
+"a_1": "按金额出售",
+"a_2": "按数量出售",
+"b_1": "按金额购买",
+"b_2": "按数量购买",
+"a_account_i": "请输入需要出售的总数量",
+"a_price_i": "请输入需要出售的总金额",
+"c_usdt": "出售usdt",
+"b_usdt": "购买usdt",
+"b_account_i": "请输入需要购买的总数量",
+"b_price_i": "请输入需要购买的总金额",
+"cj_jg": "成交单价",
+"cj_sl": "成交数量",
+"cj_ze": "成交总额",
+"ck_jg": "USDT参考单价"
 }
