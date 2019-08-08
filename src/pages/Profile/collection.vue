@@ -47,14 +47,7 @@
                 <dd class="cs">{{ item.currency }}</dd>
                 <dd>{{ item.name }}</dd>
                 <dd>{{ item.alipay_account }}</dd>
-                <dd v-if="item.collection_img">
-                  <button
-                    type="text"
-                    v-clipboard:copy="item.alipay_account"
-                    v-clipboard:success="onCopy"
-                    v-clipboard:error="onError">
-                    <icon name="fund-history-copy"/>
-                  </button>
+                <dd v-if="item.collection_img"> 
                   <i
                     class="el-icon-picture"
                     @click="handleCol(item, 'img')"/>
@@ -66,17 +59,10 @@
                 <dd class="cs">{{ item.currency }}</dd>
                 <dd>{{ item.name }}</dd>
                 <dd>{{ item.we_chat_account }}</dd>
-                <dd v-if="item.collection_img">
-                  <button
-                    type="text"
-                    v-clipboard:copy="item.weChat_account"
-                    v-clipboard:success="onCopy"
-                    v-clipboard:error="onError">
-                    <icon
-                      name="fund-history-copy"
-                      @click="handleCol(item, 'img')"/>
-                  </button>
-                  <i class="el-icon-picture"/>
+                <dd v-if="item.collection_img"> 
+                  <i
+                    class="el-icon-picture"
+                    @click="handleCol(item, 'img')"/>
                 </dd>
               </dl>
             </template>
