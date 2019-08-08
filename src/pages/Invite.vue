@@ -192,16 +192,80 @@ export default {
         page: this.invitationList.page++,
         size: PageSize
       })
-      if (result && !result.code) {
-        if (!result.data || result.data.length < PageSize) {
+      if (result && !result.code) { 
+        // result.data = {
+        //   page: 1,
+        //   size: 10,
+        //   total: 66,
+        //   data: [
+        //     {
+        //       "id": "1090560",
+        //       "region": 86,
+        //       "phone": "18******802",
+        //       "register_time": 1561875636599,
+        //       "lv": 0,
+        //       "state": 0
+        //     },
+        //     {
+        //       "id": "1039351",
+        //       "region": 86,
+        //       "phone": "15******716",
+        //       "register_time": 1559522535673,
+        //       "lv": 0,
+        //       "state": 0
+        //     },
+        //     {
+        //       "id": "970225",
+        //       "email": "3****@qq.com",
+        //       "register_time": 1557404589920,
+        //       "lv": 0,
+        //       "state": 0
+        //     },
+        //     {
+        //       "id": "963501",
+        //       "email": "b****@foxmail.com",
+        //       "register_time": 1556523101902,
+        //       "lv": 0,
+        //       "state": 0
+        //     },
+        //     {
+        //       "id": "963255",
+        //       "region": 86,
+        //       "phone": "15******135",
+        //       "register_time": 1556506360033,
+        //       "lv": 0,
+        //       "state": 0
+        //     },
+        //     {
+        //       "id": "1090560",
+        //       "region": 86,
+        //       "phone": "18******802",
+        //       "register_time": 1561875636599,
+        //       "lv": 0,
+        //       "state": 0
+        //     },
+        //     {
+        //       "id": "1039351",
+        //       "region": 86,
+        //       "phone": "15******716",
+        //       "register_time": 1559522535673,
+        //       "lv": 0,
+        //       "state": 0
+        //     }, 
+        //   ]
+        // }
+        if (!result.data.data || result.data.total < PageSize ) {
           this.invitationList.isEnd = true
         } else {
           this.invitationList.isEnd = false
         }
         if (this.invitationList.list.length > 0) {
-          this.invitationList.list = this.invitationList.list.concat(result.data)
+          this.invitationList.list = this.invitationList.list.concat(result.data.data) 
+          if (this.invitationList.list.length >= result.data.total) {
+            this.invitationList.isEnd = true
+          }
         } else {
-          this.invitationList.list = result.data
+          this.invitationList.list = result.data.data
         }
       } else {
         utils.alert(result.message)
