@@ -498,6 +498,7 @@ export default {
         if (res.code === 0) {
           utils.success('认购成功。')
           this.getAccountBalanceList() //重新获取数据
+          this.is_nodes = true
         } else {
           if (res.message) {
             utils.alert(res.message)
