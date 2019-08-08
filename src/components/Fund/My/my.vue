@@ -126,13 +126,23 @@
           :label="operate.title"
         >
           <template slot-scope="scope">
-            <label class="my-fund-label"
-              v-if="scope.row.currency==='USDT'"
-              @click="nodeBuy"
-              v-tooltip.top="{html: true, content: $t('fund_assets_node_buy_tip'), classes: 'assets'}" 
-              >
-              {{$t('fund_assets_node_buy')}}
-            </label>
+            <template v-if="is_nodes === false">
+                <label class="my-fund-label"
+                v-if="scope.row.currency==='USDT'"
+                @click="nodeBuy"
+                v-tooltip.top="{html: true, content: $t('fund_assets_node_buy_tip'), classes: 'assets'}" 
+                >
+                {{$t('fund_assets_node_buy')}}
+                </label>
+            </template>
+            <template v-else>
+                <label class="my-fund-label dis-my-fund-label"
+                v-if="scope.row.currency==='USDT'"
+                v-tooltip.top="{html: true, content: $t('fund_assets_node_buy_tip'), classes: 'assets'}" 
+                >
+                {{$t('fund_assets_node_buy')}}
+                </label>
+            </template>
             <span 
               class="my-fund-operate"> 
                <a href="javascript:;" class="menu-name" @click="routerTransFer(scope.row)">
@@ -244,11 +254,10 @@
 </template>
 <script>
 import service from '@/modules/service';
-import { state } from '@/modules/store';
+import { state, actions } from '@/modules/store';
 import utils from '@/modules/utils';
 import transferModal from '../contract/transfer-modal';
 import _ from 'lodash'
-
 const ExchangePairs = {
   BTC: 'BTC_USDT',
   EOS: 'EOS_BTC',
@@ -284,6 +293,7 @@ export default {
       unlock_disable: true,
       unlock_amount: '',
       lock_amount: '',
+      is_nodes: false,
       // 我的余额
       balance: {
         available: 0,
@@ -439,7 +449,10 @@ export default {
     await this.getMine()
     this.getAccountBalanceList()
     this.getIxBalance()
-    this.$nextTick(console.log(this.header))
+    service.getOrderList().then((res) => {
+        this.is_nodes = res.data.is_nodes
+    })
+    // this.$nextTick(console.log(this.header))
   },
   methods: {
     dianji (res) {
