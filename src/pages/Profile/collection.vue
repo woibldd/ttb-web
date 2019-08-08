@@ -435,7 +435,6 @@ export default {
           }
         })
       } else {
-        item.state = !item.state
         service.orderUnbind(params).then(res => {
           if (res.code === 0) {
             this.$message({
@@ -444,6 +443,7 @@ export default {
             })
             this.init()
           } else {
+            item.state = !item.state
             this.$message({
               type: 'warning',
               message: `${res.message}`
