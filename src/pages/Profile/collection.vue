@@ -29,7 +29,7 @@
             {{$t(payName( item.payment_type))}}
           </div>
           <div class="mes">
-            <template v-if="item.payment_type === 1">
+            <template v-if="item.payment_type === 1  || item.payment_type === 4 || item.payment_type === 5">
               <dl>
                 <dd class="cs">{{ item.currency }}</dd>
                 <dd>{{ item.name }}</dd>
@@ -416,7 +416,7 @@ export default {
     },
     change (item) {
       let params = {
-        user_id: state.userInfo.id,
+        //user_id: state.userInfo.id,
         collection_id: item.collection_id
       }
       if (item.state) {
@@ -435,6 +435,7 @@ export default {
           }
         })
       } else {
+        item.state = !item.state
         service.orderUnbind(params).then(res => {
           if (res.code === 0) {
             this.$message({
@@ -470,7 +471,7 @@ export default {
           this.loading = true
           if (this.type === 'add') {
             let params = {
-              user_id: state.userInfo.id,
+              //user_id: state.userInfo.id,
               payment_type: this.ruleForm.payment_type,
               name: this.ruleForm.name,
               deposit_bank: this.ruleForm.deposit_bank,
@@ -555,7 +556,7 @@ export default {
     },
     async init () {
       const params = {
-        userId: state.userInfo.id,
+        //userId: state.userInfo.id,
         currency: this.currency
       }
       try {
@@ -583,25 +584,29 @@ export default {
     }
   },
   async created () {
-    console.log(this.id)
+    //console.log(this.id)
     this.init()
     this.symbolList()
-    this.filedir = this.id + '_' + utils.generateToken(32)
-    let policy = await service.getOSSPolicy()
-    if (!policy.code) {
-      this.policy = JSON.parse(policy.data)
-      this.uploadConfig.host = this.policy.host
-      let obj = {
-        'key': this.policy.dir + this.filedir + '${filename}', // this.policy.dir,
-        'policy': this.policy.policy,
-        'OSSAccessKeyId': this.policy.accessid,
-        'success_action_status': '200', // 让服务端返回200,不然，默认会返回204
-        'signature': this.policy.signature,
-        'dir': this.policy.dir
+    try {
+      this.filedir = this.id + '_' + utils.generateToken(32)
+      let policy = await service.getOSSPolicy()
+      if (!policy.code) {
+        this.policy = JSON.parse(policy.data)
+        this.uploadConfig.host = this.policy.host
+        let obj = {
+          'key': this.policy.dir + this.filedir + '${filename}', // this.policy.dir,
+          'policy': this.policy.policy,
+          'OSSAccessKeyId': this.policy.accessid,
+          'success_action_status': '200', // 让服务端返回200,不然，默认会返回204
+          'signature': this.policy.signature,
+          'dir': this.policy.dir
+        } 
+        this.policy = obj
+      } else {
+        utils.alert('获取服务端签名失败')
       } 
-      this.policy = obj
-    } else {
-      utils.alert('获取服务端签名失败')
+    } catch (error) {
+      
     }
   }
 }
