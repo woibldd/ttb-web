@@ -140,7 +140,7 @@ const service = {
     return request('order/query', {order_id: id})
   },
   getOrderList (data) {
-    return request('order/list', data)
+    return request('/api/agent/nodes/state', data)
   },
   orderActive (data) {
     return request('order/active', data).then(res => {

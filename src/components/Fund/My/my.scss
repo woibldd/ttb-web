@@ -42,6 +42,20 @@
       border:1px solid $primary;
       border-radius: 15px;
       color: $primary;
+      &:hover {
+        background:  $primary;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+    .dis-my-fund-label {
+        background: #DDDDDD;
+        color: #BCBCBC;
+        border-color: #DDDDDD;
+        &:hover {
+            background: #DDDDDD;
+            color: #BCBCBC
+        }
     }
     .dib {
         display: inline-block;

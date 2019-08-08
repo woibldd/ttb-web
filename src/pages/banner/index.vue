@@ -29,7 +29,7 @@
         <el-row>
           <el-col :span="6">
             <div class="tips">
-              <h1>一键买币</h1>
+              <h1>{{this.$t('yj_mb')}}</h1>
               <p>
                 <em>参考价</em>
                 <el-tooltip content="非最终交易单价，仅供参考" placement="top" effect="light">
@@ -48,7 +48,7 @@
                     class="number-input"
                     v-model="buy.amount"
                     :scale="amountPoint"
-                    placeholder="请输入需要购买的总金额"
+                    :placeholder="this.$t('b_price_i')"
                   />
                 </div>
               </el-col>
@@ -75,7 +75,7 @@
               </el-col>
               <el-col :span="7">
                 <div class="currency-btn">
-                  <el-button style="width: 100%;" @click="buyHandle">一键买币</el-button>
+                  <el-button style="width: 100%;" @click="buyHandle">{{this.$t('yj_mb')}}</el-button>
                 </div>
               </el-col>
             </el-row>
@@ -126,9 +126,9 @@ export default {
   methods: {
     buyHandle() {
       if (this.$big(Number(this.buy.amount)).lt(100)) {
-        this.$message.warning("购买量低于最低100限额");
+        this.$message.warning(this.$t('zd_xe'));
       } else if (this.$big(Number(this.buy.amount)).gt(50000)) {
-        this.$message.warning("购买量大于最大50000限额");
+        this.$message.warning(this.$t('gm_sl'));
       } else if (this.buy.amount) {
         this.$emit("buy-handle", this.buy);
       }
