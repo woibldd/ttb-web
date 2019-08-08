@@ -1953,10 +1953,10 @@ export default {
         this.$eh.$emit("protrade:order:refresh", "doSubmit");
         // utils.success(this.$t("contract_order_success"));
         let side =''
-        res.data.side === 2 ? side = '买入' :side = '卖出'
+        res.data.side === 2 ? side = this.$t('order_side_buy') :side = this.$t('order_side_sell')
         if(this.userSetting.submission){
           let toastText = {
-            title: '委托已提交',
+            title: this.$t('message_setting_content_02'),// '委托已提交',
             body: `在${res.data.price}价格${side}${res.data.amount}张BTC永续合约。`,
             color: 'yellow'
           }
@@ -2010,7 +2010,7 @@ export default {
           }
           //当触发价格低于盘口价格时，可以卖出止损
           else if (tprice < lprice) {
-            [this.buyEnabled, this.sellEnabled] = [false, true];
+            [this.buyEnabled, this.sellEnabled] = [false, true]; 
           }
         }
         //限价止盈  市价止盈
