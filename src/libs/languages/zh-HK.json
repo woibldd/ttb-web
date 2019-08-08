@@ -1746,7 +1746,7 @@
   "otc_currency": "幣種",
   "otc_trans_idjg": "單價",
   "otc_trans_idsl": "數量",
-  "otc_price": "單價%{legal_currency}）",
+  "otc_price": "單價(%{legal_currency}）",
   "otc_total": "總金額(%{legal_currency})",
   "otc_amount": "數量(%{currency})",
   "otc_transaction_info": "訂單信息",
