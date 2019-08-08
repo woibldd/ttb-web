@@ -219,7 +219,7 @@ export default {
 
 
 <style lang='scss'> 
-.el-date-range-picker {
+.el-picker-panel.el-date-range-picker {
   width: 460px;
   .el-picker-panel__body {
     min-width: 450px;
