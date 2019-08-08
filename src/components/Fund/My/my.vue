@@ -497,6 +497,7 @@ export default {
       service.nodesBuy({uid: state.userInfo.id}).then(res=> {
         if (res.code === 0) {
           utils.success('认购成功。')
+          this.getAccountBalanceList() //重新获取数据
         } else {
           if (res.message) {
             utils.alert(res.message)

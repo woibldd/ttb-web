@@ -426,7 +426,8 @@ export default {
       return res.round(num, this.C.ROUND_DOWN).toString()
     },
     getStateLabel (row) { 
-      let s = this.hasComplated(row)
+      // let s = this.hasComplated(row)
+      let s = row.state
       if (this.type === 'withdraw') {
          switch (s) {
            case -1:
@@ -449,14 +450,16 @@ export default {
       }
       else {
         switch (s) {
+          case -1: 
+            return 'deposit_state_error'
           case 0:
             return 'pending'
           case 1:
             return 'done'
-          case 2:
-            return 'broadcasting'
-          case -2:
-            return 'canceled'
+          // case 2:
+          //   return 'broadcasting'
+          // case -2:
+          //   return 'canceled'
           default:
             return 'pending'
         }
