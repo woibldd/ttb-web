@@ -1,13 +1,8 @@
 
 <template>
   <div class="profile-container">
-    <div class="title-box">
-
-      {{ $t('collection') }}
-      <!-- <span class="chose_txt"> {{ $t('collection_cs') }}</span>
-      <em class="cs">
-        {{ $t('collection_all') }}
-      </em> -->
+    <div class="title-box"> 
+      {{ $t('collection') }} 
       <div
         class="add_collection"
         @click="handle('add')">
@@ -47,7 +42,7 @@
                 </dd>
               </dl>
             </template>
-            <template v-else>
+            <template v-else-if="item.payment_type===2">
               <dl>
                 <dd class="cs">{{ item.currency }}</dd>
                 <dd>{{ item.name }}</dd>
@@ -66,11 +61,11 @@
                 </dd>
               </dl>
             </template>
-            <!-- <template v-else>
+            <template  v-else-if="item.payment_type===3">
               <dl>
                 <dd class="cs">{{ item.currency }}</dd>
                 <dd>{{ item.name }}</dd>
-                <dd>{{ item.weChat_account }}</dd>
+                <dd>{{ item.we_chat_account }}</dd>
                 <dd v-if="item.collection_img">
                   <button
                     type="text"
@@ -84,7 +79,7 @@
                   <i class="el-icon-picture"/>
                 </dd>
               </dl>
-            </template> -->
+            </template>
           </div>
           <div class="btn">
             <el-switch
@@ -455,11 +450,11 @@ export default {
     },
     onCopy: function (e) {
       console.log(e)
-      alert(this.$t('otc_otutcol_9'))
+      utils.success(this.$t('otc_otutcol_9'))
     },
     onError: function (e) {
       console.log(e)
-     alert(this.$t('otc_otutcol_10'))
+      utils.alert(this.$t('otc_otutcol_10'))
     },
     handleCommand (command) {
       this.currency = command
