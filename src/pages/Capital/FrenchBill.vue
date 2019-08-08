@@ -216,3 +216,13 @@ export default {
 <style lang="scss" rel="stylesheet/scss" scoped>
   @import './../StepTable/assets/scss/trade.scss';
 </style>
+
+
+<style lang='scss'> 
+.el-picker-panel.el-date-range-picker {
+  width: 460px;
+  .el-picker-panel__body {
+    min-width: 450px;
+  }
+}
+</style>

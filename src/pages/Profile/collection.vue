@@ -1,13 +1,8 @@
 
 <template>
   <div class="profile-container">
-    <div class="title-box">
-
-      {{ $t('collection') }}
-      <!-- <span class="chose_txt"> {{ $t('collection_cs') }}</span>
-      <em class="cs">
-        {{ $t('collection_all') }}
-      </em> -->
+    <div class="title-box"> 
+      {{ $t('collection') }} 
       <div
         class="add_collection"
         @click="handle('add')">
@@ -47,44 +42,30 @@
                 </dd>
               </dl>
             </template>
-            <template v-else>
+            <template v-else-if="item.payment_type===2">
               <dl>
                 <dd class="cs">{{ item.currency }}</dd>
                 <dd>{{ item.name }}</dd>
                 <dd>{{ item.alipay_account }}</dd>
-                <dd v-if="item.collection_img">
-                  <button
-                    type="text"
-                    v-clipboard:copy="item.alipay_account"
-                    v-clipboard:success="onCopy"
-                    v-clipboard:error="onError">
-                    <icon name="fund-history-copy"/>
-                  </button>
+                <dd v-if="item.collection_img"> 
                   <i
                     class="el-icon-picture"
                     @click="handleCol(item, 'img')"/>
                 </dd>
               </dl>
             </template>
-            <!-- <template v-else>
+            <template  v-else-if="item.payment_type===3">
               <dl>
                 <dd class="cs">{{ item.currency }}</dd>
                 <dd>{{ item.name }}</dd>
-                <dd>{{ item.weChat_account }}</dd>
-                <dd v-if="item.collection_img">
-                  <button
-                    type="text"
-                    v-clipboard:copy="item.weChat_account"
-                    v-clipboard:success="onCopy"
-                    v-clipboard:error="onError">
-                    <icon
-                      name="fund-history-copy"
-                      @click="handleCol(item, 'img')"/>
-                  </button>
-                  <i class="el-icon-picture"/>
+                <dd>{{ item.we_chat_account }}</dd>
+                <dd v-if="item.collection_img"> 
+                  <i
+                    class="el-icon-picture"
+                    @click="handleCol(item, 'img')"/>
                 </dd>
               </dl>
-            </template> -->
+            </template>
           </div>
           <div class="btn">
             <el-switch
@@ -435,7 +416,6 @@ export default {
           }
         })
       } else {
-        item.state = !item.state
         service.orderUnbind(params).then(res => {
           if (res.code === 0) {
             this.$message({
@@ -444,6 +424,7 @@ export default {
             })
             this.init()
           } else {
+            item.state = !item.state
             this.$message({
               type: 'warning',
               message: `${res.message}`
@@ -455,11 +436,11 @@ export default {
     },
     onCopy: function (e) {
       console.log(e)
-      alert(this.$t('otc_otutcol_9'))
+      utils.success(this.$t('otc_otutcol_9'))
     },
     onError: function (e) {
       console.log(e)
-     alert(this.$t('otc_otutcol_10'))
+      utils.alert(this.$t('otc_otutcol_10'))
     },
     handleCommand (command) {
       this.currency = command
