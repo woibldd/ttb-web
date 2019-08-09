@@ -1151,7 +1151,7 @@
     "contract_limit_price": "한도가",
     "contract_price_tips": "당신은 구매 또는 판매의 가격을 원 합니다",
     "contract_limit_price_tips": "가격 제한 위탁은 지정 한 (또는 더 좋은) 가격에의 한 매입 또는 판매에 사용 한다.이것은 가장 상용하는 위탁 유형이다。",
-    "contract_buy_on_price_piece": "%{price}가격에서%{num}장%{symbol}。",
+    "contract_buy_on_price_piece": "%{price}가격에서%{amount}장%{symbol}。",
     "contract_cost_10_times": "성본@{lever}x",
     "contract_pos_after_deal": "거래 가 성사 된 후 창고 포지션의 크기",
     "contract_expect_equal_price": "예상물가",
@@ -2086,5 +2086,12 @@
 "tj_cg": "提交成功",
 "zd_xe": "购买量低于最低100限额",
 "gm_sl": "购买量大于最大50000限额",
-"deposit_state_error": "错误"
+
+"deposit_state_error": "错误",
+"order_apply_failed": "委托提交失败",
+"order_apply_message_a": "可用余额不足，无法提交委托。",
+"order_apply_message_b": "当前下单价格与盘口价格差异过大，无法提交委托。",
+"order_apply_message_c":"在%{price}价格%{side}%{amount}张%{currency}永续合约。", 
+"contract_buy_on_price_piece1":"在市价%{amount}张%{symbol}。",
+"invite_kyc_lv": "KYC认证"
 }

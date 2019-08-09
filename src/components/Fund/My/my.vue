@@ -79,40 +79,40 @@
           <template slot-scope="scope">
             <span v-if="hd.key === 'currency'">
               <icon :name="scope.row.currency"/>
-              <i
+              <!-- <i
                 v-if="scope.row[hd.key] === 'ITD'"
                 class="airdrop"
                 v-tooltip.top-start="{html: true, content: $t('idt_tips'), classes: 'assets'}"
               >
                 {{ scope.row[hd.key] }}
                 <icon class="question" name="question-n"/>
-              </i>
+              </i> -->
 
-              <i
+              <!-- <i
                 v-else-if="scope.row[hd.key] === 'DFD'"
                 class="airdrop"
                 v-tooltip.top-start="{html: true, content: $t('dfd_tips'), classes: 'assets'}"
               >
                 {{ scope.row[hd.key] }}
                 <icon class="question" name="question-n"/>
-              </i>
-              <i
+              </i> -->
+              <!-- <i
                 v-else-if="scope.row[hd.key] === 'NEWOS'"
                 class="airdrop"
                 v-tooltip.top-start="{html: true, content: $t('newos_tips'), classes: 'assets'}"
               >
                 {{ scope.row[hd.key] }}
                 <icon class="question" name="question-n"/>
-              </i>
-              <i
+              </i> -->
+              <!-- <i
                 v-else-if="scope.row[hd.key] === 'BNL'"
                 class="airdrop"
                 v-tooltip.top-start="{html: true, content: $t('bnl_tips'), classes: 'assets'}"
               >
                 {{ scope.row[hd.key] }}
                 <icon class="question" name="question-n"/>
-              </i>
-              <i v-else>{{ scope.row[hd.key] }}</i>
+              </i> -->
+              <i>{{ scope.row[hd.key] }}</i>
             </span>
             <span v-else-if="hd.key==='estValue'">{{ scope.row[hd.key] || 0 | fixed(unit.scale) }}</span>
             <span v-else>{{ scope.row[hd.key] || 0 | fixed(8) }}</span>

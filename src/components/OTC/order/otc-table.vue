@@ -192,8 +192,7 @@ export default {
               let pay_ment_data = [];
 
               if (item.payment_type.includes(",")) {
-                pay_ment_data = item.payment_type.split(",");
-
+                pay_ment_data = item.payment_type.split(","); 
                 // target 更新数据源， 对象，数组 [] {}
                 // key 你要生成的键值
                 // value 你要生成的值
@@ -241,21 +240,21 @@ export default {
         console.log(error);
       }
     },
-    refreshCurrency(vm) {
-       service.otcSymbolList().then(res => {
-        if (!res.code) {
-          vm.symbolList = res.data;
-          for (const symbol of vm.symbolList) {
-            if (symbol.currency == vm.currency) {
-              if (!state.otc.symbolInfo) {
-                state.otc.symbolInfo = symbol
-              }
-              Vue.set(state.otc.symbolInfo, 'cny_rate', symbol.cny_rate )
-            }
-          }
-        }
-      });
-    }
+    // refreshCurrency(vm) {
+    //    service.otcSymbolList().then(res => {
+    //     if (!res.code) {
+    //       vm.symbolList = res.data;
+    //       for (const symbol of vm.symbolList) {
+    //         if (symbol.currency == vm.currency) {
+    //           if (!state.otc.symbolInfo) {
+    //             state.otc.symbolInfo = symbol
+    //           }
+    //           Vue.set(state.otc.symbolInfo, 'cny_rate', symbol.cny_rate )
+    //         }
+    //       }
+    //     }
+    //   });
+    // }
   },
   async created() {
     this.switchCurrency(this.currency, this.side);
@@ -268,10 +267,10 @@ export default {
     })
 
     let $this = this
-    $this.refreshCurrency($this)
-    this.inter1 = setInterval(() => {
-      $this.refreshCurrency($this)
-    }, 5000);
+    // $this.refreshCurrency($this)
+    // this.inter1 = setInterval(() => {
+    //   $this.refreshCurrency($this)
+    // }, 5000);
 
     this.inter2 = setInterval(() => {
       let orderSide = this.side == 1 ? 2 : 1;
@@ -312,14 +311,14 @@ export default {
     clearInterval(this.inter2);
   },
   watch: {
-    currency() {
-      for (const symbol of this.symbolList) {
-        if (symbol.currency == this.currency) {
-          this.state.otc.symbolInfo = symbol;
-          return;
-        }
-      }
-    },
+    // currency() {
+    //   for (const symbol of this.symbolList) {
+    //     if (symbol.currency == this.currency) {
+    //       this.state.otc.symbolInfo = symbol;
+    //       return;
+    //     }
+    //   }
+    // },
     legal_currency() { 
       this.switchCurrency(this.currency, this.side);
     }

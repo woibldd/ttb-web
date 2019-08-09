@@ -1261,7 +1261,7 @@
 "contract_limit_price": "Limits",
 "contract_price_tips": "Specific price levels you wish to trade in",
 "contract_limit_price_tips": "Limited trading based on specified price available in the market. This is the most common strategy of delegated trading。",
-"contract_buy_on_price_piece": "contract buy on (%{num})price(%{symbol}) piece。",
+
 "contract_cost_10_times": "Cost@{lever}x",
 "contract_pos_after_deal": "Post transacted position",
 "contract_expect_equal_price": "Future price of liquidation",
@@ -2250,5 +2250,13 @@
 "tj_cg": "successfully",
 "zd_xe": "purchase amount is below the minimum 100 limit",
 "gm_sl": "purchase amount excess maximum 50,000 limit",
-"deposit_state_error": "错误"
+
+"deposit_state_error": "错误",
+"contract_buy_on_price_piece": "%{symbol} contract on (%{price}) price (%{amount}) piece。",
+"order_apply_failed": "委托提交失败",
+"order_apply_message_a": "可用余额不足，无法提交委托。",
+"order_apply_message_b": "当前下单价格与盘口价格差异过大，无法提交委托。",
+"order_apply_message_c":"在%{price}价格%{side}%{amount}张%{currency}永续合约。", 
+"contract_buy_on_price_piece1":"在市价%{amount}张%{symbol}。",
+"invite_kyc_lv": "KYC认证"
 }

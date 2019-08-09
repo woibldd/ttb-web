@@ -40,7 +40,7 @@
           </dl>
         </div>
         <ul class="left-menu-list">
-          <li class>
+          <!-- <li class>
             <router-link
               to="/OTC/Trade"
               class="menu-name"
@@ -61,6 +61,26 @@
               <dl @click="setCurrency('BTC')">
                 <dt>{{ $t('BTC') }}</dt>
                 <dd><span class="text-idx">{{ coin.symbol + user.btcCount }}</span> </dd>
+              </dl>
+            </router-link>
+          </li> -->
+          <li 
+            v-for="(item, idx) in currencyList"
+            :key ="idx"
+          >
+            <router-link
+              to="/OTC/Trade"
+              class="menu-name"
+              :class="{'active': currency === item.currency && from === 'trade'}"
+            > 
+              <dl @click="setCurrency(item)">
+                <dt>{{ $t(item.currency) }}</dt>
+                <dd>
+                  <span class="text-idx">
+                    {{ getFiatMoneySymbolByFiat(legal_currency)}}
+                    {{ getRatebyCurrency(item)}}
+                  </span> 
+                </dd>
               </dl>
             </router-link>
           </li>
@@ -123,7 +143,8 @@
 </template>
 
 <script>
-import { state } from "@/modules/store";
+import { state } from "@/modules/store"; 
+import utils from '@/modules/utils'
 import service from "@/modules/service";
 import Vue from "vue";
 export default {
@@ -148,14 +169,16 @@ export default {
           symbol: "S$"
         }
       },
+      currencyList: [],
       count: 0,
       down: false
     };
   },
   methods: {
-    setCurrency(coin) {
-      this.currency = coin;
-      this.$eh.$emit("otc:currency:change", coin, this.side);
+    setCurrency(item) {
+      this.currency = item.currency;
+      this.state.otc.symbolInfo = item
+      this.$eh.$emit("otc:currency:change", item.currency, this.side);
     },
     init() {
       service.otcSymbolList({}).then(res => {
@@ -208,26 +231,52 @@ export default {
     },
     changeCoin(command) {
       this.legal_currency = command;
-    }
+    },
+    getCurrencyList() { 
+      service.otcSymbolList({}).then((res) => {
+        if (res.code === 0) {
+          // this.currencyList = res.data
+          this.$set(this, "currencyList", res.data )
+          console.log({currencyList: this.currencyList})
+        }
+      })
+    }, 
+    getRatebyCurrency(item) {
+      let currency = this.legal_currency.toLowerCase()
+      return item[currency + '_rate']
+    },
+    getFiatMoneySymbolByFiat (fiat) {
+      const map = {
+        'CNY': '¥',
+        'USD': '$',
+        'KRW': '₩',
+        'HKD': 'HK$',
+        'JPY': 'JP¥',
+        'SGD': 'S$',
+      }
+      return map[fiat] || fiat
+    },
   },
   created() {
     this.init();
+    this.getCurrencyList();
     this.timer = setInterval(() => {
-      service.otcSymbolList({}).then(res => {
-        if (res.code === 0) {
-          //let rate = this.legal_currency.toLowerCase() + '_rate'
-          Vue.set(
-            this.user,
-            "btcCount",
-            this.$big(res.data[1][this.coin.rate]).round(2, 0)
-          );
-          Vue.set(
-            this.user,
-            "usdtCount",
-            this.$big(res.data[0][this.coin.rate]).round(2, 0)
-          );
-        }
-      });
+      this.getCurrencyList();
+      // service.otcSymbolList({}).then(res => {
+      //   if (res.code === 0) {
+      //     //let rate = this.legal_currency.toLowerCase() + '_rate'
+      //     Vue.set(
+      //       this.user,
+      //       "btcCount",
+      //       this.$big(res.data[1][this.coin.rate]).round(2, 0)
+      //     );
+      //     Vue.set(
+      //       this.user,
+      //       "usdtCount",
+      //       this.$big(res.data[0][this.coin.rate]).round(2, 0)
+      //     );
+      //   }
+      // });
       service
         .getUnDonefills({
           page: 1,

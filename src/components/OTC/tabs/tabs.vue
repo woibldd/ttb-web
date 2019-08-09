@@ -209,12 +209,12 @@ export default {
         }
       })
     },
-    setCurrency(coin, side) {
-      this.active = '0'
-      this.currency = coin
-      this.state.otc.showSide = side
-      this.$eh.$emit('otc:currency:change', coin, side)
-    },
+    // setCurrency(coin, side) {
+    //   this.active = '0'
+    //   this.currency = coin
+    //   this.state.otc.showSide = side
+    //   this.$eh.$emit('otc:currency:change', coin, side)
+    // },
     changeSide(side) {
       this.state.otc.showSide = side
       this.$eh.$emit('otc:currency:change', this.currency, side)

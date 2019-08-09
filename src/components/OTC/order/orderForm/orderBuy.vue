@@ -358,8 +358,7 @@ export default {
     return {
       state,
       side: 1,
-      limitedTime: '15',
-      sideTitle: '发布购买委托单 BTC',
+      limitedTime: '15', 
       message: this.$t('otc_tips_success'),
       message_success: '',
       message_failed: '',
@@ -685,14 +684,14 @@ export default {
       //   this.view = {}
       // }
     },
-    currency () {
-      for (const symbol of this.state.otc.symbolList) {
-        if (symbol.currency == this.currency) {
-          this.state.otc.symbolInfo = symbol
-          return
-        }
-      }
-    },
+    // currency () {
+    //   for (const symbol of this.state.otc.symbolList) {
+    //     if (symbol.currency == this.currency) {
+    //       this.state.otc.symbolInfo = symbol
+    //       return
+    //     }
+    //   }
+    // },
     side () { 
       this.order.remark = ''
       this.inputPrice = ''

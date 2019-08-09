@@ -32,6 +32,11 @@ export default {
       }
     }, 
     symbolInfo () {
+      // for (const symbol of this.symbolList) {
+      //   if (symbol.currency == this.currency) {
+      //     return symbol; 
+      //   }
+      // } 
       return this.state.otc.symbolInfo
     },
     indexPrice () {
