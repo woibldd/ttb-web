@@ -130,8 +130,7 @@ export default {
   },
   watch: {
     '$route.params.pair': {
-      async handler (pair = '', last) {
-        // debugger
+      async handler (pair = '', last) { 
         this.state.pro.lock = true
         const match = pair.match(/^([A-Za-z]*)_([A-Za-z]*)$/)
         if (match) {
@@ -145,7 +144,7 @@ export default {
             this.state.pro.pairInfo = res.data
             this.state.close_time = res.data.close_time
             this.state.price_open = res.data.price_open || 0.017
-            this.state.showCountDown = !!this.state.close_time && this.state.close_time != ""
+            this.state.showCountDown = false // !!this.state.close_time && this.state.close_time != ""
           } else {
             this.state.pro.pairInfo = null
           }

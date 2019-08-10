@@ -1,5 +1,5 @@
 <template>
-  <div class="pairs-table">
+  <div class="pairs-table"> 
       <div class="pairs-table__head">
         <div class="head-item percent9">
           {{ $t('currency') }}
@@ -61,7 +61,7 @@
           @click="toExchange(pair.name)">
           <icon name="handle"/>
         </div>
-      </div>
+      </div> 
     </div>
 </template>
 

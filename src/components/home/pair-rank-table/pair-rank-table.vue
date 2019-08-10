@@ -1,5 +1,5 @@
 <template>
-  <div class="coin-list-section">
+  <div class="coin-list-section"> 
     <div
       @click="toExchange(pair.name)"
       class="coin-info-box pointer"
@@ -24,7 +24,7 @@
           :value="pair.tick.current"/></p>
         <p class="f13 c-b0 "><span class="inline-block mr-14">24H</span><span>{{ pretty(pair.tick.volume_24h) }}</span></p>
       </div>
-    </div>
+    </div> 
 </div></template>
 <script>
 import {state} from '@/modules/store'

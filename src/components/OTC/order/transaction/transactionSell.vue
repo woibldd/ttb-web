@@ -54,12 +54,14 @@
                 class="number-input"
                 v-model="amount"
                 @input="amountInput"
-                :scale="8"
+                @blur="changeTarget('')"
+                @focus="changeTarget('amount')"
+                :scale="amount_scale || 6"
                 :placeholder="$t('amount')"
               />
               <span
                 class="btn-all"
-                @click="inputAll">{{$t('input_all')}}</span>
+                @click="inputAll('amount')">{{$t('input_all')}}</span>
             </div>
           </li>
           <li>
@@ -71,11 +73,14 @@
               <number-input
                 class="number-input"
                 v-model="total"
-                :scale="8"
+                @input="totalInput"
+                @blur="changeTarget('')"
+                @focus="changeTarget('total')"
+                :scale="price_scale || 2"
                 :placeholder="$t('otc_amount_sale')"
               />
               <span class="btn-all"
-                    @click="inputAll"
+                    @click="inputAll('total')"
               >{{$t('input_all')}}</span>
             </div>
           </li>
@@ -116,6 +121,8 @@ import countDown from "@/components/CountDown"
 import processValue from '@/mixins/process-otc-value'
 import { state } from "@/modules/store"
 import utils from "@/modules/utils.js"
+import otcComputed from '@/components/OTC/mixins/index.js'
+
 export default {
   data() {
     return {
@@ -187,12 +194,12 @@ export default {
             width: "",
             key: "name"
           },
-          {
-            title: "register_time", //注册时间
-            text: "otc_register_time",
-            width: "",
-            key: "register_time"
-          },
+          // {
+          //   title: "register_time", //注册时间
+          //   text: "otc_register_time",
+          //   width: "",
+          //   key: "register_time"
+          // },
           {
             title: "kyc_level", //认证等级
             text: "otc_kyc_level",
@@ -256,28 +263,21 @@ export default {
           }]
       },
       tranTable: {},
+      inputTarget: "",
     };
   },
   components: {
     vList,
     countDown
   },
-  computed: {
-    currency: {
-      get() {
-        return state.otc.currency
-      }
-    },
+  computed: { 
     sideTitle() {
       let title = "otc_sell_currency"
       if (this.option === 1) {
         title =  `otc_confirm_issued`
       }
       return title
-    },
-    isLogin () {
-      return state.userInfo !== null
-    },
+    }, 
   },
   props: {
     view: {
@@ -322,29 +322,53 @@ export default {
           this.step = 1;
           this.tranTable = res.data
           this.$eh.$emit('otc:assets:balance')
-          // this.step = 1;
         }
         else if(res.message){
           utils.alert(res.message)
         }
       });
-
     },
-    amountInput() {
-      if(!this.view.price || this.view.price == ''){
-        this.total = 0
-      }
-      else {
+    amountInput () {
+      console.log('amount')
+      if (!this.amount || this.amount == '') {
+        this.total = ''
+      } else {
         if (this.$big(this.amount).gt(this.$big(this.view.amount).minus(this.view.freezed))) {
           this.inputAll()
         } else {
-          this.total = this.$big(this.view.price).mul(this.amount).round(2, 0)
+          let total =  this.$big(this.view.price).mul(this.amount).round(2, 0)
+          if (this.inputTarget === 'amount') {
+            if (this.total != total) {
+              this.total = total
+            }
+          }
         }
       }
     },
-    inputAll() {
-      this.amount = this.$big(this.view.amount).minus(this.view.freezed)
-      this.total = this.$big(this.view.price).mul(this.amount)
+    totalInput() { 
+      console.log('total')
+      if (!this.total || this.total == '') {
+        this.amount = ''
+      } else {
+        let amount = this.$big(this.total).div(this.view.price).round(this.symbolInfo.amount_scale, 0)
+        if (this.inputTarget === 'total') {
+          if (this.amount != amount) {
+            this.amount = amount
+          }
+        }
+      }
+    },
+    inputAll(arg) {  
+      if (arg === 'total') {
+        this.inputTarget = 'total'
+        this.total = this.view.total
+        //this.amount = this.$big(this.total).div(this.view.price).round(2, 0)
+      }
+      else {
+        this.inputTarget = 'amount'
+        this.amount = this.$big(this.view.amount).minus(this.view.freezed)
+        //this.total = this.$big(this.amount).times(this.view.price)
+      }
     },
     // 撤销订单
     revokeOrder() {
@@ -355,6 +379,9 @@ export default {
       service.otcOrderRemove(params)
       this.step = 0
       this.$emit('closeSide')
+    },
+    changeTarget (target) {
+      this.inputTarget = target
     },
 
   },
@@ -385,9 +412,7 @@ export default {
       }
     }
   },
-  mixins: [
-    processValue
-  ],
+  mixins: [ processValue,otcComputed ]
 };
 </script>
 
@@ -410,4 +435,23 @@ export default {
       }
     }
   }
+
+  // 修改字体大小
+  .el-step__title.is-process,.el-step__head.is-process{
+    font-size: 14px;
+    color: #999999;
+    border-color: #999999;
+  }
+  .el-step__title.is-process,.el-step__head.is-wait{
+    font-size: 14px;
+    color: #999999;
+    border-color: #999999;
+  }
+  .el-step__title.is-success,.el-step__head.is-success{
+    font-size: 14px;
+    color: #09C989;
+    border-color: #09C989;
+  }
+   
 </style>
+

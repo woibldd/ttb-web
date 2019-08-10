@@ -1,6 +1,6 @@
 <template>
   <tr
-    :style="{lineHeight: height}"
+    :style="{lineHeight: height, height: height}"
     style="overflow:hidden"
     class="price-stack-row">
     <!-- <td

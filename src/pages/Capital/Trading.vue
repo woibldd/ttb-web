@@ -20,45 +20,32 @@
 <template>
   <div class="fund-container my-fund-container">
     <div class="title-box">
-      <div>{{ $t('trading') }}</div>
-      <div class="title__right">
-        <!-- <router-link
-          :to="{name: 'LockWarehouse'}"
-          class="c-mine mr-30 dib pointer"><icon
-          name="anchor"/>{{ $t('mining') }}</router-link> -->
-        <!--<span-->
-          <!--@click="showLockModal = true"-->
-          <!--class="c-mine pointer mr-30 dib">-->
-          <!--{{ $t('locked') }}-->
-        <!--</span>-->
-        <!--<span-->
-          <!--@click="showUnlockModal = true"-->
-          <!--class="c-mine pointer mr-30 dib">-->
-          <!--{{ $t('unlock') }}-->
-        <!--</span>-->
-        <!--<router-link-->
-          <!--v-if="!showHistory"-->
-          <!--class="fund-history"-->
-          <!--:to="{name:'assetsHistory', params: {from: 'deposit'}}"> {{ $t('capital_record') }}</router-link>-->
+      <div>
+        {{ $t('trading') }}
+        <span class="ml-30">
+          <el-select  
+            v-model="unit"
+            @change="currencyChange"
+            value-key="name">
+            <el-option
+              v-for="(item, idx) in currencyList"
+              :key="idx"
+              :label="item.name"
+              :value="item"/>
+          </el-select> 
+        </span> 
+      </div>
+      <div class="title__right"> 
       </div>
     </div>
     <div class="gz-wrapper clearfix">
-      <span>币币资产估值</span>
-      <h1>¥ {{total | fixed(4)}}</h1>
+      <span>{{$t('otc_otutcol_14')}}</span>
+      <h1>
+        <icon :name="unit.name+'-unit'" /> {{total | fixed(unit.scale)}}</h1>
     </div>
-    <div
-      v-if="!showHistory"
-      class="my-fund-content">
-      <!--<div class="fund-total">-->
-        <!--<div class="total__label">{{ $t('my_balance_equal') }}</div>-->
-        <!--<div class="total__coin">{{ total || 0 | fixed(valueScale)  }} {{ unit }} </div>-->
-        <!--&lt;!&ndash;  百万usdt活动需要,先写死 &ndash;&gt;-->
-        <!--<div-->
-          <!--class="fund-with-usdt"-->
-          <!--v-if="plusMillionUsdt">-->
-          <!--+{{ millionUsdtAmount }} USDT≈ {{ $big(total).plus($big(plusUsdtEst)).toString() }}  {{ unit }}-->
-        <!--</div>-->
-      <!--</div>-->
+    <div 
+      class="my-fund-content"> 
+
       <el-table :empty-text=" $t('no_data') "
                 :data="tableData"
                 class="fund-coin-pool">
@@ -75,13 +62,31 @@
                  v-tooltip.top-start='{html: true, content: $t("idt_tips"), classes: "assets"}'  >
                 {{scope.row[hd.key]}} <icon class='question' name='question-x' />
               </i>
-              <i v-else-if="scope.row[hd.key] === 'BNL'"
+              
+               <i
+                v-else-if="scope.row[hd.key] === 'DFD'"
+                class="airdrop"
+                v-tooltip.top-start="{html: true, content: $t('dfd_tips'), classes: 'assets'}"
+              >
+                {{scope.row[hd.key]}}
+                <icon class="question" name="question-x"/>
+              </i> 
+             <i
+                v-else-if="scope.row[hd.key] === 'NEWOS'"
+                class="airdrop"
+                v-tooltip.top-start="{html: true, content: $t('newos_tips'), classes: 'assets'}"
+              >
+                {{scope.row[hd.key]}}
+                <icon class="question" name="question-x"/>
+              </i>
+               <i v-else-if="scope.row[hd.key] === 'BNL'"
                  class="airdrop"
                  v-tooltip.top-start='{html: true, content: $t("bnl_tips"), classes: "assets"}'  >
                 {{scope.row[hd.key]}} <icon class='question' name='question-x' />
               </i>
               <i v-else>{{scope.row[hd.key]}} </i>
-            </span>
+            </span> 
+            <span v-else-if="hd.key === 'estValue'">{{ scope.row[hd.key] || 0 | fixed(unit.scale) }}</span>
             <!--  针对locking的判断,在百万usdt活动之后要删掉 -->
             <!-- <div v-else-if="hd.key === 'locking'">
             {{ scope.row.currency.toUpperCase() === 'USDT' && plusMillionUsdt? $big(scope.row[hd.key]).plus(millionUsdtAmount).toString() : scope.row[hd.key]  | fixed(8) }}
@@ -96,10 +101,10 @@
           min-width="230px"
           :label="operate.title">
           <template slot-scope="scope">
-            <span
+            <!-- <span
               v-if="scope.row.currency === 'BTC'"
               @click="showModal = true"
-              class="my-fund-operate">{{ $t('account_exchange') }}</span>
+              class="my-fund-operate">{{ $t('account_exchange') }}</span> -->
             <!--<router-link-->
               <!--v-if="scope.row.depositable"-->
               <!--:to="'/fund/deposit/' + scope.row.currency"-->
@@ -108,6 +113,13 @@
               <!--v-if="scope.row.withdrawable"-->
               <!--:to="'/fund/withdraw/'+scope.row.currency"-->
               <!--class="my-fund-operate">{{ $t('withdraw') }}</router-link>-->
+              
+            <span 
+              class="my-fund-operate"> 
+               <a href="javascript:;" class="menu-name" @click="routerTransFer(scope.row)">
+                  {{ $t('account_exchange') }}
+              </a>
+            </span>
             <router-link
               v-if="scope.row.pairs"
               :to="{
@@ -120,6 +132,7 @@
           </template>
         </el-table-column>
       </el-table>
+
     </div>
     <v-modal :open.sync="showLockModal">
       <div class="lock-modal">
@@ -254,7 +267,26 @@
           available: 0,
           unlocking: 0,
           locked: 0
-        }
+        },
+        currencyList: [
+          {
+            name: 'CNY',
+            symbol: '￥',
+            scale: 2
+          },
+          {
+            name: 'USD',
+            symbol: '$',
+            scale: 4
+          },
+          // {
+          //   name: 'BTC',
+          //   symbol: 'B',
+          //   scale: 8
+          // },
+        ],
+        unit: {},
+        rates: {},
       }
     },
     components: {
@@ -277,13 +309,13 @@
       total () {
         let sum = this.$big(0)
         this.tableData.forEach(item => {
-          sum = sum.plus(this.getEstValue(item))
+          sum = sum.plus(item.estValue)
         })
         return sum.toString()
       },
-      unit () {
-        return state.locale === 'zh-CN' ? 'CNY' : 'USD'
-      },
+      // unit () {
+      //   return state.locale === 'zh-CN' ? 'CNY' : 'USD'
+      // },
       valueScale() {
         return state.locale === 'zh-CN' ? 2 : 4
       },
@@ -291,9 +323,9 @@
         return state.locale && [
           {key: 'currency', title: this.$t('fees_name')},
           {key: 'available', title: this.$t('avlb')},
-          // {key: 'locking', title: this.$t('asset_th_unavlb')},
-          {key: 'amount', title: this.$t('total_count')},
-          {key: 'estValue', title: this.$t('homechart_fiat') + '(' + (state.locale === 'zh-CN' ? 'CNY' : 'USD') + ')'}
+          {key: 'locking', title: this.$t('asset_th_unavlb')},
+          // {key: 'amount', title: this.$t('total_count')},
+          {key: 'estValue', title: this.$t('homechart_fiat') + '(' + this.unit.name + ')'}
         ]
       },
       operate () {
@@ -332,7 +364,12 @@
         return (this.myPower.power || 0) - (this.myPower.amount || 0)
       }
     },
-    async created () {
+    async created () { 
+      this.unit = this.currencyList[0]
+      let res = await service.getAllRate() 
+      if (!res.code && !!res.data) {
+        this.rates = res.data;
+      }
       await this.getMine()
       this.getAccountBalanceList()
       this.getIxBalance()
@@ -341,11 +378,22 @@
       )
     },
     methods: {
+      routerTransFer(item) {
+        this.$router.push({
+          path:'/fund/transfer',
+          query: {
+            currency: item.currency
+          }
+        })
+      },
       reset (type) {
         this.blur(type)
         this.unlock_amount = 0
         this.lock_amount = 0
         this.getIxBalance()
+      },
+      currencyChange(e) { 
+        this.getAccountBalanceList()
       },
       hideModal () {
         this.showModal = false
@@ -456,7 +504,7 @@
           this.tableData = (res.data || []).map(item => {
             item.rates = item.rates || {}
             item.locking = this.$big(item.locking || 0).plus(this.$big(item.ordering || 0).plus(this.$big(item.withdrawing || 0))).toString()
-            item.amount = this.$big(item.locking).plus(this.$big(item.available)).round(8, this.C.ROUND_DOWN).toString()
+            item.camount = this.$big(item.locking).plus(this.$big(item.available)).round(8, this.C.ROUND_DOWN).toString()
             item.estValue = this.getEstValue(item)
             item.available = this.$big(item.available).round(8, this.C.ROUND_DOWN).toString()
             item.pairs = ExchangePairs[item.currency] || 'BTC_USDT'
@@ -465,12 +513,28 @@
         })
       },
       getEstValue (item) {
-        let res = this.$big(item.amount).times(this.$big(item.rates[this.unit] || 0))
-        let num = 8
-        // if (this.unit === 'USD') {
-        //   num = 8
-        // }
-        return res.round(num, this.C.ROUND_DOWN).toString()
+        let res = this.$big(0)
+        let unit = this.unit.name
+        let {currency,camount} = item 
+        if (unit === 'BTC'){
+          if(currency === 'BTC') {
+            res = this.$big(camount) 
+          }
+          else {
+            if (this.$big(camount).gt(0)) {
+              res = this.$big(camount).times(this.rates[currency]['USD'] || 0).div(this.rates['BTC']['USD'])
+            }
+          }
+        }
+        else if (item.rates) {
+          res = this.$big(camount).times(this.$big(item.rates[unit] || 0))
+        }
+        else {
+          if (this.rates[currency]) {
+            res = this.$big(camount).times(this.$big(this.rates[currency][unit] || 0))
+          }
+        } 
+        return res
       },
       async getMine () {
         let res = await service.getMillionInfoMine()
@@ -512,7 +576,7 @@
       bottom: 0;
       width: 100%;
       height: 6px;
-      background: rgba(107, 181, 120, 1);
+      background: #3E77E6;
       border-radius: 4px;
     }
 
@@ -521,12 +585,12 @@
       font-size: 18px;
       display: block;
       font-weight: 400;
-      color: rgba(107, 181, 120, 1);
+      color: #3E77E6;
     }
 
     h1 {
       font-size: 30px;
-      color: rgba(107, 181, 120, 1);
+      color: #3E77E6;
     }
   }
 </style>

@@ -7,7 +7,7 @@
       <div class="mt-29 mb-30">
         <p class="mb-15 c-primary f26">{{ symbol }}</p>
         <p class="flex-avg">
-          <span>{{ $t('contract_trade_index_base') }}</span>
+          <span>{{ $t('contract_trade_index_base',{currency: coin} ) }}</span>
           <span>{{ $t('contract_trade_index_value') }}</span>
         </p>
       </div>
@@ -17,21 +17,21 @@
       <div class="tips-section mb-21">
         <p
           class="mb-26"
-          v-html=" $t('contract_how_price_tip_a', {'symbol': symbol, coin: 'BTC'})"/>
+          v-html=" $t('contract_how_price_tip_a', {'symbol': symbol, coin: coin, 'value': value})"/>
         <p class="mb-26">{{ $t('contract_how_price_tip_b', {next_pay_time: nextPayTime}) }}</p>
         <p
           class="mb-26"
           v-html=" $t('contract_how_price_tip_c', {'symbol': symbol, id1: $t('contract_base_rate'),id2: $t('contract_cal_rate'),id3: $t('contract_over_price'),})"/>
-        <p class="mb-26">{{ $t('contract_how_price_tip_d', {feerate: feeRate, next_pay_time:nextPayTime}) }}</p>
+        <p class="mb-26">{{ $t('contract_how_price_tip_d', {feerate: ($big(feeRate).round(4)), next_pay_time:nextPayTime}) }}</p>
         <p>{{ $t('contract_how_price_tip_e') }}</p>
       </div>
       <!-- 查看btc永续指南 -->
       <a
         class="look-tutorial pointer"
         target="_blank"
-        :href="'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360027994431'">
+        :href="tutorialUrl">
         <div class="icon-wrapper mr-16">
-        <span class="icon icon-ques"/><span/></div><span>{{ $t('contract_look_tutorial') }}</span>
+        <span class="icon icon-ques"/><span/></div><span>{{ $t('contract_look_tutorial', {currency: coin}) }}</span>
       </a>
 
       <div class="index-chart-wrapper">
@@ -96,7 +96,7 @@
           <div class="label">{{ $t('contract_label_result') }}</div>
           <div class="note-back">
             <p class="flex">{{ $t('contract_label_result_a') }} <span>I = 0.0100%</span></p>
-            <p class="flex">{{ $t('contract_label_result_b') }} <span>F = -0.3750%</span></p>
+             <p class="flex">{{ $t('contract_label_result_b',{premium}) }} <span>F = {{feeRate | fixed(8)}}%</span></p>
           </div>
         </div>
       </div>
@@ -109,6 +109,7 @@ import ixPagination from '@/components/common/ix-pagination'
 import TradingView from '../contract-trading-view'
 import service from '@/modules/service'
 import utils from '@/modules/utils'
+import Big from "big.js";
 
 export default {
   components: {ixPagination, TradingView},
@@ -121,8 +122,10 @@ export default {
       chartType: 'index',
       symbolInfo: {
         fee_rate: 0,
-        next_fee_time: new Date().getTime()
-      }
+        next_fee_time: new Date().getTime(),
+        mark_price: 0,
+      },
+      selectPair: {}
     }
   },
   watch: {
@@ -132,6 +135,13 @@ export default {
         if (match) {
           this.pair = pair
           this.tempPair = this._formatPair('index')
+
+          let res = await service.getContractSymInfo({
+            symbol: this.pair
+          })
+          if (!res.code) {
+            Object.assign(this.symbolInfo, res.data)
+          }
         }
       },
       immediate: true
@@ -139,13 +149,45 @@ export default {
   },
   computed: {
     symbol () {
-      return this.$t('contract_' + this.pair)
+      return this.$t('FUTURE_&USD', {currency: this.pair.replace('FUTURE_','').replace('USD','')} )
       // switch (this.$route.params.pair) {
       //   case 'xx':
       //     return ''
       //   default:
       //     return this.$t('contract_btc_forever')
       // }
+    }, 
+    coin () {
+      // return this.$t('coin_' + this.pair)
+      return this.pair.replace('FUTURE_','').replace('USD','')
+    },
+    tutorialUrl () {
+      if (this.pair === 'FUTURE_BTCUSD') {
+        return 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360027994431'
+      }
+      else if (this.pair === 'FUTURE_BHDUSD') {
+        return 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360030485092-BHD'
+      }
+      else if (this.pair === 'FUTURE_ETHUSD') {
+        return 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360031397811'
+      }
+      else {
+        return ''
+      }
+    }, 
+    value() { 
+      if (this.pair === 'FUTURE_BTCUSD') {
+        return '1 USD'
+      }
+      else if (this.pair === 'FUTURE_BHDUSD') { 
+        return this.$big(this.symbolInfo.mark_price || 0).times(this.symbolInfo.multiplier || 0.00001)
+      }
+      else if (this.pair === 'FUTURE_ETHUSD') {
+        return this.$big(this.symbolInfo.mark_price || 0).times(this.symbolInfo.multiplier || 0.000001)
+      }
+      else {
+        return ''
+      }
     },
     nextPayTime () {
       const date = Number(this.symbolInfo.next_fee_time) // + 8 * 60 * 60 * 1000// 前端加8小时
@@ -153,9 +195,24 @@ export default {
     },
     feeRate () {
       return Math.abs(this.symbolInfo.fee_rate * 100)
-    }
+    }, 
+    premium() { 
+      return this.$big(this.symbolInfo.premium_price || 0).mul(100).toString()
+    } 
   },
   methods: {
+    async getPairs () {
+      await service.getContractSymList().then(res => {
+        if (res && res.data) {
+          let allPairs = res.data.items
+          allPairs.map(e => {
+            if (e.name === this.pair) {
+              this.selectPair = e
+            }
+          })  
+        }
+      })
+    },
     _formatPair (type = 'index') {
       return this.pair.replace('FUTURE', type.toUpperCase())
     },
@@ -173,6 +230,18 @@ export default {
           pair
         }
       })
+    },
+     async refresh() { 
+      try {
+        let res = await service.getContractSymInfo({
+          symbol: this.pair
+        })
+        if (!res.code) { 
+          this.$set(this, "symbolInfo" , res.data)
+        }
+      } 
+      catch (e) {
+      }
     }
   },
   async created () {
@@ -184,16 +253,10 @@ export default {
         }
       })
     }
-    try {
-      let res = await service.getContractSymInfo({
-        symbol: this.pair
-      })
-      if (!res.code) {
-        Object.assign(this.symbolInfo, res.data)
-      }
-    } catch (e) {
-
-    }
+    let $this = this
+    setInterval(() => {
+      $this.refresh()
+    }, 5000); 
   }
 }
 </script>
@@ -227,7 +290,7 @@ export default {
 }
 
 .look-tutorial{
-    background:rgba(34,206,208,1);
+    background:$primary;
     color: #fff;
     font-size: 16px;
     line-height: 16px;
@@ -248,7 +311,7 @@ export default {
 }
 
 .note-back {
-    background-color: #F4EEE2;
+    background-color: #F6FDFD;
     line-height: 16px;
     color: $primary;
     border: 1px solid #CCCCCC;
@@ -318,12 +381,12 @@ export default {
         button {
             width:90px;
             height:40px;
-            background:rgba(244,238,226,1);
+            background:rgba(220,248,236,1);
             color: $primary;
             border: 0;
 
             &.active {
-                background-color: #22ced0;
+                background-color: $primary;
                 color: #fff;
             }
 

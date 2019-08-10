@@ -1,13 +1,43 @@
 <template>
-  <div class="fund-container my-fund-container contract-container">
-
-    <div class="my-fund-content pt-40">
+  <div class="fund-container my-fund-container contract-container"> 
+     <div class="title-box"> 
+      <div>
+        {{ $t('contract_account') }} 
+         <span class="ml-30">
+          <el-select  
+            v-model="unit" 
+            value-key="name">
+            <el-option
+              v-for="(item, idx) in currencyList"
+              :key="idx"
+              :label="item.name"
+              :value="item"/>
+          </el-select> 
+        </span> 
+      </div>
+      <div>
+        <router-link
+          class="fund-history mr-22 " 
+          to="/fund/hyTrade/index"> {{ $t('account_balance') }}</router-link>
+        <router-link
+          class="fund-history mr-22"
+          to="/fund/my/contract/history"> {{ $t('transaction_record') }}</router-link>
+        <router-link
+          class="fund-history"
+          to="/fund/my/contract/assets-history"> {{ $t('capital_record') }}</router-link>
+      </div>
+    </div>
+    <div class="my-fund-content">
+      <div  class="gz-wrapper clearfix">
+        <span>{{$t('otc_otutcol_15')}}</span>
+        <h1> <icon :name="unit.name+'-unit'" /> {{total | fixed(unit.scale)}}</h1>
+      </div>
       <div class="account-row">
         <div class="row__box pl-6">
           <!-- <div
             id="contract-summary-chart"
             class="chart-dom"/> -->
-          <div>
+          <div v-if="false">
             <div class="currency-row">
               <div class="row__label">{{ $t('account') }}</div>
               <div class="row__value">
@@ -38,7 +68,7 @@
               </p>
             </div> -->
           </div>
-        </div>
+        </div> 
         <div class="row__box">
           <div class="currency-row">
             <div class="row__label"/>
@@ -119,7 +149,8 @@
                 class="c-999 cursor_help"
                 v-tooltip.top-center="{html: true, content: $t('contract_margin_balance_tips'), classes: 'contract_fund'}">{{ $t('contract_margin_balance') }}</span>
               <span class="c-333">{{ (marginBalance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
-            </div>
+            </div> 
+            <!-- 仓位保证金 -->
             <div class="table__tr right">
               <span
                 class="c-999 cursor_help"
@@ -144,9 +175,23 @@
             <div
               class="table__tr right c-999"
               v-if="holding.margin_delegation">
-              {{ $t('contract_fund_usee_lever', {per: (this.state.ct.holding.margin_position/this.state.ct.holding.available*100).toFixed(priceScale) + '%', lever: $big(holding.leverage || 0).toFixed(2)}) }}
+              {{ $t('contract_fund_usee_lever', {per: margin + '%', lever: $big(holding.leverage || 0).toFixed(2)}) }}
+              <!-- (holding.margin_position/holding.available*100).toFixed(priceScale)  -->
             </div>
           </div>
+        </div>
+      </div>
+      
+      <div class="account__row  mt-40"> 
+        <div class="row__box card-list">
+          <div class="card-detail"  
+          v-for="(holding,index) in holdingList" 
+          :key="index"
+          v-if="(holding.holding || 0) != 0">
+            <contractCard  
+              :holding="holding"
+              />
+          </div> 
         </div>
       </div>
     </div>
@@ -159,8 +204,9 @@
 import service from '@/modules/service'
 import {state} from '@/modules/store'
 import utils from '@/modules/utils'
-import holdingMixins from '@/projects/contract/components/stateHoldingComputedMixins'
+// import tickTableMixin from "@/mixins/fund-contract-tick";  
 import dealSocketMixins from '@/mixins/deal-socket-mixins'
+import contractCard from './contract-card'
 import transferModal from './transfer-modal'
 /**
  *
@@ -175,7 +221,9 @@ max_quota 当前提币总额度
  */
 export default {
   name: 'MyFund',
-  mixins: [holdingMixins, dealSocketMixins],
+  mixins: [ dealSocketMixins],
+  // mixins: [tickTableMixin, dealSocketMixins],
+  components: {contractCard,transferModal},
   data () {
     return {
       state,
@@ -195,7 +243,27 @@ export default {
       plusMillionUsdt: false,
       millionUsdtAmount: 1000000,
       accountInfo: {},
-      pair: 'FUTURE_BTCUSD'
+      pair: 'FUTURE_BTCUSD',
+      rates: {},
+      currencyList: [
+        {
+          name: 'CNY',
+          symbol: '￥',
+          scale: 2
+        },
+        {
+          name: 'USD',
+          symbol: '$',
+          scale: 4
+        },
+        // {
+        //   name: 'BTC',
+        //   symbol: 'B',
+        //   scale: 8
+        // },
+      ],
+      unit: null, 
+      loading: false,
     }
   },
   computed: {
@@ -220,39 +288,223 @@ export default {
     showHistory () {
       return this.$route.name === 'history'
     },
-    total () {
+    total () {   
       let sum = this.$big(0)
       this.tableData.forEach(item => {
         sum = sum.plus(this.getEstValue(item))
       })
       return sum.toString()
-    },
-    unit () {
-      return state.locale === 'zh-CN' ? 'CNY' : 'USD'
-    },
-    header () {
-      return state.locale && [
-        {key: 'currency', title: this.$t('fees_name')},
-        {key: 'available', title: this.$t('avlb')},
-        {key: 'locking', title: this.$t('asset_th_unavlb')},
-        {key: 'amount', title: this.$t('total_count')},
-        {key: 'estValue', title: this.$t('homechart_fiat') + '(' + (state.locale === 'zh-CN' ? 'CNY' : 'USD') + ')'}
-      ]
-    },
+    },   
     operate () {
       return state.locale && {key: 'operate', title: this.$t('operation')}
     },
     currency () {
       return this.pairInfo.product_name
     },
+    //保证金余额
     marginBalance() {
       //保证金余额 = 可用余额 + 未实现盈亏
       return this.$big(this.holding.available_balance || 0).plus(this.holding.unrealized || 0)
-    }
+    }, 
+    //保证金=【（仓位保证金+委托保证金）/保证金余额】*100%（四舍五入，取整）
+    margin() {
+      return this.$big(this.holding.margin_position)
+        .plus(this.holding.margin_delegation)
+        .div(this.marginBalance)
+        .times(100)
+        .round(0)
+    },
+    holding () { 
+      let obj = {}
+      console.log({obj})
+      let list = this.holdingList
+      if (!!list && list.length > 0) {
+        let item = list[0]
+        obj.available = item.available //账户权益
+        obj.marginBalance = this.$big(item.available_balance || 0) //保证金余额
+        obj.available_balance = item.available_balance //可用余额
+        obj.unrealized = this.$big(0) //未实现盈亏
+        obj.margin_position = this.$big(0) //仓位保证金 
+        obj.margin_delegation = this.$big(0) //委托保证金 
+        list.map(arg => { 
+          //保证金余额 = 可用余额 + 未实现盈亏
+          if (obj.marginBalance.eq(0)) { 
+            obj.marginBalance= obj.marginBalance.plus(arg.available_balance || 0)
+          }
+          obj.marginBalance = obj.marginBalance.plus(arg.unrealized || 0) 
+          obj.unrealized = obj.unrealized.plus(arg.unrealized || 0)
+          obj.margin_position = obj.margin_position.plus(arg.margin_position || 0) 
+          obj.margin_delegation = obj.margin_delegation.plus(arg.margin_delegation || 0)
+        })
+      }
+      console.log({obj})
+      return obj
+    },
+    holdingList() { 
+      let list = state.ct.holdingList 
+      let pairInfoList = state.ct.pairInfoList
+      list = list.map((holding) => {
+        if (holding) {
+          // hack
+          holding.amount = holding.holding || '0'
+          holding.value = '0'
+        } else {
+          holding = {
+            amount: '0',
+            available_balance: '0',
+            value: '0'
+          }
+        }
+        let pairInfo = pairInfoList['FUTURE_' + holding.currency]
+        if (!pairInfo) {
+          return holding
+        }
+        holding.pairInfo = pairInfo
+        let lastPrice = pairInfo.lastPrice// this.lastPrice
+        let markPrice = pairInfo.markTick  // this.markPrice  
+        let mul = pairInfo.multiplier
+        let value_scale = pairInfo.value_scale
 
+        let amount = holding.holding
+        let currency = holding.currency
+        let price = holding.price
+        console.log({ lastPrice, markPrice, mul, price })
+
+        holding.product_name = pairInfo.product_name
+        holding.value_scale = pairInfo.value_scale || 4
+        holding.price_scale = pairInfo.price_scale
+
+        // holding.lastPrice = lastPrice
+        // holding.markPrice = markPrice
+        this.$set(holding, 'lastPrice', lastPrice)
+        this.$set(holding, 'markPrice', markPrice)
+        console.log(holding, 'vue-set')
+        holding.unrealized = "0"
+        holding.unrealizedlp = "0"
+        holding.roe = "0"
+        holding.roelp = "0"
+
+        //计算价值
+        let value = "0"
+        let unrealized = "0"
+        let unrealizedlp = "0"
+        if (currency === 'BTCUSD') {
+          let unitPrice = 1 //单价 先写死
+          if (!!markPrice) {
+            holding.value = this.$big(amount).div(holding.markPrice || 0).times(unitPrice).round(value_scale || 4).abs().toString()
+          }
+          else {
+            holding.value = "0"
+          }
+        }
+        else {
+          holding.value = this.$big(holding.price || 0).times(amount).times(mul).abs().toString()
+        }
+        // holding.value = value
+        if (currency === 'BTCUSD') {
+          if (holding.amount > '0' && !!holding.markPrice && !!holding.lastPrice) { 
+            unrealized = this.$big(amount).div(price).minus(this.$big(amount).div(holding.markPrice))
+            unrealizedlp = this.$big(amount).div(price).minus(this.$big(amount).div(holding.lastPrice))
+          } else if (holding.amount < 0 && !!holding.markPrice && !!holding.lastPrice) { 
+            unrealized = (this.$big(amount).abs().div(holding.markPrice)).minus(this.$big(amount).abs().div(price))
+            unrealizedlp = (this.$big(amount).abs().div(holding.lastPrice)).minus(this.$big(amount).abs().div(price))
+          } else {
+            unrealized = this.$big('0')
+            unrealizedlp = this.$big('0')
+          }
+
+          holding.unrealized = unrealized
+          holding.unrealizedlp = unrealizedlp
+        }
+        //VDS BHD
+        else {
+          //VDS未实现盈亏计算   //乘数（0.0001BTC）
+          //多：（VDSUSD 标记价格 - VDSUSD 开仓价格）* 比特币乘数 * 合约数量  
+          //空：（ VDSUSD 开仓价格- VDSUSD 标记价格）* 比特币乘数 * 合约数量 
+          if (amount > 0) {
+            unrealized = (this.$big(holding.markPrice || 0).minus(price)).times(mul).times(this.$big(amount).abs())
+            unrealizedlp = (this.$big(holding.lastPrice || 0).minus(price)).times(mul).times(this.$big(amount).abs())
+          } else if (amount < 0) {
+            unrealized = (this.$big(price).minus(holding.markPrice || 0)).times(mul).times(this.$big(amount).abs())
+            unrealizedlp = (this.$big(price).minus(holding.lastPrice || 0)).times(mul).times(this.$big(amount).abs())
+          } else {
+            unrealized = this.$big('0')
+            unrealizedlp = this.$big('0')
+          }
+
+          holding.unrealized = unrealized
+          holding.unrealizedlp = unrealizedlp
+
+        }
+        //console.log(holding.value)
+        if (this.$big(amount || 0).eq(0) || this.$big(price || 0).eq(0) || !holding.value || holding.value ==='0') {
+          holding.roe = this.$big('0')
+          holding.roelp = this.$big('0')
+        }
+        else {
+          let maxLever = pairInfo.max_leverage || 100
+           
+          holding.roe = unrealized
+            .div(holding.value)
+            .mul(holding.leverage == 0 ? maxLever : holding.leverage)
+            .mul(100).mul(2)
+            .toFixed(2)
+            
+          //console.log(holding.roe)
+          holding.roelp = unrealizedlp
+            .div(holding.value)
+            .mul(holding.leverage == 0 ? maxLever : holding.leverage)
+            .mul(100).mul(2)
+            .toFixed(2)
+            //console.log(holding.roelp)
+        }
+        // console.log('无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限')
+
+        //平仓价格
+        if (!holding.changeUnwindPrice) {
+          //最小步算法
+          let accuracy = holding.pairInfo.accuracy || 1
+          let scale = holding.pairInfo.price_scale || 4
+          const minStep = Math.pow(10, -scale) * accuracy
+          let $newValue = this.$big(markPrice || 0)
+          if (!$newValue.mod(minStep).eq(0)) {
+            $newValue = $newValue.div(minStep).round(scale >= 1 ? scale - 1 : 0, 0).mul(minStep)
+          }
+          let unwindPrice = $newValue
+          this.$set(holding, "unwindPrice", unwindPrice)
+        }
+
+        holding.margin = "0"
+        holding.margin_position = this.$big(holding.margin_position || 0).round(value_scale || 4).toString()
+        // 动态保证金
+        holding.margin = this.$big(holding.margin_position || 0).plus(holding.unrealized).round(pairInfo.value_scale || 4).toString()
+        // 保证金余额=用户当前还可用于开仓的保证金数量=账户权益-仓位保证金-委托保证金。
+        holding.margin_available = this.$big(holding.available || 0).minus(holding.margin_position || 0).minus(holding.margin_delegation || 0).round(value_scale || 4, 0).toString()
+        holding.canRemoveMargin = holding.margin_user
+        holding.canAddMargin = holding.available_balance
+        // 保证金占比
+        holding.marginPercent = holding.available == 0 ? '0.00' : this.$big(holding.margin_delegation || 0).div(holding.available).mul(100).round(2).toString() 
+        //holding.test = 0;
+        return holding
+      })
+      return list
+    },
   },
-  async created () {
+  async created () {   
+    this.currencyList = [{
+          name: 'CNY',
+          symbol: '￥',
+          scale: 2
+        },
+        {
+          name: 'USD',
+          symbol: '$',
+          scale: 4
+        },]
+    this.unit = this.currencyList[0]
+    await this.getAllRate() 
     await this.getPairs()
+    // this.getContractBalanceByPair()
     this.getContractBalanceList()
   },
   watch:{
@@ -262,6 +514,9 @@ export default {
   },
   mounted () {
     // this.initChart()
+    if(this.holding === undefined){
+      utils.alert(this.$t('网络加载失败，请检查网络重试'))
+    }
   },
   methods: {
     amounts(){
@@ -275,35 +530,95 @@ export default {
        if (this.state.isSimulation) {
         utils.alert(this.$t('contract_simulation_exchange_limit'))
       } else {
-        this.showModal = true
+        // this.showModal = true
+        this.$router.push({
+          path:'/fund/transfer',
+          query: {
+            currency: "BTC"
+          }
+        })
       }
     },
     async getPairs () {
       await service.getContractSymList().then(res => {
         if (res && res.data) {
           this.allPairs = res.data.items
-          this.selectPair = this.allPairs[0]
+          //this.selectPair = this.allPairs[0]
+          this.selectPair = res.data.items.filter(arg => arg.product_name === 'BTC')[0]
+
+          //this.state.ct.pairInfoList = {}
+          // res.data.items.forEach(element => {
+          //   this.state.ct.pairInfoList[element.name] = element
+          // });
         }
       })
     },
     hideModal () {
       this.showModal = false
     },
+    async getAllRate() {
+      let res = await service.getAllRate() 
+      if (!res.code && !!res.data) {
+        this.rates = res.data;
+      }
+    },
+    
+    getEstValue (item) {
+      let res = this.$big(0)
+      let unit = this.unit.name
+      let {currencyName,camount} = item  
+      if (unit === 'BTC'){
+        if(currencyName === 'BTC') { //折合与账户币种都是BTC，不进行换算
+          res = this.$big(camount)
+        }
+        else { 
+          if (!!this.rates[currencyName]) {
+            res = this.$big(camount || 0).times(this.rates[currencyName]['USD'] || 0).div(this.rates['BTC']['USD'])
+          }
+        }
+      }
+      else if (item.rates) { //优先使用账户信息中自带的汇率
+        res = this.$big(camount).times(this.$big(item.rates[unit] || 0))
+      }
+      else {
+        if (this.rates[currencyName]) {
+          res = this.$big(camount || 0).times(this.$big(this.rates[currencyName][unit] || 0))
+        }
+      } 
+      return res
+    },
     getContractBalanceList () {
-      service.getContractBalanceByPair({
-        symbol: this.currency
-      }).then(res => {
-        this.accountInfo = res.data
-        this.state.ct.holding = res.data
+      service.getContractBalanceList().then(res => { 
+         if (!res.code && !!res.data) {
+            state.ct.holdingList = res.data.slice()
+            this.tableData = (res.data || []).map(item => { 
+            item.currencyName = item.currency.replace("USD","")
+            item.camount = item.available
+            item.estValue = this.getEstValue(item) 
+            console.log({item})
+            console.log({holding: this.holding})
+            return item
+          })
+        }
       })
-    }
+    },
+    // getContractBalanceByPair () { 
+    //   service.getContractBalanceByPair({
+    //     symbol: this.currency
+    //   }).then(res => {
+    //     this.accountInfo = res.data
+    //     this.state.ct.holding = res.data 
+    //     // this.tableData = res.data
+    //   })
+    // }
   },
-  components: {
-    transferModal
-  }
+  // components: {
+  //   transferModal
+  // }
 }
 </script>
 <style lang="scss" scoped>
+  @import './contract.scss';
   .popover{
     position: fixed;
     left:0;
@@ -331,7 +646,7 @@ export default {
         position: absolute;
         right: 15px;
         top: 20px;
-        color: #22ced0;
+        color: $primary;
         cursor: pointer;
       }
     }
@@ -364,7 +679,7 @@ export default {
           padding:10px 20px;
         }
         .popover-hz{
-          background: #22ced0;
+          background: $primary;
           color: #fff;
           padding: 7px 15px;
           border:none;
@@ -388,5 +703,56 @@ export default {
         margin-bottom: 30px;
       }
     }
+  }
+  .gz-wrapper {
+    width: 520px;
+    height: 176px;
+    background: #F6F1FD;
+    border-radius: 4px;
+    position: relative;
+    text-align: center;
+    margin: 30px 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 6px;
+      background: #A572E9;
+      border-radius: 4px;
+    }
+
+    span {
+      padding: 30px 0;
+      font-size: 18px;
+      display: block;
+      font-weight: 400;
+      color: #A572E9;
+    }
+
+    h1 {
+      font-size: 30px;
+      color: #A572E9;
+    }
+  }
+  .card-list {
+    @include clearfix;
+    .card-detail {
+      float: left;
+      margin-right: 40px;
+      &:nth-child(3),&:nth-child(6),&:nth-child(9) { 
+        margin-right: 0;
+      }
+    }
+  }
+  .fund-history {
+      color: #999;
+      border-color: #999;
+      &.router-link-active {
+          color: $primary;
+          border-color: $primary;
+      }
   }
 </style>

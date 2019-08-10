@@ -17,8 +17,8 @@
           v-for="pair in pairList"
           :key="pair.name">
           <p class="lt rate-t-a">{{ $t('contract_' + pair.name) }}</p>
-          <p class="lt rate-t-b">{{ $big(pair.make_rate_ixx).mul(100) | fixed(4) }}%</p>
-          <p class="lt rate-t-c">{{ $big(pair.take_rate).mul(100) | fixed(4) }}%</p>
+          <p class="lt rate-t-b">{{ $big(pair.make_rate || 0).mul(100) | fixed(4) }}%</p>
+          <p class="lt rate-t-c">{{ $big(pair.take_rate  || 0).mul(100) | fixed(4) }}%</p>
         </li>
       </ul>
     </div>
@@ -119,7 +119,7 @@ export default {
         height: 4px;
         position: absolute;
         border-radius: 4px;
-        background: #C1A538;
+        background: $primary;
         left: 0;
         top: 50%;
         margin-top: -2px;

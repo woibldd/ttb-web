@@ -16,5 +16,9 @@
       "vue-html": "html",
       "vue": "html"
   },
-  "workbench.colorTheme": "Night Owl"
+<<<<<<< HEAD
+  "workbench.colorTheme": "Visual Studio Dark"
+=======
+  "workbench.colorTheme": "One Dark Pro Bold"
+>>>>>>> otc
 }

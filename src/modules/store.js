@@ -17,7 +17,7 @@ export const state = {
   userInfo: null,
   loginBack: {name: 'home'}, // 默认登录返回页
   verifyEmail: '', // 注册、找回密码使用的邮箱
-  
+
   tabSelected: 'USDT', //币对列表
   assets: {
     ready: false,
@@ -68,6 +68,13 @@ export const state = {
     curCommitPrice: 0,
     orderFills: [],
     lastSide: 0,
+    pairInfoList: {},
+    holdingList: [],
+    computeHoldingList: [],
+    lastPriceList: {},
+    markTickList: {},
+    indexTickList: {},
+    currentDelList: {},
   },
   rate: {
     IX: null,
@@ -92,8 +99,8 @@ export const state = {
     task: ''
   },
   otc: {
-    currency: "BTC", 
-    legal_currency: "CNY",
+    currency: "USDT",
+    legal_currency: "CNY", // CNY,SGD 
     showSide: 1, //1: 买，2：卖
     symbolList: [],
     userInfo: null,
@@ -113,14 +120,14 @@ export const local = new Locals('store', {
   orderbookMode: 'both',
   regionId: '',
   timezone: '',
-  interval: '60',
+  interval: '15',
   supportNum: 129,
   proOnFav: false,
   pairTableTab: 'USDT',
   everSignup: false,
   hideOthers: false,
   ixAlert: false,
-  lineType : 1, 
+  lineType : 1,
 })
 
 export const actions = {
@@ -166,6 +173,14 @@ export const actions = {
           email: 'guest@IXX.COM'
         })
       })
+    }
+  }, 
+  async getKycLv () {
+    if (state.userInfo) {
+      let res = await service.getKycInfo();
+      if (!res.code && !!res.data) {
+        state.userInfo.lv = res.data.lv
+      }
     }
   },
   getToken () {

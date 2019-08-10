@@ -32,6 +32,10 @@ import {
   RadioButton,
   Loading,
   MessageBox,
+  Alert,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
   Tabs,
   TabPane,
   Button,
@@ -40,8 +44,18 @@ import {
   Switch,
   DatePicker,
   Pagination,
+  InputNumber,
   Dialog,
-  Message
+  Message,
+  Autocomplete,
+  Timeline,
+  TimelineItem,
+  Progress,
+  Row,
+  Col,
+  Tooltip,
+  Popover,
+  Checkbox
 } from 'element-ui'
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
@@ -53,7 +67,8 @@ if (process.env.NODE_ENV === 'production') {
 Vue.config.productionTip = false
 Vue.use(VueI18n)
 Vue.use(VTooltip)
-
+Vue.use(Row)
+Vue.use(Col)
 Vue.use(Select) // 引入element单个组件
 Vue.use(Option)
 Vue.use(Table)
@@ -62,19 +77,30 @@ Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
 Vue.use(Upload)
-
+Vue.use(Dropdown)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
 Vue.use(RadioGroup)
 Vue.use(RadioButton)
 Vue.use(Loading)
 Vue.use(Tabs)
+Vue.use(Tooltip)
 Vue.use(TabPane)
 Vue.use(Button)
 Vue.use(Steps)
 Vue.use(Step)
 Vue.use(Dialog)
 Vue.use(Switch)
+Vue.use(Alert)
 Vue.use(DatePicker)
 Vue.use(Pagination)
+Vue.use(InputNumber)
+Vue.use(Autocomplete)
+Vue.use(Timeline)
+Vue.use(TimelineItem)
+Vue.use(Progress)
+Vue.use(Checkbox)
+Vue.use(Popover)
 const request = require.context('./assets/svg', true, /\.svg$/)
 /* console.log('request', request)
 console.log('request.keys', request.keys())

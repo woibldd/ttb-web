@@ -70,6 +70,7 @@
 <script>
 import coinInfo from './coin-info.js'
 import {state} from '@/modules/store'
+import service from '@/modules/service'
 
 export default {
   data () {
@@ -79,14 +80,38 @@ export default {
     }
   },
   methods: {
-    switchContent (coinType) {
+    switchContent (coinType) { 
       const {locale} = this.state
+      this.getCurrency(coinType)
       if (coinInfo[coinType]) {
         this.coinInfo = coinInfo[coinType][locale]
       } else {
-        this.coinInfo = null
+        // this.coinInfo = null
+        this.getCurrency(coinType)
       }
-    }
+    },
+    getCurrency(coinType) {
+      this.coinInfo = null
+      service.getCurrencyList({
+        currency: coinType, 
+        lang: state.locale
+      }).then(res => {
+        if(!res.code && !!res.data){
+          let coin = {}
+          coin.name=res.data.currency
+          coin.full_name=res.data.full_name
+          coin.brief_info=res.data.intro
+          coin.issue_time=res.data.issue_time
+          coin.issue_all=res.data.issue_amount
+          coin.issue_circulation=res.data.circulate_amount
+          coin.token_price=res.data. raise_price
+          coin.whitepagger=res.data.white_paper
+          coin.office_website=res.data.home_page
+          coin.chain_info=res.data.block_query
+          this.coinInfo = coin 
+        } 
+      })
+    },
   },
   created () {
     const coinType = this.state.pro.product_name

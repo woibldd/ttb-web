@@ -10,18 +10,23 @@
         </el-input>-->
         <div class="pairs-search">
           <div class="search-box">
-            <input placeholder="搜索" type="text" v-model="search">
-            <icon name="home-search"/>
+            <input placeholder="搜索" 
+              @input="filterPair()" 
+              type="text" 
+              v-model="search">
+            <icon name="home-search-t"/>
           </div>
         </div>
       </div>
       <!-- tabs -->
       <div class="ix-pair-head">
         <el-tabs v-model="tabSelected" >
-          <el-tab-pane :label="$t('home_optional')" name="like"></el-tab-pane>
+          <el-tab-pane :label="$t('pair_list_option')" name="like"></el-tab-pane>
           <el-tab-pane label="USDT" name="USDT"></el-tab-pane>
           <el-tab-pane label="BTC" name="BTC"></el-tab-pane>
           <el-tab-pane label="ETH" name="ETH"></el-tab-pane>
+          <el-tab-pane :label="$t('pair_list_new')" name="new"></el-tab-pane>
+          <el-tab-pane :label="$t('pair_list_all')" name="all"></el-tab-pane>
         </el-tabs>
       </div>
       <div class="ix-pair-head tr" v-show="sortedList.length">
@@ -41,7 +46,7 @@
       <ul class="ul ix-pair-body tbody" :style="{'max-height': height}" v-show="sortedList.length">
         <li
           class="tr"
-          v-for="pair in sortedList"
+          v-for="(pair,index) in sortedList"
           :class="{cur: pair.name === state.pro.pair}"
           :key="pair.id"
           @click="setPair(pair)"
@@ -52,6 +57,7 @@
               <icon v-show="!pair.like" name="sc-w"/>
             </span>
             {{ pair.product_name }}/{{ pair.currency_name }}
+            <icon v-show="index < 3 && tabSelected==='new' " name='hot-red'/>   
           </div>
           <div class="td price">
             <span v-if="pair.tick">{{ pair.tick.current | fixed(pair.price_scale) }}</span>
@@ -144,8 +150,7 @@ export default {
         params: {
           pair: pair.name
         }
-      });
-      //debugger
+      }); 
       state.close_time = pair.close_time || "[*][*][*][9:59-10:00]";
       state.price_open = pair.price_open || 0.017;
       
@@ -181,8 +186,7 @@ export default {
     // tabsClick(tab) {
     //   this.state.tabSelected = tab.name;
     // },
-    collection(pair) {
-      //debugger
+    collection(pair) { 
       if (pair.like) {
         pair.like = false;
         service.delOptional({
@@ -197,7 +201,10 @@ export default {
         });
       }
       // pair.like = !(pair.like || false)
-    }
+    },
+    filterPair () {
+      state.tabSelected = 'all' 
+    }, 
   },
   created() {
 

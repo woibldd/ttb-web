@@ -34,7 +34,12 @@ export default {
     stepScale: {
       type: Number
     },
-    value: String
+    value: String,
+    // 步长间隔 N 每次增加N个最小单位
+    accuracy: {
+      type: Number,
+      default: 1
+    },
   },
   data () {
     return {
@@ -65,11 +70,11 @@ export default {
     })
   },
   methods: {
-    up () {
-      this.fixValue(1)
+     up () {
+      this.fixValue(this.accuracy || 1)
     },
     down () {
-      this.fixValue(-1)
+      this.fixValue(-this.accuracy || -1)
     },
     focus () {
       this.$emit('focus')
@@ -82,8 +87,17 @@ export default {
       if (newValue === '') {
         return this.updateValue('')
       }
-      try {
-        this.updateValue(this.$big(newValue).round(this.realScale) + '', 'valueChange')
+      try { 
+        // 最小进步 accuracy 参与运算  
+        const minStep = this.$big(10).pow(-this.realScale).times(this.accuracy) 
+        let $newValue = this.$big(newValue)
+        if (!$newValue.mod(minStep).eq(0)) {
+          
+          $newValue = $newValue.div(minStep).round(this.realScale >= 1 ? this.realScale - 1 : 0, 0).mul(minStep)
+          // $newValue = $newValue.div(minStep).round(0, 0).mul(minStep)
+        }
+        // this.updateValue(this.$big(newValue).round(this.realScale) + '', 'valueChange')
+        this.updateValue($newValue.round(this.realScale, 0) + '', 'valueChange')
       } catch (e) {
         utils.log('Invalid value changing: ', newValue)
         this.log(e)
@@ -95,7 +109,7 @@ export default {
       if (this.$refs.input.value === '' && delta === 0) {
         return this.updateValue('')
       }
-      this.updateValue(this.$big(this.$refs.input.value || '0').plus(this.step.mul(delta)).round(this.stepScale || this.realScale) + '', 'fixValue')
+      this.updateValue(this.$big(this.$refs.input.value || '0').plus(this.step.mul(delta)).round(this.stepScale || this.realScale, 0) + '', 'fixValue')
     },
     updateValue (value, src) {
       this.log(`updateValue: ${value} @${src}`)

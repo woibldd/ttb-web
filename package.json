@@ -21,7 +21,7 @@
     "babel-polyfill": "^6.26.0",
     "big.js": "^5.1.2",
     "copy-to-clipboard": "^3.0.8",
-    "element-ui": "^2.4.7",
+    "element-ui": "^2.10.1",
     "mint-ui": "^2.2.13",
     "moment": "^2.24.0",
     "qrcode": "^1.2.2",

@@ -20,45 +20,51 @@
 <template>
   <div class="fund-container my-fund-container">
     <div class="title-box">
-      <div>{{ $t('trading') }}</div>
+      <div>
+        {{ $t('otc_account') }}
+        <span class="ml-30">
+          <el-select
+            v-model="unit"
+            @change="currencyChange"
+            value-key="name">
+            <el-option
+              v-for="(item, idx) in currencyList"
+              :key="idx"
+              :label="item.name"
+              :value="item"/>
+          </el-select>
+        </span>
+      </div>
       <div class="title__right">
         <!-- <router-link
           :to="{name: 'LockWarehouse'}"
           class="c-mine mr-30 dib pointer"><icon
           name="anchor"/>{{ $t('mining') }}</router-link> -->
         <!--<span-->
-          <!--@click="showLockModal = true"-->
-          <!--class="c-mine pointer mr-30 dib">-->
-          <!--{{ $t('locked') }}-->
+        <!--@click="showLockModal = true"-->
+        <!--class="c-mine pointer mr-30 dib">-->
+        <!--{{ $t('locked') }}-->
         <!--</span>-->
         <!--<span-->
-          <!--@click="showUnlockModal = true"-->
-          <!--class="c-mine pointer mr-30 dib">-->
-          <!--{{ $t('unlock') }}-->
+        <!--@click="showUnlockModal = true"-->
+        <!--class="c-mine pointer mr-30 dib">-->
+        <!--{{ $t('unlock') }}-->
         <!--</span>-->
         <!--<router-link-->
-          <!--v-if="!showHistory"-->
-          <!--class="fund-history"-->
-          <!--:to="{name:'assetsHistory', params: {from: 'deposit'}}"> {{ $t('capital_record') }}</router-link>-->
+        <!--v-if="!showHistory"-->
+        <!--class="fund-history"-->
+        <!--:to="{name:'assetsHistory', params: {from: 'deposit'}}"> {{ $t('capital_record') }}</router-link>-->
       </div>
     </div>
     <div class="gz-wrapper clearfix">
-      <span>法币资产估值</span>
-      <h1>¥ 0.00000000</h1>
+      <span>{{$t('otc_otutcol_13')}}</span>
+
+      <h1> 
+        <icon :name="unit.name+'-unit'" />
+        {{ total | fixed(unit.scale)}}</h1>
     </div>
-    <div
-      v-if="!showHistory"
-      class="my-fund-content">
-      <!--<div class="fund-total">-->
-        <!--<div class="total__label">{{ $t('my_balance_equal') }}</div>-->
-        <!--<div class="total__coin">{{ total || 0 | fixed(valueScale)  }} {{ unit }} </div>-->
-        <!--&lt;!&ndash;  百万usdt活动需要,先写死 &ndash;&gt;-->
-        <!--<div-->
-          <!--class="fund-with-usdt"-->
-          <!--v-if="plusMillionUsdt">-->
-          <!--+{{ millionUsdtAmount }} USDT≈ {{ $big(total).plus($big(plusUsdtEst)).toString() }}  {{ unit }}-->
-        <!--</div>-->
-      <!--</div>-->
+    <div 
+      class="my-fund-content"> 
       <el-table :empty-text=" $t('no_data') "
                 :data="tableData"
                 class="fund-coin-pool">
@@ -69,9 +75,10 @@
           :label="hd.title">
           <template slot-scope="scope">
             <span v-if="hd.key === 'currency'">
-              <icon :name="scope.row.currency"/> 
+              <icon :name="scope.row.currency"/>
               <i>{{scope.row[hd.key]}} </i>
-            </span> 
+            </span>
+            <span v-else-if="hd.key === 'estValue'">{{ scope.row[hd.key] || 0 | fixed(unit.scale) }}</span>
             <span v-else>{{ scope.row[hd.key] || 0 | fixed(8)}}</span>
           </template>
         </el-table-column>
@@ -81,16 +88,26 @@
           align="right"
           min-width="230px"
           :label="operate.title">
-          <template >
-            <span 
+          <template slot-scope="scope">
+            <!-- <span
               @click="showModal = true"
-              class="my-fund-operate">{{ $t('account_exchange') }}</span>  
+              class="my-fund-operate">{{ $t('account_exchange') }}</span>   -->
+            <span 
+              class="my-fund-operate"> 
+               <a href="javascript:;" class="menu-name" @click="routerTransFer(scope.row)">
+                  {{ $t('account_exchange') }}
+              </a>
+            </span>
+            <router-link
+              :to="{name: 'OTC'}"
+              class="my-fund-operate">{{ $t('asset_trading') }}</router-link>
           </template>
         </el-table-column>
       </el-table>
-    </div> 
+    </div>
     <transfer-modal
       :show-modal.sync="showModal"
+      :showModal="showModal"
       @click="hideModal"/>
   </div>
 </template>
@@ -125,22 +142,32 @@
     data () {
       return {
         tableData: [],
-        plusMillionUsdt: false,
-        millionUsdtAmount: 1000000,
-        showLockModal: false,
-        showUnlockModal: false,
-        unlock_loading: false,
-        lock_disable: true,
         showModal:false,
-        unlock_disable: true,
-        unlock_amount: '',
-        lock_amount: '',
+        rates: {},
         // 我的余额
         balance: {
           available: 0,
           unlocking: 0,
           locked: 0
-        }
+        },
+        currencyList: [
+          {
+            name: 'CNY',
+            symbol: '￥',
+            scale: 2
+          },
+          {
+            name: 'USD',
+            symbol: '$',
+            scale: 4
+          },
+          // {
+          //   name: 'BTC',
+          //   symbol: 'B',
+          //   scale: 8
+          // },
+        ],
+        unit: null,
       }
     },
     components: {
@@ -163,28 +190,28 @@
       total () {
         let sum = this.$big(0)
         this.tableData.forEach(item => {
-          sum = sum.plus(this.getEstValue(item))
+          sum = sum.plus(item.estValue)
         })
         return sum.toString()
       },
-      unit () {
-        return state.locale === 'zh-CN' ? 'CNY' : 'USD'
-      },
+      // unit () {
+      //   return state.locale === 'zh-CN' ? 'CNY' : 'USD'
+      // },
       valueScale() {
         return state.locale === 'zh-CN' ? 2 : 4
       },
       header () {
         return state.locale && [
           {key: 'currency', title: this.$t('fees_name')},
-          {key: 'available', title: this.$t('avlb')}, 
+          {key: 'available', title: this.$t('avlb')},
           {key: 'ordering', title: this.$t('asset_th_unavlb')},
-          {key: 'estValue', title: this.$t('homechart_fiat') + '(' + (state.locale === 'zh-CN' ? 'CNY' : 'USD') + ')'}, 
+          {key: 'estValue', title: this.$t('homechart_fiat') + '(' + this.unit.name + ')'},
         ]
       },
       operate () {
         return state.locale && {key: 'operate', title: this.$t('operation')}
       },
-      
+
       // ix锁仓/解锁
       maxLock () {
         if (this.balance.available) {
@@ -200,172 +227,95 @@
       },
       myRemainTotal () {
         return (this.myPower.power || 0) - (this.myPower.amount || 0)
-      }
+      },
     },
     async created () {
-      await this.getMine()
-      this.getOtcBalance()
-      this.getIxBalance()
+      this.unit = this.currencyList[0]
+      let res = await service.getAllRate()
+      if (!res.code && !!res.data) {
+        this.rates = res.data;
+      }
+      await this.getOtcBalance()
+      // await this.getEstValue()
+      //this.getIxBalance()
       this.$nextTick(
         console.log(this.header)
       )
     },
     methods: {
-      reset (type) {
-        this.blur(type)
-        this.unlock_amount = 0
-        this.lock_amount = 0
-        this.getIxBalance()
+      routerTransFer(item) {
+        this.$router.push({
+          path:'/fund/transfer',
+          query: {
+            currency: item.currency
+          }
+        })
       },
       hideModal () {
         this.showModal = false
       },
-      blur (type) {
-        let amount = 0
-        if (type === 'lock') {
-          if (this.lock_amount === '') {
-            this.lock_disable = true
-            return
-          }
-          amount = this.$big(this.lock_amount)
-          if (amount.mod(MIN_AMOUNT_UNIT) !== 0) {
-            this.lock_amount = amount.div(MIN_AMOUNT_UNIT).round(0, this.C.ROUND_DOWN).times(MIN_AMOUNT_UNIT).toString()
-            if (!parseInt(this.lock_amount)) {
-              this.lock_disable = true
-            }
-          }
-        } else {
-          if (this.unlock_amount === '') {
-            this.unlock_disable = true
-            return
-          }
-          amount = this.$big(this.unlock_amount)
-          if (amount.mod(MIN_AMOUNT_UNIT) !== 0) {
-            this.unlock_amount = amount.div(MIN_AMOUNT_UNIT).round(0, this.C.ROUND_DOWN).times(MIN_AMOUNT_UNIT).toString()
-            if (!parseInt(this.unlock_amount)) {
-              this.unlock_disable = true
-            }
-          }
-        }
-      },
-      async doLock () {
-        let amount = this.lock_amount
-        this.lock_loading = true
-        let res = await service.balanceLock({
-          amount
-        })
-        this.lock_loading = false
-        if (!res.code) {
-          // todo
-          this.lock_amount = ''
-          utils.success(this.$t('lock_success') + amount + ' IX')
-          this.reset('lock')
-          this.showLockModal = false
-        } else {
-          utils.alert(res.message)
-        }
-      },
-      unlockAmountChanged () {
-        if (parseInt(this.unlock_amount)) {
-          if (this.$big(this.unlock_amount).gt(this.maxUnLock)) {
-            this.unlock_amount = this.maxUnLock
-          }
-          if (!this.unlock_amount) {
-            this.unlock_disable = true
-          } else {
-            this.unlock_disable = false
-          }
-        } else {
-          this.unlock_disable = true
-        }
-      },
-      lockAmountChanged () {
-        if (parseInt(this.lock_amount)) {
-          if (this.$big(this.lock_amount).gt(this.maxLock)) {
-            this.lock_amount = this.maxLock
-          }
-          if (!this.lock_amount) {
-            this.lock_disable = true
-          } else {
-            this.lock_disable = false
-          }
-        } else {
-          this.lock_disable = true
-        }
-      },
-      setMax (type) {
-        if (type === 'lock') {
-          this.lock_amount = this.maxLock
-          this.lockAmountChanged()
-          this.blur(type)
-        } else {
-          this.unlock_amount = this.maxUnLock
-          this.unlockAmountChanged()
-          this.blur(type)
-        }
-      },
-      async doUnLock () {
-        let amount = this.unlock_amount
-        this.unlock_loading = true
-        let res = await service.balanceUnLock({
-          amount
-        })
-        this.unlock_loading = false
-        if (!res.code) {
-          // todo
-          this.unlock_amount = ''
-          utils.success(this.$t('unlock_success') + amount + ' IX')
-          this.reset('lock')
-          this.showUnlockModal = false
-        } else {
-          utils.alert(res.message)
-        }
+      currencyChange(e) {
+        //console.log({e})
+        this.getOtcBalance()
       },
       getOtcBalance () {
         return service.getOtcBalance().then(res => {
           this.tableData = (res.data || []).map(item => {
-            item.rates = item.rates || {}
-            item.locking = this.$big(item.locking || 0).plus(this.$big(item.ordering || 0).plus(this.$big(item.withdrawing || 0))).toString()
-            item.amount = this.$big(item.locking).plus(this.$big(item.available)).round(8, this.C.ROUND_DOWN).toString()
-            // item.estValue = this.getEstValue(item)
-            item.available = this.$big(item.available).round(8, this.C.ROUND_DOWN).toString()
-            item.pairs = ExchangePairs[item.currency] || 'BTC_USDT'
+            //item.rates = item.rates || {}
+            // item.locking = this.$big(item.locking || 0).plus(item.ordering || 0).toString()
+            let scale = 8
+            if (item.currency === 'BTC') {
+              scale = 8
+            }
+            else if (item.currency === 'USDT') {
+              scale = 4
+            }
+            item.camount = this.$big(item.ordering).plus(this.$big(item.available)).round(scale, this.C.ROUND_DOWN).toFixed(scale).toString()
+            item.estValue = this.getEstValue(item)
+            item.ordering = this.$big(item.ordering).round(scale, this.C.ROUND_DOWN).toFixed(scale).toString()
+            item.available = this.$big(item.available).round(scale, this.C.ROUND_DOWN).toFixed(scale).toString()
+            // item.pairs = ExchangePairs[item.currency] || 'BTC_USDT'
             return item
           })
         })
       },
       getEstValue (item) {
-        let res = this.$big(item.amount).times(this.$big(item.rates[this.unit] || 0))
-        let num = 8
-        // if (this.unit === 'USD') {
-        //   num = 8
-        // }
-        return res.round(num, this.C.ROUND_DOWN).toString()
-      },
-      async getMine () {
-        let res = await service.getMillionInfoMine()
-        if (!res.code && res.data) {
-          this.plusMillionUsdt = res.data.state === 1
-          this.millionUsdtAmount = this.$big(this.millionUsdtAmount).minus(res.data.reward || 0).round(1).toString()
-        } else {
+
+        let res = this.$big(0)
+        let unit = this.unit.name
+        let {currency,camount} = item
+        if (unit === 'BTC'){
+          if(currency === 'BTC') {
+            res = this.$big(camount)
+          }
+          else {
+            if (this.$big(camount).gt(0) && !!this.rates[currency]) {
+              res = this.$big(camount).times(this.rates[currency]['USD'] || 0).div(this.rates['BTC']['USD'])
+            }
+          }
         }
-      },
-      async getIxBalance () {
-        const res = await service.getIxBalance()
-        if (!res.code && res.data) {
-          this.balance = res.data
+        else if (item.rates) {
+          res = this.$big(camount).times(this.$big(item.rates[unit] || 0))
         }
-      }
-    },
-    watch:{
-      valueScale() {
-        this.getOtcBalance()
-      }
+        else {
+          if (this.rates[currency]) {
+            res = this.$big(camount).times(this.$big(this.rates[currency][unit] || 0))
+          }
+        }
+        //let num = 8
+        //return res.round(num, this.C.ROUND_DOWN).toString()
+        return res
+      },
+
     }
   }
 </script>
 <style lang="scss" scoped>
   @import './../../components/Fund/My/my.scss';
+  // .iconfont {
+  //   font-size: 27px;
+  //   color: rgba(107, 181, 120, 1) !important;
+  // }
   .gz-wrapper {
     width: 520px;
     height: 176px;
@@ -382,7 +332,7 @@
       bottom: 0;
       width: 100%;
       height: 6px;
-      background: #3E77E6;
+      background: rgba(107, 181, 120, 1);
       border-radius: 4px;
     }
 
@@ -391,12 +341,12 @@
       font-size: 18px;
       display: block;
       font-weight: 400;
-      color: #3E77E6;
+      color: rgba(107, 181, 120, 1);
     }
 
     h1 {
       font-size: 30px;
-      color: #3E77E6;
+      color: rgba(107, 181, 120, 1);
     }
   }
 </style>

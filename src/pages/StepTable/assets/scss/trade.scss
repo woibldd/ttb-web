@@ -36,18 +36,21 @@ $high-color: #333;
         flex: 1;
         em {
           flex: 100px 0 0 0;
-          width: 100px;
           display: inline-block;
           font-style: normal;
+          padding-right: 10px;
           margin-bottom: 12px;
         }
       }
-      .user-info,.time {
+      .user-info,.time, .acount-info {
         flex: 225px 0 0 0;
         width: 225px;
         padding-left: 20px;
         color: #999999;
         font-weight: 400;
+      }
+      .acount-info {
+          flex-grow: 1.5
       }
       .text {
         flex: 1;
@@ -159,7 +162,7 @@ $high-color: #333;
     font-size: $font-small;
     color: #999;
   }
-  .table-con {
+  .table-con { 
     margin-top: 20px;
     .table-list {
       padding:0 20px;
@@ -292,6 +295,11 @@ $high-color: #333;
         }
       }
     }
+    .crud /deep/ .el-table {
+      th>.cell {
+        word-break: break-word;
+      }
+    }
   }
   .page {
     margin-top: 20px;
@@ -400,7 +408,7 @@ $high-color: #333;
     .btn_t {
       width: 196px;
       border-color: transparent;
-      background: #FDA22D;
+      background: #01CED1;
       color: #fff
     }
   }
@@ -441,7 +449,7 @@ $high-color: #333;
       margin-top: 10px;
       padding: 6px!important;
     }
-    .table-con {
+    .table-con { 
       font-size: 13px;
       dt {
         em {

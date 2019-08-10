@@ -12,7 +12,7 @@
       <el-table-column prop="price" :label="$t('otc_price',{legal_currency})">
         <template slot-scope="scope">
           <div>
-            {{ $big(scope.row.price || 0).toFixed(2) }}
+            {{ $big(scope.row.price || 0) | fixed(2) }}
           </div>
         </template>
       </el-table-column>
@@ -26,74 +26,30 @@
       <el-table-column prop="total" :label="$t('otc_total',{legal_currency})">
         <template slot-scope="scope">
           <div>
-            {{ $big(scope.row.amount).minus(scope.row.freezed).mul(scope.row.price).toFixed(2) }}
+            {{ $big(scope.row.amount).minus(scope.row.freezed).mul(scope.row.price) | fixed(2)  }}
           </div>
         </template>
       </el-table-column>
       <el-table-column prop="quota" :label="$t('otc_order_quota',{legal_currency})"></el-table-column>
       <el-table-column prop="payment_type" :label="$t('otc_payment_method')">
-        <template slot-scope="scope">
-
+        <template slot-scope="scope"> 
           <div v-for="(item, index) in scope.row.pay_ment_data" :key="index" style="display: inline-block;margin-right: 4px;">
-            <!--<template v-if="item === '1'">-->
-              <!--<icon-->
-                <!--class="card active"-->
-                <!--name="bank-card"-->
-              <!--/>-->
-            <!--</template>-->
-            <!--<template v-if="item === '2'">-->
-              <!--<icon-->
-                <!--class="alipay active"-->
-                <!--name="alipay"-->
-              <!--/>-->
-            <!--</template>-->
-            <!--<template v-if="item === '3'">-->
-              <!--<icon-->
-                <!--class="wechat active"-->
-                <!--name="wechat"-->
-              <!--/>-->
-            <!--</template>-->
-            <icon
-              :class="item === '1' ? 'card active' : item === '2' ? 'alipay active' : 'wechat active'"
-              :name="item === '1' ? 'bank-card' : item === '2' ? 'alipay' : 'wechat'"
-            />
-          </div>
-          <!--<icon-->
-            <!--v-for="(item, index) in scope.row.pay_ment_data"-->
-            <!--:key="index"-->
-            <!--:class="item === 1 ? 'card' : item === 1 ? 'alipay' : 'wechat'"-->
-            <!--:name="item === 1 ? 'bank-card' : item === 1 ? 'alipay' : 'wechat'"-->
-          <!--/>-->
-
-          <!--<icon-->
-            <!--class="card"-->
-            <!--name="bank-card"-->
-          <!--/>-->
-
-          <!--&lt;!&ndash; 银行卡 &ndash;&gt;-->
-          <!--<icon-->
-            <!--class="alipay"-->
-            <!--name="alipay"-->
-          <!--/>-->
-          <!--&lt;!&ndash; 支付宝 &ndash;&gt;-->
-          <!--<icon-->
-            <!--:class="{'active': scope.row.payment_type.indexOf('3') > -1,}"-->
-            <!--class="wechat"-->
-            <!--name="wechat"-->
-          <!--/>-->
-
-
-          <!-- 微信 -->
+            <!-- <icon
+              :class="item === '1' ? 'card active' : item === '2' ? 'alipay active' :  item === '3' ? 'wechat active' : ''"
+              :name="item === '1' ? 'bank-card' : item === '2' ? 'alipay' :  item === '3' ? 'wechat' : ''"
+            /> -->
+            <icon v-if="index < 3" :name="paytype(item)" />
+          </div> 
         </template>
       </el-table-column>
-      <el-table-column :label="$t('operation')" width="130">
+      <el-table-column :label="$t('otc_order_trade')" width="130">
         <template slot-scope="scope">
           <div>
             <button
               v-if="isLogin && scope.row.user_id == userInfo.id"
               class="btn my"
             >{{$t('my_order')}}</button>
-            <div v-else-if="isLogin && scope.row.kyc_level > userInfo.state">
+            <div v-else-if="isLogin && scope.row.kyc_level > userInfo.lv">
               <div
                 @click="clickVerifyRow('Kyc')"
                 v-html="$t('otc_need_authentication', {side: $t('otc_side_'+side)} )"
@@ -151,6 +107,7 @@ import transactionBuy from "@/components/OTC/order/transaction/transactionBuy";
 import transactionSell from "@/components/OTC/order/transaction/transactionSell";
 import Vue from "vue";
 import { setInterval, clearInterval } from "timers";
+import otcComputed from '@/components/OTC/mixins/index.js'
 import _ from "lodash";
 
 export default {
@@ -172,33 +129,17 @@ export default {
       selectedRow: {},
       inter1: 0,
       inter2: 0,
-      dis: false
+      dis: false,  
     };
   },
+  mixins: [otcComputed],
   computed: {
     side() {
       return this.state.otc.showSide;
     },
-    currency() {
-      return this.state.otc.currency;
-    },
-    legal_currency() {
-      return this.state.otc.legal_currency;
-    },
     userInfo() {
       return this.state.userInfo;
-    },
-    symbolList: {
-      get() {
-        return this.state.otc.symbolList;
-      },
-      set(val) {
-        this.state.otc.symbolList = val;
-      }
-    },
-    isLogin() {
-      return state.userInfo !== null;
-    }
+    }, 
   },
   components: {
     sideBar,
@@ -207,6 +148,15 @@ export default {
     transactionSell
   },
   methods: {
+    paytype(type) {
+      return {
+        1: "bank-card",
+        2: "alipay",
+        3: "wechat",
+        4: "paynow",
+        5: "paylah"
+      }[type]
+    }, 
     openSideBar (row) {
       if (window.localStorage.getItem('X-TOKEN')) {
         this.operation = 1
@@ -228,6 +178,7 @@ export default {
       try {
         let orderSide = side == 1 ? 2 : 1;
         let res = await service.getOtcOrderList({
+          currency_type: this.legal_currency,
           currency,
           side: orderSide,
           page: this.page,
@@ -241,8 +192,7 @@ export default {
               let pay_ment_data = [];
 
               if (item.payment_type.includes(",")) {
-                pay_ment_data = item.payment_type.split(",");
-
+                pay_ment_data = item.payment_type.split(","); 
                 // target 更新数据源， 对象，数组 [] {}
                 // key 你要生成的键值
                 // value 你要生成的值
@@ -273,6 +223,7 @@ export default {
         let orderSide = side == 1 ? 2 : 1;
         service
           .getOtcOrderList({
+            currency_type: this.legal_currency,
             currency,
             side: orderSide,
             page: this.page,
@@ -289,21 +240,21 @@ export default {
         console.log(error);
       }
     },
-    refreshCurrency(vm) {
-       service.otcSymbolList().then(res => {
-        if (!res.code) {
-          vm.symbolList = res.data;
-          for (const symbol of vm.symbolList) {
-            if (symbol.currency == vm.currency) {
-              if (!state.otc.symbolInfo) {
-                state.otc.symbolInfo = symbol
-              }
-              Vue.set(state.otc.symbolInfo, 'cny_rate', symbol.cny_rate )
-            }
-          }
-        }
-      });
-    }
+    // refreshCurrency(vm) {
+    //    service.otcSymbolList().then(res => {
+    //     if (!res.code) {
+    //       vm.symbolList = res.data;
+    //       for (const symbol of vm.symbolList) {
+    //         if (symbol.currency == vm.currency) {
+    //           if (!state.otc.symbolInfo) {
+    //             state.otc.symbolInfo = symbol
+    //           }
+    //           Vue.set(state.otc.symbolInfo, 'cny_rate', symbol.cny_rate )
+    //         }
+    //       }
+    //     }
+    //   });
+    // }
   },
   async created() {
     this.switchCurrency(this.currency, this.side);
@@ -316,15 +267,16 @@ export default {
     })
 
     let $this = this
-    $this.refreshCurrency($this)
-    this.inter1 = setInterval(() => {
-      $this.refreshCurrency($this)
-    }, 5000);
+    // $this.refreshCurrency($this)
+    // this.inter1 = setInterval(() => {
+    //   $this.refreshCurrency($this)
+    // }, 5000);
 
     this.inter2 = setInterval(() => {
       let orderSide = this.side == 1 ? 2 : 1;
       service
         .getOtcOrderList({
+          currency_type: this.legal_currency,
           currency: this.currency,
           side: orderSide,
           page: this.page,
@@ -359,24 +311,36 @@ export default {
     clearInterval(this.inter2);
   },
   watch: {
-    currency() {
-      for (const symbol of this.symbolList) {
-        if (symbol.currency == this.currency) {
-          this.state.otc.symbolInfo = symbol;
-          return;
-        }
-      }
+    // currency() {
+    //   for (const symbol of this.symbolList) {
+    //     if (symbol.currency == this.currency) {
+    //       this.state.otc.symbolInfo = symbol;
+    //       return;
+    //     }
+    //   }
+    // },
+    legal_currency() { 
+      this.switchCurrency(this.currency, this.side);
     }
+
   }
 };
 </script>
+
 <style lang="scss">
 .entrust-order-container {
   margin-top: 20px;
+  .el-table {
+    th {
+      .cell  {
+        word-break: break-word;
+      }
+    }
+  }
   .btn {
     border: none;
     border-radius: 3px;
-    background: rgba(0, 0, 0, 0);
+    /*background: rgba(0, 0, 0, 0);*/
     color: #fff;
     padding: 7px 14px;
     cursor: pointer;
@@ -491,6 +455,7 @@ export default {
           float: right;
           box-sizing: border-box;
           .number-input {
+              
             &.input {
               font-family: monaco Trebuchet MS, Tahoma, Arial, sans-serif;
               outline: none;
@@ -604,10 +569,7 @@ span.orange {
       }
     }
     .tr.message-box {
-      position: absolute;
-      top: 8px;
-      left: 0;
-      width: 100%;
+     overflow: hidden;
     }
     .msg {
       padding-left: 24px;
@@ -635,6 +597,7 @@ span.orange {
     font-size: 12px!important;
   }
   .entrust-order-container .otcaction .action-order ul .content .number-input.input {
+    
     height: 36px!important;
     line-height: 36px!important;
   }

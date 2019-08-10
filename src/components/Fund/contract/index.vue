@@ -1,12 +1,16 @@
 <template>
   <div class="fund-container my-fund-container contract-container">
-    <div class="title-box">
-
-      <div>{{ $t('capital_manage') }}  <span class="title__second"> <span class="pl-10 pr-10"> > </span>{{ $t('contract_account') }} </span></div>
+    <div class="title-box"
+      v-if="from!='contractIndex'"
+      > 
+      <!-- <div>{{ $t('capital_manage') }}  <span class="title__second"> <span class="pl-10 pr-10"> > </span>{{ $t('contract_account') }} </span></div> -->
+      <div>
+        {{ $t('contract_account') }} 
+      </div>
       <div>
         <router-link
           class="fund-history mr-22 "
-          to="/fund/my/contract/index"> {{ $t('account_balance') }}</router-link>
+          to="/fund/hyTrade/index"> {{ $t('account_balance') }}</router-link>
         <router-link
           class="fund-history mr-22"
           to="/fund/my/contract/history"> {{ $t('transaction_record') }}</router-link>
@@ -20,6 +24,18 @@
 </template>
 <script>
 export default {
+  data() {
+    return { 
+    }
+  },
+  computed: {
+    from() {
+      return this.$route.name
+    }
+  },
+  created () {  
+    console.log(this.$route.name)
+  },
 }
 </script>
 <style lang="scss" scoped>

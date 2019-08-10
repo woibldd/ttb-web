@@ -4,7 +4,7 @@
     <div class="model-it">
       <template v-if="close">
         <div class="action-title">
-          确定取消
+         {{$t('otc_otutcol_1')}}
         </div>
         <div
           class="close-inner"
@@ -24,13 +24,15 @@
           class="action-title"
           v-if="textCode !== 3"
         >
-          {{ textDetail.side | side }} {{ textDetail.currency }}
+        <!-- {{ textDetail.side | side }} {{ textDetail.currency }} -->
+          <!-- {{ $t(textDetail.side ===1 ? 'otc_sideoc_1' : 'otc_sideoc_2')}} -->
+          {{textDetail.side ===1 ? $t('order_side_buy') : $t('order_side_sell') }}{{ textDetail.currency }}
         </div>
         <div
           v-else
           :style="{color: textDetail.side === 1 ? '#23C88B' : '#F24E4D'}"
-          class="action-title">
-          发布 {{ textDetail.side | side }} 委托单 {{ textDetail.currency }}
+          class="action-title"> 
+         {{$t('otc_otutcol_3')}}  {{ $t(textDetail.side === 1 ?this.$t('otc_side_1'):this.$t('otc_side_2') ) }}  {{$t('otc_otutcol_2')}} {{ textDetail.currency }}
         </div>
       </template>
       <template v-if="!close">
@@ -39,9 +41,21 @@
           v-if="textDetail.side === 2 && textCode === 0 && !textDetail.appeal && !textDetail.text_appeal">
           <div style="width: 90%;margin:0 auto">
             <el-steps :active="textDetail.state">
-              <el-step title="下订单"/>
-              <el-step title="等对方付款"/>
-              <el-step title="去放币"/>
+              <el-step :title="this.$t('otc_buy_step_1')"/>
+              <el-step :title="this.$t('otc_sell_step_2')"/>
+              <el-step :title="this.$t('otc_sell_step_3')"/>
+            </el-steps>
+          </div>
+        </div>
+        <div
+v-if="textDetail.side === 1 && textCode === 0 && !textDetail.appeal && !textDetail.text_appeal"
+             class="step-tip">
+          <div style="width: 90%;margin:0 auto">
+            <el-steps :active="textDetail.state">
+              <el-step :title="this.$t('otc_sell_step_1')"/>
+              <el-step :title="this.$t('otc_buy_step_2')"/>
+              <el-step :title="this.$t('otc_buy_step_3')"/>
+              <el-step :title="this.$t('otc_buy_step_4')"/>
             </el-steps>
           </div>
         </div>
@@ -49,123 +63,110 @@
           class="tips"
           v-if="textDetail.time && textCode === 0 && !textDetail.appeal && !textDetail.other_appeal">
           <!--<icon/>-->
-          还剩 <count-down :terminal="textDetail.time" />’，超时自动
-          <b v-if="textDetail.side === 1 && textDetail.state === 1">取消订单</b>
-          <b v-if="textDetail.side === 2 && textDetail.state === 1">取消订单</b>
-          <b v-if="textDetail.side === 1 && textDetail.state === 2">放币</b>
-          <b v-if="textDetail.side === 2 && textDetail.state === 2">放币</b>
-          <b v-if="textDetail.side === 1 && textDetail.state === 7">放币</b>
+          {{$t('otc_overtime_tips_a1')}} <count-down :terminal="textDetail.time" />’， {{$t('otc_overtime_tips_a2')}}
+          <b v-if="textDetail.side === 1 && textDetail.state === 1">{{$t('otc_overtime_tips_a3')}}</b>
+          <b v-if="textDetail.side === 2 && textDetail.state === 1">{{$t('otc_overtime_tips_a3')}}</b>
+          <b v-if="textDetail.side === 1 && textDetail.state === 2">{{$t('pay_fangbi')}}</b>
+          <b v-if="textDetail.side === 2 && textDetail.state === 2">{{$t('pay_fangbi')}}</b>
+          <b v-if="textDetail.side === 1 && textDetail.state === 7">{{$t('pay_fangbi')}}</b>
         </div>
         <template v-if="textCode !== 3">
           <div class="table-con">
             <dl>
               <dt>
-                <em>订单信息</em>
+                <em>{{$t('otc_transaction_info')}}</em>
                 <span
                   style="color: #5D82E1"
                   v-if="textCode === 0">
                   <em
                     v-if="!textDetail.other_appeal"
                     style="color: #FDA22D">
-                    {{ textDetail.state | state }}
+                    {{ state(textDetail.state)  }}
                   </em>
                   <em
                     v-else
-                    style="color: #FDA22D">
-                    对方已申诉
+                    style="color: #FDA22D">{{$t('otc_seiitm_7')}}
+                 
                   </em>
                 </span>
               </dt>
               <dd>
-                <span>订单号</span> <em>{{ textDetail.trans_id || '--' }}</em>
+                <span>{{$t('otc_trans_id')}}</span> <em>{{ textDetail.trans_id || '--' }}</em>
               </dd>
               <dd>
-                <span>下单时间</span><em>
-                <!--{{ textDetail.create_time || '&#45;&#45;' }}-->
-                {{ processValue('create_time', textDetail) || '--' }}
-              </em>
+                <span>{{$t('otc_create_time')}}</span><em>
+                  <!--{{ textDetail.create_time || '&#45;&#45;' }}--> 
+                  {{ processValue('create_time', textDetail) || '--' }}
+                </em>
+              </dd>
+              <dd> 
+                <span>{{$t('orders')}}{{$t('otc_amount_money')}}（{{textDetail.currency_type}}）</span><em style="color: #FDA22D">{{ textDetail.total || '--' }}</em>
               </dd>
               <dd>
-                <span>订单金额（CNY）</span><em style="color: #FDA22D">{{ textDetail.total || '--' }}</em>
+                <span>{{$t('otc_trans_idjg')}}({{textDetail.currency_type}})</span><em style="color: #FDA22D">{{ textDetail.price || '--' }}</em>
               </dd>
               <dd>
-                <span>单价(CNY)</span><em style="color: #FDA22D">{{ textDetail.price || '--' }}</em>
+                <span>{{$t('otc_side_2')}}{{$t('amount')}}</span><em>{{ textDetail.amount || '--' }}</em>
               </dd>
-              <dd>
-                <span>出售数量</span><em>{{ textDetail.amount || '--' }}</em>
-              </dd>
+              <template v-if="textDetail.otc_collection">
+                <template v-if="textDetail.state !== 1 && textDetail.state !== 6 && textDetail.state !== 4">
+                  <dd>
+                    <span>{{ textDetail.otc_collection.alipay_account ? $t('payment_namezfb') : textDetail.otc_collection.we_chat_account ? $t('payment_weChat_adasunt') : $t('payment_nameyhk') }}</span>
+                    <em>{{ textDetail.otc_collection.alipay_account ? textDetail.otc_collection.alipay_account : textDetail.otc_collection.we_chat_account ? textDetail.otc_collection.we_chat_account : textDetail.otc_collection.card_number }}</em>
+                  </dd>
+                  <dd v-if="textDetail.otc_collection.card_number">
+                    <span>{{$t('otc_otutcol_4')}}</span>
+                    <em>{{ textDetail.otc_collection.deposit_bank }}</em>
+                  </dd>
+                  <dd>
+                    <span>{{ textDetail.otc_collection.alipay_account ?  $t('payment_namezfb') : textDetail.otc_collection.we_chat_account ? $t('payment_weChat_adasunt') : $t('payment_nameyhk') }}{{$t('name')}}</span>
+                    <em>{{ textDetail.otc_collection.name || '--' }}</em>
+                  </dd>
+                </template>
+              </template>
             </dl>
           </div>
           <div class="table-con">
             <dl>
               <dt>
-                <em><b v-html="textDetail.side === 1 ? '卖' : '买'"/>家信息</em>
+                <em><b v-html="textDetail.side === 1 ? $t('otc_sideoc_2') : $t('otc_sideoc_1')"/>{{$t('otc_sideoc_3')}}</em>
               </dt>
               <dd>
-                <span><b v-html="textDetail.side === 1 ? '卖' : '买'"/>家姓名</span>
-                <em>{{ textDetail.other_name || '--' }}</em>
+                <span><b v-html="textDetail.side === 1 ? $t('otc_sideoc_2') : $t('otc_sideoc_1')"/>{{$t('otc_sideoc_4')}}</span>
+                <em>{{ textDetail.name || '--' }}</em>
               </dd>
               <dd>
-                <span>注册时间</span>
+                <span>{{$t('otc_register_time')}}</span>
                 <em>{{ processValue('register_time', textDetail) || '--' }}</em>
               </dd>
               <dd>
-                <span>认证等级</span>
+                <span>{{$t('otc_kyc_level')}}</span>
                 <em style="color: #FDA22D">{{ 'Kyc' + textDetail.kyc_level || '--' }}</em>
               </dd>
               <dd>
-                <span>成交单数</span>
+                <span>{{$t('thirty_day_orders')}}</span>
                 <em>{{ textDetail.orders_complete || '0' }}</em>
               </dd>
               <dd>
-                <span>完成率</span>
+                <span>{{$t('thirty_day_orders_rate')}}</span>
                 <em>{{ textDetail.orders_rate ? (Number(textDetail.orders_rate) * 100).toFixed(2) + '%' : '0%' }}</em>
               </dd>
               <dd>
-                <span>平均放币时间</span>
+                <span>{{$t('issue_time_avg')}}</span>
                 <em>{{ processValue('issue_time_avg', textDetail) || '--' }}</em>
-                <!--<em>{{textDetail.issue_time_avg || '&#45;&#45;'}}</em>-->
+              <!--<em>{{textDetail.issue_time_avg || '&#45;&#45;'}}</em>-->
               </dd>
               <dd>
-                <span><b v-html="textDetail.side === 1 ? '卖' : '买'"/>家提示</span>
+                <span><b v-html="textDetail.side === 1 ? $t('otc_sideoc_2') : $t('otc_sideoc_1')"/>{{$t('otc_sideoc_5')}}</span>
                 <em>{{ textDetail.remark || '--' }}</em>
               </dd>
-              <template v-if="textDetail.state !== 1 && textDetail.state !== 6 && textDetail.state !== 4">
-                <dd>
-                  <span>{{ textDetail.otc_collection.alipay_account ? '支付宝' : textDetail.otc_collection.we_chat_account ? '微信' : '银行卡' }}</span>
-                  <em>{{ textDetail.otc_collection.alipay_account ? textDetail.otc_collection.alipay_account : textDetail.otc_collection.we_chat_account ? textDetail.otc_collection.alipay_account : textDetail.otc_collection.card_number }}</em>
-                </dd>
-                <dd v-if="textDetail.otc_collection.card_number">
-                  <span>银行类型</span>
-                  <em>{{ textDetail.otc_collection.deposit_bank }}</em>
-                </dd>
-                <dd>
-                  <span>{{ textDetail.otc_collection.alipay_account ? '支付宝' : textDetail.otc_collection.we_chat_account ? '微信' : '银行卡' }}姓名</span>
-                  <em>{{ textDetail.otc_collection.name || '--' }}</em>
-                </dd>
-                <!--<template v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0">-->
-                <!--<dd>-->
-                <!--<span>银行卡</span>-->
-                <!--<em>-->
-                <!--<el-select size="small" placeholder="请选择" v-model="form.bankId" @change="bankHandle">-->
-                <!--<el-option v-for="(item, index) in bankData" :key="index" :label="item.deposit_bank" :value="item.collection_id"></el-option>-->
-                <!--</el-select>-->
-                <!--</em>-->
-                <!--</dd>-->
-                <!--<template v-if="changeFlag">-->
-                <!--<dd>-->
-                <!--<span></span>-->
-                <!--</dd>-->
-                <!--</template>-->
-                <!--</template>-->
-              </template>
             </dl>
           </div>
           <div
             class="table-con"
-            v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0">
+            v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0 && !textDetail.appeal && !textDetail.other_appeal">
             <dd>
-              <span>支付类型</span>
+              <span>{{$t('otc_otutcol_5')}}</span>
               <em>
                 <el-form
                   ref="form"
@@ -174,7 +175,7 @@
                   <el-form-item>
                     <el-select
                       size="small"
-                      placeholder="请选择"
+                      :placeholder="this.$t('please_choose')"
                       v-model="form.bankId"
                       @change="bankHandle"
                       style="width: 100%;">
@@ -190,23 +191,24 @@
             </dd>
             <template v-if="changeFlag">
               <dd>
-                <span>支付类型</span>
-                <em>{{ activeItem.a_t === 1 ? '银行卡' : activeItem.a_t === 2 ? '支付宝' : '微信' }}</em>
+                <span>{{$t('otc_otutcol_5')}}</span>
+                <!-- <em>{{ activeItem.a_t === 1 ? this.$t('payment_nameyhk') : activeItem.a_t === 2 ? this.$t('payment_namezfb') : this.$t('payment_weChat_adasunt') }}</em> -->
+                <em>{{$t(payName(activeItem.a_t).text)}}</em>
               </dd>
               <dd v-if="activeItem.a_t !== 1">
-                <span>支付账号</span>
+                <span>{{$t('otc_otutcol_6')}}</span>
                 <em>{{ activeItem.account }}</em>
               </dd>
               <dd v-else>
-                <span>银行卡号</span>
+                <span>{{$t('payment_card_number')}}</span>
                 <em>{{ activeItem.type + '  ' + activeItem.account }}</em>
               </dd>
               <dd v-if="activeItem.name">
-                <span>支付姓名</span>
+                <span>{{$t('otc_otutcol_7')}}</span>
                 <em>{{ activeItem.name }}</em>
               </dd>
               <dd v-if="activeItem.img">
-                <span>支付图片</span>
+                <span>{{$t('otc_otutcol_8')}}</span>
                 <em>
                   <!-- <img
                     :src="activeItem.img"
@@ -226,28 +228,28 @@
           <div class="table-con">
             <dl>
               <dt>
-                <em>委托单信息</em>
+                <em>{{$t('otc_order_info')}}</em>
               </dt>
               <dd>
-                <span>类型</span> <em>{{ textDetail.type === 1 ? '固定价格' : '浮动价格' }}</em>
+                <span>{{$t('order_th_type')}}</span> <em>{{ textDetail.type === 1 ? this.$t('otc_fixed_price') : this.$t('otc_float_price') }}</em>
               </dd>
               <dd>
-                <span>币种</span><em>{{ textDetail.currency }}</em>
+                <span>{{$t('fees_name')}}</span><em>{{ textDetail.currency }}</em>
               </dd>
               <dd>
-                <span>单价(CNY)</span><em style="color: #FDA22D">{{ textDetail.price || '--' }}</em>
+                <span>{{$t('otc_trans_idjg')}}({{textDetail.currency_type}})</span><em style="color: #FDA22D">{{ textDetail.price || '--' }}</em>
               </dd>
               <dd>
-                <span>数量</span><em>{{ textDetail.amount || '--' }}</em>
+                <span>{{$t('otc_trans_idsl')}}</span><em>{{ textDetail.amount || '--' }}</em>
               </dd>
               <dd>
-                <span>总金额(CNY)</span><em>{{ textDetail.total || '--' }}</em>
+                <span>{{$t('otc_ziurec_19')}}({{textDetail.currency_type}})</span><em>{{ textDetail.total || '--' }}</em>
               </dd>
               <dd>
-                <span>平台服务费</span><em>限时免费</em>
+                <span>{{$t('otc_ziurec_13')}}</span><em>{{$t('otc_ziurec_16')}}</em>
               </dd>
               <dd>
-                <span>对手认证等级</span><em style="color: #FDA22D">{{ 'KYC' + textDetail.kyc_level || '--' }}</em>
+                <span>{{$t('otc_opponent_kyc_level')}}</span><em style="color: #FDA22D">{{ 'KYC' + textDetail.kyc_level || '--' }}</em>
               </dd>
             </dl>
           </div>
@@ -256,65 +258,66 @@
             <div class="table-con">
               <dl>
                 <dt>
-                  <em><b v-html="textDetail.side === 1 ? '卖' : '买'"/>家信息</em>
+                  <em><b v-html="textDetail.side === 1 ? this.$t('otc_sideoc_2') : this.$t('otc_sideoc_1') "/>{{$t('otc_sideoc_3')}}</em>
                 </dt>
                 <dd>
-                  <span><b v-html="textDetail.side === 1 ? '卖' : '买'"/>家姓名</span>
-                  <em>{{ textDetail.name || '--' }}</em>
+                  <span><b v-html="textDetail.side === 1 ? this.$t('otc_sideoc_2')  : this.$t('otc_sideoc_1') "/>{{$t('otc_sideoc_4')}}</span>
+                  <em v-if="textCode === 0">{{ textDetail.name || '--' }}</em>
+                  <em v-else>{{ textDetail.other_name || '--' }}</em>
                 </dd>
                 <dd>
-                  <span>注册时间</span>
+                  <span>{{$t('otc_register_time')}}</span>
                   <em>{{ processValue('register_time', textDetail) || '--' }}</em>
                 </dd>
                 <dd>
-                  <span>认证等级</span>
+                  <span>{{$t('otc_kyc_level')}}</span>
                   <em>{{ textDetail.kyc_level || '--' }}</em>
                 </dd>
                 <dd>
-                  <span>成交单数</span>
+                  <span>{{$t('thirty_day_orders')}}</span>
                   <em>{{ textDetail.orders_complete || '0' }}</em>
                 </dd>
                 <dd>
-                  <span>完成率</span>
+                  <span>{{$t('thirty_day_orders_rate')}}</span>
                   <em>{{ textDetail.orders_rate ? (Number(textDetail.orders_rate) * 100).toFixed(2) + '%' : '0%' }}</em>
                 </dd>
                 <dd>
-                  <span>平均放币时间</span>
+                  <span>{{$t('issue_time_avg')}}</span>
                   <em>{{ processValue('issue_time_avg', textDetail) || '--' }}</em>
-                  <!--<em>{{textDetail.issue_time_avg || '&#45;&#45;'}}</em>-->
+                <!--<em>{{textDetail.issue_time_avg || '&#45;&#45;'}}</em>-->
                 </dd>
                 <dd>
-                  <span><b v-html="textDetail.side === 1 ? '卖' : '买'"/>家提示</span>
+                  <span><b v-html="textDetail.side === 1 ?this.$t('otc_sideoc_2'):this.$t('otc_sideoc_1')"/>{{$t('otc_sideoc_5')}}</span>
                   <em>{{ textDetail.remark || '--' }}</em>
                 </dd>
                 <template v-if="textDetail.state !== 1 && textDetail.state !== 6 && textDetail.state !== 4">
                   <dd>
-                    <span>{{ textDetail.otc_collection.alipay_account ? '支付宝' : textDetail.otc_collection.we_chat_account ? '微信' : '银行卡' }}</span>
+                    <span>{{ textDetail.otc_collection.alipay_account ? $t('payment_namezfb') : textDetail.otc_collection.we_chat_account ?  $t('payment_weChat_adasunt') : $t('payment_nameyhk') }}</span>
                     <em>{{ textDetail.otc_collection.alipay_account ? textDetail.otc_collection.alipay_account : textDetail.otc_collection.we_chat_account ? textDetail.otc_collection.alipay_account : textDetail.otc_collection.card_number }}</em>
                   </dd>
                   <dd v-if="textDetail.otc_collection.card_number">
-                    <span>银行类型</span>
+                    <span>{{$t('otc_otutcol_4')}}</span>
                     <em>{{ textDetail.otc_collection.deposit_bank }}</em>
                   </dd>
                   <dd>
-                    <span>{{ textDetail.otc_collection.alipay_account ? '支付宝' : textDetail.otc_collection.we_chat_account ? '微信' : '银行卡' }}姓名</span>
+                    <span>{{ textDetail.otc_collection.alipay_account ? $t('payment_namezfb') : textDetail.otc_collection.we_chat_account ?  $t('payment_weChat_adasunt') :  $t('payment_nameyhk') }}{{$t('payment_name')}}</span>
                     <em>{{ textDetail.otc_collection.name || '--' }}</em>
                   </dd>
-                  <!--<template v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0">-->
-                  <!--<dd>-->
-                  <!--<span>银行卡</span>-->
-                  <!--<em>-->
-                  <!--<el-select size="small" placeholder="请选择" v-model="form.bankId" @change="bankHandle">-->
-                  <!--<el-option v-for="(item, index) in bankData" :key="index" :label="item.deposit_bank" :value="item.collection_id"></el-option>-->
-                  <!--</el-select>-->
-                  <!--</em>-->
-                  <!--</dd>-->
-                  <!--<template v-if="changeFlag">-->
-                  <!--<dd>-->
-                  <!--<span></span>-->
-                  <!--</dd>-->
-                  <!--</template>-->
-                  <!--</template>-->
+                <!--<template v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0">-->
+                <!--<dd>-->
+                <!--<span>银行卡</span>-->
+                <!--<em>-->
+                <!--<el-select size="small" placeholder="请选择" v-model="form.bankId" @change="bankHandle">-->
+                <!--<el-option v-for="(item, index) in bankData" :key="index" :label="item.deposit_bank" :value="item.collection_id"></el-option>-->
+                <!--</el-select>-->
+                <!--</em>-->
+                <!--</dd>-->
+                <!--<template v-if="changeFlag">-->
+                <!--<dd>-->
+                <!--<span></span>-->
+                <!--</dd>-->
+                <!--</template>-->
+                <!--</template>-->
                 </template>
               </dl>
             </div>
@@ -323,18 +326,18 @@
       </template>
       <div
         class="tips"
-        v-if="textDetail.side === 2 && textDetail.state === 2 && textDetail.state !== 7 && textDetail.appeal && textCode === 0 && textDetail.textDetail.appeal">确认收到买家付款后请及时点击【确认放币】，否则请勿点击</div>
+        v-if="textDetail.side === 2 && textDetail.state === 2 && textDetail.state !== 7 && !textDetail.appeal && textCode === 0 && !textDetail.other_appeal">{{$t('otc_sell_tips_k')}}</div>
       <div
         class="tips1"
-        v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0 && !close">
+        v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0 && !close && !textDetail.appeal && !textDetail.other_appeal">
         <div class="tips-con">
-          <p>线下转账请注意</p>
+          <p>{{$t('otc_buy_tips_a')}}</p>
           <ul>
             <li>
-              <b>请勿备注任何信息</b>
+              <b>{{$t('otc_buy_tips_b')}}</b>
             </li>
             <li>
-              请使用<b>实时到账</b>的支付方式。选择支付宝转银行卡、 延时到账等方式造成2小时内未到账，<b>卖家有权延迟 放币或取消订单！</b>
+            {{$t('otc_buy_tips_c')}}
             </li>
           </ul>
         </div>
@@ -344,33 +347,50 @@
       class="step-btn"
       :class="{stepActive: stepActive}">
       <p
-        v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0 && !close"
-        style="color: #999;font-size: 13px;line-height: 24px;padding: 8px 0">付款完成后请及时点击“已付款”按钮，本平台不提供自动扣款， 请自行付款！</p>
+        v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0 && !close && !textDetail.appeal && !textDetail.other_appeal"
+        style="color: #999;font-size: 13px;line-height: 24px;padding: 8px 0;margin-bottom: 10px;">{{$t('otc_buy_tips_j')}}</p>
       <a
         href="javascript:;"
         class="close_btn"
-        v-if="textCode === 0"
-        @click="closeHandle">关闭</a>
+        v-if="textCode === 0 && !textDetail.appeal && !textDetail.other_appeal && textDetail.side === 1 && textDetail.state === 1"
+        @click="closeHandle">{{$t('otc_close')}}</a>
+      <a
+        href="javascript:;"
+        class="close_btn"
+        v-if="textCode === 0 && !textDetail.appeal && !textDetail.other_appeal && textDetail.side === 2 && textDetail.state === 2"
+        @click="closeHandle">{{$t('otc_close')}}</a>
+      <a
+        href="javascript:;"
+        class="close_btn"
+        v-if="textCode === 0 && !textDetail.appeal && !textDetail.other_appeal && textDetail.side === 2 && textDetail.state === 7"
+        @click="closeHandle">{{$t('otc_close')}}</a>
       <template v-if="close">
         <a
           href="javascript:;"
           class="btn_t"
-          @click="stepHandle('close')">取消订单</a>
+          @click="stepHandle('close')">{{$t('otc_overtime_tips_a3')}}</a>
       </template>
       <template v-else>
-        <template v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0">
+        <template v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0 && !textDetail.appeal && !textDetail.other_appeal">
           <!--<div class="tips">付款完成后请及时点击“已付款”按钮，本平台不提供自动扣款， 请自行付款！</div>-->
           <a
             href="javascript:;"
             class="btn_t"
-            @click="stepHandle('money')">确认付款</a>
+            @click="stepHandle('money')">{{$t('otc_already_paid')}}</a>
         </template>
-        <template v-if="textDetail.side === 2 && textDetail.state === 2 && textDetail.state !== 7 && !textDetail.appeal && !textDetail.other_appeal && textCode === 0">
+        <template v-if="textDetail.side === 2 && textDetail.state === 2 && !textDetail.appeal && !textDetail.other_appeal && textCode === 0">
           <!--<div class="tips">确认收到买家付款后请及时点击【确认放币】，否则请勿点击</div>-->
           <a
             href="javascript:;"
             class="btn_t"
-            @click="stepHandle('down')">确认放币</a>
+            @click="stepHandle('down')">{{$t('otc_confirm_issued')}}</a>
+        </template>
+        <template v-if="textDetail.side === 2 && textDetail.state === 7 && !textDetail.appeal && !textDetail.other_appeal && textCode === 0">
+          <!--<div class="tips">确认收到买家付款后请及时点击【确认放币】，否则请勿点击</div>-->
+          <a
+            href="javascript:;"
+            class="btn_t"
+            @click="stepHandle('down')">{{$t('otc_confirm_issued')}}</a>
         </template>
         <!--<template v-if="textDetail.side === 2  && textCode === 0">-->
         <!--<a href="javascript:;" class="btn_t" @click="stepHandle('down')">我已放币</a>-->
@@ -402,14 +422,24 @@ export default {
         activeItem: {}
       },
       qrsrc: '',
-      showQRcode: false,
+      activeItem: {},
+      showQRcode: false
     }
   },
   components: {
     countDown
   },
+  filters: {
+    formatBankNumber (bankNumber) { 
+      return bankNumber.substr(0, 4) + '****' + bankNumber.substr(-4)
+    },
+    otherCount (e) {
+      return e.substr(0, 3) + '****'
+    }
+  },
   methods: {
     openQR (collection_img) {
+      console.log(collection_img)
       this.qrsrc = collection_img
       this.showQRcode = true
     },
@@ -419,14 +449,25 @@ export default {
     closeHandle () {
       this.$emit('close-change')
     },
+    payName(type){
+      return {
+          1: { text:"payment_nameyhk", account:"card_number"},
+          2: { text:"payment_namezfb", account:"alipay_account"},
+          3: { text:"payment_weChat_adasunt", account:"alipay_account"},
+          4: { text:"Paynow", account:"card_number"},
+          5: { text:"Paylah", account:"card_number"},
+        }[type]
+    },
     bankHandle () {
       this.changeFlag = true
       this.activeItem = {}
       if (this.bankData.length > 0) {
         this.bankData.forEach((item) => {
           if (this.form.bankId === item.collection_id) {
-            const payType = item.obj.payment_type === 1 ? item.obj.deposit_bank : item.obj.payment_type === 2 ? '支付宝' : '微信'
-            const payAccount = item.obj.alipay_account ? item.obj.alipay_account : item.obj.card_number ? item.obj.card_number : item.obj.we_chat_account
+            // const payType = item.obj.payment_type === 1 ? item.obj.deposit_bank : item.obj.payment_type === 2 ?this.$t('payment_namezfb') : this.$t('payment_weChat_adasunt')
+            // const payAccount = item.obj.alipay_account ? item.obj.alipay_account : item.obj.card_number ? item.obj.card_number : item.obj.we_chat_account
+            const payType = this.payName(item.obj.payment_type).text 
+            const payAccount = item.obj[this.payName(item.obj.payment_type).account] 
             this.activeItem = {
               name: item.obj.name,
               img: item.obj.collection_img,
@@ -441,15 +482,12 @@ export default {
     }
   },
   watch: {
-    bankData() {
-      console.log(this.bankData)
-      //默认选择银行卡支付
+    bankData () {
       if (this.bankId) {
         this.form.bankId = this.bankId
         this.bankHandle()
-      }
-      else if (this.bankData && this.bankData.length > 0) {
-        let arr = this.bankData.filter(arg => arg.obj.payment_type===1)
+      } else if (this.bankData && this.bankData.length > 0) {
+        let arr = this.bankData.filter(arg => arg.obj.payment_type === 1)
         if (arr.length > 0) {
           this.form.bankId = arr[0].collection_id
         }

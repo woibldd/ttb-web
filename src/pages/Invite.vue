@@ -47,8 +47,8 @@
           <div class="invite-list">
             <div class="th pd-15">
               <div class="td">{{ $t('username') }}</div>
-              <div class="td">{{ $t('invite_kyc2') }}</div>
-              <div class="td">{{ $t('time') }}</div>
+              <div class="td center">{{ $t('invite_kyc_lv') }}</div>
+              <div class="td right">{{ $t('time') }}</div>
             </div>
             <div class="tbody pb-20">
               <div
@@ -65,8 +65,10 @@
                 v-for="item in invitationList.list"
                 :key="item.id">
                 <div class="td">{{ item.phone || item.email }}</div>
-                <div class="td">{{ item.state === 2 ? $t('invite_kyc2_pass') : $t('invite_kyc2_deniel') }}</div>
-                <div class="td">{{ item.register_time | ts2date }}</div>
+                <div class="td center">
+                  {{ item.lv > 0 ? 'KYC' + item.lv : $t('invite_kyc2_deniel') }}
+                </div>
+                <div class="td right">{{ item.register_time | ts2date }}</div>
               </div>
             </div>
             <div
@@ -192,16 +194,80 @@ export default {
         page: this.invitationList.page++,
         size: PageSize
       })
-      if (result && !result.code) {
-        if (!result.data || result.data.length < PageSize) {
+      if (result && !result.code) { 
+        // result.data = {
+        //   page: 1,
+        //   size: 10,
+        //   total: 66,
+        //   data: [
+        //     {
+        //       "id": "1090560",
+        //       "region": 86,
+        //       "phone": "18******802",
+        //       "register_time": 1561875636599,
+        //       "lv": 0,
+        //       "state": 0
+        //     },
+        //     {
+        //       "id": "1039351",
+        //       "region": 86,
+        //       "phone": "15******716",
+        //       "register_time": 1559522535673,
+        //       "lv": 0,
+        //       "state": 0
+        //     },
+        //     {
+        //       "id": "970225",
+        //       "email": "3****@qq.com",
+        //       "register_time": 1557404589920,
+        //       "lv": 0,
+        //       "state": 0
+        //     },
+        //     {
+        //       "id": "963501",
+        //       "email": "b****@foxmail.com",
+        //       "register_time": 1556523101902,
+        //       "lv": 0,
+        //       "state": 0
+        //     },
+        //     {
+        //       "id": "963255",
+        //       "region": 86,
+        //       "phone": "15******135",
+        //       "register_time": 1556506360033,
+        //       "lv": 0,
+        //       "state": 0
+        //     },
+        //     {
+        //       "id": "1090560",
+        //       "region": 86,
+        //       "phone": "18******802",
+        //       "register_time": 1561875636599,
+        //       "lv": 0,
+        //       "state": 0
+        //     },
+        //     {
+        //       "id": "1039351",
+        //       "region": 86,
+        //       "phone": "15******716",
+        //       "register_time": 1559522535673,
+        //       "lv": 0,
+        //       "state": 0
+        //     }, 
+        //   ]
+        // }
+        if (!result.data.data || result.data.total < PageSize ) {
           this.invitationList.isEnd = true
         } else {
           this.invitationList.isEnd = false
         }
         if (this.invitationList.list.length > 0) {
-          this.invitationList.list = this.invitationList.list.concat(result.data)
+          this.invitationList.list = this.invitationList.list.concat(result.data.data) 
+          if (this.invitationList.list.length >= result.data.total) {
+            this.invitationList.isEnd = true
+          }
         } else {
-          this.invitationList.list = result.data
+          this.invitationList.list = result.data.data
         }
       } else {
         utils.alert(result.message)
@@ -406,7 +472,15 @@ export default {
           justify-content: space-between;
           font-size: 14px;
           color: $text-light;
-
+          .td {
+            flex: 1;
+            &.center {
+              text-align: center;
+            }
+            &.right {
+              text-align: right;
+            }
+          }
           .username {
             width: 20%;
             @include limit(1)

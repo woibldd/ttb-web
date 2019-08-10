@@ -17,8 +17,8 @@ const processValue = {
       }
 
       if (key === 'order_amount') {
-        value = '0'
-          if(!row.amount || !row.freezed){
+        if(!row.amount || !row.freezed){
+          value = '0'
         }
         else {
           return this.$big(row.amount).minus(row.freezed).toString()
@@ -39,13 +39,21 @@ const processValue = {
       }
 
       if (key === 'payment_type') {
+        console.log({key})
         switch (value) {
-          case 1:
-            return `银行卡(${row['card_number']})`
+          case 1: 
+            // return `银行卡(${row['card_number']})`
+            return row['card_number'].substr(0, 4) + '****' + row['card_number'].substr(-4)
           case 2:
-            return `支付宝(${row['alipay_account']})`
+            // return `支付宝(${row['alipay_account']})`
+            return '支付宝 ' + row['alipay_account'].substr(0, 3) + '****'
           case 3:
-            return `微信支付(${row['we_chat_account']})`
+            // return `微信支付(${row['we_chat_account']})`
+            return '微信支付 ' + row['we_chat_account'].substr(0, 3) + '****' 
+          case 4: 
+            return 'Paynow ' + row['card_number'].substr(0, 4) + '****' + row['card_number'].substr(-4)
+          case 5:
+            return 'Paylah ' + row['card_number'].substr(0, 4) + '****' + row['card_number'].substr(-4)
           default:
             return ''
         }
@@ -54,22 +62,22 @@ const processValue = {
       if (key === 'transaction_state') {
         value = row['state']
         switch (value) {
-          case 1:
-            return "待支付"
-          case 2:
-            return "等待放币"
-          case 3:
-            return "已完成"
-          case 4:
-            return "买家取消"
-          case 5:
-            return "卖家取消"
-          case 6:
-            return "买家超时取消"
-          case 7:
-            return "卖家超时发币"
-          default:
-            return ""
+            case 1:
+                return this.$t('otcState_1')
+            case 2:
+                return this.$t('otcState_2')
+            case 3:
+                return this.$t('otcState_3')
+            case 4:
+                return this.$t('otcState_4')
+            case 5:
+                return this.$t('otcState_5')
+            case 6:
+                return this.$t('otcState_6')
+            case 7:
+                return this.$t('otcState_7')
+            default:
+                return ""
         }
       }
 

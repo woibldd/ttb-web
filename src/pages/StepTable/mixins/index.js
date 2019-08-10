@@ -8,151 +8,22 @@ import SlideModel from '../components/StepModel'
 import utils from '../../../modules/utils'
 import service from '@/modules/service'
 import {state} from '@/modules/store'
+import STepSelect from '../components/StepSelect'
 export const tradeMixins = {
+  components: {
+    StepTable,
+    SlideModel,
+    STepSelect
+  },
   data () {
     return {
       active: 0,
       side: 0,
       detail: {},
-      orderHeader: [
-        {
-          label: '订单号',
-          prop: 'trans_id'
-        },
-        {
-          label: '类型',
-          prop: 'side',
-          render: (h, params) => {
-            const state = params.row.side
-            const name = state === 1 ? '买入' : '卖出'
-            const color = state === 1 ? '#09C989' : '#F45151'
-            return h('div', {
-              style: {
-                color: color
-              }
-            }, name)
-          }
-        },
-        {
-          label: '状态',
-          prop: 'state',
-          render: (h, params) => {
-            return h('div', this.state(params.row.state))
-          }
-        },
-        {
-          label: '币种',
-          prop: 'symbol'
-        },
-        {
-          label: '价格',
-          prop: 'price',
-          render: (h, params) => {
-            let spiltName = params.row.symbol.split('/')
-            let name = params.row.price + '   ' + spiltName[1]
-            return h('div', name)
-          }
-        },
-        {
-          label: '数量',
-          prop: 'amount',
-          render: (h, params) => {
-            let name = params.row.amount + '   ' + params.row.currency
-            return h('div', name)
-          }
-        },
-        {
-          label: '金额',
-          prop: 'total',
-          render: (h, params) => {
-            let spiltName = params.row.symbol.split('/')
-            let name = params.row.total + '   ' + spiltName[1]
-            return h('div', name)
-          }
-        },
-        {
-          label: '下单时间',
-          prop: 'create_time',
-          width: 180,
-          render: (h, params) => {
-            return h('div', utils.dateFormatter(params.row.create_time, 'Y-M-D H:m:s'))
-          }
-        },
-        {
-          label: '操作',
-          prop: 'trans_id',
-          render: this.tradeActions
-        }
-      ],
-      tradeHeader: [
-        {
-          label: '委托单号',
-          prop: 'active_id'
-        },
-        {
-          label: '类型',
-          prop: 'side',
-          render: (h, params) => {
-            const state = params.row.side
-            const name = state === 1 ? '买入' : '卖出'
-            const color = state === 1 ? '#09C989' : '#F45151'
-            return h('div', {
-              style: {
-                color: color
-              }
-            }, name)
-          }
-        },
-        {
-          label: '委托单价',
-          prop: 'price',
-          render: (h, params) => {
-            let spiltName = params.row.symbol.split('/')
-            let name = params.row.price + '   ' + spiltName[1]
-            return h('div', name)
-          }
-        },
-        {
-          label: '委托数量/成交数量',
-          prop: 'side',
-          width: 160,
-          render: (h, params) => {
-            let name = params.row.amount + '/' + params.row.executed + '  ' + params.row.currency
-            return h('div', name)
-          }
-        },
-        {
-          label: '委托金额/成交金额',
-          width: 160,
-          prop: 'side',
-          render: (h, params) => {
-            let spiltName = params.row.symbol.split('/')
-            let name = params.row.total + '/' + params.row.executed * params.row.price + '   ' + spiltName[1]
-            return h('div', name)
-          }
-        },
-        {
-          label: '状态',
-          prop: 'state',
-          render: (h, params) => {
-            return h('div', this.orderState(params.row.state))
-          }
-        },
-        {
-          label: '发布时间',
-          prop: 'create_time',
-          width: 180,
-          render: (h, params) => {
-            return h('div', utils.dateFormatter(params.row.create_time, 'Y-M-D H:m:s'))
-          }
-        },
-        {
-          label: '操作',
-          prop: 'id',
-          width: 140,
-          render: this.tradeActions
-        }
-      ],
+      currentType: {
+        currency: ''
+      },
+
       tableHeader: [],
       data: [],
       tradeData: [
@@ -174,54 +45,221 @@ export const tradeMixins = {
     },
     id () {
       return this.userInfo.id
-    }
-  },
-  components: {
-    StepTable,
-    SlideModel
-  },
-  filters: {
-    side (state) {
-      return state === 1 ? '买入' : '售出'
     },
-    state (code) {
-      switch (code) {
-        case 1:
-          return '待支付'
-        case 2:
-          return '等待放币'
-        case 3:
-          return '已完成'
-        case 4:
-          return '买家取消'
-        case 5:
-          return '卖家取消'
-        case 6:
-          return '买家超时取消'
-        case 7:
-          return '卖家超时放币'
-        default:
-          return ''
-      }
+    orderHeader () {
+      return [
+        {
+          label: this.$t('otc_trans_id'),
+          prop: 'trans_id'
+        },
+        {
+          label: this.$t('order_th_type'),
+          prop: 'side',
+          renderHeader: (h, params) => {
+            return h(STepSelect, {
+              on: {
+                'dropdown-slect': (e) => {
+                  this.params1.side = e
+                  this.init(this.active)
+                }
+              }
+            })
+          },
+          render: (h, params) => {
+            const state = params.row.side
+            const name = state === 1 ? this.$t('order_side_buy') : this.$t('order_side_sell')
+            const color = state === 1 ? '#09C989' : '#F45151'
+            return h('div', {
+              style: {
+                color: color
+              }
+            }, name)
+          }
+        },
+        {
+          label: this.$t('order_th_status'),
+          prop: 'state',
+          render: (h, params) => {
+            return h('div', this.state(params.row.state))
+          }
+        },
+        {
+          label: this.$t('currency'),
+          prop: 'symbol',
+          renderHeader: (h, params) => {
+            return h(STepSelect, {
+              props: {
+                dropData: {
+                  name: this.$t('otc_currency'),
+                  data: [this.$t('allin'), 'USDT', 'BTC']
+                }
+              },
+              on: {
+                'dropdown-slect': (e) => {
+                  const selectName = e === 0 ? '' : e === 1 ? 'USDT' : 'BTC'
+                  this.params1.currency = selectName
+                  this.init(this.active)
+                }
+              }
+            })
+          }
+        },
+        {
+          label: this.$t('price'),
+          prop: 'price',
+          render: (h, params) => {
+            let spiltName = params.row.symbol.split('/')
+            let name = params.row.price + '   ' + spiltName[1]
+            return h('div', name)
+          }
+        },
+        {
+          label: this.$t('amount'),
+          prop: 'amount',
+          render: (h, params) => {
+            let name = params.row.amount + '   ' + params.row.currency
+            return h('div', name)
+          }
+        },
+        {
+          label: this.$t('order_value'),
+          prop: 'total',
+          render: (h, params) => {
+            let spiltName = params.row.symbol.split('/')
+            let name = params.row.total + '   ' + spiltName[1]
+            return h('div', name)
+          }
+        },
+        {
+          label: this.$t('otc_create_time'),
+          prop: 'create_time',
+          width: 180,
+          render: (h, params) => {
+            return h('div', utils.dateFormatter(params.row.create_time, 'Y-M-D H:m:s'))
+          }
+        },
+        {
+          label: this.$t('operation'),
+          prop: 'trans_id',
+          render: this.tradeActions
+        }
+      ]
+    },
+    tradeHeader () {
+      return [
+        {
+          label: this.$t('otc_active_id'),
+          prop: 'active_id'
+        },
+        {
+          label: this.$t('order_th_type'),
+          prop: 'side',
+          render: (h, params) => {
+            const state = params.row.side
+            const name = state === 1 ? this.$t('order_side_buy') : this.$t('order_side_sell')
+            const color = state === 1 ? '#09C989' : '#F45151'
+            return h('div', {
+              style: {
+                color: color
+              }
+            }, name)
+          }
+        },
+        {
+          label: this.$t('order_th_capedasda'),
+          prop: 'price',
+          render: (h, params) => {
+            let spiltName = params.row.symbol.split('/')
+            let name = params.row.price + '   ' + spiltName[1]
+            return h('div', name)
+          }
+        },
+        {
+          label: this.$t('order_th_capeaxcvb'),
+          prop: 'side',
+          width: 160,
+          render: (h, params) => {
+            let name = params.row.amount + '/' + params.row.executed + '  ' + params.row.currency
+            return h('div', name)
+          }
+        },
+        {
+          label: this.$t('order_th_capehjiky'),
+          width: 160,
+          prop: 'side',
+          render: (h, params) => {
+            let spiltName = params.row.symbol.split('/')
+            let name = params.row.total + '/' + params.row.executed * params.row.price + '   ' + spiltName[1]
+            return h('div', name)
+          }
+        },
+        {
+          label: this.$t('state'),
+          prop: 'state',
+          render: (h, params) => {
+            return h('div', this.orderState(params.row.state))
+          }
+        },
+        {
+          label: this.$t('order_th_capeqqewc'),
+          prop: 'create_time',
+          width: 180,
+          render: (h, params) => {
+            return h('div', utils.dateFormatter(params.row.create_time, 'Y-M-D H:m:s'))
+          }
+        },
+        {
+          label: this.$t('active_relay_operator'),
+          prop: 'id',
+          width: 140,
+          render: this.tradeActions
+        }
+      ]
     }
   },
+  // filters: {
+
+  //   //  side (state) {
+  //   //   return state === 1 ?'otc_side_1' :'otc_side_2'
+  //   // },
+  //   state (code) {
+  //     switch (code) {
+  //       case 1:
+  //         return this.$t('otc_sideoc_6')
+  //       case 2:
+  //         return this.$t('otc_buy_step_4')
+  //       case 3:
+  //         return this.$t('done')
+  //       case 4:
+  //         return this.$t('otc_sidees2')
+  //       case 5:
+  //         return this.$t('otc_sidees3')
+  //       case 6:
+  //         return this.$t('otc_sidees4')
+  //       case 7:
+  //         return this.$t('otc_sideoc_7')
+  //       default:
+  //         return ''
+  //     }
+  //   }
+  // },
   methods: {
-    state (code) {
+    state (code) { 
       switch (code) {
         case 1:
-          return '待支付'
+          return this.$t('otc_sideoc_6')
         case 2:
-          return '等待放币'
+          return this.$t('otc_buy_step_4')
         case 3:
-          return '已完成'
+          return this.$t('done')
         case 4:
-          return '买家取消'
+          return this.$t('otc_sidees2')
         case 5:
-          return '卖家取消'
+          return this.$t('otc_sidees3')
         case 6:
-          return '买家超时取消'
+          return this.$t('otc_sidees4')
         case 7:
-          return '卖家超时放币'
+          return this.$t('otc_sideoc_7')
         default:
           return ''
       }
@@ -229,17 +267,17 @@ export const tradeMixins = {
     orderState (code) {
       switch (code) {
         case 1:
-          return '委托中未成交'
+          return this.$t('contract_assigning_undeal')
         case 2:
-          return '委托中部分成交'
+          return this.$t('contract_assigning_deal_part')
         case 3:
-          return '成交完了'
+          return this.$t('otc_sidees6')
         case 4:
-          return '撤单全部'
+          return this.$t('otc_sidees7')
         case 5:
-          return '撤单部分成交'
+          return this.$t('otc_sidees8')
         case 6:
-          return '暂停'
+          return this.$t('otc_sidees9')
         default:
           return ''
       }
@@ -259,12 +297,26 @@ export const tradeMixins = {
           },
           on: {
             click: () => {
-              this.dialogVisible = true
-              this.detail = params.row
-              this.side = 0
+              if (this.active === 3) {
+                this.dialogVisible = true
+                this.detail = params.row
+                this.side = 0
+                this.bankData = []
+              } else {
+                let p = {
+                  trans_id: params.row.trans_id,
+                  user_id: this.id
+                }
+                service.getOtcOrderInfo(p).then(res => {
+                  this.dialogVisible = true
+                  this.detail = res.data
+                  this.side = 0
+                  this.bankData = []
+                })
+              }
             }
           }
-        }, '详情')
+        }, this.$t('otc_sidees10'))
       )
       if (this.active === 3) {
         if (params.row.state === 1 || params.row.state === 2) {
@@ -274,7 +326,7 @@ export const tradeMixins = {
                 marginRight: '5px',
                 width: '40px',
                 height: '20px',
-                background: '#01CED1',
+                background: 'rgba(201,169,108,1)',
                 borderRadius: '10px',
                 color: '#fff',
                 fontSize: '12px',
@@ -286,27 +338,49 @@ export const tradeMixins = {
               },
               on: {
                 click: () => {
-                  service.otcOrderRemove(
-                    {
-                      type: 1,
-                      trans_id: params.row.active_id
-                    }
-                  ).then(res => {
-                    if (!res.code) {
-                      this.$message.success('撤销成功')
-                      this.init(this.active)
-                    } else {
-                      this.$message.error(`${res.message}`)
-                    }
+                  this.$confirm(this.$t('otc_ziurec_18'), {
+                    confirmButtonText: this.$t('otc_ziurec_20'),
+                    cancelButtonText: this.$t('cancel'),
+                    type: 'warning'
+                  }).then(() => {
+                    service.otcOrderRemove(
+                      {
+                        type: 1,
+                        trans_id: params.row.active_id
+                      }
+                    ).then(res => {
+                      if (!res.code) {
+                        // this.$message.success('撤销成功')
+                        this.$message({
+                          type: 'success',
+                          message: this.$t('otc_sidees11'),
+                          duration: 1000
+                        })
+                        this.init(this.active)
+                      } else {
+                        // this.$message.error(`${res.message}`)
+                        this.$message({
+                          type: 'error',
+                          message: `${res.message}`,
+                          duration: 1000
+                        })
+                      }
+                    })
+                  }).catch(() => {
                   })
                 }
               }
-            }, '撤销')
+            }, this.$t('contract_assign_revert'))
           )
         }
       }
       return h('div', btns)
-    }
+    },
+    Order (state) {
+        return state === 1 ? this.$t('otc_side_1') : this.$t('otc_side_2')
+
+        
+      }
   },
   created () {
     // 初始化第一条数据

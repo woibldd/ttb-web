@@ -15,11 +15,11 @@
       @input="updateValue($event.target.value, 'input')"
       @focus="focus()"
       @blur="fixValue();blur()">
+
     <div
-      class="currency-input label"
+      class="currency-input label long"
       v-if="currency"
-      :class="{long: currency.length > 5}">
-      {{ currency }}
+      v-html="currency">
     </div>
     <!-- <div class="btn bid1" v-show="bid"
       v-tooltip.left="bidTip"
@@ -66,7 +66,12 @@ export default {
     currency: {
       type: String
     },
-    value: String
+    value: String,
+    // 步长间隔 N 每次增加N个最小单位
+    accuracy: {
+      type: Number,
+      default: 1
+    },
   },
   data () {
     const vm = this
@@ -74,7 +79,7 @@ export default {
       debug: 0,
       lastValue: '',
       bidTip: {
-        classes: ['pro-popover'],
+        classes: ['ix-popover'],
         offset: '-4px',
         popperOptions: {
           modifiers: {
@@ -123,10 +128,12 @@ export default {
   },
   watch: {
     realScale () {
+      console.log('scaleChange')
       this.updateValue(this.$refs.input.value, 'scaleChange')
     },
-    value (newValue) {
-      this.onValueChange(newValue)
+    value (newValue, oldValue) {
+      if (newValue !== oldValue)
+        this.onValueChange(newValue)
     }
   },
   mounted () {
@@ -136,10 +143,10 @@ export default {
   },
   methods: {
     up () {
-      this.fixValue(1)
+      this.fixValue(this.accuracy || 1)
     },
     down () {
-      this.fixValue(-1)
+      this.fixValue(-this.accuracy || -1)
     },
     setAsk () {
       this.updateValue(this.$big(this.ask).toString())
@@ -159,7 +166,15 @@ export default {
         return this.updateValue('')
       }
       try {
-        this.updateValue(this.$big(newValue).round(this.realScale) + '', 'valueChange')
+        // 最小进步 accuracy 参与运算 
+        const minStep = this.$big(10).pow(-this.realScale).times(this.accuracy)
+        // const minStep = Math.pow(10, -this.realScale) * this.accuracy
+        let $newValue = this.$big(newValue)
+        if (!$newValue.mod(minStep).eq(0)) {
+          $newValue = $newValue.div(minStep).round(this.realScale >= 1 ? this.realScale - 1 : 0, 0).mul(minStep)
+        }
+        // this.updateValue(this.$big(newValue).round(this.realScale) + '', 'valueChange')
+        this.updateValue($newValue.round(this.realScale) + '', 'valueChange')
       } catch (e) {
         utils.log('Invalid value changing: ', newValue)
         this.log(e)
@@ -167,21 +182,19 @@ export default {
       }
     },
     fixValue (delta = 0) {
-      if (this.isStatic) {
-        return false
-      }
+      // if (this.isStatic) {
+      // return false
+      // }
       this.log(`fixValue ${delta}`)
       if (this.$refs.input.value === '' && delta === 0) {
         return this.updateValue('')
       }
       this.updateValue(this.$big(this.$refs.input.value || '0').plus(this.step.mul(delta)).round(this.stepScale || this.realScale) + '', 'fixValue')
     },
-    updateValue (value, src) {
+    updateValue (value, src) { 
       let isE = false
-      this.log(`updateValue: ${value} @${src}`)
-      if (this.isStatic) {
-        return false
-      }
+      this.log(`updateValue..: ${value} @${src}`)
+
       if (typeof value !== 'string') {
         throw new Error('Value must be string.')
       }
@@ -201,7 +214,6 @@ export default {
         this.$refs.input.value = this.lastValue
         return false
       }
-
       if (this.$refs.input.value !== value) {
         this.$refs.input.value = value
       }
@@ -209,10 +221,14 @@ export default {
       this.log(`Set input val to ${value}`)
       // 是否输入格式正确，当是科学计数法时，要转行为标准10进制数字
       // 该方法为了防止输入内容为 "9.", ".9", "9.90", "09", "" 等数字
-      let formatCorrect = this.$big(value) + '' === value
+      let formatCorrect = this.$big(value || 0) + '' === value
+      if ((!formatCorrect && !value.includes('.')) || !pattern.test(value)) {
+        this.fixValue() //每次修改都对输入值进行修正
+      }
       if (!formatCorrect && isE) {
         formatCorrect = this.$big(value).toFixed(this.realScale).toString() === value
       }
+
       if (value === '' || formatCorrect) {
         // Emit the number value through the input event
         // utils.log(`Input: ${value}`)
@@ -229,7 +245,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 
 .currency-input {
   position: relative;
@@ -277,14 +292,14 @@ export default {
     .input {
       color: $text-light;
     }
-    .label {
-    }
   }
   .label {
     color: white;
     // background-color: #CCCCCC;
-    width: 54px;
-    line-height: 30px;
+    padding-right: 15px;
+    width: 50px;
+    text-align: right;
+    line-height: 33px;
     height: 32px;
     box-sizing: border-box;
     border-top: 1px solid $order-input-label;

@@ -25,7 +25,7 @@
             @click.prevent="(currentTab.rightButtonClick || rightButtonClick) (currentTab)"
             v-if="currentTab.rightButtonText"
           >{{ $t(currentTab.rightButtonText) }}</div>
-        </div>
+        </div> 
         <div class="tab__body relative">
           <div
             class="contract__history__table-loading"
@@ -296,6 +296,11 @@ export default {
               key: "executed_price"
             },
             {
+              title: "contract_trigger_price", //触发价格
+              width: "",
+              key: "trigger_price"
+            },
+            {
               title: "contract_action_delegate_type", //委托类型
               width: "",
               key: "type"
@@ -311,69 +316,7 @@ export default {
               key: "update_time"
             }
           ]
-        },
-        // 计划委托
-        // {
-        //   name: 'contract_history_plan_current',
-        //   headers: [{
-        //     title: 'contract_name',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'deal_th_side',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'contract_trigger_plan',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'contract_assign_price',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'order_th_status',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'contract_deadline',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'actions',
-        //     width: '',
-        //     key: '---'
-        //   }]
-        // },
-        // 计划历史
-        // {
-        //   name: 'contract_history_plan_history',
-        //   headers: [{
-        //     title: 'contract_name',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'deal_th_side',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'contract_trigger_plan',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'contract_assign_price',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'contract_deadline',
-        //     width: '',
-        //     key: '---'
-        //   }, {
-        //     title: 'actions',
-        //     width: '',
-        //     key: '---'
-        //   }]
-        // },
+        }, 
         // 已成交, 之前叫成交历史
         {
           name: "contract_history_deal_fills",
@@ -411,7 +354,7 @@ export default {
               key: "price"
             },
             {
-              title: "contract_assign_price", //委托价值
+              title: "contract_assign_price", //委托价格
               width: "",
               key: "price"
             },
@@ -464,14 +407,16 @@ export default {
         //   }, {
         //     title: 'contract_freezing_quota',
         //     width: '',
-        //     key: '---'
-
+        //     key: '---' 
         //   }]
         // }
       ],
       activeList: [],
       refreshTime: 0,
-      isLoginOverdue: false
+      isLoginOverdue: false,
+      indexList: {},
+      lastList: {},
+      marketList: {},
     };
   },
   computed: {
@@ -480,7 +425,17 @@ export default {
     },
     isLogin() {
       return !!this.state.userInfo;
+    },
+    // currentDel() {
+    //   return this.state.ct.currentDelList["BTCUSD"]
+    // },
+    holdingValue() {
+
+    },
+    markTickList() {
+      return this.state.ct.markTickList
     }
+    
   },
   components: {
     historyTable
@@ -534,16 +489,18 @@ export default {
       const tab = this.current;
       let func = null;
       let params = {
-        symbol: this.state.ct.pair,
+        // symbol: this.state.ct.pair,
         page: this.page,
         size: this.size
       };
       switch (tab) {
         case "contract_history_position":
-          params = {
-            symbol: this.state.ct.product_name
-          };
-          func = service.getContractBalanceByPair;
+          //这里需要获取全部的币对持仓
+          // params = {
+          //   symbol: this.state.ct.product_name
+          // };
+          // func = service.getContractBalanceByPair;
+          func = service.getContractBalanceList 
           break;
         case "contract_has_equal_pos":
           func = service.getClosedposition;
@@ -569,24 +526,35 @@ export default {
           .then(res => {
             if (res.message != "OK" && res.data == null) {
               state.loadingfailed = true;
-            } else if (!res.code) {
-              //console.log(res.data.data, params)
-              if (tab === "contract_history_position") {
-                // 持仓数据存储到state中
-                // let holding = this.state.ct.holding
-                // holding = res.data
-                let holding = res.data;
-                this.state.ct.holding = holding;
-                if (holding && holding.holding && holding.holding != 0) {
-                  this.setTabDataCount(tab, 1);
+            } else if (!res.code) { 
+              if (tab === "contract_history_position") {  
+                let holdingList = null; 
+                let cholding = {}
+                if(res.data && res.data.length > 0){ 
+                  holdingList = res.data 
+                  holdingList.map(item => {
+                    if (item.currency === state.ct.symbol) {
+                      cholding = item
+                    } 
+                  }) 
+                  state.ct.holding = cholding
+                  state.ct.holdingList = holdingList
+                  // state.ct.computeHoldingList = this.computeHoldingList(holdingList)
+                } 
+                this.tableData = res.data
+                if (holdingList && holdingList.length) {
+                  let count = holdingList.reduce((a,b) => { 
+                    let c = b.holding * 1 != 0 ? 1 : 0  //多仓大于0， 空仓小于0
+                    return a + c }, 0) 
+                  this.setTabDataCount(tab, count);
                 } else {
                   this.setTabDataCount(tab, 0);
                 }
-                // //如果存在future_close_id，则更新平仓价格
-                if (!!holding.future_close_id) {
-                  //this.setClearCommitPrice(holding.future_close_id)
-                  this.state.ct.curCommitPrice = holding.close_position_price;
-                }
+                // // 如果存在future_close_id，则更新平仓价格
+                // if (!!cholding.future_close_id) {
+                //   //this.setClearCommitPrice(holding.future_close_id)
+                //   this.state.ct.curCommitPrice = cholding.close_position_price;
+                // }
               }
               // 当前委托, 委托历史, 已成交需要分页,返回值不同;
               // 在这里只取前10个了
@@ -610,7 +578,8 @@ export default {
               this.tableData = res.data;
             }
           })
-          .catch(() => {
+          .catch((err) => {
+            console.log({err})
             state.loadingfailed = true;
           })
           .finally(() => {
@@ -619,47 +588,47 @@ export default {
           });
       }
       // this.fetchActiveList()
-    },
+    }, 
     //更新平仓价格
-    async setClearCommitPrice(commitid) {
-      if (!commitid) {
-        console.log("commitid:" + commitid);
-        return;
-      }
+    // async setClearCommitPrice(commitid) {
+    //   if (!commitid) {
+    //     console.log("commitid:" + commitid);
+    //     return;
+    //   }
 
-      this.state.ct.curCommitPrice = 0;
-      let currentDel = this.state.ct.currentDel;
-      if (currentDel) {
-        currentDel.map((val, index) => {
-          if (val.id == commitid) {
-            this.state.ct.curCommitPrice = val.price;
-            return this.state.ct.curCommitPrice;
-          }
-        });
-      }
-      // //如果currentDel位空或者没找到这条委托，那么重新取抓一次数据
+    //   this.state.ct.curCommitPrice = 0;
+    //   let currentDel = this.state.ct.currentDel;
+    //   if (currentDel) {
+    //     currentDel.map((val, index) => {
+    //       if (val.id == commitid) {
+    //         this.state.ct.curCommitPrice = val.price;
+    //         return this.state.ct.curCommitPrice;
+    //       }
+    //     });
+    //   }
+    //   // //如果currentDel位空或者没找到这条委托，那么重新取抓一次数据
 
-      if (!this.state.ct.curCommitPrice) {
-        let params = {
-          symbol: this.state.ct.pair,
-          page: 1,
-          size: 200
-        };
-        currentDel = [];
-        await service.getActiveorders(params).then(res => {
-          if (!res.code) {
-            currentDel = res.data.data;
-          }
-          if (currentDel) {
-            currentDel.map((val, index) => {
-              if (val.id == commitid) {
-                this.state.ct.curCommitPrice = val.price;
-              }
-            });
-          }
-        });
-      }
-    },
+    //   if (!this.state.ct.curCommitPrice) {
+    //     let params = {
+    //       symbol: this.state.ct.pair,
+    //       page: 1,
+    //       size: 200
+    //     };
+    //     currentDel = [];
+    //     await service.getActiveorders(params).then(res => {
+    //       if (!res.code) {
+    //         currentDel = res.data.data;
+    //       }
+    //       if (currentDel) {
+    //         currentDel.map((val, index) => {
+    //           if (val.id == commitid) {
+    //             this.state.ct.curCommitPrice = val.price;
+    //           }
+    //         });
+    //       }
+    //     });
+    //   }
+    // },
     refreshTabData(type) { 
       let func = null;
       let tab = null;
@@ -701,8 +670,7 @@ export default {
     },
     setTabDataCount(name, count) {
       let item = this.nav.find(item => item.name === name);
-      if (item) {
-        console.log(item);
+      if (item) { 
         item.dataCount = count;
       }
     },
@@ -723,7 +691,18 @@ export default {
     clearTimer() {
       clearInterval(this.timer);
     },
-    rightButtonClick(tab) {
+    async rightButtonClick(tab) { 
+      let ok = await utils.confirm(this, {
+        title: this.$t('contract-cancel-all-title'),
+        content: this.$t('contract-cancel-all-content'), 
+        customClass: "ix-message-box-wrapper", 
+        confirmButtonClass: "btn--confirm",
+        cancelButtonClass: "btn--cancel",
+      }) 
+      if (!ok) {
+        return 
+      }
+
       if (
         tab.name === "contract_history_del_current" ||
         tab.name === "contract_history_stop_loss"
@@ -739,7 +718,7 @@ export default {
             if (this.userSetting) {
               //根据用户设置判断
               this.$toast({
-                title: "所有委托已被取消",
+                title: this.$t("delegate_cancellation"),
                 body: this.$t("contract_revert_success"),
                 color: "yellow"
               });
@@ -750,7 +729,7 @@ export default {
             if (this.userSetting) {
               //根据用户设置判断
               this.$toast({
-                title: "取消失败",
+                title:  this.$t("delegation_cancellation_failed"),
                 body: res.message,
                 color: "red"
               });
@@ -770,12 +749,23 @@ export default {
           size: 200
         };
         service.getActiveorders(params).then(res => {
-          if (!res.code) {
-            this.state.ct.currentDel = res.data.data;
+          if (!res.code && !!res.data) {
+            // console.log({res: res.data})
+            // this.state.ct.currentDel = res.data.data;
+            this.state.ct.currentDelList = {}
+            res.data.data.map(item => {
+              if (this.state.ct.currentDelList[item.currency]) {
+                this.state.ct.currentDelList[item.currency].push(item)
+              } else {
+                this.state.ct.currentDelList[item.currency] = []
+                this.state.ct.currentDelList[item.currency].push(item)
+              }
+            })
             this.setTabDataCount(tab, res.data.total);
           }
         });
-        return this.state.ct.currentDel; 
+        // return this.state.ct.currentDel; 
+        return this.state.ct.currentDelList; 
       }, 1000);
     },
     //刷新委托历史数量
@@ -790,12 +780,12 @@ export default {
         size: 1
       };
       await service.getOrderhistory(params).then(res => {
-        if (!res.code) { 
+        if (!res.code && !!res.data) { 
           this.setTabDataCount(tab, res.data.total);
         }
       }); 
     },
-    refreshHolding() {
+    refreshHoldingCount() {
       let holdingTag = "contract_history_position";
       if(holdingTag === this.current){
         return
@@ -813,11 +803,11 @@ export default {
         } else  if (!res.code) {
           holdingTag = "contract_history_position"; 
           if (res.data && res.data.holding && res.data.holding != 0) {
-            console.log("this.setTabDataCount(holdingTag, 1)")
+            //console.log("this.setTabDataCount(holdingTag, 1)")
             this.setTabDataCount(holdingTag, 1);
           } else if (res.data) {
             this.setTabDataCount(holdingTag, 0);
-            console.log("this.setTabDataCount(holdingTag, 0)", {res})
+            //console.log("this.setTabDataCount(holdingTag, 0)", {res})
           }
         }
       }).catch((msg)=>{
@@ -825,7 +815,7 @@ export default {
       })
       ; 
     },
-
+     
   },
   async created() {
     await actions.updateSession();
@@ -841,8 +831,7 @@ export default {
     } //查询用户设置
     this.switchTab({ name: "contract_history_position" });
     this.$eh.$once("protrade:order:refresh", this.refreshCurrentDelegation);
-    this.$eh.$on("protrade:order:refresh", type => {
-
+    this.$eh.$on("protrade:order:refresh", type => { 
       this.size = this.page * this.size;
       this.page = 1;
       this.fetchData(); 
@@ -850,7 +839,7 @@ export default {
       this.refreshOrderHistory()
       if (!isNaN(Number(type))) { 
         //console.log({type})
-        this.refreshHolding()
+        this.refreshHoldingCount()
       }
     });
     this.$nextTick(function() {
@@ -859,11 +848,25 @@ export default {
     this.$eh.$on("setOrderfill:count", count => {
       this.setTabDataCount("contract_history_deal_fills", count)
     })
+    // this.$eh.$on("socket:price:update", item => {
+    //   this.holdingComputedData(item)  
+    // })
   },
   destroyed() {
     this.$eh.$off("protrade:order:refresh", "destroyed");
     this.$eh.$off("setOrderfill:count","destroyed");
+    this.$eh.$off("socket:price:update","destroyed");
     this.clearTimer();
+  },
+  watch: {
+
+  markTickList:{
+      handler:function(val,oldval){ 
+        this.holdingList[0].test = 1
+        console.log(this.markTickList.handler, 'markTickList')
+      },
+      deep:true//对象内部的属性监听，也叫深度监听
+    }
   }
 };
 </script>
@@ -906,8 +909,7 @@ export default {
     font-size: 14px;
     color: white;
   }
-  .link-group {
-  }
+ 
   .link {
     font-size: 12px;
     text-align: center;
@@ -951,8 +953,7 @@ export default {
           }
         }
       }
-      tr:nth-of-type(odd) {
-      }
+ 
 
       .tab__button {
         color: $primary;

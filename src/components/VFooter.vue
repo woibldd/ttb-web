@@ -6,8 +6,8 @@
           :to="{name:'home'}"
           class="footer_logo"/>
         <p class="footer_ltxt">
-          <b>{{ $t('first') }}</b>
-          {{ $t('bitcoin_equity_certificate') }}
+          <!-- <b>{{ $t('first') }}</b> -->
+          {{ exchangeNameConfig }}
         </p>
         <div
           class="lt">
@@ -67,9 +67,9 @@
           <router-link
             :to="{name:'Fee'}"
             target="_blank">{{ $t('footer_fee') }}</router-link>
-            <!-- <a
+            <a
             :href="apiDoc"
-            target="_blank">{{ $t('footer_api') }}</a> -->
+            target="_blank">{{ $t('footer_api') }}</a>
         </div>
         <div class="footer_ct footer-rt">
           <p>{{ $t('footer_terms') }}</p>
@@ -140,10 +140,10 @@
       </div>
     </div>
     <div class="footer_info">
-      <strong class="strong mr-10">{{ $t('footer_company_info_title') }}</strong>
+      <!-- <strong class="strong mr-10">{{ $t('footer_company_info_title') }}</strong>
       <span class="company_name mr-10">{{ $t('footer_company_info_name') }}</span>
       <span class="company_registion mr-10">{{ $t('footer_company_info_registion') }}</span>
-      <span class="company_address">{{ $t('footer_company_info_address') }}</span>
+      <span class="company_address">{{ $t('footer_company_info_address') }}</span> -->
     </div>
   </footer>
 </template>
@@ -171,14 +171,23 @@ export default {
       return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
     },
     aboutLink () {
-      return `/docs/IXX_introduction_${this.state.locale || 'en'}.pdf`
+      // return `/docs/IXX_introduction_${this.state.locale || 'en'}.pdf`
+      if (this.state.locale === 'zh-CN') {
+        return `https://ix-static.oss-ap-southeast-1.aliyuncs.com/IXX_introduction_zh-CN.pdf`
+      }
+      else {
+        return `https://ix-static.oss-ap-southeast-1.aliyuncs.com/IXX_introduction_en.pdf`
+      }
     },
     apiDoc () {
       return this.state.theme.apiDoc[this.state.locale || 'en']
     },
     showEnTips () {
       return this.state.locale === 'en' || this.state.locale === 'ko'
-    }
+    },
+    exchangeNameConfig () {
+      return this.state.theme.exchangeNameConfig[this.state.locale || 'en']
+    },
   }
 }
 </script>

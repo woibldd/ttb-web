@@ -4,27 +4,27 @@
       <p class="left-menu-title">
         <span class="icon icon-his"/>
         <span class="menu-title">{{ $t('history_material') }}</span>
-      </p>
+      </p> 
       <ul class="left-menu-list">
         <li class=""><router-link
           class="menu-name"
           active-class="active"
           to="/material/fee-history">{{ $t('assets_fee_history') }}</router-link></li>
-        <li class=""><router-link
+        <!-- <li class=""><router-link
           class="menu-name"
           active-class="active"
-          to="/material/ensurance-fund">{{ $t('ensurance_fund') }}</router-link></li>
+          to="/material/ensurance-fund">{{ $t('ensurance_fund') }}</router-link></li> -->
         <li class=""><a
           class="menu-name"
           target="_blank"
           active-class="active"
           href="https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360027994471">{{ $t('ensurance_contract_tutorial') }}</a></li>
-      </ul>
+      </ul> 
       <!-- 指数 -->
       <p class="left-menu-title mt-20">
         <span class="icon icon-index"/>
         <span class="menu-title">{{ $t('coin_trade_index') }}</span>
-      </p>
+      </p> 
       <ul class="left-menu-list">
         <li
           v-for="(pair, index) in coinIndexArray"
@@ -47,15 +47,15 @@
                 <li class="dropdown-item pl-34 pr-24">
                   <a
                     target="_blank"
-                    href="https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360027994431-BTC永续 指南"
-                    class="index__sub__link">{{ $t("ensurance_btc_future_tutorial") }}
+                    :href="tutorialUrl(pair)"
+                    class="index__sub__link">{{ $t("ensurance_btc_future_tutorial", {coin: pair.replace('FUTURE_','').replace('USD','')}) }}
                   </a>
                 </li>
                 <li class="dropdown-item pl-34 pr-24">
                   <a
                     target="_blank"
                     href="https://ixxcustomer.zendesk.com/hc/zh-cn"
-                    class="index__sub__link">{{ $t("ensurance_btc_future_rule") }}
+                    class="index__sub__link">{{ $t("ensurance_btc_future_rule", {coin: pair.replace('FUTURE_','').replace('USD','')})}}
                   </a>
                 </li>
               </ul>
@@ -75,6 +75,23 @@ export default{
       coinIndexArray: [
       ]
     }
+  },
+  methods: {
+    tutorialUrl (pair) {
+      if (pair === 'FUTURE_BTCUSD') {
+        return 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360027994431'
+      }
+      else if (pair === 'FUTURE_BHDUSD') {
+        return 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360030485092-BHD'
+      }
+      else if (pair === 'FUTURE_ETHUSD') {
+        return 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360031397811'
+      }
+      else {
+        return ''
+      }
+    }, 
+
   },
   async created () {
     let res = await service.getContractSymList()
@@ -133,17 +150,18 @@ export default{
       margin-top: 20px;
 
       .menu-name {
-          box-sizing: border-box;
-          width: 100%;
-          display: inline-block;
-          padding-left: 34px;
-          color: $text-strong;
+        box-sizing: border-box;
+        width: 100%;
+        display: inline-block;
+        padding-left: 34px;
+        color: $text-strong;
 
-          &.active, &:hover {
+        &.active {
           color: $primary;
           background: $profile-menu-bg;
           box-shadow: inset 3px 0 0 0 $primary;
-        }
+        } 
+
       }
       .sub-menu-group {
           margin-top: 10px;
@@ -162,7 +180,7 @@ export default{
       li {
         width: 100%;
         text-align: left;
-        line-height: 36px;
+        line-height: 48px;
         font-size: 14px;
         color: #333;
         cursor: pointer;

@@ -1,6 +1,6 @@
 @import "./vars";
 @import "./mixins";
-// @import "./tooltip";
+ @import "./tooltip";
 // div.zopim {
 //   top: auto !important;
 // }
@@ -257,6 +257,33 @@ $primary-color: #01CED1;
     }
 
 }
+.el-button.el-button--buy {
+  color: #fff;
+  background-color: $otc-buy-bg !important;
+  border-color: $otc-buy-bg !important;
+
+  &:hover, &:focus {
+      color: #fff !important;
+      background-color: $otc-buy-bg-light !important;
+      border-color: $otc-buy-bg-light !important;
+      opacity: .8;
+  } 
+}
+
+.el-button.el-button--sell {
+  color: #fff;
+  background-color: $otc-sell-bg !important;
+  border-color: $otc-sell-bg !important;
+
+  &:hover, &:focus {
+      color: #fff !important;
+      background-color: $otc-sell-bg-light !important;
+      border-color: $otc-sell-bg-light !important;
+      opacity: .8;
+  } 
+}
+
+
 .el-button:focus, .el-button:hover{
     color: $primary-color !important;
     border-color: $primary-color !important;

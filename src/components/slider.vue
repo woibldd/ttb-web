@@ -1,29 +1,29 @@
 <template>
-  <div 
-class="swiper-box"
-       rel="swiperBox">
-    <swiper 
-:options="swiperOption"
-            class="swiper-container" 
-ref="mySwiper">
+  <div
+    class="swiper-box"
+    rel="swiperBox">
+    <swiper
+      :options="swiperOption"
+      class="swiper-container"
+      ref="mySwiper">
       <!-- 轮播项 -->
-      <swiper-slide 
-v-for="banner in banners"
-                    :key="banner.id">
-        <a 
-class="link"
-           target="_blank" 
-:href="banner.url">
-          <img 
-:src="banner.picture"
-               class="swiper-image">
+      <swiper-slide
+        v-for="banner in banners"
+        :key="banner.id">
+        <a
+          class="link"
+          target="_blank"
+          :href="banner.url">
+          <img
+            :src="banner.picture"
+            class="swiper-image">
         </a>
 
       </swiper-slide>
       <!-- 轮播的小圆点 -->
-      <div 
-class="swiper-pagination"
-           slot="pagination"/>
+      <div
+        class="swiper-pagination"
+        slot="pagination"/>
     </swiper>
   </div>
 </template>

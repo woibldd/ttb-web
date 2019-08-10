@@ -1,10 +1,12 @@
 <template>
   <div class="page-home">
-    <div class="home2">
-      <k-slider
-        :banners="banners"
-        :swiper-option="swiperOption"/>
-    </div>
+    <!--<div class="home2">-->
+      <!--<k-slider-->
+        <!--:banners="banners"-->
+        <!--:swiper-option="swiperOption"/>-->
+
+    <!--</div>-->
+    <home-banner :banner="banner1" :swipe-banner="notices1" v-on:buy-handle="buySubmit"/>
     <div class="ind_txt">
       <div class="ind_cen">
         <div
@@ -81,14 +83,37 @@
       </div>
     </div>
     <div class="corperator">
-      <div class="corperator-container"> 
+      <div class="corperator-container">
+        <div class="corp-row row-60 mb-60">
+          <div class="corp-title" v-t="'footer_investors'"/> 
+            <div class="corp-logo">
+              <a class="link" href="javascript:;" @click.prevent>
+                <img class="logo may" src="~@/assets/copr-logo-may.png">
+              </a>
+            </div>
+            <div class="corp-logo">
+              <a class="link" href="javascript:;" @click.prevent>
+                <img class="logo may" src="~@/assets/copr-logo-bah.png">
+              </a>
+            </div>
+            <div class="corp-logo">
+              <a class="link" href="javascript:;" @click.prevent>
+                <img class="logo may" src="~@/assets/copr-logo-jlzb.png">
+              </a>
+            </div>
+            <div class="corp-logo">
+              <a class="link" href="javascript:;" @click.prevent>
+                <img class="logo may" src="~@/assets/copr-logo-yxzb.png">
+              </a>
+            </div>
+          </div>
         <div class="corp-row row-60 mb-60">
           <div
             class="corp-title"
             v-t="'footer_partners'"/>
           <div class="corp-logo">
             <span
-              class="link" 
+              class="link"
               target="_blank">
               <img
                 class="logo cw"
@@ -97,7 +122,7 @@
           </div>
           <div class="corp-logo">
             <span
-              class="link" 
+              class="link"
               target="_blank">
               <img
                 class="logo hl"
@@ -106,7 +131,7 @@
           </div>
           <div class="corp-logo">
             <span
-              class="link" 
+              class="link"
               target="_blank">
               <img
                 class="logo hx"
@@ -115,7 +140,7 @@
           </div>
           <div class="corp-logo">
             <span
-              class="link" 
+              class="link"
               target="_blank">
               <img
                 class="logo js"
@@ -124,7 +149,7 @@
           </div>
           <div class="corp-logo">
             <span
-              class="link" 
+              class="link"
               target="_blank">
               <img
                 class="logo he"
@@ -133,7 +158,7 @@
           </div>
           <div class="corp-logo">
             <span
-              class="link" 
+              class="link"
               target="_blank">
               <img
                 class="logo blk"
@@ -149,7 +174,7 @@
           </div>
           <div class="corp-logo">
             <span
-              class="link" 
+              class="link"
               target="_blank">
               <img
                 class="logo dvp"
@@ -158,18 +183,26 @@
           </div>
           <div class="corp-logo">
             <span
-              class="link" 
+              class="link"
               target="_blank">
               <img
                 class="logo hx"
                 src="~@/assets/copr-logo-cs.png" >
             </span>
           </div>
+          <div class="corp-logo">
+            <span
+              class="link"
+              target="_blank">
+              <img
+                class="logo hx"
+                src="~@/assets/copr-logo-pdkj.png" >
+            </span>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
 </template>
 <script>
 import Slider from '@/components/slider.vue'
@@ -178,19 +211,21 @@ import PairTable from '@/components/home/pair-table'
 import PairRankTable from '@/components/home/pair-rank-table'
 import MineSummary from '@/components/Mine/MineSummary'
 import tickTableMixin from '@/mixins/tick-table'
-
+import HomeBanner from './banner/index'
 export default {
   mixins: [tickTableMixin],
   data: function () {
     return {
       banners: [],
       notices: [],
+      banner1: [],
+      notices1: [],
       swiperOption: {
         direction: 'horizontal',
         loop: true,
         autoplay: 1000,
         paginationType: 'fraction',
-        pagination: '.swiper-pagination',
+        pagination: '.swiper-pagination'
       },
       hasNewNotice: false,
       pairsHead: [
@@ -201,14 +236,15 @@ export default {
         {key: 'homechart_24h_h', name: this.$t('homechart_24h_h')},
         {key: 'homechart_24h_v', name: this.$t('homechart_24h_v')},
         {key: 'actions', name: this.$t('actions')}
-      ], 
+      ]
     }
   },
   components: {
     kSlider: Slider,
     PairTable,
     PairRankTable,
-    MineSummary, 
+    MineSummary,
+    HomeBanner
     // Kyc
   },
   computed: {
@@ -228,13 +264,22 @@ export default {
     }
   },
   methods: {
+    buySubmit(item) {
+      this.$router.push({
+        path: '/Superzis',
+        query: item
+      })
+    },
     async getBanners () {
       const res = await service.getBanners()
+      console.log(res)
       if (!res.code) {
         let list = res.data
         if (list.length > 0) {
           this.banners = list.filter(b => b.slot === 1)
           this.notices = list.filter(b => b.slot === 2)
+          this.banner1 = list.filter(b => b.slot === 3)
+          this.notices1.push(this.notices[0])
           if (this.notices.length > 3) {
             this.notices.splice(3)
           }
