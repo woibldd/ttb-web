@@ -67,7 +67,7 @@
             v-show="!pair.like"
             name='sc-w'/>
         </div>
-        <div class="row__item percent9"> 
+        <div class="row__item percent13"> 
           {{ pair.name | pairfix }}
           <icon v-show="index < 3 && tabSelected==='new' " name='hot-red'/>  
         </div>
