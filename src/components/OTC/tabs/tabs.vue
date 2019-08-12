@@ -53,7 +53,7 @@
       <div class="select-item">
         <el-row>
           <el-col :span="10">
-            <span class="font24 font-weight font-base title-text">一键买币</span>
+            <span class="font24 font-weight font-base title-text">{{$t('yj_mb')}}</span>
             <span class="font-gray">小额快速交易，0手续费，单笔50000以下</span>
           </el-col>
           <el-col :span="11">
