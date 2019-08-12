@@ -333,7 +333,7 @@ export default {
         }
     }
     .dl__btn {
-        width:rem(160);
+        width:rem(190);
         height:rem(60);
         background:#00bbbd;
         border-radius:rem(30);

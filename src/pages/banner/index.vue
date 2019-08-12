@@ -31,8 +31,8 @@
             <div class="tips">
               <h1>{{this.$t('yj_mb')}}</h1>
               <p>
-                <em>参考价</em>
-                <el-tooltip content="非最终交易单价，仅供参考" placement="top" effect="light">
+                <em>{{$t('ck_jg')}}</em>
+                <el-tooltip content="$t('jg_ck')" placement="top" effect="light">
                   <i class="currency-icon">&#xe61c;</i>
                 </el-tooltip>
                 <span>{{Number(downPrice).toFixed(2)}} CNY/USDT</span>

@@ -16,8 +16,7 @@
   "withdraw": "Withdrawal",
   "wallet_accosaada": "About the fund account",
   "copy": "Copy",
-
-  "otc_account": "Legal currency account ",
+ 
   "label": "Label",
   "cancel": "Cancel",
   "close": "Close",
@@ -1030,8 +1029,7 @@
 "activity_hero_reward": "Reward",
 "activity_hero_info_contact": "Wechat Q&A about the activity",
 "activity_hero_click_get_millison": "Click to win 1 million USDT",
-"download_app_dl": "APP download",
-"download_dl_app": "download the APP",
+"download_app_dl": "APP download", 
 "download_scan_qr_pc": "Scan QR code to download APP",
 "download_slogan_txt_a": "IX.com is the first exchange in the world to support Bitcoin",
 "download_slogan_txt_b": "Digital currency exchange ",
@@ -2251,6 +2249,8 @@
 "tj_cg": "Successfully",
 "zd_xe": "Purchase amount is below the minimum 100 limit",
 "gm_sl": "Purchase amount excess maximum 50,000 limit",
+"otc_account": "Fiat account ",
+"download_dl_app": "APP Download",
 
 "deposit_state_error": "错误",
 "contract_buy_on_price_piece": "%{symbol} contract on (%{price}) price (%{amount}) piece。",
