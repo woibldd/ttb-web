@@ -115,14 +115,16 @@ export default {
       }
 
       if (type === 'android') {
-        let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
-        window.open(url, '_blank')
+        let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk' 
+        // window.open(url, '_blank')
+        window.location.href = url
         return
       }
 
       if (this.isSafari) {
-        let url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
-        window.open(url, '_blank')
+        let url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'  
+        // window.open(url, '_blank')
+        window.location.href = url
       }
     },
     touch () {

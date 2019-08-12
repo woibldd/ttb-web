@@ -275,7 +275,8 @@ export default {
       if (utils.isIos()) {
         url = `itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist`
       }
-      window.open(url, '_blank')
+      // window.open(url, '_blank')
+      window.location.href = url
     }
 
   },
