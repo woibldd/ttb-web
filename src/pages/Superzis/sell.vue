@@ -8,7 +8,7 @@
      <div class="but-form">
        <div class="tip">
          <i class="iconfont">&#xe62e;</i>
-        <span> {{currency}}参考单价：</span> {{ downPrice }} CNY/{{ currency }}
+        <span> {{currency}}{{$t('ck_jg')}}：</span> {{ downPrice }} CNY/{{ currency }}
        </div>
        <div class="amount-btn-con">
          <div class="btn-list">
