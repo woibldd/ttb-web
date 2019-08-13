@@ -1907,8 +1907,7 @@ export default {
         // 做空
         this.mmModal.label = this.$t("order_side_sell");
         this.btnShortLoading = true;
-      } 
-      this.showMakeMoreModal = true;
+      }  
       // 先打开弹窗
       if (!local.mmNeverShow) {
         this.showMakeMoreModal = true;

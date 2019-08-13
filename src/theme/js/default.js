@@ -10,8 +10,8 @@ module.exports = {
   exchangeNameConfig: {
     'zh-CN': 'IXX | 数字资产交易共同体',
     'zh-HK': 'IX | 數字資產交易共同體',
-    en: 'IX | Digital assets trading community',
-    ko: 'IX | 수자 재산 거래 공동체'
+    en: 'IXX | Digital assets trading community',
+    ko: 'IXX | 수자 재산 거래 공동체'
   },
   keywords: 'IXX,比特币,比特币交易,以太坊,区块链,共识,自由联合,数字资产交易所',
   description: 'IXX全球首家一站式免费上币数字资产服务中心，安全、公正、透明',
