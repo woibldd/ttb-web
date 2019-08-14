@@ -1,5 +1,4 @@
-/build/
-/config/
-/dist/
-/*.js
-package-lock.json
+build/*.js
+src/assets
+public
+dist
