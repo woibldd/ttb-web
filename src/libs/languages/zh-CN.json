@@ -2022,7 +2022,6 @@
     "otc_otutcol_16": "充币成功后，若想进行”币币交易/法币交易/合约交易，需操作“资金划转”，将“资金账户”的币转移到该账户上。",
     "otc_otutcol_17": "个人资产",
     "otc_otutcol_19": "你确定要申诉？",
-    "otc_otutcol_20": "申诉成功，请等待客服处理",
 
 
     "order_th_typecsef1": "输入金额不合法",
@@ -2187,7 +2186,8 @@
     "order_apply_message_b": "当前下单价格与盘口价格差异过大，无法提交委托。",
     "order_apply_message_c":"在%{price}价格%{side}%{amount}张%{currency}永续合约。", 
     "contract_buy_on_price_piece1":"在市价%{amount}张%{symbol}。",
-    "invite_kyc_lv": "KYC认证"
+    "invite_kyc_lv": "KYC认证",
+    "otc_otutcol_20": "申诉成功，请等待客服处理"
 
   }
 

@@ -6,19 +6,19 @@
           class="row-pick-up"
           @click="pickUp('service')">
           <div
-            class="row__title"
-            v-t="'footer_services'"/>
+            v-t="'footer_services'"
+            class="row__title"/>
           <div
             class="row__pick__arrow"
           >
             <icon
-              name="arrow-down"
-              :class="[list.service && 'up']"/>
+              :class="[list.service && 'up']"
+              name="arrow-down"/>
           </div>
         </div>
         <div
-          class="row-content"
-          v-if="list.service">
+          v-if="list.service"
+          class="row-content">
           <router-link :to="{name: 'trading'}">{{ $t('trading') }}</router-link>
           <a
             :href="aboutLink"
@@ -34,19 +34,19 @@
           class="row-pick-up"
           @click="pickUp('tool')">
           <div
-            class="row__title"
-            v-t="'footer_tools'"/>
+            v-t="'footer_tools'"
+            class="row__title"/>
           <div
             class="row__pick__arrow"
           >
             <icon
-              name="arrow-down"
-              :class="[list.tool && 'up']"/>
+              :class="[list.tool && 'up']"
+              name="arrow-down"/>
           </div>
         </div>
         <div
-          class="row-content"
-          v-if="list.tool">
+          v-if="list.tool"
+          class="row-content">
           <a
             :href="announcementLink"
             target="_blank">{{ $t('footer_notice') }}</a>
@@ -66,18 +66,18 @@
           class="row-pick-up"
           @click="pickUp('intro')">
           <div
-            class="row__title"
-            v-t="'footer_terms'"/>
+            v-t="'footer_terms'"
+            class="row__title"/>
           <div
             class="row__pick__arrow">
             <icon
-              name="arrow-down"
-              :class="[list.intro && 'up']"/>
+              :class="[list.intro && 'up']"
+              name="arrow-down"/>
           </div>
         </div>
         <div
-          class="row-content"
-          v-if="list.intro">
+          v-if="list.intro"
+          class="row-content">
           <router-link
             :to="{name: 'terms'}"
             target="_blank">{{ $t('footer_agreement') }}</router-link>
@@ -91,23 +91,23 @@
           class="row-pick-up"
           @click="pickUp('company')">
           <div
-            class="row__title"
-            v-t="'footer_company_info_title'"/>
+            v-t="'footer_company_info_title'"
+            class="row__title"/>
           <div
             class="row__pick__arrow">
             <icon
-              name="arrow-down"
-              :class="[list.company && 'up']"/>
+              :class="[list.company && 'up']"
+              name="arrow-down"/>
           </div>
         </div>
         <div
+          v-if="list.company"
           class="row-content pb-10"
-          style="display: inline-block;"
-          v-if="list.company">
+          style="display: inline-block;">
           <a v-t="$t('footer_company_info_name')"/>
           <a
-            class="ml-10 mr-10"
-            v-t="$t('footer_company_info_registion')"/>
+            v-t="$t('footer_company_info_registion')"
+            class="ml-10 mr-10"/>
           <a
             v-t="$t('footer_company_info_address')"/>
         </div>
@@ -117,25 +117,25 @@
           class="row-pick-up"
           @click="pickUp('qrcode')">
           <div
-            class="row__title"
-            v-t="'footer_contract'"/>
+            v-t="'footer_contract'"
+            class="row__title"/>
           <div
             class="row__pick__arrow">
             <icon
-              name="arrow-down"
-              :class="[list.qrcode && 'up']"/>
+              :class="[list.qrcode && 'up']"
+              name="arrow-down"/>
           </div>
         </div>
         <div
-          class="row-content"
-          v-if="list.qrcode">
+          v-if="list.qrcode"
+          class="row-content">
           <div class="qrcode">
             <img
               src="~@/assets/pic-contact-wx.png"
             >
             <p
-              class="contact_desc mt-10 mb-10"
-              v-t="'footer_contract_desc'"/>
+              v-t="'footer_contract_desc'"
+              class="contact_desc mt-10 mb-10"/>
           </div>
         </div>
       </div>
@@ -173,7 +173,7 @@
         </div>
         <a
           class="contact-item-wrapper mr-20 pointer"
-          href='https://t.me/ixxofficial'>
+          href="https://t.me/ixxofficial">
           <icon
             class="contact-item "
             name="footer-telegram"/>
@@ -195,7 +195,7 @@
 import { state } from '@/modules/store'
 
 export default {
-  data () {
+  data() {
     return {
       list: {
         service: false,
@@ -208,28 +208,28 @@ export default {
     }
   },
   computed: {
-    helpLink () {
+    helpLink() {
       return this.state.theme.help[this.state.locale] || this.state.theme.help.en
     },
-    requestLink () {
+    requestLink() {
       if (this.state.userInfo && this.state.theme.themeName === 'default') {
         return process.env.BASE_API + 'ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
       } else {
         return this.state.theme.request[this.state.locale] || this.request.theme.help.en
       }
     },
-    announcementLink () {
+    announcementLink() {
       return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
     },
-    aboutLink () {
+    aboutLink() {
       return `/docs/IX_introduction_${this.state.locale || 'en'}.pdf`
     },
-    apiDoc () {
+    apiDoc() {
       return this.state.theme.apiDoc[this.state.locale || 'en']
     }
   },
   methods: {
-    pickUp (name) {
+    pickUp(name) {
       this.list[name] = !this.list[name]
     }
   }
