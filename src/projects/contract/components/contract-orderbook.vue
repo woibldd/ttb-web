@@ -275,48 +275,50 @@ export default {
       this.changeDepthNumber(this.deepthData)
     },
     changeDepthNumber (data){ 
+
       let bidsOne = []
       let asksOne = []
-      if (this.pair === 'FUTURE_BTCUSD') {
-        if (this.offset === 1) {
-          for (let i in data.bids){
-            let number = i-1
-            if(0 <= number){
-              if(data.bids[number].values[0].indexOf(data.bids[i].values[0]) !== -1){
-                let arr = {'values': [data.bids[number].values[0],
-                data.bids[number].values[1]*1+data.bids[i].values[1]*1]}
-                // console.log(
-                //   data.bids[number].values[0]*1+data.bids[i].values[0]*1,
-                //   data.bids[number].values[0],
-                //   data.bids[i].values[0])
-                bidsOne.push(arr)
-              }
-            }
-          }
-          for (let i in data.asks){
-            let number = i-1
-            if(0 <= number){
-              let str = data.asks[number].values[0] + ''
-              let str1 = data.asks[i].values[0] + ''
-              if(str1.indexOf(str) !== -1){
-                let arr = {'values': [data.asks[number].values[0],
-                data.asks[number].values[1]*1+data.asks[i].values[1]*1]}
-                asksOne.push(arr)
-              }
-            }
-          }
-          // console.log(asksOne)
-          this.assignData({
-              bids : bidsOne ,
-              asks : asksOne
-            })
-        } else {
-          this.assignData(data)
-        }
-      }
-      else {
-        this.assignData(data)
-      }
+      this.assignData(data)
+      // if (this.pair === 'FUTURE_BTCUSD') {
+      //   if (this.offset === 1) {
+      //     for (let i in data.bids){
+      //       let number = i-1
+      //       if(0 <= number){
+      //         if(data.bids[number].values[0].indexOf(data.bids[i].values[0]) !== -1){
+      //           let arr = {'values': [data.bids[number].values[0],
+      //           data.bids[number].values[1]*1+data.bids[i].values[1]*1]}
+      //           // console.log(
+      //           //   data.bids[number].values[0]*1+data.bids[i].values[0]*1,
+      //           //   data.bids[number].values[0],
+      //           //   data.bids[i].values[0])
+      //           bidsOne.push(arr)
+      //         }
+      //       }
+      //     }
+      //     for (let i in data.asks){
+      //       let number = i-1
+      //       if(0 <= number){
+      //         let str = data.asks[number].values[0] + ''
+      //         let str1 = data.asks[i].values[0] + ''
+      //         if(str1.indexOf(str) !== -1){
+      //           let arr = {'values': [data.asks[number].values[0],
+      //           data.asks[number].values[1]*1+data.asks[i].values[1]*1]}
+      //           asksOne.push(arr)
+      //         }
+      //       }
+      //     }
+      //     // console.log(asksOne)
+      //     this.assignData({
+      //         bids : bidsOne ,
+      //         asks : asksOne
+      //       })
+      //   } else {
+      //     this.assignData(data)
+      //   }
+      // }
+      // else {
+      //   this.assignData(data)
+      // }
     },
     toggleSetting () {
       this.panelShow = !this.panelShow
@@ -439,6 +441,7 @@ export default {
       } 
       this.socket = ws.create(`orderbook/${this.pair}/${this.offset}/${this.accuracy}/20`)
       this.socket.$on('message', (data) => {
+        
         this.deepthData = data
         this.changeDepthNumber(data)
       })

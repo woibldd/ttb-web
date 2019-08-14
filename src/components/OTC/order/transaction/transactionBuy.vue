@@ -672,6 +672,7 @@ export default {
       if (!this.total || this.total == '') {
         this.amount = ''
       } else {
+        
         let amount = this.$big(this.total).div(this.view.price).round(this.symbolInfo.amount_scale, 0)
         if (this.inputTarget === 'total') {
           if (this.amount != amount) {

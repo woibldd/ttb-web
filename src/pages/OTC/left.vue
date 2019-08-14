@@ -237,6 +237,7 @@ export default {
         if (res.code === 0) {
           // this.currencyList = res.data
           this.$set(this, "currencyList", res.data )
+          this.state.otc.symbolInfo = res.data[0]
           console.log({currencyList: this.currencyList})
         }
       })

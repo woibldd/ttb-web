@@ -24,9 +24,10 @@ class="nav_link">{{ $t('trading') }}</router-link>
             class="nav_link"
             style="padding-left:10px;"
           >
-            {{ $t('FrenzySaleZone') }}(SP)
-            <img src="@/assets/hot.png"
-alt style="position: relative;top: 5px;left: 5px;">
+            {{ $t('FrenzySaleZone') }}(SP) 
+            <icon name="hot-red"/>
+            <!-- <img src="@/assets/hot.png"
+alt style="position: relative;top: 5px;left: 5px;"> -->
           </router-link>
           <router-link
             to="/snowball"
@@ -40,8 +41,9 @@ alt style="position: relative;top: 5px;left: 5px;">
             style="padding-left:30px;"
           >
             {{ this.$t('node_sub') }}
-            <img src="@/assets/hot.png"
-alt style="position: relative;top: 5px;left: 5px;">
+            <icon name="hot-red"/>
+            <!-- <img src="@/assets/hot.png"
+alt style="position: relative;top: 5px;left: 5px;"> -->
           </a>
           <!-- <div class="nav_link arrow-down">
             <a
