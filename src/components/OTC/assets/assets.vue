@@ -275,7 +275,6 @@ export default {
 
     .title {
       font-size: 18px;
-      line-height: 40px;
       .logo {
         display: inline-block;
         // padding: 3px 7.5px;
