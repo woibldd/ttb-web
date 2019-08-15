@@ -53,11 +53,11 @@
       <div class="select-item">
         <el-row>
           <el-col :span="10">
-            <span class="font24 font-weight font-base title-text">一键买币</span>
+            <span class="font24 font-weight font-base title-text">${{this.$t('yj_mb')}}</span>
             <span class="font-gray">小额快速交易，0手续费，单笔50000以下</span>
           </el-col>
           <el-col :span="11">
-            <el-input v-model="ipt" :placeholder="active=='0' ? '请输入需要购买的总金额' : '请输入需要购买的数量'" style="width: 98%">
+            <el-input v-model="ipt" :placeholder="active=='0' ? `${this.$t('b_price_i')}` : `${this.$t('b_account_i')}`" style="width: 98%">
               <el-select v-model="active" slot="prepend" placeholder="请选择" style="width: 120px" @change="change">
                 <el-option label="按金额购买" value="0"></el-option>
                 <el-option label="按数量购买" value="1"></el-option>
@@ -68,7 +68,7 @@
               v-html="active=='0' ? 'CNY' : 'USDT'"/>
           </el-col>
           <el-col :span="3">
-            <el-button style="width: 118px;float: right" type="primary" @click="buySubmit">购买USDT</el-button>
+            <el-button style="width: 118px;float: right" type="primary" @click="buySubmit">{{ this.$t('b_usdt') }}</el-button>
           </el-col>
         </el-row>
       </div>
@@ -79,7 +79,7 @@
       <div class="select-item">
         <el-row>
           <el-col :span="10">
-            <span class="font24 font-weight font-base title-text">一键卖币</span>
+            <span class="font24 font-weight font-base title-text">{{this.$t('y_b')}}</span>
             <span class="font-gray">小额快速交易，0手续费，单笔50000以下</span>
           </el-col>
           <el-col :span="11">

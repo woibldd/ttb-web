@@ -2249,5 +2249,7 @@
 "yj_mb1": "one-click sell",
 "tj_cg": "successfully",
 "zd_xe": "purchase amount is below the minimum 100 limit",
-"gm_sl": "purchase amount excess maximum 50,000 limit"
+"gm_sl": "purchase amount excess maximum 50,000 limit",
+"xe": "Small and fast trade, 0 poundage, sheet pen 50000 below",
+"sl": "The quantity cannot be empty"
 }
