@@ -7,10 +7,10 @@
       </div>
      <div class="but-form">
        <div class="tip">
-         <el-tooltip content="非最终交易单价，仅供参考" placement="top" effect="light">
+         <el-tooltip :content="$t('jg_ck')" placement="top" effect="light">
         <i class="iconfont">&#xe62e;</i>
         </el-tooltip>
-        <span> {{currency}}参考单价：</span> {{ downPrice }} CNY/{{ currency }}
+        <span> {{currency}}{{$t('ck_jg')}}：</span> {{ downPrice }} CNY/{{ currency }}
        </div>
        <div class="amount-btn-con">
          <div class="btn-list">

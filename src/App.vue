@@ -7,8 +7,8 @@
     @keyup.enter="onkeyup('enter')"
     @keyup.esc="onkeyup('esc')">
     <div
-      class="page-mask"
-      v-show="state.loading"/>
+      v-show="state.loading"
+      class="page-mask"/>
     <v-nav2
       v-if="showNav && !isMobile"
       :class="[navClass]"/>
@@ -16,19 +16,19 @@
       v-if="showNav && isMobile"
       :class="[navClass]"/>
     <div
-      class="main-container"
       ref="container"
-      :style="{background: 'initial'}">
-      <router-view/>
+      :style="{background: 'initial'}"
+      class="main-container">
+      <router-view :key="this.$route.path"/>
     </div>
     <v-footer
-      ref="footer"
       v-if="footer === 'default'"
-      :fixed="fixed"
-      v-show="showFooter"/>
-    <mobile-footer
+      v-show="showFooter"
       ref="footer"
+      :fixed="fixed"/>
+    <mobile-footer
       v-if="showFooter && footer === 'mobile'"
+      ref="footer"
       :fixed="fixed"
     />
     <v-notify-list/>
@@ -47,11 +47,11 @@ import VNav2 from '@/components/VNav3.vue'
 import MobileNav from '@/components/Mobile/MobileNav.vue'
 import VFooter from '@/components/VFooter.vue'
 import MobileFooter from '@/pages/h5/footer'
-import {state, actions} from '@/modules/store'
+import { state, actions } from '@/modules/store'
 import utils from '@/modules/utils'
 import VNotifyList from '@/components/VNotifyList.vue'
 
-let zeStyleEl = document.querySelector('#ze-style')
+const zeStyleEl = document.querySelector('#ze-style')
 
 export default {
   name: 'App',
@@ -62,7 +62,7 @@ export default {
     MobileFooter,
     MobileNav
   },
-  data () {
+  data() {
     return {
       state,
       isMobile: utils.isMobile(),
@@ -71,19 +71,19 @@ export default {
     }
   },
   computed: {
-    showNav () {
+    showNav() {
       if (!this.$route.name) {
         return false
       }
       return utils.getRouteMeta(this.$route, 'nav')
     },
-    showMobileNav () {
+    showMobileNav() {
       if (!this.$route.name) {
         return false
       }
       return utils.getRouteMeta(this.$route, 'mobileNav')
     },
-    showFooter () {
+    showFooter() {
       if (!this.$route.name) {
         return false
       }
@@ -92,20 +92,20 @@ export default {
       }
       return !(utils.getRouteMeta(this.$route, 'footer') === false)
     },
-    zendeskWidget () {
+    zendeskWidget() {
       if (!this.$route.name) {
         return false
       }
       return !(utils.getRouteMeta(this.$route, 'zendeskWidget') === false) && this.showContact
     },
-    navClass () {
+    navClass() {
       if (!this.$route.name) {
         return false
       }
       return utils.getRouteMeta(this.$route, 'class')
     },
-    bgColor () {
-      let navClass = this.navClass
+    bgColor() {
+      const navClass = this.navClass
       switch (navClass) {
         case 'login':
           return '#303E4B'
@@ -115,7 +115,7 @@ export default {
           return 'initial'
       }
     },
-    footer () {
+    footer() {
       if (this.state.theme.themeName === 'default' && !this.isMobile) {
         return 'default'
       }
@@ -125,14 +125,14 @@ export default {
     }
   },
   watch: {
-    showNav () {
+    showNav() {
       this.fixPosition()
     },
-    showFooter () {
+    showFooter() {
       this.fixPosition()
     },
-    zendeskWidget (show) {
-      window.zE && window.zE(function () {
+    zendeskWidget(show) {
+      window.zE && window.zE(function() {
         if (utils.isMobile()) {
           return window.zE.hide()
         }
@@ -143,14 +143,33 @@ export default {
       })
     }
   },
+  mounted() {
+    this.$eh.$on('app:resize', () => this.fixPosition())
+    this.$nextTick(this.fixPosition)
+  },
+  created() {
+    utils.$app = this
+    this.state.router = this.$router
+    this.$router.afterEach((to, from) => {
+      if (from.name === 'trading') {
+        this.$nextTick(() => {
+          this.fixPosition(from.name)
+        })
+      }
+    })
+    this.keepSession()
+    window.onresize = () => {
+      this.$eh.$emit('app:resize')
+    }
+  },
   methods: {
-    onkeyup (name) {
+    onkeyup(name) {
       this.$eh.$emit('app:keyup:' + name)
     },
-    onclick (e) {
+    onclick(e) {
       this.$eh.$emit('app:click')
     },
-    fixPosition (name) {
+    fixPosition(name) {
       try {
         const box = this.$refs.container
         if (box) {
@@ -168,14 +187,14 @@ export default {
         console.log(e)
       }
     },
-    async keepSession () {
+    async keepSession() {
       await utils.sleep(6e5)
       if (this.state.userInfo) {
         await actions.updateSession()
       }
       this.keepSession()
     },
-    toNotice () {
+    toNotice() {
       let url = ''
       if (this.state.userInfo && this.state.theme.themeName === 'default') {
         url = process.env.BASE_API + 'ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
@@ -187,25 +206,6 @@ export default {
       } else {
         window.open(url)
       }
-    }
-  },
-  mounted () {
-    this.$eh.$on('app:resize', () => this.fixPosition())
-    this.$nextTick(this.fixPosition)
-  },
-  created () {
-    utils.$app = this
-    this.state.router = this.$router
-    this.$router.afterEach((to, from) => {
-      if (from.name === 'trading') {
-        this.$nextTick(() => {
-          this.fixPosition(from.name)
-        })
-      }
-    })
-    this.keepSession()
-    window.onresize = () => {
-      this.$eh.$emit('app:resize')
     }
   }
 }

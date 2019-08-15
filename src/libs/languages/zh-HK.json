@@ -1996,9 +1996,9 @@
     "cj_jg": "成交單價",
     "cj_sl": "成交數量",
     "cj_ze": "成交總額",
-    "ck_jg": "USDT參考單價",
+    "ck_jg": "參考單價",
     "yj_mb": "壹鍵買幣",
-    "xe_je": "小額快速交易，單筆100以下",
+    "xe_je": "小額快速交易，單筆50000以下",
     "wz_xx": "未找到合適報價，修改條件或",
     "ck_bj": " 查看所有報價",
     "but_bank": "銀行卡",
@@ -2013,6 +2013,11 @@
     "tj_cg": "提交成功",
     "zd_xe": "購買量低於最低100限額",
     "gm_sl": "購買量大於最大50000限額",
-    "xe": "小額快速交易，0手續費，單筆50000以下",
-    "sl": "數量不能為空"
+    "deposit_state_error": "错误",
+    "order_apply_failed": "委托提交失败",
+    "order_apply_message_a": "可用余额不足，无法提交委托。",
+    "order_apply_message_b": "当前下单价格与盘口价格差异过大，无法提交委托。",
+    "order_apply_message_c":"在%{price}价格%{side}%{amount}张%{currency}永续合约。",
+    "contract_buy_on_price_piece1":"在市价%{amount}张%{symbol}。",
+    "invite_kyc_lv": "KYC认证"
 }

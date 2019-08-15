@@ -2,8 +2,8 @@
   <div class="otcaction">
     <!-- 吃单 -->
     <div
-      class="action-box"
       :class="{'status_0': status === 0, 'status_2': status > 0}"
+      class="action-box"
     >
       <!-- 标题 -->
       <div class="action-title title buy">{{ $t(sideTitle, {currency}) }}</div>
@@ -33,7 +33,7 @@
           <icon name="timer" />
           {{ $t('otc_overtime_tips_a1') }}
           <count-down :terminal="interval" />，
-          {{ $t('otc_overtime_tips_a2') }}{{$t('otc_overtime_tips_a3')}}
+          {{ $t('otc_overtime_tips_a2') }}{{ $t('otc_overtime_tips_a3') }}
         </div>
         <!-- 委托单信息 -->
         <div
@@ -75,9 +75,9 @@
                 <td>
                   <el-select
                     v-model="selectPayment"
-                    @change="changePayType"
                     default-first-option
-                    value-key="collection_id">
+                    value-key="collection_id"
+                    @change="changePayType">
                     <el-option
                       v-for="(item,index) in paylist"
                       :key="index"
@@ -88,13 +88,13 @@
               </tr>
               <tbody >
                 <tr
-                  v-for='(item, index) in paymentHeaderList[selectPayment.payment_type]'
-                  :key='index'>
+                  v-for="(item, index) in paymentHeaderList[selectPayment.payment_type]"
+                  :key="index">
                   <td>{{ $t(item.text) }}</td>
-                  <td> 
+                  <td>
                     <span
-                      style="cursor: pointer;"
                       v-if="item.key==='collection_img'"
+                      style="cursor: pointer;"
                       @click="openQR(selectPayment)">
                       <icon name="qrcode" />
                     </span>
@@ -122,7 +122,7 @@
             style="font-size:14px;" >
             <icon
               style="color:#F5A623;"
-              name='information' />
+              name="information" />
             <!-- 注意 -->
             <span>{{ $t('otc_buy_tips_a') }}</span>
           </div>
@@ -154,8 +154,9 @@
       </div>
     </div>
     <!-- 操作部分 -->
-    <div class="action-order footer"
-         :class="{'status_2': status > 0}">
+    <div
+      :class="{'status_2': status > 0}"
+      class="action-order footer">
       <!-- 输入框 -->
       <div
         v-if="step<1"
@@ -167,16 +168,16 @@
               <span class="red">*</span>
             </div>
             <div class="content">
-              <number-input  
-                class="number-input"
+              <number-input
                 v-model="amount"
+                :scale="amount_scale || 6"
+                :placeholder="$t('amount')"
+                class="number-input"
                 @input="amountInput"
                 @blur="changeTarget('')"
                 @focus="changeTarget('amount')"
-                :scale="amount_scale || 6"
-                :placeholder="$t('amount')"
               />
-             
+
               <span
                 class="btn-all"
                 @click="inputAll('amount')">{{ $t('input_all') }}</span>
@@ -189,13 +190,13 @@
             </div>
             <div class="content">
               <number-input
-                class="number-input"
                 v-model="total"
+                :scale="price_scale || 2"
+                :placeholder="$t('otc_purchase_amount')"
+                class="number-input"
                 @input="totalInput"
                 @blur="changeTarget('')"
                 @focus="changeTarget('total')"
-                :scale="price_scale || 2"
-                :placeholder="$t('otc_purchase_amount')"
               />
               <span
                 class="btn-all"
@@ -210,87 +211,88 @@
         <div v-if="step<1">
           <div class="btn-left">
             <v-btn
+              :label="$t('cancel')"
               class="w-110 cancel"
               radius="3"
               height="30"
               @click="closeSideBar"
-              :label="$t('cancel')"
             />
           </div>
           <div class="btn-left">
             <v-btn
+              :label="$t('otc_confirm_buy')"
               class="w-208 buy"
               radius="3"
               height="30"
               @click="createTransaction"
-              :label="$t('otc_confirm_buy')"
             />
           </div>
         </div>
         <div v-else-if="step ===2 && option===0">
           <div class="btn-left">
             <v-btn
+              :label="$t('otc_cancel_order')"
               class="w-110 cancel"
               radius="3"
               height="30"
               @click="revokeOrder"
-              :label="$t('otc_cancel_order')"
             />
           </div>
           <div class="btn-left">
             <v-btn
+              :label="$t('otc_already_paid')"
               class="w-208 pay"
               radius="3"
               height="30"
               @click="paymentDone"
-              :label="$t('otc_already_paid')"
             />
           </div>
         </div>
         <div v-else-if="step===2 && option===1 ">
-          <div class="bottom"
-               style="    background: #EDF6FF;color: #5D82E1;font-size: 12px;padding: 8px;border-radius: 4px;margin-top: -30px!important;margin-bottom: 10px;">
+          <div
+            class="bottom"
+            style="    background: #EDF6FF;color: #5D82E1;font-size: 12px;padding: 8px;border-radius: 4px;margin-top: -30px!important;margin-bottom: 10px;">
             <icon name="timer" style="font-size: 12px!important;vertical-align: middle;" />
             {{ $t('otc_overtime_tips_a1') }}
             <count-down :terminal="interval" />，
-            {{ $t('otc_overtime_tips_a2') }}{{$t('cancel')}}
+            {{ $t('otc_overtime_tips_a2') }}{{ $t('cancel') }}
           </div>
           <div class="btn-left">
             <v-btn
+              :label="$t('otc_close')"
               class="w-110 cancel"
               radius="3"
               height="30"
               @click="cancelOption"
-              :label="$t('otc_close')"
             />
           </div>
           <div class="btn-left">
             <v-btn
+              :label="$t('otc_already_paid')"
               class="w-208 pay"
               radius="3"
               height="30"
               @click="paymentDone"
-              :label="$t('otc_already_paid')"
             />
           </div>
         </div>
         <div v-else-if="step===2 && option===2 ">
           <div class="btn-left">
             <v-btn
+              :label="$t('otc_close')"
               class="w-110 cancel"
               radius="3"
               height="30"
               @click="cancelOption"
-              :label="$t('otc_close')"
             />
           </div>
           <div class="btn-left">
             <v-btn
+              :label="$t('otc_confirm_cancel')"
               class="w-208 buy"
               radius="3"
               height="30"
               @click="revokeOrder"
-              :label="$t('otc_confirm_cancel')"
             />
           </div>
         </div>
@@ -319,7 +321,22 @@ import otcComputed from '@/components/OTC/mixins/index.js'
 const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
 
 export default {
-  data () {
+  components: {
+    vList,
+    countDown
+  },
+  mixins: [processValue, otcComputed],
+  props: {
+    view: {
+      type: Object,
+      default: () => {}
+    },
+    show: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
     return {
       price: '',
       amount: '',
@@ -522,7 +539,7 @@ export default {
             key: 'collection_img'
           }
         ],
-        //paynow
+        // paynow
         4: [
           {
             title: 'name', // 姓名
@@ -535,9 +552,9 @@ export default {
             text: 'payment_card_number',
             width: '',
             key: 'card_number'
-          }, 
-        ], 
-        //paylah
+          }
+        ],
+        // paylah
         5: [
           {
             title: 'name', // 姓名
@@ -550,7 +567,7 @@ export default {
             text: 'payment_card_number',
             width: '',
             key: 'card_number'
-          }, 
+          }
         ]
       },
       paylist: [],
@@ -558,8 +575,8 @@ export default {
       inputTarget: ''
     }
   },
-  computed: { 
-    sideTitle () {
+  computed: {
+    sideTitle() {
       let title = ''
       if (this.option === 0) {
         // title = `购买${this.currency}`
@@ -570,25 +587,51 @@ export default {
         title = `otc_confirm_cancel` // `确认取消`
       }
       return title
-    }, 
+    }
   },
-  components: {
-    vList,
-    countDown
+  watch: {
+    show() {
+      this.total = ''
+      this.amount = ''
+      this.active_id = 0
+      this.trans_id = ''
+      this.status = 0
+      this.step = 0 // 步骤  根据操作 和 类型 的不同 展示不同的结果
+      this.option = 0 //
+      if (this.show === true) {
+        this.active_id = this.view.active_id
+        this.price = this.view.price
+      } else if (this.show === false) {
+        this.view = {}
+      }
+    },
+    status() {
+      if (this.status === 0) {
+        this.step = 0
+      } else if (this.status === 1) {
+        this.step = 2
+      } else if (this.status === 2) {
+        this.step = 3
+      } else {
+        this.step = 4
+      }
+    }
+  },
+  created() {
   },
   methods: {
-    openSideBar () {
+    openSideBar() {
       // this.show = true;
     },
-    openQR (pay) {
+    openQR(pay) {
       this.qrsrc = pay.collection_img
       this.showQRcode = true
     },
-    closeSideBar () {
+    closeSideBar() {
       // this.show = false;
       this.$emit('closeSideBar')
     },
-    createTransaction () {
+    createTransaction() {
       if (!this.isLogin) {
         this.$router.push({
           name: 'login'
@@ -602,13 +645,13 @@ export default {
         this.active_id = this.view.active_id
         this.price = this.view.price
       }
-      let params = {
+      const params = {
         active_id: this.active_id,
         side: 1,
         amount: this.amount * 1,
         total: this.total
       }
-      let $this = this
+      const $this = this
       service.createOtcTransaction(params).then(res => {
         if (!res.code) {
           $this.active_id = res.data.active_id
@@ -628,78 +671,78 @@ export default {
       })
     },
     // 获取成交单详情
-    getOrderInfo (trans_id) {
+    getOrderInfo(trans_id) {
       if (!trans_id) {
         return
       }
-      let params = {
+      const params = {
         trans_id
       }
       service.getOtcOrderInfo(params).then(res => {
         this.paylist = res.data.otc_collection_list
         if (this.paylist.length > 0) {
-          let arr = this.paylist.filter(arg => arg.payment_type === 1)
+          const arr = this.paylist.filter(arg => arg.payment_type === 1)
           if (arr.length > 0) {
             this.selectPayment = arr[0]
+          } else {
+            this.selectPayment = this.paylist[0]
           }
-          else {
-            this.selectPayment = this.paylist[0] 
-          } 
         }
       })
     },
-    removefill () {
-      if (this.active_id <= 0) {}
+    removefill() {
+      if (this.active_id <= 0) {
+        console.log(11)
+      }
     },
-    amountInput () {
+    amountInput() {
       // console.log(this.view)
-      if (!this.amount || this.amount == '') {
+      if (!this.amount || this.amount === '') {
         this.total = ''
       } else {
         if (this.$big(this.amount).gt(this.$big(this.view.amount).minus(this.view.freezed))) {
           this.inputAll()
         } else {
-          let total = this.$big(this.view.price).mul(this.amount).round(2, 0)
+          const total = this.$big(this.view.price).mul(this.amount).round(2, 0)
           if (this.inputTarget === 'amount') {
-            if (this.total != total) {
+            if (this.total !== total) {
               this.total = total
             }
           }
         }
       }
     },
-    totalInput () {
-      if (!this.total || this.total == '') {
+    totalInput() {
+      if (!this.total || this.total === '') {
         this.amount = ''
       } else {
-        let amount = this.$big(this.total).div(this.view.price).round(this.symbolInfo.amount_scale, 0)
+        const amount = this.$big(this.total).div(this.view.price).round(this.symbolInfo.amount_scale, 0)
         if (this.inputTarget === 'total') {
-          if (this.amount != amount) {
+          if (this.amount !== amount) {
             this.amount = amount
           }
         }
       }
     },
-    inputAll (arg) {
+    inputAll(arg) {
       if (arg === 'total') {
         this.inputTarget = 'total'
         this.total = this.view.total
-        //this.amount = this.$big(this.total).div(this.view.price).round(2, 0)
-      }
-      else {
+        // this.amount = this.$big(this.total).div(this.view.price).round(2, 0)
+      } else {
         this.inputTarget = 'amount'
         this.amount = this.$big(this.view.amount).minus(this.view.freezed)
-        //this.total = this.$big(this.amount).times(this.view.price)
-      } 
+        // this.total = this.$big(this.amount).times(this.view.price)
+      }
     },
     // 撤销成交单
-    revokeOrder () {
+    revokeOrder() {
       // 先切换到提示信息
       if (this.option !== 2) {
         this.option = 2
         return
       }
-      let params = {
+      const params = {
         type: 2,
         trans_id: this.trans_id
       }
@@ -709,7 +752,7 @@ export default {
       this.step = 0
       this.$emit('closeSide')
     },
-    paymentDone () {
+    paymentDone() {
       if (!this.selectPayment || !this.selectPayment.collection_id) {
         utils.alert(this.$t('otc_buy_tips_i'))
         return
@@ -719,7 +762,7 @@ export default {
         this.option = 1
         return
       }
-      let params = {
+      const params = {
         trans_id: this.trans_id,
         collection_id: this.selectPayment.collection_id
       }
@@ -735,12 +778,12 @@ export default {
         }
       })
     },
-    cancelOption () {
+    cancelOption() {
       this.option = 0
       this.status = 0
     },
-    getCllectionList () {
-      let params = {
+    getCllectionList() {
+      const params = {
         currency: 'CNY' // 目前只有CNY, 先写死
       }
       service.getOtcCollection(params).then(res => {
@@ -749,10 +792,10 @@ export default {
         }
       })
     },
-    changePayType (e) {
+    changePayType(e) {
       console.log(e)
     },
-    async setQr (url) {
+    async setQr(url) {
       const QRCode = await qrcode()
       QRCode.toCanvas(
         this.$refs.qr,
@@ -772,51 +815,10 @@ export default {
         }
       )
     },
-    changeTarget (target) {
+    changeTarget(target) {
       this.inputTarget = target
     }
-  },
-  props: {
-    view: {
-      type: Object,
-      default: () => {}
-    },
-    show: {
-      type: Boolean,
-      default: false
-    }
-  },
-  created () {
-  },
-  watch: {
-    show () {
-      this.total = ''
-      this.amount = ''
-      this.active_id = 0
-      this.trans_id = ''
-      this.status = 0
-      this.step = 0 // 步骤  根据操作 和 类型 的不同 展示不同的结果
-      this.option = 0 //
-      if (this.show === true) {
-        this.active_id = this.view.active_id
-        this.price = this.view.price
-      } else if (this.show === false) {
-        this.view = {}
-      }
-    },
-    status () {
-      if (this.status === 0) {
-        this.step = 0
-      } else if (this.status === 1) {
-        this.step = 2
-      } else if (this.status === 2) {
-        this.step = 3
-      } else {
-        this.step = 4
-      }
-    }
-  },
-  mixins: [ processValue,otcComputed ]
+  }
 
 }
 </script>
@@ -830,7 +832,7 @@ export default {
       tr:first-child {
         td {
           padding-top:13px;
-        } 
+        }
       }
     }
   }
@@ -881,6 +883,5 @@ export default {
     color: #09C989;
     border-color: #09C989;
   }
-   
 
 </style>

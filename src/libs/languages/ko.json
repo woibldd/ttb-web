@@ -1151,7 +1151,7 @@
     "contract_limit_price": "한도가",
     "contract_price_tips": "당신은 구매 또는 판매의 가격을 원 합니다",
     "contract_limit_price_tips": "가격 제한 위탁은 지정 한 (또는 더 좋은) 가격에의 한 매입 또는 판매에 사용 한다.이것은 가장 상용하는 위탁 유형이다。",
-    "contract_buy_on_price_piece": "%{price}가격에서%{num}장%{symbol}。",
+    "contract_buy_on_price_piece": "%{price}가격에서%{amount}장%{symbol}。",
     "contract_cost_10_times": "성본@{lever}x",
     "contract_pos_after_deal": "거래 가 성사 된 후 창고 포지션의 크기",
     "contract_expect_equal_price": "예상물가",
@@ -2071,7 +2071,7 @@
 "cj_ze": "거래금액",
 "ck_jg": "USDT참고단가",
 "yj_mb": "코인을 사다",
-"xe_je": "소액쾌속 거래，단가100이하",
+"xe_je": "소액쾌속 거래，단가50000이하",
 "wz_xx": "적당한 단가를 찾지못함，거래조건을 수개",
 "ck_bj": " 모든 가격을 보다",
 "but_bank": "은행카드",
@@ -2086,6 +2086,12 @@
 "tj_cg": "거래성공",
 "zd_xe": "구매량의 최소한도100",
 "gm_sl": "구매량 최대한도50000",
-"xe": "소액급행거래, 0 수수료, 단일 5만 이하",
-"sl": "수량을 비어 있을 수 없음"
+"deposit_state_error": "错误",
+"order_apply_failed": "委托提交失败",
+"order_apply_message_a": "可用余额不足，无法提交委托。",
+"order_apply_message_b": "当前下单价格与盘口价格差异过大，无法提交委托。",
+"order_apply_message_c":"在%{price}价格%{side}%{amount}张%{currency}永续合约。",
+"contract_buy_on_price_piece1":"在市价%{amount}张%{symbol}。",
+"invite_kyc_lv": "KYC认证",
+"otc_otutcol_20": "申诉成功，请等待客服处理"
 }

@@ -1,9 +1,12 @@
 <template>
-  <input type="text" ref="input" class="input"
+  <input
+    ref="input"
     :disabled="disabled"
     :readonly="readonly"
-    maxlength="32"
     :placeholder="placeholder"
+    type="text"
+    class="input"
+    maxlength="32"
     @keydown.up="up"
     @keydown.down="down"
     @input="updateValue($event.target.value, 'input')"
@@ -15,12 +18,14 @@
 import utils from '@/modules/utils'
 
 export default {
-  name: 'currencyInput',
+  name: 'CurrencyInput',
   props: {
     disabled: {
+      type: Boolean,
       default: false
     },
     readonly: {
+      type: Boolean,
       default: false
     },
     placeholder: {
@@ -32,67 +37,70 @@ export default {
       type: Number
     },
     stepScale: {
-      type: Number
+      type: Number,
+      default: 0
     },
-    value: String,
+    value: {
+      type: [String, Object],
+      default: null
+    },
     // 步长间隔 N 每次增加N个最小单位
     accuracy: {
       type: Number,
       default: 1
-    },
+    }
   },
-  data () {
+  data() {
     return {
       debug: 0,
       lastValue: ''
     }
   },
   computed: {
-    step () {
+    step() {
       const scale = this.stepScale ? 0 - this.stepScale : 0 - this.realScale
       return this.$big(10).pow(scale)
     },
-    realScale () {
+    realScale() {
       return Math.floor(this.scale)
     }
   },
   watch: {
-    realScale () {
+    realScale() {
       this.updateValue(this.$refs.input.value, 'scaleChange')
     },
-    value (newValue) {
+    value(newValue) {
       this.onValueChange(newValue)
     }
   },
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
       this.value && this.onValueChange(this.value)
     })
   },
   methods: {
-     up () {
+    up() {
       this.fixValue(this.accuracy || 1)
     },
-    down () {
+    down() {
       this.fixValue(-this.accuracy || -1)
     },
-    focus () {
+    focus() {
       this.$emit('focus')
     },
-    blur () {
+    blur() {
       this.$emit('blur')
     },
-    onValueChange (newValue) {
+    onValueChange(newValue) {
       this.log('Value Change: ', newValue)
       if (newValue === '') {
         return this.updateValue('')
       }
-      try { 
-        // 最小进步 accuracy 参与运算  
-        const minStep = this.$big(10).pow(-this.realScale).times(this.accuracy) 
+      try {
+        // 最小进步 accuracy 参与运算
+        const minStep = this.$big(10).pow(-this.realScale).times(this.accuracy)
         let $newValue = this.$big(newValue)
         if (!$newValue.mod(minStep).eq(0)) {
-          
           $newValue = $newValue.div(minStep).round(this.realScale >= 1 ? this.realScale - 1 : 0, 0).mul(minStep)
           // $newValue = $newValue.div(minStep).round(0, 0).mul(minStep)
         }
@@ -104,15 +112,15 @@ export default {
         this.updateValue(this.lastValue)
       }
     },
-    fixValue (delta = 0) {
+    fixValue(delta = 0) {
       this.log(`fixValue ${delta}`)
       if (this.$refs.input.value === '' && delta === 0) {
         return this.updateValue('')
       }
       this.updateValue(this.$big(this.$refs.input.value || '0').plus(this.step.mul(delta)).round(this.stepScale || this.realScale, 0) + '', 'fixValue')
     },
-    updateValue (value, src) {
-      this.log(`updateValue: ${value} @${src}`)
+    updateValue(value, src) {
+      this.log(`updateValue: ${value} @${src}111`)
       if (typeof value !== 'string') {
         throw new Error('Value must be string.')
       }

@@ -275,7 +275,8 @@ export default {
       if (utils.isIos()) {
         url = `itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist`
       }
-      window.open(url, '_blank')
+      // window.open(url, '_blank')
+      window.location.href = url
     }
 
   },
@@ -333,7 +334,7 @@ export default {
         }
     }
     .dl__btn {
-        width:rem(160);
+        width:rem(190);
         height:rem(60);
         background:#00bbbd;
         border-radius:rem(30);

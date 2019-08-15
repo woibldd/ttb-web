@@ -7,13 +7,13 @@
     @keyup.enter="onkeyup('enter')"
     @keyup.esc="onkeyup('esc')">
     <div
-      class="page-mask"
-      v-show="state.loading"/>
+      v-show="state.loading"
+      class="page-mask"/>
   </div>
 </template>
 
 <script>
-import {state, actions} from '@/modules/store'
+import { state, actions } from '@/modules/store'
 import utils from '@/modules/utils'
 import VNotifyList from '@/components/VNotifyList.vue'
 
@@ -22,7 +22,7 @@ export default {
   components: {
     VNotifyList
   },
-  data () {
+  data() {
     return {
       state,
       isMobile: utils.isMobile()
@@ -31,5 +31,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import "styles/reset.scss"; 
+@import "styles/reset.scss";
 </style>

@@ -47,8 +47,8 @@
           <div class="invite-list">
             <div class="th pd-15">
               <div class="td">{{ $t('username') }}</div>
-              <div class="td">{{ $t('invite_kyc2') }}</div>
-              <div class="td">{{ $t('time') }}</div>
+              <div class="td center">{{ $t('invite_kyc_lv') }}</div>
+              <div class="td right">{{ $t('time') }}</div>
             </div>
             <div class="tbody pb-20">
               <div
@@ -65,8 +65,10 @@
                 v-for="item in invitationList.list"
                 :key="item.id">
                 <div class="td">{{ item.phone || item.email }}</div>
-                <div class="td">{{ item.state === 2 ? $t('invite_kyc2_pass') : $t('invite_kyc2_deniel') }}</div>
-                <div class="td">{{ item.register_time | ts2date }}</div>
+                <div class="td center">
+                  {{ item.lv > 0 ? 'KYC' + item.lv : $t('invite_kyc2_deniel') }}
+                </div>
+                <div class="td right">{{ item.register_time | ts2date }}</div>
               </div>
             </div>
             <div

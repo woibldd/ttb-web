@@ -1813,7 +1813,7 @@ export default {
       $value = this.$big($value)
       if ($value.gt(this.balance.available_balance)) {
         if (true){
-          return this.$toast({title: '委托提交失败',body:  `可用余额不足，无法提交委托。`,color: 'red'})
+          return this.$toast({title: this.$t('order_apply_failed'), body: this.$t('order_apply_message_a'), color: 'red'})
          } else {
           return utils.alert(this.$i18n.t("amount_over")); //余额不足
         }
@@ -1842,8 +1842,8 @@ export default {
       if (side === "BUY" && $ask.gt(0) && $price.div(1.3).gt($ask)) {
         if (true){
           let toastText = {
-                title: '委托提交失败',
-                body:  `当前下单价格与盘口价格差异过大，无法提交委托。`,
+                title:  this.$t('order_apply_failed'),
+                body:   this.$t('order_apply_message_b'),
                 color: 'red'
             }
           this.$toast(toastText)
@@ -1907,8 +1907,7 @@ export default {
         // 做空
         this.mmModal.label = this.$t("order_side_sell");
         this.btnShortLoading = true;
-      } 
-      this.showMakeMoreModal = true;
+      }  
       // 先打开弹窗
       if (!local.mmNeverShow) {
         this.showMakeMoreModal = true;
@@ -1948,16 +1947,17 @@ export default {
       let res = await service.orderContract(order);
       if (!res.code) {
         this._resetLoadingState();
-        // 通知所有组件，有数据更新，需要强制刷新数据
-        //console.log("doSubmit")
+        // 通知所有组件，有数据更新，需要强制刷新数据 
         this.$eh.$emit("protrade:order:refresh", "doSubmit");
         // utils.success(this.$t("contract_order_success"));
         let side =''
-        res.data.side === 2 ? side = '买入' :side = '卖出'
+        let data = res.data
+        data.side === 2 ? side = this.$t('order_side_buy') :side = this.$t('order_side_sell')
         if(this.userSetting.submission){
           let toastText = {
-            title: '委托已提交',
-            body: `在${res.data.price}价格${side}${res.data.amount}张BTC永续合约。`,
+            title: this.$t('message_setting_content_02'),// '委托已提交',
+            // body: `在${res.data.price}价格${side}${res.data.amount}张BTC永续合约。`,
+            body: this.$t('order_apply_message_c', {price: data.price, side, amount: data.amount, currency: data.currency.replace('USD','')  }),
             color: 'yellow'
           }
           this.$toast(toastText)
@@ -2010,7 +2010,7 @@ export default {
           }
           //当触发价格低于盘口价格时，可以卖出止损
           else if (tprice < lprice) {
-            [this.buyEnabled, this.sellEnabled] = [false, true];
+            [this.buyEnabled, this.sellEnabled] = [false, true]; 
           }
         }
         //限价止盈  市价止盈
