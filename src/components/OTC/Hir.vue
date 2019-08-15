@@ -9,21 +9,21 @@
         <li class="head">
           <icon class="touxiang" name="rentou"/>
         </li>
-        <li class="User-name">{{tableData.name}}</li>
-        <li class="User-Grade">{{tableData.kyc_level}}</li>
+        <li class="User-name">{{ tableData.name }}</li>
+        <li class="User-Grade">{{ tableData.kyc_level }}</li>
         <li class="User-Grades">认证等级</li>
-        <li class="User-number">UID：{{tableData.id}}</li>
-        <li class="User-time">注册时间 {{tableData.register_time | date}}</li>
+        <li class="User-number">UID：{{ tableData.id }}</li>
+        <li class="User-time">注册时间 {{ tableData.register_time | date }}</li>
       </ul>
       <!-- 2 -->
       <ul class="information-b">
         <li class="User-transaction">
           交易总额(CNY)
-          <span class="User-transaction-a">{{tableData.orders_total}}</span>
+          <span class="User-transaction-a">{{ tableData.orders_total }}</span>
         </li>
         <li class="User-MeanTime">
           平均付款时间
-          <span class="User-MeanTime-a">{{tableData.pay_time_avg}}</span>
+          <span class="User-MeanTime-a">{{ tableData.pay_time_avg }}</span>
         </li>
         <li class="User-TextPrompt">平均付款时间、平均放币时间每日24:00更新</li>
       </ul>
@@ -31,25 +31,25 @@
       <ul class="information-c">
         <li class="User-Total">
           总单数
-          <span class="res">{{tableData.orders_total}}</span>
+          <span class="res">{{ tableData.orders_total }}</span>
         </li>
         <li class="User-Completionrate">
           完成率
-          <span class="ree">{{tableData.orders_rate}}</span>
+          <span class="ree">{{ tableData.orders_rate }}</span>
         </li>
         <li class="User-CoinTimes">
           平均放币时间
-          <span class="rea">{{tableData.issue_time_avg}}</span>
+          <span class="rea">{{ tableData.issue_time_avg }}</span>
         </li>
       </ul>
     </div>
 
     <!-- //按钮 -->
     <ul class="Button">
-      <li class="ButtonSwitch" :class="{'active': state===0}" @click="b()">未完成订单</li>
-      <li class="ButtonSwitch" :class="{'active': state===1}" @click="c()">已完成订单</li>
-      <li class="ButtonSwitch" :class="{'active': state===2}" @click="d()">已取消订单</li>
-      <li class="ButtonSwitch" :class="{'active': state===3}" @click="e()">我的委托单</li>
+      <li :class="{'active': state===0}" class="ButtonSwitch" @click="b()">未完成订单</li>
+      <li :class="{'active': state===1}" class="ButtonSwitch" @click="c()">已完成订单</li>
+      <li :class="{'active': state===2}" class="ButtonSwitch" @click="d()">已取消订单</li>
+      <li :class="{'active': state===3}" class="ButtonSwitch" @click="e()">我的委托单</li>
       <li class="TimeSequencing">时间</li>
     </ul>
     <p class="FriendshipTips">
@@ -60,46 +60,45 @@
 
     <!-- 未完成 -->
     <div v-if="state===0" class="undone-order">
-      <div v-for="(item,  index) in unDoneOrder" :key="index">
-        <Hoc :aver="item" v-on:detail-list="toDetailsTran(item)"/>
+      <div v-for="(item, index) in unDoneOrder" :key="index">
+        <Hoc :aver="item" @detail-list="toDetailsTran(item)"/>
       </div>
     </div>
     <!-- 已完成/已取消 -->
-    <div class="done-order" v-if="state===1 || state===2">
+    <div v-if="state===1 || state===2" class="done-order">
       <el-table :data="doneOrder" style="width:100%">
-        <el-table-column prop="trans_id" label="订单号"></el-table-column>
+        <el-table-column prop="trans_id" label="订单号"/>
         <el-table-column prop="side" label="类型">
           <template slot-scope="scope">
-            <div v-html="processValue('side', scope.row)"></div>
+            <div v-html="processValue('side', scope.row)"/>
           </template>
         </el-table-column>
         <el-table-column prop="state" label="状态">
           <template slot-scope="scope">
-            <div v-html="processValue('transaction_state', scope.row)">
-            </div>
+            <div v-html="processValue('transaction_state', scope.row)"/>
           </template>
         </el-table-column>
         <el-table-column prop="symbol" label="币对">
           <template slot-scope="scope">
-            <div>{{scope.row.symbol}}</div>
+            <div>{{ scope.row.symbol }}</div>
           </template>
         </el-table-column>
         <el-table-column prop="price" label="价格">
           <template slot-scope="scope">
-            <div>{{scope.row.price}}</div>
+            <div>{{ scope.row.price }}</div>
           </template>
         </el-table-column>
-        <el-table-column prop="amount" label="数量"></el-table-column>
+        <el-table-column prop="amount" label="数量"/>
         <el-table-column prop="total" label="金额">
           <template slot-scope="scope">
             <div>
-              {{scope.row.total}}
+              {{ scope.row.total }}
             </div>
           </template>
         </el-table-column>
         <el-table-column prop="create_time" label="下单时间">
           <template slot-scope="scope">
-            <div>{{scope.row.create_time | date('Y-M-D')}}</div>
+            <div>{{ scope.row.create_time | date('Y-M-D') }}</div>
           </template>
         </el-table-column>
         <el-table-column prop label="操作">
@@ -109,8 +108,8 @@
               style="width:50px"
               height="30"
               radius="15"
-              @click="toDetailsTran(scope.row)"
-            label='详情'></v-btn>
+              label="详情"
+              @click="toDetailsTran(scope.row)"/>
           </template>
         </el-table-column>
       </el-table>
@@ -119,32 +118,31 @@
     <!-- 我的委托单 -->
     <div v-if="state ===3" class="my-order">
       <el-table :data="myOrder" style="width:100%">
-        <el-table-column prop="active_id" label="委托单号"></el-table-column>
+        <el-table-column prop="active_id" label="委托单号"/>
         <el-table-column prop="side" label="类型">
           <template slot-scope="scope">
-            <div v-html="processValue('side', scope.row)"></div>
+            <div v-html="processValue('side', scope.row)"/>
           </template>
         </el-table-column>
-        <el-table-column prop="price" label="委托单价"></el-table-column>
+        <el-table-column prop="price" label="委托单价"/>
         <el-table-column width="180" label="委托数量/成交数量">
           <template slot-scope="scope">
-            <div>{{scope.row.amount +'/'+ scope.row.executed}}</div>
+            <div>{{ scope.row.amount +'/'+ scope.row.executed }}</div>
           </template>
         </el-table-column>
         <el-table-column width="180" label="委托金额/成交金额">
           <template slot-scope="scope">
-            <div>{{scope.row.total +'/'+ (scope.row.executed * scope.row.price).toFiexd(2)}}</div>
+            <div>{{ scope.row.total +'/'+ (scope.row.executed * scope.row.price).toFiexd(2) }}</div>
           </template>
         </el-table-column>
         <el-table-column prop="amount" label="状态">
           <template slot-scope="scope">
-            <div v-html="processValue('order_state', scope.row)">
-            </div>
+            <div v-html="processValue('order_state', scope.row)"/>
           </template>
         </el-table-column>
         <el-table-column prop="create_time" width="120" label="发布时间">
           <template slot-scope="scope">
-            <div>{{scope.row.create_time | date('Y-M-D H:m')}}</div>
+            <div>{{ scope.row.create_time | date('Y-M-D H:m') }}</div>
           </template>
         </el-table-column>
         <el-table-column width="130" label="操作">
@@ -155,36 +153,43 @@
                 style="width:50px"
                 height="30"
                 radius="15"
-                @click="toDetailsOrder(scope.row.active_id)"
-              label='详情'></v-btn>
+                label="详情"
+                @click="toDetailsOrder(scope.row.active_id)"/>
               <v-btn
                 v-if="scope.row.state === 1"
                 class="td"
                 style="width:50px"
                 height="30"
-                radius="15" @click="toRevokeOrder(scope.row.active_id)"
-                label="撤销"></v-btn>
+                radius="15"
+                label="撤销"
+                @click="toRevokeOrder(scope.row.active_id)"/>
             </div>
           </template>
         </el-table-column>
       </el-table>
     </div>
     <side-bar :open.sync="showSide">
-      <step-alert :stepInfo="stepInfo" :stepType="stepType" v-on:success-change="successChange" />
+      <step-alert :step-info="stepInfo" :step-type="stepType" @success-change="successChange" />
     </side-bar>
   </div>
 </template>
 
 <script>
-import Hoc from "@/components/Hoc";
-import StepAlert from "@/components/StepAlert";
-import service from "@/modules/service";
-//import utils from "@/modules/utils.js";
-import sideBar from "@/components/VSideBar";
-import processValue from "@/mixins/process-otc-value";
+import Hoc from '@/components/Hoc'
+import StepAlert from '@/components/StepAlert'
+import service from '@/modules/service'
+// import utils from "@/modules/utils.js";
+import sideBar from '@/components/VSideBar'
+import processValue from '@/mixins/process-otc-value'
 
 export default {
-  name: "Hir",
+  name: 'Hir',
+  components: {
+    Hoc,
+    sideBar,
+    StepAlert
+  },
+  mixins: [processValue],
   data() {
     return {
       showSide: false,
@@ -198,79 +203,77 @@ export default {
       stepType: 1
     }
   },
-  components: {
-    Hoc,
-    sideBar,
-    StepAlert
+  async created() {
+    this.getOrderz()
+    this.getour(0)
   },
-  mixins: [processValue],
   methods: {
     b() {
-      this.getour(0);
+      this.getour(0)
     },
     c() {
-      this.getour(1);
+      this.getour(1)
     },
     d() {
-      this.getour(2);
+      this.getour(2)
     },
     e() {
-      this.getour(3);
+      this.getour(3)
     },
     getOrderz() {
       const params = {
         user_id: null
-      };
+      }
       service.getOtcUserinfo(params).then(res => {
         if (!res.code) {
-          let $this = this;
-          $this.tableData = res.data;
+          const $this = this
+          $this.tableData = res.data
         }
-      });
+      })
     },
     async getour(state) {
-      this.state = state;
-      let params = {
+      this.state = state
+      const params = {
         page: 1,
         size: 10,
         side: 0
-      };
-      this.dataTable = [];
+      }
+      this.dataTable = []
 
-      let $this = this;
-      if (state == 0) {
-        //未完成
-        let rec = await service.getUnDonefills(params);
+      const $this = this
+      if (state === 0) {
+        // 未完成
+        const rec = await service.getUnDonefills(params)
         if (!rec.code) {
-          $this.unDoneOrder = rec.data.data;
+          $this.unDoneOrder = rec.data.data
         }
-      } else if (state == 1) {
-        //已完成
-        let rec = await service.getDonefills(params);
+      } else if (state === 1) {
+        // 已完成
+        const rec = await service.getDonefills(params)
         if (!rec.code) {
-          $this.doneOrder = rec.data.data;
+          $this.doneOrder = rec.data.data
         }
-      } else if (state == 2) {
-        //已取消
-        let rec = await service.getOtcRemovefills(params);
+      } else if (state === 2) {
+        // 已取消
+        const rec = await service.getOtcRemovefills(params)
         if (!rec.code) {
-          $this.doneOrder = rec.data.data;
+          $this.doneOrder = rec.data.data
         }
-      } else if (state == 3) {
-        //我的委托单
-        let res = await service.getOtcActivefills(params);
+      } else if (state === 3) {
+        // 我的委托单
+        const res = await service.getOtcActivefills(params)
         if (!res.code) {
-          $this.myOrder = res.data.data;
+          $this.myOrder = res.data.data
         }
       }
     },
-    //委托单详情
+    // 委托单详情
     successChange() {
       this.getour(0)
       this.showSide = false
     },
     toDetailsOrder(active_id) {},
-    //撤销委托单
+    // 撤销委托单
     toRevokeOrder(active_id) {
       service
         .otcOrderRemove({
@@ -279,24 +282,24 @@ export default {
         })
         .then(res => {
           if (!res.code) {
-            console.log("撤销成功");
-            this.getour(this.state);
+            console.log('撤销成功')
+            this.getour(this.state)
           }
-          return res;
+          return res
         })
         .then(res => {
           if (res.code) {
-            console.log(res.code + ":" + res.message);
+            console.log(res.code + ':' + res.message)
           }
-        });
+        })
     },
-    //成交详情
-    toDetailsTran (item) {
+    // 成交详情
+    toDetailsTran(item) {
       this.stepType = item.side
       this.showSide = true
       this.stepInfo = item
     },
-    //撤销成交
+    // 撤销成交
     toRevokeTran(trans_id) {
       service
         .otcOrderRemove({
@@ -305,23 +308,19 @@ export default {
         })
         .then(res => {
           if (!res.code) {
-            console.log("撤销成功");
-            this.getour(this.state);
+            console.log('撤销成功')
+            this.getour(this.state)
           }
-          return res;
+          return res
         })
         .then(res => {
           if (res.code) {
-            console.log(res.code + ":" + res.message);
+            console.log(res.code + ':' + res.message)
           }
-        });
+        })
     }
-  },
-  async created() {
-    this.getOrderz();
-    this.getour(0);
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -341,7 +340,6 @@ export default {
   color: $otc-sell-bg !important;
 }
 </style>
-
 
 <style lang="scss" scoped>
 * {
@@ -580,14 +578,4 @@ div ul {
   }
 }
 </style>
-
-
-
-
-
-
-
-
-
-
 

@@ -5,7 +5,7 @@
   "author": "LeiYao <mylhei@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --open",
     "dev:host": "HOST=ix-test.com npm run dev",
     "dev:dist": "gulp",
     "start": "npm run dev",

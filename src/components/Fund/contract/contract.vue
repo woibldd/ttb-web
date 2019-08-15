@@ -314,16 +314,15 @@ export default {
         .times(100)
         .round(0)
     },
-    //计算杠杆倍数
+    // 计算杠杆倍数
     curLever() {
       let value = this.$big(0)
       this.holdingList.map(item => {
         value = value.plus(item.value)
       })
       if (this.$big(this.marginBalance).eq(0)) {
-        return "0"
-      }
-      else {
+        return '0'
+      } else {
         return value.div(this.marginBalance).toString()
       }
     },

@@ -1634,7 +1634,7 @@
     "transfer_side": "전입방향을 바꾸다",
     "transfer_amount": "전입수량을 바꾸다",
     "transfer_enter_amount": "금액을 입력하세요",
-    "transfer_enter_amountor": "수량을 입력하세요", 
+    "transfer_enter_amountor": "수량을 입력하세요",
     "transfer_able_amount": "전입가능한 수량：",
     "transfer_btc_history": "전입기록",
     "transfer_currency": "전입코인종류",
@@ -1650,7 +1650,7 @@
     "withdraw_tips1": "당신의 자료를 완성하세요",
     "idt_tips": "공백부분ITD매일 시스템이 자동으로 해동2%",
     "dfd_tips": "공백부분DFD매일 시스템이 자동으로 해동5%",
-    
+
     "persoal_rank": "개인 선수권대회 순위표",
     "profit_rank": "수익대회 순위표",
     "transaction": "거래량 순위표",
@@ -2086,12 +2086,12 @@
 "tj_cg": "거래성공",
 "zd_xe": "구매량의 최소한도100",
 "gm_sl": "구매량 최대한도50000",
-
 "deposit_state_error": "错误",
 "order_apply_failed": "委托提交失败",
 "order_apply_message_a": "可用余额不足，无法提交委托。",
 "order_apply_message_b": "当前下单价格与盘口价格差异过大，无法提交委托。",
-"order_apply_message_c":"在%{price}价格%{side}%{amount}张%{currency}永续合约。", 
+"order_apply_message_c":"在%{price}价格%{side}%{amount}张%{currency}永续合约。",
 "contract_buy_on_price_piece1":"在市价%{amount}张%{symbol}。",
-"invite_kyc_lv": "KYC认证"
+"invite_kyc_lv": "KYC认证",
+"otc_otutcol_20": "申诉成功，请等待客服处理"
 }

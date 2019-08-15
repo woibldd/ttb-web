@@ -16,7 +16,7 @@
   "withdraw": "Withdrawal",
   "wallet_accosaada": "About the fund account",
   "copy": "Copy",
- 
+
   "label": "Label",
   "cancel": "Cancel",
   "close": "Close",
@@ -1029,7 +1029,7 @@
 "activity_hero_reward": "Reward",
 "activity_hero_info_contact": "Wechat Q&A about the activity",
 "activity_hero_click_get_millison": "Click to win 1 million USDT",
-"download_app_dl": "APP download", 
+"download_app_dl": "APP download",
 "download_scan_qr_pc": "Scan QR code to download APP",
 "download_slogan_txt_a": "IX.com is the first exchange in the world to support Bitcoin",
 "download_slogan_txt_b": "Digital currency exchange ",
@@ -2257,7 +2257,8 @@
 "order_apply_failed": "委托提交失败",
 "order_apply_message_a": "可用余额不足，无法提交委托。",
 "order_apply_message_b": "当前下单价格与盘口价格差异过大，无法提交委托。",
-"order_apply_message_c":"在%{price}价格%{side}%{amount}张%{currency}永续合约。", 
+"order_apply_message_c":"在%{price}价格%{side}%{amount}张%{currency}永续合约。",
 "contract_buy_on_price_piece1":"在市价%{amount}张%{symbol}。",
-"invite_kyc_lv": "KYC认证"
+"invite_kyc_lv": "KYC认证",
+"otc_otutcol_20": "申诉成功，请等待客服处理"
 }
