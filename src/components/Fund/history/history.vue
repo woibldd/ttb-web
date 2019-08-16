@@ -15,6 +15,7 @@
           <el-radio-button label="deposit">{{ $t('deposit_record') }}</el-radio-button>
           <el-radio-button label="withdraw">{{ $t('withdraw_record') }}</el-radio-button>
           <el-radio-button label="reward"> {{ $t('fund_reward') }} </el-radio-button>
+          <el-radio-button label="return"> {{ $t('commission_history_text') }} </el-radio-button>
           <el-radio-button
             v-if="isPromoter"
             label="promoter"> {{ $t('promote_brokerage') }} </el-radio-button>
@@ -329,6 +330,10 @@ export default {
           break
         case 'promoter':
           request = service.getPromoteList
+          break
+        //节点返佣记录
+        case 'return':
+          request = service.nodeReturn
           break
         default:
           break

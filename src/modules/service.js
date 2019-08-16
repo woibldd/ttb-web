@@ -1277,10 +1277,14 @@ const service = {
       }
     }
   },
-  //结点认购
+  //节点认购
   nodesBuy (params) {
     return getCache('c_nodes_buy', () => request('api/agent/nodes/pre', params), 1e3)
     //return fetch('http://staging.ixex.pro:93/api/agent/nodes/pre', params)
+  },
+  //节点返佣
+  nodeReturn (params) {
+    return getCache('c_node_return', () => request('future/activity/node/list', params), 1e3)
   }
 }
 
