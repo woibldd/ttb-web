@@ -1,7 +1,8 @@
 <template>
   <div class="bid-detail-container">
-    <div class="backTop" 
-@click="backTop">
+    <div
+      class="backTop"
+      @click="backTop">
       <i class="iconfont">&#xe64e;</i>
       <span>{{ $t('bby_shouy7') }}</span>
     </div>
@@ -9,8 +10,9 @@
       <div class="logo"/>
       <h1>{{ cell.currency }}</h1>
       <h2>{{ cell.product }}</h2>
-      <em class="jl" 
-@click="jl">{{ $t('bby_shise1') }}</em>
+      <em
+        class="jl"
+        @click="jl">{{ $t('bby_shise1') }}</em>
     </div>
     <div class="bid-detail-area">
       <div class="message-box">
@@ -26,8 +28,11 @@
         </div>
         <div class="range-box">
           <div class="range">
-            <el-progress :text-inside="true" 
-:stroke-width="12" :percentage="cell.down_amount" status="warning"/>
+            <el-progress
+              :text-inside="true"
+              :stroke-width="12"
+              :percentage="cell.down_amount"
+              status="warning"/>
           </div>
           <div class="range-txt">
             <span class="lock">{{ $t('bby_shouy3') }} {{ cell.lockedAmount }}</span>
@@ -77,14 +82,16 @@
         <div class="buy-area">
           <span>{{ $t('account_balance') }} {{ accountBalance }} {{ cell.currency }}</span>
           <em class="pay">
-            <router-link to="/fund/deposit" 
-tag="a">{{ $t('bby_shouy15') }}</router-link>
-            <!--<a href="http://127.0.0.1:8080/fund/deposit">{{$t('bby_shouy15')}}</a></em>-->
+            <router-link
+              to="/fund/deposit"
+              tag="a">{{ $t('bby_shouy15') }}</router-link>
+              <!--<a href="http://127.0.0.1:8080/fund/deposit">{{$t('bby_shouy15')}}</a></em>-->
           </em>
           <em class="buy">
-            <router-link to="/trading/BTC_USDT" 
-tag="a">{{ $t('bby_shouy16') }}</router-link>
-            <!--<a href="http://127.0.0.1:8080/fund/deposit">{{$t('bby_shouy16')}}</a>-->
+            <router-link
+              to="/trading/BTC_USDT"
+              tag="a">{{ $t('bby_shouy16') }}</router-link>
+              <!--<a href="http://127.0.0.1:8080/fund/deposit">{{$t('bby_shouy16')}}</a>-->
           </em>
         </div>
         <div class="buy-ipt">
@@ -94,10 +101,10 @@ tag="a">{{ $t('bby_shouy16') }}</router-link>
             <!-- <el-input-number v-model.number="count" :min="Number(cell.minLimit)" @change="inputKeyBoard"
                              :max="Number(cell.maxLimit)" label="请输入存币数量"  :controls="controls"></el-input-number> -->
             <number-input
-              class="number-input"
               v-model="count"
               :scale="point"
               :placeholder="$t('bby_shouy19')"
+              class="number-input"
             />
             <div class="rage">
               <span class="cell">{{ cell.currency }}</span>
@@ -106,8 +113,10 @@ tag="a">{{ $t('bby_shouy16') }}</router-link>
           </div>
           <div class="tip">{{ $t('bby_shouy18') }}<em>{{ money }}</em>{{ cell.currency }}</div>
         </div>
-        <button class="join-btn" 
-:disabled="disabled" @click="submit">
+        <button
+          :disabled="accordDate || disabled"
+          class="join-btn"
+          @click="submit">
           {{ $t('bby_shouy20') }}
         </button>
       </div>
@@ -127,15 +136,15 @@ tag="a">{{ $t('bby_shouy16') }}</router-link>
 </template>
 
 <script type="text/ecmascript-6">
-import axios from 'axios'
-import {getLocalTime} from './mixins'
+// import axios from 'axios'
+import { getLocalTime } from './mixins'
 import Vue from 'vue'
 import qs from 'qs'
 import service from '@/modules/service'
-import {envApi} from '../../modules/request'
+// import { envApi } from '../../modules/request'
 
 export default {
-  data () {
+  data() {
     return {
       count: 0,
       controls: false,
@@ -178,12 +187,117 @@ export default {
       point: 0
     }
   },
-  mounted () {
-
+  computed: {
+    accordDate() {
+      return this.cell.deadlineTime - new Date().getTime() < 0
+    }
+  },
+  watch: {
+    count() {
+      if (this.cell.state === 1) {
+        if (this.count) {
+          if (this.cell.minLimit.indexOf('.') > 0) {
+            const minArr = this.cell.minLimit.split('.')
+            this.point = minArr[1].length
+            const towTotal = Number(this.cell.maxLimit) - Number(this.cell.lockedAmount)
+            if (Number(this.accountBalance) > 0) {
+              if (Number(this.accountBalance) < towTotal) {
+                console.log('sss', this.accountBalance)
+                this.money = this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
+                this.disabled = false
+              } else {
+                this.money = this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
+                this.disabled = false
+              }
+            }
+          } else {
+            const towTotal = Number(this.cell.maxLimit) - Number(this.cell.lockedAmount)
+            if (Number(this.accountBalance) > 0) {
+              if (Number(this.accountBalance) < towTotal) {
+                console.log('sss', this.accountBalance)
+                this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
+                this.disabled = false
+              } else {
+                this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
+                this.disabled = false
+              }
+            }
+          }
+        } else {
+          this.disabled = true
+        }
+      }
+    }
+  },
+  mounted() {
+    this.timeLine = [{
+      content: this.$t('bby_shouy28'),
+      timestamp: '2018-04-15',
+      color: '#C9A96C'
+    }, {
+      content: this.$t('bby_shouy29'),
+      timestamp: '2018-04-13',
+      color: '#C9A96C'
+    }, {
+      content: this.$t('bby_shouy30'),
+      timestamp: '2018-04-11',
+      color: '#C9A96C'
+    }]
+  },
+  created() {
+    this.cell = JSON.parse(window.localStorage.getItem('detail'))
+    const remaining_amount = Number(this.cell.total) - Number(this.cell.lockedAmount)
+    const c = Number(this.cell.lockedAmount) / (Number(this.cell.total) / 100)
+    if (this.cell.lockedAmount.indexOf('.') > 0) {
+      const minArr = this.cell.lockedAmount.split('.')
+      Vue.set(this.cell, 'remaining_amount', remaining_amount.toFixed(minArr[1].length))
+    } else {
+      Vue.set(this.cell, 'remaining_amount', remaining_amount)
+    }
+    Vue.set(this.cell, 'down_amount', c)
+    Vue.set(this.cell, 'max_limit', Number(this.cell.maxLimit))
+    Vue.set(this.cell, 'min_limit', Number(this.cell.minLimit))
+    this.detail.timeLine[0].timestamp = getLocalTime(this.cell.deadlineTime)
+    this.detail.timeLine[1].timestamp = getLocalTime(this.cell.bearingTime)
+    this.detail.timeLine[2].timestamp = getLocalTime(this.cell.unlockTime)
+    this.getAccountWalletList()
+    if (this.cell.minLimit.indexOf('.') > 0) {
+      const minArr = this.cell.minLimit.split('.')
+      this.point = minArr[1].length
+      const towTotal = Number(this.cell.maxLimit) - Number(this.cell.lockedAmount)
+      if (Number(this.accountBalance) > 0) {
+        if (Number(this.accountBalance) < towTotal) {
+          console.log('sss', this.accountBalance)
+          this.money = this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
+          this.disabled = false
+        } else {
+          this.money = this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
+          this.disabled = false
+        }
+      }
+    } else {
+      const towTotal = Number(this.cell.maxLimit) - Number(this.cell.lockedAmount)
+      if (Number(this.accountBalance) > 0) {
+        if (Number(this.accountBalance) < towTotal) {
+          console.log('sss', this.accountBalance)
+          this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
+          this.disabled = false
+        } else {
+          this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
+          this.disabled = false
+        }
+      }
+    }
+    // const timestamp = Date.parse(new Date())
+    if (this.cell.state === 1) {
+      this.disabled = false
+    } else {
+      this.disabled = true
+    }
   },
   methods: {
     //   manageResopetate
-    getAccountWalletList () {
+    getAccountWalletList() {
       this.accountBalance = 0
       service.getAccountWalletList().then(res => {
         if (res.code === 0) {
@@ -197,15 +311,15 @@ export default {
         }
       })
     },
-    backTop () {
+    backTop() {
       this.$router.push('/snowball')
     },
-    inputKeyBoard (e) {
+    inputKeyBoard(e) {
       if (e > this.accountBalance) {
         this.count = this.accountBalance
       }
     },
-    allMoney () {
+    allMoney() {
       //   if (this.accountBalance < Number(this.cell.minLimit)) {
       //     // this.$message.warning('余额不足，请充值')
       //      this.$message({
@@ -218,7 +332,7 @@ export default {
       //       }
       //   }
       this.disabled = false
-      let towTotal = Number(this.cell.maxLimit) - Number(this.cell.lockedAmount)
+      const towTotal = Number(this.cell.maxLimit) - Number(this.cell.lockedAmount)
       if (towTotal > 0) {
         if (Number(this.accountBalance) > 0) {
           if (Number(this.accountBalance) < towTotal) {
@@ -237,12 +351,12 @@ export default {
         this.disabled = true
       }
     },
-    jl () {
+    jl() {
       this.$router.push({
         name: 'bidtable'
       })
     },
-    submit () {
+    submit() {
       if (this.accountBalance !== 0) {
         service.manageRecord(qs.stringify({
           site: this.cell.site,
@@ -271,109 +385,6 @@ export default {
         this.$message.warning(this.$t('bby_shouy32'))
       } else {
         this.$message.warning(this.$t('bby_shouy32'))
-      }
-    }
-  },
-  mounted () {
-    this.timeLine = [{
-      content: this.$t('bby_shouy28'),
-      timestamp: '2018-04-15',
-      color: '#C9A96C'
-    }, {
-      content: this.$t('bby_shouy29'),
-      timestamp: '2018-04-13',
-      color: '#C9A96C'
-    }, {
-      content: this.$t('bby_shouy30'),
-      timestamp: '2018-04-11',
-      color: '#C9A96C'
-    }]
-  },
-  created () {
-    this.cell = JSON.parse(window.localStorage.getItem('detail'))
-    const remaining_amount = Number(this.cell.total) - Number(this.cell.lockedAmount)
-    let c = Number(this.cell.lockedAmount) / (Number(this.cell.total) / 100)
-    if (this.cell.lockedAmount.indexOf('.') > 0) {
-      let minArr = this.cell.lockedAmount.split('.')
-      Vue.set(this.cell, 'remaining_amount', remaining_amount.toFixed(minArr[1].length))
-    } else {
-      Vue.set(this.cell, 'remaining_amount', remaining_amount)
-    }
-    Vue.set(this.cell, 'down_amount', c)
-    Vue.set(this.cell, 'max_limit', Number(this.cell.maxLimit))
-    Vue.set(this.cell, 'min_limit', Number(this.cell.minLimit))
-    this.detail.timeLine[0].timestamp = getLocalTime(this.cell.deadlineTime)
-    this.detail.timeLine[1].timestamp = getLocalTime(this.cell.bearingTime)
-    this.detail.timeLine[2].timestamp = getLocalTime(this.cell.unlockTime)
-    this.getAccountWalletList()
-    if (this.cell.minLimit.indexOf('.') > 0) {
-      let minArr = this.cell.minLimit.split('.')
-      this.point = minArr[1].length
-      let towTotal = Number(this.cell.maxLimit) - Number(this.cell.lockedAmount)
-      if (Number(this.accountBalance) > 0) {
-        if (Number(this.accountBalance) < towTotal) {
-          console.log('sss', this.accountBalance)
-          this.money = this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
-          this.disabled = false
-        } else {
-          this.money = this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
-          this.disabled = false
-        }
-      }
-    } else {
-      let towTotal = Number(this.cell.maxLimit) - Number(this.cell.lockedAmount)
-      if (Number(this.accountBalance) > 0) {
-        if (Number(this.accountBalance) < towTotal) {
-          console.log('sss', this.accountBalance)
-          this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
-          this.disabled = false
-        } else {
-          this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
-          this.disabled = false
-        }
-      }
-    }
-    let timestamp = Date.parse(new Date())
-    if (this.cell.state === 1) {
-      this.disabled = false
-    } else {
-      this.disabled = true
-    }
-  },
-  watch: {
-    count () {
-      if (this.cell.state === 1) {
-        if (this.count) {
-          if (this.cell.minLimit.indexOf('.') > 0) {
-            let minArr = this.cell.minLimit.split('.')
-            this.point = minArr[1].length
-            let towTotal = Number(this.cell.maxLimit) - Number(this.cell.lockedAmount)
-            if (Number(this.accountBalance) > 0) {
-              if (Number(this.accountBalance) < towTotal) {
-                console.log('sss', this.accountBalance)
-                this.money = this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
-                this.disabled = false
-              } else {
-                this.money = this.$big(this.cell.moneyDays).div(365).times(this.cell.annualizedReturns).div(100).times(this.count).round(minArr[1].length + 2, 0).toString()
-                this.disabled = false
-              }
-            }
-          } else {
-            let towTotal = Number(this.cell.maxLimit) - Number(this.cell.lockedAmount)
-            if (Number(this.accountBalance) > 0) {
-              if (Number(this.accountBalance) < towTotal) {
-                console.log('sss', this.accountBalance)
-                this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
-                this.disabled = false
-              } else {
-                this.money = this.$big(this.cell.annualizedReturns).div(365).times(this.cell.moneyDays).times(this.count).div(100).round(2, 0).toString()
-                this.disabled = false
-              }
-            }
-          }
-        } else {
-          this.disabled = true
-        }
       }
     }
   }
