@@ -2187,7 +2187,8 @@
     "contract_buy_on_price_piece1":"在市价%{amount}张%{symbol}。",
     "invite_kyc_lv": "KYC认证",
     "otc_otutcol_20": "申诉成功，请等待客服处理", 
-    "link_name":"链名称"
+    "link_name":"链名称",
+
   }
 
 
