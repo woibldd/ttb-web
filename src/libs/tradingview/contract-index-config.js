@@ -1,7 +1,7 @@
 import utils from '@/modules/utils'
 import theme from '@/modules/dynamic-theme'
 
-export default function () {
+export default function() {
   const themeStyle = theme.getStyle()
   const upColor = themeStyle.up
   const downColor = themeStyle.down
@@ -15,7 +15,7 @@ export default function () {
     locale: 'en',
     drawings_access: {
       type: 'black',
-      tools: [ { name: 'Regression Trend' } ]
+      tools: [{ name: 'Regression Trend' }]
     },
     disabled_features: [
       'header_symbol_search',
@@ -36,7 +36,7 @@ export default function () {
     ],
     enabled_features: [
       'adaptive_logo',
-      'save_chart_properties_to_local_storage' 
+      'save_chart_properties_to_local_storage'
       // 'charting_library_debug_mode',
       // 'seconds_resolution'
     ],

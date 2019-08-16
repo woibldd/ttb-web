@@ -1,6 +1,6 @@
 <template>
   <section class="countdown-wrap">
-    <div class="countdown" :style="{'font-size': size}">
+    <div :style="{'font-size': size}" class="countdown">
       <!-- <span class="day">{{ day }}</span>
       <span class="split">:</span>-->
       <span v-if="hour!='00'" class="day">{{ hour }}</span>
@@ -14,18 +14,18 @@
 <script>
 export default {
   props: {
-    //结束时的时间戳
+    // 结束时的时间戳
     terminal: {
       type: Number
     },
     size: {
       type: Number,
-      default: function () {
+      default: function() {
         return 12
       }
     }
   },
-  data () {
+  data() {
     return {
       day: '00',
       hour: '00',
@@ -34,13 +34,21 @@ export default {
       timer: '00'
     }
   },
+  computed: {},
+  created() {
+    this.countdown()
+    this.timer = setInterval(this.countdown, 1000)
+  },
+  destroyed() {
+    clearInterval(this.timer)
+  },
   methods: {
-    countdown () {
-      let remain = this.getRemainSecond()
-      let seconds = remain % 60
-      let day = Math.floor(remain / (60 * 60 * 24))
-      let hour = Math.floor((remain - day * 60 * 60 * 24) / (60 * 60))
-      let minutes = Math.floor(
+    countdown() {
+      const remain = this.getRemainSecond()
+      const seconds = remain % 60
+      const day = Math.floor(remain / (60 * 60 * 24))
+      const hour = Math.floor((remain - day * 60 * 60 * 24) / (60 * 60))
+      const minutes = Math.floor(
         (remain - day * 60 * 60 * 24 - hour * 60 * 60) / 60
       )
 
@@ -49,7 +57,7 @@ export default {
       this.hour = hour < 10 ? '0' + hour : hour
       this.day = day < 10 ? '0' + day : day
     },
-    getRemainSecond () {
+    getRemainSecond() {
       let remain = Math.floor(
         (this.terminal - new Date().getTime()) / 1000
       )
@@ -58,14 +66,6 @@ export default {
       }
       return remain
     }
-  },
-  computed: {},
-  created () {
-    this.countdown()
-    this.timer = setInterval(this.countdown, 1000)
-  },
-  destroyed () {
-    clearInterval(this.timer)
   }
 }
 </script>
