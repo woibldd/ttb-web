@@ -2020,5 +2020,10 @@
     "order_apply_message_c":"在%{price}价格%{side}%{amount}张%{currency}永续合约。",
     "contract_buy_on_price_piece1":"在市价%{amount}张%{symbol}。",
     "invite_kyc_lv": "KYC认证",
-    "fund_assets_subscribed": "已认购"
+    "fund_assets_subscribed": "已认购",
+    "fund_history_inviter_userid": "来源UID",
+    "fund_history_star_lv": "用户星级",
+    "fund_history_transaction_type": "交易类型", 
+    "fund_history_symbol":"交易产品", 
+    "fund_history_release_time":"发放时间"
 }

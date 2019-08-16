@@ -41,16 +41,16 @@
           </el-table-column>
           <el-table-column
           prop="inviter_user_id"
-            :label="this.$t('来源UID')"/>
+            :label="this.$t('fund_history_inviter_userid')"/>
           <el-table-column
           prop="star_lv"
-             :label="this.$t('用户星级')"/>
+             :label="this.$t('fund_history_star_lv')"/>
           <el-table-column
           prop="currency"
-            :label="this.$t('币种')"/>
+            :label="this.$t('currency')"/>
           <el-table-column
             prop="tran_type"
-            :label="this.$t('交易类型')">
+            :label="this.$t('fund_history_transaction_type')">
             <template slot-scope="scope">
               <div>
                 {{ returnTranType[scope.row.tran_type]}}
@@ -59,7 +59,7 @@
           </el-table-column>
           <el-table-column 
             prop="symbol"
-            :label="this.$t('交易产品')">
+            :label="this.$t('fund_history_symbol')">
             <template slot-scope="scope">
               <div>
                 {{ scope.row.tran_type === 1 ? $t("FUTURE_&USD", {currency: scope.row.symbol.replace('USD','')}) : scope.row.symbol}}
@@ -68,10 +68,10 @@
           </el-table-column>
           <el-table-column
             prop="amount"
-            :label="this.$t('返佣金额')"/>
+            :label="this.$t('commission_amount')"/>
           <el-table-column
             prop="create_time"
-            :label="this.$t('成交时间')">
+            :label="this.$t('contract_deal_time')">
             <template slot-scope="scope">
               <div>
                 {{ formatTime(scope.row.create_time)}}
@@ -80,7 +80,7 @@
           </el-table-column>
           <el-table-column
             prop="release_time"
-          :label="this.$t('发放时间')">
+          :label="this.$t('fund_history_release_time')">
             <template slot-scope="scope">
               <div>
                 {{ formatTime(scope.row.release_time)}}
@@ -89,7 +89,7 @@
           </el-table-column>
           <el-table-column
             prop="state"
-            :label="this.$t('状态')">
+            :label="this.$t('status')">
             <template slot-scope="scope">
               <div>
                 {{ returnState[scope.row.state]}}
