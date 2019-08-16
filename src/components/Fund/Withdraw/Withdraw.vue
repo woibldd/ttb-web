@@ -11,13 +11,13 @@
         <div class="row__label">{{ $t('currency') }}</div>
         <div class="row__value">
           <el-select
-            v-model="selectCoin"
-            :placeholder="$t('please_choose')"
-            :no-data-text="$t('no_data')"
             style="width: 440px;"
             filterable
-            value-key="currency"
-            @change="changeCoinType">
+            v-model="selectCoin"
+            @change="changeCoinType"
+            :placeholder="$t('please_choose')"
+            :no-data-text="$t('no_data')"
+            value-key="currency">
             <el-option
               v-for="item in allCoins"
               :key="item.id"
@@ -25,7 +25,7 @@
               :value="item">
               <b style="display: inline-block;width: 40px">{{ item.currency }}</b>
               <span style="color: #CCC;font-size: 12px;padding-left: 20px;">
-                {{ item.full_name }}
+                {{item.full_name}}
               </span>
             </el-option>
           </el-select>
@@ -40,31 +40,30 @@
       </div>
       <div class="fund-item-other mb-14 withdraw-list">
         <span
-          v-for="(c, idx) in allCoins"
           :class="['quick-btn mb-10 mr-10', selectCoin.currency === c.currency && 'selected']"
-          :key="idx"
-          @click.prevent="quickSelectCoin(c)">
+          @click.prevent="quickSelectCoin(c)"
+          v-for="(c, idx) in allCoins"
+          :key="idx">
           {{ c.currency }}
         </span>
       </div>
-      <div v-if="selectCoin.currency === 'USDT'" class="fund-item-row mb-24">
+      <div class="fund-item-row mb-24" v-if="selectCoin.currency === 'USDT'">
         <div class="row__label">
           <el-popover
-            :content="depTip"
             placement="bottom-start"
             title=""
             width="240"
             trigger="hover"
-            effect="dark">
-            <el-button slot="reference" type="text" class="lian">链名称</el-button>
+            effect="dark" :content="depTip">
+            <el-button type="text" slot="reference" class="lian">链名称</el-button>
           </el-popover>
         </div>
         <div class="row__value">
           <el-select
-            v-model="selectLian"
+            @change="lianSelect"
             style="width: 440px;"
-            value-key="chain"
-            @change="lianSelect">
+            v-model="selectLian"
+            value-key="chain">
             <el-option
               v-for="(item, idx) in lianData"
               :key="idx"
@@ -96,15 +95,14 @@
           </div> -->
           <div class="withdraw-address">
             <el-autocomplete
+              class="select-address"
               v-model="selectItem"
               :fetch-suggestions="querySearch"
-              :highlight-first-item="highlight"
-              class="select-address"
-              cols="1"
-              rows="1"
-              style="vertical-align:top;outline:none;"
               @select="handleSelect"
               @blur="onBlur"
+              :highlight-first-item="highlight"
+              cols="1"
+              rows="1" style="vertical-align:top;outline:none;"
             />
           </div>
         </div>
@@ -117,28 +115,28 @@
       </div>
       <!-- address_tag -->
       <div
-        v-if="selectCoin.memo_support"
-        class="fund-item-row">
+        class="fund-item-row"
+        v-if="selectCoin.memo_support">
         <div class="row__label">{{ $t('address_tag') }}</div>
         <div class="row__value">
           <div class="withdraw-address border-1 pl-10">
             <input
-              v-model="memo"
-              class="coin-count">
+              class="coin-count"
+              v-model="memo">
           </div>
         </div>
         <div class="attention">
           <icon
-            v-tooltip.top-center="{html: true,content: robotAttention, classes: 'myfund'} "
             name="robot-info"
             class="icon-eos ml-5 pointer"
+            v-tooltip.top-center="{html: true,content: robotAttention, classes: 'myfund'} "
           />
         </div>
       </div>
       <!-- address_tag_label -->
       <div
-        v-if="selectCoin.memo_support"
-        class="fund-item-other eos-deposit-tips">
+        class="fund-item-other eos-deposit-tips"
+        v-if="selectCoin.memo_support">
         {{ $t('eos_deposit_tip_label') }}
       </div>
       <div class="fund-item-row">
@@ -154,17 +152,16 @@
               @input='checkInput'
              >   -->
             <number-input
+              class="amount-input"
               :scale="myCoinInfo.withdraw_scales"
               :max="Number(myCoinInfo.available)"
               :min="Number(selectCoin.min_withdraw_amount)"
               v-model="withdrawCount"
-              class="amount-input"
             />
             <span class="coin-type">
               <i> {{ selectCoin.currency }}</i>
-              <a
-                class="up-limit pointer ml-5"
-                @click="input_all">{{ $t('transfer_all') }}</a>
+              <a @click="input_all"
+class="up-limit pointer ml-5">{{ $t('transfer_all') }}</a>
             </span>
           </div>
           <!-- @input='checkInput' -->
@@ -178,8 +175,8 @@
         <p> <span class="fee__label">{{ $t('withdraw_fee') }} </span> <span class="fee__coin">{{ selectCoin.withdraw_fee }}{{ selectCoin.currency }}</span> </p>
         <p><span class="fee__label">{{ $t('withdraw_arrival') }}</span>
           <span
-            v-if="coinArrival > 0"
-            class="fee__coin">{{ coinArrival }} {{ selectCoin.currency }}
+            class="fee__coin"
+            v-if="coinArrival > 0">{{ coinArrival }} {{ selectCoin.currency }}
           </span>
           <span v-else>
             --
@@ -188,10 +185,10 @@
       </div>
       <div class="fund-item-other">
         <v-btn
-          :disabled="disableBtn"
-          :label="$t('withdraw_confirm')"
           style="width: 200px"
-          @click="ensure"/>
+          @click="ensure"
+          :disabled="disableBtn"
+          :label="$t('withdraw_confirm')"/>
       </div>
       <ul
         class="fund-item-other mt-25 text-des"
@@ -213,8 +210,8 @@
             <div class="row__input" >{{ contact }} </div>
           </div>
           <div
-            v-if="verify_phone"
-            class="modal__row mt-12 mb-25">
+            class="modal__row mt-12 mb-25"
+            v-if="verify_phone">
             <div class="row__label mb-9">{{ $t('phone_verification_code') }}</div>
             <div class="row__input" >
               <input
@@ -227,8 +224,8 @@
             </div>
           </div>
           <div
-            v-if="verify_google"
-            class="modal__row mt-12 mb-25">
+            class="modal__row mt-12 mb-25"
+            v-if="verify_google">
             <div class="row__label mb-9">{{ $t('fa2_google_code_mobile') }}</div>
             <div class="row__input" >
               <input
@@ -237,9 +234,9 @@
             </div>
           </div>
           <v-btn
-            :label="$t('withdraw_confirm')"
             class="w-340"
-            @click="confirmWithdraw"/>
+            @click="confirmWithdraw"
+            :label="$t('withdraw_confirm')"/>
         </div>
       </div>
     </v-modal>
@@ -253,25 +250,25 @@
           <div class="layer__row mt-30">
             <span class="row__label">1. {{ $t('bind_email') }}</span>
             <span
-              :class="{'done': email_bound}"
               class="row__status"
-              @click="clickVerifyRow('EmailBind')">{{ email_bound ? $t('done') : $t('to_bind') }}</span>
+              @click="clickVerifyRow('EmailBind')"
+              :class="{'done': email_bound}">{{ email_bound ? $t('done') : $t('to_bind') }}</span>
           </div>
           <div class="layer__row mt-20">
             <span class="row__label">2. {{ $t('bind_phone') }}</span>
             <span
-              :class="{'done': phone_bound}"
               class="row__status"
-              @click="clickVerifyRow('PhoneBind')">{{ phone_bound ? $t('done') : $t('to_bind') }}</span>
+              @click="clickVerifyRow('PhoneBind')"
+              :class="{'done': phone_bound}">{{ phone_bound ? $t('done') : $t('to_bind') }}</span>
           </div>
           <div class="layer__row mt-20">
             <span class="row__label">3.
               <span v-html="$t('complete_verified')"/>
             </span>
             <span
-              :class="{'done': all_bound}"
               class="row__status"
-              @click="clickVerifyRow('Kyc')">{{ all_bound ? $t('done') : $t('to_bind') }}</span>
+              @click="clickVerifyRow('Kyc')"
+              :class="{'done': all_bound}">{{ all_bound ? $t('done') : $t('to_bind') }}</span>
           </div>
         </div>
       </div>
@@ -291,8 +288,7 @@ import { state, actions } from '@/modules/store'
 
 export default {
   name: 'Withdraw',
-  components: { vModal, countDown },
-  data() {
+  data () {
     return {
       showLayerModal: false,
       address: '',
@@ -317,10 +313,10 @@ export default {
     }
   },
   computed: {
-    depTip() {
+    depTip () {
       return state.locale && this.$t('dep_tip')
     },
-    robotAttention() {
+    robotAttention () {
       return ` <div
             class="attention__tips">
             <p class="title mb-8">${this.$t('about_eos_address_label')}</p>
@@ -328,43 +324,44 @@ export default {
             <p >${this.$t('about_eos_address_label_b')}</p>
           </div>`
     },
-    contact() {
+    contact () {
       if (this.state && this.state.userInfo) {
         return this.state.userInfo.phone || this.state.userInfo.email
       } else {
         return ''
       }
     },
-    coinArrival() {
+    coinArrival () {
       return this.$big(parseFloat(this.withdrawCount) || 0).minus(this.$big(this.selectCoin.withdraw_fee || 0)).toString()
     },
-    verify_google() {
+    verify_google () {
       if (this.state.userInfo && this.state.userInfo.verify_google) {
         return true
       }
       return false
     },
-    verify_phone() {
+    verify_phone () {
       if (this.state.userInfo && this.state.userInfo.verify_phone) {
         return true
       }
       return false
     },
-    email_bound() {
+    email_bound () {
       return this.state.userInfo && this.state.userInfo.email
     },
-    phone_bound() {
+    phone_bound () {
       return this.state.userInfo && this.state.userInfo.phone
     },
-    all_bound() {
+    all_bound () {
       // kyc > 0 就可以提币
       return this.state.userInfo && this.state.userInfo.lv > 0
     },
-    disableBtn() {
+    disableBtn () {
       return !this.email_bound || !this.phone_bound || !this.all_bound
     }
   },
-  async created() {
+  components: {vModal, countDown },
+  async created () {
     await actions.getKycLv()
     await actions.updateSession()
     this.showLayerModal = !this.email_bound || !this.phone_bound || !this.all_bound
@@ -373,15 +370,15 @@ export default {
     this.getCoinAddress()
   },
   methods: {
-    async lianSelect(coin) {
+    async lianSelect (coin) {
       this.selectCoin = coin
       await this.getCoinAddress()
       this.updadeMyCoinInfo()
     },
-    onBlur(e) {
-      const arr = this.restaurants.filter(item => item.value === this.selectItem)
+    onBlur (e) {
+      let arr = this.restaurants.filter(item => item.value === this.selectItem)
       if (arr.length === 0) {
-        const obj = {
+        let obj = {
           value: this.selectItem,
           address: this.selectItem,
           memo: ''
@@ -398,32 +395,32 @@ export default {
         this.memo = arr[0].memo
       }
     },
-    checkInput() {
+    checkInput () {
     },
-    input_all() {
+    input_all () {
       this.withdrawCount = this.myCoinInfo.available
     },
-    clickVerifyRow(v) {
+    clickVerifyRow (v) {
       this.$router.push({
         name: v
       })
     },
-    copy() {
+    copy () {
       copyToClipboard(this.address)
       utils.success(this.$i18n.t('copyed'))
     },
-    async getCoinAddress() {
+    async getCoinAddress () {
       const param = {
         currency: this.selectCoin.currency
       }
       return service.getMyAddressList(param).then((res) => {
-        if (res && res.data) {
+        if (res && res.data) { 
           this.restaurants = []
           this.allAddress = res.data
           if (this.selectCoin.currency === 'USDT') {
-            this.allAddress = this.allAddress.filter(item => item.chain === this.selectLian.chain || (!item.chain && this.selectLian.chain === 'OMNI'))
+            this.allAddress = this.allAddress.filter(item => item.chain === this.selectLian.chain || (!item.chain &&  this.selectLian.chain === 'OMNI' ))
           }
-
+           
           // console.log(this.allAddress)
           for (const item of this.allAddress) {
             this.restaurants.push({
@@ -452,7 +449,7 @@ export default {
         }
       })
     },
-    async changeCoinType(coin) {
+    async changeCoinType (coin) {
       this.selectCoin = coin
       this.selectItem = ''
       this.selectAddress = {
@@ -462,7 +459,7 @@ export default {
       this.getCoinAddress()
       this.updadeMyCoinInfo() // 更改币种后，重新获取一次自己的钱包状态
     },
-    async updadeMyCoinInfo() {
+    async updadeMyCoinInfo () {
       await this.getAccountWalletList()
       this.myCoinInfoList.forEach(mc => {
         if (mc.currency === this.selectCoin.currency) {
@@ -470,17 +467,15 @@ export default {
         }
       })
     },
-    async getAllCoinTypes() {
+    async getAllCoinTypes () {
       await service.getAllCoinTypes().then(res => {
         if (res && res.data) {
           this.lianData = []
           res.data.forEach((item) => {
-            if (item.currency === 'USDT') {
-              item.chain === 'OMNI' && this.lianData.unshift(item) || this.lianData.push(item)
+            if(item.currency === 'USDT') {
+              this.lianData.push(item)
             }
           })
-          console.log(this.lianData, 22)
-
           this.lianData.forEach((item) => {
             if (item.chain === 'OMNI') {
               Vue.set(item, 'currencyName', item.currency + '-' + 'Omni')
@@ -488,10 +483,10 @@ export default {
               Vue.set(item, 'currencyName', item.currency + '-' + 'ERC20')
             }
           })
-          this.selectLian = this.lianData[0]
+          this.selectLian = this.lianData[1]
           this.allCoins = this.removalData(res.data.filter(c => c.withdrawable))
           this.allCoins.forEach((item) => {
-            if (state.locale === 'zh-CN') {
+            if(state.locale === 'zh-CN') {
               Vue.set(item, 'full_name', item.zh_name)
             } else {
               Vue.set(item, 'full_name', item.full_name)
@@ -509,34 +504,34 @@ export default {
         }
       })
     },
-    quickSelectCoin(coin) {
+    quickSelectCoin (coin) {
       this.changeCoinType(coin)
       this.selectLian = this.lianData[1]
     },
-    removalData(arrData) {
+    removalData (arrData) {
       var hash = {}
-      arrData = arrData.reduce(function(item, next) {
-        // num_iid是你要以什么属性去重
+      arrData = arrData.reduce(function (item, next) {
+        //num_iid是你要以什么属性去重
         hash[next.currency] ? '' : hash[next.currency] = true && item.push(next)
         return item
       }, [])
       return arrData
     },
-    getAccountWalletList() {
+    getAccountWalletList () {
       return service.getAccountWalletList().then(res => {
         this.myCoinInfoList = res.data
       })
     },
-    getVerifyCode() {
+    getVerifyCode () {
       const param = {
         region: this.state.userInfo.region,
         phone: this.contact
       }
-      const res = service.getVerifyCode(param, 'phone')
+      let res = service.getVerifyCode(param, 'phone')
       // .then(res => {console.log(res)})
       return res
     },
-    changeAddress(item) {
+    changeAddress (item) {
       if (typeof item === 'string') {
         this.allAddress.splice(0, 0, {
           address: item,
@@ -548,7 +543,7 @@ export default {
         this.memo = item.memo
       }
     },
-    async confirmWithdraw() {
+    async confirmWithdraw () {
       const param = {
         currency: this.selectCoin.currency,
         to_address: this.selectAddress.address,
@@ -560,7 +555,7 @@ export default {
       if (this.selectCoin.currency === 'USDT') {
         param.chain = this.selectLian.chain
       }
-
+ 
       // eos 需要填memo
       if (this.selectCoin.memo_support) {
         if (this.memo) {
@@ -586,7 +581,7 @@ export default {
         }
       })
     },
-    ensure() {
+    ensure () {
       if (this.disableBtn) {
         utils.alert(this.$t('withdraw_tips1')) // 请完善你的资料
         return
@@ -607,7 +602,7 @@ export default {
         return
       }
       if (this.selectCoin.memo_support) {
-        if (this.memo.trim() === '') {
+        if (this.memo.trim() == '') {  
           utils.alert(this.$t('eos_deposit_tip_label'))
           return
         }
@@ -615,25 +610,25 @@ export default {
 
       this.showModal = true
     },
-    hideModal() {
+    hideModal () {
       this.showModal = false
     },
-    addNewAddr() {
+    addNewAddr () {
       const url = '/fund/address/' + this.selectCoin.currency
       this.$router.push(url)
     },
-    querySearch(queryString, cb) {
+    querySearch (queryString, cb) {
       var restaurants = this.restaurants
       var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants
       // 调用 callback 返回建议列表的数据
       cb(results)
     },
-    createFilter(queryString) {
+    createFilter (queryString) {
       return (restaurant) => {
         return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
-      }
+      };
     },
-    handleSelect(item) {
+    handleSelect (item) {
       // console.log(item);
       this.selectAddress = item
       this.memo = item.memo
