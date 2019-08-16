@@ -137,10 +137,9 @@
             </template>
             <template v-else>
                 <label class="my-fund-label dis-my-fund-label"
-                v-if="scope.row.currency==='USDT'"
-                v-tooltip.top="{html: true, content: $t('fund_assets_node_buy_tip'), classes: 'assets'}" 
+                v-if="scope.row.currency==='USDT'" 
                 >
-                {{$t('fund_assets_node_buy')}}
+                {{$t('fund_assets_subscribed')}}
                 </label>
             </template>
             <span 

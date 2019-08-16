@@ -3,11 +3,11 @@
  * Date: 2019-06-03 20:48
  */
 import StepTable from '../components/table'
-// import * as mock from '../mock/mock'
+import * as mock from '../mock/mock'
 import SlideModel from '../components/StepModel'
 import utils from '../../../modules/utils'
 import service from '@/modules/service'
-import { state } from '@/modules/store'
+import {state} from '@/modules/store'
 import STepSelect from '../components/StepSelect'
 export const tradeMixins = {
   components: {
@@ -15,7 +15,7 @@ export const tradeMixins = {
     SlideModel,
     STepSelect
   },
-  data() {
+  data () {
     return {
       active: 0,
       side: 0,
@@ -40,13 +40,13 @@ export const tradeMixins = {
     }
   },
   computed: {
-    userInfo() {
+    userInfo () {
       return state.userInfo || {}
     },
-    id() {
+    id () {
       return this.userInfo.id
     },
-    orderHeader() {
+    orderHeader () {
       return [
         {
           label: this.$t('otc_trans_id'),
@@ -108,8 +108,8 @@ export const tradeMixins = {
           label: this.$t('price'),
           prop: 'price',
           render: (h, params) => {
-            const spiltName = params.row.symbol.split('/')
-            const name = params.row.price + '   ' + spiltName[1]
+            let spiltName = params.row.symbol.split('/')
+            let name = params.row.price + '   ' + spiltName[1]
             return h('div', name)
           }
         },
@@ -117,7 +117,7 @@ export const tradeMixins = {
           label: this.$t('amount'),
           prop: 'amount',
           render: (h, params) => {
-            const name = params.row.amount + '   ' + params.row.currency
+            let name = params.row.amount + '   ' + params.row.currency
             return h('div', name)
           }
         },
@@ -125,10 +125,8 @@ export const tradeMixins = {
           label: this.$t('order_value'),
           prop: 'total',
           render: (h, params) => {
-            const spiltName = params.row.symbol.split('/')
-            const retainTwo = str => this.$big(str).round(2, 0)
-            const name = `${retainTwo(params.row.total)}/${retainTwo(params.row.executed * params.row.price)}   ${spiltName[1]}`
-            // params.row.total + '/' + params.row.executed * params.row.price + '   ' + spiltName[1]
+            let spiltName = params.row.symbol.split('/')
+            let name = params.row.total + '   ' + spiltName[1]
             return h('div', name)
           }
         },
@@ -147,7 +145,7 @@ export const tradeMixins = {
         }
       ]
     },
-    tradeHeader() {
+    tradeHeader () {
       return [
         {
           label: this.$t('otc_active_id'),
@@ -171,8 +169,8 @@ export const tradeMixins = {
           label: this.$t('order_th_capedasda'),
           prop: 'price',
           render: (h, params) => {
-            const spiltName = params.row.symbol.split('/')
-            const name = params.row.price + '   ' + spiltName[1]
+            let spiltName = params.row.symbol.split('/')
+            let name = params.row.price + '   ' + spiltName[1]
             return h('div', name)
           }
         },
@@ -181,7 +179,7 @@ export const tradeMixins = {
           prop: 'side',
           width: 160,
           render: (h, params) => {
-            const name = params.row.amount + '/' + params.row.executed + '  ' + params.row.currency
+            let name = params.row.amount + '/' + params.row.executed + '  ' + params.row.currency
             return h('div', name)
           }
         },
@@ -190,8 +188,8 @@ export const tradeMixins = {
           width: 160,
           prop: 'side',
           render: (h, params) => {
-            const spiltName = params.row.symbol.split('/')
-            const name = params.row.total + '/' + params.row.executed * params.row.price + '   ' + spiltName[1]
+            let spiltName = params.row.symbol.split('/')
+            let name = params.row.total + '/' + params.row.executed * params.row.price + '   ' + spiltName[1]
             return h('div', name)
           }
         },
@@ -246,7 +244,7 @@ export const tradeMixins = {
   //   }
   // },
   methods: {
-    state(code) {
+    state (code) { 
       switch (code) {
         case 1:
           return this.$t('otc_sideoc_6')
@@ -266,7 +264,7 @@ export const tradeMixins = {
           return ''
       }
     },
-    orderState(code) {
+    orderState (code) {
       switch (code) {
         case 1:
           return this.$t('contract_assigning_undeal')
@@ -284,10 +282,10 @@ export const tradeMixins = {
           return ''
       }
     },
-    tradeActions(h, params) {
+    tradeActions (h, params) {
       const state = params.row.side
       const color = state === 1 ? '#09C989' : '#F45151'
-      const btns = []
+      let btns = []
       btns.push(
         h('span', {
           style: {
@@ -305,7 +303,7 @@ export const tradeMixins = {
                 this.side = 0
                 this.bankData = []
               } else {
-                const p = {
+                let p = {
                   trans_id: params.row.trans_id,
                   user_id: this.id
                 }
@@ -378,11 +376,13 @@ export const tradeMixins = {
       }
       return h('div', btns)
     },
-    Order(state) {
-      return state === 1 ? this.$t('otc_side_1') : this.$t('otc_side_2')
-    }
+    Order (state) {
+        return state === 1 ? this.$t('otc_side_1') : this.$t('otc_side_2')
+
+        
+      }
   },
-  created() {
+  created () {
     // 初始化第一条数据
     // this.data = mock.unDonefillsData.data.data
   }
