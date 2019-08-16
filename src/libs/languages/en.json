@@ -2251,9 +2251,9 @@
 "gm_sl": "Purchase amount excess maximum 50,000 limit",
 "otc_account": "Fiat account ",
 "download_dl_app": "APP Download",
+"contract_buy_on_price_piece": "%{symbol} contract on (%{price}) price (%{amount}) piece。",
 
 "deposit_state_error": "错误",
-"contract_buy_on_price_piece": "%{symbol} contract on (%{price}) price (%{amount}) piece。",
 "order_apply_failed": "委托提交失败",
 "order_apply_message_a": "可用余额不足，无法提交委托。",
 "order_apply_message_b": "当前下单价格与盘口价格差异过大，无法提交委托。",
