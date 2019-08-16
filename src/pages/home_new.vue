@@ -1,28 +1,28 @@
 <template>
   <div class="page-home">
     <!--<div class="home2">-->
-      <!--<k-slider-->
-        <!--:banners="banners"-->
-        <!--:swiper-option="swiperOption"/>-->
+    <!--<k-slider-->
+    <!--:banners="banners"-->
+    <!--:swiper-option="swiperOption"/>-->
 
     <!--</div>-->
-    <home-banner :banner="banner1" :swipe-banner="notices1" v-on:buy-handle="buySubmit"/>
+    <home-banner :banner="banner1" :swipe-banner="notices1" @buy-handle="buySubmit"/>
     <div class="ind_txt">
       <div class="ind_cen">
         <div
-          class="ind_c"
           v-for="(item) in notices"
-          :key="item.id">
+          :key="item.id"
+          class="ind_c">
           <a
-            class="text_link"
             :href="item.url || 'javascript:;'"
+            class="text_link"
             target="_blank">
             {{ item.title }}
           </a>
         </div>
         <a
-          class="more"
           :href="announcementLink"
+          class="more"
           target="_blank">
           <icon :name="hasNewNotice ? 'notice-new' :'notice'"/>
         </a>
@@ -37,12 +37,12 @@
       <!-- 最新上线 -->
       <pair-table
         :sorted-list="sortedList"
+        :get-delta="getDelta"
         @searching="onSearching"
-        @switchTab="onSwitchTab"
-        :get-delta="getDelta"/>
+        @switchTab="onSwitchTab"/>
       <div
-        class="mask"
-        :class="{show: loading}">
+        :class="{show: loading}"
+        class="mask">
         <v-loading/>
       </div>
       <!-- 倒数第二层的图标 -->
@@ -85,32 +85,32 @@
     <div class="corperator">
       <div class="corperator-container">
         <div class="corp-row row-60 mb-60">
-          <div class="corp-title" v-t="'footer_investors'"/> 
-            <div class="corp-logo">
-              <a class="link" href="javascript:;" @click.prevent>
-                <img class="logo may" src="~@/assets/copr-logo-may.png">
-              </a>
-            </div>
-            <div class="corp-logo">
-              <a class="link" href="javascript:;" @click.prevent>
-                <img class="logo may" src="~@/assets/copr-logo-bah.png">
-              </a>
-            </div>
-            <div class="corp-logo">
-              <a class="link" href="javascript:;" @click.prevent>
-                <img class="logo may" src="~@/assets/copr-logo-jlzb.png">
-              </a>
-            </div>
-            <div class="corp-logo">
-              <a class="link" href="javascript:;" @click.prevent>
-                <img class="logo may" src="~@/assets/copr-logo-yxzb.png">
-              </a>
-            </div>
+          <div v-t="'footer_investors'" class="corp-title"/>
+          <div class="corp-logo">
+            <a class="link" href="javascript:;" @click.prevent>
+              <img class="logo may" src="~@/assets/copr-logo-may.png">
+            </a>
           </div>
+          <div class="corp-logo">
+            <a class="link" href="javascript:;" @click.prevent>
+              <img class="logo may" src="~@/assets/copr-logo-bah.png">
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a class="link" href="javascript:;" @click.prevent>
+              <img class="logo may" src="~@/assets/copr-logo-jlzb.png">
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a class="link" href="javascript:;" @click.prevent>
+              <img class="logo may" src="~@/assets/copr-logo-yxzb.png">
+            </a>
+          </div>
+        </div>
         <div class="corp-row row-60 mb-60">
           <div
-            class="corp-title"
-            v-t="'footer_partners'"/>
+            v-t="'footer_partners'"
+            class="corp-title"/>
           <div class="corp-logo">
             <span
               class="link"
@@ -213,8 +213,16 @@ import MineSummary from '@/components/Mine/MineSummary'
 import tickTableMixin from '@/mixins/tick-table'
 import HomeBanner from './banner/index'
 export default {
+  components: {
+    kSlider: Slider,
+    PairTable,
+    PairRankTable,
+    MineSummary,
+    HomeBanner
+    // Kyc
+  },
   mixins: [tickTableMixin],
-  data: function () {
+  data: function() {
     return {
       banners: [],
       notices: [],
@@ -229,39 +237,34 @@ export default {
       },
       hasNewNotice: false,
       pairsHead: [
-        {key: 'currency', name: this.$t('currency')},
-        {key: 'homechart_price', name: this.$t('homechart_price')},
-        {key: 'homechart_24h_chg', name: this.$t('homechart_24h_chg')},
-        {key: 'homechart_24h_l', name: this.$t('homechart_24h_l')},
-        {key: 'homechart_24h_h', name: this.$t('homechart_24h_h')},
-        {key: 'homechart_24h_v', name: this.$t('homechart_24h_v')},
-        {key: 'actions', name: this.$t('actions')}
+        { key: 'currency', name: this.$t('currency') },
+        { key: 'homechart_price', name: this.$t('homechart_price') },
+        { key: 'homechart_24h_chg', name: this.$t('homechart_24h_chg') },
+        { key: 'homechart_24h_l', name: this.$t('homechart_24h_l') },
+        { key: 'homechart_24h_h', name: this.$t('homechart_24h_h') },
+        { key: 'homechart_24h_v', name: this.$t('homechart_24h_v') },
+        { key: 'actions', name: this.$t('actions') }
       ]
     }
   },
-  components: {
-    kSlider: Slider,
-    PairTable,
-    PairRankTable,
-    MineSummary,
-    HomeBanner
-    // Kyc
-  },
   computed: {
-    announcementLink () {
+    announcementLink() {
       return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
     },
-    isKorean () {
+    isKorean() {
       return state.locale === 'ko'
-    },
+    }
     // tabSelected () {
     //   return state.tabSelected
     // },
   },
   watch: {
-    'state.locale' (locale) {
+    'state.locale'(locale) {
       this.getBanners()
     }
+  },
+  created() {
+    this.getBanners()
   },
   methods: {
     buySubmit(item) {
@@ -270,11 +273,11 @@ export default {
         query: item
       })
     },
-    async getBanners () {
+    async getBanners() {
       const res = await service.getBanners()
       console.log(res)
       if (!res.code) {
-        let list = res.data
+        const list = res.data
         if (list.length > 0) {
           this.banners = list.filter(b => b.slot === 1)
           this.notices = list.filter(b => b.slot === 2)
@@ -284,23 +287,20 @@ export default {
             this.notices.splice(3)
           }
           // 判断最新公告是否小于4小时
-          let resp = await service.hasNewBanner()
+          const resp = await service.hasNewBanner()
           if (!resp.code && resp.data) {
             this.hasNewNotice = resp.data['new']
           }
         }
       }
     },
-    onSearching (kw) {
+    onSearching(kw) {
       this.search = kw
     },
-    onSwitchTab (val) {
+    onSwitchTab(val) {
       // console.log('switchTab')
       // this.state.tabSelected = val
     }
-  },
-  created () {
-    this.getBanners()
   }
 }
 </script>

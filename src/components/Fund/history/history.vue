@@ -15,6 +15,7 @@
           <el-radio-button label="deposit">{{ $t('deposit_record') }}</el-radio-button>
           <el-radio-button label="withdraw">{{ $t('withdraw_record') }}</el-radio-button>
           <el-radio-button label="reward"> {{ $t('fund_reward') }} </el-radio-button>
+          <el-radio-button label="return"> {{ $t('commission_history_text') }} </el-radio-button>
           <el-radio-button
             v-if="isPromoter"
             label="promoter"> {{ $t('promote_brokerage') }} </el-radio-button>
@@ -24,10 +25,82 @@
         </el-radio-group>
         
       </div>
+      <el-table :empty-text="$t('no_data')"
+        :data="tableData"
+        v-if="type === 'return'" 
+        v-loading="loading"
+        class="fund-coin-pool">
+         <el-table-column
+            prop="user_id"
+            :label="this.$t('UID')">
+            <template slot-scope="scope">
+              <div>
+                {{scope.row.user_id}}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column
+          prop="inviter_user_id"
+            :label="this.$t('fund_history_inviter_userid')"/>
+          <el-table-column
+          prop="star_lv"
+             :label="this.$t('fund_history_star_lv')"/>
+          <el-table-column
+          prop="currency"
+            :label="this.$t('currency')"/>
+          <el-table-column
+            prop="tran_type"
+            :label="this.$t('fund_history_transaction_type')">
+            <template slot-scope="scope">
+              <div>
+                {{ returnTranType[scope.row.tran_type]}}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column 
+            prop="symbol"
+            :label="this.$t('fund_history_symbol')">
+            <template slot-scope="scope">
+              <div>
+                {{ scope.row.tran_type === 1 ? $t("FUTURE_&USD", {currency: scope.row.symbol.replace('USD','')}) : scope.row.symbol}}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="amount"
+            :label="this.$t('commission_amount')"/>
+          <el-table-column
+            prop="create_time"
+            :label="this.$t('contract_deal_time')">
+            <template slot-scope="scope">
+              <div>
+                {{ formatTime(scope.row.create_time)}}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="release_time"
+          :label="this.$t('fund_history_release_time')">
+            <template slot-scope="scope">
+              <div>
+                {{ formatTime(scope.row.release_time)}}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="state"
+            :label="this.$t('status')">
+            <template slot-scope="scope">
+              <div>
+                {{ returnState[scope.row.state]}}
+              </div>
+            </template>
+          </el-table-column>
+      </el-table>
       <el-table       :empty-text="$t('no_data')"
         :data="tableData"
         height="550"
-        v-show="type === 'all'"
+        v-else-if="type === 'all'"
         v-loading="loading"
         cell-class-name="unrelease-cell"
         class="fund-coin-pool">
@@ -60,7 +133,7 @@
       <el-table   :empty-text="$t('no_data')"
         :data="tableData"
         height="550"
-        v-show="type !== 'all'"
+        v-else
         v-loading="loading"
         cell-class-name="unrelease-cell"
         class="fund-coin-pool">
@@ -184,6 +257,20 @@ export default {
       hasInternal: false,
       state,
       coinList: {},
+      returnState:{
+        0:"未发放",
+        1:"已发放"
+      },
+      returnType:{
+        1:"交易返佣",
+        2:"上币返佣",
+        3:"节点开通返佣"
+      },
+      returnTranType:{
+        1:"合约交易",
+        2:"币币交易"
+      },
+
     }
   },
   computed: {
@@ -251,7 +338,7 @@ export default {
       //   })
       // },
     formatter (row, column) {
-      if (column.property === 'create_time') {
+      if (column.property === 'create_time' ) {
         return utils.dateFormatter(row.create_time)
       } else {
         return row[column.property]
@@ -275,7 +362,7 @@ export default {
       if (!time) {
         return '--'
       }
-      return utils.dateFormatter(time, 'Y-M-D')
+      return utils.dateFormatter(time, 'Y-M-D H:m')
     },
     hasComplated (row) {  
       if (this.type === 'deposit' && row.state === 1) {
@@ -330,6 +417,10 @@ export default {
         case 'promoter':
           request = service.getPromoteList
           break
+        //节点返佣记录
+        case 'return':
+          request = service.nodeReturn
+          break
         default:
           break
       } 
@@ -350,9 +441,9 @@ export default {
           //     r.state = 0
           //   }
           //   return r
-          // })
+          // }) 
           this.tableData = res.data
-          if(this.type === 'all' || from === 'reward') { 
+          if(this.type === 'all' || from === 'reward' || this.type === 'return') { 
             this.tableData = res.data.data
           }
           this.loading = false

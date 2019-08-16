@@ -618,6 +618,7 @@ export default {
     }
   },
   created() {
+    console.log(this.view)
   },
   methods: {
     openSideBar() {
@@ -649,7 +650,8 @@ export default {
         active_id: this.active_id,
         side: 1,
         amount: this.amount * 1,
-        total: this.total
+        total: this.total,
+        price: this.view.price
       }
       const $this = this
       service.createOtcTransaction(params).then(res => {

@@ -195,7 +195,7 @@ class="up-limit pointer ml-5">{{ $t('transfer_all') }}</a>
         style="padding-left: 102px">
         <li>  {{ $t('withdraw_hint_delay') }}</li>
         <li>  {{ $t('withdraw_hint_check',{num: selectCoin.min_review_amount ,coin: selectCoin.currency}) }}</li>
-        <li v-if="selectCoin.currency === 'EOS'">  {{ $t('watch_tips') }}</li>
+        <li>  {{ $t('watch_tips') }}</li>
       </ul>
 
     </div>

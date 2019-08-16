@@ -2,18 +2,19 @@
 <template>
   <div class="otcaction">
     <!-- 吃单 -->
-    <div v-if="operation===1" class="action-box"
-         :class="{'status_0': status === 0, 'status_1': status > 0}"
+    <div 
+v-if="operation===1" :class="{'status_0': status === 0, 'status_1': status > 0}"
+         class="action-box"
     >
       <!-- 标题 -->
-      <div class="action-title title sell">{{$t(sideTitle, {currency})}}</div>
+      <div class="action-title title sell">{{ $t(sideTitle, {currency}) }}</div>
       <!-- 步骤图 -->
       <div class="action-steps">
         <div v-if="operSide===2" class="sell-step">
           <el-steps :space="200" :active="step" finish-status="success" align-center>
-            <el-step :title="$t('otc_sell_step_1')"></el-step>
-            <el-step :title="$t('otc_sell_step_2')"></el-step>
-            <el-step :title="$t('otc_sell_step_3')"></el-step>
+            <el-step :title="$t('otc_sell_step_1')"/>
+            <el-step :title="$t('otc_sell_step_2')"/>
+            <el-step :title="$t('otc_sell_step_3')"/>
           </el-steps>
         </div>
       </div>
@@ -23,9 +24,9 @@
         <!-- <span class="iconfont">&#xe72c;</span> -->
         <!-- 倒计时 -->
         <icon name="timer" />
-        {{$t('otc_overtime_tips_a1')}}
+        {{ $t('otc_overtime_tips_a1') }}
         <count-down :terminal="interval" />，
-        {{$t('otc_overtime_tips_a2')}}取消订单
+        {{ $t('otc_overtime_tips_a2') }}取消订单
       </div>
       <!-- 订单信息 -->
       <div v-if="step===0" class="action-order-info wrap">
@@ -36,52 +37,53 @@
       </div>
       <!-- 对手信息 -->
       <div v-if="step<=2" class="action-seller-info wrap">
-        <v-list :header="userInfoHeader" :table="view"  viewtype=""/>
+        <v-list :header="userInfoHeader" :table="view" viewtype=""/>
       </div>
     </div>
     <!-- 操作部分 -->
-    <div  v-if="step<1" class="action-order footer">
+    <div v-if="step<1" class="action-order footer">
       <!-- 输入框 -->
       <div class="action-input-group">
         <ul>
           <li>
             <div class="label">
-              {{$t('amount')}}
+              {{ $t('amount') }}
               <span class="red">*</span>
             </div>
             <div class="content">
               <number-input
-                class="number-input"
                 v-model="amount"
+                class="number-input"
                 @input="amountInput"
                 @blur="changeTarget('')"
-                @focus="changeTarget('amount')"
                 :scale="amount_scale || 6"
+                @focus="changeTarget('amount')"
                 :placeholder="$t('amount')"
               />
               <span
                 class="btn-all"
-                @click="inputAll('amount')">{{$t('input_all')}}</span>
+                @click="inputAll('amount')">{{ $t('input_all') }}</span>
             </div>
           </li>
           <li>
             <div class="label">
-              {{$t('otc_amount_money')}}
+              {{ $t('otc_amount_money') }}
               <span class="red">*</span>
             </div>
             <div class="content">
               <number-input
-                class="number-input"
                 v-model="total"
+                class="number-input"
                 @input="totalInput"
                 @blur="changeTarget('')"
-                @focus="changeTarget('total')"
                 :scale="price_scale || 2"
+                @focus="changeTarget('total')"
                 :placeholder="$t('otc_amount_sale')"
               />
-              <span class="btn-all"
+              <span 
+class="btn-all"
                     @click="inputAll('total')"
-              >{{$t('input_all')}}</span>
+              >{{ $t('input_all') }}</span>
             </div>
           </li>
         </ul>
@@ -95,8 +97,8 @@
               class="w-110 cancel"
               radius="3"
               height="30"
-              @click="closeSideBar"
               :label="$t('cancel')"
+              @click="closeSideBar"
             />
           </div>
           <div class="btn-left">
@@ -104,8 +106,8 @@
               class="w-208 sell"
               radius="3"
               height="30"
-              @click="createTransaction"
               :label="$t('otc_confirm_sell')"
+              @click="createTransaction"
             />
           </div>
         </div>
@@ -115,15 +117,19 @@
 </template>
 
 <script>
-import vList from "@/components/OTC/vlist/vertical-table"
-import service from "@/modules/service.js"
-import countDown from "@/components/CountDown"
+import vList from '@/components/OTC/vlist/vertical-table'
+import service from '@/modules/service.js'
+import countDown from '@/components/CountDown'
 import processValue from '@/mixins/process-otc-value'
-import { state } from "@/modules/store"
-import utils from "@/modules/utils.js"
+import { state } from '@/modules/store'
+import utils from '@/modules/utils.js'
 import otcComputed from '@/components/OTC/mixins/index.js'
 
 export default {
+  components: {
+    vList,
+    countDown
+  },
   data() {
     return {
       price: "",
@@ -266,19 +272,16 @@ export default {
       inputTarget: "",
     };
   },
-  components: {
-    vList,
-    countDown
-  },
-  computed: { 
+  computed: {
     sideTitle() {
-      let title = "otc_sell_currency"
+      let title = 'otc_sell_currency'
       if (this.option === 1) {
-        title =  `otc_confirm_issued`
+        title = `otc_confirm_issued`
       }
       return title
-    }, 
+    }
   },
+  mixins: [ processValue,otcComputed ],
   props: {
     view: {
       type: Object,
@@ -311,6 +314,7 @@ export default {
         side: 2,
         amount: this.amount * 1,
         total: this.total * 1,
+        price: this.view.price
       };
 
       service.createOtcTransaction(params).then(res => {
@@ -412,8 +416,7 @@ export default {
       }
     }
   },
-  mixins: [ processValue,otcComputed ]
-};
+}
 </script>
 
 <style lang='scss'>
@@ -452,6 +455,6 @@ export default {
     color: #09C989;
     border-color: #09C989;
   }
-   
+
 </style>
 
