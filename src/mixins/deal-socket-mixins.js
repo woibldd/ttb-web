@@ -44,7 +44,7 @@ export default {
           return 0
         }
       })
-      // 先不做重连判断
+      // 先不做重连判断，因为socket返回的数据有时候时间顺序不对导致这里的判断出错
       // if (
       //   dealList.length &&
       //   this.dealList.length &&
