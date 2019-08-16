@@ -1,3 +1,9 @@
+<!--
+ * @Author: zlccy
+ * @Date: 2019-08-15 14:15:44
+ * @LastEditTime: 2019-08-15 14:17:32
+ * @Description: file content
+ -->
 <template>
   <div class="trade-container">
     <div class="trade-message-box">
@@ -11,9 +17,8 @@
               <!---->
               <!--</div>-->
               <!--sdsd-->
-              <icon
-                class="avt"
-                name="rentou"/>
+              <icon class="avt" name="rentou" />
+
               <div class="avt-text">
                 <div class="top">
                   {{ tableDataUname.name }}
@@ -65,10 +70,8 @@
           style="padding-bottom: 20px;">
           <div class="time">
             {{ $t('otc_register_time') }}
-            <span
-              v-if="tableDataUname.register_time"
-            >{{ tableDataUname.register_time | date }}</span>
-            <span v-else/>
+            <span v-if="tableDataUname.register_time">{{ tableDataUname.register_time | date }}</span>
+            <span v-else />
           </div>
           <!--<div class="text">{{ $t('otc_assets_tips_m') }}</div>-->
         </div>
@@ -81,21 +84,19 @@
           :key="index"
           :class="{active: active === index}"
           class="nav-list"
-          @click="switchTab(index)"
-        >{{ item.name }}
+          @click="switchTab(index)">{{ item.name }}
           <span v-if="item.count > 0 && token">{{ item.count }}</span>
         </div>
         <div
           v-if="active === 0"
-          class="slot-down"
-        >
+          class="slot-down">
           <i
             v-for="(item, index) in icons"
             :key="index"
             :class="{iconActive: iconActive === index}"
             class="iconfont"
             @click="iconTab(index)"
-            v-html="item"/>
+            v-html="item" />
         </div>
         <div
           v-if="active === 3"
@@ -104,8 +105,7 @@
             v-for="(item, index) in orderBtn"
             :key="index"
             :class="{selected: orderActive === index}"
-            @click="orderSwtich(index)"
-          >{{ item }}</span>
+            @click="orderSwtich(index)">{{ item }}</span>
         </div>
       </div>
 
@@ -115,10 +115,9 @@
         style="line-height: 40px;">
         <icon
           style="  margin-left: 12px;margin-right: 8px;height: 14px;width: 14px;color: inherit;font-size: 0px;"
-          name="inhsdgbnljkarf"
-        />
-        <span v-html="$t('otc_buy_tips_a')"/>！
-        <span v-html="$t('otc_buy_tips_c')"/>
+          name="inhsdgbnljkarf" />
+        <span v-html="$t('otc_buy_tips_a')" />！
+        <span v-html="$t('otc_buy_tips_c')" />
       </div>
       <div class="table-con">
         <template v-if="active === 0">
@@ -141,8 +140,8 @@
                   <span v-else>{{ state(item.state) }}</span>
                   <b
                     v-if="item.state === 2 || item.state === 7 || item.state === 6"
-                    @click="sq(item)"
-                  >{{ $t('otc_seiitm_8') }}</b>
+                    style="cursor:pointer"
+                    @click="sq(item)">{{ $t('otc_seiitm_8') }}</b>
                 </template>
                 <template v-else>{{ $t('otc_seiitm_9') }}</template>
                 <!--（没收到对方付款？-->
@@ -155,7 +154,7 @@
                   <div
                     :style="{color: item.side === 1 ? '#23C88B' : '#F24E4D'}"
                     class="cur">
-                    <p>/{{ item.currency_type }}</p>
+                    <p>{{ item.currency_type }}</p>
                     {{ item.currency }}
                   </div>
                 </div>
@@ -187,8 +186,8 @@
               <li>
                 <dl>
                   <dt>
-                    <b v-if="item.side === 1">  {{ $t('otc_seller_nameacer') }}：</b>
-                    <b v-else>  {{ $t('otc_seiitm_11') }}：</b>
+                    <b v-if="item.side === 1"> {{ $t('otc_seller_nameacer') }}：</b>
+                    <b v-else> {{ $t('otc_seiitm_11') }}：</b>
                     <span>{{ item.name }}</span>
                   </dt>
                   <dd>
@@ -289,7 +288,7 @@
                         v-for="(bank, index) in item.otc_collection_list"
                         :key="index"
                         :label="processValue('payment_type', bank)"
-                        :value="bank"/>
+                        :value="bank" />
                     </el-select>
                   </dt>
                   <div v-if="item.selectPayment">
@@ -311,8 +310,7 @@
                       <a
                         href="javascript:;"
                         style="font-size: 12px;"
-                        @click="closeHadle(item)"
-                      >{{ $t('otc_cancel_order') }}</a>
+                        @click="closeHadle(item)">{{ $t('otc_cancel_order') }}</a>
                     </dd>
                   </div>
                   <!-- <dd v-if="item.bankId">
@@ -331,8 +329,7 @@
                 <div
                   v-if="item.side === 1 && item.state === 1 && !item.appeal && !item.other_appeal"
                   class="btn btn1"
-                  @click="detailHandle(item)"
-                >{{ $t('otc_already_paid') }}</div>
+                  @click="detailHandle(item)">{{ $t('otc_already_paid') }}</div>
                 <!--<div-->
                 <!--class="btn btn2"-->
                 <!--v-if="item.side === 1 && item.state === 1 && !item.appeal && !item.other_appeal"-->
@@ -342,13 +339,11 @@
                   <div
                     v-if="item.side === 2 && item.state === 2 && !item.appeal && !item.other_appeal"
                     class="btn"
-                    @click="detailHandle(item)"
-                  >{{ $t('otc_confirm_issued') }}</div>
+                    @click="detailHandle(item)">{{ $t('otc_confirm_issued') }}</div>
                   <div
                     v-if="item.side === 2 && item.state === 7 && !item.appeal && !item.other_appeal"
                     class="btn"
-                    @click="detailHandle(item)"
-                  >{{ $t('otc_confirm_issued') }}</div>
+                    @click="detailHandle(item)">{{ $t('otc_confirm_issued') }}</div>
                 </template>
                 <div
                   v-if="item.time && !item.appeal && !item.other_appeal"
@@ -357,13 +352,13 @@
                     {{ $t('otc_overtime_tips_a1') }}
                     <count-down
                       :terminal="item.time"
-                      style="font-size: 12px;"/>
+                      style="font-size: 12px;" />
                   </p>
                   <!--<b v-if="item.side === 1 && item.state === 1"></b>-->
-                  <b v-if="item.side === 2 && item.state === 1">  {{ $t('otc_seiitm_13') }}</b>
-                  <b v-if="item.side === 1 && item.state === 2">  {{ $t('otc_seiitm_14') }}</b>
-                  <b v-if="item.side === 2 && item.state === 2">  {{ $t('otc_seiitm_14') }}</b>
-                  <b v-if="item.side === 1 && item.state === 7">  {{ $t('otc_seiitm_14') }}</b>
+                  <b v-if="item.side === 2 && item.state === 1"> {{ $t('otc_seiitm_13') }}</b>
+                  <b v-if="item.side === 1 && item.state === 2"> {{ $t('otc_seiitm_14') }}</b>
+                  <b v-if="item.side === 2 && item.state === 2"> {{ $t('otc_seiitm_14') }}</b>
+                  <b v-if="item.side === 1 && item.state === 7"> {{ $t('otc_seiitm_14') }}</b>
                   <!--<span v-html="item.side === 1 && ? '取消订单' : '放币'"></span>-->
                 </div>
                 <dd
@@ -381,7 +376,7 @@
           <step-table
             :grid-config="tableHeader"
             :show-grid-data="data"
-            :loading="loading"/>
+            :loading="loading" />
         </template>
       </div>
     </div>
@@ -392,8 +387,7 @@
         :total="total"
         background
         layout="prev, pager, next"
-        @current-change="handleCurrentChange"
-      />
+        @current-change="handleCurrentChange" />
     </div>
     <slide-model
       :open.sync="dialogVisible"
@@ -407,11 +401,10 @@
         :close="closeFlag"
         @step-change="stepChange"
         @close-change="closeChange"
-        @bank-change="bankChange"
-      />
+        @bank-change="bankChange" />
     </slide-model>
     <v-modal :open.sync="showQRcode">
-      <div class="qr" >
+      <div class="qr">
         <img
           :src="qrsrc"
           alt=""
@@ -589,12 +582,6 @@ export default {
   //     return 0
   //   }
   // },
-  mounted() {
-    this.setTimeInit()
-  },
-  beforeDestroy() {
-    clearInterval(this.timer)
-  },
   created() {
     this.getOrderz()
     // todo 初始化第一种类型数据
@@ -631,6 +618,12 @@ export default {
       })
     }, 5000)
   },
+  mounted() {
+    this.setTimeInit()
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
+  },
   methods: {
     payName(type) {
       return {
@@ -666,7 +659,7 @@ export default {
       }
     },
     changePayType(e) {
-      console.log(e)
+      // console.log(e)
     },
     openQR(pay) {
       this.qrsrc = pay.collection_img
@@ -719,7 +712,7 @@ export default {
     },
     closeHadle(item) {
       this.detail = item
-      console.log(item)
+      // console.log(item)
       this.closeFlag = true
       this.stepActive = true
       this.dialogVisible = true
@@ -729,10 +722,10 @@ export default {
     },
     // Todo 待开发
     paySetHandle(item, index) {
-      console.log(item, index)
+      // console.log(item, index)
     },
     detailHandle(item) {
-      console.log({ item })
+      // console.log({ item })
       this.stepActive = false
       this.bankData = []
       this.closeFlag = false
@@ -783,6 +776,7 @@ export default {
         }
         // const $this = this
         service.otcOrderIssueDone(params).then(res => {
+          // console.log(res)
           if (!res.code) {
             // this.$message.success('提交成功')
             this.$message({
@@ -1002,7 +996,11 @@ export default {
             that.total = rer.data.total
           }
           break
+<<<<<<< HEAD
           // eslint-disable-next-line no-case-declarations
+=======
+        // eslint-disable-next-line no-case-declarations
+>>>>>>> 4b041d613b6c75a4c80629ceaf204bfa2448a890
         case 2:
           const res = await service.getOtcRemovefills(that.params1)
           if (!res.code) {
@@ -1010,7 +1008,11 @@ export default {
             that.total = res.data.total
           }
           break
+<<<<<<< HEAD
           // eslint-disable-next-line no-case-declarations
+=======
+        // eslint-disable-next-line no-case-declarations
+>>>>>>> 4b041d613b6c75a4c80629ceaf204bfa2448a890
         default:
           const rew = await service.getOtcActivefills(that.params)
           if (!rew.code) {
@@ -1032,6 +1034,10 @@ export default {
           }
           service.otcAppeal(params).then(res => {
             console.log(res)
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b041d613b6c75a4c80629ceaf204bfa2448a890
             if (!res.code) {
               // this.$message.success('申诉成功，请等待客服处理')
               this.$message({
@@ -1050,17 +1056,17 @@ export default {
             }
           })
         })
-        .catch(() => {})
+        .catch(() => { })
     },
     handleCurrentChange(e) {
-      console.log(this.active)
+      // console.log(this.active)
       if (this.active === 1 || this.active === 2) {
         this.params1.page = e
-        console.log(this.params1.page, '1')
+        // console.log(this.params1.page, '1')
         this.init(this.active)
       } else {
         this.params.page = e
-        console.log(this.params.page, '2')
+        // console.log(this.params.page, '2')
         this.init(this.active)
       }
     },
@@ -1077,40 +1083,45 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
-  @import "./assets/scss/trade.scss";
-  @font-face {
-    font-family: 'iconfont';  /* project id 1244642 */
-    src: url('https://at.alicdn.com/t/font_1244642_widppyjmvhh.eot');
-    src: url('https://at.alicdn.com/t/font_1244642_widppyjmvhh.eot?#iefix') format('embedded-opentype'),
-    url('https://at.alicdn.com/t/font_1244642_widppyjmvhh.woff2') format('woff2'),
-    url('https://at.alicdn.com/t/font_1244642_widppyjmvhh.woff') format('woff'),
-    url('https://at.alicdn.com/t/font_1244642_widppyjmvhh.ttf') format('truetype'),
-    url('https://at.alicdn.com/t/font_1244642_widppyjmvhh.svg#iconfont') format('svg');
-  }
-  .iconfont{
-    font-family:"iconfont" !important;
-    font-size:16px;font-style:normal;
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-stroke-width: 0.2px;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  .slot-down {
-    position: absolute;
-    right: 4px;
-    top: 14px;
-    width: 16px;
-    height: 32px;
-    line-height: 0.5;
-    color: #999;
-    i {
-      cursor: pointer;
-      display:inherit;
-      &:last-child {
-        margin-top: -8px;
-      }
+@import "./assets/scss/trade.scss";
+@font-face {
+  font-family: "iconfont"; /* project id 1244642 */
+  src: url("https://at.alicdn.com/t/font_1244642_widppyjmvhh.eot");
+  src: url("https://at.alicdn.com/t/font_1244642_widppyjmvhh.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://at.alicdn.com/t/font_1244642_widppyjmvhh.woff2")
+      format("woff2"),
+    url("https://at.alicdn.com/t/font_1244642_widppyjmvhh.woff") format("woff"),
+    url("https://at.alicdn.com/t/font_1244642_widppyjmvhh.ttf")
+      format("truetype"),
+    url("https://at.alicdn.com/t/font_1244642_widppyjmvhh.svg#iconfont")
+      format("svg");
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+.slot-down {
+  position: absolute;
+  right: 4px;
+  top: 14px;
+  width: 16px;
+  height: 32px;
+  line-height: 0.5;
+  color: #999;
+  i {
+    cursor: pointer;
+    display: inherit;
+    &:last-child {
+      margin-top: -8px;
     }
-    .iconActive {
-      color: #c9a96c
-    }
   }
+  .iconActive {
+    color: #c9a96c;
+  }
+}
 </style>

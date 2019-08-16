@@ -234,10 +234,8 @@ export default {
     },
     getCurrencyList() { 
       service.otcSymbolList({}).then((res) => {
-        if (res.code === 0) {
-          // this.currencyList = res.data
+        if (res.code === 0) { 
           this.$set(this, "currencyList", res.data )
-          this.state.otc.symbolInfo = res.data[0]
           console.log({currencyList: this.currencyList})
         }
       })
@@ -260,7 +258,15 @@ export default {
   },
   created() {
     this.init();
-    this.getCurrencyList();
+    service.otcSymbolList({}).then((res) => {
+      if (res.code === 0) { 
+        this.$set(this, "currencyList", res.data )
+        this.state.otc.symbolInfo = res.data[0]
+        console.log({currencyList: this.currencyList})
+      }
+    }) 
+    // this.state.otc.symbolInfo =  this.currencyList[0]
+
     this.timer = setInterval(() => {
       this.getCurrencyList();
       // service.otcSymbolList({}).then(res => {
