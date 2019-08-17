@@ -143,16 +143,17 @@ export default {
           return 0
         }
       })
-      if (
-        dealList.length &&
-        this.dealList.length &&
-        dealList[0].time <= this.dealList[0].time
-      ) {
-        // 因断线重连，导致重新获取了全量数据
-        this.dealList = dealList
-      } else {
+        //   if (
+        //     dealList.length &&
+        //     this.dealList.length &&
+        //     dealList[0].time <= this.dealList[0].time
+        //   ) {
+        //     // 因断线重连，导致重新获取了全量数据
+        //     this.dealList = dealList
+        //   } else {
+        //     this.dealList = dealList.concat(this.dealList).slice(0, 20)
+        //   }
         this.dealList = dealList.concat(this.dealList).slice(0, 20)
-      }
     },
     setTitle () {
       document.title =
