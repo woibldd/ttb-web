@@ -2100,5 +2100,7 @@
 "fund_history_star_lv": "사용자등급",
 "fund_history_transaction_type": "거래류형", 
 "fund_history_symbol":"거래상품", 
-"fund_history_release_time":"발급시간"
+"fund_history_release_time":"발급시간",
+
+"link_name":"链名称"
 }
