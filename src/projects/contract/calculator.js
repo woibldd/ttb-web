@@ -210,6 +210,10 @@ export default {
         force_price = result.round(price_scale || 4).toString()
       }
     }
+    //计算强平价格小于0时，将其赋值为0
+    if (force_price.lt(0)) {
+      force_price = Big(0)
+    }
     let new_amount = Number(current) + Number(amount * (direction === 'less' ? -1 : 1))
 
     return {
@@ -291,6 +295,10 @@ export default {
         force_price = (value.minus(imDiff).minus(avia)).div(mulvol)
       }
     } 
+    //计算强平价格小于0时，将其赋值为0
+    if (force_price.lt(0)) {
+      force_price = Big(0)
+    }
     // console.log({
     //   value:value.toString(),
     //   im: im.toString(),

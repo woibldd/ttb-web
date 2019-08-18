@@ -160,6 +160,7 @@ export default {
           }]
         indicators.forEach(indicat => {
           const btn = widget.createButton().on('click', (e) => {
+            console.log(1111)
             const element = e.srcElement || e.target
             const cls = element.classList
             if (!cls.contains('selected')) {

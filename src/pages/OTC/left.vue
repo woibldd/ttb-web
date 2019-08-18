@@ -236,12 +236,14 @@ export default {
       service.otcSymbolList({}).then((res) => {
         if (res.code === 0) { 
           this.$set(this, "currencyList", res.data )
+          // this.state.otc.symbolInfo = res.data[0]
           console.log({currencyList: this.currencyList})
         }
       })
     }, 
     getRatebyCurrency(item) {
       let currency = this.legal_currency.toLowerCase()
+      console.log({item})
       return item[currency + '_rate']
     },
     getFiatMoneySymbolByFiat (fiat) {

@@ -55,7 +55,7 @@
             width="240"
             trigger="hover"
             effect="dark" :content="depTip">
-            <el-button type="text" slot="reference" class="lian">链名称</el-button>
+            <el-button type="text" slot="reference" class="lian">{{$t("link_name")}}</el-button>
           </el-popover>
         </div>
         <div class="row__value">
