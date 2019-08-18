@@ -2179,9 +2179,7 @@
     "tj_cg": "提交成功",
     "zd_xe": "购买量低于最低100限额",
     "gm_sl": "购买量大于最大50000限额",
-    "jg_ck": "非最终交易单价，仅供参考", 
-    
-    "link_name":"链名称",
+    "jg_ck": "非最终交易单价，仅供参考",
     "deposit_state_error": "错误",
     "order_apply_failed": "委托提交失败",
     "order_apply_message_a": "可用余额不足，无法提交委托。",
@@ -2189,14 +2187,14 @@
     "order_apply_message_c":"在%{price}价格%{side}%{amount}张%{currency}永续合约。",
     "contract_buy_on_price_piece1":"在市价%{amount}张%{symbol}。",
     "invite_kyc_lv": "KYC认证",
+    "link_name":"链名称",
+    
     "fund_assets_subscribed": "已认购",
     "fund_history_inviter_userid": "来源UID",
     "fund_history_star_lv": "用户星级",
     "fund_history_transaction_type": "交易类型", 
     "fund_history_symbol":"交易产品", 
     "fund_history_release_time":"发放时间"
-
-
     
   }
 
