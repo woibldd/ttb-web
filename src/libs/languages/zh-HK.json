@@ -2013,6 +2013,10 @@
     "tj_cg": "提交成功",
     "zd_xe": "購買量低於最低100限額",
     "gm_sl": "購買量大於最大50000限額",
+    "link_name":"鏈名稱",
+    "otc_kyc_verified":"身份認證 <i style='color:#ccc;'>（認證等級：KYC2）</i>",
+    "otc_bind_bankCard":"綁定本人實名銀行卡",
+
     "deposit_state_error": "错误",
     "order_apply_failed": "委托提交失败",
     "order_apply_message_a": "可用余额不足，无法提交委托。",

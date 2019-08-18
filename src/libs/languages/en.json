@@ -2252,6 +2252,8 @@
 "otc_account": "Fiat account ",
 "download_dl_app": "APP Download",
 "contract_buy_on_price_piece": "%{symbol} contract on (%{price}) price (%{amount}) piece。",
+"link_name":"link name",
+"otc_need_authentication": "%{side} requires <span style='color:$primary;'>Advanced verification</span>",
 
 "deposit_state_error": "错误",
 "order_apply_failed": "委托提交失败",
@@ -2267,4 +2269,5 @@
 "fund_history_transaction_type": "交易类型", 
 "fund_history_symbol":"交易产品", 
 "fund_history_release_time":"发放时间"
+
 }
