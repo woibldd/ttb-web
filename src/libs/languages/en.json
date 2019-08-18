@@ -2269,7 +2269,7 @@
 "fund_history_star_lv": "User star",
 "fund_history_transaction_type": "Trading type", 
 "fund_history_symbol":"Trading product", 
-"fund_history_release_time":"release time",
-"link_name":"链名称"
+"fund_history_release_time":"release time", 
+"fund_history_airdrop": "空投奖励"
 
 }

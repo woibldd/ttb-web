@@ -340,6 +340,14 @@ export default {
     formatter (row, column) {
       if (column.property === 'create_time' ) {
         return utils.dateFormatter(row.create_time)
+      } else if (column.property === 'name' && this.type === 'reward') {
+        if (row.name === '合约交易大赛') {
+          return this.$t('header_title_contract_competition')
+        } else if (row.name === '空投奖励') {
+          return this.$t('fund_history_airdrop')
+        } else {
+          return row.name
+        }
       } else {
         return row[column.property]
       }

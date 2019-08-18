@@ -2027,6 +2027,7 @@
     "order_apply_message_b": "當前下單價格與盤口價格差异過大，無法提交委託。",
     "order_apply_message_c":"在%{price}價格%{side}%{amount}張%{currency}永續合約。", 
     "contract_buy_on_price_piece1":"在市價%{amount}張%{symbol}。",
-    "invite_kyc_lv": "KYC認證"
+    "invite_kyc_lv": "KYC認證",
+    "fund_history_airdrop": "空投奖励"
 
 }

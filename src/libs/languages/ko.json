@@ -2102,5 +2102,6 @@
 "fund_history_symbol":"거래상품", 
 "fund_history_release_time":"발급시간",
 
-"link_name":"链名称"
+"link_name":"链名称",
+"fund_history_airdrop": "空投奖励"
 }
