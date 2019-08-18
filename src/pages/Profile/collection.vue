@@ -93,11 +93,12 @@
         class="demo-ruleForm">
         <template v-if="type === 'add'">
           <el-form-item
-            :label="'币种'"
+            :label="$t('currency')"
             prop='currency'>
             <el-select
               v-model="ruleForm.currency"
               style="width: 100%;"
+              :placeholder="$t('please_choose')"
               size="small">
               <el-option
                 value="CNY"

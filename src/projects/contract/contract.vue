@@ -90,42 +90,42 @@
         </div>
         <div v-show="problemType" class="contract-problem">
           <div class="contract-problem-list">
-            <h1>{{ $t('problem_list1') }}<strong v-show="problemLstt[0] === 'false' && !problemError">x</strong></h1>
+            <h1>{{ $t('problem_list1') }}<strong v-show="problemLstt[0] === 'false' || problemLstt[0] === '' && !problemError">x</strong></h1>
             <span><input v-model="problemLstt[0]" type="radio" value="false"><label for="">{{ $t('answer_list2_1') }}</label></span>
             <span><input v-model="problemLstt[0]" type="radio" value="true"><label for="">{{ $t('answer_list2_2') }}</label></span>
           </div>
           <div class="contract-problem-list">
-            <h1>{{ $t('problem_list2') }}<strong v-show="problemLstt[1] === 'false' && !problemError">x</strong></h1>
+            <h1>{{ $t('problem_list2') }}<strong v-show="problemLstt[1] === 'false' || problemLstt[1] === '' && !problemError">x</strong></h1>
             <span><input v-model="problemLstt[1]" type="radio" value="true"><label for="">0.1</label></span>
             <span><input v-model="problemLstt[1]" type="radio" value="false"><label for="">1</label></span>
           </div>
           <div class="contract-problem-list">
-            <h1>{{ $t('problem_list3') }}<strong v-show="problemLstt[2] === 'false' && !problemError">x</strong></h1>
+            <h1>{{ $t('problem_list3') }}<strong v-show="problemLstt[2] === 'false' || problemLstt[2] === '' && !problemError">x</strong></h1>
             <span><input v-model="problemLstt[2]" type="radio" value="true"><label for="">{{ $t('answer_list3_1') }}</label></span>
             <span><input v-model="problemLstt[2]" type="radio" value="false"><label for="">{{ $t('answer_list3_2') }}</label></span>
           </div>
           <div class="contract-problem-list">
-            <h1>{{ $t('problem_list4') }}<strong v-show="problemLstt[3] === 'false' && !problemError">x</strong></h1>
+            <h1>{{ $t('problem_list4') }}<strong v-show="problemLstt[3] === 'false' || problemLstt[3] === '' && !problemError">x</strong></h1>
             <span><input v-model="problemLstt[3]" type="radio" value="true"><label for="">{{ $t('answer_list4_1') }}</label></span>
             <span><input v-model="problemLstt[3]" type="radio" value="false"><label for="">{{ $t('answer_list4_2') }}</label></span>
           </div>
           <div class="contract-problem-list">
-            <h1>{{ $t('problem_list5') }}<strong v-show="problemLstt[4] === 'false' && !problemError">x</strong></h1>
+            <h1>{{ $t('problem_list5') }}<strong v-show="problemLstt[4] === 'false' || problemLstt[4] === '' && !problemError">x</strong></h1>
             <span><input v-model="problemLstt[4]" type="radio" value="false"><label for="">{{ $t('answer_list5_1') }}</label></span>
             <span><input v-model="problemLstt[4]" type="radio" value="true"><label for="">{{ $t('answer_list5_2') }}</label></span>
           </div>
           <div class="contract-problem-list">
-            <h1>{{ $t('problem_list6') }}<strong v-show="problemLstt[5] === 'false' && !problemError">x</strong></h1>
+            <h1>{{ $t('problem_list6') }}<strong v-show="problemLstt[5] === 'false' || problemLstt[5] === '' && !problemError">x</strong></h1>
             <span><input v-model="problemLstt[5]" type="radio" value="true"><label for="">{{ $t('answer_list6_1') }}</label></span>
             <span><input v-model="problemLstt[5]" type="radio" value="false"><label for="">{{ $t('answer_list6_2') }}</label></span>
           </div>
           <div class="contract-problem-list">
-            <h1>{{ $t('problem_list7') }}<strong v-show="problemLstt[6] === 'false' && !problemError">x</strong></h1>
+            <h1>{{ $t('problem_list7') }}<strong v-show="problemLstt[6] === 'false' || problemLstt[6] === '' && !problemError">x</strong></h1>
             <span><input v-model="problemLstt[6]" type="radio" value="true"><label for="">{{ $t('answer_list7_1') }}</label></span>
             <span><input v-model="problemLstt[6]" type="radio" value="false"><label for="">{{ $t('answer_list7_2') }}</label></span>
           </div>
           <div class="contract-problem-list">
-            <h1>{{ $t('problem_list8') }}<strong v-show="problemLstt[7] === 'false' && !problemError">x</strong></h1>
+            <h1>{{ $t('problem_list8') }}<strong v-show="problemLstt[7] === 'false' || problemLstt[7] === '' && !problemError">x</strong></h1>
             <span><input v-model="problemLstt[7]" type="radio" value="true"><label for="">{{ $t('answer_list8_1') }}</label></span>
             <span><input v-model="problemLstt[7]" type="radio" value="false"><label for="">{{ $t('answer_list8_2') }}</label></span>
           </div>
@@ -253,7 +253,6 @@ export default {
           } else {
             this.state.ct.pairInfo = null
           }
-        } else {
         }
         // alert(pair)
       },
@@ -267,7 +266,7 @@ export default {
       // console.log(this.problemError)
       service.getOrderfills({ page: 1, size: 10, symbol: 'FUTURE_BTCUSD' }).then(res => {
         if (!res.code) {
-          const number = 0
+          // const number = 0
           if (JSON.stringify(newOrder) === '{}') {
             newOrder = res.data.data
             return false
