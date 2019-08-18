@@ -44,16 +44,18 @@ export default {
           return 0
         }
       })
-      if (
-        dealList.length &&
-        this.dealList.length &&
-        dealList[0].time <= this.dealList[0].time
-      ) {
-        // 因断线重连，导致重新获取了全量数据
-        this.dealList = dealList
-      } else {
-        this.dealList = dealList.concat(this.dealList).slice(0, PAGE_SIZE)
-      }
+      // 先不做重连判断，因为socket返回的数据有时候时间顺序不对导致这里的判断出错
+      // if (
+      //   dealList.length &&
+      //   this.dealList.length &&
+      //   dealList[0].time <= this.dealList[0].time
+      // ) {
+      //   // 因断线重连，导致重新获取了全量数据
+      //   this.dealList = dealList
+      // } else {
+      //   this.dealList = dealList.concat(this.dealList).slice(0, PAGE_SIZE)
+      // }
+      this.dealList = dealList.concat(this.dealList).slice(0, PAGE_SIZE)
     },
     async fetchDealList () {
       const res = await service.getQuoteDeal({
