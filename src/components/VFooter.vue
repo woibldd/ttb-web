@@ -67,7 +67,7 @@
           <router-link
             :to="{name:'Fee'}"
             target="_blank">{{ $t('footer_fee') }}</router-link>
-            <a
+          <a
             :href="apiDoc"
             target="_blank">{{ $t('footer_api') }}</a>
         </div>
@@ -101,7 +101,7 @@
                 <icon
                   class="contact-item"
                   name="footer-twitter"/>
-              </a> --> 
+              </a> -->
               <a
                 href="mailto:service@ixx.com"
                 class="contact-item-wrapper pointer">
@@ -118,8 +118,8 @@
                   src="../assets/pic-contact-wx.png">
               </div>
               <a
-                class="contact-item-wrapper pointer"
-                :href="showEnTips ? 'https://t.me/ixxofficial' : 'https://t.me/ixxofficial'">
+                :href="showEnTips ? 'https://t.me/ixxofficial' : 'https://t.me/ixxofficial'"
+                class="contact-item-wrapper pointer">
                 <icon
                   class="contact-item "
                   name="footer-telegram"/>
@@ -151,43 +151,42 @@
 <script>
 import { state } from '@/modules/store'
 export default {
-  data () {
+  data() {
     return {
       state
     }
   },
   computed: {
-    helpLink () {
+    helpLink() {
       return this.state.theme.help[this.state.locale] || this.state.theme.help.en
     },
-    requestLink () {
+    requestLink() {
       if (this.state.userInfo && this.state.theme.themeName === 'default') {
         return process.env.BASE_API + 'ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
       } else {
         return this.state.theme.request[this.state.locale] || this.request.theme.help.en
       }
     },
-    announcementLink () {
+    announcementLink() {
       return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
     },
-    aboutLink () {
+    aboutLink() {
       // return `/docs/IXX_introduction_${this.state.locale || 'en'}.pdf`
       if (this.state.locale === 'zh-CN') {
         return `https://ix-static.oss-ap-southeast-1.aliyuncs.com/IXX_introduction_zh-CN.pdf`
-      }
-      else {
+      } else {
         return `https://ix-static.oss-ap-southeast-1.aliyuncs.com/IXX_introduction_en.pdf`
       }
     },
-    apiDoc () {
+    apiDoc() {
       return this.state.theme.apiDoc[this.state.locale || 'en']
     },
-    showEnTips () {
+    showEnTips() {
       return this.state.locale === 'en' || this.state.locale === 'ko'
     },
-    exchangeNameConfig () {
+    exchangeNameConfig() {
       return this.state.theme.exchangeNameConfig[this.state.locale || 'en']
-    },
+    }
   }
 }
 </script>
