@@ -464,7 +464,7 @@
             >{{ orderValue | round(pairInfo.value_scale || 4) }} BTC</div>
           </div>
           <div class="table__tr c-fff">
-            <div class="col col1">{{ $t('contract_cost_10_times', {lever: userLeverTime==0 ? 100 : userLeverTime}) }}</div>
+            <div class="col col1">{{ $t('contract_cost_10_times', {lever: userLeverTime==0 ? maxLeverage : userLeverTime}) }}</div>
             <div
               class="col"
             >{{ mmModal.label === $t('order_side_buy') ? costValueBuyNew : costValueSellNew }} BTC</div>

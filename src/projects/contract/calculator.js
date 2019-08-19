@@ -211,7 +211,7 @@ export default {
       }
     }
     //计算强平价格小于0时，将其赋值为0
-    if (force_price.lt(0)) {
+    if (Big(force_price).lt(0)) {
       force_price = Big(0)
     }
     let new_amount = Number(current) + Number(amount * (direction === 'less' ? -1 : 1))
@@ -296,7 +296,7 @@ export default {
       }
     } 
     //计算强平价格小于0时，将其赋值为0
-    if (force_price.lt(0)) {
+    if (Big(force_price).lt(0)) {
       force_price = Big(0)
     }
     // console.log({
