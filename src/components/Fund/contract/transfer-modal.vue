@@ -8,6 +8,7 @@
         <el-select class="ex-row__value" 
           v-model="selectCoin" 
           value-key="currency"
+          filterable="true"
           @change="changeCoin">
           <el-option
             v-for="(item, idx) in allCoins"

@@ -169,8 +169,8 @@ export default {
           symbol: "S$"
         }
       },
-      currencyList: [],
-      count: 0,
+      currencyList: [], 
+      count: 0, 
       down: false
     };
   },
@@ -234,11 +234,13 @@ export default {
     },
     getCurrencyList() { 
       service.otcSymbolList({}).then((res) => {
-        if (res.code === 0) {
-          // this.currencyList = res.data
+        if (res.code === 0) { 
           this.$set(this, "currencyList", res.data )
           // this.state.otc.symbolInfo = res.data[0]
-          console.log({currencyList: this.currencyList})
+          // console.log({currencyList: this.currencyList})
+          if (!this.state.otc.symbolInfo) {
+            this.state.otc.symbolInfo = res.data[0]
+          }
         }
       })
     }, 
@@ -264,21 +266,7 @@ export default {
     this.getCurrencyList();
     this.timer = setInterval(() => {
       this.getCurrencyList();
-      // service.otcSymbolList({}).then(res => {
-      //   if (res.code === 0) {
-      //     //let rate = this.legal_currency.toLowerCase() + '_rate'
-      //     Vue.set(
-      //       this.user,
-      //       "btcCount",
-      //       this.$big(res.data[1][this.coin.rate]).round(2, 0)
-      //     );
-      //     Vue.set(
-      //       this.user,
-      //       "usdtCount",
-      //       this.$big(res.data[0][this.coin.rate]).round(2, 0)
-      //     );
-      //   }
-      // });
+     
       service
         .getUnDonefills({
           page: 1,

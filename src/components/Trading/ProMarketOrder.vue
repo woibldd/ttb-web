@@ -41,6 +41,7 @@
                 :disabled="!currencyAvailable"
                 @input="onSliderDragEnd($event, 'buy')"
                 height="4"
+                width="5"
                 :dot-size="14"
                 :lazy="true"
                 :min="0"
