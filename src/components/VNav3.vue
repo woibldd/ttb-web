@@ -386,6 +386,7 @@ export default {
       utils.setSessionStorageValue('markTime', 9999999999)
       service.signout().then(res => {
         console.log({ res })
+        window.onload()
       })
       // if (utils.getRouteMeta(this.$route, 'auth')) {
       //   this.$router.push({
