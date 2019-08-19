@@ -2029,7 +2029,7 @@
     "contract_buy_on_price_piece1":"在市價%{amount}張%{symbol}。",
     "invite_kyc_lv": "KYC認證",
     "fund_history_airdrop": "空投奖励",
-    "fund_deposit_tip_contract": "合约地址为：https://etherscan.io/address/%{contract}，请核对后再进行充币行为",
+    "fund_deposit_tip_contract": "合约地址为：%{contract}，请核对后操作",
     "fund_trading_bill": "币币账单"
 
 }
