@@ -96,7 +96,6 @@ const service = {
     return request('user/register/email', data)
   },
   signout() {
-    debugger
     rmCache('session')
     rmCache('balanceList')
     state.pro.currency = null

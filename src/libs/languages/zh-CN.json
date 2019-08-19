@@ -2195,7 +2195,9 @@
     "fund_history_transaction_type": "交易类型", 
     "fund_history_symbol":"交易产品", 
     "fund_history_release_time":"发放时间",
-    "fund_history_airdrop": "空投奖励"
+    "fund_history_airdrop": "空投奖励",
+    "fund_deposit_tip_contract": "合约地址为：%{contract}，请核对后再进行充币行为",
+    "fund_trading_bill": "币币账单"
     
   }
 

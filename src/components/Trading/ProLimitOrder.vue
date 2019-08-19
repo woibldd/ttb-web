@@ -57,11 +57,11 @@
                 class="avbl-value"
                 v-else>...</div>
             </div>
-            <div class="ix-slider">
-              <ix-slider
+            <div class="ix-slider" sytle="width: 100%;">
+              <ix-slider 
                 :disabled="!currencyAvailable"
                 @input="onSliderDragEnd($event, 'buy')"
-                height="4"
+                :height="4" 
                 :dot-size="14"
                 :lazy="true"
                 :value="buy_percent"
@@ -743,7 +743,7 @@ export default {
 }
 .ix-slider {
   padding: 0;
-  margin-right: 30px;
+  // margin-right: 30px;
   position: relative;
   box-sizing: border-box;
   @include clearfix();

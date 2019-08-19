@@ -2103,5 +2103,7 @@
 "fund_history_release_time":"발급시간",
 
 "link_name":"链名称",
-"fund_history_airdrop": "空投奖励"
+"fund_history_airdrop": "空投奖励",
+"fund_deposit_tip_contract": "合约地址为：%{contract}，请核对后再进行充币行为",
+"fund_trading_bill": "币币账单"
 }

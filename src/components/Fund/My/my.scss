@@ -194,6 +194,26 @@
           }
       }
   }
+  .fl {
+    float: left;
+  }
+  .fr {
+    float: right;
+  }
+  .clearfix {
+    @include clearfix()
+  }
+  .bill {
+    text-align: right;
+    padding-right: 10px;
+    a {
+      padding: 4px 17px;
+      line-height: 28px;
+      border: 1px solid;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+  }
 }
 
 

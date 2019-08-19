@@ -204,7 +204,7 @@ export default {
       })
     },
     getBalance() {
-      const $this = this
+      // const $this = this
       service.getOtcBalance().then(res => {
         if (res.code === 0) {
           const arr = _.filter(res.data, item => item.currency === this.currency)
@@ -231,6 +231,7 @@ export default {
 
   .assets-box {
     display: flex;
+    justify-content: space-between;
     padding: 10px 38px;
     .user-info {
       > a {
@@ -248,9 +249,9 @@ export default {
 
       }
     }
-    div {
-      flex: 1;
-    }
+    // div {
+    //   flex: 1;
+    // }
 
     .transfer-btn {
       text-align: right;
@@ -260,7 +261,10 @@ export default {
       font-family: PingFangSC-Regular;
       font-weight: 400;
       color: rgba(153, 153, 153, 1);
-
+      flex: 1;
+      text-align: center;
+      display: flex;
+      justify-content: center;
       > div .valuebold {
         color: #000;
       }
@@ -284,6 +288,7 @@ export default {
         font-size: 14px;
         width: 40px;
         height: 40px;
+        line-height: 40px;
         text-align: center;
 
       }
