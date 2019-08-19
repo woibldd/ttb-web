@@ -133,6 +133,10 @@
         <li> {{ $t('deposit_hint_confirm',{confirm: selectCoin.min_confirm, coin: selectCoin.currency}) }}</li>
         <li v-if="selectCoin.memo_support">{{ $t('eos_deposit_tip_security_third') }}</li>
         <li >  {{ $t('watch_tips') }}</li>
+        <li v-if="!!contract"> 
+          {{$t('fund_deposit_tip_contract', {contract})}}
+        </li>
+
       </ul>
     </div>
     <remember-alert
@@ -169,7 +173,8 @@ export default {
       openEosAlert: false,
       lianData: [],
       curreryCoin: '',
-      selectLian: {}
+      selectLian: {},
+      contract: ''
     }
   },
   computed: {
@@ -207,10 +212,12 @@ export default {
       }
       this.address = ''
       this.memo = ''
+      this.contract = ''
       return service.getMyCoinAddress(param).then((res) => {
         if (res && res.data) {
           this.address = res.data.address
           this.memo = res.data.memo
+          this.contract = res.data.contract
         }
       })
     },
