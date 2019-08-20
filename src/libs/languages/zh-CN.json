@@ -2187,8 +2187,10 @@
     "contract_buy_on_price_piece1":"在市价%{amount}张%{symbol}。",
     "invite_kyc_lv": "KYC认证",
     "otc_otutcol_20": "申诉成功，请等待客服处理",  
-    "link_name":"链名称",
-    
+    "link_name":"链名称", 
+    "otc_order_default_tips": "提示：1.请使用实名认证付款方式 2.请按订单金额付款 3.付款时无需备注",
+    "app_download_tips": "温馨提示：APP下载，建议iOS手机系统版本10.0以上；Android手机系统版本7.0以上",
+    "otc_suspend_all_tips" :"当您不在线或不方便操作交易时，点击“全部暂停”；可将委托单从列表中隐藏；点击“全部开始”订单恢复正常",
     "fund_assets_subscribed": "已认购",
     "fund_history_inviter_userid": "来源UID",
     "fund_history_star_lv": "用户星级",

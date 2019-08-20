@@ -556,7 +556,7 @@ export default {
 }
 .custom-tooltip {
   position: absolute;
-  bottom: -44px;
+  bottom: -39px;
   left: -7px;
   color: #A5B4C5;
 }

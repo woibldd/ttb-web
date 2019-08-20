@@ -100,6 +100,10 @@
             :key="index"
             :class="{selected: orderActive === index}"
             @click="orderSwtich(index)">{{ item }}</span>
+            <icon
+              name="robot-info" 
+              v-tooltip.top-end="{html: true,content: $t('otc_suspend_all_tips')} "
+            />
         </div>
       </div>
 
