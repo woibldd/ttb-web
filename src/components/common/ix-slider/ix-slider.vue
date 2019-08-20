@@ -143,7 +143,7 @@
             :active="piecewiseObj.inRange"
           >
             <span
-              v-if="piecewiseLabel"
+              v-if="!piecewiseLabel"
               class="vue-slider-piecewise-label"
               :style="[ labelStyle, piecewiseObj.inRange ? labelActiveStyle : null ]"
             >

@@ -76,6 +76,11 @@
                   <span
                     :class="['custom-label', { active }]"
                     v-if="label % 25 === 0"/>
+                  <span
+                    v-if="label % 25 === 0"
+                    class="vue-slider-piecewise-label" >
+                    {{ label }}
+                    </span>
                 </template>
                 <template
                   slot="tooltip"
@@ -183,6 +188,11 @@
                   <span
                     :class="['custom-label', { active }]"
                     v-if="label % 25 === 0"/>
+                  <span
+                    v-if="label % 25 === 0"
+                    class="vue-slider-piecewise-label" >
+                    {{ label }}
+                  </span>
                 </template>
                 <template
                   slot="tooltip"
