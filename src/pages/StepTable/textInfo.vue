@@ -106,7 +106,7 @@
                 <span>{{ $t('otc_trans_idjg') }}({{ textDetail.currency_type }})</span><em style="color: #FDA22D">{{ textDetail.price || '--' }}</em>
               </dd>
               <dd>
-                <span>{{ textDetail.side === 2 ? $t('otc_side_2') : $t('otc_side_1') }}{{ $t('amount') }}({{ textDetail.currency }})</span><em>{{ textDetail.amount || '--' }}</em>
+                <span>{{ textDetail.side === 2 ? $t('otc_side_2') : $t('otc_side_1') }}{{ $t('otc_quantity') }}({{ textDetail.currency }})</span><em>{{ textDetail.amount || '--' }}</em>
               </dd>
               <template v-if="textDetail.otc_collection">
                 <template v-if="textDetail.state !== 1 && textDetail.state !== 6 && textDetail.state !== 4">

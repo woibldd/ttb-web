@@ -2033,6 +2033,7 @@
     "fund_trading_bill": "币币账单",
     "otc_suspend_all_tips" :"當您不線上或不方便操作交易時，點擊“全部暫停”；可將委託單從清單中隱藏；點擊“全部開始”訂單恢復正常",
     "otc_order_default_tips": "提示：1.請使用實名認證付款方式2.請按訂單金額付款3.付款時無需備註",
-    "app_download_tips": "温馨提示：APP下载，建议iOS手机系统版本10.0以上；Android手机系统版本7.0以上"
+    "app_download_tips": "温馨提示：APP下载，建议iOS手机系统版本10.0以上；Android手机系统版本7.0以上",
+    "otc_quantity": "數量"
 
 }

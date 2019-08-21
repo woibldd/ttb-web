@@ -1820,6 +1820,7 @@
   "otc_tips_failed_a": "发布失败：",
   "input_all": "全部",
   "otc_amount_money": "金额",
+  "otc_quantity": "数量",
   "otc_purchase_amount": "购买金额",
   "otc_confirm_buy": "确定购买",
   "otc_cancel_order": "取消订单",

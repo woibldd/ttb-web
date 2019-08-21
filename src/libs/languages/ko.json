@@ -2103,6 +2103,7 @@
 "fund_history_release_time":"발급시간",
 "otc_order_default_tips": "힌트:1. 실명인증제 지불방식을 사용하세요 2. 주문금액대로 지불하세요 3. 지불시 비고가 필요 없습니다.",
 "otc_suspend_all_tips" :"온라인 또는 거래가 원활하지 않을 경우 잠시 클릭을 중단합니다;위탁서를 목록에서 숨길수 있다;\"모두 시작\"을 누르면 주문서가 정상적으로 회복됩니다.",
+"otc_quantity": "수량",
 "link_name":"链名称",
 "fund_history_airdrop": "空投奖励",
 "fund_deposit_tip_contract": "合约地址为：%{contract}，请核对后操作",
