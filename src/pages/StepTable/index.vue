@@ -157,7 +157,7 @@
                   <div
                     :style="{color: item.side === 1 ? '#23C88B' : '#F24E4D'}"
                     class="cur">
-                    <p>{{ item.currency_type }}</p>
+                    <p style="opacity:0.6;">{{ item.currency_type }}/</p>
                     {{ item.currency }}
                   </div>
                 </div>
