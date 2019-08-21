@@ -43,12 +43,16 @@
         @click="goIosTurorial">
         {{ $t('download_ios_tutorial') }}
       </div>
+      <div class="footer"> 
+        <div class="tips">
+          {{ $t('app_download_tips') }}
+        </div>
+      </div>
     </div>
     <div
       class="tt-mask"
       v-if="showTutorialArrow"
-      @click="touch"
-    >
+      @click="touch">
       <div
         class="tutorial-arrow">
         <img

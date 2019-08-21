@@ -24,23 +24,21 @@
         <span @click="showUnlockModal = true" style="font-size: 14px;"  class="c-mine pointer mr-30 dib"><a>{{ $t('unlock') }}</a></span> -->
         <span
           style="margin-right: 8px;"
-          @click="dianji('1')"
-          v-if="!showHistory"
+          @click="content = 'assets'" 
           class="fund-history"
-          :class="{'fund-historc' : one ==1}"
+          :class="{'fund-historc' : content == 'assets'}"
         >{{ $t('otc_otutcol_17') }}</span>
 
-        <span @click="dianjs('2')">
-          <router-link
-            v-if="!showHistory"
+        <span @click="content = 'history'">
+          <router-link 
             class="fund-history"
-            :class="{'fund-historc' : one ==2}"
+            :class="{'fund-historc' : content == 'history'}"
             :to="{name:'assetsHistory', params: {from: 'deposit'}}"
           >{{ $t('capital_record') }}</router-link>
         </span>
       </div>
     </div> 
-    <div v-if="one==1" class="my-fund-content">
+    <div v-if="content == 'assets'" class="my-fund-content">
       <div class="information">
         <icon name='information' />
         <span >{{$t('otc_otutcol_16')}}        </span>
@@ -171,9 +169,10 @@
           </template>
         </el-table-column>
       </el-table>
+    </div> 
+    <div v-if="content == 'history'">
+      <router-view/>
     </div>
-
-    <div v-if="one==2">
       <v-modal :open.sync="showLockModal">
         <div class="lock-modal">
           <div class="modal__title mb-30">{{ $t('locked') }}</div>
@@ -246,9 +245,8 @@
           </div>
         </div>
       </v-modal>
-      <router-view/>
       <transfer-modal :show-modal.sync="showModal" @click="hideModal"/>
-    </div>
+    
   </div>
 </template>
 <script>
@@ -299,7 +297,7 @@ export default {
         unlocking: 0,
         locked: 0
       },
-      one: 1,
+      content: 'assets', 
       currencyList: [
         {
           name: 'CNY',
@@ -454,12 +452,12 @@ export default {
     // this.$nextTick(console.log(this.header))
   },
   methods: {
-    dianji (res) {
-      this.one = res
-    },
-    dianjs (res) {
-      this.one = res
-    },
+    // dianji (res) {
+    //   this.one = res
+    // },
+    // dianjs (res) {
+    //   this.one = res
+    // },
     async nodeBuy() {
       //  const confirm = await utils.confirm(this, { 
       //   customClass: "ix-message-box-wrapper", 
