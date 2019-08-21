@@ -22,23 +22,24 @@
         name="anchor"/>{{ $t('mining') }}</router-link>-->
         <!-- <span @click="showLockModal = true" style="font-size: 14px;"  class="c-mine pointer mr-30 dib"><a >{{ $t('locked') }}</a></span>
         <span @click="showUnlockModal = true" style="font-size: 14px;"  class="c-mine pointer mr-30 dib"><a>{{ $t('unlock') }}</a></span> -->
-        <span
-          style="margin-right: 8px;"
-          @click="content = 'assets'" 
-          class="fund-history"
-          :class="{'fund-historc' : content == 'assets'}"
-        >{{ $t('otc_otutcol_17') }}</span>
-
-        <span @click="content = 'history'">
+        <span class="mr-8"  >    
           <router-link 
-            class="fund-history"
-            :class="{'fund-historc' : content == 'history'}"
+              class="fund-history"
+              :class="{'fund-historc' : !showHistory}" 
+              :to="{name:'myAssets'}">
+            {{ $t('otc_otutcol_17') }}</router-link>
+        </span>
+
+        <span >
+          <router-link 
+            class="fund-history" 
+            :class="{'fund-historc' : showHistory}"
             :to="{name:'assetsHistory', params: {from: 'deposit'}}"
           >{{ $t('capital_record') }}</router-link>
         </span>
       </div>
     </div> 
-    <div v-if="content == 'assets'" class="my-fund-content">
+    <div v-if="!showHistory" class="my-fund-content">
       <div class="information">
         <icon name='information' />
         <span >{{$t('otc_otutcol_16')}}        </span>
@@ -76,40 +77,7 @@
           :label="hd.title">
           <template slot-scope="scope">
             <span v-if="hd.key === 'currency'">
-              <icon :name="scope.row.currency"/>
-              <!-- <i
-                v-if="scope.row[hd.key] === 'ITD'"
-                class="airdrop"
-                v-tooltip.top-start="{html: true, content: $t('idt_tips'), classes: 'assets'}"
-              >
-                {{ scope.row[hd.key] }}
-                <icon class="question" name="question-n"/>
-              </i> -->
-
-              <!-- <i
-                v-else-if="scope.row[hd.key] === 'DFD'"
-                class="airdrop"
-                v-tooltip.top-start="{html: true, content: $t('dfd_tips'), classes: 'assets'}"
-              >
-                {{ scope.row[hd.key] }}
-                <icon class="question" name="question-n"/>
-              </i> -->
-              <!-- <i
-                v-else-if="scope.row[hd.key] === 'NEWOS'"
-                class="airdrop"
-                v-tooltip.top-start="{html: true, content: $t('newos_tips'), classes: 'assets'}"
-              >
-                {{ scope.row[hd.key] }}
-                <icon class="question" name="question-n"/>
-              </i> -->
-              <!-- <i
-                v-else-if="scope.row[hd.key] === 'BNL'"
-                class="airdrop"
-                v-tooltip.top-start="{html: true, content: $t('bnl_tips'), classes: 'assets'}"
-              >
-                {{ scope.row[hd.key] }}
-                <icon class="question" name="question-n"/>
-              </i> -->
+              <icon :name="scope.row.currency"/> 
               <i>{{ scope.row[hd.key] }}</i>
             </span>
             <span v-else-if="hd.key==='estValue'">{{ scope.row[hd.key] || 0 | fixed(unit.scale) }}</span>
@@ -170,7 +138,7 @@
         </el-table-column>
       </el-table>
     </div> 
-    <div v-if="content == 'history'">
+    <div v-if="showHistory">
       <router-view/>
     </div>
       <v-modal :open.sync="showLockModal">
@@ -354,7 +322,7 @@ export default {
       return list
     },
     showHistory () {
-      return this.$route.name === 'history';
+      return this.$route.name === 'assetsHistory';
     },
     total () {
       let sum = this.$big(0)
@@ -449,6 +417,7 @@ export default {
     service.getOrderList().then((res) => {
         this.is_nodes = res.data.is_nodes
     })
+    console.log(this.$router.name)
     // this.$nextTick(console.log(this.header))
   },
   methods: {
@@ -703,10 +672,9 @@ export default {
       this.getAccountBalanceList()
     }
   },
-  watch: {
-    valueScale () {
-      this.getAccountBalanceList()
-    }
+  async beforeRouteEnter(to, from, next) { 
+    console.log({to, from}) 
+    next();
   }
 }
 </script>

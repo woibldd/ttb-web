@@ -12,7 +12,7 @@
           <el-select v-model="selectCoin"
             :placeholder="$t('please_choose')"
             class="max-input"
-            filterable="true"
+            :filterable="true"
             @change="changeCoin"
           >
             <el-option

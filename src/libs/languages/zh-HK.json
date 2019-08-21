@@ -2028,12 +2028,12 @@
     "order_apply_message_c":"在%{price}價格%{side}%{amount}張%{currency}永續合約。", 
     "contract_buy_on_price_piece1":"在市價%{amount}張%{symbol}。",
     "invite_kyc_lv": "KYC認證",
-    "fund_history_airdrop": "空投奖励",
-    "fund_deposit_tip_contract": "合约地址为：%{contract}，请核对后操作",
-    "fund_trading_bill": "币币账单",
+    "fund_history_airdrop": "空投獎勵",
+    "fund_deposit_tip_contract": "合約地址為：%{contract}，請核對後操作",
+    "fund_trading_bill": "幣幣帳單",
     "otc_suspend_all_tips" :"當您不線上或不方便操作交易時，點擊“全部暫停”；可將委託單從清單中隱藏；點擊“全部開始”訂單恢復正常",
     "otc_order_default_tips": "提示：1.請使用實名認證付款方式2.請按訂單金額付款3.付款時無需備註",
-    "app_download_tips": "温馨提示：APP下载，建议iOS手机系统版本10.0以上；Android手机系统版本7.0以上",
+    "app_download_tips": "溫馨提示：APP下載，建議IOS手機系統版本10.0以上；Android手機系統版本7.0以上",
     "otc_quantity": "數量"
 
 }
