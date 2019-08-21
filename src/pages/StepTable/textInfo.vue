@@ -240,7 +240,7 @@
                 <span>{{ $t('otc_trans_idjg') }}({{ textDetail.currency_type }})</span><em style="color: #FDA22D">{{ textDetail.price || '--' }}</em>
               </dd>
               <dd>
-                <span>{{ $t('otc_trans_idsl') }}</span><em>{{ textDetail.amount || '--' }}</em>
+                <span>{{ $t('otc_amount', {currency: textDetail.currency }) }}</span><em>{{ textDetail.amount || '--' }}</em>
               </dd>
               <dd>
                 <span>{{ $t('otc_ziurec_19') }}({{ textDetail.currency_type }})</span><em>{{ textDetail.total || '--' }}</em>
