@@ -55,7 +55,7 @@ export default {
       if (!!this.symbolInfo) {
         return this.symbolInfo.amount_scale || 6
       }
-      return 2
+      return 6
     },
     isLogin () {
       return this.state.userInfo !== null
