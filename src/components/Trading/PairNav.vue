@@ -1,7 +1,7 @@
 <template>
   <div
-    class="ix-pannel"
-    :class="{loading: loading}">
+    :class="{loading: loading}"
+    class="ix-pannel">
     <div class="ix-header">
       {{ $t('pairnav_title') }}
       <div class="input-wrap">
@@ -9,25 +9,25 @@
           <icon name="search"/>
         </span>
         <input
-          type="text"
           ref="input"
-          class="input search-input"
           :placeholder="$t('search')"
+          v-model="search"
+          type="text"
+          class="input search-input"
           @keydown.ctrl.prevent
-          @keydown.meta.prevent
-          v-model="search">
+          @keydown.meta.prevent>
       </div>
     </div>
     <div class="ix-pannel-body">
       <div
-        class="no-data"
-        v-if="errmsg">{{ $t(errmsg) }}</div>
+        v-if="errmsg"
+        class="no-data">{{ $t(errmsg) }}</div>
       <div
-        class="err"
-        v-if="!loading && err && !pairList.length">{{ err }}</div>
+        v-if="!loading && err && !pairList.length"
+        class="err">{{ err }}</div>
       <div
-        class="ix-pair-head tr"
-        v-show="sortedList.length">
+        v-show="sortedList.length"
+        class="ix-pair-head tr">
         <div
           class="th pair"
           @click="setSort('pair')">
@@ -58,30 +58,33 @@
         </div>
       </div>
       <ul
-        class="ul ix-pair-body tbody"
+        v-show="sortedList.length"
         :style="{height: height}"
-        v-show="sortedList.length">
+        class="ul ix-pair-body tbody">
         <li
-          class="tr"
           v-for="pair in sortedList"
           :class="{cur: pair.name === state.pro.pair}"
           :key="pair.id"
+          class="tr"
           @click="setPair(pair)">
-          <div class="td pair">{{ pair.product_name }}/{{ pair.currency_name }}</div>
-          <div class="td price">
-            <span v-if="pair.tick">{{ pair.tick.current | fixed(pair.price_scale) }}</span>
-            <span v-else>...</span>
-          </div>
-          <div
-            class="td delta"
-            :class="{'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}">
-            <span v-if="pair.tick">{{ (getDelta(pair.tick) > 0) ? '+' : '' }}{{ getDelta(pair.tick) }}%</span>
-            <span v-else>...</span>
-          </div>
-          <div class="td vol">
-            <span v-if="pair.tick">{{ pretty(pair.tick.volume_24h) }}</span>
-            <span v-else>...</span>
-          </div>
+          <template v-if="!pair.CUSTOM">
+            <div class="td pair">{{ pair.product_name }}/{{ pair.currency_name }}bbb</div>
+            <div class="td price">
+              <span v-if="pair.tick">{{ pair.tick.current | fixed(pair.price_scale) }}</span>
+              <span v-else>...</span>
+            </div>
+            <div
+              :class="{'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}"
+              class="td delta">
+              <span v-if="pair.tick">{{ (getDelta(pair.tick) > 0) ? '+' : '' }}{{ getDelta(pair.tick) }}%</span>
+              <span v-else>...</span>
+            </div>
+            <div class="td vol">
+              <span v-if="pair.tick">{{ pretty(pair.tick.volume_24h) }}</span>
+              <span v-else>...</span>
+            </div>
+          </template>
+          <p v-if="pair.CUSTOM" v-cloak class="custom-title">{{ pair.type === '2' ? $t('pair_list_new') : 'ST区' }}aaa</p>
         </li>
       </ul>
     </div>
@@ -96,26 +99,37 @@ import tickTableMixin from '@/mixins/tick-table'
 
 export default {
   name: 'PairNav',
-  mixins: [tickTableMixin],
   components: {
     Sort,
     CollectStar
   },
+  mixins: [tickTableMixin],
   props: {
     initHeight: {
       type: Number,
       default: 0
     }
   },
-  data () {
+  data() {
     return {
       bodyHeight: 0,
       isMac: /Macintosh/.test(navigator.userAgent)
     }
   },
+  computed: {
+    hotKey() {
+      return this.isMac ? ' (Cmd+F)' : ' (Ctrl+F)'
+    },
+    height() {
+      if (this.initHeight) {
+        return `${this.initHeight - 80}px`
+      }
+      return this.bodyHeight
+    }
+  },
   watch: {
     'state.pro.currency_name': {
-      handler (currency) {
+      handler(currency) {
         if (currency && !this.local.proOnFav) {
           this.setTab(currency)
         }
@@ -126,19 +140,17 @@ export default {
       console.log(this.pairList)
     }
   },
-  computed: {
-    hotKey () {
-      return this.isMac ? ' (Cmd+F)' : ' (Ctrl+F)'
-    },
-    height () {
-      if (this.initHeight) {
-        return `${this.initHeight - 80}px`
-      }
-      return this.bodyHeight
-    }
+  destroyed() {
+    this.$eh.$off('app:resize', this.onresize)
+    this.$eh.$off('protrade:layout:init', this.layoutInit)
+    this.key.unbind(this.isMac ? '⌘+f' : 'ctrl+f')
+  },
+  async created() {
+    this.$eh.$on('protrade:layout:init', this.layoutInit)
+    this.bindHotKey()
   },
   methods: {
-    setPair (pair) { 
+    setPair(pair) {
       console.log(pair.name)
       this.$router.replace({
         name: 'trading',
@@ -147,7 +159,7 @@ export default {
         }
       })
     },
-    pretty (num) {
+    pretty(num) {
       num = this.$big(num || 0)
       if (num < 100) {
         return num.toFixed(2)
@@ -166,37 +178,28 @@ export default {
       }
       return num.div(1e9).toFixed(0) + ' B'
     },
-    layoutInit () {
+    layoutInit() {
       this.onresize()
       this.$eh.$on('app:resize', this.onresize)
     },
-    onresize () {
+    onresize() {
       this.bodyHeight = this.container.height - 88 + 'px'
     },
-    async bindHotKey () {
+    async bindHotKey() {
       this.key = await utils.getExtModule('key')
       this.key((this.isMac ? '⌘+f' : 'ctrl+f'), () => {
         this.$refs.input.focus()
         return false
       })
     }
-  },
-  destroyed () {
-    this.$eh.$off('app:resize', this.onresize)
-    this.$eh.$off('protrade:layout:init', this.layoutInit)
-    this.key.unbind(this.isMac ? '⌘+f' : 'ctrl+f')
-  },
-  async created () {
-    this.$eh.$on('protrade:layout:init', this.layoutInit)
-    this.bindHotKey()
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
-
-
+.custom-title{
+  color: #778694
+}
 .ix-header {
   height: 32px;
   line-height: 32px;

@@ -2086,6 +2086,7 @@
 "tj_cg": "거래성공",
 "zd_xe": "구매량의 최소한도100",
 "gm_sl": "구매량 최대한도50000",
+"pair_list_ST": "ST구역",
  
 "deposit_state_error": "오류",
 "order_apply_failed": "위탁제출실패",
