@@ -127,3 +127,18 @@
 .el-date-range-picker {
   width:460px;
 }
+
+
+.el-dropdown-menu {
+    background-color:red;
+    .el-dropdown-menu__item {
+      background-color:red;
+      .my-fund-operate {
+        background-color:red;
+        color:#6F6F70;
+        a {
+          color: #6F6F70;
+        }
+      }
+    }
+  }
