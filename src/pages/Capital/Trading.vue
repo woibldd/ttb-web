@@ -38,14 +38,20 @@
       <div class="title__right"> 
       </div>
     </div>
-    <div class="gz-wrapper clearfix">
-      <span>{{$t('otc_otutcol_14')}}</span>
-      <h1>
-        <icon :name="unit.name+'-unit'" /> {{total | fixed(unit.scale)}}</h1>
+    <div class="clearfix"> 
+      <div class="gz-wrapper clearfix">
+        <span>{{$t('otc_otutcol_14')}}</span>
+        <h1>
+          <icon :name="unit.name+'-unit'" /> {{total | fixed(unit.scale)}}</h1> 
+      </div>
+      <!-- <div class="bill">
+        <router-link 
+          :to="'/myorder-new/pairs'"
+          class="my-fund-operate">{{ $t('fund_trading_bill') }}</router-link>
+      </div> -->
     </div>
     <div 
-      class="my-fund-content"> 
-
+      class="my-fund-content">  
       <el-table :empty-text=" $t('no_data') "
                 :data="tableData"
                 class="fund-coin-pool">

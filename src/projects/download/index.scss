@@ -135,3 +135,16 @@
     height: rem(40);
     margin-right: rem(19);
 }
+.footer {
+  position: absolute;
+  width: 100%;
+  bottom: 100px;
+  left: 0;
+  height: 100px;
+  .tips { 
+    width:80%; 
+    text-align:center; 
+    margin: 0 auto;
+    color: #ccc; 
+  }
+}

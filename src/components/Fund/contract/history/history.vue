@@ -6,7 +6,7 @@
         :class="[tabName==='active' && 'select']"
         @click="filter('active')">
         {{ $t('order_active') }}
-      </div> -->
+      </div> --> 
       <div
         class="filter-item c-primary"
         :class="[tabName==='history' && 'select']"
@@ -18,8 +18,7 @@
         :class="[tabName==='executed' && 'select']"
         @click="filter('executed')">
         {{ $t('order_history') }}
-      </div>
-       
+      </div> 
       <div class="currency-row" >
         <div class="c-999 mr-13">
           {{ $t('contract') }}
@@ -36,7 +35,7 @@
             :value="item.currency"/>
         </el-select>
       </div>
-    </div>
+    </div> 
     <div
       class="table-wrapper"
       v-loading="isLoading">

@@ -142,7 +142,7 @@ if (release || !window.grayline) {
 } else {
   new Vue({
     el: '#app',
-    components: {App: Upgrading},
+    components: { App: Upgrading },
     template: '<App/>'
   })
 }

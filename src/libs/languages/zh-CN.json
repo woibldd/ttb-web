@@ -1820,6 +1820,7 @@
   "otc_tips_failed_a": "发布失败：",
   "input_all": "全部",
   "otc_amount_money": "金额",
+  "otc_quantity": "数量",
   "otc_purchase_amount": "购买金额",
   "otc_confirm_buy": "确定购买",
   "otc_cancel_order": "取消订单",
@@ -2022,7 +2023,6 @@
     "otc_otutcol_16": "充币成功后，若想进行”币币交易/法币交易/合约交易，需操作“资金划转”，将“资金账户”的币转移到该账户上。",
     "otc_otutcol_17": "个人资产",
     "otc_otutcol_19": "你确定要申诉？",
-    "otc_otutcol_20": "申诉成功，请等待客服处理",
 
 
     "order_th_typecsef1": "输入金额不合法",
@@ -2188,8 +2188,11 @@
     "order_apply_message_c":"在%{price}价格%{side}%{amount}张%{currency}永续合约。",
     "contract_buy_on_price_piece1":"在市价%{amount}张%{symbol}。",
     "invite_kyc_lv": "KYC认证",
-    "link_name":"链名称",
-    
+    "otc_otutcol_20": "申诉成功，请等待客服处理",  
+    "link_name":"链名称", 
+    "otc_order_default_tips": "提示：1.请使用实名认证付款方式 2.请按订单金额付款 3.付款时无需备注",
+    "app_download_tips": "温馨提示：APP下载，建议iOS手机系统版本10.0以上；Android手机系统版本7.0以上",
+    "otc_suspend_all_tips" :"当您不在线或不方便操作交易时，点击“全部暂停”；可将委托单从列表中隐藏；点击“全部开始”订单恢复正常",
     "fund_assets_subscribed": "已认购",
     "fund_history_inviter_userid": "来源UID",
     "fund_history_star_lv": "用户星级",
@@ -2197,7 +2200,8 @@
     "fund_history_symbol":"交易产品", 
     "fund_history_release_time":"发放时间",
     "fund_history_airdrop": "空投奖励",
-    "fund_deposit_tip_contract": "合约地址为：%{contract}，请核对后再进行充币行为"
+    "fund_deposit_tip_contract": "合约地址为：%{contract}，请核对后操作",
+    "fund_trading_bill": "币币账单"
     
   }
 

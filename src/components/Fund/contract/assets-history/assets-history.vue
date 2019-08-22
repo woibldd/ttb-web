@@ -1,5 +1,5 @@
 <template>
-  <div class="contract-history-container my-fund-content pt-40 f14">
+  <div class="contract-history-container my-fund-content pt-40 f14"> 
     <div class="filter-list mb-39">
       <!-- 账户 -->
       <!-- <div class="currency-row mr-40">
@@ -41,7 +41,7 @@
           start-placeholder="开始日期"
           end-placeholder="结束日期"/>
       </div> -->
-    </div>
+    </div> 
     <div class="table-wrapper">
       <table>
         <tr class="table__tr header c-999">

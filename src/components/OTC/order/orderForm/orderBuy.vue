@@ -235,6 +235,7 @@
                         class="coadawm"
                         :max="130"
                         :min="70"
+                        :placeholder="side === 2 ? $t('otc_order_default_tips') : ''"
                         maxlength="30"
                         type="textarea"
                         :autosize="{ minRows: 2, maxRows: 4}"
@@ -545,6 +546,11 @@ export default {
         this.order.amount = this.amount
         this.order.float_rate = Number(this.$big(this.float_rate).mul(0.01))
         this.order.currency_type = this.legal_currency
+
+        //发布卖单是，给默认提示
+        if (this.side === 2 && !this.order.remark) {
+          this.order.remark  = this.$t('otc_order_default_tips')
+        }
 
         console.log({total: this.total})
         service.createOtcOrder(this.order).then(res => {

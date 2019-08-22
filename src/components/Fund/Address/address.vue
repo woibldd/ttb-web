@@ -93,8 +93,7 @@
       </div>
       <el-table
         v-loading="loading"
-        :data="addressList"
-        height="400"
+        :data="addressList" 
         class="fund-coin-pool address__table">
         <el-table-column
           v-for="(hd, idx) in header"

@@ -41,6 +41,7 @@
                 :disabled="!currencyAvailable"
                 @input="onSliderDragEnd($event, 'buy')"
                 height="4"
+                width="5"
                 :dot-size="14"
                 :lazy="true"
                 :min="0"
@@ -55,6 +56,11 @@
                   <span
                     :class="['custom-label', { active }]"
                     v-if="label % 25 === 0"/>
+                  <span
+                    v-if="label % 25 === 0"
+                    class="vue-slider-piecewise-label" >
+                    {{ label }} 
+                  </span>
                 </template>
                 <template
                   slot="tooltip"
@@ -137,6 +143,11 @@
                   <span
                     :class="['custom-label', { active }]"
                     v-if="label % 25 === 0"/>
+                  <span
+                    v-if="label % 25 === 0"
+                    class="vue-slider-piecewise-label" >
+                    {{ label }} 
+                  </span>
                 </template>
                 <template
                   slot="tooltip"
@@ -545,7 +556,7 @@ export default {
 }
 .custom-tooltip {
   position: absolute;
-  bottom: -44px;
+  bottom: -39px;
   left: -7px;
   color: #A5B4C5;
 }

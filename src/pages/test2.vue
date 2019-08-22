@@ -3,8 +3,8 @@
     class="swiper-box"
     rel="swiperBox">
     <swiper
-      :options="swiperOption"
-      ref="mySwiper">
+      ref="mySwiper"
+      :options="swiperOption">
       <!-- 轮播项 -->
       <swiper-slide>I'm Slide 1</swiper-slide>
       <swiper-slide>I'm Slide 2</swiper-slide>
@@ -14,8 +14,8 @@
       <swiper-slide>I'm Slide 6</swiper-slide>
       <swiper-slide>I'm Slide 7</swiper-slide>
       <div
-        class="swiper-pagination"
-        slot="pagination"/>
+        slot="pagination"
+        class="swiper-pagination"/>
     </swiper>
     <div/>
   </div>
@@ -26,7 +26,14 @@ import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 export default {
-  data: function () {
+  components: {
+    swiper,
+    swiperSlide
+  },
+  props: {
+
+  },
+  data: function() {
     return {
       swiperOption: {
         pagination: {
@@ -37,16 +44,9 @@ export default {
       }
     }
   },
-  props: {
-
-  },
-  components: {
-    swiper,
-    swiperSlide
-  },
   // 定义这个sweiper对象
   computed: {
-    swiper: function () {
+    swiper: function() {
       return this.$refs.mySwiper.swiper
     }
   }

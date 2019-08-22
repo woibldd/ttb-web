@@ -102,7 +102,7 @@ $high-color: #333;
         padding: 0 10px;
         color: #B1B1B1;
         font-size: $font-middle;
-        margin-right: 12px;
+        // margin-right: 12px;
         -webkit-transition: all .3s ease-in;
         -moz-transition: all .3s ease-in;
         -ms-transition: all .3s ease-in;
@@ -117,6 +117,10 @@ $high-color: #333;
       .selected {
         background: $primary;
         color: #fff
+      }
+      .iconfont {
+        font-size: 14px;
+        vertical-align: middle;
       }
     }
     .nav-list {

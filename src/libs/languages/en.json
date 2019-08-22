@@ -1833,7 +1833,7 @@
 "otc_currency": "Currency",
 "otc_price": "Unit Price (%{legal_currency})",
 "otc_total": "Total amount (%{legal_currency})",
-"otc_amount": "Available (%{currency})",
+"otc_amount": "Quantity (%{currency})",
 "otc_transaction_info": "Order Information",
 "otc_trans_id": "Order Number",
 "otc_create_time": "Order time",
@@ -2204,9 +2204,7 @@
 "withdraw_state_broadcast_send":"Broadcast Sent",
 "withdraw_state_broadcast_success":"Broadcast completed",
 "withdraw_state_broadcast_failed":"Broadcast failed",
-
-"contract-cancel-all-title": "撤销委托单",
-"contract-cancel-all-content": "是否撤销全部委托单？",
+ 
 "otcState_1": "Pending payment",
 "otcState_2": "Waiting for release",
 "otcState_3": "Completed",
@@ -2269,8 +2267,14 @@
 "fund_history_star_lv": "User star",
 "fund_history_transaction_type": "Trading type", 
 "fund_history_symbol":"Trading product", 
-"fund_history_release_time":"release time", 
-"fund_history_airdrop": "空投奖励",
-"fund_deposit_tip_contract": "合约地址为：%{contract}，请核对后再进行充币行为"
-
+"fund_history_release_time":"release time",
+"otc_order_default_tips": "Tips: 1. Please use real name authentication the payment method  2. Please pay according to order amount  3. No remarks are required for payment.", 
+"otc_suspend_all_tips" :"When you are not online or inconvenient to operate a transaction, click \"Pause All\"; to hide the order from the list, click \"Start All\" to resume to normal order",
+"otc_quantity": "Quantity", 
+"contract-cancel-all-title": "Cancel order",
+"contract-cancel-all-content": "Cancel all orders?",
+"fund_history_airdrop": "Airdrop reward",
+"fund_deposit_tip_contract": "Contract address is: %{contract},check before operation",
+"fund_trading_bill": "exchange bill",
+"app_download_tips": "Tips: APP download, IOS mobile version 10.0 or above and Android phone version 7.0 above are recommended"
 }

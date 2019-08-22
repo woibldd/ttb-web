@@ -93,7 +93,7 @@
             <el-input :placeholder="active=='0' ? $t('a_price_i') : $t('a_account_i')" v-model="ipt" style="width: 98%">
               <el-select slot="prepend" v-model="active" :placeholder="$t('please_choose')" style="width: 120px" @change="change">
                 <el-option :label="$t('a_1')" value="0"/>
-                <el-option :label="$t('a_1')" value="1"/>
+                <el-option :label="$t('a_2')" value="1"/>
               </el-select>
             </el-input>
             <div

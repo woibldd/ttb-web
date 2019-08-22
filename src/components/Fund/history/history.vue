@@ -5,8 +5,7 @@
         <div class="left">
           <div class="total__label">{{ $t('withdraw_avlb') }}</div>
           <div class="total__coin">{{ total | fixed(2) }} {{ unit }} </div>
-        </div>
-        
+        </div> 
         <el-radio-group  :empty-text="$t('no_data')"
           @change="changeType"
           class="total__switch"
@@ -451,8 +450,10 @@ export default {
           //   return r
           // }) 
           this.tableData = res.data
-          if(this.type === 'all' || from === 'reward' || this.type === 'return') { 
+          if(this.type === 'all' ||  this.type === 'return') { 
             this.tableData = res.data.data
+          }  else if (from === 'reward') {
+            this.tableData = res.data.data.filter(dr => dr.name.indexOf('持仓分红') === -1) //IXX没有持仓分红
           }
           this.loading = false
           if (this.type === 'all' || from === 'reward') {
@@ -467,7 +468,7 @@ export default {
                 text=this.$t('contract_account');
                 break;
               case 3:
-           text=this.$t('day_liquidation');
+                text=this.$t('day_liquidation');
                 break;
               }
               switch  (this.tableData[i].status ) {
@@ -602,6 +603,10 @@ export default {
       }
     }
 
+  },
+  async beforeRouteEnter(to, from, next) { 
+    console.log({to, from})
+    next();
   },
   watch: {
     'state.locale' (v) {

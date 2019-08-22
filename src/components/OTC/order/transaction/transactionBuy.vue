@@ -164,7 +164,7 @@
         <ul>
           <li>
             <div class="label">
-              {{ $t('amount') }}
+              {{ $t('otc_quantity') }}
               <span class="red">*</span>
             </div>
             <div class="content">
