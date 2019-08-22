@@ -606,7 +606,32 @@ export default {
       ).then(res => {
         if (res.code === 0) {
           if (res.data.data.length > 0) {
-            Vue.set(this.tab[0], 'count', res.data.data.length)
+
+          Vue.set(this.tab[0], 'count', res.data.data.length)
+            if (this.active === 0) { 
+            that.data = rec.data.data
+            that.data.forEach((item) => {
+              //state-1-等待对方付款 2-等待放币 3-已完成 4-买家取消 5-卖家取消 6买家超时取消 7卖家超时放币
+              if (item.state === 1) {
+                Vue.set(item, 'time', item.create_time + 15 * 60 * 1000)
+              } else if (item.state === 2) {
+                //申诉取消后
+                if (item.appeal_time > 0) {
+                  Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
+                }
+                else {
+                  Vue.set(item, 'time', item.pay_time + 15 * 60 * 1000) 
+                }
+              } else if (item.state === 7 ) {
+                if (item.appeal_time > 0) {
+                  Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
+                }
+                else {
+                  Vue.set(item, 'time', item.pay_time + 12 * 60 * 60 * 1000 + 15 * 60 * 1000)
+                }
+              } 
+            })
+          } 
           }
         }
       })
@@ -922,12 +947,24 @@ export default {
             const noCount = []
             const bankData = []
             that.data.forEach((item) => {
+             //state-1-等待对方付款 2-等待放币 3-已完成 4-买家取消 5-卖家取消 6买家超时取消 7卖家超时放币
               if (item.state === 1) {
                 Vue.set(item, 'time', item.create_time + 15 * 60 * 1000)
               } else if (item.state === 2) {
-                Vue.set(item, 'time', item.pay_time + 12 * 60 * 60 * 1000)
-              } else if (item.state === 7 && item.side === 1) {
-                Vue.set(item, 'time', item.pay_time + 12 * 60 * 60 * 1000)
+                //申诉取消后
+                if (item.appeal_time > 0) {
+                  Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
+                }
+                else {
+                  Vue.set(item, 'time', item.pay_time + 15 * 60 * 1000) 
+                }
+              } else if (item.state === 7 ) {
+                 if (item.appeal_time > 0) {
+                  Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
+                }
+                else {
+                  Vue.set(item, 'time', item.pay_time + 12 * 60 * 60 * 1000 + 15 * 60 * 1000)
+                }
               }
               if (item.otc_collection) {
                 Vue.set(item, 'otc_type', 1)
