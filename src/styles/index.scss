@@ -349,3 +349,11 @@ $primary-color: #01CED1;
   border-color: $primary!important;
   background-color: $primary!important;
 }
+
+.el-dropdown-menu { 
+  .el-dropdown-menu__item { 
+    .my-fund-operate { 
+      color:#6F6F70; 
+    }
+  }
+}

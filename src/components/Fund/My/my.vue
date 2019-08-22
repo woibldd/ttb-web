@@ -124,7 +124,7 @@
               :to="'/fund/withdraw/'+scope.row.currency"
               class="my-fund-operate"
             >{{ $t('withdraw') }}</router-link>
-            <router-link
+            <!-- <router-link
               v-if="scope.row.pairs"
               :to="{
                 name: 'trading',
@@ -133,7 +133,26 @@
                 }
               }"
               class="my-fund-operate"
-            >{{ $t('asset_trading') }}</router-link>
+            >{{ $t('asset_trading') }}</router-link> -->
+            <el-dropdown size="small">
+              <el-button type="label">
+                {{ $t('asset_trading') }}
+              </el-button>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item v-for="(pair,idx) in scope.row.pairs" :key="idx">
+                  <router-link 
+                    :to="{
+                      name: 'trading',
+                      params: {
+                        pair: pair.name
+                      }
+                    }"
+                    class="my-fund-operate"
+                  >{{ pair.product + '/' + pair.currency }}</router-link>
+                </el-dropdown-item>
+                
+              </el-dropdown-menu>
+            </el-dropdown>
           </template>
         </el-table-column>
       </el-table>
@@ -288,6 +307,7 @@ export default {
       search: "",
       hideSmall: false,
       nodePrice: 1000,
+      pairList: []
     };
   },
   components: {
@@ -407,13 +427,21 @@ export default {
   },
   async created () {
     this.unit = this.currencyList[0]
+    //获取汇率
     let res = await service.getAllRate()
     if (!res.code && !!res.data) {
       this.rates = res.data
     }
+    console.log('234234')
+    //获取币对列表
+    let result =  await service.getPairList()
+    if (!result.code && !!result.data) {
+      this.pairList = result.data.items
+    }
     await this.getMine()
     this.getAccountBalanceList()
     this.getIxBalance()
+
     service.getOrderList().then((res) => {
         this.is_nodes = res.data.is_nodes
     })
@@ -615,7 +643,8 @@ export default {
           item.available = this.$big(item.available)
             .round(8, this.C.ROUND_DOWN)
             .toString()
-          item.pairs = ExchangePairs[item.currency] || 'BTC_USDT';
+          // item.pairs = ExchangePairs[item.currency] || 'BTC_USDT';
+          item.pairs = this.pairList.filter(t => t.product === item.currency)
           return item
         })
       }) 
@@ -670,7 +699,7 @@ export default {
     },
     currencyChange (e) {
       this.getAccountBalanceList()
-    }
+    }, 
   },
   async beforeRouteEnter(to, from, next) { 
     console.log({to, from}) 

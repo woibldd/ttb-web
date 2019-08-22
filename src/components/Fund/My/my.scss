@@ -214,6 +214,22 @@
       font-size: 16px;
     }
   }
+
+  
+  .el-dropdown {
+    .el-button--label {
+      border: none;
+      color: $primary;
+      &:hover {
+        background-color: #F5F7FA;
+      }
+      a {
+        color: #6F6F70;
+      }
+      
+    }
+  }
+  
 }
 
 
