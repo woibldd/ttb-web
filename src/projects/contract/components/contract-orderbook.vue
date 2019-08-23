@@ -521,10 +521,13 @@ export default {
       this.$router.push({name: 'TradeIndex', params: {pair: this.state.ct.pair}})
     },
     handleScroll(e){
-      clearTimeout(this.timer)
-      this.timer = setTimeout(()=>{
-        this.hasBtnReturnDish = e.target.scrollTop > 380 || e.target.scrollTop<100
-      },100)
+      // clearTimeout(this.timer)
+      // this.timer = setTimeout(()=>{
+      //   this.hasBtnReturnDish = e.target.scrollTop > 380 || e.target.scrollTop<100
+      // },100)
+      this.$nextTick(() => { 
+        this.hasBtnReturnDish = e.target.scrollTop > 390 || e.target.scrollTop < 100
+      })
     },
     returnToDefault(){
       const singleSideLength = 7
