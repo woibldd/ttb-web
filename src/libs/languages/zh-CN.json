@@ -1889,7 +1889,7 @@
   "otc_order_confirm_buy": "发布购买",
   "otc_order_confirm_sell": "发布出售",
   "otc_view_userinfo": "查看",
-  "otc_total_transaction_volume": "当前站点交易总额(USD)",
+  "otc_total_transaction_volume": "当前站点交易总额(CNY)",
   "otc_total_arder": "总单数",
   "otc_orders_rate": "完成率",
   "otc_legal_currency": "法币",
