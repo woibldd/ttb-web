@@ -373,16 +373,27 @@ export default {
         alipay_account: '',
         weChat_account: '',
         collection_img: '',
-        currency: ''
+        currency: 'CNY'
       }
-      this.$refs['ruleForm'].resetFields()
+      // this.$refs['ruleForm'].resetFields()
     },
     bankHandle (code) {
-      let codeName = code
-      let currency = this.ruleForm.currency 
-      this.$refs['ruleForm'].resetFields()
-      this.ruleForm.payment_type = codeName
-      this.ruleForm.currency = currency
+      // let codeName = code
+      // let currency = this.ruleForm.currency 
+      // this.$refs['ruleForm'].resetFields()
+      // this.ruleForm.payment_type = codeName
+      // this.ruleForm.currency = currency
+      this.ruleForm = {
+        payment_type: code,
+        name: '',
+        deposit_bank: '',
+        sub_branch: '',
+        card_number: '',
+        alipay_account: '',
+        weChat_account: '',
+        collection_img: '',
+        currency: this.ruleForm.currency 
+      }
     },
     uploadStart ({type}) {
     },

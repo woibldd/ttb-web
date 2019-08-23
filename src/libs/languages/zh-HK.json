@@ -1800,7 +1800,7 @@
   "otc_order_confirm_buy": "發布購買",
   "otc_order_confirm_sell": "發佈出售",
   "otc_view_userinfo": "查看",
-  "otc_total_transaction_volume": "當前站點交易總額(%{currency})",
+  "otc_total_transaction_volume": "當前站點交易總額(USD)",
   "otc_total_arder": "總單數",
   "otc_orders_rate": "完成率",
   "otc_legal_currency": "法幣",

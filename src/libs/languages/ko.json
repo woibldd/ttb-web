@@ -1855,7 +1855,7 @@
     "otc_order_confirm_buy": "구매를 발표하다",
     "otc_order_confirm_sell": "발포 판매",
     "otc_view_userinfo": "조사하다",
-    "otc_total_transaction_volume": "현재 사이트 거래 총액(%{currency})",
+    "otc_total_transaction_volume": "현재 사이트 거래 총액(USD)",
     "otc_total_arder": "총 홀수",
     "otc_orders_rate": "완성률",
     "otc_legal_currency": "코인",

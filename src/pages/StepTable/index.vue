@@ -986,14 +986,14 @@ export default {
                     bankData.push({
                       id: child.collection_id,
                       realName: child.name,
-                      name: '支付宝' + '/' + child.alipay_account,
+                      name: this.$t('payment_namezfb') + '/' + child.alipay_account,
                       img: child.collection_img
                     })
                   } else if (child.payment_type === 3) {
                     bankData.push({
                       id: child.collection_id,
                       realName: child.name,
-                      name: '微信' + '/' + child.we_chat_account,
+                      name: this.$t('payment_weChat_adasunt') + '/' + child.we_chat_account,
                       img: child.collection_img
                     })
                   } else if (child.payment_type === 4) {
