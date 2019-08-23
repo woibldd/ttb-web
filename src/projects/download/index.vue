@@ -30,7 +30,7 @@
         <icon
           name="android"
           class="download__icon"/> {{ $t('download_android') }}
-      </div>
+      </div> 
       <div
         class="download__btn"
         @click="download('ios')">

@@ -194,8 +194,7 @@
           v-if="type!=='reward' && type !== 'internal' && type !== 'promoter'"
           align="right"
           width="200px"
-          :label="operate.title" >
-
+          :label="operate.title" > 
           <template slot-scope="scope">
             <div
               class="contact-item"
@@ -212,8 +211,9 @@
         </el-table-column>
       </el-table>
       <div class="history__footer pt-10">
-        <ix-pagination
+        <ix-pagination 
           :page.sync="page"
+          :isEnd="isEnd"
           :func="getPage"/>
       </div>
     </div>
@@ -251,6 +251,7 @@ export default {
       from: 'all',
       type: this.$route.params.from || 'deposit',
       page: 1,
+      size: 10, 
       unit: 'CNY',
       loading: true,
       hasInternal: false,
@@ -269,7 +270,7 @@ export default {
         1:"合约交易",
         2:"币币交易"
       },
-
+      isEnd: true
     }
   },
   computed: {
@@ -403,6 +404,7 @@ export default {
     },
     getFundHistory (from = 'deposit') {
       console.log(this.tableData)
+      this.isEnd = true
       this.loading = true
       let request = ''
       switch (from) {
@@ -441,6 +443,7 @@ export default {
          
         if (res.code || res.data.length === 0) {
           this.loading = false
+          this.total = 0
         } 
         else {
           // res.data = res.data.map(r => {
@@ -451,9 +454,21 @@ export default {
           // }) 
           this.tableData = res.data
           if(this.type === 'all' ||  this.type === 'return') { 
-            this.tableData = res.data.data
+            this.tableData = res.data.data  
+            let p = res.data
+            if (p.total > p.page * p.size) {
+              this.isEnd = false
+            }
           }  else if (from === 'reward') {
-            this.tableData = res.data.data.filter(dr => dr.name.indexOf('持仓分红') === -1) //IXX没有持仓分红
+            this.tableData = res.data.data.filter(dr => dr.name.indexOf('持仓分红') === -1) //IXX没有持仓分红 
+            let p = res.data
+            if (p.total > p.page * p.size) {
+              this.isEnd = false
+            }
+          }
+          else {
+            if (this.tableData.length === 10)
+              this.isEnd = false
           }
           this.loading = false
           if (this.type === 'all' || from === 'reward') {

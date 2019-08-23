@@ -499,7 +499,7 @@ const utils = {
     return navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1
   },
   isWeiXin() {
-    return navigator.userAgent.toLowerCase().match(/MicroMessenger/i) === 'micromessenger'
+    return navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger' 
   },
   /**
    * 脱敏
