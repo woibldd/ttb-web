@@ -166,7 +166,7 @@ export default {
       this.$eh.$emit('app:resize')
     }
     state.userInfo && service.getLoginHistory().then(res=>{
-      if(res.data && res.data.length === 1 )this.isFirstLogin = true
+      if(res.data && res.data.length === 1 )this.isFirstLogin = false
     })
   },
   methods: {
