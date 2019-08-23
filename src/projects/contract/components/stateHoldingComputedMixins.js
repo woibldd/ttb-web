@@ -198,9 +198,9 @@ export default {
         else {
           let maxLever = pairInfo.max_leverage || 100
           let roeMul = 2 
-          if (currency === 'BTCUSD') {
-            roeMul = 1
-          }
+          // if (currency === 'BTCUSD') {
+          //   roeMul = 1
+          // }
            
           holding.roe = unrealized
             .div(holding.value)

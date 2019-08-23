@@ -86,6 +86,7 @@ export const tradeMixins = {
         {
           label: this.$t('currency'),
           prop: 'symbol',
+          width: 120,
           renderHeader: (h, params) => {
             return h(STepSelect, {
               props: {
