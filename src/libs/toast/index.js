@@ -34,7 +34,8 @@ function showToast(obj, duration = 3000) {
         showWrap: true,
         showContent: true,
         display: true,
-        show:0
+        show:0,
+
       }
     }
   })
@@ -45,6 +46,8 @@ function showToast(obj, duration = 3000) {
   // 过了 duration 时间后隐藏
   setTimeout(() => {toastDom.show = '-340px'} ,duration)
   setTimeout(() => {toastDom.display = false} ,duration+300)
+  // setTimeout(() => { document.body.removeChild(toastDom.$el)} ,duration+3000)
+  
 }
 
 // 注册为全局组件的函数

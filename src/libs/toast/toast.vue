@@ -21,6 +21,7 @@
   border-top: 4px solid #f00;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  z-index: 99999999;
   &.red {
     background: #f6dddd;
     border-color: #f00;
