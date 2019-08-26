@@ -263,7 +263,7 @@ export default {
         let list = res.data
         if (list.length > 0) {
           this.banners = list.filter(b => b.slot === 1)
-          this.notices = list.filter(b => b.slot === 2)
+          this.notices = list.filter(b => b.slot === 4)
           if (this.notices.length > 1) {
             this.notices.splice(1)
           }

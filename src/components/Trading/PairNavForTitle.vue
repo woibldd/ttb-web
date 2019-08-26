@@ -59,7 +59,7 @@
                 <icon v-show="!pair.like" name="sc-w"/>
               </span>
               {{ pair.product_name }}/{{ pair.currency_name }}
-              <icon v-show="index < 3 && tabSelected==='new' " name="hot-red"/>
+              <icon v-show="index < 4 && tabSelected==='new' " name="hot-red"/>
             </div>
             <div class="td price">
               <span v-if="pair.tick">{{ pair.tick.current | fixed(pair.price_scale) }}</span>

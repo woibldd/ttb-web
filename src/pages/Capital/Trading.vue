@@ -63,7 +63,7 @@
           <template slot-scope="scope">
             <span v-if="hd.key === 'currency'">
               <icon :name="scope.row.currency"/>
-              <i v-if="scope.row[hd.key] === 'ITD'"
+              <!-- <i v-if="scope.row[hd.key] === 'ITD'"
                  class="airdrop"
                  v-tooltip.top-start='{html: true, content: $t("idt_tips"), classes: "assets"}'  >
                 {{scope.row[hd.key]}} <icon class='question' name='question-x' />
@@ -90,7 +90,8 @@
                  v-tooltip.top-start='{html: true, content: $t("bnl_tips"), classes: "assets"}'  >
                 {{scope.row[hd.key]}} <icon class='question' name='question-x' />
               </i>
-              <i v-else>{{scope.row[hd.key]}} </i>
+              <i v-else>{{scope.row[hd.key]}} </i> -->
+              <i>{{scope.row[hd.key]}} </i>
             </span> 
             <span v-else-if="hd.key === 'estValue'">{{ scope.row[hd.key] || 0 | fixed(unit.scale) }}</span>
             <!--  针对locking的判断,在百万usdt活动之后要删掉 -->
@@ -126,7 +127,7 @@
                   {{ $t('account_exchange') }}
               </a>
             </span>
-            <router-link
+            <!-- <router-link
               v-if="scope.row.pairs"
               :to="{
                 name: 'trading',
@@ -134,7 +135,25 @@
                   pair: scope.row.pairs
                 }
               }"
-              class="my-fund-operate">{{ $t('asset_trading') }}</router-link>
+              class="my-fund-operate">{{ $t('asset_trading') }}</router-link> -->
+              <el-dropdown size="small">
+                <el-button type="label">
+                  {{ $t('asset_trading') }}
+                </el-button>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item v-for="(pair,idx) in scope.row.pairs" :key="idx">
+                    <router-link 
+                      :to="{
+                        name: 'trading',
+                        params: {
+                          pair: pair.name
+                        }
+                      }"
+                      class="my-fund-operate"
+                    >{{ pair.product + '/' + pair.currency }}</router-link>
+                  </el-dropdown-item> 
+                </el-dropdown-menu>
+              </el-dropdown>
           </template>
         </el-table-column>
       </el-table>
@@ -293,6 +312,7 @@
         ],
         unit: {},
         rates: {},
+        pairList: [],
       }
     },
     components: {
@@ -375,6 +395,11 @@
       let res = await service.getAllRate() 
       if (!res.code && !!res.data) {
         this.rates = res.data;
+      }
+      //获取币对列表
+      let result =  await service.getPairList()
+      if (!result.code && !!result.data) {
+        this.pairList = result.data.items
       }
       await this.getMine()
       this.getAccountBalanceList()
@@ -513,7 +538,8 @@
             item.camount = this.$big(item.locking).plus(this.$big(item.available)).round(8, this.C.ROUND_DOWN).toString()
             item.estValue = this.getEstValue(item)
             item.available = this.$big(item.available).round(8, this.C.ROUND_DOWN).toString()
-            item.pairs = ExchangePairs[item.currency] || 'BTC_USDT'
+            // item.pairs = ExchangePairs[item.currency] || 'BTC_USDT'
+            item.pairs = this.pairList.filter(t => t.product === item.currency)
             return item
           })
         })

@@ -149,8 +149,7 @@
                     }"
                     class="my-fund-operate"
                   >{{ pair.product + '/' + pair.currency }}</router-link>
-                </el-dropdown-item>
-                
+                </el-dropdown-item> 
               </el-dropdown-menu>
             </el-dropdown>
           </template>

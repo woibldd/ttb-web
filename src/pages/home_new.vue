@@ -228,6 +228,7 @@ export default {
       notices: [],
       banner1: [],
       notices1: [],
+      newbanners:[],
       swiperOption: {
         direction: 'horizontal',
         loop: true,
@@ -280,9 +281,11 @@ export default {
         const list = res.data
         if (list.length > 0) {
           this.banners = list.filter(b => b.slot === 1)
-          this.notices = list.filter(b => b.slot === 2)
+          this.notices = list.filter(b => b.slot === 4)
           this.banner1 = list.filter(b => b.slot === 3)
-          this.notices1.push(this.notices[0])
+
+          this.newbanners = list.filter(b => b.slot === 2)
+          this.notices1.push(this.newbanners[0])
           if (this.notices.length > 3) {
             this.notices.splice(3)
           }

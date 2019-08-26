@@ -78,8 +78,7 @@ export default {
         let arr = []
         Object.keys(temGroup).forEach(key => {
           arr = arr.concat([{ CUSTOM: true, type: key }]).concat(temGroup[key])
-        })
-        console.log(arr)
+        }) 
 
         return arr
         // res = _.groupBy(res, 'type')

@@ -64,8 +64,8 @@
                   name="sc-w"/>
               </div>
               <div class="row__item percent13">
-                {{ pair.name | pairfix }}
-                <icon v-show="index < 3 && tabSelected==='new' " name="hot-red"/>
+                {{ pair.name | pairfix }} 
+                <icon v-show="index < 4 && tabSelected==='new' " name="hot-red"/>
               </div>
               <div class="row__item percent18_8 newest_price">
                 <span class="ml-10 inline-block c-999">{{ state.fiatMoneySymbol }}<fiat-money
@@ -79,8 +79,7 @@
                 class="row__item percent14_8 c-f24">
                 <p v-if="pair.tick">{{ (getDelta(pair.tick) > 0) ? '+' : '' }}{{ getDelta(pair.tick) }}%
                 </p>
-                <p v-else>...</p>
-
+                <p v-else>...</p> 
               </div>
               <div class="row__item percent14_8">
                 {{ pair.tick.lowest_24h | fixed(pair.price_scale) }}
