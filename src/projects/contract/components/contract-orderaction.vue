@@ -1952,7 +1952,7 @@ export default {
         // utils.success(this.$t("contract_order_success"));
         let side =''
         let data = res.data
-        data.side === 2 ? side = this.$t('order_side_buy') :side = this.$t('order_side_sell')
+        data.side === 1 ? side = this.$t('order_side_buy') :side = this.$t('order_side_sell')
  
         if(this.userSetting.submission){
           let content = this.$t('order_apply_message_c', {price: data.price, side, amount: data.amount, currency: data.symbol.replace('FUTURE_','').replace('USD','')  })

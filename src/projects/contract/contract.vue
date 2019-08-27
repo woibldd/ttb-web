@@ -358,7 +358,7 @@ export default {
           $this.$toast({ title: $this.$t('system_automatic_warehouse_closing'),
             body: $this.$t('successfully_body_text_reduce', { price: newOrder[i].price, amount: newOrder[i].amount }), color: 'red' })
         }
-  
+   
         if (newOrder[i].origin !== 2 & newOrder[i].origin !== 4) { 
           setTimeout(function() {
             let side = ''
