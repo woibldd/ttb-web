@@ -992,7 +992,7 @@ export default {
     costValueBuyNew() { 
       //  console.log({holding:this.holding})
        let amount = this.amount;
-      if (amount > 0 && this.balance && this.$big(this.balance.amount).plus(this.buyDelAmount) < 0) {
+      if (amount > 0 && this.balance && this.$big(this.balance.holding).plus(this.buyDelAmount) < 0) {
         amount = -(-amount - this.balance.amount - this.buyDelAmount)
         if (amount < 0) {
           amount = 0;
@@ -1037,7 +1037,7 @@ export default {
       let amount = this.amount;
        
       // 有已持仓，做对手时，判断持仓是否可以对冲，不可对冲部分算成本
-      if (amount > 0 && this.balance && this.$big(this.balance.amount).plus(this.sellDelAmount) > 0) {
+      if (amount > 0 && this.balance && this.$big(this.balance.holding).plus(this.sellDelAmount) > 0) {
         amount = amount - this.balance.amount - this.sellDelAmount ;
         if (amount < 0) {
           amount = 0;

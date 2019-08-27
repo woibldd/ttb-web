@@ -35,7 +35,10 @@
           </el-select> 
         </span> 
       </div>
-      <div class="title__right"> 
+      <div class="title__right">
+         <router-link 
+          :to="'/myorder-new/pairs'"
+          class="fund-history">{{ $t('fund_trading_bill') }}</router-link>
       </div>
     </div>
     <div class="clearfix"> 
@@ -44,11 +47,11 @@
         <h1>
           <icon :name="unit.name+'-unit'" /> {{total | fixed(unit.scale)}}</h1> 
       </div>
-      <div class="bill">
+      <!-- <div class="bill">
         <router-link 
           :to="'/myorder-new/pairs'"
           class="my-fund-operate">{{ $t('fund_trading_bill') }}</router-link>
-      </div>
+      </div> -->
     </div>
     <div 
       class="my-fund-content">  

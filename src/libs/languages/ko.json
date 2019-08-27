@@ -2108,6 +2108,6 @@
 "contract-cancel-all-content": "모든 거래단을 철회합니까?",
 "fund_history_airdrop": "공로상",
 "fund_deposit_tip_contract": "계약주소는：%{contract}，체크후 조작",
-"fund_trading_bill": "코인거래서",
+"fund_trading_bill": "거래기록",
 "app_download_tips": "따스한 제시:APP 다운로드, iOS 핸드폰시스템버전 10.0 이상 건의.안드로이드폰 시스템 버전 7.0 이상"
 }

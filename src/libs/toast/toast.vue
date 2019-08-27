@@ -2,7 +2,7 @@
   <div class="contract-popup" :class="color" :style="{'right':show}" v-show={display}>
     <h1><i></i>{{title}}</h1>
     <span>{{time}}</span>
-    <p>{{body}}</p>
+    <div class='content' v-html="body"></div> 
     <b @click="show = '-340px'"></b>
   </div>
 </template>
@@ -28,7 +28,7 @@
     span{
       background:rgba(242,78,77,1);
     }
-    h1,p{
+    h1,.content{
       color:#F24E4D
     }
   }
@@ -38,7 +38,7 @@
     span{
       background:#22ced0;
     }
-    h1,p{
+    h1,.content{
       color:#22ced0
     }
   }
@@ -105,7 +105,7 @@
       border: 10px;
     }
   }
-  p{
+  .content{
     font-size: 12px;
   }
 }
