@@ -150,6 +150,7 @@ export default {
   mounted() {
     this.$eh.$on('app:resize', () => this.fixPosition())
     this.$nextTick(this.fixPosition)
+    
   },
   created() {
     utils.$app = this
@@ -165,11 +166,15 @@ export default {
     window.onresize = () => {
       this.$eh.$emit('app:resize')
     }
-    state.userInfo && service.getLoginHistory().then(res=>{
-      if(res.data && res.data.length === 1 )this.isFirstLogin = false
-    })
+    console.log(122);
+    this.$eventBus.$on('handleFirstLogin',this.handleFirstLogin)
   },
   methods: {
+    handleFirstLogin(){
+      state.userInfo && service.getLoginHistory().then(res=>{
+        if(res.data && res.data.length < 2 )this.isFirstLogin = true
+      })
+    },
     onkeyup(name) {
       this.$eh.$emit('app:keyup:' + name)
     },
