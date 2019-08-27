@@ -48,7 +48,7 @@
     span{
       background:#09C989;
     }
-    h1,p{
+    h1,.content{
       color:#09C989
     }
   }
