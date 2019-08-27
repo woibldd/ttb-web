@@ -25,9 +25,9 @@
       </div>
     </div>
     <div class="pairs-table">
-      <div class="pairs-table__head">
+      <div class="pairs-table__head  pl-10 pr-10">
         <div class="head-item percent5"/>
-        <div class="head-item percent9">
+        <div class="head-item percent13">
           {{ $t('currency') }}
         </div>
         <div class="head-item percent18_8">
@@ -49,12 +49,12 @@
           {{ $t('actions') }}
         </div>
       </div>
-      <div class="pairs-table-container" style="padding:0 20px">
+      <div class="pairs-table-container pl-10 pr-10" >
         <div v-for="(pair,index) in sortedList" :key="index" @click="toExchange(pair.name)">
           <template v-if="pair.tick && !pair.CUSTOM">
             <div class="pairs-table__row c-21">
               <div
-                class="row__item percent5"
+                class="row__item percent5 tal_r"
                 @click.stop="collection(pair)">
                 <icon
                   v-show="pair.like"
@@ -67,12 +67,14 @@
                 {{ pair.name | pairfix }} 
                 <icon v-show="index < 4 && tabSelected==='new' " name="hot-red"/>
               </div>
-              <div class="row__item percent18_8 newest_price">
+              <div class="row__item percent18_8 "> 
+                <span>
+                  {{ pair.tick.current | fixed(pair.price_scale) }}
+                </span>
                 <span class="ml-10 inline-block c-999">{{ state.fiatMoneySymbol }}<fiat-money
                   :base="pair.currency"
                   :value="pair.tick.current"/>
-                </span>
-                {{ pair.tick.current | fixed(pair.price_scale) }}
+                </span> 
               </div>
               <div
                 :class="{'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}"

@@ -1953,11 +1953,11 @@ export default {
         let side =''
         let data = res.data
         data.side === 2 ? side = this.$t('order_side_buy') :side = this.$t('order_side_sell')
+ 
         if(this.userSetting.submission){
           let toastText = {
-            title: this.$t('message_setting_content_02'),// '委托已提交',
-            // body: `在${res.data.price}价格${side}${res.data.amount}张BTC永续合约。`,
-            body: this.$t('order_apply_message_c', {price: data.price, side, amount: data.amount, currency: data.currency.replace('USD','')  }),
+            title: this.$t('message_setting_content_02'),// '委托已提交', 
+            body: this.$t('order_apply_message_c', {price: data.price, side, amount: data.amount, currency: data.symbol.replace('FUTURE_','').replace('USD','')  }),
             color: 'yellow'
           }
           this.$toast(toastText)
