@@ -44,11 +44,11 @@
         <h1>
           <icon :name="unit.name+'-unit'" /> {{total | fixed(unit.scale)}}</h1> 
       </div>
-      <!-- <div class="bill">
+      <div class="bill">
         <router-link 
           :to="'/myorder-new/pairs'"
           class="my-fund-operate">{{ $t('fund_trading_bill') }}</router-link>
-      </div> -->
+      </div>
     </div>
     <div 
       class="my-fund-content">  
@@ -156,8 +156,7 @@
               </el-dropdown>
           </template>
         </el-table-column>
-      </el-table>
-
+      </el-table> 
     </div>
     <v-modal :open.sync="showLockModal">
       <div class="lock-modal">

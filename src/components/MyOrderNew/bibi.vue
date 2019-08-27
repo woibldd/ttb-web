@@ -2,7 +2,7 @@
   <div class="order--container">
     <div class="profile-container">
       <div class="title-box">{{ $t('trading') }}</div>
-      <div class="row-select mt-24 mb-24">
+      <!-- <div class="row-select mt-24 mb-24">
         <span>{{ $t('pair') }}</span>
         <div class="row__value ml-9">
           <el-select
@@ -16,7 +16,7 @@
               :value="item"/>
           </el-select>
         </div>
-      </div>
+      </div> -->
       <div class="table-wrapper">
         <table class="table">
           <tr class="thead">

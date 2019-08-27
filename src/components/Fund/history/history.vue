@@ -293,7 +293,7 @@ export default {
       return false
     }
   },
-  async created () { 
+  async created () {  
     await this.getCoins()
     this.updateHeaderLabel()
     this.getFundHistory(this.type)
@@ -354,8 +354,8 @@ export default {
     },
     showCXID (row) {
       //console.log({row,cc: this.coinList})
-      if (!!row.txid && !!this.coinList[row.currency]) { 
-        const url = this.coinList[row.currency].scan_url.replace('${txid}',row.txid)
+      if (!!row.txid && !!this.coinList[row.currency + '_' + row.chain]) { 
+        const url = this.coinList[row.currency + '_' + row.chain].scan_url.replace('${txid}',row.txid)
         window.open(url)
       }
     },
@@ -612,8 +612,9 @@ export default {
     async getCoins() {
       let res = await service.getCoins()
       if (!res.code && !!res.data) {
+        console.log({data: res.data})
         res.data.map(item => {
-          this.coinList[item.currency] = item
+          this.coinList[item.currency + '_' + item.chain] = item
         })
       }
     }

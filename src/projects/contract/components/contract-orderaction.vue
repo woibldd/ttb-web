@@ -1598,7 +1598,7 @@ export default {
       local.mmNeverShow = this.mmModal.neverShow;
       const side = this.exchangeDir;
       const $$price = this.getValues("price");
-      const $price = this.$big($$price || side);
+      const $price = this.$big($$price || 0);
       const $amount = this.$big(this.getValues("amount", side) || 0);
 
       //yzf 2019/3/7
@@ -1761,7 +1761,7 @@ export default {
 
       this.exchangeDir = side;
       const $$price = this.getValues("price");
-      let $price = this.$big($$price || side);
+      let $price = this.$big($$price || 0);
       const $amount = this.$big(this.getValues("amount", side) || 0);
       const $bid = this.$big(this.state.ct.bid || 0);
       const $ask = this.$big(this.state.ct.ask || 0);
@@ -1955,9 +1955,13 @@ export default {
         data.side === 2 ? side = this.$t('order_side_buy') :side = this.$t('order_side_sell')
  
         if(this.userSetting.submission){
+          let content = this.$t('order_apply_message_c', {price: data.price, side, amount: data.amount, currency: data.symbol.replace('FUTURE_','').replace('USD','')  })
+          if (order.type > 2) {
+            content = `<p>${content}</p><p>${this.$t('contract_trigger_price')}:${order.trigger_price}</p>`
+          }
           let toastText = {
             title: this.$t('message_setting_content_02'),// '委托已提交', 
-            body: this.$t('order_apply_message_c', {price: data.price, side, amount: data.amount, currency: data.symbol.replace('FUTURE_','').replace('USD','')  }),
+            body: content,
             color: 'yellow'
           }
           this.$toast(toastText)
