@@ -126,6 +126,7 @@ Vue.prototype.$msgbox = MessageBox
 Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$message = Message
 Vue.prototype.$moment = moment
+Vue.prototype.$eventBus = new Vue({})
 
 actions.setLocale()
 

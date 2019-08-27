@@ -339,6 +339,7 @@ export default {
   },
   created() {
     this.fetchRegion()
+       
 
     const returnTo = this.$route.query.return_to
     if (returnTo && returnTo.indexOf('https://ix.zendesk.com/') > -1) {
@@ -514,6 +515,9 @@ export default {
       // this.$router.push({
       //   name: 'profile'
       // })
+      setTimeout(()=>{
+        this.$eventBus.$emit('handleFirstLogin')
+      },100)
     },
     getPhoneVerifyCode() {
       const param = {
