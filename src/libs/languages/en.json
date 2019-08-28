@@ -2276,5 +2276,9 @@
 "fund_history_airdrop": "Airdrop reward",
 "fund_deposit_tip_contract": "Contract address is: %{contract},check before operation",
 "fund_trading_bill": "Transactions record",
-"app_download_tips": "Tips: APP download, IOS mobile version 10.0 or above and Android phone version 7.0 above are recommended"
+"app_download_tips": "Tips: APP download, IOS mobile version 10.0 or above and Android phone version 7.0 above are recommended",
+
+"fund_contract_open":"Contracts Open",
+"fund_contract_result_yet":"Realised PNL",
+"fund_contract_result_unrealized":"Unrealised PNL"
 }

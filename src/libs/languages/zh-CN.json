@@ -2201,7 +2201,11 @@
     "fund_history_release_time":"发放时间",
     "fund_history_airdrop": "空投奖励",
     "fund_deposit_tip_contract": "合约地址为：%{contract}，请核对后操作",
-    "fund_trading_bill": "交易记录"
+    "fund_trading_bill": "交易记录",
+
+    "fund_contract_open":"未平仓仓位",
+    "fund_contract_result_yet":"已实现盈亏",
+    "fund_contract_result_unrealized":"未实现盈亏"
     
   }
 

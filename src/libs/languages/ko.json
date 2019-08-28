@@ -2109,5 +2109,9 @@
 "fund_history_airdrop": "공로상",
 "fund_deposit_tip_contract": "계약주소는：%{contract}，체크후 조작",
 "fund_trading_bill": "거래기록",
-"app_download_tips": "따스한 제시:APP 다운로드, iOS 핸드폰시스템버전 10.0 이상 건의.안드로이드폰 시스템 버전 7.0 이상"
+"app_download_tips": "따스한 제시:APP 다운로드, iOS 핸드폰시스템버전 10.0 이상 건의.안드로이드폰 시스템 버전 7.0 이상",
+
+"fund_contract_open":"오픈 계약",
+"fund_contract_result_yet":"실현 손익",
+"fund_contract_result_unrealized":"미실현 손익"
 }
