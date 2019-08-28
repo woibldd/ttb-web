@@ -171,13 +171,12 @@
               <number-input
                 v-model="amount"
                 :scale="amount_scale || 6"
-                :placeholder="$t('amount')"
+                :placeholder="$t('otc_quantity')"
                 class="number-input"
                 @input="amountInput"
                 @blur="changeTarget('')"
                 @focus="changeTarget('amount')"
-              />
-
+              /> 
               <span
                 class="btn-all"
                 @click="inputAll('amount')">{{ $t('input_all') }}</span>

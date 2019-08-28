@@ -190,7 +190,8 @@ export const tradeMixins = {
           prop: 'side',
           render: (h, params) => {
             let spiltName = params.row.symbol.split('/')
-            let name = params.row.total + '/' + params.row.executed * params.row.price + '   ' + spiltName[1]
+            const retainTwo = str => this.$big(str).round(2, 0)
+            let name = `${retainTwo(params.row.total)}/${retainTwo(params.row.executed * params.row.price)}   ${spiltName[1]}`
             return h('div', name)
           }
         },

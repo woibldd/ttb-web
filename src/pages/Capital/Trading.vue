@@ -130,33 +130,35 @@
                   {{ $t('account_exchange') }}
               </a>
             </span>
-            <!-- <router-link
-              v-if="scope.row.pairs"
+            <router-link
+              v-if="scope.row.pairs.length == 1"
               :to="{
                 name: 'trading',
                 params: {
-                  pair: scope.row.pairs
+                  pair: scope.row.pairs[0].name
                 }
               }"
-              class="my-fund-operate">{{ $t('asset_trading') }}</router-link> -->
-              <el-dropdown size="small">
-                <el-button type="label">
-                  {{ $t('asset_trading') }}
-                </el-button>
-                <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item v-for="(pair,idx) in scope.row.pairs" :key="idx">
-                    <router-link 
-                      :to="{
-                        name: 'trading',
-                        params: {
-                          pair: pair.name
-                        }
-                      }"
-                      class="my-fund-operate"
-                    >{{ pair.product + '/' + pair.currency }}</router-link>
-                  </el-dropdown-item> 
-                </el-dropdown-menu>
-              </el-dropdown>
+              class="my-fund-operate pr-20"
+            >{{ $t('asset_trading') }}</router-link>
+            <el-dropdown size="small" 
+              v-else>
+              <el-button type="label">
+                {{ $t('asset_trading') }}
+              </el-button>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item v-for="(pair,idx) in scope.row.pairs" :key="idx">
+                  <router-link 
+                    :to="{
+                      name: 'trading',
+                      params: {
+                        pair: pair.name
+                      }
+                    }"
+                    class="my-fund-operate"
+                  >{{ pair.product + '/' + pair.currency }}</router-link>
+                </el-dropdown-item> 
+              </el-dropdown-menu>
+            </el-dropdown>
           </template>
         </el-table-column>
       </el-table> 
@@ -541,7 +543,10 @@
             item.estValue = this.getEstValue(item)
             item.available = this.$big(item.available).round(8, this.C.ROUND_DOWN).toString()
             // item.pairs = ExchangePairs[item.currency] || 'BTC_USDT'
-            item.pairs = this.pairList.filter(t => t.product === item.currency)
+            if (item.currency === 'USDT')
+              item.pairs = ['BTC_USDT']
+            else
+              item.pairs = this.pairList.filter(t => t.product === item.currency || t.currency === item.currency)
             return item
           })
         })

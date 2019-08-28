@@ -465,8 +465,7 @@ export default {
             .mul(100).mul(2)
             .toFixed(2)
             // console.log(holding.roelp)
-        }
-        // console.log('无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限')
+        } 
 
         // 平仓价格
         if (!holding.changeUnwindPrice) {

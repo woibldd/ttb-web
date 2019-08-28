@@ -1,15 +1,21 @@
 <template>
   <div class="crud">
     <el-table :data="showGridData" 
-v-loading="loading" :empty-text="$t('no_data')">
+      v-loading="loading" :empty-text="$t('no_data')">
       <el-table-column 
-v-for="(item,index) in gridConfig" 
-:key="index" :prop="item.prop" :label="item.label"
-                       :width="item.width?item.width:''" 
-:render-header="item.renderHeader" show-overflow-tooltip>
+        v-for="(item,index) in gridConfig" 
+        :key="index" 
+        :prop="item.prop" 
+        :label="item.label" 
+        :width="item.width?item.width:''" 
+        :render-header="item.renderHeader" 
+        show-overflow-tooltip>
         <template slot-scope="scope">
           <Cell v-if="item.render" 
-:row="scope.row" :column="item" :index="scope.$index" :render="item.render">
+            :row="scope.row" 
+            :column="item" 
+            :index="scope.$index" 
+            :render="item.render">
             <!---->
           </Cell>
           <span v-else>{{ scope.row[item.prop] }}</span>

@@ -124,17 +124,18 @@
               :to="'/fund/withdraw/'+scope.row.currency"
               class="my-fund-operate"
             >{{ $t('withdraw') }}</router-link>
-            <!-- <router-link
-              v-if="scope.row.pairs"
+            <router-link
+              v-if="scope.row.pairs.length == 1"
               :to="{
                 name: 'trading',
                 params: {
-                  pair: scope.row.pairs
+                  pair: scope.row.pairs[0].name
                 }
               }"
-              class="my-fund-operate"
-            >{{ $t('asset_trading') }}</router-link> -->
-            <el-dropdown size="small">
+              class="my-fund-operate pr-20"
+            >{{ $t('asset_trading') }}</router-link>
+            <el-dropdown size="small" 
+              v-else>
               <el-button type="label">
                 {{ $t('asset_trading') }}
               </el-button>
@@ -643,7 +644,10 @@ export default {
             .round(8, this.C.ROUND_DOWN)
             .toString()
           // item.pairs = ExchangePairs[item.currency] || 'BTC_USDT';
-          item.pairs = this.pairList.filter(t => t.product === item.currency)
+          if (item.currency === 'USDT')
+            item.pairs = ['BTC_USDT']
+          else
+            item.pairs = this.pairList.filter(t => t.product === item.currency || t.currency === item.currency)
           return item
         })
       }) 

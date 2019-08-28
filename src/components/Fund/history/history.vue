@@ -52,7 +52,7 @@
             :label="this.$t('fund_history_transaction_type')">
             <template slot-scope="scope">
               <div>
-                {{ returnTranType[scope.row.tran_type]}}
+                {{ $t(returnTranType[scope.row.tran_type])}}
               </div>
             </template>
           </el-table-column>
@@ -91,12 +91,12 @@
             :label="this.$t('status')">
             <template slot-scope="scope">
               <div>
-                {{ returnState[scope.row.state]}}
+                {{ $t(returnState[scope.row.state])}}
               </div>
             </template>
           </el-table-column>
       </el-table>
-      <el-table       :empty-text="$t('no_data')"
+      <el-table  :empty-text="$t('no_data')"
         :data="tableData"
         height="550"
         v-else-if="type === 'all'"
@@ -258,17 +258,17 @@ export default {
       state,
       coinList: {},
       returnState:{
-        0:"未发放",
-        1:"已发放"
+        0:"fund_assets_status_unissued",
+        1:"fund_assets_status_issued"
       },
       returnType:{
-        1:"交易返佣",
-        2:"上币返佣",
-        3:"节点开通返佣"
+        1:"fund_assets_type_trading",
+        2:"fund_assets_type_Upper",
+        3:"fund_assets_type_opening"
       },
       returnTranType:{
-        1:"合约交易",
-        2:"币币交易"
+        1:"trading",
+        2:"contract"
       },
       isEnd: true
     }
@@ -302,8 +302,8 @@ export default {
   },
   methods: {
     open(param) {
-      this.$confirm(this.$t('otc_ziurec_18'), {
-        confirmButtonText: this.$t('otc_ziurec_20'),
+      this.$confirm(this.$t('fund_assets_withdraw_revoke_tips'), {
+        confirmButtonText: this.$t('confirm'),
         cancelButtonText: this.$t('cancel'),
         type: 'warning'
       }).then(() => {
@@ -743,6 +743,14 @@ export default {
          color: $primary-hover !important;
       }
     }
-
+    .my-fund-content {
+      .el-table {
+        .el-table__header-wrapper {
+          .cell {
+            word-break: break-word;
+          }
+        }
+      }
+    }
 }
 </style>

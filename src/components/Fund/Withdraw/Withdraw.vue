@@ -431,18 +431,19 @@ export default {
               description: item.description
             })
           }
-          this.selectItem = this.restaurants[0].address
-          this.memo = this.restaurants[0].memo
 
+          this.selectItem = ''
+          this.selectAddress = {
+            address: '',
+            memo: ''
+          }
           if (this.allAddress.length > 0) {
+            this.selectItem = this.restaurants[0].address
+            this.memo = this.restaurants[0].memo
+
             this.selectAddress = this.allAddress[0]
             this.memo = this.selectAddress.memo
-          } else {
-            this.selectAddress = {
-              address: ''
-            }
-            this.memo = ''
-          }
+          }  
         } else {
           this.selectAddress = {}
           this.memo = ''
@@ -483,7 +484,8 @@ export default {
               Vue.set(item, 'currencyName', item.currency + '-' + 'ERC20')
             }
           })
-          this.selectLian = this.lianData[1]
+          this.lianData = this.lianData.reverse()//顺序颠倒一下，omni要放在前面
+          this.selectLian = this.lianData[0]
           this.allCoins = this.removalData(res.data.filter(c => c.withdrawable))
           this.allCoins.forEach((item) => {
             if(state.locale === 'zh-CN') {
@@ -506,7 +508,7 @@ export default {
     },
     quickSelectCoin (coin) {
       this.changeCoinType(coin)
-      this.selectLian = this.lianData[1]
+      this.selectLian = this.lianData[0]
     },
     removalData (arrData) {
       var hash = {}

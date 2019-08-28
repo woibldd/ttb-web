@@ -2036,8 +2036,40 @@
     "otc_order_default_tips": "提示：1.請使用實名認證付款方式2.請按訂單金額付款3.付款時無需備註",
     "app_download_tips": "溫馨提示：APP下載，建議IOS手機系統版本10.0以上；Android手機系統版本7.0以上",
     "otc_quantity": "數量",
+    "otc_ziurec_9": "至",
+    "otc_ziurec_7": "卖家超时放币", 
+    "otc_ziurec_1": "价格不能为空",
+    "otc_ziurec_2": "数量不能为空",  
+    "otc_ziurec_4": "的交易单，价格为",
+    "otc_ziurec_5": "CNY高于卖一价",
+    "otc_ziurec_6": "CNY，以该价格发布可能给您带来损失",
+    "otc_ziurec_19": "总金额",
+    "otc_ziurec_13": "平台服务费",
+    "otc_ziurec_16": "限时免费",
+    "otc_ziurec_18": "你确定要撤销该笔委托单？",
+    "otc_ziurec_20": "确定",
+    "otc_ziurec_21": "发布失败",
+    
+    "fund_contract_up": "做多",
+    "fund_contract_down": "做空",
     "fund_contract_open":"未平倉倉位",
     "fund_contract_result_yet":"已實現盈虧",
-    "fund_contract_result_unrealized":"未實現盈虧"
+    "fund_contract_result_unrealized":"未實現盈虧",
+
+    "otc_trade_available": "可用數量",
+    "fund_assets_status_issued": "已發放", 
+    "fund_assets_withdraw_revoke_tips": "你確定要撤銷該筆提幣申請？",
+    "jg_ck": "非最終交易單價，僅供參考",
+    "otc_french_bill_in": "轉入",
+    "otc_french_bill_out": "轉出",
+    "otc_french_bill_liquidation": "當日清算",
+    "otc_french_bill_buy": "買入",
+    "otc_french_bill_sell": "賣出",
+    "otc_one_click_optimal": "单价最优",
+    
+    "fund_assets_status_unissued": "未發放",
+    "fund_assets_type_trading":"交易返傭",
+    "fund_assets_type_Upper":"上幣返傭",
+    "fund_assets_type_opening":"節點開通返傭"
 
 }

@@ -2103,7 +2103,6 @@
 "otc_order_default_tips": "힌트:1. 실명인증제 지불방식을 사용하세요 2. 주문금액대로 지불하세요 3. 지불시 비고가 필요 없습니다.",
 "otc_suspend_all_tips" :"온라인 또는 거래가 원활하지 않을 경우 잠시 클릭을 중단합니다;위탁서를 목록에서 숨길수 있다;\"모두 시작\"을 누르면 주문서가 정상적으로 회복됩니다.",
 "otc_quantity": "수량",
-"link_name":"链名称", 
 "contract-cancel-all-title": "거래단 철회",
 "contract-cancel-all-content": "모든 거래단을 철회합니까?",
 "fund_history_airdrop": "공로상",
@@ -2111,7 +2110,24 @@
 "fund_trading_bill": "거래기록",
 "app_download_tips": "따스한 제시:APP 다운로드, iOS 핸드폰시스템버전 10.0 이상 건의.안드로이드폰 시스템 버전 7.0 이상",
 
+"fund_contract_up": "많이 하가",
+"fund_contract_down": "공백",
 "fund_contract_open":"오픈 계약",
 "fund_contract_result_yet":"실현 손익",
-"fund_contract_result_unrealized":"미실현 손익"
+"fund_contract_result_unrealized":"미실현 손익", 
+"otc_french_bill_in": "계좌입금",
+"otc_french_bill_out": "계좌출금",
+"otc_french_bill_liquidation": "당일청산",
+"otc_french_bill_buy": "매수",
+"otc_french_bill_sell": "매도", 
+"otc_trade_available": "가용수량",
+"fund_assets_status_issued": "이미 지급", 
+"fund_assets_withdraw_revoke_tips": "너는이 화폐 인출 신청을 취소할 것을 확정하니?",
+"link_name":"련쇄명칭", 
+"jg_ck": "비최종거래단가는 참고만 하십시오",
+"otc_one_click_optimal": "단가최고",
+"fund_assets_status_unissued": "미지급",
+"fund_assets_type_trading":"交易返佣",
+"fund_assets_type_Upper":"上币返佣",
+"fund_assets_type_opening":"节点开通返佣"
 }

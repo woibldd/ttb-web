@@ -596,6 +596,7 @@ export default {
     // todo 初始化第一种类型数据
     this.init(this.active)
 
+    const that = this
     // 定时器
     this.timers = setInterval(() => {
       service.getUnDonefills({
@@ -605,33 +606,32 @@ export default {
       }
       ).then(res => {
         if (res.code === 0) {
-          if (res.data.data.length > 0) {
-
-          Vue.set(this.tab[0], 'count', res.data.data.length)
-            if (this.active === 0) { 
-            that.data = rec.data.data
-            that.data.forEach((item) => {
-              //state-1-等待对方付款 2-等待放币 3-已完成 4-买家取消 5-卖家取消 6买家超时取消 7卖家超时放币
-              if (item.state === 1) {
-                Vue.set(item, 'time', item.create_time + 15 * 60 * 1000)
-              } else if (item.state === 2) {
-                //申诉取消后
-                if (item.appeal_time > 0) {
-                  Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
-                }
-                else {
-                  Vue.set(item, 'time', item.pay_time + 15 * 60 * 1000) 
-                }
-              } else if (item.state === 7 ) {
-                if (item.appeal_time > 0) {
-                  Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
-                }
-                else {
-                  Vue.set(item, 'time', item.pay_time + 12 * 60 * 60 * 1000 + 15 * 60 * 1000)
-                }
-              } 
-            })
-          } 
+          if (res.data.data.length > 0) { 
+            Vue.set(this.tab[0], 'count', res.data.data.length)
+              if (this.active === 0) { 
+                that.data = res.data.data
+                that.data.forEach((item) => {
+                //state-1-等待对方付款 2-等待放币 3-已完成 4-买家取消 5-卖家取消 6买家超时取消 7卖家超时放币
+                if (item.state === 1) {
+                  Vue.set(item, 'time', item.create_time + 15 * 60 * 1000)
+                } else if (item.state === 2) {
+                  //申诉取消后
+                  if (item.appeal_time > 0) {
+                    Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
+                  }
+                  else {
+                    Vue.set(item, 'time', item.pay_time + 15 * 60 * 1000) 
+                  }
+                } else if (item.state === 7 ) {
+                  if (item.appeal_time > 0) {
+                    Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
+                  }
+                  else {
+                    Vue.set(item, 'time', item.pay_time + 12 * 60 * 60 * 1000 + 15 * 60 * 1000)
+                  }
+                } 
+              })
+            } 
           }
         }
       })

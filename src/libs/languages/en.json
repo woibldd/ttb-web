@@ -2263,7 +2263,7 @@
 "invite_kyc_lv": "KYC verify",
 "otc_otutcol_20": "appeal successful,customer service to handle",
 "fund_assets_subscribed": "Purchased",
-"fund_history_inviter_userid": "UID source",
+"fund_history_inviter_userid": "UID source",
 "fund_history_star_lv": "User star",
 "fund_history_transaction_type": "Trading type", 
 "fund_history_symbol":"Trading product", 
@@ -2278,7 +2278,24 @@
 "fund_trading_bill": "Transactions record",
 "app_download_tips": "Tips: APP download, IOS mobile version 10.0 or above and Android phone version 7.0 above are recommended",
 
+"fund_contract_up": "Long",
+"fund_contract_down": "Short",
 "fund_contract_open":"Contracts Open",
 "fund_contract_result_yet":"Realised PNL",
-"fund_contract_result_unrealized":"Unrealised PNL"
+"fund_contract_result_unrealized":"Unrealised PNL",
+"otc_french_bill_in": "In",
+"otc_french_bill_out": "Out",
+"otc_french_bill_liquidation": "Liquidation on the day",
+"otc_french_bill_buy": "Buy",
+"otc_french_bill_sell": "Sell",
+"otc_trade_available": "Available qty",
+"fund_assets_status_issued": "Issued",
+"fund_assets_withdraw_revoke_tips": "confirm cancel withdrawal?", 
+"jg_ck": "Unit price for refer only",
+"otc_one_click_optimal": "Best unit price",
+"fund_assets_status_unissued": "Unissued",
+"fund_assets_type_trading":"交易返佣",
+"fund_assets_type_Upper":"上币返佣",
+"fund_assets_type_opening":"节点开通返佣"
+ 
 }

@@ -492,7 +492,7 @@ export default {
       else {
         if (JSON.stringify(this.balance) !== "{}")
           plt = this.balance[this.currency].available
-        return '可用数量：' + plt
+        return  this.$t('otc_trade_available') + ':' + plt
       }
     },
   },

@@ -37,7 +37,10 @@
          </div>
          <div class="tip"> {{this.$t('ky_dq')}} </div>
          <div class="pay-list-con">
-           <div class="pay-list" v-for="(item, index) in payData" :key="index" :data-pay="item.name" :class="{active: active === index, 'excellent': item.excellent}" @click="tabHanlde(item, index)">{{ item.name }}</div>
+           <div class="pay-list" v-for="(item, index) in payData" 
+            :key="index" :data-pay="item.name" 
+            :class="[ state.locale.toString(), {active: active === index, 'excellent': item.excellent}]" 
+            @click="tabHanlde(item, index)">{{ item.name }}</div>
          </div>
          <div class="result-msg">
            <dl>
@@ -149,6 +152,7 @@ export default {
       ],
       payTypeData: [this.$t('b_1'), this.$t('b_2')],
       loading: false,
+      state,
     }
   },
   computed: {
@@ -565,6 +569,18 @@ export default {
             top: -5px;
             color: #fff;
             font-size: 12px!important;
+          }
+          &.zh-CN::after {
+            content: '单价最优';
+          }
+          &.en::after {
+            content: 'Optimum';
+          }
+          &.zh-HK::after {
+            content: '單價最優';
+          }
+          &.ko::after {
+            content: '최혜택';
           }
         }
         .disabled {
