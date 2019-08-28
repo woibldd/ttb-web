@@ -166,7 +166,6 @@ export default {
     window.onresize = () => {
       this.$eh.$emit('app:resize')
     }
-    console.log(122);
     this.$eventBus.$on('handleFirstLogin',this.handleFirstLogin)
   },
   methods: {
