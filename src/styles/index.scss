@@ -284,7 +284,8 @@ $primary-color: #01CED1;
 }
 
 
-.el-button.el-button--text {
+.el-button.el-button--text { 
+  color: #000;
   &:hover, &:focus {
     color: #000;
   }
