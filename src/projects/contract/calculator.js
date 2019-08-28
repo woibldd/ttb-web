@@ -31,8 +31,7 @@ export default {
       let mul = Big(pairInfo.multiplier) //乘数
       value = mul.times(price).times(amount)
       // ix = Big(max_leverage).div(Big(lever).eq(0) ? max_leverage : lever).round(6, down)
-    }
-    console.log({value:value.toString()})
+    } 
     totalValue = (totalValue == null || totalValue.eq(0)) ? value : totalValue
     // let count = 0
     // if (pairInfo.name === 'FUTURE_BTCUSD') {

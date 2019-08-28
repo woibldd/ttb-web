@@ -358,14 +358,14 @@ export default {
           $this.$toast({ title: $this.$t('system_automatic_warehouse_closing'),
             body: $this.$t('successfully_body_text_reduce', { price: newOrder[i].price, amount: newOrder[i].amount }), color: 'red' })
         }
-
-        if (newOrder[i].origin !== 2 & newOrder[i].origin !== 4) {
-          // console.log(newOrder[i])
+   
+        if (newOrder[i].origin !== 2 & newOrder[i].origin !== 4) { 
           setTimeout(function() {
-            let cn = ''
-            newOrder[i].side === 1 ? cn = $this.$t('order_side_buy') : cn = $this.$t('order_side_sell')
+            let side = ''
+            newOrder[i].side === 1 ? side = $this.$t('order_side_buy') : side = $this.$t('order_side_sell')
             $this.$toast({ title: $this.$t('successful_trade'),
-              body: $this.$t('successful_purchase_of_contracts', { language: cn, amount: newOrder[i].amount }),
+              // body: $this.$t('successful_purchase_of_contracts', { language: cn, amount: newOrder[i].amount }),
+              body: $this.$t('order_apply_message_c', { price: newOrder[i].price, side, amount: newOrder[i].amount, currency: newOrder[i].currency.replace('USD','') }),
               color: 'green' })
           }, 3000 * number)
           number++

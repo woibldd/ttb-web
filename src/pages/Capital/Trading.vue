@@ -35,7 +35,10 @@
           </el-select> 
         </span> 
       </div>
-      <div class="title__right"> 
+      <div class="title__right">
+         <router-link 
+          :to="'/myorder-new/pairs'"
+          class="fund-history">{{ $t('fund_trading_bill') }}</router-link>
       </div>
     </div>
     <div class="clearfix"> 
@@ -156,8 +159,7 @@
               </el-dropdown>
           </template>
         </el-table-column>
-      </el-table>
-
+      </el-table> 
     </div>
     <v-modal :open.sync="showLockModal">
       <div class="lock-modal">
