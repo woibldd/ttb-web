@@ -212,8 +212,7 @@ export default {
       }
       this.address = ''
       this.memo = ''
-      this.contract = ''
-      console.log('0000000000000000000000000000000000000000000000000000000000000000000000')
+      this.contract = '' 
       return service.getMyCoinAddress(param).then((res) => {
         if (res && res.data) {
           this.address = res.data.address
