@@ -106,27 +106,32 @@
 
           <el-table-column
           prop="currency"
-          name="currency"
+          :key="'currency_all'"
           :label="this.$t('transfer_currency')"/>
           <el-table-column
           prop="form"
+          :key="'form_all'"
             :label="this.$t('transfer_from_a')"/>
           <el-table-column
           prop="to"
+          :key="'to_all'"
              :label="this.$t('transfer_to_a')"/>
           <el-table-column
           prop="amount"
+          :key="'amount_all'"
             :label="this.$t('transfer_amount')"/>
           <el-table-column
             prop="available"
+          :key="'available_all'"
          :label="this.$t('balance')"/>
           <el-table-column
             width="240"
             prop="create_time"
+          :key="'create_time_all'"
                :label="this.$t('transfer_time')"/>
           <el-table-column
             prop="status"
-          name="status"
+          :key="'status_all'"
           :label="this.$t('status')"/>
             
 
