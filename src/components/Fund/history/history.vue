@@ -106,6 +106,7 @@
 
           <el-table-column
           prop="currency"
+          name="currency"
           :label="this.$t('transfer_currency')"/>
           <el-table-column
           prop="form"
@@ -125,6 +126,7 @@
                :label="this.$t('transfer_time')"/>
           <el-table-column
             prop="status"
+          name="status"
           :label="this.$t('status')"/>
             
 
