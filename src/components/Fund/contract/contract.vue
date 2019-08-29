@@ -172,11 +172,11 @@
               <span class="c-333">{{ (holding.available_balance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
             </div>
             <!-- 杠杆倍数 -->
-            <!-- <div
+            <div
               class="table__tr right c-999"
               v-if="holding.margin_delegation">
               {{ $t('contract_fund_usee_lever', {per: margin + '%', lever: $big(holding.leverage || 0).toFixed(2)}) }}
-            </div> -->
+            </div>
           </div>
         </div>
       </div>
@@ -338,6 +338,7 @@ export default {
         obj.unrealized = this.$big(0) // 未实现盈亏
         obj.margin_position = this.$big(0) // 仓位保证金
         obj.margin_delegation = this.$big(0) // 委托保证金
+        obj.totalValue = this.$big(0) //持仓总价值
         list.map(arg => {
           // 保证金余额 = 可用余额 + 未实现盈亏
           if (obj.marginBalance.eq(0)) {
@@ -348,6 +349,16 @@ export default {
           obj.margin_position = obj.margin_position.plus(arg.margin_position || 0)
           obj.margin_delegation = obj.margin_delegation.plus(arg.margin_delegation || 0)
         })
+
+        obj.margin = this.$big(obj.totalValue)
+          .div(obj.marginBalance)
+          .times(100)
+          .toFixed(2)
+        obj.leverage = (this.$big(obj.margin_position)
+          .plus(obj.margin_delegation))
+          .div(obj.available)
+          .times(100)
+          .toFixed(2)
       }
       console.log({ obj })
       return obj

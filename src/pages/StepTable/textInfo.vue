@@ -243,7 +243,7 @@
                 <span>{{ $t('otc_amount', {currency: textDetail.currency }) }}</span><em>{{ textDetail.amount || '--' }}</em>
               </dd>
               <dd>
-                <span>{{ $t('otc_ziurec_19') }}({{ textDetail.currency_type }})</span><em>{{ textDetail.total || '--' }}</em>
+                <span>{{ $t('otc_ziurec_19') }}({{ textDetail.currency_type }})</span><em>{{ $big(textDetail.amount || 0).times(textDetail.price || 0) || '--' }}</em>
               </dd>
               <dd>
                 <span>{{ $t('otc_ziurec_13') }}</span><em>{{ $t('otc_ziurec_16') }}</em>
