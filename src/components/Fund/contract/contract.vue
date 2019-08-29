@@ -175,7 +175,7 @@
             <div
               class="table__tr right c-999"
               v-if="holding.margin_delegation">
-              {{ $t('contract_fund_usee_lever', {per: margin + '%', lever: $big(holding.leverage || 0).toFixed(2)}) }}
+              {{ $t('contract_fund_usee_lever', {per: holding.margin + '%', lever: $big(holding.leverage || 0).toFixed(2)}) }}
             </div>
           </div>
         </div>
