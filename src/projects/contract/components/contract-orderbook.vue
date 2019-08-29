@@ -525,8 +525,17 @@ export default {
       // this.timer = setTimeout(()=>{
       //   this.hasBtnReturnDish = e.target.scrollTop > 380 || e.target.scrollTop<100
       // },100)
-      this.$nextTick(() => { 
-        this.hasBtnReturnDish = e.target.scrollTop > 390 || e.target.scrollTop < 100
+      this.$nextTick(() => {  
+        let tag = e.target
+        let [ask, split, bid]  = tag.children
+        if (ask.offsetHeight - tag.scrollTop + split.offsetHeight >= tag.offsetHeight ||
+          ask.offsetHeight - tag.scrollTop + split.offsetHeight <= 0
+        ) {
+          this.hasBtnReturnDish = true
+        }
+        else  {
+          this.hasBtnReturnDish = false
+        } 
       })
     },
     returnToDefault(){

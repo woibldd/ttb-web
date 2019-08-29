@@ -409,8 +409,7 @@ export default {
         this.hasInternal = true
       }
     },
-    getFundHistory (from = 'deposit') {
-      console.log(this.tableData)
+    getFundHistory (from = 'deposit') { 
       this.isEnd = true
       this.loading = true
       let request = ''
