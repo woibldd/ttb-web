@@ -274,7 +274,7 @@ export default {
       isMobile: utils.isMobile()
     }
   },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter(to, from, next) {  
     if (to.params.by === 'email') {
       return next()
     }
@@ -338,9 +338,14 @@ export default {
     this.$nextTick(this.fixPosition)
   },
   created() {
-    this.fetchRegion()
-       
-
+    this.fetchRegion() 
+    let $this = this
+    setTimeout(function () { 
+      if (state.userInfo) {
+        $this.$router.push('/')
+      }
+    }, 500)
+      
     const returnTo = this.$route.query.return_to
     if (returnTo && returnTo.indexOf('https://ix.zendesk.com/') > -1) {
       actions.setLoginBack('/zendesk/auth' + location.search)
