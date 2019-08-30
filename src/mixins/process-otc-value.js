@@ -43,7 +43,7 @@ const processValue = {
         switch (value) {
           case 1: 
             // return `银行卡(${row['card_number']})`
-            return row['card_number'].substr(0, 4) + '****' + row['card_number'].substr(-4)
+            return row['deposit_bank'] + ' ' + row['card_number'].substr(0, 4) + '****' + row['card_number'].substr(-4)
           case 2:
             // return `支付宝(${row['alipay_account']})`
             return '支付宝 ' + row['alipay_account'].substr(0, 3) + '****'
