@@ -361,7 +361,7 @@ export default {
           .times(100)
           .toFixed(2)
       }
-      console.log({ obj })
+      // console.log({ obj })
       return obj
     },
     holdingList() {
