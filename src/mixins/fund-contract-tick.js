@@ -44,15 +44,20 @@ export default {
             current: item.current
           }   
         }  
-        this.state.ct.markTickList[item.pair.replace('MARKET_','')] =  item.current
-        if (!!this.state.ct.pairInfoList[item.pair.replace('MARKET','FUTURE')]) {  
-          // this.$set(ct.pairInfoList[item.pair.replace('MARKET','FUTURE')], 'markTick', item.current ) 
-          this.state.ct.holdingList.forEach((skt) => {
-            if ('MARKET_' + skt.currency === item.pair) {
-              Vue.set(skt, 'markPrice', item.current)
-            }
-          })
-        }
+        // this.state.ct.markTickList[item.pair.replace('MARKET_','')] =  item.current
+        // if (!!this.state.ct.pairInfoList[item.pair.replace('MARKET','FUTURE')]) {  
+        //   // this.$set(ct.pairInfoList[item.pair.replace('MARKET','FUTURE')], 'markTick', item.current ) 
+        //   this.state.ct.holdingList.forEach((skt) => {
+        //     if ('MARKET_' + skt.currency === item.pair) {
+        //       Vue.set(skt, 'markPrice', item.current)
+        //     }
+        //   })
+        // }
+        this.state.ct.holdingList.forEach((skt) => {
+          if ('MARKET_' + skt.currency === item.pair) {
+            Vue.set(skt, 'markPrice', item.current)
+          }
+        })
       }
     }, 
     async fetch () { 

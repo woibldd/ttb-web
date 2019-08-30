@@ -348,6 +348,7 @@ export default {
           obj.unrealized = obj.unrealized.plus(arg.unrealized || 0)
           obj.margin_position = obj.margin_position.plus(arg.margin_position || 0)
           obj.margin_delegation = obj.margin_delegation.plus(arg.margin_delegation || 0)
+          obj.totalValue = obj.totalValue.plus(arg.value)
         })
 
         obj.margin = this.$big(obj.totalValue)
