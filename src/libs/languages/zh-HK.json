@@ -2070,6 +2070,10 @@
     "fund_assets_status_unissued": "未發放",
     "fund_assets_type_trading":"交易返傭",
     "fund_assets_type_Upper":"上幣返傭",
-    "fund_assets_type_opening":"節點開通返傭"
+    "fund_assets_type_opening":"節點開通返傭",
+    "fund_deposit_mpv_tips1":"MPV存幣申請白名單操作流程如下：",
+    "fund_deposit_mpv_tips2":"1. MPV官方註冊帳號<br/><a  href='https://assets.mpvworld.com/account/register'>https://assets.mpvworld.com/account/register</a>",
+    "fund_deposit_mpv_tips3":"2. 登入以後提交實名認證資料",
+    "fund_deposit_mpv_tips4":"3. 點擊 首頁->乙太坊地址白名單->添加錢包地址"
 
 }

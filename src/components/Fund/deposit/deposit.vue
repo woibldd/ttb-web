@@ -136,7 +136,14 @@
         <li v-if="!!contract"> 
           {{$t('fund_deposit_tip_contract', {contract})}}
         </li>
-
+        <li v-if="selectCoin.currency==='MPV'">
+          <span>{{$t('fund_deposit_mpv_tips1')}}</span>
+          <dl>
+            <dd v-html="$t('fund_deposit_mpv_tips2')"></dd>
+            <dd v-html="$t('fund_deposit_mpv_tips3')"></dd>
+            <dd v-html="$t('fund_deposit_mpv_tips4')"></dd>
+          </dl>
+        </li>
       </ul>
     </div>
     <remember-alert

@@ -26,7 +26,7 @@
         <div class="swiper-pagination" slot="pagination" />
       </swiper>
     </div>
-    <div class="buy-currency-container">
+    <div class="buy-currency-container" v-if="state.locale==='zh-CN' || state.locale==='zh-HK'">
       <div class="currency-inner">
         <el-row>
           <el-col :span="6">

@@ -191,6 +191,12 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
                     :to="{name: 'withdraw'}"
                     class="link">{{ $t('withdraw') }}</router-link>
                 </li>
+                <li class="dropdown-item pl-24 pr-24"> 
+                  <router-link
+                    class="link" 
+                    :to="'/fund/transfer'">{{ $t('account_exchange') }}
+                  </router-link>
+                </li>
               </ul>
             </div>
           </div>
@@ -386,13 +392,16 @@ export default {
       utils.setSessionStorageValue('markTime', 9999999999)
       service.signout().then(res => {
         console.log({ res })
-        window.onload()
+        // window.onload()
+        this.$nextTick(() => {
+          location.reload()
+        })
       })
-      // if (utils.getRouteMeta(this.$route, 'auth')) {
-      //   this.$router.push({
-      //     name: 'login'
-      //   })
-      // }
+      if (utils.getRouteMeta(this.$route, 'auth')) {
+        this.$router.push({
+          name: 'login'
+        })
+      }
 
       // this.$nextTick(() => {
       //   location.reload()
