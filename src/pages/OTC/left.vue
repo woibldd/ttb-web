@@ -245,8 +245,7 @@ export default {
       })
     }, 
     getRatebyCurrency(item) {
-      let currency = this.legal_currency.toLowerCase()
-      console.log({item})
+      let currency = this.legal_currency.toLowerCase() 
       return item[currency + '_rate']
     },
     getFiatMoneySymbolByFiat (fiat) {

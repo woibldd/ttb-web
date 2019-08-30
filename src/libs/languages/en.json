@@ -2297,9 +2297,9 @@
 "fund_assets_type_trading":"交易返佣",
 "fund_assets_type_Upper":"上币返佣",
 "fund_assets_type_opening":"节点开通返佣",
-"fund_deposit_mpv_tips1":"MPV存币申请白名单操作流程如下：",
-"fund_deposit_mpv_tips2":"1. MPV官方注册账号<br/><a  href='https://assets.mpvworld.com/account/register'>https://assets.mpvworld.com/account/register</a>",
-"fund_deposit_mpv_tips3":"2. 登录以后提交实名认证资料",
-"fund_deposit_mpv_tips4":"3. 点击 首页 -> 以太坊地址白名单 -> 添加钱包地址"
+"fund_deposit_mpv_tips1":"MPV deposit white list application process as follows : ",
+"fund_deposit_mpv_tips2":"1. MPV official registered account <br/><a  href='https://assets.mpvworld.com/account/register'>https://assets.mpvworld.com/account/register</a>",
+"fund_deposit_mpv_tips3":"2. Submit real-name certification information after login",
+"fund_deposit_mpv_tips4":"3. Click Home -> Ethereum Address White list -> Add Wallet Address"
  
 }

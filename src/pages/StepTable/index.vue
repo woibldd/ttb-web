@@ -603,34 +603,34 @@ export default {
         page: 1,
         side: 0,
         size: 999
-      }
-      ).then(res => {
+      }).then(res => {
         if (res.code === 0) {
           if (res.data.data.length > 0) { 
             Vue.set(this.tab[0], 'count', res.data.data.length)
               if (this.active === 0) { 
-                that.data = res.data.data
-                that.data.forEach((item) => {
-                //state-1-等待对方付款 2-等待放币 3-已完成 4-买家取消 5-卖家取消 6买家超时取消 7卖家超时放币
-                if (item.state === 1) {
-                  Vue.set(item, 'time', item.create_time + 15 * 60 * 1000)
-                } else if (item.state === 2) {
-                  //申诉取消后
-                  if (item.appeal_time > 0) {
-                    Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
-                  }
-                  else {
-                    Vue.set(item, 'time', item.pay_time + 15 * 60 * 1000) 
-                  }
-                } else if (item.state === 7 ) {
-                  if (item.appeal_time > 0) {
-                    Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
-                  }
-                  else {
-                    Vue.set(item, 'time', item.pay_time + 12 * 60 * 60 * 1000 + 15 * 60 * 1000)
-                  }
-                } 
-              })
+                // that.data = res.data.data
+              //   that.data.forEach((item) => {
+              //   //state-1-等待对方付款 2-等待放币 3-已完成 4-买家取消 5-卖家取消 6买家超时取消 7卖家超时放币
+              //   if (item.state === 1) {
+              //     Vue.set(item, 'time', item.create_time + 15 * 60 * 1000)
+              //   } else if (item.state === 2) {
+              //     //申诉取消后
+              //     if (item.appeal_time > 0) {
+              //       Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
+              //     }
+              //     else {
+              //       Vue.set(item, 'time', item.pay_time + 15 * 60 * 1000) 
+              //     }
+              //   } else if (item.state === 7 ) {
+              //     if (item.appeal_time > 0) {
+              //       Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
+              //     }
+              //     else {
+              //       Vue.set(item, 'time', item.pay_time + 12 * 60 * 60 * 1000 + 15 * 60 * 1000)
+              //     }
+              //   } 
+              // })
+              this.setOrderInfo(res)
             } 
           }
         }
@@ -655,9 +655,9 @@ export default {
   // mounted() {
   //   this.setTimeInit()
   // },
-  // beforeDestroy() {
-  //   clearInterval(this.timer)
-  // },
+  beforeDestroy() {
+    clearInterval(this.timers)
+  },
   methods: {
     payName(type) {
       return {
@@ -941,98 +941,100 @@ export default {
         // eslint-disable-next-line no-case-declarations
         case 0:
           const rec = await service.getUnDonefills(that.params)
-          if (!rec.code) {
-            that.data = rec.data.data
-            that.total = rec.data.total
-            const noCount = []
-            const bankData = []
-            that.data.forEach((item) => {
-             //state-1-等待对方付款 2-等待放币 3-已完成 4-买家取消 5-卖家取消 6买家超时取消 7卖家超时放币
-              if (item.state === 1) {
-                Vue.set(item, 'time', item.create_time + 15 * 60 * 1000)
-              } else if (item.state === 2) {
-                //申诉取消后
-                if (item.appeal_time > 0) {
-                  Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
-                }
-                else {
-                  Vue.set(item, 'time', item.pay_time + 15 * 60 * 1000) 
-                }
-              } else if (item.state === 7 ) {
-                 if (item.appeal_time > 0) {
-                  Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
-                }
-                else {
-                  Vue.set(item, 'time', item.pay_time + 12 * 60 * 60 * 1000 + 15 * 60 * 1000)
-                }
-              }
-              if (item.otc_collection) {
-                Vue.set(item, 'otc_type', 1)
-              } else {
-                Vue.set(item, 'otc_type', 0)
-              }
-              //
-              if (item.otc_collection_list && !item.other_appeal && !item.appeal) noCount.push(item)
-              //
-              if (item.state === 1 && item.side === 1 && !item.appeal && !item.other_appeal) {
-                item.otc_collection_list.forEach((child) => {
-                  if (child.payment_type === 1) {
-                    bankData.push({
-                      id: child.collection_id,
-                      realName: child.name,
-                      name: child.deposit_bank + '/' + child.card_number
-                    })
-                  } else if (child.payment_type === 2) {
-                    bankData.push({
-                      id: child.collection_id,
-                      realName: child.name,
-                      name: this.$t('payment_namezfb') + '/' + child.alipay_account,
-                      img: child.collection_img
-                    })
-                  } else if (child.payment_type === 3) {
-                    bankData.push({
-                      id: child.collection_id,
-                      realName: child.name,
-                      name: this.$t('payment_weChat_adasunt') + '/' + child.we_chat_account,
-                      img: child.collection_img
-                    })
-                  } else if (child.payment_type === 4) {
-                    bankData.push({
-                      id: child.collection_id,
-                      realName: child.name,
-                      name: 'Paynow' + '/' + child.card_number,
-                      img: child.collection_img
-                    })
-                  } else if (child.payment_type === 5) {
-                    bankData.push({
-                      id: child.collection_id,
-                      realName: child.name,
-                      name: 'Paylah' + '/' + child.card_number,
-                      img: child.collection_img
-                    })
-                  }
-                  Vue.set(item, 'paySet', child.payment_type)
-                })
-                // 支付方式默认选择银行卡
-                const paylist = item.otc_collection_list
-                if (paylist.length > 0) {
-                  const arr = paylist.filter(arg => arg.payment_type === 1)
-                  if (arr.length > 0) {
-                    // this.selectPayment = arr[0]
-                    Vue.set(item, 'selectPayment', arr[0])
-                  } else {
-                    Vue.set(item, 'selectPayment', paylist[0])
-                  }
-                }
+          that.setOrderInfo(rec)
+          // if (!rec.code) {
+          //   that.data = rec.data.data
+          //   that.total = rec.data.total
+          //   const noCount = []
+          //   const bankData = []
+          //   that.data.forEach((item) => {
+          //    //state-1-等待对方付款 2-等待放币 3-已完成 4-买家取消 5-卖家取消 6买家超时取消 7卖家超时放币
+          //     if (item.state === 1) {
+          //       Vue.set(item, 'time', item.create_time + 15 * 60 * 1000)
+          //     } else if (item.state === 2) {
+          //       //申诉取消后
+          //       if (item.appeal_time > 0) {
+          //         Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
+          //       }
+          //       else {
+          //         Vue.set(item, 'time', item.pay_time + 15 * 60 * 1000) 
+          //       }
+          //     } else if (item.state === 7 ) {
+          //        if (item.appeal_time > 0) {
+          //         Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
+          //       }
+          //       else {
+          //         Vue.set(item, 'time', item.pay_time + 12 * 60 * 60 * 1000 + 15 * 60 * 1000)
+          //       }
+          //     }
+          //     if (item.otc_collection) {
+          //       Vue.set(item, 'otc_type', 1)
+          //     } else {
+          //       Vue.set(item, 'otc_type', 0)
+          //     }
+          //     //
+          //     if (item.otc_collection_list && !item.other_appeal && !item.appeal) noCount.push(item)
+          //     //
+          //     if (item.state === 1 && item.side === 1 && !item.appeal && !item.other_appeal) {
+          //       item.otc_collection_list.forEach((child) => {
+          //         if (child.payment_type === 1) {
+          //           bankData.push({
+          //             id: child.collection_id,
+          //             realName: child.name,
+          //             name: child.deposit_bank + '/' + child.card_number
+          //           })
+          //         } else if (child.payment_type === 2) {
+          //           bankData.push({
+          //             id: child.collection_id,
+          //             realName: child.name,
+          //             name: this.$t('payment_namezfb') + '/' + child.alipay_account,
+          //             img: child.collection_img
+          //           })
+          //         } else if (child.payment_type === 3) {
+          //           bankData.push({
+          //             id: child.collection_id,
+          //             realName: child.name,
+          //             name: this.$t('payment_weChat_adasunt') + '/' + child.we_chat_account,
+          //             img: child.collection_img
+          //           })
+          //         } else if (child.payment_type === 4) {
+          //           bankData.push({
+          //             id: child.collection_id,
+          //             realName: child.name,
+          //             name: 'Paynow' + '/' + child.card_number,
+          //             img: child.collection_img
+          //           })
+          //         } else if (child.payment_type === 5) {
+          //           bankData.push({
+          //             id: child.collection_id,
+          //             realName: child.name,
+          //             name: 'Paylah' + '/' + child.card_number,
+          //             img: child.collection_img
+          //           })
+          //         }
+          //         Vue.set(item, 'paySet', child.payment_type)
+          //       })
+          //       // 支付方式默认选择银行卡
+          //       const paylist = item.otc_collection_list
+          //       if (paylist.length > 0) {
+          //         const arr = paylist.filter(arg => arg.payment_type === 1)
+          //         if (arr.length > 0) {
+          //           // this.selectPayment = arr[0]
+          //           Vue.set(item, 'selectPayment', arr[0])
+          //         } else {
+          //           Vue.set(item, 'selectPayment', paylist[0])
+          //         }
+          //       }
 
-                Vue.set(item, 'bankArray', bankData)
-                Vue.set(item, 'bankId', '')
-                Vue.set(item, 'pAccount', '')
-                Vue.set(item, 'realName', '')
-                Vue.set(item, 'bankAccount', '')
-              }
-            })
-          }
+          //       Vue.set(item, 'bankArray', bankData)
+          //       Vue.set(item, 'bankId', '')
+          //       Vue.set(item, 'pAccount', '')
+          //       Vue.set(item, 'realName', '')
+          //       Vue.set(item, 'bankAccount', '')
+          //     }
+          //   })
+          // }
+
           break
         // eslint-disable-next-line no-case-declarations
         case 1:
@@ -1057,6 +1059,100 @@ export default {
             that.data = rew.data.data
             that.total = rew.data.total
           }
+      }
+    },
+    setOrderInfo(rec) { 
+      if (!rec.code) {
+        this.data = rec.data.data
+        this.total = rec.data.total
+        const noCount = []
+        const bankData = []
+        this.data.forEach((item) => {
+          //state-1-等待对方付款 2-等待放币 3-已完成 4-买家取消 5-卖家取消 6买家超时取消 7卖家超时放币
+          if (item.state === 1) {
+            Vue.set(item, 'time', item.create_time + 15 * 60 * 1000)
+          } else if (item.state === 2) {
+            //申诉取消后
+            if (item.appeal_time > 0) {
+              Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
+            }
+            else {
+              Vue.set(item, 'time', item.pay_time + 15 * 60 * 1000) 
+            }
+          } else if (item.state === 7 ) {
+              if (item.appeal_time > 0) {
+              Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
+            }
+            else {
+              Vue.set(item, 'time', item.pay_time + 12 * 60 * 60 * 1000 + 15 * 60 * 1000)
+            }
+          }
+          if (item.otc_collection) {
+            Vue.set(item, 'otc_type', 1)
+          } else {
+            Vue.set(item, 'otc_type', 0)
+          }
+          //
+          if (item.otc_collection_list && !item.other_appeal && !item.appeal) noCount.push(item)
+          //
+          if (item.state === 1 && item.side === 1 && !item.appeal && !item.other_appeal) {
+            item.otc_collection_list.forEach((child) => {
+              if (child.payment_type === 1) {
+                bankData.push({
+                  id: child.collection_id,
+                  realName: child.name,
+                  name: child.deposit_bank + '/' + child.card_number
+                })
+              } else if (child.payment_type === 2) {
+                bankData.push({
+                  id: child.collection_id,
+                  realName: child.name,
+                  name: this.$t('payment_namezfb') + '/' + child.alipay_account,
+                  img: child.collection_img
+                })
+              } else if (child.payment_type === 3) {
+                bankData.push({
+                  id: child.collection_id,
+                  realName: child.name,
+                  name: this.$t('payment_weChat_adasunt') + '/' + child.we_chat_account,
+                  img: child.collection_img
+                })
+              } else if (child.payment_type === 4) {
+                bankData.push({
+                  id: child.collection_id,
+                  realName: child.name,
+                  name: 'Paynow' + '/' + child.card_number,
+                  img: child.collection_img
+                })
+              } else if (child.payment_type === 5) {
+                bankData.push({
+                  id: child.collection_id,
+                  realName: child.name,
+                  name: 'Paylah' + '/' + child.card_number,
+                  img: child.collection_img
+                })
+              }
+              Vue.set(item, 'paySet', child.payment_type)
+            })
+            // 支付方式默认选择银行卡
+            const paylist = item.otc_collection_list
+            if (paylist.length > 0) {
+              const arr = paylist.filter(arg => arg.payment_type === 1)
+              if (arr.length > 0) {
+                // this.selectPayment = arr[0]
+                Vue.set(item, 'selectPayment', arr[0])
+              } else {
+                Vue.set(item, 'selectPayment', paylist[0])
+              }
+            }
+
+            Vue.set(item, 'bankArray', bankData)
+            Vue.set(item, 'bankId', '')
+            Vue.set(item, 'pAccount', '')
+            Vue.set(item, 'realName', '')
+            Vue.set(item, 'bankAccount', '')
+          }
+        })
       }
     },
     sq(item) {

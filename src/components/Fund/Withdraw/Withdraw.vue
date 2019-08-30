@@ -172,7 +172,7 @@ class="up-limit pointer ml-5">{{ $t('transfer_all') }}</a>
         <!-- <a @click="input_all" class="up-limit pointer ml-30">{{$t('transfer_all')}}</a> -->
       </div>
       <div class="fund-item-other withdraw-fee mb-23">
-        <p> <span class="fee__label">{{ $t('withdraw_fee') }} </span> <span class="fee__coin">{{ selectCoin.withdraw_fee }}{{ selectCoin.currency }}</span> </p>
+        <p> <span class="fee__label">{{ $t('withdraw_fee') }} </span> <span class="fee__coin">{{ selectCoin.withdraw_fee }}{{ selectCoin.withdraw_currency ? selectCoin.withdraw_currency : selectCoin.currency }}</span> </p>
         <p><span class="fee__label">{{ $t('withdraw_arrival') }}</span>
           <span
             class="fee__coin"
@@ -332,7 +332,11 @@ export default {
       }
     },
     coinArrival () {
-      return this.$big(parseFloat(this.withdrawCount) || 0).minus(this.$big(this.selectCoin.withdraw_fee || 0)).toString()
+      if (!!this.selectCoin.withdraw_currency) {
+        return this.$big(parseFloat(this.withdrawCount) || 0).toString()
+      } else {
+        return this.$big(parseFloat(this.withdrawCount) || 0).minus(this.$big(this.selectCoin.withdraw_fee || 0)).toString()
+      }
     },
     verify_google () {
       if (this.state.userInfo && this.state.userInfo.verify_google) {
