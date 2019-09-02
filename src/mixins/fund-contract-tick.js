@@ -24,14 +24,15 @@ export default {
         this.state.ct.pairTick = item 
       }
 
-      if (item.pair.indexOf('INDEX') > -1) {
-        if (item.pair.indexOf(this.state.ct.symbol) > -1) { 
-          this.state.ct.indexTick = {
-            current: item.current
-          }  
-        } 
-        this.state.ct.indexTickList[item.pair.replace('INDEX_','')] =  item.current
-      } else if (item.pair.indexOf('FUTURE') > -1) { 
+      // if (item.pair.indexOf('INDEX') > -1) {
+      //   if (item.pair.indexOf(this.state.ct.symbol) > -1) { 
+      //     this.state.ct.indexTick = {
+      //       current: item.current
+      //     }  
+      //   } 
+      //   this.state.ct.indexTickList[item.pair.replace('INDEX_','')] =  item.current
+      // } else 
+      if (item.pair.indexOf('FUTURE') > -1) { 
         this.state.ct.lastPriceList[item.pair.replace('FUTURE_','')] =  item.current
         
         if (!!this.state.ct.pairInfoList[item.pair]) {
@@ -43,7 +44,10 @@ export default {
           this.state.ct.markTick = {
             current: item.current
           }   
-        }  
+        }   
+        if (!!this.state.ct.pairInfoList[item.pair.replace('MARKET','FUTURE')]) { 
+          this.$set(this.state.ct.pairInfoList[item.pair.replace('MARKET','FUTURE')], 'markTick', item.current )
+        }
         // this.state.ct.markTickList[item.pair.replace('MARKET_','')] =  item.current
         // if (!!this.state.ct.pairInfoList[item.pair.replace('MARKET','FUTURE')]) {  
         //   // this.$set(ct.pairInfoList[item.pair.replace('MARKET','FUTURE')], 'markTick', item.current ) 
