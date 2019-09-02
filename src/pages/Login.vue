@@ -129,6 +129,24 @@
         </form>
       </div>
     </div>
+    <div class="download-mask" v-if="isMobile">
+      <div class="flex">
+        <div class="dl-icon">
+          <img
+            src="../assets/h5/h5_download@3x.png"
+            alt="">
+        </div>
+        <div class="dl__txt">
+          <p>IX.COM</p>
+          <p class="f16">{{ $t('download_app_dl') }}</p>
+        </div>
+      </div>
+      <div
+        class="dl__btn"
+        @click="download">
+        {{ $t('download_dl_app') }}
+      </div>
+    </div>
     <v-modal
       :open.sync="showModal"
       :backdrop="false"
@@ -237,6 +255,7 @@ export default {
     return {
       local,
       state,
+      utils,
       pwdType: 'password',
       regionId: '',
       errmsg: '',
@@ -270,8 +289,7 @@ export default {
 
         }
       },
-      prevent: false,
-      isMobile: utils.isMobile()
+      prevent: false 
     }
   },
   beforeRouteEnter(to, from, next) {  
@@ -321,7 +339,10 @@ export default {
         }
       }
       return type
-    }
+    },
+    isMobile(){
+      return this.utils.isMobile()
+    } 
   },
   watch: {
     showModal(val) {
@@ -358,7 +379,14 @@ export default {
   destroyed() {
     this.$eh.$off('app:resize')
   },
-  methods: {
+  methods: { 
+    download (type) {
+      let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
+      if (type === 'ios') {
+        url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
+      } 
+      window.location.href = url
+    },
     async fetchRegion() {
       const res = await service.getRegionList()
       if (!res.code) {

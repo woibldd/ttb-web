@@ -195,6 +195,24 @@
           </div>
         </form>
       </div>
+    </div>    
+    <div class="download-mask" v-if="isMobile">
+      <div class="flex">
+        <div class="dl-icon">
+          <img
+            src="../assets/h5/h5_download@3x.png"
+            alt="">
+        </div>
+        <div class="dl__txt">
+          <p>IX.COM</p>
+          <p class="f16">{{ $t('download_app_dl') }}</p>
+        </div>
+      </div>
+      <div
+        class="dl__btn"
+        @click="download">
+        {{ $t('download_dl_app') }}
+      </div>
     </div>
   </div>
 </template>
@@ -227,6 +245,7 @@ export default {
   data () {
     return {
       state,
+      utils,
       errmsg: '',
       email: '',
       invitorId: '',
@@ -342,7 +361,10 @@ export default {
         return this.$i18n.t('sms_retry')
       }
       return `${this.$i18n.t('sms_retry')}(${this.sms.countDown})`
-    }
+    },
+    isMobile() {
+      return this.utils.isMobile()
+    } 
   },
   watch: {
     params () {
@@ -353,7 +375,14 @@ export default {
       this.clearCountDown()
     }
   },
-  methods: {
+  methods: { 
+    download (type) {
+      let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
+      if (type === 'ios') {
+        url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
+      } 
+      window.location.href = url
+    },
     async submit (e) { 
       // 本地校验
       const check = this.checkParams()
