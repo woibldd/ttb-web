@@ -196,24 +196,7 @@
         </form>
       </div>
     </div>    
-    <div class="download-mask" v-if="isMobile">
-      <div class="flex">
-        <div class="dl-icon">
-          <img
-            src="../assets/h5/h5_download@3x.png"
-            alt="">
-        </div>
-        <div class="dl__txt">
-          <p>IX.COM</p>
-          <p class="f16">{{ $t('download_app_dl') }}</p>
-        </div>
-      </div>
-      <div
-        class="dl__btn"
-        @click="download">
-        {{ $t('download_dl_app') }}
-      </div>
-    </div>
+    <v-download />
   </div>
 </template>
 
@@ -228,6 +211,7 @@ import resbg from '@/components/resbg'
 import ixInput from '@/components/common/ix-input/ix-input.vue'
 import responsive from '@/mixins/responsive'
 import bubble from '@/components/Bubble'
+import VDownload from '@/components/VDownload'
   
 // import { MdField } from 'vue-material/dist/components'
 // import gtMixin from '@/mixins/gt'
@@ -239,7 +223,8 @@ export default {
     VBtn,
     resbg,
     ixInput,
-    bubble
+    bubble,
+    VDownload
   },
   props: ['by'],
   data () {
@@ -304,8 +289,8 @@ export default {
           }
         }
       },
-      triggerValidate: false,  
-      isMobile: utils.isMobile(),
+      triggerValidate: false,    
+      showTutorialArrow: false,
     }
   },
   /* beforeRouteEnter (to, from, next) {
@@ -376,13 +361,6 @@ export default {
     }
   },
   methods: { 
-    download (type) {
-      let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
-      if (type === 'ios') {
-        url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
-      } 
-      window.location.href = url
-    },
     async submit (e) { 
       // 本地校验
       const check = this.checkParams()

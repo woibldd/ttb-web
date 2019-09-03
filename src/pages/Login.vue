@@ -128,25 +128,8 @@
           </div>
         </form>
       </div>
-    </div>
-    <div class="download-mask" v-if="isMobile">
-      <div class="flex">
-        <div class="dl-icon">
-          <img
-            src="../assets/h5/h5_download@3x.png"
-            alt="">
-        </div>
-        <div class="dl__txt">
-          <p>IX.COM</p>
-          <p class="f16">{{ $t('download_app_dl') }}</p>
-        </div>
-      </div>
-      <div
-        class="dl__btn"
-        @click="download">
-        {{ $t('download_dl_app') }}
-      </div>
-    </div>
+    </div> 
+    <v-download />
     <v-modal
       :open.sync="showModal"
       :backdrop="false"
@@ -239,6 +222,7 @@ import ixInput from '@/components/common/ix-input/ix-input.vue'
 import countDown from '@/components/common/countdown-code-button'
 import responsive from '@/mixins/responsive'
 import bubble from '@/components/Bubble'
+import VDownload from '@/components/VDownload'
 
 export default {
   name: 'Login',
@@ -247,7 +231,8 @@ export default {
     resbg,
     ixInput,
     countDown,
-    bubble
+    bubble,
+    VDownload
   },
   mixins: [responsive],
   props: ['by'],
