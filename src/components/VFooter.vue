@@ -180,7 +180,7 @@ export default {
     },
     apiDoc() {
       return this.state.theme.apiDoc[this.state.locale || 'en']
-    },
+    }, 
     showEnTips() {
       return this.state.locale === 'en' || this.state.locale === 'ko'
     },

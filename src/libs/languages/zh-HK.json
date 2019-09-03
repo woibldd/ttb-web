@@ -2074,6 +2074,14 @@
     "fund_deposit_mpv_tips1":"MPV存幣申請白名單操作流程如下：",
     "fund_deposit_mpv_tips2":"1. MPV官方註冊帳號<br/><a  href='https://assets.mpvworld.com/account/register'>https://assets.mpvworld.com/account/register</a>",
     "fund_deposit_mpv_tips3":"2. 登入以後提交實名認證資料",
-    "fund_deposit_mpv_tips4":"3. 點擊 首頁->乙太坊地址白名單->添加錢包地址"
+    "fund_deposit_mpv_tips4":"3. 點擊 首頁->乙太坊地址白名單->添加錢包地址",
+    "h5_home_introduce1": "安全",
+    "h5_home_introduce2": "100%冷錢包”存放機制，確保平台資產全隔離公網，輔以多層加密、多級防火牆、多重簽名的驗證機制，極限保障用戶的資產安全。",
+    "h5_home_introduce3": "專業",
+    "h5_home_introduce4": "創始團隊均來自全球知名院校(麻省理工、耶魯大學、東京大學等)，而且具有主流數字貨幣交易所及大型互聯網項目的開發及運營經驗。",
+    "h5_home_introduce5": "體驗",
+    "h5_home_introduce6": "提供24小時不間斷的專屬客服服務，多語言支持，確保溝通沒有國界障礙，在提幣等核心服務環節上可以實現秒級響應。",
+    "h5_home_introduce7": "高效",
+    "h5_home_introduce8": "自研高性能撮合引擎，在嚴格的壓力測試下，可以充分支持200萬+/秒/交易對的撮合速度,確保服務不間斷，操作上無卡頓。"
 
 }

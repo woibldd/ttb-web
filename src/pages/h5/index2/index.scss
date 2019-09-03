@@ -1,0 +1,192 @@
+
+
+
+.h5-index-container{
+    color: $primary;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 100vw;
+
+    background-color: #273039;
+
+    .h5-page__banner {
+        background:rgba(51,59,70,1);
+        padding-top: rem(32);
+        .banner-pic {
+            box-sizing: border-box;
+            height: rem(340);
+            width: rem(686);
+            margin: 0 auto;
+            border-radius: rem(12);
+            img {
+                height: rem(340);
+                width: rem(686);
+            }
+        }
+        .banner-announce{
+            height: rem(106);
+            padding:0 rem(32);
+            display: flex;
+            align-items: center;
+            .intro {
+                margin-right: rem(24);
+                color: #ffffff;
+            }
+            .news {
+                width: rem(580);
+                text-align: center;
+                height: rem(28);
+                border-radius: rem(14);
+                background:rgba(39,48,57,1);
+                font-size: rem(20);
+            }
+        }
+        .more-dots{
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: transparent;
+            height: rem(32);
+            justify-content: space-between;
+            margin-left: rem(20);
+
+            > span {
+                display: inline-block;
+                width: rem(6);
+                height: rem(6);
+                border-radius: rem(3);
+                background-color: #ffffff;
+            }
+        }
+    }
+
+    .activity-info-section {
+      padding-left: rem(32);
+      padding-right: rem(32);
+      margin-top: rem(40);
+      margin-bottom: rem(4);
+      background:rgba(51,59,70,1);
+    }
+    .mine-info-section{
+        padding-left: rem(32);
+        padding-right: rem(32);
+        margin-top: rem(4);
+        margin-bottom: rem(4);
+        // padding-top: rem(100);
+        background:rgba(51,59,70,1);
+
+        .mine-summary-container {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    .h5-trading-summary {
+        width: 100%;
+        margin-top: rem(4);
+        padding-top: rem(40);
+        padding-left: rem(32);
+        padding-right: rem(32);
+        margin-bottom: rem(60);
+        box-sizing: border-box;
+        .trading__title {
+            height:rem(54);
+            width: 100%;
+            box-sizing: border-box;
+            background:linear-gradient(0deg,rgba(193,194,194,1) 0%,rgba(255,255,255,1) 100%);
+            border-radius:rem(27);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: rem(40);
+        }
+
+    }
+
+    .swiper-container {
+      border-radius: rem(12);
+      .swiper-pagination-bullet {
+        background: #ffffff !important;
+        opacity: 0.6;
+      }
+      .swiper-pagination-bullet-active{
+        background: #ffffff !important;
+        opacity: 1;
+      }
+    }
+
+}
+// 合作媒体
+.lang-en {
+  .corp-title {
+    width: rem(160) !important;
+    text-align: left !important;
+  }
+}
+.corperator {
+  display: flex;
+  width: 100%;
+  background: #1A1A1A;
+  border-bottom: 1px solid #3D3D3D;
+  .corperator-container {
+    margin: 0 auto;
+    padding-top: rem(60);
+    padding-bottom: rem(40);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .mb-rem-20 {
+        margin-bottom: rem(20);
+    }
+
+    .corp-row {
+      display: flex;
+      &.row-60 {
+        height: rem(60);
+      }
+      .corp-title {
+        width: rem(120);
+        font-size: rem(18);
+        font-weight:bold;
+        color:#929292;
+        display: flex;
+        height: rem(40);
+        padding: 0 rem(32);
+        align-items: center;
+      }
+      .corp-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        flex: 1;
+        .corp-logo {
+          margin-bottom: rem(20);
+          min-width: rem(150);
+          padding: 0 rem(16);
+          border-left: 1px solid #3D3D3D;
+          text-align: center;
+          height: rem(40);
+          display: flex;
+          align-items: center;
+          box-sizing: border-box;
+
+          .link {
+            display: block;
+            width: 100%;
+          }
+          .logo {
+            height: rem(20);
+            &.gs {
+              height: rem(60);
+            }
+            &.cw {
+              height: rem(35)
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+ 

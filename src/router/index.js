@@ -86,7 +86,7 @@ const TradeIndex = () => import(/* webpackChunkName: "ContractMaterial" */ '@/co
 
 // h5相关页面
 const h5login = () => import(/* webpackChunkName: "h5login" */ '@/pages/h5/sign-up')
-const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index')
+const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index2')
 
 // 合约大赛
 // 活动页面

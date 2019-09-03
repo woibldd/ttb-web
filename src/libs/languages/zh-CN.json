@@ -2220,7 +2220,15 @@
     "fund_deposit_mpv_tips1":"MPV存币申请白名单操作流程如下：",
     "fund_deposit_mpv_tips2":"1. MPV官方注册账号<br/><a  href='https://assets.mpvworld.com/account/register'>https://assets.mpvworld.com/account/register</a>",
     "fund_deposit_mpv_tips3":"2. 登录以后提交实名认证资料",
-    "fund_deposit_mpv_tips4":"3. 点击 首页 -> 以太坊地址白名单 -> 添加钱包地址"
+    "fund_deposit_mpv_tips4":"3. 点击 首页 -> 以太坊地址白名单 -> 添加钱包地址",
+    "h5_home_introduce1": "安全",
+    "h5_home_introduce2": "100%冷钱包”存放机制，确保平台资产全隔离公网，辅以多层加密、多级防火墙、多重签名的验证机制，极限保障用户的资产安全。",
+    "h5_home_introduce3": "专业",
+    "h5_home_introduce4": "创始团队均来自全球知名院校（麻省理工、耶鲁大学、东京大学等），而且具有主流数字货币交易所及大型互联网项目的开发及运营经验。",
+    "h5_home_introduce5": "体验",
+    "h5_home_introduce6": "提供24小时不间断的专属客服服务，多语言支持，确保沟通没有国界障碍，在提币等核心服务环节上可以实现秒级响应。",
+    "h5_home_introduce7": "高效",
+    "h5_home_introduce8": "自研高性能撮合引擎，在严格的压力测试下，可以充分支持200万+/秒/交易对的撮合速度，确保服务不间断，操作上无卡顿。"
     
   }
 
