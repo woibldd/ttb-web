@@ -59,22 +59,22 @@
     <div class="h5-introduce">
       <ul>
         <li>
-          <img src="@/assets/h5/anquan.png" alt="">
+          <img src="~@/assets/h5/anquan.png" alt="">
           <h2>{{ $t("h5_home_introduce1") }}</h2>
           <p>{{ $t("h5_home_introduce2") }}</p>
         </li>
         <li>
-          <img src="@/assets/h5/zhuanye.png" alt="">
+          <img src="~@/assets/h5/zhuanye.png" alt="">
           <h2>{{ $t("h5_home_introduce3") }}</h2>
           <p>{{ $t("h5_home_introduce4") }}</p>
         </li>
         <li>
-          <img src="@/assets/h5/tiyan.png" alt="">
+          <img src="~@/assets/h5/tiyan.png" alt="">
           <h2>{{ $t("h5_home_introduce5") }}</h2>
           <p>{{ $t("h5_home_introduce6") }}</p>
         </li>
         <li>
-          <img src="@/assets/h5/gaoxiao.png" alt="">
+          <img src="~@/assets/h5/gaoxiao.png" alt="">
           <h2>{{ $t("h5_home_introduce7") }}</h2>
           <p>{{ $t("h5_home_introduce8") }}</p>
         </li>

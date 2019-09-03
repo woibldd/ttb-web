@@ -8,7 +8,7 @@
             alt="">
         </div>
         <div class="dl__txt">
-          <p>IX.COM</p>
+          <p>IXX.COM</p>
           <p class="f16">{{ $t('download_app_dl') }}</p>
         </div>
       </div>
