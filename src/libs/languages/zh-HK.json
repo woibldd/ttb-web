@@ -2065,7 +2065,7 @@
     "otc_french_bill_liquidation": "當日清算",
     "otc_french_bill_buy": "買入",
     "otc_french_bill_sell": "賣出",
-    "otc_one_click_optimal": "单价最优",
+    "otc_one_click_optimal": "單價最優",
     
     "fund_assets_status_unissued": "未發放",
     "fund_assets_type_trading":"交易返傭",
@@ -2076,7 +2076,7 @@
     "fund_deposit_mpv_tips3":"2. 登入以後提交實名認證資料",
     "fund_deposit_mpv_tips4":"3. 點擊 首頁->乙太坊地址白名單->添加錢包地址",
     "h5_home_introduce1": "安全",
-    "h5_home_introduce2": "100%冷錢包”存放機制，確保平台資產全隔離公網，輔以多層加密、多級防火牆、多重簽名的驗證機制，極限保障用戶的資產安全。",
+    "h5_home_introduce2": "“100%冷錢包”存放機制，確保平台資產全隔離公網，輔以多層加密、多級防火牆、多重簽名的驗證機制，極限保障用戶的資產安全。",
     "h5_home_introduce3": "專業",
     "h5_home_introduce4": "創始團隊均來自全球知名院校(麻省理工、耶魯大學、東京大學等)，而且具有主流數字貨幣交易所及大型互聯網項目的開發及運營經驗。",
     "h5_home_introduce5": "體驗",

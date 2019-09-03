@@ -2301,13 +2301,13 @@
 "fund_deposit_mpv_tips2":"1. MPV official registered account <br/><a  href='https://assets.mpvworld.com/account/register'>https://assets.mpvworld.com/account/register</a>",
 "fund_deposit_mpv_tips3":"2. Submit real-name certification information after login",
 "fund_deposit_mpv_tips4":"3. Click Home -> Ethereum Address White list -> Add Wallet Address",
-"h5_home_introduce1": "安全",
-"h5_home_introduce2": "区块链安全专家、顶级技术团队、风控管理团队共同打造的数字资产交易平台，我们始终将用户的资金安全放在第一位。",
-"h5_home_introduce3": "专业",
-"h5_home_introduce4": "我们的团队成员来自知名互联网公司、金融机构、投资机构、区块链领域，共同打造高品质的产品、服务。",
-"h5_home_introduce5": "体验",
-"h5_home_introduce6": "致力打造“最简单”的数字资产交易平台；不断的产品打磨，提高用户在平台的体验。",
-"h5_home_introduce7": "安高效全",
-"h5_home_introduce8": "强大的技术支持以及完善的客服系统，使整个交易系统在交易中保持处理高效，响应迅速。"
+"h5_home_introduce1": "Safety",
+"h5_home_introduce2": "The “100% cold wallet” storage mechanism ensures that the platform assets are fully isolated from the public network, supplemented by multi-layer encryption, multi-level firewall, and multi-signature verification mechanism to the ultimate protection of user funds.",
+"h5_home_introduce3": "Professional",
+"h5_home_introduce4": "The founding team is from well-known universities around the world (MIT, Yale, and Tokyo), and has experience in the development and operation of mainstream crypto exchanges and large-scale Internet projects.",
+"h5_home_introduce5": "Experience",
+"h5_home_introduce6": "Provide 24-hour dedicated customer service, multilingual support, ensure communication without border barriers, and achieve a immediate response in core services such as coin withdrawal.",
+"h5_home_introduce7": "Efficient",
+"h5_home_introduce8": "Self-developing high-performance matching engine, can fully support the speed of 2 million+/second/trading pair, under strict stress test, ensuring uninterrupted service and smooth operation."
  
 }
