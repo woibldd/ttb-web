@@ -363,12 +363,7 @@ export default {
         })
       })
       for (let i = asks.length; i < 20; i++) {
-        asks.unshift({
-          price: '',
-          amount: '',
-          deep: '',
-          total: ''
-        }) 
+        asks.unshift({}) 
       }
 
       this.asks = asks
