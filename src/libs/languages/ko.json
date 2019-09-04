@@ -1581,7 +1581,7 @@
     "count_down_value": "%{hour} 때 %{minute} 분 %{second} 초",
     "message_setting_safety": "안전인증",
     "message_setting_notice": "웹 싸이트 알림",
-    "message_setting_content_01": "IX 다음 상황에서는 알려드리겠습니다.만약 브라우저가 지원한다면 우리도 시스템 알림을 보낼 것이다.만일 시스템 알림을 원하지 않으면 브라우저 인증시 브라우저 툴의 잠금 이미지를 취소하거나 클릭하여 권한을 취소할 수 있습니다.아래 알림 사용을 중지할 수도 있습니다。",
+    "message_setting_content_01": "IXX 다음 상황에서는 알려드리겠습니다.만약 브라우저가 지원한다면 우리도 시스템 알림을 보낼 것이다.만일 시스템 알림을 원하지 않으면 브라우저 인증시 브라우저 툴의 잠금 이미지를 취소하거나 클릭하여 권한을 취소할 수 있습니다.아래 알림 사용을 중지할 수도 있습니다。",
     "message_setting_content_02": "위탁 이미 신청",
     "message_setting_content_03": "위탁 이미 취소",
     "message_setting_content_04": "부분 위탁 신청",
