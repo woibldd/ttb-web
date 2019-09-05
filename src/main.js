@@ -55,7 +55,9 @@ import {
   Col,
   Tooltip,
   Popover,
-  Checkbox
+  Checkbox,
+  Carousel,
+  CarouselItem,
 } from 'element-ui'
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
@@ -65,6 +67,8 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 Vue.config.productionTip = false
+Vue.use(Carousel)
+Vue.use(CarouselItem)
 Vue.use(VueI18n)
 Vue.use(VTooltip)
 Vue.use(Row)
