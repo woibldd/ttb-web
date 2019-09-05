@@ -1616,7 +1616,7 @@
 
     "message_setting_safety":"安全认证",
     "message_setting_notice":"网站通知",
-    "message_setting_content_01":"IX 会在以下情况下通知您。 如果浏览器支持的话，我们也会发送系统通知。如果不希望系统通知，可以在浏览器授权时取消或点选浏览器URL的锁扣图像并取消授权。你也可以在下方停用个别通知。",
+    "message_setting_content_01":"IXX 会在以下情况下通知您。 如果浏览器支持的话，我们也会发送系统通知。如果不希望系统通知，可以在浏览器授权时取消或点选浏览器URL的锁扣图像并取消授权。你也可以在下方停用个别通知。",
     "message_setting_content_02":"委托已提交",
     "message_setting_content_03":"委托已被取消",
     "message_setting_content_04":"委托部分成交",

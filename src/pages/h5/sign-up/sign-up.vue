@@ -84,8 +84,7 @@
               :rule="validateRules.captcha"
               :placeholder="$t('captcha')"
               :label="$t('captcha')"
-            />
-
+            /> 
             <a
               class="sms-btn"
               :class="{disabled: sms.status === 1}"

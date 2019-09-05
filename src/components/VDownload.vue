@@ -46,7 +46,7 @@ export default {
       return this.utils.isMobile()
     },
     isIos () {
-      return utils.isIos
+      return utils.isIos()
     },
     isSafari () {
       return this.isIos && /safari/ig.test(navigator.userAgent)
@@ -62,7 +62,7 @@ export default {
         return
       }  
       let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
-      if (type === 'ios') {
+      if (this.isIos) {
         url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
       } 
       window.location.href = url

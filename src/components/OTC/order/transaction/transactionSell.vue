@@ -26,7 +26,7 @@
         <icon name="timer" />
         {{ $t('otc_overtime_tips_a1') }}
         <count-down :terminal="interval" />，
-        {{ $t('otc_overtime_tips_a2') }}取消订单
+        {{ $t('otc_overtime_tips_a2') }} {{$t('otc_cancel_order')}}
       </div>
       <!-- 订单信息 -->
       <div v-if="step===0" class="action-order-info wrap">

@@ -1569,7 +1569,7 @@
   "count_down_value": "%{hour} 時 %{minute} 分 %{second} 秒",
   "message_setting_safety": "安全認證",
   "message_setting_notice": "網站通知",
-  "message_setting_content_01": "IX 會在以下情况下通知您。如果瀏覽器支持的話，我們也會發送系統通知。如果不希望系統通知，可以在瀏覽器授權時取消或點選瀏覽器URL的鎖扣影像並取消授權。你也可以在下方停用個別通知。",
+  "message_setting_content_01": "IXX 會在以下情况下通知您。如果瀏覽器支持的話，我們也會發送系統通知。如果不希望系統通知，可以在瀏覽器授權時取消或點選瀏覽器URL的鎖扣影像並取消授權。你也可以在下方停用個別通知。",
   "message_setting_content_02": "委託已提交",
   "message_setting_content_03": "委託已被取消",
   "message_setting_content_04": "委託部分成交",

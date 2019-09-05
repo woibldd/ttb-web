@@ -362,6 +362,10 @@ export default {
           total: sellTotal
         })
       })
+      for (let i = asks.length; i < 20; i++) {
+        asks.unshift({}) 
+      }
+
       this.asks = asks
       this.bids = bids
       // 获取数据后强制指定滚动条位置，并重置状态，否则用户滚动会被纠正
