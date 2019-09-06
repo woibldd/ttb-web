@@ -35,8 +35,8 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
           <router-link
             to="/snowball/bazaar"
             class="nav_link  ml-30">  
-            {{ $t('bidTitle') }}
-            <!-- <whDropdown :menuOptions="[{label:'市盈盈',href:'/snowball/bazaar'}]" >{{$t('playBTC')}}</whDropdown > -->
+            <!-- {{ $t('bidTitle') }} -->
+            <whDropdown :menuOptions="[{label:$t('bidTitle'),href:'/snowball/bazaar'}]" >{{$t('playBTC')}}</whDropdown >
           </router-link>
           <a
             href="javascript:;"
