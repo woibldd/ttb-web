@@ -345,6 +345,41 @@ export default {
           }
         })
 
+         //保存和载入技术指标
+        let arr = utils.getStorageValue('ixx-contract-study')
+        if (!arr) {
+          arr = []
+        } else {
+          arr = JSON.parse(arr)
+        }
+  
+        arr.map(item => {
+          widget.chart().createStudy(
+            item.value,
+            !1,
+            !1,
+            item.args 
+          );
+        })
+  
+        widget.subscribe('study', (e) => { 
+          arr.push(e)
+          utils.setStorageValue('ixx-contract-study', JSON.stringify(arr) )
+        })
+
+        window.condwgt = widget
+        widget.subscribe('onAutoSaveNeeded', () => { 
+          let studies = condwgt.chart().getAllStudies()
+          arr.map(item => {
+            let s = studies.filter(a => a.name === item.value) 
+            if (s.length === 0) {
+              arr.splice(arr.indexOf(item), 1) 
+              utils.setStorageValue('ixx-contract-study', JSON.stringify(arr))
+              return
+            }
+          })
+        })
+
         // widget.chart().executeActionById("chartProperties") //样式设置
         // widget.chart().executeActionById("symbolSearch") //
         // widget.chart().executeActionById("insertIndicator")
