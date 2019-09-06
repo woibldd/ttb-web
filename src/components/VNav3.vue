@@ -33,7 +33,7 @@
 alt style="position: relative;top: 5px;left: 5px;"> -->
           </router-link>
           <router-link
-            to="/snowball/bazaar"
+            to="/snowball"
             class="nav_link  ml-30">  
             <!-- {{ $t('bidTitle') }} -->
             <whDropdown :menuOptions="[{label:$t('bidTitle'),href:'/snowball/bazaar'}]" >{{$t('playBTC')}}</whDropdown >

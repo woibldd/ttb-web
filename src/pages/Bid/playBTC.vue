@@ -70,21 +70,27 @@ export default {
           text:['竞猜大师','全球联赛尽收其中']
         },
       ],
-      loading: false
+      loading: false,
+      state,
     }
   },
   methods: {
     play(key) { 
-      if (!state.userInfo.id ) return
-      
+      if (!this.isLogin) {
+        this.$router.push({
+          name: 'login'
+        })
+        return
+      }
+
+
       this.loading = true
       const params = {
         uid: state.userInfo.id 
       }
       service.createCode(params).then(res => { 
         this.loading = false
-        if(res.code) { 
-          //console.log(res.code) 
+        if(res.code) {  
           this.enter(key, res.code)
         } 
         // else {
@@ -105,6 +111,11 @@ export default {
       // window.location.href = url
       window.open(url)
     }
+  },
+  computed: { 
+    isLogin () {
+      return this.state.userInfo !== null
+    },
   }
 }
 </script>
