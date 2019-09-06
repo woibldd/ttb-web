@@ -1284,7 +1284,11 @@ const service = {
   // 节点返佣
   nodeReturn(params) {
     return getCache('c_node_return', () => request('future/activity/node/list', params), 1e3)
-  }
+  },
+  //获取游戏code
+  createCode(params) {
+    return fetch('http://47.244.186.74:2100/oauth2/createcode.do', params)
+  } 
 }
 
 export async function fetch(url, body, options, method = 'post') {

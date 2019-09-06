@@ -1,7 +1,7 @@
 <template>
   <div class="entrust-order-container">
     <!-- 挂单列表 -->
-    <el-table v-loading="loading" :data="tableData" style="width: 100%">
+    <el-table v-loading="loading" :data="tableData" style="width: 100%" :empty-text="$t('no_data')">
       <el-table-column :label="$t('otc_position')" type="index"/>
       <el-table-column :label="$t('otc_completed_info')" prop="name" width="180">
         <template slot-scope="scope">
@@ -119,7 +119,7 @@ export default {
   },
   mixins: [otcComputed],
   data() {
-    return {
+    return { 
       tableData: [],
       loading: false,
       showSide: false,

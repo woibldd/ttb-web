@@ -16,7 +16,9 @@
               <p style="font-size:16px;color:#999999">{{item.text[1]}}</p>
             </div>
           </div>
-          <div class="container-btn">点击试玩</div>
+          <div class="container-btn"
+            @click="play(item.key)"
+            >点击试玩</div>
         </div>
       </div>
     </div>
@@ -24,6 +26,7 @@
 </template>
 <script>
 
+import service from '@/modules/service'
 export default {
   data(){
     return {
@@ -64,7 +67,29 @@ export default {
           dessrc:require('./assets/play-btc-6-1.png'),
           text:['竞猜大师','全球联赛尽收其中']
         },
-      ]
+      ],
+
+    }
+  },
+  methods: {
+    play(key) {
+      let params = {uid: 940951}
+      // service.createCode(params).then(res => { 
+      //   console.log({res}) 
+      // }) 
+      this.enter(key, '244633821494095145871')
+    },
+    enter(key, code) {
+      //1 极速火箭， 2足球神射，3绝杀卡当，4疯狂二八红，5发哥百家乐，6竞猜大师
+      let url = {
+        1: `https://testing-sso.cointest.link/channel/callbacks/IXX/ROCKET?code=${code}&langue=zh`,
+        2: `https://testing-sso.cointest.link/channel/callbacks/IXX/GOAL?code=${code}&langue=zh`,
+        3: `https://testing-sso.cointest.link/channel/callbacks/IXX/MEDIAN?code=${code}&langue=zh`,
+        4: `https://testing-sso.cointest.link/channel/callbacks/IXX/MAGNATE?code=${code}&langue=zh`,
+        5: `https://testing-sso.cointest.link/channel/callbacks/IXX/BACCARAT?code=${code}&langue=zh`,
+        6: `https://testing-sso.cointest.link/channel/callbacks/IXX/GAME-COLLECTION-MOB-INNER?code=${code}&langue=zh`,
+      }[key]
+      window.location.href = url
     }
   }
 }
