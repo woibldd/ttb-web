@@ -75,6 +75,8 @@ export default {
   },
   methods: {
     play(key) { 
+      if (!state.userInfo.id ) return
+      
       this.loading = true
       const params = {
         uid: state.userInfo.id 
