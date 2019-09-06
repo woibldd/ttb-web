@@ -60,22 +60,22 @@
       <ul>
         <li>
           <img src="~@/assets/h5/anquan.png" alt="">
-          <h2>{{ $t("h5_home_introduce1") }}</h2>
+          <h2 class='mb-10'>{{ $t("h5_home_introduce1") }}</h2>
           <p>{{ $t("h5_home_introduce2") }}</p>
         </li>
         <li>
           <img src="~@/assets/h5/zhuanye.png" alt="">
-          <h2>{{ $t("h5_home_introduce3") }}</h2>
+          <h2 class='mb-10'>{{ $t("h5_home_introduce3") }}</h2>
           <p>{{ $t("h5_home_introduce4") }}</p>
         </li>
         <li>
           <img src="~@/assets/h5/tiyan.png" alt="">
-          <h2>{{ $t("h5_home_introduce5") }}</h2>
+          <h2 class='mb-10'>{{ $t("h5_home_introduce5") }}</h2>
           <p>{{ $t("h5_home_introduce6") }}</p>
         </li>
         <li>
           <img src="~@/assets/h5/gaoxiao.png" alt="">
-          <h2>{{ $t("h5_home_introduce7") }}</h2>
+          <h2 class='mb-10'>{{ $t("h5_home_introduce7") }}</h2>
           <p>{{ $t("h5_home_introduce8") }}</p>
         </li>
          
@@ -338,7 +338,8 @@ export default {
   text-align: center;
   padding:20px 0;
   li{
-    margin-bottom: 100px;
+    margin-bottom: 80px;
+    margin-top: 50px;
     img {
       max-width: 60%;
       max-height: 150px; 
@@ -348,7 +349,7 @@ export default {
   h2{
     color:#fff;
     font-size: 16px;
-    margin-top: 5px;
+    margin-top: 20px;
   }
   p{
     color:rgba(203,230,253,1);

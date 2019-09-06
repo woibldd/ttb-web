@@ -1902,7 +1902,7 @@
   "otc_order_quota": "限额(%{legal_currency})",
   "otc_completed_infadwo": " 成交单数 / 完成率",
   "otc_completed_info": "商家(成单 | 完成率)",
-  "otc_need_authentication": "%{side} 需 <span style='color:$primary;'>高级认证</span>",
+  "otc_need_authentication": "%{side} 需 <span style='color:#01CED1;'>高级认证</span>",
   "otc_confirm_payment": "确认付款",
   "otc_sidees1": "等待对方付款",
   "otc_sidees2": "买家取消",

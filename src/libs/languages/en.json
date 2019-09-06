@@ -2251,7 +2251,8 @@
 "download_dl_app": "APP Download",
 "contract_buy_on_price_piece": "%{symbol} contract on (%{price}) price (%{amount}) piece。",
 "link_name":"link name",
-"otc_need_authentication": "%{side} requires <span style='color:$primary;'>Advanced verification</span>",
+"otc_need_authentication": "%{side} requires <span style='color:#01CED1;'>Advanced verification</span>", 
+"otc_confirm_payment": "I have paid",
 "pair_list_ST": "Zone",
  
 "deposit_state_error": "error", 
