@@ -115,7 +115,8 @@
                 v-model.trim="password"
                 @input="password=$event;pwChange($event)"
                 :trigger-validate="triggerValidate"
-                type="password"
+                :type.sync="pwdType"
+                :show-eye="true"
                 :required='true'
                 @focus="active(true)"
                 @blur="active(false)"
@@ -152,7 +153,8 @@
                 @input="password2=$event"
                 :trigger-validate="triggerValidate"
                 :required='true'
-                type="password"
+                :type.sync="pwdType2"
+                :show-eye="true"
                 :empty-err-tips="$t('change_password_diff')"
                 :rule="validateRules.password2"
                 :placeholder="$t('pwcheck_ph2')"
@@ -290,7 +292,9 @@ export default {
         }
       },
       triggerValidate: false,    
-      showTutorialArrow: false,
+      showTutorialArrow: false, 
+      pwdType: 'password',
+      pwdType2: 'password'
     }
   },
   /* beforeRouteEnter (to, from, next) {

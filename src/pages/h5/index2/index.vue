@@ -340,7 +340,9 @@ export default {
   li{
     margin-bottom: 100px;
     img {
-      max-width: 90%;
+      max-width: 60%;
+      max-height: 150px; 
+
     }
   }
   h2{

@@ -166,9 +166,7 @@ export default {
             'Plot.linewidth': 3,
             precision: 1
           })
-
-        console.log('0000000000000000000000000000000000000000001111111111111')
-
+ 
         local.lineType = 1 // 默认蜡烛线
         const resolutions = document.createElement('div') // 时间周期菜单
         // 时间周期下拉菜单
@@ -314,26 +312,41 @@ export default {
             btn.trigger('click')
           }
         })
-        // widget.btnFS = widget.createButton().on('click', (e, vm)=>{
-        //   let element = e.srcElement || e.target
-        //   let cls = element.classList
-        //   if (!cls.contains('selected')) {
-        //       element.classList.add('selected')
-        //       local.lineType = widget.chart().chartType() //记录当前的K线样式
-        //       widget.chart().setChartType(2)  //K线样式切換到线形图
-        //       widget.chart().setResolution('1', null) //周期切换到一分钟
-        //       widget.chart().setEntityVisibility(ida, false) //隐藏7 日平均线
-        //       widget.chart().setEntityVisibility(idb, false) //隐藏30 日平均线
-        //        widget.chart().setEntityVisibility(idc, false) //隐藏60 日平均线
-        //     } else {
-        //       element.classList.remove('selected')
-        //       widget.chart().setChartType(local.lineType)
-        //       widget.chart().setEntityVisibility(ida, true) //显示7 日平均线
-        //       widget.chart().setEntityVisibility(idb, true) //显示30 日平均线
-        //       widget.chart().setEntityVisibility(idc, true) //显示60 日平均线
-        //     }
-        // }).append(utils.$i18n.t("tradingview_line"))
-        // widget.btnFS[0].style.display = 'none'
+       
+        //保存和载入技术指标
+                let arr = utils.getStorageValue('ixx-trading-study')
+        if (!arr) {
+          arr = []
+        } else {
+          arr = JSON.parse(arr)
+        }
+
+        arr.map(item => {
+          widget.chart().createStudy(
+            item.value,
+            !1,
+            !1,
+            item.args 
+          );
+        })
+  
+        widget.subscribe('study', (e) => { 
+          arr.push(e)
+          utils.setStorageValue('ixx-trading-study', JSON.stringify(arr) )
+        })
+
+        window.tradwgt = widget
+        widget.subscribe('onAutoSaveNeeded', () => { 
+          let studies = tradwgt.chart().getAllStudies()
+          arr.map(item => {
+            let s = studies.filter(a => a.name === item.value) 
+            if (s.length === 0) {
+              arr.splice(arr.indexOf(item), 1) 
+              utils.setStorageValue('ixx-trading-study', JSON.stringify(arr))
+              return
+            }
+          })
+        })
 
         // widget.chart().executeActionById('drawingToolbarAction')
       })
