@@ -36,9 +36,12 @@
         </span> 
       </div>
       <div class="title__right">
-         <router-link 
+         <!-- <router-link 
           :to="'/myorder-new/pairs'"
-          class="fund-history">{{ $t('fund_trading_bill') }}</router-link>
+          class="fund-history">{{ $t('fund_trading_bill') }}</router-link> -->
+          <a class="fund-history" style="margin-right:15px">{{ $t('trading_account') }}</a>
+          <a class="fund-history" style="margin-right:15px">{{ $t('fund_trading_bill') }}</a>
+          <a class="fund-history">{{ $t('play-record') }}</a>
       </div>
     </div>
     <div class="clearfix"> 

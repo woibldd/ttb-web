@@ -35,7 +35,8 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
           <router-link
             to="/snowball"
             class="nav_link  ml-30">
-            {{ $t('bidTitle') }}
+            <!-- {{ $t('bidTitle') }} -->
+            <whDropdown :menuOptions="[{label:'市盈盈',href:'/snowball/bazaar'}]" >{{$t('playBTC')}}</whDropdown >
           </router-link>
           <a
             href="javascript:;"
@@ -285,8 +286,11 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
 import { state, actions } from '@/modules/store'
 import service from '@/modules/service'
 import utils from '@/modules/utils'
-
+import whDropdown from '@/components/dropdown/index'
 export default {
+  components: {
+    whDropdown,
+  },
   props: {
     dark: {
       type: Boolean,
