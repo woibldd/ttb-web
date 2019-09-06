@@ -1,7 +1,7 @@
 <template>
   <div class="order--container">
     <div class="profile-container">
-      <div class="title-box">{{ $t('fund_trading_bill') }}</div>
+      <div class="title-box">{{ $t('play-record') }}</div>
       <!-- <div class="row-select mt-24 mb-24">
         <span>{{ $t('pair') }}</span>
         <div class="row__value ml-9">
@@ -20,15 +20,17 @@
       <div class="table-wrapper">
         <table class="table">
           <tr class="thead">
-            <th>{{ $t('time') }}</th>
-            <th>{{ $t('pair') }}</th>
+            <!-- <th>{{ $t('active_relay_time') }} </th>
+            <th>{{ $t('pair') }} </th>
             <th>{{ $t('deal_th_side') }}</th>
             <th>{{ $t('order_th_type') }}</th>
             <th>{{ $t('orderdeal_fee') }}</th>
-            <!-- <th>{{ $t('order_ix_service_fee') }}</th> -->
             <th>{{ $t('avg_price') }}</th>
-            <th>{{ $t('deal_amount') }}</th>
-          <!-- <th>{{ $t('order_th_status') }}</th> -->
+            <th>{{ $t('deal_amount') }}</th> -->
+            <th>时间</th>
+            <th>订单ID</th>
+            <th>币种</th>
+            <th>数量</th>
           </tr>
           <tr
             class="row-tr"
