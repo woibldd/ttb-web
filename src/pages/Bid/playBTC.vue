@@ -5,7 +5,7 @@
         <h3>{{ item }}</h3>
       </el-carousel-item>
     </el-carousel>
-    <div class="container content">
+    <div class="container content" v-loading="loading">
       <div class="content-item" v-for="(item,index) in mapData" :key="index">
         <img :src="item.src" class="item-img">
         <div class="item-describe">
@@ -27,6 +27,8 @@
 <script>
 
 import service from '@/modules/service'
+import {state} from '@/modules/store'
+
 export default {
   data(){
     return {
@@ -68,28 +70,38 @@ export default {
           text:['竞猜大师','全球联赛尽收其中']
         },
       ],
-
+      loading: false
     }
   },
   methods: {
-    play(key) {
-      let params = {uid: 940951}
-      // service.createCode(params).then(res => { 
-      //   console.log({res}) 
-      // }) 
-      this.enter(key, '244633821494095145871')
+    play(key) { 
+      this.loading = true
+      const params = {
+        uid: state.userInfo.id 
+      }
+      service.createCode(params).then(res => { 
+        this.loading = false
+        if(res.code) { 
+          //console.log(res.code) 
+          this.enter(key, res.code)
+        } 
+        // else {
+        //   console.log(res.code)
+        // }
+      }) 
     },
     enter(key, code) {
-      //1 极速火箭， 2足球神射，3绝杀卡当，4疯狂二八红，5发哥百家乐，6竞猜大师
+      // 1 极速火箭， 2足球神射，3绝杀卡当，4疯狂二八红，5发哥百家乐，6竞猜大师
       let url = {
         1: `https://testing-sso.cointest.link/channel/callbacks/IXX/ROCKET?code=${code}&langue=zh`,
         2: `https://testing-sso.cointest.link/channel/callbacks/IXX/GOAL?code=${code}&langue=zh`,
         3: `https://testing-sso.cointest.link/channel/callbacks/IXX/MEDIAN?code=${code}&langue=zh`,
         4: `https://testing-sso.cointest.link/channel/callbacks/IXX/MAGNATE?code=${code}&langue=zh`,
         5: `https://testing-sso.cointest.link/channel/callbacks/IXX/BACCARAT?code=${code}&langue=zh`,
-        6: `https://testing-sso.cointest.link/channel/callbacks/IXX/GAME-COLLECTION-MOB-INNER?code=${code}&langue=zh`,
+        6: `https://testing-sso.cointest.link/channel/callbacks/IXX/GAME-COLLECTION-INNER?code=${code}&langue=zh`,
       }[key]
-      window.location.href = url
+      // window.location.href = url
+      window.open(url)
     }
   }
 }

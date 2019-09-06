@@ -1287,7 +1287,8 @@ const service = {
   },
   //获取游戏code
   createCode(params) {
-    return fetch('http://47.244.186.74:2100/oauth2/createcode.do', params)
+    // return fetch('http://47.244.186.74:2100/oauth2/createcode.do', params) 
+    return getCache('c_game_code', () => request('future/activity/oauth2/createcode.do', params), 6e5)
   } 
 }
 
