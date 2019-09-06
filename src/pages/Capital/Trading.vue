@@ -21,7 +21,7 @@
   <div class="fund-container my-fund-container">
     <div class="title-box">
       <div>
-        {{ $t('trading') }}
+        {{ $t('trading_account') }}
         <span class="ml-30">
           <el-select  
             v-model="unit"
@@ -39,9 +39,11 @@
          <!-- <router-link 
           :to="'/myorder-new/pairs'"
           class="fund-history">{{ $t('fund_trading_bill') }}</router-link> -->
-          <a class="fund-history" style="margin-right:15px">{{ $t('trading_account') }}</a>
-          <a class="fund-history" style="margin-right:15px">{{ $t('fund_trading_bill') }}</a>
-          <a class="fund-history">{{ $t('play-record') }}</a>
+
+          
+          <a class="fund-history" v-for="(name,index) in ['trading_account','fund_trading_bill','play-record']" :key="index" @click="handleTitleRightTab(name)" :class="{active:activeTab === name}" style="margin-left:15px">{{ $t(name) }}</a>
+          <!-- <a class="fund-history" :class="{active:activeTab === 'fund_trading_bill'}" style="margin-right:15px">{{ $t('fund_trading_bill') }}</a>
+          <a class="fund-history" :class="{active:activeTab === 'play-record'}">{{ $t('play-record') }}</a> -->
       </div>
     </div>
     <div class="clearfix"> 
@@ -56,11 +58,8 @@
           class="my-fund-operate">{{ $t('fund_trading_bill') }}</router-link>
       </div> -->
     </div>
-    <div 
-      class="my-fund-content">  
-      <el-table :empty-text=" $t('no_data') "
-                :data="tableData"
-                class="fund-coin-pool">
+    <div  v-if="activeTab === 'trading_account'" class="my-fund-content">  
+      <el-table :empty-text=" $t('no_data') " :data="tableData" class="fund-coin-pool">
         <el-table-column
           v-for="(hd, idx) in header"
           :key="idx"
@@ -166,6 +165,8 @@
         </el-table-column>
       </el-table> 
     </div>
+    <historyComponent v-else-if="activeTab === 'fund_trading_bill'" ></historyComponent>
+    <playRecord v-else-if="activeTab === 'play-record'" ></playRecord>
     <v-modal :open.sync="showLockModal">
       <div class="lock-modal">
         <div class="modal__title mb-30">
@@ -258,7 +259,8 @@
   import {state} from '@/modules/store'
   import utils from '@/modules/utils'
   import transferModal from '@/components/Fund/contract/transfer-modal'
-
+  import historyComponent from '@/components/MyOrderNew/bibi.vue'
+  import playRecord from '@/components/MyOrderNew/play-record.vue'
   const ExchangePairs = {
     'BTC': 'BTC_USDT',
     'EOS': 'EOS_BTC',
@@ -320,10 +322,14 @@
         unit: {},
         rates: {},
         pairList: [],
+
+        activeTab:'trading_account'
       }
     },
     components: {
-      transferModal
+      transferModal,
+      historyComponent,
+      playRecord
     },
     watch:{
       showModal(val){
@@ -416,6 +422,12 @@
       )
     },
     methods: {
+      handleTitleRightTab(name){
+        if(name === 'fund_trading_bill'){
+          this.$router.push('')
+        }
+        this.activeTab = name
+      },
       routerTransFer(item) {
         this.$router.push({
           path:'/fund/transfer',
@@ -602,6 +614,12 @@
 </script>
 <style lang="scss" scoped>
   @import './../../components/Fund/My/my.scss';
+  .title__right{
+    &>.active{
+      color: #01CED1 !important;
+      border-color: #01CED1 !important;
+    }
+  }
   .gz-wrapper {
     width: 520px;
     height: 176px;
