@@ -2109,6 +2109,45 @@
 "fund_deposit_tip_contract": "계약주소는：%{contract}，체크후 조작",
 "fund_trading_bill": "거래기록",
 "app_download_tips": "따스한 제시:APP 다운로드, iOS 핸드폰시스템버전 10.0 이상 건의.안드로이드폰 시스템 버전 7.0 이상",
+"playbtcMaptext":{
+  "1":{
+    "title":"극속로케트",
+    "describe":"로켓이 폭발하자, 수익이 모두 날아갔다.",
+    "tips":"퀴즈 게임",
+    "btntext":"점만 열면 바로 장난이다"
+  },
+  "2":{
+    "title":"축구신활",
+    "describe":"축구공이 문으로 들어서면 돈이 대야에 가득하다",
+    "tips":"축구 게임",
+    "btntext":"점만 열면 바로 장난이다"
+  },
+  "3":{
+    "title":"절살카드",
+    "describe":"포인트 아웃을 해서 이긴 사람이 갑절이 되다.",
+    "tips":"트럼프 게임",
+    "btntext":"점만 열면 바로 장난이다"
+  },
+  "4":{
+    "title":"광기 이팔색",
+    "describe":"여러 사람이 대결하니, 너도 죽여라",
+    "tips":"고주파 게임",
+    "btntext":"점만 열면 바로 장난이다"
+  },
+  "5":{
+    "title":"발가백가",
+    "describe":"문명하고 공정하며 실력으로 모범이 되다",
+    "tips":"오락 종목",
+    "btntext":"점만 열면 바로 장난이다"
+  },
+  "6":{
+    "title":"퀴즈대가",
+    "describe":"전 세계 리그는 전부",
+    "tips":"경기 예측",
+    "btntext":"점만 열면 바로 장난이다"
+  }
+},
+
 
 "fund_contract_up": "많이 하가",
 "fund_contract_down": "공백",
