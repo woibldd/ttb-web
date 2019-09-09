@@ -64,7 +64,7 @@ export default {
       let url = {
         1: `https://testing-sso.cointest.link/channel/callbacks/IXX/ROCKET?code=${code}&lang=zh`,
         2: `https://testing-sso.cointest.link/channel/callbacks/IXX/GOAL?code=${code}&langue=zh`,
-        3: `https://testing-sso.cointest.link/channel/callbacks/IXX/MEDIAN?code=${code}&lang=en`,
+        3: `https://testing-sso.cointest.link/channel/callbacks/IXX/MEDIAN?code=${code}&langug=en`,
         4: `https://testing-sso.cointest.link/channel/callbacks/IXX/MAGNATE?code=${code}&langue=zh`,
         5: `https://testing-sso.cointest.link/channel/callbacks/IXX/BACCARAT?code=${code}&langue=zh`,
         6: `https://testing-sso.cointest.link/channel/callbacks/IXX/GAME-COLLECTION-INNER?code=${code}&langue=zh`,

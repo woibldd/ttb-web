@@ -30,7 +30,7 @@
             <th>{{$t('time')}}</th>
             <th>订单ID</th>
             <th>{{$t('currency')}}</th>
-            <th>{{$t('time')}}</th>
+            <th>{{$t('amount')}}</th>
           </tr>
           <tr
             class="row-tr"
@@ -43,7 +43,7 @@
             <td>{{ row.fee | round(6) }} {{ row.side == 1 ? row.product : row.currency }}</td> 
             <td>{{ row.price }}</td>
             <td>{{ row.amount | round(5) }}</td>  -->
-            <td>{{ row.create_time }}</td>
+            <td>{{ row.create_time | date}}</td>
             <td>{{ row.order_no }}</td>
             <td>{{ row.asset_code }}</td>
             <td> {{ row.amount }}</td>

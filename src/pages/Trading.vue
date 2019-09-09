@@ -5,9 +5,7 @@
     <v-nav
       pro="1"
       v-if="!isMobile"/>
-    <mobile-nav
-      v-if="isMobile"
-    />
+    <mobile-nav v-if="isMobile" />
     <div class="container-trade-panel">
       <div class="ix-row">
         <div class="ix-col ix-col-2">
@@ -81,6 +79,9 @@
       </div>
     </div>
     <order-deal-popover />
+    <v-modal :open.sync="showMvpModal">
+
+    </v-modal>
   </div>
 </template>
 
@@ -119,7 +120,8 @@ export default {
     PairNav,
     Operate,
     MobileNav,
-    PairTitle
+    PairTitle,
+    showMvpModal: false
   },
   data () {
     return {

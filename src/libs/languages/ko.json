@@ -2182,5 +2182,8 @@
 "h5_home_introduce7": "효율적인",
 "h5_home_introduce8": "높은 성능의 프로그래밍 엔진을 자체 개발하고, 엄격한 스트레스 테스트, 200만 + 초/초, 교역의 적절한 속도 지원, 서비스 중단 및 운영 카드-무료.", 
 "otc_need_authentication": "%{side} 필요하다 <span style='color:#01CED1;'>고급 인증</span>",
-"otc_confirm_payment": "나는 이미 돈을 지불했다"
+"otc_confirm_payment": "나는 이미 돈을 지불했다",
+
+"playBTC": "오락도시",
+"play-record": "遊戲記錄"
 }

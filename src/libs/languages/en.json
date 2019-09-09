@@ -2278,48 +2278,46 @@
 "fund_deposit_tip_contract": "Contract address is: %{contract},check before operation",
 "fund_trading_bill": "Transactions record",
 "app_download_tips": "Tips: APP download, IOS mobile version 10.0 or above and Android phone version 7.0 above are recommended",
-
-"playBTC": "娛樂城",
-"play-record": "遊戲記錄",
+ 
+ 
 "playbtcMaptext":{
   "1":{
-    "title":"極速火箭",
-    "describe":"火箭一爆，收益全開",
-    "tips":"競猜遊戲",
-    "btntext":"點開即玩"
+    "title":"Rapid rocket",
+    "describe":"Profits fully realized once rocket exploded",
+    "tips":"Quiz game",
+    "btntext":"Click to play" 
   },
   "2":{
-    "title":"足球神射",
-    "describe":"足球進門，財富滿盆",
-    "tips":"足球遊戲",
-    "btntext":"點開即玩"
+    "title":"Soccer shots",
+    "describe":"Wealth fullness with goal, ",
+    "tips":"Football game",
+    "btntext":"Click to play" 
   },
   "3":{
-    "title":"絕殺卡當",
-    "describe":"點比特插隊，贏者翻倍",
-    "tips":"撲克遊戲",
-    "btntext":"點開即玩"
+    "title":"Killing Card",
+    "describe":"Point fight, double the winner",
+    "tips":"Poker game",
+    "btntext":"Click to play" 
   },
   "4":{
-    "title":"瘋狂二八紅",
-    "describe":"多人對決，等你通殺",
-    "tips":"高頻遊戲",
-    "btntext":"點開即玩"
+    "title":"Crazy 28 ",
+    "describe":"Multi-player duel, get them all",
+    "tips":"High frequency game",
+    "btntext":"Click to play" 
   },
   "5":{
-    "title":"發哥百家樂",
-    "describe":"文明公正，用實力做發哥",
-    "tips":"娛樂項目",
-    "btntext":"點開即玩"
+    "title":"Wealthy Baccarat",
+    "describe":"Civilized and fair, proof your strength",
+    "tips":"Entertainment event",
+    "btntext":"Click to play" 
   },
   "6":{
-    "title":"競猜大師",
-    "describe":"全球聯賽，盡收其中",
-    "tips":"賽事預測",
-    "btntext":"點開即玩"
+    "title":"Quiz Master",
+    "describe":"Global League",
+    "tips":"Event forecast",
+    "btntext":"Click to play" 
   }
 },
-
 
 "fund_contract_up": "Long",
 "fund_contract_down": "Short",
@@ -2351,6 +2349,9 @@
 "h5_home_introduce5": "Experience",
 "h5_home_introduce6": "Provide 24-hour dedicated customer service, multilingual support, ensure communication without border barriers, and achieve a immediate response in core services such as coin withdrawal.",
 "h5_home_introduce7": "Efficient",
-"h5_home_introduce8": "Self-developing high-performance matching engine, can fully support the speed of 2 million+/second/trading pair, under strict stress test, ensuring uninterrupted service and smooth operation."
+"h5_home_introduce8": "Self-developing high-performance matching engine, can fully support the speed of 2 million+/second/trading pair, under strict stress test, ensuring uninterrupted service and smooth operation.",
+
+"playBTC": "Entertainment Zone",
+"play-record": "遊戲記錄"
  
 }
