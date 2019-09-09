@@ -62,9 +62,9 @@ export default {
     enter(key, code) {
       // 1 极速火箭， 2足球神射，3绝杀卡当，4疯狂二八红，5发哥百家乐，6竞猜大师
       let url = {
-        1: `https://testing-sso.cointest.link/channel/callbacks/IXX/ROCKET?code=${code}&langue=zh`,
+        1: `https://testing-sso.cointest.link/channel/callbacks/IXX/ROCKET?code=${code}&lang=zh`,
         2: `https://testing-sso.cointest.link/channel/callbacks/IXX/GOAL?code=${code}&langue=zh`,
-        3: `https://testing-sso.cointest.link/channel/callbacks/IXX/MEDIAN?code=${code}&langue=en`,
+        3: `https://testing-sso.cointest.link/channel/callbacks/IXX/MEDIAN?code=${code}&lang=en`,
         4: `https://testing-sso.cointest.link/channel/callbacks/IXX/MAGNATE?code=${code}&langue=zh`,
         5: `https://testing-sso.cointest.link/channel/callbacks/IXX/BACCARAT?code=${code}&langue=zh`,
         6: `https://testing-sso.cointest.link/channel/callbacks/IXX/GAME-COLLECTION-INNER?code=${code}&langue=zh`,

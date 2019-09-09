@@ -2278,42 +2278,45 @@
 "fund_deposit_tip_contract": "Contract address is: %{contract},check before operation",
 "fund_trading_bill": "Transactions record",
 "app_download_tips": "Tips: APP download, IOS mobile version 10.0 or above and Android phone version 7.0 above are recommended",
+
+"playBTC": "娛樂城",
+"play-record": "遊戲記錄",
 "playbtcMaptext":{
   "1":{
-    "title":"Rapid rocket",
-    "describe":"Profits fully realized once rocket exploded",
-    "tips":"Quiz game",
-    "btntext":"Click to play"
+    "title":"極速火箭",
+    "describe":"火箭一爆，收益全開",
+    "tips":"競猜遊戲",
+    "btntext":"點開即玩"
   },
   "2":{
-    "title":"Soccer shots",
-    "describe":"Wealth fullness with goal, ",
-    "tips":"Football game",
-    "btntext":"Click to play"
+    "title":"足球神射",
+    "describe":"足球進門，財富滿盆",
+    "tips":"足球遊戲",
+    "btntext":"點開即玩"
   },
   "3":{
-    "title":"Killing Card",
-    "describe":"Point fight, double the winner",
-    "tips":"Poker game",
-    "btntext":"Click to play"
+    "title":"絕殺卡當",
+    "describe":"點比特插隊，贏者翻倍",
+    "tips":"撲克遊戲",
+    "btntext":"點開即玩"
   },
   "4":{
-    "title":"Crazy 28 ",
-    "describe":"Multi-player duel, get them all",
-    "tips":"High frequency game",
-    "btntext":"Click to play"
+    "title":"瘋狂二八紅",
+    "describe":"多人對決，等你通殺",
+    "tips":"高頻遊戲",
+    "btntext":"點開即玩"
   },
   "5":{
-    "title":"Wealthy Baccarat",
-    "describe":"Civilized and fair, proof your strength",
-    "tips":"Entertainment event",
-    "btntext":"Click to play"
+    "title":"發哥百家樂",
+    "describe":"文明公正，用實力做發哥",
+    "tips":"娛樂項目",
+    "btntext":"點開即玩"
   },
   "6":{
-    "title":"Quiz Master",
-    "describe":"Global League",
-    "tips":"Event forecast",
-    "btntext":"Click to play"
+    "title":"競猜大師",
+    "describe":"全球聯賽，盡收其中",
+    "tips":"賽事預測",
+    "btntext":"點開即玩"
   }
 },
 

@@ -32,12 +32,28 @@
             <!-- <img src="@/assets/hot.png"
 alt style="position: relative;top: 5px;left: 5px;"> -->
           </router-link>
-          <router-link
+          <!-- <router-link
             to="/snowball"
-            class="nav_link  ml-30">  
-            <!-- {{ $t('bidTitle') }} -->
-            <whDropdown :menuOptions="[{label:$t('bidTitle'),href:'/snowball/bazaar'}]" >{{$t('playBTC')}}</whDropdown >
-          </router-link>
+            class="nav_link  ml-30">   
+            <whDropdown :menuOptions="[{label:$t('bidTitle'),href:'/snowball/bazaar'}]" >{{$t('playBTC')}}</whDropdown > 
+          </router-link>-->
+            <div class="nav_link arrow-down">
+            <router-link
+              to="/snowball"
+              class="nav_link ml-20">{{ $t('playBTC') }} 
+            </router-link> 
+            <div class="dropdown-sub-menu">
+              <ul class="dropdown-list pt-10 pb-10">
+                <li class="dropdown-item pl-24 pr-24">
+                  <a
+                    href="/snowball/bazaar"
+                    :class="{'router-link-active': from === 'contract'}"
+                    class="link">{{ $t('bidTitle') }} 
+                  </a>
+                </li>  
+              </ul>
+            </div>
+          </div>
           <a
             href="javascript:;"
             class="nav_link" 
@@ -509,7 +525,7 @@ export default {
             background: $protrade-bg;
             position: absolute;
             left: 0;
-            top: 68px;
+            top: 58px;
             border-radius: 4px;
             z-index: 999;
             opacity: 0;
@@ -519,6 +535,7 @@ export default {
             .dropdown-list {
               .dropdown-item {
                 height: 40px;
+                line-height: 40px;
                 white-space: nowrap;
                 .link {
                   width: 100%;

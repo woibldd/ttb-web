@@ -127,7 +127,7 @@ export default {
       // this.params.symbol = this.selectPair.name || ''
       service.gameTradeList(this.params).then(res => {
         // this.originList = res.data // 暂时前端过滤,所以保留最初的全部数据
-        this.tableData = res.data
+        this.tableData = res.data.data
       }).finally(() => {
         this.isLoading = false
       })
@@ -197,8 +197,8 @@ export default {
             text-align: left;
         }
         .thead {
-            border-top: 1px dashed #999999;
-            border-bottom: 1px dashed #999999;
+            // border-top: 1px solid #EBEEF5;
+            border-bottom: 1px solid #EBEEF5;
         }
         .row-tr {
             color: #666;

@@ -455,8 +455,7 @@ export default {
         }
       })
     },
-    async changeCoinType (coin) {
-      console.log({coin})
+    async changeCoinType (coin) { 
       if (coin.currency === 'USDT') {
         this.selectCoin = this.selectLian
       }

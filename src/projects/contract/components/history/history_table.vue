@@ -863,7 +863,7 @@ export default {
     cursor: help;
 }
 .border_bottom_dash {
-        border-bottom: 1px dashed #C8AA6C;
+        border-bottom: 1px solid #C8AA6C;
     }
 .history_table_container {
   height: 240px;
