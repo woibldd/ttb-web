@@ -2212,8 +2212,46 @@
     "otc_french_bill_buy": "买入",
     "otc_french_bill_sell": "卖出",
     "otc_one_click_optimal": "单价最优",
-    "playBTC": "玩转BTC",
+    "playBTC": "娱乐城",
     "play-record": "游戏记录",
+    "playbtcMaptext":{
+      "1":{
+        "title":"极速火箭",
+        "describe":"火箭一爆，收益全开",
+        "tips":"竞猜游戏",
+        "btntext":"点开即玩"
+      },
+      "2":{
+        "title":"足球神射",
+        "describe":"足球进门，财富满盆",
+        "tips":"足球游戏",
+        "btntext":"点开即玩"
+      },
+      "3":{
+        "title":"绝杀卡当",
+        "describe":"点位插队，赢者翻倍",
+        "tips":"扑克游戏",
+        "btntext":"点开即玩"
+      },
+      "4":{
+        "title":"疯狂二八红",
+        "describe":"多人对决 ，等你通杀",
+        "tips":"高频游戏",
+        "btntext":"点开即玩"
+      },
+      "5":{
+        "title":"发哥百家乐",
+        "describe":"文明公正，用实力做发哥",
+        "tips":"娱乐项目",
+        "btntext":"点开即玩"
+      },
+      "6":{
+        "title":"竞猜大师",
+        "describe":"全球联赛，尽收其中",
+        "tips":"赛事预测",
+        "btntext":"点开即玩"
+      }
+    },
     
     "fund_assets_status_unissued": "未发放",
     "fund_assets_type_trading":"交易返佣",

@@ -2278,6 +2278,45 @@
 "fund_deposit_tip_contract": "Contract address is: %{contract},check before operation",
 "fund_trading_bill": "Transactions record",
 "app_download_tips": "Tips: APP download, IOS mobile version 10.0 or above and Android phone version 7.0 above are recommended",
+"playbtcMaptext":{
+  "1":{
+    "title":"Rapid rocket",
+    "describe":"Profits fully realized once rocket exploded",
+    "tips":"Quiz game",
+    "btntext":"Click to play"
+  },
+  "2":{
+    "title":"Soccer shots",
+    "describe":"Wealth fullness with goal, ",
+    "tips":"Football game",
+    "btntext":"Click to play"
+  },
+  "3":{
+    "title":"Killing Card",
+    "describe":"Point fight, double the winner",
+    "tips":"Poker game",
+    "btntext":"Click to play"
+  },
+  "4":{
+    "title":"Crazy 28 ",
+    "describe":"Multi-player duel, get them all",
+    "tips":"High frequency game",
+    "btntext":"Click to play"
+  },
+  "5":{
+    "title":"Wealthy Baccarat",
+    "describe":"Civilized and fair, proof your strength",
+    "tips":"Entertainment event",
+    "btntext":"Click to play"
+  },
+  "6":{
+    "title":"Quiz Master",
+    "describe":"Global League",
+    "tips":"Event forecast",
+    "btntext":"Click to play"
+  }
+},
+
 
 "fund_contract_up": "Long",
 "fund_contract_down": "Short",

@@ -679,7 +679,7 @@ export default {
       font-size: 16px;
     }
     .lang_box {
-      display: block;
+      // display: block;
       width: 100%;
       height: auto;
       line-height: 40px;
@@ -703,7 +703,7 @@ export default {
     }
     &:hover {
       .lang_box {
-        display: flex;
+        display: block;
       }
       .rig {
         transform: rotate(180deg);
