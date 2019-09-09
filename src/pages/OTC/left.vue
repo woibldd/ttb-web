@@ -191,7 +191,7 @@ export default {
                 .then(res => {
                   if (res.code === 0) {
                     res.data.data.forEach(item => {
-                      if (item.state === 2) countData.push(item);
+                      if (item.state === 1 || item.state === 2 || item.state === 6 ) countData.push(item);
                     });
                     this.count = countData.length;
                   }
@@ -260,7 +260,7 @@ export default {
                 .then(res => {
                   if (res.code === 0) {
                     res.data.data.forEach(item => {
-                      if (item.state === 2) countData.push(item);
+                      if (item.state === 1 || item.state === 2 || item.state === 6 ) countData.push(item);
                     });
                     this.count = countData.length;
                   }

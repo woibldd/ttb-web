@@ -1285,11 +1285,15 @@ const service = {
   nodeReturn(params) {
     return getCache('c_node_return', () => request('future/activity/node/list', params), 1e3)
   },
-  //获取游戏code
+  //获取游戏code  一个小时获取一次，再次获取后上一次作废，如不重新获取，上一次的code一直有效
   createCode(params) {
     // return fetch('http://47.244.186.74:2100/oauth2/createcode.do', params) 
     return getCache('c_game_code', () => request('future/activity/oauth2/createcode.do', params), 6e5)
-  } 
+  } ,
+  //游戏记录查询
+  gameTradeList(params) {
+    return getCache('c_game_trade', ()=> request('future/activity/gameTrade/list', params), 1e3)
+  }
 }
 
 export async function fetch(url, body, options, method = 'post') {

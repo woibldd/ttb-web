@@ -27,24 +27,26 @@
             <th>{{ $t('orderdeal_fee') }}</th>
             <th>{{ $t('avg_price') }}</th>
             <th>{{ $t('deal_amount') }}</th> -->
-            <th>时间</th>
+            <th>{{$t('time')}}</th>
             <th>订单ID</th>
-            <th>币种</th>
-            <th>数量</th>
+            <th>{{$t('currency')}}</th>
+            <th>{{$t('time')}}</th>
           </tr>
           <tr
             class="row-tr"
             v-for="(row,index) in tableData"
             :key="index">
-            <td>{{ row.create_time }}</td>
+            <!-- <td>{{ row.create_time }}</td>
             <td>{{ row.symbol | pairfix }}</td>
             <td> <span v-html="processSide(row.side)"/></td>
             <td>{{ row.type == 1 ? $t('operate_limit') : $t('operate_market') }}</td>
-            <td>{{ row.fee | round(6) }} {{ row.side == 1 ? row.product : row.currency }}</td>
-            <!-- <td>{{row.discount}}</td> -->
+            <td>{{ row.fee | round(6) }} {{ row.side == 1 ? row.product : row.currency }}</td> 
             <td>{{ row.price }}</td>
-            <td>{{ row.amount | round(5) }}</td>
-          <!-- <td>{{row.}}</td> -->
+            <td>{{ row.amount | round(5) }}</td>  -->
+            <td>{{ row.create_time }}</td>
+            <td>{{ row.order_no }}</td>
+            <td>{{ row.asset_code }}</td>
+            <td> {{ row.amount }}</td>
           </tr>
         </table>
         <div
@@ -80,17 +82,12 @@ export default {
       total: 0,
       params: {
         page: 1,
-        size: 10,
-        symbol: ''
+        size: 10, 
+        // user_id: 940951
       }
     }
   },
-  methods: {
-    changePairs (e) {
-      this.filterList()
-      this.params.symbol = e.name
-      this.getList()
-    },
+  methods: { 
     currentHandle (e) {
       this.params.page = e
       this.getList()
@@ -116,20 +113,20 @@ export default {
         this.pairList = res.data.items
       }
     },
-    filterList () {
-      this.tableData = this.originList.filter(item => {
-        return item.symbol === this.selectPair.name
-      })
-    },
+    // filterList () {
+    //   this.tableData = this.originList.filter(item => {
+    //     return item.symbol === this.selectPair.name
+    //   })
+    // },
     getList () {
       // const params = {
       //   page: 1,
       //   size: 10,
       //   symbol: this.selectPair.name
       // }
-      this.params.symbol = this.selectPair.name || ''
-      service.getBiBiOrders(this.params).then(res => {
-        this.originList = res.data // 暂时前端过滤,所以保留最初的全部数据
+      // this.params.symbol = this.selectPair.name || ''
+      service.gameTradeList(this.params).then(res => {
+        // this.originList = res.data // 暂时前端过滤,所以保留最初的全部数据
         this.tableData = res.data
       }).finally(() => {
         this.isLoading = false

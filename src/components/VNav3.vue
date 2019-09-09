@@ -668,7 +668,7 @@ export default {
     text-align: center;
     font-size: 12px;
     cursor: pointer;
-    z-index: 2;
+    z-index: 100;
     .rig {
       display: inline-block;
       transition: all 0.2s ease-in-out;
