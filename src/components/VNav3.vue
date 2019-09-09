@@ -447,7 +447,7 @@ export default {
 .nav_box {
   width: 100%;
   height: 60px;
-
+  min-width: 1340px;
   .border-right-1 {
     border-right: 1px solid #ffffff;
   }
@@ -455,7 +455,7 @@ export default {
   .ind_cen {
     position: relative;
     margin: 0 60px;
-    min-width: 1200px;
+    min-width: 1300px;
   }
 
   .nav_logo {
@@ -742,11 +742,11 @@ export default {
 .login {
   background: $home-header-login;
 }
-@media screen and (min-width: 1280px){ // 1280是英文状态下nav正常显示的最小宽度
+@media screen and (min-width: 1300px){ // 1280是英文状态下nav正常显示的最小宽度
     .nav_box {
         .ind_cen {
             width: auto;
-            min-width: 1200px;
+            min-width: 1300px;
             margin: 0 60px;
         }
    }

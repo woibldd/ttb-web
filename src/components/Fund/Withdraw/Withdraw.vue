@@ -375,6 +375,7 @@ export default {
   },
   methods: {
     async lianSelect (coin) {
+      console.log({coin})
       this.selectCoin = coin
       await this.getCoinAddress()
       this.updadeMyCoinInfo()
@@ -455,7 +456,13 @@ export default {
       })
     },
     async changeCoinType (coin) {
-      this.selectCoin = coin
+      console.log({coin})
+      if (coin.currency === 'USDT') {
+        this.selectCoin = this.selectLian
+      }
+      else {
+        this.selectCoin = coin
+      }
       this.selectItem = ''
       this.selectAddress = {
         address: '',
@@ -473,6 +480,7 @@ export default {
       })
     },
     async getAllCoinTypes () {
+
       await service.getAllCoinTypes().then(res => {
         if (res && res.data) {
           this.lianData = []
