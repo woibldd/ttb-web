@@ -292,7 +292,7 @@ export default {
         const amount = holding.holding
         const currency = holding.currency
         const price = holding.price
-        console.log({ lastPrice, markPrice, mul, price })
+        // console.log({ lastPrice, markPrice, mul, price })
 
         holding.product_name = pairInfo.product_name
         holding.value_scale = pairInfo.value_scale || 4
@@ -302,7 +302,7 @@ export default {
         // holding.markPrice = markPrice
         Vue.set(holding, 'lastPrice', lastPrice)
         Vue.set(holding, 'markPrice', markPrice)
-        console.log(holding, 'vue-set')
+        // console.log(holding, 'vue-set')
         holding.unrealized = '0'
         holding.unrealizedlp = '0'
         holding.roe = '0'
