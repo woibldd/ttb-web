@@ -16,7 +16,7 @@
   "withdraw": "Withdrawal",
   "wallet_accosaada": "About the fund account",
   "copy": "Copy",
-
+  "amount_unit": "Amount(%{unit})", 
   "label": "Label",
   "cancel": "Cancel",
   "close": "Close",
