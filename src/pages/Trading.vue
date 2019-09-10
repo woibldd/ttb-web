@@ -136,7 +136,7 @@ export default {
       state,
       comps: [],
       isMobile: utils.isMobile(),
-      showMvpModal: true
+      showMvpModal: false
     }
   },
   watch: {
