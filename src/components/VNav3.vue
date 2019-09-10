@@ -32,12 +32,12 @@
             <!-- <img src="@/assets/hot.png"
 alt style="position: relative;top: 5px;left: 5px;"> -->
           </router-link>
-          <!-- <router-link
-            to="/snowball"
-            class="nav_link  ml-30">   
-            <whDropdown :menuOptions="[{label:$t('bidTitle'),href:'/snowball/bazaar'}]" >{{$t('playBTC')}}</whDropdown > 
-          </router-link>-->
-            <div class="nav_link arrow-down">
+          <router-link
+            to="/snowball/bazaar"
+            class="nav_link  ml-30">    
+            {{$t('bidTitle')}}
+          </router-link>
+          <!-- <div class="nav_link arrow-down">
             <router-link
               to="/snowball"
               class="nav_link ml-20">{{ $t('playBTC') }} 
@@ -53,7 +53,7 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
                 </li>  
               </ul>
             </div>
-          </div>
+          </div> -->
           <a
             href="javascript:;"
             class="nav_link" 

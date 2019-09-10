@@ -112,6 +112,9 @@
           <li class>
             <a class="menu-name" :href="commonProblemLink">{{ $t('footer_hreseqgslp2') }}</a>
           </li>
+           <li class>
+            <a class="menu-name" :href="fxpl">{{ $t('fxpl')}}</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -133,6 +136,7 @@ export default {
         btcCount: 0,
         usdtCount: 0
       },
+      fxpl: 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360033225252--IXX-com平台反洗钱和反恐怖融资用户指引-',
       symbolList: {
         CNY: {
           name: "CNY",

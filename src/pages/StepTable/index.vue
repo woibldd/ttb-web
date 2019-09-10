@@ -80,7 +80,7 @@
           class="nav-list"
           @click="switchTab(index)">{{ item.name }}
           <span v-if="item.count > 0 && token">{{ item.count }}</span>
-        </div>
+        </div> 
         <div
           v-if="active === 0"
           class="slot-down">
@@ -585,9 +585,9 @@ export default {
   //     return 0
   //   }
   // },
-  mounted() {
-    this.setTimeInit()
-  },
+  // mounted() {
+  //   this.setTimeInit()
+  // },
   beforeDestroy() {
     clearInterval(this.timer)
   },
@@ -598,7 +598,8 @@ export default {
 
     const that = this
     // 定时器
-    this.timers = setInterval(() => {
+    this.timers = setInterval(() => { 
+      console.log('setInterval')
       service.getUnDonefills({
         page: 1,
         side: 0,
@@ -737,7 +738,7 @@ export default {
       // console.log(item, index)
     }, 
     detailHandle(item) {
-      console.log({ item })
+      // console.log({ item })
       this.stepActive = false
       this.bankData = []
       this.closeFlag = false
@@ -910,7 +911,7 @@ export default {
         this.loading = false
         // 切换数据
         this.init(index)
-        this.setTimeInit()
+        // this.setTimeInit()
       }, 300)
     }),
     async init(state) {
@@ -1086,7 +1087,7 @@ export default {
             user_id: this.id
           }
           service.otcAppeal(params).then(res => {
-            console.log(res)
+            // console.log(res)
             if (!res.code) {
               // this.$message.success('申诉成功，请等待客服处理')
               this.$message({
@@ -1108,7 +1109,7 @@ export default {
         .catch(() => { })
     },
     handleCurrentChange(e) {
-      console.log(this.active)
+      // console.log(this.active)
       if (this.active === 1 || this.active === 2) {
         this.params1.page = e
         // console.log(this.params1.page, '1')
@@ -1119,13 +1120,13 @@ export default {
         this.init(this.active)
       }
     },
-    setTimeInit() {
-      this.timer = setInterval(() => {
-        if (this.active === 0 || this.active === 3) {
-          // this.init(this.active)
-        }
-      }, 3000)
-    }
+    // setTimeInit() {
+    //   this.timer = setInterval(() => {
+    //     if (this.active === 0 || this.active === 3) {
+    //       // this.init(this.active)
+    //     }
+    //   }, 3000)
+    // }
   }
 
 }

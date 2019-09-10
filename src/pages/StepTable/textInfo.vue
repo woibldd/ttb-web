@@ -458,7 +458,7 @@ export default {
   },
   methods: {
     openQR(collection_img) {
-      console.log(collection_img)
+      // console.log(collection_img)
       this.qrsrc = collection_img
       this.showQRcode = true
     },
