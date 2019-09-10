@@ -354,12 +354,16 @@ export default {
         }
   
         arr.map(item => {
-          widget.chart().createStudy(
-            item.value,
-            !1,
-            !1,
-            item.args 
-          );
+          try {
+            widget.chart().createStudy(
+              item.value,
+              !1,
+              !1,
+              item.args 
+            );
+          } catch (error) {
+            console.log(error)
+          }
         })
   
         widget.subscribe('study', (e) => { 

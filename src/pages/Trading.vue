@@ -80,7 +80,16 @@
     </div>
     <order-deal-popover />
     <v-modal :open.sync="showMvpModal">
-
+      <div>
+        <p>请您认真阅读以下内容：</p>
+        <p>根据MPV项目法律监管要求，MPV项目需要获取您的以下信息：</p>
+        <p>MPV持有者的账号、名字、证件号、电邮、MPV成交量信息、充/提币信息、MPV划转信息。</p>
+        <div>
+          <el-button  @click="closeModal">不再提醒</el-button>
+          <el-button type='primary' @click="closeModal">确认</el-button>
+        </div>
+        <p>*这将不会影响您的提币操作</p>
+      </div>
     </v-modal>
   </div>
 </template>
@@ -120,14 +129,14 @@ export default {
     PairNav,
     Operate,
     MobileNav,
-    PairTitle,
-    showMvpModal: false
+    PairTitle 
   },
   data () {
     return {
       state,
       comps: [],
-      isMobile: utils.isMobile()
+      isMobile: utils.isMobile(),
+      showMvpModal: true
     }
   },
   watch: {
@@ -217,6 +226,9 @@ export default {
     },
     async onresize () {
       this.setGridContainers()
+    },
+    closeModal() {
+      this.showMvpModal = false
     }
   },
   async created () {

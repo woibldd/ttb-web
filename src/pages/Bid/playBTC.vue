@@ -61,13 +61,20 @@ export default {
     },
     enter(key, code) {
       // 1 极速火箭， 2足球神射，3绝杀卡当，4疯狂二八红，5发哥百家乐，6竞猜大师
+      let lang = {
+        'zh-CN': 'zh',
+        'zh-HK': 'zh-Hant',
+        'en': 'en',
+        'ko': 'ko',
+      }[state.locale]
+
       let url = {
-        1: `https://testing-sso.cointest.link/channel/callbacks/IXX/ROCKET?code=${code}&lang=zh`,
-        2: `https://testing-sso.cointest.link/channel/callbacks/IXX/GOAL?code=${code}&langue=zh`,
-        3: `https://testing-sso.cointest.link/channel/callbacks/IXX/MEDIAN?code=${code}&langug=en`,
-        4: `https://testing-sso.cointest.link/channel/callbacks/IXX/MAGNATE?code=${code}&langue=zh`,
-        5: `https://testing-sso.cointest.link/channel/callbacks/IXX/BACCARAT?code=${code}&langue=zh`,
-        6: `https://testing-sso.cointest.link/channel/callbacks/IXX/GAME-COLLECTION-INNER?code=${code}&langue=zh`,
+        1: `https://testing-sso.cointest.link/channel/callbacks/IXX/ROCKET?code=${code}&lang=${lang}`,
+        2: `https://testing-sso.cointest.link/channel/callbacks/IXX/GOAL?code=${code}&lang=${lang}`,
+        3: `https://testing-sso.cointest.link/channel/callbacks/IXX/MEDIAN?code=${code}&lang=${lang}`,
+        4: `https://testing-sso.cointest.link/channel/callbacks/IXX/MAGNATE?code=${code}&lang=${lang}`,
+        5: `https://testing-sso.cointest.link/channel/callbacks/IXX/BACCARAT?code=${code}&lang=${lang}`,
+        6: `https://testing-sso.cointest.link/channel/callbacks/IXX/GAME-COLLECTION-INNER?code=${code}&lang=${lang}`,
       }[key]
       // window.location.href = url
       window.open(url)
