@@ -80,15 +80,17 @@
     </div>
     <order-deal-popover />
     <v-modal :open.sync="showMvpModal">
-      <div>
-        <p>请您认真阅读以下内容：</p>
-        <p>根据MPV项目法律监管要求，MPV项目需要获取您的以下信息：</p>
-        <p>MPV持有者的账号、名字、证件号、电邮、MPV成交量信息、充/提币信息、MPV划转信息。</p>
-        <div>
+      <div class="pd-20 mvp-modal">
+        <article  class="mt-20 mb-20">
+          <h3>请您认真阅读以下内容：</h3> 
+          <p>根据MPV项目法律监管要求，MPV项目需要获取您的以下信息：</p>
+          <p>MPV持有者的账号、名字、证件号、电邮、MPV成交量信息、充/提币信息、MPV划转信息。</p> 
+        </article> 
+        <div style="text-align:right" class='mb-10'>
           <el-button  @click="closeModal">不再提醒</el-button>
           <el-button type='primary' @click="closeModal">确认</el-button>
         </div>
-        <p>*这将不会影响您的提币操作</p>
+        <p  style="text-align:right">*这将不会影响您的提币操作</p>
       </div>
     </v-modal>
   </div>
@@ -312,6 +314,16 @@ export default {
   font-size: 12px;
   display: flex;
   flex-direction: column;
+  .mvp-modal {
+    font-size: 14px;
+    article {
+      color: #666;
+      h3 {
+        font-size:16px;
+        padding-bottom:20px;
+      } 
+    }
+  }
 }
 .container-trade-panel {
   flex: 1;

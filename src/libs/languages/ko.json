@@ -2166,9 +2166,9 @@
 "jg_ck": "비최종거래단가는 참고만 하십시오",
 "otc_one_click_optimal": "단가최고",
 "fund_assets_status_unissued": "미지급",
-"fund_assets_type_trading":"交易返佣",
-"fund_assets_type_Upper":"上币返佣",
-"fund_assets_type_opening":"节点开通返佣",
+"fund_assets_type_trading":"거래반환수수료",
+"fund_assets_type_Upper":"웃돈 반환수수료",
+"fund_assets_type_opening":"절점 개통, 반환수수료",
 "fund_deposit_mpv_tips1":"MPV머니신청 화이트 리스트 조작 절차는 다음과 같다.：",
 "fund_deposit_mpv_tips2":"1. MPV 공식등록계정 <br/><a  href='https://assets.mpvworld.com/account/register'>https://assets.mpvworld.com/account/register</a>",
 "fund_deposit_mpv_tips3":"2. 로그인한후 실명인증자료를 제출해야 한다.",
@@ -2185,5 +2185,6 @@
 "otc_confirm_payment": "나는 이미 돈을 지불했다",
 
 "playBTC": "오락도시",
-"play-record": "遊戲記錄"
+"play-record": "게임기록",
+"order_id": "주문서ID"
 }

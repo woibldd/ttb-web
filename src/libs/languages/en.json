@@ -2335,9 +2335,9 @@
 "jg_ck": "Unit price for refer only",
 "otc_one_click_optimal": "Best unit price",
 "fund_assets_status_unissued": "Unissued",
-"fund_assets_type_trading":"交易返佣",
-"fund_assets_type_Upper":"上币返佣",
-"fund_assets_type_opening":"节点开通返佣",
+"fund_assets_type_trading":"trading rebate",
+"fund_assets_type_Upper":"listing coin rebate ",
+"fund_assets_type_opening":"node open rebate ",
 "fund_deposit_mpv_tips1":"MPV deposit white list application process as follows : ",
 "fund_deposit_mpv_tips2":"1. MPV official registered account <br/><a  href='https://assets.mpvworld.com/account/register'>https://assets.mpvworld.com/account/register</a>",
 "fund_deposit_mpv_tips3":"2. Submit real-name certification information after login",
@@ -2352,6 +2352,7 @@
 "h5_home_introduce8": "Self-developing high-performance matching engine, can fully support the speed of 2 million+/second/trading pair, under strict stress test, ensuring uninterrupted service and smooth operation.",
 
 "playBTC": "Entertainment Zone",
-"play-record": "遊戲記錄"
+"play-record": "Game record",
+"order_id": "Order ID"
  
 }

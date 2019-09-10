@@ -2,47 +2,19 @@
   <div class="order--container">
     <div class="profile-container">
       <div class="title-box">{{ $t('play-record') }}</div>
-      <!-- <div class="row-select mt-24 mb-24">
-        <span>{{ $t('pair') }}</span>
-        <div class="row__value ml-9">
-          <el-select
-            v-model="selectPair"
-            value-key="name"
-            @change="changePairs">
-            <el-option
-              v-for="(item, idx) in pairList"
-              :key="idx"
-              :label="item.name | pairfix"
-              :value="item"/>
-          </el-select>
-        </div>
-      </div> -->
+      
       <div class="table-wrapper">
         <table class="table">
-          <tr class="thead">
-            <!-- <th>{{ $t('active_relay_time') }} </th>
-            <th>{{ $t('pair') }} </th>
-            <th>{{ $t('deal_th_side') }}</th>
-            <th>{{ $t('order_th_type') }}</th>
-            <th>{{ $t('orderdeal_fee') }}</th>
-            <th>{{ $t('avg_price') }}</th>
-            <th>{{ $t('deal_amount') }}</th> -->
+          <tr class="thead"> 
             <th>{{$t('time')}}</th>
-            <th>订单ID</th>
+            <th>{{$t('order_id')}}</th>
             <th>{{$t('currency')}}</th>
             <th>{{$t('amount')}}</th>
           </tr>
           <tr
             class="row-tr"
             v-for="(row,index) in tableData"
-            :key="index">
-            <!-- <td>{{ row.create_time }}</td>
-            <td>{{ row.symbol | pairfix }}</td>
-            <td> <span v-html="processSide(row.side)"/></td>
-            <td>{{ row.type == 1 ? $t('operate_limit') : $t('operate_market') }}</td>
-            <td>{{ row.fee | round(6) }} {{ row.side == 1 ? row.product : row.currency }}</td> 
-            <td>{{ row.price }}</td>
-            <td>{{ row.amount | round(5) }}</td>  -->
+            :key="index"> 
             <td>{{ row.create_time | date}}</td>
             <td>{{ row.order_no }}</td>
             <td>{{ row.asset_code }}</td>
@@ -128,6 +100,7 @@ export default {
       service.gameTradeList(this.params).then(res => {
         // this.originList = res.data // 暂时前端过滤,所以保留最初的全部数据
         this.tableData = res.data.data
+        this.total = res.data.total
       }).finally(() => {
         this.isLoading = false
       })
@@ -178,7 +151,7 @@ export default {
         color: #666666;
     }
     .table-wrapper {
-        height: 550px;
+        min-height: 441px;
         overflow: scroll;
         width: 100%;
     }
