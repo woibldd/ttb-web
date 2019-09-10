@@ -576,19 +576,19 @@ const service = {
   getOrderHistory(params) {
     return request('/order/history', params)
   },
-  /**
-   * 获取用户交易模式
-   */
-  getUserExchangeMode() {
-    return request('order/mode/get')
-  },
-  /**
-   * 设置用户交易模式
-   * @param {*} params
-   */
-  setUserExchangeMode(params) {
-    return request('order/mode/set', params)
-  },
+  // /**
+  //  * 获取用户交易模式
+  //  */
+  // getUserExchangeMode() {
+  //   return request('order/mode/get')
+  // },
+  // /**
+  //  * 设置用户交易模式
+  //  * @param {*} params
+  //  */
+  // setUserExchangeMode(params) {
+  //   return request('order/mode/set', params)
+  // },
   // 锁仓开始
   /**
    * 锁仓
@@ -1292,7 +1292,7 @@ const service = {
   } ,
   //游戏记录查询
   gameTradeList(params) {
-    return getCache('c_game_trade', ()=> request('future/activity/gameTrade/list', params), 1e3)
+    return request('future/activity/gameTrade/list', params)
   }
 }
 

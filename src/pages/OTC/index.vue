@@ -54,7 +54,7 @@ export default {
         height:28px;
         line-height: 28px;
         text-align: center;
-        border:1px solid #01ced1;
+        // border:1px solid #01ced1;
         border-radius:14px;
         color: $primary;
         font-size: 14px;

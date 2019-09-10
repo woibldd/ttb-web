@@ -3,7 +3,7 @@
     <div class="profile-container">
       <div class="title-box">{{ $t('play-record') }}</div>
       
-      <div class="table-wrapper">
+      <div class="table-wrapper" v-loading='isLoading'>
         <table class="table">
           <tr class="thead"> 
             <th>{{$t('time')}}</th>
@@ -31,6 +31,7 @@
         <el-pagination
           background
           @current-change="currentHandle"
+          :current-page.sync="params.page"
           layout="prev, pager, next"
           :total="total" />
       </div>
@@ -40,6 +41,7 @@
 <script>
 import service from '@/modules/service'
 import { pairfix } from '@/mixins/index'
+import utils from '@/modules/utils'
 
 export default {
   mixins: [pairfix],
@@ -56,7 +58,8 @@ export default {
         page: 1,
         size: 10, 
         // user_id: 940951
-      }
+      }, 
+      curPage: 1,
     }
   },
   methods: { 
@@ -84,23 +87,19 @@ export default {
       if (!res.code) {
         this.pairList = res.data.items
       }
-    },
-    // filterList () {
-    //   this.tableData = this.originList.filter(item => {
-    //     return item.symbol === this.selectPair.name
-    //   })
-    // },
-    getList () {
-      // const params = {
-      //   page: 1,
-      //   size: 10,
-      //   symbol: this.selectPair.name
-      // }
-      // this.params.symbol = this.selectPair.name || ''
+    }, 
+    getList () { 
+      this.isLoading = true
       service.gameTradeList(this.params).then(res => {
         // this.originList = res.data // 暂时前端过滤,所以保留最初的全部数据
-        this.tableData = res.data.data
-        this.total = res.data.total
+        if (!res.code) {
+          this.tableData = res.data.data
+          this.total = res.data.total 
+          this.curPage = res.data.page
+        } else {
+          utils.alert(res.message)
+          this.params.page = this.curPage
+        }
       }).finally(() => {
         this.isLoading = false
       })
@@ -109,7 +108,7 @@ export default {
   async created () {
     await this.getAllPairs()
     this.getList()
-  }
+  }, 
 }
 </script>
 <style lang="scss">
