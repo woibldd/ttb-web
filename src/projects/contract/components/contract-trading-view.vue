@@ -355,20 +355,24 @@ export default {
   
         arr.map(item => {
           try {
-            widget.chart().createStudy(
-              item.value,
-              !1,
-              !1,
-              item.args 
-            );
+             if (item.value !== 'MACD_' && item.value !== 'Stochastic RSI' && item.value !== 'Bollinger Bands') { 
+              widget.chart().createStudy(
+                item.value,
+                !1,
+                !1,
+                item.args 
+              ); 
+            }
           } catch (error) {
             console.log(error)
           }
         })
   
         widget.subscribe('study', (e) => { 
-          arr.push(e)
-          utils.setStorageValue('ixx-contract-study', JSON.stringify(arr) )
+           if (e.value !== 'MACD_' && e.value !== 'Stochastic RSI' && e.value !== 'Bollinger Bands') { 
+            arr.push(e)
+            utils.setStorageValue('ixx-trading-study', JSON.stringify(arr) )
+          }
         })
 
         window.condwgt = widget
