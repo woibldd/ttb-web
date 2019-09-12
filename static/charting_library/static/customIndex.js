@@ -5,7 +5,7 @@ __customIndicators = [
       "_metainfoVersion": 40,
       "id": "MACD_@tv-basicstudies-1",
       "scriptIdPart": "",
-      "name": "MACD_",
+      "name": "MACD",
       "description": "MACD_",
       "shortDescription": "MACD",
       "is_price_study": false,
