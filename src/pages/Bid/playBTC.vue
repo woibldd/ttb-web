@@ -53,12 +53,12 @@ export default {
       }
  
       let name = {
-        1: "baccarat", //百家乐入口
-        2: "bar", //二八杠入口
+        1: "rockets", // 火箭入口
+        2: "shot", //射门入口
         3: "card_when", //卡当入口
-        4: "game_collection", //竞猜入口 
-        5: "rockets", // 火箭入口
-        6: "shot" //射门入口
+        4: "bar", //二八杠入口
+        5: "baccarat", //百家乐入口
+        6: "game_collection" //竞猜入口 
       }[key]
 
       let lang = {
