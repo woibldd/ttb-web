@@ -2186,12 +2186,7 @@
     "order_apply_message_c":"在%{price}价格%{side}%{amount}张%{currency}永续合约。",
     "contract_buy_on_price_piece1":"在市价%{amount}张%{symbol}。",
     "invite_kyc_lv": "KYC认证",
-<<<<<<< HEAD
-    "link_name":"链名称"
-=======
     "otc_otutcol_20": "申诉成功，请等待客服处理"
-
->>>>>>> 4b041d613b6c75a4c80629ceaf204bfa2448a890
   }
 
 

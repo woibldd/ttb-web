@@ -1,7 +1,7 @@
 <!--
  * @Author: zlccy
  * @Date: 2019-08-15 14:15:44
- * @LastEditTime: 2019-08-15 14:17:32
+ * @LastEditTime: 2019-09-16 10:50:35
  * @Description: file content
  -->
 <template>
@@ -582,6 +582,12 @@ export default {
   //     return 0
   //   }
   // },
+  mounted() {
+    this.setTimeInit()
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
+  },
   created() {
     this.getOrderz()
     // todo 初始化第一种类型数据
@@ -618,12 +624,12 @@ export default {
       })
     }, 5000)
   },
-  mounted() {
-    this.setTimeInit()
-  },
-  beforeDestroy() {
-    clearInterval(this.timer)
-  },
+  // mounted() {
+  //   this.setTimeInit()
+  // },
+  // beforeDestroy() {
+  //   clearInterval(this.timer)
+  // },
   methods: {
     payName(type) {
       return {
@@ -725,7 +731,7 @@ export default {
       // console.log(item, index)
     },
     detailHandle(item) {
-      // console.log({ item })
+      console.log({ item })
       this.stepActive = false
       this.bankData = []
       this.closeFlag = false
@@ -996,11 +1002,6 @@ export default {
             that.total = rer.data.total
           }
           break
-<<<<<<< HEAD
-          // eslint-disable-next-line no-case-declarations
-=======
-        // eslint-disable-next-line no-case-declarations
->>>>>>> 4b041d613b6c75a4c80629ceaf204bfa2448a890
         case 2:
           const res = await service.getOtcRemovefills(that.params1)
           if (!res.code) {
@@ -1008,11 +1009,6 @@ export default {
             that.total = res.data.total
           }
           break
-<<<<<<< HEAD
-          // eslint-disable-next-line no-case-declarations
-=======
-        // eslint-disable-next-line no-case-declarations
->>>>>>> 4b041d613b6c75a4c80629ceaf204bfa2448a890
         default:
           const rew = await service.getOtcActivefills(that.params)
           if (!rew.code) {
@@ -1034,10 +1030,6 @@ export default {
           }
           service.otcAppeal(params).then(res => {
             console.log(res)
-<<<<<<< HEAD
-=======
-
->>>>>>> 4b041d613b6c75a4c80629ceaf204bfa2448a890
             if (!res.code) {
               // this.$message.success('申诉成功，请等待客服处理')
               this.$message({
@@ -1059,7 +1051,7 @@ export default {
         .catch(() => { })
     },
     handleCurrentChange(e) {
-      // console.log(this.active)
+      console.log(this.active)
       if (this.active === 1 || this.active === 2) {
         this.params1.page = e
         // console.log(this.params1.page, '1')
