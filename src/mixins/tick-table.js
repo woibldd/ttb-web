@@ -1,11 +1,11 @@
 import _ from 'lodash'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
-import {state, local} from '@/modules/store'
+import { state, local } from '@/modules/store'
 import ws from '@/modules/ws'
 
 export default {
-  data () {
+  data() {
     return {
       state,
       local,
@@ -18,10 +18,10 @@ export default {
     }
   },
   computed: {
-    tabSelected () {
+    tabSelected() {
       return state.tabSelected
     },
-    errmsg () {
+    errmsg() {
       if (this.loading || this.err) {
         return ''
       }
@@ -33,22 +33,21 @@ export default {
       }
       return ''
     },
-    group () {
+    group() {
       return _.sortBy(_.uniq(_.map(this.state.pro.pairList, 'currency_name')), name => {
         return (_.indexOf(['USDT', 'BTC', 'ETH', 'EOS'], name) + 1) || 100
       })
     },
-    pairList () {
+    pairList() {
       return this.state.pro.pairList
     },
-    showList () { 
-      let list = this.pairList
+    showList() {
+      const list = this.pairList
       if (this.tabSelected === 'all') {
-        return  _.filter(list, pair => {
-          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1  
+        return _.filter(list, pair => {
+          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1
         })
-      } 
-      else if (this.tabSelected === 'new') { 
+      } else if (this.tabSelected === 'new') {
         // let excludeList = [
         //   "BTC_USDT",
         //   "EOS_BTC",
@@ -64,27 +63,33 @@ export default {
         //   "ADA_BTC",
         //   "ADA_USDT"
         // ]
-        // let res = _.filter(list, (pair) => { 
-        //   return excludeList.indexOf(pair.name) < 0 
-        // })    
+        // let res = _.filter(list, (pair) => {
+        //   return excludeList.indexOf(pair.name) < 0
+        // })
         let res = _.sortBy(list, (pair) => {
-          let value = this.getDelta(pair.tick) || 0
+          const value = this.getDelta(pair.tick) || 0
           return value * -1
-        })   
-        res = _.filter(res, (pair, index) => {  
+        })
+        res = _.filter(res, (pair, index) => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 &&
-                pair.type === 2 
-        })   
+                pair.type > 1
+        })
+        const temGroup = _.groupBy(res, 'type')
+        let arr = []
+        Object.keys(temGroup).forEach(key => {
+          arr = arr.concat([{ CUSTOM: true, type: key }]).concat(temGroup[key])
+        }) 
 
-        return res
-      }
-      else if (this.tabSelected === 'like') {
+        return arr
+        // res = _.groupBy(res, 'type')
+
+        // return res
+      } else if (this.tabSelected === 'like') {
         return _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 &&
             (pair.like || false)
         })
-      }
-      else { 
+      } else {
         return _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 &&
             pair.currency.indexOf(this.tabSelected) > -1 &&
@@ -92,13 +97,13 @@ export default {
         })
       }
     },
-    changeRankList () {
+    changeRankList() {
       return _.sortBy(this.pairList, (item) => {
-        let value = this.getDelta(item.tick) || 0
+        const value = this.getDelta(item.tick) || 0
         return value * -1
       })
     },
-    sortedList () { 
+    sortedList() {
       if (!this.sortBy || !this.sortState) {
         return this.showList
       }
@@ -126,15 +131,15 @@ export default {
     }
   },
   methods: {
-    setTab (tab) {
+    setTab(tab) {
       this.tab = tab
       this.local.proOnFav = tab === '*'
     },
-    setPair (pair) {
+    setPair(pair) {
       // need implement
       utils.log(pair)
     },
-    getDelta (tick) {
+    getDelta(tick) {
       if (!tick || tick.increment_24h === tick.current) {
         return false
       }
@@ -144,16 +149,16 @@ export default {
         .round(2, this.C.ROUND_HALF_UP)
         .toFixed(2)
     },
-    getSign (num) {
+    getSign(num) {
       if (num === false) {
         return 0
       }
       return utils.getSign(num)
     },
-    isCollect (pair) {
+    isCollect(pair) {
       return _.find(this.state.favorite.list, item => item.symbol === pair.name)
     },
-    setSort (key) {
+    setSort(key) {
       if (this.sortBy === key) {
         this.sortState = (this.sortState + 1) % 3
       } else {
@@ -161,7 +166,7 @@ export default {
         this.sortState = 1
       }
     },
-    patch (item) {
+    patch(item) {
       const find = _.find(this.pairList, pair => pair.name === item.pair)
       if (find) {
         find.price = item.current
@@ -173,14 +178,14 @@ export default {
         this.state.pro.pairTick = item
       }
     },
-    stateSortBy (key) {
+    stateSortBy(key) {
       if (key !== this.sortBy) {
         return 0
       } else {
         return this.sortState
       }
     },
-    async fetch () {
+    async fetch() {
       this.loading = true
       let res = await service.getPairList()
       this.loading = false
@@ -195,19 +200,21 @@ export default {
         this.$set(item, 'delta', item.delta || false)
         this.$set(item, 'vol', item.vol || false)
       })
-      let optional = await service.getOptionalList({site: 2})
-      if(!!optional && optional.data != null)
-      for (const item of optional.data) {
-        let id = item.id
-        let pair = _.filter(res.data.items, item => { return item.id===id})
-        if (pair.length > 0) {
-          pair[0].like = true;
+      const optional = await service.getOptionalList({ site: 2 })
+      if (!!optional && optional.data != null) {
+        for (const item of optional.data) {
+          const id = item.id
+          const pair = _.filter(res.data.items, item => { return item.id === id })
+          if (pair.length > 0) {
+            pair[0].like = true
+          }
         }
-      } 
-      
-      this.state.pro.pairList = res.data.items 
+      }
+      console.log(res.data.items, 123)
+
+      this.state.pro.pairList = res.data.items
     },
-    subMarket () {
+    subMarket() {
       if (this.socket) {
         this.socket.$destroy()
       }
@@ -219,12 +226,12 @@ export default {
       })
     }
   },
-  destroyed () {
+  destroyed() {
     if (this.socket) {
       this.socket.$destroy()
     }
   },
-  async created () {
+  async created() {
     if (this.local.proOnFav) {
       this.setTab('*')
     }

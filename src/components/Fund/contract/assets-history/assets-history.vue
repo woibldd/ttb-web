@@ -1,5 +1,5 @@
 <template>
-  <div class="contract-history-container my-fund-content pt-40 f14">
+  <div class="contract-history-container my-fund-content pt-40 f14"> 
     <div class="filter-list mb-39">
       <!-- 账户 -->
       <!-- <div class="currency-row mr-40">
@@ -41,7 +41,7 @@
           start-placeholder="开始日期"
           end-placeholder="结束日期"/>
       </div> -->
-    </div>
+    </div> 
     <div class="table-wrapper">
       <table>
         <tr class="table__tr header c-999">
@@ -73,9 +73,9 @@
           :key="index">
           <td class="table__td">{{ item.create_time }}</td>
           <td class="table__td">{{ item.currency }}</td>
-          <td class="table__td" v-show="item.opetate === 1"> {{ $t('transfer_in')}} </td>
-          <td class="table__td" v-show="item.opetate === 2">{{ $t('transfer_out')}} </td>
-          <td class="table__td" v-show="item.opetate === 3">{{ $t('day_liquidation')}} </td>
+          <td class="table__td" v-if="item.to_balance === 3"> {{ $t('transfer_in')}} </td>
+          <td class="table__td" v-else-if="item.from_balance === 3">{{ $t('transfer_out')}} </td>
+          <td class="table__td" v-else-if="item.opetate === 3">{{ $t('day_liquidation')}} </td>
           <td class="table__td">{{ item.amount | fixed(valueScale) }}</td>
           <td class="table__td pr-10">{{ item.available | fixed(valueScale) }}</td>
           <td class="table__td">{{ processStatus(item.status) }}</td>

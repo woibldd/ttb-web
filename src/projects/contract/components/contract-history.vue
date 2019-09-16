@@ -462,9 +462,9 @@ export default {
     },
     switchTab(tab) {
       if (!this.isLogin) { 
-        if(utils.getSessionStorageValue("LoginStatus") == 1){
-          this.state.isLoginOverdue = true;
-        }
+        // if(utils.getSessionStorageValue("LoginStatus") == 1){
+        //   this.state.isLoginOverdue = true;
+        // }
         return;
       }
       this.page = 1;

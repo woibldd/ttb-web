@@ -16,6 +16,7 @@ import BidDetail from '@/pages/Bid/detail.vue'
 import BidTable from '@/pages/Bid/table.vue'
 import Superzis from '@/pages/Superzis/index.vue'
 import ByAmount from '@/pages/Superzis/sell.vue'
+import layout from '@/pages/layout/index'
 
 import _ from 'lodash'
 // import HelloWorld from '@/components/HelloWorld'
@@ -54,7 +55,7 @@ const lever = () => import(/* webpackChunkName: "lever" */ '@/pages/lever')
 // const ProfileAuthen = () => import(/* webpackChunkName: "ProfileAuthen" */ '@/pages/ProfileAuthen')
 
 const Fee = () => import(/* webpackChunkName: "Fee" */ '@/pages/Fee')
-const ContractFee = () => import(/* webpackChunkName: "ContractFee" */ '@/components/Fee/contractFee')
+// const ContractFee = () => import(/* webpackChunkName: "ContractFee" */ '@/components/Fee/contractFee')
 const TradingFee = () => import(/* webpackChunkName: "tradingFee" */ '@/components/Fee/tradingFee')
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
 
@@ -86,7 +87,7 @@ const TradeIndex = () => import(/* webpackChunkName: "ContractMaterial" */ '@/co
 
 // h5相关页面
 const h5login = () => import(/* webpackChunkName: "h5login" */ '@/pages/h5/sign-up')
-const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index')
+const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index2')
 
 // 合约大赛
 // 活动页面
@@ -149,7 +150,7 @@ function beforeResolve(to, from, next) {
       document.body.classList.add(className)
     })
   }
-
+  
   if (!loaded) {
     loaded = true
     utils.preloadEnd()
@@ -266,7 +267,7 @@ export const routes = [
   },
   {
     path: '/fee',
-    name: 'Fee',
+    // name: 'Fee',
     meta: {
       auth: false,
       nav: true,
@@ -321,14 +322,14 @@ export const routes = [
     component: Test1
   }, {
     path: '/fee-set',
-    name: 'ServiceFeeSet',
+    // name: 'ServiceFeeSet',
     component: ServiceFeeSet
   },
-  {
-    path: 'TransferModal',
-    name: 'transferModal',
-    component: TransferModal
-  },
+  // {
+  //   path: 'TransferModal',
+  //   name: 'transferModal',
+  //   component: TransferModal
+  // },
   {
     path: '/myorder-new',
     name: 'MyOrderNew',
@@ -359,13 +360,36 @@ export const routes = [
   ...otherRouter,
   {
     path: '/snowball',
-    name: 'Bid',
+    redirect:'/snowball/playBTC',
+    name:'snowball',
     meta: {
       nav: true,
       footer: true,
       class: 'dark'
     },
-    component: Bid
+    component: layout,
+    children:[
+      {
+        path: '/snowball/bazaar',
+        name: 'Bid',
+        // meta: {
+        //   nav: true,
+        //   footer: true,
+        //   class: 'dark'
+        // },
+        component: Bid,
+      },
+      {
+        path: '/snowball/playBTC',
+        name: 'playBTC',
+        // meta: {
+        //   nav: true,
+        //   footer: true,
+        //   class: 'dark'
+        // },
+        component: () => import('@/pages/Bid/playBTC')
+      },
+    ]
   },
   {
     path: '/snowballDetail',

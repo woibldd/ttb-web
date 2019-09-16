@@ -5,8 +5,7 @@
         <div class="left">
           <div class="total__label">{{ $t('withdraw_avlb') }}</div>
           <div class="total__coin">{{ total | fixed(2) }} {{ unit }} </div>
-        </div>
-        
+        </div> 
         <el-radio-group  :empty-text="$t('no_data')"
           @change="changeType"
           class="total__switch"
@@ -15,6 +14,7 @@
           <el-radio-button label="deposit">{{ $t('deposit_record') }}</el-radio-button>
           <el-radio-button label="withdraw">{{ $t('withdraw_record') }}</el-radio-button>
           <el-radio-button label="reward"> {{ $t('fund_reward') }} </el-radio-button>
+          <el-radio-button label="return"> {{ $t('commission_history_text') }} </el-radio-button>
           <el-radio-button
             v-if="isPromoter"
             label="promoter"> {{ $t('promote_brokerage') }} </el-radio-button>
@@ -24,35 +24,114 @@
         </el-radio-group>
         
       </div>
-      <el-table       :empty-text="$t('no_data')"
+      <el-table :empty-text="$t('no_data')"
+        :data="tableData"
+        v-if="type === 'return'" 
+        v-loading="loading"
+        class="fund-coin-pool">
+         <el-table-column
+            prop="user_id"
+            :label="this.$t('UID')">
+            <template slot-scope="scope">
+              <div>
+                {{scope.row.user_id}}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column
+          prop="inviter_user_id"
+            :label="this.$t('fund_history_inviter_userid')"/>
+          <el-table-column
+          prop="star_lv"
+             :label="this.$t('fund_history_star_lv')"/>
+          <el-table-column
+          prop="currency"
+            :label="this.$t('currency')"/>
+          <el-table-column
+            prop="tran_type"
+            :label="this.$t('fund_history_transaction_type')">
+            <template slot-scope="scope">
+              <div>
+                {{ $t(returnTranType[scope.row.tran_type])}}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column 
+            prop="symbol"
+            :label="this.$t('fund_history_symbol')">
+            <template slot-scope="scope">
+              <div>
+                {{ scope.row.tran_type === 1 ? $t("FUTURE_&USD", {currency: scope.row.symbol.replace('USD','')}) : scope.row.symbol}}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="amount"
+            :label="this.$t('commission_amount')"/>
+          <el-table-column
+            prop="create_time"
+            :label="this.$t('contract_deal_time')">
+            <template slot-scope="scope">
+              <div>
+                {{ formatTime(scope.row.create_time)}}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="release_time"
+          :label="this.$t('fund_history_release_time')">
+            <template slot-scope="scope">
+              <div>
+                {{ formatTime(scope.row.release_time)}}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="state"
+            :label="this.$t('status')">
+            <template slot-scope="scope">
+              <div>
+                {{ $t(returnState[scope.row.state])}}
+              </div>
+            </template>
+          </el-table-column>
+      </el-table>
+      <el-table  :empty-text="$t('no_data')"
         :data="tableData"
         height="550"
-        v-show="type === 'all'"
+        v-else-if="type === 'all'"
         v-loading="loading"
         cell-class-name="unrelease-cell"
         class="fund-coin-pool">
 
           <el-table-column
           prop="currency"
+          :key="'currency_all'"
           :label="this.$t('transfer_currency')"/>
           <el-table-column
           prop="form"
+          :key="'form_all'"
             :label="this.$t('transfer_from_a')"/>
           <el-table-column
           prop="to"
+          :key="'to_all'"
              :label="this.$t('transfer_to_a')"/>
           <el-table-column
           prop="amount"
+          :key="'amount_all'"
             :label="this.$t('transfer_amount')"/>
           <el-table-column
             prop="available"
+          :key="'available_all'"
          :label="this.$t('balance')"/>
           <el-table-column
             width="240"
             prop="create_time"
+          :key="'create_time_all'"
                :label="this.$t('transfer_time')"/>
           <el-table-column
             prop="status"
+          :key="'status_all'"
           :label="this.$t('status')"/>
             
 
@@ -60,7 +139,7 @@
       <el-table   :empty-text="$t('no_data')"
         :data="tableData"
         height="550"
-        v-show="type !== 'all'"
+        v-else
         v-loading="loading"
         cell-class-name="unrelease-cell"
         class="fund-coin-pool">
@@ -122,8 +201,7 @@
           v-if="type!=='reward' && type !== 'internal' && type !== 'promoter'"
           align="right"
           width="200px"
-          :label="operate.title" >
-
+          :label="operate.title" > 
           <template slot-scope="scope">
             <div
               class="contact-item"
@@ -140,8 +218,9 @@
         </el-table-column>
       </el-table>
       <div class="history__footer pt-10">
-        <ix-pagination
+        <ix-pagination 
           :page.sync="page"
+          :isEnd="isEnd"
           :func="getPage"/>
       </div>
     </div>
@@ -179,11 +258,26 @@ export default {
       from: 'all',
       type: this.$route.params.from || 'deposit',
       page: 1,
+      size: 10, 
       unit: 'CNY',
       loading: true,
       hasInternal: false,
       state,
       coinList: {},
+      returnState:{
+        0:"fund_assets_status_unissued",
+        1:"fund_assets_status_issued"
+      },
+      returnType:{
+        1:"fund_assets_type_trading",
+        2:"fund_assets_type_Upper",
+        3:"fund_assets_type_opening"
+      },
+      returnTranType:{
+        1:"trading",
+        2:"contract"
+      },
+      isEnd: true
     }
   },
   computed: {
@@ -206,7 +300,7 @@ export default {
       return false
     }
   },
-  async created () { 
+  async created () {  
     await this.getCoins()
     this.updateHeaderLabel()
     this.getFundHistory(this.type)
@@ -215,8 +309,8 @@ export default {
   },
   methods: {
     open(param) {
-      this.$confirm(this.$t('otc_ziurec_18'), {
-        confirmButtonText: this.$t('otc_ziurec_20'),
+      this.$confirm(this.$t('fund_assets_withdraw_revoke_tips'), {
+        confirmButtonText: this.$t('confirm'),
         cancelButtonText: this.$t('cancel'),
         type: 'warning'
       }).then(() => {
@@ -251,16 +345,24 @@ export default {
       //   })
       // },
     formatter (row, column) {
-      if (column.property === 'create_time') {
+      if (column.property === 'create_time' ) {
         return utils.dateFormatter(row.create_time)
+      } else if (column.property === 'name' && this.type === 'reward') {
+        if (row.name === '合约交易大赛') {
+          return this.$t('header_title_contract_competition')
+        } else if (row.name === '空投奖励') {
+          return this.$t('fund_history_airdrop')
+        } else {
+          return row.name
+        }
       } else {
         return row[column.property]
       }
     },
     showCXID (row) {
       //console.log({row,cc: this.coinList})
-      if (!!row.txid && !!this.coinList[row.currency]) { 
-        const url = this.coinList[row.currency].scan_url.replace('${txid}',row.txid)
+      if (!!row.txid && !!this.coinList[row.currency + '_' + row.chain]) { 
+        const url = this.coinList[row.currency + '_' + row.chain].scan_url.replace('${txid}',row.txid)
         window.open(url)
       }
     },
@@ -275,7 +377,7 @@ export default {
       if (!time) {
         return '--'
       }
-      return utils.dateFormatter(time, 'Y-M-D')
+      return utils.dateFormatter(time, 'Y-M-D H:m')
     },
     hasComplated (row) {  
       if (this.type === 'deposit' && row.state === 1) {
@@ -307,8 +409,8 @@ export default {
         this.hasInternal = true
       }
     },
-    getFundHistory (from = 'deposit') {
-      console.log(this.tableData)
+    getFundHistory (from = 'deposit') { 
+      this.isEnd = true
       this.loading = true
       let request = ''
       switch (from) {
@@ -330,6 +432,10 @@ export default {
         case 'promoter':
           request = service.getPromoteList
           break
+        //节点返佣记录
+        case 'return':
+          request = service.nodeReturn
+          break
         default:
           break
       } 
@@ -343,6 +449,7 @@ export default {
          
         if (res.code || res.data.length === 0) {
           this.loading = false
+          this.total = 0
         } 
         else {
           // res.data = res.data.map(r => {
@@ -350,10 +457,24 @@ export default {
           //     r.state = 0
           //   }
           //   return r
-          // })
+          // }) 
           this.tableData = res.data
-          if(this.type === 'all' || from === 'reward') { 
-            this.tableData = res.data.data
+          if(this.type === 'all' ||  this.type === 'return') { 
+            this.tableData = res.data.data  
+            let p = res.data
+            if (p.total > p.page * p.size) {
+              this.isEnd = false
+            }
+          }  else if (from === 'reward') {
+            this.tableData = res.data.data.filter(dr => dr.name.indexOf('持仓分红') === -1) //IXX没有持仓分红 
+            let p = res.data
+            if (p.total > p.page * p.size) {
+              this.isEnd = false
+            }
+          }
+          else {
+            if (this.tableData.length === 10)
+              this.isEnd = false
           }
           this.loading = false
           if (this.type === 'all' || from === 'reward') {
@@ -368,7 +489,7 @@ export default {
                 text=this.$t('contract_account');
                 break;
               case 3:
-           text=this.$t('day_liquidation');
+                text=this.$t('day_liquidation');
                 break;
               }
               switch  (this.tableData[i].status ) {
@@ -497,12 +618,17 @@ export default {
     async getCoins() {
       let res = await service.getCoins()
       if (!res.code && !!res.data) {
+        console.log({data: res.data})
         res.data.map(item => {
-          this.coinList[item.currency] = item
+          this.coinList[item.currency + '_' + item.chain] = item
         })
       }
     }
 
+  },
+  async beforeRouteEnter(to, from, next) { 
+    console.log({to, from})
+    next();
   },
   watch: {
     'state.locale' (v) {
@@ -623,6 +749,14 @@ export default {
          color: $primary-hover !important;
       }
     }
-
+    .my-fund-content {
+      .el-table {
+        .el-table__header-wrapper {
+          .cell {
+            word-break: break-word;
+          }
+        }
+      }
+    }
 }
 </style>

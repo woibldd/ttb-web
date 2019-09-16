@@ -21,7 +21,7 @@
   <div class="fund-container my-fund-container">
     <div class="title-box">
       <div>
-        {{ $t('trading') }}
+        {{ $t('trading_account') }}
         <span class="ml-30">
           <el-select  
             v-model="unit"
@@ -35,20 +35,31 @@
           </el-select> 
         </span> 
       </div>
-      <div class="title__right"> 
+      <div class="title__right">
+         <!-- <router-link 
+          :to="'/myorder-new/pairs'"
+          class="fund-history">{{ $t('fund_trading_bill') }}</router-link> -->
+
+          
+          <a class="fund-history" v-for="(name,index) in ['trading_account','fund_trading_bill','play-record']" :key="index" @click="handleTitleRightTab(name)" :class="{active:activeTab === name}" style="margin-left:15px">{{ $t(name) }}</a>
+          <!-- <a class="fund-history" :class="{active:activeTab === 'fund_trading_bill'}" style="margin-right:15px">{{ $t('fund_trading_bill') }}</a>
+          <a class="fund-history" :class="{active:activeTab === 'play-record'}">{{ $t('play-record') }}</a> -->
       </div>
     </div>
-    <div class="gz-wrapper clearfix">
-      <span>{{$t('otc_otutcol_14')}}</span>
-      <h1>
-        <icon :name="unit.name+'-unit'" /> {{total | fixed(unit.scale)}}</h1>
+    <div class="clearfix"> 
+      <div class="gz-wrapper clearfix">
+        <span>{{$t('otc_otutcol_14')}}</span>
+        <h1>
+          <icon :name="unit.name+'-unit'" /> {{total | fixed(unit.scale)}}</h1> 
+      </div>
+      <!-- <div class="bill">
+        <router-link 
+          :to="'/myorder-new/pairs'"
+          class="my-fund-operate">{{ $t('fund_trading_bill') }}</router-link>
+      </div> -->
     </div>
-    <div 
-      class="my-fund-content"> 
-
-      <el-table :empty-text=" $t('no_data') "
-                :data="tableData"
-                class="fund-coin-pool">
+    <div  v-if="activeTab === 'trading_account'" class="my-fund-content">  
+      <el-table :empty-text=" $t('no_data') " :data="tableData" class="fund-coin-pool">
         <el-table-column
           v-for="(hd, idx) in header"
           :key="idx"
@@ -57,7 +68,7 @@
           <template slot-scope="scope">
             <span v-if="hd.key === 'currency'">
               <icon :name="scope.row.currency"/>
-              <i v-if="scope.row[hd.key] === 'ITD'"
+              <!-- <i v-if="scope.row[hd.key] === 'ITD'"
                  class="airdrop"
                  v-tooltip.top-start='{html: true, content: $t("idt_tips"), classes: "assets"}'  >
                 {{scope.row[hd.key]}} <icon class='question' name='question-x' />
@@ -84,7 +95,8 @@
                  v-tooltip.top-start='{html: true, content: $t("bnl_tips"), classes: "assets"}'  >
                 {{scope.row[hd.key]}} <icon class='question' name='question-x' />
               </i>
-              <i v-else>{{scope.row[hd.key]}} </i>
+              <i v-else>{{scope.row[hd.key]}} </i> -->
+              <i>{{scope.row[hd.key]}} </i>
             </span> 
             <span v-else-if="hd.key === 'estValue'">{{ scope.row[hd.key] || 0 | fixed(unit.scale) }}</span>
             <!--  针对locking的判断,在百万usdt活动之后要删掉 -->
@@ -121,19 +133,40 @@
               </a>
             </span>
             <router-link
-              v-if="scope.row.pairs"
+              v-if="scope.row.pairs.length == 1"
               :to="{
                 name: 'trading',
                 params: {
-                  pair: scope.row.pairs
+                  pair: scope.row.pairs[0].name
                 }
               }"
-              class="my-fund-operate">{{ $t('asset_trading') }}</router-link>
+              class="my-fund-operate pr-20"
+            >{{ $t('asset_trading') }}</router-link>
+            <el-dropdown size="small" 
+              v-else>
+              <el-button type="label">
+                {{ $t('asset_trading') }}
+              </el-button>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item v-for="(pair,idx) in scope.row.pairs" :key="idx">
+                  <router-link 
+                    :to="{
+                      name: 'trading',
+                      params: {
+                        pair: pair.name
+                      }
+                    }"
+                    class="my-fund-operate"
+                  >{{ pair.product + '/' + pair.currency }}</router-link>
+                </el-dropdown-item> 
+              </el-dropdown-menu>
+            </el-dropdown>
           </template>
         </el-table-column>
-      </el-table>
-
+      </el-table> 
     </div>
+    <historyComponent v-else-if="activeTab === 'fund_trading_bill'" ></historyComponent>
+    <playRecord v-else-if="activeTab === 'play-record'" ></playRecord>
     <v-modal :open.sync="showLockModal">
       <div class="lock-modal">
         <div class="modal__title mb-30">
@@ -226,7 +259,8 @@
   import {state} from '@/modules/store'
   import utils from '@/modules/utils'
   import transferModal from '@/components/Fund/contract/transfer-modal'
-
+  import historyComponent from '@/components/MyOrderNew/bibi.vue'
+  import playRecord from '@/components/MyOrderNew/play-record.vue'
   const ExchangePairs = {
     'BTC': 'BTC_USDT',
     'EOS': 'EOS_BTC',
@@ -287,10 +321,15 @@
         ],
         unit: {},
         rates: {},
+        pairList: [],
+
+        activeTab:'trading_account'
       }
     },
     components: {
-      transferModal
+      transferModal,
+      historyComponent,
+      playRecord
     },
     watch:{
       showModal(val){
@@ -370,6 +409,11 @@
       if (!res.code && !!res.data) {
         this.rates = res.data;
       }
+      //获取币对列表
+      let result =  await service.getPairList()
+      if (!result.code && !!result.data) {
+        this.pairList = result.data.items
+      }
       await this.getMine()
       this.getAccountBalanceList()
       this.getIxBalance()
@@ -378,6 +422,12 @@
       )
     },
     methods: {
+      handleTitleRightTab(name){
+        if(name === 'fund_trading_bill'){
+          this.$router.push('')
+        }
+        this.activeTab = name
+      },
       routerTransFer(item) {
         this.$router.push({
           path:'/fund/transfer',
@@ -507,7 +557,11 @@
             item.camount = this.$big(item.locking).plus(this.$big(item.available)).round(8, this.C.ROUND_DOWN).toString()
             item.estValue = this.getEstValue(item)
             item.available = this.$big(item.available).round(8, this.C.ROUND_DOWN).toString()
-            item.pairs = ExchangePairs[item.currency] || 'BTC_USDT'
+            // item.pairs = ExchangePairs[item.currency] || 'BTC_USDT'
+            if (item.currency === 'USDT')
+              item.pairs = ['BTC_USDT']
+            else
+              item.pairs = this.pairList.filter(t => t.product === item.currency || t.currency === item.currency)
             return item
           })
         })
@@ -560,6 +614,12 @@
 </script>
 <style lang="scss" scoped>
   @import './../../components/Fund/My/my.scss';
+  .title__right{
+    &>.active{
+      color: #01CED1 !important;
+      border-color: #01CED1 !important;
+    }
+  }
   .gz-wrapper {
     width: 520px;
     height: 176px;

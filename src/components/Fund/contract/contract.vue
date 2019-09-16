@@ -172,11 +172,11 @@
               <span class="c-333">{{ (holding.available_balance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
             </div>
             <!-- 杠杆倍数 -->
-            <!-- <div
+            <div
               class="table__tr right c-999"
               v-if="holding.margin_delegation">
-              {{ $t('contract_fund_usee_lever', {per: margin + '%', lever: $big(holding.leverage || 0).toFixed(2)}) }}
-            </div> -->
+              {{ $t('contract_fund_usee_lever', {per: holding.margin + '%', lever: $big(holding.leverage || 0).toFixed(2)}) }}
+            </div>
           </div>
         </div>
       </div>
@@ -204,7 +204,7 @@
 import service from '@/modules/service'
 import { state } from '@/modules/store'
 import utils from '@/modules/utils'
-// import tickTableMixin from "@/mixins/fund-contract-tick";
+import tickTableMixin from "@/mixins/fund-contract-tick";
 import dealSocketMixins from '@/mixins/deal-socket-mixins'
 import contractCard from './contract-card'
 import transferModal from './transfer-modal'
@@ -221,9 +221,9 @@ max_quota 当前提币总额度
  */
 export default {
   name: 'MyFund',
-  // mixins: [tickTableMixin, dealSocketMixins],
+  mixins: [tickTableMixin, dealSocketMixins],
   components: { contractCard, transferModal },
-  mixins: [dealSocketMixins],
+  //mixins: [dealSocketMixins],
   data() {
     return {
       state,
@@ -328,7 +328,7 @@ export default {
     },
     holding() {
       const obj = {}
-      console.log({ obj })
+      // console.log({ obj })
       const list = this.holdingList
       if (!!list && list.length > 0) {
         const item = list[0]
@@ -338,6 +338,7 @@ export default {
         obj.unrealized = this.$big(0) // 未实现盈亏
         obj.margin_position = this.$big(0) // 仓位保证金
         obj.margin_delegation = this.$big(0) // 委托保证金
+        obj.totalValue = this.$big(0) //持仓总价值
         list.map(arg => {
           // 保证金余额 = 可用余额 + 未实现盈亏
           if (obj.marginBalance.eq(0)) {
@@ -347,9 +348,20 @@ export default {
           obj.unrealized = obj.unrealized.plus(arg.unrealized || 0)
           obj.margin_position = obj.margin_position.plus(arg.margin_position || 0)
           obj.margin_delegation = obj.margin_delegation.plus(arg.margin_delegation || 0)
+          obj.totalValue = obj.totalValue.plus(arg.value)
         })
+
+        obj.margin = this.$big(obj.totalValue)
+          .div(obj.marginBalance)
+          .times(100)
+          .toFixed(2)
+        obj.leverage = (this.$big(obj.margin_position)
+          .plus(obj.margin_delegation))
+          .div(obj.available)
+          .times(100)
+          .toFixed(2)
       }
-      console.log({ obj })
+      // console.log({ obj })
       return obj
     },
     holdingList() {
@@ -380,7 +392,7 @@ export default {
         const amount = holding.holding
         const currency = holding.currency
         const price = holding.price
-        console.log({ lastPrice, markPrice, mul, price })
+        // console.log({ lastPrice, markPrice, mul, price })
 
         holding.product_name = pairInfo.product_name
         holding.value_scale = pairInfo.value_scale || 4
@@ -390,7 +402,7 @@ export default {
         // holding.markPrice = markPrice
         this.$set(holding, 'lastPrice', lastPrice)
         this.$set(holding, 'markPrice', markPrice)
-        console.log(holding, 'vue-set')
+        // console.log(holding, 'vue-set')
         holding.unrealized = '0'
         holding.unrealizedlp = '0'
         holding.roe = '0'
@@ -465,8 +477,7 @@ export default {
             .mul(100).mul(2)
             .toFixed(2)
             // console.log(holding.roelp)
-        }
-        // console.log('无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限无限')
+        } 
 
         // 平仓价格
         if (!holding.changeUnwindPrice) {

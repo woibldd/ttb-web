@@ -1,30 +1,30 @@
 <template>
   <div class="trade-container">
-    <assets v-if="isLogin"></assets>
-    <tabs></tabs>
-    <otc-table></otc-table>
+    <assets v-if="isLogin"/>
+    <tabs/>
+    <otc-table/>
   </div>
 </template>
 <script>
 import assets from './assets/assets.vue'
 import otcTable from './order/otc-table.vue'
 import tabs from './tabs/tabs.vue'
-import service from "@/modules/service.js"
-import {state} from '@/modules/store'
+import service from '@/modules/service.js'
+import { state } from '@/modules/store'
 
 export default {
+  components: {
+    assets,
+    otcTable,
+    tabs
+  },
   data() {
     return {
       kycVue: 0
     }
   },
-  components: {
-    assets,
-    otcTable,
-    tabs,
-  },
   computed: {
-     isLogin () {
+    isLogin() {
       return state.userInfo !== null
     }
   },

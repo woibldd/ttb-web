@@ -31,8 +31,7 @@ export default {
       let mul = Big(pairInfo.multiplier) //乘数
       value = mul.times(price).times(amount)
       // ix = Big(max_leverage).div(Big(lever).eq(0) ? max_leverage : lever).round(6, down)
-    }
-    console.log({value:value.toString()})
+    } 
     totalValue = (totalValue == null || totalValue.eq(0)) ? value : totalValue
     // let count = 0
     // if (pairInfo.name === 'FUTURE_BTCUSD') {
@@ -210,6 +209,10 @@ export default {
         force_price = result.round(price_scale || 4).toString()
       }
     }
+    //计算强平价格小于0时，将其赋值为0
+    if (Big(force_price).lt(0)) {
+      force_price = Big(0)
+    }
     let new_amount = Number(current) + Number(amount * (direction === 'less' ? -1 : 1))
 
     return {
@@ -291,6 +294,10 @@ export default {
         force_price = (value.minus(imDiff).minus(avia)).div(mulvol)
       }
     } 
+    //计算强平价格小于0时，将其赋值为0
+    if (Big(force_price).lt(0)) {
+      force_price = Big(0)
+    }
     // console.log({
     //   value:value.toString(),
     //   im: im.toString(),

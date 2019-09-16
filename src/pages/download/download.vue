@@ -168,7 +168,7 @@ export default {
       }
     },
     goIosTurorial () {
-      window.open('https://ixcustomer.zendesk.com/hc/zh-cn/articles/360020414512', '_blank')
+      window.open('https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360032874512', '_blank')
     }
   }
 }

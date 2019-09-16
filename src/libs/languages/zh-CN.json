@@ -934,7 +934,7 @@
     "download_ios_tutorial_c":"Step 3. 在设置中，找到【 设置 — 通用 — 描述文件与设备管理 】并点击相应描述文件 描述文件与设备管理 】并点击相应描述文件",
     "download_ios_tutorial_d":"Step 4. 单击相应的描述文件后弹出弹窗，点击【信任】，系统允许应用程序运行",
     "download_ios_tutorial_e":"Step 5. 返回手机桌面, 再次点击IXX app, 完成安装。",
-    "download_ios_click_right":"点击右上角选择在safari中打开",
+    "download_ios_click_right":"点击右上角选择在浏览器中打开",
     "moblie_login_banner_god":"众神之战",
     "moblie_login_banner_million_champ":"<span style=\"color: #01CED1\">100万USDT</span>大闯关",
     "moblie_login_banner_click_challange":"点击挑战",
@@ -1616,7 +1616,7 @@
 
     "message_setting_safety":"安全认证",
     "message_setting_notice":"网站通知",
-    "message_setting_content_01":"IX 会在以下情况下通知您。 如果浏览器支持的话，我们也会发送系统通知。如果不希望系统通知，可以在浏览器授权时取消或点选浏览器URL的锁扣图像并取消授权。你也可以在下方停用个别通知。",
+    "message_setting_content_01":"IXX 会在以下情况下通知您。 如果浏览器支持的话，我们也会发送系统通知。如果不希望系统通知，可以在浏览器授权时取消或点选浏览器URL的锁扣图像并取消授权。你也可以在下方停用个别通知。",
     "message_setting_content_02":"委托已提交",
     "message_setting_content_03":"委托已被取消",
     "message_setting_content_04":"委托部分成交",
@@ -1806,8 +1806,8 @@
   "otc_buy_tips_a": "线下转账请注意",
   "otc_buy_tips_b": "请勿备注任何信息",
   "otc_buy_tips_c": "请使用实时到账的支付方式。选择支付宝转银行卡、 延时到账等方式造成2小时内未到账，卖家有权延迟 放币或取消订单!",
-  "otc_buy_tips_d": "1.如果您已支付完成请点击下方【我已付款】，卖家确认收款后会及时为您放币",
-  "otc_buy_tips_e": "2. 对于未支付完成，却点击【我已支付】的用户将会降低信用权重，甚至冻结账户使用权限，请您知晓；",
+  "otc_buy_tips_d": "1.如果您已支付完成请点击下方【确认付款】，卖家确认收款后会及时为您放币",
+  "otc_buy_tips_e": "2. 对于未支付完成，却点击【确认付款】的用户将会降低信用权重，甚至冻结账户使用权限，请您知晓；",
   "otc_buy_tips_f": "如果您已向卖家付款，请千万不要取消订单。",
   "otc_buy_tips_g": "取消规则：每天自主取消订单达到3次或恶意取消订单2次将被冻结当日无法交易，当月累计超时/恶意取消10单后每取消一单将冻结2小时无法交易。",
   "otc_buy_tips_h": "是否确定取消？",
@@ -1820,6 +1820,7 @@
   "otc_tips_failed_a": "发布失败：",
   "input_all": "全部",
   "otc_amount_money": "金额",
+  "otc_quantity": "数量",
   "otc_purchase_amount": "购买金额",
   "otc_confirm_buy": "确定购买",
   "otc_cancel_order": "取消订单",
@@ -1888,7 +1889,7 @@
   "otc_order_confirm_buy": "发布购买",
   "otc_order_confirm_sell": "发布出售",
   "otc_view_userinfo": "查看",
-  "otc_total_transaction_volume": "当前站点交易总额(%{currency})",
+  "otc_total_transaction_volume": "当前站点交易总额(CNY)",
   "otc_total_arder": "总单数",
   "otc_orders_rate": "完成率",
   "otc_legal_currency": "法币",
@@ -1901,7 +1902,7 @@
   "otc_order_quota": "限额(%{legal_currency})",
   "otc_completed_infadwo": " 成交单数 / 完成率",
   "otc_completed_info": "商家(成单 | 完成率)",
-  "otc_need_authentication": "%{side} 需 <span style='color:$primary;'>高级认证</span>",
+  "otc_need_authentication": "%{side} 需 <span style='color:#01CED1;'>高级认证</span>",
   "otc_confirm_payment": "确认付款",
   "otc_sidees1": "等待对方付款",
   "otc_sidees2": "买家取消",
@@ -1952,16 +1953,11 @@
     "otc_sideoc_51": "结束日期",
     "otc_ziurec_9": "至",
     "otc_ziurec_7": "卖家超时放币",
-
-
-
     "otc_ziurec_1": "价格不能为空",
     "otc_ziurec_2": "数量不能为空",
-
-
-  "otc_ziurec_12": "偏离指数价格过多，确定要以此价格下单交易",
-  "otc_ziurec_15": "您发布的出售%{currency}的交易单，价格为 %{inputPrice} %{legal_currency} 低于买一价 %{symbolInfo} %{legal_currency} ，以该价格发布可能给您带来损失",
-  "otc_ziurec_3": "您发布的购买%{currency}的交易单，价格为 %{inputPrice} %{legal_currency} 高于卖一价 %{symbolInfo} %{legal_currency}，以该价格发布可能给您带来损失",
+    "otc_ziurec_12": "偏离指数价格过多，确定要以此价格下单交易",
+    "otc_ziurec_15": "您发布的出售%{currency}的交易单，价格为 %{inputPrice} %{legal_currency} 低于买一价 %{symbolInfo} %{legal_currency} ，以该价格发布可能给您带来损失",
+    "otc_ziurec_3": "您发布的购买%{currency}的交易单，价格为 %{inputPrice} %{legal_currency} 高于卖一价 %{symbolInfo} %{legal_currency}，以该价格发布可能给您带来损失",
     "otc_ziurec_4": "的交易单，价格为",
     "otc_ziurec_5": "CNY高于卖一价",
     "otc_ziurec_6": "CNY，以该价格发布可能给您带来损失",
@@ -2099,6 +2095,7 @@
     "pair_list_all": "全部",
     "pair_list_option": "自选",
     "pair_list_new": "创新区",
+    "pair_list_ST": "ST区",
     "done_verified": "已完成",
     "otc_trans_time": "成交时间",
     "coin_FUTURE_BTCUSD":"BTC",
@@ -2178,7 +2175,6 @@
     "tj_cg": "提交成功",
     "zd_xe": "购买量低于最低100限额",
     "gm_sl": "购买量大于最大50000限额",
-    "jg_ck": "非最终交易单价，仅供参考",
     "deposit_state_error": "错误",
     "order_apply_failed": "委托提交失败",
     "order_apply_message_a": "可用余额不足，无法提交委托。",
@@ -2186,7 +2182,95 @@
     "order_apply_message_c":"在%{price}价格%{side}%{amount}张%{currency}永续合约。",
     "contract_buy_on_price_piece1":"在市价%{amount}张%{symbol}。",
     "invite_kyc_lv": "KYC认证",
-    "otc_otutcol_20": "申诉成功，请等待客服处理"
+    "otc_otutcol_20": "申诉成功，请等待客服处理",
+    "link_name":"链名称",
+    "otc_order_default_tips": "提示：1.请使用实名认证付款方式 2.请按订单金额付款 3.付款时无需备注",
+    "app_download_tips": "温馨提示：APP下载，建议iOS手机系统版本10.0以上；Android手机系统版本7.0以上",
+    "otc_suspend_all_tips" :"当您不在线或不方便操作交易时，点击“全部暂停”；可将委托单从列表中隐藏；点击“全部开始”订单恢复正常",
+    "fund_assets_subscribed": "已认购",
+    "fund_history_inviter_userid": "来源UID",
+    "fund_history_star_lv": "用户星级",
+    "fund_history_transaction_type": "交易类型",
+    "fund_history_symbol":"交易产品",
+    "fund_history_release_time":"发放时间",
+    "fund_history_airdrop": "空投奖励",
+    "fund_deposit_tip_contract": "合约地址为：%{contract}，请核对后操作",
+    "fund_trading_bill": "交易记录",
+    "fund_contract_up": "做多",
+    "fund_contract_down": "做空",
+    "fund_contract_open":"未平仓仓位",
+    "fund_contract_result_yet":"已实现盈亏",
+    "fund_contract_result_unrealized":"未实现盈亏",
+
+    "otc_trade_available": "可用数量",
+    "fund_assets_status_issued": "已发放",
+    "fund_assets_withdraw_revoke_tips": "你确定要撤销该笔提币申请？",
+    "jg_ck": "非最终交易单价，仅供参考",
+    "otc_french_bill_in": "转入",
+    "otc_french_bill_out": "转出",
+    "otc_french_bill_liquidation": "当日清算",
+    "otc_french_bill_buy": "买入",
+    "otc_french_bill_sell": "卖出",
+    "otc_one_click_optimal": "单价最优",
+    "playBTC": "娱乐区",
+    "play-record": "游戏记录",
+    "playbtcMaptext":{
+      "1":{
+        "title":"极速火箭",
+        "describe":"火箭一爆，收益全开",
+        "tips":"竞猜游戏",
+        "btntext":"点开即玩"
+      },
+      "2":{
+        "title":"足球神射",
+        "describe":"足球进门，财富满盆",
+        "tips":"足球游戏",
+        "btntext":"点开即玩"
+      },
+      "3":{
+        "title":"绝杀卡当",
+        "describe":"点位插队，赢者翻倍",
+        "tips":"扑克游戏",
+        "btntext":"点开即玩"
+      },
+      "4":{
+        "title":"疯狂二八红",
+        "describe":"多人对决 ，等你通杀",
+        "tips":"高频游戏",
+        "btntext":"点开即玩"
+      },
+      "5":{
+        "title":"发哥百家乐",
+        "describe":"文明公正，用实力做发哥",
+        "tips":"娱乐项目",
+        "btntext":"点开即玩"
+      },
+      "6":{
+        "title":"竞猜大师",
+        "describe":"全球联赛，尽收其中",
+        "tips":"赛事预测",
+        "btntext":"点开即玩"
+      }
+    },
+
+    "fund_assets_status_unissued": "未发放",
+    "fund_assets_type_trading":"交易返佣",
+    "fund_assets_type_Upper":"上币返佣",
+    "fund_assets_type_opening":"节点开通返佣",
+    "fund_deposit_mpv_tips1":"MPV存币申请白名单操作流程如下：",
+    "fund_deposit_mpv_tips2":"1. MPV官方注册账号<br/><a  href='https://assets.mpvworld.com/account/register'>https://assets.mpvworld.com/account/register</a>",
+    "fund_deposit_mpv_tips3":"2. 登录以后提交实名认证资料",
+    "fund_deposit_mpv_tips4":"3. 点击 首页 -> 以太坊地址白名单 -> 添加钱包地址",
+    "h5_home_introduce1": "安全",
+    "h5_home_introduce2": "“100%冷钱包”存放机制，确保平台资产全隔离公网，辅以多层加密、多级防火墙、多重签名的验证机制，极限保障用户的资产安全。",
+    "h5_home_introduce3": "专业",
+    "h5_home_introduce4": "创始团队均来自全球知名院校（麻省理工、耶鲁大学、东京大学等），而且具有主流数字货币交易所及大型互联网项目的开发及运营经验。",
+    "h5_home_introduce5": "体验",
+    "h5_home_introduce6": "提供24小时不间断的专属客服服务，多语言支持，确保沟通没有国界障碍，在提币等核心服务环节上可以实现秒级响应。",
+    "h5_home_introduce7": "高效",
+    "h5_home_introduce8": "自研高性能撮合引擎，在严格的压力测试下，可以充分支持200万+/秒/交易对的撮合速度，确保服务不间断，操作上无卡顿。",
+    "order_id": "订单ID",
+    "fxpl": "反洗钱指引"
   }
 
 

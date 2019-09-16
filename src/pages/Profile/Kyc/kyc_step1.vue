@@ -53,7 +53,7 @@
           <el-form-item
             class="inp_box"
             :label="$t('kyc_id_type')">
-            <el-select v-model="form.id_type" disabled>
+            <el-select v-model="form.id_type" :disabled="form.regionId===86">
               <el-option
                 :label="$t('kyc_idcard')"
                 :value="1"/>
@@ -172,9 +172,9 @@ export default {
     next()
   },
   methods: {
-    selectChange(coin) {
+    selectChange(regionId) {
       this.form.id_number = ''
-      if (coin === 86) {
+      if (regionId === 86) {
         this.form.id_type = 1
       } else {
         this.form.id_type = 2
@@ -227,6 +227,7 @@ export default {
         this.form.regionId = res.data.region || 86
         this.form.id_type = res.data.id_type || 1
         this.form.id_number = res.data.id_number || ""
+        this.selectChange(this.form.regionId)
       }
       else if (kycInfo.lv === 1 && kycInfo.state === 1 && kycInfo.region !== 86) {
         this.$router.replace({

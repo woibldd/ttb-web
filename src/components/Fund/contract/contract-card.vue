@@ -6,18 +6,18 @@
       </div>
       <div class="contract-card-content">
         <dl class="contract-card-row">
-          <dt>{{$t('未平仓仓位')}}</dt>
+          <dt>{{$t('fund_contract_open')}}</dt>
           <dd> 
             <span
               :class='{up: (holding.amount || 0) > 0, down: (holding.amount || 0) < 0}'
             >
               {{holding.amount}}  
-              ({{ (holding.amount || 0) > 0 ? $t('做多') : $t('做空') }})
+              ({{ (holding.amount || 0) > 0 ? $t('fund_contract_up') : $t('fund_contract_down') }})
             </span>
           </dd>
         </dl>  
         <dl class="contract-card-row">
-          <dt>{{$t('已实现盈亏')}}</dt>
+          <dt>{{$t('fund_contract_result_yet')}}</dt>
           <dd>
             <span 
               :class='{up: (holding.realized || 0) > 0, down: (holding.realized || 0) < 0}'
@@ -27,7 +27,7 @@
           </dd>
         </dl>  
         <dl class="contract-card-row">
-          <dt>{{$t('未实现盈亏')}}</dt>
+          <dt>{{$t('fund_contract_result_unrealized')}}</dt>
           <dd>
             <span
               :class='{up: $big(holding.unrealized || 0).gt(0), down: $big(holding.unrealized || 0).lt(0)}'

@@ -1,17 +1,20 @@
 <template>
-  <div class="nav_box"
-:class="{dark: dark}">
+  <div
+    :class="{dark: dark}"
+    class="nav_box">
     <div class="ind_cen">
-      <router-link :to="{name:'home'}"
-class="nav_logo"/>
+      <router-link
+        :to="{name:'home'}"
+        class="nav_logo"/>
       <div class="nav_left">
         <div class="left_options">
-          <router-link :to="{name: 'trading'}"
-class="nav_link">{{ $t('trading') }}</router-link>
+          <router-link
+            :to="{name: 'trading'}"
+            class="nav_link">{{ $t('trading') }}</router-link>
           <a
             v-if="showContract"
-            href="/contract.html"
             :class="{'router-link-active': from === 'contract'}"
+            href="/contract.html"
             class="nav_link ml-30">{{ $t('contract') }}
           </a>
           <router-link
@@ -24,21 +27,42 @@ class="nav_link">{{ $t('trading') }}</router-link>
             class="nav_link"
             style="padding-left:10px;"
           >
-            {{ $t('FrenzySaleZone') }}(SP) 
+            {{ $t('FrenzySaleZone') }}(SP)
             <icon name="hot-red"/>
             <!-- <img src="@/assets/hot.png"
 alt style="position: relative;top: 5px;left: 5px;"> -->
           </router-link>
           <router-link
-            to="/snowball"
-            class="nav_link  ml-30">
-            {{ $t('bidTitle') }}
+            v-if='!isTestnet'
+            to="/snowball/bazaar"
+            class="nav_link  ml-30">    
+            {{$t('bidTitle')}}
           </router-link>
+          <div 
+            class="nav_link arrow-down"
+            v-if='isTestnet'
+            >
+            <router-link
+              to="/snowball"
+              class="nav_link ml-20">{{ $t('playBTC') }} 
+            </router-link> 
+            <div class="dropdown-sub-menu">
+              <ul class="dropdown-list pt-10 pb-10">
+                <li class="dropdown-item pl-24 pr-24">
+                  <a
+                    href="/snowball/bazaar"
+                    :class="{'router-link-active': from === 'contract'}"
+                    class="link">{{ $t('bidTitle') }} 
+                  </a>
+                </li>  
+              </ul>
+            </div>
+          </div>
           <a
             href="javascript:;"
-            class="nav_link"
-            @click="subscribeHandle"
+            class="nav_link" 
             style="padding-left:30px;"
+            @click="subscribeHandle"
           >
             {{ this.$t('node_sub') }}
             <icon name="hot-red"/>
@@ -132,27 +156,33 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
         </div>
       </div>
       <div class="nav_right">
-        <div class="set-app-dl right_options"
-style="margin-right: 40px;">
-          <router-link class="nav_log_res"
-:to="{name: 'Download'}">
+        <div
+          class="set-app-dl right_options"
+          style="margin-right: 40px;">
+          <router-link
+            :to="{name: 'Download'}"
+            class="nav_log_res">
             <div class="app-dl">
-              <icon class="mr-3"
-name="topbar-dl-phone"/>APP
+              <icon
+                class="mr-3"
+                name="topbar-dl-phone"/>APP
             </div>
           </router-link>
         </div>
-        <div v-if="!state.userInfo"
-class="right_options">
+        <div
+          v-if="!state.userInfo"
+          class="right_options">
           <router-link
             :to="{name:'login'}"
             class="nav_log_res border-right-1 pr-14 mr-14"
           >{{ $t("signin") }}</router-link>
-          <router-link :to="{name:'register'}"
-class="nav_log_res">{{ $t("signup_title") }}</router-link>
+          <router-link
+            :to="{name:'register'}"
+            class="nav_log_res">{{ $t("signup_title") }}</router-link>
         </div>
-        <div class="right_options"
-v-else>
+        <div
+          v-else
+          class="right_options">
           <!-- <p class="email">
             <router-link :to="{name:'trading'}">币币交易</router-link>
           </p>
@@ -160,7 +190,7 @@ v-else>
             <router-link :to="{name:'fund'}">我的资产</router-link>
           </p>-->
           <div class="fund mr-30">
-            <icon 
+            <icon
               :name="fund"
             />
             <span @click="openDefault('fund')">{{ $t('wallets_nav_asset') }}</span>
@@ -168,16 +198,25 @@ v-else>
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
-                  <router-link :to="{name: 'fund'}"
-class="link">{{ $t('capital_manage') }}</router-link>
+                  <router-link
+                    :to="{name: 'fund'}"
+                    class="link">{{ $t('capital_manage') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <router-link :to="{name: 'deposit'}"
-class="link">{{ $t('deposit') }}</router-link>
+                  <router-link
+                    :to="{name: 'deposit'}"
+                    class="link">{{ $t('deposit') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <router-link :to="{name: 'withdraw'}"
-class="link">{{ $t('withdraw') }}</router-link>
+                  <router-link
+                    :to="{name: 'withdraw'}"
+                    class="link">{{ $t('withdraw') }}</router-link>
+                </li>
+                <li class="dropdown-item pl-24 pr-24"> 
+                  <router-link
+                    class="link" 
+                    :to="'/fund/transfer'">{{ $t('account_exchange') }}
+                  </router-link>
                 </li>
               </ul>
             </div>
@@ -193,8 +232,9 @@ class="link">{{ $t('withdraw') }}</router-link>
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24 mobile">
-                  <router-link :to="{name: 'fund'}"
-class="link">{{ $t('capital_manage') }}</router-link>
+                  <router-link
+                    :to="{name: 'fund'}"
+                    class="link">{{ $t('capital_manage') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
                   <router-link
@@ -203,8 +243,9 @@ class="link">{{ $t('capital_manage') }}</router-link>
                   >{{ $t('profile_personal_center') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <a class="link"
-@click="logout">{{ $t('signout') }}</a>
+                  <a
+                    class="link"
+                    @click="logout">{{ $t('signout') }}</a>
                 </li>
               </ul>
             </div>
@@ -214,16 +255,22 @@ class="link">{{ $t('capital_manage') }}</router-link>
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
-                  <a class="link"
-target="_blank" :href="announcementLink">{{ $t('footer_notice') }}</a>
+                  <a
+                    :href="announcementLink"
+                    class="link"
+                    target="_blank">{{ $t('footer_notice') }}</a>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <a class="link"
-target="_blank" :href="helpLink">{{ $t('user_guide') }}</a>
+                  <a
+                    :href="helpLink"
+                    class="link"
+                    target="_blank">{{ $t('user_guide') }}</a>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
-                  <a class="link"
-target="_blank" :href="requestLink">{{ $t('footer_request') }}</a>
+                  <a
+                    :href="requestLink"
+                    class="link"
+                    target="_blank">{{ $t('footer_request') }}</a>
                 </li>
               </ul>
             </div>
@@ -231,16 +278,21 @@ target="_blank" :href="requestLink">{{ $t('footer_request') }}</a>
         </div>
 
         <div class="lang">
-          <icon :name="'flag-'+state.locale"
-class="mr-5"/>
+          <icon
+            :name="'flag-'+state.locale"
+            class="mr-5"/>
           {{ localeText }}
-          <icon class="rig"
-name="arrow-down"/>
+          <icon
+            class="rig"
+            name="arrow-down"/>
           <div class="lang_box">
-            <a @click="switchLang(key)"
-:key="key" v-for="(value, key) in locales">
-              <icon :name="'flag-'+key"
-class="mr-5"/>
+            <a
+              v-for="(value, key) in locales"
+              :key="key"
+              @click="switchLang(key)">
+              <icon
+                :name="'flag-'+key"
+                class="mr-5"/>
               {{ value }}
             </a>
           </div>
@@ -251,11 +303,14 @@ class="mr-5"/>
 </template>
 
 <script>
-import { state, actions } from '@/modules/store';
-import service from '@/modules/service';
-import utils from '@/modules/utils';
-
+import { state, actions } from '@/modules/store'
+import service from '@/modules/service'
+import utils from '@/modules/utils'
+import whDropdown from '@/components/dropdown/index'
 export default {
+  components: {
+    whDropdown,
+  },
   props: {
     dark: {
       type: Boolean,
@@ -266,30 +321,30 @@ export default {
       default: ''
     }
   },
-  data () {
+  data() {
     return {
       state,
       locales: utils.locales
     }
   },
   computed: {
-    localeText () {
+    localeText() {
       return utils.getLocaleName(state.locale)
     },
-    pdfSubfix () {
+    pdfSubfix() {
       if (state.locale === 'zh-CN') {
         return '+zh-CN'
       }
       return ''
     },
-    fund() { 
+    fund() {
       if (state.locale === 'zh-CN') {
         return 'fund'
       }
       return 'fund-en'
     },
-    desentInfo () {
-      let userInfo = this.state.userInfo
+    desentInfo() {
+      const userInfo = this.state.userInfo
       if (userInfo) {
         if (userInfo.phone) {
           return utils.publicDesensitization(userInfo.phone)[0]
@@ -298,14 +353,14 @@ export default {
           return utils.publicDesensitization(userInfo.email)[0]
         }
       }
-      return '';
+      return ''
     },
-    helpLink () {
+    helpLink() {
       return (
         this.state.theme.help[this.state.locale] || this.state.theme.help.en
       )
     },
-    requestLink () {
+    requestLink() {
       if (this.state.userInfo && this.state.theme.themeName === 'default') {
         return (
           process.env.BASE_API +
@@ -322,82 +377,86 @@ export default {
         )
       }
     },
-    announcementLink () {
+    announcementLink() {
       return (
         this.state.theme.announcement[this.state.locale] ||
         this.state.theme.announcement.en
       )
     },
-    isTestnet () {
+    isTestnet() {
       return location.hostname.indexOf('ixex.pro') >= 0
     },
-    showContract () {
-      let time1 = new Date()
-      let time2 = new Date(2019, 4, 7, 14)
+    showContract() {
+      const time1 = new Date()
+      const time2 = new Date(2019, 4, 7, 14)
       return this.isTestnet || time1 > time2
     }
   },
   methods: {
     subscribeHandle() {
-        if (window.localStorage.getItem('X-TOKEN')) {
-            this.$router.push('/fund/my/assets')
-        } else {
-            this.$router.push(
-                {
-                    name: 'login'
-                }
-            )
-        }
+      if (window.localStorage.getItem('X-TOKEN')) {
+        this.$router.push('/fund/my/assets')
+      } else {
+        this.$router.push(
+          {
+            name: 'login'
+          }
+        )
+      }
     },
-    switchLang (lang) {
+    switchLang(lang) {
       actions.setLocale(lang)
       this.$nextTick(() => {
         location.reload()
       })
     },
-    logout () {
+    logout() {
       actions.setUserInfo(null)
       utils.setSessionStorageValue('LoginStatus', 0)
       utils.setSessionStorageValue('markTime', 9999999999)
       service.signout().then(res => {
-        console.log({res})
+        console.log({ res })
+        // window.onload()
+        this.$nextTick(() => {
+          location.reload()
+        })
       })
-      // if (utils.getRouteMeta(this.$route, 'auth')) {
-      //   this.$router.push({
-      //     name: 'login'
-      //   })
-      // }
+      if (utils.getRouteMeta(this.$route, 'auth')) {
+        this.$router.push({
+          name: 'login'
+        })
+      }
 
       // this.$nextTick(() => {
       //   location.reload()
       // })
     },
-    clickStar ($event) {
-      this.className = 'active'; // console.log($event.currentTarget);
+    clickStar($event) {
+      this.className = 'active' // console.log($event.currentTarget);
     },
-    alert () {
+    alert() {
       alert(1)
     },
-    openDefault (type) {
+    openDefault(type) {
       switch (type) {
         case 'fund':
           this.$router.push({
             name: 'fund'
           })
-          break;
+          break
         case 'profile':
           this.$router.push({
             name: 'profile'
           })
-          break;
+          break
         case 'help':
           window.open(this.helpLink)
-          break;
+          break
         case 'orders':
           this.$router.push({
             name: 'orders'
           })
-          break;
+          break
       }
     }
   }
@@ -408,7 +467,7 @@ export default {
 .nav_box {
   width: 100%;
   height: 60px;
-
+  min-width: 1340px;
   .border-right-1 {
     border-right: 1px solid #ffffff;
   }
@@ -416,7 +475,7 @@ export default {
   .ind_cen {
     position: relative;
     margin: 0 60px;
-    min-width: 1200px;
+    min-width: 1300px;
   }
 
   .nav_logo {
@@ -470,7 +529,7 @@ export default {
             background: $protrade-bg;
             position: absolute;
             left: 0;
-            top: 68px;
+            top: 58px;
             border-radius: 4px;
             z-index: 999;
             opacity: 0;
@@ -480,6 +539,7 @@ export default {
             .dropdown-list {
               .dropdown-item {
                 height: 40px;
+                line-height: 40px;
                 white-space: nowrap;
                 .link {
                   width: 100%;
@@ -629,7 +689,7 @@ export default {
     text-align: center;
     font-size: 12px;
     cursor: pointer;
-    z-index: 2;
+    z-index: 100;
     .rig {
       display: inline-block;
       transition: all 0.2s ease-in-out;
@@ -640,7 +700,7 @@ export default {
       font-size: 16px;
     }
     .lang_box {
-      display: block;
+      // display: block;
       width: 100%;
       height: auto;
       line-height: 40px;
@@ -664,7 +724,7 @@ export default {
     }
     &:hover {
       .lang_box {
-        display: flex; 
+        display: block;
       }
       .rig {
         transform: rotate(180deg);
@@ -703,11 +763,11 @@ export default {
 .login {
   background: $home-header-login;
 }
-@media screen and (min-width: 1280px){ // 1280是英文状态下nav正常显示的最小宽度
+@media screen and (min-width: 1300px){ // 1280是英文状态下nav正常显示的最小宽度
     .nav_box {
         .ind_cen {
             width: auto;
-            min-width: 1200px;
+            min-width: 1300px;
             margin: 0 60px;
         }
    }

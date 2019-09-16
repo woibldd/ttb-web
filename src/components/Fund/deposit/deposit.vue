@@ -132,7 +132,18 @@
         <li> {{ $t('deposit_hint_addr', {coin: selectCoin.currency}) }}</li>
         <li> {{ $t('deposit_hint_confirm',{confirm: selectCoin.min_confirm, coin: selectCoin.currency}) }}</li>
         <li v-if="selectCoin.memo_support">{{ $t('eos_deposit_tip_security_third') }}</li>
-        <li v-if="selectCoin.currency === 'EOS'">  {{ $t('watch_tips') }}</li>
+        <li >  {{ $t('watch_tips') }}</li>
+        <li v-if="!!contract"> 
+          {{$t('fund_deposit_tip_contract', {contract})}}
+        </li>
+        <li v-if="selectCoin.currency==='MPV'">
+          <span>{{$t('fund_deposit_mpv_tips1')}}</span>
+          <dl>
+            <dd v-html="$t('fund_deposit_mpv_tips2')"></dd>
+            <dd v-html="$t('fund_deposit_mpv_tips3')"></dd>
+            <dd v-html="$t('fund_deposit_mpv_tips4')"></dd>
+          </dl>
+        </li>
       </ul>
     </div>
     <remember-alert
@@ -169,7 +180,8 @@ export default {
       openEosAlert: false,
       lianData: [],
       curreryCoin: '',
-      selectLian: {}
+      selectLian: {},
+      contract: ''
     }
   },
   computed: {
@@ -207,10 +219,12 @@ export default {
       }
       this.address = ''
       this.memo = ''
+      this.contract = '' 
       return service.getMyCoinAddress(param).then((res) => {
         if (res && res.data) {
           this.address = res.data.address
           this.memo = res.data.memo
+          this.contract = res.data.contract
         }
       })
     },
@@ -263,6 +277,7 @@ export default {
               Vue.set(item, 'currencyName', item.currency + '-' + 'ERC20')
             }
           })
+          this.lianData = this.lianData.reverse()//顺序颠倒一下，omni要放在前面
           this.allCoins = this.removalData(res.data.filter(c => c.depositable))
           this.allCoins.forEach((item) => {
             if (state.locale === 'zh-CN') {

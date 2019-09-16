@@ -2,8 +2,8 @@
   <div class="tv-wrap">
     <div id="tv_chart_container"/>
     <div
-      class="mask"
-      :class="{show: !tvReady}">
+      :class="{show: !tvReady}"
+      class="mask">
       <v-loading/>
     </div>
   </div>
@@ -13,12 +13,18 @@
 import utils from '@/modules/utils'
 import configIniter from '@/libs/tradingview/contract-index-config'
 import datafeeder from '@/libs/tradingview/contract-o-datafeeder'
-import {local, state} from '@/modules/store'
+import { local, state } from '@/modules/store'
 // preload
 const tvlib = utils.getExtModule('TradingView')
 export default {
   name: 'TradingView',
-  data () {
+  props: {
+    pair: {
+      type: String,
+      default: 'BTC_USDT'
+    }
+  },
+  data() {
     return {
       state,
       local,
@@ -28,14 +34,61 @@ export default {
       hasIndicator: false
     }
   },
-  props: {
+  watch: {
     pair: {
-      type: String,
-      default: 'BTC_USDT'
+      handler(pair, oldPair) {
+        if (pair && !oldPair) {
+          this.init(pair)
+        }
+        if (pair && oldPair) {
+          // this.$destroy()
+          // this.init(pair)
+          if (this.tvReady) {
+            return this.widget.chart().setSymbol(pair)
+          }
+          this.$once('chartReady', () => {
+            return this.widget.chart().setSymbol(this.pair)
+          })
+        }
+      },
+      immediate: true
+    },
+    'local.upDown'() {
+      if (this.tvReady) {
+        this.widget.remove()
+      }
+      datafeeder.destroy()
+      this.tvReady = false
+      this.$nextTick(() => {
+        this.init(this.pair)
+      })
+    },
+    'state.locale'(locale) {
+      // SetLanguage is bugy
+      // this.widget.setLanguage(this.getLanguage(this.state.locale))
+      // Reload widget
+      if (this.tvReady) {
+        this.widget.remove()
+      }
+      datafeeder.destroy()
+      this.tvReady = false
+      this.$nextTick(() => {
+        this.init(this.pair)
+      })
     }
   },
+  async created() {
+  },
+  beforeDestroy() {
+  },
+  destroyed() {
+    if (this.tvReady) {
+      this.widget.remove()
+    }
+    datafeeder.destroy()
+  },
   methods: {
-    configure () {
+    configure() {
       const config = configIniter()
       config.symbol = this.pair
       config.interval = local.interval
@@ -43,7 +96,7 @@ export default {
       config.locale = this.getLanguage(this.state.locale)
       return config
     },
-    getLanguage (locale) {
+    getLanguage(locale) {
       switch (locale) {
         case 'zh-CN':
           return 'zh'
@@ -56,7 +109,7 @@ export default {
           return 'en'
       }
     },
-    async init (pair) {
+    async init(pair) {
       if (!this.pair || this._isDestroyed) {
         return false
       }
@@ -68,11 +121,11 @@ export default {
       const Widget = TradingView.widget
       this.widget = new Widget(config)
 
-      this.widget.onChartReady(function () {
+      this.widget.onChartReady(function() {
         if (vm._isDestroyed) {
           return false
         }
-        let widget = vm.widget
+        const widget = vm.widget
         vm.tvReady = true
         vm.$emit('chartReady')
 
@@ -89,10 +142,10 @@ export default {
           precision: 8
         })
         // MACD
-        widget.chart().onIntervalChanged().subscribe(null, function (interval) {
+        widget.chart().onIntervalChanged().subscribe(null, function(interval) {
           local.interval = interval
         })
-        let indicators = [
+        const indicators = [
           {
             name: 'MACD'
             // args: [14, 30, 'close', 9]
@@ -106,9 +159,10 @@ export default {
             // args: [20]
           }]
         indicators.forEach(indicat => {
-          let btn = widget.createButton().on('click', (e) => {
-            let element = e.srcElement || e.target
-            let cls = element.classList
+          const btn = widget.createButton().on('click', (e) => {
+            console.log(1111)
+            const element = e.srcElement || e.target
+            const cls = element.classList
             if (!cls.contains('selected')) {
               if (this.hasIndicator) {
                 widget.chart().removeEntity(this.entryId)
@@ -142,59 +196,6 @@ export default {
         widget.chart().executeActionById('drawingToolbarAction')
       })
     }
-  },
-  watch: {
-    pair: {
-      handler (pair, oldPair) {
-        if (pair && !oldPair) {
-          this.init(pair)
-        } 
-        if (pair && oldPair) { 
-          // this.$destroy()
-          // this.init(pair)
-          if (this.tvReady) {
-            return this.widget.chart().setSymbol(pair)
-          }
-          this.$once('chartReady', () => {
-            return this.widget.chart().setSymbol(this.pair)
-          })
-        }
-      },
-      immediate: true
-    },
-    'local.upDown' () {
-      if (this.tvReady) {
-        this.widget.remove()
-      }
-      datafeeder.destroy()
-      this.tvReady = false
-      this.$nextTick(() => {
-        this.init(this.pair)
-      })
-    },
-    'state.locale' (locale) {
-      // SetLanguage is bugy
-      // this.widget.setLanguage(this.getLanguage(this.state.locale))
-      // Reload widget
-      if (this.tvReady) {
-        this.widget.remove()
-      }
-      datafeeder.destroy()
-      this.tvReady = false
-      this.$nextTick(() => {
-        this.init(this.pair)
-      })
-    }
-  },
-  async created () {
-  },
-  beforeDestroy () {
-  },
-  destroyed () {
-    if (this.tvReady) {
-      this.widget.remove()
-    }
-    datafeeder.destroy()
   }
 }
 </script>

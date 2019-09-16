@@ -64,7 +64,7 @@
 
         .head-item {
             box-sizing: border-box;
-            text-align: right;
+            text-align: center;
             border-right: 1px solid #C9C9C9;
             padding-right: 10px;
             height: 11px;
@@ -84,7 +84,7 @@
         }
 
         .row__item{
-            text-align: right;
+            text-align: left;
             padding-right: 10px;
             box-sizing: border-box;
             &.color-down {
@@ -108,7 +108,7 @@
     .percent12{
         width: 12%;
     }
-    .percent13{
+    .percent13{ 
         width: 13%;
     }
     .percent14_8{
@@ -127,6 +127,13 @@
           color: $primary;
         }
       }
+    
+    .tal_r {
+      text-align: right !important;
+    }
+    .tal_l {
+      text-align: left !important;
+    }
   
   .relative {
     position: relative;

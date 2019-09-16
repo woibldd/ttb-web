@@ -65,6 +65,7 @@
         </div>
         <div
           class="order-split mb-18 mt-18"
+          :class="{displayFlex:hasBtnReturnDish}"
         >
           <span
             class="delta"
@@ -74,7 +75,7 @@
               :class="{'arrow-up': state.ct.lastSide === 1, 'arrow-down': state.ct.lastSide === 2}"
             />
           </span>
-          <div class="left-part">
+          <div class="left-part" v-if="!hasBtnReturnDish">
             <span class="last-price">
               <em
                 class="pointer"
@@ -86,10 +87,8 @@
                 @click="jumpToHistory"
                 v-tooltip.top-center="{html: true, content: $t('contract_mark_price_tips'), classes: 'contract'}">{{ markPrice }}</em>
             </span>
-            <!-- <span class="estimate">
-              0.002034
-            </span> -->
           </div>
+          <a v-else size='mini' class="el-link" @click="returnToDefault">返回盘口</a>
         </div>
         <div
           class="side-wrap bid"
@@ -173,7 +172,9 @@ export default {
       isFristAdultScrolling: true,
       showDepthOption: false,
       buyOnePrice: 0, //买一价
-      sellOnePrice: 0  //卖一价
+      sellOnePrice: 0,  //卖一价
+
+      hasBtnReturnDish:false
     }
   },
   watch: {
@@ -503,22 +504,43 @@ export default {
      */
     computedScrollPosition () {
       // 已经纠正过的不在纠正
+      
       if (!this.isFristAdultScrolling) return
       // 单边显示长度
       const singleSideLength = 7
       // mode === 'both'
       this.$nextTick(() => {
         this.$refs['body'].scrollTop = (this.asks && this.asks.length) ? (this.asks.length - singleSideLength) * 20 : 300
-        // console.log(this.$refs['body'].scrollTop)
       })
       // 数据更新不及时可能会带来问题
       setTimeout(() => {
         this.$refs['body'].scrollTop = (this.asks && this.asks.length) ? (this.asks.length - singleSideLength) * 20 : 300
-        // console.log(this.$refs['body'].scrollTop)
       }, 300)
     },
     jumpToHistory () {
       this.$router.push({name: 'TradeIndex', params: {pair: this.state.ct.pair}})
+    },
+    handleScroll(e){
+      // clearTimeout(this.timer)
+      // this.timer = setTimeout(()=>{
+      //   this.hasBtnReturnDish = e.target.scrollTop > 380 || e.target.scrollTop<100
+      // },100)
+      this.$nextTick(() => {  
+        let tag = e.target
+        let [ask, split, bid]  = tag.children
+        if (ask.offsetHeight - tag.scrollTop + split.offsetHeight >= tag.offsetHeight ||
+          ask.offsetHeight - tag.scrollTop + split.offsetHeight <= 0
+        ) {
+          this.hasBtnReturnDish = true
+        }
+        else  {
+          this.hasBtnReturnDish = false
+        } 
+      })
+    },
+    returnToDefault(){
+      const singleSideLength = 7
+      this.$refs['body'].scrollTop = (this.asks && this.asks.length) ? (this.asks.length - singleSideLength) * 20 : 300
     }
   },
   created () {
@@ -528,6 +550,9 @@ export default {
   mounted () {
     let height = utils.getComputedStyle(this.$refs.body, 'height')
     this.panelHeight = parseInt(height)
+    const el = this.$refs['body']
+    el.addEventListener('scroll',this.handleScroll)
+    
   },
   destroyed () {
     this.$eh.$off('app:resize', this.onresize)
@@ -538,7 +563,6 @@ export default {
     }
   }
   // updated () {
-  //   console.log(new Date())
   //   this.computedScrollPosition()
   // }
 }
@@ -565,6 +589,14 @@ export default {
       overflow-y: scroll;
       scrollbar-width: none;
     }
+  }
+}
+.el-link{
+  font-size: 14px;
+  color: #888;
+  &:hover{
+    text-decoration: underline;
+    color: #01CED1
   }
 }
 
@@ -705,19 +737,23 @@ th.sell {
 .order-split {
   color: white;
   padding-left: 12px;
-  height: 70px;
-  line-height: 30px;
+  line-height: 34px;
   font-size: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
   position: sticky;
   top: 0;
   bottom:0;
+  text-align: center;
   background: $contract-block-active-bg;
   z-index: 10;
-
+  &.displayFlex{
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between
+  }
   &.bid {
     top: 0;
     bottom: auto;

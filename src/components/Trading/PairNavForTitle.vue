@@ -1,19 +1,20 @@
 <template>
-  <div class="ix-pannel" :class="{loading: loading}">
+  <div :class="{loading: loading}" class="ix-pannel">
     <div class="ix-pannel-body">
-      <div class="no-data" v-if="errmsg">{{ $t(errmsg) }}</div>
-      <div class="err" v-if="!loading && err && !pairList.length">{{ err }}</div>
+      <div v-if="errmsg" class="no-data">{{ $t(errmsg) }}</div>
+      <div v-if="!loading && err && !pairList.length" class="err">{{ err }}</div>
       <!-- 索引 -->
       <div class="ix-pair-head tr">
-        <!-- <el-input placeholder="搜索" v-model="search" > 
+        <!-- <el-input placeholder="搜索" v-model="search" >
           <el-button slot="append" icon="el-icon-search"></el-button>
         </el-input>-->
         <div class="pairs-search">
           <div class="search-box">
-            <input placeholder="搜索" 
-              @input="filterPair()" 
-              type="text" 
-              v-model="search">
+            <input
+              v-model="search"
+              placeholder="搜索"
+              type="text"
+              @input="filterPair()">
             <icon name="home-search-t"/>
           </div>
         </div>
@@ -21,15 +22,15 @@
       <!-- tabs -->
       <div class="ix-pair-head">
         <el-tabs v-model="tabSelected" >
-          <el-tab-pane :label="$t('pair_list_option')" name="like"></el-tab-pane>
-          <el-tab-pane label="USDT" name="USDT"></el-tab-pane>
-          <el-tab-pane label="BTC" name="BTC"></el-tab-pane>
-          <el-tab-pane label="ETH" name="ETH"></el-tab-pane>
-          <el-tab-pane :label="$t('pair_list_new')" name="new"></el-tab-pane>
-          <el-tab-pane :label="$t('pair_list_all')" name="all"></el-tab-pane>
+          <el-tab-pane :label="$t('pair_list_option')" name="like"/>
+          <el-tab-pane label="USDT" name="USDT"/>
+          <el-tab-pane label="BTC" name="BTC"/>
+          <el-tab-pane label="ETH" name="ETH"/>
+          <el-tab-pane :label="$t('pair_list_new')" name="new"/>
+          <el-tab-pane :label="$t('pair_list_all')" name="all"/>
         </el-tabs>
       </div>
-      <div class="ix-pair-head tr" v-show="sortedList.length">
+      <div v-show="sortedList.length" class="ix-pair-head tr">
         <div class="th pair" @click="setSort('pair')">
           <sort :sort="sort" :label="$t('pairnav_pair')" :state="stateSortBy('pair')"/>
         </div>
@@ -43,39 +44,42 @@
           <sort :sort="sort" :label="$t('pairnav_vol')" :state="stateSortBy('vol')"/>
         </div>
       </div>
-      <ul class="ul ix-pair-body tbody" :style="{'max-height': height}" v-show="sortedList.length">
+      <ul v-show="sortedList.length" :style="{'max-height': height}" class="ul ix-pair-body tbody">
         <li
-          class="tr"
           v-for="(pair,index) in sortedList"
           :class="{cur: pair.name === state.pro.pair}"
           :key="pair.id"
+          class="tr"
           @click="setPair(pair)"
         >
-          <div class="td pair">
-            <span @click.stop="collection(pair)" class="row__item percent5">
-              <icon v-show="pair.like" name="sc-x"/>
-              <icon v-show="!pair.like" name="sc-w"/>
-            </span>
-            {{ pair.product_name }}/{{ pair.currency_name }}
-            <icon v-show="index < 3 && tabSelected==='new' " name='hot-red'/>   
-          </div>
-          <div class="td price">
-            <span v-if="pair.tick">{{ pair.tick.current | fixed(pair.price_scale) }}</span>
-            <span v-else>...</span>
-          </div>
-          <div
-            class="td delta"
-            :class="{'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}"
-          >
-            <span
-              v-if="pair.tick"
-            >{{ (getDelta(pair.tick) > 0) ? '+' : '' }}{{ getDelta(pair.tick) }}%</span>
-            <span v-else>...</span>
-          </div>
-          <div class="td vol">
-            <span v-if="pair.tick">{{ pretty(pair.tick.volume_24h) }}</span>
-            <span v-else>...</span>
-          </div>
+          <template v-if="!pair.CUSTOM">
+            <div class="td pair">
+              <span class="row__item percent5" @click.stop="collection(pair)">
+                <icon v-show="pair.like" name="sc-x"/>
+                <icon v-show="!pair.like" name="sc-w"/>
+              </span>
+              {{ pair.product_name }}/{{ pair.currency_name }}
+              <icon v-show="index < 4 && tabSelected==='new' " name="hot-red"/>
+            </div>
+            <div class="td price">
+              <span v-if="pair.tick">{{ pair.tick.current | fixed(pair.price_scale) }}</span>
+              <span v-else>...</span>
+            </div>
+            <div
+              :class="{'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}"
+              class="td delta"
+            >
+              <span
+                v-if="pair.tick"
+              >{{ (getDelta(pair.tick) > 0) ? '+' : '' }}{{ getDelta(pair.tick) }}%</span>
+              <span v-else>...</span>
+            </div>
+            <div class="td vol">
+              <span v-if="pair.tick">{{ pretty(pair.tick.volume_24h) }}</span>
+              <span v-else>...</span>
+            </div>
+          </template>
+          <div v-if="pair.CUSTOM" v-cloak class="td custom-title">{{ pair.type === '2' ? $t('pair_list_new') : $t('pair_list_ST') }}</div>
         </li>
       </ul>
     </div>
@@ -83,20 +87,20 @@
 </template>
 
 <script>
-import utils from "@/modules/utils";
-import { state } from "@/modules/store";
-import Sort from "./Sort";
-import CollectStar from "./CollectStar";
-import tickTableMixin from "@/mixins/tick-table";
-import service from "@/modules/service";
+import utils from '@/modules/utils'
+import { state } from '@/modules/store'
+import Sort from './Sort'
+import CollectStar from './CollectStar'
+import tickTableMixin from '@/mixins/tick-table'
+import service from '@/modules/service'
 
 export default {
-  name: "PairNav",
-  mixins: [tickTableMixin],
+  name: 'PairNav',
   components: {
     Sort,
     CollectStar
   },
+  mixins: [tickTableMixin],
   props: {
     initHeight: {
       type: Number,
@@ -111,31 +115,21 @@ export default {
     return {
       bodyHeight: 0,
       isMac: /Macintosh/.test(navigator.userAgent),
-      activeName: "like"
-    };
-  },
-  watch: {
-    "state.pro.currency_name": {
-      handler(currency) {
-        if (currency && !this.local.proOnFav) {
-          this.setTab(currency);
-        }
-      },
-      immediate: true
+      activeName: 'like'
     }
   },
   computed: {
     hotKey() {
-      return this.isMac ? " (Cmd+F)" : " (Ctrl+F)";
+      return this.isMac ? ' (Cmd+F)' : ' (Ctrl+F)'
     },
     height() {
       if (this.initHeight) {
-        return `${this.initHeight}px`;
+        return `${this.initHeight}px`
       }
-      return this.bodyHeight;
+      return this.bodyHeight
     },
-    tabSelected: { 
-      get() { 
+    tabSelected: {
+      get() {
         return this.state.tabSelected
       },
       set(val) {
@@ -143,84 +137,99 @@ export default {
       }
     }
   },
-  methods: {
-    setPair(pair) {
-      this.$router.replace({
-        name: "trading",
-        params: {
-          pair: pair.name
+  watch: {
+    'state.pro.currency_name': {
+      handler(currency) {
+        if (currency && !this.local.proOnFav) {
+          this.setTab(currency)
         }
-      }); 
-      state.close_time = pair.close_time || "[*][*][*][9:59-10:00]";
-      state.price_open = pair.price_open || 0.017;
-      
-      //this.$eh.$emit("switchPair");
-      //this.$eh.$emit("trading:countDown", this.startCountDown);
-    },
-    pretty(num) {
-      num = this.$big(num || 0);
-      if (num < 100) {
-        return num.toFixed(2);
-      }
-      if (num < 1e6) {
-        return num.toFixed(0);
-      }
-      if (num < 1e7) {
-        return num.div(1e6).toFixed(1) + " M";
-      }
-      if (num < 1e9) {
-        return num.div(1e6).toFixed(0) + " M";
-      }
-      if (num < 1e10) {
-        return num.div(1e9).toFixed(1) + " B";
-      }
-      return num.div(1e9).toFixed(0) + " B";
-    },
-    layoutInit() {
-      this.onresize();
-      this.$eh.$on("app:resize", this.onresize);
-    },
-    onresize() {
-      this.bodyHeight = (this.initHeight || this.container.height - 80) + "px";
-    },
-    // tabsClick(tab) {
-    //   this.state.tabSelected = tab.name;
-    // },
-    collection(pair) { 
-      if (pair.like) {
-        pair.like = false;
-        service.delOptional({
-          site: 2,
-          id: pair.id
-        });
-      } else {
-        pair.like = true;
-        service.addOptional({
-          site: 2,
-          id: pair.id
-        });
-      }
-      // pair.like = !(pair.like || false)
-    },
-    filterPair () {
-      state.tabSelected = 'all' 
-    }, 
+      },
+      immediate: true
+    }
   },
   created() {
 
   },
 
   destroyed() {
-    this.$eh.$off("app:resize", this.onresize);
-    this.$eh.$off("protrade:layout:init", this.layoutInit);
+    this.$eh.$off('app:resize', this.onresize)
+    this.$eh.$off('protrade:layout:init', this.layoutInit)
   },
   async created() {
-    this.$eh.$on("protrade:layout:init", this.layoutInit);
+    this.$eh.$on('protrade:layout:init', this.layoutInit)
+  },
+  methods: {
+    setPair(pair) {
+      if (!pair.name) return
+      this.$router.replace({
+        name: 'trading',
+        params: {
+          pair: pair.name
+        }
+      })
+      state.close_time = pair.close_time || '[*][*][*][9:59-10:00]'
+      state.price_open = pair.price_open || 0.017
+
+      // this.$eh.$emit("switchPair");
+      // this.$eh.$emit("trading:countDown", this.startCountDown);
+    },
+    pretty(num) {
+      num = this.$big(num || 0)
+      if (num < 100) {
+        return num.toFixed(2)
+      }
+      if (num < 1e6) {
+        return num.toFixed(0)
+      }
+      if (num < 1e7) {
+        return num.div(1e6).toFixed(1) + ' M'
+      }
+      if (num < 1e9) {
+        return num.div(1e6).toFixed(0) + ' M'
+      }
+      if (num < 1e10) {
+        return num.div(1e9).toFixed(1) + ' B'
+      }
+      return num.div(1e9).toFixed(0) + ' B'
+    },
+    layoutInit() {
+      this.onresize()
+      this.$eh.$on('app:resize', this.onresize)
+    },
+    onresize() {
+      this.bodyHeight = (this.initHeight || this.container.height - 80) + 'px'
+    },
+    // tabsClick(tab) {
+    //   this.state.tabSelected = tab.name;
+    // },
+    collection(pair) {
+      if (pair.like) {
+        pair.like = false
+        service.delOptional({
+          site: 2,
+          id: pair.id
+        })
+      } else {
+        pair.like = true
+        service.addOptional({
+          site: 2,
+          id: pair.id
+        })
+      }
+      // pair.like = !(pair.like || false)
+    },
+    filterPair() {
+      state.tabSelected = 'all'
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
+.custom-title{
+  color: #778694;
+  text-indent: 10px;
+}
 .ix-header {
   height: 32px;
   line-height: 32px;

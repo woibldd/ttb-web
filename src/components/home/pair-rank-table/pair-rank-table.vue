@@ -1,60 +1,60 @@
 <template>
-  <div class="coin-list-section"> 
+  <div class="coin-list-section">
     <div
-      @click="toExchange(pair.name)"
-      class="coin-info-box pointer"
       v-for="(pair,index) in sortedList"
+      class="coin-info-box pointer"
       :class="{'mr-13': index < 5}"
+      @click="toExchange(pair.name)"
       :key="pair.name"
       v-if="pair.tick && index < 5"
     >
       <div class="coin__left">
         <div class="leftright f17 c-00 mb-10 bold">{{ pair.name | pairfix }}
           <div
-            class="coin__right"
-            :class="{'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}">
+            :class="{'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}"
+            class="coin__right">
             {{ (getDelta(pair.tick) > 0) ? '+' : '' }}{{ getDelta(pair.tick) }}%
           </div>
         </div>
         <p
-          class="f28 mb-6 bold"
-          :class="{'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}">{{ pair.tick.current | fixed(pair.price_scale) }}</p>
+          :class="{'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}"
+          class="f28 mb-6 bold">{{ pair.tick.current | fixed(pair.price_scale) }}</p>
         <p class="f13 c-8a mb-6">≈ {{ state.fiatMoneySymbol }}<fiat-money
           :base="pair.currency"
           :value="pair.tick.current"/></p>
         <p class="f13 c-b0 "><span class="inline-block mr-14">24H</span><span>{{ pretty(pair.tick.volume_24h) }}</span></p>
       </div>
-    </div> 
+    </div>
 </div></template>
 <script>
-import {state} from '@/modules/store'
+import { state } from '@/modules/store'
 import { pairfix } from '@/mixins/index'
 export default {
   mixins: [pairfix],
-  data () {
+  props: {
+    sortedList: {
+      type: Array,
+      default() {
+        return []
+      }
+    },
+    getDelta: {
+      type: Function,
+      default() {
+        return v => v
+      }
+    }
+
+  },
+  data() {
     return {
       state,
       searchCoin: '',
       search: ''
     }
   },
-  props: {
-    sortedList: {
-      type: Array,
-      default () {
-        return []
-      }
-    },
-    getDelta: {
-      type: Function,
-      default () {
-        return v => v
-      }
-    }
-
-  },
   methods: {
-    pretty (num) {
+    pretty(num) {
       num = this.$big(num || 0)
       if (num < 100) {
         return num.toFixed(2)
@@ -73,7 +73,7 @@ export default {
       }
       return num.div(1e9).toFixed(0) + ' B'
     },
-    toExchange (pair) {
+    toExchange(pair) {
       this.$router.push({
         name: 'trading',
         params: {
@@ -81,7 +81,7 @@ export default {
         }
       })
     },
-    filterPair () {
+    filterPair() {
       this.sortBy = null
     }
   }

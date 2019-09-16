@@ -205,10 +205,10 @@ export default {
             width: 15px;
             height: 15px;
             color: #fff;
-            border: 1px solid #C9AA6D;
+            border: 1px solid $primary;
             top: -16px;
             left: -15px;
-            background: #C9AA6D;
+            background: $primary;
             z-index: 2;
             line-height: 1;
             text-align: center;

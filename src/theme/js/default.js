@@ -9,7 +9,7 @@ module.exports = {
   exchangeName: 'IXX | 数字资产交易共同体',
   exchangeNameConfig: {
     'zh-CN': 'IXX | 数字资产交易共同体',
-    'zh-HK': 'IX | 數字資產交易共同體',
+    'zh-HK': 'IXX | 數字資產交易共同體',
     en: 'IXX | Digital assets trading community',
     ko: 'IXX | 수자 재산 거래 공동체'
   },

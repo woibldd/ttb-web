@@ -86,7 +86,7 @@
           class="nav-list"
           @click="switchTab(index)">{{ item.name }}
           <span v-if="item.count > 0 && token">{{ item.count }}</span>
-        </div>
+        </div> 
         <div
           v-if="active === 0"
           class="slot-down">
@@ -106,6 +106,10 @@
             :key="index"
             :class="{selected: orderActive === index}"
             @click="orderSwtich(index)">{{ item }}</span>
+            <icon
+              name="robot-info" 
+              v-tooltip.top-end="{html: true,content: $t('otc_suspend_all_tips')} "
+            />
         </div>
       </div>
 
@@ -135,9 +139,14 @@
                 <span>{{ item.name }}</span>
               </div>
               <div class="state">
+                <span
+                  v-if="item.other_appeal && !item.appeal"
+                  style="color:#c9a96c">{{ $t('otc_seiitm_7') }}
+                </span>
+
                 <template v-if="!item.appeal">
                   <span v-if="item.side === 2 && item.state === 1">{{ $t('otc_seiitm_6') }}</span>
-                  <span v-else>{{ state(item.state) }}</span>
+                  <span v-else>{{ !item.other_appeal && state(item.state) || "" }}</span>
                   <b
                     v-if="item.state === 2 || item.state === 7 || item.state === 6"
                     style="cursor:pointer"
@@ -154,7 +163,7 @@
                   <div
                     :style="{color: item.side === 1 ? '#23C88B' : '#F24E4D'}"
                     class="cur">
-                    <p>{{ item.currency_type }}</p>
+                    <p style="opacity:0.6;">{{ item.currency_type }}/</p>
                     {{ item.currency }}
                   </div>
                 </div>
@@ -582,9 +591,9 @@ export default {
   //     return 0
   //   }
   // },
-  mounted() {
-    this.setTimeInit()
-  },
+  // mounted() {
+  //   this.setTimeInit()
+  // },
   beforeDestroy() {
     clearInterval(this.timer)
   },
@@ -593,17 +602,21 @@ export default {
     // todo 初始化第一种类型数据
     this.init(this.active)
 
+    const that = this
     // 定时器
-    this.timers = setInterval(() => {
+    this.timers = setInterval(() => { 
+      console.log('setInterval')
       service.getUnDonefills({
         page: 1,
         side: 0,
         size: 999
-      }
-      ).then(res => {
+      }).then(res => {
         if (res.code === 0) {
-          if (res.data.data.length > 0) {
+          if (res.data.data.length > 0) { 
             Vue.set(this.tab[0], 'count', res.data.data.length)
+            if (this.active === 0) {  
+              this.setOrderInfo(res)
+            } 
           }
         }
       })
@@ -627,9 +640,9 @@ export default {
   // mounted() {
   //   this.setTimeInit()
   // },
-  // beforeDestroy() {
-  //   clearInterval(this.timer)
-  // },
+  beforeDestroy() {
+    clearInterval(this.timers)
+  },
   methods: {
     payName(type) {
       return {
@@ -731,7 +744,7 @@ export default {
       // console.log(item, index)
     },
     detailHandle(item) {
-      console.log({ item })
+      // console.log({ item })
       this.stepActive = false
       this.bankData = []
       this.closeFlag = false
@@ -904,7 +917,7 @@ export default {
         this.loading = false
         // 切换数据
         this.init(index)
-        this.setTimeInit()
+        // this.setTimeInit()
       }, 300)
     }),
     async init(state) {
@@ -913,69 +926,17 @@ export default {
         // eslint-disable-next-line no-case-declarations
         case 0:
           const rec = await service.getUnDonefills(that.params)
+           if (!rec.code) {
+            this.data = rec.data.data
+            this.setOrderInfo(rec)
+          }
+          //支付方式默认选择银行卡
           if (!rec.code) {
-            that.data = rec.data.data
-            that.total = rec.data.total
-            const noCount = []
-            const bankData = []
-            that.data.forEach((item) => {
-              if (item.state === 1) {
-                Vue.set(item, 'time', item.create_time + 15 * 60 * 1000)
-              } else if (item.state === 2) {
-                Vue.set(item, 'time', item.pay_time + 12 * 60 * 60 * 1000)
-              } else if (item.state === 7 && item.side === 1) {
-                Vue.set(item, 'time', item.pay_time + 12 * 60 * 60 * 1000)
-              }
-              if (item.otc_collection) {
-                Vue.set(item, 'otc_type', 1)
-              } else {
-                Vue.set(item, 'otc_type', 0)
-              }
-              //
-              if (item.otc_collection_list && !item.other_appeal && !item.appeal) noCount.push(item)
-              //
+            let dt = rec.data.data
+            dt.forEach((item) => {
               if (item.state === 1 && item.side === 1 && !item.appeal && !item.other_appeal) {
-                item.otc_collection_list.forEach((child) => {
-                  if (child.payment_type === 1) {
-                    bankData.push({
-                      id: child.collection_id,
-                      realName: child.name,
-                      name: child.deposit_bank + '/' + child.card_number
-                    })
-                  } else if (child.payment_type === 2) {
-                    bankData.push({
-                      id: child.collection_id,
-                      realName: child.name,
-                      name: '支付宝' + '/' + child.alipay_account,
-                      img: child.collection_img
-                    })
-                  } else if (child.payment_type === 3) {
-                    bankData.push({
-                      id: child.collection_id,
-                      realName: child.name,
-                      name: '微信' + '/' + child.we_chat_account,
-                      img: child.collection_img
-                    })
-                  } else if (child.payment_type === 4) {
-                    bankData.push({
-                      id: child.collection_id,
-                      realName: child.name,
-                      name: 'Paynow' + '/' + child.card_number,
-                      img: child.collection_img
-                    })
-                  } else if (child.payment_type === 5) {
-                    bankData.push({
-                      id: child.collection_id,
-                      realName: child.name,
-                      name: 'Paylah' + '/' + child.card_number,
-                      img: child.collection_img
-                    })
-                  }
-                  Vue.set(item, 'paySet', child.payment_type)
-                })
-                // 支付方式默认选择银行卡
                 const paylist = item.otc_collection_list
-                if (paylist.length > 0) {
+                if (paylist.length > 0 && !item.selectPayment) {
                   const arr = paylist.filter(arg => arg.payment_type === 1)
                   if (arr.length > 0) {
                     // this.selectPayment = arr[0]
@@ -984,15 +945,10 @@ export default {
                     Vue.set(item, 'selectPayment', paylist[0])
                   }
                 }
-
-                Vue.set(item, 'bankArray', bankData)
-                Vue.set(item, 'bankId', '')
-                Vue.set(item, 'pAccount', '')
-                Vue.set(item, 'realName', '')
-                Vue.set(item, 'bankAccount', '')
               }
             })
           }
+
           break
         // eslint-disable-next-line no-case-declarations
         case 1:
@@ -1017,6 +973,112 @@ export default {
           }
       }
     },
+    setOrderInfo(rec) { 
+      if (!rec.code) {
+        if (this.total != rec.data.total &&  rec.data.total > 0) {
+          //当订单数量发送变化的时候，需要重新加载订单数据，但是需要保留用户已经选择的支付方式
+          this.data.map(rowa => {
+            rec.data.data.map(rowb => {
+              if(rowa.trans_id === rowb.trans_id) {
+                Vue.set(rowb, 'selectPayment', rowa.selectPayment)   
+              }
+            })
+          })
+          this.data = rec.data.data
+        } else if (!this.total) {
+          this.data = rec.data.data
+        } 
+        this.total = rec.data.total
+        const noCount = []
+        const bankData = []
+        this.data.forEach((item) => {
+          //state-1-等待对方付款 2-等待放币 3-已完成 4-买家取消 5-卖家取消 6买家超时取消 7卖家超时放币
+          if (item.state === 1) {
+            Vue.set(item, 'time', item.create_time + 15 * 60 * 1000)
+          } else if (item.state === 2) {
+            //申诉取消后
+            if (item.appeal_time > 0) {
+              Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
+            }
+            else {
+              Vue.set(item, 'time', item.pay_time + 15 * 60 * 1000) 
+            }
+          } else if (item.state === 7 ) {
+              if (item.appeal_time > 0) {
+              Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
+            }
+            else {
+              Vue.set(item, 'time', item.pay_time + 12 * 60 * 60 * 1000 + 15 * 60 * 1000)
+            }
+          }
+          if (item.otc_collection) {
+            Vue.set(item, 'otc_type', 1)
+          } else {
+            Vue.set(item, 'otc_type', 0)
+          }
+          //
+          if (item.otc_collection_list && !item.other_appeal && !item.appeal) noCount.push(item)
+          //
+          if (item.state === 1 && item.side === 1 && !item.appeal && !item.other_appeal) {
+            item.otc_collection_list.forEach((child) => {
+              if (child.payment_type === 1) {
+                bankData.push({
+                  id: child.collection_id,
+                  realName: child.name,
+                  name: child.deposit_bank + '/' + child.card_number
+                })
+              } else if (child.payment_type === 2) {
+                bankData.push({
+                  id: child.collection_id,
+                  realName: child.name,
+                  name: this.$t('payment_namezfb') + '/' + child.alipay_account,
+                  img: child.collection_img
+                })
+              } else if (child.payment_type === 3) {
+                bankData.push({
+                  id: child.collection_id,
+                  realName: child.name,
+                  name: this.$t('payment_weChat_adasunt') + '/' + child.we_chat_account,
+                  img: child.collection_img
+                })
+              } else if (child.payment_type === 4) {
+                bankData.push({
+                  id: child.collection_id,
+                  realName: child.name,
+                  name: 'Paynow' + '/' + child.card_number,
+                  img: child.collection_img
+                })
+              } else if (child.payment_type === 5) {
+                bankData.push({
+                  id: child.collection_id,
+                  realName: child.name,
+                  name: 'Paylah' + '/' + child.card_number,
+                  img: child.collection_img
+                })
+              }
+              Vue.set(item, 'paySet', child.payment_type)
+            })
+            // // 支付方式默认选择银行卡
+            // const paylist = item.otc_collection_list
+            // if (paylist.length > 0) {
+            //   const arr = paylist.filter(arg => arg.payment_type === 1)
+            //   if (arr.length > 0) {
+            //     // this.selectPayment = arr[0]
+            //     Vue.set(item, 'selectPayment', arr[0])
+            //   } else {
+            //     Vue.set(item, 'selectPayment', paylist[0])
+            //   }
+            // }
+
+            Vue.set(item, 'bankArray', bankData)
+            Vue.set(item, 'bankId', '')
+            Vue.set(item, 'pAccount', '')
+            Vue.set(item, 'realName', '')
+            Vue.set(item, 'bankAccount', '')
+          }
+        })
+      }
+    },
     sq(item) {
       this.$confirm(this.$t('otc_otutcol_19'), this.$t('tips'), {
         confirmButtonText: this.$t('otc_ziurec_20'),
@@ -1029,7 +1091,7 @@ export default {
             user_id: this.id
           }
           service.otcAppeal(params).then(res => {
-            console.log(res)
+            // console.log(res)
             if (!res.code) {
               // this.$message.success('申诉成功，请等待客服处理')
               this.$message({
@@ -1051,7 +1113,7 @@ export default {
         .catch(() => { })
     },
     handleCurrentChange(e) {
-      console.log(this.active)
+      // console.log(this.active)
       if (this.active === 1 || this.active === 2) {
         this.params1.page = e
         // console.log(this.params1.page, '1')
@@ -1062,13 +1124,13 @@ export default {
         this.init(this.active)
       }
     },
-    setTimeInit() {
-      this.timer = setInterval(() => {
-        if (this.active === 0 || this.active === 3) {
-          // this.init(this.active)
-        }
-      }, 3000)
-    }
+    // setTimeInit() {
+    //   this.timer = setInterval(() => {
+    //     if (this.active === 0 || this.active === 3) {
+    //       // this.init(this.active)
+    //     }
+    //   }, 3000)
+    // }
   }
 
 }

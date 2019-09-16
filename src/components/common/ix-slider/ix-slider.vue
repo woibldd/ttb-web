@@ -5,6 +5,7 @@
     v-show="show"
     :style="[wrapStyles, boolDisabled ? disabledStyle : null]"
     @click="wrapClick"
+
   >
     <div
       ref="elem"
@@ -142,7 +143,7 @@
             :active="piecewiseObj.inRange"
           >
             <span
-              v-if="piecewiseLabel"
+              v-if="!piecewiseLabel"
               class="vue-slider-piecewise-label"
               :style="[ labelStyle, piecewiseObj.inRange ? labelActiveStyle : null ]"
             >
@@ -484,6 +485,7 @@ export default {
       return this.currentSlider === 0 ? 1 : 0
     },
     wrapStyles () {
+      console.log('000000000000000000000000000000000000000000000000000000')
       return this.direction === 'vertical' ? {
         height: typeof this.height === 'number' ? `${this.height}px` : this.height,
         padding: `${this.dotHeightVal / 2}px ${this.dotWidthVal / 2}px`

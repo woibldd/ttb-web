@@ -2,7 +2,7 @@
   <div class="contract-popup" :class="color" :style="{'right':show}" v-show={display}>
     <h1><i></i>{{title}}</h1>
     <span>{{time}}</span>
-    <p>{{body}}</p>
+    <div class='content' v-html="body"></div> 
     <b @click="show = '-340px'"></b>
   </div>
 </template>
@@ -21,13 +21,14 @@
   border-top: 4px solid #f00;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  z-index: 99999999;
   &.red {
     background: #f6dddd;
     border-color: #f00;
     span{
       background:rgba(242,78,77,1);
     }
-    h1,p{
+    h1,.content{
       color:#F24E4D
     }
   }
@@ -37,7 +38,7 @@
     span{
       background:#22ced0;
     }
-    h1,p{
+    h1,.content{
       color:#22ced0
     }
   }
@@ -47,7 +48,7 @@
     span{
       background:#09C989;
     }
-    h1,p{
+    h1,.content{
       color:#09C989
     }
   }
@@ -104,7 +105,7 @@
       border: 10px;
     }
   }
-  p{
+  .content{
     font-size: 12px;
   }
 }

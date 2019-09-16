@@ -154,15 +154,17 @@ const processValue = {
       if (key === 'price' ||
         key === 'executed_price') {
         pairlist = this.state.ct.pairInfoList
-        console.log({ pairlist })
-        if (!!pairlist && !!pairlist[row.symbol]) {
+        // console.log({ pairlist })
+        if (row.type === 4 || row.type === 6) {
+          value = '--'
+        } else if (!!pairlist && !!pairlist[row.symbol]) {
           const price_scales = pairlist[row.symbol].price_scale || 4
           console.log(price_scales, { test: pairlist[row.symbol] })
           value = this.$big(row.price).round(price_scales, down).toFixed(price_scales).toString()
         } else {
           value = this.$big(row.price).round(4, down).toString().toString()
         }
-        if (row.type === 4 || row.type === 6)value = '--'
+        // if (row.type === 4 || row.type === 6)value = '--'
       }
 
       if (key === 'fee_rate') {

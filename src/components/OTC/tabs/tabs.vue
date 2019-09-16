@@ -54,60 +54,62 @@
         >{{ $t('otc_publish_order') }}</button>
       </div>
     </div>
-    <div v-if="side === 1 && currency==='USDT' && legal_currency==='CNY'" class="otc-buy-ac">
-      <div class="line"/>
-      <div class="select-item">
-        <el-row>
-          <el-col :span="10">
-            <span class="font24 font-weight font-base title-text">{{ $t('yj_mb') }}</span>
-            <span class="font-gray">{{ $t('xe_je') }}</span>
-          </el-col>
-          <el-col :span="11">
-            <el-input v-model="ipt" :placeholder="active=='0' ? $t('b_price_i') : $t('b_account_i')" style="width: 98%">
-              <el-select slot="prepend" v-model="active" :placeholder="$t('please_choose')" style="width: 120px" @change="change">
-                <el-option :label="$t('b_1')" value="0"/>
-                <el-option :label="$t('b_2')" value="1"/>
-              </el-select>
-            </el-input>
-            <div
-              class="unit-label"
-              style="right:130px"
-              v-html="active=='0' ? 'CNY' : 'USDT'"/>
-          </el-col>
-          <el-col :span="3">
-            <el-button style="width: 118px;float: right" type="primary" @click="buySubmit">{{ $t('otc_buy_currency', {currency: 'USDT'}) }}</el-button>
-          </el-col>
-        </el-row>
+    <div v-if="state.locale==='zh-CN' || state.locale==='zh-HK'">
+      <div v-if="side === 1 && currency==='USDT' && legal_currency==='CNY'" class="otc-buy-ac">
+        <div class="line"/>
+        <div class="select-item">
+          <el-row>
+            <el-col :span="10">
+              <span class="font24 font-weight font-base title-text">{{ $t('yj_mb') }}</span>
+              <span class="font-gray">{{ $t('xe_je') }}</span>
+            </el-col>
+            <el-col :span="11">
+              <el-input v-model="ipt" :placeholder="active=='0' ? $t('b_price_i') : $t('b_account_i')" style="width: 98%">
+                <el-select slot="prepend" v-model="active" :placeholder="$t('please_choose')" style="width: 120px" @change="change">
+                  <el-option :label="$t('b_1')" value="0"/>
+                  <el-option :label="$t('b_2')" value="1"/>
+                </el-select>
+              </el-input>
+              <div
+                class="unit-label"
+                style="right:130px"
+                v-html="active=='0' ? 'CNY' : 'USDT'"/>
+            </el-col>
+            <el-col :span="3">
+              <el-button style="width: 118px;float: right" type="primary" @click="buySubmit">{{ $t('otc_buy_currency', {currency: 'USDT'}) }}</el-button>
+            </el-col>
+          </el-row>
+        </div>
+        <div class="line"/>
       </div>
-      <div class="line"/>
-    </div>
-    <div v-if="side === 2 && currency==='USDT' && legal_currency==='CNY'" class="otc-buy-ac">
-      <div class="line"/>
-      <div class="select-item">
-        <el-row>
-          <el-col :span="10">
-            <span class="font24 font-weight font-base title-text">{{ $t('yj_mb1') }}</span>
-            <span class="font-gray">{{ $t('xe_je') }}</span>
-          </el-col>
-          <el-col :span="11">
-            <el-input :placeholder="active=='0' ? $t('a_price_i') : $t('a_account_i')" v-model="ipt" style="width: 98%">
-              <el-select slot="prepend" v-model="active" :placeholder="$t('please_choose')" style="width: 120px" @change="change">
-                <el-option :label="$t('a_1')" value="0"/>
-                <el-option :label="$t('a_1')" value="1"/>
-              </el-select>
-            </el-input>
-            <div
-              class="unit-label"
-              style="right:130px"
-              v-html="active=='0' ? 'CNY' : 'USDT'"/>
+      <div v-if="side === 2 && currency==='USDT' && legal_currency==='CNY'" class="otc-buy-ac">
+        <div class="line"/>
+        <div class="select-item">
+          <el-row>
+            <el-col :span="10">
+              <span class="font24 font-weight font-base title-text">{{ $t('yj_mb1') }}</span>
+              <span class="font-gray">{{ $t('xe_je') }}</span>
+            </el-col>
+            <el-col :span="11">
+              <el-input :placeholder="active=='0' ? $t('a_price_i') : $t('a_account_i')" v-model="ipt" style="width: 98%">
+                <el-select slot="prepend" v-model="active" :placeholder="$t('please_choose')" style="width: 120px" @change="change">
+                  <el-option :label="$t('a_1')" value="0"/>
+                  <el-option :label="$t('a_2')" value="1"/>
+                </el-select>
+              </el-input>
+              <div
+                class="unit-label"
+                style="right:130px"
+                v-html="active=='0' ? 'CNY' : 'USDT'"/>
 
-          </el-col>
-          <el-col :span="3">
-            <el-button style="width: 118px;float: right" type="sell" @click="sellSubmit">{{ $t('otc_sell_currency', {currency: 'USDT'}) }}</el-button>
-          </el-col>
-        </el-row>
+            </el-col>
+            <el-col :span="3">
+              <el-button style="width: 118px;float: right" type="sell" @click="sellSubmit">{{ $t('otc_sell_currency', {currency: 'USDT'}) }}</el-button>
+            </el-col>
+          </el-row>
+        </div>
+        <div class="line"/>
       </div>
-      <div class="line"/>
     </div>
     <!-- 侧边操作栏 -->
     <side-bar :open.sync="showSide" >

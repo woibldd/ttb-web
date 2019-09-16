@@ -39,31 +39,7 @@
             <dd><span class="text-idx">{{$t('otc_menu_title_price')}}</span></dd>
           </dl>
         </div>
-        <ul class="left-menu-list">
-          <!-- <li class>
-            <router-link
-              to="/OTC/Trade"
-              class="menu-name"
-              :class="{'active': currency === 'USDT' && from === 'trade' }"
-            > 
-              <dl @click="setCurrency('USDT')">
-                <dt>{{ $t('USDT') }}</dt>
-                <dd><span class="text-idx">{{ coin.symbol + user.usdtCount }}</span> </dd>
-              </dl>
-            </router-link>
-          </li>
-          <li class>
-            <router-link
-              to="/OTC/Trade"
-              class="menu-name"
-              :class="{'active': currency === 'BTC' && from === 'trade'}"
-            > 
-              <dl @click="setCurrency('BTC')">
-                <dt>{{ $t('BTC') }}</dt>
-                <dd><span class="text-idx">{{ coin.symbol + user.btcCount }}</span> </dd>
-              </dl>
-            </router-link>
-          </li> -->
+        <ul class="left-menu-list"> 
           <li 
             v-for="(item, idx) in currencyList"
             :key ="idx"
@@ -136,6 +112,9 @@
           <li class>
             <a class="menu-name" :href="commonProblemLink">{{ $t('footer_hreseqgslp2') }}</a>
           </li>
+           <li class>
+            <a class="menu-name" :href="fxpl">{{ $t('fxpl')}}</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -157,6 +136,7 @@ export default {
         btcCount: 0,
         usdtCount: 0
       },
+      fxpl: 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360033225252--IXX-com平台反洗钱和反恐怖融资用户指引-',
       symbolList: {
         CNY: {
           name: "CNY",
@@ -169,13 +149,14 @@ export default {
           symbol: "S$"
         }
       },
-      currencyList: [],
-      count: 0,
+      currencyList: [], 
+      count: 0, 
       down: false
     };
   },
   methods: {
     setCurrency(item) {
+      console.log({item})
       this.currency = item.currency;
       this.state.otc.symbolInfo = item
       this.$eh.$emit("otc:currency:change", item.currency, this.side);
@@ -183,14 +164,8 @@ export default {
     init() {
       service.otcSymbolList({}).then(res => {
         if (res.code === 0) {
-          this.user.btcCount = this.$big(res.data[1][this.coin.rate]).round(
-            2,
-            0
-          );
-          this.user.usdtCount = this.$big(res.data[0][this.coin.rate]).round(
-            2,
-            0
-          );
+          this.user.btcCount = this.$big(res.data[1][this.coin.rate]).round(2, 0);
+          this.user.usdtCount = this.$big(res.data[0][this.coin.rate]).round(2, 0);
         }
       });
       // 委托
@@ -220,7 +195,7 @@ export default {
                 .then(res => {
                   if (res.code === 0) {
                     res.data.data.forEach(item => {
-                      if (item.state === 2) countData.push(item);
+                      if (item.state === 1 || item.state === 2 || item.state === 6 ) countData.push(item);
                     });
                     this.count = countData.length;
                   }
@@ -235,13 +210,15 @@ export default {
     getCurrencyList() { 
       service.otcSymbolList({}).then((res) => {
         if (res.code === 0) { 
-          this.$set(this, "currencyList", res.data )
-          console.log({currencyList: this.currencyList})
+          this.$set(this, "currencyList", res.data ) 
+          if (!this.state.otc.symbolInfo) {
+            this.state.otc.symbolInfo = res.data[0]
+          }
         }
       })
     }, 
     getRatebyCurrency(item) {
-      let currency = this.legal_currency.toLowerCase()
+      let currency = this.legal_currency.toLowerCase() 
       return item[currency + '_rate']
     },
     getFiatMoneySymbolByFiat (fiat) {
@@ -257,33 +234,10 @@ export default {
     },
   },
   created() {
-    this.init();
-    service.otcSymbolList({}).then((res) => {
-      if (res.code === 0) { 
-        this.$set(this, "currencyList", res.data )
-        this.state.otc.symbolInfo = res.data[0]
-        console.log({currencyList: this.currencyList})
-      }
-    }) 
-    // this.state.otc.symbolInfo =  this.currencyList[0]
-
+    this.init();  
+    this.getCurrencyList(); 
     this.timer = setInterval(() => {
-      this.getCurrencyList();
-      // service.otcSymbolList({}).then(res => {
-      //   if (res.code === 0) {
-      //     //let rate = this.legal_currency.toLowerCase() + '_rate'
-      //     Vue.set(
-      //       this.user,
-      //       "btcCount",
-      //       this.$big(res.data[1][this.coin.rate]).round(2, 0)
-      //     );
-      //     Vue.set(
-      //       this.user,
-      //       "usdtCount",
-      //       this.$big(res.data[0][this.coin.rate]).round(2, 0)
-      //     );
-      //   }
-      // });
+      this.getCurrencyList(); 
       service
         .getUnDonefills({
           page: 1,
@@ -310,7 +264,7 @@ export default {
                 .then(res => {
                   if (res.code === 0) {
                     res.data.data.forEach(item => {
-                      if (item.state === 2) countData.push(item);
+                      if (item.state === 1 || item.state === 2 || item.state === 6 ) countData.push(item);
                     });
                     this.count = countData.length;
                   }

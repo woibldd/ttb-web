@@ -115,7 +115,8 @@
                 v-model.trim="password"
                 @input="password=$event;pwChange($event)"
                 :trigger-validate="triggerValidate"
-                type="password"
+                :type.sync="pwdType"
+                :show-eye="true"
                 :required='true'
                 @focus="active(true)"
                 @blur="active(false)"
@@ -152,7 +153,8 @@
                 @input="password2=$event"
                 :trigger-validate="triggerValidate"
                 :required='true'
-                type="password"
+                :type.sync="pwdType2"
+                :show-eye="true"
                 :empty-err-tips="$t('change_password_diff')"
                 :rule="validateRules.password2"
                 :placeholder="$t('pwcheck_ph2')"
@@ -195,7 +197,8 @@
           </div>
         </form>
       </div>
-    </div>
+    </div>    
+    <v-download />
   </div>
 </template>
 
@@ -210,6 +213,7 @@ import resbg from '@/components/resbg'
 import ixInput from '@/components/common/ix-input/ix-input.vue'
 import responsive from '@/mixins/responsive'
 import bubble from '@/components/Bubble'
+import VDownload from '@/components/VDownload'
   
 // import { MdField } from 'vue-material/dist/components'
 // import gtMixin from '@/mixins/gt'
@@ -221,12 +225,14 @@ export default {
     VBtn,
     resbg,
     ixInput,
-    bubble
+    bubble,
+    VDownload
   },
   props: ['by'],
   data () {
     return {
       state,
+      utils,
       errmsg: '',
       email: '',
       invitorId: '',
@@ -285,8 +291,10 @@ export default {
           }
         }
       },
-      triggerValidate: false,  
-      isMobile: utils.isMobile(),
+      triggerValidate: false,    
+      showTutorialArrow: false, 
+      pwdType: 'password',
+      pwdType2: 'password'
     }
   },
   /* beforeRouteEnter (to, from, next) {
@@ -342,7 +350,10 @@ export default {
         return this.$i18n.t('sms_retry')
       }
       return `${this.$i18n.t('sms_retry')}(${this.sms.countDown})`
-    }
+    },
+    isMobile() {
+      return this.utils.isMobile()
+    } 
   },
   watch: {
     params () {
@@ -353,7 +364,7 @@ export default {
       this.clearCountDown()
     }
   },
-  methods: {
+  methods: { 
     async submit (e) { 
       // 本地校验
       const check = this.checkParams()

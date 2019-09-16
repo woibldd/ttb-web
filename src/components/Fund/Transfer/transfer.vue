@@ -12,6 +12,7 @@
           <el-select v-model="selectCoin"
             :placeholder="$t('please_choose')"
             class="max-input"
+            :filterable="true"
             @change="changeCoin"
           >
             <el-option
@@ -478,11 +479,7 @@
       this.getBalance()
       // this.getAllCoinTypes()
       this.page()
-      
-      if (!!this.$route.query.currency) {
-        this.selectCoin = this.$route.query.currency
-        this.changeCoin(this.selectCoin)
-      }
+       
       this.accountTo = ''
       this.accountTypes.forEach((item) => {
         if(item.value !== this.accountFrom) {
@@ -490,6 +487,11 @@
         }
       })
       this.accountTo = this.accountTypes2[0].value
+
+      if (!!this.$route.query.currency) {
+        this.selectCoin = this.$route.query.currency
+        this.changeCoin(this.selectCoin)
+      }
     }
   }
 </script>

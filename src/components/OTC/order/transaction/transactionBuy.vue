@@ -164,20 +164,19 @@
         <ul>
           <li>
             <div class="label">
-              {{ $t('amount') }}
+              {{ $t('otc_quantity') }}
               <span class="red">*</span>
             </div>
             <div class="content">
               <number-input
                 v-model="amount"
                 :scale="amount_scale || 6"
-                :placeholder="$t('amount')"
+                :placeholder="$t('otc_quantity')"
                 class="number-input"
                 @input="amountInput"
                 @blur="changeTarget('')"
                 @focus="changeTarget('amount')"
-              />
-
+              /> 
               <span
                 class="btn-all"
                 @click="inputAll('amount')">{{ $t('input_all') }}</span>
@@ -618,6 +617,7 @@ export default {
     }
   },
   created() {
+    console.log(this.view)
   },
   methods: {
     openSideBar() {
@@ -649,7 +649,8 @@ export default {
         active_id: this.active_id,
         side: 1,
         amount: this.amount * 1,
-        total: this.total
+        total: this.total,
+        price: this.view.price
       }
       const $this = this
       service.createOtcTransaction(params).then(res => {

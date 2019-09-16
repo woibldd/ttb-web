@@ -5,9 +5,7 @@
     <v-nav
       pro="1"
       v-if="!isMobile"/>
-    <mobile-nav
-      v-if="isMobile"
-    />
+    <mobile-nav v-if="isMobile" />
     <div class="container-trade-panel">
       <div class="ix-row">
         <div class="ix-col ix-col-2">
@@ -81,6 +79,20 @@
       </div>
     </div>
     <order-deal-popover />
+    <v-modal :open.sync="showMvpModal">
+      <div class="pd-20 mvp-modal">
+        <article  class="mt-20 mb-20">
+          <h3>请您认真阅读以下内容：</h3> 
+          <p>根据MPV项目法律监管要求，MPV项目需要获取您的以下信息：</p>
+          <p>MPV持有者的账号、名字、证件号、电邮、MPV成交量信息、充/提币信息、MPV划转信息。</p> 
+        </article> 
+        <div style="text-align:right" class='mb-10'>
+          <el-button  @click="closeModal">不再提醒</el-button>
+          <el-button type='primary' @click="closeModal">确认</el-button>
+        </div>
+        <p  style="text-align:right">*这将不会影响您的提币操作</p>
+      </div>
+    </v-modal>
   </div>
 </template>
 
@@ -119,13 +131,14 @@ export default {
     PairNav,
     Operate,
     MobileNav,
-    PairTitle
+    PairTitle 
   },
   data () {
     return {
       state,
       comps: [],
-      isMobile: utils.isMobile()
+      isMobile: utils.isMobile(),
+      showMvpModal: false
     }
   },
   watch: {
@@ -215,6 +228,9 @@ export default {
     },
     async onresize () {
       this.setGridContainers()
+    },
+    closeModal() {
+      this.showMvpModal = false
     }
   },
   async created () {
@@ -298,6 +314,16 @@ export default {
   font-size: 12px;
   display: flex;
   flex-direction: column;
+  .mvp-modal {
+    font-size: 14px;
+    article {
+      color: #666;
+      h3 {
+        font-size:16px;
+        padding-bottom:20px;
+      } 
+    }
+  }
 }
 .container-trade-panel {
   flex: 1;

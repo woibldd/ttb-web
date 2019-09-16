@@ -1,50 +1,45 @@
 <template>
   <div class="page page-login">
-    <bubble  v-if='!isMobile'/> 
-    <resbg/>  
-    <div
-      class="panel_box"
-      ref="container">
+    <bubble v-if="!isMobile"/>
+    <resbg/>
+    <div ref="container" class="panel_box">
       <div class="panel">
         <div class="title-wrap">
           <div
-            class="panel-title"
-            v-t="'signin'"/>
+            v-t="'signin'"
+            class="panel-title"/>
           <div
-            class="by-links"
-            v-if="state.enablePhoneSignup">
+            v-if="state.enablePhoneSignup"
+            class="by-links">
             <router-link
               class="by-link ibt"
               to="email">{{ $t('login_by_email') }}</router-link>
             <span class="sp-line"/>
-            <router-link
-              class="by-link ibt"
-              to="phone">{{ $t('login_by_phone') }}</router-link>
+            <router-link class="by-link ibt" to="phone">{{ $t('login_by_phone') }}</router-link>
           </div>
         </div>
         <form
           class="form"
           onsubmit="return false"
-          @keydown.enter.stop.prevent="submit"
-          autocomplete="off">
+          autocomplete="off"
+          @keydown.enter.stop.prevent="submit">
           <div
-            :class="['field']"
-            v-show="by === 'phone'">
+            v-show="by === 'phone'"
+            :class="['field']">
             <div class="input-box">
               <div class="label">{{ $t('region_label') }}</div>
               <v-loading
                 v-if="!regionOptions.length"
                 color="gray"/>
               <select
-                class="select"
                 v-else
                 v-model="regionId"
-                tabindex="1"
-              >
+                class="select"
+                tabindex="1">
                 <option value="">{{ $t('region_ph') }}</option>
                 <option
-                  :value="option.id"
                   v-for="option in regionOptions"
+                  :value="option.id"
                   :key="option.id">
                   <span>+{{ option.id }}</span>
                   <template v-if="state.locale === 'zh-CN'">{{ option.cname }}</template>
@@ -54,20 +49,20 @@
             </div>
           </div>
           <div
-            class="field"
-            v-show="by === 'phone'">
+            v-show="by === 'phone'"
+            class="field">
             <div class="input-box">
               <!-- <div class="label">{{ $t('phone_number') }}</div> -->
               <ix-input
-                class=""
                 ref="phone"
-                tabindex="2"
                 v-model.trim="phone"
-                :required='true'
+                :required="true"
                 :empty-err-tips="$t('bind_phone_err_empty')"
                 :rule="validateRules.phone"
                 :placeholder="$t('bind_phone_input')"
                 :label="$t('phone_number')"
+                class=""
+                tabindex="2"
               />
             <!-- <input class="input item" type="text"
               name="phone"
@@ -79,20 +74,20 @@
             </div>
           </div>
           <div
-            :class="['field']"
-            v-show="by === 'email'">
+            v-show="by === 'email'"
+            :class="['field']">
             <div class="input-box">
               <!-- <div class="label" v-t="'login_label_mail'"></div> -->
               <ix-input
-                class=""
-                tabindex="2"
                 ref="email"
                 v-model.trim="email"
-                :required='true' 
+                :required="true"
                 :empty-err-tips="$t('err_empty_email')"
                 :rule="validateRules.email"
                 :placeholder="$t('err_empty_email')"
                 :label="$t('login_label_mail')"
+                class=""
+                tabindex="2"
               />
             </div>
           </div>
@@ -100,40 +95,41 @@
             <div class="input-box">
               <!-- <div class="label" v-t="'login_label_pw'"></div> -->
               <ix-input
-                class=""
                 ref="password"
-                tabindex="3"
                 v-model.trim="password"
-                @input="password=$event"
-                :required='true' 
+                :required="true"
                 :type.sync="pwdType"
                 :show-eye="true"
                 :empty-err-tips="$t('err_empty_password')"
                 :rule="validateRules.password"
                 :placeholder="$t('err_empty_password')"
                 :label="$t('login_label_pw')"
+                class=""
+                tabindex="3"
+                @input="password=$event"
               />
             </div>
           </div>
           <div class="field submit">
             <v-btn
+              :label="$t('signin')"
+              :loading="loading"
               tabindex="4"
               class="submit-btn"
-              :label="$t('signin')"
               height="40"
               width="290"
-              :loading="loading"
               @click="submit"/>
             <div class="to-others">
               <router-link :to="{name: 'registerBy', params: $route.params, query: $route.query}">{{ $t('signup') }}</router-link>
               <router-link
-                class="ml-5"
-                :to="{name: 'recover'}">{{ $t('if_forgot') }}?</router-link>
+                :to="{name: 'recover'}"
+                class="ml-5">{{ $t('if_forgot') }}?</router-link>
             </div>
           </div>
         </form>
       </div>
-    </div>
+    </div> 
+    <v-download />
     <v-modal
       :open.sync="showModal"
       :backdrop="false"
@@ -142,22 +138,22 @@
         <div class="modal__title mb-30">{{ $t('security_verification') }}</div>
         <div class="modal__content">
           <div
-            class="modal__row mt-12 mb-25"
-            v-if="verify_type==='google'">
+            v-if="verify_type==='google'"
+            class="modal__row mt-12 mb-25">
             <div class="row__label mb-9">{{ $t('fa2_google_code_mobile') }}</div>
             <div class="row__input" >
               <input
-                v-model="googleCode"
-                @input="keyPress"  
-                maxlength="6"
                 ref="googleCode"
-                @keydown.enter.stop.prevent="toVerifyCode"
-                class="input-validate google mr-14">
+                v-model="googleCode"
+                maxlength="6"
+                class="input-validate google mr-14"
+                @input="keyPress"
+                @keydown.enter.stop.prevent="toVerifyCode">
             </div>
           </div>
           <div
-            class="modal_phone"
-            v-else-if="verify_type==='phone'">
+            v-else-if="verify_type==='phone'"
+            class="modal_phone">
             <div class="modal__row" >
               <div class="row__label mb-9">{{ $t('register_by_phone') }}</div>
               <div class="row__input" >{{ phone }} </div>
@@ -166,12 +162,12 @@
               <div class="row__label mb-9">{{ $t('phone_code') }}</div>
               <div class="row__input" >
                 <input
-                  v-model="phoneCode"
-                  @input="keyPress"
-                  maxlength="6" 
                   ref="phoneCode"
-                  @keydown.enter.stop.prevent="toVerifyCode"
-                  class="input-validate mr-14">
+                  v-model="phoneCode"
+                  maxlength="6"
+                  class="input-validate mr-14"
+                  @input="keyPress"
+                  @keydown.enter.stop.prevent="toVerifyCode">
                 <count-down
                   :send-text="$t('hq_send')"
                   :start-when-loaded="showModal"
@@ -181,8 +177,8 @@
             </div>
           </div>
           <div
-            class="modal_phone"
-            v-else-if="verify_type==='email'">
+            v-else-if="verify_type==='email'"
+            class="modal_phone">
             <div class="modal__row" >
               <div class="row__label mb-9">{{ $t('register_by_email') }}</div>
               <div class="row__input" >{{ email }} </div>
@@ -191,12 +187,12 @@
               <div class="row__label mb-9">{{ $t('email_code') }}</div>
               <div class="row__input" >
                 <input
-                  v-model="emailCode"
-                  @input="keyPress" 
-                  maxlength="6"
                   ref="emailCode"
-                  @keydown.enter.stop.prevent="toVerifyCode"
-                  class="input-validate mr-14">
+                  v-model="emailCode"
+                  maxlength="6"
+                  class="input-validate mr-14"
+                  @input="keyPress"
+                  @keydown.enter.stop.prevent="toVerifyCode">
                 <count-down
                   :send-text="$t('hq_send')"
                   :start-when-loaded="showModal"
@@ -207,9 +203,9 @@
           </div>
 
           <v-btn
+            :label="$t('signin')"
             class="w-340"
-            @click="toVerifyCode"
-            :label="$t('signin')"/>
+            @click="toVerifyCode"/>
         </div>
       </div>
     </v-modal>
@@ -219,29 +215,32 @@
 <script>
 import service from '@/modules/service'
 import VBtn from '@/components/VBtn'
-import {state, actions, local} from '@/modules/store'
+import { state, actions, local } from '@/modules/store'
 import utils from '@/modules/utils'
 import resbg from '@/components/resbg'
 import ixInput from '@/components/common/ix-input/ix-input.vue'
 import countDown from '@/components/common/countdown-code-button'
 import responsive from '@/mixins/responsive'
 import bubble from '@/components/Bubble'
+import VDownload from '@/components/VDownload'
 
 export default {
-  mixins: [responsive],
   name: 'Login',
   components: {
     VBtn,
     resbg,
     ixInput,
     countDown,
-    bubble
+    bubble,
+    VDownload
   },
+  mixins: [responsive],
   props: ['by'],
-  data () {
+  data() {
     return {
       local,
       state,
+      utils,
       pwdType: 'password',
       regionId: '',
       errmsg: '',
@@ -275,11 +274,10 @@ export default {
 
         }
       },
-      prevent: false,  
-      isMobile: utils.isMobile()
+      prevent: false 
     }
   },
-  beforeRouteEnter (to, from, next) {
+  beforeRouteEnter(to, from, next) {  
     if (to.params.by === 'email') {
       return next()
     }
@@ -295,7 +293,7 @@ export default {
     })
   },
   computed: {
-    params () {
+    params() {
       const params = {
         password: this.password
       }
@@ -307,43 +305,74 @@ export default {
       }
       return params
     },
-    verify_type () {
+    verify_type() {
       let type = 'email'
-      //优先google验证
-      if(this.verify_google){
-          type = 'google'
-      }
-      else if (this.by === 'email') {
-        if(this.verify_email){
+      // 优先google验证
+      if (this.verify_google) {
+        type = 'google'
+      } else if (this.by === 'email') {
+        if (this.verify_email) {
           type = 'email'
-        } 
-        else if(this.verify_phone){
+        } else if (this.verify_phone) {
           type = 'phone'
         }
-      }
-      else if  (this.by === 'phone') {
-        if(this.verify_phone){
+      } else if (this.by === 'phone') {
+        if (this.verify_phone) {
           type = 'phone'
-        } 
-        else if(this.verify_email){
+        } else if (this.verify_email) {
           type = 'email'
         }
       }
       return type
     },
+    isMobile(){
+      return this.utils.isMobile()
+    } 
   },
   watch: {
-    showModal(val){
+    showModal(val) {
       if (!val) {
         this.loading = val
       }
     },
-    params () {
+    params() {
       this.errmsg = ''
     }
   },
-  methods: {
-    async fetchRegion () {
+  mounted() {
+    this.$eh.$on('app:resize', () => this.fixPosition())
+    this.$nextTick(this.fixPosition)
+  },
+  created() {
+    this.fetchRegion() 
+    let $this = this
+    setTimeout(function () { 
+      if (state.userInfo) {
+        $this.$router.push('/')
+      }
+    }, 500)
+      
+    const returnTo = this.$route.query.return_to
+    if (returnTo && returnTo.indexOf('https://ix.zendesk.com/') > -1) {
+      actions.setLoginBack('/zendesk/auth' + location.search)
+    }
+    const backTo = this.$route.query.from
+    if (backTo && (/^\/campaigns\//.test(backTo) || /^\/activity\//.test(backTo))) {
+      actions.setLoginBack(backTo)
+    }
+  },
+  destroyed() {
+    this.$eh.$off('app:resize')
+  },
+  methods: { 
+    download (type) {
+      let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
+      if (type === 'ios') {
+        url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
+      } 
+      window.location.href = url
+    },
+    async fetchRegion() {
       const res = await service.getRegionList()
       if (!res.code) {
         this.regionOptions = res.data
@@ -358,7 +387,7 @@ export default {
         }
       }
     },
-    checkParams () {
+    checkParams() {
       if (this.$refs.password.validateSuccess) {
         if (this.by === 'phone' && this.$refs.phone.validateSuccess) {
           return true
@@ -369,22 +398,22 @@ export default {
 
       return false
     },
-    hideModal () { 
-      this.showModal = false  
+    hideModal() {
+      this.showModal = false
     },
-    keyPress ($event) {
-      let code = $event.srcElement.value
+    keyPress($event) {
+      const code = $event.srcElement.value
       if (code && code.length === 6 && /^\d{6}$/.test(code)) {
         this.toVerifyCode()
       }
     },
-    async submit (e) { 
+    async submit(e) {
       // 本地校验
       const check = this.checkParams()
       if (!check) {
         return false
       }
-      this.errmsg = '' 
+      this.errmsg = ''
       this.loading = true
 
       const res = await service.login(this.params)
@@ -408,17 +437,17 @@ export default {
         this.verify_email = res.data.verify_email
         this.verify_google = res.data.verify_google
         this.showModal = true
-        this.$nextTick(()=>{ 
-          let type = this.verify_type
-            console.log(type)
-          if (type === 'google') { 
+        this.$nextTick(() => {
+          const type = this.verify_type
+          console.log(type)
+          if (type === 'google') {
             this.$refs.googleCode.focus()
-          } else if (type === 'phone') { 
-            this.$refs.phoneCode.focus() 
-          } else { 
-            this.$refs.emailCode.focus() 
+          } else if (type === 'phone') {
+            this.$refs.phoneCode.focus()
+          } else {
+            this.$refs.emailCode.focus()
           }
-        }) 
+        })
       } else {
       // 未开启二步认证
         this.loginSuccess(res.data)
@@ -437,7 +466,7 @@ export default {
       // 去二次验证
       // actions.setFa2(res.data)
     },
-    fixPosition () {
+    fixPosition() {
       try {
         if (utils.isMobile) {
           this.$refs.container.style.height = screen.availHeight - (205) + 'px'
@@ -448,16 +477,16 @@ export default {
         console.log(e)
       }
     },
-    async toVerifyCode () {
-      if(this.prevent == true) return;
-      setTimeout(()=>{ this.prevent = false;},  2000 )
-      this.prevent = true;
+    async toVerifyCode() {
+      if (this.prevent == true) return
+      setTimeout(() => { this.prevent = false }, 2000)
+      this.prevent = true
 
-      //let type = 'google'
-      let type = this.verify_type
+      // let type = 'google'
+      const type = this.verify_type
       let params = {
       }
-      console.log({verify_type: this.verify_type})
+      console.log({ verify_type: this.verify_type })
       if (type === 'google') {
         params = {
           code: this.googleCode
@@ -469,20 +498,20 @@ export default {
           code: this.phoneCode
         }
         this.$refs.phoneCode.focus()
-        //type = 'phone'
+        // type = 'phone'
       } else {
         params = {
           email: this.email,
           code: this.emailCode
         }
         this.$refs.emailCode.focus()
-        //type = 'email'
+        // type = 'email'
       }
       if (!params.code) {
         utils.alert(this.$i18n.t('err_captcha_empty'))
         return
       }
-      let resp = await service.verifyLoginVerifyCode(params, type)
+      const resp = await service.verifyLoginVerifyCode(params, type)
       if (!resp.code) {
         if (resp.data && resp.data.verified) {
           this.loginSuccess(resp.data)
@@ -491,7 +520,7 @@ export default {
         utils.alert(resp.message)
       }
     },
-    async loginSuccess (userInfo) {
+    async loginSuccess(userInfo) {
       actions.setUserInfo(userInfo)
       actions.resetStatus()
 
@@ -504,8 +533,11 @@ export default {
       // this.$router.push({
       //   name: 'profile'
       // })
+      setTimeout(()=>{
+        this.$eventBus.$emit('handleFirstLogin')
+      },100)
     },
-    getPhoneVerifyCode () {
+    getPhoneVerifyCode() {
       const param = {
         region: this.regionId,
         phone: this.phone,
@@ -518,7 +550,7 @@ export default {
         }
       })
     },
-    getEmailVerifyCode () {
+    getEmailVerifyCode() {
       const param = {
         region: this.regionId,
         email: this.email
@@ -530,25 +562,6 @@ export default {
         }
       })
     }
-  },
-  mounted () {
-    this.$eh.$on('app:resize', () => this.fixPosition())
-    this.$nextTick(this.fixPosition)
-  },
-  created () {
-    this.fetchRegion()
-
-    const returnTo = this.$route.query.return_to
-    if (returnTo && returnTo.indexOf('https://ix.zendesk.com/') > -1) {
-      actions.setLoginBack('/zendesk/auth' + location.search)
-    }
-    const backTo = this.$route.query.from
-    if (backTo && (/^\/campaigns\//.test(backTo) || /^\/activity\//.test(backTo))) {
-      actions.setLoginBack(backTo)
-    }
-  },
-  destroyed () {
-    this.$eh.$off('app:resize')
   }
 }
 </script>

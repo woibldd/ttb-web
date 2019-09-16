@@ -32,6 +32,7 @@
       :fixed="fixed"
     />
     <v-notify-list/>
+    <giveMoneyAD v-if="isFirstLogin" v-model="isFirstLogin"></giveMoneyAD>
     <!-- <div
       class="home-ball"
       @click="toNotice"
@@ -50,7 +51,8 @@ import MobileFooter from '@/pages/h5/footer'
 import { state, actions } from '@/modules/store'
 import utils from '@/modules/utils'
 import VNotifyList from '@/components/VNotifyList.vue'
-
+import giveMoneyAD from '@/components/giveMoneyAD'
+import service from '@/modules/service'
 const zeStyleEl = document.querySelector('#ze-style')
 
 export default {
@@ -60,14 +62,16 @@ export default {
     VFooter,
     VNotifyList,
     MobileFooter,
-    MobileNav
+    MobileNav,
+    giveMoneyAD
   },
   data() {
     return {
       state,
       isMobile: utils.isMobile(),
       fixed: false,
-      showContact: true
+      showContact: true,
+      isFirstLogin:false
     }
   },
   computed: {
@@ -146,6 +150,7 @@ export default {
   mounted() {
     this.$eh.$on('app:resize', () => this.fixPosition())
     this.$nextTick(this.fixPosition)
+    
   },
   created() {
     utils.$app = this
@@ -161,8 +166,14 @@ export default {
     window.onresize = () => {
       this.$eh.$emit('app:resize')
     }
+    this.$eventBus.$on('handleFirstLogin',this.handleFirstLogin)
   },
   methods: {
+    handleFirstLogin(){
+      state.userInfo && service.getLoginHistory().then(res=>{
+        if(res.data && res.data.length < 2 )this.isFirstLogin = true
+      })
+    },
     onkeyup(name) {
       this.$eh.$emit('app:keyup:' + name)
     },

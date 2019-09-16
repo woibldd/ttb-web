@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div style=" height: 400px;" class="ixx_banner_container">
+    <div class="ixx_banner_container" style="height: 400px;"
+      :class="[state.locale]"
+    >
       <swiper :options="swiperOption">
         <swiper-slide>
           <div class="dot-item-list">
@@ -24,7 +26,7 @@
         <div class="swiper-pagination" slot="pagination" />
       </swiper>
     </div>
-    <div class="buy-currency-container">
+    <div class="buy-currency-container" v-if="state.locale==='zh-CN' || state.locale==='zh-HK'">
       <div class="currency-inner">
         <el-row>
           <el-col :span="6">
@@ -91,6 +93,7 @@ import Vue from "vue";
 import VueAwesomeSwiper from "vue-awesome-swiper";
 import service from "@/modules/service";
 import utils from "@/modules/utils"
+import {state} from "@/modules/store"
 import "swiper/dist/css/swiper.css";
 
 Vue.use(VueAwesomeSwiper /* { default global options } */);
@@ -120,7 +123,8 @@ export default {
       },
       arr: [],
       money: 0,
-      downPrice: ""
+      downPrice: "",
+      state,
     };
   },
   methods: {
@@ -180,7 +184,16 @@ export default {
   height: 480px;
   width: 100%;
   overflow: hidden;
-  background: url("./img/bj.png") top center no-repeat;
+  background: url("./img/bj-zh-CN.png") top center no-repeat;
+  &.en {
+    background-image: url('./img/bj-en.png')
+  }
+  &.ko {
+    background-image: url('./img/bj-ko.png')
+  }
+  &.zh-HK {
+    background-image: url('./img/bj-zh-HK.png')
+  }
   .swiper-container {
     width: 100%;
     height: 400px;

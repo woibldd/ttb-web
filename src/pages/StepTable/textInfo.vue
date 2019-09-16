@@ -106,7 +106,7 @@
                 <span>{{ $t('otc_trans_idjg') }}({{ textDetail.currency_type }})</span><em style="color: #FDA22D">{{ textDetail.price || '--' }}</em>
               </dd>
               <dd>
-                <span>{{ textDetail.side === 2 ? $t('otc_side_2') : $t('otc_side_1') }}{{ $t('amount') }}({{ textDetail.currency }})</span><em>{{ textDetail.amount || '--' }}</em>
+                <span>{{ textDetail.side === 2 ? $t('otc_side_2') : $t('otc_side_1') }}{{ $t('otc_quantity') }}({{ textDetail.currency }})</span><em>{{ textDetail.amount || '--' }}</em>
               </dd>
               <template v-if="textDetail.otc_collection">
                 <template v-if="textDetail.state !== 1 && textDetail.state !== 6 && textDetail.state !== 4">
@@ -164,9 +164,9 @@
           </div>
           <div
             v-if="textDetail.side === 1 && textDetail.state === 1 && textCode === 0 && !textDetail.appeal && !textDetail.other_appeal"
-            class="table-con">
+            class="table-con"> 
             <dd>
-              <span>{{ $t('otc_otutcol_5') }}</span>
+              <span>{{ $t('otc_payment_method') }}</span>
               <em>
                 <el-form
                   ref="form"
@@ -182,26 +182,26 @@
                       <el-option
                         v-for="(item, index) in bankData"
                         :key="index"
-                        :label="item.deposit_bank"
+                        :label="item.deposit_bank "
                         :value="item.collection_id"/>
+                        <!-- :label="$t(payName(item.payment_type).text) + item.deposit_bank" -->
                     </el-select>
                   </el-form-item>
                 </el-form>
               </em>
             </dd>
             <template v-if="changeFlag">
-              <dd>
+              <!-- <dd>
                 <span>{{ $t('otc_otutcol_5') }}</span>
-                <!-- <em>{{ activeItem.a_t === 1 ? this.$t('payment_nameyhk') : activeItem.a_t === 2 ? this.$t('payment_namezfb') : this.$t('payment_weChat_adasunt') }}</em> -->
                 <em>{{ $t(payName(activeItem.a_t).text) }}</em>
-              </dd>
+              </dd> -->
               <dd v-if="activeItem.a_t !== 1">
                 <span>{{ $t('otc_otutcol_6') }}</span>
                 <em>{{ activeItem.account }}</em>
               </dd>
               <dd v-else>
                 <span>{{ $t('payment_card_number') }}</span>
-                <em>{{ activeItem.type + '  ' + activeItem.account }}</em>
+                <em>{{ activeItem.account }}</em>
               </dd>
               <dd v-if="activeItem.name">
                 <span>{{ $t('otc_otutcol_7') }}</span>
@@ -220,6 +220,10 @@
                     <icon name="qrcode" />
                   </span>
                 </em>
+              </dd>
+              <dd v-if="activeItem.a_t===1">
+                <span>{{ $t('payment_deposit_bank') }}</span>
+                <em>{{ activeItem.bank }}</em>
               </dd>
             </template>
           </div>
@@ -240,10 +244,10 @@
                 <span>{{ $t('otc_trans_idjg') }}({{ textDetail.currency_type }})</span><em style="color: #FDA22D">{{ textDetail.price || '--' }}</em>
               </dd>
               <dd>
-                <span>{{ $t('otc_trans_idsl') }}</span><em>{{ textDetail.amount || '--' }}</em>
+                <span>{{ $t('otc_amount', {currency: textDetail.currency }) }}</span><em>{{ textDetail.amount || '--' }}</em>
               </dd>
               <dd>
-                <span>{{ $t('otc_ziurec_19') }}({{ textDetail.currency_type }})</span><em>{{ textDetail.total || '--' }}</em>
+                <span>{{ $t('otc_ziurec_19') }}({{ textDetail.currency_type }})</span><em>{{ $big(textDetail.amount || 0).times(textDetail.price || 0) || '--' }}</em>
               </dd>
               <dd>
                 <span>{{ $t('otc_ziurec_13') }}</span><em>{{ $t('otc_ziurec_16') }}</em>
@@ -454,7 +458,7 @@ export default {
   },
   methods: {
     openQR(collection_img) {
-      console.log(collection_img)
+      // console.log(collection_img)
       this.qrsrc = collection_img
       this.showQRcode = true
     },
@@ -468,7 +472,7 @@ export default {
       return {
         1: { text: 'payment_nameyhk', account: 'card_number' },
         2: { text: 'payment_namezfb', account: 'alipay_account' },
-        3: { text: 'payment_weChat_adasunt', account: 'alipay_account' },
+        3: { text: 'payment_weChat_adasunt', account: 'we_chat_account' },
         4: { text: 'Paynow', account: 'card_number' },
         5: { text: 'Paylah', account: 'card_number' }
       }[type]
@@ -478,9 +482,7 @@ export default {
       this.activeItem = {}
       if (this.bankData.length > 0) {
         this.bankData.forEach((item) => {
-          if (this.form.bankId === item.collection_id) {
-            // const payType = item.obj.payment_type === 1 ? item.obj.deposit_bank : item.obj.payment_type === 2 ?this.$t('payment_namezfb') : this.$t('payment_weChat_adasunt')
-            // const payAccount = item.obj.alipay_account ? item.obj.alipay_account : item.obj.card_number ? item.obj.card_number : item.obj.we_chat_account
+          if (this.form.bankId === item.collection_id) {  
             const payType = this.payName(item.obj.payment_type).text
             const payAccount = item.obj[this.payName(item.obj.payment_type).account]
             this.activeItem = {
@@ -488,7 +490,8 @@ export default {
               img: item.obj.collection_img,
               type: payType,
               a_t: item.obj.payment_type,
-              account: payAccount
+              account: payAccount,
+              bank: item.obj.deposit_bank
             }
           }
         })
