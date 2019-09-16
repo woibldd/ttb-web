@@ -3,7 +3,14 @@
     <el-carousel :interval="5000" arrow="always" style="z-index: 0; width:100%;">
       <el-carousel-item v-for="item in banners" :key="item">
         <!-- <h3>{{ item }}</h3> -->
-        <img :src="item" alt="banner" height="100%">
+        <!-- <img :src="item" alt="banner" height="100%"> --> 
+        <div
+          :style="{ 
+            height: '400px', 
+            backgroundImage: `url(${item})`,
+            backgroundPosition: 'center' 
+          }">
+        </div>
       </el-carousel-item>
     </el-carousel>
     <div class="container content" v-loading="loading">
@@ -163,11 +170,14 @@ export default {
 }
 </script>
 <style>
+  .el-carousel__container { 
+    height: 400px;
+  }
   .el-carousel__item h3 {
     color: #475669;
     font-size: 18px;
     opacity: 0.75;
-    line-height: 300px;
+    /* line-height: 300px; */
     margin: 0;
   }
   
