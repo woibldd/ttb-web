@@ -11,6 +11,7 @@
       <div class="select-row mb-40">
         <el-select
           v-model="selectPair"
+          @change="getRateHistory"
           value-key="name">
           <el-option
             v-for="(item, idx) in allPairs"
@@ -24,7 +25,7 @@
       <div class="table-section">
         <table class="table-wrapper">
           <tr class="table__tr header c-999">
-            <th class="table__th">3
+            <th class="table__th">
               {{ $t('date') }}
             </th>
             <th class="table__th">
