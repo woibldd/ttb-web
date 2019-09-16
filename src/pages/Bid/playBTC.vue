@@ -43,20 +43,44 @@ export default {
         })
         return
       }
+ 
+      let name = {
+        1: "baccarat", //百家乐入口
+        2: "bar", //二八杠入口
+        3: "card_when", //卡当入口
+        4: "game_collection", //竞猜入口 
+        5: "rockets", // 火箭入口
+        6: "shot" //射门入口
+      }[key]
 
-
+      let lang = {
+        'zh-CN': 'zh',
+        'zh-HK': 'zh-Hant',
+        'en': 'en',
+        'ko': 'ko',
+      }[state.locale]
+ 
       this.loading = true
       const params = {
-        uid: state.userInfo.id 
+        uid: state.userInfo.id,
+        is_pc: true
       }
       service.createCode(params).then(res => { 
         this.loading = false
-        if(res.code) {  
-          this.enter(key, res.code)
+        if(!res.code && !!res.data) {   
+            // this.enter(key, res.code)
+          let list = res.data[0]
+          if(!!list){
+            let url = list[name] + '&lang=' + lang
+            window.open(url)
+          }
         } 
-        // else {
-        //   console.log(res.code)
-        // }
+        else {
+          if(res.code === '403'){
+            utils.alert('请求失败，请稍后重试。')
+          }
+          console.log(res.code)
+        }
       }) 
     },
     enter(key, code) {
@@ -85,8 +109,7 @@ export default {
       return this.state.userInfo !== null
     },
     mapData(){
-      console.log();
-     
+      // console.log(); 
       return Array.from({length:6}).map((e,i)=>(
         {
           key:i+1,
