@@ -171,7 +171,7 @@ export default {
 </script>
 <style>
   .el-carousel__container { 
-    height: 400px;
+    height: 400px !important;
   }
   .el-carousel__item h3 {
     color: #475669;
