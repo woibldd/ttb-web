@@ -1,3 +1,9 @@
+<!--
+ * @Author: zlccy
+ * @Date: 2019-09-17 12:02:20
+ * @LastEditTime: 2019-09-17 12:02:20
+ * @Description: file content
+ -->
 <template>
   <div
     id="app"
@@ -150,7 +156,7 @@ export default {
   mounted() {
     this.$eh.$on('app:resize', () => this.fixPosition())
     this.$nextTick(this.fixPosition)
-    
+
   },
   created() {
     utils.$app = this
@@ -230,6 +236,16 @@ button {
   outline:none;
   scrollbar-width: none;
 }
+input::-webkit-credentials-auto-fill-button {
+    display: none !important;
+    visibility: hidden;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+}
+input {
+  line-height: normal
+}
 @import "styles/reset.scss";
 @import "styles/index.scss";
 @media (max-width: 1378px) {
@@ -239,5 +255,10 @@ button {
 }
 .el-loading-mask {
   z-index: 1!important;
+}
+</style>
+<style>
+.el-input__inner {
+  line-height: normal!important;
 }
 </style>
