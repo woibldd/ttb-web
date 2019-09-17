@@ -179,6 +179,9 @@ export default {
       if (this.pair === 'FUTURE_BTCUSD') {
         return '1 USD'
       }
+      else if (this.symbolInfo.multiplier) { 
+        return this.$big(this.symbolInfo.mark_price || 0).times(this.symbolInfo.multiplier)
+      }
       else if (this.pair === 'FUTURE_BHDUSD') { 
         return this.$big(this.symbolInfo.mark_price || 0).times(this.symbolInfo.multiplier || 0.00001)
       }
@@ -186,7 +189,7 @@ export default {
         return this.$big(this.symbolInfo.mark_price || 0).times(this.symbolInfo.multiplier || 0.000001)
       }
       else {
-        return ''
+        return '0'
       }
     },
     nextPayTime () {

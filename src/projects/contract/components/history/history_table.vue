@@ -101,7 +101,7 @@
             <div class="col__row mb-10">
               <span
                 v-tooltip.top-center="{html: true, content: $t('contract_mark_price_tips_table'), classes: 'contract'}"
-                class="label">{{ $t('contract_mark_price') }}</span> <span class="value">{{ cholding.markPrice | round(cholding.pairInfo.price_scale || 2) }}</span>
+                class="label">{{ $t('contract_mark_price') }}</span> <span class="value">{{ cholding.markPrice | round(cholding.mark_scale || 2) }}</span>
             </div>
             <div class="col__row">
               <span
