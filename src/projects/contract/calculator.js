@@ -121,7 +121,7 @@ export default {
     let close_value = Big(0)
     let margin = Big(0)
 
-    if (symbol.currency_name === 'BTC') {
+    if (symbol.product_name === 'BTC') {
       open_value = Big(amount).div(open_price || 1).abs()
       close_value = Big(close_price).div(open_price || 1).mul(open_value).abs()
       margin = Big(open_value).mul(100).div(lever || 100).mul(0.01).abs()

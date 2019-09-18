@@ -1181,9 +1181,9 @@
     "contract_trade_index_base": "1.기본화폐는%{currency}。",
     "contract_how_price": "계약은 어떻게 가격을 제시합니까？",
     "contract_how_price_tip_a": "<span style=\"color:#22ced0\"> %{symbol} </span>에 근거하여<span style=\"color:#22ced0\"> %{coin} </span>지수가격 책정 %{symbol} 계약。%{value}의 비트 코인 한 장의 계약 가치。",
-    "contract_how_price_tip_b": "。",
+    "contract_how_price_tipe_b":"8시간마다 자금비용을 지불하거나 수취합니다.다음의 지불은%에서 발생한다{next_pay_time}",
     "contract_how_price_tip_c": "<span style=\"color:#22ced0\"> %{symbol} </span>할증 가 지수를 이용 하여 자금 비율을 계산하다。<span style=\"color:#22ced0\"> %{id1} </span>또<span style=\"color:#22ced0\"> %{id2} </span>기본률이다，<span style=\"color:#22ced0\"> %{id3} </span>익장률이다:그들은<span style=\"color:#22ced0\"> 최종 자금률을 계산한다</span>에서 사용가능하다。",
-    "contract_how_price_tip_d": "",
+    "contract_how_price_tip_d": "{next_pay_time}이 설정되면 다창고는%{receive}%{feerate}% 이며 공창은%{pay}%{feerate}%%이 됩니다.IXX.COM은 어떠한 자금도 받지 않는다. ",
     "contract_how_price_tip_e": "만기:이 계약은 영구 계약으로, 기간이 되지 않습니다。",
     "contract_look_tutorial": "%{currency} 영속 지침을 참조하십시오",
     "contract_fee_formula": "자금 비율 계산 공식",
@@ -2187,5 +2187,7 @@
 "playBTC": "오락도시",
 "play-record": "게임기록",
 "order_id": "주문서ID", 
-"fxpl": "돈세탁방지 가이드"
+"fxpl": "돈세탁방지 가이드",
+"pay":"지불",
+"receive":"획득"
 }

@@ -1176,7 +1176,7 @@
     "contract_how_price_tip_a":"<span style=\"color:#01CED1\"> %{symbol} </span>是根据<span style=\"color:#01CED1\"> %{coin} </span>指数 定价的 %{symbol} 合约。每张合约价值 %{value} 的比特币。",
     "contract_how_price_tip_b":"每 8 小时 支付或收取资金费用。下一个支付将发生在 %{next_pay_time}",
     "contract_how_price_tip_c":"<span style=\"color:#01CED1\"> %{symbol} </span>利用溢价指数计算资金费率。<span style=\"color:#01CED1\"> %{id1} </span>以及<span style=\"color:#01CED1\"> %{id2} </span>，<span style=\"color:#01CED1\"> %{id3} </span>。它们在 <span style=\"color:#01CED1\"> 计算最终的资金费率</span>中被使用。",
-    "contract_how_price_tip_d":"在 %{next_pay_time} 时，多仓将会获得 %{feerate}%，同时空仓将会支付%{feerate}% 的费率。IXX.COM 不会收取任何资金费用。",
+    "contract_how_price_tip_d":"在 %{next_pay_time} 时，多仓将会%{receive} %{feerate}%，同时空仓将会%{pay}%{feerate}% 的费率。IXX.COM 不会收取任何资金费用。",
     "contract_how_price_tip_e":"到期: 此合约为永续合约，不会到期。",
     "contract_look_tutorial":"查看%{currency}永续指南",
     "contract_fee_formula":"资金费率计算公式",
@@ -2270,7 +2270,9 @@
     "h5_home_introduce7": "高效",
     "h5_home_introduce8": "自研高性能撮合引擎，在严格的压力测试下，可以充分支持200万+/秒/交易对的撮合速度，确保服务不间断，操作上无卡顿。",
     "order_id": "订单ID",
-    "fxpl": "反洗钱指引"
+    "fxpl": "反洗钱指引",
+    "pay": "支付",
+    "receive": "获得"
   }
 
 

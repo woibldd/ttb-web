@@ -22,7 +22,14 @@
         <p
           class="mb-26"
           v-html=" $t('contract_how_price_tip_c', {'symbol': symbol, id1: $t('contract_base_rate'),id2: $t('contract_cal_rate'),id3: $t('contract_over_price'),})"/>
-        <p class="mb-26">{{ $t('contract_how_price_tip_d', {feerate: ($big(feeRate).round(4, 0)), next_pay_time:nextPayTime}) }}</p>
+          <p class="mb-26">
+            {{ $t('contract_how_price_tip_d', {
+              feerate: ($big(feeRate).round(4, 0)), 
+              next_pay_time:nextPayTime, 
+              receive: $big(feeRate).lt(0) ? $t('pay') : $t('receive'), 
+              pay:  $big(feeRate).lt(0) ? $t('receive') : $t('pay'),}) 
+            }}
+          </p>
         <p>{{ $t('contract_how_price_tip_e') }}</p>
       </div>
       <!-- 查看btc永续指南 -->
