@@ -109,16 +109,28 @@ export default {
       cost: margin.plus(fee)
     }
   }, 
-  getStorageInfo ({direction, lever, amount, open_price, close_price}) {
+  getStorageInfo ({direction, lever, amount, open_price, close_price, symbol}) {
     if (direction === 'less') {
       amount = -amount
     }
+    
     if (lever == 0) {
-      lever = 100
+      lever = symbol.max_leverage
     }
-    let open_value = Big(amount).div(open_price || 1).abs()
-    let close_value = Big(close_price).div(open_price || 1).mul(open_value).abs()
-    let margin = Big(open_value).mul(100).div(lever || 100).mul(0.01).abs()
+    let open_value = Big(0)
+    let close_value = Big(0)
+    let margin = Big(0)
+
+    if (symbol.product_name === 'BTC') {
+      open_value = Big(amount).div(open_price || 1).abs()
+      close_value = Big(close_price).div(open_price || 1).mul(open_value).abs()
+      margin = Big(open_value).mul(100).div(lever || 100).mul(0.01).abs()
+    } else {
+      open_value =  Big(amount || 0).times(open_price || 0).times(symbol.multiplier).abs()
+      close_value = Big(close_price).div(open_price || 1).mul(open_value).abs() 
+      margin = Big(open_value).mul(symbol.max_leverage).div(lever || symbol.max_leverage).mul(symbol.im).abs()
+    }
+
     let realized = close_value.minus(open_value).mul(amount < 0 ? -1 : 1)
     let realized_roe = realized.div(open_value || 1).mul(100)
     let roe = realized_roe.mul(lever)

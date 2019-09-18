@@ -109,6 +109,13 @@ export default {
         holding.product_name = pairInfo.product_name
         holding.value_scale = pairInfo.value_scale || 4
         holding.price_scale = pairInfo.price_scale
+        if (currency === 'BTCUSD') {
+          holding.mark_scale = 2
+        }
+        else {
+          holding.mark_scale = pairInfo.price_scale
+        }
+
 
         // holding.lastPrice = lastPrice
         // holding.markPrice = markPrice

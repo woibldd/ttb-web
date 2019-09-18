@@ -1,5 +1,4 @@
-#!/bin/sh 
-  
+#!/bin/sh  
 npm run build
 
 sleep 2

@@ -3004,7 +3004,7 @@ export default {
 .mask {
   width: 100%;
   height: 100%;
-  z-index: 0;
+  z-index: 2;
   position: absolute;
   left: 0;
   top: 0;
