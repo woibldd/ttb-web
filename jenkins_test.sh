@@ -1,5 +1,5 @@
 #!/bin/sh 
-  
+  cnpm i compression-webpack-plugin -S
 npm run build
 
 sleep 2
