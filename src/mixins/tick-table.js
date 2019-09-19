@@ -210,7 +210,7 @@ export default {
           }
         }
       }
-      console.log(res.data.items, 123)
+      
 
       this.state.pro.pairList = res.data.items
     },

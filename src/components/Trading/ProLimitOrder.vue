@@ -59,6 +59,7 @@
             </div>
             <div class="ix-slider" sytle="width: 100%;">
               <ix-slider 
+                ref="sliderBuy"
                 :disabled="!currencyAvailable"
                 @input="onSliderDragEnd($event, 'buy')"
                 :height="4" 
@@ -68,7 +69,7 @@
                 :min="0"
                 :max="100"
                 :piecewise-label="true"
-                :interval="1"
+                :interval="1" 
                 :piecewise="false">
                 <template
                   slot="label"
@@ -173,6 +174,7 @@
             <div class="ix-slider">
               <ix-slider
                 :disabled="!currencyAvailable"
+                ref="sliderSell"
                 @input="onSliderDragEnd($event, 'sell')"
                 height="4"
                 :dot-size="14"
@@ -368,7 +370,15 @@ export default {
     },
     sell_worth () {
       this.calcAmount('sell')
-    }
+    },
+    // currencyAvailable: {
+    //   async handler (val) {
+    //     console.log('valvalvalvalvalvalvalvalvalvalvalval')
+    //     this.buy_percent = 0
+    //     this.sell_percent = 0
+    //   },
+    //   immediate: true
+    // }
   },
   methods: {
     clear () {
@@ -380,7 +390,7 @@ export default {
       this.sell_worth = ''
     },
     worthFocus (type) {
-      this.worthLock = true
+      this.worthLock = true 
     },
     worthBlur (type) {
       this.worthLock = false
@@ -610,13 +620,18 @@ export default {
         this.setSellVolumn(value)
       }
       // console.log(value)
+    }, 
+    refreshBalance () {  
+      this.$refs.sliderBuy.setValue(0)
+      this.$refs.sliderSell.setValue(0)
     }
   },
   components: {
     ixSlider
   },
   created () {
-    this.$eh.$on('protrade:exchange:set', this.set)
+    this.$eh.$on('protrade:exchange:set', this.set) 
+    this.$eh.$on('protrade:balance:refresh', this.refreshBalance)
   }
 }
 </script>

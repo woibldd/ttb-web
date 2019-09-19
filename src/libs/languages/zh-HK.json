@@ -2126,5 +2126,9 @@
     "order_id": "訂單ID", 
     "fxpl": "反洗錢指引",
     "pay": "支付",
-    "receive": "獲得"
+    "receive": "獲得",
+    "new_user_register_popup1": "注册贈金",
+    "new_user_register_popup2": "掃碼添加微信客服，加入ixx.com官方社區立即領取$50等值合約交易體驗金！",
+    "new_user_register_popup3": "如有疑問，請直接諮詢微信客服。",
+    "pair_table_option_empty": "暫無添加自選 "
 }

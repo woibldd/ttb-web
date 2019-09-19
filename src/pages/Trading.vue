@@ -170,6 +170,7 @@ export default {
   },
   methods: {
     async refreshBalance () {
+      console.log('refreshBalancerefreshBalancerefreshBalancerefreshBalancerefreshBalancerefreshBalance')
       const product = this.state.pro.product_name
       const currency = this.state.pro.currency_name
       if (

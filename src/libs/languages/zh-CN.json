@@ -2272,7 +2272,11 @@
     "order_id": "订单ID",
     "fxpl": "反洗钱指引",
     "pay": "支付",
-    "receive": "获得"
+    "receive": "获得",
+    "new_user_register_popup1": "注册赠金",
+    "new_user_register_popup2": "扫码添加微信客服，加入ixx.com官方社区立即领取$50等值合约交易体验金！",
+    "new_user_register_popup3": "如有疑问，请直接咨询微信客服。",
+    "pair_table_option_empty": "暂无添加自选 "
   }
 
 
