@@ -286,22 +286,25 @@ export default {
               }
             }
           })
-        const indicators = [
+         let indicators = [
           {
-            name: 'MACD'
+            name: "MACD_",
+            text: "MACD"
             // args: [14, 30, 'close', 9]
           },
           {
-            name: 'StochRSI',
-            fullname: 'Stochastic RSI'
+            name: "StochRSI",
+            fullname: "Stochastic RSI",
+            text: "StochRSI"
             // args: [10]
           },
           {
-            name: 'BOLL',
-            fullname: 'Bollinger Bands'
+            name: "BOLL",
+            fullname: "Bollinger Bands",
+            text: "BOLL"
             // args: [20]
           }
-        ]
+        ];
         indicators.forEach(indicat => {
           const btn = widget
             .createButton()
@@ -339,8 +342,8 @@ export default {
                 element.classList.remove('selected')
               }
             })
-            .append(indicat.name)
-          if (indicat.name === 'MACD') {
+            .append(indicat.text)
+          if (indicat.name === 'MACD_') {
             btn.trigger('click')
           }
         })
@@ -354,17 +357,25 @@ export default {
         }
   
         arr.map(item => {
-          widget.chart().createStudy(
-            item.value,
-            !1,
-            !1,
-            item.args 
-          );
+          try {
+            if (item.value !== 'MACD_' && item.value !== 'Stochastic RSI' && item.value !== 'Bollinger Bands') { 
+              widget.chart().createStudy(
+                item.value,
+                !1,
+                !1,
+                item.args 
+              ); 
+            }
+          } catch (error) {
+            console.log(error)
+          }
         })
   
         widget.subscribe('study', (e) => { 
-          arr.push(e)
-          utils.setStorageValue('ixx-contract-study', JSON.stringify(arr) )
+          if (e.value !== 'MACD_' && e.value !== 'Stochastic RSI' && e.value !== 'Bollinger Bands') { 
+            arr.push(e)
+            utils.setStorageValue('ixx-trading-study', JSON.stringify(arr) )
+          }
         })
 
         window.condwgt = widget

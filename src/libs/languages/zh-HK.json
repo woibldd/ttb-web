@@ -1172,7 +1172,7 @@
   "contract_how_price_tip_a": "<span style=\"color:#22ced0\"> %{symbol} </span>是根據<span style=\"color:#22ced0\"> %{coin} </span>指數定價的%{symbol}合約。每張合約價值%{value} 的比特幣。",
   "contract_how_price_tip_b": "每 8 小時 支付或收取資金費用。下一個支付將發生在 %{next_pay_time}。",
   "contract_how_price_tip_c": "<span style=\"color:#22ced0\"> %{symbol} </span>利用溢價指數計算資金費率。<span style=\"color:#22ced0\"> %{id1 } </span>以及<span style=\"color:#22ced0\"> %{id2} </span>是標的費率，<span style=\"color:#22ced0\"> %{id3} < /span>是溢價率。它們在<span style=\"color:#22ced0\"> 計算最終的資金費率</span>中被使用。",
-  "contract_how_price_tip_d": "在 %{next_pay_time}時，多倉將會獲得%{feerate}%，同時空倉將會支付%{feerate}% 的費率。IXX.COM 不會收取任何資金費用。",
+  "contract_how_price_tip_d": "在 %{next_pay_time}時，多倉將會%{receive}%{feerate}%，同時空倉將會%{pay}%{feerate}% 的費率。IXX.COM 不會收取任何資金費用。",
   "contract_how_price_tip_e": "到期: 此合約為永續合約，不會到期。",
   "contract_look_tutorial": "查看%{currency}永續指南",
   "contract_fee_formula": "資金費率計算公式",
@@ -2082,6 +2082,53 @@
     "h5_home_introduce5": "體驗",
     "h5_home_introduce6": "提供24小時不間斷的專屬客服服務，多語言支持，確保溝通沒有國界障礙，在提幣等核心服務環節上可以實現秒級響應。",
     "h5_home_introduce7": "高效",
-    "h5_home_introduce8": "自研高性能撮合引擎，在嚴格的壓力測試下，可以充分支持200萬+/秒/交易對的撮合速度,確保服務不間斷，操作上無卡頓。"
-
+    "h5_home_introduce8": "自研高性能撮合引擎，在嚴格的壓力測試下，可以充分支持200萬+/秒/交易對的撮合速度,確保服務不間斷，操作上無卡頓。",
+    "playBTC": "娛樂區",
+    "play-record": "遊戲記錄",
+    "playbtcMaptext":{
+      "1":{
+        "title":"極速火箭",
+        "describe":"火箭一爆，收益全開",
+        "tips":"競猜遊戲",
+        "btntext":"點開即玩"
+      },
+      "2":{
+        "title":"足球神射",
+        "describe":"足球進門，財富滿盆",
+        "tips":"足球遊戲",
+        "btntext":"點開即玩"
+      },
+      "3":{
+        "title":"絕殺卡當",
+        "describe":"點比特插隊，贏者翻倍",
+        "tips":"撲克遊戲",
+        "btntext":"點開即玩"
+      },
+      "4":{
+        "title":"瘋狂二八紅",
+        "describe":"多人對決，等你通殺",
+        "tips":"高頻遊戲",
+        "btntext":"點開即玩"
+      },
+      "5":{
+        "title":"發哥百家樂",
+        "describe":"文明公正，用實力做發哥",
+        "tips":"娛樂項目",
+        "btntext":"點開即玩"
+      },
+      "6":{
+        "title":"競猜大師",
+        "describe":"全球聯賽，盡收其中",
+        "tips":"賽事預測",
+        "btntext":"點開即玩"
+      }
+    },
+    "order_id": "訂單ID", 
+    "fxpl": "反洗錢指引",
+    "pay": "支付",
+    "receive": "獲得",
+    "new_user_register_popup1": "注册贈金",
+    "new_user_register_popup2": "掃碼添加微信客服，加入ixx.com官方社區立即領取$50等值合約交易體驗金！",
+    "new_user_register_popup3": "如有疑問，請直接諮詢微信客服。",
+    "pair_table_option_empty": "暫無添加自選 "
 }

@@ -88,20 +88,20 @@
           </div>
           <div class="bottom-txt bot-lb">
             <div class="contact-list">
-              <!-- <a
+              <a
                 class="contact-item-wrapper pointer"
-                href='https://www.facebook.com/IXX-301038947404383'>
+                href=' https://www.facebook.com/profile.php?id=100040054419479'>
                 <icon
                   class="contact-item"
                   name="footer-facebook"/>
               </a>
               <a
                 class="contact-item-wrapper pointer"
-                href='https://twitter.com/IXX73784665'>
+                href='https://twitter.com/ExchangeIxx'>
                 <icon
                   class="contact-item"
                   name="footer-twitter"/>
-              </a> -->
+              </a>
               <a
                 href="mailto:service@ixx.com"
                 class="contact-item-wrapper pointer">
@@ -132,6 +132,13 @@
                   class="contact-img"
                   src="../assets/pic-contact-biyong.png">
               </div>
+              <a
+                href="https://www.instagram.com/ixxexchange/"
+                class="contact-item-wrapper pointer">
+                <icon
+                  class="contact-item "
+                  name="footer-Instagram"/>
+              </a>
             </div>
             <p class="copyright">Copyright © 2019 ixx.com</p>
           </div>
@@ -180,7 +187,7 @@ export default {
     },
     apiDoc() {
       return this.state.theme.apiDoc[this.state.locale || 'en']
-    }, 
+    },
     showEnTips() {
       return this.state.locale === 'en' || this.state.locale === 'ko'
     },

@@ -1,8 +1,16 @@
 <template>
   <div class="play-btc">
-    <el-carousel :interval="5000" arrow="always" style="z-index: 0;">
-      <el-carousel-item v-for="item in 4" :key="item">
-        <h3>{{ item }}</h3>
+    <el-carousel :interval="5000" arrow="always" style="z-index: 0; width:100%;">
+      <el-carousel-item v-for="item in banners" :key="item">
+        <!-- <h3>{{ item }}</h3> -->
+        <!-- <img :src="item" alt="banner" height="100%"> --> 
+        <div
+          :style="{ 
+            height: '400px', 
+            backgroundImage: `url(${item})`,
+            backgroundPosition: 'center' 
+          }">
+        </div>
       </el-carousel-item>
     </el-carousel>
     <div class="container content" v-loading="loading">
@@ -32,7 +40,7 @@ export default {
   data(){
     return {
       loading: false,
-      state,
+      state, 
     }
   },
   methods: {
@@ -43,31 +51,62 @@ export default {
         })
         return
       }
+ 
+      let name = {
+        1: "rockets", // 火箭入口
+        2: "shot", //射门入口
+        3: "card_when", //卡当入口
+        4: "bar", //二八杠入口
+        5: "baccarat", //百家乐入口
+        6: "game_collection" //竞猜入口 
+      }[key]
 
-
+      let lang = {
+        'zh-CN': 'zh',
+        'zh-HK': 'zh-Hant',
+        'en': 'en',
+        'ko': 'ko',
+      }[state.locale]
+ 
       this.loading = true
       const params = {
-        uid: state.userInfo.id 
+        uid: state.userInfo.id,
+        is_pc: true
       }
       service.createCode(params).then(res => { 
         this.loading = false
-        if(res.code) {  
-          this.enter(key, res.code)
+        if(!res.code && !!res.data) {   
+            // this.enter(key, res.code)
+          let list = res.data[0]
+          if(!!list){
+            let url = list[name] + '&lang=' + lang
+            window.open(url)
+          }
         } 
-        // else {
-        //   console.log(res.code)
-        // }
+        else {
+          if(res.code === '403'){
+            utils.alert('请求失败，请稍后重试。')
+          }
+          console.log(res.code)
+        }
       }) 
     },
     enter(key, code) {
       // 1 极速火箭， 2足球神射，3绝杀卡当，4疯狂二八红，5发哥百家乐，6竞猜大师
+      let lang = {
+        'zh-CN': 'zh',
+        'zh-HK': 'zh-Hant',
+        'en': 'en',
+        'ko': 'ko',
+      }[state.locale]
+
       let url = {
-        1: `https://testing-sso.cointest.link/channel/callbacks/IXX/ROCKET?code=${code}&langue=zh`,
-        2: `https://testing-sso.cointest.link/channel/callbacks/IXX/GOAL?code=${code}&langue=zh`,
-        3: `https://testing-sso.cointest.link/channel/callbacks/IXX/MEDIAN?code=${code}&langue=zh`,
-        4: `https://testing-sso.cointest.link/channel/callbacks/IXX/MAGNATE?code=${code}&langue=zh`,
-        5: `https://testing-sso.cointest.link/channel/callbacks/IXX/BACCARAT?code=${code}&langue=zh`,
-        6: `https://testing-sso.cointest.link/channel/callbacks/IXX/GAME-COLLECTION-INNER?code=${code}&langue=zh`,
+        1: `https://testing-sso.cointest.link/channel/callbacks/IXX/ROCKET?code=${code}&lang=${lang}`,
+        2: `https://testing-sso.cointest.link/channel/callbacks/IXX/GOAL?code=${code}&lang=${lang}`,
+        3: `https://testing-sso.cointest.link/channel/callbacks/IXX/MEDIAN?code=${code}&lang=${lang}`,
+        4: `https://testing-sso.cointest.link/channel/callbacks/IXX/MAGNATE?code=${code}&lang=${lang}`,
+        5: `https://testing-sso.cointest.link/channel/callbacks/IXX/BACCARAT?code=${code}&lang=${lang}`,
+        6: `https://testing-sso.cointest.link/channel/callbacks/IXX/GAME-COLLECTION-INNER?code=${code}&lang=${lang}`,
       }[key]
       // window.location.href = url
       window.open(url)
@@ -78,8 +117,7 @@ export default {
       return this.state.userInfo !== null
     },
     mapData(){
-      console.log();
-     
+      // console.log(); 
       return Array.from({length:6}).map((e,i)=>(
         {
           key:i+1,
@@ -122,16 +160,24 @@ export default {
       //     text:['竞猜大师','全球联赛尽收其中']
       //   },
       // ]
+    },
+    banners() {
+      return [ 
+        require(`./assets/playBTC/banner/banner-${this.state.locale}.png`)
+      ]
     }
   }
 }
 </script>
 <style>
+  .el-carousel__container { 
+    height: 400px !important;
+  }
   .el-carousel__item h3 {
     color: #475669;
     font-size: 18px;
     opacity: 0.75;
-    line-height: 300px;
+    /* line-height: 300px; */
     margin: 0;
   }
   

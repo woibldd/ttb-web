@@ -39,7 +39,7 @@ const processValue = {
       }
 
       if (key === 'payment_type') {
-        console.log({key})
+        // console.log({key})
         switch (value) {
           case 1: 
             // return `银行卡(${row['card_number']})`

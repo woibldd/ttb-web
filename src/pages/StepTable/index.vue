@@ -1,3 +1,9 @@
+<!--
+ * @Author: zlccy
+ * @Date: 2019-08-15 14:15:44
+ * @LastEditTime: 2019-09-16 10:50:35
+ * @Description: file content
+ -->
 <template>
   <div class="trade-container">
     <div class="trade-message-box">
@@ -80,7 +86,7 @@
           class="nav-list"
           @click="switchTab(index)">{{ item.name }}
           <span v-if="item.count > 0 && token">{{ item.count }}</span>
-        </div>
+        </div> 
         <div
           v-if="active === 0"
           class="slot-down">
@@ -585,9 +591,9 @@ export default {
   //     return 0
   //   }
   // },
-  mounted() {
-    this.setTimeInit()
-  },
+  // mounted() {
+  //   this.setTimeInit()
+  // },
   beforeDestroy() {
     clearInterval(this.timer)
   },
@@ -598,7 +604,8 @@ export default {
 
     const that = this
     // 定时器
-    this.timers = setInterval(() => {
+    this.timers = setInterval(() => { 
+      console.log('setInterval')
       service.getUnDonefills({
         page: 1,
         side: 0,
@@ -735,9 +742,9 @@ export default {
     // Todo 待开发
     paySetHandle(item, index) {
       // console.log(item, index)
-    }, 
+    },
     detailHandle(item) {
-      console.log({ item })
+      // console.log({ item })
       this.stepActive = false
       this.bankData = []
       this.closeFlag = false
@@ -910,7 +917,7 @@ export default {
         this.loading = false
         // 切换数据
         this.init(index)
-        this.setTimeInit()
+        // this.setTimeInit()
       }, 300)
     }),
     async init(state) {
@@ -951,7 +958,6 @@ export default {
             that.total = rer.data.total
           }
           break
-          // eslint-disable-next-line no-case-declarations
         case 2:
           const res = await service.getOtcRemovefills(that.params1)
           if (!res.code) {
@@ -959,7 +965,6 @@ export default {
             that.total = res.data.total
           }
           break
-          // eslint-disable-next-line no-case-declarations
         default:
           const rew = await service.getOtcActivefills(that.params)
           if (!rew.code) {
@@ -1086,7 +1091,7 @@ export default {
             user_id: this.id
           }
           service.otcAppeal(params).then(res => {
-            console.log(res)
+            // console.log(res)
             if (!res.code) {
               // this.$message.success('申诉成功，请等待客服处理')
               this.$message({
@@ -1108,7 +1113,7 @@ export default {
         .catch(() => { })
     },
     handleCurrentChange(e) {
-      console.log(this.active)
+      // console.log(this.active)
       if (this.active === 1 || this.active === 2) {
         this.params1.page = e
         // console.log(this.params1.page, '1')
@@ -1119,13 +1124,13 @@ export default {
         this.init(this.active)
       }
     },
-    setTimeInit() {
-      this.timer = setInterval(() => {
-        if (this.active === 0 || this.active === 3) {
-          // this.init(this.active)
-        }
-      }, 3000)
-    }
+    // setTimeInit() {
+    //   this.timer = setInterval(() => {
+    //     if (this.active === 0 || this.active === 3) {
+    //       // this.init(this.active)
+    //     }
+    //   }, 3000)
+    // }
   }
 
 }

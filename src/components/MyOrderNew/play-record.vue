@@ -2,49 +2,23 @@
   <div class="order--container">
     <div class="profile-container">
       <div class="title-box">{{ $t('play-record') }}</div>
-      <!-- <div class="row-select mt-24 mb-24">
-        <span>{{ $t('pair') }}</span>
-        <div class="row__value ml-9">
-          <el-select
-            v-model="selectPair"
-            value-key="name"
-            @change="changePairs">
-            <el-option
-              v-for="(item, idx) in pairList"
-              :key="idx"
-              :label="item.name | pairfix"
-              :value="item"/>
-          </el-select>
-        </div>
-      </div> -->
-      <div class="table-wrapper">
+      
+      <div class="table-wrapper" v-loading='isLoading'>
         <table class="table">
-          <tr class="thead">
-            <!-- <th>{{ $t('active_relay_time') }} </th>
-            <th>{{ $t('pair') }} </th>
-            <th>{{ $t('deal_th_side') }}</th>
-            <th>{{ $t('order_th_type') }}</th>
-            <th>{{ $t('orderdeal_fee') }}</th>
-            <th>{{ $t('avg_price') }}</th>
-            <th>{{ $t('deal_amount') }}</th> -->
-            <th>时间</th>
-            <th>订单ID</th>
-            <th>币种</th>
-            <th>数量</th>
+          <tr class="thead"> 
+            <th>{{$t('time')}}</th>
+            <th>{{$t('order_id')}}</th>
+            <th>{{$t('currency')}}</th>
+            <th>{{$t('amount')}}</th>
           </tr>
           <tr
             class="row-tr"
             v-for="(row,index) in tableData"
-            :key="index">
-            <td>{{ row.create_time }}</td>
-            <td>{{ row.symbol | pairfix }}</td>
-            <td> <span v-html="processSide(row.side)"/></td>
-            <td>{{ row.type == 1 ? $t('operate_limit') : $t('operate_market') }}</td>
-            <td>{{ row.fee | round(6) }} {{ row.side == 1 ? row.product : row.currency }}</td>
-            <!-- <td>{{row.discount}}</td> -->
-            <td>{{ row.price }}</td>
-            <td>{{ row.amount | round(5) }}</td>
-          <!-- <td>{{row.}}</td> -->
+            :key="index"> 
+            <td>{{ row.create_time | date}}</td>
+            <td>{{ row.order_no }}</td>
+            <td>{{ row.asset_code }}</td>
+            <td> {{ row.amount }}</td>
           </tr>
         </table>
         <div
@@ -57,6 +31,7 @@
         <el-pagination
           background
           @current-change="currentHandle"
+          :current-page.sync="params.page"
           layout="prev, pager, next"
           :total="total" />
       </div>
@@ -66,6 +41,7 @@
 <script>
 import service from '@/modules/service'
 import { pairfix } from '@/mixins/index'
+import utils from '@/modules/utils'
 
 export default {
   mixins: [pairfix],
@@ -80,17 +56,13 @@ export default {
       total: 0,
       params: {
         page: 1,
-        size: 10,
-        symbol: ''
-      }
+        size: 10, 
+        // user_id: 940951
+      }, 
+      curPage: 1,
     }
   },
-  methods: {
-    changePairs (e) {
-      this.filterList()
-      this.params.symbol = e.name
-      this.getList()
-    },
+  methods: { 
     currentHandle (e) {
       this.params.page = e
       this.getList()
@@ -115,22 +87,19 @@ export default {
       if (!res.code) {
         this.pairList = res.data.items
       }
-    },
-    filterList () {
-      this.tableData = this.originList.filter(item => {
-        return item.symbol === this.selectPair.name
-      })
-    },
-    getList () {
-      // const params = {
-      //   page: 1,
-      //   size: 10,
-      //   symbol: this.selectPair.name
-      // }
-      this.params.symbol = this.selectPair.name || ''
-      service.getBiBiOrders(this.params).then(res => {
-        this.originList = res.data // 暂时前端过滤,所以保留最初的全部数据
-        this.tableData = res.data
+    }, 
+    getList () { 
+      this.isLoading = true
+      service.gameTradeList(this.params).then(res => {
+        // this.originList = res.data // 暂时前端过滤,所以保留最初的全部数据
+        if (!res.code) {
+          this.tableData = res.data.data
+          this.total = res.data.total 
+          this.curPage = res.data.page
+        } else {
+          utils.alert(res.message)
+          this.params.page = this.curPage
+        }
       }).finally(() => {
         this.isLoading = false
       })
@@ -139,7 +108,7 @@ export default {
   async created () {
     await this.getAllPairs()
     this.getList()
-  }
+  }, 
 }
 </script>
 <style lang="scss">
@@ -181,7 +150,7 @@ export default {
         color: #666666;
     }
     .table-wrapper {
-        height: 550px;
+        min-height: 441px;
         overflow: scroll;
         width: 100%;
     }
@@ -200,8 +169,8 @@ export default {
             text-align: left;
         }
         .thead {
-            border-top: 1px dashed #999999;
-            border-bottom: 1px dashed #999999;
+            // border-top: 1px solid #EBEEF5;
+            border-bottom: 1px solid #EBEEF5;
         }
         .row-tr {
             color: #666;

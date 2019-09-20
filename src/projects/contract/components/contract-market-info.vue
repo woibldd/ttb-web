@@ -125,7 +125,7 @@ export default {
       return 0
     },
     adlurl () {
-      let link = 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360024495432'
+      let link = 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360027995111'
       if (this.state.locale === 'en') {
         link = link.replace('zh-cn', 'en-us')
       }

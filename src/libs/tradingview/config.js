@@ -6,6 +6,7 @@ export default function () {
   const upColor = themeStyle.up
   const downColor = themeStyle.down
   return {
+    indicators_file_name: 'customIndex.js',
     timezone: utils.getDefaultTimezone(),
     autosize: true,
     // fullscreen: true,

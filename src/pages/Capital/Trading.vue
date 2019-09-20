@@ -41,7 +41,7 @@
           class="fund-history">{{ $t('fund_trading_bill') }}</router-link> -->
 
           
-          <a class="fund-history" v-for="(name,index) in ['trading_account','fund_trading_bill','play-record']" :key="index" @click="handleTitleRightTab(name)" :class="{active:activeTab === name}" style="margin-left:15px">{{ $t(name) }}</a>
+          <a class="fund-history" v-for="(name,index) in ['trading_account','fund_trading_bill']" :key="index" @click="handleTitleRightTab(name)" :class="{active:activeTab === name}" style="margin-left:15px">{{ $t(name) }}</a>
           <!-- <a class="fund-history" :class="{active:activeTab === 'fund_trading_bill'}" style="margin-right:15px">{{ $t('fund_trading_bill') }}</a>
           <a class="fund-history" :class="{active:activeTab === 'play-record'}">{{ $t('play-record') }}</a> -->
       </div>

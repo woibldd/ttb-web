@@ -198,8 +198,8 @@ export default {
             text-align: left;
         }
         .thead {
-            border-top: 1px dashed #999999;
-            border-bottom: 1px dashed #999999;
+            border-top: 1px soild #EBEEF5;
+            border-bottom: 1px soild #EBEEF5;
         }
         .row-tr {
             color: #666;

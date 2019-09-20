@@ -33,11 +33,31 @@
 alt style="position: relative;top: 5px;left: 5px;"> -->
           </router-link>
           <router-link
-            to="/snowball"
-            class="nav_link  ml-30">  
-            <!-- {{ $t('bidTitle') }} -->
-            <whDropdown :menuOptions="[{label:$t('bidTitle'),href:'/snowball/bazaar'}]" >{{$t('playBTC')}}</whDropdown >
+            v-if='!isTestnet'
+            to="/snowball/bazaar"
+            class="nav_link  ml-30">    
+            {{$t('bidTitle')}}
           </router-link>
+          <div 
+            class="nav_link arrow-down"
+            v-if='isTestnet'
+            >
+            <router-link
+              to="/snowball"
+              class="nav_link ml-20">{{ $t('playBTC') }} 
+            </router-link> 
+            <div class="dropdown-sub-menu">
+              <ul class="dropdown-list pt-10 pb-10">
+                <li class="dropdown-item pl-24 pr-24">
+                  <a
+                    href="/snowball/bazaar"
+                    :class="{'router-link-active': from === 'contract'}"
+                    class="link">{{ $t('bidTitle') }} 
+                  </a>
+                </li>  
+              </ul>
+            </div>
+          </div>
           <a
             href="javascript:;"
             class="nav_link" 
@@ -451,7 +471,7 @@ export default {
 .nav_box {
   width: 100%;
   height: 60px;
-
+  min-width: 1340px;
   .border-right-1 {
     border-right: 1px solid #ffffff;
   }
@@ -459,7 +479,7 @@ export default {
   .ind_cen {
     position: relative;
     margin: 0 60px;
-    min-width: 1200px;
+    min-width: 1300px;
   }
 
   .nav_logo {
@@ -513,7 +533,7 @@ export default {
             background: $protrade-bg;
             position: absolute;
             left: 0;
-            top: 68px;
+            top: 58px;
             border-radius: 4px;
             z-index: 999;
             opacity: 0;
@@ -523,6 +543,7 @@ export default {
             .dropdown-list {
               .dropdown-item {
                 height: 40px;
+                line-height: 40px;
                 white-space: nowrap;
                 .link {
                   width: 100%;
@@ -672,7 +693,7 @@ export default {
     text-align: center;
     font-size: 12px;
     cursor: pointer;
-    z-index: 2;
+    z-index: 100;
     .rig {
       display: inline-block;
       transition: all 0.2s ease-in-out;
@@ -746,11 +767,11 @@ export default {
 .login {
   background: $home-header-login;
 }
-@media screen and (min-width: 1280px){ // 1280是英文状态下nav正常显示的最小宽度
+@media screen and (min-width: 1300px){ // 1280是英文状态下nav正常显示的最小宽度
     .nav_box {
         .ind_cen {
             width: auto;
-            min-width: 1200px;
+            min-width: 1300px;
             margin: 0 60px;
         }
    }

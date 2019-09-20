@@ -7,7 +7,7 @@
       <div class="mt-29 mb-30">
         <p class="mb-15 c-primary f26">{{ symbol }}</p>
         <p class="flex-avg">
-          <span>{{ $t('contract_trade_index_base',{currency: coin} ) }}</span>
+          <span>{{ $t('contract_trade_index_base',{currency: 'BTC'} ) }}</span>
           <span>{{ $t('contract_trade_index_value') }}</span>
         </p>
       </div>
@@ -18,11 +18,18 @@
         <p
           class="mb-26"
           v-html=" $t('contract_how_price_tip_a', {'symbol': symbol, coin: coin, 'value': value})"/>
-        <p class="mb-26">{{ $t('contract_how_price_tip_b', {next_pay_time: nextPayTime}) }}</p>
+        <p class="mb-26">{{ $t('contract_how_price_tip_b', {next_pay_time: nextPayTime}) }}</p> 
         <p
           class="mb-26"
           v-html=" $t('contract_how_price_tip_c', {'symbol': symbol, id1: $t('contract_base_rate'),id2: $t('contract_cal_rate'),id3: $t('contract_over_price'),})"/>
-        <p class="mb-26">{{ $t('contract_how_price_tip_d', {feerate: ($big(feeRate).round(4)), next_pay_time:nextPayTime}) }}</p>
+          <p class="mb-26">
+            {{ $t('contract_how_price_tip_d', {
+              feerate: ($big(feeRate).round(4, 0)), 
+              next_pay_time:nextPayTime, 
+              receive: $big(feeRate).lt(0) ? $t('pay') : $t('receive'), 
+              pay:  $big(feeRate).lt(0) ? $t('receive') : $t('pay'),}) 
+            }}
+          </p>
         <p>{{ $t('contract_how_price_tip_e') }}</p>
       </div>
       <!-- 查看btc永续指南 -->
@@ -97,7 +104,7 @@
           <div class="note-back">
             <p class="flex">{{ $t('contract_label_result_a') }} <span>I = 0.0100%</span></p>
              <p class="flex">{{ $t('contract_label_result_b',{premium}) }} <span>F = {{feeRate | fixed(8)}}%</span></p>
-          </div>
+          </div> 
         </div>
       </div>
 
@@ -179,6 +186,9 @@ export default {
       if (this.pair === 'FUTURE_BTCUSD') {
         return '1 USD'
       }
+      else if (this.symbolInfo.multiplier) { 
+        return this.$big(this.symbolInfo.mark_price || 0).times(this.symbolInfo.multiplier)
+      }
       else if (this.pair === 'FUTURE_BHDUSD') { 
         return this.$big(this.symbolInfo.mark_price || 0).times(this.symbolInfo.multiplier || 0.00001)
       }
@@ -186,7 +196,7 @@ export default {
         return this.$big(this.symbolInfo.mark_price || 0).times(this.symbolInfo.multiplier || 0.000001)
       }
       else {
-        return ''
+        return '0'
       }
     },
     nextPayTime () {

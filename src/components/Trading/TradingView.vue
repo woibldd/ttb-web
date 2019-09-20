@@ -99,7 +99,7 @@ export default {
       config.symbol = this.pair
       config.interval = local.interval
       config.datafeed = datafeeder
-      config.locale = this.getLanguage(this.state.locale)
+      config.locale = this.getLanguage(this.state.locale) 
       return config
     },
     getLanguage(locale) {
@@ -268,20 +268,25 @@ export default {
             // console.log(widget.btnFS)
           }
         })
-        const indicators = [
+        let indicators = [
           {
-            name: 'MACD'
+            name: "MACD_",
+            text: "MACD"
             // args: [14, 30, 'close', 9]
           },
           {
-            name: 'StochRSI',
-            fullname: 'Stochastic RSI'
+            name: "StochRSI",
+            fullname: "Stochastic RSI",
+            text: "StochRSI"
             // args: [10]
-          }, {
-            name: 'BOLL',
-            fullname: 'Bollinger Bands'
+          },
+          {
+            name: "BOLL",
+            fullname: "Bollinger Bands",
+            text: "BOLL"
             // args: [20]
-          }]
+          }
+        ];
         indicators.forEach(indicat => {
           const btn = widget.createButton().on('click', (e) => {
             console.log(111)
@@ -307,14 +312,14 @@ export default {
               this.hasIndicator = false
               element.classList.remove('selected')
             }
-          }).append(indicat.name)
-          if (indicat.name === 'MACD') {
+          }).append(indicat.text)
+          if (indicat.name === 'MACD_') {
             btn.trigger('click')
           }
         })
        
         //保存和载入技术指标
-                let arr = utils.getStorageValue('ixx-trading-study')
+        let arr = utils.getStorageValue('ixx-trading-study')
         if (!arr) {
           arr = []
         } else {
@@ -322,17 +327,25 @@ export default {
         }
 
         arr.map(item => {
-          widget.chart().createStudy(
-            item.value,
-            !1,
-            !1,
-            item.args 
-          );
+          try {
+            if (item.value !== 'MACD_' && item.value !== 'Stochastic RSI' && item.value !== 'Bollinger Bands') { 
+              widget.chart().createStudy(
+                item.value,
+                !1,
+                !1,
+                item.args 
+              ); 
+            }
+          } catch (error) {
+            console.log(error)
+          }
         })
   
         widget.subscribe('study', (e) => { 
-          arr.push(e)
-          utils.setStorageValue('ixx-trading-study', JSON.stringify(arr) )
+          if (e.value !== 'MACD_' && e.value !== 'Stochastic RSI' && e.value !== 'Bollinger Bands') { 
+            arr.push(e)
+            utils.setStorageValue('ixx-trading-study', JSON.stringify(arr) )
+          }
         })
 
         window.tradwgt = widget
@@ -348,7 +361,11 @@ export default {
           })
         })
 
+        // widget.chart().createStudy('ShuBenRSI', false, true)
+        // widget.chart().createStudy('MACDCUSTOM', false, true)
+
         // widget.chart().executeActionById('drawingToolbarAction')
+        
       })
     }
 

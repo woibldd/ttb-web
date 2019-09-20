@@ -142,7 +142,7 @@
     </div>
     <div class="h5-contact-info">
       <div class="contact-list">
-        <!-- <a
+        <a
           class="contact-item-wrapper mr-20 pointer"
           href='https://www.facebook.com/IXX-301038947404383'>
           <icon
@@ -155,7 +155,7 @@
           <icon
             class="contact-item"
             name="footer-twitter"/>
-        </a> -->
+        </a>
         <a
           href="mailto:service@IXX.COM"
           class="contact-item-wrapper mr-20 pointer">
@@ -171,6 +171,13 @@
             class="contact-img"
             src="../../../assets/pic-contact-wx.png">
         </div>
+        <a
+          class="contact-item-wrapper mr-20 pointer"
+          href="https://t.me/ixxofficial">
+          <icon
+            class="contact-item "
+            name="footer-telegram"/>
+        </a>
         <a
           class="contact-item-wrapper mr-20 pointer"
           href="https://t.me/ixxofficial">

@@ -82,6 +82,9 @@
           <div v-if="pair.CUSTOM" v-cloak class="td custom-title">{{ pair.type === '2' ? $t('pair_list_new') : $t('pair_list_ST') }}</div>
         </li>
       </ul>
+      <div v-show="!sortedList.length && tabSelected==='like'" class="ix-pair-empty">
+        {{$t('pair_table_option_empty')}}
+      </div>
     </div>
   </div>
 </template>
@@ -269,6 +272,10 @@ export default {
     height: 22px;
     opacity: 1;
   }
+}
+.ix-pair-empty {
+  text-align: center;
+  padding-bottom: .7em;
 }
 .tr {
   height: 40px;

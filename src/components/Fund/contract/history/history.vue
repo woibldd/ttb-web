@@ -112,14 +112,11 @@
           <td class="table__td">{{$t('FUTURE_&USD', {currency: item.symbol.replace('FUTURE_','').replace('USD','')} )}}</td>
           <td class="table__td">{{ processValue('origin', item) }}</td> <!--成交类型-->
           <td class="table__td"> <span v-html="processValue('side', item)"/></td>
-          <td class="table__td">{{ (item.amount || 0)  }}</td>
-
+          <td class="table__td">{{ (item.amount || 0)  }}</td> 
           <td class="table__td">{{ (item.price || 0) | fixed(valueScale)}}</td>
           <td class="table__td">{{ (item.total || 0) | fixed(valueScale) }}</td>
-          <td class="table__td">{{ processValue('fee_rate', item) }} </td>
-
-          <td class="table__td">{{ (item.fee || 0) | fixed(8) }}</td>
-
+          <td class="table__td">{{ processValue('fee_rate', item) }} </td> 
+          <td class="table__td">{{ (item.fee || 0) | fixed(8) }}</td> 
           <td class="table__td">{{ processValue('type',item) }}</td>
           <td class="table__td">{{ item.amount_total }}</td>
           <td class="table__td">{{ unclosedQty(item) }}</td>

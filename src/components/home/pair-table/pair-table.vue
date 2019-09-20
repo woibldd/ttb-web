@@ -101,6 +101,9 @@
           </template>
           <p v-if="pair.CUSTOM" v-cloak class="custom-title">{{ pair.type === '2' ? $t('pair_list_new') : $t('pair_list_ST') }}</p>
         </div>
+        <div v-if="tabSelected==='like' && sortedList.length===0" class="pairs-table__row empty">
+          <span>{{$t('pair_table_option_empty')}}</span>
+        </div>
       </div>
       <!-- class="pairs-table__row c-21" -->
       <!-- <div
@@ -155,8 +158,7 @@
         </div>
         <p v-else class="custom-title">bbbb</p> -->
     </div>
-  </div>
-  </div>
+  </div> 
 </template>
 <script>
 import { state } from '@/modules/store'
@@ -271,5 +273,10 @@ export default {
   margin-top: 10px;
   line-height: 40px;
   text-indent: 30px;
+}
+.empty {
+  display: block !important;
+  text-align: center;
+  border-bottom: none !important;
 }
 </style>
