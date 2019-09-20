@@ -398,7 +398,7 @@ export default {
   watch: {
     "force.mode"(value) {
       if(value == "cross") {
-        this.force.lever = 100 
+        this.force.lever = this.pairInfo.max_leverage 
       }
     }
   }
