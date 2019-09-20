@@ -1093,7 +1093,7 @@
   "contract_account_rights": "賬戶權益",
   "contract_account_rights_tips": "<a>賬戶權益</a><br/>（存款-提款+已實現盈虧）",
   "contract_margin_balance": "保證金餘額",
-  "contract_margin_balance_tips": "<a>保證金餘額</a><br/>用戶當前還可用於開倉的保證金數量=可用餘額+未實現盈虧。",
+  "contract_margin_balance_tips": "<a>保證金餘額</a><br/>保證金餘額=可用餘額+未實現盈虧。",
   "contract_avab_tips": "<a>可用餘額</a><br/>可以用於開新倉和轉出的資金部分，不包含佔用保證金部分。",
   "contract_unrealized_profit_and_loss_tips": "<a>未實現盈虧</a><br/>至當前用戶持倉 倉位產生的盈虧。",
   "contract_were_margin_tips": "<a>倉位保證金</a><br/>保證金中分配給未平倉倉位作為起始保證金要求的部分加上未實現的盈虧。",

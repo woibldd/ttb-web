@@ -1094,7 +1094,7 @@
     "contract_account_rights":"账户权益",
     "contract_account_rights_tips":"<a>账户权益</a><br/>用户的全部资金，包括用户的可用余额和占用保证金部分",
     "contract_margin_balance":"保证金余额",
-    "contract_margin_balance_tips":"<a>保证金余额</a><br/>用户当前还可用于开仓的保证金数量=可用余额+未实现盈亏。",
+    "contract_margin_balance_tips":"<a>保证金余额</a><br/>保证金余额=可用余额+未实现盈亏。",
     "contract_avab_tips": "<a>可用余额</a><br/>可以用于开新仓和转出的资金部分，不包含占用保证金部分。",
     "contract_unrealized_profit_and_loss_tips": "<a>未实现盈亏</a><br/>至当前用户持仓 仓位产生的盈亏。",
     "contract_were_margin_tips": "<a>仓位保证金</a><br/>保证金中分配给未平仓仓位作为起始保证金要求的部分加上未实现的盈亏。",
