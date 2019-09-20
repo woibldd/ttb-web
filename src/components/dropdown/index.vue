@@ -35,7 +35,7 @@ export default {
     position: absolute;
     z-index: 1000;
     padding-top: 24px;
-    width: 100%;
+    min-width: 100px;
     // transition: all 1s ease-in-out;
     display: none;
     // height: 0;
@@ -48,6 +48,7 @@ export default {
       color: #f0f0f0;
       font-size: 14px;
       &>li{
+        width: 100%;
         &.active,&:hover{
           color: #01CED1
         }
