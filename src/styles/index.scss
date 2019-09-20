@@ -24,6 +24,10 @@ html.hybrid-dark-bg {
 html {
   height: 100%;
 }
+.container{
+  width: 1200px;
+  margin: 0 auto;
+}
 body {
   font-size: 14px;
   line-height: 1.42857;
@@ -284,6 +288,13 @@ $primary-color: #01CED1;
 }
 
 
+.el-button.el-button--text { 
+  color: #000;
+  &:hover, &:focus {
+    color: #000;
+  }
+}
+
 .el-button:focus, .el-button:hover{
     color: $primary-color !important;
     border-color: $primary-color !important;
@@ -348,4 +359,18 @@ $primary-color: #01CED1;
 .el-switch.is-checked .el-switch__core {
   border-color: $primary!important;
   background-color: $primary!important;
+}
+
+.el-dropdown-menu { 
+  .el-dropdown-menu__item { 
+    .my-fund-operate { 
+      color:#6F6F70; 
+    }
+  }
+}
+
+.el-button--text {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333333;
 }

@@ -25,10 +25,10 @@ const utils = {
   isBeta: process.env.MODE === 'beta',
   isProd: process.env.NODE_ENV === 'production',
   locales: localeName,
-  getLocaleName (locale) {
+  getLocaleName(locale) {
     return localeName[locale] || 'Unknown'
   },
-  getUrlParam (name) {
+  getUrlParam(name) {
     var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
     var r = window.location.search.substr(1).match(reg)
     if (r !== null) {
@@ -36,7 +36,7 @@ const utils = {
     }
     return null
   },
-  getAppParam (name) {
+  getAppParam(name) {
     var reg = new RegExp('@' + name + '=([^@]*)(@|$)')
     var r = window.navigator.userAgent.match(reg)
     if (r !== null) {
@@ -44,7 +44,7 @@ const utils = {
     }
     return null
   },
-  getDefaultLang () {
+  getDefaultLang() {
     // return 'zh-CN'
     const lang = navigator.language
     if (/^en(-|$)/.test(lang)) {
@@ -61,7 +61,7 @@ const utils = {
     }
     return 'en'
   },
-  getGtLang (locale) {
+  getGtLang(locale) {
     if (locale === 'zh-CN') {
       return 'zh-cn'
     }
@@ -73,9 +73,9 @@ const utils = {
     }
     return 'en'
   },
-  getStorageValue (key, field) {
+  getStorageValue(key, field) {
     if ('localStorage' in window) {
-      let item = window.localStorage.getItem(key)
+      const item = window.localStorage.getItem(key)
       if (field) {
         return JSON.parse(item)[field]
       }
@@ -83,19 +83,19 @@ const utils = {
     }
     return ''
   },
-  setStorageValue (key, str) {
+  setStorageValue(key, str) {
     if ('localStorage' in window) {
       window.localStorage.setItem(key, str)
     }
   },
-  setSessionStorageValue (key, str) {
+  setSessionStorageValue(key, str) {
     if ('sessionStorage' in window) {
       window.sessionStorage.setItem(key, str)
     }
   },
-  getSessionStorageValue (key, field) {
+  getSessionStorageValue(key, field) {
     if ('sessionStorage' in window) {
-      let item = window.sessionStorage.getItem(key)
+      const item = window.sessionStorage.getItem(key)
       if (field) {
         return JSON.parse(item)[field]
       }
@@ -103,7 +103,7 @@ const utils = {
     }
     return ''
   },
-  getDefaultTimezone () {
+  getDefaultTimezone() {
     const data = window.localStorage.getItem('tradingview.chartproperties')
     if (data) {
       try {
@@ -153,7 +153,7 @@ const utils = {
         return ''
     }
   },
-  getFiatMoneyByLocale (locale) {
+  getFiatMoneyByLocale(locale) {
     const map = {
       'zh-CN': 'CNY',
       'zh-HK': 'HKD',
@@ -162,7 +162,7 @@ const utils = {
     }
     return map[locale] || 'USD'
   },
-  getFiatMoneySymbolByLocale (locale) {
+  getFiatMoneySymbolByLocale(locale) {
     const map = {
       'zh-CN': '¥',
       'zh-HK': 'HK$',
@@ -171,43 +171,43 @@ const utils = {
     }
     return map[locale] || 'US$'
   },
-  getFiatMoneySymbolByFiat (fiat) {
+  getFiatMoneySymbolByFiat(fiat) {
     const map = {
       'CNY': '¥',
       'USD': '$',
       'KRW': '₩',
       'HKD': 'HK$',
       'JPY': 'JP¥',
-      'SGD': 'S$',
+      'SGD': 'S$'
     }
     return map[fiat] || fiat
   },
-  preloadStart () {
+  preloadStart() {
     preloadEl.classList.add('show')
   },
-  preloadError (msg) {
+  preloadError(msg) {
     preloadEl.classList.add('error')
     preloadEl.querySelector('._a').innerHTML = msg
   },
-  preloadEnd () {
+  preloadEnd() {
     preloadEl.classList.remove('show')
   },
-  rand (n) {
+  rand(n) {
     return Math.floor(Math.random() * (n + 1))
   },
-  info (msg, id = msg) {
+  info(msg, id = msg) {
     return utils.alert(msg, id, 'info')
   },
-  success (msg, id = msg) {
+  success(msg, id = msg) {
     return utils.alert(msg, id, 'success')
   },
-  danger (msg, id = msg) {
+  danger(msg, id = msg) {
     return utils.alert(msg, id, 'danger')
   },
-  warning (msg, id = msg) {
+  warning(msg, id = msg) {
     return utils.alert(msg, id, 'warning')
   },
-  alert (msg, id = msg, style = 'danger') {
+  alert(msg, id = msg, style = 'danger') {
     return utils.notify({
       id,
       style,
@@ -215,7 +215,7 @@ const utils = {
       title: msg
     })
   },
-  confirm (self, options = {}) {
+  confirm(self, options = {}) {
     const {
       title,
       content,
@@ -236,7 +236,7 @@ const utils = {
       })
     })
   },
-  notify (options = {}) {
+  notify(options = {}) {
     if (!options.id) {
       options.id = _.uniqueId()
     }
@@ -251,7 +251,7 @@ const utils = {
       eventHub.$emit('app:notify', options)
     })
   },
-  getOffset (el) {
+  getOffset(el) {
     const box = el.getBoundingClientRect()
     return {
       width: box.width,
@@ -260,21 +260,21 @@ const utils = {
       left: box.left + window.pageXOffset - document.documentElement.clientLeft
     }
   },
-  sleep (t) {
+  sleep(t) {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(t)
       }, t)
     })
   },
-  async delay (promise, t = 500) {
+  async delay(promise, t = 500) {
     const [res] = await Promise.all([
       promise,
       utils.sleep(t)
     ])
     return res
   },
-  generateToken (len = 16) {
+  generateToken(len = 16) {
     const source = '1234567890qwertyuiopasdfghjklzxcvbnm'
     let token = ''
     for (let i = 0; i < len; i += 1) {
@@ -282,7 +282,7 @@ const utils = {
     }
     return token
   },
-  getDomain () {
+  getDomain() {
     if (utils.domain) {
       return utils.domain
     }
@@ -292,7 +292,7 @@ const utils = {
     utils.domain = match ? match[0] : domain
     return domain
   },
-  setCookie (name, value, days) {
+  setCookie(name, value, days) {
     utils.eraseCookie(name)
     let expires = ''
     if (days) {
@@ -302,7 +302,7 @@ const utils = {
     }
     document.cookie = name + '=' + (value || '') + expires + '; path=/; domain=' + utils.getDomain()
   },
-  getCookie (name) {
+  getCookie(name) {
     const nameEQ = name + '='
     const ca = document.cookie.split(';')
     for (let i = 0; i < ca.length; i += 1) {
@@ -316,14 +316,14 @@ const utils = {
     }
     return null
   },
-  eraseCookie (name) {
+  eraseCookie(name) {
     document.cookie = name + '=; Max-Age=-99999999;'
     document.cookie = name + '=; Max-Age=-99999999; domain=' + utils.getDomain()
   },
-  getCoinIcon (coin = '', color = 'b') {
+  getCoinIcon(coin = '', color = 'b') {
     return utils.staticPath + 'static/currency/' + color + '_' + coin.toLowerCase() + '@2x.png'
   },
-  getScript (source, key) {
+  getScript(source, key) {
     if (key && externalModule[key]) {
       // 缓存机制
       return externalModule[key]
@@ -336,7 +336,7 @@ const utils = {
       const prior = document.getElementsByTagName('script')[0]
       script.async = 1
       prior.parentNode.insertBefore(script, prior)
-      const onchange = function (_, isAbort) {
+      const onchange = function(_, isAbort) {
         if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) {
           script.onload = null
           script.onreadystatechange = null
@@ -356,7 +356,7 @@ const utils = {
     }
     return loader
   },
-  preloadImage (src) {
+  preloadImage(src) {
     return new Promise((resolve) => {
       const image = new Image()
       image.onload = () => resolve(true)
@@ -367,7 +367,7 @@ const utils = {
       }
     })
   },
-  getExtModule (key) {
+  getExtModule(key) {
     // the library js should assign the [key] to window object
     const map = {
       'key': 'static/keymaster.js',
@@ -375,13 +375,13 @@ const utils = {
     }
     return map[key] ? utils.getScript(map[key], key) : null
   },
-  leftpad (num) {
+  leftpad(num) {
     return num < 10 ? '0' + num : '' + num
   },
-  unixFormatter (unix, tpl) {
+  unixFormatter(unix, tpl) {
     return utils.dateFormatter(unix * 1000, tpl)
   },
-  dateFormatter (ts, tpl = 'Y-M-D H:m:s') {
+  dateFormatter(ts, tpl = 'Y-M-D H:m:s') {
     if (typeof ts === 'string') {
       ts = parseInt(ts)
     }
@@ -399,11 +399,11 @@ const utils = {
     }
     return tpl
   },
-  toThousand (num = 0) {
+  toThousand(num = 0) {
     if (typeof num === 'undefined') {
       return 0
     }
-    return (num || 0).toString().replace(/\d+/, function (n) {
+    return (num || 0).toString().replace(/\d+/, function(n) {
       var len = n.length
       if (len % 3 === 0) {
         return n.replace(/(\d{3})/g, ',$1').slice(1)
@@ -412,15 +412,15 @@ const utils = {
       }
     })
   },
-  toBig (num) {
+  toBig(num) {
     if (typeof num === 'undefined') {
       return 0
     }
     return Big(num).toString()
   },
-  toPretty (num) { 
+  toPretty(num) {
     num = Big(num || 0)
-    Big.RM = 0 // rm = 0,向下截取 
+    Big.RM = 0 // rm = 0,向下截取
     if (num < 100) {
       return num.toFixed(2)
     }
@@ -438,76 +438,76 @@ const utils = {
     }
     return num.div(1e9).toFixed(0) + ' B'
   },
-  toRound (num, scale = 20, rm = consts.ROUND_DOWN) {
+  toRound(num, scale = 20, rm = consts.ROUND_DOWN) {
     if (typeof num === 'undefined') {
       return 0
     }
     if (isNaN(num)) {
       return 0
     }
-    Big.NE = -16 //当小数超过16位时使用科学计数法
+    Big.NE = -16 // 当小数超过16位时使用科学计数法
     return Big(num).round(scale, rm).toString()
   },
-  toFixed (num, scale = 8, rm = consts.ROUND_DOWN) { 
+  toFixed(num, scale = 8, rm = consts.ROUND_DOWN) {
     if (isNaN(Number(num))) {
       return 0
     }
     return Big(num).round(scale, rm).toFixed(scale)
   },
-  toNum (num) {
+  toNum(num) {
     if (isNaN(Number(num))) {
       return 0
     }
     return +Big(num).toFixed(12)
   },
-  unsign (num) {
+  unsign(num) {
     return num > 0 ? num : 0
   },
-  getSign (num) {
+  getSign(num) {
     return Big(num).cmp(0)
   },
-  getRouteMeta (route, metaKey) {
+  getRouteMeta(route, metaKey) {
     const findMeta = _.findLast(route.matched, match => !_.isUndefined(match.meta[metaKey]))
     return findMeta && findMeta.meta[metaKey]
   },
-  getPreviewImage (file) {
+  getPreviewImage(file) {
     return new Promise((resolve, reject) => {
       if (!file) {
         return reject
       }
       const reader = new FileReader()
-      reader.onload = function (e) {
+      reader.onload = function(e) {
         resolve(e.target.result)
       }
-      reader.onerror = function (err) {
+      reader.onerror = function(err) {
         reject(err)
       }
       reader.readAsDataURL(file)
     })
   },
-  log () {},
-  logI () {},
-  logW () {},
-  logE () {},
-  isMobile () {
+  log() {},
+  logI() {},
+  logW() {},
+  logE() {},
+  isMobile() {
     return navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
   },
-  isIos () {
+  isIos() {
     return navigator.userAgent.match(/(iPhone|iPod|ios|iPad)/i)
   },
-  isAndroid () {
-    return navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1;
+  isAndroid() {
+    return navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1
   },
-  isWeiXin(){ 
+  isWeiXin() {
     return navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger' 
   },
   /**
    * 脱敏
    * @param arguments 多个要脱敏数据
    */
-  publicDesensitization () {
+  publicDesensitization() {
     // 先将内置的 arguments 转换为真正的数组
-    let dataArr = Array.prototype.slice.apply(arguments)
+    const dataArr = Array.prototype.slice.apply(arguments)
     for (let i = 0; i < dataArr.length; i++) {
       let data = dataArr[i]
       if (typeof data !== 'string') {
@@ -529,10 +529,10 @@ const utils = {
       } else if (/^\d{6,7}$/.test(data)) {
         data = data.substr(0, 2) + '**' + data.substr(-2)
       } else if (data.length === 2) {
-
+        console.log(111)
       } else {
-        let raw = dataArr[0]
-        let len = dataArr[1] || 6
+        const raw = dataArr[0]
+        const len = dataArr[1] || 6
         if (raw) {
           data = data.substr(0, len) + '****'
         }
@@ -541,7 +541,7 @@ const utils = {
     }
     return dataArr
   },
-  getBlockChainUrl (tx, type, chainName) {
+  getBlockChainUrl(tx, type, chainName) {
     let url = ''
     switch (chainName) {
       case 'BTC':
@@ -559,16 +559,16 @@ const utils = {
         break
     }
     return url
-  }, 
-  getComputedStyle (el, prop) {
+  },
+  getComputedStyle(el, prop) {
     if (!el) return {}
-    let styles = document.defaultView.getComputedStyle(el, null) || {}
+    const styles = document.defaultView.getComputedStyle(el, null) || {}
     if (prop) {
       return styles[prop]
     }
     return styles
   },
-  getGbLength (str) {
+  getGbLength(str) {
     if (!str) {
       return 0
     }
@@ -577,7 +577,7 @@ const utils = {
     }
     return str.replace(/[^\x00-\xff]/g, 'xx').length
   },
-  pretty (num, accuracy = 2) {
+  pretty(num, accuracy = 2) {
     num = Big(num || 0)
     if (num < 100) {
       return num.toFixed(accuracy)
@@ -599,29 +599,28 @@ const utils = {
     }
     return num.div(1e9).toFixed(0) + ' B'
   },
-  parseQueryString (url) {
-    let result = {}
-    if(url && url.indexOf('?')>-1) {
-      let str=url.split("?")[1],
-      items=str.split("&");
-      let arr,name,value;
-      for(let i = 0, l = items.length; i < l; i++){
-          arr=items[i].split("=");
-          name= arr[0];
-          value= arr[1];
-          result[name]=value;
+  parseQueryString(url) {
+    const result = {}
+    if (url && url.indexOf('?') > -1) {
+      const itemArr = url.split('?')[1].split('&')
+      let arr, name, value
+      for (let i = 0, l = itemArr.length; i < l; i++) {
+        arr = itemArr[i].split('=')
+        name = arr[0]
+        value = arr[1]
+        result[name] = value
       }
     }
-    return result;
+    return result
   }
 
 }
 
 if (process.env.NODE_ENV === 'development') {
-  utils.log = function () { console.log.apply(console, arguments) }
-  utils.logI = function () { console.info.apply(console, arguments) }
-  utils.logW = function () { console.warn.apply(console, arguments) }
-  utils.logE = function () { console.error.apply(console, arguments) }
+  utils.log = function() { console.log.apply(console, arguments) }
+  utils.logI = function() { console.info.apply(console, arguments) }
+  utils.logW = function() { console.warn.apply(console, arguments) }
+  utils.logE = function() { console.error.apply(console, arguments) }
   window.utils = utils
 }
 export default utils

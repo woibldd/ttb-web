@@ -1,3 +1,9 @@
+<!--
+ * @Author: zlccy
+ * @Date: 2019-09-17 12:02:20
+ * @LastEditTime: 2019-09-17 12:02:20
+ * @Description: file content
+ -->
 <template>
   <div
     id="app"
@@ -7,8 +13,8 @@
     @keyup.enter="onkeyup('enter')"
     @keyup.esc="onkeyup('esc')">
     <div
-      class="page-mask"
-      v-show="state.loading"/>
+      v-show="state.loading"
+      class="page-mask"/>
     <v-nav2
       v-if="showNav && !isMobile"
       :class="[navClass]"/>
@@ -16,22 +22,23 @@
       v-if="showNav && isMobile"
       :class="[navClass]"/>
     <div
-      class="main-container"
       ref="container"
-      :style="{background: 'initial'}">
-      <router-view/>
+      :style="{background: 'initial'}"
+      class="main-container">
+      <router-view :key="this.$route.path"/>
     </div>
     <v-footer
-      ref="footer"
       v-if="footer === 'default'"
-      :fixed="fixed"
-      v-show="showFooter"/>
-    <mobile-footer
+      v-show="showFooter"
       ref="footer"
+      :fixed="fixed"/>
+    <mobile-footer
       v-if="showFooter && footer === 'mobile'"
+      ref="footer"
       :fixed="fixed"
     />
     <v-notify-list/>
+    <giveMoneyAD v-if="isFirstLogin" v-model="isFirstLogin"></giveMoneyAD>
     <!-- <div
       class="home-ball"
       @click="toNotice"
@@ -47,11 +54,12 @@ import VNav2 from '@/components/VNav3.vue'
 import MobileNav from '@/components/Mobile/MobileNav.vue'
 import VFooter from '@/components/VFooter.vue'
 import MobileFooter from '@/pages/h5/footer'
-import {state, actions} from '@/modules/store'
+import { state, actions } from '@/modules/store'
 import utils from '@/modules/utils'
 import VNotifyList from '@/components/VNotifyList.vue'
-
-let zeStyleEl = document.querySelector('#ze-style')
+import giveMoneyAD from '@/components/giveMoneyAD'
+import service from '@/modules/service'
+const zeStyleEl = document.querySelector('#ze-style')
 
 export default {
   name: 'App',
@@ -60,30 +68,32 @@ export default {
     VFooter,
     VNotifyList,
     MobileFooter,
-    MobileNav
+    MobileNav,
+    giveMoneyAD
   },
-  data () {
+  data() {
     return {
       state,
       isMobile: utils.isMobile(),
       fixed: false,
-      showContact: true
+      showContact: true,
+      isFirstLogin:false
     }
   },
   computed: {
-    showNav () {
+    showNav() {
       if (!this.$route.name) {
         return false
       }
       return utils.getRouteMeta(this.$route, 'nav')
     },
-    showMobileNav () {
+    showMobileNav() {
       if (!this.$route.name) {
         return false
       }
       return utils.getRouteMeta(this.$route, 'mobileNav')
     },
-    showFooter () {
+    showFooter() {
       if (!this.$route.name) {
         return false
       }
@@ -92,20 +102,20 @@ export default {
       }
       return !(utils.getRouteMeta(this.$route, 'footer') === false)
     },
-    zendeskWidget () {
+    zendeskWidget() {
       if (!this.$route.name) {
         return false
       }
       return !(utils.getRouteMeta(this.$route, 'zendeskWidget') === false) && this.showContact
     },
-    navClass () {
+    navClass() {
       if (!this.$route.name) {
         return false
       }
       return utils.getRouteMeta(this.$route, 'class')
     },
-    bgColor () {
-      let navClass = this.navClass
+    bgColor() {
+      const navClass = this.navClass
       switch (navClass) {
         case 'login':
           return '#303E4B'
@@ -115,7 +125,7 @@ export default {
           return 'initial'
       }
     },
-    footer () {
+    footer() {
       if (this.state.theme.themeName === 'default' && !this.isMobile) {
         return 'default'
       }
@@ -125,14 +135,14 @@ export default {
     }
   },
   watch: {
-    showNav () {
+    showNav() {
       this.fixPosition()
     },
-    showFooter () {
+    showFooter() {
       this.fixPosition()
     },
-    zendeskWidget (show) {
-      window.zE && window.zE(function () {
+    zendeskWidget(show) {
+      window.zE && window.zE(function() {
         if (utils.isMobile()) {
           return window.zE.hide()
         }
@@ -143,14 +153,40 @@ export default {
       })
     }
   },
+  mounted() {
+    this.$eh.$on('app:resize', () => this.fixPosition())
+    this.$nextTick(this.fixPosition)
+
+  },
+  created() {
+    utils.$app = this
+    this.state.router = this.$router
+    this.$router.afterEach((to, from) => {
+      if (from.name === 'trading') {
+        this.$nextTick(() => {
+          this.fixPosition(from.name)
+        })
+      }
+    })
+    this.keepSession()
+    window.onresize = () => {
+      this.$eh.$emit('app:resize')
+    }
+    this.$eventBus.$on('handleFirstLogin',this.handleFirstLogin)
+  },
   methods: {
-    onkeyup (name) {
+    handleFirstLogin(){
+      state.userInfo && service.getLoginHistory().then(res=>{
+        if(res.data && res.data.length < 2 )this.isFirstLogin = true
+      })
+    },
+    onkeyup(name) {
       this.$eh.$emit('app:keyup:' + name)
     },
-    onclick (e) {
+    onclick(e) {
       this.$eh.$emit('app:click')
     },
-    fixPosition (name) {
+    fixPosition(name) {
       try {
         const box = this.$refs.container
         if (box) {
@@ -168,14 +204,14 @@ export default {
         console.log(e)
       }
     },
-    async keepSession () {
+    async keepSession() {
       await utils.sleep(6e5)
       if (this.state.userInfo) {
         await actions.updateSession()
       }
       this.keepSession()
     },
-    toNotice () {
+    toNotice() {
       let url = ''
       if (this.state.userInfo && this.state.theme.themeName === 'default') {
         url = process.env.BASE_API + 'ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
@@ -187,25 +223,6 @@ export default {
       } else {
         window.open(url)
       }
-    }
-  },
-  mounted () {
-    this.$eh.$on('app:resize', () => this.fixPosition())
-    this.$nextTick(this.fixPosition)
-  },
-  created () {
-    utils.$app = this
-    this.state.router = this.$router
-    this.$router.afterEach((to, from) => {
-      if (from.name === 'trading') {
-        this.$nextTick(() => {
-          this.fixPosition(from.name)
-        })
-      }
-    })
-    this.keepSession()
-    window.onresize = () => {
-      this.$eh.$emit('app:resize')
     }
   }
 }
@@ -219,6 +236,16 @@ button {
   outline:none;
   scrollbar-width: none;
 }
+input::-webkit-credentials-auto-fill-button {
+    display: none !important;
+    visibility: hidden;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+}
+input {
+  line-height: normal
+}
 @import "styles/reset.scss";
 @import "styles/index.scss";
 @media (max-width: 1378px) {
@@ -228,5 +255,10 @@ button {
 }
 .el-loading-mask {
   z-index: 1!important;
+}
+</style>
+<style>
+.el-input__inner {
+  line-height: normal!important;
 }
 </style>

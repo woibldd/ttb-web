@@ -16,9 +16,11 @@
           <el-option
             v-for="(item, idx) in allPairs"
             :key="idx"
-            :label="$t('contract_' + item.name)"
+            :label="$t('FUTURE_&USD', {currency: item.name.replace('FUTURE_','').replace('USD','')} )"
             :value="item"/>
         </el-select>
+        
+            <!-- :label="$t('contract_' + item.name)" -->
       </div>
       <div class="table-section">
         <table class="table-wrapper">

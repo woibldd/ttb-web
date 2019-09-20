@@ -9,16 +9,16 @@
         @mouseout="showPair(false)"
       >
         {{ pair | pairfix }}
-        <icon name="arrow-down" class="arrow" :class="{up: show}"/>
-        <div class="grid-pairtable" :class="{show: show}">
-          <PairNav :init-height="400" :sort="false" ref="PairNav"/>
+        <icon :class="{up: show}" name="arrow-down" class="arrow"/>
+        <div :class="{show: show}" class="grid-pairtable">
+          <PairNav ref="PairNav" :init-height="400" :sort="false"/>
         </div>
       </div>
       <p
-        class="fl grid-value"
         :class="{'color-up': delta > 0, 'color-down': delta < 0}"
+        class="fl grid-value"
       >{{ lastPrice }}</p>
-      <p class="fl grid-abt" :class="{'color-up': delta > 0, 'color-down': delta < 0}">
+      <p :class="{'color-up': delta > 0, 'color-down': delta < 0}" class="fl grid-abt">
         ≈ {{ state.fiatMoneySymbol }}
         <fiat-money :base="state.pro.currency_name" :value="lastPrice"/>
       </p>
@@ -38,22 +38,20 @@
         class="fl grid-tf-amount"
       >24H {{ $t('vol') }} {{ pairTick.volume_24h | round(2) }} {{ state.pro.product_name }}</p>
     </div>
-    <div class="row clearfix" v-if="state.showCountDown">
+    <div v-if="state.showCountDown" class="row clearfix">
       <p
         class="fl grid-increase"
       >{{ $t('trading_title_start_time', {startTime: $moment.unix(startTime).format('hh:mm:ss')}) }}</p>
       <p
-        class="fl grid-increase" 
+        class="fl grid-increase"
       >
-        {{$t('trading_title_end_time', {endTime: $moment.unix(endTime).format('hh:mm:ss')})}}
+        {{ $t('trading_title_end_time', {endTime: $moment.unix(endTime).format('hh:mm:ss')}) }}
         <span
           v-show="countDownStatus===1"
-          v-html="$t('trading_title_count_downE', {countdown:countDown})"> 
-        </span>  
+          v-html="$t('trading_title_count_downE', {countdown:countDown})"/>
         <span
           v-show="countDownStatus===2"
-          v-html="$t('trading_title_count_downS', {countdown:countDown})"> 
-        </span> 
+          v-html="$t('trading_title_count_downS', {countdown:countDown})"/>
       </p>
       <p class="fl grid-increase">{{ $t('trading_title_start_price', {price: state.price_open}) }}</p>
     </div>
@@ -61,12 +59,15 @@
 </template>
 
 <script>
-import { state } from "@/modules/store";
-import { pairfix } from "@/mixins/index";
-import isEmpty from "lodash/isEmpty";
-import PairNav from "@/components/Trading/PairNavForTitle";
+import { state } from '@/modules/store'
+import { pairfix } from '@/mixins/index'
+import isEmpty from 'lodash/isEmpty'
+import PairNav from '@/components/Trading/PairNavForTitle'
 
 export default {
+  components: {
+    PairNav
+  },
   mixins: [pairfix],
   data() {
     return {
@@ -74,59 +75,47 @@ export default {
       show: false,
       startTime: 0,
       endTime: 0,
-      countDown: "", 
+      countDown: '',
       interval: 0,
-      countDownStatus: 1,
-    };
-  },
-  components: {
-    PairNav
-  },
-  methods: {
-    showPair(toggle) { 
-      if (typeof toggle === "boolean") {
-        this.show = toggle;
-      } else {
-        this.show = !this.show;
-      }
+      countDownStatus: 1
     }
   },
   computed: {
     ready() {
-      return !isEmpty(this.pairTick);
+      return !isEmpty(this.pairTick)
     },
     pair() {
       if (this.state.pro.pair) {
-        return this.state.pro.pair;
+        return this.state.pro.pair
       } else {
-        return "";
+        return ''
       }
     },
     showCountDown() {
-      if (this.state.pro.pair === "SP_USDT") {
-        return true;
+      if (this.state.pro.pair === 'SP_USDT') {
+        return true
       } else {
-        return false;
+        return false
       }
     },
     lastPrice() {
       if (this.state.pro.lastPrice) {
         return this.state.pro.lastPrice.toFixed(
-          _.get(this, "state.pro.pairInfo.price_scale", 4)
-        );
+          _.get(this, 'state.pro.pairInfo.price_scale', 4)
+        )
       }
     },
     pairTick() {
       if (this.state.pro.pairTick) {
-        return this.state.pro.pairTick;
+        return this.state.pro.pairTick
       }
-      return {};
+      return {}
     },
-    delta() { 
-      const tick = this.state.pro.pairTick;
+    delta() {
+      const tick = this.state.pro.pairTick
       if (!tick || tick.increment_24h === tick.current) {
-        return 0;
-      } 
+        return 0
+      }
       // if(this.pair === "SP_USDT"){
       //   tick.increment_24h = this.$big(tick.current).minus(this.state.price_open || 0.017);
       // }
@@ -134,100 +123,105 @@ export default {
         .mul(100)
         .div(this.$big(tick.current).minus(tick.increment_24h))
         .round(2, this.C.ROUND_HALF_UP)
-        .toFixed(2);
-    }, 
-    startCountDown() { 
-      if(this.pair === "SP_USDT"){
-        let closelist = [];
+        .toFixed(2)
+    },
+    startCountDown() {
+      if (this.pair === 'SP_USDT') {
+        let closelist = []
         if (this.state.close_time) {
           closelist = this.state.close_time.match(
             /\[[\d\S]\]|\[[\d\S]*\-[\d\S]*\]/g
-          );
-        }
-        else {
-          closelist =  "[*][*][*][9:59-10:00]".match(
+          )
+        } else {
+          closelist = '[*][*][*][9:59-10:00]'.match(
             /\[[\d\S]\]|\[[\d\S]*\-[\d\S]*\]/g
-          );
+          )
         }
-        let date = new Date();
-        let year = date.getFullYear();
-        let month = date.getMonth() + 1;
-        let day = date.getDate();
-        let timeReg = closelist[3].replace("[", "").replace("]", "");
-        //timeReg = "16:50-17:06"
-        let end = timeReg.split("-")[0];
-        let start = timeReg.split("-")[1];
+        const date = new Date()
+        const year = date.getFullYear()
+        const month = date.getMonth() + 1
+        const day = date.getDate()
+        const timeReg = closelist[3].replace('[', '').replace(']', '')
+        // timeReg = "16:50-17:06"
+        const end = timeReg.split('-')[0]
+        const start = timeReg.split('-')[1]
 
-        let tickEnd = this.$moment(`${year}-${month}-${day} ${end}`);
-        let tickStart = this.$moment(`${year}-${month}-${day} ${start}`);
+        const tickEnd = this.$moment(`${year}-${month}-${day} ${end}`)
+        const tickStart = this.$moment(`${year}-${month}-${day} ${start}`)
 
-        this.startTime = tickStart.unix();
-        this.endTime = tickEnd.unix();
+        this.startTime = tickStart.unix()
+        this.endTime = tickEnd.unix()
 
-        var $this = this;
+        var $this = this
         setTimeout(function() {
-          let curTime = Math.round(new Date() / 1000); //开始时间
+          let curTime = Math.round(new Date() / 1000) // 开始时间
 
-          if(curTime > $this.endTime && curTime > $this.startTime) {
+          if (curTime > $this.endTime && curTime > $this.startTime) {
             $this.endTime += 86400
-            //停盘倒计时
+            // 停盘倒计时
             $this.countDownStatus = 1
-          }
-          else if(curTime < $this.endTime && curTime < $this.startTime) {
+          } else if (curTime < $this.endTime && curTime < $this.startTime) {
             $this.startTime -= 86400
-            //停盘倒计时
+            // 停盘倒计时
             $this.countDownStatus = 1
-          }
-          else { 
-            //开盘倒计时
+          } else {
+            // 开盘倒计时
             $this.countDownStatus = 2
           }
 
           this.interval = setInterval(function() {
-            var ts = $this.endTime - curTime; //计算剩余的毫秒数
-            if($this.endTime > $this.startTime) {
-              ts = $this.endTime - curTime; 
-              //console.log("停盘倒计时")
-              //停盘倒计时
+            var ts = $this.endTime - curTime // 计算剩余的毫秒数
+            if ($this.endTime > $this.startTime) {
+              ts = $this.endTime - curTime
+              // console.log("停盘倒计时")
+              // 停盘倒计时
               $this.countDownStatus = 1
-            }
-            else {
-              ts = $this.startTime - curTime; 
-              //console.log("开盘倒计时")
-              //开盘倒计时
-              $this.countDownStatus = 2
-            } 
-            var hh = parseInt((ts / 60 / 60) % 24, 10); //计算剩余的小时数
-            var mm = parseInt((ts / 60) % 60, 10); //计算剩余的分钟数
-            var ss = parseInt(ts % 60, 10); //计算剩余的秒数
-            hh = checkTime(hh);
-            mm = checkTime(mm);
-            ss = checkTime(ss);
-            if (ts > 0) {
-              $this.countDown = ` ${hh}:${mm}:${ss}`;
-              curTime = Math.round(new Date() / 1000);
             } else {
-              if($this.endTime > $this.startTime) {
-                $this.startTime += 86400 //一天的秒数
-                //转到开盘倒计时
-              }
-              else {
-                $this.endTime += 86400;
-                //转到停盘倒计时
-              }
-
+              ts = $this.startTime - curTime
+              // console.log("开盘倒计时")
+              // 开盘倒计时
+              $this.countDownStatus = 2
             }
-          }, 1000);
+            var hh = parseInt((ts / 60 / 60) % 24, 10) // 计算剩余的小时数
+            var mm = parseInt((ts / 60) % 60, 10) // 计算剩余的分钟数
+            var ss = parseInt(ts % 60, 10) // 计算剩余的秒数
+            hh = checkTime(hh)
+            mm = checkTime(mm)
+            ss = checkTime(ss)
+            if (ts > 0) {
+              $this.countDown = ` ${hh}:${mm}:${ss}`
+              curTime = Math.round(new Date() / 1000)
+            } else {
+              if ($this.endTime > $this.startTime) {
+                $this.startTime += 86400 // 一天的秒数
+                // 转到开盘倒计时
+              } else {
+                $this.endTime += 86400
+                // 转到停盘倒计时
+              }
+            }
+          }, 1000)
           function checkTime(i) {
             if (i < 10) {
-              i = "0" + i;
+              i = '0' + i
             }
-            return i;
+            return i
           }
-        }, 3000);
-      }
-      else {
+        }, 3000)
+      } else {
         clearInterval(this.interval)
+      }
+    }
+  },
+  watch: {
+    pair() {
+      if (this.startCountDown) {
+        this.startCountDown()
+      }
+    },
+    countDownStatus(v) {
+      if (v = 2) {
+        this.state.price_open = this.state.pro.lastPrice
       }
     }
   },
@@ -235,23 +229,20 @@ export default {
     //  this.$eh.$on("trading:countDown", this.startCountDown);
   },
   mounted() {
-    if(!!this.startCountDown) {
+    if (this.startCountDown) {
       this.startCountDown()
     }
   },
-  watch: {
-    pair() {
-      if(!!this.startCountDown) {
-        this.startCountDown()
-      }
-    },
-    countDownStatus(v){
-      if(v = 2){
-        this.state.price_open = this.state.pro.lastPrice;
+  methods: {
+    showPair(toggle) {
+      if (typeof toggle === 'boolean') {
+        this.show = toggle
+      } else {
+        this.show = !this.show
       }
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -281,7 +272,7 @@ export default {
         transform: rotate(180deg);
       }
     }
-  } 
+  }
   .grid-pairtable {
     position: absolute;
     top: 28px;

@@ -7,10 +7,12 @@
         </th>
         <th style="text-align:right;">
           <span v-if='viewtype==="transaction" && table.side === 1' class="status orange">
-            待支付
+            <!-- 待支付 -->
+            {{$t('otcState_1')}}
           </span>
           <span v-if='viewtype==="transaction" && table.side === 2' class="status orange">
-            等待对方付款
+            <!-- 等待对方付款 -->
+            {{$t('otc_sidees1')}}
           </span>
           <!-- <span v-else-if='viewtype==="order"' class="status orange">{{processValue('order_state', table)}}</span>  -->
         </th>

@@ -1,10 +1,10 @@
 <template>
   <div
-    class="history_table_container"
-    v-scroll-load="loadMore">
+    v-scroll-load="loadMore"
+    class="history_table_container">
     <table
-      class="table scroll--body mb-10"
-      v-show="!isFirst">
+      v-show="!isFirst"
+      class="table scroll--body mb-10">
       <tr class="tr th pt-15">
         <th
           v-for="header in headers"
@@ -16,34 +16,34 @@
       </tr>
       <tbody>
         <tr
-          class="tr td"
           v-for="(row, index) in bodyData"
-          :key="row.id && row.order_id ? (row.order_id +''+ row.id) : index">
+          :key="row.id && row.order_id ? (row.order_id +''+ row.id) : index"
+          class="tr td">
           <td
-            class="column"
-            align="center"
             v-for="header in headers"
-            @click="clickTd(row, header.key)"
             :key="header.title"
             :class="[{'pointer': header.key==='revert'}]"
             :style="{width: header.width ? header.width: 'auto'}"
+            class="column"
+            align="center"
+            @click="clickTd(row, header.key)"
           >
-            <span v-if="header.title === 'contract_trigger_price'" v-html="triggerPrice(processValue('trigger_price', row))"></span>
-            <span v-else-if="header.title === 'contract_trigger_price_rule'" v-html="triggerPrice(processValue('trigger_price', row), 1)" >
-            </span>
-            <span v-else-if="header.title==='contract_deal_price' ||
-                header.title === 'contract_assign_price'"
-                v-html="processValue(header.key, row)"/>
-            <span v-else-if="header.title=== 'contract_assign_value'"
-                v-html="processValue('contract_assign_value', row)"/>
+            <span v-if="header.title === 'contract_trigger_price'" v-html="triggerPrice('trigger_price', row)"/>
+            <span v-else-if="header.title === 'contract_trigger_price_rule'" v-html="triggerPrice('trigger_price', row, 1)" />
+            <span
+              v-else-if="header.title==='contract_deal_price' ||
+              header.title === 'contract_assign_price'"
+              v-html="processValue(header.key, row)"/>
+            <span
+              v-else-if="header.title=== 'contract_assign_value'"
+              v-html="processValue('contract_assign_value', row)"/>
             <span v-else v-html="processValue(header.key, row) "/>
-
           </td>
         </tr>
         <tr class="tr td">
           <td
-            align="center"
-            :colspan="headers.length">
+            :colspan="headers.length"
+            align="center">
             <span
               v-show="isLoading"
               style="line-height:13px">loading</span>
@@ -52,76 +52,77 @@
       </tbody>
     </table>
     <!-- 仓位tab -->
-    <div 
+    <div
       v-if="isFirst && isLogin && holdingList">
-      <div v-for="(cholding,idx) in holdingList" :key="idx" class="holding-box"> 
-        <div 
+      <div v-for="(cholding,idx) in holdingList" :key="idx" class="holding-box">
+        <div
           v-if="cholding.holding && cholding.holding != 0"
           class="werehouse-box"
-          >
+        >
           <div class="currency-col flex-column">
             <!-- <p>{{ $t('contract_' + symbol.name) }} </p> -->
-            <p>{{ $t('contract_FUTURE_' + cholding.currency) }} </p>
+            <!-- <p>{{ $t('contract_FUTURE_' + cholding.currency) }} </p> -->
+            <p> {{ $t('FUTURE_&USD', {currency: cholding.currency.replace('USD','')} ) }}</p>
             <p
-              class="mt-9"
-              :class="{'color-up': cholding.holding > 0, 'color-down':cholding.holding < 0}"> {{ cholding.holding > 0 ? $t('contract_action_button_up_r') : $t('contract_action_button_down_r') }} </p>
+              :class="{'color-up': cholding.holding > 0, 'color-down':cholding.holding < 0}"
+              class="mt-9"> {{ cholding.holding > 0 ? $t('contract_action_button_up_r') : $t('contract_action_button_down_r') }} </p>
           </div>
           <div class="equal-col">
             <div class="col__row mb-10">
               <span
-                class="label"
-                v-tooltip.top-center="{html: true, content: $t('contract_current_werehouse_poi_tips'), classes: 'contract'}">{{ $t('contract_current_werehouse_poi') }}</span> <span
-                  class="value"
-                  :class="{'color-up': cholding.holding > 0, 'color-down':cholding.holding < 0}">{{ cholding.holding }}</span>
+                v-tooltip.top-center="{html: true, content: $t('contract_current_werehouse_poi_tips'), classes: 'contract'}"
+                class="label">{{ $t('contract_current_werehouse_poi') }}</span> <span
+                  :class="{'color-up': cholding.holding > 0, 'color-down':cholding.holding < 0}"
+                  class="value">{{ cholding.holding }}</span>
             </div>
             <div class="col__row mb-13">
               <span
-                class="label"
-                v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_value_tips'), classes: 'contract'}">
+                v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_value_tips'), classes: 'contract'}"
+                class="label">
                 {{ $t('contract_history_postion_header_value') }}</span>
-                <span class="value">{{ cholding.value  | fixed(cholding.pairInfo.value_scale || 4) }}</span>
+              <span class="value">{{ cholding.value | fixed(cholding.pairInfo.value_scale || 4) }}</span>
             </div>
             <div class="col__row">
               <!-- 开仓价格 -->
               <span
-                class="label"
-                v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_avg_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_avg') }}</span> <span class="value">{{ cholding.price | round(cholding.pairInfo.price_scale || 2) }}</span>
+                v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_avg_tips'), classes: 'contract'}"
+                class="label">{{ $t('contract_history_postion_header_avg') }}</span> <span class="value">{{ cholding.price | round(cholding.pairInfo.price_scale || 2) }}</span>
             </div>
           </div>
           <div class="equal-col">
             <div class="col__row mb-10">
               <span
-                class="label"
-                v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_force_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_force') }}</span> 
-                <span class="value" >  
-                  {{ (cholding.liq_price || 0) | round(cholding.pairInfo.price_scale || 2) }}
-                </span>
+                v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_force_tips'), classes: 'contract'}"
+                class="label">{{ $t('contract_history_postion_header_force') }}</span>
+              <span class="value" >
+                {{ (cholding.liq_price || 0) | round(cholding.pairInfo.price_scale || 2) }}
+              </span>
             </div>
             <div class="col__row mb-10">
               <span
-                class="label"
-                v-tooltip.top-center="{html: true, content: $t('contract_mark_price_tips_table'), classes: 'contract'}">{{ $t('contract_mark_price') }}</span> <span class="value">{{ cholding.markPrice  | round(cholding.pairInfo.price_scale || 2) }}</span>
+                v-tooltip.top-center="{html: true, content: $t('contract_mark_price_tips_table'), classes: 'contract'}"
+                class="label">{{ $t('contract_mark_price') }}</span> <span class="value">{{ cholding.markPrice | round(cholding.mark_scale || 2) }}</span>
             </div>
             <div class="col__row">
               <span
-                class="label"
-                v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_promise_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_promise') }}</span>
+                v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_promise_tips'), classes: 'contract'}"
+                class="label">{{ $t('contract_history_postion_header_promise') }}</span>
               <div class="value">
                 <input
-                  type="number"
-                  v-model="cholding.margin_position"
-                  @click="showEnsModal(cholding)"
                   v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_promise_tips'), classes: 'contract'}"
+                  v-model="cholding.margin_position"
+                  :class="cholding.leverage == 0 ? '' : 'pointer'"
+                  type="number"
                   readonly
                   class="input-num "
-                  :class="cholding.leverage == 0 ? '' : 'pointer'"
-                  >
-                  <span
-                  v-if="cholding.leverage != 0"
                   @click="showEnsModal(cholding)"
+                >
+                <span
+                  v-if="cholding.leverage != 0"
                   class="input-lab pointer"
-                  >±</span>
-                  <!-- {{ pairInfo.product_name }} -->
+                  @click="showEnsModal(cholding)"
+                >±</span>
+                <!-- {{ pairInfo.product_name }} -->
               </div>
             </div>
           </div>
@@ -132,84 +133,85 @@
             <!-- 未实现盈亏 -->
             <div class="col__row mb-10">
               <span
-                class="label"
-                v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_delta_rate_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_delta_rate') }}</span>
-                <i class="value profit"  
-                  v-tooltip.top-center="{html: true, content: $t('contract_close_tips3'), classes: 'contract'}"
-                >
-                  <span 
-                    class="value val1" 
-                    :class="{'color-up': cholding.unrealized > 0, 'color-down': cholding.unrealized < 0}">
-                    {{ cholding.unrealized | fixed(cholding.pairInfo.value_scale || 4) }} ({{ cholding.roe  | fixed(2) }}%) 
-                  </span>
-                  <span
-                    class="value val2"
-                    :class="{ 'bgcolor-unp': cholding.unrealizedlp > 0,  'bgcolor-dnp': cholding.unrealizedlp < 0}">
-                    {{ cholding.unrealizedlp | fixed(cholding.pairInfo.value_scale || 4) }} ({{ cholding.roelp | fixed(2) }}%) 
-                  </span> 
+                v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_delta_rate_tips'), classes: 'contract'}"
+                class="label">{{ $t('contract_history_postion_header_delta_rate') }}</span>
+              <i
+                v-tooltip.top-center="{html: true, content: $t('contract_close_tips3'), classes: 'contract'}"
+                class="value profit"
+              >
+                <span
+                  :class="{'color-up': cholding.unrealized > 0, 'color-down': cholding.unrealized < 0}"
+                  class="value val1">
+                  {{ cholding.unrealized | fixed(cholding.pairInfo.value_scale || 4) }} ({{ cholding.roe | fixed(2) }}%)
+                </span>
+                <span
+                  :class="{ 'bgcolor-unp': cholding.unrealizedlp > 0, 'bgcolor-dnp': cholding.unrealizedlp < 0}"
+                  class="value val2">
+                  {{ cholding.unrealizedlp | fixed(cholding.pairInfo.value_scale || 4) }} ({{ cholding.roelp | fixed(2) }}%)
+                </span>
 
-                </i>
+              </i>
             </div>
             <div class="col__row">
               <span
-                class="label"
-                v-tooltip.top-center="{html: true, content: $t('contract_result_yet_tips'), classes: 'contract'}">{{ $t('contract_result_yet') }}</span> <span
-                  class="value"
-                  :class="{'color-up': cholding.realized > 0, 'color-down': cholding.realized < 0}">{{ cholding.realized | fixed(cholding.pairInfo.value_scale || 4) }}</span>
+                v-tooltip.top-center="{html: true, content: $t('contract_result_yet_tips'), classes: 'contract'}"
+                class="label">{{ $t('contract_result_yet') }}</span> <span
+                  :class="{'color-up': cholding.realized > 0, 'color-down': cholding.realized < 0}"
+                  class="value">{{ cholding.realized | fixed(cholding.pairInfo.value_scale || 4) }}</span>
             </div>
           </div>
           <!-- 平仓/市价全平 -->
-          <div class="operate-col pl-16 pt-16 close"
-            v-loading='cholding.clearLoading'> 
+          <!-- <div class="operate-col pl-16 pt-16 close"
+            v-loading='cholding.clearLoading'>
             <div
-              class="equal mr-21 "
-              v-if='!cholding.future_close_id'> 
-              <div
-                class="label mb-10 t-a-center nowrap"
-                v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}">{{ $t('contract_equal_werehouse_price') }}</div>
-              <!-- <input
-                type="number"
-                class="input-num mb-10"> -->
-                
-              <!-- :class="{'btn-disabled': btnDisabled }" -->
-              <!-- 限价平仓 -->  
-              <div
-                class="btn"
-                :class="{'btn-disabled': !cholding.unwindPrice  }"
-                
-                @click.prevent="submitOrder('limit', cholding)">
-                {{ $t('contract_action_open_short') }}  
-              </div>
-            </div> 
-            <div
-              class="equal"
+              class="operate-r "
               v-if='!cholding.future_close_id'>
-              <!-- <div class="label mb-6 t-a-center">{{ $t('contract_equal_werehouse_amount') }}</div> --> 
-              <!-- v-model="state.ct.markTickList[cholding.currency]" --> 
-              <input
+              <div
+                class="col1 label t-a-center nowrap"
+                v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}">{{ $t('平仓') }}
+              </div>
+              <div class="col2" >
+                <input
                 v-model="cholding.unwindPrice"
                 min=0
                 step="0.5"
                 @input="checkInput(cholding)"
                 ref='input_price'
                 v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}"
-                class="input-num mb-10"/> 
-               <!-- <number-input  
-                class="input-num mb-10"  
-                ref='input_price'
-                @focus="checkInput(cholding)"
-                :accuracy="cholding.pairInfo.accuracy"
-                v-model="cholding.unwindPrice"  
-                :scale="cholding.pairInfo.price_scale" 
-              /> -->
+                class="input-num"/>
+              </div>
               <div
-                class="btn full"
+                class="btn col2"
+                :class="{'btn-disabled': !cholding.unwindPrice  }"
+
+                @click.prevent="submitOrder('limit', cholding)">
+                {{ $t('contract_action_open_short') }}
+              </div>
+            </div>
+            <div
+              class="operate-r pt-10"
+              v-if='!cholding.future_close_id'>
+              <div
+                class="col1 label t-a-center nowrap"
+                v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}">{{ $t('amount') }}
+              </div>
+              <div class="col2" >
+                <input
+                  v-model="cholding.unwindAmount"
+                  min=0
+                  step="0.5"
+                  @input="checkInput(cholding)"
+                  ref='input_price'
+                  v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}"
+                  class="input-num"/>
+              </div>
+              <div
+                class="btn  col2 full"
                 @click.prevent="submitOrder('market', cholding)"
               >
                 {{ $t('contract_market_price') }}
               </div>
             </div>
-            <!-- yzf 2019/3/20 展示和关闭平仓委托-->
             <div class="equal"
               v-if='!!cholding.future_close_id'>
               <div
@@ -225,10 +227,79 @@
                   @click="cancel(cholding)"/>
               </div>
             </div>
-          </div> 
-        </div> 
-      </div> 
-    </div> 
+          </div>  -->
+          <div
+            v-loading="cholding.clearLoading"
+            class="operate-col pl-16 pt-16 close">
+            <div
+              v-if="!cholding.future_close_id"
+              class="equal mr-21 ">
+              <div
+                v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}"
+                class="label mb-10 t-a-center nowrap">{{ $t('contract_equal_werehouse_price') }}</div>
+              <!-- <input
+                type="number"
+                class="input-num mb-10"> -->
+
+              <!-- :class="{'btn-disabled': btnDisabled }" -->
+              <!-- 限价平仓 -->
+              <div
+                :class="{'btn-disabled': !cholding.unwindPrice }"
+                class="btn"
+
+                @click.prevent="submitOrder('limit', cholding)">
+                {{ $t('contract_action_open_short') }}
+              </div>
+            </div>
+            <div
+              v-if="!cholding.future_close_id"
+              class="equal">
+              <!-- <div class="label mb-6 t-a-center">{{ $t('contract_equal_werehouse_amount') }}</div> -->
+              <!-- v-model="state.ct.markTickList[cholding.currency]" -->
+              <input
+                v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}"
+                ref="input_price"
+                v-model="cholding.unwindPrice"
+                min="0"
+                step="0.5"
+                class="input-num mb-10"
+                @input="checkInput(cholding)">
+              <!-- <number-input
+                class="input-num mb-10"
+                ref='input_price'
+                @focus="checkInput(cholding)"
+                :accuracy="cholding.pairInfo.accuracy"
+                v-model="cholding.unwindPrice"
+                :scale="cholding.pairInfo.price_scale"
+              /> -->
+              <div
+                class="btn full"
+                @click.prevent="submitOrder('market', cholding)"
+              >
+                {{ $t('contract_market_price') }}
+              </div>
+            </div>
+            <!-- yzf 2019/3/20 展示和关闭平仓委托-->
+            <div
+              v-if="!!cholding.future_close_id"
+              class="equal">
+              <div
+                v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}"
+                class="label mb-10 t-a-left nowrap">{{ $t('contract_action_open_short') }}
+              </div>
+              <div>
+                <label
+                  class="label"
+                  v-html="$t('contract_history_close_content', { price: $big(cholding.close_position_price || 0).toFixed(cholding.pairInfo.price_scale || 2)})"/>
+                <span
+                  class="op op_cancel"
+                  @click="cancel(cholding)"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- 增加/减少保证金 modal -->
     <v-modal :open.sync="showPromiseFundModal">
       <div class="modal-operate-ensurance pd-26 c-333">
@@ -237,23 +308,23 @@
           <div class="showing-unit mb-24">
             <p class="mr-30">{{ $t('contract_show_unit') }}</p>
             <el-radio-group v-model="modal.radio">
-              <el-radio label='1'>{{ $t('contract_add_ensurance') }}</el-radio>
-              <el-radio label='-1'>{{ $t('contract_increase_ensurance') }}</el-radio>
+              <el-radio label="1">{{ $t('contract_add_ensurance') }}</el-radio>
+              <el-radio label="-1">{{ $t('contract_increase_ensurance') }}</el-radio>
             </el-radio-group>
           </div>
           <div class="current-info sp_container">
             <p class="mb-10"> <span class="dib mr-5">{{ $t('contract_your_current_werehouse') }} </span> {{ $t('contract_many_piece_con', {amount: selectedHolding.amount}) }} ({{ selectedHolding.leverage }}x)</p>
-            <p class="mb-10"> <span class="dib mr-5">{{ $t('contract_have_apply_yet') }}</span> {{ selectedHolding.margin_position  | round(selectedHolding.value_scale || 4) }} BTC</p>
+            <p class="mb-10"> <span class="dib mr-5">{{ $t('contract_have_apply_yet') }}</span> {{ selectedHolding.margin_position | round(selectedHolding.value_scale || 4) }} BTC</p>
             <p>
               <span
-                class="dib mr-5"
-                v-if="modal.radio === '1'">{{ $t('contract_aval_balance') }} </span>
+                v-if="modal.radio === '1'"
+                class="dib mr-5">{{ $t('contract_aval_balance') }} </span>
               <span
-                class="dib mr-5 cursor_help border_bottom_dash relative"
                 v-tooltip.left-start="{html: true, content: $t('contract_max_remove_account_tips'), classes: 'contract', placement:'.sp_container'}"
-                v-if="modal.radio !== '1'">{{ $t('contract_max_remove_account') }} </span>
+                v-if="modal.radio !== '1'"
+                class="dib mr-5 cursor_help border_bottom_dash relative">{{ $t('contract_max_remove_account') }} </span>
 
-              {{ modal.radio === '1' ? selectedHolding.canAddMargin : selectedHolding.canRemoveMargin  | round(selectedHolding.value_scale || 4) }} 
+              {{ modal.radio === '1' ? selectedHolding.canAddMargin : selectedHolding.canRemoveMargin | round(selectedHolding.value_scale || 4) }}
               <!-- {{ selectedHolding.product_name }} -->
               BTC
             </p>
@@ -262,11 +333,11 @@
             <p>{{ modal.radio === '1' ? $t('contract_add_ensurance') : $t('contract_increase_ensurance') }}</p>
             <p class="input-wrapper">
               <el-input
-                class="mt-15"
-                type='number'
-                min="0"
                 :max="modal.radio === '1' ? selectedHolding.canAddMargin : selectedHolding.canRemoveMargin"
-                v-model="modal.amount"/>
+                v-model="modal.amount"
+                class="mt-15"
+                type="number"
+                min="0"/>
               <span class="unit">
                 BTC
                 <!-- {{ selectedHolding.product_name }} -->
@@ -278,47 +349,47 @@
               class="btn-cancel pointer"
               @click="showPromiseFundModal = false">{{ $t('cancel') }}</div>
             <v-btn
-              class="btn"
               :class="{'btn-disabled': btnEnsuranceDisabled }"
-              @click="changePromiseFund"
-              :label="modal.radio === '1' ? $t('contract_add_ensurance') : $t('contract_increase_ensurance')"/>
+              :label="modal.radio === '1' ? $t('contract_add_ensurance') : $t('contract_increase_ensurance')"
+              class="btn"
+              @click="changePromiseFund"/>
               <!-- 此处需要根据modal是弹出操作源头,显示增减 -->
           </div>
         </div>
       </div>
     </v-modal>
     <div
-      class="mask"
       v-if="!isLogin"
-      :class="{show: state.userStatus === 0}">
+      :class="{show: state.userStatus === 0}"
+      class="mask">
       <div class="mask-front">
         <div class="hint">{{ $t('operate_noauth') }}</div>
         <div class="link-group">
           <!-- <router-link
             class="link btn ibt signin bgcolor-up"
             :to="{name: 'login'}"><span>{{ $t('signin') }}</span></router-link> -->
-            <span
-              class="link btn ibt signin bgcolor-up"
-              @click="tologin"
-            >{{ $t('signin') }}</span>
+          <span
+            class="link btn ibt signin bgcolor-up"
+            @click="tologin"
+          >{{ $t('signin') }}</span>
           <router-link
-            class="link btn ibt signup bgcolor-down"
-            :to="{name: 'register'}"><span>{{ $t('signup') }}</span></router-link>
+            :to="{name: 'register'}"
+            class="link btn ibt signup bgcolor-down"><span>{{ $t('signup') }}</span></router-link>
         </div>
       </div>
     </div>
     <div
-      class="mask show loadfailed"
-      v-if="state.loadingfailed">
+      v-if="state.loadingfailed"
+      class="mask show loadfailed">
       <div class="mask-front ">
         <div class="hint">
-          <i class="icon"></i>
+          <i class="icon"/>
         </div>
         <div class="hint">
           {{ $t('contract_loading') }}
           <a
-            @click='reload'
-          >{{ $t('contract_reload')}}</a>
+            @click="reload"
+          >{{ $t('contract_reload') }}</a>
         </div>
       </div>
     </div>
@@ -326,7 +397,7 @@
 </template>
 <script>
 import service from '@/modules/service'
-import {state, actions} from '@/modules/store'
+import { state, actions } from '@/modules/store'
 import utils from '@/modules/utils'
 import stateHoldingMixins from '../stateHoldingComputedMixins'
 import pairInfoMixins from '../statePairInfoComputedMixins'
@@ -335,22 +406,6 @@ import orderWatcher from '@/mixins/contract-order-watcher'
 import processValue from '@/mixins/process-contract-value'
 
 export default {
-  data () {
-    return {
-      state,
-      showPromiseFundModal: false,
-      modal: {
-        amount: '',
-        radio: '1' // 1增加保证金, -1 减少
-      },
-      // unwindPrice: this.markPrice,
-      bindMarkPrice: true,
-      clearWarehouseLoading: false,
-      //showupm: true, 
-      showupm: '',
-      selectedHolding: {}, 
-    }
-  },
   mixins: [
     pairInfoMixins,
     stateMixins,
@@ -358,331 +413,6 @@ export default {
     orderWatcher,
     processValue
   ],
-  computed: {
-    isLoading () {
-      return this.loading
-    },
-    isLogin () {
-      return !!this.state.userInfo
-    },
-    isFirst () {
-      return this.name && this.name === 'contract_history_position'
-    },
-    bodyData () { 
-      console.log(this.tableData) 
-      if (Array.isArray(this.tableData)) {
-        let dataview = this.tableData.map((val)=> {
-          let row = val 
-          return row
-        }) 
-        return dataview
-      }
-      return []
-    },
-    pairInfo () {
-      if (this.state.ct.pairInfo) {
-        return this.state.ct.pairInfo
-      }
-      return {}
-    },
-    lastPrice () {
-      if (this.state.ct.lastPrice) {
-        return this.state.ct.lastPrice.toString()
-      }
-    },
-    btnDisabled () {
-      return !this.unwindPrice || this.unwindPrice == "0"
-    },
-    btnEnsuranceDisabled() {
-      return !this.modal.amount || this.modal.amount == "0" 
-    },
-    holdingData() {
-      return this.state.ct.computeHoldingList
-    }, 
-  },
-  methods: {
-    tologin() {
-      //console.log(this.$route.fullPath)
-      utils.setStorageValue("LoginBack", "/contract.html")
-      actions.setLoginBack( "/contract.html")
-      this.$router.push({
-        name: 'login'
-      })
-    },
-    //价格输入框过滤，对不符合格式的输入值进行过滤
-    transforPrice(v){
-      //console.log('transforPrice')
-      if(Number(v)){
-        let accuracy = this.pairInfo.accuracy || 1
-        let scale = this.pairInfo.price_scale || 4
-        const minStep = Math.pow(10, -scale) * accuracy
-        let $newValue = this.$big( v || 0)
-        if (!$newValue.mod(minStep).eq(0)) {
-          $newValue = $newValue.div(minStep).round(scale >= 1 ? scale - 1 : 0, 0).mul(minStep)
-        }
-        return $newValue
-      }
-    },
-    triggerPrice (trgPrice, type = 0) {
-        let diffPrice = this.lastPrice - trgPrice
-        let triggerPriceStr = ''
-        if (trgPrice == 0) {
-          triggerPriceStr = '--'
-        } else if (type === 0) {
-           if (diffPrice > 0){
-              triggerPriceStr = `<=${trgPrice}`
-          }
-          else{
-              triggerPriceStr = `>=${trgPrice}`
-          }
-        }
-        else {
-          if (diffPrice > 0){
-              triggerPriceStr = `${this.lastPrice}(<span class='font-color-sell'>+${ diffPrice.toFixed(1) }</span>)`
-          }
-          else{
-              triggerPriceStr = `${this.lastPrice}(<span class='font-color-buy'>${diffPrice}</span>)`
-          }
-        }
-        return triggerPriceStr;
-    },
-    loadMore () {
-      this.$emit('loadMore')
-    },
-    clickTd (row, key) {
-      if (key === 'revert') {
-        const params = {
-          symbol: row.symbol || this.pairInfo.name,
-          order_id: row.id
-        }
-        service.revertContract(params).then(res => {
-          if (!res.code) {
-            // utils.success()
-            // 刷新所有订单
-            this.$toast({title: this.$t('delegate_cancellation'),body: this.$t('contract_revert_success'),color: 'yellow'})
-            this.$eh.$emit('protrade:order:refresh','clickTd')
-          } else {
-            this.$toast({title: this.$t('delegation_cancellation_failed'),body: res.message,color: 'red'})
-            // utils.alert()
-          }
-        })
-      }
-      //console.log(row, key)
-    },
-    showEnsModal (cholding) {
-      // console.log(this.holding.leverage)
-      // if(this.holding.leverage != 0)
-      //   this.showPromiseFundModal = true
-      console.log({cholding})
-      this.selectedHolding = cholding
-      if(cholding.leverage != 0)
-        this.showPromiseFundModal = true
-
-    },
-    changePromiseFund () {  
-      if(this.btnEnsuranceDisabled) return;
-      let max = this.modal.radio === '1' ? this.selectedHolding.canAddMargin : this.selectedHolding.canRemoveMargin
-      let amount = this.modal.amount
-      if (!amount || this.$big(amount).lte(0)) {
-        amount = 0
-        this.modal.amount = amount
-        return
-      } else if (this.$big(amount).gt(max)) {
-        amount = max
-        this.modal.amount = amount
-        utils.alert(this.$t('contract_margin_over_amount'))
-        return
-      }
-      let params = {
-        amount,
-        currency: this.selectedHolding.currency
-      }
-      params.amount = Number(this.modal.radio) * Number(params.amount)
-      service.changePromiseFund(params).then(res => {
-        console.log('change 保证金, 传参是:', params.amount)
-        let  type = ''
-        if (params.amount>0){
-          type = '增加'
-        } else {
-          type = '减少'
-        }
-        if (!res.code) {
-          utils.success(this.$t('contract_order_success_type',{orderType:type}))
-          this.$eh.$emit('protrade:order:refresh','changePromiseFund')
-        } else {
-          utils.alert(res.message)
-        }
-      }).finally(() => {
-        this.showPromiseFundModal = false
-      })
-    },
-    async submitOrder (type, holding) {
-       
-      if (!holding.amount) return 
-      // if (this.btnDisabled) return
-      if (!type) {
-        type = 'limit'
-      }
-      if (type === 'limit' && (!holding.unwindPrice || holding.unwindPrice == "0")) {
-        return
-      }
- 
-      let title = ""
-      // let content = ""
-      let confirmText = ""
-      let side = ""
-      let price = 0
-      //限价
-      let msg = 'contract_close_tips1'; 
-      if (type === 'limit'){
-        confirmText = this.$t('contract_close_limit')
-        if(holding.amount > 0) {
-          title = this.$t('contract_close_limit_sell')
-        } else if (holding.amount < 0) {
-          title = this.$t('contract_close_limit_buy')
-        }
-        price = holding.unwindPrice
-      }
-      //市价
-      else {
-        confirmText = this.$t('contract_close_market')
-        msg = 'contract_close_tips4'
-        if(holding.amount > 0) {
-          title = this.$t('contract_close_market_sell')
-        } else if (holding.amount < 0) {
-          title = this.$t('contract_close_market_buy')
-        }
-        // price = this.lastPrice
-       // price = holding.lastPrice
-      } 
-      if(holding.amount > 0) {
-        side = this.$t('order_side_sell')
-      } else if (holding.amount < 0) {
-        side = this.$t('order_side_buy')
-      }
-
-      const h = this.$createElement;
-      let message = h('div', {style: 'text-align: center;'}, [
-          h('div', { style: 'margin:10px; font-size: 16px;'}, [
-          h('span', { style: holding.amount > 0 ? 'color: #F24E4D' : 'color: #09C989' }, side ),
-          h('span', null, this.$t(msg,{ price, amount: Math.abs(holding.amount), currency: holding.product_name}))]),
-          h('div', {style: 'font-size: 16px;'},  this.$t('contract_close_tips2'))
-        ])
- 
-      // this.clearWarehouseLoading = true
-      holding.clearLoading = true
-      const ok = await utils.confirm(this, {
-        customClass: "ix-message-box-wrapper",
-        confirmBtnText: confirmText,
-        confirmButtonClass: "btn--confirm",
-        cancelButtonClass: "btn--cancel",
-        title,
-        message
-      });
-
-      
-      if (!ok) {
-        // this.clearWarehouseLoading = false 
-        holding.clearLoading = false
-        return;
-      }
-
-      //已有平仓订单
-      if (holding.future_close_id) {
-        utils.alert(this.$t('contract_order_repeat'))
-        // this.clearWarehouseLoading = false
-        holding.clearLoading = false
-        return
-      }
-      //let $price = this.unwindPrice.toString()
-      let $price = price
-      if (this.$big($price).lt(0)) {
-        holding.unwindPrice = 0
-        $price = '0'
-      }
-      
-      let order = {
-        price: type === 'market' ? '0' : $price.toString(),
-        symbol: holding.pairInfo.name
-      }
-      let res = await service.orderContractClose(order)
-      if (!res.code) {
-        utils.success(this.$t('successful_closing'))
-        //平仓订单提交后 更新平仓价格，之后刷新会从接口中重新获取，但是会有延迟
-        // this.state.ct.curCommitPrice = $price
-
-        this.$eh.$emit('protrade:order:refresh', 1 )
-        //this.$eh.$emit('protrade:order:refresh', 'submitOrder' )
-        //this.clearWarehouseLoading = false
-        holding.clearLoading = false
-      } else {
-        utils.alert(res.message)
-        //this.clearWarehouseLoading = false
-        holding.clearLoading = false
-      }
-    },
-    set ({price, amount, dontOveride, side}) {
-      // if (price) {
-      //   if (!dontOveride || (dontOveride && (!holding.unwindPrice || holding.unwindPrice == 0))) {
-      //     holding.unwindPrice = price
-      //   }
-      // }
-    },
-    checkInput (cholding) {  
-      cholding.changeUnwindPrice = true
-      // console.log({cholding})
-      let $oldValue = this.$big(cholding.unwindPrice || 0)
-      let $newValue = this.$big(cholding.unwindPrice || 0)
-      if (cholding.unwindPrice && cholding.currency === 'BTCUSD'){
-        let accuracy = cholding.pairInfo.accuracy || 1
-        let scale = cholding.pairInfo.price_scale || 4
-        const minStep = Math.pow(10, -scale) * accuracy
-        if (!$newValue.mod(minStep).eq(0)) {
-          $newValue = $newValue.div(minStep).round(scale >= 1 ? scale - 1 : 0, 0).mul(minStep)
-        }
-        if (!$oldValue.eq($newValue)){
-          cholding.unwindPrice = $newValue.toString()
-        }
-      }
-      else {
-        $newValue = this.$big(cholding.unwindPrice).round(cholding.pairInfo.price_scale || 2, 0)
-        if (!$oldValue.eq($newValue)){
-          cholding.unwindPrice = $newValue.toString()
-        }
-      }
-    },
-    inputPriceOnfocus(){
-      this.bindMarkPrice = false
-      console.log(this.bindMarkPrice)
-    },
-    cancel (holding) {
-      console.log('close current Entrust', this.pairInfo.name, holding.future_close_id)
-      //this.clearWarehouseLoading = true
-      holding.clearLoading = true
-      const params = {
-          symbol: holding.pairInfo.name,
-          order_id: holding.future_close_id
-        }
-        service.revertContract(params).then(res => {
-          if (!res.code) {
-            utils.success(this.$t('contract_revert_success'))
-            // 刷新所有订单
-            this.$eh.$emit('protrade:order:refresh', 1)
-            //this.clearWarehouseLoading = false
-            holding.clearLoading = false
-          } else {
-            utils.alert(res.message)
-            //this.clearWarehouseLoading = false
-            holding.clearLoading = false
-          }
-        })
-    },
-    reload () {
-      this.$eh.$emit('protrade:order:refresh','reload')
-      state.loadingfailed=false;
-    },
-     
-  },
   props: {
     loading: {
       type: Boolean,
@@ -694,24 +424,82 @@ export default {
     },
     headers: {
       type: Array,
-      default () {
+      default() {
         return []
       }
     },
     tableData: {
       type: Array | Object,
-      default () {
+      default() {
         return {}
       }
     },
     activeList: {
       type: Array | Object,
-      default () {
+      default() {
         return []
       }
     }
   },
-  watch: {   
+  data() {
+    return {
+      state,
+      showPromiseFundModal: false,
+      modal: {
+        amount: '',
+        radio: '1' // 1增加保证金, -1 减少
+      },
+      // unwindPrice: this.markPrice,
+      bindMarkPrice: true,
+      clearWarehouseLoading: false,
+      // showupm: true,
+      showupm: '',
+      selectedHolding: {}
+    }
+  },
+  computed: {
+    isLoading() {
+      return this.loading
+    },
+    isLogin() {
+      return !!this.state.userInfo
+    },
+    isFirst() {
+      return this.name && this.name === 'contract_history_position'
+    },
+    bodyData() {
+      console.log(this.tableData)
+      if (Array.isArray(this.tableData)) {
+        const dataview = this.tableData.map((val) => {
+          const row = val
+          return row
+        })
+        return dataview
+      }
+      return []
+    },
+    pairInfo() {
+      if (this.state.ct.pairInfo) {
+        return this.state.ct.pairInfo
+      }
+      return {}
+    },
+    lastPrice() {
+      if (this.state.ct.lastPrice) {
+        return this.state.ct.lastPrice.toString()
+      }
+    },
+    btnDisabled() {
+      return !this.unwindPrice || this.unwindPrice == '0'
+    },
+    btnEnsuranceDisabled() {
+      return !this.modal.amount || this.modal.amount == '0'
+    },
+    holdingData() {
+      return this.state.ct.computeHoldingList
+    }
+  },
+  watch: {
     // unwindPrice(v){
     //   let accuracy = this.pairInfo.accuracy || 1
     //   let scale = this.pairInfo.price_scale || 4
@@ -726,29 +514,329 @@ export default {
     //   this.holding.roe = this.roe
     // },
     markPrice(v) {
-      if(this.bindMarkPrice){
+      if (this.bindMarkPrice) {
         // console.log(this.bindMarkPrice)
         this.unwindPrice = this.transforPrice(v)
       }
-    },
+    }
   },
-  created () {
+  created() {
     this.$eh.$on('protrade:exchange:set', this.set)
     this.unwindPrice = this.transforPrice(this.markPrice)
-    //平仓价格跟随标记价格变动，但是获得一次焦点后就不再变化，
-    //在切换tab或刷新页面再重新绑定标记价格
+    // 平仓价格跟随标记价格变动，但是获得一次焦点后就不再变化，
+    // 在切换tab或刷新页面再重新绑定标记价格
     setTimeout(x => {
       this.$nextTick(() => {
-        if(this.$refs.input_price){
+        if (this.$refs.input_price) {
           console.log('refs:' + this.$refs.input_price)
 
-          this.$refs.input_price.onfocus = () => { this.bindMarkPrice = false;}
+          this.$refs.input_price.onfocus = () => { this.bindMarkPrice = false }
         }
-      });
-    }, 1000);
+      })
+    }, 1000)
   },
-  destroyed () {
+  destroyed() {
     this.$eh.$off('protrade:exchange:set', this.set)
+  },
+  methods: {
+    tologin() {
+      // console.log(this.$route.fullPath)
+      utils.setStorageValue('LoginBack', '/contract.html')
+      actions.setLoginBack('/contract.html')
+      this.$router.push({
+        name: 'login'
+      })
+    },
+    // 价格输入框过滤，对不符合格式的输入值进行过滤
+    transforPrice(v) {
+      // console.log('transforPrice')
+      if (Number(v)) {
+        const accuracy = this.pairInfo.accuracy || 1
+        const scale = this.pairInfo.price_scale || 4
+        const minStep = Math.pow(10, -scale) * accuracy
+        let $newValue = this.$big(v || 0)
+        if (!$newValue.mod(minStep).eq(0)) {
+          $newValue = $newValue.div(minStep).round(scale >= 1 ? scale - 1 : 0, 0).mul(minStep)
+        }
+        return $newValue
+      }
+    },
+    triggerPrice(key, row, type = 0) {
+      // this.state.ct.lastPriceList
+      const trgPrice = row[key]
+      const lastPrice = this.state.ct.lastPriceList[row.currency] || 0
+      const diffPrice = this.$big(lastPrice).minus(trgPrice)
+      let triggerPriceStr = ''
+      if (trgPrice == 0) {
+        triggerPriceStr = '--'
+      } else if (type === 0) {
+        // if (diffPrice > 0){
+        //     triggerPriceStr = `<=${trgPrice}`
+        // }
+        // else{
+        //     triggerPriceStr = `>=${trgPrice}`
+        // }
+        if (row.side == 1) {
+          // 止损
+          if (row.type == 3 || row.type == 4) {
+            triggerPriceStr = `>=${trgPrice}`
+          }
+          // 止盈
+          else if (row.type == 5 || row.type == 6) {
+            triggerPriceStr = `<=${trgPrice}`
+          }
+        }
+        // 卖出
+        else if (row.side == 2) {
+          // 止损
+          if (row.type == 3 || row.type == 4) {
+            triggerPriceStr = `<=${trgPrice}`
+          }
+          // 止盈
+          else if (row.type == 5 || row.type == 6) {
+            triggerPriceStr = `>=${trgPrice}`
+          }
+        }
+      } else {
+        if (diffPrice.gt(0)) {
+          triggerPriceStr = `${lastPrice}(<span class='font-color-sell'>+${diffPrice.toString()}</span>)`
+        } else {
+          triggerPriceStr = `${lastPrice}(<span class='font-color-buy'>${diffPrice.toString()}</span>)`
+        }
+      }
+      return triggerPriceStr
+    },
+    loadMore() {
+      this.$emit('loadMore')
+    },
+    clickTd(row, key) {
+      if (key === 'revert') {
+        const params = {
+          symbol: row.symbol || this.pairInfo.name,
+          order_id: row.id
+        }
+        service.revertContract(params).then(res => {
+          if (!res.code) {
+            // utils.success()
+            // 刷新所有订单
+            this.$toast({ title: this.$t('delegate_cancellation'), body: this.$t('contract_revert_success'), color: 'yellow' })
+            this.$eh.$emit('protrade:order:refresh', 'clickTd')
+          } else {
+            this.$toast({ title: this.$t('delegation_cancellation_failed'), body: res.message, color: 'red' })
+            // utils.alert()
+          }
+        })
+      }
+      // console.log(row, key)
+    },
+    showEnsModal(cholding) {
+      // console.log(this.holding.leverage)
+      // if(this.holding.leverage != 0)
+      //   this.showPromiseFundModal = true
+      console.log({ cholding })
+      this.selectedHolding = cholding
+      if (cholding.leverage != 0) { this.showPromiseFundModal = true }
+    },
+    changePromiseFund() {
+      if (this.btnEnsuranceDisabled) return
+      const max = this.modal.radio === '1' ? this.selectedHolding.canAddMargin : this.selectedHolding.canRemoveMargin
+      let amount = this.modal.amount
+      if (!amount || this.$big(amount).lte(0)) {
+        amount = 0
+        this.modal.amount = amount
+        return
+      } else if (this.$big(amount).gt(max)) {
+        amount = max
+        this.modal.amount = amount
+        utils.alert(this.$t('contract_margin_over_amount'))
+        return
+      }
+      const params = {
+        amount,
+        currency: this.selectedHolding.currency
+      }
+      params.amount = Number(this.modal.radio) * Number(params.amount)
+      service.changePromiseFund(params).then(res => {
+        console.log('change 保证金, 传参是:', params.amount)
+        let type = ''
+        if (params.amount > 0) {
+          type = '增加'
+        } else {
+          type = '减少'
+        }
+        if (!res.code) {
+          utils.success(this.$t('contract_order_success_type', { orderType: type }))
+          this.$eh.$emit('protrade:order:refresh', 'changePromiseFund')
+        } else {
+          utils.alert(res.message)
+        }
+      }).finally(() => {
+        this.showPromiseFundModal = false
+      })
+    },
+    async submitOrder(type, holding) {
+      if (!holding.amount) return
+      // if (this.btnDisabled) return
+      if (!type) {
+        type = 'limit'
+      }
+      if (type === 'limit' && (!holding.unwindPrice || holding.unwindPrice == '0')) {
+        return
+      }
+
+      let title = ''
+      // let content = ""
+      let confirmText = ''
+      let side = ''
+      let price = 0
+      // 限价
+      let msg = 'contract_close_tips1'
+      if (type === 'limit') {
+        confirmText = this.$t('contract_close_limit')
+        if (holding.amount > 0) {
+          title = this.$t('contract_close_limit_sell')
+        } else if (holding.amount < 0) {
+          title = this.$t('contract_close_limit_buy')
+        }
+        price = holding.unwindPrice
+      }
+      // 市价
+      else {
+        confirmText = this.$t('contract_close_market')
+        msg = 'contract_close_tips4'
+        if (holding.amount > 0) {
+          title = this.$t('contract_close_market_sell')
+        } else if (holding.amount < 0) {
+          title = this.$t('contract_close_market_buy')
+        }
+        // price = this.lastPrice
+        // price = holding.lastPrice
+      }
+      if (holding.amount > 0) {
+        side = this.$t('order_side_sell')
+      } else if (holding.amount < 0) {
+        side = this.$t('order_side_buy')
+      }
+
+      const h = this.$createElement
+      const message = h('div', { style: 'text-align: center;' }, [
+        h('div', { style: 'margin:10px; font-size: 16px;' }, [
+          h('span', { style: holding.amount > 0 ? 'color: #F24E4D' : 'color: #09C989' }, side),
+          h('span', null, this.$t(msg, { price, amount: Math.abs(holding.amount), currency: holding.product_name }))]),
+        h('div', { style: 'font-size: 16px;' }, this.$t('contract_close_tips2'))
+      ])
+
+      // this.clearWarehouseLoading = true
+      holding.clearLoading = true
+      const ok = await utils.confirm(this, {
+        customClass: 'ix-message-box-wrapper',
+        confirmBtnText: confirmText,
+        confirmButtonClass: 'btn--confirm',
+        cancelButtonClass: 'btn--cancel',
+        title,
+        message
+      })
+
+      if (!ok) {
+        // this.clearWarehouseLoading = false
+        holding.clearLoading = false
+        return
+      }
+
+      // 已有平仓订单
+      if (holding.future_close_id) {
+        utils.alert(this.$t('contract_order_repeat'))
+        // this.clearWarehouseLoading = false
+        holding.clearLoading = false
+        return
+      }
+      // let $price = this.unwindPrice.toString()
+      let $price = price
+      if (this.$big($price).lt(0)) {
+        holding.unwindPrice = 0
+        $price = '0'
+      }
+
+      const order = {
+        price: type === 'market' ? '0' : $price.toString(),
+        symbol: holding.pairInfo.name
+      }
+      const res = await service.orderContractClose(order)
+      if (!res.code) {
+        utils.success(this.$t('successful_closing'))
+        // 平仓订单提交后 更新平仓价格，之后刷新会从接口中重新获取，但是会有延迟
+        // this.state.ct.curCommitPrice = $price
+
+        this.$eh.$emit('protrade:order:refresh', 1)
+        // this.$eh.$emit('protrade:order:refresh', 'submitOrder' )
+        // this.clearWarehouseLoading = false
+        holding.clearLoading = false
+      } else {
+        utils.alert(res.message)
+        // this.clearWarehouseLoading = false
+        holding.clearLoading = false
+      }
+    },
+    set({ price, amount, dontOveride, side }) {
+      // if (price) {
+      //   if (!dontOveride || (dontOveride && (!holding.unwindPrice || holding.unwindPrice == 0))) {
+      //     holding.unwindPrice = price
+      //   }
+      // }
+    },
+    checkInput(cholding) {
+      cholding.changeUnwindPrice = true
+      // console.log({cholding})
+      const $oldValue = this.$big(cholding.unwindPrice || 0)
+      let $newValue = this.$big(cholding.unwindPrice || 0)
+      if (cholding.unwindPrice && cholding.currency === 'BTCUSD') {
+        const accuracy = cholding.pairInfo.accuracy || 1
+        const scale = cholding.pairInfo.price_scale || 4
+        const minStep = Math.pow(10, -scale) * accuracy
+        if (!$newValue.mod(minStep).eq(0)) {
+          $newValue = $newValue.div(minStep).round(scale >= 1 ? scale - 1 : 0, 0).mul(minStep)
+        }
+        if (!$oldValue.eq($newValue)) {
+          cholding.unwindPrice = $newValue.toString()
+        }
+      } else {
+        $newValue = this.$big(cholding.unwindPrice).round(cholding.pairInfo.price_scale || 2, 0)
+        if (!$oldValue.eq($newValue)) {
+          cholding.unwindPrice = $newValue.toString()
+        }
+      }
+    },
+    inputPriceOnfocus() {
+      this.bindMarkPrice = false
+      console.log(this.bindMarkPrice)
+    },
+    cancel(holding) {
+      console.log('close current Entrust', this.pairInfo.name, holding.future_close_id)
+      // this.clearWarehouseLoading = true
+      holding.clearLoading = true
+      const params = {
+        symbol: holding.pairInfo.name,
+        order_id: holding.future_close_id
+      }
+      service.revertContract(params).then(res => {
+        if (!res.code) {
+          utils.success(this.$t('contract_revert_success'))
+          // 刷新所有订单
+          this.$eh.$emit('protrade:order:refresh', 1)
+          // this.clearWarehouseLoading = false
+          holding.clearLoading = false
+        } else {
+          utils.alert(res.message)
+          // this.clearWarehouseLoading = false
+          holding.clearLoading = false
+        }
+      })
+    },
+    reload() {
+      this.$eh.$emit('protrade:order:refresh', 'reload')
+      state.loadingfailed = false
+    }
+
   }
 }
 </script>
@@ -775,7 +863,7 @@ export default {
     cursor: help;
 }
 .border_bottom_dash {
-        border-bottom: 1px dashed #C8AA6C;
+        border-bottom: 1px solid #C8AA6C;
     }
 .history_table_container {
   height: 240px;
@@ -866,6 +954,7 @@ export default {
       }
     }
     .currency-col {
+      flex: 1;
         color: $primary;
         font-size: 20px;
         height: 100%;
@@ -876,13 +965,11 @@ export default {
     .input-num {
         width: 80px;
         height: 18px;
+        text-indent: 8px;
         color: $primary;
         background-color: #1B1B1B;
-        padding-left: 7px;
-        margin-left: -7px;
-        box-sizing: border-box; 
+        box-sizing: border-box;
         border-width: 0;
-  
     }
     .input-lab {
         color: $primary;
@@ -890,6 +977,7 @@ export default {
         margin-left: -7px;
     }
     .equal-col {
+      flex: 2;
         padding-top: 14px;
         display: flex;
         flex-direction: column;
@@ -898,7 +986,7 @@ export default {
             width: 100%;
             display: flex;
             .label{
-                flex: 3
+                flex: 1;
             }
             .value {
                 flex: 1;
@@ -910,7 +998,42 @@ export default {
     .t-a-center {
         text-align: center;
     }
-    .operate-col {
+    // .operate-col {
+    //   flex: 2;
+    //     border-left: 1px solid #0F0F0F;
+    //     .label {
+    //         height: 18px;
+    //         line-height: 18px;
+    //     }
+    //     .btn {
+    //         width:70px;
+    //         height:24px;
+    //         line-height: 24px;
+    //         text-align: center;
+    //         border:1px solid rgba(9,201,137,1);
+    //         color: rgba(9,201,137,1);
+
+    //         &.full {
+    //             background-color: rgba(9,201,137,1);
+    //             color: #252525;
+    //         }
+    //     }
+    //     .operate-r {
+    //       display: flex;
+    //       align-items: center;
+    //       .col1{
+    //         flex:1;
+    //       }
+    //       .col2{
+    //         flex:2;
+    //       }
+    //       .col3{
+    //         flex:3;
+    //       }
+    //     }
+
+    // }
+      .operate-col {
         border-left: 1px solid #0F0F0F;
         display: flex;
 
@@ -932,8 +1055,7 @@ export default {
                 color: #252525;
             }
         }
-        
-        
+
     }
 }
 .modal-operate-ensurance {
@@ -1051,7 +1173,7 @@ export default {
   -o-filter: grayscale(60%);
   filter: grayscale(60%);
   // filter: gray;
-  filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1); 
+  filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
   // border-color:#177757;
   cursor: not-allowed;
 }

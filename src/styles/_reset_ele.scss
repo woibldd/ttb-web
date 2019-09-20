@@ -91,8 +91,7 @@
         &:focus {
             opacity: 0.8
         }
-    }
-
+    } 
     .btn--cancel {
         width:104px;
         height:36px;
@@ -100,8 +99,7 @@
         border-radius:6px;
         border-width: 0;
         color: #393D4D;
-    }
-
+    } 
     .el-message-box__title {
         text-align: center;
     }
@@ -109,8 +107,9 @@
         display: none;
     }
     .el-message-box__message{
-        padding-left: 12px;
-    }
+        //padding-left: 12px;
+        text-align: center;
+    } 
 }
 
 .el-checkbox__inner:hover {
@@ -120,3 +119,26 @@
     background-color: $primary;
     border-color: $primary;
 }
+
+.el-button--text {
+  color: #000;
+}
+
+.el-date-range-picker {
+  width:460px;
+}
+
+
+.el-dropdown-menu {
+    background-color:red;
+    .el-dropdown-menu__item {
+      background-color:red;
+      .my-fund-operate {
+        background-color:red;
+        color:#6F6F70;
+        a {
+          color: #6F6F70;
+        }
+      }
+    }
+  }

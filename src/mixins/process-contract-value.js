@@ -3,36 +3,35 @@ import utils from '@/modules/utils'
 const processValue = {
 
   methods: {
-    processValue (key, row) {
-      let value = row[key] 
-      let down = 0
+    processValue(key, row) {
+      let value = row[key]
+      const down = 0
       let pairlist = null
 
       // 格式化时间
       if (key === 'deal_create_time') {
-        value = utils.dateFormatter(row.create_time/1000)
-      }
-      else if (key === 'create_time_stamp') { 
-        value = utils.dateFormatter(row.create_time/1000)
+        value = utils.dateFormatter(row.create_time / 1000)
+      } else if (key === 'create_time_stamp') {
+        value = utils.dateFormatter(row.create_time / 1000)
       }
 
       if (key === 'uid') {
-        // if(row.is_self === false){ 
+        // if(row.is_self === false){
         //   value = 'UID:'+ utils.publicDesensitization(value).toString()
         // }
         // else {
-          value = `UID:${value}`
+        value = `UID:${value}`
         // }
       }
       // if (key === 'number') {
       //   if (value < 4) {
       //     value =  `<span class="icon icon-${value}">${value}</span>`
-      //   } 
+      //   }
       // }
 
       if (key === 'create_time' ||
       key === 'update_time' ||
-      key === 'created_time') { 
+      key === 'created_time') {
         value = utils.dateFormatter(value)
       }
       // 撤销
@@ -84,24 +83,21 @@ const processValue = {
         if (value && value.indexOf('FUTURE_') === -1) {
           value = 'FUTURE_' + value
         }
-        value = this.$t('contract_' + value)
+        // value = this.$t('contract_' + value)
+        value = this.$t('FUTURE_&USD', { currency: value.replace('FUTURE_', '').replace('USD', '') })
       }
       // 转换百分比
       if (key === 'realized') {
-        
         if (row.symbol === 'BTCUSD') {
           value = this.$big(value || 0).round(4).toString()
-        }
-        else {
-          console.log({pairlist})
+        } else {
+          console.log({ pairlist })
           pairlist = this.state.ct.pairInfoList
-          if (!!pairlist && !!pairlist['FUTURE_'+row.symbol]) {
-            value = this.$big(value).round(pairlist['FUTURE_'+row.symbol].value_scale, down).toString()
+          if (!!pairlist && !!pairlist['FUTURE_' + row.symbol]) {
+            value = this.$big(value).round(pairlist['FUTURE_' + row.symbol].value_scale, down).toString()
+          } else {
+            value = '--'
           }
-          else {
-            value = "--" 
-          }
-
         }
       }
       // 成交类型(type) 1限价 2市价 3止盈 4止损
@@ -124,51 +120,51 @@ const processValue = {
         }
       }
       if (key === 'origin') {
-        switch(value) {
+        switch (value) {
           case 1:
-            value = this.$t('contract_history_deal_dan')//"成交单"
-            break;
+            value = this.$t('contract_history_deal_dan')// "成交单"
+            break
           case 2:
-            value = this.$t('contract_stop_out_order')//"强平单"
-            break;
+            value = this.$t('contract_stop_out_order')// "强平单"
+            break
           case 3:
-            value = this.$t('contract_fee_rate') //"资金费率"
-            break;
+            value = this.$t('contract_fee_rate') // "资金费率"
+            break
           case 4:
-            value = this.$t('contract_adl_reduce')//"ADL减仓"
-            break; 
+            value = this.$t('contract_adl_reduce')// "ADL减仓"
+            break
           default:
-            value = ""
-            break;
+            value = ''
+            break
         }
       }
-      //委托价值
-      if (key === 'contract_assign_value') { 
+      // 委托价值
+      if (key === 'contract_assign_value') {
         if (row.symbol === 'FUTURE_BTCUSD') {
           value = this.$big(row.amount).div(row.price).abs().round(4, down).toString()
-        }
-        else { 
+        } else {
           pairlist = this.state.ct.pairInfoList
           if (!!pairlist && !!pairlist[row.symbol]) {
             value = this.$big(row.amount).times(row.price).times(pairlist[row.symbol].multiplier).round(8, down).toString()
+          } else {
+            value = '--'
           }
-          else {
-            value = "--"
-          }
-        } 
+        }
       }
       if (key === 'price' ||
-        key === 'executed_price') {   
+        key === 'executed_price') {
         pairlist = this.state.ct.pairInfoList
-        console.log({pairlist})
-        if (!!pairlist && !!pairlist[row.symbol]) {  
-          let price_scales =  pairlist[row.symbol].price_scale || 4
-          console.log(price_scales, { test: pairlist[row.symbol]})
-          value = this.$big(row.price).round(price_scales, down).toFixed(price_scales).toString() 
+        // console.log({ pairlist })
+        if (row.type === 4 || row.type === 6) {
+          value = '--'
+        } else if (!!pairlist && !!pairlist[row.symbol]) {
+          const price_scales = pairlist[row.symbol].price_scale || 4
+          console.log(price_scales, { test: pairlist[row.symbol] })
+          value = this.$big(row.price).round(price_scales, down).toFixed(price_scales).toString()
+        } else {
+          value = this.$big(row.price).round(4, down).toString().toString()
         }
-        else {
-          value = this.$big(row.price).round(4, down).toString().toString() 
-        }
+        // if (row.type === 4 || row.type === 6)value = '--'
       }
 
       if (key === 'fee_rate') {
@@ -182,38 +178,37 @@ const processValue = {
         }
       }
       // history-table > 已成交 > 价值
-      if (key === 'history_table_contract_value' && row.amount_total) { 
+      if (key === 'history_table_contract_value' && row.amount_total) {
         pairlist = this.state.ct.pairInfoList
-        if (!!pairlist && !!pairlist[row.symbol]) { 
-          let pair =  pairlist[row.symbol]
-          let value_scales =  pair.value_scale || 4 
+        if (!!pairlist && !!pairlist[row.symbol]) {
+          const pair = pairlist[row.symbol]
+          const value_scales = pair.value_scale || 4
           if (row.symbol === 'FUTURE_BTCUSD') {
-            value = this.$big(row.amount_total).div(row.price).round(value_scales, down).toFixed(value_scales || 4).toString() 
-          } else { 
-            let mul = pair.multiplier
-            value = this.$big(row.amount_total).times(row.price).times(mul).round(value_scales, down).toFixed(value_scales || 4).toString() 
+            value = this.$big(row.amount_total).div(row.price).round(value_scales, down).toFixed(value_scales || 4).toString()
+          } else {
+            const mul = pair.multiplier
+            value = this.$big(row.amount_total).times(row.price).times(mul).round(value_scales, down).toFixed(value_scales || 4).toString()
           }
-        }
-        else {
-          value = this.$big(row.amount_total).div(row.price).toFixed(4).toString() 
+        } else {
+          value = this.$big(row.amount_total).div(row.price).toFixed(4).toString()
         }
       }
 
       // 处理委托id, 取id中哈希值的前5位
       if (key === 'symbol_id') {
-        let symbolLen = row.symbol.length
+        const symbolLen = row.symbol.length
         value = row.id.slice(symbolLen, symbolLen + 5)
       }
 
       if (key === '0') {
-        value = '0';
+        value = '0'
       }
       if (key === 'trigger_price_compute') {
-          value = row['trigger_price'] ;
+        value = row['trigger_price']
       }
-      if (key === 'amount_side'){
-          let side =  row['side']
-          switch (side) {
+      if (key === 'amount_side') {
+        const side = row['side']
+        switch (side) {
           case 1:
             value = `<span class="font-color-buy"> ${row['amount']}</span>`
             break
@@ -222,11 +217,11 @@ const processValue = {
             break
           default:
             break
-          }
+        }
       }
-      if (key === 'amount'){
-        let side =  row['side']
-          switch (side) {
+      if (key === 'amount') {
+        const side = row['side']
+        switch (side) {
           case 1:
             value = `<span class="font-color-buy"> ${row['amount']}</span>`
             break
@@ -235,9 +230,8 @@ const processValue = {
             break
           default:
             break
-          }
+        }
       }
-
 
       return value
     }

@@ -382,12 +382,12 @@ export default {
       this.$eh.$emit('protrade:balance:refresh')
     },
     async fetch (tab) {
-      console.log('00000000')
+      // console.log('00000000')
       const ctx = this[tab]
       if (this._isDestroyed) {
         return false
       }
-      console.log('1111111111')
+      // console.log('1111111111')
 
       await actions.updateSession()
       if (this.state.userStatus === 0) {

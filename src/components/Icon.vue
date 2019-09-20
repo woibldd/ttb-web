@@ -1,8 +1,8 @@
 <template>
   <svg
+    :style="style"
     class="iconfont"
-    aria-hidden="true"
-    :style="style">
+    aria-hidden="true">
     <use :xlink:href="'#icon-' + name"/>
   </svg>
 </template>
@@ -21,7 +21,7 @@ export default {
     }
   },
   computed: {
-    style () {
+    style() {
       return {
         color: this.color
       }

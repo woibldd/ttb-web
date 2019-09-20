@@ -1,13 +1,8 @@
 
 <template>
   <div class="profile-container">
-    <div class="title-box">
-
-      {{ $t('collection') }}
-      <!-- <span class="chose_txt"> {{ $t('collection_cs') }}</span>
-      <em class="cs">
-        {{ $t('collection_all') }}
-      </em> -->
+    <div class="title-box"> 
+      {{ $t('collection') }} 
       <div
         class="add_collection"
         @click="handle('add')">
@@ -29,7 +24,7 @@
             {{$t(payName( item.payment_type))}}
           </div>
           <div class="mes">
-            <template v-if="item.payment_type === 1">
+            <template v-if="item.payment_type === 1  || item.payment_type === 4 || item.payment_type === 5">
               <dl>
                 <dd class="cs">{{ item.currency }}</dd>
                 <dd>{{ item.name }}</dd>
@@ -47,44 +42,30 @@
                 </dd>
               </dl>
             </template>
-            <template v-else>
+            <template v-else-if="item.payment_type===2">
               <dl>
                 <dd class="cs">{{ item.currency }}</dd>
                 <dd>{{ item.name }}</dd>
                 <dd>{{ item.alipay_account }}</dd>
-                <dd v-if="item.collection_img">
-                  <button
-                    type="text"
-                    v-clipboard:copy="item.alipay_account"
-                    v-clipboard:success="onCopy"
-                    v-clipboard:error="onError">
-                    <icon name="fund-history-copy"/>
-                  </button>
+                <dd v-if="item.collection_img"> 
                   <i
                     class="el-icon-picture"
                     @click="handleCol(item, 'img')"/>
                 </dd>
               </dl>
             </template>
-            <!-- <template v-else>
+            <template  v-else-if="item.payment_type===3">
               <dl>
                 <dd class="cs">{{ item.currency }}</dd>
                 <dd>{{ item.name }}</dd>
-                <dd>{{ item.weChat_account }}</dd>
-                <dd v-if="item.collection_img">
-                  <button
-                    type="text"
-                    v-clipboard:copy="item.weChat_account"
-                    v-clipboard:success="onCopy"
-                    v-clipboard:error="onError">
-                    <icon
-                      name="fund-history-copy"
-                      @click="handleCol(item, 'img')"/>
-                  </button>
-                  <i class="el-icon-picture"/>
+                <dd>{{ item.we_chat_account }}</dd>
+                <dd v-if="item.collection_img"> 
+                  <i
+                    class="el-icon-picture"
+                    @click="handleCol(item, 'img')"/>
                 </dd>
               </dl>
-            </template> -->
+            </template>
           </div>
           <div class="btn">
             <el-switch
@@ -112,11 +93,12 @@
         class="demo-ruleForm">
         <template v-if="type === 'add'">
           <el-form-item
-            :label="'币种'"
+            :label="$t('currency')"
             prop='currency'>
             <el-select
               v-model="ruleForm.currency"
               style="width: 100%;"
+              :placeholder="$t('please_choose')"
               size="small">
               <el-option
                 value="CNY"
@@ -231,7 +213,7 @@
           </template>
           <template v-if="ruleForm.payment_type === '4' || ruleForm.payment_type === '5'">
             <el-form-item
-              :label="this.$t('payment_card_number')"
+              :label="ruleForm.payment_type === '4' ? this.$t('Paynow') + ' ' + this.$t('account') : this.$t('Paylah')  + ' ' + this.$t('account')"
               prop="card_number">
               <br>
               <number-input
@@ -391,16 +373,27 @@ export default {
         alipay_account: '',
         weChat_account: '',
         collection_img: '',
-        currency: ''
+        currency: 'CNY'
       }
-      this.$refs['ruleForm'].resetFields()
+      // this.$refs['ruleForm'].resetFields()
     },
     bankHandle (code) {
-      let codeName = code
-      let currency = this.ruleForm.currency 
-      this.$refs['ruleForm'].resetFields()
-      this.ruleForm.payment_type = codeName
-      this.ruleForm.currency = currency
+      // let codeName = code
+      // let currency = this.ruleForm.currency 
+      // this.$refs['ruleForm'].resetFields()
+      // this.ruleForm.payment_type = codeName
+      // this.ruleForm.currency = currency
+      this.ruleForm = {
+        payment_type: code,
+        name: '',
+        deposit_bank: '',
+        sub_branch: '',
+        card_number: '',
+        alipay_account: '',
+        weChat_account: '',
+        collection_img: '',
+        currency: this.ruleForm.currency 
+      }
     },
     uploadStart ({type}) {
     },
@@ -416,7 +409,7 @@ export default {
     },
     change (item) {
       let params = {
-        user_id: state.userInfo.id,
+        //user_id: state.userInfo.id,
         collection_id: item.collection_id
       }
       if (item.state) {
@@ -443,6 +436,7 @@ export default {
             })
             this.init()
           } else {
+            item.state = !item.state
             this.$message({
               type: 'warning',
               message: `${res.message}`
@@ -454,11 +448,11 @@ export default {
     },
     onCopy: function (e) {
       console.log(e)
-      alert(this.$t('otc_otutcol_9'))
+      utils.success(this.$t('otc_otutcol_9'))
     },
     onError: function (e) {
       console.log(e)
-     alert(this.$t('otc_otutcol_10'))
+      utils.alert(this.$t('otc_otutcol_10'))
     },
     handleCommand (command) {
       this.currency = command
@@ -470,7 +464,7 @@ export default {
           this.loading = true
           if (this.type === 'add') {
             let params = {
-              user_id: state.userInfo.id,
+              //user_id: state.userInfo.id,
               payment_type: this.ruleForm.payment_type,
               name: this.ruleForm.name,
               deposit_bank: this.ruleForm.deposit_bank,
@@ -555,7 +549,7 @@ export default {
     },
     async init () {
       const params = {
-        userId: state.userInfo.id,
+        //userId: state.userInfo.id,
         currency: this.currency
       }
       try {
@@ -583,25 +577,29 @@ export default {
     }
   },
   async created () {
-    console.log(this.id)
+    //console.log(this.id)
     this.init()
     this.symbolList()
-    this.filedir = this.id + '_' + utils.generateToken(32)
-    let policy = await service.getOSSPolicy()
-    if (!policy.code) {
-      this.policy = JSON.parse(policy.data)
-      this.uploadConfig.host = this.policy.host
-      let obj = {
-        'key': this.policy.dir + this.filedir + '${filename}', // this.policy.dir,
-        'policy': this.policy.policy,
-        'OSSAccessKeyId': this.policy.accessid,
-        'success_action_status': '200', // 让服务端返回200,不然，默认会返回204
-        'signature': this.policy.signature,
-        'dir': this.policy.dir
+    try {
+      this.filedir = this.id + '_' + utils.generateToken(32)
+      let policy = await service.getOSSPolicy()
+      if (!policy.code) {
+        this.policy = JSON.parse(policy.data)
+        this.uploadConfig.host = this.policy.host
+        let obj = {
+          'key': this.policy.dir + this.filedir + '${filename}', // this.policy.dir,
+          'policy': this.policy.policy,
+          'OSSAccessKeyId': this.policy.accessid,
+          'success_action_status': '200', // 让服务端返回200,不然，默认会返回204
+          'signature': this.policy.signature,
+          'dir': this.policy.dir
+        } 
+        this.policy = obj
+      } else {
+        utils.alert('获取服务端签名失败')
       } 
-      this.policy = obj
-    } else {
-      utils.alert('获取服务端签名失败')
+    } catch (error) {
+      
     }
   }
 }

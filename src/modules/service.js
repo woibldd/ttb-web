@@ -3,52 +3,52 @@ import config from '@/libs/config'
 import _ from 'lodash'
 import utils from './utils'
 import api from './request'
-import {quotaApi} from './request'
-import {state, actions} from '@/modules/store'
+import { quotaApi } from './request'
+import { state, actions } from '@/modules/store'
 
 // const Mock = () => import('./mock')
 
 const service = {
-  getBanners (data = {}) {
+  getBanners(data = {}) {
     data.platform = data.platform || 1
     return request('announcement/list', data)
   },
-  hasNewBanner () {
+  hasNewBanner() {
     return request('announcement/has_new')
   },
-  resetPassword (data) {
+  resetPassword(data) {
     let uri = 'user/reset/password/email'
     if (data.by === 'phone') {
       uri = 'user/reset/password/phone'
     }
     return request(uri, data)
   },
-  resetPaswordCode (data) {
+  resetPaswordCode(data) {
     let uri = 'user/reset/password/email/code'
     if (data.by === 'phone') {
       uri = 'user/reset/password/phone/code'
     }
     return request(uri, data)
   },
-  changePassword (data) {
+  changePassword(data) {
     return request('user/modify/password', data)
   },
-  getSmsCode (data) {
+  getSmsCode(data) {
     if (data.task === 'register') {
       return request('sign/signup/code/resend', data)
     }
     return request('fa2/sms', data)
   },
-  fa2 (data) {
+  fa2(data) {
     if (data.task === 'register') {
       return request('sign/signup/code', data)
     }
     return request('fa2/verify', data)
   },
-  getUserInfo () {
+  getUserInfo() {
     return getCache('session', () => request('user/session'), 6e4)
   },
-  activate (code) {
+  activate(code) {
     rmCache('session')
     return request('sign/activate?auth=' + code)
   },
@@ -56,14 +56,14 @@ const service = {
    * 发送验证码
    * @param {*} data by lang phone email region
    */
-  sendCode (data) {
-    let url = `user/register/${data.by}/code`
+  sendCode(data) {
+    const url = `user/register/${data.by}/code`
     return request(url, data)
   },
-  sendVerifyEmail () {
+  sendVerifyEmail() {
     return request('sign/reactivate')
   },
-  login (data) {
+  login(data) {
     rmCache('session')
     if (data.email) {
       return request('user/login/email', data)
@@ -73,7 +73,7 @@ const service = {
     }
   },
   // 获取登录邮箱/手机验证码
-  getLoginVerifyCode (param, type) {
+  getLoginVerifyCode(param, type) {
     let url
     if (type === 'phone') {
       url = 'user/login/phone/code'
@@ -83,66 +83,65 @@ const service = {
     return request(url, param)
   },
   // 验证登录验证码
-  verifyLoginVerifyCode (param, type) {
+  verifyLoginVerifyCode(param, type) {
     // 新版登录接口后面加2
-    let url = '/user/login/' + type + '2'
+    const url = '/user/login/' + type + '2'
     return request(url, param)
   },
-  register (data) {
+  register(data) {
     rmCache('session')
     if (data.phone) {
       return request('user/register/phone', data)
     }
     return request('user/register/email', data)
   },
-  signout () {
-    debugger
+  signout() {
     rmCache('session')
     rmCache('balanceList')
     state.pro.currency = null
     state.pro.product = null
     return request('user/logout')
   },
-  async getBalanceByPair (...currencys) {
-    let result = await this.getBalance()
-    let resp = []
+  async getBalanceByPair(...currencys) {
+    const result = await this.getBalance()
+    const resp = []
     if (!result.code) {
-      let list = result.data
+      const list = result.data
       currencys.forEach(currency => {
-        let balance = list.filter(l => currency === l.currency)[0] || {}
+        const balance = list.filter(l => currency === l.currency)[0] || {}
         resp.push(balance)
       })
     }
     return resp
   },
-  getBalance () {
+  getBalance() {
     return getCache('balanceList', () => request('account/balance/list'), 2e3)
   },
-  createOrder (data) {
+  createOrder(data) {
     return request('order/create', data)
   },
-  removeOrder (data) {
+  removeOrder(data) {
     return request('order/remove', data)
   },
-  removeOrderList (orderList) {
-    return orderList.reduce(async function (preTask, order) {
+  removeOrderList(orderList) {
+    return orderList.reduce(async function(preTask, order) {
       await preTask
       return request('order/remove', order)
     }, 0)
   },
-  removeAllOrder () {
-    return request('order/remove_all', {site: 2})
+  removeAllOrder() {
+    return request('order/remove_all', { site: 2 })
   },
-  queryOrder ({id, finished}) {
+  queryOrder({ id, finished }) {
     if (finished) {
-      return getCache('orderQuery' + id, () => request('order/query', {order_id: id}))
+      return getCache('orderQuery' + id, () => request('order/query', { order_id: id }))
     }
-    return request('order/query', {order_id: id})
+    return request('order/query', { order_id: id })
   },
-  getOrderList (data) {
-    return request('order/list', data)
+  getOrderList(data) {
+    return request('/api/agent/nodes/state', data)
   },
-  orderActive (data) {
+  orderActive(data) {
     return request('order/active', data).then(res => {
       if (res.data) {
         if (res.data.length) {
@@ -153,15 +152,15 @@ const service = {
             return item
           })
         }
-        res.data = {items: res.data}
+        res.data = { items: res.data }
       }
       return res
     })
   },
-  orderClosed (data) {
+  orderClosed(data) {
     return request('order/closed', data)
   },
-  orderHistory (data) {
+  orderHistory(data) {
     return request('order/history', data).then(res => {
       if (res.data) {
         if (res.data.length) {
@@ -173,50 +172,50 @@ const service = {
             return item
           })
         }
-        res.data = {items: res.data}
+        res.data = { items: res.data }
       }
       return res
     })
   },
-  getQuote (data) {
+  getQuote(data) {
     return request('quote/query', data)
   },
-  getRegionList () {
+  getRegionList() {
     return getCache('regionList', () => Promise.resolve(require('./region.json')))
   },
   /**
    * 获取kyc接力btc总量
    */
-  getKycRelayBtcRemain () {
+  getKycRelayBtcRemain() {
     return request('user/kyc/relay/bonus')
   },
   /**
    * 获取当前用户kyc信息
    */
-  getKycInfo () {
+  getKycInfo() {
     return request('user/kyc')
   },
   /**
    * 最近kyc用户
    * @param list true 要list false 要item
    */
-  getRecentlyKycList (list) {
+  getRecentlyKycList(list) {
     return list ? request('user/kyc/relay/list') : request('user/kyc/recent')
   },
-  updateKycInfo (data) {
+  updateKycInfo(data) {
     return request('user/kyc2', data)
   },
-  updateKyc1 (data) {
+  updateKyc1(data) {
     return request('user/kyc1', data)
   },
-  getOSSPolicy () {
+  getOSSPolicy() {
     return request('user/kyc/oss/policy')
   },
-  uploadKycPics (form) {
+  uploadKycPics(form) {
     const handler = new Vue()
     const upload = request('kyc/upload', form, {
       timeout: 0,
-      uploadProgress (event) {
+      uploadProgress(event) {
         handler.$emit('progress', event)
       }
     })
@@ -225,28 +224,28 @@ const service = {
     })
     return handler
   },
-  getFaceToken (params) {
+  getFaceToken(params) {
     return request('user/kyc/face/token', params)
   },
-  faceComplete (params) {
+  faceComplete(params) {
     return request('user/kyc/face/complete', params)
   },
-  findPage (params) {
+  findPage(params) {
     return request('api/moneyManage/findPage', params)
   },
-  manageRecord (params) {
+  manageRecord(params) {
     return request('/api/manageRecord/buy', params)
   },
-  manageResopetate (params) {
+  manageResopetate(params) {
     return request('/api/manageRecord/opetate', params)
   },
-  getRecommend () {
+  getRecommend() {
     return request('pair/recommends')
   },
-  getHomeNotice (slot) {
-    return request('notice/list', {platform: 0, slot: slot})
+  getHomeNotice(slot) {
+    return request('notice/list', { platform: 0, slot: slot })
   },
-  async getPairInfo (data = {}) {
+  async getPairInfo(data = {}) {
     const res = await this.getPairList()
     if (!res.code) {
       // if (res.data && res.data.length) {
@@ -266,7 +265,7 @@ const service = {
     }
     return res
   },
-  getPairList () {
+  getPairList() {
     return getCache('pairList', () => request('order/symbol/list').then(res => {
       if (res && res.data) {
         res.data = res.data.map(item => {
@@ -277,124 +276,124 @@ const service = {
           item.currency_name = item.name.split('_')[1]
           return item
         })
-        res.data = {items: res.data}
+        res.data = { items: res.data }
         return res
       }
     }))
   },
-  getQuoteOrderbook ({pair, accuracy, offset, size}) {
-    return quote(`orderbook/${pair}`, {offset, accuracy, size})
+  getQuoteOrderbook({ pair, accuracy, offset, size }) {
+    return quote(`orderbook/${pair}`, { offset, accuracy, size })
   },
-  getQuoteDeal ({pair, size}) {
-    return quote(`deal/${pair}`, {size})
+  getQuoteDeal({ pair, size }) {
+    return quote(`deal/${pair}`, { size })
   },
-  getQuoteHistory (data) {
+  getQuoteHistory(data) {
     if (data.begin && data.end) {
       return quote(`history/millis/${data.pair}`, data)
     } else {
       return quote(`history/${data.pair}`, data)
     }
   },
-  async getSupportedVerifys () {
+  async getSupportedVerifys() {
     return ['google', 'message']
   },
-  getGoogleKey () {
+  getGoogleKey() {
     return request('user/generate/google_key')
   },
-  bindGoogleKey (data) {
+  bindGoogleKey(data) {
     return request('/user/bind/google_key', data)
   },
-  setPhone (data) {
+  setPhone(data) {
     return request('phone/begin', data)
   },
-  bindPhoneCode (data) {
+  bindPhoneCode(data) {
     return request('user/bind/phone/code', data)
   },
-  bindPhone (data) {
+  bindPhone(data) {
     return request('user/bind/phone', data)
   },
-  bindEmailCode (data) {
+  bindEmailCode(data) {
     return request('user/bind/email/code', data)
   },
-  bindEmail (data) {
+  bindEmail(data) {
     return request('user/bind/email', data)
   },
-  getApiList () {
+  getApiList() {
     return request('api/list')
   },
-  getApiPermissions () {
+  getApiPermissions() {
     return request('api/permissions')
   },
-  createApiKey (data) {
+  createApiKey(data) {
     return request('api/create', data)
   },
-  confirmApiKey (data) {
+  confirmApiKey(data) {
     return request('api/create/confirm', data)
   },
-  removeApiKey (data) {
+  removeApiKey(data) {
     return request('api/remove', data)
   },
-  getRate (currency = 'USDT') {
+  getRate(currency = 'USDT') {
     // return getCache(name + 'FiatRate', () => request('currency/query', { name }), 1e4)
-    return getCache(currency + 'FiatRate', () => request('account/currency/rates', {currency}), 1e4)
+    return getCache(currency + 'FiatRate', () => request('account/currency/rates', { currency }), 1e4)
   },
-  getAllRate () {
+  getAllRate() {
     return getCache('ALLFiatRate', () => request('account/currency/rates'), 1e4)
   },
-  getCoins () {
+  getCoins() {
     return getCache('currencyList', () => request('account/currency/list'))
   },
   // 资产-转出页面请求转出地址，请求参数为 currency_name
-  getWithdrawAddress (data) {
+  getWithdrawAddress(data) {
     return request('address/withdraw/list', data)
   },
   // 资产-转出页面-新增转出地址，请求参数为 currency_name:币名,label:自定义标签,address:地址值
-  addWithdrawAddress (data) {
+  addWithdrawAddress(data) {
     return request('address/withdraw/create', data)
   },
   // 资产-转出页面-转出目标地址下拉列表-列表项删除按钮 请求参数为 地址id
-  delWithwrawAddress (id) {
-    return request('address/withdraw/remove', {id: id})
+  delWithwrawAddress(id) {
+    return request('address/withdraw/remove', { id: id })
   },
-  getDepositAddress (data) {
+  getDepositAddress(data) {
     return request('address/deposit/query', data)
   },
-  getCollect () {
+  getCollect() {
     return getCache('favoriteList', () => request('favorite/list'))
   },
-  collect (data) {
+  collect(data) {
     return request('favorite/create', data)
   },
-  uncollect (data) {
+  uncollect(data) {
     return request('favorite/remove', data)
   },
-  getTransferStats () {
+  getTransferStats() {
     return request('transfer/stats')
   },
-  getTransferList (data) {
+  getTransferList(data) {
     return request('transfer/list', data)
   },
   /**
    * 获取内部转账历史
    * @param {page,size} data
    */
-  getInternalHistory (data) {
+  getInternalHistory(data) {
     return request('account/balance/transfer/list', data)
   },
   //  撤销订单
-  Cancellationoforders (data) {
+  Cancellationoforders(data) {
     return request('/account/withdraw/cancel', data)
   },
   /**
    * 获取推广返佣
    */
-  getPromoteList (data) {
+  getPromoteList(data) {
     return request('account/balance/promote/list', data)
   },
-  rmCache (key) {
+  rmCache(key) {
     rmCache(key)
   },
-  clearAll () {
+  clearAll() {
     for (const key in cache) {
       rmCache(key)
     }
@@ -402,64 +401,64 @@ const service = {
   /**
    * 邀请记录
    */
-  getMyInviteList (data) {
+  getMyInviteList(data) {
     return request('user/invitation/list', data)
     // .then(resp => {
     //   resp.data = resp.data.concat(resp.data).concat(resp.data)
     //   return resp
     // })
   },
-  getCommissionList (data) {
+  getCommissionList(data) {
     return request('mine/invite/list', data)
   },
   /**
    * 登录历史
    */
-  getLoginHistory () {
+  getLoginHistory() {
     return request('user/login/history')
   },
 
   /* -- 资金管理 start  -- */
   // 充币，提币
-  getMyCoinAddress (param) {
+  getMyCoinAddress(param) {
     return request('account/address/query', param)
   },
   // 获取币种列表
-  getAllCoinTypes (param) {
+  getAllCoinTypes(param) {
     return request('account/currency/list')
   },
   // 获取用户余额信息
-  getAccountBalanceList () {
+  getAccountBalanceList() {
     return request('account/balance/list')
   },
   // 提币记录
-  getWithdrawHistory (param) {
+  getWithdrawHistory(param) {
     return request('/account/withdraw/list', param)
   },
   // 充币记录
-  getDepositHistory (param) {
+  getDepositHistory(param) {
     return request('/account/deposit/list', param)
   },
 
   // 发放奖励记录
-  getRewardHistory (param) {
+  getRewardHistory(param) {
     return request('/account/candy/list', param)
   },
 
   // 获取添加过的地址列表
-  getMyAddressList (param) {
+  getMyAddressList(param) {
     return request('/account/withdraw/address/list', param)
   },
   // 添加提币地址
-  addCoinAddress (param) {
+  addCoinAddress(param) {
     return request('/account/withdraw/address/create', param)
   },
   // 删除提币地址
-  deleteCoinAddress (param) {
+  deleteCoinAddress(param) {
     return request('/account/withdraw/address/delete', param)
   },
   // 获取提币邮箱/手机验证码
-  getVerifyCode (param, type) {
+  getVerifyCode(param, type) {
     let url
     if (type === 'phone') {
       url = '/account/withdraw/phone/code'
@@ -469,103 +468,104 @@ const service = {
     return request(url, param)
   },
   // 发起提币
-  confirmWithdraw (param) {
-    return request('/account/withdraw/create', param)
+  confirmWithdraw(param) {
+    // return request('/account/withdraw/create', param)
+    return getCache('withdraw_create', () => request('/account/withdraw/create', param), 2e3)
   },
   // 取消提币
-  cancelWithdraw (param) {
+  cancelWithdraw(param) {
     return request('/account/withdraw/cancel', param)
   },
-//   一键买币
-  canbullWithdraw (param) {
+  //   一键买币
+  canbullWithdraw(param) {
     return request('/otcactive//keyByCoins', param)
   },
   /* -- 资金管理 end  -- */
 
   /* 挖矿 */
-  getMineTotal (data) {
+  getMineTotal(data) {
     return request('mine/exchange/total', data)
   },
-  getPersonalTotal (data) {
+  getPersonalTotal(data) {
     return getCache('mine_my_total', () => request('mine/exchange/me'), 1e4)
   },
-  getInviteMineTotal (data) {
+  getInviteMineTotal(data) {
     return request('mine/invite/total', data)
   },
-  getBonusMineTotal (data) {
+  getBonusMineTotal(data) {
     return request('bonus/btc/total', data)
   },
-  getRelayTotal () {
+  getRelayTotal() {
     return request('relay/query')
   },
 
   // ix市场信息
-  getIXMarket () {
+  getIXMarket() {
     return request('/market/ix')
   },
 
   // 分红信息汇总
-  getAllBonusInfo () {
+  getAllBonusInfo() {
     return request('/bonus/total')
   },
 
   // Sp 活动
-  spPageInfo (params) {
+  spPageInfo(params) {
     return request('/future/activity/sp_info', params)
   },
-  rushToBuy (params) {
+  rushToBuy(params) {
     return request('/future/activity/buy_sp', params)
   },
   /* 挖矿 end */
   //  用户个人设置
-  MessageSettings (params) {
+  MessageSettings(params) {
     return request('/future/account/notify_switch', params)
   },
   /* 行情 */
-  getDealHistory (pair, data) {
+  getDealHistory(pair, data) {
     return quote(`history/${pair}`, data)
   },
 
   /** 登录验证修改 */
   // 获取修改密码邮箱验证码 POST
-  getCode4modifyEmailPassword (data) {
+  getCode4modifyEmailPassword(data) {
     return request('/user/modify/password/email/code', data)
   },
   // 获取修改密码手机验证码 POST /user/modify/password/phone/code
-  getCode4modifyPhonePassword (data) {
+  getCode4modifyPhonePassword(data) {
     return request('/user/modify/password/phone/code', data)
   },
   // 修改密码 POST
-  modifyPassword () {
+  modifyPassword() {
     return request('/user/modify/password')
   },
   // 获取开关验证邮箱验证码 POST
-  getCode4switchEmailVerify () {
+  getCode4switchEmailVerify() {
     return request('/user/bind/switch/email/code')
   },
   // 获取开关验证手机验证码 POST
-  getCode4switchPhoneVerify () {
+  getCode4switchPhoneVerify() {
     return request('/user/bind/switch/phone/code')
   },
   // 开关验证 POST
-  switchBindAction (params) {
+  switchBindAction(params) {
     return request('/user/bind/switch', params)
   },
   // 申请API 验证码
-  getProfileApiCode (param, isEmail) {
+  getProfileApiCode(param, isEmail) {
     return request(isEmail ? 'user/api/email/code' : '/user/api/phone/code', param)
   },
 
   // 申请API POST /user/api/create
-  createProfileApi (params) {
+  createProfileApi(params) {
     return request('/user/api/create', params)
   },
   // 删除API POST /user/api/delete
-  deleteProfileApi (params) {
+  deleteProfileApi(params) {
     return request('/user/api/delete', params)
   },
   // 获取api列表
-  getProfileApi () {
+  getProfileApi() {
     return request('/user/api/list')
   },
 
@@ -573,148 +573,148 @@ const service = {
   // 获取内部划转记录 POST /account/balance/transfer/list
 
   // 用户订单历史
-  getOrderHistory (params) {
+  getOrderHistory(params) {
     return request('/order/history', params)
   },
-  /**
-   * 获取用户交易模式
-   */
-  getUserExchangeMode () {
-    return request('order/mode/get')
-  },
-  /**
-   * 设置用户交易模式
-   * @param {*} params
-   */
-  setUserExchangeMode (params) {
-    return request('order/mode/set', params)
-  },
+  // /**
+  //  * 获取用户交易模式
+  //  */
+  // getUserExchangeMode() {
+  //   return request('order/mode/get')
+  // },
+  // /**
+  //  * 设置用户交易模式
+  //  * @param {*} params
+  //  */
+  // setUserExchangeMode(params) {
+  //   return request('order/mode/set', params)
+  // },
   // 锁仓开始
   /**
    * 锁仓
    */
-  balanceLock (data) {
+  balanceLock(data) {
     return request('account/balance/lock', data)
   },
   /**
    * 解锁
    */
-  balanceUnLock (data) {
+  balanceUnLock(data) {
     return request('account/balance/unlock', data)
   },
   /**
    * 获取挖矿历史
    */
-  getLockMineHistory () {
+  getLockMineHistory() {
     return request('mine/exchange/ix/me/history')
   },
   // 我的ix余额
-  getIxBalance () {
+  getIxBalance() {
     return request('account/balance/ix')
   },
   // 我的算力
-  getMyPower () {
+  getMyPower() {
     return request('mine/exchange/ix/me')
   },
   // 个人锁仓信息
-  getMyLockTotal () {
+  getMyLockTotal() {
     return request('mine/exchange/ix/me/total')
   },
   // 全网挖矿详细 基准算力等
-  getLockMineTotal () {
+  getLockMineTotal() {
     return request('mine/exchange/ix/total')
   },
-  getMyInviteSummary () {
+  getMyInviteSummary() {
     return request('bonus/invite/me')
   },
   // 挖矿大赛
   // 报名
-  enrollMineMatch () {
+  enrollMineMatch() {
     return request('mine/game/join')
   },
   // 奖池金额
-  getMatchRewardPool () {
+  getMatchRewardPool() {
     return request('mine/game/pool')
   },
   // 挖矿排名
-  getMatchRewardRank () {
+  getMatchRewardRank() {
     return request('mine/game/rank')
   },
   // 我的挖矿信息
-  getMyMatchTotal () {
+  getMyMatchTotal() {
     return request('mine/game/me')
   },
   // 最近挖矿列表
-  getRecentMatchList () {
+  getRecentMatchList() {
     return request('mine/game/join/list')
   },
   // 全民竞猜 历史回顾
-  getGuessHistory () {
+  getGuessHistory() {
     return request('game/bet/history')
   },
   // 全民竞猜 当前期
-  getGuessCurrent () {
+  getGuessCurrent() {
     return request('game/bet/current')
   },
   // 全民竞猜 上一期
-  getGuessLast () {
+  getGuessLast() {
     return request('game/bet/last')
   },
   // 我的竞猜历史
-  getGuessMine () {
+  getGuessMine() {
     return request('game/bet/me')
   },
   // 投注
-  doGuess (data) {
+  doGuess(data) {
     return request('game/bet/bet', data)
   },
   //  价格公示（最近一期） 获取比特币的开盘,收盘价格
-  getAllPlatformBtcPrice () {
+  getAllPlatformBtcPrice() {
     return request('game/bet/btc/price')
   },
-  getPieceCurrent () {
+  getPieceCurrent() {
     return request('mine/chip/current')
   },
-  doExchangePiece () {
+  doExchangePiece() {
     return request('mine/chip/exchange')
   },
-  doExchangePiece () {
+  doExchangePiece() {
     return request('mine/chip/exchange')
   },
-  getCurrentIxPrice () {
+  getCurrentIxPrice() {
     return request('mine/ix/price')
   },
-  getMillionInfo () {
+  getMillionInfo() {
     return request('million/data')
   },
-  getMillionInfoMine () {
+  getMillionInfoMine() {
     return request('million/me')
   },
-  getMillionReward (params) {
+  getMillionReward(params) {
     return request('million/reward', params)
   },
-  startMillion () {
+  startMillion() {
     return request('million/start')
   },
   // 开启/关闭手续费抵扣
-  setFeeDiscount (params) {
+  setFeeDiscount(params) {
     return request('fee/discount/switch', params)
   },
   // 查询当前手续费开关状态
-  getFeeDiscountStatus () {
+  getFeeDiscountStatus() {
     return request('fee/discount/get')
   },
   // 我的订单 > 币币交易
-  getBiBiOrders (params) {
+  getBiBiOrders(params) {
     return request('fee/transaction/history', params)
   },
   // ix累计抵扣
-  getIxTotalDiscount () {
+  getIxTotalDiscount() {
     return request('fee/discount/total')
   },
 
   // contract 接口
-  getContractSymList () {
+  getContractSymList() {
     return getCache('cpairList', () => request('contract/symbol/list').then(res => {
       if (res && res.data) {
         res.data = res.data.map(item => {
@@ -729,7 +729,7 @@ const service = {
             item.value_scale = 8
             item.accuracy = item.accuracy || 1
           }
-          //item.value_scale = parseInt(item.value_scale, 10) || 4
+          // item.value_scale = parseInt(item.value_scale, 10) || 4
           if (item.name.indexOf('FUTURE_') < 0) {
             item.name = `FUTURE_${item.name.replace('_', '')}`
           }
@@ -742,12 +742,12 @@ const service = {
           item.product_name = item.symbol.substr(0, 3)
           return item
         })
-        res.data = {items: res.data}
+        res.data = { items: res.data }
         return res
       }
     }))
   },
-  async getContractPairInfo ({symbol}) {
+  async getContractPairInfo({ symbol }) {
     const res = await this.getContractSymList()
     if (!res.code) {
       // if (res.data && res.data.length) {
@@ -767,13 +767,13 @@ const service = {
     }
     return res
   },
-  getContractSymInfo (params) {
+  getContractSymInfo(params) {
     return request('future/account/symbol/info', params)
   },
-  getContractBalanceList () {
+  getContractBalanceList() {
     return getCache('contractBalance', () => request('future/account/balance/list'), 1e3)
   },
-  async getContractBalanceByPair (symbol) {
+  async getContractBalanceByPair(symbol) {
     if (!symbol || !symbol.symbol) {
       symbol = {
         symbol: 'BTCUSD'
@@ -781,11 +781,11 @@ const service = {
     } else {
       symbol.symbol = symbol.symbol + 'USD'
     }
-    let result = await service.getContractBalanceList()
+    const result = await service.getContractBalanceList()
     // let resp = []
     if (!result.code) {
-      let list = result.data
-      let balance = list ? list.filter(l => symbol.symbol === l.currency)[0] || {} : {
+      const list = result.data
+      const balance = list ? list.filter(l => symbol.symbol === l.currency)[0] || {} : {
         available: '0',
         holding: '0',
         available_balance: '0',
@@ -798,22 +798,22 @@ const service = {
     }
     return null
   },
-  changePromiseFund (params) {
+  changePromiseFund(params) {
     return request('future/account/transfer_margin', params)
   },
-  setRiskLimit (params) {
+  setRiskLimit(params) {
     return request('contract/risklimit/set', params)
   },
-  getRiskLimit (params) {
+  getRiskLimit(params) {
     return request('contract/risklimit/get', params)
   },
-  transferContractFund (params) {
+  transferContractFund(params) {
     return request('future/account/transfer', params)
   },
-  orderContract (params) {
+  orderContract(params) {
     return getCache('c_orderContract', () => request('contract/order', params), 1e3)
   },
-  orderContractClose (params) {
+  orderContractClose(params) {
     return request('contract/close', params)
   },
 
@@ -822,126 +822,126 @@ const service = {
   //   return request('contract/holding', params)
   // },
   // 已平仓table
-  getClosedposition (params) {
+  getClosedposition(params) {
     return request('contract/closedposition', params)
   },
   // 当前委托
-  getActiveorders (params) {
+  getActiveorders(params) {
     return getCache('c_activeList', () => request('contract/activeorders', params), 1e3)
   },
   // 止损委托
-  getStoplossOrder (params) {
+  getStoplossOrder(params) {
     return getCache('c_stoploss', () => request('contract/activetriggers', params), 1e3)
   },
   // 委托历史
-  getOrderhistory (params) {
+  getOrderhistory(params) {
     return getCache('c_orderhisotry', () => request('contract/orderhistory', params), 1e3)
   },
   // 已成交
-  getOrderfills (params) {
+  getOrderfills(params) {
     return getCache('c_orderfill', () => request('future/account/orderfills', params), 1e3)
   },
   // 已成交列表
-  getOrderfillList (params) {
+  getOrderfillList(params) {
     return getCache('c_orderfilllist', () => request('future/account/orderfills', params), 1e3)
   },
   // 我的资产,contract专用
   // 交易历史
-  getContractTradeHistory (params) {
+  getContractTradeHistory(params) {
     return request('future/account/trade_history', params)
   },
   // 财务记录
-  getContractFundHistory (params) {
+  getContractFundHistory(params) {
     return request('future/account/fund/history', params)
   },
   // 资金费率历史
-  getFundFeeRateHistory (params) {
+  getFundFeeRateHistory(params) {
     return request('future/account/feerate/history', params)
   },
   // 保险基金
-  getEnsuranceFund (params) {
+  getEnsuranceFund(params) {
     return request('future/account/ensurance', params)
   },
   // 合约是否开通
-  checkContractActive (currency, isSimulation) {
+  checkContractActive(currency, isSimulation) {
     return request(`/future/account/is_activated${isSimulation ? '_simulation' : ''}`, {
       currency
     })
   },
   // 激活合约
-  activeContract (currency, isSimulation) {
+  activeContract(currency, isSimulation) {
     return request(`future/account/activate${isSimulation ? '_simulation' : ''}`, {
       currency
     })
   },
   // 设置杠杆倍数
-  setContractlever (params) {
+  setContractlever(params) {
     return request('future/account/leverage', params)
   },
-  previewContractlever (params) {
+  previewContractlever(params) {
     return request('future/account/leverage_preview', params)
   },
   //   撤销合约
-  revertContract (params) {
+  revertContract(params) {
     return request('contract/remove', params)
   },
-  cancelAllContractOrder (params) {
+  cancelAllContractOrder(params) {
     return request('contract/remove_all', params)
   },
 
   // 创建战队
-  createTeam (params) {
+  createTeam(params) {
     return request('future/activity/team_create', params)
   },
   // 报名参赛交易大赛
-  enrollMatch (params) {
+  enrollMatch(params) {
     return request('future/activity/enter_for', params)
   },
   // 交易大赛排行榜
-  getRankList (params) {
+  getRankList(params) {
     return getCache('c_ranklist', () => request('future/activity/rank_list', params), 1e3)
   },
 
-  //自选列表
-  getOptionalList (params) {
-    //site (int 非必须,默认1) 1-ix 2-ixx
+  // 自选列表
+  getOptionalList(params) {
+    // site (int 非必须,默认1) 1-ix 2-ixx
     return getCache('c_optional', () => request('account/currency/optionalList', params), 1e3)
   },
   // 增加自选
-  addOptional (params) {
-    //site (int 非必须,默认1) 1-ix 2-ixx
+  addOptional(params) {
+    // site (int 非必须,默认1) 1-ix 2-ixx
     // id 币对id
     return request('account/currency/optional/add', params)
   },
-  //删除自选
-  delOptional (params) {
-    //site (int 非必须,默认1) 1-ix 2-ixx
+  // 删除自选
+  delOptional(params) {
+    // site (int 非必须,默认1) 1-ix 2-ixx
     // id 币对id
     return request('account/currency/optional/del', params)
   },
   // 查询最低价
-  minactive (params) {
+  minactive(params) {
     return request('/otc/active/find/minactive', params)
   },
-// 一键买币(按金额购买CNY)
-  bycoins (params) { 
+  // 一键买币(按金额购买CNY)
+  bycoins(params) {
     return getCache('c_otc_bycoins', () => request('/otc/active/key/bycoins', params), 2e3)
   },
-// 一键买币(按数量购买)
-  byamount (params) {
-    //return request('/otc/active/key/byamount', params)
+  // 一键买币(按数量购买)
+  byamount(params) {
+    // return request('/otc/active/key/byamount', params)
     return getCache('c_otc_byamount', () => request('/otc/active/key/byamount', params), 2e3)
   },
-// POST /otc/active/key/sell/coins
-  sellCoins (params) {
+  // POST /otc/active/key/sell/coins
+  sellCoins(params) {
     return request('/otc/active/key/sell/coins', params)
   },
-// 一键卖币(按数量出售) POST /otc/active/key/sell/amount
-  sellAmount (params) {
+  // 一键卖币(按数量出售) POST /otc/active/key/sell/amount
+  sellAmount(params) {
     return request('/otc/active/key/sell/amount', params)
   },
-  //获取币对信息
-  getCurrencyList (params) {
+  // 获取币对信息
+  getCurrencyList(params) {
     return request('future/account/currency_list', params)
   },
 
@@ -950,22 +950,22 @@ const service = {
    * @param {
    * user_id} params
    */
-  getOtcBalance (params) {
+  getOtcBalance(params) {
     return getCache('c_otc_balance', () => request('otc/account/balance/list', params), 1e3)
   },
 
-  async getOtcBalanceByPair (symbol) {
+  async getOtcBalanceByPair(symbol) {
     if (!symbol || !symbol.symbol) {
       symbol = {
         symbol: 'BTC'
       }
     }
-    let result = await service.getOtcBalance()
+    const result = await service.getOtcBalance()
     console.log(result)
     // let resp = []
     if (!result.code) {
-      let list = result.data
-      let balance = list ? list.filter(l => symbol.symbol === l.currency)[0] || {} : {
+      const list = result.data
+      const balance = list ? list.filter(l => symbol.symbol === l.currency)[0] || {} : {
         available: '0',
         holding: '0',
         available_balance: '0',
@@ -978,14 +978,14 @@ const service = {
     }
     return null
   },
-  //*************************  OTC 接口  ************************//
+  //* ************************  OTC 接口  ************************//
   /**
    * 查询是否满足交易条件
    * @param {
    * user_id} params
    * kyc_level 0-未认证 1-绑定手机 2-绑定本人实名银行卡 3-身份认证
    */
-  isQualified (params) {
+  isQualified(params) {
     return request('otc/account/is_qualified', params)
   },
   /**
@@ -993,22 +993,22 @@ const service = {
    * @param {
    * user_id} params
    */
-  getOtcBalance (params) {
+  getOtcBalance(params) {
     return getCache('c_otc_balance', () => request('otc/account/balance/list', params), 1e3)
   },
 
-  async getOtctBalanceByPair (symbol) {
+  async getOtctBalanceByPair(symbol) {
     if (!symbol || !symbol.symbol) {
       symbol = {
         symbol: 'BTC'
       }
     }
-    let result = await service.getOtcBalance()
+    const result = await service.getOtcBalance()
     console.log(result)
     // let resp = []
     if (!result.code) {
-      let list = result.data
-      let balance = list ? list.filter(l => symbol.symbol === l.currency)[0] || {} : {
+      const list = result.data
+      const balance = list ? list.filter(l => symbol.symbol === l.currency)[0] || {} : {
         available: '0',
         holding: '0',
         available_balance: '0',
@@ -1032,7 +1032,7 @@ const service = {
    * page 页码
    * size 页面条数
    */
-  getOtcOrderList (params) {
+  getOtcOrderList(params) {
     return request('otc/account/orderlist', params)
   },
   /**
@@ -1041,7 +1041,7 @@ const service = {
    * trans_id,
    * user_id } params
    */
-  getOtcOrderInfo (params) {
+  getOtcOrderInfo(params) {
     return getCache('c_otc_orderinfo', () => request('otc/account/orderinfo', params), 1e3)
   },
   /**
@@ -1051,7 +1051,7 @@ const service = {
    * page,
    * size } params
    */
-  getOtcActivefills (params) {
+  getOtcActivefills(params) {
     return getCache('c_otc_activefills', () => request('otc/account/activefills', params), 1e3)
   },
   /**
@@ -1065,14 +1065,14 @@ const service = {
    * side (非必须,默认0) 0-全部 1-购买 2-出售
    * currency(非必须,默认全部)
    */
-  getOtcRemovefills (params) {
+  getOtcRemovefills(params) {
     return getCache('c_otc_removefills', () => request('otc/account/removefills', params), 1e3)
   },
-  balancefills (params) {
+  balancefills(params) {
     return request('otc/account/balancefills', params)
   },
   // 划转记录
-  getBalanceList (param) {
+  getBalanceList(param) {
     return request('/account/balance/finance/list', param)
   },
   /**
@@ -1083,7 +1083,7 @@ const service = {
    * side (非必须,默认0) 0-全部 1-购买 2-出售
    * currency(非必须,默认全部)
    */
-  getDonefills (params) {
+  getDonefills(params) {
     return getCache('c_otc_donefills', () => request('otc/account/donefills', params), 1e3)
   },
   /**
@@ -1095,7 +1095,7 @@ const service = {
    * side,
    * currency } params
    */
-  getUnDonefills (params) {
+  getUnDonefills(params) {
     return getCache('c_otc_undonefills', () => request('otc/account/unDonefills', params), 1e3)
   },
   /**
@@ -1103,7 +1103,7 @@ const service = {
    * @param {
    * user_id} params
    */
-  getOtcUserinfo (params) {
+  getOtcUserinfo(params) {
     return getCache('c_otc_userinfo', () => request('otc/account/userinfo', params), 1e3)
   },
   /**
@@ -1112,7 +1112,7 @@ const service = {
    * user_id,
    * currency}
    */
-  getOtcCollection (params) {
+  getOtcCollection(params) {
     return getCache('c_otc_collection', () => request('otc/account/collection/list', params), 1e3)
   },
   /**
@@ -1130,13 +1130,13 @@ const service = {
    * collection_img} params
    * payment_type 收款方式 1-银行卡 2-支付宝 3-微信支付
    */
-  addOtcCollection (params) {
+  addOtcCollection(params) {
     return getCache('c_otc_collection_add', () => request('otc/account/collection/add', params), 2e3)
   },
-  orderBind (params) {
+  orderBind(params) {
     return request('otc/order/bind', params)
   },
-  orderUnbind (params) {
+  orderUnbind(params) {
     return request('otc/order/unbind', params)
   },
   /**
@@ -1144,7 +1144,7 @@ const service = {
    * @param {
    * collection_id } params
    */
-  delOtcCollection (params) {
+  delOtcCollection(params) {
     return request('otc/account/collection/del', params)
   },
   /**
@@ -1166,9 +1166,9 @@ const service = {
    * remark 备注
    * site (非必须 ,默认1)1-个人 2-商户
    */
-  createOtcOrder (params) {
+  createOtcOrder(params) {
     return getCache('c_otc_createOrder', () => request('otc/order/create', params), 1e3)
-    //return request('otc/order/create', params)
+    // return request('otc/order/create', params)
   },
   /**
    * 发布成交单
@@ -1180,9 +1180,9 @@ const service = {
    * total } params
    * active_id 委托单ID
    */
-  createOtcTransaction (params) {
+  createOtcTransaction(params) {
     return getCache('c_otc_transaction', () => request('otc/order/transaction', params), 1e3)
-    //return request('otc/order/transaction', params)
+    // return request('otc/order/transaction', params)
   },
   /**
    * 我已付款
@@ -1190,7 +1190,7 @@ const service = {
    * trans_id  成交单id
    * collection_id 收款方式id
    */
-  otcOrderPaymentDone (params) {
+  otcOrderPaymentDone(params) {
     return request('otc/order/paymentDone', params)
   },
   /**
@@ -1200,7 +1200,7 @@ const service = {
    * trans_id } params
    * trans_id 成交单id
    */
-  otcOrderIssueDone (params) {
+  otcOrderIssueDone(params) {
     return request('otc/order/issueDone', params)
   },
   /**
@@ -1212,7 +1212,7 @@ const service = {
    * type 1-委托单 2-成交单
    * trans_id 委托单/成交单id
    */
-  otcOrderRemove (params) {
+  otcOrderRemove(params) {
     return request('otc/order/remove', params)
   },
   /**
@@ -1222,7 +1222,7 @@ const service = {
    * type} params
    * type 1-委托单全部撤销 2-委托单全部开始 3-委托单全部暂停
    */
-  otcOrderOperateAll (params) {
+  otcOrderOperateAll(params) {
     return request('otc/order/operateAll', params)
   },
   /**
@@ -1232,7 +1232,7 @@ const service = {
    *  trans_id} params
    * trans_id 成交单id
    */
-  otcAppeal (params) {
+  otcAppeal(params) {
     return request('otc/order/appeal', params)
   },
   /**
@@ -1242,29 +1242,29 @@ const service = {
    *  trans_id} params
    * trans_id 成交单id
    */
-  otcUnAppeal (params) {
+  otcUnAppeal(params) {
     return request('otc/order/unAppeal', params)
   },
   /**
    * 交易对详情
    */
-  otcSymbolList () {
+  otcSymbolList() {
     return getCache('c_otc_symbol_list', () => request('otc/account/symbol/list'), 5e3)
   },
-  //获取余额（总账户）
-  getAccountWalletList () {
+  // 获取余额（总账户）
+  getAccountWalletList() {
     return getCache('c_wallet_list', () => request('account/wallet/list'), 1e3)
   },
-  async getwalletBalanceByPair (symbol) {
+  async getwalletBalanceByPair(symbol) {
     if (!symbol || !symbol.symbol) {
       symbol = {
         symbol: 'BTC'
       }
     }
-    let result = await service.getAccountWalletList()
+    const result = await service.getAccountWalletList()
     if (!result.code) {
-      let list = result.data
-      let balance = list ? list.filter(l => symbol.symbol === l.currency)[0] || {} : {
+      const list = result.data
+      const balance = list ? list.filter(l => symbol.symbol === l.currency)[0] || {} : {
         available: '0',
         holding: '0',
         available_balance: '0',
@@ -1276,14 +1276,29 @@ const service = {
       }
     }
   },
-  //结点认购
-  nodesBuy (params) {
+  // 节点认购
+  nodesBuy(params) {
     return getCache('c_nodes_buy', () => request('api/agent/nodes/pre', params), 1e3)
-    //return fetch('http://staging.ixex.pro:93/api/agent/nodes/pre', params)
-  }
+    // return fetch('http://staging.ixex.pro:93/api/agent/nodes/pre', params)
+  },
+  // 节点返佣
+  nodeReturn(params) {
+    return getCache('c_node_return', () => request('future/activity/node/list', params), 1e3)
+  },
+  //获取游戏code  一个小时获取一次，再次获取后上一次作废，如不重新获取，上一次的code一直有效
+  createCode(params) {
+    // return fetch('http://47.244.186.74:2100/oauth2/createcode.do', params) 
+    // return getCache('c_game_code', () => request('future/activity/oauth2/createcode.do', params), 1e3)
+    return getCache('c_game_code', () => request('/create_code_get_uri', params), 1e3)
+  } , 
+  //游戏记录查询
+  gameTradeList(params) {
+    return request('future/activity/gameTrade/list', params)
+  }, 
+
 }
 
-export async function fetch (url, body, options, method = 'post') {
+export async function fetch(url, body, options, method = 'post') {
   // let mock = false
   // mock = await Mock()
   // if (mock && url.indexOf('quota.ix') > 0) {
@@ -1308,7 +1323,7 @@ export async function fetch (url, body, options, method = 'post') {
   try {
     let res
     if (method === 'get') {
-      res = await api.get(url, {params: body}, options)
+      res = await api.get(url, { params: body }, options)
     } else {
       res = await api.post(url, body, options)
     }
@@ -1348,11 +1363,11 @@ export async function fetch (url, body, options, method = 'post') {
   }
 }
 
-export async function fetchQuota (url, body, options, method = 'post') {
+export async function fetchQuota(url, body, options, method = 'post') {
   try {
     let res
     if (method === 'get') {
-      res = await quotaApi.get(url, {params: body}, options)
+      res = await quotaApi.get(url, { params: body }, options)
     } else {
       res = await quotaApi.post(url, body, options)
     }
@@ -1393,20 +1408,20 @@ export async function fetchQuota (url, body, options, method = 'post') {
   }
 }
 
-export function request (url, body, options) {
+export function request(url, body, options) {
   // if (process.env.NODE_ENV === 'development') {
   // return fetch('/beta-gate/' + url, body, options)
   // }
   return fetch(url, body, options)
 }
 
-function quote (url, body, options) {
+function quote(url, body, options) {
   return fetchQuota(config.quoteUrl + url, body, options, 'get')
 }
 
 const cache = {}
 
-function getCache (key, promiseGetter, ttl = 0) {
+function getCache(key, promiseGetter, ttl = 0) {
   if (!cache[key] || (cache[key].expired && cache[key].expired < new Date())) {
     cache[key] = {
       promise: promiseGetter(),
@@ -1421,7 +1436,7 @@ function getCache (key, promiseGetter, ttl = 0) {
   return cache[key].promise
 }
 
-function rmCache (key) {
+function rmCache(key) {
   // utils.log('Remove Cache:', key)
   delete cache[key]
 }

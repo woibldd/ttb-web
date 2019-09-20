@@ -12,6 +12,7 @@
           <el-select v-model="selectCoin"
             :placeholder="$t('please_choose')"
             class="max-input"
+            :filterable="true"
             @change="changeCoin"
           >
             <el-option
@@ -214,31 +215,30 @@
         if (!this.tradingBalance) {
           return 0;
         } else {
-          return new Big(this.tradingBalance.available || 0).toFixed(8);
+          return new Big(this.tradingBalance.available || 0).round(8, 0).toFixed(8);
         }
       },
       contractAvai() {
         if (!this.contractBalance) {
           return 0;
         } else {
-          return new Big(this.contractBalance.available_balance || 0).toFixed(8);
+          return new Big(this.contractBalance.available_balance || 0).round(8, 0).toFixed(8);
         }
       },
       otcAvai() {
         if (!this.otcBalance) {
           return 0;
         } else {
-          return new Big(this.otcBalance.available || 0).toFixed(8);
+          return new Big(this.otcBalance.available || 0).round(8, 0).toFixed(8);
         }
       },
       walletAvai() {
         if (!this.walletBalance) {
           return 0;
         } else {
-          return new Big(this.walletBalance.available || 0).toFixed(8);
+          return new Big(this.walletBalance.available || 0).round(8, 0).toFixed(8);
         }
       }
-
     },
     methods: {
       transferType(type){
@@ -323,7 +323,7 @@
       },
       page(page = 1){
         service.getBalanceList({page:page,size:10}).then(res => {
-
+          this.tableData = []
           if (res.code || res.data.length === 0) {
             this.loading = false
           } else {
@@ -479,11 +479,7 @@
       this.getBalance()
       // this.getAllCoinTypes()
       this.page()
-      
-      if (!!this.$route.query.currency) {
-        this.selectCoin = this.$route.query.currency
-        this.changeCoin(this.selectCoin)
-      }
+       
       this.accountTo = ''
       this.accountTypes.forEach((item) => {
         if(item.value !== this.accountFrom) {
@@ -491,6 +487,11 @@
         }
       })
       this.accountTo = this.accountTypes2[0].value
+
+      if (!!this.$route.query.currency) {
+        this.selectCoin = this.$route.query.currency
+        this.changeCoin(this.selectCoin)
+      }
     }
   }
 </script>

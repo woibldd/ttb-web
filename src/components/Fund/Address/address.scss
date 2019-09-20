@@ -28,12 +28,11 @@
     }
     .address-list {
         margin-top: 40px;
-        height: 500px;
+        min-height: 500px;
         overflow: scroll;
     }
 
-    .address__table {
-        height: 400px;
+    .address__table { 
         overflow-x: scroll;
     }
 }

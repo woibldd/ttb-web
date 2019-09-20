@@ -15,10 +15,10 @@ import FundLeft from './FundLeft/FundLeft'
 import responsiveScale from '@/mixins/responsiveScale'
 
 export default {
-  mixins: [responsiveScale],
   name: 'Fund',
   components: {
     FundLeft
-  }
+  },
+  mixins: [responsiveScale]
 }
 </script>

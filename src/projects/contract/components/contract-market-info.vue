@@ -83,7 +83,7 @@
          
           <div class="row__label">{{ $t('contract_fee_rate') }}</div>
           <div class="row__value">
-            <span>{{time}}</span>
+            <span>{{$t('count_down_value', { hour, minute, second})}}</span>
             <router-link to="/material/fee-history">{{ (pairInfo.fee_rate * 100 || 0) | round(4)   }} % </router-link>
             <!-- {{ ((pairInfo.fee_rate * 100).toFixed(4) || 0) + '%' }} -->
           </div>
@@ -104,12 +104,16 @@ export default {
     return {
       state,
       time:'',
-
+      hour: '',
+      minute: '',
+      second: ''
     }
   },
   computed: {
     title () {
-      return this.$t('contract_' + this.pairInfo.name)
+      return this.$t('FUTURE_&USD', {currency: this.pairInfo.product_name})
+      // return this.$t('contract_' + this.pairInfo.name)
+      // return  this.$t('FUTURE_&USD', {currency: this.pairInfo.name.replace('FUTURE_','').replace('USD','')} )
     },
     moreInfoUrl () {
       return ''
@@ -121,7 +125,7 @@ export default {
       return 0
     },
     adlurl () {
-      let link = 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360024495432'
+      let link = 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360027995111'
       if (this.state.locale === 'en') {
         link = link.replace('zh-cn', 'en-us')
       }
@@ -156,8 +160,11 @@ export default {
     		 mm = checkTime(mm);
     		 ss = checkTime(ss);
     		 if(ts>0){
-           //$this.time = + hh + "时" + mm + "分" + ss + "秒"
-           $this.time = $this.$t('count_down_value', { hour: hh, minute: mm, second: ss})
+           $this.hour = hh
+           $this.minute = mm
+           $this.second = ss
+          //$this.time = + hh + "时" + mm + "分" + ss + "秒"
+          //  $this.time = $this.$t('count_down_value', { hour: hh, minute: mm, second: ss})
     				 startTime++;
          }
          else {

@@ -20,5 +20,4 @@
         @keyframes bg3{0%{ opacity:0;}10%{ opacity:0;}25%{opacity: 0.1;}75%{opacity:0.1;}90%{opacity:0;}100%{opacity:0;}}
         @keyframes bg4{0%{ opacity:0;}15%{ opacity:0;}30%{opacity: 0.1;}70%{opacity:0.1;}85%{opacity:0;}100%{opacity:0;}}
     }
-
 </style>

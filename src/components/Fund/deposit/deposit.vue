@@ -11,10 +11,11 @@
         <div class="row__label">{{ $t('currency') }}</div>
         <div class="row__value">
           <el-select
-            style="width: 440px;"
             v-model="selectCoin"
-            @change="changeCoinType"
-            value-key="currency">
+            style="width: 440px;"
+            filterable
+            value-key="currency"
+            @change="changeCoinType">
             <el-option
               v-for="(item, idx) in allCoins"
               :key="idx"
@@ -30,30 +31,31 @@
       </div>
       <div class="fund-item-other mb-14 coin-list">
         <span
-          :class="['quick-btn mb-10 mr-10', selectCoin.currency === c.currency && 'selected']"
-          @click="quickSelectCoin(c)"
           v-for="(c, idx) in allCoins"
-          :key="idx">
+          :class="['quick-btn mb-10 mr-10', selectCoin.currency === c.currency && 'selected']"
+          :key="idx"
+          @click="quickSelectCoin(c)">
           {{ c.currency }}
         </span>
       </div>
-      <div class="fund-item-row mb-24" v-if="selectCoin.currency === 'USDT'">
+      <div v-if="selectCoin.currency === 'USDT'" class="fund-item-row mb-24">
         <div class="row__label">
           <el-popover
+            :content="depTip"
             placement="bottom-start"
             title=""
             trigger="hover"
             width="240"
-            effect="dark" :content="depTip">
-            <el-button type="text" slot="reference" class="lian">链名称</el-button>
+            effect="dark">
+            <el-button slot="reference" type="text" class="lian">{{ $t('link_name') }}</el-button>
           </el-popover>
         </div>
         <div class="row__value">
           <el-select
-            @change="lianSelect"
-            style="width: 440px;"
             v-model="selectLian"
-            value-key="chain">
+            style="width: 440px;"
+            value-key="chain"
+            @change="lianSelect">
             <el-option
               v-for="(item, idx) in lianData"
               :key="idx"
@@ -73,12 +75,12 @@
           </div>
         </div>
       </div> -->
-       <div class="fund-item-row mb-24" style="height: auto">
+      <div class="fund-item-row mb-24" style="height: auto">
         <div class="row__label">{{ $t('deposit_address') }}</div>
         <div class="row__value">
           <div class="deposit-address-textarea">
             <div class="text-info">
-                {{ address }}
+              {{ address }}
             </div>
             <span
               class="address-copy pointer"
@@ -94,14 +96,14 @@
         <div
           class="qrcode">
           <canvas
-            class="qr-img"
-            ref="qr"/>
+            ref="qr"
+            class="qr-img"/>
         </div>
       </div>
       <!-- address_tag -->
       <div
-        class="fund-item-row"
-        v-if="selectCoin.memo_support">
+        v-if="selectCoin.memo_support"
+        class="fund-item-row">
         <div class="row__label">{{ $t('address_tag') }}</div>
         <div class="row__value">
           <div class="deposit-address">
@@ -113,15 +115,15 @@
         </div>
         <div class="attention">
           <icon
+            v-tooltip.top-center="{html: true,content: robotAttention, classes: 'myfund'} "
             name="robot-info"
             class="icon-eos ml-5 pointer"
-            v-tooltip.top-center="{html: true,content: robotAttention, classes: 'myfund'} "
           />
         </div>
       </div>
       <div
-        class="fund-item-other eos-deposit-tips"
-        v-if="selectCoin.memo_support">
+        v-if="selectCoin.memo_support"
+        class="fund-item-other eos-deposit-tips">
         {{ $t('eos_deposit_tip_label') }}
       </div>
       <ul
@@ -130,16 +132,27 @@
         <li> {{ $t('deposit_hint_addr', {coin: selectCoin.currency}) }}</li>
         <li> {{ $t('deposit_hint_confirm',{confirm: selectCoin.min_confirm, coin: selectCoin.currency}) }}</li>
         <li v-if="selectCoin.memo_support">{{ $t('eos_deposit_tip_security_third') }}</li>
-        <li v-if="selectCoin.currency === 'EOS'">  {{ $t('watch_tips') }}</li>
+        <li >  {{ $t('watch_tips') }}</li>
+        <li v-if="!!contract"> 
+          {{$t('fund_deposit_tip_contract', {contract})}}
+        </li>
+        <li v-if="selectCoin.currency==='MPV'">
+          <span>{{$t('fund_deposit_mpv_tips1')}}</span>
+          <dl>
+            <dd v-html="$t('fund_deposit_mpv_tips2')"></dd>
+            <dd v-html="$t('fund_deposit_mpv_tips3')"></dd>
+            <dd v-html="$t('fund_deposit_mpv_tips4')"></dd>
+          </dl>
+        </li>
       </ul>
     </div>
     <remember-alert
-      class="remember"
-      bg-color="#fff"
       :open.sync="openEosAlert"
       :local-key="'eosAlert'"
-      :curreryCoin="curreryCoin"
+      :currery-coin="curreryCoin"
       :content="'rate_tips_i'"
+      class="remember"
+      bg-color="#fff"
     />
   </div>
 </template>
@@ -149,12 +162,15 @@ import utils from '@/modules/utils'
 import service from '@/modules/service'
 import RememberAlert from '@/components/Trading/RememberAlert'
 import Vue from 'vue'
-import { state } from "@/modules/store"
+import { state } from '@/modules/store'
 const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
 
 export default {
   name: 'Deposit',
-  data () {
+  components: {
+    RememberAlert
+  },
+  data() {
     return {
       address: '',
       memo: '',
@@ -164,39 +180,55 @@ export default {
       openEosAlert: false,
       lianData: [],
       curreryCoin: '',
-      selectLian: {}
+      selectLian: {},
+      contract: ''
     }
   },
-  async created () {
+  computed: {
+    robotAttention() {
+      return ` <div
+            class="attention__tips">
+            <p class="title mb-8">${this.$t('about_eos_address_label')}</p>
+            <p class="mb-4">${this.$t('about_eos_address_label_a')}</p>
+            <p >${this.$t('about_eos_address_label_b')}</p>
+          </div>`
+    },
+    depTip() {
+      return state.locale && this.$t('dep_tip')
+    }
+  },
+  async created() {
     this.getDepositHistory()
     await this.getAllCoinTypes()
     await this.getCoinAddress()
     this.setQr(this.address)
   },
   methods: {
-    copy () {
+    copy() {
       copyToClipboard(this.address)
       utils.success(this.$i18n.t('copyed'))
     },
-    copyMemo () {
+    copyMemo() {
       copyToClipboard(this.memo || '')
       utils.success(this.$i18n.t('copyed'))
     },
-    async getCoinAddress () {
+    async getCoinAddress() {
       const param = {
         chain: this.selectCoin.chain,
         currency: this.selectCoin.currency
       }
       this.address = ''
       this.memo = ''
+      this.contract = '' 
       return service.getMyCoinAddress(param).then((res) => {
         if (res && res.data) {
           this.address = res.data.address
           this.memo = res.data.memo
+          this.contract = res.data.contract
         }
       })
     },
-    async setQr (url) {
+    async setQr(url) {
       const QRCode = await qrcode()
       QRCode.toCanvas(
         this.$refs.qr,
@@ -216,27 +248,25 @@ export default {
         }
       )
     },
-    async changeCoinType (coin) {
-      this.selectCoin = coin
+    async changeCoinType(coin) {
       this.curreryCoin = ''
       await this.getCoinAddress()
       this.setQr(this.address)
       if (coin.currency === 'EOS' || coin.currency === 'PAN') {
         this.openEosAlert = true
-         this.curreryCoin = coin.currency
+        this.curreryCoin = coin.currency
       }
     },
-    async lianSelect (coin) {
+    async lianSelect(coin) {
       this.selectCoin = coin
       await this.getCoinAddress()
     },
-    async getAllCoinTypes () {
+    async getAllCoinTypes() {
       await service.getAllCoinTypes().then(res => {
-
         if (res && res.data) {
           this.lianData = []
           res.data.forEach((item) => {
-            if(item.currency === 'USDT') {
+            if (item.currency === 'USDT') {
               this.lianData.push(item)
             }
           })
@@ -247,10 +277,10 @@ export default {
               Vue.set(item, 'currencyName', item.currency + '-' + 'ERC20')
             }
           })
-          this.selectLian = this.lianData[1]
+          this.lianData = this.lianData.reverse()//顺序颠倒一下，omni要放在前面
           this.allCoins = this.removalData(res.data.filter(c => c.depositable))
           this.allCoins.forEach((item) => {
-            if(state.locale === 'zh-CN') {
+            if (state.locale === 'zh-CN') {
               Vue.set(item, 'full_name', item.zh_name)
             } else {
               Vue.set(item, 'full_name', item.full_name)
@@ -263,24 +293,42 @@ export default {
             })
             return
           }
-          this.selectCoin = this.allCoins[0]
+          if (this.allCoins[0].currency === 'USDT') {
+            this.lianData.forEach((item) => {
+              if (item.currencyName === 'USDT-Omni') {
+                this.selectLian = item
+                this.selectCoin = item
+              }
+            })
+          } else {
+            this.selectCoin = this.allCoins[0]
+          }
         }
       })
     },
-    removalData (arrData) {
+    removalData(arrData) {
       var hash = {}
-      arrData = arrData.reduce(function (item, next) {
+      arrData = arrData.reduce(function(item, next) {
         // num_iid是你要以什么属性去重
         hash[next.currency] ? '' : hash[next.currency] = true && item.push(next)
         return item
       }, [])
       return arrData
     },
-    quickSelectCoin (coin) {
-      this.selectLian = this.lianData[1]
+    quickSelectCoin(coin) {
+      if (coin.currency === 'USDT') {
+        this.lianData.forEach((item) => {
+          if (item.currencyName === 'USDT-Omni') {
+            this.selectLian = item
+            this.selectCoin = item
+          }
+        })
+      } else {
+        this.selectCoin = coin
+      }
       this.changeCoinType(coin)
     },
-    getDepositHistory () {
+    getDepositHistory() {
       const param = {
         page: 1,
         size: 10
@@ -288,22 +336,6 @@ export default {
       service.getDepositHistory(param).then(res => {
         this.tableData = []
       })
-    }
-  },
-  components: {
-    RememberAlert
-  },
-  computed: {
-    robotAttention () {
-      return ` <div
-            class="attention__tips">
-            <p class="title mb-8">${this.$t('about_eos_address_label')}</p>
-            <p class="mb-4">${this.$t('about_eos_address_label_a')}</p>
-            <p >${this.$t('about_eos_address_label_b')}</p>
-          </div>`
-    },
-    depTip () {
-      return state.locale && this.$t('dep_tip')
     }
   }
 }

@@ -109,6 +109,13 @@ export default {
         holding.product_name = pairInfo.product_name
         holding.value_scale = pairInfo.value_scale || 4
         holding.price_scale = pairInfo.price_scale
+        if (currency === 'BTCUSD') {
+          holding.mark_scale = 2
+        }
+        else {
+          holding.mark_scale = pairInfo.price_scale
+        }
+
 
         // holding.lastPrice = lastPrice
         // holding.markPrice = markPrice
@@ -197,10 +204,10 @@ export default {
         }
         else {
           let maxLever = pairInfo.max_leverage || 100
-          let roeMul = 2 
-          if (currency === 'BTCUSD') {
-            roeMul = 1
-          }
+          let roeMul = 1 
+          // if (currency === 'BTCUSD') {
+          //   roeMul = 1
+          // }
            
           holding.roe = unrealized
             .div(holding.value)
@@ -235,6 +242,10 @@ export default {
           } 
           let unwindPrice = this.$big($newValue).round(holding.pairInfo.price_scale || 2, 0)
           this.$set(holding, "unwindPrice", unwindPrice)
+        }
+
+        if (!holding.changeUnwindAmount) {
+          this.$set(holding, "unwindAmount", amount)
         }
 
         holding.margin = "0"

@@ -266,7 +266,7 @@
     <!-- 持有仓位, btc永续 -->
     <div class="ix-pannel flex mt-4">
       <div class="ix-header">
-        <span>{{ $t('contract_hold_pos') }} : {{ $t('contract_' + state.ct.pair) }}</span>
+        <span>{{ $t('contract_hold_pos') }} : {{$t('FUTURE_&USD', {currency: state.ct.product_name} )}}</span>
         <!-- <span class="risk-alert">
           <i
             class="iconfont strong pointer ml-6"
@@ -407,13 +407,13 @@
               <span v-if="currentDealType == 'limit'||
                 currentDealType == 'contract_lose_stopLimit'||
                 currentDealType == 'contract_lose_stopLimit'
-              ">{{ $t('contract_buy_on_price_piece', {price: price, amount: amount, symbol: $t('contract_' + state.ct.pair)}) }}</span>
-              <span else>{{ $t('contract_buy_on_price_piece1', {price: price, amount: amount, symbol: $t('contract_' + state.ct.pair)}) }}</span>
+              ">{{ $t('contract_buy_on_price_piece', {price: price, amount: amount, symbol: $t('FUTURE_&USD', {currency: state.ct.product_name} )}) }}</span>
+              <span else>{{ $t('contract_buy_on_price_piece1', {price: price, amount: amount, symbol: $t('FUTURE_&USD', {currency: state.ct.product_name} )}) }}</span>
             </span>
             <span
               v-else
               class="c-666"
-            >{{ $t('contract_buy_on_price_piece', {price: price, amount: amount, symbol: $t('contract_' + state.ct.pair)}) }}</span>
+            >{{ $t('contract_buy_on_price_piece', {price: price, amount: amount, symbol: $t('FUTURE_&USD', {currency: state.ct.product_name} )}) }}</span>
           </p>
           <p class="mt-8" v-if="isExtOrderType">
             <span
@@ -425,7 +425,7 @@
           <!-- 持有仓位 -->
           <div
             class="mb-17 c-fff"
-          >{{ $t('contract_hold_pos') }} : {{ $t('contract_' + state.ct.pair) }}</div>
+          >{{ $t('contract_hold_pos') }} : {{ $t('FUTURE_&USD', {currency: state.ct.product_name} ) }}</div>
           <!-- 红绿条 -->
           <div class="profit-risk-row mb-20">
             <div
@@ -464,7 +464,7 @@
             >{{ orderValue | round(pairInfo.value_scale || 4) }} BTC</div>
           </div>
           <div class="table__tr c-fff">
-            <div class="col col1">{{ $t('contract_cost_10_times', {lever: userLeverTime==0 ? 100 : userLeverTime}) }}</div>
+            <div class="col col1">{{ $t('contract_cost_10_times', {lever: userLeverTime==0 ? maxLeverage : userLeverTime}) }}</div>
             <div
               class="col"
             >{{ mmModal.label === $t('order_side_buy') ? costValueBuyNew : costValueSellNew }} BTC</div>
@@ -501,7 +501,7 @@
         <div
           class="stopmarket_tips c-primary"
           v-if="isExtOrderType && local.closeAfterTrigger"
-          v-html="$t('contract_win_stopMarket_sell.tips', {symbol: $t('contract_' + state.ct.pair)})"/>
+          v-html="$t('contract_win_stopMarket_sell.tips', {symbol: $t('FUTURE_&USD', {currency: state.ct.product_name} )})"/>
         <div class="never-show pt-10 mb-10">
           <input type="checkbox" v-model="mmModal.neverShow">
           {{ $t('contract_never_show') }}
@@ -992,7 +992,7 @@ export default {
     costValueBuyNew() { 
       //  console.log({holding:this.holding})
        let amount = this.amount;
-      if (amount > 0 && this.balance && this.$big(this.balance.amount).plus(this.buyDelAmount) < 0) {
+      if (amount > 0 && this.balance && this.$big(this.balance.holding).plus(this.buyDelAmount) < 0) {
         amount = -(-amount - this.balance.amount - this.buyDelAmount)
         if (amount < 0) {
           amount = 0;
@@ -1037,7 +1037,7 @@ export default {
       let amount = this.amount;
        
       // 有已持仓，做对手时，判断持仓是否可以对冲，不可对冲部分算成本
-      if (amount > 0 && this.balance && this.$big(this.balance.amount).plus(this.sellDelAmount) > 0) {
+      if (amount > 0 && this.balance && this.$big(this.balance.holding).plus(this.sellDelAmount) > 0) {
         amount = amount - this.balance.amount - this.sellDelAmount ;
         if (amount < 0) {
           amount = 0;
@@ -1598,7 +1598,7 @@ export default {
       local.mmNeverShow = this.mmModal.neverShow;
       const side = this.exchangeDir;
       const $$price = this.getValues("price");
-      const $price = this.$big($$price || side);
+      const $price = this.$big($$price || 0);
       const $amount = this.$big(this.getValues("amount", side) || 0);
 
       //yzf 2019/3/7
@@ -1761,7 +1761,7 @@ export default {
 
       this.exchangeDir = side;
       const $$price = this.getValues("price");
-      let $price = this.$big($$price || side);
+      let $price = this.$big($$price || 0);
       const $amount = this.$big(this.getValues("amount", side) || 0);
       const $bid = this.$big(this.state.ct.bid || 0);
       const $ask = this.$big(this.state.ct.ask || 0);
@@ -1813,7 +1813,7 @@ export default {
       $value = this.$big($value)
       if ($value.gt(this.balance.available_balance)) {
         if (true){
-          return this.$toast({title: '委托提交失败',body:  `可用余额不足，无法提交委托。`,color: 'red'})
+          return this.$toast({title: this.$t('order_apply_failed'), body: this.$t('order_apply_message_a'), color: 'red'})
          } else {
           return utils.alert(this.$i18n.t("amount_over")); //余额不足
         }
@@ -1842,8 +1842,8 @@ export default {
       if (side === "BUY" && $ask.gt(0) && $price.div(1.3).gt($ask)) {
         if (true){
           let toastText = {
-                title: '委托提交失败',
-                body:  `当前下单价格与盘口价格差异过大，无法提交委托。`,
+                title:  this.$t('order_apply_failed'),
+                body:   this.$t('order_apply_message_b'),
                 color: 'red'
             }
           this.$toast(toastText)
@@ -1907,8 +1907,7 @@ export default {
         // 做空
         this.mmModal.label = this.$t("order_side_sell");
         this.btnShortLoading = true;
-      } 
-      this.showMakeMoreModal = true;
+      }  
       // 先打开弹窗
       if (!local.mmNeverShow) {
         this.showMakeMoreModal = true;
@@ -1948,16 +1947,21 @@ export default {
       let res = await service.orderContract(order);
       if (!res.code) {
         this._resetLoadingState();
-        // 通知所有组件，有数据更新，需要强制刷新数据
-        //console.log("doSubmit")
+        // 通知所有组件，有数据更新，需要强制刷新数据 
         this.$eh.$emit("protrade:order:refresh", "doSubmit");
         // utils.success(this.$t("contract_order_success"));
         let side =''
-        res.data.side === 2 ? side = '买入' :side = '卖出'
+        let data = res.data
+        data.side === 1 ? side = this.$t('order_side_buy') :side = this.$t('order_side_sell')
+ 
         if(this.userSetting.submission){
+          let content = this.$t('order_apply_message_c', {price: data.price, side, amount: data.amount, currency: data.symbol.replace('FUTURE_','').replace('USD','')  })
+          if (order.type > 2) {
+            content = `<p>${content}</p><p>${this.$t('contract_trigger_price')}:${order.trigger_price}</p>`
+          }
           let toastText = {
-            title: '委托已提交',
-            body: `在${res.data.price}价格${side}${res.data.amount}张BTC永续合约。`,
+            title: this.$t('message_setting_content_02'),// '委托已提交', 
+            body: content,
             color: 'yellow'
           }
           this.$toast(toastText)
@@ -2010,7 +2014,7 @@ export default {
           }
           //当触发价格低于盘口价格时，可以卖出止损
           else if (tprice < lprice) {
-            [this.buyEnabled, this.sellEnabled] = [false, true];
+            [this.buyEnabled, this.sellEnabled] = [false, true]; 
           }
         }
         //限价止盈  市价止盈
@@ -3000,7 +3004,7 @@ export default {
 .mask {
   width: 100%;
   height: 100%;
-  z-index: 0;
+  z-index: 2;
   position: absolute;
   left: 0;
   top: 0;

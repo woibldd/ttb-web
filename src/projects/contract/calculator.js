@@ -31,8 +31,7 @@ export default {
       let mul = Big(pairInfo.multiplier) //乘数
       value = mul.times(price).times(amount)
       // ix = Big(max_leverage).div(Big(lever).eq(0) ? max_leverage : lever).round(6, down)
-    }
-    console.log({value:value.toString()})
+    } 
     totalValue = (totalValue == null || totalValue.eq(0)) ? value : totalValue
     // let count = 0
     // if (pairInfo.name === 'FUTURE_BTCUSD') {
@@ -110,16 +109,28 @@ export default {
       cost: margin.plus(fee)
     }
   }, 
-  getStorageInfo ({direction, lever, amount, open_price, close_price}) {
+  getStorageInfo ({direction, lever, amount, open_price, close_price, symbol}) {
     if (direction === 'less') {
       amount = -amount
     }
+    
     if (lever == 0) {
-      lever = 100
+      lever = symbol.max_leverage
     }
-    let open_value = Big(amount).div(open_price || 1).abs()
-    let close_value = Big(close_price).div(open_price || 1).mul(open_value).abs()
-    let margin = Big(open_value).mul(100).div(lever || 100).mul(0.01).abs()
+    let open_value = Big(0)
+    let close_value = Big(0)
+    let margin = Big(0)
+
+    if (symbol.product_name === 'BTC') {
+      open_value = Big(amount).div(open_price || 1).abs()
+      close_value = Big(close_price).div(open_price || 1).mul(open_value).abs()
+      margin = Big(open_value).mul(100).div(lever || 100).mul(0.01).abs()
+    } else {
+      open_value =  Big(amount || 0).times(open_price || 0).times(symbol.multiplier).abs()
+      close_value = Big(close_price).div(open_price || 1).mul(open_value).abs() 
+      margin = Big(open_value).mul(symbol.max_leverage).div(lever || symbol.max_leverage).mul(symbol.im).abs()
+    }
+
     let realized = close_value.minus(open_value).mul(amount < 0 ? -1 : 1)
     let realized_roe = realized.div(open_value || 1).mul(100)
     let roe = realized_roe.mul(lever)
@@ -210,6 +221,10 @@ export default {
         force_price = result.round(price_scale || 4).toString()
       }
     }
+    //计算强平价格小于0时，将其赋值为0
+    if (Big(force_price).lt(0)) {
+      force_price = Big(0)
+    }
     let new_amount = Number(current) + Number(amount * (direction === 'less' ? -1 : 1))
 
     return {
@@ -291,6 +306,10 @@ export default {
         force_price = (value.minus(imDiff).minus(avia)).div(mulvol)
       }
     } 
+    //计算强平价格小于0时，将其赋值为0
+    if (Big(force_price).lt(0)) {
+      force_price = Big(0)
+    }
     // console.log({
     //   value:value.toString(),
     //   im: im.toString(),

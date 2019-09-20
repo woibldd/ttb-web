@@ -93,5 +93,6 @@ td:first-child {
     position: relative;
     display: flex;   // 不能缺少了上面的position属性哈
     flex-direction: row;
+    white-space: nowrap;
 }
 </style>

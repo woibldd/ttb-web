@@ -79,7 +79,7 @@
               <i>{{scope.row[hd.key]}} </i>
             </span>
             <span v-else-if="hd.key === 'estValue'">{{ scope.row[hd.key] || 0 | fixed(unit.scale) }}</span>
-            <span v-else>{{ scope.row[hd.key] || 0 }}</span>
+            <span v-else>{{ scope.row[hd.key] || 0 | fixed(8)}}</span>
           </template>
         </el-table-column>
 

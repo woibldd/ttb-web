@@ -3,7 +3,7 @@
     <div class="page-fund-content">
       <fund-left/>
       <div class="fund-right">
-        <router-view/>
+        <router-view :key="this.$route.path"/>
       </div>
     </div>
   </div>
@@ -14,11 +14,11 @@ import FundLeft from './left'
 import responsiveScale from '@/mixins/responsiveScale'
 
 export default {
-  mixins: [responsiveScale],
   name: 'OTC',
   components: {
     FundLeft
   },
+  mixins: [responsiveScale],
   computed: {
   }
 
@@ -54,9 +54,9 @@ export default {
         height:28px;
         line-height: 28px;
         text-align: center;
-        border:1px solid rgba(193,164,66,1);
+        border:1px solid #999;
         border-radius:14px;
-        color: $primary;
+        color: #999;
         font-size: 14px;
         cursor: pointer;
     }
@@ -108,7 +108,6 @@ export default {
         }
     }
 
-
     .fund__spot {
         display: inline-block;
         width:4px;
@@ -117,6 +116,5 @@ export default {
         border-radius:50%;
     }
 }
-
 
 </style>

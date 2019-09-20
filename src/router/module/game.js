@@ -34,7 +34,10 @@ export const gameRouter = [
   {
     path: '/bid',
     name: 'Bid',
-    component: Bid
+    component: Bid,
+    meta: {
+      require: false
+    }
   },
   {
     path: '/bidDetail',

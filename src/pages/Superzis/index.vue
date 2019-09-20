@@ -2,15 +2,15 @@
   <div class="otc-buy-container">
     <div class="otc-buy-inner">
       <div class="title">
-        <span class="font24 font-weight font-base title-text">一键买币</span>
-        <span class="font-gray">小额快速交易，单笔50000以下</span>
+        <span class="font24 font-weight font-base title-text">{{ this.$t('yj_mb') }}</span>
+        <!-- <span class="font-gray">{{this.$t('xe_je')}}</span> -->
       </div>
      <div class="but-form">
        <div class="tip">
-         <el-tooltip content="非最终交易单价，仅供参考" placement="top" effect="light">
+         <el-tooltip :content="$t('jg_ck')" placement="top" effect="light">
         <i class="iconfont">&#xe62e;</i>
         </el-tooltip>
-        <span> {{currency}}参考单价：</span> {{ downPrice }} CNY/{{ currency }}
+        <span> {{currency}}{{$t('ck_jg')}}：</span> {{ downPrice }} CNY/{{ currency }}
        </div>
        <div class="amount-btn-con">
          <div class="btn-list">
@@ -22,47 +22,49 @@
               v-model="price"
               :scale="pricePoint"
               @blur="focus"
-              placeholder="请输入价格"
+              :placeholder="this.$t('a_price_i')"
             />
            <span class="company"> CNY </span>
          </div>
-         <div class="err-msg" v-if="err">最小下单金额为100CNY</div>
           <div class="btn-ipt" v-show="paySelect === 1">
            <number-input
               class="number-input"
               v-model="amount"
               :scale="amountPoint"
-              placeholder="请输入数量"
+              :placeholder="this.$t('a_account_i')"
             />
            <span class="company"> {{ currency }} </span>
          </div>
-         <div class="tip">选择付款方式</div>
+         <div class="tip"> {{this.$t('ky_dq')}} </div>
          <div class="pay-list-con">
-           <div class="pay-list" v-for="(item, index) in payData" :key="index" :data-pay="item.name" :class="{active: active === index, 'excellent': item.excellent}" @click="tabHanlde(item, index)">{{ item.name }}</div>
+           <div class="pay-list" v-for="(item, index) in payData" 
+            :key="index" :data-pay="item.name" 
+            :class="[ state.locale.toString(), {active: active === index, 'excellent': item.excellent}]" 
+            @click="tabHanlde(item, index)">{{ item.name }}</div>
          </div>
          <div class="result-msg">
            <dl>
              <dt></dt>
              <dd>
-               <span>成交单价：</span>
+               <span>{{ this.$t('cj_jg') }}: </span>
                <template v-if="Number(price) >= 100 || amount">
                    <template v-if="Number(result.unitPrice) > 0">
                        <em>{{result.unitPrice}} CNY/{{currency}}</em>
                    </template>
                    <template v-else>
                        <div class="result-no-msg">
-                           <i class="iconfont">&#xe61c;</i>未找到合适报价，修改条件或
+                           <i class="iconfont">&#xe61c;</i>{{ this.$t('wz_xx') }}
                            <router-link
-                            to="/OTC/Trade"> {{ $t('查看所有报价') }}</router-link>
+                            to="/OTC/Trade"> {{ $t('ck_bj') }}</router-link>
                        </div>
                    </template>
                </template>
                <template v-else>
-                   <em>输入购买 {{ type }} 后获取</em>
+                   <em>{{this.$t('sr_hq', {type: type})}}</em>
                </template>
              </dd>
              <dd>
-               <span>成交数量：</span>
+               <span>{{ this.$t('cj_sl') }}</span>
                <template v-if="amount">
                    <em>{{amount}} {{currency}}</em>
                </template>
@@ -71,7 +73,7 @@
                </template>
              </dd>
              <dd>
-               <span>成交总额：</span>
+               <span>{{ this.$t('cj_ze') }}: </span>
                <template v-if="price">
                    <em>{{price}} {{company}}</em>
                </template>
@@ -85,10 +87,10 @@
            <!--购买-->
            <el-button
             v-loading="loading"
-            class="res-btn" @click="purchaseHandle" style="width: 100%;" :disabled="buyDisabled">购买USDT</el-button>
+            class="res-btn" @click="purchaseHandle" style="width: 100%;" :disabled="buyDisabled">{{ this.$t('b_usdt') }}</el-button>
          </div>
          <div class="result-btn" v-if="overdue">
-           <el-button class="err-btn" @click="overdueHandle" style="width: 100%;">报价已过期，点击获取最新价格</el-button>
+           <el-button class="err-btn" @click="overdueHandle" style="width: 100%;"> {{this.$t('bj_xx')}} </el-button>
          </div>
        </div>
      </div>
@@ -115,7 +117,7 @@ export default {
       pricePoint: 2,
       amountPoint: 2,
       price: '',
-      type: '金额',
+      type: this.$t('but_je'),
       amount: '',
       timer: null,
       priceFlag: true,
@@ -131,25 +133,26 @@ export default {
       payData: [
         {
             excellent: false,
-            name: '银行卡',
+            name: this.$t('but_bank'),
             pay: 1,
             data: {}
         },
         {
             excellent: false,
-            name: '支付宝',
+            name: this.$t('but_aliPay'),
             pay: 2,
             data: {}
         },
         {
             excellent: false,
-            name: '微信',
+            name: this.$t('but_wechat'),
             pay: 3,
             data: {}
         }
       ],
-      payTypeData: ['按金额购买', '按数量购买'],
+      payTypeData: [this.$t('b_1'), this.$t('b_2')],
       loading: false,
+      state,
     }
   },
   computed: {
@@ -187,7 +190,7 @@ export default {
     },
     selectHanlde(index) {
         this.paySelect = index
-        this.type = index === 0 ? '金额' : '数量'
+        this.type = index === 0 ? this.$t('but_je') : this.$t('but_sl')
         this.priceFlag = index === 0 ? true : false
         this.amountFlag = index === 0 ? false : true
         this.price = 0
@@ -210,7 +213,7 @@ export default {
           }).then((res) => {
             this.loading = false
              if (res.code === 0) {
-                 this.$message.success('提交成功')
+                 this.$message.success(this.$t('tj_cg'))
                  this.$router.push('/OTC/Hir')
              } else {
                  this.$message.warning(res.message)
@@ -229,7 +232,7 @@ export default {
               }).then((res) => {
                 this.loading = false
                 if (res.code === 0) {
-                    this.$message.success('提交成功')
+                    this.$message.success(this.$t('tj_cg'))
                     this.$router.push('/OTC/Hir')
                 } else {
                     this.$message.warning(res.message)
@@ -566,6 +569,18 @@ export default {
             top: -5px;
             color: #fff;
             font-size: 12px!important;
+          }
+          &.zh-CN::after {
+            content: '单价最优';
+          }
+          &.en::after {
+            content: 'Optimum';
+          }
+          &.zh-HK::after {
+            content: '單價最優';
+          }
+          &.ko::after {
+            content: '최혜택';
           }
         }
         .disabled {

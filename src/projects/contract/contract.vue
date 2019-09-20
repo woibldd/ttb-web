@@ -1,9 +1,9 @@
 <template>
-  <div class="page-contract">
+  <div class="page-contract" style="clear:both">
     <div class="container-trade-panel">
       <!-- 1-1 -->
       <div class="ix-row mt-0 overflow-hidden">
-        <div class="ix-col ix-col-1" style='width:600px;'>
+        <div class="ix-col ix-col-1" style="width:600px;">
           <div class="flex">
             <pairTable
               :list="sortedList"
@@ -18,14 +18,14 @@
           </div>
         </div>
         <!-- 挂单簿 -->
-        <section class="order-section mt-4" style='width:500px;'>
+        <section class="order-section mt-4" style="width:500px;">
           <div class="only-orders">
             <!-- 委托列表 -->
-            <div class="ix-col ix-col-2 ml-4 relative" style='width:50%;'>
+            <div class="ix-col ix-col-2 ml-4 relative" style="width:50%;">
               <order-book/>
             </div>
             <!--  最新成交 -->
-            <div class="ix-col ix-col-3 ml-4 relative" style='width:50%;'>
+            <div class="ix-col ix-col-3 ml-4 relative" style="width:50%;">
               <order-deal/>
             </div>
           </div>
@@ -86,57 +86,57 @@
         </div>
         <div class="contract-switch">
           <ul><li :class="{'contract-active':problemType}"><span>1</span>{{ $t('contract_answer') }}</li>
-            <li :class="{'contract-active':!problemType}"><span>2</span>{{ $t('contract_tips') }}</li></ul>
+          <li :class="{'contract-active':!problemType}"><span>2</span>{{ $t('contract_tips') }}</li></ul>
         </div>
-        <div class="contract-problem" v-show="problemType">
-            <div class="contract-problem-list">
-              <h1>{{ $t('problem_list1') }}<strong v-show="problemLstt[0] === 'false' && !problemError">x</strong></h1>
-              <span><input type="radio" value="false" v-model="problemLstt[0]"><label for="">{{ $t('answer_list2_1') }}</label></span>
-              <span><input type="radio" value="true" v-model="problemLstt[0]"><label for="">{{ $t('answer_list2_2') }}</label></span>
-            </div>
-            <div class="contract-problem-list">
-              <h1>{{ $t('problem_list2') }}<strong v-show="problemLstt[1] === 'false' && !problemError">x</strong></h1>
-              <span><input type="radio" value="true" v-model="problemLstt[1]"><label for="">0.1</label></span>
-              <span><input type="radio" value="false" v-model="problemLstt[1]"><label for="">1</label></span>
-            </div>
-            <div class="contract-problem-list">
-              <h1>{{ $t('problem_list3') }}<strong v-show="problemLstt[2] === 'false' && !problemError">x</strong></h1>
-              <span><input type="radio" value="true" v-model="problemLstt[2]"><label for="">{{ $t('answer_list3_1') }}</label></span>
-              <span><input type="radio" value="false" v-model="problemLstt[2]"><label for="">{{ $t('answer_list3_2') }}</label></span>
-            </div>
-            <div class="contract-problem-list">
-              <h1>{{ $t('problem_list4') }}<strong v-show="problemLstt[3] === 'false' && !problemError">x</strong></h1>
-              <span><input type="radio" value="true" v-model="problemLstt[3]"><label for="">{{ $t('answer_list4_1') }}</label></span>
-              <span><input type="radio" value="false" v-model="problemLstt[3]"><label for="">{{ $t('answer_list4_2') }}</label></span>
-            </div>
-            <div class="contract-problem-list">
-              <h1>{{ $t('problem_list5') }}<strong v-show="problemLstt[4] === 'false' && !problemError">x</strong></h1>
-              <span><input type="radio" value="false" v-model="problemLstt[4]"><label for="">{{ $t('answer_list5_1') }}</label></span>
-              <span><input type="radio" value="true" v-model="problemLstt[4]"><label for="">{{ $t('answer_list5_2') }}</label></span>
-            </div>
-            <div class="contract-problem-list">
-              <h1>{{ $t('problem_list6') }}<strong v-show="problemLstt[5] === 'false' && !problemError">x</strong></h1>
-              <span><input type="radio" v-model="problemLstt[5]" value="true"><label for="">{{ $t('answer_list6_1') }}</label></span>
-              <span><input type="radio" v-model="problemLstt[5]" value="false"><label for="">{{ $t('answer_list6_2') }}</label></span>
-            </div>
-            <div class="contract-problem-list">
-              <h1>{{ $t('problem_list7') }}<strong v-show="problemLstt[6] === 'false' && !problemError">x</strong></h1>
-              <span><input type="radio" v-model="problemLstt[6]" value="true"><label for="">{{ $t('answer_list7_1') }}</label></span>
-              <span><input type="radio" v-model="problemLstt[6]" value="false"><label for="">{{ $t('answer_list7_2') }}</label></span>
-            </div>
-            <div class="contract-problem-list">
-              <h1>{{ $t('problem_list8') }}<strong v-show="problemLstt[7] === 'false' && !problemError">x</strong></h1>
-              <span><input type="radio" value="true" v-model="problemLstt[7]"><label for="">{{ $t('answer_list8_1') }}</label></span>
-              <span><input type="radio" value="false" v-model="problemLstt[7]"><label for="">{{ $t('answer_list8_2') }}</label></span>
-            </div>
-            <div class="contract-eqcode">
-              <img src="@/assets/eqcode.jpg" alt="">
-              <span>如有疑问，请联系 官方微信客服寻求 帮助</span>
-            </div>
-            <span class="contract-error" v-show="!problemError">{{ problemText }}</span>
-            <button class="contract-btn" @click="downStep">{{ $t('contract_submission') }}</button>
+        <div v-show="problemType" class="contract-problem">
+          <div class="contract-problem-list">
+            <h1>{{ $t('problem_list1') }}<strong v-show="problemLstt[0] === 'false' || problemLstt[0] === '' && !problemError">x</strong></h1>
+            <span><input v-model="problemLstt[0]" type="radio" value="false"><label for="">{{ $t('answer_list2_1') }}</label></span>
+            <span><input v-model="problemLstt[0]" type="radio" value="true"><label for="">{{ $t('answer_list2_2') }}</label></span>
+          </div>
+          <div class="contract-problem-list">
+            <h1>{{ $t('problem_list2') }}<strong v-show="problemLstt[1] === 'false' || problemLstt[1] === '' && !problemError">x</strong></h1>
+            <span><input v-model="problemLstt[1]" type="radio" value="true"><label for="">0.1</label></span>
+            <span><input v-model="problemLstt[1]" type="radio" value="false"><label for="">1</label></span>
+          </div>
+          <div class="contract-problem-list">
+            <h1>{{ $t('problem_list3') }}<strong v-show="problemLstt[2] === 'false' || problemLstt[2] === '' && !problemError">x</strong></h1>
+            <span><input v-model="problemLstt[2]" type="radio" value="true"><label for="">{{ $t('answer_list3_1') }}</label></span>
+            <span><input v-model="problemLstt[2]" type="radio" value="false"><label for="">{{ $t('answer_list3_2') }}</label></span>
+          </div>
+          <div class="contract-problem-list">
+            <h1>{{ $t('problem_list4') }}<strong v-show="problemLstt[3] === 'false' || problemLstt[3] === '' && !problemError">x</strong></h1>
+            <span><input v-model="problemLstt[3]" type="radio" value="true"><label for="">{{ $t('answer_list4_1') }}</label></span>
+            <span><input v-model="problemLstt[3]" type="radio" value="false"><label for="">{{ $t('answer_list4_2') }}</label></span>
+          </div>
+          <div class="contract-problem-list">
+            <h1>{{ $t('problem_list5') }}<strong v-show="problemLstt[4] === 'false' || problemLstt[4] === '' && !problemError">x</strong></h1>
+            <span><input v-model="problemLstt[4]" type="radio" value="false"><label for="">{{ $t('answer_list5_1') }}</label></span>
+            <span><input v-model="problemLstt[4]" type="radio" value="true"><label for="">{{ $t('answer_list5_2') }}</label></span>
+          </div>
+          <div class="contract-problem-list">
+            <h1>{{ $t('problem_list6') }}<strong v-show="problemLstt[5] === 'false' || problemLstt[5] === '' && !problemError">x</strong></h1>
+            <span><input v-model="problemLstt[5]" type="radio" value="true"><label for="">{{ $t('answer_list6_1') }}</label></span>
+            <span><input v-model="problemLstt[5]" type="radio" value="false"><label for="">{{ $t('answer_list6_2') }}</label></span>
+          </div>
+          <div class="contract-problem-list">
+            <h1>{{ $t('problem_list7') }}<strong v-show="problemLstt[6] === 'false' || problemLstt[6] === '' && !problemError">x</strong></h1>
+            <span><input v-model="problemLstt[6]" type="radio" value="true"><label for="">{{ $t('answer_list7_1') }}</label></span>
+            <span><input v-model="problemLstt[6]" type="radio" value="false"><label for="">{{ $t('answer_list7_2') }}</label></span>
+          </div>
+          <div class="contract-problem-list">
+            <h1>{{ $t('problem_list8') }}<strong v-show="problemLstt[7] === 'false' || problemLstt[7] === '' && !problemError">x</strong></h1>
+            <span><input v-model="problemLstt[7]" type="radio" value="true"><label for="">{{ $t('answer_list8_1') }}</label></span>
+            <span><input v-model="problemLstt[7]" type="radio" value="false"><label for="">{{ $t('answer_list8_2') }}</label></span>
+          </div>
+          <div class="contract-eqcode">
+            <img src="@/assets/eqcode.jpg" alt="">
+            <span>如有疑问，请联系 官方微信客服寻求 帮助</span>
+          </div>
+          <span v-show="!problemError" class="contract-error">{{ problemText }}</span>
+          <button class="contract-btn" @click="downStep">{{ $t('contract_submission') }}</button>
         </div>
-        <div class="contract-problem" v-show="!problemType">
+        <div v-show="!problemType" class="contract-problem">
           <!-- <div class="m_title"> 老版的合同
             {{ $t('contract_risk_announce') }}
           </div>
@@ -156,288 +156,34 @@
           <p class="m_detail">{{ $t('contract_content6') }}</p>
           <p class="m_detail">{{ $t('contract_content7') }}</p>
           <p class="m_detail">{{ $t('contract_content8') }}</p>
-        <v-btn
-          class="mt-25"
-          @click="openContractAccount"
-          :label="$t(state.isSimulation ? 'contract_simulation_risk_known' : 'contract_risk_known')"/>
+          <v-btn
+            :label="$t(state.isSimulation ? 'contract_simulation_risk_known' : 'contract_risk_known')"
+            class="mt-25"
+            @click="openContractAccount"/>
         </div>
       </div>
     </v-modal>
   </div>
 </template>
 <script>
-import pairTable from "./components/contract-pair-nav";
-import tradingView from "./components/contract-trading-view";
-import history from "./components/contract-history";
+import pairTable from './components/contract-pair-nav'
+import tradingView from './components/contract-trading-view'
+import history from './components/contract-history'
 // import contractDeepth from './components/contract-deepth'
-import contractDeepth from "./components/contract-deepth.am";
-import marketInfo from "./components/contract-market-info";
-import orderBook from "./components/contract-orderbook";
-import orderDeal from "./components/contract-orderdeal";
-import orderAction from "./components/contract-orderaction";
-import tickTableMixin from "@/mixins/contract-tick-table";
-import { state, actions, local } from "@/modules/store";
-import calculate from "./components/calculate";
-import ContractSetup from "./components/setup";
-import utils from "@/modules/utils";
-import service from "@/modules/service";
-import pairInfoMixins from "./components/statePairInfoComputedMixins";
+import contractDeepth from './components/contract-deepth.am'
+import marketInfo from './components/contract-market-info'
+import orderBook from './components/contract-orderbook'
+import orderDeal from './components/contract-orderdeal'
+import orderAction from './components/contract-orderaction'
+import tickTableMixin from '@/mixins/contract-tick-table'
+import { state, actions, local } from '@/modules/store'
+import calculate from './components/calculate'
+import ContractSetup from './components/setup'
+import utils from '@/modules/utils'
+import service from '@/modules/service'
+import pairInfoMixins from './components/statePairInfoComputedMixins'
 
 export default {
-  mixins: [tickTableMixin, pairInfoMixins],
-  data() {
-    return {
-      problemType: true,
-      problemError: true,
-      problemLstt: ['','','','','','','',''],
-      state,
-      // 计算器
-      showCalculator: false,
-      showSetupModal: false,
-      problemText:'',
-      // 合约激活
-      contractNotActive: false
-    };
-  },
-  watch: {
-    problemLstt:function(){
-
-      console.log(this.problemType,!this.problemType)
-    },
-    "$route.query.pair": {
-      async handler(pair) {
-        if (!pair) return; 
-        const match = pair.match(/^([A-Za-z]*)_([A-Za-z]*)$/);
-        if (match) {
-          this.state.ct.pair = pair;
-          local.future = pair;
-
-          const res = await service.getContractPairInfo({ symbol: pair });
-          if (!res.code) {
-            this.state.ct.pairInfo = res.data;
-            this.state.ct.product_name = res.data.product_name;
-            this.state.ct.currency_name = res.data.currency_name;
-            this.state.ct.symbol = res.data.symbol;
-            if (this.isLogin) {
-              this.checkActiveContract();
-            }
-            this.$eh.$emit("protrade:balance:refresh");
-            let resp = await service.getContractSymInfo({
-              symbol: this.symbol.name
-            });
-            if (!resp.code) {
-              Object.assign(this.state.ct.pairInfo, resp.data);
-            }
-          } else {
-            this.state.ct.pairInfo = null;
-          }
-        } else {
-        }
-        // alert(pair)
-      },
-      immediate: true
-    }
-  },
-  async created() {
-    let newOrder = {}; 
-    const $this = this 
-    setInterval(function(){
-      //console.log(this.problemError) 
-      service.getOrderfills({page: 1,size: 10,symbol: "FUTURE_BTCUSD"}).then(res => {
-        if (!res.code) {
-          let number = 0
-          if (JSON.stringify(newOrder) === '{}') {
-            newOrder = res.data.data
-            return false
-          }
-
-          let newOrderList = []
-          let oneListObj = newOrder[0] 
-          if (JSON.stringify(newOrder) !== JSON.stringify(res.data.data)){
-            for (var i in res.data.data) {
-              if(JSON.stringify(res.data.data[i]) === JSON.stringify(oneListObj)){
-                break;
-              }
-              newOrderList.push(res.data.data[i])
-            } 
-            console.log(newOrderList)
-            $this.toast(newOrderList)
-            newOrder = res.data.data 
-            $this.$eh.$emit("protrade:order:refresh", 1)
-          }
-          
-          //刷新已成交表头的数量
-          $this.$eh.$emit("setOrderfill:count", res.data.total)
-        }
-      })
-    },5000)
- 
-    await actions.updateSession();
-    document.querySelector(".page-loading").classList.add("show");
-    if (!this.$route.params.pair) {
-      const res = await service.getContractSymList();
-      if (res.code) {
-        return utils.alert(res.message);
-      }
-      let pair = res.data.items.filter(item => item.name === local.future).length
-        ? local.future
-        : res.data.items[0].name;
-
-       //console.log({pair, data: res.data})
-      //保存所有币对的基本信息
-      this.state.ct.pairInfoList = {}
-      res.data.items.forEach(element => {
-        this.state.ct.pairInfoList[element.name] = element
-      });
-      
-      this.$router.replace({
-        name: "spa_contract",
-        query: {
-          pair: pair
-        }
-      });
-    }
-    this.$nextTick(() => {
-      // const layoutHeight = window.innerHeight
-      // this.$refs.wrap.style.height = layoutHeight + 'px'
-      this.state.loading = false;
-      this.state.ct.layout = true;
-
-      this.setGridContainers();
-      this.$eh.$emit("protrade:layout:init");
-      utils.log("Layout inited");
-
-      this.$eh.$on('app:resize', this.onresize)
-      // this.$eh.$on('deal:update', this.dealChanged)
-      document.querySelector(".page-loading").classList.remove("show");
-    });
-    this.state.loading = true;
-
-
-    // setInterval(() => {
-    //   this.loopFetch();
-    // }, 30e3);
-  },
-  computed: { 
-    isLogin () {
-      return !!this.state.userInfo
-    },
-    pairTick() {
-      if (this.state.ct.pairTick) {
-        return this.state.ct.pairTick;
-      }
-      return {};
-    }
-  },
-  methods: {
-    onresize () { 
-      // let bodyHeight = this.container.height - 88 + 'px'
-    },
-    /**
-     * 激活
-     */
-    toast(newOrder){
-      let number = 0
-      let $this = this
-      for (let i in newOrder) {
-        if(newOrder[i].origin === 2 ){
-          $this.$toast({title:  $this.$t('entrusted_mandatory_liquidation'),
-          body: $this.$t('successfully_body_text_system',{price:newOrder[i].price,amount:newOrder[i].amount}),color: 'red'})
-        }
-
-        if(newOrder[i].origin === 4 ){
-          $this.$toast({title: $this.$t('system_automatic_warehouse_closing'),
-          body: $this.$t('successfully_body_text_reduce',{price:newOrder[i].price,amount:newOrder[i].amount}),color: 'red'})
-        }
-
-        if (newOrder[i].origin !== 2 & newOrder[i].origin !== 4){
-          // console.log(newOrder[i])
-          setTimeout(function(){
-            let cn = ''
-            newOrder[i].side  === 1 ? cn = $this.$t('order_side_buy') : cn = $this.$t('order_side_sell')
-            $this.$toast({title: $this.$t('successful_trade'),
-            body:$this.$t('successful_purchase_of_contracts',{language:cn,amount:newOrder[i].amount}),
-            color: 'green'})
-          },3000*number)
-          number++
-        }
-      }
-    },
-    downStep(){
-      for( var i =0; i<this.problemLstt.length; i++ ){
-          if(this.problemLstt[i] === ''){
-            this.problemError = false
-            this.problemText = this.$t('answer_the_question')
-            return false
-          } else if(this.problemLstt[i] !== 'true') {
-            this.problemError = false
-            this.problemText =  this.t("contract_error")
-            return false
-          } else{
-            this.problemError = true
-          }
-       }
-      if (this.problemError) {
-        this.problemType = false
-      }
-    },
-    openContractAccount () {
-      service
-        .activeContract(this.pairInfo.symbol, this.state.isSimulation)
-        .then(res => {
-          if (!res.code) {
-            this.contractNotActive = !res.data.state;
-            console.log(this.contractNotActive,12345679)
-            utils.success(this.$t("contract_has_active"));
-            this.$eh.$emit("protrade:balance:refresh");
-          } else {
-            utils.alert(res.message);
-          }
-        });
-    },
-    openSetting() {
-      this.showCalculator = true;
-    },
-    changePair(pair) {
-      this.$router.replace({
-        name: "spa_contract",
-        query: {
-          pair: pair
-        }
-      });
-    },
-    setGridContainers() {
-      for (var compName in this.$options.components) {
-        if (!this.$refs[compName]) {
-          continue;
-        }
-        const grid = this.$refs["grid" + compName];
-        this.$refs[compName].container = {
-          width: grid.clientWidth,
-          height: grid.clientHeight
-        };
-      }
-    },
-    async loopFetch() {
-      let resp = await service.getContractSymInfo({
-        symbol: this.symbol.name
-      });
-      if (!resp.code) {
-        Object.assign(this.state.ct.pairInfo, resp.data);
-      }
-    },
-    checkActiveContract() {
-      // 先检查是否开通合约
-      service
-        .checkContractActive(this.pairInfo.symbol, this.state.isSimulation)
-        .then(res => {
-          if (!res.code){
-            this.contractNotActive = !res.data.state;
-            window.localStorage["contract"] = this.contractNotActive
-          }
-        });
-    }
-  },
   components: {
     pairTable,
     tradingView,
@@ -449,8 +195,261 @@ export default {
     orderAction,
     calculate,
     ContractSetup
+  },
+  mixins: [tickTableMixin, pairInfoMixins],
+  data() {
+    return {
+      problemType: true,
+      problemError: true,
+      problemLstt: ['', '', '', '', '', '', '', ''],
+      state,
+      // 计算器
+      showCalculator: false,
+      showSetupModal: false,
+      problemText: '',
+      // 合约激活
+      contractNotActive: false
+    }
+  },
+  computed: {
+    isLogin() {
+      return !!this.state.userInfo
+    },
+    pairTick() {
+      if (this.state.ct.pairTick) {
+        return this.state.ct.pairTick
+      }
+      return {}
+    }
+  },
+  watch: {
+    problemLstt: function() {
+      console.log(this.problemType, !this.problemType)
+    },
+    '$route.query.pair': {
+      async handler(pair) {
+        if (!pair) return
+        const match = pair.match(/^([A-Za-z]*)_([A-Za-z]*)$/)
+        if (match) {
+          this.state.ct.pair = pair
+          local.future = pair
+
+          const res = await service.getContractPairInfo({ symbol: pair })
+          if (!res.code) {
+            this.state.ct.pairInfo = res.data
+            this.state.ct.product_name = res.data.product_name
+            this.state.ct.currency_name = res.data.currency_name
+            this.state.ct.symbol = res.data.symbol
+            if (this.isLogin) {
+              this.checkActiveContract()
+            }
+            this.$eh.$emit('protrade:balance:refresh')
+            const resp = await service.getContractSymInfo({
+              symbol: this.symbol.name
+            })
+            if (!resp.code) {
+              Object.assign(this.state.ct.pairInfo, resp.data)
+            }
+          } else {
+            this.state.ct.pairInfo = null
+          }
+        }
+        // alert(pair)
+      },
+      immediate: true
+    }
+  },
+  async created() {
+    let newOrder = {}
+    const $this = this
+    setInterval(function() {
+      // console.log(this.problemError)
+      service.getOrderfills({ page: 1, size: 10, symbol: 'FUTURE_BTCUSD' }).then(res => {
+        if (!res.code) {
+          // const number = 0
+          if (JSON.stringify(newOrder) === '{}') {
+            newOrder = res.data.data
+            return false
+          }
+
+          const newOrderList = []
+          const oneListObj = newOrder[0]
+          if (JSON.stringify(newOrder) !== JSON.stringify(res.data.data)) {
+            for (var i in res.data.data) {
+              if (JSON.stringify(res.data.data[i]) === JSON.stringify(oneListObj)) {
+                break
+              }
+              newOrderList.push(res.data.data[i])
+            }
+            console.log(newOrderList)
+            $this.toast(newOrderList)
+            newOrder = res.data.data
+            $this.$eh.$emit('protrade:order:refresh', 1)
+          }
+
+          // 刷新已成交表头的数量
+          $this.$eh.$emit('setOrderfill:count', res.data.total)
+        }
+      })
+    }, 5000)
+
+    await actions.updateSession()
+    document.querySelector('.page-loading').classList.add('show')
+    if (!this.$route.params.pair) {
+      const res = await service.getContractSymList()
+      if (res.code) {
+        return utils.alert(res.message)
+      }
+      const pair = res.data.items.filter(item => item.name === local.future).length
+        ? local.future
+        : res.data.items[0].name
+
+      // console.log({pair, data: res.data})
+      // 保存所有币对的基本信息
+      this.state.ct.pairInfoList = {}
+      res.data.items.forEach(element => {
+        this.state.ct.pairInfoList[element.name] = element
+      })
+
+      this.$router.replace({
+        name: 'spa_contract',
+        query: {
+          pair: pair
+        }
+      })
+    }
+    this.$nextTick(() => {
+      // const layoutHeight = window.innerHeight
+      // this.$refs.wrap.style.height = layoutHeight + 'px'
+      this.state.loading = false
+      this.state.ct.layout = true
+
+      this.setGridContainers()
+      this.$eh.$emit('protrade:layout:init')
+      utils.log('Layout inited')
+
+      this.$eh.$on('app:resize', this.onresize)
+      // this.$eh.$on('deal:update', this.dealChanged)
+      document.querySelector('.page-loading').classList.remove('show')
+    })
+    this.state.loading = true
+
+    // setInterval(() => {
+    //   this.loopFetch();
+    // }, 30e3);
+  },
+  methods: {
+    onresize() {
+      // let bodyHeight = this.container.height - 88 + 'px'
+    },
+    /**
+     * 激活
+     */
+    toast(newOrder) {
+      let number = 0
+      const $this = this
+      for (const i in newOrder) {
+        if (newOrder[i].origin === 2) {
+          $this.$toast({ title: $this.$t('entrusted_mandatory_liquidation'),
+            body: $this.$t('successfully_body_text_system', { price: newOrder[i].price, amount: newOrder[i].amount }), color: 'red' })
+        }
+
+        if (newOrder[i].origin === 4) {
+          $this.$toast({ title: $this.$t('system_automatic_warehouse_closing'),
+            body: $this.$t('successfully_body_text_reduce', { price: newOrder[i].price, amount: newOrder[i].amount }), color: 'red' })
+        }
+   
+        if (newOrder[i].origin !== 2 & newOrder[i].origin !== 4) { 
+          setTimeout(function() {
+            let side = ''
+            newOrder[i].side === 1 ? side = $this.$t('order_side_buy') : side = $this.$t('order_side_sell')
+            $this.$toast({ title: $this.$t('successful_trade'),
+              // body: $this.$t('successful_purchase_of_contracts', { language: cn, amount: newOrder[i].amount }),
+              body: $this.$t('order_apply_message_c', { price: newOrder[i].price, side, amount: newOrder[i].amount, currency: newOrder[i].currency.replace('USD','') }),
+              color: 'green' })
+          }, 3000 * number)
+          number++
+        }
+      }
+    },
+    downStep() {
+      console.log(this.problemLstt)
+
+      for (var i = 0; i < this.problemLstt.length; i++) {
+        if (this.problemLstt[i] === '') {
+          this.problemError = false
+          this.problemText = this.$t('answer_the_question')
+          return false
+        } else if (this.problemLstt[i] !== 'true') {
+          this.problemError = false
+          this.problemText = this.t('contract_error')
+          return false
+        } else {
+          this.problemError = true
+        }
+      }
+      if (this.problemError) {
+        this.problemType = false
+      }
+    },
+    openContractAccount() {
+      service
+        .activeContract(this.pairInfo.symbol, this.state.isSimulation)
+        .then(res => {
+          if (!res.code) {
+            this.contractNotActive = !res.data.state
+            console.log(this.contractNotActive, 12345679)
+            utils.success(this.$t('contract_has_active'))
+            this.$eh.$emit('protrade:balance:refresh')
+          } else {
+            utils.alert(res.message)
+          }
+        })
+    },
+    openSetting() {
+      this.showCalculator = true
+    },
+    changePair(pair) {
+      this.$router.replace({
+        name: 'spa_contract',
+        query: {
+          pair: pair
+        }
+      })
+    },
+    setGridContainers() {
+      for (var compName in this.$options.components) {
+        if (!this.$refs[compName]) {
+          continue
+        }
+        const grid = this.$refs['grid' + compName]
+        this.$refs[compName].container = {
+          width: grid.clientWidth,
+          height: grid.clientHeight
+        }
+      }
+    },
+    async loopFetch() {
+      const resp = await service.getContractSymInfo({
+        symbol: this.symbol.name
+      })
+      if (!resp.code) {
+        Object.assign(this.state.ct.pairInfo, resp.data)
+      }
+    },
+    checkActiveContract() {
+      // 先检查是否开通合约
+      service
+        .checkContractActive(this.pairInfo.symbol, this.state.isSimulation)
+        .then(res => {
+          if (!res.code) {
+            this.contractNotActive = !res.data.state
+            window.localStorage['contract'] = this.contractNotActive
+          }
+        })
+    }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .contract-eqcode{

@@ -157,7 +157,8 @@ export default {
       if (type === 'ios') {
         url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
       }
-      window.open(url, '_blank')
+      // window.open(url, '_blank')
+      window.location.href = url
     },
     downloadImme () {
       if (document.scrollingElement) {
@@ -167,7 +168,7 @@ export default {
       }
     },
     goIosTurorial () {
-      window.open('https://ixcustomer.zendesk.com/hc/zh-cn/articles/360020414512', '_blank')
+      window.open('https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360032874512', '_blank')
     }
   }
 }

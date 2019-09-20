@@ -1,10 +1,16 @@
+<!--
+ * @Author: zlccy
+ * @Date: 2019-08-15 14:07:18
+ * @LastEditTime: 2019-08-15 14:12:02
+ * @Description: file content
+ -->
 <template>
   <div class="main-tabs-container">
     <div class="main-tabs-box  clear-fix">
       <div class="tab-left pull-left">
-        <div  class="side-buy tab ">
-          <label>{{$t('otc_side_1')}}</label>
-          <button class='btn_left'
+        <div class="side-buy tab ">
+          <!-- <label>{{$t('otc_side_1')}}</label> -->
+          <!-- <button class='btn_left'
                   :class="{'active' : currency==='USDT','active-side': side===1  }"
                   @click="setCurrency('USDT', 1)"
           >USDT</button>
@@ -12,11 +18,21 @@
             class='btn_left'
             :class="{'active' : currency==='BTC','active-side': side===1 }"
             @click="setCurrency('BTC', 1)"
-          >BTC</button>
+          >BTC</button> -->
+          <button
+            :class="{'active' : currency==='BTC','active-side': side===1 }"
+            class="btn_left"
+            @click="changeSide(1)"
+          >{{ $t('otc_side_1') }}</button>
         </div>
         <div class="side-sell tab">
-          <label>{{$t('otc_side_2')}}</label>
-          <button class='btn_left'
+          <!-- <label>{{$t('otc_side_2')}}</label> -->
+          <button
+            :class="{'active' : currency==='BTC','active-side': side===2 }"
+            class="btn_left"
+            @click="changeSide(2)"
+          >{{ $t('otc_side_2') }}</button>
+          <!-- <button class='btn_left'
                   :class="{'active' : currency==='USDT','active-side': side===2  }"
                   @click="setCurrency('USDT', 2)"
           >USDT</button>
@@ -24,101 +40,96 @@
             class='btn_left'
             :class="{'active' : currency==='BTC','active-side': side===2  }"
             @click="setCurrency('BTC', 2)"
-          >BTC</button>
+          >BTC</button> -->
         </div>
       </div>
       <div class="tab-right pull-right" style="margin-top:-5px!important;" >
-        <label  class='label'>{{$t('otc_legal_currency')}}</label>
+        <label class="label">{{ $t('otc_legal_currency') }}</label>
         <span class="el-dropdown-link currency">
-          {{legal_currency}}
+          {{ legal_currency }}
         </span>
-        <!-- <el-dropdown @command="changeCoin">
-          <span class="el-dropdown-link currency">
-            {{legal_currency}}<i class="el-icon-arrow-down el-icon--right"></i>
-          </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item
-              v-for="(item,idx) in dataList"
-              :key="idx"
-              :command="item.name"
-              >
-              {{item.name}}
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown> -->
         <button
           class="btn"
           @click="openSideBar()"
-        >{{$t('otc_publish_order')}}</button>
+        >{{ $t('otc_publish_order') }}</button>
       </div>
     </div>
-    <div class="otc-buy-ac" v-if="side === 1 && currency==='USDT' && legal_currency==='CNY'">
-      <div class="line"></div>
-      <div class="select-item">
-        <el-row>
-          <el-col :span="10">
-            <span class="font24 font-weight font-base title-text">一键买币</span>
-            <span class="font-gray">小额快速交易，0手续费，单笔50000以下</span>
-          </el-col>
-          <el-col :span="10">
-            <el-input v-model="ipt" :placeholder="active=='0' ? '请输入需要购买的总金额' : '请输入需要购买的数量'">
-              <el-select v-model="active" slot="prepend" placeholder="请选择" style="width: 120px" @change="change">
-                <el-option label="按金额购买" value="0"></el-option>
-                <el-option label="按数量购买" value="1"></el-option>
-              </el-select>
-            </el-input>
-            <div
-              class="unit-label" style='right:148px'
-              v-html="active=='0' ? 'CNY' : 'USDT'"/>
-          </el-col>
-          <el-col :span="4">
-            <el-button style="width: 118px;float: right" type="primary" @click="buySubmit">购买USDT</el-button>
-          </el-col>
-        </el-row>
+    <div v-if="state.locale==='zh-CN' || state.locale==='zh-HK'">
+      <div v-if="side === 1 && currency==='USDT' && legal_currency==='CNY'" class="otc-buy-ac">
+        <div class="line"/>
+        <div class="select-item">
+          <el-row>
+            <el-col :span="10">
+              <span class="font24 font-weight font-base title-text">{{ $t('yj_mb') }}</span>
+              <span class="font-gray">{{ $t('xe_je') }}</span>
+            </el-col>
+            <el-col :span="11">
+              <el-input v-model="ipt" :placeholder="active=='0' ? $t('b_price_i') : $t('b_account_i')" style="width: 98%">
+                <el-select slot="prepend" v-model="active" :placeholder="$t('please_choose')" style="width: 120px" @change="change">
+                  <el-option :label="$t('b_1')" value="0"/>
+                  <el-option :label="$t('b_2')" value="1"/>
+                </el-select>
+              </el-input>
+              <div
+                class="unit-label"
+                style="right:130px"
+                v-html="active=='0' ? 'CNY' : 'USDT'"/>
+            </el-col>
+            <el-col :span="3">
+              <el-button style="width: 118px;float: right" type="primary" @click="buySubmit">{{ $t('otc_buy_currency', {currency: 'USDT'}) }}</el-button>
+            </el-col>
+          </el-row>
+        </div>
+        <div class="line"/>
       </div>
-      <div class="line"></div>
-    </div>
-    <div class="otc-buy-ac" v-if="side === 2 && currency==='USDT' && legal_currency==='CNY'">
-      <div class="line"></div>
-      <div class="select-item">
-        <el-row>
-          <el-col :span="10">
-            <span class="font24 font-weight font-base title-text">一键卖币</span>
-            <span class="font-gray">小额快速交易，0手续费，单笔50000以下</span>
-          </el-col>
-          <el-col :span="10">
-            <el-input :placeholder="active=='0' ? '请输入需要出售的总金额' : '请输入需要出售的数量'" v-model="ipt">
-              <el-select v-model="active" slot="prepend" placeholder="请选择" style="width: 120px" @change="change">
-                <el-option label="按金额出售" value="0"></el-option>
-                <el-option label="按数量出售" value="1"></el-option>
-              </el-select>
-            </el-input>
-            <div
-              class="unit-label" style='right:158px'
-              v-html="active=='0' ? 'CNY' : 'USDT'"/>
+      <div v-if="side === 2 && currency==='USDT' && legal_currency==='CNY'" class="otc-buy-ac">
+        <div class="line"/>
+        <div class="select-item">
+          <el-row>
+            <el-col :span="10">
+              <span class="font24 font-weight font-base title-text">{{ $t('yj_mb1') }}</span>
+              <span class="font-gray">{{ $t('xe_je') }}</span>
+            </el-col>
+            <el-col :span="11">
+              <el-input :placeholder="active=='0' ? $t('a_price_i') : $t('a_account_i')" v-model="ipt" style="width: 98%">
+                <el-select slot="prepend" v-model="active" :placeholder="$t('please_choose')" style="width: 120px" @change="change">
+                  <el-option :label="$t('a_1')" value="0"/>
+                  <el-option :label="$t('a_2')" value="1"/>
+                </el-select>
+              </el-input>
+              <div
+                class="unit-label"
+                style="right:130px"
+                v-html="active=='0' ? 'CNY' : 'USDT'"/>
 
-          </el-col>
-          <el-col :span="4">
-            <el-button style="width: 112px;float: right" type="sell" @click="sellSubmit">出售USDT</el-button>
-          </el-col>
-        </el-row>
+            </el-col>
+            <el-col :span="3">
+              <el-button style="width: 118px;float: right" type="sell" @click="sellSubmit">{{ $t('otc_sell_currency', {currency: 'USDT'}) }}</el-button>
+            </el-col>
+          </el-row>
+        </div>
+        <div class="line"/>
       </div>
-      <div class="line"></div>
     </div>
     <!-- 侧边操作栏 -->
     <side-bar :open.sync="showSide" >
-      <orderBuy @closeSide="colseSideBar"
-                :show="showSide" />
+      <orderBuy
+        :show="showSide"
+        @closeSide="colseSideBar" />
     </side-bar>
   </div>
 </template>
 
 <script>
-import { state } from "@/modules/store";
-import sideBar from "@/components/VSideBar";
-import orderBuy from "@/components/OTC/order/orderForm/orderBuy"
+import { state } from '@/modules/store'
+import sideBar from '@/components/VSideBar'
+import orderBuy from '@/components/OTC/order/orderForm/orderBuy'
 import utils from '@/modules/utils'
 export default {
+  components: {
+    sideBar,
+    orderBuy
+  },
   data() {
     return {
       state,
@@ -128,10 +139,6 @@ export default {
       ipt: '',
       active: '0'
     }
-  },
-  components: {
-    sideBar,
-    orderBuy,
   },
   computed: {
     side: {
@@ -151,31 +158,30 @@ export default {
       }
     },
     legal_currency: {
-      get () {
+      get() {
         return state.otc.legal_currency
       },
-      set (value) {
+      set(value) {
         state.otc.legal_currency = value
       }
-    },
+    }
   },
   methods: {
     change(code) {
       this.ipt = ''
     },
     buySubmit() {
-      if (this.active === "0") {//金额
+      if (this.active === '0') { // 金额
         if (this.$big(Number(this.ipt)).lt(100)) {
-          this.$message.warning('购买量低于最低限额')
+          this.$message.warning(this.$t('zd_xe'))
+          return
+        } else if (this.$big(Number(this.ipt)).gt(50000)) {
+          this.$message.warning(this.$t('gm_sl'))
           return
         }
-        else if (this.$big(Number(this.ipt)).gt(50000)) {
-          this.$message.warning('购买量大于最大限额')
-          return
-        }
-      } else if (this.active === "1") { //数量
+      } else if (this.active === '1') { // 数量
         if (!Number(this.ipt) || isNaN(Number(this.ipt)) || this.$big(Number(this.ipt)).lte(0)) {
-          this.$message.warning('数量不能为空')
+          this.$message.warning(this.$t('otc_ziurec_2'))
           return
         }
       }
@@ -189,18 +195,17 @@ export default {
       })
     },
     sellSubmit() {
-      if (this.active === "0") {//金额
+      if (this.active === '0') { // 金额
         if (this.$big(Number(this.ipt)).lt(100)) {
-          this.$message.warning('购买量低于最低限额')
+          this.$message.warning(this.$t('zd_xe'))
+          return
+        } else if (this.$big(Number(this.ipt)).gt(50000)) {
+          this.$message.warning(this.$t('gm_sl'))
           return
         }
-        else if (this.$big(Number(this.ipt)).gt(50000)) {
-          this.$message.warning('购买量大于最大限额')
-          return
-        }
-      } else if (this.active === "1") { //数量
+      } else if (this.active === '1') { // 数量
         if (!Number(this.ipt) || isNaN(Number(this.ipt)) || this.$big(Number(this.ipt)).lte(0)) {
-            this.$message.warning('数量不能为空')
+          this.$message.warning(this.$t('otc_ziurec_2'))
           return
         }
       }
@@ -213,17 +218,21 @@ export default {
         }
       })
     },
-    setCurrency(coin, side) {
-      this.active = '0'
-      this.currency = coin
+    // setCurrency(coin, side) {
+    //   this.active = '0'
+    //   this.currency = coin
+    //   this.state.otc.showSide = side
+    //   this.$eh.$emit('otc:currency:change', coin, side)
+    // },
+    changeSide(side) {
       this.state.otc.showSide = side
-      this.$eh.$emit('otc:currency:change', coin, side)
+      this.$eh.$emit('otc:currency:change', this.currency, side)
     },
-    openSideBar () {
+    openSideBar() {
       if (window.localStorage.getItem('X-TOKEN')) {
         this.operation = 2
         this.operSide = this.side
-        this.showSide = true;
+        this.showSide = true
       } else {
         this.$router.push({
           name: 'login'
@@ -231,7 +240,7 @@ export default {
       }
     },
     colseSideBar() {
-      this.showSide = false;
+      this.showSide = false
     }
   }
 }
@@ -242,7 +251,7 @@ export default {
     margin-top: 20px;
     .main-tabs-box {
       font-size: 16px;
-      padding: 18px 36px;
+      padding: 10px 0 10px 0;
       vertical-align: middle;
       overflow: hidden;
       // background-color: #80b1b4;
@@ -250,7 +259,7 @@ export default {
         border: none;
         background: rgba(0,0,0,0);
         color: #999999;
-        padding: 5px 15px;
+        padding: 5px 20px 0 0;
         cursor: pointer;
       }
       label {
@@ -264,7 +273,6 @@ export default {
         width: 50%;
         display: flex;
         .tab {
-          flex: 1;
           &:last-child {
             padding-left: 20px;
             label {
@@ -278,7 +286,7 @@ export default {
           }
         }
         .btn_left {
-          &.active.active-side {
+          &.active.active-side{
             color:#01CED1;
             text-decoration: underline;
             font-weight: bold;
@@ -314,7 +322,6 @@ export default {
   }
   .otc-buy-ac {
     overflow: hidden;
-    padding: 0 36px;
     .line {
       height:6px;
       background:rgba(245,246,248,1);
@@ -330,11 +337,18 @@ export default {
       font-size: 18px;
       color: #1a1a1a;
       line-height: 40px;
-      padding-right:20px;
+      padding-right:10px;
     }
     .font-gray {
       color: #bbb;
       font-size: 14px;
     }
   }
+   .active-side {
+        color:#01CED1!important;
+        text-decoration: underline;
+        font-weight: bold;
+        font-size: 14px;
+        padding-bottom: 6px;
+    }
 </style>

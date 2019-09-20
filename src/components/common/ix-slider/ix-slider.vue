@@ -5,6 +5,7 @@
     v-show="show"
     :style="[wrapStyles, boolDisabled ? disabledStyle : null]"
     @click="wrapClick"
+
   >
     <div
       ref="elem"
@@ -142,7 +143,7 @@
             :active="piecewiseObj.inRange"
           >
             <span
-              v-if="piecewiseLabel"
+              v-if="!piecewiseLabel"
               class="vue-slider-piecewise-label"
               :style="[ labelStyle, piecewiseObj.inRange ? labelActiveStyle : null ]"
             >
@@ -483,7 +484,7 @@ export default {
     idleSlider () {
       return this.currentSlider === 0 ? 1 : 0
     },
-    wrapStyles () {
+    wrapStyles () { 
       return this.direction === 'vertical' ? {
         height: typeof this.height === 'number' ? `${this.height}px` : this.height,
         padding: `${this.dotHeightVal / 2}px ${this.dotWidthVal / 2}px`
@@ -591,6 +592,7 @@ export default {
   },
   watch: {
     value (val) {
+      console.log('090999999999999999999999999999999999999999999999999999999999')
       this.flag || this.setValue(val, true)
     },
     max (val) {
@@ -599,6 +601,7 @@ export default {
       }
 
       let resetVal = this.limitValue(this.val)
+      console.log('max')
       this.setValue(resetVal)
       this.refresh()
     },
@@ -607,6 +610,7 @@ export default {
         return this.printError('The minimum value can not be greater than the maximum value.')
       }
 
+      console.log('min')
       let resetVal = this.limitValue(this.val)
       this.setValue(resetVal)
       this.refresh()
@@ -883,6 +887,7 @@ export default {
       return Math.round((value - this.minimum) * this.multiple) / (this.spacing * this.multiple)
     },
     setIndex (val) {
+      console.log('setIndex')
       if (Array.isArray(val) && this.isRange) {
         let value
         if (this.data) {
@@ -900,6 +905,7 @@ export default {
       }
     },
     setValue (val, noCb, speed) {
+      console.log('setValue')
       if (this.isDiff(this.val, val)) {
         let resetVal = this.limitValue(val)
         this.val = this.isRange ? resetVal.concat() : resetVal
@@ -1074,6 +1080,8 @@ export default {
     this.$nextTick(() => {
       if (this.isComponentExists) {
         this.getStaticData()
+        
+        console.log('mounted')
         this.setValue(this.limitValue(this.value), true, this.startAnimation ? this.speed : 0)
         this.bindEvents()
 

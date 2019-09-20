@@ -22,25 +22,24 @@
         name="anchor"/>{{ $t('mining') }}</router-link>-->
         <!-- <span @click="showLockModal = true" style="font-size: 14px;"  class="c-mine pointer mr-30 dib"><a >{{ $t('locked') }}</a></span>
         <span @click="showUnlockModal = true" style="font-size: 14px;"  class="c-mine pointer mr-30 dib"><a>{{ $t('unlock') }}</a></span> -->
-        <span
-          style="margin-right: 8px;"
-          @click="dianji('1')"
-          v-if="!showHistory"
-          class="fund-history"
-          :class="{'fund-historc' : one ==1}"
-        >{{ $t('otc_otutcol_17') }}</span>
+        <span class="mr-8"  >    
+          <router-link 
+              class="fund-history"
+              :class="{'fund-historc' : !showHistory}" 
+              :to="{name:'myAssets'}">
+            {{ $t('otc_otutcol_17') }}</router-link>
+        </span>
 
-        <span @click="dianjs('2')">
-          <router-link
-            v-if="!showHistory"
-            class="fund-history"
-            :class="{'fund-historc' : one ==2}"
+        <span >
+          <router-link 
+            class="fund-history" 
+            :class="{'fund-historc' : showHistory}"
             :to="{name:'assetsHistory', params: {from: 'deposit'}}"
           >{{ $t('capital_record') }}</router-link>
         </span>
       </div>
     </div> 
-    <div v-if="one==1" class="my-fund-content">
+    <div v-if="!showHistory" class="my-fund-content">
       <div class="information">
         <icon name='information' />
         <span >{{$t('otc_otutcol_16')}}        </span>
@@ -78,41 +77,8 @@
           :label="hd.title">
           <template slot-scope="scope">
             <span v-if="hd.key === 'currency'">
-              <icon :name="scope.row.currency"/>
-              <i
-                v-if="scope.row[hd.key] === 'ITD'"
-                class="airdrop"
-                v-tooltip.top-start="{html: true, content: $t('idt_tips'), classes: 'assets'}"
-              >
-                {{ scope.row[hd.key] }}
-                <icon class="question" name="question-n"/>
-              </i>
-
-              <i
-                v-else-if="scope.row[hd.key] === 'DFD'"
-                class="airdrop"
-                v-tooltip.top-start="{html: true, content: $t('dfd_tips'), classes: 'assets'}"
-              >
-                {{ scope.row[hd.key] }}
-                <icon class="question" name="question-n"/>
-              </i>
-              <i
-                v-else-if="scope.row[hd.key] === 'NEWOS'"
-                class="airdrop"
-                v-tooltip.top-start="{html: true, content: $t('newos_tips'), classes: 'assets'}"
-              >
-                {{ scope.row[hd.key] }}
-                <icon class="question" name="question-n"/>
-              </i>
-              <i
-                v-else-if="scope.row[hd.key] === 'BNL'"
-                class="airdrop"
-                v-tooltip.top-start="{html: true, content: $t('bnl_tips'), classes: 'assets'}"
-              >
-                {{ scope.row[hd.key] }}
-                <icon class="question" name="question-n"/>
-              </i>
-              <i v-else>{{ scope.row[hd.key] }}</i>
+              <icon :name="scope.row.currency"/> 
+              <i>{{ scope.row[hd.key] }}</i>
             </span>
             <span v-else-if="hd.key==='estValue'">{{ scope.row[hd.key] || 0 | fixed(unit.scale) }}</span>
             <span v-else>{{ scope.row[hd.key] || 0 | fixed(8) }}</span>
@@ -126,13 +92,22 @@
           :label="operate.title"
         >
           <template slot-scope="scope">
-            <label class="my-fund-label"
-              v-if="scope.row.currency==='USDT'"
-              @click="nodeBuy"
-              v-tooltip.top="{html: true, content: $t('fund_assets_node_buy_tip'), classes: 'assets'}" 
-              >
-              {{$t('fund_assets_node_buy')}}
-            </label>
+            <template v-if="is_nodes === false">
+                <label class="my-fund-label"
+                v-if="scope.row.currency==='USDT'"
+                @click="nodeBuy"
+                v-tooltip.top="{html: true, content: $t('fund_assets_node_buy_tip'), classes: 'assets'}" 
+                >
+                {{$t('fund_assets_node_buy')}}
+                </label>
+            </template>
+            <template v-else>
+                <label class="my-fund-label dis-my-fund-label"
+                v-if="scope.row.currency==='USDT'" 
+                >
+                {{$t('fund_assets_subscribed')}}
+                </label>
+            </template>
             <span 
               class="my-fund-operate"> 
                <a href="javascript:;" class="menu-name" @click="routerTransFer(scope.row)">
@@ -150,21 +125,41 @@
               class="my-fund-operate"
             >{{ $t('withdraw') }}</router-link>
             <router-link
-              v-if="scope.row.pairs"
+              v-if="scope.row.pairs.length == 1"
               :to="{
                 name: 'trading',
                 params: {
-                  pair: scope.row.pairs
+                  pair: scope.row.pairs[0].name
                 }
               }"
-              class="my-fund-operate"
+              class="my-fund-operate pr-20"
             >{{ $t('asset_trading') }}</router-link>
+            <el-dropdown size="small" 
+              v-else>
+              <el-button type="label">
+                {{ $t('asset_trading') }}
+              </el-button>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item v-for="(pair,idx) in scope.row.pairs" :key="idx">
+                  <router-link 
+                    :to="{
+                      name: 'trading',
+                      params: {
+                        pair: pair.name
+                      }
+                    }"
+                    class="my-fund-operate"
+                  >{{ pair.product + '/' + pair.currency }}</router-link>
+                </el-dropdown-item> 
+              </el-dropdown-menu>
+            </el-dropdown>
           </template>
         </el-table-column>
       </el-table>
+    </div> 
+    <div v-if="showHistory">
+      <router-view/>
     </div>
-
-    <div v-if="one==2">
       <v-modal :open.sync="showLockModal">
         <div class="lock-modal">
           <div class="modal__title mb-30">{{ $t('locked') }}</div>
@@ -237,18 +232,16 @@
           </div>
         </div>
       </v-modal>
-      <router-view/>
       <transfer-modal :show-modal.sync="showModal" @click="hideModal"/>
-    </div>
+    
   </div>
 </template>
 <script>
 import service from '@/modules/service';
-import { state } from '@/modules/store';
+import { state, actions } from '@/modules/store';
 import utils from '@/modules/utils';
 import transferModal from '../contract/transfer-modal';
 import _ from 'lodash'
-
 const ExchangePairs = {
   BTC: 'BTC_USDT',
   EOS: 'EOS_BTC',
@@ -284,13 +277,14 @@ export default {
       unlock_disable: true,
       unlock_amount: '',
       lock_amount: '',
+      is_nodes: false,
       // 我的余额
       balance: {
         available: 0,
         unlocking: 0,
         locked: 0
       },
-      one: 1,
+      content: 'assets', 
       currencyList: [
         {
           name: 'CNY',
@@ -313,6 +307,7 @@ export default {
       search: "",
       hideSmall: false,
       nodePrice: 1000,
+      pairList: []
     };
   },
   components: {
@@ -347,7 +342,7 @@ export default {
       return list
     },
     showHistory () {
-      return this.$route.name === 'history';
+      return this.$route.name === 'assetsHistory';
     },
     total () {
       let sum = this.$big(0)
@@ -432,22 +427,34 @@ export default {
   },
   async created () {
     this.unit = this.currencyList[0]
+    //获取汇率
     let res = await service.getAllRate()
     if (!res.code && !!res.data) {
       this.rates = res.data
     }
+    console.log('234234')
+    //获取币对列表
+    let result =  await service.getPairList()
+    if (!result.code && !!result.data) {
+      this.pairList = result.data.items
+    }
     await this.getMine()
     this.getAccountBalanceList()
     this.getIxBalance()
-    this.$nextTick(console.log(this.header))
+
+    service.getOrderList().then((res) => {
+        this.is_nodes = res.data.is_nodes
+    })
+    console.log(this.$router.name)
+    // this.$nextTick(console.log(this.header))
   },
   methods: {
-    dianji (res) {
-      this.one = res
-    },
-    dianjs (res) {
-      this.one = res
-    },
+    // dianji (res) {
+    //   this.one = res
+    // },
+    // dianjs (res) {
+    //   this.one = res
+    // },
     async nodeBuy() {
       //  const confirm = await utils.confirm(this, { 
       //   customClass: "ix-message-box-wrapper", 
@@ -484,6 +491,8 @@ export default {
       service.nodesBuy({uid: state.userInfo.id}).then(res=> {
         if (res.code === 0) {
           utils.success('认购成功。')
+          this.getAccountBalanceList() //重新获取数据
+          this.is_nodes = true
         } else {
           if (res.message) {
             utils.alert(res.message)
@@ -634,7 +643,11 @@ export default {
           item.available = this.$big(item.available)
             .round(8, this.C.ROUND_DOWN)
             .toString()
-          item.pairs = ExchangePairs[item.currency] || 'BTC_USDT';
+          // item.pairs = ExchangePairs[item.currency] || 'BTC_USDT';
+          if (item.currency === 'USDT')
+            item.pairs = ['BTC_USDT']
+          else
+            item.pairs = this.pairList.filter(t => t.product === item.currency || t.currency === item.currency)
           return item
         })
       }) 
@@ -689,12 +702,11 @@ export default {
     },
     currencyChange (e) {
       this.getAccountBalanceList()
-    }
+    }, 
   },
-  watch: {
-    valueScale () {
-      this.getAccountBalanceList()
-    }
+  async beforeRouteEnter(to, from, next) { 
+    console.log({to, from}) 
+    next();
   }
 }
 </script>

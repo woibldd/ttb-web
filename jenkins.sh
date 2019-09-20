@@ -1,7 +1,6 @@
 #!/bin/sh
-
 echo "\nixx.com building...\n"
- 
+
 
 npm run build
 
@@ -11,6 +10,6 @@ eval `ssh-agent -s`
 ssh-add ~/.ssh/id_rsa
 
 
-rsync -e "ssh -p 10022" -rcvPz dist/* root@47.88.159.32:~/ixx
+rsync -e "ssh -p 10022" -rcvPz dist/* root@47.74.255.117:~/ixx
 
-ssh -p 10022 root@47.88.159.32 "rsync -r ~/ixx/ ixx-www-1:~/ixx"
+ssh -p 10022 root@47.74.255.117 "rsync -r ~/ixx/ ixx-www-1:~/ixx"

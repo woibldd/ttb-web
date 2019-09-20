@@ -1,7 +1,10 @@
 <template>
   <div class="otc-left-container">
     <div class="left-menu-container left-menu-nobottom"> 
-      <div class="coin_link arrow-down">
+      <div class="coin_link arrow-down"
+        :class="{hover: down}"
+        @click="down=!down"
+        >
         <dl>
           <dt>{{coin.name +'/' + coin.symbol}}</dt>
           <dd>
@@ -36,28 +39,24 @@
             <dd><span class="text-idx">{{$t('otc_menu_title_price')}}</span></dd>
           </dl>
         </div>
-        <ul class="left-menu-list">
-          <li class>
+        <ul class="left-menu-list"> 
+          <li 
+            v-for="(item, idx) in currencyList"
+            :key ="idx"
+          >
             <router-link
               to="/OTC/Trade"
               class="menu-name"
-              :class="{'active': currency === 'USDT' && from === 'trade' }"
+              :class="{'active': currency === item.currency && from === 'trade'}"
             > 
-              <dl @click="setCurrency('USDT')">
-                <dt>{{ $t('USDT') }}</dt>
-                <dd><span class="text-idx">{{ coin.symbol + user.usdtCount }}</span> </dd>
-              </dl>
-            </router-link>
-          </li>
-          <li class>
-            <router-link
-              to="/OTC/Trade"
-              class="menu-name"
-              :class="{'active': currency === 'BTC' && from === 'trade'}"
-            > 
-              <dl @click="setCurrency('BTC')">
-                <dt>{{ $t('BTC') }}</dt>
-                <dd><span class="text-idx">{{ coin.symbol + user.btcCount }}</span> </dd>
+              <dl @click="setCurrency(item)">
+                <dt>{{ $t(item.currency) }}</dt>
+                <dd>
+                  <span class="text-idx">
+                    {{ getFiatMoneySymbolByFiat(legal_currency)}}
+                    {{ getRatebyCurrency(item)}}
+                  </span> 
+                </dd>
               </dl>
             </router-link>
           </li>
@@ -113,6 +112,9 @@
           <li class>
             <a class="menu-name" :href="commonProblemLink">{{ $t('footer_hreseqgslp2') }}</a>
           </li>
+           <li class>
+            <a class="menu-name" :href="fxpl">{{ $t('fxpl')}}</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -120,7 +122,8 @@
 </template>
 
 <script>
-import { state } from "@/modules/store";
+import { state } from "@/modules/store"; 
+import utils from '@/modules/utils'
 import service from "@/modules/service";
 import Vue from "vue";
 export default {
@@ -133,6 +136,7 @@ export default {
         btcCount: 0,
         usdtCount: 0
       },
+      fxpl: 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360033225252--IXX-com平台反洗钱和反恐怖融资用户指引-',
       symbolList: {
         CNY: {
           name: "CNY",
@@ -145,25 +149,23 @@ export default {
           symbol: "S$"
         }
       },
-      count: 0
+      currencyList: [], 
+      count: 0, 
+      down: false
     };
   },
   methods: {
-    setCurrency(coin) {
-      this.currency = coin;
-      this.$eh.$emit("otc:currency:change", coin, this.side);
+    setCurrency(item) {
+      console.log({item})
+      this.currency = item.currency;
+      this.state.otc.symbolInfo = item
+      this.$eh.$emit("otc:currency:change", item.currency, this.side);
     },
     init() {
       service.otcSymbolList({}).then(res => {
         if (res.code === 0) {
-          this.user.btcCount = this.$big(res.data[1][this.coin.rate]).round(
-            2,
-            0
-          );
-          this.user.usdtCount = this.$big(res.data[0][this.coin.rate]).round(
-            2,
-            0
-          );
+          this.user.btcCount = this.$big(res.data[1][this.coin.rate]).round(2, 0);
+          this.user.usdtCount = this.$big(res.data[0][this.coin.rate]).round(2, 0);
         }
       });
       // 委托
@@ -193,7 +195,7 @@ export default {
                 .then(res => {
                   if (res.code === 0) {
                     res.data.data.forEach(item => {
-                      if (item.state === 2) countData.push(item);
+                      if (item.state === 1 || item.state === 2 || item.state === 6 ) countData.push(item);
                     });
                     this.count = countData.length;
                   }
@@ -204,26 +206,38 @@ export default {
     },
     changeCoin(command) {
       this.legal_currency = command;
-    }
+    },
+    getCurrencyList() { 
+      service.otcSymbolList({}).then((res) => {
+        if (res.code === 0) { 
+          this.$set(this, "currencyList", res.data ) 
+          if (!this.state.otc.symbolInfo) {
+            this.state.otc.symbolInfo = res.data[0]
+          }
+        }
+      })
+    }, 
+    getRatebyCurrency(item) {
+      let currency = this.legal_currency.toLowerCase() 
+      return item[currency + '_rate']
+    },
+    getFiatMoneySymbolByFiat (fiat) {
+      const map = {
+        'CNY': '¥',
+        'USD': '$',
+        'KRW': '₩',
+        'HKD': 'HK$',
+        'JPY': 'JP¥',
+        'SGD': 'S$',
+      }
+      return map[fiat] || fiat
+    },
   },
   created() {
-    this.init();
+    this.init();  
+    this.getCurrencyList(); 
     this.timer = setInterval(() => {
-      service.otcSymbolList({}).then(res => {
-        if (res.code === 0) {
-          //let rate = this.legal_currency.toLowerCase() + '_rate'
-          Vue.set(
-            this.user,
-            "btcCount",
-            this.$big(res.data[1][this.coin.rate]).round(2, 0)
-          );
-          Vue.set(
-            this.user,
-            "usdtCount",
-            this.$big(res.data[0][this.coin.rate]).round(2, 0)
-          );
-        }
-      });
+      this.getCurrencyList(); 
       service
         .getUnDonefills({
           page: 1,
@@ -250,7 +264,7 @@ export default {
                 .then(res => {
                   if (res.code === 0) {
                     res.data.data.forEach(item => {
-                      if (item.state === 2) countData.push(item);
+                      if (item.state === 1 || item.state === 2 || item.state === 6 ) countData.push(item);
                     });
                     this.count = countData.length;
                   }
@@ -349,8 +363,7 @@ export default {
       margin-left: 12px;
       text-align: left;
       color: $text-weak;
-      box-sizing: border-box;
-
+      box-sizing: border-box; 
       .menu-title {
         margin-left: 6px;
       }
@@ -364,8 +377,7 @@ export default {
 
     .left-menu-list {
       width: 100%;
-      margin-top: 5px;
-
+      margin-top: 5px; 
       .menu-name {
         box-sizing: border-box;
         width: 100%;
@@ -420,7 +432,7 @@ export default {
       }
       dt {
         font-size: 14px;
-        font-weight: bold;
+        //font-weight: bold;
       }
       dd {
         font-size: 12px;
@@ -453,15 +465,15 @@ export default {
         .dropdown-sub-menu {
           background: #fff;
         }
-        &:hover {
+        &.hover {
           .dropdown-sub-menu {
             opacity: 1;
             display: block;
             visibility: visible;
           }
-          .nav_link {
-            // color: $primary;
-          }
+          // .nav_link {
+          //   color: $primary;
+          // }
           .arrow {
             transform: rotate(180deg);
           }

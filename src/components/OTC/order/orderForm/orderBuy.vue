@@ -235,6 +235,7 @@
                         class="coadawm"
                         :max="130"
                         :min="70"
+                        :placeholder="side === 2 ? $t('otc_order_default_tips') : ''"
                         maxlength="30"
                         type="textarea"
                         :autosize="{ minRows: 2, maxRows: 4}"
@@ -358,8 +359,7 @@ export default {
     return {
       state,
       side: 1,
-      limitedTime: '15',
-      sideTitle: '发布购买委托单 BTC',
+      limitedTime: '15', 
       message: this.$t('otc_tips_success'),
       message_success: '',
       message_failed: '',
@@ -391,43 +391,43 @@ export default {
         headers: [
           {
             title: 'type', // 交易类型
-            text: this.$t('otc_transaction_type'),
+            text: 'otc_transaction_type',
             width: '',
             key: 'type'
           },
           {
             title: 'currency', // 币种
-              text: this.$t('currency'),
+            text: 'currency' ,
             width: '',
             key: 'currency'
           },
           {
             title: 'price', // 单价(CNY)
-             text: this.$t('otc_trans_idjg'),
+            text: 'otc_price' ,
             width: '',
             key: 'price'
           },
           {
-            title: 'amount', // 数量(CNY)
-            text: this.$t('amount'),
+            title: 'amount', // 数量(BTC)
+            text: 'otc_amount' ,
             width: '',
             key: 'amount'
           },
           {
             title: 'total', // 总金额(CNY)
-            text: this.$t('otc_ziurec_19'),
+            text: 'otc_total' ,
             width: '',
             key: 'total'
           },
           {
             title: 'fee', // 平台服务费
-             text: this.$t('otc_ziurec_13'),
+             text: 'otc_ziurec_13',
             width: '',
             key: 'fee'
           },
           {
             title: 'kyc_level', // 对手认证等级
-            text: this.$t('otc_opponent_kyc_level'),
+            text: 'otc_opponent_kyc_level',
             width: '',
             key: 'kyc_level'
           }
@@ -492,7 +492,7 @@ export default {
       else {
         if (JSON.stringify(this.balance) !== "{}")
           plt = this.balance[this.currency].available
-        return '可用数量：' + plt
+        return  this.$t('otc_trade_available') + ':' + plt
       }
     },
   },
@@ -546,6 +546,11 @@ export default {
         this.order.amount = this.amount
         this.order.float_rate = Number(this.$big(this.float_rate).mul(0.01))
         this.order.currency_type = this.legal_currency
+
+        //发布卖单是，给默认提示
+        if (this.side === 2 && !this.order.remark) {
+          this.order.remark  = this.$t('otc_order_default_tips')
+        }
 
         console.log({total: this.total})
         service.createOtcOrder(this.order).then(res => {
@@ -628,7 +633,7 @@ export default {
         if (this.side === 1) {
           if (this.$big(this.inputPrice).gt(sell_price_one)) {
             this.flag = true
-             this.alertTitle =this.$t('otc_ziurec_3',{currency:this.currency,inputPrice:this.inputPrice,symbolInfo:sell_price_one})
+             this.alertTitle =this.$t('otc_ziurec_3',{currency:this.currency,inputPrice:this.inputPrice,symbolInfo:sell_price_one, legal_currency:this.legal_currency})
            // `您发布的购买${this.currency}的交易单，价格为${this.inputPrice}CNY高于卖一价${this.symbolInfo.sell_price_one}CNY，以该价格发布可能给您带来损失`
           } else {
             this.flag = false
@@ -642,7 +647,7 @@ export default {
         } else { 
           if (this.$big(this.inputPrice).lt(buy_price_one)) {
             this.flag = true 
-              this.alertTitle =this.$t('otc_ziurec_15',{currency:this.currency,inputPrice:this.inputPrice,symbolInfo:buy_price_one})
+              this.alertTitle =this.$t('otc_ziurec_15',{currency:this.currency,inputPrice:Number(this.inputPrice).toFixed(2),symbolInfo: Number(buy_price_one).toFixed(2), legal_currency:this.legal_currency})
           // `您发布的出售${this.currency}的交易单，价格为${this.inputPrice}CNY低于买一价${ this.symbolInfo.buy_price_one}CNY，以该价格发布可能给您带来损失`
           } else {
             this.flag = false
@@ -680,18 +685,19 @@ export default {
       this.active_id = 0
       this.message_success = ''
       this.message_failed = ''
+      this.inputPrice = ''
       // if (this.show === false) {
       //   this.view = {}
       // }
     },
-    currency () {
-      for (const symbol of this.state.otc.symbolList) {
-        if (symbol.currency == this.currency) {
-          this.state.otc.symbolInfo = symbol
-          return
-        }
-      }
-    },
+    // currency () {
+    //   for (const symbol of this.state.otc.symbolList) {
+    //     if (symbol.currency == this.currency) {
+    //       this.state.otc.symbolInfo = symbol
+    //       return
+    //     }
+    //   }
+    // },
     side () { 
       this.order.remark = ''
       this.inputPrice = ''
@@ -731,7 +737,7 @@ export default {
       color: red
     }
     .action-box {
-      height: calc(100% - 140px);
+      height: calc(100% - 120px);
       padding: 0 38px;
       overflow: scroll;
       .title {
@@ -830,7 +836,12 @@ export default {
     }
     .footer {
       box-shadow: 0px 0px 50px #aaaaaa;
-      height: 140px;
+      height: auto;
+      position: absolute;
+      width: 100%;
+      overflow: hidden;
+      left: 0;
+      bottom: 0;
       .btn {
         &.buy {
           background-color: $otc-buy-bg;
@@ -844,12 +855,12 @@ export default {
           color: #333;
         }
       }
-      .tr.message-box {
-        position: absolute;
-        top: 8px;
-        left: 0;
-        width: 100%;
-      }
+    //   .tr.message-box {
+    //     position: absolute;
+    //     top: 8px;
+    //     left: 0;
+    //     width: 100%;
+    //   }
       .msg {
         padding-left: 24px;
         font-size: 14px;
@@ -866,8 +877,7 @@ export default {
       }
     }
     .action-button-group {
-      margin-top: 20px;
-      padding: 30px 40px;
+      padding: 20px 40px;
       .btn-left {
         float: left;
         .btn {

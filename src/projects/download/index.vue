@@ -30,7 +30,7 @@
         <icon
           name="android"
           class="download__icon"/> {{ $t('download_android') }}
-      </div>
+      </div> 
       <div
         class="download__btn"
         @click="download('ios')">
@@ -43,12 +43,16 @@
         @click="goIosTurorial">
         {{ $t('download_ios_tutorial') }}
       </div>
+      <div class="footer"> 
+        <div class="tips">
+          {{ $t('app_download_tips') }}
+        </div>
+      </div>
     </div>
     <div
       class="tt-mask"
       v-if="showTutorialArrow"
-      @click="touch"
-    >
+      @click="touch">
       <div
         class="tutorial-arrow">
         <img
@@ -115,14 +119,16 @@ export default {
       }
 
       if (type === 'android') {
-        let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
-        window.open(url, '_blank')
+        let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk' 
+        // window.open(url, '_blank')
+        window.location.href = url
         return
       }
 
       if (this.isSafari) {
-        let url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
-        window.open(url, '_blank')
+        let url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'  
+        // window.open(url, '_blank')
+        window.location.href = url
       }
     },
     touch () {

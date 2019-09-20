@@ -1,8 +1,8 @@
 <template>
   <div class="order--container">
     <div class="profile-container">
-      <div class="title-box">{{ $t('trading') }}</div>
-      <div class="row-select mt-24 mb-24">
+      <div class="title-box">{{ $t('fund_trading_bill') }}</div>
+      <!-- <div class="row-select mt-24 mb-24">
         <span>{{ $t('pair') }}</span>
         <div class="row__value ml-9">
           <el-select
@@ -16,7 +16,7 @@
               :value="item"/>
           </el-select>
         </div>
-      </div>
+      </div> -->
       <div class="table-wrapper">
         <table class="table">
           <tr class="thead">
@@ -152,7 +152,7 @@ export default {
 </style>
 <style lang="scss" scoped>
 .order--container {
-    padding-left: 60px;
+    // padding-left: 60px;
     float: left;
     .profile-container {
       width: 960px;
@@ -198,8 +198,8 @@ export default {
             text-align: left;
         }
         .thead {
-            border-top: 1px dashed #999999;
-            border-bottom: 1px dashed #999999;
+            border-top: 1px soild #EBEEF5;
+            border-bottom: 1px soild #EBEEF5;
         }
         .row-tr {
             color: #666;

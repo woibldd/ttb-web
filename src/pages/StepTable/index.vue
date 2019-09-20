@@ -1,3 +1,9 @@
+<!--
+ * @Author: zlccy
+ * @Date: 2019-08-15 14:15:44
+ * @LastEditTime: 2019-09-16 10:50:35
+ * @Description: file content
+ -->
 <template>
   <div class="trade-container">
     <div class="trade-message-box">
@@ -11,9 +17,8 @@
               <!---->
               <!--</div>-->
               <!--sdsd-->
-              <icon
-                class="avt"
-                name="rentou"/>
+              <icon class="avt" name="rentou" />
+
               <div class="avt-text">
                 <div class="top">
                   {{ tableDataUname.name }}
@@ -25,7 +30,7 @@
             </div>
             <!--<div class="user">{{ tableDataUname.name }}</div-->
           </dd>
-          <dd>
+          <dd class="acount-info">
             <div class="trade">
               <div class="number">
                 <em>{{ $t('otc_side_3') }}:</em>
@@ -65,10 +70,8 @@
           style="padding-bottom: 20px;">
           <div class="time">
             {{ $t('otc_register_time') }}
-            <span
-              v-if="tableDataUname.register_time"
-            >{{ tableDataUname.register_time | date }}</span>
-            <span v-else/>
+            <span v-if="tableDataUname.register_time">{{ tableDataUname.register_time | date }}</span>
+            <span v-else />
           </div>
           <!--<div class="text">{{ $t('otc_assets_tips_m') }}</div>-->
         </div>
@@ -77,55 +80,55 @@
     <div class="trade-table-box">
       <div class="table-nav">
         <div
-          class="nav-list"
           v-for="(item, index) in tab"
           :key="index"
           :class="{active: active === index}"
-          @click="switchTab(index)"
-        >{{ item.name }}
+          class="nav-list"
+          @click="switchTab(index)">{{ item.name }}
           <span v-if="item.count > 0 && token">{{ item.count }}</span>
-        </div>
+        </div> 
         <div
-          class="slot-down"
           v-if="active === 0"
-        >
+          class="slot-down">
           <i
-            class="iconfont"
             v-for="(item, index) in icons"
             :key="index"
-            v-html="item"
             :class="{iconActive: iconActive === index}"
-            @click="iconTab(index)"/>
+            class="iconfont"
+            @click="iconTab(index)"
+            v-html="item" />
         </div>
         <div
-          class="order-btn"
-          v-if="active === 3">
+          v-if="active === 3"
+          class="order-btn">
           <span
             v-for="(item, index) in orderBtn"
             :key="index"
             :class="{selected: orderActive === index}"
-            @click="orderSwtich(index)"
-          >{{ item }}</span>
+            @click="orderSwtich(index)">{{ item }}</span>
+            <icon
+              name="robot-info" 
+              v-tooltip.top-end="{html: true,content: $t('otc_suspend_all_tips')} "
+            />
         </div>
       </div>
 
       <div
+        v-if="active === 0"
         class="tips"
-        style="line-height: 40px;"
-        v-if="active === 0">
+        style="line-height: 40px;">
         <icon
           style="  margin-left: 12px;margin-right: 8px;height: 14px;width: 14px;color: inherit;font-size: 0px;"
-          name="inhsdgbnljkarf"
-        />
-        <span v-html="$t('otc_buy_tips_a')"/>！
-        <span v-html="$t('otc_buy_tips_c')"/>
+          name="inhsdgbnljkarf" />
+        <span v-html="$t('otc_buy_tips_a')" />！
+        <span v-html="$t('otc_buy_tips_c')" />
       </div>
       <div class="table-con">
         <template v-if="active === 0">
           <div
-            class="table-list"
             v-for="(item, index) in data"
-            :key="index">
+            :key="index"
+            class="table-list">
             <div class="top">
               <div class="order-number">
                 {{ $t('otc_trans_id') }}：
@@ -136,26 +139,31 @@
                 <span>{{ item.name }}</span>
               </div>
               <div class="state">
+                <span
+                  v-if="item.other_appeal && !item.appeal"
+                  style="color:#c9a96c">{{ $t('otc_seiitm_7') }}
+                </span>
+
                 <template v-if="!item.appeal">
-                  <span v-if="item.side === 2 && item.state === 1">{{$t('otc_seiitm_6')}}</span>
-                  <span  v-else>{{ state(item.state) }}</span>
+                  <span v-if="item.side === 2 && item.state === 1">{{ $t('otc_seiitm_6') }}</span>
+                  <span v-else>{{ !item.other_appeal && state(item.state) || "" }}</span>
                   <b
                     v-if="item.state === 2 || item.state === 7 || item.state === 6"
-                    @click="sq(item)"
-                  >{{$t('otc_seiitm_8')}}</b>
+                    style="cursor:pointer"
+                    @click="sq(item)">{{ $t('otc_seiitm_8') }}</b>
                 </template>
-                <template v-else>{{$t('otc_seiitm_9')}}</template>
+                <template v-else>{{ $t('otc_seiitm_9') }}</template>
                 <!--（没收到对方付款？-->
               </div>
             </div>
             <ul class="inner">
               <li class="first">
                 <div class="type">
-                  <em :style="{color: item.side === 1 ? '#23C88B' : '#F24E4D'}">{{ Order(item.side)}}</em>
+                  <em :style="{color: item.side === 1 ? '#23C88B' : '#F24E4D'}">{{ Order(item.side) }}</em>
                   <div
-                    class="cur"
-                    :style="{color: item.side === 1 ? '#23C88B' : '#F24E4D'}">
-                    <p>/{{item.currency_type}}</p>
+                    :style="{color: item.side === 1 ? '#23C88B' : '#F24E4D'}"
+                    class="cur">
+                    <p style="opacity:0.6;">{{ item.currency_type }}/</p>
                     {{ item.currency }}
                   </div>
                 </div>
@@ -174,11 +182,11 @@
                   </dd>
                   <template v-if="item.side === 2">
                     <dd>
-                      {{$t('otc_ziurec_13')}}：
-                      <span> {{$t('otc_ziurec_16')}}</span>
+                      {{ $t('otc_ziurec_13') }}：
+                      <span> {{ $t('otc_ziurec_16') }}</span>
                     </dd>
                     <dd>
-                     {{$t('otc_seiitm_10')}}：
+                      {{ $t('otc_seiitm_10') }}：
                       <span>{{ getCurrencySymbol(item.currency_type) + item.total }}</span>
                     </dd>
                   </template>
@@ -187,8 +195,8 @@
               <li>
                 <dl>
                   <dt>
-                    <b v-if="item.side === 1">  {{$t('otc_seller_nameacer')}}：</b>
-                    <b v-else>  {{$t('otc_seiitm_11')}}：</b>
+                    <b v-if="item.side === 1"> {{ $t('otc_seller_nameacer') }}：</b>
+                    <b v-else> {{ $t('otc_seiitm_11') }}：</b>
                     <span>{{ item.name }}</span>
                   </dt>
                   <dd>
@@ -197,7 +205,7 @@
                   </dd>
                   <dd>
                     {{ $t('otc_kyc_level') }}：
-                    <span>{{$t('otc_seiitm_12')}}{{ item.kyc_level }}</span>
+                    <span>{{ $t('otc_seiitm_12') }}{{ item.kyc_level }}</span>
                   </dd>
                   <dd>
                     {{ $t('pay_time_avg') }}：
@@ -251,15 +259,15 @@
                       <span>{{ item.otc_collection.card_number }}</span>
                     </template>
                   </dd> -->
-                  <div v-if='item.otc_collection'>
+                  <div v-if="item.otc_collection">
                     <dd
-                      v-for='(payItem, index) in paymentHeaderList[item.otc_collection.payment_type]'
-                      :key='index'>
+                      v-for="(payItem, index) in paymentHeaderList[item.otc_collection.payment_type]"
+                      :key="index">
                       <span>{{ $t(payItem.text) }}</span>
                       <span>
                         <span
-                          style="cursor: pointer;"
                           v-if="payItem.key==='collection_img'"
+                          style="cursor: pointer;"
                           @click="openQR(item.otc_collection)">
                           <icon name="qrcode" />
                         </span>
@@ -270,37 +278,37 @@
                   <dd>
                     <a
                       href="javascript:;"
-                      @click="detailHandle(item)">{{$t('otc_sidees10')}} ></a>
+                      @click="detailHandle(item)">{{ $t('otc_sidees10') }} ></a>
                   </dd>
                 </dl>
                 <dl v-if="item.state === 1 && item.side === 1 && !item.appeal && !item.other_appeal">
                   <dt>
-                    <span>{{$t('otc_payment_method')}}</span>
+                    <span>{{ $t('otc_payment_method') }}</span>
                     <!-- <el-select v-model="item.bankId" size="small" style="width: 140px" @change="paySetHandle(item, item.bankId)">
                       <el-option v-for="(bank, i) in item.bankArray" :key="i" :label="bank.name" :value="bank.id"></el-option>
                     </el-select> -->
                     <el-select
+                      v-model="item.selectPayment"
                       style="width: 140px;"
                       size="small"
-                      v-model="item.selectPayment"
-                      @change="changePayType(item)"
-                      value-key="collection_id">
+                      value-key="collection_id"
+                      @change="changePayType(item)">
                       <el-option
                         v-for="(bank, index) in item.otc_collection_list"
                         :key="index"
                         :label="processValue('payment_type', bank)"
-                        :value="bank"/>
+                        :value="bank" />
                     </el-select>
                   </dt>
-                  <div v-if='item.selectPayment'>
+                  <div v-if="item.selectPayment">
                     <dd
-                      v-for='(payItem, index) in paymentHeaderList[item.selectPayment.payment_type]'
-                      :key='index'>
+                      v-for="(payItem, index) in paymentHeaderList[item.selectPayment.payment_type]"
+                      :key="index">
                       <span>{{ $t(payItem.text) }}</span>
                       <span>
                         <span
-                          style="cursor: pointer;"
                           v-if="payItem.key==='collection_img'"
+                          style="cursor: pointer;"
                           @click="openQR(item.selectPayment)">
                           <icon name="qrcode" />
                         </span>
@@ -310,9 +318,8 @@
                     <dd>
                       <a
                         href="javascript:;"
-                        @click="closeHadle(item)"
                         style="font-size: 12px;"
-                      >{{ $t('otc_cancel_order') }}</a>
+                        @click="closeHadle(item)">{{ $t('otc_cancel_order') }}</a>
                     </dd>
                   </div>
                   <!-- <dd v-if="item.bankId">
@@ -329,10 +336,9 @@
                   </dd> -->
                 </dl>
                 <div
-                  class="btn btn1"
                   v-if="item.side === 1 && item.state === 1 && !item.appeal && !item.other_appeal"
-                  @click="detailHandle(item)"
-                >{{ $t('otc_already_paid') }}</div>
+                  class="btn btn1"
+                  @click="detailHandle(item)">{{ $t('otc_already_paid') }}</div>
                 <!--<div-->
                 <!--class="btn btn2"-->
                 <!--v-if="item.side === 1 && item.state === 1 && !item.appeal && !item.other_appeal"-->
@@ -340,30 +346,28 @@
                 <!--&gt;{{ $t('otc_cancel_order') }}</div>-->
                 <template>
                   <div
-                    class="btn"
                     v-if="item.side === 2 && item.state === 2 && !item.appeal && !item.other_appeal"
-                    @click="detailHandle(item)"
-                  >{{$t('otc_confirm_issued')}}</div>
-                  <div
                     class="btn"
+                    @click="detailHandle(item)">{{ $t('otc_confirm_issued') }}</div>
+                  <div
                     v-if="item.side === 2 && item.state === 7 && !item.appeal && !item.other_appeal"
-                    @click="detailHandle(item)"
-                  >{{$t('otc_confirm_issued')}}</div>
+                    class="btn"
+                    @click="detailHandle(item)">{{ $t('otc_confirm_issued') }}</div>
                 </template>
                 <div
-                  class="time-ago"
-                  v-if="item.time && !item.appeal && !item.other_appeal">
+                  v-if="item.time && !item.appeal && !item.other_appeal"
+                  class="time-ago">
                   <p>
-                    {{$t('otc_overtime_tips_a1')}}
+                    {{ $t('otc_overtime_tips_a1') }}
                     <count-down
                       :terminal="item.time"
-                      style="font-size: 12px;"/>
+                      style="font-size: 12px;" />
                   </p>
                   <!--<b v-if="item.side === 1 && item.state === 1"></b>-->
-                  <b v-if="item.side === 2 && item.state === 1">  {{$t('otc_seiitm_13')}}</b>
-                  <b v-if="item.side === 1 && item.state === 2">  {{$t('otc_seiitm_14')}}</b>
-                  <b v-if="item.side === 2 && item.state === 2">  {{$t('otc_seiitm_14')}}</b>
-                  <b v-if="item.side === 1 && item.state === 7">  {{$t('otc_seiitm_14')}}</b>
+                  <b v-if="item.side === 2 && item.state === 1"> {{ $t('otc_seiitm_13') }}</b>
+                  <b v-if="item.side === 1 && item.state === 2"> {{ $t('otc_seiitm_14') }}</b>
+                  <b v-if="item.side === 2 && item.state === 2"> {{ $t('otc_seiitm_14') }}</b>
+                  <b v-if="item.side === 1 && item.state === 7"> {{ $t('otc_seiitm_14') }}</b>
                   <!--<span v-html="item.side === 1 && ? '取消订单' : '放币'"></span>-->
                 </div>
                 <dd
@@ -371,7 +375,7 @@
                   style="position: absolute;right: 0;bottom: 0;">
                   <a
                     href="javascript:;"
-                    @click="detailHandle(item)">{{$t('otc_sidees10')}} ></a>
+                    @click="detailHandle(item)">{{ $t('otc_sidees10') }} ></a>
                 </dd>
               </li>
             </ul>
@@ -381,19 +385,18 @@
           <step-table
             :grid-config="tableHeader"
             :show-grid-data="data"
-            :loading="loading"/>
+            :loading="loading" />
         </template>
       </div>
     </div>
     <div
-      class="page"
-      v-if="data.length > 0">
+      v-if="data.length > 0"
+      class="page">
       <el-pagination
+        :total="total"
         background
         layout="prev, pager, next"
-        :total="total"
-        @current-change="handleCurrentChange"
-      />
+        @current-change="handleCurrentChange" />
     </div>
     <slide-model
       :open.sync="dialogVisible"
@@ -407,11 +410,10 @@
         :close="closeFlag"
         @step-change="stepChange"
         @close-change="closeChange"
-        @bank-change="bankChange"
-      />
+        @bank-change="bankChange" />
     </slide-model>
     <v-modal :open.sync="showQRcode">
-      <div class="qr" >
+      <div class="qr">
         <img
           :src="qrsrc"
           alt=""
@@ -423,10 +425,10 @@
 
 <script type="text/ecmascript-6">
 import { tradeMixins } from './mixins'
-import { state } from '@/modules/store'
-import * as mock from './mock/mock'
+// import { state } from '@/modules/store'
+// import * as mock from './mock/mock'
 import utils from './tools'
-import axios from 'axios'
+// import axios from 'axios'
 import TextInfo from './textInfo'
 import service from '@/modules/service'
 import countDown from '@/components/CountDown'
@@ -438,7 +440,7 @@ export default {
     countDown
   },
   mixins: [tradeMixins, processValue],
-  data () {
+  data() {
     return {
       icons: ['&#xe618;', '&#xe654;'],
       iconActive: 0,
@@ -536,7 +538,7 @@ export default {
             key: 'collection_img'
           }
         ],
-        //paynow
+        // paynow
         4: [
           {
             title: 'name', // 姓名
@@ -549,9 +551,9 @@ export default {
             text: 'payment_card_number',
             width: '',
             key: 'card_number'
-          },
+          }
         ],
-        //paylah
+        // paylah
         5: [
           {
             title: 'name', // 姓名
@@ -564,12 +566,12 @@ export default {
             text: 'payment_card_number',
             width: '',
             key: 'card_number'
-          },
+          }
         ]
       },
       selectPayment: {},
       qrsrc: '',
-      showQRcode: false,
+      showQRcode: false
 
     }
   },
@@ -589,33 +591,85 @@ export default {
   //     return 0
   //   }
   // },
+  // mounted() {
+  //   this.setTimeInit()
+  // },
+  beforeDestroy() {
+    clearInterval(this.timer)
+  },
+  created() {
+    this.getOrderz()
+    // todo 初始化第一种类型数据
+    this.init(this.active)
+
+    const that = this
+    // 定时器
+    this.timers = setInterval(() => { 
+      console.log('setInterval')
+      service.getUnDonefills({
+        page: 1,
+        side: 0,
+        size: 999
+      }).then(res => {
+        if (res.code === 0) {
+          if (res.data.data.length > 0) { 
+            Vue.set(this.tab[0], 'count', res.data.data.length)
+            if (this.active === 0) {  
+              this.setOrderInfo(res)
+            } 
+          }
+        }
+      })
+      service.getOtcActivefills({
+        page: 1,
+        side: 0,
+        size: 999
+      }).then(res => {
+        if (res.code === 0) {
+          const noCount = []
+          if (res.data.data.length > 0) {
+            res.data.data.forEach((item) => {
+              noCount.push(item)
+            })
+          }
+          Vue.set(this.tab[3], 'count', noCount.length)
+        }
+      })
+    }, 5000)
+  },
+  // mounted() {
+  //   this.setTimeInit()
+  // },
+  beforeDestroy() {
+    clearInterval(this.timers)
+  },
   methods: {
-    payName(type){
+    payName(type) {
       return {
-          1: "payment_nameyhk",
-          2: "payment_namezfb",
-          3: "payment_weChat_adasunt",
-          4: "Paynow",
-          5: "Paylah",
-        }[type]
+        1: 'payment_nameyhk',
+        2: 'payment_namezfb',
+        3: 'payment_weChat_adasunt',
+        4: 'Paynow',
+        5: 'Paylah'
+      }[type]
     },
     getCurrencySymbol(type) {
       return {
-        "CNY": "￥",
-        "SGD": "S$",
+        'CNY': '￥',
+        'SGD': 'S$'
       }[type]
     },
-    compareDown (property) {
-      return function (a, b) {
+    compareDown(property) {
+      return function(a, b) {
         return a[property] - b[property]
       }
     },
-    compareUp (property) {
-      return function (a, b) {
+    compareUp(property) {
+      return function(a, b) {
         return b[property] - a[property]
       }
     },
-    iconTab (index) {
+    iconTab(index) {
       this.iconActive = index
       if (index === 0) {
         return this.data.sort(this.compareDown('create_time'))
@@ -623,22 +677,21 @@ export default {
         return this.data.sort(this.compareUp('create_time'))
       }
     },
-    changePayType (e) {
-      console.log(e)
+    changePayType(e) {
+      // console.log(e)
     },
-    openQR (pay) {
+    openQR(pay) {
       this.qrsrc = pay.collection_img
       this.showQRcode = true
     },
-    orderSwtich (index) {
-
+    orderSwtich(index) {
       if (this.data.length > 0) {
         this.orderActive = index
         const orderName =
           index === 0 ? this.$t('otc_seiitm_15') : index === 1 ? this.$t('otc_tab_lisetr3') : this.$t('otc_tab_lisetr4')
-        this.$confirm(this.$t('otc_otutcol_18',{orderName}), this.$t('tips'), {
-         confirmButtonText: this.$t('otc_ziurec_20'),
-          cancelButtonText:  this.$t('cancel'),
+        this.$confirm(this.$t('otc_otutcol_18', { orderName }), this.$t('tips'), {
+          confirmButtonText: this.$t('otc_ziurec_20'),
+          cancelButtonText: this.$t('cancel'),
           type: 'warning'
         })
           .then(() => {
@@ -676,27 +729,27 @@ export default {
         })
       }
     },
-    closeHadle (item) {
+    closeHadle(item) {
       this.detail = item
-      console.log(item)
+      // console.log(item)
       this.closeFlag = true
       this.stepActive = true
       this.dialogVisible = true
     },
-    bankChange (bank) {
+    bankChange(bank) {
       this.bankId = bank
     },
     // Todo 待开发
-    paySetHandle (item, index) {
-      console.log(item, index)
+    paySetHandle(item, index) {
+      // console.log(item, index)
     },
-    detailHandle (item) {
-      console.log({item})
+    detailHandle(item) {
+      // console.log({ item })
       this.stepActive = false
       this.bankData = []
       this.closeFlag = false
       this.detail = item
-      let payData = []
+      const payData = []
       if (item.otc_collection) {
         this.bankData.push(item.otc_collection)
       } else {
@@ -728,21 +781,21 @@ export default {
       }
       this.dialogVisible = true
     },
-    closeChange () {
+    closeChange() {
       this.dialogVisible = false
       this.closeFlag = false
     },
-    stepChange (type) {
+    stepChange(type) {
       this.dialogVisible = false
       // 防币
       if (type === 'down') {
         // todo request
-        let params = {
+        const params = {
           trans_id: this.detail.trans_id
         }
-        let $this = this
+        // const $this = this
         service.otcOrderIssueDone(params).then(res => {
-          console.log(res)
+          // console.log(res)
           if (!res.code) {
             // this.$message.success('提交成功')
             this.$message({
@@ -761,7 +814,7 @@ export default {
           }
         })
       } else if (type === 'close') {
-        let params = {
+        const params = {
           user_id: this.id,
           type: '2',
           trans_id: this.detail.trans_id
@@ -789,13 +842,13 @@ export default {
           // this.$message.warning('请选择支付方式!')
           this.$message({
             type: 'warning',
-              message: this.$t('otc_buy_tips_i'),
+            message: this.$t('otc_buy_tips_i'),
             duration: 1000
           })
           return
         }
-        let $this = this
-        let params = {
+        // const $this = this
+        const params = {
           trans_id: this.detail.trans_id,
           collection_id: this.bankId
         }
@@ -804,7 +857,7 @@ export default {
             // this.$message.success('提交成功')
             this.$message({
               type: 'success',
-               message: this.$t('otc_seiitm_16'),
+              message: this.$t('otc_seiitm_16'),
               duration: 1000
             })
             this.init(this.active)
@@ -819,20 +872,20 @@ export default {
         })
       }
     },
-    getOrderz () {
+    getOrderz() {
       const params = {
         user_id: null
       }
       service.getOtcUserinfo(params).then(ren => {
         if (!ren.code) {
-          let $this = this
+          const $this = this
           $this.tableDataUname = ren.data
         }
       })
     },
-    switchTab: utils.debounce(function (index) {
+    switchTab: utils.debounce(function(index) {
       this.tableHeader = []
-      let that = this
+      const that = this
       // 数据初始化
       that.params = {
         page: 1,
@@ -864,131 +917,182 @@ export default {
         this.loading = false
         // 切换数据
         this.init(index)
-        this.setTimeInit()
+        // this.setTimeInit()
       }, 300)
     }),
-    async init (state) {
-      let that = this
+    async init(state) {
+      const that = this
       switch (state) {
+        // eslint-disable-next-line no-case-declarations
         case 0:
-          let rec = await service.getUnDonefills(that.params)
+          const rec = await service.getUnDonefills(that.params)
+           if (!rec.code) {
+            this.data = rec.data.data
+            this.setOrderInfo(rec)
+          }
+          //支付方式默认选择银行卡
           if (!rec.code) {
-            that.data = rec.data.data
-            that.total = rec.data.total
-            let noCount = []
-            let bankData = []
-            that.data.forEach((item) => {
-              if (item.state === 1) {
-                Vue.set(item, 'time', item.create_time + 15 * 60 * 1000)
-              } else if (item.state === 2) {
-                Vue.set(item, 'time', item.pay_time + 12 * 60 * 60 * 1000)
-              } else if (item.state === 7 && item.side === 1) {
-                Vue.set(item, 'time', item.pay_time + 12 * 60 * 60 * 1000)
-              }
-              if (item.otc_collection) {
-                Vue.set(item, 'otc_type', 1)
-              } else {
-                Vue.set(item, 'otc_type', 0)
-              }
-              //
-              if (item.otc_collection_list && !item.other_appeal && !item.appeal) noCount.push(item)
-              //
+            let dt = rec.data.data
+            dt.forEach((item) => {
               if (item.state === 1 && item.side === 1 && !item.appeal && !item.other_appeal) {
-                item.otc_collection_list.forEach((child) => {
-                  if (child.payment_type === 1) {
-                    bankData.push({
-                      id: child.collection_id,
-                      realName: child.name,
-                      name: child.deposit_bank + '/' + child.card_number
-                    })
-                  } else if (child.payment_type === 2) {
-                    bankData.push({
-                      id: child.collection_id,
-                      realName: child.name,
-                      name: '支付宝' + '/' + child.alipay_account,
-                      img: child.collection_img
-                    })
-                  } else  if (child.payment_type === 3) {
-                    bankData.push({
-                      id: child.collection_id,
-                      realName: child.name,
-                      name: '微信' + '/' + child.we_chat_account,
-                      img: child.collection_img
-                    })
-                  }  else if (child.payment_type === 4) {
-                    bankData.push({
-                      id: child.collection_id,
-                      realName: child.name,
-                      name: 'Paynow'  + '/' + child.card_number,
-                      img: child.collection_img
-                    })
-                  }  else if (child.payment_type === 5) {
-                    bankData.push({
-                      id: child.collection_id,
-                      realName: child.name,
-                      name: 'Paylah' + '/' + child.card_number,
-                      img: child.collection_img
-                    })
-                  }
-                  Vue.set(item, 'paySet', child.payment_type)
-                })
-                // 支付方式默认选择银行卡
-                let paylist = item.otc_collection_list
-                if (paylist.length > 0) {
-                  let arr = paylist.filter(arg => arg.payment_type === 1)
+                const paylist = item.otc_collection_list
+                if (paylist.length > 0 && !item.selectPayment) {
+                  const arr = paylist.filter(arg => arg.payment_type === 1)
                   if (arr.length > 0) {
                     // this.selectPayment = arr[0]
                     Vue.set(item, 'selectPayment', arr[0])
-                  }
-                  else {
+                  } else {
                     Vue.set(item, 'selectPayment', paylist[0])
                   }
                 }
-
-                Vue.set(item, 'bankArray', bankData)
-                Vue.set(item, 'bankId', '')
-                Vue.set(item, 'pAccount', '')
-                Vue.set(item, 'realName', '')
-                Vue.set(item, 'bankAccount', '')
               }
             })
           }
+
           break
+        // eslint-disable-next-line no-case-declarations
         case 1:
-          let rer = await service.getDonefills(that.params1)
+          const rer = await service.getDonefills(that.params1)
           if (!rer.code) {
             that.data = rer.data.data
             that.total = rer.data.total
           }
           break
         case 2:
-          let res = await service.getOtcRemovefills(that.params1)
+          const res = await service.getOtcRemovefills(that.params1)
           if (!res.code) {
             that.data = res.data.data
             that.total = res.data.total
           }
           break
         default:
-          let rew = await service.getOtcActivefills(that.params)
+          const rew = await service.getOtcActivefills(that.params)
           if (!rew.code) {
             that.data = rew.data.data
             that.total = rew.data.total
           }
       }
     },
-    sq (item) {
+    setOrderInfo(rec) { 
+      if (!rec.code) {
+        if (this.total != rec.data.total &&  rec.data.total > 0) {
+          //当订单数量发送变化的时候，需要重新加载订单数据，但是需要保留用户已经选择的支付方式
+          this.data.map(rowa => {
+            rec.data.data.map(rowb => {
+              if(rowa.trans_id === rowb.trans_id) {
+                Vue.set(rowb, 'selectPayment', rowa.selectPayment)   
+              }
+            })
+          })
+          this.data = rec.data.data
+        } else if (!this.total) {
+          this.data = rec.data.data
+        } 
+        this.total = rec.data.total
+        const noCount = []
+        const bankData = []
+        this.data.forEach((item) => {
+          //state-1-等待对方付款 2-等待放币 3-已完成 4-买家取消 5-卖家取消 6买家超时取消 7卖家超时放币
+          if (item.state === 1) {
+            Vue.set(item, 'time', item.create_time + 15 * 60 * 1000)
+          } else if (item.state === 2) {
+            //申诉取消后
+            if (item.appeal_time > 0) {
+              Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
+            }
+            else {
+              Vue.set(item, 'time', item.pay_time + 15 * 60 * 1000) 
+            }
+          } else if (item.state === 7 ) {
+              if (item.appeal_time > 0) {
+              Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
+            }
+            else {
+              Vue.set(item, 'time', item.pay_time + 12 * 60 * 60 * 1000 + 15 * 60 * 1000)
+            }
+          }
+          if (item.otc_collection) {
+            Vue.set(item, 'otc_type', 1)
+          } else {
+            Vue.set(item, 'otc_type', 0)
+          }
+          //
+          if (item.otc_collection_list && !item.other_appeal && !item.appeal) noCount.push(item)
+          //
+          if (item.state === 1 && item.side === 1 && !item.appeal && !item.other_appeal) {
+            item.otc_collection_list.forEach((child) => {
+              if (child.payment_type === 1) {
+                bankData.push({
+                  id: child.collection_id,
+                  realName: child.name,
+                  name: child.deposit_bank + '/' + child.card_number
+                })
+              } else if (child.payment_type === 2) {
+                bankData.push({
+                  id: child.collection_id,
+                  realName: child.name,
+                  name: this.$t('payment_namezfb') + '/' + child.alipay_account,
+                  img: child.collection_img
+                })
+              } else if (child.payment_type === 3) {
+                bankData.push({
+                  id: child.collection_id,
+                  realName: child.name,
+                  name: this.$t('payment_weChat_adasunt') + '/' + child.we_chat_account,
+                  img: child.collection_img
+                })
+              } else if (child.payment_type === 4) {
+                bankData.push({
+                  id: child.collection_id,
+                  realName: child.name,
+                  name: 'Paynow' + '/' + child.card_number,
+                  img: child.collection_img
+                })
+              } else if (child.payment_type === 5) {
+                bankData.push({
+                  id: child.collection_id,
+                  realName: child.name,
+                  name: 'Paylah' + '/' + child.card_number,
+                  img: child.collection_img
+                })
+              }
+              Vue.set(item, 'paySet', child.payment_type)
+            })
+            // // 支付方式默认选择银行卡
+            // const paylist = item.otc_collection_list
+            // if (paylist.length > 0) {
+            //   const arr = paylist.filter(arg => arg.payment_type === 1)
+            //   if (arr.length > 0) {
+            //     // this.selectPayment = arr[0]
+            //     Vue.set(item, 'selectPayment', arr[0])
+            //   } else {
+            //     Vue.set(item, 'selectPayment', paylist[0])
+            //   }
+            // }
+
+            Vue.set(item, 'bankArray', bankData)
+            Vue.set(item, 'bankId', '')
+            Vue.set(item, 'pAccount', '')
+            Vue.set(item, 'realName', '')
+            Vue.set(item, 'bankAccount', '')
+          }
+        })
+      }
+    },
+    sq(item) {
       this.$confirm(this.$t('otc_otutcol_19'), this.$t('tips'), {
         confirmButtonText: this.$t('otc_ziurec_20'),
         cancelButtonText: this.$t('cancel'),
         type: 'warning'
       })
         .then(() => {
-          let params = {
+          const params = {
             trans_id: item.trans_id,
             user_id: this.id
           }
           service.otcAppeal(params).then(res => {
-            if (!res) {
+            // console.log(res)
+            if (!res.code) {
               // this.$message.success('申诉成功，请等待客服处理')
               this.$message({
                 type: 'success',
@@ -1006,126 +1110,72 @@ export default {
             }
           })
         })
-        .catch(() => {})
+        .catch(() => { })
     },
-    handleCurrentChange (e) {
-      console.log(this.active)
+    handleCurrentChange(e) {
+      // console.log(this.active)
       if (this.active === 1 || this.active === 2) {
         this.params1.page = e
-        console.log(this.params1.page, '1')
+        // console.log(this.params1.page, '1')
         this.init(this.active)
       } else {
         this.params.page = e
-        console.log(this.params.page, '2')
+        // console.log(this.params.page, '2')
         this.init(this.active)
       }
     },
-    setTimeInit () {
-      this.timer = setInterval(() => {
-        if (this.active === 0 || this.active === 3) {
-          // this.init(this.active)
-        }
-      }, 3000)
-    }
-  },
-  mounted () {
-    this.setTimeInit()
-  },
-  beforeDestroy () {
-    clearInterval(this.timer)
-  },
-  created () {
-    this.getOrderz()
-    // todo 初始化第一种类型数据
-    this.init(this.active)
-
-    // 定时器
-    this.timers = setInterval(() => {
-      service.getUnDonefills({
-        page: 1,
-        side: 0,
-        size: 999
-      }
-      ).then(res => {
-        if (res.code === 0) {
-          if (res.data.data.length > 0) {
-            Vue.set(this.tab[0], 'count', res.data.data.length)
-          }
-        }
-      })
-      service.getOtcActivefills({
-        page: 1,
-        side: 0,
-        size: 999
-      }).then(res => {
-        if (res.code === 0) {
-          let noCount = []
-          if (res.data.data.length > 0) {
-            res.data.data.forEach((item) => {
-              noCount.push(item)
-            })
-          }
-          Vue.set(this.tab[3], 'count', noCount.length)
-        }
-      })
-    }, 5000)
+    // setTimeInit() {
+    //   this.timer = setInterval(() => {
+    //     if (this.active === 0 || this.active === 3) {
+    //       // this.init(this.active)
+    //     }
+    //   }, 3000)
+    // }
   }
+
 }
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <style lang="scss" rel="stylesheet/scss" scoped>
-  @import "./assets/scss/trade.scss";
-  @font-face {
-    font-family: 'iconfont';  /* project id 1244642 */
-    src: url('https://at.alicdn.com/t/font_1244642_widppyjmvhh.eot');
-    src: url('https://at.alicdn.com/t/font_1244642_widppyjmvhh.eot?#iefix') format('embedded-opentype'),
-    url('https://at.alicdn.com/t/font_1244642_widppyjmvhh.woff2') format('woff2'),
-    url('https://at.alicdn.com/t/font_1244642_widppyjmvhh.woff') format('woff'),
-    url('https://at.alicdn.com/t/font_1244642_widppyjmvhh.ttf') format('truetype'),
-    url('https://at.alicdn.com/t/font_1244642_widppyjmvhh.svg#iconfont') format('svg');
-  }
-  .iconfont{
-    font-family:"iconfont" !important;
-    font-size:16px;font-style:normal;
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-stroke-width: 0.2px;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  .slot-down {
-    position: absolute;
-    right: 4px;
-    top: 14px;
-    width: 16px;
-    height: 32px;
-    line-height: 0.5;
-    color: #999;
-    i {
-      cursor: pointer;
-      display:inherit;
-      &:last-child {
-        margin-top: -8px;
-      }
+@import "./assets/scss/trade.scss";
+@font-face {
+  font-family: "iconfont"; /* project id 1244642 */
+  src: url("https://at.alicdn.com/t/font_1244642_widppyjmvhh.eot");
+  src: url("https://at.alicdn.com/t/font_1244642_widppyjmvhh.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://at.alicdn.com/t/font_1244642_widppyjmvhh.woff2")
+      format("woff2"),
+    url("https://at.alicdn.com/t/font_1244642_widppyjmvhh.woff") format("woff"),
+    url("https://at.alicdn.com/t/font_1244642_widppyjmvhh.ttf")
+      format("truetype"),
+    url("https://at.alicdn.com/t/font_1244642_widppyjmvhh.svg#iconfont")
+      format("svg");
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+.slot-down {
+  position: absolute;
+  right: 4px;
+  top: 14px;
+  width: 16px;
+  height: 32px;
+  line-height: 0.5;
+  color: #999;
+  i {
+    cursor: pointer;
+    display: inherit;
+    &:last-child {
+      margin-top: -8px;
     }
-    .iconActive {
-      color: #c9a96c
-    }
   }
-
-
+  .iconActive {
+    color: #c9a96c;
+  }
+}
 </style>

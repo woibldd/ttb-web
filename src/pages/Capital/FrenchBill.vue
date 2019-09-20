@@ -13,7 +13,7 @@
       <el-form-item>
         <el-select
           v-model="formInline.currency"
-          placeholder="币种"
+          :placeholder="$t('currency')"
           @change="changeCurreny"
           clearable>
           <el-option
@@ -27,7 +27,7 @@
       <el-form-item>
         <el-select
           v-model="formInline.type"
-          placeholder="交易类型"
+          :placeholder="$t('otc_transaction_type')"
           @change="changeType"
           clearable>
           <el-option
@@ -65,8 +65,12 @@
         prop="opetate"
         :label="$t('order_th_type')">
         <template slot-scope="scope">
-          <span
-            v-html="scope.row.opetate === 1 ? $t('transfer_out') : scope.row.opetate === 2 ? $t('transfer_in') : scope.row.opetate === 3 ? '当日清算' : scope.row.opetate === 4 ? '买入' : '卖出'"/>
+          <!-- <span
+            v-html="scope.row.opetate === 1 ? $t('transfer_out') 
+            : scope.row.opetate === 2 ? $t('transfer_in') 
+            : scope.row.opetate === 3 ? '当日清算' 
+            : scope.row.opetate === 4 ? '买入' : '卖出'"/> -->
+          <span v-html="$t(opetates[scope.row.opetate])"></span>
         </template>
       </el-table-column>
       <el-table-column
@@ -153,7 +157,14 @@ export default {
       ],
       tableData: [],
       start: '',
-      end: ''
+      end: '',
+      opetates: {
+        1: 'otc_french_bill_in',
+        2: 'otc_french_bill_out',
+        3: 'otc_french_bill_liquidation',
+        4: 'otc_french_bill_buy',
+        5: 'otc_french_bill_sell',
+      }
     }
   },
   methods: {
@@ -215,4 +226,14 @@ export default {
 
 <style lang="scss" rel="stylesheet/scss" scoped>
   @import './../StepTable/assets/scss/trade.scss';
+</style>
+
+
+<style lang='scss'> 
+.el-picker-panel.el-date-range-picker {
+  width: 460px;
+  .el-picker-panel__body {
+    min-width: 450px;
+  }
+}
 </style>

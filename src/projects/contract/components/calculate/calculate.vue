@@ -32,7 +32,7 @@
             class="row__oprate"
             v-model="earn.lever">
             <el-option
-              v-for="(item, idx) in allLevers"
+              v-for="(item, idx) in leverages"
               :key="idx"
               :label="item + 'x'"
               :value="item"/>
@@ -81,19 +81,19 @@
         </div>
         <div class="flex-between mb-28">
           <span class="result_label">{{ $t('contract_history_postion_header_promise') }}</span>
-          <span>{{ earn.result.margin }} {{ product_name }}</span>
+          <span>{{ earn.result.margin }} BTC</span>
         </div>
         <div class="flex-between mb-28">
           <span class="result_label">{{ $t('contract_cal_open_lever') }}</span>
-          <span>{{ earn.result.open_value }} {{ product_name }}</span>
+          <span>{{ earn.result.open_value }} BTC</span>
         </div>
         <div class="flex-between mb-28">
           <span class="result_label">{{ $t('contract_cal_pull_lever') }}</span>
-          <span>{{ earn.result.close_value }} {{ product_name }} </span>
+          <span>{{ earn.result.close_value }} BTC </span>
         </div>
         <div class="flex-between mb-28">
           <span class="result_label">{{ $t('contract_cal_earn') }}</span>
-          <span>{{ earn.result.realized }} {{ product_name }}</span>
+          <span>{{ earn.result.realized }} BTC</span>
         </div>
         <div class="flex-between mb-28">
           <span class="result_label">{{ $t('contract_cal_earn_percent') }}</span>
@@ -296,7 +296,7 @@ export default {
 
       earn: {
         direction: 'more',
-        lever: 100,
+        lever: '1',
         amount: '',
         open_price: '',
         close_price: '',
@@ -313,7 +313,7 @@ export default {
       force: { // 强平价格
         direction: 'more',
         mode: 'fixed',
-        lever: 100,
+        lever: '1',
         amount: '',
         open_price: '',
         result: {
@@ -324,7 +324,7 @@ export default {
       },
       aim: {
         direction: 'more',
-        lever: 100,
+        lever: '1',
         open_price: '',
         roe: 100,
         result: {
@@ -352,7 +352,7 @@ export default {
     },
     holding () {
       if (this.state.ct.holding) {
-        console.log('99999999999999999999999999')
+        // console.log('99999999999999999999999999')
         return this.state.ct.holding
       }
     },
@@ -361,6 +361,14 @@ export default {
         return this.state.ct.pairInfo
       }
       return {}
+    },
+    leverages() {
+      if (this.pairInfo && this.pairInfo.leverages) {
+        return this.state.ct.pairInfo.leverages.split(',')
+      }
+      else {
+        return [1, 5, 10, 25, 50, 100]
+      }
     }
   },
   methods: {
@@ -368,6 +376,7 @@ export default {
       this.selectTitleIndex = t.index
     },
     calcEarn () {
+      this.earn.symbol = this.pairInfo
       let result = calculator.getStorageInfo(this.earn)
       for (let key in result) {
         result[key] = result[key].round(4).toString()

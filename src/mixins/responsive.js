@@ -1,10 +1,16 @@
 import utils from '@/modules/utils'
 const isIos = utils.isIos()
 const vp = document.querySelector('meta[name=viewport]')
-
+  
 let isResponsive = 0
 
 export default {
+  data() {
+    return { 
+      
+    }
+  },
+
   created () {
     isResponsive = 1
     this.$nextTick(() => {
@@ -21,7 +27,7 @@ export default {
     isResponsive = 0
     this.setResponsivePage()
   },
-  methods: {
+  methods: {  
     setResponsivePage () {
       let content = ''
       if (isResponsive > 0) {

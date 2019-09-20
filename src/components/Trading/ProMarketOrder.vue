@@ -39,15 +39,18 @@
             <div class="ix-slider">
               <ix-slider
                 :disabled="!currencyAvailable"
+                ref="sliderBuy"
                 @input="onSliderDragEnd($event, 'buy')"
                 height="4"
+                width="5"
                 :dot-size="14"
                 :lazy="true"
                 :min="0"
                 :max="100"
                 :piecewise-label="true"
                 :interval="1"
-                :piecewise="false"
+                :piecewise="false" 
+                :value='buy_slide'
                 :show="tabActive">
                 <template
                   slot="label"
@@ -55,6 +58,11 @@
                   <span
                     :class="['custom-label', { active }]"
                     v-if="label % 25 === 0"/>
+                  <span
+                    v-if="label % 25 === 0"
+                    class="vue-slider-piecewise-label" >
+                    {{ label }} 
+                  </span>
                 </template>
                 <template
                   slot="tooltip"
@@ -121,6 +129,7 @@
             <div class="ix-slider">
               <ix-slider
                 :disabled="!currencyAvailable"
+                ref="sliderSell"
                 @input="onSliderDragEnd($event, 'sell')"
                 height="4"
                 :dot-size="14"
@@ -130,6 +139,7 @@
                 :piecewise-label="true"
                 :interval="1"
                 :piecewise="false"
+                :value='sell_slide'
                 :show="tabActive">
                 <template
                   slot="label"
@@ -137,6 +147,11 @@
                   <span
                     :class="['custom-label', { active }]"
                     v-if="label % 25 === 0"/>
+                  <span
+                    v-if="label % 25 === 0"
+                    class="vue-slider-piecewise-label" >
+                    {{ label }} 
+                  </span>
                 </template>
                 <template
                   slot="tooltip"
@@ -237,7 +252,9 @@ export default {
       },
       submitting: false,
       postOnly: false,
-      hidden: false
+      hidden: false,
+      buy_slide: 0,
+      sell_slide: 0
     }
   },
   computed: {
@@ -265,7 +282,7 @@ export default {
         }
       },
       immediate: true
-    }
+    }, 
   },
   methods: {
     clear () {
@@ -273,6 +290,7 @@ export default {
       this.buy_price = ''
       this.sell_amount = ''
       this.sell_price = ''
+      
     },
     set ({price, amount, side}) {
       if (!side) {
@@ -398,6 +416,10 @@ export default {
       } else {
         this.setSellVolumn(value)
       }
+    },
+    refreshBalance () {  
+      this.$refs.sliderBuy.setValue(0)
+      this.$refs.sliderSell.setValue(0)
     }
   },
   components: {
@@ -408,6 +430,7 @@ export default {
     this.$eh.$on('order:tab_switch', (tab) => {
       this.tabActive = tab === 'market'
     })
+    this.$eh.$on('protrade:balance:refresh', this.refreshBalance)
   }
 }
 </script>
@@ -545,7 +568,7 @@ export default {
 }
 .custom-tooltip {
   position: absolute;
-  bottom: -44px;
+  bottom: -39px;
   left: -7px;
   color: #A5B4C5;
 }

@@ -8,6 +8,7 @@
         <el-select class="ex-row__value" 
           v-model="selectCoin" 
           value-key="currency"
+          :filterable="true"
           @change="changeCoin">
           <el-option
             v-for="(item, idx) in allCoins"
@@ -68,8 +69,7 @@
             @input="inputText"
             v-model="transferAmount"
           /> -->
-           <number-input 
-           
+           <number-input  
               class="number-input ex-row__value"
               v-model="transferAmount" 
               @input="inputText"

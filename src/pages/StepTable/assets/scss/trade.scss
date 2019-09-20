@@ -36,18 +36,21 @@ $high-color: #333;
         flex: 1;
         em {
           flex: 100px 0 0 0;
-          width: 100px;
           display: inline-block;
           font-style: normal;
+          padding-right: 10px;
           margin-bottom: 12px;
         }
       }
-      .user-info,.time {
+      .user-info,.time, .acount-info {
         flex: 225px 0 0 0;
         width: 225px;
         padding-left: 20px;
         color: #999999;
         font-weight: 400;
+      }
+      .acount-info {
+          flex-grow: 1.5
       }
       .text {
         flex: 1;
@@ -99,7 +102,7 @@ $high-color: #333;
         padding: 0 10px;
         color: #B1B1B1;
         font-size: $font-middle;
-        margin-right: 12px;
+        // margin-right: 12px;
         -webkit-transition: all .3s ease-in;
         -moz-transition: all .3s ease-in;
         -ms-transition: all .3s ease-in;
@@ -114,6 +117,10 @@ $high-color: #333;
       .selected {
         background: $primary;
         color: #fff
+      }
+      .iconfont {
+        font-size: 14px;
+        vertical-align: middle;
       }
     }
     .nav-list {

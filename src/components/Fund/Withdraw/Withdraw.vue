@@ -55,7 +55,7 @@
             width="240"
             trigger="hover"
             effect="dark" :content="depTip">
-            <el-button type="text" slot="reference" class="lian">链名称</el-button>
+            <el-button type="text" slot="reference" class="lian">{{$t("link_name")}}</el-button>
           </el-popover>
         </div>
         <div class="row__value">
@@ -102,7 +102,7 @@
               @blur="onBlur"
               :highlight-first-item="highlight"
               cols="1"
-rows="1" style="vertical-align:top;outline:none;"
+              rows="1" style="vertical-align:top;outline:none;"
             />
           </div>
         </div>
@@ -172,7 +172,7 @@ class="up-limit pointer ml-5">{{ $t('transfer_all') }}</a>
         <!-- <a @click="input_all" class="up-limit pointer ml-30">{{$t('transfer_all')}}</a> -->
       </div>
       <div class="fund-item-other withdraw-fee mb-23">
-        <p> <span class="fee__label">{{ $t('withdraw_fee') }} </span> <span class="fee__coin">{{ selectCoin.withdraw_fee }}{{ selectCoin.currency }}</span> </p>
+        <p> <span class="fee__label">{{ $t('withdraw_fee') }} </span> <span class="fee__coin">{{ selectCoin.withdraw_fee }}{{ selectCoin.withdraw_currency ? selectCoin.withdraw_currency : selectCoin.currency }}</span> </p>
         <p><span class="fee__label">{{ $t('withdraw_arrival') }}</span>
           <span
             class="fee__coin"
@@ -195,7 +195,7 @@ class="up-limit pointer ml-5">{{ $t('transfer_all') }}</a>
         style="padding-left: 102px">
         <li>  {{ $t('withdraw_hint_delay') }}</li>
         <li>  {{ $t('withdraw_hint_check',{num: selectCoin.min_review_amount ,coin: selectCoin.currency}) }}</li>
-        <li v-if="selectCoin.currency === 'EOS'">  {{ $t('watch_tips') }}</li>
+        <li>  {{ $t('watch_tips') }}</li>
       </ul>
 
     </div>
@@ -332,7 +332,11 @@ export default {
       }
     },
     coinArrival () {
-      return this.$big(parseFloat(this.withdrawCount) || 0).minus(this.$big(this.selectCoin.withdraw_fee || 0)).toString()
+      if (!!this.selectCoin.withdraw_currency) {
+        return this.$big(parseFloat(this.withdrawCount) || 0).toString()
+      } else {
+        return this.$big(parseFloat(this.withdrawCount) || 0).minus(this.$big(this.selectCoin.withdraw_fee || 0)).toString()
+      }
     },
     verify_google () {
       if (this.state.userInfo && this.state.userInfo.verify_google) {
@@ -371,6 +375,7 @@ export default {
   },
   methods: {
     async lianSelect (coin) {
+      console.log({coin})
       this.selectCoin = coin
       await this.getCoinAddress()
       this.updadeMyCoinInfo()
@@ -383,8 +388,8 @@ export default {
           address: this.selectItem,
           memo: ''
         }
-        if (this.restaurants)
-          {this.restaurants.push(obj)}
+        // if (this.restaurants)
+        //   {this.restaurants.push(obj)}
 
         this.selectItem = obj.value
         this.selectAddress = obj
@@ -414,8 +419,13 @@ export default {
         currency: this.selectCoin.currency
       }
       return service.getMyAddressList(param).then((res) => {
-        if (res && res.data) {
+        if (res && res.data) { 
+          this.restaurants = []
           this.allAddress = res.data
+          if (this.selectCoin.currency === 'USDT') {
+            this.allAddress = this.allAddress.filter(item => item.chain === this.selectLian.chain || (!item.chain &&  this.selectLian.chain === 'OMNI' ))
+          }
+           
           // console.log(this.allAddress)
           for (const item of this.allAddress) {
             this.restaurants.push({
@@ -426,26 +436,32 @@ export default {
               description: item.description
             })
           }
-          this.selectItem = this.restaurants[0].address
-          this.memo = this.restaurants[0].memo
 
+          this.selectItem = ''
+          this.selectAddress = {
+            address: '',
+            memo: ''
+          }
           if (this.allAddress.length > 0) {
+            this.selectItem = this.restaurants[0].address
+            this.memo = this.restaurants[0].memo
+
             this.selectAddress = this.allAddress[0]
             this.memo = this.selectAddress.memo
-          } else {
-            this.selectAddress = {
-              address: ''
-            }
-            this.memo = ''
-          }
+          }  
         } else {
           this.selectAddress = {}
           this.memo = ''
         }
       })
     },
-    async changeCoinType (coin) {
-      this.selectCoin = coin
+    async changeCoinType (coin) { 
+      if (coin.currency === 'USDT') {
+        this.selectCoin = this.selectLian
+      }
+      else {
+        this.selectCoin = coin
+      }
       this.selectItem = ''
       this.selectAddress = {
         address: '',
@@ -463,6 +479,7 @@ export default {
       })
     },
     async getAllCoinTypes () {
+
       await service.getAllCoinTypes().then(res => {
         if (res && res.data) {
           this.lianData = []
@@ -478,7 +495,8 @@ export default {
               Vue.set(item, 'currencyName', item.currency + '-' + 'ERC20')
             }
           })
-          this.selectLian = this.lianData[1]
+          this.lianData = this.lianData.reverse()//顺序颠倒一下，omni要放在前面
+          this.selectLian = this.lianData[0]
           this.allCoins = this.removalData(res.data.filter(c => c.withdrawable))
           this.allCoins.forEach((item) => {
             if(state.locale === 'zh-CN') {
@@ -501,7 +519,7 @@ export default {
     },
     quickSelectCoin (coin) {
       this.changeCoinType(coin)
-      this.selectLian = this.lianData[1]
+      this.selectLian = this.lianData[0]
     },
     removalData (arrData) {
       var hash = {}
@@ -547,6 +565,10 @@ export default {
         phone_code: this.phoneCode
       }
 
+      if (this.selectCoin.currency === 'USDT') {
+        param.chain = this.selectLian.chain
+      }
+ 
       // eos 需要填memo
       if (this.selectCoin.memo_support) {
         if (this.memo) {
@@ -591,6 +613,12 @@ export default {
       } else if (this.selectAddress.address === 'ixeosdeposit') {
         utils.alert(this.$t('eos_not_support_internal_transfer'))
         return
+      }
+      if (this.selectCoin.memo_support) {
+        if (this.memo.trim() == '') {  
+          utils.alert(this.$t('eos_deposit_tip_label'))
+          return
+        }
       }
 
       this.showModal = true

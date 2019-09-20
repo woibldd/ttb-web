@@ -5,7 +5,7 @@ import utils from '@/modules/utils'
 import { accountRouter } from './module/account'
 import { activityRouter } from './module/activity'
 import { capitalRouter } from './module/assets'
-import {feeRouter} from './module/fee'
+import { feeRouter } from './module/fee'
 import { materialRouter } from './module/material'
 import { profileRouter } from './module/profile'
 import { tradeRouter } from './module/trade'
@@ -16,6 +16,7 @@ import BidDetail from '@/pages/Bid/detail.vue'
 import BidTable from '@/pages/Bid/table.vue'
 import Superzis from '@/pages/Superzis/index.vue'
 import ByAmount from '@/pages/Superzis/sell.vue'
+import layout from '@/pages/layout/index'
 
 import _ from 'lodash'
 // import HelloWorld from '@/components/HelloWorld'
@@ -54,7 +55,7 @@ const lever = () => import(/* webpackChunkName: "lever" */ '@/pages/lever')
 // const ProfileAuthen = () => import(/* webpackChunkName: "ProfileAuthen" */ '@/pages/ProfileAuthen')
 
 const Fee = () => import(/* webpackChunkName: "Fee" */ '@/pages/Fee')
-const ContractFee = () => import(/* webpackChunkName: "ContractFee" */ '@/components/Fee/contractFee')
+// const ContractFee = () => import(/* webpackChunkName: "ContractFee" */ '@/components/Fee/contractFee')
 const TradingFee = () => import(/* webpackChunkName: "tradingFee" */ '@/components/Fee/tradingFee')
 // const MobileProfile = () => import(/* webpackChunkName: "MobileProfile" */ '@/pages/MobileProfile')
 
@@ -86,7 +87,7 @@ const TradeIndex = () => import(/* webpackChunkName: "ContractMaterial" */ '@/co
 
 // h5相关页面
 const h5login = () => import(/* webpackChunkName: "h5login" */ '@/pages/h5/sign-up')
-const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index')
+const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index2')
 
 // 合约大赛
 // 活动页面
@@ -111,7 +112,7 @@ const textTrade = () => import(/* webpackChunkName: "Hir" */ '@/pages/StepTable/
 
 // 下载
 const Download = () => import(/* webpackChunkName: "Download" */ '@/pages/download/download.vue')
-async function beforeEach (to, from, next) {
+async function beforeEach(to, from, next) {
   state.loading = true
   const auth = utils.getRouteMeta(to, 'auth')
   // utils.log('to:', to.name, 'from:', from.name)
@@ -133,14 +134,14 @@ async function beforeEach (to, from, next) {
     } else {
       next({
         name: 'login',
-        query: {redirect: to.fullPath}
+        query: { redirect: to.fullPath }
       })
     }
   }
   next()
 }
 
-function beforeResolve (to, from, next) {
+function beforeResolve(to, from, next) {
   if (to.name !== '404' || (from.name && from.name !== '404')) {
     document.body.className = document.body.className.replace(/\brouter-([-a-zA-Z0-9]+)\b/g, '')
     let className = 'router'
@@ -149,7 +150,7 @@ function beforeResolve (to, from, next) {
       document.body.classList.add(className)
     })
   }
-
+  
   if (!loaded) {
     loaded = true
     utils.preloadEnd()
@@ -158,7 +159,7 @@ function beforeResolve (to, from, next) {
   state.loading = false
   next()
 }
-function onError (err) {
+function onError(err) {
   utils.log(err)
   state.loading = false
   utils.alert(utils.$app.$i18n.t('page_error'))
@@ -266,7 +267,7 @@ export const routes = [
   },
   {
     path: '/fee',
-    name: 'Fee',
+    // name: 'Fee',
     meta: {
       auth: false,
       nav: true,
@@ -321,19 +322,19 @@ export const routes = [
     component: Test1
   }, {
     path: '/fee-set',
-    name: 'ServiceFeeSet',
+    // name: 'ServiceFeeSet',
     component: ServiceFeeSet
   },
-  {
-    path: 'TransferModal',
-    name: 'transferModal',
-    component: TransferModal
-  },
+  // {
+  //   path: 'TransferModal',
+  //   name: 'transferModal',
+  //   component: TransferModal
+  // },
   {
     path: '/myorder-new',
     name: 'MyOrderNew',
     component: MyOrderNew,
-    redirect: {name: 'OrderBiBi'},
+    redirect: { name: 'OrderBiBi' },
     meta: {
       auth: false,
       nav: true,
@@ -359,13 +360,36 @@ export const routes = [
   ...otherRouter,
   {
     path: '/snowball',
-    name: 'Bid',
+    redirect:'/snowball/playBTC',
+    name:'snowball',
     meta: {
       nav: true,
       footer: true,
       class: 'dark'
     },
-    component: Bid
+    component: layout,
+    children:[
+      {
+        path: '/snowball/bazaar',
+        name: 'Bid',
+        // meta: {
+        //   nav: true,
+        //   footer: true,
+        //   class: 'dark'
+        // },
+        component: Bid,
+      },
+      {
+        path: '/snowball/playBTC',
+        name: 'playBTC',
+        // meta: {
+        //   nav: true,
+        //   footer: true,
+        //   class: 'dark'
+        // },
+        component: () => import('@/pages/Bid/playBTC')
+      },
+    ]
   },
   {
     path: '/snowballDetail',
@@ -422,10 +446,10 @@ export const routes = [
   }
 ]
 
-let router = new Router({
+const router = new Router({
   mode: process.env.NODE_ENV === 'development' ? 'history' : 'history',
   routes: routes,
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
     // if (to.name === 'trading') {
     return { x: 0, y: 0 }
     // }

@@ -3,10 +3,6 @@
    <div class="bid-banner">
       <div class="bid-con clearfix">
         <div class="banner-item-list">
-          <!-- <img v-if='state.locale === "en"' src="./assets/item-banner-en.png">
-          <img v-if='state.locale === "ko"' src="./assets/item-banner-ko.png">
-          <img v-if='state.locale === "zh-CN"' src="./assets/item-banner-zh-CN.png">
-          <img v-if='state.locale === "zh-HK"' src="./assets/item-banner-zh-HK.png">  -->
           <img :src="bannerPath">
         </div>
         <div class="banner-item-text">
@@ -146,7 +142,7 @@ export default {
                 if (item.beginTime > timestamp) {
                   Vue.set(item, 'isTrue', true)
                 }
-              }
+             }
             })
           }
           this.hotList.push(this.list[0])

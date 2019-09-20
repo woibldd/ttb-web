@@ -34,7 +34,7 @@
             <v-loading
               v-if="!regionOptions.length"
               color="gray"/>
-            <el-select v-model="form.regionId" filterable>
+            <el-select v-model="form.regionId" filterable  @change="selectChange">
               <el-option
                 v-for="option in regionOptions"
                 :value="option.id"
@@ -53,7 +53,7 @@
           <el-form-item
             class="inp_box"
             :label="$t('kyc_id_type')">
-            <el-select v-model="form.id_type">
+            <el-select v-model="form.id_type" :disabled="form.regionId===86">
               <el-option
                 :label="$t('kyc_idcard')"
                 :value="1"/>
@@ -172,6 +172,14 @@ export default {
     next()
   },
   methods: {
+    selectChange(regionId) {
+      this.form.id_number = ''
+      if (regionId === 86) {
+        this.form.id_type = 1
+      } else {
+        this.form.id_type = 2
+      }
+    },
     async fetchRegion () {
       const res = await service.getRegionList()
       if (!res.code) {
@@ -219,6 +227,7 @@ export default {
         this.form.regionId = res.data.region || 86
         this.form.id_type = res.data.id_type || 1
         this.form.id_number = res.data.id_number || ""
+        this.selectChange(this.form.regionId)
       }
       else if (kycInfo.lv === 1 && kycInfo.state === 1 && kycInfo.region !== 86) {
         this.$router.replace({

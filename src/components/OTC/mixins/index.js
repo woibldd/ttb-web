@@ -32,6 +32,11 @@ export default {
       }
     }, 
     symbolInfo () {
+      // for (const symbol of this.symbolList) {
+      //   if (symbol.currency == this.currency) {
+      //     return symbol; 
+      //   }
+      // } 
       return this.state.otc.symbolInfo
     },
     indexPrice () {
@@ -47,10 +52,11 @@ export default {
       return 2
     },
     amount_scale() {
+      console.log({test:this.symbolInfo})
       if (!!this.symbolInfo) {
         return this.symbolInfo.amount_scale || 6
       }
-      return 2
+      return 6
     },
     isLogin () {
       return this.state.userInfo !== null
