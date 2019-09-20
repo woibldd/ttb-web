@@ -495,8 +495,9 @@ export default {
               Vue.set(item, 'currencyName', item.currency + '-' + 'ERC20')
             }
           })
-          this.lianData = this.lianData.reverse()//顺序颠倒一下，omni要放在前面
-          this.selectLian = this.lianData[0]
+          // this.lianData = this.lianData.reverse()//顺序颠倒一下，omni要放在前面
+          this.selectLian = this.lianData.filter(a => a.chain==='OMNI')[0]      
+          // this.selectLian = this.lianData[0]
           this.allCoins = this.removalData(res.data.filter(c => c.withdrawable))
           this.allCoins.forEach((item) => {
             if(state.locale === 'zh-CN') {
@@ -519,7 +520,7 @@ export default {
     },
     quickSelectCoin (coin) {
       this.changeCoinType(coin)
-      this.selectLian = this.lianData[0]
+      this.selectLian =  this.lianData.filter(a => a.chain==='OMNI')[0]      
     },
     removalData (arrData) {
       var hash = {}
