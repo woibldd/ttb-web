@@ -1,7 +1,8 @@
+
 <template>
   <div class="market-info-container">
     <div class="ix-pannel">
-      <div class="ix-header">
+      <div class="ix-header" style="line-height: 1!important">
         <span>{{ $t('contract_block_market_info') }}: {{ title }}</span>
         <router-link
           :to="{name: 'TradeIndex', params: {pair: state.ct.pair}}"
@@ -21,7 +22,7 @@
               v-if="delta >= 0"
               name="arrow-down-green"/>
           </div>
-          <div class="sub-price"> 
+          <div class="sub-price">
             <router-link
               class="c-666 pointer"
               v-tooltip.top-center="{html: true, content: indexPriceTips, classes: 'contract'}"
@@ -80,7 +81,7 @@
         <div
           class="info__row"
            v-tooltip.top-center="{html: true, content: $t('contract_fee_rate_estimate_tips', { feeRate: (((pairInfo.fee_rate_forecast || pairInfo.fee_rate) * 100).toFixed(4) || 0) + '%' }), classes: 'contract'}">
-         
+
           <div class="row__label">{{ $t('contract_fee_rate') }}</div>
           <div class="row__value">
             <span>{{$t('count_down_value', { hour, minute, second})}}</span>
@@ -137,11 +138,11 @@ export default {
       }
       return this.$t('contract_index_price_tips' , {product_name : 'BTC'})
     },
-    unit() { 
-      if (this.state.ct.pair === 'FUTURE_BTCUSD') { 
+    unit() {
+      if (this.state.ct.pair === 'FUTURE_BTCUSD') {
         return 'USD'
       }
-      else { 
+      else {
         return 'contract_min_unit'
       }
     },
@@ -150,7 +151,7 @@ export default {
     var $this = this
     setTimeout(function(){
      var startTime=Math.round(new Date() / 1000);//开始时间
-     var endTime= $this.pairInfo.next_fee_time/ 1000; //结束时间 
+     var endTime= $this.pairInfo.next_fee_time/ 1000; //结束时间
      setInterval(function(){
     		 var ts =endTime-startTime;//计算剩余的毫秒数
     		 var hh = parseInt(ts  / 60 / 60 % 24, 10);//计算剩余的小时数
