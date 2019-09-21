@@ -5,23 +5,41 @@
     >
       <swiper :options="swiperOption">
         <swiper-slide>
+          <!--<div class="dot-item-list">-->
+            <!--<div class="item-list-banner" v-for="(item, index) in banner" :key="index">-->
+              <!--<a :href="item.url" target="_blank">-->
+                <!--<img-->
+                  <!--:src="item.picture"-->
+                  <!--style="border: 1px solid #01CED1;border-radius: 8px;height: 124px;width: 266px;overflow: hidden;zoom: 1;"-->
+                <!--/>-->
+              <!--</a>-->
+            <!--</div>-->
+          <!--</div>-->
           <div class="dot-item-list">
-            <div class="item-list-banner" v-for="(item, index) in banner" :key="index">
-              <a :href="item.url" target="_blank">
-                <img
-                  :src="item.picture"
-                  style="border: 1px solid #01CED1;border-radius: 8px;height: 124px;width: 266px;overflow: hidden;zoom: 1;"
-                />
-              </a>
-            </div>
+            <swiper :options="swiperOptione">
+              <swiper-slide v-for="(item, index) in banner" :key="index">
+                <a :href="item.url" target="_blank">
+                  <img
+                    :src="item.picture"
+                    style="border: 1px solid #01CED1;border-radius: 8px;height: 124px;width: 266px;overflow: hidden;zoom: 1;"
+                  />
+                </a>
+              </swiper-slide>
+              <!--<div class="swiper-pagination swiper-pagination-s" slot="pagination"></div>-->
+            </swiper>
           </div>
         </swiper-slide>
         <swiper-slide>
-          <div class="normal-item-list" v-for="(item, index) in swipeBanner" :key="index">
-            <a :href="item.url" target="_blank">
-              <img :src="item.picture" style="border-radius: 8px;border:1px solid #01393c" />
-            </a>
-          </div>
+          <swiper :options="swiperOptions">
+            <swiper-slide v-for="(item, index) in swipeBanner" :key="index">
+              <div class="normal-item-list">
+                <a :href="item.url" target="_blank">
+                  <img :src="item.picture" style="border-radius: 8px;border:1px solid #01393c" />
+                </a>
+              </div>
+            </swiper-slide>
+            <!--<div class="swiper-pagination swiper-pagination-s" slot="pagination"></div>-->
+          </swiper>
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination" />
       </swiper>
@@ -54,7 +72,7 @@
                   />
                 </div>
               </el-col>
-              <el-col :span="6"> 
+              <el-col :span="6">
                 <div class="mynav_link arrow-down">
                   <span class="label">
                     <icon name="USDT" />
@@ -112,14 +130,31 @@ export default {
           template: `<i class="currency-icon">&#xe61a;</i> USDT`
         }
       ],
+      swiperOptione: {
+        initialSlide :2,
+        autoplayDisableOnInteraction : false,
+        slidesPerView: 4,
+        slidesPerGroup: 4
+      },
       swiperOption: {
-        spaceBetween: 30,
+        initialSlide :1,
+        autoplayDisableOnInteraction : false,
+        slidesPerView: "auto",
+        centeredSlides: true,
+        loop: true,
+        loopFillGroupWithBlank: true,
         autoplay: true,
         speed: 500,
         pagination: {
           el: ".swiper-pagination",
           clickable: true
         }
+      },
+      swiperOptions: {
+        initialSlide :2,
+        autoplayDisableOnInteraction : false,
+        slidesPerView: "auto",
+        centeredSlides: true
       },
       arr: [],
       money: 0,
@@ -206,6 +241,8 @@ export default {
       margin-left: -600px;
       bottom: 40px;
       display: flex;
+      overflow: hidden;
+      height: 160px;
       .item-list-banner {
         flex: 1;
       }
@@ -294,9 +331,9 @@ export default {
   }
 }
 
-.mynav_link {  
+.mynav_link {
   font-size: 16px;
-  position: relative;  
+  position: relative;
   background-color: #fefefe;
   width: 140px;
   border-radius: 5px;
@@ -304,7 +341,7 @@ export default {
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  &.arrow-down {  
+  &.arrow-down {
     .label {
       line-height: 40px;
     }
@@ -339,7 +376,7 @@ export default {
       visibility: hidden;
 
       .dropdown-list {
-        .dropdown-item { 
+        .dropdown-item {
           white-space: nowrap;
           .link {
             width: 100%;
