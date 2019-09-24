@@ -1105,7 +1105,7 @@
     "contract_account_rights": "계정권익",
     "contract_account_rights_tips": "<a>계정 권익 </a><br/> (예금-인출 + 이미 손익 실현)",
     "contract_margin_balance": "보증금금액",
-    "contract_margin_balance_tips": "<a>보증금 잔액 </a><br/> 현재 사용 자가 창고를 열 때 사용 할 수 있는 보증금의 수량 = 계좌 권익-창고 보증금-위탁 보증금。",
+    "contract_margin_balance_tips": "<a>보증금 잔액 </a><br/> 보증금 잔액 = 가용 잔액 + 미실현 손익",
     "contract_avab_tips": "<a>사용 가능 한 잔고 </a><br/> 새로 운 창고를 건설 하거나 다른 용도에 사용 할 수 있는 자금 부분은 점용 보증금 부분을 포함 하지 않는다.",
     "contract_unrealized_profit_and_loss_tips": "<a>미 실현 손익 </a><br/> 현재 사용 자가 보유하고 있는 창고 공간에서 발생하는 손익。",
     "contract_were_margin_tips": "<a>창고 보관 보증금 </a><br/> 보증금에서 미 평 창고 증권에 분배 되는 초기 보증금 요구 부분에 실현 되지 못 한 손익을 합 한다。",
@@ -2189,9 +2189,9 @@
 "order_id": "주문서ID", 
 "fxpl": "돈세탁방지 가이드",
 "pay":"지불",
-"receive":"획득",
-"new_user_register_popup1": "注册赠金",
-"new_user_register_popup2": "扫码添加微信客服，加入ixx.com官方社区立即领取$50等值合约交易体验金！",
-"new_user_register_popup3": "如有疑问，请直接咨询微信客服。",
-"pair_table_option_empty": "暂无添加自选 "
+"receive":"획득", 
+"new_user_register_popup1": "등록증정금",
+"new_user_register_popup2": "위쳇고객님의 QR코드를 스캔하여 친구를 추가하세요，ix.com 공식 커뮤니티에 가입 즉시 50달러 등가계약 거래 체험금 수급!！",
+"new_user_register_popup3": "질문이 있으시면 직접 위챗 고객님에게 문의해 주십시오。",
+"pair_table_option_empty": "자동첨가가 없습니다"
 }

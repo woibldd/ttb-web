@@ -248,6 +248,13 @@ input {
 }
 @import "styles/reset.scss";
 @import "styles/index.scss";
+input::-webkit-credentials-auto-fill-button {
+  display: none !important;
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
 @media (max-width: 1378px) {
   .el-table td, .el-table th {
     font-size: 12px!important;
