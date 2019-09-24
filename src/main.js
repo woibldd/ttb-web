@@ -16,9 +16,10 @@ import qs from 'querystring'
 import * as Sentry from '@sentry/browser'
 import 'babel-polyfill'
 import moment from 'moment'
-
+import 'flex.css'
 import 'element-ui/lib/theme-chalk/index.css'
 
+import './icons'
 import {
   Select,
   Option,

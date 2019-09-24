@@ -89,11 +89,14 @@ module.exports = {
       {
         test: /\.svg$/,
         include: [resolve('src')],
-        loader: 'svg-sprite-loader'
+        loader: 'svg-sprite-loader',
         /* loader: 'svg-sprite?' + JSON.stringify({
           name: '[name]',
           prefixize: true,
         }) */
+        options:{
+          symbolId: 'icon-[name]'
+        }
       }
     ]
   },

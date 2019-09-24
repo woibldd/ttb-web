@@ -2294,15 +2294,15 @@
     "btntext":"Click to play" 
   },
   "3":{
-    "title":"Killing Card",
-    "describe":"Point fight, double the winner",
-    "tips":"Poker game",
-    "btntext":"Click to play" 
-  },
-  "4":{
     "title":"Crazy 28 ",
     "describe":"Multi-player duel, get them all",
     "tips":"High frequency game",
+    "btntext":"Click to play" 
+  },
+  "4":{
+    "title":"Killing Card",
+    "describe":"Point fight, double the winner",
+    "tips":"Poker game",
     "btntext":"Click to play" 
   },
   "5":{

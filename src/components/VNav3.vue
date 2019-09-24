@@ -73,6 +73,12 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             <!-- {{ $t('bidTitle') }} -->
             <whDropdown :menuOptions="[{label:$t('bidTitle'),href:'/snowball/bazaar'}]" >{{$t('playBTC')}}</whDropdown >
           </router-link>
+          <router-link
+            to="/share_option"
+            class="nav_link  ml-30">  
+            {{$t('playBTC')}}
+            <!-- <whDropdown :menuOptions="[{label:$t('bidTitle'),href:'/snowball/bazaar'}]" >{{$t('playBTC')}}</whDropdown > -->
+          </router-link>
           <!-- <div class="nav_link arrow-down">
             <a
               :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"
