@@ -10,7 +10,7 @@
 
 # ssh -p 10022 root@47.74.255.117 'rsync -e "ssh -p 10022" -rcvPz ~/web_staging_ixx/ test:/var/www/ixx'
 
-npm i clipboard -S 
-npm i element-ui -S
-npm i canvg -S
-npm i amcharts -S
+cnpm i clipboard -S 
+cnpm i element-ui -S
+cnpm i canvg -S
+cnpm i amcharts -S
