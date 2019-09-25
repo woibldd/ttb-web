@@ -186,7 +186,7 @@ export default {
 .banner {
     width: 100%;
     height: 100vw * (690/1920);
-    background-image: url(~@/assets/download/banner.jpg);
+    background-image: url(~@/assets/download/banner.png);
     background-size: 100%;
     background-repeat: no-repeat;
     display: flex;
