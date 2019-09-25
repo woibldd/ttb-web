@@ -25,6 +25,7 @@
     "countup": "^1.8.2",
     "element-ui": "^2.10.1",
     "highcharts": "^7.2.0",
+    "loader": "^2.1.1",
     "mint-ui": "^2.2.13",
     "moment": "^2.24.0",
     "qrcode": "^1.2.2",
