@@ -387,7 +387,7 @@ export default {
       )
     },
     isTestnet() {
-      return location.hostname.indexOf('ixex.pro') >= 0
+      return location.hostname.indexOf('ixex.pro') >= 0 || location.hostname.includes('localhost')
       // return true
     },
     showContract() {
