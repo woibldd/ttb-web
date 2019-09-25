@@ -415,6 +415,15 @@
         this.getBalance()
         this.value = 2
         this.transferType(1)
+        this.accountTypes2 = []
+        this.accountTo = ''
+        this.accountFrom = this.accountTypes[0].value
+        this.accountTypes.forEach((item) => {
+          if (item.value !== this.accountFrom) {
+            this.accountTypes2.push(item)
+          }
+        })
+      this.accountTo = this.accountTypes2[0].value
         this.accountFrom = this.accountTypes[0].value
       },
       updateAvailable() {
@@ -479,7 +488,7 @@
       this.getBalance()
       // this.getAllCoinTypes()
       this.page()
-       
+
       this.accountTo = ''
       this.accountTypes.forEach((item) => {
         if(item.value !== this.accountFrom) {

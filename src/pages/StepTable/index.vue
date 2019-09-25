@@ -86,7 +86,7 @@
           class="nav-list"
           @click="switchTab(index)">{{ item.name }}
           <span v-if="item.count > 0 && token">{{ item.count }}</span>
-        </div> 
+        </div>
         <div
           v-if="active === 0"
           class="slot-down">
@@ -107,7 +107,7 @@
             :class="{selected: orderActive === index}"
             @click="orderSwtich(index)">{{ item }}</span>
             <icon
-              name="robot-info" 
+              name="robot-info"
               v-tooltip.top-end="{html: true,content: $t('otc_suspend_all_tips')} "
             />
         </div>
@@ -604,7 +604,7 @@ export default {
 
     const that = this
     // 定时器
-    this.timers = setInterval(() => { 
+    this.timers = setInterval(() => {
       console.log('setInterval')
       service.getUnDonefills({
         page: 1,
@@ -612,11 +612,11 @@ export default {
         size: 999
       }).then(res => {
         if (res.code === 0) {
-          if (res.data.data.length > 0) { 
+          if (res.data.data.length > 0) {
             Vue.set(this.tab[0], 'count', res.data.data.length)
-            if (this.active === 0) {  
+            if (this.active === 0) {
               this.setOrderInfo(res)
-            } 
+            }
           }
         }
       })
@@ -632,7 +632,7 @@ export default {
               noCount.push(item)
             })
           }
-          Vue.set(this.tab[3], 'count', noCount.length)
+          // Vue.set(this.tab[3], 'count', noCount.length)
         }
       })
     }, 5000)
@@ -973,21 +973,21 @@ export default {
           }
       }
     },
-    setOrderInfo(rec) { 
+    setOrderInfo(rec) {
       if (!rec.code) {
         if (this.total != rec.data.total &&  rec.data.total > 0) {
           //当订单数量发送变化的时候，需要重新加载订单数据，但是需要保留用户已经选择的支付方式
           this.data.map(rowa => {
             rec.data.data.map(rowb => {
               if(rowa.trans_id === rowb.trans_id) {
-                Vue.set(rowb, 'selectPayment', rowa.selectPayment)   
+                Vue.set(rowb, 'selectPayment', rowa.selectPayment)
               }
             })
           })
           this.data = rec.data.data
         } else if (!this.total) {
           this.data = rec.data.data
-        } 
+        }
         this.total = rec.data.total
         const noCount = []
         const bankData = []
@@ -998,14 +998,14 @@ export default {
           } else if (item.state === 2) {
             //申诉取消后
             if (item.appeal_time > 0) {
-              Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
+              Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000)
             }
             else {
-              Vue.set(item, 'time', item.pay_time + 15 * 60 * 1000) 
+              Vue.set(item, 'time', item.pay_time + 15 * 60 * 1000)
             }
           } else if (item.state === 7 ) {
               if (item.appeal_time > 0) {
-              Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000) 
+              Vue.set(item, 'time', item.appeal_time + 12 * 60 * 60 * 1000)
             }
             else {
               Vue.set(item, 'time', item.pay_time + 12 * 60 * 60 * 1000 + 15 * 60 * 1000)
