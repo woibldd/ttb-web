@@ -1,8 +1,5 @@
 #!/bin/sh
-npm i compression-webpack-plugin -S
-npm i highcharts -S
-npm i countup  -S  
-
+cnpm install 
 npm run build
 
 sleep 2
