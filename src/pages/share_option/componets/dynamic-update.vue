@@ -11,7 +11,7 @@
 import Highcharts from 'highcharts/highcharts'
 import HighMap from 'highcharts/modules/map.js'
 import Annotations from 'highcharts/modules/annotations.js'
-import websoketMixin from '@/mixins/soket'
+import websoketMixin from '../soket'
 import CountUp from 'countup/dist/countUp.min'
 HighMap(Highcharts)
 Annotations(Highcharts)

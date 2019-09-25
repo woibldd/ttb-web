@@ -1,11 +1,13 @@
 <template>
-  <div class="share-option" flex="main:justify cross:strech">
+  <div class="share-option-wrap">
     <div class="share-option-bg" />
-
+    <share-option-nav/>
+    <div class="share-option" flex="main:justify cross:strech">
     <div class="left-side-bar">
-      <div v-for="(value,key) in mapComponentNames" :key="key" :class="{active:drawerIsOpen && activeName === key}" @click="handleClickTab(key)">
-        <svg-icon icon-class="chart" style="font-size:24px" />
-        <p>{{ value }}</p>
+      <div v-for="(item,key) in mapComponentNames" :key="key" :class="{active:drawerIsOpen && activeName === key}" @click="handleClickTab(key)">
+        <svg-icon :icon-class="item.icon"  style="font-size:24px" />
+        <!-- <svg-icon :icon-class="xianhuozhishu_huise"  style="font-size:24px" /> -->
+        <p>{{ item.value }}</p>
       </div>
     </div>
     <transition name="fade" @after-leave="afterLeaveOrEnter" @enter="afterLeaveOrEnter">
@@ -66,18 +68,19 @@
       </div>
       <div class="text"><span>{{ 100-up }}%</span><br>看跌 </div>
     </div>
-    <!-- <div class="test" style="margin-left:40px" />
-    <div class="test" /> -->
+  </div>
   </div>
 </template>
 <script>
 import chartsDynamicUpdate from './componets/dynamic-update'
-import websoketMixin from '@/mixins/soket'
+import shareOptionNav from './componets/share-option-nav'
+import websoketMixin from './soket'
 
 export default {
   name: 'ShareOption',
   components: {
-    chartsDynamicUpdate
+    chartsDynamicUpdate,
+    shareOptionNav
   },
   mixins: [websoketMixin],
   data() {
@@ -91,10 +94,10 @@ export default {
   computed: {
     mapComponentNames() {
       return {
-        'spot-index': '现货指数',
-        'history': '历史记录',
-        'ranking-list': '排行榜',
-        'teach-view': '教学视频'
+        'spot-index': {value:'现货指数',icon:'xianhuozhishu_huise'},
+        'history': {value:'历史记录',icon:'lishijilu_baise'},
+        // 'ranking-list': {value:'排行榜',icon:'xianhuozhishu_huise'},
+        // 'teach-view': {value:'教学视频',icon:'xianhuozhishu_huise'},
       }
     },
     dynamicChart() {
@@ -124,13 +127,14 @@ export default {
 }
 </script>
 <style lang="scss" scope="this api replaced by slot-scope in 2.5.0+">
-.share-option{
-  height: calc(100vh - 60px);
-  box-sizing: border-box;
-  font-size: 13px;
-  background: url('./bg-chart.png') no-repeat center bottom;
-  background-size: 100%;
+$--contract-table-bg: #0c1222;
+$--share-bg-color:rgb(30, 38, 58);
+$--share-border-color:rgba(105, 111, 128, 0.5);
+$--color-success: #13ce66;
+.share-option-wrap{
   position: relative;
+  z-index: 0;
+  background: url('./assets/bg-chart.png') no-repeat center bottom;
   .share-option-bg{
     position: absolute;
     width: 100%;
@@ -140,7 +144,19 @@ export default {
     background: rgba($color: $--contract-table-bg, $alpha: .9);
     z-index: -1;
   }
-
+  .share-option-nav{
+    // position: absolute;
+    height: 60px;
+    width: 100%;
+    background: transparent
+  }
+  .share-option{
+  height: calc(100vh - 60px);
+  box-sizing: border-box;
+  font-size: 13px;
+  background-size: 100%;
+  position: relative;
+  z-index: 0;
   .left-side-bar{
     color: #6C7482;
     background: $--share-bg-color;
@@ -375,14 +391,13 @@ export default {
     border-bottom: 10px solid hotpink;
     transform: skewY(45deg);
   }
+  }
 }
- /*添加动画效果*/
-//  @keyframes rotateanimation{
-//      0%{
-//          transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-//      }
-//      100%{
-//          transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
-//      }
-//  }
+.fade-enter-active, .fade-leave-active {
+  transition: all .5s ease-in-out;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  transform: translateX(-300px);
+  z-index:0;
+}
 </style>

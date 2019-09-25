@@ -1,0 +1,11 @@
+<svg id="eth" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ec6941;
+      }
+    </style>
+  </defs>
+  <circle id="椭圆_4" data-name="椭圆 4" class="cls-1" cx="10" cy="10" r="10"/>
+  <image id="ETH-2" data-name="ETH" x="5" y="3" width="10" height="15" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAPCAQAAAB39paFAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAHdElNRQfjCRQQGSrS8qKLAAAA0UlEQVQY01XPLUtDARyF8d+9W7EKBsG0pkywKaxsaUUsfoN9AQ02GffeJugUi2nJj2BbNK8pIlgEkRXTfEPU8TdcZfNJ5zyccpJcSdawXhyXOfVHVy9r/ZPZrrZP5zMyS/R8u7KUdabLvtSDCfpZhZRsWQeJChJnyMVtRETcxzBK6mL/N07lR2rkAkx8gRunSczb8WLbhjdzul7dVY3V1OVW1AwsOtCSy8VjROzFZgwjop2rgjVPDl1b1S8GVJq4fG8+a1swLhoz34sTR0a2yvYDy2BdCnBwQFgAAAAASUVORK5CYII="/>
+</svg>

@@ -1,0 +1,12 @@
+<svg id="die" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="45" height="63" viewBox="0 0 45 63">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="椭圆_5_拷贝_3" data-name="椭圆 5 拷贝 3" class="cls-1" d="M3913,3148.5a22.5,22.5,0,0,1,45,0c0,12.73-22.5,40.5-22.5,40.5S3913,3161.38,3913,3148.5Zm22.5-17.09a16.2,16.2,0,1,1-16.19,16.2A16.194,16.194,0,0,1,3935.5,3131.41Z" transform="translate(-3913 -3126)"/>
+  <image id="上涨_拷贝_3" data-name="上涨 拷贝 3" x="12" y="15" width="22" height="16" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAQCAQAAAC45EetAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAHdElNRQfjCRQQHBRu5EtlAAABBElEQVQoz42Su0oDYRCFvyxCsJElATXZnyja2Cm6UXwHUwu+jBvBxhfwCSysLGwtRSMKyxYW8VJ4WcgqqBgELeRYZNHVjfw5U8yZ4eMUwxTkscUGbf5RM+MdtlnjAJcB5LBJF0NEdRD4hDoP1DhjzA5DG58uFUK8zN7rD8MdPk9UaFFK90dc53En7RfM8oohYhjYZ4kiEdP9YbjHJ8FwyC4rfHBFmWNqWbig7GQ4ZwSAeUJiqryw2LzMJ/fSF/gEVgmBOjEup+s/R9XfmlPj24+rI+lRUwEBWs7Dv8voRlKiGe0otsHI1a16SqxwgIp6liS92ZPL2kuTNWT9nkkmaFFilPcvGN+uZ2AhMGoAAAAASUVORK5CYII="/>
+</svg>

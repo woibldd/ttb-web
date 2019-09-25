@@ -392,6 +392,16 @@ export const routes = [
     ]
   },
   {
+    path: '/share_option',
+    name:'share_option',
+    meta: {
+      // nav: true,
+      // footer: true,
+      class: 'dark'
+    },
+    component:  () => import('@/pages/share_option/index.vue')
+  },
+  {
     path: '/snowballDetail',
     name: 'BidDetail',
     meta: {

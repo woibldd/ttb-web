@@ -220,7 +220,7 @@ export default {
         position: absolute;
         right: 22px;
         top: 22px;
-        width:56px;
+        min-width:56px;
         height:20px;
         background:rgba(1,206,209,1);
         border-radius:2px;

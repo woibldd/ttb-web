@@ -1,4 +1,5 @@
 #!/bin/sh
+npm install 
 npm run build
 
 sleep 2
