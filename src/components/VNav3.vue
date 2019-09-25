@@ -67,11 +67,13 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             {{ this.$t('node_sub') }}
             <icon name="hot-red"/>
           </a>
-          <!-- <router-link
-            to="/snowball"
-            class="nav_link  ml-30">   
-            <whDropdown :menuOptions="[{label:$t('bidTitle'),href:'/snowball/bazaar'}]" >{{$t('playBTC')}}</whDropdown >
-          </router-link> -->
+          <router-link
+            to="/share_option"
+            class="nav_link  ml-30">  
+            <!-- {{$t('playBTC')}}  -->
+            期权交易
+            <!-- <whDropdown :menuOptions="[{label:$t('bidTitle'),href:'/snowball/bazaar'}]" >{{$t('playBTC')}}</whDropdown > -->
+          </router-link>
           <!-- <div class="nav_link arrow-down">
             <a
               :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"
