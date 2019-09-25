@@ -14,7 +14,7 @@
     "build:beta": "NODE_ENV=beta node build/build.js"
   },
   "dependencies": {
-    "@amcharts/amcharts4": "^4.4.0",
+    "@amcharts/amcharts4": "^4.6.1",
     "@sentry/browser": "^4.0.6",
     "amcharts": "^3.14.5",
     "animate.css": "^3.7.0",

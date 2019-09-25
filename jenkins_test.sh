@@ -10,4 +10,4 @@
 
 # ssh -p 10022 root@47.74.255.117 'rsync -e "ssh -p 10022" -rcvPz ~/web_staging_ixx/ test:/var/www/ixx'
  
-cnpm i amcharts -S
+cnpm i @amcharts/amcharts4 -S
