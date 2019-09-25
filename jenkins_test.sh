@@ -1,7 +1,5 @@
 #!/bin/sh
-npm install --save-dev compression-webpack-plugin
-npm install flex.css -D
-
+npm install 
 npm run build
 
 sleep 2
