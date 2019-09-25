@@ -1,5 +1,5 @@
 #!/bin/sh
-cnpm install 
+# cnpm install 
 npm run build
 
 sleep 2
