@@ -1,4 +1,5 @@
 #!/bin/sh
+npm install flex.css -S
 npm run build
 
 sleep 2
