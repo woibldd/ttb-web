@@ -387,8 +387,8 @@ export default {
       )
     },
     isTestnet() {
-      // return location.hostname.indexOf('ixex.pro') >= 0
-      return true
+      return location.hostname.indexOf('ixex.pro') >= 0
+      // return true
     },
     showContract() {
       const time1 = new Date()
