@@ -546,12 +546,12 @@ export default {
       if ($value.gt(this.pairInfo.max_total)) {
         return utils.alert(this.$i18n.t('value_high', {num: this.pairInfo.max_total + ' ' + this.pairInfo.currency_name}))
       }
-      if (side === 'BUY' && $ask.gt(0) && $price.div(1.3).gt($ask)) {
-        return utils.alert(this.$i18n.t('price_high', {per: 30}))
-      }
-      if (side === 'SELL' && $bid.gt(0) && $price.div(0.7).lt($bid)) {
-        return utils.alert(this.$i18n.t('price_low', {per: 30}))
-      }
+      // if (side === 'BUY' && $ask.gt(0) && $price.div(1.3).gt($ask)) {
+      //   return utils.alert(this.$i18n.t('price_high', {per: 30}))
+      // }
+      // if (side === 'SELL' && $bid.gt(0) && $price.div(0.7).lt($bid)) {
+      //   return utils.alert(this.$i18n.t('price_low', {per: 30}))
+      // }
       // if ($bid.gt(0) && $ask.gt(0) && $bid.mul(1.05).lt($ask) &&
       //     ((side === 'SELL' && $price.lte($bid)) || (side === 'BUY' && $price.gte($ask)))) {
       //   // 盘口差价较大，且下单价超过盘口
