@@ -94,8 +94,8 @@ export default {
   computed: {
     mapComponentNames() {
       return {
-        'spot-index': {value:'现货指数',icon:'xianhuozhishu_huise'},
-        'history': {value:'历史记录',icon:'lishijilu_baise'},
+        'spot-index': {value:'现货指数',icon:'chart'},
+        'history': {value:'历史记录',icon:'component'},
         // 'ranking-list': {value:'排行榜',icon:'xianhuozhishu_huise'},
         // 'teach-view': {value:'教学视频',icon:'xianhuozhishu_huise'},
       }
