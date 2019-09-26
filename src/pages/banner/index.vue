@@ -3,7 +3,7 @@
     <div class="ixx_banner_container" style="height: 400px;"
       :class="[state.locale]"
     >
-      <swiper :options="swiperOption">
+      <swiper :options="swiperOption" ref="mySwiper">
         <swiper-slide>
           <!--<div class="dot-item-list">-->
             <!--<div class="item-list-banner" v-for="(item, index) in banner" :key="index">-->
@@ -192,7 +192,15 @@ export default {
   },
   created() {
     this.bicher();
-  }
+  },
+  computed: {
+  			swiper() {
+    			return this.$refs.mySwiper.swiper;
+  			}
+		},
+		updated() {
+  			this.swiper.init();
+    }
 };
 </script>
 
