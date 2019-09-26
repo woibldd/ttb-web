@@ -137,14 +137,14 @@ export default {
         slidesPerGroup: 4
       },
       swiperOption: {
-        initialSlide :1,
-        autoplayDisableOnInteraction : false,
-        slidesPerView: "auto",
-        centeredSlides: true,
-        loop: true,
-        loopFillGroupWithBlank: true,
-        autoplay: true,
-        speed: 500,
+         init:false,
+					grabCursor: true,
+					centeredSlides: true,
+					slidesPerView: 1,
+					autoplay:{
+						delay:3000
+					},
+					loop:true,
         pagination: {
           el: ".swiper-pagination",
           clickable: true
