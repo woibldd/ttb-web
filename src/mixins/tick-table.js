@@ -47,6 +47,7 @@ export default {
         return _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1
             && pair.name.toUpperCase().indexOf('GRC') < 0
+            && pair.name.toUpperCase().indexOf('BTZ') < 0 
         })
       } else if (this.tabSelected === 'new') {
         // let excludeList = [
@@ -90,6 +91,7 @@ export default {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
             && (pair.like || false)
             && pair.name.toUpperCase().indexOf('GRC') < 0
+            && pair.name.toUpperCase().indexOf('BTZ') < 0 
         })
       } else {
         return _.filter(list, pair => {
@@ -97,6 +99,7 @@ export default {
             && pair.currency.indexOf(this.tabSelected) > -1 
             && pair.type === 1
             && pair.name.toUpperCase().indexOf('GRC') < 0
+            && pair.name.toUpperCase().indexOf('BTZ') < 0 
 
         })
       }
