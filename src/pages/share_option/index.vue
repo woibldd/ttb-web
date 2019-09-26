@@ -94,8 +94,8 @@ export default {
   computed: {
     mapComponentNames() {
       return {
-        'spot-index': {value:'现货指数',icon:'xianhuozhishu_huise'},
-        'history': {value:'历史记录',icon:'lishijilu_baise'},
+        'spot-index': {value:'现货指数',icon:'chart'},
+        'history': {value:'历史记录',icon:'component'},
         // 'ranking-list': {value:'排行榜',icon:'xianhuozhishu_huise'},
         // 'teach-view': {value:'教学视频',icon:'xianhuozhishu_huise'},
       }
@@ -235,12 +235,13 @@ $--color-success: #13ce66;
     }
     .content-top{
       // background: $--share-bg-color;
-      background: rgba($color: $--contract-table-bg, $alpha: .6);
+      background: rgba($color:#ffffff, $alpha: .1);
       border-radius: 4px;
       box-sizing: border-box;
       .share-text-info{
         line-height: 26px;
         text-indent: 6px;
+        color: #888;
       }
       input{
         background: transparent;
@@ -251,7 +252,7 @@ $--color-success: #13ce66;
         font-size: 12px;
         letter-spacing: 1;
         outline: none;
-        color: #fff;
+        color: #ccc;
         text-indent: 6px;
       }
       .btn-group{
@@ -280,7 +281,7 @@ $--color-success: #13ce66;
     }
     .content-center{
       height: 200px;
-      background: rgba($color: $--contract-table-bg, $alpha: .6);
+      background: rgba($color: #fff, $alpha: .1);
       margin-top: 15px;
       border-radius: 6px;
       line-height: 26px;

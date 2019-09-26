@@ -95,7 +95,7 @@ module.exports = {
           prefixize: true,
         }) */
         options:{
-          symbolId: 'icon-[name]'
+          symbolId: '[name]'
         }
       }
     ]

@@ -55,8 +55,8 @@ export default {
       let name = {
         1: "rockets", // 火箭入口
         2: "shot", //射门入口
-        3: "card_when", //卡当入口
-        4: "bar", //二八杠入口
+        3: "bar", //卡当入口
+        4: "card_when", //二八杠入口
         5: "baccarat", //百家乐入口
         6: "game_collection" //竞猜入口 
       }[key]
@@ -103,8 +103,8 @@ export default {
       let url = {
         1: `https://testing-sso.cointest.link/channel/callbacks/IXX/ROCKET?code=${code}&lang=${lang}`,
         2: `https://testing-sso.cointest.link/channel/callbacks/IXX/GOAL?code=${code}&lang=${lang}`,
-        3: `https://testing-sso.cointest.link/channel/callbacks/IXX/MEDIAN?code=${code}&lang=${lang}`,
-        4: `https://testing-sso.cointest.link/channel/callbacks/IXX/MAGNATE?code=${code}&lang=${lang}`,
+        3: `https://testing-sso.cointest.link/channel/callbacks/IXX/MAGNATE?code=${code}&lang=${lang}`,
+        4: `https://testing-sso.cointest.link/channel/callbacks/IXX/MEDIAN?code=${code}&lang=${lang}`,
         5: `https://testing-sso.cointest.link/channel/callbacks/IXX/BACCARAT?code=${code}&lang=${lang}`,
         6: `https://testing-sso.cointest.link/channel/callbacks/IXX/GAME-COLLECTION-INNER?code=${code}&lang=${lang}`,
       }[key]
