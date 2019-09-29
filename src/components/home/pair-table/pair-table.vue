@@ -101,8 +101,10 @@
           </template>
           <p v-if="pair.CUSTOM" v-cloak class="custom-title">{{ pair.type === '2' ? $t('pair_list_new') : $t('pair_list_ST') }}</p>
         </div>
-        <div v-if="tabSelected==='like' && sortedList.length===0" class="pairs-table__row empty">
-          <span>{{$t('pair_table_option_empty')}}</span>
+        <div v-if="tabSelected==='like' && sortedList.length===0" class="pairs-table__row empty" style="padding:40px 0;height: initial;line-height:normal">
+          <img src="./empty-data.png" alt="" srcset="">
+          <br>
+          <span style="color: #adadad;">{{$t('pair_table_option_empty')}}</span>
         </div>
       </div>
       <!-- class="pairs-table__row c-21" -->

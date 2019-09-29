@@ -44,10 +44,13 @@ export default {
     showList() {
       const list = this.pairList
       if (this.tabSelected === 'all') {
+        const temGroup = _.groupBy(list, 'type')
+        
         return _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1
             && pair.name.toUpperCase().indexOf('GRC') < 0
             && pair.name.toUpperCase().indexOf('BTZ') < 0 
+            && pair.type < 4
         })
       } else if (this.tabSelected === 'new') {
         // let excludeList = [
@@ -76,10 +79,14 @@ export default {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1
                 && pair.type > 1 
         })
-        const temGroup = _.groupBy(res, 'type')
         let arr = []
+        const temGroup = _.groupBy(res, 'type')
+        temGroup['2'] = temGroup['2'].concat(temGroup['4']||[])
+        delete temGroup['4']
+        
         Object.keys(temGroup).forEach(key => {
           arr = arr.concat([{ CUSTOM: true, type: key }]).concat(temGroup[key])
+          // arr = arr.concat([{ CUSTOM: true, type: key }]).concat(temGroup[key])
         }) 
 
         return arr
