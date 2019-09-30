@@ -366,8 +366,8 @@ export default {
     requestLink() {
       if (this.state.userInfo && this.state.theme.themeName === 'default') {
         return (
-          process.env.BASE_API +
-          'ixx/zendesk/sso?return_to=' +
+          process.env.BASE_API + 
+          '/ixx/zendesk/sso?return_to=' +
           encodeURIComponent(
             this.state.theme.request[this.state.locale] ||
               this.state.theme.request.en
