@@ -363,7 +363,7 @@ export default {
         this.state.theme.help[this.state.locale] || this.state.theme.help.en
       )
     },
-    requestLink() {
+    requestLink() { 
       if (this.state.userInfo && this.state.theme.themeName === 'default') {
         return (
           process.env.BASE_API + 
