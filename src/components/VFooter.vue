@@ -83,7 +83,7 @@
         <div class="hg"/>
         <div class="right-bottom">
           <div class="bottom-txt bot-la">
-            <p class="footer_ltxt">{{ $t('footer_services_email') }}：service@ixx.com</p>
+            <p class="footer_ltxt">{{ $t('footer_services_email') }}：support@ixx.com</p>
             <p class="footer_ltxt">{{ $t('footer_bussness') }}：business@ixx.com</p>
           </div>
           <div class="bottom-txt bot-lb">
@@ -103,7 +103,7 @@
                   name="footer-twitter"/>
               </a>
               <a
-                href="mailto:service@ixx.com"
+                href="mailto:support@ixx.com"
                 class="contact-item-wrapper pointer">
                 <icon
                   class="contact-item"
