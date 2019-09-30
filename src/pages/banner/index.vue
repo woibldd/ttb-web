@@ -201,7 +201,7 @@ export default {
 		updated() {
   			this.swiper.init();
     }
-};
+}
 </script>
 
 <style lang="scss" rel="stylesheet/scss">

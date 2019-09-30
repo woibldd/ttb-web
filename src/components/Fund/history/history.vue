@@ -5,7 +5,7 @@
         <div class="left">
           <div class="total__label">{{ $t('withdraw_avlb') }}</div>
           <div class="total__coin">{{ total | fixed(2) }} {{ unit }} </div>
-        </div> 
+        </div>
         <el-radio-group  :empty-text="$t('no_data')"
           @change="changeType"
           class="total__switch"
@@ -22,11 +22,11 @@
             v-if="hasInternal"
             label="internal"> {{ $t('internal_transfer') }} </el-radio-button>
         </el-radio-group>
-        
+
       </div>
       <el-table :empty-text="$t('no_data')"
         :data="tableData"
-        v-if="type === 'return'" 
+        v-if="type === 'return'"
         v-loading="loading"
         class="fund-coin-pool">
          <el-table-column
@@ -56,7 +56,7 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column 
+          <el-table-column
             prop="symbol"
             :label="this.$t('fund_history_symbol')">
             <template slot-scope="scope">
@@ -98,7 +98,7 @@
       </el-table>
       <el-table  :empty-text="$t('no_data')"
         :data="tableData"
-        height="550"
+        height="750"
         v-else-if="type === 'all'"
         v-loading="loading"
         cell-class-name="unrelease-cell"
@@ -133,12 +133,12 @@
             prop="status"
           :key="'status_all'"
           :label="this.$t('status')"/>
-            
+
 
       </el-table>
       <el-table   :empty-text="$t('no_data')"
         :data="tableData"
-        height="550"
+        height="750"
         v-else
         v-loading="loading"
         cell-class-name="unrelease-cell"
@@ -195,13 +195,13 @@
             </div>
           </template>
         </el-table-column>
-        
+
         <el-table-column
           header-align='right'
           v-if="type!=='reward' && type !== 'internal' && type !== 'promoter'"
           align="right"
           width="200px"
-          :label="operate.title" > 
+          :label="operate.title" >
           <template slot-scope="scope">
             <div
               class="contact-item"
@@ -210,7 +210,7 @@
               <span
                 class="show-address"
                 @click="showCXID(scope.row)">{{ $t('view_txid') }}</span>
-               
+
             </div>
             <el-button class="chexiao" type="text" @click="open(scope.row.id)"><a v-if="scope.row.state==-1|scope.row.state==-100" >{{$t('contract_assign_revert')}}</a></el-button>
             <!-- 撤销按钮 -->
@@ -218,7 +218,7 @@
         </el-table-column>
       </el-table>
       <div class="history__footer pt-10">
-        <ix-pagination 
+        <ix-pagination
           :page.sync="page"
           :isEnd="isEnd"
           :func="getPage"/>
@@ -258,7 +258,7 @@ export default {
       from: 'all',
       type: this.$route.params.from || 'deposit',
       page: 1,
-      size: 10, 
+      size: 10,
       unit: 'CNY',
       loading: true,
       hasInternal: false,
@@ -300,7 +300,7 @@ export default {
       return false
     }
   },
-  async created () {  
+  async created () {
     await this.getCoins()
     this.updateHeaderLabel()
     this.getFundHistory(this.type)
@@ -361,13 +361,13 @@ export default {
     },
     showCXID (row) {
       //console.log({row,cc: this.coinList})
-      if (!!row.txid && !!this.coinList[row.currency + '_' + row.chain]) { 
+      if (!!row.txid && !!this.coinList[row.currency + '_' + row.chain]) {
         const url = this.coinList[row.currency + '_' + row.chain].scan_url.replace('${txid}',row.txid)
         window.open(url)
       }
     },
     changeType (type) {
-      this.page = 1 
+      this.page = 1
       this.getFundHistory(type)
     },
     getPage () {
@@ -379,7 +379,7 @@ export default {
       }
       return utils.dateFormatter(time, 'Y-M-D H:m')
     },
-    hasComplated (row) {  
+    hasComplated (row) {
       if (this.type === 'deposit' && row.state === 1) {
         return 1
       }
@@ -409,7 +409,7 @@ export default {
         this.hasInternal = true
       }
     },
-    getFundHistory (from = 'deposit') { 
+    getFundHistory (from = 'deposit') {
       this.isEnd = true
       this.loading = true
       let request = ''
@@ -438,35 +438,35 @@ export default {
           break
         default:
           break
-      } 
+      }
       if (!request) { return }
       const param = {
         page: this.page,
         size: 10
       }
       this.tableData = []
-      request(param).then(res => { 
-         
+      request(param).then(res => {
+
         if (res.code || res.data.length === 0) {
           this.loading = false
           this.total = 0
-        } 
+        }
         else {
           // res.data = res.data.map(r => {
           //   if (r.type === 7) {
           //     r.state = 0
           //   }
           //   return r
-          // }) 
+          // })
           this.tableData = res.data
-          if(this.type === 'all' ||  this.type === 'return') { 
-            this.tableData = res.data.data  
+          if(this.type === 'all' ||  this.type === 'return') {
+            this.tableData = res.data.data
             let p = res.data
             if (p.total > p.page * p.size) {
               this.isEnd = false
             }
           }  else if (from === 'reward') {
-            this.tableData = res.data.data.filter(dr => dr.name.indexOf('持仓分红') === -1) //IXX没有持仓分红 
+            this.tableData = res.data.data.filter(dr => dr.name.indexOf('持仓分红') === -1) //IXX没有持仓分红
             let p = res.data
             if (p.total > p.page * p.size) {
               this.isEnd = false
@@ -512,6 +512,7 @@ export default {
 
               this.tableData[i].status = text1
             }
+            // console.log(this.ta)
           }
         }
       })
@@ -546,13 +547,13 @@ export default {
       }
       return res.round(num, this.C.ROUND_DOWN).toString()
     },
-    getStateLabel (row) { 
+    getStateLabel (row) {
       // let s = this.hasComplated(row)
       let s = row.state
       if (this.type === 'withdraw') {
          switch (s) {
            case -1:
-            return 'withdraw_state_unAudited' 
+            return 'withdraw_state_unAudited'
           case -100:
             return 'withdraw_state_padding'
           case -2:
@@ -571,7 +572,7 @@ export default {
       }
       else {
         switch (s) {
-          case -1: 
+          case -1:
             return 'deposit_state_error'
           case 0:
             return 'pending'
@@ -584,7 +585,7 @@ export default {
           default:
             return 'pending'
         }
-      } 
+      }
     },
     updateHeaderLabel () {
       this.header = [
@@ -612,7 +613,7 @@ export default {
       ]
       this.status = Object.assign({key: 'state', title: this.$i18n.t('state')})
 
-      this.operate = Object.assign({key: 'txid', title: this.$i18n.t('actions')}) 
+      this.operate = Object.assign({key: 'txid', title: this.$i18n.t('actions')})
       this.internalType = Object.assign({key: 'internal', title: this.$i18n.t('order_th_type')})
     },
     async getCoins() {
@@ -626,7 +627,7 @@ export default {
     }
 
   },
-  async beforeRouteEnter(to, from, next) { 
+  async beforeRouteEnter(to, from, next) {
     console.log({to, from})
     next();
   },

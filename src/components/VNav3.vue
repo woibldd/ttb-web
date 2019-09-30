@@ -68,9 +68,9 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             <icon name="hot-red"/>
           </a>
           <!-- <router-link
-            to="/snowball"
+            to="/share_option"
             class="nav_link  ml-30">   
-            <whDropdown :menuOptions="[{label:$t('bidTitle'),href:'/snowball/bazaar'}]" >{{$t('playBTC')}}</whDropdown >
+            期权交易 
           </router-link> -->
           <!-- <div class="nav_link arrow-down">
             <a
