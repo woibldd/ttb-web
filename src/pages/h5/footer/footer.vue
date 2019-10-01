@@ -151,7 +151,7 @@
         </a>
         <a
           class="contact-item-wrapper mr-20 pointer"
-          href='https://twitter.com/IXX73784665'>
+          href='https://twitter.com/IXX_Official'>
           <icon
             class="contact-item"
             name="footer-twitter"/>

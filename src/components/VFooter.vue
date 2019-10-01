@@ -97,7 +97,7 @@
               </a>
               <a
                 class="contact-item-wrapper pointer"
-                href='https://twitter.com/ExchangeIxx'>
+                href='https://twitter.com/IXX_Official'>
                 <icon
                   class="contact-item"
                   name="footer-twitter"/>
