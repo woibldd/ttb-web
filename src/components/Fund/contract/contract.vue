@@ -172,11 +172,11 @@
               <span class="c-333">{{ (holding.available_balance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
             </div>
             <!-- 杠杆倍数 -->
-            <div
+            <!-- <div
               class="table__tr right c-999"
               v-if="holding.margin_delegation">
               {{ $t('contract_fund_usee_lever', {per: holding.margin + '%', lever: $big(holding.leverage || 0).toFixed(2)}) }}
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
