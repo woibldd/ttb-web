@@ -1206,7 +1206,7 @@
 "contract_assign_price": "Order  price",
 "contract_deal_amount": "Execute volume(pieces)",
 "contract_assign_value": "Order Value（BTC)",
-"contract_assign_value_raw": "Order Value",
+"contract_assign_value_raw": "Order Palue",
 "contract_assign_price_btc": "Order Price（BTC)",
 "contract_amount_piece": "Volume (piece)",
 "contract_trigger_plan": "triggered plan",
