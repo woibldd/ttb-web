@@ -171,7 +171,7 @@ export default {
             {
               title: "contract_complete_deal",
               width: "",
-              key: "executed"
+              key: "executed_amount"
             },
             {
               title: "contract_assign_value",
@@ -181,7 +181,7 @@ export default {
             {
               title: "order_th_type",
               width: "",
-              key: "side"
+              key: "type"
             },
             {
               title: "status",
@@ -215,7 +215,7 @@ export default {
               key: "amount_side"
             },
             {
-              title: "contract_assign_price", //委托价格
+              title: "price", //委托价格
               width: "",
               key: "price"
             },
@@ -250,7 +250,7 @@ export default {
               key: "state"
             },
             {
-              title: "time", // 时间
+              title: "contract_assign_time", // 时间
               width: "",
               key: "create_time"
             },

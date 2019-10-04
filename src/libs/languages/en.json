@@ -23,7 +23,7 @@
   "tips": "Tips",
   "confirm": "Confirm",
   "confirming": "Confirming",
-  "amount": "Amount",
+  "amount": "Qty",
   "price": "Price",
   "time": "Time",
   "date": "Date",
@@ -99,7 +99,7 @@
   "FrenzySaleZone": "Frenzy sale zone",
   "change_password_repeat": "Confirm",
   "change_password_diff": "Input password incorrectly",
-  "secure_level": "Security level",
+  "secure_level": "Security Level",
   "secure_level_0": "Low",
   "secure_level_1": "Medium",
   "secure_level_2": "High",
@@ -478,7 +478,7 @@
   "complete_verified": "Complete identity authentication.",
   "withdraw_count_max_error": "Exceeding the maximum quantity",
   "withdraw_count_min_error": "Less than minimum quantity",
-  "footer_services_email": "Service E-mail",
+  "footer_services_email": "Support",
   "footer_bussness": "Business Cooperation",
   "app_download_sologan": "It covers multiple platforms including IOS, Android, Windows and Mac, and supports full-service function.",
   "app_download_ios": "Guide for IOS",
@@ -1179,7 +1179,7 @@
 "contract_action_open_long": "Opening positions",
 "contract_action_open_short": "Close",
 "contract_action_open_short_tips": "Closing the position - you can close the position here which will be submitted to the market to offset the existing position of the commission. Select \"market\" immediately to close the position. You need to confirm the operation.。",
-"contract_action_delegate_type": "Delegation types",
+"contract_action_delegate_type": "Delegation Types",
 "contract_action_button_tips": "Click here to submit  %{amount}BTC contract with a limit at the price of % {price}<span style='font-weight: bold’>%{method}</span> Order,If the deal closed, your position will increases from % {raw}to % {now}。<br/><br/>the white color under the button if it appears, represents parts of the commission that have the opportunity to make an immediate deal in the submission to the market. <br/><br/>your expected liquidation price is % {boom}。",
 
 "contract_action_button_avg": "Cost",
@@ -1191,7 +1191,7 @@
 "contract_risk_limit_tips1": "When your position is too large, your leverage will be limited. If you exceed the upper limit on the right side, the system will require a higher deposit rate for your newly submitted order ",
 "contract_risk_limit_tips2": "Your current maintenance deposit rate is 0.5%, and the initial guarantee rate is 1%.",
 "contract_click_to_wallet": "Available balanceyou create the available balance of the commission. Click here to view the wallet details.",
-"contract_tooltip_price": "Order price",
+"contract_tooltip_price": "Order Price",
 "contract_tooltip_addons": "Grand total",
 "contract_show_unit": "Display of units：",
 "contract_unachieve_calculate": "Unrealized profit and loss calculation：",
@@ -1203,8 +1203,8 @@
 "contract_result_yet_percent": "Realized profit and loss (rate of return%)",
 "contract_result_yet_percent_tips": "Realized profit and loss-the profit and loss of the last closed position",
 "contract_assign_amount": "Order volume",
-"contract_assign_price": "Order  price",
-"contract_deal_amount": "Execute volume(pieces)",
+"contract_assign_price": "Order Price",
+"contract_deal_amount": "Execute Volume(Pieces)",
 "contract_assign_value": "Order Value（BTC)",
 "contract_assign_value_raw": "Order Value",
 "contract_assign_price_btc": "Order Price（BTC)",
@@ -1267,8 +1267,8 @@
 "contract_lever_times": " Leverage",
 "contract_FUTURE_BTCUSD": " BTC Perpetual",
 "contract_FUTURE_BHDUSD":"BHD Perpetual",
-"contract_complete_deal": "Completed transactions",
-"contract_deal_price": "Transacted price",
+"contract_complete_deal": "Filled/Remaining",
+"contract_deal_price": "Transacted Price",
 "contract_value": "Value",
 "contract_assign_id": "Assigned ID",
 "contract_aval_balance": "Available balance",
@@ -1281,10 +1281,10 @@
 "contract_deal_time": "Time",
 "contract_has_paid": "Fee paid",
 "contract_undeal_amount": "Un-transacted volume",
-"contract_deal_type": "Txec types",
-"contract_assign_time": "Order time",
+"contract_deal_type": "Txec Types",
+"contract_assign_time": "Order Time",
 "contract_all_dealed": "Filled",
-"contract_amount_value": "amount",
+"contract_amount_value": "Qty",
 "contract_symbol_detail": "contract details",
 "contract_trade_index_base": "1.Base currency is %{currency}。",
 "contract_trade_index_value": "2.Pricing currency is USD",
@@ -1341,8 +1341,8 @@
 "contract_cal_final_account": "Final volume",
 "contract_ca_aim": "Target price",
 "contract_revert_success": "Cancelled",
-"contract_assigning_undeal": "Incomplete transactions in commissioned trading",
-"contract_assigning_deal_part": "Partial transactions in commissioned trading",
+"contract_assigning_undeal": "Untriggered",
+"contract_assigning_deal_part": "Active Orders",
 "contract_simulation_trading": "Simulated trading",
 "contract_simulation_exchange_limit": "Prohibited transfer of funds in simulated trading",
 "contract_deal_type_1": "Limit",
@@ -1359,7 +1359,7 @@
 "novice_img":"<img src=\"../../../assets/yingwen.png\" alt=\"dl\" width=\"60\">",
 
 
-"contract_trigger_price_rule": "trigger price",
+"contract_trigger_price_rule": "Price(Distance)",
 "mine_bonus_volume_business": "Yesterday total trading volume:",
 "contract_commission": "Contract rebate",
 "spot_return": "Spot rebate",
@@ -1494,8 +1494,8 @@
     "guide_title_index26_step2": "Calculate Margin",
     "guide_title_index29_step0": "Profit component",
 
-"contract_lose_stopLimit": "Stop Limit",
-"contract_lose_stopMarket": "Stop Market",
+"contract_lose_stopLimit": "Stop Loss Limit",
+"contract_lose_stopMarket": "Stop Loss Market",
 "contract_win_stopLimit": "Take Profit Limit",
 "contract_win_stopMarket": "Take Profit Market",
 "problem_list1": "If you own 1 BTC but worry that the price of it may fall, you can __________ 1 BTC to hedge the downside risk",
@@ -1562,11 +1562,11 @@
 "contract_win_stopMarket_sell.tips":"Note: This Stop order is being submitted with the 'Close on Trigger' instruction.<br />Close Orders can only reduce your position, not increase it. If the account has insufficient Available Balance when the Close order is triggered, then other % orders will be canceled or amended down.This is desired behavior to ensure your stop will trigger as expected.",
 "contract_win_stopMarket_sell.info":"This position will be opened in Isolated Margin mode. <br />Isolated Margin will use your selected margin preference ()x..。<br />This will limit your loss.Watch your liquidation price carefully",
 "contract_win_stopMarket_0.info":"This position will be opened in Cross Margin mode.<br />This uses your full account equity to back the position.",
-"contract_trigger_price":"Trigger price",
-"contract_trigger_win_buy":"take profit  buying",
-"contract_trigger_win_sell":"take profit  selling",
-"contract_trigger_lose_buy":"Buy Stop",
-"contract_trigger_lose_sell":"Sell stop",
+"contract_trigger_price":"Trigger Price",
+"contract_trigger_win_buy":"Take Profit Buy",
+"contract_trigger_win_sell":"Take Profit Sell",
+"contract_trigger_lose_buy":"Set Buy Stop",
+"contract_trigger_lose_sell":"Set Sell stop",
 "contract_trigger":"trigger",
 "contract_trigger_tips_buy":"Trigger: Last Price @%{price} and below",
 "contract_trigger_tips_sell":"Trigger: Last Price @%{price} and above",
@@ -1682,12 +1682,12 @@
 "contract_competition_message_failed": "Registration failed",
 
 "header_title_contract_competition": "Contract Competition",
-"contract_action_position": "Positions",
+"contract_action_position": "Qty",
 "contract_action_limit_price": "Limits",
 "contract_action_market_price": "Market",
 
-"contract_order_enter_tips1": "Please enter the amount",
-"contract_order_enter_tips2": "Please enter the price ",
+"contract_order_enter_tips1": "Enter the Qty",
+"contract_order_enter_tips2": "Enter the price ",
 "contract_order_enter_tips3": "Best Price",
 "contract_close_limit":"Close Limit",
 "contract_close_limit_buy":"Close Limit Buying",
@@ -1894,7 +1894,7 @@
 
 
 
-"order_th_capedasda": "Order price",
+"order_th_capedasda": "Order Price",
 "order_th_capeaxcvb": "Number of orders/ transactions",
 "order_th_capehjiky": "Order amount/ Executed amount",
 "order_th_capeqqewc": "Release time",
@@ -2360,5 +2360,25 @@
  "new_user_register_popup1": "registration bonus",
  "new_user_register_popup2": "Scan code to add WeChat customer service, join the official community of ix.com to get equivalent of $50 contract transaction bonus instantly!" , 
  "new_user_register_popup3": "If you have any questions, please contact WeChat directly." , 
- "pair_table_option_empty": "No added optional currently"
+ "pair_table_option_empty": "No added optional currently",
+ "status": "Status",
+ "contract_page": {
+   "order_action": {
+    "price":"Order Price"
+   },
+   "history": {
+     "active": {
+       "contract_assigning_undeal": "New"
+     },
+     "stop_loss": { 
+      "contract_assigning_undeal": "Untriggered", 
+      "price_distance": "Price(Distance)"
+     }
+   }
+ },
+ "home": {
+   "footer": {
+     "affiliate": "Affiliate：affiliate@ixx.com"
+   }
+ }
 }

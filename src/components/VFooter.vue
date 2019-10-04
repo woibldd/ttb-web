@@ -84,7 +84,8 @@
         <div class="right-bottom">
           <div class="bottom-txt bot-la">
             <p class="footer_ltxt">{{ $t('footer_services_email') }}：support@ixx.com</p>
-            <p class="footer_ltxt">{{ $t('footer_bussness') }}：business@ixx.com</p>
+            <p class="footer_ltxt">{{ $t('footer_bussness') }}：business@ixx.com</p> 
+            <p class="footer_ltxt">{{ $t('home.footer.affiliate') }}</p>
           </div>
           <div class="bottom-txt bot-lb">
             <div class="contact-list">
