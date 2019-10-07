@@ -16,24 +16,29 @@
             src="../assets/ixx_kefu_big.jpg">
           <p class="footer_ewm_ltxt">{{ $t('footer_contract_desc') }}</p>
         </div>
-        <!--
+        
+        <div
+          class="lt"> 
+          <p class="footer_explain_txt">{{ $t('home.footer.explain') }}</p>
+        </div>
+        <!--         
         <div
           class="lt"
           v-if="!showEnTips">
           <img
             class="footer_ewm"
-            src="../assets/ewm_by.png">
+            src="../assets/ixx_kefu_big.jpg">
           <p class="footer_ewm_ltxt">{{ $t('footer_contract_jb') }}</p>
-        </div>
-        <div
+        </div> -->
+        <!-- <div
           class="lt"
           v-if="showEnTips">
           <img
             class="footer_ewm"
             src="../assets/ewm_en.png">
           <p class="footer_ewm_ltxt">{{ $t('footer_contract_desc') }}</p>
-        </div>
-        <div
+        </div> -->
+        <!-- <div
           class="lt"
           v-if="showEnTips">
           <img
@@ -139,6 +144,13 @@
                 <icon
                   class="contact-item "
                   name="footer-Instagram"/>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/ixx-digital-assets-trading-community-134877194/"
+                class="contact-item-wrapper pointer">
+                <icon
+                  class="contact-item "
+                  name="footer-linkedin"/>
               </a>
             </div>
             <p class="copyright">Copyright © 2019 ixx.com</p>
@@ -251,6 +263,13 @@ export default {
       color: #999999;
       line-height: 22px;
       text-align: center;
+    }
+    .footer_explain_txt {
+      margin-top: 15px;
+      text-align: left;
+      width: 280px;
+      font-size: 14px;
+      color: #fff;
     }
     .footer_logo{
       width: 176px;
