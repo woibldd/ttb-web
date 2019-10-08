@@ -128,6 +128,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {state} from '@/modules/store'
 import service from '@/modules/service'
 export default {
   data() {
