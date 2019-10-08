@@ -14,7 +14,7 @@
               :value="item"/>
           </el-select> 
         </span>
-      </div>
+      </div> 
     </div>
     <div class="tip">
       <h1>{{$t('otc_otutcol_11')}}</h1>
@@ -299,7 +299,7 @@ export default {
       this.flushBalance()
     }
   },
-  async created() {
+  async created() { 
     if (state.locale === "zh-CN"){
       this.unit = this.currencyList[0]
     } else {
