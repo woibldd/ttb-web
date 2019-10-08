@@ -525,7 +525,12 @@ export default {
       symbol: '$',
       scale: 4
     } ]
-    this.unit = this.currencyList[0]
+    
+    if (state.locale === "zh-CN"){
+      this.unit = this.currencyList[0]
+    } else {
+      this.unit = this.currencyList[1]
+    }   
     await this.getAllRate()
     await this.getPairs()
     // this.getContractBalanceByPair()

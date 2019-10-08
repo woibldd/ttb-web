@@ -34,6 +34,7 @@
       </div>
       <el-table :empty-text=" $t('no_data') " :data="showList" class="fund-coin-pool">
         <el-table-column v-for="(hd, idx) in header" :key="idx" :prop="hd.key" 
+          style="width:100px;"
           :label="hd.title">
           <template slot-scope="scope">
             <span v-if="hd.key === 'currency'">
@@ -48,7 +49,7 @@
         <el-table-column
           header-align="right"
           align="right"
-          min-width="230px"
+          min-width="400px" 
           :label="operate.title"
         >
           <template slot-scope="scope">
@@ -92,7 +93,7 @@
                   pair: scope.row.pairs
                 }
               }"
-              class="my-fund-operate"
+              class="my-fund-operate" 
             >{{ $t('asset_trading') }}</router-link>
           </template>
         </el-table-column>

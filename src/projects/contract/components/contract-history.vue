@@ -288,7 +288,7 @@ export default {
             {
               title: "contract_complete_deal", //完全成交
               width: "",
-              key: "executed"
+              key: "executed_amount"
             },
             {
               title: "contract_deal_price", //成交价格

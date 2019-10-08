@@ -184,8 +184,7 @@ const processValue = {
         // if (row.type === 4 || row.type === 6)value = '--'
       }
 
-      if (key === "executed_amount") {
-
+      if (key === "executed_amount") { 
         value = row["executed"] + "/" + row["amount"]
       }
 

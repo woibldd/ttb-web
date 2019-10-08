@@ -2640,6 +2640,7 @@ export default {
           float: left;
           box-sizing: border-box;
           min-height: 20px;
+          line-height: 32px;
           width: 26%;
         }
         .content {

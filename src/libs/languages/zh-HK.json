@@ -42,6 +42,7 @@
   "pair": "交易對",
   "email": "電子郵箱",
   "currency": "幣種",
+  "coin": "幣種",
   "password": "密碼",
   "password2": "確認密碼",
   "username": "用戶名",
