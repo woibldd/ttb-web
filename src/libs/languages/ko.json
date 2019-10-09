@@ -2187,7 +2187,13 @@
   "pair_table_option_empty": "자동첨가가 없습니다",
   "contract_page": {
     "order_action": {
-      "price": "가격"
+      "price": "가격",
+      "modal": {
+        "available": "사용가능금액",
+        "position": "거래 가 성사 된 후 창고 포지션의 크기",
+        "liq_price": "예상물가",
+        "difference": "예상가격차이" 
+      }
     },
     "orderbook": {
       "back_to": "다시 서킷으로"

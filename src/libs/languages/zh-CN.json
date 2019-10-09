@@ -2199,7 +2199,13 @@
   "pair_table_option_empty": "暂无添加自选 ",
   "contract_page": {
     "order_action": {
-      "price": "价格"
+      "price": "价格",
+      "modal": {
+        "available": "可用余额",
+        "position": "成交后的仓位大小",
+        "liq_price": "预期强平价格",
+        "difference": "标记价格/预期强平价格 差异" 
+      }
     },
     "orderbook": {
       "back_to": "返回盘口"
