@@ -8,7 +8,7 @@
     </div>
     <div class="fund-items-content">
       <div class="fund-item-row mb-24">
-        <div class="row__label">{{ $t('currency') }}</div>
+        <div class="row__label">{{ $t('coin') }}</div>
         <div class="row__value">
           <el-select
             v-model="selectCoin"
@@ -76,7 +76,7 @@
         </div>
       </div> -->
       <div class="fund-item-row mb-24" style="height: auto">
-        <div class="row__label">{{ $t('deposit_address') }}</div>
+        <div class="row__label">{{ $t('fund.deposit.address') }}</div>
         <div class="row__value">
           <div class="deposit-address-textarea">
             <div class="text-info">
@@ -127,8 +127,7 @@
         {{ $t('eos_deposit_tip_label') }}
       </div>
       <ul
-        class="fund-item-other mt-10 text-des"
-        style="padding-left: 102px">
+        class="fund-item-other mt-10 text-des">
         <li> {{ $t('deposit_hint_addr', {coin: selectCoin.currency}) }}</li>
         <li> {{ $t('deposit_hint_confirm',{confirm: selectCoin.min_confirm, coin: selectCoin.currency}) }}</li>
         <li v-if="selectCoin.memo_support">{{ $t('eos_deposit_tip_security_third') }}</li>

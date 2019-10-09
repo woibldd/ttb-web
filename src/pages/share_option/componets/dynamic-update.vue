@@ -23,7 +23,8 @@ export default {
   data() {
     return {
       isLoading: false,
-      isNoScroll: true
+      isNoScroll: true,
+      times:0
     }
   },
   mounted() {
@@ -55,8 +56,11 @@ export default {
 
         const resTime = res.lineBinaryOptionPriceIndex.time
         const { orderPixels, finishPixels } = this.handleLinePixelsByTime(resTime)
-        this.orderTimeElement.style.transform = `translate(${orderPixels}px, 0px)`
-        this.finishTimeElement.style.transform = `translate(${finishPixels}px, 0px)`
+        
+        if(!(this.times++ % 2)){
+          this.orderTimeElement.style.transform = `translate(${orderPixels}px, 0px)`
+          this.finishTimeElement.style.transform = `translate(${finishPixels}px, 0px)`
+        }
 
         this.rippleElement.style.right = this.chart.containerWidth - this.chart.xAxis[0].toPixels(resTime, true) - 20 + 'px'
 
@@ -92,7 +96,7 @@ export default {
         this.chart.series[0].addPoint([resTime, price])
 
         // this.chart.addAnnotation({ labels: [{ point: { x: resTime, y: price }}] })
-
+        
         const dataCout = this.chart.series[0].data.filter(item => item.x > min).length
 
         if (dataCout > 400 && this.isNoScroll) this.initxAxis()
@@ -388,6 +392,7 @@ export default {
     },
     creatTwoLineByTime(timeStamp) {
       const { orderPixels, finishPixels } = this.handleLinePixelsByTime(timeStamp)
+      
       this.chart.renderer.label(`<div id="orderTime" class="time-line white  opacity" style="transform: translate(${orderPixels}px, 0px);">
           <div class="time-line-main">
             <div class="box"></div>

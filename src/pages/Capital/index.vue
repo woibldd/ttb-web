@@ -14,7 +14,7 @@
               :value="item"/>
           </el-select> 
         </span>
-      </div>
+      </div> 
     </div>
     <div class="tip">
       <h1>{{$t('otc_otutcol_11')}}</h1>
@@ -128,6 +128,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {state} from '@/modules/store'
 import service from '@/modules/service'
 export default {
   data() {
@@ -299,8 +300,12 @@ export default {
       this.flushBalance()
     }
   },
-  async created() {
-    this.unit = this.currencyList[0]
+  async created() { 
+    if (state.locale === "zh-CN"){
+      this.unit = this.currencyList[0]
+    } else {
+      this.unit = this.currencyList[1]
+    } 
     await this.getAllRate()
     this.flushBalance()
   }

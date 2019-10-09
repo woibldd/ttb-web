@@ -2,7 +2,7 @@
   <div class="share-option-nav" flex="main:justify cross:strech">
     <div flex="cross:center">
       <!-- <img src="../assets/ixx_logo.png" height="40" alt="" srcset=""> -->
-      <svg-icon icon-class="logo"  style="font-size:48px"  />
+      <svg-icon icon-class="logo"  style="font-size:48px" @click="$router.push('/')"  />
       <customSelect :mapData="mapData" default="BTC/USD" size="small">
         <div class="prefix-markness" slot="prefix" slot-scope="{value}">
           <svg-icon icon-class="btc" />

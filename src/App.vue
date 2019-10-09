@@ -214,7 +214,7 @@ export default {
     toNotice() {
       let url = ''
       if (this.state.userInfo && this.state.theme.themeName === 'default') {
-        url = process.env.BASE_API + 'ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
+        url = process.env.BASE_API + '/ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
       } else {
         url = this.state.theme.request[this.state.locale] || this.request.theme.help.en
       }

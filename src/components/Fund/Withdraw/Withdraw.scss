@@ -246,8 +246,18 @@
 
   }
 
-  .fund-item-row {
-      align-items: center;
+  &.fund-container {
+    .fund-items-content {
+      .fund-item-other {
+        padding-left: 130px;
+      }
+      .fund-item-row {
+          align-items: center; 
+          .row__label{
+            width: 130px;
+          }
+      }
+    }
   }
   .attention {
       position: relative;

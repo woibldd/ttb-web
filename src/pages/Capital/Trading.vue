@@ -404,7 +404,12 @@
       }
     },
     async created () { 
-      this.unit = this.currencyList[0]
+      
+      if (state.locale === "zh-CN"){
+        this.unit = this.currencyList[0]
+      } else {
+        this.unit = this.currencyList[1]
+      }  
       let res = await service.getAllRate() 
       if (!res.code && !!res.data) {
         this.rates = res.data;

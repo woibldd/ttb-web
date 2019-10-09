@@ -510,6 +510,7 @@ export default {
 
               this.tableData[i].status = text1
             }
+            // console.log(this.ta)
           }
         }
       })
