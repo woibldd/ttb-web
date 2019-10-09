@@ -2322,6 +2322,10 @@
         "contract_assigning_undeal": "Untriggered",
         "price_distance": "Price(Distance)"
       }
+    },
+    "pair_nav":{ 
+      "24h_h": "24H High",
+      "24h_l": "24H Low" 
     }
   },
   "home": {

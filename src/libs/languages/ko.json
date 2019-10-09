@@ -2200,6 +2200,10 @@
         "contract_assigning_undeal": "위탁 중에 아직 거래 가 이루어지지 않았다",
         "price_distance": "촉발 가격"
       }
+    },
+    "pair_nav":{ 
+      "24h_h": "24시간 최고가",
+      "24h_l": "24시간 최저가" 
     }
   },
   "home": {

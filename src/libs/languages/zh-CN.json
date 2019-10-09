@@ -2212,6 +2212,10 @@
         "contract_assigning_undeal": "委托中未成交",
         "price_distance": "触发价格"
       }
+    },
+    "pair_nav":{ 
+      "24h_h": "24H最高价",
+      "24h_l": "24H最低价"
     }
   },
   "home": {

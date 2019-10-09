@@ -2136,6 +2136,10 @@
         "contract_assigning_undeal": "委託中未成交",
         "price_distance": "觸發價格"
       }
+    },
+    "pair_nav":{ 
+      "24h_h": "24H最高價",
+      "24h_l": "24H最低價" 
     }
   },
   "home": {
