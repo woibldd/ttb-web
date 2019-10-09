@@ -67,13 +67,11 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             {{ this.$t('node_sub') }}
             <icon name="hot-red"/>
           </a>
-          <router-link
+          <!-- <router-link
             to="/share_option"
-            class="nav_link  ml-30">  
-            <!-- {{$t('playBTC')}}  -->
-            期权交易
-            <!-- <whDropdown :menuOptions="[{label:$t('bidTitle'),href:'/snowball/bazaar'}]" >{{$t('playBTC')}}</whDropdown > -->
-          </router-link>
+            class="nav_link  ml-30">   
+            期权交易 
+          </router-link> -->
           <!-- <div class="nav_link arrow-down">
             <a
               :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"
@@ -365,22 +363,25 @@ export default {
         this.state.theme.help[this.state.locale] || this.state.theme.help.en
       )
     },
-    requestLink() {
-      if (this.state.userInfo && this.state.theme.themeName === 'default') {
-        return (
-          process.env.BASE_API +
-          'ixx/zendesk/sso?return_to=' +
-          encodeURIComponent(
-            this.state.theme.request[this.state.locale] ||
-              this.state.theme.request.en
-          )
-        )
-      } else {
-        return (
-          this.state.theme.request[this.state.locale] ||
-          this.request.theme.help.en
-        )
-      }
+    requestLink() { 
+        //   if (this.state.userInfo && this.state.theme.themeName === 'default') {
+        //     return (
+        //       process.env.BASE_API + 
+        //       '/ixx/zendesk/sso?return_to=' +
+        //       encodeURIComponent(
+        //         this.state.theme.request[this.state.locale] ||
+        //           this.state.theme.request.en
+        //       )
+        //     )
+        //   } else {
+        //     return (
+        //       this.state.theme.request[this.state.locale] ||
+        //       this.request.theme.help.en
+        //     )
+        //   }
+      
+        this.state.theme.request[this.state.locale] ||
+        this.request.theme.help.en
     },
     announcementLink() {
       return (

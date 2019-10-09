@@ -265,18 +265,18 @@ export const routes = [
     },
     component: MyOrder
   },
-  {
-    path: '/fee',
-    // name: 'Fee',
-    meta: {
-      auth: false,
-      nav: true,
-      footer: true,
-      class: 'dark',
-      mobileNav: isMobile
-    },
-    component: Fee
-  },
+  // {
+  //   path: '/fee',
+  //   // name: 'Fee',
+  //   meta: {
+  //     auth: false,
+  //     nav: true,
+  //     footer: true,
+  //     class: 'dark',
+  //     mobileNav: isMobile
+  //   },
+  //   component: Fee
+  // },
   // {
   //   path: '/Guide',
   //   name: 'Guide',
@@ -391,16 +391,16 @@ export const routes = [
       },
     ]
   },
-  {
-    path: '/share_option',
-    name:'share_option',
-    meta: {
-      // nav: true,
-      // footer: true,
-      class: 'dark'
-    },
-    component:  () => import('@/pages/share_option/index.vue')
-  },
+  // {
+  //   path: '/share_option',
+  //   name:'share_option',
+  //   meta: {
+  //     // nav: true,
+  //     // footer: true,
+  //     class: 'dark'
+  //   },
+  //   component:  () => import('@/pages/share_option/index.vue')
+  // },
   {
     path: '/snowballDetail',
     name: 'BidDetail',

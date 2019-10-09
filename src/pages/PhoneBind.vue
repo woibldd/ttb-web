@@ -66,7 +66,7 @@
     computed: {
 
     },
-    async created() {
+    async created() { 
       const res = await service.getRegionList()
       if (!res.code) {
         this.regionOptions = res.data

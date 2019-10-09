@@ -73,7 +73,8 @@
         </div> 
       </div>
       <el-table :empty-text=" $t('no_data') " :data="showList" class="fund-coin-pool">
-        <el-table-column v-for="(hd, idx) in header" :key="idx" :prop="hd.key" 
+        <el-table-column v-for="(hd, idx) in header" :key="idx" :prop="hd.key"   
+          :width="hd.width"
           :label="hd.title">
           <template slot-scope="scope">
             <span v-if="hd.key === 'currency'">
@@ -88,7 +89,7 @@
         <el-table-column
           header-align="right"
           align="right"
-          min-width="230px"
+          width="400"
           :label="operate.title"
         >
           <template slot-scope="scope">
@@ -360,14 +361,14 @@ export default {
     header () {
       return (
         state.locale && [
-          { key: 'currency', title: this.$t('fees_name') },
-          { key: 'available', title: this.$t('avlb') },
-          { key: 'locking', title: this.$t('asset_th_unavlb') },
+          { key: 'currency', title: this.$t('fees_name'), width: "100" },
+          { key: 'available', title: this.$t('avlb'), width: "100"  },
+          { key: 'locking', title: this.$t('asset_th_unavlb'), width: "100"  },
           // {key: 'amount', title: this.$t('total_count')},
           {
             key: 'estValue',
-            title:
-              this.$t('homechart_fiat') + this.unit.name
+            title: `${this.$t('homechart_fiat')}(${this.unit.name})`,
+            width: "130"
 
           }
         ]
@@ -426,7 +427,11 @@ export default {
     }
   },
   async created () {
-    this.unit = this.currencyList[0]
+    if (state.locale === "zh-CN"){
+      this.unit = this.currencyList[0]
+    } else {
+      this.unit = this.currencyList[1]
+    }
     //获取汇率
     let res = await service.getAllRate()
     if (!res.code && !!res.data) {

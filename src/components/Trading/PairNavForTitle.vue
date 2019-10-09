@@ -83,7 +83,10 @@
         </li>
       </ul>
       <div v-show="!sortedList.length && tabSelected==='like'" class="ix-pair-empty">
-        {{$t('pair_table_option_empty')}}
+        <!-- {{$t('pair_table_option_empty')}} -->
+        <img src="./empty.png" alt="" srcset="">
+          <br>
+          <span style="color: #5F6B76;font-size:14px">{{$t('pair_table_option_empty')}}</span>
       </div>
     </div>
   </div>

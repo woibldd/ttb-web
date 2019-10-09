@@ -33,6 +33,7 @@
     "pair": "페어",
     "email": "이메일",
     "currency": "코인종류",
+    "coin": "코인종류",
     "password": "패스워드",
     "password2": "패스워드 확인",
     "username": "사용자 아이디",
@@ -2193,5 +2194,25 @@
 "new_user_register_popup1": "등록증정금",
 "new_user_register_popup2": "위쳇고객님의 QR코드를 스캔하여 친구를 추가하세요，ix.com 공식 커뮤니티에 가입 즉시 50달러 등가계약 거래 체험금 수급!！",
 "new_user_register_popup3": "질문이 있으시면 직접 위챗 고객님에게 문의해 주십시오。",
-"pair_table_option_empty": "자동첨가가 없습니다"
+"pair_table_option_empty": "자동첨가가 없습니다",
+"contract_page": {
+  "order_action": {
+   "price":"가격"
+  },
+  "history": {
+    "active": {
+      "contract_assigning_undeal": "위탁 중에 아직 거래 가 이루어지지 않았다"
+    },
+    "stop_loss": { 
+     "contract_assigning_undeal": "위탁 중에 아직 거래 가 이루어지지 않았다", 
+     "price_distance": "촉발 가격"
+    }
+  }
+},
+"home": {
+  "footer": {
+    "affiliate": "대리신청：affiliate@ixx.com",
+    "explain": "IXX 증권거래소는 세계 첫 디지털 자산 거래 공동체, 본부는 싱가포르에 있으며, 거래소 생태의 지역 체인 이상국 실현을 위해 노력하고 있으며, 모두가 나를 위해, 나는 모두를 위해, 모두가 나를 위해, 거래소 참여 공헌자는 모두 거래소의 발전 성과를 공유할 수 있다."
+  }
+}
 }
