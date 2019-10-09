@@ -512,8 +512,31 @@ export default {
             }
             // console.log(this.ta)
           }
+          console.log(this.tableData)
+          this.tableData.forEach((item) => {
+            item.form = this.getBalance(item.from_balance)
+            item.to = this.getBalance(item.to_balance)
+          })
+          console.log(this.tableData)
         }
       })
+    },
+    getBalance(code) {
+      switch (code) {
+        case 1:
+          return this.$t('wallet_account')
+          break;
+        case 2:
+          return this.$t('trading_account')
+          break;
+        case 3:
+          return this.$t('contract_account')
+          break;
+        case 4:
+          return this.$t('otc_account')
+          break;
+
+      }
     },
     getAccountBalanceList () {
       return service.getAccountBalanceList().then(res => {
