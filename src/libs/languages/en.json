@@ -2110,7 +2110,7 @@
   "otc_legal_currency": "Fiat Currency",
   "coin_FUTURE_BTCUSD": "BTC",
   "coin_FUTURE_BHDUSD": "BHD",
-  "fund_my_assets_hide": " Hide small balances ",
+  "fund_my_assets_hide": " Hide Small Balances ",
   "fund_my_assets_hide_tip": " <",
   "otc_collection_update": " edit ",
   "otc_placeholder_c": "Please enter your expected  price",
@@ -2310,6 +2310,9 @@
   "contract_page": {
     "order_action": {
       "price": "Order Price"
+    },
+    "orderbook": {
+      "back_to": "Back to Order Book"
     },
     "history": {
       "active": {

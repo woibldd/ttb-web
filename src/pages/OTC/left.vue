@@ -185,22 +185,22 @@ export default {
               orderData.push(item);
             });
             this.count = orderData.length;
-            if (this.count <= 0) {
-              service
-                .getOtcActivefills({
-                  page: 1,
-                  side: 0,
-                  size: 9999
-                })
-                .then(res => {
-                  if (res.code === 0) {
-                    res.data.data.forEach(item => {
-                      if (item.state === 1 || item.state === 2 || item.state === 6 ) countData.push(item);
-                    });
-                    this.count = countData.length;
-                  }
-                });
-            }
+            // if (this.count <= 0) {
+            //   service
+            //     .getOtcActivefills({
+            //       page: 1,
+            //       side: 0,
+            //       size: 9999
+            //     })
+            //     .then(res => {
+            //       if (res.code === 0) {
+            //         res.data.data.forEach(item => {
+            //           if (item.state === 1 || item.state === 2 || item.state === 6 ) countData.push(item);
+            //         });
+            //         this.count = countData.length;
+            //       }
+            //     });
+            // }
           }
         });
     },
@@ -254,22 +254,22 @@ export default {
               orderData.push(item);
             });
             this.count = orderData.length;
-            if (this.count <= 0) {
-              service
-                .getOtcActivefills({
-                  page: 1,
-                  side: 0,
-                  size: 9999
-                })
-                .then(res => {
-                  if (res.code === 0) {
-                    res.data.data.forEach(item => {
-                      if (item.state === 1 || item.state === 2 || item.state === 6 ) countData.push(item);
-                    });
-                    this.count = countData.length;
-                  }
-                });
-            }
+            // if (this.count <= 0) {
+            //   service
+            //     .getOtcActivefills({
+            //       page: 1,
+            //       side: 0,
+            //       size: 9999
+            //     })
+            //     .then(res => {
+            //       if (res.code === 0) {
+            //         res.data.data.forEach(item => {
+            //           if (item.state === 1 || item.state === 2 || item.state === 6 ) countData.push(item);
+            //         });
+            //         this.count = countData.length;
+            //       }
+            //     });
+            // }
           }
         });
     }, 5000);

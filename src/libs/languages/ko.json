@@ -2189,6 +2189,9 @@
     "order_action": {
       "price": "가격"
     },
+    "orderbook": {
+      "back_to": "다시 서킷으로"
+    },
     "history": {
       "active": {
         "contract_assigning_undeal": "위탁 중에 아직 거래 가 이루어지지 않았다"

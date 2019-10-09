@@ -2201,6 +2201,9 @@
     "order_action": {
       "price": "价格"
     },
+    "orderbook": {
+      "back_to": "返回盘口"
+    },
     "history": {
       "active": {
         "contract_assigning_undeal": "委托中未成交"
