@@ -88,7 +88,7 @@
                 v-tooltip.top-center="{html: true, content: $t('contract_mark_price_tips'), classes: 'contract'}">{{ markPrice }}</em>
             </span>
           </div>
-          <a v-else size='mini' class="el-link" @click="returnToDefault">返回盘口</a>
+          <a v-else size='mini' class="el-link" @click="returnToDefault">{{$t('contract_page.orderbook.back_to')}}</a>
         </div>
         <div
           class="side-wrap bid"

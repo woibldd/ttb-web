@@ -80,7 +80,9 @@
                 v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_value_tips'), classes: 'contract'}"
                 class="label">
                 {{ $t('contract_history_postion_header_value') }}</span>
-              <span class="value">{{ cholding.value | fixed(cholding.pairInfo.value_scale || 4) }}</span>
+              <span class="value">{{ cholding.value | fixed(cholding.pairInfo.value_scale || 4) }} BTC</span>
+              
+              <!-- <span class="estimated">≈{{ cholding.value | fixed(2) }}</span> -->
             </div>
             <div class="col__row">
               <!-- 开仓价格 -->
@@ -392,7 +394,7 @@
           >{{ $t('contract_reload') }}</a>
         </div>
       </div>
-    </div>
+    </div> 
   </div>
 </template>
 <script>

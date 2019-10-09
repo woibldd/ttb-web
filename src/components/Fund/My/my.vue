@@ -378,8 +378,8 @@ export default {
       return (
         state.locale && [
           { key: 'currency', title: this.$t('fees_name'), width: "100" },
-          { key: 'available', title: this.$t('avlb'), width: "100"  },
-          { key: 'locking', title: this.$t('asset_th_unavlb'), width: "100"  },
+          { key: 'available', title: this.$t('avlb'), width: "120"  },
+          { key: 'locking', title: this.$t('asset_th_unavlb'), width: "120"  },
           // {key: 'amount', title: this.$t('total_count')},
           {
             key: 'estValue',

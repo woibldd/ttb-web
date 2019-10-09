@@ -1261,7 +1261,7 @@
   "contract_limit_price": "Limits",
   "contract_price_tips": "Specific price levels you wish to trade in",
   "contract_limit_price_tips": "Limited trading based on specified price available in the market. This is the most common strategy of delegated trading。",
-  "contract_cost_10_times": "Order Cost",
+  "contract_cost_10_times": "Cost @{lever}x",
   "contract_pos_after_deal": "Total position Qty after execution",
   "contract_expect_equal_price": "Estimated Liq Price",
   "contract_diff_expect_force": "Mark Price to Liq Price(Distance)",
@@ -1276,7 +1276,7 @@
   "contract_newest_deal_price": "Latest transacted price",
   "contract_repay_percent": "Your percentage of return。",
   "contract_lignter_tips": "This indicator shows you where you are in the automatic partial selling queue. If all indicators are lit, your position may be reduced after liquidation activities end. Click for more details。",
-  "contract_never_show": "Do not show Confirmation Window anymore",
+  "contract_never_show": "Don't Show Again",
   "contract_assign_revert": "Cancel",
   "contract_trade_his": "Trading history",
   "contract_deal_time": "Time",
@@ -2110,7 +2110,7 @@
   "otc_legal_currency": "Fiat Currency",
   "coin_FUTURE_BTCUSD": "BTC",
   "coin_FUTURE_BHDUSD": "BHD",
-  "fund_my_assets_hide": " Hide small balances ",
+  "fund_my_assets_hide": " Hide Small Balances ",
   "fund_my_assets_hide_tip": " <",
   "otc_collection_update": " edit ",
   "otc_placeholder_c": "Please enter your expected  price",
@@ -2309,7 +2309,16 @@
   "status": "Status",
   "contract_page": {
     "order_action": {
-      "price": "Order Price"
+      "price": "Order Price",
+      "modal": {
+        "available": "Available Balance",
+        "position": "Position Size After Execution",
+        "liq_price": "Estimated Liquidation Price",
+        "difference": "Mark Price/Est. Liquidation Difference" 
+      }
+    },
+    "orderbook": {
+      "back_to": "Back to Order Book"
     },
     "history": {
       "active": {
@@ -2319,6 +2328,10 @@
         "contract_assigning_undeal": "Untriggered",
         "price_distance": "Price(Distance)"
       }
+    },
+    "pair_nav":{ 
+      "24h_h": "24H High",
+      "24h_l": "24H Low" 
     }
   },
   "home": {
