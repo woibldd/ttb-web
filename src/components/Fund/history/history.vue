@@ -98,7 +98,6 @@
       </el-table>
       <el-table  :empty-text="$t('no_data')"
         :data="tableData"
-        height="750"
         v-else-if="type === 'all'"
         v-loading="loading"
         cell-class-name="unrelease-cell"
@@ -138,7 +137,6 @@
       </el-table>
       <el-table   :empty-text="$t('no_data')"
         :data="tableData"
-        height="750"
         v-else
         v-loading="loading"
         cell-class-name="unrelease-cell"
