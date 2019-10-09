@@ -35,7 +35,8 @@
     .my-fund-operate {
         color: $primary;
         cursor: pointer;
-        margin-left: 21px;
+        margin-left: 14px; 
+        white-space: nowrap;
     } 
     .my-fund-label {
       padding: 5px 12px;
@@ -218,6 +219,7 @@
   
   .el-dropdown {
     .el-button--label {
+      padding: 12px 0px 12px 14px;
       border: none;
       color: $primary;
       &:hover {
@@ -293,8 +295,9 @@
     .my-fund-operate {
         color: $primary;
         cursor: pointer;
-        margin-left: 21px;
+        margin-left: 14px; 
     }
+
     .el-table /deep/ .el-table__row{
       td {
         padding: 5px 0;
