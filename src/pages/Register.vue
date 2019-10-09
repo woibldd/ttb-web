@@ -14,12 +14,21 @@
             class="by-links"
             v-if="state.enablePhoneSignup">
             <router-link
-              class="by-link ibt"
-              to="email">{{ $t('register_by_email') }}</router-link>
+              :to="{
+                path: '/user/register/email' + routerParams,  
+              }"
+              class="by-link ibt" 
+              >
+              {{ $t('register_by_email') }}
+            </router-link> 
             <span class="sp-line"/>
             <router-link
               class="by-link ibt"
-              to="phone">{{ $t('register_by_phone') }}</router-link>
+              :to="{
+                path: '/user/register/phone' + routerParams,
+              }">
+              {{ $t('register_by_phone') }}
+            </router-link>
           </div>
         </div>
         <!-- <div class="error-block" v-show="errmsg">{{ errmsg }}</div> -->
@@ -162,14 +171,15 @@
               />
             </div>
           </div>
-          <div :class="['field']">
+          <div :class="['field']" 
+              v-if="!hasAgent">
             <div class="input-box">
               <ix-input
                 ref="invitor"
                 :disabled="hasInvitor"
                 v-model.trim="invitorId"
                 @input="invitorId=$event"
-                :rule="validateRules.invitor"
+                :rule="validateRules.invitor" 
                 :placeholder="$t('invitor_ph')"
                 :label="$t('invitor')"
               />
@@ -237,6 +247,7 @@ export default {
       email: '',
       invitorId: '',
       hasInvitor: false,
+      hasAgent: false,
       password: '',
       captcha: '',
       password2: '',
@@ -294,7 +305,8 @@ export default {
       triggerValidate: false,    
       showTutorialArrow: false, 
       pwdType: 'password',
-      pwdType2: 'password'
+      pwdType2: 'password',
+      routerParams: ''
     }
   },
   /* beforeRouteEnter (to, from, next) {
@@ -525,12 +537,27 @@ export default {
     if (invitorId) {
       utils.setCookie('invitor', invitorId)
       this.hasInvitor = true
+      this.routerParams = `?invitor=${invitorId}`
     } else {
       invitorId = utils.getCookie('invitor')
     }
     if (invitorId && /^[A-Za-z0-9]+$/.test(invitorId)) {
       this.invitorId = invitorId
     }
+
+    let agentId = this.$route.query.agent
+    if (agentId) {
+      utils.setCookie('agent', agentId)
+      this.hasAgent = true
+      this.routerParams = `?agent=${agentId}`
+    } else {
+      agentId = utils.getCookie('agent')
+    }
+    if (agentId && /^[A-Za-z0-9]+$/.test(agentId)) {
+      this.invitorId = agentId
+    }
+
+
 
     const res = await service.getRegionList()
     if (!res.code) {
