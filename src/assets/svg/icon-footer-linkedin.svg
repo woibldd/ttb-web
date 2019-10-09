@@ -1,15 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="20px" height="20px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">  <image id="image0" width="20" height="20" x="0" y="0"
-    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAQAAAAngNWGAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
-AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElN
-RQfjCggALw9Ro9Y+AAABQ0lEQVQoz42TP0tCURjGf/dcr0GEkC32Z4qGcGhJoaD6BsWVjKSp6SxN
-BV2zsSHC1ho6X8FI+wDRF0iMliCsFsWlKYfogtTguah40p7lvOd5fvAeDu9r/RBIhXFxWWYKnxoV
-itxKP0itAFQp8szRqypZedMFKptTPMzKcyxbEAIYgIEHZEGASuMBe4xxYkZVGqyrMK/MABHZVPM8
-G9E6s/Z6hl0AxstNjogbwQgvIVx92WEbB/ikhcMoFb5IMqJTV5DU5YqMktHnBmsyIVeJ867ThCDW
-30ne86gmQL6R09akwO8HVZQqDbUA3AWeoGF4fIIYDksgP7TTEDwZQAcAu8t5EJT4j0qCArWhWJ2C
-kD4HQ8F9+d2enjyHA7Bz6YEAIMfFn9hl+y87g7vJmWFwc/K6XVo9q7BFikWmgTplihQ6q/ALqchV
-JD/h/fwAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTktMTAtMDdUMTY6NDc6MTUrMDg6MDB4RY+6AAAA
-JXRFWHRkYXRlOm1vZGlmeQAyMDE5LTEwLTA3VDE2OjQ3OjE1KzA4OjAwCRg3BgAAAABJRU5ErkJg
-gg==" />
-</svg>
+<svg id="图层_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 819.08 819.2">
+<defs>
+  <style></style>
+</defs><title></title><path class="cls-1" d="M911.43-291.62C688.5-291.62,507.18-113.53,502,108.14v19.69C507.18,349.5,688.5,527.58,911.43,527.58,1137.65,527.58,1321,344.2,1321,118S1137.65-291.62,911.43-291.62ZM797.37,339.9H694.09V29.59H797.37ZM745.72-12.77h-.67C710.4-12.77,688-36.6,688-66.39,688-96.83,711.06-120,746.4-120s57.1,23.17,57.76,53.61C804.16-36.6,781.74-12.77,745.72-12.77ZM1169.81,339.9H1066.55v-166c0-41.7-15-70.16-52.34-70.16-28.54,0-45.53,19.18-53,37.71-2.73,6.65-3.39,15.9-3.39,25.16V339.9H854.52s1.37-281.18,0-310.31h103.3v44c13.71-21.13,38.24-51.25,93.08-51.25,68,0,118.91,44.36,118.91,139.68Z" transform="translate(-501.95 291.62)"/></svg>
