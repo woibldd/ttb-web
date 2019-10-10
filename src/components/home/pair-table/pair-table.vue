@@ -235,7 +235,7 @@ export default {
       })
     },
     filterPair() {
-      state.tabSelected = 'all'
+      // state.tabSelected = 'all'
       this.$emit('searching', this.search)
     },
     // tabsClick(tab, event) {

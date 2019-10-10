@@ -225,7 +225,7 @@ export default {
       // pair.like = !(pair.like || false)
     },
     filterPair() {
-      state.tabSelected = 'all'
+      // state.tabSelected = 'all'
     }
   }
 }
