@@ -48,46 +48,31 @@ export default {
         
         return _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1
-            && pair.name.toUpperCase().indexOf('GRC') < 0
-            && pair.name.toUpperCase().indexOf('BTZ') < 0 
-            && pair.type < 4
+            // && pair.name.toUpperCase().indexOf('GRC') < 0
+            // && pair.name.toUpperCase().indexOf('BTZ') < 0 
+            && pair.type != 4
         })
       } else if (this.tabSelected === 'new') {
-        // let excludeList = [
-        //   "BTC_USDT",
-        //   "EOS_BTC",
-        //   "EOS_USDT",
-        //   "ETH_BTC",
-        //   "ETH_USDT",
-        //   "LTC_USDT",
-        //   "BCH_BTC",
-        //   "BCH_USDT",
-        //   "XRP_BTC",
-        //   "XRP_USDT",
-        //   "LTC_BTC",
-        //   "ADA_BTC",
-        //   "ADA_USDT"
-        // ]
-        // let res = _.filter(list, (pair) => {
-        //   return excludeList.indexOf(pair.name) < 0
-        // })
+         
         let res = _.sortBy(list, (pair) => {
           const value = this.getDelta(pair.tick) || 0
           return value * -1
         })
         res = _.filter(res, (pair, index) => {
+          if (pair.type == 4){
+            pair.type = 2
+          }
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1
                 && pair.type > 1 
         })
         let arr = []
         const temGroup = _.groupBy(res, 'type')
-        temGroup['2'] = temGroup['2'].concat(temGroup['4']||[])
-        delete temGroup['4']
-        
+        // temGroup['2'] = temGroup['2'].concat(temGroup['4']||[])
+        // delete temGroup['4'] 
         Object.keys(temGroup).forEach(key => {
-          arr = arr.concat([{ CUSTOM: true, type: key }]).concat(temGroup[key])
-          // arr = arr.concat([{ CUSTOM: true, type: key }]).concat(temGroup[key])
+          arr = arr.concat([{ CUSTOM: true, type: key }]).concat(temGroup[key]) 
         }) 
+ 
 
         return arr
         // res = _.groupBy(res, 'type')
