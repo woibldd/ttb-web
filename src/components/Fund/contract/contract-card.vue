@@ -1,41 +1,47 @@
 <template>
   <div class="contract-card">
-    <div class="contract-card-box" v-if="rates"> 
+    <div
+      class="contract-card-box"
+      v-if="rates">
       <div class="contract-card-title">
-        <h3>{{holding.currency}}</h3>
+        <h3>{{ holding.currency }}</h3>
       </div>
       <div class="contract-card-content">
         <dl class="contract-card-row">
-          <dt>{{$t('fund_contract_open')}}</dt>
-          <dd> 
+          <dt>{{ $t('fund_contract_open') }}</dt>
+          <dd>
             <span :class='{up: (holding.amount || 0) > 0, down: (holding.amount || 0) < 0}' >
-              {{holding.amount}}  
+              {{ holding.amount }}
               ({{ (holding.amount || 0) > 0 ? $t('fund_contract_up') : $t('fund_contract_down') }})
             </span>
           </dd>
-        </dl>  
+        </dl>
         <dl class="contract-card-row">
-          <dt>{{$t('fund_contract_result_yet')}}</dt>
+          <dt>{{ $t('fund_contract_result_yet') }}</dt>
           <dd>
             <span :class='{up: (holding.realized || 0) > 0, down: (holding.realized || 0) < 0}' >
-              {{holding.realized | fixed(8)}} BTC
+              {{ holding.realized | fixed(8) }} BTC
             </span>
-            <div :class='{up: (holding.realized || 0) > 0, down: (holding.realized || 0) < 0}' >
-              {{translateByRate(holding.realized)}} USD
+            <div
+              style="transform:scale(0.8)"
+              :class='{up: (holding.realized || 0) > 0, down: (holding.realized || 0) < 0}' >
+              {{ translateByRate(holding.realized) }} USD
             </div>
           </dd>
-        </dl>  
+        </dl>
         <dl class="contract-card-row">
-          <dt>{{$t('fund_contract_result_unrealized')}}</dt>
+          <dt>{{ $t('fund_contract_result_unrealized') }}</dt>
           <dd>
             <span :class='{up: $big(holding.unrealized || 0).gt(0), down: $big(holding.unrealized || 0).lt(0)}' >
-              {{holding.unrealized | fixed(8)}} BTC
+              {{ holding.unrealized | fixed(8) }} BTC
             </span>
-            <div :class='{up: $big(holding.unrealized || 0).gt(0), down: $big(holding.unrealized || 0).lt(0)}' >
-              {{translateByRate(holding.unrealized) | fixed(8)}} USD
+            <div
+              style="transform:scale(0.8)"
+              :class='{up: $big(holding.unrealized || 0).gt(0), down: $big(holding.unrealized || 0).lt(0)}' >
+              {{ translateByRate(holding.unrealized) | fixed(8) }} USD
             </div>
           </dd>
-        </dl>   
+        </dl>
       </div>
     </div>
   </div>
@@ -45,35 +51,35 @@
 import {bigTimes} from '@/utils/handleNum'
 export default {
   props: {
-    holding : {
+    holding: {
       type: Object,
       default: {}
     },
-    rates : {
+    rates: {
       type: Object,
-      default: ()=>null
+      default: () => null
     }
-  }, 
-  methods: {
-    translateByRate(value){
-      if(!this.rates)return 
-      console.log(this.rates['USD'],value);
-      return bigTimes([this.rates['USD'],value],8)
-    },
   },
+  methods: {
+    translateByRate (value) {
+      if (!this.rates) return
+      console.log(this.rates['USD'], value)
+      return bigTimes([this.rates['USD'], value], 8)
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-.contract-card { 
-  width: 278px; 
+.contract-card {
+  width: 278px;
   font-size: 18px;
   text-align: center;
-  border: 1px solid $primary; 
+  border: 1px solid $primary;
   .contract-card-title {
     height: 40px;
     line-height: 40px;
-    background-color: $primary; 
+    background-color: $primary;
     h3 {
       font-size: 18px;
       color: #fff;
@@ -81,7 +87,7 @@ export default {
   }
   .contract-card-content {
     padding:15px 0;
-    .contract-card-row { 
+    .contract-card-row {
       line-height: 32px;
       dt {
         color: #A0A0A0;
@@ -92,10 +98,8 @@ export default {
       .down {
         color: $font-down;
       }
-    } 
+    }
   }
- 
+
 }
 </style>
-
-
