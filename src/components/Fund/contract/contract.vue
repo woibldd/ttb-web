@@ -87,12 +87,16 @@
         <div class="row__box">
           <div class="box__table">
             <!-- 账户权益 -->
-            <div class="table__tr border-bottom-1">
+            <div
+              class="table__tr border-bottom-1"
+              flex="main:justify">
               <span
                 v-tooltip.top-center="{html: true, content: $t('contract_account_rights_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help border_bottom_dash special">{{ $t('contract_account_rights') }}</span>
-              <span class="c-333">{{ (holding.available || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
-              <span class="c-999">≈ {{ translateByRate(holding.available) | fixed(valueScale) }} USD</span>
+              <span class="c-333">{{ (holding.available || 0) | fixed(valueScale) }} {{ selectPair.product_name }} </span>
+              <span
+                class="c-999"
+                style="transform: scale(0.8);position:absolute;margin-left: 70px;">≈ {{ translateByRate(holding.available) | fixed(valueScale) }} USD</span>
             </div>
             <!-- 保证金余额 -->
             <div class="table__tr border-bottom-1">
@@ -100,7 +104,9 @@
                 v-tooltip.top-center="{html: true, content: $t('contract_margin_balance_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help border_bottom_dash">{{ $t('contract_margin_balance') }}</span>
               <span class="c-333">{{ (marginBalance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
-              <span class="c-999">≈ {{ translateByRate(marginBalance) | fixed(valueScale) }} USD</span>
+              <span
+                class="c-999"
+                style="transform: scale(0.8);position:absolute;margin-left: 70px;">≈ {{ translateByRate(marginBalance) | fixed(valueScale) }} USD</span>
             </div>
             <!-- 可用余额 -->
             <div class="table__tr">
@@ -108,7 +114,9 @@
                 v-tooltip.top-center="{html: true, content: $t('contract_avab_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help border_bottom_dash">{{ $t('withdraw_avlb') }}</span>
               <span class="c-333">{{ (holding.available_balance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
-              <span class="c-999">≈ {{ translateByRate(holding.available_balance) | fixed(valueScale) }} USD</span>
+              <span
+                class="c-999"
+                style="transform: scale(0.8);position:absolute;margin-left: 70px;">≈ {{ translateByRate(holding.available_balance) | fixed(valueScale) }} USD</span>
             </div>
             <div class="table__btns">
               <div
@@ -137,32 +145,40 @@
               <span
                 v-tooltip.top-center="{html: true, content: $t('contract_account_rights_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help special">{{ $t('contract_account_rights') }}</span>
-              <span class="c-333">{{ holding.available | fixed(valueScale) }} {{ selectPair.product_name }}</span>
-              <span class="c-999">≈ {{ translateByRate(holding.available ) | fixed(valueScale) }} USD</span>
+              <span class="c-333">{{ holding.available | fixed(8) }} {{ selectPair.product_name }}</span>
+              <span
+                class="c-999"
+                style="transform: scale(0.8);position:absolute;margin-left: 70px;">≈ {{ translateByRate(holding.available,4 ) }} USD</span>
             </div>
             <div class="table__tr right">
               <!-- 未实现盈亏 -->
               <span
                 v-tooltip.top-center="{html: true, content: $t('contract_unrealized_profit_and_loss_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help">{{ $t('unrealized_profit_and_loss') }}</span>
-              <span class="c-333">{{ (holding.unrealized || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
-              <span class="c-999">≈ {{ translateByRate(holding.unrealized ) | fixed(valueScale) }} USD</span>
+              <span class="c-333">{{ (holding.unrealized || 0) | fixed(8) }} {{ selectPair.product_name }}</span>
+              <span
+                class="c-999"
+                style="transform: scale(0.8);position:absolute;margin-left: 70px;">≈ {{ translateByRate(holding.unrealized) }} USD</span>
             </div>
             <!-- 保证金余额 -->
             <div class="table__tr right border-bottom-1 yellow">
               <span
                 v-tooltip.top-center="{html: true, content: $t('contract_margin_balance_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help">{{ $t('contract_margin_balance') }}</span>
-              <span class="c-333">{{ (marginBalance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
-              <span class="c-999">≈ {{ translateByRate(marginBalance) | fixed(valueScale) }} USD</span>
+              <span class="c-333">{{ (marginBalance || 0) | fixed(8) }} {{ selectPair.product_name }}</span>
+              <span
+                class="c-999"
+                style="transform: scale(0.8);position:absolute;margin-left: 70px;">≈ {{ translateByRate(marginBalance) }} USD</span>
             </div>
             <!-- 仓位保证金 -->
             <div class="table__tr right">
               <span
                 v-tooltip.top-center="{html: true, content: $t('contract_were_margin_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help">{{ $t('warehouse_margin') }}</span>
-              <span class="c-333">{{ (holding.margin_position || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
-               <span class="c-999">≈ {{ translateByRate(holding.margin_position) | fixed(valueScale) }} USD</span>
+              <span class="c-333">{{ (holding.margin_position || 0) | fixed(8) }} {{ selectPair.product_name }}</span>
+              <span
+                class="c-999"
+                style="transform: scale(0.8);position:absolute;margin-left: 70px;">≈ {{ translateByRate(holding.margin_position) }} USD</span>
             </div>
             <!-- 委托保证金 -->
             <div class="table__tr right">
@@ -170,7 +186,9 @@
                 v-tooltip.top-center="{html: true, content: $t('contract_entrust_margin_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help">{{ $t('entrust_margin') }}</span>
               <span class="c-333">{{ (holding.margin_delegation || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
-              <span class="c-333">≈ {{ translateByRate(holding.margin_delegation) | fixed(valueScale) }} USD</span>
+              <span
+                class="c-999"
+                style="transform: scale(0.8);position:absolute;margin-left: 70px;">≈ {{ translateByRate(holding.margin_delegation) }} USD</span>
             </div>
             <!-- 可用余额 -->
             <div class="table__tr right border-bottom-1 yellow">
@@ -178,7 +196,9 @@
                 v-tooltip.top-center="{html: true, content: $t('contract_avab_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help">{{ $t('withdraw_avlb') }}</span>
               <span class="c-333">{{ (holding.available_balance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
-              <span class="c-999">≈ {{ translateByRate(holding.available_balance) | fixed(valueScale) }} USD</span>
+              <span
+                class="c-999"
+                style="transform: scale(0.8);position:absolute;margin-left: 70px;">≈ {{ translateByRate(holding.available_balance) }} USD</span>
             </div>
             <!-- 杠杆倍数 -->
             <!-- <div
@@ -195,7 +215,7 @@
           <div
             v-for="(holding,index) in holdingList"
             :key="index"
-               class="card-detail"
+            class="card-detail"
             v-if="(holding.holding || 0) != 0">
             <contractCard
               :holding="holding"
@@ -214,7 +234,7 @@
 import service from '@/modules/service'
 import { state } from '@/modules/store'
 import utils from '@/modules/utils'
-import tickTableMixin from "@/mixins/fund-contract-tick";
+import tickTableMixin from '@/mixins/fund-contract-tick'
 import dealSocketMixins from '@/mixins/deal-socket-mixins'
 import contractCard from './contract-card'
 import transferModal from './transfer-modal'
@@ -234,8 +254,8 @@ export default {
   name: 'MyFund',
   mixins: [tickTableMixin, dealSocketMixins],
   components: { contractCard, transferModal },
-  //mixins: [dealSocketMixins],
-  data() {
+  // mixins: [dealSocketMixins],
+  data () {
     return {
       state,
       chart: null,
@@ -275,51 +295,51 @@ export default {
       ],
       unit: null,
       loading: false,
-      rates:{}
+      rates: {}
     }
   },
   computed: {
     // lastPrice () {
     //   return this.state.ct.lastPrice
     // },
-    gm() {
+    gm () {
       console.log(123)
     },
-    change2() {
+    change2 () {
       console.log(456)
     },
-    pairInfo() {
+    pairInfo () {
       return this.selectPair
     },
-    priceScale() {
+    priceScale () {
       return this.pairInfo.price_scale || 2
     },
-    valueScale() {
+    valueScale () {
       return this.pairInfo.value_scale || 4
     },
-    showHistory() {
+    showHistory () {
       return this.$route.name === 'history'
     },
-    total() {
+    total () {
       let sum = this.$big(0)
       this.tableData.forEach(item => {
         sum = sum.plus(this.getEstValue(item))
       })
       return sum.toString()
     },
-    operate() {
+    operate () {
       return state.locale && { key: 'operate', title: this.$t('operation') }
     },
-    currency() {
+    currency () {
       return this.pairInfo.product_name
     },
     // 保证金余额
-    marginBalance() {
+    marginBalance () {
       // 保证金余额 = 可用余额 + 未实现盈亏
       return this.$big(this.holding.available_balance || 0).plus(this.holding.unrealized || 0)
     },
     // 保证金=【（仓位保证金+委托保证金）/保证金余额】*100%（四舍五入，取整）
-    margin() {
+    margin () {
       return this.$big(this.holding.margin_position)
         .plus(this.holding.margin_delegation)
         .div(this.marginBalance)
@@ -327,7 +347,7 @@ export default {
         .round(0)
     },
     // 计算杠杆倍数
-    curLever() {
+    curLever () {
       let value = this.$big(0)
       this.holdingList.map(item => {
         value = value.plus(item.value)
@@ -338,7 +358,7 @@ export default {
         return value.div(this.marginBalance).toString()
       }
     },
-    holding() {
+    holding () {
       const obj = {}
       // console.log({ obj })
       const list = this.holdingList
@@ -350,7 +370,7 @@ export default {
         obj.unrealized = this.$big(0) // 未实现盈亏
         obj.margin_position = this.$big(0) // 仓位保证金
         obj.margin_delegation = this.$big(0) // 委托保证金
-        obj.totalValue = this.$big(0) //持仓总价值
+        obj.totalValue = this.$big(0) // 持仓总价值
         list.map(arg => {
           // 保证金余额 = 可用余额 + 未实现盈亏
           if (obj.marginBalance.eq(0)) {
@@ -376,7 +396,7 @@ export default {
       // console.log({ obj })
       return obj
     },
-    holdingList() {
+    holdingList () {
       let list = state.ct.holdingList
       const pairInfoList = state.ct.pairInfoList
       list = list.map((holding) => {
@@ -489,7 +509,7 @@ export default {
             .mul(100).mul(2)
             .toFixed(2)
             // console.log(holding.roelp)
-        } 
+        }
 
         // 平仓价格
         if (!holding.changeUnwindPrice) {
@@ -526,7 +546,7 @@ export default {
     //   this.layer = !val
     // }
   },
-  async created() {
+  async created () {
     this.currencyList = [{
       name: 'CNY',
       symbol: '￥',
@@ -537,36 +557,35 @@ export default {
       symbol: '$',
       scale: 4
     } ]
-    
-    if (state.locale === "zh-CN"){
-      this.unit = this.currencyList[0]
-    } else {
-      this.unit = this.currencyList[1]
-    }   
+
+    if (state.locale === 'zh-CN') {
+      this.unit = this.currencyList[0]
+    } else {
+      this.unit = this.currencyList[1]
+    }
     await this.getAllRate()
     await this.getPairs()
     // this.getContractBalanceByPair()
     this.getContractBalanceList()
-    
-    const res = await service.getRates({currency:'BTC'})
+
+    const res = await service.getRates({currency: 'BTC'})
     this.rates = res.data.BTC
   },
-  mounted() {
+  mounted () {
     // this.initChart()
     if (this.holding === undefined) {
       utils.alert(this.$t('网络加载失败，请检查网络重试'))
     }
   },
   methods: {
-    translateByRate(value){
-      if(!this.rates||!this.rates['USD'])return
-      
-      return bigTimes([this.rates['USD'],value])
+    translateByRate (value, scale = 2) {
+      if (!this.rates || !this.rates['USD']) return
+      return bigTimes([this.rates['USD'], value], scale)
     },
-    amounts() {
+    amounts () {
       this.amountNumber = 21321
     },
-    exchange(number) {
+    exchange (number) {
       this.popover = true
       this.state.stateType = number
       // console.log(number,this.stateType)
@@ -583,7 +602,7 @@ export default {
         })
       }
     },
-    async getPairs() {
+    async getPairs () {
       await service.getContractSymList().then(res => {
         if (res && res.data) {
           this.allPairs = res.data.items
@@ -597,17 +616,17 @@ export default {
         }
       })
     },
-    hideModal() {
+    hideModal () {
       this.showModal = false
     },
-    async getAllRate() {
+    async getAllRate () {
       const res = await service.getAllRate()
       if (!res.code && !!res.data) {
         this.rates = res.data
       }
     },
 
-    getEstValue(item) {
+    getEstValue (item) {
       let res = this.$big(0)
       const unit = this.unit.name
       const { currencyName, camount } = item
@@ -628,7 +647,7 @@ export default {
       }
       return res
     },
-    getContractBalanceList() {
+    getContractBalanceList () {
       service.getContractBalanceList().then(res => {
         if (!res.code && !!res.data) {
           state.ct.holdingList = res.data.slice()
