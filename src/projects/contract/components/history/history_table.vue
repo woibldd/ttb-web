@@ -1026,6 +1026,8 @@ export default {
 .reset-werehouse-box{
   color: #ACACAC;
   line-height: 24px;
+  border:2px solid #0F0F0F;
+  padding: 10px;
   &>div{
     &>*:nth-child(3){
       margin-top:15px;
@@ -1042,19 +1044,23 @@ export default {
     &:first-child{
       flex: none;
       width: 150px;
-      // text-align: right;
-      margin-right: 50px;
+      box-sizing: border-box;
+      margin-right: 70px;
+      border-right:2px solid #0F0F0F;
       &>p{
         color: $primary;
         font-size: 20px;
         line-height: normal;
       }
     }
+    &:last-child{
+      border-left:2px solid #0F0F0F;
+    }
     &>.btn{
       width:70px;
       height:24px;
       line-height: 24px;
-      margin-bottom:10px; 
+      margin-bottom:10px;
       text-align: center;
       border:1px solid rgba(9,201,137,1);
       color: rgba(9,201,137,1);
