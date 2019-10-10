@@ -43,15 +43,14 @@ export default {
     },
     showList() {
       const list = this.pairList
-      if (this.tabSelected === 'all') {
-        const temGroup = _.groupBy(list, 'type')
-        
-        return _.filter(list, pair => {
+      if (this.tabSelected === 'all') { 
+        let arr =  _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
             && pair.type != 4
-        })
-      } else if (this.tabSelected === 'new') {
-         
+        }) 
+        arr = _.sortBy(arr, ['rank'])
+        return arr 
+      } else if (this.tabSelected === 'new') { 
         let res = _.sortBy(list, (pair) => {
           const value = this.getDelta(pair.tick) || 0
           return value * -1
@@ -70,28 +69,26 @@ export default {
         Object.keys(temGroup).forEach(key => {
           arr = arr.concat([{ CUSTOM: true, type: key }]).concat(temGroup[key]) 
         }) 
- 
-
+  
         return arr
-        // res = _.groupBy(res, 'type')
-
+        // res = _.groupBy(res, 'type') 
         // return res
       } else if (this.tabSelected === 'like') {
         return _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
             && (pair.like || false)
-            && pair.name.toUpperCase().indexOf('GRC') < 0
-            && pair.name.toUpperCase().indexOf('BTZ') < 0 
+            && pair.type != 4 
         })
       } else {
-        return _.filter(list, pair => {
+        let arr =  _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1
             && pair.currency.indexOf(this.tabSelected) > -1 
             && pair.type === 1
-            && pair.name.toUpperCase().indexOf('GRC') < 0
-            && pair.name.toUpperCase().indexOf('BTZ') < 0 
-
-        })
+            // && pair.name.toUpperCase().indexOf('GRC') < 0
+            // && pair.name.toUpperCase().indexOf('BTZ') < 0  
+        }) 
+        arr = _.sortBy(arr, ['rank'])
+        return arr 
       }
     },
     changeRankList() {
