@@ -199,7 +199,7 @@
             <span v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_promise_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_promise') }}</span>
             <input class="input-num" v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_promise_tips'), classes: 'contract'}" v-model="cholding.margin_position" :class="cholding.leverage == 0 ? '' : 'pointer'" type="number" readonly @click="showEnsModal(cholding)" >
             <!-- <span>≈ {{translateByRate(cholding.margin_position)}} USD</span> -->
-            <span>≈ {{translateByRate(cholding.margin_position)}} USD</span>
+            <span>≈ {{translateByRate(cholding.position)}} USD</span>
           </div>
           <div flex="dir:top">
             <span class="label">{{ $t('contract_lever_times') }}</span>
