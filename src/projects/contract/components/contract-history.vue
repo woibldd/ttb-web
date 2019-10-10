@@ -829,6 +829,11 @@ export default {
         }
       });
     } //查询用户设置
+ 
+    await service.getRates({currency:'BTC'}).then(res=>{
+      this.state.rate.BTC = res.data.BTC
+    })
+
     this.switchTab({ name: "contract_history_position" });
     this.$eh.$once("protrade:order:refresh", this.refreshCurrentDelegation);
     this.$eh.$on("protrade:order:refresh", type => { 

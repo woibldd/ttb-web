@@ -8,7 +8,7 @@ export const logogramNum = num => {
     return num
   }
 }
-const handler = (dataArr, fixed, type) => {
+const handler = (dataArr, fixed, type) => { 
   const res = dataArr.reduce((curr, prev) => Big(curr)[type](prev))
   return bigRound(res, fixed)
 }

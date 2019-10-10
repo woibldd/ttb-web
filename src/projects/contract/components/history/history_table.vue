@@ -455,6 +455,9 @@ export default {
     },
     holdingData() {
       return this.state.ct.computeHoldingList
+    },
+    Rates() {
+      return this.state.rate.BTC
     }
   },
   watch: {
@@ -478,9 +481,13 @@ export default {
       }
     }
   },
-  created() {
+  async created() {
     this.$eh.$on('protrade:exchange:set', this.set)
     this.unwindPrice = this.transforPrice(this.markPrice)
+    
+    // await service.getRates({currency:'BTC'}).then(res=>{
+    //   this.rates = res.data.BTC
+    // })
     // 平仓价格跟随标记价格变动，但是获得一次焦点后就不再变化，
     // 在切换tab或刷新页面再重新绑定标记价格
     setTimeout(x => {
@@ -492,17 +499,15 @@ export default {
         }
       })
     }, 1000)
-    service.getRates({currency:'BTC'}).then(res=>{
-      this.rates = res.data.BTC
-    })
   },
   destroyed() {
     this.$eh.$off('protrade:exchange:set', this.set)
   },
   methods: {
     translateByRate(value){
-      if(!this.rates)return 
-      return bigTimes([this.rates['USD'],value])
+      if(!this.Rates) return  
+      // console.log({Rates: this.Rates['USD'], value: value.toString()})
+      return bigTimes([this.Rates['USD'], value], 8)
     },
     tologin() {
       // console.log(this.$route.fullPath)
