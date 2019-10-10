@@ -9,6 +9,9 @@ import { state, actions } from '@/modules/store'
 // const Mock = () => import('./mock')
 
 const service = {
+  getRates(params){
+    return request('/account/currency/rates', params)
+  },
   getBanners(data = {}) {
     data.platform = data.platform || 1
     return request('announcement/list', data)

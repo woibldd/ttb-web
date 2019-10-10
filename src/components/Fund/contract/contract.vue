@@ -92,6 +92,8 @@
                 v-tooltip.top-center="{html: true, content: $t('contract_account_rights_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help border_bottom_dash special">{{ $t('contract_account_rights') }}</span>
               <span class="c-333">{{ (holding.available || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
+              <span class="c-999">≈ {{ translateByRate(holding.available) | fixed(valueScale) }} USD</span>
+
             </div>
             <!-- 保证金余额 -->
             <div class="table__tr border-bottom-1">
@@ -99,6 +101,7 @@
                 v-tooltip.top-center="{html: true, content: $t('contract_margin_balance_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help border_bottom_dash">{{ $t('contract_margin_balance') }}</span>
               <span class="c-333">{{ (marginBalance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
+              <span class="c-999">≈ {{ translateByRate(marginBalance) | fixed(valueScale) }} USD</span>
             </div>
             <!-- 可用余额 -->
             <div class="table__tr">
@@ -106,6 +109,7 @@
                 v-tooltip.top-center="{html: true, content: $t('contract_avab_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help border_bottom_dash">{{ $t('withdraw_avlb') }}</span>
               <span class="c-333">{{ (holding.available_balance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
+              <span class="c-999">≈ {{ translateByRate(holding.available_balance) | fixed(valueScale) }} USD</span>
             </div>
             <div class="table__btns">
               <div
@@ -135,6 +139,7 @@
                 v-tooltip.top-center="{html: true, content: $t('contract_account_rights_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help special">{{ $t('contract_account_rights') }}</span>
               <span class="c-333">{{ holding.available | fixed(valueScale) }} {{ selectPair.product_name }}</span>
+              <span class="c-999">≈ {{ translateByRate(holding.available ) | fixed(valueScale) }} USD</span>
             </div>
             <div class="table__tr right">
               <!-- 未实现盈亏 -->
@@ -142,6 +147,7 @@
                 v-tooltip.top-center="{html: true, content: $t('contract_unrealized_profit_and_loss_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help">{{ $t('unrealized_profit_and_loss') }}</span>
               <span class="c-333">{{ (holding.unrealized || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
+              <span class="c-999">≈ {{ translateByRate(holding.unrealized ) | fixed(valueScale) }} USD</span>
             </div>
             <!-- 保证金余额 -->
             <div class="table__tr right border-bottom-1 yellow">
@@ -149,6 +155,7 @@
                 v-tooltip.top-center="{html: true, content: $t('contract_margin_balance_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help">{{ $t('contract_margin_balance') }}</span>
               <span class="c-333">{{ (marginBalance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
+              <span class="c-999">≈ {{ translateByRate(marginBalance) | fixed(valueScale) }} USD</span>
             </div>
             <!-- 仓位保证金 -->
             <div class="table__tr right">
@@ -156,6 +163,7 @@
                 v-tooltip.top-center="{html: true, content: $t('contract_were_margin_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help">{{ $t('warehouse_margin') }}</span>
               <span class="c-333">{{ (holding.margin_position || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
+               <span class="c-999">≈ {{ translateByRate(holding.margin_position) | fixed(valueScale) }} USD</span>
             </div>
             <!-- 委托保证金 -->
             <div class="table__tr right">
@@ -163,6 +171,7 @@
                 v-tooltip.top-center="{html: true, content: $t('contract_entrust_margin_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help">{{ $t('entrust_margin') }}</span>
               <span class="c-333">{{ (holding.margin_delegation || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
+              <span class="c-333">≈ {{ translateByRate(holding.margin_delegation) | fixed(valueScale) }} USD</span>
             </div>
             <!-- 可用余额 -->
             <div class="table__tr right border-bottom-1 yellow">
@@ -170,6 +179,7 @@
                 v-tooltip.top-center="{html: true, content: $t('contract_avab_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help">{{ $t('withdraw_avlb') }}</span>
               <span class="c-333">{{ (holding.available_balance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
+              <span class="c-999">≈ {{ translateByRate(holding.available_balance) | fixed(valueScale) }} USD</span>
             </div>
             <!-- 杠杆倍数 -->
             <div
@@ -190,6 +200,7 @@
             v-if="(holding.holding || 0) != 0">
             <contractCard
               :holding="holding"
+              :rates="rates"
             />
           </div>
         </div>
@@ -208,6 +219,7 @@ import tickTableMixin from "@/mixins/fund-contract-tick";
 import dealSocketMixins from '@/mixins/deal-socket-mixins'
 import contractCard from './contract-card'
 import transferModal from './transfer-modal'
+import {bigTimes} from '@/utils/handleNum'
 /**
  *
 currency 币名
@@ -263,7 +275,8 @@ export default {
         // },
       ],
       unit: null,
-      loading: false
+      loading: false,
+      rates:{}
     }
   },
   computed: {
@@ -530,6 +543,9 @@ export default {
     await this.getPairs()
     // this.getContractBalanceByPair()
     this.getContractBalanceList()
+    
+    const res = await service.getRates({currency:'BTC'})
+    this.rates = res.data.BTC
   },
   mounted() {
     // this.initChart()
@@ -538,6 +554,11 @@ export default {
     }
   },
   methods: {
+    translateByRate(value){
+      if(!this.rates||!this.rates['USD'])return
+      
+      return bigTimes([this.rates['USD'],value])
+    },
     amounts() {
       this.amountNumber = 21321
     },

@@ -1,10 +1,6 @@
 <template>
-  <div
-    v-scroll-load="loadMore"
-    class="history_table_container">
-    <table
-      v-show="!isFirst"
-      class="table scroll--body mb-10">
+  <div v-scroll-load="loadMore" class="history_table_container">
+    <table v-show="!isFirst" class="table scroll--body mb-10">
       <tr class="tr th pt-15">
         <th
           v-for="header in headers"
@@ -51,57 +47,35 @@
         </tr>
       </tbody>
     </table>
-    <!-- 仓位tab -->
-    <div
-      v-if="isFirst && isLogin && holdingList">
+              
+    <div v-if="isFirst && isLogin && holdingList">
       <div v-for="(cholding,idx) in holdingList" :key="idx" class="holding-box">
-        <div
-          v-if="cholding.holding && cholding.holding != 0"
-          class="werehouse-box"
-        >
+        <!-- <div v-if="cholding.holding && cholding.holding != 0" class="werehouse-box" >
           <div class="currency-col flex-column">
-            <!-- <p>{{ $t('contract_' + symbol.name) }} </p> -->
-            <!-- <p>{{ $t('contract_FUTURE_' + cholding.currency) }} </p> -->
             <p> {{ $t('FUTURE_&USD', {currency: cholding.currency.replace('USD','')} ) }}</p>
-            <p
-              :class="{'color-up': cholding.holding > 0, 'color-down':cholding.holding < 0}"
-              class="mt-9"> {{ cholding.holding > 0 ? $t('contract_action_button_up_r') : $t('contract_action_button_down_r') }} </p>
+            <p :class="{'color-up': cholding.holding > 0, 'color-down':cholding.holding < 0}" class="mt-9"> {{ cholding.holding > 0 ? $t('contract_action_button_up_r') : $t('contract_action_button_down_r') }} </p>
           </div>
           <div class="equal-col">
             <div class="col__row mb-10">
-              <span
-                v-tooltip.top-center="{html: true, content: $t('contract_current_werehouse_poi_tips'), classes: 'contract'}"
-                class="label">{{ $t('contract_current_werehouse_poi') }}</span> <span
-                  :class="{'color-up': cholding.holding > 0, 'color-down':cholding.holding < 0}"
-                  class="value">{{ cholding.holding }}</span>
+              <span v-tooltip.top-center="{html: true, content: $t('contract_current_werehouse_poi_tips'), classes: 'contract'}" class="label">{{ $t('contract_current_werehouse_poi') }}</span>
+              <span :class="{'color-up': cholding.holding > 0, 'color-down':cholding.holding < 0}" class="value">{{ cholding.holding }}</span>
             </div>
             <div class="col__row mb-13">
-              <span
-                v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_value_tips'), classes: 'contract'}"
-                class="label">
+              <span v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_value_tips'), classes: 'contract'}" class="label">
                 {{ $t('contract_history_postion_header_value') }}</span>
-              <span class="value">{{ cholding.value | fixed(cholding.pairInfo.value_scale || 4) }}</span>
+              <span class="value">{{ cholding.value | fixed(cholding.pairInfo.value_scale || 4) }} btc</span>
             </div>
             <div class="col__row">
-              <!-- 开仓价格 -->
-              <span
-                v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_avg_tips'), classes: 'contract'}"
-                class="label">{{ $t('contract_history_postion_header_avg') }}</span> <span class="value">{{ cholding.price | round(cholding.pairInfo.price_scale || 2) }}</span>
+              <span v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_avg_tips'), classes: 'contract'}" class="label">{{ $t('contract_history_postion_header_avg') }}</span> <span class="value">{{ cholding.price | round(cholding.pairInfo.price_scale || 2) }}</span>
             </div>
           </div>
           <div class="equal-col">
             <div class="col__row mb-10">
-              <span
-                v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_force_tips'), classes: 'contract'}"
-                class="label">{{ $t('contract_history_postion_header_force') }}</span>
-              <span class="value" >
-                {{ (cholding.liq_price || 0) | round(cholding.pairInfo.price_scale || 2) }}
-              </span>
+              <span v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_force_tips'), classes: 'contract'}" class="label">{{ $t('contract_history_postion_header_force') }}</span>
+              <span class="value" > {{ (cholding.liq_price || 0) | round(cholding.pairInfo.price_scale || 2) }} </span>
             </div>
             <div class="col__row mb-10">
-              <span
-                v-tooltip.top-center="{html: true, content: $t('contract_mark_price_tips_table'), classes: 'contract'}"
-                class="label">{{ $t('contract_mark_price') }}</span> <span class="value">{{ cholding.markPrice | round(cholding.mark_scale || 2) }}</span>
+              <span v-tooltip.top-center="{html: true, content: $t('contract_mark_price_tips_table'), classes: 'contract'}" class="label">{{ $t('contract_mark_price') }}</span> <span class="value">{{ cholding.markPrice | round(cholding.mark_scale || 2) }}</span>
             </div>
             <div class="col__row">
               <span
@@ -122,7 +96,6 @@
                   class="input-lab pointer"
                   @click="showEnsModal(cholding)"
                 >±</span>
-                <!-- {{ pairInfo.product_name }} -->
               </div>
             </div>
           </div>
@@ -130,7 +103,6 @@
             <div class="col__row mb-10">
               <span class="label">{{ $t('contract_lever_times') }}</span> <span class="value">{{ cholding.leverage == 0? $t('contract_all_in') : (cholding.leverage + 'x') }}</span>
             </div>
-            <!-- 未实现盈亏 -->
             <div class="col__row mb-10">
               <span
                 v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_delta_rate_tips'), classes: 'contract'}"
@@ -149,7 +121,6 @@
                   class="value val2">
                   {{ cholding.unrealizedlp | fixed(cholding.pairInfo.value_scale || 4) }} ({{ cholding.roelp | fixed(2) }}%)
                 </span>
-
               </i>
             </div>
             <div class="col__row">
@@ -160,74 +131,6 @@
                   class="value">{{ cholding.realized | fixed(cholding.pairInfo.value_scale || 4) }}</span>
             </div>
           </div>
-          <!-- 平仓/市价全平 -->
-          <!-- <div class="operate-col pl-16 pt-16 close"
-            v-loading='cholding.clearLoading'>
-            <div
-              class="operate-r "
-              v-if='!cholding.future_close_id'>
-              <div
-                class="col1 label t-a-center nowrap"
-                v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}">{{ $t('平仓') }}
-              </div>
-              <div class="col2" >
-                <input
-                v-model="cholding.unwindPrice"
-                min=0
-                step="0.5"
-                @input="checkInput(cholding)"
-                ref='input_price'
-                v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}"
-                class="input-num"/>
-              </div>
-              <div
-                class="btn col2"
-                :class="{'btn-disabled': !cholding.unwindPrice  }"
-
-                @click.prevent="submitOrder('limit', cholding)">
-                {{ $t('contract_action_open_short') }}
-              </div>
-            </div>
-            <div
-              class="operate-r pt-10"
-              v-if='!cholding.future_close_id'>
-              <div
-                class="col1 label t-a-center nowrap"
-                v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}">{{ $t('amount') }}
-              </div>
-              <div class="col2" >
-                <input
-                  v-model="cholding.unwindAmount"
-                  min=0
-                  step="0.5"
-                  @input="checkInput(cholding)"
-                  ref='input_price'
-                  v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}"
-                  class="input-num"/>
-              </div>
-              <div
-                class="btn  col2 full"
-                @click.prevent="submitOrder('market', cholding)"
-              >
-                {{ $t('contract_market_price') }}
-              </div>
-            </div>
-            <div class="equal"
-              v-if='!!cholding.future_close_id'>
-              <div
-                class="label mb-10 t-a-left nowrap"
-                v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}">{{ $t('contract_action_open_short') }}
-              </div>
-              <div>
-                <label class='label'
-                  v-html="$t('contract_history_close_content', { price: $big(cholding.close_position_price || 0).toFixed(cholding.pairInfo.price_scale || 2)})">
-                </label>
-                <span
-                  class="op op_cancel"
-                  @click="cancel(cholding)"/>
-              </div>
-            </div>
-          </div>  -->
           <div
             v-loading="cholding.clearLoading"
             class="operate-col pl-16 pt-16 close">
@@ -237,12 +140,6 @@
               <div
                 v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}"
                 class="label mb-10 t-a-center nowrap">{{ $t('contract_equal_werehouse_price') }}</div>
-              <!-- <input
-                type="number"
-                class="input-num mb-10"> -->
-
-              <!-- :class="{'btn-disabled': btnDisabled }" -->
-              <!-- 限价平仓 -->
               <div
                 :class="{'btn-disabled': !cholding.unwindPrice }"
                 class="btn"
@@ -254,8 +151,6 @@
             <div
               v-if="!cholding.future_close_id"
               class="equal">
-              <!-- <div class="label mb-6 t-a-center">{{ $t('contract_equal_werehouse_amount') }}</div> -->
-              <!-- v-model="state.ct.markTickList[cholding.currency]" -->
               <input
                 v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}"
                 ref="input_price"
@@ -264,14 +159,6 @@
                 step="0.5"
                 class="input-num mb-10"
                 @input="checkInput(cholding)">
-              <!-- <number-input
-                class="input-num mb-10"
-                ref='input_price'
-                @focus="checkInput(cholding)"
-                :accuracy="cholding.pairInfo.accuracy"
-                v-model="cholding.unwindPrice"
-                :scale="cholding.pairInfo.price_scale"
-              /> -->
               <div
                 class="btn full"
                 @click.prevent="submitOrder('market', cholding)"
@@ -279,7 +166,6 @@
                 {{ $t('contract_market_price') }}
               </div>
             </div>
-            <!-- yzf 2019/3/20 展示和关闭平仓委托-->
             <div
               v-if="!!cholding.future_close_id"
               class="equal">
@@ -296,6 +182,77 @@
                   @click="cancel(cholding)"/>
               </div>
             </div>
+          </div>
+        </div> -->
+
+        <div v-if="cholding.holding && cholding.holding != 0" flex="main:justify box:mean" class="reset-werehouse-box">
+          <div flex="dir:top">
+            <p> {{ $t('FUTURE_&USD', {currency: cholding.currency.replace('USD','')} ) }}</p>
+            <p :class="[cholding.holding > 0 && 'color-up'||'color-down']"> {{ cholding.holding > 0 ? $t('contract_action_button_up_r') : $t('contract_action_button_down_r') }} </p>
+            <span v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_value_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_value') }}</span>
+            <span>{{ cholding.value | fixed(cholding.pairInfo.value_scale || 4) }} BTC</span>
+            <span>≈ {{translateByRate(cholding.value) | fixed(cholding.pairInfo.value_scale || 4)}} USD</span>
+          </div>
+          <div flex="dir:top">
+            <span v-tooltip.top-center="{html: true, content: $t('contract_current_werehouse_poi_tips'), classes: 'contract'}">{{ $t('contract_current_werehouse_poi') }}</span>
+            <span :class="{'color-up': cholding.holding > 0, 'color-down':cholding.holding < 0}">{{ cholding.holding }}</span>
+            <span v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_promise_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_promise') }}</span>
+            <input class="input-num" v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_promise_tips'), classes: 'contract'}" v-model="cholding.margin_position" :class="cholding.leverage == 0 ? '' : 'pointer'" type="number" readonly @click="showEnsModal(cholding)" >
+            <!-- <span>≈ {{translateByRate(cholding.margin_position)}} USD</span> -->
+            <span>≈ {{translateByRate(cholding.margin_position)}} USD</span>
+          </div>
+          <div flex="dir:top">
+            <span class="label">{{ $t('contract_lever_times') }}</span>
+            <span class="value">{{ cholding.leverage == 0? $t('contract_all_in') : (cholding.leverage + 'x') }}</span>
+            <span v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_delta_rate_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_delta_rate') }}</span>
+            <span :class="[cholding.holding < 0 && 'color-up'||'color-down']" v-tooltip.top-center="{html: true, content: $t('contract_close_tips3'), classes: 'contract'}" >{{ cholding.unrealized | fixed(cholding.pairInfo.value_scale || 4) }} BTC ({{ cholding.roe | fixed(2) }}%)</span>
+            <span>≈ {{translateByRate(cholding.unrealized) | fixed(cholding.pairInfo.value_scale || 4)}} USD</span>
+          </div>
+          <div flex="dir:top">
+            <span v-tooltip.top-center="{html: true, content: $t('contract_mark_price_tips_table'), classes: 'contract'}">{{ $t('contract_mark_price') }}</span>
+            <span>{{ cholding.markPrice | round(cholding.mark_scale || 2) }}</span>
+            <span v-tooltip.top-center="{html: true, content: $t('contract_result_yet_tips'), classes: 'contract'}">{{ $t('contract_result_yet') }}</span>
+            <span :class="[cholding.holding < 0 && 'color-up'||'color-down']">{{ cholding.realized | fixed(cholding.pairInfo.value_scale || 4) }} BTC</span>
+            <span>≈ {{translateByRate(cholding.realized) | fixed(cholding.pairInfo.value_scale || 4)}} USD</span>
+          </div>
+          <div flex="dir:top">
+            <span v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_avg_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_avg') }}</span>
+            <span>{{ cholding.price | round(cholding.pairInfo.price_scale || 2) }}</span>
+          </div>
+          <div flex="dir:top">
+            <span v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_force_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_force') }}</span>
+            <span> {{ (cholding.liq_price || 0) | round(cholding.pairInfo.price_scale || 2) }} </span>
+          </div>
+          <div flex="dir:top cross:center" v-loading="cholding.clearLoading">
+            <template v-if="!cholding.future_close_id">
+              <span v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}">{{ $t('contract_equal_werehouse_price') }}</span>
+              <input class="input-num" v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}"
+                ref="input_price"
+                v-model="cholding.unwindPrice"
+                style="text-align:center"
+                min="0"
+                step="0.5"
+                @input="checkInput(cholding)">
+              <div class="btn" @click.prevent="submitOrder('market', cholding)" > {{ $t('contract_market_price') }} </div>
+              <div class="btn" :class="{'btn-disabled': !cholding.unwindPrice }" @click.prevent="submitOrder('limit', cholding)"> {{ $t('contract_action_open_short') }}</div>
+            </template>
+            <div
+              v-if="!!cholding.future_close_id">
+              <div v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}">{{ $t('contract_action_open_short') }}</div>
+              <div>
+                <label v-html="$t('contract_history_close_content', { price: $big(cholding.close_position_price || 0).toFixed(cholding.pairInfo.price_scale || 2)})"/>
+                <span  @click="cancel(cholding)"/>
+              </div>
+            </div>
+
+            <!-- <span v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}">{{ $t('contract_equal_werehouse_price') }}</span>
+            <span :class="{'btn-disabled': !cholding.unwindPrice }" @click.prevent="submitOrder('limit', cholding)"> {{ $t('contract_action_open_short') }}</span>
+            <input v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}"
+                ref="input_price"
+                v-model="cholding.unwindPrice"
+                min="0"
+                step="0.5"
+                @input="checkInput(cholding)"> -->
           </div>
         </div>
       </div>
@@ -404,7 +361,7 @@ import pairInfoMixins from '../statePairInfoComputedMixins'
 import stateMixins from '../stateComputedMixins'
 import orderWatcher from '@/mixins/contract-order-watcher'
 import processValue from '@/mixins/process-contract-value'
-
+import {bigTimes} from '@/utils/handleNum'
 export default {
   mixins: [
     pairInfoMixins,
@@ -454,7 +411,8 @@ export default {
       clearWarehouseLoading: false,
       // showupm: true,
       showupm: '',
-      selectedHolding: {}
+      selectedHolding: {},
+      rates:null
     }
   },
   computed: {
@@ -534,11 +492,18 @@ export default {
         }
       })
     }, 1000)
+    service.getRates({currency:'BTC'}).then(res=>{
+      this.rates = res.data.BTC
+    })
   },
   destroyed() {
     this.$eh.$off('protrade:exchange:set', this.set)
   },
   methods: {
+    translateByRate(value){
+      if(!this.rates)return 
+      return bigTimes([this.rates['USD'],value])
+    },
     tologin() {
       // console.log(this.$route.fullPath)
       utils.setStorageValue('LoginBack', '/contract.html')
@@ -1057,6 +1022,44 @@ export default {
         }
 
     }
+}
+.reset-werehouse-box{
+  color: #ACACAC;
+  line-height: 24px;
+  &>div{
+    &>*:nth-child(3){
+      margin-top:15px;
+    }
+    & .input-num{
+      width: 80px;
+      color: #01CED1;
+      background-color: #1B1B1B;
+      margin-top:2px;
+      box-sizing: border-box;
+      border-width: 0;
+      line-height: 24px;
+    }
+    &:first-child{
+      flex: none;
+      width: 150px;
+      // text-align: right;
+      margin-right: 50px;
+      &>p{
+        color: $primary;
+        font-size: 20px;
+        line-height: normal;
+      }
+    }
+    &>.btn{
+      width:70px;
+      height:24px;
+      line-height: 24px;
+      margin-bottom:10px; 
+      text-align: center;
+      border:1px solid rgba(9,201,137,1);
+      color: rgba(9,201,137,1);
+    }
+  }
 }
 .modal-operate-ensurance {
     min-width: 420px;

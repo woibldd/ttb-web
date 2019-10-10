@@ -1,6 +1,6 @@
 <template>
   <div class="contract-card">
-    <div class="contract-card-box"> 
+    <div class="contract-card-box" v-if="rates"> 
       <div class="contract-card-title">
         <h3>{{holding.currency}}</h3>
       </div>
@@ -8,9 +8,7 @@
         <dl class="contract-card-row">
           <dt>{{$t('fund_contract_open')}}</dt>
           <dd> 
-            <span
-              :class='{up: (holding.amount || 0) > 0, down: (holding.amount || 0) < 0}'
-            >
+            <span :class='{up: (holding.amount || 0) > 0, down: (holding.amount || 0) < 0}' >
               {{holding.amount}}  
               ({{ (holding.amount || 0) > 0 ? $t('fund_contract_up') : $t('fund_contract_down') }})
             </span>
@@ -19,21 +17,23 @@
         <dl class="contract-card-row">
           <dt>{{$t('fund_contract_result_yet')}}</dt>
           <dd>
-            <span 
-              :class='{up: (holding.realized || 0) > 0, down: (holding.realized || 0) < 0}'
-              >
+            <span :class='{up: (holding.realized || 0) > 0, down: (holding.realized || 0) < 0}' >
               {{holding.realized | fixed(8)}} BTC
             </span>
+            <div :class='{up: (holding.realized || 0) > 0, down: (holding.realized || 0) < 0}' >
+              {{translateByRate(holding.realized)}} USD
+            </div>
           </dd>
         </dl>  
         <dl class="contract-card-row">
           <dt>{{$t('fund_contract_result_unrealized')}}</dt>
           <dd>
-            <span
-              :class='{up: $big(holding.unrealized || 0).gt(0), down: $big(holding.unrealized || 0).lt(0)}'
-              >
+            <span :class='{up: $big(holding.unrealized || 0).gt(0), down: $big(holding.unrealized || 0).lt(0)}' >
               {{holding.unrealized | fixed(8)}} BTC
             </span>
+            <div :class='{up: $big(holding.unrealized || 0).gt(0), down: $big(holding.unrealized || 0).lt(0)}' >
+              {{translateByRate(holding.unrealized) | fixed(8)}} USD
+            </div>
           </dd>
         </dl>   
       </div>
@@ -42,16 +42,25 @@
 </template>
 
 <script>
+import {bigTimes} from '@/utils/handleNum'
 export default {
   props: {
     holding : {
       type: Object,
       default: {}
+    },
+    rates : {
+      type: Object,
+      default: ()=>null
     }
   }, 
-  created() {
-    console.log({h: this.holding})
-  }
+  methods: {
+    translateByRate(value){
+      if(!this.rates)return 
+      console.log(this.rates['USD'],value);
+      return bigTimes([this.rates['USD'],value],8)
+    },
+  },
 }
 </script>
 
