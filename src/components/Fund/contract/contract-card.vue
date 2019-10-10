@@ -62,8 +62,7 @@ export default {
   },
   methods: {
     translateByRate (value) {
-      if (!this.rates) return
-      console.log(this.rates['USD'], value)
+       if (!this.rates || !this.rates['USD']) return
       return bigTimes([this.rates['USD'], value], 8)
     }
   }
