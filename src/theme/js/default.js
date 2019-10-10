@@ -6,15 +6,15 @@ module.exports = {
   locales: ['en', 'zh-CN', 'zh-HK', 'ko'],
   themeName: 'default',
   companyName: 'IXX.COM',
-  exchangeName: 'IXX | 数字资产交易共同体',
+  exchangeName: 'IXX | Digital assets trading community',
   exchangeNameConfig: {
     'zh-CN': 'IXX | 数字资产交易共同体',
     'zh-HK': 'IXX | 數字資產交易共同體',
     en: 'IXX | Digital assets trading community',
     ko: 'IXX | 수자 재산 거래 공동체'
   },
-  keywords: 'IXX,比特币,比特币交易,以太坊,区块链,共识,自由联合,数字资产交易所',
-  description: 'IXX全球首家一站式免费上币数字资产服务中心，安全、公正、透明',
+  keywords: 'IXX,比特币,比特币交易,以太坊,区块链,共识,自由联合,数字资产交易所,BTC,ETH,Block chain,Bitcoin Trading',
+  description: 'IXX | The world\'s first one-stop service center on digital currency assets, secure, fair and transparent.',
   shortcut: '',
   supportMail: 'support@ixx.com',
   hrMail: 'hr@ixx.com',

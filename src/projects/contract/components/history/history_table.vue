@@ -349,7 +349,7 @@
           >{{ $t('contract_reload') }}</a>
         </div>
       </div>
-    </div>
+    </div> 
   </div>
 </template>
 <script>

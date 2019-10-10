@@ -6,7 +6,7 @@
       </div>
       <div class="fund-items-content">
         <div class="fund-item-row mb-14">
-          <div class="row__label">{{ $t('currency') }}</div>
+          <div class="row__label">{{ $t('coin') }}</div>
           <div class="row__value">
             <el-select
               v-model="selectCoin"
@@ -53,7 +53,7 @@
           </div>
         </div>
         <div class="fund-item-row mb-14">
-          <div class="row__label">{{ $t('withdraw_addr') }}</div>
+          <div class="row__label">{{ $t('fund.address.address') }}</div>
           <div class="row__value">
             <input
               v-model="address"
@@ -146,7 +146,7 @@ export default {
       hasMemo: false,
       header: [
         { key: 'currency', title: this.$t('fees_name') },
-        { key: 'address', title: this.$t('withdraw_addr') },
+        { key: 'address', title: this.$t('fund.address.address') },
         { key: 'description', title: this.$t('note') }
       ],
       operate: { key: 'operate', title: this.$t('operation') },

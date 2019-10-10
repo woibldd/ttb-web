@@ -182,11 +182,11 @@
               <span class="c-999">≈ {{ translateByRate(holding.available_balance) | fixed(valueScale) }} USD</span>
             </div>
             <!-- 杠杆倍数 -->
-            <div
+            <!-- <div
               class="table__tr right c-999"
               v-if="holding.margin_delegation">
               {{ $t('contract_fund_usee_lever', {per: holding.margin + '%', lever: $big(holding.leverage || 0).toFixed(2)}) }}
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -538,7 +538,12 @@ export default {
       symbol: '$',
       scale: 4
     } ]
-    this.unit = this.currencyList[0]
+    
+    if (state.locale === "zh-CN"){
+      this.unit = this.currencyList[0]
+    } else {
+      this.unit = this.currencyList[1]
+    }   
     await this.getAllRate()
     await this.getPairs()
     // this.getContractBalanceByPair()

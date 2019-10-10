@@ -57,9 +57,27 @@
           :to="'/myorder-new/pairs'"
           class="my-fund-operate">{{ $t('fund_trading_bill') }}</router-link>
       </div> -->
-    </div>
+    </div> 
+    <div>
+        <div class="pairs-search">
+          <div class="search-box">
+            <input
+              type="text" 
+              v-model="search">
+            <icon
+              class="ml-5"
+              name="home-search"/>
+          </div>
+          <div class="ml-20">
+            <el-tooltip :content="tipContent" placement="bottom">
+              <el-checkbox 
+                v-model="hideSmall">{{ $t('fund_my_assets_hide')}}</el-checkbox> 
+            </el-tooltip>
+          </div>
+        </div> 
+      </div>
     <div  v-if="activeTab === 'trading_account'" class="my-fund-content">  
-      <el-table :empty-text=" $t('no_data') " :data="tableData" class="fund-coin-pool">
+      <el-table :empty-text=" $t('no_data') " :data="showList" class="fund-coin-pool">
         <el-table-column
           v-for="(hd, idx) in header"
           :key="idx"
@@ -140,7 +158,7 @@
                   pair: scope.row.pairs[0].name
                 }
               }"
-              class="my-fund-operate pr-20"
+              class="my-fund-operate"
             >{{ $t('asset_trading') }}</router-link>
             <el-dropdown size="small" 
               v-else>
@@ -285,6 +303,7 @@
     name: 'MyFund',
     data () {
       return {
+        search: "",
         tableData: [],
         plusMillionUsdt: false,
         millionUsdtAmount: 1000000,
@@ -322,7 +341,7 @@
         unit: {},
         rates: {},
         pairList: [],
-
+        hideSmall: false, 
         activeTab:'trading_account'
       }
     },
@@ -342,6 +361,23 @@
       }
     },
     computed: {
+      showList() {
+        let list = this.tableData 
+        list =  _.filter(list, pair => { 
+          return pair.currency.toUpperCase().indexOf(this.search.toUpperCase()) > -1  
+        }) 
+        if (this.hideSmall) {  
+          list =  _.filter(list, pair => { 
+            if (this.unit.name === 'CNY'){
+              return this.$big(pair.estValue || 0).gt(50)
+            }
+            else {
+              return this.$big(pair.estValue || 0).gt(10)
+            }
+          }) 
+        }
+        return list
+      },
       showHistory () {
         return this.$route.name === 'history'
       },
@@ -401,10 +437,23 @@
       },
       myRemainTotal () {
         return (this.myPower.power || 0) - (this.myPower.amount || 0)
+      },
+      tipContent() {
+        if (this.unit.name === 'CNY') {
+          return  this.$t('fund_my_assets_hide_tip') + '50CNY'
+        }
+        else {
+          return this.$t('fund_my_assets_hide_tip') + '10USD'
+        }
       }
     },
     async created () { 
-      this.unit = this.currencyList[0]
+      
+      if (state.locale === "zh-CN"){
+        this.unit = this.currencyList[0]
+      } else {
+        this.unit = this.currencyList[1]
+      }  
       let res = await service.getAllRate() 
       if (!res.code && !!res.data) {
         this.rates = res.data;

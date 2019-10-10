@@ -4,7 +4,7 @@
       :class="[state.locale]"
     >
       <swiper :options="swiperOption" ref="mySwiper">
-        <swiper-slide>
+        <swiper-slide v-if="banner.length > 0">
           <!--<div class="dot-item-list">-->
             <!--<div class="item-list-banner" v-for="(item, index) in banner" :key="index">-->
               <!--<a :href="item.url" target="_blank">-->
@@ -29,7 +29,7 @@
             </swiper>
           </div>
         </swiper-slide>
-        <swiper-slide>
+        <swiper-slide v-if="swipeBanner.length > 0">
           <swiper :options="swiperOptions">
             <swiper-slide v-for="(item, index) in swipeBanner" :key="index">
               <div class="normal-item-list">
@@ -201,7 +201,7 @@ export default {
 		updated() {
   			this.swiper.init();
     }
-};
+}
 </script>
 
 <style lang="scss" rel="stylesheet/scss">

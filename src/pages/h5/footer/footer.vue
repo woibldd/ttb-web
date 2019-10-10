@@ -151,13 +151,13 @@
         </a>
         <a
           class="contact-item-wrapper mr-20 pointer"
-          href='https://twitter.com/IXX73784665'>
+          href='https://twitter.com/IXX_Official'>
           <icon
             class="contact-item"
             name="footer-twitter"/>
         </a>
         <a
-          href="mailto:service@IXX.COM"
+          href="mailto:support@ixx.com"
           class="contact-item-wrapper mr-20 pointer">
           <icon
             class="contact-item"
@@ -220,7 +220,7 @@ export default {
     },
     requestLink() {
       if (this.state.userInfo && this.state.theme.themeName === 'default') {
-        return process.env.BASE_API + 'ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
+        return process.env.BASE_API + '/ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
       } else {
         return this.state.theme.request[this.state.locale] || this.request.theme.help.en
       }

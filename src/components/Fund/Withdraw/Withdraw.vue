@@ -8,7 +8,7 @@
     </div>
     <div class="fund-items-content">
       <div class="fund-item-row">
-        <div class="row__label">{{ $t('currency') }}</div>
+        <div class="row__label">{{ $t('coin') }}</div>
         <div class="row__value">
           <el-select
             style="width: 440px;"
@@ -191,8 +191,7 @@ class="up-limit pointer ml-5">{{ $t('transfer_all') }}</a>
           :label="$t('withdraw_confirm')"/>
       </div>
       <ul
-        class="fund-item-other mt-25 text-des"
-        style="padding-left: 102px">
+        class="fund-item-other mt-25 text-des">
         <li>  {{ $t('withdraw_hint_delay') }}</li>
         <li>  {{ $t('withdraw_hint_check',{num: selectCoin.min_review_amount ,coin: selectCoin.currency}) }}</li>
         <li>  {{ $t('watch_tips') }}</li>

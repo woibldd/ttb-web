@@ -8,9 +8,9 @@
         :class="{active: pair.name === state.ct.pair, 'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}"
         v-for="pair in list"
         :key="pair.name"
-      >
+      > 
         <span class="pair-name">{{ $t('FUTURE_&USD', {currency: pair.product_name} ) }}</span>
-        <p class="price mt-10">{{ pair.price || '0' | fixed(pair.price_scale) }} <i
+        <p class="price mt-10">{{ pair.delta || '0' | fixed(2) }} % <i
           class="iconfont arrow"
           :class="{'arrow-up': getDelta(pair.tick) > 0, 'arrow-down': getDelta(pair.tick) < 0}"
         /></p> 
@@ -49,6 +49,10 @@
             <span v-if="pairInfo.currency==='BTCUSD'" class="info-value default" >{{ markPrice | fixed(2)  }}</span>
             <span v-else class="info-value default" >{{ markPrice | fixed(pairInfo.price_scale || 2)  }}</span>
           </div>
+          
+          <div class="info-row">
+            <span class="info-value default">&nbsp;</span>
+          </div> 
         </div>
         <!-- BLOCK 3 -->
         <div class="column flex flex-start ml-15">
@@ -58,15 +62,12 @@
               class="info-value"
             >{{ getDelta(tick) + '%' }}</span>
           </div>
-          <div class="info-row">
+          <!-- <div class="info-row">
             <span class="info-field">{{ $t('homechart_24h_change_value') }}： </span>
             <span
               class="info-value"
             >{{ tick.increment_24h  | fixed(pairInfo.price_scale || 2)  }}</span>
-          </div>
-        </div>
-        <!-- BLOCK 4 -->
-        <div class="column flex flex-start ml-15">
+          </div>-->
           <div class="info-row">
             <span class="info-field">{{ $t('homechart_24h_v') }}： </span>
             <span class="info-value default" >{{ tick.volume_24h | pretty }} {{ $t(unit) }}</span>
@@ -75,6 +76,22 @@
             <span
               class="info-value default"> ≈{{ volumnValue | thousand }} BTC</span>
           </div>
+        </div>
+        <!-- BLOCK 4 -->
+        <div class="column flex flex-start ml-15">
+          <div class="info-row">
+            <span class="info-field">{{ $t('contract_page.pair_nav.24h_h') }}： </span>
+            <span class="info-value default" >{{ tick.highest_24h | fixed(pairInfo.price_scale || 2)  }} </span>
+          </div>
+          <div class="info-row">
+            <span class="info-field">{{ $t('contract_page.pair_nav.24h_l') }}： </span>
+            <span
+              class="info-value default"> {{ tick.lowest_24h | fixed(pairInfo.price_scale || 2) }} </span>
+          </div> 
+          
+          <div class="info-row">
+            <span class="info-value default">&nbsp;</span>
+          </div> 
         </div>
         <div  class="guide-link" v-show="link">
           <router-link :to="{ path: 'guide' }" >
@@ -86,7 +103,7 @@
         <img @click="link = false" src="@/assets/quxiao.png" width="12" style="    position: relative;left: -4px;top: -20px;cursor: pointer;"></div>
 
       </div>
-      <div class="pair-info-bottom flex-lr mt-17">
+      <div class="pair-info-bottom flex-lr">
         <div class="pair-info-left flex-lr">
           <div class="info-row">
             <span class="info-field">{{ $t('contract_fee_rate') }}： </span>
@@ -225,6 +242,7 @@ export default {
       .column {
         justify-content: space-between;
         min-width: 130px;
+        height: 55px;
       }
       .info-title-block {
         background:$contract-block-active-bg;

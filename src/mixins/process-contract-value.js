@@ -38,17 +38,34 @@ const processValue = {
       if (key === 'revert') {
         value = this.$t('contract_assign_revert')
       }
+
+      console.log('contract_assigning_undealcontract_assigning_undealcontract_assigning_undealcontract_assigning_undeal')
+      let context = {}
       // 格式化状态
       if (key === 'state' || key === 'status') {
-        const context = {
-          1: 'contract_assigning_undeal',
-          2: 'contract_assigning_deal_part',
-          3: 'contract_all_dealed',
-          4: 'order_sts_canceled',
-          5: 'order_sts_partial',
-          6: 'order_sts_post_rm',
-          7: 'order_sts_partial'
-        }[value] || 'Unknown'
+        if (this.name === "contract_history_del_current")
+        {
+          context = {
+            1: 'contract_page.history.active.contract_assigning_undeal',
+            2: 'contract_assigning_deal_part',
+            3: 'contract_all_dealed',
+            4: 'order_sts_canceled',
+            5: 'order_sts_partial',
+            6: 'order_sts_post_rm',
+            7: 'order_sts_partial'
+          }[value] || 'Unknown'
+        }
+        else {
+          context = {
+            1: 'contract_page.history.stop_loss.contract_assigning_undeal',
+            2: 'contract_assigning_deal_part',
+            3: 'contract_all_dealed',
+            4: 'order_sts_canceled',
+            5: 'order_sts_partial',
+            6: 'order_sts_post_rm', 
+            7: 'order_sts_partial'
+          }[value] || 'Unknown'
+        }
         value = this.$t(context)
         // switch (value) {
         //   case 1:
@@ -165,6 +182,10 @@ const processValue = {
           value = this.$big(row.price).round(4, down).toString().toString()
         }
         // if (row.type === 4 || row.type === 6)value = '--'
+      }
+
+      if (key === "executed_amount") { 
+        value = row["executed"] + "/" + row["amount"]
       }
 
       if (key === 'fee_rate') {

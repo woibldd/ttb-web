@@ -34,6 +34,7 @@
       </div>
       <el-table :empty-text=" $t('no_data') " :data="showList" class="fund-coin-pool">
         <el-table-column v-for="(hd, idx) in header" :key="idx" :prop="hd.key" 
+          style="width:100px;"
           :label="hd.title">
           <template slot-scope="scope">
             <span v-if="hd.key === 'currency'">
@@ -44,11 +45,26 @@
             <span v-else>{{ scope.row[hd.key] || 0 | fixed(8) }}</span>
           </template>
         </el-table-column>
-
+        <el-table-column>
+          <template slot-scope="scope"> 
+            <template v-if="scope.row.currency==='USDT'">
+              <label class="my-fund-label"
+                v-if="is_nodes === false"
+                @click="nodeBuy"
+                v-tooltip.top="{html: true, content: $t('fund_assets_node_buy_tip'), classes: 'assets'}">
+                {{$t('fund_assets_node_buy')}}
+              </label>
+              <label class="my-fund-label dis-my-fund-label"
+               v-else>
+                {{$t('fund_assets_subscribed')}}
+              </label> 
+            </template>
+          </template> 
+        </el-table-column>
         <el-table-column
           header-align="right"
           align="right"
-          min-width="230px"
+          min-width="400px" 
           :label="operate.title"
         >
           <template slot-scope="scope">
@@ -92,7 +108,7 @@
                   pair: scope.row.pairs
                 }
               }"
-              class="my-fund-operate"
+              class="my-fund-operate" 
             >{{ $t('asset_trading') }}</router-link>
           </template>
         </el-table-column>

@@ -265,18 +265,18 @@ export const routes = [
     },
     component: MyOrder
   },
-  {
-    path: '/fee',
-    // name: 'Fee',
-    meta: {
-      auth: false,
-      nav: true,
-      footer: true,
-      class: 'dark',
-      mobileNav: isMobile
-    },
-    component: Fee
-  },
+  // {
+  //   path: '/fee',
+  //   // name: 'Fee',
+  //   meta: {
+  //     auth: false,
+  //     nav: true,
+  //     footer: true,
+  //     class: 'dark',
+  //     mobileNav: isMobile
+  //   },
+  //   component: Fee
+  // },
   // {
   //   path: '/Guide',
   //   name: 'Guide',

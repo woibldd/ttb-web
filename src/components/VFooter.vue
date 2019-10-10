@@ -16,24 +16,29 @@
             src="../assets/ixx_kefu_big.jpg">
           <p class="footer_ewm_ltxt">{{ $t('footer_contract_desc') }}</p>
         </div>
-        <!--
+        
+        <div
+          class="lt"> 
+          <p class="footer_explain_txt">{{ $t('home.footer.explain') }}</p>
+        </div>
+        <!--         
         <div
           class="lt"
           v-if="!showEnTips">
           <img
             class="footer_ewm"
-            src="../assets/ewm_by.png">
+            src="../assets/ixx_kefu_big.jpg">
           <p class="footer_ewm_ltxt">{{ $t('footer_contract_jb') }}</p>
-        </div>
-        <div
+        </div> -->
+        <!-- <div
           class="lt"
           v-if="showEnTips">
           <img
             class="footer_ewm"
             src="../assets/ewm_en.png">
           <p class="footer_ewm_ltxt">{{ $t('footer_contract_desc') }}</p>
-        </div>
-        <div
+        </div> -->
+        <!-- <div
           class="lt"
           v-if="showEnTips">
           <img
@@ -53,7 +58,7 @@
             :href="requestLink"
             target="_blank">{{ $t('footer_request') }}</a>
           <a
-            href="http://ixofficial.mikecrm.com/kl7CuJZ"
+            href="http://ixxwenjuan.mikecrm.com/kl7CuJZ"
             target="_blank">{{ $t('footer_application_coin') }}</a>
         </div>
         <div class="footer_ct">
@@ -83,13 +88,15 @@
         <div class="hg"/>
         <div class="right-bottom">
           <div class="bottom-txt bot-la">
-            <p class="footer_ltxt">{{ $t('footer_services_email') }}：service@ixx.com</p>
-            <p class="footer_ltxt">{{ $t('footer_bussness') }}：business@ixx.com</p>
+            <p class="footer_ltxt">{{ $t('footer_services_email') }}：support@ixx.com</p>
+            <p class="footer_ltxt">{{ $t('footer_bussness') }}：business@ixx.com</p> 
+            <p class="footer_ltxt">{{ $t('home.footer.affiliate') }}</p>
           </div>
           <div class="bottom-txt bot-lb">
             <div class="contact-list">
               <a
                 class="contact-item-wrapper pointer"
+                target="_blank"
                 href=' https://www.facebook.com/profile.php?id=100040054419479'>
                 <icon
                   class="contact-item"
@@ -97,13 +104,15 @@
               </a>
               <a
                 class="contact-item-wrapper pointer"
-                href='https://twitter.com/ExchangeIxx'>
+                target="_blank"
+                href='https://twitter.com/IXX_Official'>
                 <icon
                   class="contact-item"
                   name="footer-twitter"/>
               </a>
               <a
-                href="mailto:service@ixx.com"
+                href="mailto:support@ixx.com"
+                target="_blank"
                 class="contact-item-wrapper pointer">
                 <icon
                   class="contact-item"
@@ -118,6 +127,7 @@
                   src="../assets/pic-contact-wx.png">
               </div>
               <a
+                target="_blank"
                 :href="showEnTips ? 'https://t.me/ixxofficial' : 'https://t.me/ixxofficial'"
                 class="contact-item-wrapper pointer">
                 <icon
@@ -133,11 +143,20 @@
                   src="../assets/pic-contact-biyong.png">
               </div>
               <a
+                target="_blank"
                 href="https://www.instagram.com/ixxexchange/"
                 class="contact-item-wrapper pointer">
                 <icon
-                  class="contact-item "
+                  class="contact-item"
                   name="footer-Instagram"/>
+              </a>
+              <a
+                target="_blank"
+                href="https://www.linkedin.com/in/ixx-digital-assets-trading-community-134877194/"
+                class="contact-item-wrapper pointer">
+                <icon
+                  class="contact-item "
+                  name="footer-linkedin"/>
               </a>
             </div>
             <p class="copyright">Copyright © 2019 ixx.com</p>
@@ -168,11 +187,12 @@ export default {
       return this.state.theme.help[this.state.locale] || this.state.theme.help.en
     },
     requestLink() {
-      if (this.state.userInfo && this.state.theme.themeName === 'default') {
-        return process.env.BASE_API + 'ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
-      } else {
+        //   if (this.state.userInfo && this.state.theme.themeName === 'default') {
+        //     return process.env.BASE_API + '/ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
+        //   } else {
+        //     return this.state.theme.request[this.state.locale] || this.request.theme.help.en
+        //   }
         return this.state.theme.request[this.state.locale] || this.request.theme.help.en
-      }
     },
     announcementLink() {
       return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
@@ -249,6 +269,13 @@ export default {
       color: #999999;
       line-height: 22px;
       text-align: center;
+    }
+    .footer_explain_txt {
+      margin-top: 15px;
+      text-align: left;
+      width: 280px;
+      font-size: 14px;
+      color: #fff;
     }
     .footer_logo{
       width: 176px;

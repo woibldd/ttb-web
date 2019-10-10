@@ -32,7 +32,7 @@
       <div class="ix-pannel-body flex">
         <div class="row flex-lr button-group">
           <v-btn
-            :class="[{active: currentDealType === 'limit'}]"
+            :class="['small',{active: currentDealType === 'limit'}]"
             v-tooltip.top-center="{html: true, content: $t('contract_limit_price_tips'), classes: 'contract'}"
             @click="setDealType('limit')"
             :label="$t('contract_limit_price')"
@@ -40,13 +40,13 @@
           <v-btn
             @click="setDealType('market')"
             v-tooltip.top-center="{html: true, content: $t('contract_market_price_tips'), classes: 'contract'}"
-            :class="['ml-10', {active: currentDealType === 'market'}]"
+            :class="['small','ml-10', {active: currentDealType === 'market'}]"
             :label="$t('contract_market_price')"
           />
           <v-btn
             @click="setDealType(currentOrderTypeExt)"
             class="button-limit-other relative"
-            :class="['ml-10', {active: currentDealType === currentOrderTypeExt}]"
+            :class="['big','ml-10', {active: currentDealType === currentOrderTypeExt}]"
             :label="$t(currentOrderTypeExt)"
           >
             <icon slot="btn-right" name="arrow-down-yellow" class="arrow-down-yellow"/>
@@ -98,7 +98,7 @@
                 <div
                   class="label"
                   v-tooltip.top-center="{html: true, content: $t('contract_price_tips'), classes: 'contract'}"
-                >{{ $t('price') }}</div>
+                >{{ $t('contract_page.order_action.price') }}</div>
                 <div class="content">
                   <!-- 价格 -->
                   <currency-input
@@ -470,13 +470,13 @@
             >{{ mmModal.label === $t('order_side_buy') ? costValueBuyNew : costValueSellNew }} BTC</div>
           </div>
           <div class="table__tr c-fff">
-            <div class="col col1">{{ $t('withdraw_avlb') }}</div>
+            <div class="col col1">{{ $t('contract_page.order_action.modal.available') }}</div>
             <div
               class="col"
             >{{ balance.available_balance | round(pairInfo.value_scale || 4) }} BTC</div>
           </div>
           <div class="table__tr c-fff">
-            <div class="col col1">{{ $t('contract_pos_after_deal') }}</div>
+            <div class="col col1">{{ $t('contract_page.order_action.modal.position') }}</div>
             <div class="col">{{ currentHodingAmount }}</div>
           </div>
           <div class="table__tr c-fff">
@@ -485,12 +485,12 @@
           </div>
           <div class="table__tr c-fff">
             <!-- 预计强平价格 -->
-            <div class="col col1">{{ $t('contract_expect_equal_price') }}</div>
+            <div class="col col1">{{ $t('contract_page.order_action.modal.liq_price') }}</div>
             <div class="col">{{ exchangeDir === 'BUY' ? liqBuyPrice : liqSellPrice | fixed(pairInfo.price_scale || 4) }}</div>
           </div>
           <div class="table__tr c-fff">
             <!-- 差异 -->
-            <div class="col col1">{{ $t('contract_diff_expect_force') }}</div>
+            <div class="col col1">{{ $t('contract_page.order_action.modal.difference') }}</div>
             <div class="col">
               <span class="c-primary">{{ liqDiffRate | fixed(2) }}%</span>
               ({{ liqDiff | fixed(pairInfo.price_scale || 4)  }})
@@ -2518,13 +2518,18 @@ export default {
   .button-group {
     justify-content: space-between;
     .btn {
-      flex: 1;
+      // flex: 1;
       background: $contract-block-active-bg;
-      transition: border 0.2s ease-in-out;
-
+      transition: border 0.2s ease-in-out; 
       &.active {
         color: $primary;
         border: 1px solid $primary;
+      }
+      &.small {
+        width: 70px;
+      }
+      &.big {
+        width: 120px;
       }
     }
     .button-limit-other {
@@ -2635,13 +2640,17 @@ export default {
           float: left;
           box-sizing: border-box;
           min-height: 20px;
-          width: 16%;
+          line-height: 32px;
+          width: 26%;
         }
         .content {
           position: relative;
-          width: 80%;
+          width: 70%;
           float: right;
           box-sizing: border-box;
+          // .trade {
+          //   width: 170px;
+          // }
           /deep/ .currency-input {
             .input {
               border: 1px solid #666666;
@@ -2664,7 +2673,7 @@ export default {
         .label {
           line-height: 32px;
           color: #acacac;
-          width: 16%;
+          width: 26%;
         }
       }
       .li-volume {

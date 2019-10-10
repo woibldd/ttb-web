@@ -7,7 +7,7 @@
     </div>
     <div class="fund-items-content" style="margin-left:0">
       <div class="fund-item-row mb-14">
-        <div class="row__label">{{$t('currency')}}</div>
+        <div class="row__label">{{$t('transfer_currency')}}</div>
         <div>
           <el-select v-model="selectCoin"
             :placeholder="$t('please_choose')"
@@ -506,13 +506,13 @@
 </script>
 <style lang="scss" scoped>
   .min-input{
-    width: 120px;
+    width: 160px;
   }
   .max-input{
-    width: 288px;
+    width: 335px;
   }
   .number-input {
-    width: 286px;
+    width: 333px;
     line-height: 37px;
     border: 1px solid #DCDFE6;
     border-radius: 5px;
@@ -527,6 +527,6 @@
     background-color: #fff;
     cursor: pointer;
     border:none;
-    color:#aa8b61
+    color: $primary;
   }
 </style>

@@ -73,7 +73,8 @@
         </div> 
       </div>
       <el-table :empty-text=" $t('no_data') " :data="showList" class="fund-coin-pool">
-        <el-table-column v-for="(hd, idx) in header" :key="idx" :prop="hd.key" 
+        <el-table-column v-for="(hd, idx) in header" :key="idx" :prop="hd.key"   
+          :width="hd.width"
           :label="hd.title">
           <template slot-scope="scope">
             <span v-if="hd.key === 'currency'">
@@ -84,11 +85,27 @@
             <span v-else>{{ scope.row[hd.key] || 0 | fixed(8) }}</span>
           </template>
         </el-table-column>
-
+        <!-- <el-table-column
+          width="100">
+          <template slot-scope="scope"> 
+            <template v-if="scope.row.currency==='USDT'">
+              <label class="my-fund-label"
+                v-if="is_nodes === false"
+                @click="nodeBuy"
+                v-tooltip.top="{html: true, content: $t('fund_assets_node_buy_tip'), classes: 'assets'}">
+                {{$t('fund_assets_node_buy')}}
+              </label>
+              <label class="my-fund-label dis-my-fund-label"
+               v-else>
+                {{$t('fund_assets_subscribed')}}
+              </label> 
+            </template>
+          </template> 
+        </el-table-column> -->
         <el-table-column
           header-align="right"
           align="right"
-          min-width="230px"
+          width="400"
           :label="operate.title"
         >
           <template slot-scope="scope">
@@ -132,7 +149,7 @@
                   pair: scope.row.pairs[0].name
                 }
               }"
-              class="my-fund-operate pr-20"
+              class="my-fund-operate"
             >{{ $t('asset_trading') }}</router-link>
             <el-dropdown size="small" 
               v-else>
@@ -360,14 +377,14 @@ export default {
     header () {
       return (
         state.locale && [
-          { key: 'currency', title: this.$t('fees_name') },
-          { key: 'available', title: this.$t('avlb') },
-          { key: 'locking', title: this.$t('asset_th_unavlb') },
+          { key: 'currency', title: this.$t('fees_name'), width: "100" },
+          { key: 'available', title: this.$t('avlb'), width: "120"  },
+          { key: 'locking', title: this.$t('asset_th_unavlb'), width: "120"  },
           // {key: 'amount', title: this.$t('total_count')},
           {
             key: 'estValue',
-            title:
-              this.$t('homechart_fiat') + this.unit.name
+            title: `${this.$t('homechart_fiat')}(${this.unit.name})`,
+            width: "130"
 
           }
         ]
@@ -426,7 +443,11 @@ export default {
     }
   },
   async created () {
-    this.unit = this.currencyList[0]
+    if (state.locale === "zh-CN"){
+      this.unit = this.currencyList[0]
+    } else {
+      this.unit = this.currencyList[1]
+    }
     //获取汇率
     let res = await service.getAllRate()
     if (!res.code && !!res.data) {
