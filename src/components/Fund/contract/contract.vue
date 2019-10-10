@@ -93,8 +93,10 @@
               <span
                 v-tooltip.top-center="{html: true, content: $t('contract_account_rights_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help border_bottom_dash special">{{ $t('contract_account_rights') }}</span>
-              <span class="c-333">{{ (holding.available || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
-              <span class="c-999">≈ {{ translateByRate(holding.available) | fixed(valueScale) }} USD</span>
+              <span class="c-333">{{ (holding.available || 0) | fixed(valueScale) }} {{ selectPair.product_name }} </span>
+              <span
+                class="c-999"
+                style="transform: scale(0.8);position:absolute;margin-left: 70px;">≈ {{ translateByRate(holding.available) | fixed(valueScale) }} USD</span>
             </div>
             <!-- 保证金余额 -->
             <div class="table__tr border-bottom-1">
