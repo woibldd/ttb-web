@@ -47,9 +47,7 @@ export default {
         const temGroup = _.groupBy(list, 'type')
         
         return _.filter(list, pair => {
-          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1
-            // && pair.name.toUpperCase().indexOf('GRC') < 0
-            // && pair.name.toUpperCase().indexOf('BTZ') < 0 
+          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
             && pair.type != 4
         })
       } else if (this.tabSelected === 'new') {
