@@ -5,7 +5,7 @@
       > 
       <!-- <div>{{ $t('capital_manage') }}  <span class="title__second"> <span class="pl-10 pr-10"> > </span>{{ $t('contract_account') }} </span></div> -->
       <div>
-        {{ $t('contract_account') }} 
+          {{ computedTitle }}
       </div>
       <div>
         <router-link
@@ -31,7 +31,15 @@ export default {
   computed: {
     from() {
       return this.$route.name
-    }
+    },
+    computedTitle(){
+      const obj = {
+        '/fund/hyTrade/index':this.$t('account_balance'),
+        '/fund/my/contract/history':this.$t('transaction_record'),
+        '/fund/my/contract/assets-history':this.$t('capital_record'),
+      }
+      return obj[this.$route.path]
+    },
   },
   created () {  
     console.log(this.$route.name)
