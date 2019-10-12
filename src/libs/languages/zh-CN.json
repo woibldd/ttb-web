@@ -2232,7 +2232,17 @@
   },
   "fund": {
     "withdraw": {
-      "address": "提币地址"
+      "address": "提币地址",
+      "bind_google": "绑定谷歌验证器",
+      "bind_email_or_phone": "绑定邮箱/手机",
+      "current_state": "当前状态", 
+      "bindings": "已绑定",
+      "no_bindings": "未绑定",
+      "to_verify": "去认证",
+      "to_bind": "去绑定",
+      "done": "已完成",
+      "to_deposit_tips": "提币需要您至少完成一笔任意额度充币，激活提币功能",
+      "to_deposit": "去充币"
     },
     "address": {
       "address": "地址"
@@ -2241,4 +2251,5 @@
       "address": "充币地址"
     }
   }
+
 }

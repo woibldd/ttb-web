@@ -191,7 +191,7 @@
             <p :class="[cholding.holding > 0 && 'color-up'||'color-down']"> {{ cholding.holding > 0 ? $t('contract_action_button_up_r') : $t('contract_action_button_down_r') }} </p>
             <span v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_value_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_value') }}</span>
             <span>{{ cholding.value | fixed(cholding.pairInfo.value_scale || 4) }} BTC</span>
-            <span>≈ {{translateByRate(cholding.value) | fixed(cholding.pairInfo.value_scale || 4)}} USD</span>
+            <span>≈ {{translateByRate(cholding.value) | fixed(2)}} USD</span>
           </div>
           <div flex="dir:top">
             <span v-tooltip.top-center="{html: true, content: $t('contract_current_werehouse_poi_tips'), classes: 'contract'}">{{ $t('contract_current_werehouse_poi') }}</span>
@@ -203,7 +203,7 @@
               {{cholding.margin_position | fixed(cholding.pairInfo.value_scale || 4)}} 
             </label>
             <!-- <span>≈ {{translateByRate(cholding.margin_position)}} USD</span> -->
-            <span>≈ {{translateByRate(cholding.margin_position)}} USD</span>
+            <span>≈ {{translateByRate(cholding.margin_position) | fixed(2)}} USD</span>
           </div>
           <div flex="dir:top">
             <span class="label">{{ $t('contract_lever_times') }}</span>
@@ -216,12 +216,12 @@
               <span :class="{'color-up': cholding.unrealized > 0, 'color-down': cholding.unrealized < 0}" class="value val1">
                 {{ cholding.unrealized | fixed(cholding.pairInfo.value_scale || 4) }} ({{ cholding.roe | fixed(2) }}%) 
               </span>
-              <span  class="value val1"> ≈{{translateByRate(cholding.unrealized) | fixed(cholding.pairInfo.value_scale || 4)}} USD</span>
+              <span  class="value val1"> ≈{{translateByRate(cholding.unrealized) | fixed(2)}} USD</span>
 
               <span :class="{ 'bgcolor-unp': cholding.unrealizedlp > 0, 'bgcolor-dnp': cholding.unrealizedlp < 0}"  class="value val2">
                 {{ cholding.unrealizedlp | fixed(cholding.pairInfo.value_scale || 4) }} ({{ cholding.roelp | fixed(2) }}%) 
               </span> 
-              <span  class="value val2"> ≈{{translateByRate(cholding.unrealizedlp) | fixed(cholding.pairInfo.value_scale || 4)}} USD</span>
+              <span  class="value val2"> ≈{{translateByRate(cholding.unrealizedlp) | fixed(2)}} USD</span>
             </i> 
           </div>
           <div flex="dir:top">
@@ -229,7 +229,7 @@
             <span>{{ cholding.markPrice | round(cholding.mark_scale || 2) }}</span>
             <span v-tooltip.top-center="{html: true, content: $t('contract_result_yet_tips'), classes: 'contract'}">{{ $t('contract_result_yet') }}</span>
             <span :class="[cholding.holding < 0 && 'color-up'||'color-down']">{{ cholding.realized | fixed(cholding.pairInfo.value_scale || 4) }} BTC</span>
-            <span>≈ {{translateByRate(cholding.realized) | fixed(cholding.pairInfo.value_scale || 4)}} USD</span>
+            <span>≈ {{translateByRate(cholding.realized) | fixed(2)}} USD</span>
           </div>
           <div flex="dir:top">
             <span v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_avg_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_avg') }}</span>

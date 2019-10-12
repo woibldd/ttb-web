@@ -38,7 +38,7 @@
             <div
               style="transform:scale(0.8)"
               :class='{up: $big(holding.unrealized || 0).gt(0), down: $big(holding.unrealized || 0).lt(0)}' >
-              {{ translateByRate(holding.unrealized) | fixed(8) }} USD
+              {{ translateByRate(holding.unrealized) }} USD
             </div>
           </dd>
         </dl>
@@ -63,7 +63,7 @@ export default {
   methods: {
     translateByRate (value) {
        if (!this.rates || !this.rates['USD']) return
-      return bigTimes([this.rates['USD'], value], 8)
+      return bigTimes([this.rates['USD'], value], 2)
     }
   }
 }

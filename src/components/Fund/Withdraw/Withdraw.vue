@@ -160,8 +160,7 @@
             />
             <span class="coin-type">
               <i> {{ selectCoin.currency }}</i>
-              <a @click="input_all"
-class="up-limit pointer ml-5">{{ $t('transfer_all') }}</a>
+              <a @click="input_all" class="up-limit pointer ml-5">{{ $t('transfer_all') }}</a>
             </span>
           </div>
           <!-- @input='checkInput' -->
@@ -239,7 +238,7 @@ class="up-limit pointer ml-5">{{ $t('transfer_all') }}</a>
         </div>
       </div>
     </v-modal>
-    <v-modal :open.sync="showLayerModal">
+     <v-modal :open.sync="showLayerModal">
       <div class="not-verified-layer">
         <div class="layer__title mb-30">{{ $t('withdraw_need_verify') }}</div>
         <div class="layer__content">
@@ -262,7 +261,7 @@ class="up-limit pointer ml-5">{{ $t('transfer_all') }}</a>
           </div>
           <div class="layer__row mt-20">
             <span class="row__label">3.
-              <span v-html="$t('complete_verified')"/>
+              <span v-html="$t('complete_verified')"></span>
             </span>
             <span
               class="row__status"
@@ -272,7 +271,61 @@ class="up-limit pointer ml-5">{{ $t('transfer_all') }}</a>
         </div>
       </div>
     </v-modal>
-
+    <!-- <v-modal :open.sync="showLayerModal">
+      <div class="not-verified-layer">
+        <div class="layer__title mb-30">{{ $t('withdraw_need_verify') }}</div>
+        <div class="layer__content">
+          <div class="layer__row_note">
+            <div class="row__label">{{ $t('withdraw_need_verify_note') }}</div>
+          </div>
+          <div class="layer__row mt-30">
+            <span class="row__label">1. {{ $t('fund.withdraw.bind_email_or_phone') }}</span>
+            <span
+              class="row__status"
+              @click="clickVerifyRow('EmailBind')"
+              :class="{'done': email_or_phone_bound}">{{ email_or_phone_bound ? $t('fund.withdraw.done') : $t('fund.withdraw.to_bind') }}</span>
+          </div>
+          <div class="layer__row mt-20">
+            <span class="row__label">2. {{ $t('fund.withdraw.bind_google') }}</span>
+            <span
+              class="row__status"
+              @click="clickVerifyRow('GoogleBind')"
+              :class="{'done': google_bound}">{{ google_bound ? $t('fund.withdraw.done') : $t('fund.withdraw.to_bind') }}</span>
+          </div>
+          <div class="layer__row mt-20">
+            <span class="row__label">3.
+              <span v-html="$t('complete_verified')"/>
+            </span>
+            <span
+              class="row__status"
+              @click="clickVerifyRow('Kyc')"
+              :class="{'done': all_bound}">{{ all_bound ? $t('done') : $t('to_verify') }}</span>
+          </div> 
+        </div>
+      </div>
+    </v-modal> -->
+    <v-modal :open.sync="showDepositModal">
+      <div class="not-verified-layer">
+        <div class="layer__title mb-30">{{ $t('withdraw_need_verify') }}</div>
+        <div class="layer__content">
+          <div class="layer__row_note">
+            <div class="row__label">{{ $t('withdraw_need_verify_note') }}</div>
+          </div>
+          <div class="layer__row mt-30">
+            <span class="row__label">1. {{ $t('fund.withdraw.bind_google') }}</span>
+            <span class="row__status"
+              @click="clickVerifyRow('GoogleBind')"
+              :class="{'done': google_bound}">{{ google_bound ? $t('fund.withdraw.done') : $t('fund.withdraw.to_bind') }}</span>
+          </div>
+          <div class="layer__row mt-20">
+            <span class="row__label">2. {{ $t('fund.withdraw.to_deposit_tips') }}</span> 
+          </div>
+          <div class="layer__row mt-20 pl-20">
+            <el-button type="primary">{{ $t('fund.withdraw.to_deposit') }}</el-button>
+          </div> 
+        </div>
+      </div>
+    </v-modal>
   </div>
 </template>
 <script>
@@ -355,6 +408,9 @@ export default {
     },
     phone_bound () {
       return this.state.userInfo && this.state.userInfo.phone
+    },
+    email_or_phone_bound() {
+      return this.state.userInfo && (this.state.userInfo.phone ||  this.state.userInfo.email)
     },
     all_bound () {
       // kyc > 2 就可以提币
