@@ -2,7 +2,7 @@
   <div class="fund-container my-fund-container contract-container">
     <div class="title-box">
       <div>
-        {{ $t('contract_account') }}
+        {{ computedTitle }}
         <span class="ml-30">
           <el-select
             v-model="unit"
@@ -345,6 +345,16 @@ export default {
         .div(this.marginBalance)
         .times(100)
         .round(0)
+    },
+    computedTitle(){
+      const obj = {
+        '/fund/hyTrade/index':this.$t('account_balance'),
+        '/fund/my/contract/history':this.$t('transaction_record'),
+        '/fund/my/contract/assets-history':this.$t('capital_record'),
+      }
+      console.log(this.$route.path,222);
+      
+      return obj[this.$route.path]
     },
     // 计算杠杆倍数
     curLever () {

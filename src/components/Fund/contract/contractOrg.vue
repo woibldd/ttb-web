@@ -2,7 +2,7 @@
   <div class="fund-container my-fund-container contract-container">
     <div class="title-box">
       <div>
-        {{ $t('contract_account') }}
+          {{ $t('capital_record') }}
         <span class="ml-30">
           <el-select
             v-model="unit"
