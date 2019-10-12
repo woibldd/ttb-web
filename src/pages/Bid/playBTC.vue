@@ -116,50 +116,26 @@ export default {
     isLogin () {
       return this.state.userInfo !== null
     },
-    mapData(){
-      // console.log(); 
-      return Array.from({length:6}).map((e,i)=>(
-        {
-          key:i+1,
-          src:require(`./assets/playBTC/${i+1}/${this.$i18n.locale.toLowerCase()}.png`),
-          dessrc:require(`./assets/playBTC/${i+1}/icon.png`),
-          text:[this.$t(`playbtcMaptext.${i+1}.title`),this.$t(`playbtcMaptext.${i+1}.describe`)],
-          tips:this.$t(`playbtcMaptext.${i+1}.tips`),
-          btntext:this.$t(`playbtcMaptext.${i+1}.btntext`)
-        }
-      ))
-      // return [
+    mapData(){ 
+      // return Array.from({length:6}).map((e,i)=>(
       //   {
-      //     key:2,
-      //     src:require('./assets/play-btc-2.png'),
-      //     dessrc:require('./assets/play-btc-2-1.png'),
-      //     text:['足球神射','足球进门，财富满盆']
-      //   },
-      //   {
-      //     key:3,
-      //     src:require('./assets/play-btc-3.png'),
-      //     dessrc:require('./assets/play-btc-3-1.png'),
-      //     text:['绝杀卡当','点位插队，赢者翻倍']
-      //   },
-      //   {
-      //     key:4,
-      //     src:require('./assets/play-btc-4.png'),
-      //     dessrc:require('./assets/play-btc-4-1.png'),
-      //     text:['疯狂二八红','多人对决 ，等你通杀']
-      //   },
-      //   {
-      //     key:5,
-      //     src:require('./assets/play-btc-5.png'),
-      //     dessrc:require('./assets/play-btc-5-1.png'),
-      //     text:['发哥百家乐','文明公正，用实力做发哥']
-      //   },
-      //   {
-      //     key:6,
-      //     src:require('./assets/play-btc-6.png'),
-      //     dessrc:require('./assets/play-btc-6-1.png'),
-      //     text:['竞猜大师','全球联赛尽收其中']
-      //   },
-      // ]
+      //     key:i+1,
+      //     src:require(`./assets/playBTC/${i+1}/${this.$i18n.locale.toLowerCase()}.png`),
+      //     dessrc:require(`./assets/playBTC/${i+1}/icon.png`),
+      //     text:[this.$t(`playbtcMaptext.${i+1}.title`),this.$t(`playbtcMaptext.${i+1}.describe`)],
+      //     tips:this.$t(`playbtcMaptext.${i+1}.tips`),
+      //     btntext:this.$t(`playbtcMaptext.${i+1}.btntext`)
+      //   }
+      // ))
+      return [{
+        key:2,
+        src:require(`./assets/playBTC/2/${this.$i18n.locale.toLowerCase()}.png`),
+        dessrc:require(`./assets/playBTC/2/icon.png`),
+        text:[this.$t(`playbtcMaptext.2.title`),this.$t(`playbtcMaptext.2.describe`)],
+        tips:this.$t(`playbtcMaptext.2.tips`),
+        btntext:this.$t(`playbtcMaptext.2.btntext`)
+      }]
+     
     },
     banners() {
       return [ 

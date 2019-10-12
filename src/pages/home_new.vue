@@ -87,6 +87,11 @@
         <div class="corp-row row-60 mb-60">
           <div v-t="'footer_investors'" class="corp-title"/>
           <div class="corp-logo">
+            <a class="link" href="http://gs.holdings/" @click.prevent>
+              <img class="logo gs" src="~@/assets/copr-logo-gs.png">
+            </a>
+          </div>
+          <div class="corp-logo">
             <a class="link" href="javascript:;" @click.prevent>
               <img class="logo may" src="~@/assets/copr-logo-may.png">
             </a>

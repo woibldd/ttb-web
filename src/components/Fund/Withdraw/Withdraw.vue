@@ -290,6 +290,7 @@ export default {
   data () {
     return {
       showLayerModal: false,
+      showDepositModal: false,
       address: '',
       allCoins: [],
       selectCoin: {},
@@ -356,25 +357,46 @@ export default {
       return this.state.userInfo && this.state.userInfo.phone
     },
     all_bound () {
-      // kyc > 0 就可以提币
+      // kyc > 2 就可以提币
       return this.state.userInfo && this.state.userInfo.lv > 0
     },
     disableBtn () {
       return !this.email_bound || !this.phone_bound || !this.all_bound
-    }
+    },
+    isDeposited () {
+      return this.state.userInfo && this.state.userInfo.deposit_state 
+    },
+    google_bound() {
+      return this.state.userInfo && this.state.userInfo.google_key_bound
+    } 
   },
   components: {vModal, countDown },
   async created () {
     await actions.getKycLv()
     await actions.updateSession()
+    // console.log({userInfo: this.state.userInfo}) 
     this.showLayerModal = !this.email_bound || !this.phone_bound || !this.all_bound
+     
+    // //有充币行为
+    // if (isDeposited){
+    //   this.showDepositModal = !this.google_bound
+    // } 
+    // //kyc2
+    // else if(all_bound) {
+    //   this.showLayerModal = !this.email_bound || !this.phone_bound || !this.all_bound
+    // }
+    // //没有充币行为且kyc=0
+    // else {
+    //    this.showDepositModal = true
+    // }
+    
     await this.getAllCoinTypes()
     this.updadeMyCoinInfo()
     this.getCoinAddress()
   },
   methods: {
     async lianSelect (coin) {
-      console.log({coin})
+      // console.log({coin})
       this.selectCoin = coin
       await this.getCoinAddress()
       this.updadeMyCoinInfo()

@@ -62,8 +62,7 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             href="javascript:;"
             class="nav_link" 
             style="padding-left:30px;"
-            @click="subscribeHandle"
-          >
+            @click="subscribeHandle">
             {{ this.$t('node_sub') }}
             <icon name="hot-red"/>
           </a>
@@ -392,6 +391,9 @@ export default {
     isTestnet() {
       return location.hostname.indexOf('ixex.pro') >= 0 || location.hostname.includes('localhost')
       // return true
+    }, 
+    isLogin () {
+      return this.state.userInfo !== null
     },
     showContract() {
       const time1 = new Date()

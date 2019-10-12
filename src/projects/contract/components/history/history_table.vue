@@ -197,7 +197,11 @@
             <span v-tooltip.top-center="{html: true, content: $t('contract_current_werehouse_poi_tips'), classes: 'contract'}">{{ $t('contract_current_werehouse_poi') }}</span>
             <span :class="{'color-up': cholding.holding > 0, 'color-down':cholding.holding < 0}">{{ cholding.holding }}</span>
             <span v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_promise_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_promise') }}</span>
-            <input class="input-num" v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_promise_tips'), classes: 'contract'}" v-model="cholding.margin_position" :class="cholding.leverage == 0 ? '' : 'pointer'" type="number" readonly @click="showEnsModal(cholding)" >
+            <label class="input-num" v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_promise_tips'), classes: 'contract'}" 
+             :class="cholding.leverage == 0 ? '' : 'pointer'" type="number" 
+             @click="showEnsModal(cholding)" >
+              {{cholding.margin_position | fixed(cholding.pairInfo.value_scale || 4)}} 
+            </label>
             <!-- <span>≈ {{translateByRate(cholding.margin_position)}} USD</span> -->
             <span>≈ {{translateByRate(cholding.margin_position)}} USD</span>
           </div>
@@ -205,8 +209,20 @@
             <span class="label">{{ $t('contract_lever_times') }}</span>
             <span class="value">{{ cholding.leverage == 0? $t('contract_all_in') : (cholding.leverage + 'x') }}</span>
             <span v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_delta_rate_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_delta_rate') }}</span>
-            <span :class="[cholding.holding < 0 && 'color-up'||'color-down']" v-tooltip.top-center="{html: true, content: $t('contract_close_tips3'), classes: 'contract'}" >{{ cholding.unrealized | fixed(cholding.pairInfo.value_scale || 4) }} BTC ({{ cholding.roe | fixed(2) }}%)</span>
-            <span>≈ {{translateByRate(cholding.unrealized) | fixed(cholding.pairInfo.value_scale || 4)}} USD</span>
+            <!-- <span :class="[cholding.holding < 0 && 'color-up'||'color-down']" v-tooltip.top-center="{html: true, content: $t('contract_close_tips3'), classes: 'contract'}" >{{ cholding.unrealized | fixed(cholding.pairInfo.value_scale || 4) }} BTC ({{ cholding.roe | fixed(2) }}%)</span>
+            <span>≈ {{translateByRate(cholding.unrealized) | fixed(cholding.pairInfo.value_scale || 4)}} USD</span> -->
+
+            <i v-tooltip.top-center="{html: true, content: $t('contract_close_tips3'), classes: 'contract'}" class="value profit" >
+              <span :class="{'color-up': cholding.unrealized > 0, 'color-down': cholding.unrealized < 0}" class="value val1">
+                {{ cholding.unrealized | fixed(cholding.pairInfo.value_scale || 4) }} ({{ cholding.roe | fixed(2) }}%) 
+              </span>
+              <span  class="value val1"> ≈{{translateByRate(cholding.unrealized) | fixed(cholding.pairInfo.value_scale || 4)}} USD</span>
+
+              <span :class="{ 'bgcolor-unp': cholding.unrealizedlp > 0, 'bgcolor-dnp': cholding.unrealizedlp < 0}"  class="value val2">
+                {{ cholding.unrealizedlp | fixed(cholding.pairInfo.value_scale || 4) }} ({{ cholding.roelp | fixed(2) }}%) 
+              </span> 
+              <span  class="value val2"> ≈{{translateByRate(cholding.unrealizedlp) | fixed(cholding.pairInfo.value_scale || 4)}} USD</span>
+            </i> 
           </div>
           <div flex="dir:top">
             <span v-tooltip.top-center="{html: true, content: $t('contract_mark_price_tips_table'), classes: 'contract'}">{{ $t('contract_mark_price') }}</span>
@@ -455,6 +471,9 @@ export default {
     },
     holdingData() {
       return this.state.ct.computeHoldingList
+    },
+    Rates() {
+      return this.state.rate.BTC
     }
   },
   watch: {
@@ -478,9 +497,13 @@ export default {
       }
     }
   },
-  created() {
+  async created() {
     this.$eh.$on('protrade:exchange:set', this.set)
     this.unwindPrice = this.transforPrice(this.markPrice)
+    
+    // await service.getRates({currency:'BTC'}).then(res=>{
+    //   this.rates = res.data.BTC
+    // })
     // 平仓价格跟随标记价格变动，但是获得一次焦点后就不再变化，
     // 在切换tab或刷新页面再重新绑定标记价格
     setTimeout(x => {
@@ -492,17 +515,15 @@ export default {
         }
       })
     }, 1000)
-    service.getRates({currency:'BTC'}).then(res=>{
-      this.rates = res.data.BTC
-    })
   },
   destroyed() {
     this.$eh.$off('protrade:exchange:set', this.set)
   },
   methods: {
     translateByRate(value){
-      if(!this.rates)return 
-      return bigTimes([this.rates['USD'],value])
+      if(!this.Rates) return  
+      // console.log({Rates: this.Rates['USD'], value: value.toString()})
+      return bigTimes([this.Rates['USD'], value], 8)
     },
     tologin() {
       // console.log(this.$route.fullPath)
@@ -1189,7 +1210,7 @@ export default {
 
 .profit {
     .val1 {
-      display: inline;
+      display: block;
     }
     .val2 {
       display: none;
@@ -1199,7 +1220,7 @@ export default {
       display: none;
     }
     .val2 {
-      display: inline;
+      display: block;
     }
   }
 }

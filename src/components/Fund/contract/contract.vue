@@ -96,7 +96,7 @@
               <span class="c-333">{{ (holding.available || 0) | fixed(valueScale) }} {{ selectPair.product_name }} </span>
               <span
                 class="c-999"
-                style="transform: scale(0.8);position:absolute;margin-left: 70px;">≈ {{ translateByRate(holding.available) | fixed(valueScale) }} USD</span>
+                style="transform: scale(0.8);position:absolute;margin-left: 90px;">≈ {{ translateByRate(holding.available) | fixed(valueScale) }} USD</span>
             </div>
             <!-- 保证金余额 -->
             <div class="table__tr border-bottom-1">
@@ -106,7 +106,7 @@
               <span class="c-333">{{ (marginBalance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
               <span
                 class="c-999"
-                style="transform: scale(0.8);position:absolute;margin-left: 70px;">≈ {{ translateByRate(marginBalance) | fixed(valueScale) }} USD</span>
+                style="transform: scale(0.8);position:absolute;margin-left: 90px;">≈ {{ translateByRate(marginBalance) | fixed(valueScale) }} USD</span>
             </div>
             <!-- 可用余额 -->
             <div class="table__tr">
@@ -116,7 +116,7 @@
               <span class="c-333">{{ (holding.available_balance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
               <span
                 class="c-999"
-                style="transform: scale(0.8);position:absolute;margin-left: 70px;">≈ {{ translateByRate(holding.available_balance) | fixed(valueScale) }} USD</span>
+                style="transform: scale(0.8);position:absolute;margin-left: 90px;">≈ {{ translateByRate(holding.available_balance) | fixed(valueScale) }} USD</span>
             </div>
             <div class="table__btns">
               <div
@@ -148,7 +148,7 @@
               <span class="c-333">{{ holding.available | fixed(8) }} {{ selectPair.product_name }}</span>
               <span
                 class="c-999"
-                style="transform: scale(0.8);position:absolute;margin-left: 70px;">≈ {{ translateByRate(holding.available,4 ) }} USD</span>
+                style="transform: scale(0.8);position:absolute;margin-left: 90px;">≈ {{ translateByRate(holding.available,4 ) }} USD</span>
             </div>
             <div class="table__tr right">
               <!-- 未实现盈亏 -->
@@ -158,7 +158,7 @@
               <span class="c-333">{{ (holding.unrealized || 0) | fixed(8) }} {{ selectPair.product_name }}</span>
               <span
                 class="c-999"
-                style="transform: scale(0.8);position:absolute;margin-left: 70px;">≈ {{ translateByRate(holding.unrealized) }} USD</span>
+                style="transform: scale(0.8);position:absolute;margin-left: 90px;">≈ {{ translateByRate(holding.unrealized) }} USD</span>
             </div>
             <!-- 保证金余额 -->
             <div class="table__tr right border-bottom-1 yellow">
@@ -168,7 +168,7 @@
               <span class="c-333">{{ (marginBalance || 0) | fixed(8) }} {{ selectPair.product_name }}</span>
               <span
                 class="c-999"
-                style="transform: scale(0.8);position:absolute;margin-left: 70px;">≈ {{ translateByRate(marginBalance) }} USD</span>
+                style="transform: scale(0.8);position:absolute;margin-left: 90px;">≈ {{ translateByRate(marginBalance) }} USD</span>
             </div>
             <!-- 仓位保证金 -->
             <div class="table__tr right">
@@ -178,7 +178,7 @@
               <span class="c-333">{{ (holding.margin_position || 0) | fixed(8) }} {{ selectPair.product_name }}</span>
               <span
                 class="c-999"
-                style="transform: scale(0.8);position:absolute;margin-left: 70px;">≈ {{ translateByRate(holding.margin_position) }} USD</span>
+                style="transform: scale(0.8);position:absolute;margin-left: 90px;">≈ {{ translateByRate(holding.margin_position) }} USD</span>
             </div>
             <!-- 委托保证金 -->
             <div class="table__tr right">
@@ -188,7 +188,7 @@
               <span class="c-333">{{ (holding.margin_delegation || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
               <span
                 class="c-999"
-                style="transform: scale(0.8);position:absolute;margin-left: 70px;">≈ {{ translateByRate(holding.margin_delegation) }} USD</span>
+                style="transform: scale(0.8);position:absolute;margin-left: 90px;">≈ {{ translateByRate(holding.margin_delegation) }} USD</span>
             </div>
             <!-- 可用余额 -->
             <div class="table__tr right border-bottom-1 yellow">
@@ -198,7 +198,7 @@
               <span class="c-333">{{ (holding.available_balance || 0) | fixed(valueScale) }} {{ selectPair.product_name }}</span>
               <span
                 class="c-999"
-                style="transform: scale(0.8);position:absolute;margin-left: 70px;">≈ {{ translateByRate(holding.available_balance) }} USD</span>
+                style="transform: scale(0.8);position:absolute;margin-left: 90px;">≈ {{ translateByRate(holding.available_balance) }} USD</span>
             </div>
             <!-- 杠杆倍数 -->
             <!-- <div
@@ -219,7 +219,7 @@
             v-if="(holding.holding || 0) != 0">
             <contractCard
               :holding="holding"
-              :rates="rates"
+              :rates="btcRates"
             />
           </div>
         </div>
@@ -295,7 +295,7 @@ export default {
       ],
       unit: null,
       loading: false,
-      rates: {}
+      btcRates: {}
     }
   },
   computed: {
@@ -579,7 +579,7 @@ export default {
     this.getContractBalanceList()
 
     const res = await service.getRates({currency: 'BTC'})
-    this.rates = res.data.BTC
+    this.btcRates = res.data.BTC
   },
   mounted () {
     // this.initChart()
@@ -589,8 +589,8 @@ export default {
   },
   methods: {
     translateByRate (value, scale = 2) {
-      if (!this.rates || !this.rates['USD']) return
-      return bigTimes([this.rates['USD'], value], scale)
+      if (!this.btcRates || !this.btcRates['USD']) return
+      return bigTimes([this.btcRates['USD'], value], scale)
     },
     amounts () {
       this.amountNumber = 21321
