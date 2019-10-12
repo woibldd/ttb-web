@@ -168,7 +168,7 @@ export default {
     },
     tradingTotal() {
       let sum = this.$big(0)
-      console.log({test:this.tradingTable})
+      // console.log({test:this.tradingTable})
       this.tradingTable.forEach(item => {
         sum = sum.plus(item.estValue)
       })
@@ -204,8 +204,12 @@ export default {
       service.getAccountBalanceList().then(res => {
         if(!res.code && !!res.data) {
           this.tradingTable = (res.data || []).map(item => {  
-            item.camount = this.$big(item.locking).plus(item.available).round(8, this.C.ROUND_DOWN).toString()
-            item.estValue = this.getEstValue(item) 
+            // item.camount = this.$big(item.locking).plus(item.available).round(8, this.C.ROUND_DOWN).toString()
+            // item.estValue = this.getEstValue(item)  
+            item.locking = this.$big(item.locking || 0).plus(this.$big(item.ordering || 0).plus(this.$big(item.withdrawing || 0))).toString()
+            item.camount = this.$big(item.locking).plus(this.$big(item.available)).round(8, this.C.ROUND_DOWN).toString()
+            item.estValue = this.getEstValue(item)
+            item.available = this.$big(item.available).round(8, this.C.ROUND_DOWN).toString()
             return item
           })
         }
