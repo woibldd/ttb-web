@@ -7,6 +7,7 @@ const isMobile = utils.isMobile()
 // const guide = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index')
 const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index')
 const HomeNew = () => import(/* webpackChunkName: "home" */ '@/pages/home_new.vue')
+// const Plan = () => import(/* webpackChunkName: "home" */ '@/pages/plan.vue')
 export const otherRouter = [
   {
     path: '/',
@@ -158,5 +159,35 @@ export const otherRouter = [
       class: 'dark'
     },
     component: () => import(/* webpackChunkName: "Test1" */ '@/pages/test1.vue')
+  },
+  {
+    path: '/plan',
+    name: 'plan',
+    meta: {
+      auth: false,
+      footer: false,
+      nav: false
+    },
+    component: () => import(/* webpackChunkName: "Trading" */ '@/pages/plan/index')
+  },
+  {
+    path: '/planSubmit',
+    name: 'planSubmit',
+    meta: {
+      auth: true,
+      footer: false,
+      nav: false
+    },
+    component: () => import(/* webpackChunkName: "Trading" */ '@/pages/plan/submit')
+  },
+  {
+    path: '/planSuccess',
+    name: 'planSuccess',
+    meta: {
+      auth: true,
+      footer: false,
+      nav: false
+    },
+    component: () => import(/* webpackChunkName: "Trading" */ '@/pages/plan/submitNext')
   }
 ]

@@ -35,42 +35,50 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
           <router-link
             v-if='!isTestnet'
             to="/snowball/bazaar"
-            class="nav_link  ml-30">    
+            class="nav_link  ml-30">
             {{$t('bidTitle')}}
           </router-link>
-          <div 
+          <div
             class="nav_link arrow-down"
             v-if='isTestnet'
             >
             <router-link
               to="/snowball"
-              class="nav_link ml-20">{{ $t('playBTC') }} 
-            </router-link> 
+              class="nav_link ml-20">{{ $t('playBTC') }}
+            </router-link>
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
                   <a
                     href="/snowball/bazaar"
                     :class="{'router-link-active': from === 'contract'}"
-                    class="link">{{ $t('bidTitle') }} 
+                    class="link">{{ $t('bidTitle') }}
                   </a>
-                </li>  
+                </li>
               </ul>
             </div>
           </div>
           <a
             href="javascript:;"
-            class="nav_link" 
+            class="nav_link"
             style="padding-left:30px;"
             @click="subscribeHandle"
           >
             {{ this.$t('node_sub') }}
             <icon name="hot-red"/>
           </a>
+          <a
+            href="javascript:;"
+            class="nav_link"
+            style="padding-left:30px;"
+            @click="planHandle"
+          >
+            代理计划
+          </a>
           <!-- <router-link
             to="/share_option"
-            class="nav_link  ml-30">   
-            期权交易 
+            class="nav_link  ml-30">
+            期权交易
           </router-link> -->
           <!-- <div class="nav_link arrow-down">
             <a
@@ -215,9 +223,9 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
                     :to="{name: 'withdraw'}"
                     class="link">{{ $t('withdraw') }}</router-link>
                 </li>
-                <li class="dropdown-item pl-24 pr-24"> 
+                <li class="dropdown-item pl-24 pr-24">
                   <router-link
-                    class="link" 
+                    class="link"
                     :to="'/fund/transfer'">{{ $t('account_exchange') }}
                   </router-link>
                 </li>
@@ -363,10 +371,10 @@ export default {
         this.state.theme.help[this.state.locale] || this.state.theme.help.en
       )
     },
-    requestLink() { 
+    requestLink() {
         //   if (this.state.userInfo && this.state.theme.themeName === 'default') {
         //     return (
-        //       process.env.BASE_API + 
+        //       process.env.BASE_API +
         //       '/ixx/zendesk/sso?return_to=' +
         //       encodeURIComponent(
         //         this.state.theme.request[this.state.locale] ||
@@ -379,7 +387,7 @@ export default {
         //       this.request.theme.help.en
         //     )
         //   }
-      
+
         this.state.theme.request[this.state.locale] ||
         this.request.theme.help.en
     },
@@ -400,6 +408,9 @@ export default {
     }
   },
   methods: {
+    planHandle() {
+      this.$router.push('/plan')
+    },
     subscribeHandle() {
       if (window.localStorage.getItem('X-TOKEN')) {
         this.$router.push('/fund/my/assets')

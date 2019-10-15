@@ -1,0 +1,284 @@
+.broker {
+  min-width: 1200px;
+  .l-line, .r-line {
+    width: 68px;
+    height: 3px;
+    background: url("../images/PC/grey-l.png") center center no-repeat;
+  }
+  .r-line {
+    background: url("../images/PC/grey-r.png") center center no-repeat;
+  }
+  &-banner {
+    width: 100%;
+    height: 640px;
+    overflow: hidden;
+    background: #030C0C url("../images/PC/earth.png") center center no-repeat;
+
+    .broker-text {
+      height: 184px;
+      margin-top: 120px;
+      //background: url("../images/text.png") center center no-repeat;
+    }
+
+    .join {
+      margin: 42px auto 10px;
+      width: 160px;
+      height: 50px;
+      background: rgba(35, 206, 208, 1);
+      border-radius: 5px;
+      color: #fff;
+      text-align: center;
+      line-height: 50px;
+      cursor: pointer;
+    }
+
+    .login {
+      margin: 0 auto;
+      display: block;
+      text-align: center;
+      color: #fff;
+    }
+
+    .broker-text-tip {
+      width: 1200px;
+      margin: 40px auto;
+      color: #fff;
+      position: relative;
+
+      .ct-text {
+        margin: 0 60px;
+
+        p {
+          margin-bottom: 20px;
+          line-height: 1.5;
+        }
+      }
+
+      .left-point, .right-point {
+        width: 34px;
+        height: 34px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: url("../images/left.png") center center no-repeat;
+      }
+
+      .left-point {
+        left: 0;
+      }
+
+      .right-point {
+        right: 0;
+        background: url("../images/right.png") center center no-repeat;
+      }
+    }
+  }
+
+  &-apply {
+    padding: 60px 0;
+    overflow: hidden;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 1), rgba(228, 255, 250, 1));
+
+    .apply-container {
+      width: 1080px;
+      margin: 0 auto;
+
+      .apply-list {
+        width: 216px;
+        float: left;
+        text-align: center;
+        padding-bottom: 40px;
+        background: transparent;
+        transition: all .4s ease-in;
+
+        .list-img {
+          padding-top: 40px;
+          width: 84px;
+          height: 84px;
+          margin: 0 auto;
+          padding-bottom: 30px;
+          background: url("../images/PC/apply_0_hover.png") center center no-repeat;
+        }
+
+        &:hover {
+          background: rgba(31, 198, 139, 1);
+          box-shadow: 0px 0px 10px 0px rgba(32, 200, 153, 1);
+          color: #fff;
+
+          &:hover {
+            .list-img {
+              background: url("../images/PC/apply_0.png") center center no-repeat;
+            }
+          }
+        }
+
+        .list-text {
+          overflow: hidden;
+        }
+
+        &:nth-child(2) {
+          .list-img {
+            background: url("../images/PC/apply_1_hover.png") center center no-repeat;
+          }
+
+          &:hover {
+            .list-img {
+              background: url("../images/PC/apply_1.png") center center no-repeat;
+            }
+          }
+        }
+
+        &:nth-child(3) {
+          .list-img {
+            background: url("../images/PC/apply_2_hover.png") center center no-repeat;
+          }
+
+          &:hover {
+            .list-img {
+              background: url("../images/PC/apply_2.png") center center no-repeat;
+            }
+          }
+        }
+
+        &:nth-child(4) {
+          .list-img {
+            background: url("../images/PC/apply_3_hover.png") center center no-repeat;
+          }
+
+          &:hover {
+            .list-img {
+              background: url("../images/PC/apply_3.png") center center no-repeat;
+            }
+
+            &:hover {
+              .list-img {
+                background: url("../images/PC/apply_3.png") center center no-repeat;
+              }
+            }
+          }
+        }
+
+        &:nth-child(5) {
+          .list-img {
+            background: url("../images/PC/apply_4_hover.png") center center no-repeat;
+          }
+
+          &:hover {
+            .list-img {
+              background: url("../images/PC/apply_4.png") center center no-repeat;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &-equity {
+    background: url("../images/PC/BJ.03.png") center center no-repeat;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+
+    .equity-title {
+      padding: 60px 0 40px 0;
+      font-size: 18px;
+      .r-line {
+        background: url("../images/PC/g-r.png") center center no-repeat;
+      }
+      .l-line {
+        background: url("../images/PC/g-l.png") center center no-repeat;
+      }
+    }
+
+    .equity-table {
+      width: 1080px;
+      margin: 0 auto 50px;
+      overflow: hidden;
+
+      &-title {
+        height: 50px;
+        line-height: 50px;
+        background: linear-gradient(266deg, rgba(35, 206, 208, 1), rgba(31, 198, 139, 1));
+      }
+
+      &-list {
+        box-sizing: border-box;
+        height: 64px;
+        line-height: 64px;
+        border-left: 1px solid #296F61;
+        border-right: 1px solid #296F61;
+        overflow: hidden;
+        display: flex;
+        font-size: 14px;
+        .count {
+          flex: 380px 0 0 0;
+          width: 380px;
+          border-right: 1px solid #296F61;
+        }
+
+        .text {
+          flex: 1;
+          text-align: center;
+        }
+
+        &:nth-child(odd) {
+          background: rgba(23, 64, 56, .8);
+        }
+        &:last-child {
+          border-bottom: 1px solid rgba(41,111,97,.7);
+        }
+      }
+    }
+  }
+  &-way {
+    .broker-way-title {
+      padding: 60px 0 40px;
+      text-align: center;
+      font-size: 18px;
+    }
+    .con {
+      width: 1080px;
+      margin: 40px auto;
+      display: flex;
+      overflow: hidden;
+      .broker-way-text {
+        flex: 1;
+        color: #6F6F6F;
+        &-list {
+          line-height: 40px;
+          display: flex;
+          font-size: 14px;
+          .lt {
+            flex: 140px 0 0 0;
+            width: 140px;
+            text-align: right;
+          }
+          .rt {
+            flex: 1;
+            padding-left: 40px;
+          }
+        }
+      }
+      .broker-way-img {
+        flex: 0 0 720px;
+        width: 720px;
+        height: 320px;
+        background: url("../images/PC/line.png") center center no-repeat;
+      }
+    }
+  }
+  .text-vk {
+    width: 348px;
+    margin: 0 auto;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+    div, span {
+      flex: 1;
+    }
+  }
+  .text-vk1 {
+    width: 408px
+  }
+}
