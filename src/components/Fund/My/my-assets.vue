@@ -45,7 +45,22 @@
             <span v-else>{{ scope.row[hd.key] || 0 | fixed(8) }}</span>
           </template>
         </el-table-column>
-
+        <el-table-column>
+          <template slot-scope="scope"> 
+            <template v-if="scope.row.currency==='USDT'">
+              <label class="my-fund-label"
+                v-if="is_nodes === false"
+                @click="nodeBuy"
+                v-tooltip.top="{html: true, content: $t('fund_assets_node_buy_tip'), classes: 'assets'}">
+                {{$t('fund_assets_node_buy')}}
+              </label>
+              <label class="my-fund-label dis-my-fund-label"
+               v-else>
+                {{$t('fund_assets_subscribed')}}
+              </label> 
+            </template>
+          </template> 
+        </el-table-column>
         <el-table-column
           header-align="right"
           align="right"

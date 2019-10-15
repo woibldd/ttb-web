@@ -1308,7 +1308,7 @@
   "contract_limit_price": "Limits",
   "contract_price_tips": "Specific price levels you wish to trade in",
   "contract_limit_price_tips": "Limited trading based on specified price available in the market. This is the most common strategy of delegated trading。",
-  "contract_cost_10_times": "Order Cost",
+  "contract_cost_10_times": "Cost @{lever}x",
   "contract_pos_after_deal": "Total position Qty after execution",
   "contract_expect_equal_price": "Estimated Liq Price",
   "contract_diff_expect_force": "Mark Price to Liq Price(Distance)",
@@ -1323,7 +1323,7 @@
   "contract_newest_deal_price": "Latest transacted price",
   "contract_repay_percent": "Your percentage of return。",
   "contract_lignter_tips": "This indicator shows you where you are in the automatic partial selling queue. If all indicators are lit, your position may be reduced after liquidation activities end. Click for more details。",
-  "contract_never_show": "Do not show Confirmation Window anymore",
+  "contract_never_show": "Don't Show Again",
   "contract_assign_revert": "Cancel",
   "contract_trade_his": "Trading history",
   "contract_deal_time": "Time",
@@ -1905,7 +1905,7 @@
   "otc_tab_lisetr": "Processing",
   "otc_tab_lisetr1": "Completed",
   "otc_tab_lisetr2": "Cancelled",
-  "contract_cancel_all": "Cancelled All",
+  "contract_cancel_all": "Cancel All",
   "otc_tab_lisetr3": "Start All",
   "otc_tab_lisetr4": "Pause All",
   "order_th_capedasda": "Order Price",
@@ -2046,7 +2046,7 @@
   "otc_seiitm_12": "level",
   "otc_seiitm_13": "automatically cancels the order when timeout",
   "otc_seiitm_14": "Automatic timeout",
-  "otc_seiitm_15": "Cancelled all",
+  "otc_seiitm_15": "Cancell all",
   "otc_seiitm_16": "Submitted successfully",
   "otc_seiitm_17": "Cancelled successfully!",
   "otc_otutcol_1": "Confirm to cancel",
@@ -2072,15 +2072,15 @@
   "otc_otutcol_17": "Personal Asset",
   "otc_otutcol_18": "Confirm {orderName} Orders？",
   "kyc_cf_id": "ID number",
-  "kyc_top_authen_1": "level 1 Verification, Basic information verification",
-  "kyc_top_authen_2": "level 2 Verification, Advance",
+  "kyc_top_authen_1": "Level 1 Verification, Basic information verification",
+  "kyc_top_authen_2": "Level 2 Verification, Advance",
   "kyc_title_info": "Basic information verification",
   "kyc_title_state_padding": "pending",
   "kyc_title_state_complete": "completed",
   "kyc_form_nationality": "Nationality",
   "kyc_form_submit": "Submit ",
-  "kyc_complete_kyc1": "level 1 verification",
-  "kyc_complete_kyc2": "level 2 verification",
+  "kyc_complete_kyc1": "Level 1 verification",
+  "kyc_complete_kyc2": "Level 2 verification",
   "kyc_notice_1": "Level 1 verification successful! You can conduct coin-coin  and contract trading. The 24-hour withdrawal limit is 2 BTC",
   "kyc_notice_2": "If you need to increase the 24-hour withdrawal limit to 100 BTC, please complete the level 2 identity verification.",
   "kyc_to_kyc2": " Level 2 verification",
@@ -2157,7 +2157,7 @@
   "otc_legal_currency": "Fiat Currency",
   "coin_FUTURE_BTCUSD": "BTC",
   "coin_FUTURE_BHDUSD": "BHD",
-  "fund_my_assets_hide": " Hide small balances ",
+  "fund_my_assets_hide": " Hide Small Balances ",
   "fund_my_assets_hide_tip": " <",
   "otc_collection_update": " edit ",
   "otc_placeholder_c": "Please enter your expected  price",
@@ -2175,7 +2175,7 @@
   "otc_kvcec_14": "Please enter payment QR code",
   "watch_tips": "Please ensure that deposit address is correct, if not will result in failure to deposit or assets can not be recovered",
   "contract_FUTURE_ETHUSD": "ETHUSD",
-  "trading_order_cancel_all": "Cancelled all",
+  "trading_order_cancel_all": "Cancel all",
   "tv_technical_indicators": "Technical Indicator",
   "tv_style": "Style",
   "tv_down_minute": "minute",
@@ -2356,7 +2356,16 @@
   "status": "Status",
   "contract_page": {
     "order_action": {
-      "price": "Order Price"
+      "price": "Order Price",
+      "modal": {
+        "available": "Available Balance",
+        "position": "Position Size After Execution",
+        "liq_price": "Estimated Liquidation Price",
+        "difference": "Mark Price/Est. Liquidation Difference" 
+      }
+    },
+    "orderbook": {
+      "back_to": "Back to Order Book"
     },
     "history": {
       "active": {
@@ -2366,17 +2375,34 @@
         "contract_assigning_undeal": "Untriggered",
         "price_distance": "Price(Distance)"
       }
+    },
+    "pair_nav":{ 
+      "24h_h": "24H High",
+      "24h_l": "24H Low" 
     }
   },
   "home": {
     "footer": {
       "affiliate": "Affiliate：affiliate@ixx.com",
-      "explain": "IXX is a cryptocurrency derivatives exchange, headquartered in Singapore and registered in Malaysia. It is the world's first digital asset trading community，It is committed to realizing the ideal utopia nation of blockchain trading ecology, creating an exchange for everyone. All contributors can share the fruitful outcome from developments of the exchange."
+      "explain": "IXX is a cryptocurrency derivatives exchange, headquartered in Singapore and registered in Malaysia. It is the world's first digital asset trading community and committed to realize the ideal utopia nation of blockchain trading ecology, create an exchange for everyone. All contributors can share the fruitful outcome from developments of the exchange."
     }
   },
   "fund": {
     "withdraw": {
-      "address": "Withdraw Address"
+      "address": "Withdraw Address", 
+      "bindings": "Linked",
+      "no_bindings": "Unbounded",
+      "to_verify": "Verify",
+      "to_bind": "Link",
+      "done": "Done", 
+      "email": "Email",
+      "phone": "Mobile",
+      "phone_code": "SMS Verification Code",
+      "email_code": "Code",
+      "bind_google": "绑定谷歌验证器",
+      "bind_email_or_phone": "绑定邮箱/手机", 
+      "to_deposit_tips": "提币需要您至少完成一笔任意额度充币，激活提币功能",
+      "to_deposit": "去充币"
     },
     "address": {
       "address": "Address"

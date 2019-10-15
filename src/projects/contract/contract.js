@@ -19,6 +19,7 @@ import ToastRegistry from '@/libs/toast/index'
 
 import 'element-ui/lib/theme-chalk/index.css'
 import '../../styles/_reset_ele.scss'
+import '../../styles/flex.css'
 
 import {
   Select,

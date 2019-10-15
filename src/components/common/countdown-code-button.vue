@@ -75,6 +75,7 @@ export default {
       clearInterval(this.sms.timer)
     },
     async getSmsCode () {
+      
       if (this.sms.status === 1 || this.sms.loading || this.loading) {
         return false
       }

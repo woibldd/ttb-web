@@ -2246,7 +2246,16 @@
   "pair_table_option_empty": "暂无添加自选 ",
   "contract_page": {
     "order_action": {
-      "price": "价格"
+      "price": "价格",
+      "modal": {
+        "available": "可用余额",
+        "position": "成交后的仓位大小",
+        "liq_price": "预期强平价格",
+        "difference": "标记价格/预期强平价格 差异"
+      }
+    },
+    "orderbook": {
+      "back_to": "返回盘口"
     },
     "history": {
       "active": {
@@ -2256,6 +2265,10 @@
         "contract_assigning_undeal": "委托中未成交",
         "price_distance": "触发价格"
       }
+    },
+    "pair_nav":{
+      "24h_h": "24H最高价",
+      "24h_l": "24H最低价"
     }
   },
   "home": {
@@ -2263,11 +2276,30 @@
       "affiliate": "代理申请：support@ixx.com",
       "explain": "IXX交易所是全球首家数字资产交易共同体，总部在新加坡，其致力于实现交易所生态的区块链理想国，打造人人的交易所，我为人人，人人为我，所有参与交易所的贡献者者均可共享交易所的发展成果。"
     }
+  },
+  "fund": {
+    "withdraw": {
+      "address": "提币地址",
+      "bind_google": "绑定谷歌验证器",
+      "bind_email_or_phone": "绑定邮箱/手机",
+      "bindings": "已绑定",
+      "no_bindings": "未绑定",
+      "to_verify": "去认证",
+      "to_bind": "去绑定",
+      "done": "已完成",
+      "to_deposit_tips": "提币需要您至少完成一笔任意额度充币，激活提币功能",
+      "to_deposit": "去充币",
+      "email": "邮箱",
+      "phone": "手机号",
+      "phone_code": "手机验证码",
+      "email_code": "邮箱验证码"
+    },
+    "address": {
+      "address": "地址"
+    },
+    "deposit": {
+      "address": "充币地址"
+    }
   }
+
 }
-
-
-
-
-
-

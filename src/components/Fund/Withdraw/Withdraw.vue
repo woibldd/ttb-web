@@ -160,8 +160,7 @@
             />
             <span class="coin-type">
               <i> {{ selectCoin.currency }}</i>
-              <a @click="input_all"
-class="up-limit pointer ml-5">{{ $t('transfer_all') }}</a>
+              <a @click="input_all" class="up-limit pointer ml-5">{{ $t('transfer_all') }}</a>
             </span>
           </div>
           <!-- @input='checkInput' -->
@@ -204,21 +203,40 @@ class="up-limit pointer ml-5">{{ $t('transfer_all') }}</a>
       <div class="ensure-modal">
         <div class="modal__title mb-30">{{ $t('security_verification') }}</div>
         <div class="modal__content">
-          <div class="modal__row">
-            <div class="row__label mb-9">{{ $t('register_by_phone') }}</div>
-            <div class="row__input" >{{ contact }} </div>
+          <div class="modal__row" v-if="verify_phone">
+            <div class="row__label mb-9">{{ $t('fund.withdraw.phone') }}</div>
+            <div class="row__input" >{{ contact_phone }} </div>
           </div>
           <div
             class="modal__row mt-12 mb-25"
             v-if="verify_phone">
-            <div class="row__label mb-9">{{ $t('phone_verification_code') }}</div>
+            <div class="row__label mb-9">{{ $t('fund.withdraw.phone_code') }}</div>
             <div class="row__input" >
               <input
                 v-model="phoneCode"
                 class="input-validate mr-14">
               <count-down
                 :send-text="$t('hq_send')"
-                :send-code-func="getVerifyCode"
+                :send-code-func="getPhoneVerifyCode"
+              />
+            </div>
+          </div>
+          <div class="modal__row"
+            v-if="verify_email">
+            <div class="row__label mb-9">{{ $t('fund.withdraw.email') }}</div>
+            <div class="row__input" >{{ contact_email }} </div>
+          </div>
+          <div
+            class="modal__row mt-12 mb-25"
+            v-if="verify_email">
+            <div class="row__label mb-9">{{ $t('fund.withdraw.email_code') }}</div>
+            <div class="row__input" >
+              <input
+                v-model="emailCode"
+                class="input-validate mr-14">
+              <count-down
+                :send-text="$t('hq_send')"
+                :send-code-func="getEmailVerifyCode"
               />
             </div>
           </div>
@@ -239,7 +257,7 @@ class="up-limit pointer ml-5">{{ $t('transfer_all') }}</a>
         </div>
       </div>
     </v-modal>
-    <v-modal :open.sync="showLayerModal">
+    <!-- <v-modal :open.sync="showLayerModal">
       <div class="not-verified-layer">
         <div class="layer__title mb-30">{{ $t('withdraw_need_verify') }}</div>
         <div class="layer__content">
@@ -262,7 +280,7 @@ class="up-limit pointer ml-5">{{ $t('transfer_all') }}</a>
           </div>
           <div class="layer__row mt-20">
             <span class="row__label">3.
-              <span v-html="$t('complete_verified')"/>
+              <span v-html="$t('complete_verified')"></span>
             </span>
             <span
               class="row__status"
@@ -271,8 +289,62 @@ class="up-limit pointer ml-5">{{ $t('transfer_all') }}</a>
           </div>
         </div>
       </div>
+    </v-modal> -->
+    <v-modal :open.sync="showLayerModal">
+      <div class="not-verified-layer">
+        <div class="layer__title mb-30">{{ $t('withdraw_need_verify') }}</div>
+        <div class="layer__content">
+          <div class="layer__row_note">
+            <div class="row__label">{{ $t('withdraw_need_verify_note') }}</div>
+          </div>
+          <div class="layer__row mt-30">
+            <span class="row__label">1. {{ $t('fund.withdraw.bind_email_or_phone') }}</span>
+            <span
+              class="row__status"
+              @click="clickVerifyRow('EmailBind')"
+              :class="{'done': email_or_phone_bound}">{{ email_or_phone_bound ? $t('fund.withdraw.done') : $t('fund.withdraw.to_bind') }}</span>
+          </div>
+          <div class="layer__row mt-20">
+            <span class="row__label">2. {{ $t('fund.withdraw.bind_google') }}</span>
+            <span
+              class="row__status"
+              @click="clickVerifyRow('GoogleBind')"
+              :class="{'done': google_bound}">{{ google_bound ? $t('fund.withdraw.done') : $t('fund.withdraw.to_bind') }}</span>
+          </div>
+          <div class="layer__row mt-20">
+            <span class="row__label">3.
+              <span v-html="$t('complete_verified')"/>
+            </span>
+            <span
+              class="row__status"
+              @click="clickVerifyRow('Kyc')"
+              :class="{'done': all_bound}">{{ all_bound ? $t('done') : $t('to_verify') }}</span>
+          </div> 
+        </div>
+      </div>
     </v-modal>
-
+    <v-modal :open.sync="showDepositModal">
+      <div class="not-verified-layer">
+        <div class="layer__title mb-30">{{ $t('withdraw_need_verify') }}</div>
+        <div class="layer__content">
+          <div class="layer__row_note">
+            <div class="row__label">{{ $t('withdraw_need_verify_note') }}</div>
+          </div>
+          <div class="layer__row mt-30">
+            <span class="row__label">1. {{ $t('fund.withdraw.bind_google') }}</span>
+            <span class="row__status"
+              @click="clickVerifyRow('GoogleBind')"
+              :class="{'done': google_bound}">{{ google_bound ? $t('fund.withdraw.done') : $t('fund.withdraw.to_bind') }}</span>
+          </div>
+          <div class="layer__row mt-20">
+            <span class="row__label">2. {{ $t('fund.withdraw.to_deposit_tips') }}</span> 
+          </div>
+          <div class="layer__row mt-20 pl-20">
+            <el-button type="primary">{{ $t('fund.withdraw.to_deposit') }}</el-button>
+          </div> 
+        </div>
+      </div>
+    </v-modal>
   </div>
 </template>
 <script>
@@ -290,17 +362,19 @@ export default {
   data () {
     return {
       showLayerModal: false,
+      showDepositModal: false,
       address: '',
       allCoins: [],
       selectCoin: {},
       allAddress: [],
       selectAddress: {},
       withdrawCount: '',
-      showModal: false,
+      showModal: true,
       myCoinInfoList: [],
       myCoinInfo: {},
       phoneCode: '',
       googleCode: '',
+      emailCode: '',
       memo: '',
       state,
       myitem: '',
@@ -323,9 +397,16 @@ export default {
             <p >${this.$t('about_eos_address_label_b')}</p>
           </div>`
     },
-    contact () {
+    contact_phone () {
       if (this.state && this.state.userInfo) {
-        return this.state.userInfo.phone || this.state.userInfo.email
+        return this.state.userInfo.phone 
+      } else {
+        return ''
+      }
+    },
+    contact_email () {
+      if (this.state && this.state.userInfo) {
+        return this.state.userInfo.email
       } else {
         return ''
       }
@@ -349,32 +430,65 @@ export default {
       }
       return false
     },
+    verify_email () {
+      if (this.state.userInfo && this.state.userInfo.verify_email) {
+        return true
+      }
+      return false
+    },
     email_bound () {
       return this.state.userInfo && this.state.userInfo.email
     },
     phone_bound () {
       return this.state.userInfo && this.state.userInfo.phone
     },
+    email_or_phone_bound() {
+      return this.state.userInfo && (this.state.userInfo.phone ||  this.state.userInfo.email)
+    },
     all_bound () {
-      // kyc > 0 就可以提币
-      return this.state.userInfo && this.state.userInfo.lv > 0
+      // kyc > 2 就可以提币
+      return this.state.userInfo && this.state.userInfo.lv < 2
     },
     disableBtn () {
       return !this.email_bound || !this.phone_bound || !this.all_bound
-    }
+    },
+    isDeposited () {
+      return this.state.userInfo && this.state.userInfo.deposit_state 
+    },
+    google_bound() {
+      return this.state.userInfo && this.state.userInfo.google_key_bound
+    } 
   },
   components: {vModal, countDown },
   async created () {
     await actions.getKycLv()
     await actions.updateSession()
-    this.showLayerModal = !this.email_bound || !this.phone_bound || !this.all_bound
+    // console.log({userInfo: this.state.userInfo}) 
+    // this.showLayerModal = !this.email_bound || !this.phone_bound || !this.all_bound
+     
+    //有充币行为
+    if (this.isDeposited){
+      this.showDepositModal = !this.google_bound
+    } 
+    //kyc2
+    else if(this.state.userInfo.lv > 0) {
+      this.showLayerModal = !this.email_or_phone_bound || !this.google_bound || !this.all_bound
+    }
+    //没有充币行为且kyc=0
+    else {
+       this.showDepositModal = true
+    }
+    // this.showLayerModal = true
+    this.showModal = true
+    
+    
     await this.getAllCoinTypes()
     this.updadeMyCoinInfo()
     this.getCoinAddress()
   },
   methods: {
     async lianSelect (coin) {
-      console.log({coin})
+      // console.log({coin})
       this.selectCoin = coin
       await this.getCoinAddress()
       this.updadeMyCoinInfo()
@@ -535,12 +649,19 @@ export default {
         this.myCoinInfoList = res.data
       })
     },
-    getVerifyCode () {
+    getPhoneVerifyCode() {
       const param = {
         region: this.state.userInfo.region,
-        phone: this.contact
+        phone: this.contact_phone
       }
-      let res = service.getVerifyCode(param, 'phone')
+      let res = service.getVerifyCode(param, 'phone') 
+      return res
+    },
+    getEmailVerifyCode () { 
+      const param = { 
+        email: this.contact_email
+      }
+      let res = service.getVerifyCode(param, 'email')
       // .then(res => {console.log(res)})
       return res
     },
@@ -561,8 +682,7 @@ export default {
         currency: this.selectCoin.currency,
         to_address: this.selectAddress.address,
         amount: this.withdrawCount,
-        // email_code
-        phone_code: this.phoneCode
+        google_code: this.googleCode  
       }
 
       if (this.selectCoin.currency === 'USDT') {
@@ -583,9 +703,15 @@ export default {
           }
         }
       }
-      if (this.googleCode) {
-        param.google_code = this.googleCode
+
+      if (this.verify_email) {
+        param.email_code = this.emailCode
       }
+      if (this.verify_phone) {
+        param.phone_code =this.phoneCode 
+      }
+
+
       service.confirmWithdraw(param).then(res => {
         if (res.code) {
           utils.alert(res.message)

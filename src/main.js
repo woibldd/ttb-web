@@ -17,7 +17,7 @@ import * as Sentry from '@sentry/browser'
 import 'babel-polyfill'
 import './assets/scss/index.scss'
 import moment from 'moment'
-// import 'flex.css'
+import './styles/flex.css'
 import 'element-ui/lib/theme-chalk/index.css'
 
 import './icons'
