@@ -2178,5 +2178,10 @@
     "deposit": {
       "address": "充幣地址"
     }
+  },
+  "profile": {
+    "security": {
+      "close_verify_tips": "手机验证和邮箱验证不能同时关闭"
+    }
   }
 }

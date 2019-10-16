@@ -2241,6 +2241,11 @@
     },
     "deposit": {
       "address": "입금주소"
-    } 
+    } ,
+    "profile": {
+      "security": {
+        "close_verify_tips": "手机验证和邮箱验证不能同时关闭"
+      }
+    }
   }
 }

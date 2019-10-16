@@ -47,9 +47,9 @@
           <div><span/><p>{{ $t('google_validator') }}</p></div>
           <div>{{ $t( !!google_key_bound ? 'Bindings' : 'No_Bindings') }}</div>
           <div>
-            <a
+            <!-- <a
               v-if="verify_google"
-              @click="switchGoogleBind">{{ $t('close_verify') }}</a>
+              @click="switchGoogleBind">{{ $t('close_verify') }}</a> -->
             <a
               v-if="!verify_google && google_key_bound"
               @click="switchGoogleBind">{{ $t('open_verify') }}</a>
@@ -146,12 +146,20 @@ export default {
   },
   methods: {
     switchPhoneBind () {
+      if (!this.verify_email) { 
+        utils.alert(this.$t("profile.security.close_verify_tips"))
+        return
+      }
       this.showModal = !this.showModal
       this.openOrClose = this.verify_phone
       this.currentGetCodeFunc = this.getCode4switchPhoneVerify
       this.modalEnsureCallback = this.ensureSwitchPhoneBind
     },
     switchEmailBind () {
+      if (!this.verify_phone) { 
+        utils.alert(this.$t("profile.security.close_verify_tips"))
+        return
+      }
       this.showModal = !this.showModal
       this.openOrClose = this.verify_email
       this.currentGetCodeFunc = this.getCode4switchEmailVerify

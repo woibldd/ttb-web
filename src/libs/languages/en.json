@@ -2412,5 +2412,10 @@
     "deposit": {
       "address": "Deposit Address"
     }
+  },
+  "profile": {
+    "security": {
+      "close_verify_tips": "手机验证和邮箱验证不能同时关闭"
+    }
   }
 }
