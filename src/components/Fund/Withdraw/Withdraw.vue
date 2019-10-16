@@ -340,7 +340,9 @@
             <span class="row__label">2. {{ $t('fund.withdraw.to_deposit_tips') }}</span> 
           </div>
           <div class="layer__row mt-20 pl-20">
-            <el-button type="primary">{{ $t('fund.withdraw.to_deposit') }}</el-button>
+            <el-button type="primary" @click="clickVerifyRow('deposit')">
+              {{ $t('fund.withdraw.to_deposit') }}
+            </el-button>
           </div> 
         </div>
       </div>
@@ -449,15 +451,16 @@ export default {
       // kyc > 2 就可以提币
       return this.state.userInfo && this.state.userInfo.lv < 2
     },
-    disableBtn () {
-      return !this.email_bound || !this.phone_bound || !this.all_bound
-    },
     isDeposited () {
       return this.state.userInfo && this.state.userInfo.deposit_state 
     },
     google_bound() {
       return this.state.userInfo && this.state.userInfo.google_key_bound
-    } 
+    }, 
+    disableBtn () {
+      //return !this.email_bound || !this.phone_bound || !this.all_bound
+      return !this.email_or_phone_bound || !this.google_bound || !(this.isDeposited || this.all_bound)
+    }
   },
   components: {vModal, countDown },
   async created () {

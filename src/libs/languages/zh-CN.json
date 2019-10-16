@@ -2248,6 +2248,7 @@
   "contract_page": {
     "order_action": {
       "price": "价格",
+      "trigger_short":"触发后平仓",
       "modal": {
         "available": "可用余额",
         "position": "成交后的仓位大小",

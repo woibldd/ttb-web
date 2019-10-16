@@ -2188,6 +2188,7 @@
   "contract_page": {
     "order_action": {
       "price": "가격",
+      "trigger_short":"触发后平仓",
       "modal": {
         "available": "사용가능금액",
         "position": "거래 가 성사 된 후 창고 포지션의 크기",

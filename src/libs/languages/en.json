@@ -2358,6 +2358,7 @@
   "contract_page": {
     "order_action": {
       "price": "Order Price",
+      "trigger_short":"触发后平仓",
       "modal": {
         "available": "Available Balance",
         "position": "Position Size After Execution",
