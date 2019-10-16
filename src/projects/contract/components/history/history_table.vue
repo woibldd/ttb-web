@@ -1085,7 +1085,22 @@ export default {
       text-align: center;
       border:1px solid rgba(9,201,137,1);
       color: rgba(9,201,137,1);
+    }  
+    .op {
+      width: 14px;
+      height: 14px;
+      vertical-align: text-bottom;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      display: inline-block;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.8;
+      }
     }
+    .op_cancel {
+      background-image: url("../../../../assets/contract/icon-num-cancel.png");
+    } 
   }
 }
 .modal-operate-ensurance {

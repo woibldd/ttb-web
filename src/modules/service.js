@@ -736,11 +736,11 @@ const service = {
           item.price_scale = parseInt(item.price_scale, 10) || 2
           item.fee_rate = item.fee_rate || 0
           if (item.currency === 'BTCUSD') {
-            item.value_scale = 4
+            item.value_scale = 8
             item.accuracy = item.accuracy || 5
           } else {
             item.value_scale = 8
-            item.accuracy = item.accuracy || 1
+            item.accuracy = item.accuracy || 5
           }
           // item.value_scale = parseInt(item.value_scale, 10) || 4
           if (item.name.indexOf('FUTURE_') < 0) {

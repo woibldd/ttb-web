@@ -37,7 +37,8 @@
               :key="'h_'+item.id">
               <div>{{ item.login_time }}</div>
               <div>{{ item.ip }}</div>
-              <div>{{ item.address }}</div>
+              <div v-if="state.locale==='zh-CN'">{{ item.address }}</div>
+              <div v-else>{{ item.address_en }}</div> 
             </li>
           </ul>
         </div>
