@@ -369,7 +369,7 @@ export default {
       allAddress: [],
       selectAddress: {},
       withdrawCount: '',
-      showModal: true,
+      showModal: false,
       myCoinInfoList: [],
       myCoinInfo: {},
       phoneCode: '',
@@ -479,7 +479,7 @@ export default {
        this.showDepositModal = true
     }
     // this.showLayerModal = true
-    this.showModal = true
+    // this.showModal = true
     
     
     await this.getAllCoinTypes()

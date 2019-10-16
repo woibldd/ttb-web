@@ -533,11 +533,19 @@ export default {
     this.$nextTick(this.fixPosition)
   },
   async created () {
+    
+    //如果地址带有邀请码信息则将邀请码写入cookie中，有效期为10天  2019/10/16 yzf
     let invitorId = this.$route.query.invitor
+    let agentId = this.$route.query.agent
     if (invitorId) {
-      utils.setCookie('invitor', invitorId)
+      utils.setCookie('invitor', invitorId, 10)
       this.hasInvitor = true
-      this.routerParams = `?invitor=${invitorId}`
+      this.routerParams = `?invitor=${invitorId}` 
+    } else if (agentId) {
+      utils.setCookie('invitor', agentId, 10)
+      this.hasAgent = true
+      this.routerParams = `?agent=${agentId}`
+      invitorId = agentId;
     } else {
       invitorId = utils.getCookie('invitor')
     }
@@ -545,17 +553,16 @@ export default {
       this.invitorId = invitorId
     }
 
-    let agentId = this.$route.query.agent
-    if (agentId) {
-      utils.setCookie('agent', agentId)
-      this.hasAgent = true
-      this.routerParams = `?agent=${agentId}`
-    } else {
-      agentId = utils.getCookie('agent')
-    }
-    if (agentId && /^[A-Za-z0-9]+$/.test(agentId)) {
-      this.invitorId = agentId
-    }
+    // if (agentId) {
+    //   utils.setCookie('invitor', agentId)
+    //   this.hasAgent = true
+    //   this.routerParams = `?agent=${agentId}`
+    // } else {
+    //   agentId = utils.getCookie('agent')
+    // }
+    // if (agentId && /^[A-Za-z0-9]+$/.test(agentId)) {
+    //   this.invitorId = agentId
+    // }
 
 
 
