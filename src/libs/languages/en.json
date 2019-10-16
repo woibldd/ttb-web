@@ -1,6 +1,7 @@
 {
   "realName": "Real name",
   "join": " Join Now",
+  "plan": "Agency plan",
   "login": "Login to IXX Affiliate System",
   "next": "下一步",
   "bannerText": "IXX Exchange is the world's first digital asset trading community. It is committed to realise the ideal utopia nation of blockchain trading ecology and to create an exchange for everyone. I am for everyone, and everyone is for me.  All contributors can share the fruitful outcome from developments of the exchange。",
@@ -40,7 +41,7 @@
   "submit": "Submit",
   "submit_success": "Affiliate application submitted successfully",
   "submit_tip_1": "*We will and process your application as soon as possible",
-  "submit_tip_2 ": "You will receive an email from designated account manager within 48h hours, please check it（also check the trash）",
+  "submit_tip_2": "You will receive an email from designated account manager within 48h hours, please check it（also check the trash）",
   "news": "Follow IXX social media for more information：",
   "back": "Back",
   "not": "No IXX trading account",
@@ -2361,7 +2362,7 @@
         "available": "Available Balance",
         "position": "Position Size After Execution",
         "liq_price": "Estimated Liquidation Price",
-        "difference": "Mark Price/Est. Liquidation Difference" 
+        "difference": "Mark Price/Est. Liquidation Difference"
       }
     },
     "orderbook": {
@@ -2376,9 +2377,9 @@
         "price_distance": "Price(Distance)"
       }
     },
-    "pair_nav":{ 
+    "pair_nav":{
       "24h_h": "24H High",
-      "24h_l": "24H Low" 
+      "24h_l": "24H Low"
     }
   },
   "home": {
@@ -2389,18 +2390,18 @@
   },
   "fund": {
     "withdraw": {
-      "address": "Withdraw Address", 
+      "address": "Withdraw Address",
       "bindings": "Linked",
       "no_bindings": "Unbounded",
       "to_verify": "Verify",
       "to_bind": "Link",
-      "done": "Done", 
+      "done": "Done",
       "email": "Email",
       "phone": "Mobile",
       "phone_code": "SMS Verification Code",
       "email_code": "Code",
       "bind_google": "绑定谷歌验证器",
-      "bind_email_or_phone": "绑定邮箱/手机", 
+      "bind_email_or_phone": "绑定邮箱/手机",
       "to_deposit_tips": "提币需要您至少完成一笔任意额度充币，激活提币功能",
       "to_deposit": "去充币"
     },

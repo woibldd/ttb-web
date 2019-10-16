@@ -10,9 +10,9 @@
         </template>
       </div>
       <div class="broker-btn wow fadeInUp">
-        <div class="join" @click="joinHandle">
+        <a class="join" href="/planSubmit" target="_blank">
           {{ $t('join') }}
-        </div>
+        </a>
         <a class="login" href="https://freebarley.com/#/login?redirect=%2Fdashboard" target="_blank">
           {{ $t('login') }} >
         </a>

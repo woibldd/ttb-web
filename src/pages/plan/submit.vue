@@ -42,9 +42,9 @@
       <div class="next-container-btn" @click="nextHandle">
         <input type="button" :disabled="!checked" :value="this.$t('submit')">
       </div>
-      <div class="register">
+      <!-- <div class="register">
         <router-link to="/user/register/email">{{ $t('not') }}? <span>{{ $t('now') }}</span></router-link>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -109,7 +109,7 @@
                   cancelButtonText: this.$t('cancel'),
                   type: 'warning'
                 }).then(() => {
-                  this.$router.push('/')
+                  this.$router.push('/profile/info')
                 }).catch(() => {
                 })
               } else {

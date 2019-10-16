@@ -165,8 +165,9 @@ export const otherRouter = [
     name: 'plan',
     meta: {
       auth: false,
-      footer: false,
-      nav: false
+      footer: true,
+      nav: true,
+      class: 'dark'
     },
     component: () => import(/* webpackChunkName: "Trading" */ '@/pages/plan/index')
   },

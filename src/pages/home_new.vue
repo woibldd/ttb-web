@@ -16,6 +16,7 @@
           <a
             :href="item.url || 'javascript:;'"
             class="text_link"
+            :title="item.title"
             target="_blank">
             {{ item.title }}
           </a>

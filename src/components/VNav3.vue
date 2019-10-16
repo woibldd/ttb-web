@@ -72,7 +72,7 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             style="padding-left:30px;"
             @click="planHandle"
           >
-            代理计划
+            {{ $t('plan') }}
           </a>
           <!-- <router-link
             to="/share_option"
@@ -399,7 +399,7 @@ export default {
     isTestnet() {
       return location.hostname.indexOf('ixex.pro') >= 0 || location.hostname.includes('localhost')
       // return true
-    }, 
+    },
     isLogin () {
       return this.state.userInfo !== null
     },

@@ -32,8 +32,12 @@
     text-align: center;
     font-size: 14px;
     float: left;
-    width: 33.33%;
+    width: 31%;
+    padding: 0 1%;
     color: #6C869C;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     .text_link {
       color: #6C869C;
       &:hover {
@@ -184,7 +188,7 @@
       visibility: hidden;
       transition: opacity 500ms, visibility 0s 500ms;
       text-align: center;
-    
+
       &.show {
         transition: none;
         visibility: visible;
