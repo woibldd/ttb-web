@@ -264,7 +264,7 @@
               <div v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}">{{ $t('contract_action_open_short') }}</div>
               <div>
                 <label v-html="$t('contract_history_close_content', { price: $big(cholding.close_position_price || 0).toFixed(cholding.pairInfo.price_scale || 2)})"/>
-                <span  @click="cancel(cholding)"/>
+                <span  class="op op_cancel"  @click="cancel(cholding)"/>
               </div>
             </div>
 

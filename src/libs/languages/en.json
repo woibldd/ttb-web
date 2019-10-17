@@ -1284,7 +1284,7 @@
   "contract_add_ensurance": "Increasing your margin deposit",
   "contract_increase_ensurance": " Reducing your margin deposit",
   "contract_your_current_werehouse": "Your current position:",
-  "contract_many_piece_con": "%{amount}\":\"%{amount}contract",
+  "contract_many_piece_con": "%{amount}contract",
   "contract_have_apply_yet": "Currently allocated deposits:",
   "contract_max_remove_account": "maximum surplus that cashed out:",
   "contract_24_hour_trade": "24H Trading Volume",
