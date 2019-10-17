@@ -449,7 +449,7 @@ export default {
     },
     all_bound () {
       // kyc > 2 就可以提币
-      return this.state.userInfo && this.state.userInfo.lv < 2
+      return this.state.userInfo && this.state.userInfo.lv > 1
     },
     isDeposited () {
       return this.state.userInfo && this.state.userInfo.deposit_state 
