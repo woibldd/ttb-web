@@ -1302,8 +1302,8 @@ const service = {
   createCode(params) {
     // return fetch('http://47.244.186.74:2100/oauth2/createcode.do', params)
     //return getCache('c_game_code', () => request('future/activity/oauth2/createcode.do', params), 1e3)
-    return getCache('c_game_code', () => request('/create_code_get_uri', params), 1e3)
-    //return getCache('c_game_code', () => request('mine/game/create_code_get_uri', params), 1e3)
+    //return getCache('c_game_code', () => request('/create_code_get_uri', params), 1e3)
+    return getCache('c_game_code', () => request('mine/game/create_code_get_uri', params), 1e3)
   } ,
   //游戏记录查询
   gameTradeList(params) {
