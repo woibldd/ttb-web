@@ -146,7 +146,7 @@ export default {
   },
   methods: {
     switchPhoneBind () {
-      if (!this.verify_email) { 
+      if (this.verify_phone && !this.verify_email) { 
         utils.alert(this.$t("profile.security.close_verify_tips"))
         return
       }
@@ -156,7 +156,7 @@ export default {
       this.modalEnsureCallback = this.ensureSwitchPhoneBind
     },
     switchEmailBind () {
-      if (!this.verify_phone) { 
+      if (!this.verify_phone && this.verify_email) { 
         utils.alert(this.$t("profile.security.close_verify_tips"))
         return
       }
