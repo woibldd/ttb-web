@@ -95,7 +95,7 @@
   "profile_title": "用戶中心",
   "profile_sec_info": "帳戶信息",
   "profile_sec_2fa": "二步認證",
-  "profile_sec_kyc": "身份驗證",
+  "profile_sec_kyc": "身份認證",
   "change_password": "修改密碼",
   "change_password_success": "修改密碼成功",
   "change_password_orig": "原密碼",
@@ -2124,7 +2124,10 @@
   "contract_page": {
     "order_action": {
       "price": "價格",
-      "trigger_short":"触发后平仓",
+      "trigger_short":"觸發後平倉",
+      "order_price": "盘口价格",
+      "trigger_close_tips": "止盈止损委托时，勾选此按钮，平仓委托只会减少您的仓位，触发时，系统会根据当前仓位数量自动减少这类型委托的数量，甚至制动取消它，来确保它不会增加您的仓位，如果您的余额不足，当前委托类型触发后将会委托失败。",
+      
       "modal": {
         "available": "可用餘額",
         "position": "成交後的倉位大小",
@@ -2152,7 +2155,8 @@
   "home": {
     "footer": {
       "affiliate": "代理申請：support@ixx.com",
-      "explain": "IXX交易所是全球首家數字資產交易共同體，總部在新加坡，其致力於實現交易所生態的區塊鏈理想國，打造人人的交易所，我為人人，人人為我，所有參與交易所的貢獻者者均可共享交易所的發展成果。"
+      "explain": "IXX交易所是全球首家數字資產交易共同體，總部在新加坡，其致力於實現交易所生態的區塊鏈理想國，打造人人的交易所，我為人人，人人為我，所有參與交易所的貢獻者者均可共享交易所的發展成果。",
+      "footer_contract_desc": "添加客服微信" 
     }
   },
   "fund": {

@@ -143,7 +143,7 @@
           </div>
         </div>
         <!-- 按钮区域 -->
-        <div class="row op-button-group mt-20 ">
+        <div class="row op-button-group">
           <div class="op-button-container">
             <!-- 买入 做多 -->
             <div
@@ -166,7 +166,7 @@
               </p>
             </div>
             <!-- 成本 -->
-            <div class="op-balance flex-lr mt-10">
+            <div class="op-balance flex-lr mt-5">
               <span>
                 {{ $t('contract_action_button_avg') }}:
                 <em class="primary-text">{{ costValueBuyNew }} </em> BTC
@@ -174,7 +174,7 @@
               <!-- <span>{{ $t('contract_action_button_available_balance') }}: <em class="primary-text">0.00</em> {{ $t('contract_min_unit') }}</span> -->
             </div>
             <div
-              class="op-button flex-lr bgcolor-down btn mt-10"
+              class="op-button flex-lr bgcolor-down btn mt-5"
               :class="{overflow: sellOverflow,enabled: sellEnabled, disabled: !sellEnabled}"
               v-loading="btnShortLoading"
               @click.prevent="submit('make_less')"
@@ -193,7 +193,7 @@
               </p>
             </div>
             <!-- 成本 -->
-            <div class="op-balance flex-lr mt-10">
+            <div class="op-balance flex-lr mt-5">
               <span
                 v-tooltip.top-center="{html: true, content: $t('contract_action_button_avg_tips'), classes: 'contract'}"
               >
@@ -205,7 +205,7 @@
           </div>
           <!-- <div class="op-exchange flex-lr mt-10 mb-10"/> -->
         </div>
-        <div class="row op-button-group mt-20">
+        <div class="row op-button-group">
           <div class="op-balance-container">
             <!-- 委托价值/可用余额 -->
             <div class="op-balance flex-lr mt-5">
@@ -240,18 +240,23 @@
               </span>
             </div>
             <!-- <div class="op-balance mt-5" v-if="isExtOrderType"> -->
-            <div class="op-balance mt-5" v-if="false">
+            <div class="op-balance  flex-lr  mt-5" v-if="isExtOrderType">
               <span>
                 {{ $t('contract_trigger_type') }}
                 <el-select class="trigger_dropdown ml-6" v-model="currentTriggerPrice">
-                  <el-option :label="$t('homechart_price')" value="price"/>
+                  <el-option :label="$t('contract_page.order_action.order_price')" :value="1"/>
+                  <el-option :label="$t('contract_mark_price')" :value="2"/>
+                  <el-option :label="$t('contract_index_price')" :value="3"/>
                 </el-select>
               </span>
-              <!-- <span>{{ $t('contract_trigger_close') }}
+              <span>{{ $t('contract_trigger_close') }}
+                <i class="iconfont strong pointer ml-6" 
+                  v-tooltip.top-center="{html: true, content:  $t('contract_page.order_action.trigger_close_tips'), classes: 'contract'}"
+                />
                 <el-checkbox
                   class="ml-4"
-                  v-model="local.closeAfterTrigger"/>
-              </span>-->
+                  v-model="closeAfterTrigger"/>
+              </span>
             </div>
             <!-- <div class="op-balance flex-lr mt-10" v-else-if="currentDealType === 'limit'">
               <span v-tooltip.top-center="{content: $t('post_only_tips'), classes: 'contract'}" :style="{color:(local.passiveDelegate ? '#22ced0':'')}">
@@ -500,7 +505,7 @@
         <!--备注-->
         <div
           class="stopmarket_tips c-primary"
-          v-if="isExtOrderType && local.closeAfterTrigger"
+          v-if="isExtOrderType && closeAfterTrigger"
           v-html="$t('contract_win_stopMarket_sell.tips', {symbol: $t('FUTURE_&USD', {currency: state.ct.product_name} )})"/>
         <div class="never-show pt-10 mb-10">
           <input type="checkbox" v-model="mmModal.neverShow">
@@ -730,7 +735,7 @@ export default {
       ],
       // 默认选中止损止盈
       currentOrderTypeExt: "contract_lose_stopMarket",
-      currentTriggerPrice: "price",
+      currentTriggerPrice: 1,
       buyEnabled: false,
       sellEnabled: false,
       showDialogModel: false,
@@ -741,6 +746,7 @@ export default {
       empty: "--", 
       stickLen: 23,
       profitRiskWidth: "316px",
+      closeAfterTrigger: false
     };
   },
   computed: {
@@ -1940,10 +1946,10 @@ export default {
     async doSubmit(order) {
       order.passive =  local.passiveDelegate ? 1 : 0;
       order.trigger_price = this.trigger_price;
-      //   if (this.isExtOrderType) {
-      //     order.trigger_type = this.currentTriggerPrice
-      //     order.close = local.closeAfterTrigger
-      //   }
+      if (this.isExtOrderType) { 
+        order.trigger_close = this.closeAfterTrigger;
+        order.trigger_type = this.closeAfterTrigger ? this.currentTriggerPrice : 0;
+      }
       let res = await service.orderContract(order);
       if (!res.code) {
         this._resetLoadingState();
@@ -2348,6 +2354,33 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.router-spa_contract>.el-popper{
+  border: none;
+  .el-scrollbar{
+    background: #1C2435;
+    color: #000;
+    border: none; 
+    .el-select-dropdown__item
+    {
+      color: #d7d7d7;
+      &.hover{
+        background: #1C2435; 
+        color: $primary;
+      }
+    }
+  }
+  .popper__arrow{
+    
+    border-bottom-color: #1C2435;
+    &::after {
+      border-bottom-color: #1C2435; 
+    }
+  }
+   
+}
+</style>
 
 <style lang="scss" scoped>
 .loginStatus {
