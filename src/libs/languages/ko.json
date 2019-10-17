@@ -2,6 +2,7 @@
   "signup": "회원가입",
   "signin": "로그인",
   "signout": "로그아웃",
+  "plan": "대리계획",
   "trading": "코인거래",
   "mining": "락업채굴",
   "asset": "자산",
@@ -2191,7 +2192,7 @@
       "trigger_short":"발동 후 창고를 평평하게하다",
       "order_price": "가격",
       "trigger_close_tips": "마진 정지 손해가 있을 때이 단추를 누르면, 평창의 위탁 유형은 창고만 줄어들 수 있습니다. 터질 때 시스템은 현재 창고수에 따라 자동으로이 유형의 위탁 개수가 줄어들거나 심지어 브레이크 취소, 위탁 유형이 부족하면 현재 위탁 유형이 터지면 위탁 실패。",
-      
+
       "modal": {
         "available": "사용가능금액",
         "position": "거래 가 성사 된 후 창고 포지션의 크기",
@@ -2211,21 +2212,21 @@
         "price_distance": "촉발 가격"
       }
     },
-    "pair_nav":{ 
+    "pair_nav":{
       "24h_h": "24시간 최고가",
-      "24h_l": "24시간 최저가" 
+      "24h_l": "24시간 최저가"
     }
   },
   "home": {
     "footer": {
       "affiliate": "대리신청：affiliate@ixx.com",
       "explain": "IXX 증권거래소는 세계 첫 디지털 자산 거래 공동체, 본부는 싱가포르에 있으며, 거래소 생태의 지역 체인 이상국 실현을 위해 노력하고 있으며, 모두가 나를 위해, 나는 모두를 위해, 모두가 나를 위해, 거래소 참여 공헌자는 모두 거래소의 발전 성과를 공유할 수 있다.",
-      "footer_contract_desc": "고객 서비스 추가" 
+      "footer_contract_desc": "고객 서비스 추가"
     }
   },
   "fund": {
     "withdraw": {
-      "address": "주소", 
+      "address": "주소",
       "bindings": "연동 완료",
       "no_bindings": "연동 미완료",
       "to_verify": "인증하러 가기",
@@ -2236,7 +2237,7 @@
       "phone_code": "메세지 인증번호",
       "email_code": "이메일 인증번호",
       "bind_google":"Google인증을 입력",
-      "bind_email_or_phone":"이메일/핸드폰 입력", 
+      "bind_email_or_phone":"이메일/핸드폰 입력",
       "to_deposit_tips":"인출은 원하는 액수의 최소 충전을 완료하고, 인출 기능을 활성화합니다",
       "to_deposit":"코인을 충전하다"
     },

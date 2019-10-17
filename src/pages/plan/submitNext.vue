@@ -12,9 +12,9 @@
       <div class="chart-container">
         <dl>
           <dt>{{ $t('news') }}</dt>
-          <dd><a href="https://www.instagram.com/ixxexchange"></a></dd>
-          <dd><a href="https://www.facebook.com/profile.php?id=100040054419479"></a></dd>
-          <dd><a href="https://twitter.com/IXX_Official"></a></dd>
+          <dd><a href="https://www.instagram.com/ixxexchange" target="_blank"></a></dd>
+          <dd><a href="https://www.facebook.com/profile.php?id=100040054419479" target="_blank"></a></dd>
+          <dd><a href="https://twitter.com/IXX_Official" target="_blank"></a></dd>
         </dl>
       </div>
       <div class="next-container-btn" @click="nextHandle">
@@ -187,6 +187,7 @@
         margin-bottom: 50px;
         background: url("../../assets/images/PC/Twitter.png") center center no-repeat;
         a {
+          height: 40px;
           display: block;
         }
         &:nth-child(2) {
