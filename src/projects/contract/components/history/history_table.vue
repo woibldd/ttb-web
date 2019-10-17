@@ -197,11 +197,18 @@
             <span v-tooltip.top-center="{html: true, content: $t('contract_current_werehouse_poi_tips'), classes: 'contract'}">{{ $t('contract_current_werehouse_poi') }}</span>
             <span :class="{'color-up': cholding.holding > 0, 'color-down':cholding.holding < 0}">{{ cholding.holding }}</span>
             <span v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_promise_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_promise') }}</span>
-            <label class="input-num" v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_promise_tips'), classes: 'contract'}" 
-             :class="cholding.leverage == 0 ? '' : 'pointer'" type="number" 
-             @click="showEnsModal(cholding)" >
-              {{cholding.margin_position | fixed(cholding.pairInfo.value_scale || 4)}} 
-            </label>
+            <span> 
+              <label class="input-num" v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_promise_tips'), classes: 'contract'}" 
+              :class="cholding.leverage == 0 ? '' : 'pointer'" type="number" 
+              @click="showEnsModal(cholding)" >
+                {{cholding.margin_position | fixed(cholding.pairInfo.value_scale || 4)}} 
+              </label>
+              <span
+                v-if="cholding.leverage != 0"
+                class="input-lab pointer"
+                @click="showEnsModal(cholding)"
+              >±</span>
+            </span>
             <!-- <span>≈ {{translateByRate(cholding.margin_position)}} USD</span> -->
             <span>≈ {{translateByRate(cholding.margin_position) | fixed(2)}} USD</span>
           </div>
@@ -1085,7 +1092,22 @@ export default {
       text-align: center;
       border:1px solid rgba(9,201,137,1);
       color: rgba(9,201,137,1);
+    }  
+    .op {
+      width: 14px;
+      height: 14px;
+      vertical-align: text-bottom;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      display: inline-block;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.8;
+      }
     }
+    .op_cancel {
+      background-image: url("../../../../assets/contract/icon-num-cancel.png");
+    } 
   }
 }
 .modal-operate-ensurance {

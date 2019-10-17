@@ -2,7 +2,7 @@
   <div
     class="pc-download-container"
     ref="pcDown">
-    <div class="banner">
+    <div class="banner" :class="{en: state.locale !=='zh-CN'}">
       <div class="main-info">
         <div class="slogan-txt">
           <p>{{ $t('dowload_text_1') }}</p>
@@ -73,10 +73,10 @@
             {{ $t('dowload_text_4') }}
           </div>
         </div>
-        <div class="phone phone-one"/>
+        <div class="phone phone-one" :class="{en: state.locale !=='zh-CN'}"/>
       </div>
       <div class="bg bg-two">
-        <div class="phone phone-two mr-30"/>
+        <div class="phone phone-two mr-30" :class="{en: state.locale !=='zh-CN'}"/>
 
         <div class="feature--txt">
           <div class="txt-1">
@@ -102,10 +102,10 @@
             {{ $t('download_pc_txt_3_3') }}
           </div>
         </div>
-        <div class="phone phone-three"/>
+        <div class="phone phone-three" :class="{en: state.locale !=='zh-CN'}"/>
       </div>
       <div class="bg bg-four">
-        <div class="phone phone-four mr-30"/>
+        <div class="phone phone-four mr-30" :class="{en: state.locale !=='zh-CN'}"/>
         <div class="feature--txt">
           <div class="txt-1">
             {{ $t('dowload_text_11') }}
@@ -139,11 +139,13 @@
   </div>
 </template>
 <script>
+import {state} from '@/modules/store'
 export default {
   data () {
     return {
       href: location.origin,
-      ix: false
+      ix: false,
+      state
     }
   },
   created () {
@@ -196,6 +198,9 @@ export default {
         box-sizing: border-box;
         padding-top: 120px * 100vw / 1920px;
         padding-left: 50%;
+    }
+    &.en {
+      background-image: url(~@/assets/download/banner-en.jpg); 
     }
 
 }
@@ -336,6 +341,23 @@ export default {
             }
             &.phone-five {
 /*                background-image: url(~@/assets/download/iphone-5.png)*/
+            }
+             &.en {
+              &.phone-one {
+                background-image: url(~@/assets/download/iphone-1-en.png)
+              }
+              &.phone-two {
+                  background-image: url(~@/assets/download/iphone-2-en.png)
+              }
+              &.phone-three {
+                  background-image: url(~@/assets/download/iphone-3-en.png)
+              }
+              &.phone-four {
+                  background-image: url(~@/assets/download/iphone-4-en.png)
+              }
+              &.phone-five {
+                  background-image: url(~@/assets/download/iphone-5-en.png)
+              }
             }
         }
 

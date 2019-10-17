@@ -1743,7 +1743,7 @@
   "count_down_value": " %{hour}:%{minute}:%{second}",
   "message_setting_safety": "Security Authentication",
   "message_setting_notice": "Site Notification",
-  "message_setting_content_01": "IXX will notify you on the following events. If supported, IX will use your native Browser/Operating System notifications. You can disable that and use in-page notifications by clicking the lock icon in the URL bar and disabling notifications. You may also disable individual notifications below.",
+  "message_setting_content_01": "IXX will notify you on the following events. If supported, IXX will use your native Browser/Operating System notifications. You can disable that and use in-page notifications by clicking the lock icon in the URL bar and disabling notifications. You may also disable individual notifications below.",
   "message_setting_content_02": " Order has been submitted",
   "message_setting_content_03": "The order has been cancelled",
   "message_setting_content_04": " The order has been partially executed ",
@@ -2358,6 +2358,10 @@
   "contract_page": {
     "order_action": {
       "price": "Order Price",
+      "trigger_short":"trigger liquidation",
+      "order_price": "盘口价格",
+      "trigger_close_tips": "止盈止损委托时，勾选此按钮，平仓委托只会减少您的仓位，触发时，系统会根据当前仓位数量自动减少这类型委托的数量，甚至制动取消它，来确保它不会增加您的仓位，如果您的余额不足，当前委托类型触发后将会委托失败。",
+      
       "modal": {
         "available": "Available Balance",
         "position": "Position Size After Execution",
@@ -2385,7 +2389,8 @@
   "home": {
     "footer": {
       "affiliate": "Affiliate：affiliate@ixx.com",
-      "explain": "IXX is a cryptocurrency derivatives exchange, headquartered in Singapore and registered in Malaysia. It is the world's first digital asset trading community and committed to realize the ideal utopia nation of blockchain trading ecology, create an exchange for everyone. All contributors can share the fruitful outcome from developments of the exchange."
+      "explain": "IXX is a cryptocurrency derivatives exchange, headquartered in Singapore and registered in Malaysia. It is the world's first digital asset trading community and committed to realize the ideal utopia nation of blockchain trading ecology, create an exchange for everyone. All contributors can share the fruitful outcome from developments of the exchange.",
+      "footer_contract_desc": "Official Wechat" 
     }
   },
   "fund": {
@@ -2399,17 +2404,22 @@
       "email": "Email",
       "phone": "Mobile",
       "phone_code": "SMS Verification Code",
-      "email_code": "Code",
-      "bind_google": "绑定谷歌验证器",
-      "bind_email_or_phone": "绑定邮箱/手机",
-      "to_deposit_tips": "提币需要您至少完成一笔任意额度充币，激活提币功能",
-      "to_deposit": "去充币"
+      "email_code": "Code",  
+      "bind_google": " Link with Google Autheticator",
+      "bind_email_or_phone": "Link with Email/ Mobile", 
+      "to_deposit_tips": "Activation of withdrawal function  can  only be done after a deposit of any amount had been made into the account",
+      "to_deposit": "Deposit"
     },
     "address": {
       "address": "Address"
     },
     "deposit": {
       "address": "Deposit Address"
+    }
+  },
+  "profile": {
+    "security": {
+      "close_verify_tips": "手机验证和邮箱验证不能同时关闭"
     }
   }
 }

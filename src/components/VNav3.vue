@@ -494,7 +494,7 @@ export default {
 
   .ind_cen {
     position: relative;
-    margin: 0 60px;
+    margin: 0;
     min-width: 1300px;
   }
 
@@ -609,7 +609,9 @@ export default {
     }
   }
   .nav_right {
-    float: right;
+    position: absolute;
+    top: 28px;
+    right: 0;
     font-size: 14px;
     height: 100%;
     display: flex;
@@ -752,7 +754,7 @@ export default {
     }
   }
 
-  @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .c_box {
       padding: 0 10px;
     }
@@ -783,11 +785,11 @@ export default {
 .login {
   background: $home-header-login;
 }
-@media screen and (min-width: 1300px){ // 1280是英文状态下nav正常显示的最小宽度
+@media screen and (min-width: 1500px){ // 1280是英文状态下nav正常显示的最小宽度
     .nav_box {
         .ind_cen {
             width: auto;
-            min-width: 1300px;
+            min-width: 1500px;
             margin: 0 60px;
         }
    }

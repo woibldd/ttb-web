@@ -14,9 +14,15 @@
           <img
             class="footer_ewm"
             src="../assets/ixx_kefu_big.jpg">
+          <p class="footer_ewm_ltxt">{{ $t('home.footer.footer_contract_desc') }}</p>
+        </div> 
+        <div
+          class="lt">
+          <img
+            class="footer_ewm"
+            src="../assets/kefu_telegran_ewm.jpg">
           <p class="footer_ewm_ltxt">{{ $t('footer_contract_desc') }}</p>
         </div>
-        
         <div
           class="lt"> 
           <p class="footer_explain_txt">{{ $t('home.footer.explain') }}</p>

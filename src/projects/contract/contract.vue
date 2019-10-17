@@ -260,6 +260,16 @@ export default {
     }
   },
   async created() {
+    
+    //如果地址带有邀请码信息则将邀请码写入cookie中，有效期为10天 2019/10/16 yzf
+    let invitorId = this.$route.query.invitor
+    let agentId = this.$route.query.agent
+    if (invitorId) {
+      utils.setCookie('invitor', invitorId, 10) 
+    } else if (agentId) {
+      utils.setCookie('invitor', agentId, 10) 
+    }
+
     let newOrder = {}
     const $this = this
     setInterval(function() {

@@ -11,8 +11,8 @@
       </div>
       <div class="broker-btn wow fadeInUp">
         <a class="join" href="javascript:;" @click="joinHandle">
-            {{ $t('join') }}
-          </a>
+          {{ $t('join') }}
+        </a>
         <a class="login" href="https://freebarley.com/#/login?redirect=%2Fdashboard" target="_blank">
           {{ $t('login') }} >
         </a>
