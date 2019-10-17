@@ -277,7 +277,7 @@
     margin-top: 0;
   }
   .email {
-    margin-top: 20px;
+    // margin-top: 20px;
     color: #23CED0
   }
   .error-msg {

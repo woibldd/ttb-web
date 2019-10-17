@@ -32,13 +32,27 @@
             <!-- <img src="@/assets/hot.png"
 alt style="position: relative;top: 5px;left: 5px;"> -->
           </router-link>
-          <router-link
-            v-if='!isTestnet'
-            to="/snowball/bazaar"
-            class="nav_link  ml-30">
-            {{$t('bidTitle')}}
-          </router-link>
-          <div
+          
+          <div class="nav_link arrow-down">
+            <router-link 
+              to="/snowball/bazaar"
+              class="nav_link  ml-30">
+              {{$t('bidTitle')}}
+            </router-link>
+            <div class="dropdown-sub-menu" v-if="isLogin">
+              <ul class="dropdown-list pt-10 pb-10">
+                <li class="dropdown-item pl-24 pr-24"> 
+                  <a
+                    href="/snowball"
+                    :class="{'router-link-active': from === 'contract'}"
+                    class="link">{{ $t('playBTC') }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+            
+          </div>
+          <!-- <div
             class="nav_link arrow-down"
             v-if='isTestnet'
             >
@@ -57,7 +71,7 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
                 </li>
               </ul>
             </div>
-          </div>
+          </div> -->
           <a
             href="javascript:;"
             class="nav_link"
@@ -66,14 +80,14 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             {{ this.$t('node_sub') }}
             <icon name="hot-red"/>
           </a>
-          <a
+          <!-- <a
             href="javascript:;"
             class="nav_link"
             style="padding-left:30px;"
             @click="planHandle"
           >
             {{ $t('plan') }}
-          </a>
+          </a> -->
           <!-- <router-link
             to="/share_option"
             class="nav_link  ml-30">
@@ -641,7 +655,7 @@ export default {
     .dropdown-sub-menu {
       background: $protrade-bg;
       position: absolute;
-      top: 60px;
+      top: 31px;
       border-radius: 4px;
       z-index: 999;
 
