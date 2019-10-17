@@ -243,14 +243,16 @@
             <div class="op-balance  flex-lr  mt-5" v-if="isExtOrderType">
               <span>
                 {{ $t('contract_trigger_type') }}
-                <el-select class="trigger_dropdown ml-6" v-model="currentTriggerPrice">
+                <el-select class="trigger_dropdown"
+                  @change="setButtonState()"
+                  v-model="currentTriggerType">
                   <el-option :label="$t('contract_page.order_action.order_price')" :value="1"/>
                   <el-option :label="$t('contract_mark_price')" :value="2"/>
                   <el-option :label="$t('contract_index_price')" :value="3"/>
                 </el-select>
               </span>
               <span>{{ $t('contract_trigger_close') }}
-                <i class="iconfont strong pointer ml-6" 
+                <i class="iconfont strong pointer" 
                   v-tooltip.top-center="{html: true, content:  $t('contract_page.order_action.trigger_close_tips'), classes: 'contract'}"
                 />
                 <el-checkbox
@@ -423,7 +425,7 @@
           <p class="mt-8" v-if="isExtOrderType">
             <span
               class="c-666"
-            >{{ $t(exchangeDir === 'BUY' ? 'contract_trigger_tips_sell' : 'contract_trigger_tips_buy', {price: trigger_price}) }}</span>
+            >{{ $t(exchangeDir === 'BUY' ? 'contract_trigger_tips_sell' : 'contract_trigger_tips_buy', {price: trigger_price, trigger_type: $t(triggerType)}) }}</span>
           </p>
         </div>
         <div class="modal__holding pt-17 pb-17">
@@ -735,7 +737,7 @@ export default {
       ],
       // 默认选中止损止盈
       currentOrderTypeExt: "contract_lose_stopMarket",
-      currentTriggerPrice: 1,
+      currentTriggerType: 1,
       buyEnabled: false,
       sellEnabled: false,
       showDialogModel: false,
@@ -750,6 +752,13 @@ export default {
     };
   },
   computed: {
+    triggerType () {
+      return {
+        1: "contract_page.order_action.order_price",
+        2: "contract_mark_price",
+        3: "contract_index_price"
+      }[this.currentTriggerType]
+    },
     pair () {
       return this.state.ct.pair
     },
@@ -1612,6 +1621,12 @@ export default {
       //止盈止损操作，当系统会自动产生委托时，弹出确认提示
       const type = this._getOrderType();
       let showWarn = false;
+
+      let lprice = {
+        1 : this.lastPrice * 1, //盘口价格
+        2 : this.markPrice * 1, //标记价格
+        3 : this.indexPrice * 1  //指数价格
+      } [this.currentTriggerType]
       //console.log(type, this.lastPrice, this.trigger_price, showWarn)
       console.log(typeof this.currentHolding.amount, typeof ($amount * 1));
       if ([3, 4, 5, 6].indexOf(type) >= 0) {
@@ -1619,14 +1634,14 @@ export default {
           //买入止损，盘口价格大于等于触发价格，系统自动生产委托订单
           if (
             (type === 3 || type === 4) &&
-            this.lastPrice >= this.trigger_price
+            lprice >= this.trigger_price
           ) {
             showWarn = true;
           }
           //买入止盈，盘口价格低于等于触发价格，系统自动生成订单委托
           if (
             (type === 5 || type === 6) &&
-            this.lastPrice <= this.trigger_price
+            lprice <= this.trigger_price
           ) {
             showWarn = true;
           }
@@ -1634,14 +1649,14 @@ export default {
           //卖出止损，盘口价格低于等于触发价格，系统自动生产订单委托
           if (
             (type === 3 || type === 4) &&
-            this.lastPrice <= this.trigger_price
+            lprice <= this.trigger_price
           ) {
             showWarn = true;
           }
           //卖出止盈，盘口价格大于等于触发价格，系统自动生成订单委托
           if (
             (type === 5 || type === 6) &&
-            this.lastPrice >= this.trigger_price
+            lprice >= this.trigger_price
           ) {
             showWarn = true;
           }
@@ -1948,7 +1963,7 @@ export default {
       order.trigger_price = this.trigger_price;
       if (this.isExtOrderType) { 
         order.trigger_close = this.closeAfterTrigger;
-        order.trigger_type = this.closeAfterTrigger ? this.currentTriggerPrice : 0;
+        order.trigger_type = this.currentTriggerType;
       }
       let res = await service.orderContract(order);
       if (!res.code) {
@@ -2005,7 +2020,11 @@ export default {
         [this.buyEnabled, this.sellEnabled] = [true, true];
       } else {
         const orderType = this._getOrderType();
-        const lprice = this.lastPrice * 1;
+        let lprice = {
+          1 : this.lastPrice * 1, //盘口价格
+          2 : this.markPrice * 1, //标记价格
+          3 : this.indexPrice * 1  //指数价格
+        } [this.currentTriggerType]
         const tprice = this.trigger_price;
         //console.log(oldValue)
         //限价止损  市价止损

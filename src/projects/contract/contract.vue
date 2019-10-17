@@ -681,7 +681,7 @@ export default {
   }
   .ix-col-4 {
     width: 20%;
-    min-width: 300px;
+    min-width: 310px;
     max-width: 340px;
     flex-shrink: 0;
   }

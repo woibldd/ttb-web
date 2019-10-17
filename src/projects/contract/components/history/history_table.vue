@@ -905,11 +905,13 @@ export default {
 }
 .bgcolor-unp {
     background-color: #8CBF26;
-    opacity: .6;
+    color:#fff;
+    opacity: .9;
   }
   .bgcolor-dnp {
     background-color: #e8704f;
-    opacity: .6;
+    color:#fff;
+    opacity: .9;
   }
 .werehouse-box {
     width: 100%;

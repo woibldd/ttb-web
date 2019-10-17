@@ -1174,8 +1174,8 @@
   "coin_index_value_history": "%{pair} coin index value history",
   "contract_block_orderbook": "Orderbook",
   "contract_block_orderdeal": "Latest",
-  "contract_block_orderaction": "Submit an order",
-  "contract_block_market_info": "Market information",
+  "contract_block_orderaction": "Submit An Order",
+  "contract_block_market_info": "Market Information",
   "contract_history_position": "Positions",
   "contract_history_position_tips": "This is the number of positions you wish to buy or sell. See contract details below. See \"Delegation Value\" for the total value of the entire contracts。",
   "contract_min_unit": "Increase",
@@ -1362,7 +1362,7 @@
   "contract_label_result_b": "F = %{premium} + Clamp(0.0100% - -1.7021%, -0.05%, 0.05%) F = P + Clamp(I - P, -0.05%, 0.05%)",
   "formula a": "I = (0.06% - 0.03%) / 3",
   "formula b": "F = -1.7021% + Clamp(0.0100% - -1.7021%, -0.05%, 0.05%)",
-  "contract_index_price": " Price Index",
+  "contract_index_price": "Index Price",
   "contract_convin_price": "Fair Price",
   "contract_fund_usee_lever": " %{per} deposit has been used times %{lever} of leverage",
   "contract_risk_note": "Risk disclosure notice：",
@@ -1411,7 +1411,7 @@
   "contract_commission": "Contract rebate",
   "spot_return": "Spot rebate",
   "stop_win_loss_warn_title": "Warning: Stop Loss Orders are not necessarily triggered",
-  "stop_win_loss_warn_content": "After the stop loss order is executed, your position will be increased from %{hold} to %{will hold}. Then you have selected the \"Shutdown after trigger\" option. The purpose of this option is to Closing the position. If you continue, the stop loss order may be cancelled immediately after being triggered.",
+  "stop_win_loss_warn_content": "After the stop loss order is executed, your position will be increased from %{hold} to %{willhold}. Then you have selected the \"Shutdown after trigger\" option. The purpose of this option is to Closing the position. If you continue, the stop loss order may be cancelled immediately after being triggered.",
   "warn_confirm_text": "Please click to confirm this action",
   "stop_loss_apply": "Submit Stop Loss Order",
   "stop_win_apply": "Submit a profit-taking commission",
@@ -1587,7 +1587,7 @@
   "contract_ix_index_source": "IXX Index",
   "contract_deal_type_0": "Funding Rate distribution",
   "contract_risklimit_tips": "Use this to adjust your leverage on the fly via the leverage slider.，it only affect the allocated Margin",
-  "contract_action_passive_delegate": "Post-only order",
+  "contract_action_passive_delegate": "Post-Only Order",
   "contract_lose_stopMarket.tips": "A Stop Order is an order that does not enter the order book until the market reaches a certain Trigger price.Traders use this type of order for two main strategies.：\n\n1. As a risk-management tool to limit losses on existing positions.\n2. As an automatic tool to enter the market at a desired entry point without manually waiting for the market to place the order.\n\nA Stop Order will become a Market Order when the Stop Price is reached",
   "contract_lose_stopLimit.tips": "\n\n",
   "contract_win_stopLimit.tips": "A Take Profit Limit Order can be used to set a target price on a position.It is like a Stop, but triggers are set in the opposite direction.\n\nUse this to exit a position in profit, or to set an entry point for a new position.",
@@ -1601,11 +1601,11 @@
   "contract_trigger_lose_buy": "Set Buy Stop",
   "contract_trigger_lose_sell": "Set Sell stop",
   "contract_trigger": "trigger",
-  "contract_trigger_tips_buy": "Trigger: Last Price @%{price} and below",
-  "contract_trigger_tips_sell": "Trigger: Last Price @%{price} and above",
+  "contract_trigger_tips_buy": "Trigger: {trigger_type} @%{price} and below",
+  "contract_trigger_tips_sell": "Trigger: {trigger_type} @%{price} and above",
   "contract_passive_cancel": "As the post-only order mode on, this direction can not ordered by Price ",
-  "contract_trigger_type": "Trigger type",
-  "contract_trigger_close": "trigger liquidation",
+  "contract_trigger_type": "Trigger",
+  "contract_trigger_close": "Close on Trigger",
   "contract_deal_type_5": "Take Limit",
   "contract_deal_type_6": "Take Market",
   "contract_Competition_banner_1": "Sign up for participation",
@@ -2359,9 +2359,8 @@
     "order_action": {
       "price": "Order Price",
       "trigger_short":"trigger liquidation",
-      "order_price": "盘口价格",
-      "trigger_close_tips": "止盈止损委托时，勾选此按钮，平仓委托只会减少您的仓位，触发时，系统会根据当前仓位数量自动减少这类型委托的数量，甚至制动取消它，来确保它不会增加您的仓位，如果您的余额不足，当前委托类型触发后将会委托失败。",
-      
+      "order_price": "Price",
+      "trigger_close_tips": "Check this button when placing take profit and stop loss orders, close orders can only reduce your position. When triggered, the system will automatically reduce the quantity of this order according to the current position, or even cancel it to ensure that it will not increase your position. If your balance is insufficient, the current order will fail after triggering.",
       "modal": {
         "available": "Available Balance",
         "position": "Position Size After Execution",
@@ -2419,7 +2418,7 @@
   },
   "profile": {
     "security": {
-      "close_verify_tips": "手机验证和邮箱验证不能同时关闭"
+      "close_verify_tips": "Do not allowed to turn off mobile and email verification simultaneous"
     }
   }
 }

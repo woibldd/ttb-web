@@ -171,7 +171,8 @@ export default {
         // const minStep = Math.pow(10, -this.realScale) * this.accuracy
         let $newValue = this.$big(newValue)
         if (!$newValue.mod(minStep).eq(0)) {
-          $newValue = $newValue.div(minStep).round(this.realScale >= 1 ? this.realScale - 1 : 0, 0).mul(minStep)
+          // $newValue = $newValue.div(minStep).round(this.realScale >= 1 ? this.realScale - 1 : 0, 0).mul(minStep)
+          $newValue = $newValue.div(minStep).round(0, 0).mul(minStep)
         }
         // this.updateValue(this.$big(newValue).round(this.realScale) + '', 'valueChange')
         this.updateValue($newValue.round(this.realScale) + '', 'valueChange')
