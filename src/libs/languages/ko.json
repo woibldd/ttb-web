@@ -2,6 +2,7 @@
   "signup": "회원가입",
   "signin": "로그인",
   "signout": "로그아웃",
+  "plan": "대리계획",
   "trading": "코인거래",
   "mining": "락업채굴",
   "asset": "자산",
@@ -2192,7 +2193,7 @@
         "available": "사용가능금액",
         "position": "거래 가 성사 된 후 창고 포지션의 크기",
         "liq_price": "예상물가",
-        "difference": "예상가격차이" 
+        "difference": "예상가격차이"
       }
     },
     "orderbook": {
@@ -2207,9 +2208,9 @@
         "price_distance": "촉발 가격"
       }
     },
-    "pair_nav":{ 
+    "pair_nav":{
       "24h_h": "24시간 최고가",
-      "24h_l": "24시간 최저가" 
+      "24h_l": "24시간 최저가"
     }
   },
   "home": {
@@ -2220,7 +2221,7 @@
   },
   "fund": {
     "withdraw": {
-      "address": "주소", 
+      "address": "주소",
       "bindings": "연동 완료",
       "no_bindings": "연동 미완료",
       "to_verify": "인증하러 가기",
@@ -2231,7 +2232,7 @@
       "phone_code": "메세지 인증번호",
       "email_code": "이메일 인증번호",
       "bind_google": "绑定谷歌验证器",
-      "bind_email_or_phone": "绑定邮箱/手机", 
+      "bind_email_or_phone": "绑定邮箱/手机",
       "to_deposit_tips": "提币需要您至少完成一笔任意额度充币，激活提币功能",
       "to_deposit": "去充币"
     },
