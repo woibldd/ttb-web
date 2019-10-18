@@ -25,7 +25,7 @@
       <div class="next-container-ipt">
         <div class="ipt">
           <div class="tip" for="region">{{$t('country')}}</div>
-          <el-select v-model="form.region" :disabled="!emailFlag" placeholder="请选择" style="width: 100%">
+          <el-select :placeholder="plc" v-model="form.region" :disabled="!emailFlag" style="width: 100%">
             <el-option
               v-for="item in regionData.data"
               :key="item.id"
@@ -101,6 +101,9 @@
           return state.userInfo.id
         }
         return ''
+      },
+      plc () {
+        return this.$t('please_choose')
       }
     },
     methods: {
@@ -158,6 +161,7 @@
     },
     created() {
       this.form.uid = Number(this.uid)
+      console.log(this.plc)
     }
   }
 </script>
