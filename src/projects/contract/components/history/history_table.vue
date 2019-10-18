@@ -481,6 +481,12 @@ export default {
     },
     Rates() {
       return this.state.rate.BTC
+    },
+    userSetting () {
+      if (this.state.ct.userSetting) {
+        return this.state.ct.userSetting
+      }
+      return {}
     }
   },
   watch: {
@@ -609,14 +615,15 @@ export default {
           order_id: row.id
         }
         service.revertContract(params).then(res => {
-          if (!res.code) {
-            // utils.success()
+          if (!res.code) { 
             // 刷新所有订单
-            this.$toast({ title: this.$t('delegate_cancellation'), body: this.$t('contract_revert_success'), color: 'yellow' })
+            if (this.userSetting.cancel){
+              this.$toast({ title: this.$t('delegate_cancellation'), body: this.$t('contract_revert_success'), color: 'yellow' })
+            } 
             this.$eh.$emit('protrade:order:refresh', 'clickTd')
           } else {
             this.$toast({ title: this.$t('delegation_cancellation_failed'), body: res.message, color: 'red' })
-            // utils.alert()
+             
           }
         })
       }

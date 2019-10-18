@@ -23,7 +23,7 @@
               <p>{{ $t('message_setting_content_03') }}</p>
             </div>
             <div>
-              <input v-model="data.deal" type="checkbox" name="" value="true"><label @click="fanx('cancel')" for=""></label>
+              <input v-model="data.cancel" type="checkbox" name="" value="true"><label @click="fanx('cancel')" for=""></label>
             </div>
           </li>
           <li class="">
@@ -31,7 +31,7 @@
               <p>{{ $t('message_setting_content_04') }}</p>
             </div>
             <div>
-              <input v-model="data.cancel" type="checkbox" name="" value="true"><label @click="fanx('deal')" for=""></label>
+              <input v-model="data.deal" type="checkbox" name="" value="true"><label @click="fanx('deal')" for=""></label>
             </div>
           </li>
           <li class="">
@@ -119,6 +119,7 @@ export default {
     service.MessageSettings(param).then(resp => {
       if (!resp.code) {
          this.data = resp.data
+         this.state.ct.userSetting = resp.data
       }
     })
   },
