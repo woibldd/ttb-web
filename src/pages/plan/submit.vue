@@ -46,6 +46,19 @@
         <router-link to="/user/register/email">{{ $t('not') }}? <span>{{ $t('now') }}</span></router-link>
       </div> -->
     </div>
+    <div class="submit-alert-mask" v-if="emailAlertFlag">
+      <div class="submit-alert-container">
+        <div class="close" @click="emailAlertFlag = false">
+          <img src="../../assets/images/close.png" alt="" width="36" height="36">
+        </div>
+        <div class="title">
+          {{ $t('s_email') }}
+        </div>
+        <div class="button" @click="emailAlertHandle">
+          {{ $t('bd') }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -65,6 +78,7 @@
           'create_time': Date.parse(new Date()),
           'update_time': Date.parse(new Date())
         },
+        emailAlertFlag: false,
         regionData,
         errorMsg: '',
         emailFlag: false
@@ -104,20 +118,16 @@
               })
             } else {
               if (res.code === 30015) {
-                this.$confirm(this.$t('s_email'), {
-                  confirmButtonText: this.$t('confirm'),
-                  cancelButtonText: this.$t('cancel'),
-                  type: 'warning'
-                }).then(() => {
-                  this.$router.push('/profile/info')
-                }).catch(() => {
-                })
+                this.emailAlertFlag = true
               } else {
                 this.$message.error(res.message)
               }
             }
           })
         }
+      },
+      emailAlertHandle() {
+        this.$router.push('/profile/info')
       },
       emailHandle() {
         this.emailFlag = false
@@ -300,6 +310,50 @@
       text-decoration: none;
       span {
         color: #23CED0
+      }
+    }
+  }
+  .submit-alert-mask {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, .6);
+    .submit-alert-container {
+      width: 376px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 1);
+      border-radius: 8px;
+      box-shadow: 0 8px 16px rgba(0,0,0,.8);
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      overflow: hidden;
+      .close {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+        img {
+          zoom: 1
+        }
+      }
+      .title {
+        font-size: 18px;
+        text-align: center;
+      }
+      .button {
+        width:229px;
+        height:40px;
+        background:rgba(35,206,208,1);
+        border-radius:5px;
+        margin: 30px auto 0;
+        text-align: center;
+        line-height: 40px;
+        color: #fff;
       }
     }
   }
