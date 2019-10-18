@@ -46,7 +46,7 @@
   "back": "Back",
   "not": "No IXX trading account",
   "now": "Register now",
-  "s_email": "You did not bind this mailbox, please do so",
+  "s_email": "'You have yet to link the email, please link' . 'Link",
   "signup": "Sign up",
   "signin": "Sign in",
   "signout": "Sign out",
@@ -2389,7 +2389,7 @@
     "footer": {
       "affiliate": "Affiliate：affiliate@ixx.com",
       "explain": "IXX is a cryptocurrency derivatives exchange, headquartered in Singapore and registered in Malaysia. It is the world's first digital asset trading community and committed to realize the ideal utopia nation of blockchain trading ecology, create an exchange for everyone. All contributors can share the fruitful outcome from developments of the exchange.",
-      "footer_contract_desc": "Official Wechat" 
+      "footer_contract_desc": "Official Wechat"
     }
   },
   "fund": {
@@ -2403,9 +2403,9 @@
       "email": "Email",
       "phone": "Mobile",
       "phone_code": "SMS Verification Code",
-      "email_code": "Code",  
+      "email_code": "Code",
       "bind_google": " Link with Google Autheticator",
-      "bind_email_or_phone": "Link with Email/ Mobile", 
+      "bind_email_or_phone": "Link with Email/ Mobile",
       "to_deposit_tips": "Activation of withdrawal function  can  only be done after a deposit of any amount had been made into the account",
       "to_deposit": "Deposit"
     },

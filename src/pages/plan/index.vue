@@ -10,7 +10,7 @@
         </template>
       </div>
       <div class="broker-btn wow fadeInUp">
-        <a class="join" href="javascript:;" @click="joinHandle">
+        <a class="join" :href="next" target="_blank">
           {{ $t('join') }}
         </a>
         <a class="login" href="https://freebarley.com/#/login?redirect=%2Fdashboard" target="_blank">
@@ -113,7 +113,10 @@
     computed: {
       lang() {
         return state.locale
-      }
+      },
+      next() {
+        return '/planSubmit?lang=' + this.lang
+      },
     },
     methods: {
       joinHandle() {

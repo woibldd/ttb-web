@@ -27,8 +27,8 @@
           <div class="tip" for="region">{{$t('country')}}</div>
           <select id="region" autocomplete="off" :disabled="!emailFlag" v-model="form.region" name="region">
             <option v-for="(item, index) in regionData.data" :key="index" :value="item.id">
-              <template v-if="lang === 'zh'">{{ item.cname }}</template>
-              <template v-else> {{ item.fullname }} </template>
+              <template v-if="lang === 'en'">{{ item.fullname }}</template>
+              <template v-else> {{ item.cname }} </template>
             </option>
           </select>
         </div>
@@ -72,7 +72,7 @@
     },
     computed: {
       lang() {
-        return 'en'
+        return this.$route.query.lang
       },
       uid () {
         if (state.userInfo) {
@@ -205,6 +205,9 @@
         }
         &:focus + label {
           transform: translateY(-35px) scale(0.85);
+        }
+        option {
+          color: #666;
         }
       }
       .tip {
