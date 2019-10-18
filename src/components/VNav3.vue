@@ -87,7 +87,7 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             @click="planHandle"
           >
             {{ $t('plan') }}
-          </a> -->
+          </a>  
           <router-link
             to="/share_option"
             class="nav_link  ml-30">
