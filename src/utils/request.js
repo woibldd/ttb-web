@@ -6,7 +6,7 @@ import { getUser } from '@/utils/auth'
 // create an axios instance
 // axios.defaults.withCredentials = true
 const service = axios.create({
-  baseURL: process.env.BASE_API, // url = base url + request url
+  baseURL: 'https://i.ixex.pro', // url = base url + request url
   withCredentials: true, // send cookies when cross-domain requests
   timeout: 10000 // request timeout
 })
@@ -56,12 +56,12 @@ service.interceptors.response.use(
           type: 'warning',
           duration: 3 * 1000
         })
-        // setTimeout(() => {
-        //   store.dispatch('loginout')
-        // }, 3000)
+        setTimeout(() => {
+          store.dispatch('loginout')
+        }, 3000)
       } else {
         Message({
-          message: res.message || 'Server Error',
+          message: res.message || '服务端的错误',
           type: 'error',
           duration: 5 * 1000
         })

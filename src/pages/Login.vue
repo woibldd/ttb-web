@@ -223,7 +223,7 @@ import countDown from '@/components/common/countdown-code-button'
 import responsive from '@/mixins/responsive'
 import bubble from '@/components/Bubble'
 import VDownload from '@/components/VDownload'
-
+import { activeShareAccount } from '@/api/share_option'
 export default {
   name: 'Login',
   components: {
@@ -523,7 +523,7 @@ export default {
     async loginSuccess(userInfo) {
       actions.setUserInfo(userInfo)
       actions.resetStatus()
-
+      activeShareAccount(userInfo.id)
       if (typeof state.loginBack === 'string') {
         location.href = state.loginBack
       } else {

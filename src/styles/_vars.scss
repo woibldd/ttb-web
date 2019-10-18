@@ -15,3 +15,16 @@ $--color-primary: #01ced1;
 $--color-success: #13ce66;
 $--color-warning: #FFBA00;
 $--color-danger: #ff4949;
+
+.share-text-info{
+  color: $--share-text-info
+}
+.share-text-success{
+  color: $--color-success
+}
+.share-text-danger{
+  color: $--color-danger
+}
+.share-active-bg{
+  color: $--color-success
+}

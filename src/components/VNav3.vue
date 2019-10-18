@@ -288,7 +288,7 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
                   <el-tooltip :disabled="false" :content="`${item.currency} 账户 / ${bigRound(item.available,4)}`" placement="left" effect="dark">
                     <a class="text-nowrap" :style="{color:item.currency === activeShareAccount.currency?'':'#fff'}"><svg-icon :icon-class="item.currency.toLowerCase()" /> {{item.currency}} 账户 /{{item.available| bigRound(4)}}</a>
                   </el-tooltip>
-                  <span v-if="item.currency === 'DEMO'"  @click.stop="resetBalance(item.currency)">充值体验金</span>
+                  <span v-if="item.currency === 'DEMO'"  @click.stop="resetBalance(item.currency)">重置体验金</span>
                   <span v-else>充值</span>
                 </li>
               </ul>

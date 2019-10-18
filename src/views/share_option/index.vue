@@ -11,7 +11,10 @@
     <transition name="fade" @after-leave="afterLeaveOrEnter" @enter="afterLeaveOrEnter">
       <div v-if="drawerIsOpen" class="left-drawer">
         <div slot="title" flex="cross:center main:justify" style="height:40px">
-          <p>{{ temComponet.name=== 'ShareHistory'?'历史记录':'最新价格' }}<span v-if="temComponet.name=== 'SpotIndex'" class="share-text-info" style="font-size:12px;">(USDT/USD)</span> <el-link type="primary" style="font-size:12px" @click="$router.push({path:'/user/property',query:{key:'share-option'}})"> 完整历史记录</el-link></p>
+          <p>
+            {{ temComponet.name=== 'ShareHistory'?'历史记录':'最新价格' }}
+            <span v-if="temComponet.name=== 'SpotIndex'" class="share-text-info" style="font-size:12px;">(USDT/USD)</span>
+            <el-link v-else type="primary" style="font-size:12px" @click="$router.push('/fund/share')"> 完整历史记录</el-link></p>
         </div>
         <component :is="temComponet" :data="temComponet.name=== 'ShareHistory'?historyData:marketData" @loadData="loadHistoryData" />
         <i class="el-icon-close" @click="drawerIsOpen = false" />
