@@ -220,6 +220,12 @@ export default {
         return this.state.ct.pairTick
       }
       return {}
+    },
+    userSetting () {
+      if (this.state.ct.userSetting) {
+        return this.state.ct.userSetting
+      }
+      return {}
     }
   },
   watch: {
@@ -269,12 +275,18 @@ export default {
     } else if (agentId) {
       utils.setCookie('invitor', agentId, 10) 
     }
+    
+    service.MessageSettings().then(resp => {
+      if (!resp.code) {
+        $this.state.ct.userSetting = resp.data
+      }
+    })
 
     let newOrder = {}
     const $this = this
     setInterval(function() {
       // console.log(this.problemError)
-      service.getOrderfills({ page: 1, size: 10, symbol: 'FUTURE_BTCUSD' }).then(res => {
+      service.getOrderfills({ page: 1, size: 10, symbol: this.state.ct.pair }).then(res => {
         if (!res.code) {
           // const number = 0
           if (JSON.stringify(newOrder) === '{}') {
@@ -359,17 +371,17 @@ export default {
       let number = 0
       const $this = this
       for (const i in newOrder) {
-        if (newOrder[i].origin === 2) {
+        if (newOrder[i].origin === 2 && this.userSetting.force) {
           $this.$toast({ title: $this.$t('entrusted_mandatory_liquidation'),
             body: $this.$t('successfully_body_text_system', { price: newOrder[i].price, amount: newOrder[i].amount }), color: 'red' })
         }
 
-        if (newOrder[i].origin === 4) {
+        if (newOrder[i].origin === 4 && this.userSetting.reduce) {
           $this.$toast({ title: $this.$t('system_automatic_warehouse_closing'),
             body: $this.$t('successfully_body_text_reduce', { price: newOrder[i].price, amount: newOrder[i].amount }), color: 'red' })
         }
    
-        if (newOrder[i].origin !== 2 & newOrder[i].origin !== 4) { 
+        if (newOrder[i].origin === 1 && this.userSetting.deal) { 
           setTimeout(function() {
             let side = ''
             newOrder[i].side === 1 ? side = $this.$t('order_side_buy') : side = $this.$t('order_side_sell')

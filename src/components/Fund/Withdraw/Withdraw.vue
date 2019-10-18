@@ -340,9 +340,10 @@
             <span class="row__label">2. {{ $t('fund.withdraw.to_deposit_tips') }}</span> 
           </div>
           <div class="layer__row mt-20 pl-20">
-            <el-button type="primary" @click="clickVerifyRow('deposit')">
-              {{ $t('fund.withdraw.to_deposit') }}
-            </el-button>
+            <el-button v-if="!isDeposited" type="primary"
+               @click="clickVerifyRow('deposit')"
+              >{{ $t('fund.withdraw.to_deposit') }}</el-button>
+            <span v-else class="row__status done" >{{ $t('fund.withdraw.done') }}</span>
           </div> 
         </div>
       </div>
@@ -449,7 +450,7 @@ export default {
     },
     all_bound () {
       // kyc > 2 就可以提币
-      return this.state.userInfo && this.state.userInfo.lv < 2
+      return this.state.userInfo && this.state.userInfo.lv > 1
     },
     isDeposited () {
       return this.state.userInfo && this.state.userInfo.deposit_state 
@@ -711,7 +712,7 @@ export default {
         param.email_code = this.emailCode
       }
       if (this.verify_phone) {
-        param.phone_code =this.phoneCode 
+        param.phone_code = this.phoneCode 
       }
 
 

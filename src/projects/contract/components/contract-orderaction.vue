@@ -658,8 +658,7 @@ export default {
       state,
       local,
       language: true,
-      submitting: false,
-      userSetting: {},
+      submitting: false, 
       showModal: false,
       // currentOpenMode: 'open-long',
       //   currentDealType: 'contract_lose_stopMarket',
@@ -752,6 +751,12 @@ export default {
     };
   },
   computed: {
+    userSetting () {
+      if (this.state.ct.userSetting) {
+        return this.state.ct.userSetting
+      }
+      return {}
+    },
     triggerType () {
       return {
         1: "contract_page.order_action.order_price",
@@ -2342,18 +2347,18 @@ export default {
     // }
   },
   async created() {
-    if (state) {
-      console.log(state)
-      if (state.userInfo) {
-        service.MessageSettings({
-          user:state.userInfo.id
-        }).then(resp => {
-          if (!resp.code) {
-            this.userSetting = resp.data
-          }
-        })  //查询用户设置
-      }
-    }
+    // if (state) {
+    //   console.log(state)
+    //   if (state.userInfo) {
+    //     service.MessageSettings({
+    //       user:state.userInfo.id
+    //     }).then(resp => {
+    //       if (!resp.code) {
+    //         this.userSetting = resp.data
+    //       }
+    //     })  //查询用户设置
+    //   }
+    // }
     this.$eh.$on("protrade:exchange:set", this.set);
     this.$eh.$on("protrade:order:refresh", () => {
       this.fetchData();

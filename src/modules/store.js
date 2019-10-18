@@ -74,6 +74,7 @@ export const state = {
     markTickList: {},
     indexTickList: {},
     currentDelList: {},
+    userSetting: {}
   },
   rate: {
     IX: null,
