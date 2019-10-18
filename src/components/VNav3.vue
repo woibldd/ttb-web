@@ -72,8 +72,7 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
               </ul>
             </div>
           </div> -->
-          <a 
-            v-if="isTestnet"
+          <a  
             href="javascript:;"
             class="nav_link"
             style="padding-left:30px;"
@@ -89,7 +88,8 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             @click="planHandle" >
             {{ $t('plan') }}
           </a>
-          <router-link
+          <router-link 
+            v-if="isTestnet"
             to="/share_option"
             class="nav_link  ml-30">
             期权交易
