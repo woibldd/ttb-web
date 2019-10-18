@@ -23,7 +23,7 @@
               <p>{{ $t('message_setting_content_03') }}</p>
             </div>
             <div>
-              <input v-model="data.deal" type="checkbox" name="" value="true"><label @click="fanx('deal')" for=""></label>
+              <input v-model="data.deal" type="checkbox" name="" value="true"><label @click="fanx('cancel')" for=""></label>
             </div>
           </li>
           <li class="">
@@ -31,7 +31,7 @@
               <p>{{ $t('message_setting_content_04') }}</p>
             </div>
             <div>
-              <input v-model="data.cancel" type="checkbox" name="" value="true"><label @click="fanx('cancel')" for=""></label>
+              <input v-model="data.cancel" type="checkbox" name="" value="true"><label @click="fanx('deal')" for=""></label>
             </div>
           </li>
           <li class="">
@@ -77,8 +77,8 @@ export default {
         deal:false, //成交
         cancel:false,//取消
         stoploss:false, //止损
-        force:false, //强制
-        reduce: false//减少
+        force:false, //强平
+        reduce: false//减仓
       },
       state
     }
