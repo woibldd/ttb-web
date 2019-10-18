@@ -80,14 +80,14 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             {{ this.$t('node_sub') }}
             <icon name="hot-red"/>
           </a>
-          <!-- <a
+          <a
             href="javascript:;"
             class="nav_link"
             style="padding-left:30px;"
             @click="planHandle"
           >
             {{ $t('plan') }}
-          </a> -->
+          </a>
           <!-- <router-link
             to="/share_option"
             class="nav_link  ml-30">
