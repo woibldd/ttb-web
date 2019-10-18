@@ -18,7 +18,7 @@
             <td>{{ row.create_time | date}}</td>
             <td>{{ row.order_no }}</td>
             <td>{{ row.asset_code }}</td>
-            <td> {{ row.amount }}</td>
+            <td> <span v-if="row.trade_type==='0'">-</span> {{ row.amount }}</td>
           </tr>
         </table>
         <div
