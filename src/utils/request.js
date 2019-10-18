@@ -56,12 +56,12 @@ service.interceptors.response.use(
           type: 'warning',
           duration: 3 * 1000
         })
-        // setTimeout(() => {
-        //   store.dispatch('loginout')
-        // }, 3000)
+        setTimeout(() => {
+          store.dispatch('loginout')
+        }, 3000)
       } else {
         Message({
-          message: res.message || 'Server Error',
+          message: res.message || '服务端的错误',
           type: 'error',
           duration: 5 * 1000
         })

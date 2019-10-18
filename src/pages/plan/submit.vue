@@ -206,6 +206,9 @@
         &:focus + label {
           transform: translateY(-35px) scale(0.85);
         }
+        option {
+          color: #666;
+        }
       }
       .tip {
         font-size: 14px;

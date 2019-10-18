@@ -100,6 +100,11 @@ export const capitalRouter = [
         component: () => import(/* webpackChunkName: "FundAddress" */ '@/pages/Capital/fTrading.vue')
       },
       {
+        path: 'share',
+        name: 'share',
+        component: () => import(/* webpackChunkName: "FundAddress" */ '@/pages/Capital/share_history.vue')
+      },
+      {
         path: 'hyTrade',
         name: 'hyTrade',
         redirect: 'hyTrade/index',

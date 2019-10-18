@@ -1009,6 +1009,7 @@
   "trading_lever": "合约交易",
   "activity_lock_share": "锁仓分红规则：",
   "contract_account": "合约账户",
+  "share_account": "期权账户",
   "account_balance": "账户余额",
   "transaction_record": "交易记录",
   "warehouse_margin": "仓位保证金",
@@ -2301,6 +2302,26 @@
     "deposit": {
       "address": "充币地址"
     }
+  },
+  "profile": {
+    "security": {
+      "close_verify_tips": "手机验证和邮箱验证不能同时关闭"
+    }
+  },
+  "shareHistory": {
+    "mapShareColumns": {
+      "currency": " 支付货币",
+      "symbol": "产品类型",
+      "period": "周期",
+      "trade_type": "交易方向",
+      "amount": "下单金额",
+      "income": "收益金额",
+      "profile": "价值金额",
+      "strike": "行权价格",
+      "sett_price": "结算价格",
+      "create_time": "下单时间",
+      "sett_time": "结算时间",
+      "state": "是否结算"
+    }
   }
-
 }
