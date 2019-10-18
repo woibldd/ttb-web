@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { getShareAccountList } from '@/api/share_option'
 import { loginout } from '@/api/user'
+import api from '@/modules/service'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -47,6 +48,7 @@ export default new Vuex.Store({
     },
     async loginout() {
       await loginout()
+      await api.signout()
       location.reload()
       const userAccountObj = localStorage.getItem('userAccountObj')
       localStorage.clear()

@@ -20,7 +20,7 @@
         <span class="num">{{ USD }}</span>
       </li>
     </ul>
-    <el-button type="info" style="margin-top:30px;width:100%">点击了解更多信息</el-button>
+    <!-- <el-button type="info" style="margin-top:30px;width:100%">点击了解更多信息</el-button> -->
   </div>
 </template>
 <script>

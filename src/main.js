@@ -42,6 +42,7 @@ import {
   TabPane,
   Button,
   Steps,
+  Link,
   Step,
   Switch,
   DatePicker,
@@ -76,6 +77,7 @@ Vue.use(CarouselItem)
 Vue.use(VueI18n)
 Vue.use(VTooltip)
 Vue.use(Row)
+Vue.use(Link)
 Vue.use(Col)
 Vue.use(Select) // 引入element单个组件
 Vue.use(Option)
