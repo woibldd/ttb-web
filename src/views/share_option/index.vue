@@ -531,13 +531,11 @@ export default {
     transform: skewY(45deg);
   }
 }
- /*添加动画效果*/
-//  @keyframes rotateanimation{
-//      0%{
-//          transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-//      }
-//      100%{
-//          transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
-//      }
-//  }
+.fade-enter-active, .fade-leave-active {
+  transition: all .5s ease-in-out;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  transform: translateX(-300px);
+  z-index:0;
+}
 </style>
