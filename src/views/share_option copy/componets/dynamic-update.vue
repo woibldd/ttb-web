@@ -14,8 +14,8 @@ import Annotations from 'highcharts/modules/annotations.js'
 import websoketMixin from '@/mixins/soket'
 import CountUp from 'countup/dist/countUp.min'
 import { bigRound } from '@/utils/handleNum'
-import { debounce } from '@/utils'
-import { parseTime } from '@/utils'
+import { debounce, parseTime, timestampToDate } from '@/utils'
+import { rangeArr } from '@/const'
 HighMap(Highcharts)
 Annotations(Highcharts)
 export default {
@@ -29,13 +29,14 @@ export default {
   data() {
     return {
       isLoading: false,
-      isNoScroll: true
+      isNoScroll: true,
+      yetHandle: false
     }
   },
   mounted() {
     this.isLoading = true
     // wss://fota.com/apioption/wsoption?brokerId=1
-    this.openWebSocket('ws://ws.ixex.pro/v2', res => {
+    this.openWebSocket('wss://wss.ixex.pro/v1', res => {
       if (res.spotIndexDTOList) {
         if (!res.spotIndexDTOList.length) return
         const data = res.spotIndexDTOList.map((dataString, index) => {
@@ -55,8 +56,9 @@ export default {
         this.chart.pointer.onContainerMouseWheel = debounce(this.handleScroll, 100, true)
 
         this.isLoading = false
+      } else if (res.data) {
+        this.addUserAnnotations(res.data)
       } else {
-        this.$emit('pushData', res)
         if (!this.chart) return
         const { min } = this.chart.xAxis[0].getExtremes()
         const price = Number(res.price)
@@ -68,49 +70,52 @@ export default {
         const resTime = res.time
 
         const markElement = this.orderTimeElement.querySelector('.mask')
-        const orderBoxElement = this.orderTimeElement.querySelector('.box')
-        const finishBoxElement = this.finishTimeElement.querySelector('.box')
 
-        if (resTime >= new Date(resTime).setSeconds(40)) {
-          if (orderBoxElement.innerText !== '下一轮') {
-            const yetTime = (new Date(resTime).setSeconds(60) - resTime) / 1000
-            const finishCountUp = new CountUp(finishBoxElement, yetTime, 0, 0, yetTime, { useEasing: false, prefix: '00 ：' })
-            finishCountUp.start()
-            orderBoxElement.innerText = '下一轮'
-          }
-          orderBoxElement.innerText = '下一轮'
-        } else {
-          // orderBoxElement.innerText = orderBoxElement.innerText || '下一轮'
-          finishBoxElement.innerText = ''
+        // if (resTime >= new Date(resTime).setSeconds(period * 60 - settleTime)) {
+        //   if (orderBoxElement.innerText !== '下一轮') {
+        //     const yetTime = (new Date(resTime).setSeconds(period * 60) - resTime) / 1000
+        //     const finishCountUp = new CountUp(finishBoxElement, yetTime, 0, 0, yetTime, { useEasing: false, prefix: '00 ：' })
+        //     finishCountUp.start()
+        //     orderBoxElement.innerText = '下一轮'
+        //   }
+        //   orderBoxElement.innerText = '下一轮'
+        // } else {
+        //   // orderBoxElement.innerText = orderBoxElement.innerText || '下一轮'
+        //   finishBoxElement.innerText = ''
 
-          if (!orderBoxElement.innerText) this.initOrderLineByCountUp(resTime)
-          if (orderBoxElement.innerText === '下一轮') {
-            // this.orderBoxCountUp.reset()
-            this.orderBoxCountUp = new CountUp(orderBoxElement, 40, 0, 0, 40, { useEasing: false, prefix: '00 ：' })
-            this.orderBoxCountUp.start()
-            const userOptions = { ...this.chart.annotations[0].userOptions }
-            this.chart.annotations[0].remove()
-            this.chart.addAnnotation(userOptions)
+        //   if (!orderBoxElement.innerText) this.initOrderLineByCountUp(resTime)
+        //   if (orderBoxElement.innerText === '下一轮') {
+        //     // this.orderBoxCountUp.reset()
+        //     this.orderBoxCountUp = new CountUp(orderBoxElement, period * 60 - settleTime, 0, 0, period * 60 - settleTime, { useEasing: false, prefix: '00 ：' })
+        //     this.orderBoxCountUp.start()
+        //     const userOptions = { ...this.chart.annotations[0].userOptions }
+        //     const labels = this.chart.annotations[0].labels.filter(item => item.options.point.x <= resTime - 20000)
+        //     const shapes = this.chart.annotations[0].shapes.filter(item => item.options.points[0].x <= resTime - 20000)
+        //     labels.forEach((item, index) => {
+        //       this.chart.annotations[0].destroyItem(shapes[index])
+        //       this.chart.annotations[0].destroyItem(item)
+        //     })
+        //     // const labels = this.chart.annotations[0].labels.filter(item=>item.options.point.x <= new Date(resTime).setSeconds(40))
+        //     // this.chart.annotations[0].destoryItem(this.chart.annotations[0])
+        //     this.chart.addAnnotation(userOptions)
 
-            const points = this.chart.series[0].points
-            this.$emit('settleOrder', incomeObj => {
-              this.chart.tooltip.iscustom = true
-              this.chart.tooltip.incomeObj = incomeObj
-              this.chart.tooltip.refresh(points[points.length - 1])
-              setTimeout(() => {
-                this.chart.tooltip.hide()
-                this.chart.tooltip.iscustom = false
-                this.chart.tooltip.incomeObj = {}
-              }, 2000)
-            })
-          } else {
-            finishBoxElement.innerText = ''
-          }
-        }
+        //     const points = this.chart.series[0].points
+        //     this.$emit('settleOrder', incomeObj => {
+        //       this.chart.tooltip.iscustom = true
+        //       this.chart.tooltip.incomeObj = incomeObj
+        //       this.chart.tooltip.refresh(points[points.length - 1])
+        //       setTimeout(() => {
+        //         this.chart.tooltip.hide()
+        //         this.chart.tooltip.iscustom = false
+        //         this.chart.tooltip.incomeObj = {}
+        //       }, 2000)
+        //     })
+        //   } else {
+        //     finishBoxElement.innerText = ''
+        //   }
+        // }
         const xData = this.chart.series[0].xData
         this.isLoading = xData[xData.length - 5] === resTime
-
-        markElement.style.width = resTime >= new Date(resTime).setSeconds(40) ? '50vw' : 0
         this.lastPoint = {
           x: resTime,
           y: price,
@@ -120,7 +125,14 @@ export default {
         // console.log(new Date(resTime).getTime())
 
         this.chart.series[0].addPoint([new Date(resTime).getTime(), price])
-        const { orderPixels, finishPixels } = this.handleLinePixelsByTime(resTime)
+
+        const { orderPixels, finishPixels, orderTime, finishTime } = this.handleLinePixelsByTime(resTime)
+        markElement.style.width = resTime >= orderTime ? '50vw' : 0
+        res.orderTime = orderTime
+        this.$emit('pushData', res)
+
+        this.handleTwoLineTips(resTime, orderTime, finishTime)
+
         this.orderTimeElement.style.transform = `translate(${orderPixels + 5}px, 0px)`
         this.finishTimeElement.style.transform = `translate(${finishPixels + 5}px, 0px)`
         // this.chart.addAnnotation({ labels: [{ point: { x: resTime, y: price }}] })
@@ -139,12 +151,85 @@ export default {
     clearInterval(this.timer)
   },
   methods: {
+    handleTwoLineTips(resTime, orderTime, finishTime) {
+      const innerText = '下一轮'
+      const orderBoxElement = this.orderTimeElement.querySelector('.box')
+      const finishBoxElement = this.finishTimeElement.querySelector('.box')
+      if (resTime >= orderTime) {
+        orderBoxElement.innerText = innerText
+        const yetTime = (finishTime - resTime) / 1000
+        finishBoxElement.innerText = timestampToDate(yetTime)
+        if (yetTime === 1) {
+          this.$emit('settleOrder', incomeObj => {
+            const points = this.chart.series[0].points
+            this.chart.tooltip.iscustom = true
+            this.chart.tooltip.incomeObj = incomeObj
+            this.chart.tooltip.refresh(points[points.length - 1])
+            setTimeout(() => {
+              this.chart.tooltip.hide()
+              this.chart.tooltip.iscustom = false
+              this.chart.tooltip.incomeObj = {}
+            }, 2000)
+          })
+          this.cleanAnnotations(orderTime)
+        }
+      } else {
+        const yetTime = (orderTime - resTime) / 1000
+        orderBoxElement.innerText = timestampToDate(yetTime)
+        finishBoxElement.innerText = ''
+      }
+    },
+    addUserAnnotations(data) {
+      data = JSON.parse(data)
+      this.addLabels(!data.tradeType ? 'green' : 'red', data.amount, 1, data)
+      // const obj = {
+      //   green: {
+      //     borderColor: 'rgba(42, 172, 62, 0.8)',
+      //     backgroundColor: 'rgba(42, 172, 62, 0.6)'
+      //   },
+      //   red: {
+      //     borderColor: 'rgba(232, 79, 67, 0.8)',
+      //     backgroundColor: 'rgba(232, 79, 67, 0.6)'
+      //   }
+      // }
+      // const labelOption = {
+      //   point: { x: data.createTime, y: data.strike, xAxis: 0, yAxis: 0 },
+      //   text: data.amount + ' ' + data.currency,
+      //   borderRadius: 6,
+      //   shape: 'rect',
+      //   y: -6,
+      //   allowOverlap: true,
+      //   ...obj[!data.tradeType ? 'green' : 'red']
+      // }
+      // console.log(data)
+
+      // const annotation2 = localStorage.getItem('annotations2')
+      // const { labels = [] } = annotation2 ? JSON.parse(annotation2) : {}
+      // labels.push(labelOption)
+      // localStorage.setItem('annotations2', JSON.stringify({ labels2: labels }))
+
+      // if (this.$store.state.userData && data.userId !== +this.$store.state.userData.id) {
+      //   this.chart.annotations[1].initLabel(labelOption)
+      // }
+    },
+    cleanAnnotations(orderTime) {
+      // const labels = this.chart.annotations[0].labels.filter(item => item.options.point.x <= orderTime)
+      const shapes = this.chart.annotations[0].shapes.filter(item => item.options.points[0].x <= orderTime)
+      shapes.forEach((item, index) => {
+        this.chart.annotations[0].destroyItem(item)
+        // this.chart.annotations[0].destroyItem(item)
+      })
+      localStorage.removeItem('annotations0')
+    },
     handleLinePixelsByTime(time) {
-      const orderTime = +bigRound(new Date(time).setSeconds(40), -2, 0)
-      const finishTime = orderTime + 20000
+      const [period, , settleTime] = rangeArr[this.websocketArgs[0] - 1]
+      const num = (period - new Date(time).getMinutes() % period) || 1
+      const orderTime = new Date(time).setSeconds(num * 60 - settleTime)
+      const finishTime = new Date(time).setSeconds(num * 60)
+      // console.log(new Date(orderTime), new Date(finishTime), period * 60 - settleTime, period)
       const orderPixels = this.chart.xAxis[0].toPixels(orderTime, true)
       const finishPixels = this.chart.xAxis[0].toPixels(finishTime, true)
-      return { orderPixels, finishPixels }
+      return { orderPixels, finishPixels, orderTime, finishTime }
     },
     initxAxis() {
       const dataArr = this.chart.series[0].data
@@ -154,10 +239,12 @@ export default {
       Highcharts.setOptions({
         global: { useUTC: false }
       })
-      // function activeLastPointToolip(chart) {
-      //   var points = chart.series[0].points
-      //   chart.tooltip.refresh(points[points.length - 1])
-      // }
+
+      let annotations0 = localStorage.getItem(`annotations0`)
+      annotations0 = annotations0 ? JSON.parse(annotations0) : {}
+      let annotations1 = localStorage.getItem(`annotations1`)
+      annotations1 = annotations1 ? JSON.parse(annotations1) : {}
+
       const that = this
       this.chart = Highcharts.chart('container', {
         rangeSelector: { selected: 1
@@ -208,9 +295,20 @@ export default {
           }
         },
         annotations: [{
-          points: [],
+          labels: (annotations0 || {}).labels || [],
+          shapes: (annotations0 || {}).shapes || [],
+          draggable: false
+        }, {
+          labels: (annotations1 || {}).labels || [],
           draggable: false
         }],
+        // annotations: [{
+        //   points: [],
+        //   draggable: false
+        // }, {
+        //   points: [],
+        //   draggable: false
+        // }],
         credits: {
           enabled: !1
         },
@@ -246,7 +344,7 @@ export default {
           xDateFormat: '%H:%M:%S',
           backgroundColor: 'rgba(79,89,109,0.8)',
           formatter: function(instance) {
-            const transformHtml = obj => Object.keys(obj).map(key => `<p style="color:#A8ACBB;">${key}：${+obj[key] >= 0 ? '+' : '-'}<span style="color:${+obj[key] >= 0 ? 'green' : 'red'}">${obj[key]}</span></p>`)
+            const transformHtml = obj => Object.keys(obj).map(key => `<p style="color:#A8ACBB;">${key}：<span style="color:${+obj[key] >= 0 ? 'green' : 'red'}">${obj[key]}</span></p>`)
             return !instance.iscustom ? `<div>
               <p style="color:#fff; margin-bottom:5px;"><span style="color:#A8ACBB; margin-right:5px;">时间：${parseTime(this.x)}</span></p>
               <p style="color:#fff; margin-bottom:0px;"><span style="color:#A8ACBB;margin-right:5px;">价格：${bigRound(this.y, 4)}</p>
@@ -460,7 +558,7 @@ export default {
       const xAxis = this.chart.xAxis[0]
       // if (Math.ceil(xAxis.tickInterval) <= 2000) return
       const { min, max, dataMin } = xAxis.getExtremes()
-      const rangeArr = [[1, 5], [5, 10], [10, 60], [60, 180], [180, 1440], [1440, 10080], [10080, 20000]]
+
       const newMin = min - 60 * rangeArr[this.websocketArgs[0] - 1][1] * e.deltaY
 
       if (newMin > max - 60000) return
@@ -478,23 +576,18 @@ export default {
           setTimeout(() => {
             this.websockets[0].send(`{"reqType": 1, "args":${JSON.stringify([8, this.websocketArgs[1], newMin, this.websocketArgs[0]])}}`)
             this.$emit('loadingData', 0)
+            this.isNoScroll = true
           }, 500)
         }
         const index = rangeArr.findIndex(item => tickTime >= item[0] && tickTime < item[1])
         if (+this.websocketArgs[0] === index) {
           this.$emit('handleTimeTabClick', this.websocketArgs[0])
           this.$emit('loadingData', 0)
+          this.isNoScroll = true
         } else {
           console.log(this.chart.xAxis[0])
         }
       }, 1000)
-
-      // const arr = [[]]
-      // if (tickTime > 3) {
-      //   console.log(1)
-      // } else if (tickTime > 5) {
-      //   console.log(22)
-      // }
     },
     activeHover(stateName) {
       const element = document.querySelector(`#plotline-${stateName}`)
@@ -506,7 +599,7 @@ export default {
       if (!element) return
       element.style.display = 'none'
     },
-    addLabels(color, value = 1) {
+    addLabels(color, value = 1, index = 0, data) {
       const obj = {
         green: {
           borderColor: 'rgba(42, 172, 62, 0.8)',
@@ -517,7 +610,7 @@ export default {
           backgroundColor: 'rgba(232, 79, 67, 0.6)'
         }
       }
-      this.chart.annotations[0].initLabel({
+      const labelOption = {
         point: this.lastPoint,
         text: value + ' ' + this.$store.state.activeShareAccount.currency,
         borderRadius: 6,
@@ -525,28 +618,8 @@ export default {
         y: -6,
         allowOverlap: true,
         ...obj[color]
-        // className: 'annotations-box'
-      })
-      // this.chart.annotations[0].initLabel({
-      //   point: this.lastPoint,
-      //   // text: '1',
-      //   // shape: 'circle',
-      //   shape: 'diamond',
-      //   backgroundColor: 'white',
-      //   useHTML: true,
-      //   allowOverlap: true,
-      //   formatter() {
-      //     return `
-      //       <div class="annotations-box ${color}">
-      //         <svg class="icon" aria-hidden="true" width="20px">
-      //           <use xlink:href="#icon-user" />
-      //         </svg>
-      //         <span>${value}</span>
-      //       </div>
-      //     `
-      //   }
-      // })
-      this.chart.annotations[0].initShape({
+      }
+      const shapeOption = {
         fill: 'none',
         stroke: color,
         strokeWidth: 1,
@@ -557,22 +630,25 @@ export default {
           y: this.lastPoint.y,
           xAxis: 0,
           yAxis: 0
-        }] })
-      console.log(this.chart.annotations[0])
-      
-      setTimeout(() => {
-        // this.chart.annotations[0].destroyItem()
-      }, 1000)
+        }] }
+      !index && this.chart.annotations[index].initShape(shapeOption) || this.chart.annotations[index].initLabel(labelOption)
+      let annotation = localStorage.getItem(`annotations${index}`)
+      annotation = annotation ? JSON.parse(annotation) : {}
+      const { labels = [], shapes = [] } = annotation
+      labels.push(labelOption)
+      shapes.push(shapeOption)
+      localStorage.setItem(`annotations${index}`, JSON.stringify({ labels, shapes }))
     },
     initChartsByReqType(reqType) {
-      this.websocketArgs[0] = +reqType + 1
+      // this.websocketArgs[0] = +reqType + 1
       this.isLoading = true
-      this.websockets[0].send(`{"reqType": 1, "args":${JSON.stringify(this.websocketArgs)}}`)
+      this.websockets[0].send(`{"reqType": 1, "args":["${+reqType + 1}","${this.websocketArgs[1]}"]}`)
     },
     switchProduct(product) {
-      this.websockets[0].send(`{"reqType": 3, "args":["${this.websocketArgs[1]}"]}`)
-      this.websocketArgs = ['1', product]
-      this.websockets[0].send(`{"reqType": 2, "args":["${product}"]}`)
+      this.isLoading = true
+      product[1] !== this.websocketArgs[1] && this.websockets[0].send(`{"reqType": 3, "args":["${this.websocketArgs[1]}"]}`)
+      this.websocketArgs = product
+      this.websockets[0].send(`{"reqType": 2, "args":["${this.websocketArgs[1]}"]}`)
       this.websockets[0].send(`{"reqType": 1, "args":${JSON.stringify(this.websocketArgs)}}`)
     }
   }
