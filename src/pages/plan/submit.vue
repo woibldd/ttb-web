@@ -135,7 +135,7 @@
         }
       },
       emailAlertHandle() {
-        this.$router.push('/profile/info')
+        this.$router.push('/profile/security/summary')
       },
       emailHandle() {
         this.emailFlag = false

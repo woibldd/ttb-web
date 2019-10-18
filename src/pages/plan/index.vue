@@ -10,9 +10,16 @@
         </template>
       </div>
       <div class="broker-btn wow fadeInUp">
-        <a class="join" :href="next" target="_blank">
-          {{ $t('join') }}
-        </a>
+        <span v-if="uid !== '--'">
+          <a class="join" :href="next" target="_blank">
+            {{ $t('join') }}
+          </a>
+        </span>
+        <span v-else>
+          <a class="join" href="/user/login/email">
+            {{ $t('join') }}
+          </a>
+        </span>
         <a class="login" href="https://freebarley.com/#/login?redirect=%2Fdashboard" target="_blank">
           {{ $t('login') }} >
         </a>
@@ -101,7 +108,9 @@
   import 'animate.css'
   import { WOW } from 'wowjs'
   import {state} from '@/modules/store'
+  import Terms from '../terms'
   export default {
+    components: {Terms},
     mounted() {
       this.$nextTick(() => {
         var wow = new WOW({
@@ -117,6 +126,12 @@
       next() {
         return '/planSubmit?lang=' + this.lang
       },
+      uid () {
+        if (state.userInfo) {
+          return state.userInfo.id
+        }
+        return '--'
+      }
     },
     methods: {
       joinHandle() {
@@ -124,7 +139,7 @@
       }
     },
     created () {
-      console.log(this.lang)
+      console.log(this.uid)
     }
   }
 </script>
