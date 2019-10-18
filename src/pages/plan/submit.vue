@@ -25,12 +25,20 @@
       <div class="next-container-ipt">
         <div class="ipt">
           <div class="tip" for="region">{{$t('country')}}</div>
-          <select id="region" autocomplete="off" :disabled="!emailFlag" v-model="form.region" name="region">
-            <option v-for="(item, index) in regionData.data" :key="index" :value="item.id">
-              <template v-if="lang === 'en'">{{ item.fullname }}</template>
-              <template v-else> {{ item.cname }} </template>
-            </option>
-          </select>
+          <el-select v-model="form.region" :disabled="!emailFlag" placeholder="请选择" style="width: 100%">
+            <el-option
+              v-for="item in regionData.data"
+              :key="item.id"
+              :label="lang === 'en' ? item.fullname : item.cname"
+              :value="item.id">
+            </el-option>
+          </el-select>
+<!--          <select id="region" autocomplete="off" :disabled="!emailFlag" v-model="form.region" name="region">-->
+<!--            <option v-for="(item, index) in regionData.data" :key="index" :value="item.id">-->
+<!--              <template v-if="lang === 'en'">{{ item.fullname }}</template>-->
+<!--              <template v-else> {{ item.cname }} </template>-->
+<!--            </option>-->
+<!--          </select>-->
         </div>
       </div>
       <div  class="next-container-checked">
@@ -209,7 +217,12 @@
         padding:6px 0;
         transition: border-bottom-width .3s ease-in-out;
         color: #fff;
-        font-size: 14px;
+        border-radius: 0;
+        &:focus {
+          outline: none;
+          box-shadow: none;
+          border-color: #fff;
+        }
         &::placeholder {
           color: #CBCBCB
         }
@@ -219,6 +232,12 @@
         option {
           color: #666;
         }
+      }
+      .el-select .el-input__inner:focus {
+        border-color: #fff;
+      }
+      .el-input.is-disabled .el-input__inner {
+        background: transparent;
       }
       .tip {
         font-size: 14px;
