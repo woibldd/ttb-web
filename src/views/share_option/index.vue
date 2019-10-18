@@ -175,7 +175,7 @@ export default {
     activeShareAccount: {
       handler(newValue) {
         if (!newValue) return
-        this.orderCount = +newValue.min_amount
+        this.orderCount =  Math.max(this.orderCount,+newValue.min_amount)
       }
     }
   },

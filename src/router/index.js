@@ -19,6 +19,8 @@ import ByAmount from '@/pages/Superzis/sell.vue'
 import layout from '@/pages/layout/index'
 
 import _ from 'lodash'
+
+
 // import HelloWorld from '@/components/HelloWorld'
 let loaded = false
 Vue.use(Router)
@@ -138,7 +140,9 @@ async function beforeEach(to, from, next) {
       })
     }
   }
+  // to.query.redirect && next({ path: to.query.redirect }) || next()
   next()
+  // next()
 }
 
 function beforeResolve(to, from, next) {
@@ -266,18 +270,6 @@ export const routes = [
     component: MyOrder
   },
   // {
-  //   path: '/fee',
-  //   // name: 'Fee',
-  //   meta: {
-  //     auth: false,
-  //     nav: true,
-  //     footer: true,
-  //     class: 'dark',
-  //     mobileNav: isMobile
-  //   },
-  //   component: Fee
-  // },
-  // {
   //   path: '/Guide',
   //   name: 'Guide',
   //   meta: {
@@ -391,16 +383,16 @@ export const routes = [
       },
     ]
   },
-  // {
-  //   path: '/share_option',
-  //   name:'share_option',
-  //   meta: {
-  //     // nav: true,
-  //     // footer: true,
-  //     class: 'dark'
-  //   },
-  //   component:  () => import('@/pages/share_option/index.vue')
-  // },
+  {
+    path: '/share_option',
+    name:'share_option',
+    meta: {
+      nav: true,
+      footer: false,
+      class: 'custom-dark'
+    },
+    component:  () => import('@/views/share_option')
+  },
   {
     path: '/snowballDetail',
     name: 'BidDetail',
