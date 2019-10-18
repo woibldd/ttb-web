@@ -19,7 +19,7 @@ import './assets/scss/index.scss'
 import moment from 'moment'
 import './styles/flex.css'
 import 'element-ui/lib/theme-chalk/index.css'
-
+import store from './store'
 import './icons'
 import {
   Select,
@@ -60,6 +60,8 @@ import {
   Checkbox,
   Carousel,
   CarouselItem,
+  Cascader,
+  CascaderPanel,
 } from 'element-ui'
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
@@ -107,6 +109,8 @@ Vue.use(TimelineItem)
 Vue.use(Progress)
 Vue.use(Checkbox)
 Vue.use(Popover)
+Vue.use(CascaderPanel)
+Vue.use(Cascader)
 const request = require.context('./assets/svg', true, /\.svg$/)
 /* console.log('request', request)
 console.log('request.keys', request.keys())
@@ -135,7 +139,8 @@ Vue.prototype.$moment = moment
 Vue.prototype.$eventBus = new Vue({})
 
 actions.setLocale()
-
+import mixins from './mixins'
+Vue.mixin(mixins)
 /* eslint-disable no-new */
 const release = qs.parse(location.search.replace('?', '')).release
 if (release || !window.grayline) {
@@ -143,6 +148,7 @@ if (release || !window.grayline) {
     el: '#app',
     router,
     i18n: utils.$i18n,
+    store,
     components: { App },
     template: '<App/>'
   })

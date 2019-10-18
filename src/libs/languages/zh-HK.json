@@ -1427,8 +1427,8 @@
   "contract_trigger_lose_buy": "止損買入",
   "contract_trigger_lose_sell": "止損賣出",
   "contract_trigger": "觸發",
-  "contract_trigger_tips_buy": "觸發價格：最新成交價@%{price}及以下",
-  "contract_trigger_tips_sell": "觸發價格：最新成交價@%{price}及以上",
+  "contract_trigger_tips_buy": "觸發價格：{trigger_type}@%{price}及以下",
+  "contract_trigger_tips_sell": "觸發價格：{trigger_type}@%{price}及以上",
   "contract_passive_cancel": "因開啟被動委託，該方向無法以此價格掛單",
   "contract_trigger_type": "觸發類型",
   "contract_trigger_close": "觸發後平倉",
@@ -2126,8 +2126,8 @@
     "order_action": {
       "price": "價格",
       "trigger_short":"觸發後平倉",
-      "order_price": "盘口价格",
-      "trigger_close_tips": "止盈止损委托时，勾选此按钮，平仓委托只会减少您的仓位，触发时，系统会根据当前仓位数量自动减少这类型委托的数量，甚至制动取消它，来确保它不会增加您的仓位，如果您的余额不足，当前委托类型触发后将会委托失败。",
+      "order_price": "盤口價格",
+      "trigger_close_tips": "止盈止損委託時，勾選此按鈕，平倉委託只會减少您的倉位，觸發時，系統會根據當前倉位數量自動减少這類型委託的數量，甚至制動取消它，來確保它不會新增您的倉位，如果您的餘額不足，當前委託類型觸發後將會委託失敗。",
       
       "modal": {
         "available": "可用餘額",
@@ -2186,7 +2186,7 @@
   },
   "profile": {
     "security": {
-      "close_verify_tips": "手机验证和邮箱验证不能同时关闭"
+      "close_verify_tips": "手機驗證和郵箱驗證不能同時關閉"
     }
   }
 }

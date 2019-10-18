@@ -67,8 +67,7 @@ export default {
       page: 1, // page 都是从1 开始的,
       size: 10,
       totalItems: 0,
-      timer: 0,
-      userSetting: {},
+      timer: 0, 
       current: "contract_history_position",
       nav: [
         // 仓位
@@ -434,6 +433,12 @@ export default {
     },
     markTickList() {
       return this.state.ct.markTickList
+    },
+    userSetting () {
+      if (this.state.ct.userSetting) {
+        return this.state.ct.userSetting
+      }
+      return {}
     }
     
   },
@@ -715,7 +720,7 @@ export default {
         service.cancelAllContractOrder(params).then(res => {
           if (!res.code) {
             this.$eh.$emit("protrade:order:refresh", "rightButtonClick");
-            if (this.userSetting) {
+            if (this.userSetting.cancel) {
               //根据用户设置判断
               this.$toast({
                 title: this.$t("delegate_cancellation"),
@@ -724,16 +729,13 @@ export default {
               });
             }
             // utils.success(this.$t('contract_revert_success'))
-          } else {
-            // utils.alert(res.message)
-            if (this.userSetting) {
-              //根据用户设置判断
-              this.$toast({
-                title:  this.$t("delegation_cancellation_failed"),
-                body: res.message,
-                color: "red"
-              });
-            }
+          } else { 
+            //根据用户设置判断
+            this.$toast({
+              title:  this.$t("delegation_cancellation_failed"),
+              body: res.message,
+              color: "red"
+            }); 
           }
         });
       }
@@ -823,11 +825,7 @@ export default {
       let param = {
         user: this.state.userInfo.id
       };
-      service.MessageSettings(param).then(resp => {
-        if (!resp.code) {
-          this.userSetting = resp.data;
-        }
-      });
+      
     } //查询用户设置
  
     await service.getRates({currency:'BTC'}).then(res=>{

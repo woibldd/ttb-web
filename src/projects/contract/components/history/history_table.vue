@@ -264,7 +264,7 @@
               <div v-tooltip.top-center="{html: true, content: $t('contract_action_open_short_tips'), classes: 'contract'}">{{ $t('contract_action_open_short') }}</div>
               <div>
                 <label v-html="$t('contract_history_close_content', { price: $big(cholding.close_position_price || 0).toFixed(cholding.pairInfo.price_scale || 2)})"/>
-                <span  @click="cancel(cholding)"/>
+                <span  class="op op_cancel"  @click="cancel(cholding)"/>
               </div>
             </div>
 
@@ -481,6 +481,12 @@ export default {
     },
     Rates() {
       return this.state.rate.BTC
+    },
+    userSetting () {
+      if (this.state.ct.userSetting) {
+        return this.state.ct.userSetting
+      }
+      return {}
     }
   },
   watch: {
@@ -609,14 +615,15 @@ export default {
           order_id: row.id
         }
         service.revertContract(params).then(res => {
-          if (!res.code) {
-            // utils.success()
+          if (!res.code) { 
             // 刷新所有订单
-            this.$toast({ title: this.$t('delegate_cancellation'), body: this.$t('contract_revert_success'), color: 'yellow' })
+            if (this.userSetting.cancel){
+              this.$toast({ title: this.$t('delegate_cancellation'), body: this.$t('contract_revert_success'), color: 'yellow' })
+            } 
             this.$eh.$emit('protrade:order:refresh', 'clickTd')
           } else {
             this.$toast({ title: this.$t('delegation_cancellation_failed'), body: res.message, color: 'red' })
-            // utils.alert()
+             
           }
         })
       }
@@ -905,11 +912,13 @@ export default {
 }
 .bgcolor-unp {
     background-color: #8CBF26;
-    opacity: .6;
+    color:#fff;
+    opacity: .9;
   }
   .bgcolor-dnp {
     background-color: #e8704f;
-    opacity: .6;
+    color:#fff;
+    opacity: .9;
   }
 .werehouse-box {
     width: 100%;

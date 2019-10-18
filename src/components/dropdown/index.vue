@@ -16,7 +16,6 @@ export default {
   props:['menuOptions'],
   methods: {
     handle(item){
-      console.log(item.href);
       this.$router.push({path:'/snowball/bazaar'})
     }
   }

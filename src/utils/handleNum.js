@@ -1,5 +1,4 @@
 import Big from 'big.js/big.mjs'
-
 export const logogramNum = num => {
   const numberObj = Big(num)
   if (numberObj.e > 6) {
@@ -8,7 +7,7 @@ export const logogramNum = num => {
     return num
   }
 }
-const handler = (dataArr, fixed, type) => { 
+const handler = (dataArr, fixed, type) => {
   const res = dataArr.reduce((curr, prev) => Big(curr)[type](prev))
   return bigRound(res, fixed)
 }
@@ -19,3 +18,6 @@ export const bigDiv = ([source, rate], fixed) => bigRound(Big(source).div(rate),
 export const bigTimes = (dataArr, fixed) => handler(dataArr, fixed, 'times')
 
 export const bigPlus = (dataArr, fixed) => handler(dataArr, fixed, 'plus')
+
+export const bigMinus = (dataArr, fixed) => handler(dataArr, fixed, 'minus')
+

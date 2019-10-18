@@ -120,7 +120,7 @@ a.raw {
     }
   }
   &.strong {
-    vertical-align: middle;
+    vertical-align: baseline;
     &::before {
       vertical-align: inherit;
       border-radius: 50%;

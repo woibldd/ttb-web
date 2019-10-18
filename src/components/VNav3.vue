@@ -32,13 +32,27 @@
             <!-- <img src="@/assets/hot.png"
 alt style="position: relative;top: 5px;left: 5px;"> -->
           </router-link>
-          <router-link
-            v-if='!isTestnet'
-            to="/snowball/bazaar"
-            class="nav_link  ml-30">
-            {{$t('bidTitle')}}
-          </router-link>
-          <div
+          
+          <div class="nav_link arrow-down">
+            <router-link 
+              to="/snowball/bazaar"
+              class="nav_link  ml-30">
+              {{$t('bidTitle')}}
+            </router-link>
+            <div class="dropdown-sub-menu" v-if="isLogin">
+              <ul class="dropdown-list pt-10 pb-10">
+                <li class="dropdown-item pl-24 pr-24"> 
+                  <a
+                    href="/snowball"
+                    :class="{'router-link-active': from === 'contract'}"
+                    class="link">{{ $t('playBTC') }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+            
+          </div>
+          <!-- <div
             class="nav_link arrow-down"
             v-if='isTestnet'
             >
@@ -57,7 +71,7 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
                 </li>
               </ul>
             </div>
-          </div>
+          </div> -->
           <a
             href="javascript:;"
             class="nav_link"
@@ -74,11 +88,11 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
           >
             {{ $t('plan') }}
           </a>
-          <!-- <router-link
+          <router-link
             to="/share_option"
             class="nav_link  ml-30">
             期权交易
-          </router-link> -->
+          </router-link>
           <!-- <div class="nav_link arrow-down">
             <a
               :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"
@@ -260,6 +274,26 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
               </ul>
             </div>
           </div>
+          <!-- <whDropdown v-if="$route.path === '/share_option/index' && mapBalanceMenu.length" v-model="activeShareAccount" :tooltip="true" label="currency" :handle-label="item=>`${item.currency} 账户 / ${bigRound(item.available,4)}`" style="margin-left:20px" :menu-min-width="250" :menu-options="mapBalanceMenu">
+          <svg-icon slot="item-prefix" slot-scope="{data}" :icon-class="data.currency.toLowerCase()" />
+          <el-link slot="item-suffix" slot-scope="{data}" :disabled="data.currency === 'DEMO'?+data.currency.ordering>0:false" :type="data.currency === 'DEMO'?'danger':'primary'" :underline="false" @click.stop="resetBalance(data.currency)">{{ data.currency === 'DEMO'?'重置体验金':'充值' }}</el-link>
+          <div v-if="activeShareAccount" style="min-width:170px">{{ activeShareAccount.currency }} 账户 / {{ activeShareAccount.available| bigRound(4) }} <i class="el-icon-caret-bottom" /></div>
+        </whDropdown> -->
+
+          <div class="help mr-30"  v-if="$route.path === '/share_option' && mapBalanceMenu.length">
+            <span style="display:inline-block;min-width:160px">{{ activeShareAccount.currency }} 账户 / {{ activeShareAccount.available| bigRound(4) }}</span>
+            <div class="dropdown-sub-menu">
+              <ul class="dropdown-list pt-10 pb-10" style="min-width:250px">
+                <li class="dropdown-item pl-24 pr-24" @click="$store.commit('SET_ACTIVESHAREACCOUNT',item)" flex="main:justify" v-for="item in mapBalanceMenu" :key="item.currency">
+                  <el-tooltip :disabled="false" :content="`${item.currency} 账户 / ${bigRound(item.available,4)}`" placement="left" effect="dark">
+                    <a class="text-nowrap" :style="{color:item.currency === activeShareAccount.currency?'':'#fff'}"><svg-icon :icon-class="item.currency.toLowerCase()" /> {{item.currency}} 账户 /{{item.available| bigRound(4)}}</a>
+                  </el-tooltip>
+                  <span v-if="item.currency === 'DEMO'"  @click.stop="resetBalance(item.currency)">充值体验金</span>
+                  <span v-else>充值</span>
+                </li>
+              </ul>
+            </div>
+          </div>
           <div class="help">
             <span @click="openDefault('help')">{{ $t('footer_help') }}</span>
             <div class="dropdown-sub-menu">
@@ -337,6 +371,10 @@ export default {
       locales: utils.locales
     }
   },
+  created () {
+    console.log(this);
+    
+  },
   computed: {
     localeText() {
       return utils.getLocaleName(state.locale)
@@ -407,9 +445,35 @@ export default {
       const time1 = new Date()
       const time2 = new Date(2019, 4, 7, 14)
       return this.isTestnet || time1 > time2
+    },
+    mapBalanceMenu() {
+      console.log(this.$store.state.mapShareAccount);
+      
+      return this.$store.state.mapShareAccount
+    },
+    mapUserCenter() {
+      return [
+        { label: '个人中心', path: '/user/index' },
+        { label: '资产管理', path: '/user/property' },
+        { label: '退出', click: () => this.$store.dispatch('loginout') }
+      ]
+    },
+    activeShareAccount: {
+      get() {
+        return this.$store.state.activeShareAccount
+      },
+      set(value) {
+        localStorage.setItem('ACTIVESHAREACCOUNT', value.currency)
+        this.$store.commit('SET_ACTIVESHAREACCOUNT', value)
+      }
     }
   },
   methods: {
+    resetBalance(balance) {
+      balance === 'DEMO' && resetBalance().then(res => {
+        this.$store.dispatch('getShareAccountList', { accountArr: this.mapBalanceMenu, isAssignment: true })
+      })
+    },
     planHandle() {
       this.$router.push('/plan')
     },
@@ -482,7 +546,14 @@ export default {
   }
 }
 </script>
-
+<style>
+  .text-nowrap{
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+</style>
 <style scoped lang="scss">
 .nav_box {
   width: 100%;
@@ -561,6 +632,7 @@ export default {
                 height: 40px;
                 line-height: 40px;
                 white-space: nowrap;
+                box-sizing: border-box;
                 .link {
                   width: 100%;
                   height: 100%;
@@ -641,7 +713,7 @@ export default {
     .dropdown-sub-menu {
       background: $protrade-bg;
       position: absolute;
-      top: 60px;
+      top: 31px;
       border-radius: 4px;
       z-index: 999;
 
@@ -781,6 +853,9 @@ export default {
 }
 .dark {
   background: $home-header-bgdark;
+}
+.custom-dark {
+  background: $home-header-custom-bgdark;
 }
 .login {
   background: $home-header-login;

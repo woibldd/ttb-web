@@ -164,6 +164,14 @@
                   class="contact-item "
                   name="footer-linkedin"/>
               </a>
+              <a
+                target="_blank"
+                href="https://medium.com/@ixxofficial"
+                class="contact-item-wrapper pointer">
+                <icon
+                  class="contact-item "
+                  name="footer-medium"/>
+              </a>
             </div>
             <p class="copyright">Copyright © 2019 ixx.com</p>
           </div>
@@ -338,7 +346,7 @@ export default {
         color: #fff;
       }
       .bot-la{
-        width: 60%;
+        width: 45%;
       }
       .bot-lb{
         width: 40%;
