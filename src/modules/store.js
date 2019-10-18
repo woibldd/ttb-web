@@ -2,9 +2,9 @@ import _ from 'lodash'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
 import Locals from '@/modules/locals'
-
+import store from '@/store.js'
 const locales = process.env.THEME_ENV.locales
-
+import { setSession } from '@/utils/auth'
 export const state = {
   enablePhoneSignup: true,
   router: null,
@@ -198,6 +198,8 @@ export const actions = {
     }
     if (res.code >= 0) {
       actions.setUserInfo(res.code ? null : res.data)
+      store.commit('SET_USERDATA',res.code ? null : res.data)
+      setSession(res.data.session_id)
     }
     return res.code
   },
