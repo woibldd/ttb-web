@@ -39,7 +39,7 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
               class="nav_link  ml-30">
               {{$t('bidTitle')}}
             </router-link>
-            <div class="dropdown-sub-menu" v-if="isLogin">
+            <div class="dropdown-sub-menu" v-if="isLogin && isTestnet">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24"> 
                   <a
@@ -72,7 +72,8 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
               </ul>
             </div>
           </div> -->
-          <a
+          <a 
+            v-if="isTestnet"
             href="javascript:;"
             class="nav_link"
             style="padding-left:30px;"
@@ -80,12 +81,12 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             {{ this.$t('node_sub') }}
             <icon name="hot-red"/>
           </a>
-          <a
+          <a 
+            v-if="isTestnet"
             href="javascript:;"
             class="nav_link"
             style="padding-left:30px;"
-            @click="planHandle"
-          >
+            @click="planHandle" >
             {{ $t('plan') }}
           </a>
           <router-link
