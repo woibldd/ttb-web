@@ -1,0 +1,320 @@
+// 2,3倍图适配
+@mixin bg-image($url){
+  background-image: url("~imgs/icon/" + $url + "@2x.png");
+  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3){
+    background-image: url("~imgs/icon/" + $url + "@3x.png");
+  }
+}
+
+//一像素边框
+@media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5){
+  .border-1px{
+    &::after{
+      -webkit-transform: scaleY(0.7);
+      transform: scaleY(0.7);
+    }
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2){
+  .border-1px{
+    &::after{
+      -webkit-transform: scaleY(0.5);
+      transform: scaleY(0.5);
+    }
+  }
+}
+
+@mixin border-1px($color){
+  position: relative;
+  &:after{
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-bottom: 1px solid $color;
+    content: ' ';
+  }
+}
+
+@mixin border-none(){
+  &:after{
+    display: none;
+  }
+}
+
+
+// radius
+@mixin radius($rag){
+  -webkit-border-radius: $rag;
+  -moz-border-radius: $rag;
+  border-radius: $rag;
+}
+
+// rotate
+@mixin rotate($rot){
+  -ms-transform:rotate($rot + deg);
+  -moz-transform:rotate($rot + deg);
+  -webkit-transform:rotate($rot + deg);
+  -o-transform:rotate($rot + deg);
+  transform:rotate(-$rot + deg);
+}
+
+$theme-color:rgba(35, 206, 208, 1);
+.broker-h5 {
+  .l-line, .r-line {
+    width: 68px;
+    height: 3px;
+    background: url("../images/PC/grey-l.png") center center no-repeat;
+  }
+  .r-line {
+    background: url("../images/PC/grey-r.png") center center no-repeat;
+  }
+  .broker-h5-banner {
+    overflow: hidden;
+    background: #030C0C;
+    position: relative;
+    padding: .6rem 0;
+    a {
+      text-align: center;
+      color: #fff;
+      margin: 0 auto;
+      display: block;
+    }
+    .broker-earth {
+      height: 360px;
+      background: #030C0C url("./../img/hd.jpg") center center no-repeat;
+      background-size: 100%;
+      overflow: hidden;
+      color: #fff;
+      font-size: 14px;
+      .btn {
+        display: block;
+        text-align: center;
+        margin: .3rem auto;
+      }
+      .join {
+        background: $theme-color;
+        width: 120px;
+        height: 40px;
+        line-height: 40px;
+        @include radius(.06rem);
+        margin: 0 auto 20px;
+      }
+      .broker-text-bg {
+        height: 140px;
+        background: url("./../img/agent/text_zh.png") center center no-repeat;
+        zoom: 1;
+        background-size: 86%;
+        margin-top: 1.4rem;
+      }
+    }
+    .broker-text {
+      width: 90%;
+      background: url("./../img/521571214425_.pic.jpg") center bottom no-repeat;
+      background-size: 100%;
+      padding: .1rem;
+      margin: -60px auto 20px;
+      h1 {
+        color: #fff;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+    }
+  }
+  &-apply {
+    padding: .3rem 0;
+    overflow: hidden;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 1), rgba(228, 255, 250, 1));
+
+    .apply-container {
+      margin: 0 auto;
+      font-size: 12px;
+      .apply-list {
+        width: 33.33%;
+        float: right;
+        text-align: center;
+        padding-bottom: .4rem;
+        background: transparent;
+        transition: all .4s ease-in;
+
+        .list-img {
+          padding-top: .4rem;
+          width: 42px;
+          height: 42px;
+          margin: 0 auto;
+          padding-bottom: .3rem;
+          background: url("../apply_1.png") center center no-repeat;
+        }
+
+        .list-text {
+          overflow: hidden;
+        }
+
+        &:nth-child(2) {
+          .list-img {
+            background: url("../apply_2.png") center center no-repeat;
+          }
+        }
+
+        &:nth-child(3) {
+          .list-img {
+            background: url("../apply_3.png") center center no-repeat;
+          }
+
+        }
+
+        &:nth-child(4) {
+          .list-img {
+            background: url("../apply_4.png") center center no-repeat;
+          }
+        }
+
+        &:nth-child(5) {
+          .list-img {
+            background: url("../apply_5.png") center center no-repeat;
+          }
+        }
+      }
+    }
+  }
+  &-equity {
+    background: url("../images/PC/BJ.03.png") center center no-repeat;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+
+    .equity-title {
+      padding: .6rem 0 .4rem 0;
+      font-size: .3rem;
+      .r-line {
+        background: url("../images/PC/g-r.png") center center no-repeat;
+      }
+      .l-line {
+        background: url("../images/PC/g-l.png") center center no-repeat;
+      }
+    }
+
+    .equity-table {
+      width: 94%;
+      margin: 0 auto .5rem;
+      overflow: hidden;
+
+      &-title {
+        height: 40px;
+        font-size: 13px;
+        overflow: hidden;
+        display: flex;
+        text-align: center;
+        justify-items: center;
+        align-items: center;
+        background: linear-gradient(266deg, rgba(35, 206, 208, 1), rgba(31, 198, 139, 1));
+      }
+
+      &-list {
+        box-sizing: border-box;
+        height: 64px;
+        border-left: 1px solid #296F61;
+        border-right: 1px solid #296F61;
+        overflow: hidden;
+        display: flex;
+        font-size: 14px;
+        justify-items: center;
+        align-items: center;
+        .count {
+          flex: 1;
+          position: relative;
+          &:after {
+            content: '';
+            position: absolute;
+            width: 1px;
+            height:1.88rem;
+            background: #296F61;
+            right: 0;
+            top: -1rem;
+          }
+        }
+
+        .text {
+          flex: 1;
+          text-align: left;
+          padding-left: .1rem;
+        }
+
+        &:nth-child(odd) {
+          background: rgba(23, 64, 56, .8);
+        }
+        &:last-child {
+          border-bottom: 1px solid rgba(41,111,97,.7);
+        }
+      }
+    }
+  }
+  &-way {
+    position: relative;
+    .broker-way-title {
+      padding:.3rem 0 .4rem;
+      text-align: center;
+    }
+    .broker-way-text {
+      position: absolute;
+      font-size: 12px;
+      left: -70px;
+      z-index: 10;
+      .broker-way-text-list {
+        width: 300px;
+        display: flex;
+        line-height: 30px;
+        .lt {
+          width: 120px;
+          flex: 0 0 0 120px;
+          text-align: right;
+          padding-right: .3rem;
+        }
+        .rt {
+          flex: 1
+        }
+      }
+    }
+    .broker-way-img {
+      position: absolute;
+      right: 0;
+      img {
+        height: 130px;
+        display: block;
+        zoom: 1;
+      }
+      //background: url("../img/agent/message.png") center center no-repeat;
+    }
+  }
+  .text-vk {
+    width: 240px;
+    margin: 0 auto;
+    font-size: 14px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+    div, span {
+      flex: 1;
+    }
+    span {
+      font-weight: 500;
+    }
+  }
+}
+@font-face {
+  font-family: 'iconfont';  /* project id 1408535 */
+  src: url('//at.alicdn.com/t/font_1408535_1znmdege8jt.eot');
+  src: url('//at.alicdn.com/t/font_1408535_1znmdege8jt.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1408535_1znmdege8jt.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1408535_1znmdege8jt.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1408535_1znmdege8jt.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1408535_1znmdege8jt.svg#iconfont') format('svg');
+}
+.iconfont{
+  font-family:"iconfont" !important;
+  font-size:16px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;}
