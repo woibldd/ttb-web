@@ -11,7 +11,7 @@
       from="contract"
       :class="[navClass]"/>
     <router-view/>
-    <v-notify-list/>
+    <!-- <v-notify-list/> -->
   </div>
 </template>
 
@@ -80,7 +80,7 @@ export default {
       if (!this.$route.name) {
         return false
       }
-      return !(utils.getRouteMeta(this.$route, 'zendeskWidget') === false) && this.showContact
+      return !(utils.getRouteMeta(this.$route, 'zendeskWidget') === false) 
     },
   },
   created () {
