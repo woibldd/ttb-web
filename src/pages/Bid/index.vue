@@ -10,7 +10,12 @@
                  <div class="title">
                     {{$t('bby_shise9')}}
                 </div>
-                <p style="font-size: 16px;">{{ item.currency }} {{ item.product }}</p >
+                <p style="font-size: 16px;">{{ item.currency }}  
+                  <b v-if="state.locale==='zh-CN'">{{ item.product }}</b>
+                  <b v-else-if="state.locale==='zh-HK'">{{ item.productCt }}</b>
+                  <b v-else-if="state.locale==='en'">{{ item.productEn }}</b>
+                  <b v-else-if="state.locale==='ko'">{{ item.productKn }}</b>
+                </p >
                 <p style="font-size: 13px;">{{$t('bby_shise10')}} {{ item.moneyDays }}{{$t('bby_shouy9')}}</p >
                 <div class="rate">
                     <h1>{{ item.annualizedReturns > 0 ? (Number(item.annualizedReturns)).toFixed(2) : 0 }}%</h1>
@@ -34,12 +39,14 @@
                 <div class="title">
                     <div class="icon"><i></i></div>
                     <em>{{ item.currency }}</em>
-                    {{ item.product }}
-
+                    <b v-if="state.locale==='zh-CN'">{{ item.product }}</b>
+                    <b v-else-if="state.locale==='zh-HK'">{{ item.productCt }}</b>
+                    <b v-else-if="state.locale==='en'">{{ item.productEn }}</b>
+                    <b v-else-if="state.locale==='ko'">{{ item.productKn }}</b> 
                 </div>
                 <div class="time">
                     <span>{{$t('bby_shouy1')}}:</span>
-                    <b>{{ item.startTime }}~{{ item.end_time }}</b>
+                    <b>{{ item.beginTime | date('Y-M-D H:m') }}~{{ item.deadlineTime |  date('Y-M-D H:m')}}</b>
                 </div>
             </div>
                 
@@ -57,10 +64,10 @@
                 <div class="btn">
                     <el-button
                         class="bid-btn"
-                        :disabled="item.isTrue"
                         @click="detail(item)"
                         v-html="item.state === 1 ?  $t('bby_shouy6') : item.state === 2 ? $t('bby_shise3') : item.state === 3 ?  $t('bby_shise4') : $t('bby_shise5')"
                     >
+                        <!-- :disabled="item.isTrue" -->
                     </el-button>
                 </div>
             </div>
@@ -134,8 +141,8 @@ export default {
           this.total = res.data.total
           if (this.list.length > 0) {
             this.list.forEach((item) => {
-              Vue.set(item, 'startTime', getLocalTime1(item.beginTime))
-              Vue.set(item, 'end_time', getLocalTime1(item.endTime))
+              // Vue.set(item, 'startTime', getLocalTime1(item.beginTime))
+              // Vue.set(item, 'end_time', getLocalTime1(item.endTime))
               Vue.set(item, 'isTrue', true)
               if (item.endTime > timestamp) {
                 Vue.set(item, 'isTrue', false)
