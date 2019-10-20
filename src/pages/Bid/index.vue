@@ -63,11 +63,11 @@
                 </div>
                 <div class="btn">
                     <el-button
-                        class="bid-btn"
+                        class="bid-btn" 
+                        :disabled="item.isTrue"
                         @click="detail(item)"
                         v-html="item.state === 1 ?  $t('bby_shouy6') : item.state === 2 ? $t('bby_shise3') : item.state === 3 ?  $t('bby_shise4') : $t('bby_shise5')"
                     >
-                        <!-- :disabled="item.isTrue" -->
                     </el-button>
                 </div>
             </div>
