@@ -7,7 +7,12 @@ const isMobile = utils.isMobile()
 // const guide = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index')
 const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index')
 const HomeNew = () => import(/* webpackChunkName: "home" */ '@/pages/home_new.vue')
-// const Plan = () => import(/* webpackChunkName: "home" */ '@/pages/plan.vue')
+const h5submitNext = () => import('@/pages/plan/h5/submitNext')
+const submitNext = () => import('@/pages/plan/submitNext')
+const h5planSubmit = () => import('@/pages/plan/h5/submit')
+const planSubmit = () => import('@/pages/plan/submit')
+const h5plan = () => import('@/pages/plan/h5/index')
+const plan = () => import('@/pages/plan/index')
 export const otherRouter = [
   {
     path: '/',
@@ -165,11 +170,31 @@ export const otherRouter = [
     name: 'plan',
     meta: {
       auth: false,
-      footer: true,
+      footer: false,
       nav: true,
       class: 'dark'
     },
-    component: () => import(/* webpackChunkName: "Trading" */ '@/pages/plan/index')
+    component: isMobile ? h5plan : plan
+  },
+  {
+    path: '/h5-plan',
+    name: 'h5plan',
+    meta: {
+      auth: false,
+      nav: false,
+      footer: false
+    },
+    component: h5plan
+  },
+  {
+    path: '/plan',
+    name: 'plan',
+    meta: {
+      auth: false,
+      nav: false,
+      footer: false
+    },
+    component: plan
   },
   {
     path: '/planSubmit',
@@ -179,7 +204,27 @@ export const otherRouter = [
       footer: false,
       nav: false
     },
-    component: () => import(/* webpackChunkName: "Trading" */ '@/pages/plan/submit')
+    component: isMobile ? h5planSubmit : planSubmit
+  },
+  {
+    path: '/h5planSubmit',
+    name: 'h5planSubmit',
+    meta: {
+      auth: false,
+      nav: false,
+      footer: false
+    },
+    component: h5planSubmit
+  },
+  {
+    path: '/plan-submit',
+    name: 'planSubmit',
+    meta: {
+      auth: false,
+      nav: false,
+      footer: false
+    },
+    component: planSubmit
   },
   {
     path: '/planSuccess',
@@ -189,6 +234,26 @@ export const otherRouter = [
       footer: false,
       nav: false
     },
-    component: () => import(/* webpackChunkName: "Trading" */ '@/pages/plan/submitNext')
+    component: isMobile ? h5submitNext : submitNext
+  },
+  {
+    path: '/h5submitNext',
+    name: 'h5submitNext',
+    meta: {
+      auth: false,
+      nav: false,
+      footer: false
+    },
+    component: h5submitNext
+  },
+  {
+    path: '/submitNext',
+    name: 'submitNext',
+    meta: {
+      auth: false,
+      nav: false,
+      footer: false
+    },
+    component: submitNext
   }
 ]

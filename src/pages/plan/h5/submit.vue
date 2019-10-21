@@ -1,51 +1,43 @@
 <template>
-  <div class="next-container">
-    <div class="next-container-con">
+  <div class="next-container-h5">
+    <div class="next-container-h5-con">
       <h1> {{ $t('application_account') }} </h1>
       <p>{{ $t('application_tip') }}</p>
       <div class="error-msg"> {{ errorMsg }} </div>
-      <div class="next-container-ipt" style="margin-top: 0" :class="{err: errorMsg}">
+      <div class="next-container-h5-ipt" style="margin-top: 0" :class="{err: errorMsg}">
         <div class="ipt">
           <label class="tip" for="email"> {{ $t('application_ipt_email') }} </label>
           <input type="text" id="email" autocomplete="off" v-model="form.email" v-on:input="emailHandle">
-          <div class="tips">
-            <div class="tip-text">
-              <p>{{ $t('application_email_tip_1') }}</p>
-              <p>{{ $t('application_email_tip_2') }}</p>
-            </div>
-          </div>
+<!--          <div class="tips">-->
+<!--            <div class="tip-text">-->
+<!--              <p>{{ $t('application_email_tip_1') }}</p>-->
+<!--              <p>{{ $t('application_email_tip_2') }}</p>-->
+<!--            </div>-->
+<!--          </div>-->
         </div>
       </div>
-      <div class="next-container-ipt">
+      <div class="next-container-h5-ipt">
         <div class="ipt">
           <label class="tip" for="name">{{ $t('realName') }}</label>
           <input type="text" id="name" autocomplete="off" :disabled="!emailFlag" v-model="form.name" name="name" v-on:input="realHandle">
         </div>
       </div>
-      <div class="next-container-ipt">
+      <div class="next-container-h5-ipt">
         <div class="ipt">
           <div class="tip" for="region">{{$t('country')}}</div>
-          <el-select :placeholder="plc" v-model="form.region" :disabled="!emailFlag" style="width: 100%">
-            <el-option
-              v-for="item in regionData.data"
-              :key="item.id"
-              :label="lang === 'en' ? item.fullname : item.cname"
-              :value="item.id">
-            </el-option>
-          </el-select>
-<!--          <select id="region" autocomplete="off" :disabled="!emailFlag" v-model="form.region" name="region">-->
-<!--            <option v-for="(item, index) in regionData.data" :key="index" :value="item.id">-->
-<!--              <template v-if="lang === 'en'">{{ item.fullname }}</template>-->
-<!--              <template v-else> {{ item.cname }} </template>-->
-<!--            </option>-->
-<!--          </select>-->
+          <select id="region" autocomplete="off" :disabled="!emailFlag" v-model="form.region" name="region">
+            <option v-for="(item, index) in regionData.data" :key="index" :value="item.id">
+              <template v-if="lang === 'zh'">{{ item.cname }}</template>
+              <template v-else> {{ item.fullname }} </template>
+            </option>
+          </select>
         </div>
       </div>
-      <div  class="next-container-checked">
-        <el-checkbox v-model="checked">
+      <div  class="next-container-h5-checked">
+        <van-checkbox v-model="checked">
           <span class="true">{{ $t('application_check') }}</span>
           <a href="javascript:;">{{ $t('application_xy') }}</a>
-        </el-checkbox>
+        </van-checkbox>
       </div>
       <div class="next-container-btn" @click="nextHandle">
         <input type="button" :disabled="!checked" :value="this.$t('submit')">
@@ -57,7 +49,7 @@
     <div class="submit-alert-mask" v-if="emailAlertFlag">
       <div class="submit-alert-container">
         <div class="close" @click="emailAlertFlag = false">
-          <img src="../../assets/images/close.png" alt="" width="36" height="36">
+          <img src="../../../assets/images/close.png" alt="" width="36" height="36">
         </div>
         <div class="title">
           {{ $t('s_email') }}
@@ -70,7 +62,7 @@
   </div>
 </template>
 <script type="text/ecmascript-6">
-  import { regionData } from "../../lang/region"
+  import { regionData } from "../../../lang/region"
   import service from '@/modules/service'
   import {state} from '@/modules/store'
   import qs from 'qs'
@@ -166,7 +158,7 @@
   }
 </script>
 <style lang="scss">
-  .next-container {
+  .next-container-h5 {
     width: 100%;
     height: 100%;
     position: fixed;
@@ -175,7 +167,7 @@
     background: #323E4A;
     &-con {
       position: absolute;
-      width: 448px;
+      width: 90%;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
@@ -335,48 +327,48 @@
         color: #23CED0
       }
     }
-  }
-  .submit-alert-mask {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 1000;
-    background: rgba(0, 0, 0, .6);
-    .submit-alert-container {
-      width: 376px;
-      padding: 40px;
-      background: rgba(255, 255, 255, 1);
-      border-radius: 8px;
-      box-shadow: 0 8px 16px rgba(0,0,0,.8);
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      overflow: hidden;
-      .close {
+    .submit-alert-mask {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, .6);
+      .submit-alert-container {
+        width: 70%;
+        padding: 40px;
+        background: rgba(255, 255, 255, 1);
+        border-radius: 8px;
+        box-shadow: 0 8px 16px rgba(0,0,0,.8);
         position: absolute;
-        right: 10px;
-        top: 10px;
-        cursor: pointer;
-        img {
-          zoom: 1
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+        .close {
+          position: absolute;
+          right: 10px;
+          top: 10px;
+          cursor: pointer;
+          img {
+            zoom: 1
+          }
         }
-      }
-      .title {
-        font-size: 18px;
-        text-align: center;
-      }
-      .button {
-        width:229px;
-        height:40px;
-        background:rgba(35,206,208,1);
-        border-radius:5px;
-        margin: 30px auto 0;
-        text-align: center;
-        line-height: 40px;
-        color: #fff;
+        .title {
+          font-size: 18px;
+          text-align: center;
+        }
+        .button {
+          width:229px;
+          height:40px;
+          background:rgba(35,206,208,1);
+          border-radius:5px;
+          margin: 30px auto 0;
+          text-align: center;
+          line-height: 40px;
+          color: #fff;
+        }
       }
     }
   }

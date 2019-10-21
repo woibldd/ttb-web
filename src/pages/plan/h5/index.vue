@@ -1,43 +1,34 @@
 <template>
-  <div class="broker">
-    <div class="broker-banner">
-      <div class="broker-text wow pulse" data-wow-iteration="infinite" data-wow-duration="2000ms">
-        <template v-if="lang === 'zh-CN'">
-          <img src="../../assets/images/text.png" alt="" style="zoom: 1;display: block;margin: 0 auto;">
-        </template>
-        <template v-else>
-          <img src="../../assets/images/text1.jpg" alt="" style="zoom: 1;display: block;margin: 0 auto;">
-        </template>
-      </div>
-      <div class="broker-btn wow fadeInUp">
-        <span v-if="uid !== '--'">
+  <div class="broker-h5">
+    <div class="broker-h5-banner">
+      <div class="broker-earth">
+        <div class="broker-text-bg wow pulse" data-wow-iteration="infinite" data-wow-duration="2000ms"></div>
+        <div class="broker-btn wow fadeInUp">
+        <template v-if="uid !== '--'">
           <a class="join" :href="next" target="_blank">
             {{ $t('join') }}
           </a>
-        </span>
-        <span v-else>
+        </template>
+        <template v-else>
           <a class="join" href="/user/login/email">
             {{ $t('join') }}
           </a>
-        </span>
-        <a class="login" href="https://freebarley.com/#/login?redirect=%2Fdashboard" target="_blank">
-          {{ $t('login') }} >
-        </a>
-      </div>
-      <div class="broker-text-tip">
-        <div class="left-point wow bounceInLeft"></div>
-        <div class="ct-text wow slideInUp">
-          <p>
-            {{ $t('bannerText') }}
-          </p>
-          <p>
-            {{ $t('bannerText2') }}
-          </p>
+        </template>
+          <a class="login" href="https://freebarley.com/#/login?redirect=%2Fdashboard" target="_blank">
+            {{ $t('login') }} >
+          </a>
         </div>
-        <div class="right-point wow bounceInRight"></div>
+      </div>
+      <div class="broker-text wow slideInUp">
+        <h1>
+          {{ $t('bannerText') }}
+        </h1>
+        <h1>
+          {{ $t('bannerText2') }}
+        </h1>
       </div>
     </div>
-    <div class="broker-apply">
+    <div class="broker-h5-apply">
       <div class="apply-container">
         <div class="apply-text text-vk">
           <div class="l-line wow slideInLeft" data-wow-duration="500ms"></div>
@@ -52,7 +43,7 @@
         </div>
       </div>
     </div>
-    <div class="broker-equity">
+    <div class="broker-h5-equity">
       <div class="equity-title text-vk">
         <div class="l-line wow slideInLeft" data-wow-duration="500ms"></div>
         <span class="wow slideInDown">{{ $t('equity') }}</span>
@@ -72,14 +63,14 @@
         </div>
       </div>
     </div>
-    <div class="broker-way">
+    <div class="broker-h5-way">
       <div class="broker-way-title text-vk text-vk1">
         <div class="l-line wow slideInLeft" data-wow-duration="500ms"></div>
         <span class="wow slideInDown">{{ $t('way') }}</span>
         <div class="r-line wow slideInRight" data-wow-duration="500ms"></div>
       </div>
       <div class="con">
-        <div class="broker-way-text wow slideInLeft" data-wow-duration="500ms">
+        <div class="broker-way-text wow slideinleft" data-wow-duration="500ms">
           <div class="broker-way-text-list">
             <div class="lt">{{ $t('application_email') }}</div>
             <div class="rt">service@ixx.com</div>
@@ -99,7 +90,9 @@
             </div>
           </div>
         </div>
-        <div class="broker-way-img wow slideInRight" data-wow-duration="500ms"></div>
+        <div class="broker-way-img wow slideinright" data-wow-duration="500ms">
+          <img src="../../../assets/img/agent/message.png" alt="">
+        </div>
       </div>
     </div>
   </div>
@@ -108,9 +101,7 @@
   import 'animate.css'
   import { WOW } from 'wowjs'
   import {state} from '@/modules/store'
-  import Terms from '../terms'
   export default {
-    components: {Terms},
     mounted() {
       this.$nextTick(() => {
         var wow = new WOW({
@@ -135,13 +126,8 @@
     },
     methods: {
       joinHandle() {
-        this.$router.push('/planSubmit')
+        this.$router.push('/submit')
       }
-    },
-    created () {
-      console.log(this.uid)
     }
   }
 </script>
-<style lang="scss">
-</style>

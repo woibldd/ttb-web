@@ -32,7 +32,7 @@ body {
   font-size: 14px;
   line-height: 1.42857;
   width: 100%;
-  min-width: $page-width;
+  //min-width: $page-width;
   color: $text;
   background-color: #ffffff;
   min-height: 600px;
@@ -59,7 +59,7 @@ body.router-kyc {
 //   }
 // }
 body.mobile {
-  min-width: 1200px;
+  //min-width: 1200px;
   // .home-ball {
   //   display: none;
   // }
@@ -82,7 +82,7 @@ body.router-trading {
     min-width: 960px;
   }
   &.mobile {
-    min-width: 1200px;
+    //min-width: 1200px;
     &.ios {
       min-width: auto;
     }
@@ -271,7 +271,7 @@ $primary-color: #01CED1;
       background-color: $otc-buy-bg-light !important;
       border-color: $otc-buy-bg-light !important;
       opacity: .8;
-  } 
+  }
 }
 
 .el-button.el-button--sell {
@@ -284,11 +284,11 @@ $primary-color: #01CED1;
       background-color: $otc-sell-bg-light !important;
       border-color: $otc-sell-bg-light !important;
       opacity: .8;
-  } 
+  }
 }
 
 
-.el-button.el-button--text { 
+.el-button.el-button--text {
   color: #000;
   &:hover, &:focus {
     color: #000;
@@ -361,10 +361,10 @@ $primary-color: #01CED1;
   background-color: $primary!important;
 }
 
-.el-dropdown-menu { 
-  .el-dropdown-menu__item { 
-    .my-fund-operate { 
-      color:#6F6F70; 
+.el-dropdown-menu {
+  .el-dropdown-menu__item {
+    .my-fund-operate {
+      color:#6F6F70;
     }
   }
 }
