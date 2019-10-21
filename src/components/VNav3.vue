@@ -351,6 +351,7 @@ import { state, actions } from '@/modules/store'
 import service from '@/modules/service'
 import utils from '@/modules/utils'
 import whDropdown from '@/components/dropdown/index'
+import { resetBalance } from '@/api/share_option'
 export default {
   components: {
     whDropdown,
@@ -370,10 +371,6 @@ export default {
       state,
       locales: utils.locales
     }
-  },
-  created () {
-    console.log(this);
-    
   },
   computed: {
     localeText() {
@@ -447,8 +444,6 @@ export default {
       return this.isTestnet || time1 > time2
     },
     mapBalanceMenu() {
-      console.log(this.$store.state.mapShareAccount);
-      
       return this.$store.state.mapShareAccount
     },
     mapUserCenter() {
@@ -499,8 +494,6 @@ export default {
       utils.setSessionStorageValue('LoginStatus', 0)
       utils.setSessionStorageValue('markTime', 9999999999)
       service.signout().then(res => {
-        console.log({ res })
-        // window.onload()
         this.$nextTick(() => {
           location.reload()
         })
@@ -516,10 +509,7 @@ export default {
       // })
     },
     clickStar($event) {
-      this.className = 'active' // console.log($event.currentTarget);
-    },
-    alert() {
-      alert(1)
+      this.className = 'active'
     },
     openDefault(type) {
       switch (type) {
