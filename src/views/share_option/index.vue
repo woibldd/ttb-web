@@ -287,6 +287,7 @@ export default {
   background-attachment: fixed;
   background-size: cover;
   position: relative;
+  width: 100%;
   .share-option-bg{
     position: absolute;
     width: 100%;
