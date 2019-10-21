@@ -182,35 +182,6 @@ export default {
     addUserAnnotations(data) {
       data = JSON.parse(data)
       this.addLabels(!data.tradeType ? 'green' : 'red', data.amount, 1, data)
-      // const obj = {
-      //   green: {
-      //     borderColor: 'rgba(42, 172, 62, 0.8)',
-      //     backgroundColor: 'rgba(42, 172, 62, 0.6)'
-      //   },
-      //   red: {
-      //     borderColor: 'rgba(232, 79, 67, 0.8)',
-      //     backgroundColor: 'rgba(232, 79, 67, 0.6)'
-      //   }
-      // }
-      // const labelOption = {
-      //   point: { x: data.createTime, y: data.strike, xAxis: 0, yAxis: 0 },
-      //   text: data.amount + ' ' + data.currency,
-      //   borderRadius: 6,
-      //   shape: 'rect',
-      //   y: -6,
-      //   allowOverlap: true,
-      //   ...obj[!data.tradeType ? 'green' : 'red']
-      // }
-      // console.log(data)
-
-      // const annotation2 = localStorage.getItem('annotations2')
-      // const { labels = [] } = annotation2 ? JSON.parse(annotation2) : {}
-      // labels.push(labelOption)
-      // localStorage.setItem('annotations2', JSON.stringify({ labels2: labels }))
-
-      // if (this.$store.state.userData && data.userId !== +this.$store.state.userData.id) {
-      //   this.chart.annotations[1].initLabel(labelOption)
-      // }
     },
     cleanAnnotations(orderTime) {
       // const labels = this.chart.annotations[0].labels.filter(item => item.options.point.x <= orderTime)
@@ -530,7 +501,7 @@ export default {
             <div class="box"></div>
             <div class="time-lineL" />
             <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-qizhi" />
+              <use xlink:href="#qizhi" />
             </svg>
             <div class="mask" style="width:0" />
           </div>
@@ -541,7 +512,7 @@ export default {
             <div class="box" style="background:none;color:red"></div>
             <div class="time-lineL yellow" />
             <svg class="icon" aria-hidden="true" width="20px">
-              <use xlink:href="#icon-qizhi_hongse" />
+              <use xlink:href="#qizhi_hongse" />
             </svg></div>
         </div>`, 0, 0, 'rect', 0, 0, true).add()
     },
