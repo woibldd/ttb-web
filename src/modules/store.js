@@ -196,7 +196,7 @@ export const actions = {
       // 重试一次
       res = await service.getUserInfo()
     }
-    if (res.code >= 0) {
+    if (!res.code) {
       actions.setUserInfo(res.code ? null : res.data)
       store.commit('SET_USERDATA',res.code ? null : res.data)
       setSession(res.data.session_id)
