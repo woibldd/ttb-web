@@ -4,7 +4,7 @@
       <h1>
         {{ $t('agreeList.title') }}
       </h1>
-      <p v-for="(item) in 96" :key="item" :data-p="`item_${item}`" v-html="$t(`agreeList.t_${item}`)"></p>
+      <p v-for="(item) in 95" :key="item" :data-p="`item_${item}`" v-html="$t(`agreeList.t_${item}`)"></p>
     </div>
   </div>
 </template>
@@ -20,7 +20,6 @@
   .treaty-inner {
     overflow: hidden;
     overflow-y: auto;
-    height: 640px;
     min-width: 1200px;
     margin: 60px auto;
     h1 {
