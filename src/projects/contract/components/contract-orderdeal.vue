@@ -11,7 +11,7 @@
         <table class="table table-ix-deal">
           <tbody v-if="state.ct.pairInfo">
             <tr style="height: 30px">
-              <th class="th-dir">{{ $t('deal_th_side') }} {{lastSide}}</th>
+              <th class="th-dir">{{ $t('deal_th_side') }}</th>
               <th class="right">{{ $t('deal_th_price') }}</th>
               <th class="right">{{ $t('deal_th_amount') }}</th>
               <th>{{ $t('deal_th_time') }}</th>

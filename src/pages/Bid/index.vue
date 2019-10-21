@@ -144,7 +144,7 @@ export default {
               // Vue.set(item, 'startTime', getLocalTime1(item.beginTime))
               // Vue.set(item, 'end_time', getLocalTime1(item.endTime))
               Vue.set(item, 'isTrue', true)
-              if (item.endTime > timestamp) {
+              if (item.deadlineTime > timestamp) {
                 Vue.set(item, 'isTrue', false)
                 if (item.beginTime > timestamp) {
                   Vue.set(item, 'isTrue', true)
