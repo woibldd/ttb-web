@@ -2324,5 +2324,9 @@
       "sett_time": "结算时间",
       "state": "是否结算"
     }
+  },
+  "share_option":{
+    "navText":"急速合约"
+
   }
 }

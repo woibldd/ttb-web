@@ -34,6 +34,17 @@ export default {
     }
   },
   mounted() {
+    document.addEventListener('visibilitychange',function(){
+    if(document.visibilityState=='hidden') {     
+      if(this.websockets[0]){
+        console.log(111222);
+        
+        this.websockets[0].close(); //关闭websocket
+      }
+    }else {
+      location.reload(); //刷新页面
+    }
+  });
     this.isLoading = true
     // wss://fota.com/apioption/wsoption?brokerId=1
     this.openWebSocket('wss://wss.ixex.pro/v1', res => {

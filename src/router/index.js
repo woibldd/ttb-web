@@ -394,6 +394,16 @@ export const routes = [
     component:  () => import('@/views/share_option')
   },
   {
+    path: '/proposer',
+    name:'proposer',
+    meta: {
+      nav: true,
+      footer: false,
+      class: 'custom-dark'
+    },
+    component:  () => import('@/views/proposer')
+  },
+  {
     path: '/snowballDetail',
     name: 'BidDetail',
     meta: {

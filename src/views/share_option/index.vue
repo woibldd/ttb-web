@@ -58,17 +58,17 @@
           </el-tooltip>
           <div v-if="mapCurrencyList[0]" class="share-text-info">
             <span>{{ mapCurrencyList[0].up_rate|bigRound(2) }}%</span>
-            <p><svg-icon icon-class="dollar" style="font-size:16px" /> {{ orderCount/100*(+mapCurrencyList[0].up_rate)|bigRound(8) }}</p>
+            <p><svg-icon :icon-class="activeShareAccount?activeShareAccount.currency.toLowerCase():'dollar'" style="font-size:16px" /> {{ orderCount/100*(+mapCurrencyList[0].up_rate)|bigRound(8) }}</p>
           </div>
         </div>
-        <el-button class="center-btn success" :disabled="!$store.state.userData" type="success" @click="addLabels('green')" @mouseover.native="dynamicChart.activeHover('success')" @mouseout.native="dynamicChart.disableHover('success')">
+        <div class="center-btn success" flex="dir:top main:center cross:center" :disabled="!$store.state.userData" type="success" @click="addLabels('green')" @mouseover.native="dynamicChart.activeHover('success')" @mouseout.native="dynamicChart.disableHover('success')">
           <svg-icon icon-class="share-up" style="font-size:40px" /> <h2 style="margin-top:5px">看涨</h2>
-        </el-button>
+        </div>
       </div>
       <div class="content-center hover-scale" flex="dir:top main:justify cross:center box:mean">
-        <el-button class="center-btn danger" :disabled="!$store.state.userData" type="danger" @click="addLabels('red')" @mouseover.native="dynamicChart.activeHover('danger')" @mouseout.native="dynamicChart.disableHover('danger')">
+        <div class="center-btn danger" flex="dir:top main:center cross:center" :disabled="!$store.state.userData" type="danger" @click="addLabels('red')" @mouseover.native="dynamicChart.activeHover('danger')" @mouseout.native="dynamicChart.disableHover('danger')">
           <svg-icon icon-class="share-down" style="font-size:40px" /> <h2 style="margin-top:5px">看跌</h2>
-        </el-button>
+        </div>
         <div flex="main:center cross:center" class="center-info">
           <el-tooltip placement="bottom" effect="dark">
             <div slot="content" style="width:200px;line-height:2">看跌期权预期收益率。即，如果您购买看跌期权，且期权到期时标的价格低于初始行权价格，则您的净收益=看跌收益率*投资金额。</div>
@@ -76,18 +76,18 @@
           </el-tooltip>
           <div v-if="mapCurrencyList[0]" class="share-text-info">
             <span>{{ mapCurrencyList[0].down_rate|bigRound(2) }}%</span>
-            <p><svg-icon icon-class="dollar" style="font-size:16px" /> {{ orderCount/100*(+mapCurrencyList[0].down_rate)|bigRound(8) }}</p>
+            <p><svg-icon :icon-class="activeShareAccount?activeShareAccount.currency.toLowerCase():'dollar'" style="font-size:16px" /> {{ orderCount/100*(+mapCurrencyList[0].down_rate)|bigRound(8) }}</p>
           </div>
         </div>
       </div>
     </div>
     <div v-if="marketData" ref="square-container" class="square-container" flex="dir:top box:mean">
-      <div class="text">看涨 <br><span>{{ +marketData.Bullish }}%</span></div>
+      <div class="text">看涨 <br><span>{{ +marketData.Bullish*100 }}%</span></div>
       <div class="mark-box" flex="dir:top box:mean">
-        <div class="top" :style="{height:+marketData.Bullish+'%'}" />
+        <div class="top" :style="{height:+marketData.Bullish*100+'%'}" />
         <div class="bottom" />
       </div>
-      <div class="text"><span>{{ +marketData.Bearish }}%</span><br>看跌 </div>
+      <div class="text"><span>{{ +marketData.Bearish*100 }}%</span><br>看跌 </div>
     </div>
     <!-- <div class="test" style="margin-left:40px" />
     <div class="test" /> -->
@@ -151,8 +151,6 @@ export default {
       return this.$store.state.userData
     },
     activeShareAccount() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      // this.orderCount = +(this.$store.state.activeShareAccount || {}).min_amount
       return this.$store.state.activeShareAccount
     },
     mapShareAccount() {
@@ -442,13 +440,21 @@ export default {
         box-sizing: border-box;
         padding: 0;
         border: none;
+        opacity: 0.8;
+        color: #fff;
         &.success{
-          border-top-left-radius:0;
-          border-top-right-radius:0;
+          border-bottom-left-radius:4px;
+          border-bottom-right-radius:4px;
+          background: #67C23A;
         }
         &.danger{
-          border-bottom-left-radius:0;
-          border-bottom-right-radius:0;
+          border-top-left-radius:4px;
+          border-top-right-radius:4px;
+          background: #F56C6C;
+        }
+        &:hover{
+          opacity: 1;
+          cursor: pointer;
         }
       }
     }

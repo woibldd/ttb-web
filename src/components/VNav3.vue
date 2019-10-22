@@ -91,7 +91,7 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
           <router-link
             to="/share_option"
             class="nav_link  ml-30">
-            期权交易
+            {{ $t('share_option.navText') }}
           </router-link>
           <!-- <div class="nav_link arrow-down">
             <a
