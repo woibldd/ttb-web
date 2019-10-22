@@ -37,8 +37,6 @@ export default {
     document.addEventListener('visibilitychange',function(){
     if(document.visibilityState=='hidden') {     
       if(this.websockets[0]){
-        console.log(111222);
-        
         this.websockets[0].close(); //关闭websocket
       }
     }else {
@@ -594,7 +592,7 @@ export default {
       }
       const labelOption = {
         point: this.lastPoint,
-        text: value + ' ' + this.$store.state.activeShareAccount.currency,
+        text: value + ' ' + data.currency||this.$store.state.activeShareAccount.currency,
         borderRadius: 6,
         shape: 'rect',
         y: -6,
