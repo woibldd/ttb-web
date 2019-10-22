@@ -1,14 +1,17 @@
 <template>
   <div class="bid-detail-container">
     <div class="backTop" 
-@click="backTop">
+      @click="backTop">
       <i class="iconfont">&#xe64e;</i>
       <span>{{ $t('bby_shouy7') }}</span>
     </div>
     <div class="title-box">
       <div class="logo"/>
       <h1>{{ cell.currency }}</h1>
-      <h2>{{ cell.product }}</h2>
+       <h2 v-if="state.locale==='zh-CN'">{{ cell.product }}</h2>
+      <h2 v-else-if="state.locale==='zh-HK'">{{ cell.productCt }}</h2>
+      <h2 v-else-if="state.locale==='en'">{{ cell.productEn }}</h2>
+      <h2 v-else-if="state.locale==='ko'">{{ cell.productKn }}</h2>
       <em class="jl" 
 @click="jl">{{ $t('bby_shise1') }}</em>
     </div>
@@ -133,10 +136,12 @@ import Vue from 'vue'
 import qs from 'qs'
 import service from '@/modules/service'
 import {envApi} from '../../modules/request'
+import {state} from '@/modules/store'
 
 export default {
   data () {
     return {
+      state,
       count: 0,
       controls: false,
       // 账户余额
@@ -189,16 +194,16 @@ export default {
         if (res.code === 0) {
           res.data.forEach((item) => {
             if (item.currency === this.cell.currency) {
-              console.log(item.currency)
-              console.log(this.cell.currency)
-              this.accountBalance = Number(item.available)
+              // console.log(item.currency)
+              // console.log(this.cell.currency)
+              this.accountBalance = this.$big(item.available).toString();
             }
           })
         }
       })
     },
     backTop () {
-      this.$router.push('/snowball')
+      this.$router.push('/snowball/bazaar')
     },
     inputKeyBoard (e) {
       if (e > this.accountBalance) {

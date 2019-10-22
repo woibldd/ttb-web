@@ -72,7 +72,7 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
               </ul>
             </div>
           </div> -->
-          <a
+          <a  
             href="javascript:;"
             class="nav_link"
             style="padding-left:30px;"
@@ -80,15 +80,16 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             {{ this.$t('node_sub') }}
             <icon name="hot-red"/>
           </a>
-          <a
+          <a 
+            v-if="isTestnet"
             href="javascript:;"
             class="nav_link"
             style="padding-left:30px;"
-            @click="planHandle"
-          >
+            @click="planHandle" >
             {{ $t('plan') }}
           </a>
-          <router-link
+          <router-link 
+            v-if="isTestnet"
             to="/share_option"
             class="nav_link  ml-30">
             {{ $t('share_option.navText') }}
