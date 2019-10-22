@@ -82,12 +82,12 @@
       </div>
     </div>
     <div v-if="marketData" ref="square-container" class="square-container" flex="dir:top box:mean">
-      <div class="text">看涨 <br><span>{{ +marketData.Bullish*100 }}%</span></div>
+      <div class="text">看涨 <br><span>{{ +marketData.Bullish*100|bigRound(0) }}%</span></div>
       <div class="mark-box" flex="dir:top box:mean">
         <div class="top" :style="{height:+marketData.Bullish*100+'%'}" />
         <div class="bottom" />
       </div>
-      <div class="text"><span>{{ +marketData.Bearish*100 }}%</span><br>看跌 </div>
+      <div class="text"><span>{{ +marketData.Bearish*100|bigRound(0) }}%</span><br>看跌 </div>
     </div>
     <!-- <div class="test" style="margin-left:40px" />
     <div class="test" /> -->
