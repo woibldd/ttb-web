@@ -579,7 +579,7 @@ export default {
       if (!element) return
       element.style.display = 'none'
     },
-    addLabels(color, value = 1, index = 0, data) {
+    addLabels(color, value = 1, index = 0, data={}) {
       const obj = {
         green: {
           borderColor: 'rgba(42, 172, 62, 0.8)',
