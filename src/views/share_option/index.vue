@@ -227,9 +227,9 @@ export default {
       createOrder({ user_id: this.userData.id, symbol: this.activeProduct[0], amount: this.orderCount, currency: this.activeShareAccount.currency, 'trade_type': tradeType, period: this.activeProduct[1] }).then(res => {
         return this.$store.dispatch('getShareAccountList', { accountArr: this.mapCurrencyList, isAssignment: true })
       }).then(res => {
-        if (this.marketData.time > this.marketData.orderTime) {
-          this.cacheOrderObj[this.activeShareAccount.currency] = +this.orderCount + (this.cacheOrderObj[this.activeShareAccount.currency] || 0)
-        }
+        // if (this.marketData.time > this.marketData.orderTime) {
+        //   this.cacheOrderObj[this.activeShareAccount.currency] = +this.orderCount + (this.cacheOrderObj[this.activeShareAccount.currency] || 0)
+        // }
         this.dynamicChart.addLabels(color, this.orderCount)
         this.getHistory()
       })
@@ -247,11 +247,11 @@ export default {
           this.getHistory().then(res => {
             // console.log(this.marketData.time > this.marketData.orderTime);
             const incomeObj = dataArr.reduce((prev, curr, index) => {
-              const value = bigMinus([curr.available, mapShareAccount[index].available, mapShareAccount[index].ordering], 4)
-              prev[curr.currency] = bigPlus([value, this.cacheOrderObj[curr.currency] || 0])
+              const value = bigMinus([curr.available, mapShareAccount[index].available,mapShareAccount[index].ordering], 4)
+              prev[curr.currency] = bigPlus([value, curr.ordering])
               return prev
             }, {})
-            this.cacheOrderObj = {}
+            // this.cacheOrderObj = {}
             this.userData && callback && callback(incomeObj)
           })
         })
