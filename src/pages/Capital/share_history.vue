@@ -56,7 +56,7 @@ export default {
             case 'sett_time':
               return this.parseTime(value)
             default:
-              return value
+              return value?value:'--'
           }
         }
       }))
