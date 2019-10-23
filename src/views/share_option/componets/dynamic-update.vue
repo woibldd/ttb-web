@@ -34,88 +34,84 @@ export default {
     }
   },
   mounted() {
-    document.addEventListener('visibilitychange',function(){
-    if(document.visibilityState=='hidden') {     
-      if(this.websockets[0]){
-        this.websockets[0].close(); //关闭websocket
-      }
-    }else {
-      location.reload(); //刷新页面
-    }
+    document.addEventListener('visibilitychange',()=>{
+      if(this.websockets[0].readyState !== 1)this.startWebSocket()
   });
-    this.isLoading = true
-    // wss://fota.com/apioption/wsoption?brokerId=1
-    this.openWebSocket('wss://wss.ixex.pro/v1', res => {
-      if (res.spotIndexDTOList) {
-        if (!res.spotIndexDTOList.length) return
-        const data = res.spotIndexDTOList.map((dataString, index) => {
-          const item = JSON.parse(dataString)
-          return { x: item.time, y: Number(item.price) }
-        })
-        if (!data.length) return
-        this.initCharts(data)
-        this.handlePlotLinesByCountUp(data)
-        this.creatTwoLineByTime(res.timeStamp)
-
-        this.orderTimeElement = document.querySelector('#orderTime')
-        this.finishTimeElement = document.querySelector('#finishTime')
-        this.rippleElement = document.querySelector('#ripple')
-
-        // this.initOrderLineByCountUp(res.timeStamp)
-        this.chart.pointer.onContainerMouseWheel = debounce(this.handleScroll, 100, true)
-
-        this.isLoading = false
-      } else if (res.data) {
-        this.addUserAnnotations(res.data)
-      } else {
-        if (!this.chart) return
-        const { min } = this.chart.xAxis[0].getExtremes()
-        const price = Number(res.price)
-        this.chart.yAxis[0].plotLinesAndBands[0].options.value = price
-
-        this.countUp.update(price)
-        this.countUp.isUp = this.countUp.endVal - this.countUp.startVal > 0
-
-        const resTime = res.time
-
-        const markElement = this.orderTimeElement.querySelector('.mask')
-        const xData = this.chart.series[0].xData
-        this.isLoading = xData[xData.length - 5] === resTime
-        this.lastPoint = {
-          x: resTime,
-          y: price,
-          xAxis: 0,
-          yAxis: 0
-        }
-        // console.log(new Date(resTime).getTime())
-
-        this.chart.series[0].addPoint([new Date(resTime).getTime(), price])
-
-        const { orderPixels, finishPixels, orderTime, finishTime } = this.handleLinePixelsByTime(resTime)
-        markElement.style.width = resTime >= orderTime ? '50vw' : 0
-        res.orderTime = orderTime
-        this.$emit('pushData', res)
-
-        this.handleTwoLineTips(resTime, orderTime, finishTime)
-
-        this.orderTimeElement.style.transform = `translate(${orderPixels + 5}px, 0px)`
-        this.finishTimeElement.style.transform = `translate(${finishPixels + 5}px, 0px)`
-        // this.chart.addAnnotation({ labels: [{ point: { x: resTime, y: price }}] })
-        this.rippleElement.style.right = this.chart.containerWidth - this.chart.xAxis[0].toPixels(resTime, true) - 22 + 'px'
-
-        const dataCout = this.chart.series[0].data.filter(item => item.x > min).length
-
-        if (dataCout > 400 && this.isNoScroll) this.initxAxis()
-      }
-    }).then(websocket => {
-      // websocket.send(`{"reqType":9,"param":{"id":1,"period":1,"optionType":1}}`)
-      // websocket.send(`{"reqType":1,"param":{"assetCode":1,"optionType":1}}`)
-    })
+    this.startWebSocket()
   },
   destroyed() {
     clearInterval(this.timer)
   },
   methods: {
+    startWebSocket(){
+      this.isLoading = true
+      this.openWebSocket('wss://wss.ixex.pro/v1', res => {
+      if (res.spotIndexDTOList) {
+          if (!res.spotIndexDTOList.length) return
+          const data = res.spotIndexDTOList.map((dataString, index) => {
+            const item = JSON.parse(dataString)
+            return { x: item.time, y: Number(item.price) }
+          })
+          if (!data.length) return
+          this.initCharts(data)
+          this.handlePlotLinesByCountUp(data)
+          this.creatTwoLineByTime(res.timeStamp)
+
+          this.orderTimeElement = document.querySelector('#orderTime')
+          this.finishTimeElement = document.querySelector('#finishTime')
+          this.rippleElement = document.querySelector('#ripple')
+
+          // this.initOrderLineByCountUp(res.timeStamp)
+          this.chart.pointer.onContainerMouseWheel = debounce(this.handleScroll, 100, true)
+
+          this.isLoading = false
+        } else if (res.data) {
+          this.addUserAnnotations(res.data)
+        } else {
+          if (!this.chart) return
+          const { min } = this.chart.xAxis[0].getExtremes()
+          const price = Number(res.price)
+          this.chart.yAxis[0].plotLinesAndBands[0].options.value = price
+
+          this.countUp.update(price)
+          this.countUp.isUp = this.countUp.endVal - this.countUp.startVal > 0
+
+          const resTime = res.time
+
+          const markElement = this.orderTimeElement.querySelector('.mask')
+          const xData = this.chart.series[0].xData
+          this.isLoading = xData[xData.length - 5] === resTime
+          this.lastPoint = {
+            x: resTime,
+            y: price,
+            xAxis: 0,
+            yAxis: 0
+          }
+          // console.log(new Date(resTime).getTime())
+
+          this.chart.series[0].addPoint([new Date(resTime).getTime(), price])
+
+          const { orderPixels, finishPixels, orderTime, finishTime } = this.handleLinePixelsByTime(resTime)
+          markElement.style.width = resTime >= orderTime ? '50vw' : 0
+          res.orderTime = orderTime
+          this.$emit('pushData', res)
+
+          this.handleTwoLineTips(resTime, orderTime, finishTime)
+
+          this.orderTimeElement.style.transform = `translate(${orderPixels + 5}px, 0px)`
+          this.finishTimeElement.style.transform = `translate(${finishPixels + 5}px, 0px)`
+          // this.chart.addAnnotation({ labels: [{ point: { x: resTime, y: price }}] })
+          this.rippleElement.style.right = this.chart.containerWidth - this.chart.xAxis[0].toPixels(resTime, true) - 22 + 'px'
+
+          const dataCout = this.chart.series[0].data.filter(item => item.x > min).length
+
+          if (dataCout > 400 && this.isNoScroll) this.initxAxis()
+        }
+      }).then(websocket => {
+        // websocket.send(`{"reqType":9,"param":{"id":1,"period":1,"optionType":1}}`)
+        // websocket.send(`{"reqType":1,"param":{"assetCode":1,"optionType":1}}`)
+      })
+    },
     handleTwoLineTips(resTime, orderTime, finishTime) {
       const innerText = '下一轮'
       const orderBoxElement = this.orderTimeElement.querySelector('.box')
