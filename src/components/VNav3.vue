@@ -38,14 +38,14 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
               to="/plan"
               class="nav_link  ml-30">
               {{$t('plan')}}
-              <img src="./../assets/down.png" width="24" height="24" alt="" style="zoom: 1;
+              <img v-if="isLogin" src="./../assets/down.png" width="24" height="24" alt="" style="zoom: 1;
     display: inline-block;
     vertical-align: top;
     width: 18px;
     height: 18px;
     margin-top: 2px;">
             </router-link>
-            <div class="dropdown-sub-menu">
+            <div class="dropdown-sub-menu" v-if="isLogin">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
                   <router-link to="/plan" class="link">{{ $t('plan') }}</router-link>
