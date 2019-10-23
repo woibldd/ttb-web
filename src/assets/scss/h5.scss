@@ -108,6 +108,10 @@ $theme-color:rgba(35, 206, 208, 1);
         background-size: 86%;
         margin-top: 1.4rem;
       }
+      .lang-en {
+        background: url("./../img/agent/text_us.png") center center no-repeat;
+        background-size: 86%;
+      }
     }
     .broker-text {
       width: 90%;
@@ -292,6 +296,22 @@ $theme-color:rgba(35, 206, 208, 1);
       //background: url("../img/agent/message.png") center center no-repeat;
     }
   }
+  &-en-way {
+    height: 249px;
+    .broker-way-text {
+      position: relative;
+      left: 0;
+      z-index: 10;
+      .broker-way-text-list {
+        .lt {
+          width: 120px;
+        }
+      }
+    }
+    .broker-way-img {
+      top: 60px;
+    }
+}
   .text-vk {
     width: 240px;
     margin: 20px auto;

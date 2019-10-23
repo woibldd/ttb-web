@@ -2,7 +2,7 @@
   <div class="broker-h5">
     <div class="broker-h5-banner">
       <div class="broker-earth">
-        <div class="broker-text-bg wow pulse" data-wow-iteration="infinite" data-wow-duration="2000ms"></div>
+        <div class="broker-text-bg wow pulse" :class="{'lang-en': lang !== 'zh-CN'}" data-wow-iteration="infinite" data-wow-duration="2000ms"></div>
         <div class="broker-btn wow fadeInUp">
         <template v-if="uid !== '--'">
           <a class="join" :href="next" target="_blank">
@@ -63,7 +63,7 @@
         </div>
       </div>
     </div>
-    <div class="broker-h5-way">
+    <div class="broker-h5-way" :class="{'broker-h5-en-way': lang !== 'zh-CN'}">
       <div class="broker-way-title text-vk text-vk1" style="width: 300px">
         <div class="l-line wow slideInLeft" data-wow-duration="500ms"></div>
         <span class="wow slideInDown">{{ $t('way') }}</span>
