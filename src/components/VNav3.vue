@@ -35,9 +35,15 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
 
           <div class="nav_link arrow-down">
             <router-link
-              to="/snowball/bazaar"
+              to="/plan"
               class="nav_link  ml-30">
-              {{$t('bidTitle')}}
+              {{$t('plan')}}
+              <img src="./../assets/down.png" width="24" height="24" alt="" style="zoom: 1;
+    display: inline-block;
+    vertical-align: top;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;">
             </router-link>
             <div class="dropdown-sub-menu" v-if="isLogin">
               <ul class="dropdown-list pt-10 pb-10">
@@ -83,14 +89,14 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             {{ this.$t('node_sub') }}
             <icon name="hot-red"/>
           </a>
-          <!--<a
+          <a
             v-if="isTestnet"
             href="javascript:;"
             class="nav_link"
             style="padding-left:30px;"
             @click="planHandle" >
             {{ $t('plan') }}
-          </a>-->
+          </a>
           <router-link
             v-if="isTestnet"
             to="/share_option"
@@ -218,7 +224,10 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             <router-link :to="{name:'fund'}">我的资产</router-link>
           </p>-->
           <div class="fund mr-30">
-            <span>{{ $t('plan') }}</span>
+            <icon
+              :name="fund"
+            />
+            <span @click="openDefault('fund')">{{ $t('wallets_nav_asset') }}</span>
 
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">

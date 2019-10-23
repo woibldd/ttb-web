@@ -82,7 +82,7 @@
           <div class="broker-way-text-list">
             <div class="lt">{{ $t('content') }}</div>
             <div class="rt">
-              <dl>
+              <dl style="color: #B5B5B5">
                 <dd>{{ $t('tip_email') }}</dd>
                 <dd>{{ $t('tip_phone') }}</dd>
                 <dd>{{ $t('tip_content') }}</dd>
