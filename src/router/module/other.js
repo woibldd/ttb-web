@@ -202,7 +202,7 @@ export const otherRouter = [
     path: '/planSubmit',
     name: 'planSubmit',
     meta: {
-      auth: false,
+      auth: true,
       footer: false,
       nav: false
     },
