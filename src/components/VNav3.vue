@@ -45,8 +45,15 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
     height: 18px;
     margin-top: 2px;">
             </router-link>
-            <div class="dropdown-sub-menu" v-if="isLogin">
+            <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
+                <li class="dropdown-item pl-24 pr-24">
+                  <a
+                    href="/snowball/bazaar"
+                    :class="{'router-link-active': from === 'contract'}"
+                    class="link">{{ $t('bidTitle') }}
+                  </a>
+                </li>
                 <li class="dropdown-item pl-24 pr-24">
                   <a
                     href="/snowball"
