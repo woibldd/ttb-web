@@ -4,14 +4,9 @@
       <slot />
       <el-divider />
     </div>
-    <custom-table v-loading="!tableList.length" stripe :table-list="tableList" :table-columns="mapShareColumns" @change="handlePageChange">
-      <!-- <div slot="handlerDom" slot-scope="data" style="width:200px">
-        <el-link type="primary">划转</el-link>
-        <el-link type="primary">充币</el-link>
-        <el-link type="primary">提币</el-link>
-        <el-link type="primary">交易</el-link>
-      </div> -->
+    <custom-table v-loading="loading" stripe :table-list="tableList" :table-columns="mapShareColumns" @change="handlePageChange">
     </custom-table>
+    
   </div>
 </template>
 <script>
@@ -27,7 +22,7 @@ export default {
     return {
       tableList: [],
       total: 0,
-      loading: false,
+      loading: true,
       lastColumnConfig: {
         headerLabel: '操作',
         headerAlign: 'right',
@@ -74,9 +69,11 @@ export default {
   methods: {
     handlePageChange(obj) {
       const { pageSize, currentPage } = obj
+      this.loading = true
       getHistory({ user_id: this.id, page: currentPage, size: pageSize }).then(res => {
         this.tableList = res.data.data
         obj.total = res.data.total
+        this.loading = false
       })
     }
   }
