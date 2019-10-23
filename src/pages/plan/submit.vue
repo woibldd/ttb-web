@@ -159,9 +159,7 @@
         }
       },
       applyHandle() {
-        if (this.lang !== 'zh-CN') {
-          this.$router.push('/treaty')
-        }
+        this.$router.push('/treaty')
       }
     },
     created() {

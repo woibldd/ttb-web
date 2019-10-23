@@ -83,14 +83,14 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             {{ this.$t('node_sub') }}
             <icon name="hot-red"/>
           </a>
-          <a
+          <!--<a
             v-if="isTestnet"
             href="javascript:;"
             class="nav_link"
             style="padding-left:30px;"
             @click="planHandle" >
             {{ $t('plan') }}
-          </a>
+          </a>-->
           <router-link
             v-if="isTestnet"
             to="/share_option"
