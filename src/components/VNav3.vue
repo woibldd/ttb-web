@@ -48,6 +48,9 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
+                  <router-link to="/plan" class="link">{{ $t('plan') }}</router-link>
+                </li>
+                <li class="dropdown-item pl-24 pr-24">
                   <a
                     href="/snowball/bazaar"
                     :class="{'router-link-active': from === 'contract'}"
@@ -60,9 +63,6 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
                     :class="{'router-link-active': from === 'contract'}"
                     class="link">{{ $t('playBTC') }}
                   </a>
-                </li>
-                <li class="dropdown-item pl-24 pr-24">
-                  <router-link to="/plan" class="link">{{ $t('plan') }}</router-link>
                 </li>
               </ul>
             </div>

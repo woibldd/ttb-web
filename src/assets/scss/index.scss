@@ -283,3 +283,37 @@
     width: 408px
   }
 }
+.apply-list {
+  .item_1 {
+    background: url("../images/PC/apply_0_hover.png") center center no-repeat!important;
+  }
+  .item_2 {
+    background: url("../images/PC/apply_1_hover.png") center center no-repeat!important;
+  }
+  .item_3 {
+    background: url("../images/PC/apply_2_hover.png") center center no-repeat!important;
+  }
+  .item_4 {
+    background: url("../images/PC/apply_3_hover.png") center center no-repeat!important;
+  }
+  .item_5 {
+    background: url("../images/PC/apply_4_hover.png") center center no-repeat!important;
+  }
+  &:hover {
+    .item_1 {
+      background: url("../images/PC/apply_0.png") center center no-repeat!important;
+    }
+    .item_2 {
+      background: url("../images/PC/apply_1.png") center center no-repeat!important;
+    }
+    .item_3 {
+      background: url("../images/PC/apply_2.png") center center no-repeat!important;
+    }
+    .item_4 {
+      background: url("../images/PC/apply_3.png") center center no-repeat!important;
+    }
+    .item_5 {
+      background: url("../images/PC/apply_4.png") center center no-repeat!important;
+    }
+  }
+}

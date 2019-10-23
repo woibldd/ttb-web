@@ -36,7 +36,7 @@
           <div class="r-line wow slideInRight" data-wow-duration="500ms"></div>
         </div>
         <div class="apply-list wow fadeInUp" v-for="item in 5" :key="item"  :data-wow-delay="(100 + item * 100) + 'ms'">
-          <div class="list-img"></div>
+          <div class="list-img" :class="`item_${item}`"></div>
           <div class="list-text">
             {{ $t(`demand_${item}`) }}
           </div>

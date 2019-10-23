@@ -342,4 +342,22 @@ $theme-color:rgba(35, 206, 208, 1);
   font-size:16px;font-style:normal;
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke-width: 0.2px;
-  -moz-osx-font-smoothing: grayscale;}
+  -moz-osx-font-smoothing: grayscale;
+}
+.broker-h5 {
+  .apply-list {
+    .item_1 {
+      background: url("../apply_1.png") center center no-repeat!important;
+    }
+    .item_2 {
+      background: url("../apply_2.png") center center no-repeat!important;
+    }
+    .item_3 {
+      background: url("../apply_3.png") center center no-repeat!important;
+    }
+    .item_4 {
+      background: url("../apply_4.png") center center no-repeat!important;}
+    .item_5 {
+      background: url("../apply_5.png") center center no-repeat!important;}
+  }
+}

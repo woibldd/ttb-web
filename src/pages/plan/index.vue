@@ -40,12 +40,12 @@
     <div class="broker-apply">
       <div class="apply-container">
         <div class="apply-text text-vk">
-          <div class="l-line wow slideInLeft" data-wow-duration="500ms"></div>
-          <span class="wow slideInDown">{{ $t('demand') }}</span>
-          <div class="r-line wow slideInRight" data-wow-duration="500ms"></div>
+          <div class="l-line wow slideinleft" data-wow-duration="500ms"></div>
+          <span class="wow slideindown">{{ $t('demand') }}</span>
+          <div class="r-line wow slideinright" data-wow-duration="500ms"></div>
         </div>
-        <div class="apply-list wow fadeInUp" v-for="item in 5" :key="item"  :data-wow-delay="(100 + item * 100) + 'ms'">
-          <div class="list-img"></div>
+        <div class="apply-list wow fadeinup" v-for="item in 5" :key="item"  :data-wow-delay="(100 + item * 100) + 'ms'">
+          <div class="list-img" :class="`item_${item}`"></div>
           <div class="list-text">
             {{ $t(`demand_${item}`) }}
           </div>

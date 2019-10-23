@@ -107,6 +107,10 @@
       }
     },
     methods: {
+       filterInput(val) {
+        // 这里过滤的是除了英文字母和数字的其他字符
+        return val.replace(/[^A-z0-9]/, '')
+      },
       nextHandle() {
         if(!this.form.email) {
           this.$message.error(this.$t('application_ipt_email'))
