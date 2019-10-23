@@ -142,17 +142,16 @@ export default {
     },
     addUserAnnotations(data) {
       data = JSON.parse(data)
-      this.addLabels(!data.tradeType ? 'green' : 'red', data.amount, 1, data)
+      this.addLabels(!data.tradeType ? 'green' : 'red', data.amount, data)
     },
     cleanAnnotations(orderTime) {
       // const labels = this.chart.annotations[0].labels.filter(item => item.options.point.x <= orderTime)
-      const shapes = this.chart.annotations[0].shapes.filter(item => item.options.points[0].x <= orderTime)
+      const shapes = this.chart.annotations[0].shapes.filter(item => item.options.points[0].x <= orderTime && item.options.customPeriod === this.websocketArgs[0])
       shapes.forEach((item, index) => {
         this.chart.annotations[0].destroyItem(item)
         // this.chart.annotations[0].destroyItem(item)
       })
-      localStorage.removeItem('annotations0')
-      localStorage.removeItem('annotations1')
+      localStorage.removeItem('annotations')
     },
     handleLinePixelsByTime(time) {
       const [period, , settleTime] = rangeArr[this.websocketArgs[0] - 1]
@@ -173,10 +172,8 @@ export default {
         global: { useUTC: false }
       })
 
-      let annotations0 = localStorage.getItem(`annotations0`)
-      annotations0 = annotations0 ? JSON.parse(annotations0) : {}
-      let annotations1 = localStorage.getItem(`annotations1`)
-      annotations1 = annotations1 ? JSON.parse(annotations1) : {}
+      let annotations = localStorage.getItem(`annotations`)
+      annotations = annotations ? JSON.parse(annotations) : {}
 
       const that = this
       this.chart = Highcharts.chart('container', {
@@ -228,11 +225,8 @@ export default {
           }
         },
         annotations: [{
-          labels: (annotations0 || {}).labels || [],
-          shapes: (annotations0 || {}).shapes || [],
-          draggable: false
-        }, {
-          labels: (annotations1 || {}).labels || [],
+          labels: (annotations || {}).labels || [],
+          shapes: (annotations || {}).shapes || [],
           draggable: false
         }],
         // annotations: [{
@@ -532,7 +526,11 @@ export default {
       if (!element) return
       element.style.display = 'none'
     },
-    addLabels(color, value = 1, index = 0, data={}) {
+    addLabels(color, value = 1, data) {
+      const xAxis = this.chart.xAxis[0]
+      // if (Math.ceil(xAxis.tickInterval) <= 2000) return
+      const { max} = xAxis.getExtremes()
+
       const obj = {
         green: {
           borderColor: 'rgba(42, 172, 62, 0.8)',
@@ -543,34 +541,45 @@ export default {
           backgroundColor: 'rgba(232, 79, 67, 0.6)'
         }
       }
-      const labelOption = {
-        point: this.lastPoint,
-        text: value + ' ' + data.currency||this.$store.state.activeShareAccount.currency,
-        borderRadius: 6,
-        shape: 'rect',
-        y: -6,
-        allowOverlap: true,
-        ...obj[color]
-      }
-      const shapeOption = {
+      let annotation = localStorage.getItem(`annotations`)
+      annotation = annotation ? JSON.parse(annotation) : {}
+      const { labels = [], shapes = [] } = annotation
+      if(data){
+        const labelOption = {
+          point: {
+            x:data.createTime,
+            y:data.strike,
+            xAxis: 0,
+            yAxis: 0
+          },
+          text: value + ' ' + data.currency,
+          borderRadius: 6,
+          shape: 'rect',
+          y: -6,
+          allowOverlap: true,
+          ...obj[color]
+        }
+        this.chart.annotations[0].initLabel(labelOption)
+        labels.push(labelOption)
+      }else {
+        // const {finishTime} = this.handleLinePixelsByTime(this.lastPoint.x)
+        const shapeOption = {
         fill: 'none',
         stroke: color,
         strokeWidth: 1,
         type: 'path',
         markerStart: color,
+        customPeriod:this.websocketArgs[0],
         points: [this.lastPoint, {
-          x: this.lastPoint.x + 1000 * 60 * 60,
+          x: max+24*60*60*1000,
           y: this.lastPoint.y,
           xAxis: 0,
           yAxis: 0
         }] }
-      !index && this.chart.annotations[index].initShape(shapeOption) || this.chart.annotations[index].initLabel(labelOption)
-      let annotation = localStorage.getItem(`annotations${index}`)
-      annotation = annotation ? JSON.parse(annotation) : {}
-      const { labels = [], shapes = [] } = annotation
-      labels.push(labelOption)
-      shapes.push(shapeOption)
-      localStorage.setItem(`annotations${index}`, JSON.stringify({ labels, shapes }))
+        this.chart.annotations[0].initShape(shapeOption)
+        shapes.push(shapeOption)
+      }
+      localStorage.setItem(`annotations`, JSON.stringify({ labels, shapes }))
     },
     initChartsByReqType(reqType) {
       // this.websocketArgs[0] = +reqType + 1

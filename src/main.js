@@ -64,6 +64,7 @@ import {
   CarouselItem,
   Cascader,
   CascaderPanel,
+  Divider
 } from 'element-ui'
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
@@ -114,6 +115,7 @@ Vue.use(Checkbox)
 Vue.use(Popover)
 Vue.use(CascaderPanel)
 Vue.use(Cascader)
+Vue.use(Divider)
 const request = require.context('./assets/svg', true, /\.svg$/)
 /* console.log('request', request)
 console.log('request.keys', request.keys())
