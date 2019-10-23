@@ -19,7 +19,7 @@
       <div class="next-container-ipt">
         <div class="ipt">
           <label class="tip" for="name">{{ $t('realName') }}</label>
-          <input type="text" id="name" autocomplete="off" :disabled="!emailFlag" v-model="form.name" name="name" v-on:input="realHandle">
+          <el-input type="text" id="name" autocomplete="off" :disabled="!emailFlag" v-model="form.name" name="name"  @input="e => form.name = validSe(e)"></el-input>
         </div>
       </div>
       <div class="next-container-ipt">
@@ -385,6 +385,11 @@
         line-height: 40px;
         color: #fff;
       }
+    }
+  }
+  .next-container-ipt {
+    .el-input__inner {
+      line-height: 1!important;
     }
   }
 </style>

@@ -171,3 +171,8 @@ if (utils.isMobile()) {
     document.body.classList.add('ios')
   }
 }
+
+Vue.prototype.validSe = function (value) {
+  value = value.replace(/[`~!@#$%^&*()_\-+=<>?:"{}|,./;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘’，。、]/g, '').replace(/\s/g, "");
+  return value;
+}
