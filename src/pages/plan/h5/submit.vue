@@ -34,10 +34,10 @@
         </div>
       </div>
       <div  class="next-container-h5-checked">
-        <van-checkbox v-model="checked">
+        <el-checkbox v-model="checked">
           <span class="true">{{ $t('application_check') }}</span>
-          <a href="javascript:;">{{ $t('application_xy') }}</a>
-        </van-checkbox>
+          <a href="javascript:;" @click="applyHandle">{{ $t('application_xy') }}</a>
+        </el-checkbox>
       </div>
       <div class="next-container-btn" @click="nextHandle">
         <input type="button" :disabled="!checked" :value="this.$t('submit')">
@@ -101,7 +101,7 @@
     methods: {
       nextHandle() {
         if(!this.form.email) {
-          this.$message.error(this.$t('login_ph_pw'))
+          this.$message.error(this.$t('application_ipt_email'))
         } else if(!this.form.name) {
           this.$message.error(this.$t('kyc_name_err'))
         } else if(!this.form.email) {
@@ -149,6 +149,9 @@
         } else {
           this.errorMsg = ''
         }
+      },
+      applyHandle() {
+        this.$router.push('/treaty')
       }
     },
     created() {

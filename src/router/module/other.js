@@ -13,6 +13,8 @@ const h5planSubmit = () => import('@/pages/plan/h5/submit')
 const planSubmit = () => import('@/pages/plan/submit')
 const h5plan = () => import('@/pages/plan/h5/index')
 const plan = () => import('@/pages/plan/index')
+const h5treaty = () => import('@/pages/plan/h5/treaty')
+const treaty = () => import('@/pages/plan/treaty')
 export const otherRouter = [
   {
     path: '/',
@@ -170,7 +172,7 @@ export const otherRouter = [
     name: 'plan',
     meta: {
       auth: false,
-      footer: false,
+      footer: true,
       nav: true,
       class: 'dark'
     },
@@ -255,5 +257,36 @@ export const otherRouter = [
       footer: false
     },
     component: submitNext
-  }
+  },
+  {
+    path: '/treaty',
+    name: 'treaty',
+    meta: {
+      auth: false,
+      footer: true,
+      nav: true,
+      class: 'dark'
+    },
+    component: isMobile ? h5treaty : treaty
+  },
+  {
+    path: '/h5treaty',
+    name: 'h5treaty',
+    meta: {
+      auth: true,
+      footer: false,
+      nav: false
+    },
+    component: h5treaty
+  },
+  {
+    path: '/treaty',
+    name: 'treaty',
+    meta: {
+      auth: true,
+      footer: false,
+      nav: false
+    },
+    component: treaty
+  },
 ]

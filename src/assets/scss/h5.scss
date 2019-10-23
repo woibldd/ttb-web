@@ -222,16 +222,17 @@ $theme-color:rgba(35, 206, 208, 1);
         justify-items: center;
         align-items: center;
         .count {
-          flex: 1;
+          width: 100px;
+          flex: 100px 0 0 0;
           position: relative;
           &:after {
             content: '';
             position: absolute;
             width: 1px;
-            height:1.88rem;
+            height: 3000%;
             background: #296F61;
             right: 0;
-            top: -1rem;
+            top: -28px;
           }
         }
 
@@ -289,7 +290,7 @@ $theme-color:rgba(35, 206, 208, 1);
   }
   .text-vk {
     width: 240px;
-    margin: 0 auto;
+    margin: 20px auto;
     font-size: 14px;
     display: flex;
     justify-items: center;

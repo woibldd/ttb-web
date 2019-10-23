@@ -44,7 +44,7 @@
       <div  class="next-container-checked">
         <el-checkbox v-model="checked">
           <span class="true">{{ $t('application_check') }}</span>
-          <a href="javascript:;">{{ $t('application_xy') }}</a>
+          <a href="javascript:;" @click="applyHandle">{{ $t('application_xy') }}</a>
         </el-checkbox>
       </div>
       <div class="next-container-btn" @click="nextHandle">
@@ -109,7 +109,7 @@
     methods: {
       nextHandle() {
         if(!this.form.email) {
-          this.$message.error(this.$t('login_ph_pw'))
+          this.$message.error(this.$t('application_ipt_email'))
         } else if(!this.form.name) {
           this.$message.error(this.$t('kyc_name_err'))
         } else if(!this.form.email) {
@@ -157,6 +157,9 @@
         } else {
           this.errorMsg = ''
         }
+      },
+      applyHandle() {
+        this.$router.push('/treaty')
       }
     },
     created() {
