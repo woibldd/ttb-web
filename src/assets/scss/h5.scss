@@ -132,7 +132,8 @@ $theme-color:rgba(35, 206, 208, 1);
       font-size: 12px;
       .apply-list {
         width: 33.33%;
-        float: right;
+        height: 100px;
+        float: left;
         text-align: center;
         padding-bottom: .4rem;
         background: transparent;
@@ -238,7 +239,7 @@ $theme-color:rgba(35, 206, 208, 1);
 
         .text {
           flex: 1;
-          text-align: left;
+          text-align: center;
           padding-left: .1rem;
         }
 
@@ -253,6 +254,7 @@ $theme-color:rgba(35, 206, 208, 1);
   }
   &-way {
     position: relative;
+    height: 230px;
     .broker-way-title {
       padding:.3rem 0 .4rem;
       text-align: center;

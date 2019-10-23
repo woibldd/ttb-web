@@ -218,10 +218,7 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             <router-link :to="{name:'fund'}">我的资产</router-link>
           </p>-->
           <div class="fund mr-30">
-            <icon
-              :name="fund"
-            />
-            <span @click="openDefault('fund')">{{ $t('wallets_nav_asset') }}</span>
+            <span>{{ $t('plan') }}</span>
 
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
