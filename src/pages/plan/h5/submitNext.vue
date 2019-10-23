@@ -101,7 +101,7 @@
         height: inherit;
         padding:12px 0 12px 20px;
         color: #23CED0;
-        font-size: .28rem;
+        font-size: 16px;
         [placeholder] {
           color: #CBCBCB
         }

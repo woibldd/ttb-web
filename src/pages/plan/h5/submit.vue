@@ -270,6 +270,7 @@
       a {
         color: #23CED0;
         text-decoration: none;
+        font-size: 13px
       }
       .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
         background-color: #23CED0;
