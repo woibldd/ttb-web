@@ -35,7 +35,7 @@ export default {
       return Object.keys(this.chineseLangData.mapShareColumns).map(key => ({
         hearderLabel: this.$tR(`mapShareColumns.${key}`),
         prop: key,
-        hearderWidth: key => ['period', 'trade_type', 'amount'].includes(key) && '50px',
+        hearderWidth: key => ['period', 'trade_type', 'amount','income','profile'].includes(key) && '50px',
         handleValue: (value, key) => {
           switch (key) {
             case 'period':
@@ -49,7 +49,7 @@ export default {
             case 'create_time':
               return this.parseTime(value)
             case 'sett_time':
-              return this.parseTime(value)
+              return value && this.parseTime(value) || '--'
             default:
               return value?value:'--'
           }
