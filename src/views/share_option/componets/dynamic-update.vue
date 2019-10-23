@@ -571,7 +571,7 @@ export default {
         markerStart: color,
         customPeriod:this.websocketArgs[0],
         points: [this.lastPoint, {
-          x: max,
+          x: max+24*60*60*1000,
           y: this.lastPoint.y,
           xAxis: 0,
           yAxis: 0
