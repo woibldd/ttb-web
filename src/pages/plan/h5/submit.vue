@@ -36,7 +36,7 @@
       <div  class="next-container-h5-checked">
         <el-checkbox v-model="checked">
           <span class="true">{{ $t('application_check') }}</span>
-          <a href="javascript:;">{{ $t('application_xy') }}</a>
+          <a href="javascript:;" @click="applyHandle">{{ $t('application_xy') }}</a>
         </el-checkbox>
       </div>
       <div class="next-container-btn" @click="nextHandle">
@@ -148,6 +148,11 @@
           this.errorMsg = this.$t('otc_kvcoc_9')
         } else {
           this.errorMsg = ''
+        }
+      },
+      applyHandle() {
+        if (this.lang !== 'zh-CN') {
+          this.$router.push('/treaty')
         }
       }
     },

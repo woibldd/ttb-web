@@ -20,7 +20,6 @@
   .treaty-inner {
     overflow: hidden;
     overflow-y: auto;
-    height: 640px;
     min-width: 1200px;
     margin: 60px auto;
     h1 {
