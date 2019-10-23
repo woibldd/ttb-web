@@ -32,25 +32,28 @@
             <!-- <img src="@/assets/hot.png"
 alt style="position: relative;top: 5px;left: 5px;"> -->
           </router-link>
-          
+
           <div class="nav_link arrow-down">
-            <router-link 
+            <router-link
               to="/snowball/bazaar"
               class="nav_link  ml-30">
               {{$t('bidTitle')}}
             </router-link>
             <div class="dropdown-sub-menu" v-if="isLogin">
               <ul class="dropdown-list pt-10 pb-10">
-                <li class="dropdown-item pl-24 pr-24"> 
+                <li class="dropdown-item pl-24 pr-24">
                   <a
                     href="/snowball"
                     :class="{'router-link-active': from === 'contract'}"
                     class="link">{{ $t('playBTC') }}
                   </a>
                 </li>
+                <li class="dropdown-item pl-24 pr-24">
+                  <router-link to="/plan" class="link">{{ $t('plan') }}</router-link>
+                </li>
               </ul>
             </div>
-            
+
           </div>
           <!-- <div
             class="nav_link arrow-down"
@@ -72,7 +75,7 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
               </ul>
             </div>
           </div> -->
-          <a  
+          <a
             href="javascript:;"
             class="nav_link"
             style="padding-left:30px;"
@@ -80,7 +83,7 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             {{ this.$t('node_sub') }}
             <icon name="hot-red"/>
           </a>
-          <a 
+          <a
             v-if="isTestnet"
             href="javascript:;"
             class="nav_link"
@@ -88,7 +91,7 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             @click="planHandle" >
             {{ $t('plan') }}
           </a>
-          <router-link 
+          <router-link
             v-if="isTestnet"
             to="/share_option"
             class="nav_link  ml-30">

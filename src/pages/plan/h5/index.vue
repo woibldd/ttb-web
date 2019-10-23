@@ -30,7 +30,7 @@
     </div>
     <div class="broker-h5-apply">
       <div class="apply-container">
-        <div class="apply-text text-vk">
+        <div class="apply-text text-vk" style="width: 300px;">
           <div class="l-line wow slideInLeft" data-wow-duration="500ms"></div>
           <span class="wow slideInDown">{{ $t('demand') }}</span>
           <div class="r-line wow slideInRight" data-wow-duration="500ms"></div>
@@ -64,7 +64,7 @@
       </div>
     </div>
     <div class="broker-h5-way">
-      <div class="broker-way-title text-vk text-vk1">
+      <div class="broker-way-title text-vk text-vk1" style="width: 300px">
         <div class="l-line wow slideInLeft" data-wow-duration="500ms"></div>
         <span class="wow slideInDown">{{ $t('way') }}</span>
         <div class="r-line wow slideInRight" data-wow-duration="500ms"></div>

@@ -170,7 +170,7 @@ export const otherRouter = [
     name: 'plan',
     meta: {
       auth: false,
-      footer: false,
+      footer: true,
       nav: true,
       class: 'dark'
     },
