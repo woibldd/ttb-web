@@ -152,6 +152,7 @@ export default {
         // this.chart.annotations[0].destroyItem(item)
       })
       localStorage.removeItem('annotations0')
+      localStorage.removeItem('annotations1')
     },
     handleLinePixelsByTime(time) {
       const [period, , settleTime] = rangeArr[this.websocketArgs[0] - 1]

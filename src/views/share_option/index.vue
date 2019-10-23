@@ -43,7 +43,7 @@
     <!-- <charts-dynamic-update class="content" /> -->
     <div class="right-side-bar">
       <div class="content-top hover-scale">
-        <p class="share-text-info"> 投资 </p>
+        <p class="share-text-info"> 投资 <span>（{{(activeShareAccount||{}).min_amount}}-{{(activeShareAccount||{}).max_amount}}）</span></p>
         <input v-model.number="orderCount" min="1" type="text" maxlength="8">
         <div class="btn-group">
           <div @click="orderCount++"> + </div>
