@@ -95,7 +95,7 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             v-if="isTestnet"
             to="/share_option"
             class="nav_link  ml-30">
-            {{ $t('share_option.navText') }}
+            {{ $t('shareOption.navText') }}
           </router-link>
           <!-- <div class="nav_link arrow-down">
             <a
@@ -285,15 +285,15 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
         </whDropdown> -->
 
           <div class="help mr-30"  v-if="$route.path === '/share_option' && mapBalanceMenu.length">
-            <span style="display:inline-block;min-width:160px">{{ activeShareAccount.currency }} 账户 / {{ activeShareAccount.available| bigRound(4) }}</span>
+            <span style="display:inline-block;min-width:160px">{{ activeShareAccount.currency }} {{$t('shareOption.account')}} / {{ activeShareAccount.available| bigRound(4) }}</span>
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10" style="min-width:250px">
                 <li class="dropdown-item pl-24 pr-24" @click="$store.commit('SET_ACTIVESHAREACCOUNT',item)" flex="main:justify" v-for="item in mapBalanceMenu" :key="item.currency">
-                  <el-tooltip :disabled="false" :content="`${item.currency} 账户 / ${bigRound(item.available,4)}`" placement="left" effect="dark">
-                    <a class="text-nowrap" :style="{color:item.currency === activeShareAccount.currency?'':'#fff'}"><svg-icon :icon-class="item.currency.toLowerCase()" /> {{item.currency}} 账户 /{{item.available| bigRound(4)}}</a>
+                  <el-tooltip :disabled="false" :content="`${item.currency} ${$t('shareOption.account')} / ${bigRound(item.available,4)}`" placement="left" effect="dark">
+                    <a class="text-nowrap" :style="{color:item.currency === activeShareAccount.currency?'':'#fff'}"><svg-icon :icon-class="item.currency.toLowerCase()" /> {{item.currency}} {{$t('shareOption.account')}} /{{item.available| bigRound(4)}}</a>
                   </el-tooltip>
-                  <span v-if="item.currency === 'DEMO'"  @click.stop="resetBalance(item.currency)">重置体验金</span>
-                  <span v-else>充值</span>
+                  <span v-if="item.currency === 'DEMO'"  @click.stop="resetBalance(item.currency)">{{$t('shareOption.resetMoney')}} </span>
+                  <span v-else>{{$t('shareOption.recharge')}}</span>
                 </li>
               </ul>
             </div>

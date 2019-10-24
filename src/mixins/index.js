@@ -12,7 +12,7 @@ export default {
       return capitalizeLower(this.$options.name)
     },
     chineseLangData() {
-      return this.$i18n.messages['zh-CN'][this.thisName]
+      return this.$i18n.messages[this.$i18n.locale][this.thisName]
     }
   },
   methods: {

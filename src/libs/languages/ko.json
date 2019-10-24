@@ -2252,5 +2252,55 @@
         "close_verify_tips": "모바일 인증과 메일박스 인증은 동시에 닫을 수 없습니다."
       }
     }
+  },
+  "shareOption": {
+    "navText":"전속계약",
+    "share_account": "전속계좌",
+    "account": "계좌",
+    "resetMoney":"체험금 재설치",
+    "recharge":"충전",
+    "settle":"결제",
+    "noSettle":"미결제",
+    "next":"다음 라운드",
+    "up_rate": "오르다",
+    "down_rate": "내리다",
+    "newPrice": "최신가격",
+    "fullHistory": "완정한 력사기록",
+    "describe": "옵션 기대수익률.즉, 옵션 구입 및 만기일에 목적물 가격이 초기 발행권 가격보다 높을 경우, 순이익 = 설정수익률 * 투자 금액。",
+    "mapLeftNav": {
+      "spot-index": "현물지수",
+      "history": "력사기록"
+    },
+    "rightSideBar": {
+      "inputTitle": "투자"
+    },
+    "mapShareColumns": {
+      "currency": " 화피지불",
+      "symbol": " 상품류형",
+      "period": "주기",
+      "trade_type": "거래방향",
+      "amount": "주문금액",
+      "income": "수익금액",
+      "profile": "가격금액",
+      "spot": "현물지수",
+      "strike": "권리행사가격",
+      "sett_price": "가격계산",
+      "create_time": "주문시간",
+      "sett_time": "결산시간",
+      "state": "결산을 하겠습니까"
+    }
+  },
+  "spotIndex": {
+    "USD": "현물지수",
+    "mapList": {
+      "price": "USDT지수",
+      "usdtRate": "환률(USDT/USD)"
+    }
+  },
+  "shareHistory":{
+    "investment":"투자",
+    "earnings":"수익",
+    "values":"가치",
+    "noData":"수치가 없다"
   }
 }

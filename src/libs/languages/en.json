@@ -2519,5 +2519,55 @@
     "security": {
       "close_verify_tips": "Do not allowed to turn off mobile and email verification simultaneous"
     }
+  },
+  "shareOption": {
+    "navText":"Speed Contract",
+    "share_account": "Speed Account",
+    "account": "Account",
+    "resetMoney":"Reset Trading Bonus",
+    "recharge":"Deposit",
+    "settle":"Settled",
+    "noSettle":"no Settle",
+    "up_rate": "Bullish",
+    "down_rate": "Bearish",
+    "newPrice": "Latest Price",
+    "next": "Next Round",
+    "fullHistory": "Full history",
+    "describe": "The expected yield of the option. That is, if you buy a call option and the price at the expiration of the option expires above the initial exercise price, then your net income = call rate of return * Investment Amount. ",
+    "mapLeftNav": {
+      "spot-index": "Spot Index",
+      "history": "History"
+    },
+    "rightSideBar": {
+      "inputTitle": "Investment"
+    },
+    "mapShareColumns": {
+      "currency": "Payment Currency",
+      "symbol": "Product Type",
+      "period": "Cycle",
+      "trade_type": "Trade Direction",
+      "amount": "Order Price",
+      "income": "Return Amount",
+      "profile": "Value",
+      "spot": "Spot Index",
+      "strike": "Exercise Price",
+      "sett_price": "Settlement price",
+      "create_time": "Order Time",
+      "sett_time": "Settlement Time",
+      "state": "Settle or not"
+    }
+  },
+  "spotIndex": {
+    "USD": "Spot Index",
+    "mapList": {
+      "price": "USDT Index",
+      "usdtRate": "Fee (USDT/USD)"
+    }
+  },
+  "shareHistory":{
+    "investment": "Investment",
+    "earnings": "Return",
+    "values": "Value",
+    "noData": "No Data"
   }
 }

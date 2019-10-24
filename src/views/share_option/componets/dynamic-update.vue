@@ -113,7 +113,7 @@ export default {
       })
     },
     handleTwoLineTips(resTime, orderTime, finishTime) {
-      const innerText = '下一轮'
+      const innerText = this.$t('shareOption.next')
       const orderBoxElement = this.orderTimeElement.querySelector('.box')
       const finishBoxElement = this.finishTimeElement.querySelector('.box')
       if (resTime >= orderTime) {

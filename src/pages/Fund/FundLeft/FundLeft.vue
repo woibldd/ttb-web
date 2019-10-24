@@ -126,7 +126,7 @@
         <dd>
           <router-link
             class="sub-menu-item"
-            to="/fund/share">{{ $t('share_account') }}
+            to="/fund/share">{{ $t('shareOption.share_account') }}
           </router-link>
         </dd> 
        </dl>

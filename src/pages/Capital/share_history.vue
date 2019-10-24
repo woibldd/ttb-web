@@ -14,7 +14,7 @@ import customTable from '@/components/customTable'
 import { getHistory } from '@/api/share_option'
 import { mapTabTimes } from '@/const'
 export default {
-  name: 'ShareHistory',
+  name: 'shareOption',
   components: {
     customTable
   },
@@ -41,11 +41,11 @@ export default {
             case 'period':
               return mapTabTimes[value]
             case 'trade_type':
-              return !value ? '涨' : '跌'
+              return !value ? this.$t('shareOption.up_rate') : this.$t('shareOption.down_rate')
             case 'spot':
               return this.bigRound(value, 4)
             case 'state':
-              return !value ? '未结算' : '已结算'
+              return !value ? this.$t('shareOption.noSettle') : this.$t('shareOption.settle')
             case 'create_time':
               return this.parseTime(value)
             case 'sett_time':
