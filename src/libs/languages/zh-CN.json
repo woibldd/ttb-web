@@ -15,17 +15,17 @@
   "equity": "经纪人权益",
   "equity_text": "权益",
   "equity_1_text": "新用户专享最高＄60交易赠金;",
-  "equity_2_text": "独立代理后台系统，最高交易返佣80%；",
-  "equity_3_text": "佣金实时结算，随时提现；",
+  "equity_2_text": "独立代理后台系统，最高交易返佣80%;",
+  "equity_3_text": "佣金实时结算，随时提现;",
   "equity_4_text": "全面协助开展市场活动;",
   "equity_5_text": "量身定制市场推广物料;",
   "equity_content": "IXX平台将赋予经纪人的，不仅有丰富的福利还有平台权益",
   "way": "经纪人申请方式",
-  "application_email": "申请邮箱",
-  "application_theme": "主题",
-  "content": "内容",
+  "application_email": "申请邮箱:",
+  "application_theme": "主题:",
+  "content": "内容:",
   "tip_email": "IXX注册账号UID",
-  "tip_phone": "联系方式：手机号、微信",
+  "tip_phone": "联系方式、手机号、微信",
   "tip_content": "个人简介及资源介绍",
   "tip_add": "经纪人申请+姓名",
   "application_account": "申请代理账户",
@@ -2278,7 +2278,7 @@
     "footer": {
       "affiliate": "代理申请：support@ixx.com",
       "explain": "IXX交易所是全球首家数字资产交易共同体，总部在新加坡，其致力于实现交易所生态的区块链理想国，打造人人的交易所，我为人人，人人为我，所有参与交易所的贡献者者均可共享交易所的发展成果。",
-      "footer_contract_desc": "添加客服微信" 
+      "footer_contract_desc": "添加客服微信"
     }
   },
   "fund": {

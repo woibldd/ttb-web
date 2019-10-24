@@ -19,7 +19,7 @@
       <div class="next-container-h5-ipt">
         <div class="ipt">
           <label class="tip" for="name">{{ $t('realName') }}</label>
-          <input type="text" id="name" autocomplete="off" :disabled="!emailFlag" v-model="form.name" name="name" v-on:input="realHandle">
+          <el-input type="text" id="name" autocomplete="off" :disabled="!emailFlag" v-model="form.name" name="name" @input="e => form.name = validSe(e)"></el-input>
         </div>
       </div>
       <div class="next-container-h5-ipt">
@@ -270,6 +270,7 @@
       a {
         color: #23CED0;
         text-decoration: none;
+        font-size: 13px
       }
       .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
         background-color: #23CED0;
@@ -373,6 +374,11 @@
           color: #fff;
         }
       }
+    }
+  }
+  .next-container-ipt {
+    .el-input__inner {
+      line-height: 1!important;
     }
   }
 </style>
