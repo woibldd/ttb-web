@@ -2304,5 +2304,8 @@
     "earnings":"수익",
     "values":"가치",
     "noData":"수치가 없다"
+  },
+  "otc": {
+    "b_price_i": "100~50000 CNY"
   }
 }

@@ -205,10 +205,7 @@
                       <el-select
                         v-model="order.kyc_level"
                         :placeholder="$t('please_choose')"
-                        style="width: 100%!important">
-                        <el-option
-                          label="KYC1"
-                          :value="1"/>
+                        style="width: 100%!important"> 
                         <el-option
                           label="KYC2"
                           :value="2"/>

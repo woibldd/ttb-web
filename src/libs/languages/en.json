@@ -2571,5 +2571,8 @@
     "earnings": "Return",
     "values": "Value",
     "noData": "No Data"
+  },
+  "otc": {
+    "b_price_i": "100~50000 CNY"
   }
 }

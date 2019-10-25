@@ -2361,5 +2361,8 @@
     "earnings":"收益",
     "values":"价值",
     "noData":"暂无数据"
-  }
+  },
+  "otc": {
+    "b_price_i": "100~50000 CNY"
+  } 
 }

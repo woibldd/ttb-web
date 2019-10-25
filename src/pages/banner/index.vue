@@ -68,7 +68,7 @@
                     class="number-input"
                     v-model="buy.amount"
                     :scale="amountPoint"
-                    :placeholder="this.$t('b_price_i')"
+                    :placeholder="this.$t('otc.b_price_i')"
                   />
                 </div>
               </el-col>

@@ -185,7 +185,7 @@ const processValue = {
       }
 
       if (key === "executed_amount") { 
-        value = row["executed"] + "/" + row["amount"]
+        value = row["executed"] + "/" + this.$big(row["amount"]).minus(row["executed"])
       }
 
       if (key === 'fee_rate') {
