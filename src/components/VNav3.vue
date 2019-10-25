@@ -502,6 +502,7 @@ export default {
     },
     switchLang(lang) {
       actions.setLocale(lang)
+      localStorage.setItem('locale',lang)
       this.$nextTick(() => {
         location.reload()
       })
