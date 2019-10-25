@@ -109,12 +109,12 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             @click="planHandle" >
             {{ $t('plan') }}
           </a>
-          <!-- <router-link
+          <router-link
             v-if="isTestnet"
             to="/share_option"
             class="nav_link  ml-30">
             {{ $t('shareOption.navText') }}
-          </router-link> -->
+          </router-link>
           <!-- <div class="nav_link arrow-down">
             <a
               :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"
