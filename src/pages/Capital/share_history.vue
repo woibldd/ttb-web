@@ -55,6 +55,8 @@ export default {
               return !value ? this.$t('shareOption.up_rate') : this.$t('shareOption.down_rate')
             case 'spot':
               return this.bigRound(value, 4)
+            case 'rate':
+              return value+'%'
             case 'strike':
               return this.bigRound(value, 4)
             case 'sett_price':
