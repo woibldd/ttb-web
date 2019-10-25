@@ -2188,5 +2188,56 @@
     "security": {
       "close_verify_tips": "手機驗證和郵箱驗證不能同時關閉"
     }
+  },
+  "shareOption": {
+    "time":"時間",
+    "price":"價格",
+    "navText":"急速合約",
+    "share_account": "極速賬戶",
+    "account": "賬戶",
+    "recharge": "充值",
+    "resetMoney": "重置體驗金",
+    "settle":"已結算",
+    "noSettle":"未結算",
+    "up_rate": "看漲",
+    "down_rate": "看跌",
+    "newPrice": "最新價格",
+    "fullHistory": "完整歷史記錄",
+    "describe": "期權預期收益率。即，如果您購買看漲期權，且期權到期時標的價格高於初始行權價格，則您的凈收益=看漲收益率*投資金額。",
+    "mapLeftNav": {
+      "spot-index": "現貨指數",
+      "history": "歷史記錄"
+    },
+    "rightSideBar": {
+      "inputTitle": "投資"
+    },
+    "mapShareColumns": {
+      "currency": "支付貨幣",
+      "symbol": "產品類型",
+      "period": "周期",
+      "trade_type": "交易方向",
+      "amount": "下單金額",
+      "income": "收益金額",
+      "profile": "價值金額",
+      "rate": "賠率",
+      "strike": "行權價格",
+      "sett_price": "結算價格",
+      "create_time": "下單時間",
+      "sett_time": "結算時間",
+      "state": "是否結算"
+    }
+  },
+  "spotIndex": {
+    "USD": "現貨指數",
+    "mapList": {
+      "price": "USDT指數",
+      "usdtRate": "匯率(USDT/USD)"
+    }
+  },
+  "shareHistory":{
+    "investment":"投資",
+    "earnings":"收益",
+    "values":"價值",
+    "noData":"暫無數據"
   }
 }

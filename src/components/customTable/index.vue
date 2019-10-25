@@ -8,7 +8,6 @@
       <el-table-column
         v-for="(item,index) in tableColumns"
         :key="index"
-        :show-overflow-tooltip="true"
         v-bind="item"
         :label="item.hearderLabel"
         :width="item.hearderWidth && item.hearderWidth(item.prop)||''"
@@ -42,7 +41,7 @@
       </el-table-column>
       <el-table-column v-if="lastColumnConfig" v-bind="$attrs">
         <template slot="header">
-          <p class="text-nowrap" :style="{textAlign:lastColumnConfig.headerAlign||'left'}">{{ lastColumnConfig.headerLabel }}</p>
+          <p :style="{textAlign:lastColumnConfig.headerAlign||'left'}">{{ lastColumnConfig.headerLabel }}</p>
         </template>
         <template slot-scope=" { row }">
           <slot name="handlerDom" :data="row" />

@@ -10,9 +10,9 @@
               <span v-if="item.sett_time" class="share-text-info">{{ item.create_time | parseTime }}</span>
             </div>
             <div flex="main:justify cross:center">
-              <span class="share-text-info">投资 </span>
-              <span class="share-text-info">收益 </span>
-              <span class="share-text-info">价值 </span>
+              <span class="share-text-info">{{$tR('investment')}}</span>
+              <span class="share-text-info">{{$tR('earnings')}} </span>
+              <span class="share-text-info">{{$tR('values')}} </span>
             </div>
             <div flex="main:justify cross:center">
               <span class="share-text-info">{{ item.amount }} {{ item.currency }}</span>
@@ -24,7 +24,7 @@
       </div>
       <div v-else flex="dir:top cross:center" class="no-data">
         <svg-icon icon-class="404" style="font-size:50px" />
-        <span>暂无数据</span>
+        <span>{{$tR('noData')}} </span>
       </div>
     </div>
   </div>

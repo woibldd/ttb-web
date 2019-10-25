@@ -61,7 +61,7 @@ service.interceptors.response.use(
         }, 3000)
       } else {
         Message({
-          message: res.message || '服务端的错误',
+          message: res.message || 'network error ',
           type: 'error',
           duration: 5 * 1000
         })

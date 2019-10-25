@@ -11,12 +11,12 @@
       </li>
       <div class="line" />
       <li v-for="(value,key) in mapExponent" :key="key" flex="main:justify cross:center">
-        <p class="text">{{ mapChineseData[key] }}</p>
+        <p class="text">{{ $tR(`mapList.${key}`) }}</p>
         <span class="num">{{ value }}</span>
       </li>
       <div class="line" />
       <li flex="main:justify cross:center">
-        <p class="text">现货指数<span class="graysmall">(USD)</span></p>
+        <p class="text">{{ $tR(`USD`) }}<span class="graysmall">(USD)</span></p>
         <span class="num">{{ USD }}</span>
       </li>
     </ul>
