@@ -2254,6 +2254,8 @@
     }
   },
   "shareOption": {
+    "time":"time",
+    "price":"price",
     "navText":"전속계약",
     "share_account": "전속계좌",
     "account": "계좌",

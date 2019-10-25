@@ -2521,6 +2521,8 @@
     }
   },
   "shareOption": {
+    "time":"time",
+    "price":"price",
     "navText":"Speed Contract",
     "share_account": "Speed Account",
     "account": "Account",
