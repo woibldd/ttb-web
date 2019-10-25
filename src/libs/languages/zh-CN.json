@@ -2341,7 +2341,7 @@
       "amount": "下单金额",
       "income": "收益金额",
       "profile": "价值金额",
-      "spot": "现货指数",
+      "rate": "赔率",
       "strike": "行权价格",
       "sett_price": "结算价格",
       "create_time": "下单时间",

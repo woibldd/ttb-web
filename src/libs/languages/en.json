@@ -2551,7 +2551,7 @@
       "amount": "Order Price",
       "income": "Return Amount",
       "profile": "Value",
-      "spot": "Spot Index",
+      "rate": "Odds",
       "strike": "Exercise Price",
       "sett_price": "Settlement price",
       "create_time": "Order Time",

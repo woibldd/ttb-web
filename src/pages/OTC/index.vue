@@ -2,7 +2,7 @@
   <div class="page-fund-container">
     <div class="page-fund-content">
       <fund-left/>
-      <div class="fund-right">
+      <div class="fund-right" style="width:100%">
         <router-view :key="this.$route.path"/>
       </div>
     </div>
@@ -64,6 +64,7 @@ export default {
     .fund-right {
         box-sizing: border-box;
         padding-left: 60px;
+        width:100%;
     }
     .fund-container {
         box-sizing: border-box;

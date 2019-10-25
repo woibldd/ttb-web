@@ -2284,7 +2284,7 @@
       "amount": "주문금액",
       "income": "수익금액",
       "profile": "가격금액",
-      "spot": "현물지수",
+      "rate": "배당률",
       "strike": "권리행사가격",
       "sett_price": "가격계산",
       "create_time": "주문시간",

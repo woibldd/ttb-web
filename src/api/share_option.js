@@ -15,7 +15,15 @@ export const activeShareAccount = user_id => request({
   method: 'post',
   data: { user_id }
 })
-
+/* 
+  user_id 用户id
+  currency 账户类型
+  begin_time 下单时间
+  end_time 结算时间
+  page
+  size
+  state 状态 0待结算，1已结算 3或不传查全部
+*/
 export const getHistory = data => request({
   url: '/opt/account/order/list',
   method: 'post',

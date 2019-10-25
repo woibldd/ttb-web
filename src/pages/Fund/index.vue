@@ -2,7 +2,7 @@
   <div class="page-fund-container">
     <div class="page-fund-content">
       <fund-left/>
-      <div class="fund-right">
+      <div class="fund-right" style="width:100%">
         <router-view/>
       </div>
     </div>

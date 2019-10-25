@@ -2219,7 +2219,7 @@
       "amount": "下單金額",
       "income": "收益金額",
       "profile": "價值金額",
-      "spot": "現貨指數",
+      "rate": "賠率",
       "strike": "行權價格",
       "sett_price": "結算價格",
       "create_time": "下單時間",

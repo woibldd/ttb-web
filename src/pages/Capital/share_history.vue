@@ -2,7 +2,7 @@
   <div class="property-manage-warp" flex="dir:top">
     <div class="top" flex="main:justify cross:center">
       <div class="title" style="font-size: 18px;text-align: left;">{{$t('shareOption.share_account')}}</div>
-      <customForm ref="customForm" flex="main:justify" class="login-custom-form" :schema="schema" :submit-btn="false" label-width="10"  label-position="left">
+      <customForm ref="customForm" size="mini" flex="main:justify" class="login-custom-form" :schema="schema" :submit-btn="false" label-width="10"  label-position="left">
     </customForm>
       <!-- <el-divider style="maring:12px 0" /> -->
     </div>
@@ -45,7 +45,8 @@ export default {
       return Object.keys(this.chineseLangData.mapShareColumns).map(key => ({
         hearderLabel: this.$tR(`mapShareColumns.${key}`),
         prop: key,
-        hearderWidth: key => ['period', 'trade_type', 'amount','income','profile'].includes(key) && '50px',
+        hearderWidth: key => ['period', 'trade_type', 'amount','income','profile','rate'].includes(key) && '50px',
+        
         handleValue: (value, key) => {
           switch (key) {
             case 'period':
@@ -53,6 +54,10 @@ export default {
             case 'trade_type':
               return !value ? this.$t('shareOption.up_rate') : this.$t('shareOption.down_rate')
             case 'spot':
+              return this.bigRound(value, 4)
+            case 'strike':
+              return this.bigRound(value, 4)
+            case 'sett_price':
               return this.bigRound(value, 4)
             case 'state':
               return !value ? this.$t('shareOption.noSettle') : this.$t('shareOption.settle')
