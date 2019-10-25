@@ -534,7 +534,7 @@ export default {
       //   name: 'profile'
       // })
       setTimeout(()=>{
-        activeShareAccount(userInfo.id)
+        // activeShareAccount(userInfo.id)
         this.$eventBus.$emit('handleFirstLogin')
       },100)
     },
