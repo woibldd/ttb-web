@@ -1,22 +1,26 @@
 <template>
   <div class="property-manage-warp" flex="dir:top">
-    <div class="top">
-      <slot />
-      <el-divider />
+    <div class="top" flex="main:justify cross:center">
+      <div class="title" style="font-size: 18px;text-align: left;">{{$t('shareOption.share_account')}}</div>
+      <customForm ref="customForm" flex="main:justify" class="login-custom-form" :schema="schema" :submit-btn="false" label-width="10"  label-position="left">
+    </customForm>
+      <!-- <el-divider style="maring:12px 0" /> -->
     </div>
     <custom-table v-loading="loading" stripe :table-list="tableList" :table-columns="mapShareColumns" @change="handlePageChange">
     </custom-table>
-    
   </div>
 </template>
 <script>
 import customTable from '@/components/customTable'
 import { getHistory } from '@/api/share_option'
+import { getShareAccountList } from '@/api/share_option'
 import { mapTabTimes } from '@/const'
+import customForm from '@/components/customForm'
 export default {
   name: 'shareOption',
   components: {
-    customTable
+    customTable,
+    customForm
   },
   data() {
     return {
@@ -27,7 +31,13 @@ export default {
         headerLabel: '操作',
         headerAlign: 'right',
         width: '400px'
-      }
+      },
+      schema:[
+        { fieldType: 'select',size:'mini', prefixIcon: 'el-icon-search', placeholder: '', vModel: 'currency', default: '',options:[],on:{
+          change:value=>this.handlePageChange()
+        } },
+        // { fieldType: 'date-picker',size:'mini',type:'daterange', prefixIcon: 'el-icon-search', valueFormat: 'timestamp', placeholder: '', vModel: 'plan_time', default: '' }
+      ]
     }
   },
   computed: {
@@ -56,23 +66,33 @@ export default {
         }
       }))
     },
-    mapTableInfo() {
-      return this.chineseLangData.mapTableInfo
-    },
     userData() {
       return this.$store.state.userData
-    }
-  },
-  created() {
+    },
+    mapBalanceMenu() {
+      return this.$store.state.mapShareAccount
+    },
 
   },
+  created () {
+    this.$store.dispatch('getShareAccountList').then(res=>{
+      this.schema[0].options = res.map(item=>item.currency)
+      this.schema[0].placeholder = this.$tR('account')
+      this.schema[1].placeholder = this.$tR('time')
+    })
+  },
   methods: {
-    handlePageChange(obj) {
-      const { pageSize, currentPage } = obj
+    handlePageChange(pageConfig) {
+      this.temPageConfig = pageConfig || this.temPageConfig
+      if (!pageConfig) this.temPageConfig.init()
+      const { pageSize, currentPage } = this.temPageConfig
       this.loading = true
-      getHistory({ user_id: this.id, page: currentPage, size: pageSize }).then(res => {
+      const currency = this.schema[0].currency
+      console.log(currency);
+      
+      getHistory({ user_id: this.id, page: currentPage, size: pageSize,currency }).then(res => {
         this.tableList = res.data.data
-        obj.total = res.data.total
+        this.temPageConfig.total = res.data.total
         this.loading = false
       })
     }

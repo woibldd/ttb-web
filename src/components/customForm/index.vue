@@ -11,7 +11,7 @@
         <span v-if="field.slotDefault">{{ field.slotDefault }}</span>
         <!-- <component :is="field.append" /> -->
         <component :is="field.slot" v-if="field.slot" />
-        <!-- <template v-if="field.fieldType === 'select'">
+        <template v-if="field.fieldType === 'select'">
           <el-option
             v-for="(item,i) in field.options||[]"
             :key="i"
@@ -27,7 +27,7 @@
             :disabled="item.disabled"
             :label="handleValue(item,field,i)"
           >{{ handleLabel(item,field,i) }}</el-radio>
-        </template> -->
+        </template>
       </component>
       <el-button v-if="field.append" :type="field.append.type || 'pramiry'" :disabled="field.append.disabled" :style="field.append.style" class="custom-input-append" @click="e=>field.append.click && field.append.click(e,field.append)">{{ field.append.text }}</el-button>
     </el-form-item>
