@@ -2311,6 +2311,8 @@
     }
   },
   "shareOption": {
+    "time":"时间",
+    "price":"价格",
     "navText":"极速合约",
     "share_account": "极速账户",
     "account": "账户",

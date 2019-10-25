@@ -273,8 +273,8 @@ export default {
           formatter: function(instance) {
             const transformHtml = obj => Object.keys(obj).map(key => `<p style="color:#A8ACBB;">${key}：<span style="color:${+obj[key] >= 0 ? 'green' : 'red'}">${obj[key]}</span></p>`)
             return !instance.iscustom ? `<div>
-              <p style="color:#fff; margin-bottom:5px;"><span style="color:#A8ACBB; margin-right:5px;">时间：${parseTime(this.x)}</span></p>
-              <p style="color:#fff; margin-bottom:0px;"><span style="color:#A8ACBB;margin-right:5px;">价格：${bigRound(this.y, 4)}</p>
+              <p style="color:#fff; margin-bottom:5px;"><span style="color:#A8ACBB; margin-right:5px;">${that.$t('shareOption.time')}：${parseTime(this.x)}</span></p>
+              <p style="color:#fff; margin-bottom:0px;"><span style="color:#A8ACBB;margin-right:5px;">${that.$t('shareOption.price')}：${bigRound(this.y, 4)}</p>
               </div>` : transformHtml(instance.incomeObj || {})
           },
           borderColor: 'transparent',

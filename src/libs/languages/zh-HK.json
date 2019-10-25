@@ -2190,6 +2190,8 @@
     }
   },
   "shareOption": {
+    "time":"時間",
+    "price":"價格",
     "navText":"急速合約",
     "share_account": "極速賬戶",
     "account": "賬戶",
