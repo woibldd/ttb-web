@@ -97,7 +97,6 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             <icon name="hot-red"/>
           </a>
           <router-link
-            v-if="isTestnet"
             v-if="!isLogin"
             to="/snowball/bazaar"
             class="nav_link  ml-30">{{ $t('bidTitle') }}
