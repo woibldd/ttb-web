@@ -6,7 +6,7 @@ import { getUser } from '@/utils/auth'
 // create an axios instance
 // axios.defaults.withCredentials = true
 const service = axios.create({
-  baseURL: 'https://i.ixex.io', // url = base url + request url
+  baseURL: 'https://i.ixx.com', // url = base url + request url
   withCredentials: true, // send cookies when cross-domain requests
   timeout: 10000 // request timeout
 })
@@ -19,6 +19,8 @@ service.interceptors.request.use(
     // console.log(store,222);
     
     if (store.state.userData) {
+      console.log(store.state.userData,22);
+      
       config.headers['token'] = store.state.userData.token
       // config.headers['ix_session_id'] = store.state.userData.ix_session_id
     }
@@ -57,7 +59,7 @@ service.interceptors.response.use(
           duration: 3 * 1000
         })
         setTimeout(() => {
-          store.dispatch('loginout')
+          // store.dispatch('loginout')
         }, 3000)
       } else {
         Message({
