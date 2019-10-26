@@ -826,6 +826,9 @@ const service = {
   orderContract(params) {
     return getCache('c_orderContract', () => request('contract/order', params), 1e3)
   },
+  modifyContract (params) {
+    return request('contract/modify', params)
+  }, 
   orderContractClose(params) {
     return request('contract/close', params)
   },

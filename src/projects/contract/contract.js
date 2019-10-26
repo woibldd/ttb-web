@@ -25,6 +25,7 @@ import {
   Select,
   Option,
   Input,
+  InputNumber,
   Radio,
   RadioGroup,
   RadioButton,
@@ -50,6 +51,7 @@ Vue.use(VTooltip, {
 Vue.use(Select) // 引入element单个组件
 Vue.use(Option)
 Vue.use(Input)
+Vue.use(InputNumber)
 Vue.use(Checkbox)
 Vue.use(Radio)
 Vue.use(RadioGroup)
