@@ -158,12 +158,12 @@ export default {
               key: "symbol"
             },
             {
-              title: "amount",
+              title: "contract_page.contract_edit_amount",
               width: "",
               key: "amount"
             },
             {
-              title: "contract_assign_price",
+              title: "contract_page.contract_edit_price",
               width: "",
               key: "price"
             },
