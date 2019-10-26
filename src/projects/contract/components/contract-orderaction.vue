@@ -1606,95 +1606,56 @@ export default {
       let swprice = this.modalStopWinPrice || 0;
       let markPrice = this.markPrice;
       let indexPrice = this.indexPrice;
+      let lastPrice = this.lastPrice
       let stopWinType = this.modalStopWinType;
       let stoplossType = this.modalStoplossType;
       // 做多时，止盈触发价格不能低于委托价格，止损价格不能高于委托价格，不能低于爆仓价格
       // 做空时，止盈触发价格不能高于委托价格，止损价格不能低于委托价格，不能高于爆仓价格
-      if (this.stopWinState) {
+      if (this.modalStopWinState) {
         if (side === 1) {
-          if (stopWinType === 1 && this.$big(swprice).lt(price)) {
+          if (stopWinType === 1 &&  this.$big(swprice).lt(price)) { 
             return false;
-          } else if (
-            stopWinType === 2 &&
-            this.$big(swprice).lt(price) &&
-            this.$big(swprice).lt(markPrice)
-          ) {
+          }
+          else if (stopWinType === 2 && (this.$big(swprice).lt(price) || this.$big(swprice).lt(lastPrice) || this.$big(swprice).lt(markPrice))) { 
             return false;
-          } else if (
-            stopWinType === 3 &&
-            this.$big(swprice).lt(price) &&
-            this.$big(swprice).lt(indexPrice)
-          ) {
+          }
+          else if (stopWinType === 3 && (this.$big(swprice).lt(price) || this.$big(swprice).lt(lastPrice) || this.$big(swprice).lt(indexPrice))) { 
             return false;
           }
         } else {
-          if (stopWinType === 1 && this.$big(swprice).gt(price)) {
+          if (stopWinType === 1 && this.$big(swprice).gt(price)) { 
             return false;
-          } else if (
-            stopWinType === 2 &&
-            this.$big(swprice).gt(price) &&
-            this.$big(swprice).gt(markPrice)
-          ) {
+          }
+          else if (stopWinType === 2 && (this.$big(swprice).gt(price) || this.$big(swprice).gt(lastPrice) || this.$big(swprice).gt(markPrice))) { 
             return false;
-          } else if (
-            stopWinType === 3 &&
-            this.$big(swprice).gt(price) &&
-            this.$big(swprice).gt(indexPrice)
-          ) {
+          }
+          else if (stopWinType === 3 && (this.$big(swprice).gt(price) || this.$big(swprice).gt(lastPrice) || this.$big(swprice).gt(indexPrice))) { 
             return false;
           }
         }
       }
-
-      if (this.stoplossState) {
+ 
+      if (this.modalStoplossState)  {
         if (side === 1) {
-          if (
-            stoplossType === 1 &&
-            (this.$big(slprice).gt(price) ||
-              this.$big(slprice).lt(this.liqPrice || 0))
-          ) {
-            return false;
-          }
-          if (
-            stoplossType === 2 &&
-            ((this.$big(slprice).gt(price) &&
-              this.$big(slprice).gt(markPrice)) ||
-              this.$big(slprice).lt(this.liqPrice || 0))
-          ) {
-            return false;
-          }
-          if (
-            stoplossType === 3 &&
-            ((this.$big(slprice).gt(price) &&
-              this.$big(slprice).gt(indexPrice)) ||
-              this.$big(slprice).lt(this.liqPrice || 0))
-          ) {
-            return false;
-          }
+          if (this.$big(slprice).gt(price) || 
+             this.$big(slprice).gt(lastPrice) || 
+             this.$big(slprice).lt(this.liqPrice || 0)) {  
+            return false; 
+          } else if (stoplossType===2 && this.$big(slprice).gt(markPrice)) {
+            return false; 
+          } else if (stoplossType===3 && this.$big(slprice).gt(indexPrice)) {
+            return false; 
+          }  
         } else {
-          if (
-            stoplossType === 1 &&
-            (this.$big(slprice).lt(price) ||
-              this.$big(slprice).gt(this.liqPrice || 0))
-          ) {
+          if (this.$big(slprice).lt(price) ||
+             this.$big(slprice).lt(lastPrice) ||
+            this.$big(slprice).gt(this.liqPrice || 0)) { 
             return false;
-          }
-          if (
-            stoplossType === 2 &&
-            ((this.$big(slprice).lt(price) &&
-              this.$big(slprice).lt(markPrice)) ||
-              this.$big(slprice).gt(this.liqPrice || 0))
-          ) {
+          } else if (stoplossType===2 && this.$big(slprice).lt(markPrice)) {
+            return false; 
+          } else if (stoplossType===3 && this.$big(slprice).lt(indexPrice)) {
             return false;
-          }
-          if (
-            stoplossType === 3 &&
-            ((this.$big(slprice).lt(price) &&
-              this.$big(slprice).lt(indexPrice)) ||
-              this.$big(slprice).gt(this.liqPrice || 0))
-          ) {
-            return false;
-          }
+          } 
         }
       }
       return true;

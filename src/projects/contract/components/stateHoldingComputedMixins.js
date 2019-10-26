@@ -119,8 +119,8 @@ export default {
 
         // holding.lastPrice = lastPrice
         // holding.markPrice = markPrice
-        Vue.set(holding, 'lastPrice', lastPrice)
-        Vue.set(holding, 'markPrice', markPrice)
+        // Vue.set(holding, 'lastPrice', lastPrice)
+        // Vue.set(holding, 'markPrice', markPrice)
         // console.log(holding, 'vue-set')
         holding.unrealized = "0"
         holding.unrealizedlp = "0"

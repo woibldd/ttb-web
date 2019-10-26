@@ -125,16 +125,15 @@ export default {
             current: item.current
           }  
         } 
-        state.ct.indexTickList[item.pair.replace('INDEX_','')] =  item.current
+        //state.ct.indexTickList[item.pair.replace('INDEX_','')] =  item.current
+        if (!!ct.pairInfoList[item.pair.replace('INDEX','FUTURE')]) { 
+          this.$set(ct.pairInfoList[item.pair.replace('INDEX','FUTURE')], 'indexPrice', item.current )
+        } 
       } else if (item.pair.indexOf('FUTURE') > -1) { 
-        state.ct.lastPriceList[item.pair.replace('FUTURE_','')] =  item.current
-        
-        if (!!ct.pairInfoList[item.pair]) {
-          // ct.pairInfoList[item.pair].lastPrice = item.current 
+        state.ct.lastPriceList[item.pair.replace('FUTURE_','')] =  item.current 
+        if (!!ct.pairInfoList[item.pair]) { 
           this.$set(ct.pairInfoList[item.pair], 'lastPrice', item.current )
-        }
-        
-        
+        } 
         this.$eh.$emit("socket:price:update", item)
       } else if (item.pair.indexOf('MARKET') > -1) {
         if (item.pair.indexOf(state.ct.symbol) > -1) {
@@ -145,10 +144,8 @@ export default {
         this.$eh.$emit("socket:price:update", item)
         state.ct.markTickList[item.pair.replace('MARKET_','')] =  item.current
         if (!!ct.pairInfoList[item.pair.replace('MARKET','FUTURE')]) { 
-          // ct.pairInfoList[item.pair.replace('MARKET','FUTURE')].markTick = item.current 
-          this.$set(ct.pairInfoList[item.pair.replace('MARKET','FUTURE')], 'markTick', item.current )
-          // console.log(item.current, this.pairList, 'sdsd')
-          // console.log(this.state.ct.holdingList[0].currency, item, 'sss') 
+           
+          this.$set(ct.pairInfoList[item.pair.replace('MARKET','FUTURE')], 'markTick', item.current ) 
           state.ct.holdingList.forEach((skt) => {
             if ('MARKET_' + skt.currency === item.pair) {
               Vue.set(skt, 'markPrice', item.current)

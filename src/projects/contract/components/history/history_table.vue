@@ -252,6 +252,7 @@
                 :leverage="cholding.leverage"
                 :markPrice="cholding.markPrice"
                 :indexPrice="cholding.indexPrice"
+                :lastPrice="cholding.lastPrice"
               /> 
             </span>
           </div>
@@ -928,8 +929,7 @@ export default {
     //   this.holding.roe = this.roe
     // },
     markPrice (v) {
-      if (this.bindMarkPrice) {
-        // console.log(this.bindMarkPrice)
+      if (this.bindMarkPrice) { 
         this.unwindPrice = this.transforPrice(v)
       }
     }
