@@ -39,9 +39,9 @@
     </div>
     <div class="broker-apply">
       <div class="apply-container">
-        <div class="apply-text text-vk">
+        <div class="apply-text text-vk" style="margin-bottom: 20px;width: 490px;">
           <div class="l-line wow slideinleft" data-wow-duration="500ms"></div>
-          <span class="wow slideindown">{{ $t('demand') }}</span>
+          <span class="wow slideindown" style="font-size: 18px;">{{ $t('demand') }}</span>
           <div class="r-line wow slideinright" data-wow-duration="500ms"></div>
         </div>
         <div class="apply-list wow fadeinup" v-for="item in 5" :key="item"  :data-wow-delay="(100 + item * 100) + 'ms'">
@@ -103,6 +103,7 @@
       </div>
     </div>
   </div>
+<!--  <div></div>-->
 </template>
 <script type="text/ecmascript-6">
   import 'animate.css'

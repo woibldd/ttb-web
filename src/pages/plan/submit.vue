@@ -124,6 +124,7 @@
             email: this.form.email
           }).then((res) => {
             if (res.code === 0) {
+              this.form.uid = this.uid
               service.proxyApplyInsert(this.form).then((res) => {
                 if (res.code === 0) {
                   this.$router.push('/planSuccess')

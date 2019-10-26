@@ -2187,17 +2187,23 @@
   "new_user_register_popup3": "질문이 있으시면 직접 위챗 고객님에게 문의해 주십시오。",
   "pair_table_option_empty": "자동첨가가 없습니다",
   "contract_page": {
+    "order_stop_winloss": "止盈/止损",
+    "contract_edit_price": "委托价格",
+    "contract_edit_amount": "数量",
     "order_action": {
       "price": "가격",
-      "trigger_short":"발동 후 창고를 평평하게하다",
+      "trigger_short": "발동 후 창고를 평평하게하다",
       "order_price": "가격",
       "trigger_close_tips": "마진 정지 손해가 있을 때이 단추를 누르면, 평창의 위탁 유형은 창고만 줄어들 수 있습니다. 터질 때 시스템은 현재 창고수에 따라 자동으로이 유형의 위탁 개수가 줄어들거나 심지어 브레이크 취소, 위탁 유형이 부족하면 현재 위탁 유형이 터지면 위탁 실패。",
-
       "modal": {
         "available": "사용가능금액",
         "position": "거래 가 성사 된 후 창고 포지션의 크기",
         "liq_price": "예상물가",
-        "difference": "예상가격차이"
+        "difference": "예상가격차이",
+        "stop_win": "止盈USD",
+        "stop_loss": "止损USD",
+        "stop_win_tips": "%{triggerType} %{triggerSide} 至 %{triggerPrice} 将触发 市价止盈单 预计 盈利： %{realized} BTC",
+        "stop_loss_tips": "%{triggerType} %{triggerSide} 至 %{triggerPrice} 将触发 市价止损单 预计 亏损： %{realized} BTC"
       }
     },
     "orderbook": {
@@ -2205,14 +2211,21 @@
     },
     "history": {
       "active": {
-        "contract_assigning_undeal": "위탁 중에 아직 거래 가 이루어지지 않았다"
+        "contract_assigning_undeal": "위탁 중에 아직 거래 가 이루어지지 않았다",
+        "contract_complete_deal": "已成交量/剩余量"
       },
       "stop_loss": {
         "contract_assigning_undeal": "위탁 중에 아직 거래 가 이루어지지 않았다",
         "price_distance": "촉발 가격"
+      },
+      "holding": {
+        "contract_close_tips3": "这是假设以当前标记价格平仓的预计盈亏，鼠标移除则显示当前委托列表中最新市场价格平仓的预计盈亏。"
+      },
+      "history": {
+        "contract_complete_deal": "已成交量/剩余量"
       }
     },
-    "pair_nav":{
+    "pair_nav": {
       "24h_h": "24시간 최고가",
       "24h_l": "24시간 최저가"
     }
@@ -2304,5 +2317,8 @@
     "earnings":"수익",
     "values":"가치",
     "noData":"수치가 없다"
+  },
+  "otc": {
+    "b_price_i": "100~50000 CNY"
   }
 }

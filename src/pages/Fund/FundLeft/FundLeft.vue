@@ -122,13 +122,13 @@
             class="sub-menu-item"
             to="/fund/hyTrade">{{ $t('contract_account') }}
           </router-link>
-        </dd> 
-        <dd>
-          <router-link
-            class="sub-menu-item"
-            to="/fund/share">{{ $t('shareOption.share_account') }}
-          </router-link>
-        </dd> 
+        </dd>
+<!--        <dd>-->
+<!--          <router-link-->
+<!--            class="sub-menu-item"-->
+<!--            to="/fund/share">{{ $t('share_account') }}-->
+<!--          </router-link>-->
+<!--        </dd> -->
        </dl>
       <dl class="address_dl">
         <dd>

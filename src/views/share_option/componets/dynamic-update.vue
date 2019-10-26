@@ -45,7 +45,7 @@ export default {
   methods: {
     startWebSocket(){
       this.isLoading = true
-      this.openWebSocket('wss://wss.ixex.pro/v1', res => {
+      this.openWebSocket('wss://wss.ixex.io/v1', res => {
       if (res.spotIndexDTOList) {
           if (!res.spotIndexDTOList.length) return
           const data = res.spotIndexDTOList.map((dataString, index) => {

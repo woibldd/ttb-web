@@ -30,7 +30,9 @@ import {
   RadioButton,
   Loading,
   MessageBox,
-  Checkbox
+  Checkbox,
+  Popover,
+  Button,
 } from 'element-ui'
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
@@ -54,6 +56,8 @@ Vue.use(RadioGroup)
 Vue.use(RadioButton)
 Vue.use(Loading)
 Vue.use(ToastRegistry)
+Vue.use(Popover)
+Vue.use(Button) 
 
 const request = require.context('../../assets/svg', true, /\.svg$/)
 /* console.log('request', request)

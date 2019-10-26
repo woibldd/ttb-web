@@ -10,7 +10,7 @@
                  <div class="title">
                     {{$t('bby_shise9')}}
                 </div>
-                <p style="font-size: 16px;">{{ item.currency }}  
+                <p style="font-size: 16px;">{{ item.currency }}
                   <b v-if="state.locale==='zh-CN'">{{ item.product }}</b>
                   <b v-else-if="state.locale==='zh-HK'">{{ item.productCt }}</b>
                   <b v-else-if="state.locale==='en'">{{ item.productEn }}</b>
@@ -42,14 +42,14 @@
                     <b v-if="state.locale==='zh-CN'">{{ item.product }}</b>
                     <b v-else-if="state.locale==='zh-HK'">{{ item.productCt }}</b>
                     <b v-else-if="state.locale==='en'">{{ item.productEn }}</b>
-                    <b v-else-if="state.locale==='ko'">{{ item.productKn }}</b> 
+                    <b v-else-if="state.locale==='ko'">{{ item.productKn }}</b>
                 </div>
                 <div class="time">
                     <span>{{$t('bby_shouy1')}}:</span>
                     <b>{{ item.beginTime | date('Y-M-D H:m') }}~{{ item.deadlineTime |  date('Y-M-D H:m')}}</b>
                 </div>
             </div>
-                
+
         </div>
         <div class="bottom">
             <div class="rate" :style={}>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="btn">
                     <el-button
-                        class="bid-btn" 
+                        class="bid-btn"
                         :disabled="item.isTrue"
                         @click="detail(item)"
                         v-html="item.state === 1 ?  $t('bby_shouy6') : item.state === 2 ? $t('bby_shise3') : item.state === 3 ?  $t('bby_shise4') : $t('bby_shise5')"
@@ -74,7 +74,7 @@
         </div>
       </div>
     </div>
-    <div class="page" style="text-align: center;margin: 30px auto">
+    <div class="page" style="text-align: center;margin: 30px auto" v-if="list.length > 0">
       <el-pagination
         background
         layout="prev, pager, next"
@@ -109,8 +109,8 @@ export default {
     }
   },
   computed: {
-    bannerPath () { 
-      let path = require(`./assets/item-banner-${this.state.locale}.png`) 
+    bannerPath () {
+      let path = require(`./assets/item-banner-${this.state.locale}.png`)
       return path
     },
 
@@ -158,7 +158,7 @@ export default {
     }
   },
   created () {
-    this.init(this.params) 
+    this.init(this.params)
     // this.img = require('./assets/banner-' + state.locale + '.png')
   },
   mounted () {

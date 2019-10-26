@@ -1309,7 +1309,14 @@ const service = {
   gameTradeList(params) {
     return request('future/activity/gameTrade/list', params)
   },
-
+  //盈亏历史
+  getFutureCloseRealized(params) { 
+    return getCache('c_future_close_realized', () => request('future/account/close_realized', params), 1e3)
+  },
+  //盈亏历史走势
+  getFutureCloseRealizedDays(params) {
+    return getCache('c_future_close_realized_days', () => request('future/account/close_realized_days', params), 1e3)
+  }
 }
 
 export async function fetch(url, body, options, method = 'post') {

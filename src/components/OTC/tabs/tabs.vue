@@ -64,7 +64,7 @@
               <span class="font-gray">{{ $t('xe_je') }}</span>
             </el-col>
             <el-col :span="11">
-              <el-input v-model="ipt" :placeholder="active=='0' ? $t('b_price_i') : $t('b_account_i')" style="width: 98%">
+              <el-input v-model="ipt" :placeholder="active=='0' ? $t('otc.b_price_i') : $t('b_account_i')" style="width: 98%">
                 <el-select slot="prepend" v-model="active" :placeholder="$t('please_choose')" style="width: 120px" @change="change">
                   <el-option :label="$t('b_1')" value="0"/>
                   <el-option :label="$t('b_2')" value="1"/>

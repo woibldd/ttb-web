@@ -168,7 +168,7 @@ export default {
               key: "price"
             },
             {
-              title: "contract_complete_deal",
+              title: "contract_page.history.active.contract_complete_deal",
               width: "",
               key: "executed_amount"
             },
@@ -285,7 +285,7 @@ export default {
               key: "price"
             },
             {
-              title: "contract_complete_deal", //完全成交
+              title: "contract_page.history.history.contract_complete_deal", //完全成交
               width: "",
               key: "executed_amount"
             },

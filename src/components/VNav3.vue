@@ -38,14 +38,14 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
               to="/plan"
               class="nav_link  ml-30">
               {{$t('plan')}}
-              <img v-if="isLogin" src="./../assets/down.png" width="24" height="24" alt="" style="zoom: 1;
+              <img src="./../assets/down.png" width="24" height="24" alt="" style="zoom: 1;
     display: inline-block;
     vertical-align: top;
     width: 18px;
     height: 18px;
     margin-top: 2px;">
             </router-link>
-            <div class="dropdown-sub-menu" v-if="isLogin">
+            <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
                   <router-link to="/plan" class="link">{{ $t('plan') }}</router-link>
@@ -57,7 +57,7 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
                     class="link">{{ $t('bidTitle') }}
                   </a>
                 </li>
-                <li class="dropdown-item pl-24 pr-24">
+                <li class="dropdown-item pl-24 pr-24" v-if="isLogin">
                   <a
                     href="/snowball"
                     :class="{'router-link-active': from === 'contract'}"
@@ -96,6 +96,11 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             {{ this.$t('node_sub') }}
             <icon name="hot-red"/>
           </a>
+          <router-link
+            v-if="isTestnet"
+            to="/snowball/bazaar"
+            class="nav_link  ml-30">{{ $t('bidTitle') }}
+          </router-link>
           <a
             v-if="isTestnet"
             href="javascript:;"
@@ -104,12 +109,12 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             @click="planHandle" >
             {{ $t('plan') }}
           </a>
-          <!-- <router-link
+          <router-link
             v-if="isTestnet"
             to="/share_option"
             class="nav_link  ml-30">
             {{ $t('shareOption.navText') }}
-          </router-link> -->
+          </router-link>
           <!-- <div class="nav_link arrow-down">
             <a
               :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"
