@@ -43,8 +43,7 @@ export default {
           ],
           crosshair: true
         },
-        yAxis: {
-          
+        yAxis: { 
           title: {
             text: ""
           }

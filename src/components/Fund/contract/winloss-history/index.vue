@@ -120,7 +120,7 @@
         <div class="valuation">≈ {{translateByRate(realized.realized_market) | fixed(2)}} USD</div>
       </div>
       <div class="realized-item">
-        <div class="title">未结盈亏(盘口价格)</div>
+        <div class="title">未结算盈亏(盘口价格)</div>
         <div class="value">
           <span :class="realized.realized_price > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_price | fixed(4)}}<b>BTC</b></span>
         </div>
