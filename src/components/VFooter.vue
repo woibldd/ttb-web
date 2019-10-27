@@ -63,8 +63,11 @@
           <a
             :href="requestLink"
             target="_blank">{{ $t('footer_request') }}</a>
-          <a
+          <!-- <a
             href="/proposer"
+            target="_blank">{{ $t('footer_application_coin') }}</a> -->
+          <a
+            href="http://ixxwenjuan.mikecrm.com/kl7CuJZ"
             target="_blank">{{ $t('footer_application_coin') }}</a>
         </div>
         <div class="footer_ct">
