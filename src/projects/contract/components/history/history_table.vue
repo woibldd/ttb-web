@@ -48,6 +48,7 @@
                 :orderid="row.id"
                 :id="index"
                 @confirm="editPrice"
+                :scale="state.ct.pairInfoList[row.symbol].price_scale"
               />
             </span>
             <span v-else-if="header.title=== 'contract_page.contract_edit_amount'"> 
@@ -68,6 +69,7 @@
                 :orderid="row.id"
                 :id="index"
                 @confirm="editTriggerPrice"
+                :scale="state.ct.pairInfoList[row.symbol].price_scale"
               />
             </span> 
             <span

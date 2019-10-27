@@ -1,7 +1,7 @@
 <template>
   <div>
     <span v-if="state=='show'">
-      <span :class="{'font-color-buy' : side==1, 'font-color-sell' : side==2}">{{value}} </span>
+      <span :class="{'font-color-buy' : side==1, 'font-color-sell' : side==2}">{{value | fixed(scale)}} </span>
       <!-- <icon style="font-size: 14px;" name="edit" @click="editPrice('edit')"/>  --> 
       <span class="icon edit" 
         name="edit" 
@@ -58,6 +58,10 @@ export default {
     type: {
       type: String,
       default: ""
+    },
+    scale: {
+      type: Number,
+      default: 0
     }
   },
   methods: {
@@ -70,6 +74,7 @@ export default {
       this.newValue = this.value
     },
     async confirm() {  
+      this.newValue = this.$big(this.newValue).round(this.scale, 0).toFixed(this.scale) 
       if (this.type === 'price') { 
         let content = `将价格更改至${this.newValue}可能会使该委托立刻与市场中的其他委托成交。请确认更改。`
         let ok = await utils.confirm(this, {
