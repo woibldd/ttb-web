@@ -253,6 +253,13 @@ const processValue = {
             break
         }
       }
+      
+      if (key === 'order_stop_winloss') { 
+        let win = row.tp_price
+        let loss = row.sl_price
+        value = `<span class="font-color-buy"> ${win}</span>/
+                <span class="font-color-sell">${loss}</span>`
+      }
 
       return value
     }

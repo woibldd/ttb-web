@@ -188,6 +188,11 @@ export default {
               key: "state"
             },
             {
+              title: "contract_page.order_stop_winloss",
+              width: "",
+              key: "order_stop_winloss"
+            },
+            {
               title: "order_th_placed",
               width: "",
               key: "create_time"
