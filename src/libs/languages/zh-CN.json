@@ -2251,6 +2251,8 @@
     "order_stop_winloss": "止盈/止损",
     "contract_edit_price": "委托价格",
     "contract_edit_amount": "数量",
+    "rise": "上涨",
+    "fall": "下跌",
     "order_action": {
       "price": "价格",
       "trigger_short":"触发后平仓",

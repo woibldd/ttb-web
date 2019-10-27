@@ -2187,9 +2187,11 @@
   "new_user_register_popup3": "질문이 있으시면 직접 위챗 고객님에게 문의해 주십시오。",
   "pair_table_option_empty": "자동첨가가 없습니다",
   "contract_page": {
-    "order_stop_winloss": "止盈/止损",
-    "contract_edit_price": "委托价格",
-    "contract_edit_amount": "数量",
+    "order_stop_winloss": "목표가/손절가",
+    "contract_edit_price": "위탁가격",
+    "contract_edit_amount": "수량",
+    "rise": "오르다",
+    "fall": "락폭하다",
     "order_action": {
       "price": "가격",
       "trigger_short": "발동 후 창고를 평평하게하다",

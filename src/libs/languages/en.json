@@ -2458,6 +2458,8 @@
     "order_stop_winloss": "TP/SL",
     "contract_edit_price": "Order Price",
     "contract_edit_amount": "Qty",
+    "rise": "rise",
+    "fall": "fall",
     "order_action": {
       "price": "Order Price",
       "trigger_short":"trigger liquidation",

@@ -1598,7 +1598,7 @@ export default {
           this.currentDealType === "limit") &&
         this.currentHolding.holding == 0
       );
-    },\
+    },
     allowSubmit() {
       let side = this.exchangeDir === "BUY" ? 1 : 2;
       let price = this.price || 0;
