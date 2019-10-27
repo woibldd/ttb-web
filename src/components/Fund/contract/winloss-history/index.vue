@@ -103,7 +103,7 @@
         <div class="value">
           <span :class="realized.realized_total > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_total | fixed(4)}}<b>BTC</b></span>
         </div>
-        <div class="valuation">≈  {{translateByRate(realized.realized_price) | fixed(2)}} USD</div>
+        <div class="valuation">≈  {{translateByRate(realized.realized_total) | fixed(2)}} USD</div>
       </div>
       <div class="realized-item">
         <div class="title">当日已结算盈亏</div>

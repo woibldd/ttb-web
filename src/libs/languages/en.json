@@ -2455,9 +2455,9 @@
   "pair_table_option_empty": "No added optional currently",
   "status": "Status",
   "contract_page": {
-    "order_stop_winloss": "止盈/止损",
-    "contract_edit_price": "委托价格",
-    "contract_edit_amount": "数量",
+    "order_stop_winloss": "TP/SL",
+    "contract_edit_price": "Order Price",
+    "contract_edit_amount": "Qty",
     "order_action": {
       "price": "Order Price",
       "trigger_short":"trigger liquidation",
