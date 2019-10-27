@@ -840,6 +840,7 @@ export default {
       this.fetchData(); 
       this.refreshCurrentDelegation(); 
       this.refreshOrderHistory()
+      this.refreshTriggerCount()
       if (!isNaN(Number(type))) { 
         //console.log({type})
         this.refreshHoldingCount()
