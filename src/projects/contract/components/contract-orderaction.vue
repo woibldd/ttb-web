@@ -1513,11 +1513,11 @@ export default {
       }
 
       if (this.state.ct.pair === "FUTURE_BTCUSD") {
-        if (price > 0 && swprice > 0 && amount > 0) {
+        if (price > 0 && swprice > 0 && side == 1) {
           result = this.$big(amount)
             .div(price)
             .minus(this.$big(amount).div(swprice));
-        } else if (price > 0 && swprice > 0 && amount < 0) {
+        } else if (price > 0 && swprice > 0 && side == 2) {
           result = this.$big(amount)
             .div(swprice)
             .minus(this.$big(amount).div(price));
@@ -1525,12 +1525,12 @@ export default {
       } else {
         if (this.state.ct.pairInfo) {
           let mul = this.state.ct.pairInfo.multiplier;
-          if (amount > 0) {
+          if (side == 1) {
             result = this.$big(swprice || 0)
               .minus(price)
               .times(mul)
               .times(this.$big(amount).abs());
-          } else if (amount < 0) {
+          } else if (side == 2) {
             result = this.$big(price)
               .minus(swprice || 0)
               .times(mul)
@@ -1609,6 +1609,7 @@ export default {
       let lastPrice = this.lastPrice
       let stopWinType = this.modalStopWinType;
       let stoplossType = this.modalStoplossType;
+      let liqPrice = this.exchangeDir === 'BUY' ? this.liqBuyPrice : this.liqSellPrice
       // 做多时，止盈触发价格不能低于委托价格，止损价格不能高于委托价格，不能低于爆仓价格
       // 做空时，止盈触发价格不能高于委托价格，止损价格不能低于委托价格，不能高于爆仓价格
       if (this.modalStopWinState) {
@@ -1639,7 +1640,7 @@ export default {
         if (side === 1) {
           if (this.$big(slprice).gt(price) || 
              this.$big(slprice).gt(lastPrice) || 
-             this.$big(slprice).lt(this.liqPrice || 0)) {  
+             this.$big(slprice).lt(liqPrice || 0)) {  
             return false; 
           } else if (stoplossType===2 && this.$big(slprice).gt(markPrice)) {
             return false; 
@@ -1649,7 +1650,7 @@ export default {
         } else {
           if (this.$big(slprice).lt(price) ||
              this.$big(slprice).lt(lastPrice) ||
-            this.$big(slprice).gt(this.liqPrice || 0)) { 
+            this.$big(slprice).gt(liqPrice || 0)) { 
             return false;
           } else if (stoplossType===2 && this.$big(slprice).lt(markPrice)) {
             return false; 
