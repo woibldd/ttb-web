@@ -265,7 +265,7 @@
                 <el-checkbox class="ml-4" v-model="closeAfterTrigger" />
               </span>
             </div>
-            <div class="op-balance flex-lr mt-10" v-else-if="currentDealType === 'limit'">
+            <!-- <div class="op-balance flex-lr mt-10" v-else-if="currentDealType === 'limit'">
               <span
                 v-tooltip.top-center="{content: $t('post_only_tips'), classes: 'contract'}"
                 :style="{color:(local.passiveDelegate ? '#22ced0':'')}"
@@ -273,7 +273,7 @@
                 {{ $t('contract_action_passive_delegate') }}
                 <el-checkbox class="ml-4" v-model="local.passiveDelegate" />
               </span>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
