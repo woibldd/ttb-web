@@ -47,7 +47,7 @@
             {{$t('contract_page.order_action.modal.stop_win_tips',
             {
             triggerType: $t(triggerTypes[stopWinType]),
-            triggerSide: side === 1 ? "上涨": "下跌",
+            triggerSide: side === 1 ? $t("contract_page.rise"): $t("contract_page.fall"),
             triggerPrice: stopWinPrice,
             realized: $big(stopWinRealized).round(8,0).toFixed(8)
             })}}
@@ -97,7 +97,7 @@
             {{$t('contract_page.order_action.modal.stop_loss_tips',
             {
             triggerType: $t(triggerTypes[stoplossType]),
-            triggerSide: side === 1 ? "下跌": "上涨",
+            triggerSide: side === 1 ? $t("contract_page.fall"): $t("contract_page.rise"),
             triggerPrice: stoplossPrice,
             realized: $big(stopLossRealized).round(8,0).toFixed(8)
             })}}

@@ -2286,6 +2286,11 @@
       },
       "history": {
         "contract_complete_deal": "已成交量/剩余量"
+      },
+      "edit_cell" : { 
+        "edit_price_pop_title": "委托修改可执行", 
+        "edit_price_pop_content": "将价格更改至%{price}可能会使该委托立刻与市场中的其它委托成交。请确认更改。", 
+        "edit_price_pop_confirm": "执行修改"
       }
     },
     "pair_nav":{
@@ -2343,9 +2348,9 @@
       "unrealized_mark_price":"未结算盈亏（标记价格）",
       "unrealized_last_price":"未结算盈亏(盘口价格)",
       "day": "日", 
-      "start": "開始日期",
-      "end": "結束日期"
-    }
+      "start": "开始日期",
+      "end": "结束日期"
+    } 
   },
   "profile": {
     "security": {

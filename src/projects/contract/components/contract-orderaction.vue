@@ -531,7 +531,7 @@
                   {{$t('contract_page.order_action.modal.stop_win_tips',
                   {
                   triggerType: $t(triggerTypes[modalStopWinType]),
-                  triggerSide: exchangeDir === 'BUY' ? "上涨": "下跌",
+                  triggerSide: exchangeDir === 'BUY' ? $t("contract_page.rise"): $t("contract_page.fall"),
                   triggerPrice: modalStopWinPrice,
                   realized: $big(stopWinRealized).round(8,0).toFixed(8)
                   })}}
@@ -585,7 +585,7 @@
                   {{$t('contract_page.order_action.modal.stop_loss_tips',
                   {
                   triggerType: $t(triggerTypes[modalStoplossType]),
-                  triggerSide: exchangeDir === 'BUY' ? "下跌": "上涨",
+                  triggerSide: exchangeDir === 'BUY' ? $t("contract_page.fall"): $t("contract_page.rise"),
                   triggerPrice: modalStoplossPrice,
                   realized: $big(stopLossRealized).round(8,0).toFixed(8)
                   })}}
@@ -596,7 +596,7 @@
           <!-- 表格 -->
           <div class="more__table mt-10">
             <div class="table__tr c-fff" v-show="!allowStopWinLoss">
-              <div class="col col1">{{ $t('委托价格') }}</div>
+              <div class="col col1">{{ $t('contract_assign_price') }}</div>
               <div v-if="currentDealType === 'market'" class="col">
                 <span
                   :class="{'color-up': exchangeDir === 'BUY', 'color-down': exchangeDir === 'SELL'}"

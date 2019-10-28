@@ -2471,10 +2471,10 @@
         "position": "Position Size After Execution",
         "liq_price": "Estimated Liquidation Price",
         "difference": "Mark Price/Est. Liquidation Difference",
-        "stop_win": "止盈USD",
-        "stop_loss": "止损USD",
-        "stop_win_tips": "%{triggerType} %{triggerSide} 至 %{triggerPrice} 将触发 市价止盈单 预计 盈利： %{realized} BTC",
-        "stop_loss_tips": "%{triggerType} %{triggerSide} 至 %{triggerPrice} 将触发 市价止损单 预计 亏损： %{realized} BTC"
+        "stop_win": "Take Profit USD",
+        "stop_loss": "Stop Loss USD",
+        "stop_win_tips": "%{triggerType} %{triggerSide} to %{triggerPrice} will trigger Market take profit order Estimated profit: %{realized} BTC",
+        "stop_loss_tips": "%{triggerType} %{triggerSide} to %{triggerPrice} will trigger Market stop loss order Estimate Loss: %{realized} BTC"
       }
     },
     "orderbook": {
@@ -2483,17 +2483,22 @@
     "history": {
       "active": {
         "contract_assigning_undeal": "New",
-        "contract_complete_deal": "已成交量/剩余量"
+        "contract_complete_deal": "Filled Vol/Remaining Vol"
       },
       "stop_loss": {
         "contract_assigning_undeal": "Untriggered",
         "price_distance": "Price(Distance)"
       },
       "holding": { 
-        "contract_close_tips3": "这是假设以当前标记价格平仓的预计盈亏，鼠标移除则显示当前委托列表中最新市场价格平仓的预计盈亏。"
+        "contract_close_tips3": "This is expected P&L assuming the position is closed at the current mark price. Mouse removal shows the expected P&L of the latest market price in the current list of orders."
       },
       "history": {
-        "contract_complete_deal": "已成交量/剩余量"
+        "contract_complete_deal": "Filled Vol/Remaining Vol"
+      },
+      "edit_cell" : { 
+        "edit_price_pop_title": "Modification order is executable",
+        "edit_price_pop_content": "Changing the price to %{price} may cause the order immediately close with other orders in the market. Please confirm the changes.",
+        "edit_price_pop_confirm": "Perform changes"
       }
     },
     "pair_nav":{
@@ -2530,6 +2535,34 @@
     },
     "deposit": {
       "address": "Deposit Address"
+    },
+    "profile": {
+      "security": {
+        "close_verify_tips": "Do not allowed to turn off mobile and email verification simultaneous"
+      }
+    },
+    "contract": { 
+      "day": " Days", 
+      "start": "Start",
+      "end": "End",
+      "winloss_record": "P&L Record",
+      "contract_name": "Contract",
+      "future": "Perpetual",
+      "query": "Query",
+      "close_side": "Closing Direction",
+      "into_price": "Entry Price",
+      "out_price": "Exit Price",
+      "close_realized": "Closed P&L",
+      "close_type": "Exit Type",
+      "close_datetime": "Closing Time",
+      "close_side_1": "Buy Short",
+      "close_side_2": "Sell Long",
+      "close_type_1": "Transaction",
+      "close_type_2": "Forced Liquidation",
+      "total_realized": "Accumulated P&L calculation",
+      "current_day_realized": " Current day  settled P&L",
+      "unrealized_mark_price": "Unsettled P&L (Mark Price)",
+      "unrealized_last_price": "Unsettled P&L (Order Book Price)"
     }
   },
   "profile": {
