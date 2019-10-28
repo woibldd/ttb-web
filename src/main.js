@@ -22,6 +22,9 @@ import './styles/flex.css'
 import 'element-ui/lib/theme-chalk/index.css'
 import store from './store'
 import './icons'
+import locale from 'element-ui/lib/locale/lang/en'
+console.log(locale);
+
 Vue.use(VueI18n)
 utils.$i18n = new VueI18n({
   fallbackLocale: 'en',

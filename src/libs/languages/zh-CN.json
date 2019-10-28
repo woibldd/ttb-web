@@ -2435,5 +2435,13 @@
   },
   "otc": {
     "b_price_i": "100~50000 CNY"
-  } 
+  },
+  "el":{
+    "pagination":{
+      "total":"共 {total} 条",
+      "pagesize":"条/页",
+      "goto":"前往",
+      "pageClassifier":"页"
+    }
+  }
 }
