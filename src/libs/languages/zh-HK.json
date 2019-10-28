@@ -2255,6 +2255,35 @@
     "values":"價值",
     "noData":"暫無數據"
   },
+  "Proposer":{
+    "name" :"联系人",
+    "phone": "手机",
+    "wechat": "微信号",
+    "telegram": "电报",
+    "email": "邮箱",
+    "project": "1项目方 2项目推荐人",
+    "projectOptions": [{"label":"项目方","value":1},{"label":"项目推荐人","value":2}],
+    "project_name": "项目全称",
+    "url": "官方网站",
+    "white": "项目白皮书",
+    "white_url": "最新版白皮书链接",
+    "synopsis" :"项目简介",
+    "currency": "代币全称和代币简称",
+    "type" :"是否为ERC20代币 0否 1是",
+    "typeOptions" :["是", "否"],
+    "future_url": "最新代币合约地址",
+    "total": "代币总量",
+    "amount" :"代币流通量",
+    "scheme" :"代币分配方案",
+    "precision": "代币币种精度",
+    "locked": "代币锁仓方案及解锁周期",
+    "report_url": "代币智能合约安全审计报告地址",
+    "price": "私募价格",
+    "starting": "是否首发 0否 1是",
+    "bourse": "已上币交易所",
+    "user_number": "社群平台及用户数",
+    "plan_time": "计划上币时间"
+  },
   "otc": {
     "b_price_i": "100~50000 CNY"
   }

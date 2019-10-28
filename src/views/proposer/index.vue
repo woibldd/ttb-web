@@ -19,43 +19,47 @@
 import customForm from '@/components/customForm'
 import { validEmail, validPhone, validURL } from '@/utils/validate'
 import { insertCoinApply, getPolicy } from '@/api/baseApi'
+const isZhCN = localStorage.getItem("locale") === 'zh-CN'
 export default {
+  name:'Proposer',
   components: {
     customForm
   },
-  data() {
+  data(vm) {
+    console.log();
+    
     return {
       actionUrl: '',
       schema: [
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: '联系人姓名', label: '联系人', vModel: 'name', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: '请输入手机号', errorMassage: '请输入正确手机号码', validate: obj => validPhone(obj.phone), label: '手机号', vModel: 'phone', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: '请输入微信号', label: '微信号', vModel: 'wechat', default: '' },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: '请输入电报', label: '电报', vModel: 'telegram', default: '' },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: '请输入邮箱', errorMassage: '请输入正确邮箱', validate: obj => validEmail(obj.email), label: '邮箱', vModel: 'email', default: '', required: true },
-        { fieldType: 'radio-group', prefixIcon: 'el-icon-search', options: [{ label: '项目方', value: 1 }, { label: '项目推荐人', value: 2 }], label: '请注明您是项目方，还是项目推荐人', vModel: 'project', default: 1, required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: '项目全称', label: '项目全称', vModel: 'project_name', default: '项目全称', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: '以http开头', label: '官方网站', errorMassage: '请输入正确的网站', vModel: 'url', validate: obj => validURL(obj.url), default: '', required: true },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.name'), label: vm.$t('Proposer.name'), vModel: 'name', default: '', required: true },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.phone'), errorMassage: "输入正确的手机号", validate: obj => validPhone(obj.phone), label: vm.$t('Proposer.phone'), vModel: 'phone', default: '', required: true },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.wechat'), label: vm.$t('Proposer.wechat'), vModel: 'wechat', default: '' },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.telegram'), label: vm.$t('Proposer.telegram'), vModel: 'telegram', default: '' },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.email'), errorMassage: '请输入正确邮箱', validate: obj => validEmail(obj.email), label:vm.$t('Proposer.email'), vModel: 'email', default: '', required: true },
+        { fieldType: 'radio-group', prefixIcon: 'el-icon-search', options: vm.$t('Proposer.projectOptions'), label: vm.$t('Proposer.project'), vModel: 'project', default: 1, required: true },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.project_name'), label: vm.$t('Proposer.project_name'), vModel: 'project_name', default: '', required: true },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.url'), label: vm.$t('Proposer.url'), errorMassage: '请输入正确的网站', vModel: 'url', validate: obj => validURL(obj.url), default: '', required: true },
         { fieldType: 'upload', onSuccess: (res, files) => {
           this.schemaWhite[this.schemaWhite.vModel] = this.schemaWhite.data.key + files.name
-        }, data: {}, slotDefault: `<i class="el-icon-plus avatar-uploader-icon"></i><span style="color:#999">点击上传<span>`, errorMassage: '此项必传', action: '', label: '项目白皮书', vModel: 'white', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: '最新版白皮书链接', label: '最新版白皮书链接', validate: obj => validURL(obj.white_url), vModel: 'white_url', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: '项目简介', label: '项目简介', vModel: 'synopsis', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: '代币全称和代币简称', label: '代币全称和代币简称', vModel: 'currency', default: '', required: true }
+        }, data: {}, slotDefault: `<i class="el-icon-plus avatar-uploader-icon"></i><span style="color:#999">${vm.$t('Proposer.white')}<span>`, errorMassage: '此项必传', action: '', label: vm.$t('Proposer.white'), vModel: 'white', required: true },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.white_url'), label: vm.$t('Proposer.white_url'), validate: obj => validURL(obj.white_url), vModel: 'white_url', default: '', required: true },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.synopsis'), label: vm.$t('Proposer.synopsis'), vModel: 'synopsis', default: '', required: true },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.currency'), label: vm.$t('Proposer.currency'), vModel: 'currency', default: '', required: true }
       ],
       schema1: [
-        { fieldType: 'radio-group', prefixIcon: 'el-icon-search', options: ['是', '否'], label: '是否为ERC20代币', vModel: 'type', optValue: 'index', default: 0, required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: '最新代币合约地址', label: '最新代币合约地址', vModel: 'future_url', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: '代币总量', label: '代币总量', vModel: 'total', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: '代币流通量', label: '代币流通量', vModel: 'amount', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: '代币分配方案', label: '代币分配方案', vModel: 'scheme', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: '代币币种精度', label: '代币币种精度', vModel: 'precision', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: '代币锁仓方案及解锁周期', label: '代币锁仓方案及解锁周期', vModel: 'locked', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: '代币智能合约安全审计报告地址', label: '代币智能合约安全审计报告地址', vModel: 'report_url', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: '1ETH或1BTC对应的对少代币，务必准确填写，如没有私募，填写：无', label: '私募价格', vModel: 'price', default: '', required: true },
-        { fieldType: 'radio-group', prefixIcon: 'el-icon-search', options: ['是', '否'], placeholder: '1ETH或1', optValue: 'index', label: '是否首发', vModel: 'starting', default: 0, required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: '非首发，请填写已上币的交易所', label: '上币的交易所', vModel: 'bourse', default: '' },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: '社群平台及用户数', label: '社群平台及用户数', vModel: 'user_number', default: '', required: true },
-        { fieldType: 'date-picker', prefixIcon: 'el-icon-search', valueFormat: 'timestamp', placeholder: '计划上币时间', label: '计划上币时间', vModel: 'plan_time', default: '', required: true }
+        { fieldType: 'radio-group', prefixIcon: 'el-icon-search', options: vm.$t('Proposer.typeOptions'), label: vm.$t('Proposer.type'), vModel: 'type', optValue: 'index', default: 0, required: true },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.future_url'), label: vm.$t('Proposer.future_url'), vModel: 'future_url', default: '', required: true },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.total'), label: vm.$t('Proposer.total'), vModel: 'total', default: '', required: true },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.amount'), label: vm.$t('Proposer.amount'), vModel: 'amount', default: '', required: true },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.scheme'), label: vm.$t('Proposer.scheme'), vModel: 'scheme', default: '', required: true },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.precision'), label: vm.$t('Proposer.precision'), vModel: 'precision', default: '', required: true },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.locked'), label: vm.$t('Proposer.locked'), vModel: 'locked', default: '', required: true },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.report_url'), label: vm.$t('Proposer.report_url'), vModel: 'report_url', default: '', required: true },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.price'), label: vm.$t('Proposer.price'), vModel: 'price', default: '', required: true },
+        { fieldType: 'radio-group', prefixIcon: 'el-icon-search', options: ['是', '否'], optValue: 'index', label:vm.$t('Proposer.starting'), vModel: 'starting', default: 0, required: true },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.bourse'), label:vm.$t('Proposer.bourse'), vModel: 'bourse', default: '' },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder:vm.$t('Proposer.user_number'), label: vm.$t('Proposer.user_number'), vModel: 'user_number', default: '', required: true },
+        { fieldType: 'date-picker', prefixIcon: 'el-icon-search', valueFormat: 'timestamp', placeholder: vm.$t('Proposer.plan_time'), label: vm.$t('Proposer.plan_time'), vModel: 'plan_time', default: '', required: true }
       ]
     }
   },
