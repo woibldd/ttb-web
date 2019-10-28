@@ -27,6 +27,7 @@ import {
   Option,
   Table,
   Input,
+  Radio,
   Form,
   FormItem,
   TableColumn,
@@ -64,7 +65,8 @@ import {
   CarouselItem,
   Cascader,
   CascaderPanel,
-  Divider
+  Divider,
+  Card,
 } from 'element-ui'
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
@@ -75,6 +77,7 @@ if (process.env.NODE_ENV === 'production') {
 
 Vue.config.productionTip = false
 Vue.use(Carousel)
+Vue.use(Radio)
 Vue.use(CarouselItem)
 Vue.use(VueI18n)
 Vue.use(VTooltip)
@@ -116,6 +119,7 @@ Vue.use(Popover)
 Vue.use(CascaderPanel)
 Vue.use(Cascader)
 Vue.use(Divider)
+Vue.use(Card)
 const request = require.context('./assets/svg', true, /\.svg$/)
 /* console.log('request', request)
 console.log('request.keys', request.keys())
