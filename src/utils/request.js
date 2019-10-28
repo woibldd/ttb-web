@@ -5,14 +5,12 @@ import { getUser } from '@/utils/auth'
 
 // create an axios instance
 // axios.defaults.withCredentials = true
-const baseURL = process.env.NODE_ENV === 'development'?'https://i.ixex.pro':'https://i.ixx.com'
 const service = axios.create({
-  baseURL, // url = base url + request url
+  baseURL:'https://i.ixex.pro', // url = base url + request url
   withCredentials: true, // send cookies when cross-domain requests
   timeout: 10000 // request timeout
 })
 // request interceptor
-console.log(process);
 
 service.interceptors.request.use(
   config => {
