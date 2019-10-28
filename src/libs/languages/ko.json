@@ -2327,6 +2327,7 @@
     "telegram": "Telegram",
     "email": "E-mail",
     "project": "Please indicate whether you are the project party or the projec",
+    "projectOptions": [{"label":"Project Party","value":1},{"label":"Project Recommender","value":2}],
     "project_name": "Project Name（Please Provide Both English/Chinese Name）",
     "url": "Official Website",
     "white": "Whitepaper",
@@ -2334,6 +2335,7 @@
     "synopsis" :"Project Introduction",
     "currency": "Name And The Abbreviation Of The Token",
     "type" :"Was It ERC20 Token",
+    "typeOptions" :["yes", "no"],
     "future_url": "Latest Token Contract Address",
     "total": "Total Supply",
     "amount" :"Token Circulation",
@@ -2349,5 +2351,13 @@
   },
   "otc": {
     "b_price_i": "100~50000 CNY"
+  },
+  "el":{
+    "pagination":{
+      "goto": "Go to",
+      "pageClassifier": "",
+      "pagesize": "/page",
+      "total": "Total {total}"
+    }
   }
 }
