@@ -34,22 +34,28 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
           </router-link>
 
           <div class="nav_link arrow-down">
-            <router-link
-              to="/plan"
-              class="nav_link  ml-30">
-              {{$t('plan')}}
-              <img src="./../assets/down.png" width="24" height="24" alt="" style="zoom: 1;
+            <a
+              href="/snowball/bazaar"
+              :class="{'router-link-active': from === 'contract'}"
+              class="link">{{ $t('bidTitle') }}
+            </a>
+            <img src="./../assets/down.png" width="24" height="24" alt="" style="zoom: 1;
     display: inline-block;
     vertical-align: top;
     width: 18px;
     height: 18px;
     margin-top: 2px;">
-            </router-link>
+<!--            <router-link-->
+<!--              to="/plan"-->
+<!--              class="nav_link  ml-30">-->
+<!--              {{$t('plan')}}-->
+<!--            -->
+<!--            </router-link>-->
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
-                <li class="dropdown-item pl-24 pr-24">
-                  <router-link to="/plan" class="link">{{ $t('plan') }}</router-link>
-                </li>
+<!--                <li class="dropdown-item pl-24 pr-24">-->
+<!--                  <router-link to="/plan" class="link">{{ $t('plan') }}</router-link>-->
+<!--                </li>-->
                 <li class="dropdown-item pl-24 pr-24">
                   <a
                     href="/snowball/bazaar"
