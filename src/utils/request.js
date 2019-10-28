@@ -6,17 +6,19 @@ import { getUser } from '@/utils/auth'
 // create an axios instance
 // axios.defaults.withCredentials = true
 const service = axios.create({
-  baseURL: 'https://i.ixx.com', // url = base url + request url
+  baseURL:'https://i.ixex.pro', // url = base url + request url
   withCredentials: true, // send cookies when cross-domain requests
   timeout: 10000 // request timeout
 })
 // request interceptor
+
 service.interceptors.request.use(
   config => {
     // do something before request is sent
     // if (!config.url.startsWith('http'))config.url = process.env.VUE_APP_BASE_API_I + config.url
     // const userDataStr = getUser()
     // console.log(store,222);
+    console.log(process.env.NODE_ENV);
     
     if (store.state.userData) {
       console.log(store.state.userData,22);

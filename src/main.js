@@ -22,50 +22,70 @@ import './styles/flex.css'
 import 'element-ui/lib/theme-chalk/index.css'
 import store from './store'
 import './icons'
-import {
-  Select,
-  Option,
-  Table,
-  Input,
-  Form,
-  FormItem,
-  TableColumn,
-  Upload,
-  RadioGroup,
-  RadioButton,
-  Loading,
-  MessageBox,
-  Alert,
-  Dropdown,
-  DropdownMenu,
-  DropdownItem,
-  Tabs,
-  TabPane,
-  Button,
-  Steps,
-  Link,
-  Step,
-  Switch,
-  DatePicker,
-  Pagination,
-  InputNumber,
-  Dialog,
-  Message,
-  Autocomplete,
-  Timeline,
-  TimelineItem,
-  Progress,
-  Row,
-  Col,
-  Tooltip,
-  Popover,
-  Checkbox,
-  Carousel,
-  CarouselItem,
-  Cascader,
-  CascaderPanel,
-  Divider
-} from 'element-ui'
+import locale from 'element-ui/lib/locale/lang/en'
+console.log(locale);
+
+Vue.use(VueI18n)
+utils.$i18n = new VueI18n({
+  fallbackLocale: 'en',
+  locale: 'en',
+  silentTranslationWarn: true, // process.env.NODE_ENV === 'production',
+  messages: {
+    en: actions.replaceName(en)
+  }
+})
+import ElementUI from 'element-ui'
+// import locale from 'element-ui/lib/locale/lang/en'
+import 'element-ui/lib/theme-chalk/index.css'
+Vue.use(ElementUI,{
+  i18n: (key, value) => utils.$i18n.t(key, value)
+})
+// import {
+//   Select,
+//   Option,
+//   Table,
+//   Input,
+//   Radio,
+//   Form,
+//   FormItem,
+//   TableColumn,
+//   Upload,
+//   RadioGroup,
+//   RadioButton,
+//   Loading,
+//   MessageBox,
+//   Alert,
+//   Dropdown,
+//   DropdownMenu,
+//   DropdownItem,
+//   Tabs,
+//   TabPane,
+//   Button,
+//   Steps,
+//   Link,
+//   Step,
+//   Switch,
+//   DatePicker,
+//   Pagination,
+//   InputNumber,
+//   Dialog,
+//   Message,
+//   Autocomplete,
+//   Timeline,
+//   TimelineItem,
+//   Progress,
+//   Row,
+//   Col,
+//   Tooltip,
+//   Popover,
+//   Checkbox,
+//   Carousel,
+//   CarouselItem,
+//   Cascader,
+//   CascaderPanel,
+//   Divider,
+//   Card,
+// } from 'element-ui'
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
     dsn: 'https://cb7ce83188954a2d89afa702d5d4fcdf@sentry.io/1291113',
@@ -74,48 +94,54 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 Vue.config.productionTip = false
-Vue.use(Carousel)
-Vue.use(CarouselItem)
-Vue.use(VueI18n)
-Vue.use(VTooltip)
-Vue.use(Row)
-Vue.use(Link)
-Vue.use(Col)
-Vue.use(Select) // 引入element单个组件
-Vue.use(Option)
-Vue.use(Table)
-Vue.use(TableColumn)
-Vue.use(Form)
-Vue.use(FormItem)
-Vue.use(Input)
-Vue.use(Upload)
-Vue.use(Dropdown)
-Vue.use(DropdownMenu)
-Vue.use(DropdownItem)
-Vue.use(RadioGroup)
-Vue.use(RadioButton)
-Vue.use(Loading)
-Vue.use(Tabs)
-Vue.use(Tooltip)
-Vue.use(TabPane)
-Vue.use(Button)
-Vue.use(Steps)
-Vue.use(Step)
-Vue.use(Dialog)
-Vue.use(Switch)
-Vue.use(Alert)
-Vue.use(DatePicker)
-Vue.use(Pagination)
-Vue.use(InputNumber)
-Vue.use(Autocomplete)
-Vue.use(Timeline)
-Vue.use(TimelineItem)
-Vue.use(Progress)
-Vue.use(Checkbox)
-Vue.use(Popover)
-Vue.use(CascaderPanel)
-Vue.use(Cascader)
-Vue.use(Divider)
+
+// Vue.use(Radio)
+// Vue.use(CarouselItem)
+// Vue.use(VueI18n)
+// Vue.use(VTooltip)
+// Vue.use(Row)
+// Vue.use(Link)
+// Vue.use(Col)
+// Vue.use(Select) // 引入element单个组件
+// Vue.use(Option)
+// Vue.use(Table, {
+//   i18n: (key, value) => utils.$i18n.t(key, value)
+// })
+// Vue.use(TableColumn, {
+//   i18n: (key, value) => utils.$i18n.t(key, value)
+// })
+// Vue.use(Form)
+// Vue.use(FormItem)
+// Vue.use(Input)
+// Vue.use(Upload)
+// Vue.use(Dropdown)
+// Vue.use(DropdownMenu)
+// Vue.use(DropdownItem)
+// Vue.use(RadioGroup)
+// Vue.use(RadioButton)
+// Vue.use(Loading)
+// Vue.use(Tabs)
+// Vue.use(Tooltip)
+// Vue.use(TabPane)
+// Vue.use(Button)
+// Vue.use(Steps)
+// Vue.use(Step)
+// Vue.use(Dialog)
+// Vue.use(Switch)
+// Vue.use(Alert)
+// Vue.use(DatePicker)
+// Vue.use(Pagination)
+// Vue.use(InputNumber)
+// Vue.use(Autocomplete)
+// Vue.use(Timeline)
+// Vue.use(TimelineItem)
+// Vue.use(Progress)
+// Vue.use(Checkbox)
+// Vue.use(Popover)
+// Vue.use(CascaderPanel)
+// Vue.use(Cascader)
+// Vue.use(Divider)
+// Vue.use(Card)
 const request = require.context('./assets/svg', true, /\.svg$/)
 /* console.log('request', request)
 console.log('request.keys', request.keys())
@@ -127,19 +153,12 @@ request.keys().forEach(request)
 
 theme.set()
 
-utils.$i18n = new VueI18n({
-  fallbackLocale: 'en',
-  locale: 'en',
-  silentTranslationWarn: true, // process.env.NODE_ENV === 'production',
-  messages: {
-    en: actions.replaceName(en)
-  }
-})
+
 
 Vue.prototype.$eh = eventHub
-Vue.prototype.$msgbox = MessageBox
-Vue.prototype.$confirm = MessageBox.confirm
-Vue.prototype.$message = Message
+// Vue.prototype.$msgbox = MessageBox
+// Vue.prototype.$confirm = MessageBox.confirm
+// Vue.prototype.$message = Message
 Vue.prototype.$moment = moment
 Vue.prototype.$eventBus = new Vue({})
 
