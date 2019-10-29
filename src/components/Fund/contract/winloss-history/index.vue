@@ -39,7 +39,7 @@
           width="200"
           v-model="timeRange"
           type="daterange" 
-          range-separator="-"
+          range-separator="-"  
           :start-placeholder="$t('fund.contract.start')"
           :end-placeholder="$t('fund.contract.end')"/>
       </div>
@@ -80,7 +80,7 @@
           <td class="table__td">{{ $t(closeType[item.side]) }}</td>
           <td class="table__td"> {{item.open_price | fixed(valueScale)}} </td>
           <td class="table__td">{{ item.sell_price | fixed(valueScale)}} </td>
-          <td class="table__td">{{ item.realized | fixed(valueScale)}} </td>
+          <td class="table__td">{{ item.realized | fixed(8)}} </td>
           <td class="table__td">{{ $t(tradeType[item.origin]) }}</td>
           <td class="table__td pr-10">{{ (item.create_time / 1000) | date }}</td> 
         </tr>
@@ -101,28 +101,28 @@
       <div class="realized-item">
         <div class="title">{{$t('fund.contract.total_realized')}} </div>
         <div class="value">
-          <span :class="realized.realized_total > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_total | fixed(4)}}<b>BTC</b></span>
+          <span :class="realized.realized_total > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_total | fixed(8)}}<b>BTC</b></span>
         </div>
         <div class="valuation">≈  {{translateByRate(realized.realized_total) | fixed(2)}} USD</div>
       </div>
       <div class="realized-item">
         <div class="title">{{$t('fund.contract.current_day_realized')}} </div>
         <div class="value">
-          <span :class="realized.realized_today > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_today | fixed(4)}}<b>BTC</b></span>
+          <span :class="realized.realized_today > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_today | fixed(8)}}<b>BTC</b></span>
         </div>
         <div class="valuation">≈  {{translateByRate(realized.realized_today) | fixed(2)}} USD</div>
       </div>
       <div class="realized-item">
         <div class="title">{{$t('fund.contract.unrealized_mark_price')}} </div>
         <div class="value">
-          <span :class="realized.realized_market > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_market | fixed(4)}}<b>BTC</b></span>
+          <span :class="realized.realized_market > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_market | fixed(8)}}<b>BTC</b></span>
         </div>
         <div class="valuation">≈ {{translateByRate(realized.realized_market) | fixed(2)}} USD</div>
       </div>
       <div class="realized-item">
         <div class="title">{{$t('fund.contract.unrealized_last_price')}} </div>
         <div class="value">
-          <span :class="realized.realized_price > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_price | fixed(4)}}<b>BTC</b></span>
+          <span :class="realized.realized_price > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_price | fixed(8)}}<b>BTC</b></span>
         </div>
         <div class="valuation">≈ {{translateByRate(realized.realized_price) | fixed(2)}} USD</div>
       </div>
