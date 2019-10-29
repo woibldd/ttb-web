@@ -21,7 +21,7 @@ export default {
   props: {
     label: String,
     color: {
-      default: 'white'
+      default: '#000'
     },
     state: {
       default: 0
@@ -46,7 +46,7 @@ export default {
     opacity: 1;
   }
   &:hover {
-    background-color: rgba(255,255,255, .1);
+    background-color: rgba(255,255,255, .9);
     border-radius: 2px;
     .icons {
       opacity: 1;

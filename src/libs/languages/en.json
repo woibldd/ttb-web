@@ -2742,6 +2742,10 @@
       "capital_fee_period" :"Capital Fee Period",
       "next_capital_fee" :"Next Capital Fee",
       "every_8_hours" :"Every 8 hours",
+      "tips_1": "Maker fees are paid when you add liquidity to our order book, by placing a limit order under the last trade price for buy and above the last trade price for sell.",
+      "tips_2": "Taker fees are paid when you remove liquidity from our order book, by placing any order that is executed against an order of the orderbook. (Please note when your limit order is executed against other user's limit order and his/her order placed earlier than your order, you will pay taker fees.)",
+      "tips_3": "Taker means that the limit order or market order you place is executed with the current maker.",
+      "tips_4": "When the order you placed is filled by others orders, you need to pay the taker fees.", 
       "tips_5": "Our perpetual contracts, such as BTC perpetual contracts, have their capital costs exchanged between holders of multiple and short positions at regular intervals. In your trading history, a positive amount means that you paid fund during this period while a negative amount means that you received fund. The platform does not pay or charge any fund fees"
     }
   }

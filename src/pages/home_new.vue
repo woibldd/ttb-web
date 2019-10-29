@@ -37,8 +37,6 @@
         :get-delta="getDelta"/>
       <!-- 最新上线 -->
       <pair-table
-        :sorted-list="sortedList"
-        :get-delta="getDelta"
         @searching="onSearching"
         @switchTab="onSwitchTab"/>
       <div
