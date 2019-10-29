@@ -2321,6 +2321,7 @@
     "noData":"수치가 없다"
   },
   "Proposer":{
+    "title":"Please fill in the following to submit your application for the",
     "name" :"Name",
     "phone": "Mobile",
     "wechat": "Wechat",
@@ -2345,6 +2346,7 @@
     "report_url": "Token Smart Contract Security Audit Report Address （If Not, Ple",
     "price": "ICO Price （How Many Tokens Corresponding To 1ETH or 1BTC Must ",
     "starting": "Was It New  Publish",
+    "startingOptions": ["yes", "no"],
     "bourse": "If Not, Please Fill List On Which Exchange （If Not, Please Fill",
     "user_number": "Community platform and number of users",
     "plan_time": "Expect Listing Time"
@@ -2358,6 +2360,9 @@
       "pageClassifier": "",
       "pagesize": "/page",
       "total": "Total {total}"
+    },
+    "table":{
+      "emptyText":"No data"
     }
   }
 }

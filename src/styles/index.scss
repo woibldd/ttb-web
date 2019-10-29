@@ -239,9 +239,9 @@ td.right {
 
 // element reset
 
-.el-form-item.is-required>.el-form-item__label:before {
-    display: none;
-}
+// .el-form-item.is-required>.el-form-item__label:before {
+//     display: none;
+// }
 
 $primary-color: #01CED1;
 .el-select-dropdown__item.selected {
@@ -373,4 +373,9 @@ $primary-color: #01CED1;
   font-size: 14px;
   font-weight: bold;
   color: #333333;
+}
+.el-form-item.is-required:not(.is-no-asterisk) .el-form-item__label-wrap > .el-form-item__label:before, .el-form-item.is-required:not(.is-no-asterisk) > .el-form-item__label:before {
+  content: '*';
+  color: #F56C6C;
+  margin-right: 4px;
 }

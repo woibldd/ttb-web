@@ -2256,6 +2256,7 @@
     "noData":"暫無數據"
   },
   "Proposer":{
+    "title":"请填写以下内容提交上币申请，收到申请后我们将尽快联系您",
     "name" :"联系人",
     "phone": "手机",
     "wechat": "微信号",
@@ -2280,6 +2281,7 @@
     "report_url": "代币智能合约安全审计报告地址",
     "price": "私募价格",
     "starting": "是否首发 0否 1是",
+    "startingOptions": ["是", "否"],
     "bourse": "已上币交易所",
     "user_number": "社群平台及用户数",
     "plan_time": "计划上币时间"
@@ -2293,6 +2295,9 @@
       "pagesize":"条/页",
       "goto":"前往",
       "pageClassifier":"页"
+    },
+    "table":{
+      "emptyText":"无数据"
     }
   }
 }
