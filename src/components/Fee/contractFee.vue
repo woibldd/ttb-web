@@ -32,12 +32,12 @@
       <table  class="rate-table">
         <tr>
           <th>{{ $t('transaction_pair') }}</th>
-          <th>{{ $t('杠杆') }}</th>
-          <th>{{ $t('提供流动性费率') }}</th>
-          <th>{{ $t('提取流动性分离') }}</th>
-          <th>{{ $t('资金费率') }}</th>
-          <th>{{ $t('资金费率时间段') }}</th>
-          <th>{{ $t('下一资金费率') }}</th> 
+          <th>{{ $t('fee.contract.leverage') }}</th>
+          <th>{{ $t('fee.contract.provision_fee') }}</th>
+          <th>{{ $t('fee.contract.withdraw_fee') }}</th>
+          <th>{{ $t('fee.contract.capital_fee') }}</th>
+          <th>{{ $t('fee.contract.capital_fee_period') }}</th>
+          <th>{{ $t('fee.contract.next_capital_fee') }}</th> 
         </tr>
         <tbody>
           <tr v-for="pair in pairList" :key="pair.name">
@@ -46,7 +46,7 @@
             <td class="">{{ $big(pair.make_rate || 0).mul(100) | fixed(4) }}%</td>
             <td class="">{{ $big(pair.take_rate  || 0).mul(100) | fixed(4) }}%</td> 
             <td class="">{{ $big(pair.fee_rate || 0).mul(100) | fixed(4) }}%</td>
-            <td class="">{{ $t('每8小时') }}</td> 
+            <td class="">{{ $t('fee.contract.every_8_hours') }}</td> 
             <td class="">{{ pair.next_fee_time | date('Y-M-D H:m:s')}}</td>
           </tr>
         </tbody>
@@ -58,7 +58,7 @@
       <p>2. {{ $t('rate_tips_b') }}</p>
       <p>3. {{ $t('rate_tips_c') }}</p>
       <p>4. {{ $t('rate_tips_d') }}</p>  
-      <p>5. {{ $t('我们的永续合约，如BTC永续，其资金费用每隔一段时间在多仓和空仓的持有者之间进行交换。 在您的交易历史中，正数金额意味着你在此时段支付资金而 负数金额意味着您收取资金。 平台不支付或收取任何资金费用。') }}</p>  
+      <p>5. {{ $t('fee.contract.tips_5') }}</p>  
     </div> 
   </div>
 </template>
@@ -180,15 +180,10 @@ export default {
     tr {
       height: 45px;
       line-height: 45px;
-      border-bottom: 1px solid #ccc;
-      display: flex;
+      border-bottom: 1px solid #ccc; 
       th {
-        text-align: left;
-        flex: 1;
-      }
-      td {
-        flex: 1;
-      }
+        text-align: left; 
+      } 
     }
   }
 }

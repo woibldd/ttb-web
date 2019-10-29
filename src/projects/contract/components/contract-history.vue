@@ -792,6 +792,22 @@ export default {
         }
       }); 
     },
+    async refreshTriggerCount(){
+      let tab = "contract_history_stop_loss" 
+      if(tab === this.current){
+        return
+      }
+      let params = {
+        symbol: this.state.ct.pair,
+        page: 1,
+        size: 1
+      };
+      await service.getStoplossOrder(params).then(res => { 
+        if (!res.code && !!res.data) { 
+          this.setTabDataCount(tab, res.data.total);
+        }
+      })
+    },
     refreshHoldingCount() {
       let holdingTag = "contract_history_position";
       if(holdingTag === this.current){
