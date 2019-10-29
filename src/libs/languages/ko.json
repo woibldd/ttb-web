@@ -2085,7 +2085,7 @@
   "order_apply_failed": "위탁제출실패",
   "order_apply_message_a": "사용가능한  금액 부족 ，위탁못함。",
   "order_apply_message_b": "현재 주문가격과 통장가격 차이가 너무 커서 주문을 제출할 수 없습니다，。",
-  "order_apply_message_c": "있다%{price}价格%{side}%{amount}장%{currency}영속계약。",
+  "order_apply_message_c": "있다%{price}가격%{side}%{amount}장%{currency}영속계약。",
   "contract_buy_on_price_piece1": "시가%{amount}장%{symbol}。",
   "invite_kyc_lv": "KYC인증",
   "otc_otutcol_20": "신소성공 고객님의 복장을 기다려 주십시오",
@@ -2199,14 +2199,14 @@
       "trigger_close_tips": "마진 정지 손해가 있을 때이 단추를 누르면, 평창의 위탁 유형은 창고만 줄어들 수 있습니다. 터질 때 시스템은 현재 창고수에 따라 자동으로이 유형의 위탁 개수가 줄어들거나 심지어 브레이크 취소, 위탁 유형이 부족하면 현재 위탁 유형이 터지면 위탁 실패。",
       "modal": {
         "available": "사용가능금액",
-        "position": "거래 가 성사 된 후 창고 포지션의 크기",
+        "position": "거래 가 성사 된 후 창고 포지션의 크기", 
         "liq_price": "예상물가",
         "difference": "예상가격차이",
-        "stop_win": "止盈USD",
-        "stop_loss": "止损USD",
-        "stop_win_tips": "%{triggerType} %{triggerSide} 至 %{triggerPrice} 将触发 市价止盈单 预计 盈利： %{realized} BTC",
-        "stop_loss_tips": "%{triggerType} %{triggerSide} 至 %{triggerPrice} 将触发 市价止损单 预计 亏损： %{realized} BTC"
-      }
+        "stop_win": "리익정지%{unit}",
+        "stop_loss": "손익정지%{unit}",
+        "stop_win_tips": "%{triggerType} %{triggerSide} 부터 %{triggerPrice} 시세 리익단 예상 리윤 발생： %{realized} BTC",
+        "stop_loss_tips": "%{triggerType} %{triggerSide} 부터 %{triggerPrice} 시세 수익단 예상 손해 발생： %{realized} BTC"
+     }
     },
     "orderbook": {
       "back_to": "다시 서킷으로"
@@ -2214,22 +2214,22 @@
     "history": {
       "active": {
         "contract_assigning_undeal": "위탁 중에 아직 거래 가 이루어지지 않았다",
-        "contract_complete_deal": "已成交量/剩余量"
+        "contract_complete_deal": "거래량/잔여량"
       },
       "stop_loss": {
         "contract_assigning_undeal": "위탁 중에 아직 거래 가 이루어지지 않았다",
         "price_distance": "촉발 가격"
       },
       "holding": {
-        "contract_close_tips3": "这是假设以当前标记价格平仓的预计盈亏，鼠标移除则显示当前委托列表中最新市场价格平仓的预计盈亏。"
+        "contract_close_tips3": "이것은 현재 표시 가격인 평창의 예상 손익을 가정한 것이고, 마우스를 제거하면 현재 위탁 목록의 최신 시장 가격인 평창의 예상 손익을 나타낸다。"
       },
       "history": {
-        "contract_complete_deal": "已成交量/剩余量"
+        "contract_complete_deal": "거래량/잔여량"
       },
       "edit_cell" : { 
-        "edit_price_pop_title": "Modification order is executable",
-        "edit_price_pop_content": "Changing the price to %{price} may cause the order immediately close with other orders in the market. Please confirm the changes.",
-        "edit_price_pop_confirm": "Perform changes"
+        "edit_price_pop_title": "수정위탁 실행",
+        "edit_price_pop_content": "값을 %{price} 바꾸기시장 내의 다른 위탁과 바로 거래를 성사시킬 수 있을 것이다.변경 확인。",
+        "edit_price_pop_confirm": "실행 수정됨"
       }
     },
     "pair_nav": {
@@ -2267,29 +2267,29 @@
     "deposit": {
       "address": "입금주소"
     }, 
-    "contract": {
-      "winloss_record": "盈亏记录",
-      "contract_name": "合约",
-      "future": "永续",
-      "query":"查询",
-      "close_side": "平仓方向",
-      "into_price": "入场价格",
-      "out_price": "出场价格",
-      "close_realized": "平仓盈亏",
-      "close_type": "出场类型",
-      "close_datetime": "平仓成交时间",
-      "close_side_1": "买入平空",
-      "close_side_2": "卖出平多",
-      "close_type_1": "交易",
-      "close_type_2": "强制平仓",
-      "total_realized":"累计盈亏计算",
-      "current_day_realized":"当日已结算盈亏",
-      "unrealized_mark_price":"未结算盈亏（标记价格）",
-      "unrealized_last_price":"未结盈亏(盘口价格)",
-      "day": "日", 
+    "contract": { 
       "start": "시작 날짜",
-      "end": "종료 날짜"
-    } 
+      "end": "종료 날짜",
+      "winloss_record": "손익 기록",
+      "contract_name": "계약",
+      "future": "지속",
+      "query":"조회",
+      "close_side": "평창방향",
+      "into_price": "입장 가격",
+      "out_price": "출전 가격",
+      "close_realized": "평창리익",
+      "close_type": "등장 류형",
+      "close_datetime": "평창 거래 시간",
+      "close_side_1": "무공해 매입",
+      "close_side_2": "매출액 보통보다 많다",
+      "close_type_1": "거래",
+      "close_type_2": "강제적 평창",
+      "total_realized":"누적 손익 계산",
+      "current_day_realized":"당일 이미 손익 결산",
+      "unrealized_mark_price":"미결산 손익 (표시가격)",
+      "unrealized_last_price":"미결손가격(거래가격)",
+      "day": "일"
+    }
   },
   "shareOption": {
     "time":"time",
@@ -2443,15 +2443,18 @@
   }, 
   "fee": {
     "contract": {
-      "leverage" : "杠杆" ,
-      "provision_fee" :"提供流动性费率",
-      "withdraw_fee" :"提取流动性费率",
-      "capital_fee" :"资金费率",
-      "capital_fee_period" :"资金费率时间段",
-      "next_capital_fee" :"下一资金费率",
-      "every_8_hours" :"每8小时",
-      "tips_5": "我们的永续合约，如BTC永续，其资金费用每隔一段时间在多仓和空仓的持有者之间进行交换。 在您的交易历史中，正数金额意味着你在此时段支付资金而 负数金额意味着您收取资金。 平台不支付或收取任何资金费用"
-    
+      "leverage" : "지레" ,
+      "provision_fee" :"유동성 공급비률",
+      "withdraw_fee" :"유동성 인출비률",
+      "capital_fee" :"자금료",
+      "capital_fee_period" :"자금료률 시간대",
+      "next_capital_fee" :"다음 자금료률",
+      "every_8_hours" :"매8시간",
+      "tips_1": "주문서는 당신이 한정한 가격명세서가 현재 주문서와 거래되지 않았고 또한 거래장중에 놓여져 거래되기를 기다리고 있는 거래장부이다. 이는 매매장소의 류동성을 증가시킨다.",
+      "tips_2": "다른 사람의 진열장이 주동적으로 당신이 놓은 거래처와 거래될 때 당신은 수속비를 지불하게 됩니다.",
+      "tips_3": "당신이 한정한 가격명세서 또는 시장가격명세서와 현재 주문서가 직접 거래되는 경우.",
+      "tips_4": "아래에 있는 거래명세서가 주동적으로 다른 사람과 거래될 경우 거래수수료를 지불한다.",
+      "tips_5": "우리의 영속계약, 예를 들면 BTC 영속계약은 자금비용을 일정한 시간마다 다창고와 빈창고의 소유자 사이에서 교환한다.거래의 역사에서, 양수 금액은 당신이이 기간에 돈을 지불했다는 것을 의미하고, 부수 금액은 당신이 돈을 받았다는 것을 의미한다.플랫폼은 비용을 지불하거나 받지 않습니다."
     }
   }
 }

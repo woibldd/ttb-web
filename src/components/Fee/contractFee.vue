@@ -54,10 +54,10 @@
     </div>
     <div class="rate-tips">
       <p class="rate-tips-title">{{ $t('tips') }}</p> 
-      <p>1. {{ $t('rate_tips_a') }}</p>
-      <p>2. {{ $t('rate_tips_b') }}</p>
-      <p>3. {{ $t('rate_tips_c') }}</p>
-      <p>4. {{ $t('rate_tips_d') }}</p>  
+      <p>1. {{ $t('fee.contract.tips_1') }}</p>
+      <p>2. {{ $t('fee.contract.tips_2') }}</p>
+      <p>3. {{ $t('fee.contract.tips_3') }}</p>
+      <p>4. {{ $t('fee.contract.tips_4') }}</p>  
       <p>5. {{ $t('fee.contract.tips_5') }}</p>  
     </div> 
   </div>

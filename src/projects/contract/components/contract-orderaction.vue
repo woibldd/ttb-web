@@ -487,7 +487,7 @@
                 <el-checkbox
                   v-model="modalStopWinState"
                   class="c-fff"
-                >{{ $t('contract_page.order_action.modal.stop_win') }}</el-checkbox>
+                >{{ $t('contract_page.order_action.modal.stop_win',{unit: "USD"}) }}</el-checkbox>
               </div>
               <div class="r2">
                 <div class="row">
@@ -543,7 +543,7 @@
                 <el-checkbox
                   class="c-fff"
                   v-model="modalStoplossState"
-                >{{ $t('contract_page.order_action.modal.stop_loss') }}</el-checkbox>
+                >{{ $t('contract_page.order_action.modal.stop_loss',{unit: "USD"}) }}</el-checkbox>
               </div>
               <div class="r2">
                 <div class="row">
@@ -600,7 +600,7 @@
               <div v-if="currentDealType === 'market'" class="col">
                 <span
                   :class="{'color-up': exchangeDir === 'BUY', 'color-down': exchangeDir === 'SELL'}"
-                >{{ $t('市价单') }} USD</span>
+                >{{ $t('contract_market_price') }} USD</span>
               </div>
               <div v-else class="col">
                 <span
@@ -634,7 +634,7 @@
 
             <div class="table__tr c-fff" v-show="!allowStopWinLoss">
               <!-- 止盈 -->
-              <div class="col col1">{{ $t('止盈') }}</div>
+              <div class="col col1">{{ $t('contract_page.order_action.modal.stop_win', {unit: ""}) }}</div>
               <div class="col">
                 <label
                   v-if="!currentHolding || !currentHolding.tp_price || currentHolding.tp_price==='0'"
@@ -648,7 +648,7 @@
             </div>
             <div class="table__tr c-fff" v-show="!allowStopWinLoss">
               <!-- 止损 -->
-              <div class="col col1">{{ $t('止损') }}</div>
+              <div class="col col1">{{ $t('contract_page.order_action.modal.stop_loss', {unit: ""}) }}</div>
               <div class="col">
                 <label
                   v-if="!currentHolding || !currentHolding.sl_price || currentHolding.sl_price==='0'"

@@ -2138,8 +2138,8 @@
         "position": "成交後的倉位大小",
         "liq_price": "預期強平價格",
         "difference": "標記價格/預期強平價格 差異",
-        "stop_win": "止盈USD",
-        "stop_loss": "止损USD",
+        "stop_win": "止盈%{unit}",
+        "stop_loss": "止损%{unit}",
         "stop_win_tips": "%{triggerType} %{triggerSide} 至 %{triggerPrice} 将触发 市价止盈单 预计 盈利： %{realized} BTC",
         "stop_loss_tips": "%{triggerType} %{triggerSide} 至 %{triggerPrice} 将触发 市价止损单 预计 亏损： %{realized} BTC"
       }

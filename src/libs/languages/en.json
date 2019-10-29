@@ -2471,8 +2471,8 @@
         "position": "Position Size After Execution",
         "liq_price": "Estimated Liquidation Price",
         "difference": "Mark Price/Est. Liquidation Difference",
-        "stop_win": "Take Profit USD",
-        "stop_loss": "Stop Loss USD",
+        "stop_win": "Take Profit %{unit}",
+        "stop_loss": "Stop Loss %{unit}",
         "stop_win_tips": "%{triggerType} %{triggerSide} to %{triggerPrice} will trigger Market take profit order Estimated profit: %{realized} BTC",
         "stop_loss_tips": "%{triggerType} %{triggerSide} to %{triggerPrice} will trigger Market stop loss order Estimate Loss: %{realized} BTC"
       }
