@@ -2344,6 +2344,7 @@
     "noData":"수치가 없다"
   },
   "Proposer":{
+    "title":"Please fill in the following to submit your application for the",
     "name" :"Name",
     "phone": "Mobile",
     "wechat": "Wechat",
@@ -2358,7 +2359,7 @@
     "synopsis" :"Project Introduction",
     "currency": "Name And The Abbreviation Of The Token",
     "type" :"Was It ERC20 Token",
-    "typeOptions" :["yes", "no"],
+    "typeOptions" :[ "no","yes"],
     "future_url": "Latest Token Contract Address",
     "total": "Total Supply",
     "amount" :"Token Circulation",
@@ -2368,6 +2369,7 @@
     "report_url": "Token Smart Contract Security Audit Report Address （If Not, Ple",
     "price": "ICO Price （How Many Tokens Corresponding To 1ETH or 1BTC Must ",
     "starting": "Was It New  Publish",
+    "startingOptions": [ "no","yes"],
     "bourse": "If Not, Please Fill List On Which Exchange （If Not, Please Fill",
     "user_number": "Community platform and number of users",
     "plan_time": "Expect Listing Time"
@@ -2434,6 +2436,9 @@
         "nov": "11월",
         "dec": "12월"
       }
+    },
+    "table":{
+      "emptyText":"No data"
     }
   }, 
   "fee": {
@@ -2446,6 +2451,7 @@
       "next_capital_fee" :"下一资金费率",
       "every_8_hours" :"每8小时",
       "tips_5": "我们的永续合约，如BTC永续，其资金费用每隔一段时间在多仓和空仓的持有者之间进行交换。 在您的交易历史中，正数金额意味着你在此时段支付资金而 负数金额意味着您收取资金。 平台不支付或收取任何资金费用"
+    
     }
   }
 }

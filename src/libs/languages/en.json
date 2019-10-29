@@ -2621,9 +2621,10 @@
     "earnings": "Return",
     "values": "Value",
     "noData": "No Data"
-  },
-  "Proposer": {
-    "name": "Name",
+  }, 
+  "Proposer":{
+    "title":"Please fill in the following to submit your application for the",
+    "name" :"Name",
     "phone": "Mobile",
     "wechat": "Wechat",
     "telegram": "Telegram",
@@ -2649,7 +2650,7 @@
     "typeOptions": [
       "yes",
       "no"
-    ],
+    ], 
     "future_url": "Latest Token Contract Address",
     "total": "Total Supply",
     "amount": "Token Circulation",
@@ -2659,6 +2660,7 @@
     "report_url": "Token Smart Contract Security Audit Report Address （If Not, Ple",
     "price": "ICO Price （How Many Tokens Corresponding To 1ETH or 1BTC Must ",
     "starting": "Was It New  Publish",
+    "startingOptions": [ "no","yes"],
     "bourse": "If Not, Please Fill List On Which Exchange （If Not, Please Fill",
     "user_number": "Community platform and number of users",
     "plan_time": "Expect Listing Time"
@@ -2726,6 +2728,9 @@
         "fri": "Fri"
       },
       "year": ""
+    },
+    "table":{
+      "emptyText":"No data"
     }
   }, 
   "fee": {
