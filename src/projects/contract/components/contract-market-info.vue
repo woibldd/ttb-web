@@ -84,8 +84,8 @@
 
           <div class="row__label">{{ $t('contract_fee_rate') }}</div>
           <div class="row__value">
-            <router-link to="/material/fee-history">{{ (pairInfo.fee_rate * 100 || 0) | round(4)   }} % </router-link>
             <span>{{$t('count_down_value', { hour, minute, second})}}</span>
+            <router-link to="/material/fee-history">{{ (pairInfo.fee_rate * 100 || 0) | round(4)   }} % </router-link>
             <!-- {{ ((pairInfo.fee_rate * 100).toFixed(4) || 0) + '%' }} -->
           </div>
         </div>

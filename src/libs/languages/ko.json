@@ -2225,6 +2225,11 @@
       },
       "history": {
         "contract_complete_deal": "已成交量/剩余量"
+      },
+      "edit_cell" : { 
+        "edit_price_pop_title": "Modification order is executable",
+        "edit_price_pop_content": "Changing the price to %{price} may cause the order immediately close with other orders in the market. Please confirm the changes.",
+        "edit_price_pop_confirm": "Perform changes"
       }
     },
     "pair_nav": {
@@ -2251,22 +2256,40 @@
       "phone": "휴대폰",
       "phone_code": "메세지 인증번호",
       "email_code": "이메일 인증번호",
-      "bind_google":"Google인증을 입력",
-      "bind_email_or_phone":"이메일/핸드폰 입력",
-      "to_deposit_tips":"인출은 원하는 액수의 최소 충전을 완료하고, 인출 기능을 활성화합니다",
-      "to_deposit":"코인을 충전하다"
+      "bind_google": "Google인증을 입력",
+      "bind_email_or_phone": "이메일/핸드폰 입력",
+      "to_deposit_tips": "인출은 원하는 액수의 최소 충전을 완료하고, 인출 기능을 활성화합니다",
+      "to_deposit": "코인을 충전하다"
     },
     "address": {
       "address": "주소"
     },
     "deposit": {
       "address": "입금주소"
-    } ,
-    "profile": {
-      "security": {
-        "close_verify_tips": "모바일 인증과 메일박스 인증은 동시에 닫을 수 없습니다."
-      }
-    }
+    }, 
+    "contract": {
+      "winloss_record": "盈亏记录",
+      "contract_name": "合约",
+      "future": "永续",
+      "query":"查询",
+      "close_side": "平仓方向",
+      "into_price": "入场价格",
+      "out_price": "出场价格",
+      "close_realized": "平仓盈亏",
+      "close_type": "出场类型",
+      "close_datetime": "平仓成交时间",
+      "close_side_1": "买入平空",
+      "close_side_2": "卖出平多",
+      "close_type_1": "交易",
+      "close_type_2": "强制平仓",
+      "total_realized":"累计盈亏计算",
+      "current_day_realized":"当日已结算盈亏",
+      "unrealized_mark_price":"未结算盈亏（标记价格）",
+      "unrealized_last_price":"未结盈亏(盘口价格)",
+      "day": "日", 
+      "start": "시작 날짜",
+      "end": "종료 날짜"
+    } 
   },
   "shareOption": {
     "time":"time",

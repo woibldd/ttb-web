@@ -73,16 +73,17 @@ export default {
       this.state = 'show' 
       this.newValue = this.value
     },
-    async confirm() {  
+    async confirm() {   
       this.newValue = this.$big(this.newValue).round(this.scale, 0).toFixed(this.scale) 
       if (this.type === 'price') { 
-        let content = `将价格更改至${this.newValue}可能会使该委托立刻与市场中的其他委托成交。请确认更改。`
+        //let content = `将价格更改至${this.newValue}可能会使该委托立刻与市场中的其他委托成交。请确认更改。`
+        let content = this.$t("contract_page.history.edit_cell.edit_price_pop_content", { price: this.newValue })
         let ok = await utils.confirm(this, {
           customClass: "ix-message-box-wrapper",
-          confirmBtnText: "执行修改",
+          confirmBtnText: this.$t("contract_page.history.edit_cell.edit_price_pop_confirm"),
           confirmButtonClass: "btn--confirm",
           cancelButtonClass: "btn--cancel",
-          title: this.$t("委托修改可执行"),
+          title: this.$t("contract_page.history.edit_cell.edit_price_pop_title"),
           content
         });
         if (!ok) {

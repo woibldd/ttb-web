@@ -4,7 +4,7 @@
        <!-- 账户 -->
       <div class="currency-row mr-40">
         <div class="c-999 mr-13">
-          {{ $t('永续') }}
+          {{ $t('fund.contract.future') }}
         </div>
         <el-select
           class="opetion"
@@ -13,14 +13,14 @@
           <el-option
             v-for="(item, idx) in futureTypes"
             :key="idx"
-            :label="item.name"
+            :label="$t(item.name)"
             :value="item.key"/>
         </el-select>
       </div>
       <!-- 类型 -->
       <div class="currency-row mr-40">
         <div class="c-999 mr-13">
-          {{ $t('合约') }}
+          {{ $t('fund.contract.contract_name') }}
         </div>
         <el-select
           class="opetion"
@@ -39,37 +39,37 @@
           width="200"
           v-model="timeRange"
           type="daterange" 
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"/>
+          range-separator="-"  
+          :start-placeholder="$t('fund.contract.start')"
+          :end-placeholder="$t('fund.contract.end')"/>
       </div>
-      <el-button type='default' @click="query" class="ml-20">查询</el-button>
+      <el-button type='default' @click="query" class="ml-20">{{$t('fund.contract.query')}}</el-button>
     </div>
     <div class="table-wrapper">
       <table>
         <tr class="table__tr header c-999">
           <th class="table__th">
-            {{ $t('合约') }}
+            {{ $t('fund.contract.contract_name') }}
           </th>
           <th class="table__th">
-            {{ $t('平仓方向') }}
+            {{ $t('fund.contract.close_side') }}
           </th>
           <th class="table__th">
-            {{ $t('入场价格') }}
+            {{ $t('fund.contract.into_price') }}
           </th> 
           <th class="table__th">
-            {{ $t('出场价格') }}
+            {{ $t('fund.contract.out_price') }}
           </th>
           <!-- 余额 -->
           <th class="table__th pr-10">
-            {{ $t('平仓盈亏') }}
+            {{ $t('fund.contract.close_realized') }}
           </th>
           <!-- 状态 -->
           <th class="table__th">
-            {{ $t('出场类型') }}
+            {{ $t('fund.contract.close_type') }}
           </th>
           <th class="table__th">
-            {{ $t('平仓成交时间') }}
+            {{ $t('fund.contract.close_datetime') }}
           </th>
         </tr>
         <tr
@@ -77,11 +77,11 @@
           v-for="(item,index) in tableData"
           :key="index">
           <td class="table__td">{{ item.currency }}</td>
-          <td class="table__td">{{ item.side }}</td>
+          <td class="table__td">{{ $t(closeType[item.side]) }}</td>
           <td class="table__td"> {{item.open_price | fixed(valueScale)}} </td>
           <td class="table__td">{{ item.sell_price | fixed(valueScale)}} </td>
-          <td class="table__td">{{ item.realized | fixed(valueScale)}} </td>
-          <td class="table__td">{{ tradeType[item.origin]  }}</td>
+          <td class="table__td">{{ item.realized | fixed(8)}} </td>
+          <td class="table__td">{{ $t(tradeType[item.origin]) }}</td>
           <td class="table__td pr-10">{{ (item.create_time / 1000) | date }}</td> 
         </tr>
       </table>
@@ -99,37 +99,36 @@
     </div>
     <div class="realized-box">
       <div class="realized-item">
-        <div class="title">累计盈亏计算</div>
+        <div class="title">{{$t('fund.contract.total_realized')}} </div>
         <div class="value">
-          <span :class="realized.realized_total > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_total | fixed(4)}}<b>BTC</b></span>
+          <span :class="realized.realized_total > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_total | fixed(8)}}<b>BTC</b></span>
         </div>
         <div class="valuation">≈  {{translateByRate(realized.realized_total) | fixed(2)}} USD</div>
       </div>
       <div class="realized-item">
-        <div class="title">当日已结算盈亏</div>
+        <div class="title">{{$t('fund.contract.current_day_realized')}} </div>
         <div class="value">
-          <span :class="realized.realized_today > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_today | fixed(4)}}<b>BTC</b></span>
+          <span :class="realized.realized_today > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_today | fixed(8)}}<b>BTC</b></span>
         </div>
         <div class="valuation">≈  {{translateByRate(realized.realized_today) | fixed(2)}} USD</div>
       </div>
       <div class="realized-item">
-        <div class="title">未结算盈亏（标记价格）</div>
+        <div class="title">{{$t('fund.contract.unrealized_mark_price')}} </div>
         <div class="value">
-          <span :class="realized.realized_market > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_market | fixed(4)}}<b>BTC</b></span>
+          <span :class="realized.realized_market > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_market | fixed(8)}}<b>BTC</b></span>
         </div>
         <div class="valuation">≈ {{translateByRate(realized.realized_market) | fixed(2)}} USD</div>
       </div>
       <div class="realized-item">
-        <div class="title">未结算盈亏(盘口价格)</div>
+        <div class="title">{{$t('fund.contract.unrealized_last_price')}} </div>
         <div class="value">
-          <span :class="realized.realized_price > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_price | fixed(4)}}<b>BTC</b></span>
+          <span :class="realized.realized_price > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_price | fixed(8)}}<b>BTC</b></span>
         </div>
         <div class="valuation">≈ {{translateByRate(realized.realized_price) | fixed(2)}} USD</div>
       </div>
     </div>
 
-    <div class="trend-view">
-      
+    <div class="trend-view"> 
       <div class="charts">
         <trendCharts :pair="currencyPair"/>
       </div>
@@ -149,14 +148,14 @@ export default {
     return {
       timeRange: [],
       futureTypes: [
-        { name:'BTC永续', key: 0}, 
+        { name:'contract_FUTURE_BTCUSD', key: 0}, 
       ],
       pairList: [
         'BTCUSD',
         'ETHUSD',
         'EOSUSD'
       ],
-      currencyFuture: 'BTC永续',
+      currencyFuture: 0,
       currencyPair: 'BTCUSD',
       pages:{
         total: 0,
@@ -178,8 +177,12 @@ export default {
       cycleTime: 7,
       rates: null,
       tradeType: {
-        1: "交易",
-        2: "强制平仓"
+        1: "fund.contract.close_type_1",
+        2: "fund.contract.close_type_2"
+      },
+      closeType: {
+        "买入平空":"fund.contract.close_side_1",
+        "卖出平多":"fund.contract.close_side_2",
       }
     }
   },

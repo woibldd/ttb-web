@@ -5,9 +5,9 @@
         @change="cycleChange"
         v-model="cycleTime" 
         style="margin-bottom: 30px;">
-        <el-radio-button label="7">7日</el-radio-button>
-        <el-radio-button label="30">30日</el-radio-button>
-        <el-radio-button label="90">90日</el-radio-button> 
+        <el-radio-button label="7">7{{$t('fund.contract.day')}}</el-radio-button>
+        <el-radio-button label="30">30{{$t('fund.contract.day')}}</el-radio-button>
+        <el-radio-button label="90">90{{$t('fund.contract.day')}}</el-radio-button> 
       </el-radio-group> 
     </div>
     
@@ -43,7 +43,8 @@ export default {
           ],
           crosshair: true
         },
-        yAxis: { 
+        yAxis: {
+          
           title: {
             text: ""
           }
@@ -67,13 +68,13 @@ export default {
         series: [
           {
             color: '#36D1DC',
-            name: "当日已结算盈亏",
+            name: this.$t("fund.contract.current_day_realized"),
             data: [ 
             ]
           }, 
           { 
             color: '#FF6B70',
-            name: "盈亏累计计算",
+            name: this.$t("fund.contract.total_realized"), 
             data: [ 
             ]
           }

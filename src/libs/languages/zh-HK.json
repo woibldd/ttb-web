@@ -2179,14 +2179,14 @@
     "withdraw": {
       "address": "提幣地址",
       "bind_google": "绑定谷歌验证器",
-      "bind_email_or_phone": "绑定邮箱/手机",
+      "bind_email_or_phone": "绑定邮箱/手机", 
       "bindings": "已绑定",
       "no_bindings": "未绑定",
       "to_verify": "去认证",
       "to_bind": "去绑定",
       "done": "已完成",
-      "to_deposit_tips": "提币需要您至少完成一笔任意额度充币，激活提币功能",
-      "to_deposit": "去充币",
+      "to_deposit_tips": "提币需要您至少完成一笔任意额度充币，激活提币功能", 
+      "to_deposit": "去充币", 
       "email": "邮箱",
       "phone": "手机号",
       "phone_code": "手机验证码",
@@ -2197,6 +2197,34 @@
     },
     "deposit": {
       "address": "充幣地址"
+    },
+    "contract": {
+      "winloss_record": "盈亏记录",
+      "contract_name": "合约",
+      "future": "永续",
+      "query":"查询",
+      "close_side": "平仓方向",
+      "into_price": "入场价格",
+      "out_price": "出场价格",
+      "close_realized": "平仓盈亏",
+      "close_type": "出场类型",
+      "close_datetime": "平仓成交时间",
+      "close_side_1": "买入平空",
+      "close_side_2": "卖出平多",
+      "close_type_1": "交易",
+      "close_type_2": "强制平仓",
+      "total_realized":"累计盈亏计算",
+      "current_day_realized":"当日已结算盈亏",
+      "unrealized_mark_price":"未结算盈亏（标记价格）",
+      "unrealized_last_price":"未结算盈亏(盘口价格)",
+      "day": "日", 
+      "start": "開始日期",
+      "end": "結束日期"
+    }, 
+    "edit_cell" : { 
+      "confirm_text": "執行修改",
+      "title": "委託修改可執行",
+      "content": "將價格更改至%{newValue}可能會使該委託立刻與市場中的其他委託成交。請確認更改。"
     }
   },
   "profile": {

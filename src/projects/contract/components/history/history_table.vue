@@ -236,7 +236,7 @@
           <div flex="dir:top">
             <p> {{ $t('FUTURE_&USD', {currency: cholding.currency.replace('USD','')} ) }}</p>
             <p :class="[cholding.holding > 0 && 'color-up'||'color-down']"> {{ cholding.holding > 0 ? $t('contract_action_button_up_r') : $t('contract_action_button_down_r') }} </p>
-            <span>止盈/止损</span>
+            <span>{{$t('contract_page.order_stop_winloss')}}</span>
             <span>
               <label v-if="!cholding.tp_price || cholding.tp_price==='0'" class="color-up">--</label>
               <label v-else class="color-up">{{cholding.tp_price | fixed(cholding.pairInfo.price_scale || 4)}}</label> /  
