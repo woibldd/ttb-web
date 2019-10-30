@@ -1,6 +1,6 @@
 <template>
   <div class="proposer">
-    <div><img :src="`@/assets/images/banner_${isZhCN?'zhongwen':'yingwen'}.png`" width="100%" alt=""></div>
+    <div><img :src="imgsrc" width="100%" alt=""></div>
     <div class="form-content">
       <el-card class="box-card">
         <div slot="header" class="clearfix" style="text-align:center">
@@ -25,7 +25,7 @@ export default {
   },
   data(vm) {
     return {
-      isZhCN,
+      imgsrc:isZhCN?require('@/assets/images/banner_zhongwen.png'):require('@/assets/images/banner_yingwen.png'),
       schema: [
         { fieldType: 'input', prefix: 'avatar', placeholder: vm.$t('Proposer.name'), label: vm.$t('Proposer.name'), vModel: 'name', default: '', required: true },
         { fieldType: 'input', prefix: 'phone', placeholder: vm.$t('Proposer.phone'), label: vm.$t('Proposer.phone'), vModel: 'phone', default: '', required: true },
@@ -77,6 +77,8 @@ export default {
       }
       this.schemaWhite.action = data.host
       this.schemaWhite.data = obj
+      console.log(this.imgsrc);
+      
     })
   },
   methods: {
