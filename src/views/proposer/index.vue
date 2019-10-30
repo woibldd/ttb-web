@@ -37,6 +37,8 @@ export default {
         { fieldType: 'input',  placeholder: vm.$t('Proposer.url'), label: vm.$t('Proposer.url'), vModel: 'url', default: '', required: true },
         { fieldType: 'upload', onSuccess: (res, files) => {
           this.schemaWhite[this.schemaWhite.vModel] = this.schemaWhite.action +'/'+ this.schemaWhite.data.key + files.name
+          console.log(this.schemaWhite.white);
+          
         }, data: {},beforeRemove:()=>{
           this.schemaWhite[this.schemaWhite.vModel] = ''
           return true
@@ -88,6 +90,8 @@ export default {
       const isok = this.$refs['customForm'].verifyAll()
       const isok1 = this.$refs['customForm1'].verifyAll()
       if (isok && isok1) {
+        console.log(Object.assign(isok, isok1));
+        
         insertCoinApply(Object.assign(isok, isok1)).then(res => {
           this.$message.success(this.$t('Proposer.applySuccess'))
           this.$router.push('/')
