@@ -6,7 +6,7 @@ import { getUser } from '@/utils/auth'
 // create an axios instance
 // axios.defaults.withCredentials = true
 const service = axios.create({
-  baseURL:'https://i.ixx.com', // url = base url + request url
+  baseURL:location.hostname === 'https://i.ixx.com'?location.hostname:'https://i.ixex.pro', // url = base url + request url
   withCredentials: true, // send cookies when cross-domain requests
   timeout: 10000 // request timeout
 })
