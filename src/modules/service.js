@@ -1319,6 +1319,14 @@ const service = {
   //盈亏历史走势
   getFutureCloseRealizedDays(params) {
     return getCache('c_future_close_realized_days', () => request('future/account/close_realized_days', params), 1e3)
+  },
+  //查询用户的tag列表
+  futureActivityGet(params) {
+    return request('future/activity/wallet/queryUserTag', params)
+  },
+  //设置用户tag
+  futureActivitySet(params) {
+    return request('future/activity/wallet/setTag', params)
   }
 }
 
