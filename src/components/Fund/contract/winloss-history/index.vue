@@ -55,6 +55,9 @@
             {{ $t('fund.contract.close_side') }}
           </th>
           <th class="table__th">
+            {{ $t('fund.contract.amount') }}
+          </th>
+          <th class="table__th">
             {{ $t('fund.contract.into_price') }}
           </th> 
           <th class="table__th">
@@ -78,9 +81,14 @@
           :key="index">
           <td class="table__td">{{ item.currency }}</td>
           <td class="table__td">{{ $t(closeType[item.side]) }}</td>
+          <td class="table__td">{{ item.amount }}</td>
           <td class="table__td"> {{item.open_price | fixed(valueScale)}} </td>
           <td class="table__td">{{ item.sell_price | fixed(valueScale)}} </td>
-          <td class="table__td">{{ item.realized | fixed(8)}} </td>
+          <td class="table__td">
+            <span :class="item.realized > 0 ? 'color-up' : 'color-down'" >
+              {{ item.realized | fixed(8)}} 
+            </span>
+          </td>
           <td class="table__td">{{ $t(tradeType[item.origin]) }}</td>
           <td class="table__td pr-10">{{ (item.create_time / 1000) | date }}</td> 
         </tr>
@@ -233,6 +241,13 @@ export default {
 
 
 <style lang="scss" scoped>
+
+  .color-up { 
+    color:#08C988; 
+  }
+  .color-down { 
+    color:#F24E4D; 
+  }
   .bgcolor-unp { 
     color:#08C988; 
     font-size: 24px;

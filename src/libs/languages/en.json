@@ -209,11 +209,11 @@
   "deposit_address": "Address",
   "address_manage": "Address Manage",
   "add_address_error": "Address is required",
-  "copyed": "Copyed",
-  "link_copyed": "Share Link has Copyed",
+  "copyed": "Copied",
+  "link_copyed": "Share Link has Copied",
   "deposit_hint_addr": "This address is only used to receive %{coin}. Do not send other digital asset to this address. If you do it wont be recoverable.",
   "deposit_hint_min": "Minimum deposit amount: %{min}.",
-  "deposit_hint_confirm": "%{coin} transfers must be confirmed by the %{confirm} blockchain network",
+  "deposit_hint_confirm": "%{coin} transfer must be confirmed by the %{confirm} blockchain network",
   "profile_left_invite_safety": "Security",
   "kyc_ph_id": "Please fill in the certificate number",
   "kyc_passport": "Passport",
@@ -749,7 +749,7 @@
   "have": "Have",
   "none": "None",
   "transaction_fees": "Transaction Fees",
-  "transaction_pair": "Transaction Pair",
+  "transaction_pair": "Trading",
   "maker": "Maker",
   "taker": "Taker",
   "rate_tips_a": "Maker fees are paid when you add liquidity to our order book, by placing a limit order under the last trade price for buy and above the last trade price for sell.",
@@ -1886,8 +1886,8 @@
   "footer_application_coin": "Coin listing application",
   "otc_trade": "Fiat",
   "otc_tips": "Add WeChat Please note",
-  "trading_fees": "trading fee ",
-  "contract_fees": "contract fee",
+  "trading_fees": "Spot Trading",
+  "contract_fees": "Perpetual Contracts",
   "contract_fee_rate_current_tips": "<a>Current rate：</a><br/>Current funding rate is %{feeRate}，When the Funding Rate is positive, longs pay shorts. When it is negative, shorts pay longs。",
   "transfer_side": "Transfer",
   "transfer_amount": "Amount",
@@ -2542,27 +2542,28 @@
       }
     },
     "contract": {
-      "day": " Days",
+      "day": " Days", 
       "start": "Start",
       "end": "End",
       "winloss_record": "P&L Record",
       "contract_name": "Contract",
       "future": "Perpetual",
       "query": "Query",
-      "close_side": "Closing Direction",
+      "close_side": "Direction",
       "into_price": "Entry Price",
       "out_price": "Exit Price",
       "close_realized": "Closed P&L",
       "close_type": "Exit Type",
       "close_datetime": "Closing Time",
-      "close_side_1": "Buy Short",
-      "close_side_2": "Sell Long",
+      "close_side_1": "Short",
+      "close_side_2": "Long",
       "close_type_1": "Transaction",
       "close_type_2": "Forced Liquidation",
       "total_realized": "Accumulated P&L calculation",
       "current_day_realized": " Current day  settled P&L",
       "unrealized_mark_price": "Unsettled P&L (Mark Price)",
-      "unrealized_last_price": "Unsettled P&L (Order Book Price)"
+      "unrealized_last_price": "Unsettled P&L (Order Book Price)",
+      "amount":"Qty"
     }
   },
   "profile": {
@@ -2736,17 +2737,28 @@
   "fee": {
     "contract": {
       "leverage" : "Leverage" ,
-      "provision_fee" :"Provision of Liquidity Fees",
-      "withdraw_fee" :"Withdraw Liquidity Fee",
-      "capital_fee" :"Capital Fee",
-      "capital_fee_period" :"Capital Fee Period",
-      "next_capital_fee" :"Next Capital Fee",
+      "provision_fee" :"Maker Fees",
+      "withdraw_fee" :"Taker Fees",
+      "capital_fee" :"Funding Rate",
+      "capital_fee_period" :"Interval for Funding Rate",
+      "next_capital_fee" :"Next Funding Fee",
       "every_8_hours" :"Every 8 hours",
       "tips_1": "Maker fees are paid when you add liquidity to our order book, by placing a limit order under the last trade price for buy and above the last trade price for sell.",
       "tips_2": "Taker fees are paid when you remove liquidity from our order book, by placing any order that is executed against an order of the orderbook. (Please note when your limit order is executed against other user's limit order and his/her order placed earlier than your order, you will pay taker fees.)",
       "tips_3": "Taker means that the limit order or market order you place is executed with the current maker.",
       "tips_4": "When the order you placed is filled by others orders, you need to pay the taker fees.", 
       "tips_5": "Our perpetual contracts, such as BTC perpetual contracts, have their capital costs exchanged between holders of multiple and short positions at regular intervals. In your trading history, a positive amount means that you paid fund during this period while a negative amount means that you received fund. The platform does not pay or charge any fund fees"
+    }
+  },
+  "trading_page": {
+    "mpv_modal": {
+      "tips": "Tips",
+      "content_a": "Please read the content carefully:",
+      "content_b": "According to the legal regulatory requirements of the MPV project, the MPV project needs to obtain the following information from you:",
+      "content_c": "MPV holder's account number, name, ID number, email, MPV volume information, deposit/withdrawal information, MPV transfer information.",
+      "content_d": "*his will not affect your withdrawal function",
+      "content_e": "《MPV Additional Terms》",
+      "chk_text": "Read and Agree" 
     }
   }
 }
