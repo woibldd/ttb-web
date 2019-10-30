@@ -36,7 +36,7 @@ export default {
         { fieldType: 'input', placeholder: vm.$t('Proposer.project_name'), label: vm.$t('Proposer.project_name'), vModel: 'project_name', default: '', required: true },
         { fieldType: 'input',  placeholder: vm.$t('Proposer.url'), label: vm.$t('Proposer.url'), vModel: 'url', default: '', required: true },
         { fieldType: 'upload', onSuccess: (res, files) => {
-          this.schemaWhite[this.schemaWhite.vModel] = this.schemaWhite.data.key + files.name
+          this.schemaWhite[this.schemaWhite.vModel] = this.schemaWhite.action +'/'+ this.schemaWhite.data.key + files.name
         }, data: {},beforeRemove:()=>{
           this.schemaWhite[this.schemaWhite.vModel] = ''
           return true
