@@ -2418,7 +2418,7 @@
     "email": "邮箱",
     "project": "请注明您是项目方，还是项目推荐人",
     "projectOptions": [{"label":"项目方","value":1},{"label":"项目推荐人","value":2}],
-    "project_name": "项目全称",
+    "project_name": "项目全称（提供中英全名）",
     "url": "官方网站",
     "white": "项目白皮书",
     "white_url": "最新版白皮书链接",
