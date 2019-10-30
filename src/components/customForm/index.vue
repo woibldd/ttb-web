@@ -85,11 +85,13 @@ export default {
   methods: {
     verifyAll() {
       const obj = {}
+      console.log(this.$attrs);
+      
       this.schema.forEach(item => {
         // if (typeof item[item.vModel] === "string")
         //   item[item.vModel] = item[item.vModel].tirm();
-        if (item.required && isEmpty(item[item.vModel]) && item[item.vModel] !== 0) item.error = item.errorMassage || '此项必填'
-        else if (item.validate && !item.validate(item)) item.error = item.errorMassage || '不合规则'
+        if (item.required && isEmpty(item[item.vModel]) && item[item.vModel] !== 0) item.error = item.errorMassage || this.$attrs.errorMassage  || '此项必填'
+        else if (item.validate && !item.validate(item)) item.error = item.errorMassage|| '不合规则'
         else item.error = ''
         obj[item.vModel] = item[item.vModel]
       })

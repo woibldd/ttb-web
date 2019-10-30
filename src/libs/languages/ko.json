@@ -2350,7 +2350,7 @@
     "wechat": "Wechat",
     "telegram": "Telegram",
     "email": "E-mail",
-    "project": "Please indicate whether you are the project party or the projec",
+    "project": "Please indicate whether you are the project party or the project recommender",
     "projectOptions": [{"label":"Project Party","value":1},{"label":"Project Recommender","value":2}],
     "project_name": "Project Name（Please Provide Both English/Chinese Name）",
     "url": "Official Website",
@@ -2366,13 +2366,17 @@
     "scheme" :"Token Distribution Plan",
     "precision": "Token Type Accuracy",
     "locked": "Token Lock Program And Unlock Cycle",
-    "report_url": "Token Smart Contract Security Audit Report Address （If Not, Ple",
-    "price": "ICO Price （How Many Tokens Corresponding To 1ETH or 1BTC Must ",
+    "report_url": "Token Smart Contract Security Audit Report Address",
+    "price": "ICO Price",
     "starting": "Was It New  Publish",
     "startingOptions": [ "no","yes"],
-    "bourse": "If Not, Please Fill List On Which Exchange （If Not, Please Fill",
+    "bourse": "If Not, Please Fill List On Which Exchange",
     "user_number": "Community platform and number of users",
-    "plan_time": "Expect Listing Time"
+    "plan_time": "Expect Listing Time",
+    "errorMassage":"Option is required",
+    "applySuccess":"Apply Success",
+    "verifyText":"format error ",
+    "submit":"Submit"
   },
   "otc": {
     "b_price_i": "100~50000 CNY"

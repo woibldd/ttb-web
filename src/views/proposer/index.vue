@@ -6,9 +6,9 @@
         <div slot="header" class="clearfix" style="text-align:center">
           {{$t('Proposer.title')}}
         </div>
-        <customForm ref="customForm" :schema="schema" label-position="top" />
-        <customForm ref="customForm1" :schema="schema1" label-position="top" />
-        <el-button style="width:100%" type="primary" @click="handleClick">提交</el-button>
+        <customForm ref="customForm"  :errorMassage="$t('Proposer.errorMassage')" :schema="schema" label-position="top" />
+        <customForm ref="customForm1" :errorMassage="$t('Proposer.errorMassage')" :schema="schema1" label-position="top" />
+        <el-button style="width:100%" type="primary" @click="handleClick">{{$t('Proposer.submit')}}</el-button>
       </el-card>
     </div>
   </div>
@@ -28,17 +28,17 @@ export default {
       actionUrl: '',
       schema: [
         { fieldType: 'input', prefix: 'avatar', placeholder: vm.$t('Proposer.name'), label: vm.$t('Proposer.name'), vModel: 'name', default: '', required: true },
-        { fieldType: 'input', prefix: 'phone', placeholder: vm.$t('Proposer.phone'), errorMassage: "输入正确的手机号", validate: obj => validPhone(obj.phone), label: vm.$t('Proposer.phone'), vModel: 'phone', default: '', required: true },
+        { fieldType: 'input', prefix: 'phone', placeholder: vm.$t('Proposer.phone'), label: vm.$t('Proposer.phone'), vModel: 'phone', default: '', required: true },
         { fieldType: 'input', prefix: 'wechat', placeholder: vm.$t('Proposer.wechat'), label: vm.$t('Proposer.wechat'), vModel: 'wechat', default: '' },
         { fieldType: 'input', prefix: 'article', placeholder: vm.$t('Proposer.telegram'), label: vm.$t('Proposer.telegram'), vModel: 'telegram', default: '' },
-        { fieldType: 'input', prefix: 'email', placeholder: vm.$t('Proposer.email'), errorMassage: '请输入正确邮箱', validate: obj => validEmail(obj.email), label:vm.$t('Proposer.email'), vModel: 'email', default: '', required: true },
+        { fieldType: 'input', prefix: 'email', placeholder: vm.$t('Proposer.email'),validate: obj => validEmail(obj.email),errorMassage:vm.$t('Proposer.verifyText'), label:vm.$t('Proposer.email'), vModel: 'email', default: '', required: true },
         { fieldType: 'radio-group', prefixIcon: 'el-icon-search', options: vm.$t('Proposer.projectOptions'), label: vm.$t('Proposer.project'), vModel: 'project', default: 1, required: true },
         { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.project_name'), label: vm.$t('Proposer.project_name'), vModel: 'project_name', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.url'), label: vm.$t('Proposer.url'), errorMassage: '请输入正确的网站', vModel: 'url', validate: obj => validURL(obj.url), default: '', required: true },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.url'), label: vm.$t('Proposer.url'), vModel: 'url', default: '', required: true },
         { fieldType: 'upload', onSuccess: (res, files) => {
           this.schemaWhite[this.schemaWhite.vModel] = this.schemaWhite.data.key + files.name
-        }, data: {}, slotDefault: `<i class="el-icon-plus avatar-uploader-icon"></i><span style="color:#999">${vm.$t('Proposer.white')}<span>`, errorMassage: '此项必传', action: '', label: vm.$t('Proposer.white'), vModel: 'white', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.white_url'), label: vm.$t('Proposer.white_url'), validate: obj => validURL(obj.white_url), vModel: 'white_url', default: '', required: true },
+        }, data: {}, slotDefault: `<i class="el-icon-plus avatar-uploader-icon"></i><span style="color:#999">${vm.$t('Proposer.white')}<span>`, action: '', label: vm.$t('Proposer.white'), vModel: 'white', required: true },
+        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.white_url'), label: vm.$t('Proposer.white_url'), vModel: 'white_url', default: '', required: true },
         { fieldType: 'input',type:'textarea', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.synopsis'), label: vm.$t('Proposer.synopsis'), vModel: 'synopsis', default: '', required: true },
         { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.currency'), label: vm.$t('Proposer.currency'), vModel: 'currency', default: '', required: true }
       ],
@@ -85,7 +85,8 @@ export default {
       const isok1 = this.$refs['customForm1'].verifyAll()
       if (isok && isok1) {
         insertCoinApply(Object.assign(isok, isok1)).then(res => {
-          this.$message.success('申请成功')
+          this.$message.success(this.$t('Proposer.applySuccess'))
+          this.$router.push('/')
         })
       }
     }

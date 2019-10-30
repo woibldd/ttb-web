@@ -2312,7 +2312,11 @@
     "startingOptions": [ "否","是"],
     "bourse": "已上币交易所",
     "user_number": "社群平台及用户数",
-    "plan_time": "计划上币时间"
+    "plan_time": "计划上币时间",
+    "errorMassage":"选项必填",
+    "applySuccess":"申请成功",
+    "verifyText":"格式错误",
+    "submit":"提交"
   },
   "otc": {
     "b_price_i": "100~50000 CNY"
