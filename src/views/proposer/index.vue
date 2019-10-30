@@ -3,7 +3,7 @@
     <div><img :src="imgsrc" width="100%" alt=""></div>
     <div class="form-content">
       <el-card class="box-card">
-        <div slot="header" class="clearfix" style="text-align:center;width:60%;maring:0 auto">
+        <div slot="header" class="clearfix" style="text-align:center;width:60%;margin:0 auto">
           {{$t('Proposer.title')}}
         </div>
         <customForm ref="customForm"  :errorMassage="$t('Proposer.errorMassage')" :schema="schema" label-position="top" />
@@ -37,7 +37,7 @@ export default {
         { fieldType: 'input',  placeholder: vm.$t('Proposer.url'), label: vm.$t('Proposer.url'), vModel: 'url', default: '', required: true },
         { fieldType: 'upload', onSuccess: (res, files) => {
           this.schemaWhite[this.schemaWhite.vModel] = this.schemaWhite.data.key + files.name
-        }, data: {},"show-file-list":"false",beforeRemove:()=>{
+        }, data: {},beforeRemove:()=>{
           this.schemaWhite[this.schemaWhite.vModel] = ''
           return true
         }, slotDefault: `<i class="el-icon-plus avatar-uploader-icon"></i><span style="color:#999">${vm.$t('Proposer.white')}<span>`, action: '', label: vm.$t('Proposer.white'), vModel: 'white',multiple:false, required: true },
@@ -53,7 +53,7 @@ export default {
         { fieldType: 'input',  placeholder: vm.$t('Proposer.scheme'), label: vm.$t('Proposer.scheme'), vModel: 'scheme', default: '', required: true },
         { fieldType: 'input',  placeholder: vm.$t('Proposer.precision'), label: vm.$t('Proposer.precision'), vModel: 'precision', default: '', required: true },
         { fieldType: 'input',  placeholder: vm.$t('Proposer.locked'), label: vm.$t('Proposer.locked'), vModel: 'locked', default: '', required: true },
-        { fieldType: 'input',  placeholder: vm.$t('Proposer.report_url'), label: vm.$t('Proposer.report_url'), vModel: 'report_url', default: '', required: true },
+        { fieldType: 'input',  placeholder: vm.$t('Proposer.report_url'), label: vm.$t('Proposer.report_url'), vModel: 'report_url', default: ''},
         { fieldType: 'input',  placeholder: vm.$t('Proposer.price'), label: vm.$t('Proposer.price'), vModel: 'price', default: '', required: true },
         { fieldType: 'radio-group',  options: vm.$t('Proposer.startingOptions'), optValue: 'index', label:vm.$t('Proposer.starting'), vModel: 'starting', default: 0, required: true },
         { fieldType: 'input',  placeholder: vm.$t('Proposer.bourse'), label:vm.$t('Proposer.bourse'), vModel: 'bourse', default: '' },
@@ -80,7 +80,6 @@ export default {
       }
       this.schemaWhite.action = data.host
       this.schemaWhite.data = obj
-      console.log(this.imgsrc);
       
     })
   },

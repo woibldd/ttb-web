@@ -27,8 +27,8 @@ console.log(locale);
 
 Vue.use(VueI18n)
 utils.$i18n = new VueI18n({
-  fallbackLocale: 'en',
-  locale: 'en',
+  // fallbackLocale: 'en',
+  locale: localStorage.getItem('locale')||'en',
   silentTranslationWarn: true, // process.env.NODE_ENV === 'production',
   messages: {
     en: actions.replaceName(en)
