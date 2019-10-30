@@ -2138,8 +2138,8 @@
         "position": "成交後的倉位大小",
         "liq_price": "預期強平價格",
         "difference": "標記價格/預期強平價格 差異",
-        "stop_win": "止盈USD",
-        "stop_loss": "止损USD",
+        "stop_win": "止盈%{unit}",
+        "stop_loss": "止损%{unit}",
         "stop_win_tips": "%{triggerType} %{triggerSide} 至 %{triggerPrice} 将触发 市价止盈单 预计 盈利： %{realized} BTC",
         "stop_loss_tips": "%{triggerType} %{triggerSide} 至 %{triggerPrice} 将触发 市价止损单 预计 亏损： %{realized} BTC"
       }
@@ -2161,7 +2161,12 @@
       },
       "history": {
         "contract_complete_deal": "已成交量/剩余量"
-      }
+      },
+      "edit_cell" : { 
+        "edit_price_pop_title": "委託修改可執行", 
+        "edit_price_pop_content": "將價格更改至%{newValue}可能會使該委託立刻與市場中的其他委託成交。請確認更改。", 
+        "edit_price_pop_confirm": "執行修改"
+      } 
     },
     "pair_nav":{ 
       "24h_h": "24H最高價",
@@ -2220,11 +2225,6 @@
       "day": "日", 
       "start": "開始日期",
       "end": "結束日期"
-    }, 
-    "edit_cell" : { 
-      "confirm_text": "執行修改",
-      "title": "委託修改可執行",
-      "content": "將價格更改至%{newValue}可能會使該委託立刻與市場中的其他委託成交。請確認更改。"
     }
   },
   "profile": {
@@ -2328,8 +2328,78 @@
       "goto":"前往",
       "pageClassifier":"页"
     },
+    "datepicker": {
+      "now": "現在",
+      "today": "今天",
+      "cancel": "取消",
+      "clear": "清空",
+      "confirm": "確認",
+      "selectDate": "選擇日期",
+      "selectTime": "選擇時間",
+      "startDate": "開始日期",
+      "startTime": "開始時間",
+      "endDate": "結束日期",
+      "endTime": "結束時間",
+      "prevYear": "前一年",
+      "nextYear": "後一年",
+      "prevMonth": "上個月",
+      "nextMonth": "下個月",
+      "year": "年",
+      "month1": "1 月",
+      "month2": "2 月",
+      "month3": "3 月",
+      "month4": "4 月",
+      "month5": "5 月",
+      "month6": "6 月",
+      "month7": "7 月",
+      "month8": "8 月",
+      "month9": "9 月",
+      "month10": "10 月",
+      "month11": "11 月",
+      "month12": "12 月", 
+      "weeks": {
+        "sun": "日",
+        "mon": "一",
+        "tue": "二",
+        "wed": "三",
+        "thu": "四",
+        "fri": "五",
+        "sat": "六"
+      },
+      "months": {
+        "jan": "一月",
+        "feb": "二月",
+        "mar": "三月",
+        "apr": "四月",
+        "may": "五月",
+        "jun": "六月",
+        "jul": "七月",
+        "aug": "八月",
+        "sep": "九月",
+        "oct": "十月",
+        "nov": "十一月",
+        "dec": "十二月"
+      }
+    },
     "table":{
       "emptyText":"无数据"
+    }
+  }, 
+  "fee": {
+    "contract": {
+      "leverage" : "杠杆" ,
+      "provision_fee" :"提供流動性費率",
+      "withdraw_fee" :"選取流動性費率",
+      "capital_fee" :"資金費率",
+      "capital_fee_period" :"資金費率時間段",
+      "next_capital_fee" :"下一資金費率",
+      "every_8_hours" :"每8小時",
+      "tips_1": "掛單是你所下的限價單並未與當前掛單成交，並被放在買賣盤中等待成交的擺單，它增加了買賣盤的流動性。",
+      "tips_2": "當其他人的擺單主動與你所下的擺單成交，你將支付掛單交易手續費（請注意當其他人的限價單與你的限價單成交，而下單時間又早於你時，你將支付吃單費）。",
+      "tips_3": "吃單是你所下的限價單或市價單與當前的掛單直接成交。",
+      "tips_4": "當你所下的擺單主動與其他人的擺單成交，你將支付吃單交易手續費。",
+      "tips_5": "我們的永續合約，如BTC永續，其資金費用每隔一段時間在多倉和空倉的持有者之間進行交換。在您的交易歷史中，正數金額意味著你在此時段支付資金而負數金額意味著您收取資金。平臺不支付或收取任何資金費用"
+    
     }
   }
 }

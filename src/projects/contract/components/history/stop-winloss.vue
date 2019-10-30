@@ -7,7 +7,7 @@
           <el-checkbox
             v-model="stopWinState"
             class="c-fff"
-          >{{ $t('contract_page.order_action.modal.stop_win') }}</el-checkbox>
+          >{{ $t('contract_page.order_action.modal.stop_win',{unit: "USD"}) }}</el-checkbox>
         </div>
         <div class="r2">
           <div class="row">
@@ -59,7 +59,7 @@
           <el-checkbox
             class="c-fff"
             v-model="stoplossState"
-          >{{ $t('contract_page.order_action.modal.stop_loss') }}</el-checkbox>
+          >{{ $t('contract_page.order_action.modal.stop_loss',{unit: "USD"}) }}</el-checkbox>
         </div>
         <div class="r2">
           <div class="row">
