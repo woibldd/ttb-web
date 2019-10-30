@@ -82,15 +82,22 @@
     <v-modal :open.sync="showMvpModal">
       <div class="pd-20 mvp-modal">
         <article  class="mt-20 mb-20">
-          <h3>请您认真阅读以下内容：</h3> 
-          <p>根据MPV项目法律监管要求，MPV项目需要获取您的以下信息：</p>
-          <p>MPV持有者的账号、名字、证件号、电邮、MPV成交量信息、充/提币信息、MPV划转信息。</p> 
-        </article> 
-        <div style="text-align:right" class='mb-10'>
-          <el-button  @click="closeModal">不再提醒</el-button>
-          <el-button type='primary' @click="closeModal">确认</el-button>
+          <h3 style="text-align:center; font-size:20px; font-weight: 600; " class="mb-8">{{ $t('trading_page.mpv_modal.tips') }}</h3>  
+          <p  class="mb-20">{{ $t('trading_page.mpv_modal.content_a')}}</p>
+          <p  class="mb-20">{{ $t('trading_page.mpv_modal.content_b')}}</p>
+          <a>{{ $t('trading_page.mpv_modal.content_c')}}</a> 
+        </article>  
+        <p style="text-align:left">{{ $t('trading_page.mpv_modal.content_d')}}</p>
+        <div>
+          <el-checkbox v-model='agreeMPV'>{{$t('trading_page.mpv_modal.chk_text')}}</el-checkbox>
+          <a href="https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360035136651">{{$t("trading_page.mpv_modal.content_e")}}</a>
         </div>
-        <p  style="text-align:right">*这将不会影响您的提币操作</p>
+        <div class="mt-10 mb-15">
+          <el-button type="primary" 
+            style="width: 100%;"
+            :disabled="!agreeMPV"
+          >{{$t('confirm')}}</el-button>
+        </div>
       </div>
     </v-modal>
   </div>
@@ -130,15 +137,17 @@ export default {
     Orderbook,
     PairNav,
     Operate,
-    MobileNav,
-    PairTitle 
+    PairTitle, 
+    MobileNav
   },
   data () {
     return {
       state,
       comps: [],
       isMobile: utils.isMobile(),
-      showMvpModal: false
+      showMvpModal: false,
+      agreeMPV: false,
+      activityList: []  
     }
   },
   watch: {
@@ -146,6 +155,17 @@ export default {
       async handler (pair = '', last) { 
         this.state.pro.lock = true
         const match = pair.match(/^([A-Za-z]*)_([A-Za-z]*)$/)
+
+        //默认可交易
+        this.state.tv.isActivity = true
+        if (match.indexOf('MPV') > -1) {
+          if (this.activityList.indexOf('mvp_user') > -1) {
+            this.showMvpModal = false
+          } else {
+            this.showMvpModal = true
+            this.state.tv.isActivity = false
+          }
+        }
         if (match) {
           this.state.pro.pair = pair
           local.pair = pair
@@ -169,8 +189,7 @@ export default {
     }
   },
   methods: {
-    async refreshBalance () {
-      console.log('refreshBalancerefreshBalancerefreshBalancerefreshBalancerefreshBalancerefreshBalance')
+    async refreshBalance () { 
       const product = this.state.pro.product_name
       const currency = this.state.pro.currency_name
       if (
@@ -236,6 +255,7 @@ export default {
   },
   async created () {
     document.querySelector('.page-loading').classList.add('show')
+    await this.activityWalletGet()
     if (!this.$route.params.pair) {
       const res = await service.getPairList()
       if (res.code) {
@@ -285,6 +305,25 @@ export default {
     this.state.pro.layout = false
     document.querySelector('.page-loading').classList.remove('show')
     document.documentElement.setAttribute('style', '')
+  },
+  activityWalletSet(symbol) {
+    let params = {
+      tagSymbol: symbol
+    }
+    let res = service.futureActivitySet(params)
+    //console.log({res})
+    if (!res.code && res.message == "OK") {
+      this.activityWalletGet()
+      this.state.tv.isActivity = true
+    }
+  },
+  async activityWalletGet() {
+    let params = {} 
+    let res = service.futureActivityGet(params)
+    //console.log({res})
+    if (!res.code) {
+      this.activityList = res.code
+    }
   }
 }
 </script>
@@ -316,7 +355,10 @@ export default {
   display: flex;
   flex-direction: column;
   .mvp-modal {
+    width: 430px;
+    line-height: 1.5em;
     font-size: 14px;
+
     article {
       color: #666;
       h3 {

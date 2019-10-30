@@ -258,8 +258,7 @@ $primary-color: #01CED1;
         background-color: $primary-color !important;
         border-color: $primary-color !important;
         opacity: .8;
-    }
-
+    } 
 }
 .el-button.el-button--buy {
   color: #fff;
@@ -285,6 +284,12 @@ $primary-color: #01CED1;
       border-color: $otc-sell-bg-light !important;
       opacity: .8;
   }
+}
+
+.el-button--primary.is-disabled, .el-button--primary.is-disabled:active, .el-button--primary.is-disabled:focus, .el-button--primary.is-disabled:hover {
+  color: #FFF!important;
+  background-color: #a0cfff!important;
+  border-color: #a0cfff!important;
 }
 
 
