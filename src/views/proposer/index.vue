@@ -3,7 +3,7 @@
     <div><img :src="imgsrc" width="100%" alt=""></div>
     <div class="form-content">
       <el-card class="box-card">
-        <div slot="header" class="clearfix" style="text-align:center">
+        <div slot="header" class="clearfix" style="text-align:center;width:60%;maring:0 auto">
           {{$t('Proposer.title')}}
         </div>
         <customForm ref="customForm"  :errorMassage="$t('Proposer.errorMassage')" :schema="schema" label-position="top" />
@@ -32,30 +32,33 @@ export default {
         { fieldType: 'input', prefix: 'wechat', placeholder: vm.$t('Proposer.wechat'), label: vm.$t('Proposer.wechat'), vModel: 'wechat', default: '' },
         { fieldType: 'input', prefix: 'article', placeholder: vm.$t('Proposer.telegram'), label: vm.$t('Proposer.telegram'), vModel: 'telegram', default: '' },
         { fieldType: 'input', prefix: 'email', placeholder: vm.$t('Proposer.email'),validate: obj => validEmail(obj.email),errorMassage:vm.$t('Proposer.verifyText'), label:vm.$t('Proposer.email'), vModel: 'email', default: '', required: true },
-        { fieldType: 'radio-group', prefixIcon: 'el-icon-search', options: vm.$t('Proposer.projectOptions'), label: vm.$t('Proposer.project'), vModel: 'project', default: 1, required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.project_name'), label: vm.$t('Proposer.project_name'), vModel: 'project_name', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.url'), label: vm.$t('Proposer.url'), vModel: 'url', default: '', required: true },
+        { fieldType: 'radio-group',  options: vm.$t('Proposer.projectOptions'), label: vm.$t('Proposer.project'), vModel: 'project', default: 1, required: true },
+        { fieldType: 'input', placeholder: vm.$t('Proposer.project_name'), label: vm.$t('Proposer.project_name'), vModel: 'project_name', default: '', required: true },
+        { fieldType: 'input',  placeholder: vm.$t('Proposer.url'), label: vm.$t('Proposer.url'), vModel: 'url', default: '', required: true },
         { fieldType: 'upload', onSuccess: (res, files) => {
           this.schemaWhite[this.schemaWhite.vModel] = this.schemaWhite.data.key + files.name
-        }, data: {}, slotDefault: `<i class="el-icon-plus avatar-uploader-icon"></i><span style="color:#999">${vm.$t('Proposer.white')}<span>`, action: '', label: vm.$t('Proposer.white'), vModel: 'white', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.white_url'), label: vm.$t('Proposer.white_url'), vModel: 'white_url', default: '', required: true },
-        { fieldType: 'input',type:'textarea', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.synopsis'), label: vm.$t('Proposer.synopsis'), vModel: 'synopsis', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.currency'), label: vm.$t('Proposer.currency'), vModel: 'currency', default: '', required: true }
+        }, data: {},"show-file-list":"false",beforeRemove:()=>{
+          this.schemaWhite[this.schemaWhite.vModel] = ''
+          return true
+        }, slotDefault: `<i class="el-icon-plus avatar-uploader-icon"></i><span style="color:#999">${vm.$t('Proposer.white')}<span>`, action: '', label: vm.$t('Proposer.white'), vModel: 'white',multiple:false, required: true },
+        { fieldType: 'input',  placeholder: vm.$t('Proposer.white_url'), label: vm.$t('Proposer.white_url'), vModel: 'white_url', default: '', required: true },
+        { fieldType: 'input',type:'textarea',  placeholder: vm.$t('Proposer.synopsis'), label: vm.$t('Proposer.synopsis'), vModel: 'synopsis', default: '', required: true },
+        { fieldType: 'input',  placeholder: vm.$t('Proposer.currency'), label: vm.$t('Proposer.currency'), vModel: 'currency', default: '', required: true }
       ],
       schema1: [
-        { fieldType: 'radio-group', prefixIcon: 'el-icon-search', options: vm.$t('Proposer.typeOptions'), label: vm.$t('Proposer.type'), vModel: 'type', optValue: 'index', default: 0, required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.future_url'), label: vm.$t('Proposer.future_url'), vModel: 'future_url', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.total'), label: vm.$t('Proposer.total'), vModel: 'total', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.amount'), label: vm.$t('Proposer.amount'), vModel: 'amount', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.scheme'), label: vm.$t('Proposer.scheme'), vModel: 'scheme', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.precision'), label: vm.$t('Proposer.precision'), vModel: 'precision', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.locked'), label: vm.$t('Proposer.locked'), vModel: 'locked', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.report_url'), label: vm.$t('Proposer.report_url'), vModel: 'report_url', default: '', required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.price'), label: vm.$t('Proposer.price'), vModel: 'price', default: '', required: true },
-        { fieldType: 'radio-group', prefixIcon: 'el-icon-search', options: vm.$t('Proposer.startingOptions'), optValue: 'index', label:vm.$t('Proposer.starting'), vModel: 'starting', default: 0, required: true },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder: vm.$t('Proposer.bourse'), label:vm.$t('Proposer.bourse'), vModel: 'bourse', default: '' },
-        { fieldType: 'input', prefixIcon: 'el-icon-search', placeholder:vm.$t('Proposer.user_number'), label: vm.$t('Proposer.user_number'), vModel: 'user_number', default: '', required: true },
-        { fieldType: 'date-picker', prefixIcon: 'el-icon-search', valueFormat: 'timestamp', placeholder: vm.$t('Proposer.plan_time'), label: vm.$t('Proposer.plan_time'), vModel: 'plan_time', default: '', required: true }
+        { fieldType: 'radio-group',  options: vm.$t('Proposer.typeOptions'), label: vm.$t('Proposer.type'), vModel: 'type', optValue: 'index', default: 0, required: true },
+        { fieldType: 'input',  placeholder: vm.$t('Proposer.future_url'), label: vm.$t('Proposer.future_url'), vModel: 'future_url', default: '', required: true },
+        { fieldType: 'input',  placeholder: vm.$t('Proposer.total'), label: vm.$t('Proposer.total'), vModel: 'total', default: '', required: true },
+        { fieldType: 'input',  placeholder: vm.$t('Proposer.amount'), label: vm.$t('Proposer.amount'), vModel: 'amount', default: '', required: true },
+        { fieldType: 'input',  placeholder: vm.$t('Proposer.scheme'), label: vm.$t('Proposer.scheme'), vModel: 'scheme', default: '', required: true },
+        { fieldType: 'input',  placeholder: vm.$t('Proposer.precision'), label: vm.$t('Proposer.precision'), vModel: 'precision', default: '', required: true },
+        { fieldType: 'input',  placeholder: vm.$t('Proposer.locked'), label: vm.$t('Proposer.locked'), vModel: 'locked', default: '', required: true },
+        { fieldType: 'input',  placeholder: vm.$t('Proposer.report_url'), label: vm.$t('Proposer.report_url'), vModel: 'report_url', default: '', required: true },
+        { fieldType: 'input',  placeholder: vm.$t('Proposer.price'), label: vm.$t('Proposer.price'), vModel: 'price', default: '', required: true },
+        { fieldType: 'radio-group',  options: vm.$t('Proposer.startingOptions'), optValue: 'index', label:vm.$t('Proposer.starting'), vModel: 'starting', default: 0, required: true },
+        { fieldType: 'input',  placeholder: vm.$t('Proposer.bourse'), label:vm.$t('Proposer.bourse'), vModel: 'bourse', default: '' },
+        { fieldType: 'input',  placeholder:vm.$t('Proposer.user_number'), label: vm.$t('Proposer.user_number'), vModel: 'user_number', default: '', required: true },
+        { fieldType: 'date-picker',  valueFormat: 'timestamp', placeholder: vm.$t('Proposer.plan_time'), label: vm.$t('Proposer.plan_time'), vModel: 'plan_time', default: '', required: true }
       ]
     }
   },

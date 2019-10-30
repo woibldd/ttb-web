@@ -2623,13 +2623,13 @@
     "noData": "No Data"
   }, 
   "Proposer":{
-    "title":"Please fill in the following to submit your application for the",
+    "title":"Please fill in the following to submit your application for the currency. We will contact you as soon as we receive the application.",
     "name" :"Name",
     "phone": "Mobile",
     "wechat": "Wechat",
     "telegram": "Telegram",
     "email": "E-mail",
-    "project": "Please indicate whether you are the project party or the projec",
+    "project": "Please indicate whether you are the project party or the project recommender",
     "projectOptions": [
       {
         "label": "Project Party",
