@@ -4,6 +4,7 @@ import Vue from 'vue'
 import utils from '@/modules/utils'
 
 export default {
+create (channel) {
     const hub = new Vue({
       data () {
         return {
