@@ -6,7 +6,7 @@ export const insertCoinApply = data => request({
   data
 })
 export const getPolicy = () => request({
-  url: '/user/kyc/oss/policy',
+  url: 'user/kyc/oss/policy_currency_apply',
   method: 'post'
 })
 export const whiteBookActionUrl = process.env.VUE_APP_BASE_API_I + '/future/activity/currencyApply/upload'
