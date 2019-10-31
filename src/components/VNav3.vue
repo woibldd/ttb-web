@@ -206,7 +206,7 @@
           class="nav_item right_options">
           <router-link
             :to="{name:'login'}"
-            class="nav_log_res">{{ $t("signin") }}</router-link>
+            class="nav_log_res mr-20">{{ $t("signin") }}</router-link>
           <router-link
             :to="{name:'register'}"
             class="nav_log_res">{{ $t("signup_title") }}</router-link>
