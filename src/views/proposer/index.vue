@@ -90,6 +90,8 @@ export default {
       const isok = this.$refs['customForm'].verifyAll()
       const isok1 = this.$refs['customForm1'].verifyAll()
       if (isok && isok1) {
+        console.log(Object.assign(isok, isok1));
+        
         insertCoinApply(Object.assign(isok, isok1)).then(res => {
           this.$message.success(this.$t('Proposer.applySuccess'))
           this.$router.push('/')
