@@ -212,11 +212,11 @@
             class="nav_log_res">{{ $t("signup_title") }}</router-link>
         </div>
         <div class="right_options"
-          v-else> 
-          
+          v-else>
+
           <!-- 我的资产 -->
-          <div  class="nav_item fund mr-15"  style="margin-left: -10px;"> 
-            <span @click="openDefault('fund')">{{ $t('wallets_nav_asset') }}</span> 
+          <div  class="nav_item fund mr-15"  style="margin-left: -10px;">
+            <span @click="openDefault('fund')">{{ $t('wallets_nav_asset') }}</span>
             <icon name='header-down'  class="mini" />
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
@@ -243,12 +243,12 @@
                 </li>
               </ul>
             </div>
-          </div> 
+          </div>
           <!-- 个人中心 -->
           <div class="nav_item email mr-15 ml-15" >
             <!-- <span @click="openDefault('profile')">{{ desentInfo }}</span> -->
             <span @click="openDefault('profile')">
-              <icon name='header-head' />   
+              <icon name='header-head' />
               <icon name='header-down' class="mini" />
             </span>
             <div class="dropdown-sub-menu" style="margin-left: -39px;">
@@ -268,11 +268,11 @@
                     :to="{name: 'MyOrderNew'}"
                     class="link">{{ $t('my_orders') }}</router-link>
                 </li> -->
-                <li class="dropdown-item pl-24 pr-24">
-                  <router-link
-                    :to="{name: 'ServiceFeeSet'}"
-                    class="link">{{ $t('set_service_fee') }}</router-link>
-                </li>
+<!--                <li class="dropdown-item pl-24 pr-24">-->
+<!--                  <router-link-->
+<!--                    :to="{name: 'ServiceFeeSet'}"-->
+<!--                    class="link">{{ $t('set_service_fee') }}</router-link>-->
+<!--                </li>-->
                 <li class="dropdown-item pl-24 pr-24">
                   <a
                     class="link"
@@ -283,18 +283,18 @@
           </div>
         </div>
         <div class="nav_item ">
-          <router-link 
+          <router-link
             class="download mr-15 ml-15"
-            :to="{name: 'Download'}"> 
+            :to="{name: 'Download'}">
               <icon
                 class="mr-3"
-                name="header-download"/>  
+                name="header-download"/>
           </router-link>
         </div>
         <!-- 帮助中心中心 -->
-        <div class="nav_item help-center" > 
+        <div class="nav_item help-center" >
           <span class="help mr-15 ml-15" @click="openDefault('help')">
-            <icon name='header-help' />  
+            <icon name='header-help' />
           </span>
           <div class="dropdown-sub-menu" style="margin-left: -39px">
             <ul class="dropdown-list pt-10 pb-10">
@@ -325,7 +325,7 @@
             <icon
             :name="'header-'+state.locale"
             class="mr-5"/>
-          </span> 
+          </span>
           <div class="lang_box">
             <a
               @click="switchLang(key)"
@@ -669,9 +669,9 @@ export default {
   .nav_right {
     position: absolute;
     min-width: 320px;
-    height: 60px; 
-    right: 30px; 
-    font-size: 14px; 
+    height: 60px;
+    right: 30px;
+    font-size: 14px;
     display: flex;
     align-items: center;
 
@@ -742,9 +742,9 @@ export default {
       float: left;
       color: #fff;
     }
-    
-    .nav_item { 
-      .iconfont { 
+
+    .nav_item {
+      .iconfont {
         font-size: 20px;
         &.mini {
           font-size: 14px;
@@ -755,16 +755,16 @@ export default {
       .help, .language{
         position: relative;
         &::after {
-          position: absolute;  
+          position: absolute;
           left: -17px;
           top: -3px;
           content: "";
           width: 1px;
           height: 20px;
-          background-color: #aaa; 
+          background-color: #aaa;
           opacity:0.3;
         }
-      } 
+      }
     }
   }
   .nav_right .nav_log_res,
@@ -784,19 +784,19 @@ export default {
     height: 30px;
     float: left;
     color: #fff;
-    line-height: 24px; 
-    margin: 8px 0 0 0px; 
+    line-height: 24px;
+    margin: 8px 0 0 0px;
     position: relative;
-    text-align: center; 
+    text-align: center;
     cursor: pointer;
     z-index: 3;
     .rig {
       display: inline-block;
-      transition: all 0.2s ease-in-out; 
+      transition: all 0.2s ease-in-out;
       vertical-align: middle;
       font-size: 16px;
     }
-    .lang_box{ 
+    .lang_box{
         font-size: 12px;
         width: 110px;
         height: auto;
