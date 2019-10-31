@@ -80,7 +80,7 @@ export default {
         { fieldType: 'input', label: this.$t('Proposer.precision'), vModel: 'precision', default: '', required: true },
         { fieldType: 'input', label: this.$t('Proposer.locked'), vModel: 'locked', default: '', required: true },
         { fieldType: 'input', labelHtml: this.$t('Proposer.report_url'), vModel: 'report_url', default: ''},
-        { fieldType: 'input', label: this.$t('Proposer.price'), vModel: 'price', default: '', required: true },
+        { fieldType: 'input', labelHtml: this.$t('Proposer.price'), vModel: 'price', default: '', required: true },
         { fieldType: 'radio-group',  options: this.$t('Proposer.startingOptions'), optValue: 'index', label:this.$t('Proposer.starting'), vModel: 'starting', default: 0, required: true },
         { fieldType: 'input', labelHtml:this.$t('Proposer.bourse'), vModel: 'bourse', default: '' },
         { fieldType: 'input', label: this.$t('Proposer.user_number'), vModel: 'user_number', default: '', required: true },
