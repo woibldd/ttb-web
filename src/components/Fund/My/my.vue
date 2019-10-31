@@ -323,7 +323,7 @@ export default {
       rates: {},
       search: "",
       hideSmall: false,
-      nodePrice: 1000,
+      nodePrice: 3000,
       pairList: []
     };
   },
