@@ -80,7 +80,7 @@
         <div class="half-wrap left">
           <v-btn
             :label="$t('operate_buy', {coin: state.pro.product_name})"
-            :disabled="!state.tv.isActivity"
+            :disabled="!state.pro.isActivity"
             class="submit-btn"
             radius="4"
             color="ixbuy"
@@ -170,7 +170,7 @@
         <div class="half-wrap right">
           <v-btn
             :label="$t('operate_sell', {coin: state.pro.product_name})"
-            :disabled="!state.tv.isActivity"
+            :disabled="!state.pro.isActivity"
             class="submit-btn"
             radius="4"
             color="ixsell"
