@@ -668,7 +668,7 @@ export default {
   }
   .nav_right {
     position: absolute;
-    min-width: 310px;
+    min-width: 320px;
     height: 60px; 
     right: 30px; 
     font-size: 14px; 
