@@ -212,7 +212,7 @@ export default {
             margin-bottom: 40px; 
           }
           &.en {
-             &li {
+            li {
               margin-bottom: 30px;
             }
           }
