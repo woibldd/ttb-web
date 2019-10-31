@@ -55,7 +55,7 @@
     </div>
     <div class="footer">
       <article>
-        <h3>{{$t('gift.footer.title?')}}</h3>
+        <h3>{{$t('gift.footer.title')}}</h3>
         <p>{{$t('gift.footer.content')}}</p>
       </article>
     </div>
