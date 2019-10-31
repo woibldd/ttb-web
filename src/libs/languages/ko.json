@@ -2486,12 +2486,12 @@
   },
   "gift": {
     "banner": {
-      "btn_text": "立即领取 $60 交易金"
+      "btn_text": "Redeem $60 Trading Bonus"
     },
     "content": { 
-      "tips_1": "注册赠金",
-      "tips_2": "首存赠金",
-      "valuation": "当前等值：%{value} BTC",
+      "tips_1": "Registration Bonus",
+      "tips_2": "First Deposit Bonus",
+      "valuation": "Current Equivalent：%{value} BTC",
       "detail_a":"New successful registered and verification of the account, with a contract account, you can get a $10 equivalent BTC registration transaction bonus (direct withdrawal is not supported ), can be used for platform contract product trading experience;",
       "detail_b":"No deposit required;",
       "detail_c":"After customer service is confirmed, bonus will be automatically remitted to your registered account; ",
@@ -2502,7 +2502,7 @@
       "detail_h":"The bonus will be automatically remitted to your registered account;",
       "detail_i":"Support withdrawal of profitable portion;",
       "detail_j":"The first deposit bonus does not support direct withdrawal, only used as a trading margin.",
-      "btn_text": "领取我的赠金"
+      "btn_text": "Redeem My Bonus"
     },
     "footer": {
       "title":"What is IXX's Referral program?",

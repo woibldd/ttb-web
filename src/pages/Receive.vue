@@ -1,7 +1,8 @@
 <template>
   <div class="receive-container">
     <div class="header">
-      <div class="banner" :style="{backgroundImage: `url(/static/receive/banner-zh-CN.png)`}">
+      <div class="banner" :style="{
+          backgroundImage: state.locale == 'zh-CN' ? `url(/static/receive/banner-zh-CN.png)` : `url(/static/receive/banner-en.png)`}">
         <div class="option">
           <el-button @click="show" class="button" type="primary">{{$t('gift.banner.btn_text')}}</el-button>
         </div>
