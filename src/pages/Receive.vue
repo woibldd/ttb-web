@@ -1,114 +1,288 @@
 <template>
   <div class="receive-container">
     <div class="header">
-      <v-btn>{{$t('立即领取 $60 交易金')}}</v-btn>
+      <div class="banner" :style="{backgroundImage: `url(/static/receive/banner-zh-CN.png)`}">
+        <div class="option">
+          <el-button @click="show" class="button" type="primary">{{$t('gift.banner.btn_text')}}</el-button>
+        </div>
+      </div>
     </div>
     <div class="content">
       <div class="card register">
         <div class="left">
-          <i>{{$t('注册赠金')}}</i>
-          <label >{{ gift_a.symbol + gift_a.amount }}</label>
-          <span>
-            {{ $t('当前等值：0') }}
-          </span>
+          <i>{{$t('gift.content.tips_1')}}</i>
+          <p>
+            <label>{{ gift_a.symbol + gift_a.amount }}</label>
+          </p>
+          <p>
+            <span>{{ $t("gift.content.valuation", {value: gift_a.valueA}) }}</span>
+          </p>
         </div>
         <div class="right">
           <ul>
-            <li>1.{{$t('首次成功注册并认证账户， 开通合约账户，即可获得$10等值的BTC注册交易赠金(不支持直接提取)， 可用于平台合约产品交易体验；')}}  </li>
-            <li>2.{{$t('无需充值； ')}}</li>
-            <li>3.{{$t('客服确认后赠金自动汇入您的注册账户； ')}}</li>
-            <li>4.{{$t('支持盈利部分提现；')}}</li>
-            <li>5.{{$t('新用户专享, 赠金仅用作交易保证金使用。')}}</li>
+            <li>1.{{$t('gift.content.detail_a')}}</li>
+            <li>2.{{$t('gift.content.detail_b')}}</li>
+            <li>3.{{$t('gift.content.detail_c')}}</li>
+            <li>4.{{$t('gift.content.detail_d')}}</li>
+            <li>5.{{$t('gift.content.detail_e')}}</li>
           </ul>
         </div>
       </div>
       <div class="card deposit">
         <div class="left">
-          <i>{{$t('首存赠金')}}</i>
-          <label >{{ gift_b.symbol + gift_b.amount }}</label>
-          <span>
-            {{ $t('当前等值：0') }}
-          </span>
+          <i>{{$t('gift.content.tips_2')}}</i>
+          <p>
+            <label>{{ gift_b.symbol + gift_b.amount }}</label>
+          </p>
+          <p>
+            <span>{{ $t("gift.content.valuation", {value: gift_b.valueB}) }}</span>
+          </p>
         </div>
         <div class="right">
-          <ul> 
-            <li>1.{{$t('只限首次合约账户充值并满足条件的用户，将额外获得$50等值的BTC；')}}  </li>
-            <li>2.{{$t('充值金额超过 (含) 0.2BTC；')}}</li>
-            <li>3.{{$t('赠金自动汇入您的注册账户；')}}</li>
-            <li>4.{{$t('支持盈利部分提现；')}}</li>
-            <li>5.{{$t('首存赠金不支持直接提取， 仅用作交易保证金使用。')}}</li>
+          <ul>
+            <li>1.{{$t('gift.content.detail_f')}}</li>
+            <li>2.{{$t('gift.content.detail_g')}}</li>
+            <li>3.{{$t('gift.content.detail_h')}}</li>
+            <li>4.{{$t('gift.content.detail_i')}}</li>
+            <li>5.{{$t('gift.content.detail_j')}}</li>
           </ul>
         </div>
       </div>
       <div class="option">
-        <v-btn>{{$t('领取我的赠金')}}</v-btn>
+        <el-button  @click="show" class="button" type="primary">{{$t('gift.content.btn_text')}}</el-button>
       </div>
     </div>
     <div class="footer">
-      <article> 
-        <h3>{{$t('什么是交易赠金?')}}</h3> 
-        <p>
-          {{$t('交易赠金可以让您在真实交易环境中，无风险零成本地体验我们的合约产品。成功注册认证或首次合约账户充值超过(含) 0.2BTC时， 即可获得IXX合约交易赠金，赠金自动汇入您的注册账户后，可以开始交易。充值后，盈利部分支持提现。请注意任何的提现行为都会导致个人所得交易赠金清零。')}}
-        </p>
+      <article>
+        <h3>{{$t('gift.footer.title?')}}</h3>
+        <p>{{$t('gift.footer.content')}}</p>
       </article>
     </div>
+    <v-modal :open.sync="showModal">
+      <div class="pop">
+        <div class="title">恭喜您成功完成注册！</div>
+        <p class="describe">联系官方客服，领取最高$60合约交易金!</p>
+        <div class="qr-code">
+          <div class="lt left">
+            <img class="footer_ewm" src="../assets/ixx_kefu_big.jpg" />
+            <p class="footer_ewm_ltxt">{{ $t('添加官方微信客服') }}</p>
+          </div>
+          <div class="lt right">
+            <img class="footer_ewm" src="../assets/kefu_telegran_ewm.jpg" />
+            <p class="footer_ewm_ltxt">{{ $t('加入Telegram电报群') }}</p>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="item">官方邮箱：service@ixx.com</div>
+          <div class="item">关注微博@ixx数字资产交易所</div>
+          <div class="item">关注推特@IXX_Official</div>
+        </div>
+      </div>
+    </v-modal>
   </div>
 </template>
 
 <script>
+import service from "@/modules/service";
+import { state } from "@/modules/store";
 export default {
   data() {
     return {
+      state,
+      showModal: false,
       rates: [],
       gift_a: {
         amount: 10,
         symbol: "$",
         unit: "USD"
       },
-      gift_b:  {
+      gift_b: {
         amount: 60,
         symbol: "$",
         unit: "USD"
-      },
+      }
+    };
+  },
+  methods: {
+    show() {
+      if (!this.isLogin) {
+        this.$router.replace({
+          name: "login"
+        })
+      } else {
+        this.showModal = true;
+      }
     }
   },
-  created() {
-    let res = await service.getRates({currency: 'BTC'})  
+  computed: { 
+    isLogin () {
+      return this.state.userInfo !== null
+    },
+    valueA() {
+      if (this.rates)
+        return this.$big(this.gift_a.amount).div(this.rates.USD || 1).round(8, 0).toFixed(8)
+      return ''
+    },
+    valueB() {
+      if (this.rates)
+        return this.$big(this.gift_b.amount).div(this.rates.USD  || 1).round(8, 0).toFixed(8)
+      return ''
+    }
+  },
+  async created() {
+    let res = await service.getRates({ currency: "BTC" });
     if (!!res && !res.code) {
-      this.rates = res.data.BTC
+      this.rates = res.data.BTC;
     }
   }
-}
-</script>
+};
+</script> 
 
 <style lang="scss" scope>
 .receive-container {
-  width: 1300px;
   .header {
-    height: 450px;
-    background-color: skyblue;
+    height: 400px;
+    .banner {
+      position: relative;
+      height: 400px;
+      width: 100%;
+      background-repeat: no-repeat;
+      background-position: center center;
+      text-align: center;
+      .option {
+        position: absolute;
+        top: 240px;
+        width: 100%;
+        text-align: center;
+      }
+    }
+    .button {
+      width: 300px;
+    }
   }
   .content {
-    background-color: lemonchiffon;
-    .card { 
-      margin-top:80px;
+    .card {
       height: 340px;
+      padding: 20px;
       width: 1088px;
-      border: 1px solid $pirmary;
+      margin: 40px auto 0;
+      &.register {
+        background-image: url(/static/receive/card-a.png);
+      }
+      &.deposit {
+        background-image: url(/static/receive/card-b.png);
+      }
       .left {
         width: 450px;
+        float: left;
+        color: #fff;
+        p {
+          text-align: center;
+        }
+        i {
+          display: block;
+          margin: 45px 0 10px 45px;
+          width: 110px;
+          height: 34px;
+          line-height: 34px;
+          font-weight: bold;
+          background: rgba(13, 147, 130, 1);
+          border-radius: 2px;
+          text-align: center;
+        }
+        label {
+          font-size: 123px;
+        }
+        span {
+          font-size: 18px;
+        }
       }
       .right {
-        right: 638px;
+        width: 500px;
+        float: left;
+        margin: 35px 42px 35px 90px;
+        ul {
+          li {
+            margin-bottom: 40px;
+          }
+        }
+      }
+      &:after {
+        display: block;
+        content: "";
+        clear: both;
       }
     }
     .option {
-      margin:80px 0;
+      margin: 60px 0 80px;
+      text-align: center;
+      .button {
+        width: 300px;
+      }
     }
   }
   .footer {
     height: 450px;
-    background-color: gold;
+    background: url(/static/receive/footer.png) center center no-repeat;
+    color: #fff;
+    article {
+      width: 1200px;
+      margin: 0 auto;
+      padding-top: 130px;
+      h3 {
+        text-align: center;
+        font-size: 22px;
+        margin-bottom: 60px;
+      }
+      p {
+        line-height: 40px;
+      }
+    }
+  }
+  .pop {
+    width: 440px;
+    padding: 32px 57px;
+    .title {
+      text-align: center;
+      font-size:18px;
+      margin-bottom: 10px;
+    }
+    .contact, .describe {
+      color: $primary;
+      line-height: 2em; 
+      text-align: center;
+    }
+
+    .qr-code {
+      height: 165px;
+      margin-top: 20px;
+      color: #aaa;
+      .lt {
+        width: 130px;
+        float: left;
+        &.left {
+          margin-left: 65px;
+        }
+        &.right {
+          margin-left: 45px;
+        }
+      }
+      img {
+        height: 125px;
+        width: 125px;
+        border: 1px solid #ccc;
+        margin-bottom: 5px;
+      }
+    }
+
+    .contact {
+      height: 41px;
+      .item {
+        float: left;
+        width: 220px;
+        text-align: center;
+      }
+    }
   }
 }
 </style>

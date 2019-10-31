@@ -2765,5 +2765,30 @@
       "chk_text": "Read and Agree" 
     }
   },
-  "set_service_fee": "Fee setting"
+  "set_service_fee": "Fee setting",
+  "gift": {
+    "banner": {
+      "btn_text": "立即领取 $60 交易金"
+    },
+    "content": { 
+      "tips_1": "注册赠金",
+      "tips_2": "首存赠金",
+      "valuation": "当前等值：%{value} BTC",
+      "detail_a":"New successful registered and verification of the account, with a contract account, you can get a $10 equivalent BTC registration transaction bonus (direct withdrawal is not supported ), can be used for platform contract product trading experience;",
+      "detail_b":"No deposit required;",
+      "detail_c":"After customer service is confirmed, bonus will be automatically remitted to your registered account; ",
+      "detail_d":"Support withdrawal of profitable portion;",
+      "detail_e":" New users are exclusive, and the bonus is only used as a trading margin.",
+      "detail_f":" Only users who have deposit for the first time and meet the conditions will receive an additional $50 equivalent BTC;",
+      "detail_g":"The deposit amount exceeds (including) 0.2BTC;",
+      "detail_h":"The bonus will be automatically remitted to your registered account;",
+      "detail_i":"Support withdrawal of profitable portion;",
+      "detail_j":"The first deposit bonus does not support direct withdrawal, only used as a trading margin.",
+      "btn_text": "领取我的赠金"
+    },
+    "footer": {
+      "title":"What is IXX's Referral program?",
+      "content": "It is a program that aims to reward all our existing loyal traders on crypto markets to share the joy of trading on IXX with their friends, families, colleagues, and acquaintances. Traders can earn a USD 10 bonus (equivalent in BTC) immediately as long as the referred user has deposited at least 0.02 BTC, regardless of the trading volume. Traders can only either participate in the referral program or the affiliate program."
+    }
+  }
 }
