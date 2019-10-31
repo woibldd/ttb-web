@@ -23,45 +23,11 @@ export default {
   components: {
     customForm
   },
-  data(vm) {
+  data() {
     return {
       imgsrc:isZhCN?require('@/assets/images/banner_zhongwen.png'):require('@/assets/images/banner_yingwen.png'),
-      schema: [
-        { fieldType: 'input', prefix: 'avatar', placeholder: vm.$t('Proposer.name'), label: vm.$t('Proposer.name'), vModel: 'name', default: '', required: true },
-        { fieldType: 'input', prefix: 'phone', placeholder: vm.$t('Proposer.phone'), label: vm.$t('Proposer.phone'), vModel: 'phone', default: '', required: true },
-        { fieldType: 'input', prefix: 'wechat', placeholder: vm.$t('Proposer.wechat'), label: vm.$t('Proposer.wechat'), vModel: 'wechat', default: '' },
-        { fieldType: 'input', prefix: 'article', placeholder: vm.$t('Proposer.telegram'), label: vm.$t('Proposer.telegram'), vModel: 'telegram', default: '' },
-        { fieldType: 'input', prefix: 'email', placeholder: vm.$t('Proposer.email'),validate: obj => validEmail(obj.email),errorMassage:vm.$t('Proposer.verifyText'), label:vm.$t('Proposer.email'), vModel: 'email', default: '', required: true },
-        { fieldType: 'radio-group',  options: vm.$t('Proposer.projectOptions'), label: vm.$t('Proposer.project'), vModel: 'project', default: 1, required: true },
-        { fieldType: 'input', placeholder: vm.$t('Proposer.project_name'), label: vm.$t('Proposer.project_name'), vModel: 'project_name', default: '', required: true },
-        { fieldType: 'input',  placeholder: vm.$t('Proposer.url'), label: vm.$t('Proposer.url'), vModel: 'url', default: '', required: true },
-        { fieldType: 'upload', onSuccess: (res, files) => {
-          const data = this.schemaWhite.data
-          this.schemaWhite[this.schemaWhite.vModel] = `${this.schemaWhite.action}/${data.dir}${this.fileName}`
-          console.log(`${this.schemaWhite.action}/${data.dir}${this.fileName}`)
-        }, data: {},beforeRemove:()=>{
-          this.schemaWhite[this.schemaWhite.vModel] = ''
-          return true
-        }, slotDefault: `<i class="el-icon-plus avatar-uploader-icon"></i><span style="color:#999">${vm.$t('Proposer.white')}<span>`, action: '', label: vm.$t('Proposer.white'), vModel: 'white',multiple:false, required: true },
-        { fieldType: 'input',  placeholder: vm.$t('Proposer.white_url'), label: vm.$t('Proposer.white_url'), vModel: 'white_url', default: '', required: true },
-        { fieldType: 'input',type:'textarea',  placeholder: vm.$t('Proposer.synopsis'), label: vm.$t('Proposer.synopsis'), vModel: 'synopsis', default: '', required: true },
-        { fieldType: 'input',  placeholder: vm.$t('Proposer.currency'), label: vm.$t('Proposer.currency'), vModel: 'currency', default: '', required: true }
-      ],
-      schema1: [
-        { fieldType: 'radio-group',  options: vm.$t('Proposer.typeOptions'), label: vm.$t('Proposer.type'), vModel: 'type', optValue: 'index', default: 0, required: true },
-        { fieldType: 'input',  placeholder: vm.$t('Proposer.future_url'), label: vm.$t('Proposer.future_url'), vModel: 'future_url', default: '', required: true },
-        { fieldType: 'input',  placeholder: vm.$t('Proposer.total'), label: vm.$t('Proposer.total'), vModel: 'total', default: '', required: true },
-        { fieldType: 'input',  placeholder: vm.$t('Proposer.amount'), label: vm.$t('Proposer.amount'), vModel: 'amount', default: '', required: true },
-        { fieldType: 'input',  placeholder: vm.$t('Proposer.scheme'), label: vm.$t('Proposer.scheme'), vModel: 'scheme', default: '', required: true },
-        { fieldType: 'input',  placeholder: vm.$t('Proposer.precision'), label: vm.$t('Proposer.precision'), vModel: 'precision', default: '', required: true },
-        { fieldType: 'input',  placeholder: vm.$t('Proposer.locked'), label: vm.$t('Proposer.locked'), vModel: 'locked', default: '', required: true },
-        { fieldType: 'input',  placeholder: vm.$t('Proposer.report_url'), label: vm.$t('Proposer.report_url'), vModel: 'report_url', default: ''},
-        { fieldType: 'input',  placeholder: vm.$t('Proposer.price'), label: vm.$t('Proposer.price'), vModel: 'price', default: '', required: true },
-        { fieldType: 'radio-group',  options: vm.$t('Proposer.startingOptions'), optValue: 'index', label:vm.$t('Proposer.starting'), vModel: 'starting', default: 0, required: true },
-        { fieldType: 'input',  placeholder: vm.$t('Proposer.bourse'), label:vm.$t('Proposer.bourse'), vModel: 'bourse', default: '' },
-        { fieldType: 'input',  placeholder:vm.$t('Proposer.user_number'), label: vm.$t('Proposer.user_number'), vModel: 'user_number', default: '', required: true },
-        { fieldType: 'date-picker',  valueFormat: 'timestamp', placeholder: vm.$t('Proposer.plan_time'), label: vm.$t('Proposer.plan_time'), vModel: 'plan_time', default: '', required: true }
-      ]
+      schema: [],
+      schema1: []
     }
   },
   computed: {
@@ -81,8 +47,45 @@ export default {
         signature: data.signature,
         dir: data.dir
       }
-      this.schemaWhite.action = data.host
-      this.schemaWhite.data = obj
+      // this.schemaWhite.action = data.host
+      // this.schemaWhite.data = obj
+
+      this.schema = [
+        { fieldType: 'input', prefix: 'avatar',  label: this.$t('Proposer.name'), vModel: 'name', default: '', required: true },
+        { fieldType: 'input', prefix: 'phone', label: this.$t('Proposer.phone'), vModel: 'phone', default: '', required: true },
+        { fieldType: 'input', prefix: 'wechat',label: this.$t('Proposer.wechat'), vModel: 'wechat', default: '' },
+        { fieldType: 'input', prefix: 'article', label: this.$t('Proposer.telegram'), vModel: 'telegram', default: '' },
+        { fieldType: 'input', prefix: 'email',validate: obj => validEmail(obj.email),errorMassage:this.$t('Proposer.verifyText'), label:this.$t('Proposer.email'), vModel: 'email', default: '', required: true },
+        { fieldType: 'radio-group',  options: this.$t('Proposer.projectOptions'), label: this.$t('Proposer.project'), vModel: 'project', default: 1, required: true },
+        { fieldType: 'input', label: this.$t('Proposer.project_name'), vModel: 'project_name', default: '', required: true },
+        { fieldType: 'input', label: this.$t('Proposer.url'), vModel: 'url', default: '', required: true },
+        { fieldType: 'upload', onSuccess: (res, files) => {
+          const data = this.schemaWhite.data
+          this.schemaWhite[this.schemaWhite.vModel] = `${this.schemaWhite.action}/${data.dir}${this.fileName}`
+          console.log(`${this.schemaWhite.action}/${data.dir}${this.fileName}`)
+        }, data: {},beforeRemove:()=>{
+          this.schemaWhite[this.schemaWhite.vModel] = ''
+          return true
+        },data:obj, slotDefault: `<i class="el-icon-plus avatar-uploader-icon"></i><span style="color:#999">${this.$t('Proposer.white')}<span>`, action: data.host, label: this.$t('Proposer.white'), vModel: 'white',multiple:false, required: true },
+        { fieldType: 'input', label: this.$t('Proposer.white_url'), vModel: 'white_url', default: '', required: true },
+        { fieldType: 'input',type:'textarea', label: this.$t('Proposer.synopsis'), vModel: 'synopsis', default: '', required: true },
+        { fieldType: 'input', label: this.$t('Proposer.currency'), vModel: 'currency', default: '', required: true }
+      ]
+      this.schema1 = [
+        { fieldType: 'radio-group',  options: this.$t('Proposer.typeOptions'), label: this.$t('Proposer.type'), vModel: 'type', optValue: 'index', default: 0, required: true },
+        { fieldType: 'input', label: this.$t('Proposer.future_url'), vModel: 'future_url', default: '', required: true },
+        { fieldType: 'input',label: this.$t('Proposer.total'), vModel: 'total', default: '', required: true },
+        { fieldType: 'input',  label: this.$t('Proposer.amount'), vModel: 'amount', default: '', required: true },
+        { fieldType: 'input', label: this.$t('Proposer.scheme'), vModel: 'scheme', default: '', required: true },
+        { fieldType: 'input', label: this.$t('Proposer.precision'), vModel: 'precision', default: '', required: true },
+        { fieldType: 'input', label: this.$t('Proposer.locked'), vModel: 'locked', default: '', required: true },
+        { fieldType: 'input', labelHtml: this.$t('Proposer.report_url'), vModel: 'report_url', default: ''},
+        { fieldType: 'input', label: this.$t('Proposer.price'), vModel: 'price', default: '', required: true },
+        { fieldType: 'radio-group',  options: this.$t('Proposer.startingOptions'), optValue: 'index', label:this.$t('Proposer.starting'), vModel: 'starting', default: 0, required: true },
+        { fieldType: 'input', labelHtml:this.$t('Proposer.bourse'), vModel: 'bourse', default: '' },
+        { fieldType: 'input', label: this.$t('Proposer.user_number'), vModel: 'user_number', default: '', required: true },
+        { fieldType: 'date-picker',  valueFormat: 'timestamp',label: this.$t('Proposer.plan_time'), vModel: 'plan_time', default: '', required: true }
+      ]
     })
   },
   methods: {
