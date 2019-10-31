@@ -7,10 +7,12 @@
         @input="handleInput($event,field)"
         @change="handleChange($event,field,index)"
         @select="handleChange($event,field,index)" -->
+        <span v-if="field.labelHtml" slot="label" v-html="field.labelHtml"></span>
       <component :is="field.fieldType?'el-'+field.fieldType:field" v-model="field[field.vModel]" :default-first-option="true" v-bind="filterComponentAttrsfield(field)" clearable v-on="resetEvent(field)">
         <span v-if="field.slotDefault && !field[field.vModel]" v-html="field.slotDefault" />
         <!-- <component :is="field.append" /> -->
         <!-- <i slot="prefix" class="el-input__icon el-icon-search"></i> -->
+        
         <svg-icon  slot="prefix" style="color:#01ced1" v-if="field.prefix" :icon-class="field.prefix" />
         <component :is="field.slot" v-if="field.slot" />
         <template v-if="field.fieldType === 'select'">
@@ -160,6 +162,7 @@ export default {
 <style scoped lang="scss">
 .custom-form{
   .custom-form-item{
+    line-height: normal;
     .custom-input-append{
       position: absolute;
       top: 0px;
