@@ -8,7 +8,7 @@
           class="primary-text pull-right btn"
           @click="transfer"
         >
-          <icon name="exchange"/>
+          <icon name="exchange" />
           {{ $t('account_transfer_come_on') }}
         </a>
         <!-- <div class="ibm pull-right arrow-down pointer">
@@ -49,7 +49,7 @@
             :class="['big','ml-10', {active: currentDealType === currentOrderTypeExt}]"
             :label="$t(currentOrderTypeExt)"
           >
-            <icon slot="btn-right" name="arrow-down-yellow" class="arrow-down-yellow"/>
+            <icon slot="btn-right" name="arrow-down-yellow" class="arrow-down-yellow" />
             <div class="dropdown-menus ul" slot="btn-right">
               <div
                 class="li menu"
@@ -61,7 +61,7 @@
               >{{ $t(item) }}</div>
             </div>
           </v-btn>
-        </div> 
+        </div>
         <!-- 操作区域 -->
         <div class="row op-container mt-10">
           <div
@@ -98,7 +98,7 @@
                 <div
                   class="label"
                   v-tooltip.top-center="{html: true, content: $t('contract_price_tips'), classes: 'contract'}"
-                >{{ $t('contract_page.order_action.price') }}</div>
+                >{{ $t('price') }}</div>
                 <div class="content">
                   <!-- 价格 -->
                   <currency-input
@@ -107,21 +107,20 @@
                     readonly="ture"
                     :placeholder="$t('contract_order_enter_tips3')"
                     :currency="pairInfo.currency_name"
-                    />
+                  />
 
-                  
-                    <!-- @keyup.native="decimal(price)" -->
+                  <!-- @keyup.native="decimal(price)" -->
                   <currency-input
                     v-show="!isMarketOrderType"
                     class="trade"
                     v-model="price"
-                    :accuracy="5" 
+                    :accuracy="pairInfo.accuracy"
                     :readonly="currentDealType === 'market' || isExtMarketOrderType"
                     :class="[input.price.status]"
                     :currency="pairInfo.currency_name"
                     :scale="pairInfo.price_scale"
                     :placeholder="$t('contract_order_enter_tips2')"
-                  /> 
+                  />
                 </div>
               </li>
               <li class="li-trigger-price mb-12" v-if="isExtOrderType">
@@ -169,7 +168,9 @@
             <div class="op-balance flex-lr mt-5">
               <span>
                 {{ $t('contract_action_button_avg') }}:
-                <em class="primary-text">{{ costValueBuyNew }} </em> BTC
+                <em
+                  class="primary-text"
+                >{{ costValueBuyNew }}</em> BTC
               </span>
               <!-- <span>{{ $t('contract_action_button_available_balance') }}: <em class="primary-text">0.00</em> {{ $t('contract_min_unit') }}</span> -->
             </div>
@@ -193,12 +194,14 @@
               </p>
             </div>
             <!-- 成本 -->
-            <div class="op-balance flex-lr mt-5">
+            <div class="op-balance flex-lr mt-10">
               <span
                 v-tooltip.top-center="{html: true, content: $t('contract_action_button_avg_tips'), classes: 'contract'}"
               >
                 {{ $t('contract_action_button_avg') }}:
-                <em class="primary-text">{{ costValueSellNew }} </em> BTC
+                <em
+                  class="primary-text"
+                >{{ costValueSellNew }}</em> BTC
               </span>
               <!-- <span>{{ $t('contract_action_button_available_balance') }}: <em class="primary-text">{{ balance.available_balance }}</em> {{ $t('contract_min_unit') }}</span> -->
             </div>
@@ -240,30 +243,35 @@
               </span>
             </div>
             <!-- <div class="op-balance mt-5" v-if="isExtOrderType"> -->
-            <div class="op-balance  flex-lr  mt-5" v-if="isExtOrderType">
+            <div class="op-balance flex-lr mt-5" v-if="isExtOrderType">
               <span>
                 {{ $t('contract_trigger_type') }}
-                <el-select class="trigger_dropdown"
+                <el-select
+                  class="trigger_dropdown ml-6"
                   @change="setButtonState()"
-                  v-model="currentTriggerType">
-                  <el-option :label="$t('contract_page.order_action.order_price')" :value="1"/>
-                  <el-option :label="$t('contract_mark_price')" :value="2"/>
-                  <el-option :label="$t('contract_index_price')" :value="3"/>
+                  v-model="currentTriggerType"
+                >
+                  <el-option :label="$t('contract_page.order_action.order_price')" :value="1" />
+                  <el-option :label="$t('contract_mark_price')" :value="2" />
+                  <el-option :label="$t('contract_index_price')" :value="3" />
                 </el-select>
               </span>
-              <span>{{ $t('contract_trigger_close') }}
-                <i class="iconfont strong pointer" 
+              <span>
+                {{ $t('contract_trigger_close') }}
+                <i
+                  class="iconfont strong pointer ml-6"
                   v-tooltip.top-center="{html: true, content:  $t('contract_page.order_action.trigger_close_tips'), classes: 'contract'}"
                 />
-                <el-checkbox
-                  class="ml-4"
-                  v-model="closeAfterTrigger"/>
+                <el-checkbox class="ml-4" v-model="closeAfterTrigger" />
               </span>
             </div>
             <!-- <div class="op-balance flex-lr mt-10" v-else-if="currentDealType === 'limit'">
-              <span v-tooltip.top-center="{content: $t('post_only_tips'), classes: 'contract'}" :style="{color:(local.passiveDelegate ? '#22ced0':'')}">
+              <span
+                v-tooltip.top-center="{content: $t('post_only_tips'), classes: 'contract'}"
+                :style="{color:(local.passiveDelegate ? '#22ced0':'')}"
+              >
                 {{ $t('contract_action_passive_delegate') }}
-                <el-checkbox class="ml-4" v-model="local.passiveDelegate"/>
+                <el-checkbox class="ml-4" v-model="local.passiveDelegate" />
               </span>
             </div> -->
           </div>
@@ -273,33 +281,33 @@
     <!-- 持有仓位, btc永续 -->
     <div class="ix-pannel flex mt-4">
       <div class="ix-header">
-        <span>{{ $t('contract_hold_pos') }} : {{$t('FUTURE_&USD', {currency: state.ct.product_name} )}}</span>
+        <span>{{ $t('contract_hold_pos') }} : {{ $t('FUTURE_&USD', {currency: state.ct.product_name}) }}</span>
         <!-- <span class="risk-alert">
           <i
             class="iconfont strong pointer ml-6"
             v-tooltip.top-end="{html: true, content: $t('contract_click_to_wallet'), classes: 'contract'}"
           />
-        </span>  -->
-        <router-link 
-          style="float:right;"
-          :to="{name: 'ContractFee'}">{{ $t('footer_fee') }}</router-link>
+        </span>-->
+        <router-link style="float:right;" :to="{name: 'ContractFee'}">{{ $t('footer_fee') }}</router-link>
       </div>
       <div class="ix-pannel-body risk-limit-wrap">
         <div class="hold__info mb-7">
           <!-- 合约 -->
           <div>
-            <p class="mb-8" :class="{'color-up': currentHolding.holding > 0, 'color-down':currentHolding.holding < 0}">{{ currentHolding.holding || 0 }}</p>
+            <p
+              class="mb-8"
+              :class="{'color-up': currentHolding.holding > 0, 'color-down':currentHolding.holding < 0}"
+            >{{ currentHolding.holding || 0 }}</p>
             <p>{{ $t('contract') }}</p>
           </div>
           <!-- 回报率 -->
           <div v-tooltip.top-center="{content: $t('contract_repay_percent'), classes: 'contract'}">
-            <p class="mb-8">{{ currentHolding.roe || 0 | round(2)}} %</p>
+            <p class="mb-8">{{ currentHolding.roelp || 0 | round(2)}} %</p>
             <p>{{ $t('contract_return_rate') }}</p>
           </div>
         </div>
         <!-- 红绿条 -->
-        <div class="profit-risk-row mb-27"
-          :style="{width: profitRiskWidth }" >
+        <div class="profit-risk-row mb-27" :style="{width: profitRiskWidth }">
           <div
             :style="{left: outerTimesLeft}"
             class="response-times"
@@ -313,7 +321,7 @@
             v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}"
           />
         </div>
-        <div class="outer-slider mb-10"  ref="divlever">
+        <div class="outer-slider mb-10" ref="divlever">
           <!-- 滑块 外面-->
           <leverOperate
             v-if="language"
@@ -333,19 +341,18 @@
               v-tooltip.bottom-end="{html: true, content: $t('contract_risk_limit_tips1'), classes: 'contract'}"
             />
           </span>
-          <span> 
-            {{ (currentHolding.value || 0)  | round(pairInfo.value_scale || 4) | abs }}/{{ riskModal.currentValue }}BTC
+          <span>
+            {{ (currentHolding.value || 0) | round(pairInfo.value_scale || 4) | abs }}/{{ riskModal.currentValue }}BTC
             <!-- {{ pairInfo.product_name }}  -->
             <!-- <span
               @click="editRiskLimit"
-            class="icon icon-edit pointer"/> -->
+            class="icon icon-edit pointer"/>-->
           </span>
         </div>
- 
       </div>
     </div>
     <!-- 资产划转modal -->
-    <transfer-modal :show-modal.sync="showModal"/>
+    <transfer-modal :show-modal.sync="showModal" />
 
     <!-- 调整风险限额modal -->
     <v-modal :open.sync="showRiskModal">
@@ -370,7 +377,7 @@
         </div>
         <div class="risk__status mb-23">
           <div class="row">
-            <div class="col-1 col"/>
+            <div class="col-1 col" />
             <div class="col">{{ $t('contract_risk_limit') }}</div>
             <div class="col">{{ $t('contract_hold_promise_money') }}</div>
             <div class="col">{{ $t('contract_init_promise_money') }}</div>
@@ -401,44 +408,53 @@
 
     <!-- 买入/做多 modal 弹出购买确认-->
     <v-modal :open.sync="showMakeMoreModal" @close="confirmModalClosed">
-      <div class="modal-make-more pd-24">
-        <div
-          class="modal-title mb-10"
-          :class="{'color-up': exchangeDir === 'BUY', 'color-down': exchangeDir === 'SELL'}">
-          <p
-            class="mb-10"
-          >{{ $t(exchangeDir === 'BUY' ? 'contract_action_button_up' : 'contract_action_button_down') }} {{ $t(isExtOrderType ? currentDealType : (currentDealType === 'limit' ? 'contract_limit_price': 'contract_market_price')) }}</p>
-          <p>
-            {{ $t(exchangeDir === 'BUY' ? 'contract_action_button_up' : 'contract_action_button_down') }}
-            <span v-if="isMarketOrderType" class="c-666">
-              <span v-if="currentDealType == 'limit'||
+      <div class="modal-make-more" :style="{height: allowStopWinLoss ? '720px' : '520px'}">
+        <dir class="pl-24 pr-24 pb-24">
+          <div
+            class="modal-title mb-10"
+            :class="{'color-up': exchangeDir === 'BUY', 'color-down': exchangeDir === 'SELL'}"
+          >
+            <p
+              class="mb-10"
+            >{{ $t(exchangeDir === 'BUY' ? 'contract_action_button_up' : 'contract_action_button_down') }} {{ $t(isExtOrderType ? currentDealType : (currentDealType === 'limit' ? 'contract_limit_price': 'contract_market_price')) }}</p>
+            <p>
+              {{ $t(exchangeDir === 'BUY' ? 'contract_action_button_up' : 'contract_action_button_down') }}
+              <span
+                v-if="isMarketOrderType"
+                class="c-666"
+              >
+                <span
+                  v-if="currentDealType == 'limit'||
                 currentDealType == 'contract_lose_stopLimit'||
                 currentDealType == 'contract_lose_stopLimit'
-              ">{{ $t('contract_buy_on_price_piece', {price: price, amount: amount, symbol: $t('FUTURE_&USD', {currency: state.ct.product_name} )}) }}</span>
-              <span else>{{ $t('contract_buy_on_price_piece1', {price: price, amount: amount, symbol: $t('FUTURE_&USD', {currency: state.ct.product_name} )}) }}</span>
-            </span>
-            <span
-              v-else
-              class="c-666"
-            >{{ $t('contract_buy_on_price_piece', {price: price, amount: amount, symbol: $t('FUTURE_&USD', {currency: state.ct.product_name} )}) }}</span>
-          </p>
-          <p class="mt-8" v-if="isExtOrderType">
-            <span
-              class="c-666"
-            >{{ $t(exchangeDir === 'BUY' ? 'contract_trigger_tips_sell' : 'contract_trigger_tips_buy', {price: trigger_price, trigger_type: $t(triggerType)}) }}</span>
-          </p>
-        </div>
-        <div class="modal__holding pt-17 pb-17">
-          <!-- 持有仓位 -->
+              "
+                >{{ $t('contract_buy_on_price_piece', {price: price, amount: amount, symbol: $t('FUTURE_&USD', {currency: state.ct.product_name})}) }}</span>
+                <span
+                  else
+                >{{ $t('contract_buy_on_price_piece1', {price: price, amount: amount, symbol: $t('FUTURE_&USD', {currency: state.ct.product_name})}) }}</span>
+              </span>
+              <span
+                v-else
+                class="c-666"
+              >{{ $t('contract_buy_on_price_piece', {price: price, amount: amount, symbol: $t('FUTURE_&USD', {currency: state.ct.product_name})}) }}</span>
+            </p>
+            <p class="mt-8" v-if="isExtOrderType">
+              <span
+                class="c-666"
+              >{{ $t(exchangeDir === 'BUY' ? 'contract_trigger_tips_sell' : 'contract_trigger_tips_buy', {price: trigger_price, trigger_type: $t(triggerType)}) }}</span>
+            </p>
+          </div>
+          <!--<div class="modal__holding pt-17 pb-17">
+          !-- 持有仓位 --
           <div
             class="mb-17 c-fff"
-          >{{ $t('contract_hold_pos') }} : {{ $t('FUTURE_&USD', {currency: state.ct.product_name} ) }}</div>
-          <!-- 红绿条 -->
+          >{{ $t('contract_hold_pos') }} : {{ $t('FUTURE_&USD', {currency: state.ct.product_name}) }}</div>
+          !-- 红绿条 --
           <div class="profit-risk-row mb-20">
             <div
               class="response-times c-fff f12"
               :style="{left: riskModalTimesLeft}"
-            >{{ mmModal.inputLeverTime  == 0 ? maxTimes : mmModal.inputLeverTime  }}x</div>
+            >{{ mmModal.inputLeverTime == 0 ? maxTimes : mmModal.inputLeverTime }}x</div>
             <span
               class="icon icon-alert"
               v-tooltip.top-center="{content: $t('contract_max_lever') + maxTimes +'x', classes: 'contract'}"
@@ -448,82 +464,247 @@
               v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}"
             />
           </div>
-          <!-- 杠杆操作 input number-->
-          <!-- @change="mmModalLeverChange" -->
+          !-- 杠杆操作 input number--
+          !-- @change="mmModalLeverChange" --
           <leverOperate
             v-if="language"
             @change="mmChangeConfirm"
             :timers-map="timersMap"
             :real-value.sync="mmModal.inputLeverTime"
-            :slider-value.sync="mmModal.sliderLeverTime"/>
-          <!-- 提示信息-->
+            :slider-value.sync="mmModal.sliderLeverTime"
+          />
+          !-- 提示信息--
           <div
             class="stopmarket_tips"
             v-if="isExtOrderType"
-            v-html="$t(mmModal.inputLeverTime == 0 ? 'contract_win_stopMarket_0.info':'contract_win_stopMarket_sell.info' , {times: mmModal.inputLeverTime})"/>
-        </div>
-        <!-- 表格 -->
-        <div class="more__table mt-10">
-          <div class="table__tr c-fff">
-            <div class="col col1">{{ $t('contract_assign_value_raw') }}</div>
-            <div
-              class="col"
-            >{{ orderValue | round(pairInfo.value_scale || 4) }} BTC</div>
-          </div>
-          <div class="table__tr c-fff">
-            <div class="col col1">{{ $t('contract_cost_10_times', {lever: userLeverTime==0 ? maxLeverage : userLeverTime}) }}</div>
-            <div
-              class="col"
-            >{{ mmModal.label === $t('order_side_buy') ? costValueBuyNew : costValueSellNew }} BTC</div>
-          </div>
-          <div class="table__tr c-fff">
-            <div class="col col1">{{ $t('contract_page.order_action.modal.available') }}</div>
-            <div
-              class="col"
-            >{{ balance.available_balance | round(pairInfo.value_scale || 4) }} BTC</div>
-          </div>
-          <div class="table__tr c-fff">
-            <div class="col col1">{{ $t('contract_page.order_action.modal.position') }}</div>
-            <div class="col">{{ currentHodingAmount }}</div>
-          </div>
-          <div class="table__tr c-fff">
-            <div class="col col1">{{ $t('contract_mark_price') }}</div>
-            <div class="col">{{ markPrice }}</div>
-          </div>
-          <div class="table__tr c-fff">
-            <!-- 预计强平价格 -->
-            <div class="col col1">{{ $t('contract_page.order_action.modal.liq_price') }}</div>
-            <div class="col">{{ exchangeDir === 'BUY' ? liqBuyPrice : liqSellPrice | fixed(pairInfo.price_scale || 4) }}</div>
-          </div>
-          <div class="table__tr c-fff">
-            <!-- 差异 -->
-            <div class="col col1">{{ $t('contract_page.order_action.modal.difference') }}</div>
-            <div class="col">
-              <span class="c-primary">{{ liqDiffRate | fixed(2) }}%</span>
-              ({{ liqDiff | fixed(pairInfo.price_scale || 4)  }})
+            v-html="$t(mmModal.inputLeverTime == 0 ? 'contract_win_stopMarket_0.info':'contract_win_stopMarket_sell.info' , {times: mmModal.inputLeverTime})"
+          />
+          </div>-->
+          <!-- 止盈止损 -->
+          <div v-show="allowStopWinLoss" class="more__action mt-10">
+            <div class="stopwin">
+              <div class="r1 c-fff">
+                <el-checkbox
+                  v-model="modalStopWinState"
+                  class="c-fff"
+                >{{ $t('contract_page.order_action.modal.stop_win',{unit: "USD"}) }}</el-checkbox>
+              </div>
+              <div class="r2">
+                <div class="row">
+                  <div class="action__table mt-10">
+                    <div class="table__tr c-fff">
+                      <div class="col">{{ $t('contract_trigger_type') }}</div>
+                      <div class="col2">
+                        <el-select class="trigger_dropdown ml-6" v-model="modalStopWinType">
+                          <el-option
+                            :label="$t('contract_page.order_action.order_price')"
+                            :value="1"
+                          />
+                          <el-option :label="$t('contract_mark_price')" :value="2" />
+                          <el-option :label="$t('contract_index_price')" :value="3" />
+                        </el-select>
+                      </div>
+                      <div class="col2"></div>
+                    </div>
+                    <div class="table__tr c-fff">
+                      <div class="col">{{$t('price')}}</div>
+                      <div class="col2 pl-9">
+                        <currency-input
+                          class="trade"
+                          v-model="modalStopWinPrice"
+                          :class="[input.amount.status]"
+                          :currency="pairInfo.currency_name"
+                          :accuracy="pairInfo.accuracy"
+                          :scale="pairInfo.price_scale"
+                          :placeholder="$t('contract_order_enter_tips2')"
+                        />
+                      </div>
+                      <div class="col2"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="r3">
+                <!-- <p>{{$t('市场价格 上涨 至 8500 将触发 市价止盈单 预计 盈利： 0.00000432BTC')}}</p> -->
+                <!-- <p>{{$t('%{triggerType} %{triggerSide} 至 %{triggerPrice} 将触发 %{triggerOrder} 预计 %{triggerResult}： %{realized}BTC', -->
+                <p>
+                  {{$t('contract_page.order_action.modal.stop_win_tips',
+                  {
+                  triggerType: $t(triggerTypes[modalStopWinType]),
+                  triggerSide: exchangeDir === 'BUY' ? $t("contract_page.rise"): $t("contract_page.fall"),
+                  triggerPrice: modalStopWinPrice,
+                  realized: $big(stopWinRealized).round(8,0).toFixed(8)
+                  })}}
+                </p>
+              </div>
+            </div>
+            <div class="stoploss">
+              <div class="r1 c-fff">
+                <el-checkbox
+                  class="c-fff"
+                  v-model="modalStoplossState"
+                >{{ $t('contract_page.order_action.modal.stop_loss',{unit: "USD"}) }}</el-checkbox>
+              </div>
+              <div class="r2">
+                <div class="row">
+                  <div class="action__table mt-10">
+                    <div class="table__tr c-fff">
+                      <div class="col">{{ $t('contract_trigger_type') }}</div>
+                      <div class="col2">
+                        <el-select class="trigger_dropdown ml-6" v-model="modalStoplossType">
+                          <el-option
+                            :label="$t('contract_page.order_action.order_price')"
+                            :value="1"
+                          />
+                          <el-option :label="$t('contract_mark_price')" :value="2" />
+                          <el-option :label="$t('contract_index_price')" :value="3" />
+                        </el-select>
+                      </div>
+                      <div class="col2"></div>
+                    </div>
+                    <div class="table__tr c-fff">
+                      <div class="col">{{$t('price')}}</div>
+                      <div class="col2 pl-9">
+                        <currency-input
+                          class="trade"
+                          v-model="modalStoplossPrice"
+                          :class="[input.amount.status]"
+                          :currency="pairInfo.currency_name"
+                          :accuracy="pairInfo.accuracy"
+                          :scale="pairInfo.price_scale"
+                          :placeholder="$t('contract_order_enter_tips2')"
+                        />
+                      </div>
+                      <div class="col2"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="r3">
+                <p>
+                  {{$t('contract_page.order_action.modal.stop_loss_tips',
+                  {
+                  triggerType: $t(triggerTypes[modalStoplossType]),
+                  triggerSide: exchangeDir === 'BUY' ? $t("contract_page.fall"): $t("contract_page.rise"),
+                  triggerPrice: modalStoplossPrice,
+                  realized: $big(stopLossRealized).round(8,0).toFixed(8)
+                  })}}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <!--备注-->
-        <div
-          class="stopmarket_tips c-primary"
-          v-if="isExtOrderType && closeAfterTrigger"
-          v-html="$t('contract_win_stopMarket_sell.tips', {symbol: $t('FUTURE_&USD', {currency: state.ct.product_name} )})"/>
-        <div class="never-show pt-10 mb-10">
-          <input type="checkbox" v-model="mmModal.neverShow">
-          {{ $t('contract_never_show') }}
-        </div>
-        <div class="flex-end">
+          <!-- 表格 -->
+          <div class="more__table mt-10">
+            <div class="table__tr c-fff" v-show="!allowStopWinLoss">
+              <div class="col col1">{{ $t('contract_assign_price') }}</div>
+              <div v-if="currentDealType === 'market'" class="col">
+                <span
+                  :class="{'color-up': exchangeDir === 'BUY', 'color-down': exchangeDir === 'SELL'}"
+                >{{ $t('contract_market_price') }} USD</span>
+              </div>
+              <div v-else class="col">
+                <span
+                  :class="{'color-up': exchangeDir === 'BUY', 'color-down': exchangeDir === 'SELL'}"
+                >{{ price }} USD</span>
+              </div>
+            </div>
+            <div class="table__tr c-fff">
+              <div class="col col1">{{ $t('contract_assign_value_raw') }}</div>
+              <div class="col">{{ orderValue | round(pairInfo.value_scale || 4) }} BTC</div>
+            </div>
+            <div class="table__tr c-fff">
+              <div
+                class="col col1"
+              >{{ $t('contract_cost_10_times', {lever: userLeverTime==0 ? maxLeverage : userLeverTime}) }}</div>
+              <div
+                class="col"
+              >{{ mmModal.label === $t('order_side_buy') ? costValueBuyNew : costValueSellNew }} BTC</div>
+            </div>
+            <div class="table__tr c-fff">
+              <div class="col col1">{{ $t('withdraw_avlb') }}</div>
+              <div
+                class="col"
+              >{{ balance.available_balance | round(pairInfo.value_scale || 4) }} BTC</div>
+            </div>
+            <div class="table__tr c-fff">
+              <!-- 成交后的仓位大小 -->
+              <div class="col col1">{{ $t('contract_pos_after_deal') }}</div>
+              <div class="col">{{ currentHodingAmount }}</div>
+            </div>
+
+            <div class="table__tr c-fff" v-show="!allowStopWinLoss">
+              <!-- 止盈 -->
+              <div class="col col1">{{ $t('contract_page.order_action.modal.stop_win', {unit: ""}) }}</div>
+              <div class="col">
+                <label
+                  v-if="!currentHolding || !currentHolding.tp_price || currentHolding.tp_price==='0'"
+                  class="color-up"
+                >--</label>
+                <label
+                  v-else
+                  class="color-up"
+                >{{currentHolding.tp_price | fixed(pairInfo.price_scale || 4)}}</label>
+              </div>
+            </div>
+            <div class="table__tr c-fff" v-show="!allowStopWinLoss">
+              <!-- 止损 -->
+              <div class="col col1">{{ $t('contract_page.order_action.modal.stop_loss', {unit: ""}) }}</div>
+              <div class="col">
+                <label
+                  v-if="!currentHolding || !currentHolding.sl_price || currentHolding.sl_price==='0'"
+                  class="color-down"
+                >--</label>
+                <label
+                  v-else
+                  class="color-down"
+                >{{currentHolding.sl_price | fixed(pairInfo.price_scale || 4)}}</label>
+              </div>
+            </div>
+
+            <div class="table__tr c-fff">
+              <!-- 标记价格 -->
+              <div class="col col1">{{ $t('contract_mark_price') }}</div>
+              <div class="col">{{ markPrice }}</div>
+            </div>
+            <div class="table__tr c-fff">
+              <!-- 预计强平价格 -->
+              <div class="col col1">{{ $t('contract_expect_equal_price') }}</div>
+              <div
+                class="col"
+              >{{ exchangeDir === 'BUY' ? liqBuyPrice : liqSellPrice | fixed(pairInfo.price_scale || 4) }}</div>
+            </div>
+            <div class="table__tr c-fff">
+              <!-- 差异 -->
+              <div class="col col1">{{ $t('contract_diff_expect_force') }}</div>
+              <div class="col">
+                <span class="c-primary">{{ liqDiffRate | fixed(2) }}%</span>
+                ({{ liqDiff | fixed(pairInfo.price_scale || 4) }})
+              </div>
+            </div>
+          </div>
+          <!--备注-->
           <div
-            class="pointer mr-30 c-fff"
-            @click="showMakeMoreModal=false;confirmModalClosed()"
-          >{{ $t('cancel') }}</div>
-          <v-btn
-            style="padding: 0 20px; width:133px"
-            @click="confrimBuyTimes"
-            :label="mmModal.label"
+            class="stopmarket_tips c-primary"
+            v-if="isExtOrderType && closeAfterTrigger"
+            v-html="$t('contract_win_stopMarket_sell.tips', {symbol: $t('FUTURE_&USD', {currency: state.ct.product_name})})"
           />
-        </div>
+          <div class="never-show pt-10 mb-10">
+            <input type="checkbox" v-model="mmModal.neverShow" />
+            {{ $t('contract_never_show') }}
+          </div>
+          <div class="flex-end">
+            <div
+              class="pointer mr-30 c-fff"
+              @click="showMakeMoreModal=false;confirmModalClosed()"
+            >{{ $t('cancel') }}</div>
+            <v-btn
+              style="padding: 0 20px; width:133px"
+              :disabled="!allowSubmit"
+              @click="confrimBuyTimes"
+              :label="mmModal.label"
+            />
+          </div>
+        </dir>
       </div>
     </v-modal>
     <!-- 未登录态 -->
@@ -533,11 +714,8 @@
         <div class="link-group">
           <!-- <router-link class="link btn ibt signin bgcolor-up" :to="{name: 'login'}">
             <span>{{ $t('signin') }}</span>
-          </router-link> -->
-          <span
-            class="link btn ibt signin bgcolor-up"
-            @click="tologin"
-            >{{ $t('signin') }}</span>
+          </router-link>-->
+          <span class="link btn ibt signin bgcolor-up" @click="tologin">{{ $t('signin') }}</span>
           <router-link class="link btn ibt signup bgcolor-down" :to="{name: 'register'}">
             <span>{{ $t('signup') }}</span>
           </router-link>
@@ -560,7 +738,7 @@
           </div>
           <div class="el-message-box__input" style="display: none;">
             <div class="el-input">
-              <input type="text" autocomplete="off" placeholder class="el-input__inner">
+              <input type="text" autocomplete="off" placeholder class="el-input__inner" />
             </div>
             <div class="el-message-box__errormsg" style="visibility: hidden;"></div>
           </div>
@@ -570,37 +748,33 @@
           <button
             type="checkbox"
             @click="showDialogModel=false;"
-            class="el-button el-button--default el-button--small btn--cancel">
+            class="el-button el-button--default el-button--small btn--cancel"
+          >
             <span>{{ $t('cancel')}}</span>
           </button>
           <button
             type="button"
             @click="showDialogModel=false;mmModalLeverChange()"
-            class="el-button el-button--default el-button--small el-button--primary btn--confirm">
+            class="el-button el-button--default el-button--small el-button--primary btn--confirm"
+          >
             <span>{{ $t('contract_confirm_change')}}</span>
           </button>
         </div>
       </div>
     </v-modal>
-   <v-modal    :open.sync="state.isLoginOverdue"  @close="logoutClose">
-     <div class="loginStatus">
+    <v-modal :open.sync="state.isLoginOverdue" @close="logoutClose">
+      <div class="loginStatus">
         <div>
-          <div class="mask-logout" >
+          <div class="mask-logout">
             <div class="hint header">{{ $t('contract_login_overdue') }}</div>
-            <div class="link-group"> 
-              <span
-                class="link btn ibt signin bgcolor-up"
-                @click="tologin"
-                >{{ $t('signin') }}</span>
-              <span
-                class="link btn ibt signin bgcolor-down"
-                @click="logoutClose"
-                >{{ $t('close') }}</span> 
+            <div class="link-group">
+              <span class="link btn ibt signin bgcolor-up" @click="tologin">{{ $t('signin') }}</span>
+              <span class="link btn ibt signin bgcolor-down" @click="logoutClose">{{ $t('close') }}</span>
             </div>
           </div>
         </div>
       </div>
-    </v-modal>   
+    </v-modal>
   </div>
 </template>
 <script>
@@ -611,19 +785,21 @@ import leverOperate from "../components/lever-operate";
 import pairInfoMixins from "./statePairInfoComputedMixins";
 import priceInfoMixins from "./stateComputedMixins";
 import stateHoldingMixins from "./stateHoldingComputedMixins";
-import currentDelMixins from "./stateCurrentDelComputedMixins.js"
+import currentDelMixins from "./stateCurrentDelComputedMixins.js";
 import utils from "@/modules/utils";
 import registryToast from "@/libs/toast/index";
 import isEmpty from "lodash/isEmpty";
 import calculator from "@/projects/contract/calculator";
 const transferModal = () =>
-  import(/* webpackChunkName: "transferModal" */ "@/components/Fund/contract/transfer-modal");
+  import(
+    /* webpackChunkName: "transferModal" */ "@/components/Fund/contract/transfer-modal"
+  );
 /**
  * r 限额值
  * m 最大杠杆倍数
  */
 //BTCUSD
-const RiskLimitDict = [  
+const RiskLimitDict = [
   { r: 0, m: 100 },
   { r: 200, m: 100 },
   { r: 300, m: 66.66 },
@@ -647,24 +823,29 @@ const RiskLimitVDS = [
   { r: 300, m: 3.3 },
   { r: 350, m: 2.8 },
   { r: 400, m: 2.5 },
-  { r: 450, m: 2.2 } ,
-  { r: 500, m: 2 } 
-]
+  { r: 450, m: 2.2 },
+  { r: 500, m: 2 }
+];
 export default {
-  mixins: [pairInfoMixins, priceInfoMixins, stateHoldingMixins, currentDelMixins],
+  mixins: [
+    pairInfoMixins,
+    priceInfoMixins,
+    stateHoldingMixins,
+    currentDelMixins
+  ],
   components: { simpleSlider, leverOperate, transferModal },
   data() {
-    return { 
+    return {
       state,
       local,
       language: true,
-      submitting: false, 
+      submitting: false,
       showModal: false,
       // currentOpenMode: 'open-long',
       //   currentDealType: 'contract_lose_stopMarket',
       currentDealType: "limit",
-      calc:'≥',
-      calc1: '≤',
+      calc: "≥",
+      calc1: "≤",
       leverTimes: ["100X", "50X", "20X", "10X"],
       maxTimes: 200,
       price: "",
@@ -743,53 +924,62 @@ export default {
       neverShowOneDay: false,
       selectedTime: 0,
       confirm_txt: "",
-      enter_tips: this.currentDealType === "market" ? "--" : this.$t('contract_order_enter_tips2'),
-      empty: "--", 
+      enter_tips:
+        this.currentDealType === "market"
+          ? "--"
+          : this.$t("contract_order_enter_tips2"),
+      empty: "--",
       stickLen: 23,
       profitRiskWidth: "316px",
-      closeAfterTrigger: false
-    };
-  },
-  computed: {
-    userSetting () {
-      if (this.state.ct.userSetting) {
-        return this.state.ct.userSetting
-      }
-      return {}
-    },
-    triggerType () {
-      return {
+      closeAfterTrigger: false,
+      modalStopWinState: false,
+      modalStopWinType: 1, // 1 市价， 2 标记价格， 3 指数价格
+      modalStopWinPrice: 0,
+      modalStoplossState: false,
+      modalStoplossType: 1,
+      modalStoplossPrice: 0,
+      triggerTypes: {
         1: "contract_page.order_action.order_price",
         2: "contract_mark_price",
         3: "contract_index_price"
-      }[this.currentTriggerType]
+      }
+    };
+  },
+  computed: {
+    userSetting() {
+      if (this.state.ct.userSetting) {
+        return this.state.ct.userSetting;
+      }
+      return {};
     },
-    pair () {
-      return this.state.ct.pair
+    triggerType() {
+      return this.triggerTypes[this.currentTriggerType];
+    },
+    pair() {
+      return this.state.ct.pair;
     },
     currentHolding() {
-      let holdingList = this.state.ct.holdingList
-      let obj = {}
+      let holdingList = this.state.ct.holdingList;
+      let obj = {};
       holdingList.map(h => {
-        if(h.currency === this.state.ct.symbol) { 
-          obj = h
+        if (h.currency === this.state.ct.symbol) {
+          obj = h;
         }
-      })
-      return obj
+      });
+      return obj;
     },
-    unit() { 
-      if (this.pair === 'FUTURE_BTCUSD') {
-        return 'USD'
-      }
-      else {
-        return 'contract_min_unit'
+    unit() {
+      if (this.pair === "FUTURE_BTCUSD") {
+        return "USD";
+      } else {
+        return "contract_min_unit";
       }
     },
     //风险限额字典
-    RiskLimitDict() { 
-      let pair = this.state.ct.pair
-      if (this.maxLeverage==100) {
-        return [  
+    RiskLimitDict() {
+      let pair = this.state.ct.pair;
+      if (this.maxLeverage == 100) {
+        return [
           { r: 0, m: 100 },
           { r: 200, m: 100 },
           { r: 300, m: 66.66 },
@@ -802,8 +992,7 @@ export default {
           { r: 1000, m: 20 },
           { r: 1100, m: 18.1 }
         ];
-      }
-      else if (this.maxLeverage==50) {
+      } else if (this.maxLeverage == 50) {
         return [
           { r: 0, m: 50 },
           { r: 50, m: 50 },
@@ -814,11 +1003,10 @@ export default {
           { r: 300, m: 14.2 },
           { r: 350, m: 12.5 },
           { r: 400, m: 11.1 },
-          { r: 450, m: 10 } ,
-          { r: 500, m: 9 } 
-        ]
-      } 
-      else if (this.maxLeverage==20) {
+          { r: 450, m: 10 },
+          { r: 500, m: 9 }
+        ];
+      } else if (this.maxLeverage == 20) {
         return [
           { r: 0, m: 20 },
           { r: 50, m: 20 },
@@ -829,75 +1017,73 @@ export default {
           { r: 300, m: 3.3 },
           { r: 350, m: 2.8 },
           { r: 400, m: 2.5 },
-          { r: 450, m: 2.2 } ,
-          { r: 500, m: 2 } 
-        ]
-      } 
-      else {
-        return []
+          { r: 450, m: 2.2 },
+          { r: 500, m: 2 }
+        ];
+      } else {
+        return [];
       }
     },
     //杠杆字典
     timersMap() {
-      let pair = this.state.ct.pair  
-      let pairInfo = this.state.ct.pairInfo
-      let max_leverage = "100"
+      let pair = this.state.ct.pair;
+      let pairInfo = this.state.ct.pairInfo;
+      let max_leverage = "100";
       if (!!pairInfo) {
-        max_leverage = pairInfo.max_leverage
+        max_leverage = pairInfo.max_leverage;
+      } else {
+        max_leverage =
+          {
+            FUTURE_BTCUSD: "100",
+            FUTURE_BHDUSD: "20",
+            FUTURE_ETHUSD: "50"
+          }[pair] || "100";
       }
-      else {
-        max_leverage = {
-          "FUTURE_BTCUSD": "100",
-          "FUTURE_BHDUSD": "20",
-          "FUTURE_ETHUSD": "50"
-        }[pair] || "100"
-      }
-      if (max_leverage==='100') {
-        return {  
-          // 倍数 ; 1x 2x....100x 
-          0: this.$t("contract_all_in"), 
-          1: "1x", 
-          2: "2x", 
-          3: "3x", 
-          5: "5x", 
-          10: "10x", 
-          25: "25x", 
-          50: "50x", 
-          100: "100x" 
-        }
-      } else if (max_leverage==='50') { 
+      if (max_leverage === "100") {
         return {
-          0: this.$t("contract_all_in"), 
-          1: "1x", 
-          2: "2x",  
-          3: "3x", 
-          5: "5x", 
-          10: "10x", 
-          25: "25x", 
-          35: "35x", 
+          // 倍数 ; 1x 2x....100x
+          0: this.$t("contract_all_in"),
+          1: "1x",
+          2: "2x",
+          3: "3x",
+          5: "5x",
+          10: "10x",
+          25: "25x",
+          50: "50x",
+          100: "100x"
+        };
+      } else if (max_leverage === "50") {
+        return {
+          0: this.$t("contract_all_in"),
+          1: "1x",
+          2: "2x",
+          3: "3x",
+          5: "5x",
+          10: "10x",
+          25: "25x",
+          35: "35x",
           50: "50x"
-        }
-      } else if (max_leverage==='20') { 
+        };
+      } else if (max_leverage === "20") {
         return {
-          0: this.$t("contract_all_in"), 
-          1: "1x", 
-          2: "2x",  
-          3: "3x", 
-          4: "4x", 
-          5: "5x", 
-          10: "10x", 
-          15: "15x", 
+          0: this.$t("contract_all_in"),
+          1: "1x",
+          2: "2x",
+          3: "3x",
+          4: "4x",
+          5: "5x",
+          10: "10x",
+          15: "15x",
           20: "20x"
-        }
+        };
       }
-
     },
     //最大杠杆倍数
     maxLeverage() {
       if (!this.state.ct.pairInfo) {
-        return 100
+        return 100;
       }
-      return this.state.ct.pairInfo.max_leverage
+      return this.state.ct.pairInfo.max_leverage;
     },
     // 外面红绿条上的倍数
     outerTimesLeft() {
@@ -916,22 +1102,22 @@ export default {
       return `${this.amount} @ ${this.price}`;
     },
     buyButtonRightText() {
-      if (this.currentDealType === "market"){
-        return `${this.amount} @ ${ (this.ask || '--')}`;
+      if (this.currentDealType === "market") {
+        return `${this.amount} @ ${this.ask || "--"}`;
       } else {
         return `${this.amount} @ ${this.price}`;
       }
     },
     sellButtonRightText() {
-      if (this.currentDealType === "market"){
-        return `${this.amount} @ ${this.bid || '--'}`;
+      if (this.currentDealType === "market") {
+        return `${this.amount} @ ${this.bid || "--"}`;
       } else {
         return `${this.amount} @ ${this.price}`;
       }
     },
     buyTipsButton() {
       if (this.isExtOrderType) {
-        let tag = this.currentOrderTypeExt.indexOf("win") > -1 ? "win" : "lose"; 
+        let tag = this.currentOrderTypeExt.indexOf("win") > -1 ? "win" : "lose";
         return this.$t(`contract_trigger_${tag}_buy`);
       }
 
@@ -954,7 +1140,7 @@ export default {
         "contract_action_button_down_r"
       )}`;
     },
-    buyTipsContent() { 
+    buyTipsContent() {
       return this.$t("contract_action_button_tips", {
         amount: this.amount,
         price: this.price,
@@ -993,12 +1179,12 @@ export default {
       }
       return "--";
     },
-    ask(){
+    ask() {
       if (this.state.ct.ask) {
         return this.state.ct.ask.toString();
       }
     },
-    bid(){
+    bid() {
       if (this.state.ct.bid) {
         return this.state.ct.bid.toString();
       }
@@ -1009,11 +1195,15 @@ export default {
     this.balance : 持仓数量
     this.amount : 输入框数量
     */
-    costValueBuyNew() { 
+    costValueBuyNew() {
       //  console.log({holding:this.holding})
-       let amount = this.amount;
-      if (amount > 0 && this.balance && this.$big(this.balance.holding).plus(this.buyDelAmount) < 0) {
-        amount = -(-amount - this.balance.amount - this.buyDelAmount)
+      let amount = this.amount;
+      if (
+        amount > 0 &&
+        this.balance &&
+        this.$big(this.balance.holding).plus(this.buyDelAmount) < 0
+      ) {
+        amount = -(-amount - this.balance.amount - this.buyDelAmount);
         if (amount < 0) {
           amount = 0;
         }
@@ -1021,16 +1211,16 @@ export default {
 
       let lever = this.userLeverTime == 0 ? this.maxTimes : this.userLeverTime; // local.userLeverTime
       // let im = this.$big(this.riskModalInitPercent || 0).div(100);
-      let pairInfo = this.state.ct.pairInfo
+      let pairInfo = this.state.ct.pairInfo;
       if (amount === 0 || !pairInfo) {
         return "0";
-      }  
-      
+      }
+
       // console.log({pairInfo})
-      let im = pairInfo.im
-      let mm = pairInfo.mm 
-      let mul = pairInfo.multiplier 
-      let takeRate = pairInfo.take_rate
+      let im = pairInfo.im;
+      let mm = pairInfo.mm;
+      let mul = pairInfo.multiplier;
+      let takeRate = pairInfo.take_rate;
 
       let price = this.getCurrentPrice("BUY");
 
@@ -1039,42 +1229,59 @@ export default {
         executed: 0,
         side: 1,
         price
-      }
+      };
       // let futures = [...this.state.ct.currentDel, userInput]
-      let futures = [...this.currentDel, userInput] 
-      let totalValue = calculator.getTotalValue(futures, this.balance, pairInfo, mul)
-      let down = 0
+      let futures = [...this.currentDel, userInput];
+      let totalValue = calculator.getTotalValue(
+        futures,
+        this.balance,
+        pairInfo,
+        mul
+      );
+      let down = 0;
 
       if (totalValue && amount) {
-        let margin = calculator.getMargin(amount, price, lever, totalValue, im, mm, takeRate, pairInfo)
-        // return margin.cost.round(this.pairInfo.value_scale || 4, down).toString() 
-        return utils.toFixed(margin.cost, this.pairInfo.value_scale || 4) 
+        let margin = calculator.getMargin(
+          amount,
+          price,
+          lever,
+          totalValue,
+          im,
+          mm,
+          takeRate,
+          pairInfo
+        );
+        // return margin.cost.round(this.pairInfo.value_scale || 4, down).toString()
+        return utils.toFixed(margin.cost, this.pairInfo.value_scale || 4);
       }
-      return "--"
+      return "--";
     },
-    costValueSellNew() { 
+    costValueSellNew() {
       // console.log({holding:this.holding})
       let amount = this.amount;
-       
       // 有已持仓，做对手时，判断持仓是否可以对冲，不可对冲部分算成本
-      if (amount > 0 && this.balance && this.$big(this.balance.holding).plus(this.sellDelAmount) > 0) {
-        amount = amount - this.balance.amount - this.sellDelAmount ;
+      if (
+        amount > 0 &&
+        this.balance &&
+        this.$big(this.balance.holding).plus(this.sellDelAmount) > 0
+      ) {
+        amount = amount - this.balance.amount - this.sellDelAmount;
         if (amount < 0) {
           amount = 0;
         }
       }
-      let pairInfo = this.state.ct.pairInfo
+      let pairInfo = this.state.ct.pairInfo;
       if (amount === 0 || !pairInfo) {
         return "0";
       }
-  
+
       let lever = this.userLeverTime == 0 ? this.maxTimes : this.userLeverTime; // local.userLeverTime
       // let im = this.$big(this.riskModalInitPercent).div(100);
-      
-      let im = pairInfo.im
-      let mm = pairInfo.mm 
-      let mul = pairInfo.multiplier
-      let takeRate = pairInfo.take_rate
+
+      let im = pairInfo.im;
+      let mm = pairInfo.mm;
+      let mul = pairInfo.multiplier;
+      let takeRate = pairInfo.take_rate;
       let price = this.getCurrentPrice("SELL");
 
       let userInput = {
@@ -1082,145 +1289,33 @@ export default {
         executed: 0,
         side: 2,
         price
-      }
+      };
       // let futures = [...this.state.ct.currentDel, userInput]
-      let futures = [...this.currentDel, userInput] 
-      let totalValue = calculator.getTotalValue(futures, this.balance, pairInfo, mul)
-      let down = 0
- 
+      let futures = [...this.currentDel, userInput];
+      let totalValue = calculator.getTotalValue(
+        futures,
+        this.balance,
+        pairInfo,
+        mul
+      );
+      let down = 0;
+
       if (totalValue && amount) {
-        let margin = calculator.getMargin(amount, price, lever, totalValue, im, mm, takeRate, pairInfo)
-        //return margin.cost.round(this.pairInfo.value_scale || 4, down).toString()
-        return utils.toFixed(margin.cost, this.pairInfo.value_scale || 4) 
+        let margin = calculator.getMargin(
+          amount,
+          price,
+          lever,
+          totalValue,
+          im,
+          mm,
+          takeRate,
+          pairInfo
+        );
+        // return margin.cost.round(this.pairInfo.value_scale || 4, down).toString()
+        return utils.toFixed(margin.cost, this.pairInfo.value_scale || 4);
       }
-      return "--"
+      return "--";
     },
-    // costValueBuy() {
-    //   //this.log("costvalue buy...");
-    //   const $amount = this.$big(this.getValues("amount", 'BUY') || 0);
-    //   const $amount2 = this.$big(this.getValues("amount", 'SELL') || 0);
-    //   // console.log("buyDelAmount:" + this.buyDelAmount,
-    //   //  sellDelAmount:" + this.sellDelAmount,
-    //   // "amount:" + this.amount,
-    //   // "$amount:" + $amount ,
-    //   // "this.balance.amount:" + this.balance.amount )
-    //   // return;
-
-    //   let amount = this.amount;
-    //   if (amount > 0 && this.balance && this.$big(this.balance.amount).plus(this.buyDelAmount).plus(this.sellDelAmount) < 0) {
-    //     amount = -(-amount - this.balance.amount - this.buyDelAmount - this.sellDelAmount);
-    //     if (amount < 0) {
-    //       amount = 0;
-    //     }
-    //   }
-    //   if (amount === 0) {
-    //     return "0";
-    //   }
-
-    //   let orderValue = this.getOrderValue(amount, "BUY");
-    //   orderValue = orderValue === "--" ? 0 : orderValue;
-    //   if (
-    //     orderValue &&
-    //     amount &&
-    //     !isEmpty(this.pairInfo) &&
-    //     typeof this.pairInfo.fee_rate !== "undefined"
-    //   ) {
-    //     // 当前杠杆 20倍
-    //     let lever = this.userLeverTime == 0 ? 100 : this.userLeverTime; // local.userLeverTime
-    //     // 限额
-    //     let im = this.$big(this.riskModalInitPercent).div(100); // local.riskLimit
-    //     // // 资金费率 不收取
-    //     let feeRate = 0;
-    //     let { margin, fee } = calculator.getCostValue({
-    //       lever,
-    //       im,
-    //       value: orderValue,
-    //       take_rate: this.pairInfo.take_rate
-    //     });
-    //     // console.log({amount, price: this.price, lever, orderValue, margin : margin.toString(), fee : fee.toString(),riskModalInitPercent : this.riskModalInitPercent })
-    //     // let mymargin = calculator.getMargin(amount, this.price, lever, im)
-    //     // console.log(mymargin.toString())
-
-    //     let v = margin
-    //       .plus(feeRate)
-    //       .plus(fee)
-    //       .round(this.pairInfo.value_scale || 4)
-    //       .toString();
-    //     // console.log(
-    //     //   "level=",
-    //     //   lever,
-    //     //   "margin=",
-    //     //   margin.toString(),
-    //     //   "feeRate=",
-    //     //   feeRate.toString(),
-    //     //   "fee=",
-    //     //   fee.toString(),
-    //     //   "cost=",
-    //     //   v
-    //     // );
-    //     return v;
-    //   }
-    //   return "--";
-    // },
-    // costValueSell() {
-    //   //this.log("costvalue sell...");
-    //   let amount = this.amount;
-    //   // 有已持仓，做对手时，判断持仓是否可以对冲，不可对冲部分算成本
-    //   if (amount > 0 && this.balance && this.$big(this.balance.amount).plus(this.buyDelAmount).plus(this.sellDelAmount) > 0) {
-    //     amount = amount - this.balance.amount - this.buyDelAmount - this.sellDelAmount ;
-    //     if (amount < 0) {
-    //       amount = 0;
-    //     }
-    //   }
-    //   if (amount === 0) {
-    //     return "0";
-    //   }
-    //   let orderValue = this.getOrderValue(amount, "SELL");
-    //   orderValue = orderValue === "--" ? 0 : orderValue;
-    //   if (
-    //     orderValue &&
-    //     amount &&
-    //     !isEmpty(this.pairInfo) &&
-    //     typeof this.pairInfo.fee_rate !== "undefined"
-    //   ) {
-    //     // 当前杠杆 20倍
-    //     let lever = this.userLeverTime == 0 ? 100 : this.userLeverTime; // local.userLeverTime
-    //     // 限额
-    //     let im = this.$big(this.riskModalInitPercent).div(100); // local.riskLimit
-    //     // // 资金费率 不收取
-    //     let feeRate = 0;
-    //     let { margin, fee } = calculator.getCostValue({
-    //       lever,
-    //       im,
-    //       value: orderValue,
-    //       take_rate: this.pairInfo.take_rate
-    //     });
-
-    //     // console.log({amount, price: this.price, lever, orderValue, margin : margin.toString(), fee : fee.toString(),riskModalInitPercent : this.riskModalInitPercent })
-    //     // let mymargin = calculator.getMargin(amount, this.price, lever, im)
-    //     // console.log(mymargin.toString())
-
-    //     let v = margin
-    //       .plus(feeRate)
-    //       .plus(fee)
-    //       .round(this.pairInfo.value_scale || 4)
-    //       .toString();
-    //     // console.log(
-    //     //   "level=",
-    //     //   lever,
-    //     //   "margin=",
-    //     //   margin.toString(),
-    //     //   "feeRate=",
-    //     //   feeRate.toString(),
-    //     //   "fee=",
-    //     //   fee.toString(),
-    //     //   "cost=",
-    //     //   v
-    //     // );
-    //     return v;
-    //   }
-    //   return "--";
-    // },
     /**
      *
      * 成本
@@ -1239,7 +1334,8 @@ export default {
         typeof this.pairInfo.fee_rate !== "undefined"
       ) {
         // 当前杠杆 20倍
-        let lever = this.userLeverTime == 0 ? this.maxTimes : this.userLeverTime; // local.userLeverTime
+        let lever =
+          this.userLeverTime == 0 ? this.maxTimes : this.userLeverTime; // local.userLeverTime
         // 限额
         let im = this.$big(this.riskModalInitPercent).div(100); // local.riskLimit
         // // 保证金
@@ -1257,15 +1353,13 @@ export default {
           take_rate: this.pairInfo.take_rate
         });
 
-
         let v = margin
           .plus(feeRate)
           .plus(fee)
           .round(this.pairInfo.value_scale || 4)
           .toString();
 
-
-        console.log(margin.round)
+        console.log(margin.round);
         // console.log(
         //   "level=",
         //   lever,
@@ -1321,7 +1415,7 @@ export default {
         );
         return liqPrice.force_price;
       }
-      return "--";
+      return "0";
     },
     liqSellPrice() {
       const lever = this.userLeverTime == 0 ? 100 : this.userLeverTime;
@@ -1342,7 +1436,7 @@ export default {
         );
         return liqPrice.force_price;
       }
-      return "--";
+      return "0";
     },
     /**
      * 最新持仓数量
@@ -1403,29 +1497,190 @@ export default {
       );
     },
     isTestnet() {
-      return location.hostname.indexOf("ixex.pro") >= 0
+      return location.hostname.indexOf("ixex.pro") >= 0;
+    },
+    stopWinRealized() {
+      let result = this.$big(0);
+      let side = this.exchangeDir === "BUY" ? 1 : 2;
+      let amount = this.amount || 0;
+      let price = this.price || 0;
+      let swprice = this.modalStopWinPrice || 0;
+
+      if (side === 1) {
+        if (this.$big(swprice).lt(price)) return this.$big(0);
+      } else {
+        if (this.$big(swprice).gt(price)) return this.$big(0);
+      }
+
+      if (this.state.ct.pair === "FUTURE_BTCUSD") {
+        if (price > 0 && swprice > 0 && side == 1) {
+          result = this.$big(amount)
+            .div(price)
+            .minus(this.$big(amount).div(swprice));
+        } else if (price > 0 && swprice > 0 && side == 2) {
+          result = this.$big(amount)
+            .div(swprice)
+            .minus(this.$big(amount).div(price));
+        }
+      } else {
+        if (this.state.ct.pairInfo) {
+          let mul = this.state.ct.pairInfo.multiplier;
+          if (side == 1) {
+            result = this.$big(swprice || 0)
+              .minus(price)
+              .times(mul)
+              .times(this.$big(amount).abs());
+          } else if (side == 2) {
+            result = this.$big(price)
+              .minus(swprice || 0)
+              .times(mul)
+              .times(this.$big(amount).abs());
+          }
+        }
+      }
+      return result;
+    },
+    stopLossRealized() {
+      let result = this.$big(0);
+      let side = this.exchangeDir === "BUY" ? 1 : 2;
+      let amount = this.amount || 0;
+      let price = this.price || 0;
+      let slprice = this.modalStoplossPrice || 0;
+      let liqBuyPrice = this.liqBuyPrice == "--" ? 0 : this.liqBuyPrice;
+      let liqSellPrice = this.liqSellPrice == "--" ? 0 : this.liqSellPrice;
+      if (side === 1) {
+        if (
+          this.$big(slprice).gt(price) ||
+          this.$big(slprice).lt(liqBuyPrice || 0)
+        )
+          return this.$big(0);
+      } else {
+        if (
+          this.$big(slprice).lt(price) ||
+          this.$big(slprice).gt(liqSellPrice || 0)
+        )
+          return this.$big(0);
+      }
+
+      if (this.state.ct.pair === "FUTURE_BTCUSD") {
+        if (price > 0 && slprice > 0 && side === 1) {
+          result = this.$big(amount)
+            .div(price)
+            .minus(this.$big(amount).div(slprice));
+        } else if (price > 0 && slprice > 0 && side === 2) {
+          result = this.$big(amount)
+            .div(slprice)
+            .minus(this.$big(amount).div(price));
+        }
+      } else {
+        if (this.state.ct.pairInfo) {
+          let mul = this.state.ct.pairInfo.multiplier;
+          if (side === 1) {
+            result = this.$big(slprice || 0)
+              .minus(price)
+              .times(mul)
+              .times(this.$big(amount).abs());
+          } else if (side === 2) {
+            result = this.$big(price)
+              .minus(slprice || 0)
+              .times(mul)
+              .times(this.$big(amount).abs());
+          }
+        }
+      }
+
+      if (this.$big(result).gt(0)) result = this.$big(0);
+      return result;
+    },
+    allowStopWinLoss() {
+      return (
+        (this.currentDealType === "market" ||
+          this.currentDealType === "limit") &&
+        this.currentHolding.holding == 0
+      );
+    },
+    allowSubmit() {
+      let side = this.exchangeDir === "BUY" ? 1 : 2;
+      let price = this.price || 0;
+      let slprice = this.modalStoplossPrice || 0;
+      let swprice = this.modalStopWinPrice || 0;
+      let markPrice = this.markPrice;
+      let indexPrice = this.indexPrice;
+      let lastPrice = this.lastPrice
+      let stopWinType = this.modalStopWinType;
+      let stoplossType = this.modalStoplossType;
+      let liqPrice = this.exchangeDir === 'BUY' ? this.liqBuyPrice : this.liqSellPrice
+      // 做多时，止盈触发价格不能低于委托价格，止损价格不能高于委托价格，不能低于爆仓价格
+      // 做空时，止盈触发价格不能高于委托价格，止损价格不能低于委托价格，不能高于爆仓价格
+      if (this.modalStopWinState) {
+        if (side === 1) {
+          if (stopWinType === 1 &&  this.$big(swprice).lt(price)) { 
+            return false;
+          }
+          else if (stopWinType === 2 && (this.$big(swprice).lt(price) || this.$big(swprice).lt(lastPrice) || this.$big(swprice).lt(markPrice))) { 
+            return false;
+          }
+          else if (stopWinType === 3 && (this.$big(swprice).lt(price) || this.$big(swprice).lt(lastPrice) || this.$big(swprice).lt(indexPrice))) { 
+            return false;
+          }
+        } else {
+          if (stopWinType === 1 && this.$big(swprice).gt(price)) { 
+            return false;
+          }
+          else if (stopWinType === 2 && (this.$big(swprice).gt(price) || this.$big(swprice).gt(lastPrice) || this.$big(swprice).gt(markPrice))) { 
+            return false;
+          }
+          else if (stopWinType === 3 && (this.$big(swprice).gt(price) || this.$big(swprice).gt(lastPrice) || this.$big(swprice).gt(indexPrice))) { 
+            return false;
+          }
+        }
+      }
+ 
+      if (this.modalStoplossState)  {
+        if (side === 1) {
+          if (this.$big(slprice).gt(price) || 
+             this.$big(slprice).gt(lastPrice) || 
+             this.$big(slprice).lt(liqPrice || 0)) {  
+            return false; 
+          } else if (stoplossType===2 && this.$big(slprice).gt(markPrice)) {
+            return false; 
+          } else if (stoplossType===3 && this.$big(slprice).gt(indexPrice)) {
+            return false; 
+          }  
+        } else {
+          if (this.$big(slprice).lt(price) ||
+             this.$big(slprice).lt(lastPrice) ||
+            this.$big(slprice).gt(liqPrice || 0)) { 
+            return false;
+          } else if (stoplossType===2 && this.$big(slprice).lt(markPrice)) {
+            return false; 
+          } else if (stoplossType===3 && this.$big(slprice).lt(indexPrice)) {
+            return false;
+          } 
+        }
+      }
+      return true;
     }
   },
   methods: {
     tologin() {
       //console.log(this.$route.fullPath)
-      utils.setStorageValue("LoginBack", "/contract.html")
-      actions.setLoginBack( "/contract.html")
+      utils.setStorageValue("LoginBack", "/contract.html");
+      actions.setLoginBack("/contract.html");
       this.$router.push({
-        name: 'login'
-      })
-
+        name: "login"
+      });
     },
-    decimal(val){ 
-      if (val.indexOf('.') !== -1) {
-        let value = val.substr(0,val.length-1)
-        if (val.charAt(val.length - 1)>4){
-          value = value + 5
+    decimal(val) {
+      if (val.indexOf(".") !== -1) {
+        let value = val.substr(0, val.length - 1);
+        if (val.charAt(val.length - 1) > 4) {
+          value = value + 5;
         } else {
-          value = value + 0
+          value = value + 0;
         }
-        console.log(value)
-        this.price  = value
+        console.log(value);
+        this.price = value;
       }
     },
     // 处理滑块数据
@@ -1443,21 +1698,20 @@ export default {
       }
     },
     async mmChangeConfirm(item) {
-
-      console.log(this.mmModal.inputLeverTime, this.mmModal.sliderLeverTime)
+      console.log(this.mmModal.inputLeverTime, this.mmModal.sliderLeverTime);
       console.log(item, "mmModalLeverChange");
       if (this.maxTimes && this.$big(item).gt(this.maxTimes)) {
         // 纠正输入
         utils.alert(`最大${this.maxTimes}倍杠杆`);
         item = this.maxTimes;
       }
-      console.log(this.getCookie('NeverShowDialog'))
+      console.log(this.getCookie("NeverShowDialog"));
 
       // if(this.getCookie('NeverShowDialog') == '0'){
       //   this.dialogModalClosed()
       // }
 
-      if (this.currentHolding.amount != 0) { 
+      if (this.currentHolding.amount != 0) {
         let params = {
           currency: this.pairInfo.symbol,
           leverage: item
@@ -1481,8 +1735,8 @@ export default {
           n: pData.margin_delegation
         });
         this.selectedTime = item;
-        if(this.getCookie('NeverShowDialog') == '0'){
-          this.mmModalLeverChange()
+        if (this.getCookie("NeverShowDialog") == "0") {
+          this.mmModalLeverChange();
         } else {
           this.showDialogModel = true;
         }
@@ -1501,16 +1755,15 @@ export default {
           utils.alert(res.message);
         }
       }
-
     },
     async mmModalLeverChange() {
-      if (this.neverShowOneDay === true){
-        this.setCookie("NeverShowDialog", 0, 1)
+      if (this.neverShowOneDay === true) {
+        this.setCookie("NeverShowDialog", 0, 1);
         this.neverShowOneDay = false;
       }
 
       if (this.currentHolding.amount != 0) {
-        const item = this.selectedTime
+        const item = this.selectedTime;
         // 确定
         let params = {
           currency: this.pairInfo.symbol,
@@ -1519,8 +1772,8 @@ export default {
         let res = await service.setContractlever(params);
         if (!res.code) {
           this._setLeverage(item);
-          // 重新拉下持仓数据 
-          this.getBalance(); 
+          // 重新拉下持仓数据
+          this.getBalance();
           this.$eh.$emit("protrade:order:refresh");
         } else {
           utils.alert(res.message);
@@ -1533,33 +1786,35 @@ export default {
         };
         let res = await service.setContractlever(params);
         if (!res.code) {
-          // 重新拉下持仓数据 
+          // 重新拉下持仓数据
           this.getBalance();
           this.$eh.$emit("protrade:order:refresh");
         } else {
           utils.alert(res.message);
         }
       }
-    }, 
-    setCookie(cname,cvalue,exdays){
+    },
+    setCookie(cname, cvalue, exdays) {
       var d = new Date();
-      d.setTime(d.getTime()+(exdays * 24 * 60 * 60 * 1000));
-      var expires = "expires="+d.toGMTString();
+      d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+      var expires = "expires=" + d.toGMTString();
       document.cookie = cname + "=" + cvalue + "; " + expires;
     },
-    getCookie(cname){
-        var name = cname + "=";
-        var ca = document.cookie.split(';');
-        for(var i=0; i<ca.length; i++) {
-            var c = ca[i].trim();
-            if (c.indexOf(name)==0) { return c.substring(name.length,c.length); }
+    getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
         }
-        return "";
+      }
+      return "";
     },
     /**
      * 设置杠杆变量
      */
-    _setLeverage(value) { 
+    _setLeverage(value) {
       this.mmModal.inputLeverTime = value;
       this.mmModal.sliderLeverTime = value;
       local.times = value;
@@ -1568,7 +1823,7 @@ export default {
       this.userLeverTime = value;
     },
     changeHoldingLeverTimes(item) {
-      //return this.mmModalLeverChange(item); 
+      //return this.mmModalLeverChange(item);
       return this.mmChangeConfirm(item);
     },
     // 单机编辑
@@ -1588,8 +1843,7 @@ export default {
         .setRiskLimit(params)
         .then(res => {
           utils.success("修改成功");
-
-          // 根据风险限额调整最大杠杆值  
+          // 根据风险限额调整最大杠杆值
           this.RiskLimitDict.forEach(item => {
             // 选中值有可能是数字或者字符串.所以先用==
             if (item.r == this.riskModal.currentValue) {
@@ -1613,6 +1867,8 @@ export default {
     },
     // 买入modal,买入按钮
     async confrimBuyTimes() {
+      // if (this.allowSubmit() == false) return;
+
       // 杠杆值存到ls
       local.times = this.mmModal.inputLeverTime;
       local.mmNeverShow = this.mmModal.neverShow;
@@ -1626,43 +1882,31 @@ export default {
       //止盈止损操作，当系统会自动产生委托时，弹出确认提示
       const type = this._getOrderType();
       let showWarn = false;
-
-      let lprice = {
-        1 : this.lastPrice * 1, //盘口价格
-        2 : this.markPrice * 1, //标记价格
-        3 : this.indexPrice * 1  //指数价格
-      } [this.currentTriggerType]
       //console.log(type, this.lastPrice, this.trigger_price, showWarn)
+      let lprice = {
+        1: this.lastPrice * 1, //盘口价格
+        2: this.markPrice * 1, //标记价格
+        3: this.indexPrice * 1 //指数价格
+      }[this.currentTriggerType];
+
       console.log(typeof this.currentHolding.amount, typeof ($amount * 1));
       if ([3, 4, 5, 6].indexOf(type) >= 0) {
         if (side === "BUY") {
           //买入止损，盘口价格大于等于触发价格，系统自动生产委托订单
-          if (
-            (type === 3 || type === 4) &&
-            lprice >= this.trigger_price
-          ) {
+          if ((type === 3 || type === 4) && lprice >= this.trigger_price) {
             showWarn = true;
           }
           //买入止盈，盘口价格低于等于触发价格，系统自动生成订单委托
-          if (
-            (type === 5 || type === 6) &&
-            lprice <= this.trigger_price
-          ) {
+          if ((type === 5 || type === 6) && lprice <= this.trigger_price) {
             showWarn = true;
           }
         } else if (side === "SELL") {
           //卖出止损，盘口价格低于等于触发价格，系统自动生产订单委托
-          if (
-            (type === 3 || type === 4) &&
-            lprice <= this.trigger_price
-          ) {
+          if ((type === 3 || type === 4) && lprice <= this.trigger_price) {
             showWarn = true;
           }
           //卖出止盈，盘口价格大于等于触发价格，系统自动生成订单委托
-          if (
-            (type === 5 || type === 6) &&
-            lprice >= this.trigger_price
-          ) {
+          if ((type === 5 || type === 6) && lprice >= this.trigger_price) {
             showWarn = true;
           }
         }
@@ -1705,6 +1949,7 @@ export default {
       };
       this.doSubmit(order);
     },
+
     /**
      * 1 限价 2市价 3 限价止损 4 市价止损 5 限价止赢 6 市价止盈
      */
@@ -1759,8 +2004,8 @@ export default {
         location.href = "/user/login/";
         return;
       }
-      if (window.localStorage.contract === 'true') {
-        window.location.reload()
+      if (window.localStorage.contract === "true") {
+        window.location.reload();
         return;
       }
       if (!this.balance.available_balance) {
@@ -1771,9 +2016,9 @@ export default {
         console.log("is submitting");
         return false;
       }
-      
+
       //更新用户session
-      actions.updateSession()
+      actions.updateSession();
 
       const side = type === "make_more" ? "BUY" : "SELL";
       //置灰的时候禁用事件
@@ -1792,24 +2037,23 @@ export default {
       const $bid = this.$big(this.state.ct.bid || 0);
       const $ask = this.$big(this.state.ct.ask || 0);
 
-
       //1 限价 2市价 3 限价止损 4 市价止损 5 限价止赢 6 市价止盈
-      if (this._getOrderType() === 2){
+      if (this._getOrderType() === 2) {
         //市价买入时，取卖一价
-        if(side === "BUY"){
-          $price = $ask
+        if (side === "BUY") {
+          $price = $ask;
         }
         //市价卖出时，取买一价
         else if (side === "SELL") {
-          $price = $bid
+          $price = $bid;
         }
       }
 
       // 提交订单时要做成本对冲，必须区分买和卖
-      let $value = 0
+      let $value = 0;
       //在不做对冲的情况下做判断，低于订单成本最小值时返回错误
       // $amount = $amount + this.buyDelAmount + this.sellDelAmount
-      $value = this.getMargin($amount, $price, side).cost
+      $value = this.getMargin($amount, $price, side).cost;
       // $value = this.$big(this.costValue === "--" ? "0" : this.costValue);
       if ($value.lt(this.pairInfo.min_total)) {
         return utils.alert(
@@ -1819,11 +2063,10 @@ export default {
         );
       }
       //根据买/卖情况，获取对冲后的订单成本
-      if(side === "BUY"){
-        $value = this.costValueBuyNew
-      }
-      else if (side === "SELL") {
-        $value = this.costValueSellNew
+      if (side === "BUY") {
+        $value = this.costValueBuyNew;
+      } else if (side === "SELL") {
+        $value = this.costValueSellNew;
       }
 
       if (!$price.gt(0)) {
@@ -1835,12 +2078,16 @@ export default {
         return this.setInputStatus("amount", "error");
       }
 
-      console.log($value.toString(),this.balance.available_balance.toString())
-      $value = this.$big($value)
+      console.log($value.toString(), this.balance.available_balance.toString());
+      $value = this.$big($value);
       if ($value.gt(this.balance.available_balance)) {
-        if (true){
-          return this.$toast({title: this.$t('order_apply_failed'), body: this.$t('order_apply_message_a'), color: 'red'})
-         } else {
+        if (true) {
+          return this.$toast({
+            title: this.$t("order_apply_failed"),
+            body: this.$t("order_apply_message_a"),
+            color: "red"
+          });
+        } else {
           return utils.alert(this.$i18n.t("amount_over")); //余额不足
         }
       }
@@ -1866,13 +2113,13 @@ export default {
         );
       }
       if (side === "BUY" && $ask.gt(0) && $price.div(1.3).gt($ask)) {
-        if (true){
+        if (true) {
           let toastText = {
-                title:  this.$t('order_apply_failed'),
-                body:   this.$t('order_apply_message_b'),
-                color: 'red'
-            }
-          this.$toast(toastText)
+            title: this.$t("order_apply_failed"),
+            body: this.$t("order_apply_message_b"),
+            color: "red"
+          };
+          this.$toast(toastText);
         } else {
           return utils.alert(this.$i18n.t("price_high", { per: 30 }));
         }
@@ -1933,12 +2180,12 @@ export default {
         // 做空
         this.mmModal.label = this.$t("order_side_sell");
         this.btnShortLoading = true;
-      }  
+      }
       // 先打开弹窗
       if (!local.mmNeverShow) {
         this.showMakeMoreModal = true;
         return;
-      } 
+      }
       const order = {
         type: this._getOrderType(),
         side: side === "SELL" ? 2 : 1,
@@ -1950,7 +2197,7 @@ export default {
       };
       this.doSubmit(order);
 
-      // service.orderContract(order) 
+      // service.orderContract(order)
       /*
       const res = await service.createOrder(order)
       this.submitting = false
@@ -1960,42 +2207,67 @@ export default {
         this.$eh.$emit('protrade:order:refresh')
         this.$eh.$emit('protrade:balance:refresh')
       }
-      */ 
+      */
       // alert(this.currentOpenMode)
     },
     async doSubmit(order) {
-      order.passive =  local.passiveDelegate ? 1 : 0;
+      order.passive = local.passiveDelegate ? 1 : 0;
       order.trigger_price = this.trigger_price;
-      if (this.isExtOrderType) { 
+      if (this.isExtOrderType) {
         order.trigger_close = this.closeAfterTrigger;
         order.trigger_type = this.currentTriggerType;
       }
+
+      //快速止盈
+      if (this.modalStopWinState === true) {
+        order.tp_type = this.modalStopWinType;
+        order.tp_price = this.modalStopWinPrice;
+      }
+      //快速止损
+      if (this.modalStoplossState === true) {
+        order.sl_type = this.modalStoplossType;
+        order.sl_price = this.modalStoplossPrice;
+      }
+
+      //1 限价 2市价 3 限价止损 4 市价止损 5 限价止赢 6 市价止盈
       let res = await service.orderContract(order);
       if (!res.code) {
         this._resetLoadingState();
-        // 通知所有组件，有数据更新，需要强制刷新数据 
+        // 通知所有组件，有数据更新，需要强制刷新数据
         this.$eh.$emit("protrade:order:refresh", "doSubmit");
-        // utils.success(this.$t("contract_order_success"));
-        let side =''
-        let data = res.data
-        data.side === 1 ? side = this.$t('order_side_buy') :side = this.$t('order_side_sell')
- 
-        if(this.userSetting.submission){
-          let content = this.$t('order_apply_message_c', {price: data.price, side, amount: data.amount, currency: data.symbol.replace('FUTURE_','').replace('USD','')  })
+        let side = "";
+        let data = res.data;
+        res.data.side === 1
+          ? (side = this.$t("order_side_buy"))
+          : (side = this.$t("order_side_sell"));
+        if (this.userSetting.submission) {
+          let content = this.$t("order_apply_message_c", {
+            price: data.price,
+            side,
+            amount: data.amount,
+            currency: data.symbol.replace("FUTURE_", "").replace("USD", "")
+          });
           if (order.type > 2) {
-            content = `<p>${content}</p><p>${this.$t('contract_trigger_price')}:${order.trigger_price}</p>`
+            content = `<p>${content}</p><p>${this.$t(
+              "contract_trigger_price"
+            )}:${order.trigger_price}</p>`;
           }
           let toastText = {
-            title: this.$t('message_setting_content_02'),// '委托已提交', 
+            title: this.$t("message_setting_content_02"),
             body: content,
-            color: 'yellow'
-          }
-          this.$toast(toastText)
+            // body:this.$t('order_apply_message_c', {price: data.price, side, amount: data.amount, currency: data.symbol.replace('FUTURE_','').replace('USD','')  }),
+            color: "yellow"
+          };
+          this.$toast(toastText);
         }
         //  ---------------
       } else {
-        utils.alert(res.message);
-        
+        // utils.alert(res.message);
+        this.$toast({
+          title: this.$t("order_apply_failed"),
+          body: res.message,
+          color: "red"
+        });
         this._resetLoadingState();
       }
     },
@@ -2003,6 +2275,12 @@ export default {
       this.btnLongLoading = false;
       this.btnShortLoading = false;
       this.submitting = false;
+
+      (this.modalStopWinState = false), (this.modalStopWinType = 1); // 1 市价， 2 标记价格， 3 指数价格
+      this.modalStopWinPrice = 0;
+      this.modalStoplossState = false;
+      this.modalStoplossType = 1;
+      this.modalStoplossPrice = 0;
     },
     setDealType(type) {
       this.currentDealType = type;
@@ -2012,24 +2290,25 @@ export default {
         this.price = this.lastPrice;
       }
 
-      console.log(this.priceText)
+      console.log(this.priceText);
       this.setButtonState(type);
     },
     //更新买入卖出按钮的状态
     setButtonState(type) {
       //console.log(this.currentDealType);
-      if (!this.amount || this.amount == '0') {
+      if (!this.amount || this.amount == "0") {
         [this.buyEnabled, this.sellEnabled] = [false, false];
-      }
-      else if (type === "market" || type === "limit") {
+      } else if (type === "market" || type === "limit") {
         [this.buyEnabled, this.sellEnabled] = [true, true];
       } else {
         const orderType = this._getOrderType();
+
         let lprice = {
-          1 : this.lastPrice * 1, //盘口价格
-          2 : this.markPrice * 1, //标记价格
-          3 : this.indexPrice * 1  //指数价格
-        } [this.currentTriggerType]
+          1: this.lastPrice * 1, //盘口价格
+          2: this.markPrice * 1, //标记价格
+          3: this.indexPrice * 1 //指数价格
+        }[this.currentTriggerType];
+
         const tprice = this.trigger_price;
         //console.log(oldValue)
         //限价止损  市价止损
@@ -2044,7 +2323,7 @@ export default {
           }
           //当触发价格低于盘口价格时，可以卖出止损
           else if (tprice < lprice) {
-            [this.buyEnabled, this.sellEnabled] = [false, true]; 
+            [this.buyEnabled, this.sellEnabled] = [false, true];
           }
         }
         //限价止盈  市价止盈
@@ -2086,27 +2365,31 @@ export default {
       }
     },
     getBalance() {
-      console.log({product_name:this.pairInfo.product_name})
+      console.log({ product_name: this.pairInfo.product_name });
       if (!this.pairInfo.product_name) {
         return;
       }
       if (!this.isLogin) {
         return;
-      } 
+      }
       return service
         .getContractBalanceByPair({
           symbol: this.pairInfo.product_name
         })
         .then(res => {
-          if (!res.code && !!res.data) { 
+          if (!res.code && !!res.data) {
             this.state.ct.holding = res.data;
-            if (res.data && res.data.leverage != null && res.data.leverage != undefined ) {
+            if (
+              res.data &&
+              res.data.leverage != null &&
+              res.data.leverage != undefined
+            ) {
               this._setLeverage(res.data.leverage);
             }
           }
         });
     },
-    // getBalanceList() { 
+    // getBalanceList() {
     //   if (!this.isLogin) {
     //     return;
     //   }
@@ -2114,10 +2397,10 @@ export default {
     //   .then(res => {
 
     //   })
-    // }, 
-    async fetchData() { 
-      await this.getBalance(); 
-      if (!isEmpty(this.balance)) { 
+    // },
+    async fetchData() {
+      await this.getBalance();
+      if (!isEmpty(this.balance)) {
         const $value = this.$big(this.currentHolding.value || 0);
         if ($value.gte(this.RiskLimitDict[this.RiskLimitDict.length - 1].r)) {
           this.riskModal.currentValue = String(
@@ -2125,16 +2408,20 @@ export default {
           );
           this.maxTimes = this.RiskLimitDict[this.RiskLimitDict.length - 1].m;
         } else if ($value.eq("0")) {
-          this.riskModal.currentValue = !!this.state.ct.pairInfo ? this.state.ct.pairInfo.base_risk : "200" //默认先写成btc_usd的参数
-          this.maxTimes =  !!this.state.ct.pairInfo ?  this.state.ct.pairInfo.max_leverage  : 100
+          this.riskModal.currentValue = !!this.state.ct.pairInfo
+            ? this.state.ct.pairInfo.base_risk
+            : "200"; //默认先写成btc_usd的参数
+          this.maxTimes = !!this.state.ct.pairInfo
+            ? this.state.ct.pairInfo.max_leverage
+            : 100;
           // if (this.state.ct.pair==='FUTURE_BTCUSD') {
           //   this.riskModal.currentValue = "200";
-          //   this.maxTimes = 100; 
+          //   this.maxTimes = 100;
           // }
-          // else { // if (pair==='FUTURE_VDSUSD') 
+          // else { // if (pair==='FUTURE_VDSUSD')
           //   this.riskModal.currentValue = "50";
-          //   this.maxTimes = 20; 
-          // } 
+          //   this.maxTimes = 20;
+          // }
         } else {
           for (let i = 0; i < this.RiskLimitDict.length; i++) {
             let limit = this.RiskLimitDict[i];
@@ -2163,29 +2450,32 @@ export default {
     },
     getOrderValue(amount, side) {
       if (amount && !isEmpty(this.pairInfo)) {
-        let pairInfo = this.pairInfo
+        let pairInfo = this.pairInfo;
         let price = this.price;
         if (this.currentDealType === "market") {
           price = this.lastPrice;
         }
         if (!price) {
           return "--";
-        } 
-        if (this.currentDealType === "market" && side === 'SELL'){
+        }
+        if (this.currentDealType === "market" && side === "SELL") {
           const $bid = this.$big(this.state.ct.bid || 0);
-          if ($bid.eq(0)){
+          if ($bid.eq(0)) {
             return "--";
-          } 
+          }
           if (pairInfo.currency === "BTCUSD") {
             return this.$big(amount)
               .div($bid)
               .toString();
           } else {
-            return this.$big(pairInfo.multiplier).times($bid).times(amount).toString()
+            return this.$big(pairInfo.multiplier)
+              .times($bid)
+              .times(amount)
+              .toString();
           }
-        } else if (this.currentDealType === "market" && side === 'BUY') {
+        } else if (this.currentDealType === "market" && side === "BUY") {
           const $ask = this.$big(this.state.ct.ask || 0);
-          if ($ask.eq(0)){
+          if ($ask.eq(0)) {
             return "--";
           }
           if (pairInfo.currency === "BTCUSD") {
@@ -2193,7 +2483,10 @@ export default {
               .div($ask)
               .toString();
           } else {
-            return this.$big(pairInfo.multiplier).times($ask).times(amount).toString()
+            return this.$big(pairInfo.multiplier)
+              .times($ask)
+              .times(amount)
+              .toString();
           }
         } else {
           if (pairInfo.currency === "BTCUSD") {
@@ -2201,139 +2494,158 @@ export default {
               .div(price)
               .toString();
           } else {
-            return this.$big(pairInfo.multiplier).times(price).times(amount).toString()
+            return this.$big(pairInfo.multiplier)
+              .times(price)
+              .times(amount)
+              .toString();
           }
         }
-
       }
       return "--";
     },
     getCurrentPrice(side) {
       let price = this.price;
-      if (this.currentDealType === "market" && side === 'SELL'){
-          const $bid = this.$big(this.state.ct.bid || 0);
-          if ($bid.eq(0)){
-            return "--";
-          }
-          return this.$big($bid).toString();
-        } else if (this.currentDealType === "market" && side === 'BUY') {
-          const $ask = this.$big(this.state.ct.ask || 0);
-          if ($ask.eq(0)){
-            return "--";
-          }
-          return this.$big($ask).toString();
-        } else {
-          return this.$big(price || 0).toString();
+      if (this.currentDealType === "market" && side === "SELL") {
+        const $bid = this.$big(this.state.ct.bid || 0);
+        if ($bid.eq(0)) {
+          return "--";
         }
+        return this.$big($bid).toString();
+      } else if (this.currentDealType === "market" && side === "BUY") {
+        const $ask = this.$big(this.state.ct.ask || 0);
+        if ($ask.eq(0)) {
+          return "--";
+        }
+        return this.$big($ask).toString();
+      } else {
+        return this.$big(price || 0).toString();
+      }
     },
-    getMargin(amount, price, side){
-       if (
+    getMargin(amount, price, side) {
+      if (
         price &&
         amount &&
         !isEmpty(this.pairInfo) &&
-        typeof this.pairInfo.fee_rate !== "undefined" 
+        typeof this.pairInfo.fee_rate !== "undefined"
       ) {
         //杠杆
-        let lever = this.userLeverTime == 0 ? this.maxTimes : this.userLeverTime; // local.userLeverTime
+        let lever =
+          this.userLeverTime == 0 ? this.maxTimes : this.userLeverTime; // local.userLeverTime
         // // 限额
         // let im = this.$big(this.riskModalInitPercent).div(100); // local.riskLimit
-        let pairInfo = this.state.ct.pairInfo
-        console.log({pairInfo})
-        let im = pairInfo.im
-        let mm = pairInfo.mm 
-        let mul = pairInfo.multiplier
-        let takeRate = pairInfo.take_rate
+        let pairInfo = this.state.ct.pairInfo;
+        console.log({ pairInfo });
+        let im = pairInfo.im;
+        let mm = pairInfo.mm;
+        let mul = pairInfo.multiplier;
+        let takeRate = pairInfo.take_rate;
 
         //this.state.ct.currentDel  当前委托
         //this.holding  持仓
         let userInput = {
           amount: amount || "0",
           executed: 0,
-          side : side === "BUY" ? 1 : 2,
+          side: side === "BUY" ? 1 : 2,
           price
-        }
-        let future = [...this.state.ct.currentDel, userInput]
+        };
+        let future = [...this.state.ct.currentDel, userInput];
 
-        // let totalValue = 0 
-        let totalValue = calculator.getTotalValue(future, this.balance, pairInfo, mul);
-        return calculator.getMargin(amount, price, lever, totalValue, im, mm, takeRate, pairInfo)
+        // let totalValue = 0
+        let totalValue = calculator.getTotalValue(
+          future,
+          this.balance,
+          pairInfo,
+          mul
+        );
+        return calculator.getMargin(
+          amount,
+          price,
+          lever,
+          totalValue,
+          im,
+          mm,
+          takeRate,
+          pairInfo
+        );
       }
       return "--";
-    }, 
-    logoutClose(){ 
-      this.state.isLoginOverdue = false; 
-      utils.setSessionStorageValue('LoginStatus', 0)
+    },
+    logoutClose() {
+      this.state.isLoginOverdue = false;
+      utils.setSessionStorageValue("LoginStatus", 0);
       //  if(utils.getSessionStorageValue("LoginStatus") == 1){
       //     this.state.isLoginOverdue = true;
       //   }
     },
-    layoutInit () { 
-      this.onresize()
-      this.$eh.$on('app:resize', this.onresize)
+    layoutInit() {
+      this.onresize();
+      this.$eh.$on("app:resize", this.onresize);
     },
-    onresize () { 
-      //调整杠杆宽度 
-       let width = this.$refs.divlever.offsetWidth
-      if(width < 300 ) {
-        this.stickLen = 21
-      } else if(width >= 300 && width < 310){
-        this.stickLen = 22
-      } else if(width >= 310 && width < 320){
-        this.stickLen = 23
-      } else if(width >= 320 && width < 330){
-        this.stickLen = 25
-      }  else if(width >= 330){
-        this.stickLen = 26
-      }  
-      this.profitRiskWidth = (width - 10) + "px"
-    },
-    
+    onresize() {
+      //调整杠杆宽度
+      let width = this.$refs.divlever.offsetWidth;
+      if (width < 300) {
+        this.stickLen = 21;
+      } else if (width >= 300 && width < 310) {
+        this.stickLen = 22;
+      } else if (width >= 310 && width < 320) {
+        this.stickLen = 23;
+      } else if (width >= 320 && width < 330) {
+        this.stickLen = 25;
+      } else if (width >= 330) {
+        this.stickLen = 26;
+      }
+      this.profitRiskWidth = width - 10 + "px";
+    }
   },
   watch: {
     // 止损止盈 * 1 限价 2市价 3 限价止损 4 市价止损 5 限价止赢 6 市价止盈
     trigger_price() {
       this.setButtonState();
     },
-    "state.locale"(){
-      this.timersMap[0] = this.$t("contract_all_in")
-      this.language = false
+    "state.locale"() {
+      this.timersMap[0] = this.$t("contract_all_in");
+      this.language = false;
       this.$nextTick(() => {
-        this.language = true
-      })
-      console.log(this.timersMap,this.$t("contract_all_in"))
+        this.language = true;
+      });
+      console.log(this.timersMap, this.$t("contract_all_in"));
     },
     lastPrice() {
       this.setButtonState();
-      if (this.currentDealType  === "market") {
+      if (this.currentDealType === "market") {
         // 锁定价格
         this.price = this.lastPrice;
       }
     },
     amount(v) {
-      this.setButtonState(this.currentDealType)
-      if(v > 99999999){
-        this.amount = 99999999
+      this.setButtonState(this.currentDealType);
+      if (v > 99999999) {
+        this.amount = 99999999;
       }
     },
 
-    currentDealType(val){
-      if(val === "contract_win_stopLimit"  || val === "contract_win_stopMarket"){
-        this.calc = '≤'
-        this.calc1 = '≥'
+    currentDealType(val) {
+      if (
+        val === "contract_win_stopLimit" ||
+        val === "contract_win_stopMarket"
+      ) {
+        this.calc = "≤";
+        this.calc1 = "≥";
       } else {
-        this.calc = '≥'
-        this.calc1 = '≤'
+        this.calc = "≥";
+        this.calc1 = "≤";
       }
     },
-    
-    pair: { 
-      async handler (pair) {
+
+    pair: {
+      async handler(pair) {
         if (pair) {
           //  console.log({pair, price: this.price})
-          this.price = ""
+          this.price = "";
         }
       }
-    },
+    }
     // "$route.query.pair"() {
     //   console.log({pairInfo:this.state.ct.pairInfo})
     //   let pairInfo = this.state.ct.pairInfoList[this.$route.query.pair]
@@ -2359,12 +2671,18 @@ export default {
     //     })  //查询用户设置
     //   }
     // }
+    // //查询用户设置
+    // service.MessageSettings().then(resp => {
+    //   if (!resp.code) {
+    //     this.userSetting = resp.data
+    //   }
+    // })
     this.$eh.$on("protrade:exchange:set", this.set);
     this.$eh.$on("protrade:order:refresh", () => {
       this.fetchData();
     });
     this.$eh.$on("protrade:balance:refresh", this.fetchData);
-    this.$eh.$on('protrade:layout:init', this.layoutInit)
+    this.$eh.$on("protrade:layout:init", this.layoutInit);
     //this.$eh.$on("protrade:exchange:setOnePrice", this.setOnePrice)
     await actions.updateSession();
     if (this.isLogin) {
@@ -2374,84 +2692,85 @@ export default {
   destroyed() {
     this.$eh.$off("protrade:order:refresh");
     this.$eh.$off("protrade:balance:refresh", this.fetchData);
-    this.$eh.$off('protrade:layout:init', this.layoutInit);
-  },
+    this.$eh.$off("protrade:layout:init", this.layoutInit);
+  }
 };
 </script>
 
 <style lang="scss">
-.router-spa_contract>.el-popper{
+.router-spa_contract > .el-popper {
   border: none;
-  .el-scrollbar{
-    background: #1C2435;
+  .el-scrollbar {
+    background: #1d1d1d;
     color: #000;
-    border: none; 
-    .el-select-dropdown__item
-    {
+    border: none;
+    .el-select-dropdown__item {
       color: #d7d7d7;
-      &.hover{
-        background: #1C2435; 
+      &.hover {
+        background: #1d1d1d;
         color: $primary;
       }
     }
   }
-  .popper__arrow{
-    
-    border-bottom-color: #1C2435;
+  .popper__arrow {
+    border-bottom-color: #1d1d1d;
     &::after {
-      border-bottom-color: #1C2435; 
+      border-bottom-color: #1d1d1d;
     }
   }
-   
 }
 </style>
 
 <style lang="scss" scoped>
 .loginStatus {
-    display: block; 
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(51,51,51,0.7);
-    background: radial-gradient(ellipse farthest-side at 50% 50%, rgba(51,51,51,0.7), rgba(0,0,0,0.7));
-    -webkit-box-shadow: 0px 2px 10px 5px rgba(164,140,66,0.4) inset;
-    box-shadow: 0px 2px 10px 5px rgba(164,140,66,0.4) inset;
-    z-index: 9999;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(51, 51, 51, 0.7);
+  background: radial-gradient(
+    ellipse farthest-side at 50% 50%,
+    rgba(51, 51, 51, 0.7),
+    rgba(0, 0, 0, 0.7)
+  );
+  -webkit-box-shadow: 0px 2px 10px 5px rgba(164, 140, 66, 0.4) inset;
+  box-shadow: 0px 2px 10px 5px rgba(164, 140, 66, 0.4) inset;
+  z-index: 9999;
 
-    .mask-logout{
-      position:absolute;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin: -50px -175px;
-      width:350px;
-      padding:6px;
-      text-align: center;
-      color: #fff;
-      background-color: #1e1e1e; 
-      .header {
-        height: 60px;
-        line-height: 60px;
-        font-size: 1.2em; 
-      }
-      .close-btn{
-        display:none !important;
-      }
+  .mask-logout {
+    position: absolute;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -50px -175px;
+    width: 350px;
+    padding: 6px;
+    text-align: center;
+    color: #fff;
+    background-color: #1e1e1e;
+    .header {
+      height: 60px;
+      line-height: 60px;
+      font-size: 1.2em;
     }
-    .link {
-      font-size: 12px;
-      text-align: center;
-      padding: 0 20px;
-      min-width: 84px;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      margin: 0 4px 8px;
-      color: white;
-      border-radius: 3px;
-      line-height: 32px;
-    } 
+    .close-btn {
+      display: none !important;
+    }
+  }
+  .link {
+    font-size: 12px;
+    text-align: center;
+    padding: 0 20px;
+    min-width: 84px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0 4px 8px;
+    color: white;
+    border-radius: 3px;
+    line-height: 32px;
+  }
 }
 .modal-exchange-wrapper {
   font-size: 14px;
@@ -2518,7 +2837,6 @@ export default {
       .dropdown-list {
         .dropdown-item {
           white-space: nowrap;
-
           &:hover,
           &.active {
             background: $contract-block-bg;
@@ -2575,9 +2893,9 @@ export default {
   .button-group {
     justify-content: space-between;
     .btn {
-      // flex: 1;
       background: $contract-block-active-bg;
-      transition: border 0.2s ease-in-out; 
+      transition: border 0.2s ease-in-out;
+
       &.active {
         color: $primary;
         border: 1px solid $primary;
@@ -2705,9 +3023,6 @@ export default {
           width: 70%;
           float: right;
           box-sizing: border-box;
-          // .trade {
-          //   width: 170px;
-          // }
           /deep/ .currency-input {
             .input {
               border: 1px solid #666666;
@@ -2730,7 +3045,7 @@ export default {
         .label {
           line-height: 32px;
           color: #acacac;
-          width: 26%;
+          width: 16%;
         }
       }
       .li-volume {
@@ -2928,42 +3243,44 @@ export default {
 
 // modal-make-more
 .modal-make-more {
-  width: 480px;
+  width: 520px;
+  max-height: 720px;
+  overflow-y: hidden;
   box-sizing: border-box;
   background-color: #252525;
 
-    .modal-title {
-        font-size: 18px;
-        width: 100%;
-        text-align: center;
-    }
-    .modal__holding {
-        background-color: #292929;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-    }
-    .stopmarket_tips {
-      font-size:12px;
-      font-weight:400;
-      color:rgba(255,255,255,1);
-      line-height:18px;
-      text-align: center;
-      margin-top: 8px;
-    }
-    .more__table {
-        font-size: 12px;
-        border: 1px solid #ccc;
-        border-bottom: 0;
-        border-right: 0;
-        .table__tr {
-            display: flex;
-            height: 40px;
-            box-sizing: border-box;
-            border-bottom: 1px solid #ccc;
-            line-height: 40px;
+  .modal-title {
+    font-size: 18px;
+    width: 100%;
+    text-align: center;
+  }
+  .modal__holding {
+    background-color: #292929;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .stopmarket_tips {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
+    line-height: 18px;
+    text-align: center;
+    margin-top: 8px;
+  }
+  .more__table {
+    width: 472px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-bottom: 0;
+    border-right: 0;
+    .table__tr {
+      display: flex;
+      height: 34px;
+      box-sizing: border-box;
+      border-bottom: 1px solid #ccc;
+      line-height: 34px;
 
       .col {
         text-align: center;
@@ -2975,6 +3292,74 @@ export default {
           flex: none;
         }
       }
+    }
+  }
+  .more__action {
+    padding: 3px 11px;
+    width: 450px;
+    background-color: #292929;
+    .stoploss {
+      margin-top: 10px;
+    }
+    .r1 {
+      color: #fff;
+      .el-checkbox.is-checked {
+        /deep/ .el-checkbox__label {
+          color: #fff;
+        }
+      }
+    }
+    .r2 {
+      .action__table {
+        font-size: 12px;
+        border-bottom: 0;
+        border-right: 0;
+        .table__tr {
+          display: flex;
+          height: 40px;
+          box-sizing: border-box;
+          line-height: 32px;
+
+          .col {
+            text-align: left;
+            flex: 1;
+          }
+          .col2 {
+            text-align: center;
+            flex: 2;
+            .currency-input.trade {
+              width: 188px;
+              /deep/ .input {
+                background-color: #292929;
+                text-align: left;
+              }
+            }
+            .trigger_dropdown {
+              /deep/ input {
+                background: transparent !important;
+                color: #fff !important;
+                border-color: #fff !important;
+                width: 188px !important;
+              }
+              /deep/ .el-select__caret {
+                color: #fff;
+              }
+            }
+          }
+          .col3 {
+            text-align: center;
+            flex: 3;
+          }
+        }
+      }
+    }
+    .r3 {
+      padding: 3px 20px;
+      border: 1px solid $primary;
+      font-size: 14px;
+      color: $primary;
+      background-color: $primary-disabled;
+      border-radius: 5px;
     }
   }
   .never-show {

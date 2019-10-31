@@ -3,18 +3,18 @@
     <div class="share-option-bg" />
 
     <div v-loading="!marketData" class="left-side-bar" element-loading-background="rgba(0, 0, 0, 0.3)" element-loading-spinner="el-icon-loading">
-      <div v-for="(value,key) in mapComponentNames" :key="key" :class="{active:drawerIsOpen && activeName === key}" @click="handleClickleftTab(key)">
+      <div v-for="(value,key) in mapLeftNav" :key="key" :class="{active:drawerIsOpen && activeName === key}" @click="handleClickleftTab(key)">
         <svg-icon :icon-class="mapIcons[key]" style="font-size:24px" />
-        <p>{{ value }}</p>
+        <p>{{ $tR(`mapLeftNav.${key}`) }}</p>
       </div>
     </div>
     <transition name="fade" @after-leave="afterLeaveOrEnter" @enter="afterLeaveOrEnter">
       <div v-if="drawerIsOpen" class="left-drawer">
         <div slot="title" flex="cross:center main:justify" style="height:40px">
           <p>
-            {{ temComponet.name=== 'ShareHistory'?'历史记录':'最新价格' }}
+            {{ $tR(`mapLeftNav.${activeName}`) }}
             <span v-if="temComponet.name=== 'SpotIndex'" class="share-text-info" style="font-size:12px;">(USDT/USD)</span>
-            <el-link v-else type="primary" style="font-size:12px" @click="$router.push('/fund/share')"> 完整历史记录</el-link></p>
+            <el-link v-else type="primary" style="font-size:12px" @click="$router.push('/fund/share')"> {{ $tR('fullHistory') }}</el-link></p>
         </div>
         <component :is="temComponet" :data="temComponet.name=== 'ShareHistory'?historyData:marketData" @loadData="loadHistoryData" />
         <i class="el-icon-close" @click="drawerIsOpen = false" />
@@ -43,7 +43,7 @@
     <!-- <charts-dynamic-update class="content" /> -->
     <div class="right-side-bar">
       <div class="content-top hover-scale">
-        <p class="share-text-info"> 投资 <span>（{{(activeShareAccount||{}).min_amount}}-{{(activeShareAccount||{}).max_amount}}）</span></p>
+        <p class="share-text-info"> {{$tR(`rightSideBar.inputTitle`)}} <span>（{{(activeShareAccount||{}).min_amount}}-{{(activeShareAccount||{}).max_amount}}）</span></p>
         <input v-model.number="orderCount" min="1" type="text" maxlength="8">
         <div class="btn-group">
           <div @click="orderCount++"> + </div>
@@ -53,7 +53,7 @@
       <div class="content-center hover-scale" flex="dir:top main:justify cross:center box:mean">
         <div flex="main:center cross:center" class="center-info">
           <el-tooltip placement="bottom" effect="dark">
-            <div slot="content" style="width:200px;line-height:2">看涨期权预期收益率。即，如果您购买看涨期权，且期权到期时标的价格高于初始行权价格，则您的净收益=看涨收益率*投资金额。</div>
+            <div slot="content" style="width:200px;line-height:2">{{ $tR('up_rate') }}{{ $tR('describe') }}</div>
             <i class="el-icon-bell" style="position:absolute;top:10px;right:10px;color:#fff" />
           </el-tooltip>
           <div v-if="mapCurrencyList[0]" class="share-text-info">
@@ -62,16 +62,16 @@
           </div>
         </div>
         <div class="center-btn success" flex="dir:top main:center cross:center" :disabled="!$store.state.userData" type="success" @click="addLabels('green')" @mouseover.native="dynamicChart.activeHover('success')" @mouseout.native="dynamicChart.disableHover('success')">
-          <svg-icon icon-class="share-up" style="font-size:40px" /> <h2 style="margin-top:5px">看涨</h2>
+          <svg-icon icon-class="share-up" style="font-size:40px" /> <h2 style="margin-top:5px">{{ $tR('up_rate') }}</h2>
         </div>
       </div>
       <div class="content-center hover-scale" flex="dir:top main:justify cross:center box:mean">
         <div class="center-btn danger" flex="dir:top main:center cross:center" :disabled="!$store.state.userData" type="danger" @click="addLabels('red')" @mouseover.native="dynamicChart.activeHover('danger')" @mouseout.native="dynamicChart.disableHover('danger')">
-          <svg-icon icon-class="share-down" style="font-size:40px" /> <h2 style="margin-top:5px">看跌</h2>
+          <svg-icon icon-class="share-down" style="font-size:40px" /> <h2 style="margin-top:5px">{{ $tR('down_rate') }}</h2>
         </div>
         <div flex="main:center cross:center" class="center-info">
           <el-tooltip placement="bottom" effect="dark">
-            <div slot="content" style="width:200px;line-height:2">看跌期权预期收益率。即，如果您购买看跌期权，且期权到期时标的价格低于初始行权价格，则您的净收益=看跌收益率*投资金额。</div>
+            <div slot="content" style="width:200px;line-height:2">{{ $tR('down_rate') }}{{ $tR('describe') }}</div>
             <i class="el-icon-bell" style="position:absolute;bottom:10px;right:10px;color:#fff" />
           </el-tooltip>
           <div v-if="mapCurrencyList[0]" class="share-text-info">
@@ -82,12 +82,12 @@
       </div>
     </div>
     <div v-if="marketData" ref="square-container" class="square-container" flex="dir:top box:mean">
-      <div class="text">看涨 <br><span>{{ +marketData.Bullish*100|bigRound(0) }}%</span></div>
+      <div class="text">{{ $tR('up_rate') }} <br><span>{{ +marketData.Bullish*100|bigRound(0) }}%</span></div>
       <div class="mark-box" flex="dir:top box:mean">
         <div class="top" :style="{height:+marketData.Bullish*100+'%'}" />
         <div class="bottom" />
       </div>
-      <div class="text"><span>{{ +marketData.Bearish*100|bigRound(0) }}%</span><br>看跌 </div>
+      <div class="text"><span>{{ +marketData.Bearish*100|bigRound(0) }}%</span><br>{{ $tR('down_rate') }}</div>
     </div>
     <!-- <div class="test" style="margin-left:40px" />
     <div class="test" /> -->
@@ -137,6 +137,9 @@ export default {
         // 'ranking-list': '排行榜',
         // 'teach-view': '教学视频'
       }
+    },
+    mapLeftNav() {
+      return this.chineseLangData.mapLeftNav
     },
     mapIcons() {
       return {

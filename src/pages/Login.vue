@@ -523,7 +523,7 @@ export default {
     async loginSuccess(userInfo) {
       actions.setUserInfo(userInfo)
       actions.resetStatus()
-      activeShareAccount(userInfo.id)
+      
       if (typeof state.loginBack === 'string') {
         location.href = state.loginBack
       } else {
@@ -534,6 +534,7 @@ export default {
       //   name: 'profile'
       // })
       setTimeout(()=>{
+        // activeShareAccount(userInfo.id)
         this.$eventBus.$emit('handleFirstLogin')
       },100)
     },

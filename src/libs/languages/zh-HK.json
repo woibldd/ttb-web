@@ -544,8 +544,8 @@
   "trading_title_count_downE": "( <span style='color:#FF4E4E;'>停盤倒數計時 %{countdown}</span>)",
   "trading_title_count_downS": "( <span style='color:#22CED0;'>開盤倒數計時 %{countdown}</span>)",
   "trading_title_start_price": "今日開盤價格 %{price}",
-  "dowload_text_1": "全球首家",
-  "dowload_text_2": "壹站式上幣數字資產服務中心",
+  "dowload_text_1": "",
+  "dowload_text_2": "數字資產交易共同體",
   "dowload_text_3": "隨時隨地看行情，做交易",
   "dowload_text_4": "實時交易：便捷交易，快速買賣; 隨身錢包：資產充提，安全儲存",
   "dowload_text_5": "交易高效",
@@ -2123,17 +2123,25 @@
   "new_user_register_popup3": "如有疑問，請直接諮詢微信客服。",
   "pair_table_option_empty": "暫無添加自選 ",
   "contract_page": {
+    "order_stop_winloss": "止盈/止损",
+    "contract_edit_price": "委托价格",
+    "contract_edit_amount": "数量",
+    "rise": "上漲",
+    "fall": "下跌",
     "order_action": {
       "price": "價格",
       "trigger_short":"觸發後平倉",
       "order_price": "盤口價格",
       "trigger_close_tips": "止盈止損委託時，勾選此按鈕，平倉委託只會减少您的倉位，觸發時，系統會根據當前倉位數量自動减少這類型委託的數量，甚至制動取消它，來確保它不會新增您的倉位，如果您的餘額不足，當前委託類型觸發後將會委託失敗。",
-      
       "modal": {
         "available": "可用餘額",
         "position": "成交後的倉位大小",
         "liq_price": "預期強平價格",
-        "difference": "標記價格/預期強平價格 差異"
+        "difference": "標記價格/預期強平價格 差異",
+        "stop_win": "止盈%{unit}",
+        "stop_loss": "止损%{unit}",
+        "stop_win_tips": "%{triggerType} %{triggerSide} 至 %{triggerPrice} 将触发 市价止盈单 预计 盈利： %{realized} BTC",
+        "stop_loss_tips": "%{triggerType} %{triggerSide} 至 %{triggerPrice} 将触发 市价止损单 预计 亏损： %{realized} BTC"
       }
     },
     "orderbook": {
@@ -2141,16 +2149,28 @@
     },
     "history": {
       "active": {
-        "contract_assigning_undeal": "委託中未成交"
+        "contract_assigning_undeal": "委託中未成交",
+        "contract_complete_deal": "已成交量/剩余量"
       },
       "stop_loss": {
         "contract_assigning_undeal": "委託中未成交",
-        "price_distance": "觸發價格"
-      }
+        "price_distance": "市價（距離）"
+      },
+      "holding": { 
+        "contract_close_tips3": "这是假设以当前标记价格平仓的预计盈亏，鼠标移除则显示当前委托列表中最新市场价格平仓的预计盈亏。"
+      },
+      "history": {
+        "contract_complete_deal": "已成交量/剩余量"
+      },
+      "edit_cell" : { 
+        "edit_price_pop_title": "委託修改可執行", 
+        "edit_price_pop_content": "將價格更改至%{newValue}可能會使該委託立刻與市場中的其他委託成交。請確認更改。", 
+        "edit_price_pop_confirm": "執行修改"
+      } 
     },
-    "pair_nav":{
+    "pair_nav":{ 
       "24h_h": "24H最高價",
-      "24h_l": "24H最低價"
+      "24h_l": "24H最低價" 
     }
   },
   "home": {
@@ -2164,14 +2184,14 @@
     "withdraw": {
       "address": "提幣地址",
       "bind_google": "绑定谷歌验证器",
-      "bind_email_or_phone": "绑定邮箱/手机",
+      "bind_email_or_phone": "绑定邮箱/手机", 
       "bindings": "已绑定",
       "no_bindings": "未绑定",
       "to_verify": "去认证",
       "to_bind": "去绑定",
       "done": "已完成",
-      "to_deposit_tips": "提币需要您至少完成一笔任意额度充币，激活提币功能",
-      "to_deposit": "去充币",
+      "to_deposit_tips": "提币需要您至少完成一笔任意额度充币，激活提币功能", 
+      "to_deposit": "去充币", 
       "email": "邮箱",
       "phone": "手机号",
       "phone_code": "手机验证码",
@@ -2182,11 +2202,250 @@
     },
     "deposit": {
       "address": "充幣地址"
+    },
+    "contract": {
+      "winloss_record": "盈亏记录",
+      "contract_name": "合约",
+      "future": "永续",
+      "query":"查询",
+      "close_side": "平仓方向",
+      "into_price": "入场价格",
+      "out_price": "出场价格",
+      "close_realized": "平仓盈亏",
+      "close_type": "出场类型",
+      "close_datetime": "平仓成交时间",
+      "close_side_1": "买入平空",
+      "close_side_2": "卖出平多",
+      "close_type_1": "交易",
+      "close_type_2": "强制平仓",
+      "total_realized":"累计盈亏计算",
+      "current_day_realized":"当日已结算盈亏",
+      "unrealized_mark_price":"未结算盈亏（标记价格）",
+      "unrealized_last_price":"未结算盈亏(盘口价格)",
+      "day": "日", 
+      "start": "開始日期",
+      "end": "結束日期"
     }
   },
   "profile": {
     "security": {
       "close_verify_tips": "手機驗證和郵箱驗證不能同時關閉"
+    }
+  },
+  "shareOption": {
+    "time":"時間",
+    "price":"價格",
+    "navText":"急速合約",
+    "share_account": "極速賬戶",
+    "account": "賬戶",
+    "recharge": "充值",
+    "resetMoney": "重置體驗金",
+    "settle":"已結算",
+    "noSettle":"未結算",
+    "up_rate": "看漲",
+    "down_rate": "看跌",
+    "newPrice": "最新價格",
+    "fullHistory": "完整歷史記錄",
+    "describe": "期權預期收益率。即，如果您購買看漲期權，且期權到期時標的價格高於初始行權價格，則您的凈收益=看漲收益率*投資金額。",
+    "mapLeftNav": {
+      "spot-index": "現貨指數",
+      "history": "歷史記錄"
+    },
+    "rightSideBar": {
+      "inputTitle": "投資"
+    },
+    "mapShareColumns": {
+      "currency": "支付貨幣",
+      "symbol": "產品類型",
+      "period": "周期",
+      "trade_type": "交易方向",
+      "amount": "下單金額",
+      "income": "收益金額",
+      "profile": "價值金額",
+      "rate": "賠率",
+      "strike": "行權價格",
+      "sett_price": "結算價格",
+      "create_time": "下單時間",
+      "sett_time": "結算時間",
+      "state": "是否結算"
+    }
+  },
+  "spotIndex": {
+    "USD": "現貨指數",
+    "mapList": {
+      "price": "USDT指數",
+      "usdtRate": "匯率(USDT/USD)"
+    }
+  },
+  "shareHistory":{
+    "investment":"投資",
+    "earnings":"收益",
+    "values":"價值",
+    "noData":"暫無數據"
+  },
+  "Proposer":{
+    "title":"请填写以下内容提交上币申请，收到申请后我们将尽快联系您",
+    "name" :"联系人",
+    "phone": "手机",
+    "wechat": "微信号",
+    "telegram": "电报",
+    "email": "邮箱",
+    "project": "请注明您是项目方，还是项目推荐人",
+    "projectOptions": [{"label":"项目方","value":1},{"label":"项目推荐人","value":2}],
+    "project_name": "项目全称（提供中英全名）",
+    "url": "官方网站",
+    "white": "项目白皮书",
+    "white_url": "最新版白皮书链接",
+    "synopsis" :"项目简介",
+    "currency": "代币全称和代币简称",
+    "type" :"是否为ERC20代币",
+    "typeOptions" :[ "否","是"],
+    "future_url": "最新代币合约地址",
+    "total": "代币总量",
+    "amount" :"代币流通量",
+    "scheme" :"代币分配方案",
+    "precision": "代币币种精度",
+    "locked": "代币锁仓方案及解锁周期",
+    "report_url": "代币智能合约安全审计报告地址 <br/>（如没有请填写：无）",
+    "price": "私募价格 <br/>（1ETH或1BTC对应的对少代币，务必准确填写，如没有私募，填写：无）",
+    "starting": "是否首发",
+    "startingOptions": [ "否","是"],
+    "bourse": "如果非首发，请填写已上币的交易所 <br/>（如没有请填写：无）",
+    "user_number": "社群平台及用户数",
+    "plan_time": "计划上币时间",
+    "errorMassage":"选项必填",
+    "applySuccess":"申请成功",
+    "verifyText":"格式错误",
+    "submit":"提交"
+  },
+  "otc": {
+    "b_price_i": "100~50000 CNY"
+  },
+  "el":{
+    "pagination":{
+      "total":"共 {total} 条",
+      "pagesize":"条/页",
+      "goto":"前往",
+      "pageClassifier":"页"
+    },
+    "datepicker": {
+      "now": "現在",
+      "today": "今天",
+      "cancel": "取消",
+      "clear": "清空",
+      "confirm": "確認",
+      "selectDate": "選擇日期",
+      "selectTime": "選擇時間",
+      "startDate": "開始日期",
+      "startTime": "開始時間",
+      "endDate": "結束日期",
+      "endTime": "結束時間",
+      "prevYear": "前一年",
+      "nextYear": "後一年",
+      "prevMonth": "上個月",
+      "nextMonth": "下個月",
+      "year": "年",
+      "month1": "1 月",
+      "month2": "2 月",
+      "month3": "3 月",
+      "month4": "4 月",
+      "month5": "5 月",
+      "month6": "6 月",
+      "month7": "7 月",
+      "month8": "8 月",
+      "month9": "9 月",
+      "month10": "10 月",
+      "month11": "11 月",
+      "month12": "12 月", 
+      "weeks": {
+        "sun": "日",
+        "mon": "一",
+        "tue": "二",
+        "wed": "三",
+        "thu": "四",
+        "fri": "五",
+        "sat": "六"
+      },
+      "months": {
+        "jan": "一月",
+        "feb": "二月",
+        "mar": "三月",
+        "apr": "四月",
+        "may": "五月",
+        "jun": "六月",
+        "jul": "七月",
+        "aug": "八月",
+        "sep": "九月",
+        "oct": "十月",
+        "nov": "十一月",
+        "dec": "十二月"
+      }
+    },
+    "table":{
+      "emptyText":"无数据"
+    }
+  }, 
+  "fee": {
+    "contract": {
+      "leverage" : "杠杆" ,
+      "provision_fee" :"提供流動性費率",
+      "withdraw_fee" :"選取流動性費率",
+      "capital_fee" :"資金費率",
+      "capital_fee_period" :"資金費率時間段",
+      "next_capital_fee" :"下一資金費率",
+      "every_8_hours" :"每8小時",
+      "tips_1": "掛單是你所下的限價單並未與當前掛單成交，並被放在買賣盤中等待成交的擺單，它增加了買賣盤的流動性。",
+      "tips_2": "當其他人的擺單主動與你所下的擺單成交，你將支付掛單交易手續費（請注意當其他人的限價單與你的限價單成交，而下單時間又早於你時，你將支付吃單費）。",
+      "tips_3": "吃單是你所下的限價單或市價單與當前的掛單直接成交。",
+      "tips_4": "當你所下的擺單主動與其他人的擺單成交，你將支付吃單交易手續費。",
+      "tips_5": "我們的永續合約，如BTC永續，其資金費用每隔一段時間在多倉和空倉的持有者之間進行交換。在您的交易歷史中，正數金額意味著你在此時段支付資金而負數金額意味著您收取資金。平臺不支付或收取任何資金費用"
+    
+    }
+  },
+  "trading_page": {
+    "mpv_modal": {
+      "tips": "提示",
+      "content_a": "請認真閱讀一下內容：",
+      "content_b": "根據MPV項目法律監管要求，MPV項目需要獲取您的以下資訊：",
+      "content_c": "MPV持有者的账号、名字、证件号、电邮、MPV成交量信息、充/提币信息、MPV划转信息。",
+      "content_d": "*這將不會影響您的提幣操作",
+      "content_e": "《MPV附加條款》",
+      "chk_text": "閱讀並同意"  
+    }
+  },
+  "set_service_fee": "手續費設定",
+  "gift": {
+    "banner": {
+      "btn_text": "Redeem $60 Trading Bonus"
+    },
+    "content": { 
+      "tips_1": "Registration Bonus",
+      "tips_2": "First Deposit Bonus",
+      "valuation": "Current Equivalent：%{value} BTC",
+      "detail_a":"New successful registered and verification of the account, with a contract account, you can get a $10 equivalent BTC registration transaction bonus (direct withdrawal is not supported ), can be used for platform contract product trading experience;",
+      "detail_b":"No deposit required;",
+      "detail_c":"After customer service is confirmed, bonus will be automatically remitted to your registered account; ",
+      "detail_d":"Support withdrawal of profitable portion;",
+      "detail_e":" New users are exclusive, and the bonus is only used as a trading margin.",
+      "detail_f":" Only users who have deposit for the first time and meet the conditions will receive an additional $50 equivalent BTC;",
+      "detail_g":"The deposit amount exceeds (including) 0.2BTC;",
+      "detail_h":"The bonus will be automatically remitted to your registered account;",
+      "detail_i":"Support withdrawal of profitable portion;",
+      "detail_j":"The first deposit bonus does not support direct withdrawal, only used as a trading margin.",
+      "btn_text": "Redeem My Bonus"
+    },
+    "footer": {
+      "title":"What is IXX's Referral program?",
+      "content": "It is a program that aims to reward all our existing loyal traders on crypto markets to share the joy of trading on IXX with their friends, families, colleagues, and acquaintances. Traders can earn a USD 10 bonus (equivalent in BTC) immediately as long as the referred user has deposited at least 0.02 BTC, regardless of the trading volume. Traders can only either participate in the referral program or the affiliate program."
+    },
+    "modal": {
+      "title": "Congratulations on your successfu registration!",
+      "describe": "Contact the official customer service to receive up to $60 contract transaction bonus",
+      "qr_a": "Add official WeChat Customer Service",
+      "qr_b": "Join Telegram telegraph group",
+      "contact_a": "Official Email：support@ixx.com ",
+      "contact_b": "Follow Telegram :https://t.me/ixxofficial ",
+      "contact_c": "Follow Twitter @IXX_Official"  
     }
   }
 }

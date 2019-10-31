@@ -826,6 +826,9 @@ const service = {
   orderContract(params) {
     return getCache('c_orderContract', () => request('contract/order', params), 1e3)
   },
+  modifyContract (params) {
+    return request('contract/modify', params)
+  }, 
   orderContractClose(params) {
     return request('contract/close', params)
   },
@@ -1309,7 +1312,22 @@ const service = {
   gameTradeList(params) {
     return request('future/activity/gameTrade/list', params)
   },
-
+  //盈亏历史
+  getFutureCloseRealized(params) { 
+    return getCache('c_future_close_realized', () => request('future/account/close_realized', params), 1e3)
+  },
+  //盈亏历史走势
+  getFutureCloseRealizedDays(params) {
+    return getCache('c_future_close_realized_days', () => request('future/account/close_realized_days', params), 1e3)
+  },
+  //查询用户的tag列表
+  futureActivityGet(params) {
+    return request('future/activity/wallet/queryUserTag', params)
+  },
+  //设置用户tag
+  futureActivitySet(params) {
+    return request('future/activity/wallet/setTag', params)
+  }
 }
 
 export async function fetch(url, body, options, method = 'post') {

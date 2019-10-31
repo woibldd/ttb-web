@@ -27,23 +27,39 @@
     <div class="pairs-table">
       <div class="pairs-table__head  pl-10 pr-10">
         <div class="head-item percent5"/>
-        <div class="head-item percent13">
+        <!-- <div class="head-item percent13">
           {{ $t('currency') }}
+        </div> -->
+        <div   class="head-item percent13"
+          @click="setSort('pair')">
+          <sort
+            :label="$t('currency')"
+            :state="stateSortBy('pair')"/>
         </div>
-        <div class="head-item percent18_8">
-          {{ $t('homechart_price') }}
+        <div class="head-item percent18_8" @click="setSort('price')">
+           <sort
+            :label="$t('homechart_price')"
+            :state="stateSortBy('price')"/>  
         </div>
-        <div class="head-item percent14_8">
-          {{ $t('homechart_24h_chg') }}
+        <div class="head-item percent14_8" @click="setSort('delta')">
+          <sort
+            :label="$t('homechart_24h_chg')"
+            :state="stateSortBy('delta')"/>
         </div>
-        <div class="head-item percent14_8">
-          {{ $t('homechart_24h_l') }}
+        <div class="head-item percent14_8" @click="setSort('lowest')">
+          <sort
+            :label="$t('homechart_24h_l')"
+            :state="stateSortBy('lowest')"/>
         </div>
-        <div class="head-item percent14_8">
-          {{ $t('homechart_24h_h') }}
+        <div class="head-item percent14_8"  @click="setSort('highest')">
+          <sort
+            :label="$t('homechart_24h_h')"
+            :state="stateSortBy('highest')"/> 
         </div>
-        <div class="head-item percent14_8">
-          {{ $t('homechart_24h_v') }}
+        <div class="head-item percent14_8" @click="setSort('vol')">
+           <sort
+            :label="$t('homechart_24h_v')"
+            :state="stateSortBy('vol')"/>
         </div>
         <div class="head-item percent8">
           {{ $t('actions') }}
@@ -166,25 +182,29 @@
 import { state } from '@/modules/store'
 import service from '@/modules/service'
 import { pairfix } from '@/mixins/index'
-import dataView from './data-view'
+import tickTableMixin from '@/mixins/tick-table'
+import dataView from './data-view' 
+import Sort from '../../Trading/Sort'
+
 export default {
   components: {
     dataView
   },
-  mixins: [pairfix],
+  components: { Sort },
+  mixins: [pairfix, tickTableMixin],
   props: {
-    sortedList: {
-      type: Array,
-      default() {
-        return []
-      }
-    },
-    getDelta: {
-      type: Function,
-      default() {
-        return v => v
-      }
-    }
+    // sortedList: {
+    //   type: Array,
+    //   default() {
+    //     return []
+    //   }
+    // },
+    // getDelta: {
+    //   type: Function,
+    //   default() {
+    //     return v => v
+    //   }
+    // }
 
   },
   data() {

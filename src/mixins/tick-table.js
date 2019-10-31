@@ -116,6 +116,12 @@ export default {
           case 'vol':
             value = item.tick ? item.tick.volume_24h : 0
             break
+          case 'highest': 
+            value = item.tick ? item.tick.highest_24h : 0
+            break
+          case 'lowest': 
+            value = item.tick ? item.tick.lowest_24h : 0
+            break 
           default:
             value = item.tick ? (item.tick[this.sortBy] || item[this.sortBy]) : 0
             break

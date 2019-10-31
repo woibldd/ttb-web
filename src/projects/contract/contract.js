@@ -25,12 +25,15 @@ import {
   Select,
   Option,
   Input,
+  InputNumber,
   Radio,
   RadioGroup,
   RadioButton,
   Loading,
   MessageBox,
-  Checkbox
+  Checkbox,
+  Popover,
+  Button,
 } from 'element-ui'
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
@@ -48,12 +51,15 @@ Vue.use(VTooltip, {
 Vue.use(Select) // 引入element单个组件
 Vue.use(Option)
 Vue.use(Input)
+Vue.use(InputNumber)
 Vue.use(Checkbox)
 Vue.use(Radio)
 Vue.use(RadioGroup)
 Vue.use(RadioButton)
 Vue.use(Loading)
 Vue.use(ToastRegistry)
+Vue.use(Popover)
+Vue.use(Button) 
 
 const request = require.context('../../assets/svg', true, /\.svg$/)
 /* console.log('request', request)

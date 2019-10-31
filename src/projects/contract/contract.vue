@@ -286,7 +286,7 @@ export default {
     const $this = this
     setInterval(function() {
       // console.log(this.problemError)
-      service.getOrderfills({ page: 1, size: 10, symbol: this.state.ct.pair }).then(res => {
+      service.getOrderfills({ page: 1, size: 10, symbol: $this.state.ct.pair }).then(res => {
         if (!res.code) {
           // const number = 0
           if (JSON.stringify(newOrder) === '{}') {

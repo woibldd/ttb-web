@@ -7,11 +7,15 @@
         @input="handleInput($event,field)"
         @change="handleChange($event,field,index)"
         @select="handleChange($event,field,index)" -->
+        <span v-if="field.labelHtml" slot="label" v-html="field.labelHtml"></span>
       <component :is="field.fieldType?'el-'+field.fieldType:field" v-model="field[field.vModel]" :default-first-option="true" v-bind="filterComponentAttrsfield(field)" clearable v-on="resetEvent(field)">
-        <span v-if="field.slotDefault">{{ field.slotDefault }}</span>
+        <span v-if="field.slotDefault && !field[field.vModel]" v-html="field.slotDefault" />
         <!-- <component :is="field.append" /> -->
+        <!-- <i slot="prefix" class="el-input__icon el-icon-search"></i> -->
+        
+        <svg-icon  slot="prefix" style="color:#01ced1" v-if="field.prefix" :icon-class="field.prefix" />
         <component :is="field.slot" v-if="field.slot" />
-        <!-- <template v-if="field.fieldType === 'select'">
+        <template v-if="field.fieldType === 'select'">
           <el-option
             v-for="(item,i) in field.options||[]"
             :key="i"
@@ -27,7 +31,7 @@
             :disabled="item.disabled"
             :label="handleValue(item,field,i)"
           >{{ handleLabel(item,field,i) }}</el-radio>
-        </template> -->
+        </template>
       </component>
       <el-button v-if="field.append" :type="field.append.type || 'pramiry'" :disabled="field.append.disabled" :style="field.append.style" class="custom-input-append" @click="e=>field.append.click && field.append.click(e,field.append)">{{ field.append.text }}</el-button>
     </el-form-item>
@@ -83,11 +87,13 @@ export default {
   methods: {
     verifyAll() {
       const obj = {}
+      console.log(this.$attrs);
+      
       this.schema.forEach(item => {
         // if (typeof item[item.vModel] === "string")
         //   item[item.vModel] = item[item.vModel].tirm();
-        if (item.required && isEmpty(item[item.vModel]) && item[item.vModel] !== 0) item.error = item.errorMassage || '此项必填'
-        else if (item.validate && !item.validate(item)) item.error = item.errorMassage || '不合规则'
+        if (item.required && isEmpty(item[item.vModel]) && item[item.vModel] !== 0) item.error = item.errorMassage || this.$attrs.errorMassage  || '此项必填'
+        else if (item.validate && !item.validate(item)) item.error = item.errorMassage|| '不合规则'
         else item.error = ''
         obj[item.vModel] = item[item.vModel]
       })
@@ -120,11 +126,11 @@ export default {
       const { optValue, valueKey } = field
       if (optValue === 'index') return index
       else if (valueKey) return item
-      else { return typeof item === 'object' ? (optValue ? item[optValue] : item.name) : item }
+      else { return typeof item === 'object' ? (optValue ? item[optValue] : item.value) : item }
     },
     handleLabel(item, field, index) {
       const { optLabel } = field
-      return typeof item === 'object' ? (optLabel ? item[optLabel] : item.name) : item
+      return typeof item === 'object' ? (optLabel ? item[optLabel] : item.label) : item
     },
     handleControl(controlBy) {
       if (!controlBy || isEmpty(controlBy)) return true
@@ -156,6 +162,7 @@ export default {
 <style scoped lang="scss">
 .custom-form{
   .custom-form-item{
+    line-height: normal;
     .custom-input-append{
       position: absolute;
       top: 0px;

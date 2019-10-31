@@ -15,6 +15,7 @@ const h5plan = () => import('@/pages/plan/h5/index')
 const plan = () => import('@/pages/plan/index')
 const h5treaty = () => import('@/pages/plan/h5/treaty')
 const treaty = () => import('@/pages/plan/treaty')
+const giftMoney = () => import(/*  */ '@/pages/Receive.vue')
 export const otherRouter = [
   {
     path: '/',
@@ -289,4 +290,14 @@ export const otherRouter = [
     },
     component: treaty
   },
+  {
+    path: '/giftMoney',
+    name: 'giftmoney',
+    component: giftMoney,
+    meta: { 
+      nav: true,
+      footer: true,
+      class: 'dark'
+    } 
+  }
 ]

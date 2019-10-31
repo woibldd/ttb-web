@@ -66,7 +66,7 @@ export default {
     currency: {
       type: String
     },
-    value: String,
+    value: [String, Number],
     // 步长间隔 N 每次增加N个最小单位
     accuracy: {
       type: Number,

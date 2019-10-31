@@ -158,17 +158,17 @@ export default {
               key: "symbol"
             },
             {
-              title: "amount",
+              title: "contract_page.contract_edit_amount",
               width: "",
               key: "amount"
             },
             {
-              title: "contract_assign_price",
+              title: "contract_page.contract_edit_price",
               width: "",
               key: "price"
             },
             {
-              title: "contract_complete_deal",
+              title: "contract_page.history.active.contract_complete_deal",
               width: "",
               key: "executed_amount"
             },
@@ -186,6 +186,11 @@ export default {
               title: "status",
               width: "",
               key: "state"
+            },
+            {
+              title: "contract_page.order_stop_winloss",
+              width: "",
+              key: "order_stop_winloss"
             },
             {
               title: "order_th_placed",
@@ -285,7 +290,7 @@ export default {
               key: "price"
             },
             {
-              title: "contract_complete_deal", //完全成交
+              title: "contract_page.history.history.contract_complete_deal", //完全成交
               width: "",
               key: "executed_amount"
             },
@@ -787,6 +792,22 @@ export default {
         }
       }); 
     },
+    async refreshTriggerCount(){
+      let tab = "contract_history_stop_loss" 
+      if(tab === this.current){
+        return
+      }
+      let params = {
+        symbol: this.state.ct.pair,
+        page: 1,
+        size: 1
+      };
+      await service.getStoplossOrder(params).then(res => { 
+        if (!res.code && !!res.data) { 
+          this.setTabDataCount(tab, res.data.total);
+        }
+      })
+    },
     refreshHoldingCount() {
       let holdingTag = "contract_history_position";
       if(holdingTag === this.current){
@@ -840,6 +861,7 @@ export default {
       this.fetchData(); 
       this.refreshCurrentDelegation(); 
       this.refreshOrderHistory()
+      this.refreshTriggerCount()
       if (!isNaN(Number(type))) { 
         //console.log({type})
         this.refreshHoldingCount()

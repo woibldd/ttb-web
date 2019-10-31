@@ -61,7 +61,12 @@ export const capitalRouter = [
                 path: 'assets-history',
                 name: 'AssetsHistory',
                 component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contract/assets-history')
-              }
+              },
+              {
+                path: 'winloss-history',
+                name: 'WinLossHistory',
+                component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contract/winloss-history')
+              },
             ]
           },
           {

@@ -97,7 +97,8 @@ export default {
         }
         holding.pairInfo = pairInfo
         let lastPrice = pairInfo.lastPrice// this.lastPrice
-        let markPrice = pairInfo.markTick  // this.markPrice  
+        let markPrice = pairInfo.markTick  // this.markPrice 
+        let indexPrice = pairInfo.indexPrice
         let mul = pairInfo.multiplier
         let value_scale = pairInfo.value_scale
 
@@ -121,6 +122,7 @@ export default {
         // holding.markPrice = markPrice
         Vue.set(holding, 'lastPrice', lastPrice)
         Vue.set(holding, 'markPrice', markPrice)
+        Vue.set(holding, 'indexPrice', indexPrice)
         // console.log(holding, 'vue-set')
         holding.unrealized = "0"
         holding.unrealizedlp = "0"

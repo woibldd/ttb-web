@@ -29,8 +29,7 @@
           >
             {{ $t('FrenzySaleZone') }}(SP)
             <icon name="hot-red"/>
-            <!-- <img src="@/assets/hot.png"
-alt style="position: relative;top: 5px;left: 5px;"> -->
+            <!-- <img src="@/assets/hot.png" alt style="position: relative;top: 5px;left: 5px;"> -->
           </router-link>
 
           <div class="nav_link arrow-down">
@@ -39,11 +38,11 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
               class="nav_link  ml-30">
               {{$t('plan')}}
               <img src="./../assets/down.png" width="24" height="24" alt="" style="zoom: 1;
-    display: inline-block;
-    vertical-align: top;
-    width: 18px;
-    height: 18px;
-    margin-top: 2px;">
+                display: inline-block;
+                vertical-align: top;
+                width: 18px;
+                height: 18px;
+                margin-top: 2px;">
             </router-link>
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
@@ -113,7 +112,7 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
             v-if="isTestnet"
             to="/share_option"
             class="nav_link  ml-30">
-            {{ $t('share_option.navText') }}
+            {{ $t('shareOption.navText') }}
           </router-link>
           <!-- <div class="nav_link arrow-down">
             <a
@@ -202,45 +201,23 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
         </div>
       </div>
       <div class="nav_right">
-        <div
-          class="set-app-dl right_options"
-          style="margin-right: 40px;">
-          <router-link
-            :to="{name: 'Download'}"
-            class="nav_log_res">
-            <div class="app-dl">
-              <icon
-                class="mr-3"
-                name="topbar-dl-phone"/>APP
-            </div>
-          </router-link>
-        </div>
-        <div
+         <div
           v-if="!state.userInfo"
-          class="right_options">
+          class="nav_item right_options">
           <router-link
             :to="{name:'login'}"
-            class="nav_log_res border-right-1 pr-14 mr-14"
-          >{{ $t("signin") }}</router-link>
+            class="nav_log_res mr-20">{{ $t("signin") }}</router-link>
           <router-link
             :to="{name:'register'}"
             class="nav_log_res">{{ $t("signup_title") }}</router-link>
         </div>
-        <div
-          v-else
-          class="right_options">
-          <!-- <p class="email">
-            <router-link :to="{name:'trading'}">币币交易</router-link>
-          </p>
-          <p class="email">
-            <router-link :to="{name:'fund'}">我的资产</router-link>
-          </p>-->
-          <div class="fund mr-30">
-            <icon
-              :name="fund"
-            />
-            <span @click="openDefault('fund')">{{ $t('wallets_nav_asset') }}</span>
-
+        <div class="right_options"
+          v-else> 
+          
+          <!-- 我的资产 -->
+          <div  class="nav_item fund mr-15"  style="margin-left: -10px;"> 
+            <span @click="openDefault('fund')">{{ $t('wallets_nav_asset') }}</span> 
+            <icon name='header-down'  class="mini" />
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
@@ -266,16 +243,15 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
                 </li>
               </ul>
             </div>
-          </div>
-          <!-- <div
-            class="fund mr-30"
-            @click="openDefault('orders')">
-            <icon name="order" />
-            {{ $t('orders') }}
-          </div>-->
-          <div class="email mr-30">
-            <span @click="openDefault('profile')">{{ desentInfo }}</span>
-            <div class="dropdown-sub-menu">
+          </div> 
+          <!-- 个人中心 -->
+          <div class="nav_item email mr-15 ml-15" >
+            <!-- <span @click="openDefault('profile')">{{ desentInfo }}</span> -->
+            <span @click="openDefault('profile')">
+              <icon name='header-head' />   
+              <icon name='header-down' class="mini" />
+            </span>
+            <div class="dropdown-sub-menu" style="margin-left: -39px;">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24 mobile">
                   <router-link
@@ -285,8 +261,17 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
                 <li class="dropdown-item pl-24 pr-24">
                   <router-link
                     :to="{name: 'profile'}"
-                    class="link"
-                  >{{ $t('profile_personal_center') }}</router-link>
+                    class="link">{{ $t('profile_personal_center') }}</router-link>
+                </li>
+                <!-- <li class="dropdown-item pl-24 pr-24">
+                  <router-link
+                    :to="{name: 'MyOrderNew'}"
+                    class="link">{{ $t('my_orders') }}</router-link>
+                </li> -->
+                <li class="dropdown-item pl-24 pr-24">
+                  <router-link
+                    :to="{name: 'ServiceFeeSet'}"
+                    class="link">{{ $t('set_service_fee') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
                   <a
@@ -296,71 +281,59 @@ alt style="position: relative;top: 5px;left: 5px;"> -->
               </ul>
             </div>
           </div>
-          <!-- <whDropdown v-if="$route.path === '/share_option/index' && mapBalanceMenu.length" v-model="activeShareAccount" :tooltip="true" label="currency" :handle-label="item=>`${item.currency} 账户 / ${bigRound(item.available,4)}`" style="margin-left:20px" :menu-min-width="250" :menu-options="mapBalanceMenu">
-          <svg-icon slot="item-prefix" slot-scope="{data}" :icon-class="data.currency.toLowerCase()" />
-          <el-link slot="item-suffix" slot-scope="{data}" :disabled="data.currency === 'DEMO'?+data.currency.ordering>0:false" :type="data.currency === 'DEMO'?'danger':'primary'" :underline="false" @click.stop="resetBalance(data.currency)">{{ data.currency === 'DEMO'?'重置体验金':'充值' }}</el-link>
-          <div v-if="activeShareAccount" style="min-width:170px">{{ activeShareAccount.currency }} 账户 / {{ activeShareAccount.available| bigRound(4) }} <i class="el-icon-caret-bottom" /></div>
-        </whDropdown> -->
-
-          <div class="help mr-30"  v-if="$route.path === '/share_option' && mapBalanceMenu.length">
-            <span style="display:inline-block;min-width:160px">{{ activeShareAccount.currency }} 账户 / {{ activeShareAccount.available| bigRound(4) }}</span>
-            <div class="dropdown-sub-menu">
-              <ul class="dropdown-list pt-10 pb-10" style="min-width:250px">
-                <li class="dropdown-item pl-24 pr-24" @click="$store.commit('SET_ACTIVESHAREACCOUNT',item)" flex="main:justify" v-for="item in mapBalanceMenu" :key="item.currency">
-                  <el-tooltip :disabled="false" :content="`${item.currency} 账户 / ${bigRound(item.available,4)}`" placement="left" effect="dark">
-                    <a class="text-nowrap" :style="{color:item.currency === activeShareAccount.currency?'':'#fff'}"><svg-icon :icon-class="item.currency.toLowerCase()" /> {{item.currency}} 账户 /{{item.available| bigRound(4)}}</a>
-                  </el-tooltip>
-                  <span v-if="item.currency === 'DEMO'"  @click.stop="resetBalance(item.currency)">重置体验金</span>
-                  <span v-else>充值</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="help">
-            <span @click="openDefault('help')">{{ $t('footer_help') }}</span>
-            <div class="dropdown-sub-menu">
-              <ul class="dropdown-list pt-10 pb-10">
-                <li class="dropdown-item pl-24 pr-24">
-                  <a
-                    :href="announcementLink"
-                    class="link"
-                    target="_blank">{{ $t('footer_notice') }}</a>
-                </li>
-                <li class="dropdown-item pl-24 pr-24">
-                  <a
-                    :href="helpLink"
-                    class="link"
-                    target="_blank">{{ $t('user_guide') }}</a>
-                </li>
-                <li class="dropdown-item pl-24 pr-24">
-                  <a
-                    :href="requestLink"
-                    class="link"
-                    target="_blank">{{ $t('footer_request') }}</a>
-                </li>
-              </ul>
-            </div>
+        </div>
+        <div class="nav_item ">
+          <router-link 
+            class="download mr-15 ml-15"
+            :to="{name: 'Download'}"> 
+              <icon
+                class="mr-3"
+                name="header-download"/>  
+          </router-link>
+        </div>
+        <!-- 帮助中心中心 -->
+        <div class="nav_item help-center" > 
+          <span class="help mr-15 ml-15" @click="openDefault('help')">
+            <icon name='header-help' />  
+          </span>
+          <div class="dropdown-sub-menu" style="margin-left: -39px">
+            <ul class="dropdown-list pt-10 pb-10">
+              <li class="dropdown-item pl-24 pr-24">
+                <a
+                  class="link"
+                  target="_blank"
+                  :href="announcementLink">{{ $t('footer_notice') }}</a>
+              </li>
+              <li class="dropdown-item pl-24 pr-24">
+                <a
+                  class="link"
+                  target="_blank"
+                  :href="helpLink">{{ $t('user_guide') }}</a>
+              </li>
+              <li class="dropdown-item pl-24 pr-24">
+                <a
+                  class="link"
+                  target="_blank"
+                  :href="requestLink">{{ $t('footer_request') }}</a>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <div class="lang">
-          <icon
-            :name="'flag-'+state.locale"
+        <div class="nav_item lang ml-15">
+          <span class="language">
+            <icon
+            :name="'header-'+state.locale"
             class="mr-5"/>
-          {{ localeText }}
-          <icon
-            class="rig"
-            name="arrow-down"/>
+          </span> 
           <div class="lang_box">
             <a
-              v-for="(value, key) in locales"
+              @click="switchLang(key)"
               :key="key"
-              @click="switchLang(key)">
-              <icon
-                :name="'flag-'+key"
-                class="mr-5"/>
-              {{ value }}
-            </a>
+              v-for="(value, key) in locales"
+            > <icon
+              :name="'flag-'+key"
+              class="mr-5"/>{{ value }}</a>
           </div>
         </div>
       </div>
@@ -507,6 +480,7 @@ export default {
     },
     switchLang(lang) {
       actions.setLocale(lang)
+      localStorage.setItem('locale',lang)
       this.$nextTick(() => {
         location.reload()
       })
@@ -694,10 +668,10 @@ export default {
   }
   .nav_right {
     position: absolute;
-    top: 28px;
-    right: 0;
-    font-size: 14px;
-    height: 100%;
+    min-width: 320px;
+    height: 60px; 
+    right: 30px; 
+    font-size: 14px; 
     display: flex;
     align-items: center;
 
@@ -710,7 +684,7 @@ export default {
 
     .fund,
     .email,
-    .help {
+    .help-center {
       float: left;
       color: #fff;
       padding: 19px 0;
@@ -725,7 +699,7 @@ export default {
     .dropdown-sub-menu {
       background: $protrade-bg;
       position: absolute;
-      top: 31px;
+      top: 60px;
       border-radius: 4px;
       z-index: 999;
 
@@ -755,7 +729,7 @@ export default {
 
     .fund:hover,
     .email:hover,
-    .help:hover {
+    .help-center:hover {
       color: $primary;
       .dropdown-sub-menu {
         // transition: opacity .3s,visibility 0s;
@@ -767,6 +741,30 @@ export default {
     .quit {
       float: left;
       color: #fff;
+    }
+    
+    .nav_item { 
+      .iconfont { 
+        font-size: 20px;
+        &.mini {
+          font-size: 14px;
+          padding: 0 5px;
+        }
+      }
+
+      .help, .language{
+        position: relative;
+        &::after {
+          position: absolute;  
+          left: -17px;
+          top: -3px;
+          content: "";
+          width: 1px;
+          height: 20px;
+          background-color: #aaa; 
+          opacity:0.3;
+        }
+      } 
     }
   }
   .nav_right .nav_log_res,
@@ -781,60 +779,55 @@ export default {
       color: $primary;
     }
   }
-  .lang {
-    width: 110px;
-    height: 24px;
-    margin-left: 20px;
+   .lang {
+    width: 30px;
+    height: 30px;
+    float: left;
     color: #fff;
-    line-height: 24px;
-    border-radius: 20px;
-    border: 1px solid #fff;
-    // background: url(../assets/lang.png) no-repeat 12px center;
-    // text-indent: 16px;
+    line-height: 24px; 
+    margin: 8px 0 0 0px; 
     position: relative;
-    text-align: center;
-    font-size: 12px;
+    text-align: center; 
     cursor: pointer;
-    z-index: 100;
+    z-index: 3;
     .rig {
       display: inline-block;
-      transition: all 0.2s ease-in-out;
-      // position: absolute;
-      // top: 4px;
-      // right: 10px;
+      transition: all 0.2s ease-in-out; 
       vertical-align: middle;
       font-size: 16px;
     }
-    .lang_box {
-      // display: block;
-      width: 100%;
-      height: auto;
-      line-height: 40px;
-      padding-top: 17px;
-      right: 0;
-      position: absolute;
-      display: none;
-      flex-direction: column;
-      a {
-        background: #303c47;
-        display: block;
-        width: 100%;
-        height: 40px;
-        float: left;
-        color: #fff;
-        &:hover {
-          background: #273440;
-          color: #01ced1;
+    .lang_box{ 
+        font-size: 12px;
+        width: 110px;
+        height: auto;
+        line-height: 40px;
+        padding-top: 18px;
+        left:-36px;
+        position: absolute;
+        display: none;
+        flex-direction: column;
+        a{
+            background: #303c47;
+            display: block;
+            width: 100%;
+            height: 40px;
+            color: #fff;
+            text-align: left;
+            padding: 0 20px;
+            box-sizing: border-box;
+            &:hover{
+                background:#273440;
+                color: #c9a96c;
+            }
         }
-      }
     }
-    &:hover {
-      .lang_box {
-        display: block;
-      }
-      .rig {
-        transform: rotate(180deg);
-      }
+    &:hover{
+        .lang_box{
+            display: flex;
+        }
+        .rig {
+          transform: rotate(180deg);
+        }
     }
   }
 

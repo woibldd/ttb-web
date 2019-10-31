@@ -5,6 +5,7 @@
         {{ computedTitle }}
         <span class="ml-30">
           <el-select
+            class="ddl-small"
             v-model="unit"
             value-key="name">
             <el-option
@@ -23,8 +24,11 @@
           class="fund-history mr-22"
           to="/fund/my/contract/history"> {{ $t('transaction_record') }}</router-link>
         <router-link
+          class="fund-history mr-22"
+          to="/fund/my/contract/assets-history"> {{ $t('capital_record') }}</router-link> 
+         <router-link
           class="fund-history"
-          to="/fund/my/contract/assets-history"> {{ $t('capital_record') }}</router-link>
+          to="/fund/my/contract/winloss-history"> {{ $t('fund.contract.winloss_record') }}</router-link>
       </div>
     </div>
     <div class="my-fund-content">
@@ -824,5 +828,8 @@ export default {
           color: $primary;
           border-color: $primary;
       }
+  }
+  .el-select.ddl-small {
+    width:100px;
   }
 </style>
