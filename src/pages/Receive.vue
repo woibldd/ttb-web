@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="content">
-      <div class="card register">
+      <div class="card registration">
         <div class="left">
           <i :class="{en: state.locale != 'zh-CN'}">{{$t('gift.content.tips_1')}}</i>
           <p>
@@ -169,7 +169,7 @@ export default {
       padding: 20px;
       width: 1088px;
       margin: 40px auto 0;
-      &.register {
+      &.registration {
         background-image: url(/static/receive/card-a.png);
       }
       &.deposit {
@@ -193,7 +193,7 @@ export default {
           border-radius: 2px;
           text-align: center;
           &.en {
-            width: 130px;
+            width: 140px;
           }
         }
         label {
