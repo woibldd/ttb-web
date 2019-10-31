@@ -157,13 +157,13 @@ export default {
         const match = pair.match(/^([A-Za-z]*)_([A-Za-z]*)$/)
 
         //默认可交易
-        this.state.tv.isActivity = true
-        if (match.indexOf('MPV') > -1) {
+        this.state.pro.isActivity = true
+        if (!!match && match.indexOf('MPV') > -1) {
           if (this.activityList.indexOf('mvp_user') > -1) {
             this.showMvpModal = false
           } else {
             this.showMvpModal = true
-            this.state.tv.isActivity = false
+            this.state.pro.isActivity = false
           }
         }
         if (match) {
@@ -251,6 +251,25 @@ export default {
     },
     closeModal() {
       this.showMvpModal = false
+    },
+    activityWalletSet(symbol) {
+      let params = {
+        tagSymbol: symbol
+      }
+      let res = service.futureActivitySet(params)
+      //console.log({res})
+      if (!res.code && res.message == "OK") {
+        this.activityWalletGet()
+        this.state.pro.isActivity = true
+      }
+    },
+    async activityWalletGet() {
+      let params = {} 
+      let res = service.futureActivityGet(params)
+      //console.log({res})
+      if (!res.code) {
+        this.activityList = res.code
+      }
     }
   },
   async created () {
@@ -305,25 +324,6 @@ export default {
     this.state.pro.layout = false
     document.querySelector('.page-loading').classList.remove('show')
     document.documentElement.setAttribute('style', '')
-  },
-  activityWalletSet(symbol) {
-    let params = {
-      tagSymbol: symbol
-    }
-    let res = service.futureActivitySet(params)
-    //console.log({res})
-    if (!res.code && res.message == "OK") {
-      this.activityWalletGet()
-      this.state.tv.isActivity = true
-    }
-  },
-  async activityWalletGet() {
-    let params = {} 
-    let res = service.futureActivityGet(params)
-    //console.log({res})
-    if (!res.code) {
-      this.activityList = res.code
-    }
   }
 }
 </script>
