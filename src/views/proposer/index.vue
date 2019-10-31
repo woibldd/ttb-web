@@ -36,12 +36,9 @@ export default {
         { fieldType: 'input', placeholder: vm.$t('Proposer.project_name'), label: vm.$t('Proposer.project_name'), vModel: 'project_name', default: '', required: true },
         { fieldType: 'input',  placeholder: vm.$t('Proposer.url'), label: vm.$t('Proposer.url'), vModel: 'url', default: '', required: true },
         { fieldType: 'upload', onSuccess: (res, files) => {
-          // this.schemaWhite[this.schemaWhite.vModel] = this.schemaWhite.action +'/'+ this.schemaWhite.data.key + files.name
-          // console.log(this.schemaWhite.white);
           const data = this.schemaWhite.data
-          this.schemaWhite[this.schemaWhite.vModel] = `${data.host}/${this.schemaWhite.action}/${this._aaa}${files.name}`
-          console.log(`${data.host}/${this.schemaWhite.action}/${this._aaa}${files.name}`)
-          
+          this.schemaWhite[this.schemaWhite.vModel] = `${data.host}/${this.schemaWhite.action}/${this.fileName}`
+          console.log(`${this.schemaWhite.action}/${data.dir}${this.fileName}`)
         }, data: {},beforeRemove:()=>{
           this.schemaWhite[this.schemaWhite.vModel] = ''
           return true
@@ -75,24 +72,15 @@ export default {
   created() {
     getPolicy().then(res => {
       const data = JSON.parse(res.data)
-      console.log(data)
-      this._aaa = '1992683_' + this.generateToken(32) + '_front_'
+      this.fileName = 'currency_' + this.generateToken(32)
       const obj = {
-        key: data.dir + this._aaa + '${filename}', // data.dir,
+        key: data.dir + this.fileName, // data.dir,
         policy: data.policy,
         OSSAccessKeyId: data.accessid,
         success_action_status: '200', // 让服务端返回200,不然，默认会返回204
         signature: data.signature,
         dir: data.dir
       }
-      // const obj = {
-      //   'key': data.dir, // data.dir,
-      //   'policy': data.policy,
-      //   'OSSAccessKeyId': data.accessid,
-      //   'success_action_status': '200', // 让服务端返回200,不然，默认会返回204
-      //   'signature': data.signature,
-      //   'dir': data.dir
-      // }
       this.schemaWhite.action = data.host
       this.schemaWhite.data = obj
     })
@@ -102,8 +90,6 @@ export default {
       const isok = this.$refs['customForm'].verifyAll()
       const isok1 = this.$refs['customForm1'].verifyAll()
       if (isok && isok1) {
-        console.log(Object.assign(isok, isok1));
-        
         insertCoinApply(Object.assign(isok, isok1)).then(res => {
           this.$message.success(this.$t('Proposer.applySuccess'))
           this.$router.push('/')
