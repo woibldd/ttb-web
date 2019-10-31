@@ -2437,6 +2437,15 @@
     "footer": {
       "title":"What is IXX's Referral program?",
       "content": "It is a program that aims to reward all our existing loyal traders on crypto markets to share the joy of trading on IXX with their friends, families, colleagues, and acquaintances. Traders can earn a USD 10 bonus (equivalent in BTC) immediately as long as the referred user has deposited at least 0.02 BTC, regardless of the trading volume. Traders can only either participate in the referral program or the affiliate program."
+    },
+    "modal": {
+      "title": "Congratulations on your successfu registration!",
+      "describe": "Contact the official customer service to receive up to $60 contract transaction bonus",
+      "qr_a": "Add official WeChat Customer Service",
+      "qr_b": "Join Telegram telegraph group",
+      "contact_a": "Official Email：support@ixx.com ",
+      "contact_b": "Follow Telegram :https://t.me/ixxofficial ",
+      "contact_c": "Follow Twitter @IXX_Official"  
     }
   }
 }

@@ -11,7 +11,7 @@
     <div class="content">
       <div class="card register">
         <div class="left">
-          <i>{{$t('gift.content.tips_1')}}</i>
+          <i :class="{en: state.locale != 'zh-CN'}">{{$t('gift.content.tips_1')}}</i>
           <p>
             <label>{{ gift_a.symbol + gift_a.amount }}</label>
           </p>
@@ -20,7 +20,7 @@
           </p>
         </div>
         <div class="right">
-          <ul>
+          <ul :class="{en: state.locale != 'zh-CN'}">
             <li>1.{{$t('gift.content.detail_a')}}</li>
             <li>2.{{$t('gift.content.detail_b')}}</li>
             <li>3.{{$t('gift.content.detail_c')}}</li>
@@ -31,7 +31,7 @@
       </div>
       <div class="card deposit">
         <div class="left">
-          <i>{{$t('gift.content.tips_2')}}</i>
+          <i :class="{en: state.locale != 'zh-CN'}">{{$t('gift.content.tips_2')}}</i>
           <p>
             <label>{{ gift_b.symbol + gift_b.amount }}</label>
           </p>
@@ -40,7 +40,9 @@
           </p>
         </div>
         <div class="right">
-          <ul>
+          <ul
+            :class="{en: state.locale != 'zh-CN'}"
+            >
             <li>1.{{$t('gift.content.detail_f')}}</li>
             <li>2.{{$t('gift.content.detail_g')}}</li>
             <li>3.{{$t('gift.content.detail_h')}}</li>
@@ -61,22 +63,22 @@
     </div>
     <v-modal :open.sync="showModal">
       <div class="pop">
-        <div class="title">恭喜您成功完成注册！</div>
-        <p class="describe">联系官方客服，领取最高$60合约交易金!</p>
+        <div class="title">{{ $t('gift.modal.title') }}</div>
+        <p class="describe">{{ $t('gift.modal.describe') }}</p>
         <div class="qr-code">
           <div class="lt left">
             <img class="footer_ewm" src="../assets/ixx_kefu_big.jpg" />
-            <p class="footer_ewm_ltxt">{{ $t('添加官方微信客服') }}</p>
+            <p class="footer_ewm_ltxt">{{ $t('gift.modal.qr_a') }}</p>
           </div>
           <div class="lt right">
             <img class="footer_ewm" src="../assets/kefu_telegran_ewm.jpg" />
-            <p class="footer_ewm_ltxt">{{ $t('加入Telegram电报群') }}</p>
+            <p class="footer_ewm_ltxt">{{ $t('gift.modal.qr_b') }}</p>
           </div>
         </div>
         <div class="contact">
-          <div class="item">官方邮箱：service@ixx.com</div>
-          <div class="item">关注微博@ixx数字资产交易所</div>
-          <div class="item">关注推特@IXX_Official</div>
+          <div class="item">{{ $t('gift.modal.contact_a')}}</div>
+          <div class="item">{{ $t('gift.modal.contact_b')}}</div>
+          <div class="item">{{ $t('gift.modal.contact_c')}}</div>
         </div>
       </div>
     </v-modal>
@@ -139,7 +141,7 @@ export default {
 };
 </script> 
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 .receive-container {
   .header {
     height: 400px;
@@ -190,6 +192,9 @@ export default {
           background: rgba(13, 147, 130, 1);
           border-radius: 2px;
           text-align: center;
+          &.en {
+            width: 130px;
+          }
         }
         label {
           font-size: 123px;
@@ -203,9 +208,15 @@ export default {
         float: left;
         margin: 35px 42px 35px 90px;
         ul {
-          li {
-            margin-bottom: 40px;
+          li { 
+            margin-bottom: 40px; 
           }
+          &.en {
+             &li {
+              margin-bottom: 30px;
+            }
+          }
+
         }
       }
       &:after {
@@ -282,6 +293,7 @@ export default {
         float: left;
         width: 220px;
         text-align: center;
+        white-space: nowrap;
       }
     }
   }
