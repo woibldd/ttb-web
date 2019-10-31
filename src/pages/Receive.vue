@@ -16,7 +16,7 @@
             <label>{{ gift_a.symbol + gift_a.amount }}</label>
           </p>
           <p>
-            <span>{{ $t("gift.content.valuation", {value: gift_a.valueA}) }}</span>
+            <span>{{ $t("gift.content.valuation", {value: valueA}) }}</span>
           </p>
         </div>
         <div class="right">
@@ -36,7 +36,7 @@
             <label>{{ gift_b.symbol + gift_b.amount }}</label>
           </p>
           <p>
-            <span>{{ $t("gift.content.valuation", {value: gift_b.valueB}) }}</span>
+            <span>{{ $t("gift.content.valuation", {value: valueB}) }}</span>
           </p>
         </div>
         <div class="right">
