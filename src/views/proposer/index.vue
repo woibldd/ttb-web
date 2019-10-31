@@ -37,7 +37,7 @@ export default {
         { fieldType: 'input',  placeholder: vm.$t('Proposer.url'), label: vm.$t('Proposer.url'), vModel: 'url', default: '', required: true },
         { fieldType: 'upload', onSuccess: (res, files) => {
           const data = this.schemaWhite.data
-          this.schemaWhite[this.schemaWhite.vModel] = `${data.host}/${this.schemaWhite.action}/${this.fileName}`
+          this.schemaWhite[this.schemaWhite.vModel] = `${this.schemaWhite.action}/${data.dir}${this.fileName}`
           console.log(`${this.schemaWhite.action}/${data.dir}${this.fileName}`)
         }, data: {},beforeRemove:()=>{
           this.schemaWhite[this.schemaWhite.vModel] = ''
