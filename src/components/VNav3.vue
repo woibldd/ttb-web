@@ -63,39 +63,26 @@
                     class="link">{{ $t('playBTC') }}
                   </a>
                 </li>
-              </ul>
-            </div>
-
-          </div>
-          <!-- <div
-            class="nav_link arrow-down"
-            v-if='isTestnet'
-            >
-            <router-link
-              to="/snowball"
-              class="nav_link ml-20">{{ $t('playBTC') }}
-            </router-link>
-            <div class="dropdown-sub-menu">
-              <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
                   <a
-                    href="/snowball/bazaar"
-                    :class="{'router-link-active': from === 'contract'}"
-                    class="link">{{ $t('bidTitle') }}
+                    href="javascript:;"
+                    class="link"
+                    @click="subscribeHandle">
+                    {{ this.$t('node_sub') }} 
                   </a>
                 </li>
               </ul>
-            </div>
-          </div> -->
+            </div> 
+          </div>
+         
           <a
-            href="javascript:;"
+            href="/bonus"
             class="nav_link"
-            style="padding-left:30px;"
-            @click="subscribeHandle">
-            {{ this.$t('node_sub') }}
+            style="padding-left:30px;" >
+            {{ this.$t('gift.bonus') }}
             <icon name="hot-red"/>
           </a>
-          <router-link
+          <!-- <router-link
             v-if="isTestnet"
             to="/snowball/bazaar"
             class="nav_link  ml-30">{{ $t('bidTitle') }}
@@ -107,7 +94,7 @@
             style="padding-left:30px;"
             @click="planHandle" >
             {{ $t('plan') }}
-          </a>
+          </a> -->
           <router-link
             v-if="isTestnet"
             to="/share_option"
