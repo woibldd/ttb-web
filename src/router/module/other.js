@@ -15,8 +15,7 @@ const h5plan = () => import('@/pages/plan/h5/index')
 const plan = () => import('@/pages/plan/index')
 const h5treaty = () => import('@/pages/plan/h5/treaty')
 const treaty = () => import('@/pages/plan/treaty')
-const bonus = () => import(/*  */ '@/pages/Bonus.vue')
-const h5bonus = () => import(/*  */ '@/pages/h5/bonus')
+const bonus = () => import(/*  */ '@/pages/Bonus.vue') 
 export const otherRouter = [
   {
     path: '/',
@@ -294,7 +293,7 @@ export const otherRouter = [
   {
     path: '/bonus',
     name: 'bonus',
-    component: isMobile ? h5bonus : bonus,
+    component: isMobile ?  () =>  import(/*  */ '@/pages/h5/bonus/index.vue') :  () =>  import(/*  */ '@/pages/Bonus.vue'),
     meta: { 
       nav: isMobile ? false : true,
       footer:  isMobile ? false : true,
@@ -304,7 +303,7 @@ export const otherRouter = [
   {
     path: '/h5bonus',
     name: 'h5bonus',
-    component: h5bonus,
+    component: () =>  import(/*  */ '@/pages/h5/bonus/index.vue'),
     meta: { 
       nav: false,
       footer:  false,
