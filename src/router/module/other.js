@@ -16,7 +16,7 @@ const plan = () => import('@/pages/plan/index')
 const h5treaty = () => import('@/pages/plan/h5/treaty')
 const treaty = () => import('@/pages/plan/treaty')
 const bonus = () => import(/*  */ '@/pages/Bonus.vue')
-const h5bonus = () => import(/*  */ '@/pages/h5/bonus.vue')
+const h5bonus = () => import(/*  */ '@/pages/h5/bonus')
 export const otherRouter = [
   {
     path: '/',

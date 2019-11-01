@@ -72,13 +72,13 @@
       <div class="pop">
         <div class="title">{{ $t('gift.modal.title') }}</div>
         <p class="describe">{{ $t('gift.modal.describe') }}</p>
-        <div class="qr-code">
+        <div class="qr-code clear-fix">
           <div class="lt left">
-            <img class="footer_ewm" src="../assets/ewm.png" />
+            <img class="footer_ewm" src="../../../assets/ixx_kefu_big.jpg" />
             <p class="footer_ewm_ltxt">{{ $t('gift.modal.qr_a') }}</p>
           </div>
           <div class="lt right">
-            <img class="footer_ewm" src="../assets/ewm.png" />
+            <img class="footer_ewm" src="../../../assets/kefu_telegran_ewm.jpg" />
             <p class="footer_ewm_ltxt">{{ $t('gift.modal.qr_b') }}</p>
           </div>
         </div>
@@ -162,7 +162,7 @@ export default {
 <style lang="scss">
 .receive-container{
   .header {
-    height: 4rem;
+    height: 3.4rem;
     .banner {
       position: relative;
       height: 3.41rem;;
@@ -184,11 +184,10 @@ export default {
   }
   .content {
     .card {
-      height: 2.27rem;
+      height: 3.9rem;
       padding: .2rem;
       width: 7.07rem;
-      margin: .4rem auto 0;
-      border: 1px solid red;
+      margin: .2rem auto 0; 
       &.registration {
         background: url(/static/receive/h5_card_a@2x.png) center center/contain no-repeat ;
       }
@@ -205,19 +204,19 @@ export default {
         i {
           display: block;
           margin: .3rem 0 .1rem .2rem;
-          width: .7rem;
-          height: .23rem;
-          line-height: .23rem;
+          width: .7rem; 
+          height: .48rem;
+          line-height: .24rem;
           font-weight: bold;
           background: rgba(13, 147, 130, 1);
           border-radius: 2px;
           text-align: center;
           &.en {
-            width: 1.4rem;
+            width: 1.7rem;
           }
         }
         label {
-          font-size: .8rem;
+          font-size: 1.4rem;
         }
         span {
           font-size: .15rem;
@@ -225,14 +224,18 @@ export default {
       }
       .right {
         width: 3.67rem;
+        line-height: 1;
         float: left;
         margin: .12rem .3rem;
         ul {
+          font-size: .1rem;
           li { 
-            margin-bottom: .4rem; 
+            margin-top: .1rem;
+            margin-bottom: .3rem; 
           }
           &.en {
             li {
+              margin-top: 0;
               margin-bottom: 0;
             }
           }
@@ -246,7 +249,7 @@ export default {
       }
     }
     .option {
-      margin: .6rem 0 .8rem;
+      margin: .4rem 0 .4rem;
       text-align: center;
       .button {
         width: 5rem;
@@ -260,19 +263,19 @@ export default {
     article {
       width: 6.39rem;
       margin: 0 auto;
-      padding-top: 0.3rem;
+      padding-top: 0.15rem;
       h3 {
         text-align: center;
         font-size: .22rem;
-        margin-bottom: .3rem;
+        margin-bottom: .15rem;
       }
       p {
-        line-height: .4rem;
+        line-height: .22rem;
       }
     }
   }
   .pop {
-    width: 4.4rem;
+    width: 5rem;
     padding: .32rem .57rem;
     .title {
       text-align: center;
@@ -280,43 +283,40 @@ export default {
       margin-bottom: .1rem;
     }
     .contact, .describe {
-      color: $primary;
-      line-height: 2em; 
+      color: $primary; 
       text-align: center;
     }
 
     .qr-code {
-      height: 1.65rem;
       margin-top: .2rem;
+      margin-bottom: .2rem;
       color: #aaa;
       .lt {
-        width: 1.3rem;
+        width: 2.5rem;
+        text-align: center;
         float: left;
-        &.left {
-          margin-left: .65rem;
-        }
-        &.right {
-          margin-left: .45rem;
-        }
+        
       }
       img {
-        height: 1.25rem;
-        width: 1.25rem;
+        height: 1.4rem;
+        width: 1.4rem;
         border: 1px solid #ccc;
         margin-bottom: .05rem;
       }
     }
 
-    .contact {
-      height: .41rem;
-      .item {
-        float: left;
-        width: 2.2rem;
+    .contact { 
+      .item {  
         text-align: center;
         white-space: nowrap;
       }
     }
   }
+  
+  .clear-fix {
+    @include clearfix();
+  }
 }
+
  
 </style>
