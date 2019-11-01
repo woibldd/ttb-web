@@ -189,8 +189,8 @@ export default {
         2: "fund.contract.close_type_2"
       },
       closeType: {
-        1:"fund.contract.close_side_1",
-        2:"fund.contract.close_side_2",
+        "买入平空":"fund.contract.close_side_1",
+        "卖出平多":"fund.contract.close_side_2",
       }
     }
   },
