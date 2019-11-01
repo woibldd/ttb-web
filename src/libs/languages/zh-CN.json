@@ -2349,7 +2349,8 @@
       "unrealized_last_price":"未结算盈亏(盘口价格)",
       "day": "日", 
       "start": "开始日期",
-      "end": "结束日期"
+      "end": "结束日期",
+      "amount": "数量"
     } 
   },
   "profile": {

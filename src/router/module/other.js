@@ -15,7 +15,8 @@ const h5plan = () => import('@/pages/plan/h5/index')
 const plan = () => import('@/pages/plan/index')
 const h5treaty = () => import('@/pages/plan/h5/treaty')
 const treaty = () => import('@/pages/plan/treaty')
-const giftMoney = () => import(/*  */ '@/pages/Receive.vue')
+const bonus = () => import(/*  */ '@/pages/Bonus.vue')
+const h5bonus = () => import(/*  */ '@/pages/h5/bonus.vue')
 export const otherRouter = [
   {
     path: '/',
@@ -291,12 +292,12 @@ export const otherRouter = [
     component: treaty
   },
   {
-    path: '/giftMoney',
-    name: 'giftmoney',
-    component: giftMoney,
+    path: '/bonus',
+    name: 'bonus',
+    component: isMobile ? h5bonus : bonus,
     meta: { 
-      nav: true,
-      footer: true,
+      nav: isMobile ? false : true,
+      footer:  isMobile ? false : true,
       class: 'dark'
     } 
   }
