@@ -212,9 +212,9 @@
           v-else>
 
           <!-- 我的资产 -->
-          <div  class="nav_item fund mr-15"  style="margin-left: -10px;">
+          <div  class="nav_item fund arrow-down mr-15"  style="margin-left: -10px;">
             <span @click="openDefault('fund')">{{ $t('wallets_nav_asset') }}</span>
-            <icon name='header-down'  class="mini" />
+            <icon name='header-down'  class="mini arrow" />
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
