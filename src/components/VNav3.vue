@@ -199,7 +199,7 @@
       </div>
       <div class="nav_right">
         
-        <div class="help mr-15"  v-if="$route.path === '/share_option' && mapBalanceMenu.length">
+        <div class="nav_item fund mr-15"  v-if="$route.path === '/share_option' && mapBalanceMenu.length">
           <span style="display:inline-block;min-width:160px">{{ activeShareAccount.currency }} {{$t('shareOption.account')}} / {{ activeShareAccount.available| bigRound(4) }}</span>
           <div class="dropdown-sub-menu">
             <ul class="dropdown-list pt-10 pb-10" style="min-width:250px">
