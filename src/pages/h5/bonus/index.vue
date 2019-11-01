@@ -227,16 +227,17 @@ export default {
         line-height: 1;
         float: left;
         margin: .12rem .3rem;
-        font-size: .12rem;
         ul {
           li { 
             margin-top: .1rem;
-            margin-bottom: .3rem; 
+            margin-bottom: .1rem; 
+            font-size: .26rem;
           }
           &.en {
             li {
               margin-top: 0;
               margin-bottom: 0;
+              font-size: .21rem;
             }
           }
 
@@ -299,8 +300,8 @@ export default {
         
       }
       img {
-        height: 1.4rem;
-        width: 1.4rem;
+        height: 2rem;
+        width: 2rem;
         border: 1px solid #ccc;
         margin-bottom: .05rem;
       }
