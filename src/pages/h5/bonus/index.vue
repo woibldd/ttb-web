@@ -270,7 +270,8 @@ export default {
         margin-bottom: .15rem;
       }
       p {
-        line-height: .22rem;
+        font-size: .18rem;
+        line-height: .24rem;
       }
     }
   }
@@ -279,7 +280,7 @@ export default {
     padding: .32rem .57rem;
     .title {
       text-align: center;
-      font-size: .18rem;
+      font-size: .25rem;
       margin-bottom: .1rem;
     }
     .contact, .describe {
