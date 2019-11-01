@@ -2284,6 +2284,7 @@
       "close_side_2": "매출액 보통보다 많다",
       "close_type_1": "거래",
       "close_type_2": "강제적 평창",
+      "close_type_4": "ADL감창",
       "total_realized":"누적 손익 계산",
       "current_day_realized":"당일 이미 손익 결산",
       "unrealized_mark_price":"미결산 손익 (표시가격)",

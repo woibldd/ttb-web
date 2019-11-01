@@ -2343,6 +2343,7 @@
       "close_side_2": "卖出平多",
       "close_type_1": "交易",
       "close_type_2": "强制平仓",
+      "close_type_4": "ADL减仓",
       "total_realized":"累计盈亏计算",
       "current_day_realized":"当日已结算盈亏",
       "unrealized_mark_price":"未结算盈亏（标记价格）",
