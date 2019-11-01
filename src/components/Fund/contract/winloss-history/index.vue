@@ -186,7 +186,8 @@ export default {
       rates: null,
       tradeType: {
         1: "fund.contract.close_type_1",
-        2: "fund.contract.close_type_2"
+        2: "fund.contract.close_type_2", 
+        4: "fund.contract.close_type_4" 
       },
       closeType: {
         "买入平空":"fund.contract.close_side_1",

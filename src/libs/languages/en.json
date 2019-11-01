@@ -2559,6 +2559,7 @@
       "close_side_2": "Long",
       "close_type_1": "Transaction",
       "close_type_2": "Forced Liquidation",
+      "close_type_4": " ADL Deleverage",
       "total_realized": "Accumulated P&L calculation",
       "current_day_realized": " Current day  settled P&L",
       "unrealized_mark_price": "Unsettled P&L (Mark Price)",

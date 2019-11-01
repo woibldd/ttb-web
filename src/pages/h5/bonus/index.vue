@@ -227,8 +227,8 @@ export default {
         line-height: 1;
         float: left;
         margin: .12rem .3rem;
+        font-size: .12rem;
         ul {
-          font-size: .1rem;
           li { 
             margin-top: .1rem;
             margin-bottom: .3rem; 
