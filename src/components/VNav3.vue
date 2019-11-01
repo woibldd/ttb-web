@@ -37,12 +37,8 @@
               to="/plan"
               class="nav_link  ml-30">
               {{$t('plan')}}
-              <img src="./../assets/down.png" width="24" height="24" alt="" style="zoom: 1;
-                display: inline-block;
-                vertical-align: top;
-                width: 18px;
-                height: 18px;
-                margin-top: 2px;">
+              
+              <icon name='header-down' class="mini arrow" />
             </router-link>
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
@@ -62,7 +58,22 @@
                     :class="{'router-link-active': from === 'contract'}"
                     class="link">{{ $t('playBTC') }}
                   </a>
-                </li>
+                </li> 
+              </ul>
+            </div> 
+          </div>
+         
+         
+          <div class="nav_link arrow-down"> 
+            <a
+              href="/bonus"
+              class="nav_link ml-30">
+              {{ this.$t('gift.bonus') }} 
+            <icon name="hot-red"/>
+              <icon name='header-down' class="mini arrow" />
+            </a>
+            <div class="dropdown-sub-menu">
+              <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
                   <a
                     href="javascript:;"
@@ -74,14 +85,13 @@
               </ul>
             </div> 
           </div>
-         
-          <a
+          <!-- <a
             href="/bonus"
             class="nav_link"
             style="padding-left:30px;" >
             {{ this.$t('gift.bonus') }}
             <icon name="hot-red"/>
-          </a>
+          </a> -->
           <!-- <router-link
             v-if="isTestnet"
             to="/snowball/bazaar"
@@ -249,17 +259,7 @@
                   <router-link
                     :to="{name: 'profile'}"
                     class="link">{{ $t('profile_personal_center') }}</router-link>
-                </li>
-                <!-- <li class="dropdown-item pl-24 pr-24">
-                  <router-link
-                    :to="{name: 'MyOrderNew'}"
-                    class="link">{{ $t('my_orders') }}</router-link>
-                </li> -->
-<!--                <li class="dropdown-item pl-24 pr-24">-->
-<!--                  <router-link-->
-<!--                    :to="{name: 'ServiceFeeSet'}"-->
-<!--                    class="link">{{ $t('set_service_fee') }}</router-link>-->
-<!--                </li>-->
+                </li> 
                 <li class="dropdown-item pl-24 pr-24">
                   <a
                     class="link"
@@ -592,7 +592,7 @@ export default {
           .dropdown-sub-menu {
             background: $protrade-bg;
             position: absolute;
-            left: 0;
+            left: 22px;
             top: 58px;
             border-radius: 4px;
             z-index: 999;

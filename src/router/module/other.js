@@ -300,5 +300,15 @@ export const otherRouter = [
       footer:  isMobile ? false : true,
       class: 'dark'
     } 
+  },
+  {
+    path: '/h5bonus',
+    name: 'h5bonus',
+    component: h5bonus,
+    meta: { 
+      nav: false,
+      footer:  false,
+      class: 'dark'
+    } 
   }
 ]
