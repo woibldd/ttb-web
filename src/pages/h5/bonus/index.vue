@@ -205,8 +205,9 @@ export default {
         i {
           display: block;
           margin: .3rem 0 .1rem .2rem;
+          padding: .03rem;
           width: .7rem; 
-          height: .48rem;
+          height: .5rem;
           line-height: .24rem;
           font-weight: bold;
           background: rgba(13, 147, 130, 1);
