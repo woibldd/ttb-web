@@ -138,7 +138,7 @@
                     class="link">{{ $t("declaration") }}</a>
                 </li>
               </ul>
-            </div>
+            </div>   
           </div>
 
           <div class="nav_link arrow-down">
@@ -268,11 +268,7 @@
                     :to="{name: 'MyOrderNew'}"
                     class="link">{{ $t('my_orders') }}</router-link>
                 </li> -->
-<!--                <li class="dropdown-item pl-24 pr-24">-->
-<!--                  <router-link-->
-<!--                    :to="{name: 'ServiceFeeSet'}"-->
-<!--                    class="link">{{ $t('set_service_fee') }}</router-link>-->
-<!--                </li>-->
+ 
                 <li class="dropdown-item pl-24 pr-24">
                   <a
                     class="link"
