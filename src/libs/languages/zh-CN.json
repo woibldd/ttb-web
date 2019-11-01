@@ -2542,6 +2542,7 @@
   },
   "set_service_fee": "手续费设置",
   "gift": {
+    "bonus":"交易赠金",
     "banner": {
       "btn_text": "立即领取 $60 交易金"
     },

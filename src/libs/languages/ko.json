@@ -2487,6 +2487,7 @@
     }
   },
   "gift": {
+    "bonus":"Trading Bonus",
     "banner": {
       "btn_text": "Redeem $60 Trading Bonus"
     },
@@ -2507,7 +2508,7 @@
       "btn_text": "Redeem My Bonus"
     },
     "footer": {
-      "title":"What is IXX's Referral program?",
+      "title":"What is a trading bonus?",
       "content": "Trading bonuses allow you to experience our contract products in a real trading environment with no risk and zero cost. Upon successful registration or the first contract account deposit exceeds (including) 0.2BTC, you can get the IXX contract trading bonus. After the bonus is automatically credited into your registered account, you can start trading. After the deposit, the profit part supports the withdrawal. Please note that any withdrawal will result in the zero clearing of the personal trading bonus. "
     },
     "modal": {
