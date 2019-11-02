@@ -1,7 +1,7 @@
 <template>
   <div class="page page-register">
     <resbg/>
-    <bubble  v-if='!isMobile'/> 
+    <bubble  v-if='!isMobile'/>
     <div
       class="panel_box"
       ref="container">
@@ -15,12 +15,12 @@
             v-if="state.enablePhoneSignup">
             <router-link
               :to="{
-                path: '/user/register/email' + routerParams,  
+                path: '/user/register/email' + routerParams,
               }"
-              class="by-link ibt" 
+              class="by-link ibt"
               >
               {{ $t('register_by_email') }}
-            </router-link> 
+            </router-link>
             <span class="sp-line"/>
             <router-link
               class="by-link ibt"
@@ -171,7 +171,7 @@
               />
             </div>
           </div>
-          <div :class="['field']" 
+          <div :class="['field']"
               v-if="!hasAgent">
             <div class="input-box">
               <ix-input
@@ -179,7 +179,7 @@
                 :disabled="hasInvitor"
                 v-model.trim="invitorId"
                 @input="invitorId=$event"
-                :rule="validateRules.invitor" 
+                :rule="validateRules.invitor"
                 :placeholder="$t('invitor_ph')"
                 :label="$t('invitor')"
               />
@@ -207,13 +207,12 @@
           </div>
         </form>
       </div>
-    </div>    
+    </div>
     <v-download />
   </div>
 </template>
-
 <script>
-import _ from 'lodash'  
+import _ from 'lodash'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
 import pwChecker from '@/modules/pw-checker'
@@ -224,7 +223,7 @@ import ixInput from '@/components/common/ix-input/ix-input.vue'
 import responsive from '@/mixins/responsive'
 import bubble from '@/components/Bubble'
 import VDownload from '@/components/VDownload'
-  
+
 // import { MdField } from 'vue-material/dist/components'
 // import gtMixin from '@/mixins/gt'
 
@@ -302,8 +301,8 @@ export default {
           }
         }
       },
-      triggerValidate: false,    
-      showTutorialArrow: false, 
+      triggerValidate: false,
+      showTutorialArrow: false,
       pwdType: 'password',
       pwdType2: 'password',
       routerParams: ''
@@ -330,7 +329,7 @@ export default {
       const params = {
         email: this.email,
         password: this.password,
-        code: this.captcha, 
+        code: this.captcha,
       }
       if (this.by === 'phone') {
         params.region = this.regionId
@@ -346,7 +345,7 @@ export default {
     },
     utm_source () {
       if(location.search.length > 0) {
-        let para = utils.parseQueryString(location.search) 
+        let para = utils.parseQueryString(location.search)
         return para['utm_source'] || ''
       }
     },
@@ -365,7 +364,7 @@ export default {
     },
     isMobile() {
       return this.utils.isMobile()
-    } 
+    }
   },
   watch: {
     params () {
@@ -376,8 +375,8 @@ export default {
       this.clearCountDown()
     }
   },
-  methods: { 
-    async submit (e) { 
+  methods: {
+    async submit (e) {
       // 本地校验
       const check = this.checkParams()
       if (!check.ok || !!this.triggerValidate) {
@@ -409,7 +408,7 @@ export default {
     active (active) {
       this.atPw = active
     },
-    input (field, value) { 
+    input (field, value) {
       this[field] = value
     },
     checkParams () {
@@ -526,21 +525,21 @@ export default {
         console.log(e)
       }
     },
-    
+
   },
-  mounted () { 
+  mounted () {
     this.$eh.$on('app:resize', () => this.fixPosition())
     this.$nextTick(this.fixPosition)
   },
   async created () {
-    
+
     //如果地址带有邀请码信息则将邀请码写入cookie中，有效期为10天  2019/10/16 yzf
     let invitorId = this.$route.query.invitor
     let agentId = this.$route.query.agent
     if (invitorId) {
       utils.setCookie('invitor', invitorId, 10)
       this.hasInvitor = true
-      this.routerParams = `?invitor=${invitorId}` 
+      this.routerParams = `?invitor=${invitorId}`
     } else if (agentId) {
       utils.setCookie('invitor', agentId, 10)
       this.hasAgent = true
