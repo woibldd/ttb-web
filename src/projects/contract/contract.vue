@@ -235,7 +235,7 @@ export default {
     '$route.query.pair': {
       async handler(pair) {
         if (!pair) return
-        const match = pair.match(/^([A-Za-z]*)_([A-Za-z]*)$/)
+        const match = pair.match(/^([a-zA-Z0-9_-]*)_([a-zA-Z0-9_-]*)$/)
         if (match) {
           this.state.ct.pair = pair
           local.future = pair
