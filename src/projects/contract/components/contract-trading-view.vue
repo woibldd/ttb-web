@@ -75,6 +75,9 @@ export default {
     }
   },
   async created() {
+    document.addEventListener('visibilitychange',()=>{
+      if(utils.$tvSocket.socket.readyState !== 1)location.reload()
+  });
     this.$eh.$on('protrade:layout:init', this.layout)
   },
   beforeDestroy() {
