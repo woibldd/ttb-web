@@ -85,7 +85,7 @@ export default {
     this.$store.dispatch('getShareAccountList').then(res=>{
       this.schema[0].options = res.map(item=>item.currency)
       this.schema[0].placeholder = this.$tR('account')
-      this.schema[1].placeholder = this.$tR('time')
+      // this.schema[1].placeholder = this.$tR('time')
     })
   },
   methods: {
