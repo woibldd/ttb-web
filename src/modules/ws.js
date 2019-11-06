@@ -45,29 +45,7 @@ create (channel) {
         }
         hub.$emit('message', data)
       }
-
-      //heartCheck.start();
     }
-    // let heartCheck = {
-    //   timeout: 10000, //10秒一次
-    //   timeoutObj: null,
-    //   serverTimeoutObj: null,
-    //   start: function() {
-    //     console.log('start');
-    //     let self = this;
-    //     this.timeoutObj && clearTimeout(this.timeoutObj);
-    //     this.serverTimeoutObj && clearTimeout(this.serverTimeoutObj);
-    //     this.timeoutObj = setTimeout(function(){
-    //       //这里发送一个心跳，后端收到后，返回一个心跳消息，
-    //       //console.log('这里发送一个心跳')
-    //       socket.send('123456');
-    //       self.serverTimeoutObj = setTimeout(function() {
-    //         console.log(socket);
-    //         socket.close()
-    //       }, self.timeout)
-    //     }, self.timeout)
-    //   }
-    // }
     return hub
   }
 }

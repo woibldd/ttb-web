@@ -25,14 +25,14 @@
           </router-link>
 
           <div class="nav_link arrow-down">
-            <router-link to="/plan" class="nav_link ml-30">
+            <router-link to="/affiliate" class="nav_link ml-30">
               {{$t('plan')}}
               <icon name="header-down" class="mini arrow" />
             </router-link>
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
-                  <router-link to="/plan" class="link">{{ $t('plan') }}</router-link>
+                  <router-link to="/affiliate" class="link">{{ $t('plan') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
                   <a
@@ -63,7 +63,7 @@
                 <li class="dropdown-item pl-24 pr-24">
                   <a href="/bonus" class="link">
                     {{ this.$t('gift.bonus') }}
-                    <icon name="hot-red" /> 
+                    <icon name="hot-red" />
                   </a>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
@@ -125,7 +125,7 @@
                     class="link">{{ $t("declaration") }}</a>
                 </li>
               </ul>
-            </div>   
+            </div>
           </div>
 
           <div class="nav_link arrow-down">
@@ -448,7 +448,7 @@ export default {
         });
     },
     planHandle() {
-      this.$router.push("/plan");
+      this.$router.push("/affiliate");
     },
     subscribeHandle() {
       if (window.localStorage.getItem("X-TOKEN")) {
