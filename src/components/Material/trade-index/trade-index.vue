@@ -138,7 +138,7 @@ export default {
   watch: {
     '$route.params.pair': {
       async handler (pair = '', last) {
-        const match = pair.match(/^([A-Za-z]*)_([A-Za-z]*)$/)
+        const match = pair.match(/^([a-zA-Z0-9_-]*)_([a-zA-Z0-9_-]*)$/)
         if (match) {
           this.pair = pair
           this.tempPair = this._formatPair('index')

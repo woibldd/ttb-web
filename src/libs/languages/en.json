@@ -99,7 +99,7 @@
   },
   "realName": "Real name",
   "join": " Join Now",
-  "plan": "Affiliate Progra",
+  "plan": "Affiliate",
   "login": "Login to IXX Affiliate System",
   "next": "下一步",
   "bannerText": "IXX Exchange is the world's first digital asset trading community. It is committed to realise the ideal utopia nation of blockchain trading ecology and to create an exchange for everyone. I am for everyone, and everyone is for me.  All contributors can share the fruitful outcome from developments of the exchange。",
@@ -2542,7 +2542,7 @@
       }
     },
     "contract": {
-      "day": " Days", 
+      "day": " Days",
       "start": "Start",
       "end": "End",
       "winloss_record": "P&L Record",
@@ -2623,7 +2623,7 @@
     "earnings": "Return",
     "values": "Value",
     "noData": "No Data"
-  }, 
+  },
   "Proposer":{
     "title":"Please fill in the following to submit your application for the currency. We will contact you as soon as we receive the application.",
     "name" :"Name",
@@ -2652,7 +2652,7 @@
     "typeOptions": [
       "YES",
       "NO"
-    ], 
+    ],
     "future_url": "Latest Token Contract Address",
     "total": "Total Supply",
     "amount": "Token Circulation",
@@ -2738,7 +2738,7 @@
     "table":{
       "emptyText":"No data"
     }
-  }, 
+  },
   "fee": {
     "contract": {
       "leverage" : "Leverage" ,
@@ -2751,7 +2751,7 @@
       "tips_1": "Maker fees are paid when you add liquidity to our order book, by placing a limit order under the last trade price for buy and above the last trade price for sell.",
       "tips_2": "Taker fees are paid when you remove liquidity from our order book, by placing any order that is executed against an order of the orderbook. (Please note when your limit order is executed against other user's limit order and his/her order placed earlier than your order, you will pay taker fees.)",
       "tips_3": "Taker means that the limit order or market order you place is executed with the current maker.",
-      "tips_4": "When the order you placed is filled by others orders, you need to pay the taker fees.", 
+      "tips_4": "When the order you placed is filled by others orders, you need to pay the taker fees.",
       "tips_5": "Our perpetual contracts, such as BTC perpetual contracts, have their capital costs exchanged between holders of multiple and short positions at regular intervals. In your trading history, a positive amount means that you paid fund during this period while a negative amount means that you received fund. The platform does not pay or charge any fund fees"
     }
   },
@@ -2763,7 +2763,7 @@
       "content_c": "MPV holder's account number, name, ID number, email, MPV volume information, deposit/withdrawal information, MPV transfer information.",
       "content_d": "*his will not affect your withdrawal function",
       "content_e": "《MPV Additional Terms》",
-      "chk_text": "Read and Agree" 
+      "chk_text": "Read and Agree"
     }
   },
   "set_service_fee": "Fee setting",
@@ -2772,7 +2772,7 @@
     "banner": {
       "btn_text": "Redeem $60 Trading Bonus"
     },
-    "content": { 
+    "content": {
       "tips_1": "Registration Bonus",
       "tips_2": "First Deposit Bonus",
       "valuation": "Current Equivalent：%{value} BTC",
@@ -2799,7 +2799,7 @@
       "qr_b": "Join Telegram telegraph group",
       "contact_a": "Official Email：support@ixx.com ",
       "contact_b": "Follow Telegram :https://t.me/ixxofficial ",
-      "contact_c": "Follow Twitter @IXX_Official"  
+      "contact_c": "Follow Twitter @IXX_Official"
     }
   }
 }
