@@ -665,8 +665,7 @@ export default {
       const param = { 
         email: this.contact_email
       }
-      let res = service.getVerifyCode(param, 'email')
-      // .then(res => {console.log(res)})
+      let res = service.getVerifyCode(param, 'email') 
       return res
     },
     changeAddress (item) {
