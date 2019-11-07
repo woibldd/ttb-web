@@ -2801,5 +2801,22 @@
       "contact_b": "Follow Telegram :https://t.me/ixxofficial ",
       "contact_c": "Follow Twitter @IXX_Official"
     }
+  },
+  "tv" : {
+    "1m": "Line",
+    "1": "1m",
+    "3": "3m",
+    "5": "5m",
+    "15": "15m",
+    "30": "30m",
+    "60": "1h",
+    "120": "2h",
+    "240": "4h",
+    "360": "6h",
+    "720": "12h",
+    "1D": "1d",
+    "1W": "1w",
+    "1M": "1M",
+    "more" : "More"
   }
 }
