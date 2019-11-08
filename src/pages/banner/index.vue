@@ -3,45 +3,38 @@
     <div class="ixx_banner_container" style="height: 400px;"
       :class="[state.locale]"
     >
-      <swiper :options="swiperOption" ref="mySwiper">
-        <swiper-slide v-if="banner.length > 0">
-          <!--<div class="dot-item-list">-->
-            <!--<div class="item-list-banner" v-for="(item, index) in banner" :key="index">-->
-              <!--<a :href="item.url" target="_blank">-->
-                <!--<img-->
-                  <!--:src="item.picture"-->
-                  <!--style="border: 1px solid #01CED1;border-radius: 8px;height: 124px;width: 266px;overflow: hidden;zoom: 1;"-->
-                <!--/>-->
-              <!--</a>-->
-            <!--</div>-->
-          <!--</div>-->
-          <div class="dot-item-list">
-            <swiper :options="swiperOptione">
-              <swiper-slide v-for="(item, index) in banner" :key="index">
-                <a :href="item.url" target="_blank">
-                  <img
-                    :src="item.picture"
-                    style="border: 1px solid #01CED1;border-radius: 8px;height: 124px;width: 266px;overflow: hidden;zoom: 1;"
-                  />
-                </a>
+      <swiper :options="option" ref="mySwiper">
+        <swiper-slide>
+          <div class="dot-banner">
+            <swiper :options="optionFirst" style="height: 168px">
+              <swiper-slide v-for="(item, index) in banner[0]" :key="index">
+                <img :src="item.picture" alt="">
               </swiper-slide>
-              <!--<div class="swiper-pagination swiper-pagination-s" slot="pagination"></div>-->
             </swiper>
           </div>
         </swiper-slide>
-        <swiper-slide v-if="swipeBanner.length > 0">
-          <swiper :options="swiperOptions">
-            <swiper-slide v-for="(item, index) in swipeBanner" :key="index">
-              <div class="normal-item-list">
-                <a :href="item.url" target="_blank">
-                  <img :src="item.picture" style="border-radius: 8px;border:1px solid #01393c" />
-                </a>
-              </div>
-            </swiper-slide>
-            <!--<div class="swiper-pagination swiper-pagination-s" slot="pagination"></div>-->
-          </swiper>
-        </swiper-slide>
-        <div class="swiper-pagination" slot="pagination" />
+       <template>
+         <swiper-slide v-if="banner[1].length > 0">
+           <div class="dot-banner dot-banner1">
+             <swiper :options="optionDot" style="height: 168px">
+               <swiper-slide v-for="(item, index) in banner[1]" :key="index">
+                 <img :src="item.picture" alt="">
+               </swiper-slide>
+             </swiper>
+           </div>
+         </swiper-slide>
+       </template>
+        <template v-if="banner[1].length > 0">
+          <swiper-slide>
+            <div class="dot-banner2">
+              <swiper :options="option" style="height: 400px">
+                <swiper-slide v-for="(item, index) in banner[2]" :key="index">
+                  <img :src="item.picture" alt="">
+                </swiper-slide>
+              </swiper>
+            </div>
+          </swiper-slide>
+        </template>
       </swiper>
     </div>
     <div class="buy-currency-container" v-if="state.locale==='zh-CN' || state.locale==='zh-HK'">
@@ -116,9 +109,10 @@ import "swiper/dist/css/swiper.css";
 
 Vue.use(VueAwesomeSwiper /* { default global options } */);
 export default {
-  props: ["banner", "swipeBanner"],
+  props: [ "swipeBanner"],
   data() {
     return {
+      banner: [],
       amountPoint: 2,
       buy: {
         amount: "",
@@ -130,31 +124,31 @@ export default {
           template: `<i class="currency-icon">&#xe61a;</i> USDT`
         }
       ],
-      swiperOptione: {
-        initialSlide :2,
-        autoplayDisableOnInteraction : false,
+      option: {
+        init: false,
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 1,
+        autoplay: {
+          delay: 3000
+        },
+        loop: true
+      },
+      optionFirst: {
         slidesPerView: 4,
-        slidesPerGroup: 4
+        spaceBetween: 30,
+        slidesPerGroup: 4,
+        loop: true,
+        loopFillGroupWithBlank: true
       },
-      swiperOption: {
-         init:false,
-					grabCursor: true,
-					centeredSlides: true,
-					slidesPerView: 1,
-					autoplay:{
-						delay:3000
-					},
-					loop:true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true
-        }
-      },
-      swiperOptions: {
-        initialSlide :2,
-        autoplayDisableOnInteraction : false,
-        slidesPerView: "auto",
-        centeredSlides: true
+      optionDot: {
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 1,
+        autoplay: {
+          delay: 3000
+        },
+        loop: true
       },
       arr: [],
       money: 0,
@@ -163,6 +157,30 @@ export default {
     };
   },
   methods: {
+    init() {
+      service.getBanners({
+        platform: 3
+      }).then((res) => {
+        if (res.code === 0) {
+          var arrDot1 = []
+          var arrDot2 = []
+          // 筛选图片地址不能为空的数组
+          const banner = res.data.filter(item => item.picture)
+          // 得到第一条数据的类型
+          const firstSolt = 1
+          // 拿到第一组数组
+          const arrDot = banner.filter(item => item.slot === firstSolt)
+          // 得到不为第一条数据的类型的所有数组
+          const otherBanner = banner.filter(item => item.slot !== firstSolt)
+          if (otherBanner.length > 0) {
+            const otherSolt = otherBanner[0].slot
+            arrDot1 = otherBanner.filter(item => item.slot === otherSolt)
+            arrDot2 = otherBanner.filter(item => item.slot !== otherSolt)
+          }
+          this.banner = [arrDot, arrDot1, arrDot2]
+        }
+      })
+    },
     buyHandle() {
       if (this.$big(Number(this.buy.amount)).lt(100)) {
         this.$message.warning(this.$t('zd_xe'));
@@ -192,15 +210,16 @@ export default {
   },
   created() {
     this.bicher();
+    this.init()
   },
   computed: {
-  			swiper() {
-    			return this.$refs.mySwiper.swiper;
-  			}
-		},
-		updated() {
-  			this.swiper.init();
+    swiper() {
+      return this.$refs.mySwiper.swiper;
     }
+  },
+  updated() {
+      this.swiper.init();
+  }
 }
 </script>
 
@@ -237,36 +256,17 @@ export default {
   &.zh-HK {
     background-image: url('./img/bj-zh-HK.png')
   }
-  .swiper-container {
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
-    .dot-item-list,
-    .normal-item-list {
-      width: 1200px;
-      position: absolute;
-      left: 50%;
-      margin-left: -600px;
-      bottom: 40px;
-      display: flex;
-      overflow: hidden;
-      height: 160px;
-      .item-list-banner {
-        flex: 1;
-      }
-    }
-  }
-  .swiper-pagination-bullet {
-    width: 30px;
-    height: 4px;
-    border-radius: 40px;
-    opacity: 0.4;
-    background: #fff;
-  }
-  .swiper-pagination-bullet-active {
-    opacity: 1;
-    background: #09c989 !important;
-  }
+  /*.swiper-pagination-bullet {*/
+  /*  width: 30px;*/
+  /*  height: 4px;*/
+  /*  border-radius: 40px;*/
+  /*  opacity: 0.4;*/
+  /*  background: #fff;*/
+  /*}*/
+  /*.swiper-pagination-bullet-active {*/
+  /*  opacity: 1;*/
+  /*  background: #09c989 !important;*/
+  /*}*/
 }
 .buy-currency-container {
   .number-input {
@@ -427,6 +427,47 @@ export default {
     font-size: 16px;
     // margin-left:5px;
     display: inline-block;
+  }
+}
+.swiper-container {
+  height: 400px;
+  width: 100%;
+  position: relative;
+  .dot-banner {
+    width: 1200px;
+    height: 128px;
+    position: relative;
+    margin: 218px auto 0;
+    .swiper-slide {
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        zoom: 1;
+        border-radius: 6px;
+        border: 1px solid #00badb;
+        box-sizing: border-box;
+      }
+    }
+  }
+  .dot-banner1 {
+    img {
+      width: 100%;
+    }
+  }
+  .dot-banner2 {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    img {
+      width: 100% ;
+      height: 100%;
+      display: block;
+      zoom: 1
+    }
   }
 }
 </style>

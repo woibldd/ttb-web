@@ -54,7 +54,7 @@
       <div class="option">
         <el-button  @click="show" class="button" type="primary">{{$t('gift.content.btn_text')}}</el-button>
       </div>
-    </div> 
+    </div>
 
     <div class="footer">
       <article>
@@ -82,6 +82,7 @@
           <div class="item">{{ $t('gift.modal.contact_c')}}</div>
         </div>
       </div>
+
     </v-modal>
   </div>
 </template>
@@ -118,7 +119,7 @@ export default {
       }
     }
   },
-  computed: { 
+  computed: {
     isLogin () {
       return this.state.userInfo !== null
     },
@@ -140,7 +141,7 @@ export default {
     }
   }
 };
-</script> 
+</script>
 
 <style lang="scss" scoped>
 .receive-container{
@@ -209,8 +210,8 @@ export default {
         float: left;
         margin: 35px 42px 35px 90px;
         ul {
-          li { 
-            margin-bottom: 40px; 
+          li {
+            margin-bottom: 40px;
           }
           &.en {
             li {
@@ -262,7 +263,7 @@ export default {
     }
     .contact, .describe {
       color: $primary;
-      line-height: 2em; 
+      line-height: 2em;
       text-align: center;
     }
 
@@ -366,8 +367,8 @@ export default {
         float: left;
         margin: 35px 42px 35px 90px;
         ul {
-          li { 
-            margin-bottom: 40px; 
+          li {
+            margin-bottom: 40px;
           }
           &.en {
             li {
@@ -419,7 +420,7 @@ export default {
     }
     .contact, .describe {
       color: $primary;
-      line-height: 2em; 
+      line-height: 2em;
       text-align: center;
     }
 
