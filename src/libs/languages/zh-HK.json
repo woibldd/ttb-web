@@ -2467,5 +2467,11 @@
     "1W": "1周",
     "1M": "1月",
     "more" : "更多"
+  },
+  "nav" : {
+    "download_pop": {
+      "scan": "掃碼下載App",
+      "process": "App安裝流程>>"
+    }
   }
 }

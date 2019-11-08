@@ -2593,5 +2593,11 @@
      "1W": "1周",
      "1M": "1月" ,
      "more" : "更多"
+  },
+  "nav" : {
+    "download_pop": {
+      "scan": "扫码下载App",
+      "process": "App安裝流程>>"
+    }
   }
 }

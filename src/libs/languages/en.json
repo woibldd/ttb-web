@@ -2818,5 +2818,11 @@
     "1W": "1w",
     "1M": "1M",
     "more" : "More"
+  },
+  "nav" : {
+    "download_pop": {
+      "scan": "Download App",
+      "process": "App Install Guide >>"
+    }
   }
 }
