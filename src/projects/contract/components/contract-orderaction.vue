@@ -3175,7 +3175,7 @@ export default {
     height: 100%;
     line-height: 30px;
     border-left: 2px solid #fff;
-    line-height: 30px;
+    width: 30px;
     position: relative;
   }
   .icon-money {
