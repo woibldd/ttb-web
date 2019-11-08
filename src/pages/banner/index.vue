@@ -6,7 +6,7 @@
       <swiper :options="option" ref="mySwiper">
         <swiper-slide>
           <div class="dot-banner">
-            <swiper :options="optionFirst" style="height: 168px">
+            <swiper :options="optionFirst" style="height: 128px">
               <swiper-slide v-for="(item, index) in banner[0]" :key="index">
                 <img :src="item.picture" alt="">
               </swiper-slide>
@@ -16,7 +16,7 @@
        <template>
          <swiper-slide v-if="banner[1].length > 0">
            <div class="dot-banner dot-banner1">
-             <swiper :options="optionDot" style="height: 168px">
+             <swiper :options="optionDot" style="height: 128px">
                <swiper-slide v-for="(item, index) in banner[1]" :key="index">
                  <img :src="item.picture" alt="">
                </swiper-slide>

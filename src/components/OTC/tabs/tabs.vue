@@ -286,6 +286,7 @@ export default {
           }
         }
         .btn_left {
+          font-size: 14px;
           &.active.active-side{
             color:#01CED1;
             text-decoration: underline;
