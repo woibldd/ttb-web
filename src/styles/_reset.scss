@@ -64,12 +64,12 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
   -moz-appearance:textfield;/* firefox */
 }
 
-.el-popper.nav-popover {
+.el-popper.nav-popover[x-placement^=bottom]  {
   background-color: #2C3B4B;
   border: none; 
   margin-top: 1px;
 }
 
-.nav-popover .popper__arrow { 
+.el-popper.nav-popover .popper__arrow { 
   display: none;
 }
