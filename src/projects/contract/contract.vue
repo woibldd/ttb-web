@@ -129,10 +129,10 @@
             <span><input v-model="problemLstt[7]" type="radio" value="true"><label for="">{{ $t('answer_list8_1') }}</label></span>
             <span><input v-model="problemLstt[7]" type="radio" value="false"><label for="">{{ $t('answer_list8_2') }}</label></span>
           </div>
-          <div class="contract-eqcode">
+          <!-- <div class="contract-eqcode">
             <img src="@/assets/eqcode.jpg" alt="">
             <span>如有疑问，请联系 官方微信客服寻求 帮助</span>
-          </div>
+          </div> -->
           <span v-show="!problemError" class="contract-error">{{ problemText }}</span>
           <button class="contract-btn" @click="downStep">{{ $t('contract_submission') }}</button>
         </div>

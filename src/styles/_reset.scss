@@ -63,3 +63,13 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
  input[type="number"]{
   -moz-appearance:textfield;/* firefox */
 }
+
+.el-popper.nav-popover[x-placement^=bottom]  {
+  background-color: #2C3B4B;
+  border: none; 
+  margin-top: 1px;
+}
+
+.el-popper.nav-popover .popper__arrow { 
+  display: none;
+}

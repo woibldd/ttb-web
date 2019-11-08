@@ -279,9 +279,41 @@
           </div>
         </div>
         <div class="nav_item">
-          <router-link class="download mr-15 ml-15" :to="{name: 'Download'}">
+          <!-- <router-link class="download mr-15 ml-15" :to="{name: 'Download'}">
             <icon class="mr-3" name="header-download" />
-          </router-link>
+          </router-link> -->
+           <label
+            class="download mr-15 ml-15"
+            v-popover:popover1>
+            <icon
+              class="mr-3"
+              name="header-download"/>
+          </label>
+          <el-popover
+            ref="popover1"
+            popper-class="nav-popover"
+            placement="bottom-start"
+            width="270"
+            style="background:#2C3B4B;"
+            trigger="hover">
+            <div
+              class="pop">
+              <div class="left">
+                <h3><span>{{ $t('nav.download_pop.scan') }}</span></h3>
+                <p>
+                  <img
+                    src="~@/assets/download/qr-download.png" >
+                </p>
+              </div>
+              <div class="right">
+                <h3><a target="_blank" href="https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360032874512">{{ $t('nav.download_pop.process') }}</a></h3>
+                <p>
+                  <v-btn label="Iphone"/>
+                  <v-btn label="Addroid"/>
+                </p>
+              </div>
+            </div>
+          </el-popover>
         </div>
         <!-- 帮助中心中心 -->
         <div class="nav_item help-center">
@@ -584,7 +616,7 @@ export default {
           }
 
           .dropdown-sub-menu {
-            background: $protrade-bg;
+            background: $nav-2;
             position: absolute;
             left: 22px;
             top: 58px;
@@ -665,7 +697,8 @@ export default {
 
     .fund,
     .email,
-    .help-center {
+    .help-center,
+    .download {
       float: left;
       color: #fff;
       padding: 19px 0;
@@ -678,7 +711,7 @@ export default {
       }
     }
     .dropdown-sub-menu {
-      background: $protrade-bg;
+      background: $nav-2;
       position: absolute;
       top: 60px;
       border-radius: 4px;
@@ -710,7 +743,8 @@ export default {
 
     .fund:hover,
     .email:hover,
-    .help-center:hover {
+    .help-center:hover,
+    .download:hover {
       color: $primary;
       .dropdown-sub-menu {
         // transition: opacity .3s,visibility 0s;
@@ -780,7 +814,7 @@ export default {
     }
     .lang_box {
       font-size: 12px;
-      width: 110px;
+      width: 120px;
       height: auto;
       line-height: 40px;
       padding-top: 18px;
@@ -846,6 +880,33 @@ export default {
 }
 .login {
   background: $home-header-login;
+}
+
+.pop {
+  display: flex;
+  width: 270px;
+  color: #fff;
+  h3 {
+    margin-bottom: 10px;
+    text-align: center;
+    a {
+      color: #fff;
+    }
+  }
+  .left {
+    flex: 84px 1;
+    margin-right: 36px;
+    text-align: center;
+    img {
+      width: 89px;
+    }
+  }
+  .right {
+    flex: 1 120px;
+    .btn {
+      margin-top:10px;
+    }
+  }
 }
 @media screen and (min-width: 1500px) {
   // 1280是英文状态下nav正常显示的最小宽度

@@ -28,7 +28,7 @@ export default new Vuex.Store({
   },
   actions: {
     async getShareAccountList({ commit, state }, { accountArr=[], isAssignment }={}) {
-      if (!state.userData) return
+      if (!state.userData) return []
       const currenyArr = accountArr.map(item => item.currency).join(',')
       const res = await getShareAccountList(state.userData.id, currenyArr)
       const dataArr = res.data.map(item => {

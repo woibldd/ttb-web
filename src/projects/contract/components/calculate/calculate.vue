@@ -134,12 +134,12 @@
         <!-- 杠杆 -->
         <div class="input-row mb-27">
           <div class="row__label mr-10">{{ $t('lever') }}</div>
-          <el-select 
-            :disabled="force.mode=='cross'" 
+          <el-select
+            :disabled="force.mode=='cross'"
             class="row__oprate"
             v-model="force.lever">
             <el-option
-              v-for="(item, idx) in allLevers"
+              v-for="(item, idx) in leverages"
               :key="idx"
               :label="item + 'x'"
               :value="item"/>
@@ -174,17 +174,17 @@
         <div class="result mb-28">
           {{ $t('contract_cal_result') }}
         </div>
-        <div class="flex-between mb-28">
+        <!-- <div class="flex-between mb-28">
           <span class="result_label">{{ $t('contract_cal_current') }}</span>
           <span>{{ force.result.current }} {{ $t('contract_werehouse_piece') }}</span>
-        </div>
+        </div> -->
         <div class="flex-between mb-28">
           <span class="result_label">{{ $t('contract_cal_final_account') }}</span>
           <span>{{ force.result.new_amount }} {{ $t('contract_werehouse_piece') }}</span>
         </div>
         <div class="flex-between mb-28">
           <span class="result_label">{{ $t('contract_force_equal_price') }}</span>
-          <span>{{ force.result.force_price }} {{ currency_name }}</span>
+          <span>{{ force.result.force_price | fixed(2) }} {{ currency_name }}</span>
         </div>
       </div>
     </div>
@@ -211,7 +211,7 @@
             class="row__oprate"
             v-model="aim.lever">
             <el-option
-              v-for="(item, idx) in allLevers"
+              v-for="(item, idx) in leverages"
               :key="idx"
               :label="item + 'x'"
               :value="item"/>
@@ -333,8 +333,7 @@ export default {
           realized_rate: 0
           // roe_percent: 0
         }
-
-      }, // 目标收益率 
+      } // 目标收益率
     }
   },
   computed: {
@@ -362,11 +361,10 @@ export default {
       }
       return {}
     },
-    leverages() {
+    leverages () {
       if (this.pairInfo && this.pairInfo.leverages) {
         return this.state.ct.pairInfo.leverages.split(',')
-      }
-      else {
+      } else {
         return [1, 5, 10, 25, 50, 100]
       }
     }
@@ -384,7 +382,9 @@ export default {
       this.earn.result = result
     },
     calcUnwindPrice () {
-      let result = calculator.getLiqPriceInfo(this.force, this.holding, this.pairInfo)
+      // let result = calculator.getLiqPriceInfo(this.force, this.holding, this.pairInfo)
+      let {available_balance} = this.holding
+      let result = calculator.getLiqPriceInfo(this.force, {holding: 0, available_balance}, this.pairInfo)
       this.force.result = result
     },
     calcReward () {
@@ -396,11 +396,14 @@ export default {
     }
   },
   watch: {
-    "force.mode"(value) {
-      if(value == "cross") {
-        this.force.lever = this.pairInfo.max_leverage 
+    'force.mode' (value) {
+      if (value == 'cross') {
+        this.force.lever = this.pairInfo.max_leverage
       }
     }
+  },
+  created () {
+    console.log('calculate craeted')
   }
 }
 </script>

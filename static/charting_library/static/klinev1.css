@@ -254,11 +254,12 @@ body {
   
 }
 
-.chart-top-toolbar .space-single:not(:first-child),
+/* .chart-top-toolbar .space-single:not(:first-child),
 .header-chart-panel .space-single:not(:first-child) {
   border-left: solid 1px hsla(0, 0%, 100%, 0.05);
   
-}
+}  */
+
 .header-chart-panel .space-single:not(:first-child) .button:hover {
   color: #01CED1;
   opacity: 0.8;
@@ -268,6 +269,20 @@ body {
   font-weight: bold;
   opacity: 1;
 }
+
+.header-chart-panel .space-single:not(:first-child) .button.cycle {
+  padding: 6px 5px;
+}
+.header-chart-panel .space-single:not(:first-child) .button.active {
+  color: #01CED1;
+  font-weight: bold;
+  opacity: 1;
+}
+
+.header-chart-panel .space-single:not(:first-child) .button .active {
+  color: #01CED1;
+}
+
 .header-chart-panel-content {
   box-shadow: hsla(218, 26%, 86%, 0.25) 0 -1px 0 inset;
   
