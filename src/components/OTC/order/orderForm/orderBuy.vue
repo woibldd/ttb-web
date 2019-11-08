@@ -820,8 +820,8 @@ export default {
           .label {
             display: flex;
             align-items: center;
-            flex: 100px 0 0 0;
-            width: 100px;
+            flex: 120px 0 0 0;
+            width: 120px;
            // margin-bottom: 15px;
             font-size: 14px;
             font-family: MicrosoftYaHei;
