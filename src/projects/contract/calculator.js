@@ -123,7 +123,7 @@ export default {
 
     if (symbol.product_name === 'BTC') {
       open_value = Big(amount).div(open_price || 1).abs()
-      close_value = Big(close_price).div(open_price || 1).mul(open_value).abs()
+      close_value = Big(amount).div(close_value || 1).abs()
       margin = Big(open_value).mul(100).div(lever || 100).mul(0.01).abs()
     } else {
       open_value =  Big(amount || 0).times(open_price || 0).times(symbol.multiplier).abs()
