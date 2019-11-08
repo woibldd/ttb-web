@@ -28,8 +28,7 @@
         </div>
       </div>
     </div>
-    <div
-      class="ix-panel-thead"
+    <div class="ix-panel-thead"
       :style="{paddingRight: hasScrollBar ? '14px' : '4px'}">
       <div class="table table-ix-orderbook">
         <div class="thead">
@@ -40,8 +39,7 @@
         </div>
       </div>
     </div>
-    <div
-      class="ix-panel-body"
+    <div class="ix-panel-body"
       ref="body"
       :style="{height: bookHeight + 'px'}">
       <div
@@ -102,13 +100,11 @@
       <!--<div class="no-data" v-show="!err && !orderbookList.length">{{ $t('orderbook_empty') }}</div>-->
       <!--<div class="err" v-show="err">{{ err }}</div>-->
     </div>
-    <div
-      class="mask"
+    <div class="mask"
       :class="{show: loading && !bids.length && !asks.length}">
       <v-loading />
     </div>
-    <div
-      class="mask changing"
+    <div class="mask changing"
       :class="{show: changing}">
       <v-loading />
     </div>

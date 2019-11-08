@@ -18,14 +18,14 @@ if(process.env.NODE_ENV != 'development'){
 }
 
 const api = axios.create({
-  baseURL: 'https://i.ixx.com', // api的base_url
+  baseURL: _env_ || process.env.BASE_API,
   timeout: 30000, // request timeout
   withCredentials: true
 })
 console.log("_env_:" + _env_)
 export const envApi = _env_
 export const quotaApi = axios.create({
-  baseURL: location.hostname.includes('ixx.com')?'https://i.ixx.com':'https://i.ixex.pro', // api的base_url
+  baseURL: _env_ || process.env.BASE_API, // api的base_url
   timeout: 30000, // request timeout
   withCredentials: false
 })

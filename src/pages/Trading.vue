@@ -154,7 +154,7 @@ export default {
     '$route.params.pair': {
       async handler (pair = '', last) { 
         this.state.pro.lock = true
-        const match = pair.match(/^([A-Za-z]*)_([A-Za-z]*)$/)
+        const match = pair.match(/^([A-Za-z0-9]*)_([A-Za-z0-9]*)$/)
 
         //默认可交易
         this.state.pro.isActivity = true

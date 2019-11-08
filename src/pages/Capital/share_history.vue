@@ -54,13 +54,13 @@ export default {
             case 'trade_type':
               return !value ? this.$t('shareOption.up_rate') : this.$t('shareOption.down_rate')
             case 'spot':
-              return this.bigRound(value, 4)
+              return this.bigRound(value||0, 4)
             case 'rate':
               return value+'%'
             case 'strike':
-              return this.bigRound(value, 4)
+              return this.bigRound(value||0, 4)
             case 'sett_price':
-              return this.bigRound(value, 4)
+              return this.bigRound(value||0, 4)
             case 'state':
               return !value ? this.$t('shareOption.noSettle') : this.$t('shareOption.settle')
             case 'create_time':
@@ -85,7 +85,7 @@ export default {
     this.$store.dispatch('getShareAccountList').then(res=>{
       this.schema[0].options = res.map(item=>item.currency)
       this.schema[0].placeholder = this.$tR('account')
-      this.schema[1].placeholder = this.$tR('time')
+      // this.schema[1].placeholder = this.$tR('time')
     })
   },
   methods: {
