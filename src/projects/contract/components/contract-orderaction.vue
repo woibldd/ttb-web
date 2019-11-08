@@ -408,7 +408,7 @@
 
     <!-- 买入/做多 modal 弹出购买确认-->
     <v-modal :open.sync="showMakeMoreModal" @close="confirmModalClosed">
-      <div class="modal-make-more" :style="{height: allowStopWinLoss ? '720px' : '520px'}">
+      <div class="modal-make-more">
         <dir class="pl-24 pr-24 pb-24">
           <div
             class="modal-title mb-10"
@@ -444,12 +444,12 @@
               >{{ $t(exchangeDir === 'BUY' ? 'contract_trigger_tips_sell' : 'contract_trigger_tips_buy', {price: trigger_price, trigger_type: $t(triggerType)}) }}</span>
             </p>
           </div>
-          <!--<div class="modal__holding pt-17 pb-17">
-          !-- 持有仓位 --
+          <div class="modal__holding pt-17 pb-17">
+          <!-- !-- 持有仓位 -- -->
           <div
             class="mb-17 c-fff"
           >{{ $t('contract_hold_pos') }} : {{ $t('FUTURE_&USD', {currency: state.ct.product_name}) }}</div>
-          !-- 红绿条 --
+          <!-- !-- 红绿条 -- -->
           <div class="profit-risk-row mb-20">
             <div
               class="response-times c-fff f12"
@@ -464,8 +464,8 @@
               v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}"
             />
           </div>
-          !-- 杠杆操作 input number--
-          !-- @change="mmModalLeverChange" --
+          <!-- !-- 杠杆操作 input number-- -->
+          <!-- !-- @change="mmModalLeverChange" -- -->
           <leverOperate
             v-if="language"
             @change="mmChangeConfirm"
@@ -473,15 +473,15 @@
             :real-value.sync="mmModal.inputLeverTime"
             :slider-value.sync="mmModal.sliderLeverTime"
           />
-          !-- 提示信息--
+          <!-- !-- 提示信息-- -->
           <div
             class="stopmarket_tips"
             v-if="isExtOrderType"
             v-html="$t(mmModal.inputLeverTime == 0 ? 'contract_win_stopMarket_0.info':'contract_win_stopMarket_sell.info' , {times: mmModal.inputLeverTime})"
           />
-          </div>-->
+          </div>
           <!-- 止盈止损 -->
-          <div v-show="allowStopWinLoss" class="more__action mt-10">
+          <!-- <div v-show="allowStopWinLoss" class="more__action mt-10">
             <div class="stopwin">
               <div class="r1 c-fff">
                 <el-checkbox
@@ -524,9 +524,7 @@
                   </div>
                 </div>
               </div>
-              <div class="r3">
-                <!-- <p>{{$t('市场价格 上涨 至 8500 将触发 市价止盈单 预计 盈利： 0.00000432BTC')}}</p> -->
-                <!-- <p>{{$t('%{triggerType} %{triggerSide} 至 %{triggerPrice} 将触发 %{triggerOrder} 预计 %{triggerResult}： %{realized}BTC', -->
+              <div class="r3"> 
                 <p>
                   {{$t('contract_page.order_action.modal.stop_win_tips',
                   {
@@ -592,10 +590,10 @@
                 </p>
               </div>
             </div>
-          </div>
+          </div> -->
           <!-- 表格 -->
           <div class="more__table mt-10">
-            <div class="table__tr c-fff" v-show="!allowStopWinLoss">
+            <!-- <div class="table__tr c-fff" v-show="!allowStopWinLoss">
               <div class="col col1">{{ $t('contract_assign_price') }}</div>
               <div v-if="currentDealType === 'market'" class="col">
                 <span
@@ -607,7 +605,7 @@
                   :class="{'color-up': exchangeDir === 'BUY', 'color-down': exchangeDir === 'SELL'}"
                 >{{ price }} USD</span>
               </div>
-            </div>
+            </div> -->
             <div class="table__tr c-fff">
               <div class="col col1">{{ $t('contract_assign_value_raw') }}</div>
               <div class="col">{{ orderValue | round(pairInfo.value_scale || 4) }} BTC</div>
@@ -632,8 +630,8 @@
               <div class="col">{{ currentHodingAmount }}</div>
             </div>
 
-            <div class="table__tr c-fff" v-show="!allowStopWinLoss">
               <!-- 止盈 -->
+            <!-- <div class="table__tr c-fff" v-show="!allowStopWinLoss">
               <div class="col col1">{{ $t('contract_page.order_action.modal.stop_win', {unit: ""}) }}</div>
               <div class="col">
                 <label
@@ -645,9 +643,9 @@
                   class="color-up"
                 >{{currentHolding.tp_price | fixed(pairInfo.price_scale || 4)}}</label>
               </div>
-            </div>
-            <div class="table__tr c-fff" v-show="!allowStopWinLoss">
+            </div> -->
               <!-- 止损 -->
+            <!-- <div class="table__tr c-fff" v-show="!allowStopWinLoss">
               <div class="col col1">{{ $t('contract_page.order_action.modal.stop_loss', {unit: ""}) }}</div>
               <div class="col">
                 <label
@@ -659,7 +657,7 @@
                   class="color-down"
                 >{{currentHolding.sl_price | fixed(pairInfo.price_scale || 4)}}</label>
               </div>
-            </div>
+            </div> -->
 
             <div class="table__tr c-fff">
               <!-- 标记价格 -->

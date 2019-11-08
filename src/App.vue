@@ -38,7 +38,7 @@
       :fixed="fixed"
     />
     <v-notify-list/>
-    <giveMoneyAD v-if="isFirstLogin" v-model="isFirstLogin"></giveMoneyAD>
+    <!-- <giveMoneyAD v-if="isFirstLogin" v-model="isFirstLogin"></giveMoneyAD> -->
     <!-- <div
       class="home-ball"
       @click="toNotice"
