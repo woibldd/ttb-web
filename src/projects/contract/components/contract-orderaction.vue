@@ -3173,6 +3173,7 @@ export default {
   .response-times {
     padding-left: 10px;
     height: 100%;
+    line-height: 30px;
     border-left: 2px solid #fff;
     line-height: 30px;
     position: relative;
