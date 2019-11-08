@@ -616,7 +616,7 @@ export default {
           }
 
           .dropdown-sub-menu {
-            background: $protrade-bg;
+            background: $nav-2;
             position: absolute;
             left: 22px;
             top: 58px;
@@ -711,7 +711,7 @@ export default {
       }
     }
     .dropdown-sub-menu {
-      background: $protrade-bg;
+      background: $nav-2;
       position: absolute;
       top: 60px;
       border-radius: 4px;
