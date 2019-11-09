@@ -115,60 +115,124 @@ export default {
           return 'en'
       }
     },
-    async init(pair) {
+    async init (pair) {
       if (!this.pair || !this.layoutOk || this._isDestroyed) {
         return false
       }
       const vm = this
       const config = this.configure()
+
       const TradingView = await tvlib
       const Widget = TradingView.widget
       this.widget = new Widget(config)
-      console.log(1, this.widget, config, vm._isDestroyed)
-      this.widget.onChartReady(function() {
-        console.log(2)
 
+      this.widget.onChartReady(function () {
         if (vm._isDestroyed) {
           return false
         }
-
-        const widget = vm.widget
-
+        let widget = vm.widget
         vm.tvReady = true
-        console.log(vm.tvReady)
         vm.$emit('chartReady')
-        // widget.chart().createStudy('Moving Average', !1, !1, [1], null, {
-        //   'Plot.color': '#ff9500',
-        //   'Plot.linewidth': 3,
-        //   precision: 8
-        // })
+
         // 7 日均线
         let ida = 0
-        let idb = 0
-        widget.chart().createStudy('Moving Average', !1, !1, [7],
-          (entryId) => { ida = entryId }, {
+        widget.chart().createStudy(
+          'Moving Average',
+          !1,
+          !1,
+          [7],
+          entryId => {
+            ida = entryId
+          },
+          {
             'Plot.color': '#ff9500',
             'Plot.linewidth': 3,
             precision: 1
-          })
+          }
+        )
         // 30 日均线
-        widget.chart().createStudy('Moving Average', !1, !1, [30],
-          (entryId) => { idb = entryId }, {
+        let idb = 0
+        widget.chart().createStudy(
+          'Moving Average',
+          !1,
+          !1,
+          [30],
+          entryId => {
+            idb = entryId
+          },
+          {
             'Plot.color': '#107efa',
             'Plot.linewidth': 3,
             precision: 1
-          })
+          }
+        )
         // 60 日均线
-        const idc = 0
-        widget.chart().createStudy('Moving Average', !1, !1, [60],
-          (entryId) => { idb = entryId }, {
+        let idc = 0
+        widget.chart().createStudy(
+          'Moving Average',
+          !1,
+          !1,
+          [60],
+          entryId => {
+            idb = entryId
+          },
+          {
             'Plot.color': '#92d5f7',
             'Plot.linewidth': 3,
             precision: 1
-          })
- 
+          }
+        )
+
+        let cycle = ['1m', '1', '5', '15', '30', '60'] // nav显示的周期
+        let list = ['1m', '1', '3', '5', '15', '30', '60', '120', '240', '360', '720', '1D', '1W'] // 下拉列表中的全部周期
+        let more = ['3', '120', '240', '360', '720', '1D', '1W'] // 下拉列表中的独有周期
         local.lineType = 1 // 默认蜡烛线
-        const resolutions = document.createElement('div') // 时间周期菜单
+        let cycleList = []
+        let cycleliList = []
+        cycle.forEach(item => {
+          let btn = widget
+            .createButton()
+            .on('click', e => {
+              let element = e.srcElement || e.target
+              let cls = element.classList
+              if (!cls.contains('active')) {
+                if (item === '1m') { // 分时线
+                  widget.chart().setResolution('1', null) // 周期切换
+                  local.lineType = widget.chart().chartType() // 记录当前的K线样式
+                  widget.chart().setChartType(2) // K线样式切換到线形图
+                  widget.chart().setEntityVisibility(ida, false) // 隐藏7 日平均线
+                  widget.chart().setEntityVisibility(idb, false) // 隐藏30 日平均线
+                  widget.chart().setEntityVisibility(idc, false) // 隐藏60 日平均线
+                } else {
+                  widget.chart().setResolution(item, null) // 周期切换
+                  widget.chart().setChartType(local.lineType) // K线样式切換到线形图
+                  widget.chart().setEntityVisibility(ida, true) // 隐藏7 日平均线
+                  widget.chart().setEntityVisibility(idb, true) // 隐藏30 日平均线
+                  widget.chart().setEntityVisibility(idc, true) // 隐藏60 日平均线
+                }
+                cycleList.forEach(c => {
+                  c[0].classList.remove('active')
+                  if (c.tag === item) {
+                    c[0].classList.add('active')
+                  }
+                })
+                cycleliList.forEach(li => {
+                  li.classList.remove('active')
+                  if (li.tag === item) {
+                    li.classList.add('active')
+                  }
+                })
+              }
+              span.classList.remove('active')
+            })
+            .append(utils.$i18n.t(`tv.${item}`))
+          btn.addClass('cycle')
+
+          btn.tag = item
+          cycleList.push(btn)
+        })
+
+        let resolutions = document.createElement('div') // 时间周期菜单
         // 时间周期下拉菜单
         widget.btnFS = widget.createButton().on('click', (e, vm) => {
           let element = e.srcElement || e.target
@@ -177,7 +241,7 @@ export default {
           } else if (element.tagName === 'DIV' && !element.classList.contains('button')) {
             element = element.parentElement
           }
-          const cls = element.classList
+          let cls = element.classList
           if (!cls.contains('selected')) {
             widget.closePopupsAndDialogs()
             element.classList.add('selected')
@@ -186,58 +250,75 @@ export default {
           }
         })
           .append(resolutions)
+
         widget.btnFS.addClass('charts-popup-d')
-        const span = document.createElement('span')
-        span.innerText = '1分'
+        let span = document.createElement('span')
+        span.innerText = utils.$i18n.t(`tv.more`)
         resolutions.appendChild(span)
 
-        const list = ['1', '3', '5', '15', '30', '60', '120', '240', '360', '720', '1D', '1W', '1M']
-        const ul = document.createElement('ul')
-        const lia = document.createElement('li')
-        lia.innerText = utils.$i18n.t('tradingview_line') // 分时线
-        lia.addEventListener('click', function() {
-          widget.chart().setResolution('1', null) // 周期切换到一分钟
-          local.lineType = widget.chart().chartType() // 记录当前的K线样式
-          widget.chart().setChartType(2) // K线样式切換到线形图
-          widget.chart().setEntityVisibility(ida, false) // 隐藏7 日平均线
-          widget.chart().setEntityVisibility(idb, false) // 隐藏30 日平均线
-          widget.chart().setEntityVisibility(idc, false) // 隐藏60 日平均线
-          resolutions.parentElement.classList.remove('selected')
-          span.innerText = lia.innerText
-        })
-        ul.appendChild(lia)
+        if (more.indexOf(config.interval) > -1) {
+          span.classList.add('active')
+        }
+        let ul = document.createElement('ul')
         list.map((item) => {
-          const li = document.createElement('li')
-          // const text = ''
-          if (item === '1D') {
-            li.innerText = '1 ' + utils.$i18n.t('tv_down_day')
-          } else if (item === '1W') {
-            li.innerText = '1 ' + utils.$i18n.t('tv_down_week')
-          } else if (item === '1M') {
-            li.innerText = '1 ' + utils.$i18n.t('tv_down_month')
-          } else if (!!Number(item) && Number(item) < 60) {
-            li.innerText = item + ' ' + utils.$i18n.t('tv_down_minute')
-          } else if (Number(item)) {
-            li.innerText = item / 60 + ' ' + utils.$i18n.t('tv_down_hour')
-          }
-          if (item === config.interval) {
-            span.innerText = li.innerText
-          }
+          let li = document.createElement('li')
+          li.innerText = utils.$i18n.t(`tv.${item}`)
+          li.tag = item
+          cycleliList.push(li)
 
-          li.addEventListener('click', function() {
-            widget.chart().setResolution(item, null) // 周期切换到一分钟
+          li.addEventListener('click', function () {
             resolutions.parentElement.classList.remove('selected')
-            if (local.lineType) {
-              widget.chart().setChartType(local.lineType)
+            if (item === '1m') { // 分时线
+              widget.chart().setResolution('1', null) // 周期切换
+              local.lineType = widget.chart().chartType() // 记录当前的K线样式
+              widget.chart().setChartType(2) // K线样式切換到线形图
+              widget.chart().setEntityVisibility(ida, false) // 隐藏7 日平均线
+              widget.chart().setEntityVisibility(idb, false) // 隐藏30 日平均线
+              widget.chart().setEntityVisibility(idc, false) // 隐藏60 日平均线
+            } else {
+              widget.chart().setResolution(item, null) // 周期切换
+              widget.chart().setChartType(local.lineType) // K线样式切換到线形图
+              widget.chart().setEntityVisibility(ida, true) // 隐藏7 日平均线
+              widget.chart().setEntityVisibility(idb, true) // 隐藏30 日平均线
+              widget.chart().setEntityVisibility(idc, true) // 隐藏60 日平均线
             }
-            widget.chart().setEntityVisibility(ida, true) // 显示7 日平均线
-            widget.chart().setEntityVisibility(idb, true) // 显示30 日平均线
-            widget.chart().setEntityVisibility(idc, true) // 显示60 日平均线
-            span.innerText = li.innerText
+
+            if (more.indexOf(item) > -1) {
+              span.classList.add('active')
+            } else {
+              span.classList.remove('active')
+            }
+            // span.innerText = li.innerText
+            cycleList.forEach(c => {
+              c[0].classList.remove('active')
+              if (c.tag === item) {
+                c[0].classList.add('active')
+              }
+            })
+
+            cycleliList.forEach(li => {
+              li.classList.remove('active')
+              if (li.tag === item) {
+                li.classList.add('active')
+              }
+            })
           })
           ul.appendChild(li)
         })
         resolutions.appendChild(ul)
+
+        cycleList.forEach(c => {
+          c[0].classList.remove('active')
+          if (c.tag === config.interval) {
+            c[0].classList.add('active')
+          }
+        })
+        cycleliList.forEach(li => {
+          li.classList.remove('active')
+          if (li.tag === config.interval) {
+            li.classList.add('active')
+          }
+        })
 
         // .append(utils.$i18n.t("tradingview_line"))
         widget.btnIndicator = widget.createButton().on('click', (e, vm) => {
@@ -253,73 +334,85 @@ export default {
           widget.chart().executeActionById('chartProperties') // 样式设置
         }).append(utils.$i18n.t('tv_style'))
 
-        // MACD
-        widget.chart().onIntervalChanged().subscribe(null, function(interval) {
-          local.interval = interval
-          if (interval !== '1') {
-            widget.chart().setChartType(local.lineType)
-            widget.chart().setEntityVisibility(ida, true) // 显示7 日平均线
-            widget.chart().setEntityVisibility(idb, true) // 显示30 日平均线
-            widget.chart().setEntityVisibility(idc, true) // 显示60 日平均线
-            // 移除分时线高亮
-            if (widget.btnFS[0].classList.contains('selected')) {
-              widget.btnFS[0].classList.remove('selected')
+        widget
+          .chart()
+          .onIntervalChanged()
+          .subscribe(null, function (interval) {
+            local.interval = interval
+            if (interval != '1') {
+              // widget.chart().setChartType(local.lineType);
+              widget.chart().setEntityVisibility(ida, true) // 显示7 日平均线
+              widget.chart().setEntityVisibility(idb, true) // 显示30 日平均线
+              widget.chart().setEntityVisibility(idc, true) // 显示60 日平均线
             }
-            // console.log(widget.btnFS)
-          }
-        })
+          })
+
+        // MACD
         let indicators = [
           {
-            name: "MACD_",
-            text: "MACD"
+            name: 'MACD_',
+            text: 'MACD'
             // args: [14, 30, 'close', 9]
           },
           {
-            name: "StochRSI",
-            fullname: "Stochastic RSI",
-            text: "StochRSI"
+            name: 'StochRSI',
+            fullname: 'Stochastic RSI',
+            text: 'StochRSI'
             // args: [10]
           },
           {
-            name: "BOLL",
-            fullname: "Bollinger Bands",
-            text: "BOLL"
+            name: 'BOLL',
+            fullname: 'Bollinger Bands',
+            text: 'BOLL'
             // args: [20]
           }
-        ];
-        indicators.forEach(indicat => {
-          const btn = widget.createButton().on('click', (e) => {
-            console.log(111)
+        ]
 
-            const element = e.srcElement || e.target
-            const cls = element.classList
-            if (!cls.contains('selected')) {
-              if (this.hasIndicator) {
+        indicators.forEach(indicat => {
+          let btn = widget
+            .createButton()
+            .on('click', e => {
+              let element = e.srcElement || e.target
+              let cls = element.classList
+              if (!cls.contains('selected')) {
+                if (this.hasIndicator) {
+                  widget.chart().removeEntity(this.entryId)
+                  element.parentElement.parentElement
+                    .querySelector('.space-single .selected')
+                    .classList.remove('selected')
+                }
+                widget.chart().createStudy(
+                  indicat.fullname || indicat.name,
+                  !1,
+                  !1,
+                  indicat.args,
+                  entryId => {
+                    this.entryId = entryId
+                  },
+                  {
+                    precision: 1
+                  }
+                )
+                element.classList.add('selected')
+                this.hasIndicator = true
+              } else {
+                if (!this.entryId) return
                 widget.chart().removeEntity(this.entryId)
-                element.parentElement.parentElement.querySelector('.space-single .selected').classList.remove('selected')
+                this.entryId = ''
+                this.hasIndicator = false
+                element.classList.remove('selected')
               }
-              widget.chart().createStudy(indicat.fullname || indicat.name, !1, !1, indicat.args, (entryId) => {
-                this.entryId = entryId
-              }, {
-                precision: 1
-              })
-              element.classList.add('selected')
-              this.hasIndicator = true
-            } else {
-              if (!this.entryId) return
-              widget.chart().removeEntity(this.entryId)
-              this.entryId = ''
-              this.hasIndicator = false
-              element.classList.remove('selected')
-            }
-          }).append(indicat.text)
+            })
+            .append(indicat.text)
           if (indicat.name === 'MACD_') {
             btn.trigger('click')
           }
         })
-       
-        //保存和载入技术指标
-        let arr = utils.getStorageValue('ixx-trading-study')
+
+        // widget.chart().createStudy('MACD_', false, true)
+        // widget.chart().createStudy('ShuBenRSI', false, true)
+
+        let arr = utils.getStorageValue('ix-trading-study')
         if (!arr) {
           arr = []
         } else {
@@ -328,44 +421,42 @@ export default {
 
         arr.map(item => {
           try {
-            if (item.value !== 'MACD_' && item.value !== 'Stochastic RSI' && item.value !== 'Bollinger Bands') { 
+            if (item.value !== 'MACD_' && item.value !== 'Stochastic RSI' && item.value !== 'Bollinger Bands') {
               widget.chart().createStudy(
                 item.value,
                 !1,
                 !1,
-                item.args 
-              ); 
+                item.args
+              )
             }
           } catch (error) {
             console.log(error)
           }
         })
-  
-        widget.subscribe('study', (e) => { 
-          if (e.value !== 'MACD_' && e.value !== 'Stochastic RSI' && e.value !== 'Bollinger Bands') { 
+
+        widget.subscribe('study', (e) => {
+          if (e.value !== 'MACD_' && e.value !== 'Stochastic RSI' && e.value !== 'Bollinger Bands') {
             arr.push(e)
-            utils.setStorageValue('ixx-trading-study', JSON.stringify(arr) )
+            utils.setStorageValue('ixx-trading-study', JSON.stringify(arr))
           }
         })
 
         window.tradwgt = widget
-        widget.subscribe('onAutoSaveNeeded', () => { 
+        widget.subscribe('onAutoSaveNeeded', () => {
           let studies = tradwgt.chart().getAllStudies()
           arr.map(item => {
-            let s = studies.filter(a => a.name === item.value) 
+            let s = studies.filter(a => a.name === item.value)
             if (s.length === 0) {
-              arr.splice(arr.indexOf(item), 1) 
-              utils.setStorageValue('ixx-trading-study', JSON.stringify(arr))
-              return
+              arr.splice(arr.indexOf(item), 1)
+              utils.setStorageValue('ix-trading-study', JSON.stringify(arr))
             }
           })
         })
 
-        // widget.chart().createStudy('ShuBenRSI', false, true)
-        // widget.chart().createStudy('MACDCUSTOM', false, true)
-
+        // widget.chart().executeActionById("chartProperties") //样式设置
+        // widget.chart().executeActionById("symbolSearch") //
+        // widget.chart().executeActionById("insertIndicator")
         // widget.chart().executeActionById('drawingToolbarAction')
-        
       })
     }
 

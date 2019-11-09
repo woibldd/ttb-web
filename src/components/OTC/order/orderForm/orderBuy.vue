@@ -179,6 +179,23 @@
               </div>
               <div class="action-order">
                 <ul>
+                  <!-- 商家挂单是可以设置最小限额 -->
+                  <li v-if="isMerchant">
+                    <div class="label">
+                      {{ $t('otc.min_amount') }}
+                    </div>
+                    <div class="content">
+                      <div class="el-number-input">
+                        <number-input
+                          class="number-input"
+                          v-model="minAmount"
+                          :scale="price_scale || 2"
+                          placeholder="≥100"
+                          @blur="minAmountWatcher"
+                        />
+                      </div>
+                    </div>
+                  </li>
                   <li v-if="side===2">
                     <div class="label">
                       {{ $t('otc_payment_time_limit') }}
@@ -436,14 +453,11 @@ export default {
       alertFlag: false,
       awitFlag: false,
       balance: {},
+      active_id: 0
     }
   },
   mixins: [otcComputed],
-  props: {
-    active_id: {
-      type: Number,
-      default: 0
-    },
+  props: { 
     view: {
       type: Object,
       defalut: {}
@@ -492,6 +506,13 @@ export default {
         return  this.$t('otc_trade_available') + ':' + plt
       }
     },
+    isMerchant () {
+      if (this.state.userInfo) {
+        console.log({userinfo: this.state.userInfo})
+        return this.state.userInfo.is_merchant
+      }
+      return false
+    }
   },
   components: {
     vList
@@ -507,6 +528,16 @@ export default {
           this.float_rate = 70
         } 
       } 
+    },
+    minAmountWatcher () {
+      let val = this.minAmount
+      if (!isNaN(Number(val))) {
+        if (Number(val) > 50000) {
+          this.minAmount = 50000
+        } else if (Number(val) < 100) {
+          this.minAmount = 100
+        }
+      }
     },
     openSideBar () {
       this.step = 0
@@ -544,6 +575,10 @@ export default {
         this.order.float_rate = Number(this.$big(this.float_rate).mul(0.01))
         this.order.currency_type = this.legal_currency
 
+        // 商家可以设置最小成交额
+        if (this.isMerchant) {
+          this.order.quota = this.minAmount
+        }
         //发布卖单是，给默认提示
         if (this.side === 2 && !this.order.remark) {
           this.order.remark  = this.$t('otc_order_default_tips')
@@ -785,8 +820,8 @@ export default {
           .label {
             display: flex;
             align-items: center;
-            flex: 100px 0 0 0;
-            width: 100px;
+            flex: 120px 0 0 0;
+            width: 120px;
            // margin-bottom: 15px;
             font-size: 14px;
             font-family: MicrosoftYaHei;

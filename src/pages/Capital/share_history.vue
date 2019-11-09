@@ -1,12 +1,26 @@
 <template>
-  <div class="property-manage-warp" flex="dir:top">
-    <div class="top" flex="main:justify cross:center">
-      <div class="title" style="font-size: 18px;text-align: left;">{{$t('shareOption.share_account')}}</div>
-      <customForm ref="customForm" size="mini" flex="main:justify" class="login-custom-form" :schema="schema" :submit-btn="false" label-width="10"  label-position="left">
-    </customForm>
+  <div class="property-manage-warp"
+       flex="dir:top">
+    <div class="top"
+         flex="main:justify cross:center">
+      <div class="title"
+           style="font-size: 18px;text-align: left;">{{$t('shareOption.share_account')}}</div>
+      <customForm ref="customForm"
+                  size="mini"
+                  flex="main:justify"
+                  class="login-custom-form"
+                  :schema="schema"
+                  :submit-btn="false"
+                  label-width="10"
+                  label-position="left">
+      </customForm>
       <!-- <el-divider style="maring:12px 0" /> -->
     </div>
-    <custom-table v-loading="loading" stripe :table-list="tableList" :table-columns="mapShareColumns" @change="handlePageChange">
+    <custom-table v-loading="loading"
+                  stripe
+                  :table-list="tableList"
+                  :table-columns="mapShareColumns"
+                  @change="handlePageChange">
     </custom-table>
   </div>
 </template>
@@ -22,7 +36,7 @@ export default {
     customTable,
     customForm
   },
-  data() {
+  data () {
     return {
       tableList: [],
       total: 0,
@@ -32,21 +46,21 @@ export default {
         headerAlign: 'right',
         width: '400px'
       },
-      schema:[
-        { fieldType: 'select',size:'mini', prefixIcon: 'el-icon-search', placeholder: '', vModel: 'currency', default: '',options:[],on:{
-          change:value=>this.handlePageChange()
-        } },
+      schema: [
+        {          fieldType: 'select', size: 'mini', prefixIcon: 'el-icon-search', placeholder: '', vModel: 'currency', default: '', options: [], on: {
+            change: value => this.handlePageChange()
+          }        },
         // { fieldType: 'date-picker',size:'mini',type:'daterange', prefixIcon: 'el-icon-search', valueFormat: 'timestamp', placeholder: '', vModel: 'plan_time', default: '' }
       ]
     }
   },
   computed: {
-    mapShareColumns() {
+    mapShareColumns () {
       return Object.keys(this.chineseLangData.mapShareColumns).map(key => ({
         hearderLabel: this.$tR(`mapShareColumns.${key}`),
         prop: key,
-        hearderWidth: key => ['period', 'trade_type', 'amount','income','profile','rate'].includes(key) && '50px',
-        
+        hearderWidth: key => ['period', 'trade_type', 'amount', 'income', 'profile', 'rate'].includes(key) && '50px',
+
         handleValue: (value, key) => {
           switch (key) {
             case 'period':
@@ -56,7 +70,7 @@ export default {
             case 'spot':
               return this.bigRound(value||0, 4)
             case 'rate':
-              return value+'%'
+              return value + '%'
             case 'strike':
               return this.bigRound(value||0, 4)
             case 'sett_price':
@@ -68,36 +82,36 @@ export default {
             case 'sett_time':
               return value && this.parseTime(value) || '--'
             default:
-              return value?value:'--'
+              return value ? value : '--'
           }
         }
       }))
     },
-    userData() {
+    userData () {
       return this.$store.state.userData
     },
-    mapBalanceMenu() {
+    mapBalanceMenu () {
       return this.$store.state.mapShareAccount
     },
 
   },
   created () {
-    this.$store.dispatch('getShareAccountList').then(res=>{
-      this.schema[0].options = res.map(item=>item.currency)
+    this.$store.dispatch('getShareAccountList').then(res => {
+      this.schema[0].options = res.map(item => item.currency)
       this.schema[0].placeholder = this.$tR('account')
       // this.schema[1].placeholder = this.$tR('time')
     })
   },
   methods: {
-    handlePageChange(pageConfig) {
+    handlePageChange (pageConfig) {
       this.temPageConfig = pageConfig || this.temPageConfig
       if (!pageConfig) this.temPageConfig.init()
       const { pageSize, currentPage } = this.temPageConfig
       this.loading = true
       const currency = this.schema[0].currency
       console.log(currency);
-      
-      getHistory({ user_id: this.id, page: currentPage, size: pageSize,currency }).then(res => {
+
+      getHistory({ user_id: this.id, page: currentPage, size: pageSize, currency }).then(res => {
         this.tableList = res.data.data
         this.temPageConfig.total = res.data.total
         this.loading = false
@@ -107,11 +121,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.property-manage-warp{
+.property-manage-warp {
   height: 100%;
   text-align: center;
-  &>.center{
-    .numerical{
+  & > .center {
+    .numerical {
       // line-height: 100px;
       margin-top: 30px;
       color: $--color-danger;
@@ -121,18 +135,18 @@ export default {
       // padding-bottom: 20px;
     }
   }
-  &>.bottom{
-    &>fieldset{
+  & > .bottom {
+    & > fieldset {
       margin: 0;
       padding: 30px;
       box-sizing: border-box;
       width: 48%;
       border: solid 1px #f0f0f0;
-      .title{
+      .title {
         font-size: 20px;
       }
-      .numerical{
-        margin-top:30px;
+      .numerical {
+        margin-top: 30px;
         margin-bottom: 30px;
         color: rgba($color: $--color-warning, $alpha: 3);
         border-width: 0 5px 5px 5px;
@@ -140,7 +154,7 @@ export default {
         border-color: #f6f6f6;
         padding-bottom: 20px;
       }
-      .list > p{
+      .list > p {
         line-height: 40px;
       }
     }

@@ -302,7 +302,7 @@
           <div flex="dir:top">
             <span v-tooltip.top-center="{html: true, content: $t('contract_history_postion_header_avg_tips'), classes: 'contract'}">{{ $t('contract_history_postion_header_avg') }}</span>
             <span>{{ cholding.price | round(cholding.pairInfo.price_scale || 2) }}</span> <span v-tooltip.top-center="{html: true, content: $t('contract_result_yet_tips'), classes: 'contract'}">{{ $t('contract_result_yet') }}</span>
-            <span :class="[cholding.holding < 0 && 'color-up'||'color-down']">{{ cholding.realized | fixed(cholding.pairInfo.value_scale || 4) }} BTC</span>
+            <span :class="[cholding.realized > 0 && 'color-up'||'color-down']">{{ cholding.realized | fixed(cholding.pairInfo.value_scale || 4) }} BTC</span>
             <span>≈ {{ translateByRate(cholding.realized) | fixed(2) }} USD</span>
           </div>
           <div flex="dir:top">
