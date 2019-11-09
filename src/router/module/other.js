@@ -12,11 +12,44 @@ const submitNext = () => import('@/pages/plan/submitNext')
 const h5planSubmit = () => import('@/pages/plan/h5/submit')
 const planSubmit = () => import('@/pages/plan/submit')
 const h5plan = () => import('@/pages/plan/h5/index')
+const appplan = () => import('@/pages/plan/app/index')
+const appsubmitNext = () => import('@/pages/plan/app/submitNext')
+const appplanSubmit = () => import('@/pages/plan/app/submit')
 const plan = () => import('@/pages/plan/index')
 const h5treaty = () => import('@/pages/plan/h5/treaty')
 const treaty = () => import('@/pages/plan/treaty')
 const bonus = () => import(/*  */ '@/pages/Bonus.vue')
 export const otherRouter = [
+  {
+    path: '/affiliate-app',
+    name: 'affiliate-app',
+    meta: {
+      auth: false,
+      nav: false,
+      footer: false,
+    },
+    component: appplan
+  },
+  {
+    path: '/planSubmit-app',
+    name: 'planSubmit-app',
+    meta: {
+      auth: false,
+      nav: false,
+      footer: false,
+    },
+    component: appplanSubmit
+  },
+  {
+    path: '/planSuccess-app',
+    name: 'planSuccess-app',
+    meta: {
+      auth: false,
+      nav: false,
+      footer: false,
+    },
+    component: appsubmitNext
+  },
   {
     path: '/',
     name: 'home',
@@ -298,6 +331,15 @@ export const otherRouter = [
       nav: isMobile ? false : true,
       footer:  isMobile ? false : true,
       class: 'dark'
+    }
+  },
+  {
+    path: '/bonus-app',
+    name: 'bonus-app',
+    component: () =>  import(/*  */ '@/pages/h5/bonus/app-bonus.vue'),
+    meta: {
+      nav: false,
+      footer:  false
     }
   },
   {
