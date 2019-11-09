@@ -165,13 +165,7 @@ export default {
   },
   computed: {
     inviteLink () {
-      let url = ''
-      if (utils.isMobile()) {
-        url = 'https://ixx.com/#/sign?invitor=' + this.inviteCode
-      } else {
-        url = `${location.protocol}//${location.host}/user/register/?invitor=${this.inviteCode}`
-      }
-      return url
+      return `${location.protocol}//${location.host}/user/register/?invitor=${this.inviteCode}`
     },
     inviteCode () {
       if (this.state.userInfo) { return this.state.userInfo.id }
