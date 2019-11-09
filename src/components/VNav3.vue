@@ -309,7 +309,7 @@
                 <h3><a target="_blank" href="https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360032874512">{{ $t('nav.download_pop.process') }}</a></h3>
                 <p>
                   <v-btn label="Iphone"/>
-                  <v-btn label="Addroid"/>
+                  <v-btn label="Android"/>
                 </p>
               </div>
             </div>
