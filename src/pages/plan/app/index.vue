@@ -105,9 +105,6 @@
       lang() {
         return state.locale
       },
-      next() {
-        return '/planSubmit?lang=' + this.lang
-      },
       uid () {
         if (state.userInfo) {
           return state.userInfo.id

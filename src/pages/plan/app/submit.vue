@@ -213,7 +213,6 @@
     },
     created() {
       this.form.uid = Number(this.uid)
-      console.log(this.plc)
     },
     mounted () {
       window.switchLang = actions.setLocale
