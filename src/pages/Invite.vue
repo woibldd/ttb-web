@@ -165,7 +165,13 @@ export default {
   },
   computed: {
     inviteLink () {
-      return `${location.protocol}//${location.host}/user/register/?invitor=${this.inviteCode}`
+      let url = ''
+      if (utils.isMobile()) {
+        url = 'https://ixx.com/#/sign?invitor=' + this.inviteCode
+      } else {
+        url = `${location.protocol}//${location.host}/user/register/?invitor=${this.inviteCode}`
+      }
+      return url
     },
     inviteCode () {
       if (this.state.userInfo) { return this.state.userInfo.id }
@@ -194,7 +200,7 @@ export default {
         page: this.invitationList.page++,
         size: PageSize
       })
-      if (result && !result.code) { 
+      if (result && !result.code) {
         // result.data = {
         //   page: 1,
         //   size: 10,
@@ -253,7 +259,7 @@ export default {
         //       "register_time": 1559522535673,
         //       "lv": 0,
         //       "state": 0
-        //     }, 
+        //     },
         //   ]
         // }
         if (!result.data.data || result.data.total < PageSize ) {
@@ -262,7 +268,7 @@ export default {
           this.invitationList.isEnd = false
         }
         if (this.invitationList.list.length > 0) {
-          this.invitationList.list = this.invitationList.list.concat(result.data.data) 
+          this.invitationList.list = this.invitationList.list.concat(result.data.data)
           if (this.invitationList.list.length >= result.data.total) {
             this.invitationList.isEnd = true
           }

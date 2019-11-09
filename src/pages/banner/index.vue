@@ -14,7 +14,7 @@
           </div>
         </swiper-slide>
        <template>
-         <swiper-slide v-if="banner[1].length > 0">
+         <swiper-slide v-if="banner[1].lengh > 0">
            <div class="dot-banner dot-banner1">
              <swiper :options="optionDot" style="height: 128px">
                <swiper-slide v-for="(item, index) in banner[1]" :key="index">
