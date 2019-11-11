@@ -124,7 +124,6 @@
       if (!!res && !res.code) {
         this.rates = res.data.BTC;
       }
-      window.switchLang = actions.setLocale
     },
     mounted() {
       this.$nextTick(() => {
