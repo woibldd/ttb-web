@@ -73,6 +73,7 @@
   import { regionData } from "../../lang/region"
   import service from '@/modules/service'
   import {state} from '@/modules/store'
+  import utils from '@/modules/utils'
   import qs from 'qs'
   export default {
     data() {

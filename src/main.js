@@ -23,9 +23,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 import store from './store'
 import './icons'
 import locale from 'element-ui/lib/locale/lang/en'
-// import console from 'vconsole'
-// let consoleMobile = new console()
-// Vue.use(consoleMobile)
+import vConsole from 'vconsole'
+let consoleMobile = new vConsole()
+Vue.use(consoleMobile)
 Vue.use(VueI18n)
 utils.$i18n = new VueI18n({
   // fallbackLocale: 'en',

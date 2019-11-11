@@ -91,6 +91,7 @@
   import 'animate.css'
   import { WOW } from 'wowjs'
   import {state, actions} from '@/modules/store'
+  import utils from '@/modules/utils'
   export default {
     mounted() {
       this.$nextTick(() => {
