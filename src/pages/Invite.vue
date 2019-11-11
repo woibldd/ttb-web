@@ -194,7 +194,7 @@ export default {
         page: this.invitationList.page++,
         size: PageSize
       })
-      if (result && !result.code) { 
+      if (result && !result.code) {
         // result.data = {
         //   page: 1,
         //   size: 10,
@@ -253,7 +253,7 @@ export default {
         //       "register_time": 1559522535673,
         //       "lv": 0,
         //       "state": 0
-        //     }, 
+        //     },
         //   ]
         // }
         if (!result.data.data || result.data.total < PageSize ) {
@@ -262,7 +262,7 @@ export default {
           this.invitationList.isEnd = false
         }
         if (this.invitationList.list.length > 0) {
-          this.invitationList.list = this.invitationList.list.concat(result.data.data) 
+          this.invitationList.list = this.invitationList.list.concat(result.data.data)
           if (this.invitationList.list.length >= result.data.total) {
             this.invitationList.isEnd = true
           }
