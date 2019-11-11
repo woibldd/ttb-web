@@ -2321,7 +2321,8 @@
     "submit":"提交"
   },
   "otc": {
-    "b_price_i": "100~50000 CNY"
+    "b_price_i": "100~50000 CNY",
+    "min_amount": "單筆交易最小限額"
   },
   "el":{
     "pagination":{

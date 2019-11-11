@@ -272,8 +272,8 @@ export default {
         3:"fund_assets_type_opening"
       },
       returnTranType:{
-        1:"trading",
-        2:"contract"
+        2:"trading",
+        1:"contract"
       },
       isEnd: true
     }

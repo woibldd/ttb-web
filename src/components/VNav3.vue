@@ -279,16 +279,16 @@
           </div>
         </div>
         <div class="nav_item">
-          <!-- <router-link class="download mr-15 ml-15" :to="{name: 'Download'}">
+          <router-link class="download mr-15 ml-15" v-popover:popover1 :to="{name: 'Download'}">
             <icon class="mr-3" name="header-download" />
-          </router-link> -->
-           <label
+          </router-link>
+           <!-- <label
             class="download mr-15 ml-15"
             v-popover:popover1>
             <icon
               class="mr-3"
               name="header-download"/>
-          </label>
+          </label> -->
           <el-popover
             ref="popover1"
             popper-class="nav-popover"
