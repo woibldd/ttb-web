@@ -67,7 +67,7 @@
 <script type="text/ecmascript-6">
   import Big from 'big.js'
   import service from "@/modules/service";
-  import { state } from "@/modules/store";
+  import { state, actions } from "@/modules/store";
   import utils from '@/modules/utils'
   export default {
     data() {
@@ -127,7 +127,7 @@
     },
     mounted() {
       window.switchLang = actions.setLocale
-      console.log(window.switchLang)
+      console.log(window.switchLang())
     }
   }
 </script>

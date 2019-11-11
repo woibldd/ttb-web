@@ -93,15 +93,6 @@
   import {state, actions} from '@/modules/store'
   import utils from '@/modules/utils'
   export default {
-    mounted() {
-      this.$nextTick(() => {
-        var wow = new WOW({
-          live: false
-        })
-        wow.init()
-        window.switchLang = actions.setLocale
-      })
-    },
     computed: {
       lang() {
         return state.locale
@@ -142,6 +133,15 @@
           }
         }
       }
+    },
+    mounted() {
+      this.$nextTick(() => {
+        var wow = new WOW({
+          live: false
+        })
+        wow.init()
+        window.switchLang = actions.setLocale
+      })
     }
   }
 </script>
