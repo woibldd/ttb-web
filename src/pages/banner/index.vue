@@ -162,10 +162,11 @@ export default {
         platform: 3
       }).then((res) => {
         if (res.code === 0) {
+          let newBanner = res.data.filter(item => item.platform === 1)
           var arrDot1 = []
           var arrDot2 = []
           // 筛选图片地址不能为空的数组
-          const banner = res.data.filter(item => item.picture)
+          const banner = newBanner.filter(item => item.picture)
           // 得到第一条数据的类型
           const firstSolt = 1
           // 拿到第一组数组
