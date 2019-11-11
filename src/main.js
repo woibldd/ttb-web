@@ -23,7 +23,6 @@ import 'element-ui/lib/theme-chalk/index.css'
 import store from './store'
 import './icons'
 import locale from 'element-ui/lib/locale/lang/en'
-console.log(locale);
 
 Vue.use(VueI18n)
 utils.$i18n = new VueI18n({
@@ -34,6 +33,9 @@ utils.$i18n = new VueI18n({
     en: actions.replaceName(en)
   }
 })
+import Vconsole from 'vconsole'
+let vConsole = new Vconsole()
+Vue.use(vConsole)
 import ElementUI from 'element-ui'
 // import locale from 'element-ui/lib/locale/lang/en'
 import 'element-ui/lib/theme-chalk/index.css'

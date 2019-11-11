@@ -117,7 +117,8 @@
                 if (nextChecked.code === 0) {
                   this.$router.push('/planSuccess-app')
                 } else {
-                  Notify({ type: 'warning', message: nextChecked.message, duration: 500 })
+                  this.$message.warning(nextChecked.message)
+                  // Notify({ type: 'warning', message: nextChecked.message, duration: 500 })
                 }
               } else {
                 if (checkedEmail.code === 50015) {
@@ -130,7 +131,8 @@
                   }).catch(() => {
                   })
                 } else {
-                  Notify({ type: 'warning', message: checkedEmail.message, duration: 500 })
+                  this.$message.warning(checkedEmail.message)
+                  // Notify({ type: 'warning', message: checkedEmail.message, duration: 500 })
                 }
               }
             } else {
@@ -155,7 +157,8 @@
                     if (res.code === 0) {
                       this.$router.push('/planSuccess-app')
                     } else {
-                      Notify({ type: 'warning', message: res.message, duration: 500 })
+                      this.$message.warning(res.message)
+                      // Notify({ type: 'warning', message: res.message, duration: 500 })
                     }
                   })
                 } else {
@@ -178,7 +181,8 @@
                     }).catch(() => {
                     })
                   } else {
-                    Notify({ type: 'warning', message: res.message, duration: 500 })
+                    this.$message.warning(res.message)
+                    // Notify({ type: 'warning', message: res.message, duration: 500 })
                   }
                 }
               })

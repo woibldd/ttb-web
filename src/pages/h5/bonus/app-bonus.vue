@@ -124,9 +124,10 @@
       if (!!res && !res.code) {
         this.rates = res.data.BTC;
       }
-    }, 
+    },
     mounted() {
       window.switchLang = actions.setLocale
+      console.log(window.switchLang)
     }
   }
 </script>
