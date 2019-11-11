@@ -24,9 +24,9 @@ import store from './store'
 import './icons'
 import locale from 'element-ui/lib/locale/lang/en'
 import vConsole from 'vconsole'
-let consoleMobile = new vConsole()
-Vue.use(consoleMobile)
-Vue.use(VueI18n)
+// let consoleMobile = new vConsole()
+// Vue.use(consoleMobile)
+// Vue.use(VueI18n)
 utils.$i18n = new VueI18n({
   // fallbackLocale: 'en',
   locale: localStorage.getItem('locale')||'en',
