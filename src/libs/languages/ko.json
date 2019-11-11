@@ -2393,7 +2393,8 @@
     "submit":"Submit"
   },
   "otc": {
-    "b_price_i": "100~50000 CNY"
+    "b_price_i": "100~50000 CNY",
+    "min_amount": "단일거래최소금액"
   },
   "el":{
     "pagination":{
