@@ -127,6 +127,9 @@
       window.switchLang = actions.setLocale
     },
     mounted() {
+      this.$nextTick(() => {
+        window.switchLang = actions.setLocale
+      })
     }
   }
 </script>
