@@ -1,4 +1,53 @@
 {
+  "realName": "Real name",
+  "join": " Join Now",
+  "plan": "Affiliate",
+  "login": "Login to IXX Affiliate System",
+  "next": "下一步",
+  "bannerText": "IXX Exchange is the world's first digital asset trading community. It is committed to realise the ideal utopia nation of blockchain trading ecology and to create an exchange for everyone. I am for everyone, and everyone is for me.  All contributors can share the fruitful outcome from developments of the exchange。",
+  "bannerText2": "We will look for partners with common aspirations on a global scale. As long as you have the ability and a willingness to pay for your dreams, you can become an IXX global Affiliate with or without crypto currency experience. Let's work together for a win-win situation. Your influence The power is worth the biggest gain!",
+  "demand": "Affiliate Requirement",
+  "demand_1": "All users can participate in 0 input threshold",
+  "demand_2": "Senior users in the blockchain industry",
+  "demand_3": "Development of regional business independently",
+  "demand_4": "Rich in management and operation experience",
+  "demand_5": "Engaged in legal compliance industry",
+  "equity": "Partner Interest",
+  "equity_text": "Interest",
+  "equity_1_text": "Exclusively for new users $60 welcome bonus;",
+  "equity_2_text": "The industry’s most complete affiliate backend system, up to 80% Commission;",
+  "equity_3_text": "Real-time settlement of commission, cash withdrawals;",
+  "equity_4_text": "Help affiliates to facilitate new users to register and trade;",
+  "equity_5_text": "Individually customized marketing materials;",
+  "equity_content": "IXX platform will give Affiliate, not only rich benefits but also platform rights and interests",
+  "way": "Affiliate Application Method",
+  "application_email": "Your email address:",
+  "application_theme": "Subject:",
+  "content": "Content:",
+  "tip_email": "IXX Account UID",
+  "tip_phone": "Contact、Mobile、We Chat",
+  "tip_content": "Account Details",
+  "tip_add": "Affiliate application+name",
+  "application_account": "Affiliate Account Application",
+  "application_tip": "*If you had referred friends under the referral scheme previously, all your friends will automatically be added under your affiliate account",
+  "application_ipt_email": "Please input the email you used to register on IXX",
+  "application_check": "Agree",
+  "application_xy": "《IXX Affiliate Program Service Agreement》",
+  "application_email_tip_1": "1.Please use IXX trading account for register",
+  "application_email_tip_2": "2.Email not registered, Please link your email at Personal Centre',\n  no_tran_account: 'No account yet?",
+  "no_tran_account": "No account yet?",
+  "write": "Key in",
+  "country": "Country of Residence",
+  "submit": "Submit",
+  "submit_success": "Affiliate application submitted successfully",
+  "submit_tip_1": "*We will process your application as soon as possible",
+  "submit_tip_2": "You will receive an email from designated account manager within 48 hours, please check it（also check the trash）",
+  "news": "Follow IXX social media for more information：",
+  "back": "Back",
+  "not": "No IXX trading account",
+  "now": "Register now",
+  "s_email": "You have yet to link the email, please link",
+  "bd": "Link",
   "signup": "創建帳號",
   "signin": "登錄",
   "signout": "退出登錄",
@@ -2156,42 +2205,42 @@
         "contract_assigning_undeal": "委託中未成交",
         "price_distance": "市價（距離）"
       },
-      "holding": { 
+      "holding": {
         "contract_close_tips3": "这是假设以当前标记价格平仓的预计盈亏，鼠标移除则显示当前委托列表中最新市场价格平仓的预计盈亏。"
       },
       "history": {
         "contract_complete_deal": "已成交量/剩余量"
       },
-      "edit_cell" : { 
-        "edit_price_pop_title": "委託修改可執行", 
-        "edit_price_pop_content": "將價格更改至%{newValue}可能會使該委託立刻與市場中的其他委託成交。請確認更改。", 
+      "edit_cell" : {
+        "edit_price_pop_title": "委託修改可執行",
+        "edit_price_pop_content": "將價格更改至%{newValue}可能會使該委託立刻與市場中的其他委託成交。請確認更改。",
         "edit_price_pop_confirm": "執行修改"
-      } 
+      }
     },
-    "pair_nav":{ 
+    "pair_nav":{
       "24h_h": "24H最高價",
-      "24h_l": "24H最低價" 
+      "24h_l": "24H最低價"
     }
   },
   "home": {
     "footer": {
       "affiliate": "代理申請：support@ixx.com",
       "explain": "IXX交易所是全球首家數字資產交易共同體，總部在新加坡，其致力於實現交易所生態的區塊鏈理想國，打造人人的交易所，我為人人，人人為我，所有參與交易所的貢獻者者均可共享交易所的發展成果。",
-      "footer_contract_desc": "添加客服微信" 
+      "footer_contract_desc": "添加客服微信"
     }
   },
   "fund": {
     "withdraw": {
       "address": "提幣地址",
       "bind_google": "绑定谷歌验证器",
-      "bind_email_or_phone": "绑定邮箱/手机", 
+      "bind_email_or_phone": "绑定邮箱/手机",
       "bindings": "已绑定",
       "no_bindings": "未绑定",
       "to_verify": "去认证",
       "to_bind": "去绑定",
       "done": "已完成",
-      "to_deposit_tips": "提币需要您至少完成一笔任意额度充币，激活提币功能", 
-      "to_deposit": "去充币", 
+      "to_deposit_tips": "提币需要您至少完成一笔任意额度充币，激活提币功能",
+      "to_deposit": "去充币",
       "email": "邮箱",
       "phone": "手机号",
       "phone_code": "手机验证码",
@@ -2223,7 +2272,7 @@
       "current_day_realized":"当日已结算盈亏",
       "unrealized_mark_price":"未结算盈亏（标记价格）",
       "unrealized_last_price":"未结算盈亏(盘口价格)",
-      "day": "日", 
+      "day": "日",
       "start": "開始日期",
       "end": "結束日期",
       "amount":"數量"
@@ -2359,7 +2408,7 @@
       "month9": "9 月",
       "month10": "10 月",
       "month11": "11 月",
-      "month12": "12 月", 
+      "month12": "12 月",
       "weeks": {
         "sun": "日",
         "mon": "一",
@@ -2387,7 +2436,7 @@
     "table":{
       "emptyText":"无数据"
     }
-  }, 
+  },
   "fee": {
     "contract": {
       "leverage" : "杠杆" ,
@@ -2402,7 +2451,7 @@
       "tips_3": "吃單是你所下的限價單或市價單與當前的掛單直接成交。",
       "tips_4": "當你所下的擺單主動與其他人的擺單成交，你將支付吃單交易手續費。",
       "tips_5": "我們的永續合約，如BTC永續，其資金費用每隔一段時間在多倉和空倉的持有者之間進行交換。在您的交易歷史中，正數金額意味著你在此時段支付資金而負數金額意味著您收取資金。平臺不支付或收取任何資金費用"
-    
+
     }
   },
   "trading_page": {
@@ -2413,7 +2462,7 @@
       "content_c": "MPV持有者的账号、名字、证件号、电邮、MPV成交量信息、充/提币信息、MPV划转信息。",
       "content_d": "*這將不會影響您的提幣操作",
       "content_e": "《MPV附加條款》",
-      "chk_text": "閱讀並同意"  
+      "chk_text": "閱讀並同意"
     }
   },
   "set_service_fee": "手續費設定",
@@ -2422,7 +2471,7 @@
     "banner": {
       "btn_text": "Redeem $60 Trading Bonus"
     },
-    "content": { 
+    "content": {
       "tips_1": "Registration Bonus",
       "tips_2": "First Deposit Bonus",
       "valuation": "Current Equivalent：%{value} BTC",
@@ -2449,7 +2498,7 @@
       "qr_b": "Join Telegram telegraph group",
       "contact_a": "Official Email：support@ixx.com ",
       "contact_b": "Follow Telegram :https://t.me/ixxofficial ",
-      "contact_c": "Follow Twitter @IXX_Official"  
+      "contact_c": "Follow Twitter @IXX_Official"
     }
   },
   "tv" : {

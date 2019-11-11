@@ -1,4 +1,53 @@
 {
+  "realName": "Real name",
+  "join": " Join Now",
+  "plan": "Affiliate",
+  "login": "Login to IXX Affiliate System",
+  "next": "下一步",
+  "bannerText": "IXX Exchange is the world's first digital asset trading community. It is committed to realise the ideal utopia nation of blockchain trading ecology and to create an exchange for everyone. I am for everyone, and everyone is for me.  All contributors can share the fruitful outcome from developments of the exchange。",
+  "bannerText2": "We will look for partners with common aspirations on a global scale. As long as you have the ability and a willingness to pay for your dreams, you can become an IXX global Affiliate with or without crypto currency experience. Let's work together for a win-win situation. Your influence The power is worth the biggest gain!",
+  "demand": "Affiliate Requirement",
+  "demand_1": "All users can participate in 0 input threshold",
+  "demand_2": "Senior users in the blockchain industry",
+  "demand_3": "Development of regional business independently",
+  "demand_4": "Rich in management and operation experience",
+  "demand_5": "Engaged in legal compliance industry",
+  "equity": "Partner Interest",
+  "equity_text": "Interest",
+  "equity_1_text": "Exclusively for new users $60 welcome bonus;",
+  "equity_2_text": "The industry’s most complete affiliate backend system, up to 80% Commission;",
+  "equity_3_text": "Real-time settlement of commission, cash withdrawals;",
+  "equity_4_text": "Help affiliates to facilitate new users to register and trade;",
+  "equity_5_text": "Individually customized marketing materials;",
+  "equity_content": "IXX platform will give Affiliate, not only rich benefits but also platform rights and interests",
+  "way": "Affiliate Application Method",
+  "application_email": "Your email address:",
+  "application_theme": "Subject:",
+  "content": "Content:",
+  "tip_email": "IXX Account UID",
+  "tip_phone": "Contact、Mobile、We Chat",
+  "tip_content": "Account Details",
+  "tip_add": "Affiliate application+name",
+  "application_account": "Affiliate Account Application",
+  "application_tip": "*If you had referred friends under the referral scheme previously, all your friends will automatically be added under your affiliate account",
+  "application_ipt_email": "Please input the email you used to register on IXX",
+  "application_check": "Agree",
+  "application_xy": "《IXX Affiliate Program Service Agreement》",
+  "application_email_tip_1": "1.Please use IXX trading account for register",
+  "application_email_tip_2": "2.Email not registered, Please link your email at Personal Centre',\n  no_tran_account: 'No account yet?",
+  "no_tran_account": "No account yet?",
+  "write": "Key in",
+  "country": "Country of Residence",
+  "submit": "Submit",
+  "submit_success": "Affiliate application submitted successfully",
+  "submit_tip_1": "*We will process your application as soon as possible",
+  "submit_tip_2": "You will receive an email from designated account manager within 48 hours, please check it（also check the trash）",
+  "news": "Follow IXX social media for more information：",
+  "back": "Back",
+  "not": "No IXX trading account",
+  "now": "Register now",
+  "s_email": "You have yet to link the email, please link",
+  "bd": "Link",
   "signup": "회원가입",
   "signin": "로그인",
   "signout": "로그아웃",
@@ -2199,7 +2248,7 @@
       "trigger_close_tips": "마진 정지 손해가 있을 때이 단추를 누르면, 평창의 위탁 유형은 창고만 줄어들 수 있습니다. 터질 때 시스템은 현재 창고수에 따라 자동으로이 유형의 위탁 개수가 줄어들거나 심지어 브레이크 취소, 위탁 유형이 부족하면 현재 위탁 유형이 터지면 위탁 실패。",
       "modal": {
         "available": "사용가능금액",
-        "position": "거래 가 성사 된 후 창고 포지션의 크기", 
+        "position": "거래 가 성사 된 후 창고 포지션의 크기",
         "liq_price": "예상물가",
         "difference": "예상가격차이",
         "stop_win": "리익정지%{unit}",
@@ -2226,7 +2275,7 @@
       "history": {
         "contract_complete_deal": "거래량/잔여량"
       },
-      "edit_cell" : { 
+      "edit_cell" : {
         "edit_price_pop_title": "수정위탁 실행",
         "edit_price_pop_content": "값을 %{price} 바꾸기시장 내의 다른 위탁과 바로 거래를 성사시킬 수 있을 것이다.변경 확인。",
         "edit_price_pop_confirm": "실행 수정됨"
@@ -2266,8 +2315,8 @@
     },
     "deposit": {
       "address": "입금주소"
-    }, 
-    "contract": { 
+    },
+    "contract": {
       "start": "시작 날짜",
       "end": "종료 날짜",
       "winloss_record": "손익 기록",
@@ -2373,7 +2422,7 @@
     "typeOptions": [
       "YES",
       "NO"
-    ], 
+    ],
     "future_url": "Latest Token Contract Address",
     "total": "Total Supply",
     "amount": "Token Circulation",
@@ -2431,7 +2480,7 @@
       "month9": "9월",
       "month10": "10월",
       "month11": "11월",
-      "month12": "12월", 
+      "month12": "12월",
       "weeks": {
         "sun": "일",
         "mon": "월",
@@ -2459,7 +2508,7 @@
     "table":{
       "emptyText":"No data"
     }
-  }, 
+  },
   "fee": {
     "contract": {
       "leverage" : "지레" ,
@@ -2484,7 +2533,7 @@
       "content_c": "MPV持有者的账号、名字、证件号、电邮、MPV成交量信息、充/提币信息、MPV划转信息。",
       "content_d": "*这将不会影响您的提币操作",
       "content_e": "《MPV附加条款》",
-      "chk_text": "阅读并同意"  
+      "chk_text": "阅读并同意"
     }
   },
   "gift": {
@@ -2492,7 +2541,7 @@
     "banner": {
       "btn_text": "Redeem $60 Trading Bonus"
     },
-    "content": { 
+    "content": {
       "tips_1": "Registration Bonus",
       "tips_2": "First Deposit Bonus",
       "valuation": "Current Equivalent：%{value} BTC",
@@ -2519,7 +2568,7 @@
       "qr_b": "Join Telegram telegraph group",
       "contact_a": "Official Email：support@ixx.com ",
       "contact_b": "Follow Telegram :https://t.me/ixxofficial ",
-      "contact_c": "Follow Twitter @IXX_Official"  
+      "contact_c": "Follow Twitter @IXX_Official"
     }
   },
   "tv" : {
