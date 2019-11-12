@@ -308,8 +308,8 @@
               <div class="right">
                 <h3><a target="_blank" href="https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360032874512">{{ $t('nav.download_pop.process') }}</a></h3>
                 <p>
-                  <v-btn label="Iphone"/>
-                  <v-btn label="Android"/>
+                  <v-btn icon="apple" label="Iphone"/>
+                  <v-btn icon="android" label="Android"/>
                 </p>
               </div>
             </div>

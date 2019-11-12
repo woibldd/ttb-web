@@ -348,6 +348,19 @@ body {
   left: 0;
 }
 
+.drowdownlist:after {
+  display: inline-block; 
+  content: "";
+  width:0;
+  height:0;
+  border-width:4px 4px 0;
+  border-style:solid;
+  border-color: #ccc  transparent transparent;/*灰 透明 透明 */
+  margin:0 5px;
+  position:relative;
+}
+
+
 .charts-popup-d {
   position: relative;
   z-index: 4;
