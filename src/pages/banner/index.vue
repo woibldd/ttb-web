@@ -4,17 +4,19 @@
       :class="[state.locale]"
     >
       <swiper :options="option" ref="mySwiper">
-        <swiper-slide>
-          <div class="dot-banner">
-            <swiper :options="optionFirst" style="height: 128px">
-              <swiper-slide v-for="(item, index) in banner[0]" :key="index">
-                <img :src="item.picture" alt="">
-              </swiper-slide>
-            </swiper>
-          </div>
-        </swiper-slide>
+        <template v-if="banner[0]">
+          <swiper-slide>
+            <div class="dot-banner">
+              <swiper :options="optionFirst" style="height: 128px">
+                <swiper-slide v-for="(item, index) in banner[0]" :key="index">
+                  <img :src="item.picture" alt="">
+                </swiper-slide>
+              </swiper>
+            </div>
+          </swiper-slide>
+        </template>
        <template>
-         <swiper-slide v-if="banner[1].lengh > 0">
+         <swiper-slide v-if="banner[1]">
            <div class="dot-banner dot-banner1">
              <swiper :options="optionDot" style="height: 128px">
                <swiper-slide v-for="(item, index) in banner[1]" :key="index">
@@ -24,7 +26,7 @@
            </div>
          </swiper-slide>
        </template>
-        <template v-if="banner[1].length > 0">
+        <template v-if="banner[2] > 0">
           <swiper-slide>
             <div class="dot-banner2">
               <swiper :options="option" style="height: 400px">
@@ -178,7 +180,13 @@ export default {
             arrDot1 = otherBanner.filter(item => item.slot === otherSolt)
             arrDot2 = otherBanner.filter(item => item.slot !== otherSolt)
           }
-          this.banner = [arrDot, arrDot1, arrDot2]
+          let list = [arrDot, arrDot1, arrDot2]
+          this.banner = []
+          list.forEach((item) => {
+            if (item.length > 0) {
+              this.banner.push(item)
+            }
+          })
         }
       })
     },
