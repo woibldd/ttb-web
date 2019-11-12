@@ -161,7 +161,7 @@ export default {
   methods: {
     init() {
       service.getBanners({
-        platform: 3
+        platform: 1
       }).then((res) => {
         if (res.code === 0) {
           let newBanner = res.data.filter(item => item.platform === 1)
