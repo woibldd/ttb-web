@@ -12,6 +12,9 @@
       borderWidth: border + 'px',
       fontSize: fontsize + 'px'
   }">
+    <icon
+      v-if="icon"
+      :name="icon" />
     <span
       class="text"
       v-show="!loading">{{ label }}</span>
@@ -51,6 +54,10 @@ export default {
     },
     loading: {
       type: Boolean
+    },
+    icon: {
+      type: String,
+      default: ''
     }
   },
   methods: {
