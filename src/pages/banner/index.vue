@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="ixx_banner_container" style="height: 400px;"
-      :class="[state.locale]"
+      :class="[state.locale]"  @mouseenter="on_top_enter" @mouseleave="on_top_leave"
     >
       <swiper :options="option" ref="mySwiper">
         <template v-if="banner[0]">
@@ -9,7 +9,9 @@
             <div class="dot-banner">
               <swiper :options="optionFirst" style="height: 128px">
                 <swiper-slide v-for="(item, index) in banner[0]" :key="index">
-                  <img :src="item.picture" alt="">
+                  <a :href="item.url" target="_blank">
+                    <img :src="item.picture" alt="">
+                  </a>
                 </swiper-slide>
               </swiper>
             </div>
@@ -20,7 +22,9 @@
            <div class="dot-banner dot-banner1">
              <swiper :options="optionDot" style="height: 128px">
                <swiper-slide v-for="(item, index) in banner[1]" :key="index">
-                 <img :src="item.picture" alt="">
+                 <a :href="item.url" target="_blank">
+                   <img :src="item.picture" alt="">
+                 </a>
                </swiper-slide>
              </swiper>
            </div>
@@ -29,9 +33,11 @@
         <template v-if="banner[2] > 0">
           <swiper-slide>
             <div class="dot-banner2">
-              <swiper :options="option" style="height: 400px">
+              <swiper :options="option2" style="height: 400px">
                 <swiper-slide v-for="(item, index) in banner[2]" :key="index">
-                  <img :src="item.picture" alt="">
+                  <a :href="item.url" target="_blank">
+                    <img :src="item.picture" alt="">
+                  </a>
                 </swiper-slide>
               </swiper>
             </div>
@@ -130,6 +136,7 @@ export default {
         init: false,
         grabCursor: true,
         centeredSlides: true,
+        simulateTouch: false,
         slidesPerView: 1,
         autoplay: {
           delay: 3000
@@ -137,20 +144,40 @@ export default {
         loop: true
       },
       optionFirst: {
+        pagination: {
+          el: '.swiper-pagination'
+        },
         slidesPerView: 4,
         spaceBetween: 30,
         slidesPerGroup: 4,
-        loop: true,
+        loop: false,
         loopFillGroupWithBlank: true
       },
       optionDot: {
+        pagination: {
+          el: '.swiper-pagination'
+        },
         grabCursor: true,
+        centeredSlides: true,
+        simulateTouch: false,
+        slidesPerView: 1,
+        autoplay: {
+          delay: 3000
+        },
+        loop: false
+      },
+      optionDot2: {
+        pagination: {
+          el: '.swiper-pagination'
+        },
+        grabCursor: true,
+        simulateTouch: false,
         centeredSlides: true,
         slidesPerView: 1,
         autoplay: {
           delay: 3000
         },
-        loop: true
+        loop: false
       },
       arr: [],
       money: 0,
@@ -159,6 +186,12 @@ export default {
     };
   },
   methods: {
+    on_top_enter() {
+      this.swiper.autoplay.stop()
+    },
+    on_top_leave() {
+      this.swiper.autoplay.start()
+    },
     init() {
       service.getBanners({
         platform: 1
@@ -479,4 +512,16 @@ export default {
     }
   }
 }
+.swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets {
+  bottom: 0!important;
+}
+.swiper-pagination-bullet-active {
+  background: #00badb!important;
+}
+.swiper-pagination-bullet {
+  width: 16px;
+  height: 4px;
+  border-radius: 50px;
+}
+
 </style>

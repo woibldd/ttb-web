@@ -170,7 +170,7 @@
 
       .hot-inner {
         background: #fff;
-        /*box-shadow: 0 .02rem .48rem rgba(182, 205, 216, 0.5);*/
+        box-shadow: 0 .02rem .48rem rgba(182, 205, 216, 0.5);
         border-radius: 4px;
         overflow: hidden;
         margin-bottom: 24px;
