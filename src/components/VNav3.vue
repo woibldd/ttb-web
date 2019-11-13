@@ -882,9 +882,10 @@ export default {
   background: $home-header-login;
 }
 
+
 .pop {
   display: flex;
-  width: 270px;
+  width: 280px;
   color: #fff;
   h3 {
     margin-bottom: 10px;
@@ -894,7 +895,7 @@ export default {
     }
   }
   .left {
-    flex: 84px 1;
+    flex: 95px 1;
     margin-right: 36px;
     text-align: center;
     img {
@@ -902,9 +903,10 @@ export default {
     }
   }
   .right {
-    flex: 1 120px;
+    flex: 1 135px;
+    margin-right:10px;
     .btn {
-      margin-top:10px;
+      margin-top:10px; 
     }
   }
 }
