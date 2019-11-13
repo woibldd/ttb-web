@@ -224,7 +224,7 @@ export default {
                 })
               }
               span.classList.remove('active')
-              span.innerText = utils.$i18n.t(`tv.more`)
+              span.innerText = utils.$i18n.t(`tv.360`)
             })
             .append(utils.$i18n.t(`tv.${item}`))
           btn.addClass('cycle')
@@ -254,7 +254,7 @@ export default {
 
         widget.btnFS.addClass('charts-popup-d')
         let span = document.createElement('span')
-        span.innerText = utils.$i18n.t(`tv.more`)
+        span.innerText = utils.$i18n.t(`tv.360`)
         span.classList.add('drowdownlist')
         resolutions.appendChild(span)
 
@@ -291,7 +291,7 @@ export default {
               span.innerText = utils.$i18n.t(`tv.${item}`)
             } else {
               span.classList.remove('active')
-              span.innerText = utils.$i18n.t(`tv.more`)
+              span.innerText = utils.$i18n.t(`tv.360`)
             }
             // span.innerText = li.innerText
             cycleList.forEach(c => {
