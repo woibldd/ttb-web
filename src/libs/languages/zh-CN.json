@@ -1010,7 +1010,7 @@
   "trading_lever": "合约交易",
   "activity_lock_share": "锁仓分红规则：",
   "contract_account": "合约账户",
-  
+
   "account_balance": "账户余额",
   "transaction_record": "交易记录",
   "warehouse_margin": "仓位保证金",
@@ -2281,15 +2281,15 @@
         "contract_assigning_undeal": "委托中未成交",
         "price_distance": "市价（距离）"
       },
-      "holding": { 
+      "holding": {
         "contract_close_tips3": "这是假设以当前标记价格平仓的预计盈亏，鼠标移除则显示当前委托列表中最新市场价格平仓的预计盈亏。"
       },
       "history": {
         "contract_complete_deal": "已成交量/剩余量"
       },
-      "edit_cell" : { 
-        "edit_price_pop_title": "委托修改可执行", 
-        "edit_price_pop_content": "将价格更改至%{price}可能会使该委托立刻与市场中的其它委托成交。请确认更改。", 
+      "edit_cell" : {
+        "edit_price_pop_title": "委托修改可执行",
+        "edit_price_pop_content": "将价格更改至%{price}可能会使该委托立刻与市场中的其它委托成交。请确认更改。",
         "edit_price_pop_confirm": "执行修改"
       }
     },
@@ -2348,11 +2348,11 @@
       "current_day_realized":"当日已结算盈亏",
       "unrealized_mark_price":"未结算盈亏（标记价格）",
       "unrealized_last_price":"未结算盈亏(盘口价格)",
-      "day": "日", 
+      "day": "日",
       "start": "开始日期",
       "end": "结束日期",
       "amount": "数量"
-    } 
+    }
   },
   "profile": {
     "security": {
@@ -2488,7 +2488,7 @@
       "month9": "9 月",
       "month10": "10 月",
       "month11": "11 月",
-      "month12": "12 月", 
+      "month12": "12 月",
       "weeks": {
         "sun": "日",
         "mon": "一",
@@ -2538,7 +2538,7 @@
       "content_c": "MPV持有者的账号、名字、证件号、电邮、MPV成交量信息、充/提币信息、MPV划转信息。",
       "content_d": "*这将不会影响您的提币操作",
       "content_e": "《MPV附加条款》",
-      "chk_text": "阅读并同意"  
+      "chk_text": "阅读并同意"
     }
   },
   "set_service_fee": "手续费设置",
@@ -2547,7 +2547,7 @@
     "banner": {
       "btn_text": "立即领取 $60 交易金"
     },
-    "content": { 
+    "content": {
       "tips_1": "注册赠金",
       "tips_2": "首存赠金",
       "valuation": "当前等值：%{value} BTC",

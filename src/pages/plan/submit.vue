@@ -44,8 +44,8 @@
       <div  class="next-container-checked">
         <el-checkbox v-model="checked">
           <span class="true">{{ $t('application_check') }}</span>
-          <a href="javascript:;" @click="applyHandle">{{ $t('application_xy') }}</a>
         </el-checkbox>
+        <a href="javascript:;" @click="applyHandle">{{ $t('application_xy') }}</a>
       </div>
       <div class="next-container-btn" @click="nextHandle">
         <input type="button" :disabled="!checked" :value="this.$t('submit')">
@@ -95,7 +95,7 @@
     },
     computed: {
       lang() {
-        return this.$route.query.lang
+        return state.locale
       },
       uid () {
         if (state.userInfo) {
@@ -165,7 +165,9 @@
         }
       },
       applyHandle() {
-        this.$router.push('/treaty')
+        if (this.lang === 'en') {
+          this.$router.push('/treaty')
+        }
       }
     },
     created() {
