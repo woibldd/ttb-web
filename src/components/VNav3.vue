@@ -895,18 +895,19 @@ export default {
     }
   }
   .left {
-    flex: 95px 1;
-    margin-right: 36px;
+    flex: 110px 1;
+    margin-right: 15px;
     text-align: center;
     img {
       width: 89px;
     }
   }
   .right {
-    flex: 1 135px;
+    flex: 1 150px;
     margin-right:10px;
     .btn {
-      margin-top:10px; 
+      margin-top:10px;
+
     }
   }
 }
