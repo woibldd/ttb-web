@@ -308,8 +308,8 @@
               <div class="right">
                 <h3><a target="_blank" href="https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360032874512">{{ $t('nav.download_pop.process') }}</a></h3>
                 <p>
-                  <v-btn label="Iphone"/>
-                  <v-btn label="Android"/>
+                  <v-btn icon="apple" label="Iphone"/>
+                  <v-btn icon="android" label="Android"/>
                 </p>
               </div>
             </div>
@@ -882,9 +882,10 @@ export default {
   background: $home-header-login;
 }
 
+
 .pop {
   display: flex;
-  width: 270px;
+  width: 280px;
   color: #fff;
   h3 {
     margin-bottom: 10px;
@@ -894,17 +895,19 @@ export default {
     }
   }
   .left {
-    flex: 84px 1;
-    margin-right: 36px;
+    flex: 110px 1;
+    margin-right: 15px;
     text-align: center;
     img {
       width: 89px;
     }
   }
   .right {
-    flex: 1 120px;
+    flex: 1 150px;
+    margin-right:10px;
     .btn {
       margin-top:10px;
+
     }
   }
 }
