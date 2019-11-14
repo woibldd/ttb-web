@@ -18,7 +18,7 @@ if(process.env.NODE_ENV != 'development'){
 }
 
 const api = axios.create({
-  baseURL: _env_ || process.env.BASE_API,
+  baseURL: 'https://i.ixx.com',
   timeout: 30000, // request timeout
   withCredentials: true
 })

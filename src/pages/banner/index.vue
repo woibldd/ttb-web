@@ -1,49 +1,32 @@
 <template>
   <div>
     <div class="ixx_banner_container" style="height: 400px;"
-      :class="[state.locale]"  @mouseenter="on_top_enter" @mouseleave="on_top_leave"
+      :class="[state.locale]"
     >
-      <swiper :options="option" ref="mySwiper">
-        <template v-if="banner[0]">
-          <swiper-slide>
-            <div class="dot-banner">
-              <swiper :options="optionFirst" style="height: 128px">
-                <swiper-slide v-for="(item, index) in banner[0]" :key="index">
-                  <a :href="item.url" target="_blank">
-                    <img :src="item.picture" alt="">
-                  </a>
-                </swiper-slide>
-              </swiper>
+      <div class="wrapper" @mouseenter="on_top_enter" @mouseleave="on_top_leave">
+        <swiper :options="option" ref="mySwiper">
+          <swiper-slide v-for="(item, index) in banner" :key="index">
+            <div class="dot-banner" :class="{'dot-banner1': item.slot === 2, 'dot-banner2': item.slot === 1}">
+              <template v-if="item.slot === 3 || item.slot === 2">
+                <swiper :options="item.slot === 3 ? optionFirst : optionDot" style="height: 148px">
+                  <swiper-slide v-for="(child, i) in item.bannerList" :key="i">
+                    <img :src="child.picture" alt="" style="height: 128px">
+                  </swiper-slide>
+                  <div class="swiper-pagination" slot="pagination"></div>
+                </swiper>
+              </template>
+              <template v-else>
+                <swiper :options="option2" style="height: 400px">
+                  <swiper-slide v-for="(child, i) in item.bannerList" :key="i">
+                    <img :src="child.picture" alt="">
+                  </swiper-slide>
+                  <div class="swiper-pagination" slot="pagination"></div>
+                </swiper>
+              </template>
             </div>
           </swiper-slide>
-        </template>
-       <template>
-         <swiper-slide v-if="banner[1]">
-           <div class="dot-banner dot-banner1">
-             <swiper :options="optionDot" style="height: 128px">
-               <swiper-slide v-for="(item, index) in banner[1]" :key="index">
-                 <a :href="item.url" target="_blank">
-                   <img :src="item.picture" alt="">
-                 </a>
-               </swiper-slide>
-             </swiper>
-           </div>
-         </swiper-slide>
-       </template>
-        <template v-if="banner[2] > 0">
-          <swiper-slide>
-            <div class="dot-banner2">
-              <swiper :options="option2" style="height: 400px">
-                <swiper-slide v-for="(item, index) in banner[2]" :key="index">
-                  <a :href="item.url" target="_blank">
-                    <img :src="item.picture" alt="">
-                  </a>
-                </swiper-slide>
-              </swiper>
-            </div>
-          </swiper-slide>
-        </template>
-      </swiper>
+        </swiper>
+      </div>
     </div>
     <div class="buy-currency-container" v-if="state.locale==='zh-CN' || state.locale==='zh-HK'">
       <div class="currency-inner">
@@ -114,7 +97,7 @@ import service from "@/modules/service";
 import utils from "@/modules/utils"
 import {state} from "@/modules/store"
 import "swiper/dist/css/swiper.css";
-
+import _ from 'lodash'
 Vue.use(VueAwesomeSwiper /* { default global options } */);
 export default {
   props: [ "swipeBanner"],
@@ -135,48 +118,46 @@ export default {
       option: {
         init: false,
         grabCursor: true,
+        simulateTouch: true,
         centeredSlides: true,
-        simulateTouch: false,
         slidesPerView: 1,
-        autoplay: {
-          delay: 3000
-        },
         loop: true
       },
       optionFirst: {
         pagination: {
           el: '.swiper-pagination'
         },
+        paginationClickable: true,
         slidesPerView: 4,
         spaceBetween: 30,
         slidesPerGroup: 4,
-        loop: false,
+        loop: true,
+        simulateTouch: true,
         loopFillGroupWithBlank: true
       },
       optionDot: {
+        paginationClickable: true,
         pagination: {
           el: '.swiper-pagination'
         },
         grabCursor: true,
         centeredSlides: true,
-        simulateTouch: false,
         slidesPerView: 1,
-        autoplay: {
-          delay: 3000
-        },
+        simulateTouch: false,
         loop: false
       },
-      optionDot2: {
+      option2: {
+        paginationClickable: true,
         pagination: {
           el: '.swiper-pagination'
         },
         grabCursor: true,
-        simulateTouch: false,
         centeredSlides: true,
         slidesPerView: 1,
         autoplay: {
           delay: 3000
         },
+        simulateTouch: false,
         loop: false
       },
       arr: [],
@@ -186,6 +167,19 @@ export default {
     };
   },
   methods: {
+    prev() {
+      this.$refs.carousel.prev()
+    },
+    next() {
+      this.$refs.carousel.next()
+    },
+    // 通过获得的swiper对象来暂停自动播放
+    on_bot_enter() {
+      this.swiper.autoplay.stop()
+    },
+    on_bot_leave() {
+      this.swiper.autoplay.start()
+    },
     on_top_enter() {
       this.swiper.autoplay.stop()
     },
@@ -197,28 +191,46 @@ export default {
         platform: 1
       }).then((res) => {
         if (res.code === 0) {
-          let newBanner = res.data.filter(item => item.platform === 1)
           var arrDot1 = []
           var arrDot2 = []
+          var firstObj = {}
+          var objDot1 = {}
+          var objDot2 = {}
           // 筛选图片地址不能为空的数组
+          let newBanner = res.data.filter(item => item.platform === 1)
           const banner = newBanner.filter(item => item.picture)
           // 得到第一条数据的类型
-          const firstSolt = 1
-          // 拿到第一组数组
+          const firstSolt = banner[0].slot
           const arrDot = banner.filter(item => item.slot === firstSolt)
+          // 拿到第一组数组
+          if (arrDot.length > 0) {
+            firstObj = {
+              slot: arrDot[0].slot,
+              bannerList: arrDot
+            }
+          }
           // 得到不为第一条数据的类型的所有数组
           const otherBanner = banner.filter(item => item.slot !== firstSolt)
           if (otherBanner.length > 0) {
             const otherSolt = otherBanner[0].slot
             arrDot1 = otherBanner.filter(item => item.slot === otherSolt)
-            arrDot2 = otherBanner.filter(item => item.slot !== otherSolt)
-          }
-          let list = [arrDot, arrDot1, arrDot2]
-          this.banner = []
-          list.forEach((item) => {
-            if (item.length > 0) {
-              this.banner.push(item)
+            if (arrDot1.length > 0) {
+              objDot1 = {
+                slot: arrDot1[0].slot,
+                bannerList: arrDot1
+              }
             }
+            arrDot2 = otherBanner.filter(item => item.slot !== otherSolt)
+            if (arrDot2.length > 0) {
+              objDot2 = {
+                slot: arrDot2[0].slot,
+                bannerList: arrDot2
+              }
+            }
+          }
+          let list = [firstObj, objDot1, objDot2]
+          this.banner = _.filter(list, function(item) {
+            return item.slot
           })
         }
       })
@@ -515,13 +527,14 @@ export default {
 .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets {
   bottom: 0!important;
 }
-.swiper-pagination-bullet-active {
-  background: #00badb!important;
-}
 .swiper-pagination-bullet {
   width: 16px;
   height: 4px;
   border-radius: 50px;
+  background: #fff;
 }
 
+.swiper-pagination-bullet-active {
+  background: #00badb!important;
+}
 </style>
