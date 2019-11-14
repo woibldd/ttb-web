@@ -347,6 +347,7 @@ body {
   bottom: 20px;
   left: 0;
 }
+ 
 
 .charts-popup-d {
   position: relative;
@@ -366,7 +367,7 @@ ul {
   list-style: none;
 }
 li {
-  width:193px;
+  width:120px;
   height:28px;
   line-height: 28px;
   text-indent: 12px;
@@ -374,4 +375,21 @@ li {
 }
 li:hover {
   background-color: hsla(218, 26%, 86%, 0.06);
+} 
+
+.charts-popup-d .drowdownlist:after {
+  display: inline-block; 
+  content: "";
+  transition: all 0.2s ease-in-out;
+  width:0;
+  height:0;
+  border-width:4px 4px 0;
+  border-style:solid;
+  border-color: #ccc  transparent transparent;/*灰 透明 透明 */
+  margin:0 5px;
+  position:relative;
+}
+
+.charts-popup-d.selected .drowdownlist:after { 
+  transform: rotate(180deg);
 }

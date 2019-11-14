@@ -17,7 +17,7 @@
               alt="dl">
             <img
               v-else
-              src="../../assets/download/ixex.io.png"
+              src="../../assets/download/qr-download.png"
               alt="dl">
           </div>
           <div class="btns">
@@ -30,7 +30,7 @@
                 class="qr__img">
               <img
                 v-else
-                src="../../assets/download/ixex.io.png"
+                src="../../assets/download/qr-download.png"
                 alt=""
                 class="qr__img">
               <icon
@@ -46,7 +46,7 @@
                 class="qr__img">
               <img
                 v-else
-                src="../../assets/download/ixex.io.png"
+                src="../../assets/download/qr-download.png"
                 alt=""
                 class="qr__img">
               <icon

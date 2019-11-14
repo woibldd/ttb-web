@@ -97,7 +97,7 @@ import service from "@/modules/service";
 import utils from "@/modules/utils"
 import {state} from "@/modules/store"
 import "swiper/dist/css/swiper.css";
-
+import _ from 'lodash'
 Vue.use(VueAwesomeSwiper /* { default global options } */);
 export default {
   props: [ "swipeBanner"],
@@ -185,7 +185,7 @@ export default {
     },
     init() {
       service.getBanners({
-        platform: 3
+        platform: 1
       }).then((res) => {
         if (res.code === 0) {
           var arrDot1 = []
