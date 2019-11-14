@@ -5,7 +5,7 @@
     >
       <div class="wrapper" @mouseenter="on_top_enter" @mouseleave="on_top_leave">
         <swiper :options="option" ref="mySwiper">
-          <swiper-slide v-for="(item, index) in bannerList" :key="index">
+          <swiper-slide v-for="(item, index) in banner" :key="index">
             <div class="dot-banner" :class="{'dot-banner1': item.slot === 2, 'dot-banner2': item.slot === 1}">
               <template v-if="item.slot === 3 || item.slot === 2">
                 <swiper :options="item.slot === 3 ? optionFirst : optionDot" style="height: 148px">
@@ -226,7 +226,7 @@ export default {
             }
           }
           let list = [firstObj, objDot1, objDot2]
-          this.bannerList = _.filter(list, function(item) {
+          this.banner = _.filter(list, function(item) {
             return item.slot
           })
         }
