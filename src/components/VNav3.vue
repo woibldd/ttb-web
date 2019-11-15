@@ -24,12 +24,22 @@
             <!-- <img src="@/assets/hot.png" alt style="position: relative;top: 5px;left: 5px;"> -->
           </router-link>
 
-          <div class="nav_link arrow-down">
+          <div class="nav_link arrow-down" v-popover:popover2>
             <router-link to="/affiliate" class="nav_link ml-30">
               {{$t('plan')}}
               <icon name="header-down" class="mini arrow" />
             </router-link>
-            <div class="dropdown-sub-menu">
+            <!-- <span class="nav_link ml-30" >
+              {{$t('plan')}}
+              <icon name="header-down" class="mini arrow" />
+            </span> -->
+            <el-popover
+              ref="popover2"
+              popper-class="nav-list"
+              placement="bottom"
+              style="background:#2C3B4B;"
+              trigger="hover">
+              <div class="pop-dropdown">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
                   <router-link to="/affiliate" class="link">{{ $t('plan') }}</router-link>
@@ -49,16 +59,23 @@
                   >{{ $t('playBTC') }}</a>
                 </li>
               </ul>
-            </div>
+              </div>
+            </el-popover>
           </div>
 
           <div class="nav_link arrow-down">
-            <a href="/bonus" class="nav_link ml-30">
+            <a href="/bonus" class="nav_link ml-30" v-popover:popover3>
               {{ this.$t('gift.bonus') }}
               <icon name="hot-red" />
               <icon name="header-down" class="mini arrow" />
             </a>
-            <div class="dropdown-sub-menu">
+            <el-popover
+              ref="popover3"
+              popper-class="nav-list"
+              placement="bottom"
+              style="background:#2C3B4B;"
+              trigger="hover">
+              <div class="pop-dropdown">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
                   <a href="/bonus" class="link">
@@ -74,7 +91,8 @@
                   >{{ this.$t('node_sub') }}</a>
                 </li>
               </ul>
-            </div>
+              </div>
+            </el-popover>
           </div>
           <!-- <a
             href="/bonus"
@@ -191,11 +209,18 @@
         <div
           class="nav_item fund mr-15"
           v-if="$route.path === '/share_option' && mapBalanceMenu.length"
+           v-popover:popover4
         >
           <span
             style="display:inline-block;min-width:160px"
           >{{ activeShareAccount.currency }} {{$t('shareOption.account')}} / {{ activeShareAccount.available| bigRound(4) }}</span>
-          <div class="dropdown-sub-menu">
+           <el-popover
+              ref="popover4"
+              popper-class="nav-list"
+              placement="bottom"
+              style="background:#2C3B4B;"
+              trigger="hover">
+              <div class="pop-dropdown">
             <ul class="dropdown-list pt-10 pb-10" style="min-width:250px">
               <li
                 class="dropdown-item pl-24 pr-24"
@@ -225,7 +250,9 @@
                 <span v-else>{{$t('shareOption.recharge')}}</span>
               </li>
             </ul>
-          </div>
+          
+              </div>
+            </el-popover>
         </div>
         <div v-if="!state.userInfo" class="nav_item right_options">
           <router-link :to="{name:'login'}" class="nav_log_res mr-20">{{ $t("signin") }}</router-link>
@@ -233,10 +260,16 @@
         </div>
         <div class="right_options" v-else>
           <!-- 我的资产 -->
-          <div class="nav_item fund arrow-down mr-15" style="margin-left: -10px;">
+          <div class="nav_item fund arrow-down mr-15" style="margin-left: -10px;"  v-popover:popover5>
             <span @click="openDefault('fund')">{{ $t('wallets_nav_asset') }}</span>
             <icon name="header-down" class="mini arrow" />
-            <div class="dropdown-sub-menu">
+             <el-popover
+              ref="popover5"
+              popper-class="nav-list"
+              placement="bottom"
+              style="background:#2C3B4B;"
+              trigger="hover">
+              <div class="pop-dropdown">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">
                   <router-link :to="{name: 'fund'}" class="link">{{ $t('capital_manage') }}</router-link>
@@ -251,17 +284,26 @@
                   <router-link class="link" :to="'/fund/transfer'">{{ $t('account_exchange') }}</router-link>
                 </li>
               </ul>
-            </div>
+             </div>
+            </el-popover>
           </div>
           <!-- 个人中心 -->
-          <div class="nav_item email mr-15 ml-15">
+          <div class="nav_item email mr-15 ml-15"  v-popover:popover6>
             <!-- <span @click="openDefault('profile')">{{ desentInfo }}</span> -->
-            <span @click="openDefault('profile')">
+            <!-- @click="openDefault('profile')" -->
+            <span >
               <icon name="header-head" />
               <icon name="header-down" class="mini" />
             </span>
-            <div class="dropdown-sub-menu" style="margin-left: -39px;">
-              <ul class="dropdown-list pt-10 pb-10">
+            <el-popover
+              ref="popover6"
+              popper-class="nav-list"
+              placement="bottom"
+              style="background:#2C3B4B;"
+              trigger="hover">
+              <div class="pop-dropdown pt-10"> 
+              <p>{{ desentInfo }}</p>
+              <ul class="dropdown-list pt-10">
                 <li class="dropdown-item pl-24 pr-24 mobile">
                   <router-link :to="{name: 'fund'}" class="link">{{ $t('capital_manage') }}</router-link>
                 </li>
@@ -274,8 +316,9 @@
                 <li class="dropdown-item pl-24 pr-24">
                   <a class="link" @click="logout">{{ $t('signout') }}</a>
                 </li>
-              </ul>
-            </div>
+              </ul> 
+             </div>
+            </el-popover>
           </div>
         </div>
         <div class="nav_item">
@@ -316,11 +359,17 @@
           </el-popover>
         </div>
         <!-- 帮助中心中心 -->
-        <div class="nav_item help-center">
+        <div class="nav_item help-center" v-popover:popover7>
           <span class="help mr-15 ml-15" @click="openDefault('help')">
             <icon name="header-help" />
           </span>
-          <div class="dropdown-sub-menu" style="margin-left: -39px">
+           <el-popover
+              ref="popover7"
+              popper-class="nav-list"
+              placement="bottom"
+              style="background:#2C3B4B;"
+              trigger="hover">
+              <div class="pop-dropdown"> 
             <ul class="dropdown-list pt-10 pb-10">
               <li class="dropdown-item pl-24 pr-24">
                 <a class="link" target="_blank" :href="announcementLink">{{ $t('footer_notice') }}</a>
@@ -333,17 +382,39 @@
               </li>
             </ul>
           </div>
+          </el-popover>
         </div>
-        <div class="nav_item lang ml-15">
+        <div class="nav_item lang ml-15" v-popover:popover8>
           <span class="language">
             <icon :name="'header-'+state.locale" class="mr-5" />
           </span>
-          <div class="lang_box">
-            <a @click="switchLang(key)" :key="key" v-for="(value, key) in locales">
-              <icon :name="'flag-'+key" class="mr-5" />
-              {{ value }}
-            </a>
-          </div>
+              <el-popover
+            ref="popover8"
+            popper-class="nav-list"
+            placement="bottom"
+            style="background:#2C3B4B;"
+            width="100"
+            trigger="hover"> 
+            <div
+              style="width:100px;"
+              class="pop-dropdown">
+              <ul
+                class="dropdown-list pt-10 pb-10"
+                style="width:100px;">
+                <li
+                  class="dropdown-item pl-10 pr-10"
+                  :key="key"
+                  v-for="(value, key) in locales">
+                  <a
+                    @click="switchLang(key)"
+                  > <icon
+                    :name="'flag-'+key"
+                    class="mr-5"/>{{ value }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </el-popover>
         </div>
       </div>
     </div>
@@ -682,15 +753,15 @@ export default {
   .nav_right {
     position: absolute;
     min-width: 320px;
-    height: 60px;
+    //height: 60px;
     right: 30px;
     font-size: 14px;
     display: flex;
     align-items: center;
 
     .right_options {
-      height: 60px;
-      line-height: 60px;
+      // height: 60px;
+      // line-height: 60px;
       display: flex;
       align-items: center;
     }
@@ -698,7 +769,8 @@ export default {
     .fund,
     .email,
     .help-center,
-    .download {
+    .download,
+    .lang {
       float: left;
       color: #fff;
       padding: 19px 0;
@@ -797,11 +869,11 @@ export default {
   }
   .lang {
     width: 30px;
-    height: 30px;
+    // height: 30px;
     float: left;
     color: #fff;
-    line-height: 24px;
-    margin: 8px 0 0 0px;
+    // line-height: 24px;
+    // margin: 8px 0 0 0px;
     position: relative;
     text-align: center;
     cursor: pointer;
@@ -908,6 +980,27 @@ export default {
     .btn {
       margin-top:10px;
 
+    }
+  }
+}
+.pop-dropdown {
+  p {
+    color: #ccc;
+    text-align: center;
+  }
+  ul {
+    li {
+      height: 2.5em;
+      line-height: 2.5em;
+      a {
+        color: #fff;
+      }
+    }
+    li:hover {
+      background-color: #192D3F;
+      a {
+        color: $primary;
+      }
     }
   }
 }

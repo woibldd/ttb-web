@@ -2110,21 +2110,21 @@ export default {
           })
         );
       }
-      if (side === "BUY" && $ask.gt(0) && $price.div(1.3).gt($ask)) {
-        if (true) {
-          let toastText = {
-            title: this.$t("order_apply_failed"),
-            body: this.$t("order_apply_message_b"),
-            color: "red"
-          };
-          this.$toast(toastText);
-        } else {
-          return utils.alert(this.$i18n.t("price_high", { per: 30 }));
-        }
-      }
-      if (side === "SELL" && $bid.gt(0) && $price.div(0.7).lt($bid)) {
-        return utils.alert(this.$i18n.t("price_low", { per: 30 }));
-      }
+      // if (side === "BUY" && $ask.gt(0) && $price.div(1.3).gt($ask)) {
+      //   if (true) {
+      //     let toastText = {
+      //       title: this.$t("order_apply_failed"),
+      //       body: this.$t("order_apply_message_b"),
+      //       color: "red"
+      //     };
+      //     this.$toast(toastText);
+      //   } else {
+      //     return utils.alert(this.$i18n.t("price_high", { per: 30 }));
+      //   }
+      // }
+      // if (side === "SELL" && $bid.gt(0) && $price.div(0.7).lt($bid)) {
+      //   return utils.alert(this.$i18n.t("price_low", { per: 30 }));
+      // }
       if (side === "BUY" && $ask.gt(0) && $price.div(1.05).gt($ask)) {
         const ok = await utils.confirm(this, {
           trade: true,
