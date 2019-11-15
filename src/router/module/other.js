@@ -19,6 +19,8 @@ const plan = () => import('@/pages/plan/index')
 const h5treaty = () => import('@/pages/plan/h5/treaty')
 const treaty = () => import('@/pages/plan/treaty')
 const bonus = () => import(/*  */ '@/pages/Bonus.vue')
+const overseas = () => import(/*  */ '@/views/new-downLoad/index.vue')
+const overseasTip = () => import(/*  */ '@/views/new-downLoad/tip.vue')
 export const otherRouter = [
   {
     path: '/affiliate-app',
@@ -337,6 +339,24 @@ export const otherRouter = [
     path: '/bonus-app',
     name: 'bonus-app',
     component: () =>  import(/*  */ '@/pages/h5/bonus/app-bonus.vue'),
+    meta: {
+      nav: false,
+      footer:  false
+    }
+  },
+  {
+    path: '/overseas',
+    name: 'overseas',
+    component: overseas,
+    meta: {
+      nav: false,
+      footer:  false
+    }
+  },
+  {
+    path: '/overseas-next',
+    name: 'overseas-next',
+    component: overseasTip,
     meta: {
       nav: false,
       footer:  false

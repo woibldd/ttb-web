@@ -165,9 +165,7 @@
         }
       },
       applyHandle() {
-        if (this.lang === 'en') {
-          this.$router.push('/treaty')
-        }
+        this.$router.push('/treaty')
       }
     },
     created() {

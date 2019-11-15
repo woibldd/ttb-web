@@ -228,6 +228,21 @@ export default {
 }
 </script>
 <style lang="scss">
+@font-face {
+  font-family: 'down-icon';  /* project id 1408535 */
+  src: url('//at.alicdn.com/t/font_1408535_z5q5sgr3j38.eot');
+  src: url('//at.alicdn.com/t/font_1408535_z5q5sgr3j38.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1408535_z5q5sgr3j38.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1408535_z5q5sgr3j38.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1408535_z5q5sgr3j38.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1408535_z5q5sgr3j38.svg#iconfont') format('svg');
+}
+.down-icon{
+  font-family:"down-icon" !important;
+  font-size:16px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;}
 button {
   outline: none!important;
   box-shadow: none!important;
