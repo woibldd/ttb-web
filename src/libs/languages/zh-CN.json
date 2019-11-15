@@ -2662,8 +2662,11 @@
       "content_c": "MPV持有者的账号、名字、证件号、电邮、MPV成交量信息、充/提币信息、MPV划转信息。",
       "content_d": "*这将不会影响您的提币操作",
       "content_e": "《MPV附加条款》",
-      "chk_text": "阅读并同意"
-    }
+      "chk_text": "阅读并同意"  
+    },
+    "order": {
+      "hide_canceled": "隐藏已撤销"
+    }  
   },
   "set_service_fee": "手续费设置",
   "gift": {

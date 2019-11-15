@@ -2631,7 +2631,10 @@
       "content_d": "*这将不会影响您的提币操作",
       "content_e": "《MPV附加条款》",
       "chk_text": "阅读并同意"
-    }
+    },
+    "order": {
+      "hide_canceled": "숨김 철회"
+    } 
   },
   "gift": {
     "bonus":"Trading Bonus",

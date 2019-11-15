@@ -46,7 +46,7 @@ export default {
       if (this.tabSelected === 'all') { 
         let arr =  _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
-            && pair.type != 4
+            && pair.type != 4 && pair.type != 5
         }) 
         arr = _.sortBy(arr, ['rank'])
         return arr 
@@ -58,6 +58,9 @@ export default {
         res = _.filter(res, (pair, index) => {
           if (pair.type == 4){
             pair.type = 2
+          }
+          if (pair.type == 5) {
+            pair.type = 3
           }
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1
                 && pair.type > 1 
@@ -77,7 +80,7 @@ export default {
         return _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
             && (pair.like || false)
-            && pair.type != 4 
+            && pair.type != 4 && pair.type != 5
         })
       } else {
         let arr =  _.filter(list, pair => {

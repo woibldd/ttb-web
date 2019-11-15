@@ -24,8 +24,8 @@
             <!-- <img src="@/assets/hot.png" alt style="position: relative;top: 5px;left: 5px;"> -->
           </router-link>
 
-          <div class="nav_link arrow-down" v-popover:popover2>
-            <router-link to="/affiliate" class="nav_link ml-30">
+          <div class="nav_link arrow-down">
+            <router-link to="/affiliate" class="nav_link ml-30" v-popover:popover2>
               {{$t('plan')}}
               <icon name="header-down" class="mini arrow" />
             </router-link>
