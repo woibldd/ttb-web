@@ -36,7 +36,7 @@
               <h1>{{this.$t('yj_mb')}}</h1>
               <p>
                 <em>{{$t('ck_jg')}}</em>
-                <el-tooltip content="$t('jg_ck')" placement="top" effect="light">
+                <el-tooltip :content="$t('jg_ck')" placement="top" effect="light">
                   <i class="currency-icon">&#xe61c;</i>
                 </el-tooltip>
                 <span>{{Number(downPrice).toFixed(2)}} CNY/USDT</span>
