@@ -22,14 +22,20 @@
         {{ $t('order_history') }}
       </a>
       <div class="header-icons">
-        <span
+        <!-- <span
           class="hide-others btn on"
           @click="local.hideOthers = !local.hideOthers">
           <input
             type="checkbox"
             v-model="local.hideOthers">
           {{ $t('hide_others', {pair: pair}) }}
-        </span>
+        </span> -->
+        <el-checkbox
+          class="hide-others btn on"
+          v-model="local.hideOthers">{{ $t('hide_others', {pair: pair}) }}</el-checkbox>
+        <el-checkbox
+          v-if="tab === 'history'"
+          v-model="local.hideCanceled">{{ $t('trading_page.order.hide_canceled') }}</el-checkbox>
         <a
           v-if="tab === 'active'  && local.hideOthers"
           @click.prevent="cancelAll"
@@ -250,6 +256,9 @@ export default {
     'local.hideOthers' () {
       this.hideOthersChange()
     },
+    'local.hideCanceled' () {
+      this.hideOthersChange()
+    },
     'active.list': {
       immediate: true,
       handler (list) {
@@ -423,9 +432,13 @@ export default {
       if (res.code) {
         ctx.err = res.message
       } else {
-        const items = this.local.hideOthers
+        let items = this.local.hideOthers
           ? res.data.items.filter(item => item.symbol === this.state.pro.pair)
           : res.data.items
+
+        items = this.local.hideCanceled
+          ? items.filter(item => item.status !== 4 && item.status !== 6)
+          : items 
         if (ctx.page > 1) {
           ctx.list = ctx.list.concat(items)
         } else {
@@ -672,5 +685,8 @@ tbody tr:nth-child(odd) {
   &:active {
     opacity: 1;
   }
+}
+.el-checkbox /deep/ .el-checkbox__label {
+  color: #fff;
 }
 </style>

@@ -33,6 +33,7 @@
             v-model="earn.lever">
             <el-option
               v-for="(item, idx) in leverages"
+              v-if="item !== '0'"
               :key="idx"
               :label="item + 'x'"
               :value="item"/>
@@ -140,6 +141,7 @@
             v-model="force.lever">
             <el-option
               v-for="(item, idx) in leverages"
+              v-if="item !== '0'"
               :key="idx"
               :label="item + 'x'"
               :value="item"/>
@@ -212,6 +214,7 @@
             v-model="aim.lever">
             <el-option
               v-for="(item, idx) in leverages"
+              v-if="item !== '0'"
               :key="idx"
               :label="item + 'x'"
               :value="item"/>

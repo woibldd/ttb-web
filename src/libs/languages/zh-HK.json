@@ -2463,7 +2463,10 @@
       "content_d": "*這將不會影響您的提幣操作",
       "content_e": "《MPV附加條款》",
       "chk_text": "閱讀並同意"
-    }
+    },
+    "order": {
+      "hide_canceled": "隐藏已撤销"
+    } 
   },
   "set_service_fee": "手續費設定",
   "gift": {

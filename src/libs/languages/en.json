@@ -2765,7 +2765,10 @@
       "content_d": "*his will not affect your withdrawal function",
       "content_e": "《MPV Additional Terms》",
       "chk_text": "Read and Agree"
-    }
+    },
+    "order": {
+      "hide_canceled": "隐藏已撤销"
+    } 
   },
   "set_service_fee": "Fee setting",
   "gift": {
