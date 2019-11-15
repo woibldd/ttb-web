@@ -2767,7 +2767,7 @@
       "chk_text": "Read and Agree"
     },
     "order": {
-      "hide_canceled": "隐藏已撤销"
+      "hide_canceled": "Hide Revoked"
     } 
   },
   "set_service_fee": "Fee setting",

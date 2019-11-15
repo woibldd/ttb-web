@@ -339,7 +339,7 @@ export default {
       //aim_price = Big(1).plus(realized_rate).mul(open_price)
       // aim_price = (Big(roe).div(100).plus(realized_rate)).plus(realized_rate.div(lever)).mul(open_price) 
       if (realized_rate.gte(1)) {
-        aim_price = '0'
+        aim_price = '----'
       } else {
         aim_price = Big(open_price).div(Big(1).minus(realized_rate)).round(2, 0)
       }
