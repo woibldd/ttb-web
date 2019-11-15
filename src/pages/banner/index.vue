@@ -10,7 +10,9 @@
               <template v-if="item.slot === 3 || item.slot === 2">
                 <swiper :options="item.slot === 3 ? optionFirst : optionDot" style="height: 148px">
                   <swiper-slide v-for="(child, i) in item.bannerList" :key="i">
-                    <img :src="child.picture" alt="" style="height: 128px">
+                    <a :href="child.url" target="_blank">
+                      <img :src="child.picture" alt="" style="height: 128px">
+                    </a>
                   </swiper-slide>
                   <div class="swiper-pagination" slot="pagination"></div>
                 </swiper>
@@ -18,7 +20,9 @@
               <template v-else>
                 <swiper :options="option2" style="height: 400px">
                   <swiper-slide v-for="(child, i) in item.bannerList" :key="i">
-                    <img :src="child.picture" alt="">
+                    <a :href="child.url" target="_blank">
+                      <img :src="child.picture" alt="">
+                    </a>
                   </swiper-slide>
                   <div class="swiper-pagination" slot="pagination"></div>
                 </swiper>
@@ -36,7 +40,7 @@
               <h1>{{this.$t('yj_mb')}}</h1>
               <p>
                 <em>{{$t('ck_jg')}}</em>
-                <el-tooltip content="$t('jg_ck')" placement="top" effect="light">
+                <el-tooltip :content="$t('jg_ck')" placement="top" effect="light">
                   <i class="currency-icon">&#xe61c;</i>
                 </el-tooltip>
                 <span>{{Number(downPrice).toFixed(2)}} CNY/USDT</span>
