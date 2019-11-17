@@ -275,8 +275,8 @@ export default {
     download () {
       let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
       if (utils.isIos()) {
-        url = `itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist`
-        // url = `https://ios.ixx.com`
+        // url = `itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist`
+        url = `https://ios.ixx.com`
       }
       // window.open(url, '_blank')
       window.location.href = url
