@@ -4,10 +4,13 @@
       <div class="footer_left">
         <router-link
           :to="{name:'home'}"
-          class="footer_logo"/>
+          class="footer_logo">
+          <img src="../assets/ixx/ixx_logo.png" :alt="$t('seo_keywords')">
+        </router-link>
         <p class="footer_ltxt">
           <!-- <b>{{ $t('first') }}</b> -->
-          {{ exchangeNameConfig }}
+          <!-- {{ exchangeNameConfig }} -->
+          {{ $t('exchangeNameConfig') }}
         </p>
         <div
           class="lt">
@@ -298,9 +301,13 @@ export default {
       width: 176px;
       height: 38px;
       margin-top: 22px;
-      background-image: url('../assets/ixx/ixx_logo.png');
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
+      img {
+        width: 176px;
+        height: 38px;
+      }
+      // background-image: url('../assets/ixx/ixx_logo.png');
+      // background-size: 100% 100%;
+      // background-repeat: no-repeat;
     //   @include bg-retina('../assets/footer_logo', 'png', 224px, 51px);
       display: block;
     }
