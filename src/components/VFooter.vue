@@ -87,6 +87,9 @@
           <a
             :href="apiDoc"
             target="_blank">{{ $t('footer_api') }}</a>
+           <a 
+            :href="deepDoc"
+            target="_blank">{{ $t('home.footer.information') }}</a>
         </div>
         <div class="footer_ct footer-rt">
           <p>{{ $t('footer_terms') }}</p>
@@ -207,15 +210,21 @@ export default {
       return this.state.theme.help[this.state.locale] || this.state.theme.help.en
     },
     requestLink() {
-        //   if (this.state.userInfo && this.state.theme.themeName === 'default') {
-        //     return process.env.BASE_API + '/ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
-        //   } else {
-        //     return this.state.theme.request[this.state.locale] || this.request.theme.help.en
-        //   }
+      if (this.state.userInfo && this.state.theme.themeName === 'default') {
+        return process.env.BASE_API + '/ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
+      } else {
         return this.state.theme.request[this.state.locale] || this.request.theme.help.en
+      }
+      // return this.state.theme.request[this.state.locale] || this.request.theme.help.en
     },
     announcementLink() {
-      return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
+      
+      if (this.state.userInfo && this.state.theme.themeName === 'default') {
+        return process.env.BASE_API + '/ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.announcement[this.state.locale] || this.request.theme.announcement.en)
+      } else {
+        return this.state.theme.announcement[this.state.locale] || this.request.theme.announcement.en
+      }
+      // return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
     },
     aboutLink() {
       // return `/docs/IXX_introduction_${this.state.locale || 'en'}.pdf`
@@ -227,6 +236,13 @@ export default {
     },
     apiDoc() {
       return this.state.theme.apiDoc[this.state.locale || 'en']
+    },
+    deepDoc() { 
+      if (this.state.userInfo && this.state.theme.themeName === 'default') {
+        return process.env.BASE_API + '/ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.deep[this.state.locale] || this.request.theme.deep.en)
+      } else {
+        return this.state.theme.deep[this.state.locale] || this.request.theme.deep.en
+      }
     },
     showEnTips() {
       return this.state.locale === 'en' || this.state.locale === 'ko'
