@@ -11,7 +11,7 @@ const handler = (dataArr, fixed, type) => {
   const res = dataArr.reduce((curr, prev) => Big(curr)[type](prev))
   return bigRound(res, fixed)
 }
-export const bigRound = (target, fixed = 1, rm = 0) => Big(target).round(fixed, rm).toFixed(fixed < 0 ? 0 : fixed)
+export const bigRound = (target=0, fixed = 1, rm = 0) => Big(target).round(fixed, rm).toFixed(fixed < 0 ? 0 : fixed)
 
 export const bigDiv = ([source, rate], fixed) => bigRound(Big(source).div(rate), fixed)
 
