@@ -4,10 +4,13 @@
       <div class="footer_left">
         <router-link
           :to="{name:'home'}"
-          class="footer_logo"/>
+          class="footer_logo">
+          <img src="../assets/ixx/ixx_logo.png" :alt="$t('seo_keywords')">
+        </router-link>
         <p class="footer_ltxt">
           <!-- <b>{{ $t('first') }}</b> -->
-          {{ exchangeNameConfig }}
+          <!-- {{ exchangeNameConfig }} -->
+          {{ $t('exchangeNameConfig') }}
         </p>
         <div
           class="lt">
@@ -84,6 +87,9 @@
           <a
             :href="apiDoc"
             target="_blank">{{ $t('footer_api') }}</a>
+           <a 
+            :href="deepDoc"
+            target="_blank">{{ $t('home.footer.information') }}</a>
         </div>
         <div class="footer_ct footer-rt">
           <p>{{ $t('footer_terms') }}</p>
@@ -204,15 +210,21 @@ export default {
       return this.state.theme.help[this.state.locale] || this.state.theme.help.en
     },
     requestLink() {
-        //   if (this.state.userInfo && this.state.theme.themeName === 'default') {
-        //     return process.env.BASE_API + '/ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
-        //   } else {
-        //     return this.state.theme.request[this.state.locale] || this.request.theme.help.en
-        //   }
+      if (this.state.userInfo && this.state.theme.themeName === 'default') {
+        return process.env.BASE_API + '/ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
+      } else {
         return this.state.theme.request[this.state.locale] || this.request.theme.help.en
+      }
+      // return this.state.theme.request[this.state.locale] || this.request.theme.help.en
     },
     announcementLink() {
-      return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
+      
+      if (this.state.userInfo && this.state.theme.themeName === 'default') {
+        return process.env.BASE_API + '/ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.announcement[this.state.locale] || this.request.theme.announcement.en)
+      } else {
+        return this.state.theme.announcement[this.state.locale] || this.request.theme.announcement.en
+      }
+      // return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
     },
     aboutLink() {
       // return `/docs/IXX_introduction_${this.state.locale || 'en'}.pdf`
@@ -224,6 +236,13 @@ export default {
     },
     apiDoc() {
       return this.state.theme.apiDoc[this.state.locale || 'en']
+    },
+    deepDoc() { 
+      if (this.state.userInfo && this.state.theme.themeName === 'default') {
+        return process.env.BASE_API + '/ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.deep[this.state.locale] || this.request.theme.deep.en)
+      } else {
+        return this.state.theme.deep[this.state.locale] || this.request.theme.deep.en
+      }
     },
     showEnTips() {
       return this.state.locale === 'en' || this.state.locale === 'ko'
@@ -298,9 +317,13 @@ export default {
       width: 176px;
       height: 38px;
       margin-top: 22px;
-      background-image: url('../assets/ixx/ixx_logo.png');
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
+      img {
+        width: 176px;
+        height: 38px;
+      }
+      // background-image: url('../assets/ixx/ixx_logo.png');
+      // background-size: 100% 100%;
+      // background-repeat: no-repeat;
     //   @include bg-retina('../assets/footer_logo', 'png', 224px, 51px);
       display: block;
     }

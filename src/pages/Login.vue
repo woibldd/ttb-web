@@ -21,7 +21,7 @@
         <form
           class="form"
           onsubmit="return false"
-          autocomplete="off"
+          autocomplete="on"
           @keydown.enter.stop.prevent="submit">
           <div
             v-show="by === 'phone'"
@@ -97,6 +97,7 @@
               <ix-input
                 ref="password"
                 v-model.trim="password"
+                :autocomplete="autocomplete"
                 :required="true"
                 :type.sync="pwdType"
                 :show-eye="true"
@@ -128,7 +129,7 @@
           </div>
         </form>
       </div>
-    </div> 
+    </div>
     <v-download />
     <v-modal
       :open.sync="showModal"
@@ -238,6 +239,7 @@ export default {
   props: ['by'],
   data() {
     return {
+      autocomplete: 'on',
       local,
       state,
       utils,
@@ -274,10 +276,10 @@ export default {
 
         }
       },
-      prevent: false 
+      prevent: false
     }
   },
-  beforeRouteEnter(to, from, next) {  
+  beforeRouteEnter(to, from, next) {
     if (to.params.by === 'email') {
       return next()
     }
@@ -322,19 +324,19 @@ export default {
       //   } else if (this.verify_email) {
       //     type = 'email'
       //   }
-      // } 
+      // }
       if (this.verify_google) {
         type = 'google'
       } else if (this.verify_phone) {
         type = 'phone'
       } else if (this.verify_email) {
         type = 'email'
-      } 
+      }
       return type
     },
     isMobile(){
       return this.utils.isMobile()
-    } 
+    }
   },
   watch: {
     showModal(val) {
@@ -351,14 +353,14 @@ export default {
     this.$nextTick(this.fixPosition)
   },
   created() {
-    this.fetchRegion() 
+    this.fetchRegion()
     let $this = this
-    setTimeout(function () { 
+    setTimeout(function () {
       if (state.userInfo) {
         $this.$router.push('/')
       }
     }, 500)
-      
+
     const returnTo = this.$route.query.return_to
     if (returnTo && returnTo.indexOf('https://ix.zendesk.com/') > -1) {
       actions.setLoginBack('/zendesk/auth' + location.search)
@@ -371,13 +373,13 @@ export default {
   destroyed() {
     this.$eh.$off('app:resize')
   },
-  methods: { 
+  methods: {
     download (type) {
       let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
       if (type === 'ios') {
-        url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
-        // url = `https://ios.ixx.com`
-      } 
+        // url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
+        url = `https://ios.ixx.com`
+      }
       window.location.href = url
     },
     async fetchRegion() {
@@ -531,7 +533,7 @@ export default {
     async loginSuccess(userInfo) {
       actions.setUserInfo(userInfo)
       actions.resetStatus()
-      
+
       if (typeof state.loginBack === 'string') {
         location.href = state.loginBack
       } else {
