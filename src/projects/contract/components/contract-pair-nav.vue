@@ -124,6 +124,7 @@
         <div class="pair-info-right">
           <div class="info-controls">
             <span
+              v-if="isLogin"
               class="info-control pointer"
               @click.prevent="openSetting">
               <icon name="calc"/>
@@ -193,6 +194,9 @@ export default {
         return 'contract_min_unit'
       }
     },
+    isLogin () {
+      return !!this.state.userInfo
+    }
   },
   methods: {
     changePair (pair) {

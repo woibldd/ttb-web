@@ -123,7 +123,8 @@ export default {
 
     if (symbol.product_name === 'BTC') {
       open_value = Big(amount).div(open_price || 1).abs()
-      close_value = Big(amount).div(close_value || 1).abs()
+      // close_value = Big(amount).div(close_price || 1).abs()
+      close_value = Big(close_price).div(open_price || 1).mul(open_value).abs()
       margin = Big(open_value).mul(100).div(lever || 100).mul(0.01).abs()
     } else {
       open_value =  Big(amount || 0).times(open_price || 0).times(symbol.multiplier).abs()
@@ -332,11 +333,17 @@ export default {
     let realized_rate = Big(roe).div(100).div(lever)
     let aim_price = ''
     if (direction === 'less') {
-      aim_price = (Big(roe).div(100).minus(realized_rate)).plus(realized_rate.div(lever)).mul(open_price)
+      // aim_price = (Big(roe).div(100).minus(realized_rate)).plus(realized_rate.div(lever)).mul(open_price)
       //aim_price = Big(1).minus(realized_rate).mul(open_price)
+      aim_price = Big(open_price).div(Big(1).plus(realized_rate)).round(2, 0)
     } else {
       //aim_price = Big(1).plus(realized_rate).mul(open_price)
-      aim_price = (Big(roe).div(100).plus(realized_rate)).plus(realized_rate.div(lever)).mul(open_price)
+      // aim_price = (Big(roe).div(100).plus(realized_rate)).plus(realized_rate.div(lever)).mul(open_price) 
+      if (realized_rate.gte(1)) {
+        aim_price = '----'
+      } else {
+        aim_price = Big(open_price).div(Big(1).minus(realized_rate)).round(2, 0)
+      }
     }
     return {
       aim_price,

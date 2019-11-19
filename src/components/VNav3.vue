@@ -1,7 +1,9 @@
 <template>
   <div :class="{dark: dark}" class="nav_box">
     <div class="ind_cen">
-      <router-link :to="{name:'home'}" class="nav_logo" />
+      <router-link class="nav_logo" :to="{name:'home'}" >
+        <img src="../assets/ixx/ixx_logo.png" :alt="$t('seo_keywords')">
+      </router-link>
       <div class="nav_left">
         <div class="left_options">
           <router-link :to="{name: 'trading'}" class="nav_link">{{ $t('trading') }}</router-link>
@@ -24,8 +26,8 @@
             <!-- <img src="@/assets/hot.png" alt style="position: relative;top: 5px;left: 5px;"> -->
           </router-link>
 
-          <div class="nav_link arrow-down" v-popover:popover2>
-            <router-link to="/affiliate" class="nav_link ml-30">
+          <div class="nav_link arrow-down">
+            <router-link to="/affiliate" class="nav_link ml-30" v-popover:popover2>
               {{$t('plan')}}
               <icon name="header-down" class="mini arrow" />
             </router-link>
@@ -645,9 +647,13 @@ export default {
     height: 38px;
     margin-top: 11px;
     display: block;
-    background-image: url("../assets/ixx/ixx_logo.png");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
+    // background-image: url("../assets/ixx/ixx_logo.png");
+    // background-size: 100% 100%;
+    // background-repeat: no-repeat;
+    img {
+      width: 176px;
+      height: 38px;
+    }
     // @include bg-retina('../assets/nav_logo', 'png', 142px, 46px);
   }
   .nav_left {

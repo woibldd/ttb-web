@@ -15,7 +15,7 @@
           <img src="./../../assets/overseas/ix/bb.png" alt="">
         </div>
         <div class="right">
-          <h1>法币交易</h1>
+          <h1>法币交易</h1
           <p> 安全便捷，一键买币 ，畅快交易</p>
         </div>
       </div>

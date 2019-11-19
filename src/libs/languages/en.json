@@ -2765,7 +2765,10 @@
       "content_d": "*his will not affect your withdrawal function",
       "content_e": "《MPV Additional Terms》",
       "chk_text": "Read and Agree"
-    }
+    },
+    "order": {
+      "hide_canceled": "Hide Revoked"
+    } 
   },
   "set_service_fee": "Fee setting",
   "gift": {
@@ -2825,5 +2828,7 @@
       "scan": "Download App",
       "process": "App Install Guide >>"
     }
-  }
+  },
+  "seo_keywords": "IXX,比特币,比特币交易,以太坊,区块链,共识,自由联合,数字资产交易所,BTC,ETH,Block chain,Bitcoin Trading,炒币,比特币,比特币交易所,比特币价格今日行情,比特币走势,数字货币交易所,比特币去哪买,比特币如何购买,比特币交易所,比特币价格今日行情,比特币实时行情,比特币走势,数字货币交易所,比特币去哪买,比特币如何购买,永续合约,合约交易所,合约交易所排名,交割合约,比特币合约,BTC合约,合约是什么,怎么玩合约,犀牛交易所,永续合约,合约交易所,合约交易所排名,交割合约,比特币合约,BTC合约,合约是什么,怎么玩合约,合约在哪玩",
+  "exchangeNameConfig": "IXX | Digital assets trading community"
 }

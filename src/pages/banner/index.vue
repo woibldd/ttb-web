@@ -11,7 +11,7 @@
                 <swiper :options="item.slot === 3 ? optionFirst : optionDot" style="height: 148px">
                   <swiper-slide v-for="(child, i) in item.bannerList" :key="i">
                     <a :href="child.url" target="_blank">
-                      <img :src="child.picture" alt="" style="height: 128px">
+                      <img :src="child.picture"  :alt="$t('seo_keywords')" style="height: 128px">
                     </a>
                   </swiper-slide>
                   <div class="swiper-pagination" slot="pagination"></div>
@@ -21,7 +21,7 @@
                 <swiper :options="option2" style="height: 400px">
                   <swiper-slide v-for="(child, i) in item.bannerList" :key="i">
                     <a :href="child.url" target="_blank">
-                      <img :src="child.picture" alt="">
+                      <img :src="child.picture" :alt="$t('seo_keywords')">
                     </a>
                   </swiper-slide>
                   <div class="swiper-pagination" slot="pagination"></div>
