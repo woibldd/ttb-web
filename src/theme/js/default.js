@@ -13,10 +13,10 @@ module.exports = {
     en: 'IXX | Digital assets trading community',
     ko: 'IXX | 수자 재산 거래 공동체'
   },
-  keywords: 'IXX,比特币交易,以太坊,区块链,共识,自由联合,数字资产交易所,炒币,比特币,比特币交易所,比特币价格今日行情,比特币走势,数字货币交易所,比特币去哪买,比特币如何购买,比特币交易所,比特币价格今日行情,比特币实时行情,比特币走势,数字货币交易所,比特币去哪买,比特币如何购买,合约交易所,合约交易所排名,交割合约,比特币合约,BTC合约,合约是什么,怎么玩合约,永续合约,合约交易所,合约交易所排名,交割合约,比特币合约,BTC合约,合约是什么,怎么玩合约',
+  keywords: 'IXX,比特币交易,以太坊,区块链,共识,自由联合,数字资产交易所,炒币,比特币,比特币交易所,比特币价格今日行情,比特币走势,数字货币交易所,比特币去哪买,比特币如何购买,比特币交易所,比特币价格今日行情,比特币实时行情,比特币走势,数字货币交易所,比特币去哪买,比特币如何购买,合约交易所,合约交易所排名,交割合约,比特币合约,BTC合约,合约是什么,怎么玩合约,永续合约,合约交易所,合约交易所排名,交割合约,比特币合约,BTC合约,合约是什么,怎么玩合约,资产交易',
   keywordsConfig: {
-    'zh-CN': 'IXX,炒币，比特币，比特币交易所 ，比特币价格今日行情，比特币走势，数字货币交易所，比特币去哪买，比特币如何购买，比特币交易所、比特币价格今日行情、比特币实时行情、比特币走势、数字货币交易所、比特币去哪买、比特币如何购买、合约交易所、合约交易所排名、交割合约、比特币合约、BTC合约、合约是什么、怎么玩合约、永续合约、合约交易所、合约交易所排名、交割合约、比特币合约、BTC合约、合约是什么、怎么玩合约,资产交易',
-    'zh-HK': 'IXX，炒幣，比特幣，比特幣交易所，比特幣價格今日行情，比特幣走勢，數位貨幣交易所，比特幣去哪買，比特幣如何購買，比特幣交易所、比特幣價格今日行情、比特幣即時行情、比特幣走勢、數位貨幣交易所、比特幣去哪買、比特幣如何購買、合約交易所、合約交易所排名、交割合約、比特幣合約、BTC合約、合約是什麼、怎麼玩合約、永續合約、合約交易所、合約交易所排名、交割合約、比特幣合約、BTC合約、合約是什麼、怎麼玩合約，資產交易',
+    'zh-CN': 'IXX,炒币,比特币,比特币交易所 ,比特币价格今日行情,比特币走势,数字货币交易所,比特币去哪买,比特币如何购买,比特币交易所,比特币价格今日行情,比特币实时行情,比特币走势,数字货币交易所,比特币去哪买,比特币如何购买,合约交易所,合约交易所排名,交割合约,比特币合约,BTC合约,合约是什么,怎么玩合约,永续合约,合约交易所,合约交易所排名,交割合约,比特币合约,BTC合约,合约是什么,怎么玩合约,资产交易',
+    'zh-HK': 'IXX,炒幣,比特幣,比特幣交易所,比特幣價格今日行情,比特幣走勢,數位貨幣交易所,比特幣去哪買,比特幣如何購買,比特幣交易所,比特幣價格今日行情,比特幣即時行情,比特幣走勢,數位貨幣交易所,比特幣去哪買,比特幣如何購買,合約交易所,合約交易所排名,交割合約,比特幣合約,BTC合約,合約是什麼,怎麼玩合約,永續合約,合約交易所,合約交易所排名,交割合約,比特幣合約,BTC合約,合約是什麼,怎麼玩合約,資產交易',
     en: 'speculation, bitcoin, bitcoin exchange, bitcoin price today, bitcoin trend, digital currency exchange, where to buy bitcoin, how to buy bitcoin, bitcoin exchange, bitcoin price today, Bitcoin real-time market, bitcoin trend, digital currency exchange, where to buy bitcoin, how to buy bitcoin, contract exchange, contract exchange ranking, delivery contract, bitcoin contract, BTC contract, contract, what to play Contracts, perpetual contracts, contract exchanges, contract exchange rankings, delivery contracts, bitcoin contracts, BTC contracts, contracts, and how to play contracts',
     ko: 'speculation, bitcoin, bitcoin exchange, bitcoin price today, bitcoin trend, digital currency exchange, where to buy bitcoin, how to buy bitcoin, bitcoin exchange, bitcoin price today, Bitcoin real-time market, bitcoin trend, digital currency exchange, where to buy bitcoin, how to buy bitcoin, contract exchange, contract exchange ranking, delivery contract, bitcoin contract, BTC contract, contract, what to play Contracts, perpetual contracts, contract exchanges, contract exchange rankings, delivery contracts, bitcoin contracts, BTC contracts, contracts, and how to play contracts'
   },
