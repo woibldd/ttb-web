@@ -297,7 +297,7 @@
   "email_code": "邮箱验证码",
   "bind_phone_label_code": "输入短信验证码",
   "not_supported": "暂不支持此功能",
-  "transfer_cancel": "取消",
+  "transfer_cancel": "撤销",
   "signup_title": "注册",
   "pwcheck_ph": "密码至少8个字符",
   "pwcheck_ph2": "确认密码",

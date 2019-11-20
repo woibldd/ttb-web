@@ -17,16 +17,16 @@
       </a>
       <a
         class="ix-header-nav raw"
-        :class="{cur: tab === 'history'}"
-        @click.prevent="setTab('history')">
-        {{ $t('order_history') }}
-      </a> 
-      <a
-        class="ix-header-nav raw"
         :class="{cur: tab === 'stop'}"
         @click.prevent="setTab('stop')">
         {{ $t('trading_page.stop_order.stop_win_loss') }}
       </a>
+      <a
+        class="ix-header-nav raw"
+        :class="{cur: tab === 'history'}"
+        @click.prevent="setTab('history')">
+        {{ $t('order_history') }}
+      </a> 
       <div class="header-icons">
         <!-- <span
           class="hide-others btn on"

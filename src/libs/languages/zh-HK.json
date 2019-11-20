@@ -282,7 +282,7 @@
   "email_code": "郵箱驗證碼",
   "bind_phone_label_code": "輸入短信驗證碼",
   "not_supported": "暫不支持此功能",
-  "transfer_cancel": "取消",
+  "transfer_cancel": "撤銷",
   "signup_title": "註冊",
   "pwcheck_ph": "密碼至少8個字符",
   "pwcheck_ph2": "確認密碼",
