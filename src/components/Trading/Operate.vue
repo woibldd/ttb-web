@@ -16,6 +16,12 @@
         @click.prevent="setTab('market')">
         {{ $t('operate_market') }}
       </a>
+      <a
+        class="ix-header-nav raw stop"
+        :class="{cur: tab === 'stop'}"
+        @click.prevent="setTab('stop')">
+        {{ $t('trading_page.stop_order.stop_win_loss') }}
+      </a>
 
       <router-link
         class="mr-20"
@@ -25,6 +31,7 @@
     <div class="op-container">
       <ProLimitOrder v-show="tab === 'limit'"/>
       <ProMarketOrder v-show="tab === 'market'"/>
+      <ProStopOrder v-show="tab === 'stop'"/>
     </div>
     <div
       class="mask"

@@ -2403,7 +2403,10 @@
       },
       "stop_loss": {
         "contract_assigning_undeal": "委托中未成交",
-        "price_distance": "市价（距离）"
+        "price_distance": "市价（距离）",
+        "edit_amount": "数量",
+        "edit_price": "委托价格",
+        "edit_trigger_price": "触发价格"
       },
       "holding": {
         "contract_close_tips3": "这是假设以当前标记价格平仓的预计盈亏，鼠标移除则显示当前委托列表中最新市场价格平仓的预计盈亏。"
@@ -2667,7 +2670,19 @@
     },
     "order": {
       "hide_canceled": "隐藏已撤销"
-    }  
+    } ,
+    "stop_order": { 
+      "message_h": "当价格上涨或高于%{triggerPrice}%{symbol}时，则以%{price}%{symbol}的 价格%{side}%{amount}%{product}。",
+      "message_l":"当价格下跌或低于%{triggerPrice}%{symbol}时，则以%{price}%{symbol}的 价格%{side}%{amount}%{product}。",
+      "stop_win_loss": "止盈止损",
+      "trigger_price":"触发价格",
+      "price_distance":"市价（距离）",
+      "order_price":"委托价格",
+      "order_th_type": "类型", 
+      "order_th_status": "状态",
+      "order_th_time": "委托时间",
+      "untriggerl":"未触发"
+    }
   },
   "set_service_fee": "手续费设置",
   "gift": {

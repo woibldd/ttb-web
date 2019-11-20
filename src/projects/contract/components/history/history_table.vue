@@ -40,37 +40,73 @@
               v-html="processValue(header.key, row)"/>
             <span
               v-else-if="header.title=== 'contract_assign_value'"
-              v-html="processValue('contract_assign_value', row)"/>
-            <span v-else-if="header.title=== 'contract_page.contract_edit_price'"> 
-              <edit-cell 
+              v-html="processValue('contract_assign_value', row)"/> 
+            <span v-else-if="header.title=== 'contract_page.contract_edit_price'">
+              <edit-cell
                 :value="row.price"
                 :type="'price'"
                 :orderid="row.id"
                 :id="index"
                 @confirm="editPrice"
                 :scale="state.ct.pairInfoList[row.symbol].price_scale"
-              />
+              >
+                <span v-html="processValue('price', row)"/>
+              </edit-cell>
             </span>
-            <span v-else-if="header.title=== 'contract_page.contract_edit_amount'"> 
-              <edit-cell 
+            <span v-else-if="header.title=== 'contract_page.contract_edit_amount'">
+              <edit-cell
                 :side="row.side"
                 :type="'amount'"
                 :value="row.amount"
                 :orderid="row.id"
                 :id="index"
                 @confirm="editQty"
-              />
+              >
+                <span v-html="processValue('amount', row)"/>
+              </edit-cell>
             </span>
-            <span v-else-if="header.title=== 'contract_page.contract_edit_trigger_price'"> 
-              <edit-cell 
+            <span v-else-if="header.title==='contract_page.history.stop_loss.edit_amount'">
+              <edit-cell
+                v-if="row.sl_type == 0 && row.tp_type == 0"
                 :side="row.side"
-                :type="'trigger_price'"
+                :type="'amount'"
+                :value="row.amount"
+                :orderid="row.id"
+                :id="index"
+                @confirm="editQty"
+              >
+                <span v-html="processValue('amount', row)"/>
+              </edit-cell>
+              <span v-else>
+                <span v-html="processValue('amount', row)"/>
+              </span>
+            </span>
+            <span v-else-if="header.title==='contract_page.history.stop_loss.edit_price'">
+              <edit-cell
+                v-if="row.sl_type == 0 && row.tp_type == 0 && (row.type == 3 || row.type == 5)"
+                :value="row.price"
+                :orderid="row.id"
+                :id="index"
+                @confirm="editPrice"
+                :scale="state.ct.pairInfoList[row.symbol].price_scale"
+              >
+                <span v-html="processValue('price', row)"/>
+              </edit-cell>
+              <span v-else>
+                <span v-html="processValue('price', row)"/>
+              </span>
+            </span>
+            <span v-else-if="header.title==='contract_page.history.stop_loss.edit_trigger_price'">
+              <edit-cell
                 :value="row.trigger_price"
                 :orderid="row.id"
                 :id="index"
                 @confirm="editTriggerPrice"
                 :scale="state.ct.pairInfoList[row.symbol].price_scale"
-              />
+              >
+                <span v-html="triggerPrice('trigger_price', row)"/>
+              </edit-cell>
+
             </span> 
             <span
               v-else

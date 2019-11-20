@@ -2364,7 +2364,10 @@
       },
       "stop_loss": {
         "contract_assigning_undeal": "위탁 중에 아직 거래 가 이루어지지 않았다",
-        "price_distance": "촉발 가격"
+        "price_distance": "촉발 가격",
+        "edit_amount": "수량",
+        "edit_price": "위탁가격",
+        "edit_trigger_price": "트리거 프라이스" 
       },
       "holding": {
         "contract_close_tips3": "이것은 현재 표시 가격인 평창의 예상 손익을 가정한 것이고, 마우스를 제거하면 현재 위탁 목록의 최신 시장 가격인 평창의 예상 손익을 나타낸다。"
@@ -2635,6 +2638,18 @@
     },
     "order": {
       "hide_canceled": "숨김 철회"
+    }, 
+    "stop_order": {  
+      "trigger_price": "트리거 프라이스",
+      "order_price": "위탁가격",
+      "price_distance": "촉발 가격",
+      "order_th_type": "종류", 
+      "order_th_status": "상태",
+      "order_th_time": "위탁시간",
+      "message_h": "가격이 오르거나 내려갈때%{triggerPrice}%{symbol}때，으로%{price}%{symbol}의 가격%{side}%{amount}%{product}。",
+      "message_l": "가격이 오르거나 내려갈때%{triggerPrice}%{symbol}때，으로%{price}%{symbol}의 가격%{side}%{amount}%{product}。",
+      "stop_win_loss": "리익손해",
+      "untriggerl": "촉발전"
     } 
   },
   "gift": {
