@@ -39,7 +39,7 @@
       <img src="./../../assets/overseas/ix/IXX@2x.png" alt="">
     </div>
     <div class="overseas-fixed-btn">
-      <div class="btn">
+      <div class="btn-t">
         <i class="down-icon">&#xe676;</i>
         {{ $t('newLoad.know') }}</div>
     </div>
