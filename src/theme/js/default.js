@@ -8,10 +8,10 @@ module.exports = {
   companyName: 'IXX.COM',
   exchangeName: 'IXX | Digital assets trading community',
   exchangeNameConfig: {
-    'zh-CN': 'IXX | 数字资产交易共同体',
-    'zh-HK': 'IXX | 數字資產交易共同體',
-    en: 'IXX | Digital assets trading community',
-    ko: 'IXX | 수자 재산 거래 공동체'
+    'zh-CN': 'IXX | 犀牛交易所 数字资产交易共同体 ',
+    'zh-HK': 'IXX | 犀牛交易所 數字資產交易共同體',
+    en: 'IXX | IXX Exchange Digital assets trading community',
+    ko: 'IXX | 코뿔소거래소 수자 재산 거래 공동체'
   },
   keywords: 'IXX,比特币交易,以太坊,区块链,共识,自由联合,数字资产交易所,炒币,比特币,比特币交易所,比特币价格今日行情,比特币走势,数字货币交易所,比特币去哪买,比特币如何购买,比特币交易所,比特币价格今日行情,比特币实时行情,比特币走势,数字货币交易所,比特币去哪买,比特币如何购买,合约交易所,合约交易所排名,交割合约,比特币合约,BTC合约,合约是什么,怎么玩合约,永续合约,合约交易所,合约交易所排名,交割合约,比特币合约,BTC合约,合约是什么,怎么玩合约',
   keywordsConfig: {
