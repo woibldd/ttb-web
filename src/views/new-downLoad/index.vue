@@ -44,7 +44,7 @@
        <template v-if="isIos">
          <div class="group">
            <div class="btn">
-             <a href="/overseas-next" target="_blank" style="display: block">
+             <a href="javascript:;" :target="target" style="display: block" @click="storeHandle">
                <i class="down-icon">&#xe676;</i>
                App Store
              </a>
@@ -85,7 +85,8 @@ import utils from '@/modules/utils'
 export default {
   data() {
     return {
-      showTutorialArrow: false
+      showTutorialArrow: false,
+      target: '_self'
     }
   },
   computed: {
@@ -103,6 +104,14 @@ export default {
     }
   },
   methods: {
+    storeHandle() {
+      if (this.isWeiXin) {
+        this.showTutorialArrow = true
+      } else {
+        this.$router.push('/overseas-next')
+        this.target = '_blank'
+      }
+    },
     touch () {
       this.showTutorialArrow = false
     },
@@ -162,11 +171,11 @@ export default {
   .overseas {
     font-family: 'PingFangSC-Regular';
     &-banner {
-      height: 350px;
+      height: 320px;
       position: relative;
       color: #fff;
       background: url('./../../assets/overseas/bg.png') top center no-repeat;
-      background-size: 100% 120%;
+      background-size: 110%;
       .logo {
         overflow: hidden;
         img {
@@ -177,14 +186,14 @@ export default {
         }
       }
       .title {
-        font-size: 1.84rem;
+        font-size: 1.64rem;
         text-align: center;
         margin-top: 1.4rem;
       }
       .text {
-        font-size: .84rem;
+        font-size: .96rem;
         text-align: center;
-        margin-top: .96rem;
+        margin-top: .64rem;
         color: rgba(255,255,255,.6)
       }
       .banner-svg {
@@ -209,7 +218,7 @@ export default {
         flex: 0 0 0 48px;
         img {
           margin-top: 10px;
-          height: 48px;
+          height: 36px;
           zoom: 1;
         }
       }
@@ -239,6 +248,7 @@ export default {
     left: 0;
     bottom: 0;
     position: fixed;
+    z-index: 20;
     background: #fff;
     .text {
       font-size: 13px;
@@ -250,6 +260,7 @@ export default {
     .group-list {
       text-align: center;
       display: flex;
+      background: #fff;
       .group {
         flex: 1;
         h1 {
@@ -257,7 +268,7 @@ export default {
           font-weight: 500;
         }
         p {
-          font-size: .4rem;
+          font-size: .64rem;
           color: #717171;
           margin-top: .3rem;
           margin-bottom: .64rem;

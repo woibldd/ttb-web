@@ -52,10 +52,6 @@
 <style lang="scss" scoped>
   .overseas {
     font-family: 'PingFangSC-Regular';
-    position: fixed;
-    left: 0;
-    width: 100%;
-    top: 0;
     height: calc(100% - 70px);
     overflow: hidden;
     overflow-y: auto;
@@ -64,7 +60,7 @@
       width: 100%;
       height: 400px;
       position: fixed;
-      z-index: -1;
+      z-index: 0;
       left: 0;
       top: 0;
       color: #fff;
@@ -84,6 +80,7 @@
       box-shadow:0px 0px 8px 0px rgba(177,177,177,1);
       border-radius:10px;
       overflow: hidden;
+      position: relative;
       img {
         width: 80%;
         margin:.48rem auto;
@@ -99,15 +96,15 @@
         overflow: hidden;
         text-align: center;
         border-bottom: 1px solid #eee;
-        color: #1FC68B;
+        color: #01CED1;
         font-size: .96rem;
       }
       em {
         display: block;
-        font-size: .24rem;
+        font-size: .64rem;
         font-style: normal;
         color: #797979;
-        padding: 0 60px 0 60px;
+        padding: 0 60px 0 30px;
         margin-bottom: .3rem;
         line-height: 1.2
       }
@@ -122,7 +119,7 @@
           left: 0;
           top: 50%;
           transform: translateY(-50%);
-          background: #1FC68B;
+          background: #01CED1;
           width: 6px;
           height: 12px;
         }
@@ -133,16 +130,19 @@
       border:1px solid rgba(238,238,238,1);
       box-shadow:-3px 1px 6px 0px rgba(222,222,222,1);
       height: 70px;
+      background: #fff;
       width: 100%;
       position: fixed;
       left: 0;
       bottom: 0;
-      .btn {
+      z-index: 1000000;
+      color: #999;
+      .btn-t {
         width: 90%;
         height: 48px;
-        margin: 11px auto;
+        margin: 10px auto;
         line-height: 48px;
-        background:rgba(31,198,139,1);
+        background:#01CED1;
         border-radius:4px;
         color: #fff;
         text-align: center;
@@ -157,6 +157,8 @@
       margin: 1.8rem auto 1rem;
       display: flex;
       justify-self: center;
+      position: relative;
+      z-index: 10;
       align-items: center;
       .left {
         flex: 0 0 0 96px;
