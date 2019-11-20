@@ -1,4 +1,38 @@
 {
+  "newLoad":{
+    "logOut": "點擊登出，重新輸入Apple ID和密碼",
+    "id": "輸入非中國大陸Apple ID",
+    "fid": "如果您沒有非中國大陸地區的Apple ID，您可以聯系客服，獲取免費提供的下載Apple ID。",
+    "kf": "客服微訊號",
+    "sm": "掃碼添加客服",
+    "fz": "*為防止您的手機資訊洩露，請不要使用客服提供的Apple ID登入iCloud。使用Apple ID下載成功後，請您及時退出該帳戶。",
+    "az": "App Store 安裝",
+    "wd": "安全·穩定·可信",
+    "tip": "提示：IOS系統版本10.0以上，下載更流暢~",
+    "safe": "安全穩定",
+    "qui": "安裝便捷",
+    "app_id": "免費提供Apple ID",
+    "update": "更新後需再次安裝",
+    "t_1_text": "安全便捷，一鍵買幣，暢快交易",
+    "t_2_text": "幣種繁多、幣對豐富，任你選擇",
+    "t_3_text": "高倍杠杆，最强深度，極致安全",
+    "install": "安裝內測版",
+    "user_apple_id": "您擁有非中國地區的Apple ID，請直接使用ID登入Apple Store下載{web} App即可。",
+    "check_id": "切換蘋果ID",
+    "up": "進入App Store應用",
+    "port": "點擊App Store首頁右上角頭像",
+    "install_app": "安裝APP",
+    "login_up": "登入成功後，會自動跳轉至海外版的App Store點擊App Store下方蒐索，然後在頁面輸入框蒐索{web}",
+    "get": "點擊“GET”按鈕，開始安裝App，回到案頭查看即可",
+    "know": "我已知曉去App Store安裝",
+    "t_ix_1": "100%冷錢包",
+    "t_1_ix_text": "極限保障資產安全",
+    "t_ix_2": "更多福利",
+    "t_2_ix_text": "獎勵+糖果空投+交易贈金",
+    "t_ix_3": "合約多樣",
+    "t_3_ix_text": "多品種合約任你選擇",
+    "android": "安裝安卓版"
+  },
   "agreeList": {
     "title": "Affiliate Program Services Agreement",
     "t_1": "This Affiliate Program Services Agreement (“Services Agreement”) sets forth the terms and conditions of your use of IXX Affiliate Program (“Affiliate Program”) and serves to supplement the Terms of Service Agreement (“Agreement”) between you and IXX. Please read this Services Agreement completely and carefully before enrolling in IXX Affiliate Program. You must agree with and accept all of the terms and conditions contained in this Services Agreement without modifications, which include the terms and conditions expressly set out below and those incorporated herein by reference, before you may become an affiliate under the IXX Affiliate Program.",
@@ -2564,7 +2598,7 @@
     },
     "order": {
       "hide_canceled": "隱藏已撤銷"
-    } 
+    }
   },
   "set_service_fee": "手續費設定",
   "gift": {
