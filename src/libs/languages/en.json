@@ -1256,14 +1256,14 @@
   "user_service_fee_rule_c": "3. If the transaction fee is IX, when the “IX deduction fee” is turned on, enjoy 50% discount; when closed, 100% will charge transaction fee",
   "user_service_fee_rule_d": "4. Turn on the IX fee deduction function. The fee collection method is: deduct the handling fee in full, and return the handling fee in full at the next hour after the transaction, and deduct the handling fee of 50% equivalent IX;  ",
   "user_service_fee_rule_e": "5.When the available IX in your account deducts 50% of the current transaction fee, the handling fee will still be charged according to the original handling fee deduction method.",
-  "activity_lock_fenhong": "Lock warehouse dividend",
-  "activity_invite_reward": "Invite rewards",
+  "activity_lock_fenhong": "Lock for Dividend",
+  "activity_invite_reward": "Referral Program",
   "user_close_sevice_fee": "Close the fee deduction",
   "user_open_sevice_fee": "Open the fee deduction",
   "user_service_fee_history": "View history of transaction",
   "order_ix_service_fee": "IX deduction fee",
   "trading_lever": "contract transaction",
-  "activity_lock_share": "Rule of Lock warehouse dividend:",
+  "activity_lock_share": "Rule of Lock for Dividend:",
   "order_ix_total_discount": "Accumulated deduction",
   "contract_account": "Contract Account",
   "contract": "Contract",
@@ -2545,8 +2545,9 @@
   "home": {
     "footer": {
       "affiliate": "Affiliate：affiliate@ixx.com",
-      "explain": "IXX is a cryptocurrency derivatives exchange, headquartered in Singapore and registered in Malaysia. It is the world's first digital asset trading community and committed to realize the ideal utopia nation of blockchain trading ecology, create an exchange for everyone. All contributors can share the fruitful outcome from developments of the exchange.",
-      "footer_contract_desc": "Official Wechat"
+      "explain": "IXX Exchange is a cryptocurrency derivatives exchange, headquartered in Singapore and registered in Malaysia. It is the world's first digital asset trading community and committed to realize the ideal utopia nation of blockchain trading ecology, create an exchange for everyone. All contributors can share the fruitful outcome from developments of the exchange.",
+      "footer_contract_desc": "Official Wechat",
+      "information":"Industrial News"
     }
   },
   "fund": {
@@ -2865,6 +2866,6 @@
       "process": "App Install Guide >>"
     }
   },
-  "seo_keywords": "IXX,比特币,比特币交易,以太坊,区块链,共识,自由联合,数字资产交易所,BTC,ETH,Block chain,Bitcoin Trading,炒币,比特币,比特币交易所,比特币价格今日行情,比特币走势,数字货币交易所,比特币去哪买,比特币如何购买,比特币交易所,比特币价格今日行情,比特币实时行情,比特币走势,数字货币交易所,比特币去哪买,比特币如何购买,永续合约,合约交易所,合约交易所排名,交割合约,比特币合约,BTC合约,合约是什么,怎么玩合约,犀牛交易所,永续合约,合约交易所,合约交易所排名,交割合约,比特币合约,BTC合约,合约是什么,怎么玩合约,合约在哪玩",
+  "seo_keywords": "speculation, bitcoin, bitcoin exchange, bitcoin price today, bitcoin trend, digital currency exchange, where to buy bitcoin, how to buy bitcoin, bitcoin exchange, bitcoin price today, Bitcoin real-time market, bitcoin trend, digital currency exchange, where to buy bitcoin, how to buy bitcoin, contract exchange, contract exchange ranking, delivery contract, bitcoin contract, BTC contract, contract, what to play Contracts, perpetual contracts, contract exchanges, contract exchange rankings, delivery contracts, bitcoin contracts, BTC contracts, contracts, and how to play contracts",
   "exchangeNameConfig": "IXX | Digital assets trading community"
 }

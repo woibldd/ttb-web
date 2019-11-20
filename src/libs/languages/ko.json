@@ -2421,8 +2421,9 @@
   "home": {
     "footer": {
       "affiliate": "대리신청：affiliate@ixx.com",
-      "explain": "IXX 증권거래소는 세계 첫 디지털 자산 거래 공동체, 본부는 싱가포르에 있으며, 거래소 생태의 지역 체인 이상국 실현을 위해 노력하고 있으며, 모두가 나를 위해, 나는 모두를 위해, 모두가 나를 위해, 거래소 참여 공헌자는 모두 거래소의 발전 성과를 공유할 수 있다.",
-      "footer_contract_desc": "고객 서비스 추가"
+      "explain": "IXX 코뿔소거래소 증권거래소는 세계 첫 디지털 자산 거래 공동체, 본부는 싱가포르에 있으며, 거래소 생태의 지역 체인 이상국 실현을 위해 노력하고 있으며, 모두가 나를 위해, 나는 모두를 위해, 모두가 나를 위해, 거래소 참여 공헌자는 모두 거래소의 발전 성과를 공유할 수 있다.",
+      "footer_contract_desc": "고객 서비스 추가",
+      "information":"엎계깊이/정보"
     }
   },
   "fund": {
@@ -2729,6 +2730,6 @@
       "process": "App설치 프로세스 >>"
     }
   },
-  "seo_keywords": "IXX,比特币,比特币交易,以太坊,区块链,共识,自由联合,数字资产交易所,BTC,ETH,Block chain,Bitcoin Trading,炒币,比特币,比特币交易所,比特币价格今日行情,比特币走势,数字货币交易所,比特币去哪买,比特币如何购买,比特币交易所,比特币价格今日行情,比特币实时行情,比特币走势,数字货币交易所,比特币去哪买,比特币如何购买,永续合约,合约交易所,合约交易所排名,交割合约,比特币合约,BTC合约,合约是什么,怎么玩合约,犀牛交易所,永续合约,合约交易所,合约交易所排名,交割合约,比特币合约,BTC合约,合约是什么,怎么玩合约,合约在哪玩",
+  "seo_keywords": "speculation, bitcoin, bitcoin exchange, bitcoin price today, bitcoin trend, digital currency exchange, where to buy bitcoin, how to buy bitcoin, bitcoin exchange, bitcoin price today, Bitcoin real-time market, bitcoin trend, digital currency exchange, where to buy bitcoin, how to buy bitcoin, contract exchange, contract exchange ranking, delivery contract, bitcoin contract, BTC contract, contract, what to play Contracts, perpetual contracts, contract exchanges, contract exchange rankings, delivery contracts, bitcoin contracts, BTC contracts, contracts, and how to play contracts",
   "exchangeNameConfig": "IXX | 수자 재산 거래 공동체"
 }

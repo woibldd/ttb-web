@@ -345,8 +345,17 @@ export const actions = {
     }
   },
   setTitle (locale = 'en') {
-    const { exchangeNameConfig } = process.env.THEME_ENV
+    const { exchangeNameConfig, keywordsConfig, descriptionConfig } = process.env.THEME_ENV
     document.title = exchangeNameConfig[locale]
+    // document.keywords = keywordsConfig[locale]
+    // document.description = descriptionConfig[locale]
+    const arr = [...document.head.getElementsByTagName('meta')]
+    arr.forEach(node => {
+      if (node.name === 'keywords')
+        node.content = keywordsConfig[locale]
+      if (node.name === 'description')
+        node.content = descriptionConfig[locale]
+    })
   },
   async setLocale (locale) {
     if (!locale) {
