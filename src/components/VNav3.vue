@@ -306,9 +306,9 @@
               <div class="pop-dropdown pt-10"> 
               <p>{{ desentInfo }}</p>
               <ul class="dropdown-list pt-10">
-                <li class="dropdown-item pl-24 pr-24 mobile">
+                <!-- <li class="dropdown-item pl-24 pr-24 mobile">
                   <router-link :to="{name: 'fund'}" class="link">{{ $t('capital_manage') }}</router-link>
-                </li>
+                </li> -->
                 <li class="dropdown-item pl-24 pr-24">
                   <router-link
                     :to="{name: 'profile'}"
