@@ -26,7 +26,7 @@ const processValue = {
       // if (key === 'number') {
       //   if (value < 4) {
       //     value =  `<span class="icon icon-${value}">${value}</span>`
-      //   }
+      //   } 
       // }
 
       if (key === 'create_time' ||
@@ -177,9 +177,9 @@ const processValue = {
         } else if (!!pairlist && !!pairlist[row.symbol]) {
           const price_scales = pairlist[row.symbol].price_scale || 4
           console.log(price_scales, { test: pairlist[row.symbol] })
-          value = this.$big(row.price).round(price_scales, down).toFixed(price_scales).toString()
+          value = this.$big(row[key]).round(price_scales, down).toFixed(price_scales).toString()
         } else {
-          value = this.$big(row.price).round(4, down).toString().toString()
+          value = this.$big(row[key]).round(4, down).toString().toString()
         }
         // if (row.type === 4 || row.type === 6)value = '--'
       }
