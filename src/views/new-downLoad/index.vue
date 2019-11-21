@@ -12,7 +12,7 @@
     <div class="overseas-product">
       <div class="product-list">
         <div class="left">
-          <img src="./../../assets/overseas/ix/bb.png" alt="">
+          <img src="./../../assets/overseas/ix/fb.png" alt="">
         </div>
         <div class="right">
           <h1>{{ $t('otc_trade') }}</h1>
@@ -21,7 +21,7 @@
       </div>
       <div class="product-list">
         <div class="left">
-          <img src="./../../assets/overseas/ix/fb.png" alt="">
+          <img src="./../../assets/overseas/ix/bb.png" alt="">
         </div>
         <div class="right">
           <h1>{{ $t('trading') }}</h1>
@@ -44,7 +44,7 @@
        <template v-if="isIos">
          <div class="group">
            <div class="btn">
-             <a href="javascript:;" :target="target" style="display: block" @click="storeHandle">
+             <a href="javascript:;" :target="target" style="display: block;color: #fff" @click="storeHandle">
                <i class="down-icon">&#xe676;</i>
                App Store
              </a>
