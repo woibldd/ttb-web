@@ -21,7 +21,7 @@
       </div>
       <!-- tabs -->
       <div class="ix-pair-head">
-        <el-tabs v-model="tabSelected" >
+        <el-tabs v-model="tabSelected"  @tab-click="tabChange">
           <el-tab-pane :label="$t('pair_list_option')" name="like"/>
           <el-tab-pane label="USDT" name="USDT"/>
           <el-tab-pane label="BTC" name="BTC"/>
@@ -94,7 +94,7 @@
 
 <script>
 import utils from '@/modules/utils'
-import { state } from '@/modules/store'
+import { state, local } from '@/modules/store'
 import Sort from './Sort'
 import CollectStar from './CollectStar'
 import tickTableMixin from '@/mixins/tick-table'
@@ -226,12 +226,17 @@ export default {
     },
     filterPair() {
       // state.tabSelected = 'all'
-    }
+    },
+    tabChange (val) { 
+     this.$emit('switchTab', val.name) 
+    },
+    
   }
 }
 </script>
 
 <style lang="scss" scoped>
+
 .custom-title{
   color: #778694;
   text-indent: 10px;

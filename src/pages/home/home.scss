@@ -9,6 +9,26 @@
 
 .page-home {
   background: linear-gradient(0deg, #222931, #3A444F);
+  .statement {
+    width: 400px;
+    height: 180px;
+    padding: 35px;
+    .statement-title {
+      .iconfont {
+        color: $primary;
+      }
+      font-size: 18px;
+      padding-bottom: 20px;
+    }
+    .statement-content {
+      padding-bottom: 30px;
+    }
+    .statement-footer { 
+      .right {
+        text-align: right;
+      }
+    }
+  }
 }
 
 .ind_cena {
