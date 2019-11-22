@@ -7,7 +7,7 @@
         <div class="inner">
           <div class="detail">
             <div class="top">
-              <div class="icon" :class="{active: activityInfo.collect === 1}"></div>
+              <div class="icon" :class="{active: activityInfo.collect === 1}" @click="collectHadnle"></div>
               <div class="text">
                 <h1>{{ activityInfo.title }}</h1>
               </div>
@@ -68,12 +68,37 @@ export default {
     },
     ids() {
       return this.list.map(item => item.id)
+    },
+    userId() {
+      let id = ''
+      if (state.userInfo) {
+        id = state.userInfo.id
+      } else {
+        id = ''
+      }
+      return id
     }
   },
   methods: {
     collectHandle() {
       if (this.userId) {
         this.$router.push('/collect')
+      } else {
+        this.$router.push('/user/login')
+      }
+    },
+    collectHadnle() {
+      const collect = activityInfo.collect === 0 ? 1 : 0
+      if (this.userId) {
+        collectActivity({
+          user_id: this.userId,
+          id: item.id,
+          collect: collect
+        }).then((res) => {
+          if (res.code === 200) {
+            this.getGoodLists()
+          }
+        })
       } else {
         this.$router.push('/user/login')
       }
