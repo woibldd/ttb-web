@@ -117,7 +117,7 @@
       },
       detialHandle(item) {
         this.$router.push({
-          path: `/other/industry/${item.id}`
+          path: `/industry/${item.id}`
         })
       },
       collectHadnle(item) {
