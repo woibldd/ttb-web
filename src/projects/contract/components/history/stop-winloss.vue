@@ -255,13 +255,11 @@ export default {
 
       if (this.pairInfo.name === "FUTURE_BTCUSD") {
         if (price > 0 && slprice > 0 && side === 1) {
-          result = this.$big(amount)
-            .div(price)
-            .minus(this.$big(amount).div(slprice));
+          result = (this.$big(amount).div(price))
+            .minus(this.$big(amount).div(slprice))
         } else if (price > 0 && slprice > 0 && side === 2) {
-          result = this.$big(amount)
-            .div(slprice)
-            .minus(this.$big(amount).div(price));
+          result = (this.$big(amount).abs().div(slprice))
+            .minus(this.$big(amount).abs().div(price))
         }
       } else {
         if (this.pairInfo) {
