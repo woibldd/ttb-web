@@ -62,6 +62,9 @@
             :state="stateSortBy('vol')"/>
         </div>
         <div class="head-item percent8">
+           type
+        </div>
+        <div class="head-item percent8">
           {{ $t('actions') }}
         </div>
       </div>
@@ -107,6 +110,10 @@
               </div>
               <div class="row__item percent14_8">
                 {{ pretty(pair.tick.volume_24h) }}<span> {{ pair.product }}</span>
+              </div>
+              <div
+                class="row__item percent8 tg" >
+                 {{pair.type}}
               </div>
               <div
                 class="row__item percent8 tg"

@@ -46,7 +46,7 @@ export default {
       if (this.tabSelected === 'all') { 
         let arr =  _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
-            && pair.type != 4 && pair.type != 5
+             && pair.type != 5
         }) 
         arr = _.sortBy(arr, ['rank'])
         return arr 
@@ -56,17 +56,17 @@ export default {
           return value * -1
         })
         res = _.filter(res, (pair, index) => {
-          if (pair.type == 4){
-            pair.type = 2
+          if (pair.type == 4 || pair.type == 2){
+            pair.group = 2
           }
-          if (pair.type == 5) {
-            pair.type = 3
+          if (pair.type == 5 || pair.group == 3) {
+            pair.group = 3
           }
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1
                 && pair.type > 1 
         })
         let arr = []
-        const temGroup = _.groupBy(res, 'type')
+        const temGroup = _.groupBy(res, 'group')
         // temGroup['2'] = temGroup['2'].concat(temGroup['4']||[])
         // delete temGroup['4'] 
         Object.keys(temGroup).forEach(key => {
