@@ -5,7 +5,7 @@
       <div class="bread">
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item>当前位置</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/other/industry' }">行业资讯</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/industry' }">行业资讯</el-breadcrumb-item>
           <el-breadcrumb-item>我的收藏</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
@@ -25,7 +25,7 @@
                     <p>来源: <span> {{ item.source }} </span></p>
                   </div>
                   <div class="time">
-                    <p>发布时间: <span> {{ item.release_time }} </span></p>
+                    <p>发布时间: <span style="padding-left: 30px;"> {{ item.release_time }} </span></p>
                   </div>
                 </div>
               </div>
@@ -55,27 +55,7 @@
           <h1>最新行情</h1>
           <span>更多</span>
         </div>
-        <div class="list-con">
-          <div class="list-table">
-            <ul class="tab">
-              <li class="dt">交易对</li>
-              <li class="dt">价格</li>
-              <li class="nt">24H涨跌幅</li>
-            </ul>
-            <ul class="tab" v-for="(item, index) in market" :key="index">
-              <li>{{ item.pair }}</li>
-              <li>
-                {{ item.p }} USDT
-                ≈￥{{item.h}}
-              </li>
-              <li>
-                <div class="btn">
-                  {{ item.h }}%
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <market />
       </div>
     </div>
   </div>
@@ -83,55 +63,17 @@
 
 <script type="text/ecmascript-6">
   import { getCollect, collectActivity } from '../../api/user'
-  import _ from 'lodash'
-  import utils from '@/modules/utils'
-  import service from '@/modules/service'
-  import { state, local } from '@/modules/store'
-  import ws from '@/modules/ws'
+  import market from "./market";
   export default {
+    components: {
+      market
+    },
     data() {
       return {
         state,
         loading: true,
         list: [],
         total: 0,
-        market: [
-          {
-            pair: 'BTC/USDT',
-            c: 'BTC_USDT',
-            h: '-',
-            price: '-',
-            rmb: '-'
-          },
-          {
-            pair: 'ETH/USDT',
-            c: 'ETH_USDT',
-            h: '-',
-            price: '-',
-            rmb: '-'
-          },
-          {
-            pair: 'EOS/USDT',
-            c: 'ETH_USDT',
-            h: '-',
-            price: '-',
-            rmb: '-'
-          },
-          {
-            pair: 'LTC/USDT',
-            c: 'LTC_USDT',
-            h: '-',
-            price: '-',
-            rmb: '-'
-          },
-          {
-            pair: 'BCH/USDT',
-            c: 'BCH_USDT',
-            h: '-',
-            price: '-',
-            rmb: '-'
-          }
-        ],
         params: {
           page: 1,
           size: 20,
@@ -155,20 +97,15 @@
       }
     },
     methods: {
-      subMarket() {
-        if (this.socket) {
-          this.socket.$destroy()
-        }
-        this.socket = ws.create('market/tickers')
-        this.socket.$on('open', () => {
-          this.socket.heartCheck.start()
-        })
-        this.socket.$on('message', (datas) => {
-          this.socket.heartCheck.start()
-          datas.forEach(data => {
-            this.patch(data)
-          })
-        })
+      timestampToTime(timestamp) {
+        var date = new Date(timestamp)
+        var Y = date.getFullYear() + '-'
+        var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+        var D = date.getDate() + ' '
+        var h = date.getHours() + ':'
+        var m = date.getMinutes() + ':'
+        var s = date.getSeconds()
+        return Y + M + D
       },
       handleSizeChange(val) {
         this.params.size = val
@@ -180,15 +117,16 @@
       },
       detialHandle(item) {
         this.$router.push({
-          path: `/other/industry/${item.id}`
+          path: `/industry/${item.id}`
         })
       },
       collectHadnle(item) {
+        const collect = item.collect === 0 ? 1 : 0
         if (this.userId) {
           collectActivity({
             user_id: this.userId,
             id: item.id,
-            collect: !item.collect
+            collect: collect
           }).then((res) => {
             if (res.code === 200) {
               this.getGoodLists()
@@ -198,10 +136,16 @@
       },
       getGoodLists() {
         this.list = []
+        this.params.userId = this.userId
         getCollect(this.params).then((res) => {
           if (res.code === 200) {
             this.list = res.data.data
-            this.total = res.data.total
+            if (res.data.length > 0) {
+              this.total = res.data.total
+              this.list.forEach((item) => {
+                item.release_time = this.timestampToTime(item.release_time)
+              })
+            }
             window.localStorage.setItem('activityData', JSON.stringify(this.list))
           } else {
             window.localStorage.setItem('activityData', [])
@@ -217,7 +161,9 @@
 
 <style lang="scss" rel="stylesheet/scss" scoped>
   .industry {
+    overflow: hidden;
     margin-bottom: 30px;
+    clear: both;
     &-banner {
       height: 400px;
       background: #00badb;
@@ -299,8 +245,8 @@
               margin-bottom: 10px;
             }
             p {
-              font-size: 16px;
-              color: #595959;
+              font-size: 14px;
+              color: #959595;
               line-height: 1.2;
               overflow: hidden;
               text-overflow:ellipsis;
