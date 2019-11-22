@@ -17,10 +17,16 @@
       </a>
       <a
         class="ix-header-nav raw"
+        :class="{cur: tab === 'stop'}"
+        @click.prevent="setTab('stop')">
+        {{ $t('trading_page.stop_order.stop_win_loss') }}
+      </a>
+      <a
+        class="ix-header-nav raw"
         :class="{cur: tab === 'history'}"
         @click.prevent="setTab('history')">
         {{ $t('order_history') }}
-      </a>
+      </a> 
       <div class="header-icons">
         <!-- <span
           class="hide-others btn on"
@@ -173,6 +179,71 @@
           v-show="!history.fetching && history.err && !history.list.length">{{ history.err }}</div>
       </div>
     </div>
+     <div
+      class="ix-panel-body"
+      v-show="tab === 'stop'"
+      ref="stop"
+      @scroll.prevent="onScroll('stop')">
+      <div
+        class="inner"
+        ref="stopContent">
+        <table class="table table-ix-order">
+          <thead>
+            <tr v-show="stop.list.length">
+              <th>{{ $t('pair') }}</th>
+              <th>{{ $t('deal_th_side') }}</th>
+              <th >{{ $t('amount') }}</th>
+              <th>{{ $t('trading_page.stop_order.trigger_price') }}</th>
+              <th>{{ $t('trading_page.stop_order.price_distance') }}</th>
+              <th >{{ $t('trading_page.stop_order.order_price') }}</th>
+              <th>{{ $t('trading_page.stop_order.order_th_type') }}</th>
+              <th>{{ $t('trading_page.stop_order.order_th_status') }}</th>
+              <th>{{ $t('trading_page.stop_order.order_th_time') }}</th>
+              <th class="center">{{ $t('operation') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="order in stop.list"
+              :key="order.id">
+              <td>{{ order.symbol | pairfix }}</td>
+              <td
+                style="color: #09C989"
+                v-if="order.side === 'BUY'">{{ $t('order_side_buy') }}</td>
+              <td
+                style="color: #F24E4D"
+                v-else>{{ $t('order_side_sell') }}</td>
+              <td>{{ fixAmount(order.amount, order.symbol) }}</td>
+              <td>
+                <span v-if="$big(order.trigger_price).gte(state.pro.pairTick.current)">≥</span>
+                <span v-if="$big(order.trigger_price).lte(state.pro.pairTick.current)">≤</span>
+                {{ order.trigger_price }}
+              </td>
+              <td style="width: 150px;">
+                {{ state.pro.pairTick.current }}
+                <span
+                  :style="{color: $big(order.trigger_price).gte(state.pro.pairTick.current) ? '#09C989' : '#F24E4D' }">
+                  ({{ $big(order.trigger_price).minus(state.pro.pairTick.current).toString() }})
+                </span>
+              </td>
+              <td>{{ order.price }} </td>
+              <td> {{ $t(order.type) }}</td>
+              <td> {{ $t(order.status) }}</td>
+              <td>{{ order.create_time | date }}</td>
+              <td class="center">
+                <a @click.prevent="cancel(order)">{{ $t('transfer_cancel') }}</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          class="no-data"
+          v-show="!stop.fetching && !stop.err && !stop.list.length">{{ $t(empty) }}</div>
+        <div
+          class="err"
+          v-show="!stop.fetching && stop.err && !stop.list.length">{{ stop.err }}</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -214,6 +285,15 @@ export default {
         over: false,
         latest: false,
         api: 'orderHistory',
+        list: []
+      },
+      stop: {
+        page: 1,
+        fetchId: 0,
+        fetching: false,
+        over: false,
+        latest: false,
+        api: 'orderStop',
         list: []
       },
       progressing: false,
@@ -453,6 +533,7 @@ export default {
       // 设置 latest=false 下次该tab fetch 时会进行刷新
       this.active.latest = false
       this.history.latest = false
+      this.stop.latest = false
     },
     clear (tab) {
       const ctx = this[tab]
@@ -468,6 +549,7 @@ export default {
     clearAll () {
       this.clear('active')
       this.clear('history')
+      this.clear('stop')
 
       // 通知 deals 浮窗关闭
       this.$eh.$emit('order-deals:hide')
@@ -487,15 +569,17 @@ export default {
         this.update()
       }, 60000)
     },
-    onresize: _.debounce(function () {
+    onresize: _.debounce(function () { 
       if (!this.$refs.active) {
         return this.$nextTick(() => this.onresize())
       }
+      
       this.$refs.active.style.height = this.container.height - 32 + 'px'
       this.$refs.history.style.height = this.container.height - 32 + 'px'
+      this.$refs.stop.style.height = this.container.height - 32 + 'px'
       this.onScroll(this.tab)
     }, 100),
-    layout () {
+    layout () { 
       this.onresize()
       this.$eh.$on('app:resize', this.onresize)
     },
@@ -591,6 +675,7 @@ tbody tr:nth-child(odd) {
 }
 .ix-panel-body {
   height: 100%;
+  width: 100%;
   overflow-y: auto;
   overflow-scrolling: touch;
   -webkit-overflow-scrolling: touch;

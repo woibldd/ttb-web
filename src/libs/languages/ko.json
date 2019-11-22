@@ -2399,7 +2399,10 @@
       },
       "stop_loss": {
         "contract_assigning_undeal": "위탁 중에 아직 거래 가 이루어지지 않았다",
-        "price_distance": "촉발 가격"
+        "price_distance": "촉발 가격",
+        "edit_amount": "수량",
+        "edit_price": "위탁가격",
+        "edit_trigger_price": "트리거 프라이스" 
       },
       "holding": {
         "contract_close_tips3": "이것은 현재 표시 가격인 평창의 예상 손익을 가정한 것이고, 마우스를 제거하면 현재 위탁 목록의 최신 시장 가격인 평창의 예상 손익을 나타낸다。"
@@ -2424,6 +2427,12 @@
       "explain": "IXX 코뿔소거래소 증권거래소는 세계 첫 디지털 자산 거래 공동체, 본부는 싱가포르에 있으며, 거래소 생태의 지역 체인 이상국 실현을 위해 노력하고 있으며, 모두가 나를 위해, 나는 모두를 위해, 모두가 나를 위해, 거래소 참여 공헌자는 모두 거래소의 발전 성과를 공유할 수 있다.",
       "footer_contract_desc": "고객 서비스 추가",
       "information":"엎계깊이/정보"
+    },
+    "stmodal": {
+      "statement": "성명",
+      "content": "【 혁신구 】 본 구의 거래품종은 모두 혁신형프로젝트로서 글로벌 류동성이 비교적 적고 가격파동이 비교적 크며 위험이 비교적 높은 지역체인자산에 속한다.IXX.com은 당신이 사전에 조사하고 료해할 수 있는 위험 범위 내에서 교역에 참여하기를 강력히 건의합니다.",
+      "no_alert_again": "다시 알리지 않기",
+      "understand": "나는 이미 이해했다"
     }
   },
   "fund": {
@@ -2670,7 +2679,19 @@
     },
     "order": {
       "hide_canceled": "숨김 철회"
-    }
+    }, 
+    "stop_order": {  
+      "trigger_price": "트리거 프라이스",
+      "order_price": "위탁가격",
+      "price_distance": "촉발 가격",
+      "order_th_type": "종류", 
+      "order_th_status": "상태",
+      "order_th_time": "위탁시간",
+      "message_h": "가격이 오르거나 내려갈때%{triggerPrice}%{symbol}때，으로%{price}%{symbol}의 가격%{side}%{amount}%{product}。",
+      "message_l": "가격이 오르거나 내려갈때%{triggerPrice}%{symbol}때，으로%{price}%{symbol}의 가격%{side}%{amount}%{product}。",
+      "stop_win_loss": "리익손해",
+      "untriggerl": "촉발전"
+    } 
   },
   "gift": {
     "bonus":"Trading Bonus",

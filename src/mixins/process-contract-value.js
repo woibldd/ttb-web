@@ -26,7 +26,7 @@ const processValue = {
       // if (key === 'number') {
       //   if (value < 4) {
       //     value =  `<span class="icon icon-${value}">${value}</span>`
-      //   }
+      //   } 
       // }
 
       if (key === 'create_time' ||

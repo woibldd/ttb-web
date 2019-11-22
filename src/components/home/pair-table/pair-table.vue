@@ -3,7 +3,7 @@
     <div class="relative">
       <!-- <div class="pair-title">{{ $t('newest_coin_pairs') }}</div> -->
       <div class="pair-title">
-        <el-tabs v-model="tabSelected" type="card">
+        <el-tabs v-model="tabSelected" @tab-click="tabChange" type="card">
           <el-tab-pane :label="$t('pair_list_option')" name="like"/>
           <el-tab-pane  label="USDT" name="USDT"/>
           <el-tab-pane label="BTC" name="BTC"/>
@@ -62,6 +62,9 @@
             :state="stateSortBy('vol')"/>
         </div>
         <div class="head-item percent8">
+           type
+        </div>
+        <div class="head-item percent8">
           {{ $t('actions') }}
         </div>
       </div>
@@ -107,6 +110,10 @@
               </div>
               <div class="row__item percent14_8">
                 {{ pretty(pair.tick.volume_24h) }}<span> {{ pair.product }}</span>
+              </div>
+              <div
+                class="row__item percent8 tg" >
+                 {{pair.type}}
               </div>
               <div
                 class="row__item percent8 tg"
@@ -222,6 +229,7 @@ export default {
       },
       set(val) {
         state.tabSelected = val
+        
       }
     }
   },
@@ -276,7 +284,10 @@ export default {
         })
       }
       // pair.like = !(pair.like || false)
-    }
+    },
+    tabChange (val) { 
+      this.$emit('switchTab', val.name) 
+    },
   }
 }
 </script>

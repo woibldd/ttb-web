@@ -130,6 +130,7 @@ export const local = new Locals('store', {
   hideCanceled: false,
   ixAlert: false,
   lineType : 1,
+  stNeverShow: false
 })
 
 export const actions = {

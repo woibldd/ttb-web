@@ -2523,7 +2523,10 @@
       },
       "stop_loss": {
         "contract_assigning_undeal": "Untriggered",
-        "price_distance": "Price(Distance)"
+        "price_distance": "Price(Distance)",
+        "edit_amount": "Amount",
+        "edit_price": "Trigger Price",
+        "edit_trigger_price": "Price"
       },
       "holding": {
         "contract_close_tips3": "This is expected P&L assuming the position is closed at the current mark price. Mouse removal shows the expected P&L of the latest market price in the current list of orders."
@@ -2548,6 +2551,12 @@
       "explain": "IXX Exchange is a cryptocurrency derivatives exchange, headquartered in Singapore and registered in Malaysia. It is the world's first digital asset trading community and committed to realize the ideal utopia nation of blockchain trading ecology, create an exchange for everyone. All contributors can share the fruitful outcome from developments of the exchange.",
       "footer_contract_desc": "Official Wechat",
       "information":"Industrial News"
+    },
+    "stmodal": {
+      "statement": "Declaration",
+      "content": "[Innovation Zone] The trading varieties in this zone are all innovative projects, which are blockchain assets with low global liquidity, high price fluctuations and high risks. IXX.com strongly recommends that you go thru in advance and participate in the transaction within the risk scope that you can endure.",
+      "no_alert_again": "No longer remind",
+      "understand": "I already understand"
     }
   },
   "fund": {
@@ -2805,7 +2814,19 @@
     },
     "order": {
       "hide_canceled": "Hide Revoked"
-    }
+    }, 
+    "stop_order": {   
+      "trigger_price": "Trigger Price",
+      "order_price":"Price",
+      "price_distance":"Price(Distance)",
+      "order_th_type": "Type", 
+      "order_th_status": "Status",
+      "order_th_time": "Order time",
+      "message_h": "When the price rises or is higher than %{triggerPrice}%{symbol}, the price of %{price}%{symbol} is %{side} %{amount}%{product}.",
+      "message_l": "When the price falls or falls below %{triggerPrice}%{symbol}, the price of %{price}%{symbol} is %{side} %{amount}%{product}.",
+      "stop_win_loss": "Take Profit Stop Loss",
+      "untriggerl": "Untriggered"
+    } 
   },
   "set_service_fee": "Fee setting",
   "gift": {

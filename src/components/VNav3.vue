@@ -390,7 +390,7 @@
           <span class="language">
             <icon :name="'header-'+state.locale" class="mr-5" />
           </span>
-              <el-popover
+          <el-popover
             ref="popover8"
             popper-class="nav-list"
             placement="bottom"
@@ -848,6 +848,10 @@ export default {
       .help,
       .language {
         position: relative;
+        color: #fff;
+        &:hover {
+          color: $primary;
+        }
         &::after {
           position: absolute;
           left: -17px;
@@ -936,6 +940,7 @@ export default {
     .right_options {
       .fund,
       .help {
+        color: #fff;
         display: none;
         margin: 0;
       }

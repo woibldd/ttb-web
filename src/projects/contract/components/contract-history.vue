@@ -213,30 +213,30 @@ export default {
               width: "",
               key: "symbol"
             },
-            {
-              title: "amount", //数量
-              width: "",
-              key: "amount_side"
+           {
+              title: 'contract_page.history.stop_loss.edit_amount', // 数量
+              width: '',
+              key: 'amount_side'
             },
             {
-              title: "price", //委托价格
-              width: "",
-              key: "price"
+              title: 'contract_page.history.stop_loss.edit_price', // 委托价格
+              width: '',
+              key: 'price'
             },
             {
-              title: "contract_complete_deal", //完成成交
-              width: "",
-              key: "total"
+              title: 'contract_complete_deal', // 完成成交
+              width: '',
+              key: 'total'
             },
             {
-              title: "contract_trigger_price", //触发价格
-              width: "",
-              key: "trigger_price"
+              title: 'contract_page.history.stop_loss.edit_trigger_price', // 触发价格
+              width: '',
+              key: 'trigger_price'
             },
             {
-              title: "contract_trigger_price_rule", //触发价格2
-              width: "",
-              key: "trigger_price_compute"
+              title: 'contract_page.history.stop_loss.price_distance', // 触发价格2
+              width: '',
+              key: 'trigger_price_compute'
             },
             {
               title: "contract_deal_price", //成交价格

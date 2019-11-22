@@ -114,7 +114,7 @@
             <div class="contact-list">
               <a
                 rel="nofollow"
-                class="contact-item-wrapper pointer"
+                class="contact-item-wrapper pointer" 
                 target="_blank"
                 href=' https://www.facebook.com/profile.php?id=100040054419479'>
                 <icon
@@ -123,7 +123,7 @@
               </a>
               <a
                 rel="nofollow"
-                class="contact-item-wrapper pointer"
+                class="contact-item-wrapper pointer" 
                 target="_blank"
                 href='https://twitter.com/IXX_Official'>
                 <icon
@@ -149,7 +149,7 @@
               </div>
               <a
                 rel="nofollow"
-                target="_blank"
+                target="_blank" 
                 :href="showEnTips ? 'https://t.me/ixxofficial' : 'https://t.me/ixxofficial'"
                 class="contact-item-wrapper pointer">
                 <icon
@@ -166,7 +166,7 @@
               </div>
               <a
                 rel="nofollow"
-                target="_blank"
+                target="_blank" 
                 href="https://www.instagram.com/ixxexchange/"
                 class="contact-item-wrapper pointer">
                 <icon
@@ -175,7 +175,7 @@
               </a>
               <a
                 rel="nofollow"
-                target="_blank"
+                target="_blank" 
                 href="https://www.linkedin.com/in/ixx-digital-assets-trading-community-134877194/"
                 class="contact-item-wrapper pointer">
                 <icon
@@ -184,7 +184,7 @@
               </a>
               <a
                 rel="nofollow"
-                target="_blank"
+                target="_blank" 
                 href="https://medium.com/@ixxofficial"
                 class="contact-item-wrapper pointer">
                 <icon

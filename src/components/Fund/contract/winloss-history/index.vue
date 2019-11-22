@@ -1,8 +1,8 @@
 <template>
   <div class="contract-history-container my-fund-content pt-40 f14">
-    <div class="filter-list mb-39"> 
+    <div class="filter-list mb-39" flex> 
        <!-- 账户 -->
-      <div class="currency-row mr-40">
+      <!-- <div class="currency-row mr-40">
         <div class="c-999 mr-13">
           {{ $t('fund.contract.future') }}
         </div>
@@ -16,34 +16,39 @@
             :label="$t(item.name)"
             :value="item.key"/>
         </el-select>
-      </div>
+      </div> -->
       <!-- 类型 -->
-      <div class="currency-row mr-40">
-        <div class="c-999 mr-13">
-          {{ $t('fund.contract.contract_name') }}
+      <div flex-box="1" flex="main:left">
+        <div class="currency-row mr-40">
+          <div class="c-999 mr-13">
+            {{ $t('fund.contract.contract_name') }}
+          </div>
+          <el-select
+            class="opetion"
+            v-model="currencyPair"
+            @change="query"
+            value-key="currency">
+            <el-option
+              v-for="(item, idx) in pairList"
+              :key="idx"
+              :label="item"
+              :value="item"/> 
+          </el-select>
         </div>
-        <el-select
-          class="opetion"
-          v-model="currencyPair"
-          @change="query"
-          value-key="currency">
-          <el-option
-            v-for="(item, idx) in pairList"
-            :key="idx"
-            :label="item"
-            :value="item"/> 
-        </el-select>
+        <div class="currency-row">
+          <el-date-picker
+            width="200"
+            v-model="timeRange"
+            type="daterange" 
+            range-separator="-"  
+            :start-placeholder="$t('fund.contract.start')"
+            :end-placeholder="$t('fund.contract.end')"/>
+        </div>
       </div>
-      <div class="currency-row">
-        <el-date-picker
-          width="200"
-          v-model="timeRange"
-          type="daterange" 
-          range-separator="-"  
-          :start-placeholder="$t('fund.contract.start')"
-          :end-placeholder="$t('fund.contract.end')"/>
+      <div flex-box="0">
+        <el-button type='default' @click="query" class="ml-20">{{$t('fund.contract.query')}}</el-button>
       </div>
-      <el-button type='default' @click="query" class="ml-20">{{$t('fund.contract.query')}}</el-button>
+      
     </div>
     <div class="table-wrapper">
       <table>

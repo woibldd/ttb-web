@@ -205,6 +205,39 @@
         </div>
       </div>
     </div>
+    <v-modal
+      :open.sync="showSTModal">
+      <div class="statement">
+        <div class="statement-title">
+          <icon
+            name="information"
+            color="$primary;" />
+          <span>{{ $t('home.stmodal.statement') }}</span>
+        </div>
+        <div class="statement-content"> 
+          {{ $t('home.stmodal.content') }}
+        </div>
+        <div
+          class="statement-footer"
+          flex="main">
+          <div
+            flex-box="1"
+            flex="cross:center"
+            class="left">
+            <el-checkbox
+              v-model="local.stNeverShow">{{ $t('home.stmodal.no_alert_again') }}</el-checkbox>
+          </div>
+          <div
+            flex-box="1"
+            class="right">
+            <el-button
+              class="right"
+              type="primary"
+              @click="close"> {{ $t('home.stmodal.understand') }}</el-button>
+          </div>
+        </div> 
+      </div>
+    </v-modal>
   </div>
 </template>
 <script>
@@ -215,6 +248,8 @@ import PairRankTable from '@/components/home/pair-rank-table'
 import MineSummary from '@/components/Mine/MineSummary'
 import tickTableMixin from '@/mixins/tick-table'
 import HomeBanner from './banner/index'
+import { local } from '@/modules/store'
+
 export default {
   components: {
     kSlider: Slider,
@@ -248,7 +283,8 @@ export default {
         { key: 'homechart_24h_h', name: this.$t('homechart_24h_h') },
         { key: 'homechart_24h_v', name: this.$t('homechart_24h_v') },
         { key: 'actions', name: this.$t('actions') }
-      ]
+      ],
+      showSTModal: false
     }
   },
   computed: {
@@ -311,9 +347,14 @@ export default {
     onSearching(kw) {
       this.search = kw
     },
-    onSwitchTab(val) {
-      // console.log('switchTab')
+    onSwitchTab(val) {  
+      if (val === 'new' && !local.stNeverShow) {
+        this.showSTModal = true
+      }
       // this.state.tabSelected = val
+    },
+    close () {
+      this.showSTModal = false
     }
   }
 }

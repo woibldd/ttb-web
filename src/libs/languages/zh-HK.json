@@ -316,7 +316,7 @@
   "email_code": "郵箱驗證碼",
   "bind_phone_label_code": "輸入短信驗證碼",
   "not_supported": "暫不支持此功能",
-  "transfer_cancel": "取消",
+  "transfer_cancel": "撤銷",
   "signup_title": "註冊",
   "pwcheck_ph": "密碼至少8個字符",
   "pwcheck_ph2": "確認密碼",
@@ -2335,7 +2335,10 @@
       },
       "stop_loss": {
         "contract_assigning_undeal": "委託中未成交",
-        "price_distance": "市價（距離）"
+        "price_distance": "市價（距離）",
+        "edit_amount": "數量",
+        "edit_price": "委託價格",
+        "edit_trigger_price": "觸發價格"
       },
       "holding": {
         "contract_close_tips3": "这是假设以当前标记价格平仓的预计盈亏，鼠标移除则显示当前委托列表中最新市场价格平仓的预计盈亏。"
@@ -2360,6 +2363,12 @@
       "explain": "IXX犀牛交易所是全球首家數字資產交易共同體，總部在新加坡，其致力於實現交易所生態的區塊鏈理想國，打造人人的交易所，我為人人，人人為我，所有參與交易所的貢獻者者均可共享交易所的發展成果。",
       "footer_contract_desc": "添加客服微信",
       "information":"行業資訊"
+    },
+    "stmodal": {
+      "statement": "聲明",
+      "content": "【創新區】本區交易品種均為創新型項目，屬於全球流動性較小，價格波動較大，風險較高的區塊鏈資產。IXX.com強烈建議您事先調查瞭解，在自身所能承受的風險範圍內參與交易。",
+      "no_alert_again": "不再提醒",
+      "understand": "我已瞭解"
     }
   },
   "fund": {
@@ -2599,6 +2608,18 @@
     },
     "order": {
       "hide_canceled": "隱藏已撤銷"
+    } ,
+    "stop_order": {  
+      "trigger_price": "觸發價格",
+      "price_distance": "市價（距離）",
+      "order_price":"委託價格",
+      "order_th_type": "類型", 
+      "order_th_status": "狀態",
+      "order_th_time": "委託時間",
+      "stop_win_loss": "止盈止損",
+      "message_h": "當價格上漲或高於%{triggerPrice}%{symbol}時，則以%{price}%{symbol}的價格%{side}%{amount}%{product}。",
+      "message_l":"當價格下跌或低於%{triggerPrice}%{symbol}時，則以%{price}%{symbol}的價格%{side}%{amount}%{product}。",
+      "untriggerl":"未觸發"
     }
   },
   "set_service_fee": "手續費設定",

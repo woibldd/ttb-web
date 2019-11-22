@@ -11,7 +11,10 @@
         {{ pair | pairfix }}
         <icon :class="{up: show}" name="arrow-down" class="arrow"/>
         <div :class="{show: show}" class="grid-pairtable">
-          <PairNav ref="PairNav" :init-height="400" :sort="false"/>
+          <PairNav ref="PairNav" 
+          @switchTab="switchTab"
+          :init-height="400" 
+          :sort="false"/>
         </div>
       </div>
       <p
@@ -55,11 +58,45 @@
       </p>
       <p class="fl grid-increase">{{ $t('trading_title_start_price', {price: state.price_open}) }}</p>
     </div>
+    
+    <v-modal
+      :open.sync="showSTModal">
+      <div class="statement">
+        <div class="statement-title">
+          <icon
+            name="information"
+            color="$primary;" />
+          <span>{{ $t('home.stmodal.statement') }}</span>
+        </div>
+        <div class="statement-content"> 
+          {{ $t('home.stmodal.content') }}
+        </div>
+        <div
+          class="statement-footer"
+          flex="main">
+          <div
+            flex-box="1"
+            flex="cross:center"
+            class="left">
+            <el-checkbox
+              v-model="local.stNeverShow">{{ $t('home.stmodal.no_alert_again') }}</el-checkbox>
+          </div>
+          <div
+            flex-box="1"
+            class="right">
+            <el-button
+              class="right"
+              type="primary"
+              @click="close"> {{ $t('home.stmodal.understand') }}</el-button>
+          </div>
+        </div> 
+      </div>
+    </v-modal>
   </div>
 </template>
 
 <script>
-import { state } from '@/modules/store'
+import { state, local } from '@/modules/store'
 import { pairfix } from '@/mixins/index'
 import isEmpty from 'lodash/isEmpty'
 import PairNav from '@/components/Trading/PairNavForTitle'
@@ -72,12 +109,14 @@ export default {
   data() {
     return {
       state,
+      local,
       show: false,
       startTime: 0,
       endTime: 0,
       countDown: '',
       interval: 0,
-      countDownStatus: 1
+      countDownStatus: 1,
+      showSTModal: false 
     }
   },
   computed: {
@@ -240,6 +279,14 @@ export default {
       } else {
         this.show = !this.show
       }
+    },
+    switchTab(val) {
+       if (val === 'new' && !local.stNeverShow) {
+        this.showSTModal = true
+      }
+    },
+    close () {
+      this.showSTModal = false
     }
   }
 }
@@ -313,6 +360,28 @@ export default {
     display: block;
     content: "";
     clear: both;
+  }
+  .statement {
+    width: 400px; 
+    padding: 35px;
+    background-color: #1D2434;
+    border-radius: 2px;
+    color: #fff;
+    .statement-title {
+      .iconfont {
+        color: $primary;
+      }
+      font-size: 18px;
+      padding-bottom: 20px;
+    }
+    .statement-content {
+      padding-bottom: 30px;
+    }
+    .statement-footer { 
+      .right {
+        text-align: right;
+      }
+    }
   }
 }
 </style>

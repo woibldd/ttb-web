@@ -180,6 +180,23 @@ const service = {
       return res
     })
   },
+  orderStop (data) {
+    return request('order/active/triggers', data).then(res => {
+      if (res.data) {
+        if (res.data.length) {
+          res.data = res.data.map(item => {
+            item.side = item.side === 1 ? 'BUY' : 'SELL'
+            item.type = 'trading_page.stop_order.stop_win_loss'
+            item.deal_amount = item.executed
+            item.status = 'trading_page.stop_order.untriggerl'
+            return item
+          })
+        }
+        res.data = { items: res.data }
+      }
+      return res
+    })
+  },
   getQuote(data) {
     return request('quote/query', data)
   },
