@@ -8,8 +8,8 @@ module.exports = {
   companyName: 'IXX.COM',
   exchangeName: 'IXX | Digital currency exchange - Digital assets trading community - IXX Exchange',
   exchangeNameConfig: {
-    'zh-CN': 'IXX | 犀牛交易所 数字资产交易共同体-',
-    'zh-HK': 'IXX | 犀牛交易所 數位資產交易共同體-',
+    'zh-CN': 'IXX | 犀牛交易所 数字资产交易共同体',
+    'zh-HK': 'IXX | 犀牛交易所 數位資產交易共同體',
     en: 'IXX | IXX Exchange  Digital assets trading community',
     ko: 'IXX | 수자 재산 거래 공동체'
   },
