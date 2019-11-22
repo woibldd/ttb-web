@@ -29,11 +29,16 @@
         </div>
       </div>
       <div class="quotation">
-        <div class="title">
-          <h1>最新行情</h1>
-          <span @click="moreHandle">更多</span>
+        <div class="btn-1" @click="collectHandle">
+          我的收藏
         </div>
-        <market />
+        <div class="inner">
+           <div class="title">
+            <h1>最新行情</h1>
+            <span @click="moreHandle">更多</span>
+          </div>
+          <market />
+        </div>
       </div>
     </div>
   </div>
@@ -66,6 +71,13 @@ export default {
     }
   },
   methods: {
+    collectHandle() {
+      if (this.userId) {
+        this.$router.push('/collect')
+      } else {
+        this.$router.push('/user/login')
+      }
+    },
     timestampToTime(timestamp) {
       var date = new Date(timestamp)
       var Y = date.getFullYear() + '-'
@@ -213,13 +225,32 @@ export default {
         }
       }
       .quotation {
+        .btn-1 {
+        width:156px;
+        height:52px;
+        text-align: center;
+        cursor: pointer;
+        line-height: 52px;
+        background:rgba(255,255,255,1);
+        border:1px solid rgba(1, 206, 209, 1);
+        box-shadow:0px 1px 15px 0px rgba(209,209,209,1);
+        border-radius:4px;
+        float: right;
+        margin-bottom: 20px;
+        overflow: hidden;
+        color: #01CED1;
+      }
         width: 356px;
         float: left;
         padding: 12px;
         margin-left: 30px;
+        color: #525252;
+         .inner {
+        width: 332px;
+        padding: 12px;
         background:rgba(255,255,255,1);
         box-shadow:0px 1px 15px 0px rgba(209,209,209,1);
-        color: #525252;
+        overflow: hidden;
         .tab {
           display: flex;
           li {
@@ -265,6 +296,7 @@ export default {
             text-align: right;
           }
         }
+      }
       }
     }
   }

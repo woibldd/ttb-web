@@ -190,6 +190,7 @@ export default {
           overflow: hidden;
           border-bottom: 1px solid #ececec;
           display: flex;
+          cursor: pointer;
           .icon {
             flex: 50px 0 0 0;
             width: 40px;

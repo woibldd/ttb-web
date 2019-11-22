@@ -63,7 +63,7 @@ export const activity = data => request({
   method: 'post',
   data
 })
-export const getCollect = data => request({
+export const getCollect1 = data => request({
   url: '/future/activity/message/getCollect',
   method: 'post',
   data
