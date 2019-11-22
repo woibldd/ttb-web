@@ -103,6 +103,7 @@ export default {
 
 <style lang="scss" rel="stylesheet/scss" scoped>
   .industry {
+
     overflow: hidden;
     margin-bottom: 30px;
     clear: both;
