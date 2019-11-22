@@ -346,7 +346,11 @@ export default {
     },
     wsConnect (pair) {
       this.sockets[pair] = ws.create(`deal/${pair}`)
+      this.sockets[pair].$on('open', () => {
+        this.sockets[pair].heartCheck.start()
+      })
       this.sockets[pair].$on('message', data => {
+        this.sockets[pair].heartCheck.start()
         this.loading = false
         this.update(pair, data)
       })

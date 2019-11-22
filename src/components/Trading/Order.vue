@@ -67,15 +67,21 @@
             <tr v-show="active.list.length">
               <th>{{ $t('order_th_placed') }}</th>
               <th>{{ $t('pair') }}</th>
-              <th>{{ $t('deal_th_side') }}</th>
-              <!-- <th>{{ $t('order_th_type') }}</th> -->
+              <th>{{ $t('order_th_type') }}</th>
               <th class="right">{{ $t('price') }}</th>
-              <th class="right">{{ $t('amount') }}</th>
-              <th/>
-              <th>{{ $t('order_th_status') }}</th>
-              <!-- <th class="center" v-if="active.list.length">
-                <a class="btn op-cancel" @click.prevent="cancelAll"></a>
-              </th> -->
+              <th>{{ $t('deal_th_side') }}</th>
+              <!--委托价格(USDT) -->
+              <th>{{ $t('trading_page.order.order_price') }}{{ `(${state.pro.currency_name})` }}</th>
+              <!--委托量（BTC） -->
+              <th>{{ $t('trading_page.order.order_amount') }}{{ `(${state.pro.product_name})` }}</th>
+              <!--成交总额（USDT） -->
+              <th>{{ $t('trading_page.order.order_total') }}{{ `(${state.pro.currency_name})` }}</th>
+              <!--已成交量（BTC）  -->
+              <th>{{ $t('trading_page.order.order_executed_qty') }}{{ `(${state.pro.product_name})` }}</th>
+              <!--剩余量（BTC）  -->
+              <th>{{ $t('trading_page.order.order_surplus') }}{{ `(${state.pro.product_name})` }}</th>
+              <!--触发价格(USDT) -->
+              <th>{{ $t('trading_page.order.order_trigger_price') }}{{ `(${state.pro.currency_name})` }}</th>
               <th class="center">{{ $t('operation') }}</th>
             </tr>
           </thead>
@@ -85,25 +91,28 @@
               :key="order.id">
               <td>{{ order.create_time | date }}</td>
               <td>{{ order.symbol | pairfix }}</td>
+              <td>{{ getType(order.type) }}</td>
+              <td class="right">
+                <span v-if="order.price > 0">{{ fixPrice(order.price, order.symbol) }}</span>
+                <span v-else>--</span>
+              </td>
               <td
                 style="color: #09C989"
                 v-if="order.side === 'BUY'">{{ $t('order_side_buy') }}</td>
               <td
                 style="color: #F24E4D"
                 v-else>{{ $t('order_side_sell') }}</td>
-              <!-- <td>{{ getType(order.type) }}</td> -->
-              <td class="right">
-                <span v-if="order.price > 0">{{ fixPrice(order.price, order.symbol) }}</span>
-                <span v-else>--</span>
-              </td>
-              <td class="right">
-                <span>{{ fixAmount(order.deal_amount, order.symbol) }} /</span>
-                <span>{{ fixAmount(order.amount, order.symbol) }}</span>
-              </td>
-              <td class="ccy">{{ order.symbol | p }}</td>
+
+              <td>{{ order.price | fixed(priceScale) }}</td>
+              <td>{{ order.amount | fixed(amountScale) }}</td>
+              <td>{{ $big(order.amount).times(order.price) | fixed(priceScale) }}</td>
+              <td>{{ order.executed | fixed(amountScale) }}</td>
+              <td>{{ $big(order.amount).minus(order.executed) | fixed(amountScale) }}</td>
               <td>
-                {{ order.deal_amount > 0 ? $t('order_sts_partial') : $t('order_sts_active') }}
-                <!-- <order-deal v-if="order.deal_amount > 0" :key="active.fetchId" :id="order.id" :pairName="order.symbol"/> -->
+                <span v-if="order.trigger_price > 0">
+                  {{ order.trigger_price | fixed(priceScale) }}
+                </span>
+                <span v-else>--</span>
               </td>
               <td class="center">
                 <a @click.prevent="cancel(order)">{{ $t('transfer_cancel') }}</a>
@@ -130,13 +139,25 @@
         <table class="table table-ix-order table-history">
           <thead>
             <tr v-show="history.list.length">
-              <th>{{ $t('time') }}</th>
+             <th>{{ $t('time') }}</th>
               <th>{{ $t('pair') }}</th>
-              <th>{{ $t('deal_th_side') }}</th>
               <th>{{ $t('order_th_type') }}</th>
-              <th class="right">{{ $t('avg_price') }}</th>
-              <th class="right">{{ $t('amount') }}</th>
-              <th/>
+              <th>{{ $t('deal_th_side') }}</th>
+              <!--委托价格(USDT) -->
+              <th>{{ $t('trading_page.order.order_price') }}{{ `(${state.pro.currency_name})` }}</th>
+              <!--委托量（BTC） -->
+              <th>{{ $t('trading_page.order.order_amount') }}{{ `(${state.pro.product_name})` }}</th>
+              <!--成交总额（USDT） -->
+              <th>{{ $t('trading_page.order.order_executed_amount') }}{{ `(${state.pro.currency_name})` }}</th>
+              <!--成交均价(USDT) -->
+              <th>{{ $t('avg_price') }} {{ `(${state.pro.currency_name})` }}</th>
+              <!--成交量（BTC）  -->
+              <th>{{ $t('trading_page.order.order_executed_qty') }}{{ `(${state.pro.product_name})` }}</th>
+              <!--触发价格(USDT) -->
+              <th>{{ $t('trading_page.order.order_trigger_price') }}{{ `(${state.pro.currency_name})` }}</th>
+              <!--手续费(USDT) -->
+              <th>{{ $t('trading_page.order.orderdeal_fee') }}{{ `(${state.pro.currency_name})` }}</th>
+              <!-- 状态 -->
               <th>{{ $t('order_th_status') }}</th>
 
             </tr>
@@ -147,14 +168,40 @@
               :key="order.id">
               <td>{{ order.create_time | date }}</td>
               <td>{{ order.symbol | pairfix }}</td>
+              <td>{{ getType(order.type) }}</td>
               <td
                 style="color: #09C989"
                 v-if="order.side === 'BUY'">{{ $t('order_side_buy') }}</td>
               <td
                 style="color: #F24E4D"
                 v-else>{{ $t('order_side_sell') }}</td>
-              <td>{{ getType(order.type) }}</td>
-              <td class="right">
+
+              <!--委托价格(USDT) -->
+              <td>{{ order.price | fixed(2) }}</td>
+              <!--委托量（BTC） -->
+              <td>{{ order.amount | fixed(amountScale) }}</td>
+              <!--成交总额（USDT） -->
+              <td>{{ order.total | fixed(priceScale) }}</td>
+              <!--成交均价(USDT) -->
+              <td>
+                <span v-if="order.deal_amount > 0"><num :num="avg(order)"/></span>
+                <span v-else>--</span>
+              </td>
+              <!--成交量（BTC）  -->
+              <td>{{ order.executed | fixed(amountScale) }}</td>
+              <!--触发价格(USDT) -->
+              <td>
+                <span v-if="order.trigger_price > 0">
+                  {{ order.trigger_price | fixed(priceScale) }}
+                </span>
+                <span v-else>--</span>
+              </td>
+              <!--手续费(USDT) -->
+              <td>{{ order.fee | fixed(priceScale) }}</td>
+              <!-- 状态 -->
+              <td>{{ orderSts(order.status) }}</td>
+
+              <!-- <td class="right">
                 <span v-if="order.deal_amount > 0"><num :num="avg(order)"/></span>
                 <span v-else>--</span>
               </td>
@@ -165,8 +212,8 @@
               <td class="ccy">{{ order.symbol | p }}</td>
               <td>
                 {{ orderSts(order.status) }}
-                <!-- <order-deal v-if="order.status == 3 || order.status == 5 || order.status == 7" :data="order" :pairName="order.symbol" :finished="true" /> -->
-              </td>
+
+              </td> -->
 
             </tr>
           </tbody>
@@ -325,11 +372,18 @@ export default {
         return _.mapKeys(this.state.pro.pairList, pair => pair.name)
       }
       return null
+    },
+    priceScale () {
+      return _.get(this, 'state.pro.pairInfo.price_scale', 4)
+    },
+    amountScale () {
+      return _.get(this, 'state.pro.pairInfo.amount_scale', 4)
     }
   },
   watch: {
     tab (tab) {
       if (!this[tab].latest) {
+         
         this.fetch(tab)
       }
     },
@@ -352,6 +406,7 @@ export default {
         }
         this.clearAll()
         this.loading = true
+         
         await this.fetch(this.tab)
         this.loading = false
       },
@@ -395,6 +450,8 @@ export default {
           return this.$i18n.t('operate_limit')
         case 'MARKET':
           return this.$i18n.t('operate_market')
+        case 'STOP':
+          return this.$i18n.t('trading_page.stop_order.stop_win_loss')
         default:
           return 'Unknown'
       }
@@ -403,7 +460,7 @@ export default {
       this.tab = tab
     },
     hideOthersChange: _.throttle(async function () {
-      this.resetAll()
+      this.resetAll() 
       await this.fetch(this.tab)
       this.loop()
     }, 1000),
@@ -425,7 +482,7 @@ export default {
         if (find > -1) {
           this.active.list.splice(find, 1)
         }
-      }
+      } 
       this.update()
       this.progressing = false
       if (order.symbol.indexOf(this.state.pro.product_name) > -1 ||
@@ -466,17 +523,15 @@ export default {
       if (res.code) {
         return utils.alert(res.message)
       }
-      this.resetAll()
+      this.resetAll() 
       this.update()
       this.$eh.$emit('protrade:balance:refresh')
     },
-    async fetch (tab) {
-      // console.log('00000000')
+    async fetch (tab) { 
       const ctx = this[tab]
       if (this._isDestroyed) {
         return false
-      }
-      // console.log('1111111111')
+      } 
 
       await actions.updateSession()
       if (this.state.userStatus === 0) {
@@ -554,18 +609,18 @@ export default {
       // 通知 deals 浮窗关闭
       this.$eh.$emit('order-deals:hide')
     },
-    refresh (tab) {
+    refresh (tab) { 
       this.latest = false
       return this.fetch(tab)
     },
     update: _.throttle(async function () {
-      this.resetAll()
+      this.resetAll() 
       await this.fetch(this.tab)
       this.loop()
     }, 2000),
     loop () {
       clearTimeout(this.loopTimer)
-      this.loopTimer = setTimeout(() => {
+      this.loopTimer = setTimeout(() => { 
         this.update()
       }, 60000)
     },

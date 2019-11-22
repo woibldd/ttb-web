@@ -112,7 +112,11 @@ export default {
     const period = getPeriod(resolution)
     utils.$tvSocket && utils.$tvSocket.$destroy()
     utils.$tvSocket = ws.create(`history/${symbolInfo.ticker}/${period}`)
+    utils.$tvSocket.$on('open', () => {
+      utils.$tvSocket.heartCheck.start()
+    })
     utils.$tvSocket.$on('message', (data) => {
+      utils.$tvSocket.heartCheck.start()
       // @fixme 改接口，不用数组
       data = data[0]
       if (!data.time || data.time < lastTime) {

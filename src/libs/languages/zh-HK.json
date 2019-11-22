@@ -2607,7 +2607,15 @@
       "chk_text": "閱讀並同意"
     },
     "order": {
-      "hide_canceled": "隱藏已撤銷"
+      "hide_canceled": "隱藏已撤銷",
+      "order_price":"委託價格",
+      "orderdeal_fee": "手續費",
+      "order_trigger_price": "觸發價格",
+      "order_amount": "委託量",
+      "order_total": "委託總額",
+      "order_executed_amount": "成交總額",
+      "order_executed_qty": "成交量",
+      "order_surplus": "剩餘量"
     } ,
     "stop_order": {  
       "trigger_price": "觸發價格",

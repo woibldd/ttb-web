@@ -190,7 +190,11 @@ export default {
         this.socket.$destroy()
       }
       this.socket = ws.create('market/tickers')
+      this.socket.$on('open', () => {
+        this.socket.heartCheck.start()
+      })
       this.socket.$on('message', (datas) => {
+        this.socket.heartCheck.start()
         datas.forEach(data => {
           this.patch(data)
         })

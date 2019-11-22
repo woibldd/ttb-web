@@ -75,6 +75,9 @@ export default {
         return
       }
       this.socket = ws.create(`deal/${this.pair}`)
+      this.socket.$on('open', () => {
+        this.socket.heartCheck.start()
+      })
       // this.socketIndex = ws.create(`deal/${this.pair.replace('FUTURE_', 'INDEX_')}`)
       // this.socketMarket = ws.create(`deal/${this.pair.replace('FUTURE_', 'MARKET_')}`)
       // this.socketIndex = ws.create(`deal/INDEX_BTCUSD`)
@@ -99,6 +102,7 @@ export default {
       //   }
       // })
       this.socket.$on('message', data => {
+        this.socket.heartCheck.start()
         this.update(data)
         this.loading = false
         this.$eh.$emit('deal:update', data)

@@ -26,6 +26,19 @@ create (channel) {
       hub.$emit(hub.openTime > 1 ? 'reopen' : 'open')
       //heartCheck.start();
     }
+    
+    socket.onclose = function () {
+      if (hub._isDestroyed) {
+        return  
+      }
+      hub.$emit('reopen')
+    }
+    socket.onerror = function () {
+      if (hub._isDestroyed) {
+        return  
+      }
+      hub.$emit('reopen')
+    }
     socket.onmessage = function (evt) {
       if (hub._isDestroyed) {
         return socket.close()
@@ -44,6 +57,24 @@ create (channel) {
           data = data.data
         }
         hub.$emit('message', data)
+      }
+    }
+    hub.heartCheck = {
+      timeout: 60000, // 10秒一次
+      timeoutObj: null,
+      serverTimeoutObj: null,
+      start: function () { 
+        let self = this
+        this.timeoutObj && clearTimeout(this.timeoutObj)
+        this.serverTimeoutObj && clearTimeout(this.serverTimeoutObj)
+        this.timeoutObj = setTimeout(function () {
+          let time = new Date() * 1
+          socket.send(`{"op":"heart","args":["${time}"]}`)
+          self.serverTimeoutObj = setTimeout(function () {
+            socket.close()
+            // createWebSocket();
+          }, self.timeout)
+        }, this.timeout)
       }
     }
     return hub

@@ -90,7 +90,11 @@ export default {
         this.socketPrice.$destroy()
       }
       this.socketPrice = ws.create('market/tickers')
+      this.socketPrice.$on('open', () => {
+        this.socketPrice.heartCheck.start()
+      })
       this.socketPrice.$on('message', (datas) => {
+        this.socketPrice.heartCheck.start()
         datas.forEach(data => {
           this.patch(data)
         })

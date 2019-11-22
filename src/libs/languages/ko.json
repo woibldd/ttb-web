@@ -2678,7 +2678,15 @@
       "chk_text": "阅读并同意"
     },
     "order": {
-      "hide_canceled": "숨김 철회"
+      "hide_canceled": "숨김 철회",
+      "order_price":"위탁가격",
+      "orderdeal_fee": "수수료",
+      "order_trigger_price": "트리거 프라이스",
+      "order_amount": "委托量",
+      "order_total": "委托总额",
+      "order_executed_amount": "成交总额",
+      "order_executed_qty": "成交量",
+      "order_surplus": "剩余量"
     }, 
     "stop_order": {  
       "trigger_price": "트리거 프라이스",

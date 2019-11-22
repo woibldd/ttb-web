@@ -169,7 +169,11 @@ const service = {
         if (res.data.length) {
           res.data = res.data.map(item => {
             item.side = item.side === 1 ? 'BUY' : 'SELL'
-            item.type = item.type === 1 ? 'LIMIT' : 'MARKET'
+            item.type = {
+              1: 'LIMIT',
+              2: 'MARKET',
+              3: 'STOP'
+            }[item.type]
             item.deal_amount = item.executed
             item.status = item.state
             return item

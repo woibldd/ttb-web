@@ -102,7 +102,11 @@ export default {
         this.$eh.$emit('deal:update', res.data)
       }
       this.socket = ws.create(`deal/${this.state.pro.pair}`)
+      this.socket.$on('open', () => {
+        this.socket.heartCheck.start()
+      })
       this.socket.$on('message', data => {
+        this.socket.heartCheck.start()
         this.loading = false
         this.update(data)
         this.$eh.$emit('deal:update', data)

@@ -2683,7 +2683,15 @@
       "chk_text": "阅读并同意"
     },
     "order": {
-      "hide_canceled": "隐藏已撤销"
+      "hide_canceled": "隐藏已撤销",
+      "order_price":"委托价格",
+      "orderdeal_fee": "手续费",
+      "order_amount": "委托量",
+      "order_total": "委托总额",
+      "order_executed_amount": "成交总额",
+      "order_executed_qty": "成交量",
+      "order_trigger_price": "触发价格",
+      "order_surplus": "剩余量"
     } ,
     "stop_order": { 
       "message_h": "当价格上涨或高于%{triggerPrice}%{symbol}时，则以%{price}%{symbol}的 价格%{side}%{amount}%{product}。",

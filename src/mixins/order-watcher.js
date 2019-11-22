@@ -12,14 +12,18 @@ export default {
       const bid = this.$big(this.state.pro.bid)
       const myBid = this.$big(this.myHighestBid)
       if (bid.gt(0) && bid.lte(myBid)) {
-        this.$eh.$emit('protrade:order:refresh')
+        // this.$eh.$emit('protrade:order:refresh') 
+        this.$eh.$emit('protrade:order:refresh', 'marketBid')
+        this.$eh.$emit('protrade:balance:refresh', 'marketBid')
       }
     },
     marketAsk () {
       const ask = this.$big(this.state.pro.ask)
       const myAsk = this.$big(this.myLowestAsk)
       if (ask.gte(myAsk) && myAsk.gt(0)) {
-        this.$eh.$emit('protrade:order:refresh')
+        // this.$eh.$emit('protrade:order:refresh') 
+        this.$eh.$emit('protrade:order:refresh', 'marketAsk') 
+        this.$eh.$emit('protrade:balance:refresh', 'marketAsk')
       }
     }
   },

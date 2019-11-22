@@ -393,7 +393,11 @@ export default {
       }
 
       this.socket = ws.create(`orderbook/${this.pair}/${this.offset}/${this.accuracy}/20`)
+      this.socket.$on('open', () => {
+        this.socket.heartCheck.start()
+      })
       this.socket.$on('message', (data) => {
+        this.socket.heartCheck.start()
         this.assignData(data)
       })
     },
