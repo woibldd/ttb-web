@@ -18,7 +18,7 @@
             class="footer_ewm"
             src="../assets/ixx_kefu_big.jpg">
           <p class="footer_ewm_ltxt">{{ $t('home.footer.footer_contract_desc') }}</p>
-        </div> 
+        </div>
         <div
           class="lt">
           <img
@@ -27,10 +27,10 @@
           <p class="footer_ewm_ltxt">{{ $t('footer_contract_desc') }}</p>
         </div>
         <div
-          class="lt"> 
+          class="lt">
           <p class="footer_explain_txt">{{ $t('home.footer.explain') }}</p>
         </div>
-        <!--         
+        <!--
         <div
           class="lt"
           v-if="!showEnTips">
@@ -90,8 +90,8 @@
             rel="nofollow"
             :href="apiDoc"
             target="_blank">{{ $t('footer_api') }}</a>
-           <a 
-            :href="deepDoc"
+           <a
+            href="/industry"
             target="_blank">{{ $t('home.footer.information') }}</a>
         </div>
         <div class="footer_ct footer-rt">
@@ -107,14 +107,14 @@
         <div class="right-bottom">
           <div class="bottom-txt bot-la">
             <p class="footer_ltxt">{{ $t('footer_services_email') }}：support@ixx.com</p>
-            <p class="footer_ltxt">{{ $t('footer_bussness') }}：business@ixx.com</p> 
+            <p class="footer_ltxt">{{ $t('footer_bussness') }}：business@ixx.com</p>
             <p class="footer_ltxt">{{ $t('home.footer.affiliate') }}</p>
           </div>
           <div class="bottom-txt bot-lb">
             <div class="contact-list">
               <a
                 rel="nofollow"
-                class="contact-item-wrapper pointer" 
+                class="contact-item-wrapper pointer"
                 target="_blank"
                 href=' https://www.facebook.com/profile.php?id=100040054419479'>
                 <icon
@@ -123,7 +123,7 @@
               </a>
               <a
                 rel="nofollow"
-                class="contact-item-wrapper pointer" 
+                class="contact-item-wrapper pointer"
                 target="_blank"
                 href='https://twitter.com/IXX_Official'>
                 <icon
@@ -149,7 +149,7 @@
               </div>
               <a
                 rel="nofollow"
-                target="_blank" 
+                target="_blank"
                 :href="showEnTips ? 'https://t.me/ixxofficial' : 'https://t.me/ixxofficial'"
                 class="contact-item-wrapper pointer">
                 <icon
@@ -166,7 +166,7 @@
               </div>
               <a
                 rel="nofollow"
-                target="_blank" 
+                target="_blank"
                 href="https://www.instagram.com/ixxexchange/"
                 class="contact-item-wrapper pointer">
                 <icon
@@ -175,7 +175,7 @@
               </a>
               <a
                 rel="nofollow"
-                target="_blank" 
+                target="_blank"
                 href="https://www.linkedin.com/in/ixx-digital-assets-trading-community-134877194/"
                 class="contact-item-wrapper pointer">
                 <icon
@@ -184,7 +184,7 @@
               </a>
               <a
                 rel="nofollow"
-                target="_blank" 
+                target="_blank"
                 href="https://medium.com/@ixxofficial"
                 class="contact-item-wrapper pointer">
                 <icon
@@ -228,7 +228,7 @@ export default {
       // return this.state.theme.request[this.state.locale] || this.request.theme.help.en
     },
     announcementLink() {
-      
+
       if (this.state.userInfo && this.state.theme.themeName === 'default') {
         return process.env.BASE_API + '/ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.announcement[this.state.locale] || this.request.theme.announcement.en)
       } else {
@@ -247,7 +247,7 @@ export default {
     apiDoc() {
       return this.state.theme.apiDoc[this.state.locale || 'en']
     },
-    deepDoc() { 
+    deepDoc() {
       if (this.state.userInfo && this.state.theme.themeName === 'default') {
         return process.env.BASE_API + '/ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.deep[this.state.locale] || this.request.theme.deep.en)
       } else {

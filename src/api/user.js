@@ -73,7 +73,8 @@ export const collectActivity = data => request({
   method: 'post',
   data
 })
-export const symbolList = () => request({
-  url: '/otc/account/symbol/list',
+export const symbolList = (data) => request({
+  url: '/account/currency/rates',
   method: 'post',
+  data
 })

@@ -22,7 +22,7 @@
                 <div class="from">
                   <p>来源: <span> {{ item.source }} </span></p>
                 </div>
-                <div class="time">
+                <div class="to">
                   <p>发布时间: <span> {{ item.release_time }} </span></p>
                 </div>
               </div>
@@ -49,27 +49,7 @@
             <h1>最新行情</h1>
             <span>更多</span>
           </div>
-          <div class="list-con">
-            <div class="list-table">
-              <ul class="tab">
-                <li class="dt">交易对</li>
-                <li class="dt">价格</li>
-                <li class="nt">24H涨跌幅</li>
-              </ul>
-              <ul class="tab" v-for="item in 5" :key="item">
-                <li>BTC/USDT</li>
-                <li>
-                  8210.12 USDT
-                  ≈￥56210.12
-                </li>
-                <li>
-                  <div class="btn">
-                    2.88%
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <market />
         </div>
       </div>
     </div>
@@ -79,7 +59,11 @@
 <script type="text/ecmascript-6">
 import { activity, collectActivity } from '../../api/user'
 import {state} from '@/modules/store'
+import market from "./market";
 export default {
+  components: {
+    market
+  },
   data() {
     return {
       loading: true,
@@ -144,12 +128,25 @@ export default {
         this.$router.push('/user/login')
       }
     },
+    timestampToTime(timestamp) {
+      var date = new Date(timestamp)
+      var Y = date.getFullYear() + '-'
+      var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+      var D = date.getDate() + ' '
+      var h = date.getHours() + ':'
+      var m = date.getMinutes() + ':'
+      var s = date.getSeconds()
+      return Y + M + D
+    },
     getGoodLists() {
       this.list = []
       this.params.userId = this.userId
       activity(this.params).then((res) => {
         if (res.code === 200) {
           this.list = res.data.data
+          this.list.forEach((item) => {
+            item.release_time = this.timestampToTime(item.release_time)
+          })
           this.total = res.data.total
           window.localStorage.setItem('activityData', JSON.stringify(this.list))
         } else {
@@ -160,13 +157,13 @@ export default {
   },
   created() {
     this.getGoodLists()
-    console.log(state)
   }
 }
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
 .industry {
+  overflow: hidden;
   margin-bottom: 30px;
   &-banner {
     height: 400px;
@@ -207,7 +204,7 @@ export default {
             flex: 1
           }
           .time {
-            .from {
+            .from, .to {
               margin-right: 30px;
               color: #959595;
             }
@@ -229,8 +226,8 @@ export default {
             margin-bottom: 10px;
           }
           p {
-            font-size: 16px;
-            color: #595959;
+            font-size: 14px;
+            color: #959595;
             line-height: 1.2;
             overflow: hidden;
             text-overflow:ellipsis;
