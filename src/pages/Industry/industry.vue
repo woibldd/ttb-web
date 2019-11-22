@@ -5,7 +5,7 @@
       <div class="bread">
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item>当前位置</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/other/industry' }">行业资讯</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/industry' }">行业资讯</el-breadcrumb-item>
           <el-breadcrumb-item>我的收藏</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
@@ -121,11 +121,12 @@
         })
       },
       collectHadnle(item) {
+        const collect = item.collect === 0 ? 1 : 0
         if (this.userId) {
           collectActivity({
             user_id: this.userId,
             id: item.id,
-            collect: !item.collect
+            collect: collect
           }).then((res) => {
             if (res.code === 200) {
               this.getGoodLists()
@@ -135,6 +136,7 @@
       },
       getGoodLists() {
         this.list = []
+        this.params.userId = this.userId
         getCollect(this.params).then((res) => {
           if (res.code === 200) {
             this.list = res.data.data
