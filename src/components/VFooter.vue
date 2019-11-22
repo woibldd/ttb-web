@@ -74,7 +74,7 @@
             target="_blank">{{ $t('footer_application_coin') }}</a> -->
         </div>
         <div class="footer_ct">
-          <p>{{ $t('footer_tools') }}</p>
+          <p>{{ $t('footer_tools') }}</p
           <a
             rel="nofollow"
             :href="announcementLink"
@@ -90,8 +90,9 @@
             rel="nofollow"
             :href="apiDoc"
             target="_blank">{{ $t('footer_api') }}</a>
-           <a
-            href="/industry">{{ $t('home.footer.information') }}</a>
+          <router-link to="/industry">{{ $t('home.footer.information') }}</router-link>
+<!--           <a-->
+<!--            href="/industry"></a>-->
         </div>
         <div class="footer_ct footer-rt">
           <p>{{ $t('footer_terms') }}</p>
