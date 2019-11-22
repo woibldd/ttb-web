@@ -15,7 +15,7 @@ export const activeShareAccount = user_id => request({
   method: 'post',
   data: { user_id }
 })
-/* 
+/*
   user_id 用户id
   currency 账户类型
   begin_time 下单时间
@@ -35,5 +35,5 @@ export const getProduct = () => request({
 })
 export const resetBalance = () => request({
   url: '/opt/account/reset',
-  method: 'post'
+  method: 'post',
 })

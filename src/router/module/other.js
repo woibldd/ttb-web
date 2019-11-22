@@ -23,6 +23,39 @@ const overseas = () => import(/*  */ '@/views/new-downLoad/index.vue')
 const overseasTip = () => import(/*  */ '@/views/new-downLoad/tip.vue')
 export const otherRouter = [
   {
+    path: '/industryDetail',
+    name: 'industryDetail',
+    meta: {
+      auth: false,
+      nav: true,
+      footer: true,
+      class: 'dark',
+    },
+    component: () => import('@/pages/Industry/detial')
+  },
+  {
+    path: '/collect',
+    name: 'collect',
+    meta: {
+      auth: true,
+      nav: true,
+      footer: true,
+      class: 'dark',
+    },
+    component: () => import('@/pages/Industry/industry')
+  },
+  {
+    path: '/industry',
+    name: 'industry',
+    meta: {
+      auth: false,
+      nav: true,
+      footer: true,
+      class: 'dark'
+    },
+    component: () => import('@/pages/Industry/index')
+  },
+  {
     path: '/affiliate-app',
     name: 'affiliate-app',
     meta: {

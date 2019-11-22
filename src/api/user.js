@@ -58,3 +58,22 @@ export const getSession = () => request({
   method: 'post'
 })
 // account/wallet/list
+export const activity = data => request({
+  url: '/future/activity/message/list',
+  method: 'post',
+  data
+})
+export const getCollect = data => request({
+  url: '/future/activity/message/getCollect',
+  method: 'post',
+  data
+})
+export const collectActivity = data => request({
+  url: '/future/activity/message/collect',
+  method: 'post',
+  data
+})
+export const symbolList = () => request({
+  url: '/otc/account/symbol/list',
+  method: 'post',
+})

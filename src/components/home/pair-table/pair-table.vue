@@ -1,11 +1,11 @@
-<template>
+      <template>
   <div class="newest-coin-pairs">
     <div class="relative">
       <!-- <div class="pair-title">{{ $t('newest_coin_pairs') }}</div> -->
       <div class="pair-title">
         <el-tabs v-model="tabSelected" type="card">
           <el-tab-pane :label="$t('pair_list_option')" name="like"/>
-          <el-tab-pane label="USDT" name="USDT"/>
+          <el-tab-pane  label="USDT" name="USDT"/>
           <el-tab-pane label="BTC" name="BTC"/>
           <el-tab-pane label="ETH" name="ETH"/>
           <el-tab-pane :label="$t('pair_list_new')" name="new"/>
@@ -39,7 +39,7 @@
         <div class="head-item percent18_8" @click="setSort('price')">
            <sort
             :label="$t('homechart_price')"
-            :state="stateSortBy('price')"/>  
+            :state="stateSortBy('price')"/>
         </div>
         <div class="head-item percent14_8" @click="setSort('delta')">
           <sort
@@ -54,7 +54,7 @@
         <div class="head-item percent14_8"  @click="setSort('highest')">
           <sort
             :label="$t('homechart_24h_h')"
-            :state="stateSortBy('highest')"/> 
+            :state="stateSortBy('highest')"/>
         </div>
         <div class="head-item percent14_8" @click="setSort('vol')">
            <sort
@@ -80,24 +80,24 @@
                   name="sc-w"/>
               </div>
               <div class="row__item percent13">
-                {{ pair.name | pairfix }} 
+                {{ pair.name | pairfix }}
                 <icon v-show="index < 4 && tabSelected==='new' " name="hot-red"/>
               </div>
-              <div class="row__item percent18_8 "> 
+              <div class="row__item percent18_8 ">
                 <span>
                   {{ pair.tick.current | fixed(pair.price_scale) }}
                 </span>
                 <span class="ml-10 inline-block c-999">{{ state.fiatMoneySymbol }}<fiat-money
                   :base="pair.currency"
                   :value="pair.tick.current"/>
-                </span> 
+                </span>
               </div>
               <div
                 :class="{'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}"
                 class="row__item percent14_8 c-f24">
                 <p v-if="pair.tick">{{ (getDelta(pair.tick) > 0) ? '+' : '' }}{{ getDelta(pair.tick) }}%
                 </p>
-                <p v-else>...</p> 
+                <p v-else>...</p>
               </div>
               <div class="row__item percent14_8">
                 {{ pair.tick.lowest_24h | fixed(pair.price_scale) }}
@@ -176,14 +176,14 @@
         </div>
         <p v-else class="custom-title">bbbb</p> -->
     </div>
-  </div> 
+  </div>
 </template>
 <script>
 import { state } from '@/modules/store'
 import service from '@/modules/service'
 import { pairfix } from '@/mixins/index'
 import tickTableMixin from '@/mixins/tick-table'
-import dataView from './data-view' 
+import dataView from './data-view'
 import Sort from '../../Trading/Sort'
 
 export default {

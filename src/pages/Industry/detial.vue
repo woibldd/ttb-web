@@ -1,0 +1,274 @@
+<template>
+  <div class="industry">
+    <div class="industry-banner"></div>
+    <div class="con">
+      <div class="new-container">
+        <div class=""></div>
+        <div class="inner">
+          <div class="detail">
+            <div class="top">
+              <div class="icon" :class="{active: activityInfo.collect === 1}"></div>
+              <div class="text">
+                <h1>{{ activityInfo.title }}</h1>
+              </div>
+            </div>
+            <div class="time">
+              <div class="from">
+                <p>来源: <span> {{ activityInfo.source }} </span></p>
+              </div>
+              <div class="to">
+                <p>发布时间: <span> {{ activityInfo.release_time }} </span></p>
+              </div>
+            </div>
+            <div class="content" v-html="activityInfo.content"></div>
+          </div>
+        </div>
+        <div class="group">
+          <div class="btn" @click="prev">上一篇</div>
+          <div class="btn" @click="next">下一篇</div>
+        </div>
+      </div>
+      <div class="quotation">
+        <div class="title">
+          <h1>最新行情</h1>
+          <span @click="moreHandle">更多</span>
+        </div>
+        <div class="list-con">
+          <div class="list-table">
+            <ul class="tab">
+              <li class="dt">交易对</li>
+              <li class="dt">价格</li>
+              <li class="nt">24H涨跌幅</li>
+            </ul>
+            <ul class="tab" v-for="item in 5" :key="item">
+              <li>BTC/USDT</li>
+              <li>
+                8210.12 USDT
+                ≈￥56210.12
+              </li>
+              <li>
+                <div class="btn">
+                  2.88%
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script type="text/ecmascript-6">
+export default {
+  data() {
+    return {
+      loading: true,
+      total: 0,
+      currentPage: 1,
+      i: 1,
+      activityInfo: {}
+    }
+  },
+  computed: {
+    activityId() {
+      return Number(this.$route.query.id)
+    },
+    list() {
+      return JSON.parse(window.localStorage.getItem('activityData'))
+    },
+    ids() {
+      return this.list.map(item => item.id)
+    }
+  },
+  methods: {
+    moreHandle() {
+      this.$router.push('/')
+    },
+    prev() {
+      this.i--
+      if (this.i <= 0) {
+        this.i = this.ids.length
+      }
+      this.activityInfo = this.list[this.i - 1]
+    },
+    next() {
+      this.i++
+      if (this.i >= this.ids.length) {
+        this.i = 1
+      }
+      this.activityInfo = this.list[this.i - 1]
+    }
+  },
+  created() {
+    this.activityInfo = this.list.filter(item => (item.id === this.activityId))[0]
+  }
+}
+</script>
+
+<style lang="scss" rel="stylesheet/scss" scoped>
+  .industry {
+    .content {
+      overflow: hidden;
+      width: 100%;
+      margin: 0 20px 20px 20px;
+      p {
+        display: block;
+      }
+      img {
+        display: block;
+        margin: 10px auto;
+      }
+    }
+    margin-bottom: 30px;
+    &-banner {
+      height: 400px;
+      background: #00badb;
+      background: url('./img/new.png') center center no-repeat;
+    }
+    .con {
+      width: 1200px;
+      margin: 30px auto;
+      .new-container {
+        width: 790px;
+        float: left;
+        .group {
+          display: flex;
+          margin: 30px auto;
+          width: 100%;
+          .btn {
+            flex: 1;
+            height:52px;
+            background:rgba(255,255,255,1);
+            box-shadow:0px 1px 15px 0px rgba(209,209,209,1);
+            border-radius:3px;
+            text-align: center;
+            line-height: 52px;
+            &:first-child {
+              margin-right: 10px;
+            }
+            &:last-child {
+              margin-left: 10px;
+            }
+          }
+        }
+        .inner {
+          background:rgba(255,255,255,1);
+          box-shadow:0px 1px 15px 0px rgba(209,209,209,1);
+          box-sizing: border-box;
+          overflow: hidden;
+          .top {
+            margin: 20px 20px 0 20px;
+            overflow: hidden;
+            display: flex;
+            .icon {
+              flex: 50px 0 0 0;
+              width: 40px;
+              margin-right: 10px;
+              cursor: pointer;
+              height: 40px;
+              background: url('./img/icon.png') center center no-repeat;
+            }
+            .active {
+              background: url('./img/active.png') center center no-repeat;
+            }
+            .text {
+              flex: 1;
+              line-height: 40px;
+            }
+            h1 {
+              font-size: 20px;
+              color: #030303;
+              overflow: hidden;
+              text-overflow:ellipsis;
+              white-space: nowrap;
+              font-weight: 500;
+              margin-bottom: 10px;
+            }
+            p {
+              font-size: 16px;
+              color: #595959;
+              line-height: 1.2;
+              overflow: hidden;
+              text-overflow:ellipsis;
+              white-space: nowrap;
+            }
+          }
+          .time {
+            width: 100%;
+            text-align: right;
+            border-bottom: 1px solid #ececec;
+            float: right;
+            margin-bottom: 20px;
+            .from, .to {
+              float: right;
+              margin-right: 30px;
+              color: #959595;
+              padding-bottom: 20px;
+            }
+            overflow: hidden;
+            font-size: 14px;
+            & > div {
+              padding: 20px 0;
+              float: left;
+            }
+          }
+        }
+      }
+      .quotation {
+        width: 356px;
+        float: left;
+        padding: 12px;
+        margin-left: 30px;
+        background:rgba(255,255,255,1);
+        box-shadow:0px 1px 15px 0px rgba(209,209,209,1);
+        color: #525252;
+        .tab {
+          display: flex;
+          li {
+            flex: 1;
+            font-size: 14px;
+            padding-bottom: 30px;
+          }
+          .dt {
+            flex: 1;
+          }
+          .nt {
+            flex: 0 0 0 64px;
+            width: 64px;
+            text-align: center;
+          }
+          .btn {
+            width: 60px;
+            height: 30px;
+            text-align: center;
+            background: #4BC384;
+            color: #fff;
+            line-height: 30px;
+            font-size: 14px;
+            margin: 0 auto;
+          }
+        }
+        .title {
+          font-size: 14px;
+          color: #030303;
+          display: flex;
+          padding-bottom: 12px;
+          border-bottom: 1px solid #DBDBDB;
+          margin-bottom: 30px;
+          h1 {
+            flex: 1;
+            font-size: 18px;
+            padding-left: 8px;
+            border-left: 4px solid rgba(1,206,209,1);
+          }
+          span {
+            flex: 1;
+            color: #525252;
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+</style>
