@@ -1,4 +1,39 @@
 {
+  "newLoad": {
+    "logOut": "로그아웃하고 다시 Apple ID와 비밀번호를 입력하세요",
+    "id": "중국 대륙이 아닌 Apple id를 입력하세요",
+    "fid": "중국 대륙이 아닌 Apple ID 가 없을 경우 고객과 연락해 무료로 제공되는 Apple ID를 받을 수 있습니다",
+    "kf": "마이크로 신호 고객님",
+    "sm": "고객님 유니폼 쓸어",
+    "fz": " * 고객님의 휴대폰 정보 유출을 방지하기 위해서 고객님이 제공하는 Apple ID를 iCloud에 로그인하지 마세요.Apple ID를 사용하여 다운로드한 후 해당 계정에서 즉시 로그아웃하세요",
+    "az": "App Store 설치하다",
+    "wd": "안정적이고 믿음직스럽다",
+    "wd1": "안전 편리 안정",
+    "tip":"힌트:IOS 시스템 버전 10.0 이상, 다운로드가 더 원활합니다~",
+    "safe":"안전하고 안정되다.",
+    "qui":"설치가 간편하다.",
+    "app_id":"무료 제공Apple ID",
+    "update":"업데이트 후 다시 설치해야 함",
+    "t_1_text":"안전하고 간편하고, 단추로 화폐를 사고, 원활한 거래를 할 수 있다.",
+    "t_2_text":"화폐의 종류가 많고, 화폐가 풍부하니, 네가 마음대로 선택하거라.",
+    "t_3_text":"높은 지렛대, 최강의 깊이, 최대한의 안전",
+    "install":"내부 측정판을 설치하다.",
+    "user_apple_id":"비중국지역 Apple ID를 가지고 계십니다. 직접 아이디 로그인 Apple Store 다운로드 {web} App 하시면 됩니다。",
+    "check_id":"사과 전환ID",
+    "up":"App Store 응용 시작",
+    "port":"App Store 첫 페이지의 오른쪽 위 이미지 클릭",
+    "install_app":"APP설치",
+    "login_up":"로그인 성공 후 자동으로 해외 App Store로 건너가 App Store 아래 검색 후 페이지 입력 상자에서 {web} 검색",
+    "get": "버튼을 누르고 App를 설치하기 시작해서 데스크톱으로 돌아가 보면 됩니다.",
+    "know":"나는 이미 App Store를 설치할 것을 알았다",
+    "t_ix_1":"100%찬 지갑",
+    "t_1_ix_text":"자산안전을 최대한으로 보장하다.",
+    "t_ix_2":"더 많은 복지",
+    "t_2_ix_text":"장려 + 사탕공수 + 거래증금",
+    "t_ix_3":"계약이 다양하다",
+    "t_3_ix_text":"다품종계약서 선택",
+    "android":"안줘내측판"
+  },
   "agreeList": {
     "title": "Affiliate Program Services Agreement",
     "t_1": "This Affiliate Program Services Agreement (“Services Agreement”) sets forth the terms and conditions of your use of IXX Affiliate Program (“Affiliate Program”) and serves to supplement the Terms of Service Agreement (“Agreement”) between you and IXX. Please read this Services Agreement completely and carefully before enrolling in IXX Affiliate Program. You must agree with and accept all of the terms and conditions contained in this Services Agreement without modifications, which include the terms and conditions expressly set out below and those incorporated herein by reference, before you may become an affiliate under the IXX Affiliate Program.",
@@ -2389,7 +2424,7 @@
   "home": {
     "footer": {
       "affiliate": "대리신청：affiliate@ixx.com",
-      "explain": "IXX 증권거래소는 세계 첫 디지털 자산 거래 공동체, 본부는 싱가포르에 있으며, 거래소 생태의 지역 체인 이상국 실현을 위해 노력하고 있으며, 모두가 나를 위해, 나는 모두를 위해, 모두가 나를 위해, 거래소 참여 공헌자는 모두 거래소의 발전 성과를 공유할 수 있다.",
+      "explain": "IXX 코뿔소거래소 증권거래소는 세계 첫 디지털 자산 거래 공동체, 본부는 싱가포르에 있으며, 거래소 생태의 지역 체인 이상국 실현을 위해 노력하고 있으며, 모두가 나를 위해, 나는 모두를 위해, 모두가 나를 위해, 거래소 참여 공헌자는 모두 거래소의 발전 성과를 공유할 수 있다.",
       "footer_contract_desc": "고객 서비스 추가",
       "information":"엎계깊이/정보"
     },

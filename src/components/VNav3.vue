@@ -362,7 +362,7 @@
         </div>
         <!-- 帮助中心中心 -->
         <div class="nav_item help-center" v-popover:popover7>
-          <a  rel="nofollow" class=" help mr-15 ml-15" @click="openDefault('help')">
+          <a rel="nofollow" class="help mr-15 ml-15" @click="openDefault('help')">
             <icon name="header-help" />
           </a>
            <el-popover
@@ -374,13 +374,13 @@
               <div class="pop-dropdown"> 
             <ul class="dropdown-list pt-10 pb-10">
               <li class="dropdown-item pl-24 pr-24">
-                <a class="link" target="_blank" rel="nofollow" :href="announcementLink">{{ $t('footer_notice') }}</a>
+                <a class="link" target="_blank"  rel="nofollow"  :href="announcementLink">{{ $t('footer_notice') }}</a>
               </li>
               <li class="dropdown-item pl-24 pr-24">
-                <a class="link" target="_blank" rel="nofollow" :href="helpLink">{{ $t('user_guide') }}</a>
+                <a class="link" target="_blank"  rel="nofollow"  :href="helpLink">{{ $t('user_guide') }}</a>
               </li>
               <li class="dropdown-item pl-24 pr-24">
-                <a class="link" target="_blank" rel="nofollow" :href="requestLink">{{ $t('footer_request') }}</a>
+                <a class="link" target="_blank"  rel="nofollow"  :href="requestLink">{{ $t('footer_request') }}</a>
               </li>
             </ul>
           </div>

@@ -9,8 +9,8 @@
         </router-link>
         <p class="footer_ltxt">
           <!-- <b>{{ $t('first') }}</b> -->
-          <!-- {{ exchangeNameConfig }} -->
-          {{ $t('exchangeNameConfig') }}
+          {{ exchangeNameConfig }}
+          <!-- {{ $t('exchangeNameConfig') }} -->
         </p>
         <div
           class="lt">
@@ -76,15 +76,18 @@
         <div class="footer_ct">
           <p>{{ $t('footer_tools') }}</p>
           <a
+            rel="nofollow"
             :href="announcementLink"
             target="_blank">{{ $t('footer_notice') }}</a>
           <a
+            rel="nofollow"
             :href="helpLink"
             target="_blank">{{ $t('user_guide') }}</a>
           <router-link
             :to="{name:'Fee'}"
             target="_blank">{{ $t('footer_fee') }}</router-link>
           <a
+            rel="nofollow"
             :href="apiDoc"
             target="_blank">{{ $t('footer_api') }}</a>
            <a 
@@ -110,8 +113,8 @@
           <div class="bottom-txt bot-lb">
             <div class="contact-list">
               <a
-                class="contact-item-wrapper pointer"
-                rel="nofollow"   
+                rel="nofollow"
+                class="contact-item-wrapper pointer" 
                 target="_blank"
                 href=' https://www.facebook.com/profile.php?id=100040054419479'>
                 <icon
@@ -119,8 +122,8 @@
                   name="footer-facebook"/>
               </a>
               <a
-                class="contact-item-wrapper pointer"
-                rel="nofollow"   
+                rel="nofollow"
+                class="contact-item-wrapper pointer" 
                 target="_blank"
                 href='https://twitter.com/IXX_Official'>
                 <icon
@@ -128,7 +131,7 @@
                   name="footer-twitter"/>
               </a>
               <a
-                rel="nofollow"   
+                rel="nofollow"
                 href="mailto:support@ixx.com"
                 target="_blank"
                 class="contact-item-wrapper pointer">
@@ -145,8 +148,8 @@
                   src="../assets/pic-contact-wx.png">
               </div>
               <a
-                target="_blank"
-                rel="nofollow"   
+                rel="nofollow"
+                target="_blank" 
                 :href="showEnTips ? 'https://t.me/ixxofficial' : 'https://t.me/ixxofficial'"
                 class="contact-item-wrapper pointer">
                 <icon
@@ -162,8 +165,8 @@
                   src="../assets/pic-contact-biyong.png">
               </div>
               <a
-                target="_blank"
-                rel="nofollow"   
+                rel="nofollow"
+                target="_blank" 
                 href="https://www.instagram.com/ixxexchange/"
                 class="contact-item-wrapper pointer">
                 <icon
@@ -171,8 +174,8 @@
                   name="footer-Instagram"/>
               </a>
               <a
-                target="_blank"
-                rel="nofollow"   
+                rel="nofollow"
+                target="_blank" 
                 href="https://www.linkedin.com/in/ixx-digital-assets-trading-community-134877194/"
                 class="contact-item-wrapper pointer">
                 <icon
@@ -180,8 +183,8 @@
                   name="footer-linkedin"/>
               </a>
               <a
-                target="_blank"
-                rel="nofollow"   
+                rel="nofollow"
+                target="_blank" 
                 href="https://medium.com/@ixxofficial"
                 class="contact-item-wrapper pointer">
                 <icon

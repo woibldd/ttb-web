@@ -6,14 +6,14 @@ module.exports = {
   locales: ['en', 'zh-CN', 'zh-HK', 'ko'],
   themeName: 'default',
   companyName: 'IXX.COM',
-  exchangeName: 'IXX | Digital currency exchange - Digital assets trading community - IXX Exchange',
+  exchangeName: 'IXX | IXX Exchange - Digital currency exchange - Digital assets trading community',
   exchangeNameConfig: {
-    'zh-CN': 'IXX | 犀牛交易所 数字资产交易共同体-',
-    'zh-HK': 'IXX | 犀牛交易所 數位資產交易共同體-',
-    en: 'IXX | IXX Exchange Digital assets trading community - ',
+    'zh-CN': 'IXX | 犀牛交易所-数字资产交易所-数字资产交易共同体',
+    'zh-HK': 'IXX | 犀牛交易所-數位資產交易所-數位資產交易共同體',
+    en: 'IXX | IXX Exchange - Digital currency exchange - Digital assets trading community',
     ko: 'IXX | 수자 재산 거래 공동체'
   },
-  keywords: '数字资产交易所,犀牛交易所,数字资产交易D共同体',
+  keywords: '数字资产交易所,犀牛交易所,数字资产交易共同体',
   keywordsConfig: {
     'zh-CN': '数字资产交易所,犀牛交易所,数字资产交易共同体',
     'zh-HK': '數位資產交易所，犀牛交易所，數位資產交易共同體',

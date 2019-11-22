@@ -1,5 +1,13 @@
 {
   "newLoad":{
+    "logOut": "点击退出登录，重新输入Apple ID 和密码",
+    "id": "输入非中国大陆Apple ID",
+    "fid": "如果您没有非中国大陆地区的Apple ID，您可以联系客服，获取免费提供的下载Apple ID。",
+    "kf": "客服微信号",
+    "sm": "扫码添加客服",
+    "fz": "*为防止您的手机信息泄露，请不要使用客服提供的Apple ID登录iCloud。使用Apple ID下载成功后，请您及时退出该账户。",
+    "az": "App Store 安装",
+    "wd": "安全·稳定·可信",
     "tip": "提示：IOS系统版本10.0以上，下载更流畅~",
     "safe": "安全稳定",
     "qui": "安装便捷",
@@ -9,12 +17,12 @@
     "t_2_text": "币种繁多、币对丰富，任你选择",
     "t_3_text": "高倍杠杆，最强深度，极致安全",
     "install": "安装内测版",
-    "user_apple_id": "您拥有非中国地区的Apple ID，请直接使用ID登录Apple Store下载IXX App即可。",
+    "user_apple_id": "您拥有非中国地区的Apple ID，请直接使用ID登录Apple Store下载{web} App即可。",
     "check_id": "切换苹果ID",
     "up": "进入App Store 应用",
     "port": "点击 App Store 首页右上角头像",
     "install_app": "安装APP",
-    "login_up": "登录成功后，会自动跳转至海外版的App Store点击App Store下方搜索，然后在页面输入框搜索IXX",
+    "login_up": "登录成功后，会自动跳转至海外版的App Store点击App Store下方搜索，然后在页面输入框搜索{web}",
     "get": "点击“GET”按钮，开始安装App，回到桌面查看 即可",
     "know": "我已知晓 去App Store 安装",
     "t_ix_1": "100%冷钱包",
@@ -2428,7 +2436,7 @@
   "home": {
     "footer": {
       "affiliate": "代理申请：support@ixx.com",
-      "explain": "IXX交易所是全球首家数字资产交易共同体，总部在新加坡，其致力于实现交易所生态的区块链理想国，打造人人的交易所，我为人人，人人为我，所有参与交易所的贡献者者均可共享交易所的发展成果。",
+      "explain": "IXX犀牛交易所是全球首家数字资产交易共同体，总部在新加坡，其致力于实现交易所生态的区块链理想国，打造人人的交易所，我为人人，人人为我，所有参与交易所的贡献者者均可共享交易所的发展成果。",
       "footer_contract_desc": "添加客服微信",
       "information":"行业资讯"
     },
@@ -2672,7 +2680,7 @@
       "content_c": "MPV持有者的账号、名字、证件号、电邮、MPV成交量信息、充/提币信息、MPV划转信息。",
       "content_d": "*这将不会影响您的提币操作",
       "content_e": "《MPV附加条款》",
-      "chk_text": "阅读并同意"  
+      "chk_text": "阅读并同意"
     },
     "order": {
       "hide_canceled": "隐藏已撤销"
