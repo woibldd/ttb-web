@@ -105,6 +105,7 @@ export default {
   .industry {
     overflow: hidden;
     margin-bottom: 30px;
+    clear: both;
     .content {
       margin: 0 20px 20px 20px;
       p {

@@ -165,6 +165,7 @@ export default {
 .industry {
   overflow: hidden;
   margin-bottom: 30px;
+  clear: both;
   &-banner {
     height: 400px;
     background: #00badb;
