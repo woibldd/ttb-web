@@ -46,6 +46,7 @@
 
 <script type="text/ecmascript-6">
 import market from "./market";
+import { collectActivity } from '../../api/user';
 export default {
   components: {
     market
@@ -88,15 +89,15 @@ export default {
       }
     },
     collectHadnle() {
-      const collect = activityInfo.collect === 0 ? 1 : 0
+      const collect = this.activityInfo.collect === 0 ? 1 : 0
       if (this.userId) {
         collectActivity({
           user_id: this.userId,
-          id: item.id,
+          id: this.activityInfo.id,
           collect: collect
         }).then((res) => {
           if (res.code === 200) {
-            this.getGoodLists()
+            this.activityInfo.collect = collect
           }
         })
       } else {

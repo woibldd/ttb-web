@@ -11,23 +11,31 @@
       <div class="new-container">
         <div class=""></div>
         <div class="inner">
-          <div class="new-list" v-for="(item, index) in list" :key="index">
-            <div class="icon" :class="{active: item.collect === 1}" @click="collectHadnle(item)"></div>
-            <div class="text" @click="detialHandle(item)">
-              <div class="top">
-                <h1> {{ item.title }} </h1>
-                <p> {{ item.summary }} </p>
-              </div>
-              <div class="time">
-                <div class="from">
-                  <p>来源: <span> {{ item.source }} </span></p>
+          <template v-if="list.length > 0">
+            <div class="new-list" v-for="(item, index) in list" :key="index">
+              <div class="icon" :class="{active: item.collect === 1}" @click="collectHadnle(item)"></div>
+              <div class="text" @click="detialHandle(item)">
+                <div class="top">
+                  <h1> {{ item.title }} </h1>
+                  <p> {{ item.summary }} </p >
                 </div>
-                <div class="to">
-                  <p>发布时间: <span> {{ item.release_time }} </span></p>
+                <div class="time">
+                  <div class="from">
+                    <p>来源: <span> {{ item.source }} </span></p >
+                  </div>
+                  <div class="time">
+                    <p>发布时间: <span style="padding-left: 30px;"> {{ item.release_time }} </span></p >
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </template>
+          <template v-else>
+            <div class="no-data">
+              <img src="./img/no.png" alt="" class="no">
+              <p>暂无收藏，点击文章 <img src="./img/icon.png" alt=""> 收藏文章方便查阅哦~</p >
+            </div>
+          </template>
         </div>
         <el-pagination
             style="text-align: center;margin-top: 20px;"
@@ -160,6 +168,24 @@ export default {
 
 <style lang="scss" rel="stylesheet/scss" scoped>
 .industry {
+  .no-data {
+          width:100%;
+          text-align: center;
+          .no {
+            margin: 120px auto 10px
+          }
+          p {
+            font-size: 14px;
+            margin-bottom: 120px;
+            vertical-align: middle;
+            img {
+              height: 30px;
+              zoom: 1;
+              vertical-align: middle;
+              color: #777777;
+            }
+          }
+        }
   overflow: hidden;
   margin-bottom: 30px;
   clear: both;

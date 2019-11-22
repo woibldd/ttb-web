@@ -32,6 +32,7 @@
         <el-pagination
             style="text-align: center;margin-top: 20px;"
             background
+            v-if="list.lenth > 0"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             :current-page.sync="currentPage"
