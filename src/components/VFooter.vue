@@ -91,8 +91,7 @@
             :href="apiDoc"
             target="_blank">{{ $t('footer_api') }}</a>
            <a
-            href="/industry"
-            target="_blank">{{ $t('home.footer.information') }}</a>
+            href="/industry">{{ $t('home.footer.information') }}</a>
         </div>
         <div class="footer_ct footer-rt">
           <p>{{ $t('footer_terms') }}</p>
