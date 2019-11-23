@@ -5,7 +5,8 @@
       <div class="bread">
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item>当前位置</el-breadcrumb-item>
-          <el-breadcrumb-item>行业资讯</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{path: '/industry'}">行业资讯</el-breadcrumb-item>
+          <el-breadcrumb-item>我的收藏</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
       <div class="new-container">

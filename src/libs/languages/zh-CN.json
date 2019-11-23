@@ -31,7 +31,7 @@
     "t_2_ix_text": "奖励+糖果空投+交易赠金",
     "t_ix_3": "合约多样",
     "t_3_ix_text": "多品种合约任你选择",
-    "android": "安卓内测版"
+    "android": "安装安卓版"
   },
   "agreeList": {
     "title": "Affiliate Program Services Agreement",
@@ -2693,14 +2693,14 @@
       "order_trigger_price": "触发价格",
       "order_surplus": "剩余量"
     } ,
-    "stop_order": { 
+    "stop_order": {
       "message_h": "当价格上涨或高于%{triggerPrice}%{symbol}时，则以%{price}%{symbol}的 价格%{side}%{amount}%{product}。",
       "message_l":"当价格下跌或低于%{triggerPrice}%{symbol}时，则以%{price}%{symbol}的 价格%{side}%{amount}%{product}。",
       "stop_win_loss": "止盈止损",
       "trigger_price":"触发价格",
       "price_distance":"市价（距离）",
       "order_price":"委托价格",
-      "order_th_type": "类型", 
+      "order_th_type": "类型",
       "order_th_status": "状态",
       "order_th_time": "委托时间",
       "untriggerl":"未触发"

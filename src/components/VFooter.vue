@@ -74,7 +74,7 @@
             target="_blank">{{ $t('footer_application_coin') }}</a> -->
         </div>
         <div class="footer_ct">
-          <p>{{ $t('footer_tools') }}</p
+          <p>{{ $t('footer_tools') }}</p>
           <a
             rel="nofollow"
             :href="announcementLink"
