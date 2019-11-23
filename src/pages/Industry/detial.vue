@@ -119,7 +119,7 @@ export default {
     },
     prev() {
       this.i--
-      if (this.i <= 0) {
+      if (this.i < 0) {
         this.i = this.ids.length
       }
       this.activityInfo = this.list[this.i - 1]
@@ -127,7 +127,7 @@ export default {
     },
     next() {
       this.i++
-      if (this.i >= this.ids.length) {
+      if (this.i > this.ids.length) {
         this.i = 1
       }
       this.activityInfo = this.list[this.i - 1]
