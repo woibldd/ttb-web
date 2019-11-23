@@ -312,6 +312,7 @@ export default {
             flex: 1;
             color: #525252;
             text-align: right;
+            cursor: pointer;
           }
         }
       }
