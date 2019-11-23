@@ -35,7 +35,7 @@
         <div class="inner">
            <div class="title">
             <h1>最新行情</h1>
-            <span @click="moreHandle">更多</span>
+            <span @click="moreHandle">更多 ></span>
           </div>
           <market />
         </div>
@@ -81,6 +81,9 @@ export default {
     }
   },
   methods: {
+    moreHandle() {
+      this.$router.push('/')
+    },
     collectHandle() {
       if (this.userId) {
         this.$router.push('/collect')
@@ -113,9 +116,6 @@ export default {
       var m = date.getMinutes() + ':'
       var s = date.getSeconds()
       return Y + M + D
-    },
-    moreHandle() {
-      this.$router.push('/')
     },
     prev() {
       this.i--

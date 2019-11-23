@@ -53,7 +53,7 @@
         <div class="inner">
           <div class="title">
             <h1>最新行情</h1>
-            <span>更多</span>
+            <span @click="moreHandle">更多 ></span>
           </div>
           <market />
         </div>
@@ -95,6 +95,9 @@ export default {
     }
   },
   methods: {
+    moreHandle() {
+      this.$router.push('/')
+    },
     handleSizeChange(val) {
       this.params.size = val
       this.getGoodLists()

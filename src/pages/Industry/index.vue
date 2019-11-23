@@ -32,7 +32,7 @@
         <el-pagination
             style="text-align: center;margin-top: 20px;"
             background
-            v-if="list.lenth > 0"
+            v-if="list.length > 0"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             :current-page.sync="currentPage"
@@ -48,7 +48,7 @@
         <div class="inner">
           <div class="title">
             <h1>最新行情</h1>
-            <span>更多</span>
+            <span @click="moreHandle">更多 ></span>
           </div>
           <market />
         </div>
@@ -90,6 +90,9 @@ export default {
     }
   },
   methods: {
+    moreHandle() {
+      this.$router.push('/')
+    },
     handleSizeChange(val) {
       this.params.size = val
       this.getGoodLists()
@@ -122,7 +125,8 @@ export default {
           collect: collect
         }).then((res) => {
           if (res.code === 200) {
-            this.getGoodLists()
+            item.collect = collect
+            // this.getGoodLists()
           }
         })
       } else {
