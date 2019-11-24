@@ -230,7 +230,10 @@ export default {
             background: url('./img/active.png') center center no-repeat;
           }
           .text {
-            flex: 1
+            flex: 1;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
           }
           .time {
             .from, .to {
