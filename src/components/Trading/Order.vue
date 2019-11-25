@@ -16,7 +16,7 @@
         <span v-if="activeTotal">[{{ activeTotal }}]</span>
       </a>
       <a
-        v-if="false"
+        v-if="utils.isTestnet"
         class="ix-header-nav raw"
         :class="{cur: tab === 'stop'}"
         @click.prevent="setTab('stop')">
@@ -228,7 +228,7 @@
       </div>
     </div>
      <div
-      v-if="false"
+      v-if="utils.isTestnet"
       class="ix-panel-body"
       v-show="tab === 'stop'"
       ref="stop"

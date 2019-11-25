@@ -500,6 +500,14 @@ const utils = {
   },
   isWeiXin() {
     return navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger' 
+  }, 
+  isTestnet() {
+    return (
+      location.hostname.indexOf("ixex.pro") >= 0 ||
+      location.hostname.includes("localhost") ||
+      location.hostname.includes("127.0.0.1")
+    );
+    // return true
   },
   /**
    * 脱敏

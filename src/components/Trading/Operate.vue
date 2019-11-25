@@ -17,7 +17,7 @@
         {{ $t('operate_market') }}
       </a>
       <a
-        v-if="false"
+        v-if="utils.isTestnet"
         class="ix-header-nav raw stop"
         :class="{cur: tab === 'stop'}"
         @click.prevent="setTab('stop')">
@@ -56,7 +56,8 @@
 import {state, actions} from '@/modules/store'
 import ProLimitOrder from './ProLimitOrder'
 import ProMarketOrder from './ProMarketOrder'
-import ProStopOrder from './ProStopOrder'
+import ProStopOrder from './ProStopOrder' 
+import utils from '@/modules/utils'
 
 export default {
   name: 'Operate',
