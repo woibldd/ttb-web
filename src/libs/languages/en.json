@@ -2546,6 +2546,9 @@
     }
   },
   "home": {
+    "nav": {
+      "information":"Industrial News"
+    },
     "footer": {
       "affiliate": "Affiliate：affiliate@ixx.com",
       "explain": "IXX Exchange is a cryptocurrency derivatives exchange, headquartered in Singapore and registered in Malaysia. It is the world's first digital asset trading community and committed to realize the ideal utopia nation of blockchain trading ecology, create an exchange for everyone. All contributors can share the fruitful outcome from developments of the exchange.",
@@ -2896,5 +2899,13 @@
     }
   },
   "seo_keywords": "speculation, bitcoin, bitcoin exchange, bitcoin price today, bitcoin trend, digital currency exchange, where to buy bitcoin, how to buy bitcoin, bitcoin exchange, bitcoin price today, Bitcoin real-time market, bitcoin trend, digital currency exchange, where to buy bitcoin, how to buy bitcoin, contract exchange, contract exchange ranking, delivery contract, bitcoin contract, BTC contract, contract, what to play Contracts, perpetual contracts, contract exchanges, contract exchange rankings, delivery contracts, bitcoin contracts, BTC contracts, contracts, and how to play contracts",
-  "exchangeNameConfig": "IXX | Digital assets trading community"
+  "exchangeNameConfig": "IXX | Digital assets trading community",
+  "modal": {
+    "safeModal": {
+      "greet": "Dear User:",
+      "content": "IXX.com is a professional trading platform for overseas services. It has been legally operated in accordance with national laws and regulations. IXX.com declares that it will not provide services to the following countries or regions: China, Cuba, Iran, North Korea, Crimea, Sudan, Syria, United States [including all US territories such as Puerto Rico, American Samoa, Guam, Northern Mariana Islands, US Virgin Islands (St. Croix, St. John and St. Thomas)], Bangladesh Country, Bolivia, Ecuador and Kyrgyzstan.",
+      "salute": "Thank you for your continued support to IXX.com!",
+      "confirm": "Accept"
+    }
+  }
 }

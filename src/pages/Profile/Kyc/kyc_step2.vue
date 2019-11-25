@@ -19,7 +19,7 @@ show_box
           <b v-if="!!userName">{{ userName }},</b>
           <b>{{ userNumber }}</b>
         </h3>
-        <h3>
+        <h3 class="pt-10">
           <i>2</i>
           <span>{{$t('kyc_advanced')}}</span>
           <label class="pending">{{$t('kyc_title_state_padding')}}</label>

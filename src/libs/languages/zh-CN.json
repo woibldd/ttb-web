@@ -533,7 +533,7 @@
   "footer_contract_jb": "加入币用交流群",
   "user_guide": "新手指引",
   "withdraw_need_verify": "提币需要完成以下认证",
-  "withdraw_need_verify_note": "为保证您的资产安全，请完成：",
+  "withdaraw_need_verify_note": "为保证您的资产安全，请完成：",
   "bind_email": "绑定邮箱",
   "bind_phone": "绑定手机",
   "complete_verified": "完成身份认证",
@@ -1366,7 +1366,7 @@
   "contract_usdt_bon8h": "USD  rate",
   "contract_over_us": "Premium index",
   "contract_fee_formula_note": "I＝利率，B＝基础利率，Q＝计价利率，T＝每日资金费率交付时间，P＝溢价率，F＝资金费率",
-  "contract_note_ex_a": "<span style=\"color:#01CED1\">资金费率</span>是用户间的资金费率。使用",
+  "contract_note_ex_a": "<span style=\"color:#01CED1\">资金费率</span>是用户间的资金费率。",
   "contract_note_ex_b": "使用<span style=\"color:#01CED1\">溢价率</span>来计算，并可受到<span style=\"color:#01CED1\">利率</span>调整至多0.05%。",
   "contract_label_formula": "公式",
   "contract_label_result": "结果",
@@ -2434,9 +2434,12 @@
     }
   },
   "home": {
+    "nav": {
+      "information":"行业资讯"
+    },
     "footer": {
       "affiliate": "代理申请：support@ixx.com",
-      "explain": "IXX犀牛交易所是全球首家数字资产交易共同体，总部在新加坡，其致力于实现交易所生态的区块链理想国，打造人人的交易所，我为人人，人人为我，所有参与交易所的贡献者者均可共享交易所的发展成果。",
+      "explain": "IXX犀牛交易所是全球首家数字资产交易共同体，总部在新加坡，其致力于实现交易所生态的区块链理想国，打造人人的交易所，我为人人，人人为我，所有参与交易所的贡献者均可共享交易所的发展成果。",
       "footer_contract_desc": "添加客服微信",
       "information":"行业资讯"
     },
@@ -2766,5 +2769,13 @@
     }
   },
   "seo_keywords": "炒币，比特币，比特币交易所 ，比特币价格今日行情，比特币走势，数字货币交易所，比特币去哪买，比特币如何购买，比特币交易所、比特币价格今日行情、比特币实时行情、比特币走势、数字货币交易所、比特币去哪买、比特币如何购买、合约交易所、合约交易所排名、交割合约、比特币合约、BTC合约、合约是什么、怎么玩合约、永续合约、合约交易所、合约交易所排名、交割合约、比特币合约、BTC合约、合约是什么、怎么玩合约",
-  "exchangeNameConfig": "IXX | 数字资产交易共同体"
+  "exchangeNameConfig": "IXX | 数字资产交易共同体",
+  "modal": {
+    "safeModal": {
+      "greet": "尊敬的用戶：",
+      "content": "IXX.com是一家专业服务于海外的交易平台，一直以来都遵循各国法律法规合法运营，IXX.com声明不会向以下国家或地区提供服务：中国、古巴、伊朗、朝鲜、克里米亚、苏丹、叙利亚、美国[包括所有美国领土，如波多黎各、美属萨摩亚、关岛、北马里亚纳群岛邦、美属维尔京群岛（圣克罗伊岛、圣约翰岛和圣托马斯岛）]、孟加拉国、玻利维亚、厄瓜多尔和吉尔吉斯斯坦。",
+      "salute": "感谢您对IXX.com一如既往的支持！",
+      "confirm": "我已知晓"
+    }
+  }
 }
