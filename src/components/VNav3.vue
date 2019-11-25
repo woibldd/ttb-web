@@ -53,13 +53,13 @@
                     class="link"
                   >{{ $t('bidTitle') }}</a>
                 </li>
-                <li class="dropdown-item pl-24 pr-24" v-if="isLogin">
+                <!-- <li class="dropdown-item pl-24 pr-24" v-if="isLogin">
                   <a
                     href="/snowball"
                     :class="{'router-link-active': from === 'contract'}"
                     class="link"
                   >{{ $t('playBTC') }}</a>
-                </li>
+                </li> -->
               </ul>
               </div>
             </el-popover>

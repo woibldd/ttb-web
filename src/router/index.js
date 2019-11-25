@@ -352,7 +352,7 @@ export const routes = [
   ...otherRouter,
   {
     path: '/snowball',
-    redirect:'/snowball/playBTC',
+    redirect:'/snowball/bazaar',
     name:'snowball',
     meta: {
       nav: true,
@@ -371,16 +371,16 @@ export const routes = [
         // },
         component: Bid,
       },
-      {
-        path: '/snowball/playBTC',
-        name: 'playBTC',
-        // meta: {
-        //   nav: true,
-        //   footer: true,
-        //   class: 'dark'
-        // },
-        component: () => import('@/pages/Bid/playBTC')
-      },
+      // {
+      //   path: '/snowball/playBTC',
+      //   name: 'playBTC',
+      //   // meta: {
+      //   //   nav: true,
+      //   //   footer: true,
+      //   //   class: 'dark'
+      //   // },
+      //   component: () => import('@/pages/Bid/playBTC')
+      // },
     ]
   },
   // {
