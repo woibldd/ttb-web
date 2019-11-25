@@ -120,14 +120,18 @@ export default {
     },
     prev() {
       this.rank++
-      this.activityInfo = this.list.filter(item => (item.rank = this.rank))
+      console.log(this.rank, 'prev')
+      this.activityInfo = this.list.filter(item => (item.rank === this.rank))[0]
+      console.log(this.activityInfo, 'prev')
       if (this.activityInfo) {
         this.init(this.activityInfo.id)
       }
     },
     next() {
       this.rank--
-      this.activityInfo = this.list.filter(item => (item.rank = this.rank))
+      console.log(this.rank, 'next')
+      this.activityInfo = this.list.filter(item => (item.rank === this.rank))[0]
+      console.log(this.activityInfo, 'next')
       if (this.activityInfo) {
         this.init(this.activityInfo.id)
       }
