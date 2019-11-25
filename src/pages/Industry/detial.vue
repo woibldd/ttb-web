@@ -20,7 +20,9 @@
                 <p>来源: <span> {{ activityInfo.source }} </span></p>
               </div>
             </div>
-            <div class="content" v-html="activityInfo.content"></div>
+            <div>
+              <div class="content" v-html="activityInfo.content"></div>
+            </div>
           </div>
         </div>
         <div class="group">
@@ -192,10 +194,10 @@ export default {
     clear: both;
     .content {
       margin: 0 20px 20px 20px;
-      p {
+      & >>> p {
         display: block;
       }
-      img {
+      & >>> img {
         display: block;
         margin: 10px auto;
       }
@@ -257,7 +259,7 @@ export default {
               line-height: 40px;
             }
             h1 {
-              font-size: 20px;
+              font-size: 18px;
               color: #030303;
               overflow: hidden;
               text-overflow:ellipsis;
@@ -370,5 +372,17 @@ export default {
       }
       }
     }
+  }
+</style>
+<style scoped>
+  .content >>> p {
+    display: block;
+  }
+  .content >>> img {
+    display: block;
+    width: 100%;
+    zoom: 1;
+    margin: 10px auto;
+    overflow: hidden;
   }
 </style>

@@ -6,7 +6,7 @@
           <img src="../../assets/images/text.png" alt="" style="zoom: 1;display: block;margin: 0 auto;">
         </template>
         <template v-else>
-          <img src="../../assets/images/text1.jpg" alt="" style="zoom: 1;display: block;margin: 0 auto;">
+          <img src="../../assets/images/text1.png" alt="" style="zoom: 1;display: block;margin: 0 auto;">
         </template>
       </div>
       <div class="broker-btn wow fadeInUp">

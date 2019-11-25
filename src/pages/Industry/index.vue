@@ -24,7 +24,7 @@
                     <p>来源: <span> {{ item.source }} </span></p >
                   </div>
                   <div class="time">
-                    <p>发布时间: <span style="padding-left: 30px;"> {{ item.release_time }} </span></p >
+                    <p>发布时间: <span style="padding-left: 10px;"> {{ item.release_time }} </span></p >
                   </div>
                 </div>
               </div>
@@ -254,7 +254,7 @@ export default {
             }
           }
           h1 {
-            font-size: 20px;
+            font-size: 18px;
             color: #030303;
             overflow: hidden;
             text-overflow:ellipsis;
@@ -278,6 +278,7 @@ export default {
       float: left;
       margin-left: 30px;
       color: #525252;
+      margin-bottom: 20px;
       .btn-1 {
         width:156px;
         height:52px;
@@ -298,7 +299,6 @@ export default {
         padding: 12px;
         background:rgba(255,255,255,1);
         box-shadow:0px 1px 15px 0px rgba(209,209,209,1);
-        overflow: hidden;
         .tab {
           display: flex;
           li {
