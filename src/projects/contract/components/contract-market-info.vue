@@ -8,7 +8,7 @@
           :to="{name: 'TradeIndex', params: {pair: state.ct.pair}}"
           class="pointer c-primary">{{ $t('contract_more_resource') }}</router-link>
       </div>
-      <div class="ix-pannel-body pt-24">
+      <div class="ix-pannel-body pt-17">
         <div class="info__row flex-cloumn">
           <div
             class="cur-price mb-18"
