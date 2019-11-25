@@ -6,7 +6,7 @@ import { getUser } from '@/utils/auth'
 // create an axios instance
 // axios.defaults.withCredentials = true
 const service = axios.create({
-  baseURL:location.hostname.includes('ixx.com')?'https://i.ixx.com':'https://i.ixex.pro', // url = base url + request url
+  baseURL:location.hostname.includes('ixx.com')?'':'https://i.ixex.pro', // url = base url + request url
   withCredentials: true, // send cookies when cross-domain requests
   timeout: 10000 // request timeout
 })
@@ -19,10 +19,10 @@ service.interceptors.request.use(
     // const userDataStr = getUser()
     // console.log(store,222);
     console.log(process.env.NODE_ENV);
-    
+
     if (store.state.userData) {
       console.log(store.state.userData,22);
-      
+
       config.headers['token'] = store.state.userData.token
       // config.headers['ix_session_id'] = store.state.userData.ix_session_id
     }
