@@ -61,9 +61,9 @@
             :label="$t('homechart_24h_v')"
             :state="stateSortBy('vol')"/>
         </div>
-        <div class="head-item percent8">
+        <!-- <div class="head-item percent8">
            type
-        </div>
+        </div> -->
         <div class="head-item percent8">
           {{ $t('actions') }}
         </div>
@@ -111,10 +111,7 @@
               <div class="row__item percent14_8">
                 {{ pretty(pair.tick.volume_24h) }}<span> {{ pair.product }}</span>
               </div>
-              <div
-                class="row__item percent8 tg" >
-                 {{pair.type}}
-              </div>
+             
               <div
                 class="row__item percent8 tg"
                 @click="toExchange(pair.name)">
