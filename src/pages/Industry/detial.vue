@@ -46,6 +46,7 @@
 
 <script type="text/ecmascript-6">
 import market from "./market";
+import {state} from '@/modules/store'
 import { collectActivity, getList2 } from '../../api/user';
 export default {
   components: {
