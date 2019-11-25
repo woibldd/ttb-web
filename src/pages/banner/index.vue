@@ -421,9 +421,9 @@ export default {
         display: block;
         visibility: visible;
       }
-      .nav_link {
-        color: $primary;
-      }
+      // .nav_link {
+      //   color: $primary;
+      // }
       .arrow {
         transform: rotate(180deg);
       }
@@ -472,9 +472,9 @@ export default {
     }
   }
 
-  &:hover {
-    color: $primary;
-  }
+  // &:hover {
+  //   color: $primary;
+  // }
 
   &.router-link-active {
     color: $primary;
