@@ -2766,5 +2766,13 @@
     }
   },
   "seo_keywords": "炒币，比特币，比特币交易所 ，比特币价格今日行情，比特币走势，数字货币交易所，比特币去哪买，比特币如何购买，比特币交易所、比特币价格今日行情、比特币实时行情、比特币走势、数字货币交易所、比特币去哪买、比特币如何购买、合约交易所、合约交易所排名、交割合约、比特币合约、BTC合约、合约是什么、怎么玩合约、永续合约、合约交易所、合约交易所排名、交割合约、比特币合约、BTC合约、合约是什么、怎么玩合约",
-  "exchangeNameConfig": "IXX | 数字资产交易共同体"
+  "exchangeNameConfig": "IXX | 数字资产交易共同体",
+  "modal": {
+    "safeModal": {
+      "greet": "Dear User:",
+      "content": "IX.com operates legally in compliance with national laws and regulations and regularly discusses the best practices for compliance monitoring with regulatory agencies. To promote industry compliance, IX.com does not provide services to the following countries: Cuba, Iran, North Korea, Crimea, China, Sudan, Syria, United States [including all US territories such as Puerto Rico, American Satsuma Asia, Guam, Northern Mariana Islands, US Virgin Islands (St. Croix, St. John and St. Thomas), Bangladesh, Bolivia, Ecuador and Kyrgyzstan.",
+      "salute": "Thank you for your support to IX.com!",
+      "confirm": "Accept"
+    }
+  }
 }

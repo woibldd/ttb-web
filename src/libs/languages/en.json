@@ -2896,5 +2896,13 @@
     }
   },
   "seo_keywords": "speculation, bitcoin, bitcoin exchange, bitcoin price today, bitcoin trend, digital currency exchange, where to buy bitcoin, how to buy bitcoin, bitcoin exchange, bitcoin price today, Bitcoin real-time market, bitcoin trend, digital currency exchange, where to buy bitcoin, how to buy bitcoin, contract exchange, contract exchange ranking, delivery contract, bitcoin contract, BTC contract, contract, what to play Contracts, perpetual contracts, contract exchanges, contract exchange rankings, delivery contracts, bitcoin contracts, BTC contracts, contracts, and how to play contracts",
-  "exchangeNameConfig": "IXX | Digital assets trading community"
+  "exchangeNameConfig": "IXX | Digital assets trading community",
+  "modal": {
+    "safeModal": {
+      "greet": "Dear User:",
+      "content": "IX.com operates legally in compliance with national laws and regulations and regularly discusses the best practices for compliance monitoring with regulatory agencies. To promote industry compliance, IX.com does not provide services to the following countries: Cuba, Iran, North Korea, Crimea, China, Sudan, Syria, United States [including all US territories such as Puerto Rico, American Satsuma Asia, Guam, Northern Mariana Islands, US Virgin Islands (St. Croix, St. John and St. Thomas), Bangladesh, Bolivia, Ecuador and Kyrgyzstan.",
+      "salute": "Thank you for your support to IX.com!",
+      "confirm": "Accept"
+    }
+  }
 }

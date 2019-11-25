@@ -209,6 +209,11 @@
       </div>
     </div>
     <v-download />
+    <v-modal
+      class="safe-modal"
+      :open.sync="showSafeModal">
+      <safeModal @close="closeSafe" />
+    </v-modal>
   </div>
 </template>
 <script>
@@ -223,6 +228,7 @@ import ixInput from '@/components/common/ix-input/ix-input.vue'
 import responsive from '@/mixins/responsive'
 import bubble from '@/components/Bubble'
 import VDownload from '@/components/VDownload'
+import safeModal from '@/pages/login/safeModal'
 
 // import { MdField } from 'vue-material/dist/components'
 // import gtMixin from '@/mixins/gt'
@@ -305,7 +311,8 @@ export default {
       showTutorialArrow: false,
       pwdType: 'password',
       pwdType2: 'password',
-      routerParams: ''
+      routerParams: '',
+      showSafeModal: true
     }
   },
   /* beforeRouteEnter (to, from, next) {
@@ -525,6 +532,9 @@ export default {
         console.log(e)
       }
     },
+    closeSafe () {
+      this.showSafeModal = false
+    }
 
   },
   mounted () {
