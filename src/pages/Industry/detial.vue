@@ -46,7 +46,7 @@
 
 <script type="text/ecmascript-6">
 import market from "./market";
-import { collectActivity } from '../../api/user';
+import { collectActivity, getList } from '../../api/user';
 export default {
   components: {
     market
@@ -57,7 +57,8 @@ export default {
       total: 0,
       currentPage: 1,
       i: 1,
-      activityInfo: {}
+      activityInfo: {},
+      rank: ''
     }
   },
   computed: {
@@ -118,23 +119,62 @@ export default {
       return Y + M + D
     },
     prev() {
-      this.i--
-      if (this.i < 0) {
-        this.i = this.ids.length
+      this.rank++
+      this.activityInfo = this.list.filter(item => (item.rank = this.rank))
+      if (this.activityInfo) {
+        this.init(this.activityInfo.id)
       }
-      this.activityInfo = this.list[this.i - 1]
-      this.activityInfo.release_time = this.timestampToTime(this.activityInfo.release_time)
     },
     next() {
-      this.i++
-      if (this.i > this.ids.length) {
-        this.i = 1
+      this.rank--
+      this.activityInfo = this.list.filter(item => (item.rank = this.rank))
+      if (this.activityInfo) {
+        this.init(this.activityInfo.id)
       }
-      this.activityInfo = this.list[this.i - 1]
+    },
+    getNewQuery (oldQuery, name, val) {
+      var obj = {}, // 这里初始化一定是{}而不是null,否则会出错
+        flag = false;
+
+      for (key in oldQuery) {
+        if (oldQuery.hasOwnProperty(key)) {
+          if (key === name) {
+            // 这里是修改已有参数
+            obj[key] = val;
+            flag = true;
+          } else {
+            obj[key] = oldQuery[key]
+          }
+        }
+      }
+
+      // 这里是新增参数
+      if (!flag) {
+        obj[name] = val
+      }
+      return obj;
+    },
+    init(id) {
+      getList({
+        user_id: this.userId,
+        id: id
+      }).then((res) => {
+        if (res.code === 200) {
+          this.activityInfo = res.data
+          this.activityInfo.release_time = this.timestampToTime(this.activityInfo.release_time)
+          this.$router.push({
+            query: {
+              id: this.activityInfo.id,
+              rank: this.activityInfo.rank
+            }
+          })
+        }
+      })
     }
   },
   created() {
-    this.activityInfo = this.list.filter(item => (item.id === this.activityId))[0]
+    this.init(this.activityId)
+    this.rank = Number(this.$route.query.rank)
   }
 }
 </script>

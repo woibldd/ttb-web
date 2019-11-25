@@ -78,3 +78,9 @@ export const symbolList = (data) => request({
   method: 'post',
   data
 })
+export const getList = (data) => request({
+  url: '/future/activity/news/getList',
+  method: 'post',
+  data
+})
+

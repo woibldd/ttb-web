@@ -110,7 +110,8 @@ export default {
       this.$router.push({
         path: `/industryDetail`,
         query: {
-          id: item.id
+          id: item.id,
+          rank: item.rank
         }
       })
     },
