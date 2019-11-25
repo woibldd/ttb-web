@@ -131,6 +131,9 @@
       .layer__row_note {
           color: $text-weak;
           font-size: 16px;
+          .row__label {
+            padding-left: 20px; 
+          }
       }
       .layer__row {
           width: 330px;

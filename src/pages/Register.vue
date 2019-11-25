@@ -241,7 +241,8 @@ export default {
     resbg,
     ixInput,
     bubble,
-    VDownload
+    VDownload,
+    safeModal
   },
   props: ['by'],
   data () {

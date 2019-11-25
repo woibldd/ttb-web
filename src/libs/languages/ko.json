@@ -2763,10 +2763,10 @@
   "exchangeNameConfig": "IXX | 수자 재산 거래 공동체",
   "modal": {
     "safeModal": {
-      "greet": "Dear User:",
-      "content": "IX.com operates legally in compliance with national laws and regulations and regularly discusses the best practices for compliance monitoring with regulatory agencies. To promote industry compliance, IX.com does not provide services to the following countries: Cuba, Iran, North Korea, Crimea, China, Sudan, Syria, United States [including all US territories such as Puerto Rico, American Satsuma Asia, Guam, Northern Mariana Islands, US Virgin Islands (St. Croix, St. John and St. Thomas), Bangladesh, Bolivia, Ecuador and Kyrgyzstan.",
-      "salute": "Thank you for your support to IX.com!",
-      "confirm": "Accept"
+      "greet": "존경하는 사용자:",
+      "content": "IXX.com은 해외 전문 서비스 거래 플랫폼, 그동안 각국 법률 법규에 따라 합법적 운영 IXX.com 성명 이하 국가 또는 지역에 서비스를 제공하였다. 중국 · 쿠바 · 이란 · 북한 · 크림 · 수단 · 시리아 · 미국 [모든 미국 영토를 포함 한다. 례를들면 푸에르토리코, 미국령 사모아, 괌, 마리 아나 군도 본, 미국령 버 진 아일랜드 (세인트 크 로이 섬, 세인트 존과 세인트 토머스 섬)], 방글라데시 · 볼리비아 · 에콰도르와 끼 르 끼 즈 스 딴다.",
+      "salute": "IXX.com의 변함없는 지지에 감사드립니다!",
+      "confirm": "나는 이미 알고있다"
     }
   }
 }
