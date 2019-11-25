@@ -1,6 +1,6 @@
 #!/bin/sh 
  
-# npm run build
+npm run build
 
 sleep 2
 
