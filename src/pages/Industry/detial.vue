@@ -46,7 +46,7 @@
 
 <script type="text/ecmascript-6">
 import market from "./market";
-import { collectActivity, getList } from '../../api/user';
+import { collectActivity, getList1 } from '../../api/user';
 export default {
   components: {
     market
@@ -155,7 +155,7 @@ export default {
       return obj;
     },
     init(id) {
-      getList({
+      getList1({
         user_id: this.userId,
         id: id
       }).then((res) => {
