@@ -43,10 +43,12 @@
             range-separator="-"  
             :start-placeholder="$t('fund.contract.start')"
             :end-placeholder="$t('fund.contract.end')"/>
+            <el-button type='default' @click="query" class="ml-30">{{$t('fund.contract.query')}}</el-button>
+             
         </div>
       </div>
       <div flex-box="0">
-        <el-button type='default' @click="query" class="ml-20">{{$t('fund.contract.query')}}</el-button>
+        
       </div>
       
     </div>
