@@ -16,7 +16,7 @@
         <span v-if="activeTotal">[{{ activeTotal }}]</span>
       </a>
       <a
-        v-if="utils.isTestnet"
+        v-if="isTestnet"
         class="ix-header-nav raw"
         :class="{cur: tab === 'stop'}"
         @click.prevent="setTab('stop')">
@@ -228,7 +228,7 @@
       </div>
     </div>
      <div
-      v-if="utils.isTestnet"
+      v-if="isTestnet"
       class="ix-panel-body"
       v-show="tab === 'stop'"
       ref="stop"
@@ -350,6 +350,13 @@ export default {
     }
   },
   computed: {
+    isTestnet() { 
+      return (
+        location.hostname.indexOf("ixex.pro") >= 0 ||
+        location.hostname.includes("localhost") ||
+        location.hostname.includes("127.0.0.1")
+      );
+    },
     pair () {
       if (this.state.pro.pair) {
         return this.state.pro.pair.replace(/_/, '/')

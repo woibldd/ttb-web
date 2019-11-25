@@ -17,7 +17,7 @@
         {{ $t('operate_market') }}
       </a>
       <a
-        v-if="utils.isTestnet"
+        v-if="isTestnet"
         class="ix-header-nav raw stop"
         :class="{cur: tab === 'stop'}"
         @click.prevent="setTab('stop')">
@@ -94,6 +94,15 @@ export default {
         name: 'login'
       })
     }
+  },
+  computed: {
+    isTestnet() { 
+      return (
+        location.hostname.indexOf("ixex.pro") >= 0 ||
+        location.hostname.includes("localhost") ||
+        location.hostname.includes("127.0.0.1")
+      );
+    },
   },
   destroyed () {
     this.$eh.$off('app:resize', this.onresize)
