@@ -156,6 +156,8 @@
 import service from '@/modules/service'
 import processValue from '@/mixins/process-contract-value'
 import trendCharts from './highcharts'
+import utils from '@/modules/utils'
+
 export default {
   mixins: [ processValue],
   components: {trendCharts},
@@ -203,7 +205,7 @@ export default {
     }
   },
   methods: {
-    getFundHistory () {
+    async getFundHistory () {
       const params = {
         currency: this.currencyPair,
         page: this.pages.page,
@@ -213,21 +215,27 @@ export default {
         params.begin_time = this.timeRange[0] * 1
         params.end_time = this.timeRange[1] * 1
       }  
-      service.getFutureCloseRealized(params).then(res => { 
-        if (!!res && !res.code) {
-          this.tableData = res.data.data.close_realized_list
-          this.pages = res.data 
-          this.realized = res.data.data
-        }
-      })
+      let res = await service.getFutureCloseRealized(params)
+      if (!!res && !res.code) {
+        this.tableData = res.data.data.close_realized_list
+        this.pages = res.data
+        this.realized = res.data.data
+        return true
+      } else {
+        utils.alert(res.message)
+        return false
+      }
     },
     query() {
       this.getFundHistory(); 
     },
-    pageChange(e) {
-      console.log({e})
+    async pageChange (e) {
+      let temp = this.pages.page
       this.pages.page = e
-      this.getFundHistory(); 
+      let res = await this.getFundHistory()
+      if (!res) {
+        this.pages.page = temp
+      }
     },
     translateByRate (value) {
       if (!this.rates) return 

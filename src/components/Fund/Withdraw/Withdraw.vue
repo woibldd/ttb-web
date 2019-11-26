@@ -329,22 +329,39 @@
         <div class="layer__content">
           <div class="layer__row_note">
             <div class="row__label">{{ $t('withdraw_need_verify_note') }}</div>
-          </div>
-          <div class="layer__row mt-30">
-            <span class="row__label">1. {{ $t('fund.withdraw.bind_google') }}</span>
-            <span class="row__status"
+          </div> 
+          <div
+            class="layer__row mt-30"
+            flex="main">
+            <span
+              flex-box="1"
+              class="row__label">1. {{ $t('fund.withdraw.bind_google') }}</span>
+            <span
+              flex-box=0
+              class="row__status"
               @click="clickVerifyRow('GoogleBind')"
               :class="{'done': google_bound}">{{ google_bound ? $t('fund.withdraw.done') : $t('fund.withdraw.to_bind') }}</span>
           </div>
-          <div class="layer__row mt-20">
-            <span class="row__label">2. {{ $t('fund.withdraw.to_deposit_tips') }}</span> 
+          <div
+            class="layer__row mt-20"
+            flex="main">
+            <span
+              class="row__label"
+              flex-box="1">2. {{ $t('fund.withdraw.to_deposit_tips') }}</span>
+            <span
+              flex-box="0"
+              class="row__status done" >
+              <span v-if="isDeposited">{{ $t('fund.withdraw.done') }}</span>
+            </span>
           </div>
-          <div class="layer__row mt-20 pl-20">
-            <el-button v-if="!isDeposited" type="primary"
-               @click="clickVerifyRow('deposit')"
-              >{{ $t('fund.withdraw.to_deposit') }}</el-button>
-            <span v-else class="row__status done" >{{ $t('fund.withdraw.done') }}</span>
-          </div> 
+          <div
+            v-if="!isDeposited"
+            class="layer__row mt-20 pl-20">
+            <el-button
+              type="primary"
+              @click="clickVerifyRow('deposit')"
+            >{{ $t('fund.withdraw.to_deposit') }}</el-button>
+          </div>
         </div>
       </div>
     </v-modal>
