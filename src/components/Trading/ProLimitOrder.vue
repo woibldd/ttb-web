@@ -770,7 +770,7 @@ export default {
 }
 .ix-slider {
   padding: 0;
-  // margin-right: 30px;
+  margin-right: 20px;
   position: relative;
   box-sizing: border-box;
   @include clearfix();
