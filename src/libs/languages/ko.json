@@ -2684,12 +2684,12 @@
       "hide_canceled": "숨김 철회",
       "order_price":"위탁가격",
       "orderdeal_fee": "수수료",
-      "order_trigger_price": "트리거 프라이스",
-       "order_amount": "위탁량",
-      "order_total": "총액 위탁",
-      "order_executed_amount": "금액거래",
-      "order_executed_qty": "거래량",
-      "order_surplus": "나머지 량"
+      "order_trigger_price": "트리거 프라이스", 
+      "order_amount": "위탁량",
+     "order_total": "총액 위탁",
+     "order_executed_amount": "금액거래",
+     "order_executed_qty": "거래량",
+     "order_surplus": "나머지 량"
     }, 
     "stop_order": {  
       "trigger_price": "트리거 프라이스",
