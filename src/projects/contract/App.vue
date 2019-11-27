@@ -11,7 +11,7 @@
       from="contract"
       :class="[navClass]"/>
     <router-view/>
-    <!-- <v-notify-list/> -->
+    <v-notify-list/>
   </div>
 </template>
 
