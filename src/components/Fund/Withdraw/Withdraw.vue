@@ -413,8 +413,8 @@ export default {
       return ` <div
             class="attention__tips">
             <p class="title mb-8">${this.$t('about_eos_address_label')}</p>
-            <p class="mb-4">${this.$t('about_eos_address_label_a')}</p>
-            <p >${this.$t('about_eos_address_label_b')}</p>
+            <p class="mb-4">${this.$t('about_eos_address_label_a', {currency: this.selectCoin.currency})}</p>
+            <p >${this.$t('about_eos_address_label_b', {currency: this.selectCoin.currency})}</p>
           </div>`
     },
     contact_phone () {

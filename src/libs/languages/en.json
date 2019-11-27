@@ -1242,8 +1242,8 @@
   "moblie_login_banner_million_champ": "<span style=\"color: #22ced0\">Million USDT </span>Challenge",
   "moblie_login_banner_click_challange": "Click to START",
   "about_eos_address_label": "About address tag",
-  "about_eos_address_label_a": "Topping up EOS requires a top up address and an EOS address tag (or tag/memo, etc.). Address tag is a numeric string that guarantees the uniqueness of your coin address and appears in pairs with the coin address.",
-  "about_eos_address_label_b": "Please remember to follow the correct steps when topping up EOS. Enter the complete information when doing withdrawal to avoid the risk of losing coins!",
+  "about_eos_address_label_a": "Topping up %{currency} requires a top up address and an %{currency} address tag (or tag/memo, etc.). Address tag is a numeric string that guarantees the uniqueness of your coin address and appears in pairs with the coin address.",
+  "about_eos_address_label_b": "Please remember to follow the correct steps when topping up %{currency}. Enter the complete information when doing withdrawal to avoid the risk of losing coins!",
   "activity_lock_thrid_party_provide": "This mining software is provided by third party and is free for all users. Users are responsible for any risk of losing.",
   "activity_lock_start_use_robot": "Start using robots",
   "activity_lock_self_mine_price": "Personal mining price",
@@ -2820,11 +2820,11 @@
       "order_price":"Price",
       "orderdeal_fee": "Fees",
       "order_trigger_price": "Trigger Price",
-      "order_amount": "委托量",
-      "order_total": "委托总额",
-      "order_executed_amount": "成交总额",
-      "order_executed_qty": "成交量",
-      "order_surplus": "剩余量"
+      "order_amount": "Amount",
+      "order_total": "Total",
+      "order_executed_amount": "Executed Amount",
+      "order_executed_qty": "Executed Qty",
+      "order_surplus": "Balance"
     }, 
     "stop_order": {   
       "trigger_price": "Trigger Price",
