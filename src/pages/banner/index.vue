@@ -28,15 +28,6 @@
                   </el-carousel-item>
                 </el-carousel>
               </div>
-              <div class="item-dot1" v-if="item.type === 1" @mousemove="hoverHandle(false)" @mouseleave="hoverHandle(true)">
-                <el-carousel ref="carousel3" :initial-index="dot2" indicator-position="outside" :autoplay="true" :loop="true" @change="carouselChange3">
-                  <el-carousel-item v-for="(child, i) in item.list" :key="i">
-                    <a :href="child.url" target="_blank">
-                      <img :src="child.picture" alt="">
-                    </a>
-                  </el-carousel-item>
-                </el-carousel>
-              </div>
             </template>
           </el-carousel-item>
         </el-carousel>
@@ -134,10 +125,6 @@ export default {
         {
           type: 2,
           list: []
-        },
-        {
-          type: 1,
-          list: []
         }
       ],
       buy: {
@@ -197,7 +184,6 @@ export default {
         if (res.code === 0) {
           const firstList = res.data.filter(item => (item.slot === 3))
           const secondList = res.data.filter(item => (item.slot === 2))
-          const threeList = res.data.filter(item => (item.slot === 1))
           var result = []
           var result1 = []
           if (firstList.length > 0) {
@@ -221,8 +207,6 @@ export default {
           this.dotIndex = this.banner[0].list.length
           this.banner[1].list = secondList
           this.dot1Index = this.banner[1].list.length
-          this.banner[2].list = threeList
-          this.dot2Index = this.banner[2].list.length
           this.banner = this.banner.filter(item => (item.list.length > 0))
         }
       })
@@ -286,6 +270,7 @@ export default {
   height: 400px;
   background: #00b9db;
   overflow: hidden;
+  clear: both;
   background: url("./img/bj-zh-CN.png") top center no-repeat;
   &.en {
     background-image: url('./img/bj-en.png')
@@ -308,11 +293,15 @@ export default {
   /*  background: #09c989 !important;*/
   /*}*/
   .el-carousel__container {
-    height: 400px;
+    height: 130px;
+  }
+  .banner-list {
+    height: 130px;
+    margin: 230px auto 0;
   }
   .item-dot {
     width: 1200px;
-    margin: 210px auto 0;
+    margin: 0 auto;
     position: relative;
     z-index: 1;
     a {
