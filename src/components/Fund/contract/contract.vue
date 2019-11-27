@@ -149,7 +149,7 @@
               <span
                 v-tooltip.top-center="{html: true, content: $t('contract_account_rights_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help special">{{ $t('contract_account_rights') }}</span>
-              <span class="c-333">{{ holding.available | fixed(8) }} {{ selectPair.product_name }}</span>
+              <span class="c-333">{{ (holding.available || 0) | fixed(8) }} {{ selectPair.product_name }}</span>
               <span
                 class="c-999"
                 style="transform: scale(0.8);position:absolute;margin-left: 90px;">≈ {{ translateByRate(holding.available) }} USD</span>

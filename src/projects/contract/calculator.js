@@ -116,25 +116,40 @@ export default {
     
     if (lever == 0) {
       lever = symbol.max_leverage
-    }
+    } 
+
     let open_value = Big(0)
     let close_value = Big(0)
     let margin = Big(0)
+    let realized = Big(0)
+    let realized_roe = Big(0)
+    let roe = Big(0)
 
     if (symbol.product_name === 'BTC') {
       open_value = Big(amount).div(open_price || 1).abs()
-      // close_value = Big(amount).div(close_price || 1).abs()
-      close_value = Big(close_price).div(open_price || 1).mul(open_value).abs()
-      margin = Big(open_value).mul(100).div(lever || 100).mul(0.01).abs()
+      close_value = Big(amount).div(close_price || 1).abs()
+
+      margin = open_value.div(lever)
+      if (Big(amount).gt(0)) {
+        realized = open_value.minus(close_value)
+      } else {
+        realized = close_value.minus(open_value)
+      }
+      realized_roe = realized.div(open_value).times(100)
+      roe = realized_roe.times(lever)
     } else {
-      open_value =  Big(amount || 0).times(open_price || 0).times(symbol.multiplier).abs()
-      close_value = Big(close_price).div(open_price || 1).mul(open_value).abs() 
-      margin = Big(open_value).mul(symbol.max_leverage).div(lever || symbol.max_leverage).mul(symbol.im).abs()
+      open_value = Big(amount || 0).times(open_price || 0).times(symbol.multiplier).abs()
+      close_value = Big(amount || 0).times(close_price || 0).times(symbol.multiplier).abs()
+      margin = open_value.div(lever)
+      if (Big(amount).gt(0)) {
+        realized = close_value.minus(open_value)
+      } else {
+        realized = open_value.minus(close_value)
+      }
+      realized_roe = realized.div(open_value).times(100)
+      roe = realized_roe.times(lever)
     }
 
-    let realized = close_value.minus(open_value).mul(amount < 0 ? -1 : 1)
-    let realized_roe = realized.div(open_value || 1).mul(100)
-    let roe = realized_roe.mul(lever)
 
     return {
       open_value,
@@ -185,7 +200,13 @@ export default {
 
     //let totalValue = this.getTotalValue()
     let value = Big(vol).div(hp)
-    let im = this.getCostValue({lever, im: 0.01, value, r}).margin//margin = Big(value).mul(100 / lever).mul(im)
+    let count = (Big(value).minus(pairInfo.base_risk)).div(pairInfo.gap_risk).round(0, 3)
+    if (Big(count).lte(1)) {
+      count = Big(0)
+    }
+    // let im = this.getCostValue({lever, im: 0.01, value, r}).margin  
+    let im = Big(pairInfo.im).plus(count.mul(pairInfo.mm))
+    im = value.div(lever).times(Big(im).plus(1)) 
     let mm = Big(value).mul(0.005) // this.getCostValue({lever, im: 0.005, value, r}).margin
     let avia = holding.available_balance
     const isCross = mode === 'cross'

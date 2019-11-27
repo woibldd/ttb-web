@@ -77,7 +77,7 @@ export default {
   }
   .modal-wrap {
     position: relative;
-    border-radius: 3px;
+    border-radius: 5px;
     z-index: 1;
   }
   .modal-mask {

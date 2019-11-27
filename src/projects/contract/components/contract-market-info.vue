@@ -208,7 +208,7 @@ export default {
            font-size: 12px;
            padding-left: 14px;
            padding-right: 25px;
-           margin-bottom: 16px;
+           margin-bottom: 12px;
        }
        .c-primary {
            color: $primary;

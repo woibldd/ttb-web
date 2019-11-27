@@ -459,7 +459,7 @@
   "profile_left_invite_qrcode": "我的邀請二維碼",
   "profile_left_invite_code": "我的邀請碼",
   "profile_left_invite_link": "我的邀請鏈接",
-  "profile_left_invite_safety": "安全認證",
+  "profile_left_invite_safety": "安全驗證",
   "profile_left_copy_invite_code": "複製邀請碼",
   "profile_left_copy_invite_link": "複製分享鏈接",
   "invite_reward_text": "暫無記錄，<a>邀請好友</a>",
@@ -1365,7 +1365,7 @@
   "contract_usdt_bon8h": ".USDBON8H",
   "contract_over_us": ".BTC永續USDPI8H",
   "contract_fee_formula_note": "I＝利率，B＝基礎利率，Q＝計價利率，T＝每日資金費率交付時間，P＝溢價率，F＝資金費率",
-  "contract_note_ex_a": "<span style=\"color:#22ced0\">資金費率</span>是用戶間的資金費率。使用",
+  "contract_note_ex_a": "<span style=\"color:#22ced0\">資金費率</span>是用戶間的資金費率。",
   "contract_note_ex_b": "使用<span style=\"color:#22ced0\">溢價率</span>來計算，並可受到<span style=\"color:#22ced0\">利率</span>調整至多0.05%。",
   "contract_label_formula": "公式",
   "contract_label_result": "結果",
@@ -2358,9 +2358,12 @@
     }
   },
   "home": {
+    "nav": {
+      "information":"行業資訊"
+    },
     "footer": {
       "affiliate": "代理申請：support@ixx.com",
-      "explain": "IXX犀牛交易所是全球首家數字資產交易共同體，總部在新加坡，其致力於實現交易所生態的區塊鏈理想國，打造人人的交易所，我為人人，人人為我，所有參與交易所的貢獻者者均可共享交易所的發展成果。",
+      "explain": "IXX犀牛交易所是全球首家數字資產交易共同體，總部在新加坡，其致力於實現交易所生態的區塊鏈理想國，打造人人的交易所，我為人人，人人為我，所有參與交易所的貢獻者均可共享交易所的發展成果。",
       "footer_contract_desc": "添加客服微信",
       "information":"行業資訊"
     },
@@ -2690,5 +2693,13 @@
     }
   },
   "seo_keywords": "炒幣，比特幣，比特幣交易所，比特幣價格今日行情，比特幣走勢，數位貨幣交易所，比特幣去哪買，比特幣如何購買，比特幣交易所、比特幣價格今日行情、比特幣即時行情、比特幣走勢、數字貨幣交易所、比特幣去哪買、比特幣如何購買、合約交易所、合約交易所排名、交割合約、比特幣合約、BTC合約、合約是什麼、怎麼玩合約、永續合約、合約交易所、合約交易所排名、交割合約、比特幣合約、BTC合約、合約是什麼、怎麼玩合約",
-  "exchangeNameConfig": "IXX | 數字資產交易共同體"
+  "exchangeNameConfig": "IXX | 數字資產交易共同體",
+  "modal": {
+    "safeModal": {
+      "greet": "尊敬的用戶：",
+      "content": "IXX.com是一家專業服務於海外的交易平台，一直以來都遵循各國法律法規合法運營，IXX.com聲明不會向以下國家或地區提供服務：中國、古巴、伊朗、朝鮮、克里米亞、蘇丹、敘利亞、美國[包括所有美國領土，如波多黎各、美屬薩摩亞、關島、北馬里亞納群島邦、美屬維爾京群島（聖克羅伊島、聖約翰島和聖托馬斯島）]、孟加拉國、玻利維亞、厄瓜多爾和吉爾吉斯斯坦。",
+      "salute": "感謝您對IXX.com一如既往的支持！",
+      "confirm": "我已知曉"
+    }
+  }
 }

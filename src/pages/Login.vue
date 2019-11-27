@@ -210,6 +210,11 @@
         </div>
       </div>
     </v-modal>
+    <v-modal
+      class="safe-modal"
+      :open.sync="showSafeModal">
+      <safeModal @close="closeSafe" />
+    </v-modal>
   </div>
 </template>
 
@@ -225,6 +230,7 @@ import responsive from '@/mixins/responsive'
 import bubble from '@/components/Bubble'
 import VDownload from '@/components/VDownload'
 import { activeShareAccount } from '@/api/share_option'
+import safeModal from '@/pages/login/safeModal'
 export default {
   name: 'Login',
   components: {
@@ -233,7 +239,8 @@ export default {
     ixInput,
     countDown,
     bubble,
-    VDownload
+    VDownload,
+    safeModal
   },
   mixins: [responsive],
   props: ['by'],
@@ -276,7 +283,8 @@ export default {
 
         }
       },
-      prevent: false
+      prevent: false,
+      showSafeModal: true
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -572,6 +580,9 @@ export default {
           utils.alert(res.message)
         }
       })
+    },
+    closeSafe () {
+      this.showSafeModal = false
     }
   }
 }
