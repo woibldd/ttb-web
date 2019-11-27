@@ -5,37 +5,39 @@
          @mousemove="hoverHandle(false)" @mouseleave="hoverHandle(true)"
     >
       <div class="banner-list">
-        <el-carousel ref="carousel" arrow="always" indicator-position="none" :autoplay="false">
-          <el-carousel-item v-for="item in banner" :initial-index="dot" :key="item.type" v-if="item.list.length > 0">
-            <div class="item-dot" v-if="item.type === 3" @mousemove="hoverHandle(false)" @mouseleave="hoverHandle(true)">
-              <el-carousel ref="carousel1" indicator-position="outside" :autoplay="true" :loop="true" @change="carouselChange">
-                <el-carousel-item v-for="(child, i) in item.list" :key="i">
-                  <div class="item-img-list" v-for="(dot, c) in child.list" :key="c">
-                    <a :href="dot.url" target="_blank">
-                      <img :src="dot.picture" alt="">
+        <el-carousel ref="carousel" arrow="always" indicator-position="none" :autoplay="false" :loop="true">
+          <el-carousel-item v-for="item in banner" :initial-index="dot" :key="item.type">
+            <template>
+              <div class="item-dot" v-if="item.type === 3" @mousemove="hoverHandle(false)" @mouseleave="hoverHandle(true)">
+                <el-carousel ref="carousel1" indicator-position="outside" :autoplay="true" :loop="true" @change="carouselChange">
+                  <el-carousel-item v-for="(child, i) in item.list" :key="i">
+                    <div class="item-img-list" v-for="(dot, c) in child.list" :key="c">
+                      <a :href="dot.url" target="_blank">
+                        <img :src="dot.picture" alt="">
+                      </a>
+                    </div>
+                  </el-carousel-item>
+                </el-carousel>
+              </div>
+              <div class="item-dot" v-if="item.type === 2" :initial-index="dot1" @mousemove="hoverHandle(false)" @mouseleave="hoverHandle(true)">
+                <el-carousel ref="carousel2" indicator-position="outside" :autoplay="true" :loop="true" @change="carouselChange1">
+                  <el-carousel-item v-for="(child, i) in item.list" :key="i">
+                    <a :href="child.url" target="_blank">
+                      <img :src="child.picture" alt="">
                     </a>
-                  </div>
-                </el-carousel-item>
-              </el-carousel>
-            </div>
-            <div class="item-dot" v-if="item.type === 2" :initial-index="dot1" @mousemove="hoverHandle(false)" @mouseleave="hoverHandle(true)">
-              <el-carousel ref="carousel2" indicator-position="outside" :autoplay="true" :loop="true" @change="carouselChange1">
-                <el-carousel-item v-for="(child, i) in item.list" :key="i">
-                  <a :href="child.url" target="_blank">
-                    <img :src="child.picture" alt="">
-                  </a>
-                </el-carousel-item>
-              </el-carousel>
-            </div>
-            <div class="item-dot1" v-if="item.type === 1" @mousemove="hoverHandle(false)" @mouseleave="hoverHandle(true)">
-              <el-carousel ref="carousel3" :initial-index="dot2" indicator-position="outside" :autoplay="true" :loop="true" @change="carouselChange3">
-                <el-carousel-item v-for="(child, i) in item.list" :key="i">
-                  <a :href="child.url" target="_blank">
-                    <img :src="child.picture" alt="">
-                  </a>
-                </el-carousel-item>
-              </el-carousel>
-            </div>
+                  </el-carousel-item>
+                </el-carousel>
+              </div>
+              <div class="item-dot1" v-if="item.type === 1" @mousemove="hoverHandle(false)" @mouseleave="hoverHandle(true)">
+                <el-carousel ref="carousel3" :initial-index="dot2" indicator-position="outside" :autoplay="true" :loop="true" @change="carouselChange3">
+                  <el-carousel-item v-for="(child, i) in item.list" :key="i">
+                    <a :href="child.url" target="_blank">
+                      <img :src="child.picture" alt="">
+                    </a>
+                  </el-carousel-item>
+                </el-carousel>
+              </div>
+            </template>
           </el-carousel-item>
         </el-carousel>
       </div>
@@ -221,6 +223,7 @@ export default {
           this.dot1Index = this.banner[1].list.length
           this.banner[2].list = threeList
           this.dot2Index = this.banner[2].list.length
+          this.banner = this.banner.filter(item => (item.list.length > 0))
         }
       })
     },
