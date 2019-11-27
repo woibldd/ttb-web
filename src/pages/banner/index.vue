@@ -293,10 +293,10 @@ export default {
   /*  background: #09c989 !important;*/
   /*}*/
   .el-carousel__container {
-    height: 130px;
+    height: 150px;
   }
   .banner-list {
-    height: 130px;
+    height: 150px;
     margin: 230px auto 0;
   }
   .item-dot {
