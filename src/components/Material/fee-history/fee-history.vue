@@ -48,7 +48,7 @@
             <td class="table__td">{{ processValue('create_time', item) }}</td>
             <!-- <td class="table__td">{{ $t('contract_' + item.symbol) }}</td> -->
             <td class="table__td">{{$t('FUTURE_&USD', {currency: item.symbol.replace('FUTURE_','').replace('USD','')} )}}</td>
-            <td class="table__td">{{ item.rate_interval }} {{ $t('hour') }}</td>
+            <td class="table__td">{{ $t('every_eight_hour') }}</td>
             <td class="table__td">{{ (item.fee * 100) | fixed(4) }}%</td>
             <td class="table__td text-align-right pr-5">{{ (item.fee_rate_day * 100)  | fixed(4)  }}%</td>
           </tr>
