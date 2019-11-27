@@ -2820,11 +2820,11 @@
       "order_price":"Price",
       "orderdeal_fee": "Fees",
       "order_trigger_price": "Trigger Price",
-      "order_amount": "委托量",
-      "order_total": "委托总额",
-      "order_executed_amount": "成交总额",
-      "order_executed_qty": "成交量",
-      "order_surplus": "剩余量"
+      "order_amount": "Amount",
+      "order_total": "Total",
+      "order_executed_amount": "Executed Amount",
+      "order_executed_qty": "Executed Qty",
+      "order_surplus": "Balance"
     }, 
     "stop_order": {   
       "trigger_price": "Trigger Price",
