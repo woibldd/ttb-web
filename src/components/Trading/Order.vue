@@ -227,7 +227,12 @@
               <!--手续费(USDT) -->
               <td>{{ order.fee | fixed(priceScale) }}</td>
               <!-- 状态 -->
-              <td>{{ orderSts(order.status) }}</td>
+              <td>
+                <template v-if="order.temp_trigger_type > 0 || order.type === 1 || order.state === 4">
+                  {{ $t('order_sts_empty_rm') }}
+                </template>
+                <template v-else>{{ orderSts(order.status) }}</template>
+              </td>
 
               <!-- <td class="right">
                 <span v-if="order.deal_amount > 0"><num :num="avg(order)"/></span>

@@ -114,7 +114,14 @@ const textTrade = () => import(/* webpackChunkName: "Hir" */ '@/pages/StepTable/
 
 // 下载
 const Download = () => import(/* webpackChunkName: "Download" */ '@/pages/download/download.vue')
+import {defaultTilte} from './default'
 async function beforeEach(to, from, next) {
+  if(to.path === "/industryDetail") {
+    const defultObj = defaultTilte.filter(item => (Number(item.query.id) === Number(to.query.id)))[0]
+    document.title = defultObj.keywords
+    document.querySelector('meta[name="keywords"]').setAttribute('content', defultObj.keywords)
+    document.querySelector('meta[name="description"]').setAttribute('content', defultObj.description)
+  }
   state.loading = true
   const auth = utils.getRouteMeta(to, 'auth')
   // utils.log('to:', to.name, 'from:', from.name)

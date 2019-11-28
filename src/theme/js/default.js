@@ -8,21 +8,21 @@ module.exports = {
   companyName: 'IXX.COM',
   exchangeName: 'IXX | IXX Exchange - Digital currency exchange - Digital assets trading community',
   exchangeNameConfig: {
-    'zh-CN': 'IXX | 犀牛交易所-数字资产交易所-数字资产交易共同体',
+    'zh-CN': 'IXX | 犀牛交易所-BTC合约交易所排名-比特币价格今日实时行情走势-永续交割合约',
     'zh-HK': 'IXX | 犀牛交易所-數位資產交易所-數位資產交易共同體',
     en: 'IXX | IXX Exchange - Digital currency exchange - Digital assets trading community',
     ko: 'IXX | 수자 재산 거래 공동체'
   },
-  keywords: '数字资产交易所,犀牛交易所,数字资产交易共同体',
+  keywords: '比特币交易所,合约交易所,合约交易所排名,比特币走势,比特币实时行情,永续合约,交割合约,比特币合约,BTC合约,犀牛交易所',
   keywordsConfig: {
-    'zh-CN': '数字资产交易所,犀牛交易所,数字资产交易共同体',
+    'zh-CN': '比特币交易所,合约交易所,合约交易所排名,比特币走势,比特币实时行情,永续合约,交割合约,比特币合约,BTC合约,犀牛交易所',
     'zh-HK': '數位資產交易所，犀牛交易所，數位資產交易共同體',
     en: 'digital currency exchange, ixx exchange, digital asset trading community',
     ko: 'digital currency exchange, ixx exchange, digital asset trading community'
   },
-  description: '全球首家数字资产交易共同体；采用先进的内存算法,分布式信息传输框架,能够实时撮合大规模交易；百分百冷钱包存储机制交易更安全。提供比特币,以太坊, 莱特币,BCH,EOS等数字资产交易服务',
+  description: 'IXX犀牛交易所是全球首家数字资产交易共同体，总部在新加坡，其致力于实现交易所生态的区块链理想国，打造人人的交易所，我为人人，人人为我，所有参与交易所的贡献者均可共享交易所的发展成果。',
   descriptionConfig: {
-    'zh-CN': '全球首家数字资产交易共同体；采用先进的内存算法,分布式信息传输框架,能够实时撮合大规模交易；百分百冷钱包存储机制交易更安全。提供比特币,以太坊, 莱特币,BCH,EOS等数字资产交易服务',
+    'zh-CN': 'IXX犀牛交易所是全球首家数字资产交易共同体，总部在新加坡，其致力于实现交易所生态的区块链理想国，打造人人的交易所，我为人人，人人为我，所有参与交易所的贡献者均可共享交易所的发展成果。',
     'zh-HK': '全球首家數位資產交易共同體；採用先進的記憶體算灋,分佈式資訊傳輸框架,能够實时撮合大規模交易；百分百冷錢包存儲機制交易更安全。提供比特幣,乙太坊,萊特幣,BCH,EOS等數位資產交易服務',
     en: 'The world\'s first digital asset trading community; using advanced memory algorithms, distributed information transmission framework, can match large-scale transactions in real time; 100% cold wallet storage mechanism transactions are more secure. Provide digital asset trading services such as Bitcoin, Ethereum, Litecoin, BCH, EOS, etc.',
     ko: ' The world\'s first digital asset trading community; using advanced memory algorithms, distributed information transmission framework, can match large-scale transactions in real time; 100% cold wallet storage mechanism transactions are more secure. Provide digital asset trading services such as Bitcoin, Ethereum, Litecoin, BCH, EOS, etc.'
