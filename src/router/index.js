@@ -118,7 +118,7 @@ import {defaultTilte} from './default'
 async function beforeEach(to, from, next) {
   if(to.path === "/industryDetail") {
     const defultObj = defaultTilte.filter(item => (Number(item.query.id) === Number(to.query.id)))[0]
-    document.title = defultObj.keywords
+    document.title = defultObj.title
     document.querySelector('meta[name="keywords"]').setAttribute('content', defultObj.keywords)
     document.querySelector('meta[name="description"]').setAttribute('content', defultObj.description)
   }
