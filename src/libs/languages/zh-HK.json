@@ -147,7 +147,7 @@
   "equity": "Partner Interest",
   "equity_text": "Interest",
   "equity_1_text": "Exclusively for new users $60 welcome bonus;",
-  "equity_2_text": "The industry’s most complete affiliate backend system, up to 80% Commission;",
+  "equity_2_text": "The industry’s most complete affiliate backend system, to permanent Commission;",
   "equity_3_text": "Real-time settlement of commission, cash withdrawals;",
   "equity_4_text": "Help affiliates to facilitate new users to register and trade;",
   "equity_5_text": "Individually customized marketing materials;",
@@ -2620,11 +2620,11 @@
       "order_executed_qty": "成交量",
       "order_surplus": "剩餘量"
     } ,
-    "stop_order": {  
+    "stop_order": {
       "trigger_price": "觸發價格",
       "price_distance": "市價（距離）",
       "order_price":"委託價格",
-      "order_th_type": "類型", 
+      "order_th_type": "類型",
       "order_th_status": "狀態",
       "order_th_time": "委託時間",
       "stop_win_loss": "止盈止損",
@@ -2697,7 +2697,7 @@
   "modal": {
     "safeModal": {
       "greet": "尊敬的用戶：",
-      "content": "IXX.com是一家專業服務於海外的交易平台，一直以來都遵循各國法律法規合法運營，IXX.com聲明不會向以下國家或地區提供服務：中國、古巴、伊朗、朝鮮、克里米亞、蘇丹、敘利亞、美國[包括所有美國領土，如波多黎各、美屬薩摩亞、關島、北馬里亞納群島邦、美屬維爾京群島（聖克羅伊島、聖約翰島和聖托馬斯島）]、孟加拉國、玻利維亞、厄瓜多爾和吉爾吉斯斯坦。",
+      "content": "IXX.com一直以來都遵循各國法律法規合法運營，我們將向以下國家或地區提供部分或不提供服務：中國、古巴、伊朗、朝鮮、克里米亞、蘇丹、敘利亞、美國[包括所有美國領土，如波多黎各、美屬薩摩亞、關島、北馬里亞納群島邦、美屬維爾京群島（聖克羅伊島、聖約翰島和聖托馬斯島）]、孟加拉國、玻利維亞、厄瓜多爾和吉爾吉斯斯坦。",
       "salute": "感謝您對IXX.com一如既往的支持！",
       "confirm": "我已知曉"
     }

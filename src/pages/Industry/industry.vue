@@ -295,6 +295,7 @@ export default {
         padding: 12px;
         background:rgba(255,255,255,1);
         box-shadow:0px 1px 15px 0px rgba(209,209,209,1);
+        clear: both;
         .tab {
           display: flex;
           li {
