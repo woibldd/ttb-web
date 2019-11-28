@@ -66,23 +66,36 @@
         <table class="table table-ix-order table-active">
           <thead>
             <tr v-show="active.list.length">
-              <th>{{ $t('order_th_placed') }}</th>
+               <th>{{ $t('order_th_placed') }}</th>
               <th>{{ $t('pair') }}</th>
               <th>{{ $t('order_th_type') }}</th>
               <th class="right">{{ $t('price') }}</th>
-              <th>{{ $t('deal_th_side') }}</th>
+              <th style="padding-left:80px;width: 90px">{{ $t('deal_th_side') }}</th>
               <!--委托价格(USDT) -->
-              <th>{{ $t('trading_page.order.order_price') }}{{ `(${state.pro.currency_name})` }}</th>
+              <th>
+                {{ $t('trading_page.order.order_price') }}
+                <!-- {{ `(${state.tv.currency_name})` }} -->
+              </th>
               <!--委托量（BTC） -->
-              <th>{{ $t('trading_page.order.order_amount') }}{{ `(${state.pro.product_name})` }}</th>
+              <th>{{ $t('trading_page.order.order_amount') }}
+                <!-- {{ `(${state.tv.product_name})` }} -->
+              </th>
               <!--成交总额（USDT） -->
-              <th>{{ $t('trading_page.order.order_total') }}{{ `(${state.pro.currency_name})` }}</th>
+              <th>{{ $t('trading_page.order.order_total') }}
+                <!-- {{ `(${state.tv.currency_name})` }} -->
+              </th>
               <!--已成交量（BTC）  -->
-              <th>{{ $t('trading_page.order.order_executed_qty') }}{{ `(${state.pro.product_name})` }}</th>
+              <th>{{ $t('trading_page.order.order_executed_qty') }}
+                <!-- {{ `(${state.tv.product_name})` }} -->
+              </th>
               <!--剩余量（BTC）  -->
-              <th>{{ $t('trading_page.order.order_surplus') }}{{ `(${state.pro.product_name})` }}</th>
+              <th>{{ $t('trading_page.order.order_surplus') }}
+                <!-- {{ `(${state.tv.product_name})` }} -->
+              </th>
               <!--触发价格(USDT) -->
-              <th>{{ $t('trading_page.order.order_trigger_price') }}{{ `(${state.pro.currency_name})` }}</th>
+              <th>{{ $t('trading_page.order.order_trigger_price') }}
+                <!-- {{ `(${state.tv.currency_name})` }} -->
+              </th>
               <th class="center">{{ $t('operation') }}</th>
             </tr>
           </thead>
@@ -98,10 +111,10 @@
                 <span v-else>--</span>
               </td>
               <td
-                style="color: #09C989"
+                style="color: #09C989;padding-left:80px;width: 90px"
                 v-if="order.side === 'BUY'">{{ $t('order_side_buy') }}</td>
               <td
-                style="color: #F24E4D"
+                style="color: #F24E4D;padding-left:80px;width: 90px"
                 v-else>{{ $t('order_side_sell') }}</td>
 
               <td>{{ order.price | fixed(priceScale) }}</td>
@@ -140,24 +153,38 @@
         <table class="table table-ix-order table-history">
           <thead>
             <tr v-show="history.list.length">
-             <th>{{ $t('time') }}</th>
+            <th>{{ $t('time') }}</th>
               <th>{{ $t('pair') }}</th>
               <th>{{ $t('order_th_type') }}</th>
               <th>{{ $t('deal_th_side') }}</th>
               <!--委托价格(USDT) -->
-              <th>{{ $t('trading_page.order.order_price') }}{{ `(${state.pro.currency_name})` }}</th>
+              <th>{{ $t('trading_page.order.order_price') }}
+                <!-- {{ `(${state.tv.currency_name})` }} -->
+              </th>
               <!--委托量（BTC） -->
-              <th>{{ $t('trading_page.order.order_amount') }}{{ `(${state.pro.product_name})` }}</th>
+              <th>{{ $t('trading_page.order.order_amount') }}
+                <!-- {{ `(${state.tv.product_name})` }} -->
+              </th>
               <!--成交总额（USDT） -->
-              <th>{{ $t('trading_page.order.order_executed_amount') }}{{ `(${state.pro.currency_name})` }}</th>
+              <th>{{ $t('trading_page.order.order_executed_amount') }}
+                <!-- {{ `(${state.tv.currency_name})` }} -->
+              </th>
               <!--成交均价(USDT) -->
-              <th>{{ $t('avg_price') }} {{ `(${state.pro.currency_name})` }}</th>
+              <th>{{ $t('avg_price') }}
+                <!-- {{ `(${state.tv.currency_name})` }} -->
+              </th>
               <!--成交量（BTC）  -->
-              <th>{{ $t('trading_page.order.order_executed_qty') }}{{ `(${state.pro.product_name})` }}</th>
+              <th>{{ $t('trading_page.order.order_executed_qty') }}
+                <!-- {{ `(${state.tv.product_name})` }} -->
+              </th>
               <!--触发价格(USDT) -->
-              <th>{{ $t('trading_page.order.order_trigger_price') }}{{ `(${state.pro.currency_name})` }}</th>
+              <th>{{ $t('trading_page.order.order_trigger_price') }}
+                <!-- {{ `(${state.tv.currency_name})` }} -->
+              </th>
               <!--手续费(USDT) -->
-              <th>{{ $t('trading_page.order.orderdeal_fee') }}{{ `(${state.pro.currency_name})` }}</th>
+              <th>{{ $t('trading_page.order.orderdeal_fee') }}
+                <!-- {{ `(${state.tv.currency_name})` }} -->
+              </th>
               <!-- 状态 -->
               <th>{{ $t('order_th_status') }}</th>
 
