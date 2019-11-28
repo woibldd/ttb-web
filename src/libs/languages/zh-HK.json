@@ -147,7 +147,7 @@
   "equity": "Partner Interest",
   "equity_text": "Interest",
   "equity_1_text": "Exclusively for new users $60 welcome bonus;",
-  "equity_2_text": "The industry’s most complete affiliate backend system, up to 80% Commission;",
+  "equity_2_text": "The industry’s most complete affiliate backend system, to permanent Commission;",
   "equity_3_text": "Real-time settlement of commission, cash withdrawals;",
   "equity_4_text": "Help affiliates to facilitate new users to register and trade;",
   "equity_5_text": "Individually customized marketing materials;",
@@ -2620,11 +2620,11 @@
       "order_executed_qty": "成交量",
       "order_surplus": "剩餘量"
     } ,
-    "stop_order": {  
+    "stop_order": {
       "trigger_price": "觸發價格",
       "price_distance": "市價（距離）",
       "order_price":"委託價格",
-      "order_th_type": "類型", 
+      "order_th_type": "類型",
       "order_th_status": "狀態",
       "order_th_time": "委託時間",
       "stop_win_loss": "止盈止損",

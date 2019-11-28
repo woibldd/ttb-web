@@ -149,7 +149,7 @@
   "equity": "Partner Interest",
   "equity_text": "Interest",
   "equity_1_text": "Exclusively for new users $60 welcome bonus;",
-  "equity_2_text": "The industry’s most complete affiliate backend system, up to 80% Commission;",
+  "equity_2_text": "The industry’s most complete affiliate backend system, to permanent Commission;",
   "equity_3_text": "Real-time settlement of commission, cash withdrawals;",
   "equity_4_text": "Help affiliates to facilitate new users to register and trade;",
   "equity_5_text": "Individually customized marketing materials;",
@@ -2825,19 +2825,19 @@
       "order_executed_amount": "Executed Amount",
       "order_executed_qty": "Executed Qty",
       "order_surplus": "Balance"
-    }, 
-    "stop_order": {   
+    },
+    "stop_order": {
       "trigger_price": "Trigger Price",
       "order_price":"Price",
       "price_distance":"Price(Distance)",
-      "order_th_type": "Type", 
+      "order_th_type": "Type",
       "order_th_status": "Status",
       "order_th_time": "Order time",
       "message_h": "When the price rises or is higher than %{triggerPrice}%{symbol}, the price of %{price}%{symbol} is %{side} %{amount}%{product}.",
       "message_l": "When the price falls or falls below %{triggerPrice}%{symbol}, the price of %{price}%{symbol} is %{side} %{amount}%{product}.",
       "stop_win_loss": "Take Profit Stop Loss",
       "untriggerl": "Untriggered"
-    } 
+    }
   },
   "set_service_fee": "Fee setting",
   "gift": {

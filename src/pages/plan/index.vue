@@ -3,10 +3,10 @@
     <div class="broker-banner">
       <div class="broker-text wow pulse" data-wow-iteration="infinite" data-wow-duration="2000ms">
         <template v-if="lang === 'zh-CN'">
-          <img src="../../assets/images/text.png" alt="" style="zoom: 1;display: block;margin: 0 auto;">
+          <img src="../../assets/images/text1.png" alt="" style="zoom: 1;display: block;margin: 0 auto;">
         </template>
         <template v-else>
-          <img src="../../assets/images/text1.png" alt="" style="zoom: 1;display: block;margin: 0 auto;">
+          <img src="../../assets/images/text.png" alt="" style="zoom: 1;display: block;margin: 0 auto;">
         </template>
       </div>
       <div class="broker-btn wow fadeInUp">

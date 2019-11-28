@@ -19,9 +19,19 @@
       <p>{{ $t('newLoad.up') }}</p>
       <img src="./../../assets/overseas/ix/store.png" alt="" class="store">
       <p>{{ $t('newLoad.port') }}</p>
-      <img src="./../../assets/overseas/ix/tip3.png" alt="">
+      <template v-if="lang === 'zh-CN'">
+        <img src="./../../assets/overseas/ix/tip3.png" alt="">
+      </template>
+      <template v-else>
+        <img src="./../../assets/overseas/y2.png" alt="">
+      </template>
       <p> {{ $t('newLoad.logOut') }} </p>
-      <img src="./../../assets/overseas/ix/tip1.png" alt="">
+      <template v-if="lang === 'zh-CN'">
+        <img src="./../../assets/overseas/zhongwen.jpg" alt="">
+      </template>
+      <template v-else>
+        <img src="./../../assets/overseas/yingwen.jpg" alt="">
+      </template>
       <p>{{ $t('newLoad.id') }}</p>
       <em>{{ $t('newLoad.fid') }}</em>
       <em>{{ $t('newLoad.kf') }}：IXX官方客服 (9点~21点)</em>
@@ -46,8 +56,14 @@
   </div>
 </template>
 <script>
-  export default {
+import {state} from '@/modules/store'
+export default {
+  computed: {
+    lang() {
+      return state.locale
+    }
   }
+}
 </script>
 <style lang="scss" scoped>
   .overseas {
