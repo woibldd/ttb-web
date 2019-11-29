@@ -14,7 +14,10 @@
         <div class="inner">
           <template v-if="list.length > 0">
             <div class="new-list" v-for="(item, index) in list" :key="index">
-              <div class="icon" :class="{active: item.collect === 1}" @click="collectHadnle(item)"></div>
+              <div class="icon" :class="{active: item.collect === 1}" @click="collectHadnle(item)">
+                <i class="overseas-icon" v-if="item.collect === 1">&#xe62d;</i>
+                 <i class="overseas-icon" v-else>&#xe62c;</i>
+              </div>
               <div class="text" @click="detialHandle(item)">
                 <div class="top">
                   <h1> {{ item.title }} </h1>
@@ -257,6 +260,9 @@ export default {
             white-space: nowrap;
             font-weight: 500;
             margin-bottom: 10px;
+             &:hover{
+              color: #01CED1;
+            }
           }
           p {
             font-size: 14px;

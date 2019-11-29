@@ -7,7 +7,10 @@
         <div class="inner">
           <div class="detail">
             <div class="top">
-              <div class="icon" :class="{active: activityInfo.collect === 1}" @click="collectHadnle"></div>
+             <div class="icon" :class="{active: activityInfo.collect === 1}" @click="collectHadnle">
+                <i class="overseas-icon" v-if="activityInfo.collect === 1">&#xe62d;</i>
+                 <i class="overseas-icon" v-else>&#xe62c;</i>
+              </div>
               <div class="text">
                 <h1>{{ activityInfo.title }}</h1>
               </div>
@@ -50,7 +53,16 @@
 import market from "./market";
 import {state} from '@/modules/store'
 import { collectActivity, getList2 } from '../../api/user';
+import {defaultTilte} from '@/router/default'
 export default {
+  beforeEach(to, from, next) {
+    if(to.path === "/industryDetail") {
+      const defultObj = defaultTilte.filter(item => (Number(item.query.id) === Number(to.query.id)))[0]
+      document.title = defultObj.title
+      document.querySelector('meta[name="keywords"]').setAttribute('content', defultObj.keywords)
+      document.querySelector('meta[name="description"]').setAttribute('content', defultObj.description)
+    }
+  },
   components: {
     market
   },
@@ -249,10 +261,26 @@ export default {
               margin-right: 10px;
               cursor: pointer;
               height: 40px;
-              background: url('./img/icon.png') center center no-repeat;
+              background: #dbdbdb;
+              border-radius: 4px;
+              line-height: 40px;
+              text-align: center;
+              i {
+                font-size: 24px;
+                color: #AFAFAF;
+              }
+              &:hover {
+                background: #01CED1;
+                i {
+                  color: #fff
+                }
+              }
             }
             .active {
-              background: url('./img/active.png') center center no-repeat;
+              background: #01CED1;
+              i {
+                color: #fff
+              }
             }
             .text {
               flex: 1;

@@ -237,12 +237,29 @@ export default {
   url('//at.alicdn.com/t/font_1408535_z5q5sgr3j38.ttf') format('truetype'),
   url('//at.alicdn.com/t/font_1408535_z5q5sgr3j38.svg#iconfont') format('svg');
 }
+@font-face {
+  font-family: 'overseas-icon';  /* project id 1528548 */
+  src: url('//at.alicdn.com/t/font_1528548_timw77wx73.eot');
+  src: url('//at.alicdn.com/t/font_1528548_timw77wx73.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1528548_timw77wx73.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1528548_timw77wx73.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1528548_timw77wx73.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1528548_timw77wx73.svg#iconfont') format('svg');
+}
+.overseas-icon{
+  font-family:"overseas-icon" !important;
+  font-size:16px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
 .down-icon{
   font-family:"down-icon" !important;
   font-size:16px;font-style:normal;
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke-width: 0.2px;
-  -moz-osx-font-smoothing: grayscale;}
+  -moz-osx-font-smoothing: grayscale;
+}
 button {
   outline: none!important;
   box-shadow: none!important;

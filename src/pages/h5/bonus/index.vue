@@ -162,6 +162,7 @@ export default {
 
 <style lang="scss" scoped>
 .receive-container{
+  overflow: hidden;
   .header {
     height: 3.4rem;
     .banner {
