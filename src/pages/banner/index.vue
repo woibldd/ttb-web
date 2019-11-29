@@ -293,7 +293,7 @@ export default {
   /*  background: #09c989 !important;*/
   /*}*/
   .el-carousel__container {
-    height: 150px;
+    height: 130px;
   }
   .banner-list {
     height: 150px;
@@ -357,8 +357,12 @@ export default {
     background: #00badb!important;
   }
   .el-carousel__arrow {
-    background: rgba(255,255,255,.1)!important;
-    color: #00badb
+    background: rgba(255,255,255,.18)!important;
+    color: #00badb;
+    font-size: 20px;
+    i {
+      font-weight: bold;
+    }
   }
 }
 .buy-currency-container {

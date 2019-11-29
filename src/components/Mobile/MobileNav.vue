@@ -20,20 +20,22 @@
       <span
         class="operate"
         v-if="!state.userInfo">
-        <router-link
+        <!-- <router-link
           :to="{name:'login'}"
           class="nav_log_res">
           {{ $t("signin") }}
-        </router-link>
+        </router-link> -->
+          <a href="javascript:;" class="nav_log_res" @click="loginPath('login')">{{ $t("signin") }}</a>
       </span>
       <span
         class="operate signup"
         v-if="!state.userInfo">
-        <router-link
+        <!-- <router-link
           :to="{name:'register'}"
           class="nav_log_res">
           {{ $t("signup_title") }}
-        </router-link>
+        </router-link> -->
+        <a href="javascript:;" class="nav_log_res" @click="loginPath('register')">{{ $t("signup_title") }}</a>
       </span>
 
       <span
@@ -105,6 +107,14 @@ export default {
     }
   },
   methods: {
+    loginPath (path) {
+      this.$router.push({
+        name: path,
+        query: {
+          alert: 1
+        }
+      })
+    },
     goHome () {
       this.$router.push({
         name: 'home'

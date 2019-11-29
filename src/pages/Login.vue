@@ -10,7 +10,7 @@
             class="panel-title"/>
           <div
             v-if="state.enablePhoneSignup"
-            class="by-links">
+            class="by-links ibt">
             <router-link
               class="by-link ibt"
               to="email">{{ $t('login_by_email') }}</router-link>
@@ -210,11 +210,13 @@
         </div>
       </div>
     </v-modal>
-    <v-modal
+    <div v-show="path === 1">
+      <v-modal
       class="safe-modal"
       :open.sync="showSafeModal">
       <safeModal @close="closeSafe" />
     </v-modal>
+    </div>
   </div>
 </template>
 
@@ -303,6 +305,9 @@ export default {
     })
   },
   computed: {
+    path() {
+      return this.$route.query.alert
+    },
     params() {
       const params = {
         password: this.password
@@ -361,6 +366,7 @@ export default {
     this.$nextTick(this.fixPosition)
   },
   created() {
+    console.log(this.$route.path)
     this.fetchRegion()
     let $this = this
     setTimeout(function () {
