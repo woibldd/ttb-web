@@ -228,10 +228,26 @@ export default {
             margin-right: 10px;
             cursor: pointer;
             height: 40px;
-            background: url('./img/icon.png') center center no-repeat;
+            background: #dbdbdb;
+            border-radius: 4px;
+            line-height: 40px;
+            text-align: center;
+            i {
+              font-size: 24px;
+              color: #AFAFAF;
+            }
+            &:hover {
+              background: #01CED1;
+              i {
+                color: #fff
+              }
+            }
           }
           .active {
-            background: url('./img/active.png') center center no-repeat;
+            background: #01CED1;
+            i {
+              color: #fff
+            }
           }
           .text {
             flex: 1;
