@@ -11,7 +11,7 @@
         <h1>
           IXX.COM {{ $t('newLoad.az') }}
         </h1>
-        <p> {{ $t('newLoad.user_apple_id', {web: 'IXX'}) }} </p>
+        <p> {{ $t('newLoad.user_apple_id', {web: 'IXX Exchange'}) }} </p>
       </div>
     </div>
     <div class="text-list">
@@ -43,7 +43,7 @@
     </div>
     <div class="text-list">
       <div class="title">02  {{ $t('newLoad.install_app') }}</div>
-      <p> {{ $t('newLoad.login_up', {web: 'IXX'}) }}</p>
+      <p> {{ $t('newLoad.login_up', {web: 'IXX Exchange'}) }}</p>
       <img src="./../../assets/overseas/ix/tip2.png" alt="">
       <p>{{ $t('newLoad.get') }}</p>
       <img src="./../../assets/overseas/ix/IXX@2x.png" alt="">
