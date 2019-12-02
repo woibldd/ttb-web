@@ -6,10 +6,10 @@ module.exports = {
   locales: ['en', 'zh-CN', 'zh-HK', 'ko'],
   themeName: 'default',
   companyName: 'IXX.COM',
-  exchangeName: 'IXX |  IXX | Rhino Exchange-BTC Contract Exchange Ranking-Bitcoin Price Real-Time Quote Trend Today-Perpetual Delivery Contract',
+  exchangeName: 'IXX |  Rhino Exchange-BTC Contract Exchange Ranking-Bitcoin Price Real-Time Quote Trend Today-Perpetual Delivery Contract',
   exchangeNameConfig: {
-    'zh-CN': 'IXX | 犀牛交易所-BTC合约交易所排名-比特币价格今日实时行情走势-永续交割合约',
-    'zh-HK': 'IXX | 犀牛交易所-數位資產交易所-數位資產交易共同體',
+    'zh-CN': 'IXX | BTC合约交易所排名-比特币价格今日实时行情走势-永续交割合约',
+    'zh-HK': 'IXX | 數位資產交易所-數位資產交易共同體',
     en: 'IXX |  IXX | Rhino Exchange-BTC Contract Exchange Ranking-Bitcoin Price Real-Time Quote Trend Today-Perpetual Delivery Contract',
     ko: 'IXX | 수자 재산 거래 공동체'
   },
@@ -20,13 +20,13 @@ module.exports = {
     en: ' Bitcoin exchange, contract exchange, contract exchange ranking, bitcoin trend, real-time bitcoin market, perpetual contract, delivery contract, bitcoin contract, BTC contract, rhino exchange',
     ko: 'digital currency exchange, ixx exchange, digital asset trading community'
   },
-  description: 'IXX | IXX犀牛交易所是全球首家数字资产交易共同体，总部在新加坡，其致力于实现交易所生态的区块链理想国，打造人人的交易所，我为人人，人人为我，所有参与交易所的贡献者均可共享交易所的发展成果。',
+  description: 'IXX | IXX是全球首家数字资产交易共同体，总部在新加坡，其致力于实现交易所生态的区块链理想国，打造人人的交易所，我为人人，人人为我，所有参与交易所的贡献者均可共享交易所的发展成果。',
   descriptionConfig: {
-    'zh-CN': 'IXX | IXX犀牛交易所是全球首家数字资产交易共同体，总部在新加坡，其致力于实现交易所生态的区块链理想国，打造人人的交易所，我为人人，人人为我，所有参与交易所的贡献者均可共享交易所的发展成果。',
+    'zh-CN': 'IXX | IXX是全球首家数字资产交易共同体，总部在新加坡，其致力于实现交易所生态的区块链理想国，打造人人的交易所，我为人人，人人为我，所有参与交易所的贡献者均可共享交易所的发展成果。',
     'zh-HK': '全球首家數位資產交易共同體；採用先進的記憶體算灋,分佈式資訊傳輸框架,能够實时撮合大規模交易；百分百冷錢包存儲機制交易更安全。提供比特幣,乙太坊,萊特幣,BCH,EOS等數位資產交易服務',
     en: "IXX | Rhino Exchange is the world's first digital asset trading community，headquartered in Singapore. It is committed to achieving the ideal state of the blockchain ecosystem of the exchange and building an exchange for everyone. I am for all and everyone is for me. , All contributors participating in the exchange can share the development results of the exchange.",
     ko: ' The world\'s first digital asset trading community; using advanced memory algorithms, distributed information transmission framework, can match large-scale transactions in real time; 100% cold wallet storage mechanism transactions are more secure. Provide digital asset trading services such as Bitcoin, Ethereum, Litecoin, BCH, EOS, etc.'
-  }, 
+  },
   shortcut: '',
   supportMail: 'support@ixx.com',
   hrMail: 'hr@ixx.com',
@@ -77,6 +77,6 @@ module.exports = {
     ko: 'https://ixxcustomer.zendesk.com/hc/en-us/categories/360002347212',
     'zh-CN': 'https://ixxcustomer.zendesk.com/hc/zh-cn/categories/360002347212',
     'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/categories/360002347212'
-    
+
   }
 }
