@@ -147,7 +147,7 @@
   "equity": "Partner Interest",
   "equity_text": "Interest",
   "equity_1_text": "Exclusively for new users $60 welcome bonus;",
-  "equity_2_text": "The industry’s most complete affiliate backend system, up to 80% Commission;",
+  "equity_2_text": "The industry’s most complete affiliate backend system, to permanent Commission;",
   "equity_3_text": "Real-time settlement of commission, cash withdrawals;",
   "equity_4_text": "Help affiliates to facilitate new users to register and trade;",
   "equity_5_text": "Individually customized marketing materials;",
@@ -2402,7 +2402,7 @@
         "price_distance": "촉발 가격",
         "edit_amount": "수량",
         "edit_price": "위탁가격",
-        "edit_trigger_price": "트리거 프라이스" 
+        "edit_trigger_price": "트리거 프라이스"
       },
       "holding": {
         "contract_close_tips3": "이것은 현재 표시 가격인 평창의 예상 손익을 가정한 것이고, 마우스를 제거하면 현재 위탁 목록의 최신 시장 가격인 평창의 예상 손익을 나타낸다。"
@@ -2684,25 +2684,25 @@
       "hide_canceled": "숨김 철회",
       "order_price":"위탁가격",
       "orderdeal_fee": "수수료",
-      "order_trigger_price": "트리거 프라이스", 
+      "order_trigger_price": "트리거 프라이스",
       "order_amount": "위탁량",
      "order_total": "총액 위탁",
      "order_executed_amount": "금액거래",
      "order_executed_qty": "거래량",
      "order_surplus": "나머지 량"
-    }, 
-    "stop_order": {  
+    },
+    "stop_order": {
       "trigger_price": "트리거 프라이스",
       "order_price": "위탁가격",
       "price_distance": "촉발 가격",
-      "order_th_type": "종류", 
+      "order_th_type": "종류",
       "order_th_status": "상태",
       "order_th_time": "위탁시간",
       "message_h": "가격이 오르거나 내려갈때%{triggerPrice}%{symbol}때，으로%{price}%{symbol}의 가격%{side}%{amount}%{product}。",
       "message_l": "가격이 오르거나 내려갈때%{triggerPrice}%{symbol}때，으로%{price}%{symbol}의 가격%{side}%{amount}%{product}。",
       "stop_win_loss": "리익손해",
       "untriggerl": "촉발전"
-    } 
+    }
   },
   "gift": {
     "bonus":"Trading Bonus",
@@ -2767,7 +2767,7 @@
   "modal": {
     "safeModal": {
       "greet": "존경하는 사용자:",
-      "content": "IXX.com은 해외 전문 서비스 거래 플랫폼, 그동안 각국 법률 법규에 따라 합법적 운영 IXX.com 성명 이하 국가 또는 지역에 서비스를 제공하였다. 중국 · 쿠바 · 이란 · 북한 · 크림 · 수단 · 시리아 · 미국 [모든 미국 영토를 포함 한다. 례를들면 푸에르토리코, 미국령 사모아, 괌, 마리 아나 군도 본, 미국령 버 진 아일랜드 (세인트 크 로이 섬, 세인트 존과 세인트 토머스 섬)], 방글라데시 · 볼리비아 · 에콰도르와 끼 르 끼 즈 스 딴다.",
+      "content": "IXX.com 그동안 각국 법률 법규에 따라 합법적 운영, 우리에게 다음과 같은 나라 또는 지역에 부분적 또는 서비스를 제공 하지 않를 제공하였다. 중국 · 쿠바 · 이란 · 북한 · 크림 · 수단 · 시리아 · 미국 [모든 미국 영토를 포함 한다. 례를들면 푸에르토리코, 미국령 사모아, 괌, 마리 아나 군도 본, 미국령 버 진 아일랜드 (세인트 크 로이 섬, 세인트 존과 세인트 토머스 섬)], 방글라데시, 볼리비아 · 에콰도르 · 키르기스스탄이다.",
       "salute": "IXX.com의 변함없는 지지에 감사드립니다!",
       "confirm": "나는 이미 알고있다"
     }

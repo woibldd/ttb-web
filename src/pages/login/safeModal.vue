@@ -1,5 +1,5 @@
 <template>
-  <div class="safe-container">
+  <div class="safe-container" :class="{'safe-contaienr-mobile': isMobile}">
     <div class="safe-title">
       <icon
         name="information"
@@ -21,8 +21,14 @@
 </template>
 
 <script>
+import utils from '@/modules/utils'
 export default {
   name: 'SafeModal',
+  computed: {
+    isMobile() {
+      return utils.isMobile()
+    }
+  },
   methods: {
     close () {
       this.$emit('close')
@@ -51,5 +57,12 @@ export default {
     .safe-footer {
       text-align: right;
     }
+  }
+  .safe-contaienr-mobile {
+    width: 260px;
+    font-size: 14px;
+    height: 480px;
+    overflow: hidden;
+    overflow-y: scroll;
   }
 </style>

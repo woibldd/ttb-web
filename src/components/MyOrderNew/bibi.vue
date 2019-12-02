@@ -1,6 +1,7 @@
 <template>
   <div class="order--container">
-    <div class="profile-container">
+    <div class="profile-container"
+      v-loading="isLoading">
       <div class="title-box">{{ $t('fund_trading_bill') }}</div>
       <!-- <div class="row-select mt-24 mb-24">
         <span>{{ $t('pair') }}</span>
@@ -17,8 +18,10 @@
           </el-select>
         </div>
       </div> -->
-      <div class="table-wrapper">
-        <table class="table">
+      <div class="table-wrapper"
+        v-scroll-load="loadMore">
+        <table 
+          class="table scroll--body">
           <tr class="thead">
             <th>{{ $t('time') }}</th>
             <th>{{ $t('pair') }}</th>
@@ -51,13 +54,13 @@
           {{ $t('order_empty') }}
         </div>
       </div>
-      <div class="pages" style="text-align: center;padding-top: 20px;" v-if="tableData.length">
+      <!-- <div class="pages" style="text-align: center;padding-top: 20px;" v-if="tableData.length">
         <el-pagination
           background
           @current-change="currentHandle"
           layout="prev, pager, next"
           :total="total" />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -127,11 +130,20 @@ export default {
       // }
       this.params.symbol = this.selectPair.name || ''
       service.getBiBiOrders(this.params).then(res => {
-        this.originList = res.data // 暂时前端过滤,所以保留最初的全部数据
-        this.tableData = res.data
+        this.originList = this.originList.concat([], res.data) // 暂时前端过滤,所以保留最初的全部数据 
+        this.tableData = this.tableData.concat([], res.data)
       }).finally(() => {
-        this.isLoading = false
+        setTimeout(() => {
+          this.isLoading = false
+        }, 500)
       })
+    },
+    loadMore () { 
+      if (this.tableData.length >= this.params.page * this.params.size) {
+        this.isLoading = true
+        this.params.page++
+        this.getList()
+      }
     }
   },
   async created () {
@@ -179,7 +191,7 @@ export default {
         color: #666666;
     }
     .table-wrapper {
-        height: 550px;
+        height: 420px;
         overflow: scroll;
         width: 100%;
     }

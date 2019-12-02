@@ -66,22 +66,22 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
 
 .el-popper.nav-popover[x-placement^=bottom]  {
   background-color: #2C3B4B;
-  border: none; 
+  border: none;
   margin-top: 0;
 }
 
-.el-popper.nav-popover .popper__arrow { 
+.el-popper.nav-popover .popper__arrow {
   display: none;
 }
 
 .el-popover.nav-list[x-placement^=bottom] {
   background-color: #2C3B4B;
-  border: none; 
+  border: none;
   margin-top: 0;
   padding: 0;
   min-width: 80px;
 }
 
-.el-popper.nav-list .popper__arrow { 
+.el-popper.nav-list .popper__arrow {
   display: none;
 }

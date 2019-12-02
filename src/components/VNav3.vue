@@ -257,8 +257,10 @@
             </el-popover>
         </div>
         <div v-if="!state.userInfo" class="nav_item right_options">
-          <router-link :to="{name:'login'}" class="nav_log_res mr-20">{{ $t("signin") }}</router-link>
-          <router-link :to="{name:'register'}" class="nav_log_res">{{ $t("signup_title") }}</router-link>
+           <a href="javascript:;" class="nav_log_res mr-20" @click="loginPath('login')">{{ $t("signin") }}</a>
+          <a href="javascript:;" class="nav_log_res" @click="loginPath('register')">{{ $t("signup_title") }}</a>
+          <!-- <router-link :to="{name:'login'}" class="nav_log_res mr-20">{{ $t("signin") }}</router-link> -->
+          <!-- <router-link :to="{name:'register'}" class="nav_log_res">{{ $t("signup_title") }}</router-link> -->
         </div>
         <div class="right_options" v-else>
           <!-- 我的资产 -->
@@ -549,6 +551,14 @@ export default {
     }
   },
   methods: {
+    loginPath (path) {
+      this.$router.push({
+        name: path,
+        query: {
+          alert: 1
+        }
+      })
+    },
     resetBalance(balance) {
       balance === "DEMO" &&
         resetBalance().then(res => {

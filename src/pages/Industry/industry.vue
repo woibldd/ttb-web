@@ -14,7 +14,10 @@
         <div class="inner">
           <template v-if="list.length > 0">
             <div class="new-list" v-for="(item, index) in list" :key="index">
-              <div class="icon" :class="{active: item.collect === 1}" @click="collectHadnle(item)"></div>
+              <div class="icon" :class="{active: item.collect === 1}" @click="collectHadnle(item)">
+                <i class="overseas-icon" v-if="item.collect === 1">&#xe62d;</i>
+                 <i class="overseas-icon" v-else>&#xe62c;</i>
+              </div>
               <div class="text" @click="detialHandle(item)">
                 <div class="top">
                   <h1> {{ item.title }} </h1>
@@ -225,10 +228,26 @@ export default {
             margin-right: 10px;
             cursor: pointer;
             height: 40px;
-            background: url('./img/icon.png') center center no-repeat;
+            background: #dbdbdb;
+            border-radius: 4px;
+            line-height: 40px;
+            text-align: center;
+            i {
+              font-size: 24px;
+              color: #AFAFAF;
+            }
+            &:hover {
+              background: #01CED1;
+              i {
+                color: #fff
+              }
+            }
           }
           .active {
-            background: url('./img/active.png') center center no-repeat;
+            background: #01CED1;
+            i {
+              color: #fff
+            }
           }
           .text {
             flex: 1;
@@ -257,6 +276,9 @@ export default {
             white-space: nowrap;
             font-weight: 500;
             margin-bottom: 10px;
+             &:hover{
+              color: #01CED1;
+            }
           }
           p {
             font-size: 14px;
@@ -295,6 +317,7 @@ export default {
         padding: 12px;
         background:rgba(255,255,255,1);
         box-shadow:0px 1px 15px 0px rgba(209,209,209,1);
+        clear: both;
         .tab {
           display: flex;
           li {

@@ -1,35 +1,36 @@
 <template>
   <div>
-    <div class="ixx_banner_container" style="height: 400px;"
+    <div class="banner-container" style="height: 400px;"
       :class="[state.locale]"
+         @mousemove="hoverHandle(false)" @mouseleave="hoverHandle(true)"
     >
-      <div class="wrapper" @mouseenter="on_top_enter" @mouseleave="on_top_leave">
-        <swiper :options="option" ref="mySwiper">
-          <swiper-slide v-for="(item, index) in banner" :key="index">
-            <div class="dot-banner" :class="{'dot-banner1': item.slot === 2, 'dot-banner2': item.slot === 1}">
-              <template v-if="item.slot === 3 || item.slot === 2">
-                <swiper :options="item.slot === 3 ? optionFirst : optionDot" style="height: 148px">
-                  <swiper-slide v-for="(child, i) in item.bannerList" :key="i">
+      <div class="banner-list">
+        <el-carousel ref="carousel" arrow="always" indicator-position="none" :autoplay="false" :loop="true">
+          <el-carousel-item v-for="item in banner" :initial-index="dot" :key="item.type">
+            <template>
+              <div class="item-dot" v-if="item.type === 3" @mousemove="hoverHandle(false)" @mouseleave="hoverHandle(true)">
+                <el-carousel ref="carousel1" indicator-position="outside" :autoplay="true" :loop="true" @change="carouselChange">
+                  <el-carousel-item v-for="(child, i) in item.list" :key="i">
+                    <div class="item-img-list" v-for="(dot, c) in child.list" :key="c">
+                      <a :href="dot.url" target="_blank">
+                        <img :src="dot.picture" alt="">
+                      </a>
+                    </div>
+                  </el-carousel-item>
+                </el-carousel>
+              </div>
+              <div class="item-dot" v-if="item.type === 2" :initial-index="dot1" @mousemove="hoverHandle(false)" @mouseleave="hoverHandle(true)">
+                <el-carousel ref="carousel2" indicator-position="outside" :autoplay="true" :loop="true" @change="carouselChange1">
+                  <el-carousel-item v-for="(child, i) in item.list" :key="i">
                     <a :href="child.url" target="_blank">
-                      <img :src="child.picture"  :alt="$t('seo_keywords')" style="height: 128px">
+                      <img :src="child.picture" alt="">
                     </a>
-                  </swiper-slide>
-                  <div class="swiper-pagination" slot="pagination"></div>
-                </swiper>
-              </template>
-              <template v-else>
-                <swiper :options="option2" style="height: 400px">
-                  <swiper-slide v-for="(child, i) in item.bannerList" :key="i">
-                    <a :href="child.url" target="_blank">
-                      <img :src="child.picture" :alt="$t('seo_keywords')">
-                    </a>
-                  </swiper-slide>
-                  <div class="swiper-pagination" slot="pagination"></div>
-                </swiper>
-              </template>
-            </div>
-          </swiper-slide>
-        </swiper>
+                  </el-carousel-item>
+                </el-carousel>
+              </div>
+            </template>
+          </el-carousel-item>
+        </el-carousel>
       </div>
     </div>
     <div class="buy-currency-container" v-if="state.locale==='zh-CN' || state.locale==='zh-HK'">
@@ -107,8 +108,25 @@ export default {
   props: [ "swipeBanner"],
   data() {
     return {
-      banner: [],
       amountPoint: 2,
+      hover: true,
+      height: '280',
+      dot: 0,
+      dotIndex: 0,
+      dot1: 0,
+      dot1Index: 0,
+      dot2: 0,
+      dot2Index: 0,
+      banner: [
+        {
+          type: 3,
+          list: []
+        },
+        {
+          type: 2,
+          list: []
+        }
+      ],
       buy: {
         amount: "",
         currency: "USDT"
@@ -119,51 +137,6 @@ export default {
           template: `<i class="currency-icon">&#xe61a;</i> USDT`
         }
       ],
-      option: {
-        init: false,
-        grabCursor: true,
-        simulateTouch: true,
-        centeredSlides: true,
-        slidesPerView: 1,
-        loop: true
-      },
-      optionFirst: {
-        pagination: {
-          el: '.swiper-pagination'
-        },
-        paginationClickable: true,
-        slidesPerView: 4,
-        spaceBetween: 30,
-        slidesPerGroup: 4,
-        loop: true,
-        simulateTouch: true,
-        loopFillGroupWithBlank: true
-      },
-      optionDot: {
-        paginationClickable: true,
-        pagination: {
-          el: '.swiper-pagination'
-        },
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: 1,
-        simulateTouch: false,
-        loop: false
-      },
-      option2: {
-        paginationClickable: true,
-        pagination: {
-          el: '.swiper-pagination'
-        },
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: 1,
-        autoplay: {
-          delay: 3000
-        },
-        simulateTouch: false,
-        loop: false
-      },
       arr: [],
       money: 0,
       downPrice: "",
@@ -171,71 +144,70 @@ export default {
     };
   },
   methods: {
-    prev() {
-      this.$refs.carousel.prev()
+    hoverHandle(flag) {
+      this.hover = flag
     },
-    next() {
-      this.$refs.carousel.next()
+    carouselChange(index) {
+      if (this.hover) {
+        if (index === this.dotIndex - 1) {
+          setTimeout(() => {
+            this.$refs.carousel.next()
+            this.dot = 0
+          }, 3000)
+        }
+      }
     },
-    // 通过获得的swiper对象来暂停自动播放
-    on_bot_enter() {
-      this.swiper.autoplay.stop()
+    carouselChange1(index) {
+      if (this.hover) {
+        if (index === this.dot1Index - 1) {
+          setTimeout(() => {
+            this.$refs.carousel.next()
+            this.dot1 = 0
+          }, 3000)
+        }
+      }
     },
-    on_bot_leave() {
-      this.swiper.autoplay.start()
-    },
-    on_top_enter() {
-      this.swiper.autoplay.stop()
-    },
-    on_top_leave() {
-      this.swiper.autoplay.start()
+    carouselChange3(index) {
+      if (this.hover) {
+        if (index === this.dot1Index - 1) {
+          setTimeout(() => {
+            this.$refs.carousel.next()
+            this.dot1 = 0
+          }, 3000)
+        }
+      }
     },
     init() {
       service.getBanners({
         platform: 1
       }).then((res) => {
         if (res.code === 0) {
-          var arrDot1 = []
-          var arrDot2 = []
-          var firstObj = {}
-          var objDot1 = {}
-          var objDot2 = {}
-          // 筛选图片地址不能为空的数组
-          let newBanner = res.data.filter(item => item.platform === 1)
-          const banner = newBanner.filter(item => item.picture)
-          // 得到第一条数据的类型
-          const firstSolt = banner[0].slot
-          const arrDot = banner.filter(item => item.slot === firstSolt)
-          // 拿到第一组数组
-          if (arrDot.length > 0) {
-            firstObj = {
-              slot: arrDot[0].slot,
-              bannerList: arrDot
+          const firstList = res.data.filter(item => (item.slot === 3))
+          const secondList = res.data.filter(item => (item.slot === 2))
+          var result = []
+          var result1 = []
+          if (firstList.length > 0) {
+            for (var i = 0, len = firstList.length; i < len; i += 4) {
+              result.push(firstList.slice(i, i + 4))
             }
-          }
-          // 得到不为第一条数据的类型的所有数组
-          const otherBanner = banner.filter(item => item.slot !== firstSolt)
-          if (otherBanner.length > 0) {
-            const otherSolt = otherBanner[0].slot
-            arrDot1 = otherBanner.filter(item => item.slot === otherSolt)
-            if (arrDot1.length > 0) {
-              objDot1 = {
-                slot: arrDot1[0].slot,
-                bannerList: arrDot1
+            result.forEach((item, index) => {
+              var obj = {
+                id: index,
+                list: []
               }
-            }
-            arrDot2 = otherBanner.filter(item => item.slot !== otherSolt)
-            if (arrDot2.length > 0) {
-              objDot2 = {
-                slot: arrDot2[0].slot,
-                bannerList: arrDot2
-              }
-            }
+              result1.push(obj)
+              result1.forEach((child, i) => {
+                if (index === i) {
+                  child.list = item
+                }
+              })
+            })
           }
-          let list = [firstObj, objDot1, objDot2]
-          this.banner = _.filter(list, function(item) {
-            return item.slot
-          })
+          this.banner[0].list = result1
+          this.dotIndex = this.banner[0].list.length
+          this.banner[1].list = secondList
+          this.dot1Index = this.banner[1].list.length
+          this.banner = this.banner.filter(item => (item.list.length > 0))
         }
       })
     },
@@ -271,12 +243,6 @@ export default {
     this.init()
   },
   computed: {
-    swiper() {
-      return this.$refs.mySwiper.swiper;
-    }
-  },
-  updated() {
-      this.swiper.init();
   }
 }
 </script>
@@ -300,10 +266,11 @@ export default {
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
 }
-.ixx_banner_container {
-  height: 480px;
-  width: 100%;
+.banner-container {
+  height: 400px;
+  background: #00b9db;
   overflow: hidden;
+  clear: both;
   background: url("./img/bj-zh-CN.png") top center no-repeat;
   &.en {
     background-image: url('./img/bj-en.png')
@@ -325,6 +292,78 @@ export default {
   /*  opacity: 1;*/
   /*  background: #09c989 !important;*/
   /*}*/
+  .el-carousel__container {
+    height: 130px;
+  }
+  .banner-list {
+    height: 150px;
+    margin: 230px auto 0;
+  }
+  .item-dot {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    a {
+      width: 100%;
+      display: block;
+      overflow: hidden;
+      box-sizing: border-box;
+      img {
+        zoom: 1;
+        height: 122px;
+        border-radius: 4px;
+        border: 1px solid #00badb;
+      }
+    }
+    .item-img-list {
+      float: left;
+      margin-right: 46px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+    .item-img-list1 {
+      img {
+        width: 100%;
+        display: block;
+        zoom: 1;
+      }
+    }
+    .el-carousel__arrow {
+      display: none!important;
+    }
+    .el-carousel__container {
+      height: 160px;
+    }
+    .el-carousel__indicators--outside {
+      position: absolute;
+      bottom: 0;
+    }
+  }
+  .item-dot1 {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    .el-carousel__container {
+      height: 160px;
+    }
+    .el-carousel__indicators--outside {
+      position: absolute;
+      bottom: 0;
+    }
+  }
+  .el-carousel__indicator.is-active button{
+    background: #00badb!important;
+  }
+  .el-carousel__arrow {
+    background: rgba(255,255,255,.18)!important;
+    color: #00badb;
+    font-size: 20px;
+    i {
+      font-weight: bold;
+    }
+  }
 }
 .buy-currency-container {
   .number-input {

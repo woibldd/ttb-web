@@ -149,7 +149,7 @@
   "equity": "Partner Interest",
   "equity_text": "Interest",
   "equity_1_text": "Exclusively for new users $60 welcome bonus;",
-  "equity_2_text": "The industry’s most complete affiliate backend system, up to 80% Commission;",
+  "equity_2_text": "The industry’s most complete affiliate backend system, to permanent Commission;",
   "equity_3_text": "Real-time settlement of commission, cash withdrawals;",
   "equity_4_text": "Help affiliates to facilitate new users to register and trade;",
   "equity_5_text": "Individually customized marketing materials;",
@@ -2551,7 +2551,7 @@
     },
     "footer": {
       "affiliate": "Affiliate：affiliate@ixx.com",
-      "explain": "IXX Exchange is a cryptocurrency derivatives exchange, headquartered in Singapore and registered in Malaysia. It is the world's first digital asset trading community and committed to realize the ideal utopia nation of blockchain trading ecology, create an exchange for everyone. All contributors can share the fruitful outcome from developments of the exchange.",
+      "explain": "IXX is a cryptocurrency derivatives exchange, headquartered in Singapore and registered in Malaysia. It is the world's first digital asset trading community and committed to realize the ideal utopia nation of blockchain trading ecology, create an exchange for everyone. All contributors can share the fruitful outcome from developments of the exchange.",
       "footer_contract_desc": "Official Wechat",
       "information":"Industrial News"
     },
@@ -2825,19 +2825,19 @@
       "order_executed_amount": "Executed Amount",
       "order_executed_qty": "Executed Qty",
       "order_surplus": "Balance"
-    }, 
-    "stop_order": {   
+    },
+    "stop_order": {
       "trigger_price": "Trigger Price",
       "order_price":"Price",
       "price_distance":"Price(Distance)",
-      "order_th_type": "Type", 
+      "order_th_type": "Type",
       "order_th_status": "Status",
       "order_th_time": "Order time",
       "message_h": "When the price rises or is higher than %{triggerPrice}%{symbol}, the price of %{price}%{symbol} is %{side} %{amount}%{product}.",
       "message_l": "When the price falls or falls below %{triggerPrice}%{symbol}, the price of %{price}%{symbol} is %{side} %{amount}%{product}.",
       "stop_win_loss": "Take Profit Stop Loss",
       "untriggerl": "Untriggered"
-    } 
+    }
   },
   "set_service_fee": "Fee setting",
   "gift": {
@@ -2903,7 +2903,7 @@
   "modal": {
     "safeModal": {
       "greet": "Dear User:",
-      "content": "IXX.com is a professional trading platform for overseas services. It has been legally operated in accordance with national laws and regulations. IXX.com declares that it will not provide services to the following countries or regions: China, Cuba, Iran, North Korea, Crimea, Sudan, Syria, United States [including all US territories such as Puerto Rico, American Samoa, Guam, Northern Mariana Islands, US Virgin Islands (St. Croix, St. John and St. Thomas)], Bangladesh Country, Bolivia, Ecuador and Kyrgyzstan.",
+      "content": "IXX.com has been operating legally in accordance with the laws and regulations of various countries. We will not provide services or part service to the following countries or regions: China, Cuba, Iran, North Korea, Crimea, Sudan, Syria, the United States [including all US territories , Such as Puerto Rico, American Samoa, Guam, the Northern Mariana Islands, the US Virgin Islands (St. Croix, St. John, and St. Thomas)], Bangladesh, Bolivia, Ecuador, and Kyrgyzstan.",
       "salute": "Thank you for your continued support to IXX.com!",
       "confirm": "Accept"
     }
