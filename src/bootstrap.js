@@ -10,6 +10,7 @@ import FiatMoney from '@/components/FiatMoney'
 import PrettyNum from '@/components/PrettyNum'
 import CurrencyInput from '@/components/CurrencyInput'
 import NumberInput from '@/components/NumberInput'
+import '@/components/common/ix-scroll-load'
 import VBtn from '@/components/VBtn'
 
 Vue.mixin(commonMixins)
