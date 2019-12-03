@@ -880,6 +880,7 @@ export default {
         if (!ren.code) {
           const $this = this
           $this.tableDataUname = ren.data
+          state.otc.userInfo = ren.data
         }
       })
     },

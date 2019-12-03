@@ -2588,7 +2588,11 @@
   },
   "otc": {
     "b_price_i": "100~50000 CNY",
-    "min_amount": "단일거래최소금액"
+    "min_amount": "단일거래최소금액",
+    "right_bar": {
+       "order_fee": "플랫폼 서비스 요금(%{currency})",
+       "orderdeal_fee": "수수료"
+    }
   },
   "el":{
     "pagination":{

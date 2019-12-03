@@ -2516,7 +2516,11 @@
   },
   "otc": {
     "b_price_i": "100~50000 CNY",
-    "min_amount": "單筆交易最小限額"
+    "min_amount": "單筆交易最小限額",
+    "right_bar": {
+       "order_fee": "平臺服務費(%{currency})",
+       "orderdeal_fee": "手續費"
+    }
   },
   "el":{
     "pagination":{
