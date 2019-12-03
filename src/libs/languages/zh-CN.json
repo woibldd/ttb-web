@@ -2595,7 +2595,8 @@
     "b_price_i": "100~50000 CNY",
     "min_amount": "单笔交易最小限额",
     "right_bar": {
-       "order_fee": "平台服务费(%{currency})"
+       "order_fee": "平台服务费(%{currency})",
+       "orderdeal_fee": "手续费"
     }
   },
   "el":{

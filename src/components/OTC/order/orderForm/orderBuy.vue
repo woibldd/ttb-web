@@ -158,8 +158,7 @@
                   </li>
                   <li>
                     <div class="label">
-                      {{ $t('otc_total',{legal_currency}) }}
-                      <span class="red">*</span>
+                      {{ $t('otc_total',{legal_currency}) }} 
                     </div>
                     <div class="content">
                       <div class="text-total">
@@ -167,6 +166,19 @@
                         <div
                           class="unit-label long"
                           v-html="legal_currency"/>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="label">
+                      {{ $t('otc.right_bar.orderdeal_fee') }} 
+                    </div>
+                    <div class="content">
+                      <div class="text-total">
+                        <span class="UNA">{{ fees || 0 }}</span>
+                        <div
+                          class="unit-label long"
+                          v-html="currency"/>
                       </div>
                     </div>
                   </li>
@@ -513,6 +525,9 @@ export default {
         return this.state.userInfo.is_merchant
       }
       return false
+    },
+    fees () {
+      return this.$big(this.state.otc.symbolInfo.make_rate || 0).times(this.amount || 0).round(this.state.otc.symbolInfo.fee_scale || 6)
     }
   },
   components: {
