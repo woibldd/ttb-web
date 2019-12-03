@@ -2722,7 +2722,10 @@
   },
   "otc": {
     "b_price_i": "100~50000 CNY",
-    "min_amount": "Min transaction amount"
+    "min_amount": "Min transaction amount",
+    "right_bar": {
+       "order_fee": "Platform service fee (%{currency})"
+    }
   },
   "el": {
     "pagination": {

@@ -250,7 +250,7 @@
                 <span>{{ $t('otc_ziurec_19') }}({{ textDetail.currency_type }})</span><em>{{ $big(textDetail.amount || 0).times(textDetail.price || 0) || '--' }}</em>
               </dd>
               <dd>
-                <span>{{ $t('otc_ziurec_13') }}</span><em>{{ $t('otc_ziurec_16') }}</em>
+                <span>{{ $t('otc.right_bar.order_fee') }}({{ textDetail.currency }})</span><em>{{ fee }}</em>
               </dd>
               <dd>
                 <span>{{ $t('otc_opponent_kyc_level') }}</span><em style="color: #FDA22D">{{ 'KYC' + textDetail.kyc_level || '--' }}</em>
@@ -415,6 +415,7 @@
 import { tradeMixins } from './mixins'
 import countDown from '@/components/CountDown'
 import processValue from '@/mixins/process-otc-value.js'
+import { state } from '@/modules/store.js'
 export default {
   components: {
     countDown
@@ -497,6 +498,15 @@ export default {
         })
       }
       this.$emit('bank-change', this.form.bankId)
+    }
+  },
+  computed: {
+    fee () {
+      if (state.otc.userInfo.is_free || !this.textDetail.amount) {
+        return this.$t('otc_ziurec_16')  
+      } else {
+        return this.$big(state.otc.symbolInfo.make_rate_ixx).times(this.textDetail.amount).round(state.otc.symbolInfo.fee_scale)
+      }
     }
   }
 }
