@@ -610,9 +610,8 @@ export default {
             // this.orderData.fee = this.$t('otc_ziurec_16')
             if (this.state.otc.userInfo.is_free) {
               this.orderData.fee = this.$t('otc_ziurec_16')
-            } else {
-              this.orderData.fee = this.$big(this.state.otc.symbolInfo.make_rate_ixx).times(this.amount).round(this.state.otc.symbolInfo.fee_scale)
-            }
+            } 
+            
             this.orderData.type =
               this.orderData.type == 1 ? 'otc_fixed_price' : 'otc_float_price'
             this.orderData.total = this.total
