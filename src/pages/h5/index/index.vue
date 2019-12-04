@@ -8,6 +8,7 @@
         <swiper
           :options="swiperOption"
           class="swiper-container"
+          style="height: 200px!important"
           ref="mySwiper">
           <!-- 轮播项 -->
           <swiper-slide
@@ -295,7 +296,10 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss" scoped>
+.h5-page__banner .swiper-container {
+  height: 200px!important;
+}
 /* .zopim{
         top: 80%!important;
         position: fixed!important;

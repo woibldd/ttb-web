@@ -11,7 +11,7 @@ module.exports = {
     'zh-CN': 'IXX | IXX全球首家数字资产交易共同体',
     'zh-HK': 'IXX | IXX全球首家數位資產交易共同體',
     en: 'IXX |  IXX | Rhino Exchange-BTC Contract Exchange Ranking-Bitcoin Price Real-Time Quote Trend Today-Perpetual Delivery Contract',
-    ko: 'IXX | IXX 수자 재산 거래 공동체'
+    ko: 'IXX | 수자 재산 거래 공동체'
   },
   keywords: '比特币交易所,合约交易所,合约交易所排名,比特币走势,比特币实时行情,永续合约,交割合约,比特币合约,BTC合约,犀牛交易所',
   keywordsConfig: {
