@@ -96,7 +96,7 @@
               <dd>
                 <span>{{ $t('otc_create_time') }}</span><em>
                   <!--{{ textDetail.create_time || '&#45;&#45;' }}-->
-                  {{ processValue('create_time', textDetail) || '--' }}
+                  {{ textDetail.create_time | date('Y-M-D H:m') }}
                 </em>
               </dd>
               <dd>
