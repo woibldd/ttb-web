@@ -9,7 +9,7 @@
         </router-link>
         <p class="footer_ltxt">
           <!-- <b>{{ $t('first') }}</b> -->
-          {{ exchangeNameConfig }}
+          {{ $t('exchangeNameConfig') }}
           <!-- {{ $t('exchangeNameConfig') }} -->
         </p>
         <div
