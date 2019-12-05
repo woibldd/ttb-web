@@ -157,6 +157,10 @@ export default {
         {
           name: this.$t('contract_action_button_down'),
           id: 5
+        },
+        {
+          name: this.$t('orderdeal_fee'),
+          id: 6
         }
       ],
       tableData: [],
