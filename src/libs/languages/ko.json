@@ -404,6 +404,8 @@
   "order_sts_partial": "부분체결",
   "order_sts_canceled": "사용자취소",
   "order_sts_post_rm": "취소",
+  "order_sts_partial2": "부분 시스템 거래 취소",
+  "order_sts_system_canceled": "시스템 거래 철회",
   "order_sts_empty_rm": "취소",
   "orderdeal_executed": "체결내역",
   "orderdeal_fee": "수수료",
@@ -1959,6 +1961,7 @@
   "otc_buy_step_4": "코인을 기다리다",
   "otc_overtime_tips_a1": "나머지",
   "otc_overtime_tips_a2": "시간이 지나면 자동으로 주문을 취소합니다",
+  "otc_overtime_tips_a3":"Cancel Order",
   "otc_payment_method": "지불 방식",
   "otc_buy_tips_a": "오프라인 이체 주의",
   "otc_buy_tips_b": "어떠한 정보도 달아 두지 마세요",
@@ -2191,6 +2194,7 @@
   "otc_kvcec_13": "위챗계정은 비여서는 안된다",
   "otc_kvcec_14": "수납QR코드가 비어서는  안된다",
   "watch_tips": "충전 주소가 정확히 일치하는지 확인하시고, 일치하지 않으면 충전 불능 또는 자산 회수에 실패할 수 있습니다",
+  "watch_tips_yta": "YTA 메인망 올인, 오래된 ERC20 충전 주소로 충전되지 않도록 주의",
   "contract_FUTURE_ETHUSD": "ETH계속유지",
   "trading_order_cancel_all": "전부철회",
   "tv_technical_indicators": "기술수치",
@@ -2656,6 +2660,9 @@
     },
     "table":{
       "emptyText":"No data"
+    },
+    "select": {
+      "noMatch": "No data"
     }
   },
   "fee": {

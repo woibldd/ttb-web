@@ -481,7 +481,8 @@ export default {
         4: 'order_sts_canceled',
         5: 'order_sts_partial',
         6: 'order_sts_post_rm',
-        7: 'order_sts_partial'
+        7: 'order_sts_partial2',
+        8: 'order_sts_system_canceled'
       }[statusId] || 'Unknown'
       return this.$i18n.t(context)
     },

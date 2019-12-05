@@ -480,6 +480,8 @@
   "order_sts_partial": "Partially filled",
   "order_sts_canceled": "Cancelled",
   "order_sts_post_rm": "Cancelled(Post-only)",
+  "order_sts_partial2": "Unfilled canceled by system",
+  "order_sts_system_canceled": "System Withdraw",
   "order_sts_empty_rm": "Cancelled",
   "orderdeal_executed": "History",
   "orderdeal_fee": "Fees",
@@ -1955,6 +1957,7 @@
   "otc_buy_step_4": "Waiting for money",
   "otc_overtime_tips_a1": "Remaining",
   "otc_overtime_tips_a2": "Timeout automatically cancels order",
+  "otc_overtime_tips_a3":"Cancel Order",
   "otc_payment_method": "Payment method",
   "otc_buy_tips_a": "Please pay attention to offline transfer",
   "otc_buy_tips_b": "Do not note any information",
@@ -2310,6 +2313,7 @@
   "otc_kvcec_13": " Please enter Wechat",
   "otc_kvcec_14": "Please enter payment QR code",
   "watch_tips": "Please ensure that deposit address is correct, if not will result in failure to deposit or assets can not be recovered",
+  "watch_tips_yta": "YTA Mainnet goes live, Please avoid deposit to the old ERC20 deposit address, otherwise you will not be able to retrieve it",
   "contract_FUTURE_ETHUSD": "ETHUSD",
   "trading_order_cancel_all": "Cancel all",
   "tv_technical_indicators": "Technical Indicator",
@@ -2791,6 +2795,9 @@
     },
     "table":{
       "emptyText":"No data"
+    },
+    "select": {
+      "noMatch": "No data"
     }
   },
   "fee": {

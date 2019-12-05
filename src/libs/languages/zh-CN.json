@@ -396,11 +396,14 @@
   "operate_noauth": "请登录后进行交易",
   "market_ph": "以市场最优价成交",
   "avg_price": "成交均价",
-  "order_sts_active": "生效",
   "order_sts_filled": "全部成交",
-  "order_sts_partial": "部分成交",
   "order_sts_canceled": "用户取消",
+  "order_sts_partial": "部分成交",
   "order_sts_post_rm": "被撤销",
+  "order_sts_partial2": "部分成交系统取消",
+  "order_sts_system_canceled": "系统撤单",
+
+  "order_sts_active": "生效",
   "order_sts_empty_rm": "被撤销",
   "orderdeal_executed": "成交记录",
   "orderdeal_fee": "手续费",
@@ -2212,6 +2215,7 @@
   "otc_collection_update": "编辑",
   "otc_placeholder_c": "请输入您预期购买单价",
   "watch_tips": "请认真核对充币地址是否正确一致，如果不一致将导致无法成功充值或资产不可找回",
+  "watch_tips_yta": "YTA主网上线，请注意避免充值至旧的ERC20充币地址，否则将无法找回",
   "contract_FUTURE_ETHUSD": "ETH永续",
   "trading_order_cancel_all": "全部撤销",
   "tv_technical_indicators": "技术指标",
@@ -2661,6 +2665,9 @@
         "nov": "十一月",
         "dec": "十二月"
       }
+    },
+    "select": {
+      "noMatch": "无数据"
     }
   },
   "fee": {

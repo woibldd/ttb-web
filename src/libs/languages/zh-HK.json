@@ -411,6 +411,8 @@
   "order_sts_partial": "部分成交",
   "order_sts_canceled": "用戶取消",
   "order_sts_post_rm": "被撤銷",
+  "order_sts_partial2": "部分成交系統取消",
+  "order_sts_system_canceled": "系統撤單",
   "order_sts_empty_rm": "被撤銷",
   "orderdeal_executed": "成交記錄",
   "orderdeal_fee": "手續費",
@@ -2121,6 +2123,7 @@
   "fund_my_assets_hide_tip": "小於",
   "otc_collection_update": "編輯",
   "watch_tips": "請認真核對充幣地址是否正確壹致，如果不壹致將導致無法成功充值或資產不可找回",
+  "watch_tips_yta": "YTA主網上線，請注意避免充值至舊的ERC20充幣地址，否則將無法找回",
   "contract_FUTURE_ETHUSD": "ETH永續",
   "trading_order_cancel_all": "全部撤銷",
   "tv_technical_indicators": "技術指標",
@@ -2584,6 +2587,9 @@
     },
     "table":{
       "emptyText":"无数据"
+    },
+    "select": {
+      "noMatch": "无数据"
     }
   },
   "fee": {

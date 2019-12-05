@@ -131,7 +131,10 @@
         <li> {{ $t('deposit_hint_addr', {coin: selectCoin.currency}) }}</li>
         <li> {{ $t('deposit_hint_confirm',{confirm: selectCoin.min_confirm, coin: selectCoin.currency}) }}</li>
         <li v-if="selectCoin.memo_support">{{ $t('eos_deposit_tip_security_third') }}</li>
-        <li >  {{ $t('watch_tips') }}</li>
+        
+        <li v-if="selectCoin.currency==='YTA'" >{{ $t('watch_tips_yta') }}</li>
+        <li v-else>{{ $t('watch_tips') }}</li>
+
         <li v-if="!!contract"> 
           {{$t('fund_deposit_tip_contract', {contract})}}
         </li>
