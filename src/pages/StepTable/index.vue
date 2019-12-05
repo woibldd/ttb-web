@@ -183,7 +183,7 @@
                   <template v-if="item.side === 2">
                     <dd>
                       {{ $t('otc_ziurec_13') }}：
-                      <span> {{ $t('otc_ziurec_16') }}</span>
+                      <span> {{ item.fee }}</span>
                     </dd>
                     <dd>
                       {{ $t('otc_seiitm_10') }}：
@@ -880,6 +880,7 @@ export default {
         if (!ren.code) {
           const $this = this
           $this.tableDataUname = ren.data
+          state.otc.userInfo = ren.data
         }
       })
     },

@@ -75,7 +75,11 @@
       </el-table-column>
       <el-table-column
         prop="amount"
-        :label="this.$t('otc_trans_idsl')"/>
+        :label="this.$t('otc_trans_idsl')"/> 
+      <el-table-column
+        v-if="formInline.type !== 6"
+        prop="fee"
+        :label="this.$t('orderdeal_fee')"/>
       <el-table-column
         prop="available"
         :label="$t('balance')">
@@ -153,6 +157,10 @@ export default {
         {
           name: this.$t('contract_action_button_down'),
           id: 5
+        },
+        {
+          name: this.$t('orderdeal_fee'),
+          id: 6
         }
       ],
       tableData: [],
