@@ -250,6 +250,11 @@
                 <span>{{ $t('otc_ziurec_19') }}({{ textDetail.currency_type }})</span><em>{{ $big(textDetail.amount || 0).times(textDetail.price || 0) || '--' }}</em>
               </dd>
               <dd>
+                <span>{{ $t('otc.right_bar.order_fee', {currency: textDetail.currency}) }}</span>
+                <em>{{ $t('otc_ziurec_16') }} </em>
+                <!-- <em>{{ textDetail.fee }} </em> -->
+              </dd>
+              <dd>
                 <span>{{ $t('otc.right_bar.order_fee', {currency: textDetail.currency}) }}</span><em>{{ textDetail.fee }}</em>
               </dd>
               <dd>

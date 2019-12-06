@@ -183,7 +183,8 @@
                   <template v-if="item.side === 2">
                     <dd>
                       {{ $t('otc_ziurec_13') }}：
-                      <span> {{ item.fee }}</span>
+                      <!-- <span> {{ item.fee }}</span> -->
+                      <span>{{ $t('otc_ziurec_16') }} </span>
                     </dd>
                     <dd>
                       {{ $t('otc_seiitm_10') }}：
