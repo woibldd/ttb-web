@@ -144,6 +144,7 @@ export default {
      
     totalBalance() {
       return this.$big(this.tradingAvai || 0)
+        .plus(this.walletAvai || 0)
         .plus(this.contractAvai || 0)
         .plus(this.otcAvai || 0)
         .toFixed(8)
