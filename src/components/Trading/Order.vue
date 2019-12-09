@@ -93,9 +93,8 @@
                 <!-- {{ `(${state.tv.product_name})` }} -->
               </th>
               <!--触发价格(USDT) -->
-              <th>{{ $t('trading_page.order.order_trigger_price') }}
-                <!-- {{ `(${state.tv.currency_name})` }} -->
-              </th>
+              <!-- <th>{{ $t('trading_page.order.order_trigger_price') }} 
+              </th> -->
               <th class="center">{{ $t('operation') }}</th>
             </tr>
           </thead>
@@ -122,12 +121,12 @@
               <td>{{ $big(order.amount).times(order.price) | fixed(priceScale) }}</td>
               <td>{{ order.executed | fixed(amountScale) }}</td>
               <td>{{ $big(order.amount).minus(order.executed) | fixed(amountScale) }}</td>
-              <td>
+              <!-- <td>
                 <span v-if="order.trigger_price > 0">
                   {{ order.trigger_price | fixed(priceScale) }}
                 </span>
                 <span v-else>--</span>
-              </td>
+              </td> -->
               <td class="center">
                 <a @click.prevent="cancel(order)">{{ $t('transfer_cancel') }}</a>
               </td>
@@ -178,9 +177,8 @@
                 <!-- {{ `(${state.tv.product_name})` }} -->
               </th>
               <!--触发价格(USDT) -->
-              <th>{{ $t('trading_page.order.order_trigger_price') }}
-                <!-- {{ `(${state.tv.currency_name})` }} -->
-              </th>
+              <!-- <th>{{ $t('trading_page.order.order_trigger_price') }} 
+              </th> -->
               <!--手续费(USDT) -->
               <th>{{ $t('trading_page.order.orderdeal_fee') }}
                 <!-- {{ `(${state.tv.currency_name})` }} -->
@@ -218,12 +216,12 @@
               <!--成交量（BTC）  -->
               <td>{{ order.executed | fixed(amountScale) }}</td>
               <!--触发价格(USDT) -->
-              <td>
+              <!-- <td>
                 <span v-if="order.trigger_price > 0">
                   {{ order.trigger_price | fixed(priceScale) }}
                 </span>
                 <span v-else>--</span>
-              </td>
+              </td> -->
               <!--手续费(USDT) -->
               <td>{{ order.fee | fixed(priceScale) }}</td>
               <!-- 状态 -->
@@ -481,7 +479,8 @@ export default {
         4: 'order_sts_canceled',
         5: 'order_sts_partial',
         6: 'order_sts_post_rm',
-        7: 'order_sts_partial'
+        7: 'order_sts_partial2',
+        8: 'order_sts_system_canceled'
       }[statusId] || 'Unknown'
       return this.$i18n.t(context)
     },

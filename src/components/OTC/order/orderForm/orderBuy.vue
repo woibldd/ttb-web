@@ -158,8 +158,7 @@
                   </li>
                   <li>
                     <div class="label">
-                      {{ $t('otc_total',{legal_currency}) }}
-                      <span class="red">*</span>
+                      {{ $t('otc_total',{legal_currency}) }} 
                     </div>
                     <div class="content">
                       <div class="text-total">
@@ -167,6 +166,19 @@
                         <div
                           class="unit-label long"
                           v-html="legal_currency"/>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="label">
+                      {{ $t('otc.right_bar.orderdeal_fee') }} 
+                    </div>
+                    <div class="content">
+                      <div class="text-total">
+                        <span class="UNA">{{ fees || 0 }}</span>
+                        <div
+                          class="unit-label long"
+                          v-html="currency"/>
                       </div>
                     </div>
                   </li>
@@ -387,6 +399,7 @@ export default {
       type: 1,
       nodata: false,
       nodata1: false,
+      minAmount: '', // 最小限额
       order: {
         currency: 'BTC',
         side: 1,
@@ -435,7 +448,7 @@ export default {
           },
           {
             title: 'fee', // 平台服务费
-             text: 'otc_ziurec_13',
+             text: 'otc.right_bar.order_fee',
             width: '',
             key: 'fee'
           },
@@ -512,6 +525,10 @@ export default {
         return this.state.userInfo.is_merchant
       }
       return false
+    },
+    fees () {
+      // return this.$big(this.state.otc.symbolInfo.make_rate || 0).times(this.amount || 0).round(this.state.otc.symbolInfo.fee_scale || 6)
+      return this.$t('otc_ziurec_16')
     }
   },
   components: {
@@ -592,6 +609,10 @@ export default {
             this.step = 1
             this.orderData = res.data
             this.orderData.fee = this.$t('otc_ziurec_16')
+            // if (this.state.otc.userInfo.is_free) {
+            //   this.orderData.fee = this.$t('otc_ziurec_16')
+            // } 
+            
             this.orderData.type =
               this.orderData.type == 1 ? 'otc_fixed_price' : 'otc_float_price'
             this.orderData.total = this.total
@@ -909,7 +930,7 @@ export default {
       }
     }
     .action-button-group {
-      padding: 20px 40px;
+      padding: 20px 40px 40px;
       .btn-left {
         float: left;
         .btn {

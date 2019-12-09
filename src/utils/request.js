@@ -5,8 +5,16 @@ import { getUser } from '@/utils/auth'
 
 // create an axios instance
 // axios.defaults.withCredentials = true
+let _env_ = ''
+if(process.env.NODE_ENV != 'development'){
+  let val = location.host.split('.')
+  _env_ = val.slice(val.length - 2, val.length).join('.')
+  _env_ = `https://i.${_env_}/`
+  // _env_ = `https://i.ixex.io/`
+  // _env_ = `https://i.ixex.pro/`
+}
 const service = axios.create({
-  baseURL: 'https://i.ixx.com', // url = base url + request url
+  baseURL: _env_ || 'https://i.ixex.pro/', // url = base url + request url
   withCredentials: true, // send cookies when cross-domain requests
   timeout: 10000 // request timeout
 })
@@ -18,11 +26,7 @@ service.interceptors.request.use(
     // if (!config.url.startsWith('http'))config.url = process.env.VUE_APP_BASE_API_I + config.url
     // const userDataStr = getUser()
     // console.log(store,222);
-    console.log(process.env.NODE_ENV);
-
     if (store.state.userData) {
-      console.log(store.state.userData,22);
-
       config.headers['token'] = store.state.userData.token
       // config.headers['ix_session_id'] = store.state.userData.ix_session_id
     }
