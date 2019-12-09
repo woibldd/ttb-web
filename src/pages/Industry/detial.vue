@@ -33,7 +33,7 @@
           <div class="btn" @click="next">下一篇</div>
         </div>
       </div>
-      <div class="quotation" style="position:fixed">
+      <div class="quotation">
         <div class="btn-1" @click="collectHandle">
           我的收藏
         </div>
