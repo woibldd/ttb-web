@@ -251,8 +251,8 @@
               </dd>
               <dd>
                 <span>{{ $t('otc.right_bar.order_fee', {currency: textDetail.currency}) }}</span>
-                <em>{{ $t('otc_ziurec_16') }} </em>
-                <!-- <em>{{ textDetail.fee }} </em> -->
+                <!-- <em>{{ $t('otc_ziurec_16') }} </em> -->
+                <em>{{ textDetail.fee }} </em>
               </dd>
               <dd>
                 <span>{{ $t('otc.right_bar.order_fee', {currency: textDetail.currency}) }}</span><em>{{ textDetail.fee }}</em>

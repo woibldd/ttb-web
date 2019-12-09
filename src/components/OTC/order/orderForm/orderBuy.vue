@@ -527,8 +527,8 @@ export default {
       return false
     },
     fees () {
-      // return this.$big(this.state.otc.symbolInfo.make_rate || 0).times(this.amount || 0).round(this.state.otc.symbolInfo.fee_scale || 6)
-      return this.$t('otc_ziurec_16')
+      return this.$big(this.state.otc.symbolInfo.make_rate || 0).times(this.amount || 0).round(this.state.otc.symbolInfo.fee_scale || 6)
+      // return this.$t('otc_ziurec_16')
     }
   },
   components: {
@@ -608,10 +608,10 @@ export default {
           if (!res.code) {
             this.step = 1
             this.orderData = res.data
-            this.orderData.fee = this.$t('otc_ziurec_16')
-            // if (this.state.otc.userInfo.is_free) {
-            //   this.orderData.fee = this.$t('otc_ziurec_16')
-            // } 
+            // this.orderData.fee = this.$t('otc_ziurec_16')
+            if (this.state.otc.userInfo.is_free) {
+              this.orderData.fee = this.$t('otc_ziurec_16')
+            } 
             
             this.orderData.type =
               this.orderData.type == 1 ? 'otc_fixed_price' : 'otc_float_price'
