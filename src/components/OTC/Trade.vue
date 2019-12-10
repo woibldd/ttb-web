@@ -34,6 +34,17 @@ export default {
     //   if(res.code===0) {
     //   }
     // }
+  },
+  async created () {
+    let res = await service.getOtcUserinfo()
+    if (res.code === 0) {
+      state.otc.userInfo = res.data
+    }
+    if (!state.userStatus) {
+      this.$router.replace({
+        name: 'login'
+      })
+    }
   }
 }
 

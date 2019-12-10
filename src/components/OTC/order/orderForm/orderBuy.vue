@@ -525,8 +525,17 @@ export default {
         return this.state.userInfo.is_merchant
       }
       return false
+    }, 
+    otcUserInfo () {
+      if (!this.state.otc.userInfo) {
+        return {}
+      }
+      return this.state.otc.userInfo
     },
-    fees () {
+    fees () { 
+      if (this.otcUserInfo.is_free || !this.symbolInfo) {
+        return this.$t('otc_ziurec_16')
+      }
       return this.$big(this.state.otc.symbolInfo.make_rate || 0).times(this.amount || 0).round(this.state.otc.symbolInfo.fee_scale || 6)
       // return this.$t('otc_ziurec_16')
     }
@@ -583,8 +592,12 @@ export default {
       } else if (!this.amount) {
         this.nodata1 = true
       } else {
-        this.order.currency = this.currency
-        this.order.total = this.total.round(2, 0) // Number(this.$big(this.amount).mul(this.price).toFixed(2));
+        this.order.currency = this.currency 
+        if (this.side === 2 && !this.otcUserInfo.is_free) {
+          this.order.total = this.$big(this.amount).minus(this.fees).times(this.price).round(2, 0)
+        } else {
+          this.order.total = this.total.round(2, 0) // Number(this.$big(this.amount).mul(this.price).toFixed(2));
+        }
         this.order.type = this.type
         this.order.side = this.side
         this.order.price = this.price
@@ -601,7 +614,7 @@ export default {
           this.order.remark  = this.$t('otc_order_default_tips')
         }
 
-        console.log({total: this.total})
+        // console.log({total: this.total})
         service.createOtcOrder(this.order).then(res => {
           this.nodata = false
           this.nodata1 = false

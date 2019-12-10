@@ -252,11 +252,12 @@
               <dd>
                 <span>{{ $t('otc.right_bar.order_fee', {currency: textDetail.currency}) }}</span>
                 <!-- <em>{{ $t('otc_ziurec_16') }} </em> -->
-                <em>{{ textDetail.fee }} </em>
-              </dd>
-              <dd>
+                <em v-if="!+textDetail.fee">{{ $t('otc_ziurec_16') }} </em>
+                <em v-else>{{ textDetail.fee }} </em>
+              </dd> 
+              <!-- <dd>
                 <span>{{ $t('otc.right_bar.order_fee', {currency: textDetail.currency}) }}</span><em>{{ textDetail.fee }}</em>
-              </dd>
+              </dd> -->
               <dd>
                 <span>{{ $t('otc_opponent_kyc_level') }}</span><em style="color: #FDA22D">{{ 'KYC' + textDetail.kyc_level || '--' }}</em>
               </dd>
@@ -419,7 +420,7 @@
 <script type="text/ecmascript-6">
 import { tradeMixins } from './mixins'
 import countDown from '@/components/CountDown'
-import processValue from '@/mixins/process-otc-value.js' 
+import processValue from '@/mixins/process-otc-value.js'  
 export default {
   components: {
     countDown

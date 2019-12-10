@@ -143,11 +143,11 @@ export default {
           id: ''
         },
         {
-          name: this.$t('transfer_in'),
+          name: this.$t('transfer_out'),
           id: 1
         },
         {
-          name: this.$t('transfer_out'),
+          name: this.$t('transfer_in'),
           id: 2
         },
         {
