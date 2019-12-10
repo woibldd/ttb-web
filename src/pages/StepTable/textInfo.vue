@@ -156,8 +156,9 @@
                 <em>{{ processValue('issue_time_avg', textDetail) || '--' }}</em>
               <!--<em>{{textDetail.issue_time_avg || '&#45;&#45;'}}</em>-->
               </dd>
-              <dd>
-                <span><b v-html="textDetail.side === 1 ? $t('otc_sideoc_2') : $t('otc_sideoc_1')"/>{{ $t('otc_sideoc_5') }}</span>
+               <dd>
+                <!-- <span><b v-html="textDetail.side === 1 ? $t('otc_sideoc_2') : $t('otc_sideoc_1')"/>{{ $t('otc_sideoc_5') }}</span>  -->
+                <span>{{ $t('otc_remark') }}</span>
                 <em>{{ textDetail.remark || '--' }}</em>
               </dd>
             </dl>
