@@ -78,10 +78,10 @@
           <h2 class='mb-10'>{{ $t("h5_home_introduce7") }}</h2>
           <p>{{ $t("h5_home_introduce8") }}</p>
         </li>
-         
-      </ul> 
+
+      </ul>
     </div>
- 
+
     <!-- <h5-footer/> -->
     <div class="corperator">
       <div class="corperator-container">
@@ -308,7 +308,7 @@ export default {
           }
         }
       }
-    } 
+    }
   },
   components: {
     MineSummary,
@@ -342,7 +342,7 @@ export default {
     margin-top: 50px;
     img {
       max-width: 60%;
-      max-height: 150px; 
+      max-height: 150px;
 
     }
   }
@@ -358,5 +358,7 @@ export default {
     width: 300px;
   }
 }
-
+.swiper-container {
+  height: 170px!important;
+}
 </style>

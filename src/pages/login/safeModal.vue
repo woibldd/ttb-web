@@ -7,7 +7,7 @@
       <span>{{ $t('modal.safeModal.greet') }}</span>
     </div>
     <div class="safe-content">
-      <p>{{ $t('modal.safeModal.content') }}</p> 
+      <p>{{ $t('modal.safeModal.content') }}</p>
       <p class="pt-10">{{ $t('modal.safeModal.salute') }}</p>
     </div>
     <div
