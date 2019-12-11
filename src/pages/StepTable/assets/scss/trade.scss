@@ -189,8 +189,7 @@ $high-color: #333;
           width: 320px;
         }
         .state {
-          flex: 0 0 0 200px;
-          width: 200px;
+          width: 230px;
           text-align: right;
           span {
             color: #FDA22D;
@@ -212,7 +211,8 @@ $high-color: #333;
             font-size: $font-middle;
             color: #333;
             font-weight: 500;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+            margin-top: 10px;
           }
           dd {
             font-size: $font-middle;
@@ -249,6 +249,7 @@ $high-color: #333;
               font-size: 16px;
               font-style: normal;
               padding-bottom: 24px;
+              padding-top: 7px;
               display: inline-block;
               font-weight: 500;
             }
@@ -270,26 +271,30 @@ $high-color: #333;
             flex: 1;
           }
           .time-ago {
-            flex: 0 0 0 78px;
-            width: 78px;
+            // flex: 0 0 0 78px;
+            // width: 78px;
             text-align: right;
             font-size: $font-small;
             color: #999999;
             position: absolute;
             right: 0;
+            top: -18px;
           }
           .btn {
             position: absolute;
             right: 0;
             bottom: 0;
-            width: 84px;
+            width: 120px;
             height: 30px;
             line-height: 30px;
             text-align: center;
             background: #FDA22D;
             border-radius: 6px;
             color: #fff;
-            font-size: $font-middle;
+            font-size: $font-middle; 
+            &.big {
+              width: 138px;
+            }
           }
           .btn2 {
             right: 106px!important;

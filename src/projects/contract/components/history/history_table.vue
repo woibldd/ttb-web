@@ -119,7 +119,7 @@
             :colspan="headers.length">
             <span
               v-show="isLoading"
-              style="line-height:13px">loading</span>
+              style="line-height:13px">{{ $t('loading') }}</span>
           </td>
         </tr>
       </tbody>
