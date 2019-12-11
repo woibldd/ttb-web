@@ -18,7 +18,10 @@ export const tradeRouter = [
       {
         path: 'trade',
         name: 'trade',
-        component: () => import(/* webpackChunkName: "Fund" */ '@/components/OTC/Trade')
+        component: () => import(/* webpackChunkName: "Fund" */ '@/components/OTC/Trade'),
+        meta: {
+          require: true
+        }
       },
       {
         path: 'FrenchBill',

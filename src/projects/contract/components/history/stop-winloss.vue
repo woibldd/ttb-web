@@ -210,9 +210,8 @@ export default {
             .div(price)
             .minus(this.$big(amount).div(swprice));
         } else if (price > 0 && swprice > 0 && amount < 0) {
-          result = this.$big(amount)
-            .div(swprice)
-            .minus(this.$big(amount).div(price));
+         result = this.$big(amount).div(swprice).abs()
+            .minus(this.$big(amount).div(price).abs())
         }
       } else {
         if (this.pairInfo) {

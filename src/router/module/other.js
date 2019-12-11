@@ -45,6 +45,11 @@ export const otherRouter = [
     component: () => import('@/pages/Industry/industry')
   },
   {
+    path: '/blog',
+    name: 'blog',
+    redirect:{ name: 'industry'}
+  },
+  {
     path: '/industry',
     name: 'industry',
     meta: {
