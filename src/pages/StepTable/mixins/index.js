@@ -17,6 +17,7 @@ export const tradeMixins = {
   },
   data () {
     return {
+      state,
       active: 0,
       side: 0,
       detail: {},
