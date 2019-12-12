@@ -194,13 +194,17 @@ export const actions = {
     }
   },
   async updateSession () {
+    console.log('updateSession')
     let res = await service.getUserInfo()
     if (res.code) {
       // 重试一次
       res = await service.getUserInfo()
     }
-    if (!res.code) {
+    
+    if (res.code >= 0) {
       actions.setUserInfo(res.code ? null : res.data)
+    }
+    if (!res.code) {
       store.commit('SET_USERDATA',res.code ? null : res.data)
       setSession(res.data.session_id)
     }

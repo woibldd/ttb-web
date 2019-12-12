@@ -121,10 +121,16 @@
               width="290"
               @click="submit"/>
             <div class="to-others">
-              <router-link :to="{name: 'registerBy', params: $route.params, query: $route.query}">{{ $t('signup') }}</router-link>
-              <router-link
-                :to="{name: 'recover'}"
-                class="ml-5">{{ $t('if_forgot') }}?</router-link>
+              <div class="mr-10">
+                <router-link
+                  :to="{name: 'recover'}">{{ $t('if_forgot') }}?
+                </router-link>
+              </div>
+              <div class="mr-10 mt-6">
+                <span style="font-size:14px; color: #999;">  {{ $t('no_account') }} </span>
+                <router-link :to="{name: 'registerBy', params: $route.params, query: $route.query}">{{ $t('signup') }}
+                </router-link>
+              </div>
             </div>
           </div>
         </form>

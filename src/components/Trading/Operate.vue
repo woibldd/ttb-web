@@ -34,9 +34,10 @@
       <ProMarketOrder v-show="tab === 'market'"/>
       <ProStopOrder v-show="tab === 'stop'"/>
     </div>
+    {{state.userStatus}}
     <div
       class="mask"
-      :class="{show: state.userStatus === 0}">
+      :class="{show: +state.userStatus === 0}">
       <div class="mask-front">
         <div class="hint">{{ $t('operate_noauth') }}</div>
         <div class="link-group">
@@ -84,7 +85,7 @@ export default {
       this.$eh.$on('app:resize', this.onresize)
     },
     onresize () {
-      this.bodyHeight = this.container.height - 32 + 'px'
+      // this.bodyHeight = this.container.height - 32 + 'px'
     },
     signin () {
       actions.setLoginBack({

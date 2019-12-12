@@ -468,7 +468,7 @@
   "set_buy_all": "Calculate max buy amount using your available balances and price.",
   "set_sell_all": "Calculate max sell amount using your available balances and price.",
   "order_noauth": "Login to view your orders",
-  "operate_noauth": "Login to make your trade",
+  "operate_noauth": "Login to trade",
   "market_ph": "MARKET",
   "avg_price": "Average",
   "nav_media": "Community",
@@ -2918,5 +2918,6 @@
       "salute": "Thank you for your continued support to IXX.com!",
       "confirm": "Accept"
     }
-  }
+  },
+  "no_account": "No Account yet?"
 }
