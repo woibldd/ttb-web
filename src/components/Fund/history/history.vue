@@ -3,8 +3,8 @@
     <div class="my-fund-content">
       <div class="fund-total">
         <div class="left">
-          <div class="total__label">{{ $t('withdraw_avlb') }}</div>
-          <div class="total__coin">{{ total | fixed(2) }} {{ unit }} </div>
+          <!-- <div class="total__label">{{ $t('withdraw_avlb') }}</div> -->
+          <!-- <div class="total__coin">{{ total | fixed(2) }} {{ unit }} </div> -->
         </div>
         <el-radio-group  :empty-text="$t('no_data')"
           @change="changeType"

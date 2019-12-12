@@ -145,7 +145,7 @@
 
     <div class="trend-view"> 
       <div class="charts">
-        <trendCharts :pair="currencyPair"/>
+        <trendCharts :pair="currencyPair.currency"/>
       </div>
     </div>
   </div>

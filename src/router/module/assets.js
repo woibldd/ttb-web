@@ -108,20 +108,20 @@ export const capitalRouter = [
         path: 'share',
         name: 'share',
         component: () => import(/* webpackChunkName: "FundAddress" */ '@/pages/Capital/share_history.vue')
-      },
-      {
-        path: 'hyTrade',
-        name: 'hyTrade',
-        redirect: 'hyTrade/index',
-        component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contract/contract.vue'),
-        children: [
-          {
-            path: 'index/:currency?',
-            name: 'contractIndex',
-            component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contract/contract.vue')
-          }
-        ]
       }
+      // {
+      //   path: 'hyTrade',
+      //   name: 'hyTrade',
+      //   redirect: 'hyTrade/index',
+      //   component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contract/contract.vue'),
+      //   children: [
+      //     {
+      //       path: 'index/:currency?',
+      //       name: 'contractIndex',
+      //       component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contract/contract.vue')
+      //     }
+      //   ]
+      // }
     ]
   }
 ]
