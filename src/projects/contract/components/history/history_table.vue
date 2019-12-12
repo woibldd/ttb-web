@@ -34,6 +34,9 @@
             <span
               v-else-if="header.title === 'contract_trigger_price_rule'"
               v-html="triggerPrice('trigger_price', row, 1)" />
+             <span
+              v-else-if="header.title === 'contract_page.history.stop_loss.price_distance'"
+              v-html="triggerPrice('trigger_price', row, 1)" />
             <span
               v-else-if="header.title==='contract_deal_price' ||
               header.title === 'contract_assign_price'"
@@ -613,7 +616,7 @@ export default {
           trigger_price: obj.newValue,
         }) 
         if (!res.code) {
-          item.amount = obj.newValue
+          item.trigger_price = obj.newValue
         }
         else {
           utils.alert(res.message)
