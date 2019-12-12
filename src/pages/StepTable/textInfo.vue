@@ -81,7 +81,7 @@
                   <em
                     v-if="!textDetail.other_appeal"
                     style="color: #FDA22D">
-                    {{ state(textDetail.state) }}
+                    {{ exchangeState(textDetail.state) }}
                   </em>
                   <em
                     v-else
@@ -398,6 +398,7 @@
           <a
             href="javascript:;"
             class="btn_t"
+            :class="{'big': state.locale === 'en'}"
             @click="stepHandle('down')">{{ $t('otc_confirm_issued') }}</a>
         </template>
         <template v-if="textDetail.side === 2 && textDetail.state === 7 && !textDetail.appeal && !textDetail.other_appeal && textCode === 0">
@@ -405,6 +406,7 @@
           <a
             href="javascript:;"
             class="btn_t"
+            :class="{'big': state.locale === 'en'}"
             @click="stepHandle('down')">{{ $t('otc_confirm_issued') }}</a>
         </template>
         <!--<template v-if="textDetail.side === 2  && textCode === 0">-->

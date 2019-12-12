@@ -12,7 +12,7 @@
           <div class="search-box">
             <input
               v-model="search"
-              placeholder="搜索"
+              :placeholder="$t('search')"
               type="text"
               @input="filterPair()">
             <icon name="home-search-t"/>

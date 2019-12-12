@@ -403,7 +403,8 @@ export default {
             passive: 0,
             tp_type: -1 
           }); 
-        } 
+        }  
+        this.$eh.$emit("protrade:order:refresh", "confirm stop winloss"); 
       }
       if (this.stoplossState) { 
         setTimeout(async () => {  
@@ -429,7 +430,7 @@ export default {
           } 
           this.$eh.$emit("protrade:order:refresh", "confirm stop winloss"); 
         }, 1200)
-      } 
+      }  
       this.pClose(this.id)
     }
 

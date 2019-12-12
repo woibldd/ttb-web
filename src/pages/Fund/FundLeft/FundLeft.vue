@@ -120,7 +120,7 @@
         <dd>
           <router-link
             class="sub-menu-item"
-            to="/fund/hyTrade">{{ $t('contract_account') }}
+            to="/fund/my/contract">{{ $t('contract_account') }}
           </router-link>
         </dd>
        <!-- <dd>

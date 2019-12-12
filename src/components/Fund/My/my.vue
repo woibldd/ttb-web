@@ -45,8 +45,8 @@
         <span >{{$t('otc_otutcol_16')}}        </span>
       </div>
       <div class="fund-total">
-        <!-- <div class="total__label">{{ $t('my_balance_equal') }}</div>
-        <div class="total__coin">{{ total || 0 | fixed(unit.scale) }} {{ unit.name }}</div> -->
+        <div class="total__label">{{ $t('my_balance_equal') }}</div>
+        <div class="total__coin">{{ total || 0 | fixed(unit.scale) }} {{ unit.name }}</div>
         <!--  百万usdt活动需要,先写死 -->
         <!-- <div
           class="fund-with-usdt"

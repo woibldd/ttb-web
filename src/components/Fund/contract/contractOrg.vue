@@ -18,7 +18,7 @@
       <div>
         <router-link
           class="fund-history mr-22 "
-          to="/fund/hyTrade/index"> {{ $t('account_balance') }}</router-link>
+          to="/fund/my/contract/index"> {{ $t('account_balance') }}</router-link>
         <router-link
           class="fund-history mr-22"
           to="/fund/my/contract/history"> {{ $t('transaction_record') }}</router-link>

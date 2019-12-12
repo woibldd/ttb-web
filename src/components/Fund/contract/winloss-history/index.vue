@@ -31,7 +31,7 @@
             <el-option
               v-for="(item, idx) in pairList"
               :key="idx"
-              :label="item"
+              :label="item.currency"
               :value="item"/> 
           </el-select>
         </div>
@@ -89,8 +89,8 @@
           <td class="table__td">{{ item.currency }}</td>
           <td class="table__td">{{ $t(closeType[item.side]) }}</td>
           <td class="table__td">{{ item.amount }}</td>
-          <td class="table__td"> {{item.open_price | fixed(valueScale)}} </td>
-          <td class="table__td">{{ item.sell_price | fixed(valueScale)}} </td>
+          <td class="table__td"> {{item.open_price | fixed(currencyPair.price_scale)}} </td>
+          <td class="table__td">{{ item.sell_price | fixed(currencyPair.price_scale)}} </td>
           <td class="table__td">
             <span :class="item.realized > 0 ? 'color-up' : 'color-down'" >
               {{ item.realized | fixed(8)}} 
@@ -118,34 +118,34 @@
         <div class="value">
           <span :class="realized.realized_total > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_total | fixed(8)}}<b>BTC</b></span>
         </div>
-        <div class="valuation">≈  {{translateByRate(realized.realized_total) | fixed(2)}} USD</div>
+        <div class="valuation">≈  {{translateByRate(realized.realized_total) | fixed(currencyPair.price_scale)}} USD</div>
       </div>
       <div class="realized-item">
         <div class="title">{{$t('fund.contract.current_day_realized')}} </div>
         <div class="value">
           <span :class="realized.realized_today > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_today | fixed(8)}}<b>BTC</b></span>
         </div>
-        <div class="valuation">≈  {{translateByRate(realized.realized_today) | fixed(2)}} USD</div>
+        <div class="valuation">≈  {{translateByRate(realized.realized_today) | fixed(currencyPair.price_scale)}} USD</div>
       </div>
       <div class="realized-item">
         <div class="title">{{$t('fund.contract.unrealized_mark_price')}} </div>
         <div class="value">
           <span :class="realized.realized_market > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_market | fixed(8)}}<b>BTC</b></span>
         </div>
-        <div class="valuation">≈ {{translateByRate(realized.realized_market) | fixed(2)}} USD</div>
+        <div class="valuation">≈ {{translateByRate(realized.realized_market) | fixed(currencyPair.price_scale)}} USD</div>
       </div>
       <div class="realized-item">
         <div class="title">{{$t('fund.contract.unrealized_last_price')}} </div>
         <div class="value">
           <span :class="realized.realized_price > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{realized.realized_price | fixed(8)}}<b>BTC</b></span>
         </div>
-        <div class="valuation">≈ {{translateByRate(realized.realized_price) | fixed(2)}} USD</div>
+        <div class="valuation">≈ {{translateByRate(realized.realized_price) | fixed(currencyPair.price_scale)}} USD</div>
       </div>
     </div>
 
     <div class="trend-view"> 
       <div class="charts">
-        <trendCharts :pair="currencyPair"/>
+        <trendCharts :pair="currencyPair.currency"/>
       </div>
     </div>
   </div>
@@ -167,13 +167,12 @@ export default {
       futureTypes: [
         { name:'contract_FUTURE_BTCUSD', key: 0}, 
       ],
-      pairList: [
-        'BTCUSD',
-        'ETHUSD',
-        'EOSUSD'
-      ],
+      pairList: [],
       currencyFuture: 0,
-      currencyPair: 'BTCUSD',
+      currencyPair:  {
+        currency: 'BTCUSD',
+        price_scale: 1
+      },
       pages:{
         total: 0,
         page: 1,
@@ -207,7 +206,7 @@ export default {
   methods: {
     async getFundHistory () {
       const params = {
-        currency: this.currencyPair,
+        currency: this.currencyPair.currency,
         page: this.pages.page,
         size: this.pages.size
       }
@@ -244,7 +243,15 @@ export default {
     
   },
   async created() { 
-    let res = await service.getRates({currency: 'BTC'})  
+    let res = await service.getContractSymList()
+    if (!res.code) {
+      this.pairList = res.data.items
+      if (this.pairList.length > 0) {
+        this.currencyPair = this.pairList[0]
+      }
+    }
+    
+    res = await service.getRates({currency: 'BTC'})  
     if (!!res && !res.code) {
       this.rates = res.data.BTC
     }

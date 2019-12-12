@@ -235,7 +235,8 @@ export default {
         return;
       }
       
-      let res = await service.transferContractFund({ 
+      // let res = await service.transferContractFund({
+      let res = await service.transferSelf({
         type: 1, 
         currency: this.selectCoin,
         from: this.accountFrom,

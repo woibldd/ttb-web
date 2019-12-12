@@ -67,7 +67,7 @@
               <span>
                 <router-link
                   class="sub-menu-item"
-                  to="/fund/fTrade">{{ $t('otc_account') }}
+                  to="/fund/my/contract/index">{{ $t('otc_account') }}
                 </router-link>
               </span>
               <div>
@@ -77,7 +77,7 @@
               <em> 
                 <router-link
                   class="sub-menu-item"
-                  to="/fund/fTrade">
+                  to="/fund/my/contract/index">
                   <icon name='goto' />
                 </router-link>
               </em>
