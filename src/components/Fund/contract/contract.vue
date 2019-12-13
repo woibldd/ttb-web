@@ -159,10 +159,10 @@
               <span
                 v-tooltip.top-center="{html: true, content: $t('contract_unrealized_profit_and_loss_tips'), classes: 'contract_fund'}"
                 class="c-999 cursor_help">{{ $t('unrealized_profit_and_loss') }}</span>
-              <span class="c-333">{{ (holding.unrealized || 0) | fixed(8) }} {{ selectPair.product_name }}</span>
+              <span class="c-333">{{ (holding.unrealizedlp || 0) | fixed(8) }} {{ selectPair.product_name }}</span>
               <span
                 class="c-999"
-                style="transform: scale(0.8);position:absolute;margin-left: 90px;">≈ {{ translateByRate(holding.unrealized) }} USD</span>
+                style="transform: scale(0.8);position:absolute;margin-left: 90px;">≈ {{ translateByRate(holding.unrealizedlp) }} USD</span>
             </div>
             <!-- 保证金余额 -->
             <div class="table__tr right border-bottom-1 yellow">
@@ -223,7 +223,8 @@
             v-if="(holding.holding || 0) != 0">
             <contractCard
               :holding="holding"
-              :rates="btcRates"
+              :rates="btcRates" 
+              :unrealized="holding.unrealizedlp"
             />
           </div>
         </div>
@@ -306,12 +307,7 @@ export default {
     // lastPrice () {
     //   return this.state.ct.lastPrice
     // },
-    gm () {
-      console.log(123)
-    },
-    change2 () {
-      console.log(456)
-    },
+    
     pairInfo () {
       return this.selectPair
     },
@@ -340,7 +336,7 @@ export default {
     // 保证金余额
     marginBalance () {
       // 保证金余额 = 可用余额 + 未实现盈亏
-      return this.$big(this.holding.available_balance || 0).plus(this.holding.unrealized || 0)
+      return this.$big(this.holding.available_balance || 0).plus(this.holding.unrealizedlp || 0)
     },
     // 保证金=【（仓位保证金+委托保证金）/保证金余额】*100%（四舍五入，取整）
     margin () {
@@ -356,7 +352,7 @@ export default {
         '/fund/my/contract/history':this.$t('transaction_record'),
         '/fund/my/contract/assets-history':this.$t('capital_record'),
       }
-      console.log(this.$route.path,222);
+      // console.log(this.$route.path,222);
       
       return obj[this.$route.path]
     },
@@ -382,6 +378,7 @@ export default {
         obj.marginBalance = this.$big(item.available_balance || 0) // 保证金余额
         obj.available_balance = item.available_balance // 可用余额
         obj.unrealized = this.$big(0) // 未实现盈亏
+        obj.unrealizedlp = this.$big(0)
         obj.margin_position = this.$big(0) // 仓位保证金
         obj.margin_delegation = this.$big(0) // 委托保证金
         obj.totalValue = this.$big(0) // 持仓总价值
@@ -390,8 +387,9 @@ export default {
           if (obj.marginBalance.eq(0)) {
             obj.marginBalance = obj.marginBalance.plus(arg.available_balance || 0)
           }
-          obj.marginBalance = obj.marginBalance.plus(arg.unrealized || 0)
+          obj.marginBalance = obj.marginBalance.plus(arg.unrealizedlp || 0)
           obj.unrealized = obj.unrealized.plus(arg.unrealized || 0)
+          obj.unrealizedlp = obj.unrealizedlp.plus(arg.unrealizedlp || 0)
           obj.margin_position = obj.margin_position.plus(arg.margin_position || 0)
           obj.margin_delegation = obj.margin_delegation.plus(arg.margin_delegation || 0)
           obj.totalValue = obj.totalValue.plus(arg.value)
@@ -669,8 +667,8 @@ export default {
             item.currencyName = item.currency.replace('USD', '')
             item.camount = item.available
             item.estValue = this.getEstValue(item)
-            console.log({ item })
-            console.log({ holding: this.holding })
+            // console.log({ item })
+            // console.log({ holding: this.holding })
             return item
           })
         }

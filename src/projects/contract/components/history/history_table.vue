@@ -537,7 +537,7 @@ export default {
       return this.name && this.name === 'contract_history_position'
     },
     bodyData () {
-      console.log(this.tableData)
+      // console.log(this.tableData)
       if (Array.isArray(this.tableData)) {
         let dataview = this.tableData.map((val) => {
           let row = val
@@ -625,7 +625,8 @@ export default {
     },
     translateByRate (value) {
       if (!this.rates) return
-      return bigTimes([this.rates['USD'], value])
+      // return bigTimes([this.rates['USD'], value])
+      return this.$big(this.rates['USD']).times(value).toString()
     },
     tologin () {
       // console.log(this.$route.fullPath)
@@ -722,7 +723,7 @@ export default {
       // console.log(this.holding.leverage)
       // if(this.holding.leverage != 0)
       //   this.showPromiseFundModal = true
-      console.log({cholding})
+      // console.log({cholding})
       this.selectedHolding = cholding
       if (cholding.leverage != 0) { this.showPromiseFundModal = true }
     },
@@ -746,7 +747,7 @@ export default {
       }
       params.amount = Number(this.modal.radio) * Number(params.amount)
       service.changePromiseFund(params).then(res => {
-        console.log('change 保证金, 传参是:', params.amount)
+        // console.log('change 保证金, 传参是:', params.amount)
         let type = ''
         if (params.amount > 0) {
           type = '增加'
@@ -897,10 +898,10 @@ export default {
     },
     inputPriceOnfocus () {
       this.bindMarkPrice = false
-      console.log(this.bindMarkPrice)
+      // console.log(this.bindMarkPrice)
     },
     cancel (holding) {
-      console.log('close current Entrust', this.pairInfo.name, holding.future_close_id)
+      // console.log('close current Entrust', this.pairInfo.name, holding.future_close_id)
       // this.clearWarehouseLoading = true
       holding.clearLoading = true
       const params = {
@@ -983,7 +984,7 @@ export default {
     setTimeout(x => {
       this.$nextTick(() => {
         if (this.$refs.input_price) {
-          console.log('refs:' + this.$refs.input_price)
+          // console.log('refs:' + this.$refs.input_price)
 
           this.$refs.input_price.onfocus = () => { this.bindMarkPrice = false }
         }

@@ -29,17 +29,20 @@
             </div>
           </dd>
         </dl>
-        <dl class="contract-card-row">
+          <dl class="contract-card-row">
           <dt>{{ $t('fund_contract_result_unrealized') }}</dt>
           <dd>
-            <span :class='{up: $big(holding.unrealized || 0).gt(0), down: $big(holding.unrealized || 0).lt(0)}' >
-              {{ holding.unrealized | fixed(8) }} BTC
-            </span>
-            <div
-              style="transform:scale(0.8)"
-              :class='{up: $big(holding.unrealized || 0).gt(0), down: $big(holding.unrealized || 0).lt(0)}' >
-              {{ translateByRate(holding.unrealized) }} USD
-            </div>
+            <div>
+              <span
+                :class='{up: $big(unrealized || 0).gt(0), down: $big(unrealized || 0).lt(0)}'
+              >
+                {{ unrealized | fixed(8) }} BTC
+              </span>
+              <div
+                :class='{up: $big(unrealized || 0).gt(0), down: $big(unrealized || 0).lt(0)}' >
+                {{ translateByRate(unrealized) }} USD
+              </div>
+            </div> 
           </dd>
         </dl>
       </div>
@@ -58,6 +61,10 @@ export default {
     rates: {
       type: Object,
       default: () => null
+    },
+    unrealized: {
+      type: [Number, String],
+      default: '0'
     }
   },
   methods: {
