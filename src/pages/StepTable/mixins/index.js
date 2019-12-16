@@ -17,6 +17,7 @@ export const tradeMixins = {
   },
   data () {
     return {
+      state,
       active: 0,
       side: 0,
       detail: {},
@@ -80,7 +81,7 @@ export const tradeMixins = {
           label: this.$t('order_th_status'),
           prop: 'state',
           render: (h, params) => {
-            return h('div', this.state(params.row.state))
+            return h('div', this.exchangeState(params.row.state))
           }
         },
         {
@@ -246,7 +247,7 @@ export const tradeMixins = {
   //   }
   // },
   methods: {
-    state (code) { 
+    exchangeState (code) { 
       switch (code) {
         case 1:
           return this.$t('otc_sideoc_6')

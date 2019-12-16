@@ -10,7 +10,7 @@
       <div>
         <router-link
           class="fund-history mr-22 "
-          to="/fund/hyTrade/index"> {{ $t('account_balance') }}</router-link>
+          to="/fund/my/contract/index"> {{ $t('account_balance') }}</router-link>
         <router-link
           class="fund-history mr-22"
           to="/fund/my/contract/history"> {{ $t('transaction_record') }}</router-link>
@@ -37,7 +37,7 @@ export default {
     },
     computedTitle(){
       const obj = {
-        '/fund/hyTrade/index':this.$t('account_balance'),
+        '/fund/my/contract/index':this.$t('account_balance'),
         '/fund/my/contract/history':this.$t('transaction_record'),
         '/fund/my/contract/assets-history':this.$t('capital_record'),
       }

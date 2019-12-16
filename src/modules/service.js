@@ -844,6 +844,12 @@ const service = {
   transferContractFund(params) {
     return request('future/account/transfer', params)
   },
+  // 新的资金划转接口
+  transferSelf (params) {
+    // 暂时使用老接口
+    // return request('future/account/transfer', params)
+    return request('account/balance/transfer/self', params)
+  },
   orderContract(params) {
     return getCache('c_orderContract', () => request('contract/order', params), 1e3)
   },

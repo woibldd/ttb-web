@@ -8,13 +8,13 @@
         <div class="total__label">{{ $t('my_balance_equal') }}</div>
         <div class="total__coin">{{ total || 0 | fixed(unit.scale) }} {{ unit.name }}</div>
         <!--  百万usdt活动需要,先写死 -->
-        <div
+        <!-- <div
           class="fund-with-usdt"
           v-if="plusMillionUsdt"
-        >+{{ millionUsdtAmount }} USDT≈ {{ $big(total).plus($big(plusUsdtEst)).toString() }} {{ unit.name }}</div>
-      </div>
+        >+{{ millionUsdtAmount }} USDT≈ {{ $big(total).plus($big(plusUsdtEst)).toString() }} {{ unit.name }}</div>-->
+      </div> 
       <div>
-        <div class="pairs-search">
+        <div class="pairs-search test">
           <div class="search-box">
             <input
               type="text"

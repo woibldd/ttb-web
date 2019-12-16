@@ -503,11 +503,11 @@ export default {
           float: left;
           .btn {
             &.w-110 {
-              width: 75px;
+              width: 85px;
               margin-right: 19px;
             }
             &.w-208 {
-              width: 165px;
+              width: 155px;
             }
           }
         }

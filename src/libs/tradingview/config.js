@@ -34,7 +34,7 @@ export default function () {
       'header_screenshot',
       'display_market_status',
       //'left_toolbar',
-      // 'volume_force_overlay',
+      'volume_force_overlay',
       'use_localstorage_for_settings',
      
     ],

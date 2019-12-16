@@ -3,8 +3,7 @@
     <div class="ix-pannel">
       <div class="ix-header relative">
         {{ $t('contract_block_orderaction') }}
-        <a
-          v-if="!isTestnet"
+        <a 
           class="primary-text pull-right btn"
           @click="transfer"
         >
@@ -409,7 +408,7 @@
     <!-- 买入/做多 modal 弹出购买确认-->
     <v-modal :open.sync="showMakeMoreModal" @close="confirmModalClosed">
       <div class="modal-make-more">
-        <dir class="pl-24 pr-24 pb-24">
+        <dir class="pd-24">
           <div
             class="modal-title mb-10"
             :class="{'color-up': exchangeDir === 'BUY', 'color-down': exchangeDir === 'SELL'}"

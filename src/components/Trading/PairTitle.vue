@@ -39,7 +39,7 @@
       >{{ $t('secure_level_0') }} {{ pairTick.lowest_24h | round(pair.price_scale) }}</p>
       <p
         class="fl grid-tf-amount"
-      >24H {{ $t('vol') }} {{ pairTick.volume_24h | round(2) }} {{ state.pro.product_name }}</p>
+      >24H {{ $t('vol') }} {{ pairTick.volume_24h | fixed(2) }} {{ state.pro.product_name }}</p>
     </div>
     <div v-if="state.showCountDown" class="row clearfix">
       <p

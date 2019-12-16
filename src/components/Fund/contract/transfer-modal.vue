@@ -235,7 +235,8 @@ export default {
         return;
       }
       
-      let res = await service.transferContractFund({ 
+      // let res = await service.transferContractFund({
+      let res = await service.transferSelf({
         type: 1, 
         currency: this.selectCoin,
         from: this.accountFrom,
@@ -246,16 +247,20 @@ export default {
         this.transferAmount = ''
         this.$emit("update:showModal", false);
         this.$emit("close");
-        utils.success("划转成功");
+        utils.success(this.$t('transfer_success'))
         this.getBalance();
-        service
-          .getContractBalanceByPair({
-            symbol: "BTC"
-          })
-          .then(res => {
-            state.ct.holding = res.data;
+        // service
+        //   .getContractBalanceByPair({
+        //     symbol: "BTC"
+        //   })
+        //   .then(res => {
+        //     state.ct.holding = res.data;
            
-          });
+        //   });
+        service.getContractBalanceList()
+          .then(res => {
+            state.ct.holdingList = res.data
+          })
       } else {
         utils.alert(res.message);
       }

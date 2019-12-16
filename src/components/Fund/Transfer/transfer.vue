@@ -271,7 +271,8 @@
           return
         }
         let $this = this
-        let res = await service.transferContractFund({
+      // let res = await service.transferContractFund({
+      let res = await service.transferSelf({
           amount: this.number,
           currency: this.selectCoin,
           from: this.accountFrom,
