@@ -109,7 +109,8 @@ export const state = {
     currency_name: '',
     indexPrice: 0,
     bid: 0,
-    ask: 0
+    ask: 0,
+    fee: '0'
   },
 }
 

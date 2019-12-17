@@ -996,7 +996,16 @@ const service = {
   getOtcBalance(params) {
     return getCache('c_otc_balance', () => request('otc/account/balance/list', params), 1e3)
   },
-
+  /**
+   * 获取手续费
+   * @param {
+    * currency 币种 "BTC"或者"USDT"
+    * currency_type 支付币种类型 "CNY"或者"SGD"
+    * } params
+    */
+   getOtcFee (params) {
+     return request('/otc/account/fee/rate', params)
+   },
   async getOtcBalanceByPair(symbol) {
     if (!symbol || !symbol.symbol) {
       symbol = {

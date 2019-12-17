@@ -536,7 +536,7 @@ export default {
       if (this.otcUserInfo.is_free || !this.symbolInfo) {
         return this.$t('otc_ziurec_16')
       }
-      return this.$big(this.state.otc.symbolInfo.make_rate || 0).times(this.amount || 0).round(this.state.otc.symbolInfo.fee_scale || 6)
+      return this.$big(this.state.otc.fee || 0).times(this.amount || 0).round(this.state.otc.symbolInfo.fee_scale || 6)
       // return this.$t('otc_ziurec_16')
     }
   },
