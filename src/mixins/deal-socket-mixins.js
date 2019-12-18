@@ -1,4 +1,3 @@
-
 import ws from '@/modules/ws'
 import map from 'lodash/map'
 import service from '@/modules/service'
@@ -56,6 +55,12 @@ export default {
       //   this.dealList = dealList.concat(this.dealList).slice(0, PAGE_SIZE)
       // }
       this.dealList = dealList.concat(this.dealList).slice(0, PAGE_SIZE)
+      let side = this.dealList.length ? this.dealList[0].side : 'buy'
+      if (side == 'buy') {
+        this.state.ct.lastSide = 1
+      } else if (side == 'sell') {
+        this.state.ct.lastSide = 2
+      }
     },
     async fetchDealList () {
       const res = await service.getQuoteDeal({
