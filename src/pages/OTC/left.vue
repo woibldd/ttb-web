@@ -155,10 +155,10 @@ export default {
     };
   },
   methods: {
-    setCurrency(item) {
-      console.log({item})
+    setCurrency(item) { 
       this.currency = item.currency;
       this.state.otc.symbolInfo = item
+      this.getFeeRate(this.currency, this.legal_currency)
       this.$eh.$emit("otc:currency:change", item.currency, this.side);
     },
     init() {
@@ -168,6 +168,7 @@ export default {
           this.user.usdtCount = this.$big(res.data[0][this.coin.rate]).round(2, 0);
         }
       });
+      this.getFeeRate(this.currency, this.legal_currency)
       // 委托
       service
         .getUnDonefills({
@@ -232,6 +233,13 @@ export default {
       }
       return map[fiat] || fiat
     },
+    async getFeeRate (currency, currency_type) {
+      let res = await service.getOtcFee({currency, currency_type})
+      if (!res.code) {
+        // console.log({t: res.data})
+        this.state.otc.fee = res.data
+      }
+    }
   },
   created() {
     this.init();  
