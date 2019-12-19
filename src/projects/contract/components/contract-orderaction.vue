@@ -1459,17 +1459,19 @@ export default {
     sellOverflow() {
       //console.log(`sell:price:${this.price};ct:${this.state.ct};ask:${this.state.ct.ask}`)
       if (this.price && this.state.ct && this.state.ct.bid) {
-        if (this.$big(this.price).lte(this.state.ct.bid)) {
-          return true;
-        }
+        // if (this.$big(this.price).lte(this.state.ct.bid)) {
+        //   return true;
+        // }
+        if(this.state.ct.lastSide === 2) return true
       }
       return false;
     },
     buyOverflow() {
       if (this.price && this.state.ct && this.state.ct.ask) {
-        if (this.$big(this.price).gte(this.state.ct.ask)) {
-          return true;
-        }
+        // if (this.$big(this.price).gte(this.state.ct.ask)) {
+        //   return true;
+        // } 
+        if(this.state.ct.lastSide === 1) return true
       }
       return false;
     },
