@@ -1,5 +1,5 @@
 module.exports = {
-  title: '合约',
+  title: 'Contract',
   description: '',
   shortcut: '/static/img/bg.186ea1d.png'
 }
