@@ -27,6 +27,9 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', '<%= htmlWebpackPlugin.options.theme.googleAnalyticsId %>');  
+      gtag('config', '<%= htmlWebpackPlugin.options.theme.exchangeName %>');  
+      gtag('config', '<%= htmlWebpackPlugin.options.theme.keywords %>');  
+      gtag('config', '<%= htmlWebpackPlugin.options.theme.description %>');  
     </script>
   <% } %>
   <!--Start of ixcustomer Zendesk Widget script-->
