@@ -91,7 +91,7 @@ const TradeIndex = () => import(/* webpackChunkName: "ContractMaterial" */ '@/co
 const h5login = () => import(/* webpackChunkName: "h5login" */ '@/pages/h5/sign-up')
 const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index2')
 
-// 合约大赛
+// 合约大赛 
 // 活动页面
 const ActivityIndex = () => import(/* webpackChunkName: "ActivityIndex" */ '@/pages/active/index.vue')
 const LockWarehouse = () => import(/* webpackChunkName: "LockWarehouse" */ '@/pages/active/LockWarehouse.vue')
