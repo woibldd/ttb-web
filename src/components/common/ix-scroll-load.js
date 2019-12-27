@@ -40,5 +40,7 @@ Vue.directive('scroll-load', function (el, binding) {
     el.timer = null
     fun()
   })
+  
+ 
 //   console.log(0, 'table height')
 })

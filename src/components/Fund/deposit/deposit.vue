@@ -96,6 +96,7 @@
         <div
           class="qrcode">
           <canvas
+            v-if="showQr"
             ref="qr"
             class="qr-img"/>
         </div>
@@ -183,7 +184,8 @@ export default {
       lianData: [],
       curreryCoin: '',
       selectLian: {},
-      contract: ''
+      contract: '',
+      showQr: false
     }
   },
   computed: {
@@ -230,7 +232,9 @@ export default {
         }
       })
     },
-    async setQr(url) {
+    async setQr(url) { 
+      const vm = this
+      this.showQr = true
       const QRCode = await qrcode()
       QRCode.toCanvas(
         this.$refs.qr,
@@ -244,6 +248,7 @@ export default {
         (err) => {
           if (err) {
             // @improve
+            vm.showQr = false
             return utils.log('qrcode error')
           }
           this.qrReady = true
@@ -252,6 +257,7 @@ export default {
     },
     async changeCoinType(coin) {
       this.curreryCoin = ''
+      this.showQr = false
       await this.getCoinAddress()
       this.setQr(this.address)
       if (coin.currency === 'EOS' || coin.currency === 'PAN') {
@@ -261,7 +267,9 @@ export default {
     },
     async lianSelect(coin) {
       this.selectCoin = coin
+      this.showQr = false
       await this.getCoinAddress()
+      this.setQr(this.address)
     },
     async getAllCoinTypes() {
       await service.getAllCoinTypes().then(res => {
