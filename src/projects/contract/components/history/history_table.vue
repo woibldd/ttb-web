@@ -645,7 +645,7 @@ export default {
         const minStep = Math.pow(10, -scale) * accuracy
         let $newValue = this.$big(v || 0)
         if (!$newValue.mod(minStep).eq(0)) {
-          $newValue = $newValue.div(minStep).round(scale >= 1 ? scale - 1 : 0, 0).mul(minStep)
+          $newValue = $newValue.div(minStep || 1).round(scale >= 1 ? scale - 1 : 0, 0).mul(minStep)
         }
         return $newValue
       }
@@ -884,7 +884,7 @@ export default {
         let scale = cholding.pairInfo.price_scale || 4
         const minStep = Math.pow(10, -scale) * accuracy
         if (!$newValue.mod(minStep).eq(0)) {
-          $newValue = $newValue.div(minStep).round(scale >= 1 ? scale - 1 : 0, 0).mul(minStep)
+          $newValue = $newValue.div(minStep || 1).round(scale >= 1 ? scale - 1 : 0, 0).mul(minStep)
         }
         if (!$oldValue.eq($newValue)) {
           cholding.unwindPrice = $newValue.toString()
