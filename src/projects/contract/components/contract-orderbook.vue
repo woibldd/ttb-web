@@ -131,7 +131,7 @@ import OrderbookItem from './OrderbookItem'
 import service from '@/modules/service'
 import stateMixins from './stateComputedMixins'
 
-import dealSocketMixins from '@/mixins/deal-socket-mixins'
+// import dealSocketMixins from '@/mixins/deal-socket-mixins'
 
 export default {
   mixins: [stateMixins],

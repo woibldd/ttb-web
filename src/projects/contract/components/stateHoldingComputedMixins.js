@@ -92,7 +92,7 @@ export default {
           }
         }
         let pairInfo = pairInfoList['FUTURE_' + holding.currency]
-        if (!pairInfo) {
+        if (!pairInfo || +holding.holding === 0 || +holding.price === 0) {
           return holding
         }
         holding.pairInfo = pairInfo
@@ -129,12 +129,17 @@ export default {
         holding.roe = "0"
         holding.roelp = "0"
 
+        if (+amount===0 || +holding.price===0) {
+            return holding
+        }
+
         //计算价值
-        let value = "0"
+        let open_value = "0"
         let unrealized = "0"
         let unrealizedlp = "0"
         if (currency === 'BTCUSD') {
-          let unitPrice = 1 //单价 先写死
+          let unitPrice = 1 //单价 先写死 
+          open_value = this.$big(amount).div(holding.price || 0).abs().toString()
           if (!!markPrice) {
             holding.value = this.$big(amount).div(holding.markPrice || 0).times(unitPrice).abs().toString()
           }
@@ -143,7 +148,8 @@ export default {
           }
         }
         else {
-          holding.value = this.$big(holding.price || 0).times(amount).times(mul).abs().toString()
+          open_value = this.$big(holding.price || 0).times(amount).times(mul).abs().toString()
+          holding.value = this.$big(holding.markPrice || 0).times(amount).times(mul).abs().toString()
         }
         // holding.value = value
         if (currency === 'BTCUSD') {
@@ -212,7 +218,7 @@ export default {
           // }
            
           holding.roe = unrealized
-            .div(holding.value)
+            .div(open_value) 
             .mul(holding.leverage == 0 ? maxLever : holding.leverage)
             .mul(roeMul)
             .mul(100)
@@ -220,7 +226,7 @@ export default {
             
           //console.log(holding.roe)
           holding.roelp = unrealizedlp
-            .div(holding.value)
+            .div(open_value)
             .mul(holding.leverage == 0 ? maxLever : holding.leverage)
             .mul(roeMul)
             .mul(100)

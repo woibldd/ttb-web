@@ -38,8 +38,7 @@ const processValue = {
       if (key === 'revert') {
         value = this.$t('contract_assign_revert')
       }
-
-      console.log('contract_assigning_undealcontract_assigning_undealcontract_assigning_undealcontract_assigning_undeal')
+ 
       let context = {}
       // 格式化状态
       if (key === 'state' || key === 'status') {

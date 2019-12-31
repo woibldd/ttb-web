@@ -146,7 +146,7 @@
             <!-- 买入 做多 -->
             <div
               class="op-button flex-lr bgcolor-up btn"
-              :class="{overflow: buyOverflow,enabled: buyEnabled, disabled: !buyEnabled }"
+              :class="{overflow: lastSideBuy,enabled: buyEnabled, disabled: !buyEnabled }"
               v-loading="btnLongLoading"
               @click.prevent="submit('make_more')"
             >
@@ -175,7 +175,7 @@
             </div>
             <div
               class="op-button flex-lr bgcolor-down btn mt-5"
-              :class="{overflow: sellOverflow,enabled: sellEnabled, disabled: !sellEnabled}"
+              :class="{overflow: lastSideSell,enabled: sellEnabled, disabled: !sellEnabled}"
               v-loading="btnShortLoading"
               @click.prevent="submit('make_less')"
             >
@@ -1456,12 +1456,24 @@ export default {
         )
         .toString();
     },
+    lastSideSell() {if (
+      this.price && this.state.ct && this.state.ct.bid) { 
+        if(this.state.ct.lastSide === 2) return true
+      }
+      return false; 
+    },
+    lastSideBuy() {if (
+      this.price && this.state.ct && this.state.ct.bid) { 
+        if(this.state.ct.lastSide === 1) return true
+      }
+      return false; 
+    },
     sellOverflow() {
       //console.log(`sell:price:${this.price};ct:${this.state.ct};ask:${this.state.ct.ask}`)
       if (this.price && this.state.ct && this.state.ct.bid) {
         if (this.$big(this.price).lte(this.state.ct.bid)) {
           return true;
-        }
+        } 
       }
       return false;
     },
@@ -1469,7 +1481,7 @@ export default {
       if (this.price && this.state.ct && this.state.ct.ask) {
         if (this.$big(this.price).gte(this.state.ct.ask)) {
           return true;
-        }
+        }  
       }
       return false;
     },

@@ -16,8 +16,7 @@
         @click.prevent="setTab('market')">
         {{ $t('operate_market') }}
       </a>
-      <a
-        v-if="isTestnet"
+      <a 
         class="ix-header-nav raw stop"
         :class="{cur: tab === 'stop'}"
         @click.prevent="setTab('stop')">
