@@ -16,5 +16,8 @@
       "vue-html": "html",
       "vue": "html"
   },
-  "workbench.colorTheme": "Default Dark+"
+  "workbench.colorTheme": "Default Dark+",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }
