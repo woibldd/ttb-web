@@ -158,14 +158,14 @@ export default {
 
         //默认可交易
         this.state.pro.isActivity = true
-        if (!!match && match.indexOf('MPV') > -1) {
-          if (this.activityList.indexOf('mvp_user') > -1) {
-            this.showMvpModal = false
-          } else {
-            this.showMvpModal = true
-            this.state.pro.isActivity = false
-          }
-        }
+        // if (!!match && match.indexOf('MPV') > -1) {
+        //   if (this.activityList.indexOf('mvp_user') > -1) {
+        //     this.showMvpModal = false
+        //   } else {
+        //     this.showMvpModal = true
+        //     this.state.pro.isActivity = false
+        //   }
+        // }
         if (match) {
           this.state.pro.pair = pair
           local.pair = pair
