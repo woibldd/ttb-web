@@ -96,6 +96,7 @@
           <el-button type="primary" 
             style="width: 100%;"
             :disabled="!agreeMPV"
+            @click="activeMpv"
           >{{$t('confirm')}}</el-button>
         </div>
       </div>
@@ -158,14 +159,14 @@ export default {
 
         //默认可交易
         this.state.pro.isActivity = true
-        // if (!!match && match.indexOf('MPV') > -1) {
-        //   if (this.activityList.indexOf('mvp_user') > -1) {
-        //     this.showMvpModal = false
-        //   } else {
-        //     this.showMvpModal = true
-        //     this.state.pro.isActivity = false
-        //   }
-        // }
+        if (!!match && match.indexOf('MPV') > -1) {
+          if (this.activityList.indexOf('mvp_user') > -1) {
+            this.showMvpModal = false
+          } else {
+            this.showMvpModal = true
+            this.state.pro.isActivity = false
+          }
+        }
         if (match) {
           this.state.pro.pair = pair
           local.pair = pair
@@ -270,6 +271,9 @@ export default {
       if (!res.code) {
         this.activityList = res.code
       }
+    },
+    activeMpv() {
+      this.agreeMPV = false
     }
   },
   async created () {
