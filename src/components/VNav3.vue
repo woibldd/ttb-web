@@ -418,9 +418,11 @@
                   v-for="(value, key) in locales">
                   <a
                     @click="switchLang(key)"
-                  > <icon
+                  > 
+                    <!-- <icon
                     :name="'flag-'+key"
-                    class="mr-5"/>{{ value }}
+                    class="mr-5"/> -->
+                    {{ value }}
                   </a>
                 </li>
               </ul>
