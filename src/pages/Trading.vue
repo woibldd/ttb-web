@@ -165,7 +165,7 @@ export default {
           //默认可交易
           this.state.pro.isActivity = true
           if (!!match && match.indexOf('MPV') > -1) {
-            if (this.state.pro.activityList.indexOf('mvp_user') > -1) {
+            if (this.state.pro.activityList.indexOf('mpv_user') > -1) {
               this.showMvpModal = false
             } else {
               console.log('$route.params.pair')
@@ -297,7 +297,7 @@ export default {
       }
     },
     activeMpv() { 
-      this.activityWalletSet('mvp_user')   
+      this.activityWalletSet('mpv_user')   
     }
   },
   async created () {
