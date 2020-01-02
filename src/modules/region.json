@@ -8,6 +8,12 @@
       "cname": "美国"
     },
     {
+      "id": "01",
+      "name": "CAN",
+      "fullname": "Canada",
+      "cname": "加拿大"
+    },
+    {
       "id": 7,
       "name": "RU",
       "fullname": "Russia",
