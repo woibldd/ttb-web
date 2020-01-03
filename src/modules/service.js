@@ -49,7 +49,7 @@ const service = {
     return request('fa2/verify', data)
   },
   getUserInfo() {
-    return getCache('session', () => request('user/session'), 6e4)
+    return getCache('session', () => request('user/session'), 1e3)
   },
   activate(code) {
     rmCache('session')
