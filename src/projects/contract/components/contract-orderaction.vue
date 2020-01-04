@@ -2244,6 +2244,7 @@ export default {
         this._resetLoadingState();
         // 通知所有组件，有数据更新，需要强制刷新数据
         this.$eh.$emit("protrade:order:refresh", "doSubmit");
+        this.getBalance()
         let side = "";
         let data = res.data;
         res.data.side === 1
@@ -2373,30 +2374,47 @@ export default {
         }
       }
     },
-    getBalance() {
-      console.log({ product_name: this.pairInfo.product_name });
+    getBalance() { 
       if (!this.pairInfo.product_name) {
         return;
       }
       if (!this.isLogin) {
         return;
       }
-      return service
-        .getContractBalanceByPair({
-          symbol: this.pairInfo.product_name
-        })
-        .then(res => {
-          if (!res.code && !!res.data) {
-            this.state.ct.holding = res.data;
-            if (
-              res.data &&
-              res.data.leverage != null &&
-              res.data.leverage != undefined
-            ) {
-              this._setLeverage(res.data.leverage);
+    //   return service
+    //     .getContractBalanceByPair({
+    //       symbol: this.pairInfo.product_name
+    //     })
+    //     .then(res => {
+    //       if (!res.code && !!res.data) {
+    //         this.state.ct.holding = res.data;
+    //         if (
+    //           res.data &&
+    //           res.data.leverage != null &&
+    //           res.data.leverage != undefined
+    //         ) {
+    //           this._setLeverage(res.data.leverage);
+    //         }
+    //       }
+    //     });
+    
+        return service.getContractBalanceList()
+            .then(res => { 
+            if (!res.code && !!res.data) {
+                state.ct.holdingList =  res.data
+                let holdingList  =  res.data
+                holdingList.map(item => {
+                    if (item.currency === this.pairInfo.product_name) {
+                    if ( 
+                        item.leverage != null &&
+                        item.leverage != undefined
+                    ) {
+                        this._setLeverage(item.leverage)
+                    }
+                    }
+                }) 
             }
-          }
-        });
+            })
     },
     // getBalanceList() {
     //   if (!this.isLogin) {
