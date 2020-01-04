@@ -1,4 +1,7 @@
 {
+  "google_login": "登录时进行谷歌验证",
+  "google_turn_off": "关闭谷歌验证",
+  "google_reset": "重置",
   "newLoad":{
     "logOut": "点击退出登录，重新输入Apple ID 和密码",
     "id": "输入非中国大陆Apple ID",

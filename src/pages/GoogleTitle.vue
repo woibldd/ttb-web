@@ -1,51 +1,49 @@
 <template>
   <div class="profile-container">
-    <div class="title-box">{{ $t('profile_left_invite_safety') }}<span>{{ $t('bind_google_title') }}</span></div>
+    <div class="title-box">{{$t('profile_left_invite_safety')}}<span>{{$t('bind_google_title')}}</span></div>
     <div class="invinfo-box">
-      <p class="gt_txt">{{ $t('bind_google_title') }}</p>
-      <div class="gt_ewm">
-        <div 
-class="pd-10"
-             style="background:#fff; height: 160px; box-sizing: border-box">
-          <canvas
-            class="qr-img"
-            ref="qr"/>
+        <p class="gt_txt">{{$t('bind_google_title')}}</p>
+        <div class="gt_ewm">
+          <div class="pd-10" style="background:#fff; height: 160px; box-sizing: border-box">
+            <canvas
+                class="qr-img"
+                ref="qr"/>
+          </div>
         </div>
-      </div>
-      <p class="gt_t">{{ $t('google_skey') }}</p>
-      <span class="gt_yz">{{ google_key }}</span>
-      <ul>
-        <li><i>1</i>{{ $t('bind_google_hint_1') }}</li>
-        <li><i>2</i>{{ $t('bind_google_hint_2') }}</li>
-        <li><i>3</i>{{ $t('bind_google_hint_3') }}</li>
-        <li><i>4</i>{{ $t('bind_google_hint_4') }}</li>
-      </ul>
-      <p class="gt_btxt">{{ $t('confirm_please') }}</p>
-      <div class="gt_lb">
-        <input 
-type="checkbox"
-               v-model="checkbox1">
-        <label for="asda">{{ $t('bind_google_confirm_1') }}</label>
-      </div>
-      <div class="gt_lb">
-        <input 
-type="checkbox"
-               v-model="checkbox2">
-        <label for="asd">{{ $t('bind_google_confirm_2') }}</label>
+        <p class="gt_t">{{$t('google_skey')}}</p>
+        <span class="gt_yz">{{google_key}}</span>
+        <ul>
+            <li><i>1</i>{{$t('bind_google_hint_1')}}</li>
+            <li><i>2</i>{{$t('bind_google_hint_2')}}</li>
+            <li><i>3</i>{{$t('bind_google_hint_3')}}</li>
+            <li><i>4</i>{{$t('bind_google_hint_4')}}</li>
+        </ul>
+        <p class="gt_btxt">{{$t('confirm_please')}}</p>
+        <div class="gt_lb">
+            <input type="checkbox" v-model="checkbox1">
+            <label for="asda">{{$t('bind_google_confirm_1')}}</label>
+        </div>
+        <div class="gt_lb">
+            <input type="checkbox" v-model="checkbox2">
+            <label for="asd">{{$t('bind_google_confirm_2')}}</label>
+        </div>
+    </div>
+    <div class="inp_box" v-if="resetCode">
+      <!--<label>谷歌验证码</label>-->
+      <input type="text" v-model="verifyCode" :placeholder="verify_type === 'phone' ? $t('phone_code') : $t('email_code')" />
+      <div class="count-down-container">
+        <count-down
+          :send-text="$t('hq_send')"
+          :send-code-func="currentGetCodeFunc"
+        />
       </div>
     </div>
     <div class="inp_box">
-      <input 
-type="text"
-             v-model="code" 
-:placeholder="$t('bind_google_ph')" >
+        <input type="text" v-model="code" :placeholder="$t('bind_google_ph')" />
     </div>
     <div class="inp_box">
-      <v-btn
-        class="submit-btn"
-        :label="$t('bind')"
-        :loading="loading"
-        @click="submit"/>
+        <v-btn class="submit-btn" :label="$t('bind')"
+        @click="submit"></v-btn>
     </div>
   </div>
 </template>
@@ -55,12 +53,14 @@ import service from '@/modules/service'
 import VBtn from '@/components/VBtn'
 import {state, actions} from '@/modules/store'
 import utils from '@/modules/utils'
+import countDown from '@/components/common/countdown-code-button'
 const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
 
 export default {
   name: 'SafeVerified',
   components: {
-    VBtn
+    VBtn,
+    countDown
   },
   data () {
     return {
@@ -68,7 +68,8 @@ export default {
       google_key: '',
       code: '',
       checkbox1: false,
-      checkbox2: false
+      checkbox2: false,
+      verifyCode: ''
     }
   },
   computed: {
@@ -77,17 +78,61 @@ export default {
         return this.state.userInfo.phone || this.state.userInfo.email
       }
       return ''
+    },
+    resetCode () {
+      return this.$route.query.reset
+    },
+    verify_phone () {
+      if (state.userInfo && state.userInfo.verify_phone) {
+        return true
+      }
+      return false
+    },
+    verify_email () {
+      if (state.userInfo && state.userInfo.verify_email) {
+        return true
+      }
+      return false
+    },
+    verify_type () {
+      let type = ''
+      if (this.verify_phone) {
+        type = 'phone'
+      } else if (this.verify_email) {
+        type = 'email'
+      }
+      return type
     }
   },
   async created () {
     this.getGoogleKey()
   },
   methods: {
+    async currentGetCodeFunc () {
+      if (this.verify_type === 'phone') {
+        let res = await service.getPhoneCode(
+          {
+            region: state.userInfo.region,
+            phone: state.userInfo.phone
+          }
+        )
+        if (res.code) {
+          utils.alert(res.message)
+        }
+      } else {
+        let res = await service.getEmailCode({
+          email: state.userInfo.email
+        })
+        if (res.code) {
+          utils.alert(res.message)
+        }
+      }
+    },
     async getGoogleKey () {
       let result = await service.getGoogleKey()
       if (result && !result.code) {
         this.google_key = result.data.google_key
-        let qrurl = 'otpauth://totp/' + this.username + '?secret=' + this.google_key + '&issuer=' + location.hostname
+        let qrurl = "otpauth://totp/"+this.username+"?secret="+this.google_key+"&issuer="+location.hostname
         this.setQr(qrurl)
       } else {
         utils.alert(result.message)
@@ -114,36 +159,74 @@ export default {
       )
     },
     async submit () {
-      if (this.checkbox1 && this.checkbox2) {
-        if (this.code.length == 6) {
-          let params = {
-            google_key: this.google_key,
-            code: this.code
-          }
-          let result = await service.bindGoogleKey(params)
-          if (result && !result.code) {
-            await actions.updateSession()
-            this.$router.push({
-              name: 'Safety'
-            })
-          } else {
-            utils.alert(result.message)
+      if (this.resetCode) {
+        let query = {}
+        if (this.verify_type === 'phone') {
+          query = {
+            phone_code: this.verifyCode
           }
         } else {
-          utils.alert(this.$i18n.t('invalid_google_code'))
+          query = {
+            email_code: this.verifyCode
+          }
+        }
+        if (this.checkbox1 && this.checkbox2) {
+          if (this.code.length === 6) {
+            let params = {
+              google_key_type: 'reset',
+              google_key: this.google_key,
+              code: this.code,
+              ...query
+            }
+            let result = await service.bindGoogleKey(params)
+            if (result && !result.code) {
+              await actions.updateSession()
+              this.$router.push({
+                name: 'Safety'
+              })
+              window.localStorage.setItem('refere', true)
+            } else {
+              utils.alert(result.message)
+            }
+          } else {
+            utils.alert(this.$i18n.t('invalid_google_code'))
+            return false;
+          }
+        } else {
+          utils.alert(this.$i18n.t('err_check_google_code'))
           return false
         }
       } else {
-        utils.alert(this.$i18n.t('err_check_google_code'))
-        return false
+        if (this.checkbox1 && this.checkbox2) {
+          if (this.code.length === 6) {
+            let params = {
+              google_key: this.google_key,
+              code: this.code
+            }
+            let result = await service.bindGoogleKey(params)
+            if (result && !result.code) {
+              await actions.updateSession()
+              this.$router.push({
+                name: 'Safety'
+              })
+              window.localStorage.setItem('refere', true)
+            } else {
+              utils.alert(result.message)
+            }
+          } else {
+            utils.alert(this.$i18n.t('invalid_google_code'))
+            return false;
+          }
+        } else {
+          utils.alert(this.$i18n.t('err_check_google_code'))
+          return false
+        }
       }
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-
-  @import '../styles/mixins';
 
   .user-center-right {
     padding-left: 60px;
@@ -190,7 +273,7 @@ export default {
               width: 180px;
               height: 180px;
               margin: 0 auto;
-              background: $primary;
+              background: #C2A538;
               padding: 10px;
               box-sizing: border-box;
           }
@@ -205,8 +288,8 @@ export default {
           .gt_yz{
               height: 30px;
               line-height: 30px;
-              color: $primary;
-              border-bottom: 1px solid $primary;
+              color: #C2A538;
+              border-bottom: 1px solid #C2A538;
               margin: 0 auto;
               display: table;
               font-size: 16px;
@@ -257,6 +340,7 @@ export default {
             width: 340px;
             height: 40px;
             margin: 30px auto;
+            position: relative;
             input{
                 display: block;
                 width: 100%;
@@ -264,6 +348,11 @@ export default {
                 text-indent: 1em;
                 border: 1px solid $c;
             }
+        .count-down-container {
+          position: absolute;
+          right: 8px;
+          top: 8px;
+        }
         }
     }
     .profile-container{

@@ -1,4 +1,7 @@
 {
+  "google_login": "로그인할 때 구글 인증",
+  "google_turn_off": "Goole 인증 끄기",
+  "google_reset": "초기화",
   "newLoad": {
     "logOut": "로그아웃하고 다시 Apple ID와 비밀번호를 입력하세요",
     "id": "중국 대륙이 아닌 Apple id를 입력하세요",

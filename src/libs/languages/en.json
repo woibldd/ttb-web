@@ -1,4 +1,7 @@
 {
+  "google_login": "Google authentication on login",
+  "google_turn_off": "Turn off",
+  "google_reset": "Reset",
   "newLoad": {
     "logOut": "Click to log out, re-enter Apple ID and password",
     "id": "Enter Non-China Apple ID",

@@ -15,8 +15,7 @@
               <div class="row__label mb-9">{{ $t('err_captcha_empty') }}</div>
               <div class="row__input" >
                 <input
-                  v-model="code"
-                  v-focus
+                  v-model="form.code"
                   maxlength="6"
                   @change="codeChange"
                   @input="onInput"
@@ -27,6 +26,15 @@
                   :send-text="$t('hq_send')"
                   :send-code-func="getVerifyCode"
                 />
+              </div>
+            </div>
+            <div class="modal__row mt-12 mb-25" v-if="!computedHideCountDown">
+              <div class="row__label mb-9">{{ $t('fa2_google_code_mobile') }}</div>
+              <div class="row__input" >
+                <input
+                  v-model="form.google_code"
+                  maxlength="6"
+                  class="input-validate mr-14">
               </div>
             </div>
 
@@ -65,7 +73,10 @@ export default {
   },
   data () {
     return {
-      code: ''
+      form: {
+        code: '',
+        google_code: ''
+      }
     }
   },
   props: {
@@ -123,22 +134,23 @@ export default {
       this.ensureCallback()
     },
     getVerifyCode () {
-      console.log('get verify code')
-      this.getCode()
+      return this.getCode()
     },
     clickBackdrop () {
       if (this.backdrop) {
         this.$emit('update:open', false)
         this.$emit('close')
+        this.form = {}
       }
     },
     close () {
       this.$emit('update:open', false)
       this.$emit('close')
+      this.form = {}
     },
     codeChange () {
-      console.log(this.code, 'code')
-      this.$emit('update:code', this.code)
+      console.log(this.form, 'code')
+      this.$emit('update:code', this.form)
     },
     onInput () {
       // let code = this.code

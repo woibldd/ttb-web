@@ -1,4 +1,7 @@
 {
+  "google_login": "登入時進行穀歌驗證",
+  "google_turn_off": "關閉穀歌驗證",
+  "google_reset": "重置",
   "newLoad":{
     "logOut": "點擊登出，重新輸入Apple ID和密碼",
     "id": "輸入非中國大陸Apple ID",
