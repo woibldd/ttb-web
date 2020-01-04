@@ -7,7 +7,7 @@
       :rules="rules"
       label-position="left"
       :model="form"
-      label-width="104px">
+      label-width="170px">
       <el-form-item
         prop="password_orig"
         class="inp_box"

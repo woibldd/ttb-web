@@ -201,25 +201,28 @@ export default {
         return
       }
       this.showModal = !this.showModal
-      this.openOrClose = this.verify_phone
+      this.openOrClose = true
+      this.hideCountDown = false
       this.currentGetCodeFunc = this.getCode4switchPhoneVerify
       this.modalEnsureCallback = this.ensureSwitchPhoneBind
       this.form = {}
     },
     switchEmailBind () {
+
       if (!this.verify_phone && this.verify_email) {
         utils.alert(this.$t("profile.security.close_verify_tips"))
         return
       }
       this.showModal = !this.showModal
-      this.openOrClose = this.verify_email
+      this.openOrClose = true
+      this.hideCountDown = false
       this.currentGetCodeFunc = this.getCode4switchEmailVerify
       this.modalEnsureCallback = this.ensureSwitchEmailBind
       this.form = {}
     },
     switchLoginGoogleBind () {
       this.showModal = !this.showModal
-      this.openOrClose = !this.verify_login_google
+      this.openOrClose = false
       this.hideCountDown = true
       this.currentGetCodeFunc = this.getCode4switchEmailVerify
       this.modalEnsureCallback = () => {
@@ -243,14 +246,14 @@ export default {
     },
     switchGoogleBind () {
       this.showModal = !this.showModal
+      this.openOrClose = true
+      this.hideCountDown = false
       if (this.verify_type === 'email') {
         this.currentGetCodeFunc = this.getCode4switchEmailVerify
         this.modalEnsureCallback = this.ensureSwitchEmailBind
-        this.openOrClose = this.verify_google
       } else {
         this.currentGetCodeFunc = this.getCode4switchPhoneVerify
         this.modalEnsureCallback = this.ensureSwitchPhoneBind
-        this.openOrClose = this.verify_google
       }
       this.modalEnsureCallback = () => {
         console.log(this.form, 'asdasdasdasdasdasdsadsa')
@@ -280,7 +283,7 @@ export default {
           }
         }).finally(() => {
           this.showModal = false
-          this.hideCountDown = false
+
         })
       }
     },

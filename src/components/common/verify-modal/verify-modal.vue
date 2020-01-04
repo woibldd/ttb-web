@@ -141,16 +141,19 @@ export default {
         this.$emit('update:open', false)
         this.$emit('close')
         this.form = {}
+        this.openOrClose = true
       }
     },
     close () {
       this.$emit('update:open', false)
       this.$emit('close')
       this.form = {}
+      this.openOrClose = true
     },
     codeChange () {
       console.log(this.form, 'code')
       this.$emit('update:code', this.form)
+      this.openOrClose = true
     },
     onInput () {
       // let code = this.code
