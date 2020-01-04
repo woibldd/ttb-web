@@ -96,6 +96,7 @@
           <el-button type="primary" 
             style="width: 100%;"
             :disabled="!agreeMPV"
+            @click="activeMpv"
           >{{$t('confirm')}}</el-button>
         </div>
       </div>
@@ -140,14 +141,18 @@ export default {
     PairTitle, 
     MobileNav
   },
+  computed: { 
+    isLogin() {
+      return this.state.userInfo !== null;
+    },
+  },
   data () {
     return {
       state,
       comps: [],
       isMobile: utils.isMobile(),
       showMvpModal: false,
-      agreeMPV: false,
-      activityList: []  
+      agreeMPV: false
     }
   },
   watch: {
@@ -156,15 +161,18 @@ export default {
         this.state.pro.lock = true
         const match = pair.match(/^([A-Za-z0-9]*)_([A-Za-z0-9]*)$/)
 
-        //默认可交易
-        this.state.pro.isActivity = true
-        if (!!match && match.indexOf('MPV') > -1) {
-          if (this.activityList.indexOf('mvp_user') > -1) {
-            this.showMvpModal = false
-          } else {
-            this.showMvpModal = true
-            this.state.pro.isActivity = false
-          }
+        if (this.isLogin) {
+          //默认可交易
+          this.state.pro.isActivity = true
+          if (!!match && match.indexOf('MPV') > -1) {
+            if (this.state.pro.activityList.indexOf('mpv_user') > -1) {
+              this.showMvpModal = false
+            } else {
+              console.log('$route.params.pair')
+              this.showMvpModal = true
+              this.state.pro.isActivity = false
+            }
+          } 
         }
         if (match) {
           this.state.pro.pair = pair
@@ -250,26 +258,45 @@ export default {
       this.setGridContainers()
     },
     closeModal() {
-      this.showMvpModal = false
     },
-    activityWalletSet(symbol) {
+    async activityWalletSet(symbol) {
       let params = {
         tagSymbol: symbol
       }
-      let res = service.futureActivitySet(params)
+      let res = await service.futureActivitySet(params)
       //console.log({res})
-      if (!res.code && res.message == "OK") {
-        this.activityWalletGet()
-        this.state.pro.isActivity = true
+      if (!res.code && res.message == "OK") { 
+        this.state.pro.isActivity = true 
+        this.showMvpModal = false 
+      } else {
+        utils.alert(res.message)
       }
     },
     async activityWalletGet() {
       let params = {} 
-      let res = service.futureActivityGet(params)
+      let res = await service.futureActivityGet(params)
       //console.log({res})
       if (!res.code) {
-        this.activityList = res.code
+        this.state.pro.activityList = res.data
+
+        const pair = this.state.pro.pair
+        this.state.pro.lock = true
+        const match = pair.match(/^([A-Za-z0-9]*)_([A-Za-z0-9]*)$/) 
+        //默认可交易
+        this.state.pro.isActivity = true
+        if (!!match && match.indexOf('MPV') > -1) {
+          if (this.state.pro.activityList.indexOf('mpv_user') > -1) {
+            this.showMvpModal = false
+          } else { 
+            this.showMvpModal = true
+            this.state.pro.isActivity = false
+          }
+        } 
+        this.state.pro.lock = false
       }
+    },
+    activeMpv() { 
+      this.activityWalletSet('mpv_user')   
     }
   },
   async created () {

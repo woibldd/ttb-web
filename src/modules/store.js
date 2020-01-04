@@ -44,7 +44,8 @@ export const state = {
     close_time: 0,
     price_open: 0,
     showCountDown: false,
-    isActivity: true
+    isActivity: true,
+    activityList: []
   },
   ct: {
     pair: '',

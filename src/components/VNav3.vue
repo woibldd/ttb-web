@@ -396,7 +396,8 @@
         </div>
         <div class="nav_item lang ml-15" v-popover:popover8>
           <span class="language">
-            <icon :name="'header-'+state.locale" class="mr-5" />
+            <!-- <icon :name="'header-'+state.locale" class="mr-5" /> -->
+            {{ locales[state.locale].slice(0,2) }}
           </span>
           <el-popover
             ref="popover8"
@@ -417,9 +418,11 @@
                   v-for="(value, key) in locales">
                   <a
                     @click="switchLang(key)"
-                  > <icon
+                  > 
+                    <!-- <icon
                     :name="'flag-'+key"
-                    class="mr-5"/>{{ value }}
+                    class="mr-5"/> -->
+                    {{ value }}
                   </a>
                 </li>
               </ul>

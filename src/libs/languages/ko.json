@@ -2686,13 +2686,13 @@
   },
   "trading_page": {
     "mpv_modal": {
-      "tips": "提示",
-      "content_a": "请认真阅读一下内容：",
-      "content_b": "根据MPV项目法律监管要求，MPV项目需要获取您的以下信息：",
-      "content_c": "MPV持有者的账号、名字、证件号、电邮、MPV成交量信息、充/提币信息、MPV划转信息。",
-      "content_d": "*这将不会影响您的提币操作",
-      "content_e": "《MPV附加条款》",
-      "chk_text": "阅读并同意"
+      "tips": "힌트",
+      "content_a": "내용을 정독하세요：",
+      "content_b": "MPV 프로젝트에 대한 법률 관리 요구에 따라 MPV 프로젝트에 필요한 다음 정보：",
+      "content_c": "MPV 소지자의 계좌, 이름, 증명번호, 이메일, MPV 거래량 정보, 충전/출금정보, MPV 전환정보。",
+      "content_d": "* 이것은 당신의 현금 인출 작업에 영향을 미치지 않을 것입니다",
+      "content_e": "《MPV부가 조항》",
+      "chk_text": "정독하고 동의하세요"
     },
     "order": {
       "hide_canceled": "숨김 철회",
