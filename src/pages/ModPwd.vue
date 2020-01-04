@@ -385,7 +385,7 @@ export default {
                 border:none;
             }
             .submit-btn{
-                width: 340px;
+                width: 100%;
                 height: 40px;
             }
             span.tips{
@@ -417,6 +417,8 @@ export default {
     padding: 16px;
     font-size: 12px;
     opacity: 0;
+    box-shadow: 0 8px 8px #ccc;
+    z-index: 10;
     transition: visibility 300ms 300ms, transform 300ms, opacity 300ms;
     &.show {
         opacity: 1;
