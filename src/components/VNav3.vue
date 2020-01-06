@@ -252,7 +252,7 @@
                 <span v-else>{{$t('shareOption.recharge')}}</span>
               </li>
             </ul>
-          
+
               </div>
             </el-popover>
         </div>
@@ -305,7 +305,7 @@
               placement="bottom"
               style="background:#2C3B4B;"
               trigger="hover">
-              <div class="pop-dropdown pt-10"> 
+              <div class="pop-dropdown pt-10">
               <p>{{ desentInfo }}</p>
               <ul class="dropdown-list pt-10">
                 <!-- <li class="dropdown-item pl-24 pr-24 mobile">
@@ -320,7 +320,7 @@
                 <li class="dropdown-item pl-24 pr-24">
                   <a class="link" @click="logout">{{ $t('signout') }}</a>
                 </li>
-              </ul> 
+              </ul>
              </div>
             </el-popover>
           </div>
@@ -373,7 +373,7 @@
               placement="bottom"
               style="background:#2C3B4B;"
               trigger="hover">
-              <div class="pop-dropdown"> 
+              <div class="pop-dropdown">
             <ul class="dropdown-list pt-10 pb-10">
               <li class="dropdown-item pl-24 pr-24">
                 <a class="link" target="_blank"  rel="nofollow"  :href="announcementLink">{{ $t('footer_notice') }}</a>
@@ -405,7 +405,7 @@
             placement="bottom"
             style="background:#2C3B4B;"
             width="100"
-            trigger="hover"> 
+            trigger="hover">
             <div
               style="width:100px;"
               class="pop-dropdown">
@@ -418,7 +418,7 @@
                   v-for="(value, key) in locales">
                   <a
                     @click="switchLang(key)"
-                  > 
+                  >
                     <!-- <icon
                     :name="'flag-'+key"
                     class="mr-5"/> -->
@@ -556,10 +556,7 @@ export default {
   methods: {
     loginPath (path) {
       this.$router.push({
-        name: path,
-        query: {
-          alert: 1
-        }
+        name: path
       })
     },
     resetBalance(balance) {

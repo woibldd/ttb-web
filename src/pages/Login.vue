@@ -216,7 +216,7 @@
         </div>
       </div>
     </v-modal>
-    <div v-show="path === 1">
+    <div>
       <v-modal
       class="safe-modal"
       :open.sync="showSafeModal">
@@ -311,9 +311,6 @@ export default {
     })
   },
   computed: {
-    path() {
-      return this.$route.query.alert
-    },
     params() {
       const params = {
         password: this.password

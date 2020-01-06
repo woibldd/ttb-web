@@ -209,7 +209,7 @@
       </div>
     </div>
     <v-download />
-    <div v-show="path === 1">
+    <div>
       <v-modal
       width="30%"
       class="safe-modal"
@@ -335,9 +335,6 @@ export default {
     })
   }, */
   computed: {
-    path() {
-      return this.$route.query.alert
-    },
     // 表单数据
     params () {
       const params = {
