@@ -1192,15 +1192,14 @@ export default {
     this.balance : 持仓数量
     this.amount : 输入框数量
     */
-    costValueBuyNew() {
-      //  console.log({holding:this.holding})
+    costValueBuyNew() { 
       let amount = this.amount;
       if (
         amount > 0 &&
         this.balance &&
         this.$big(this.balance.holding).plus(this.buyDelAmount) < 0
       ) {
-        amount = -(-amount - this.balance.amount - this.buyDelAmount);
+        amount = -(-amount - this.balance.holding - this.buyDelAmount);
         if (amount < 0) {
           amount = 0;
         }
@@ -1212,8 +1211,7 @@ export default {
       if (amount === 0 || !pairInfo) {
         return "0";
       }
-
-      // console.log({pairInfo})
+ 
       let im = pairInfo.im;
       let mm = pairInfo.mm;
       let mul = pairInfo.multiplier;
@@ -1253,8 +1251,7 @@ export default {
       }
       return "--";
     },
-    costValueSellNew() {
-      // console.log({holding:this.holding})
+    costValueSellNew() { 
       let amount = this.amount;
       // 有已持仓，做对手时，判断持仓是否可以对冲，不可对冲部分算成本
       if (
@@ -1262,7 +1259,7 @@ export default {
         this.balance &&
         this.$big(this.balance.holding).plus(this.sellDelAmount) > 0
       ) {
-        amount = amount - this.balance.amount - this.sellDelAmount;
+        amount = amount - this.balance.holding - this.sellDelAmount;
         if (amount < 0) {
           amount = 0;
         }
@@ -1320,8 +1317,7 @@ export default {
      * 起始保证金=im*委托价值*IX算法
      * IX算法 100 / 当前杠杆
      */
-    costValue() {
-      console.log("costvalue...");
+    costValue() { 
       const amount = this.amount;
       let orderValue = this.orderValue === "--" ? 0 : this.orderValue;
       if (
@@ -1355,20 +1351,7 @@ export default {
           .plus(fee)
           .round(this.pairInfo.value_scale || 4)
           .toString();
-
-        console.log(margin.round);
-        // console.log(
-        //   "level=",
-        //   lever,
-        //   "margin=",
-        //   margin.toString(),
-        //   "feeRate=",
-        //   feeRate.toString(),
-        //   "fee=",
-        //   fee.toString(),
-        //   "cost=",
-        //   v
-        // );
+  
         return v;
       }
       return "--";
@@ -1468,8 +1451,7 @@ export default {
       }
       return false; 
     },
-    sellOverflow() {
-      //console.log(`sell:price:${this.price};ct:${this.state.ct};ask:${this.state.ct.ask}`)
+    sellOverflow() { 
       if (this.price && this.state.ct && this.state.ct.bid) {
         if (this.$big(this.price).lte(this.state.ct.bid)) {
           return true;
@@ -1672,8 +1654,7 @@ export default {
     }
   },
   methods: {
-    tologin() {
-      //console.log(this.$route.fullPath)
+    tologin() { 
       utils.setStorageValue("LoginBack", "/contract.html");
       actions.setLoginBack("/contract.html");
       this.$router.push({
@@ -1687,8 +1668,7 @@ export default {
           value = value + 5;
         } else {
           value = value + 0;
-        }
-        console.log(value);
+        } 
         this.price = value;
       }
     },
@@ -1706,15 +1686,12 @@ export default {
         }
       }
     },
-    async mmChangeConfirm(item) {
-      console.log(this.mmModal.inputLeverTime, this.mmModal.sliderLeverTime);
-      console.log(item, "mmModalLeverChange");
+    async mmChangeConfirm(item) { 
       if (this.maxTimes && this.$big(item).gt(this.maxTimes)) {
         // 纠正输入
         utils.alert(`最大${this.maxTimes}倍杠杆`);
         item = this.maxTimes;
-      }
-      console.log(this.getCookie("NeverShowDialog"));
+      } 
 
       // if(this.getCookie('NeverShowDialog') == '0'){
       //   this.dialogModalClosed()
@@ -1859,8 +1836,7 @@ export default {
               this.maxTimes = item.m;
               // 更新当前设置的倍数
               this.mmModal.inputLeverTime = item.m;
-              this.mmModal.sliderLeverTime = this.dealSliderTime(item.m);
-              console.log(this.mmModal.sliderLeverTime, "0-0-0");
+              this.mmModal.sliderLeverTime = this.dealSliderTime(item.m); 
               this.holdingLever.inputLeverTime = item.m;
               this.holdingLever.sliderLeverTime = this.dealSliderTime(item.m);
               local.times = item.m;
@@ -1890,15 +1866,13 @@ export default {
       // type: 3 限价止损 4 市价止损 5 限价止赢 6 市价止盈
       //止盈止损操作，当系统会自动产生委托时，弹出确认提示
       const type = this._getOrderType();
-      let showWarn = false;
-      //console.log(type, this.lastPrice, this.trigger_price, showWarn)
+      let showWarn = false; 
       let lprice = {
         1: this.lastPrice * 1, //盘口价格
         2: this.markPrice * 1, //标记价格
         3: this.indexPrice * 1 //指数价格
       }[this.currentTriggerType];
-
-      console.log(typeof this.currentHolding.amount, typeof ($amount * 1));
+ 
       if ([3, 4, 5, 6].indexOf(type) >= 0) {
         if (side === "BUY") {
           //买入止损，盘口价格大于等于触发价格，系统自动生产委托订单
@@ -2006,9 +1980,7 @@ export default {
         this.input[input].status = "";
       }, 2000);
     },
-    async submit(type) {
-      // console.log( this.getValues("price"))
-      // console.log( this.getValues("amount"))
+    async submit(type) { 
       if (!this.isLogin) {
         location.href = "/user/login/";
         return;
@@ -2086,8 +2058,7 @@ export default {
         utils.alert("amount");
         return this.setInputStatus("amount", "error");
       }
-
-      console.log($value.toString(), this.balance.available_balance.toString());
+ 
       $value = this.$big($value);
       if ($value.gt(this.balance.available_balance)) {
         if (true) {
@@ -2154,14 +2125,7 @@ export default {
         if (!ok) {
           return false;
         }
-      }
-      // console.log({
-      //   passiveDelegate: local.passiveDelegate ,
-      //   side,
-      //   buyOverflow: this.buyOverflow ,
-      //   isExtOrderType : !this.isExtOrderType  ,
-      //   currentDealType: this.currentDealType
-      // })
+      } 
       if (
         local.passiveDelegate &&
         side === "BUY" &&
@@ -2299,13 +2263,11 @@ export default {
         // 锁定价格
         this.price = this.lastPrice;
       }
-
-      console.log(this.priceText);
+ 
       this.setButtonState(type);
     },
     //更新买入卖出按钮的状态
-    setButtonState(type) {
-      //console.log(this.currentDealType);
+    setButtonState(type) { 
       if (!this.amount || this.amount == "0") {
         [this.buyEnabled, this.sellEnabled] = [false, false];
       } else if (type === "market" || type === "limit") {
@@ -2319,8 +2281,7 @@ export default {
           3: this.indexPrice * 1 //指数价格
         }[this.currentTriggerType];
 
-        const tprice = this.trigger_price;
-        //console.log(oldValue)
+        const tprice = this.trigger_price; 
         //限价止损  市价止损
         if (orderType === 3 || orderType === 4) {
           //当盘口价格等于触发价格，不可买入或者卖出
@@ -2463,8 +2424,7 @@ export default {
       // this.getRiskLimit()
     },
     // 关闭浮层
-    confirmModalClosed() {
-      console.log(1);
+    confirmModalClosed() { 
       this._resetLoadingState();
     },
     jumpBalance() {
@@ -2560,8 +2520,7 @@ export default {
           this.userLeverTime == 0 ? this.maxTimes : this.userLeverTime; // local.userLeverTime
         // // 限额
         // let im = this.$big(this.riskModalInitPercent).div(100); // local.riskLimit
-        let pairInfo = this.state.ct.pairInfo;
-        console.log({ pairInfo });
+        let pairInfo = this.state.ct.pairInfo; 
         let im = pairInfo.im;
         let mm = pairInfo.mm;
         let mul = pairInfo.multiplier;
@@ -2635,8 +2594,7 @@ export default {
       this.language = false;
       this.$nextTick(() => {
         this.language = true;
-      });
-      console.log(this.timersMap, this.$t("contract_all_in"));
+      }); 
     },
     lastPrice() {
       this.setButtonState();
@@ -2667,8 +2625,7 @@ export default {
 
     pair: {
       async handler(pair) {
-        if (pair) {
-          //  console.log({pair, price: this.price})
+        if (pair) { 
           this.price = "";
         }
       }
