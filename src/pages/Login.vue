@@ -344,7 +344,7 @@ export default {
       //     type = 'email'
       //   }
       // }
-      if (this.verify_google) {
+      if (this.verify_google === 1) {
         type = 'google'
       } else if (this.verify_phone) {
         type = 'phone'
@@ -465,7 +465,7 @@ export default {
         this.email = res.data.email
         this.verify_phone = res.data.verify_phone
         this.verify_email = res.data.verify_email
-        this.verify_google = res.data.verify_google
+        this.verify_google = res.data.verify_login_google
         this.showModal = true
         this.$nextTick(() => {
           const type = this.verify_type
