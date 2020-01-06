@@ -141,8 +141,7 @@ async function beforeEach(to, from, next) {
       next()
     } else {
       next({
-        name: 'login',
-        query: { redirect: to.fullPath }
+        name: 'login'
       })
     }
   }
