@@ -389,6 +389,9 @@ export default {
             symbol: this.pairInfo.name,
             trigger_price: this.stopWinPrice,
           })
+          if (!res.code) {
+            utils.warning(res.message)
+          }
            
         } else {
           let res = await service.orderContract({
@@ -402,7 +405,10 @@ export default {
             trigger_type: this.stopWinType,
             passive: 0,
             tp_type: -1 
-          }); 
+          });  
+          if (!res.code) {
+            utils.warning(res.message)
+          }
         }  
         this.$eh.$emit("protrade:order:refresh", "confirm stop winloss"); 
       }
