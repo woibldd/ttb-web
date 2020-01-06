@@ -2404,7 +2404,7 @@ export default {
                 state.ct.holdingList =  res.data
                 let holdingList  =  res.data
                 holdingList.map(item => {
-                    if (item.currency === this.pairInfo.product_name) {
+                    if (item.currency === this.pairInfo.currency) {
                     if ( 
                         item.leverage != null &&
                         item.leverage != undefined
