@@ -217,9 +217,10 @@
       </div>
     </v-modal>
     <div>
-      <v-modal
+     <v-modal
+       @close="closeSafe"
       class="safe-modal"
-      :open.sync="showSafeModal">
+      :open.sync="safe">
       <safeModal @close="closeSafe" />
     </v-modal>
     </div>
@@ -239,6 +240,7 @@ import bubble from '@/components/Bubble'
 import VDownload from '@/components/VDownload'
 import { activeShareAccount } from '@/api/share_option'
 import safeModal from '@/pages/login/safeModal'
+import { mapState } from 'vuex'
 export default {
   name: 'Login',
   components: {
@@ -310,7 +312,14 @@ export default {
       query: to.query
     })
   },
+   beforeDestroy: function () {
+    console.log(11111)
+    if(this.$route.path !== '/user/login/phone' && this.$route.path !== '/user/login/email') {
+      this.$store.dispatch('safeHanle', true)
+    }
+  },
   computed: {
+    ...mapState(['safe']),
     params() {
       const params = {
         password: this.password
@@ -591,7 +600,8 @@ export default {
       })
     },
     closeSafe () {
-      this.showSafeModal = false
+      // this.showSafeModal = false
+      this.$store.dispatch('safeHanle', false)
     }
   }
 }

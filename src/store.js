@@ -10,9 +10,13 @@ export default new Vuex.Store({
     locale: 'zh-CN',
     userData: null,
     mapShareAccount: [],
-    activeShareAccount: null
+    activeShareAccount: null,
+    safe: true
   },
   mutations: {
+    SET_SAFE:(state, safe) => {
+      state.safe = safe
+    },
     CHANGE_LANG: (state, lang) => {
       state.locale = lang
     },
@@ -27,6 +31,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    safeHanle({commit}, safe) {
+      commit('SET_SAFE', safe)
+    },
     async getShareAccountList({ commit, state }, { accountArr=[], isAssignment }={}) {
       if (!state.userData) return []
       const currenyArr = accountArr.map(item => item.currency).join(',')

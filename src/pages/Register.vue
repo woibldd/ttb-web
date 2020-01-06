@@ -211,9 +211,9 @@
     <v-download />
     <div>
       <v-modal
-      width="30%"
+       @close="closeSafe"
       class="safe-modal"
-      :open.sync="showSafeModal">
+      :open.sync="safe">
       <safeModal @close="closeSafe" />
     </v-modal>
     </div>
@@ -232,7 +232,7 @@ import responsive from '@/mixins/responsive'
 import bubble from '@/components/Bubble'
 import VDownload from '@/components/VDownload'
 import safeModal from '@/pages/login/safeModal'
-
+import { mapState } from 'vuex'
 // import { MdField } from 'vue-material/dist/components'
 // import gtMixin from '@/mixins/gt'
 
@@ -335,6 +335,7 @@ export default {
     })
   }, */
   computed: {
+    ...mapState(['safe']),
     // 表单数据
     params () {
       const params = {
@@ -375,6 +376,12 @@ export default {
     },
     isMobile() {
       return this.utils.isMobile()
+    }
+  },
+  beforeDestroy: function () {
+    console.log(11111)
+    if(this.$route.path !== '/user/login/phone' && this.$route.path !== '/user/login/email') {
+      this.$store.dispatch('safeHanle', true)
     }
   },
   watch: {
@@ -537,7 +544,8 @@ export default {
       }
     },
     closeSafe () {
-      this.showSafeModal = false
+      this.$store.dispatch('safeHanle', false)
+      // this.showSafeModal = false
     }
 
   },
