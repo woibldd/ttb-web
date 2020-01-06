@@ -2711,6 +2711,7 @@ export default {
     this.$eh.$on("protrade:balance:refresh", this.fetchData);
     this.$eh.$on("protrade:layout:init", this.layoutInit);
     //this.$eh.$on("protrade:exchange:setOnePrice", this.setOnePrice)
+    this.$eh.$on('protrade:balance:leverage', this._setLeverage)
     await actions.updateSession();
     if (this.isLogin) {
       this.fetchData();
@@ -2720,6 +2721,7 @@ export default {
     this.$eh.$off("protrade:order:refresh");
     this.$eh.$off("protrade:balance:refresh", this.fetchData);
     this.$eh.$off("protrade:layout:init", this.layoutInit);
+    this.$eh.$off('protrade:balance:leverage')
   }
 };
 </script>

@@ -549,6 +549,9 @@ export default {
                   }) 
                   state.ct.holding = cholding
                   state.ct.holdingList = holdingList
+                  if (state.ct.times !== cholding.leverage) {
+                    this.$eh.$emit('protrade:balance:leverage', cholding.leverage)
+                  }
                   // state.ct.computeHoldingList = this.computeHoldingList(holdingList)
                 } 
                 this.tableData = res.data
