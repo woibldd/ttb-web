@@ -120,6 +120,7 @@
 import { state } from "@/modules/store";
 import service from "@/modules/service";
 import _ from 'lodash'
+import utils from '@/modules/utils'
 
 export default {
   props: {
@@ -389,7 +390,7 @@ export default {
             symbol: this.pairInfo.name,
             trigger_price: this.stopWinPrice,
           })
-          if (!res.code) {
+          if (res.code) {
             utils.warning(res.message)
           }
            
@@ -406,7 +407,7 @@ export default {
             passive: 0,
             tp_type: -1 
           });  
-          if (!res.code) {
+          if (res.code) {
             utils.warning(res.message)
           }
         }  
@@ -419,7 +420,10 @@ export default {
               order_id:this.stoplossId,
               symbol: this.pairInfo.name,
               trigger_price: this.stoplossPrice,
-            })  
+            })
+            if (res.code) {
+              utils.warning(res.message)
+            }  
           } else {
             let res = await service.orderContract({
               type: 4,
@@ -432,7 +436,10 @@ export default {
               trigger_type: this.stoplossType,
               passive: 0,
               sl_type: -1 
-            })  
+            }) 
+            if (res.code) {
+              utils.warning(res.message)
+            } 
           } 
           this.$eh.$emit("protrade:order:refresh", "confirm stop winloss"); 
         }, 1200)
