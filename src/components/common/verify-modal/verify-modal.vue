@@ -34,6 +34,7 @@
                 <input
                   v-model="form.google_code"
                   maxlength="6"
+                  style="border-color: transparent!important"
                   class="input-validate mr-14">
               </div>
             </div>
