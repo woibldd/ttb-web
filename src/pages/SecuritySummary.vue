@@ -99,7 +99,7 @@
     <verify-modal
       :open.sync="showModal"
       :code.sync="form"
-      :google="verify_google"
+      :google="googleFlag"
       :hide-count-down="hideCountDown"
       :open-or-close="openOrClose"
       :ensure-callback="modalEnsureCallback"
@@ -125,6 +125,7 @@
           google_code: ''
         },
         hideCountDown: false,
+        googleFlag: false,
         state
       }
     },
@@ -206,6 +207,7 @@
           utils.alert(this.$t('profile.security.close_verify_tips'))
           return
         }
+        this.googleFlag = this.verify_google
         this.showModal = !this.showModal
         this.openOrClose = this.verify_phone
         this.hideCountDown = false
@@ -218,6 +220,7 @@
           utils.alert(this.$t('profile.security.close_verify_tips'))
           return
         }
+        this.googleFlag = this.verify_google
         this.showModal = !this.showModal
         this.openOrClose = this.verify_email
         this.hideCountDown = false
@@ -226,6 +229,7 @@
         this.form = {}
       },
       switchLoginGoogleBind () {
+        this.googleFlag = true
         this.showModal = !this.showModal
         this.openOrClose = !this.verify_login_google
         this.hideCountDown = true
@@ -250,6 +254,7 @@
         }
       },
       switchGoogleBind () {
+        this.googleFlag = true
         this.showModal = !this.showModal
         this.hideCountDown = false
         if (this.verify_type === 'email') {
