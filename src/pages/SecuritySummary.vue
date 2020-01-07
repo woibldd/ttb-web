@@ -99,6 +99,7 @@
     <verify-modal
       :open.sync="showModal"
       :code.sync="form"
+      :google="verify_google"
       :hide-count-down="hideCountDown"
       :open-or-close="openOrClose"
       :ensure-callback="modalEnsureCallback"

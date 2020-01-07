@@ -28,7 +28,7 @@
                 />
               </div>
             </div>
-            <div class="modal__row mt-12 mb-25" v-if="!computedHideCountDown">
+            <div class="modal__row mt-12 mb-25" v-if="!computedHideCountDown && google">
               <div class="row__label mb-9">{{ $t('fa2_google_code_mobile') }}</div>
               <div class="row__input" >
                 <input
@@ -80,6 +80,10 @@ export default {
     }
   },
   props: {
+    google: {
+      type: Boolean,
+      default: false
+    },
     title: {
       type: String,
       default: ''
