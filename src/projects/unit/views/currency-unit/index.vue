@@ -1049,11 +1049,11 @@ export default {
             let curProduct = this.mapProduct[item.name]
             item.value = !+item.holding ? 0 : bigDiv([item.holding, item.price], 8)
             item.price = this.bigRound(item.price, this.activeProduct['price_scale'])
-            item._leverage = item.leverage === '0' ? this.$t('contract_cal_full') : item.leverage
+            item._leverage = item.leverage === '0' ? this.$t('contract_cal_full') : item.leverage 
             // console.log('handleBalanceListhandleBalanceListhandleBalanceList')
             // if (this.mapProduct && curProduct.UNIT && +item.holding > 0) {
 
-            // }
+            // } 
             item.funUnrealized = (row) => {
               if (!this.mapProduct || !curProduct.UNIT || !row.holding || !row.price) {
                 return '0'
