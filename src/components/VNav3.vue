@@ -13,6 +13,13 @@
             href="/contract.html"
             class="nav_link ml-30"
           >{{ $t('contract') }}</a>
+          <div class="nav_link arrow-down" >
+            <a
+              href="/unit.html"
+              :class="{'router-link-active': from === 'unit'}"
+              class="nav_link ml-20">{{ $t('币本位合约') }}
+            </a>
+          </div>
           <router-link :to="{name: 'OTC'}" class="nav_link ml-30">{{ $t('otc_trade') }}</router-link>
 
           <router-link

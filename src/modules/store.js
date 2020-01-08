@@ -78,6 +78,9 @@ export const state = {
     currentDelList: {},
     userSetting: {}
   },
+  unit: {
+    pair: ''
+  },
   rate: {
     IX: null,
     USDT: null,

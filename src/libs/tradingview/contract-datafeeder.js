@@ -125,6 +125,7 @@ export default {
       lastTime = data.time
       onRealtimeCallback(toTick(data))
     })
+    utils.$tvSocket.$on('reopen', this.subscribeBars)
   },
   unsubscribeBars (subscriberUID) {
     utils.log('UnsubscribeBars', subscriberUID)

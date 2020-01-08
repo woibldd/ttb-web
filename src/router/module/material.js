@@ -29,6 +29,11 @@ export const materialRouter = [
         path: 'trade-index/:pair?',
         name: 'TradeIndex',
         component: () => import(/* webpackChunkName: "ContractMaterial" */ '@/components/Material/trade-index')
+      },
+      {
+        path: 'unit-index/:pair?',
+        name: 'UnitIndex',
+        component: () => import(/* webpackChunkName: "ContractMaterial" */ '@/components/Material/trade-index/unit-index')
       }
     ]
   }

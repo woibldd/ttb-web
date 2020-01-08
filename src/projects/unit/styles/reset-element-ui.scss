@@ -1,0 +1,157 @@
+
+.el-table{
+  background: none;
+  &::before{
+    height: 0;
+  }
+  .el-table__body-wrapper{
+    &::-webkit-scrollbar {
+      /*滚动条整体样式*/
+      width : 10px;  /*高宽分别对应横竖滚动条的尺寸*/
+      height: 1px;
+      }
+    &::-webkit-scrollbar-thumb {
+      /*滚动条里面小方块*/
+      border-radius: 10px;
+      // box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
+      background   : #ddd;
+      }
+    &::-webkit-scrollbar-track {
+      /*滚动条里面轨道*/
+      // box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      background   : #f0f0f0;
+      }
+  }
+}
+tr.contract-order-list-row-class{
+  background:$--contract-table-bg;
+  &:hover>td{
+    background: $--contract-table-active!important;
+  }
+  th.is-leaf{
+    background: $--contract-table-bg;
+    border-color: rgb(27, 28, 29);
+  }
+  td{
+    border-color: rgb(27, 28, 29); 
+  }
+}
+
+.contrat-popper-success-class{
+  background: $--contract-table-bg;
+  border: 1px solid $--color-success;
+  &>.el-popover__title{
+    color: $--color-success;
+  }
+  &[x-placement^="left"] .popper__arrow{
+    border-left-color: $--color-success;
+    &::after{
+      border-left-color: $--color-success;
+    }
+  }
+}
+.contrat-popper-danger-class{
+  background: $--contract-table-bg;
+  border: 1px solid $--color-danger;
+  &>.el-popover__title{
+    color: $--color-danger;
+  }
+  &[x-placement^="left"] .popper__arrow{
+    border-left-color: $--color-danger;
+    &::after{
+      border-left-color: $--color-danger;
+    }
+  }
+}
+.custom-popper{
+  background: $--contract-table-bg;
+}   
+.login-custom-form{
+  .el-input__inner{
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+.custom-select{
+  .el-input__inner{
+    background: transparent;
+    color: #fff;
+    border:none
+  }
+}
+.el-popover__reference:focus{
+  outline: none;
+}
+.el-popup-parent--hidden{
+  overflow: auto;
+}
+.custom-input{
+  line-height: 24px;
+  border: 1px solid $--color-info;
+  color: #d7d7d7;
+  background: none;
+}
+.el-tooltip__popper.custom-tooltip{
+  background: $subMenuHover;
+  color: #ccc; 
+}
+
+.el-tooltip__popper.custom-tooltip[x-placement^=right] {
+  .popper__arrow {
+    border-right-color: $subMenuHover; 
+    &::after{
+      border-right-color: $subMenuHover; 
+    }
+  }
+}
+.el-tooltip__popper.custom-tooltip[x-placement^=top] {
+  .popper__arrow {
+    border-top-color: $subMenuHover; 
+    &::after{
+      border-top-color: $subMenuHover; 
+    }
+  }
+}
+.el-tooltip__popper.custom-tooltip[x-placement^=left] {
+  .popper__arrow {
+    border-left-color: $subMenuHover; 
+    &::after{
+      border-left-color: $subMenuHover; 
+    }
+  }
+}
+.el-tooltip__popper.custom-tooltip[x-placement^=bottom] {
+  .popper__arrow {
+    border-bottom-color: $subMenuHover; 
+    &::after{
+      border-bottom-color: $subMenuHover; 
+    }
+  }
+}
+
+
+
+
+.el-popper.nav-popover[x-placement^=bottom]  {
+  background-color: #2C3B4B;
+  border: none;
+  margin-top: 0;
+}
+
+.el-popper.nav-popover .popper__arrow {
+  display: none;
+}
+
+.el-popover.nav-list[x-placement^=bottom] {
+  background-color: #2C3B4B;
+  border: none;
+  margin-top: 0;
+  padding: 0;
+  min-width: 80px;
+}
+
+.el-popper.nav-list .popper__arrow {
+  display: none;
+}

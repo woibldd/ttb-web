@@ -99,6 +99,7 @@ export default {
           this.patch(data)
         })
       })
+      this.socketPrice.$on('reopen', this.subMarket)
     }
   },
   destroyed () {

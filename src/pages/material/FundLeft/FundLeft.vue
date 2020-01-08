@@ -29,12 +29,14 @@
         <li
           v-for="(pair, index) in coinIndexArray"
           :key="index">
-          <div class="nav_link arrow-down">
+            <div
+            v-if="pair.product==='FUTURE'"
+            class="nav_link arrow-down" >
             <router-link
               class="menu-name menu-contract-index"
               active-class="active"
-              :to="{ name: 'TradeIndex', params: { pair: pair }}">
-              {{ pair.replace('FUTURE_', '') }}
+              :to="{ name: 'TradeIndex', params: { pair: pair.fullname }}">
+              <span v-if="pair.product==='FUTURE'">{{ pair.pair }}</span> 
               <icon
                 class="arrow ml-5 arrow-right"
                 name="arrow-contract-down-black"/>
@@ -47,15 +49,49 @@
                 <li class="dropdown-item pl-34 pr-24">
                   <a
                     target="_blank"
-                    :href="tutorialUrl(pair)"
-                    class="index__sub__link">{{ $t("ensurance_btc_future_tutorial", {coin: pair.replace('FUTURE_','').replace('USD','')}) }}
+                    :href="tutorialUrl(pair.fullname)"
+                    class="index__sub__link">{{ $t("ensurance_btc_future_tutorial", {coin: pair.coin}) }}
                   </a>
                 </li>
                 <li class="dropdown-item pl-34 pr-24">
                   <a
                     target="_blank"
-                    href="https://ixxcustomer.zendesk.com/hc/zh-cn"
-                    class="index__sub__link">{{ $t("ensurance_btc_future_rule", {coin: pair.replace('FUTURE_','').replace('USD','')})}}
+                    href="https://ixcustomer.zendesk.com/hc/zh-cn/sections/360003415251-合约公告"
+                    class="index__sub__link">{{ $t("ensurance_btc_future_rule", {coin: pair.coin}) }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div
+            v-if="pair.product==='UNIT'"
+            class="nav_link arrow-down" >
+            <router-link
+              class="menu-name menu-contract-index"
+              active-class="active"
+              :to="{ name: 'UnitIndex', params: { pair: pair.fullname }}">
+              <span v-if="pair.product==='UNIT'">{{ pair.coin }}币本位</span>
+              <icon
+                class="arrow ml-5 arrow-right"
+                name="arrow-contract-down-black"/>
+              <icon
+                class="arrow ml-5 arrow-black"
+                name="arrow-contract-down"/>
+            </router-link>
+            <div class="dropdown-sub-menu">
+              <ul class="dropdown-list pt-10 pb-10">
+                <li class="dropdown-item pl-34 pr-24">
+                  <a
+                    target="_blank"
+                    :href="tutorialUrl(pair.fullname)"
+                    class="index__sub__link">{{ $t("ensurance_btc_future_tutorial", {coin: pair.coin}) }}
+                  </a>
+                </li>
+                <li class="dropdown-item pl-34 pr-24">
+                  <a
+                    target="_blank"
+                    href="https://ixcustomer.zendesk.com/hc/zh-cn/sections/360003415251-合约公告"
+                    class="index__sub__link">{{ $t("ensurance_btc_future_rule", {coin: pair.coin}) }}
                   </a>
                 </li>
               </ul>
@@ -86,8 +122,11 @@ export default{
       }
       else if (pair === 'FUTURE_ETHUSD') {
         return 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360031397811'
-      }
-      else {
+      } else if (pair === 'UNIT_ETHUSD') {
+        return 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360037905372-METHUSD-合约指南'
+      } else if (pair === 'UNIT_METHUSD') {
+        return 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360037905372-METHUSD-合约指南'
+      } else {
         return ''
       }
     }, 

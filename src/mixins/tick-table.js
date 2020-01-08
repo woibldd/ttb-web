@@ -231,6 +231,7 @@ export default {
           this.patch(data)
         })
       })
+      this.socket.$on('reopen', this.openSocket)
     }
   },
   destroyed() {

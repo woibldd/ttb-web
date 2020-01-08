@@ -198,7 +198,8 @@ export default {
         datas.forEach(data => {
           this.patch(data)
         })
-      })
+      }) 
+      this.socket.$on('reopen', this.subMarket)
     }
   },
   destroyed () {

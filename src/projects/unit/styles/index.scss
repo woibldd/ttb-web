@@ -1,0 +1,84 @@
+@import './transition.scss';
+// @import './variables.scss';
+@import "~element-ui/packages/theme-chalk/src/index";
+@import './reset-element-ui.scss';
+
+//normalize额外重置样式
+html,body { height: 100%; -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;}
+ul,dl,dd,p,h1,h2,h3,h4,h5{ list-style: none;margin: 0;padding: 0;box-sizing: border-box}
+html,body {min-width: 1366px;}
+textarea,select,input{-webkit-appearance: none; -moz-appearance: none; -o-appearance: none; appearance: none;}
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  // font: inherit;
+}
+//全局样式
+.container{ width: 1200px; margin: 0 auto; height: inherit;}
+hr{
+  border-top: none;
+  border-color: #DCDFE6;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+.text-nowrap{ max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.text-active{ color: $--color-primary;}
+.text-primary{ color: $--color-primary;}
+.text-success{color: $--color-success;}
+.text-danger{color: $--color-danger;}
+.text-warning{color: $--color-warning;}
+.text-info{color: $--color-info;}
+.text-light{color: $--color-light;}
+
+.bd-succes{border:1px solid $--color-success;background: none;color:$--color-success ;}
+.bd-primary{border:1px solid $--color-primary;background: none;color:$--color-primary ;}
+.bd-info{color: $--color-info;}
+
+.hover-point:hover{cursor: pointer;color:$--color-primary}
+
+
+.background-active{ background-color: $--color-primary;color: #fff;}
+.border-active{ border:1px solid $--color-primary;}
+.el-slider__button-wrapper{
+  z-index: 2;
+}
+.divider-line-info{
+  height: 1px;
+  width: 100%;
+  margin: 24px 0;
+  background: $--color-info;
+}
+.directive-login{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  /* transform: translateX(10px); */
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,.8);
+  z-index: 5;
+}
+
+
+
+.share-text-info{
+  color: $--share-text-info
+}
+.share-text-success{
+  color: $--color-success
+}
+.share-text-danger{
+  color: $--color-danger
+}
+.share-active-bg{
+  color: $--color-success
+}
+
+

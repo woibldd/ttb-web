@@ -307,6 +307,32 @@ $primary-color: #01CED1;
     opacity: .8;
 }
 
+.el-button.el-button--success {
+  color: #fff;
+  background-color: $otc-buy-bg;
+  border-color: $otc-buy-bg;
+
+  &:hover, &:focus {
+      color: #fff;
+      background-color: $otc-buy-bg-light;
+      border-color: $otc-buy-bg-light;
+      opacity: .8;
+  }
+}
+.el-button.el-button--danger {
+  color: #fff;
+  background-color: $otc-sell-bg;
+  border-color: $otc-sell-bg;
+
+  &:hover, &:focus {
+      color: #fff;
+      background-color: $otc-sell-bg-light;
+      border-color: $otc-sell-bg-light;
+      opacity: .8;
+  } 
+}
+
+
 .el-select .el-input.is-focus .el-input__inner {
     border-color: $primary-color !important;
 }
