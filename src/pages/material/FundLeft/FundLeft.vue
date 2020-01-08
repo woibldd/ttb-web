@@ -133,11 +133,33 @@ export default{
 
   },
   async created () {
-    let res = await service.getContractSymList()
+     let res = await service.getContractSymList()
     if (!res.code) {
       let symbolList = res.data.items
       if (symbolList.length) {
-        this.coinIndexArray = symbolList.map(item => item.name)
+        this.coinIndexArray = symbolList.map(item => {
+          return {
+            fullname: item.name,
+            pair: item.currency,
+            coin: item.currency.replace('USD', ''),
+            product: item.product
+          }
+        })
+      }
+    }
+    res = await service.getUnitSymList()
+    if (!res.code) {
+      let list = res.data.items
+      if (list.length) {
+        // this.coinIndexArray = this.coinIndexArray.concat(list.map(item => `${item.product}_${item.symbol}`))
+        this.coinIndexArray = this.coinIndexArray.concat(list.map(item => {
+          return {
+            fullname: `${item.product}_${item.symbol}`,
+            pair: item.symbol,
+            coin: item.currency,
+            product: item.product
+          }
+        }))
       }
     }
   }
