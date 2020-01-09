@@ -80,7 +80,7 @@ export default {
 
   // }
   .custom-select{
-    border-radius: 50%;
+    // border-radius: 50%;
     width: 170px;
     margin-left: 15px;
     & /deep/ .el-input__inner{

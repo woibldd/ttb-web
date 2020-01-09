@@ -40,7 +40,7 @@
                     v-model="formItem.trigger_type"
                     :disabled="!formItem.type"
                     size="small"
-                    class="transactionPrice"
+                    class="custom-select transactionPrice"
                     @change="handleInput(false,formItem,item.holding, item.price)">
                     <el-option
                       v-for="(subValue,subKey) in mapFormContent.mapTriggerType"
