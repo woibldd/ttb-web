@@ -13,7 +13,7 @@
             <span class="dib mr-5">{{ $t('orderbook_depth_group') }}</span>{{ currentDepth }} <icon
               name="arrow-down-blue"
               :class="[showDepthOption && 'up']"
-              class="arrow-down-blue"/>
+              class="arrow-down-yellow"/>
           </span>
           <div
             class="depth-options-wrapper"
