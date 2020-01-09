@@ -1,4 +1,5 @@
 {
+  "currency-unit": "币本位合约",
   "google_login": "登录时进行谷歌验证",
   "google_turn_off": "关闭谷歌验证",
   "google_reset": "重置",
@@ -901,7 +902,7 @@
   "RushBuy_text_list_32": "2. IXX交易所仅提供一个自由的数字货币交易平台，不对其发行价值做任何的审核或担保，亦不承担赔偿责任，如果您不能接受，请勿参与。",
   "RushBuy_text_list_33": "3. 由于参与此类项目面临包括但不限于项目方不发币的可能性及上述风险，请在详细了解项目内容并理解上述风险后，在个人的风险承担能力范围内谨慎参与。",
   "RushBuy_text_list_34": "输入抢购数量",
-  "contract": "合约交易",
+  "contract": "BTC合约",
   "activity_rank_total_reward_yet": "当前奖池共累计",
   "activity_rank_people": "挖矿大赛排行榜",
   "activity_rank_sign": "挖矿大赛报名",
@@ -2792,6 +2793,6 @@
       "confirm": "我已知晓"
     }
   },
-  "no_account": "还没有账号?", 
-  "UNIT_&":"%{currency}币本位" 
+  "no_account": "还没有账号?",
+  "UNIT_&":"%{currency}币本位"
 }

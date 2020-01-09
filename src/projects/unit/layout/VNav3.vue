@@ -33,17 +33,17 @@
               :to="{name: 'OTC'}"
               class="nav_link  ml-20">{{ $t('appNav.mapNavList.legalTender') }}</router-link>
           </div>
-          <!-- 热门活动 -->
-          <div class="nav_link arrow-down" >
-            <span
-              v-popover:popover6
-              class="nav_link ml-30">{{ $t('appNav.mapNavList.hotActive.label') }}
-              <svg-icon
-                class="arrow ml-5"
-                icon-class="header-down" />
-            </span>
+          <div class="nav_link arrow-down">
+            <router-link to="/affiliate" class="nav_link ml-30" v-popover:popover2>
+              {{$t('plan')}}
+              <icon name="header-down" class="mini arrow" />
+            </router-link>
+            <!-- <span class="nav_link ml-30" >
+              {{$t('plan')}}
+              <icon name="header-down" class="mini arrow" />
+            </span> -->
             <el-popover
-              ref="popover6"
+              ref="popover2"
               popper-class="nav-list"
               placement="bottom"
               style="background:#2C3B4B;"
@@ -51,26 +51,83 @@
               <div class="pop-dropdown">
                 <ul class="dropdown-list pt-10 pb-10">
                   <li class="dropdown-item pl-24 pr-24">
-                    <router-link
-                      :to="{name: 'LockWarehouse'}"
-                      class="link">{{ $t("appNav.mapNavList.hotActive.children.lock") }}
-                    </router-link>
+                    <router-link to="/affiliate" class="link">{{ $t('plan') }}</router-link>
                   </li>
                   <li class="dropdown-item pl-24 pr-24">
-                    <router-link
-                      :to="{name: 'InviteMineActivity'}"
-                      class="link">{{ $t("appNav.mapNavList.hotActive.children.invite_reward") }}</router-link>
+                    <a
+                      href="/snowball/bazaar"
+                      :class="{'router-link-active': from === 'contract'}"
+                      class="link"
+                    >{{ $t('bidTitle') }}</a>
                   </li>
-
+                  <!-- <li class="dropdown-item pl-24 pr-24" v-if="isLogin">
+                    <a
+                      href="/snowball"
+                      :class="{'router-link-active': from === 'contract'}"
+                      class="link"
+                    >{{ $t('playBTC') }}</a>
+                  </li> -->
                 </ul>
               </div>
             </el-popover>
           </div>
+
           <div class="nav_link arrow-down">
-            <router-link
-              to="/snowball"
-              class="nav_link  ml-20">{{ $t('appNav.mapNavList.bidTitle') }}</router-link>
+            <a href="/bonus" class="nav_link ml-30" v-popover:popover3>
+              {{ this.$t('gift.bonus') }}
+              <icon name="hot-red" />
+              <icon name="header-down" class="mini arrow" />
+            </a>
+            <el-popover
+              ref="popover3"
+              popper-class="nav-list"
+              placement="bottom"
+              style="background:#2C3B4B;"
+              trigger="hover">
+              <div class="pop-dropdown">
+                <ul class="dropdown-list pt-10 pb-10">
+                  <li class="dropdown-item pl-24 pr-24">
+                    <a href="/bonus" class="link">
+                      {{ this.$t('gift.bonus') }}
+                      <icon name="hot-red" />
+                    </a>
+                  </li>
+                  <li class="dropdown-item pl-24 pr-24">
+                    <a
+                      href="javascript:;"
+                      class="link"
+                      @click="subscribeHandle"
+                    >{{ this.$t('node_sub') }}</a>
+                  </li>
+                </ul>
+              </div>
+            </el-popover>
           </div>
+          <!-- <a
+            href="/bonus"
+            class="nav_link"
+            style="padding-left:30px;" >
+            {{ this.$t('gift.bonus') }}
+            <icon name="hot-red"/>
+          </a>-->
+          <!-- <router-link
+            v-if="isTestnet"
+            to="/snowball/bazaar"
+            class="nav_link  ml-30">{{ $t('bidTitle') }}
+          </router-link>
+          <a
+            v-if="isTestnet"
+            href="javascript:;"
+            class="nav_link"
+            style="padding-left:30px;"
+            @click="planHandle" >
+            {{ $t('plan') }}
+          </a>-->
+          <router-link
+            v-if="isTestnet"
+            to="/share_option"
+            class="nav_link ml-30"
+          >{{ $t('shareOption.navText') }}</router-link>
         </div>
       </div>
       <div class="nav_right">
@@ -281,7 +338,7 @@
 
         <div
           class="nav_item lang ml-15"
-          v-popover:popover3>
+          v-popover:popover4>
           <span
             class="language"
           >
@@ -292,7 +349,7 @@
             {{ locales[state.locale].slice(0,2) }}
           </span>
           <el-popover
-            ref="popover3"
+            ref="popover4"
             popper-class="nav-list"
             placement="bottom"
             style="background:#2C3B4B;"
@@ -415,6 +472,15 @@ export default {
     }
   },
   methods: {
+    subscribeHandle() {
+      if (window.localStorage.getItem("X-TOKEN")) {
+        this.$router.push("/fund/my/assets");
+      } else {
+        this.$router.push({
+          name: "login"
+        });
+      }
+    },
     switchLang (lang) {
       actions.setLocale(lang)
       localStorage.setItem('locale', lang)
@@ -498,24 +564,24 @@ export default {
     @include clearfix()
   }
   width: 100%;
-  height: 80px;
+  height: 60px;
   line-height: 42px;
   .nav_logo {
     float: left;
-    width: 142px;
-    height: 46px;
+    width: 176px;
+    height: 38px;
     display: block;
     // @include bg-retina('../assets/nav_logo', 'png', 142px, 46px);
-    margin: 17px 0;
     img {
-      width: 142px;
-      height: 46px;
+      width: 176px;
+      height: 38px;
+      margin-top: 11px;
     }
   }
   .nav_left {
     float: left;
     margin-left: 20px;
-
+    margin-top: 10px;
     .left_options {
       float: left;
       margin: 0 0 0 40px;
@@ -524,9 +590,8 @@ export default {
         font-size: 16px;
         position: relative;
         display: inline-block;
-        padding-top: 18px;
-        padding-bottom: 19px;
-
+        height: 40px;
+        font-weight: 500;
         &.arrow-down {
           display: inline;
 
@@ -610,7 +675,7 @@ export default {
   .nav_right {
     position: absolute;
     min-width: 320px;
-    top: 0;
+    top: -10px;
     right: 0;
     font-size: 14px;
     .right_options {
@@ -804,9 +869,9 @@ export default {
 
 }
 .dark {
-  background: rgba(49,49,49,1);
+  background: #0C1222;
   .app-dl {
-    background:rgba(49,49,49,1) !important;
+    background:#0C1222!important;
   }
 }
 .login {

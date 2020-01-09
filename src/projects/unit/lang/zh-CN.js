@@ -2529,6 +2529,7 @@ export default {
     }
   },
   "gift": {
+    "bonus":"交易赠金",
     "banner": {
       "btn_text": "立即领取 $60 交易金"
     },

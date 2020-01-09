@@ -1,4 +1,5 @@
 {
+  "currency-unit": "幣本位合約",
   "google_login": "登入時進行穀歌驗證",
   "google_turn_off": "關閉穀歌驗證",
   "google_reset": "重置",
@@ -1144,7 +1145,7 @@
   "activity_lock_title_a": "如需使用機器人挖礦，需要優先創建API Key",
   "activity_lock_title_b": "創建API Key後，可以開始使用機器人進行挖礦",
   "contract_account": "合約賬戶",
-  "contract": "合約交易",
+  "contract": "BTC合約",
   "account_balance": "賬戶餘額",
   "transaction_record": "交易記錄",
   "warehouse_margin": "倉位保證金",
@@ -2715,6 +2716,6 @@
       "confirm": "我已知曉"
     }
   },
-  "no_account": "還沒有帳號?", 
-  "UNIT_&":"%{currency}币本位" 
+  "no_account": "還沒有帳號?",
+  "UNIT_&":"%{currency}币本位"
 }

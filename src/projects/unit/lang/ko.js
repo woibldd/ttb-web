@@ -2119,8 +2119,8 @@ export default {
   appNav: {
     mapNavList: {
       'trading': '币币交易',
-      'contract': '合约交易',
-      'currency-unit': '币本位交易',
+      'contract': 'BTC계약',
+      'currency-unit': '코인 베이스 계약',
       'legalTender': '法币交易',
       'hotActive': {
         label: '热门活动',
