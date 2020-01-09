@@ -2804,6 +2804,7 @@
     }
   },
   "fee": {
+    "unit_fees": "币本位合约手续费",
     "contract": {
       "leverage" : "Leverage" ,
       "provision_fee" :"Maker Fees",

@@ -220,7 +220,7 @@ export default {
     leveragePreview (tag) {
       return leveragePreview({ name: this.activeProduct.name, leverage: tag }).then(res => {
         this.leverageTipObj = res.data
-        this.leverageTipObj.leverage = +this.leverageTipObj.leverage === 0 ? 100 : this.leverageTipObj.leverage
+        this.leverageTipObj.leverage = +this.leverageTipObj.leverage === 0 ? this.$t('contract_all_in') : this.leverageTipObj.leverage + 'x'
         this.leverageTipObj.margin_position = toRound(this.leverageTipObj.margin_position, 8)
         this.leverageTipObj.margin_delegation = toRound(this.leverageTipObj.margin_delegation, 8)
       })

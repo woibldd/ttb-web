@@ -2596,6 +2596,7 @@
     }
   },
   "fee": {
+    "unit_fees": "币本位合约手续费",
     "contract": {
       "leverage" : "杠杆" ,
       "provision_fee" :"提供流動性費率",
