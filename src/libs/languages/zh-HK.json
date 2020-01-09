@@ -2715,5 +2715,6 @@
       "confirm": "我已知曉"
     }
   },
-  "no_account": "還沒有帳號?"
+  "no_account": "還沒有帳號?", 
+  "UNIT_&":"%{currency}币本位" 
 }

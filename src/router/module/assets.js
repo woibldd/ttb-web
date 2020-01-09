@@ -70,6 +70,34 @@ export const capitalRouter = [
             ]
           },
           {
+            path: 'contractUnit',
+            name: 'contractUnit',
+            redirect: 'contractUnit/index',
+            component: () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/contractUnit/index.vue'),
+            children: [
+              {
+                path: 'index/:currency?',
+                name: 'contractUnitIndex',
+                component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contractUnit/contract.vue')
+              },
+              {
+                path: 'history',
+                name: 'contractUnitHistory',
+                component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contractUnit/history')
+              },
+              {
+                path: 'assets-history',
+                name: 'contractUnitHistory',
+                component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contractUnit/assets-history')
+              },
+              {
+                path: 'winloss-history',
+                name: 'contractUnitHistory',
+                component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contractUnit/winloss-history')
+              }
+            ]
+          },
+          {
             path: 'assets',
             name: 'myAssets',
             component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/My/my.vue'),
@@ -81,34 +109,6 @@ export const capitalRouter = [
                 component: () => import(/* webpackChunkName: "FundHistory" */ '@/components/Fund/history/history.vue')
               }
             ]
-          }
-        ]
-      },
-      {
-        path: 'contractUnit',
-        name: 'contractUnit',
-        redirect: 'contractUnit/index',
-        component: () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/contractUnit/index.vue'),
-        children: [
-          {
-            path: 'index/:currency?',
-            name: 'contractUnitIndex',
-            component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contractUnit/contract.vue')
-          },
-          {
-            path: 'history',
-            name: 'contractUnitHistory',
-            component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contractUnit/history')
-          },
-          {
-            path: 'assets-history',
-            name: 'contractUnitHistory',
-            component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contractUnit/assets-history')
-          },
-          {
-            path: 'winloss-history',
-            name: 'contractUnitHistory',
-            component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contractUnit/winloss-history')
           }
         ]
       },

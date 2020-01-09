@@ -801,6 +801,9 @@ const service = {
     }
     return res
   },
+  getUnitContractSymInfo (params) {
+    return request('unit/account/symbol/info', params)
+  },
   getContractSymInfo(params) {
     return request('future/account/symbol/info', params)
   },
@@ -831,6 +834,107 @@ const service = {
       }
     }
     return null
+  },
+  
+  getUnitSymList () {
+    return getCache('unitPairList', () => request('unit/symbol/list').then(res => {
+      if (res && res.data) {
+        res.data = res.data.map(item => {
+          item.amount_scale = parseInt(item.amount_scale, 10)
+          item.currency_scale = parseInt(item.price_scale, 10) || 0
+          item.price_scale = parseInt(item.price_scale, 10) || 2
+          item.fee_rate = item.fee_rate || 0
+          // item.value_scale = parseInt(item.value_scale, 10) || 4
+          if (item.currency === 'BTCUSD') {
+            item.value_scale = 8
+            item.accuracy = item.accuracy || 5
+          } else {
+            item.value_scale = 8
+            item.accuracy = item.accuracy || 5
+          }
+
+          if (item.name.indexOf('FUTURE_') < 0) {
+            item.name = `FUTURE_${item.name.replace('_', '')}`
+          }
+
+          // USD
+          item.currency_name = item.name.substr(-3)
+          // BTCUSD
+          item.symbol = item.name.split('_')[1]
+          // BTC
+          // item.product_name = item.symbol.substr(0, 3)
+          item.product_name = item.symbol.replace('USD', '')
+          return item
+        })
+        res.data = { items: res.data }
+        return res
+      }
+    }))
+  },
+  
+  // unit contract 接口
+  getUnitContractSymList () {
+    return getCache('unitPairList', () => request('unit/symbol/list').then(res => {
+      if (res && res.data) {
+        res.data = res.data.map(item => {
+          item.amount_scale = parseInt(item.amount_scale, 10)
+          item.currency_scale = parseInt(item.price_scale, 10) || 0
+          item.price_scale = parseInt(item.price_scale, 10) || 2
+          item.fee_rate = item.fee_rate || 0
+          // item.value_scale = parseInt(item.value_scale, 10) || 4
+          if (item.currency === 'BTCUSD') {
+            item.value_scale = 8
+            item.accuracy = item.accuracy || 5
+          } else {
+            item.value_scale = 8
+            item.accuracy = item.accuracy || 5
+          }
+
+          if (item.name.indexOf('FUTURE_') < 0) {
+            item.name = `FUTURE_${item.name.replace('_', '')}`
+          }
+
+          // USD
+          item.currency_name = item.name.substr(-3)
+          // BTCUSD
+          item.symbol = item.name.split('_')[1]
+          // BTC
+          item.product_name = item.symbol.substr(0, 3)
+          return item
+        })
+        res.data = { items: res.data }
+        return res
+      }
+    }))
+  },
+  async getUnitContractPairInfo ({symbol}) {
+    console.log({symbol})
+    const res = await this.getUnitContractSymList()
+    if (!res.code) {
+      const find = _.find(res.data.items, item => `${item.product}_${item.currency}` === symbol)
+      console.log({find})
+      return {
+        code: find ? 0 : 100001,
+        data: find,
+        message: find ? '' : utils.$i18n.t('sth_went_wrong')
+      }
+    }
+    return res
+  },
+  getUnitTradeHistory (params) {
+    return request('unit/account/trade_history', params)
+  },
+  // 币本位财务记录
+  getUnitFundHistory (params) {
+    return request('unit/account/fund/history', params)
+  },
+  // 币本位委托历史
+  getUnitOrderhistory (params) {
+    return getCache('c_unitOrderhistory', () => request('unit/orderhistory', params), 1e3)
+  },
+  // 币本位可用余额
+  getContractUnitBalanceList () {
+    return getCache('contractUnitBalance', () => request('unit/account/balance/list'), 1e3)
   },
   changePromiseFund(params) {
     return request('future/account/transfer_margin', params)

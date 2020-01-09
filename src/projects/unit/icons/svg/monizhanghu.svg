@@ -1,0 +1,31 @@
+<svg id="monizhanghu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="30" viewBox="0 0 30 30">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2aac3e;
+      }
+
+      .cls-2 {
+        filter: url(#filter);
+      }
+
+      .cls-3 {
+        fill: #fff;
+        fill-rule: evenodd;
+      }
+    </style>
+    <filter id="filter" filterUnits="userSpaceOnUse">
+      <feFlood result="flood" flood-color="#fff"/>
+      <feComposite result="composite" operator="in" in2="SourceGraphic"/>
+      <feBlend result="blend" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <circle id="椭圆_1942" data-name="椭圆 1942" class="cls-1" cx="15" cy="15" r="15"/>
+  <g id="组_25_拷贝_2" data-name="组 25 拷贝 2" class="cls-2">
+    <path id="矩形_1463" data-name="矩形 1463" class="cls-3" d="M3716.51,351.213h15.45v3.3h-15.45v-3.3Z" transform="translate(-3708 -346)"/>
+    <path id="矩形_1463_拷贝" data-name="矩形 1463 拷贝" class="cls-3" d="M3716.51,355.263h15.45v3.3h-15.45v-3.3Z" transform="translate(-3708 -346)"/>
+    <path id="矩形_1463_拷贝_2" data-name="矩形 1463 拷贝 2" class="cls-3" d="M3714.04,359.35h15.45v3.3h-15.45v-3.3Z" transform="translate(-3708 -346)"/>
+    <path id="矩形_1463_拷贝_3" data-name="矩形 1463 拷贝 3" class="cls-3" d="M3714.04,363.437h15.45v3.3h-15.45v-3.3Z" transform="translate(-3708 -346)"/>
+    <path id="矩形_1463_拷贝_4" data-name="矩形 1463 拷贝 4" class="cls-3" d="M3715.65,367.487h15.49v3.3h-15.49v-3.3Z" transform="translate(-3708 -346)"/>
+  </g>
+</svg>

@@ -2922,5 +2922,6 @@
       "confirm": "Accept"
     }
   },
-  "no_account": "No Account yet?"
+  "no_account": "No Account yet?", 
+  "UNIT_&":"%{currency}币本位" 
 }

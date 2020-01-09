@@ -1,0 +1,13 @@
+<svg id="qizhi" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="42" height="42" viewBox="0 0 42 42">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <image id="旗帜" x="9" y="12" width="24" height="21" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAVCAQAAAD24OatAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAHdElNRQfjCRQQEytfGnqXAAABA0lEQVQ4y92RPS+DURSAn7ctixg6MBAGIhIiBpO9o9Fik/gLTYSIvu8PkNgs4g8Y/ACRLjaTr2iaSCwlpEITIWlTj0GVUknf2Dx3Oefe8yTnnhO4xDawQZa2RN/ywH0ywCPpxs0c0wyS5I4z9qh+CrlelinirM/qvDjkpld+peSWkyEhDrvqrVpEPLcmrluzPcee+NqI84gX3jhhZxwkgADookMS71+nHk+IwT8QuuMKPSkA6s09VNnliAIV+plhgbGW8jxriAXLjqoVsw5Iy1n00CdfvHTHTEhIIBQYJ2CKa+5/9hCRS5OMyh95qvly+lvb0cOfxxrEFUbiCClghb7OhTfAwr7XmG92pwAAAABJRU5ErkJggg=="/>
+  <circle id="椭圆_8" data-name="椭圆 8" class="cls-1" cx="21" cy="21" r="20"/>
+</svg>

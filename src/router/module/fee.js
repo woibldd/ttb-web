@@ -6,7 +6,8 @@ import utils from '@/modules/utils'
 const isMobile = utils.isMobile()
 const Fee = () => import(/* webpackChunkName: "Fee" */ '@/pages/Fee')
 const ContractFee = () => import(/* webpackChunkName: "ContractFee" */ '@/components/Fee/contractFee')
-const TradingFee = () => import(/* webpackChunkName: "tradingFee" */ '@/components/Fee/tradingFee')
+const TradingFee = () => import(/* webpackChunkName: "tradingFee" */ '@/components/Fee/tradingFee') 
+const UnitContractFee = () => import(/* webpackChunkName: "tradingFee" */ '@/components/Fee/unitContractFee')
 export const feeRouter = [
   {
     path: '/fee',
@@ -30,6 +31,11 @@ export const feeRouter = [
         path: 'contractFee',
         name: 'ContractFee',
         component: ContractFee
+      },
+      {
+        path: 'unitContractFee',
+        name: 'UnitContractFee',
+        component: UnitContractFee
       }
     ]
   }
