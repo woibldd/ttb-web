@@ -111,11 +111,11 @@
                   <div
                     style="font-size:12px; line-height:24px">
                     <p>你的当前仓位: <span class="text-primary"> {{ item.holding }}</span> 张合约 ({{ item.leverage }}x)</p>
-                    <p>当前已分配的保证金: <span class="text-primary">{{ item.margin_position }}</span> {{ item.currency }} 【最大可减少 <span class="text-primary">{{ Math.floor(item.margin_position) }}</span> {{ item.currency }}】<span
+                    <p>当前已分配的保证金: <span class="text-primary">{{ item.margin_position | toRound(8) }}</span> {{ item.currency }} 【最大可减少 <span class="text-primary">{{ Math.floor(item.margin_position) }}</span> {{ item.currency }}】<span
                       v-if="checked"
                       class="text-primary hover-point"
                       @click="margin_position = Math.floor(item.margin_position)">全部</span></p>
-                    <p>可用保证金: <span class="text-primary">{{ item.available_balance }}</span> {{ item.currency }}【最大可增加 <span class="text-primary">{{ Math.floor(item.available_balance) }}</span> {{ item.currency }}】<span
+                    <p>可用保证金: <span class="text-primary">{{ item.available_balance | toRound(8) }}</span> {{ item.currency }}【最大可增加 <span class="text-primary">{{ Math.floor(item.available_balance) | toRound(8) }}</span> {{ item.currency }}】<span
                       v-if="!checked"
                       class="text-primary hover-point"
                       @click="margin_position = Math.floor(item.available_balance)">全部</span></p>
@@ -496,10 +496,10 @@ export default {
         // let tp_price = this.formArrData[0].trigger_type
         const check1 = isBuy &&
           +this.formArrData[0].trigger_price > +price &&
-          +this.formArrData[0].trigger_price > (cur_product[obj[this.formArrData[0].trigger_type]] || {}).current || +price
+          +this.formArrData[0].trigger_price > ((cur_product[obj[this.formArrData[0].trigger_type]] || {}).current || +price)
         const check2 = isBuy &&
           +this.formArrData[1].trigger_price < +price &&
-          +this.formArrData[1].trigger_price < (cur_product[obj[this.formArrData[1].trigger_type]] || {}).current || +price
+          +this.formArrData[1].trigger_price < ((cur_product[obj[this.formArrData[1].trigger_type]] || {}).current || +price)
         if (this.formArrData[0].type && this.formArrData[1].type && check1 && check2) {
           return false
         } else if (this.formArrData[0].type && check1 && !this.formArrData[1].type) {
@@ -511,10 +511,10 @@ export default {
       } else {
         const check1 = !isBuy &&
           +this.formArrData[0].trigger_price < +price &&
-          +this.formArrData[0].trigger_price < (cur_product[obj[this.formArrData[0].trigger_type]] || {}).current || +price
+          +this.formArrData[0].trigger_price < ((cur_product[obj[this.formArrData[0].trigger_type]] || {}).current || +price)
         const check2 = !isBuy &&
           +this.formArrData[1].trigger_price > +price &&
-          +this.formArrData[1].trigger_price > (cur_product[obj[this.formArrData[1].trigger_type]] || {}).current || +price
+          +this.formArrData[1].trigger_price > ((cur_product[obj[this.formArrData[1].trigger_type]] || {}).current || +price)
         if (this.formArrData[0].type && this.formArrData[1].type && check1 && check2) {
           return false
         } else if (this.formArrData[0].type && check1 && !this.formArrData[1].type) {
