@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
-import store from '../store'
+import store from '@/store'
 import { getUser } from '../utils/auth'
 
 // create an axios instance

@@ -312,8 +312,7 @@ export default {
       query: to.query
     })
   },
-   beforeDestroy: function () {
-    console.log(11111)
+   beforeDestroy: function () { 
     if(this.$route.path !== '/user/login/phone' && this.$route.path !== '/user/login/email') {
       this.$store.dispatch('safeHanle', true)
     }

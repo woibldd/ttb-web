@@ -1,7 +1,7 @@
 import { capitalizeLower, parseTime } from '../utils'
 import { bigRound, toBig, toRound, toFixed, toThousand } from '../utils/handleNum'
 import Big from 'big.js'
-import store from '../store'
+import store from '@/store'
 import {state} from '@/modules/store'
 export default {
   // data () {

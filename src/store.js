@@ -11,7 +11,8 @@ export default new Vuex.Store({
     userData: null,
     mapShareAccount: [],
     activeShareAccount: null,
-    safe: true
+    safe: true,
+    unit: '123'
   },
   mutations: {
     SET_SAFE:(state, safe) => {
@@ -28,6 +29,9 @@ export default new Vuex.Store({
     },
     SET_ACTIVESHAREACCOUNT(state, activeShareAccount) {
       state.activeShareAccount = activeShareAccount
+    },
+    SET_UNIT: (state, unit) => {
+      state.unit = unit
     }
   },
   actions: {
