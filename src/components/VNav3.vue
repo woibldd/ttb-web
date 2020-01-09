@@ -17,7 +17,7 @@
             <a
               href="/unit.html"
               :class="{'router-link-active': from === 'unit'}"
-              class="nav_link ml-20">{{ $t('币本位合约') }}
+              class="nav_link ml-20">{{ $t('currency-unit') }}
             </a>
           </div>
           <router-link :to="{name: 'OTC'}" class="nav_link ml-30">{{ $t('otc_trade') }}</router-link>

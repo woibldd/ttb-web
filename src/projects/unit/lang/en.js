@@ -2652,6 +2652,7 @@ export default {
     }
   },
   "gift": {
+    "bonus":"Trading Bonus",
     "banner": {
       "btn_text": "Redeem $60 Trading Bonus"
     },
@@ -2672,11 +2673,11 @@ export default {
       "btn_text": "Redeem My Bonus"
     },
     "footer": {
-      "title":"What is IXX's Referral program?",
-      "content": "Trading bonuses allow you to experience our contract products in a real trading environment with no risk and zero cost. Upon successful registration or the first contract account deposit exceeds (including) 0.2BTC, you can get the IXX contract trading bonus. After the bonus is automatically credited into your registered account, you can start trading. After the deposit, the profit part supports the withdrawal. Please note that any withdrawal will result in the zero clearing of the personal trading bonus. "
+      "title":"What is a trading bonus?",
+      "content": "Trading bonuses allow you to experience our contract products in a real trading environment with no risk and zero cost. Upon successful registration or the first contract account deposit exceeds (including) 0.2BTC, you can get the IXX contract trading bonus. After the bonus is automatically credited into your registered account, you can start trading. After the deposit, the profit part supports the withdrawal. Please note that any withdrawal will result in the zero clearing of the personal trading bonus. "
     },
     "modal": {
-      "title": "Congratulations on your successfu registration!",
+      "title": "Congratulations on your successful registration!",
       "describe": "Contact the official customer service to receive up to $60 contract transaction bonus",
       "qr_a": "Add official WeChat Customer Service",
       "qr_b": "Join Telegram telegraph group",
@@ -2753,9 +2754,9 @@ export default {
     },
     mapNavList: {
       'trading': 'Trading',
-      'contract': 'Contract',
+      'contract': 'BTC Contract',
       'legalTender': 'Fiat',
-      'currency-unit': '币本位交易',
+      'currency-unit': 'Currency Standard Contract',
       'hotActive': {
         label: 'Activities',
         children: {

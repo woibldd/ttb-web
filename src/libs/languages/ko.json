@@ -1,4 +1,5 @@
 {
+  "currency-unit": "코인 베이스 계약",
   "google_login": "로그인할 때 구글 인증",
   "google_turn_off": "Goole 인증 끄기",
   "google_reset": "초기화",
@@ -1155,7 +1156,7 @@
   "activity_lock_share": "락업 리익 분배",
   "order_ix_total_discount": "누적 할인",
   "contract_account": "계약 계정",
-  "contract": "계약 거래",
+  "contract": "BTC계약",
   "account_balance": "계정 잔액",
   "transaction_record": "거래기록",
   "warehouse_margin": "포지션 보증금",
@@ -2787,6 +2788,6 @@
       "confirm": "나는 이미 알고있다"
     }
   },
-  "no_account": "아직 계정이 없어요?", 
-  "UNIT_&":"%{currency}币本位" 
+  "no_account": "아직 계정이 없어요?",
+  "UNIT_&":"%{currency}币本位"
 }

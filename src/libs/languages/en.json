@@ -1,4 +1,5 @@
 {
+  "currency-unit": "Currency Standard Contract",
   "google_login": "Google authentication on login",
   "google_turn_off": "Turn off",
   "google_reset": "Reset",
@@ -1271,7 +1272,7 @@
   "activity_lock_share": "Rule of Lock for Dividend:",
   "order_ix_total_discount": "Accumulated deduction",
   "contract_account": "Contract Account",
-  "contract": "Contract",
+  "contract": "BTC Contract",
   "account_balance": "Account Balance",
   "transaction_record": "Transactions Record",
   "warehouse_margin": "Position Margin",
@@ -2923,6 +2924,6 @@
       "confirm": "Accept"
     }
   },
-  "no_account": "No Account yet?", 
-  "UNIT_&":"%{currency}币本位" 
+  "no_account": "No Account yet?",
+  "UNIT_&":"%{currency}币本位"
 }
