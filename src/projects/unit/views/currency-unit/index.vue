@@ -868,6 +868,7 @@ export default {
   },
   async created () {
     actions.updateSession()
+    console.log('created')
     this.products = (await getSymbolList()).data
     await this.openWebSocket(this.handleSoketData, websocket => {
       this.websocket.heartCheck.start() // 发送一次心跳
