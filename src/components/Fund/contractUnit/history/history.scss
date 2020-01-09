@@ -1,0 +1,46 @@
+.contract-history-container{
+    .filter-list {
+        display: flex;
+    }
+    .filter-item { 
+        height:32px;
+        border-radius:6px;
+        line-height: 32px;
+        text-align: center;
+        cursor: pointer;
+        margin-right: 50px;
+        padding: 0 20px;
+        &.select {
+          background:rgba(201,169,108,1);
+          color: #fff;
+          box-shadow:0px 2px 6px 0px rgba(201,169,108,0.6);
+        }
+    }
+    .currency-row {
+        display: flex;
+        height: 32px;
+        align-items: center;
+        .opetion {
+            width:160px;
+            height:32px;
+            border-radius:6px;
+        }
+    }
+    .table-wrapper {
+        height: 502px;
+        overflow: auto;
+
+        table {
+            width: 100%;
+        }
+
+        .table__tr,
+        .table__th  {
+            height: 44px;
+            font-size: 12px;
+        }
+        .table__td {
+            // text-align: center;
+        }
+    }
+}
