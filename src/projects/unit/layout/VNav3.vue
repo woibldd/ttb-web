@@ -36,7 +36,7 @@
           <div class="nav_link arrow-down">
             <router-link to="/affiliate" class="nav_link ml-30" v-popover:popover2>
               {{$t('plan')}}
-              <icon name="header-down" class="mini arrow" />
+              <svg-icon icon-class="header-down" class="mini arrow" />
             </router-link>
             <!-- <span class="nav_link ml-30" >
               {{$t('plan')}}
@@ -75,8 +75,8 @@
           <div class="nav_link arrow-down">
             <a href="/bonus" class="nav_link ml-30" v-popover:popover3>
               {{ this.$t('gift.bonus') }}
-              <icon name="hot-red" />
-              <icon name="header-down" class="mini arrow" />
+              <svg-icon icon-class="hot-red" />
+              <svg-icon icon-class="header-down" class="mini arrow" /> 
             </a>
             <el-popover
               ref="popover3"
@@ -89,7 +89,7 @@
                   <li class="dropdown-item pl-24 pr-24">
                     <a href="/bonus" class="link">
                       {{ this.$t('gift.bonus') }}
-                      <icon name="hot-red" />
+                      <svg-icon icon-class="hot-red" />
                     </a>
                   </li>
                   <li class="dropdown-item pl-24 pr-24">
@@ -102,32 +102,12 @@
                 </ul>
               </div>
             </el-popover>
-          </div>
-          <!-- <a
-            href="/bonus"
-            class="nav_link"
-            style="padding-left:30px;" >
-            {{ this.$t('gift.bonus') }}
-            <icon name="hot-red"/>
-          </a>-->
+          </div> 
           <!-- <router-link
-            v-if="isTestnet"
-            to="/snowball/bazaar"
-            class="nav_link  ml-30">{{ $t('bidTitle') }}
-          </router-link>
-          <a
-            v-if="isTestnet"
-            href="javascript:;"
-            class="nav_link"
-            style="padding-left:30px;"
-            @click="planHandle" >
-            {{ $t('plan') }}
-          </a>-->
-          <router-link
             v-if="isTestnet"
             to="/share_option"
             class="nav_link ml-30"
-          >{{ $t('shareOption.navText') }}</router-link>
+          >{{ $t('shareOption.navText') }}</router-link> -->
         </div>
       </div>
       <div class="nav_right">

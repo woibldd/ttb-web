@@ -2359,7 +2359,8 @@ export default {
   "fxpl": "反洗钱指引",
   "pay": "支付",
   "receive": "获得",
-  "pair_table_option_empty": "暂无添加自选 ",
+  "pair_table_option_empty": "暂无添加自选 ", 
+  'node_sub': '节点认购',
   "contract_page": {
     "order_stop_winloss": "止盈/止损",
     "contract_edit_price": "委托价格",
