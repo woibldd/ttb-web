@@ -301,8 +301,8 @@ $primary-color: #01CED1;
 }
 
 .el-button:focus, .el-button:hover{
-    color: $primary-color !important;
-    border-color: $primary-color !important;
+    color: $primary-color;
+    border-color: $primary-color;
     background-color: #ffffff;
     opacity: .8;
 }

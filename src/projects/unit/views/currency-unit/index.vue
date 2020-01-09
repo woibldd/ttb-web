@@ -277,19 +277,19 @@
                     </el-tooltip>
                   </span>
                   <span v-if="key === 'entrustValue'"
-                        class="text-warning">{{ formValueObj[1] | bigRound(8) }} {{ activeProduct.currency }}</span>
+                        class="text-primary">{{ formValueObj[1] | bigRound(8) }} {{ activeProduct.currency }}</span>
                   <el-link v-else
                            style="font-size:12px"
                            href="/fund/my/contractUnit/index"
                            type="primary">{{ (activeBalance||{}).available_balance||0| bigRound(8) }} {{ activeProduct.currency }}</el-link>
                 </div>
-                <div>
+                <!-- <div>
                   <el-checkbox class="text-light"
                                v-if="+activeBtnsKey===1"
                                v-model="passive">
                     {{ $tR(`mapFormContent.passive`) }}
                   </el-checkbox>
-                </div>
+                </div> -->
                 <div>
                   <el-checkbox v-if="+activeBtnsKey > 2"
                                v-model="trigger_close ">{{ $tR(`mapFormContent.trigger_close`) }}</el-checkbox>
@@ -1417,10 +1417,10 @@ export default {
           }
         }
         & > ul {
-          padding: 0 10px;
+          padding: 0 10px 0 0;
           & > li {
             &:nth-child(2n) {
-              background: rgb(55, 55, 55);
+              background: rgb(16, 23, 42);
             }
             & > span {
               position: relative;

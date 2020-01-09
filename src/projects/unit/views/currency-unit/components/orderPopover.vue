@@ -187,8 +187,7 @@ export default {
       inputVisible: false,
       sliderValue: +this.active,
       popoverVisible: false,
-      checked: false,
-
+      checked: false, 
       activeTag: '',
       leverageTipObj: {},
       showEdit: false,
