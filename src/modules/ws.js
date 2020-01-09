@@ -37,7 +37,7 @@ create (channel) {
       if (hub._isDestroyed) {
         return  
       }
-      hub.$emit('reopen')
+      // hub.$emit('reopen')
     }
     socket.onmessage = function (evt) {
       if (hub._isDestroyed) {

@@ -19,6 +19,12 @@
                 active-class="active"
                 :to="{name: 'ContractFee'}">{{ $t('contract_fees') }}</router-link>
             </li>
+            <li class="">
+              <router-link
+                class="menu-name"
+                active-class="active"
+                :to="{name: 'UnitContractFee'}">{{ $t('fee.unit_fees') }}</router-link>
+            </li>
             
           </ul>
         </div>

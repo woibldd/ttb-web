@@ -2670,6 +2670,7 @@
     }
   },
   "fee": {
+    "unit_fees": "币本位合约手续费",
     "contract": {
       "leverage" : "지레" ,
       "provision_fee" :"유동성 공급비률",

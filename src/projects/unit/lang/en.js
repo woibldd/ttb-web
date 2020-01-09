@@ -3135,7 +3135,7 @@ export default {
       7: '标记价格/预期强平价格 差异'
     },
     setLever: '设置杠杆倍数',
-    tip: '您的操作将会把已持仓杠杆倍数和委托订单杠杆倍数修改为25倍，仓位保证金调节为0.0041495，委托保证金为0',
+    tip: '您的操作将会把已持仓杠杆倍数和委托订单杠杆倍数修改为<i class="text-danger">{leverage}</i>，仓位保证金调节为<i class="text-danger">{margin_position}</i>，委托保证金为<i class="text-danger">{margin_delegation}</i>',
     allstorehouse: 'Cross'
   },
   userCenter: {

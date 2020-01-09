@@ -1,30 +1,7 @@
 <template>
   <div class="profile-container">
     <div class="title-box rate-tit">{{ $t('fee.unit_fees') }}</div>
-    <div class="rate-tab">
-      <!-- <div class="rate-tab-tit">
-        <p class="lt rate-t-a">{{ $t('transaction_pair') }}</p>
-        <p class="lt">{{$t('杠杆')}}</p>
-        <p class="lt">{{$t('提供流动性费率')}}</p>
-        <p class="lt">{{$t('提取流动性分离v')}}</p>
-        <p class="lt">{{$t('资金费率')}}</p>
-        <p class="lt">{{$t('资金费率时间段')}}</p>
-        <p class="lt">{{$t('下一资金费率')}}</p>
-      </div>
-      <ul class="rate-ul">
-         <li
-          v-for="pair in pairList"
-          :key="pair.name">
-          <p class="lt rate-t-a">{{ $t('FUTURE_&USD', {currency: pair.currency.replace('USD','')} )  }}</p>
-          <p class="lt rate-t-b">{{ pair.max_leverage }}</p>
-          <p class="lt rate-t-b">{{ $big(pair.make_rate || 0).mul(100) | fixed(4) }}%</p>
-          <p class="lt rate-t-c">{{ $big(pair.take_rate  || 0).mul(100) | fixed(4) }}%</p>
-
-          <p class="lt rate-t-c">123</p>
-          <p class="lt rate-t-c">每8小时</p>
-          <p class="lt rate-t-c">{{}}</p>
-        </li>
-      </ul> -->
+    <div class="rate-tab"> 
       <table class="rate-table">
         <tr>
           <th>{{ $t('transaction_pair') }}</th>

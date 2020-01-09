@@ -16,9 +16,9 @@
             class="ibt depth">
             <span class="dib mr-5">{{ $t('contract.mapDelegateList.depth') }}</span>{{ currentDepth }}
             <svg-icon
-              icon-class="arrow-down-yellow"
+              icon-class="arrow-down-blue"
               :class="[showDepthOption && 'up']"
-              class="arrow-down-yellow"/>
+              class="arrow-down-blue"/>
           </span>
           <div
             class="depth-options-wrapper"
