@@ -123,6 +123,12 @@
             to="/fund/my/contract">{{ $t('contract_account') }}
           </router-link>
         </dd>
+         <dd>
+           <router-link
+             class="sub-menu-item"
+             to="/fund/my/contractUnit">{{ $t('币本位合约账户') }}
+           </router-link>
+         </dd>
        <!-- <dd>
          <router-link
            class="sub-menu-item"
