@@ -9,6 +9,14 @@ import qs from 'qs'
 // const Mock = () => import('./mock')
 
 const service = {
+  // 盈亏币盈亏历史
+  getUnitCloseRealized (params) {
+    return request('unit/account/close_realized', params)
+  },
+  // 盈亏币本位历史走势
+  getUnitCloseRealizedDays (params) {
+    return getCache('c_future_close_realized_days', () => request('unit/account/close_realized_days', params), 1e3)
+  },
   getRates(params){
     return request('/account/currency/rates', params)
   },
@@ -835,7 +843,7 @@ const service = {
     }
     return null
   },
-  
+
   getUnitSymList () {
     return getCache('unitPairList', () => request('unit/symbol/list').then(res => {
       if (res && res.data) {
@@ -871,7 +879,7 @@ const service = {
       }
     }))
   },
-  
+
   // unit contract 接口
   getUnitContractSymList () {
     return getCache('unitPairList', () => request('unit/symbol/list').then(res => {
@@ -959,7 +967,7 @@ const service = {
   },
   modifyContract (params) {
     return request('contract/modify', params)
-  }, 
+  },
   orderContractClose(params) {
     return request('contract/close', params)
   },
@@ -1453,7 +1461,7 @@ const service = {
     return request('future/activity/gameTrade/list', params)
   },
   //盈亏历史
-  getFutureCloseRealized(params) { 
+  getFutureCloseRealized(params) {
     return getCache('c_future_close_realized', () => request('future/account/close_realized', params), 1e3)
   },
   //盈亏历史走势
