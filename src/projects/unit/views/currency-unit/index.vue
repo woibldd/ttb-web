@@ -422,14 +422,9 @@
                element-loading-background="rgba(0, 0, 0, 0.3)">
             <div class="header"
                  flex="main:justify">
-              <span>{{ $t('contract_symbol_detail') }}{{ activeProduct && $tR(`mapTabs.${activeProduct.name}`)||'' }}</span>
-              <!-- <el-link :underline="false"
-                       type="primary"
-                       :to="{name: 'UnitIndex', params: {pair: `${(activeProduct || {}).product}_${(activeProduct || {}).name}` }}">
-                更多资料</el-link> -->
+              <span>{{ $t('contract_symbol_detail') }}{{ activeProduct && $tR(`mapTabs.${activeProduct.name}`)||'' }}</span> 
               <router-link
-                class="pointer"
-                v-tooltip.top-center="{html: true, content: $tR('mapDelegateList.contract_mark_price_tips'), classes: 'contract'}"
+                class="pointer" 
                 :to="{name: 'UnitIndex', params: {pair: `${(activeProduct || {}).product}_${(activeProduct || {}).name}` }}">
                 {{ $t('contract_more_resource') }}
               </router-link> 
@@ -842,7 +837,7 @@ export default {
     },
     information () {
       return {
-        priceBy: 'ix' + this.$tR('index'),
+        priceBy: 'IXX' + this.$tR('index'),
         priceIndex: this.activeProduct.INDEX.current,
         volume_24h: this.handleDishInfoItem('volume_24h'),
         value: '1 USD',

@@ -1594,7 +1594,7 @@
   "activity_notice_annotation_a": "주의： 프리미엄은 주로 추천받은 이용자의 거래에 따른 테이커 수수료에서 나온다。",
   "activity_notice_annotation_b": "장려금 지급시간:당일 추천 보너스 데이터는 매일 24시에 업데이트되며, 다음 날 12시에 추천자 플랫폼 계정에 제공됩니다。",
   "dialog_never_show": "하루 안에 다시 표시하지 않습니다",
-  "ix_indxe_tips": "<a>IX지수：</a><br/>IX 지수는  비트코인의 가격을 따라가격을  설정합니다，빈도는 매 5초입니다,이 지수는 종합지수입니다,현재 동등한 권중으로는BITSTAMP, GDAX 、KRAKEN,GEMINI 등으로 조성되였습니다,이 지수의 조성은 거래소의 미래를 예상 못하는 불안정요소로 개변될수있습니다.",
+  "ix_indxe_tips": "<a>IXX지수：</a><br/>IXX 지수는  비트코인의 가격을 따라가격을  설정합니다，빈도는 매 5초입니다,이 지수는 종합지수입니다,현재 동등한 권중으로는BITSTAMP, GDAX 、KRAKEN,GEMINI 등으로 조성되였습니다,이 지수의 조성은 거래소의 미래를 예상 못하는 불안정요소로 개변될수있습니다.",
   "post_only_tips": "<a>post-only：</a><br/>post-only주문은 시장에서 즉시 실행되지 않습니다. 메이커 리베이트를 보장하기 위해 사용하십시 오.정지하고 있는 주문에 대해 실행될경우 취소됩니다.",
   "contract_simple_success": "성공",
   "contract_simple_fail": "실패",

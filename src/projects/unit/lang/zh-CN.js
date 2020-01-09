@@ -1358,7 +1358,7 @@ export default {
   "contract_undefined": "未知",
 
   "contract_history_deal_dan": "成交单",
-  "contract_ix_index_source": "IX指数",
+  "contract_ix_index_source": "IXX指数",
   "contract_deal_type_0": "资金费率分配",
   "contract_risklimit_tips": "使用此滑块调整你的杠杆，他仅影响被分配的保证金",
   "contract_action_passive_delegate": "被动委托",
@@ -1552,7 +1552,7 @@ export default {
   "novice_img": "<img src=\"../assets/zhongwen.png\" alt=\"dl\" width=\"60\">",
   "contract_action_button_low_tips": "当前余额不足，无法提交委托！",
   "header_title_contract_competition": "合约大赛",
-  "ix_indxe_tips": "<a>IX指数：</a><br/>IX 指数是跟踪 比特币 价格设定，频率为每 5秒钟，该指数是综合指数，目前由相同权重的 BITSTAMP, GDAX 、KRAKEN,GEMINI 组成。该指数的组成可能会因为交易所不可预见的不稳定因素而改变。",
+  "ix_indxe_tips": "<a>IXX指数：</a><br/>IXX 指数是跟踪 比特币 价格设定，频率为每 5秒钟，该指数是综合指数，目前由相同权重的 BITSTAMP, GDAX 、KRAKEN,GEMINI 组成。该指数的组成可能会因为交易所不可预见的不稳定因素而改变。",
   "post_only_tips": "<a>被动委托：</a><br/>被动委托不会立刻在市场上成交，使用该类型来确保获得做市返佣，如果委托会立刻与已有委托成交，那么该委托将会取消。",
   "contract_close_limit": "限价平仓",
   "contract_close_limit_buy": "限价买入平仓",
