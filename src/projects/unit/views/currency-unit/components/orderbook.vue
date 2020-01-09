@@ -18,7 +18,7 @@
             <svg-icon
               icon-class="arrow-down-blue"
               :class="[showDepthOption && 'up']"
-              class="arrow-down-blue"/>
+              class="arrow-down-yellow"/>
           </span>
           <div
             class="depth-options-wrapper"
