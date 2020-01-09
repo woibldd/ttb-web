@@ -7,8 +7,15 @@
       <div
         class="linear-bar text-light"
         flex="main:justify cross:center">
-        <svg-icon icon-class="money" />
-        <i class="el-icon-warning" />
+        <img
+          src="~@/projects/unit/assets/icon/icon-risk-money.png"
+          v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}"
+          alt="">
+        <!-- <i class="el-icon-warning" /> -->
+        <img
+          src="~@/projects/unit/assets/icon/icon-risk-alert.png"
+          v-tooltip.left="{content: $t('contract_max_lever') + calcData[calcData.length-1] +'x', classes: 'contract'}"
+          alt="">
         <div class="mark">{{ active === '0'?$t('contract_cal_full'):active+'x' }}</div>
       </div>
 

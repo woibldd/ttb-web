@@ -251,8 +251,8 @@
                         <span v-else-if="activeBtnsKey === '3'" style="font-size:12px; text-align:right;">
                           <span>{{ activeAcountAndPriceArr[0] }} @ {{ (activeProduct[productType[trigger_type]]||{}).current }}</span>
                           <br>
-                          <span v-if="['3','4'].includes(activePriceType.key)">{{ key === 'buy'? '≧':'≦' }} {{ activeAcountAndPriceArr[2] }}</span>
-                          <span v-if="['5','6'].includes(activePriceType.key)">{{ key === 'buy'? '≦':'≧' }} {{ (activeProduct[productType[trigger_type]]||{}).current }}</span>
+                          <span v-if="['3','4'].includes(activePriceType.key) && activeAcountAndPriceArr[2]">{{ key === 'buy'? '≧':'≦' }} {{ activeAcountAndPriceArr[2] }}</span>
+                          <span v-if="['5','6'].includes(activePriceType.key) && activeAcountAndPriceArr[2]">{{ key === 'buy'? '≦':'≧' }} {{ activeAcountAndPriceArr[2] }}</span>
                         </span>
                       </div>
                     </el-button>
