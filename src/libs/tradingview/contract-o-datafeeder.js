@@ -65,9 +65,10 @@ export default {
     const symbol = 'FUTURE_' + match[2]
     // @check end
     const res = await service.getContractPairInfo({symbol})
-    const scale = res.code ? 1e8 : Math.pow(10, res.data.price_scale)
+    let scale = res.code ? 1e8 : Math.pow(10, res.data.price_scale)
     if (res.code) {
-      return reject()
+      // return reject()
+      scale = 2
     }
     resolve({
       timezone: utils.getDefaultTimezone(),
@@ -87,8 +88,9 @@ export default {
       volume_precision: 3
     })
   },
-  getBars: function (symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
+  getBars: function (symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) { 
     const period = getPeriod(resolution)
+    if (symbolInfo.ticker.indexOf('METHUSD') > -1) symbolInfo.ticker = symbolInfo.ticker.replace('USD', '')
     service.getQuoteHistory({
       period: period,
       pair: symbolInfo.ticker,
