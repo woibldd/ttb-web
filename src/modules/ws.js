@@ -31,7 +31,7 @@ create (channel) {
       if (hub._isDestroyed) {
         return  
       }
-      hub.$emit('reopen')
+      // hub.$emit('reopen')
     }
     socket.onerror = function () {
       if (hub._isDestroyed) {
@@ -71,7 +71,8 @@ create (channel) {
           let time = new Date() * 1
           socket.send(`{"op":"heart","args":["${time}"]}`)
           self.serverTimeoutObj = setTimeout(function () {
-            socket.close()
+            // socket.close()
+            hub.$emit('reopen')
             // createWebSocket();
           }, self.timeout)
         }, this.timeout)
