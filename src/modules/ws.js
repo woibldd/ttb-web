@@ -70,10 +70,10 @@ create (channel) {
         this.timeoutObj = setTimeout(function () {
           let time = new Date() * 1
           socket.send(`{"op":"heart","args":["${time}"]}`)
-          self.serverTimeoutObj = setTimeout(function () {
-            // socket.close()
-            hub.$emit('reopen')
-            // createWebSocket();
+          self.serverTimeoutObj = setTimeout(function () { 
+            if (!hub._isDestroyed) {
+              hub.$emit('reopen')
+            } 
           }, self.timeout)
         }, this.timeout)
       }
