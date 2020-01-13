@@ -28,7 +28,7 @@
             <label for="asd">{{$t('bind_google_confirm_2')}}</label>
         </div>
     </div>
-    <div class="inp_box" v-if="resetCode">
+    <div class="inp_box">
       <!--<label>谷歌验证码</label>-->
       <input type="text" v-model="verifyCode" :placeholder="verify_type === 'phone' ? $t('phone_code') : $t('email_code')" />
       <div class="count-down-container">
@@ -159,17 +159,17 @@ export default {
       )
     },
     async submit () {
-      if (this.resetCode) {
-        let query = {}
-        if (this.verify_type === 'phone') {
-          query = {
-            phone_code: this.verifyCode
-          }
-        } else {
-          query = {
-            email_code: this.verifyCode
-          }
+      let query = {}
+      if (this.verify_type === 'phone') {
+        query = {
+          phone_code: this.verifyCode
         }
+      } else {
+        query = {
+          email_code: this.verifyCode
+        }
+      }
+      if (this.resetCode) {
         if (this.checkbox1 && this.checkbox2) {
           if (this.code.length === 6) {
             let params = {
@@ -201,7 +201,8 @@ export default {
           if (this.code.length === 6) {
             let params = {
               google_key: this.google_key,
-              code: this.code
+              code: this.code,
+              ...query
             }
             let result = await service.bindGoogleKey(params)
             if (result && !result.code) {
