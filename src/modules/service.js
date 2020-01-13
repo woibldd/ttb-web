@@ -13,6 +13,12 @@ const service = {
   getUnitCloseRealized (params) {
     return request('unit/account/close_realized', params)
   },
+  getPhoneCode (param) {
+    return request('/user/bind/phone/code', param)
+  },
+  getEmailCode (param) {
+    return request('user/bind/email/code', param)
+  },
   // 盈亏币本位历史走势
   getUnitCloseRealizedDays (params) {
     return getCache('c_future_close_realized_days', () => request('unit/account/close_realized_days', params), 1e3)

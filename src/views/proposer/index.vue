@@ -94,14 +94,14 @@ export default {
       const isok1 = this.$refs['customForm1'].verifyAll()
       if (isok && isok1) {
         console.log(Object.assign(isok, isok1));
-        
+
         insertCoinApply(Object.assign(isok, isok1)).then(res => {
           this.$message.success(this.$t('Proposer.applySuccess'))
           this.$router.push('/')
         })
       }
     },
-    
+
     generateToken(len = 16) {
       const source = '1234567890qwertyuiopasdfghjklzxcvbnm'
       let token = ''
@@ -123,10 +123,10 @@ export default {
     margin-top:-5%
     // margin-top: -400px;
   }
-}		
+}
 @media screen and (min-width:768px){
-  
-}	
+
+}
 @media screen and (min-width:1200px){
   .form-content{
     position: absolute;
@@ -137,7 +137,4 @@ export default {
     // margin-top: -400px;
   }
 }
-
-
-
 </style>
