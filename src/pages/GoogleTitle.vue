@@ -169,6 +169,7 @@ export default {
           email_code: this.verifyCode
         }
       }
+
       if (this.resetCode) {
         if (this.checkbox1 && this.checkbox2) {
           if (this.code.length === 6) {
@@ -274,7 +275,7 @@ export default {
               width: 180px;
               height: 180px;
               margin: 0 auto;
-              background: #C2A538;
+              background: #01ced1;
               padding: 10px;
               box-sizing: border-box;
           }
@@ -286,11 +287,12 @@ export default {
               height: 22px;
               line-height: 22px;
           }
+
           .gt_yz{
               height: 30px;
               line-height: 30px;
-              color: #C2A538;
-              border-bottom: 1px solid #C2A538;
+              color: #01ced1;
+              border-bottom: 1px solid #01ced1;
               margin: 0 auto;
               display: table;
               font-size: 16px;
