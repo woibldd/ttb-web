@@ -264,10 +264,13 @@
                   <!-- <v-btn
                     icon="apple"
                     label="Iphone"/> -->
-                  <el-button type="primary">
-                    <svg-icon icon-class="apple"/>
-                    Iphone
-                  </el-button>
+                  <!--<el-button type="primary">-->
+                    <!--<svg-icon icon-class="apple"/>-->
+                    <!--Iphone-->
+                  <!--</el-button>-->
+                  <v-btn
+                    icon="apple"
+                    label="apple"/>
                   <v-btn
                     icon="android"
                     label="Android"/>
@@ -279,14 +282,14 @@
         <!-- 帮助中心中心 -->
         <div
           class="nav_item help-center"
-          v-popover:popover2 >
+          v-popover:popover8 >
           <label
             class="help mr-15 ml-15"
           >
             <svg-icon icon-class="header-help" />
           </label>
           <el-popover
-            ref="popover2"
+            ref="popover8"
             popper-class="nav-list"
             placement="bottom"
             style="background:#2C3B4B;"
@@ -522,65 +525,64 @@
     }
   }
 </script>
-
-<style scoped lang="scss">
-  .set-app-dl {
-    margin-right: 0px !important;
-    .nav_log_res {
-      display: flex;
-      align-items: center;
-      .app-dl{
-        box-sizing: border-box;
-        width:65px !important;
-        height:26px !important;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius:10px;
-      }
-    }
+<style>
+  .text-nowrap {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
+</style>
+<style scoped lang="scss">
   .nav_box {
-    .ind_cen {
-      position: relative;
-      width: 1280px;
-      margin: 0 auto;
-      @include clearfix()
-    }
     width: 100%;
     height: 60px;
-    line-height: 42px;
+    min-width: 1340px;
+    .border-right-1 {
+      border-right: 1px solid #ffffff;
+    }
+
+    .ind_cen {
+      position: relative;
+      margin: 0;
+      min-width: 1300px;
+    }
+
     .nav_logo {
       float: left;
       width: 176px;
       height: 38px;
+      margin-top: 11px;
       display: block;
-      // @include bg-retina('../assets/nav_logo', 'png', 142px, 46px);
+      // background-image: url("../assets/ixx/ixx_logo.png");
+      // background-size: 100% 100%;
+      // background-repeat: no-repeat;
       img {
         width: 176px;
         height: 38px;
-        margin-top: 11px;
       }
+      // @include bg-retina('../assets/nav_logo', 'png', 142px, 46px);
     }
     .nav_left {
       float: left;
       margin-left: 20px;
-      margin-top: 10px;
+
       .left_options {
         float: left;
         margin: 0 0 0 40px;
         .nav_link {
-          color: #FFFFFF;
+          color: #ffffff;
           font-size: 16px;
           position: relative;
           display: inline-block;
-          height: 40px;
-          font-weight: 500;
+          padding-top: 19px;
+          padding-bottom: 19px;
+
           &.arrow-down {
             display: inline;
 
             .arrow {
-              font-size:10px;
+              font-size: 10px;
               transition: all 0.2s ease-in-out;
             }
             &:hover {
@@ -593,41 +595,45 @@
                 color: $primary;
               }
               .arrow {
-                transform: rotate(180deg)
+                transform: rotate(180deg);
               }
             }
 
             .dropdown-sub-menu {
-              background: #283B4C;
+              background: $nav-2;
               position: absolute;
-              left: 0;
-              top: 68px;
+              left: 22px;
+              top: 58px;
               border-radius: 4px;
               z-index: 999;
               opacity: 0;
               display: none;
-              visibility: hidden;;
+              visibility: hidden;
 
               .dropdown-list {
                 .dropdown-item {
                   height: 40px;
+                  line-height: 40px;
                   white-space: nowrap;
+                  box-sizing: border-box;
                   .link {
                     width: 100%;
                     height: 100%;
                     display: block;
                     color: #fff;
                   }
+
                   &:hover {
-                    background: #192D3F;
+                    background: #192d3f;
                     .link {
                       color: $primary;
                     }
                   }
                 }
+
                 .dropdown-qrcode {
                   line-height: 1.2em !important;
-                  text-align:center !important;
+                  text-align: center !important;
                   span {
                     font-size: 0.9em;
                     color: #fff;
@@ -648,7 +654,8 @@
             color: $primary;
           }
 
-          .hot,.mining-dig {
+          .hot,
+          .mining-dig {
             font-size: 16px;
             // margin-left:5px;
             display: inline-block;
@@ -659,17 +666,27 @@
     .nav_right {
       position: absolute;
       min-width: 320px;
-      top: -10px;
-      right: 0;
+      //height: 60px;
+      right: 30px;
       font-size: 14px;
+      display: flex;
+      align-items: center;
+
       .right_options {
-        float: left;
+        // height: 60px;
+        // line-height: 60px;
+        display: flex;
+        align-items: center;
       }
 
-      .fund, .email, .help-center, .download, .lang {
+      .fund,
+      .email,
+      .help-center,
+      .download,
+      .lang {
         float: left;
-        color:#fff;
-        padding:19px 0;
+        color: #fff;
+        padding: 19px 0;
         cursor: pointer;
 
         .dropdown-sub-menu {
@@ -679,15 +696,16 @@
         }
       }
       .dropdown-sub-menu {
-        background: #283B4C;
+        background: $nav-2;
         position: absolute;
-        top: 80px;
+        top: 60px;
         border-radius: 4px;
         z-index: 999;
 
         .dropdown-list {
           .dropdown-item {
             height: 40px;
+            line-height: 40px;
             &.mobile {
               display: none;
             }
@@ -699,7 +717,7 @@
             }
 
             &:hover {
-              background: #192D3F;
+              background: #192d3f;
               .link {
                 color: $primary;
               }
@@ -708,20 +726,23 @@
         }
       }
 
-      .fund:hover, .email:hover, .help-center:hover, .download:hover {
+      .fund:hover,
+      .email:hover,
+      .help-center:hover,
+      .download:hover {
         color: $primary;
         .dropdown-sub-menu {
           // transition: opacity .3s,visibility 0s;
           opacity: 1;
           visibility: visible;
           display: block;
-
         }
       }
-      .quit{
+      .quit {
         float: left;
-        color:#fff;
+        color: #fff;
       }
+
       .nav_item {
         .iconfont {
           font-size: 20px;
@@ -729,12 +750,15 @@
             font-size: 14px;
             padding: 0 5px;
           }
-          &.arrow {
-            transition: all 0.2s ease-in-out;
-          }
         }
-        .help, .language{
+
+        .help,
+        .language {
           position: relative;
+          color: #fff;
+          &:hover {
+            color: $primary;
+          }
           &::after {
             position: absolute;
             left: -17px;
@@ -743,25 +767,21 @@
             width: 1px;
             height: 20px;
             background-color: #aaa;
-            opacity:0.3;
-          }
-        }
-        &:hover {
-          .iconfont.arrow {
-            transform: rotate(180deg);
+            opacity: 0.3;
           }
         }
       }
     }
-    .nav_right .nav_log_res, .nav_right .quit {
-      float: left;
-      margin: 19px 40px 19px 0;
+    .nav_right .nav_log_res,
+    .nav_right .quit {
       color: #fff;
-      height: 42px;
+      display: inline-block;
+      height: 14px;
+      line-height: 14px;
       font-size: 14px;
       &:hover,
       &.router-link-active {
-        color: #c9a96c;
+        color: $primary;
       }
     }
     .lang {
@@ -770,11 +790,7 @@
       float: left;
       color: #fff;
       // line-height: 24px;
-      // border-radius: 20px;
-      // border: 1px solid #fff;
-      // margin: 28px 0 0 0px;
-      // background: url(../assets/lang.png) no-repeat 12px center;
-      // text-indent: 16px;
+      // margin: 8px 0 0 0px;
       position: relative;
       text-align: center;
       cursor: pointer;
@@ -782,23 +798,20 @@
       .rig {
         display: inline-block;
         transition: all 0.2s ease-in-out;
-        // position: absolute;
-        // top: 4px;
-        // right: 10px;
         vertical-align: middle;
         font-size: 16px;
       }
-      .lang_box{
+      .lang_box {
         font-size: 12px;
         width: 120px;
         height: auto;
         line-height: 40px;
-        padding-top: 27px;
-        left:-36px;
+        padding-top: 18px;
+        left: -36px;
         position: absolute;
         display: none;
         flex-direction: column;
-        a{
+        a {
           background: #303c47;
           display: block;
           width: 100%;
@@ -807,14 +820,14 @@
           text-align: left;
           padding: 0 20px;
           box-sizing: border-box;
-          &:hover{
-            background:#273440;
+          &:hover {
+            background: #273440;
             color: #c9a96c;
           }
         }
       }
-      &:hover{
-        .lang_box{
+      &:hover {
+        .lang_box {
           display: flex;
         }
         .rig {
@@ -823,7 +836,7 @@
       }
     }
 
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 768px) {
       .c_box {
         padding: 0 10px;
       }
@@ -832,11 +845,15 @@
         visibility: hidden;
       }
       .right_options {
-        .fund, .help {
+        .fund,
+        .help {
+          color: #fff;
           display: none;
           margin: 0;
         }
-        .nav_log_res, .email,.quit {
+        .nav_log_res,
+        .email,
+        .quit {
           margin-left: 10px;
         }
       }
@@ -844,23 +861,17 @@
         display: block !important;
       }
     }
-    .nav_right_new {
-      position: absolute;
-      top: 0;
-      right: 0;
-      font-size: 14px;
-    }
-
   }
   .dark {
-    background: #0C1222;
-    .app-dl {
-      background:#0C1222!important;
-    }
+    background: $home-header-bgdark;
+  }
+  .custom-dark {
+    background: $home-header-custom-bgdark;
   }
   .login {
     background: $home-header-login;
   }
+
 
   .pop {
     display: flex;
@@ -886,6 +897,7 @@
       margin-right:10px;
       .btn {
         margin-top:10px;
+
       }
     }
   }
@@ -910,17 +922,12 @@
       }
     }
   }
-  .svg-icon {
-    font-size: 18px;
-    &.mini {
-      font-size: 12px;
-    }
-  }
-  @media screen and (min-width: 1280px){ // 1280是英文状态下nav正常显示的最小宽度
+  @media screen and (min-width: 1500px) {
+    // 1280是英文状态下nav正常显示的最小宽度
     .nav_box {
       .ind_cen {
         width: auto;
-        min-width: 1280px;
+        min-width: 1500px;
         margin: 0 60px;
       }
     }
