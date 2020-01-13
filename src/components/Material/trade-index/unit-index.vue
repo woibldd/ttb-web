@@ -72,7 +72,7 @@
         </div>
         <div class="table__tr bb-1">
           <div class="table__td br-1 first">{{ $t('contract_tb_symbol') }}</div>
-          <div class="table__td br-1">{{ $t('contract_btc_bon8h') }}</div>
+          <div class="table__td br-1">{{ `${coin} rate` }}</div>
           <div class="table__td br-1">{{ $t('contract_usdt_bon8h') }}</div>
           <div class="table__td">{{ $t('contract_over_us') }}</div>
         </div>

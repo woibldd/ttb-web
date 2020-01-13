@@ -261,9 +261,13 @@
                   target="_blank"
                   href="https://ixcustomer.zendesk.com/hc/zh-cn/articles/360020414512">{{ $t('appNav.mapNavRight.download_pop.children.process') }}</a></h3>
                 <p>
-                  <v-btn
+                  <!-- <v-btn
                     icon="apple"
-                    label="Iphone"/>
+                    label="Iphone"/> -->
+                  <el-button type="primary">
+                    <svg-icon icon-class="apple"/>
+                    Iphone
+                  </el-button>
                   <v-btn
                     icon="android"
                     label="Android"/>

@@ -111,6 +111,7 @@ export default {
         this.update(data)
         this.$eh.$emit('deal:update', data)
       })
+      this.socket.$on('reopen', this.sub)
     },
     getStyle (deal, index) {
       if (index % 2 === 0) {

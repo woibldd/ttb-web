@@ -38,6 +38,10 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
+    modules: [
+      resolve('src'),
+      resolve('node_modules')
+    ],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
@@ -50,12 +54,15 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: vueLoaderConfig
+        options: vueLoaderConfig,
+        include: [resolve('src'), resolve('node_modules/vue-easytable/libs')],
+        exclude: /node_modules\/(?!(autotrack|dom-utils))|vendor\.dll\.js/
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')], 
+        exclude: /node_modules/
       },
       {
         test: /\.(png|jpe?g|gif)(\?.*)?$/,
@@ -63,7 +70,7 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 5000,
+              limit: 1000,
               name: utils.assetsPath('img/[name].[hash:7].[ext]')
             }
           }
@@ -74,7 +81,7 @@ module.exports = {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 10000,
+          limit: 1000,
           name: utils.assetsPath('media/[name].[hash:7].[ext]')
         }
       },
@@ -82,7 +89,7 @@ module.exports = {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 10000,
+          limit: 1000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       },

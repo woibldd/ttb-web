@@ -354,6 +354,7 @@ export default {
         this.loading = false
         this.update(pair, data)
       })
+      this.socket.$on('reopen', this.sub)
     },
     update (pair, data) {
       if (!this.tickers[pair]) {

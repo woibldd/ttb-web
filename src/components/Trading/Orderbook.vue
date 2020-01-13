@@ -400,6 +400,7 @@ export default {
         this.socket.heartCheck.start()
         this.assignData(data)
       })
+      this.socket.$on('reopen', this.sub)
     },
     assignData (data) {
       const toBig = item => [this.$big(item.values[0]), this.$big(item.values[1])]
