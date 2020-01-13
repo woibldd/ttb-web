@@ -3,6 +3,8 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+
+
 let entrys = {}
 for (let key in config.projects) {
   entrys[key] = config.projects[key].entry
