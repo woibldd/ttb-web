@@ -76,7 +76,7 @@
             <a href="/bonus" class="nav_link ml-30" v-popover:popover3>
               {{ this.$t('gift.bonus') }}
               <svg-icon icon-class="hot-red" />
-              <svg-icon icon-class="header-down" class="mini arrow" /> 
+              <svg-icon icon-class="header-down" class="mini arrow" />
             </a>
             <el-popover
               ref="popover3"
@@ -102,7 +102,7 @@
                 </ul>
               </div>
             </el-popover>
-          </div> 
+          </div>
           <!-- <router-link
             v-if="isTestnet"
             to="/share_option"
@@ -137,7 +137,7 @@
           v-else>
           <!-- 我的资产 -->
           <div
-            v-popover:popover4
+            v-popover:popover7
             class="nav_item fund mr-15"
             style="margin-left: -10px;">
             <span
@@ -147,7 +147,7 @@
               class="mini arrow"
               icon-class="header-down" />
             <el-popover
-              ref="popover4"
+              ref="popover7"
               popper-class="nav-list"
               placement="bottom"
               style="background:#2C3B4B;"
@@ -381,223 +381,223 @@
 </template>
 
 <script>
-import { state, actions } from '@/modules/store'
-import service from '@/modules/service'
-import utils from '@/modules/utils'
-import VBtn from '@/components/VBtn'
-// import {
-//   Dropdown,
-//   DropdownMenu,
-//   DropdownItem } from 'element-ui'
+  import { state, actions } from '@/modules/store'
+  import service from '@/modules/service'
+  import utils from '@/modules/utils'
+  import VBtn from '@/components/VBtn'
+  // import {
+  //   Dropdown,
+  //   DropdownMenu,
+  //   DropdownItem } from 'element-ui'
 
-export default {
-  // components: {Dropdown,DropdownMenu,DropdownItem},
-  components: {VBtn},
-  props: {
-    dark: {
-      type: Boolean,
-      default: false
-    },
-    from: {
-      type: String,
-      default: ''
-    }
-  },
-  data () {
-    return {
-      state,
-      locales: utils.locales,
-      hostname: location.hostname
-    }
-  },
-  computed: {
-    localeText () {
-      return utils.getLocaleName(state.locale)
-    },
-    pdfSubfix () {
-      if (state.locale === 'zh-CN') {
-        return '+zh-CN'
+  export default {
+    // components: {Dropdown,DropdownMenu,DropdownItem},
+    components: {VBtn},
+    props: {
+      dark: {
+        type: Boolean,
+        default: false
+      },
+      from: {
+        type: String,
+        default: ''
       }
-      return ''
     },
-    desentInfo () {
-      let userInfo = this.state.userInfo
-      if (userInfo) {
-        if (userInfo.phone) {
-          return utils.publicDesensitization(userInfo.phone)[0]
-          // return utils.publicDesensitization('91418865')[0]
-        } else if (userInfo.email) {
-          return utils.publicDesensitization(userInfo.email)[0]
+    data () {
+      return {
+        state,
+        locales: utils.locales,
+        hostname: location.hostname
+      }
+    },
+    computed: {
+      localeText () {
+        return utils.getLocaleName(state.locale)
+      },
+      pdfSubfix () {
+        if (state.locale === 'zh-CN') {
+          return '+zh-CN'
         }
+        return ''
+      },
+      desentInfo () {
+        let userInfo = this.state.userInfo
+        if (userInfo) {
+          if (userInfo.phone) {
+            return utils.publicDesensitization(userInfo.phone)[0]
+            // return utils.publicDesensitization('91418865')[0]
+          } else if (userInfo.email) {
+            return utils.publicDesensitization(userInfo.email)[0]
+          }
+        }
+        return ''
+      },
+      helpLink () {
+        return this.state.theme.help[this.state.locale] || this.state.theme.help.en
+      },
+      requestLink () {
+        if (this.state.userInfo && this.state.theme.themeName === 'default') {
+          return process.env.BASE_API + 'zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
+        } else {
+          return this.state.theme.request[this.state.locale] || this.request.theme.help.en
+        }
+      },
+      announcementLink () {
+        return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
+      },
+      isTestnet () {
+        return this.hostname.indexOf('ixex.pro') >= 0
+      },
+      fund () {
+        if (state.locale === 'zh-CN') {
+          return 'fund'
+        }
+        return 'fund-en'
       }
-      return ''
     },
-    helpLink () {
-      return this.state.theme.help[this.state.locale] || this.state.theme.help.en
-    },
-    requestLink () {
-      if (this.state.userInfo && this.state.theme.themeName === 'default') {
-        return process.env.BASE_API + 'zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
-      } else {
-        return this.state.theme.request[this.state.locale] || this.request.theme.help.en
-      }
-    },
-    announcementLink () {
-      return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
-    },
-    isTestnet () {
-      return this.hostname.indexOf('ixex.pro') >= 0
-    },
-    fund () {
-      if (state.locale === 'zh-CN') {
-        return 'fund'
-      }
-      return 'fund-en'
-    }
-  },
-  methods: {
-    subscribeHandle() {
-      if (window.localStorage.getItem("X-TOKEN")) {
-        this.$router.push("/fund/my/assets");
-      } else {
-        this.$router.push({
-          name: "login"
-        });
-      }
-    },
-    switchLang (lang) {
-      actions.setLocale(lang)
-      localStorage.setItem('locale', lang)
-      // location.reload()
-    },
-    logout () {
-      actions.setUserInfo(null)
-      // 用于标记登录过期
-      utils.setSessionStorageValue('LoginStatus', 0)
-      utils.setSessionStorageValue('markTime', 9999999999)
-      service.signout().then(res => {
-        console.log({ res })
-        // window.onload()
-        this.$nextTick(() => {
-          location.reload()
+    methods: {
+      subscribeHandle() {
+        if (window.localStorage.getItem("X-TOKEN")) {
+          this.$router.push("/fund/my/assets");
+        } else {
+          this.$router.push({
+            name: "login"
+          });
+        }
+      },
+      switchLang (lang) {
+        actions.setLocale(lang)
+        localStorage.setItem('locale', lang)
+        // location.reload()
+      },
+      logout () {
+        actions.setUserInfo(null)
+        // 用于标记登录过期
+        utils.setSessionStorageValue('LoginStatus', 0)
+        utils.setSessionStorageValue('markTime', 9999999999)
+        service.signout().then(res => {
+          console.log({ res })
+          // window.onload()
+          this.$nextTick(() => {
+            location.reload()
+          })
         })
-      })
-      // service.signout()
-      // this.$router.push('/')
-      // if (utils.getRouteMeta(this.$route, 'auth')) {
-      //   this.$router.push({
-      //     name: 'login'
-      //   })
-      // }
+        // service.signout()
+        // this.$router.push('/')
+        // if (utils.getRouteMeta(this.$route, 'auth')) {
+        //   this.$router.push({
+        //     name: 'login'
+        //   })
+        // }
 
-      // this.$nextTick(() => {
-      //   location.reload()
-      // })
-    },
-    clickStar ($event) {
-      this.className = 'active'// console.log($event.currentTarget);
-    },
-    openDefault (type) {
-      switch (type) {
-        case 'fund':
-          this.$router.push({
-            name: 'fund'
-          })
-          break
-        case 'profile':
-          this.$router.push({
-            name: 'profile'
-          })
-          break
-        case 'help':
-          window.open(this.helpLink)
-          break
-        case 'orders':
-          this.$router.push({
-            name: 'orders'
-          })
-          break
+        // this.$nextTick(() => {
+        //   location.reload()
+        // })
+      },
+      clickStar ($event) {
+        this.className = 'active'// console.log($event.currentTarget);
+      },
+      openDefault (type) {
+        switch (type) {
+          case 'fund':
+            this.$router.push({
+              name: 'fund'
+            })
+            break
+          case 'profile':
+            this.$router.push({
+              name: 'profile'
+            })
+            break
+          case 'help':
+            window.open(this.helpLink)
+            break
+          case 'orders':
+            this.$router.push({
+              name: 'orders'
+            })
+            break
+        }
       }
     }
   }
-}
 </script>
 
 <style scoped lang="scss">
-.set-app-dl {
+  .set-app-dl {
     margin-right: 0px !important;
     .nav_log_res {
+      display: flex;
+      align-items: center;
+      .app-dl{
+        box-sizing: border-box;
+        width:65px !important;
+        height:26px !important;
         display: flex;
+        justify-content: center;
         align-items: center;
-        .app-dl{
-            box-sizing: border-box;
-            width:65px !important;
-            height:26px !important;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius:10px;
-        }
+        border-radius:10px;
+      }
     }
-}
-.nav_box {
-  .ind_cen {
-    position: relative;
-    width: 1280px;
-    margin: 0 auto;
-    @include clearfix()
   }
-  width: 100%;
-  height: 60px;
-  line-height: 42px;
-  .nav_logo {
-    float: left;
-    width: 176px;
-    height: 38px;
-    display: block;
-    // @include bg-retina('../assets/nav_logo', 'png', 142px, 46px);
-    img {
+  .nav_box {
+    .ind_cen {
+      position: relative;
+      width: 1280px;
+      margin: 0 auto;
+      @include clearfix()
+    }
+    width: 100%;
+    height: 60px;
+    line-height: 42px;
+    .nav_logo {
+      float: left;
       width: 176px;
       height: 38px;
-      margin-top: 11px;
+      display: block;
+      // @include bg-retina('../assets/nav_logo', 'png', 142px, 46px);
+      img {
+        width: 176px;
+        height: 38px;
+        margin-top: 11px;
+      }
     }
-  }
-  .nav_left {
-    float: left;
-    margin-left: 20px;
-    margin-top: 10px;
-    .left_options {
+    .nav_left {
       float: left;
-      margin: 0 0 0 40px;
-      .nav_link {
-        color: #FFFFFF;
-        font-size: 16px;
-        position: relative;
-        display: inline-block;
-        height: 40px;
-        font-weight: 500;
-        &.arrow-down {
-          display: inline;
+      margin-left: 20px;
+      margin-top: 10px;
+      .left_options {
+        float: left;
+        margin: 0 0 0 40px;
+        .nav_link {
+          color: #FFFFFF;
+          font-size: 16px;
+          position: relative;
+          display: inline-block;
+          height: 40px;
+          font-weight: 500;
+          &.arrow-down {
+            display: inline;
 
-          .arrow {
-            font-size:10px;
-            transition: all 0.2s ease-in-out;
-          }
-          &:hover {
-            .dropdown-sub-menu {
-              opacity: 1;
-              display: block;
-              visibility: visible;
-            }
-            .nav_link {
-              color: $primary;
-            }
             .arrow {
-              transform: rotate(180deg)
+              font-size:10px;
+              transition: all 0.2s ease-in-out;
             }
-          }
+            &:hover {
+              .dropdown-sub-menu {
+                opacity: 1;
+                display: block;
+                visibility: visible;
+              }
+              .nav_link {
+                color: $primary;
+              }
+              .arrow {
+                transform: rotate(180deg)
+              }
+            }
 
-           .dropdown-sub-menu {
+            .dropdown-sub-menu {
               background: #283B4C;
               position: absolute;
               left: 0;
@@ -637,158 +637,158 @@ export default {
                   }
                 }
               }
-           }
-        }
-
-        &:hover {
-          color: $primary;
-        }
-
-        &.router-link-active {
-          color: $primary;
-        }
-
-        .hot,.mining-dig {
-          font-size: 16px;
-          // margin-left:5px;
-          display: inline-block;
-        }
-      }
-    }
-  }
-  .nav_right {
-    position: absolute;
-    min-width: 320px;
-    top: -10px;
-    right: 0;
-    font-size: 14px;
-    .right_options {
-      float: left;
-    }
-
-    .fund, .email, .help-center, .download, .lang {
-      float: left;
-      color:#fff;
-      padding:19px 0;
-      cursor: pointer;
-
-      .dropdown-sub-menu {
-        opacity: 0;
-        display: none;
-        visibility: hidden;
-      }
-    }
-    .dropdown-sub-menu {
-      background: #283B4C;
-      position: absolute;
-      top: 80px;
-      border-radius: 4px;
-      z-index: 999;
-
-      .dropdown-list {
-        .dropdown-item {
-          height: 40px;
-          &.mobile {
-            display: none;
-          }
-          .link {
-            width: 100%;
-            height: 100%;
-            display: block;
-            color: #fff;
+            }
           }
 
           &:hover {
-            background: #192D3F;
+            color: $primary;
+          }
+
+          &.router-link-active {
+            color: $primary;
+          }
+
+          .hot,.mining-dig {
+            font-size: 16px;
+            // margin-left:5px;
+            display: inline-block;
+          }
+        }
+      }
+    }
+    .nav_right {
+      position: absolute;
+      min-width: 320px;
+      top: -10px;
+      right: 0;
+      font-size: 14px;
+      .right_options {
+        float: left;
+      }
+
+      .fund, .email, .help-center, .download, .lang {
+        float: left;
+        color:#fff;
+        padding:19px 0;
+        cursor: pointer;
+
+        .dropdown-sub-menu {
+          opacity: 0;
+          display: none;
+          visibility: hidden;
+        }
+      }
+      .dropdown-sub-menu {
+        background: #283B4C;
+        position: absolute;
+        top: 80px;
+        border-radius: 4px;
+        z-index: 999;
+
+        .dropdown-list {
+          .dropdown-item {
+            height: 40px;
+            &.mobile {
+              display: none;
+            }
             .link {
-              color: $primary;
+              width: 100%;
+              height: 100%;
+              display: block;
+              color: #fff;
+            }
+
+            &:hover {
+              background: #192D3F;
+              .link {
+                color: $primary;
+              }
             }
           }
         }
       }
-    }
 
-    .fund:hover, .email:hover, .help-center:hover, .download:hover {
-      color: $primary;
-      .dropdown-sub-menu {
-        // transition: opacity .3s,visibility 0s;
-        opacity: 1;
-        visibility: visible;
-        display: block;
+      .fund:hover, .email:hover, .help-center:hover, .download:hover {
+        color: $primary;
+        .dropdown-sub-menu {
+          // transition: opacity .3s,visibility 0s;
+          opacity: 1;
+          visibility: visible;
+          display: block;
 
+        }
+      }
+      .quit{
+        float: left;
+        color:#fff;
+      }
+      .nav_item {
+        .iconfont {
+          font-size: 20px;
+          &.mini {
+            font-size: 14px;
+            padding: 0 5px;
+          }
+          &.arrow {
+            transition: all 0.2s ease-in-out;
+          }
+        }
+        .help, .language{
+          position: relative;
+          &::after {
+            position: absolute;
+            left: -17px;
+            top: -3px;
+            content: "";
+            width: 1px;
+            height: 20px;
+            background-color: #aaa;
+            opacity:0.3;
+          }
+        }
+        &:hover {
+          .iconfont.arrow {
+            transform: rotate(180deg);
+          }
+        }
       }
     }
-    .quit{
+    .nav_right .nav_log_res, .nav_right .quit {
       float: left;
-      color:#fff;
-    }
-    .nav_item {
-      .iconfont {
-        font-size: 20px;
-        &.mini {
-          font-size: 14px;
-          padding: 0 5px;
-        }
-        &.arrow {
-          transition: all 0.2s ease-in-out;
-        }
-      }
-      .help, .language{
-        position: relative;
-        &::after {
-          position: absolute;
-          left: -17px;
-          top: -3px;
-          content: "";
-          width: 1px;
-          height: 20px;
-          background-color: #aaa;
-          opacity:0.3;
-        }
-      }
-      &:hover {
-        .iconfont.arrow {
-          transform: rotate(180deg);
-        }
+      margin: 19px 40px 19px 0;
+      color: #fff;
+      height: 42px;
+      font-size: 14px;
+      &:hover,
+      &.router-link-active {
+        color: #c9a96c;
       }
     }
-  }
-  .nav_right .nav_log_res, .nav_right .quit {
-    float: left;
-    margin: 19px 40px 19px 0;
-    color: #fff;
-    height: 42px;
-    font-size: 14px;
-    &:hover,
-    &.router-link-active {
-      color: #c9a96c;
-    }
-  }
-  .lang {
-    width: 30px;
-    // height: 30px;
-    float: left;
-    color: #fff;
-    // line-height: 24px;
-    // border-radius: 20px;
-    // border: 1px solid #fff;
-    // margin: 28px 0 0 0px;
-    // background: url(../assets/lang.png) no-repeat 12px center;
-    // text-indent: 16px;
-    position: relative;
-    text-align: center;
-    cursor: pointer;
-    z-index: 3;
-    .rig {
-      display: inline-block;
-      transition: all 0.2s ease-in-out;
-      // position: absolute;
-      // top: 4px;
-      // right: 10px;
-      vertical-align: middle;
-      font-size: 16px;
-    }
-    .lang_box{
+    .lang {
+      width: 30px;
+      // height: 30px;
+      float: left;
+      color: #fff;
+      // line-height: 24px;
+      // border-radius: 20px;
+      // border: 1px solid #fff;
+      // margin: 28px 0 0 0px;
+      // background: url(../assets/lang.png) no-repeat 12px center;
+      // text-indent: 16px;
+      position: relative;
+      text-align: center;
+      cursor: pointer;
+      z-index: 3;
+      .rig {
+        display: inline-block;
+        transition: all 0.2s ease-in-out;
+        // position: absolute;
+        // top: 4px;
+        // right: 10px;
+        vertical-align: middle;
+        font-size: 16px;
+      }
+      .lang_box{
         font-size: 12px;
         width: 120px;
         height: auto;
@@ -799,130 +799,130 @@ export default {
         display: none;
         flex-direction: column;
         a{
-            background: #303c47;
-            display: block;
-            width: 100%;
-            height: 40px;
-            color: #fff;
-            text-align: left;
-            padding: 0 20px;
-            box-sizing: border-box;
-            &:hover{
-                background:#273440;
-                color: #c9a96c;
-            }
+          background: #303c47;
+          display: block;
+          width: 100%;
+          height: 40px;
+          color: #fff;
+          text-align: left;
+          padding: 0 20px;
+          box-sizing: border-box;
+          &:hover{
+            background:#273440;
+            color: #c9a96c;
+          }
         }
-    }
-    &:hover{
+      }
+      &:hover{
         .lang_box{
-            display: flex;
+          display: flex;
         }
         .rig {
           transform: rotate(180deg);
         }
+      }
     }
-  }
 
-  @media screen and (max-width: 768px){
-    .c_box {
-      padding: 0 10px;
-    }
-    .lang {
-      display: none;
-      visibility: hidden;
-    }
-    .right_options {
-      .fund, .help {
+    @media screen and (max-width: 768px){
+      .c_box {
+        padding: 0 10px;
+      }
+      .lang {
         display: none;
-        margin: 0;
+        visibility: hidden;
       }
-      .nav_log_res, .email,.quit {
-        margin-left: 10px;
+      .right_options {
+        .fund, .help {
+          display: none;
+          margin: 0;
+        }
+        .nav_log_res, .email,.quit {
+          margin-left: 10px;
+        }
+      }
+      .mobile {
+        display: block !important;
       }
     }
-    .mobile {
-      display: block !important;
+    .nav_right_new {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 14px;
+    }
+
+  }
+  .dark {
+    background: #0C1222;
+    .app-dl {
+      background:#0C1222!important;
     }
   }
-  .nav_right_new {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 14px;
+  .login {
+    background: $home-header-login;
   }
 
-}
-.dark {
-  background: #0C1222;
-  .app-dl {
-    background:#0C1222!important;
-  }
-}
-.login {
-  background: $home-header-login;
-}
-
-.pop {
-  display: flex;
-  width: 280px;
-  color: #fff;
-  h3 {
-    margin-bottom: 10px;
-    text-align: center;
-    a {
-      color: #fff;
-    }
-  }
-  .left {
-    flex: 110px 1;
-    margin-right: 15px;
-    text-align: center;
-    img {
-      width: 89px;
-    }
-  }
-  .right {
-    flex: 1 150px;
-    margin-right:10px;
-    .btn {
-      margin-top:10px;
-    }
-  }
-}
-.pop-dropdown {
-  p {
-    color: #ccc;
-    text-align: center;
-  }
-  ul {
-    li {
-      height: 2.5em;
-      line-height: 2.5em;
+  .pop {
+    display: flex;
+    width: 280px;
+    color: #fff;
+    h3 {
+      margin-bottom: 10px;
+      text-align: center;
       a {
         color: #fff;
       }
     }
-    li:hover {
-      background-color: #192D3F;
-      a {
-        color: $primary;
+    .left {
+      flex: 110px 1;
+      margin-right: 15px;
+      text-align: center;
+      img {
+        width: 89px;
+      }
+    }
+    .right {
+      flex: 1 150px;
+      margin-right:10px;
+      .btn {
+        margin-top:10px;
       }
     }
   }
-}
-.svg-icon {
-  font-size: 18px;
-  &.mini {
-    font-size: 12px;
-  }
-}
-@media screen and (min-width: 1280px){ // 1280是英文状态下nav正常显示的最小宽度
-    .nav_box {
-        .ind_cen {
-            width: auto;
-            min-width: 1280px;
-            margin: 0 60px;
+  .pop-dropdown {
+    p {
+      color: #ccc;
+      text-align: center;
+    }
+    ul {
+      li {
+        height: 2.5em;
+        line-height: 2.5em;
+        a {
+          color: #fff;
         }
-   }
-}
+      }
+      li:hover {
+        background-color: #192D3F;
+        a {
+          color: $primary;
+        }
+      }
+    }
+  }
+  .svg-icon {
+    font-size: 18px;
+    &.mini {
+      font-size: 12px;
+    }
+  }
+  @media screen and (min-width: 1280px){ // 1280是英文状态下nav正常显示的最小宽度
+    .nav_box {
+      .ind_cen {
+        width: auto;
+        min-width: 1280px;
+        margin: 0 60px;
+      }
+    }
+  }
 </style>
