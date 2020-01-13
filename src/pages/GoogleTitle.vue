@@ -169,6 +169,7 @@ export default {
           email_code: this.verifyCode
         }
       }
+
       if (this.resetCode) {
         if (this.checkbox1 && this.checkbox2) {
           if (this.code.length === 6) {
