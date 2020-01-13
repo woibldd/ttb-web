@@ -13,7 +13,7 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const HappyPack = require('happypack');
 const os = require('os');
-const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length }); 
 
 let plugins = [];
 for (let key in config.projects) {
@@ -58,6 +58,10 @@ const webpackConfig = merge(baseWebpackConfig, {
       //允许 HappyPack 输出日志
       verbose: true,
     }),
+    new webpack.DllReferencePlugin({
+      context: path.resolve(__dirname, '..'),
+      manifest: require('./vendor-manifest.json')
+    }),
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       "process.env": env
@@ -73,12 +77,13 @@ const webpackConfig = merge(baseWebpackConfig, {
     //   parallel: true
     // }),
     new ParallelUglifyPlugin({
-      cacheDir: '.cache/',
+      // cacheDir: '.cache/',
       uglifyJS:{
         output: {
           comments: false
         }, 
-        warnings: false 
+        warnings: false ,
+        sourceMap: config.build.productionSourceMap,
       }
     }),
     // extract css into its own file

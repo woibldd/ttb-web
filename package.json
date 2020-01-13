@@ -11,7 +11,8 @@
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js",
-    "build:beta": "NODE_ENV=beta node build/build.js"
+    "build:beta": "NODE_ENV=beta node build/build.js",
+    "build:dll": "webpack --config build/webpack.dll.conf.js"
   },
   "dependencies": {
     "@amcharts/amcharts4": "^4.6.1",

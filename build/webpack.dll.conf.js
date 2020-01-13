@@ -6,13 +6,12 @@ module.exports = {
     vendor: ['vue/dist/vue.common.js',
             'vue-router',
             'axios',
+            'element-ui',
             'mint-ui',
-            'vue-cordova',
-            '@fortawesome/fontawesome-svg-core',
-            '@fortawesome/free-solid-svg-icons',
-            '@fortawesome/free-regular-svg-icons',
-            '@fortawesome/free-brands-svg-icons',
-            '@fortawesome/vue-fontawesome']
+            'lodash',
+            '@sentry/browser', 
+            'big.js'
+           ]
   },
   output: {
     path: path.join(__dirname, '../static/js'),
