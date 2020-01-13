@@ -287,6 +287,7 @@ export default {
               height: 22px;
               line-height: 22px;
           }
+
           .gt_yz{
               height: 30px;
               line-height: 30px;
