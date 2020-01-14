@@ -10,7 +10,8 @@ module.exports = {
             'mint-ui',
             'lodash',
             '@sentry/browser', 
-            'big.js'
+            'big.js',
+            'pdfmake'
            ]
   },
   output: {
@@ -18,7 +19,7 @@ module.exports = {
     filename: '[name].dll.js',
     library: '[name]_library'       // vendor.dll.js中暴露出的全局变量名
   },
-  plugins: [
+  plugins: [ 
     new webpack.DllPlugin({
       path: path.join(__dirname, '.', '[name]-manifest.json'),
       name: '[name]_library'

@@ -12,7 +12,8 @@
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js",
     "build:beta": "NODE_ENV=beta node build/build.js",
-    "build:dll": "webpack --config build/webpack.dll.conf.js"
+    "build:dll": "webpack --config build/webpack.dll.conf.js",
+    "analyz": "NODE_ENV=production npm_config_report=true npm run build"
   },
   "dependencies": {
     "@amcharts/amcharts4": "^4.6.1",
@@ -103,7 +104,7 @@
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",
-    "webpack-bundle-analyzer": "^2.9.0",
+    "webpack-bundle-analyzer": "^2.13.1",
     "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0",
     "webpack-parallel-uglify-plugin": "^1.1.2"
