@@ -107,6 +107,7 @@ export default {
   async created () {
     this.getGoogleKey()
   },
+
   methods: {
     logout() {
       actions.setUserInfo(null);
