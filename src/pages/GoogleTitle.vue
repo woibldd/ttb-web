@@ -173,6 +173,7 @@ export default {
         }
       )
     },
+
     async submit () {
       let query = {}
       if (this.verify_type === 'phone') {
