@@ -966,11 +966,12 @@ export default {
       return obj;
     },
     unit() {
-      if (this.pair === "FUTURE_BTCUSD") {
-        return "USD";
-      } else {
-        return "contract_min_unit";
-      }
+      // if (this.pair === "FUTURE_BTCUSD") {
+      //   return "USD";
+      // } else {
+      //   return "contract_min_unit";
+      // }
+      return "contract_min_unit";
     },
     //风险限额字典
     RiskLimitDict() {

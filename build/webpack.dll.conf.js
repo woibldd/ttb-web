@@ -21,8 +21,7 @@ module.exports = {
             'highcharts', 
             'copy-to-clipboard',
             'moment',
-            'reconnecting-websocket',
-            // 'sass-resources-loader',
+            'reconnecting-websocket', 
             'v-depth-chart',
             'wowjs'
            ]

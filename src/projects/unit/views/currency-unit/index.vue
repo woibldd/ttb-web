@@ -200,7 +200,8 @@
                     <input :value="(i===0 || i===2) ? activeAcountAndPriceArr[i]:(activeAcountAndPriceArr[i]||(activeProduct.UNIT||{}).current)"
                            type="text"
                            @input="e=>activeAcountAndPriceArr[i] = e.target.value.replace(/^(0+)|[^\d.]+/g,'')">
-                    <span>USD</span>
+                    <span v-if="key==='shippingSpace'">{{ $t('contract_min_unit') }}</span>
+                    <span v-else>USD</span>
                   </template>
                 </template>
               </div>
@@ -1487,7 +1488,7 @@ export default {
         }
         & > input {
           text-align: right;
-          padding-right: 45px;
+          padding-right: 62px;
         }
         .activeBtn {
           box-shadow: 0 2px 0px 0px #fff;
@@ -1495,8 +1496,10 @@ export default {
         & > span {
           position: absolute;
           right: 14px;
+          text-align: center;
+          width: 52px;
           color: #999;
-          border-left: 1px solid #333;
+          // border-left: 1px solid #333;
           padding-left: 4px;
         }
       }

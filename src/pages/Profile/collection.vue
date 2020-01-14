@@ -160,11 +160,14 @@
               :label="this.$t('payment_card_number')"
               prop="card_number">
               <br>
-              <number-input
+              <!-- <number-input
                 class="inputc"
                 style="border: 1px solid #DCDFE6 !important;"
                 v-model="ruleForm.card_number"
-                size="small"/> 
+                size="small"/>  -->
+              <el-input
+                v-model="ruleForm.card_number"
+                size="small"/>
             </el-form-item>
           </template>
           <template v-if="ruleForm.payment_type === '2' || ruleForm.payment_type === '3'">
@@ -573,6 +576,14 @@ export default {
         }
       } catch (e) {
         console.log(e, 'error')
+      }
+    }
+  },
+  watch: {
+    'ruleForm.card_number': function (newVal, oldVal) {
+      const rex = /^[\s\d]*$/
+      if (!rex.test(newVal)) {
+        this.ruleForm.card_number = oldVal
       }
     }
   },
