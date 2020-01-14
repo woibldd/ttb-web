@@ -107,7 +107,7 @@ module.exports = {
           symbolId: '[name]'
         }
       }
-    ]
+    ] 
   },
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue

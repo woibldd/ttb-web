@@ -4,7 +4,13 @@ const webpack = require('webpack');
 module.exports = {
   entry: {
     vendor: ['vue/dist/vue.common.js',
+            'vue',
+            'vue-material',
+            'vue-i18n',
+            'vue-clipboard2',
+            'vue-awesome-swiper',
             'vue-router',
+            'vuex',
             'axios',
             'element-ui',
             'mint-ui',
@@ -12,7 +18,13 @@ module.exports = {
             '@sentry/browser', 
             'big.js',
             'pdfmake',
-            'highcharts'
+            'highcharts', 
+            'copy-to-clipboard',
+            'moment',
+            'reconnecting-websocket',
+            // 'sass-resources-loader',
+            'v-depth-chart',
+            'wowjs'
            ]
   },
   output: {
