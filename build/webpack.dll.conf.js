@@ -11,7 +11,8 @@ module.exports = {
             'lodash',
             '@sentry/browser', 
             'big.js',
-            'pdfmake'
+            'pdfmake',
+            'highcharts'
            ]
   },
   output: {
