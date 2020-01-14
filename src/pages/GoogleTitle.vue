@@ -200,7 +200,7 @@ export default {
             if (result && !result.code) {
               await actions.updateSession()
               this.logout()
-              window.localStorage.setItem('refere', true)
+              // window.localStorage.setItem('refere', true)
             } else {
               utils.alert(result.message)
             }
