@@ -108,6 +108,21 @@ export default {
     this.getGoogleKey()
   },
   methods: {
+    logout() {
+      actions.setUserInfo(null);
+      utils.setSessionStorageValue("LoginStatus", 0);
+      utils.setSessionStorageValue("markTime", 9999999999);
+      service.signout().then(res => {
+        this.$nextTick(() => {
+          location.reload();
+        });
+      });
+      if (utils.getRouteMeta(this.$route, "auth")) {
+        this.$router.push({
+          name: "login"
+        });
+      }
+    },
     async currentGetCodeFunc () {
       if (this.verify_type === 'phone') {
         let res = await service.getPhoneCode(
@@ -182,9 +197,7 @@ export default {
             let result = await service.bindGoogleKey(params)
             if (result && !result.code) {
               await actions.updateSession()
-              this.$router.push({
-                name: 'Safety'
-              })
+              this.logout()
               window.localStorage.setItem('refere', true)
             } else {
               utils.alert(result.message)
