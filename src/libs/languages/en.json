@@ -2039,7 +2039,7 @@
   "otc_order_confirm_sell": "Publish for sale",
   "otc_view_userinfo": "View",
   "otc_total_transaction_volume": "Current Site Transaction Total (CNY)",
-  "otc_total_arder": "Total singular",
+  "otc_total_arder": "Total Order",
   "otc_orders_rate": "Completion rate",
   "otc_publish_order": "Publish an order",
   "otc_transaction_manage": "Transaction Management",
