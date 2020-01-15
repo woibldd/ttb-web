@@ -608,10 +608,6 @@ export default {
           name: "login"
         });
       }
-
-      // this.$nextTick(() => {
-      //   location.reload()
-      // })
     },
     clickStar($event) {
       this.className = "active";

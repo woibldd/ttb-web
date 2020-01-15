@@ -107,7 +107,23 @@ export default {
   async created () {
     this.getGoogleKey()
   },
+
   methods: {
+    logout() {
+      actions.setUserInfo(null);
+      utils.setSessionStorageValue("LoginStatus", 0);
+      utils.setSessionStorageValue("markTime", 9999999999);
+      service.signout().then(res => {
+        this.$nextTick(() => {
+          location.reload();
+        });
+      });
+      if (utils.getRouteMeta(this.$route, "auth")) {
+        this.$router.push({
+          name: "login"
+        });
+      }
+    },
     async currentGetCodeFunc () {
       if (this.verify_type === 'phone') {
         let res = await service.getPhoneCode(
@@ -158,6 +174,7 @@ export default {
         }
       )
     },
+
     async submit () {
       let query = {}
       if (this.verify_type === 'phone') {
@@ -169,6 +186,7 @@ export default {
           email_code: this.verifyCode
         }
       }
+
       if (this.resetCode) {
         if (this.checkbox1 && this.checkbox2) {
           if (this.code.length === 6) {
@@ -181,10 +199,8 @@ export default {
             let result = await service.bindGoogleKey(params)
             if (result && !result.code) {
               await actions.updateSession()
-              this.$router.push({
-                name: 'Safety'
-              })
-              window.localStorage.setItem('refere', true)
+              this.logout()
+              // window.localStorage.setItem('refere', true)
             } else {
               utils.alert(result.message)
             }
@@ -274,7 +290,7 @@ export default {
               width: 180px;
               height: 180px;
               margin: 0 auto;
-              background: #C2A538;
+              background: #01ced1;
               padding: 10px;
               box-sizing: border-box;
           }
@@ -286,11 +302,12 @@ export default {
               height: 22px;
               line-height: 22px;
           }
+
           .gt_yz{
               height: 30px;
               line-height: 30px;
-              color: #C2A538;
-              border-bottom: 1px solid #C2A538;
+              color: #01ced1;
+              border-bottom: 1px solid #01ced1;
               margin: 0 auto;
               display: table;
               font-size: 16px;
