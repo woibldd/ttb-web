@@ -441,10 +441,14 @@ export default {
         this.assignData(res.data)
       } 
       this.socket = ws.create(`orderbook/${this.pair}/${this.offset}/${this.accuracy}/20`)
-      this.socket.$on('open', () => {
+      this.socket.$on('open', () => { 
         this.socket.heartCheck.start()
       })
-      this.socket.$on('message', (data) => {
+      this.socket.$on('message', (data) => { 
+        if (!this.socket.url || this.socket.url.indexOf(this.pair) === -1) {
+            this.socket.$destroy()
+            return
+        } 
         this.socket.heartCheck.start()
         this.deepthData = data
         this.changeDepthNumber(data)
