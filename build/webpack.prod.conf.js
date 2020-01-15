@@ -9,8 +9,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+// const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default
 const HappyPack = require('happypack');
 const os = require('os');
@@ -67,38 +67,38 @@ const webpackConfig = merge(baseWebpackConfig, {
       "process.env": env
       
     }),
-    // new UglifyJsPlugin({
-    //   uglifyOptions: {
-    //     compress: {
-    //       warnings: false
-    //     }
-    //   },
-    //   sourceMap: config.build.productionSourceMap,
-    //   parallel: true
-    // }),
-    new ParallelUglifyPlugin({
-      cacheDir: '.cache/',
-      uglifyJS:{
-        output: {
-          beautify: false,
-          comments: false
-        }, 
+    new UglifyJsPlugin({
+      uglifyOptions: {
         compress: {
-          /* 是否在UglifyJS删除没有用到的代码时输出警告信息，默认为输出，可以设置为false关闭这些作用不大的警告 */
-          // warnings: false, 
-          /* 是否删除代码中所有的console语句，默认为不删除，开启后，会删除所有的console语句 */
-          drop_console: true, 
-          /* 是否内嵌虽然已经定义了，但是只用到一次的变量，比如将 var x = 1; y = x, 转换成 y = 5, 默认为不
-           转换，为了达到更好的压缩效果，可以设置为false */
-          collapse_vars: true, 
-          /* 是否提取出现了多次但是没有定义成变量去引用的静态值，比如将 x = 'xxx'; y = 'xxx'  转换成
-            var a = 'xxxx'; x = a; y = a; 默认为不转换，为了达到更好的压缩效果，可以设置为false */
-          reduce_vars: true
-        },  
-        warnings: false, 
-        sourceMap: config.build.productionSourceMap,
-      }
+          warnings: false
+        }
+      },
+      sourceMap: config.build.productionSourceMap,
+      parallel: true
     }),
+    // new ParallelUglifyPlugin({
+    //   cacheDir: '.cache/',
+    //   uglifyJS:{
+    //     output: {
+    //       beautify: false,
+    //       comments: false
+    //     }, 
+    //     compress: {
+    //       /* 是否在UglifyJS删除没有用到的代码时输出警告信息，默认为输出，可以设置为false关闭这些作用不大的警告 */
+    //       // warnings: false, 
+    //       /* 是否删除代码中所有的console语句，默认为不删除，开启后，会删除所有的console语句 */
+    //       drop_console: true, 
+    //       /* 是否内嵌虽然已经定义了，但是只用到一次的变量，比如将 var x = 1; y = x, 转换成 y = 5, 默认为不
+    //        转换，为了达到更好的压缩效果，可以设置为false */
+    //       collapse_vars: true, 
+    //       /* 是否提取出现了多次但是没有定义成变量去引用的静态值，比如将 x = 'xxx'; y = 'xxx'  转换成
+    //         var a = 'xxxx'; x = a; y = a; 默认为不转换，为了达到更好的压缩效果，可以设置为false */
+    //       reduce_vars: true
+    //     },  
+    //     warnings: false, 
+    //     sourceMap: config.build.productionSourceMap,
+    //   }
+    // }),
     // extract css into its own file
     new ExtractTextPlugin({
       filename: utils.assetsPath("css/[name].[contenthash].css"),
