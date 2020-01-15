@@ -1,7 +1,25 @@
 <template>
   <div class="profile-container">
     <div class="title-box">{{ $t('identity_authentication') }}<span>{{ $t('Verified') }}</span></div>
-    <div class="invinfo-box">
+    
+    <div
+      v-if="kycState === -1"
+      style="height:400px;"
+      flex="dir:top main:center cross:center">
+      <span>
+        <icon
+          name='error'
+          style="font-size: 48px;" />
+      </span>
+      <span
+        class="mt-25"
+        style="color: #888;">{{ $t('kyc_failure_tip') }}</span>
+      <v-btn
+        class="submit-btn mt-25"
+        @click="kycState=0"
+        :label="$t('kyc_retry')"/>
+    </div>
+    <div v-else class="invinfo-box">
       <div class="authen_top">
         <i class=""/>
         <p class="yy">
@@ -150,21 +168,14 @@ export default {
         ]
       },
       step: 1, //1：填写基本信息， 2：前往kyc2 或 前往币币
+      kycState: 0
     }
   },
-  async beforeRouteEnter (to, from, next) {
-    // await actions.updateSession()
-    // if (state.userInfo.lv) {
-    //   if (state.userInfo.lv > 1) {
-    //     console.log('goto:: step2')
-    //     next({name: 'KycStep2'})
-    //   }
-    // }
-    console.log('sdjfklajdslkfjlasdjflasjdfkljskdl')
+  async beforeRouteEnter (to, from, next) {  
     let res = await service.getKycInfo();
     if (!res.code && !!res.data) {
       kycInfo = res.data
-      if (res.data.lv >= 1) {
+      if (res.data.lv >= 1 && res.data.state !== -1) {
         console.log('goto:: step2')
         next({name: 'KycStep2'})
       }
@@ -215,10 +226,7 @@ export default {
       }
     },
   },
-  async created() {
-    // if(state.userInfo.lv === 1) {
-    //   this.step = 2
-    // }
+  async created() { 
     this.fetchRegion()
     let res = await service.getKycInfo();
     if (!res.code && !!res.data) {
@@ -233,7 +241,9 @@ export default {
         this.$router.replace({
           name: "KycStep3"
         });
-      }
+      } else if (res.data.lv > 0 && res.data.state === -1) {
+        this.kycState = -1
+      } 
       else if (res.data.lv = 1) {
         this.$router.replace({
           name: 'KycStep2',

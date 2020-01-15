@@ -2795,5 +2795,8 @@
     }
   },
   "no_account": "还没有账号?",
-  "UNIT_&":"%{currency}币本位"
+  "UNIT_&":"%{currency}币本位", 
+  "kyc_failure": "认证失败",
+  "kyc_failure_tip" : "您的KYC认证审核失败,请重新认证",
+  "kyc_retry": "重新认证"
 }

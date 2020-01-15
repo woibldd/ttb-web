@@ -9,7 +9,8 @@
         </div>
         <div class="inv_tl">
           <p>{{ $t('u_name') }}</p>
-          <span v-if="name">{{ name }}</span>
+          <span v-if="name===-1"><router-link :to="{name: 'Kyc'}">{{ $t("kyc_failure") }}</router-link></span>
+          <span v-else-if="name">{{ name }}</span>
           <span v-else><router-link :to="{name: 'Kyc'}">{{ $t("to_verify") }}</router-link> </span>
         </div>
         <div class="inv_tl">
@@ -71,7 +72,9 @@ export default {
       return ''
     },
     name () {
-      if (state.userInfo) {
+      if (state.userInfo && state.userInfo.state === -1) {
+        return state.userInfo.state
+      } else if (state.userInfo) {
         return state.userInfo.name
       }
       return ''

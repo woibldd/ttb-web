@@ -2789,5 +2789,8 @@
     }
   },
   "no_account": "아직 계정이 없어요?",
-  "UNIT_&":"%{currency}币本位"
+  "UNIT_&":"%{currency}币本位",
+  "kyc_failure": "인증에 실패했습니다",
+  "kyc_failure_tip" : "您的KYC认证审核失败,请重新认证",
+  "kyc_retry": "重新认证"
 }
