@@ -79,12 +79,13 @@ export default {
         console.log('pair is not defined')
         return
       }
+      const fetchId = this.pair
       this.socket = ws.create(`deal/${this.pair}`)
       this.socket.$on('open', () => {
         this.socket.heartCheck.start()
       }) 
       this.socket.$on('message', data => { 
-        if (!this.socket.url || this.socket.url.indexOf(this.pair) === -1) {
+        if (fetchId.indexOf(this.pair) === -1) {
             this.socket.$destroy()
             return
         } 

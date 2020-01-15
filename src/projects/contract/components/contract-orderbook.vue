@@ -444,8 +444,8 @@ export default {
       this.socket.$on('open', () => { 
         this.socket.heartCheck.start()
       })
-      this.socket.$on('message', (data) => { 
-        if (!this.socket.url || this.socket.url.indexOf(this.pair) === -1) {
+      this.socket.$on('message', (data) => {  
+        if (fetchId.indexOf(this.pair) === -1) { 
             this.socket.$destroy()
             return
         } 
