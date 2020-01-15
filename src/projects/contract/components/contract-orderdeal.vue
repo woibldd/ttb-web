@@ -87,13 +87,7 @@ export default {
       this.loading = true
       if (this.socket) {
         this.socket.$destroy()
-      }
-      // if (this.socketMarket) {
-      //   this.socketMarket.$destroy()
-      // }
-      // if (this.socketIndex) {
-      //   this.socketIndex.$destroy()
-      // }
+      } 
       this.openSocket().then(resp => {
         this.loading = false
       })

@@ -391,7 +391,6 @@ export default {
       if (!res.code) {
         this.assignData(res.data)
       }
-
       this.socket = ws.create(`orderbook/${this.pair}/${this.offset}/${this.accuracy}/20`)
       this.socket.$on('open', () => {
         this.socket.heartCheck.start()

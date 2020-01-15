@@ -73,7 +73,7 @@ create (channel) {
           self.serverTimeoutObj = setTimeout(function () { 
             if (!hub._isDestroyed) {
               hub.$emit('reopen')
-            } 
+            }
           }, self.timeout)
         }, this.timeout)
       }
