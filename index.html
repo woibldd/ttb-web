@@ -21,24 +21,24 @@
     </div>
   </div>
   <div id="app"></div>
-  <script src="./static/js/vendor.dll.js"></script>
-  <% if (htmlWebpackPlugin.options.NODE_ENV === 'production') { %>
+  <!-- <script src="./static/js/vendor.dll.js"></script> -->
+  <% if (htmlWebpackPlugin.options.NODE_ENV === "production") { %>
     <script  src="https://www.googletagmanager.com/gtag/js?id=<%= htmlWebpackPlugin.options.theme.googleAnalyticsId %>"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '<%= htmlWebpackPlugin.options.theme.googleAnalyticsId %>');  
-      gtag('title', '<%= htmlWebpackPlugin.options.theme.exchangeName %>');  
-      gtag('keywords', '<%= htmlWebpackPlugin.options.theme.keywords %>');  
-      gtag('description', '<%= htmlWebpackPlugin.options.theme.description %>');  
+      gtag("js", new Date());
+      gtag("config", "<%= htmlWebpackPlugin.options.theme.googleAnalyticsId %>");  
+      gtag("title", "<%= htmlWebpackPlugin.options.theme.exchangeName %>");  
+      gtag("keywords", "<%= htmlWebpackPlugin.options.theme.keywords %>");  
+      gtag("description", "<%= htmlWebpackPlugin.options.theme.description %>");  
     </script>
   <% } %>
   <!--Start of ixcustomer Zendesk Widget script-->
   <script>
     window.zESettings = {
       webWidget: {
-        position: { horizontal: 'right', vertical: 'bottom' }
+        position: { horizontal: "right", vertical: "bottom" }
       }
     };
   </script>
