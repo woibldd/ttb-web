@@ -1,4 +1,4 @@
-show_box
+
 <template>
   <div class="profile-container">
     <div class="title-box">
@@ -424,8 +424,7 @@ export default {
       this[type].loading = false;
       utils.alert(message);
     },
-    removeFile({ file }) {
-      console.log(file.name);
+    removeFile({ file }) { 
     },
     async getFaceToken() {
       let res = await service.getFaceToken({ client: 1 });
@@ -528,8 +527,15 @@ export default {
     next();
   },
   async created() {
-    await this.getKycInfo();
-    
+    let res = await this.getKycInfo() 
+    if (!res.code) {
+      if (res.data.state === -1) {
+        this.kycState = -1
+        next({
+          name: "KycStep1"
+        });
+      } 
+    }
     if (kycInfo.lv === 2) {
       console.log("goto:: step3");
       next({

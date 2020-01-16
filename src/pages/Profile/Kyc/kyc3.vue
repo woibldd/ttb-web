@@ -157,6 +157,12 @@ export default {
   async created () {
     let res = await service.getKycInfo()
     if (!res.code) {
+      if (res.data.state === -1) {
+      this.kycState = -1
+        next({
+          name: "KycStep1"
+        });
+      } 
       this.kycInfo = res.data
     }
   }
