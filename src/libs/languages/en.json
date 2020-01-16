@@ -2928,6 +2928,6 @@
   "UNIT_&":"%{currency}币本位",
   
   "kyc_failure": "Verification failed",
-  "kyc_failure_tip" : "您的KYC认证审核失败,请重新认证",
-  "kyc_retry": "重新认证"
+  "kyc_failure_tip" : "Your KYC verification failed, please reverify",
+  "kyc_retry": "Re-verification"
 }
