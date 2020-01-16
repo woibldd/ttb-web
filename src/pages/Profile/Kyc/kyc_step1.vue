@@ -236,13 +236,13 @@ export default {
         this.form.id_type = res.data.id_type || 1
         this.form.id_number = res.data.id_number || ""
         this.selectChange(this.form.regionId)
-      }
+      } else if (res.data.state === -1) {
+        this.kycState = -1
+      } 
       else if (kycInfo.lv === 1 && kycInfo.state === 1 && kycInfo.region !== 86) {
         this.$router.replace({
           name: "KycStep3"
         });
-      } else if (res.data.lv > 0 && res.data.state === -1) {
-        this.kycState = -1
       } 
       else if (res.data.lv = 1) {
         this.$router.replace({
