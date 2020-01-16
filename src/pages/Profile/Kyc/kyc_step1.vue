@@ -239,7 +239,7 @@ export default {
       } else if (res.data.state === -1) {
         this.kycState = -1
       } 
-      else if (res.data.lv > 0 && res.data.state === 2 && res.data.region !== 86) {
+      else if (res.data.lv === 1 && res.data.state === 1 && kycInfo.region !== 86) {
         this.$router.replace({
           name: "KycStep3"
         });
