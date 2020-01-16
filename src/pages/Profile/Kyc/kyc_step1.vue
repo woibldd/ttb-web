@@ -236,7 +236,8 @@ export default {
         this.form.id_type = res.data.id_type || 1
         this.form.id_number = res.data.id_number || ""
         this.selectChange(this.form.regionId)
-      } else if (res.data.state === -1) {
+      } 
+      if (res.data.state === -1) {
         this.kycState = -1
       } 
       else if (res.data.lv === 1 && res.data.state === 1 && kycInfo.region !== 86) {
