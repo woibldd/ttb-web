@@ -94,7 +94,10 @@ export default {
         this.loading = false
         this.$eh.$emit('deal:update', data)
       })
-      this.socket.$on('reopen', this.openSocket)
+      this.socket.$on('reopen', () => {
+        this.socket.$destroy()
+        this.openSocket()
+      })
       return this.fetchDealList()
     }
 

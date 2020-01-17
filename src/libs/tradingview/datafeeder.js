@@ -248,6 +248,7 @@ export default {
       onRealtimeCallback(toTick(data))
     })
     utils.$tvSocket.$on('reopen', () => {
+        utils.$tvSocket.$destroy()
       this.subscribeBars(symbolInfo, resolution, onRealtimeCallback)
     })
   },

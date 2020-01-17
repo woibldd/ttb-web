@@ -453,7 +453,10 @@ export default {
         this.deepthData = data
         this.changeDepthNumber(data)
       })
-      this.socket.$on('reopen', this.sub)
+      this.socket.$on('reopen', () => {
+          this.socket.$destroy()
+          this.sub()
+        })
     },
     assignData (data) {
       // data = require('./book-depth/test-data.js').default
