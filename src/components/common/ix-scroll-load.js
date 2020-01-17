@@ -24,7 +24,7 @@ Vue.directive('scroll-load', function (el, binding) {
     scrollTop = el.scrollTop
     // console.log(wrapperHeight, scrollTop, innerHeight)
     if (wrapperHeight + scrollTop >= innerHeight - DISTANCE) {
-      console.log('到底了')
+      // console.log('到底了')
       callback && callback()
     }
   }

@@ -174,8 +174,7 @@ const processValue = {
         if (row.type === 4 || row.type === 6) {
           value = '--'
         } else if (!!pairlist && !!pairlist[row.symbol]) {
-          const price_scales = pairlist[row.symbol].price_scale || 4
-          console.log(price_scales, { test: pairlist[row.symbol] })
+          const price_scales = pairlist[row.symbol].price_scale || 4 
           value = this.$big(row[key]).round(price_scales, down).toFixed(price_scales).toString()
         } else {
           value = this.$big(row[key]).round(4, down).toString().toString()

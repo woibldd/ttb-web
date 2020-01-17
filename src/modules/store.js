@@ -198,8 +198,7 @@ export const actions = {
       return utils.getStorageValue('X-TOKEN') || undefined
     }
   },
-  async updateSession () {
-    console.log('updateSession')
+  async updateSession () { 
     let res = await service.getUserInfo()
     if (res.code) {
       // 重试一次

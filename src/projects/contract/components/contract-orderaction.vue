@@ -956,14 +956,9 @@ export default {
       return this.state.ct.pair;
     },
     currentHolding() {
-      let holdingList = this.state.ct.holdingList;
-      let obj = {};
-      holdingList.map(h => {
-        if (h.currency === this.state.ct.symbol) {
-          obj = h;
-        }
-      });
-      return obj;
+      let holdingList = this.state.ct.holdingList
+      let obj = holdingList.find(h => h.currency === this.state.ct.symbol)
+      return obj || {}
     },
     unit() {
       // if (this.pair === "FUTURE_BTCUSD") {
@@ -1143,8 +1138,8 @@ export default {
         amount: this.amount,
         price: this.price,
         method: this.$t("contract_action_button_up_r"),
-        raw: this.currentHolding.amount || 0,
-        now: Number(this.amount) + Number(this.currentHolding.amount || 0),
+        raw: this.currentHolding.holding || 0,
+        now: Number(this.amount) + Number(this.currentHolding.holding || 0),
         boom: this.liqBuyPrice || "--"
       });
     },
@@ -1153,8 +1148,8 @@ export default {
         amount: this.amount | "?",
         price: this.price || "?",
         method: this.$t("contract_action_button_down_r"),
-        raw: this.currentHolding.amount || 0,
-        now: Number(this.amount) - Number(this.currentHolding.amount || 0),
+        raw: this.currentHolding.holding || 0,
+        now: Number(this.amount) - Number(this.currentHolding.holding || 0),
         boom: this.liqSellPrice || "--"
       });
     },
@@ -1424,7 +1419,7 @@ export default {
      */
     currentHodingAmount() {
       if (!isEmpty(this.currentHolding)) {
-        return this.$big(this.currentHolding.amount || "0")
+        return this.$big(this.currentHolding.holding || "0")
           .plus(
             this.$big(this.amount || "0").mul(
               this.exchangeDir === "BUY" ? 1 : -1
@@ -1692,13 +1687,9 @@ export default {
         // 纠正输入
         utils.alert(`最大${this.maxTimes}倍杠杆`);
         item = this.maxTimes;
-      } 
+      }  
 
-      // if(this.getCookie('NeverShowDialog') == '0'){
-      //   this.dialogModalClosed()
-      // }
-
-      if (this.currentHolding.amount != 0) {
+      if (+this.currentHolding.holding !== 0 || this.currentDel.length > 0) {
         let params = {
           currency: this.pairInfo.symbol,
           leverage: item
@@ -1749,7 +1740,7 @@ export default {
         this.neverShowOneDay = false;
       }
 
-      if (this.currentHolding.amount != 0) {
+      if (+this.currentHolding.holding !== 0 || this.currentDel.length > 0) { 
         const item = this.selectedTime;
         // 确定
         let params = {
@@ -1809,8 +1800,7 @@ export default {
       this.holdingLever.sliderLeverTime = value;
       this.userLeverTime = value;
     },
-    changeHoldingLeverTimes(item) {
-      //return this.mmModalLeverChange(item);
+    changeHoldingLeverTimes(item) { 
       return this.mmChangeConfirm(item);
     },
     // 单机编辑
@@ -1897,13 +1887,13 @@ export default {
         if (showWarn) {
           let confirmbtn =
             type > 4 ? this.$t("stop_win_apply") : this.$t("stop_loss_apply");
-          const hold = this.currentHolding.amount;
+          const hold = this.currentHolding.holding;
           const willhold =
             side === "BUY"
-              ? this.currentHolding.amount * 1 + $amount * 1
-              : this.currentHolding.amount * 1 - $amount * 1;
+              ? this.currentHolding.holding * 1 + $amount * 1
+              : this.currentHolding.holding * 1 - $amount * 1;
           const content = `${this.$t("stop_win_loss_warn_content", {
-            hold: this.currentHolding.amount,
+            hold: this.currentHolding.holding,
             willhold
           })}`;
           //${this.$t('warn_confirm_text')}

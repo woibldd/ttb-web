@@ -302,8 +302,7 @@ export default {
                 break
               }
               newOrderList.push(res.data.data[i])
-            }
-            console.log(newOrderList)
+            } 
             $this.toast(newOrderList)
             newOrder = res.data.data
             $this.$eh.$emit('protrade:order:refresh', 1)

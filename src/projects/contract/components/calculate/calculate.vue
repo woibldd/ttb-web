@@ -353,8 +353,7 @@ export default {
       return ''
     },
     holding () {
-      if (this.state.ct.holding) {
-        // console.log('99999999999999999999999999')
+      if (this.state.ct.holding) { 
         return this.state.ct.holding
       }
     },
@@ -406,7 +405,7 @@ export default {
     }
   },
   created () {
-    console.log('calculate craeted')
+    // console.log('calculate craeted')
   }
 }
 </script>
