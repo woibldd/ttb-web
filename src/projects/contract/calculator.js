@@ -206,6 +206,7 @@ export default {
     }
     // let im = this.getCostValue({lever, im: 0.01, value, r}).margin  
     let im = Big(pairInfo.im).plus(count.mul(pairInfo.mm))
+    lever = +lever === 0 ? pairInfo.max_leverage : lever
     im = value.div(lever).times(Big(im).plus(1)) 
     let mm = Big(value).mul(0.005) // this.getCostValue({lever, im: 0.005, value, r}).margin
     let avia = holding.available_balance
@@ -218,9 +219,13 @@ export default {
       // 空仓Lp=Hp*VoL/[Vol-(IM-MM)*Hp*（1-R）]
       let result = Big(hp).mul(vol)
       let imDiff = Big(im - mm)
+      // 预收开闭仓手续费
+      let fee = im.times(r).times(2)
+      // 成本=起始保证金+预收开闭仓手续费
+      let cost = im.plus(fee)
       if (isCross) {
-        // 全仓--空仓Lp=Hp*VoL/[Vol-(可用余额+IM-MM)*Hp*（1-R）]
-        imDiff = imDiff.plus(avia)
+        // 全仓--多仓Lp=Hp*VoL/[Vol+(可用余额+IM-MM)*Hp*（1-R）]
+        imDiff = imDiff.plus(Big(avia).minus(cost))
       }
       result = result.div(Big(vol).minus(imDiff.mul(hp).mul(1 - Number(r || 0))))
       if (result.lt(0)) {
@@ -232,9 +237,13 @@ export default {
       // 多仓Lp=Hp*VoL/[Vol+(IM-MM)*Hp*（1-R）]
       let result = Big(hp).mul(vol) // .mul(1 + Number(r || 0))
       let imDiff = Big(im - mm)
+      // 预收开闭仓手续费
+      let fee = im.times(r).times(2)
+      // 成本=起始保证金+预收开闭仓手续费
+      let cost = im.plus(fee)
       if (isCross) {
         // 全仓--多仓Lp=Hp*VoL/[Vol+(可用余额+IM-MM)*Hp*（1-R）]
-        imDiff = imDiff.plus(avia)
+        imDiff = imDiff.plus(Big(avia).minus(cost))
       }
       result = result.div(Big(vol).plus(imDiff.mul(hp).mul(1 - Number(r || 0))))
       if (result.lt(0)) {

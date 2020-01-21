@@ -1374,7 +1374,7 @@ export default {
         .toString();
     },
     liqBuyPrice() {
-      const lever = this.userLeverTime == 0 ? 100 : this.userLeverTime;
+      const lever = this.userLeverTime == 0 ? this.pairInfo.max_leverage : this.userLeverTime;
       const price = this.price || "0";
       const amount = this.amount;
       if (price && amount) {
@@ -1394,7 +1394,7 @@ export default {
       return "0";
     },
     liqSellPrice() {
-      const lever = this.userLeverTime == 0 ? 100 : this.userLeverTime;
+      const lever = this.userLeverTime == 0 ? this.pairInfo.max_leverage : this.userLeverTime;
       const price = this.price || "0";
       const amount = this.amount;
 
