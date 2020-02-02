@@ -112,7 +112,6 @@
             />
         </div>
       </div>
-
       <div
         v-if="active === 0"
         class="tips"
@@ -126,7 +125,7 @@
       <div class="table-con">
         <template v-if="active === 0">
           <div
-            v-for="(item, index) in data"
+            v-for="(item, index) in datalist"
             :key="index"
             class="table-list">
             <div class="top">
@@ -385,13 +384,13 @@
         <template v-else>
           <step-table
             :grid-config="tableHeader"
-            :show-grid-data="data"
+            :show-grid-data="datalist"
             :loading="loading" />
         </template>
       </div>
     </div>
     <div
-      v-if="data.length > 0"
+      v-if="datalist.length > 0"
       class="page">
       <el-pagination
         :total="total"
@@ -572,8 +571,8 @@ export default {
       },
       selectPayment: {},
       qrsrc: '',
-      showQRcode: false
-
+      showQRcode: false,
+      datalist: [] 
     }
   },
   // computed: {
@@ -673,9 +672,9 @@ export default {
     iconTab(index) {
       this.iconActive = index
       if (index === 0) {
-        return this.data.sort(this.compareDown('create_time'))
+        return this.datalist.sort(this.compareDown('create_time'))
       } else {
-        return this.data.sort(this.compareUp('create_time'))
+        return this.datalist.sort(this.compareUp('create_time'))
       }
     },
     changePayType(e) {
@@ -686,7 +685,7 @@ export default {
       this.showQRcode = true
     },
     orderSwtich(index) {
-      if (this.data.length > 0) {
+      if (this.datalist.length > 0) {
         this.orderActive = index
         const orderName =
           index === 0 ? this.$t('otc_seiitm_15') : index === 1 ? this.$t('otc_tab_lisetr3') : this.$t('otc_tab_lisetr4')
@@ -902,7 +901,7 @@ export default {
       }
       that.loading = true
       that.active = index
-      this.data = []
+      this.datalist = []
       // 清除定时器
       clearInterval(this.timer)
       setTimeout(() => {
@@ -929,7 +928,7 @@ export default {
         case 0:
           const rec = await service.getUnDonefills(that.params)
            if (!rec.code) {
-            this.data = rec.data.data
+            this.datalist = rec.data.data
             this.setOrderInfo(rec)
           }
           //支付方式默认选择银行卡
@@ -956,21 +955,21 @@ export default {
         case 1:
           const rer = await service.getDonefills(that.params1)
           if (!rer.code) {
-            that.data = rer.data.data
+            that.datalist = rer.data.data
             that.total = rer.data.total
           }
           break
         case 2:
           const res = await service.getOtcRemovefills(that.params1)
           if (!res.code) {
-            that.data = res.data.data
+            that.datalist = res.data.data
             that.total = res.data.total
           }
           break
         default:
           const rew = await service.getOtcActivefills(that.params)
           if (!rew.code) {
-            that.data = rew.data.data
+            that.datalist = rew.data.data
             that.total = rew.data.total
           }
       }
@@ -979,21 +978,21 @@ export default {
       if (!rec.code) {
         if (this.total != rec.data.total &&  rec.data.total > 0) {
           //当订单数量发送变化的时候，需要重新加载订单数据，但是需要保留用户已经选择的支付方式
-          this.data.map(rowa => {
+          this.datalist.map(rowa => {
             rec.data.data.map(rowb => {
               if(rowa.trans_id === rowb.trans_id) {
                 Vue.set(rowb, 'selectPayment', rowa.selectPayment)
               }
             })
           })
-          this.data = rec.data.data
+          this.datalist = rec.data.data
         } else if (!this.total) {
-          this.data = rec.data.data
+          this.datalist = rec.data.data
         }
         this.total = rec.data.total
         const noCount = []
         const bankData = []
-        this.data.forEach((item) => {
+        this.datalist.forEach((item) => {
           //state-1-等待对方付款 2-等待放币 3-已完成 4-买家取消 5-卖家取消 6买家超时取消 7卖家超时放币
           if (item.state === 1) {
             Vue.set(item, 'time', item.create_time + 15 * 60 * 1000)
