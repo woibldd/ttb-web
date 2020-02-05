@@ -2722,6 +2722,6 @@
   "kyc_failure": "認證失敗",
   "kyc_failure_tip" : "您的KYC認證稽核失敗，請重新認證",
   "kyc_retry": "重新認證",
-  "unit_account": "币本位账户"
+  "unit_account": "幣本位合約賬戶"
 
 }

@@ -37,12 +37,7 @@
         <span>{{ $t('币本位合约资产估值') }}</span>
         <h1>
           <icon :name="unit.name+'-unit'" /> {{ total | fixed(unit.scale) }}</h1>
-      </div>
-      <!-- <div class="bill">
-        <router-link
-          :to="'/myorder-new/pairs'"
-          class="my-fund-operate">{{ $t('fund_trading_bill') }}</router-link>
-      </div> -->
+      </div> 
     </div>
     <div class="my-fund-content">
       <!--表格-->
@@ -60,48 +55,48 @@
             label="资产净值"
           >
             <template slot-scope="scope">
-              <div class="balance">{{ parsetNumber(scope.row.available) + '' + scope.row.currency }}</div>
-              <div class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.available)+ 'USD' }}</div>
+              <div class="balance">{{ parsetNumber(scope.row.available) + ' ' + scope.row.currency }}</div>
+              <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.available)+ ' USD' }}</div>
             </template>
           </el-table-column>
           <el-table-column
             prop="available_balance"
             label="余额">
             <template slot-scope="scope">
-              <div class="balance">{{ parsetNumber(scope.row.available_balance) + '' + scope.row.currency }}</div>
-              <div class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.available_balance) + 'USD' }}</div>
+              <div class="balance">{{ parsetNumber(scope.row.available_balance) + ' ' + scope.row.currency }}</div>
+              <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.available_balance) + ' USD' }}</div>
             </template>
           </el-table-column>
           <el-table-column
             prop="unrealized"
             label="未结盈亏">
             <template slot-scope="scope">
-              <div class="balance">{{ parsetNumber(scope.row.unrealized) + '' + scope.row.currency }}</div>
-              <div class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.unrealized) + 'USD' }}</div>
+              <div class="balance">{{ parsetNumber(scope.row.unrealized) + ' ' + scope.row.currency }}</div>
+              <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.unrealized) + ' USD' }}</div>
             </template>
           </el-table-column>
           <el-table-column
             prop="margin_user"
             label="可用保证金">
             <template slot-scope="scope">
-              <div class="balance">{{ parsetNumber(scope.row.margin_user) + '' + scope.row.currency }}</div>
-              <div class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.margin_user) + 'USD' }}</div>
+              <div class="balance">{{ parsetNumber(scope.row.margin_user) + ' ' + scope.row.currency }}</div>
+              <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.margin_user) + ' USD' }}</div>
             </template>
           </el-table-column>
           <el-table-column
             prop="margin_position"
             label="仓位保证金">
             <template slot-scope="scope">
-              <div class="balance">{{ parsetNumber(scope.row.margin_position) + '' + scope.row.currency }}</div>
-              <div class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.margin_position) + 'USD' }}</div>
+              <div class="balance">{{ parsetNumber(scope.row.margin_position) + ' ' + scope.row.currency }}</div>
+              <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.margin_position) + ' USD' }}</div>
             </template>
           </el-table-column>
           <el-table-column
             prop="margin_delegation"
             label="委托保证金">
             <template slot-scope="scope">
-              <div class="balance">{{ parsetNumber(scope.row.margin_delegation) + '' + scope.row.currency }}</div>
-              <div class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.margin_delegation) + 'USD' }}</div>
+              <div class="balance">{{ parsetNumber(scope.row.margin_delegation) + ' ' + scope.row.currency }}</div>
+              <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.margin_delegation) + ' USD' }}</div>
             </template>
           </el-table-column>
           <el-table-column
@@ -109,7 +104,7 @@
             label="操作"
             width="90">
             <template slot-scope="scope">
-              <a href="javascript:;" @click="linkHandle(scope.row, 0)" class="link-btn">资金划转</a>
+              <a  v-if="scope.row.currency!=='METH'" href="javascript:;" @click="linkHandle(scope.row, 0)" class="link-btn">资金划转</a>
               <a :href="`/unit.html#/?product=${scope.row.currency}USD`" class="link-btn">交易</a>
             </template>
           </el-table-column>
@@ -149,7 +144,8 @@ export default {
       const obj = {
         '/fund/my/contractUnit': this.$t('account_balance'),
         '/fund/my/contractUnit/history': this.$t('transaction_record'),
-        '/fund/my/contractUnit/assets-history': this.$t('capital_record')
+        '/fund/my/contractUnit/assets-history': this.$t('capital_record'),
+        '/fund/my/contractUnit/index': this.$t('unit_account')
       }
       return obj[this.$route.path]
     }
@@ -176,15 +172,22 @@ export default {
         if (res.code === 0) {
           this.tableData = res.data
           if (this.tableData) {
-            if (this.tableData.length > 1) {
-              this.tableData.reduce((n, m) => {
-                this.available = this.$big(Number(n.available)).plus(Number(m.available)).round(2, 0).toFixed(2).toString()
-                this.total = this.$big(Number(this.available)).times(Number(this.btcRates.CNY)).round(2, 0).toFixed(2).toString()
-              })
-            } else {
-              this.available = this.$big(Number(this.tableData[0].available)).round(2, 0).toFixed(2).toString()
-              this.total = this.$big(Number(this.available)).times(Number(this.btcRates.CNY)).round(2, 0).toFixed(2).toString()
-            }
+            // if (this.tableData.length > 1) {
+            //   this.tableData.reduce((n, m) => {
+            //     this.available = this.$big(n.available).plus(m.available).round(2, 0).toFixed(2).toString()
+            //     this.total = this.$big(this.available).times(this.btcRates.CNY).round(2, 0).toFixed(2).toString()
+            //   })} else {
+            //   this.available = this.$big(this.tableData[0].available).round(2, 0).toFixed(2).toString()
+            //   this.total = this.$big(this.available).times(this.btcRates.CNY).round(2, 0).toFixed(2).toString()
+            // }
+            
+            this.tableData.map(item => {
+              if (item.currency !== 'METH') {
+                this.available = this.$big(this.available).plus(item.available) 
+              }
+            })
+            this.total = this.$big(this.available).times(this.btcRates.CNY).round(2, 0).toFixed(2)
+            
           }
         }
       })
