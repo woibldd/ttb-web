@@ -142,6 +142,7 @@
         contractBalance: null,
         walletBalance: null,
         otcBalance: null,
+        unitBalance: null,
         tableData: [],
         accountTypes: [{
           value: 1,
@@ -167,6 +168,7 @@
           .plus(this.contractAvai || 0)
           .plus(this.otcAvai || 0)
           .plus(this.walletAvai || 0)
+          .plus(this.unitAvai || 0)
           .toFixed(8)
           .toString();
       },
@@ -185,10 +187,12 @@
           case 4:
             amount = this.otcAvai
             break
+          case 5: 
+            amount = this.unitAvai
+          break
           default:
             amount = 0
-        }
-        console.log(amount)
+        } 
         return amount
       },
       toAmount() {
@@ -205,6 +209,9 @@
             break
           case 4:
             amount = this.otcAvai
+            break
+          case 5: 
+            amount = this.unitAvai
             break
           default:
             amount = 0
@@ -237,6 +244,13 @@
           return 0;
         } else {
           return new Big(this.walletBalance.available || 0).round(8, 0).toFixed(8);
+        }
+      },
+      unitAvai () { 
+        if (!this.unitBalance) {
+          return 0
+        } else {
+          return new Big(this.unitBalance.available || 0).round(8, 0).toFixed(8)
         }
       }
     },
@@ -297,11 +311,12 @@
 
       },
       async getBalance(){
-        let [tradingBalance, contractBalance, otcBalance, walletBalance] = await Promise.all([
+        let [tradingBalance, contractBalance, otcBalance, walletBalance, unitBalance] = await Promise.all([
           service.getBalanceByPair(this.selectCoin),
           service.getContractBalanceByPair({ symbol:this.selectCoin}),
           service.getOtcBalanceByPair({symbol: this.selectCoin}),
-          service.getwalletBalanceByPair({symbol: this.selectCoin})
+          service.getwalletBalanceByPair({symbol: this.selectCoin}),
+          service.getUnitBalanceByPair({symbol: this.selectCoin})
         ]);
 
         //console.log({tradingBalance, contractBalance, otcBalance})
@@ -316,6 +331,10 @@
         }
         if (walletBalance) {
           this.walletBalance = walletBalance.data
+        }
+        
+        if (unitBalance) {
+          this.unitBalance = unitBalance.data
         }
         //this.updateAvailable()
       },
@@ -346,6 +365,7 @@
                 2 : this.$t("trading_account"),
                 3 : this.$t("contract_account"),
                 4 : this.$t("otc_account"),
+                5 : this.$t('unit_account')
               }
 
               this.tableData[i].from_balance = balanceList[this.tableData[i].from_balance]

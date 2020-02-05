@@ -3,9 +3,13 @@
     <div class="ix-pannel">
       <div class="ix-header relative">
         {{ $t('contract_block_orderaction') }}
-        <a 
+        <!-- <a 
           class="primary-text pull-right btn"
           @click="transfer"
+        > -->
+        <a
+          class="primary-text pull-right btn"
+          @click="$router.push({path:'/fund/transfer', query:{key:'2.funds-transfer'}})"
         >
           <icon name="exchange" />
           {{ $t('account_transfer_come_on') }}

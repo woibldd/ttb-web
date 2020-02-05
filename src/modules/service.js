@@ -849,7 +849,31 @@ const service = {
     }
     return null
   },
-
+  async getUnitBalanceByPair (symbol) { 
+    if (!symbol || !symbol.symbol) {
+      symbol = {
+        symbol: 'ETHUSD'
+      }
+    } else {
+      symbol.symbol = symbol.symbol + 'USD'
+    }
+    let result = await service.getContractUnitBalanceList() 
+    if (!result.code) {
+      console.log({data: result.data})
+      let list = result.data
+      let balance = list ? list.filter(l => symbol.symbol === l.name)[0] || {} : {
+        available: '0',
+        holding: '0',
+        available_balance: '0',
+        leverage: 100
+      }
+      return {
+        code: 0,
+        data: balance
+      }
+    }
+    return null
+  },
   getUnitSymList () {
     return getCache('unitPairList', () => request('unit/symbol/list').then(res => {
       if (res && res.data) {
