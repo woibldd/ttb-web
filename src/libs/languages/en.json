@@ -2925,9 +2925,10 @@
     }
   },
   "no_account": "No Account yet?",
-  "UNIT_&":"%{currency}币本位",
   
   "kyc_failure": "Verification failed",
   "kyc_failure_tip" : "Your KYC verification failed, please reverify",
-  "kyc_retry": "Re-verification"
+  "kyc_retry": "Re-verification",
+  "UNIT_&":"%{currency}币本位",
+  "unit_account": "币本位账户"
 }

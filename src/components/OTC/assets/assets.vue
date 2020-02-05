@@ -163,7 +163,7 @@ export default {
     },
     kyc_bound() {
       // kyc > 0 就可以提币
-      return this.verifiedInfo && this.verifiedInfo.kyc_level > 0
+      return this.verifiedInfo && this.verifiedInfo.kyc_level === 2
     }
   },
   watch: {

@@ -444,7 +444,7 @@ export default {
       const price = isMarket ? '最优' : this.input || this.markData[item.currency]
       const amount = Math.abs(item.holding)
       const currency = item.currency
-      const isOk = await this.confirm(`${side}${this.$t('contract.positions.contract_close_tips1', {price, amount, currency})}<br>${this.$t('contract.positions.contract_close_tips2')}`)
+      const isOk = await this.confirm(`${side}${this.$t('contract_close_tips1', {price, amount, currency})}<br>${this.$t('contract_close_tips2')}`)
 
       // const isOk = await this.confirm(`<span class="text-primary">卖出</span>在${isMarket ? '最优' : this.input || this.markData[item.currency]}价格${item.holding}张${item.currency}合约在执行时，将平掉你的整个仓位`, isMarket ? '市价平仓' : '限价平仓')
       if (!isOk) {

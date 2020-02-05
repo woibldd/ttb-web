@@ -2792,5 +2792,6 @@
   "UNIT_&":"%{currency}币本位",
   "kyc_failure": "인증에 실패했습니다",
   "kyc_failure_tip" : "당신의KYC인증실패,인증을 다시 해주세요",
-  "kyc_retry": "다시 인증"
+  "kyc_retry": "다시 인증",
+  "unit_account": "币本位账户"
 }
