@@ -16,6 +16,8 @@ import CountUp from 'countup/dist/countUp.min'
 import { bigRound } from '@/utils/handleNum'
 import { debounce, parseTime, timestampToDate } from '@/utils'
 import { rangeArr } from '@/const'
+
+import config from '@/libs/config'
 HighMap(Highcharts)
 Annotations(Highcharts)
 export default {
@@ -45,7 +47,9 @@ export default {
   methods: {
     startWebSocket(){
       this.isLoading = true
-      this.openWebSocket('wss://wss.ixex.io/v1', res => {
+
+      this.openWebSocket( config.wssUrl, res => {
+      // this.openWebSocket('wss://wss.ixex.io/v1', res => {
       if (res.spotIndexDTOList) {
           if (!res.spotIndexDTOList.length) return
           const data = res.spotIndexDTOList.map((dataString, index) => {
