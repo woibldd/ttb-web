@@ -475,9 +475,15 @@ export default {
       const { user_id, future_close_id, name } = item
       this.loadingHouse = true
       cancelOrder({ user_id, order_id: future_close_id, name }).then(res => {
-        this.$emit('change')
-        this.loadingHouse = false
-        this.$message.success(this.$t('handleSuccess'))
+       // this.$emit('change')
+        // this.$message.success(this.$t('handleSuccess'))
+        this.loadingHouse = false 
+        if (!res.code) {
+          this.$emit('change')
+          this.$message.success(this.$t('handleSuccess'))
+        } else {
+          this.$message.error(res.message)
+        }
       })
     },
     verifyPopoverBtn (item) {

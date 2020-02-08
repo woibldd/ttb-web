@@ -170,17 +170,8 @@ export default {
       this.total = 0
       service.getContractUnitBalanceList({}).then((res) => {
         if (res.code === 0) {
-          this.tableData = res.data
-          if (this.tableData) {
-            // if (this.tableData.length > 1) {
-            //   this.tableData.reduce((n, m) => {
-            //     this.available = this.$big(n.available).plus(m.available).round(2, 0).toFixed(2).toString()
-            //     this.total = this.$big(this.available).times(this.btcRates.CNY).round(2, 0).toFixed(2).toString()
-            //   })} else {
-            //   this.available = this.$big(this.tableData[0].available).round(2, 0).toFixed(2).toString()
-            //   this.total = this.$big(this.available).times(this.btcRates.CNY).round(2, 0).toFixed(2).toString()
-            // }
-            
+          this.tableData = res.data.filter(item => item.currency !== 'METH')
+          if (this.tableData) { 
             this.tableData.map(item => {
               if (item.currency !== 'METH') {
                 this.available = this.$big(this.available).plus(item.available) 
