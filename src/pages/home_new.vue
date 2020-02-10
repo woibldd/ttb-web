@@ -170,7 +170,7 @@
           </div>
         </div>
 
-        <div class="corp-row row-20">
+        <div class="corp-row row-60 mb-60">
           <div
             class="corp-title">
             {{ $t('footer_copr') }}
@@ -201,6 +201,62 @@
                 class="logo hx"
                 src="~@/assets/copr-logo-pdkj.png" >
             </span>
+          </div>
+        </div>
+        <div class="corp-row row-20">
+          <div
+            class="corp-title">
+            {{ $t('footer_link') }}
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="https://coincodex.com/exchange/ixx/"
+              target="_blank">
+              <img
+                class="logo dvp"
+                src="~@/assets/home/copr-logo-coincodex.png" >
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="https://coinmarketcap.com/exchanges/ixx-exchange/"
+              target="_blank">
+              <img
+                class="logo hx"
+                src="~@/assets/home/copr-logo-CMC.png" >
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="https://www.mytokencap.com/exchange/ixx.com"
+              target="_blank">
+              <img
+                class="logo hx"
+                src="~@/assets/home/copr-logo-mytoken.png" >
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="https://www.sosolx.com/exchange/IXX/303.html"
+              target="_blank">
+              <img
+                class="logo hx"
+                src="~@/assets/home/copr-logo-SOSOLX.png" >
+            </a>
+          </div>
+          <div class="corp-logo">
+            <a
+              class="link"
+              href="https://planemo.io"
+              target="_blank">
+              <img
+                class="logo hx"
+                src="~@/assets/home/copr-logo-pla.png" >
+            </a>
           </div>
         </div>
       </div>
