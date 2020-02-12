@@ -2794,5 +2794,6 @@
   "kyc_failure_tip" : "당신의KYC인증실패,인증을 다시 해주세요",
   "kyc_retry": "다시 인증",
   "unit_account": "코인 베이스 계약 계좌",
-  "footer_link": "友情链接"
+  "footer_link": "링크",
+  "unit_contract": "코인 베이스 계약"
 }

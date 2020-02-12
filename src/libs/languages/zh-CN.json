@@ -2800,5 +2800,6 @@
   "kyc_failure_tip" : "您的KYC认证审核失败,请重新认证",
   "kyc_retry": "重新认证",
   "unit_account": "币本位合约账户",
-  "footer_link": "友情链接"
+  "footer_link": "友情链接",
+  "unit_contract": "币本位合约"
 }

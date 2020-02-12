@@ -920,7 +920,7 @@
   "lever": "leverage",
   "lever_account": "leverage account",
   "lever_manage": "leverage management",
-  "trading_account": "Trading Account",
+  "trading_account": "Exchange Account",
   "trading_account_name": "leverage account name",
   "lever_has_risk_rate": "rate risk",
   "lever_borrow": "loan",
@@ -1278,7 +1278,7 @@
   "warehouse_margin": "Position Margin",
   "entrust_margin": "Order Margin",
   "margin_balance": "guarantee balance",
-  "account_exchange": "Transfer Of Funds",
+  "account_exchange": "Transfer",
   "account_transfer_come_on": "Transfer",
   "wallet_balance": "wallet balance",
   "unrealized_profit_and_loss": "Unrealized P&L",
@@ -2204,7 +2204,7 @@
   "otc_otutcol_9": "copied",
   "otc_otutcol_10": "Failed to copy",
   "otc_otutcol_11": "IXX Total Asset Valuation",
-  "otc_otutcol_12": "Trading Account",
+  "otc_otutcol_12": "Exchange Account",
   "otc_otutcol_13": "Estimated",
   "otc_otutcol_19": "Are you sure you want to appeal?",
   "otc_seller_nameacer": "Seller",
@@ -2931,5 +2931,6 @@
   "kyc_retry": "Re-verification",
   "UNIT_&":"%{currency} Currency Standard Contract",
   "unit_account": "Currency Standard Contract Account",
-  "footer_link": "友情链接"
+  "footer_link": "Link",
+  "unit_contract": "Currency Standard Contract"
 }

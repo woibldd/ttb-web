@@ -1063,7 +1063,7 @@ export default {
   "lever": "Leverage",
   "lever_account": "leverage account",
   "lever_manage": "leverage management",
-  "trading_account": "Trading Account",
+  "trading_account": "Exchange Account",
   "trading_account_name": "leverage account name",
   "lever_has_risk_rate": "rate risk",
   "lever_borrow": "loan",
@@ -1284,7 +1284,7 @@ export default {
   "warehouse_margin": "Position Margin",
   "entrust_margin": "Order Margin",
   "margin_balance": "guarantee balance",
-  "account_exchange": "Transfer Of Funds",
+  "account_exchange": "Transfer",
   "account_transfer_come_on": "draw in/out",
   "wallet_balance": "wallet balance",
   "unrealized_profit_and_loss": "Unrealized P&L",
@@ -2228,7 +2228,7 @@ export default {
   "otc_otutcol_9": "copied",
   "otc_otutcol_10": "Failed to copy",
   "otc_otutcol_11": "IX Total Asset Valuation",
-  "otc_otutcol_12": "Trading Account",
+  "otc_otutcol_12": "Exchange Account",
   "otc_otutcol_13": "Valuation of fiat assets",
   "otc_otutcol_19": "Are you sure you want to appeal?",
   "otc_completed_infadwo": " Number of transactions / Completion rate",
@@ -2726,7 +2726,7 @@ export default {
           'capital_manage': 'Asset Management',
           'deposit': 'Deposit',
           'withdraw': 'Withdraw',
-          'account_exchange': 'Transfer Of Funds'
+          'account_exchange': 'Transfer'
         }
       },
       personal_center: {

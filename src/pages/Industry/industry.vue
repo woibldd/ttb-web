@@ -1,7 +1,7 @@
 <template>
   <div class="industry">
     <div class="industry-banner"></div>
-    <div class="con">
+    <div class="con clearfix">
       <div class="bread">
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item>当前位置</el-breadcrumb-item>
@@ -53,9 +53,10 @@
         </el-pagination>
       </div>
       <div class="quotation">
-        <div class="inner">
+        <div class="inner abc fixtool"
+          ref="fixtool">
           <div class="title">
-            <h1>最新行情</h1>
+            <h1>最新行情 </h1>
             <span @click="moreHandle">更多 ></span>
           </div>
           <market />
@@ -83,7 +84,9 @@ export default {
         size: 20,
         userId: ''
       },
-      currentPage: 1
+      currentPage: 1,
+      offsetTop: 0,
+      whether: false
     }
   },
   computed: {
@@ -95,7 +98,13 @@ export default {
         id = ''
       }
       return id
-    }
+    },
+    toFixed() {
+      if (document.documentElement.scrollTop > 400) {
+        return true
+      }
+      return false
+    } 
   },
   methods: {
     moreHandle() {
@@ -166,10 +175,24 @@ export default {
           window.localStorage.setItem('activityData', [])
         }
       })
-    }
+    },
+    handleScroll() {
+      var scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      // console.log(scrollTop)
+      if(scrollTop>329){
+        this.whether = true;
+      }else{
+        this.whether = false;
+      }
+    }, 
   },
   created() {
     this.getGoodLists()
+    
+  },
+  mounted() {
+     window.addEventListener("scroll", this.handleScroll);  
   }
 }
 </script>
@@ -293,7 +316,7 @@ export default {
     }
     .quotation {
       width: 356px;
-      float: left;
+      // float: left;
       margin-left: 30px;
       margin-bottom: 20px;
       color: #525252;
@@ -366,6 +389,16 @@ export default {
         }
       }
     }
+  }
+      .fixed-right {
+        position: fixed;
+        top: 50px;
+        left: 1000px;
+      }
+  
+  
+  .clearfix {
+    @include clearfix()
   }
 }
 </style>

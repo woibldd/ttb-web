@@ -467,7 +467,7 @@ export default {
       locales: utils.locales
     };
   },
-  computed: {
+  computed: {  
     localeText() {
       return utils.getLocaleName(state.locale);
     },

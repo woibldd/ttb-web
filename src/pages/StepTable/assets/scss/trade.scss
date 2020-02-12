@@ -138,6 +138,7 @@ $high-color: #333;
       background: transparent;
       cursor: pointer;
       position: relative;
+      border: 1px solid $primary;
       span {
         position: absolute;
         padding: 0 6px;

@@ -1,7 +1,7 @@
 <template>
   <div class="industry">
     <div class="industry-banner"></div>
-    <div class="con">
+    <div class="con  clearfix">
       <div class="bread">
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item>当前位置</el-breadcrumb-item>
@@ -56,7 +56,8 @@
         <div class="btn-1" @click="collectHandle">
           我的收藏
         </div>
-        <div class="inner">
+        <div class="inner def" 
+          :class="{'fixed-right': toFixed}">
           <div class="title">
             <h1>最新行情</h1>
             <span @click="moreHandle">更多 ></span>
@@ -98,6 +99,12 @@ export default {
         id = ''
       }
       return id
+    },
+    toFixed() {
+      if (document.documentElement.scrollTop > 400) {
+        return true
+      }
+      return false
     }
   },
   methods: {
@@ -369,7 +376,15 @@ export default {
           }
         }
       }
+      .fixed-right {
+        position: fixed;
+        top: 50px;
+        left: 1000px;
+      }
     }
   }
 }
+  .clearfix {
+    @include clearfix()
+  }
 </style>

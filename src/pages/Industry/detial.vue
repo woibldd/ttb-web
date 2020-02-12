@@ -1,7 +1,7 @@
 <template>
   <div class="industry">
-    <div class="industry-banner"></div>
-    <div class="con">
+    <div class="industry-banner  "></div>
+    <div class="con clearfix">
       <div class="new-container">
         <div class=""></div>
         <div class="inner">
@@ -199,8 +199,7 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
-  .industry {
-
+  .industry { 
     overflow: hidden;
     margin-bottom: 30px;
     clear: both;
@@ -400,6 +399,9 @@ export default {
       }
       }
     }
+  }
+  .clearfix {
+    @include clearfix()
   }
 </style>
 <style scoped>
