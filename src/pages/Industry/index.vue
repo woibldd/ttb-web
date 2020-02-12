@@ -1,7 +1,7 @@
 <template>
   <div class="industry">
     <div class="industry-banner"></div>
-    <div class="con  clearfix">
+    <div class="con clearfix">
       <div class="bread">
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item>当前位置</el-breadcrumb-item>
@@ -10,7 +10,7 @@
       </div>
       <div class="new-container">
         <div class=""></div>
-        <div class="inner">
+        <div class="inner ">
           <template v-if="list.length > 0">
             <div class="new-list" v-for="(item, index) in list" :key="index">
               <div class="icon" :class="{active: item.collect === 1}" @click="collectHadnle(item)">
@@ -56,8 +56,8 @@
         <div class="btn-1" @click="collectHandle">
           我的收藏
         </div>
-        <div class="inner def" 
-          :class="{'fixed-right': toFixed}">
+        <div class="inner" 
+          :class="{fixtool: whether}">
           <div class="title">
             <h1>最新行情</h1>
             <span @click="moreHandle">更多 ></span>
@@ -87,7 +87,8 @@ export default {
         size: 20,
         userId: ''
       },
-      currentPage: 1
+      currentPage: 1,
+      whether: false
     }
   },
   computed: {
@@ -99,12 +100,6 @@ export default {
         id = ''
       }
       return id
-    },
-    toFixed() {
-      if (document.documentElement.scrollTop > 400) {
-        return true
-      }
-      return false
     }
   },
   methods: {
@@ -177,10 +172,22 @@ export default {
           window.localStorage.setItem('activityData', [])
         }
       })
+    },
+    handleScroll() {
+      var scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop; 
+      if(scrollTop>500){
+        this.whether = true;
+      }else{
+        this.whether = false;
+      } 
     }
   },
   created() {
     this.getGoodLists()
+  },
+  mounted() { 
+    window.addEventListener("scroll", this.handleScroll);
   }
 }
 </script>
@@ -376,15 +383,15 @@ export default {
           }
         }
       }
-      .fixed-right {
-        position: fixed;
-        top: 50px;
-        left: 1000px;
-      }
     }
   }
-}
   .clearfix {
     @include clearfix()
   }
+  .fixtool {
+    position: fixed;
+    top: 84px;
+    left: 988px;
+  }
+}
 </style>

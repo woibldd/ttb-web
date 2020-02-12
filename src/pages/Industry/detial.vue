@@ -1,6 +1,6 @@
 <template>
   <div class="industry">
-    <div class="industry-banner  "></div>
+    <div class="industry-banner"></div>
     <div class="con clearfix">
       <div class="new-container">
         <div class=""></div>
@@ -37,7 +37,8 @@
         <div class="btn-1" @click="collectHandle">
           我的收藏
         </div>
-        <div class="inner">
+        <div class="inner"
+          :class="{fixtool: whether}">
            <div class="title">
             <h1>最新行情</h1>
             <span @click="moreHandle">更多 ></span>
@@ -73,7 +74,8 @@ export default {
       currentPage: 1,
       i: 1,
       activityInfo: {},
-      rank: -1
+      rank: -1,
+      whether: false
     }
   },
   computed: {
@@ -189,17 +191,30 @@ export default {
           })
         }
       })
+    },
+    handleScroll() {
+      var scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop; 
+      if(scrollTop>500){
+        this.whether = true;
+      }else{
+        this.whether = false;
+      } 
     }
   },
   created() {
     this.init(this.activityId)
     this.rank = Number(this.$route.query.rank)
+  },
+  mounted() { 
+    window.addEventListener("scroll", this.handleScroll);
   }
 }
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
-  .industry { 
+  .industry {
+
     overflow: hidden;
     margin-bottom: 30px;
     clear: both;
@@ -399,9 +414,14 @@ export default {
       }
       }
     }
-  }
-  .clearfix {
-    @include clearfix()
+    .clearfix {
+      @include clearfix()
+    }
+    .fixtool {
+      position: fixed;
+      top: 84px;
+      left: 1000px;
+    }
   }
 </style>
 <style scoped>

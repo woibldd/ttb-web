@@ -332,6 +332,7 @@
             </el-popover>
           </div>
         </div>
+
         <div class="nav_item">
           <router-link class="download mr-15 ml-15" v-popover:popover1 :to="{name: 'Download'}">
             <icon class="mr-3" name="header-download" />
@@ -368,6 +369,11 @@
               </div>
             </div>
           </el-popover>
+        </div>
+        <div class="nav_item"> 
+          <a class="download mr-15 "  href="https://t.me/ixxofficial">
+            <icon class="mr-3" name="aircraft" />
+          </a> 
         </div>
         <!-- 帮助中心中心 -->
         <div class="nav_item help-center" v-popover:popover7>

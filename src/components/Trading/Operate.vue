@@ -32,8 +32,7 @@
       <ProLimitOrder v-show="tab === 'limit'"/>
       <ProMarketOrder v-show="tab === 'market'"/>
       <ProStopOrder v-show="tab === 'stop'"/>
-    </div>
-    {{state.userStatus}}
+    </div> 
     <div
       class="mask"
       :class="{show: +state.userStatus === 0}">
