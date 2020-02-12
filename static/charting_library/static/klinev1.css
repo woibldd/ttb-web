@@ -365,7 +365,7 @@ ul {
   background-color: #1C2435;
   list-style: none;
 }
-li {
+li { 
   width:120px;
   height:26px;
   line-height: 26px;
