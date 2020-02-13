@@ -20,6 +20,12 @@
       "cname": "俄罗斯"
     },
     {
+      "id": "07",
+      "name": "KAZ",
+      "fullname": "Kazakhstan",
+      "cname": "哈萨克斯坦"
+    },
+    {
       "id": 20,
       "name": "EG",
       "fullname": "Egypt",
