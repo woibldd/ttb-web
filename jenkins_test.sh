@@ -2,11 +2,11 @@
   
 rm -rf node_modules/*
 
-sleep 2
+sleep 5
 
 cnpm install
 
-sleep 2
+sleep 40
 
 npm run build
 
