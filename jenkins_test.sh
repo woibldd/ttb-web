@@ -1,12 +1,9 @@
 #!/bin/sh 
-  
-rm -rf node_modules/*
+   
 
-sleep 5
+cnpm i happypack
 
-cnpm install
-
-sleep 40
+sleep 2
 
 npm run build
 
