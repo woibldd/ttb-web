@@ -1,8 +1,5 @@
 #!/bin/sh 
- 
-cnpm i happypack
-
-sleep 2
+  
 
 npm run build
 
