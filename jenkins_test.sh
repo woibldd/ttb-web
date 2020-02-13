@@ -1,5 +1,12 @@
 #!/bin/sh 
   
+rm -rf node_modules/*
+
+sleep 2
+
+cnpm install
+
+sleep 2
 
 npm run build
 
