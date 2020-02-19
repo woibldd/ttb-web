@@ -38,7 +38,7 @@
           我的收藏
         </div>
         <div class="inner"
-          :class="{fixtool: whether}">
+          :class="{fixtool: whether === 1, fixbottom : whether === 2 }">
            <div class="title">
             <h1>最新行情</h1>
             <span @click="moreHandle">更多 ></span>
@@ -196,9 +196,13 @@ export default {
       var scrollTop =
         window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop; 
       if(scrollTop>500){
-        this.whether = true;
+        if(document.documentElement.scrollHeight - scrollTop < 1085) {
+          this.whether = 2;
+        } else { 
+          this.whether = 1;
+        }
       }else{
-        this.whether = false;
+        this.whether = 0;
       } 
     }
   },
@@ -421,6 +425,11 @@ export default {
       position: fixed;
       top: 84px;
       left: 1000px;
+    }
+    .fixbottom {
+      position: absolute;
+      left: 988px;
+      bottom: 81px;
     }
   }
 </style>
