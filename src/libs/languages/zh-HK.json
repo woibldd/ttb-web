@@ -2723,6 +2723,7 @@
   "kyc_failure_tip" : "您的KYC認證稽核失敗，請重新認證",
   "kyc_retry": "重新認證",
   "unit_account": "幣本位合約賬戶",
-  "footer_link": "友情链接"
+  "footer_link": "友情链接",
+  "unit_contract": "幣本位合約"
 
 }
