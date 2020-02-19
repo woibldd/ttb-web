@@ -1,7 +1,7 @@
 #!/bin/sh 
    
 
-cnpm i happypack
+# cnpm i happypack
 
 sleep 2
 
