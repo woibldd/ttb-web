@@ -990,7 +990,8 @@ const service = {
   transferSelf (params) {
     // 暂时使用老接口
     // return request('future/account/transfer', params)
-    return request('account/balance/transfer/self', params)
+    // return request('account/balance/transfer/self', params)
+    return getCache('c_transferSelf', () => request('account/balance/transfer/self', params), 1e3)
   },
   orderContract(params) {
     return getCache('c_orderContract', () => request('contract/order', params), 1e3)
