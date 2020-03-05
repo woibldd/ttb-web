@@ -6,7 +6,7 @@
     <input
       class="ix-input__text"
       :disabled="disabled"
-      :class="{'ix-input__error': showErrorTips}"
+      :class="[{'ix-input__error': showErrorTips}, clientClass]"
       v-on="inputListeners"
       :autocomplete="autocomplete"
       :value="value"
@@ -65,7 +65,8 @@ export default{
           validateFunc: () => {}
         }
       }
-    }
+    },
+    clientClass: {type: String, default: ''}
   },
   computed: {
     showErrorTips () {

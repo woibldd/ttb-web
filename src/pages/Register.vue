@@ -173,9 +173,10 @@
           </div>
           <div :class="['field']"
               v-if="!hasAgent">
-            <div class="input-box">
+            <div class="input-box" >
               <ix-input
-                ref="invitor"
+                ref="invitor" 
+                :clientClass="'invitor-input'"
                 :disabled="hasInvitor"
                 v-model.trim="invitorId"
                 @input="invitorId=$event"
@@ -603,4 +604,10 @@ export default {
 
 <style scoped lang="scss">
 @import "../styles/register";
+
+.page-register {
+  /deep/ .invitor-input{
+    color:#6c7378;
+  } 
+}
 </style>
