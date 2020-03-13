@@ -217,12 +217,12 @@
       </div>
     </v-modal>
     <div>
-     <v-modal
+     <!-- <v-modal
        @close="closeSafe"
       class="safe-modal"
       :open.sync="safe">
       <safeModal @close="closeSafe" />
-    </v-modal>
+    </v-modal> -->
     </div>
   </div>
 </template>
