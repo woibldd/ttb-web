@@ -53,13 +53,13 @@
                     class="index__sub__link">{{ $t("ensurance_btc_future_tutorial", {coin: pair.coin}) }}
                   </a>
                 </li>
-                <li class="dropdown-item pl-34 pr-24">
+                <!-- <li class="dropdown-item pl-34 pr-24">
                   <a
                     target="_blank"
                     href="https://ixcustomer.zendesk.com/hc/zh-cn/sections/360003415251-合约公告"
                     class="index__sub__link">{{ $t("ensurance_btc_future_rule", {coin: pair.coin}) }}
                   </a>
-                </li>
+                </li> -->
               </ul>
             </div>
           </div>
@@ -87,13 +87,13 @@
                     class="index__sub__link">{{ $t("ensurance_btc_future_tutorial", {coin: pair.coin}) }}
                   </a>
                 </li>
-                <li class="dropdown-item pl-34 pr-24">
+                <!-- <li class="dropdown-item pl-34 pr-24">
                   <a
                     target="_blank"
                     href="https://ixcustomer.zendesk.com/hc/zh-cn/sections/360003415251-合约公告"
                     class="index__sub__link">{{ $t("ensurance_btc_future_rule", {coin: pair.coin}) }}
                   </a>
-                </li>
+                </li> -->
               </ul>
             </div>
           </div>
