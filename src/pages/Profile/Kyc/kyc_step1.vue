@@ -210,12 +210,10 @@ export default {
         if (result) {
           if (result.code) {
             utils.alert(result.message)
+          } else { 
+            await actions.updateSession() 
+            this.step = 2
           }
-          await actions.updateSession()
-          // this.$router.push({
-          //   name: 'KycStep2'
-          // })
-          this.step = 2
         }
       })
     },
