@@ -305,7 +305,8 @@ export default {
           }
           if (this.allCoins[0].currency === 'USDT') {
             this.lianData.forEach((item) => {
-              if (item.currencyName === 'USDT-Omni') {
+              console.log(item.currencyName)
+              if (item.currencyName === 'USDT-ERC20') {
                 this.selectLian = item
                 this.selectCoin = item
               }
@@ -328,7 +329,7 @@ export default {
     quickSelectCoin(coin) {
       if (coin.currency === 'USDT') {
         this.lianData.forEach((item) => {
-          if (item.currencyName === 'USDT-Omni') {
+          if (item.currencyName === 'USDT-ERC20') {
             this.selectLian = item
             this.selectCoin = item
           }

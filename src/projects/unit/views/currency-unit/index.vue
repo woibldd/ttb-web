@@ -578,8 +578,8 @@ export default {
       loadingHistory: false,
       productType: {
         1: 'UNIT',
-        2: 'INDEX',
-        3: 'MARKET'
+        2: 'MARKET',
+        3: 'INDEX'
       }
     }
   },

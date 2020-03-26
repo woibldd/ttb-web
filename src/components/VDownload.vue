@@ -75,17 +75,24 @@ export default {
 }
 </script>
 
+<style  lang="scss" >
+@media (max-width: 800px) {
+  html {
+    font-size: 13.3333vw;
+  } 
+}
+</style>
 <style  lang="scss"> 
 .download-mask {
   position: fixed;
   bottom: 0;
   left: 0;
   width:100%;
-  height:5.375rem;
+  height:.835rem;
   background:rgba(19,24,31,.9);
-  padding: rem(43) rem(55);
+  padding: .43rem .55rem;
   box-sizing: border-box;
-  font-size: rem(24);
+  font-size: .24rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -96,24 +103,24 @@ export default {
       align-items: center;
   }
   .dl-icon{
-      width: rem(77);
-      height: rem(77);
+      width: .77rem;
+      height: .77rem;
       img {
           width: 100%;
           height: 100%;
       }
   }
   .dl__txt{
-      margin-left: rem(19);
+      margin-left: .19rem;
       .f16 {
-          font-size: rem(16);
+          font-size: .19rem;
       }
   }
   .dl__btn {
-      width:rem(190);
-      height:rem(60);
+      width:1.9rem;
+      height:.6rem;
       background:$primary;
-      border-radius:rem(30);
+      border-radius:.3rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -121,37 +128,37 @@ export default {
 }
 
 .tt-mask {
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(0,0,0,.5);
-  z-index: 1001;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: 1001;
 
-  .tutorial-arrow {
-      width: rem(205);
-      height: rem(265);
-      position: absolute;
-      right: rem(40);
-      top: rem(60);
-  
-      img {
-          width: 100%;
-          height: 100%;
-      }
-      .tuto__txt {
-          position: absolute;
-          left: rem(-200);
-          bottom: rem(-36);
-          color: #fff;
-          width: rem(205);
-          text-align: center;
-          font-size: rem(24);
-          line-height: 1.2;
-      }
-  }   
-}
+    .tutorial-arrow {
+        width: 2.05rem;
+        height: 2.65rem;
+        position: absolute;
+        right: .4rem;
+        top: .6rem;
+    
+        img {
+            width: 100%;
+            height: 100%;
+        }
+        .tuto__txt {
+            position: absolute;
+            left: -2rem;
+            bottom: -0.36rem;
+            color: #fff;
+            width: 2.05rem;
+            text-align: center;
+            font-size: .24rem;
+            line-height: 1.2;
+        }
+    }   
+  }
 
 
 </style>

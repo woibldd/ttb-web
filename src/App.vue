@@ -18,9 +18,9 @@
     <v-nav2
       v-if="showNav && !isMobile"
       :class="[navClass]"/>
-    <mobile-nav
+    <!-- <mobile-nav
       v-if="showNav && isMobile"
-      :class="[navClass]"/>
+      :class="[navClass]"/> -->
     <div
       ref="container"
       :style="{background: 'initial'}"
@@ -32,11 +32,11 @@
       v-show="showFooter"
       ref="footer"
       :fixed="fixed"/>
-    <mobile-footer
+    <!-- <mobile-footer
       v-if="showFooter && footer === 'mobile'"
       ref="footer"
       :fixed="fixed"
-    />
+    /> -->
     <v-notify-list/>
     <!-- <giveMoneyAD v-if="isFirstLogin" v-model="isFirstLogin"></giveMoneyAD> -->
     <!-- <div

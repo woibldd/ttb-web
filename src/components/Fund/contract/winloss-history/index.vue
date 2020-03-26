@@ -205,6 +205,7 @@ export default {
   },
   methods: {
     async getFundHistory () {
+      // this.tableData = []
       const params = {
         currency: this.currencyPair.currency,
         page: this.pages.page,

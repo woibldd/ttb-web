@@ -102,12 +102,7 @@ export default {
           this.option.series[0].data=[]
           this.option.series[1].data=[]
           let $this = this
-          // res.data.forEach(t => {
-          //    $this.option.categories.push(t.date)
-          //    $this.option.series[0].data.push(t.realized_today || 0)
-          //    $this.option.series[1].data.push(t.realized_total || 0) 
-          // })
-
+           
           for (let i = 0; i < res.data.length; i++) {
             let t = res.data[i]
             this.option.xAxis.categories.push(t.date)

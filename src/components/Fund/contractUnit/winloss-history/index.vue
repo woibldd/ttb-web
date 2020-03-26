@@ -210,6 +210,7 @@ export default {
   },
   methods: {
     async getFundHistory () {
+      // this.tableData = []
       const params = {
         name: this.currencyPair.symbol,
         page: this.pages.page,
