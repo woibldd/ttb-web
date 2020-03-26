@@ -7,7 +7,7 @@
     <div class="content">
       <div class="quotation box">
         <div class="title"> 
-          <p>全球首家数字资产交易共同体</p>
+          <p>{{$t('h5_home_new.title')}}</p>
         </div>
         <div class="tabs">
           <ul flex>
@@ -49,25 +49,25 @@
       </div>
       <div class="introduce box">
         <div class="title">
-          <p>为何选择IXX？</p>
+          <p>{{$t('h5_home_new.describe2')}}</p>
         </div> 
         <div class="row">
           <div class="item">
             <div class="h" >
               <img src="~@/assets/h5/home/btc@2x.png" alt="">
-              <h3>交易</h3>
+              <h3>{{$t('h5_home_new.trading')}}</h3>
             </div>
             <p class="c">
-              全面提供合约、币币、法币、理财等交易功能，满足所有用户交易需求
+              {{$t('h5_home_new.describe3')}}
             </p> 
           </div>
           <div class="item">
             <div class="h">
               <img src="~@/assets/h5/home/safe@2x.png" alt="">
-              <h3>安全</h3>
+              <h3>{{$t('h5_home_new.safe')}}</h3>
             </div>
             <p class="c">
-              首创100%冷钱包存放机制，隔离公网辅以多层验证机制，极限保障用户资产安全
+              {{$t('h5_home_new.describe4')}}
             </p> 
           </div>
         </div> 
@@ -75,49 +75,49 @@
           <div class="item">
             <div class="h">
               <img src="~@/assets/h5/home/service@2x.png" alt="">
-              <h3>服务</h3>
+              <h3>{{$t('h5_home_new.service')}}</h3>
             </div>
             <p class="c">
-              提供24小时不间断专属客服服务，多语言支持，在提币等核心服务环节实现秒级响应
+              {{$t('h5_home_new.describe5')}}
             </p> 
           </div>
           <div class="item">
             <div class="h">
               <img src="~@/assets/h5/home/rocket@2x.png" alt="">
-              <h3>高效</h3>
+              <h3>{{$t('h5_home_new.efficiency')}}</h3>
             </div>
             <p class="c">
-              自研高性能撮合引擎，充分支持200万+/秒/交易对的撮合速度，服务不间断操作无卡顿
+              {{$t('h5_home_new.describe6')}}
             </p> 
           </div>
         </div> 
       </div>
       <div class="download box">
         <div class="title">
-          <p>轻松下载，随意交易</p>
+          <p>{{$t('h5_home_new.describe1')}}</p>
         </div>
         <div class="list">
           <div class="row">
             <div class="btn">
               <img src="~@/assets/h5/home/computer@2x.png" alt="">
-              <span>电脑版</span>
+              <span>{{$t('h5_home_new.computer')}}</span>
             </div>
             <div class="btn"
               @click="download">
               <img src="~@/assets/h5/home/android@2x.png" alt="">
-              <span>Android</span>
+              <span>{{$t('h5_home_new.android')}}</span>
             </div>
           </div>
           <div class="row">
             <div class="btn"
               @click="download">
               <img src="~@/assets/h5/home/apple@2x.png" alt="">
-              <span>IOS内侧版</span>
+              <span>{{$t('h5_home_new.ios1')}}</span>
             </div>
             <div class="btn"
               @click="download">
               <img src="~@/assets/h5/home/apple@2x.png" alt="">
-              <span>IOS企业版</span>
+              <span>{{$t('h5_home_new.ios2')}}</span>
             </div>
           </div>
         </div>
@@ -646,6 +646,8 @@ export default {
         display: flex;
         .btn {
           margin: .17rem .34rem;
+          white-space: nowrap;
+          overflow: hidden;
           flex: 1;
           border: 1px solid #ffffff;
           border-radius: .36rem;
@@ -654,7 +656,7 @@ export default {
           img {
             height: .28rem;
             vertical-align: middle;
-            margin-right: .1rem;
+            margin-right: .06rem;
           }
         }
       }

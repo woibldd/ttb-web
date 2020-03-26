@@ -2724,6 +2724,23 @@
   "kyc_retry": "重新認證",
   "unit_account": "幣本位合約賬戶",
   "footer_link": "友情链接",
-  "unit_contract": "幣本位合約"
+  "unit_contract": "幣本位合約",
+  "h5_home_new": {
+    "title":"全球首家數位資產交易共同體”",
+    "describe1":"輕鬆下載，隨時交易",
+    "computer":"電腦版",    
+    "android":"Android",
+    "ios1":"IOS內測版", 
+    "ios2":"IOS企業版",
+    "describe2":"為何選擇IXX？",
+    "trading":"交易",
+    "describe3":"全面提供合約、幣幣、法幣、理財等交易功能，滿足所有用戶交易需求",
+    "safe":"安全", 
+    "describe4":"首創100%冷錢包存放機制，隔離公網輔以多層驗證機制，極限保障用戶資產安全", 
+    "service":"服務", 
+    "describe5":"提供24小時不間斷專屬客服服務，多語言支持，在提幣等覈心服務環節實現秒級響應", 
+    "efficiency":"高效", 
+    "describe6":"自研高性能撮合引擎，充分支持200萬+/秒/交易對的撮合速度，服務不間斷操作無卡頓"
+  }
 
 }

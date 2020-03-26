@@ -2802,5 +2802,22 @@
   "kyc_retry": "重新认证",
   "unit_account": "币本位合约账户",
   "footer_link": "友情链接",
-  "unit_contract": "币本位合约"
+  "unit_contract": "币本位合约",
+  "h5_home_new": {
+    "title":"全球首家数字资产交易共同体",
+    "describe1":"轻松下载，随时交易",
+    "computer":"电脑版",    
+    "android":"Android",
+    "ios1":"IOS内测版", 
+    "ios2":"IOS企业版",
+    "describe2":"为何选择IXX？",
+    "trading":"交易",
+    "describe3":"全面提供合约、币币、法币、理财等交易功能，满足所有用户交易需求",
+    "safe":"安全", 
+    "describe4":"首创100%冷钱包存放机制，隔离公网辅以多层验证机制，极限保障用户资产安全", 
+    "service":"服务", 
+    "describe5":"提供24小时不间断专属客服服务，多语言支持，在提币等核心服务环节实现秒级响应", 
+    "efficiency":"高效", 
+    "describe6":"自研高性能撮合引擎，充分支持200万+/秒/交易对的撮合速度，服务不间断操作无卡顿"
+  }
 }

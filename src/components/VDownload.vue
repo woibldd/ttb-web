@@ -1,6 +1,7 @@
 <template>
   <div class="download-container">
-    <div class="download-mask" v-if="isMobile">
+    <div class="download-mask" v-if="isMobile && state.downloadTool">
+      <a class="close-btn" @click="close"/>
       <div class="flex">
         <div class="dl-icon">
           <img
@@ -34,11 +35,13 @@
 
 <script>
 import utils from '@/modules/utils'
+import {state} from '@/modules/store'
 export default {
   data() {
     return {
       showTutorialArrow: false,
-      utils
+      utils,
+      state
     }
   },
   computed: {
@@ -71,6 +74,9 @@ export default {
     touch () {
       this.showTutorialArrow = false
     },
+    close () {
+      this.state.downloadTool = false
+    }
   }
 }
 </script>
@@ -88,7 +94,7 @@ export default {
   bottom: 0;
   left: 0;
   width:100%;
-  height:.835rem;
+  height:1.35rem;
   background:rgba(19,24,31,.9);
   padding: .43rem .55rem;
   box-sizing: border-box;
@@ -128,37 +134,51 @@ export default {
 }
 
 .tt-mask {
-    height: 100vh;
-    width: 100vw;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: rgba(0,0,0,.5);
-    z-index: 1001;
-
-    .tutorial-arrow {
-        width: 2.05rem;
-        height: 2.65rem;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,.5);
+  z-index: 1001; 
+  .tutorial-arrow {
+    width: 2.05rem;
+    height: 2.65rem;
+    position: absolute;
+    right: .4rem;
+    top: .6rem; 
+    img {
+        width: 100%;
+        height: 100%;
+    }
+    .tuto__txt {
         position: absolute;
-        right: .4rem;
-        top: .6rem;
-    
-        img {
-            width: 100%;
-            height: 100%;
-        }
-        .tuto__txt {
-            position: absolute;
-            left: -2rem;
-            bottom: -0.36rem;
-            color: #fff;
-            width: 2.05rem;
-            text-align: center;
-            font-size: .24rem;
-            line-height: 1.2;
-        }
-    }   
+        left: -2rem;
+        bottom: -0.36rem;
+        color: #fff;
+        width: 2.05rem;
+        text-align: center;
+        font-size: .24rem;
+        line-height: 1.2;
+    }
+  }   
+}
+
+.close-btn {
+  @include bg-retina('../assets/icon-cancel', 'png', 12px, 12px);
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: -4px;
+  top: -4px;
+  filter: grayscale(100%);
+  opacity: .3;
+  transition: opacity 300ms;
+  z-index: 1000;
+  &:hover {
+    opacity: .7;
   }
+}
 
 
 </style>

@@ -18,6 +18,7 @@ export const state = {
   loginBack: {name: 'home'}, // 默认登录返回页
   verifyEmail: '', // 注册、找回密码使用的邮箱 
   tabSelected: 'USDT', //币对列表
+  downloadTool: true,
   assets: {
     ready: false,
     total: 0,
