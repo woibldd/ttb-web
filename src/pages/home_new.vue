@@ -173,16 +173,7 @@
           <div
             class="corp-title">
             {{ $t('footer_copr') }}
-          </div>
-          <div class="corp-logo">
-            <span
-              class="link"
-              target="_blank">
-              <img
-                class="logo dvp"
-                src="~@/assets/copr-logo-dvp.png" >
-            </span>
-          </div>
+          </div> 
           <div class="corp-logo">
             <span
               class="link"
@@ -191,16 +182,7 @@
                 class="logo hx"
                 src="~@/assets/copr-logo-cs.png" >
             </span>
-          </div>
-          <div class="corp-logo">
-            <span
-              class="link"
-              target="_blank">
-              <img
-                class="logo hx"
-                src="~@/assets/copr-logo-pdkj.png" >
-            </span>
-          </div>
+          </div> 
           <div class="corp-logo">
             <span
               class="link"
@@ -264,17 +246,7 @@
                 class="logo hx"
                 src="~@/assets/home/copr-logo-SOSOLX.png" >
             </a>
-          </div>
-          <div class="corp-logo">
-            <a
-              class="link"
-              href="https://planemo.io"
-              target="_blank">
-              <img
-                class="logo hx"
-                src="~@/assets/home/copr-logo-pla.png" >
-            </a>
-          </div>
+          </div> 
         </div>
       </div>
     </div>

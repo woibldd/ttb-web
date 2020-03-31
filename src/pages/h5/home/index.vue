@@ -262,16 +262,7 @@
             {{ $t('footer_copr') }}
           </div>
           <div class="corp-wrap">
-            <div class="corp-logo">
-              <a
-                class="link"
-                href="https://dvpnet.io/"
-                target="_blank">
-                <img
-                  class="logo dvp"
-                  src="~@/assets/copr-logo-dvp.png" >
-              </a>
-            </div>
+            
             <div class="corp-logo">
               <a
                 class="link"
