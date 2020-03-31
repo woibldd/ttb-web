@@ -178,8 +178,8 @@ export const actions = {
       utils.setStorageValue('X-TOKEN', '')
       window.zE && window.zE(function () {
         window.zE.identify({
-          name: 'Guest',
-          email: 'guest@IXX.COM'
+          name: 'Please enter your name',
+          email: ''
         })
       })
     }

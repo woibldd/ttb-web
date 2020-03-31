@@ -21,7 +21,7 @@
             </li>
           </ul>
           <p>
-            {{ `${selectCurrency.name} = ${utils.getFiatMoneySymbolByFiat(currency)} ${ $big((pair.tick || {}).current || 0).times(rate).round(selectCurrency.scale, 0) }` }}
+            {{ `1 ${selectCurrency.name} ≈ ${utils.getFiatMoneySymbolByFiat(currency)} ${ $big((pair.tick || {}).current || 0).times(rate).round(selectCurrency.scale, 0) }` }}
           </p>
           <div> 
             <div id="high" class="high" :option="option" ref="lineCharts"></div>
@@ -110,7 +110,7 @@
           </div>
           <div class="row">
             <div class="btn"
-              @click="download">
+              @click="download('test')">
               <img src="~@/assets/h5/home/apple@2x.png" alt="">
               <span>{{$t('h5_home_new.ios1')}}</span>
             </div>
@@ -503,7 +503,11 @@ export default {
       }  
       let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
       if (this.isIos) {
-        url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
+        if(type==='text') {
+          url = 'itms-services://?action=download-manifest&url=https://testflight.apple.com/join/pG7Qos1p'
+        } else { 
+          url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
+        }
         // url = `https://ios.ixx.com`
       } 
       window.location.href = url

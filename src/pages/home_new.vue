@@ -168,8 +168,7 @@
                 src="~@/assets/copr-logo-blk.png">
             </span>
           </div>
-        </div>
-
+        </div> 
         <div class="corp-row row-60 mb-60">
           <div
             class="corp-title">
@@ -200,6 +199,24 @@
               <img
                 class="logo hx"
                 src="~@/assets/copr-logo-pdkj.png" >
+            </span>
+          </div>
+          <div class="corp-logo">
+            <span
+              class="link"
+              target="_blank">
+              <img
+                class="logo hx"
+                src="~@/assets/copr/copr_logo_cynopsis.png" >
+            </span>
+          </div>
+          <div class="corp-logo">
+            <span
+              class="link"
+              target="_blank">
+              <img
+                class="logo hx"
+                src="~@/assets/copr/copr_logo_upp.png" >
             </span>
           </div>
         </div>
