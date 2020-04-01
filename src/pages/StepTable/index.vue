@@ -137,22 +137,30 @@
                 {{ $t('otc_trans_idadawq') }}：
                 <span>{{ item.name }}</span>
               </div>
-              <div class="state">
-                <span
-                  v-if="item.other_appeal && !item.appeal"
-                  style="color:#c9a96c">{{ $t('otc_seiitm_7') }}
-                </span>
-
-                <template v-if="!item.appeal">
-                  <span v-if="item.side === 2 && item.state === 1">{{ $t('otc_seiitm_6') }}</span>
-                  <span v-else>{{ !item.other_appeal && exchangeState(item.state) || "" }}</span>
-                  <b
-                    v-if="item.state === 2 || item.state === 7 || item.state === 6"
-                    style="cursor:pointer"
-                    @click="sq(item)">{{ $t('otc_seiitm_8') }}</b>
-                </template>
-                <template v-else>{{ $t('otc_seiitm_9') }}</template>
-                <!--（没收到对方付款？-->
+               <div
+                class="state"
+                flex="main:right">
+                <div>
+                  <span v-if="item.state === 9">
+                    {{ $t('pre_reviewed') }}
+                  </span>
+                  <span
+                    v-else-if="item.other_appeal && !item.appeal"
+                    style="color:#c9a96c">{{ $t('otc_seiitm_7') }}
+                  </span>
+                </div>
+                <div>
+                  <div v-if="!item.appeal">
+                    <span v-if="item.side === 2 && item.state === 1">{{ $t('otc_seiitm_6') }}</span>
+                    <span v-else>{{ !item.other_appeal && exchangeState(item.state) || "" }}</span>
+                    <b
+                      v-if="item.state === 2 || item.state === 7 || item.state === 6"
+                      @click="sq(item)"
+                    >{{ $t('otc_seiitm_8') }}</b>
+                  </div>
+                  <div v-else>{{ $t('otc_seiitm_9') }}</div>
+                  <!--（没收到对方付款？-->
+                </div>
               </div>
             </div>
             <ul class="inner">
