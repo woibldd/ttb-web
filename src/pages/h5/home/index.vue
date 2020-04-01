@@ -261,8 +261,7 @@
             class="corp-title">
             {{ $t('footer_copr') }}
           </div>
-          <div class="corp-wrap">
-            
+          <div class="corp-wrap"> 
             <div class="corp-logo">
               <a
                 class="link"
@@ -616,6 +615,7 @@ export default {
         padding: .2rem 0; 
         .item {
           flex: 1;
+          text-align: center;
           &:first-child {
             margin-right:.35rem;
           }
