@@ -103,19 +103,19 @@
               <span>{{$t('h5_home_new.computer')}}</span>
             </div>
             <div class="btn"
-              @click="download">
+              @click="download('ios')">
               <img src="~@/assets/h5/home/android@2x.png" alt="">
               <span>{{$t('h5_home_new.android')}}</span>
             </div>
           </div>
           <div class="row">
             <div class="btn"
-              @click="download('test')">
+              @click="download('ios-test')">
               <img src="~@/assets/h5/home/apple@2x.png" alt="">
               <span>{{$t('h5_home_new.ios1')}}</span>
             </div>
             <div class="btn"
-              @click="download">
+              @click="download('android')">
               <img src="~@/assets/h5/home/apple@2x.png" alt="">
               <span>{{$t('h5_home_new.ios2')}}</span>
             </div>
@@ -467,7 +467,8 @@ export default {
         if (!!res && !res.code) {
           this.option.xAxis.categories=[] //x轴时间
           this.option.xAxis.labels.autoRotation=[]
-          this.option.series[0].data=[]  
+          this.option.series[0].data=[]
+          this.option.series[0].name=name.replace('_','/')  
 
           for (let i = 0; i < res.data.length; i++) {
             let t = res.data[i] 
@@ -491,16 +492,19 @@ export default {
         this.showTutorialArrow = true
         return
       }  
-      let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
-      if (this.isIos) {
-        if(type==='text') {
+      if (type==='android') {
+        let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk' 
+        window.location.href = url
+      }
+      else if (this.isIos) {
+        let url = ''
+        if(type==='ios-test') {
           url = 'itms-services://?action=download-manifest&url=https://testflight.apple.com/join/pG7Qos1p'
         } else { 
           url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
-        }
-        // url = `https://ios.ixx.com`
+        } 
+        window.location.href = url 
       } 
-      window.location.href = url
     },
     touch () {
       this.showTutorialArrow = false
@@ -659,7 +663,7 @@ export default {
   }
   .footer {
     margin: 0 .357rem;
-    padding: .3rem .7rem 1.1rem;
+    padding: .3rem .7rem 1.5rem;
     border-top: 1px solid #56636F;
     button {
       width: 1.8rem;
