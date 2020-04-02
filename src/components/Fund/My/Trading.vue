@@ -662,7 +662,7 @@
   }
 </script>
 <style lang="scss" scoped>
-  @import './../../components/Fund/My/my.scss';
+  @import './my.scss';
   .title__right{
     &>.active{
       color: #01CED1 !important;

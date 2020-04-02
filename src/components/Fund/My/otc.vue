@@ -316,7 +316,7 @@
   }
 </script>
 <style lang="scss" scoped>
-  @import './../../components/Fund/My/my.scss';
+  @import './my.scss';
   // .iconfont {
   //   font-size: 27px;
   //   color: rgba(107, 181, 120, 1) !important;

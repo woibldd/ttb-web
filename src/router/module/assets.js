@@ -109,7 +109,22 @@ export const capitalRouter = [
                 component: () => import(/* webpackChunkName: "FundHistory" */ '@/components/Fund/history/history.vue')
               }
             ]
-          }
+          },
+          {
+            path: 'Trading',
+            name: 'Trading',
+            component: () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/My/Trading.vue')
+          },
+          {
+            path: 'OTC',
+            name: 'OTC',
+            component: () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/My/otc.vue')
+          },
+          {
+            path: 'share',
+            name: 'share',
+            component: () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/My/share_history.vue')
+          } 
         ]
       },
       {
@@ -120,36 +135,23 @@ export const capitalRouter = [
       {
         path: 'capital',
         name: 'capital',
-        component: () => import(/* webpackChunkName: "FundAddress" */ '@/pages/Capital/index.vue')
+        component: () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/Capital/index.vue')
       },
-      {
-        path: 'bTrade',
-        name: 'bTrade',
-        component: () => import(/* webpackChunkName: "FundAddress" */ '@/pages/Capital/Trading.vue')
-      },
-      {
-        path: 'fTrade',
-        name: 'fTrade',
-        component: () => import(/* webpackChunkName: "FundAddress" */ '@/pages/Capital/fTrading.vue')
-      },
-      {
-        path: 'share',
-        name: 'share',
-        component: () => import(/* webpackChunkName: "FundAddress" */ '@/pages/Capital/share_history.vue')
-      }
       // {
-      //   path: 'hyTrade',
-      //   name: 'hyTrade',
-      //   redirect: 'hyTrade/index',
-      //   component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contract/contract.vue'),
-      //   children: [
-      //     {
-      //       path: 'index/:currency?',
-      //       name: 'contractIndex',
-      //       component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contract/contract.vue')
-      //     }
-      //   ]
-      // }
+      //   path: 'bTrade',
+      //   name: 'bTrade',
+      //   component: () => import(/* webpackChunkName: "FundAddress" */ '@/pages/Capital/Trading.vue')
+      // },
+      // {
+      //   path: 'fTrade',
+      //   name: 'fTrade',
+      //   component: () => import(/* webpackChunkName: "FundAddress" */ '@/pages/Capital/fTrading.vue')
+      // },
+      // {
+      //   path: 'share',
+      //   name: 'share',
+      //   component: () => import(/* webpackChunkName: "FundAddress" */ '@/pages/Capital/share_history.vue')
+      // } 
     ]
   }
 ]

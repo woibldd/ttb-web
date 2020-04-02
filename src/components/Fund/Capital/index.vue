@@ -20,7 +20,7 @@
       <h1>{{$t('otc_otutcol_11')}}</h1>
       <p><b>≈ {{ixTotal | fixed(unit.scale || 2)}}</b> {{unit.name}}</p>
     </div>
-    <div class="capital-wrapper clearfix">
+    <!-- <div class="capital-wrapper clearfix">
       <div class="capital-inner">
         <div class="title">{{$t('wallet_account')}}</div>
          <a style="float:right;margin-top: -55px;margin-right: 5px;" href="https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360029651652">{{$t('wallet_accosaada')}}></a>
@@ -86,7 +86,7 @@
               <span>
                 <router-link
                   class="sub-menu-item"
-                  to="/fund/bTrade">{{ $t('trading_account') }}
+                  to="/fund/my/trading">{{ $t('trading_account') }}
                 </router-link>
               </span>
               <div>
@@ -96,7 +96,7 @@
               <em> 
                 <router-link
                   class="sub-menu-item"
-                  to="/fund/bTrade">
+                  to="/fund/my/trading">
                   <icon name='goto' />
                 </router-link>
               </em>
@@ -123,6 +123,104 @@
           </dl>
         </div>
       </div>
+    </div> -->
+    <div class="account-wrapper">
+      <div class="capital-account">
+        <div
+          class="box"
+          flex>
+          <div flex-box="1">
+            <span class="title">{{ $t('wallet_account') }}</span>
+            <a
+              class="about"
+              href="https://ixcustomer.zendesk.com/hc/zh-cn/articles/360029651052">{{ $t('wallet_accosaada') }}></a>
+            <div class="valuation">
+              <p><b>{{ walletTotal | fixed(unit.scale || 2) }}</b> {{ unit.name }}</p>
+            </div>
+          </div>
+          <div flex-box="1">
+            <ul flex="main:right">
+              <li>
+                <router-link
+                  class="menu-name"
+                  to="/fund/deposit"
+                  tag="a">
+                  <p>
+                    <icon
+                      class="fund-iconfont"
+                      name="charging"/>
+                  </p>
+                  <span>{{ $t('deposit') }}</span>
+                </router-link>
+              </li>
+              <li>
+                <router-link
+                  class="menu-name"
+                  tag="a"
+                  to="/fund/withdraw">
+                  <p>
+                    <icon
+                      class="fund-iconfont"
+                      name="withdraw"/>
+                  </p>
+                  <span>{{ $t('withdraw') }}</span>
+                </router-link>
+              </li>
+              <li>
+                <router-link
+                  class="menu-name"
+                  tag="a"
+                  :to="'/fund/transfer'">
+                  <p>
+                    <!-- <img
+                      class="transfer"
+                      src="~@/assets/images/transfer.png"
+                      alt=""> -->
+                    <icon
+                      class="fund-iconfont"
+                      name="transfer"/>
+                  </p>
+                  <span>{{ $t('account_exchange') }}</span>
+                </router-link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="trading-account">
+        <div class="box">
+          <div class="h">
+            <div class="title">{{ $t('otc_otutcol_12') }}</div>
+            <div class="valuation">
+              <p><b>{{ accountTotal | fixed(unit.scale || 2) }}</b> {{ unit.name }}</p>
+            </div>
+          </div>
+          <div class="account-list">
+            <ul>
+              <li
+                v-for="(item, index) in accountMap"
+                v-show="item.visible"
+                :key="index">
+                <div
+                  class="row"
+                  flex="main:justify">
+                  <span><i :style="{color:item.color}">•</i> {{ $t(item.name) }}</span>
+                  <span class="account-valuation">
+                    <b>{{ item.total(item.dataList) | fixed(unit.scale || 2) }}</b><i class="symbol">{{ unit.name }}</i>
+                    <em>
+                      <router-link
+                        class="sub-menu-item"
+                        :to="item.link">
+                        <icon name='goto' />
+                      </router-link>
+                    </em>
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -136,6 +234,8 @@ export default {
       otcTable: [],
       tradingTable: [],
       contractTable: [],
+      unitContractTable: [],
+      mixContractTable: [],
       walletTable: [],
       rates: null,
       currencyList: [
@@ -197,6 +297,71 @@ export default {
       let sum = this.$big(0) 
       sum = sum.plus(this.accountTotal).plus(this.walletTotal)
       return sum.toString()
+    },
+    accountMap () {
+      let big = this.$big
+      return [
+        {
+          name: 'otc_account',
+          color: '#DC6929',
+          visible: true,
+          dataList: this.otcTable,
+          total: (data) => {
+            let sum = big(0)
+            data.forEach(item => { sum = sum.plus(item.estValue) })
+            return sum.toString() || 0
+          },
+          link: '/fund/my/OTC'
+        },
+        {
+          name: 'trading_account',
+          color: '#8FCCF0',
+          visible: true,
+          dataList: this.tradingTable,
+          total: (data) => {
+            let sum = big(0)
+            data.forEach(item => { sum = sum.plus(item.estValue) })
+            return sum.toString() || 0
+          },
+          link: '/fund/my/Trading'
+        },
+        {
+          name: 'contract_account',
+          color: '#AC6FFF',
+          visible: true,
+          dataList: this.contractTable,
+          total: (data) => {
+            let sum = big(0)
+            data.forEach(item => { sum = sum.plus(item.estValue) })
+            return sum.toString() || 0
+          },
+          link: '/fund/my/contract'
+        },
+        {
+          name: 'unit_account',
+          color: '#6E69DE',
+          visible: false,
+          dataList: this.unitContractTable,
+          total: (data) => {
+            let sum = big(0)
+            data.forEach(item => { sum = sum.plus(item.estValue) })
+            return sum.toString() || 0
+          },
+          link: '/fund/my/contractUnit'
+        },
+        {
+          name: 'gold_account',
+          color: '#3374CA',
+          visible: false,
+          dataList: this.mixContractTable,
+          total: (data) => {
+            let sum = big(0)
+            data.forEach(item => { sum = sum.plus(item.estValue) })
+            return sum.toString() || 0
+          },
+          link: '/fund/my/contractMix'
+        }
+      ]
     }
   },
   methods: {
@@ -451,4 +616,106 @@ export default {
     }
   }
 }
+.account-wrapper {
+  font-size: 18px;
+  .box {
+    border-width: 8px;
+    border-right-width: 0;
+    border-style: solid;
+    border-top-color: white;
+    border-left-color: $primary;
+    border-bottom-color: white;
+    border-right-color: white;
+    line-height: 35px;
+    .title {
+      font-size: 18px;
+      color: #A0A0A0;
+    }
+    .about {
+      padding: 3px 8px;
+      margin-left: 10px;
+      color: #A0A0A0;
+      border: 1px solid #a0a0a0;
+      border-radius: 4px;
+      font-size: 16px;
+      &:hover {
+        color: $primary;
+      }
+    }
+    p {
+      color: #A0A0A0;
+      b {
+        font-size: 26px;
+        color: #333333;
+      }
+    }
+
+  }
+  .capital-account {
+    padding: 10px 0;
+    margin: 22px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 50px 0 rgba(0,0,0,.2);
+    .box {
+      padding: 0 20px;
+    }
+    ul {
+      li {
+        margin: 0 30px;
+        text-align: center;
+        color: #333333;
+        p {
+          line-height: 32px;
+          img {
+            height: 32px;
+            &.transfer {
+              margin: 3px 0;
+              height: 26px;
+            }
+          }
+        }
+        a {
+          color: #333333;
+        }
+      }
+    }
+  }
+  .trading-account {
+    padding: 10px 0;
+    margin: 22px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 50px 0 rgba(0,0,0,.2);
+    .h {
+      margin: 10px 0 10px 20px;
+    }
+    .valuation {
+      border-bottom: 1px solid #ccc;
+    }
+    .account-list {
+      line-height: 80px;
+      ul {
+        li {
+          padding: 0 20px;
+          .account-valuation {
+            font-size: 22px;
+            .symbol {
+              margin-left: 5px;
+              color:#A0A0A0;
+              font-size: 18px;
+            }
+          }
+        }
+        li:nth-child(even) {
+          background-color: #F9F9F9;
+        }
+      }
+    }
+  }
+  .fund-iconfont {
+    color: $primary !important;
+    font-size: 30px;
+  }
+}
+
+
 </style>

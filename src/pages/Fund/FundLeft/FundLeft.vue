@@ -108,13 +108,13 @@
         <dd>
           <router-link
             class="sub-menu-item"
-            to="/fund/fTrade">{{ $t('otc_account') }}
+            to="/fund/my/otc">{{ $t('otc_account') }}
           </router-link>
         </dd>
         <dd>
           <router-link
             class="sub-menu-item"
-            to="/fund/bTrade">{{ $t('trading_account') }}
+            to="/fund/my/trading">{{ $t('trading_account') }}
           </router-link>
         </dd>
         <dd>
@@ -132,7 +132,7 @@
        <!-- <dd>
          <router-link
            class="sub-menu-item"
-           to="/fund/share">{{ $t('shareOption.share_account') }}
+           to="/fund/my/share">{{ $t('shareOption.share_account') }}
          </router-link>
        </dd> -->
        </dl>
