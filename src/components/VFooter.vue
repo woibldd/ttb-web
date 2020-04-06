@@ -382,7 +382,7 @@ export default {
         color: #fff;
       }
       .bot-la{
-        width: 45%;
+        margin-right: 10px;
       }
       .bot-lb{
         width: 40%;

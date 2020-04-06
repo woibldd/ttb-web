@@ -2166,9 +2166,9 @@ export default {
         }
       }
     },
-    'signup': '注册',
-    'signin': '登录',
-    'signout': '退出登录'
+    'signup': '회원가입',
+    'signin': '로그인',
+    'signout': '로그아웃',
   },
   legalTender: {
     mapCurrency: {

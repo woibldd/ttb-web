@@ -1315,7 +1315,7 @@
   "coin_index_value_history": "%{pair} coin index value history",
   "contract_block_orderbook": "Orderbook",
   "contract_block_orderdeal": "Latest",
-  "contract_block_orderaction": "Submit An Order",
+  "contract_block_orderaction": "Order",
   "contract_block_market_info": "Market Information",
   "contract_history_position": "Positions",
   "contract_history_position_tips": "This is the number of positions you wish to buy or sell. See contract details below. See \"Delegation Value\" for the total value of the entire contracts。",
@@ -2558,8 +2558,8 @@
       "information":"Industrial News"
     },
     "footer": {
-      "affiliate": "Affiliate：affiliate@ixx.com",
-      "explain": "IXX is a Malaysia registed cryptocurrency derivatives exchange. It is the world's first digital asset trading community and committed to realize the ideal utopia nation of blockchain trading ecology, create an exchange for everyone. All contributors can share the fruitful outcome from developments of the exchange.",
+      "affiliate": "",
+      "explain": "",
       "footer_contract_desc": "Official Wechat",
       "information":"Industrial News"
     },
