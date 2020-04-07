@@ -8,7 +8,7 @@ import { capitalRouter } from './module/assets'
 import { feeRouter } from './module/fee'
 import { materialRouter } from './module/material'
 import { profileRouter } from './module/profile'
-// import { tradeRouter } from './module/trade'
+import { tradeRouter } from './module/trade'
 import { fundRouter } from './module/fund'
 import { otherRouter } from './module/other'
 import Bid from '@/pages/Bid/index.vue'
@@ -262,7 +262,7 @@ export const routes = [
       nav: false
     },
     component: Trading
-  },
+  }, 
   {
     path: '/orders',
     name: 'orders',
@@ -351,7 +351,7 @@ export const routes = [
   ...feeRouter,
   ...materialRouter,
   ...profileRouter,
-  // ...tradeRouter,
+  ...tradeRouter,
   ...capitalRouter,
   ...fundRouter,
   ...otherRouter,
