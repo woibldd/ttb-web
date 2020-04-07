@@ -23,14 +23,14 @@ export const tradeRouter = [
           require: true
         }
       },
-      // {
-      //   path: 'FrenchBill',
-      //   name: 'FrenchBill',
-      //   component: () => import(/* webpackChunkName: "Fund" */ '@/pages/Capital/FrenchBill'),
-      //   meta: {
-      //     require: true
-      //   }
-      // },
+      {
+        path: 'FrenchBill',
+        name: 'FrenchBill',
+        component: () => import(/* webpackChunkName: "Fund" */ '@/components/Fund/Capital/FrenchBill'),
+        meta: {
+          require: true
+        }
+      },
       // {
       //   path: 'Transfer',
       //   name: 'Transfer',

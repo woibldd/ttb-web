@@ -233,7 +233,7 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
-  @import './../StepTable/assets/scss/trade.scss';
+  @import './trade.scss';
 </style>
 
 
