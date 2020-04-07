@@ -112,17 +112,17 @@ export const capitalRouter = [
           },
           {
             path: 'Trading',
-            name: 'Trading',
+            name: 'FundTrading',
             component: () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/My/Trading.vue')
           },
           {
             path: 'OTC',
-            name: 'OTC',
+            name: 'FundOTC',
             component: () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/My/otc.vue')
           },
           {
             path: 'share',
-            name: 'share',
+            name: 'Fundshare',
             component: () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/My/share_history.vue')
           } 
         ]
