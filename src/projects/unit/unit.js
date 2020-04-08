@@ -11,7 +11,7 @@ import theme from '@/modules/dynamic-theme'
 
 import ElementUI from 'element-ui'
 
-import 'element-ui/lib/theme-chalk/index.css'
+// import 'element-ui/lib/theme-chalk/index.css'
 import './styles/index.scss' // global css
 import '@/styles/index.scss' // 老版的全局样式
 import '@/components/common/ix-scroll-load'
