@@ -25,7 +25,7 @@
             :to="{name: 'ProfileSafety'}">{{ $t('profile_left_invite_safety') }}</router-link>
         </li>
         <li class="">
-          <template v-if="info.lv === 2 && info.state === 2">
+          <template v-if="state.userInfo.lv === 2 && state.userInfo.state === 2">
             <router-link
               class="menu-name"
               :replace="true"
@@ -76,21 +76,23 @@
 </template>
 <script>
   import service from '@/modules/service'
+  import {state} from '@/modules/store'
   export default{
 
     data () {
       return {
         kycRouter: {path: '/profile/kyc/'},
-        info: {}
+        // info: {},
+        state
       }
     },
     methods: {
       async init () {
-        let res = await service.getKycInfo()
-        if (!res.code) {
-          this.info = res.data
-          console.log(this.info, 'router')
-        }
+        // let res = await service.getKycInfo()
+        // if (!res.code) {
+        //   this.info = res.data
+        //   console.log(this.info, 'router')
+        // }
       }
     },
     created () {

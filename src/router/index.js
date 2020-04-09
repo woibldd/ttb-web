@@ -23,7 +23,7 @@ import _ from 'lodash'
 
 // import HelloWorld from '@/components/HelloWorld'
 let loaded = false
-Vue.use(Router)
+// Vue.use(Router)
 // 测试上传是否正常
 const isMobile = utils.isMobile()
 
@@ -351,7 +351,7 @@ export const routes = [
   ...feeRouter,
   ...materialRouter,
   ...profileRouter,
-  ...tradeRouter,
+  // ...tradeRouter,
   ...capitalRouter,
   ...fundRouter,
   ...otherRouter,

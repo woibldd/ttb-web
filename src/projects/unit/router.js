@@ -14,7 +14,7 @@ let loaded = false
 const layout = () => import(/* webpackChunkName: "project-index" */ './layout')
 const currency = () => import(/* webpackChunkName: "project-index" */ './views/currency-unit')
 
-Vue.use(Router)
+// Vue.use(Router)
 let router = new Router({
   // mode: 'history',
   mode: 'hash',
