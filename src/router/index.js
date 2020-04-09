@@ -351,7 +351,7 @@ export const routes = [
   ...feeRouter,
   ...materialRouter,
   ...profileRouter,
-  // ...tradeRouter,
+  ...tradeRouter,
   ...capitalRouter,
   ...fundRouter,
   ...otherRouter,

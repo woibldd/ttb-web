@@ -24,6 +24,7 @@ export default {
             return [+item.values[0], total]
           }).sort((a, b) => a[0] - b[0])
           this.chart.series[index].setData(arrData, false, false, true)
+          console.log({arrData})
         })
         this.chart.redraw()
       }
@@ -51,6 +52,7 @@ export default {
         maxPadding: 0,
         gridLineColor: 'rgba(167, 174, 196, 0.1)',
         gridLineWidth: 1,
+        tickPosition: 'inside',
         tickPixelInterval: 100
       },
       yAxis: [{

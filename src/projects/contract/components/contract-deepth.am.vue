@@ -25,6 +25,7 @@ import service from '@/modules/service'
 import throttle from 'lodash/throttle'
 import utils from '@/modules/utils'
 import isEmtpy from 'lodash/isEmpty'
+import Highcharts from 'highcharts/highcharts'
 export default {
   name: 'ContractDeepth',
   components: {
@@ -35,8 +36,9 @@ export default {
       async handler (pair) {
         if (pair) {
           this.loading = true
-          setTimeout(() => {
-            this.initChart()
+          setTimeout(() => { 
+            this.reloadChart() 
+            this.loading = false
           }, 1000)
         }
       }
@@ -62,18 +64,11 @@ export default {
       return utils.unsign(scale)
     }
   },
-  async created () {
-    this.initChart()
+  async created () { 
     this.fetch()
-    this.$eh.$on('protrade:orderbook:update', throttle(this.updateData, 10000))
+    this.$eh.$on('protrade:orderbook:update', throttle(this.updateData, 500))
   },
-  methods: {
-    _getDataSourceUrl () {
-      let pair = this.pair || 'FUTURE_BTCUSD'
-      if (pair) {
-        return `https://q.ixex.io/v1/orderbook/${pair}?offset=0&accuracy=1&size=20`
-      }
-    },
+  methods: { 
     _parseData (resp) {
       let data = resp.data
       if (isEmtpy(data) || (!data.bids || !data.asks)) {
@@ -107,6 +102,7 @@ export default {
 
         // Calculate cummulative volume
         if (desc) {
+          res[0] = []
           for (let i = list.length - 1; i >= 0; i--) {
             if (i < (list.length - 1)) {
               list[i].totalvolume = list[i + 1].totalvolume + list[i].volume
@@ -114,12 +110,14 @@ export default {
               list[i].totalvolume = list[i].volume
             }
             let dp = {}
-            dp['value'] = list[i].value
-            dp[type + 'volume'] = list[i].volume
-            dp[type + 'totalvolume'] = list[i].totalvolume
-            res.unshift(dp)
+            // dp['value'] = list[i].value
+            // dp[type + 'volume'] = list[i].volume
+            // dp[type + 'totalvolume'] = list[i].totalvolume
+            // res.unshift(dp)
+            res[0].unshift([list[i].value, list[i].totalvolume])
           }
         } else {
+          res[1] = []
           for (let i = 0; i < list.length; i++) {
             if (i > 0) {
               list[i].totalvolume = list[i - 1].totalvolume + list[i].volume
@@ -127,10 +125,11 @@ export default {
               list[i].totalvolume = list[i].volume
             }
             let dp = {}
-            dp['value'] = list[i].value
-            dp[type + 'volume'] = list[i].volume
-            dp[type + 'totalvolume'] = list[i].totalvolume
-            res.push(dp)
+            // dp['value'] = list[i].value
+            // dp[type + 'volume'] = list[i].volume
+            // dp[type + 'totalvolume'] = list[i].totalvolume
+            // res.push(dp)
+            res[1].push([list[i].value, list[i].totalvolume])
           }
         }
       }
@@ -147,98 +146,16 @@ export default {
       }
       this.loading = false
       return res
-    },
-    async initChart () {
-      let am4core = await import(/* webpackChunkName: "amchart" */'@amcharts/amcharts4/core')
-      let am4charts = await import(/* webpackChunkName: "amchart" */'@amcharts/amcharts4/charts')
-      let chart = am4core.create('depth-chart', am4charts.XYChart)
-      this.chart = chart
-      chart.fontSize  = 10
-      chart.fontWeight  = 200
-      chart.fontFamily  = 'Airal'
-      chart.dataSource.url = this._getDataSourceUrl()
-      // chart.dataSource.reloadFrequency = 10000
-      chart.dataSource.adapter.add('parsedData', this._parseData)
-
-      // Set up precision for numbers
-      // chart.numberFormatter.numberFormat = '##.####a'
-
-      // Create axes
-      let xAxis = chart.xAxes.push(new am4charts.CategoryAxis())
-      this.xAxis = xAxis
-      xAxis.dataFields.category = 'value'
-      xAxis.renderer.grid.template.location = 0;
-      // xAxis.renderer.minGridDistance = 100
-      xAxis.stroke = am4core.color('#fff')
-      xAxis.strokeWidth = 0.5;
-      // xAxis.strokeWidth = 1
-      xAxis.title.text = ''
-      xAxis.numberFormatter = new am4core.NumberFormatter()
-      xAxis.numberFormatter.numberFormat = '###.########'
-      // xAxis.numberFormatter.numberFormat = '#,###.####ae'
-
-      let yAxis = chart.yAxes.push(new am4charts.ValueAxis())
-      yAxis.title.text = ''
-      yAxis.stroke = am4core.color('#fff')
-      yAxis.strokeWidth = 0.5;
-      yAxis.numberFormatter = new am4core.NumberFormatter()
-      yAxis.numberFormatter.numberFormat = '###.##a'
-      // yAxis.numberFormatter.numberFormat = '#,###.####'
-      // yAxis.align = am4core.a
-
-      // Create series
-      let series = chart.series.push(new am4charts.StepLineSeries())
-      series.dataFields.categoryX = 'value'
-      series.dataFields.valueY = 'bidstotalvolume'
-      series.strokeWidth = 2
-      series.stroke = am4core.color('#09C989')
-      series.fill = series.stroke
-      series.fillOpacity = 0.1
-
-      // series.tooltip.getFillFromObject = false
-      // series.tooltip.label.fill = am4core.color('#fff');
-      // series.tooltip.background.fill = am4core.color('#fff')
-      // series.tooltip.background.strokeWidth = 0
-      // series.tooltip.background.cornerRadius = 3
-      // series.tooltip.background.pointerLength = 0
-      // series.tooltip.dy = 5
-
-      series.tooltipText = `${this.$t('contract_tooltip_price')}: {categoryX} \n ${this.$t('contract_tooltip_addons')}: {valueY.formatNumber('#,###.####')}` // 'Ask: [bold]{categoryX}[/]\nTotal volume: [bold]{valueY}[/]\nVolume: [bold]{bidsvolume}[/]'
-      console.log(series)
-      let series2 = chart.series.push(new am4charts.StepLineSeries())
-      series2.dataFields.categoryX = 'value'
-      series2.dataFields.valueY = 'askstotalvolume'
-      series2.strokeWidth = 2
-      series2.stroke = am4core.color('#f5222d')
-      series2.fill = series2.stroke
-      series2.fillOpacity = 0.1
-      series2.tooltipText = `${this.$t('contract_tooltip_price')}: {categoryX} \n ${this.$t('contract_tooltip_addons')}: {valueY.formatNumber('#,###.####')}` // 'Ask: [bold]{categoryX}[/]\nTotal volume: [bold]{valueY}[/]\nVolume: [bold]{asksvolume}[/]'
-      // series2.tooltip.background.fill = am4core.color('#fff')
-      // series2.tooltip.background.strokeWidth = 0
-      // series2.tooltip.background.cornerRadius = 3
-      // series2.tooltip.background.pointerLength = 0
-
-      // let series3 = chart.series.push(new am4charts.ColumnSeries())
-      // series3.dataFields.categoryX = 'value'
-      // series3.dataFields.valueY = 'bidsvolume'
-      // series3.strokeWidth = 0
-      // series3.fill = am4core.color('#fff')
-      // series3.fillOpacity = 0.2
-
-      // let series4 = chart.series.push(new am4charts.ColumnSeries())
-      // series4.dataFields.categoryX = 'value'
-      // series4.dataFields.valueY = 'asksvolume'
-      // series4.strokeWidth = 0
-      // series4.fill = am4core.color('#fff')
-      // series4.fillOpacity = 0.2
-
-      // Add cursor
-      chart.cursor = new am4charts.XYCursor()
-    },
+    }, 
     updateData (data) {
-      if (this.chart) {
-        this.chart.data = this._parseData(data)
-      }
+        if (this.chart) {  
+          if (!this.loading) {
+            const list = this._parseData(data)
+            this.chart.series[0].setData(list[0], false, false, true)
+            this.chart.series[1].setData(list[1], false, false, true) 
+              this.chart.redraw()
+          }
+        } 
     },
     fetch () {
       let pair = this.pair || 'BTC_USDT'
@@ -248,9 +165,94 @@ export default {
         accuracy: 1,
         size: 20
       }).then(resp => {
-        if (this.chart) {
-          this.chart.data = this._parseData(resp)
+        if (this.chart) { 
+          const list = this._parseData(resp)  
+          this.chart.series[0].setData(list[0], false, false, true)
+          this.chart.series[1].setData(list[1], false, false, true)
+          this.chart.redraw()
         }
+      })
+    },
+    reloadChart () {
+      this.chart = Highcharts.chart('depth-chart', {
+        chart: {
+          type: 'area',
+          zoomType: 'xy',
+          backgroundColor: 'transparent'
+        },
+        credits: {
+          enabled: false
+        },
+        title: {
+          text: ''
+        },
+        legend: {
+          enabled: false
+        },
+
+        xAxis: {
+          minPadding: 0,
+          maxPadding: 0,
+          gridLineColor: 'rgba(167, 174, 196, 0.1)',
+          gridLineWidth: 1,
+          tickPosition: 'inside',
+          tickPixelInterval: 100
+        },
+        yAxis: [{
+          lineWidth: 1,
+          gridLineColor: 'rgba(167, 174, 196, 0.1)',
+          gridLineWidth: 1,
+          title: null,
+          tickWidth: 1,
+          tickLength: 5,
+          tickPosition: 'inside',
+          labels: {
+            align: 'left',
+            x: 8
+          }
+        }, {
+          opposite: true,
+          linkedTo: 0,
+          gridLineColor: 'rgba(167, 174, 196, 0.1)',
+          gridLineWidth: 1,
+          title: null,
+          tickWidth: 1,
+          tickLength: 5,
+          tickPosition: 'inside',
+          labels: {
+            align: 'right',
+            x: -8
+          }
+        }],
+        plotOptions: {
+          area: {
+            fillOpacity: 0.2,
+            lineWidth: 1,
+            step: 'center',
+            enabled: false
+          },
+          series: {
+            marker: {
+              enabled: false
+            }
+          }
+        },
+        tooltip: {
+          headerFormat: '<span style="font-size=10px;">Price: {point.key}</span><br/>',
+          valueDecimals: 2
+        },
+        series: [
+          {
+            name: 'Asks',
+            data: [],
+            color: '#F24E4D'
+          },
+          {
+            name: 'Bids',
+            data: [],
+            color: '#09C989'
+          }
+        ]
       })
     }
   },
@@ -258,6 +260,9 @@ export default {
   destroyed () {
     this.$eh.$off('protrade:orderbook:update', this.updateData)
     this.chart = null
+  },
+  mounted () {
+    this.reloadChart()
   }
 }
 </script>
