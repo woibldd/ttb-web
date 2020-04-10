@@ -121,7 +121,8 @@
         <v-loading />
       </div>
     </div>
-</div></template>
+</div>
+</template>
 <script>
 import {state, local} from '@/modules/store'
 import utils from '@/modules/utils'

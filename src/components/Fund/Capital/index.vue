@@ -131,9 +131,9 @@
           flex>
           <div flex-box="1">
             <span class="title">{{ $t('wallet_account') }}</span>
-            <a
+            <!-- <a
               class="about"
-              href="https://ixcustomer.zendesk.com/hc/zh-cn/articles/360029651052">{{ $t('wallet_accosaada') }}></a>
+              href="https://ixcustomer.zendesk.com/hc/zh-cn/articles/360029651052">{{ $t('wallet_accosaada') }}></a> -->
             <div class="valuation">
               <p><b>{{ walletTotal | fixed(unit.scale || 2) }}</b> {{ unit.name }}</p>
             </div>

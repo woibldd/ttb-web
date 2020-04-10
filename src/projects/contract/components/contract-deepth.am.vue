@@ -38,7 +38,7 @@ export default {
           this.loading = true
           setTimeout(() => { 
             this.reloadChart() 
-            this.loading = false
+            // this.loading = false
           }, 1000)
         }
       }
@@ -148,14 +148,12 @@ export default {
       return res
     }, 
     updateData (data) {
-        if (this.chart) {  
-          if (!this.loading) {
-            const list = this._parseData(data)
-            this.chart.series[0].setData(list[0], false, false, true)
-            this.chart.series[1].setData(list[1], false, false, true) 
-              this.chart.redraw()
-          }
-        } 
+      if (this.chart) {   
+        const list = this._parseData(data)
+        this.chart.series[0].setData(list[0], false, false, true)
+        this.chart.series[1].setData(list[1], false, false, true) 
+        this.chart.redraw() 
+      } 
     },
     fetch () {
       let pair = this.pair || 'BTC_USDT'
