@@ -243,12 +243,12 @@ export default {
           {
             name: 'Asks',
             data: [],
-            color: '#F24E4D'
+            color: '#09C989'
           },
           {
             name: 'Bids',
             data: [],
-            color: '#09C989'
+            color: '#F24E4D'
           }
         ]
       })
