@@ -36,8 +36,8 @@ export default {
       async handler (pair) {
         if (pair) {
           this.loading = true
+          this.reloadChart() 
           setTimeout(() => { 
-            this.reloadChart() 
             // this.loading = false
           }, 1000)
         }
