@@ -103,7 +103,7 @@
               <span>{{$t('h5_home_new.computer')}}</span>
             </div>
             <div class="btn"
-              @click="download('ios')">
+              @click="download('android')">
               <img src="~@/assets/h5/home/android@2x.png" alt="">
               <span>{{$t('h5_home_new.android')}}</span>
             </div>
@@ -115,7 +115,7 @@
               <span>{{$t('h5_home_new.ios1')}}</span>
             </div>
             <div class="btn"
-              @click="download('android')">
+              @click="download('ios')">
               <img src="~@/assets/h5/home/apple@2x.png" alt="">
               <span>{{$t('h5_home_new.ios2')}}</span>
             </div>
