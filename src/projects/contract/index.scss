@@ -1,0 +1,152 @@
+@import "~@/styles/tooltip";
+// div.zopim {
+//   top: auto !important;
+// }
+.mt-0 {
+  margin-top: 0 !important;
+}
+@for $i from 1 through 30 {
+  .mt-#{$i} {
+      margin-top: $i * 1px !important;
+  }
+  .mr-#{$i} {
+      margin-right: $i * 1px !important;
+  }
+  .ml-#{$i} {
+      margin-left: $i * 1px !important;
+  }
+  .mb-#{$i} {
+      margin-bottom: $i * 1px !important;
+  }
+  .mg-#{$i} {
+    margin: $i * 1px !important;
+  }
+}
+
+@for $i from 1 through 30 {
+  .pt-#{$i} {
+      padding-top: $i * 1px !important;
+  }
+  .pr-#{$i} {
+      padding-right: $i * 1px !important;
+  }
+  .pl-#{$i} {
+      padding-left: $i * 1px !important;
+  }
+  .pb-#{$i} {
+      padding-bottom: $i * 1px !important;
+  }
+  .pd-#{$i} {
+    padding: $i * 1px !important
+  }
+}
+
+@for $i from 1 through 3 {
+  .line-#{$i} {
+      @include limit ($i);
+  }
+
+}
+a,
+a:hover,
+a:focus,
+a:active,
+a:visited {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  text-decoration: none;
+}
+a {
+  &, &:visited, &:focus {
+    color: $text-link;
+  }
+  &:hover {
+    color: $text-link-hover;
+  }
+  &:active {
+    color: $text-link-active;
+  }
+}
+a.raw {
+  @include a() {
+    color: inherit;
+  }
+}
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+.flex-lr {
+  display: flex;
+  flex-direction: row;
+}
+.flex-start {
+  justify-content: flex-start;
+}
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+.relative {
+  position: relative;
+}
+.ibm {
+  display: inline-block;
+  vertical-align: middle !important;
+}
+.ibt {
+  display: inline-block;
+  vertical-align: top !important;
+}
+.pull-right {
+  float: right;
+}
+.primary-text {
+  color: $primary;
+}
+.iconfont {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+  &.arrow {
+    font-size: 16px;
+    &.arrow-up:before {
+      content: "⬆";
+    }
+    &.arrow-down:before {
+      content: "⬇";
+    }
+  }
+  &.strong {
+    vertical-align: baseline;
+    &::before {
+      vertical-align: inherit;
+      border-radius: 50%;
+      width: 12px;
+      height: 12px;
+      display: inline-block;
+      content: '!';
+      background: #A6A6A6;
+      color: #252525;
+      text-align: center;
+    }
+  }
+}
+.text-right {
+    text-align: right;
+}
+.pointer, .btn {
+  cursor: pointer;
+  user-select: none;
+}
+
+.el-loading-mask {
+  background-color: rgba(white,0.5);
+  .el-loading-spinner {
+    .path {
+      stroke: #cccccc;
+    }
+  }
+}
