@@ -62,7 +62,8 @@
       </div>
     </div>
 
-</div></template>
+</div>
+  </template>
 <script>
 import utils from '@/modules/utils'
 import { Toast, MessageBox } from 'mint-ui'
@@ -139,6 +140,20 @@ export default {
   created () {
     if (this.isWeiXin) {
       this.showTutorialArrow = true
+    }
+  },
+  i18n: {
+    messages: {
+      en: { 
+        "download_android": "android download",
+        "download_ios": "ios download", 
+        "app_download_tips": "Tips: APP download, IOS mobile version 10.0 or above and Android phone version 7.0 above are recommended",
+      },
+      'zh-CN': { 
+        "download_android": "Android 下载",
+        "download_ios": "iPhone 下载", 
+        "app_download_tips": "温馨提示：APP下载，建议iOS手机系统版本10.0以上；Android手机系统版本7.0以上",
+      }
     }
   }
 }

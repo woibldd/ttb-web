@@ -112,7 +112,9 @@ module.exports = {
   externals: {
     'vue': 'Vue',
     'vue-router': 'VueRouter',
-    element: 'ElementUI'
+    'element-ui': 'ELEMENT',
+    'highcharts': 'Highcharts',
+    'moment': 'moment'
   },
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue

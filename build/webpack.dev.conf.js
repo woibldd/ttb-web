@@ -30,7 +30,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       sourceMap: config.dev.cssSourceMap,
       usePostCSS: true
     })
-  },
+  }, 
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,
 

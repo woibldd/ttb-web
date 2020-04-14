@@ -17,13 +17,13 @@ utils.$i18n = new VueI18n({
   fallbackLocale: 'en',
   locale: 'en',
   silentTranslationWarn: true, // process.env.NODE_ENV === 'production',
-  messages: {
-    en: actions.replaceName(en)
-  }
+  // messages: {
+  //   en: actions.replaceName(en)
+  // }
 })
 
 // svg
-const request = require.context('../../assets/svg', true, /\.svg$/)
+const request = require.context('./icon', true, /\.svg$/)
 request.keys().forEach(request)
 actions.setLocale()
 

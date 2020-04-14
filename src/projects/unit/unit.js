@@ -9,7 +9,7 @@ import 'flex.css'
 import 'hover.css'
 import theme from '@/modules/dynamic-theme'
 
-import ElementUI from 'element-ui'
+// import ElementUI from 'element-ui'
 
 // import 'element-ui/lib/theme-chalk/index.css'
 import './styles/index.scss' // global css

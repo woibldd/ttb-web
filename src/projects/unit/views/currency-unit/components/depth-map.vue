@@ -4,7 +4,7 @@
     style="height:220px" />
 </template>
 <script>
-import Highcharts from 'highcharts/highcharts'
+// import Highcharts from 'highcharts/highcharts'
 export default {
   props: {
     data: {

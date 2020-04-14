@@ -8,7 +8,7 @@
   />
 </template>
 <script>
-import Highcharts from 'highcharts/highcharts'
+// import Highcharts from 'highcharts/highcharts'
 import HighMap from 'highcharts/modules/map.js'
 import Annotations from 'highcharts/modules/annotations.js'
 import websoketMixin from '../soket'

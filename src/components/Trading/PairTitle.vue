@@ -100,6 +100,7 @@ import { state, local } from '@/modules/store'
 import { pairfix } from '@/mixins/index'
 import isEmpty from 'lodash/isEmpty'
 import PairNav from '@/components/Trading/PairNavForTitle'
+import utils from '@/modules/utils'
 
 export default {
   components: {
@@ -187,6 +188,10 @@ export default {
 
         const tickEnd = this.$moment(`${year}-${month}-${day} ${end}`)
         const tickStart = this.$moment(`${year}-${month}-${day} ${start}`)
+        
+        // dateFormatter(ts, tpl = 'Y-M-D H:m:s') 
+        // const tickEnd = utils.dateFormatter(`${year}-${month}-${day} ${end}`)
+
 
         this.startTime = tickStart.unix()
         this.endTime = tickEnd.unix()

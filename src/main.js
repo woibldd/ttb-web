@@ -17,12 +17,12 @@ import * as Sentry from '@sentry/browser'
 import 'babel-polyfill'
 import './assets/scss/index.scss'
 import './assets/scss/h5.scss'
-import moment from 'moment'
+// import moment from 'moment'
 import './styles/flex.css'
 // import 'element-ui/lib/theme-chalk/index.css'
 import store from './store'
 import './icons'
-import locale from 'element-ui/lib/locale/lang/en'
+// import locale from 'element-ui/lib/locale/lang/en'
 // import vConsole from 'vconsole'
 // let consoleMobile = new vConsole()
 // Vue.use(consoleMobile)
@@ -35,12 +35,12 @@ utils.$i18n = new VueI18n({
     en: actions.replaceName(en)
   }
 })
-import ElementUI from 'element-ui'
+// import ElementUI from 'element-ui'
 // import locale from 'element-ui/lib/locale/lang/en'
 // import 'element-ui/lib/theme-chalk/index.css'
-Vue.use(ElementUI,{
-  i18n: (key, value) => utils.$i18n.t(key, value)
-})
+// Vue.use(ElementUI,{
+//   i18n: (key, value) => utils.$i18n.t(key, value)
+// })
 
 // import {
 //   Select,

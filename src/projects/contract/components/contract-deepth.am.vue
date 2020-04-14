@@ -25,7 +25,7 @@ import service from '@/modules/service'
 import throttle from 'lodash/throttle'
 import utils from '@/modules/utils'
 import isEmtpy from 'lodash/isEmpty'
-import Highcharts from 'highcharts/highcharts'
+// import Highcharts from 'highcharts/highcharts'
 export default {
   name: 'ContractDeepth',
   components: {
