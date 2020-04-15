@@ -63,10 +63,10 @@
     </div>
 
 </div>
-  </template>
+</template>
 <script>
 import utils from '@/modules/utils'
-import { Toast, MessageBox } from 'mint-ui'
+// import { Toast, MessageBox } from 'mint-ui'
 import {state, actions} from '@/modules/store'
 import 'mint-ui/lib/style.css'
 import responsiveMixin from '@/mixins/responsive'
@@ -80,10 +80,10 @@ export default {
       locales: utils.locales
     }
   },
-  components: {
-    Toast,
-    MessageBox
-  },
+  // components: {
+  //   Toast,
+  //   MessageBox
+  // },
   computed: {
     localeText () {
       return utils.getLocaleName(state.locale)

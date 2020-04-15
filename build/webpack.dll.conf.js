@@ -4,13 +4,11 @@ const webpack = require('webpack');
 module.exports = {
   entry: {
     vendor: ['vue/dist/vue.common.js', 
-            'vue-material',
             'vue-i18n',
             'vue-clipboard2',
             'vue-awesome-swiper', 
             'vuex',
-            'axios', 
-            'mint-ui',
+            'axios',  
             'lodash',
             '@sentry/browser', 
             'big.js',  
