@@ -12,10 +12,10 @@ import CurrencyInput from '@/components/CurrencyInput'
 import NumberInput from '@/components/NumberInput'
 import VBtn from '@/components/VBtn'
 import '@/components/common/ix-scroll-load'
-import VDepthChart from 'v-depth-chart'
+// import VDepthChart from 'v-depth-chart'
 
+// Vue.use(VDepthChart)
 Vue.mixin(commonMixins)
-Vue.use(VDepthChart)
 Vue.component('icon', Icon)
 Vue.component('v-modal', VModal)
 Vue.component('v-loading', VLoading)

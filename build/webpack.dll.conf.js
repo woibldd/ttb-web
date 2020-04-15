@@ -3,26 +3,19 @@ const webpack = require('webpack');
  
 module.exports = {
   entry: {
-    vendor: ['vue/dist/vue.common.js',
-            'vue',
+    vendor: ['vue/dist/vue.common.js', 
             'vue-material',
             'vue-i18n',
             'vue-clipboard2',
-            'vue-awesome-swiper',
-            'vue-router',
+            'vue-awesome-swiper', 
             'vuex',
-            'axios',
-            'element-ui',
+            'axios', 
             'mint-ui',
             'lodash',
             '@sentry/browser', 
-            'big.js',
-            'pdfmake',
-            'highcharts', 
-            'copy-to-clipboard',
-            'moment',
-            'reconnecting-websocket', 
-            'v-depth-chart',
+            'big.js',  
+            'copy-to-clipboard', 
+            'reconnecting-websocket',  
             'wowjs'
            ]
   },

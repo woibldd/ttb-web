@@ -60,7 +60,7 @@ actions.setLocale()
 //   i18n: (key, value) => i18n.t(key, value)
 // })
 
-Vue.use(ElementUI)
+// Vue.use(ElementUI)
 Vue.prototype.$eventBus = new Vue({})
 
 new Vue({

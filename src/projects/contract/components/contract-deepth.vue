@@ -9,14 +9,14 @@
           <div
             id="depth-chart"
             class="depth-chart">
-            <v-depth-chart
+            <!-- <v-depth-chart
               width="468px"
               height="191px"
               bg-color="#252525"
               :jagged="false"
               :tips-price="tipsPrice"
               :tips-total="tipsTotal"
-              :data="data"/>
+              :data="data"/> -->
           </div>
         </div>
         <div
