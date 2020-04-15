@@ -75,7 +75,8 @@
           :label="hd.title">
           <template slot-scope="scope">
             <span v-if="hd.key === 'currency'">
-              <icon :name="scope.row.currency"/>
+              <!-- <icon :name="scope.row.currency"/> -->
+              <img v-if="scope.row.url" :src="scope.row.url" alt="" style="width: 20px;vertical-align: middle;">
               <i>{{scope.row[hd.key]}} </i>
             </span>
             <span v-else-if="hd.key === 'estValue'">{{ scope.row[hd.key] || 0 | fixed(unit.scale) }}</span>
