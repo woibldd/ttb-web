@@ -264,7 +264,7 @@ body {
 
 
 .header-chart-panel .space-single:not(:first-child) .button {
-  padding: 6px 5px;
+  padding: 6px 2px;
 }
 .header-chart-panel .space-single:not(:first-child) .button:hover {
   color: #01CED1;
