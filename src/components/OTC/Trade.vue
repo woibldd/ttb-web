@@ -40,11 +40,13 @@ export default {
     if (res.code === 0) {
       state.otc.userInfo = res.data
     }
-    if (!state.userStatus) {
-      this.$router.replace({
-        name: 'login'
-      })
-    }
+    setTimeout(() => {
+      if (!this.isLogin) {
+        this.$router.replace({
+          name: 'login'
+        })
+      }
+    }, 1000)
   }
 }
 
