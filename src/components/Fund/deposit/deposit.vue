@@ -229,6 +229,8 @@ export default {
           this.address = res.data.address
           this.memo = res.data.memo
           this.contract = res.data.contract
+        } else {
+          utils.alert(res.message)
         }
       })
     },
@@ -287,7 +289,7 @@ export default {
               Vue.set(item, 'currencyName', item.currency + '-' + 'ERC20')
             }
           })
-          this.lianData = this.lianData.reverse()//顺序颠倒一下，omni要放在前面
+          // this.lianData = this.lianData.reverse()//顺序颠倒一下，omni要放在前面
           this.allCoins = this.removalData(res.data.filter(c => c.depositable))
           this.allCoins.forEach((item) => {
             if (state.locale === 'zh-CN') {
@@ -304,13 +306,15 @@ export default {
             return
           }
           if (this.allCoins[0].currency === 'USDT') {
-            this.lianData.forEach((item) => {
-              console.log(item.currencyName)
-              if (item.currencyName === 'USDT-ERC20') {
-                this.selectLian = item
-                this.selectCoin = item
-              }
-            })
+            this.selectLian = this.lianData[0]
+            this.selectCoin = this.lianData[0]
+            // this.lianData.forEach((item) => {
+            //   console.log(item.currencyName)
+            //   if (item.currencyName === 'USDT-ERC20') {
+            //     this.selectLian = item
+            //     this.selectCoin = item
+            //   }
+            // })
           } else {
             this.selectCoin = this.allCoins[0]
           }
@@ -328,12 +332,14 @@ export default {
     },
     quickSelectCoin(coin) {
       if (coin.currency === 'USDT') {
-        this.lianData.forEach((item) => {
-          if (item.currencyName === 'USDT-ERC20') {
-            this.selectLian = item
-            this.selectCoin = item
-          }
-        })
+        this.selectLian = this.lianData[0]
+        this.selectCoin = this.lianData[0]
+        // this.lianData.forEach((item) => {
+        //   if (item.currencyName === 'USDT-ERC20') {
+        //     this.selectLian = item
+        //     this.selectCoin = item
+        //   }
+        // })
       } else {
         this.selectCoin = coin
       }
