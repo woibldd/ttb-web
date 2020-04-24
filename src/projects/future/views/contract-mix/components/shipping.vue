@@ -590,7 +590,7 @@ export default {
     }
   },
   async created () {
-    this.currencyRates = (await getRates({ currency: 'ETH' })).data.ETH
+    this.currencyRates = await getRates()
   }
 }
 </script>
