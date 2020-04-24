@@ -7,12 +7,13 @@ import { state, actions } from '@/modules/store'
 import _ from 'lodash'
 import routeWhiteList from '@/libs/spa-route-whitelist'
 
-const whiteList = ['currency-unit']
+const whiteList = ['currency-unit', 'contract-mix']
 
 let loaded = false
 
 const layout = () => import(/* webpackChunkName: "project-index" */ './layout')
 const currency = () => import(/* webpackChunkName: "project-index" */ './views/currency-unit')
+const contractMix = () => import (/* webpackChunkName: "contract-mix" */ './views/contract-mix')
 
 // Vue.use(Router)
 let router = new Router({
@@ -22,20 +23,20 @@ let router = new Router({
   routes: [
     {
       path: '/',
+      redirect: '/mix'
+      // name: 'currency-unit',
+      // component: currency//, 
+    },
+    {
+      path: '/mix',
+      name: 'contract-mix',
+      component: contractMix
+    },
+    {
+      path: '/unit',
       name: 'currency-unit',
-      component: currency//,
-      // redirect: '/currency',
-      // children: [
-      //   {
-      //     path: '/currency',
-      //     name: 'currency',
-      //     component: currency,
-      //     meta: {
-      //       title: '合约'
-      //     }
-      //   }
-      // ]
-    }
+      component: currency
+    },
   ].concat(routeWhiteList)
 })
 

@@ -4,7 +4,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div> -->
-    <v-nav from="unit"/>
+    <!-- <v-nav from="unit"/> -->
     <router-view />
     <!-- <v-notify-list/> -->
     <transition name="el-zoom-in-center">

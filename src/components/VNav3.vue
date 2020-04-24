@@ -15,7 +15,7 @@
           >{{ $t('contract') }}</a>
           <div class="nav_link arrow-down" >
             <a
-              href="/unit.html"
+              href="/future.html#/unit"
               :class="{'router-link-active': from === 'unit'}"
               class="nav_link ml-20">{{ $t('currency-unit') }}
             </a>

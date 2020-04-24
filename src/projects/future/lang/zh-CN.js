@@ -3051,6 +3051,274 @@ export default {
       contract_close_tips2: '在执行时，将平掉你的整个仓位。'
     }
   },
+  contractMix: {
+    sheet: '张',
+    buy: '买入',
+    sell: '卖出',
+    handle: '操作',
+    cancel: '撤销',
+    deal: '合约交易',
+    rateOReturn: '回报率',
+    quota: '风险限额',
+    handleSuccess: '操作成功',
+    index: '指数',
+    currentPlace: '当前仓位',
+    side: {
+      1: '买入开多',
+      2: '卖出开空',
+      3: '卖出平多',
+      4: '买入平空'
+    },
+    orderType: {
+      1: '限价',
+      2: '市价',
+      3: '止盈止损'
+    },
+    origin: {
+      1: '成交单',
+      2: '强平单',
+      3: '资金费率',
+      4: 'ADL减仓'
+    },
+    state: {
+      1: '委托中未成交',
+      2: '委托中限价部分成交',
+      3: '完全成交',
+      4: '撤单全部',
+      5: '撤单部分成交',
+      6: '市价部分成交',
+      7: '市价'
+    },
+    mapTabs: {
+      FUTURE_BTCUSD: `BTC永续`,
+      FUTURE_ETHUSD: `ETH永续`,
+      FUTURE_EOSUSD: `EOS永续`,
+      FUTURE_BHDUSD: `BHD永续`,
+      ETHUSD: `ETH币本位`,
+      EOSUSD: `EOS币本位`,
+      METHUSD: `METH币本位`,
+      BTCUSDT: `BTCUSDT`
+    },
+    mapTableTapContents: {
+      shipping: {
+        text: '仓位',
+        mapTableColumns: {
+          holding: {
+            label: '目前仓位数量',
+            tips: '<a>目前仓位数量</a><br/>你在此合约的仓位，正数为多仓，负数为空仓。'
+          },
+          _leverage: {
+            label: '杠杆倍数',
+            tips: ''
+          },
+          markPrice: {
+            label: '标记价格',
+            tips: '<a>标记价格</a><br/>这是现在的标记价格，点此了解更多。'
+          },
+          price: {
+            label: '开仓价格',
+            tips: '<a>开仓价格</a><br/>目前多/空仓的平均买入/卖出价。'
+          },
+          liq_price: {
+            label: '强平价格',
+            tips: '<a>强平价格</a><br/>如果该合约的标记价格低于该价格（多仓）或高于该价格（空仓），你将会被强制平仓。'
+          },
+          value: {
+            label: '价值',
+            tips: '仓位在当前合理价格的名义价值'
+          },
+          margin_position: {
+            label: '仓位保证金',
+            tips: '<a>保证金</a><br/>被仓位使用并锁仓的保证金，如果你有在某个仓位启用逐仓，此数值将会随着保证金下跌而减少，亦代表你的实际杠杆上升。移动滑杆来调整分配到各个仓位的保证金。'
+          },
+          unrealized: {
+            label: '未实现盈亏（回报率%）',
+            tips: '<a>未实现盈亏（回报率%）</a><br/>该合约的未实现盈亏，以及回报率。'
+          },
+          realized: {
+            label: '已实现盈亏',
+            tips: '<a>已实现盈亏</a><br/>自开仓以来的已实现盈亏。'
+          },
+          currency: {
+            label: '结算币种',
+            tips: ''
+          }
+        }
+      },
+      shipped: {
+        text: '已平仓位',
+        mapTableColumns: {
+          symbol: '合约类型',
+          realized: '已实现盈亏'
+        }
+      },
+      curEntrust: {
+        text: '当前委托',
+        mapTableColumns: {
+          symbol: '合约类型',
+          side: '方向',
+          amount: '数量',
+          currency: '结算币种',
+          price: '委托价格',
+          // total: '已成交额',
+          executed: '已成交量/剩余量',
+          entrustValue: '委托价值',
+          type: '类型',
+          state: '状态',
+          // tp_type: '止盈/止损',
+          create_time: '下单时间'
+          // update_time: '更新时间'
+          // tp_price: '止盈价格',
+          // sl_type: '止损触发类型',
+          // sl_price: '止损价格'
+        }
+      },
+      lossEntrust: {
+        text: '止损委托',
+        mapTableColumns: {
+          name: '合约类型',
+          side: '方向',
+          amount: '数量',
+          currency: '结算币种',
+          trigger_price: '触发价格',
+          distancePrice: '距离触发',
+          // total: '已成交额',
+          executed: '已成交量',
+          type: '类型',
+          state: '状态',
+          create_time: '下单时间'
+          // update_time: '更新时间'
+          // tp_type: '止盈触发类型',
+          // tp_price: '止盈价格',
+          // sl_type: '止损触发类型',
+          // sl_price: '止损价格'
+        }
+      },
+      historyEntrust: {
+        text: '委托历史',
+        mapTableColumns: {
+          symbol: '合约类型',
+          side: '方向',
+          amount: '数量',
+          currency: '结算币种',
+          trigger_price: '触发价格',
+          // price: '委托价格',
+          executed_price: '成交价格',
+          executed: '已成交量/剩余量',
+          // entrustValue: '委托价值',
+          type: '类型',
+          state: '状态',
+          // tp_type: '止盈/止损',
+          create_time: '下单时间'
+          // update_time: '更新时间'
+          // tp_price: '止盈价格',
+          // sl_type: '止损触发类型',
+          // sl_price: '止损价格'
+        }
+      },
+      bargain: {
+        text: '已成交',
+        mapTableColumns: {
+          symbol: '合约类型',
+          side: '方向',
+          amount_total: '委托数量',
+          currency: '结算币种',
+          amount: '成交量',
+          amount_surplus: '剩余量',
+          price: '成交价格',
+          // entrustPrice: '委托价格',
+          total: '价值',
+          type: '委托类型',
+          origin: '成交类型',
+          order_id: '委托单ID',
+          // fee: '手续费',
+          create_time: '成交时间'
+        }
+      }
+    },
+    mapDishInfo: {
+      current: '最新价',
+      change_24h: '涨跌幅',
+      volume_24h: '24H成交量',
+      markPrice: '标记价格',
+      increment_24h: '涨跌额'
+    },
+    mapDelegateList: {
+      'entrust-list': '委托列表',
+      'depth': '深度',
+      'return-dish': '返回盘口',
+      'new-bargain': '最新成交',
+      'contract_index_price_tips': '<a>指数价格</a><br/>标的资产的价格这是BTC合约的价格，点此查看历史价格。',
+      'contract_mark_price_tips': '<a>标记价格</a><br/>这是现在的标记价格，点此了解更多。',
+      mapHeader1: {
+        'price': '价格',
+        'amount': '数量',
+        'total': '累计'
+      },
+      mapHeader2: {
+        'direction': '方向',
+        'transaction-price': '成交价',
+        'trading-volume': '成交量',
+        'time': '时间'
+      }
+    },
+    mapFormContent: {
+      mapOrderTypes: {
+        1: { text: '开仓'},
+        2: { text: '平仓'}
+      },
+      mapBtns: {
+        1: { text: '限价', describe: '限价委托用于在指定的（或更好的）价格买入或卖出。这是最常用的委托类型。' },
+        2: { text: '市价', describe: '市价委托是一种最快的成交方式。它以目前委托列表的最佳价格执行。请注意，网络延迟可能导致委托的执行价格与你的期望有所不同。' },
+        3: { text: '止盈止损', describe: '' }
+      },
+      mapMenuOptions: {
+        3: '限价止损',
+        4: '市价止损',
+        5: '限价止盈',
+        6: '市价止盈'
+      },
+      mapInput: {
+        shippingSpace: '仓位',
+        value: '价格',
+        triggerPrice: '触发价格',
+        triggerType: '触发类型'
+      },
+      mapHandleBtn: {
+        buy: '买入/平空',
+        sell: '卖出/平多'
+      },
+      cost: '成本',
+      submitEntrust: '提交委托',
+      tradingType: '结算币种',
+      mapDescribe: {
+        entrustValue: {
+          text: '委托价值',
+          tips: '此委托的总价值'
+        },
+        available: {
+          text: '可用余额',
+          tips: '你建立委托的可用余额，点此查看钱包详情。'
+        }
+      },
+      mapTriggerType: {
+        1: '盘口价格',
+        2: '标记价格',
+        3: '指数价格'
+      },
+      notip: '直接下单',
+      trigger_close: '触发后平仓',
+      perfactPrice: '市场最优价格',
+      passive: '被动委托'
+    },
+    mapInformation: {
+      priceBy: '价格来源',
+      priceIndex: '指数价格',
+      volume_24h: '24小时交易量',
+      value: '合约价值',
+      valueRate: '资金费率'
+    }
+  },
   shipping: {
     lossLimit: '止损',
     winLimit: '止盈',

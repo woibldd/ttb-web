@@ -36,8 +36,7 @@ import utils from '@/modules/utils'
 import isEmtpy from 'lodash/isEmpty'
 export default {
   name: 'ContractDeepth',
-  components: {
-  },
+  components: {},
   watch: {
     pair: {
       immediate: false,
