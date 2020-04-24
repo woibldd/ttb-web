@@ -1033,8 +1033,10 @@ export default {
     },
     mapLever () {
       if (!this.activeProduct) return []
-      // console.log({mapLever:this.activeProduct})
-      return this.activeProduct.symbol_currency[this.curSymbol].leverages.split(',')
+      // console.log({mapLever:this.activeProduct})(item => item.currency === 'USDT')
+
+      // return this.activeProduct.symbol_currency[this.curSymbol].leverages.split(',')
+      return this.activeProduct.symbol_currency.find(item => item.currency === this.curSymbol).leverages.split(',')
     },
     updateTableList () {
       return this.tableList && this.tableList.map(item => {
@@ -1295,7 +1297,8 @@ export default {
               }
               // let openValue = toBig(row.holding).div(row.price).abs()
               let openValue = calcMixValueByAmountAndPrice(row.holding, row.price, curProduct.multiplier, row.rate)
-              let leverage = +row.leverage || curProduct.symbol_currency[this.tradingType].max_leverage
+              // let leverage = +row.leverage || curProduct.symbol_currency[this.tradingType].max_leverage
+              let leverage = +row.leverage || curProduct.symbol_currency(item => item.currency === this.curSymbol).max_leverage 
 
               if (row.side === 1) {
                 let unrealized = calcMixProfit(row.holding, row.price, curProduct.MIX.current, curProduct.multiplier, row.rate)

@@ -202,8 +202,11 @@ export const getCost = (product, leverages, entrustList, currHolding) => {
 }
 
 export const getMixCost = (product, leverages, entrustList, currHolding) => {
+  // console.log({product})
+  // console.log(product.symbol_currency)
   const { amount, price, take_rate, mm, im, multiplier, symbol_currency } = product
-  const { base_risk, gap_risk, max_leverage} = symbol_currency.USDT
+  // const { base_risk, gap_risk, max_leverage} = symbol_currency.USDT
+  const { base_risk, gap_risk, max_leverage} = symbol_currency.find(item => item.currency === 'USDT')
 
   // 输入价值
   // const currValue = calcValueByAmountAndPrice(amount, price, multiplier)
@@ -356,7 +359,8 @@ export const getLiqPrice = ({ isBuy, leverages, amount, price, available_balance
 
 export const getMixLiqPrice = ({ isBuy, leverages, amount, price, available_balance, totalValue }, product) => {
   const { take_rate, mm, im, multiplier, symbol_currency } = product
-  const { base_risk, gap_risk, max_leverage} = symbol_currency.USDT
+  // const { base_risk, gap_risk, max_leverage} = symbol_currency.USDT 
+  const { base_risk, gap_risk, max_leverage} = symbol_currency.find(item => item.currency === 'USDT')
   // 委托价值
   const entrustValue = calcValueByAmountAndPrice(amount, price, multiplier)
   /* 初始保证金 */

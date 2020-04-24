@@ -82,6 +82,9 @@ export const state = {
   unit: {
     pair: ''
   },
+  mix: {
+    pair: ''
+  },
   rate: {
     IX: null,
     USDT: null,
