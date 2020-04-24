@@ -28,6 +28,13 @@
               class="nav_link ml-20">{{ $t('appNav.mapNavList.currency-unit') }}
             </a>
           </div>
+          <div class="nav_link arrow-down" >
+            <a
+              href="/future.html#/mix"
+              :class="{'router-link-active': from === 'mix'}"
+              class="nav_link ml-20">{{ $t('appNav.mapNavList.currency-mix') }}
+            </a>
+          </div>
           <div class="nav_link arrow-down">
             <router-link
               :to="{name: 'OTC'}"

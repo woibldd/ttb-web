@@ -20,6 +20,13 @@
               class="nav_link ml-20">{{ $t('currency-unit') }}
             </a>
           </div>
+          <div class="nav_link arrow-down" >
+            <a
+              href="/future.html#/mix"
+              :class="{'router-link-active': from === 'mix'}"
+              class="nav_link ml-20">{{ $t('currency-mix') }}
+            </a>
+          </div>
           <router-link :to="{name: 'OTC'}" class="nav_link ml-30">{{ $t('otc_trade') }}</router-link>
 
           <router-link

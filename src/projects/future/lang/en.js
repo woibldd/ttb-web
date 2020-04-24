@@ -2757,6 +2757,7 @@ export default {
       'contract': 'BTC Contract',
       'legalTender': 'Fiat',
       'currency-unit': 'Currency Standard Contract',
+      'currency-mix': '金本位合约',
       'hotActive': {
         label: 'Activities',
         children: {

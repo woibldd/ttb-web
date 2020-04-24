@@ -2121,6 +2121,7 @@ export default {
       'trading': '币币交易',
       'contract': 'BTC계약',
       'currency-unit': '코인 베이스 계약',
+      'currency-mix': '金本位合约',
       'legalTender': '法币交易',
       'hotActive': {
         label: '热门活动',

@@ -2046,6 +2046,7 @@ export default {
       'trading': '币币交易',
       'contract': 'BTC合約',
       'currency-unit': '幣本位合約',
+      'currency-mix': '金本位合約',
       'legalTender': '法币交易',
       'hotActive': {
         label: '热门活动',
