@@ -988,6 +988,9 @@ export default {
   }
 }
 .dark {
+  &.ix-button {
+    background-color: $primary;
+  }
   background: $home-header-bgdark;
 }
 .custom-dark {
