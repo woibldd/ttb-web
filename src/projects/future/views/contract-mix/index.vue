@@ -299,7 +299,7 @@
                       :data="mapLever"
                       :type="key === 'buy'?'success':'danger'"
                       @change="setLeverage"
-                      @command="handleCommandOrder" />
+                      @command="handleCommandOrder" /> 
                     <el-button
                       slot="reference"
                       :type="key === 'buy'?'success':'danger'"
@@ -310,7 +310,7 @@
                       @click="handlePopoverClick(key)">
                       <div
                         v-show="!buyBtnLoading"
-                        flex="main:justify cross:center">
+                        flex="main:justify cross:center"> 
                         <span>{{ $tR(`mapFormContent.mapHandleBtn.${key}.${activeTypesKey}`) }}</span>
                         <span
                           v-if="activeBtnsKey === '1'"
@@ -347,19 +347,7 @@
                   <div
                     :flex-box="1"
                     class="transactionPrice"
-                    style="width: 60px;">
-                    <!-- <dropdown
-                      v-model="tradingType.label"
-                      :menu-options="tradingOptions"
-                      label="label">
-                      <el-button
-                        class="custom-btn"
-                        :disabled="true"
-                        size="small"
-                        @click="handleTradingTypeSwitch(key)">
-                        {{ tradingType }} <i class="el-icon-caret-bottom" />
-                      </el-button>
-                    </dropdown> -->
+                    style="width: 60px;"> 
                     <el-select
                       style="width:100px"
                       v-model="tradingType"
@@ -372,21 +360,8 @@
                         :value="subValue.key" />
                     </el-select>
                   </div>
-                  <div :flex-box="3"/>
-                  <!-- <div :flex-box="1">
-                    <dropdown v-model="tradingType.label"
-                              :menu-options="tradingOptions"
-                              label="label">
-                      <el-button class="custom-btn"
-                                size="small"
-                                @click="handleTradingTypeSwitch(key)">
-                        {{ tradingType }} <i class="el-icon-caret-bottom" />
-                      </el-button>
-                    </dropdown>
-                  </div>
-                  <div  ></div> -->
-                </div>
-                <!-- <hr> -->
+                  <div :flex-box="3"/> 
+                </div> 
                 <div
                   v-for="(value,key) in mapFormContent.mapDescribe"
                   :key="key"
@@ -1173,13 +1148,14 @@ export default {
       
       const curSymbol = this.tradingType
       const price = getMixLiqPrice({
-        isBuy: this.isBuy,
+        // isBuy: this.side === 1,
+         isBuy: false,
         leverages: this.activeLever,
         amount: this.activeAcountAndPriceArr[0],
         price: this.activeAcountAndPriceArr[1] || this.activeProduct.MIX.current,
         available_balance: this.activeBalance.available_balance,
         totalValue: this.totalValue()
-      }, {...this.activeProduct, curSymbol})
+      }, {...this.activeProduct, curSymbol}) 
       return price
     },
     handleOrderbookSoket (data) {
