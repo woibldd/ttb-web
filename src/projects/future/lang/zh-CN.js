@@ -2785,7 +2785,9 @@ export default {
       FUTURE_BHDUSD: `BHD永续`,
       ETHUSD: `ETHUSD`,
       EOSUSD: `EOSUSD`,
-      METHUSD: `METHUSD (模拟)`
+      METHUSD: `METHUSD (模拟)`,
+      BTCUSDT: `BTCUSDT`,
+      BTCMUSDT: `BTCMUSDT`,
     },
     mapTableTapContents: {
       shipping: {
@@ -3290,12 +3292,12 @@ export default {
         // buy: '买入/平空',
         // sell: '卖出/平多'
         buy: {
-          1: '买入',
-          2: '平空'
+          1: '买入开多',
+          2: '买入平空'
         },
         sell: {
-          1: '卖出',
-          2: '平多'
+          1: '卖出开空',
+          2: '卖出平多'
         }
       },
       cost: '成本',

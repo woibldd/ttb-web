@@ -2900,7 +2900,9 @@ export default {
       FUTURE_BHDUSD: `BHDUSD`,
       ETHUSD: `ETHUSD`,
       EOSUSD: `EOSUSD`,
-      METHUSD: `METHUSD (Simulated)`
+      METHUSD: `METHUSD (Simulated)`,
+      BTCUSDT: `BTCUSDT`,
+      BTCMUSDT: `BTCMUSDT`,
     },
     mapTableTapContents: {
       shipping: {
@@ -3165,21 +3167,53 @@ export default {
       ETHUSD: `ETH币本位`,
       EOSUSD: `EOS币本位`,
       METHUSD: `METH币本位`,
-      BTCUSDT: `BTCUSDT`
+      BTCUSDT: `BTCUSDT`,
+      BTCMUSDT: `BTCMUSDT`
     },
     mapTableTapContents: {
       shipping: {
-        text: '仓位',
+        text: '仓位', 
         mapTableColumns: {
-          holding: '目前仓位数量',
-          _leverage: '杠杆倍数',
-          markPrice: '标记价格',
-          price: '开仓价格',
-          liq_price: '强平价格',
-          value: '价值',
-          margin_position: '仓位保证金',
-          unrealized: '未实现盈亏（回报率%）',
-          realized: '已实现盈亏'
+          holding: {
+            label: '目前仓位数量',
+            tips: '<a>目前仓位数量</a><br/>你在此合约的仓位，正数为多仓，负数为空仓。'
+          },
+          _leverage: {
+            label: '杠杆倍数',
+            tips: ''
+          },
+          markPrice: {
+            label: '标记价格',
+            tips: '<a>标记价格</a><br/>这是现在的标记价格，点此了解更多。'
+          },
+          price: {
+            label: '开仓价格',
+            tips: '<a>开仓价格</a><br/>目前多/空仓的平均买入/卖出价。'
+          },
+          liq_price: {
+            label: '强平价格',
+            tips: '<a>强平价格</a><br/>如果该合约的标记价格低于该价格（多仓）或高于该价格（空仓），你将会被强制平仓。'
+          },
+          value: {
+            label: '价值',
+            tips: '仓位在当前合理价格的名义价值'
+          },
+          margin_position: {
+            label: '仓位保证金',
+            tips: '<a>保证金</a><br/>被仓位使用并锁仓的保证金，如果你有在某个仓位启用逐仓，此数值将会随着保证金下跌而减少，亦代表你的实际杠杆上升。移动滑杆来调整分配到各个仓位的保证金。'
+          },
+          unrealized: {
+            label: '未实现盈亏（回报率%）',
+            tips: '<a>未实现盈亏（回报率%）</a><br/>该合约的未实现盈亏，以及回报率。'
+          },
+          realized: {
+            label: '已实现盈亏',
+            tips: '<a>已实现盈亏</a><br/>自开仓以来的已实现盈亏。'
+          },
+          currency: {
+            label: '结算币种',
+            tips: ''
+          }
         }
       },
       shipped: {
@@ -3318,8 +3352,14 @@ export default {
         triggerType: '触发类型'
       },
       mapHandleBtn: {
-        buy: '买入/平空',
-        sell: '卖出/平多'
+        buy: {
+          1: '买入开多',
+          2: '买入平空'
+        },
+        sell: {
+          1: '卖出开空',
+          2: '卖出平多'
+        }
       },
       cost: '成本',
       submitEntrust: '提交委托',

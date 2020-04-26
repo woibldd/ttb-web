@@ -313,7 +313,7 @@ export default {
           height:0;
           position:absolute;
           left:10px;
-          right:6px;
+          right:10px;
           top: 10.5px;
         }
         &>li{

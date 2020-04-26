@@ -20,7 +20,7 @@
               class="nav_link ml-20">{{ $t('currency-unit') }}
             </a>
           </div>
-          <div v-if="isTestnet" class="nav_link arrow-down" >
+          <div class="nav_link arrow-down" >
             <a 
               href="/future.html#/mix"
               :class="{'router-link-active': from === 'mix'}"
