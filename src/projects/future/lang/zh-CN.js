@@ -3287,8 +3287,16 @@ export default {
         triggerType: '触发类型'
       },
       mapHandleBtn: {
-        buy: '买入/平空',
-        sell: '卖出/平多'
+        // buy: '买入/平空',
+        // sell: '卖出/平多'
+        buy: {
+          1: '买入',
+          2: '平空'
+        },
+        sell: {
+          1: '卖出',
+          2: '平多'
+        }
       },
       cost: '成本',
       submitEntrust: '提交委托',
@@ -3329,13 +3337,23 @@ export default {
   },
   orderPopover: {
     mapTableColumns: {
-      1: '委托价值',
-      2: '成本@{active}',
-      3: '可用余额',
-      4: '成交后的仓位大小',
-      5: '标记价格',
-      6: '预期强平价格',
-      7: '标记价格/预期强平价格 差异'
+      //1开仓， 2平仓
+      1: { 
+        1: '委托价值',
+        2: '成本@{active}',
+        3: '可用余额',
+        4: '成交后的仓位大小',
+        5: '标记价格',
+        6: '预期强平价格',
+        7: '标记价格/预期强平价格 差异'
+      },
+      2: {
+        1: '委托价值',
+        2: '成本@{active}',
+        3: '可用余额',
+        4: '成交后的仓位大小',
+        5: '标记价格'
+      }
     },
     setLever: '设置杠杆倍数',
     tip: '您的操作将会把已持仓杠杆倍数和委托订单杠杆倍数修改为<i class="text-danger">{leverage}</i>，仓位保证金调节为<i class="text-danger">{margin_position}</i>，委托保证金为<i class="text-danger">{margin_delegation}</i>',

@@ -130,8 +130,7 @@ export default {
       this.subscribeBars(symbolInfo, resolution, onRealtimeCallback)
     })
   },
-  unsubscribeBars (subscriberUID) {
-    utils.log('UnsubscribeBars', subscriberUID)
+  unsubscribeBars (subscriberUID) { 
     utils.$tvSocket && utils.$tvSocket.$destroy()
   },
   destroy () {

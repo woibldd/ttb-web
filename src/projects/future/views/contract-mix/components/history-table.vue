@@ -132,7 +132,7 @@
 
 <script>
 import editCell from './edit-cell'
-import { setModify } from '../../../api/currencyUnit'
+import { setModify } from '../../../api/contractMix'
 import { bigMinus } from '../../../utils/handleNum'
 export default {
   components: {editCell},
@@ -202,7 +202,7 @@ export default {
         let item = arr[0]
         let res = await setModify({
           order_id: item.id,
-          symbol: item.currency,
+          symbol: item.name,
           amount: obj.newValue
         })
         if (!res.code) {
@@ -219,7 +219,7 @@ export default {
         let item = arr[0]
         let res = await setModify({
           order_id: item.id,
-          symbol: item.currency,
+          symbol: item.name,
           price: obj.newValue
         })
         if (!res.code) {
@@ -236,7 +236,7 @@ export default {
         let item = arr[0]
         let res = await setModify({
           order_id: item.id,
-          symbol: item.currency,
+          symbol: item.name,
           trigger_price: obj.newValue
         })
         if (!res.code) {

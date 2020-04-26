@@ -17,77 +17,12 @@
           class="text-success">{{ $t(`contractMix.side.${item.side}`) }}</h3>
         <h3
           v-else
-          class="text-danger">{{ $t(`contractMix.side.${item.side}`) }}</h3>
-          <!-- <p class="interval">{{ $tR('winLimit') }} / {{ $tR('lossLimit') }}</p>
-        <p>
-          <span class="text-success">{{ !+item.tp_price?'--':item.tp_price }}</span>  / <span class="text-danger">{{ !+item.sl_price?'--':item.sl_price }}</span>
-          <el-popover
-            placement="top"
-            popper-class="custom-popper"
-            width="400"
-            trigger="click"
-            :ref="'popover-' + item.currency">
-            <div>
-              <div
-                v-for="(formItem,index) in formArrData"
-                :key="index"
-                class="popover-body">
-                <el-checkbox
-                  class="text-light"
-                  v-model="formItem.type">{{ $tR(`${ !index?'winLimit':'lossLimit'}`) }} USD</el-checkbox>
-                <div flex="main:justify">
-                  <label class="text-light">{{ $t('contract.mapFormContent.mapInput.triggerType') }}</label>
-                  <el-select
-                    v-model="formItem.trigger_type"
-                    :disabled="!formItem.type"
-                    size="small"
-                    class="custom-select transactionPrice"
-                    @change="handleInput(false,formItem,item.holding, item.price)">
-                    <el-option
-                      v-for="(subValue,subKey) in mapFormContent.mapTriggerType"
-                      :key="subKey"
-                      :label="subValue"
-                      :value="+subKey" />
-                  </el-select>
-                </div>
-                <div flex="main:justify">
-                  <label class="text-light">{{ $t('contract.mapFormContent.mapInput.triggerPrice') }}</label>
-                  <input
-                    :disabled="!formItem.type"
-                    :value="formItem.trigger_price"
-                    type="text"
-                    @input="handleInput($event,formItem,item.holding, item.price)"
-                  >
-                  <span>USD</span>
-                </div>
-                <div
-                  class="border-active text-active"
-                  style="padding:0 10px">
-                  <i class="text-success">{{ mapFormContent.mapTriggerType[formItem.trigger_type] }}</i>
-                  <i class="text-success">{{ $t(`${(item.buy && !index)?'up':'down'}`) }}</i> 至
-                  <i class="text-success">{{ formItem.trigger_price||'--' }}</i> 将触发 市价<i class="text-success">{{ (item.buy && !index)?'止盈':'止损' }}</i>单 预计 <i class="text-success">{{ (item.buy && !index)?'盈利':'亏损' }}</i>：
-                <i class="text-success">{{ formItem.calcProfit||'--' }}</i> {{ item.currency }}</div>
-              </div>
-              <el-button
-                type="primary"
-                style="margin-top:12px;width:100%"
-                :loading="buyBtnLoading"
-                :disabled="verifyPopoverBtn(item)"
-                @click="submitOrder(item)">确定</el-button>
-            </div>
-            <i
-              slot="reference"
-              class="el-icon-edit hover-point"
-              @click="handleEdit(item)" />
-          </el-popover>
-        </p> -->
+          class="text-danger">{{ $t(`contractMix.side.${item.side}`) }}</h3> 
       </div>
       <div
         flex
         style="flex:1;">
-        <div flex>
-          <!-- {{ markData }} -->
-          <!-- {{ item.product.MARKET }} -->
+        <div flex> 
           <div
             v-for="(value,key,i) in tableColumns"
             :key="key">

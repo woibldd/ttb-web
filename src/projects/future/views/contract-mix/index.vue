@@ -291,6 +291,7 @@
                     <orderPopover
                       v-if="activeProduct.MIX"
                       v-model="activeLever"
+                      :activeType="activeTypesKey"
                       :hander="handlePopoverTitle(key)"
                       :active-product="activeProduct"
                       :loading="buyBtnLoading"
@@ -310,7 +311,7 @@
                       <div
                         v-show="!buyBtnLoading"
                         flex="main:justify cross:center">
-                        <span>{{ $tR(`mapFormContent.mapHandleBtn.${key}`) }}</span>
+                        <span>{{ $tR(`mapFormContent.mapHandleBtn.${key}.${activeTypesKey}`) }}</span>
                         <span
                           v-if="activeBtnsKey === '1'"
                           style="font-size:12px">
@@ -467,7 +468,7 @@
                 flex="box:mean"
                 style="text-align:center">
                 <p>{{ (activeBalance||{}).holding || 0 }} <br> {{ $tR('deal') }}</p>
-                <p style="border-left:1px solid #333">{{ (activeBalance||{}).unrealized || 0 }} <br> {{ $tR('rateOReturn') }}</p>
+                <!-- <p style="border-left:1px solid #333">{{ (activeBalance||{}).unrealized || 0 }} <br> {{ $tR('rateOReturn') }}</p> -->
               </div>
               <orderPopover
                 v-if="activeProduct.MIX"
@@ -775,7 +776,7 @@ export default {
       activeTypesKey: '1', 
       tradingType: 'USDT',
       tradingMenuOptions: ['USDT', 'BTC', 'ETH'],
-      usdtRates: []
+      // usdtRates: []
     }
   },
   computed: {
@@ -1035,8 +1036,7 @@ export default {
         return item
       })
     },
-    activeBalance () {
-      console.log('activeBalance')
+    activeBalance () { 
       const found = this.balanceList.find(item => this.activeProduct.name === item.name && item.side === +this.activeTypesKey)
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.activeLever = found && found.leverage
@@ -1056,7 +1056,7 @@ export default {
         priceBy: 'ix' + this.$tR('index'),
         priceIndex: this.activeProduct.INDEX.current,
         volume_24h: this.handleDishInfoItem('volume_24h'),
-        value: '1 USD',
+        value:`${this.activeProduct.multiplier} ${this.activeProduct.currency}`,
         valueRate: this.$big(this.symbolInfo.fee_rate || 0).times(100).round(4).toFixed(4) + '%'
       }
     },
@@ -1084,8 +1084,8 @@ export default {
   },
   async created () {
     actions.updateSession()
-    const res = await getRates({currency: 'USDT'})
-    this.usdtRates = res.data.USDT
+    // const res = await getRates({currency: 'USDT'}) 
+    // this.usdtRates = res.data.USDT
 
     this.products = (await getSymbolList()).data
     await this.openWebSocket(this.handleSoketData, websocket => {
@@ -1207,7 +1207,7 @@ export default {
       const price = this.activeAcountAndPriceArr[1] || (this.activeProduct.MIX || {}).current
       const calcPrice = ['2', '4', '6'].includes(type) ? '市场最优价格' : price
       return `
-        ${this.$tR(`mapFormContent.mapHandleBtn.${key}`)}--
+        ${this.$tR(`mapFormContent.mapHandleBtn.${key}.${this.activeTypesKey}`)}--
         ${this.$tR(`mapFormContent.mapBtns.${this.activeBtnsKey}.text`)}【${calcPrice}】--
         数量【${this.activeAcountAndPriceArr[0]}】
       `
