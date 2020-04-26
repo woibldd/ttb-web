@@ -259,7 +259,7 @@
                     </el-select>
                   </div> -->
                   <input
-                    :value="(i===0 || i===2) ? activeAcountAndPriceArr[i]:(activeAcountAndPriceArr[i]||(activeProduct.MIX||{}).current)"
+                    :value="(i===0 || i===2) ? activeAcountAndPriceArr[i]:(activeAcountAndPriceArr[i] || (activeProduct.MIX||{}).current)"
                     type="text"
                     @input="e=>activeAcountAndPriceArr[i] = e.target.value.replace(/^(0+)|[^\d.]+/g,'')">
                   <span v-if="key==='shippingSpace'">{{ $t('contract_min_unit') }}</span>
@@ -276,7 +276,7 @@
                   <el-checkbox v-if="+activeBtnsKey > 2"
                               v-model="trigger_close ">{{ $tR(`mapFormContent.trigger_close`) }}</el-checkbox>
                 </div> -->
-                <!-- 按钮 -->
+                <!-- 按钮 --> 
                 <div
                   v-for="(value,key) in mapFormContent.mapHandleBtn"
                   :key="key">
@@ -422,7 +422,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div>  
           <!-- 杠杆/费率 -->
           <div
             v-loading="false"
@@ -751,6 +751,7 @@ export default {
       activeTypesKey: '1', 
       tradingType: 'USDT',
       tradingMenuOptions: ['USDT', 'BTC', 'ETH'],
+      lock: 0
       // usdtRates: []
     }
   },
@@ -1149,7 +1150,7 @@ export default {
       const curSymbol = this.tradingType
       const price = getMixLiqPrice({
         // isBuy: this.side === 1,
-         isBuy: false,
+        isBuy: false,
         leverages: this.activeLever,
         amount: this.activeAcountAndPriceArr[0],
         price: this.activeAcountAndPriceArr[1] || this.activeProduct.MIX.current,
@@ -1226,6 +1227,7 @@ export default {
     },
     handlePopoverClick (side) {
       this.side = side === 'buy' ? 1 : 2
+      this.activeAcountAndPriceArr[1] = (this.activeProduct.MIX||{}).current
       !this.popoverDisabled && (this.$root.modelVisible = true) || this.submitOrder()
     },
     handleEntrustList () {
