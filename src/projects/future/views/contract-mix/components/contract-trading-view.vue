@@ -416,8 +416,7 @@ export default {
   },
   watch: {
     pair: {
-      handler (pair, oldPair) {
-        console.log({pair, oldPair})
+      handler (pair, oldPair) { 
         if (pair && !oldPair) {
           this.init(pair)
         }

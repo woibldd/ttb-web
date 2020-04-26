@@ -413,14 +413,14 @@
                     href="/fund/my/contractMix/index"
                     type="primary">{{ (activeBalance||{}).available_balance||0| bigRound(8) }} {{ (activeBalance||{}).currency }}</el-link>
                 </div>
-                <div>
+                <!-- <div>
                   <el-checkbox
                     class="text-light"
                     v-if="+activeBtnsKey===1"
                     v-model="passive">
                     {{ $tR(`mapFormContent.passive`) }}
                   </el-checkbox>
-                </div>
+                </div> -->
                 <div
                   v-if="+activeBtnsKey > 2"
                   flex>
@@ -1282,9 +1282,8 @@ export default {
               }
               // let openValue = toBig(row.holding).div(row.price).abs()
               let openValue = calcMixValueByAmountAndPrice(row.holding, row.price, curProduct.multiplier, row.rate)
-              // let leverage = +row.leverage || curProduct.symbol_currency[this.tradingType].max_leverage
-              console.log({curProduct})
-              let leverage = +row.leverage || curProduct.symbol_currency.find(item => item.currency === this.tradingType).max_leverage 
+              // let leverage = +row.leverage || curProduct.symbol_currency[this.tradingType].max_leverage 
+              let leverage = +row.leverage || curProduct.symbol_currency.find(item => item.currency === row.currency).max_leverage 
 
               if (row.side === 1) {
                 let unrealized = calcMixProfit(row.holding, row.price, curProduct.MIX.current, curProduct.multiplier, row.rate)
