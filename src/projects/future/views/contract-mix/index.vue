@@ -467,7 +467,7 @@
               <div
                 flex="box:mean"
                 style="text-align:center">
-                <p>{{ (activeBalance||{}).holding || 0 }} <br> {{ $tR('deal') }}</p>
+                <p>{{ (activeBalance||{}).holdingSum || 0 }} <br> {{ $tR('deal') }}</p>
                 <!-- <p style="border-left:1px solid #333">{{ (activeBalance||{}).unrealized || 0 }} <br> {{ $tR('rateOReturn') }}</p> -->
               </div>
               <orderPopover
@@ -1037,9 +1037,14 @@ export default {
       })
     },
     activeBalance () { 
-      const found = this.balanceList.find(item => this.activeProduct.name === item.name && item.side === +this.activeTypesKey)
+      const found = this.balanceList.find(item => this.activeProduct.name === item.name && item.side === +this.activeTypesKey) || {}
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.activeLever = found && found.leverage
+      this.activeLever = found && found.leverage   
+      found.holdingSum = 0
+      this.balanceList.map(item => { 
+        if (this.activeProduct.name === this.balanceList[0].name)
+          found.holdingSum += +item.holding
+      })
       return found
     },
     calcTableList () {

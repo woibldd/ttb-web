@@ -2298,7 +2298,9 @@ export default {
       FUTURE_BHDUSD: `BHD계속유지`,
       ETHUSD: `ETHUSD`,
       EOSUSD: `EOSUSD`,
-      METHUSD: `METHUSD (시물레이션)`
+      METHUSD: `METHUSD (시물레이션)`,
+      BTCUSDT: `BTCUSDT`,
+      BTCMUSDT: `BTCMUSDT`, 
     },
     mapTableTapContents: {
       shipping: {
@@ -2604,8 +2606,9 @@ export default {
       FUTURE_BHDUSD: `BHD永续`,
       ETHUSD: `ETH币本位`,
       EOSUSD: `EOS币本位`,
-      METHUSD: `METH币本位`,
-      BTCUSDT: `BTCUSDT`
+      METHUSD: `METH币本位`, 
+      BTCUSDT: `BTCUSDT`,
+      BTCMUSDT: `BTCMUSDT`,
     },
     mapTableTapContents: {
       shipping: {
@@ -2789,8 +2792,14 @@ export default {
         triggerType: '触发类型'
       },
       mapHandleBtn: {
-        buy: '买入/平空',
-        sell: '卖出/平多'
+        buy: {
+          1: '买入开多',
+          2: '买入平空'
+        },
+        sell: {
+          1: '卖出开空',
+          2: '卖出平多'
+        }
       },
       cost: '成本',
       submitEntrust: '提交委托',
