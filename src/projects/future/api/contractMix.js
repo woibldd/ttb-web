@@ -180,3 +180,16 @@ export const getRates = data => request({
   method: 'post',
   params: data
 })
+
+
+// user_id
+// order_id 订单id
+// name 合约名(EHTUSD,EOSUSD)
+// amount 数量(可为空)
+// price 价格(可为空)
+// trigger_price 触发价格(可为空)
+export const setModify = data => request({
+  url: `/mix/modify`,
+  method: 'post',
+  params: data
+})

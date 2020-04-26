@@ -949,8 +949,7 @@ const service = {
     console.log({symbol})
     const res = await this.getUnitContractSymList()
     if (!res.code) {
-      const find = _.find(res.data.items, item => `${item.product}_${item.currency}` === symbol)
-      console.log({find})
+      const find = _.find(res.data.items, item => `${item.product}_${item.currency}` === symbol) 
       return {
         code: find ? 0 : 100001,
         data: find,
@@ -1544,8 +1543,7 @@ const service = {
   async getMixContractPairInfo ({symbol}) { 
     const res = await this.getMixContractSymList()
     if (!res.code) {
-      const find = _.find(res.data.items, item => `${item.product}_${item.currency}` === symbol)
-      console.log({find})
+      const find = _.find(res.data.items, item => `${item.product}_${item.currency}` === symbol) 
       return {
         code: find ? 0 : 100001,
         data: find,

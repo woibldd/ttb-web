@@ -291,6 +291,7 @@
                     <orderPopover
                       v-if="activeProduct.MIX"
                       v-model="activeLever"
+                      :activeType="activeTypesKey"
                       :hander="handlePopoverTitle(key)"
                       :active-product="activeProduct"
                       :loading="buyBtnLoading"
@@ -310,7 +311,7 @@
                       <div
                         v-show="!buyBtnLoading"
                         flex="main:justify cross:center">
-                        <span>{{ $tR(`mapFormContent.mapHandleBtn.${key}`) }}</span>
+                        <span>{{ $tR(`mapFormContent.mapHandleBtn.${key}.${activeTypesKey}`) }}</span>
                         <span
                           v-if="activeBtnsKey === '1'"
                           style="font-size:12px">
@@ -367,8 +368,8 @@
                       <el-option
                         v-for="(subValue,subKey) in tradingOptions"
                         :key="subKey"
-                        :label="subValue.label"
-                        :value="subValue" />
+                        :label="subValue.label" 
+                        :value="subValue.key" />
                     </el-select>
                   </div>
                   <div :flex-box="3"/>
@@ -413,14 +414,14 @@
                     href="/fund/my/contractMix/index"
                     type="primary">{{ (activeBalance||{}).available_balance||0| bigRound(8) }} {{ (activeBalance||{}).currency }}</el-link>
                 </div>
-                <div>
+                <!-- <div>
                   <el-checkbox
                     class="text-light"
                     v-if="+activeBtnsKey===1"
                     v-model="passive">
                     {{ $tR(`mapFormContent.passive`) }}
                   </el-checkbox>
-                </div>
+                </div> -->
                 <div
                   v-if="+activeBtnsKey > 2"
                   flex>
@@ -467,7 +468,7 @@
                 flex="box:mean"
                 style="text-align:center">
                 <p>{{ (activeBalance||{}).holding || 0 }} <br> {{ $tR('deal') }}</p>
-                <p style="border-left:1px solid #333">{{ (activeBalance||{}).unrealized || 0 }} <br> {{ $tR('rateOReturn') }}</p>
+                <!-- <p style="border-left:1px solid #333">{{ (activeBalance||{}).unrealized || 0 }} <br> {{ $tR('rateOReturn') }}</p> -->
               </div>
               <orderPopover
                 v-if="activeProduct.MIX"
@@ -772,11 +773,10 @@ export default {
         2: 'MARKET',
         3: 'INDEX'
       },
-      activeTypesKey: '1',
-      curSymbol: 'USDT',
+      activeTypesKey: '1', 
       tradingType: 'USDT',
       tradingMenuOptions: ['USDT', 'BTC', 'ETH'],
-      usdtRates: []
+      // usdtRates: []
     }
   },
   computed: {
@@ -984,15 +984,15 @@ export default {
       return arr
     },
     tradingOptions () {
-      const options = ['USDT']
+      const options = this.activeProduct.symbol_currency || [{currency:'USDT'}]
       // const arr = Object.keys(options).map(key =>  ({
       //   label:
       // }))
-      const arr = options.map(value => ({
-        label: value,
-        key: value,
+      const arr = options.map(item => ({
+        label: item.currency,
+        key: item.currency,
         click: () => {
-          this.tradingType = value
+          this.tradingType = item.currency
         }
       }))
       return arr
@@ -1001,8 +1001,9 @@ export default {
       if (!this.activeBalance) return
       const obj = {}
       const price = this.activeAcountAndPriceArr[1] || this.activeProduct.MIX.current
-      obj.buy = getMixCost({ ...this.activeProduct, amount: this.activeAcountAndPriceArr[0], price }, this.activeLever)
-      obj.sell = getMixCost({ ...this.activeProduct, amount: this.activeAcountAndPriceArr[0], price }, this.activeLever)
+      const curSymbol = this.tradingType
+      obj.buy = getMixCost({ ...this.activeProduct, amount: this.activeAcountAndPriceArr[0], price, curSymbol }, this.activeLever)
+      obj.sell = getMixCost({ ...this.activeProduct, amount: this.activeAcountAndPriceArr[0], price, curSymbol }, this.activeLever)
       // 可平仓数量
       obj.buyAmount = 0
       obj.sellAmount = 0
@@ -1014,29 +1015,12 @@ export default {
             obj.sellAmount = item.holding
           }
         }
-      })
-      // const activeLever = !+this.activeLever ? 100 : +this.activeLever
-      // if (+this.activeBalance.holding < 0) {
-      //   let buyAmount
-      //   buyAmount = this.activeAcountAndPriceArr[0] - Math.abs(+this.activeBalance.holding)
-      //   buyAmount = buyAmount <= 0 ? 0 : buyAmount
-      //   obj.buy = getMixCost({ ...this.activeProduct, amount: buyAmount, price }, this.activeLever)
-      //   obj.sell = getMixCost({ ...this.activeProduct, amount: this.activeAcountAndPriceArr[0], price }, this.activeLever)
-      // } else {
-      //   let sellAmount
-      //   sellAmount = this.activeAcountAndPriceArr[0] - +this.activeBalance.holding
-      //   sellAmount = sellAmount <= 0 ? 0 : sellAmount
-      //   obj.buy = getMixCost({ ...this.activeProduct, amount: this.activeAcountAndPriceArr[0], price }, this.activeLever)
-      //   obj.sell = getMixCost({ ...this.activeProduct, amount: sellAmount, price }, this.activeLever)
-      // }
+      }) 
       return obj
     },
     mapLever () {
-      if (!this.activeProduct) return []
-      // console.log({mapLever:this.activeProduct})(item => item.currency === 'USDT')
-
-      // return this.activeProduct.symbol_currency[this.curSymbol].leverages.split(',')
-      return this.activeProduct.symbol_currency.find(item => item.currency === this.curSymbol).leverages.split(',')
+      if (!this.activeProduct) return [] 
+      return this.activeProduct.symbol_currency.find(item => item.currency === this.tradingType).leverages.split(',')
     },
     updateTableList () {
       return this.tableList && this.tableList.map(item => {
@@ -1052,8 +1036,7 @@ export default {
         return item
       })
     },
-    activeBalance () {
-      console.log('activeBalance')
+    activeBalance () { 
       const found = this.balanceList.find(item => this.activeProduct.name === item.name && item.side === +this.activeTypesKey)
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.activeLever = found && found.leverage
@@ -1073,7 +1056,7 @@ export default {
         priceBy: 'ix' + this.$tR('index'),
         priceIndex: this.activeProduct.INDEX.current,
         volume_24h: this.handleDishInfoItem('volume_24h'),
-        value: '1 USD',
+        value:`${this.activeProduct.multiplier} ${this.activeProduct.currency}`,
         valueRate: this.$big(this.symbolInfo.fee_rate || 0).times(100).round(4).toFixed(4) + '%'
       }
     },
@@ -1101,8 +1084,8 @@ export default {
   },
   async created () {
     actions.updateSession()
-    const res = await getRates({currency: 'USDT'})
-    this.usdtRates = res.data.USDT
+    // const res = await getRates({currency: 'USDT'}) 
+    // this.usdtRates = res.data.USDT
 
     this.products = (await getSymbolList()).data
     await this.openWebSocket(this.handleSoketData, websocket => {
@@ -1182,6 +1165,8 @@ export default {
     },
     getLiqPrice () {
       if (!this.activeAcountAndPriceArr[0]) return
+      
+      const curSymbol = this.tradingType
       const price = getMixLiqPrice({
         isBuy: this.isBuy,
         leverages: this.activeLever,
@@ -1189,7 +1174,7 @@ export default {
         price: this.activeAcountAndPriceArr[1] || this.activeProduct.MIX.current,
         available_balance: this.activeBalance.available_balance,
         totalValue: this.totalValue()
-      }, this.activeProduct)
+      }, {...this.activeProduct, curSymbol})
       return price
     },
     handleOrderbookSoket (data) {
@@ -1222,7 +1207,7 @@ export default {
       const price = this.activeAcountAndPriceArr[1] || (this.activeProduct.MIX || {}).current
       const calcPrice = ['2', '4', '6'].includes(type) ? '市场最优价格' : price
       return `
-        ${this.$tR(`mapFormContent.mapHandleBtn.${key}`)}--
+        ${this.$tR(`mapFormContent.mapHandleBtn.${key}.${this.activeTypesKey}`)}--
         ${this.$tR(`mapFormContent.mapBtns.${this.activeBtnsKey}.text`)}【${calcPrice}】--
         数量【${this.activeAcountAndPriceArr[0]}】
       `
@@ -1297,8 +1282,8 @@ export default {
               }
               // let openValue = toBig(row.holding).div(row.price).abs()
               let openValue = calcMixValueByAmountAndPrice(row.holding, row.price, curProduct.multiplier, row.rate)
-              // let leverage = +row.leverage || curProduct.symbol_currency[this.tradingType].max_leverage
-              let leverage = +row.leverage || curProduct.symbol_currency(item => item.currency === this.curSymbol).max_leverage 
+              // let leverage = +row.leverage || curProduct.symbol_currency[this.tradingType].max_leverage 
+              let leverage = +row.leverage || curProduct.symbol_currency.find(item => item.currency === row.currency).max_leverage 
 
               if (row.side === 1) {
                 let unrealized = calcMixProfit(row.holding, row.price, curProduct.MIX.current, curProduct.multiplier, row.rate)
@@ -1375,6 +1360,8 @@ export default {
       })
 
       this.activeProduct = product
+      // this.tradingType = product.symbol_currency[0].currency
+      this.tradingType = product.symbol_currency.find(item => item.currency.indexOf('USDT') > -1).currency //暂时默认usdt
       this.setTitle()
       this.state.mix.pair = `${product.product}_${product.currency}`
     },
