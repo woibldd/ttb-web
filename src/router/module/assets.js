@@ -98,6 +98,34 @@ export const capitalRouter = [
             ]
           },
           {
+            path: 'contractMix',
+            name: 'contractMix',
+            redirect: 'contractMix/index',
+            component: () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/contractMix/index.vue'),
+            children: [
+              {
+                path: 'index/:currency?',
+                name: 'contractMixIndex',
+                component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contractMix/contract.vue')
+              },
+              {
+                path: 'history',
+                name: 'contractMixHistory',
+                component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contractMix/history')
+              },
+              {
+                path: 'assets-history',
+                name: 'contractMixHistory',
+                component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contractMix/assets-history')
+              },
+              {
+                path: 'winloss-history',
+                name: 'contractMixHistory',
+                component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contractMix/winloss-history')
+              }
+            ]
+          },
+          {
             path: 'assets',
             name: 'myAssets',
             component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/My/my.vue'),

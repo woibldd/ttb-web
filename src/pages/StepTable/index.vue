@@ -146,7 +146,7 @@
                   </span>
                   <span
                     v-else-if="item.other_appeal && !item.appeal"
-                    style="color:#c9a96c">{{ $t('otc_seiitm_7') }}
+                    style="color:$primary">{{ $t('otc_seiitm_7') }}
                   </span>
                 </div>
                 <div>
@@ -1184,7 +1184,7 @@ export default {
     }
   }
   .iconActive {
-    color: #c9a96c;
+    color: $primary;
   }
 }
 </style>

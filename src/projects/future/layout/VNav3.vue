@@ -829,7 +829,7 @@
           box-sizing: border-box;
           &:hover {
             background: #273440;
-            color: #c9a96c;
+            color: $primary;
           }
         }
       }

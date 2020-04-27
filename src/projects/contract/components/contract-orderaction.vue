@@ -3412,7 +3412,7 @@ export default {
   font-weight: bold !important;
 }
 .c-primary {
-  color: #22ced0 !important;
+  color: $primary !important;
 }
 .icon {
   background-repeat: no-repeat;

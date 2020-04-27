@@ -129,6 +129,12 @@
              to="/fund/my/contractUnit">{{ $t('currency-unit') + $t('account') }}
            </router-link>
          </dd>
+        <dd>
+          <router-link
+            class="sub-menu-item"
+            to="/fund/my/contractMix">{{ $t('gold_account') }}
+          </router-link>
+        </dd>
        <!-- <dd>
          <router-link
            class="sub-menu-item"
