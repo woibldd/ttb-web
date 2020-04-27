@@ -1227,7 +1227,7 @@ export default {
     },
     handlePopoverClick (side) {
       this.side = side === 'buy' ? 1 : 2
-      this.activeAcountAndPriceArr[1] = (this.activeProduct.MIX||{}).current
+      this.activeAcountAndPriceArr[1] = this.activeAcountAndPriceArr[1] || (this.activeProduct.MIX||{}).current
       !this.popoverDisabled && (this.$root.modelVisible = true) || this.submitOrder()
     },
     handleEntrustList () {
