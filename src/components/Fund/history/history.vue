@@ -539,7 +539,7 @@ export default {
       }
     },
     getAccountBalanceList () {
-      return service.getAccountBalanceList().then(res => {
+      return service.getBalance().then(res => {
         this.total = 0
         if (!res.code && res.data) {
           res.data.map(item => {

@@ -330,7 +330,7 @@ export default {
       //     withdraw_fee: "0.001"
       //   }
       // ],
-      service.getAccountBalanceList().then(res => {
+      service.getBalance().then(res => {
         if(!res.code && !!res.data) {
           console.log({data:res.data})
           this.allCoins = (res.data || []).map(item => item)

@@ -498,7 +498,7 @@
         this.getBalance();
       },
       getAccountBalanceList() {
-        service.getAccountBalanceList().then(res => {
+        service.getBalance().then(res => {
           if(!res.code && !!res.data) {
             console.log({data:res.data})
             this.allCoins = (res.data || []).map(item => item)

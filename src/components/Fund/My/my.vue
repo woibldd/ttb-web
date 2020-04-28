@@ -652,7 +652,7 @@ export default {
       }
     },
     getAccountBalanceList () {
-      // return service.getAccountBalanceList().then(res => {
+      // return service.getBalance().then(res => {
       return service.getAccountWalletList().then(res => {
         this.tableData = (res.data || []).map(item => {
           item.rates = item.rates || {};

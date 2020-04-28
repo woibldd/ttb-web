@@ -366,7 +366,7 @@ export default {
   },
   methods: {
     getAccountBalanceList () { 
-      service.getAccountBalanceList().then(res => {
+      service.getBalance().then(res => {
         if(!res.code && !!res.data) {
           this.tradingTable = (res.data || []).map(item => {  
             // item.camount = this.$big(item.locking).plus(item.available).round(8, this.C.ROUND_DOWN).toString()

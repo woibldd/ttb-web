@@ -476,11 +476,7 @@ const service = {
   // 获取币种列表
   getAllCoinTypes(param) {
     return request('account/currency/list')
-  },
-  // 获取用户余额信息
-  getAccountBalanceList() {
-    return request('account/balance/list')
-  },
+  }, 
   // 提币记录
   getWithdrawHistory(param) {
     return request('/account/withdraw/list', param)
