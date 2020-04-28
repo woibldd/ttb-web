@@ -2121,7 +2121,7 @@ export default {
       'trading': '币币交易',
       'contract': 'BTC계약',
       'currency-unit': '코인 베이스 계약',
-      'currency-mix': '金本位合约',
+      'currency-mix': '금본위 계약',
       'legalTender': '法币交易',
       'hotActive': {
         label: '热门活动',
@@ -2574,10 +2574,10 @@ export default {
     index: '指数',
     currentPlace: '当前仓位',
     side: {
-      1: '买入开多',
-      2: '卖出开空',
-      3: '卖出平多',
-      4: '买入平空'
+      1: '매입 (하다)',
+      2: '매출 공전',
+      3: '매출액이 평이',
+      4: '매입공거래'
     },
     orderType: {
       1: '限价',
@@ -2669,18 +2669,12 @@ export default {
           symbol: '合约类型',
           side: '方向',
           amount: '数量',
-          price: '委托价格',
-          // total: '已成交额',
+          price: '委托价格', 
           executed: '已成交量/剩余量',
           entrustValue: '委托价值',
           type: '类型',
-          state: '状态',
-          // tp_type: '止盈/止损',
-          create_time: '下单时间'
-          // update_time: '更新时间'
-          // tp_price: '止盈价格',
-          // sl_type: '止损触发类型',
-          // sl_price: '止损价格'
+          state: '状态', 
+          create_time: '下单时间' 
         }
       },
       lossEntrust: {
@@ -2690,17 +2684,11 @@ export default {
           side: '方向',
           amount: '数量',
           trigger_price: '触发价格',
-          distancePrice: '距离触发',
-          // total: '已成交额',
+          distancePrice: '距离触发', 
           executed: '已成交量',
           type: '类型',
           state: '状态',
-          create_time: '下单时间'
-          // update_time: '更新时间'
-          // tp_type: '止盈触发类型',
-          // tp_price: '止盈价格',
-          // sl_type: '止损触发类型',
-          // sl_price: '止损价格'
+          create_time: '下单时间' 
         }
       },
       historyEntrust: {
@@ -2709,19 +2697,12 @@ export default {
           symbol: '合约类型',
           side: '方向',
           amount: '数量',
-          trigger_price: '触发价格',
-          // price: '委托价格',
+          trigger_price: '触发价格', 
           executed_price: '成交价格',
-          executed: '已成交量/剩余量',
-          // entrustValue: '委托价值',
+          executed: '已成交量/剩余量', 
           type: '类型',
-          state: '状态',
-          // tp_type: '止盈/止损',
-          create_time: '下单时间'
-          // update_time: '更新时间'
-          // tp_price: '止盈价格',
-          // sl_type: '止损触发类型',
-          // sl_price: '止损价格'
+          state: '状态', 
+          create_time: '下单时间' 
         }
       },
       bargain: {
@@ -2732,8 +2713,7 @@ export default {
           amount_total: '委托数量',
           amount: '成交量',
           amount_surplus: '剩余量',
-          price: '成交价格',
-          // entrustPrice: '委托价格',
+          price: '成交价格', 
           total: '价值',
           type: '委托类型',
           origin: '成交类型',
@@ -2771,8 +2751,8 @@ export default {
     },
     mapFormContent: {
       mapOrderTypes: {
-        1: { text: '开仓'},
-        2: { text: '平仓'}
+        1: { text: '창고를 열다'},
+        2: { text: '평창'}
       },
       mapBtns: {
         1: { text: '限价', describe: '限价委托用于在指定的（或更好的）价格买入或卖出。这是最常用的委托类型。' },
@@ -2785,20 +2765,20 @@ export default {
         5: '限价止盈',
         6: '市价止盈'
       },
-      mapInput: {
-        shippingSpace: '仓位',
-        value: '价格',
-        triggerPrice: '触发价格',
-        triggerType: '触发类型'
+      mapInput: { 
+        shippingSpace: '포지션',
+        value: '가격',
+        triggerPrice: '트리거 프라이스',
+        triggerType: '제한류형'
       },
       mapHandleBtn: {
         buy: {
-          1: '买入开多',
-          2: '买入平空'
+          1: '매입 (하다)',
+          2: '매입공거래'
         },
         sell: {
-          1: '卖出开空',
-          2: '卖出平多'
+          1: '매출 공전',
+          2: '매출액이 평이'
         }
       },
       cost: '成本',
@@ -3008,19 +2988,7 @@ export default {
         to_address: '目标地址',
         change_address: '找零地址',
         memo: '备忘',
-        amount: '提币量'
-        // fee: '提币手续费',
-        // txid: '链上交易号',
-        // confirm: '确认数',
-        // state: '状态',
-        // create_time: '开始时间',
-        // update_time: '最近更新时间',
-        // reviewer_id: '审核人ID',
-        // reviewer_nonce: '审核人nonce',
-        // reviewer_signature: '审核人签名',
-        // review_time: '审核时间',
-        // raw_tx: '原始tx',
-        // sign_result: '签名结果'
+        amount: '提币量' 
       },
       4: {
         user_id: '用户ID',
