@@ -629,7 +629,7 @@ export default {
               Vue.set(item, 'currencyName', item.currency + '-' + 'ERC20')
             }
           })
-          // this.lianData = this.lianData.reverse()//顺序颠倒一下，omni要放在前面
+          this.lianData = this.lianData.reverse()//顺序颠倒一下，ERC20要放在前面
           // this.selectLian = this.lianData.filter(a => a.chain==='ERC20')[0]      
           this.selectLian = this.lianData[0]
           this.allCoins = this.removalData(res.data.filter(c => c.withdrawable))

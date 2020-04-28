@@ -1,6 +1,5 @@
 import ReconnectingWebSocket from 'reconnecting-websocket'
-import config from '@/libs/config'
-import { WSURL } from '../const'
+import config from '@/libs/config' 
 export default {
   data () {
     return {
@@ -46,10 +45,7 @@ export default {
             this.serverIntervalObj && clearInterval(this.serverIntervalObj)
             this.timeoutObj = setTimeout(function () {
               let time = new Date() * 1
-              websocket.send(`{"op":"heart","args":["${time}"]}`)
-              // self.serverTimeoutObj = setTimeout(function () {
-              //   websocket.close()
-              // }, self.timeout)
+              websocket.send(`{"op":"heart","args":["${time}"]}`) 
               self.serverIntervalObj = setInterval(function () {
                 // websocket.close()
                 websocket.reconnect()

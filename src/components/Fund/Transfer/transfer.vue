@@ -286,7 +286,7 @@
         }
         let $this = this
       // let res = await service.transferContractFund({
-      let res = await service.transferSelf({
+        let res = await service.transferSelf({
           amount: this.number,
           currency: this.selectCoin,
           from: this.accountFrom,
@@ -506,11 +506,9 @@
         })
       }
     },
-    created(){
-      // this.getBalance()
+    created(){ 
       this.getAccountBalanceList()
-      this.getBalance()
-      // this.getAllCoinTypes()
+      this.getBalance() 
       this.page()
 
       this.accountTo = ''
