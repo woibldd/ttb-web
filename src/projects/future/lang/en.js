@@ -2757,7 +2757,7 @@ export default {
       'contract': 'BTC Contract',
       'legalTender': 'Fiat',
       'currency-unit': 'Currency Standard Contract',
-      'currency-mix': '金本位合约',
+      'currency-mix': 'Gold Standard Contract',
       'hotActive': {
         label: 'Activities',
         children: {
@@ -3134,10 +3134,10 @@ export default {
     index: '指数',
     currentPlace: '当前仓位',
     side: {
-      1: '买入开多',
-      2: '卖出开空',
-      3: '卖出平多',
-      4: '买入平空'
+      1: 'Buy long',
+      2: 'Sell short',
+      3: 'Sell Long',
+      4: 'Buy short'
     },
     orderType: {
       1: '限价',
@@ -3323,16 +3323,16 @@ export default {
         'total': '累计'
       },
       mapHeader2: {
-        'direction': '方向',
+        'direction': 'Side',
         'transaction-price': '成交价',
         'trading-volume': '成交量',
-        'time': '时间'
+        'time': 'Time'
       }
     },
     mapFormContent: {
       mapOrderTypes: {
-        1: { text: '开仓'},
-        2: { text: '平仓'}
+        1: { text: 'Open  Position'},
+        2: { text: 'Close Position'}
       },
       mapBtns: {
         1: { text: '限价', describe: '限价委托用于在指定的（或更好的）价格买入或卖出。这是最常用的委托类型。' },
@@ -3346,24 +3346,24 @@ export default {
         6: '市价止盈'
       },
       mapInput: {
-        shippingSpace: '仓位',
-        value: '价格',
-        triggerPrice: '触发价格',
-        triggerType: '触发类型'
+        shippingSpace: 'Position', 
+        value: 'Value',
+        triggerPrice: 'Price',
+        triggerType: 'Trigger'
       },
       mapHandleBtn: {
         buy: {
-          1: '买入开多',
-          2: '买入平空'
+          1: 'Buy long',
+          2: 'Buy short'
         },
         sell: {
-          1: '卖出开空',
-          2: '卖出平多'
+          1: 'Sell short',
+          2: 'Sell Long'
         }
       },
-      cost: '成本',
-      submitEntrust: '提交委托',
-      tradingType: '结算币种',
+      cost: 'Cost',
+      submitEntrust: 'Submit',
+      tradingType: 'Currency',
       mapDescribe: {
         entrustValue: {
           text: '委托价值',

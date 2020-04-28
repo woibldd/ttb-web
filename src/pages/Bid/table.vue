@@ -67,38 +67,34 @@ export default {
         }
     },
     methods: {
-         backTop () {
-            this.$router.push('/snowball')
-        },
-        manageResopetate (params) {
-        service.manageResopetate(params).then(res => {
-            console.log(res)
-            if (res.code === 0) {
-                this.tableData=res.data.data
-                this.total = res.data.total
-                if (this.tableData.length > 0) {
-                    this.tableData.forEach((item) => {
-                        const stateName = item.state === 1 ?  $t('qrcode_close') : item.state === 2 ? $t('waiting_for_release') : item.state === 3 ? $t('waiting_for_release') : $t('bby_shise6')
-                        const siteName = item.site === 1 ? "ix" : 'ixx'
-                        const opetateName = item.opetate === 1 ? $t('bby_shise7') : $t('bby_shise8')
-                        Vue.set(item, 'state', stateName)
-                        Vue.set(item, 'site', siteName)
-                        Vue.set(item, 'opetate', opetateName)
-                    })
-                }
-            }
-        })
+      backTop () {
+        this.$router.push('/snowball')
       },
-
-      
+      manageResopetate (params) {
+        service.manageResopetate(params).then(res => {
+          console.log(res)
+          if (res.code === 0) {
+            this.tableData=res.data.data
+            this.total = res.data.total
+            if (this.tableData.length > 0) {
+              this.tableData.forEach((item) => {
+                const stateName = item.state === 1 ?  $t('qrcode_close') : item.state === 2 ? $t('waiting_for_release') : item.state === 3 ? $t('waiting_for_release') : $t('bby_shise6')
+                const siteName = item.site === 1 ? 'ix' : 'ixx'
+                const opetateName = item.opetate === 1 ? $t('bby_shise7') : $t('bby_shise8')
+                Vue.set(item, 'state', stateName)
+                Vue.set(item, 'site', siteName)
+                Vue.set(item, 'opetate', opetateName)
+              })
+            }
+          }
+        })
+      }, 
       currentChange(e) {
-          this.history.start = e
-      console.log('1111111111111111111111111111111111111111111111111111111111111')
+          this.history.start = e 
           this.manageResopetate(this.history)
       }
     },
-    created() {
-      console.log('ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss')
+    created() { 
         this.manageResopetate(this.history)
     }
 }
