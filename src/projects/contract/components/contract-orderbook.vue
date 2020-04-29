@@ -459,21 +459,8 @@ export default {
           this.sub()
         })
     },
-    assignData (data) {
-      // data = require('./book-depth/test-data.js').default
-      const toBig = item => [this.$big(item.values[0]), this.$big(item.values[1])]
-      // data = {
-      //   asks: data.asks.map(item => {
-      //     return {
-      //       values: item
-      //     }
-      //   }),
-      //   bids: data.bids.map(item => {
-      //     return {
-      //       values: item
-      //     }
-      //   })
-      // }
+    assignData (data) { 
+      const toBig = item => [this.$big(item.values[0]), this.$big(item.values[1])] 
       this.buy = _.map(data.bids, toBig)
       this.sell = _.map(data.asks, toBig)
       let bid = _.get(this.buy, '0.0', 0)

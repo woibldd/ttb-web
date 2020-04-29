@@ -12,7 +12,7 @@ if (process.env.NODE_ENV != 'development') {
   if (host === 'ixex.pro') {
     ws = `wss://ws.${host}/v1/`
     quote = `https://q.${host}/v1/`
-    wss = `wss://wss.${host}/v1`
+    wss = `wss://wss.${host}/v1` 
   } else {
     ws = 'wss://ws.ixex.io/v1/'
     quote = 'https://q.ixex.io/v1/'

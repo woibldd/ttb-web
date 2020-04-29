@@ -293,7 +293,7 @@ import PairRankTable from '@/components/home/pair-rank-table'
 import MineSummary from '@/components/Mine/MineSummary'
 import tickTableMixin from '@/mixins/tick-table'
 import HomeBanner from './banner/index'
-import { local } from '@/modules/store'
+import { local } from '@/modules/store' 
 
 export default {
   components: {
@@ -338,17 +338,15 @@ export default {
     },
     isKorean() {
       return state.locale === 'ko'
-    }
-    // tabSelected () {
-    //   return state.tabSelected
-    // },
+    } 
   },
   watch: {
     'state.locale'(locale) {
       this.getBanners()
     }
   },
-  created() {
+  created() { 
+    this.subMarket()
     this.getBanners()
     //如果地址带有邀请码信息则将邀请码写入cookie中，有效期为10天  2019/10/16 yzf
     let invitorId = this.$route.query.invitor
@@ -358,6 +356,7 @@ export default {
     } else if (agentId) {
       utils.setCookie('invitor', agentId, 10)
     }
+ 
   },
   methods: {
     buySubmit(item) {

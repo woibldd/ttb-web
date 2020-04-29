@@ -4,7 +4,7 @@ import Vue from 'vue'
 import utils from '@/modules/utils'
 
 export default {
-create (channel) {
+  create (channel) {
     const hub = new Vue({
       data () {
         return {
@@ -16,7 +16,7 @@ create (channel) {
         this.socket.close()
       }
     })
-    const socket = new WS(config.wsUrl + channel)
+    const socket = new WS(config.wssUrl)
     hub.socket = socket
     socket.onopen = function () {
       if (hub._isDestroyed) {
@@ -52,28 +52,30 @@ create (channel) {
         if (data.code) {
           return false
         }
-        if (data.data) {
-          data = data.data
-        }
+        // if (data.data) {
+        //   data = data.data
+        // }
         hub.$emit('message', data)
       }
-    }
+    } 
     hub.heartCheck = {
-      timeout: 60000, // 10秒一次
+      timeout: 10000, // 10秒一次
       timeoutObj: null,
       serverTimeoutObj: null,
       start: function () { 
         let self = this
         this.timeoutObj && clearTimeout(this.timeoutObj)
+        console.log('serverTimeoutObj')
         this.serverTimeoutObj && clearTimeout(this.serverTimeoutObj)
         this.timeoutObj = setTimeout(function () {
           let time = new Date() * 1
           socket.send(`{"op":"heart","args":["${time}"]}`)
           self.serverTimeoutObj = setTimeout(function () { 
             if (!hub._isDestroyed) {
+              console.log('reopen')
               hub.$emit('reopen')
             }
-          }, self.timeout)
+          }, self.timeout + 5000)
         }, this.timeout)
       }
     }

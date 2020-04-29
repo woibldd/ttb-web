@@ -56,11 +56,14 @@ import historyTable from "./history/history_table";
 import service from "@/modules/service";
 import { state, actions } from "@/modules/store";
 import utils from "@/modules/utils";
+// import socket from '@/modules/resocket'
+import wsNew from '@/modules/ws-new'
 
 export default {
   data() {
     return {
       state,
+      socket: null,
       tableData: {},
       loading: false,
       tabLoading: false, // 切换tab的loading
@@ -420,21 +423,18 @@ export default {
       isLoginOverdue: false,
       indexList: {},
       lastList: {},
-      marketList: {},
+      marketList: {}
     };
   },
+  // mixins: [socket],
   computed: {
     currentTab() {
       return this.nav.find(item => item.name === this.current);
     },
     isLogin() {
       return !!this.state.userInfo;
-    },
-    // currentDel() {
-    //   return this.state.ct.currentDelList["BTCUSD"]
-    // },
+    }, 
     holdingValue() {
-
     },
     markTickList() {
       return this.state.ct.markTickList
@@ -444,20 +444,35 @@ export default {
         return this.state.ct.userSetting
       }
       return {}
-    }
-    
+    },
+    mapHandlerSocket () {
+      return {
+        'liquid': this.handleLiquid,
+        'heart': this.handleHeart
+      }
+    } 
   },
   components: {
     historyTable
   },
   methods: {
-    loadNext() {
-      console.log("loadnext");
+    handleHeart(e) { 
+      if (this.socket) {  
+        console.log('handleHeart')
+        this.socket.heartCheck.start()  
+      }
+    },
+    handleLiquid(e) {
+      console.log(e)
+      if (e.state === 1) {
+        this.fetchData()
+      }
+    },
+    loadNext() { 
       if (this.page * this.size >= this.totalItems) {
         return;
       }
-      this.page += 1;
-      console.log("loadNext")
+      this.page += 1; 
       this.fetchData();
     },
     async fetchActiveList() {
@@ -601,47 +616,7 @@ export default {
           });
       }
       // this.fetchActiveList()
-    }, 
-    //更新平仓价格
-    // async setClearCommitPrice(commitid) {
-    //   if (!commitid) {
-    //     console.log("commitid:" + commitid);
-    //     return;
-    //   }
-
-    //   this.state.ct.curCommitPrice = 0;
-    //   let currentDel = this.state.ct.currentDel;
-    //   if (currentDel) {
-    //     currentDel.map((val, index) => {
-    //       if (val.id == commitid) {
-    //         this.state.ct.curCommitPrice = val.price;
-    //         return this.state.ct.curCommitPrice;
-    //       }
-    //     });
-    //   }
-    //   // //如果currentDel位空或者没找到这条委托，那么重新取抓一次数据
-
-    //   if (!this.state.ct.curCommitPrice) {
-    //     let params = {
-    //       symbol: this.state.ct.pair,
-    //       page: 1,
-    //       size: 200
-    //     };
-    //     currentDel = [];
-    //     await service.getActiveorders(params).then(res => {
-    //       if (!res.code) {
-    //         currentDel = res.data.data;
-    //       }
-    //       if (currentDel) {
-    //         currentDel.map((val, index) => {
-    //           if (val.id == commitid) {
-    //             this.state.ct.curCommitPrice = val.price;
-    //           }
-    //         });
-    //       }
-    //     });
-    //   }
-    // },
+    },  
     refreshTabData(type) { 
       let func = null;
       let tab = null;
@@ -695,9 +670,7 @@ export default {
         this.clearTimer();
       }
       this.timer = setInterval(() => {
-        console.log(this.current + " timer...");
-        
-      console.log("startTime")
+        console.log(this.current + " timer..."); 
         this.fetchData();
       }, 3e3);
     },
@@ -841,21 +814,46 @@ export default {
       })
       ; 
     },
-     
+    handleSocketData (res) { 
+      const key = res.topic && res.topic.split('@')[0]
+      this.mapHandlerSocket[key] && this.mapHandlerSocket[key](res.data)
+    }, 
+    subMarket() { 
+      const that = this
+      if (this.socket) {
+        that.socket.$destroy()
+      }
+      this.socket = wsNew.create()
+      this.socket.$on('open', () => { 
+        that.socket.heartCheck.start()
+        if (that.state.userInfo) {
+          that.socket.socket.send(`{"op":"loginWeb","args":["${that.state.userInfo.session_id}"]}`)
+          that.socket.socket.send('{"op": "subscribe", "args": ["liquid"]}') 
+        }
+      })
+      this.socket.$on('message', (data) => { 
+        console.log(data)
+        that.handleSocketData(data) 
+      })
+      this.socket.$on('reopen', () => {
+        that.socket.$destroy()
+        that.subMarket()
+      })
+    } 
   },
   async created() {
+    this.subMarket()
     await actions.updateSession();
     if (this.state.userInfo) {
       let param = {
         user: this.state.userInfo.id
-      };
-      
+      }; 
     } //查询用户设置
- 
     await service.getRates({currency:'BTC'}).then(res=>{
-      this.state.rate.BTC = res.data.BTC
+      if (!res.code) {
+        state.rate.BTC = res.data.BTC
+      }
     })
-
     this.switchTab({ name: "contract_history_position" });
     this.$eh.$once("protrade:order:refresh", this.refreshCurrentDelegation);
     this.$eh.$on("protrade:order:refresh", type => { 
@@ -865,8 +863,7 @@ export default {
       this.refreshCurrentDelegation(); 
       this.refreshOrderHistory()
       this.refreshTriggerCount()
-      if (!isNaN(Number(type))) { 
-        //console.log({type})
+      if (!isNaN(Number(type))) {  
         this.refreshHoldingCount()
       }
     });
@@ -876,9 +873,7 @@ export default {
     this.$eh.$on("setOrderfill:count", count => {
       this.setTabDataCount("contract_history_deal_fills", count)
     })
-    // this.$eh.$on("socket:price:update", item => {
-    //   this.holdingComputedData(item)  
-    // })
+    // this.openSocket() 
   },
   destroyed() {
     this.$eh.$off("protrade:order:refresh", "destroyed");
@@ -886,9 +881,8 @@ export default {
     this.$eh.$off("socket:price:update","destroyed");
     this.clearTimer();
   },
-  watch: {
-
-  markTickList:{
+  watch: { 
+    markTickList:{
       handler:function(val,oldval){ 
         this.holdingList[0].test = 1
         console.log(this.markTickList.handler, 'markTickList')

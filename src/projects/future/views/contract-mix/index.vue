@@ -1089,12 +1089,9 @@ export default {
     this.$nextTick(() => {
       this.$eventBus.$emit('protrade:layout:init')
     })
-
     this.handleProductsChange(product)
     this.handleAmountObj()
-
-    this.$eventBus.$on('protrade:exchange:set', (params) => {
-      console.log('protrade:exchange:set')
+    this.$eventBus.$on('protrade:exchange:set', (params) => { 
       this.activeAcountAndPriceArr[0] = params.amount || this.activeAcountAndPriceArr[0]
       this.activeAcountAndPriceArr[1] = params.price || this.activeAcountAndPriceArr[1]
     })

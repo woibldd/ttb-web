@@ -41,8 +41,7 @@ api.interceptors.request.use(config => {
   config.headers['lang'] = state.locale
   return config
 }, error => {
-  // Do something with request error
-  // console.log(error) // for debug
+  // Do something with request error 
   Promise.reject(error)
 })
 

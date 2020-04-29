@@ -266,10 +266,9 @@
               </div>
             </div>
           </div>
-        </div> -->
-
+        </div> --> 
         <div
-          v-if="cholding.holding && cholding.holding != 0"
+          v-if="cholding.holding && cholding.holding != 0 && cholding.state === 0"
           flex="main:justify box:mean"
           class="reset-werehouse-box">
           <div flex="dir:top">
