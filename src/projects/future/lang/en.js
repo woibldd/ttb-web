@@ -2851,8 +2851,8 @@ export default {
       },
       mapHeader2: {
         'direction': 'Side',
-        'transaction-price': 'Transacted Price',
-        'trading-volumn': 'Executed Qty',
+        'transaction-price': 'Price',
+        'trading-volumn': 'Amount',
         'time': 'Time'
       }
     },

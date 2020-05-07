@@ -352,6 +352,7 @@ export default {
   }
   .balance {
     font-size: 12px;
+    white-space: nowrap;
   }
   .balance-grey {
     color: #666666;

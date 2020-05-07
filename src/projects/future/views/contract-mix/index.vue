@@ -960,10 +960,7 @@ export default {
       return arr
     },
     tradingOptions () {
-      const options = this.activeProduct.symbol_currency || [{currency:'USDT'}]
-      // const arr = Object.keys(options).map(key =>  ({
-      //   label:
-      // }))
+      const options = this.activeProduct.symbol_currency || [{currency:'USDT'}] 
       const arr = options.map(item => ({
         label: item.currency,
         key: item.currency,

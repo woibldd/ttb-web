@@ -55,8 +55,7 @@
 import historyTable from "./history/history_table";
 import service from "@/modules/service";
 import { state, actions } from "@/modules/store";
-import utils from "@/modules/utils";
-// import socket from '@/modules/resocket'
+import utils from "@/modules/utils"; 
 import wsNew from '@/modules/ws-new'
 
 export default {
@@ -519,12 +518,7 @@ export default {
         size: this.size
       };
       switch (tab) {
-        case "contract_history_position":
-          //这里需要获取全部的币对持仓
-          // params = {
-          //   symbol: this.state.ct.product_name
-          // };
-          // func = service.getContractBalanceByPair;
+        case "contract_history_position": 
           func = service.getContractBalanceList 
           break;
         case "contract_has_equal_pos":
