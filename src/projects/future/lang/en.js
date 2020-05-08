@@ -1274,7 +1274,7 @@ export default {
   "user_open_sevice_fee": "Open the fee deduction",
   "user_service_fee_history": "View history of transaction",
   "order_ix_service_fee": "IX deduction fee",
-  "trading_lever": "contract transaction",
+  "trading_lever": "Contract Transaction",
   "activity_lock_share": "Rule of Lock for Dividend:",
   "order_ix_total_discount": "Accumulated deduction",
   "contract_account": "BTC Contract Account",
@@ -3122,17 +3122,17 @@ export default {
     }
   },
   contractMix: {
-    sheet: '张',
-    buy: '买入',
-    sell: '卖出',
-    handle: '操作',
-    cancel: '撤销',
-    deal: '合约交易',
-    rateOReturn: '回报率',
-    quota: '风险限额',
-    handleSuccess: '操作成功',
-    index: '指数',
-    currentPlace: '当前仓位',
+    sheet: 'Piece',
+    buy: 'Buy',
+    sell: 'Sell',
+    handle: 'Action',
+    cancel: 'Cancel',
+    deal: 'Contract transaction',
+    rateOReturn: 'Rate',
+    quota: 'Risk limits',
+    handleSuccess: 'Submitted successfully',
+    index: 'index',
+    currentPlace: 'Quantity',
     side: {
       1: 'Buy long',
       2: 'Sell short',
@@ -3140,24 +3140,24 @@ export default {
       4: 'Buy short'
     },
     orderType: {
-      1: '限价',
-      2: '市价',
-      3: '止盈止损'
+      1: 'Limit',
+      2: 'Market',
+      3: 'Take Profit Stop Loss'
     },
     origin: {
-      1: '成交单',
-      2: '强平单',
-      3: '资金费率',
-      4: 'ADL减仓'
+      1: 'Fill',
+      2: 'Liquidated Order',
+      3: 'Fee Rate',
+      4: 'ADL Deleverage'
     },
     state: {
-      1: '委托中未成交',
+      1: 'Untriggered',
       2: '委托中限价部分成交',
-      3: '完全成交',
-      4: '撤单全部',
-      5: '撤单部分成交',
+      3: 'Filled/Remaining',
+      4: 'Cancel All',
+      5: 'Cancelled success partially',
       6: '市价部分成交',
-      7: '市价'
+      7: 'Market'
     },
     mapTabs: {
       FUTURE_BTCUSD: `BTC永续`,
@@ -3168,75 +3168,76 @@ export default {
       EOSUSD: `EOS币本位`,
       METHUSD: `METH币本位`,
       BTCUSDT: `BTCUSDT`,
-      BTCMUSDT: `BTCMUSDT`
+      BTCMUSDT: `BTCMUSDT`,
+      ETHMUSDT: `ETHMUSDT`
     },
     mapTableTapContents: {
       shipping: {
-        text: '仓位', 
+        text: 'Quantity',
         mapTableColumns: {
           holding: {
-            label: '目前仓位数量',
-            tips: '<a>目前仓位数量</a><br/>你在此合约的仓位，正数为多仓，负数为空仓。'
+            label: 'Quantity',
+            tips: '<a>Quantity</a><br/>your position in this contract, positive number is multiple positions; negative number is short position。'
           },
           _leverage: {
-            label: '杠杆倍数',
+            label: 'Leverage',
             tips: ''
           },
           markPrice: {
-            label: '标记价格',
-            tips: '<a>标记价格</a><br/>这是现在的标记价格，点此了解更多。'
+            label: 'Fair Price',
+            tips: '<a>Mark Price</a><br/>This is the current marked price, click for more information。'
           },
           price: {
-            label: '开仓价格',
-            tips: '<a>开仓价格</a><br/>目前多/空仓的平均买入/卖出价。'
+            label: 'Opening Price',
+            tips: '<a>Open position price</a><br/>The current average bid/ask price for multiple/empty positions. '
           },
           liq_price: {
-            label: '强平价格',
-            tips: '<a>强平价格</a><br/>如果该合约的标记价格低于该价格（多仓）或高于该价格（空仓），你将会被强制平仓。'
+            label: 'Forced Liq Price',
+            tips: '<a>Forced Liq Price</a><br/>if the price of the position is lower than the existing price (multiple positions) or higher than the existing price (empty position), you will be forced to close the position。'
           },
           value: {
-            label: '价值',
+            label: 'Value',
             tips: '仓位在当前合理价格的名义价值'
           },
           margin_position: {
-            label: '仓位保证金',
-            tips: '<a>保证金</a><br/>被仓位使用并锁仓的保证金，如果你有在某个仓位启用逐仓，此数值将会随着保证金下跌而减少，亦代表你的实际杠杆上升。移动滑杆来调整分配到各个仓位的保证金。'
+            label: 'Position',
+            tips: '<a>Margin</a><br/>The funds used by opening and locking positions. If you have a current position, this value will decrease as the insurance fund falls, which also means your actual leverage rises. You can employ the ‘slider’ to adjust the insurance fund assigned to each position。'
           },
           unrealized: {
-            label: '未实现盈亏（回报率%）',
-            tips: '<a>未实现盈亏（回报率%）</a><br/>该合约的未实现盈亏，以及回报率。'
+            label: 'Unrealized P&L(%)',
+            tips: '<a>Yet to be realized profit and loss (rate of return %)</a><br/> pertaining to this position’s profit and loss of the contract, and rate of return。'
           },
           realized: {
-            label: '已实现盈亏',
-            tips: '<a>已实现盈亏</a><br/>自开仓以来的已实现盈亏。'
+            label: 'Daily Realized P&L(%)',
+            tips: '<a>Realized profit and loss</a><br/>realized profit and loss since opening the position。'
           },
           currency: {
-            label: '结算币种',
+            label: 'Currency',
             tips: ''
           }
         }
       },
       shipped: {
-        text: '已平仓位',
+        text: 'Closed Position',
         mapTableColumns: {
-          symbol: '合约类型',
-          realized: '已实现盈亏'
+          symbol: 'Contract Type',
+          realized: 'Realized PNL'
         }
       },
       curEntrust: {
-        text: '当前委托',
+        text: 'Active Orders',
         mapTableColumns: {
-          symbol: '合约类型',
-          side: '方向',
-          amount: '数量',
-          price: '委托价格',
+          symbol: 'Contract Type',
+          side: 'Side',
+          amount: 'Amount',
+          price: 'Order Price',
           // total: '已成交额',
-          executed: '已成交量/剩余量',
-          entrustValue: '委托价值',
-          type: '类型',
-          state: '状态',
+          executed: 'Filled/Remaining',
+          entrustValue: 'Order Value',
+          type: 'Type',
+          state: 'Status',
           // tp_type: '止盈/止损',
-          create_time: '下单时间'
+          create_time: 'Order Time'
           // update_time: '更新时间'
           // tp_price: '止盈价格',
           // sl_type: '止损触发类型',
@@ -3244,18 +3245,18 @@ export default {
         }
       },
       lossEntrust: {
-        text: '止损委托',
+        text: 'Stop Loss',
         mapTableColumns: {
-          name: '合约类型',
-          side: '方向',
-          amount: '数量',
-          trigger_price: '触发价格',
-          distancePrice: '距离触发',
+          symbol: 'Contract Type',
+          amount: 'Volume',
+          price: 'Order Price',
+          trigger_price: 'Price',
+          distancePrice: 'Distance',
           // total: '已成交额',
           executed: '已成交量',
-          type: '类型',
-          state: '状态',
-          create_time: '下单时间'
+          type: 'Type',
+          state: 'Status',
+          create_time: 'Order time'
           // update_time: '更新时间'
           // tp_type: '止盈触发类型',
           // tp_price: '止盈价格',
@@ -3264,20 +3265,20 @@ export default {
         }
       },
       historyEntrust: {
-        text: '委托历史',
+        text: 'History',
         mapTableColumns: {
-          symbol: '合约类型',
-          side: '方向',
-          amount: '数量',
-          trigger_price: '触发价格',
+          symbol: 'Contract Type',
+          side: 'Side',
+          amount: 'Amount',
+          trigger_price: 'Trigger Price',
           // price: '委托价格',
-          executed_price: '成交价格',
-          executed: '已成交量/剩余量',
+          executed_price: 'Transacted Price',
+          executed: 'Filled Vol/Remaining Vol',
           // entrustValue: '委托价值',
-          type: '类型',
-          state: '状态',
+          type: 'Type',
+          state: 'Status',
           // tp_type: '止盈/止损',
-          create_time: '下单时间'
+          create_time: 'Order time'
           // update_time: '更新时间'
           // tp_price: '止盈价格',
           // sl_type: '止损触发类型',
@@ -3285,47 +3286,47 @@ export default {
         }
       },
       bargain: {
-        text: '已成交',
+        text: 'Executed',
         mapTableColumns: {
-          symbol: '合约类型',
-          side: '方向',
-          amount_total: '委托数量',
-          amount: '成交量',
-          amount_surplus: '剩余量',
-          price: '成交价格',
+          symbol: 'Contract Type',
+          side: 'Side',
+          amount_total: 'Order Qty',
+          amount: 'Executed Qty',
+          amount_surplus: 'Balance',
+          price: 'Transacted Price',
           // entrustPrice: '委托价格',
-          total: '价值',
-          type: '委托类型',
-          origin: '成交类型',
-          order_id: '委托单ID',
+          total: 'Value',
+          type: 'Type',
+          origin: 'Transacted Type',
+          order_id: 'OrderID',
           // fee: '手续费',
-          create_time: '成交时间'
+          create_time: 'Exec Time'
         }
       }
     },
     mapDishInfo: {
-      current: '最新价',
-      change_24h: '涨跌幅',
-      volume_24h: '24H成交量',
-      markPrice: '标记价格',
-      increment_24h: '涨跌额'
+      current: 'Last Price',
+      change_24h: 'Change',
+      volume_24h: '24H Vol',
+      markPrice: 'Mark Price',
+      increment_24h: 'Change amt'
     },
     mapDelegateList: {
-      'entrust-list': '委托列表',
-      'depth': '深度',
-      'return-dish': '返回盘口',
-      'new-bargain': '最新成交',
-      'contract_index_price_tips': '<a>指数价格</a><br/>标的资产的价格这是BTC合约的价格，点此查看历史价格。',
-      'contract_mark_price_tips': '<a>标记价格</a><br/>这是现在的标记价格，点此了解更多。',
+      'entrust-list': 'Orderbook',
+      'depth': 'Depth',
+      'return-dish': 'Back to Order Book',
+      'new-bargain': 'Latest',
+      'contract_index_price_tips': 'The price of the underlying asset. This is the price of the BTC contract. Click here to view the historical price。',
+      'contract_mark_price_tips': '<a>Mark Price</a><br/>This is the current marked price, click for more information。。',
       mapHeader1: {
-        'price': '价格',
-        'amount': '数量',
-        'total': '累计'
+        'price': 'Price',
+        'amount': 'Amount',
+        'total': 'Total'
       },
       mapHeader2: {
         'direction': 'Side',
-        'transaction-price': '成交价',
-        'trading-volume': '成交量',
+        'transaction-price': 'Price',
+        'trading-volume': 'Amount',
         'time': 'Time'
       }
     },
@@ -3335,18 +3336,18 @@ export default {
         2: { text: 'Close Position'}
       },
       mapBtns: {
-        1: { text: '限价', describe: '限价委托用于在指定的（或更好的）价格买入或卖出。这是最常用的委托类型。' },
-        2: { text: '市价', describe: '市价委托是一种最快的成交方式。它以目前委托列表的最佳价格执行。请注意，网络延迟可能导致委托的执行价格与你的期望有所不同。' },
-        3: { text: '止盈止损', describe: '' }
+        1: { text: 'Limit', describe: 'Limited trading based on specified price available in the market. This is the most common strategy of delegated trading.' },
+        2: { text: 'Market', describe: 'Market price commission is one of the fastest way to transact. It is executed at the best price for the current delegated list. Please note that network delays may cause the execution price to differ from your expectations。' },
+        3: { text: 'Take Profit Stop Loss', describe: '' }
       },
       mapMenuOptions: {
-        3: '限价止损',
-        4: '市价止损',
-        5: '限价止盈',
-        6: '市价止盈'
+        3: 'Stop Limit',
+        4: 'Stop Market',
+        5: 'Take Profit Limit',
+        6: 'Take Profit Market'
       },
       mapInput: {
-        shippingSpace: 'Position', 
+        shippingSpace: 'Position',
         value: 'Value',
         triggerPrice: 'Price',
         triggerType: 'Trigger'
@@ -3366,30 +3367,30 @@ export default {
       tradingType: 'Currency',
       mapDescribe: {
         entrustValue: {
-          text: '委托价值',
+          text: 'Order Value',
           tips: '此委托的总价值'
         },
         available: {
-          text: '可用余额',
-          tips: '你建立委托的可用余额，点此查看钱包详情。'
+          text: 'Available',
+          tips: 'you create an available balance for a commission. Click here to see the wallet details。'
         }
       },
       mapTriggerType: {
-        1: '盘口价格',
-        2: '标记价格',
-        3: '指数价格'
+        1: 'Price',
+        2: 'Mark Price',
+        3: 'Index Price'
       },
       notip: '直接下单',
-      trigger_close: '触发后平仓',
-      perfactPrice: '市场最优价格',
-      passive: '被动委托'
+      trigger_close: 'Trigger Liquidation',
+      perfactPrice: 'Best Price',
+      passive: 'Post-Only Order'
     },
     mapInformation: {
-      priceBy: '价格来源',
-      priceIndex: '指数价格',
-      volume_24h: '24小时交易量',
-      value: '合约价值',
-      valueRate: '资金费率'
+      priceBy: 'Price Sources',
+      priceIndex: 'Index Price',
+      volume_24h: '24H Trading Volume',
+      value: 'Contract Value',
+      valueRate: 'Rate'
     }
   },
   shipping: {

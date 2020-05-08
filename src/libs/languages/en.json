@@ -1,5 +1,5 @@
 {
-  "currency-mix": "金本位合约",
+  "currency-mix": "Gold Standard Contract",
   "currency-unit": "Currency Standard Contract",
   "google_login": "Google authentication on login",
   "google_turn_off": "Turn off",
@@ -1269,7 +1269,7 @@
   "user_open_sevice_fee": "Open the fee deduction",
   "user_service_fee_history": "View history of transaction",
   "order_ix_service_fee": "IX deduction fee",
-  "trading_lever": "contract transaction",
+  "trading_lever": "Contract Transaction",
   "activity_lock_share": "Rule of Lock for Dividend:",
   "order_ix_total_discount": "Accumulated deduction",
   "contract_account": "Contract Account",

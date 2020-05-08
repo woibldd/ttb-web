@@ -14,26 +14,50 @@
           <router-link
             :to="{name: 'trading'}"
             class="nav_link arrow-down">{{ $t('appNav.mapNavList.trading') }}</router-link>
-          <div class="nav_link arrow-down" >
-            <a
-              href="/contract.html"
-              :class="{'router-link-active': from === 'contract'}"
-              class="nav_link ml-20">{{ $t('appNav.mapNavList.contract') }}
-            </a>
+           <div class="nav_link arrow-down">
+            <router-link to="/affiliate" class="nav_link ml-30" v-popover:popoverContract>
+              {{$t('trading_lever')}}
+              <svg-icon icon-class="header-down" class="mini arrow" />
+            </router-link> 
+            <el-popover
+              ref="popoverContract"
+              popper-class="nav-list"
+              placement="bottom"
+              style="background:#2C3B4B;"
+              trigger="hover">
+              <div class="pop-dropdown">
+                <ul class="dropdown-list pt-10 pb-10">
+                  <li class="dropdown-item pl-24 pr-24"> 
+                    <a
+                      href="/contract.html"
+                      :class="{'router-link-active': from === 'contract'}"
+                      class="nav_link">{{ $t('appNav.mapNavList.contract') }}
+                    </a>
+                  </li>
+                  <li class="dropdown-item pl-24 pr-24"> 
+                    <a
+                      href="/future.html#/unit"
+                      :class="{'router-link-active': from === 'unit'}"
+                      class="nav_link">{{ $t('appNav.mapNavList.currency-unit') }}
+                    </a>
+                  </li>
+                  <li class="dropdown-item pl-24 pr-24"> 
+                    <a
+                      href="/future.html#/mix"
+                      :class="{'router-link-active': from === 'mix'}"
+                      class="nav_link">{{ $t('appNav.mapNavList.currency-mix') }}
+                    </a>
+                    <svg-icon icon-class="hot-red" />
+                  </li>
+                </ul>
+              </div>
+            </el-popover>
           </div>
           <div class="nav_link arrow-down" >
-            <a
-              href="/future.html#/unit"
-              :class="{'router-link-active': from === 'unit'}"
-              class="nav_link ml-20">{{ $t('appNav.mapNavList.currency-unit') }}
-            </a>
+          </div>
+          <div class="nav_link arrow-down" >
           </div>
           <div class="nav_link arrow-down">
-            <a
-              href="/future.html#/mix"
-              :class="{'router-link-active': from === 'mix'}"
-              class="nav_link ml-20">{{ $t('appNav.mapNavList.currency-mix') }}
-            </a>
           </div>
           <div class="nav_link arrow-down">
             <router-link
@@ -44,11 +68,7 @@
             <router-link to="/affiliate" class="nav_link ml-30" v-popover:popover2>
               {{$t('plan')}}
               <svg-icon icon-class="header-down" class="mini arrow" />
-            </router-link>
-            <!-- <span class="nav_link ml-30" >
-              {{$t('plan')}}
-              <icon name="header-down" class="mini arrow" />
-            </span> -->
+            </router-link> 
             <el-popover
               ref="popover2"
               popper-class="nav-list"

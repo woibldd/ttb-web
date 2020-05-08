@@ -1338,6 +1338,7 @@ export default {
 
       this.activeProduct = product
       // this.tradingType = product.symbol_currency[0].currency
+      console.log('tradingTypetradingTypetradingType')
       this.tradingType = product.symbol_currency.find(item => item.currency.indexOf('USDT') > -1).currency //暂时默认usdt
       this.setTitle()
       this.state.mix.pair = `${product.product}_${product.currency}`

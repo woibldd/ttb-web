@@ -2226,6 +2226,7 @@ export default {
       METHUSD: `METHUSD (模擬)`,
       BTCUSDT: `BTCUSDT`,
       BTCMUSDT: `BTCMUSDT`,
+      ETHMUSDT: `ETHMUSDT`,
     },
     mapTableTapContents: {
       shipping: {
@@ -2534,6 +2535,7 @@ export default {
       METHUSD: `METH币本位`,
       BTCUSDT: `BTCUSDT`, 
       BTCMUSDT: `BTCMUSDT`,
+      ETHMUSDT: `ETHMUSDT`,
     },
     mapTableTapContents: {
       shipping: {

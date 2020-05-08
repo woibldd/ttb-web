@@ -3102,6 +3102,7 @@ export default {
       METHUSD: `METH币本位`,
       BTCUSDT: `BTCUSDT`,
       BTCMUSDT: `BTCMUSDT`,
+      ETHMUSDT: `ETHMUSDT`,
     },
     mapTableTapContents: {
       shipping: {
