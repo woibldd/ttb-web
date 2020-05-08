@@ -1075,7 +1075,7 @@ export default {
     await this.subMarket() 
     
     const queryStr = localStorage.getItem('mix-product') || this.products[0].name
-    const product = this.products.find(item => item.name === queryStr)
+    const product = this.products.find(item => item.name === queryStr) || this.products[0]
 
     this.$nextTick(() => {
       this.$eventBus.$emit('protrade:layout:init')
