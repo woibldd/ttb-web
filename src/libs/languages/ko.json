@@ -2817,5 +2817,11 @@
   },
   "pre_reviewed": "Order is being pre-reviewed",
   "gold_account": "金本文合约账户",
-  "gold_contract": "金本位合约"
+  "gold_contract": "금본위 계약",
+  "mix_side": {
+    "1": "매입 (하다)",
+    "2": "매출 공전",
+    "3": "매출액이 평이",
+    "4": "매입공거래"
+  }
 }

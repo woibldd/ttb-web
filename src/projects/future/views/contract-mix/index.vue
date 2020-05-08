@@ -691,6 +691,7 @@ import contractActive from '../../components/contractActive'
 import orderBook from './components/orderbook'
 import { state, actions } from '@/modules/store'
 import VNav from '../../layout/VNav3'
+import utils from '@/modules/utils'
 // import { mapPeriod } from '@/const'
 export default {
   name: 'ContractMix',
@@ -751,7 +752,8 @@ export default {
       activeTypesKey: '1', 
       tradingType: 'USDT',
       tradingMenuOptions: ['USDT', 'BTC', 'ETH'],
-      lock: 0
+      lock: 0,
+      utils
       // usdtRates: []
     }
   },
@@ -1014,8 +1016,9 @@ export default {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.activeLever = found && found.leverage   
       found.holdingSum = 0
+      console.log('activeBalance')
       this.balanceList.map(item => { 
-        if (this.activeProduct.name === this.balanceList[0].name)
+        if (this.activeProduct.name === item.name)
           found.holdingSum += +item.holding
       })
       return found
@@ -1066,8 +1069,10 @@ export default {
     // this.usdtRates = res.data.USDT
 
     this.products = (await getSymbolList()).data
+    this.utils.$eventBus = this.$eventBus
     await this.openWebSocket(this.handleSoketData, websocket => {
-      this.websocket.heartCheck.start() // 发送一次心跳
+      this.websocket.heartCheck.start() // 发送一次心跳 
+      this.utils.$tvSocket = this.websocket
       this.websocket.send('{"op":"subscribepub","args":["market@ticker"]}')
       if (this.userData) {
         this.websocket.send(`{"op":"loginWeb","args":["${this.userData.session_id}"]}`)
@@ -1337,8 +1342,7 @@ export default {
       })
 
       this.activeProduct = product
-      // this.tradingType = product.symbol_currency[0].currency
-      console.log('tradingTypetradingTypetradingType')
+      // this.tradingType = product.symbol_currency[0].currency 
       this.tradingType = product.symbol_currency.find(item => item.currency.indexOf('USDT') > -1).currency //暂时默认usdt
       this.setTitle()
       this.state.mix.pair = `${product.product}_${product.currency}`

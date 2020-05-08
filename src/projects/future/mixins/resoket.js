@@ -1,5 +1,6 @@
 import ReconnectingWebSocket from 'reconnecting-websocket'
 import config from '@/libs/config' 
+
 export default {
   data () {
     return {
@@ -31,6 +32,7 @@ export default {
             typeof callBack === 'function' && callBack(res)
             resolve(this.websocket)
             websocket.heartCheck.start()
+            this.$eventBus.$emit('tv:history',res)
           } else reject(res)
         }
         websocket.heartCheck = {

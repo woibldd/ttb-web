@@ -92,7 +92,7 @@
           v-for="(item,index) in tableData"
           :key="index">
           <td class="table__td">{{ item.currency }}</td>
-          <td class="table__td">{{ $t(`side.${item.side}`) }}</td>
+          <td class="table__td">{{ $t(`mix_side.${item.side}`) }}</td>
           <td class="table__td">{{ item.amount }}</td>
           <td class="table__td"> {{ item.open_price | fixed(currencyPair.price_scale) }} </td>
           <td class="table__td">{{ item.sell_price | fixed(currencyPair.price_scale) }} </td>

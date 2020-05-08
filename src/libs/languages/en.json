@@ -2953,6 +2953,12 @@
     "describe6":"Self-developed high-performance matching engine, fully supporting the matching speed of 2 million + / seconds / transaction pairs, non-stop service without jam."
   },
   "pre_reviewed": "Order is being pre-reviewed",
-  "gold_account": "金本文合约账户",
-  "gold_contract": "金本位合约"
+  "gold_account": "金本位合约账户",
+  "gold_contract": "Gold Standard Contract",
+  "mix_side": {
+    "1": "Buy long",
+    "2": "Sell short",
+    "3": "Sell Long",
+    "4": "Buy short"
+  }
 }
