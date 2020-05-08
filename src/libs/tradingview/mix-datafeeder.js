@@ -129,9 +129,9 @@ export default {
     // utils.$tvSocket.$on('reopen', () => {
     //   this.subscribeBars(symbolInfo, resolution, onRealtimeCallback)
     // })
-    lastPair = `["history@${symbolInfo.ticker}@${period}"]`
-    utils.$tvSocket.send(`{"op":"subscribepub","args":${lastPair}}`)
-    utils.$eventBus.$on('tv:history', (data) => {
+    lastPair = `["history@${symbolInfo.ticker}@${period}"]` 
+    utils.$tvSocket.socket.send(`{"op":"subscribepub","args":${lastPair}}`)
+    utils.$tvSocket.$on('message', (data) => {
       if (data.topic && data.topic.indexOf('history')===0) {
         data = data.data[0]
         if (!data.time || data.time < lastTime) {
@@ -154,11 +154,11 @@ export default {
   },
   unsubscribeBars (subscriberUID) { 
     utils.log('UnsubscribeBars', subscriberUID)
-    utils.$tvSocket.send(`{"op":"unsubscribepub","args":${lastPair}}`)
+    utils.$tvSocket.socket.send(`{"op":"unsubscribepub","args":${lastPair}}`)
     // utils.$tvSocket && utils.$tvSocket.$destroy()
   },
   destroy () {
     // utils.$tvSocket && utils.$tvSocket.$destroy()
-    utils.$tvSocket.send(`{"op":"unsubscribepub","args":${lastPair}}`)
+    utils.$tvSocket.socket.send(`{"op":"unsubscribepub","args":${lastPair}}`)
   }
 }

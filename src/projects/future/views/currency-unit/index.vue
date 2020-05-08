@@ -493,7 +493,7 @@
 <script>
 // import candlestick from '../../components/candlestick'
 import selectBase from '../../components/selectBase'
-import soket from '../../mixins/resoket'
+// import soket from '../../mixins/resoket'
 import { bigRound, logogramNum, calcValueByAmountAndPrice, bigDiv, bigTimes, bigPlus, bigMinus, getCost, getLiqPrice, getTotalValue, calcProfit, toBig } from '../../utils/handleNum'
 import {
   getSymbolInfo,
@@ -527,6 +527,8 @@ import orderBook from './components/orderbook'
 import VNav from '../../layout/VNav3'
 
 import { state, actions } from '@/modules/store'
+import utils from '@/modules/utils'
+import wsNew from '@/modules/ws-new'
 // import { mapPeriod } from '@/const'
 export default {
   name: 'Contract',
@@ -544,7 +546,7 @@ export default {
     orderBook,
     VNav
   },
-  mixins: [soket],
+  // mixins: [soket],
   data () {
     return {
       state,
@@ -583,7 +585,9 @@ export default {
         1: 'UNIT',
         2: 'MARKET',
         3: 'INDEX'
-      }
+      },
+      utils,
+      socket: null
     }
   },
   computed: {
@@ -850,12 +854,15 @@ export default {
     },
     mapHandlerSoket () {
       return {
+        'liquid': this.handleAmountObj,
+        'heart': this.handleHeart,
         'market': this.handleTickers,
         'orderbook': this.handleOrderbookSoket,
         'deal': this.handleDealSoket,
         'orderfills': this.handleAmountObj,
         'position': this.handleAmountObj,
-        'trigger': this.handleAmountObj
+        'trigger': this.handleAmountObj,
+        'history': e => {}
       }
     },
     activeProductPrice () {
@@ -871,23 +878,23 @@ export default {
     }
   },
   async created () {
-    actions.updateSession()
-    console.log('created')
+    actions.updateSession() 
     this.products = (await getSymbolList()).data
-    await this.openWebSocket(this.handleSoketData, websocket => {
-      this.websocket.heartCheck.start() // 发送一次心跳
-      this.websocket.send('{"op":"subscribepub","args":["market@ticker"]}')
-      if (this.userData) {
-        this.websocket.send(`{"op":"loginWeb","args":["${this.userData.session_id}"]}`)
-        this.websocket.send('{"op":"subscribe","args":["orderfills"]}')
-        this.websocket.send('{"op":"subscribe","args":["position"]}')
-        this.websocket.send('{"op":"subscribe","args":["trigger"]}')
-      }
-      if (this.activeProduct) {
-        this.websocket.send(`{"op":"subscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@${this.dataDeep}@1@20"]}`)
-        this.websocket.send(`{"op":"subscribepub","args":["deal@${this.activeProduct.product}_${this.activeProduct.currency}"]}`)
-      }
-    })
+    // await this.openWebSocket(this.handleSoketData, websocket => {
+    //   this.websocket.heartCheck.start() // 发送一次心跳
+    //   this.websocket.send('{"op":"subscribepub","args":["market@ticker"]}')
+    //   if (this.userData) {
+    //     this.websocket.send(`{"op":"loginWeb","args":["${this.userData.session_id}"]}`)
+    //     this.websocket.send('{"op":"subscribe","args":["orderfills"]}')
+    //     this.websocket.send('{"op":"subscribe","args":["position"]}')
+    //     this.websocket.send('{"op":"subscribe","args":["trigger"]}')
+    //   }
+    //   if (this.activeProduct) {
+    //     this.websocket.send(`{"op":"subscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@${this.dataDeep}@1@20"]}`)
+    //     this.websocket.send(`{"op":"subscribepub","args":["deal@${this.activeProduct.product}_${this.activeProduct.currency}"]}`)
+    //   }
+    // }) 
+    await this.subMarket() 
     const queryStr = localStorage.getItem('unit-product') || this.products[0].name
     const product = this.products.find(item => item.name === queryStr)
 
@@ -895,7 +902,9 @@ export default {
       this.$eventBus.$emit('protrade:layout:init')
     })
 
-    this.handleProductsChange(product)
+    this.socket.$on('open', () => { 
+      this.handleProductsChange(product)
+    })
     this.handleAmountObj()
 
     this.$eventBus.$on('protrade:exchange:set', (params) => {
@@ -904,6 +913,36 @@ export default {
     })
   },
   methods: {
+    async subMarket() { 
+      const that = this
+      if (this.socket) {
+        this.socket.$destroy()
+      }
+      this.socket = await wsNew.create()
+      this.utils.$tvSocket = this.socket
+      this.socket.$on('open', () => { 
+        that.socket.heartCheck.start() // 发送一次心跳  
+        that.socket.socket.send('{"op":"subscribepub","args":["market@ticker"]}')
+        if (this.userData) {
+          that.socket.socket.send(`{"op":"loginWeb","args":["${this.userData.session_id}"]}`)
+          that.socket.socket.send('{"op":"subscribe","args":["orderfills"]}')
+          that.socket.socket.send('{"op":"subscribe","args":["position"]}')
+          that.socket.socket.send('{"op":"subscribe","args":["trigger"]}')
+        }
+        if (this.activeProduct && this.activeProduct.product && this.activeProduct.currency) {
+          that.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@${this.dataDeep}@1@20"]}`)
+          that.socket.socket.send(`{"op":"subscribepub","args":["deal@${this.activeProduct.product}_${this.activeProduct.currency}"]}`)
+        }
+      })
+      this.socket.$on('message', (data) => { 
+        that.handleSoketData(data) 
+      })
+      this.socket.$on('reopen', () => {
+        that.socket.$destroy()
+        that.subMarket()
+      })
+    },
+
     login (arg) {
       if (arg === 'login') {
         location.href = '/user/login'
@@ -935,9 +974,9 @@ export default {
     changeDeep (e) {
       let orgDeep = this.dataDeep
       this.dataDeep = e.accuracy
-      if (this.activeProduct) {
-        this.websocket.send(`{"op":"unsubscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@${orgDeep}@1@20"]}`)
-        this.websocket.send(`{"op":"subscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@${this.dataDeep}@1@20"]}`)
+      if (this.activeProduct && this.socket) {
+        this.socket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@${orgDeep}@1@20"]}`)
+        this.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@${this.dataDeep}@1@20"]}`)
       }
     },
     totalValue () {
@@ -1087,21 +1126,20 @@ export default {
     handleProductsChange (product) {
       if (!product) {
         return
-      }
-
-      console.log('handleProductsChange')
+      } 
       if (this.isLogin) {
         this.checkActive()
-      }
-
+      } 
       localStorage.setItem('unit-product', product.name)
       this.$router.replace({ query: { product: product.name } })
-      if (this.activeProduct) {
-        this.websocket.send(`{"op":"unsubscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@0@1@20"]}`)
-        this.websocket.send(`{"op":"unsubscribepub","args":["deal@${this.activeProduct.product}_${this.activeProduct.currency}"]}`)
+      if (this.socket) {  
+        if (this.activeProduct) {
+          this.socket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@0@1@20"]}`)
+          this.socket.socket.send(`{"op":"unsubscribepub","args":["deal@${this.activeProduct.product}_${this.activeProduct.currency}"]}`)
+        }
+        this.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${product.product}_${product.currency}@0@1@20"]}`)
+        this.socket.socket.send(`{"op":"subscribepub","args":["deal@${product.product}_${product.currency}"]}`)
       }
-      this.websocket.send(`{"op":"subscribepub","args":["orderbook@${product.product}_${product.currency}@0@1@20"]}`)
-      this.websocket.send(`{"op":"subscribepub","args":["deal@${product.product}_${product.currency}"]}`)
       getFutureListByKey(`${product.product}_${product.currency}`, { size: 20 }).then(({ data }) => {
         this.newBargainListData = data
       })
@@ -1158,6 +1196,11 @@ export default {
         }, 100)
       })
     },
+    handleHeart(data) {  
+      if (this.socket) {
+        this.socket.heartCheck.start()
+      }
+    }, 
     matchFutureItemByKey (key) {
       if (!this.tickersData) return {}
       return this.tickersData.UNIT.find(item => item.pair === key)

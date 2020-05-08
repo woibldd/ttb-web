@@ -4,7 +4,7 @@ import Vue from 'vue'
 import utils from '@/modules/utils'
 
 export default {
-  create (channel) {
+  async create (channel) {
     const hub = new Vue({
       data () {
         return {
@@ -59,13 +59,12 @@ export default {
       }
     } 
     hub.heartCheck = {
-      timeout: 10000, // 10秒一次
+      timeout: 60000, // 60秒一次
       timeoutObj: null,
       serverTimeoutObj: null,
       start: function () { 
         let self = this
-        this.timeoutObj && clearTimeout(this.timeoutObj)
-        console.log('serverTimeoutObj')
+        this.timeoutObj && clearTimeout(this.timeoutObj) 
         this.serverTimeoutObj && clearTimeout(this.serverTimeoutObj)
         this.timeoutObj = setTimeout(function () {
           let time = new Date() * 1

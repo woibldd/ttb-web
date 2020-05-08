@@ -137,7 +137,8 @@
         <v-loading />
       </div> -->
     </div>
-</div></template>
+  </div>
+</template>
 <script>
 import {state, local} from '@/modules/store'
 import utils from '@/modules/utils'
@@ -252,7 +253,7 @@ export default {
       return this.langData.mapDelegateList.mapHeader1
     },
     pair () {
-      return this.state.ct.pair
+      return this.state.unit.pair
     },
     priceScale () {
       // let scale = _.get(this, 'activeProduct.price_scale', 4) - this.offset

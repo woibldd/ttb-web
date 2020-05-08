@@ -23,8 +23,7 @@ export default {
             total += +item.values[1]
             return [+item.values[0], total]
           }).sort((a, b) => a[0] - b[0])
-          this.chart.series[index].setData(arrData, false, false, true)
-          console.log({arrData})
+          this.chart.series[index].setData(arrData, false, false, true) 
         })
         this.chart.redraw()
       }

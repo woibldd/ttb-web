@@ -85,6 +85,7 @@
                 v-loading="!delegateData"
                 element-loading-background="rgba(0, 0, 0, 0.3)">
                 <orderBook
+                  ref="orderBook"
                   @changeDeep="changeDeep"
                   :active-product="activeProduct"
                   :order-data="delegateData"
@@ -652,7 +653,7 @@
 <script>
 // import candlestick from '../../components/candlestick'
 import selectBase from '../../components/selectBase'
-import soket from '../../mixins/resoket'
+// import soket from '../../mixins/resoket'
 import { bigRound, logogramNum, calcMixValueByAmountAndPrice, bigDiv, bigTimes, bigPlus, bigMinus, getMixCost, getMixLiqPrice, getTotalValue, calcMixProfit, calcMixProfitLoss, toBig } from '../../utils/handleNum'
 import {
   getSymbolList,
@@ -692,6 +693,7 @@ import orderBook from './components/orderbook'
 import { state, actions } from '@/modules/store'
 import VNav from '../../layout/VNav3'
 import utils from '@/modules/utils'
+import wsNew from '@/modules/ws-new'
 // import { mapPeriod } from '@/const'
 export default {
   name: 'ContractMix',
@@ -709,7 +711,7 @@ export default {
     orderBook,
     VNav
   },
-  mixins: [soket],
+  // mixins: [soket],
   data () {
     return {
       state,
@@ -753,7 +755,8 @@ export default {
       tradingType: 'USDT',
       tradingMenuOptions: ['USDT', 'BTC', 'ETH'],
       lock: 0,
-      utils
+      utils,
+      socket: null
       // usdtRates: []
     }
   },
@@ -1015,8 +1018,7 @@ export default {
       const found = this.balanceList.find(item => this.activeProduct.name === item.name && item.side === +this.activeTypesKey) || {}
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.activeLever = found && found.leverage   
-      found.holdingSum = 0
-      console.log('activeBalance')
+      found.holdingSum = 0  
       this.balanceList.map(item => { 
         if (this.activeProduct.name === item.name)
           found.holdingSum += +item.holding
@@ -1043,12 +1045,16 @@ export default {
     },
     mapHandlerSoket () {
       return {
+        'liquid': this.handleAmountObj,
+        'heart': this.handleHeart,
         'market': this.handleTickers,
         'orderbook': this.handleOrderbookSoket,
         'deal': this.handleDealSoket,
         'orderfills': this.handleAmountObj,
         'position': this.handleAmountObj,
-        'trigger': this.handleAmountObj
+        'trigger': this.handleAmountObj,
+        'history': e => {}
+
       }
     },
     activeProductPrice () {
@@ -1064,34 +1070,19 @@ export default {
     }
   },
   async created () {
-    actions.updateSession()
-    // const res = await getRates({currency: 'USDT'}) 
-    // this.usdtRates = res.data.USDT
-
-    this.products = (await getSymbolList()).data
-    this.utils.$eventBus = this.$eventBus
-    await this.openWebSocket(this.handleSoketData, websocket => {
-      this.websocket.heartCheck.start() // 发送一次心跳 
-      this.utils.$tvSocket = this.websocket
-      this.websocket.send('{"op":"subscribepub","args":["market@ticker"]}')
-      if (this.userData) {
-        this.websocket.send(`{"op":"loginWeb","args":["${this.userData.session_id}"]}`)
-        this.websocket.send('{"op":"subscribe","args":["orderfills"]}')
-        this.websocket.send('{"op":"subscribe","args":["position"]}')
-        this.websocket.send('{"op":"subscribe","args":["trigger"]}')
-      }
-      if (this.activeProduct && this.activeProduct.product && this.activeProduct.currency) {
-        this.websocket.send(`{"op":"subscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@${this.dataDeep}@1@20"]}`)
-        this.websocket.send(`{"op":"subscribepub","args":["deal@${this.activeProduct.product}_${this.activeProduct.currency}"]}`)
-      }
-    })
+    actions.updateSession() 
+    this.products = (await getSymbolList()).data 
+    await this.subMarket() 
+    
     const queryStr = localStorage.getItem('mix-product') || this.products[0].name
     const product = this.products.find(item => item.name === queryStr)
 
     this.$nextTick(() => {
       this.$eventBus.$emit('protrade:layout:init')
     })
-    this.handleProductsChange(product)
+    this.socket.$on('open', () => { 
+      this.handleProductsChange(product)
+    })
     this.handleAmountObj()
     this.$eventBus.$on('protrade:exchange:set', (params) => { 
       this.activeAcountAndPriceArr[0] = params.amount || this.activeAcountAndPriceArr[0]
@@ -1099,6 +1090,35 @@ export default {
     })
   },
   methods: {
+    async subMarket() { 
+      const that = this
+      if (this.socket) {
+        this.socket.$destroy()
+      }
+      this.socket = await wsNew.create()
+      this.utils.$tvSocket = this.socket
+      this.socket.$on('open', () => { 
+        that.socket.heartCheck.start() // 发送一次心跳  
+        that.socket.socket.send('{"op":"subscribepub","args":["market@ticker"]}')
+        if (this.userData) {
+          that.socket.socket.send(`{"op":"loginWeb","args":["${this.userData.session_id}"]}`)
+          that.socket.socket.send('{"op":"subscribe","args":["orderfills"]}')
+          that.socket.socket.send('{"op":"subscribe","args":["position"]}')
+          that.socket.socket.send('{"op":"subscribe","args":["trigger"]}')
+        }
+        if (this.activeProduct && this.activeProduct.product && this.activeProduct.currency) {
+          that.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@${this.dataDeep}@1@20"]}`)
+          that.socket.socket.send(`{"op":"subscribepub","args":["deal@${this.activeProduct.product}_${this.activeProduct.currency}"]}`)
+        }
+      })
+      this.socket.$on('message', (data) => { 
+        that.handleSoketData(data) 
+      })
+      this.socket.$on('reopen', () => {
+        that.socket.$destroy()
+        that.subMarket()
+      })
+    },
     login (arg) {
       if (arg === 'login') {
         location.href = '/user/login'
@@ -1130,9 +1150,9 @@ export default {
     changeDeep (e) {
       let orgDeep = this.dataDeep
       this.dataDeep = e.accuracy
-      if (this.activeProduct) {
-        this.websocket.send(`{"op":"unsubscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@${orgDeep}@1@20"]}`)
-        this.websocket.send(`{"op":"subscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@${this.dataDeep}@1@20"]}`)
+      if (this.activeProduct && this.socket) { 
+          this.socket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@${orgDeep}@1@20"]}`)
+          this.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@${this.dataDeep}@1@20"]}`) 
       }
     },
     totalValue () {
@@ -1310,25 +1330,30 @@ export default {
       //     this.$set(found, pairArr[0], market)
       //   }
       // })
-    },
+    }, 
+    handleHeart(data) {  
+      if (this.socket) {
+        this.socket.heartCheck.start()
+      }
+    }, 
     handleProductsChange (product) {
       if (!product) {
         return
-      }
-
-      // console.log('handleProductsChange')
+      } 
       if (this.isLogin) {
         this.checkActive()
       }
 
       localStorage.setItem('mix-product', product.name)
-      this.$router.replace({ query: { product: product.name } })
-      if (this.activeProduct && this.activeProduct.currency && this.activeProduct.product) {
-        this.websocket.send(`{"op":"unsubscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@0@1@20"]}`)
-        this.websocket.send(`{"op":"unsubscribepub","args":["deal@${this.activeProduct.product}_${this.activeProduct.currency}"]}`)
+      this.$router.replace({ query: { product: product.name } }) 
+      if (this.socket) {  
+        if (this.activeProduct && this.activeProduct.currency && this.activeProduct.product) {
+          this.socket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@0@1@20"]}`)
+          this.socket.socket.send(`{"op":"unsubscribepub","args":["deal@${this.activeProduct.product}_${this.activeProduct.currency}"]}`)
+        }
+        this.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${product.product}_${product.currency}@0@1@20"]}`)
+        this.socket.socket.send(`{"op":"subscribepub","args":["deal@${product.product}_${product.currency}"]}`)  
       }
-      this.websocket.send(`{"op":"subscribepub","args":["orderbook@${product.product}_${product.currency}@0@1@20"]}`)
-      this.websocket.send(`{"op":"subscribepub","args":["deal@${product.product}_${product.currency}"]}`)
       getFutureListByKey(`${product.product}_${product.currency}`, { size: 20 }).then(({ data }) => {
         this.newBargainListData = data
       })

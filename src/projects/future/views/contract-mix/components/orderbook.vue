@@ -137,7 +137,8 @@
         <v-loading />
       </div> -->
     </div>
-</div></template>
+  </div>
+</template>
 <script>
 import {state, local} from '@/modules/store'
 import utils from '@/modules/utils'
@@ -229,7 +230,7 @@ export default {
           this.sub()
           // 切换币种前置纠正
           this.isFristAdultScrolling = true
-          this.computedScrollPosition()
+          this.computedScrollPosition() 
         }
       }
     },
@@ -252,7 +253,7 @@ export default {
       return this.langData.mapDelegateList.mapHeader1
     },
     pair () {
-      return this.state.ct.pair
+      return this.state.mix.pair
     },
     priceScale () {
       // let scale = _.get(this, 'activeProduct.price_scale', 4) - this.offset
@@ -443,34 +444,11 @@ export default {
       }
       if (!res.code) {
         this.assignData(res.data)
-      }
-      // this.socket = ws.create(`orderbook/${this.pair}/${this.offset}/${this.accuracy}/20`)
-      // this.socket.$on('open', () => {
-      //   this.socket.heartCheck.start()
-      // })
-      // this.socket.$on('message', (data) => {
-      //   this.socket.heartCheck.start()
-      //   this.deepthData = data
-      //   this.changeDepthNumber(data)
-      // })
+      } 
     },
     assignData (data) {
-      if (!data) { return }
-      // data = require('./book-depth/test-data.js').default
-      const toBig = item => [this.$big(item.values[0]), this.$big(item.values[1])]
-      // data = {
-      //   asks: data.asks.map(item => {
-      //     return {
-      //       values: item
-      //     }
-      //   }),
-      //   bids: data.bids.map(item => {
-      //     return {
-      //       values: item
-      //     }
-      //   })
-      // }
-
+      if (!data) { return } 
+      const toBig = item => [this.$big(item.values[0]), this.$big(item.values[1])] 
       this.buy = _.map(data.bids, toBig)
       this.sell = _.map(data.asks, toBig)
       let bid = _.get(this.buy, '0.0', 0)
@@ -512,8 +490,7 @@ export default {
      * 计算滚动条位置，强制滚动
      */
     computedScrollPosition () {
-      // 已经纠正过的不在纠正
-
+      // 已经纠正过的不在纠正 
       if (!this.isFristAdultScrolling) return
       // 单边显示长度
       const singleSideLength = 7

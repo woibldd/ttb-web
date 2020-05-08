@@ -825,8 +825,7 @@ export default {
           that.socket.socket.send('{"op": "subscribe", "args": ["liquid"]}') 
         }
       })
-      this.socket.$on('message', (data) => { 
-        console.log(data)
+      this.socket.$on('message', (data) => {  
         that.handleSocketData(data) 
       })
       this.socket.$on('reopen', () => {

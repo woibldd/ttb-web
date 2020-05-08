@@ -125,7 +125,7 @@
                 @click="linkHandle(scope.row, 0)"
                 class="link-btn">资金划转</a>
               <a
-                :href="`/unit.html#/?product=${scope.row.currency}USD`"
+                :href="`/future.html#/mix`"
                 class="link-btn">交易</a>
             </template>
           </el-table-column>
