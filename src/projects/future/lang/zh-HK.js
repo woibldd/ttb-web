@@ -2734,7 +2734,7 @@ export default {
       },
       cost: '成本',
       submitEntrust: '提交委托',
-      tradingType: '结算币种',
+      tradingType: '結算幣種',
       mapDescribe: {
         entrustValue: {
           text: '委托价值',

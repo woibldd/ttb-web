@@ -22,16 +22,16 @@ export default {
           item.accuracy = item.accuracy || 5
         }
 
-        if (item.name.indexOf('MIX_') < 0) {
-          item.name = `MIX_${item.name.replace('_', '')}`
-        }
+        // if (item.name.indexOf('MIX_') < 0) {
+        //   item.name = `MIX_${item.name.replace('_', '')}`
+        // }
 
-        // USD
-        item.currency_name = item.name.substr(-3)
-        // BTCUSD
-        item.symbol = item.name.split('_')[1]
-        // BTC
-        item.product_name = item.symbol.substr(0, 3)
+        // // USD
+        // item.currency_name = item.name.substr(-3)
+        // // BTCUSD
+        // item.symbol = item.name.split('_')[1]
+        // // BTC
+        // item.product_name = item.symbol.substr(0, 3)
         return item
       })
       res.data = { items: res.data }

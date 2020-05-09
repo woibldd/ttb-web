@@ -2782,9 +2782,9 @@ export default {
           2: '매출액이 평이'
         }
       },
-      cost: '成本',
-      submitEntrust: '提交委托',
-      tradingType: '结算币种',
+      cost: '원가.',
+      submitEntrust: '의뢰 를 걸다',
+      tradingType: '결제 화폐 종류',
       mapDescribe: {
         entrustValue: {
           text: '委托价值',

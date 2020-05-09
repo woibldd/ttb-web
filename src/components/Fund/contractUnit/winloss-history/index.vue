@@ -35,7 +35,7 @@
             <el-option
               v-for="(item, idx) in pairList"
               :key="idx"
-              :label="item.currency"
+              :label="item.name"
               :value="item"/>
           </el-select>
         </div>
@@ -212,7 +212,7 @@ export default {
     async getFundHistory () {
       // this.tableData = []
       const params = {
-        name: this.currencyPair.symbol,
+        name: this.currencyPair.name,
         page: this.pages.page,
         size: this.pages.size
       }
