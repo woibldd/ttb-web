@@ -211,8 +211,10 @@ export default {
     },
     async refresh () {
       try {
-        let fun = service.getUnitContractSymInfo
-        // if (this.pair.indexOf('UNIT') > -1) fun = service.getUnitContractSymInfo
+        let fun = service.getUnitContractSymInfo 
+        if (this.pair.indexOf('MIX')) {
+          fun = service,getMixContractSymInfo
+        }
         let res = await fun({
           symbol: this.pair
         })

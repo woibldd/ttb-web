@@ -2,6 +2,7 @@ import utils from '@/modules/utils'
 import {state} from '@/modules/store'
 import service from '@/modules/service'
 import ws from '@/modules/ws'
+import wsNew from '@/modules/ws-new'
 import _ from 'lodash'
 // const theme = process.env.THEME_ENV
 
@@ -113,20 +114,40 @@ export default {
     if (!symbolInfo || !resolution) return
     const period = getPeriod(resolution) 
     lastPair = `["history@${symbolInfo.ticker}@${period}"]`  
-    while (utils.$tvSocket.socket.readyState !== 1) {
-      await utils.sleep(3e3)
-    }
-    utils.$tvSocket.socket.send(`{"op":"subscribepub","args":${lastPair}}`)  
-    utils.$tvSocket.$on('message', (data) => {
-      if (data.topic && data.topic.indexOf('history')===0) {
-        data = data.data[0]
-        if (!data.time || data.time < lastTime) {
-          return utils.log('Wrong realtime')
-        }
-        lastTime = data.time
-        onRealtimeCallback(toTick(data))
+    if (!utils.$tvSocket) {
+      utils.$tvSocket = await wsNew.create()
+      utils.$tvSocket.$on('open', () => {
+        that.socket.heartCheck.start() // 发送一次心跳  
+        utils.$tvSocket.socket.send(`{"op":"subscribepub","args":${lastPair}}`)  
+        utils.$tvSocket.$on('message', (data) => {
+          if (data.topic && data.topic.indexOf('history')===0) {
+            data = data.data[0]
+            if (!data.time || data.time < lastTime) {
+              return utils.log('Wrong realtime')
+            }
+            lastTime = data.time
+            onRealtimeCallback(toTick(data))
+          }
+        }) 
+      })
+    } else { 
+      while (utils.$tvSocket.socket.readyState !== 1) {
+        await utils.sleep(3e3)
       }
-    }) 
+      utils.$tvSocket.socket.send(`{"op":"subscribepub","args":${lastPair}}`)  
+      utils.$tvSocket.$on('message', (data) => {
+        if (data.topic && data.topic.indexOf('history')===0) {
+          data = data.data[0]
+          if (!data.time || data.time < lastTime) {
+            return utils.log('Wrong realtime')
+          }
+          lastTime = data.time
+          onRealtimeCallback(toTick(data))
+        }
+      }) 
+    }
+     
+
     
     utils.$tvSocket.$on('reopen', () => {
       this.subscribeBars(symbolInfo, resolution, onRealtimeCallback)

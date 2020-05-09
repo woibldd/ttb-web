@@ -60,8 +60,7 @@
       <table>
         <tr class="table__tr header c-999">
           <th class="table__th">
-            <!-- {{ $t('fund.contract.contract_name') }} -->
-            结算币种
+            {{ $t('settlement_currency') }} 
           </th>
           <th class="table__th">
             {{ $t('fund.contract.close_side') }}

@@ -581,7 +581,7 @@
               <router-link
                 class="pointer"
                 v-tooltip.top-center="{html: true, content: $tR('mapDelegateList.contract_mark_price_tips'), classes: 'contract'}"
-                :to="{name: 'UnitIndex', params: {pair: `${(activeProduct || {}).product}_${(activeProduct || {}).name}` }}">
+                :to="{name: 'UnitIndex', params: {pair: `${(activeProduct || {}).product}_${(activeProduct || {}).currency}` }}">
                 {{ $t('contract_more_resource') }}
               </router-link>
             </div>
@@ -606,12 +606,12 @@
                     <router-link
                       class="pointer text-light"
                       v-tooltip.top-center="{html: true, content: $tR('mapDelegateList.contract_index_price_tips', {product_name: (activeProduct || {}).currency}), classes: 'contract'}"
-                      :to="{name: 'UnitIndex', params: {pair: `${(activeProduct || {}).product}_${(activeProduct || {}).name}` }}">{{ activeProduct.INDEX.current }}</router-link>
+                      :to="{name: 'UnitIndex', params: {pair: `${(activeProduct || {}).product}_${(activeProduct || {}).currency}` }}">{{ activeProduct.INDEX.current }}</router-link>
                     /
                     <router-link
                       class="pointer text-light"
                       v-tooltip.top-center="{html: true, content: $tR('mapDelegateList.contract_mark_price_tips'), classes: 'contract'}"
-                      :to="{name: 'UnitIndex', params: {pair: `${(activeProduct || {}).product}_${(activeProduct || {}).name}` }}">{{ handleDishInfoItem('markPrice') }}</router-link>
+                      :to="{name: 'UnitIndex', params: {pair: `${(activeProduct || {}).product}_${(activeProduct || {}).currency}` }}">{{ handleDishInfoItem('markPrice') }}</router-link>
 
                   </div>
                   <p

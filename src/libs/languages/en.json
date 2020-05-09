@@ -2960,5 +2960,6 @@
     "2": "Sell short",
     "3": "Sell Long",
     "4": "Buy short"
-  }
+  },
+  "settlement_currency": "Currency"
 }
