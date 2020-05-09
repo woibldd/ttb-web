@@ -56,7 +56,7 @@
             width="60"/>
           <el-table-column
             prop="available"
-            :label="$t('available_balance')">
+            :label="$t('contract_account_rights')">
             <template slot-scope="scope">
               <div class="balance">{{ parsetNumber(scope.row.available) + ' ' + scope.row.currency }}</div>
               <div
@@ -77,7 +77,7 @@
           <el-table-column
             prop="unrealized"
             :label="$t('fund_contract_result_unrealized')">
-            <template slot-scope="scope">
+            <template slot-scope="scope"> 
               <div class="balance">{{ parsetNumber(scope.row.unrealized) + ' ' + scope.row.currency }}</div>
               <div
                 v-if="scope.row.currency!=='METH'"
@@ -190,18 +190,19 @@ export default {
     init () {
       this.available = 0
       this.total = 0
+      const _this = this
       service.getContractMixBalanceList({}).then((res) => {
-        if (res.code === 0) {
+        if (!res.code) {
           this.tableData = []
-          let row = {}
-          res.data.map(item => {
-            if (item.currency === row.currency) {
-              row.unrealized = this.$big(row.unrealized).push(item.unrealized).toString() // 未结盈亏
-              row.margin_position = this.$big(row.margin_position).push(item.margin_position).toString() // 仓位保证金
-              row.margin_delegation = this.$big(row.margin_delegation).push(item.margin_delegation).toString() // 委托保证金
+          // let row = {} 
+          res.data.map(item => { 
+            let row = this.tableData.find(dr => dr.currency === item.currency)
+            if (!row) { 
+              this.tableData.push(item)
             } else {
-              row = item
-              this.tableData.push(row)
+              row.unrealized = this.$big(row.unrealized || 0).plus(item.unrealized).toString() // 未结盈亏
+              row.margin_position = this.$big(row.margin_position || 0).plus(item.margin_position).toString() // 仓位保证金
+              row.margin_delegation = this.$big(row.margin_delegation || 0).plus(item.margin_delegation).toString() // 委托保证金
             }
           })
           // this.tableData = res.data

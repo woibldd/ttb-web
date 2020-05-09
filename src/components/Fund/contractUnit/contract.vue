@@ -52,7 +52,7 @@
           </el-table-column>
           <el-table-column
             prop="available"
-            :label="$t('available_balance')">
+            :label="$t('contract_account_rights')">
           >
             <template slot-scope="scope">
               <div class="balance">{{ parsetNumber(scope.row.available) + ' ' + scope.row.currency }}</div>
