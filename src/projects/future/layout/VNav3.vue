@@ -286,21 +286,24 @@
               <div class="right">
                 <h3><a
                   target="_blank"
-                  href="https://ixcustomer.zendesk.com/hc/zh-cn/articles/360020414512">{{ $t('appNav.mapNavRight.download_pop.children.process') }}</a></h3>
+                  href="https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360032874512">{{ $t('appNav.mapNavRight.download_pop.children.process') }}</a></h3>
                 <p>
                   <!-- <v-btn
                     icon="apple"
                     label="Iphone"/> -->
-                  <!--<el-button type="primary">-->
-                    <!--<svg-icon icon-class="apple"/>-->
-                    <!--Iphone-->
-                  <!--</el-button>-->
-                  <v-btn
-                    icon="apple"
-                    label="apple"/>
-                  <v-btn
-                    icon="android"
-                    label="Android"/>
+                  <p>
+                    <el-button type="primary" style="width:100%;">
+                      <svg-icon icon-class="apple"/>
+                      Iphone
+                    </el-button> 
+                  </p>
+                  <p class="mt-10">
+                    <el-button type="primary" style="width:100%;">
+                      <svg-icon icon-class="android"/>
+                      Android
+                    </el-button> 
+
+                  </p>
                 </p>
               </div>
             </div>
@@ -368,19 +371,7 @@
             placement="bottom"
             style="background:#2C3B4B;"
             width="100"
-            trigger="hover">
-            <!-- <div class="lang_box">
-              <div
-                :key="key"
-                v-for="(value, key) in locales">
-                <a
-                  @click="switchLang(key)"
-                > <icon
-                  :name="'flag-'+key"
-                  class="mr-5"/>{{ value }}
-                </a>
-              </div>
-            </div>  -->
+            trigger="hover"> 
             <div
               style="width:100px;"
               class="pop-dropdown">
@@ -393,10 +384,7 @@
                   v-for="(value, key) in locales">
                   <a
                     @click="switchLang(key)"
-                  >
-                    <!-- <svg-icon
-                      :icon-class="'flag-'+key"
-                      class="mr-5" /> -->
+                  > 
                     {{ value }}
                   </a>
                 </li>
