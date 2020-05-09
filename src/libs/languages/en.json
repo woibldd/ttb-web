@@ -2623,6 +2623,18 @@
       "unrealized_mark_price": "Unsettled P&L (Mark Price)",
       "unrealized_last_price": "Unsettled P&L (Order Book Price)",
       "amount":"Qty"
+    },
+    "opetate": {
+      "1": "转入",
+      "2": "转出",
+      "3": "当日清算",
+      "4": "购买",
+      "5": "出售",
+      "6": "理财冻结",
+      "7": "理财本息结算",
+      "8": "",
+      "9": "币本位当日清算",
+      "10": "金本位当日清算"
     }
   },
   "profile": {

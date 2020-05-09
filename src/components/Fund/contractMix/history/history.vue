@@ -115,7 +115,7 @@
             <span
               :class="[{'font-color-buy': item.side === 1 || item.side === 4},
                        {'font-color-sell': item.side === 2 || item.side === 3}]"
-              v-html="$t(`side.${item.side}`)"/>
+              v-html="$t(`mix_side.${item.side}`)"/>
           </td>
           <td class="table__td">{{ (item.amount || 0) }}</td>
 
@@ -201,7 +201,7 @@
             <span
               :class="[{'font-color-buy': item.side === 1 || item.side === 4},
                        {'font-color-sell': item.side === 2 || item.side === 3}]"
-              v-html="$t(`side.${item.side}`)"/>
+              v-html="$t(`mix_side.${item.side}`)"/>
           </td>
           <td class="table__td">{{ item.amount }}</td>
           <td class="table__td">{{ $big(item.price || 0) | fixed(2) }}</td>

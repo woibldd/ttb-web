@@ -72,8 +72,8 @@
           v-for="(item,index) in tableData"
           :key="index">
           <td class="table__td">{{ item.create_time }}</td>
-          <td class="table__td">{{ item.currency }}</td>
-          <td class="table__td"> {{ item.name }} </td>
+          <td class="table__td">{{ item.currency }}</td> 
+          <td class="table__td"> {{ $t(`fund.opetate.${item.opetate}`)  }} </td>
           <td class="table__td">{{ item.amount | fixed(valueScale) }}</td>
           <td class="table__td pr-10">{{ item.available | fixed(valueScale) }}</td>
           <td class="table__td">{{ processStatus(item.status) }}</td>

@@ -73,7 +73,7 @@
           :key="index">
           <td class="table__td">{{ item.create_time }}</td>
           <td class="table__td">{{ item.currency }}</td>
-          <td class="table__td"> {{ item.name }} </td>
+          <td class="table__td"> {{ $t(`fund.opetate.${item.opetate}`)  }} </td>
           <td class="table__td">{{ item.amount | fixed(valueScale) }}</td>
           <td class="table__td pr-10">{{ item.available | fixed(valueScale) }}</td>
           <td class="table__td">{{ processStatus(item.status) }}</td>
@@ -137,21 +137,21 @@ export default {
       }
       service.getMixFundHistory(params).then(res => {
         this.tableData = res.data.data
-        this.tableData.forEach((item) => {
-          if (item.to_balance === 3) {
-            this.$set(item, 'name', this.$t('transfer_in'))
-          }
-          if (item.from_balance === 3) {
-            this.$set(item, 'name', this.$t('transfer_out'))
-          }
-          if (item.opetate === 3) {
-            this.$set(item, 'name', this.$t('day_liquidation'))
-          }
-          if (item.opetate === 7) {
-            this.$set(item, 'name', this.$t('cash.th'))
-          }
-        })
-        console.log(this.tableData)
+        // this.tableData.forEach((item) => {
+        //   if (item.to_balance === 3) {
+        //     this.$set(item, 'name', this.$t('transfer_in'))
+        //   }
+        //   if (item.from_balance === 3) {
+        //     this.$set(item, 'name', this.$t('transfer_out'))
+        //   }
+        //   if (item.opetate === 3) {
+        //     this.$set(item, 'name', this.$t('day_liquidation'))
+        //   }
+        //   if (item.opetate === 7) {
+        //     this.$set(item, 'name', this.$t('cash.th'))
+        //   }
+        // })
+        // console.log(this.tableData)
         this.pages = res.data
       })
     },
