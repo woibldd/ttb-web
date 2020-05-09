@@ -9,10 +9,12 @@
         class="linear-bar text-light"
         flex="main:justify cross:center">
         <!-- <svg-icon icon-class="money" /> -->
-        <img
+        <svg-icon v-if="state.locale==='zh-CN'" icon-class="money-cn" v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}"/>
+        <svg-icon v-else icon-class="money-en" v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}"/>
+        <!-- <img
           src="~@/projects/future/assets/icon/icon-risk-money.png"
           v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}"
-          alt="">
+          alt=""> -->
         <!-- <i class="el-icon-warning" /> -->
         <img
           src="~@/projects/future/assets/icon/icon-risk-alert.png"
@@ -154,6 +156,7 @@
 <script>
 import { setLeveragePreview } from '../../../api/contractMix'
 import { toRound } from '../../../utils/handleNum'
+import { state } from '@/modules/store'
 export default {
   name: 'OrderPopover',
   model: {
@@ -200,6 +203,7 @@ export default {
   },
   data () {
     return {
+      state,
       input: '',
       isSeting: false,
       inputVisible: false,

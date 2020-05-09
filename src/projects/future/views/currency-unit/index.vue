@@ -1159,7 +1159,7 @@ export default {
       return +bigDiv([amount, max]) * 100 + '%'
     },
     handleAmountObj () {
-      if (!this.$store.state.userData) return
+      if (!this.state.userInfo) return
       clearTimeout(this._timer)
       return new Promise(resolve => {
         this._timer = setTimeout(async () => {

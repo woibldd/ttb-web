@@ -793,7 +793,8 @@ export default {
       return this.mapDeepData[this.dataDeep] ? this.mapDeepData[this.dataDeep].offset : 0
     },
     formValueObj () {
-      if (!this.activeProduct.MIX || !this.costObj || !this.activeBalance || !this.activeProduct.MARKET) return {}
+
+      if (!this.state.userInfo || !this.activeProduct.MIX || !this.costObj || !this.activeBalance || !this.activeProduct.MARKET) return {}
       const price = this.activeAcountAndPriceArr[1] || this.activeProduct.MIX.current
       const getLiqPrice = this.getLiqPrice()
       const balance = this.balanceList.find(item => item.name === this.activeProduct.name && item[this.side === 1 ? 'buy' : 'sell']) 
@@ -1113,7 +1114,7 @@ export default {
           that.socket.socket.send(`{"op":"subscribepub","args":["deal@${this.activeProduct.product}_${this.activeProduct.currency}"]}`)
         }
       })
-      this.socket.$on('message', (data) => { 
+      this.socket.$on('message', (data) => {  
         that.handleSoketData(data) 
       })
       this.socket.$on('reopen', () => {
@@ -1153,8 +1154,8 @@ export default {
       let orgDeep = this.dataDeep
       this.dataDeep = e.accuracy
       if (this.activeProduct && this.socket) { 
-          this.socket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@${orgDeep}@1@20"]}`)
-          this.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@${this.dataDeep}@1@20"]}`) 
+        this.socket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@${orgDeep}@1@20"]}`)
+        this.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@${this.dataDeep}@1@20"]}`) 
       }
     },
     totalValue () {
@@ -1391,8 +1392,8 @@ export default {
     handleWidthBg (amount, max) {
       return +bigDiv([amount, max]) * 100 + '%'
     },
-    handleAmountObj () {
-      if (!this.$store.state.userData) return
+    handleAmountObj () { 
+      if (!this.state.userInfo) return
       clearTimeout(this._timer)
       return new Promise(resolve => {
         this._timer = setTimeout(async () => {
@@ -1409,7 +1410,15 @@ export default {
             bargain: [bargain, data && data.bargain[0] !== bargain]
           }
           obj[this.activeTableTabKey][1] = false
-          this.amountObj = obj
+          //  const obj = {
+          //   shipping: [0,0],
+          //   shipped: [0,0],
+          //   curEntrust: [0,0],
+          //   lossEntrust: [0,0],
+          //   historyEntrust: [0,0],
+          //   bargain: [0,0],
+          // }
+          this.amountObj = obj 
           this.handleTableTabClick(this.activeTableTabKey)
           this.handleEntrustList()
           resolve()

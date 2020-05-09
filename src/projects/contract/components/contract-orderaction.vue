@@ -319,10 +319,12 @@
             class="icon icon-alert"
             v-tooltip.left="{content: $t('contract_max_lever') + maxTimes +'x', classes: 'contract'}"
           />
-          <span
+          <!-- <span
             class="icon icon-money"
             v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}"
-          />
+          /> -->
+          <icon v-if="state.locale === 'zh-CN'" class="icon icon-money" name="money-cn"  v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}" />
+          <icon v-else class="icon icon-money" name="money-en"  v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}" />
         </div>
         <div class="outer-slider mb-10" ref="divlever">
           <!-- 滑块 外面-->
@@ -462,10 +464,13 @@
               class="icon icon-alert"
               v-tooltip.top-center="{content: $t('contract_max_lever') + maxTimes +'x', classes: 'contract'}"
             />
-            <span
+            <!-- <span
               class="icon icon-money"
               v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}"
-            />
+            /> -->
+            
+            <icon v-if="state.locale === 'zh-CN'" class="icon icon-money" name="money-cn"  v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}" />
+            <icon v-else class="icon icon-money" name="money-en"  v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}" />
           </div>
           <!-- !-- 杠杆操作 input number-- -->
           <!-- !-- @change="mmModalLeverChange" -- -->
@@ -3424,9 +3429,9 @@ export default {
 .icon-alert {
   background-image: url("../../../assets/contract/icon-risk-alert.png");
 }
-.icon-money {
-  background-image: url("../../../assets/contract/icon-risk-money.png");
-}
+// .icon-money {
+//   background-image: url("../../../assets/contract/icon-risk-money.png");
+// }
 .icon-edit {
   background-image: url("../../../assets/contract/icon-risk-edit.png");
 }

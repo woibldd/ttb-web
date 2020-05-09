@@ -49,9 +49,9 @@ export default {
         utils.logE(e)
       }
       if (data) {
-        if (data.code) {
-          return false
-        }
+        // if (data.code) {
+        //   return false
+        // }
         // if (data.data) {
         //   data = data.data
         // }
