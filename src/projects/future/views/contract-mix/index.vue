@@ -1072,6 +1072,7 @@ export default {
   async created () {
     actions.updateSession() 
     this.products = (await getSymbolList()).data 
+    this.state.mix.pairList = this.products
     await this.subMarket() 
     
     const queryStr = localStorage.getItem('mix-product') || this.products[0].name

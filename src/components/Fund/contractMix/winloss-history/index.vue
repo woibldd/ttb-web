@@ -243,10 +243,9 @@ export default {
 
   },
   async created () {
-    service.getMixContractSymList({}).then((res) => {
-      console.log(res)
+    service.getMixContractSymList({}).then((res) => { 
       if (res.code === 0) {
-        this.pairList = res.data.items
+        this.pairList = res.data.items 
         this.currencyPair = this.pairList[0]
       }
     })

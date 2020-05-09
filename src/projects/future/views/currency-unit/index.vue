@@ -880,6 +880,7 @@ export default {
   async created () {
     actions.updateSession() 
     this.products = (await getSymbolList()).data  
+    this.state.unit.pairList = this.products
     await this.subMarket()  
     const queryStr = localStorage.getItem('unit-product') || this.products[0].name
     const product = this.products.find(item => item.name === queryStr) || this.products[0]

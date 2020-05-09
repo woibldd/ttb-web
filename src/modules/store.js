@@ -80,10 +80,12 @@ export const state = {
     userSetting: {}
   },
   unit: {
-    pair: ''
+    pair: '',
+    pairList: []
   },
   mix: {
-    pair: ''
+    pair: '',
+    pairList: []
   },
   rate: {
     IX: null,

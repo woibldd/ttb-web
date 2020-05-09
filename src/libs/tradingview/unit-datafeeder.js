@@ -2,6 +2,7 @@ import utils from '@/modules/utils'
 import service from '@/modules/service'
 import ws from '@/modules/ws'
 import _ from 'lodash'
+import {state} from '@/modules/store'
 // const theme = process.env.THEME_ENV
 
 let lastTime
@@ -63,9 +64,14 @@ export default {
     const ticker = product + '_' + currency
     // @check end
 
-    const res = await service.getUnitContractPairInfo({symbol: ticker})
-    const scale = res.code ? 1e8 : Math.pow(10, res.data.price_scale)
-    if (res.code) {
+    // const res = await service.getUnitContractPairInfo({symbol: ticker})
+    // const scale = res.code ? 1e8 : Math.pow(10, res.data.price_scale)
+    // if (res.code) {
+    //   return reject()
+    // }
+    const res = state.unit.pairList.find(item => item.symbol === ticker)
+    const scale = res.price_scale
+    if (!res) {
       return reject()
     }
     resolve({

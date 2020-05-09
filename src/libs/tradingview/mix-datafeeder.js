@@ -1,4 +1,5 @@
 import utils from '@/modules/utils'
+import {state} from '@/modules/store'
 import service from '@/modules/service'
 import ws from '@/modules/ws'
 import _ from 'lodash'
@@ -61,12 +62,13 @@ export default {
       reject(new Error('Invalid Symbol'))
     }
     const ticker = product + '_' + currency
-    // @check end 
-    const res = await service.getMixContractPairInfo({symbol: ticker})
-    const scale = res.code ? 1e8 : Math.pow(10, res.data.price_scale)
-    if (res.code) {
+    // @check end   
+    const res = state.mix.pairList.find(item => item.symbol === ticker)
+    const scale = res.price_scale
+    if (!res) {
       return reject()
     }
+
     resolve({
       timezone: utils.getDefaultTimezone(),
       name: product + '/' + currency,
