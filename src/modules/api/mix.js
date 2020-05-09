@@ -1,69 +1,100 @@
 import {getCache, request} from './api-base'
 
 export default {
-  getMixSymList () {
-    return getCache('mixPairList', () => request('mix/symbol/list').then(res => {
-      if (res && res.data) {
-        res.data = res.data.map(item => {
-          item.amount_scale = parseInt(item.amount_scale, 10)
-          item.currency_scale = parseInt(item.price_scale, 10) || 0
-          item.price_scale = parseInt(item.price_scale, 10) || 2
-          item.fee_rate = item.fee_rate || 0 
-          if (item.currency === 'BTCUSD') {
-            item.value_scale = 8
-            item.accuracy = item.accuracy || 5
-          } else {
-            item.value_scale = 8
-            item.accuracy = item.accuracy || 5
-          }  
-          item.currency_name = item.name.substr(-3) 
-          item.symbol = item.name.split('_')[1] 
-          return item
-        })
-        res.data = { items: res.data }
-        return res
-      }
-    }))
-  },
+  // getMixSymList () {
+  //   return getCache('mixPairList', () => request('mix/symbol/list').then(res => {
+  //     if (res && res.data) {
+  //       res.data = res.data.map(item => {
+  //         item.amount_scale = parseInt(item.amount_scale, 10)
+  //         item.currency_scale = parseInt(item.price_scale, 10) || 0
+  //         item.price_scale = parseInt(item.price_scale, 10) || 2
+  //         item.fee_rate = item.fee_rate || 0 
+  //         if (item.currency === 'BTCUSD') {
+  //           item.value_scale = 8
+  //           item.accuracy = item.accuracy || 5
+  //         } else {
+  //           item.value_scale = 8
+  //           item.accuracy = item.accuracy || 5
+  //         }  
+  //         item.currency_name = item.name.substr(-3) 
+  //         item.symbol = item.name.split('_')[1] 
+  //         return item
+  //       })
+  //       res.data = { items: res.data }
+  //       return res
+  //     }
+  //   }))
+  // },
   // 币本位可用余额
   getContractMixBalanceList () {
     return getCache('contractMixBalance', () => request('mix/account/balance/list'), 1e3)
   }, 
-  getMixContractSymList () {
-    return getCache('mixPairList', () => request('mix/symbol/list').then(res => {
-      if (res && res.data) {
-        res.data = res.data.map(item => {
-          item.amount_scale = parseInt(item.amount_scale, 10)
-          item.currency_scale = parseInt(item.price_scale, 10) || 0
-          item.price_scale = parseInt(item.price_scale, 10) || 2
-          item.fee_rate = item.fee_rate || 0
-          // item.value_scale = parseInt(item.value_scale, 10) || 4
-          if (item.currency === 'BTCUSD') {
-            item.value_scale = 8
-            item.accuracy = item.accuracy || 5
-          } else {
-            item.value_scale = 8
-            item.accuracy = item.accuracy || 5
-          }
+  async getMixContractSymList () { 
+    const res = await getCache('mixPairList', () => request('mix/symbol/list'), 2e6)
+    if (res && res.data && !res.data.items) {
+      res.data = res.data.map(item => {
+        item.amount_scale = parseInt(item.amount_scale, 10)
+        item.currency_scale = parseInt(item.price_scale, 10) || 0
+        item.price_scale = parseInt(item.price_scale, 10) || 2
+        item.fee_rate = item.fee_rate || 0
+        // item.value_scale = parseInt(item.value_scale, 10) || 4
+        if (item.currency === 'BTCUSD') {
+          item.value_scale = 8
+          item.accuracy = item.accuracy || 5
+        } else {
+          item.value_scale = 8
+          item.accuracy = item.accuracy || 5
+        }
 
-          if (item.name.indexOf('MIX_') < 0) {
-            item.name = `MIX_${item.name.replace('_', '')}`
-          }
+        if (item.name.indexOf('MIX_') < 0) {
+          item.name = `MIX_${item.name.replace('_', '')}`
+        }
 
-          // USD
-          item.currency_name = item.name.substr(-3)
-          // BTCUSD
-          item.symbol = item.name.split('_')[1]
-          // BTC
-          item.product_name = item.symbol.substr(0, 3)
-          return item
-        })
-        res.data = { items: res.data }
-        return res
-      }
-    }))
+        // USD
+        item.currency_name = item.name.substr(-3)
+        // BTCUSD
+        item.symbol = item.name.split('_')[1]
+        // BTC
+        item.product_name = item.symbol.substr(0, 3)
+        return item
+      })
+      res.data = { items: res.data }
+    } 
+    return res 
+    // return getCache('mixPairList', () => request('mix/symbol/list').then(res => {
+    //   if (res && res.data) {
+    //     res.data = res.data.map(item => {
+    //       item.amount_scale = parseInt(item.amount_scale, 10)
+    //       item.currency_scale = parseInt(item.price_scale, 10) || 0
+    //       item.price_scale = parseInt(item.price_scale, 10) || 2
+    //       item.fee_rate = item.fee_rate || 0
+    //       // item.value_scale = parseInt(item.value_scale, 10) || 4
+    //       if (item.currency === 'BTCUSD') {
+    //         item.value_scale = 8
+    //         item.accuracy = item.accuracy || 5
+    //       } else {
+    //         item.value_scale = 8
+    //         item.accuracy = item.accuracy || 5
+    //       }
+
+    //       if (item.name.indexOf('MIX_') < 0) {
+    //         item.name = `MIX_${item.name.replace('_', '')}`
+    //       }
+
+    //       // USD
+    //       item.currency_name = item.name.substr(-3)
+    //       // BTCUSD
+    //       item.symbol = item.name.split('_')[1]
+    //       // BTC
+    //       item.product_name = item.symbol.substr(0, 3)
+    //       return item
+    //     })
+    //     res.data = { items: res.data }
+    //   }
+    //   return res
+    // }), 5000)
   },
-  async getMixContractPairInfo ({symbol}) { 
+  async getMixContractPairInfo ({symbol}) {  
     const res = await this.getMixContractSymList()
     if (!res.code) {
       const find = _.find(res.data.items, item => `${item.product}_${item.currency}` === symbol) 

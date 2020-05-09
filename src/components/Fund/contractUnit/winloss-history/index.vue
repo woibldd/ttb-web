@@ -249,7 +249,7 @@ export default {
 
   },
   async created () {
-    service.getUnitSymList({}).then((res) => {
+    service.getUnitContractSymList({}).then((res) => {
       console.log(res)
       if (res.code === 0) {
         this.pairList = res.data.items

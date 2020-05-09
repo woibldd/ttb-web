@@ -105,7 +105,7 @@
             width="90">
             <template slot-scope="scope">
               <a  v-if="scope.row.currency!=='METH'" href="javascript:;" @click="linkHandle(scope.row, 0)" class="link-btn">资金划转</a>
-              <a :href="`/unit.html#/?product=${scope.row.currency}USD`" class="link-btn">交易</a>
+              <a :href="`/future.html#/unit?product=${scope.row.currency}USD`" class="link-btn">交易</a>
             </template>
           </el-table-column>
         </el-table>

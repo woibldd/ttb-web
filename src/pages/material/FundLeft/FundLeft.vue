@@ -147,7 +147,7 @@ export default{
         })
       }
     }
-    res = await service.getUnitSymList()
+    res = await service.getUnitContractSymList()
     if (!res.code) {
       let list = res.data.items
       if (list.length) {

@@ -243,7 +243,7 @@ export default {
 
   },
   async created () {
-    service.getMixSymList({}).then((res) => {
+    service.getMixContractSymList({}).then((res) => {
       console.log(res)
       if (res.code === 0) {
         this.pairList = res.data.items

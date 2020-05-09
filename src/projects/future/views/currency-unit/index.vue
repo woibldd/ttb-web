@@ -879,22 +879,8 @@ export default {
   },
   async created () {
     actions.updateSession() 
-    this.products = (await getSymbolList()).data
-    // await this.openWebSocket(this.handleSoketData, websocket => {
-    //   this.websocket.heartCheck.start() // 发送一次心跳
-    //   this.websocket.send('{"op":"subscribepub","args":["market@ticker"]}')
-    //   if (this.userData) {
-    //     this.websocket.send(`{"op":"loginWeb","args":["${this.userData.session_id}"]}`)
-    //     this.websocket.send('{"op":"subscribe","args":["orderfills"]}')
-    //     this.websocket.send('{"op":"subscribe","args":["position"]}')
-    //     this.websocket.send('{"op":"subscribe","args":["trigger"]}')
-    //   }
-    //   if (this.activeProduct) {
-    //     this.websocket.send(`{"op":"subscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@${this.dataDeep}@1@20"]}`)
-    //     this.websocket.send(`{"op":"subscribepub","args":["deal@${this.activeProduct.product}_${this.activeProduct.currency}"]}`)
-    //   }
-    // }) 
-    await this.subMarket() 
+    this.products = (await getSymbolList()).data  
+    await this.subMarket()  
     const queryStr = localStorage.getItem('unit-product') || this.products[0].name
     const product = this.products.find(item => item.name === queryStr) || this.products[0]
 
@@ -941,8 +927,7 @@ export default {
         that.socket.$destroy()
         that.subMarket()
       })
-    },
-
+    },  
     login (arg) {
       if (arg === 'login') {
         location.href = '/user/login'

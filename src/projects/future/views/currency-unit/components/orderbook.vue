@@ -429,9 +429,9 @@ export default {
     },
     async sub () {
       this.loading = true
-      if (this.socket) {
-        this.socket.$destroy()
-      }
+      // if (this.socket) {
+      //   this.socket.$destroy()
+      // }
       const fetchId = this.pair + this.offset + this.accuracy
       const res = await service.getQuoteOrderbook({
         pair: this.pair,
@@ -458,20 +458,7 @@ export default {
     assignData (data) {
       if (!data) { return }
       // data = require('./book-depth/test-data.js').default
-      const toBig = item => [this.$big(item.values[0]), this.$big(item.values[1])]
-      // data = {
-      //   asks: data.asks.map(item => {
-      //     return {
-      //       values: item
-      //     }
-      //   }),
-      //   bids: data.bids.map(item => {
-      //     return {
-      //       values: item
-      //     }
-      //   })
-      // }
-
+      const toBig = item => [this.$big(item.values[0]), this.$big(item.values[1])] 
       this.buy = _.map(data.bids, toBig)
       this.sell = _.map(data.asks, toBig)
       let bid = _.get(this.buy, '0.0', 0)
