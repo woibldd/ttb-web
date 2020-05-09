@@ -4,7 +4,7 @@ import {getCache, request} from './api-base'
 export default {
   // unit contract 接口
   async getUnitContractSymList () {
-    const res = await getCache('unitPairList', () => request('unit/symbol/list'), 2e3)
+    const res = await getCache('unitPairList', () => request('unit/symbol/list'), 5e3)
     if (res && res.data && !res.data.items) {
       res.data = res.data.map(item => {
         item.amount_scale = parseInt(item.amount_scale, 10)
@@ -66,8 +66,7 @@ export default {
     //   }
     // }))
   },
-  async getUnitContractPairInfo ({symbol}) {
-    console.log({symbol})
+  async getUnitContractPairInfo ({symbol}) { 
     const res = await this.getUnitContractSymList()
     if (!res.code) {
       const find = _.find(res.data.items, item => `${item.product}_${item.currency}` === symbol) 

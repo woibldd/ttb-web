@@ -30,7 +30,7 @@ export default {
     return getCache('contractMixBalance', () => request('mix/account/balance/list'), 1e3)
   }, 
   async getMixContractSymList () { 
-    const res = await getCache('mixPairList', () => request('mix/symbol/list'), 2e6)
+    const res = await getCache('mixPairList', () => request('mix/symbol/list'), 5e3)
     if (res && res.data && !res.data.items) {
       res.data = res.data.map(item => {
         item.amount_scale = parseInt(item.amount_scale, 10)
