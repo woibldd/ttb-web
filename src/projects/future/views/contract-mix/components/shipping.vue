@@ -21,7 +21,7 @@
       </div>
       <div
         flex
-        style="flex:1;">
+        style="flex:1;"> 
         <div flex> 
           <div
             v-for="(value,key,i) in tableColumns"
@@ -34,7 +34,7 @@
               </span>
               <el-popover
                 :ref="'popover-margin' + item.currency"
-                v-if="key === 'margin_position'"
+                v-if="key === 'margin_position' && +item.leverage !==0"
                 placement="top"
                 width="400">
                 <div>
@@ -92,7 +92,7 @@
                   {{ (item.product.MARKET || {}).current | bigRound(2) }}
                 </span>
               </span>
-              <span v-else>
+              <span v-else> 
                 {{ key === 'markPrice'? (item.product.MARKET || {}).current :key === 'liq_price'?bigRound(item[key],2):item[key] }}
               </span>
             </p>

@@ -34,7 +34,7 @@
     </div>
     <div class="clearfix">
       <div class="gz-wrapper clearfix">
-        <span>{{ $t('币本位合约资产估值') }}</span>
+        <span>{{ $t('otc_otutcol_15') }}</span>
         <h1>
           <icon :name="unit.name+'-unit'" /> {{ total | fixed(unit.scale) }}</h1>
       </div> 
@@ -47,12 +47,12 @@
           style="width: 100%">
           <el-table-column
             prop="currency"
-            label="币种"
+            :label="$t('currency')"
             width="60">
           </el-table-column>
           <el-table-column
             prop="available"
-            label="资产净值"
+            :label="$t('available_balance')">
           >
             <template slot-scope="scope">
               <div class="balance">{{ parsetNumber(scope.row.available) + ' ' + scope.row.currency }}</div>
@@ -61,7 +61,7 @@
           </el-table-column>
           <el-table-column
             prop="available_balance"
-            label="余额">
+            :label="$t('available_balance')">
             <template slot-scope="scope">
               <div class="balance">{{ parsetNumber(scope.row.available_balance) + ' ' + scope.row.currency }}</div>
               <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.available_balance) + ' USD' }}</div>
@@ -69,7 +69,7 @@
           </el-table-column>
           <el-table-column
             prop="unrealized"
-            label="未结盈亏">
+            :label="$t('fund_contract_result_unrealized')">
             <template slot-scope="scope">
               <div class="balance">{{ parsetNumber(scope.row.unrealized) + ' ' + scope.row.currency }}</div>
               <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.unrealized) + ' USD' }}</div>
@@ -77,7 +77,7 @@
           </el-table-column>
           <el-table-column
             prop="margin_user"
-            label="可用保证金">
+            :label="$t('contract_margin_balance')">
             <template slot-scope="scope">
               <div class="balance">{{ parsetNumber(scope.row.margin_user) + ' ' + scope.row.currency }}</div>
               <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.margin_user) + ' USD' }}</div>
@@ -85,7 +85,7 @@
           </el-table-column>
           <el-table-column
             prop="margin_position"
-            label="仓位保证金">
+            :label="$t('warehouse_margin')">
             <template slot-scope="scope">
               <div class="balance">{{ parsetNumber(scope.row.margin_position) + ' ' + scope.row.currency }}</div>
               <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.margin_position) + ' USD' }}</div>
@@ -93,7 +93,7 @@
           </el-table-column>
           <el-table-column
             prop="margin_delegation"
-            label="委托保证金">
+            :label="$t('entrust_margin')">
             <template slot-scope="scope">
               <div class="balance">{{ parsetNumber(scope.row.margin_delegation) + ' ' + scope.row.currency }}</div>
               <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.margin_delegation) + ' USD' }}</div>
@@ -101,11 +101,11 @@
           </el-table-column>
           <el-table-column
             prop="currency"
-            label="操作"
+            :label="$t('operation')"
             width="90">
             <template slot-scope="scope">
-              <a  v-if="scope.row.currency!=='METH'" href="javascript:;" @click="linkHandle(scope.row, 0)" class="link-btn">资金划转</a>
-              <a :href="`/future.html#/unit?product=${scope.row.currency}USD`" class="link-btn">交易</a>
+              <a  v-if="scope.row.currency!=='METH'" href="javascript:;" @click="linkHandle(scope.row, 0)" class="link-btn">{{$t('account_exchange')}}</a>
+              <a :href="`/future.html#/unit?product=${scope.row.currency}USD`" class="link-btn">{{$t('asset_trading')}}</a>
             </template>
           </el-table-column>
         </el-table>

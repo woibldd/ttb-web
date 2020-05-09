@@ -35,7 +35,7 @@
             <el-option
               v-for="(item, idx) in pairList"
               :key="idx"
-              :label="item.name"
+              :label="item.currency"
               :value="item"/>
           </el-select>
         </div>

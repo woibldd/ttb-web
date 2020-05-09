@@ -1,4 +1,8 @@
 export default {
+  trading_lever: "合约交易",
+  gift:{
+    bonus:"交易赠金", 
+  },
   contract_index_resource_tips: '<a>價格來源</a><br/>價格資料來源。',
   contract_24_hour_trade_tips: '<a>24小時營業額</a><br/>前24小時總合約交易價值。',
   contract_total_werehouse_value_tips: '<a>合約價值</a><br/>當前一份合約的價值。',

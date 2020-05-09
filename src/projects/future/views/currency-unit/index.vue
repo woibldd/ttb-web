@@ -292,10 +292,10 @@
                     {{ $tR(`mapFormContent.passive`) }}
                   </el-checkbox>
                 </div> -->
-                <div>
+                <!-- <div>
                   <el-checkbox v-if="+activeBtnsKey > 2"
                                v-model="trigger_close ">{{ $tR(`mapFormContent.trigger_close`) }}</el-checkbox>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>

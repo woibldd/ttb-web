@@ -2823,26 +2823,26 @@ export default {
     mapTableColumns: {
       //1开仓， 2平仓
       1: { 
-        1: '委托价值',
-        2: '成本@{active}',
-        3: '可用余额',
-        4: '成交后的仓位大小',
-        5: '标记价格',
-        6: '预期强平价格',
-        7: '标记价格/预期强平价格 差异'
+        1: '위탁가치',
+        2: '성본@{active}',
+        3: '사용가능금액',
+        4: '거래 가 성사 된 후 창고 포지션의 크기',
+        5: '합리가격',
+        6: '예상물가',
+        7: '예상가격차이'
       },
       2: {
-        1: '委托价值',
-        2: '成本@{active}',
-        3: '可用余额',
-        4: '成交后的仓位大小',
-        5: '标记价格'
+        1: '위탁가치',
+        2: '성본@{active}',
+        3: '사용가능금액',
+        4: '거래 가 성사 된 후 창고 포지션의 크기',
+        5: '합리가격',
       }
     },
-    setLever: '设置杠杆倍数',
-    tip: '您的操作将会把已持仓杠杆倍数和委托订单杠杆倍数修改为<i class="text-danger">{leverage}</i>，仓位保证金调节为<i class="text-danger">{margin_position}</i>，委托保证金为<i class="text-danger">{margin_delegation}</i>',
+    setLever: '레버리지 개수', 
+    tip: '당신의 작업은 이미 보유하고 있는 지렛대 배수와 위탁 주문의 지레 배수를 수정하여 <i class="text-danger">{leverage}</i>배, 위탁 보증금은<i class="text-danger">{margin_position}</i>로 조절하고, 위탁 보증금은 <i class="text-danger">{margin_delegation}</i>으로 조정합니다',
     leverageTip: '确定将杠杆倍数调节至{leverage}吗',
-    allstorehouse: '全仓'
+    allstorehouse: '포지션'
   },
   userCenter: {
     mapMenuList: {

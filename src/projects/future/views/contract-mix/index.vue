@@ -383,7 +383,7 @@
                   </span>
                   <span
                     v-if="key === 'entrustValue'"
-                    class="text-warning">{{ formValueObj[1] | bigRound(8) }}  {{ (activeBalance||{}).currency }}</span>
+                    class="text-primary">{{ formValueObj[1] | bigRound(8) }}  {{ (activeBalance||{}).currency }}</span>
                   <el-link
                     v-else
                     style="font-size:12px"
@@ -417,9 +417,9 @@
                         :value="+subKey" />
                     </el-select>
                   </div>
-                  <el-checkbox
+                  <!-- <el-checkbox
                     flex-box="1"
-                    v-model="trigger_close ">{{ $tR(`mapFormContent.trigger_close`) }}</el-checkbox>
+                    v-model="trigger_close ">{{ $tR(`mapFormContent.trigger_close`) }}</el-checkbox> -->
                 </div>
               </div>
             </div>
@@ -796,11 +796,12 @@ export default {
       if (!this.activeProduct.MIX || !this.costObj || !this.activeBalance || !this.activeProduct.MARKET) return {}
       const price = this.activeAcountAndPriceArr[1] || this.activeProduct.MIX.current
       const getLiqPrice = this.getLiqPrice()
+      const balance = this.balanceList.find(item => item.name === this.activeProduct.name && item[this.side === 1 ? 'buy' : 'sell']) 
       return {
         1: calcMixValueByAmountAndPrice(this.activeAcountAndPriceArr[0], price, this.activeProduct.multiplier, this.activeBalance.rate),
         2: this.costObj[this.side === 1 ? 'buy' : 'sell'],
         3: this.activeBalance.available_balance,
-        4: +this.activeBalance.holding + (this.side === 2 ? -this.activeAcountAndPriceArr[0] : +this.activeAcountAndPriceArr[0]),
+        4: +balance.holding + (+this.activeTypesKey === 2 ? -this.activeAcountAndPriceArr[0] : +this.activeAcountAndPriceArr[0]),
         5: this.activeProduct.MARKET.current,
         6: getLiqPrice,
         7: 1 - (this.activeProduct.MIX.current - getLiqPrice) / this.activeProduct.MIX.current
@@ -1036,7 +1037,7 @@ export default {
     },
     information () {
       return {
-        priceBy: 'ix' + this.$tR('index'),
+        priceBy: 'IXX' + this.$tR('index'),
         priceIndex: this.activeProduct.INDEX.current,
         volume_24h: this.handleDishInfoItem('volume_24h'),
         value:`${this.activeProduct.multiplier} ${this.activeProduct.currency}`,
@@ -1207,11 +1208,11 @@ export default {
     handlePopoverTitle (key) {
       const type = this.activeBtnsKey === '3' && this.activePriceType.key || this.activeBtnsKey
       const price = this.activeAcountAndPriceArr[1] || (this.activeProduct.MIX || {}).current
-      const calcPrice = ['2', '4', '6'].includes(type) ? '市场最优价格' : price
+      const calcPrice = ['2', '4', '6'].includes(type) ? this.$t('contract_order_enter_tips3') : price
       return `
         ${this.$tR(`mapFormContent.mapHandleBtn.${key}.${this.activeTypesKey}`)}--
         ${this.$tR(`mapFormContent.mapBtns.${this.activeBtnsKey}.text`)}【${calcPrice}】--
-        数量【${this.activeAcountAndPriceArr[0]}】
+        ${this.$t('amount')}【${this.activeAcountAndPriceArr[0]}】
       `
     },
     handleDisabledBtn (side) {

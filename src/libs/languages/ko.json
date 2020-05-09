@@ -2816,7 +2816,7 @@
     "describe6":"고성능 클릭 엔진으로 200만 +/초/거래상대 최대 속도를 충분히 지원해 서비스 중단 없는 무결점 실행"
   },
   "pre_reviewed": "Order is being pre-reviewed",
-  "gold_account": "金本文合约账户",
+  "gold_account": "금본위 계약 계좌",
   "gold_contract": "금본위 계약",
   "mix_side": {
     "1": "매입 (하다)",
