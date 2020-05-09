@@ -69,8 +69,8 @@ export default {
     // if (res.code) {
     //   return reject()
     // }
-    const res = state.unit.pairList.find(item => item.symbol === ticker)
-    const scale = res.price_scale
+    const res = state.unit.pairList.find(item => item.symbol === ticker) 
+    const scale = Math.pow(10, res.price_scale) 
     if (!res) {
       return reject()
     }

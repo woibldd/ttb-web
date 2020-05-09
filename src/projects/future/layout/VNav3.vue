@@ -15,10 +15,10 @@
             :to="{name: 'trading'}"
             class="nav_link arrow-down">{{ $t('appNav.mapNavList.trading') }}</router-link>
            <div class="nav_link arrow-down">
-            <router-link to="/affiliate" class="nav_link ml-30" v-popover:popoverContract>
+            <span class="nav_link ml-30" v-popover:popoverContract>
               {{$t('trading_lever')}}
               <svg-icon icon-class="header-down" class="mini arrow" />
-            </router-link> 
+            </span> 
             <el-popover
               ref="popoverContract"
               popper-class="nav-list"

@@ -797,12 +797,12 @@ export default {
       if (!this.state.userInfo || !this.activeProduct.MIX || !this.costObj || !this.activeBalance || !this.activeProduct.MARKET) return {}
       const price = this.activeAcountAndPriceArr[1] || this.activeProduct.MIX.current
       const getLiqPrice = this.getLiqPrice()
-      const balance = this.balanceList.find(item => item.name === this.activeProduct.name && item[this.side === 1 ? 'buy' : 'sell']) 
+      const balance = this.balanceList.find(item => item.name === this.activeProduct.name && item[this.side === 1 ? 'buy' : 'sell']) || {}
       return {
         1: calcMixValueByAmountAndPrice(this.activeAcountAndPriceArr[0], price, this.activeProduct.multiplier, this.activeBalance.rate),
         2: this.costObj[this.side === 1 ? 'buy' : 'sell'],
         3: this.activeBalance.available_balance,
-        4: +balance.holding + (+this.activeTypesKey === 2 ? -this.activeAcountAndPriceArr[0] : +this.activeAcountAndPriceArr[0]),
+        4: +(balance.holding || 0 ) + (+this.activeTypesKey === 2 ? -this.activeAcountAndPriceArr[0] : +this.activeAcountAndPriceArr[0]),
         5: this.activeProduct.MARKET.current,
         6: getLiqPrice,
         7: 1 - (this.activeProduct.MIX.current - getLiqPrice) / this.activeProduct.MIX.current

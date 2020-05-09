@@ -65,7 +65,8 @@ export default {
     const ticker = product + '_' + currency
     // @check end   
     const res = state.mix.pairList.find(item => item.symbol === ticker)
-    const scale = res.price_scale
+    console.log(res)
+    const scale = Math.pow(10, res.price_scale) 
     if (!res) {
       return reject()
     }
