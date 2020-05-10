@@ -67,7 +67,7 @@ export default {
     } else {
       symbol.symbol = symbol.symbol + 'USD'
     }
-    let result = await service.getContractUnitBalanceList() 
+    let result = await this.getContractUnitBalanceList() 
     if (!result.code) {
       console.log({data: result.data})
       let list = result.data
