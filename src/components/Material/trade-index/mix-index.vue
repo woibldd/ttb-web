@@ -142,8 +142,8 @@ export default {
         const match = pair.match(/^([A-Za-z]*)_([A-Za-z]*)$/)
         if (match) {
           this.pair = pair
-          // this.tempPair = this._formatPair('index')
-          this.tempPair = `INDEX_${this.symbolName}`
+          this.tempPair = this._formatPair('index')
+          // this.tempPair = `INDEX_${this.symbolName}`
           let fun = service.getMixContractSymInfo
           let res = await fun({
             symbol: this.pair
@@ -192,12 +192,13 @@ export default {
   },
   methods: {
     _formatPair (type = 'index') {
-      return this.pair.replace('MIX', type.toUpperCase())
+      // return this.pair.replace('MIX', type.toUpperCase())
+      return `${type.toUpperCase()}_${this.symbolName}`
     },
     switchChart (type) {
       this.chartType = type
-      // this.tempPair = this._formatPair(type)
-      this.tempPair = `INDEX_${this.symbolName}`
+      this.tempPair = this._formatPair(type)
+      // this.tempPair = `INDEX_${this.symbolName}`
     },
     getPage () {
       console.log('next page')
