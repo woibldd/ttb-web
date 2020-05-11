@@ -91,12 +91,12 @@
               <router-link
                 class="pointer text-light"
                 v-tooltip.top-center="{html: true, content: $t('contract.mapDelegateList.contract_index_price_tips', {product_name: (activeProduct || {}).currency}), classes: 'contract'}"
-                :to="{name: 'UnitIndex', params: {pair: `${(activeProduct || {}).product}_${(activeProduct || {}).name}` }}">{{ indexPrice }}</router-link>
+                :to="{name: 'MixIndex', params: {pair: `${(activeProduct || {}).symbol}` }}">{{ indexPrice }}</router-link>
               /
               <router-link
                 class="pointer text-light"
                 v-tooltip.top-center="{html: true, content: $t('contract.mapDelegateList.contract_mark_price_tips'), classes: 'contract'}"
-                :to="{name: 'UnitIndex', params: {pair: `${(activeProduct || {}).product}_${(activeProduct || {}).name}` }}">{{ markPrice }}</router-link>
+                :to="{name: 'MixIndex', params: {pair: `${(activeProduct || {}).symbol}` }}">{{ markPrice }}</router-link>
             </span>
           </div>
           <a

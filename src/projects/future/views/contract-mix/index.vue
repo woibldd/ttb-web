@@ -1077,8 +1077,8 @@ export default {
     this.state.mix.pairList = this.products
     await this.subMarket() 
     
-    const queryStr = localStorage.getItem('mix-product') || this.products[0].name
-    const product = this.products.find(item => item.name === queryStr) || this.products[0]
+    const queryStr = localStorage.getItem('mix-product') || this.products[0].symbol
+    const product = this.products.find(item => item.symbol === queryStr) || this.products[0]
 
     this.$nextTick(() => {
       this.$eventBus.$emit('protrade:layout:init')
@@ -1347,8 +1347,8 @@ export default {
         this.checkActive()
       }
 
-      localStorage.setItem('mix-product', product.name)
-      this.$router.replace({ query: { product: product.name } }) 
+      localStorage.setItem('mix-product', product.symbol)
+      this.$router.replace({ query: { product: product.symbol } }) 
       if (this.socket) {  
         if (this.activeProduct && this.activeProduct.currency && this.activeProduct.product) {
           this.socket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@0@1@20"]}`)

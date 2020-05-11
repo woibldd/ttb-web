@@ -2944,6 +2944,7 @@
   "kyc_failure_tip" : "Your KYC verification failed, please reverify",
   "kyc_retry": "Re-verification",
   "UNIT_&":"%{currency} Currency Standard Contract",
+  "MIX_&":"%{currency} Gold Standard Contract", 
   "unit_account": "Currency Standard Contract Account",
   "footer_link": "Link",
   "unit_contract": "Currency Standard Contract",

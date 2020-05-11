@@ -81,10 +81,12 @@ export const state = {
   },
   unit: {
     pair: '',
+    symbol: '',
     pairList: []
   },
   mix: {
     pair: '',
+    symbol: 'MIX_METH',
     pairList: []
   },
   rate: {

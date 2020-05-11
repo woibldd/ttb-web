@@ -113,8 +113,7 @@ export default {
       if (!this.pair || this._isDestroyed) {
         return false
       }
-      const vm = this
-
+      const vm = this 
       const config = this.configure()
 
       const TradingView = await tvlib

@@ -30,38 +30,38 @@
           v-for="(pair, index) in coinIndexArray"
           :key="index">
             <div
-            v-if="pair.product==='FUTURE'"
-            class="nav_link arrow-down" >
-            <router-link
-              class="menu-name menu-contract-index"
-              active-class="active"
-              :to="{ name: 'TradeIndex', params: { pair: pair.fullname }}">
-              <span v-if="pair.product==='FUTURE'">{{ pair.pair }}</span> 
-              <icon
-                class="arrow ml-5 arrow-right"
-                name="arrow-contract-down-black"/>
-              <icon
-                class="arrow ml-5 arrow-black"
-                name="arrow-contract-down"/>
-            </router-link>
-            <div class="dropdown-sub-menu">
-              <ul class="dropdown-list pt-10 pb-10">
-                <li class="dropdown-item pl-34 pr-24">
-                  <a
-                    target="_blank"
-                    :href="tutorialUrl(pair.fullname)"
-                    class="index__sub__link">{{ $t("ensurance_btc_future_tutorial", {coin: pair.coin}) }}
-                  </a>
-                </li>
-                <!-- <li class="dropdown-item pl-34 pr-24">
-                  <a
-                    target="_blank"
-                    href="https://ixcustomer.zendesk.com/hc/zh-cn/sections/360003415251-合约公告"
-                    class="index__sub__link">{{ $t("ensurance_btc_future_rule", {coin: pair.coin}) }}
-                  </a>
-                </li> -->
-              </ul>
-            </div>
+              v-if="pair.product==='FUTURE'"
+              class="nav_link arrow-down" >
+              <router-link
+                class="menu-name menu-contract-index"
+                active-class="active"
+                :to="{ name: 'TradeIndex', params: { pair: pair.fullname }}">
+                <span v-if="pair.product==='FUTURE'">{{ pair.pair }}</span> 
+                <icon
+                  class="arrow ml-5 arrow-right"
+                  name="arrow-contract-down-black"/>
+                <icon
+                  class="arrow ml-5 arrow-black"
+                  name="arrow-contract-down"/>
+              </router-link>
+              <div class="dropdown-sub-menu">
+                <ul class="dropdown-list pt-10 pb-10">
+                  <li class="dropdown-item pl-34 pr-24">
+                    <a
+                      target="_blank"
+                      :href="tutorialUrl(pair.fullname)"
+                      class="index__sub__link">{{ $t("ensurance_btc_future_tutorial", {coin: pair.coin}) }}
+                    </a>
+                  </li>
+                  <!-- <li class="dropdown-item pl-34 pr-24">
+                    <a
+                      target="_blank"
+                      href="https://ixcustomer.zendesk.com/hc/zh-cn/sections/360003415251-合约公告"
+                      class="index__sub__link">{{ $t("ensurance_btc_future_rule", {coin: pair.coin}) }}
+                    </a>
+                  </li> -->
+                </ul>
+              </div>
           </div>
           <div
             v-if="pair.product==='UNIT'"
@@ -96,8 +96,34 @@
                 </li> -->
               </ul>
             </div>
-          </div>
-
+          </div> 
+          <div
+            v-if="pair.product==='MIX'"
+            class="nav_link arrow-down" >
+            <router-link
+              class="menu-name menu-contract-index"
+              active-class="active"
+              :to="{ name: 'MixIndex', params: { pair: pair.fullname }}">
+              <span v-if="pair.product==='MIX'">{{ pair.coin }}金本位</span>
+              <icon
+                class="arrow ml-5 arrow-right"
+                name="arrow-contract-down-black"/>
+              <icon
+                class="arrow ml-5 arrow-black"
+                name="arrow-contract-down"/>
+            </router-link>
+            <div class="dropdown-sub-menu">
+              <ul class="dropdown-list pt-10 pb-10">
+                <li class="dropdown-item pl-34 pr-24">
+                  <a
+                    target="_blank"
+                    :href="tutorialUrl(pair.fullname)"
+                    class="index__sub__link">{{ $t("ensurance_btc_future_tutorial", {coin: pair.coin}) }}
+                  </a>
+                </li> 
+              </ul>
+            </div>
+          </div> 
         </li>
       </ul>
     </div>
@@ -126,6 +152,12 @@ export default{
         return 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360037905372-METHUSD-合约指南'
       } else if (pair === 'UNIT_METHUSD') {
         return 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360037905372-METHUSD-合约指南'
+      }  else if (pair === 'MIX_BTC') {
+        return 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/900000737683'
+      }  else if (pair === 'MIX_MBTC') {
+        return 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/900000737683'
+      }  else if (pair === 'MIX_METH') {
+        return 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360039419932'
       } else {
         return ''
       }
@@ -162,6 +194,20 @@ export default{
         }))
       }
     }
+    res = await service.getMixContractSymList()
+    if (!res.code) {
+      let mixList = res.data.items
+      this.coinIndexArray = this.coinIndexArray.concat(mixList.map(item => {
+        return {
+          fullname: item.symbol,
+          pair: item.symbol,
+          coin: item.currency,
+          product: item.product
+        }
+      }))
+    }
+
+    console.log(this.coinIndexArray)
   }
 }
 </script>

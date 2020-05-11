@@ -52,6 +52,8 @@ export default {
     let product
     let currency
     // @check
+
+    console.log('resolveSymbol',name)
     const match = name.match(/([A-Z]*)[/_]([A-Z]*)$/)
     if (match) {
       // product = match[1]
@@ -60,16 +62,17 @@ export default {
       currency = match[2].substr(-3)
     } else {
       reject(new Error('Invalid Symbol'))
-    }
+    } 
     const ticker = name
-    const symbol = 'FUTURE_' + match[2]
+    // const symbol = 'FUTURE_' + match[2]
+    let scale = Math.pow(10, 2)
     // @check end
-    const res = await service.getContractPairInfo({symbol})
-    let scale = res.code ? 1e8 : Math.pow(10, res.data.price_scale)
-    if (res.code) {
-      // return reject()
-      scale = 2
-    }
+    // const res = await service.getContractPairInfo({symbol})
+    // let scale = res.code ? 1e8 : Math.pow(10, res.data.price_scale)
+    // if (res.code) {
+    //   // return reject()
+    //   scale = 2
+    // }
     resolve({
       timezone: utils.getDefaultTimezone(),
       name: product + '/' + currency,

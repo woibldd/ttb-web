@@ -1,5 +1,5 @@
 {
-  "currency-mix": "金本位合约",
+  "currency-mix": "금본위 계약",
   "currency-unit": "코인 베이스 계약",
   "google_login": "로그인할 때 구글 인증",
   "google_turn_off": "Goole 인증 끄기",
@@ -2802,8 +2802,9 @@
       "confirm": "나는 이미 알고있다"
     }
   },
-  "no_account": "아직 계정이 없어요?",
-  "UNIT_&":"%{currency}币本位",
+  "no_account": "아직 계정이 없어요?", 
+  "UNIT_&":"%{currency}코인 베이스 계약",
+  "MIX_&":"%{currency}금본위 계약", 
   "kyc_failure": "인증에 실패했습니다",
   "kyc_failure_tip" : "당신의KYC인증실패,인증을 다시 해주세요",
   "kyc_retry": "다시 인증",
