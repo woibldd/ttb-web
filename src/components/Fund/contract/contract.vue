@@ -321,10 +321,11 @@ export default {
       return this.$route.name === 'history'
     },
     total () {
-      let sum = this.$big(0)
-      this.tableData.forEach(item => {
-        sum = sum.plus(this.getEstValue(item))
-      })
+      let sum = this.$big(0) 
+      if (this.tableData.length > 0) {
+        //btc合约用的是同一个公用账户，估值直接取available就行了
+        sum = this.getEstValue(this.tableData[0])
+      } 
       return sum.toString()
     },
     operate () {
