@@ -1,5 +1,6 @@
 import ReconnectingWebSocket from '@/libs/reconnecting-websocket'
 import config from '@/libs/config' 
+import utils from '@/modules/utils'
 export default {
   data () {
     return {
@@ -25,7 +26,10 @@ export default {
         } 
         this.websocket = websocket
         websocket.onmessage = e => {
-          const res = JSON.parse(e.data)
+          
+          const data = utils.pako_ungzip(e.data)
+          const res = JSON.parse(data)
+          // const res = JSON.parse(e.data)
           if (!res.code || res.code === 200) {
             typeof callBack === 'function' && callBack(res)
             resolve(this.websocket)
