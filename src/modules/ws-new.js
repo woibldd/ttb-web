@@ -43,8 +43,9 @@ export default {
         return socket.close()
       }
       let data
-      try {
-        data = JSON.parse(evt.data)
+      try { 
+        data = utils.pako_ungzip(evt.data)
+        data = JSON.parse(data)
       } catch (e) {
         utils.logE(e)
       }

@@ -2,7 +2,9 @@ import _ from 'lodash'
 import Big from 'big.js'
 import eventHub from './eventHub'
 import consts from '@/libs/consts'
+// import pako from 'pako'
 
+const pako = require('pako');
 const preloadEl = document.querySelector('.page-loading')
 const externalModule = {}
 const localeName = {
@@ -25,6 +27,21 @@ const utils = {
   isBeta: process.env.MODE === 'beta',
   isProd: process.env.NODE_ENV === 'production',
   locales: localeName,
+  pako_ungzip(b64Data) {
+    let strData   = atob(b64Data);
+    // Convert binary string to character-number array
+    let charData  = strData.split('').map(function(x){return x.charCodeAt(0);});
+    // Turn number array into byte-array
+    let binData   = new Uint8Array(charData);
+    
+    let restored = ''
+    try{
+      restored = pako.ungzip( binData, { to: 'string' } ); 
+    } catch(err){
+        console.log("Error:"+err);
+    }
+    return restored; 
+  },
   getLocaleName(locale) {
     return localeName[locale] || 'Unknown'
   },
