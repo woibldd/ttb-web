@@ -1115,8 +1115,7 @@ export default {
         }
       })
       this.socket.$on('message', (data) => { 
-        
-        console.log('socketsocketsocketsocketsocket')
+         
         that.handleSoketData(data) 
       })
       this.socket.$on('reopen', () => {
