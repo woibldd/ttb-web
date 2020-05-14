@@ -22,7 +22,7 @@
       <div class="transfer-btn">
         <router-link
           class="menu-name"
-          to="/OTC/Transfer"
+          to="/fund/Transfer"
           active-class="active"
         >{{ $t('account_exchange') }}</router-link>
       </div>
