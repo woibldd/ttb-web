@@ -78,11 +78,7 @@
           <span
             class="delta"
             :class="isBuy ? 'color-up' : 'color-down'">{{ lastPrice }}
-            <svg-icon :icon-class="isBuy?'lv':'hong'" />
-            <!-- <i
-              class="iconfont arrow"
-              :class="{'arrow-up': state.ct.lastSide === 1, 'arrow-down': state.ct.lastSide === 2}"
-            /> -->
+            <svg-icon :icon-class="isBuy?'lv':'hong'" /> 
           </span>
           <div
             class="left-part"
@@ -91,12 +87,12 @@
               <router-link
                 class="pointer text-light"
                 v-tooltip.top-center="{html: true, content: $t('contract.mapDelegateList.contract_index_price_tips', {product_name: (activeProduct || {}).currency}), classes: 'contract'}"
-                :to="{name: 'UnitIndex', params: {pair: `${(activeProduct || {}).product}_${(activeProduct || {}).name}` }}">{{ indexPrice }}</router-link>
+                :to="{name: 'UnitIndex', params: {pair: (activeProduct || {}).symbol }}">{{ indexPrice }}</router-link>
               /
               <router-link
                 class="pointer text-light"
                 v-tooltip.top-center="{html: true, content: $t('contract.mapDelegateList.contract_mark_price_tips'), classes: 'contract'}"
-                :to="{name: 'UnitIndex', params: {pair: `${(activeProduct || {}).product}_${(activeProduct || {}).name}` }}">{{ markPrice }}</router-link>
+                :to="{name: 'UnitIndex', params: {pair: (activeProduct || {}).symbol }}">{{ markPrice }}</router-link>
             </span>
           </div>
           <a

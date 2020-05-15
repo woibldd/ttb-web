@@ -456,8 +456,7 @@ export default {
   },
   methods: {
     handleHeart(e) { 
-      if (this.socket) {  
-        console.log('handleHeart')
+      if (this.socket) {   
         this.socket.heartCheck.start()  
       }
     },

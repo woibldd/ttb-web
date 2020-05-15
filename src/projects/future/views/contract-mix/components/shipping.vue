@@ -348,6 +348,7 @@ export default {
         this.formArrData[0].type = true
         this.formArrData[0].trigger_price = holdingObj.tp_price
         this.formArrData[0].isEdit = true
+        this.formArrData[0].id = holdingObj.future_tp_id
       } else {
         this.formArrData[0].isEdit = false
         this.formArrData[0].type = false
@@ -357,6 +358,7 @@ export default {
         this.formArrData[1].type = true
         this.formArrData[1].trigger_price = holdingObj.sl_price
         this.formArrData[1].isEdit = true
+        this.formArrData[1].id = holdingObj.future_sl_id
       } else {
         this.formArrData[1].isEdit = false
         this.formArrData[1].type = false
@@ -494,15 +496,28 @@ export default {
             this.buyBtnLoading = false
             return
           }
-          fun({ amount: Math.abs(holding), passive, price: '0', side: buy ? 2 : 1, name, ...item, ...data }).then(res => {
-            this.buyBtnLoading = false
-            if (!res.code) {
-              this.$emit('change')
-              this.$message.success(this.$t('handleSuccess'))
-            } else {
-              this.$message.error(res.message)
-            }
-          })
+
+          if (!item.isEdit) {
+            fun({ amount: Math.abs(holding), passive, price: '0', side: buy ? 2 : 1, name, ...item, ...data }).then(res => {
+              this.buyBtnLoading = false
+              if (!res.code) {
+                this.$emit('change')
+                this.$message.success(this.$t('handleSuccess'))
+              } else {
+                this.$message.error(res.message)
+              }
+            }) 
+          } else {
+            fun({order_id : data.order_id, symbol: data.name, trigger_price: item.trigger_price}).then(res => {
+               this.buyBtnLoading = false
+              if (!res.code) {
+                this.$emit('change')
+                this.$message.success(this.$t('handleSuccess'))
+              } else {
+                this.$message.error(res.message)
+              }
+            }) 
+          }
         }
       })
       this.pClose(holdingObj.currency)
