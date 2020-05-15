@@ -343,8 +343,7 @@ export default {
         this.params.symbol = this.pairList[0].currency
       }
     },
-    getData () {
-      
+    getData (params) { 
       if (!params) {
         params = {
           currency: this.selectPair,
