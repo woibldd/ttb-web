@@ -139,7 +139,7 @@
                   slot="reference"
                   class="el-icon-edit hover-point" />
               </el-popover>
-            </p>
+            </p>  
             <p
               v-if="i<5"
               class="text-info">
@@ -148,7 +148,7 @@
                 :class="item.holding > 0 ? 'text-success' : 'text-danger'">
                 {{ item[key] }}
               </span>
-              <span v-else>{{ key === 'markPrice'?markData[item.currency]:key === 'liq_price'?bigRound(item[key],2):item[key] }}</span>
+              <span v-else>{{ key === 'markPrice'? bigRound(markData[item.currency], getProduct(item.name).price_scale || 2) :key === 'liq_price'?bigRound(item[key],getProduct(item.name).price_scale || 2):item[key] }}</span>
             </p>
             <p
               v-else
@@ -158,9 +158,9 @@
                 <span class="text-primary">
                   {{ item[key]|bigRound(8) }} {{ item.currency }}
                 </span>
-                <br>
+                <br> 
                 <span>
-                  ≈ {{ translateByRate(item[key])|bigRound(2) }} USD
+                  ≈ {{ translateByRate(item.currency, item[key])|bigRound(2) }} USD
                 </span>
               </span>
               <span
@@ -174,7 +174,7 @@
                   </span>
                   <br>
                   <span>
-                    ≈ {{ translateByRate(item['funUnrealized'](item)['unrealized'])|bigRound(2) }} USD
+                    ≈ {{ translateByRate(item.currency, item['funUnrealized'](item)['unrealized'])|bigRound(2) }} USD
                   </span>
                 </span>
                 <span
@@ -185,7 +185,7 @@
                   </span>
                   <br>
                   <span>
-                    ≈ {{ translateByRate(item['funUnrealized'](item)['unrealizedM'])|bigRound(2) }} USD
+                    ≈ {{ translateByRate(item.currency, item['funUnrealized'](item)['unrealizedM'])|bigRound(2) }} USD
                   </span>
                 </span>
 
@@ -197,16 +197,16 @@
                 </span>
                 <br>
                 <span>
-                  ≈ {{ translateByRate(item[key])|bigRound(2) }} USD
+                  ≈ {{ translateByRate(item.currency, item[key])|bigRound(2) }} USD
                 </span>
               </span>
               <span v-else-if="key==='value'">
                 <span>
-                  {{ item[key]| toBig().abs().round(8) }}
-                </span>
+                  {{ item[key]| bigRound(8) }}
+                </span> 
                 <br>
                 <span>
-                  ≈ {{ translateByRate(item[key])| toBig().abs().round(2) }} USD
+                  ≈ {{ translateByRate(item.currency, item[key])| bigRound(2) }} USD
                 </span>
               </span>
               <span v-else>
@@ -215,47 +215,24 @@
                 </span>
                 <br>
                 <span>
-                  ≈ {{ translateByRate(item[key])|bigRound(2) }} USD
+                  ≈ {{ translateByRate(item.currency, item[key])|bigRound(2) }} USD
                 </span>
               </span>
-            </p>
-            <!-- <p v-if="key==='unrealized'">
-              {{ translateByRate(item['funUnrealized'](item)['unrealized'])|bigRound(2) }} USD
-            </p>
-            <p v-else-if="i>4">≈ {{ translateByRate(item[key])|bigRound(2) }} USD </p> -->
+            </p> 
           </div>
         </div>
         <div
-          v-if="!item.future_close_id"
+          v-if="!item.future_close_id || +item.close_position_price === 0 "
           v-loading="loadingHouse"
           flex="dir:top cross:center main:justify"
           element-loading-spinner="el-icon-loading"
-          element-loading-background="rgba(0, 0, 0, 0.5)">
-          <!-- <el-popover :ref="`popover-${item.name}`" :disabled="disabled" placement="top" width="160">
-            <p>确定要以 <span class="text-primary">市价【{{ $t(`contract.mapFormContent.perfactPrice`) }}】</span>平掉所有持仓吗</p>
-            <hr>
-            <div flex="main:justify cross:center">
-              <el-checkbox v-model="visibleChecked">不在提示</el-checkbox>
-              <el-button type="primary" size="mini" @click="closeStorehouse(item,true)">确定</el-button>
-            </div>
-            <el-button slot="reference" type="primary" @click="visibleChecked && closeStorehouse(item,true)">市价平仓</el-button>
-          </el-popover>
-          <div />
-          <el-popover placement="top" width="160">
-            <el-input :value="input||markData[item.currency]" selected size="small" autofocus placeholder="请输入平仓价格" @input="value=>input=value" />
-            <p style="margin-top:5px">确定到<span class="text-primary">指定价格</span>后平掉所有持仓吗</p>
-            <hr>
-            <div flex="main:justify cross:center dir:right">
-              <el-button type="primary" size="mini" @click="closeStorehouse(item)">确定</el-button>
-            </div>
-            <el-button slot="reference" type="primary" plain>限价平仓</el-button>
-          </el-popover> -->
+          element-loading-background="rgba(0, 0, 0, 0.5)">  
           <div
             flex="dir:top"
             style="font-size:12px">
             <div>{{ $t('contract_exit_price') }}</div>
             <input
-              :value="input||markData[item.currency]"
+              :value="input|| bigRound(markData[item.currency], getProduct(item.name).price_scale || 2)"
               class="custom-input"
               style="width:80px;text-align:center"
               @focus="e=>e.currentTarget.select()"
@@ -371,7 +348,7 @@ export default {
     }
   },
   async created () {
-    this.currencyRates = (await getRates({ currency: 'ETH' })).data.ETH
+    this.currencyRates = (await getRates()).data
   },
   methods: {
     setTransferMargin (item) {
@@ -430,11 +407,11 @@ export default {
           return item[key]
       }
     },
-    translateByRate (value) {
-      // console.log(value, this.currencyRates)
-      if (!this.currencyRates || !value) return
+    translateByRate (currency, value) {
+      // console.log(value, this.currencyRates) 
+      if (!this.currencyRates || !this.currencyRates[currency] || !value) return
       // return bigTimes([this.currencyRates['USD'], value])
-      return toBig(this.currencyRates['USD']).times(value)
+      return toBig(this.currencyRates[currency]['USD']).times(value)
     },
     async closeStorehouse (item, isMarket) {
       this.loadingHouse = true
@@ -571,6 +548,10 @@ export default {
     pClose (id) {
       // console.log(this.$refs[`popover-` + id])
       this.$refs[`popover-` + id][0].doClose()
+    },
+    getProduct(name) { 
+      const cur_product = this.products.find(p => p.name === name)
+      return cur_product || {}
     }
   }
 }

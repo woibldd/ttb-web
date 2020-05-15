@@ -25,6 +25,12 @@
                 active-class="active"
                 :to="{name: 'UnitContractFee'}">{{ $t('fee.unit_fees') }}</router-link>
             </li>
+            <li class="">
+              <router-link
+                class="menu-name"
+                active-class="active"
+                :to="{name: 'MixContractFee'}">{{ $t('金本位合约手续费') }}</router-link>
+            </li>
             
           </ul>
         </div>

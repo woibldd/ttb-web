@@ -89,7 +89,7 @@
               </span>
               <span v-else-if="key==='markPrice'">
                 <span v-if="item.product">
-                  {{ (item.product.MARKET || {}).current | bigRound(2) }}
+                  {{ (item.product.MARKET || {}).current | bigRound(item.price_scale) }}
                 </span>
               </span>
               <span v-else> 

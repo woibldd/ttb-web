@@ -374,21 +374,7 @@
                         :data="calcTableList"
                         :table-columns="tableColumns"
                         @change="handleAmountObj" />
-              <!-- <customTable v-if="activeTableTabKey !== 'shipping' && calcTableList"
-                           header-row-class-name="contract-order-list-row-class"
-                           row-class-name="contract-order-list-row-class"
-                           size="mini"
-                           :table-list="calcTableList"
-                           :last-column-config="lastColumnConfig"
-                           :table-columns="tableColumns">
-                <div slot="handlerDom"
-                     slot-scope="{data}">
-                  <el-button size="mini"
-                             type="danger"
-                             :loading="data.cancelBtnLoading"
-                             @click="cancelOrder(data)">{{ $tR('cancel') }}</el-button>
-                </div>
-              </customTable> -->
+            
               <historyTable v-if="activeTableTabKey !== 'shipping' && calcTableList"
                             header-row-class-name="contract-order-list-row-class"
                             row-class-name="contract-order-list-row-class"
@@ -707,6 +693,7 @@ export default {
     },
     tableColumns () {
       let mapTableColumns = this.mapTableTapContents[this.activeTableTabKey].mapTableColumns
+      const that = this
       if (this.activeTableTabKey !== 'shipping') {
         mapTableColumns = Object.keys(mapTableColumns).map(key => ({
           hearderLabel: this.$tR(`mapTableTapContents.${this.activeTableTabKey}.mapTableColumns.${key}`),
@@ -749,7 +736,7 @@ export default {
               case 'entrustValue':
                 return this.bigRound(calcValueByAmountAndPrice(row.amount, row.price), 8)
               case 'price':
-                return this.bigRound(value, 2)
+                return this.bigRound(value, that.mapProduct[row.name].price_scale || 2)
               default:
                 return value
             }
@@ -1157,38 +1144,42 @@ export default {
     handleWidthBg (amount, max) {
       return +bigDiv([amount, max]) * 100 + '%'
     },
-    handleAmountObj () {
+    handleAmountObj () { 
       if (!this.state.userInfo) return
       clearTimeout(this._timer)
       return new Promise(resolve => {
         this._timer = setTimeout(async () => {
           await this.handleBalanceList()
-          const { holding_amount: shipped, active_amount: curEntrust, active_triggers_amount: lossEntrust, active_orders_amount: historyEntrust, orders_amount: bargain } = (await getAllAmount()).data
-          const data = this.amountObj && JSON.parse(JSON.stringify(this.amountObj))
-          const obj = {
-            shipping: [this.calcBalanceList.length, data && data.shipping[0] !== this.calcBalanceList.length],
-            shipped: [shipped, false],
-            curEntrust: [curEntrust, data && data.curEntrust[0] !== curEntrust],
-            lossEntrust: [lossEntrust, data && data.lossEntrust[0] !== lossEntrust],
-            historyEntrust: [historyEntrust, data && data.historyEntrust[0] !== historyEntrust],
-            bargain: [bargain, data && data.bargain[0] !== bargain]
-          }
-          obj[this.activeTableTabKey][1] = false
-          this.amountObj = obj
-          this.handleTableTabClick(this.activeTableTabKey)
+          const res = await getAllAmount()  
+          if (!res.code) {
+            const { holding_amount: shipped, active_amount: curEntrust, active_triggers_amount: lossEntrust, active_orders_amount: historyEntrust, orders_amount: bargain } =res.data
+            const data = this.amountObj && JSON.parse(JSON.stringify(this.amountObj))
+            const obj = {
+              shipping: [this.calcBalanceList.length, data && data.shipping[0] !== this.calcBalanceList.length],
+              shipped: [shipped, false],
+              curEntrust: [curEntrust, data && data.curEntrust[0] !== curEntrust],
+              lossEntrust: [lossEntrust, data && data.lossEntrust[0] !== lossEntrust],
+              historyEntrust: [historyEntrust, data && data.historyEntrust[0] !== historyEntrust],
+              bargain: [bargain, data && data.bargain[0] !== bargain]
+            }
+            obj[this.activeTableTabKey][1] = false
+            this.amountObj = obj
+          } else {
+            const obj = {
+              shipping: [0,0],
+              shipped: [0,0],
+              curEntrust: [0,0],
+              lossEntrust: [0,0],
+              historyEntrust: [0,0],
+              bargain: [0,0]
+            }
+            this.amountObj = obj
+          } 
+          this.handleTableTabClick(this.activeTableTabKey) 
           this.handleEntrustList()
           resolve()
         }, 100)
       })
-    },
-    handleHeart(data) {  
-      if (this.socket) {
-        this.socket.heartCheck.start()
-      }
-    }, 
-    matchFutureItemByKey (key) {
-      if (!this.tickersData) return {}
-      return this.tickersData.UNIT.find(item => item.pair === key)
     },
     async handleTableTabClick (key) {
       this.activeTableTabKey = key
@@ -1204,10 +1195,20 @@ export default {
       // this.holdingCount = found && found.holding || +this.holdingCount
       // this.take_rate = found && found.take_rate || +this.take_rate
     },
+    handleHeart(data) {  
+      if (this.socket) {
+        this.socket.heartCheck.start()
+      }
+    }, 
+    matchFutureItemByKey (key) {
+      if (!this.tickersData) return {}
+      return this.tickersData.UNIT.find(item => item.pair === key)
+    },
     loadNext () {
       this.fetch()
     },
     async fetch () {
+      console.log('fetchfetchfetchfetch')
       if (this.historyPage * this.historySize >= this.totalItems) {
         return
       }
