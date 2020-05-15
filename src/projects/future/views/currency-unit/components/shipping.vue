@@ -95,7 +95,7 @@
               </span>
               <el-popover
                 :ref="'popover-margin' + item.currency"
-                v-if="key === 'margin_position'"
+                v-if="key === 'margin_position' && +item.leverage !==0"
                 placement="top"
                 width="400">
                 <div>
