@@ -186,7 +186,7 @@ export default{
         // this.coinIndexArray = this.coinIndexArray.concat(list.map(item => `${item.product}_${item.symbol}`))
         this.coinIndexArray = this.coinIndexArray.concat(list.map(item => {
           return {
-            fullname: `${item.product}_${item.symbol}`,
+            fullname: item.symbol,
             pair: item.symbol,
             coin: item.currency,
             product: item.product

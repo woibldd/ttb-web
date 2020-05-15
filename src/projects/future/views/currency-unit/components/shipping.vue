@@ -543,15 +543,27 @@ export default {
             this.buyBtnLoading = false
             return
           }
-          fun({ amount: Math.abs(holding), passive, price: '0', side: buy ? 2 : 1, name, ...item, ...data }).then(res => {
-            this.buyBtnLoading = false
-            if (!res.code) {
-              this.$emit('change')
-              this.$message.success(this.$t('handleSuccess'))
-            } else {
-              this.$message.error(res.message)
-            }
-          })
+          if (!item.isEdit) {
+            fun({ amount: Math.abs(holding), passive, price: '0', side: buy ? 2 : 1, name, ...item, ...data }).then(res => {
+              this.buyBtnLoading = false
+              if (!res.code) {
+                this.$emit('change')
+                this.$message.success(this.$t('handleSuccess'))
+              } else {
+                this.$message.error(res.message)
+              }
+            })
+          } else {
+            fun({order_id : data.order_id, symbol: data.name, trigger_price: item.trigger_price}).then(res => {
+               this.buyBtnLoading = false
+              if (!res.code) {
+                this.$emit('change')
+                this.$message.success(this.$t('handleSuccess'))
+              } else {
+                this.$message.error(res.message)
+              }
+            }) 
+          }
         }
       })
       this.pClose(holdingObj.currency)

@@ -5,7 +5,7 @@ import utils from '@/modules/utils'
 const pako = require('pako');
 
 export default {
-  async create (channel) {
+  create (channel) {
     const hub = new Vue({
       data () {
         return {

@@ -565,7 +565,7 @@
             </div>
           </div>
         </div>
-        <div class="ix-col ix-col-4 ml-4">
+        <div class="ix-col ix-col-4 ml-4"> 
           <div
             v-loading="!delegateData"
             class="information"
@@ -573,15 +573,11 @@
             <div
               class="header"
               flex="main:justify">
-              <span>{{ $t('contract_symbol_detail') }}{{ activeProduct && $tR(`mapTabs.${activeProduct.name}`)||'' }}</span>
-              <!-- <el-link :underline="false"
-                       type="primary"
-                       :to="{name: 'UnitIndex', params: {pair: `${(activeProduct || {}).product}_${(activeProduct || {}).name}` }}">
-                更多资料</el-link> -->
+              <span>{{ $t('contract_symbol_detail') }}{{ activeProduct && $tR(`mapTabs.${activeProduct.name}`)||'' }}</span> 
               <router-link
                 class="pointer"
                 v-tooltip.top-center="{html: true, content: $tR('mapDelegateList.contract_mark_price_tips'), classes: 'contract'}"
-                :to="{name: 'UnitIndex', params: {pair: `${(activeProduct || {}).product}_${(activeProduct || {}).currency}` }}">
+                :to="{name: 'MixIndex', params: {pair: (activeProduct || {}).symbol }}">
                 {{ $t('contract_more_resource') }}
               </router-link>
             </div>
@@ -606,12 +602,12 @@
                     <router-link
                       class="pointer text-light"
                       v-tooltip.top-center="{html: true, content: $tR('mapDelegateList.contract_index_price_tips', {product_name: (activeProduct || {}).currency}), classes: 'contract'}"
-                      :to="{name: 'UnitIndex', params: {pair: `${(activeProduct || {}).product}_${(activeProduct || {}).currency}` }}">{{ activeProduct.INDEX.current }}</router-link>
+                      :to="{name: 'MixIndex', params: {pair: (activeProduct || {}).symbol }}">{{ activeProduct.INDEX.current }}</router-link>
                     /
                     <router-link
                       class="pointer text-light"
                       v-tooltip.top-center="{html: true, content: $tR('mapDelegateList.contract_mark_price_tips'), classes: 'contract'}"
-                      :to="{name: 'UnitIndex', params: {pair: `${(activeProduct || {}).product}_${(activeProduct || {}).currency}` }}">{{ handleDishInfoItem('markPrice') }}</router-link>
+                      :to="{name: 'MixIndex', params: {pair: (activeProduct || {}).symbol }}">{{ handleDishInfoItem('markPrice') }}</router-link>
 
                   </div>
                   <p
@@ -1093,12 +1089,12 @@ export default {
     })
   },
   methods: {
-    async subMarket() { 
+    subMarket() { 
       const that = this
       if (this.socket) {
         this.socket.$destroy()
       }
-      this.socket = await wsNew.create()
+      this.socket = wsNew.create()
       this.utils.$tvSocket = this.socket
       this.socket.$on('open', () => { 
         that.socket.heartCheck.start() // 发送一次心跳  

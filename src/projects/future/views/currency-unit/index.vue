@@ -82,7 +82,7 @@
             <!--  最新成交 -->
             <div class="ix-col ix-col-3 ml-4 relative"
                  style="width:50%;">
-              <div v-loading="!newBargainListData.length"
+              <div v-loading="!newBargainListData"
                    class="delegate-list"
                    style="height:448px"
                    element-loading-background="rgba(0, 0, 0, 0.3)">
@@ -138,11 +138,11 @@
                        type="primary"
                        @click="$router.push({path:'/fund/transfer', query:{key:'2.funds-transfer'}})">{{ $t('account_exchange') }}</el-link>
             </div>
-            <div v-loading="!activeProduct.UNIT"
+            <div v-loading="!activeBalance"
                  element-loading-background="rgba(0, 0, 0, 0.3)"
                  :class="{mini:activeBtnsKey > 2}"
                  class="content-container-submit">
-              <div v-if="activeProduct.UNIT"
+              <div v-if="activeBalance"
                    flex="main:justify">
                 <div v-for="(value,key) in mapFormContent.mapBtns"
                      :key="key"
@@ -199,8 +199,7 @@
                   </div>
                   <template v-else>
                     <input :value="(i===0 || i===2) ? activeAcountAndPriceArr[i]:(activeAcountAndPriceArr[i]||(activeProduct.UNIT||{}).current)"
-                           type="text"
-                           @input="e=>activeAcountAndPriceArr[i] = e.target.value.replace(/^(0+)|[^\d.]+/g,'')">
+                           type="text" @input="e=>activeAcountAndPriceArr[i] = e.target.value.replace(/^(0+)|[^\d.]+/g,'')">
                     <span v-if="key==='shippingSpace'">{{ $t('contract_min_unit') }}</span>
                     <span v-else>USD</span>
                   </template>
@@ -294,7 +293,7 @@
                 </div> -->
                 <!-- <div>
                   <el-checkbox v-if="+activeBtnsKey > 2"
-                               v-model="trigger_close ">{{ $tR(`mapFormContent.trigger_close`) }}</el-checkbox>
+                    v-model="trigger_close ">{{ $tR(`mapFormContent.trigger_close`) }}</el-checkbox>
                 </div> -->
               </div>
             </div>
@@ -427,7 +426,7 @@
               <span>{{ $t('contract_symbol_detail') }}{{ activeProduct && $tR(`mapTabs.${activeProduct.name}`)||'' }}</span> 
               <router-link
                 class="pointer" 
-                :to="{name: 'UnitIndex', params: {pair: `${(activeProduct || {}).product}_${(activeProduct || {}).name}` }}">
+                :to="{name: 'UnitIndex', params: {pair: (activeProduct || {}).symbol }}">
                 {{ $t('contract_more_resource') }}
               </router-link> 
             </div>
@@ -450,12 +449,12 @@
                     <router-link
                       class="pointer text-light"
                       v-tooltip.top-center="{html: true, content: $tR('mapDelegateList.contract_index_price_tips', {product_name: (activeProduct || {}).currency}), classes: 'contract'}"
-                      :to="{name: 'UnitIndex', params: {pair: `${(activeProduct || {}).product}_${(activeProduct || {}).name}` }}">{{ activeProduct.INDEX.current }}</router-link>
+                      :to="{name: 'UnitIndex', params: {pair: (activeProduct || {}).symbol }}">{{ activeProduct.INDEX.current }}</router-link>
                     /
                     <router-link
                       class="pointer text-light"
                       v-tooltip.top-center="{html: true, content: $tR('mapDelegateList.contract_mark_price_tips'), classes: 'contract'}"
-                      :to="{name: 'UnitIndex', params: {pair: `${(activeProduct || {}).product}_${(activeProduct || {}).name}` }}">{{ handleDishInfoItem('markPrice') }}</router-link>
+                      :to="{name: 'UnitIndex', params: {pair: (activeProduct || {}).symbol }}">{{ handleDishInfoItem('markPrice') }}</router-link>
                   
                   </div>
                   <p class="signal"
@@ -1022,7 +1021,7 @@ export default {
     },
     handleDisabledBtn (side) {
       if (+this.activeBtnsKey > 2) {
-        const comparisonValue = ['3', '4'].includes(this.activePriceType.key) ? +this.activeProduct[this.productType[this.trigger_type]].current : (+this.activeAcountAndPriceArr[1] || +this.activeProduct[this.productType[this.trigger_type]].current)
+        const comparisonValue = ['3', '4'].includes(this.activePriceType.key) ? +(this.activeProduct[this.productType[this.trigger_type]] || {}).current : (+this.activeAcountAndPriceArr[1] || +(this.activeProduct[this.productType[this.trigger_type]] || {}).current)
         const hasValue = this.activeAcountAndPriceArr[0] && this.activeAcountAndPriceArr[2]
         const type = !['3', '4'].includes(this.activePriceType.key) ? 'sell' : 'buy'
         const isSell = side === type ? +this.activeAcountAndPriceArr[2] > comparisonValue : +this.activeAcountAndPriceArr[2] < +comparisonValue
@@ -1152,7 +1151,7 @@ export default {
       } else {
         const fixed = key === 'change_24h' ? 2 : price_scale
         const unit = this.activeProduct.name === 'FUTURE_BTCUSD' ? 'USD' : this.$tR(`sheet`)
-        return key === 'volume_24h' ? logogramNum(this.activeProduct.UNIT[key]) + unit : bigRound(this.activeProduct.UNIT[key], fixed)
+        return key === 'volume_24h' ? logogramNum((this.activeProduct.UNIT || this.activeProduct.MARKET)[key]) + unit : bigRound((this.activeProduct.UNIT  || this.activeProduct.MARKET)[key], fixed)
       }
     },
     handleWidthBg (amount, max) {
@@ -1265,7 +1264,7 @@ export default {
       const data = {
         user_id: this.userData.id,
         amount: this.activeAcountAndPriceArr[0],
-        price: this.activeAcountAndPriceArr[1] || this.activeProduct.UNIT.current,
+        price: this.activeAcountAndPriceArr[1] || (this.activeProduct.UNIT  || this.activeProduct.MARKET).current,
         type: this.activeBtnsKey === '3' && this.activePriceType.key || this.activeBtnsKey, // 下单类型 1 限价 2市价 3限价止损 4市价止损 5限价止盈 6市价止盈
         side: this.side,
         name: this.activeProduct.name,
