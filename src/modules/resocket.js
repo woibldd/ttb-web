@@ -1,5 +1,7 @@
 import ReconnectingWebSocket from '@/libs/reconnecting-websocket'
-import config from '@/libs/config' 
+import config from '@/libs/config'  
+
+const pako = require('pako');
 export default {
   data () {
     return {
@@ -25,12 +27,36 @@ export default {
         } 
         this.websocket = websocket
         websocket.onmessage = e => {
-          const res = JSON.parse(e.data)
-          if (!res.code || res.code === 200) {
-            typeof callBack === 'function' && callBack(res)
-            resolve(this.websocket)
-            websocket.heartCheck.start()
-          } else reject(res)
+
+          var reader = new FileReader();
+          reader.addEventListener("loadend", function() {
+            let binData   = new Uint8Array(reader.result); 
+            let restored = ''
+            try{
+              restored = pako.ungzip( binData, { to: 'string' } ); 
+            } catch(err){
+              console.log("Error:"+err);
+            }
+            if (restored) {
+              res = JSON.parse(restored) 
+              // const res = JSON.parse(e.data)
+              if (!res.code || res.code === 200) {
+                typeof callBack === 'function' && callBack(res)
+                resolve(this.websocket)
+                websocket.heartCheck.start()
+              } else reject(res)
+                }
+              })
+              reader.readAsArrayBuffer(e.data); 
+          
+          // const data = utils.pako_ungzip(e.data)
+          // const res = JSON.parse(data)
+          // // const res = JSON.parse(e.data)
+          // if (!res.code || res.code === 200) {
+          //   typeof callBack === 'function' && callBack(res)
+          //   resolve(this.websocket)
+          //   websocket.heartCheck.start()
+          // } else reject(res)
         }
         websocket.heartCheck = {
           timeout: 10000,

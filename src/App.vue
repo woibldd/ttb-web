@@ -31,12 +31,7 @@
       v-if="footer === 'default'"
       v-show="showFooter"
       ref="footer"
-      :fixed="fixed"/>
-    <!-- <mobile-footer
-      v-if="showFooter && footer === 'mobile'"
-      ref="footer"
-      :fixed="fixed"
-    /> -->
+      :fixed="fixed"/> 
     <v-notify-list/>
     <!-- <giveMoneyAD v-if="isFirstLogin" v-model="isFirstLogin"></giveMoneyAD> -->
     <!-- <div

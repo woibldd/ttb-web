@@ -1,7 +1,6 @@
 <template>
   <div class="share-option" flex="main:justify cross:strech">
-    <div class="share-option-bg" />
-
+    <div class="share-option-bg" /> 
     <div v-loading="!marketData" class="left-side-bar" element-loading-background="rgba(0, 0, 0, 0.3)" element-loading-spinner="el-icon-loading">
       <div v-for="(value,key) in mapLeftNav" :key="key" :class="{active:drawerIsOpen && activeName === key}" @click="handleClickleftTab(key)">
         <svg-icon :icon-class="mapIcons[key]" style="font-size:24px" />

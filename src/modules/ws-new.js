@@ -2,6 +2,7 @@ import WS from '@/libs/reconnecting-websocket'
 import config from '@/libs/config'
 import Vue from 'vue'
 import utils from '@/modules/utils'
+const pako = require('pako');
 
 export default {
   async create (channel) {
@@ -43,11 +44,26 @@ export default {
         return socket.close()
       }
       let data
-      try {
-        data = JSON.parse(evt.data)
+      try { 
+        var reader = new FileReader();
+        reader.addEventListener("loadend", function() {
+          let binData   = new Uint8Array(reader.result); 
+          let restored = ''
+          try{
+            restored = pako.ungzip( binData, { to: 'string' } ); 
+          } catch(err){
+            console.log("Error:"+err);
+          }
+          if (restored) {
+            data = JSON.parse(restored)
+            // console.log(data)
+            hub.$emit('message', data) 
+          }
+        })
+        reader.readAsArrayBuffer(evt.data); 
       } catch (e) {
         utils.logE(e)
-      }
+      } 
       if (data) {
         // if (data.code) {
         //   return false

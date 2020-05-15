@@ -1114,7 +1114,8 @@ export default {
           that.socket.socket.send(`{"op":"subscribepub","args":["deal@${this.activeProduct.product}_${this.activeProduct.currency}"]}`)
         }
       })
-      this.socket.$on('message', (data) => {  
+      this.socket.$on('message', (data) => { 
+         
         that.handleSoketData(data) 
       })
       this.socket.$on('reopen', () => {

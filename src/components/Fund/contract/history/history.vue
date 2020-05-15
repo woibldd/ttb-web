@@ -1,12 +1,6 @@
 <template>
   <div class="contract-history-container my-fund-content pt-40 f14">
-    <div class="filter-list mb-39">
-      <!-- <div
-        class="filter-item c-primary"
-        :class="[tabName==='active' && 'select']"
-        @click="filter('active')">
-        {{ $t('order_active') }}
-      </div> --> 
+    <div class="filter-list mb-39"> 
       <div
         class="filter-item c-primary"
         :class="[tabName==='history' && 'select']"
@@ -36,6 +30,70 @@
         </el-select>
       </div>
     </div> 
+    <el-row :gutter="20"> 
+      <el-col :span="4">
+        <el-select
+          id="contractType"
+          class="opetion"
+          v-model="params.symbol"
+          @change="pairChange"
+          placeholder="请选择"
+          size="mini"
+          value-key="currency">
+          <el-option
+            v-for="(item, idx) in pairList"
+            :key="idx"
+            :label="item.product_name +'/'+ item.currency_name"
+            :value="item.currency"/>
+        </el-select>
+      </el-col> 
+      <el-col :span="4"> 
+        <el-select
+          class="opetion"
+          v-model="params.side" 
+          size="mini"
+          @change="pairChange"
+          value-key="currency">
+          <el-option  label="全部" :value="0"/>
+          <el-option  label="买" :value="1"/>
+          <el-option  label="卖" :value="2"/>
+        </el-select>
+      </el-col> 
+      <el-col :span="4"> 
+        <el-select
+          class="opetion"
+          v-model="params.state"  
+          @change="pairChange"
+          size="mini"
+          value-key="currency">
+          <el-option  label="全部" :value="0"/>
+          <el-option  label="完全成交" :value="1"/>
+          <el-option  label="部分成交" :value="2"/>
+        </el-select>
+      </el-col>
+      <el-col :span="6">
+        <el-date-picker
+          v-model="params.begin_time"
+          @change="pairChange"
+          size="mini"
+          type="date"
+          value-format="timestamp"
+          placeholder="选择开始日期"
+          default-time="12:00:00">
+        </el-date-picker>
+      </el-col>
+      <el-col :span="6"> 
+        <el-date-picker
+          v-model="params.end_time"
+          @change="pairChange"
+          size="mini"
+          type="date"
+          value-format="timestamp"
+          placeholder="选择结束日期"
+          default-time="12:00:00">
+        </el-date-picker>
+      </el-col> 
+    </el-row>
     <div
       class="table-wrapper"
       v-loading="isLoading">
@@ -234,7 +292,15 @@ export default {
       size: 10,
       isLoading: true,
       totalItems: 0,
-      state,  
+      state,
+      params: {
+        pair: 'FUTURE_BTCUSD',
+        side: 0,
+        state: 0,
+        begin_time: '',
+        end_time: ''
+
+      } 
     }
   },
   computed: {
@@ -274,16 +340,28 @@ export default {
         console.log({data: res.code})
         this.pairList = res.data.items
         this.selectPair = this.pairList[0].currency
+        this.params.symbol = this.pairList[0].currency
       }
     },
-    getData (params) {
-      if (!params) {
-        params = {
-          currency: this.selectPair,
-          page: this.page,
-          size: this.size
-        }  
+    getData () {
+      
+      // if (!params) {
+      //   params = {
+      //     currency: this.selectPair,
+      //     page: this.page,
+      //     size: this.size
+      //   }  
+      // }
+      const params = {
+        currency: this.params.symbol,
+        begin_time: this.params.begin_time,
+        end_time: this.params.end_time,
+        side: this.params.side,
+        state: this.params.state,
+        page: this.page,
+        size: this.size
       }
+      
       if (this.tabName === 'executed') {
         // 订单历史
         this.getOrderhistory(params)

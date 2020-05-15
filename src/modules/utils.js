@@ -2,7 +2,8 @@ import _ from 'lodash'
 import Big from 'big.js'
 import eventHub from './eventHub'
 import consts from '@/libs/consts'
-
+// import pako from 'pako'
+ 
 const preloadEl = document.querySelector('.page-loading')
 const externalModule = {}
 const localeName = {
@@ -24,7 +25,7 @@ const utils = {
   isDev: process.env.NODE_ENV === 'development',
   isBeta: process.env.MODE === 'beta',
   isProd: process.env.NODE_ENV === 'production',
-  locales: localeName,
+  locales: localeName, 
   getLocaleName(locale) {
     return localeName[locale] || 'Unknown'
   },
