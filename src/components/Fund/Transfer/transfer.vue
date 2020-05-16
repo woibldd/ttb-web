@@ -424,8 +424,18 @@
             value: 5,
             label: 'unit_account'
           }]
-        }
-        else {
+        } else if (val === 'EOS') {
+          this.accountTypes = [{
+            value: 1,
+            label: 'wallet_account'
+          },{
+            value: 2,
+            label: 'trading_account'
+          }, {
+            value: 5,
+            label: 'unit_account'
+          }] 
+        } else {
           this.accountTypes = [{
             value: 1,
             label: 'wallet_account'

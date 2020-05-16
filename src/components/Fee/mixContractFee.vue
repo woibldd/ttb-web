@@ -1,11 +1,10 @@
 <template>
   <div class="profile-container">
-    <div class="title-box rate-tit">{{ $t('fee.unit_fees') }}</div>
+    <div class="title-box rate-tit">{{ $t('金本位合约手续费') }}</div>
     <div class="rate-tab"> 
       <table class="rate-table">
         <tr>
-          <th>{{ $t('transaction_pair') }}</th>
-          <th>{{ $t('fee.contract.leverage') }}</th>
+          <th>{{ $t('transaction_pair') }}</th> 
           <th>{{ $t('fee.contract.provision_fee') }}</th>
           <th>{{ $t('fee.contract.withdraw_fee') }}</th>
           <th>{{ $t('fee.contract.capital_fee') }}</th>
@@ -16,8 +15,7 @@
           <tr
             v-for="pair in pairList"
             :key="pair.name">
-            <td class="">{{ $t('FUTURE_&USD', {currency: pair.currency.replace('USD','')} ) }}</td>
-            <td class="">{{ pair.max_leverage }}</td>
+            <td class="">{{ $t('FUTURE_&USD', {currency: pair.currency.replace('USD','')} ) }}</td> 
             <td class="">{{ $big(pair.make_rate || 0).mul(100) | fixed(4) }}%</td>
             <td class="">{{ $big(pair.take_rate || 0).mul(100) | fixed(4) }}%</td>
             <td class="">{{ $big(pair.fee_rate || 0).mul(100) | fixed(4) }}%</td>
@@ -43,7 +41,7 @@ import service from '@/modules/service'
 import { pairfix } from '@/mixins/index'
 
 export default {
-  name: 'UnitContractFee',
+  name: 'MixContractFee',
   mixins: [pairfix],
   data () {
     return {
@@ -53,12 +51,12 @@ export default {
   },
   async created () {
     // sss
-    let res = await service.getUnitContractSymList()
+    let res = await service.getMixContractSymList()
     if (!res.code) {
       this.pairList = res.data.items
     }
     // res = await service.getContractSymInfo({symbol: 'FUTURE_BTCUSD'})
-    res = await service.getUnitContractSymInfo()
+    res = await service.getMixContractSymInfo()
     if (!res.code) {
       this.symbolList = res.data
     }

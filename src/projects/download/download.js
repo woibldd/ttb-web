@@ -5,8 +5,7 @@ import theme from '@/modules/dynamic-theme'
 import { actions } from '@/modules/store'
 import eventHub from '@/modules/eventHub'
 import router from './router'
-import utils from '@/modules/utils'
-import en from '@/libs/languages/en.json'
+import utils from '@/modules/utils' 
 import Icon from '@/components/Icon'
 
 Vue.component('icon', Icon)

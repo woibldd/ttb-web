@@ -26,8 +26,7 @@ export default {
           console.log(`${config.wssUrl}出错`)
         } 
         this.websocket = websocket
-        websocket.onmessage = e => {
-
+        websocket.onmessage = e => { 
           var reader = new FileReader();
           reader.addEventListener("loadend", function() {
             let binData   = new Uint8Array(reader.result); 
@@ -38,7 +37,7 @@ export default {
               console.log("Error:"+err);
             }
             if (restored) {
-              res = JSON.parse(restored) 
+              let res = JSON.parse(restored) 
               // const res = JSON.parse(e.data)
               if (!res.code || res.code === 200) {
                 typeof callBack === 'function' && callBack(res)

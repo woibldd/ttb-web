@@ -395,9 +395,10 @@ export const actions = {
 
     if (!utils.$i18n.messages[locale]) {
       try {
-        const msg = await import(/* webpackChunkName: "lang-[request]" */ `@/libs/languages/${locale}.json`)
-
-        utils.$i18n.setLocaleMessage(locale, actions.replaceName(msg))
+        const msg = await import(/* webpackChunkName: "lang-[request]" */ `@/libs/languages/${locale}.js`)
+        // utils.$i18n.setLocaleMessage(locale, actions.replaceName(msg))
+        
+        utils.$i18n.setLocaleMessage(locale, msg.default)
       } catch (e) {
         utils.logE('load language failed')
       }

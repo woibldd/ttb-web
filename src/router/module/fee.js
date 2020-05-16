@@ -8,6 +8,7 @@ const Fee = () => import(/* webpackChunkName: "Fee" */ '@/pages/Fee')
 const ContractFee = () => import(/* webpackChunkName: "ContractFee" */ '@/components/Fee/contractFee')
 const TradingFee = () => import(/* webpackChunkName: "tradingFee" */ '@/components/Fee/tradingFee') 
 const UnitContractFee = () => import(/* webpackChunkName: "tradingFee" */ '@/components/Fee/unitContractFee')
+const MixContractFee = () => import(/* webpackChunkName: "tradingFee" */ '@/components/Fee/mixContractFee')
 export const feeRouter = [
   {
     path: '/fee',
@@ -36,6 +37,11 @@ export const feeRouter = [
         path: 'unitContractFee',
         name: 'UnitContractFee',
         component: UnitContractFee
+      },
+      {
+        path: 'mixContractFee',
+        name: 'MixContractFee',
+        component: MixContractFee
       }
     ]
   }

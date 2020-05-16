@@ -232,8 +232,7 @@ export const getMixCost = (product, leverages, entrustList, currHolding) => {
 /**
    * @param {Array} futures 当前委托列表
    * @param {Object} holding 持仓
-   * @param {(|string|number)} multiplier
-   *
+   * @param {(|string|number)} multiplier 
    */
 export const getTotalValue = (futures, holding, multiplier) => {
   const { price, amount } = holding
@@ -394,5 +393,125 @@ export const getMixLiqPrice = ({ isBuy, leverages, amount, price, available_bala
     const temContract = margin.minus(MM)
     if (multiplier === '1' || !multiplier || !+multiplier) return Big(price).mul(amount).div(Big(amount)[isBuy ? 'plus' : 'minus'](tem)).toFixed(8)
     else return entrustValue[!isBuy ? 'plus' : 'minus'](temContract)[!isBuy ? 'plus' : 'minus'](available_balance).plus(MM).div(Big(multiplier).mul(amount)).toFixed(8)
+  }
+}
+
+
+
+export const getUnitTotalValue = (futures, holding, multiplier) => {
+  let { price, amount, side } = holding
+  let totalValue = Big(0)
+  let buyValue = Big(0)
+  let sellValue = Big(0)
+  futures.map(item => {
+    let curValue = Big(0)
+    if (side === 1) { // 持多仓
+      let newAmount = Big(amount).plus(item.amount).toString()
+      // 对冲后仍多仓,不计算这条委托的价值
+      if (item.side !== side && newAmount.gte(0)) {
+        amount = newAmount.toString()
+      }
+      // 对冲后变空仓
+      else if (item.side !== side && newAmount.lt(0)) {
+        amount = 0
+        curValue = calcValueByAmountAndPrice(newAmount, item.price, item.multiplier)
+        sellValue = sellValue.plus(curValue)
+      } else if (item.side === side) {
+        curValue = calcValueByAmountAndPrice(item.amount, item.price, item.multiplier)
+        buyValue = buyValue.plus(curValue)
+      }
+    } else {
+      let newAmount = Big(amount).plus(item.amount)
+      // 对冲后变多仓
+      if (item.side !== side && newAmount.gte(0)) {
+        amount = 0
+        curValue = calcValueByAmountAndPrice(newAmount, item.price, item.multiplier)
+        buyValue = buyValue.plus(curValue)
+      }
+      // 对冲后仍空仓,不计算这条委托的价值
+      else if (item.side !== side && newAmount.le(0)) {
+        amount = newAmount.toString()
+      } else if (item.side === side) {
+        curValue = calcValueByAmountAndPrice(item.amount, item.price, item.multiplier)
+        sellValue = sellValue.plus(curValue)
+      }
+    }
+  })
+  const holdingValue = calcValueByAmountAndPrice(amount, price, multiplier)
+  totalValue = Big(holdingValue).plus(buyValue).plus(sellValue)
+  return totalValue.abs()
+}
+export const getUnitLiqPrice = ({ isBuy, leverages, amount, price, available_balance, totalValue, totalAmount }, product) => {
+  const { base_risk, gap_risk, im, mm, take_rate, multiplier, max_leverage } = product
+  // 全仓ture 逐仓false
+  const isCross = +leverages === 0
+  // 委托价值
+  const entrustValue = calcValueByAmountAndPrice(amount, price, multiplier).abs()
+  console.log(`委托价值entrustValue：${entrustValue}`)
+  // 总委托价值
+  // totalValue = Big(totalValue || 0).plus(entrustValue).abs()
+  totalAmount = Big(totalAmount || 0).plus(amount)
+  console.log(`委托总价值totalValue：${totalValue}`)
+  /* 初始保证金 */
+  // 档位【(总价值-初始风险限额)/递增额度 向下取整】
+  // let gears = (Big(totalValue).minus(base_risk)).div(gap_risk).round(0, 3)
+  // gears = gears.lte(1) ? Big(0) : gears
+  // IM值【IM百分比】
+  // const IM = Big(im).plus(gears.mul(mm))
+  // 初始保证金【委托价值/当前杠杆倍数*（100%+IM百分比--当前档位）】
+  let IM = calcIM(isCross ? totalValue : entrustValue, base_risk, gap_risk, im, mm)
+  let margin = initalMargin(isCross ? totalValue : entrustValue, !+leverages ? max_leverage : leverages, IM)
+  console.log(`初始保证金margin${margin}, max_leverage: ${max_leverage}`)
+  // const initalMargin = entrustValue.div(!+leverages ? max_leverage : leverages).times(Big(IM).plus(1))
+  // 维持保证金【MM百分比（当前挡位）*委托价值】
+  let MM = Big(isCross ? totalValue : entrustValue).mul(mm)
+  console.log(`维持保证金MM：${MM}`)
+
+  // 合约 【开仓价值-（开仓保证金-维持保证金）】/（乘数X合约张数）
+  if (!isCross) {
+    // 多仓Lp=price*amount/[amount+(IM-MM)*price*（1-take_rate）]
+    // （乘数X合约张数）/【开仓价值+（开仓保证金-维持保证金）】
+    const fee = entrustValue.times(take_rate)
+    const totalFee = totalValue.times(take_rate)
+
+    const usesrEquity = Big(available_balance).minus(totalFee)
+    console.log(`开仓手续费fee:${fee}, 账户权益usesrEquity:${usesrEquity}`)
+    // 预收闭仓手续费
+    const closeFee = entrustValue.times(take_rate)
+    // 成本=起始保证金+开闭仓手续费
+    const cost = margin.plus(fee.times(2))
+    console.log(`成本cost：${cost}`)
+    margin = initalMargin(totalValue, !+leverages ? max_leverage : leverages, IM)
+    MM = Big(totalValue).mul(mm)
+
+    const available = Big(available_balance).minus(cost)
+    console.log(`可用余额available：${available}`)
+    // 强平价格计算=（乘数X合约张数）/【开仓价值+（开仓保证金-维持保证金）】
+    console.log({multiplier, totalAmount: totalAmount.toString(), totalValue: totalValue.toString(), margin: margin.toString(), MM: MM.toString()})
+    const lipPrice = Big(multiplier).times(totalAmount.abs()).div(Big(totalValue).plus(margin).minus(MM))
+    console.log(`强平价格lipPrice：${lipPrice}`)
+    return lipPrice
+  } else {
+    // 全仓Hp*VoL/[Vol+(可用余额+IM-MM)*Hp*（1-R）]
+    // const tem = (Big(available_balance).minus(margin).plus(IM).minus(MM)).mul(price).mul(1 - +take_rate)
+    const fee = entrustValue.times(take_rate)
+    const totalFee = totalValue.times(take_rate)
+    const usesrEquity = Big(available_balance).minus(totalFee)
+    console.log(`开仓手续费fee:${fee}, 账户权益usesrEquity:${usesrEquity}`)
+
+    const cost = margin.plus(totalFee.times(2))
+    console.log(`成本cost：${cost}`)
+
+    const available = Big(available_balance).minus(cost)
+    console.log(`可用余额available：${available}`)
+
+    // 强平价格=（乘数X合约张数）/【开仓价值-（开仓保证金-维持保证金）-账户余额】
+    console.log({multiplier, amount: totalAmount.toString(), price, margin: margin.toString(), MM: MM.toString(), available:available.toString()})
+    const lipPrice = Big(multiplier).times(totalAmount.abs()).div((Big(totalValue)[isBuy ? 'plus' : 'minus'](margin.minus(MM)))[isBuy ? 'plus' : 'minus'](available))
+    console.log(`Big(${multiplier}).times(${totalAmount.abs()}).div((Big(${totalValue.toString()})${[isBuy ? 'plus' : 'minus']}(${margin.toString()}.minus(${MM.toString()})))${[isBuy ? 'plus' : 'minus']}(${available.toString()}))`)
+    console.log(`强平价格lipPrice：${lipPrice}`)
+    console.log(`--------------------------------------------------------------------------------------------`)
+    return lipPrice
+    
   }
 }
