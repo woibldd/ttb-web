@@ -479,7 +479,7 @@
 // import candlestick from '../../components/candlestick'
 import selectBase from '../../components/selectBase'
 // import soket from '../../mixins/resoket'
-import { bigRound, logogramNum, calcValueByAmountAndPrice, bigDiv, bigTimes, bigPlus, bigMinus, getCost, getLiqPrice, getTotalValue, calcProfit, toBig } from '../../utils/handleNum'
+import { bigRound, logogramNum, calcValueByAmountAndPrice, bigDiv, bigTimes, bigPlus, bigMinus, getCost, getUnitLiqPrice, getUnitTotalValue, calcProfit, toBig } from '../../utils/handleNum'
 import {
   getSymbolInfo,
   getFutureListByKey,
@@ -953,7 +953,7 @@ export default {
     },
     totalValue () {
       if (!this.activeAcountAndPriceArr[0] || !this.entrustList) return
-      return getTotalValue(this.entrustList,
+      return getUnitTotalValue(this.entrustList,
         {
           amount: this.activeAcountAndPriceArr[0],
           price: this.activeAcountAndPriceArr[1] || this.activeProduct.UNIT.current        },
@@ -961,13 +961,14 @@ export default {
     },
     getLiqPrice () {
       if (!this.activeAcountAndPriceArr[0]) return
-      const price = getLiqPrice({
+      const price = getUnitLiqPrice({
         isBuy: this.isBuy,
         leverages: this.activeLever,
         amount: this.activeAcountAndPriceArr[0],
         price: this.activeAcountAndPriceArr[1] || this.activeProduct.UNIT.current,
         available_balance: this.activeBalance.available_balance,
-        totalValue: this.totalValue()
+        totalValue: this.totalValue(),
+        totalAmount: this.activeBalance.holding
       }, this.activeProduct)
       return price
     },

@@ -13,7 +13,7 @@
         @click="filter('executed')">
         {{ $t('order_history') }}
       </div> 
-      <div class="currency-row" >
+      <!-- <div class="currency-row" >
         <div class="c-999 mr-13">
           {{ $t('contract') }}
         </div>
@@ -28,14 +28,14 @@
             :label="item.product_name +'/'+ item.currency_name"
             :value="item.currency"/>
         </el-select>
-      </div>
+      </div> -->
     </div> 
     <el-row :gutter="20"> 
       <el-col :span="4">
         <el-select
           id="contractType"
           class="opetion"
-          v-model="params.symbol"
+          v-model="myfilter.symbol"
           @change="pairChange"
           placeholder="请选择"
           size="mini"
@@ -50,47 +50,52 @@
       <el-col :span="4"> 
         <el-select
           class="opetion"
-          v-model="params.side" 
+          v-model="myfilter.side" 
           size="mini"
           @change="pairChange"
-          value-key="currency">
-          <el-option  label="全部" :value="0"/>
-          <el-option  label="买" :value="1"/>
-          <el-option  label="卖" :value="2"/>
+          value-key="currency"> 
+          <el-option v-for="item in dict.side"
+            :key="item.value"
+            :label="item.text" 
+            :value="item.value"/> 
         </el-select>
       </el-col> 
       <el-col :span="4"> 
         <el-select
+          v-if="tabName === 'executed'"
           class="opetion"
-          v-model="params.state"  
+          v-model="myfilter.state"  
           @change="pairChange"
           size="mini"
           value-key="currency">
-          <el-option  label="全部" :value="0"/>
-          <el-option  label="完全成交" :value="1"/>
-          <el-option  label="部分成交" :value="2"/>
+          <el-option v-for="item in dict.state"
+            :key="item.value"
+            :label="item.text" 
+            :value="item.value"/> 
+        </el-select> 
+        <el-select
+          v-else
+          class="opetion"
+          v-model="myfilter.state"  
+          @change="pairChange"
+          size="mini"
+          value-key="currency">
+          <el-option v-for="item in dict.trade_state"
+            :key="item.value"
+            :label="item.text" 
+            :value="item.value"/> 
         </el-select>
       </el-col>
-      <el-col :span="6">
+      <el-col :span="8">
         <el-date-picker
-          v-model="params.begin_time"
+          v-model="myfilter.daterange"
           @change="pairChange"
           size="mini"
-          type="date"
+          type="daterange"
           value-format="timestamp"
-          placeholder="选择开始日期"
-          default-time="12:00:00">
-        </el-date-picker>
-      </el-col>
-      <el-col :span="6"> 
-        <el-date-picker
-          v-model="params.end_time"
-          @change="pairChange"
-          size="mini"
-          type="date"
-          value-format="timestamp"
-          placeholder="选择结束日期"
-          default-time="12:00:00">
+          range-separator="-"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期">
         </el-date-picker>
       </el-col> 
     </el-row>
@@ -293,14 +298,35 @@ export default {
       isLoading: true,
       totalItems: 0,
       state,
-      params: {
+      myfilter: {
         pair: 'FUTURE_BTCUSD',
         side: 0,
         state: 0,
-        begin_time: '',
-        end_time: ''
+        daterange: '',  
+      },
+      dict: {
+        side: [ 
+          { value:0, text:'全部'}, 
+          { value:1, text:'买入'}, 
+          { value:2, text:'卖出'}, 
+        ],
+        state: [
+           { value:0, text:'全部'}, 
+           { value:3, text:'全部成交'}, 
+           { value:4, text:'未成交撤单'}, 
+           { value:5, text:'部分成交撤单'},
+           { value:6, text:'未成交系统取消'}, 
+           { value:7, text:'部分成交系统取消'}, 
+           { value:8, text:'隐藏已撤销'}
+        ],
+        trade_state: [ 
+           { value:0, text:'全部'}, 
+           { value:1, text:'成交单'}, 
+           { value:2, text:'强平单'}, 
+           { value:3, text:'资金费率'},
+        ]
 
-      } 
+      }
     }
   },
   computed: {
@@ -336,30 +362,24 @@ export default {
     }, 
     async getPairs () {
       let res = await service.getContractSymList()
-      if (!res.code) {
-        console.log({data: res.code})
+      if (!res.code) { 
         this.pairList = res.data.items
-        this.selectPair = this.pairList[0].currency
-        this.params.symbol = this.pairList[0].currency
+        // this.selectPair = this.pairList[0].currency
+        this.myfilter.symbol = this.pairList[0].currency
       }
     },
     getData () {
-      
-      // if (!params) {
-      //   params = {
-      //     currency: this.selectPair,
-      //     page: this.page,
-      //     size: this.size
-      //   }  
-      // }
       const params = {
-        currency: this.params.symbol,
-        begin_time: this.params.begin_time,
-        end_time: this.params.end_time,
-        side: this.params.side,
-        state: this.params.state,
+        currency: this.myfilter.symbol, 
+        side: this.myfilter.side,
+        state: this.myfilter.state,
         page: this.page,
         size: this.size
+      }
+
+      if (this.myfilter.daterange) {
+        params.begin_time = this.myfilter.daterange[0]
+        params.end_time = this.myfilter.daterange[1]
       }
       
       if (this.tabName === 'executed') {
@@ -374,7 +394,7 @@ export default {
       this.tabName = type
       this.page = 1
       const params = {
-        currency: this.selectPair,
+        currency: this.myfilter.symbol, 
         page: this.page,
         size: this.size
       }
@@ -419,8 +439,7 @@ export default {
         this.isLoading = false
       })
     },
-    pairChange() {
-      console.log({test: this.pairList})
+    pairChange() { 
       this.getData()
     },
   },
