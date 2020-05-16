@@ -132,7 +132,7 @@
           flex="box:mean">
           <span>{{ $tR(`mapTableColumns.1.${key}`,{active:active === '0'?$t('contract_cal_full'):active+'x'}) }}</span>
           <span v-if="key==='7'">{{ +formValueObj[key]*100|bigRound(2) }}%</span>
-          <span v-else>{{ ['4','5'].includes(key)?formValueObj[key]:bigRound(formValueObj[key],key==='6'?2:8) }}</span>
+          <span v-else>{{ ['4','5'].includes(key)?formValueObj[key]:bigRound(formValueObj[key],key==='6'?3:8) }}</span>
         </div>
         <!-- <div class="divider-line-info" style="background:none" /> -->
         <div
