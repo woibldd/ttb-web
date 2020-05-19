@@ -350,8 +350,7 @@ export default {
       }
       service.getMixTradeHistory(params).then(res => {
         this.tableData = res.data.data
-        this.totalItems = res.data.total
-        console.log(this.tableData, 'trace')
+        this.totalItems = res.data.total 
       }).finally(res => {
         this.isLoading = false
       })

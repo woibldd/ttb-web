@@ -1009,7 +1009,7 @@ export default {
     },
     handleDisabledBtn (side) {
       if (+this.activeBtnsKey > 2) {
-        const comparisonValue = ['3', '4'].includes(this.activePriceType.key) ? +(this.activeProduct[this.productType[this.trigger_type]] || {}).current : (+this.activeAcountAndPriceArr[1] || +(this.activeProduct[this.productType[this.trigger_type]] || {}).current)
+        const comparisonValue = (this.activeProduct[this.productType[this.trigger_type]] || {}).current
         const hasValue = this.activeAcountAndPriceArr[0] && this.activeAcountAndPriceArr[2]
         const type = !['3', '4'].includes(this.activePriceType.key) ? 'sell' : 'buy'
         const isSell = side === type ? +this.activeAcountAndPriceArr[2] > comparisonValue : +this.activeAcountAndPriceArr[2] < +comparisonValue
@@ -1146,7 +1146,9 @@ export default {
       return +bigDiv([amount, max]) * 100 + '%'
     },
     handleAmountObj () { 
+      utils.log('handleAmountObj 1111')
       if (!this.state.userInfo) return
+      utils.log('handleAmountObj 2222')
       clearTimeout(this._timer)
       return new Promise(resolve => {
         this._timer = setTimeout(async () => {

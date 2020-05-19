@@ -30,7 +30,7 @@
         </el-select>
       </div> -->
     </div> 
-    <!-- <el-row :gutter="20"> 
+    <el-row :gutter="20"> 
       <el-col :span="4">
         <el-select
           id="contractType"
@@ -98,7 +98,7 @@
           end-placeholder="结束日期">
         </el-date-picker>
       </el-col> 
-    </el-row> -->
+    </el-row>
     <div
       class="table-wrapper"
       v-loading="isLoading">
@@ -369,14 +369,14 @@ export default {
       }
     },
     getData (params) { 
-      if (!params) {
-        params = {
-          currency: this.selectPair,
-          page: this.page,
-          size: this.size
-        }  
-      }
-      // const params = {
+      // if (!params) {
+      //   params = {
+      //     currency: this.selectPair,
+      //     page: this.page,
+      //     size: this.size
+      //   }  
+      // }
+      // params = {
       //   currency: this.params.symbol,
       //   begin_time: this.params.begin_time,
       //   end_time: this.params.end_time,
@@ -385,6 +385,14 @@ export default {
       //   page: this.page,
       //   size: this.size
       // }
+      params = {
+        currency: this.myfilter.symbol, 
+        begin_time: this.myfilter.daterange[0],
+        end_time: this.myfilter.daterange[1],
+        side: this.myfilter.side,
+        page: this.page,
+        size: this.size
+      }
       
       if (this.tabName === 'executed') {
         // 订单历史
@@ -437,8 +445,7 @@ export default {
       // }
       service.getContractTradeHistory(params).then(res => {
         this.tableData = res.data.data
-        this.totalItems = res.data.total
-        console.log(this.tableData, 'trace')
+        this.totalItems = res.data.total 
       }).finally(res => {
         this.isLoading = false
       })
