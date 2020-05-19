@@ -445,12 +445,18 @@ export const getUnitLiqPrice = ({ isBuy, leverages, amount, price, available_bal
   const { base_risk, gap_risk, im, mm, take_rate, multiplier, max_leverage } = product
   // 全仓ture 逐仓false
   const isCross = +leverages === 0
+  totalAmount = totalAmount || 0
   // 委托价值
-  const entrustValue = calcValueByAmountAndPrice(amount, price, multiplier).abs()
+  let entrustValue = calcValueByAmountAndPrice(amount, price, multiplier).abs()
   console.log(`委托价值entrustValue：${entrustValue}`)
-  // 总委托价值
-  // totalValue = Big(totalValue || 0).plus(entrustValue).abs()
-  totalAmount = Big(totalAmount || 0).plus(amount)
+  // 现有委托 和当前下单委托的 方向相同
+  if ((Big(amount).gte(0) && Big(totalAmount).gte(0)) || (Big(amount).lte(0) && Big(totalAmount).lte(0))) {
+    totalAmount = Big(totalAmount || 0).plus(amount)
+    totalValue = Big(totalValue || 0).plus(entrustValue).abs()
+  } else { // 现有委托 和当前下单委托的 方向相反
+    totalAmount = Big(totalAmount || 0).plus(amount)
+    totalValue = calcValueByAmountAndPrice(totalAmount, price, multiplier).abs()
+  }
   console.log(`委托总价值totalValue：${totalValue}`)
   /* 初始保证金 */
   // 档位【(总价值-初始风险限额)/递增额度 向下取整】
