@@ -408,19 +408,19 @@
                         :value="+subKey" />
                     </el-select>
                   </div>
+                  <el-checkbox v-if="+activeBtnsKey > 2"
+                              v-model="trigger_close ">{{ $tR(`mapFormContent.trigger_close`) }}</el-checkbox>
                   <!-- <el-checkbox
                     flex-box="1"
                     v-model="trigger_close ">{{ $tR(`mapFormContent.trigger_close`) }}</el-checkbox> -->
                 </div>
-                <div flex="main:justify">
-                  <!-- <el-tooltip popper-class="custom-tooltip">
+                <!-- <div flex="main:justify">
+                  <el-tooltip popper-class="custom-tooltip">
                     <div slot="content"
                         style="width:200px;">{{ '选择直接下单后将不会弹出详细委托表单信息而直接下单，请慎重选择' }}</div>
                     <el-checkbox v-model="popoverDisabled">{{ $tR(`mapFormContent.notip`) }}</el-checkbox>
-                  </el-tooltip> -->
-                  <el-checkbox v-if="+activeBtnsKey > 2"
-                              v-model="trigger_close ">{{ $tR(`mapFormContent.trigger_close`) }}</el-checkbox>
-                </div>
+                  </el-tooltip> 
+                </div> -->
               </div>
             </div>
           </div>  
