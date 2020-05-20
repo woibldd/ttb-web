@@ -202,11 +202,11 @@
               </span>
               <span v-else-if="key==='value'">
                 <span>
-                  {{ item[key]| bigRound(8) }}
+                  {{ $big(item[key]).abs()| bigRound(8) }}
                 </span> 
                 <br>
                 <span>
-                  ≈ {{ translateByRate(item.currency, item[key])| bigRound(2) }} USD
+                  ≈ {{ translateByRate(item.currency, $big(item[key]).abs())| bigRound(2) }} USD
                 </span>
               </span>
               <span v-else>

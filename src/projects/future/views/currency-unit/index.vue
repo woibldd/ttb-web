@@ -734,7 +734,7 @@ export default {
               case 'fee':
                 return this.bigRound(value, 8)
               case 'entrustValue':
-                return this.bigRound(calcValueByAmountAndPrice(row.amount, row.price), 8)
+                return this.bigRound(calcValueByAmountAndPrice(row.amount, row.price).abs(), 8)
               case 'price':
                 return this.bigRound(value, that.mapProduct[row.name].price_scale || 2)
               default:
