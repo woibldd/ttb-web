@@ -206,15 +206,6 @@
                 </template>
               </div>
               <div>
-                <!-- <div flex="main:justify">
-                  <el-tooltip popper-class="custom-tooltip">
-                    <div slot="content"
-                        style="width:200px;">{{ '选择直接下单后将不会弹出详细委托表单信息而直接下单，请慎重选择' }}</div>
-                    <el-checkbox v-model="popoverDisabled">{{ $tR(`mapFormContent.notip`) }}</el-checkbox>
-                  </el-tooltip>
-                  <el-checkbox v-if="+activeBtnsKey > 2"
-                              v-model="trigger_close ">{{ $tR(`mapFormContent.trigger_close`) }}</el-checkbox>
-                </div> -->
                 <div v-for="(value,key) in mapFormContent.mapHandleBtn"
                      :key="key">
                   <el-popover :ref="`popover-${key}`"
@@ -283,6 +274,15 @@
                            style="font-size:12px"
                            href="/fund/my/contractUnit/index"
                            type="primary">{{ (activeBalance||{}).available_balance||0| bigRound(8) }} {{ activeProduct.currency }}</el-link>
+                </div>
+                <div flex="main:justify">
+                  <!-- <el-tooltip popper-class="custom-tooltip">
+                    <div slot="content"
+                        style="width:200px;">{{ '选择直接下单后将不会弹出详细委托表单信息而直接下单，请慎重选择' }}</div>
+                    <el-checkbox v-model="popoverDisabled">{{ $tR(`mapFormContent.notip`) }}</el-checkbox>
+                  </el-tooltip> -->
+                  <el-checkbox v-if="+activeBtnsKey > 2"
+                              v-model="trigger_close ">{{ $tR(`mapFormContent.trigger_close`) }}</el-checkbox>
                 </div>
                 <!-- <div>
                   <el-checkbox class="text-light"

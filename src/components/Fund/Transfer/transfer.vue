@@ -117,8 +117,7 @@
   import { tabs } from 'element-ui';
   import service from '@/modules/service'
   import utils from '@/modules/utils'
-  import { state, actions, local } from "@/modules/store";
-  import Big from 'big.js'
+  import { state, actions, local } from "@/modules/store"; 
   import ixPagination from '@/components/common/ix-pagination'
 
 
@@ -143,6 +142,7 @@
         walletBalance: null,
         otcBalance: null,
         unitBalance: null,
+        mixBalance: null,
         tableData: [],
         accountTypes: [{
           value: 1,
@@ -189,7 +189,10 @@
             break
           case 5: 
             amount = this.unitAvai
-          break
+            break
+          case 7: 
+            amount = this.mixAvai
+            break
           default:
             amount = 0
         } 
@@ -213,6 +216,8 @@
           case 5: 
             amount = this.unitAvai
             break
+          case 7: 
+            amount = this.mixAvai
           default:
             amount = 0
         }
@@ -222,35 +227,42 @@
         if (!this.tradingBalance) {
           return 0;
         } else {
-          return new Big(this.tradingBalance.available || 0).round(8, 0).toFixed(8);
+          return this.$big(this.tradingBalance.available || 0).round(8, 0).toFixed(8);
         }
       },
       contractAvai() {
         if (!this.contractBalance) {
           return 0;
         } else {
-          return new Big(this.contractBalance.available_balance || 0).round(8, 0).toFixed(8);
+          return this.$big(this.contractBalance.available_balance || 0).round(8, 0).toFixed(8);
         }
       },
       otcAvai() {
         if (!this.otcBalance) {
           return 0;
         } else {
-          return new Big(this.otcBalance.available || 0).round(8, 0).toFixed(8);
+          return this.$big(this.otcBalance.available || 0).round(8, 0).toFixed(8);
         }
       },
       walletAvai() {
         if (!this.walletBalance) {
           return 0;
         } else {
-          return new Big(this.walletBalance.available || 0).round(8, 0).toFixed(8);
+          return this.$big(this.walletBalance.available || 0).round(8, 0).toFixed(8);
         }
       },
       unitAvai () { 
         if (!this.unitBalance) {
           return 0
         } else {
-          return new Big(this.unitBalance.available || 0).round(8, 0).toFixed(8)
+          return this.$big(this.unitBalance.available || 0).round(8, 0).toFixed(8)
+        }
+      },
+      mixAvai () { 
+        if (!this.mixBalance) { 
+          return 0
+        } else { 
+          return this.$big(this.mixBalance.available_balance || 0).round(8, 0).toFixed(8) 
         }
       }
     },
@@ -273,7 +285,7 @@
       },
       all(){
         Big.RM = 0
-        this.number = new Big(this.fromAmount).toFixed(8)
+        this.number = this.$big(this.fromAmount).toFixed(8)
       },
       async submit(){
         if (0 >= this.number || this.number === '') {
@@ -285,7 +297,7 @@
           return
         }
         let $this = this
-      // let res = await service.transferContractFund({
+        // let res = await service.transferContractFund({
         let res = await service.transferSelf({
           amount: this.number,
           currency: this.selectCoin,
@@ -311,12 +323,13 @@
 
       },
       async getBalance(){
-        let [tradingBalance, contractBalance, otcBalance, walletBalance, unitBalance] = await Promise.all([
+        let [tradingBalance, contractBalance, otcBalance, walletBalance, unitBalance, mixBalance] = await Promise.all([
           service.getBalanceByPair(this.selectCoin),
           service.getContractBalanceByPair({ symbol:this.selectCoin}),
           service.getOtcBalanceByPair({symbol: this.selectCoin}),
           service.getwalletBalanceByPair({symbol: this.selectCoin}),
-          service.getUnitBalanceByPair({symbol: this.selectCoin})
+          service.getUnitBalanceByPair({symbol: this.selectCoin}),
+          service.getMixBalanceByPair({symbol: this.selectCoin})
         ]);
 
         //console.log({tradingBalance, contractBalance, otcBalance})
@@ -331,10 +344,12 @@
         }
         if (walletBalance) {
           this.walletBalance = walletBalance.data
-        }
-        
+        } 
         if (unitBalance) {
           this.unitBalance = unitBalance.data
+        }
+        if (mixBalance) {
+          this.mixBalance = mixBalance.data
         }
         //this.updateAvailable()
       },
@@ -365,7 +380,8 @@
                 2 : this.$t("trading_account"),
                 3 : this.$t("contract_account"),
                 4 : this.$t("otc_account"),
-                5 : this.$t('unit_account')
+                5 : this.$t('unit_account'),
+                7 : this.$t('gold_account'), 
               }
 
               this.tableData[i].from_balance = balanceList[this.tableData[i].from_balance]
@@ -398,6 +414,9 @@
           }, {
             value: 4,
             label: 'otc_account'
+          }, {
+            value: 7,
+            label: 'gold_account'
           }]
         } else if(val === 'BTC') {
           this.accountTypes = [{

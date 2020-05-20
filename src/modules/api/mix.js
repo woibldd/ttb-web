@@ -5,6 +5,29 @@ export default {
   getContractMixBalanceList () {
     return getCache('contractMixBalance', () => request('mix/account/balance/list'), 1e3)
   }, 
+  async getMixBalanceByPair (symbol) { 
+    if (!symbol || !symbol.symbol) {
+      symbol = {
+        symbol: 'USDT'
+      }
+    } 
+    let result = await this.getContractMixBalanceList() 
+    if (!result.code) {
+      console.log({data: result.data})
+      let list = result.data
+      let balance = list ? list.filter(l => symbol.symbol === l.currency)[0] || {} : {
+        available: '0',
+        holding: '0',
+        available_balance: '0',
+        leverage: 100
+      }
+      return {
+        code: 0,
+        data: balance
+      }
+    }
+    return null
+  },  
   async getMixContractSymList () { 
     const res = await getCache('mixPairList', () => request('mix/symbol/list'), 5e3)
     if (res && res.data && !res.data.items) {

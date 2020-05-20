@@ -521,3 +521,9 @@ export const getUnitLiqPrice = ({ isBuy, leverages, amount, price, available_bal
     
   }
 }
+
+
+// 委托价值 = 委托价格 * 单张合约价值 * 合约张数 / 相对应结算货币汇率
+export const calcMixValue = (price, multiplier, amount, rate) => {
+  return Big(price).times(multiplier).times(amount).div(rate)
+}
