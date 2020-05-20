@@ -452,7 +452,7 @@ export const getUnitLiqPrice = ({ isBuy, leverages, amount, price, available_bal
   // 现有委托 和当前下单委托的 方向相同
   if ((Big(amount).gte(0) && Big(totalAmount).gte(0)) || (Big(amount).lte(0) && Big(totalAmount).lte(0))) {
     totalAmount = Big(totalAmount || 0).plus(amount)
-    totalValue = Big(totalValue || 0).plus(entrustValue).abs()
+    // totalValue = Big(totalValue || 0).plus(entrustValue).abs()
   } else { // 现有委托 和当前下单委托的 方向相反
     totalAmount = Big(totalAmount || 0).plus(amount)
     totalValue = calcValueByAmountAndPrice(totalAmount, price, multiplier).abs()
