@@ -123,7 +123,7 @@ export default {
     } 
     utils.$tvSocket.socket.send(`{"op":"subscribepub","args":${lastPair}}`)
     utils.$tvSocket.$on('message', (data) => {
-      if (data.topic && data.topic.indexOf('history')===0) {
+      if (data.topic && data.topic.indexOf('history')===0 && data.topic.indexOf(symbolInfo.ticker) > 0) {
         data = data.data[0]
         if (!data.time || data.time < lastTime) {
           return utils.log('Wrong realtime')

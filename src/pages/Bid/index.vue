@@ -99,7 +99,7 @@ export default {
     return {
       params: {
         start: 1,
-        pageSize: 8
+        pageSize: 9
       },
       list: [],
       total: 0,

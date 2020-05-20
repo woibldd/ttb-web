@@ -115,30 +115,13 @@ export default {
     if (!symbolInfo || !resolution) return
     const period = getPeriod(resolution) 
     lastPair = `["history@${symbolInfo.ticker}@${period}"]`  
-    // if (!utils.$tvSocket) {
-    //   utils.$tvSocket = await wsNew.create()
-    //   utils.$tvSocket.$on('open', () => {
-    //     that.socket.heartCheck.start() // 发送一次心跳  
-    //     utils.$tvSocket.socket.send(`{"op":"subscribepub","args":${lastPair}}`)  
-    //     utils.$tvSocket.$on('message', (data) => {
-    //       if (data.topic && data.topic.indexOf('history')===0) {
-    //         data = data.data[0]
-    //         if (!data.time || data.time < lastTime) {
-    //           return utils.log('Wrong realtime')
-    //         }
-    //         lastTime = data.time
-    //         onRealtimeCallback(toTick(data))
-    //       }
-    //     }) 
-    //   })
-    // } else { 
-    // }
+    
     while (utils.$tvSocket.socket.readyState !== 1) {
       await utils.sleep(3e3)
     }
     utils.$tvSocket.socket.send(`{"op":"subscribepub","args":${lastPair}}`)  
     utils.$tvSocket.$on('message', (data) => {
-      if (data.topic && data.topic.indexOf('history')===0) {
+      if (data.topic && data.topic.indexOf('history')===0 && data.topic.indexOf(symbolInfo.ticker) > 0) {
         data = data.data[0]
         if (!data.time || data.time < lastTime) {
           return utils.log('Wrong realtime')
@@ -147,8 +130,7 @@ export default {
         onRealtimeCallback(toTick(data))
       }
     }) 
-     
-
+      
     
     utils.$tvSocket.$on('reopen', () => {
       this.subscribeBars(symbolInfo, resolution, onRealtimeCallback)

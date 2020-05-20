@@ -952,8 +952,11 @@ export default {
       }
     },
     totalValue () {
-      if (!this.activeAcountAndPriceArr[0] || !this.entrustList) return
-      return getUnitTotalValue(this.entrustList,
+      console.log('totalValue')
+      if (!this.activeAcountAndPriceArr[0] || !this.balanceList) return
+      
+      // return getUnitTotalValue(this.entrustList,
+      return getUnitTotalValue(this.balanceList,
         {
           amount: this.activeAcountAndPriceArr[0],
           price: this.activeAcountAndPriceArr[1] || this.activeProduct.UNIT.current        },
@@ -1033,12 +1036,14 @@ export default {
       this.$refs['popover-buy'][0].showPopper = false
       this.$refs['popover-sell'][0].showPopper = false
     },
-    handlePopoverClick (side) {
+    handlePopoverClick (side) { 
       this.side = side === 'buy' ? 1 : 2
+      this.activeAcountAndPriceArr[1] = this.activeAcountAndPriceArr[1] || (this.activeProduct.UNIT||{}).current
       !this.popoverDisabled && (this.$root.modelVisible = true) || this.submitOrder()
     },
     handleEntrustList () {
       this.entrustList = null
+      console.log('handleEntrustList')
       this.mapHandlers.curEntrust({ size: 20 }).then(res => {
         if (!res.code) {
           this.entrustList = res.data.data.map(item => {
@@ -1146,9 +1151,9 @@ export default {
       return +bigDiv([amount, max]) * 100 + '%'
     },
     handleAmountObj () { 
-      utils.log('handleAmountObj 1111')
+      // utils.log('handleAmountObj 1111')
       if (!this.state.userInfo) return
-      utils.log('handleAmountObj 2222')
+      // utils.log('handleAmountObj 2222')
       clearTimeout(this._timer)
       return new Promise(resolve => {
         this._timer = setTimeout(async () => {
