@@ -493,10 +493,10 @@ export const getUnitLiqPrice = ({ isBuy, leverages, amount, price, available_bal
     const available = Big(available_balance).minus(cost)
     // console.log(`可用余额available：${available}`)
     // 强平价格计算=（乘数X合约张数）/【开仓价值+（开仓保证金-维持保证金）】
-    // console.log({multiplier, totalAmount: totalAmount.toString(), totalValue: totalValue.toString(), margin: margin.toString(), MM: MM.toString()})
+    console.log({multiplier, totalAmount: totalAmount.toString(), totalValue: totalValue.toString(), margin: margin.toString(), MM: MM.toString()})
     const lipPrice = Big(multiplier).times(totalAmount.abs()).div(Big(totalValue).plus(margin).minus(MM))
-    // console.log(`强平价格lipPrice：${lipPrice}`)
-    return lipPrice
+    console.log(`强平价格lipPrice：${lipPrice}`)
+    return lipPrice.lt(0) ? '1000000' : lipPrice
   } else {
     // 全仓Hp*VoL/[Vol+(可用余额+IM-MM)*Hp*（1-R）]
     // const tem = (Big(available_balance).minus(margin).plus(IM).minus(MM)).mul(price).mul(1 - +take_rate)
@@ -514,10 +514,10 @@ export const getUnitLiqPrice = ({ isBuy, leverages, amount, price, available_bal
     // 强平价格=（乘数X合约张数）/【开仓价值-（开仓保证金-维持保证金）-账户余额】
     // console.log({multiplier, amount: totalAmount.toString(), price, margin: margin.toString(), MM: MM.toString(), available:available.toString()})
     const lipPrice = Big(multiplier).times(totalAmount.abs()).div((Big(totalValue)[isBuy ? 'plus' : 'minus'](margin.minus(MM)))[isBuy ? 'plus' : 'minus'](available))
-    // console.log(`Big(${multiplier}).times(${totalAmount.abs()}).div((Big(${totalValue.toString()})${[isBuy ? 'plus' : 'minus']}(${margin.toString()}.minus(${MM.toString()})))${[isBuy ? 'plus' : 'minus']}(${available.toString()}))`)
-    // console.log(`强平价格lipPrice：${lipPrice}`)
+    console.log(`Big(${multiplier}).times(${totalAmount.abs()}).div((Big(${totalValue.toString()})${[isBuy ? 'plus' : 'minus']}(${margin.toString()}.minus(${MM.toString()})))${[isBuy ? 'plus' : 'minus']}(${available.toString()}))`)
+    console.log(`强平价格lipPrice：${lipPrice}`)
     // console.log(`--------------------------------------------------------------------------------------------`)
-    return lipPrice
+    return  lipPrice.lt(0) ? '1000000' : lipPrice
     
   }
 }
