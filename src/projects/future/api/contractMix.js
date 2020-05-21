@@ -1,5 +1,6 @@
 
-import {fetch, fetchQuota} from '@/modules/service'
+// import {fetch, fetchQuota} from '@/modules/service'
+import {fetch, fetchQuota, getCache} from '@/modules/api/api-base'
 
 import config from '@/libs/config'
 const proxy_q = config.quoteUrl
@@ -37,11 +38,19 @@ export const getFeeRateHistory = query => request({
 })
 
 // 用户余额(持仓) POST /mix/account/balance/list
-export const getBalanceList = query => request({
-  url: '/mix/account/balance/list',
-  method: 'post',
-  params: query
-})
+
+export const getBalanceList = (query) => {
+  return getCache('mix-balance-list', () => request({
+    url: `/mix/account/balance/list`,
+    method: 'post',
+    params: query
+  }), 1e3)
+}
+// export const getBalanceList = query => request({
+//   url: '/mix/account/balance/list',
+//   method: 'post',
+//   params: query
+// })
 
 // 设置杠杆倍数 POST /mix/account/leverage
 export const setLeverage = query => request({
@@ -100,11 +109,19 @@ export const closeOrder = query => request({
 })
 
 // 当前仓位,委托,止损委托,委托历史,已成交的数量 POST /mix/account/holding/amount
-export const getAllAmount = query => request({
-  url: '/mix/account/holding/amount',
-  method: 'post',
-  params: query
-})
+// export const getAllAmount = query => request({
+//   url: '/mix/account/holding/amount',
+//   method: 'post',
+//   params: query
+// }) 
+export const getAllAmount = (query) => {
+  return getCache('mix-all-amount', () => request({
+    url: '/mix/account/holding/amount',
+    method: 'post',
+    params: query
+  }), 1e3)
+}
+
 // 已平仓位 POST /mix/closedposition
 export const getClosedpositionList = query => request({
   url: '/mix/closedposition',
@@ -113,11 +130,18 @@ export const getClosedpositionList = query => request({
 })
 
 // 当前委托 POST /mix/activeorders
-export const getActiveOrders = query => request({
-  url: '/mix/activeorders',
-  method: 'post',
-  params: query
-})
+// export const getActiveOrders = query => request({
+//   url: '/mix/activeorders',
+//   method: 'post',
+//   params: query
+// })
+export const getActiveOrders = (query) => {
+  return getCache('mix-active-orders', () => request({
+    url: `/mix/activeorders`,
+    method: 'post',
+    params: query
+  }), 1e3)
+}
 
 // 止损委托 POST /mix/activetriggers
 export const getActiveTriggers = query => request({

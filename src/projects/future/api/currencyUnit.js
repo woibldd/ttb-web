@@ -1,6 +1,7 @@
 
 // import request from '../utils/request'
-import {fetch, fetchQuota} from '@/modules/service'
+// import {fetch, fetchQuota} from '@/modules/service'
+import {fetch, fetchQuota, getCache} from '@/modules/api/api-base'
 
 import config from '@/libs/config'
 const proxy_q = config.quoteUrl
@@ -81,11 +82,19 @@ export const getSymbolList = data => request({
   params: data
 })
 // 用户余额(持仓) POST /unit/account/balance/list
-export const getBalanceList = data => request({
-  url: `/unit/account/balance/list`,
-  method: 'post',
-  params: data
-})
+export const getBalanceList = (query) => {
+  return getCache('unit-balance-list', () => request({
+    url: `/unit/account/balance/list`,
+    method: 'post',
+    params: query
+  }), 1e3)
+}
+// export const getBalanceList = (query) => request({
+//   url: `/unit/account/balance/list`,
+//   method: 'post',
+//   params: query
+// }) 
+
 // 已平仓位 POST /unit/closedposition
 export const getClosedpositionList = data => request({
   url: `/unit/closedposition`,
@@ -93,11 +102,13 @@ export const getClosedpositionList = data => request({
   params: data
 })
 // 当前委托 POST /unit/activeorders 参数user_id page size
-export const getActiveorders = data => request({
-  url: `/unit/activeorders`,
-  method: 'post',
-  params: data
-})
+export const getActiveorders = (query) =>  { 
+  return getCache('unit-active-orders', () => request({
+    url: `/unit/activeorders`,
+    method: 'post',
+    params: query
+  }), 1e3)
+}
 // 止损委托 POST /unit/activetriggers 参数user_id page size
 export const getActivetriggers = data => request({
   url: `/unit/activetriggers`,
@@ -149,11 +160,18 @@ export const submitOrder = data => request({
 })
 
 // 当前仓位,委托,止损委托,委托历史,已成交数量 POST /unit/account/holding/amount
-export const getAllAmount = data => request({
-  url: `/unit/account/holding/amount`,
-  method: 'post',
-  params: data
-})
+// export const getAllAmount = data => request({
+//   url: `/unit/account/holding/amount`,
+//   method: 'post',
+//   params: data
+// }) 
+export const getAllAmount = (query) => { 
+  return getCache('unit-all-amount', () => request({
+    url: '/unit/account/holding/amount',
+    method: 'post',
+    params: query
+  }), 1e3)
+}
 // 撤单 POST /unit/remove
 /*
 user_id
