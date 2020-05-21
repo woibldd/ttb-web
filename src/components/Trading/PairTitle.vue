@@ -300,7 +300,8 @@ export default {
 <style lang="scss" scoped>
 .grid-title {
   // height: 56px;
-  line-height: 30px;
+  padding: 5px 0;
+  line-height: 25px;
   //overflow-y: hidden;
   box-sizing: border-box;
   padding-left: 20px;

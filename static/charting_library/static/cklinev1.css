@@ -263,9 +263,9 @@ body {
 } */  
 
 
-.header-chart-panel .space-single:not(:first-child) .button {
+/* .header-chart-panel .space-single:not(:first-child) .button {
   padding: 6px 2px;
-}
+} */
 .header-chart-panel .space-single:not(:first-child) .button:hover {
   color: #01CED1;
   opacity: 0.8;
@@ -392,4 +392,20 @@ li:hover {
 
 .charts-popup-d.selected .drowdownlist:after { 
   transform: rotate(180deg);
+}
+
+.header-chart-panel .button {
+  padding: 0 3px;
+}
+.header-chart-panel .button.fullscreen {
+  padding: 2px 3px;
+}
+
+.header-chart-panel .space-single:not(:first-child) .button.cycle {
+  padding: 0;
+}
+.header-chart-panel .group {
+  height: 25px;
+  line-height: 25px;
+  vertical-align: middle;
 }
