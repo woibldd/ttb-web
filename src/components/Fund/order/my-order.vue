@@ -2,11 +2,9 @@
   <div class="my-order-container">
     <div class="page-content">
       <div class="orders-title">{{ $t('my_orders') }}</div>
-      <div class="orders-filter">
-        filter
+      <div class="orders-filter"> 
       </div>
-      <div class="orders-list-wrapper">
-        dfg
+      <div class="orders-list-wrapper"> 
       </div>
     </div>
   </div>

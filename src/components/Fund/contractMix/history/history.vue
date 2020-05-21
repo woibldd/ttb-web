@@ -1,12 +1,6 @@
 <template>
   <div class="contract-history-container my-fund-content pt-40 f14">
-    <div class="filter-list mb-39">
-      <!-- <div
-        class="filter-item c-primary"
-        :class="[tabName==='active' && 'select']"
-        @click="filter('active')">
-        {{ $t('order_active') }}
-      </div> -->
+    <div class="filter-list mb-39"> 
       <div
         class="filter-item c-primary"
         :class="[tabName==='history' && 'select']"
@@ -18,23 +12,79 @@
         :class="[tabName==='executed' && 'select']"
         @click="filter('executed')">
         {{ $t('order_history') }}
-      </div>
-      <!-- <div class="currency-row">
-        <div class="c-999 mr-13">
-          {{ $t('pair') }}
-        </div>
+      </div> 
+      
+    </div>
+    <!-- <el-row :gutter="20"> 
+      <el-col :span="4">
         <el-select
+          id="contractType"
           class="opetion"
-          v-model="selectPair"
+          v-model="myfilter.symbol"
+          @change="pairChange"
+          placeholder="请选择"
+          size="mini"
           value-key="currency">
+          <el-option label="全部" value="" />
           <el-option
             v-for="(item, idx) in pairList"
             :key="idx"
-            :label="item.name | pairfix"
-            :value="item"/>
+            :label="item.name"
+            :value="item.symbol"/>
         </el-select>
-      </div> -->
-    </div>
+      </el-col> 
+      <el-col :span="4"> 
+        <el-select
+          class="opetion"
+          v-model="myfilter.side" 
+          size="mini"
+          @change="pairChange"
+          value-key="currency"> 
+          <el-option v-for="item in dict.side"
+            :key="item.value"
+            :label="item.text" 
+            :value="item.value"/> 
+        </el-select>
+      </el-col> 
+      <el-col :span="4"> 
+        <el-select
+          v-if="tabName === 'executed'"
+          class="opetion"
+          v-model="myfilter.state"  
+          @change="pairChange"
+          size="mini"
+          value-key="currency">
+          <el-option v-for="item in dict.state"
+            :key="item.value"
+            :label="item.text" 
+            :value="item.value"/> 
+        </el-select> 
+        <el-select
+          v-else
+          class="opetion"
+          v-model="myfilter.state"  
+          @change="pairChange"
+          size="mini"
+          value-key="currency">
+          <el-option v-for="item in dict.trade_state"
+            :key="item.value"
+            :label="item.text" 
+            :value="item.value"/> 
+        </el-select>
+      </el-col>
+      <el-col :span="8">
+        <el-date-picker
+          v-model="myfilter.daterange"
+          @change="pairChange"
+          size="mini"
+          type="daterange"
+          value-format="timestamp"
+          range-separator="-"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期">
+        </el-date-picker>
+      </el-col> 
+    </el-row> -->
     <div
       class="table-wrapper"
       v-loading="isLoading">
@@ -246,8 +296,37 @@ export default {
       size: 10,
       isLoading: true,
       totalItems: 0,
-      selectPair: 'BTCUSD',
-      state
+      selectPair: 'EOSUSD',
+      state,
+      myfilter: {
+        pair: '',
+        side: 0,
+        state: 0,
+        daterange: '',  
+      },
+      dict: {
+        side: [ 
+          { value:0, text:'全部'}, 
+          { value:1, text:'买入'}, 
+          { value:2, text:'卖出'}, 
+        ],
+        state: [
+           { value:0, text:'全部'}, 
+           { value:3, text:'全部成交'}, 
+           { value:4, text:'未成交撤单'}, 
+           { value:5, text:'部分成交撤单'},
+           { value:6, text:'未成交系统取消'}, 
+           { value:7, text:'部分成交系统取消'}, 
+           { value:8, text:'隐藏已撤销'}
+        ],
+        trade_state: [ 
+           { value:0, text:'全部'}, 
+           { value:1, text:'成交单'}, 
+           { value:2, text:'强平单'}, 
+           { value:3, text:'资金费率'},
+        ]
+
+      }
     }
   },
   computed: {
@@ -285,15 +364,24 @@ export default {
       return item.total
     },
     async getPairs () {
-      let res = await service.getPairList()
+      let res = await service.getMixContractSymList()
       if (!res.code) {
         this.pairList = res.data.items
-        this.selectPair = this.pairList[0]
+        // this.selectPair = this.pairList[0]
+        this.myfilter.symbol = this.pairList[0].symbol
       }
     },
     getData () {
+      // const params = {
+      //   symbol: this.selectPair,
+      //   page: this.page,
+      //   size: this.size
+      // }
       const params = {
-        symbol: this.selectPair,
+        currency: this.myfilter.symbol, 
+        begin_time: this.myfilter.daterange[0],
+        end_time: this.myfilter.daterange[1],
+        side: this.myfilter.side,
         page: this.page,
         size: this.size
       }
@@ -309,8 +397,7 @@ export default {
     filter (type) {
       this.tabName = type
       this.page = 1
-      const params = {
-        currency: this.selectPair,
+      const params = { 
         page: this.page,
         size: this.size
       }
@@ -326,14 +413,13 @@ export default {
       this.page = 1
     },
     // 订单历史
-    getOrderhistory () {
+    getOrderhistory (params) {
       this.isLoading = true
-      const params = {
-        page: this.page,
-        size: this.size
-      }
-      service.getMixOrderhistory(params).then(res => {
-        console.log(res.data.data, '订单历史')
+      // const params = {
+      //   page: this.page,
+      //   size: this.size
+      // }
+      service.getMixOrderhistory(params).then(res => { 
         this.tableData = res.data.data
         this.totalItems = res.data.total
         // console.log(this.tableData, 'assign')
@@ -342,19 +428,22 @@ export default {
       })
     },
     // 已成交
-    getContractTradeHistory () {
+    getContractTradeHistory (params) {
       this.isLoading = true
-      const params = {
-        page: this.page,
-        size: 10
-      }
+      // const params = {
+      //   page: this.page,
+      //   size: 10
+      // }
       service.getMixTradeHistory(params).then(res => {
         this.tableData = res.data.data
         this.totalItems = res.data.total 
       }).finally(res => {
         this.isLoading = false
       })
-    }
+    },
+    pairChange() { 
+      this.getData()
+    },
   },
   created () {
     this.getPairs()
@@ -382,6 +471,8 @@ export default {
 .table__td {
   white-space: nowrap;
 }
+
+
 .history__footer {
         width: 100%;
         border-top: 1px solid #CCCCCC;

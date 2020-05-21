@@ -37,10 +37,7 @@
         <h1> <icon :name="unit.name+'-unit'" /> {{ total | fixed(unit.scale) }}</h1>
       </div>
       <div class="account-row">
-        <div class="row__box pl-6">
-          <!-- <div
-            id="contract-summary-chart"
-            class="chart-dom"/> -->
+        <div class="row__box pl-6"> 
           <div v-if="false">
             <div class="currency-row">
               <div class="row__label">{{ $t('account') }}</div>
@@ -56,34 +53,14 @@
                     :value="item"/>
                 </el-select>
               </div>
-            </div>
-            <!-- <div class="chart-note c-666 f12">
-              <p>
-                <span class="money-spot red"/>
-                {{ $t('warehouse_margin') }}
-              </p>
-              <p>
-                <span class="money-spot yellow"/>
-                {{ $t('entrust_margin') }}
-              </p>
-              <p>
-                <span class="money-spot blue"/>
-                {{ $t('margin_balance') }}
-              </p>
-            </div> -->
+            </div> 
           </div>
         </div>
         <div class="row__box">
           <div class="currency-row">
             <div class="row__label"/>
             <div class="row__value"/>
-          </div>
-          <!-- 资金划转 -->
-          <!-- <div
-            class="account-exchange c-primary"
-            @click="exchange">
-            {{ $t('account_exchange') }}
-          </div> -->
+          </div> 
         </div>
       </div>
       <!-- 表格部分 -->

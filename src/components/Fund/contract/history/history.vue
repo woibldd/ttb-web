@@ -12,93 +12,79 @@
         :class="[tabName==='executed' && 'select']"
         @click="filter('executed')">
         {{ $t('order_history') }}
-      </div> 
-      <!-- <div class="currency-row" >
-        <div class="c-999 mr-13">
-          {{ $t('contract') }}
-        </div>
-        <el-select
-          class="opetion"
-          v-model="selectPair"
-          @change="pairChange"
-          value-key="currency">
-          <el-option
-            v-for="(item, idx) in pairList"
-            :key="idx"
-            :label="item.product_name +'/'+ item.currency_name"
-            :value="item.currency"/>
-        </el-select>
-      </div> -->
+      </div>  
     </div> 
-    <el-row :gutter="20"> 
-      <el-col :span="4">
-        <el-select
-          id="contractType"
-          class="opetion"
-          v-model="myfilter.symbol"
-          @change="pairChange"
-          placeholder="请选择"
-          size="mini"
-          value-key="currency">
-          <el-option
-            v-for="(item, idx) in pairList"
-            :key="idx"
-            :label="item.product_name +'/'+ item.currency_name"
-            :value="item.currency"/>
-        </el-select>
-      </el-col> 
-      <el-col :span="4"> 
-        <el-select
-          class="opetion"
-          v-model="myfilter.side" 
-          size="mini"
-          @change="pairChange"
-          value-key="currency"> 
-          <el-option v-for="item in dict.side"
-            :key="item.value"
-            :label="item.text" 
-            :value="item.value"/> 
-        </el-select>
-      </el-col> 
-      <el-col :span="4"> 
-        <el-select
-          v-if="tabName === 'executed'"
-          class="opetion"
-          v-model="myfilter.state"  
-          @change="pairChange"
-          size="mini"
-          value-key="currency">
-          <el-option v-for="item in dict.state"
-            :key="item.value"
-            :label="item.text" 
-            :value="item.value"/> 
-        </el-select> 
-        <el-select
-          v-else
-          class="opetion"
-          v-model="myfilter.state"  
-          @change="pairChange"
-          size="mini"
-          value-key="currency">
-          <el-option v-for="item in dict.trade_state"
-            :key="item.value"
-            :label="item.text" 
-            :value="item.value"/> 
-        </el-select>
-      </el-col>
-      <el-col :span="8">
-        <el-date-picker
-          v-model="myfilter.daterange"
-          @change="pairChange"
-          size="mini"
-          type="daterange"
-          value-format="timestamp"
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期">
-        </el-date-picker>
-      </el-col> 
-    </el-row>
+    <div>
+      <el-row :gutter="20"> 
+        <el-col :span="4">
+          <el-select
+            id="contractType"
+            class="opetion"
+            v-model="myfilter.symbol"
+            @change="pairChange"
+            placeholder="请选择"
+            size="mini"
+            value-key="currency">
+            <el-option
+              v-for="(item, idx) in pairList"
+              :key="idx"
+              :label="item.product_name +'/'+ item.currency_name"
+              :value="item.currency"/>
+          </el-select>
+        </el-col> 
+        <!-- <el-col :span="4"> 
+          <el-select
+            class="opetion"
+            v-model="myfilter.side" 
+            size="mini"
+            @change="pairChange"
+            value-key="currency"> 
+            <el-option v-for="item in dict.side"
+              :key="item.value"
+              :label="item.text" 
+              :value="item.value"/> 
+          </el-select>
+        </el-col> 
+        <el-col :span="4"> 
+          <el-select
+            v-if="tabName === 'executed'"
+            class="opetion"
+            v-model="myfilter.state"  
+            @change="pairChange"
+            size="mini"
+            value-key="currency">
+            <el-option v-for="item in dict.state"
+              :key="item.value"
+              :label="item.text" 
+              :value="item.value"/> 
+          </el-select> 
+          <el-select
+            v-else
+            class="opetion"
+            v-model="myfilter.state"  
+            @change="pairChange"
+            size="mini"
+            value-key="currency">
+            <el-option v-for="item in dict.trade_state"
+              :key="item.value"
+              :label="item.text" 
+              :value="item.value"/> 
+          </el-select>
+        </el-col>
+        <el-col :span="8">
+          <el-date-picker
+            v-model="myfilter.daterange"
+            @change="pairChange"
+            size="mini"
+            type="daterange"
+            value-format="timestamp"
+            range-separator="-"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期">
+          </el-date-picker>
+        </el-col>  -->
+      </el-row> 
+    </div>
     <div
       class="table-wrapper"
       v-loading="isLoading">

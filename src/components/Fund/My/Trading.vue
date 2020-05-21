@@ -1,22 +1,4 @@
-<!--<template>-->
-<!--<div class="fund-container my-fund-container">-->
-<!--<div class="title-box">-->
-<!--<div>{{ $t('trading') }}</div>-->
-<!--</div>-->
-<!--<div class="gz-wrapper clearfix">-->
-<!--<span>法币资产估值</span>-->
-<!--<h1>¥ 0.00000000</h1>-->
-<!--</div>-->
-<!--</div>-->
-<!--</template>-->
-
-<!--<script type="text/ecmascript-6">-->
-<!--export default {}-->
-<!--</script>-->
-
-<!--<style lang="scss" rel="stylesheet/scss" scoped>-->
-
-<!--</style>-->
+ 
 <template>
   <div class="fund-container my-fund-container">
     <div class="title-box">
@@ -35,15 +17,8 @@
           </el-select> 
         </span> 
       </div>
-      <div class="title__right">
-         <!-- <router-link 
-          :to="'/myorder-new/pairs'"
-          class="fund-history">{{ $t('fund_trading_bill') }}</router-link> -->
-
-          
+      <div class="title__right"> 
           <a class="fund-history" v-for="(name,index) in ['trading_account','fund_trading_bill','play-record']" :key="index" @click="handleTitleRightTab(name)" :class="{active:activeTab === name}" style="margin-left:15px">{{ $t(name) }}</a>
-          <!-- <a class="fund-history" :class="{active:activeTab === 'fund_trading_bill'}" style="margin-right:15px">{{ $t('fund_trading_bill') }}</a>
-          <a class="fund-history" :class="{active:activeTab === 'play-record'}">{{ $t('play-record') }}</a> -->
       </div>
     </div>
     <div class="clearfix"> 
@@ -51,12 +26,7 @@
         <span>{{$t('otc_otutcol_14')}}</span>
         <h1>
           <icon :name="unit.name+'-unit'" /> {{total | fixed(unit.scale)}}</h1> 
-      </div>
-      <!-- <div class="bill">
-        <router-link 
-          :to="'/myorder-new/pairs'"
-          class="my-fund-operate">{{ $t('fund_trading_bill') }}</router-link>
-      </div> -->
+      </div> 
     </div> 
     <div>
         <div class="pairs-search"  v-if="activeTab === 'trading_account'">
@@ -75,6 +45,26 @@
             </el-tooltip>
           </div>
         </div> 
+        <!-- <div class="filter" v-else>
+          <el-row :gutter="20">
+              <el-col :span="4">
+                <div
+                  class="filter-item c-primary"
+                  :class="[tabName==='history' && 'select']"
+                  @click="filter('history')">
+                  {{ $t('contract_trade_his') }}
+                </div> 
+              </el-col>
+              <el-col :span="4">
+                <div
+                  class="filter-item c-primary"
+                  :class="[tabName==='executed' && 'select']"
+                  @click="filter('executed')">
+                  {{ $t('order_history') }}
+                </div> 
+              </el-col>
+          </el-row>
+        </div> -->
       </div>
     <div  v-if="activeTab === 'trading_account'" class="my-fund-content">  
       <el-table :empty-text=" $t('no_data') " :data="showList" class="fund-coin-pool">
@@ -642,6 +632,21 @@
       border-color: #01CED1 !important;
     }
   }
+  
+    .filter-item { 
+        height:32px;
+        border-radius:6px;
+        line-height: 32px;
+        text-align: center;
+        cursor: pointer;
+        margin-right: 50px;
+        padding: 0 20px;
+        &.select {
+          background: $primary;
+          color: #fff;
+          box-shadow:0px 2px 6px 0px rgba(201,169,108,0.6);
+        }
+    }
   .gz-wrapper {
     width: 520px;
     height: 176px;
