@@ -2515,6 +2515,7 @@ export default {
       BTCUSDT: `BTCUSDT`, 
       BTCMUSDT: `BTCMUSDT`,
       ETHMUSDT: `ETHMUSDT`,
+      ETHUSDT: `ETHUSDT`,
     },
     mapTableTapContents: {
       shipping: {
