@@ -29,43 +29,23 @@
       </div> 
     </div> 
     <div>
-        <div class="pairs-search"  v-if="activeTab === 'trading_account'">
-          <div class="search-box">
-            <input
-              type="text" 
-              v-model="search">
-            <icon
-              class="ml-5"
-              name="home-search"/>
-          </div>
-          <div class="ml-20">
-            <el-tooltip :content="tipContent" placement="bottom">
-              <el-checkbox 
-                v-model="hideSmall">{{ $t('fund_my_assets_hide')}}</el-checkbox> 
-            </el-tooltip>
-          </div>
-        </div> 
-        <!-- <div class="filter" v-else>
-          <el-row :gutter="20">
-              <el-col :span="4">
-                <div
-                  class="filter-item c-primary"
-                  :class="[tabName==='history' && 'select']"
-                  @click="filter('history')">
-                  {{ $t('contract_trade_his') }}
-                </div> 
-              </el-col>
-              <el-col :span="4">
-                <div
-                  class="filter-item c-primary"
-                  :class="[tabName==='executed' && 'select']"
-                  @click="filter('executed')">
-                  {{ $t('order_history') }}
-                </div> 
-              </el-col>
-          </el-row>
-        </div> -->
-      </div>
+      <div class="pairs-search"  v-if="activeTab === 'trading_account'">
+        <div class="search-box">
+          <input
+            type="text" 
+            v-model="search">
+          <icon
+            class="ml-5"
+            name="home-search"/>
+        </div>
+        <div class="ml-20">
+          <el-tooltip :content="tipContent" placement="bottom">
+            <el-checkbox 
+              v-model="hideSmall">{{ $t('fund_my_assets_hide')}}</el-checkbox> 
+          </el-tooltip>
+        </div>
+      </div> 
+    </div>
     <div  v-if="activeTab === 'trading_account'" class="my-fund-content">  
       <el-table :empty-text=" $t('no_data') " :data="showList" class="fund-coin-pool">
         <el-table-column
@@ -305,7 +285,7 @@
         rates: {},
         pairList: [],
         hideSmall: false, 
-        activeTab:'trading_account'
+        activeTab:'trading_account',
       }
     },
     components: {
@@ -410,13 +390,12 @@
         }
       }
     },
-    async created () { 
-      
+    async created () {  
       if (state.locale === "zh-CN"){
-        this.unit = this.currencyList[0]
-      } else {
-        this.unit = this.currencyList[1]
-      }  
+        this.unit = this.currencyList[0]
+      } else {
+        this.unit = this.currencyList[1]
+      }  
       let res = await service.getAllRate() 
       if (!res.code && !!res.data) {
         this.rates = res.data;
@@ -631,22 +610,7 @@
       color: #01CED1 !important;
       border-color: #01CED1 !important;
     }
-  }
-  
-    .filter-item { 
-        height:32px;
-        border-radius:6px;
-        line-height: 32px;
-        text-align: center;
-        cursor: pointer;
-        margin-right: 50px;
-        padding: 0 20px;
-        &.select {
-          background: $primary;
-          color: #fff;
-          box-shadow:0px 2px 6px 0px rgba(201,169,108,0.6);
-        }
-    }
+  } 
   .gz-wrapper {
     width: 520px;
     height: 176px;

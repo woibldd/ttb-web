@@ -130,10 +130,7 @@
           class="box"
           flex>
           <div flex-box="1">
-            <span class="title">{{ $t('wallet_account') }}</span>
-            <!-- <a
-              class="about"
-              href="https://ixcustomer.zendesk.com/hc/zh-cn/articles/360029651052">{{ $t('wallet_accosaada') }}></a> -->
+            <span class="title">{{ $t('wallet_account') }}</span> 
             <div class="valuation">
               <p><b>{{ walletTotal | fixed(unit.scale || 2) }}</b> {{ unit.name }}</p>
             </div>
@@ -171,11 +168,7 @@
                   class="menu-name"
                   tag="a"
                   :to="'/fund/transfer'">
-                  <p>
-                    <!-- <img
-                      class="transfer"
-                      src="~@/assets/images/transfer.png"
-                      alt=""> -->
+                  <p> 
                     <icon
                       class="fund-iconfont"
                       name="transfer"/>
@@ -340,7 +333,7 @@ export default {
         {
           name: 'unit_account',
           color: '#6E69DE',
-          visible: false,
+          visible: true,
           dataList: this.unitContractTable,
           total: (data) => {
             let sum = big(0)
@@ -352,7 +345,7 @@ export default {
         {
           name: 'gold_account',
           color: '#3374CA',
-          visible: false,
+          visible: true,
           dataList: this.mixContractTable,
           total: (data) => {
             let sum = big(0)
@@ -364,63 +357,67 @@ export default {
       ]
     }
   },
-  methods: {
-    getAccountBalanceList () { 
-      service.getBalance().then(res => {
-        if(!res.code && !!res.data) {
-          this.tradingTable = (res.data || []).map(item => {  
-            // item.camount = this.$big(item.locking).plus(item.available).round(8, this.C.ROUND_DOWN).toString()
-            // item.estValue = this.getEstValue(item)  
-            item.locking = this.$big(item.locking || 0).plus(this.$big(item.ordering || 0).plus(this.$big(item.withdrawing || 0))).toString()
-            item.camount = this.$big(item.locking).plus(this.$big(item.available)).round(8, this.C.ROUND_DOWN).toString()
-            item.estValue = this.getEstValue(item)
-            item.available = this.$big(item.available).round(8, this.C.ROUND_DOWN).toString()
-            return item
-          })
-        }
-      })
-    },
-    getContractBalanceList () {
-       service.getContractBalanceList().then(res => {
-        if (!res.code && !!res.data) {
-            this.contractTable = (res.data || []).map(item => { 
-            item.currency = item.currency.replace("USD","")
+  methods: { 
+    async flushBalance() { 
+      const [wallet, otc, trading, future, unit, mix] = await Promise.all([
+        service.getAccountWalletList(),
+        service.getOtcBalance(),
+        service.getBalance(),
+        service.getContractBalanceList(),
+        service.getContractUnitBalanceList(),
+        service.getContractMixBalanceList()
+      ])
+ 
+      if (!wallet.code && !!wallet.data) { 
+        this.walletTable = (wallet.data || []).map(item => {  
+          item.camount = this.$big(item.available).plus(item.withdrawing).plus(item.locking)
+          item.estValue = this.getEstValue(item)
+          return item
+        }) 
+      }
+      if (!otc.code && !!otc.data) {
+        this.otcTable = (otc.data || []).map(item => {   
+          item.camount = this.$big(item.ordering).plus(this.$big(item.available)).toString()
+          item.estValue = this.getEstValue(item) 
+          return item 
+        })  
+      }
+      if (!trading.code && !!trading.data) {
+        this.tradingTable = (trading.data || []).map(item => {
+          item.locking = this.$big(item.locking || 0).plus(this.$big(item.ordering || 0).plus(this.$big(item.withdrawing || 0))).toString()
+          item.camount = this.$big(item.locking).plus(this.$big(item.available)).round(8, this.C.ROUND_DOWN).toString()
+          item.estValue = this.getEstValue(item)
+          item.available = this.$big(item.available).round(8, this.C.ROUND_DOWN).toString()
+          return item
+        })
+      }
+      if (!future.code && !!future.data) {
+        this.contractTable = (future.data || []).map(item => { 
+          item.currency = item.currency.replace("USD","")
+          item.camount = item.available
+          item.estValue = this.getEstValue(item)  
+          return item
+        })
+      }
+      if (!unit.code && !!unit.data) {
+        this.unitContractTable = (unit.data || []).map(item => {  
+          item.camount = item.available
+          item.estValue = this.getEstValue(item)  
+          return item
+        })
+      }
+      if (!mix.code && !!mix.data) {
+        const obj = {}
+        this.mixContractTable = [];
+        (mix.data || []).map(item => {
+          if (item.currency!=='MUSDT' && !obj[item.currency]) {
             item.camount = item.available
-            item.estValue = this.getEstValue(item) 
-            console.log({item})
-            return item
-          })
-        }
-      })
-    },
-    getOtcBalanceList () { 
-      service.getOtcBalance().then(res => {
-        if (!res.code && !!res.data) {
-          this.otcTable = (res.data || []).map(item => {   
-            item.camount = this.$big(item.ordering).plus(this.$big(item.available)).toString()
-            item.estValue = this.getEstValue(item) 
-            return item 
-          })  
-        }
-      })
-    },
-    getAccountWalletList() {
-      service.getAccountWalletList().then(res => {
-        if(!res.code && !!res.data) {
-          console.log({data:res.data})
-          this.walletTable = (res.data || []).map(item => {  
-            item.camount = this.$big(item.available).plus(item.withdrawing).plus(item.locking)
-            item.estValue = this.getEstValue(item)
-            return item
-          }) 
-        }
-      })
-    },
-    flushBalance() {
-      this.getAccountBalanceList()
-      this.getContractBalanceList()
-      this.getOtcBalanceList()  
-      this.getAccountWalletList()
+            item.estValue = this.getEstValue(item)  
+            obj[item.currency]=1
+            this.mixContractTable.push(item)
+          }
+        })
+      }
     },
     getEstValue (item) {
       let res = this.$big(0)
@@ -444,21 +441,8 @@ export default {
           res = this.$big(camount).times(this.$big(this.rates[currency][unit] || 0))
         }
       }
-      //let num = 8 
-      //return res.round(num, this.C.ROUND_DOWN).toString()
       return res
-    },
-    getContractEstValue (item) {
-      // console.log('asjdlfkjaskldfjasldjflasdjfl;ajsdfljkasdlfk')
-      let coin = item.currency.replace("USD","")
-      let rate = this.rates[coin]
-      if (!!rate) { 
-        let res = this.$big(item.available).times(this.$big(rate[this.unit.name] || 0))
-        let num = 8 
-        return res.round(num, this.C.ROUND_DOWN).toString()
-      } 
-      return '0';
-    },
+    }, 
     async getAllRate() {
       let res = await service.getAllRate() 
       if (!res.code && !!res.data) {
@@ -471,10 +455,10 @@ export default {
   },
   async created() { 
     if (state.locale === "zh-CN"){
-      this.unit = this.currencyList[0]
-    } else {
-      this.unit = this.currencyList[1]
-    } 
+      this.unit = this.currencyList[0]
+    } else {
+      this.unit = this.currencyList[1]
+    } 
     await this.getAllRate()
     this.flushBalance()
   }

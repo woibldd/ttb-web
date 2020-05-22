@@ -1102,7 +1102,7 @@ export default {
   order_ix_total_discount: "累计抵扣",
   trading_lever: "合约交易",
   activity_lock_share: "锁仓分红规则：",
-  contract_account: "合约账户",
+  contract_account: "BTC合约账户",
 
   account_balance: "账户余额",
   transaction_record: "交易记录",
@@ -1781,7 +1781,7 @@ export default {
   otc_trade: "法币交易",
   otc_tips: "添加微信请备注",
   trading_fees: "币币手续费",
-  contract_fees: "合约手续费",
+  contract_fees: "BTC合约手续费",
   contract_fadsaees: "划转",
   contract_fee_rate_current_tips: "<a>当前费率：</a><br/>当前时间段资金费率为%{feeRate}，该数值是正数，代表多仓需要支付给空仓，如果该数值是负数，代表空仓要付给多仓。",
   transfer_side: "划转方向",

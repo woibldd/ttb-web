@@ -1599,7 +1599,7 @@ export default {
   'legalTender': '法幣交易',
   'otc_tips': '添加微信請備註',
   'trading_fees': '幣幣手續費',
-  'contract_fees': '合約手續費',
+  'contract_fees': 'BTC 合約手續費',
   'contract_fee_rate_current_tips': '<a>當前費率:</a><br/>當前時間段資金費率為%{feeRate}，該數值是正數，代表多倉需要支付給空倉，如果該數值是負數，代表空倉要付給多倉。',
   'transfer_side': '劃轉方向',
   'transfer_amount': '劃轉數量',

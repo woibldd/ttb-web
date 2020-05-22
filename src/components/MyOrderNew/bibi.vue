@@ -2,22 +2,27 @@
   <div class="order--container">
     <div class="profile-container"
       v-loading="isLoading">
-      <div class="title-box">{{ $t('fund_trading_bill') }}</div>
-      <!-- <div class="row-select mt-24 mb-24">
-        <span>{{ $t('pair') }}</span>
-        <div class="row__value ml-9">
-          <el-select
-            v-model="selectPair"
-            value-key="name"
-            @change="changePairs">
-            <el-option
-              v-for="(item, idx) in pairList"
-              :key="idx"
-              :label="item.name | pairfix"
-              :value="item"/>
-          </el-select>
-        </div>
-      </div> -->
+      <!-- <div class="title-box">{{ $t('fund_trading_bill') }}</div>  --> 
+      <div class="filter">
+        <el-row :gutter="20">
+            <el-col :span="3">
+              <div
+                class="filter-item c-primary"
+                :class="[recordTab==='executed' && 'select']"
+                @click="filter('executed')">
+                {{ $t('contract_trade_his') }}
+              </div> 
+            </el-col>
+            <el-col :span="3">
+              <div
+                class="filter-item c-primary"
+                :class="[recordTab==='delegate' && 'select']"
+                @click="filter('delegate')">
+                {{ $t('order_history') }}
+              </div> 
+            </el-col>
+        </el-row>
+      </div>
       <div class="table-wrapper"
         v-scroll-load="loadMore">
         <table 
@@ -39,13 +44,11 @@
             :key="index">
             <td>{{ row.create_time }}</td>
             <td>{{ row.symbol | pairfix }}</td>
-            <td> <span v-html="processSide(row.side)"/></td>
+            <td><span v-html="processSide(row.side)"/></td>
             <td>{{ row.type == 1 ? $t('operate_limit') : $t('operate_market') }}</td>
-            <td>{{ row.fee | round(6) }} {{ row.side == 1 ? row.product : row.currency }}</td>
-            <!-- <td>{{row.discount}}</td> -->
+            <td>{{ row.fee | round(6) }} {{ row.side == 1 ? row.product : row.currency }}</td> 
             <td>{{ row.price }}</td>
-            <td>{{ row.amount | round(5) }}</td>
-          <!-- <td>{{row.}}</td> -->
+            <td>{{ row.amount | round(5) }}</td> 
           </tr>
         </table>
         <div
@@ -53,14 +56,7 @@
           v-if="!isLoading&& !tableData.length">
           {{ $t('order_empty') }}
         </div>
-      </div>
-      <!-- <div class="pages" style="text-align: center;padding-top: 20px;" v-if="tableData.length">
-        <el-pagination
-          background
-          @current-change="currentHandle"
-          layout="prev, pager, next"
-          :total="total" />
-      </div> -->
+      </div> 
     </div>
   </div>
 </template>
@@ -83,10 +79,15 @@ export default {
         page: 1,
         size: 10,
         symbol: ''
-      }
+      },
+      recordTab: 'executed'
     }
   },
   methods: {
+    filter (name) { 
+      this.recordTab = name
+      this.getList()
+    },
     changePairs (e) {
       this.filterList()
       this.params.symbol = e.name
@@ -122,21 +123,23 @@ export default {
         return item.symbol === this.selectPair.name
       })
     },
-    getList () {
-      // const params = {
-      //   page: 1,
-      //   size: 10,
-      //   symbol: this.selectPair.name
-      // }
+    getList () { 
       this.params.symbol = this.selectPair.name || ''
-      service.getBiBiOrders(this.params).then(res => {
-        this.originList = this.originList.concat([], res.data) // 暂时前端过滤,所以保留最初的全部数据 
-        this.tableData = this.tableData.concat([], res.data)
-      }).finally(() => {
-        setTimeout(() => {
-          this.isLoading = false
-        }, 500)
-      })
+      if (this.recordTab === 'executed') {
+        service.getBiBiOrders(this.params).then(res => {
+          this.originList = res.data
+          this.tableData = res.data
+        }).finally(() => {
+          setTimeout(() => {
+            this.isLoading = false
+          }, 500)
+        })
+      } else if (this.recordTab === 'delegate') {
+        service.orderHistory(this.params).then(res => {
+          this.originList = res.data
+          this.tableData = res.data
+        }) 
+      }
     },
     loadMore () { 
       if (this.tableData.length >= this.params.page * this.params.size) {
@@ -165,11 +168,23 @@ export default {
 <style lang="scss" scoped>
 .order--container {
     // padding-left: 60px;
-    float: left;
+    float: left; 
     .profile-container {
       width: 960px;
       position: relative;
-
+      .filter-item { 
+            height:32px;
+            border-radius:6px;
+            line-height: 32px;
+            text-align: center;
+            cursor: pointer; 
+            padding: 0 10px;
+            &.select {
+              background: $primary;
+              color: #fff;
+              box-shadow:0px 2px 6px 0px rgba(201,169,108,0.6);
+            }
+        }
       .title-box {
         width: 100%;
         height: 40px;
@@ -178,10 +193,10 @@ export default {
         color: $text-strong;
         border-bottom: 1px solid #e6e6e6;
         span{
-            color: #999;
-            font-size: 14px;
-            padding-left: 15px;
-            font-weight: lighter;
+          color: #999;
+          font-size: 14px;
+          padding-left: 15px;
+          font-weight: lighter;
         }
       }
     }

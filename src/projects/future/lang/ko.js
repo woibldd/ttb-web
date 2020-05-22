@@ -1610,7 +1610,7 @@ export default {
   'legalTender': '프랑스코인거래',
   'otc_tips': '위쳇추가할때 이름을 밝히세요',
   'trading_fees': '코인수수료',
-  'contract_fees': '계약수수료',
+  'contract_fees': 'BTC 계약수수료',
   'contract_fee_rate_current_tips': '<a>현재비률：</ a><br/>현재시간자금비률%{feeRate}，이 수치는 정수，대표로 빈 창고를 모두 팔아 치워야 한다，만약 이 수치가 부수이면，대표로 빈 창고를 모두 팔아치워야 한다。',
   'transfer_side': '전입방향을 바꾸다',
   'transfer_amount': '전입수량을 바꾸다',

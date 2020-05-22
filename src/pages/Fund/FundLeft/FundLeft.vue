@@ -120,7 +120,7 @@
         <dd>
           <router-link
             class="sub-menu-item"
-            to="/fund/my/contract">{{ $t('contract') }}
+            to="/fund/my/contract">{{ $t('contract_account') }}
           </router-link>
         </dd>
          <dd>

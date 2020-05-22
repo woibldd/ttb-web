@@ -255,8 +255,7 @@ export default {
     res = await service.getRates({currency: 'BTC'})  
     if (!!res && !res.code) {
       this.rates = res.data.BTC
-    }
-    console.log(this.rates)
+    } 
     this.getFundHistory() 
   }
 

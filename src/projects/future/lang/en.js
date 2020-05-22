@@ -1907,7 +1907,7 @@ export default {
   "otc_trade": "Fiat",
   "otc_tips": "Add WeChat Please note",
   "trading_fees": "Spot Trading",
-  "contract_fees": "Perpetual Contracts",
+  "contract_fees": "BTC Perpetual Contracts",
   "contract_fee_rate_current_tips": "<a>Current rate：</a><br/>Current  funding rate is % {feeRate}，When the Funding Rate is positive, longs pay shorts. When it is negative, shorts pay longs。",
   "transfer_side": " transfer direction",
   "transfer_amount": " transfer  amount",
