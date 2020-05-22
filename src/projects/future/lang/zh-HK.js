@@ -3151,6 +3151,9 @@ export default {
     'more': '更多',
     'tv_technical_indicators': '技术指标',
     'tv_style': '样式'
+  },
+  shareOption: { 
+    navText:"极速合约"
   }
 
 }

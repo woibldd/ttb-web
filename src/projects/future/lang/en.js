@@ -3933,6 +3933,9 @@ export default {
     "more" : "More",
     'tv_technical_indicators': 'Technical Indicator',
     'tv_style': 'Style'
-  } 
+  },
+  shareOption: { 
+    navText:"Speed Contract"
+  }
 
 }

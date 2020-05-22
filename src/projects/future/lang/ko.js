@@ -3190,6 +3190,9 @@ export default {
     "more" : "더 많은",
     'tv_technical_indicators': '技术指标',
     'tv_style': '样式'
+  },
+  shareOption: { 
+    navText:"전속계약"
   }
 
 }
