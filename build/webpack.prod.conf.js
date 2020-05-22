@@ -98,7 +98,7 @@ const webpackConfig = merge(baseWebpackConfig, {
           reduce_vars: true
         },  
         warnings: false, 
-        sourceMap: config.build.productionSourceMap,
+        sourceMap: false//config.build.productionSourceMap,
       }
     }),
     // extract css into its own file
