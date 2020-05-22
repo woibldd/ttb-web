@@ -130,115 +130,12 @@
               </div>
             </el-popover>
           </div>
-          <!-- <a
-            href="/bonus"
-            class="nav_link"
-            style="padding-left:30px;" >
-            {{ this.$t('gift.bonus') }}
-            <icon name="hot-red"/>
-          </a>-->
-          <!-- <router-link
-            v-if="isTestnet"
-            to="/snowball/bazaar"
-            class="nav_link  ml-30">{{ $t('bidTitle') }}
-          </router-link>
-          <a
-            v-if="isTestnet"
-            href="javascript:;"
-            class="nav_link"
-            style="padding-left:30px;"
-            @click="planHandle" >
-            {{ $t('plan') }}
-          </a>-->
-          <router-link
-            v-if="isTestnet"
+          
+          <router-link 
             to="/share_option"
             class="nav_link ml-30"
-          >{{ $t('shareOption.navText') }}</router-link>
-          <!-- <div class="nav_link arrow-down">
-            <a
-              :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"
-              target="_blank"
-              class="nav_link ml-30">{{ $t("whitepagger") }}
-              <icon
-                class="arrow ml-5"
-                name="arrow-down-w"/>
-            </a>
-            <div class="dropdown-sub-menu">
-              <ul class="dropdown-list pt-10 pb-10">
-                <li class="dropdown-item pl-24 pr-24">
-                  <a
-                    :href="'/docs/IXX+WhitePaper'+pdfSubfix+'.pdf'"
-                    target="_blank"
-                    class="link">{{ $t("whitepagger") }}</a>
-                </li>
-                <li class="dropdown-item pl-24 pr-24">
-                  <a
-                    :href="'/docs/The+Declaration+of+IXX'+pdfSubfix+'.pdf'"
-                    target="_blank"
-                    class="link">{{ $t("declaration") }}</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="nav_link arrow-down">
-            <router-link
-              :to="{name: 'LockWarehouse'}"
-              class="nav_link ml-30"
-              target="_blank">{{ $t('mining') }}<icon
-                class="arrow ml-5"
-                name="arrow-down-blue"/>
-            </router-link>
-            <div class="dropdown-sub-menu">
-              <ul class="dropdown-list pt-10 pb-10">
-                <li class="dropdown-item pl-24 pr-24">
-                  <router-link
-                    :to="{name: 'LockWarehouse'}"
-                    target="_blank"
-                    class="link">{{ $t("trading_mine") }}
-                  </router-link>
-                </li>
-                <li class="dropdown-item pl-24 pr-24">
-                  <router-link
-                    :to="{name: 'InviteMineActivity'}"
-                    target="_blank"
-                    class="link">{{ $t("invite_mine") }}</router-link>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="nav_link arrow-down">
-            <router-link
-              :to="{name: 'exchangeRank'}"
-              class="nav_link ml-30"
-              target="_blank">{{ $t('header_title_hot_activity') }}
-              <icon
-                class="arrow ml-5"
-                name="arrow-down-w"/>
-            </router-link>
-            <div class="dropdown-sub-menu">
-              <ul class="dropdown-list pt-10 pb-10">
-                <li class="dropdown-item pl-24 pr-24">
-                  <router-link
-                    :to="{name: 'lottery'}"
-                    target="_blank"
-                    class="link">{{ $t("header_title_activity_lottery") }}
-                    <icon name="hot-red"/>
-                  </router-link>
-                </li>
-                <li class="dropdown-item pl-24 pr-24">
-                  <router-link
-                    :to="{name: 'exchangeRank'}"
-                    target="_blank"
-                    class="link">{{ $t("header_title_activity_mine") }}
-                    <icon name="rank-leading"/>
-                  </router-link>
-                </li>
-              </ul>
-            </div>
-          </div>-->
+          >{{ $t('shareOption.navText') }} </router-link>
+          
         </div>
       </div>
       <div class="nav_right">

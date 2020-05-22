@@ -1,4 +1,6 @@
 // import { getFutureDictionaryList } from '@/api/contract'
+
+const pako = require('pako');
 export default {
   data() {
     return {
@@ -27,17 +29,30 @@ export default {
         const websocket = new WebSocket(wsurl)
         websocket.onopen = () => {
           websocket.send(`{"reqType": 2, "args":["${this.websocketArgs[1]}"]}`)
-          websocket.send(`{"reqType": 1, "args":${JSON.stringify(this.websocketArgs)}}`)
-          console.log(`${wsurl}连接成功`)
+          websocket.send(`{"reqType": 1, "args":${JSON.stringify(this.websocketArgs)}}`) 
         }
         websocket.onerror = () => console.log(`${wsurl}连接发生错误`)
         websocket.onclose = () => console.log(`${wsurl}链接关闭`)
-        this.websockets.push(websocket)
-        websocket.onmessage = e => {
-          let res = JSON.parse(e.data)
-          res = res.code === 0 ? res.data : res
-          resolve(websocket)
-          callBack(res)
+        this.websockets.push(websocket) 
+        websocket.onmessage = e => { 
+          var reader = new FileReader();
+          reader.addEventListener("loadend", function() {
+            let binData   = new Uint8Array(reader.result); 
+            let restored = ''
+            try {
+              restored = pako.ungzip( binData, { to: 'string' } ); 
+            } catch(err){
+              console.log("Error:"+err);
+            }
+            if (restored) {
+              console.log({restored})
+              let res = JSON.parse(restored)  
+              res = res.code === 0 ? res.data : res
+              resolve(websocket)
+              callBack(res)
+            }
+          })
+          reader.readAsArrayBuffer(e.data);
         }
       })
     },

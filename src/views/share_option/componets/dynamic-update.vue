@@ -47,7 +47,7 @@ export default {
   methods: {
     startWebSocket(){
       this.isLoading = true
-
+      console.log('startWebSocket')
       this.openWebSocket( config.wssUrl, res => {
       // this.openWebSocket('wss://wss.ixex.io/v1', res => {
         if (res.spotIndexDTOList) {
@@ -85,6 +85,10 @@ export default {
           const markElement = this.orderTimeElement.querySelector('.mask')
           const xData = this.chart.series[0].xData
           this.isLoading = xData[xData.length - 5] === resTime
+          // console.log('this.isLoading = xData[xData.length - 5] === resTime', xData[xData.length - 5] === resTime )
+          // if (xData[xData.length - 5] === resTime) {
+          //   console.log({data:xData[xData.length - 5], resTime, xData})
+          // }
           this.lastPoint = {
             x: resTime,
             y: price,
@@ -588,10 +592,12 @@ export default {
     initChartsByReqType(reqType) {
       // this.websocketArgs[0] = +reqType + 1
       this.isLoading = true
+      console.log('initChartsByReqType')
       this.websockets[0].send(`{"reqType": 1, "args":["${+reqType + 1}","${this.websocketArgs[1]}"]}`)
     },
     switchProduct(product) {
       this.isLoading = true
+      console.log('switchProduct')
       product[1] !== this.websocketArgs[1] && this.websockets[0].send(`{"reqType": 3, "args":["${this.websocketArgs[1]}"]}`)
       this.websocketArgs = product
       this.websockets[0].send(`{"reqType": 2, "args":["${this.websocketArgs[1]}"]}`)

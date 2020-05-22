@@ -97,8 +97,7 @@
                 </ul>
               </div>
             </el-popover>
-          </div>
-
+          </div> 
           <div class="nav_link arrow-down">
             <a href="/bonus" class="nav_link ml-30" v-popover:popover3>
               {{ this.$t('gift.bonus') }}
@@ -130,11 +129,10 @@
               </div>
             </el-popover>
           </div>
-          <!-- <router-link
-            v-if="isTestnet"
+          <router-link 
             to="/share_option"
             class="nav_link ml-30"
-          >{{ $t('shareOption.navText') }}</router-link> -->
+          >{{ $t('shareOption.navText') }}</router-link>
         </div>
       </div>
       <div class="nav_right">
