@@ -218,18 +218,19 @@ export default {
 
   },
   watch: {
-    pair: {
-      immediate: true,
-      async handler (pair) {
-        if (pair) {
-          this.clear()
-          this.sub()
-          // 切换币种前置纠正
-          this.isFristAdultScrolling = true
-          this.computedScrollPosition()
-        }
-      }
-    },
+    // pair: {
+    //   immediate: true,
+    //   async handler (pair) {
+    //     if (pair) {
+    //       console.log('computedScrollPosition')
+    //       this.clear()
+    //       this.sub()
+    //       // 切换币种前置纠正
+    //       this.isFristAdultScrolling = true
+    //       this.computedScrollPosition()
+    //     }
+    //   }
+    // },
     orderData: {
       immediate: true,
       async handler (data) {

@@ -1,6 +1,7 @@
 
 import api from './../request'
 import { quotaApi } from './../request'
+import config from '@/libs/config'
 const cache = {}
  
 export async function fetch(url, body, options, method = 'post') {

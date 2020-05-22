@@ -1102,6 +1102,7 @@ export default {
       }, this.products)
     },
     handleProductsChange (product) {
+      console.log('handleProductsChange')
       if (!product) {
         return
       } 
@@ -1132,6 +1133,8 @@ export default {
       this.activeProduct = product
       this.setTitle()
       this.state.unit.pair = `${product.product}_${product.currency}`
+      
+      console.log('this.state.unit.pair')
     },
     calcIncreaseRate (product) {
       return bigDiv([bigTimes([product.UNIT.increment_24h, 100]), bigMinus([product.UNIT.current, product.UNIT.increment_24h])], Math.max(2, product.price_scale))

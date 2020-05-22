@@ -55,6 +55,7 @@ export const getReachDataBySymbol = (symbol, params = { size: 10 }) => request({
   params
 })
 export const getOrderDataBySymbol = (symbol, params = { offset: 0, accuracy: 1, size: 10 }) => request({
+  
   url: `${proxy_q}/v1/orderbook/${symbol}`,
   method: 'get',
   params

@@ -1,7 +1,7 @@
 
 // import request from '../utils/request'
 // import {fetch, fetchQuota} from '@/modules/service'
-import {fetch, fetchQuota, getCache} from '@/modules/api/api-base'
+import {fetch, fetchQuota, getCache, quote} from '@/modules/api/api-base'
 
 import config from '@/libs/config'
 const proxy_q = config.quoteUrl
@@ -21,56 +21,53 @@ export const getFutureDictionaryList = query => request({
   method: 'post',
   params: query
 })
-export const getFutureListByKey = (key, query) => request({
-  url: `${proxy_q}deal/${key}`,
-  method: 'get',
-  params: query
-})
+// export const getFutureListByKey = (key, query) => request({
+//   url: `${proxy_q}deal/${key}`,
+//   method: 'get',
+//   params: query
+// })
 
-export const getBars = (key, query) => request({
-  url: `${proxy_q}deal/FUTURE_${key}USD`,
-  method: 'get',
-  params: query
-})
+export const getFutureListByKey = (key, query) => {
+  return quote(`deal/${key}`, query)
+}
+
+// export const getBars = (key, query) => request({
+//   url: `${proxy_q}deal/FUTURE_${key}USD`,
+//   method: 'get',
+//   params: query
+// })
+export const getBars = (key, query) => {
+  return quote(`deal/FUTURE_${key}USD`, query)
+}
+ 
 
 // export const getSymbolList = () => request({
 //   url: `${proxy_q}market/pairs`,
 //   method: 'get'
 // })
-export const getHistoryByPeriodOrPairs = (params = { period: '1m', pairs: 'ETH_BTC,EOS_BTC,UNKNOWN' }) => request({
-  url: `${proxy_q}market/histories`,
-  method: 'get',
-  params
-})
-export const getDishDataByPairs = (params = { pairs: 'ETH_BTC,EOS_BTC,UNKNOWN' }) => request({
-  url: `${proxy_q}market/tickers`,
-  method: 'get',
-  params
-})
-export const getSymbolQuote = symbol => request({
-  url: `${proxy_q}ticker/${symbol}`,
-  method: 'get'
-})
-export const getHistoryBySymbol = (symbol, params = { period: '1m', size: 10 }) => request({
-  url: `${proxy_q}history/${symbol}`,
-  method: 'get',
-  params
-})
-export const getHistoryBySymbolAndOption = (symbol, params = { period: '1m', begin: Date(), end: Date() }) => request({
-  url: `${proxy_q}history/millis/${symbol}`,
-  method: 'get',
-  params
-})
-export const getReachDataBySymbol = (symbol, params = { size: 10 }) => request({
-  url: `${proxy_q}deal/${symbol}`,
-  method: 'get',
-  params
-})
-export const getOrderDataBySymbol = (symbol, params = { offset: 0, accuracy: 1, size: 10 }) => request({
-  url: `${proxy_q}orderbook/${symbol}`,
-  method: 'get',
-  params
-})
+export const getHistoryByPeriodOrPairs = (params = { period: '1m', pairs: 'ETH_BTC,EOS_BTC,UNKNOWN' }) => {
+  return quote(`market/histories`,params)
+} 
+// export const getHistoryByPeriodOrPairs = (params = { period: '1m', pairs: 'ETH_BTC,EOS_BTC,UNKNOWN' }) =>{ return quote(`market/histories`,params)}
+export const getDishDataByPairs = (params = { pairs: 'ETH_BTC,EOS_BTC,UNKNOWN' }) => { 
+  return quote( `market/tickers`,params)
+}
+export const getSymbolQuote = symbol => {
+  return quote(`ticker/${symbol}`)
+}
+export const getHistoryBySymbol = (symbol, params = { period: '1m', size: 10 }) => {
+  return quote(`history/${symbol}`)
+}
+export const getHistoryBySymbolAndOption = (symbol, params = { period: '1m', begin: Date(), end: Date() }) => {
+  return quote(`history/millis/${symbol}`)
+}
+export const getReachDataBySymbol = (symbol, params = { size: 10 }) => {
+  return quote(`deal/${symbol}`,params)
+}
+export const getOrderDataBySymbol = (symbol, params = { offset: 0, accuracy: 1, size: 10 }) =>  {
+  console.log('123123123')
+  return quote(`orderbook/${symbol}`,params)
+}
 
 // getQuoteOrderbook({ pair, accuracy, offset, size }) {
 //   return quote(`orderbook/${pair}`, { offset, accuracy, size })
@@ -228,11 +225,9 @@ export const closeStorehouse = data => request({
 //                 "121",              // 成交笔数
 //                 "0.205"             // 现量
 // history/millis/{pair}?period={period}&begin={begin}&end={end}
-export const getKlineHistoryList = (symbol, query) => request({
-  url: `${proxy_q}history/millis/${symbol}`,
-  method: 'get',
-  params: query
-})
+export const getKlineHistoryList = (symbol, query) =>  {
+  return quote(`history/millis/${symbol}`, query)
+}
 
 // 修改委托单价格或数量或触发价格 POST /unit/modify
 // 参数

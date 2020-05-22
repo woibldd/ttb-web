@@ -1315,22 +1315,24 @@ export default {
       })
     },
     handleTickers (data) {
-      data.reduce((prev, curr) => {
-        // console.log({prev, curr})
-        const pairArr = curr.pair.split('_')
-        const found = prev.find(item => item.symbol === curr.pair || item.name === pairArr[1])
-        found && this.$set(found, pairArr[0], curr)
-        return prev
-      }, this.products)
+      // data.reduce((prev, curr) => {
+      //   // console.log({prev, curr})
+      //   const pairArr = curr.pair.split('_')
+      //   const found = prev.find(item => item.symbol === curr.pair || item.name === pairArr[1])
+      //   found && this.$set(found, pairArr[0], curr)
+      //   return prev
+      // }, this.products)
       // console.log('handleTickers')
-      // if (!this.products) return
-      // data.map(market => {
-      //   const pairArr = market.pair.split('_')
-      //   const found = this.products.find(item => item.symbol === market.pair || item.name === pairArr[1])
-      //   if (found) {
-      //     this.$set(found, pairArr[0], market)
-      //   }
-      // })
+      if (!this.products) return
+      data.map(market => {
+        const pairArr = market.pair.split('_') 
+        if (pairArr && pairArr.length) {
+          const found = this.products.find(item => item.symbol === market.pair || item.name === pairArr[1])
+          if (found) {
+            this.$set(found, pairArr[0], market)
+          } 
+        }
+      })
     }, 
     handleHeart(data) {  
       if (this.socket) {
@@ -1356,7 +1358,7 @@ export default {
         this.socket.socket.send(`{"op":"subscribepub","args":["deal@${product.product}_${product.currency}"]}`)  
       }
       getFutureListByKey(`${product.product}_${product.currency}`, { size: 20 }).then(({ data }) => {
-        this.newBargainListData = data
+        this.newBargainListData = data || []
       })
 
       getSymbolInfo({ symbol: product.name }).then(res => {
