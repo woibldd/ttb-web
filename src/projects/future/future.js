@@ -19,7 +19,7 @@ import '@/components/common/ix-scroll-load'
 import enLocale from 'element-ui/lib/locale/lang/en'
 import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
 import twLocale from 'element-ui/lib/locale/lang/zh-TW'
-import koLocale from 'element-ui/lib/locale/lang/ko'
+import koLocale from 'element-ui/lib/locale/lang/ko' 
 
 import './icons' // icon
 import './permission'
