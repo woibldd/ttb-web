@@ -8,7 +8,7 @@
   />
 </template>
 <script>
-// import Highcharts from 'highcharts/highcharts'
+import Highcharts from 'highcharts/highcharts'
 import HighMap from 'highcharts/modules/map.js'
 import Annotations from 'highcharts/modules/annotations.js'
 import websoketMixin from '@/mixins/soket'
@@ -16,6 +16,7 @@ import CountUp from 'countup/dist/countUp.min'
 import { bigRound } from '@/utils/handleNum'
 import { debounce, parseTime, timestampToDate } from '@/utils'
 import { rangeArr } from '@/const'
+import utils from '@/modules/utils'
 
 import config from '@/libs/config'
 HighMap(Highcharts)
@@ -47,10 +48,10 @@ export default {
   methods: {
     startWebSocket(){
       this.isLoading = true
-      console.log('startWebSocket')
+
       this.openWebSocket( config.wssUrl, res => {
       // this.openWebSocket('wss://wss.ixex.io/v1', res => {
-        if (res.spotIndexDTOList) {
+      if (res.spotIndexDTOList) {
           if (!res.spotIndexDTOList.length) return
           const data = res.spotIndexDTOList.map((dataString, index) => {
             const item = JSON.parse(dataString)
@@ -85,10 +86,6 @@ export default {
           const markElement = this.orderTimeElement.querySelector('.mask')
           const xData = this.chart.series[0].xData
           this.isLoading = xData[xData.length - 5] === resTime
-          // console.log('this.isLoading = xData[xData.length - 5] === resTime', xData[xData.length - 5] === resTime )
-          // if (xData[xData.length - 5] === resTime) {
-          //   console.log({data:xData[xData.length - 5], resTime, xData})
-          // }
           this.lastPoint = {
             x: resTime,
             y: price,
@@ -121,7 +118,8 @@ export default {
       })
     },
     handleTwoLineTips(resTime, orderTime, finishTime) {
-      const innerText = this.$t('shareOption.next')
+      // const innerText = this.$t('shareOption.next')
+      const innerText = utils.$i18n.t('shareOption.next')
       const orderBoxElement = this.orderTimeElement.querySelector('.box')
       const finishBoxElement = this.finishTimeElement.querySelector('.box')
       if (resTime >= orderTime) {
@@ -592,12 +590,10 @@ export default {
     initChartsByReqType(reqType) {
       // this.websocketArgs[0] = +reqType + 1
       this.isLoading = true
-      console.log('initChartsByReqType')
       this.websockets[0].send(`{"reqType": 1, "args":["${+reqType + 1}","${this.websocketArgs[1]}"]}`)
     },
     switchProduct(product) {
       this.isLoading = true
-      console.log('switchProduct')
       product[1] !== this.websocketArgs[1] && this.websockets[0].send(`{"reqType": 3, "args":["${this.websocketArgs[1]}"]}`)
       this.websocketArgs = product
       this.websockets[0].send(`{"reqType": 2, "args":["${this.websocketArgs[1]}"]}`)

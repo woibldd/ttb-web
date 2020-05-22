@@ -1,6 +1,7 @@
 <template>
   <div class="share-option" flex="main:justify cross:strech">
-    <div class="share-option-bg" /> 
+    <div class="share-option-bg" />
+
     <div v-loading="!marketData" class="left-side-bar" element-loading-background="rgba(0, 0, 0, 0.3)" element-loading-spinner="el-icon-loading">
       <div v-for="(value,key) in mapLeftNav" :key="key" :class="{active:drawerIsOpen && activeName === key}" @click="handleClickleftTab(key)">
         <svg-icon :icon-class="mapIcons[key]" style="font-size:24px" />
@@ -60,12 +61,14 @@
             <p><svg-icon :icon-class="activeShareAccount?activeShareAccount.currency.toLowerCase():'dollar'" style="font-size:16px" /> {{ orderCount/100*(+mapCurrencyList[0].up_rate)|bigRound(8) }}</p>
           </div>
         </div>
-        <div class="center-btn success" flex="dir:top main:center cross:center" :disabled="!$store.state.userData" type="success" @click="addLabels('green')" @mouseover.native="dynamicChart.activeHover('success')" @mouseout.native="dynamicChart.disableHover('success')">
+        <div class="center-btn success" flex="dir:top main:center cross:center" :disabled="!$store.state.userData" type="success" @click="addLabels('green')" 
+          @mouseover="dynamicChart.activeHover('success')" @mouseout="dynamicChart.disableHover('success')">
           <svg-icon icon-class="share-up" style="font-size:40px" /> <h2 style="margin-top:5px">{{ $tR('up_rate') }}</h2>
         </div>
       </div>
       <div class="content-center hover-scale" flex="dir:top main:justify cross:center box:mean">
-        <div class="center-btn danger" flex="dir:top main:center cross:center" :disabled="!$store.state.userData" type="danger" @click="addLabels('red')" @mouseover.native="dynamicChart.activeHover('danger')" @mouseout.native="dynamicChart.disableHover('danger')">
+        <div class="center-btn danger" flex="dir:top main:center cross:center" :disabled="!$store.state.userData" type="danger" @click="addLabels('red')" 
+          @mouseover="dynamicChart.activeHover('danger')" @mouseout="dynamicChart.disableHover('danger')">
           <svg-icon icon-class="share-down" style="font-size:40px" /> <h2 style="margin-top:5px">{{ $tR('down_rate') }}</h2>
         </div>
         <div flex="main:center cross:center" class="center-info">
