@@ -172,6 +172,7 @@ function onError(err) {
   utils.log(err)
   state.loading = false
   // utils.alert(utils.$app.$i18n.t('page_error'))
+  console.log(err)
   utils.alert(err)
 }
 

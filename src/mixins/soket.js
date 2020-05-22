@@ -44,8 +44,7 @@ export default {
             } catch(err){
               console.log("Error:"+err);
             }
-            if (restored) {
-              console.log({restored})
+            if (restored) {  
               let res = JSON.parse(restored)  
               res = res.code === 0 ? res.data : res
               resolve(websocket)
