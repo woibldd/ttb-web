@@ -171,7 +171,8 @@ function beforeResolve(to, from, next) {
 function onError(err) {
   utils.log(err)
   state.loading = false
-  utils.alert(utils.$app.$i18n.t('page_error'))
+  // utils.alert(utils.$app.$i18n.t('page_error'))
+  utils.alert(err)
 }
 
 export const routes = [
