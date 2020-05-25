@@ -373,15 +373,19 @@ export default {
           obj.totalValue = obj.totalValue.plus(arg.value)
         })
 
-        obj.margin = this.$big(obj.totalValue)
-          .div(obj.marginBalance)
-          .times(100)
-          .toFixed(2)
-        obj.leverage = (this.$big(obj.margin_position)
-          .plus(obj.margin_delegation))
-          .div(obj.available)
-          .times(100)
-          .toFixed(2)
+        if (!this.$big(obj.totalValue).eq(0)) {
+          obj.margin = this.$big(obj.totalValue)
+            .div(obj.marginBalance)
+            .times(100)
+            .toFixed(2) 
+        }
+        if (!this.$big(obj.margin_position).plus(obj.margin_delegation).eq(0)) {
+          obj.leverage = (this.$big(obj.margin_position)
+            .plus(obj.margin_delegation))
+            .div(obj.available)
+            .times(100)
+            .toFixed(2) 
+        }
       }
       // console.log({ obj })
       return obj
