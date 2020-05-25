@@ -207,9 +207,9 @@
         </div>
       </div>
     </div>
-    <transfer-modal
+    <!-- <transfer-modal
       :show-modal.sync="showModal"
-      @click="hideModal"/>
+      @click="hideModal"/> -->
   </div>
 </template>
 <script>
@@ -219,7 +219,7 @@ import utils from '@/modules/utils'
 import tickTableMixin from '@/mixins/fund-contract-tick'
 import dealSocketMixins from '@/mixins/deal-socket-mixins'
 import contractCard from './contract-card'
-import transferModal from './transfer-modal'
+// import transferModal from './transfer-modal'
 import {bigTimes} from '@/utils/handleNum'
 /**
  *
@@ -235,7 +235,7 @@ max_quota 当前提币总额度
 export default {
   name: 'MyFund',
   mixins: [tickTableMixin, dealSocketMixins],
-  components: { contractCard, transferModal },
+  components: { contractCard },
   // mixins: [dealSocketMixins],
   data () {
     return {
@@ -558,8 +558,10 @@ export default {
     // this.getContractBalanceByPair()
     this.getContractBalanceList()
 
-    const res = await service.getRates({currency: 'BTC'})
-    this.btcRates = res.data.BTC
+    // const res = await service.getRates({currency: 'BTC'})
+    // if (!res.code && res.data) {
+    //   this.btcRates = res.data.BTC 
+    // }
   },
   mounted () {
     // this.initChart()
@@ -570,11 +572,9 @@ export default {
   methods: {
     translateByRate (value, scale = 2) {
       if (!this.btcRates || !this.btcRates['USD']) return
-      return bigTimes([this.btcRates['USD'], value], scale)
-    },
-    amounts () {
-      this.amountNumber = 21321
-    },
+      // return bigTimes([this.btcRates['USD'], value], scale)
+      return this.$big(this.btcRates['USD'] || 0).times(value || 0).round(scale)
+    }, 
     exchange (number) {
       this.popover = true
       this.state.stateType = number
@@ -613,6 +613,7 @@ export default {
       const res = await service.getAllRate()
       if (!res.code && !!res.data) {
         this.rates = res.data
+        this.btcRates = res.data.BTC
       }
     },
 
@@ -644,27 +645,13 @@ export default {
           this.tableData = (res.data || []).map(item => {
             item.currencyName = item.currency.replace('USD', '')
             item.camount = item.available
-            item.estValue = this.getEstValue(item)
-            // console.log({ item })
-            // console.log({ holding: this.holding })
+            item.estValue = this.getEstValue(item) 
             return item
           })
         }
       })
-    }
-    // getContractBalanceByPair () {
-    //   service.getContractBalanceByPair({
-    //     symbol: this.currency
-    //   }).then(res => {
-    //     this.accountInfo = res.data
-    //     this.state.ct.holding = res.data
-    //     // this.tableData = res.data
-    //   })
-    // }
-  }
-  // components: {
-  //   transferModal
-  // }
+    } 
+  } 
 }
 </script>
 <style lang="scss" scoped>
