@@ -56,7 +56,7 @@
           >
             <template slot-scope="scope">
               <div class="balance">{{ parsetNumber(scope.row.available) + ' ' + scope.row.currency }}</div>
-              <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.available)+ ' USD' }}</div>
+              <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.available, scope.row.currency)+ ' USD' }}</div>
             </template>
           </el-table-column>
           <el-table-column
@@ -64,7 +64,7 @@
             :label="$t('available_balance')">
             <template slot-scope="scope">
               <div class="balance">{{ parsetNumber(scope.row.available_balance) + ' ' + scope.row.currency }}</div>
-              <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.available_balance) + ' USD' }}</div>
+              <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.available_balance, scope.row.currency) + ' USD' }}</div>
             </template>
           </el-table-column>
           <el-table-column
@@ -72,7 +72,7 @@
             :label="$t('fund_contract_result_unrealized')">
             <template slot-scope="scope">
               <div class="balance">{{ parsetNumber(scope.row.unrealized) + ' ' + scope.row.currency }}</div>
-              <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.unrealized) + ' USD' }}</div>
+              <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.unrealized, scope.row.currency) + ' USD' }}</div>
             </template>
           </el-table-column>
           <el-table-column
@@ -80,7 +80,7 @@
             :label="$t('contract_margin_balance')">
             <template slot-scope="scope">
               <div class="balance">{{ parsetNumber(scope.row.margin_user) + ' ' + scope.row.currency }}</div>
-              <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.margin_user) + ' USD' }}</div>
+              <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.margin_user, scope.row.currency) + ' USD' }}</div>
             </template>
           </el-table-column>
           <el-table-column
@@ -88,7 +88,7 @@
             :label="$t('warehouse_margin')">
             <template slot-scope="scope">
               <div class="balance">{{ parsetNumber(scope.row.margin_position) + ' ' + scope.row.currency }}</div>
-              <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.margin_position) + ' USD' }}</div>
+              <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.margin_position, scope.row.currency) + ' USD' }}</div>
             </template>
           </el-table-column>
           <el-table-column
@@ -96,7 +96,7 @@
             :label="$t('entrust_margin')">
             <template slot-scope="scope">
               <div class="balance">{{ parsetNumber(scope.row.margin_delegation) + ' ' + scope.row.currency }}</div>
-              <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.margin_delegation) + ' USD' }}</div>
+              <div v-if="scope.row.currency!=='METH'" class="balance balance-grey">{{ '≈' + usdtNumber(scope.row.margin_delegation, scope.row.currency) + ' USD' }}</div>
             </template>
           </el-table-column>
           <el-table-column
@@ -136,7 +136,8 @@ export default {
       ],
       unit: '',
       banlace: 0,
-      total: 0
+      total: 0,
+      available:[]
     }
   },
   computed: {
@@ -153,20 +154,24 @@ export default {
   methods: {
     currencyChange (item) {
       this.unit = item
-      if (item.name === 'CNY') {
-        this.total = this.$big(Number(this.available)).times(Number(this.btcRates.CNY)).round(2, 0).toFixed(2).toString()
-      } else {
-        this.total = this.usdtNumber(this.available, item.scale)
-      }
+        this.total = 0
+        this.available.map(e => {
+          this.total = this.$big(this.total).plus(this.$big(e.available).times(this.btcRates[e.currency][item.name]))
+        })
+      // if (item.name === 'CNY') {
+      //   // this.total = this.$big(this.available).times(this.btcRates.CNY).round(2, 0).toFixed(2).toString()
+      // } else {
+      //   // this.total = this.usdtNumber(this.available, item.scale)
+      // }
     },
     parsetNumber (count, n = 8) {
-      return this.$big(Number(count)).round(n, 0).toFixed(n).toString()
+      return this.$big(count).round(n, 0).toFixed(n).toString()
     },
-    usdtNumber (count, n = 2) {
-      return this.$big(Number(count)).times(Number(this.btcRates.USD)).round(n, 0).toFixed(n).toString()
+    usdtNumber (count, currency, n = 2) {
+      return this.$big(count).times(this.btcRates[currency].USD).round(n, 0).toFixed(n).toString()
     },
     init () {
-      this.available = 0
+      this.available = []
       this.total = 0
       service.getContractUnitBalanceList({}).then((res) => {
         if (res.code === 0) {
@@ -174,10 +179,12 @@ export default {
           if (this.tableData) { 
             this.tableData.map(item => {
               if (item.currency !== 'METH') {
-                this.available = this.$big(this.available).plus(item.available) 
+                // this.available = this.$big(this.available).plus(item.available) 
+                this.available.push({currency:item.currency, available:item.available })
               }
+              this.total = this.$big(this.total).plus(this.$big(item.available).times(this.btcRates[item.currency].CNY)) 
             })
-            this.total = this.$big(this.available).times(this.btcRates.CNY).round(2, 0).toFixed(2)
+            // this.total = this.$big(this.available).times(this.btcRates[item.currency].CNY).round(2, 0).toFixed(2)
             
           }
         }
@@ -190,8 +197,8 @@ export default {
       console.log(row)
     },
     getRates () {
-      service.getRates({currency: 'ETH'}).then((res) => {
-        this.btcRates = res.data.ETH
+      service.getRates().then((res) => {
+        this.btcRates = res.data
         this.init()
       })
     }

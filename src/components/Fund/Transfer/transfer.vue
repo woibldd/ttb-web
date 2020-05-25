@@ -255,7 +255,7 @@
         if (!this.unitBalance) {
           return 0
         } else {
-          return this.$big(this.unitBalance.available || 0).round(8, 0).toFixed(8)
+          return this.$big(this.unitBalance.available_balance || 0).round(8, 0).toFixed(8)
         }
       },
       mixAvai () { 

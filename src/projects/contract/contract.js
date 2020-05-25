@@ -35,12 +35,12 @@ import {
   Popover,
   Button,
 } from 'element-ui'
-if (process.env.NODE_ENV === 'production') {
-  Sentry.init({
-    dsn: 'https://cb7ce83188954a2d89afa702d5d4fcdf@sentry.io/1291113',
-    integrations: [new Sentry.Integrations.Vue({ Vue })]
-  })
-}
+// if (process.env.NODE_ENV === 'production') {
+//   Sentry.init({
+//     dsn: 'https://cb7ce83188954a2d89afa702d5d4fcdf@sentry.io/1291113',
+//     integrations: [new Sentry.Integrations.Vue({ Vue })]
+//   })
+// }
 
 Vue.config.productionTip = false
 Vue.use(VueI18n)
