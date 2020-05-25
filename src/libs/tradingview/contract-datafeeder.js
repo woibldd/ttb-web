@@ -5,6 +5,7 @@ import _ from 'lodash'
 // const theme = process.env.THEME_ENV
 
 let lastTime
+let lastPair = ''
 
 function getPeriod (interval) {
   return { 
@@ -110,30 +111,52 @@ export default {
   },
   subscribeBars: function (symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback) {
     const period = getPeriod(resolution)
-    utils.$tvSocket && utils.$tvSocket.$destroy()
-    utils.$tvSocket = ws.create(`history/${symbolInfo.ticker}/${period}`)
-    utils.$tvSocket.$on('open', () => {
-      utils.$tvSocket.heartCheck.start()
-    })
+    // utils.$tvSocket && utils.$tvSocket.$destroy()
+    // utils.$tvSocket = ws.create(`history/${symbolInfo.ticker}/${period}`)
+    // utils.$tvSocket.$on('open', () => {
+    //   utils.$tvSocket.heartCheck.start()
+    // })
+    // utils.$tvSocket.$on('message', (data) => {
+    //   utils.$tvSocket.heartCheck.start()
+    //   // @fixme 改接口，不用数组
+    //   data = data[0]
+    //   if (!data.time || data.time < lastTime) {
+    //     return utils.log('Wrong realtime')
+    //   }
+    //   lastTime = data.time
+    //   onRealtimeCallback(toTick(data))
+    // })
+    // utils.$tvSocket.$on('reopen', () => {
+    //     utils.$tvSocket.$destroy()
+    //   this.subscribeBars(symbolInfo, resolution, onRealtimeCallback)
+    // })
+    if (lastPair) {
+      utils.$tvSocket.socket.send(`{"op":"unsubscribepub","args":${lastPair}}`)
+      lastPair = `["history@${symbolInfo.ticker}@${period}"]`
+      utils.$tvSocket.socket.send(`{"op":"subscribepub","args":${lastPair}}`) 
+    } else {
+      lastPair = `["history@${symbolInfo.ticker}@${period}"]` 
+    }
     utils.$tvSocket.$on('message', (data) => {
-      utils.$tvSocket.heartCheck.start()
-      // @fixme 改接口，不用数组
-      data = data[0]
-      if (!data.time || data.time < lastTime) {
-        return utils.log('Wrong realtime')
+      if (data.topic && data.topic.indexOf('history')===0 && data.topic.indexOf(symbolInfo.ticker) > 0) {
+        data = data.data[0]
+        if (!data.time || data.time < lastTime) {
+          return utils.log('Wrong realtime')
+        }
+        lastTime = data.time
+        onRealtimeCallback(toTick(data))
       }
-      lastTime = data.time
-      onRealtimeCallback(toTick(data))
     })
     utils.$tvSocket.$on('reopen', () => {
-        utils.$tvSocket.$destroy()
       this.subscribeBars(symbolInfo, resolution, onRealtimeCallback)
-    })
+    })  
   },
   unsubscribeBars (subscriberUID) { 
-    utils.$tvSocket && utils.$tvSocket.$destroy()
+    // utils.$tvSocket && utils.$tvSocket.$destroy()
+    utils.$tvSocket.socket.send(`{"op":"unsubscribepub","args":${lastPair}}`)
   },
   destroy () {
-    utils.$tvSocket && utils.$tvSocket.$destroy()
+    // utils.$tvSocket && utils.$tvSocket.$destroy()
+    utils.$tvSocket.socket.send(`{"op":"unsubscribepub","args":${lastPair}}`)
   }
 }

@@ -7,7 +7,7 @@
       <div
         class="ix-pannel-body"
         ref="body"
-      >
+      > 
         <table class="table table-ix-deal">
           <tbody v-if="state.ct.pairInfo">
             <tr style="height: 30px">
@@ -55,22 +55,27 @@
 </template>
 <script>
 import { state, local } from '@/modules/store'
-import ws from '@/modules/ws'
+// import ws from '@/modules/ws'
 import _ from 'lodash'
 import config from '@/libs/config'
 import service from '@/modules/service'
 import { pairfix } from '@/mixins/index'
-import dealSocketMixins from '@/mixins/deal-socket-mixins'
+// import dealSocketMixins from '@/mixins/deal-socket-mixins' 
+const PAGE_SIZE = 25
 
 export default {
   name: 'Deal',
-  mixins: [pairfix, dealSocketMixins],
+  mixins: [pairfix],
+  props: { 
+    dataList: []
+  },
   data () {
     return {
       err: '',
       local,
       state,
-      loading: true
+      loading: false,
+      dealList: []
     }
   },
   methods: {
@@ -84,17 +89,17 @@ export default {
       this.dealList = []
     },
     async sub () {
-      this.loading = true
-      if (this.socket) {
-        this.socket.$destroy()
-      } 
-      this.openSocket().then(resp => {
-        this.loading = false
-      })
-      const pair = this.state.ct.pair
-      if (pair !== this.state.ct.pair) {
-        return false
-      }
+      // this.loading = true
+      // if (this.socket) {
+      //   this.socket.$destroy()
+      // } 
+      // this.openSocket().then(resp => {
+      //   this.loading = false
+      // })
+      // const pair = this.state.ct.pair
+      // if (pair !== this.state.ct.pair) {
+      //   return false
+      // }
     },
     getStyle (deal, index) {
       if (index % 2 === 0) {
@@ -134,7 +139,37 @@ export default {
     },
     setAmount (amount, side) {
       this.$eh.$emit('protrade:exchange:set', {amount, side: side})
-    }
+    },
+    update (data) {
+      if (!data) return
+      const dealList = data.map(item => {
+        return {
+          time: item.time,
+          price: item.values[0],
+          amount: item.values[1],
+          side: item.side.toLowerCase()
+        }
+      }).sort((a, b) => {
+        try {
+          return b.time - a.time
+        } catch (e) {
+          return 0
+        }
+      }) 
+      this.dealList = dealList.concat(this.dealList).slice(0, PAGE_SIZE)
+    },
+    async fetchDealList () { 
+      this.clear()
+      const res = await service.getQuoteDeal({
+        pair: this.pair,
+        size: PAGE_SIZE
+      })
+      if (!res.code) {
+        this.update(res.data)
+        this.$eh.$emit('deal:update', res.data)
+      } 
+      return Promise.resolve(res.data)
+    },
   },
   computed: {
     pair () {
@@ -149,6 +184,19 @@ export default {
     },
     price () {
       return this.dealList.length ? this.dealList[0].price : 0
+    },
+    lastPrice () { 
+      let price = this.dealList.length ? this.dealList[0].values[0] : 0
+      return price
+    },
+    lastSide () {
+      let side = this.dealList.length ? this.dealList[0].side : "buy" 
+      if (side == "buy") {
+        this.state.ct.lastSide = 1
+      } else if (side == "sell") {
+        this.state.ct.lastSide = 2
+      }
+      return this.state.ct.lastSide
     }
   },
   watch: {
@@ -156,8 +204,9 @@ export default {
       handler (pair, oldPair) {
         if (pair) {
           this.clear()
-          this.sub()
+          // this.sub()
           this.setTitle()
+          this.fetchDealList()
         }
       },
       immediate: true
@@ -174,15 +223,22 @@ export default {
         }
       },
       immediate: true
+    },
+    dataList: {
+      handler (dataList) {
+        console.log(dataList)
+        this.update(dataList)
+      },
+      immediate: true
     }
   },
   created () {
-    this.$eh.$on('protrade:deal:refresh', this.sub)
+    // this.$eh.$on('protrade:deal:refresh', this.sub)
     this.$eh.$on('protrade:layout:init', this.layout)
   },
   destroyed () {
     // this.$eh.$off('app:resize', this.onresize)
-    this.$eh.$off('protrade:deal:refresh', this.sub)
+    // this.$eh.$off('protrade:deal:refresh', this.sub)
     this.$eh.$off('protrade:layout:init', this.layout)
     document.title = config.title
   }

@@ -44,10 +44,7 @@ export default {
       }
       return obj[this.$route.path]
     }
-  },
-  created () {
-    console.log(this.$route.name, 'asdasdasdas')
-  }
+  } 
 }
 </script>
 <style lang="scss" scoped>

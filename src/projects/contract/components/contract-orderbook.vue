@@ -140,6 +140,9 @@ export default {
   components: {
     OrderbookItem
   },
+  props: {
+    deepthData:{}
+  },
   data () {
     const vm = this
     return {
@@ -153,8 +156,7 @@ export default {
       sell: [],
       bids: [],
       asks: [],
-      offset: 0,
-      deepthData:{},
+      offset: 0, 
       accuracy: 1,
       itemHeight: 20,
       navHeight: 32,
@@ -189,6 +191,13 @@ export default {
           this.isFristAdultScrolling = true
           this.computedScrollPosition()
         }
+      }
+    },
+    deepthData: {
+      immediate: true,
+      async handler (data) {
+        if (!data) return 
+        this.assignData(data) 
       }
     }
   },
@@ -425,9 +434,15 @@ export default {
     },
     async sub () {
       this.loading = true
-      if (this.socket) {
-        this.socket.$destroy()
+      
+      if (this.lastPair) {
+        utils.$tvSocket.socket.send(`{"op":"unsubscribepub","args":${this.lastPair}}`)
+        this.lastPair = `["orderbook@${this.pair}@${this.offset}@1@20"]`
+        utils.$tvSocket.socket.send(`{"op":"subscribepub","args":${this.lastPair}}`)  
+      } else {
+        this.lastPair = `["orderbook@${this.pair}@${this.offset}@1@20"]`
       }
+
       const fetchId = this.pair + this.offset + this.accuracy
       const res = await service.getQuoteOrderbook({
         pair: this.pair,
@@ -441,23 +456,23 @@ export default {
       if (!res.code) {
         this.assignData(res.data)
       } 
-      this.socket = ws.create(`orderbook/${this.pair}/${this.offset}/${this.accuracy}/20`)
-      this.socket.$on('open', () => { 
-        this.socket.heartCheck.start()
-      })
-      this.socket.$on('message', (data) => {  
-        if (fetchId.indexOf(this.pair) === -1) { 
-            this.socket.$destroy()
-            return
-        } 
-        this.socket.heartCheck.start()
-        this.deepthData = data
-        this.changeDepthNumber(data)
-      })
-      this.socket.$on('reopen', () => {
-          this.socket.$destroy()
-          this.sub()
-        })
+      // this.socket = ws.create(`orderbook/${this.pair}/${this.offset}/${this.accuracy}/20`)
+      // this.socket.$on('open', () => { 
+      //   this.socket.heartCheck.start()
+      // })
+      // this.socket.$on('message', (data) => {  
+      //   if (fetchId.indexOf(this.pair) === -1) { 
+      //       this.socket.$destroy()
+      //       return
+      //   } 
+      //   this.socket.heartCheck.start()
+      //   this.deepthData = data
+      //   this.changeDepthNumber(data)
+      // })
+      // this.socket.$on('reopen', () => {
+      //     this.socket.$destroy()
+      //     this.sub()
+      //   })
     },
     assignData (data) { 
       const toBig = item => [this.$big(item.values[0]), this.$big(item.values[1])] 

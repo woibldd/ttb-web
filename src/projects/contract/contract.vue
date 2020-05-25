@@ -22,16 +22,16 @@
           <div class="only-orders">
             <!-- 委托列表 -->
             <div class="ix-col ix-col-2 ml-4 relative" style="width:50%;">
-              <order-book/>
+              <order-book  :deepthData="delegateData"/>
             </div>
             <!--  最新成交 -->
             <div class="ix-col ix-col-3 ml-4 relative" style="width:50%;">
-              <order-deal/>
+              <order-deal :dataList="dealList"/>
             </div>
           </div>
           <!-- 深度图 -->
           <div class="ix-col ix-col-1 ml-4 mt-4">
-            <contract-deepth/>
+            <contract-deepth :dataList="delegateData"/>
           </div>
         </section>
         <!-- 操作 -->
@@ -182,6 +182,7 @@ import ContractSetup from './components/setup'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
 import pairInfoMixins from './components/statePairInfoComputedMixins'
+import wsNew from '@/modules/ws-new'
 
 export default {
   components: {
@@ -199,6 +200,7 @@ export default {
   mixins: [tickTableMixin, pairInfoMixins],
   data() {
     return {
+      utils,
       problemType: true,
       problemError: true,
       problemLstt: ['', '', '', '', '', '', '', ''],
@@ -208,7 +210,11 @@ export default {
       showSetupModal: false,
       problemText: '',
       // 合约激活
-      contractNotActive: false
+      contractNotActive: false, 
+      delegateData: null,
+      activeProduct: null,
+      dataDeep: '0',
+      dealList: []
     }
   },
   computed: {
@@ -226,14 +232,26 @@ export default {
         return this.state.ct.userSetting
       }
       return {}
-    }
+    },
+    mapHandlerSocket () {
+      return {
+        'liquid': this.handleLiquid,
+        'heart': this.handleHeart,
+        'market': this.handleTickers,
+        'deal': this.handleDealSoket,
+        'orderbook': this.handleOrderbook,
+        'position': this.handleAmountObj,
+        'orderfills': this.handleAmountObj, 
+        'trigger': this.handleAmountObj
+      }
+    } 
   },
   watch: {
     problemLstt: function() {
       console.log(this.problemType, !this.problemType)
     },
     '$route.query.pair': {
-      async handler(pair) {
+      async handler(pair, oldPair) {
         if (!pair) return
         const match = pair.match(/^([a-zA-Z0-9_-]*)_([a-zA-Z0-9_-]*)$/)
         if (match) {
@@ -252,7 +270,15 @@ export default {
             this.$eh.$emit('protrade:balance:refresh')
             const resp = await service.getContractSymInfo({
               symbol: this.symbol.name
-            })
+            }) 
+ 
+            if (this.socket && this.socket.socket.readyState === 1 && this.state.ct.pair) {
+              this.socket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${oldPair}@${this.dataDeep}@1@20"]}`)
+              this.socket.socket.send(`{"op":"unsubscribepub","args":["deal@${oldPair}"]}`) 
+
+              this.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.state.ct.pair}@${this.dataDeep}@1@20"]}`)
+              this.socket.socket.send(`{"op":"subscribepub","args":["deal@${this.state.ct.pair}"]}`)
+            }
             if (!resp.code) {
               Object.assign(this.state.ct.pairInfo, resp.data)
             }
@@ -468,6 +494,71 @@ export default {
             window.localStorage['contract'] = this.contractNotActive
           }
         })
+    },
+    handleSocketData (res) { 
+      const key = res.topic && res.topic.split('@')[0]
+      this.mapHandlerSocket[key] && this.mapHandlerSocket[key](res.data)
+    }, 
+    subMarket() { 
+      // console.log('subMarket')
+      const that = this
+      if (this.socket) {
+        that.socket.$destroy()
+      }
+      this.socket = wsNew.create()
+      this.utils.$tvSocket = this.socket
+      this.socket.$on('open', () => { 
+        that.socket.heartCheck.start() 
+        that.socket.socket.send('{"op":"subscribepub","args":["market@ticker"]}') 
+        if (that.state.userInfo) {
+          that.socket.socket.send(`{"op":"loginWeb","args":["${that.state.userInfo.session_id}"]}`)
+          that.socket.socket.send('{"op": "subscribe", "args": ["liquid"]}')  
+          that.socket.socket.send('{"op":"subscribe","args":["orderfills"]}')
+          that.socket.socket.send('{"op":"subscribe","args":["position"]}')
+          that.socket.socket.send('{"op":"subscribe","args":["trigger"]}')
+        } 
+        if (that.state && that.state.ct && that.state.ct.pair) {
+          that.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${that.state.ct.pair}@${that.dataDeep}@1@20"]}`)
+          that.socket.socket.send(`{"op":"subscribepub","args":["deal@${that.state.ct.pair}"]}`)
+        }
+      })
+      this.socket.$on('message', (data) => {  
+        that.handleSocketData(data) 
+      })
+      this.socket.$on('reopen', () => {
+        console.log('reopen')
+        that.socket.$destroy()
+        that.subMarket()
+      })
+    },
+    handleHeart(data) {  
+      if (this.socket) {
+        this.socket.heartCheck.start()
+      }
+    },
+    handleLiquid(data) { 
+      if (data.state === 1) {
+        // this.fetchData()
+      }
+    },
+    handleOrderbook(data) { 
+      this.delegateData = data
+    },
+    handleTickers (data) {  
+      const indexPair = this.state.ct.pair.replace('FUTURE', 'INDEX')
+      const marketPair = this.state.ct.pair.replace('FUTURE', 'MARKET')
+      let row = data.find(item => item.pair === this.state.ct.pair)
+      let rowIndex = data.find(item => item.pair === indexPair)
+      let rowMarket = data.find(item => item.pair === marketPair)
+      this.patch(row)
+      this.patch(rowIndex)
+      this.patch(rowMarket)
+    },
+    handleDealSoket (data) {  
+      this.dealList = data
+    },
+    handleAmountObj(data) {
+      console.log('handleAmountObj')
     }
   }
 }

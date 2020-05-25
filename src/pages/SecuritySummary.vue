@@ -266,8 +266,7 @@
           this.modalEnsureCallback = this.ensureSwitchPhoneBind
           this.openOrClose = this.verify_google
         }
-        this.modalEnsureCallback = () => {
-          console.log(this.form, 'asdasdasdasdasdasdsadsa')
+        this.modalEnsureCallback = () => { 
           let query = {}
           if (this.verify_type === 'phone') {
             query = {

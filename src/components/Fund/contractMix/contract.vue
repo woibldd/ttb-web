@@ -157,7 +157,8 @@ export default {
       ],
       unit: '',
       banlace: 0,
-      total: 0
+      total: 0,
+      available:[]
     }
   },
   computed: {
@@ -176,7 +177,7 @@ export default {
     currencyChange (item) {
       this.unit = item
       if (item.name === 'CNY') {
-        this.total = this.$big(Number(this.available)).times(Number(this.btcRates.CNY)).round(2, 0).toFixed(2).toString()
+        this.total = this.$big(this.available).times(this.btcRates['USDT'].CNY).round(2, 0).toFixed(2).toString()
       } else {
         this.total = this.usdtNumber(this.available, item.scale)
       }
@@ -185,10 +186,10 @@ export default {
       return this.$big(Number(count)).round(n, 0).toFixed(n).toString()
     },
     usdtNumber (count, n = 2) {
-      return this.$big(Number(count)).times(Number(this.btcRates.USD)).round(n, 0).toFixed(n).toString()
+      return this.$big(Number(count)).times(Number(this.btcRates['USDT'].USD)).round(n, 0).toFixed(n).toString()
     },
     init () {
-      this.available = 0
+      this.available = []
       this.total = 0
       const _this = this
       service.getContractMixBalanceList({}).then((res) => {
@@ -204,23 +205,27 @@ export default {
               row.margin_position = this.$big(row.margin_position || 0).plus(item.margin_position).toString() // 仓位保证金
               row.margin_delegation = this.$big(row.margin_delegation || 0).plus(item.margin_delegation).toString() // 委托保证金
             }
+          }) 
+          // if (this.tableData) {
+          //   console.log(this.tableData)
+          //   this.total = this.$big(this.available).times(this.btcRates.CNY).round(2, 0).toFixed(2)
+          // }
+          this.tableData.map(item => {
+            if (this.btcRates[item.currency]) {
+              this.total = this.$big(this.total).plus(this.$big(item.available).times(this.btcRates[item.currency].CNY))
+            }
           })
-          // this.tableData = res.data
-          if (this.tableData) {
-            this.total = this.$big(this.available).times(this.btcRates.CNY).round(2, 0).toFixed(2)
-          }
         }
       })
     },
     linkHandle (row, index) {
       if (index === 0) {
         this.$router.push('/fund/transfer')
-      }
-      console.log(row)
+      } 
     },
     getRates () {
-      service.getRates({currency: 'USDT'}).then((res) => {
-        this.btcRates = res.data.USDT
+      service.getRates().then((res) => {
+        this.btcRates = res.data
         this.init()
       })
     }

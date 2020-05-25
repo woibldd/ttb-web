@@ -56,7 +56,8 @@ import historyTable from "./history/history_table";
 import service from "@/modules/service";
 import { state, actions } from "@/modules/store";
 import utils from "@/modules/utils"; 
-import wsNew from '@/modules/ws-new'
+// import wsNew from '@/modules/ws-new'
+
 
 export default {
   data() {
@@ -811,30 +812,30 @@ export default {
       const key = res.topic && res.topic.split('@')[0]
       this.mapHandlerSocket[key] && this.mapHandlerSocket[key](res.data)
     }, 
-    subMarket() { 
-      const that = this
-      if (this.socket) {
-        that.socket.$destroy()
-      }
-      this.socket = wsNew.create()
-      this.socket.$on('open', () => { 
-        that.socket.heartCheck.start()
-        if (that.state.userInfo) {
-          that.socket.socket.send(`{"op":"loginWeb","args":["${that.state.userInfo.session_id}"]}`)
-          that.socket.socket.send('{"op": "subscribe", "args": ["liquid"]}') 
-        }
-      })
-      this.socket.$on('message', (data) => {  
-        that.handleSocketData(data) 
-      })
-      this.socket.$on('reopen', () => {
-        that.socket.$destroy()
-        that.subMarket()
-      })
-    } 
+    // subMarket() { 
+    //   const that = this
+    //   if (this.socket) {
+    //     that.socket.$destroy()
+    //   }
+    //   this.socket = wsNew.create()
+    //   this.socket.$on('open', () => { 
+    //     that.socket.heartCheck.start()
+    //     if (that.state.userInfo) {
+    //       that.socket.socket.send(`{"op":"loginWeb","args":["${that.state.userInfo.session_id}"]}`)
+    //       that.socket.socket.send('{"op": "subscribe", "args": ["liquid"]}') 
+    //     }
+    //   })
+    //   this.socket.$on('message', (data) => {  
+    //     that.handleSocketData(data) 
+    //   })
+    //   this.socket.$on('reopen', () => {
+    //     that.socket.$destroy()
+    //     that.subMarket()
+    //   })
+    // } 
   },
   async created() {
-    this.subMarket()
+    // this.subMarket()
     await actions.updateSession();
     if (this.state.userInfo) {
       let param = {

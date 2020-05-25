@@ -127,8 +127,7 @@ export default {
     }
   },
   watch: {
-    realScale () {
-      console.log('scaleChange')
+    realScale () { 
       this.updateValue(this.$refs.input.value, 'scaleChange')
     },
     value (newValue, oldValue) {
