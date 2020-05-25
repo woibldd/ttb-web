@@ -13,7 +13,7 @@ import en from '@/libs/languages/en.js'
 import eventHub from '@/modules/eventHub'
 import VTooltip from 'v-tooltip'
 import qs from 'querystring'
-import * as Sentry from '@sentry/browser'
+// import * as Sentry from '@sentry/browser'
 import 'babel-polyfill'
 import ToastRegistry from '@/libs/toast/index'
 

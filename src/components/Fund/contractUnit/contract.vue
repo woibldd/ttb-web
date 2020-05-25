@@ -193,8 +193,7 @@ export default {
     linkHandle (row, index) {
       if (index === 0) {
         this.$router.push('/fund/transfer')
-      }
-      console.log(row)
+      } 
     },
     getRates () {
       service.getRates().then((res) => {

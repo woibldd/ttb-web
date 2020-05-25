@@ -13,7 +13,7 @@ import en from '@/libs/languages/en.js'
 import eventHub from '@/modules/eventHub'
 import VTooltip from 'v-tooltip'
 import qs from 'querystring'
-import * as Sentry from '@sentry/browser'
+// import * as Sentry from '@sentry/browser'
 import 'babel-polyfill'
 import './assets/scss/index.scss'
 import './assets/scss/h5.scss'
@@ -90,12 +90,12 @@ Vue.use(ELEMENT,{
 // } from 'element-ui'
 
 
-if (process.env.NODE_ENV === 'production') {
-  Sentry.init({
-    dsn: 'https://cb7ce83188954a2d89afa702d5d4fcdf@sentry.io/1291113',
-    integrations: [new Sentry.Integrations.Vue({ Vue })]
-  })
-}
+// if (process.env.NODE_ENV === 'production') {
+//   Sentry.init({
+//     dsn: 'https://cb7ce83188954a2d89afa702d5d4fcdf@sentry.io/1291113',
+//     integrations: [new Sentry.Integrations.Vue({ Vue })]
+//   })
+// }
 
 Vue.config.productionTip = false
 
