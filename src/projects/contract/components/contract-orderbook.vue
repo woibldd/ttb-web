@@ -285,51 +285,10 @@ export default {
       this.onGroupChange()
       this.changeDepthNumber(this.deepthData)
     },
-    changeDepthNumber (data){ 
-
+    changeDepthNumber (data){  
       let bidsOne = []
       let asksOne = []
-      this.assignData(data)
-      // if (this.pair === 'FUTURE_BTCUSD') {
-      //   if (this.offset === 1) {
-      //     for (let i in data.bids){
-      //       let number = i-1
-      //       if(0 <= number){
-      //         if(data.bids[number].values[0].indexOf(data.bids[i].values[0]) !== -1){
-      //           let arr = {'values': [data.bids[number].values[0],
-      //           data.bids[number].values[1]*1+data.bids[i].values[1]*1]}
-      //           // console.log(
-      //           //   data.bids[number].values[0]*1+data.bids[i].values[0]*1,
-      //           //   data.bids[number].values[0],
-      //           //   data.bids[i].values[0])
-      //           bidsOne.push(arr)
-      //         }
-      //       }
-      //     }
-      //     for (let i in data.asks){
-      //       let number = i-1
-      //       if(0 <= number){
-      //         let str = data.asks[number].values[0] + ''
-      //         let str1 = data.asks[i].values[0] + ''
-      //         if(str1.indexOf(str) !== -1){
-      //           let arr = {'values': [data.asks[number].values[0],
-      //           data.asks[number].values[1]*1+data.asks[i].values[1]*1]}
-      //           asksOne.push(arr)
-      //         }
-      //       }
-      //     }
-      //     // console.log(asksOne)
-      //     this.assignData({
-      //         bids : bidsOne ,
-      //         asks : asksOne
-      //       })
-      //   } else {
-      //     this.assignData(data)
-      //   }
-      // }
-      // else {
-      //   this.assignData(data)
-      // }
+      this.assignData(data) 
     },
     toggleSetting () {
       this.panelShow = !this.panelShow
@@ -455,24 +414,7 @@ export default {
       }
       if (!res.code) {
         this.assignData(res.data)
-      } 
-      // this.socket = ws.create(`orderbook/${this.pair}/${this.offset}/${this.accuracy}/20`)
-      // this.socket.$on('open', () => { 
-      //   this.socket.heartCheck.start()
-      // })
-      // this.socket.$on('message', (data) => {  
-      //   if (fetchId.indexOf(this.pair) === -1) { 
-      //       this.socket.$destroy()
-      //       return
-      //   } 
-      //   this.socket.heartCheck.start()
-      //   this.deepthData = data
-      //   this.changeDepthNumber(data)
-      // })
-      // this.socket.$on('reopen', () => {
-      //     this.socket.$destroy()
-      //     this.sub()
-      //   })
+      }  
     },
     assignData (data) { 
       const toBig = item => [this.$big(item.values[0]), this.$big(item.values[1])] 
@@ -572,9 +514,9 @@ export default {
     this.$eh.$off('app:resize', this.onresize)
     this.$eh.$off('app:click', this.closePanels)
     this.$eh.$off('protrade:layout:init', this.layout)
-    if (this.socket) {
-      this.socket.$destroy()
-    }
+    // if (this.socket) {
+    //   this.socket.$destroy()
+    // }
   }
   // updated () {
   //   this.computedScrollPosition()

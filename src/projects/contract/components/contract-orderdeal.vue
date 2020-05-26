@@ -225,8 +225,7 @@ export default {
       immediate: true
     },
     dataList: {
-      handler (dataList) {
-        console.log(dataList)
+      handler (dataList) { 
         this.update(dataList)
       },
       immediate: true

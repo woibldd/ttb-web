@@ -246,10 +246,7 @@ export default {
       }
     } 
   },
-  watch: {
-    problemLstt: function() {
-      console.log(this.problemType, !this.problemType)
-    },
+  watch: { 
     '$route.query.pair': {
       async handler(pair, oldPair) {
         if (!pair) return
@@ -499,8 +496,7 @@ export default {
       const key = res.topic && res.topic.split('@')[0]
       this.mapHandlerSocket[key] && this.mapHandlerSocket[key](res.data)
     }, 
-    subMarket() { 
-      // console.log('subMarket')
+    subMarket() {  
       const that = this
       if (this.socket) {
         that.socket.$destroy()
@@ -544,15 +540,10 @@ export default {
     handleOrderbook(data) { 
       this.delegateData = data
     },
-    handleTickers (data) {  
-      const indexPair = this.state.ct.pair.replace('FUTURE', 'INDEX')
-      const marketPair = this.state.ct.pair.replace('FUTURE', 'MARKET')
-      let row = data.find(item => item.pair === this.state.ct.pair)
-      let rowIndex = data.find(item => item.pair === indexPair)
-      let rowMarket = data.find(item => item.pair === marketPair)
-      this.patch(row)
-      this.patch(rowIndex)
-      this.patch(rowMarket)
+    handleTickers (data) {   
+      data.map(item => {
+        this.patch(item)
+      }) 
     },
     handleDealSoket (data) {  
       this.dealList = data
