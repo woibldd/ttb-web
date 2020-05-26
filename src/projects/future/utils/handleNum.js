@@ -373,8 +373,13 @@ export const getMixLiqPrice = ({ isBuy, leverages, amount, price, available_bala
     }
   } else {
     // 全仓Hp*VoL/[Vol+(可用余额+IM-MM)*Hp*（1-R）]
-    // const tem = (Big(available_balance).minus(margin).plus(IM).minus(MM)).mul(price).mul(1 - +take_rate) 
+    //预收开闭仓手续费
+    const fee = Big(entrustValue).times(take_rate).times(2) 
+    //成本=起始保证金+预收开闭仓手续费
+    const cost = margin.plus(fee)
     const temContract = margin.minus(MM)
+    //可用余额=可用余额-成本
+    available_balance = Big(available_balance).minus(cost)
     let lip = Big(entrustValue)[!isBuy ? 'plus' : 'minus'](temContract)[!isBuy ? 'plus' : 'minus'](available_balance).times(rate).div(Big(multiplier).times(amount))
     console.log(lip.toString())
     if (lip.gt(0)) {
