@@ -802,8 +802,7 @@ export default {
           trans_id: this.detail.trans_id
         }
         // const $this = this
-        service.otcOrderIssueDone(params).then(res => {
-          // console.log(res)
+        service.otcOrderIssueDone(params).then(res => { 
           if (!res.code) {
             // this.$message.success('提交成功')
             this.$message({
@@ -1099,8 +1098,7 @@ export default {
             trans_id: item.trans_id,
             user_id: this.id
           }
-          service.otcAppeal(params).then(res => {
-            // console.log(res)
+          service.otcAppeal(params).then(res => { 
             if (!res.code) {
               // this.$message.success('申诉成功，请等待客服处理')
               this.$message({

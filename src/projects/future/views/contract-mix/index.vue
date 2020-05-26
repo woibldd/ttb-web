@@ -1244,8 +1244,7 @@ export default {
       this.$refs['popover-buy'][0].showPopper = false
       this.$refs['popover-sell'][0].showPopper = false
     },
-    handlePopoverClick (side) {
-      console.log('handlePopoverClick')
+    handlePopoverClick (side) { 
       this.side = side === 'buy' ? 1 : 2
       this.activeAcountAndPriceArr[1] = this.activeAcountAndPriceArr[1] || (this.activeProduct.MIX||{}).current
       !this.popoverDisabled && (this.$root.modelVisible = true) || this.submitOrder()

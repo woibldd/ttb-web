@@ -366,8 +366,7 @@ export default {
       })
     },
     async getBanners() {
-      const res = await service.getBanners()
-      console.log(res)
+      const res = await service.getBanners() 
       if (!res.code) {
         const list = res.data
         if (list.length > 0) {

@@ -90,8 +90,7 @@ export default {
       const res = await service.getQuoteDeal({
         pair: this.state.pro.pair,
         size: 20
-      })
-      // console.log(res)
+      }) 
 
       if (pair !== this.state.pro.pair) {
         return false

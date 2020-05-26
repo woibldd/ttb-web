@@ -249,8 +249,7 @@ export default {
 
   },
   async created () {
-    service.getUnitContractSymList({}).then((res) => {
-      console.log(res)
+    service.getUnitContractSymList({}).then((res) => { 
       if (res.code === 0) {
         this.pairList = res.data.items
         this.currencyPair = this.pairList[0]

@@ -579,8 +579,7 @@ export default {
         phone: this.phone,
         email: this.email
       }
-      service.getLoginVerifyCode(param, 'phone').then(res => {
-        console.log(res)
+      service.getLoginVerifyCode(param, 'phone').then(res => { 
         if (res.code) {
           utils.alert(res.message)
         }
@@ -591,8 +590,7 @@ export default {
         region: this.regionId,
         email: this.email
       }
-      service.getLoginVerifyCode(param, 'email').then(res => {
-        console.log(res)
+      service.getLoginVerifyCode(param, 'email').then(res => { 
         if (res.code) {
           utils.alert(res.message)
         }

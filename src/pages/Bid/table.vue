@@ -71,8 +71,7 @@ export default {
         this.$router.push('/snowball')
       },
       manageResopetate (params) {
-        service.manageResopetate(params).then(res => {
-          console.log(res)
+        service.manageResopetate(params).then(res => { 
           if (res.code === 0) {
             this.tableData=res.data.data
             this.total = res.data.total

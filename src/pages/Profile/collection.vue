@@ -495,8 +495,7 @@ export default {
             service.delOtcCollection({
               collection_id: this.collection_id
             }).then(res => { 
-              this.loading = false
-              console.log(res)
+              this.loading = false 
               if (res.code === 0) {
                 this.init()
                 // this.$message.success('删除成功')
