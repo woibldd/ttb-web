@@ -1168,13 +1168,13 @@ export default {
       
       const curSymbol = this.tradingType
       const price = getMixLiqPrice({
-        // isBuy: this.side === 1,
-        isBuy: false,
+        isBuy: this.side === 1, 
         leverages: this.activeLever,
         amount: this.activeAcountAndPriceArr[0],
         price: this.activeAcountAndPriceArr[1] || this.activeProduct.MIX.current,
         available_balance: this.activeBalance.available_balance,
-        totalValue: this.totalValue()
+        totalValue: this.totalValue(),
+        rate: this.activeBalance.rate
       }, {...this.activeProduct, curSymbol}) 
       return price
     },

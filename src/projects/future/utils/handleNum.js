@@ -112,25 +112,7 @@ export const calcTotalValue = ({ entrustList, holding = { amount: 0, price: 0, s
     } else return holdingValue.plus(entrustValue).plus(prev)
   }, 0)
   return holdingValue.plus(entrustValue)
-  // const down = 0
-  // const price = holding.price === '--' ? 0 : holding.price
-
-  // let totalValue = Big(price || 0).eq(0) ? Big(0) : Big(holding.amount).div(price)
-  // if (pairInfo.name !== 'FUTURE_BTCUSD') {
-  //   totalValue = Big(holding.amount || 0).times(price || 0).times(mul)
-  // }
-  // for (const future of futures) {
-  //   // 数量 = 委托总数量 - 已成交数量
-  //   const fprice = future.price === '--' ? 0 : future.price
-  //   const amount = Big(future.amount).minus(future.executed)
-
-  //   let value = Big(fprice || 0).eq(0) ? Big(0) : amount.div(fprice)
-  //   if (pairInfo.name !== 'FUTURE_BTCUSD') {
-  //     value = Big(future.amount || 0).times(fprice || 0).times(mul)
-  //   }
-  //   totalValue = future.side === 1 ? totalValue.plus(value) : totalValue.minus(value)
-  // }
-  // return totalValue.round(fixed, down).abs()
+  
 }
 
 /*
@@ -201,34 +183,6 @@ export const getCost = (product, leverages, entrustList, currHolding) => {
   return margin.plus(serviceCharge).round(8)
 }
 
-export const getMixCost = (product, leverages, entrustList, currHolding) => {
- 
-  if (!product) return
-  const { amount, price, take_rate, mm, im, multiplier, symbol_currency } = product 
-  const { base_risk, gap_risk, max_leverage} = symbol_currency.find(item => item.currency === product.curSymbol)
-
-  // 输入价值
-  // const currValue = calcValueByAmountAndPrice(amount, price, multiplier)
-  const currValue = calcMixValueByAmountAndPrice(amount, price, multiplier, 1)
-
-  if (!currValue) return 0
-  // 总价值=仓位价值+委托列表价值（对冲仓位）
-  // 委托列表价值 = 当前委托列表价值+即将要下单的价值
-  // totalValue = (totalValue == null || totalValue.eq(0)) ? value : totalValue
-
-  // 累加次数 向上取整
-  let totalValue = calcTotalValue({ entrustList, currHolding, multiplier })
-  totalValue = (totalValue == null || totalValue.eq(0)) ? currValue : totalValue
-
-  // 平仓手续费
-  const serviceCharge = currValue.times(take_rate).times(2)
-  // 起始保证金
-  // const margin = Big(currValue).div(leverages).times(Big(1).plus(endIM)).plus(serviceCharge)
-  const IM = calcIM(totalValue, base_risk, gap_risk, im, mm)
-  const margin = initalMargin(currValue, !+leverages ? max_leverage : leverages, IM)
-  // 成本
-  return margin.plus(serviceCharge).round(8)
-}
 /**
    * @param {Array} futures 当前委托列表
    * @param {Object} holding 持仓
@@ -355,22 +309,50 @@ export const getLiqPrice = ({ isBuy, leverages, amount, price, available_balance
 //   max_leverage: 100
 // }))
 
-export const getMixLiqPrice = ({ isBuy, leverages, amount, price, available_balance, totalValue }, product) => {
+export const getMixCost = (product, leverages, entrustList, currHolding) => {
+ 
+  if (!product) return
+  const { amount, price, take_rate, mm, im, multiplier, symbol_currency } = product 
+  const { base_risk, gap_risk, max_leverage} = symbol_currency.find(item => item.currency === product.curSymbol)
+
+  // 输入价值
+  // const currValue = calcValueByAmountAndPrice(amount, price, multiplier)
+  const currValue = calcMixValueByAmountAndPrice(amount, price, multiplier, 1)
+
+  if (!currValue) return 0
+  // 总价值=仓位价值+委托列表价值（对冲仓位）
+  // 委托列表价值 = 当前委托列表价值+即将要下单的价值
+  // totalValue = (totalValue == null || totalValue.eq(0)) ? value : totalValue
+
+  // 累加次数 向上取整
+  let totalValue = calcTotalValue({ entrustList, currHolding, multiplier })
+  totalValue = (totalValue == null || totalValue.eq(0)) ? currValue : totalValue
+
+  // 平仓手续费
+  const serviceCharge = currValue.times(take_rate).times(2)
+  // 起始保证金
+  // const margin = Big(currValue).div(leverages).times(Big(1).plus(endIM)).plus(serviceCharge)
+  const IM = calcIM(totalValue, base_risk, gap_risk, im, mm)
+  const margin = initalMargin(currValue, !+leverages ? max_leverage : leverages, IM)
+  // 成本
+  return margin.plus(serviceCharge).round(8)
+}
+ 
+export const getMixLiqPrice = ({ isBuy, leverages, amount, price, available_balance, totalValue, rate }, product) => {
   const { take_rate, mm, im, multiplier, symbol_currency } = product
   // const { base_risk, gap_risk, max_leverage} = symbol_currency.USDT 
-  const { base_risk, gap_risk, max_leverage} = symbol_currency.find(item => item.currency === product.curSymbol)
+  const { base_risk, gap_risk, max_leverage} = symbol_currency.find(item => item.currency === product.curSymbol)  
   // 委托价值
-  const entrustValue = calcValueByAmountAndPrice(amount, price, multiplier)
+  const entrustValue = calcMixValueByAmountAndPrice(amount, price, multiplier, rate)
+
+  if (Big(entrustValue).eq(0)) return 0
   /* 初始保证金 */
-  // 档位【(总价值-初始风险限额)/递增额度 向下取整】
-  // let gears = (Big(totalValue).minus(base_risk)).div(gap_risk).round(0, 3)
-  // gears = gears.lte(1) ? Big(0) : gears
-  // IM值【IM百分比】
-  // const IM = Big(im).plus(gears.mul(mm))
+  // 档位【(总价值-初始风险限额)/递增额度 向下取整】 
+  // IM值【IM百分比】 
   // 初始保证金【委托价值/当前杠杆倍数*（100%+IM百分比--当前档位）】
   const IM = calcIM(entrustValue, base_risk, gap_risk, im, mm)
-  const margin = initalMargin(entrustValue, !+leverages ? max_leverage : leverages, IM)
-  // const initalMargin = entrustValue.div(!+leverages ? max_leverage : leverages).times(Big(IM).plus(1))
+  //开仓保证金
+  const margin = initalMargin(entrustValue, !+leverages ? max_leverage : leverages, IM) 
   // 维持保证金【MM百分比（当前挡位）*委托价值】
   const MM = Big(entrustValue).mul(mm)
   // 全仓ture 逐仓false
@@ -380,19 +362,26 @@ export const getMixLiqPrice = ({ isBuy, leverages, amount, price, available_bala
   if (!isCross) {
     // 多仓Lp=price*amount/[amount+(IM-MM)*price*（1-take_rate）]
     // （乘数X合约张数）/【开仓价值+（开仓保证金-维持保证金）】
-    const tem = margin.minus(MM).mul(price).mul(1 - +take_rate)
-    const temContract = margin.minus(MM)
-    // const temCoin = margin
-    // if (multiplier === '1' || !multiplier || !+multiplier) return Big(price).mul(amount).div(Big(amount)[isBuy ? 'plus' : 'minus'](tem)).toFixed(8)
-    if (multiplier === '1' || !multiplier || !+multiplier) return Big(amount).div(entrustValue[isBuy ? 'plus' : 'minus'](temContract)).toFixed(8)
-    else return entrustValue[!isBuy ? 'plus' : 'minus'](temContract).plus(MM).div(Big(multiplier).mul(amount)).toFixed(8)
+    // const tem = margin.minus(MM).mul(price).mul(1 - +take_rate)
+    const temContract = margin.minus(MM) 
+    let lip = Big(entrustValue)[!isBuy ? 'plus' : 'minus'](temContract).times(rate).div(Big(multiplier).times(amount))
+    console.log(lip.toString())
+    if (lip.gt(0)) {
+      return lip.toFixed(8)
+    } else {
+      return '0'
+    }
   } else {
     // 全仓Hp*VoL/[Vol+(可用余额+IM-MM)*Hp*（1-R）]
-    const tem = (Big(available_balance).minus(margin).plus(IM).minus(MM)).mul(price).mul(1 - +take_rate)
-    // const tem = initalMargin.plus(Big(available_balance)).minus(MM).mul(price).mul(1 - +take_rate)
+    // const tem = (Big(available_balance).minus(margin).plus(IM).minus(MM)).mul(price).mul(1 - +take_rate) 
     const temContract = margin.minus(MM)
-    if (multiplier === '1' || !multiplier || !+multiplier) return Big(price).mul(amount).div(Big(amount)[isBuy ? 'plus' : 'minus'](tem)).toFixed(8)
-    else return entrustValue[!isBuy ? 'plus' : 'minus'](temContract)[!isBuy ? 'plus' : 'minus'](available_balance).plus(MM).div(Big(multiplier).mul(amount)).toFixed(8)
+    let lip = Big(entrustValue)[!isBuy ? 'plus' : 'minus'](temContract)[!isBuy ? 'plus' : 'minus'](available_balance).times(rate).div(Big(multiplier).times(amount))
+    console.log(lip.toString())
+    if (lip.gt(0)) {
+      return lip.toFixed(8)
+    } else {
+      return '0'
+    }
   }
 }
 

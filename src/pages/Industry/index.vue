@@ -395,12 +395,10 @@ export default {
   }
   .fixtool {
     position: fixed;
-    top: 84px;
-    left: 988px;
+    top: 84px; 
   }
   .fixbottom {
-    position: absolute;
-    left: 988px;
+    position: absolute; 
     bottom: 81px;
   }
 }
