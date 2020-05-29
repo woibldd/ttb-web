@@ -284,7 +284,7 @@
         //this.updateAvailable()
       },
       all(){
-        Big.RM = 0
+        // Big.RM = 0
         this.number = this.$big(this.fromAmount).toFixed(8)
       },
       async submit(){

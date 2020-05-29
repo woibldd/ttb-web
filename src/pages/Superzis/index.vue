@@ -14,7 +14,7 @@
        </div>
        <div class="amount-btn-con">
          <div class="btn-list">
-           <div class="inner" v-for="(item, index) in payTypeData" :key="index" :class="{select: paySelect === index}" @click="selectHanlde(index)">{{item}}</div>
+           <div class="inner" v-for="(item, index) in payTypeData" :key="index" :class="{select: paySelect === index}" @click="selectHanlde(index)">{{$t(item)}}</div>
          </div>
          <div class="btn-ipt" :class="{err: err}" v-show="paySelect === 0">
            <number-input
@@ -40,7 +40,7 @@
            <div class="pay-list" v-for="(item, index) in payData" 
             :key="index" :data-pay="item.name" 
             :class="[ state.locale.toString(), {active: active === index, 'excellent': item.excellent}]" 
-            @click="tabHanlde(item, index)">{{ item.name }}</div>
+            @click="tabHanlde(item, index)">{{ $t(item.name) }}</div>
          </div>
          <div class="result-msg">
            <dl>
@@ -133,24 +133,24 @@ export default {
       payData: [
         {
             excellent: false,
-            name: this.$t('but_bank'),
+            name: 'but_bank',
             pay: 1,
             data: {}
         },
         {
             excellent: false,
-            name: this.$t('but_aliPay'),
+            name: 'but_aliPay',
             pay: 2,
             data: {}
         },
         {
             excellent: false,
-            name: this.$t('but_wechat'),
+            name: 'but_wechat',
             pay: 3,
             data: {}
         }
       ],
-      payTypeData: [this.$t('b_1'), this.$t('b_2')],
+      payTypeData: ['b_1', 'b_2'],
       loading: false,
       state,
     }
