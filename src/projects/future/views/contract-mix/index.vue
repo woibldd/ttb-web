@@ -408,8 +408,8 @@
                         :value="+subKey" />
                     </el-select>
                   </div>
-                  <el-checkbox v-if="+activeBtnsKey > 2"
-                              v-model="trigger_close ">{{ $tR(`mapFormContent.trigger_close`) }}</el-checkbox>
+                  <!-- <el-checkbox v-if="+activeBtnsKey > 2"
+                              v-model="trigger_close ">{{ $tR(`mapFormContent.trigger_close`) }}</el-checkbox> -->
                   <!-- <el-checkbox
                     flex-box="1"
                     v-model="trigger_close ">{{ $tR(`mapFormContent.trigger_close`) }}</el-checkbox> -->

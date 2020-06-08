@@ -1,60 +1,7 @@
 <template>
   <div class="fund-left-container">
     <div class="left-menu-container left-menu-nobottom">
-<!--      <p class="left-menu-title">-->
-<!--        <icon name="fund-history-money"/>-->
-<!--        <span class="menu-title">{{ $t('wallets_nav_asset') }} </span>-->
-<!--      </p>-->
-<!--      <ul class="left-menu-list">-->
-<!--        <li class="active">-->
-<!--          <router-link-->
-<!--            class="menu-name"-->
-<!--            active-class="active"-->
-<!--            to="/fund/my">{{ $t('capital_manage') }}-->
-<!--          </router-link>-->
-<!--          <div class="sub-menu-group">-->
-<!--            <router-link-->
-<!--              class="sub-menu-item"-->
-<!--              active-class="active"-->
-<!--              to="/fund/my/assets">{{ $t('trading_account') }}-->
-<!--            </router-link>-->
-
-<!--            <router-link-->
-<!--              class="sub-menu-item"-->
-<!--              active-class="active"-->
-<!--              to="/fund/my/contract">{{ $t('contract_account') }}-->
-<!--            </router-link>-->
-<!--          </div>-->
-<!--        </li>-->
-<!--        <li class="">-->
-<!--          <router-link-->
-<!--            class="menu-name"-->
-<!--            active-class="active"-->
-<!--            to="/fund/deposit">{{ $t('deposit') }}-->
-<!--          </router-link>-->
-<!--        </li>-->
-<!--        <li class="">-->
-<!--          <router-link-->
-<!--            class="menu-name"-->
-<!--            active-class="active"-->
-<!--            to="/fund/withdraw">{{ $t('withdraw') }}-->
-<!--          </router-link>-->
-<!--        </li>-->
-<!--        <li class="">-->
-<!--          <router-link-->
-<!--            class="menu-name"-->
-<!--            active-class="active"-->
-<!--            :to="'/fund/transfer'">{{ $t('account_exchange') }}-->
-<!--          </router-link>-->
-<!--        </li>-->
-<!--        <li class="">-->
-<!--          <router-link-->
-<!--            class="menu-name"-->
-<!--            to="/fund/address"-->
-<!--            active-class="active">{{ $t('address_manage') }}-->
-<!--          </router-link>-->
-<!--        </li>-->
-<!--      </ul>-->
+ 
 
       <!--资金纵览-->
       <dl>

@@ -51,6 +51,7 @@ export default {
 
       this.openWebSocket( config.wssUrl, res => {
       // this.openWebSocket('wss://wss.ixex.io/v1', res => {
+      // console.log(res)
       if (res.spotIndexDTOList) {
           if (!res.spotIndexDTOList.length) return
           const data = res.spotIndexDTOList.map((dataString, index) => {

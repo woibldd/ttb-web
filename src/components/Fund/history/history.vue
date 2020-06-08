@@ -298,7 +298,7 @@ export default {
       return false
     }
   },
-  async created () {
+  async created () { 
     await this.getCoins()
     this.updateHeaderLabel()
     this.getFundHistory(this.type)

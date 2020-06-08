@@ -306,8 +306,8 @@ export default {
             return
           }
           if (this.allCoins[0].currency === 'USDT') {
-            this.selectLian = this.lianData[0]
-            this.selectCoin = this.lianData[0]
+            this.selectLian = this.lianData.find(a => a.chain === 'ETH')
+            this.selectCoin = this.selectLian
             // this.lianData.forEach((item) => {
             //   console.log(item.currencyName)
             //   if (item.currencyName === 'USDT-ERC20') {
@@ -332,8 +332,8 @@ export default {
     },
     quickSelectCoin(coin) {
       if (coin.currency === 'USDT') {
-        this.selectLian = this.lianData[0]
-        this.selectCoin = this.lianData[0]
+        this.selectLian = this.lianData.find(a => a.chain === 'ETH')
+        this.selectCoin = this.selectLian
         // this.lianData.forEach((item) => {
         //   if (item.currencyName === 'USDT-ERC20') {
         //     this.selectLian = item

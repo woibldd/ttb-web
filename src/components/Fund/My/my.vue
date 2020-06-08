@@ -453,8 +453,7 @@ export default {
     let res = await service.getAllRate()
     if (!res.code && !!res.data) {
       this.rates = res.data
-    }
-    console.log('234234')
+    } 
     //获取币对列表
     let result =  await service.getPairList()
     if (!result.code && !!result.data) {
