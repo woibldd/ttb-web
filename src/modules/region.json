@@ -285,6 +285,12 @@
       "cname": "缅甸"
     },
     {
+      "id": 98,
+      "name": "IRN",
+      "fullname": "The Islamic Republic of Iran",
+      "cname": "伊朗"
+    },
+    {
       "id": 211,
       "name": "SS",
       "fullname": "South Sudan",
