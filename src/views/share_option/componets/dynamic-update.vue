@@ -96,6 +96,8 @@ export default {
           // console.log(new Date(resTime).getTime())
 
           this.chart.series[0].addPoint([new Date(resTime).getTime(), price])
+          const dataCout = this.chart.series[0].data.filter(item => item.x > min).length
+          if (dataCout > 50 && this.isNoScroll) this.initxAxis()
 
           const { orderPixels, finishPixels, orderTime, finishTime } = this.handleLinePixelsByTime(resTime)
           markElement.style.width = resTime >= orderTime ? '50vw' : 0
@@ -109,9 +111,10 @@ export default {
           // this.chart.addAnnotation({ labels: [{ point: { x: resTime, y: price }}] })
           this.rippleElement.style.right = this.chart.containerWidth - this.chart.xAxis[0].toPixels(resTime, true) - 22 + 'px'
 
-          const dataCout = this.chart.series[0].data.filter(item => item.x > min).length
+          // if (dataCout > 200 && this.isNoScroll)
+          // let dataArr = this.chart.series[0].data
+          // this.chart.xAxis[0].update({ min: dataArr[dataArr.length - 200].x })
 
-          if (dataCout > 400 && this.isNoScroll) this.initxAxis()
         }
       }).then(websocket => {
         // websocket.send(`{"reqType":9,"param":{"id":1,"period":1,"optionType":1}}`)
@@ -172,7 +175,7 @@ export default {
     },
     initxAxis() {
       const dataArr = this.chart.series[0].data
-      dataArr.length > 200 && this.chart.xAxis[0].update({ min: dataArr[dataArr.length - 200].x })
+      dataArr.length > 50 && this.chart.xAxis[0].update({ min: dataArr[dataArr.length - 50].x })
     },
     initCharts(dataArr) {
       Highcharts.setOptions({
@@ -264,7 +267,7 @@ export default {
               enabled: !1
             },
             animation: {
-              duration: 1000,
+              duration: 500,
               easing: 'easeOutBounce'
             }
           },
@@ -758,7 +761,7 @@ export default {
     width: 4px;
     height: 4px;
     // margin: 160px auto;
-    animation: ripple 0.6s linear infinite;
+    animation: ripple 0.3s linear infinite;
     border-radius: 50px;
     background-color: red;
     position: absolute;
