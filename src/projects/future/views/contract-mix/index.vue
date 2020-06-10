@@ -1178,20 +1178,24 @@ export default {
       }, {...this.activeProduct, curSymbol}) 
       return price
     },
-    handleOrderbookSoket (data) {
-      this.delegateData = data
-      if (!this._scrolled) {
-        this.$nextTick(() => {
-          this.dataLoaded()
-          this._scrolled = true
-        })
+    handleOrderbookSoket (data, topic) {
+      if (topic.indexOf(this.activeProduct.currency) > 0) {
+        this.delegateData = data
+        if (!this._scrolled) {
+          this.$nextTick(() => {
+            this.dataLoaded()
+            this._scrolled = true
+          })
+        }
       }
     },
-    handleDealSoket (data) {
-      const last = data[data.length - 1]
-      this.newBargainListData.unshift(last)
-      this.newBargainListData.pop()
-      this.isBuy = last.side === 'buy'
+    handleDealSoket (data, topic) { 
+      if (topic.indexOf(this.activeProduct.currency) > 0) {
+        const last = data[data.length - 1]
+        this.newBargainListData.unshift(last)
+        this.newBargainListData.pop()
+        this.isBuy = last.side === 'buy'
+      }
     },
     handleOrderfills (data) {
       const last = data[data.length - 1]
@@ -1201,7 +1205,7 @@ export default {
     },
     handleSoketData (res) {
       const key = res.topic && res.topic.split('@')[0]
-      this.mapHandlerSoket[key] && this.mapHandlerSoket[key](res.data)
+      this.mapHandlerSoket[key] && this.mapHandlerSoket[key](res.data, res.topic)
     },
     handlePopoverTitle (key) {
       const type = this.activeBtnsKey === '3' && this.activePriceType.key || this.activeBtnsKey
