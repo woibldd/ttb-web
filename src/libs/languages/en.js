@@ -2929,5 +2929,13 @@ export default {
     3: "Sell Long",
     4: "Buy short"
   },
-  settlement_currency: "Currency"
+  settlement_currency: "Currency",
+  bazaar: {
+    state: {
+      1:'募集中',
+      2:'计息中',
+      3:'待还款',
+      4:'已还款'
+    }
+  }
 }

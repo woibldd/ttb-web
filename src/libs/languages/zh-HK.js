@@ -2734,6 +2734,14 @@ export default {
     3: "賣出平多",
     4: "買入平空"
   },
-  settlement_currency: "結算幣種"
+  settlement_currency: "結算幣種",
+  bazaar: {
+    state: {
+      1:'募集中',
+      2:'计息中',
+      3:'待还款',
+      4:'已还款'
+    }
+  }
 
 }

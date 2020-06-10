@@ -243,8 +243,11 @@ export default {
       }
     },
     jl () {
-      this.$router.push({
-        name: 'bidtable'
+      this.$router.replace({
+        name: 'FundHistory',
+        params: {
+          from: 'byyRecord'
+        } 
       })
     },
     submit () {

@@ -228,9 +228,19 @@ export default {
       this.dynamicChart.chart.reflow()
     },
     addLabels(color) {
+      if (!this.userData) { 
+        this.$router.replace({
+          name: 'login'
+        })
+        return
+      }
       const tradeType = color === 'green' ? 0 : 1
       createOrder({ user_id: this.userData.id, symbol: this.activeProduct[0], amount: this.orderCount, currency: this.activeShareAccount.currency, 'trade_type': tradeType, period: this.activeProduct[1] }).then(res => {
-        return this.$store.dispatch('getShareAccountList', { accountArr: this.mapCurrencyList, isAssignment: true })
+        if (!res.code) {
+          return this.$store.dispatch('getShareAccountList', { accountArr: this.mapCurrencyList, isAssignment: true }) 
+        } else {
+          
+        }
       }).then(res => {
         // if (this.marketData.time > this.marketData.orderTime) {
         //   this.cacheOrderObj[this.activeShareAccount.currency] = +this.orderCount + (this.cacheOrderObj[this.activeShareAccount.currency] || 0)

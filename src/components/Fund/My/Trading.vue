@@ -248,8 +248,8 @@
       return {
         search: "",
         tableData: [],
-        plusMillionUsdt: false,
-        millionUsdtAmount: 1000000,
+        // plusMillionUsdt: false,
+        // millionUsdtAmount: 1000000,
         showLockModal: false,
         showUnlockModal: false,
         unlock_loading: false,
@@ -350,21 +350,21 @@
         return state.locale && {key: 'operate', title: this.$t('operation')}
       },
       // 百万usdt活动需要
-      plusUsdtEst () {
-        let result = 0
-        let l = this.tableData.length
-        for (let i = 0; i <= l; i++) {
-          let item = this.tableData[i]
-          if (item && item.currency.toUpperCase() === 'USDT') {
-            result = this.getEstValue({
-              amount: this.millionUsdtAmount,
-              rates: item.rates
-            })
-            break
-          }
-        }
-        return result
-      },
+      // plusUsdtEst () {
+      //   let result = 0
+      //   let l = this.tableData.length
+      //   for (let i = 0; i <= l; i++) {
+      //     let item = this.tableData[i]
+      //     if (item && item.currency.toUpperCase() === 'USDT') {
+      //       result = this.getEstValue({
+      //         amount: this.millionUsdtAmount,
+      //         rates: item.rates
+      //       })
+      //       break
+      //     }
+      //   }
+      //   return result
+      // },
       // ix锁仓/解锁
       maxLock () {
         if (this.balance.available) {
@@ -405,7 +405,7 @@
       if (!result.code && !!result.data) {
         this.pairList = result.data.items
       }
-      await this.getMine()
+      // await this.getMine()
       this.getAccountBalanceList()
       this.getIxBalance()
       this.$nextTick(
@@ -581,14 +581,14 @@
         } 
         return res
       },
-      async getMine () {
-        let res = await service.getMillionInfoMine()
-        if (!res.code && res.data) {
-          this.plusMillionUsdt = res.data.state === 1
-          this.millionUsdtAmount = this.$big(this.millionUsdtAmount).minus(res.data.reward || 0).round(1).toString()
-        } else {
-        }
-      },
+      // async getMine () {
+      //   let res = await service.getMillionInfoMine()
+      //   if (!res.code && res.data) {
+      //     this.plusMillionUsdt = res.data.state === 1
+      //     this.millionUsdtAmount = this.$big(this.millionUsdtAmount).minus(res.data.reward || 0).round(1).toString()
+      //   } else {
+      //   }
+      // },
       async getIxBalance () {
         const res = await service.getIxBalance()
         if (!res.code && res.data) {

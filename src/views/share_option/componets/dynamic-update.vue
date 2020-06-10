@@ -86,7 +86,10 @@ export default {
 
           const markElement = this.orderTimeElement.querySelector('.mask')
           const xData = this.chart.series[0].xData
-          this.isLoading = xData[xData.length - 5] === resTime
+          // this.isLoading = xData[xData.length - 5] === resTime
+          if (resTime === xData[xData.length - 1]) {
+            return
+          }
           this.lastPoint = {
             x: resTime,
             y: price,
@@ -96,6 +99,7 @@ export default {
           // console.log(new Date(resTime).getTime())
 
           this.chart.series[0].addPoint([new Date(resTime).getTime(), price])
+          // this.chart.series[0].addPoint([new Date(resTime).getTime(), price], true, true)
 
           const { orderPixels, finishPixels, orderTime, finishTime } = this.handleLinePixelsByTime(resTime)
           markElement.style.width = resTime >= orderTime ? '50vw' : 0
@@ -271,7 +275,7 @@ export default {
           cursor: 'pointer'
         },
         scrollbar: {
-          enabled: !1
+          enabled: true
         },
         tooltip: {
           useHTML: !0,
@@ -316,7 +320,7 @@ export default {
             }
           },
           gridLineColor: 'rgba(167, 174, 196, 0.1)',
-          gridLineWidth: 2
+          gridLineWidth: 2,
         },
         legend: {
           enabled: !1
@@ -339,8 +343,8 @@ export default {
                   <div class="line up"></div>
                   <div class="line down"></div> `
             },
-            x: -20
-            // step: 2
+            x: -20,
+            step: 30
             // reserveSpace: false
           },
           allowDecimals: !0,
@@ -665,13 +669,13 @@ export default {
     display: none;
     &.up{
       top: 50%;
-      background: linear-gradient(to bottom, rgba(202,38,38,0.3), transparent);
+      background: linear-gradient(to bottom, rgba(224, 44, 44, 0.3), transparent);
     }
     &.down{
       bottom: 50%;
-      background: linear-gradient(to top, rgba(30,139,33,0.3), transparent);
+      background: linear-gradient(to top, rgba(47, 207, 52, 0.3), transparent);
     }
-  }
+  } 
 
   .time-line {
     position: absolute;

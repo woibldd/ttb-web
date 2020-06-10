@@ -131,9 +131,12 @@ export const capitalRouter = [
             component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/My/my.vue'),
             children: [
               {
+                path: 'personal',
+                name: 'personalAssets'
+              },
+              {
                 path: 'history/:from',
-                name: 'assetsHistory',
-                alias: 'deposit/:currency/history',
+                name: 'FundHistory', 
                 component: () => import(/* webpackChunkName: "FundHistory" */ '@/components/Fund/history/history.vue')
               }
             ]

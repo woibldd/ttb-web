@@ -2793,5 +2793,13 @@ export default {
     3: "매출액이 평이",
     4: "매입공거래"
   },
-  settlement_currency: "결제 화폐 종류"
+  settlement_currency: "결제 화폐 종류",
+  bazaar: {
+    state: {
+      1:'募集中',
+      2:'计息中',
+      3:'待还款',
+      4:'已还款'
+    }
+  }
 }

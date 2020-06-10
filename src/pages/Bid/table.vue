@@ -1,54 +1,62 @@
 <template>
-    <div style="width: 1200px;margin: 40px auto;" class="detail-table">
-        <div class="backTop" @click="backTop">
-            <i class="iconfont">&#xe64e;</i>
-            <span>{{$t('bby_shouy7')}}</span>
-        </div>
-        <el-table  
-        :data="tableData"
-        :empty-text="$t('no_data')"
-        border
-        scripe
-        style="width: 100%">
-
+  <div style="width: 1200px;margin: 40px auto;" class="detail-table">
+    <div class="backTop" @click="backTop">
+      <i class="iconfont">&#xe64e;</i>
+      <span>{{$t('bby_shouy7')}}</span>
+    </div>
+    <el-table  
+      :data="tableData"
+      :empty-text="$t('no_data')"
+      border
+      scripe
+      style="width: 100%"> 
+      <el-table-column
+        prop="manageName"
+        :label="$t('产品中文名称')"
+        width="180">
+      </el-table-column> 
       <el-table-column
         prop="createTime"
-       :label="$t('time')"
+        :label="$t('time')"
         width="180">
-      </el-table-column>
-
+      </el-table-column> 
       <el-table-column
         prop="currency"
-       :label="$t('currency')"
+        :label="$t('currency')"
         width="180">
-      </el-table-column>
-
+      </el-table-column> 
       <el-table-column
         prop="amount"
-       :label="$t('otc_trans_idsl')">
+        :label="$t('otc_trans_idsl')">
       </el-table-column>
       <el-table-column
         prop="income"
-     :label="$t('bby_shouy18')" >
+        :label="$t('bby_shouy18')" >
       </el-table-column>
-       <el-table-column
+      <el-table-column
         prop="opetate"
-      :label="$t('operation')">
+        :label="$t('operation')">
       </el-table-column>
       <el-table-column
         prop="state"
-      :label="$t('status')" >
+        :label="$t('status')" >
       </el-table-column>
-   </el-table>
-   <div style="text-align:center;margin-top: 20px;">
-          <el-pagination
-            background
-            layout="prev, pager, next"
-            :total="total"
-            @current-change="currentChange">
-          </el-pagination>
-      </div>
+      <el-table-column
+        prop="unlockTime"
+        :label="$t('预计还款时间')"
+        width="180">
+      </el-table-column> 
+
+    </el-table>
+    <div style="text-align:center;margin-top: 20px;">
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="total"
+        @current-change="currentChange">
+      </el-pagination>
     </div>
+  </div>
 </template>
 
 <script>

@@ -3,8 +3,8 @@
     <div class="my-fund-content">
       <div class="fund-total">
         <div class="left">
-          <!-- <div class="total__label">{{ $t('withdraw_avlb') }}</div> -->
-          <!-- <div class="total__coin">{{ total | fixed(2) }} {{ unit }} </div> -->
+          <div class="total__label">{{ $t('withdraw_avlb') }}</div>
+          <div class="total__coin">{{ total | fixed(2) }} {{ unit }} </div>
         </div>
         <el-radio-group  :empty-text="$t('no_data')"
           @change="changeType"
@@ -15,18 +15,39 @@
           <el-radio-button label="withdraw">{{ $t('withdraw_record') }}</el-radio-button>
           <el-radio-button label="reward"> {{ $t('fund_reward') }} </el-radio-button>
           <el-radio-button label="return"> {{ $t('commission_history_text') }} </el-radio-button>
+          <el-radio-button label="byyRecord"> {{ $t('bby_shise1') }} </el-radio-button>
           <el-radio-button
             v-if="isPromoter"
             label="promoter"> {{ $t('promote_brokerage') }} </el-radio-button>
           <el-radio-button
             v-if="hasInternal"
             label="internal"> {{ $t('internal_transfer') }} </el-radio-button>
-        </el-radio-group>
-
+        </el-radio-group> 
       </div>
+      <!-- <div
+          class="tital__switch">
+        <router-link v-for="(item, index) in routeList" :key="index" :to="{name: item.routeName, params: item.params}">
+          {{ $t(item.text)}}
+        </router-link>
+      </div> -->
+      
+      <el-table   :empty-text="$t('no_data')"
+        :data="tableData"
+        v-if="type === 'byyRecord'"
+        v-loading="loading"
+        cell-class-name="unrelease-cell"
+        class="fund-coin-pool"> 
+        <el-table-column
+          v-for="(hd, idx) in tableHeaders"
+          :key="idx"  
+          :formatter="byyFormatter"
+          :prop="hd.key"
+          :label="hd.title">
+        </el-table-column> 
+      </el-table>
       <el-table :empty-text="$t('no_data')"
         :data="tableData"
-        v-if="type === 'return'"
+        v-else-if="type === 'return'"
         v-loading="loading"
         class="fund-coin-pool">
          <el-table-column
@@ -246,6 +267,7 @@ export default {
     return {
       header: [],
       headerReward: [],
+      headerByy: [],
       headerInternal: [],
       headerPromoter: [],
       status: {key: 'state', title: this.$i18n.t('state')},
@@ -275,7 +297,51 @@ export default {
         2:"trading",
         1:"contract"
       },
-      isEnd: true
+      isEnd: true,
+      // routeList: [ 
+      //   {
+      //     routeName: 'FundHistory',
+      //     text: 'teansdasda',
+      //     params: {
+      //       from: 'all'
+      //     }
+      //   },
+      //   {
+      //     routeName: 'FundHistory',
+      //     text: 'deposit_record',
+      //     params: {
+      //       from: 'deposit'
+      //     } 
+      //   },
+      //   {
+      //     routeName: 'FundHistory',
+      //     text: 'withdraw_record',
+      //     params: {
+      //       from: 'withdraw'
+      //     } 
+      //   },
+      //   {
+      //     routeName: 'FundHistory',
+      //     text: 'fund_reward',
+      //     params: {
+      //       from: 'reward'
+      //     } 
+      //   },
+      //   {
+      //     routeName: 'FundHistory',
+      //     text: 'commission_history_text',
+      //     params: {
+      //       from: 'return'
+      //     } 
+      //   },
+      //   {
+      //     routeName: 'FundHistory',
+      //     text: 'bby_shise1',
+      //     params: {
+      //       from: 'byyRecord'
+      //     } 
+      //   }
+      // ]
     }
   },
   computed: {
@@ -287,6 +353,8 @@ export default {
           return this.headerInternal
         case 'promoter':
           return this.headerPromoter
+        case 'byyRecord':
+          return this.headerByy 
         default:
           return this.header
       }
@@ -302,8 +370,8 @@ export default {
     await this.getCoins()
     this.updateHeaderLabel()
     this.getFundHistory(this.type)
-    this.getAccountBalanceList()
-    this.getInternalHistory()
+    // this.getAccountBalanceList()
+    // this.getInternalHistory()
   },
   methods: {
     open(param) {
@@ -357,6 +425,18 @@ export default {
         return row[column.property]
       }
     },
+    byyFormatter(row, column) { 
+      if (column.property === 'createTime' || column.property === 'unlockTime') {
+        return utils.dateFormatter(row[column.property])
+      } else if (column.property === 'state') { 
+        return this.$t(`bazaar.state.${row.state}`)
+      } else if (column.property === 'opetate') { 
+        if (row.opetate===1) return this.$t('bby_shise7')
+        else return this.$t('bby_shise8') 
+      } else {
+        return row[column.property]
+      }
+    },
     showCXID (row) {
       //console.log({row,cc: this.coinList})
       if (!!row.txid && !!this.coinList[row.currency + '_' + row.chain]) {
@@ -398,15 +478,15 @@ export default {
     unReleased (row) {
       return this.type === 'reward' && row.state === 0// 0 待发放, 1 已完成
     },
-    async getInternalHistory () {
-      let res = await service.getInternalHistory({
-        page: 1,
-        size: 1
-      })
-      if (!res.code && res.data && res.data.length > 0) {
-        this.hasInternal = true
-      }
-    },
+    // async getInternalHistory () {
+    //   let res = await service.getInternalHistory({
+    //     page: 1,
+    //     size: 1
+    //   })
+    //   if (!res.code && res.data && res.data.length > 0) {
+    //     this.hasInternal = true
+    //   }
+    // },
     getFundHistory (from = 'deposit') {
       this.isEnd = true
       this.loading = true
@@ -421,9 +501,9 @@ export default {
         case 'reward':
           request = service.getRewardHistory
           break
-        case 'internal':
-          request = service.getInternalHistory
-          break
+        // case 'internal':
+        //   request = service.getInternalHistory
+        //   break
         case 'all':
           request = service.getBalanceList
           break
@@ -433,6 +513,9 @@ export default {
         //节点返佣记录
         case 'return':
           request = service.nodeReturn
+          break
+        case 'byyRecord':
+          request = service.manageResopetate
           break
         default:
           break
@@ -449,16 +532,14 @@ export default {
           this.loading = false
           this.total = 0
         }
-        else {
-          // res.data = res.data.map(r => {
-          //   if (r.type === 7) {
-          //     r.state = 0
-          //   }
-          //   return r
-          // })
+        else { 
           this.tableData = res.data
           if(this.type === 'all' ||  this.type === 'return') {
             this.tableData = res.data.data
+            this.tableData.forEach((item) => {
+              item.form = this.getBalance(item.from_balance)
+              item.to = this.getBalance(item.to_balance)
+            })
             let p = res.data
             if (p.total > p.page * p.size) {
               this.isEnd = false
@@ -469,6 +550,8 @@ export default {
             if (p.total > p.page * p.size) {
               this.isEnd = false
             }
+          } else if (from === 'byyRecord') {
+            this.tableData = res.data.data
           }
           else {
             if (this.tableData.length === 10)
@@ -511,13 +594,7 @@ export default {
               this.tableData[i].status = text1
             }
             // console.log(this.ta)
-          }
-          console.log(this.tableData)
-          this.tableData.forEach((item) => {
-            item.form = this.getBalance(item.from_balance)
-            item.to = this.getBalance(item.to_balance)
-          })
-          console.log(this.tableData)
+          }  
         }
       })
     },
@@ -538,21 +615,21 @@ export default {
 
       }
     },
-    getAccountBalanceList () {
-      return service.getBalance().then(res => {
-        this.total = 0
-        if (!res.code && res.data) {
-          res.data.map(item => {
-            item.rates = item.rates || {}
-            item.locking = this.$big(item.locking || 0).plus(this.$big(item.ordering || 0).plus(this.$big(item.withdrawing || 0)).toString())
-            item.amount = this.$big(item.locking).plus(this.$big(item.available)).round(4, this.C.ROUND_DOWN).toString()
-            item.estValue = this.getEstValue(item)
-            this.total = this.$big(this.total).plus(item.estValue)
-            return item
-          })
-        }
-      })
-    },
+    // getAccountBalanceList () {
+    //   return service.getBalance().then(res => {
+    //     this.total = 0
+    //     if (!res.code && res.data) {
+    //       res.data.map(item => {
+    //         item.rates = item.rates || {}
+    //         item.locking = this.$big(item.locking || 0).plus(this.$big(item.ordering || 0).plus(this.$big(item.withdrawing || 0)).toString())
+    //         item.amount = this.$big(item.locking).plus(this.$big(item.available)).round(4, this.C.ROUND_DOWN).toString()
+    //         item.estValue = this.getEstValue(item)
+    //         this.total = this.$big(this.total).plus(item.estValue)
+    //         return item
+    //       })
+    //     }
+    //   })
+    // },
     getText (item) {
       // IX持仓分红给独立提示
       // if (item.type === 7 && item.state === 0) {
@@ -622,6 +699,16 @@ export default {
         {key: 'name', title: this.$i18n.t('order_th_type')},
         {key: 'amount', title: this.$i18n.t('amount')} // -fee
       ]
+      this.headerByy = [
+        {key: 'manageName', title: this.$i18n.t('产品名称')},
+        {key: 'createTime', title: this.$i18n.t('time')},
+        {key: 'currency', title: this.$i18n.t('currency')},
+        {key: 'amount', title: this.$i18n.t('amount')},
+        {key: 'income', title: this.$i18n.t('bby_shouy18')},
+        {key: 'opetate', title: this.$i18n.t('operation')},
+        {key: 'state', title: this.$i18n.t('status')},
+        {key: 'unlockTime', title: this.$i18n.t('预计还款时间')} 
+      ]
       this.headerInternal = [
         {key: 'create_time', title: this.$i18n.t('time')},
         {key: 'currency', title: this.$i18n.t('currency')},
@@ -632,8 +719,7 @@ export default {
         {key: 'currency', title: this.$i18n.t('currency')},
         {key: 'amount', title: this.$i18n.t('amount')}
       ]
-      this.status = Object.assign({key: 'state', title: this.$i18n.t('state')})
-
+      this.status = Object.assign({key: 'state', title: this.$i18n.t('state')}) 
       this.operate = Object.assign({key: 'txid', title: this.$i18n.t('actions')})
       this.internalType = Object.assign({key: 'internal', title: this.$i18n.t('order_th_type')})
     },
@@ -648,13 +734,12 @@ export default {
     }
 
   },
-  async beforeRouteEnter(to, from, next) {
-    console.log({to, from})
+  async beforeRouteEnter(to, from, next) { 
     next();
   },
   watch: {
     'state.locale' (v) {
-      this.getAccountBalanceList()
+      // this.getAccountBalanceList()
       this.updateHeaderLabel()
     }
   }
@@ -733,32 +818,51 @@ export default {
         cursor: pointer;
     }
     .total__switch {
-       .el-radio-button__orig-radio,
-       .el-radio-button__inner {
-        background-color: white !important;
+      .el-radio-button__orig-radio,
+      .el-radio-button__inner {
+      background-color: white !important;
+      display: inline-block;
+      // width: 80px;
+      color: $text-weak !important;
+      border: 1px solid $text-weak !important;
+      height: 30px;
+      line-height: 30px;
+      box-sizing: border-box;
+      text-align: center;
+      border-radius: 15px !important;
+      padding: 0 10px;
+      box-shadow: none !important;
+      margin-left: 10px;
+      } 
+      .el-radio-button{
+          box-shadow: none !important;
+      }
+      .el-radio-button.is-active {
+          .el-radio-button__inner {
+              color: $primary !important;
+              border: 1px solid $primary !important;
+          }
+      }
+    }
+    .tital__switch {
+      margin:30px 0;
+      text-align: right;
+      a {
         display: inline-block;
-        // width: 80px;
-        color: $text-weak !important;
-        border: 1px solid $text-weak !important;
+        padding: 0 10px;
         height: 30px;
         line-height: 30px;
+        border: 1px solid;
         box-sizing: border-box;
         text-align: center;
-        border-radius: 15px !important;
-        padding: 0 10px;
-        box-shadow: none !important;
-        margin-left: 10px;
-       }
+        border-radius: 15px;
+        color: $text-weak;
+        margin-left: 10px; 
+        &.router-link-active {
+          color: $primary;
+        }
+      }
 
-        .el-radio-button{
-            box-shadow: none !important;
-        }
-        .el-radio-button.is-active {
-            .el-radio-button__inner {
-                color: $primary !important;
-                border: 1px solid $primary !important;
-            }
-        }
     }
     .history__footer {
         display: flex;

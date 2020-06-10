@@ -64,19 +64,19 @@ export const fundRouter = [
               }
             ]
           },
-          {
-            path: 'assets',
-            name: 'myAssets',
-            component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/My/my.vue'),
-            children: [
-              {
-                path: 'history/:from',
-                name: 'assetsHistory',
-                alias: 'deposit/:currency/history',
-                component: () => import(/* webpackChunkName: "FundHistory" */ '@/components/Fund/history/history.vue')
-              }
-            ]
-          }
+          // {
+          //   path: 'assets',
+          //   name: 'myAssets',
+          //   component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/My/my.vue'),
+          //   children: [
+          //     {
+          //       path: 'history/:from',
+          //       name: 'assetsHistory',
+          //       alias: 'deposit/:currency/history',
+          //       component: () => import(/* webpackChunkName: "FundHistory" */ '@/components/Fund/history/history.vue')
+          //     }
+          //   ]
+          // }
         ]
       },
       {

@@ -487,17 +487,19 @@ export default {
     // console.log({userInfo: this.state.userInfo}) 
     // this.showLayerModal = !this.email_bound || !this.phone_bound || !this.all_bound
      
-    //有充币行为
-    if (this.isDeposited){
-      this.showDepositModal = !this.google_bound
-    } 
-    //kyc2
-    else if(this.state.userInfo.lv > 0) {
+    // //有充币行为
+    // if (this.isDeposited){
+    //   this.showDepositModal = !this.google_bound
+    // } 
+    // //kyc2
+    // else 
+    if(this.state.userInfo.lv > 0) {
       this.showLayerModal = !this.email_or_phone_bound || !this.google_bound || !this.all_bound
     }
     //没有充币行为且kyc=0
     else {
-       this.showDepositModal = true
+      this.showLayerModal = true
+      //  this.showDepositModal = true
     }
     // this.showLayerModal = true
     // this.showModal = true

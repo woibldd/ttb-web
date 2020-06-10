@@ -2806,5 +2806,13 @@ export default {
     3: "卖出平多",
     4: "买入平空"
   },
-  settlement_currency: "结算币种"
+  settlement_currency: "结算币种",
+  bazaar: {
+    state: {
+      1:'募集中',
+      2:'计息中',
+      3:'待还款',
+      4:'已还款'
+    }
+  }
 }

@@ -34,7 +34,7 @@
           <router-link 
             class="fund-history" 
             :class="{'fund-historc' : showHistory}"
-            :to="{name:'assetsHistory', params: {from: 'deposit'}}"
+            :to="{name:'FundHistory', params: {from: 'deposit'}}"
           >{{ $t('capital_record') }}</router-link>
         </span>
       </div>
@@ -360,7 +360,8 @@ export default {
       return list
     },
     showHistory () {
-      return this.$route.name === 'assetsHistory';
+      // return this.$route.name === 'assetsHistory';
+      return this.$route.name === 'FundHistory';
     },
     total () {
       let sum = this.$big(0)
@@ -705,15 +706,14 @@ export default {
       return res
     },
     async getMine () {
-      let res = await service.getMillionInfoMine()
-      if (!res.code && res.data) {
-        this.plusMillionUsdt = res.data.state === 1
-        this.millionUsdtAmount = this.$big(this.millionUsdtAmount)
-          .minus(res.data.reward || 0)
-          .round(1)
-          .toString()
-      } else {
-      }
+      // let res = await service.getMillionInfoMine()
+      // if (!res.code && res.data) {
+      //   this.plusMillionUsdt = res.data.state === 1
+      //   this.millionUsdtAmount = this.$big(this.millionUsdtAmount)
+      //     .minus(res.data.reward || 0)
+      //     .round(1)
+      //     .toString()
+      // } 
     },
     async getIxBalance () {
       const res = await service.getIxBalance()
