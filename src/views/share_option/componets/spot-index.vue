@@ -10,13 +10,13 @@
         <span>{{ item.value }}</span>
       </li>
       <div class="line" />
-      <li v-for="(value,key) in mapExponent" :key="key" flex="main:justify cross:center">
+      <!-- <li v-for="(value,key) in mapExponent" :key="key" flex="main:justify cross:center">
         <p class="text">{{ $tR(`mapList.${key}`) }}</p>
         <span class="num">{{ value }}</span>
-      </li>
+      </li> -->
       <div class="line" />
       <li flex="main:justify cross:center">
-        <p class="text">{{ $tR(`USD`) }}<span class="graysmall">(USD)</span></p>
+        <p class="text">{{ $tR(`USD`) }}<span class="graysmall">(USDT)</span></p>
         <span class="num">{{ USD }}</span>
       </li>
     </ul>
@@ -53,7 +53,7 @@ export default {
       return { price: bigRound(price, 2), usdtRate: `x ${usdtRate}` }
     },
     USD() {
-      return bigRound(this.data.usd, 2)
+      return bigRound(this.data.price, 2)
     }
   }
 }
