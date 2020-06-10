@@ -1196,13 +1196,7 @@ export default {
         this.newBargainListData.pop()
         this.isBuy = last.side === 'buy'
       }
-    },
-    handleOrderfills (data) {
-      const last = data[data.length - 1]
-      this.newBargainListData.unshift(last)
-      this.newBargainListData.pop()
-      this.isBuy = last.side === 'buy'
-    },
+    }, 
     handleSoketData (res) {
       const key = res.topic && res.topic.split('@')[0]
       this.mapHandlerSoket[key] && this.mapHandlerSoket[key](res.data, res.topic)

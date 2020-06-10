@@ -9,7 +9,7 @@
         </div>
         <span>{{ item.value }}</span>
       </li>
-      <div class="line" />
+      <!-- <div class="line" /> -->
       <!-- <li v-for="(value,key) in mapExponent" :key="key" flex="main:justify cross:center">
         <p class="text">{{ $tR(`mapList.${key}`) }}</p>
         <span class="num">{{ value }}</span>
