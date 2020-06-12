@@ -73,6 +73,7 @@
         </div>
       </div>
     </div>
+    {{shareBlance}}
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane :label="$t('transfer_btc_history')" name="first"></el-tab-pane>
       <!-- <el-tab-pane label="全部划转记录" name="second"></el-tab-pane> -->
@@ -198,6 +199,9 @@
           case 7: 
             amount = this.mixAvai
             break
+          case 8:
+            amount = this.shareAvai
+            break
           default:
             amount = 0
         } 
@@ -223,6 +227,10 @@
             break
           case 7: 
             amount = this.mixAvai
+            break
+          case 8:
+            amount = this.shareAvai
+            break
           default:
             amount = 0
         }
@@ -236,10 +244,10 @@
         }
       },
       contractAvai() {
-        if (!this.shareBlance) {
+        if (!this.contractBalance) {
           return 0;
         } else {
-          return this.$big(this.shareBlance.available || 0).round(8, 0).toFixed(8);
+          return this.$big(this.contractBalance.available_balance || 0).round(8, 0).toFixed(8);
         }
       },
       otcAvai() {
@@ -270,11 +278,11 @@
           return this.$big(this.mixBalance.available_balance || 0).round(8, 0).toFixed(8) 
         }
       },
-      shareAvai() {
-        if (!this.contractBalance) {
+      shareAvai() { 
+        if (!this.shareBlance) {
           return 0;
         } else {
-          return this.$big(this.contractBalance.available_balance || 0).round(8, 0).toFixed(8);
+          return this.$big(this.shareBlance.available || 0).round(8, 0).toFixed(8);
         }
 
       }
