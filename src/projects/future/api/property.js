@@ -108,12 +108,12 @@ export const getUnitRecordList = (data = { page: 1, size: 10 }) => request({
   method: 'post',
   data
 })
-// 急速账户 POST /future/account/balance/list
-export const getShareBalanceList = (data = { currencys: [] }) => request({
-  url: '/opt/account/balance',
-  method: 'post',
-  data
-})
+// // 急速账户 POST /future/account/balance/list
+// export const getShareBalanceList = (data = { currencys: [] }) => request({
+//   url: '/opt/account/balance',
+//   method: 'post',
+//   data
+// })
 // 提币币种列表 POST /account/currency/list
 export const getCurrencyList = (data) => request({
   url: '/account/currency/list',

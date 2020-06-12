@@ -119,6 +119,7 @@
   import utils from '@/modules/utils'
   import { state, actions, local } from "@/modules/store"; 
   import ixPagination from '@/components/common/ix-pagination'
+  import { getShareAccountList } from '@/modules/api/share_option'
 
 
   export default {
@@ -143,6 +144,7 @@
         otcBalance: null,
         unitBalance: null,
         mixBalance: null,
+        shareBlance: null,
         tableData: [],
         accountTypes: [{
           value: 1,
@@ -156,6 +158,9 @@
         }, {
           value: 4,
           label: 'otc_account'
+        }, {
+          value: 8,
+          label: 'shareOption.share_account'
         }],
         accountTypes2: []
       }
@@ -231,10 +236,10 @@
         }
       },
       contractAvai() {
-        if (!this.contractBalance) {
+        if (!this.shareBlance) {
           return 0;
         } else {
-          return this.$big(this.contractBalance.available_balance || 0).round(8, 0).toFixed(8);
+          return this.$big(this.shareBlance.available || 0).round(8, 0).toFixed(8);
         }
       },
       otcAvai() {
@@ -264,6 +269,14 @@
         } else { 
           return this.$big(this.mixBalance.available_balance || 0).round(8, 0).toFixed(8) 
         }
+      },
+      shareAvai() {
+        if (!this.contractBalance) {
+          return 0;
+        } else {
+          return this.$big(this.contractBalance.available_balance || 0).round(8, 0).toFixed(8);
+        }
+
       }
     },
     methods: {
@@ -323,13 +336,14 @@
 
       },
       async getBalance(){
-        let [tradingBalance, contractBalance, otcBalance, walletBalance, unitBalance, mixBalance] = await Promise.all([
+        let [tradingBalance, contractBalance, otcBalance, walletBalance, unitBalance, mixBalance, shareBlance] = await Promise.all([
           service.getBalanceByPair(this.selectCoin),
           service.getContractBalanceByPair({ symbol:this.selectCoin}),
           service.getOtcBalanceByPair({symbol: this.selectCoin}),
           service.getwalletBalanceByPair({symbol: this.selectCoin}),
           service.getUnitBalanceByPair({symbol: this.selectCoin}),
-          service.getMixBalanceByPair({symbol: this.selectCoin})
+          service.getMixBalanceByPair({symbol: this.selectCoin}),
+          getShareAccountList(0 ,this.selectCoin)
         ]);
 
         //console.log({tradingBalance, contractBalance, otcBalance})
@@ -351,6 +365,9 @@
         if (mixBalance) {
           this.mixBalance = mixBalance.data
         }
+        if (shareBlance && shareBlance.data && shareBlance.data.length) {
+          this.shareBlance = shareBlance.data[0]
+        } 
         //this.updateAvailable()
       },
       getPage(){
@@ -382,6 +399,7 @@
                 4 : this.$t("otc_account"),
                 5 : this.$t('unit_account'),
                 7 : this.$t('gold_account'), 
+                8 : this.$t('shareOption.share_account'), 
               }
 
               this.tableData[i].from_balance = balanceList[this.tableData[i].from_balance]
@@ -417,6 +435,9 @@
           }, {
             value: 7,
             label: 'gold_account'
+          }, {
+            value: 8,
+            label: 'shareOption.share_account'
           }]
         } else if(val === 'BTC') {
           this.accountTypes = [{
@@ -431,6 +452,9 @@
           }, {
             value: 4,
             label: 'otc_account'
+          }, {
+            value: 8,
+            label: 'shareOption.share_account'
           }]
         } else if(val === 'ETH') {
           this.accountTypes = [{

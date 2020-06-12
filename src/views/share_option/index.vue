@@ -61,7 +61,14 @@
             <div slot="content" style="width:200px;line-height:2">{{ $tR('up_rate') }}{{ $tR('describe') }}</div>
             <i class="el-icon-bell" style="position:absolute;top:10px;right:10px;color:#fff" />
           </el-tooltip>
-          <div v-if="mapCurrencyList[0]" class="share-text-info">
+          <div v-if="rateData" class="share-text-info"> 
+            <span>{{  rateData.upRate |bigRound(2) }}%</span>
+            <p>
+              <svg-icon :icon-class="activeShareAccount?activeShareAccount.currency.toLowerCase():'dollar'" style="font-size:16px" /> 
+              {{ orderCount/100*(+rateData.upRate)|bigRound(8) }}
+            </p>
+          </div> 
+          <div v-else-if="mapCurrencyList[0]" class="share-text-info">
             <span>{{ mapCurrencyList[0].up_rate|bigRound(2) }}%</span>
             <p><svg-icon :icon-class="activeShareAccount?activeShareAccount.currency.toLowerCase():'dollar'" style="font-size:16px" /> {{ orderCount/100*(+mapCurrencyList[0].up_rate)|bigRound(8) }}</p>
           </div>
@@ -80,8 +87,15 @@
           <el-tooltip placement="bottom" effect="dark">
             <div slot="content" style="width:200px;line-height:2">{{ $tR('down_rate') }}{{ $tR('describe') }}</div>
             <i class="el-icon-bell" style="position:absolute;bottom:10px;right:10px;color:#fff" />
-          </el-tooltip>
-          <div v-if="mapCurrencyList[0]" class="share-text-info">
+          </el-tooltip> 
+          <div v-if="rateData" class="share-text-info"> 
+            <span>{{  rateData.downRate |bigRound(2) }}%</span>
+            <p>
+              <svg-icon :icon-class="activeShareAccount?activeShareAccount.currency.toLowerCase():'dollar'" style="font-size:16px" /> 
+              {{ orderCount/100*(+rateData.downRate)|bigRound(8) }}
+            </p>
+          </div> 
+          <div v-else-if="mapCurrencyList[0]" class="share-text-info">
             <span>{{ mapCurrencyList[0].down_rate|bigRound(2) }}%</span>
             <p><svg-icon :icon-class="activeShareAccount?activeShareAccount.currency.toLowerCase():'dollar'" style="font-size:16px" /> {{ orderCount/100*(+mapCurrencyList[0].down_rate)|bigRound(8) }}</p>
           </div>
@@ -191,10 +205,10 @@ export default {
   mounted() {
     getProduct().then(res => {
       this.mapProduct = this.handleProductData(res.data)
-      // this.activeProduct = ['BTCUSD', '0']
-      if (this.mapProduct.length > 0) {
-        this.activeProduct = [this.mapProduct[0].label, '0']
-      }
+      this.activeProduct = ['BTCUSDT', '0']
+      // if (this.mapProduct.length > 0) {
+      //   this.activeProduct = [this.mapProduct[0].label, '0']
+      // }
     })
   },
   methods: {

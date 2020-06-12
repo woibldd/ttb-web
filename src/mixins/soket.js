@@ -48,6 +48,8 @@ export default {
               let res = JSON.parse(restored)  
               res = res.code === 0 ? res.data : res
               resolve(websocket)
+              
+              // console.log(res)
               callBack(res)
             }
           })

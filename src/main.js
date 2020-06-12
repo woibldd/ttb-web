@@ -11,6 +11,10 @@ import { actions } from './modules/store'
 import './bootstrap'
 import en from '@/libs/languages/en.js' 
 import enLocale from 'element-ui/lib/locale/lang/en'
+ 
+import zhCN from '@/libs/languages/zh-CN.js' 
+import zhCNLocale from 'element-ui/lib/locale/lang/zh-CN'
+
 import eventHub from '@/modules/eventHub'
 import VTooltip from 'v-tooltip'
 import qs from 'querystring'
@@ -34,7 +38,8 @@ utils.$i18n = new VueI18n({
   silentTranslationWarn: true, // process.env.NODE_ENV === 'production',
   messages: {
     // en: actions.replaceName(en)
-    en: {...en, ...enLocale}
+    en: {...en, ...enLocale},
+    'zh-CN': {...zhCN, ...zhCNLocale}
   }
 })
 // import ElementUI from 'element-ui'

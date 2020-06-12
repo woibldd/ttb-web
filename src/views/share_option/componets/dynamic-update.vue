@@ -52,7 +52,7 @@ export default {
       this.openWebSocket( config.wssUrl, res => {
       // this.openWebSocket('wss://wss.ixex.io/v1', res => {
       // console.log(res)
-      if (res.spotIndexDTOList) {
+        if (res.spotIndexDTOList) {
           if (!res.spotIndexDTOList.length) return
           const data = res.spotIndexDTOList.map((dataString, index) => {
             const item = JSON.parse(dataString)
@@ -72,7 +72,7 @@ export default {
 
           this.isLoading = false
         } else if (res.data) {
-          this.addUserAnnotations(res.data)
+          this.addUserAnnotations(res)
         } else {
           if (!this.chart) return
           const { min } = this.chart.xAxis[0].getExtremes()
@@ -151,12 +151,16 @@ export default {
         finishBoxElement.innerText = ''
       }
     },
-    addUserAnnotations(data) {
-      data = JSON.parse(data)
-      if (data.downRate) { 
-        this.$emit('pushRateData', data) 
-      } else {
-        this.addLabels(!data.tradeType ? 'green' : 'red', data.amount, data)
+    addUserAnnotations(res) {
+      let data = JSON.parse(res.data)  
+      if (res.topic && res.topic==='optionsRate') {  
+        const item = data.find(c => c.symbol===this.websocketArgs[1] && c.period === this.websocketArgs[0])
+        if (!!item) { 
+          // console.log(item)
+          this.$emit('pushRateData', item) 
+        }
+      } else { 
+        this.addLabels(!res.data.tradeType ? 'green' : 'red', res.data.amount, res.data)
       }
     },
     cleanAnnotations(orderTime) {
@@ -499,10 +503,8 @@ export default {
     handleScroll(e, n) {
       const xAxis = this.chart.xAxis[0]
       // if (Math.ceil(xAxis.tickInterval) <= 2000) return
-      const { min, max, dataMin } = xAxis.getExtremes()
-
-      const newMin = min - 60 * rangeArr[this.websocketArgs[0] - 1][1] * e.deltaY
-
+      const { min, max, dataMin } = xAxis.getExtremes() 
+      const newMin = min - 60 * rangeArr[this.websocketArgs[0] - 1][1] * e.deltaY 
       if (newMin > max - 60000) return
       if (rangeArr[this.websocketArgs[0] - 1][0] >= 180 && e.deltaY < 0 && newMin > max - 60000 * rangeArr[this.websocketArgs[0] - 1][0]) return
       xAxis.update({ min: Math.min(newMin, max) })
@@ -544,8 +546,7 @@ export default {
     addLabels(color, value = 1, data) {
       const xAxis = this.chart.xAxis[0]
       // if (Math.ceil(xAxis.tickInterval) <= 2000) return
-      const { max} = xAxis.getExtremes()
-
+      const { max} = xAxis.getExtremes() 
       const obj = {
         green: {
           borderColor: 'rgba(42, 172, 62, 0.8)',

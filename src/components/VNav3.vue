@@ -144,46 +144,48 @@
           v-if="$route.path === '/share_option' && mapBalanceMenu.length"
            v-popover:popover4
         >
-          <span
-            style="display:inline-block;min-width:160px"
-          >{{ activeShareAccount.currency }} {{$t('shareOption.account')}} / {{ activeShareAccount.available| bigRound(4) }}</span>
-           <el-popover
+          <span style="display:inline-block;min-width:160px">
+            {{ activeShareAccount.currency }} {{$t('shareOption.account')}} / {{ activeShareAccount.available| bigRound(4) }}</span>
+            <el-popover
               ref="popover4"
               popper-class="nav-list"
               placement="bottom"
               style="background:#2C3B4B;"
               trigger="hover">
               <div class="pop-dropdown">
-            <ul class="dropdown-list pt-10 pb-10" style="min-width:250px">
-              <li
-                class="dropdown-item pl-24 pr-24"
-                @click="$store.commit('SET_ACTIVESHAREACCOUNT',item)"
-                flex="main:justify"
-                v-for="item in mapBalanceMenu"
-                :key="item.currency"
-              >
-                <el-tooltip
-                  :disabled="false"
-                  :content="`${item.currency} ${$t('shareOption.account')} / ${bigRound(item.available,4)}`"
-                  placement="left"
-                  effect="dark"
-                >
-                  <a
-                    class="text-nowrap"
-                    :style="{color:item.currency === activeShareAccount.currency?'':'#fff'}"
+                <ul class="dropdown-list pt-10 pb-10" style="min-width:250px">
+                  <li
+                    class="dropdown-item pl-24 pr-24"
+                    @click="$store.commit('SET_ACTIVESHAREACCOUNT',item)"
+                    flex="main:justify"
+                    v-for="item in mapBalanceMenu"
+                    :key="item.currency"
                   >
-                    <svg-icon :icon-class="item.currency.toLowerCase()" />
-                    {{item.currency}} {{$t('shareOption.account')}} /{{item.available| bigRound(4)}}
-                  </a>
-                </el-tooltip>
-                <span
-                  v-if="item.currency === 'DEMO'"
-                  @click.stop="resetBalance(item.currency)"
-                >{{$t('shareOption.resetMoney')}}</span>
-                <span v-else>{{$t('shareOption.recharge')}}</span>
-              </li>
-            </ul>
-
+                    <el-tooltip
+                      :disabled="false"
+                      :content="`${item.currency} ${$t('shareOption.account')} / ${bigRound(item.available,4)}`"
+                      placement="left"
+                      effect="dark"
+                    >
+                      <a
+                        class="text-nowrap"
+                        :style="{color:item.currency === activeShareAccount.currency?'':'#fff'}"
+                      >
+                        <svg-icon :icon-class="item.currency.toLowerCase()" />
+                        {{item.currency}} {{$t('shareOption.account')}} /{{item.available| bigRound(4)}}
+                      </a>
+                    </el-tooltip>
+                    <span
+                      class="pointer c-primary"
+                      v-if="item.currency === 'DEMO'"
+                      @click.stop="resetBalance(item.currency)">
+                      {{$t('shareOption.resetMoney')}}
+                    </span>
+                    <span v-else @click="loginPath('transfer')" class="pointer c-primary">
+                      {{$t('shareOption.recharge')}}
+                    </span>
+                  </li>
+                </ul> 
               </div>
             </el-popover>
         </div>
