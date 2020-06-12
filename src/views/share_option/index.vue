@@ -14,14 +14,19 @@
           <p>
             {{ $tR(`mapLeftNav.${activeName}`) }}
             <span v-if="temComponet.name=== 'SpotIndex'" class="share-text-info" style="font-size:12px;">(USDT/USD)</span>
-            <el-link v-else type="primary" style="font-size:12px" @click="$router.push('/fund/share')"> {{ $tR('fullHistory') }}</el-link></p>
+            <el-link v-else type="primary" style="font-size:12px" @click="$router.push('/fund/my/share')"> {{ $tR('fullHistory') }}</el-link></p>
         </div>
         <component :is="temComponet" :data="temComponet.name=== 'ShareHistory'?historyData:marketData" @loadData="loadHistoryData" />
         <i class="el-icon-close" @click="drawerIsOpen = false" />
       </div>
     </transition>
     <div class="content" flex="dir:bottom">
-      <charts-dynamic-update ref="dynamic-charts" style="width:100%" class="dynamic-update" @loadingData="showLoadBox" @handleTimeTabClick="handleTimeTabClick" @settleOrder="settleOrder" @pushData="data=>(marketData = data)" />
+      <charts-dynamic-update ref="dynamic-charts" style="width:100%" class="dynamic-update" 
+        @loadingData="showLoadBox" 
+        @handleTimeTabClick="handleTimeTabClick" 
+        @settleOrder="settleOrder" 
+        @pushRateData="data=>(rateData = data)"
+        @pushData="data=>(marketData = data)" />
       <ul class="time-tab" flex="main:justify cross:center box:mean">
         <li v-for="(item,index) in mapTabTimes" :key="index" :class="{active:+activePeriod === +index}" @click="handleTimeTabClick(index)">{{ item }}</li>
       </ul>
@@ -104,6 +109,7 @@ import { deepCopy } from '@/utils'
 import { bigMinus, bigPlus } from '@/utils/handleNum'
 import { mapTabTimes } from '@/const'
 import { clearTimeout } from 'highcharts'
+import throttle from 'lodash/throttle'
 export default {
   name: 'ShareOption',
   components: {
@@ -118,17 +124,14 @@ export default {
       temComponet: null,
       historyData: [],
       mapProduct: [],
-      mapTabTimes,
-
+      mapTabTimes, 
       marketData: null,
-      activePeriod: '',
-
-      loadingBoxWidth: '',
-
-      orderCount: 1,
-
+      activePeriod: '', 
+      loadingBoxWidth: '', 
+      orderCount: 1, 
       activeProduct: [],
-      cacheOrderObj: {}
+      cacheOrderObj: {},
+      rateData: null
     }
   },
   computed: {
@@ -188,7 +191,10 @@ export default {
   mounted() {
     getProduct().then(res => {
       this.mapProduct = this.handleProductData(res.data)
-      this.activeProduct = ['BTCUSD', '0']
+      // this.activeProduct = ['BTCUSD', '0']
+      if (this.mapProduct.length > 0) {
+        this.activeProduct = [this.mapProduct[0].label, '0']
+      }
     })
   },
   methods: {
@@ -227,7 +233,7 @@ export default {
       this.$refs['square-container'].style.left = el.clientWidth + 75 + 'px'
       this.dynamicChart.chart.reflow()
     },
-    addLabels(color) {
+    addLabels: throttle(function(color){
       if (!this.userData) { 
         this.$router.replace({
           name: 'login'
@@ -239,16 +245,14 @@ export default {
         if (!res.code) {
           return this.$store.dispatch('getShareAccountList', { accountArr: this.mapCurrencyList, isAssignment: true }) 
         } else {
-          
+          this.$message.error(res.message)
+          return Promise.reject(res.message) 
         }
-      }).then(res => {
-        // if (this.marketData.time > this.marketData.orderTime) {
-        //   this.cacheOrderObj[this.activeShareAccount.currency] = +this.orderCount + (this.cacheOrderObj[this.activeShareAccount.currency] || 0)
-        // }
+      }).then(res => { 
         this.dynamicChart.addLabels(color, this.orderCount)
         this.getHistory()
       })
-    },
+    }, 1000), 
     handleTimeTabClick(periodIndex) {
       this.activePeriod = periodIndex
       this.dynamicChart.initChartsByReqType(periodIndex)

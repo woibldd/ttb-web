@@ -153,7 +153,11 @@ export default {
     },
     addUserAnnotations(data) {
       data = JSON.parse(data)
-      this.addLabels(!data.tradeType ? 'green' : 'red', data.amount, data)
+      if (data.downRate) { 
+        this.$emit('pushRateData', data) 
+      } else {
+        this.addLabels(!data.tradeType ? 'green' : 'red', data.amount, data)
+      }
     },
     cleanAnnotations(orderTime) {
       // const labels = this.chart.annotations[0].labels.filter(item => item.options.point.x <= orderTime)
