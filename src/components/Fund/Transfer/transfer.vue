@@ -72,8 +72,7 @@
           <!-- <el-input v-model="number" placeholder="请输入内容" class="max-input"></el-input> -->
         </div>
       </div>
-    </div>
-    {{shareBlance}}
+    </div> 
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane :label="$t('transfer_btc_history')" name="first"></el-tab-pane>
       <!-- <el-tab-pane label="全部划转记录" name="second"></el-tab-pane> -->
