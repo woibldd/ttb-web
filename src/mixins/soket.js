@@ -6,7 +6,7 @@ export default {
     return {
       websockets: [],
       // tickersData: null
-      websocketArgs: ['1', 'BTCUSDT']
+      websocketArgs: ['0', 'BTCUSDT']
     }
   },
   created() {
