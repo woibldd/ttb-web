@@ -256,7 +256,7 @@ export default {
       }
       const tradeType = color === 'green' ? 0 : 1
       createOrder({ user_id: this.userData.id, symbol: this.activeProduct[0], amount: this.orderCount, currency: this.activeShareAccount.currency, 'trade_type': tradeType, period: this.activeProduct[1] }).then(res => {
-        if (!res.code) {
+        if (res.message === 'OK') {
           return this.$store.dispatch('getShareAccountList', { accountArr: this.mapCurrencyList, isAssignment: true }) 
         } else {
           this.$message.error(res.message)
