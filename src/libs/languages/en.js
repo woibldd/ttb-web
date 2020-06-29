@@ -412,9 +412,9 @@ export default {
   footer_fee: "Fees",
   footer_help: "Help Center",
   footer_request: "Submit a request",
-  footer_about: "About",
+  footer_about: "About Us",
   footer_join: "Join us",
-  footer_agreement: "Terms of Service",
+  footer_agreement: "Terms Of Use",
   footer_private: "Pricacy Policy",
   footer_wechat: "Wechat Customer Service",
   footer_additional_links: "Link Exchanges",
@@ -657,7 +657,7 @@ export default {
   no_data: "No Data",
   footer_services: "Services",
   footer_tools: "Tools",
-  footer_terms: "Terms",
+  footer_terms: "Terms of Service",
   footer_contract: "Contact",
   footer_contract_desc: "Official telegram",
   footer_contract_jb: "Korean telegram",
@@ -2517,7 +2517,8 @@ export default {
       affiliate: "",
       explain: "",
       footer_contract_desc: "Official Wechat",
-      information:"Industrial News"
+      information:"Industrial News",
+      component_address: 'Office Address: Venture Drive #13-03 Vision Exchange Singapore 608526'
     },
     stmodal: {
       statement: "Declaration",

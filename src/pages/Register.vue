@@ -573,21 +573,7 @@ export default {
     }
     if (invitorId && /^[A-Za-z0-9]+$/.test(invitorId)) {
       this.invitorId = invitorId
-    }
-
-    // if (agentId) {
-    //   utils.setCookie('invitor', agentId)
-    //   this.hasAgent = true
-    //   this.routerParams = `?agent=${agentId}`
-    // } else {
-    //   agentId = utils.getCookie('agent')
-    // }
-    // if (agentId && /^[A-Za-z0-9]+$/.test(agentId)) {
-    //   this.invitorId = agentId
-    // }
-
-
-
+    } 
     const res = await service.getRegionList()
     if (!res.code) {
       this.regionOptions = res.data

@@ -1,7 +1,7 @@
 <template>
   <footer>
     <div class="footer-container">
-      <div class="footer_left">
+      <div class="footer_left ">
         <router-link
           :to="{name:'home'}"
           class="footer_logo">
@@ -12,26 +12,31 @@
           {{ $t('exchangeNameConfig') }}
           <!-- {{ $t('exchangeNameConfig') }} -->
         </p>
-        <div
-          class="lt">
-          <img
-            class="footer_ewm"
-            src="../assets/ixx_kefu_big.jpg">
-          <p class="footer_ewm_ltxt">{{ $t('home.footer.footer_contract_desc') }}</p>
+        <div class="clearfix">
+          <div
+            class="lt">
+            <img
+              class="footer_ewm"
+              src="../assets/ixx_kefu_big.jpg">
+            <p class="footer_ewm_ltxt">{{ $t('home.footer.footer_contract_desc') }}</p>
+          </div>
+          <div
+            class="lt">
+            <img
+              class="footer_ewm"
+              src="../assets/kefu_telegran_ewm.jpg">
+            <p class="footer_ewm_ltxt">{{ $t('footer_contract_desc') }}</p>
+          </div>
+          <div
+            class="lt">
+            <p class="footer_explain_txt">{{ $t('home.footer.explain') }}</p>
+          </div> 
         </div>
-        <div
-          class="lt">
-          <img
-            class="footer_ewm"
-            src="../assets/kefu_telegran_ewm.jpg">
-          <p class="footer_ewm_ltxt">{{ $t('footer_contract_desc') }}</p>
+        <div > 
+          <p class="footer_explain_txt">{{ $t('home.footer.component_address') }}</p>
+          <!-- <p class="footer_ewm_ltxt">{{ $t('footer_contract_jb') }}</p> -->
         </div>
-        <div
-          class="lt">
-          <p class="footer_explain_txt">{{ $t('home.footer.explain') }}</p>
-        </div>
-        <!--
-        <div
+        <!-- <div
           class="lt"
           v-if="!showEnTips">
           <img

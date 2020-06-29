@@ -410,3 +410,7 @@ $primary-color: #01CED1;
   color: #F56C6C;
   margin-right: 4px;
 }
+
+.clearfix {
+  @include clearfix();
+}

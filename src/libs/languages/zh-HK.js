@@ -2342,7 +2342,8 @@ export default {
       affiliate: "代理申請：support@ixx.com",
       explain: "IXX是全球首家數字資產交易共同體，總部在新加坡，其致力於實現交易所生態的區塊鏈理想國，打造人人的交易所，我為人人，人人為我，所有參與交易所的貢獻者均可共享交易所的發展成果。",
       footer_contract_desc: "添加客服微信",
-      information:"行業資訊"
+      information:"行業資訊",
+      component_address: '办公室地址：2 Venture Drive #13-03 Vision Exchange Singapore 608526'
     },
     stmodal: {
       statement: "聲明",
