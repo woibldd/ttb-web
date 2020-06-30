@@ -2528,6 +2528,13 @@ export default {
     }
   },
   fund: {
+    history: {
+      byy: {
+        manageName: 'Product Name',
+        createTime: 'Create Time',
+        moneyDays: 'Tender Period'
+      }
+    },
     withdraw: {
       address: "Withdraw Address",
       bindings: "Linked",

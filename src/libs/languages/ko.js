@@ -2405,6 +2405,13 @@ export default {
     }
   },
   fund: {
+    history: {
+      byy: {
+        manageName: '제품 명',
+        createTime: '조작 시간',
+        moneyDays: '기한 을 표시 하 다.'
+      }
+    },
     withdraw: {
       address: "주소",
       bindings: "연동 완료",

@@ -109,8 +109,7 @@ tag="a">{{ $t('bby_shouy16') }}</router-link>
           </div>
           <div class="tip">{{ $t('bby_shouy18') }}<em>{{ money }}</em>{{ cell.currency }}</div>
         </div>
-        <button class="join-btn" 
-:disabled="disabled" @click="submit">
+        <button class="join-btn" :disabled="disabled" @click="submit">
           {{ $t('bby_shouy20') }}
         </button>
       </div>

@@ -2414,6 +2414,13 @@ export default {
     }
   },
   fund: {
+    history: {
+      byy: {
+        manageName: '产品名称',
+        createTime: '操作时间',
+        moneyDays: '标期'
+      }
+    },
     withdraw: {
       address: "提币地址",
       bind_google: "绑定谷歌验证器",

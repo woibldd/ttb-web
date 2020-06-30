@@ -700,13 +700,14 @@ export default {
         {key: 'amount', title: this.$i18n.t('amount')} // -fee
       ]
       this.headerByy = [
-        {key: 'manageName', title: this.$i18n.t('name')},
-        {key: 'createTime', title: this.$i18n.t('time')},
+        {key: 'manageName', title: this.$i18n.t('fund.history.byy.manageName')},
         {key: 'currency', title: this.$i18n.t('currency')},
         {key: 'amount', title: this.$i18n.t('amount')},
+        {key: 'moneyDays', title: this.$i18n.t('fund.history.byy.moneyDays')},
         {key: 'income', title: this.$i18n.t('bby_shouy18')},
-        {key: 'opetate', title: this.$i18n.t('operation')},
-        {key: 'state', title: this.$i18n.t('status')},
+        {key: 'createTime', title: this.$i18n.t('fund.history.byy.createTime')},
+        // {key: 'opetate', title: this.$i18n.t('operation')},
+        // {key: 'state', title: this.$i18n.t('status')},
         // {key: 'unlockTime', title: this.$i18n.t('预计还款时间')} 
       ]
       this.headerInternal = [
