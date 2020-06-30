@@ -700,14 +700,14 @@ export default {
         {key: 'amount', title: this.$i18n.t('amount')} // -fee
       ]
       this.headerByy = [
-        {key: 'manageName', title: this.$i18n.t('产品名称')},
+        {key: 'manageName', title: this.$i18n.t('name')},
         {key: 'createTime', title: this.$i18n.t('time')},
         {key: 'currency', title: this.$i18n.t('currency')},
         {key: 'amount', title: this.$i18n.t('amount')},
         {key: 'income', title: this.$i18n.t('bby_shouy18')},
         {key: 'opetate', title: this.$i18n.t('operation')},
         {key: 'state', title: this.$i18n.t('status')},
-        {key: 'unlockTime', title: this.$i18n.t('预计还款时间')} 
+        // {key: 'unlockTime', title: this.$i18n.t('预计还款时间')} 
       ]
       this.headerInternal = [
         {key: 'create_time', title: this.$i18n.t('time')},
@@ -725,8 +725,7 @@ export default {
     },
     async getCoins() {
       let res = await service.getCoins()
-      if (!res.code && !!res.data) {
-        console.log({data: res.data})
+      if (!res.code && !!res.data) { 
         res.data.map(item => {
           this.coinList[item.currency + '_' + item.chain] = item
         })
