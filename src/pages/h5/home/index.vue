@@ -495,15 +495,11 @@ export default {
       if (type==='android') {
         let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk' 
         window.location.href = url
-      }
-      else if (type==='ios-test') {
-        let url = 'https://testflight.apple.com/join/yCUsQxlN' 
-        window.location.href = url 
-      }
+      } 
       else if (this.isIos) {
         let url = ''
         if(type==='ios-test') {
-          url = 'itms-services://?action=download-manifest&url=https://testflight.apple.com/join/pG7Qos1p'
+        let url = 'https://testflight.apple.com/join/yCUsQxlN' 
         } else { 
           url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
         } 
