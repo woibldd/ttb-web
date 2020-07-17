@@ -11,6 +11,7 @@ import { profileRouter } from './module/profile'
 import { tradeRouter } from './module/trade'
 import { fundRouter } from './module/fund'
 import { otherRouter } from './module/other'
+import { ipfsRouter } from './module/ipfs'
 import Bid from '@/pages/Bid/index.vue'
 import BidDetail from '@/pages/Bid/detail.vue'
 import BidTable from '@/pages/Bid/table.vue'
@@ -176,7 +177,17 @@ function onError(err) {
   utils.alert(err)
 }
 
-export const routes = [
+export const routes = [ 
+  ...accountRouter,
+  ...activityRouter,
+  ...feeRouter,
+  ...materialRouter,
+  ...profileRouter,
+  ...tradeRouter,
+  ...capitalRouter,
+  ...fundRouter,
+  ...otherRouter,
+  ...ipfsRouter,
   {
     path: '/',
     name: 'home',
@@ -348,15 +359,6 @@ export const routes = [
       }
     ]
   },
-  ...accountRouter,
-  ...activityRouter,
-  ...feeRouter,
-  ...materialRouter,
-  ...profileRouter,
-  ...tradeRouter,
-  ...capitalRouter,
-  ...fundRouter,
-  ...otherRouter,
   {
     path: '/snowball',
     redirect:'/snowball/bazaar',

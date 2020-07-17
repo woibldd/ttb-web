@@ -414,3 +414,10 @@ $primary-color: #01CED1;
 .clearfix {
   @include clearfix();
 }
+
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
