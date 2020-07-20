@@ -6,9 +6,7 @@
       </router-link>
       <div class="nav_left">
         <div class="left_options">
-          <router-link :to="{name: 'trading'}" class="nav_link">{{ $t('trading') }}</router-link>
-
-          
+          <router-link :to="{name: 'trading'}" class="nav_link">{{ $t('trading') }}</router-link> 
           <div class="nav_link arrow-down">
             <span to="/affiliate" class="nav_link ml-30" v-popover:popoverContract>
               {{$t('trading_lever')}}
@@ -100,8 +98,8 @@
           </div>
 
           <div class="nav_link arrow-down">
-            <a href="/bonus" class="nav_link ml-30" v-popover:popover3>
-              {{ this.$t('gift.bonus') }}
+            <a href="/ipfs" class="nav_link ml-30" v-popover:popover3>
+              {{ this.$t('彼岸运矿') }}
               <icon name="hot-red" />
               <icon name="header-down" class="mini arrow" />
             </a>
@@ -113,9 +111,15 @@
               trigger="hover">
               <div class="pop-dropdown">
               <ul class="dropdown-list pt-10 pb-10">
-                <li class="dropdown-item pl-24 pr-24">
+                <!-- <li class="dropdown-item pl-24 pr-24">
                   <a href="/bonus" class="link">
                     {{ this.$t('gift.bonus') }}
+                    <icon name="hot-red" />
+                  </a>
+                </li> -->
+                <li class="dropdown-item pl-24 pr-24">
+                  <a href="/ipfs" class="link">
+                    {{ this.$t('彼岸运矿') }}
                     <icon name="hot-red" />
                   </a>
                 </li>

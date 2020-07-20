@@ -88,7 +88,7 @@ export default {
     return {
       num: 0,
       checked: false,
-      activeName: "产品说明"
+      activeName: "first"
     }
   },
   methods: {
