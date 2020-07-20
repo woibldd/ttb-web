@@ -449,12 +449,10 @@ export default {
         })
       }
     },
-    onCopy: function (e) {
-      console.log(e)
+    onCopy: function (e) { 
       utils.success(this.$t('otc_otutcol_9'))
     },
-    onError: function (e) {
-      console.log(e)
+    onError: function (e) { 
       utils.alert(this.$t('otc_otutcol_10'))
     },
     handleCommand (command) {

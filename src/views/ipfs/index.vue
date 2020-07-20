@@ -23,12 +23,12 @@
             </p>
           </div>
           <div class="progress fl">
-            <div>
+            <div class="between">
               <i>进度</i> 
               <i>可购买算力值</i>
             </div>
-            <el-progress :percentage="item.progress" status="success"></el-progress>
-            <div>
+            <el-progress  class="mt-5 mb-5" :percentage="item.progress"  :show-text="false"></el-progress>
+            <div class="between">
               <span>{{$big(item.progress || 0).times(100).div(item.total || 1).round(2)}}%</span>
               <span>{{item.total}}T</span>
             </div>
@@ -194,6 +194,13 @@ export default {
           .progress {
             margin-right: 90px;
             padding-top: 20px;
+            .between {
+              display: flex;
+              justify-content: space-between;
+              i {
+                color: #999999;
+              }
+            }
             .el-progress {
               width: 319px;
             }
