@@ -57,7 +57,12 @@
         </div>
       </div>
     </div>
-    <div class="content"></div>
+    <div class="content">
+      <el-tabs v-model="activeName" @tab-click="handleTabClick">
+        <el-tab-pane label="产品说明" name="first">产品说明</el-tab-pane>
+        <el-tab-pane label="项目图片" name="second">项目图片</el-tab-pane> 
+      </el-tabs>
+    </div>
   </div>
 </template>
 
@@ -67,6 +72,7 @@ export default {
     return {
       num: 0,
       checked: false,
+      activeName: "产品说明"
     }
   },
   methods: {
@@ -75,6 +81,9 @@ export default {
     },
     handleClick() {
 
+    },
+    handleTabClick(tab, event) {
+      console.log(tab, event);
     }
   }
 }
