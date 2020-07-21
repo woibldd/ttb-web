@@ -18,25 +18,7 @@
           </el-tooltip>
         </template>
         <template slot-scope="scope">
-          <span>{{ scope.row[item.prop] | filterColumnValue(item.prop,item,item.handleValue) }}</span>
-          <!-- <component :is="column.component" v-if="column.component" :data="[scope.row,column,$attrs.data]" />
-          <span
-            v-else-if="column.handleValue"
-            v-bind="column"
-            :style="typeof column.style === 'function' ? column.style(scope.row[column.prop], scope.row):column.style"
-            @click="column.click && handleColumnClick(scope,column.click)"
-          >{{ column.handleValue(scope.row[column.prop], scope.row) }}</span>
-          <span
-            v-else-if="typeof column.style === 'function'"
-            v-bind="column"
-            :style="column.style(scope.row[column.prop], scope.row)"
-            @click="column.click && column.click(scope)"
-          >{{ scope.row[column.prop] }}</span>
-          <span
-            v-else
-            v-bind="column"
-            @click="column.click && column.click(scope)"
-          >{{ scope.row[column.prop] }}</span> -->
+          <span>{{ scope.row[item.prop] | filterColumnValue(item.prop,item,item.handleValue) }}</span> 
         </template>
       </el-table-column>
       <el-table-column v-if="lastColumnConfig" v-bind="$attrs">

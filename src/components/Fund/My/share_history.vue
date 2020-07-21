@@ -47,9 +47,18 @@ export default {
         width: '400px'
       },
       schema: [
-        {          fieldType: 'select', size: 'mini', prefixIcon: 'el-icon-search', placeholder: '', vModel: 'currency', default: '', options: [], on: {
+        {          
+          fieldType: 'select', 
+          size: 'mini', 
+          prefixIcon: 'el-icon-search', 
+          placeholder: '', 
+          vModel: 'currency', 
+          default: '', 
+          options: [], 
+          on: {
             change: value => this.handlePageChange()
-          }        },
+          }        
+        },
         // { fieldType: 'date-picker',size:'mini',type:'daterange', prefixIcon: 'el-icon-search', valueFormat: 'timestamp', placeholder: '', vModel: 'plan_time', default: '' }
       ]
     }
@@ -60,7 +69,6 @@ export default {
         hearderLabel: this.$tR(`mapShareColumns.${key}`),
         prop: key,
         hearderWidth: key => ['period', 'trade_type', 'amount', 'income', 'profile', 'rate'].includes(key) && '50px',
-
         handleValue: (value, key) => {
           switch (key) {
             case 'period':
@@ -108,8 +116,7 @@ export default {
       if (!pageConfig) this.temPageConfig.init()
       const { pageSize, currentPage } = this.temPageConfig
       this.loading = true
-      const currency = this.schema[0].currency
-      console.log(currency);
+      const currency = this.schema[0].currency 
 
       getHistory({ user_id: this.id, page: currentPage, size: pageSize, currency }).then(res => {
         this.tableList = res.data.data

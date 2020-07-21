@@ -5,7 +5,7 @@ export const insertCoinApply = data => request({
   method: 'post',
   data
 })
-export const getPolicy = () => request({
+export const getPolicy = () =>  ({
   url: 'user/kyc/oss/policy_currency_apply',
   method: 'post'
 })

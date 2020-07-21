@@ -64,6 +64,11 @@ export const fundRouter = [
               }
             ]
           },
+          {
+            path: 'ipfs',
+            name: 'assets-ipfs',
+            component: () => import('@/components/Fund/IPFS')
+          }
           // {
           //   path: 'assets',
           //   name: 'myAssets',
