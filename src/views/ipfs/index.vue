@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import api from '@/modules/api/ipfs'
 export default {
   data() {
     return {
@@ -116,7 +117,19 @@ export default {
   methods: {
     handleClick() {
       this.$router.push({name: 'ipfs-detail'})
+    },
+    getDataList() {
+      const params = {
+        page: 1,
+        size: 10
+      }
+      api.getPowerFindPage(params).then(res => {
+        console.log(res)
+      })
     }
+  },
+  created() {
+    this.getDataList()
   }
 }
 </script>
