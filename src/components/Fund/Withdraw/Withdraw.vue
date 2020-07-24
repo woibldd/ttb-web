@@ -712,20 +712,20 @@ export default {
         param.chain = this.selectLian.chain
       }
  
-      // eos 需要填memo
-      if (this.selectCoin.memo_support) {
-        if (this.memo) {
-          param.memo = this.memo
-        } else {
-          const ok = await utils.confirm(this, {
-            content: this.$i18n.t('eos_deposit_tip_label'),
-            title: this.$i18n.t('tips')
-          })
-          if (!ok) {
-            return
-          }
-        }
-      }
+      // // eos 需要填memo
+      // if (this.selectCoin.memo_support) {
+      //   if (this.memo) {
+      //     param.memo = this.memo
+      //   } else {
+      //     const ok = await utils.confirm(this, {
+      //       content: this.$i18n.t('eos_deposit_tip_label'),
+      //       title: this.$i18n.t('tips')
+      //     })
+      //     if (!ok) {
+      //       return
+      //     }
+      //   }
+      // }
 
       if (this.verify_email) {
         param.email_code = this.emailCode
@@ -763,12 +763,12 @@ export default {
         utils.alert(this.$t('eos_not_support_internal_transfer'))
         return
       }
-      if (this.selectCoin.memo_support) {
-        if (this.memo.trim() == '') {  
-          utils.alert(this.$t('eos_deposit_tip_label'))
-          return
-        }
-      }
+      // if (this.selectCoin.memo_support) {
+      //   if (this.memo.trim() == '') {  
+      //     utils.alert(this.$t('eos_deposit_tip_label'))
+      //     return
+      //   }
+      // }
 
       this.showModal = true
     },

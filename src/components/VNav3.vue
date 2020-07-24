@@ -63,10 +63,15 @@
           </router-link>
 
           <div class="nav_link arrow-down">
-            <router-link to="/affiliate" class="nav_link ml-30" v-popover:popover2>
+            <!-- <router-link to="/affiliate" class="nav_link ml-30" v-popover:popover2>
               {{$t('plan')}}
+              <icon name="header-down" class="mini arrow" /> 
+            </router-link> -->
+              <a href="/ipfs" class="nav_link ml-30" v-popover:popover2>
+              {{ this.$t('彼岸云矿') }}
+              <icon name="hot-red" />
               <icon name="header-down" class="mini arrow" />
-            </router-link> 
+            </a>
             <el-popover
               ref="popover2"
               popper-class="nav-list"
@@ -75,6 +80,13 @@
               trigger="hover">
               <div class="pop-dropdown">
               <ul class="dropdown-list pt-10 pb-10">
+                
+                <li class="dropdown-item pl-24 pr-24">
+                  <a href="/ipfs" class="link">
+                    {{ this.$t('彼岸云矿') }}
+                    <icon name="hot-red" />
+                  </a>
+                </li>
                 <li class="dropdown-item pl-24 pr-24">
                   <router-link to="/affiliate" class="link">{{ $t('plan') }}</router-link>
                 </li>
@@ -98,9 +110,8 @@
           </div>
 
           <div class="nav_link arrow-down">
-            <a href="/ipfs" class="nav_link ml-30" v-popover:popover3>
-              {{ this.$t('彼岸运矿') }}
-              <icon name="hot-red" />
+            <a href="/bonus" class="nav_link ml-30" v-popover:popover3>
+              {{ this.$t('gift.bonus') }} 
               <icon name="header-down" class="mini arrow" />
             </a>
             <el-popover
@@ -111,16 +122,9 @@
               trigger="hover">
               <div class="pop-dropdown">
               <ul class="dropdown-list pt-10 pb-10">
-                <!-- <li class="dropdown-item pl-24 pr-24">
-                  <a href="/bonus" class="link">
-                    {{ this.$t('gift.bonus') }}
-                    <icon name="hot-red" />
-                  </a>
-                </li> -->
                 <li class="dropdown-item pl-24 pr-24">
-                  <a href="/ipfs" class="link">
-                    {{ this.$t('彼岸运矿') }}
-                    <icon name="hot-red" />
+                  <a href="/bonus" class="link">
+                    {{ this.$t('gift.bonus') }} 
                   </a>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
@@ -146,7 +150,7 @@
         <div
           class="nav_item fund mr-15"
           v-if="$route.path === '/share_option' && mapBalanceMenu.length"
-           v-popover:popover4
+          v-popover:popover4
         >
           <span style="display:inline-block;min-width:160px">
             {{ activeShareAccount.currency }} {{$t('shareOption.account')}} / {{ activeShareAccount.available| bigRound(4) }}</span>

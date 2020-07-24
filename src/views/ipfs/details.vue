@@ -32,14 +32,17 @@
               <th style="width: 15%;">产出TOKEN</th>
               <th style="width: 15%;">维护费用</th>
               <th>开始结束时间</th>
-              <th style="width: 15%;">预计生效时间</th> 
+              <th style="width: 18%;">预计生效时间</th> 
             </tr>
             <tr>
               <td>{{current.moneyDays}}天</td>
               <td>IPFS</td>
               <td>{{current.maintainanceFee}}%</td> 
               <td>{{`${ utils.dateFormatter(current.beginTime, 'Y-M-D H:m')}~${utils.dateFormatter(current.endTime, 'Y-M-D H:m')}`}}</td>
-              <td>购买成功后生效</td>
+              <td> 
+                <span v-if="current.unlockTime">{{ current.unlockTime | date }}</span>
+                <span v-else>--</span>
+              </td>
             </tr>
           </table>
         </div>
@@ -52,15 +55,17 @@
           </div>
           <el-progress class="mt-5 mb-5" :percentage="$big(current.lockedAmount || 0).times(100).div(current.total || 1).round(2)" :show-text="false"></el-progress>
           <div class="between">
-            <span>{{$big(current.lockedAmount || 0).times(100).div(current.total || 1).round(2)}}%</span>
-            <span>{{current.total }}T</span>
+            <span>{{$big(current.lockedAmount || 0).times(100).div(current.total || 1).round(2)}}%</span> 
           </div>
         </div>
-        <div class="input mb-23">
-          <el-input-number style="width:100%;" v-model="amount" @change="handleChange" :step="1"  label="描述文字"></el-input-number>
+        <div class="input mb-23 relative">
+          <el-input-number  style="width:100%;" v-model="amount" @change="handleChange" :step="1"  label="T"> 
+          </el-input-number>
+          <span class="append">T</span>
         </div>
         <div class="mb-19">
           <span>购买价值  {{`${ $big(amount || 0).times(current.price || 0)} ${current.currency}`}} </span>
+
         </div>
         <div class="mb-16" style="display: flex;justify-content: space-between;"> 
           <span> {{ `可用余额 ${balance.available} ${balance.currency}` }}</span>
@@ -73,8 +78,8 @@
           <label>算力合同</label>
         </div> -->
         <div class="mt-30">
-          <el-button :disabled="!ready" style="width: 100%;" type="primary" @click="handleBuyClick">立即购买</el-button>
-        </div>
+          <el-button  :type="current.state === 1 ? 'primary' : 'info'" :disabled="current.state!==1" style="width: 100%;" @click="handleBuyClick">立即购买</el-button>
+        </div> 
       </div>
     </div>
     <div class="content">
@@ -219,23 +224,36 @@ export default {
       .el-checkbox {
         margin-right: 0;
       }
+      .relative {
+        position: relative;
+        .append {
+          position: absolute;
+          top: 13px;
+          right: 132px;
+          color: #999;
+          font-size: 12px;
+        }
+      }
     }
   }
   .content {
     width: 1200px;
     margin: 25px auto; 
-    .box {
-      
-    padding: 37px 51px;
-    height: 900px;
-    box-shadow: 0px 0px 16px 0px rgba(221,221,221,0.78); 
-    .tabs {
-      font-size: 16px;
+    .box { 
+      padding: 37px 51px;
+      height: 900px;
+      box-shadow: 0px 0px 16px 0px rgba(221,221,221,0.78); 
+      .tabs {
+        font-size: 16px;
+      }
+      .describe {
+        font-size: 12px; 
+      }
     }
-    .describe {
-      font-size: 12px; 
-    }
-    }
+  }
+ 
+  .el-progress-bar__inner {
+    background-color: $primary;
   }
 }
 </style>

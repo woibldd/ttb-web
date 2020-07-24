@@ -16,9 +16,9 @@
           <div class="describe fl">
             <p> 
               <b class="title">{{item.product}}</b>
-              <label :style="{color: stateColor[item.state] }">{{ orderState[item.state]}}</label>
+              <label class="ml-20" :style="{color: stateColor[item.state] }">{{ orderState[item.state]}}</label>
             </p>
-            <p>
+            <p class="between">
               <i>开始结束日期</i>
               <b>{{`${ utils.dateFormatter(item.beginTime, 'Y-M-D H:m')}~${utils.dateFormatter(item.endTime, 'Y-M-D H:m')}`}}</b>
             </p>
@@ -35,7 +35,7 @@
             </div>
           </div>
           <div class="option fl">
-            <el-button type="primary" :disabled="item.state != 1" @click="handleClick(item.manageId)">立即购买</el-button>
+            <el-button :type="item.state === 1 ? 'primary' : 'info'"  @click="handleClick(item.manageId)">立即购买</el-button>
           </div> 
         </div>
       </div>
@@ -161,7 +161,10 @@ export default {
     .content { 
       min-height: 900px;
       background-color: #F9F9F9; 
-      
+      .between { 
+        display: flex;
+        justify-content: space-between; 
+      }
       .list {
         padding: 32px;
         width: 1200px;
@@ -178,9 +181,7 @@ export default {
           .describe {
             margin-right: 120px;
             width: 365px;
-            p {
-              display: flex;
-              justify-content: space-between; 
+            p { 
               font-size: 12px;
               b {
                 font-family: Microsoft YaHei Regular, Microsoft YaHei Regular-Regular; 
@@ -190,8 +191,9 @@ export default {
                 }
               }
               label {
-                padding: 0 11px;
+                padding: 4px 11px;
                 line-height: 24px; 
+                vertical-align: top;
                 border: 2px solid ;
                 border-radius: 16px 0px 16px 0px; 
               }
@@ -230,6 +232,15 @@ export default {
         padding: 50px 0 80px;
         text-align: center;
       }
+    }
+
+    .el-button--info:focus, .el-button--info:hover {
+        background: #a6a9ad;
+        border-color: #a6a9ad;
+        color: #FFF;
+    }
+    .el-progress-bar__inner {
+      background-color: $primary;
     }
   }
 </style>
