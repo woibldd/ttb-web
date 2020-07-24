@@ -177,8 +177,10 @@ export default {
           .img { 
             margin-right: 22px;
             vertical-align: bottom;
-            height: 82px;
-            width: 82px;
+            img {
+              height: 82px;
+              width: 82px;
+            }
           }
           .describe {
             margin-right: 120px;
