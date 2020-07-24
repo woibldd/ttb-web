@@ -36,7 +36,7 @@
             </tr>
             <tr>
               <td>{{current.moneyDays}}天</td>
-              <td>IPFS</td>
+              <td>{{current.token}}</td>
               <td>{{current.maintainanceFee}}%</td> 
               <td>{{`${ utils.dateFormatter(current.beginTime, 'Y-M-D H:m')}~${utils.dateFormatter(current.endTime, 'Y-M-D H:m')}`}}</td>
               <td> 
