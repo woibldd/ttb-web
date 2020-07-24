@@ -41,7 +41,7 @@
         </tr>
         <tr v-for="(item, index) in accountList" :key="index">
           <td>{{item.currency}}</td>
-          <td>{{ item.powerAvailable | fixed(8)}}</td>
+          <td>{{ item.available | fixed(8)}}</td>
           <td>{{item.locking | fixed(8)}}</td>
           <td>
             <a class="ml-10" href="/fund/transfer">资金划转</a>
@@ -60,7 +60,7 @@
         </el-tabs> 
         <custom-table v-loading="loading"
           stripe
-          :table-list="productList"
+          :table-list="productShowList"
           :table-columns="mapTableColumns"
           @change="handlePageChange" /> 
       </div> 
@@ -219,7 +219,7 @@ export default {
       }
       //订单记录
       else if (this.activeNav === 2) {
-        api.getPowerList({page: pageSize, size: currentPage}).then(res => {
+        api.getPowerList({page: currentPage, size: pageSize}).then(res => {
           if (res && !res.code) {
             this.tableRecordList = res.data.data
           }
@@ -227,7 +227,7 @@ export default {
       }
       //奖励分配
       else if (this.activeNav === 3) {
-        api.getPowerCandyList({page: pageSize, size: currentPage}).then(res => {
+        api.getPowerCandyList({page: currentPage, size: pageSize}).then(res => {
           if (res && !res.code) {
             this.tableRewardList = res.data.data
           }

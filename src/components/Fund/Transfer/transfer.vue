@@ -72,7 +72,7 @@
           <!-- <el-input v-model="number" placeholder="请输入内容" class="max-input"></el-input> -->
         </div>
       </div>
-    </div> 
+    </div>  
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane :label="$t('transfer_btc_history')" name="first"></el-tab-pane>
       <!-- <el-tab-pane label="全部划转记录" name="second"></el-tab-pane> -->
@@ -145,6 +145,7 @@
         unitBalance: null,
         mixBalance: null,
         shareBlance: null,
+        powerBalance: null,
         tableData: [],
         accountTypes: [{
           value: 1,
@@ -161,6 +162,9 @@
         }, {
           value: 8,
           label: 'shareOption.share_account'
+        }, {
+          value: 9,
+          label: '算力账户'
         }],
         accountTypes2: []
       }
@@ -201,6 +205,9 @@
           case 8:
             amount = this.shareAvai
             break
+          case 9:
+            amount = this.powerAvai
+            break
           default:
             amount = 0
         } 
@@ -229,6 +236,9 @@
             break
           case 8:
             amount = this.shareAvai
+            break
+          case 9:
+            amount = this.powerAvai
             break
           default:
             amount = 0
@@ -282,8 +292,14 @@
           return 0;
         } else {
           return this.$big(this.shareBlance.available || 0).round(8, 0).toFixed(8);
-        }
-
+        } 
+      },
+      powerAvai() { 
+        if (!this.powerBalance) {
+          return 0;
+        } else {
+          return this.$big(this.powerBalance.available || 0).round(8, 0).toFixed(8);
+        } 
       }
     },
     methods: {
@@ -343,14 +359,15 @@
 
       },
       async getBalance(){
-        let [tradingBalance, contractBalance, otcBalance, walletBalance, unitBalance, mixBalance, shareBlance] = await Promise.all([
+        let [tradingBalance, contractBalance, otcBalance, walletBalance, unitBalance, mixBalance, shareBlance, powerBalance] = await Promise.all([
           service.getBalanceByPair(this.selectCoin),
           service.getContractBalanceByPair({ symbol:this.selectCoin}),
           service.getOtcBalanceByPair({symbol: this.selectCoin}),
           service.getwalletBalanceByPair({symbol: this.selectCoin}),
           service.getUnitBalanceByPair({symbol: this.selectCoin}),
           service.getMixBalanceByPair({symbol: this.selectCoin}),
-          getShareAccountList(0 ,this.selectCoin)
+          getShareAccountList(0 ,this.selectCoin),
+          service.getPowerBalanceByPair({currency: this.selectCoin})
         ]);
 
         //console.log({tradingBalance, contractBalance, otcBalance})
@@ -374,6 +391,9 @@
         }
         if (shareBlance && shareBlance.data && shareBlance.data.length) {
           this.shareBlance = shareBlance.data[0]
+        }  
+        if (powerBalance && powerBalance.data) {
+          this.powerBalance = powerBalance.data
         } 
         //this.updateAvailable()
       },
@@ -407,6 +427,7 @@
                 5 : this.$t('unit_account'),
                 7 : this.$t('gold_account'), 
                 8 : this.$t('shareOption.share_account'), 
+                9 : this.$t('算力账户')
               }
 
               this.tableData[i].from_balance = balanceList[this.tableData[i].from_balance]
@@ -445,6 +466,9 @@
           }, {
             value: 8,
             label: 'shareOption.share_account'
+          }, {
+            value: 9,
+            label: '算力账户'
           }]
         } else if(val === 'BTC') {
           this.accountTypes = [{
@@ -462,6 +486,9 @@
           }, {
             value: 8,
             label: 'shareOption.share_account'
+          }, {
+            value: 9,
+            label: '算力账户'
           }]
         } else if(val === 'ETH') {
           this.accountTypes = [{

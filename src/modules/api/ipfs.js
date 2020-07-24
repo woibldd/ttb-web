@@ -13,6 +13,26 @@ export default {
   getPowerBalanceList (params) {
     return getCache('ipfs-power-balance-list', () => request('power/balance/list', params), 1e3)
   }, 
+  async getPowerBalanceByPair(params) { 
+
+    const result = await this.getPowerBalanceList()
+    // let resp = []
+    console.log('getPowerBalanceByPairgetPowerBalanceByPairgetPowerBalanceByPair')
+    if (!result.code) {
+      const list = result.data
+      const balance = list ? list.filter(l => params.currency === l.currency)[0] || {} : {
+        available: '0',
+        holding: '0',
+        available_balance: '0',
+        leverage: 100
+      }
+      return {
+        code: 0,
+        data: balance
+      }
+    }
+    return null
+  },
   //算力产品余额
   getPowerProductList (params) {
     return getCache('ipfs-power-product-list', () => request('power/product/balance/list', params), 1e3)

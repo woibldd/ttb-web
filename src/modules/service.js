@@ -8,11 +8,13 @@ import { state, actions } from '@/modules/store'
 import qs from 'qs'
 import mix from './api/mix.js'
 import unit from './api/unit.js' 
+import ipfs from './api/ipfs.js'
 // const Mock = () => import('./mock')
 
 const service = {
   ...mix,
   ...unit, 
+  ...ipfs,
   getPhoneCode (param) {
     return request('/user/bind/phone/code', param)
   },

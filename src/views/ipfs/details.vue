@@ -57,10 +57,16 @@
           </div>
         </div>
         <div class="input mb-23">
-          <el-input-number style="width:100%;" v-model="amount" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
+          <el-input-number style="width:100%;" v-model="amount" @change="handleChange" :step="1"  label="描述文字"></el-input-number>
         </div>
         <div class="mb-19">
           <span>购买价值  {{`${ $big(amount || 0).times(current.price || 0)} ${current.currency}`}} </span>
+        </div>
+        <div class="mb-16" style="display: flex;justify-content: space-between;"> 
+          <span> {{ `可用余额 ${balance.available} ${balance.currency}` }}</span>
+          <span>
+            <a href="/fund/transfer">资金划转</a>
+          </span>
         </div>
         <!-- <div class="mb-16">
           <el-checkbox v-model="ready">我已阅读并同意：</el-checkbox>
@@ -99,7 +105,8 @@ export default {
       activeName: "first",
       current: {},
       ready: true,
-      value: 0
+      value: 0,
+      balance: {}
     }
   },
   computed: { 
@@ -115,9 +122,8 @@ export default {
       if (!this.isLogin) {
         this.$router.push({name:'login'})
         return
-      }
-
-      api.createPowerBuy({amount: this.amount, manager_id: this.current.manageId}).then(res => {
+      } 
+      api.createPowerBuy({amount: this.amount, manage_id: this.current.manageId}).then(res => {
         if (res && !res.code) {
           this.$message.success('购买成功！')
           this.init()
@@ -135,6 +141,13 @@ export default {
         api.getProductByManageID({manage_id}).then(res => {
           if (res && !res.code) {
             this.current = res.data
+            this.amount = this.current.minLimit
+
+            api.getPowerBalanceByPair({currency: this.current.currency}).then(result => {
+              if (result && !result.code) {
+                this.balance = result.data
+              }
+            })
           }
         })
       }
