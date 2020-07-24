@@ -68,7 +68,7 @@
 
         </div>
         <div class="mb-16" style="display: flex;justify-content: space-between;"> 
-          <span> {{ `可用余额 ${balance.available} ${balance.currency}` }}</span>
+          <span> {{ `可用余额 ${balance.available || ''} ${balance.currency || ''}` }}</span>
           <span>
             <a href="/fund/transfer">资金划转</a>
           </span>
