@@ -241,7 +241,7 @@ export default {
     margin: 25px auto; 
     .box { 
       padding: 37px 51px;
-      height: 900px;
+      min-height: 900px;
       box-shadow: 0px 0px 16px 0px rgba(221,221,221,0.78); 
       .tabs {
         font-size: 16px;
