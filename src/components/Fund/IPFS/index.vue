@@ -28,7 +28,7 @@
         <div class="gz-wrapper clearfix">
           <span>{{$t('算力余额')}}</span>
           <h1> 
-            0.00T
+            <b v-if="accountList.length > 0">{{ accountList[0].powerAvailable | fixed(2) }} T</b> 
           </h1> 
         </div> 
       </div>  
@@ -191,7 +191,7 @@ export default {
         currentPage: 1,
         total: 0
       }
-      this.activeName = 'first'
+      this.activeName = '0'
       this.activeNav = e
       this.handlePageChange()
     },
