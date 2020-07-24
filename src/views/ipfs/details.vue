@@ -2,10 +2,10 @@
   <div class="ipfs-details-container">
     <div class="top">
       <div class="l">
-        <div class="title">
-            <img src="./assets/product.png" alt="">
+        <div class="title"> 
+            <img style="height: 82px; width: 82px;" :src="current.productImg" alt="">
             <b>
-              算力云IPFS云算力抢购邀请专场
+              {{current.product}}
             </b>
         </div>
         <div class="m">
@@ -123,19 +123,26 @@ export default {
     handleChange() {
 
     },
-    handleBuyClick() { 
+    async handleBuyClick() { 
       if (!this.isLogin) {
         this.$router.push({name:'login'})
         return
       } 
-      api.createPowerBuy({amount: this.amount, manage_id: this.current.manageId}).then(res => {
-        if (res && !res.code) {
-          this.$message.success('购买成功！')
-          this.init()
-        } else {
-          this.$message.error(res.message)
-        }
+      const isok = await this.$confirm(`您确认用${this.$big(this.amount || 0).times(this.current.price || 0) }${this.current.currency}购买${this.amount}（T）算力？`, {
+        confirmButtonText: this.$t('confirm'),
+        cancelButtonText: this.$t('cancel'),
+        type: 'warning'
       })
+      if (isok) {
+        api.createPowerBuy({amount: this.amount, manage_id: this.current.manageId}).then(res => {
+          if (res && !res.code) {
+            this.$message.success('购买成功！')
+            this.init()
+          } else {
+            this.$message.error(res.message)
+          }
+        }) 
+      }
     },
     handleTabClick(tab, event) {
       console.log(tab, event);

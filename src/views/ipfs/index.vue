@@ -10,8 +10,8 @@
         <div class="item clearfix"
           v-for="item in dataList"
           :key="item.id">
-          <div class="img fl">
-            <img src="./assets/product.png" alt="">
+          <div class="img fl"> 
+            <img :src="item.productImg" alt="">
           </div>
           <div class="describe fl">
             <p> 
@@ -174,9 +174,11 @@ export default {
           margin-top: 21px;
           background: #ffffff;
           box-shadow: 0px 0px 16px 0px rgba(235,235,235,0.78); 
-          .img {
+          .img { 
             margin-right: 22px;
             vertical-align: bottom;
+            height: 82px;
+            width: 82px;
           }
           .describe {
             margin-right: 120px;
