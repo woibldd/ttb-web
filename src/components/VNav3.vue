@@ -67,7 +67,7 @@
               {{$t('plan')}}
               <icon name="header-down" class="mini arrow" /> 
             </router-link> -->
-              <a href="/ipfs" class="nav_link ml-30" v-popover:popover2>
+            <a href="/mining-power" class="nav_link ml-30" v-popover:popover2>
               {{ this.$t('彼岸云矿') }}
               <icon name="hot-red" />
               <icon name="header-down" class="mini arrow" />
@@ -82,7 +82,7 @@
               <ul class="dropdown-list pt-10 pb-10">
                 
                 <li class="dropdown-item pl-24 pr-24">
-                  <a href="/ipfs" class="link">
+                  <a href="/mining-power" class="link">
                     {{ this.$t('彼岸云矿') }}
                     <icon name="hot-red" />
                   </a>

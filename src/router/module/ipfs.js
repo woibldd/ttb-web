@@ -1,6 +1,6 @@
 export const ipfsRouter = [
   {
-    path: '/ipfs',
+    path: '/mining-power',
     name: 'ipfs',
     meta: {
       nav: true,
@@ -10,7 +10,7 @@ export const ipfsRouter = [
     component: () => import('@/views/ipfs/index.vue')
   },
   {
-    path: '/ipfs-detail',
+    path: '/mining-power-detail',
     name: 'ipfs-detail',
     meta: {
       nav: true,

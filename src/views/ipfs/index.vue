@@ -35,7 +35,7 @@
             </div>
           </div>
           <div class="option fl">
-            <el-button :type="item.state === 1 ? 'primary' : 'info'"  @click="handleClick(item.manageId)">立即购买</el-button>
+            <el-button :type="item.state === 1 ? 'primary' : 'info'" :disabled="item.total===item.lockedAmount"  @click="handleClick(item.manageId)">立即购买</el-button>
           </div> 
         </div>
       </div>

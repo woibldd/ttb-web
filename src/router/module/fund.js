@@ -65,7 +65,7 @@ export const fundRouter = [
             ]
           },
           {
-            path: 'ipfs',
+            path: 'mining-power',
             name: 'assets-ipfs',
             component: () => import('@/components/Fund/IPFS')
           }

@@ -65,18 +65,29 @@
               class="nav_link  ml-20">{{ $t('appNav.mapNavList.legalTender') }}</router-link>
           </div>
           <div class="nav_link arrow-down">
-            <router-link to="/affiliate" class="nav_link ml-30" v-popover:popover2>
+            <!-- <router-link to="/affiliate" class="nav_link ml-30" v-popover:popover2>
               {{$t('plan')}}
               <svg-icon icon-class="header-down" class="mini arrow" />
-            </router-link> 
+            </router-link>  -->
+            <a href="/mining-power" class="nav_link ml-30" v-popover:popover2>
+              {{ this.$t('彼岸云矿') }}
+              <svg-icon icon-class="hot-red" />
+              <svg-icon icon-class="header-down" class="mini arrow" />
+            </a>
             <el-popover
               ref="popover2"
               popper-class="nav-list"
-              placement="bottom"
+              placement="bottom" 
               style="background:#2C3B4B;"
               trigger="hover">
               <div class="pop-dropdown">
                 <ul class="dropdown-list pt-10 pb-10">
+                  <li class="dropdown-item pl-24 pr-24">
+                    <a href="/mining-power" class="link">
+                      {{ this.$t('彼岸云矿') }}
+                      <svg-icon icon-class="hot-red" />
+                    </a> 
+                  </li>
                   <li class="dropdown-item pl-24 pr-24">
                     <router-link to="/affiliate" class="link">{{ $t('plan') }}</router-link>
                   </li>
@@ -86,14 +97,7 @@
                       :class="{'router-link-active': from === 'contract'}"
                       class="link"
                     >{{ $t('bidTitle') }}</a>
-                  </li>
-                  <!-- <li class="dropdown-item pl-24 pr-24" v-if="isLogin">
-                    <a
-                      href="/snowball"
-                      :class="{'router-link-active': from === 'contract'}"
-                      class="link"
-                    >{{ $t('playBTC') }}</a>
-                  </li> -->
+                  </li> 
                 </ul>
               </div>
             </el-popover>
