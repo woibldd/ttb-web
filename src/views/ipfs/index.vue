@@ -1,10 +1,11 @@
 <template>
   <div class="ipfs-container">
-    <div class="banner">
+    <div class="banner" :class="['banner', state.locale ]" >
       <!-- <h1>filecoin算力</h1>
       <h2>火热进行中</h2> -->
     </div>
-    <div class="content">
+    <div class="content"
+      v-loading="loading">
       <div class="list">
         <div class="item clearfix"
           v-for="item in dataList"
@@ -13,13 +14,13 @@
             <img src="./assets/product.png" alt="">
           </div>
           <div class="describe fl">
-            <p>
-              <b class="title">{{item.title}}</b>
-              <label :style="{color: stateColor[item.state] }">{{ state[item.state]}}</label>
+            <p> 
+              <b class="title">{{item.product}}</b>
+              <label :style="{color: stateColor[item.state] }">{{ orderState[item.state]}}</label>
             </p>
             <p>
               <i>开始结束日期</i>
-              <b>{{`${item.start}~${item.end}`}}</b>
+              <b>{{`${ utils.dateFormatter(item.beginTime, 'Y-M-D H:m')}~${utils.dateFormatter(item.endTime, 'Y-M-D H:m')}`}}</b>
             </p>
           </div>
           <div class="progress fl">
@@ -27,104 +28,89 @@
               <i>进度</i> 
               <i>可购买算力值</i>
             </div>
-            <el-progress  class="mt-5 mb-5" :percentage="item.progress"  :show-text="false"></el-progress>
+            <el-progress  class="mt-5 mb-5" :percentage="$big(item.lockedAmount || 0).times(100).div(item.total || 1).round(2)"  :show-text="false"></el-progress>
             <div class="between">
-              <span>{{$big(item.progress || 0).times(100).div(item.total || 1).round(2)}}%</span>
-              <span>{{item.total}}T</span>
+              <span>{{$big(item.lockedAmount || 0).times(100).div(item.total || 1).round(2)}}%</span>
+              <span>{{item.lockedAmount}}/{{item.total}}T</span>
             </div>
           </div>
           <div class="option fl">
-            <el-button type="primary" :disabled="item.state > 1" @click="handleClick">立即购买</el-button>
+            <el-button type="primary" :disabled="item.state != 1" @click="handleClick(item.manageId)">立即购买</el-button>
           </div> 
         </div>
       </div>
       <div class="page">
         <el-pagination
-          background
+          background 
           layout="prev, pager, next"
           :hide-on-single-page="true"
           :page-size="pageConfig.size"
           :current-page="pageConfig.page"
+          @current-change="handleCurrentChange"
           :total="pageConfig.total">
         </el-pagination>
       </div>
-    </div>
+      </div>
   </div>
 </template>
 
 <script>
-import api from '@/modules/api/ipfs'
+import api from '@/modules/api/ipfs' 
+import { state, local } from '@/modules/store'
+import utils from '@/modules/utils'
 export default {
   data() {
     return {
-      dataList: [
-        {
-          id:1,
-          title: '算力云IPFS云算力抢购邀请专场',
-          start: '2018-08-22,15:30:22',
-          end: '2018-08-22,15:30:22',
-          progress: '25',
-          total: '100',
-          state: 1
-        },
-        {
-          id:2,
-          title: '算力云IPFS云算力抢购邀请专场',
-          start: '2018-08-22,15:30:22',
-          end: '2018-08-22,15:30:22',
-          progress: '25',
-          total: '100',
-          state: 2
-        },
-        {
-          id:3,
-          title: '算力云IPFS云算力抢购邀请专场',
-          start: '2018-08-22,15:30:22',
-          end: '2018-08-22,15:30:22',
-          progress: '25',
-          total: '100',
-          state: 3
-        },
-        {
-          id:4,
-          title: '算力云IPFS云算力抢购邀请专场',
-          start: '2018-08-22,15:30:22',
-          end: '2018-08-22,15:30:22',
-          progress: '25',
-          total: '100',
-          state: 4
-        },
-      ],
-      state: {
+      state,
+      utils,
+      loading: true,
+      dataList: [],
+      orderState: {
+        0: '未开始',
         1: '进行中',
         2: '待生效',
         3: '生效中',
         4: '已结束',
       },
       stateColor: {
+        0: '#C7C7C7', 
         1: '#FB9246',
         2: '#FF5454',
         3: '#01CED1',
-        4: '#B2B2B2', 
+        4: '#C7C7C7', 
       },
       pageConfig: {
         page: 1,
         size: 5,
-        total: 5
+        total: 0
       }
     }
   },
   methods: {
-    handleClick() {
-      this.$router.push({name: 'ipfs-detail'})
+    handleClick(e) {
+      this.$router.push({
+        name: 'ipfs-detail',
+        query: {
+          manage: e
+        }
+      })
+    },
+    handleCurrentChange(e) { 
+      this.pageConfig.page = e
+      this.getDataList()
     },
     getDataList() {
+      this.loading = true
       const params = {
-        page: 1,
-        size: 10
+        start: this.pageConfig.page,
+        pageSize: this.pageConfig.size
       }
       api.getPowerFindPage(params).then(res => {
-        console.log(res)
+        this.loading = false
+        if (res && !res.code) {
+          this.dataList = res.data.data
+          this.pageConfig.total = res.data.total
+        }
       })
     }
   },
@@ -139,6 +125,18 @@ export default {
     .banner {
       height: 430px;
       background: url('./assets/banner.png') center center;
+      &.zh-CN {
+        background: url('./assets/banner-zh-CN.png') center center;
+      }
+      &.zh-HK {
+        background: url('./assets/banner-zh-HK.png') center center; 
+      }
+      &.ko {
+        background: url('./assets/banner-ko.png') center center; 
+      }
+      &.en {
+        background: url('./assets/banner-en.png') center center; 
+      }
       h1 {
         font-size: 120px;
         font-family: FZZhengHeiS-B-GB Regular, FZZhengHeiS-B-GB Regular-Regular;
@@ -163,6 +161,7 @@ export default {
     .content { 
       min-height: 900px;
       background-color: #F9F9F9; 
+      
       .list {
         padding: 32px;
         width: 1200px;
@@ -228,7 +227,7 @@ export default {
         }
       }
       .page {
-        margin: 50px 0 80px;
+        padding: 50px 0 80px;
         text-align: center;
       }
     }

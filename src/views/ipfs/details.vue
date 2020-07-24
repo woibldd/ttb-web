@@ -17,10 +17,10 @@
               <th>最大购买总数量</th> 
             </tr>
             <tr>
-              <td>80%至100%</td>
-              <td>1234.65 T</td>
-              <td>500.00 USDT/T</td>
-              <td>323246.36 T</td> 
+              <td>{{current.annualizedReturns}}%</td>
+              <td>{{current.total}} T</td>
+              <td>{{current.price}} {{current.currency}}/T</td>
+              <td>{{current.maxLimit}} T</td> 
             </tr>
           </table> 
         </div>
@@ -29,16 +29,16 @@
           <table>
             <tr>
               <th style="width: 15%;">期限</th>
-              <th style="width: 15%;">参数TOKEN</th>
+              <th style="width: 15%;">产出TOKEN</th>
               <th style="width: 15%;">维护费用</th>
               <th>开始结束时间</th>
               <th style="width: 15%;">预计生效时间</th> 
             </tr>
             <tr>
-              <td>300天</td>
+              <td>{{current.moneyDays}}天</td>
               <td>IPFS</td>
-              <td>100%</td>
-              <td>2020.7.10 12:33:00 ~ 2020.7.12 11:33:44</td>
+              <td>{{current.maintainanceFee}}%</td> 
+              <td>{{`${ utils.dateFormatter(current.beginTime, 'Y-M-D H:m')}~${utils.dateFormatter(current.endTime, 'Y-M-D H:m')}`}}</td>
               <td>购买成功后生效</td>
             </tr>
           </table>
@@ -50,32 +50,36 @@
             <i>进度</i> 
             <i>可购买算力值</i>
           </div>
-          <el-progress class="mt-5 mb-5" :percentage="36.6" :show-text="false"></el-progress>
+          <el-progress class="mt-5 mb-5" :percentage="$big(current.lockedAmount || 0).times(100).div(current.total || 1).round(2)" :show-text="false"></el-progress>
           <div class="between">
-            <span>36.6%</span>
-            <span>1000T</span>
+            <span>{{$big(current.lockedAmount || 0).times(100).div(current.total || 1).round(2)}}%</span>
+            <span>{{current.total }}T</span>
           </div>
         </div>
         <div class="input mb-23">
-          <el-input-number style="width:100%;" v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
+          <el-input-number style="width:100%;" v-model="amount" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
         </div>
         <div class="mb-19">
-          <span>购买价值  1993.44 USDT</span>
+          <span>购买价值  {{`${ $big(amount || 0).times(current.price || 0)} ${current.currency}`}} </span>
         </div>
-        <div class="mb-16">
-          <el-checkbox v-model="checked">我已阅读并同意：</el-checkbox>
+        <!-- <div class="mb-16">
+          <el-checkbox v-model="ready">我已阅读并同意：</el-checkbox>
           <label>算力合同</label>
-        </div>
-        <div>
-          <el-button style="width: 100%;" type="primary" @click="handleClick">立即购买</el-button>
+        </div> -->
+        <div class="mt-30">
+          <el-button :disabled="!ready" style="width: 100%;" type="primary" @click="handleBuyClick">立即购买</el-button>
         </div>
       </div>
     </div>
     <div class="content">
       <div class="box">
         <el-tabs v-model="activeName" @tab-click="handleTabClick">
-          <el-tab-pane label="产品说明" name="first">产品说明</el-tab-pane>
-          <el-tab-pane label="项目图片" name="second">项目图片</el-tab-pane> 
+          <el-tab-pane label="产品说明" name="first">
+            <p v-html="current.productInfo"></p>
+          </el-tab-pane>
+          <el-tab-pane label="项目图片" name="second">
+            <img :src="current.productImg" alt="">
+          </el-tab-pane> 
         </el-tabs> 
       </div>
     </div>
@@ -83,24 +87,61 @@
 </template>
 
 <script>
+import {local} from '@/modules/store'
+import utils from '@/modules/utils'
+import {state} from '@/modules/store'
+import api from '@/modules/api/ipfs'
 export default {
   data() {
     return {
-      num: 0,
-      checked: false,
-      activeName: "first"
+      utils,
+      amount: 0, 
+      activeName: "first",
+      current: {},
+      ready: true,
+      value: 0
+    }
+  },
+  computed: { 
+    isLogin() {
+      return state.userInfo !== null
     }
   },
   methods: {
     handleChange() {
 
     },
-    handleClick() {
+    handleBuyClick() { 
+      if (!this.isLogin) {
+        this.$router.push({name:'login'})
+        return
+      }
 
+      api.createPowerBuy({amount: this.amount, manager_id: this.current.manageId}).then(res => {
+        if (res && !res.code) {
+          this.$message.success('购买成功！')
+          this.init()
+        } else {
+          this.$message.error(res.message)
+        }
+      })
     },
     handleTabClick(tab, event) {
       console.log(tab, event);
+    },
+    init() {
+      const manage_id = this.$route.query.manage
+      if (manage_id)  {
+        api.getProductByManageID({manage_id}).then(res => {
+          if (res && !res.code) {
+            this.current = res.data
+          }
+        })
+      }
     }
+  },
+  created() {
+    this.init()
   }
 }
 </script>

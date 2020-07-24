@@ -41,26 +41,26 @@
         </tr>
         <tr v-for="(item, index) in accountList" :key="index">
           <td>{{item.currency}}</td>
-          <td>{{ item.available | fixed(8)}}</td>
+          <td>{{ item.powerAvailable | fixed(8)}}</td>
           <td>{{item.locking | fixed(8)}}</td>
           <td>
-            <a class="ml-10" href="">资金划转</a>
-            <a class="ml-10" href="">充值</a>
-            <a class="ml-10" href="">算力购买</a>
+            <a class="ml-10" href="/fund/transfer">资金划转</a>
+            <a class="ml-10" href="/fund/deposit">充值</a>
+            <a class="ml-10" href="/ipfs">算力购买</a>
           </td>
         </tr>
       </table> 
       <div class="order">
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="全部" name="first"></el-tab-pane>
-          <el-tab-pane label="进行中" name="second"></el-tab-pane>
-          <el-tab-pane label="待生效" name="third"></el-tab-pane>
-          <el-tab-pane label="生效中" name="fourth"></el-tab-pane>
-          <el-tab-pane label="已结束" name="fifth"></el-tab-pane>
+          <el-tab-pane label="全部" name="0"></el-tab-pane>
+          <el-tab-pane label="进行中" name="1"></el-tab-pane>
+          <el-tab-pane label="待生效" name="2"></el-tab-pane>
+          <el-tab-pane label="生效中" name="3"></el-tab-pane>
+          <el-tab-pane label="已结束" name="4"></el-tab-pane>
         </el-tabs> 
         <custom-table v-loading="loading"
           stripe
-          :table-list="tableList"
+          :table-list="productList"
           :table-columns="mapTableColumns"
           @change="handlePageChange" /> 
       </div> 
@@ -84,102 +84,16 @@
 
 <script>
 import customTable from '@/components/customTable'
+import api from '@/modules/api/ipfs'
 export default {
   data() {
     return {
       activeNav: 1,
-      activeName: 'first', 
-      tableList: [
-        { 
-          name: 'FIL算力第一期',
-          holding: '0.1     ',
-          date: '2018-08-22,15:30:22',
-          state: '待生效'
-        },
-        { 
-          name: 'FIL算力第一期',
-          holding: '0.1     ',
-          date: '2018-08-22,15:30:22',
-          state: '待生效'
-        },
-        { 
-          name: 'FIL算力第一期',
-          holding: '0.1     ',
-          date: '2018-08-22,15:30:22',
-          state: '待生效'
-        },
-      ],
-      tableRecordList: [
-        { 
-          createTime: '2018-08-22,15:30:22',
-          orderId: '100001121',
-          name: 'FIL算力第一期',
-          currency: 'USDT',
-          total: '3774.23',
-          amount: '1T',
-          state: '完成'
-        },
-        { 
-          createTime: '2018-08-22,15:30:22',
-          orderId: '100001121',
-          name: 'FIL算力第一期',
-          currency: 'USDT',
-          total: '3774.23',
-          amount: '1T',
-          state: '完成'
-        },
-        { 
-          createTime: '2018-08-22,15:30:22',
-          orderId: '100001121',
-          name: 'FIL算力第一期',
-          currency: 'USDT',
-          total: '3774.23',
-          amount: '1T',
-          state: '完成'
-        },
-      ],
-      tableRewardList: [
-        {
-          name: 'Filecoin分时算力 第二期',
-          type: '邀请奖励',
-          amount: '0.22 T',
-          time: '2018-08-22,15:30:22',
-        },
-        {
-          name: 'Filecoin分时算力 第二期',
-          type: '邀请奖励',
-          amount: '0.22 T',
-          time: '2018-08-22,15:30:22',
-        },
-        {
-          name: 'Filecoin分时算力 第二期',
-          type: '邀请奖励',
-          amount: '0.22 T',
-          time: '2018-08-22,15:30:22',
-        }
-      ],
-      accountList: [
-        {
-          currency: 'BTC',
-          available: 0,
-          locking: 0
-        },
-        {
-          currency: 'USDT',
-          available: 0,
-          locking: 0
-        },
-        {
-          currency: 'ETH',
-          available: 0,
-          locking: 0
-        },
-        {
-          currency: 'EOS',
-          available: 0,
-          locking: 0
-        },
-      ],
+      activeName: '0', 
+      productList: [],
+      tableRecordList: [],
+      tableRewardList: [],
+      accountList: [],
       total: 0,
       loading: false,
       temPageConfig: {
@@ -189,26 +103,32 @@ export default {
       },
       mapOrders: {
         name: '算力产品',
-        holding: '持有算力值',
-        date: '生效时间',
+        amount: '持有算力值',
+        createTime: '生效时间',
         state: '状态'
       },
       mapRecords: {
         createTime: '时间',
-        orderId: '订单编号',
-        name: '产品名称',
+        recordId: '订单编号',
+        product: '产品名称',
         currency: '支付币种',
         total: '支付金额',
         amount: '购买数量',
         state: '状态'
       },
       mapReward: {
-        name: '产品名称',
+        producName: '产品名称',
         type: '奖励类型',
         amount: '奖励额度',
-        time: '发放时间',
-      }
-
+        releaseTime: '发放时间',
+      },
+      orderState: {
+        0: '未开始',
+        1: '进行中',
+        2: '待生效',
+        3: '生效中',
+        4: '已结束',
+      },
     }
   },
   components: {
@@ -221,7 +141,10 @@ export default {
             hearderLabel: this.mapOrders[item],
             prop: item,
             handleValue: (value, key) => {
-              return value ? value : '--'
+              if (key==='state') {
+                return this.orderState[value]
+              } 
+              else return value ? value : '--'
             }
           } 
         })  
@@ -232,8 +155,11 @@ export default {
         return {
           hearderLabel: this.mapRecords[item],
           prop: item,
-          handleValue: (value, key) => {
-            return value ? value : '--'
+          handleValue: (value, key, row) => {
+            if (key==='state') {
+              return this.orderState[value]
+            } 
+            else return value ? value : '--'
           }
         }   
       })
@@ -243,12 +169,20 @@ export default {
           return {
             hearderLabel: this.mapReward[item],
             prop: item,
-            handleValue: (value, key) => {
-              return value ? value : '--'
+            handleValue: (value, key) => { 
+              if (key==='state') {
+                return this.orderState[value]
+              } 
+              else return value ? value : '--'
             }
           } 
         }) 
-    }    
+    },
+    productShowList() {
+      return this.productList.filter(item => 
+        this.activeName === '0' || this.activeName == item.state
+      )
+    }
   },
   methods: { 
     handleNavChange(e) {
@@ -266,10 +200,40 @@ export default {
       const { pageSize, currentPage } = this.temPageConfig
       // this.loading = true 
       // getHistory({ user_id: this.id, page: currentPage, size: pageSize, currency }).then(res => {
-      //   this.tableList = res.data.data
+      //   this.productList = res.data.data
       //   this.temPageConfig.total = res.data.total
       //   this.loading = false
       // })
+      //算力账户
+      if (this.activeNav === 1) {
+        api.getPowerBalanceList().then(res => {
+          if (res && !res.code) {
+            this.accountList = res.data
+          }
+        })
+        api.getPowerProductList().then(res => {
+          if (res && !res.code) {
+            this.productList = res.data
+          }
+        })
+      }
+      //订单记录
+      else if (this.activeNav === 2) {
+        api.getPowerList({page: pageSize, size: currentPage}).then(res => {
+          if (res && !res.code) {
+            this.tableRecordList = res.data.data
+          }
+        })
+      }
+      //奖励分配
+      else if (this.activeNav === 3) {
+        api.getPowerCandyList({page: pageSize, size: currentPage}).then(res => {
+          if (res && !res.code) {
+            this.tableRewardList = res.data.data
+          }
+        })
+      }
+
     }
   },
   created() {

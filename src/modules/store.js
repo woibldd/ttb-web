@@ -385,20 +385,15 @@ export const actions = {
     }
 
     utils.setCookie('lang', locale, 1000)
-    state.locale = locale
-
-    actions.setZendeskLocale(locale)
-
-    actions.setFiat()
-
-    actions.setTitle(locale)
-
+    state.locale = locale 
+    actions.setZendeskLocale(locale) 
+    actions.setFiat() 
+    actions.setTitle(locale) 
     if (!utils.$i18n.messages[locale]) {
       try {
         const msg = await import(/* webpackChunkName: "lang-[request]" */ `@/libs/languages/${locale}.js`)
         const element = await import(`element-ui/lib/locale/lang/${locale}`)
-        // utils.$i18n.setLocaleMessage(locale, actions.replaceName(msg))
-        
+        // utils.$i18n.setLocaleMessage(locale, actions.replaceName(msg)) 
         utils.$i18n.setLocaleMessage(locale, {...msg.default, ...element.default })
       } catch (e) {
         utils.logE('load language failed')

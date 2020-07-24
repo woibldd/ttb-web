@@ -82,12 +82,18 @@
             to="/fund/my/contractMix">{{ $t('gold_account') }}
           </router-link>
         </dd>
-       <dd>
-         <router-link
-           class="sub-menu-item"
-           to="/fund/my/share">{{ $t('shareOption.share_account') }}
-         </router-link>
-       </dd>
+        <dd>
+          <router-link
+            class="sub-menu-item"
+            to="/fund/my/share">{{ $t('shareOption.share_account') }}
+          </router-link>
+        </dd>
+        <dd>
+          <router-link
+            class="sub-menu-item"
+            to="/fund/my/ipfs">{{ $t('算力账户') }}
+          </router-link>
+        </dd>
        </dl>
       <dl class="address_dl">
         <dd>
