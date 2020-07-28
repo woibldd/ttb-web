@@ -5,8 +5,8 @@
 import utils from '@/modules/utils'
 const isMobile = utils.isMobile()
 // const guide = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index')
-const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index')
-const HomeNew = () => import(/* webpackChunkName: "home" */ '@/pages/home_new.vue')
+// const h5index = () => import(/* webpackChunkName: "h5index" */ '@/pages/h5/index')
+// const HomeNew = () => import(/* webpackChunkName: "home" */ '@/pages/home_new.vue')
 const h5submitNext = () => import('@/pages/plan/h5/submitNext')
 const submitNext = () => import('@/pages/plan/submitNext')
 const h5planSubmit = () => import('@/pages/plan/h5/submit')
@@ -90,38 +90,38 @@ export const otherRouter = [
     },
     component: appsubmitNext
   },
-  {
-    path: '/',
-    name: 'home',
-    meta: {
-      nav: true,
-      class: 'dark',
-      auth: false
-    },
-    component: isMobile ? h5index : HomeNew
-  },
-  {
-    path: '/h5',
-    name: 'hlogin',
-    meta: {
-      auth: false,
-      nav: false,
-      footer: false,
-      zendeskWidget: false
-    },
-    component: () => import(/* webpackChunkName: "h5login" */ '@/pages/h5/sign-up')
-  },
-  {
-    path: '/h5-index',
-    name: 'h5index',
-    meta: {
-      auth: false,
-      nav: false,
-      footer: false,
-      zendeskWidget: false
-    },
-    component: h5index
-  },
+  // {
+  //   path: '/',
+  //   name: 'home',
+  //   meta: {
+  //     nav: true,
+  //     class: 'dark',
+  //     auth: false
+  //   },
+  //   component: isMobile ? h5index : HomeNew
+  // },
+  // {
+  //   path: '/h5',
+  //   name: 'hlogin',
+  //   meta: {
+  //     auth: false,
+  //     nav: false,
+  //     footer: false,
+  //     zendeskWidget: false
+  //   },
+  //   component: () => import(/* webpackChunkName: "h5login" */ '@/pages/h5/sign-up')
+  // },
+  // {
+  //   path: '/h5-index',
+  //   name: 'h5index',
+  //   meta: {
+  //     auth: false,
+  //     nav: false,
+  //     footer: false,
+  //     zendeskWidget: false
+  //   },
+  //   component: h5index
+  // },
   {
     path: '/activity/creation',
     name: 'creation',
