@@ -4,17 +4,18 @@
       <div class="l">
         <div class="title"> 
             <img style="height: 82px; width: 82px;" :src="current.productImg" alt="">
-            <b>
-              {{current.product}}
-            </b>
+            <b v-if="state.locale==='zh-CN'"> {{current.product}} </b>
+            <b v-else-if="state.locale==='zh-HK'"> {{current.productCt}} </b>
+            <b v-else-if="state.locale==='ko'"> {{current.productEn}} </b>
+            <b v-else> {{current.productKn}} </b>
         </div>
         <div class="m">
           <table>
             <tr>
-              <th>预计回报率</th>
-              <th>算力总发值</th>
-              <th>算力价格</th>
-              <th>最大购买总数量</th> 
+              <th>{{$tR('estimated_rate')}}</th>
+              <th>{{$tR('total_calc')}}</th>
+              <th>{{$tR('calc_price')}}</th>
+              <th>{{$tR('max_buy_qty')}}</th> 
             </tr>
             <tr>
               <td>{{current.annualizedReturns}}%</td>
@@ -28,14 +29,14 @@
         <div class="b">
           <table>
             <tr>
-              <th style="width: 15%;">期限</th>
-              <th style="width: 15%;">产出TOKEN</th>
-              <th style="width: 15%;">维护费用</th>
-              <th>开始结束时间</th>
-              <th style="width: 18%;">预计生效时间</th> 
+              <th style="width: 15%;">{{$tR('term')}}</th>
+              <th style="width: 15%;">{{$tR('output_token')}}</th>
+              <th style="width: 15%;">{{$tR('maintainance_fee')}}</th>
+              <th>{{$tR('start_and_end')}}</th>
+              <th style="width: 18%;">{{$tR('estimated_time')}}</th> 
             </tr>
             <tr>
-              <td>{{current.moneyDays}}天</td>
+              <td>{{current.moneyDays}} {{$tR('days')}}</td>
               <td>{{current.token}}</td>
               <td>{{current.maintainanceFee}}%</td> 
               <td>{{`${ utils.dateFormatter(current.beginTime, 'Y-M-D H:m')}~${utils.dateFormatter(current.endTime, 'Y-M-D H:m')}`}}</td>
@@ -50,8 +51,8 @@
       <div class="r">
         <div class="progress mb-28">
           <div class="between">
-            <i>进度</i> 
-            <i>可购买算力值</i>
+            <i>{{$tR('schedule')}}</i> 
+            <i>{{$tR('buy_calc')}}</i>
           </div>
           <el-progress class="mt-5 mb-5" :percentage="$big(current.lockedAmount || 0).times(100).div(current.total || 1).round(2)" :show-text="false"></el-progress>
           <div class="between">
@@ -64,13 +65,13 @@
           <span class="append">T</span>
         </div>
         <div class="mb-19">
-          <span>购买价值  {{`${ $big(amount || 0).times(current.price || 0)} ${current.currency}`}} </span>
+          <span>{{$tR('buy_value')}}  {{`${ $big(amount || 0).times(current.price || 0)} ${current.currency}`}} </span>
 
         </div>
         <div class="mb-16" style="display: flex;justify-content: space-between;"> 
-          <span> {{ `可用余额 ${balance.available || ''} ${balance.currency || ''}` }}</span>
+          <span> {{ `${$t('available_balance')} ${balance.available || ''} ${balance.currency || ''}` }}</span>
           <span>
-            <a href="/fund/transfer">资金划转</a>
+            <a href="/fund/transfer">{{$t('account_exchange')}}</a>
           </span>
         </div>
         <!-- <div class="mb-16">
@@ -85,10 +86,13 @@
     <div class="content">
       <div class="box">
         <el-tabs v-model="activeName" @tab-click="handleTabClick">
-          <el-tab-pane label="产品说明" name="first">
-            <p v-html="current.productInfo"></p>
+          <el-tab-pane :label="$tR('product_description')" name="first">
+            <p v-if="state.locale==='zh-CN'" v-html="current.productInfo"></p>
+            <p v-else-if="state.locale==='zh-HK'" v-html="current.productInfoCt"></p>
+            <p v-else-if="state.locale==='ko'" v-html="current.productInfoKn"></p>
+            <p v-else v-html="current.productInfoEn"></p> 
           </el-tab-pane>
-          <el-tab-pane label="项目图片" name="second">
+          <el-tab-pane :label="$tR('project_img')" name="second">
             <img :src="current.productImg" alt="">
           </el-tab-pane> 
         </el-tabs> 
@@ -98,13 +102,15 @@
 </template>
 
 <script>
-import {local} from '@/modules/store'
-import utils from '@/modules/utils'
-import {state} from '@/modules/store'
+import {local, state} from '@/modules/store'
+import utils from '@/modules/utils' 
 import api from '@/modules/api/ipfs'
+import mixin from '@/mixins/index'
 export default {
+  name: 'mining_power',
   data() {
     return {
+      state,
       utils,
       amount: 0, 
       activeName: "first",
@@ -114,6 +120,7 @@ export default {
       balance: {}
     }
   },
+  mixins: [mixin],
   computed: { 
     isLogin() {
       return state.userInfo !== null

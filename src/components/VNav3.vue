@@ -68,7 +68,7 @@
               <icon name="header-down" class="mini arrow" /> 
             </router-link> -->
             <a href="/mining-power" class="nav_link ml-30" v-popover:popover2>
-              {{ this.$t('彼岸云矿') }}
+              {{ this.$t('mining_power.cloud_mine') }}
               <icon name="hot-red" />
               <icon name="header-down" class="mini arrow" />
             </a>
@@ -83,7 +83,7 @@
                 
                 <li class="dropdown-item pl-24 pr-24">
                   <a href="/mining-power" class="link">
-                    {{ this.$t('彼岸云矿') }}
+                    {{ this.$t('mining_power.cloud_mine') }}
                     <icon name="hot-red" />
                   </a>
                 </li>

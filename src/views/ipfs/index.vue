@@ -14,19 +14,22 @@
             <img :src="item.productImg" alt="">
           </div>
           <div class="describe fl">
-            <p> 
-              <b class="title">{{item.product}}</b>
-              <label class="ml-20" :style="{color: stateColor[item.state] }">{{ orderState[item.state]}}</label>
+            <p>  
+              <b class="title" v-if="state.locale==='zh-CN'"> {{item.product}} </b>
+              <b class="title" v-else-if="state.locale==='zh-HK'"> {{item.productCt}} </b>
+              <b class="title" v-else-if="state.locale==='ko'"> {{item.productEn}} </b>
+              <b class="title" v-else> {{item.productKn}} </b>
+              <label class="ml-20" :style="{color: stateColor[item.state] }">{{ $tR(orderState[item.state])}}</label>
             </p>
             <p class="between">
-              <i>开始结束日期</i>
+              <i>{{$tR('start_and_end')}}</i>
               <b>{{`${ utils.dateFormatter(item.beginTime, 'Y-M-D H:m')}~${utils.dateFormatter(item.endTime, 'Y-M-D H:m')}`}}</b>
             </p>
           </div>
           <div class="progress fl">
             <div class="between">
-              <i>进度</i> 
-              <i>可购买算力值</i>
+              <i>{{$tR('schedule')}}</i> 
+              <i>{{$tR('buy_calc')}}</i>
             </div>
             <el-progress  class="mt-5 mb-5" :percentage="$big(item.lockedAmount || 0).times(100).div(item.total || 1).round(2)"  :show-text="false"></el-progress>
             <div class="between">
@@ -35,7 +38,7 @@
             </div>
           </div>
           <div class="option fl">
-            <el-button :type="item.state === 1 ? 'primary' : 'info'" :disabled="item.total===item.lockedAmount"  @click="handleClick(item.manageId)">立即购买</el-button>
+            <el-button :type="item.state === 1 ? 'primary' : 'info'" :disabled="item.total===item.lockedAmount"  @click="handleClick(item.manageId)">{{ $tR('buy_now') }}</el-button>
           </div> 
         </div>
       </div>
@@ -58,7 +61,9 @@
 import api from '@/modules/api/ipfs' 
 import { state, local } from '@/modules/store'
 import utils from '@/modules/utils'
+import mixin from '@/mixins/index'
 export default {
+  name: 'mining_power',
   data() {
     return {
       state,
@@ -66,11 +71,12 @@ export default {
       loading: true,
       dataList: [],
       orderState: {
-        0: '未开始',
-        1: '进行中',
-        2: '待生效',
-        3: '生效中',
-        4: '已结束',
+        0: 'not_start',
+        1: 'processing',
+        2: 'pending',
+        3: 'in_effect',
+        4: 'ended',
+        5: 'expired'
       },
       stateColor: {
         0: '#C7C7C7', 
@@ -86,6 +92,7 @@ export default {
       }
     }
   },
+  mixins: [mixin],
   methods: {
     handleClick(e) {
       this.$router.push({
@@ -112,7 +119,7 @@ export default {
           this.pageConfig.total = res.data.total
         }
       })
-    }
+    }, 
   },
   created() {
     this.getDataList()
@@ -227,7 +234,8 @@ export default {
             height: 82px;
             line-height: 82px;
             .el-button {
-              padding: 13px 43px;
+              // padding: 13px 41px;
+              width: 140px;
             }
           }
         }
