@@ -91,7 +91,7 @@
         <dd>
           <router-link
             class="sub-menu-item"
-            to="/fund/my/ipfs">{{ $t('算力账户') }}
+            to="/fund/my/mining-power">{{ $t('mining_power.calc_account') }}
           </router-link>
         </dd>
        </dl>

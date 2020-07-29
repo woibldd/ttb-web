@@ -2994,6 +2994,9 @@ export default {
     end_time: "End Time",
     estimated_time: "Estimated Effective Time",
     buy_value: "Buy Value", 
-    days: "Days"
+    days: "Days",
+    buy_computational: "Buy Computational" ,
+    time: "Time",
+    state: "State" 
   }
 }

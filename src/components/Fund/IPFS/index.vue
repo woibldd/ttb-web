@@ -2,23 +2,23 @@
   <div class="fund-ipfs-container">
     <div class="title">
       <div class="l">
-        算力账户
+        {{$tR('calc_account')}}
       </div>
       <div class="r">
          <label 
           @click="handleNavChange(1)"
           :class="['tab-nav', {active: activeNav===1}]">
-           算力账户
+           {{$tR('calc_account')}}
          </label>
          <label 
           @click="handleNavChange(2)"
           :class="['tab-nav', {active: activeNav===2}]">
-           订单记录
+           {{$tR('order_record')}}
          </label>
          <label 
           @click="handleNavChange(3)"
           :class="['tab-nav', {active: activeNav===3}]">
-           奖励分配
+           {{$tR('reward_allocation')}}
          </label>
       </div>
     </div>
@@ -26,7 +26,7 @@
     <div class="content" v-if="activeNav===1"> 
       <div class="card"> 
         <div class="gz-wrapper clearfix">
-          <span>{{$t('算力余额')}}</span>
+          <span>{{$tR('calc_balance')}}</span>
           <h1> 
             <b v-if="accountList.length > 0">{{ accountList[0].powerAvailable | fixed(2) }} T</b> 
           </h1> 
@@ -34,29 +34,29 @@
       </div>  
       <table class="account mt-30 mb-30">
         <tr>
-          <th>币种</th>
-          <th>可用</th>
-          <th>冻结</th>
-          <th>操作</th>
+          <th>{{$t('currency')}}</th>
+          <th>{{$t('avlb')}}</th>
+          <th>{{$t('asset_th_unavlb')}}</th>
+          <th>{{$t('operation')}}</th>
         </tr>
         <tr v-for="(item, index) in accountList" :key="index">
           <td>{{item.currency}}</td>
           <td>{{ item.available | fixed(8)}}</td>
           <td>{{item.locking | fixed(8)}}</td>
           <td>
-            <a class="ml-10" href="/fund/transfer">资金划转</a>
-            <a class="ml-10" href="/fund/deposit">充值</a>
-            <a class="ml-10" href="/ipfs">算力购买</a>
+            <a class="ml-10" href="/fund/transfer">{{$t('account_exchange')}}</a>
+            <a class="ml-10" href="/fund/deposit">{{$t('bby_shouy15')}}</a>
+            <a class="ml-10" href="/ipfs">{{$tR('buy_computational')}}</a>
           </td>
         </tr>
       </table> 
       <div class="order">
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="全部" name="0"></el-tab-pane>
-          <el-tab-pane label="进行中" name="1"></el-tab-pane>
-          <el-tab-pane label="待生效" name="2"></el-tab-pane>
-          <el-tab-pane label="生效中" name="3"></el-tab-pane>
-          <el-tab-pane label="已结束" name="4"></el-tab-pane>
+          <el-tab-pane :label="$tR('all')" name="0"></el-tab-pane>
+          <el-tab-pane :label="$tR('processing')" name="1"></el-tab-pane>
+          <el-tab-pane :label="$tR('pending')" name="2"></el-tab-pane>
+          <el-tab-pane :label="$tR('in_effect')" name="3"></el-tab-pane>
+          <el-tab-pane :label="$tR('ended')" name="4"></el-tab-pane>
         </el-tabs> 
         <custom-table v-loading="loading"
           stripe
@@ -85,7 +85,10 @@
 <script>
 import customTable from '@/components/customTable'
 import api from '@/modules/api/ipfs'
+import mixin from '@/mixins/index'
+import utils from '@/modules/utils'
 export default {
+  name: 'mining_power',
   data() {
     return {
       activeNav: 1,
@@ -102,35 +105,37 @@ export default {
         total: 0
       },
       mapOrders: {
-        name: '算力产品',
-        amount: '持有算力值',
-        createTime: '生效时间',
-        state: '状态'
+        name: 'calc_product',
+        amount: 'hold_calc',
+        createTime: 'effective_time',
+        state: 'state'
       },
       mapRecords: {
-        createTime: '时间',
-        recordId: '订单编号',
-        product: '产品名称',
-        currency: '支付币种',
-        total: '支付金额',
-        amount: '购买数量',
-        state: '状态'
+        createTime: 'time',
+        recordId: 'order_nunber',
+        product: 'product_name',
+        currency: 'pay_currency',
+        total: 'pay_amount',
+        amount: 'buy_qty',
+        state: 'state'
       },
       mapReward: {
-        producName: '产品名称',
-        type: '奖励类型',
-        amount: '奖励额度',
-        releaseTime: '发放时间',
+        producName: 'product_name',
+        type: 'reward_type',
+        amount: 'reward_quota',
+        releaseTime: 'release_time',
       },
       orderState: {
-        0: '未开始',
-        1: '进行中',
-        2: '待生效',
-        3: '生效中',
-        4: '已结束',
+        0: 'not_start',
+        1: 'processing',
+        2: 'pending',
+        3: 'in_effect',
+        4: 'ended',
+        5: 'expired'
       },
     }
   },
+  mixins: [mixin],
   components: {
     customTable, 
   },
@@ -138,12 +143,14 @@ export default {
     mapTableColumns() { 
       return Object.keys(this.mapOrders).map(item => {
           return {
-            hearderLabel: this.mapOrders[item],
+            hearderLabel: this.$tR(this.mapOrders[item]),
             prop: item,
             handleValue: (value, key) => {
               if (key==='state') {
-                return this.orderState[value]
-              } 
+                return this.$tR(this.orderState[value])
+              } else if (key==='createTime') {
+                return !value ? '--' : utils.dateFormatter(value, 'Y-M-D H:m')
+              }
               else return value ? value : '--'
             }
           } 
@@ -153,12 +160,14 @@ export default {
     mapTableRecordColumns() { 
       return Object.keys(this.mapRecords).map(item => {
         return {
-          hearderLabel: this.mapRecords[item],
+          hearderLabel: this.$tR(this.mapRecords[item]),
           prop: item,
           handleValue: (value, key, row) => {
             if (key==='state') {
-              return this.orderState[value]
-            } 
+              return this.$tR(this.orderState[value])
+            } else if (key==='createTime') {
+              return utils.dateFormatter(value, 'Y-M-D H:m')
+            }
             else return value ? value : '--'
           }
         }   
@@ -167,12 +176,14 @@ export default {
     mapTableRewardColumns() { 
       return Object.keys(this.mapReward).map(item => {
           return {
-            hearderLabel: this.mapReward[item],
+            hearderLabel: this.$tR(this.mapReward[item]),
             prop: item,
             handleValue: (value, key) => { 
               if (key==='state') {
-                return this.orderState[value]
-              } 
+                return this.$tR(this.orderState[value])
+              } else if (key==='releaseTime') {
+                return !value ? '--' : utils.dateFormatter(value, 'Y-M-D H:m')
+              }
               else return value ? value : '--'
             }
           } 

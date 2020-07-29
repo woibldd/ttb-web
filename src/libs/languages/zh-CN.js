@@ -2871,6 +2871,9 @@ export default {
     end_time: "结束时间",
     estimated_time: "预计生效时间",
     buy_value: "购买价值", 
-    days: "天" 
+    days: "天",
+    buy_computational: "购买算力",
+    time: "时间",
+    state: "状态" 
   }
 }

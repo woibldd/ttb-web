@@ -1,11 +1,11 @@
 export default {
-    'currency-mix': "金本位合约",
-    'currency-unit': "幣本位合約",
-    google_login: "登入時進行穀歌驗證",
-    google_turn_off: "關閉穀歌驗證",
-    google_reset: "重置",
-    trading_lever: "合约交易",
-    newLoad:{
+  'currency-mix': "金本位合约",
+  'currency-unit': "幣本位合約",
+  google_login: "登入時進行穀歌驗證",
+  google_turn_off: "關閉穀歌驗證",
+  google_reset: "重置",
+  trading_lever: "合约交易",
+  newLoad:{
     logOut: "點擊登出，重新輸入Apple ID和密碼",
     id: "輸入非中國大陸Apple ID",
     fid: "如果您沒有非中國大陸地區的Apple ID，您可以聯系客服，獲取免費提供的下載Apple ID。",
@@ -2796,10 +2796,13 @@ export default {
     output_token: "產出TOKEN",
     maintainance_fee: "維護費用",
     start_time: "開始時間",
-    end_time: "結束時間",
+    end_time: "結束",
     estimated_time: "預計生效時間",
     buy_value: "購買價值", 
-    days: "天" 
+    days: "天",
+    buy_computational: "购买算力",
+    time: "時間",
+    state: "狀態"
   }
 
 }

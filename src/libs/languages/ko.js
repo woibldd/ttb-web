@@ -2858,7 +2858,10 @@ export default {
     end_time: "종결 시간",
     estimated_time: "발효 예정 시간",
     buy_value: "구매 가치",
-    days: "흘"
+    days: "흘",
+    buy_computational: "구매 산력" ,
+    time: "시간",
+    state: "상태" 
 
   }
 }
