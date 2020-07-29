@@ -391,8 +391,9 @@ export const actions = {
     actions.setTitle(locale) 
     if (!utils.$i18n.messages[locale]) {
       try {
-        const msg = await import(/* webpackChunkName: "lang-[request]" */ `@/libs/languages/${locale}.js`)
-        const element = await import(`element-ui/lib/locale/lang/${locale}`)
+        const msg = await import(`@/libs/languages/${locale}.js`)
+        const eleLocale = locale === 'zh-HK' ? 'zh-TW' : locale
+        const element = await import(`element-ui/lib/locale/lang/${eleLocale}`)
         // utils.$i18n.setLocaleMessage(locale, actions.replaceName(msg)) 
         utils.$i18n.setLocaleMessage(locale, {...msg.default, ...element.default })
       } catch (e) {
