@@ -301,9 +301,9 @@
             <div class="guide-calc">
               <p>>{{ $t('guide_title_index19_step0') }}</p>
               <div class="guide-math" v-html="$t('guide_title_index19_step1',
-              {guide_number16:numberValue,guide_number15:numberValue * 238 /1000,})">
+              {guide_number16:numberValue,guide_number15:numberValue * 476 /1000,})">
               </div>
-              <p>{{ $t('guide_title_index19_step2',{guide_number17:numberValue * 238 /1000}) }}</p>
+              <p>{{ $t('guide_title_index19_step2',{guide_number17:numberValue * 476 /1000}) }}</p>
               <div class="guide-right-dom">
                 <a href="/contract.html" class="guide-btn yellow">{{ $t('guide_title_index24_step3') }}</a>
                 <button @click="step = 0" class="guide-btn yellow">{{ $t('guide_title_index13_step4') }}</button>
