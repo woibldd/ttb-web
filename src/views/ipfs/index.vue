@@ -203,6 +203,7 @@ export default {
               }
               label {
                 padding: 4px 11px;
+                white-space: nowrap;
                 line-height: 24px; 
                 vertical-align: top;
                 border: 2px solid ;

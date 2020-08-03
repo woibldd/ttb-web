@@ -164,7 +164,7 @@
           label: 'shareOption.share_account'
         }, {
           value: 9,
-          label: '算力账户'
+          label: 'calc_account.calc_account'
         }],
         accountTypes2: []
       }
@@ -427,7 +427,7 @@
                 5 : this.$t('unit_account'),
                 7 : this.$t('gold_account'), 
                 8 : this.$t('shareOption.share_account'), 
-                9 : this.$t('算力账户')
+                9 : this.$t('calc_account.calc_account')
               }
 
               this.tableData[i].from_balance = balanceList[this.tableData[i].from_balance]
@@ -468,7 +468,7 @@
             label: 'shareOption.share_account'
           }, {
             value: 9,
-            label: '算力账户'
+            label: 'calc_account.calc_account'
           }]
         } else if(val === 'BTC') {
           this.accountTypes = [{
@@ -488,7 +488,7 @@
             label: 'shareOption.share_account'
           }, {
             value: 9,
-            label: '算力账户'
+            label: 'calc_account.calc_account'
           }]
         } else if(val === 'ETH') {
           this.accountTypes = [{

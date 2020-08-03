@@ -79,7 +79,7 @@
           <label>算力合同</label>
         </div> -->
         <div class="mt-30">
-          <el-button  :type="current.state === 1 ? 'primary' : 'info'" :disabled="current.state!==1" style="width: 100%;" @click="handleBuyClick">立即购买</el-button>
+          <el-button  :type="current.state === 1 ? 'primary' : 'info'" :disabled="current.state!==1" style="width: 100%;" @click="handleBuyClick">{{$tR('buy_now')}}</el-button>
         </div> 
       </div>
     </div>
