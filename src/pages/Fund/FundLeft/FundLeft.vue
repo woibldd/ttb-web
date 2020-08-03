@@ -1,9 +1,31 @@
 <template>
   <div class="fund-left-container">
-    <div class="left-menu-container left-menu-nobottom">
- 
+    <div class="left-menu-container left-menu-nobottom"> 
 
-      <!--资金纵览-->
+      <!-- {{navList}} -->
+      <dl v-for="(value, key) in navList" :key="key">
+        <template v-if="value.path"> 
+          <dd>
+            <router-link
+              class="menu-name"
+              :to="value.path" >
+              {{value.label }}
+            </router-link> 
+          </dd>
+        </template>
+        <template v-else> 
+          <dt>   
+            <icon v-if="value.icon" :name="value.icon"/>
+            <span class="menu-title">{{ value.label }} </span>  
+          </dt>
+          <dd v-for="(obj, k) in value.list" :key="k">
+            <router-link class="menu-name" :to="obj.path" >
+              {{ obj.label }}
+            </router-link>
+          </dd>  
+        </template>
+      </dl>
+      <!-- 资金纵览
       <dl>
         <dt>
           <icon name="fund-history-money"/>
@@ -15,7 +37,7 @@
           </router-link>
         </dd>
       </dl>
-      <!--资金账户-->
+      资金账户
       <dl>
         <dt>
           <icon name="wallet"/>
@@ -46,7 +68,7 @@
           </router-link>
         </dd>
       </dl>
-      <!--交易账户-->
+      交易账户
        <dl>
         <dt>
           <icon name="transaction"/>
@@ -73,7 +95,7 @@
          <dd>
            <router-link
              class="sub-menu-item"
-             to="/fund/my/contractUnit">{{ $t('currency-unit') + $t('account') }}
+             to="/fund/my/contractUnit">{{ $t('currency-unit') }}
            </router-link>
          </dd>
         <dd>
@@ -103,13 +125,17 @@
           >{{ $t('address_manage') }}
           </router-link>
         </dd>
-      </dl>
+      </dl> -->
     </div>
   </div>
 </template>
-<script>
+<script> 
 export default{
-
+  computed: {  
+    navList() { 
+      return this.$i18n.messages[this.$i18n.locale].fund.left
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

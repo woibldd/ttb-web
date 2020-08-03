@@ -1,6 +1,6 @@
 export default {
-  'currency-mix': "Gold Standard Contract",
-  'currency-unit': "Currency Standard Contract",
+  'currency-mix': "Gold Standard",
+  'currency-unit': "Currency Standard",
   google_login: "Google authentication on login",
   google_turn_off: "Turn off",
   google_reset: "Reset",
@@ -209,7 +209,7 @@ export default {
   cancel: "Cancel",
   close: "Close",
   tips: "Tips",
-  confirm: "Confirm",
+  confirm: "Confirmation",
   confirming: "Confirming",
   amount: "Qty",
   price: "Price",
@@ -248,7 +248,7 @@ export default {
   asset_th_unavlb: "Unavailable",
   asset_trading: "Exchange",
   deposit_address: "Address",
-  address_manage: "Address Manage",
+  address_manage: "Address Mgmt",
   add_address_error: "Address is required",
   copyed: "Copied",
   link_copyed: "Share Link has Copied",
@@ -646,7 +646,7 @@ export default {
   phone_verification_code: "SMS Verification Code",
   total_count: "Total",
   chain: "Chain",
-  state: "State",
+  state: "Status",
   actions: "Actions",
   view_txid: "View TXID",
   pending: "Pending",
@@ -668,7 +668,7 @@ export default {
   bind_phone: "Link to your phone",
   complete_verified: "Complete identity authentication.",
   withdraw_count_max_error: "Exceeding the maximum quantity",
-  withdraw_count_min_error: "Less than minimum quantity",
+  withdraw_count_min_error: "Less than minimum amount",
   footer_services_email: "Support",
   footer_bussness: "Business Cooperation",
   app_download_sologan: "It covers multiple platforms including IOS, Android, Windows and Mac, and supports full-service function.",
@@ -921,7 +921,7 @@ export default {
   lever: "leverage",
   lever_account: "leverage account",
   lever_manage: "leverage management",
-  trading_account: "Exchange Account",
+  trading_account: "Exchange",
   trading_account_name: "leverage account name",
   lever_has_risk_rate: "rate risk",
   lever_borrow: "loan",
@@ -1224,11 +1224,11 @@ export default {
   user_open_sevice_fee: "Open the fee deduction",
   user_service_fee_history: "View history of transaction",
   order_ix_service_fee: "IX deduction fee",
-  trading_lever: "Contract Transaction",
+  trading_lever: "Contract",
   activity_lock_share: "Rule of Lock for Dividend:",
   order_ix_total_discount: "Accumulated deduction",
-  contract_account: "BTC Contract Account",
-  contract: "BTC Contract",
+  contract_account: "BTC Contract",
+  contract: "BTC",
   account_balance: "Account Balance",
   transaction_record: "Transactions Record",
   warehouse_margin: "Position Margin",
@@ -2129,7 +2129,7 @@ export default {
   otc_ziurec_13: "Platform service fee",
   otc_ziurec_16: " Free for a limited time",
   otc_ziurec_18: "Are you sure you want to cancel this order？",
-  otc_ziurec_20: "Confirm",
+  otc_ziurec_20: "Confirmation",
   otc_ziurec_21: "Failed to publish",
   otc_seiitm_1: "Are you sure you want to delete the payment method？",
   otc_seiitm_2: "Delete payment method",
@@ -2296,8 +2296,8 @@ export default {
   otc_menu_title_price: "Current price",
   contract_fee_rate_estimate_tips: "<a>Forecast rate：</a><br/>the expected fee for the next time period is %{feeRate}，which means that long position need to be paid to the short position, If the value is a negative, which means that the short position is paid to long positions.",
   withdraw_state_canceled: "cancelled",
-  withdraw_state_unAudited: "Money Withdrawal",
-  withdraw_state_padding: "Money Withdrawal",
+  withdraw_state_unAudited: "Processing",
+  withdraw_state_padding: "Processing",
   withdraw_state_audited_unsigned: "Audited unsigned",
   withdraw_state_signed: "Signed",
   withdraw_state_broadcast_send: "Broadcast Sent",
@@ -2344,7 +2344,7 @@ export default {
   tj_cg: "Successfully",
   zd_xe: "Purchase amount is below the minimum 100 limit",
   gm_sl: "Purchase amount excess maximum 50,000 limit",
-  otc_account: "Fiat Account",
+  otc_account: "Fiat",
   download_dl_app: "APP Download",
   contract_buy_on_price_piece: "%{symbol} contract on (%{price}) price (%{amount}) piece。",
   link_name: "link name",
@@ -2598,6 +2598,78 @@ export default {
       8: "",
       9: "币本位当日清算",
       10: "金本位当日清算"
+    },
+    left: {
+      1: {
+        label: 'Balance',
+        icon: 'fund-history-money',
+        list: {
+          1: {
+            label: 'Asset Management',
+            path: '/fund/capital'
+          }
+        }
+      },
+      2: {
+        label: 'Funds Account',
+        icon: 'wallet',
+        list: {
+          1: {
+            label: 'Funds Account',
+            path: '/fund/my/assets'
+          },
+          2: {
+            label: 'Deposit',
+            path: '/fund/deposit'
+          },
+          3: {
+            label: 'Withdraw',
+            path: '/fund/withdraw'
+          },
+          4: {
+            label: 'Transfer',
+            path: '/fund/transfer'
+          },
+        }
+      },
+      3: {
+        label: 'Exchange Account',
+        icon: 'transaction',
+        list: {
+          1: {
+            label: 'Fiat',
+            path: '/fund/my/otc'
+          },
+          2: {
+            label: 'Exchange',
+            path: '/fund/my/trading'
+          },
+          3: {
+            label: 'BTC Contract',
+            path: '/fund/my/contract/index'
+          },
+          4: {
+            label: 'Currency Standard Contract',
+            path: '/fund/my/contractUnit/index'
+          },
+          5: {
+            label: 'Gold Standard Contract',
+            path: '/fund/my/contractMix/index'
+          },
+          6: {
+            label: 'Speed Contract',
+            path: '/fund/my/share'
+          },
+          7: {
+            label: 'Mining Power',
+            path: '/fund/my/mining-power'
+          },
+        }
+      },
+      4: {
+        label: 'Address Mgmt',
+        path: '/fund/address'
+      }
     }
   },
   profile: {
@@ -2609,7 +2681,7 @@ export default {
     time: "time",
     price: "price",
     navText: "Speed Contract",
-    share_account: "Speed Account",
+    share_account: "Speed Contract",
     account: "Account",
     resetMoney: "Reset Trading Bonus",
     recharge: "Transfer",
@@ -2908,9 +2980,9 @@ export default {
   kyc_retry: "Re-verification",
   'UNIT_&':"%{currency} Currency Standard Contract",
   'MIX_&':"%{currency} Gold Standard Contract", 
-  unit_account: "Currency Standard Contract Account",
+  unit_account: "Currency Standard Contract",
   footer_link: "Link",
-  unit_contract: "Currency Standard Contract",
+  unit_contract: "Currency Standard",
   h5_home_new: {
     title:"The World's First Digital Asset Trading Community",
     describe1:"Easy download, trade anytime",
@@ -2929,8 +3001,8 @@ export default {
     describe6:"Self-developed high-performance matching engine, fully supporting the matching speed of 2 million + / seconds / transaction pairs, non-stop service without jam."
   },
   pre_reviewed: "Order is being pre-reviewed",
-  gold_account: "Gold Standard Contract Account",
-  gold_contract: "Gold Standard Contract",
+  gold_account: "Gold Standard Contract",
+  gold_contract: "Gold Standard",
   mix_side: {
     1: "Buy long",
     2: "Sell short",
@@ -2948,7 +3020,7 @@ export default {
   },
   mining_power: {
     cloud_mine: "BA Cloud Mine",
-    calc_account: "Computational Account",
+    calc_account: "Mining Power",
     calc_balance: "Balance of computing power",
     account_details: "Account Details",
     calc_details: "Computing Power Details",

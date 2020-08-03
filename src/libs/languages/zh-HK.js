@@ -2418,6 +2418,78 @@ export default {
       8: "",
       9: "币本位当日清算",
       10: "金本位当日清算"
+    },
+    left: {
+      1: {
+        label: '我的资产',
+        icon: 'fund-history-money',
+        list: {
+          1: {
+            label: '资产管理',
+            path: '/fund/capital'
+          }
+        }
+      },
+      2: {
+        label: '资金账户',
+        icon: 'wallet',
+        list: {
+          1: {
+            label: '资金账户',
+            path: '/fund/my/assets'
+          },
+          2: {
+            label: '充币',
+            path: '/fund/deposit'
+          },
+          3: {
+            label: '提币',
+            path: '/fund/withdraw'
+          },
+          4: {
+            label: '资金划转',
+            path: '/fund/transfer'
+          },
+        }
+      },
+      3: {
+        label: '交易账户',
+        icon: 'transaction',
+        list: {
+          1: {
+            label: '法币账户',
+            path: '/fund/my/otc'
+          },
+          2: {
+            label: '币币账户',
+            path: '/fund/my/trading'
+          },
+          3: {
+            label: 'BTC合约账户',
+            path: '/fund/my/contract/index'
+          },
+          4: {
+            label: '币本位账户',
+            path: '/fund/my/contractUnit/index'
+          },
+          5: {
+            label: '金本位账户',
+            path: '/fund/my/contractMix/index'
+          },
+          6: {
+            label: '极速合约账户',
+            path: '/fund/my/share'
+          },
+          7: {
+            label: '算力账户',
+            path: '/fund/my/mining-power'
+          },
+        }
+      },
+      4: {
+        label: '地址管理',
+        path: '/fund/address'
+      }
     }
   },
   profile: {

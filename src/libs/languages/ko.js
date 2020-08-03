@@ -2470,6 +2470,78 @@ export default {
       8: "",
       9: "币本位当日清算",
       10: "金本位当日清算"
+    },
+    left: {
+      1: {
+        label: '나의 자산 ',
+        icon: 'fund-history-money',
+        list: {
+          1: {
+            label: '자산관리',
+            path: '/fund/capital'
+          }
+        }
+      },
+      2: {
+        label: '자금 계좌',
+        icon: 'wallet',
+        list: {
+          1: {
+            label: '자금 계좌',
+            path: '/fund/my/assets'
+          },
+          2: {
+            label: '입금',
+            path: '/fund/deposit'
+          },
+          3: {
+            label: '출금',
+            path: '/fund/withdraw'
+          },
+          4: {
+            label: '자금의 대체 조달',
+            path: '/fund/transfer'
+          },
+        }
+      },
+      3: {
+        label: '거래 계정',
+        icon: 'transaction',
+        list: {
+          1: {
+            label: '법폐 계좌',
+            path: '/fund/my/otc'
+          },
+          2: {
+            label: '코인계좌',
+            path: '/fund/my/trading'
+          },
+          3: {
+            label: 'BTC 계정 잔액',
+            path: '/fund/my/contract/index'
+          },
+          4: {
+            label: '코인 베이스 계약 계좌',
+            path: '/fund/my/contractUnit/index'
+          },
+          5: {
+            label: '금본위 계약 계좌',
+            path: '/fund/my/contractMix/index'
+          },
+          6: {
+            label: '전속계좌',
+            path: '/fund/my/share'
+          },
+          7: {
+            label: '산정력계정',
+            path: '/fund/my/mining-power'
+          },
+        }
+      },
+      4: {
+        label: '주소관리',
+        path: '/fund/address'
+      }
     }
   },
   shareOption: {

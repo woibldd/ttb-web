@@ -579,7 +579,7 @@ export default {
 </script>
 <style>
 .text-nowrap {
-  max-width: 120px;
+  /* max-width: 120px; */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
