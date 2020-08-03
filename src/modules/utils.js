@@ -429,15 +429,15 @@ const utils = {
       return num.toFixed(0)
     }
     if (num < 1e7) {
-      return num.div(1e6).toFixed(1) + ' M'
+      return num.div(1e6).toFixed(1) + 'M'
     }
     if (num < 1e9) {
-      return num.div(1e6).toFixed(0) + ' M'
+      return num.div(1e6).toFixed(0) + 'M'
     }
     if (num < 1e10) {
-      return num.div(1e9).toFixed(1) + ' B'
+      return num.div(1e9).toFixed(1) + 'B'
     }
-    return num.div(1e9).toFixed(0) + ' B'
+    return num.div(1e9).toFixed(0) + 'B'
   },
   toRound(num, scale = 20, rm = consts.ROUND_DOWN) {
     if (typeof num === 'undefined') {
