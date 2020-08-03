@@ -26,7 +26,7 @@
                     :class="{'router-link-active': from === 'contract'}"
                     href="/contract.html"
                     class="nav_link"
-                  >{{ $t('contract') }}</a> 
+                  >{{ $t('contract_btc') }}</a> 
                 </li>
                 <li class="dropdown-item pl-24 pr-24"> 
                   <a

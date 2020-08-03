@@ -3441,6 +3441,7 @@ export default {
       usdtRate: '汇率(USDT/USD)'
     }
   },
+  
   financialRecord: {
     mapTab: {
       1: '划转记录',

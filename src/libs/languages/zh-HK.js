@@ -1100,7 +1100,7 @@ export default {
   activity_lock_title_a: "如需使用機器人挖礦，需要優先創建API Key",
   activity_lock_title_b: "創建API Key後，可以開始使用機器人進行挖礦",
   contract_account: "BTC合約賬戶",
-  contract: "BTC合約",
+  contract_btc: "BTC合約",
   account_balance: "賬戶餘額",
   transaction_record: "交易記錄",
   warehouse_margin: "倉位保證金",
@@ -2548,6 +2548,600 @@ export default {
     values:"價值",
     noData:"暫無數據"
   },
+  contract: {
+    swap: '永续',
+    available_assets: '可用资产',
+    float_profit_loss: '浮动盈亏', 
+    forward_contract: '正向合约',
+    reverse_contract: '反向合约',
+    sheet: '張',
+    buy: '買入',
+    sell: '賣出',
+    handle: '操作',
+    cancel: '撤銷',
+    deal: '合约交易',
+    rateOReturn: '回報率',
+    quota: '風險限額',
+    handleSuccess: '操作成功',
+    index: '指數',
+    currentPlace: '當前倉位',
+    state: {
+      1: '委託中未成交',
+      2: '委託中限价部分成交',
+      3: '完全成交',
+      4: '撤單全部',
+      5: '撤單部分成交',
+      6: '市價部分成交',
+      7: '市價'
+    },
+    mapTabs: {
+      FUTURE_BTCUSD: `BTC永續`,
+      FUTURE_ETHUSD: `ETH永續`,
+      FUTURE_EOSUSD: `EOS永續`,
+      FUTURE_BHDUSD: `BHD永續`,
+      ETHUSD: `ETHUSD`,
+      EOSUSD: `EOSUSD`,
+      METHUSD: `METHUSD (模擬)`,
+      BTCUSDT: `BTCUSDT`,
+      BTCMUSDT: `BTCMUSDT`,
+      ETHMUSDT: `ETHMUSDT`,
+    },
+    mapTableTapContents: {
+      shipping: {
+        text: '倉位',
+        mapTableColumns: {
+          holding: {
+            label: '目前倉位數量',
+            tips: '<a>目前倉位數量</a><br/>你在此合約的倉位，正數為多倉，負數為空倉。'
+          },
+          _leverage: {
+            label: '杠杆倍数',
+            tips: ''
+          },
+          markPrice: {
+            label: '標記價格',
+            tips: '<a>標記價格</a><br/>這是現在的標記價格，點此了解更多。'
+          },
+          price: {
+            label: '開倉價格',
+            tips: '<a>開倉價格</a><br/>目前多/空倉的平均買入/賣出價。'
+          },
+          liq_price: {
+            label: '強平價格',
+            tips: '<a>強平價格</a><br/>如果该合约的标记价格低于该价格（多仓）或高于该价格（空仓），你将会被强制平仓。'
+          },
+          value: {
+            label: '價值',
+            tips: '倉位在當前合理價格的名義價值'
+          },
+          margin_position: {
+            label: '倉位保證金',
+            tips: '<a>保證金</a><br/>被倉位使用並鎖倉的保證金，如果你有在某個倉位啟用逐倉，此數值將會隨著保證金下跌而減少，亦代表你的實際槓桿上升。移動滑桿來調整分配到各個倉位的保證金。'
+          },
+          unrealized: {
+            label: '未實現盈虧（回報率%）',
+            tips: '<a>未實現盈虧（回報率%）</a><br/>該合約的未實現盈虧，以及回報率。'
+          },
+          realized: {
+            label: '已實現盈虧',
+            tips: '<a>已實現盈虧</a><br/>自開倉以來的已實現盈虧。'
+          }
+        }
+      },
+      shipped: {
+        text: '已平倉位',
+        mapTableColumns: {
+          symbol: '合约类型',
+          realized: '已實現盈虧'
+        }
+      },
+      curEntrust: {
+        text: '當前委託',
+        mapTableColumns: {
+          symbol: '合约类型',
+          side: '劃轉方向',
+          amount: '數量',
+          price: '委託價格',
+          // total: '已成交额',
+          executed: '已成交量/剩余量',
+          entrustValue: '委託價值',
+          type: '類型',
+          state: '狀態',
+          tp_type: '止盈/止損',
+          create_time: '下单时间'
+          // update_time: '更新时间'
+          // tp_price: '止盈价格',
+          // sl_type: '止损触发类型',
+          // sl_price: '止损价格'
+        }
+      },
+      lossEntrust: {
+        text: '止損委托',
+        mapTableColumns: {
+          symbol: '合约类型',
+          amount: '數量',
+          price: '委託價格',
+          trigger_price: '觸發價格',
+          distancePrice: '距離觸發',
+          // total: '已成交额',
+          // executed: '已成交量',
+          type: '類型',
+          state: '狀態',
+          create_time: '下单时间'
+          // update_time: '更新时间'
+          // tp_type: '止盈触发类型',
+          // tp_price: '止盈价格',
+          // sl_type: '止损触发类型',
+          // sl_price: '止损价格'
+        }
+      },
+      historyEntrust: {
+        text: '委託歷史',
+        mapTableColumns: {
+          symbol: '合约类型',
+          side: '方向',
+          amount: '數量',
+          // price: '委托价格',
+          executed_price: '成交价格',
+          executed: '已成交量/剩余量',
+          // entrustValue: '委托价值',
+          type: '類型',
+          state: '狀態',
+          // tp_type: '止盈/止损',
+          create_time: '下單時間'
+          // update_time: '更新时间'
+          // tp_price: '止盈价格',
+          // sl_type: '止损触发类型',
+          // sl_price: '止损价格'
+        }
+      },
+      bargain: {
+        text: '已成交',
+        mapTableColumns: {
+          symbol: '合約類型',
+          side: '方向',
+          amount_total: '委託數量',
+          amount: '成交量',
+          amount_surplus: '剩餘量',
+          price: '成交價格',
+          // entrustPrice: '委托价格',
+          total: '價值',
+          type: '委託類型',
+          order_id: '委託單ID',
+          fee: '手續費',
+          create_time: '成交時間'
+
+          // id: '成交单ID',
+          // origin: '1成交单',
+          // order_id: '订单ID',
+          // uid: '用户ID',
+          // product: '商品简称',
+          // currency: '货币简称',
+
+        }
+      }
+    },
+    mapDishInfo: {
+      current: '最新價',
+      change_24h: '漲跌幅',
+      volume_24h: '24H成交量',
+      markPrice: '標記價格',
+      increment_24h: '漲跌額'
+    },
+    mapDishNewInfo: {
+      increment_24h: '涨跌值',
+      markPrice: '标记价格',
+      highest_24h: '24H最高价',
+      lowest_24h: '24最低价', 
+      volume_24h: '24H成交量',
+      fee_rate: '资金费率'
+    },
+    mapDelegateList: {
+      'entrust-list': '委託列表',
+      'depth': '深度',
+      'return-dish': '返回盤口',
+      'new-bargain': '最新成交',
+      mapHeader1: {
+        'price': '價格',
+        'amount': '数量',
+        'total': '累計'
+      },
+      mapHeader2: {
+        'direction': '方向',
+        'transaction-price ': '成交價',
+        'trading-volume': '成交量',
+        'time': '時間'
+      }
+    },
+    mapFormContent: {
+      mapBtns: {
+        1: { text: '限價', describe: '限價委託用於在指定的（或更好的）價格買入或賣出。這是最常用的委託類型。' },
+        2: { text: '市價', describe: '市價委託是一種最快的成交方式。它以目前委託列表的最佳價格執行。請注意，網絡延遲可能導致委託的執行價格與你的期望有所不同。' },
+        3: { text: '限價止盈', describe: '' }
+      },
+      mapMenuOptions: {
+        3: '限價止盈',
+        4: '市價止損',
+        5: '限價止盈',
+        6: '市價止盈'
+      },
+      mapInput: {
+        shippingSpace: '倉位',
+        value: '價格',
+        triggerPrice: '觸發價格',
+        triggerType: '觸發類型'
+      },
+      mapHandleBtn: {
+        buy: '買入/做多',
+        sell: '賣出/做空'
+      },
+      cost: '成本',
+      submitEntrust: '提交委託',
+      mapDescribe: {
+        entrustValue: {
+          text: '委託價值',
+          tips: '此委託的总價值'
+        },
+        available: {
+          text: '可用餘額',
+          tips: '你建立委託的可用餘額，點此查看錢包詳情。'
+        }
+      },
+      mapTriggerType: {
+        1: '盤口價格',
+        2: '標記價格',
+        3: '指数價格'
+      },
+      notip: '直接下单',
+      trigger_close: '觸發後平倉',
+      perfactPrice: '市场最優價格',
+      passive: '被動委託'
+
+    },
+    mapInformation: {
+      priceBy: '價格來源',
+      priceIndex: '指数價格',
+      volume_24h: '24小時交易量',
+      value: '合約價值',
+      valueRate: '資金費率'
+    },
+    edit_cell: {
+      "edit_price_pop_title": "委託修改可執行",
+      "edit_price_pop_content": "將價格更改至%{newValue}可能會使該委託立刻與市場中的其他委託成交。請確認更改。",
+      "edit_price_pop_confirm": "執行修改"
+    },
+    active: {
+      'problem_list1': '1.当拥有1个BTC，但是担心价格下跌，此时可以（）1个BTC等值的合约来对冲下跌风险？',
+      'problem_list2': '2.当你想持有1个BTC的合约仓位价值，且使用10倍杠杆，您需要（）BTC作为保证金。',
+      'problem_list3': '3.未实现盈亏的计算公式是？',
+      'problem_list4': '4.当持仓张数越高，档位越高时，维持保证金率越（），最高可开杠杆倍数越（）',
+      'problem_list5': '5.当仓位用户处于强制部分减仓状态时，是否可以进行下单撤单等操作？',
+      'problem_list6': '6.资金费用为（）时，多方向空方支付费用',
+      'problem_list7': '7.爆仓触发的条件为？',
+      'problem_list8': '8.永续合约平仓后的盈利在什么时间可以转出？',
+      'answer_list2_1': '做多',
+      'answer_list2_2': '做空',
+      'answer_list3_1': '多方：未实现盈亏=面值*张数／开仓均价-面值*张数／最新标记价格；空方：未实现盈亏=面值*张数／最新标记价格-面值*张数／开仓均价',
+      'answer_list3_2': '多方：未实现盈亏=面值*张数／开仓均价-面值*张数／最新成交价；空方：未实现盈亏=面值*张数／最新成交价-面值*张数／开仓均价',
+      'answer_list4_1': '高，低',
+      'answer_list4_2': '低，高',
+      'answer_list5_1': '是',
+      'answer_list5_2': '否',
+      'answer_list6_1': '正数',
+      'answer_list6_2': '负数',
+      'answer_list7_1': '保证金率<=维持保证金率',
+      'answer_list7_2': '保证金率>=维持保证金率',
+      'answer_list8_1': '任何时间都可以转出',
+      'answer_list8_2': '每天10:00和22:00(香港时间)结算后即可转出',
+      'contract_title': '开通永续合约交易',
+      'contract_body': '亲爱的用户，为了保证您接下来更好的控制资金风险，您需要答题通过后，熟读风险提示后并确认后才能开通合约。',
+      'contract_answer': '答题',
+      'contract_tips': '提示',
+      'contract_submission': '提交答案',
+      'contract_error': '亲，您有几道题答错了，请在想想，修改答案后可重新提交',
+      'answer_the_question': '亲，请您认真答完题之后再提交哦',
+      'contract_content1': '风险披露告知通知：',
+      'contract_content2': '一、您在合约市场进行交易，假如市场走势对您不利导致您的仓位保证金不足时，IX 会按照系统约定的对您的仓位进行强平委托并 披露强平明细。 ',
+      'contract_content3': '二、您必须认真阅读并遵守IX 的业务规则，了解合约的机制和运行原理，了解市场的各种风险。  ',
+      'contract_content4': '三、在某些极端的市场情况下，您可能会难以或无法将持有的未平仓合约平仓。例如，当你的盈利在整个合约市场中有效杠杆PnL 中排位第一，且对手盘在保险基金不足以垫付其穿仓损失的情况下。',
+      'contract_content5': '四、由于法律、法规、政策的变化、合约交易所交易规则的修改、紧急措施的出台等原因，IX 会提前披露声明，您持有的未平仓 合约可能无法继续持有，但保证金和盈利的结余仍会兑现。',
+      'contract_content6': '五、由于非IX所能控制的原因，例如：地震、水灾、火灾等不可抗力因素或者计算机系统、通讯系统故障等，可能造成您的指令 无法成交或者无法全部成交，您可能会承担由此导致的损失。',
+      'contract_content7': '六、“套期保值”交易同投机交易一样，同样面临价格波动引起的风险。',
+      'contract_content8': '七、如果您没有进行KYC2（实名认证）或者未绑定Google验证，或者将账号借给非本人操作，将可能会影响您的合约保证金的安全性',
+      'contract_risk_known': '我已知晓风险，继续开通合约账户',
+      'contract_simulation_risk_known': '我已知晓风险，继续开通合约账户',
+      'contract_has_active': '已开通'
+    },
+    mapAccountInfo: {
+      available:'账户权益',
+      available_balance:'可用余额',
+      unrealized:'未实现盈亏',
+      margin_balance:'保证金余额',
+      margin_position:'仓位保证金',
+      margin_delegation:'委托保证金',
+    }
+  },
+  contractMix: {
+    sheet: '张',
+    buy: '买入',
+    sell: '卖出',
+    handle: '操作',
+    cancel: '撤销',
+    deal: '合约交易',
+    rateOReturn: '回报率',
+    quota: '风险限额',
+    handleSuccess: '操作成功',
+    index: '指数',
+    currentPlace: '当前仓位',
+    side: {
+      1: '买入开多',
+      2: '卖出开空',
+      3: '卖出平多',
+      4: '买入平空'
+    },
+    orderType: {
+      1: '限价',
+      2: '市价',
+      3: '止盈止损'
+    },
+    origin: {
+      1: '成交单',
+      2: '强平单',
+      3: '资金费率',
+      4: 'ADL减仓'
+    },
+    state: {
+      1: '委托中未成交',
+      2: '委托中限价部分成交',
+      3: '完全成交',
+      4: '撤单全部',
+      5: '撤单部分成交',
+      6: '市价部分成交',
+      7: '市价'
+    },
+    mapTabs: {
+      FUTURE_BTCUSD: `BTC永续`,
+      FUTURE_ETHUSD: `ETH永续`,
+      FUTURE_EOSUSD: `EOS永续`,
+      FUTURE_BHDUSD: `BHD永续`,
+      ETHUSD: `ETH币本位`,
+      EOSUSD: `EOS币本位`,
+      METHUSD: `METH币本位`,
+      BTCUSDT: `BTCUSDT`, 
+      BTCMUSDT: `BTCMUSDT`,
+      ETHMUSDT: `ETHMUSDT`,
+      ETHUSDT: `ETHUSDT`,
+    },
+    mapTableTapContents: {
+      shipping: {
+        text: '仓位',
+        mapTableColumns: {
+          holding: {
+            label: '目前仓位数量',
+            tips: '<a>目前仓位数量</a><br/>你在此合约的仓位，正数为多仓，负数为空仓。'
+          },
+          _leverage: {
+            label: '杠杆倍数',
+            tips: ''
+          },
+          markPrice: {
+            label: '标记价格',
+            tips: '<a>标记价格</a><br/>这是现在的标记价格，点此了解更多。'
+          },
+          price: {
+            label: '开仓价格',
+            tips: '<a>开仓价格</a><br/>目前多/空仓的平均买入/卖出价。'
+          },
+          liq_price: {
+            label: '强平价格',
+            tips: '<a>强平价格</a><br/>如果该合约的标记价格低于该价格（多仓）或高于该价格（空仓），你将会被强制平仓。'
+          },
+          value: {
+            label: '价值',
+            tips: '仓位在当前合理价格的名义价值'
+          },
+          margin_position: {
+            label: '仓位保证金',
+            tips: '<a>保证金</a><br/>被仓位使用并锁仓的保证金，如果你有在某个仓位启用逐仓，此数值将会随着保证金下跌而减少，亦代表你的实际杠杆上升。移动滑杆来调整分配到各个仓位的保证金。'
+          },
+          unrealized: {
+            label: '未实现盈亏（回报率%）',
+            tips: '<a>未实现盈亏（回报率%）</a><br/>该合约的未实现盈亏，以及回报率。'
+          },
+          realized: {
+            label: '已实现盈亏',
+            tips: '<a>已实现盈亏</a><br/>自开仓以来的已实现盈亏。'
+          },
+          currency: {
+            label: '结算币种',
+            tips: ''
+          }
+        }
+      },
+      shipped: {
+        text: '已平仓位',
+        mapTableColumns: {
+          symbol: '合约类型',
+          realized: '已实现盈亏'
+        }
+      },
+      curEntrust: {
+        text: '当前委托',
+        mapTableColumns: {
+          symbol: '合约类型',
+          side: '方向',
+          amount: '数量',
+          price: '委托价格',
+          // total: '已成交额',
+          executed: '已成交量/剩余量',
+          entrustValue: '委托价值',
+          type: '类型',
+          state: '状态',
+          // tp_type: '止盈/止损',
+          create_time: '下单时间'
+          // update_time: '更新时间'
+          // tp_price: '止盈价格',
+          // sl_type: '止损触发类型',
+          // sl_price: '止损价格'
+        }
+      },
+      lossEntrust: {
+        text: '止损委托',
+        mapTableColumns: {
+          name: '合约类型',
+          side: '方向',
+          amount: '数量',
+          trigger_price: '触发价格',
+          distancePrice: '距离触发',
+          // total: '已成交额',
+          executed: '已成交量',
+          type: '类型',
+          state: '状态',
+          create_time: '下单时间'
+          // update_time: '更新时间'
+          // tp_type: '止盈触发类型',
+          // tp_price: '止盈价格',
+          // sl_type: '止损触发类型',
+          // sl_price: '止损价格'
+        }
+      },
+      historyEntrust: {
+        text: '委托历史',
+        mapTableColumns: {
+          symbol: '合约类型',
+          side: '方向',
+          amount: '数量',
+          trigger_price: '触发价格',
+          // price: '委托价格',
+          executed_price: '成交价格',
+          executed: '已成交量/剩余量',
+          // entrustValue: '委托价值',
+          type: '类型',
+          state: '状态',
+          // tp_type: '止盈/止损',
+          create_time: '下单时间'
+          // update_time: '更新时间'
+          // tp_price: '止盈价格',
+          // sl_type: '止损触发类型',
+          // sl_price: '止损价格'
+        }
+      },
+      bargain: {
+        text: '已成交',
+        mapTableColumns: {
+          symbol: '合约类型',
+          side: '方向',
+          amount_total: '委托数量',
+          amount: '成交量',
+          amount_surplus: '剩余量',
+          price: '成交价格',
+          // entrustPrice: '委托价格',
+          total: '价值',
+          type: '委托类型',
+          origin: '成交类型',
+          order_id: '委托单ID',
+          // fee: '手续费',
+          create_time: '成交时间'
+        }
+      }
+    },
+    mapDishInfo: {
+      current: '最新价',
+      change_24h: '涨跌幅',
+      volume_24h: '24H成交量',
+      markPrice: '标记价格',
+      increment_24h: '涨跌额'
+    },
+    mapDishNewInfo: {
+      increment_24h: '涨跌值',
+      markPrice: '标记价格',
+      highest_24h: '24H最高价',
+      lowest_24h: '24最低价', 
+      volume_24h: '24H成交量',
+      fee_rate: '资金费率'
+    },
+    mapDelegateList: {
+      'entrust-list': '委托列表',
+      'depth': '深度',
+      'return-dish': '返回盘口',
+      'new-bargain': '最新成交',
+      'contract_index_price_tips': '<a>指数价格</a><br/>标的资产的价格这是BTC合约的价格，点此查看历史价格。',
+      'contract_mark_price_tips': '<a>标记价格</a><br/>这是现在的标记价格，点此了解更多。',
+      mapHeader1: {
+        'price': '价格',
+        'amount': '数量',
+        'total': '累计'
+      },
+      mapHeader2: {
+        'direction': '方向',
+        'transaction-price': '成交价',
+        'trading-volume': '成交量',
+        'time': '时间'
+      }
+    },
+    mapFormContent: {
+      mapOrderTypes: {
+        1: { text: '开仓'},
+        2: { text: '平仓'}
+      },
+      mapBtns: {
+        1: { text: '限价', describe: '限价委托用于在指定的（或更好的）价格买入或卖出。这是最常用的委托类型。' },
+        2: { text: '市价', describe: '市价委托是一种最快的成交方式。它以目前委托列表的最佳价格执行。请注意，网络延迟可能导致委托的执行价格与你的期望有所不同。' },
+        3: { text: '止盈止损', describe: '' }
+      },
+      mapMenuOptions: {
+        3: '限价止损',
+        4: '市价止损',
+        5: '限价止盈',
+        6: '市价止盈'
+      },
+      mapInput: {
+        value: '委托价格',
+        shippingSpace: '合约数量',
+        triggerPrice: '触发价格',
+        triggerType: '触发类型'
+      },
+      mapHandleBtn: {
+        buy: {
+          1: '买入开多',
+          2: '买入平空'
+        },
+        sell: {
+          1: '卖出开空',
+          2: '卖出平多'
+        }
+      },
+      cost: '成本',
+      submitEntrust: '提交委托',
+      tradingType: '結算幣種',
+      mapDescribe: {
+        entrustValue: {
+          text: '委托价值',
+          tips: '此委托的总价值'
+        },
+        available: {
+          text: '可用余额',
+          tips: '你建立委托的可用余额，点此查看钱包详情。'
+        }
+      },
+      mapTriggerType: {
+        1: '盘口价格',
+        2: '标记价格',
+        3: '指数价格'
+      },
+      notip: '直接下单',
+      trigger_close: '触发后平仓',
+      perfactPrice: '市场最优价格',
+      passive: '被动委托'
+    },
+    mapInformation: {
+      priceBy: '价格来源',
+      priceIndex: '指数价格',
+      volume_24h: '24小时交易量',
+      value: '合约价值',
+      valueRate: '资金费率'
+    }
+  },
   Proposer:{
     title:"请填写以下内容提交上币申请，收到申请后我们将尽快联系您",
     name:"联系人",
@@ -2875,6 +3469,61 @@ export default {
     buy_computational: "购买算力",
     time: "時間",
     state: "狀態"
-  }
+  },
+  appNav: {
+    mapNavList: {
+      'trading': '币币交易',
+      'contract': 'BTC合約',
+      'currency-unit': '幣本位合約',
+      'currency-mix': '金本位合約',
+      'legalTender': '法币交易',
+      'hotActive': {
+        label: '热门活动',
+        children: {
+          lock: '锁仓分红',
+          invite_reward: '邀请奖励'
+        }
+      },
+      'bidTitle': '币盈盈',
+      'fund_assets_node_buy': '节点认购',
+      'share_option': '急速合约'
+    },
+    mapNavRight: {
+      wallet_asset: {
+        label: '我的资产',
+        children: {
+          'capital_manage': '资产管理',
+          'deposit': '充币',
+          'withdraw': '提币',
+          'account_exchange': '资金划转'
+        }
+      },
+      personal_center: {
+        children: {
+          personal_center: '个人中心',
+          set_service_fee: '手续费设置',
+          signout: '退出登录'
+        }
+      },
+      download_pop: {
+        label: '下载App',
+        children: {
+          'scan': '扫码下载App',
+          'process': 'App安裝流程>>'
+        }
+      },
+      help_center: {
+        label: '帮助中心',
+        children: {
+          notice: '公告',
+          user_guide: '新手指引',
+          request: '提交工单'
+        }
+      }
+    },
+    'signup': '注册',
+    'signin': '登录',
+    'signout': '退出登录'
+  },
 
 }

@@ -3648,10 +3648,10 @@ export default {
     }
   },
   spotIndex: {
-    'USD': '现货指数',
+    'USD': 'Spot Index',
     mapList: {
-      price: 'USDT指数',
-      usdtRate: '汇率(USDT/USD)'
+      price: 'USDT Index',
+      usdtRate: 'Fee (USDT/USD)'
     }
   },
   financialRecord: {

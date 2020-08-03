@@ -33,7 +33,7 @@
           <img src="./../../assets/overseas/ix/hy.png" alt="">
         </div>
         <div class="right">
-          <h1>{{ $t('contract') }}</h1>
+          <h1>{{ $t('contract_btc') }}</h1>
           <p>{{ $t('newLoad.t_3_text') }}</p>
         </div>
       </div>

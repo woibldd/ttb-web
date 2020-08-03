@@ -1113,7 +1113,7 @@ export default {
   activity_lock_share: "락업 리익 분배",
   order_ix_total_discount: "누적 할인",
   contract_account: "BTC계약 계정",
-  contract: "BTC계약",
+  contract_btc: "BTC계약",
   account_balance: "계정 잔액",
   transaction_record: "거래기록",
   warehouse_margin: "포지션 보증금",
@@ -2596,6 +2596,579 @@ export default {
     values:"가치",
     noData:"수치가 없다"
   },
+  contract: {
+    swap: 'Swap',
+    available_assets: 'Available Assets',
+    float_profit_loss: 'Floating profit and loss', 
+    forward_contract: 'Forward Contract',
+    reverse_contract: 'Reverse Contract',
+    sheet: '장',
+    buy: '구매',
+    sell: '판매',
+    handle: '조작',
+    cancel: '철회',
+    deal: '계약 거래',
+    rateOReturn: '투자수익률',
+    quota: '위험한도',
+    handleSuccess: '操作成功',
+    index: '지수',
+    currentPlace: '현재 포지션',
+    state: {
+      1: '위탁 중에 아직 거래 가 이루어지지 않았다',
+      2: '중개를 의뢰',
+      3: '완전거래',
+      4: '전부취소',
+      5: '부분 거래',
+      6: '市价部分成交',
+      7: '촉발'
+    },
+    mapTabs: {
+      FUTURE_BTCUSD: `BTC계속유지`,
+      FUTURE_ETHUSD: `ETH계속유지`,
+      FUTURE_EOSUSD: `EOS계속유지`,
+      FUTURE_BHDUSD: `BHD계속유지`,
+      ETHUSD: `ETHUSD`,
+      EOSUSD: `EOSUSD`,
+      METHUSD: `METHUSD (시물레이션)`,
+      BTCUSDT: `BTCUSDT`,
+      BTCMUSDT: `BTCMUSDT`, 
+    },
+    mapTableTapContents: {
+      shipping: {
+        text: '仓位',
+        mapTableColumns: {
+          holding: {
+            label: '현재 창고 포지션 수량',
+            tips: '<a>현재 창고 포지션 수량</a><br/>현재 창고 공간의 수-당신이이 계약의 볼륨에 있는, 양수는 여러 창고 이고, 음수는 빈 창고이다。'
+          },
+          _leverage: {
+            label: '杠杆倍数',
+            tips: ''
+          },
+          markPrice: {
+            label: '가격을 표시',
+            tips: '<a>표시 가격</a><br/>이것은 현재의 표시 가격 입니다, 이것을 더 알아보십시오。'
+          },
+          price: {
+            label: '포지션가격',
+            tips: '<a>오픈 가격</a><br/>현재 대량-빈 주식의 평균 매입/매각 가격。'
+          },
+          liq_price: {
+            label: '강평 가격',
+            tips: '<a>강평 가격</a><br/>만약이 계약의 표지 가격이이 가격 (다 창고)보다 낮 거나,다 창고 형 (빈 창고)보다 높으면 강제로 평창이 된다。'
+          },
+          value: {
+            label: '가치',
+            tips: '창고 자리 가 현재 합리적인 가격의 명목 가치"'
+          },
+          margin_position: {
+            label: '창고 보관 보증금',
+            tips: '<a>창고 보관 보증금 </a><br/> 보증금에서 미 평 창고 증권에 분배 되는 초기 보증금 요구 부분에 실현 되지 못 한 손익을 합 한다。'
+          },
+          unrealized: {
+            label: '미 실현 손익 (투자수익률%)',
+            tips: '<a>미 실현 손익 (수익률%)</a><br/>이 계약의 미 실현 손익 및 수익률。'
+          },
+          realized: {
+            label: '이미 실현한 손익',
+            tips: '<a>이미 실현한 손익</a><br/>창고를 연 이후의 것은 이미 손익을 실현하였다。'
+          }
+        }
+      },
+      shipped: {
+        text: '공간을 평정',
+        mapTableColumns: {
+          symbol: '상세한 류형',
+          realized: '실현 손익'
+        }
+      },
+      curEntrust: {
+        text: '현재위탁',
+        mapTableColumns: {
+          symbol: '연락처',
+          side: '방향',
+          amount: '수량',
+          price: '위탁가격',
+          // total: '已成交额',
+          executed: '거래량/잔여량',
+          entrustValue: '위탁가치',
+          type: '종류',
+          state: '상태',
+          tp_type: '목표가/손절가',
+          create_time: '주문시간'
+          // update_time: '更新时间'
+          // tp_price: '止盈价格',
+          // sl_type: '止损触发类型',
+          // sl_price: '止损价格'
+        }
+      },
+      lossEntrust: {
+        text: '취소 위탁',
+        mapTableColumns: {
+          symbol: '合约类型',
+          amount: '계약 종류',
+          price: '위탁가격',
+          trigger_price: '촉발 가격',
+          distancePrice: '가격 가격',
+          // total: '已成交额',
+          // executed: '已成交量',
+          type: '위탁',
+          state: '상태',
+          create_time: '주문시간'
+          // update_time: '更新时间'
+          // tp_type: '止盈触发类型',
+          // tp_price: '止盈价格',
+          // sl_type: '止损触发类型',
+          // sl_price: '止损价格'
+        }
+      },
+      historyEntrust: {
+        text: '위탁기록',
+        mapTableColumns: {
+          symbol: '合约类型',
+          side: '방향',
+          amount: '수량',
+          // price: '委托价格',
+          executed_price: '거래 가격"',
+          executed: '거래량/잔여량',
+          // entrustValue: '委托价值',
+          type: '위탁',
+          state: '상태',
+          // tp_type: '止盈/止损',
+          create_time: '주문시간'
+          // update_time: '更新时间'
+          // tp_price: '止盈价格',
+          // sl_type: '止损触发类型',
+          // sl_price: '止损价格'
+        }
+      },
+      bargain: {
+        text: '체결내역',
+        mapTableColumns: {
+          symbol: '合约类型',
+          side: '방향',
+          amount_total: '위탁수량',
+          amount: '거래수량',
+          amount_surplus: '잔여량',
+          price: '거래 가격',
+          // entrustPrice: '委托价格',
+          total: '가치',
+          type: '위탁류형',
+          order_id: '위임장 정보',
+          fee: '수수료',
+          create_time: '거래시간'
+
+          // id: '成交单ID',
+          // origin: '1成交单',
+          // order_id: '订单ID',
+          // uid: '用户ID',
+          // product: '商品简称',
+          // currency: '货币简称',
+
+        }
+      }
+    },
+    mapDishInfo: {
+      current: '최신가격',
+      change_24h: '24시간 등락폭',
+      volume_24h: '24시간 거래량',
+      markPrice: '가격을 표시',
+      increment_24h: '등락액'
+    },
+    mapDishNewInfo: {
+      increment_24h: '등락액',
+      markPrice: '가격을 표시',
+      highest_24h: '24시간 최고가',
+      lowest_24h: '24시간 최저가',  
+      volume_24h: '24시간 거래량',
+      fee_rate: '수수료율'
+    },
+    mapDelegateList: {
+      'entrust-list': '위탁 목록',
+      'depth': '예측',
+      'return-dish': '다시 서킷으로',
+      'new-bargain': '최신 거래',
+      mapHeader1: {
+        'price': '가격',
+        'amount': '수량',
+        'total': '누적'
+      },
+      mapHeader2: {
+        'direction': '방향',
+        'transaction-price ': '방향',
+        'trading-volume': '체결가',
+        'time': '시간'
+      }
+    },
+    mapFormContent: {
+      mapBtns: {
+        1: { text: '가격', describe: '가격 제한 위탁은 지정 한 (또는 더 좋은) 가격에의 한 매입 또는 판매에 사용 한다.이것은 가장 상용하는 위탁 유형이다。' },
+        2: { text: '시가', describe: '시가 위탁은 가장 빠 른 거래 방식의 하나다.그것은 현재 위탁 목록의 가장 좋은 가격으로 실행 됩니다.주의하십시오. 인터넷 지연은 당신이 기대하는 가격과 다른 위탁 실행 가격을 초래 할 수 있습니다。。' },
+        3: { text: '리익 정지', describe: '' }
+      },
+      mapMenuOptions: {
+        3: '리익 정지',
+        4: '손상 정지',
+        5: '이익실현 지정가',
+        6: '이익실현 시장'
+      },
+      mapInput: {
+        shippingSpace: '포지션',
+        value: '가격',
+        triggerPrice: '트리거 프라이스',
+        triggerType: '제한류형'
+      },
+      mapHandleBtn: {
+        buy: '수입/많이 하가',
+        sell: '판매 / 공매도'
+      },
+      cost: '성본',
+      submitEntrust: '위탁 제출',
+      mapDescribe: {
+        entrustValue: {
+          text: '위탁가치',
+          tips: '이 위탁의 총'
+        },
+        available: {
+          text: '사용 가능 한 잔액 ',
+          tips: '사용 가능 한 잔액을 만들어 지갑의 자세 한 상황을 확인하십시오。'
+        }
+      },
+      mapTriggerType: {
+        1: '가격',
+        2: '가격을 표시',
+        3: '지수가격'
+      },
+      notip: '주문',
+      trigger_close: '발동 후 창고를 평평하게하다',
+      perfactPrice: '시장가로 체결',
+      passive: '피동위탁'
+
+    },
+    mapInformation: {
+      priceBy: '가격원천',
+      priceIndex: '지수의 가격',
+      volume_24h: '24시간 거래량',
+      value: '계약 가치',
+      valueRate: '자금률'
+    },
+    edit_cell: {
+      edit_price_pop_title: '수정위탁 실행',
+      edit_price_pop_content: '값을 %{price} 바꾸기시장 내의 다른 위탁과 바로 거래를 성사시킬 수 있을 것이다.변경 확인。',
+      edit_price_pop_confirm: '실행 수정됨'
+    },
+    active: {
+      'problem_list1': '1.当拥有1个BTC，但是担心价格下跌，此时可以（）1个BTC等值的合约来对冲下跌风险？',
+      'problem_list2': '2.当你想持有1个BTC的合约仓位价值，且使用10倍杠杆，您需要（）BTC作为保证金。',
+      'problem_list3': '3.未实现盈亏的计算公式是？',
+      'problem_list4': '4.当持仓张数越高，档位越高时，维持保证金率越（），最高可开杠杆倍数越（）',
+      'problem_list5': '5.当仓位用户处于强制部分减仓状态时，是否可以进行下单撤单等操作？',
+      'problem_list6': '6.资金费用为（）时，多方向空方支付费用',
+      'problem_list7': '7.爆仓触发的条件为？',
+      'problem_list8': '8.永续合约平仓后的盈利在什么时间可以转出？',
+      'answer_list2_1': '做多',
+      'answer_list2_2': '做空',
+      'answer_list3_1': '多方：未实现盈亏=面值*张数／开仓均价-面值*张数／最新标记价格；空方：未实现盈亏=面值*张数／最新标记价格-面值*张数／开仓均价',
+      'answer_list3_2': '多方：未实现盈亏=面值*张数／开仓均价-面值*张数／最新成交价；空方：未实现盈亏=面值*张数／最新成交价-面值*张数／开仓均价',
+      'answer_list4_1': '高，低',
+      'answer_list4_2': '低，高',
+      'answer_list5_1': '是',
+      'answer_list5_2': '否',
+      'answer_list6_1': '正数',
+      'answer_list6_2': '负数',
+      'answer_list7_1': '保证金率<=维持保证金率',
+      'answer_list7_2': '保证金率>=维持保证金率',
+      'answer_list8_1': '任何时间都可以转出',
+      'answer_list8_2': '每天10:00和22:00(香港时间)结算后即可转出',
+      'contract_title': '开通永续合约交易',
+      'contract_body': '亲爱的用户，为了保证您接下来更好的控制资金风险，您需要答题通过后，熟读风险提示后并确认后才能开通合约。',
+      'contract_answer': '答题',
+      'contract_tips': '提示',
+      'contract_submission': '提交答案',
+      'contract_error': '亲，您有几道题答错了，请在想想，修改答案后可重新提交',
+      'answer_the_question': '亲，请您认真答完题之后再提交哦',
+      'contract_content1': '风险披露告知通知：',
+      'contract_content2': '一、您在合约市场进行交易，假如市场走势对您不利导致您的仓位保证金不足时，IX 会按照系统约定的对您的仓位进行强平委托并 披露强平明细。 ',
+      'contract_content3': '二、您必须认真阅读并遵守IX 的业务规则，了解合约的机制和运行原理，了解市场的各种风险。  ',
+      'contract_content4': '三、在某些极端的市场情况下，您可能会难以或无法将持有的未平仓合约平仓。例如，当你的盈利在整个合约市场中有效杠杆PnL 中排位第一，且对手盘在保险基金不足以垫付其穿仓损失的情况下。',
+      'contract_content5': '四、由于法律、法规、政策的变化、合约交易所交易规则的修改、紧急措施的出台等原因，IX 会提前披露声明，您持有的未平仓 合约可能无法继续持有，但保证金和盈利的结余仍会兑现。',
+      'contract_content6': '五、由于非IX所能控制的原因，例如：地震、水灾、火灾等不可抗力因素或者计算机系统、通讯系统故障等，可能造成您的指令 无法成交或者无法全部成交，您可能会承担由此导致的损失。',
+      'contract_content7': '六、“套期保值”交易同投机交易一样，同样面临价格波动引起的风险。',
+      'contract_content8': '七、如果您没有进行KYC2（实名认证）或者未绑定Google验证，或者将账号借给非本人操作，将可能会影响您的合约保证金的安全性',
+      'contract_risk_known': '我已知晓风险，继续开通合约账户',
+      'contract_simulation_risk_known': '我已知晓风险，继续开通合约账户',
+      'contract_has_active': '已开通'
+    },
+    mapAccountInfo: {
+      available:'Balance',
+      available_balance:'Available Balance',
+      unrealized:'Unrealised',
+      margin_balance:'Guarantee Balance',
+      margin_position:'Position Margin',
+      margin_delegation:'Order Margin',
+    }
+  },
+  contractMix: {
+    sheet: '张',
+    buy: '买入',
+    sell: '卖出',
+    handle: '操作',
+    cancel: '撤销',
+    deal: '合约交易',
+    rateOReturn: '回报率',
+    quota: '风险限额',
+    handleSuccess: '操作成功',
+    index: '指数',
+    currentPlace: '当前仓位',
+    side: {
+      1: '매입 (하다)',
+      2: '매출 공전',
+      3: '매출액이 평이',
+      4: '매입공거래'
+    },
+    orderType: {
+      1: '限价',
+      2: '市价',
+      3: '止盈止损'
+    },
+    origin: {
+      1: '成交单',
+      2: '强平单',
+      3: '资金费率',
+      4: 'ADL减仓'
+    },
+    state: {
+      1: '委托中未成交',
+      2: '委托中限价部分成交',
+      3: '完全成交',
+      4: '撤单全部',
+      5: '撤单部分成交',
+      6: '市价部分成交',
+      7: '市价'
+    },
+    mapTabs: {
+      FUTURE_BTCUSD: `BTC永续`,
+      FUTURE_ETHUSD: `ETH永续`,
+      FUTURE_EOSUSD: `EOS永续`,
+      FUTURE_BHDUSD: `BHD永续`,
+      ETHUSD: `ETH币本位`,
+      EOSUSD: `EOS币本位`,
+      METHUSD: `METH币本位`, 
+      BTCUSDT: `BTCUSDT`,
+      BTCMUSDT: `BTCMUSDT`,
+      ETHMUSDT: `ETHMUSDT`,
+      ETHUSDT: `ETHUSDT`,
+    },
+    mapTableTapContents: {
+      shipping: {
+        text: '仓位',
+        mapTableColumns: {
+          holding: {
+            label: '目前仓位数量',
+            tips: '<a>目前仓位数量</a><br/>你在此合约的仓位，正数为多仓，负数为空仓。'
+          },
+          _leverage: {
+            label: '杠杆倍数',
+            tips: ''
+          },
+          markPrice: {
+            label: '标记价格',
+            tips: '<a>标记价格</a><br/>这是现在的标记价格，点此了解更多。'
+          },
+          price: {
+            label: '开仓价格',
+            tips: '<a>开仓价格</a><br/>目前多/空仓的平均买入/卖出价。'
+          },
+          liq_price: {
+            label: '强平价格',
+            tips: '<a>强平价格</a><br/>如果该合约的标记价格低于该价格（多仓）或高于该价格（空仓），你将会被强制平仓。'
+          },
+          value: {
+            label: '价值',
+            tips: '仓位在当前合理价格的名义价值'
+          },
+          margin_position: {
+            label: '仓位保证金',
+            tips: '<a>保证金</a><br/>被仓位使用并锁仓的保证金，如果你有在某个仓位启用逐仓，此数值将会随着保证金下跌而减少，亦代表你的实际杠杆上升。移动滑杆来调整分配到各个仓位的保证金。'
+          },
+          unrealized: {
+            label: '未实现盈亏（回报率%）',
+            tips: '<a>未实现盈亏（回报率%）</a><br/>该合约的未实现盈亏，以及回报率。'
+          },
+          realized: {
+            label: '已实现盈亏',
+            tips: '<a>已实现盈亏</a><br/>自开仓以来的已实现盈亏。'
+          },
+          currency: {
+            label: '结算币种',
+            tips: ''
+          }
+        }
+      },
+      shipped: {
+        text: '已平仓位',
+        mapTableColumns: {
+          symbol: '合约类型',
+          realized: '已实现盈亏'
+        }
+      },
+      curEntrust: {
+        text: '当前委托',
+        mapTableColumns: {
+          symbol: '合约类型',
+          side: '方向',
+          amount: '数量',
+          price: '委托价格', 
+          executed: '已成交量/剩余量',
+          entrustValue: '委托价值',
+          type: '类型',
+          state: '状态', 
+          create_time: '下单时间' 
+        }
+      },
+      lossEntrust: {
+        text: '止损委托',
+        mapTableColumns: {
+          name: '合约类型',
+          side: '方向',
+          amount: '数量',
+          trigger_price: '触发价格',
+          distancePrice: '距离触发', 
+          executed: '已成交量',
+          type: '类型',
+          state: '状态',
+          create_time: '下单时间' 
+        }
+      },
+      historyEntrust: {
+        text: '委托历史',
+        mapTableColumns: {
+          symbol: '合约类型',
+          side: '方向',
+          amount: '数量',
+          trigger_price: '触发价格', 
+          executed_price: '成交价格',
+          executed: '已成交量/剩余量', 
+          type: '类型',
+          state: '状态', 
+          create_time: '下单时间' 
+        }
+      },
+      bargain: {
+        text: '已成交',
+        mapTableColumns: {
+          symbol: '合约类型',
+          side: '方向',
+          amount_total: '委托数量',
+          amount: '成交量',
+          amount_surplus: '剩余量',
+          price: '成交价格', 
+          total: '价值',
+          type: '委托类型',
+          origin: '成交类型',
+          order_id: '委托单ID',
+          // fee: '手续费',
+          create_time: '成交时间'
+        }
+      }
+    },
+    mapDishInfo: {
+      current: '최신가격',
+      change_24h: '24시간 등락폭',
+      volume_24h: '24시간 거래량',
+      markPrice: '가격을 표시',
+      increment_24h: '등락액'
+    },
+    mapDishNewInfo: {
+      increment_24h: '등락액',
+      markPrice: '가격을 표시',
+      highest_24h: '24시간 최고가',
+      lowest_24h: '24시간 최저가',  
+      volume_24h: '24시간 거래량',
+      fee_rate: '수수료율'
+    },
+    mapDelegateList: {
+      'entrust-list': '委托列表',
+      'depth': '深度',
+      'return-dish': '返回盘口',
+      'new-bargain': '最新成交',
+      'contract_index_price_tips': '<a>指数价格</a><br/>标的资产的价格这是BTC合约的价格，点此查看历史价格。',
+      'contract_mark_price_tips': '<a>标记价格</a><br/>这是现在的标记价格，点此了解更多。',
+      mapHeader1: {
+        'price': '价格',
+        'amount': '数量',
+        'total': '累计'
+      },
+      mapHeader2: {
+        'direction': '方向',
+        'transaction-price': '成交价',
+        'trading-volume': '成交量',
+        'time': '时间'
+      }
+    },
+    mapFormContent: {
+      mapOrderTypes: {
+        1: { text: '창고를 열다'},
+        2: { text: '평창'}
+      },
+      mapBtns: {
+        1: { text: 'Limit Order', describe: 'Limited trading based on specified price available in the market. This is the most common strategy of delegated trading.' },
+        2: { text: 'Market Order', describe: 'Market price commission is one of the fastest way to transact. It is executed at the best price for the current delegated list. Please note that network delays may cause the execution price to differ from your expectations。' },
+        3: { text: 'Conditions Order', describe: '' }
+      },
+      mapMenuOptions: {
+        3: '限价止损',
+        4: '市价止损',
+        5: '限价止盈',
+        6: '市价止盈'
+      },
+      mapInput: { 
+        shippingSpace: '포지션',
+        value: '가격',
+        triggerPrice: '트리거 프라이스',
+        triggerType: '제한류형'
+      },
+      mapHandleBtn: {
+        buy: {
+          1: '매입 (하다)',
+          2: '매입공거래'
+        },
+        sell: {
+          1: '매출 공전',
+          2: '매출액이 평이'
+        }
+      },
+      cost: '원가.',
+      submitEntrust: '의뢰 를 걸다',
+      tradingType: '결제 화폐 종류',
+      mapDescribe: {
+        entrustValue: {
+          text: '委托价值',
+          tips: '此委托的总价值'
+        },
+        available: {
+          text: '可用余额',
+          tips: '你建立委托的可用余额，点此查看钱包详情。'
+        }
+      },
+      mapTriggerType: {
+        1: '盘口价格',
+        2: '标记价格',
+        3: '指数价格'
+      },
+      notip: '直接下单',
+      trigger_close: '触发后平仓',
+      perfactPrice: '市场最优价格',
+      passive: '被动委托'
+    },
+    mapInformation: {
+      priceBy: '价格来源',
+      priceIndex: '指数价格',
+      volume_24h: '24小时交易量',
+      value: '合约价值',
+      valueRate: '资金费率'
+    }
+  },
   Proposer:{
     title:"Please fill in the following to submit your application for the currency. We will contact you as soon as we receive the application.",
     "name" :"Name",
@@ -2934,6 +3507,60 @@ export default {
     buy_computational: "구매 산력" ,
     time: "시간",
     state: "상태" 
-
-  }
+  },
+  appNav: {
+    mapNavList: {
+      'trading': '币币交易',
+      'contract': 'BTC계약',
+      'currency-unit': '코인 베이스 계약',
+      'currency-mix': '금본위 계약',
+      'legalTender': '法币交易',
+      'hotActive': {
+        label: '热门活动',
+        children: {
+          lock: '锁仓分红',
+          invite_reward: '邀请奖励'
+        }
+      },
+      'bidTitle': '币盈盈',
+      'fund_assets_node_buy': '节点认购',
+      'share_option': '急速合约'
+    },
+    mapNavRight: {
+      wallet_asset: {
+        label: '我的资产',
+        children: {
+          'capital_manage': '资产管理',
+          'deposit': '充币',
+          'withdraw': '提币',
+          'account_exchange': '资金划转'
+        }
+      },
+      personal_center: {
+        children: {
+          personal_center: '个人中心',
+          set_service_fee: '手续费设置',
+          signout: '退出登录'
+        }
+      },
+      download_pop: {
+        label: '下载App',
+        children: {
+          'scan': '扫码下载App',
+          'process': 'App安裝流程>>'
+        }
+      },
+      help_center: {
+        label: '帮助中心',
+        children: {
+          notice: '公告',
+          user_guide: '新手指引',
+          request: '提交工单'
+        }
+      }
+    },
+    'signup': '회원가입',
+    'signin': '로그인',
+    'signout': '로그아웃',
+  }, 
 }

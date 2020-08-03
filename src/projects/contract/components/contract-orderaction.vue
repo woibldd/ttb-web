@@ -301,7 +301,7 @@
               class="mb-8"
               :class="{'color-up': currentHolding.holding > 0, 'color-down':currentHolding.holding < 0}"
             >{{ currentHolding.holding || 0 }}</p>
-            <p>{{ $t('contract') }}</p>
+            <p>{{ $t('contract_btc') }}</p>
           </div>
           <!-- 回报率 -->
           <div v-tooltip.top-center="{content: $t('contract_repay_percent'), classes: 'contract'}">
