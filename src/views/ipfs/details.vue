@@ -17,7 +17,7 @@
               <th>{{$tR('calc_price')}}</th>
               <th>{{$tR('max_buy_qty')}}</th> 
             </tr>
-            <tr>.
+            <tr>
               <td>{{current.annualizedReturns}}%</td>
               <td>{{current.total}} T</td>
               <td>{{current.price}} {{current.currency}}/T</td>
