@@ -3525,5 +3525,11 @@ export default {
     'signin': '登录',
     'signout': '退出登录'
   },
+  shipping: {
+    lossLimit: '止损',
+    winLimit: '止盈',
+    price: '市价',
+    closeOut: '平仓'
+  },
 
 }

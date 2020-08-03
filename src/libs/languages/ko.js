@@ -3563,4 +3563,10 @@ export default {
     'signin': '로그인',
     'signout': '로그아웃',
   }, 
+  shipping: {
+    lossLimit: '止损',
+    winLimit: '止盈',
+    price: '市价',
+    closeOut: '平仓'
+  },
 }
