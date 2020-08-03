@@ -17,8 +17,8 @@
             <p>  
               <b class="title" v-if="state.locale==='zh-CN'"> {{item.product}} </b>
               <b class="title" v-else-if="state.locale==='zh-HK'"> {{item.productCt}} </b>
-              <b class="title" v-else-if="state.locale==='ko'"> {{item.productEn}} </b>
-              <b class="title" v-else> {{item.productKn}} </b>
+              <b class="title" v-else-if="state.locale==='ko'"> {{item.productKn}} </b>
+              <b class="title" v-else> {{item.productEn}} </b>
               <label class="ml-20" :style="{color: stateColor[item.state] }">{{ $tR(orderState[item.state])}}</label>
             </p>
             <p class="between">
