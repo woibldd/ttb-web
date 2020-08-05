@@ -103,7 +103,7 @@
           <template slot-scope="scope">
             <span>{{ scope.row[hd.key] }}</span>
             <label v-if="hd.key==='currency' && scope.row[hd.key]==='USDT'" class="chain">
-              {{ scope.row['chain'] === 'ETH' ? "ERC20" : 'OMNI' }}
+              {{ chainDict[scope.row['chain']] }}
             </label>
           </template>
         </el-table-column>
@@ -154,7 +154,12 @@ export default {
       lianData: [],
       curreryCoin: '',
       selectLian: {},
-      state
+      state,
+      chainDict: {
+        OMNI: 'OMNI',
+        ETH: 'ERC20',
+        TRX: 'TRC20'
+      }
     }
   },
   computed: {
@@ -207,8 +212,12 @@ export default {
           this.lianData.forEach((item) => {
             if (item.chain === 'OMNI') {
               Vue.set(item, 'currencyName', item.currency + '-' + 'Omni')
-            } else {
+            } 
+            else if (item.chain === 'ETH') {
               Vue.set(item, 'currencyName', item.currency + '-' + 'ERC20')
+            }
+            else if (item.chain === 'TRX') {
+              Vue.set(item, 'currencyName', item.currency + '-' + 'TRC20')
             }
           })
           this.selectLian = this.lianData[0]

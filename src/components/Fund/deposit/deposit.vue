@@ -285,8 +285,12 @@ export default {
           this.lianData.forEach((item) => {
             if (item.chain === 'OMNI') {
               Vue.set(item, 'currencyName', item.currency + '-' + 'Omni')
-            } else {
+            }
+            else if (item.chain === 'ETH') {
               Vue.set(item, 'currencyName', item.currency + '-' + 'ERC20')
+            }
+            else if (item.chain === 'TRX') {
+              Vue.set(item, 'currencyName', item.currency + '-' + 'TRC20')
             }
           })
           this.lianData = this.lianData.reverse()//顺序颠倒一下，omni要放在前面
