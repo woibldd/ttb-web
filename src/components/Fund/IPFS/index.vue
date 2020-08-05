@@ -46,7 +46,7 @@
           <td>
             <a class="ml-10" href="/fund/transfer">{{$t('account_exchange')}}</a>
             <a class="ml-10" href="/fund/deposit">{{$t('bby_shouy15')}}</a>
-            <a class="ml-10" href="/ipfs">{{$tR('buy_computational')}}</a>
+            <a class="ml-10" href="/mining-power">{{$tR('buy_computational')}}</a>
           </td>
         </tr>
       </table> 

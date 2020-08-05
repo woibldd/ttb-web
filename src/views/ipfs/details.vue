@@ -3,7 +3,7 @@
     <div class="top">
       <div class="l">
         <div class="title"> 
-            <img style="height: 82px; width: 82px;" :src="current.productImg" alt="">
+            <img style="height: 82px;" :src="current.productImg" alt="">
             <b v-if="state.locale==='zh-CN'"> {{current.product}} </b>
             <b v-else-if="state.locale==='zh-HK'"> {{current.productCt}} </b>
             <b v-else-if="state.locale==='ko'"> {{current.productKn}} </b>
