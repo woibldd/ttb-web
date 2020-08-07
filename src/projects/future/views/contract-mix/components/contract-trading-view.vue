@@ -275,13 +275,13 @@ export default {
           resolutions.parentElement.classList.remove('selected')
           widget.closePopupsAndDialogs()
           widget.chart().executeActionById('insertIndicator') // 技术指标
-        }).append(vm.$t('tv.tv_technical_indicators'))
+        }).append(vm.$t('tv_technical_indicators'))
         widget.btnProperties = widget.createButton().on('click', (e, vm) => {
           // 隐藏周期列表
           resolutions.parentElement.classList.remove('selected')
           widget.closePopupsAndDialogs()
           widget.chart().executeActionById('chartProperties') // 样式设置
-        }).append(vm.$t('tv.tv_style'))
+        }).append(vm.$t('tv_style'))
 
         widget
           .chart()

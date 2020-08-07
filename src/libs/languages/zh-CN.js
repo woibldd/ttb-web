@@ -3170,8 +3170,8 @@ export default {
         6: '市价止盈'
       },
       mapInput: {
-        value: '委托价格',
         shippingSpace: '合约数量',
+        value: '委托价格',
         triggerPrice: '触发价格',
         triggerType: '触发类型'
       },
@@ -3215,6 +3215,31 @@ export default {
       value: '合约价值',
       valueRate: '资金费率'
     }
+  }, 
+  orderPopover: {
+    mapTableColumns: {
+      //1开仓， 2平仓
+      1: { 
+        1: '委托价值',
+        2: '成本@{active}',
+        3: '可用余额',
+        4: '成交后的仓位大小',
+        5: '标记价格',
+        6: '预期强平价格',
+        7: '标记价格/预期强平价格 差异'
+      },
+      2: {
+        1: '委托价值',
+        2: '成本@{active}',
+        3: '可用余额',
+        4: '成交后的仓位大小',
+        5: '标记价格'
+      }
+    },
+    setLever: '设置杠杆倍数',
+    tip: '您的操作将会把已持仓杠杆倍数和委托订单杠杆倍数修改为<i class="text-danger">{leverage}</i>，仓位保证金调节为<i class="text-danger">{margin_position}</i>，委托保证金为<i class="text-danger">{margin_delegation}</i>',
+    leverageTip: '确定将杠杆倍数调节至{leverage}吗',
+    allstorehouse: '全仓'
   },
   Proposer:{
     title:"请填写以下内容提交上币申请，收到申请后我们将尽快联系您",

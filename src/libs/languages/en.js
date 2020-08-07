@@ -3282,6 +3282,31 @@ export default {
       valueRate: 'Rate'
     }
   },
+  orderPopover: {
+    mapTableColumns: {
+      //1开仓， 2平仓
+      1: { 
+        1: 'Order Value',
+        2: 'Cost@{active}',
+        3: 'Available Balance',
+        4: 'Position Size After Execution',
+        5: 'Mark Price',
+        6: 'Estimated Liquidation Price',
+        7: 'Mark Price/Est. Liquidation Difference'
+      },
+      2: {
+        1: 'Order Value',
+        2: 'Cost@{active}',
+        3: 'Available Balance',
+        4: 'Position Size After Execution',
+        5: 'Mark Price',
+      }
+    },
+    setLever: 'Leverage', 
+    tip: 'There will be modifications in your operations with the position leverage multiplier and the commissioned order leverage multiplier altering by the value of <i class="text-danger">{leverage}</i> times; position deposit altering by the value of <i class="text-danger">{margin_position}</i>; commissioned deposit position altering by the value of <i class="text-danger">{margin_delegation}</i>',
+    leverageTip: '确定将杠杆倍数调节至{leverage}吗',
+    allstorehouse: 'Cross'
+  },
   Proposer:{
     title:"Please fill in the following to submit your application for the currency. We will contact you as soon as we receive the application.",
     "name" :"Name",
