@@ -2233,7 +2233,7 @@ export default {
   h5_home_introduce7: "高效",
   h5_home_introduce8: "自研高性能撮合引擎，在嚴格的壓力測試下，可以充分支持200萬+/秒/交易對的撮合速度,確保服務不間斷，操作上無卡頓。",
   playBTC: "娛樂區",
-  'play-record': "遊戲記錄",
+  'play_record': "遊戲記錄",
   playbtcMaptext: {
     1: {
       title: "極速火箭",
@@ -2566,13 +2566,13 @@ export default {
     index: '指數',
     currentPlace: '當前倉位',
     state: {
-      1: '委託中未成交',
-      2: '委託中限价部分成交',
+      1: '委托中未成交',
+      2: '委托中限价部分成交',
       3: '完全成交',
-      4: '撤單全部',
-      5: '撤單部分成交',
-      6: '市價部分成交',
-      7: '市價'
+      4: '撤单全部',
+      5: '撤单部分成交',
+      6: '市价部分成交',
+      7: '市價成交終止'
     },
     mapTabs: {
       FUTURE_BTCUSD: `BTC永續`,
@@ -2897,7 +2897,7 @@ export default {
       4: '撤单全部',
       5: '撤单部分成交',
       6: '市价部分成交',
-      7: '市价'
+      7: '市價成交終止'
     },
     mapTabs: {
       FUTURE_BTCUSD: `BTC永续`,

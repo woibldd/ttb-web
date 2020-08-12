@@ -2323,7 +2323,7 @@ export default {
   otc_need_authentication: "%{side} 필요하다 <span style='color:#01CED1;'>고급 인증</span>",
   otc_confirm_payment: "나는 이미 돈을 지불했다",
   playBTC: "오락도시",
-  'play-record': "게임기록",
+  'play_record': "게임기록",
   order_id: "주문서ID",
   fxpl: "돈세탁방지 가이드",
   pay: "지불",
@@ -2618,9 +2618,9 @@ export default {
       2: '중개를 의뢰',
       3: '완전거래',
       4: '전부취소',
-      5: '부분 거래',
-      6: '市价部分成交',
-      7: '촉발'
+      5: '부분 거래', 
+      6: 'Market partial termination',
+      7: 'Market closing termination'
     },
     mapTabs: {
       FUTURE_BTCUSD: `BTC계속유지`,
@@ -2937,14 +2937,14 @@ export default {
       3: '资金费率',
       4: 'ADL减仓'
     },
-    state: {
-      1: '委托中未成交',
-      2: '委托中限价部分成交',
-      3: '完全成交',
-      4: '撤单全部',
-      5: '撤单部分成交',
-      6: '市价部分成交',
-      7: '市价'
+    state: { 
+      1: 'Unexecuted',
+      2: 'Limited partial termination',
+      3: 'All Filled',
+      4: 'Cancel All',
+      5: 'Cancelled success partially',
+      6: 'Market partial termination',
+      7: 'Market closing termination'
     },
     mapTabs: {
       FUTURE_BTCUSD: `BTC永续`,

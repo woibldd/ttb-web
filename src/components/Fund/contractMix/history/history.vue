@@ -4,28 +4,27 @@
       <div
         class="filter-item c-primary"
         :class="[tabName==='history' && 'select']"
-        @click="filter('history')">
+        @click="handleTabChange('history')">
         {{ $t('contract_trade_his') }}
       </div>
       <div
         class="filter-item c-primary"
         :class="[tabName==='executed' && 'select']"
-        @click="filter('executed')">
+        @click="handleTabChange('executed')">
         {{ $t('order_history') }}
-      </div> 
-      
-    </div>
-    <!-- <el-row :gutter="20"> 
+      </div>  
+    </div> 
+    <el-row :gutter="20"> 
       <el-col :span="4">
         <el-select
           id="contractType"
           class="opetion"
           v-model="myfilter.symbol"
-          @change="pairChange"
+          @change="filter"
           placeholder="请选择"
           size="mini"
           value-key="currency">
-          <el-option label="全部" value="" />
+          <el-option :label="$t('allin')" value="" />
           <el-option
             v-for="(item, idx) in pairList"
             :key="idx"
@@ -38,11 +37,11 @@
           class="opetion"
           v-model="myfilter.side" 
           size="mini"
-          @change="pairChange"
+          @change="filter"
           value-key="currency"> 
           <el-option v-for="item in dict.side"
             :key="item.value"
-            :label="item.text" 
+            :label="$t(item.text)" 
             :value="item.value"/> 
         </el-select>
       </el-col> 
@@ -51,40 +50,40 @@
           v-if="tabName === 'executed'"
           class="opetion"
           v-model="myfilter.state"  
-          @change="pairChange"
+          @change="filter"
           size="mini"
           value-key="currency">
           <el-option v-for="item in dict.state"
             :key="item.value"
-            :label="item.text" 
+            :label="$t(item.text)" 
             :value="item.value"/> 
         </el-select> 
         <el-select
           v-else
           class="opetion"
           v-model="myfilter.state"  
-          @change="pairChange"
+          @change="filter"
           size="mini"
           value-key="currency">
           <el-option v-for="item in dict.trade_state"
             :key="item.value"
-            :label="item.text" 
+            :label="$t(item.text)" 
             :value="item.value"/> 
         </el-select>
       </el-col>
       <el-col :span="8">
         <el-date-picker
           v-model="myfilter.daterange"
-          @change="pairChange"
+          @change="filter"
           size="mini"
           type="daterange"
           value-format="timestamp"
           range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期">
+          :start-placeholder="$t('el.datepicker.startDate')"
+          :end-placeholder="$t('el.datepicker.endDate')">
         </el-date-picker>
       </el-col> 
-    </el-row> -->
+    </el-row>
     <div
       class="table-wrapper"
       v-loading="isLoading">
@@ -162,19 +161,17 @@
 
           <td class="table__td">{{ processValue('origin', item) }}</td> <!--成交类型-->
           <td class="table__td">
-            <span
+            <span v-if="item.side===0">--</span>
+            <span v-else
               :class="[{'font-color-buy': item.side === 1 || item.side === 4},
                        {'font-color-sell': item.side === 2 || item.side === 3}]"
               v-html="$t(`mix_side.${item.side}`)"/>
           </td>
-          <td class="table__td">{{ (item.amount || 0) }}</td>
-
+          <td class="table__td">{{ (item.amount || 0) }}</td> 
           <td class="table__td">{{ (item.price || 0) | fixed(valueScale) }}</td>
           <td class="table__td">{{ (item.total || 0) | fixed(valueScale) }}</td>
-          <td class="table__td">{{ processValue('fee_rate', item) }} </td>
-
-          <td class="table__td">{{ (item.fee || 0) | fixed(8) }}</td>
-
+          <td class="table__td">{{ processValue('fee_rate', item) }} </td> 
+          <td class="table__td">{{ (item.fee || 0) | fixed(8) }}</td> 
           <td class="table__td">{{ processValue('type',item) }}</td>
           <td class="table__td">{{ item.amount_total }}</td>
           <td class="table__td">{{ unclosedQty(item) }}</td>
@@ -260,7 +257,8 @@
           <td class="table__td">{{ $big(item.price || 0) | fixed(2) }}</td>
           <td class="table__th"> {{ (item.trigger_price || "0") == "0" ? "--" : $big(item.trigger_price).round(valueScale || 0).toFixed(valueScale) }} </td>
           <td class="table__td">{{ $big(assignValue(item) || 0) | fixed(valueScale) }}</td> <!-- 委托价值 -->
-          <td class="table__td">{{ processValue('type', item) }}</td>
+          <td class="table__td">{{ processValue('type', item) }}</td> 
+          <td class="table__td">{{ $t(`contract.state.${item.state}`) }}</td>
           <!-- <td class="table__td">{{ processValue('state',item) }}</td>
           <td class="table__td">{{ item.id }}</td> -->
         </tr>
@@ -273,7 +271,7 @@
       <ix-pagination
         :page.sync="page"
         :is-end="isLastPage"
-        :func="getData"/>
+        :func="filter"/>
     </div>
   </div>
 </template>
@@ -306,24 +304,27 @@ export default {
       },
       dict: {
         side: [ 
-          { value:0, text:'全部'}, 
-          { value:1, text:'买入'}, 
-          { value:2, text:'卖出'}, 
+          { value:0, text:'allin'}, 
+          { value:1, text:'contractMix.side.1'}, 
+          { value:2, text:'contractMix.side.2'}, 
+          { value:3, text:'contractMix.side.3'}, 
+          { value:4, text:'contractMix.side.4'}, 
         ],
         state: [
-           { value:0, text:'全部'}, 
-           { value:3, text:'全部成交'}, 
-           { value:4, text:'未成交撤单'}, 
-           { value:5, text:'部分成交撤单'},
-           { value:6, text:'未成交系统取消'}, 
-           { value:7, text:'部分成交系统取消'}, 
-           { value:8, text:'隐藏已撤销'}
+           { value:0, text:'allin'}, 
+           { value:1, text:'contract.state.1'}, 
+           { value:2, text:'contract.state.2'},
+           { value:3, text:'contract.state.3'}, 
+           { value:4, text:'contract.state.4'}, 
+           { value:5, text:'contract.state.5'},
+           { value:6, text:'contract.state.6'}, 
+           { value:7, text:'contract.state.7'},  
         ],
         trade_state: [ 
-           { value:0, text:'全部'}, 
-           { value:1, text:'成交单'}, 
-           { value:2, text:'强平单'}, 
-           { value:3, text:'资金费率'},
+           { value:0, text:'allin'}, 
+           { value:1, text:'contractMix.origin.1'}, 
+           { value:2, text:'contractMix.origin.2'}, 
+           { value:3, text:'contractMix.origin.3'},
         ]
 
       }
@@ -370,38 +371,23 @@ export default {
         // this.selectPair = this.pairList[0]
         this.myfilter.symbol = this.pairList[0].symbol
       }
+    }, 
+    handleTabChange(name) {
+      this.tabName = name
+      this.myfilter.state = 0
+      this.filter()
     },
-    getData () {
-      // const params = {
-      //   symbol: this.selectPair,
-      //   page: this.page,
-      //   size: this.size
-      // }
+    filter () { 
       const params = {
         currency: this.myfilter.symbol, 
         begin_time: this.myfilter.daterange[0],
         end_time: this.myfilter.daterange[1],
         side: this.myfilter.side,
+        state: this.myfilter.state,
         page: this.page,
         size: this.size
       }
-
       if (this.tabName === 'executed') {
-        // 订单历史
-        this.getOrderhistory(params)
-      } else {
-        // 获取交易历史
-        this.getContractTradeHistory(params)
-      }
-    },
-    filter (type) {
-      this.tabName = type
-      this.page = 1
-      const params = { 
-        page: this.page,
-        size: this.size
-      }
-      if (type === 'executed') {
         // 获取委托历史
         this.getOrderhistory(params)
       } else {
@@ -429,23 +415,17 @@ export default {
     },
     // 已成交
     getContractTradeHistory (params) {
-      this.isLoading = true
-      // const params = {
-      //   page: this.page,
-      //   size: 10
-      // }
+      this.isLoading = true 
       service.getMixTradeHistory(params).then(res => {
         this.tableData = res.data.data
         this.totalItems = res.data.total 
       }).finally(res => {
         this.isLoading = false
       })
-    },
-    pairChange() { 
-      this.getData()
-    },
+    }, 
   },
   created () {
+    this.page = 1 
     this.getPairs()
     this.filter('executed')
   }

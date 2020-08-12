@@ -1,7 +1,7 @@
 <template>
   <div class="order--container">
     <div class="profile-container">
-      <div class="title-box">{{ $t('play-record') }}</div>
+      <div class="title-box">{{ $t('play_record') }}</div>
       
       <div class="table-wrapper" v-loading='isLoading'>
         <table class="table">

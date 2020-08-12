@@ -2445,7 +2445,7 @@ export default {
   h5_home_introduce7: "Efficient",
   h5_home_introduce8: "Self-developing high-performance matching engine, can fully support the speed of 2 million+/second/trading pair, under strict stress test, ensuring uninterrupted service and smooth operation.",
   playBTC: "Entertainment Zone",
-  'play-record': "Game record",
+  play_record: "Game record",
   order_id: "Order ID",
   fxpl: "AML Policies",
   pay: "pay",
@@ -2749,13 +2749,13 @@ export default {
     index: 'index',
     currentPlace: 'Quantity',
     state: {
-      1: 'Untriggered',
-      2: '委托中限价部分成交',
-      3: 'Filled/Remaining',
+      1: 'Unexecuted',
+      2: 'Limited partial termination',
+      3: 'All Filled',
       4: 'Cancel All',
       5: 'Cancelled success partially',
-      6: '市价部分成交',
-      7: 'Market'
+      6: 'Market partial termination',
+      7: 'Market closing termination'
     },
     mapTabs: {
       FUTURE_BTCUSD: `BTCUSD`,
@@ -3031,13 +3031,13 @@ export default {
       4: 'ADL Deleverage'
     },
     state: {
-      1: 'Untriggered',
-      2: '委托中限价部分成交',
-      3: 'Filled/Remaining',
+      1: 'Unexecuted',
+      2: 'Limited partial termination',
+      3: 'All Filled',
       4: 'Cancel All',
       5: 'Cancelled success partially',
-      6: '市价部分成交',
-      7: 'Market'
+      6: 'Market partial termination',
+      7: 'Market closing termination'
     },
     mapTabs: {
       FUTURE_BTCUSD: `BTC永续`,

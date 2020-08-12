@@ -4,12 +4,12 @@
       v-loading="isLoading">
       <!-- <div class="title-box">{{ $t('fund_trading_bill') }}</div>  --> 
       <div class="filter">
-        <el-row :gutter="20">
+        <!-- <el-row :gutter="20">
             <el-col :span="3">
               <div
                 class="filter-item c-primary"
                 :class="[recordTab==='executed' && 'select']"
-                @click="filter('executed')">
+                @click="handleTabChange('executed')">
                 {{ $t('contract_trade_his') }}
               </div> 
             </el-col>
@@ -17,12 +17,60 @@
               <div
                 class="filter-item c-primary"
                 :class="[recordTab==='delegate' && 'select']"
-                @click="filter('delegate')">
+                @click="handleTabChange('delegate')">
                 {{ $t('order_history') }}
               </div> 
             </el-col>
-        </el-row>
+        </el-row> -->
+        <el-tabs v-model="recordTab" @tab-click="handleTabChange">
+          <el-tab-pane :label="$t('contract_trade_his')" name="executed"></el-tab-pane>
+          <el-tab-pane :label="$t('order_history')" name="delegate"></el-tab-pane> 
+        </el-tabs>
       </div>
+      <el-row :gutter="20"> 
+        <el-col :span="4">
+          <el-select
+            id="contractType"
+            class="opetion"
+            v-model="myfilter.symbol"
+            @change="filter"
+            :placeholder="$t('please_choose')"
+            size="mini"
+            value-key="currency">
+            <el-option :label="$t('allin')" value="" />
+            <el-option
+              v-for="(item, idx) in pairList"
+              :key="idx"
+              :label="item.product +'/'+ item.currency"
+              :value="item.name"/>
+          </el-select>
+        </el-col> 
+        <el-col :span="4"> 
+          <el-select
+            class="opetion"
+            v-model="myfilter.side" 
+            size="mini"
+            @change="filter"
+            value-key="currency"> 
+            <el-option v-for="item in dict.side"
+              :key="item.value"
+              :label="$t(item.text)" 
+              :value="item.value"/> 
+          </el-select>
+        </el-col>  
+        <el-col :span="8">
+          <el-date-picker
+            v-model="myfilter.daterange"
+            @change="filter"
+            size="mini"
+            type="daterange"
+            value-format="timestamp"
+            range-separator="-"
+            :start-placeholder="$t('el.datepicker.startDate')"
+            :end-placeholder="$t('el.datepicker.endDate')">
+          </el-date-picker>
+        </el-col>  
+      </el-row>
       <div class="table-wrapper"
         v-scroll-load="loadMore">
         <table 
@@ -80,12 +128,28 @@ export default {
         size: 10,
         symbol: ''
       },
-      recordTab: 'executed'
+      recordTab: 'executed', 
+      myfilter: {
+        pair: 'BTC_USD',
+        side: 0,
+        state: 0,
+        daterange: '',  
+      },
+      dict: {
+        side: [ 
+          { value:0, text:'allin'}, 
+          { value:1, text:'order_side_buy'}, 
+          { value:2, text:'order_side_sell'}, 
+        ],  
+      }
     }
   },
   methods: {
-    filter (name) { 
-      this.recordTab = name
+    handleTabChange(name) {
+      // this.recordTab = name 
+      this.filter()
+    },
+    filter () {  
       this.getList()
     },
     changePairs (e) {
@@ -124,9 +188,17 @@ export default {
       })
     },
     getList () { 
-      this.params.symbol = this.selectPair.name || ''
+      this.isLoading = true
+      const params = {
+        symbol: this.myfilter.symbol, 
+        begin_time: this.myfilter.daterange[0],
+        end_time: this.myfilter.daterange[1],
+        side: this.myfilter.side, 
+        page: this.page,
+        size: this.size
+      } 
       if (this.recordTab === 'executed') {
-        service.getBiBiOrders(this.params).then(res => {
+        service.getBiBiOrders(params).then(res => {
           this.originList = res.data
           this.tableData = res.data
         }).finally(() => {
@@ -135,10 +207,14 @@ export default {
           }, 500)
         })
       } else if (this.recordTab === 'delegate') {
-        service.orderHistory(this.params).then(res => {
+        service.orderHistory(params).then(res => {
           this.originList = res.data
           this.tableData = res.data
-        }) 
+        }).finally(() => {
+          setTimeout(() => {
+            this.isLoading = false
+          }, 500)
+        })
       }
     },
     loadMore () { 

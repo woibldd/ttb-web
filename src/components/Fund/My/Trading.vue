@@ -18,7 +18,12 @@
         </span> 
       </div>
       <div class="title__right"> 
-          <a class="fund-history" v-for="(name,index) in ['trading_account','fund_trading_bill','play-record']" :key="index" @click="handleTitleRightTab(name)" :class="{active:activeTab === name}" style="margin-left:15px">{{ $t(name) }}</a>
+          <a class="fund-history" 
+            v-for="(name,index) in ['trading_account','fund_trading_bill']" 
+            :key="index" @click="handleTitleRightTab(name)" 
+            :class="{active:activeTab === name}" 
+            style="margin-left:15px">{{ $t(name) }}
+          </a>
       </div>
     </div>
     <div class="clearfix"> 
@@ -66,8 +71,7 @@
             </div>   -->
             <span v-else>{{ scope.row[hd.key] || 0 | fixed(8)}}</span>
           </template>
-        </el-table-column>
-
+        </el-table-column> 
         <el-table-column
           header-align='right'
           align="right"
@@ -127,7 +131,7 @@
       </el-table> 
     </div>
     <historyComponent v-else-if="activeTab === 'fund_trading_bill'" ></historyComponent>
-    <playRecord v-else-if="activeTab === 'play-record'" ></playRecord>
+    <playRecord v-else-if="activeTab === 'play_record'" ></playRecord>
     <v-modal :open.sync="showLockModal">
       <div class="lock-modal">
         <div class="modal__title mb-30">

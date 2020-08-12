@@ -4,13 +4,13 @@
       <div
         class="filter-item c-primary"
         :class="[tabName==='history' && 'select']"
-        @click="filter('history')">
+        @click="handleTabChange('history')">
         {{ $t('contract_trade_his') }}
       </div>
       <div
         class="filter-item c-primary"
         :class="[tabName==='executed' && 'select']"
-        @click="filter('executed')">
+        @click="handleTabChange('executed')">
         {{ $t('order_history') }}
       </div>  
     </div> 
@@ -25,6 +25,7 @@
             placeholder="请选择"
             size="mini"
             value-key="currency">
+            <el-option :label="$t('allin')" value="" />
             <el-option
               v-for="(item, idx) in pairList"
               :key="idx"
@@ -32,7 +33,7 @@
               :value="item.currency"/>
           </el-select>
         </el-col> 
-        <!-- <el-col :span="4"> 
+        <el-col :span="4"> 
           <el-select
             class="opetion"
             v-model="myfilter.side" 
@@ -41,7 +42,7 @@
             value-key="currency"> 
             <el-option v-for="item in dict.side"
               :key="item.value"
-              :label="item.text" 
+              :label="$t(item.text) " 
               :value="item.value"/> 
           </el-select>
         </el-col> 
@@ -55,7 +56,7 @@
             value-key="currency">
             <el-option v-for="item in dict.state"
               :key="item.value"
-              :label="item.text" 
+              :label="$t(item.text) " 
               :value="item.value"/> 
           </el-select> 
           <el-select
@@ -67,7 +68,7 @@
             value-key="currency">
             <el-option v-for="item in dict.trade_state"
               :key="item.value"
-              :label="item.text" 
+              :label="$t(item.text) " 
               :value="item.value"/> 
           </el-select>
         </el-col>
@@ -79,10 +80,10 @@
             type="daterange"
             value-format="timestamp"
             range-separator="-"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期">
+            :start-placeholder="$t('el.datepicker.startDate')"
+            :end-placeholder="$t('el.datepicker.endDate')">
           </el-date-picker>
-        </el-col>  -->
+        </el-col> 
       </el-row> 
     </div>
     <div
@@ -223,9 +224,9 @@
             {{ $t('order_th_type') }}
           </th>
           <!-- 状态 -->
-          <!-- <th class="table__th">
+          <th class="table__th">
             {{ $t('status') }}
-          </th> -->
+          </th>
           <!-- 委托ID -->
           <!-- <th class="table__th">
             {{ $t('contract_assign_id') }}
@@ -247,8 +248,8 @@
           <td class="table__th"> {{ (item.trigger_price || "0") == "0" ? "--" : $big(item.trigger_price).round(valueScale || 0).toFixed(valueScale) }} </td>
           <td class="table__td">{{  $big(assignValue(item) || 0) | fixed(valueScale) }}</td> <!-- 委托价值 -->
           <td class="table__td">{{ processValue('type', item) }}</td>
-          <!-- <td class="table__td">{{ processValue('state',item) }}</td>
-          <td class="table__td">{{ item.id }}</td> -->
+          <td class="table__td">{{ $t(`contract.state.${item.state}`) }}</td>
+          <!-- <td class="table__td">{{ item.id }}</td> -->
         </tr>
       </table>
     </div>
@@ -259,7 +260,7 @@
       <ix-pagination
         :page.sync="page"
         :is-end="isLastPage"
-        :func="getData"/>
+        :func="filter"/>
     </div>
   </div>
 </template>
@@ -292,24 +293,25 @@ export default {
       },
       dict: {
         side: [ 
-          { value:0, text:'全部'}, 
-          { value:1, text:'买入'}, 
-          { value:2, text:'卖出'}, 
+          { value:0, text:'allin'}, 
+          { value:1, text:'order_side_buy'}, 
+          { value:2, text:'order_side_sell'}, 
         ],
-        state: [
-           { value:0, text:'全部'}, 
-           { value:3, text:'全部成交'}, 
-           { value:4, text:'未成交撤单'}, 
-           { value:5, text:'部分成交撤单'},
-           { value:6, text:'未成交系统取消'}, 
-           { value:7, text:'部分成交系统取消'}, 
-           { value:8, text:'隐藏已撤销'}
-        ],
+        state: [ 
+          { value:0, text:'allin'}, 
+          { value:1, text:'contract.state.1'}, 
+          { value:2, text:'contract.state.2'},
+          { value:3, text:'contract.state.3'}, 
+          { value:4, text:'contract.state.4'}, 
+          { value:5, text:'contract.state.5'},
+          { value:6, text:'contract.state.6'}, 
+          { value:7, text:'contract.state.7'},  
+        ], 
         trade_state: [ 
-           { value:0, text:'全部'}, 
-           { value:1, text:'成交单'}, 
-           { value:2, text:'强平单'}, 
-           { value:3, text:'资金费率'},
+          { value:0, text:'allin'}, 
+          { value:1, text:'contractMix.origin.1'}, 
+          { value:2, text:'contractMix.origin.2'}, 
+          { value:3, text:'contractMix.origin.3'},
         ]
 
       }
@@ -353,50 +355,23 @@ export default {
         // this.selectPair = this.pairList[0].currency
         this.myfilter.symbol = this.pairList[0].currency
       }
+    }, 
+    handleTabChange(name) {
+      this.tabName = name
+      this.myfilter.state = 0
+      this.filter()
     },
-    getData (params) { 
-      // if (!params) {
-      //   params = {
-      //     currency: this.selectPair,
-      //     page: this.page,
-      //     size: this.size
-      //   }  
-      // }
-      // params = {
-      //   currency: this.params.symbol,
-      //   begin_time: this.params.begin_time,
-      //   end_time: this.params.end_time,
-      //   side: this.params.side,
-      //   state: this.params.state,
-      //   page: this.page,
-      //   size: this.size
-      // }
-      params = {
+    filter () {
+      const params = {
         currency: this.myfilter.symbol, 
         begin_time: this.myfilter.daterange[0],
         end_time: this.myfilter.daterange[1],
         side: this.myfilter.side,
+        state: this.myfilter.state,
         page: this.page,
         size: this.size
       }
-      
       if (this.tabName === 'executed') {
-        // 订单历史
-        this.getOrderhistory(params)
-      } else {
-        // 获取交易历史
-        this.getContractTradeHistory(params)
-      }
-    },
-    filter (type) {
-      this.tabName = type
-      this.page = 1
-      const params = {
-        currency: this.myfilter.symbol, 
-        page: this.page,
-        size: this.size
-      }
-      if (type === 'executed') {
         // 获取委托历史
         this.getOrderhistory(params)
       } else {
@@ -438,7 +413,7 @@ export default {
     },
     pairChange() {
       // console.log({test: this.pairList})
-      this.getData()
+      this.filter()
     },
   },
   created () {
