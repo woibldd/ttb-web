@@ -464,7 +464,7 @@ export default {
         formattingFn(res) {
           if (!res) return res
           const arr = String(res).split('.')
-          return `<span>${arr[0]}.<span style="font-size:16px;position:absolute;margin-left:-5px;color:${this.isUp ? 'green' : 'red'}">${arr[1]}</span></span>`
+          return `<span>${arr[0]}.<span style="font-size:16px;position:absolute;margin-left:-5px;color:${this.isUp ? 'green' : 'red'}">${arr[1]|| 0}</span></span>`
         }
       })
     },
