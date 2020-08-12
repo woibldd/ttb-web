@@ -33,17 +33,17 @@ export const otherRouter = [
     },
     component: () => import('@/pages/Industry/detial')
   },
-  {
-    path: '/collect',
-    name: 'collect',
-    meta: {
-      auth: true,
-      nav: true,
-      footer: true,
-      class: 'dark',
-    },
-    component: () => import('@/pages/Industry/industry')
-  },
+  // {
+  //   path: '/collect',
+  //   name: 'collect',
+  //   meta: {
+  //     auth: true,
+  //     nav: true,
+  //     footer: true,
+  //     class: 'dark',
+  //   },
+  //   component: () => import('@/pages/Industry/industry')
+  // },
   {
     path: '/blog',
     name: 'blog',

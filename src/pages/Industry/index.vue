@@ -47,7 +47,7 @@
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             :current-page.sync="currentPage"
-            :page-size="20"
+            :page-size="params.size"
             layout="total, prev, pager, next"
             :total="total">
         </el-pagination>
@@ -82,9 +82,10 @@ export default {
       loading: true,
       list: [],
       total: 0,
+
       params: {
         page: 1,
-        size: 20,
+        size: 6,
         userId: ''
       },
       currentPage: 1,

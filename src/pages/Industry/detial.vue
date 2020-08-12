@@ -7,9 +7,13 @@
         <div class="inner">
           <div class="detail">
             <div class="top">
-             <div class="icon" :class="{active: activityInfo.collect === 1}" @click="collectHadnle">
-                <i class="overseas-icon" v-if="activityInfo.collect === 1">&#xe62d;</i>
-                 <i class="overseas-icon" v-else>&#xe62c;</i>
+              <div class="icon"
+                   :class="{active: activityInfo.collect === 1}"
+                   @click="collectHadnle">
+                <i class="overseas-icon"
+                   v-if="activityInfo.collect === 1">&#xe62d;</i>
+                <i class="overseas-icon"
+                   v-else>&#xe62c;</i>
               </div>
               <div class="text">
                 <h1>{{ activityInfo.title }}</h1>
@@ -24,22 +28,26 @@
               </div>
             </div>
             <div>
-              <div class="content" v-html="activityInfo.content"></div>
+              <div class="content"
+                   v-html="activityInfo.content"></div>
             </div>
           </div>
         </div>
         <div class="group">
-          <div class="btn" @click="prev">上一篇</div>
-          <div class="btn" @click="next">下一篇</div>
+          <div class="btn"
+               @click="prev">上一篇</div>
+          <div class="btn"
+               @click="next">下一篇</div>
         </div>
       </div>
       <div class="quotation">
-        <div class="btn-1" @click="collectHandle">
+        <div class="btn-1"
+             @click="collectHandle">
           我的收藏
         </div>
         <div class="inner"
-          :class="{fixtool: whether === 1, fixbottom : whether === 2 }">
-           <div class="title">
+             :class="{fixtool: whether === 1, fixbottom : whether === 2 }">
+          <div class="title">
             <h1>最新行情</h1>
             <span @click="moreHandle">更多 ></span>
           </div>
@@ -52,12 +60,12 @@
 
 <script type="text/ecmascript-6">
 import market from "./market";
-import {state} from '@/modules/store'
+import { state } from '@/modules/store'
 import { collectActivity, getList2 } from '../../api/user';
-import {defaultTilte} from '@/router/default'
+import { defaultTilte } from '@/router/default'
 export default {
-  beforeEach(to, from, next) {
-    if(to.path === "/industryDetail") {
+  beforeEach (to, from, next) {
+    if (to.path === "/industryDetail") {
       const defultObj = defaultTilte.filter(item => (Number(item.query.id) === Number(to.query.id)))[0]
       document.title = defultObj.title
       document.querySelector('meta[name="keywords"]').setAttribute('content', defultObj.keywords)
@@ -67,7 +75,7 @@ export default {
   components: {
     market
   },
-  data() {
+  data () {
     return {
       loading: true,
       total: 0,
@@ -79,16 +87,16 @@ export default {
     }
   },
   computed: {
-    activityId() {
+    activityId () {
       return Number(this.$route.query.id)
     },
-    list() {
+    list () {
       return JSON.parse(window.localStorage.getItem('activityData'))
     },
-    ids() {
+    ids () {
       return this.list.map(item => item.id)
     },
-    userId() {
+    userId () {
       let id = ''
       if (state.userInfo) {
         id = state.userInfo.id
@@ -99,17 +107,17 @@ export default {
     }
   },
   methods: {
-    moreHandle() {
+    moreHandle () {
       this.$router.push('/')
     },
-    collectHandle() {
+    collectHandle () {
       if (this.userId) {
         this.$router.push('/collect')
       } else {
         this.$router.push('/user/login')
       }
     },
-    collectHadnle() {
+    collectHadnle () {
       const collect = this.activityInfo.collect === 0 ? 1 : 0
       if (this.userId) {
         collectActivity({
@@ -125,7 +133,7 @@ export default {
         this.$router.push('/user/login')
       }
     },
-    timestampToTime(timestamp) {
+    timestampToTime (timestamp) {
       var date = new Date(timestamp)
       var Y = date.getFullYear() + '-'
       var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
@@ -135,7 +143,7 @@ export default {
       var s = date.getSeconds()
       return Y + M + D
     },
-    prev() {
+    prev () {
       this.rank++
       console.log(this.rank, 'prev')
       this.activityInfo = this.list.filter(item => (item.rank === this.rank))[0]
@@ -144,7 +152,7 @@ export default {
         this.init(this.activityInfo.id)
       }
     },
-    next() {
+    next () {
       this.rank--
       console.log(this.rank, 'next')
       this.activityInfo = this.list.filter(item => (item.rank === this.rank))[0]
@@ -175,7 +183,7 @@ export default {
       }
       return obj;
     },
-    init(id) {
+    init (id) {
       getList2({
         user_id: this.userId,
         id: id
@@ -192,159 +200,164 @@ export default {
         }
       })
     },
-    handleScroll() {
+    handleScroll () {
       var scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop; 
-      if(scrollTop>500){
-        if(document.documentElement.scrollHeight - scrollTop < 1085) {
+        window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      if (scrollTop > 500) {
+        if (document.documentElement.scrollHeight - scrollTop < 1085) {
           this.whether = 2;
-        } else { 
+        } else {
           this.whether = 1;
         }
-      }else{
+      } else {
         this.whether = 0;
-      } 
+      }
     }
   },
-  created() {
+  created () {
     this.init(this.activityId)
     this.rank = Number(this.$route.query.rank)
   },
-  mounted() { 
+  mounted () {
     window.addEventListener("scroll", this.handleScroll);
   }
 }
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
-  .industry {
-
-    overflow: hidden;
-    margin-bottom: 30px;
-    clear: both;
-    .content {
-      margin: 0 20px 20px 20px;
-      & >>> p {
-        display: block;
-      }
-      & >>> img {
-        display: block;
-        margin: 10px auto;
-      }
+.industry {
+  overflow: hidden;
+  margin-bottom: 30px;
+  clear: both;
+  .content {
+    margin: 0 20px 20px 20px;
+    & >>> p {
+      display: block;
     }
-    margin-bottom: 30px;
-    &-banner {
-      height: 400px;
-      background: #00badb;
-      background: url('./img/new.png') center center no-repeat;
+    & >>> img {
+      display: block;
+      margin: 10px auto;
     }
-    .con {
-      width: 1200px;
-      margin: 30px auto;
-      .new-container {
-        width: 790px;
-        float: left;
-        .group {
-          display: flex;
-          margin: 30px auto;
-          width: 100%;
-          .btn {
-            flex: 1;
-            height:52px;
-            background:rgba(255,255,255,1);
-            box-shadow:0px 1px 15px 0px rgba(209,209,209,1);
-            border-radius:3px;
-            text-align: center;
-            line-height: 52px;
-            &:first-child {
-              margin-right: 10px;
-            }
-            &:last-child {
-              margin-left: 10px;
-            }
+  }
+  margin-bottom: 30px;
+  &-banner {
+    height: 400px;
+    background: #00badb;
+    background: url("./img/new.png") center center no-repeat;
+  }
+  .con {
+    width: 1200px;
+    margin: 30px auto;
+    .new-container {
+      width: 790px;
+      float: left;
+      .group {
+        display: flex;
+        margin: 30px auto;
+        width: 100%;
+        .btn {
+          flex: 1;
+          height: 52px;
+          background: rgba(255, 255, 255, 1);
+          box-shadow: 0px 1px 15px 0px rgba(209, 209, 209, 1);
+          border-radius: 3px;
+          text-align: center;
+          line-height: 52px;
+          &:first-child {
+            margin-right: 10px;
+          }
+          &:last-child {
+            margin-left: 10px;
           }
         }
-        .inner {
-          background:rgba(255,255,255,1);
-          box-shadow:0px 1px 15px 0px rgba(209,209,209,1);
-          box-sizing: border-box;
+      }
+      .inner {
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0px 1px 15px 0px rgba(209, 209, 209, 1);
+        box-sizing: border-box;
+        overflow: hidden;
+        .top {
+          margin: 20px 20px 0 20px;
           overflow: hidden;
-          .top {
-            margin: 20px 20px 0 20px;
-            overflow: hidden;
-            display: flex;
-            .icon {
-              flex: 50px 0 0 0;
-              width: 40px;
-              margin-right: 10px;
-              cursor: pointer;
-              height: 40px;
-              background: #dbdbdb;
-              border-radius: 4px;
-              line-height: 40px;
-              text-align: center;
+          display: flex;
+          .icon {
+            flex: 50px 0 0 0;
+            width: 40px;
+            margin-right: 10px;
+            cursor: pointer;
+            height: 40px;
+            background: #dbdbdb;
+            border-radius: 4px;
+            line-height: 40px;
+            text-align: center;
+            i {
+              font-size: 24px;
+              color: #afafaf;
+            }
+            &:hover {
+              background: #01ced1;
               i {
-                font-size: 24px;
-                color: #AFAFAF;
+                color: #fff;
               }
-              &:hover {
-                background: #01CED1;
-                i {
-                  color: #fff
-                }
-              }
-            }
-            .active {
-              background: #01CED1;
-              i {
-                color: #fff
-              }
-            }
-            .text {
-              flex: 1;
-              line-height: 40px;
-            }
-            h1 {
-              font-size: 18px;
-              color: #030303;
-              overflow: hidden;
-              text-overflow:ellipsis;
-              white-space: nowrap;
-              font-weight: 500;
-              margin-bottom: 10px;
-            }
-            p {
-              font-size: 14px;
-              color: #959595;
-              line-height: 1.2;
-              overflow: hidden;
-              text-overflow:ellipsis;
-              white-space: nowrap;
             }
           }
-          .time {
-            width: 100%;
-            text-align: right;
-            border-bottom: 1px solid #ececec;
-            float: right;
-            margin-bottom: 20px;
-            .from, .to {
-              float: right;
-              margin-right: 30px;
-              color: #959595;
-              padding-bottom: 20px;
+          .active {
+            background: #01ced1;
+            i {
+              color: #fff;
             }
+          }
+          .text {
+            flex: 1;
+            line-height: 40px;
+          }
+          h1 {
+            font-size: 18px;
+            color: #030303;
             overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-weight: 500;
+            margin-bottom: 10px;
+          }
+          p {
             font-size: 14px;
-            & > div {
-              padding: 20px 0;
-              float: left;
-            }
+            color: #959595;
+            line-height: 1.2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+        .time {
+          width: 100%;
+          text-align: right;
+          border-bottom: 1px solid #ececec;
+          float: right;
+          margin-bottom: 20px;
+          .from,
+          .to {
+            float: right;
+            margin-right: 30px;
+            color: #959595;
+            padding-bottom: 20px;
+          }
+          overflow: hidden;
+          font-size: 14px;
+          & > div {
+            padding: 20px 0;
+            float: left;
           }
         }
       }
-      .quotation {
-        .btn-1 {
+    }
+    .quotation {
+      width: 356px;
+      float: left;
+      margin-left: 30px;
+      color: #525252;
+      margin-bottom: 20px;
+      .btn-1 {
         width:156px;
         height:52px;
         text-align: center;
@@ -359,17 +372,12 @@ export default {
         overflow: hidden;
         color: #01CED1;
       }
-        width: 356px;
-        float: left;
-        padding: 12px;
-        margin-left: 30px;
-        color: #525252;
-         .inner {
+      .inner {
         width: 332px;
         padding: 12px;
         background:rgba(255,255,255,1);
         box-shadow:0px 1px 15px 0px rgba(209,209,209,1);
-        overflow: hidden;
+        clear: both;
         .tab {
           display: flex;
           li {
@@ -413,35 +421,34 @@ export default {
             flex: 1;
             color: #525252;
             text-align: right;
+            cursor: pointer;
           }
         }
       }
-      }
-    }
-    .clearfix {
-      @include clearfix()
-    }
-    .fixtool {
-      position: fixed;
-      top: 84px;
-      left: 1000px;
-    }
-    .fixbottom {
-      position: absolute;
-      left: 988px;
-      bottom: 81px;
     }
   }
+  .clearfix {
+    @include clearfix();
+  }
+  .fixtool {
+    position: fixed;
+    top: 84px; 
+  }
+  .fixbottom {
+    position: absolute; 
+    bottom: 61px;
+  }
+}
 </style>
 <style scoped>
-  .content >>> p {
-    display: block;
-  }
-  .content >>> img {
-    display: block;
-    width: 100%;
-    zoom: 1;
-    margin: 10px auto;
-    overflow: hidden;
-  }
+.content >>> p {
+  display: block;
+}
+.content >>> img {
+  display: block;
+  width: 100%;
+  zoom: 1;
+  margin: 10px auto;
+  overflow: hidden;
+}
 </style>

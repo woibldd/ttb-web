@@ -229,9 +229,9 @@
             {{ $t('order_th_type') }}
           </th>
           <!-- 状态 -->
-          <!-- <th class="table__th">
+          <th class="table__th">
             {{ $t('status') }}
-          </th> -->
+          </th>
           <!-- 委托ID -->
           <!-- <th class="table__th">
             {{ $t('contract_assign_id') }}
