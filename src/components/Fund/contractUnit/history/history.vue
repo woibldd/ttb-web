@@ -353,7 +353,7 @@ export default {
       let res = await service.getUnitContractSymList()
       if (!res.code) {
         this.pairList = res.data.items
-        this.myfilter.symbol = this.pairList[0].name
+        this.myfilter.symbol = ''
       }
     }, 
     handleTabChange(name) {
@@ -363,7 +363,7 @@ export default {
     },
     filter () {
       const params = {
-        currency: this.myfilter.symbol, 
+        name: this.myfilter.symbol, 
         begin_time: this.myfilter.daterange[0],
         end_time: this.myfilter.daterange[1],
         side: this.myfilter.side,

@@ -353,7 +353,7 @@ export default {
       if (!res.code) { 
         this.pairList = res.data.items
         // this.selectPair = this.pairList[0].currency
-        this.myfilter.symbol = this.pairList[0].currency
+        this.myfilter.symbol = ''
       }
     }, 
     handleTabChange(name) {

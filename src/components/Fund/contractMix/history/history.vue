@@ -29,7 +29,7 @@
             v-for="(item, idx) in pairList"
             :key="idx"
             :label="item.name"
-            :value="item.symbol"/>
+            :value="item.name"/>
         </el-select>
       </el-col> 
       <el-col :span="4"> 
@@ -369,7 +369,7 @@ export default {
       if (!res.code) {
         this.pairList = res.data.items
         // this.selectPair = this.pairList[0]
-        this.myfilter.symbol = this.pairList[0].symbol
+        this.myfilter.symbol = ''
       }
     }, 
     handleTabChange(name) {
@@ -379,7 +379,7 @@ export default {
     },
     filter () { 
       const params = {
-        currency: this.myfilter.symbol, 
+        name: this.myfilter.symbol, 
         begin_time: this.myfilter.daterange[0],
         end_time: this.myfilter.daterange[1],
         side: this.myfilter.side,
