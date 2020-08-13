@@ -199,26 +199,7 @@ export const otherRouter = [
       class: 'dark'
     },
     component: () => import(/* webpackChunkName: "FundHistory" */ '@/components/Fund/order')
-  },
-  {
-    path: '/myorder-new',
-    name: 'MyOrderNew',
-    component: () => import(/* webpackChunkName: "MyOrderNew" */ '@/pages/MyOrderNew'),
-    redirect: {name: 'OrderBiBi'},
-    meta: {
-      auth: false,
-      nav: true,
-      footer: true,
-      class: 'dark'
-    },
-    children: [
-      {
-        path: 'pairs',
-        name: 'OrderBiBi',
-        component: () => import(/* webpackChunkName: "MyOrderNew" */ '@/components/MyOrderNew/bibi')
-      }
-    ]
-  },
+  }, 
   {
     path: '/download',
     name: 'Download',

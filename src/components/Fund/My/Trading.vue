@@ -130,8 +130,7 @@
         </el-table-column>
       </el-table> 
     </div>
-    <historyComponent v-else-if="activeTab === 'fund_trading_bill'" ></historyComponent>
-    <playRecord v-else-if="activeTab === 'play_record'" ></playRecord>
+    <historyComponent v-else-if="activeTab === 'fund_trading_bill'" ></historyComponent> 
     <v-modal :open.sync="showLockModal">
       <div class="lock-modal">
         <div class="modal__title mb-30">
@@ -224,8 +223,7 @@
   import {state} from '@/modules/store'
   import utils from '@/modules/utils'
   import transferModal from '@/components/Fund/contract/transfer-modal'
-  import historyComponent from '@/components/MyOrderNew/bibi.vue'
-  import playRecord from '@/components/MyOrderNew/play-record.vue'
+  import historyComponent from './TradingHistory.vue'  
   const ExchangePairs = {
     'BTC': 'BTC_USDT',
     'EOS': 'EOS_BTC',
@@ -294,8 +292,7 @@
     },
     components: {
       transferModal,
-      historyComponent,
-      playRecord
+      historyComponent, 
     },
     watch:{
       showModal(val){

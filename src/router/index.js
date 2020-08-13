@@ -77,10 +77,7 @@ const ContractHistory = () => import(/* webpackChunkName: "Myfund" */ '@/compone
 const AssetsHistory = () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/contract/assets-history')
 const Transfer = () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/Transfer/transfer.vue')
 const TransferModal = () => import(/* webpackChunkName: "FundAddress" */ '@/components/Fund/contract/transfer-modal.vue')
-
-// 我的订单
-const MyOrderNew = () => import(/* webpackChunkName: "MyOrderNew" */ '@/pages/MyOrderNew')
-const OrderBiBi = () => import(/* webpackChunkName: "MyOrderNew" */ '@/components/MyOrderNew/bibi')
+ 
 
 // 合约历史资料
 const ContractMaterial = () => import(/* webpackChunkName: "ContractMaterial" */ '@/pages/material')
@@ -339,26 +336,7 @@ export const routes = [
   //   path: 'TransferModal',
   //   name: 'transferModal',
   //   component: TransferModal
-  // },
-  {
-    path: '/myorder-new',
-    name: 'MyOrderNew',
-    component: MyOrderNew,
-    redirect: { name: 'OrderBiBi' },
-    meta: {
-      auth: false,
-      nav: true,
-      footer: true,
-      class: 'dark'
-    },
-    children: [
-      {
-        path: 'pairs',
-        name: 'OrderBiBi',
-        component: OrderBiBi
-      }
-    ]
-  },
+  // }, 
   {
     path: '/snowball',
     redirect:'/snowball/bazaar',

@@ -1,27 +1,8 @@
 <template>
   <div class="order--container">
     <div class="profile-container"
-      v-loading="isLoading">
-      <!-- <div class="title-box">{{ $t('fund_trading_bill') }}</div>  --> 
-      <div class="filter">
-        <!-- <el-row :gutter="20">
-            <el-col :span="3">
-              <div
-                class="filter-item c-primary"
-                :class="[recordTab==='executed' && 'select']"
-                @click="handleTabChange('executed')">
-                {{ $t('contract_trade_his') }}
-              </div> 
-            </el-col>
-            <el-col :span="3">
-              <div
-                class="filter-item c-primary"
-                :class="[recordTab==='delegate' && 'select']"
-                @click="handleTabChange('delegate')">
-                {{ $t('order_history') }}
-              </div> 
-            </el-col>
-        </el-row> -->
+      v-loading="isLoading"> 
+      <div class="filter"> 
         <el-tabs v-model="recordTab" @tab-click="handleTabChange">
           <el-tab-pane :label="$t('contract_trade_his')" name="executed"></el-tab-pane>
           <el-tab-pane :label="$t('order_history')" name="delegate"></el-tab-pane> 
@@ -248,18 +229,33 @@ export default {
     .profile-container {
       width: 960px;
       position: relative;
-      .filter-item { 
-            height:32px;
-            border-radius:6px;
-            line-height: 32px;
-            text-align: center;
-            cursor: pointer; 
-            padding: 0 10px;
-            &.select {
-              background: $primary;
-              color: #fff;
-              box-shadow:0px 2px 6px 0px rgba(201,169,108,0.6);
+      .el-tabs {
+        /deep/ .el-tabs__header {
+          .el-tabs__active-bar {
+            background-color: $primary;
+          }
+          .el-tabs__item {
+            &.is-active {
+              color: $primary; 
             }
+            &:hover {
+              color: $primary; 
+            }
+          } 
+        }
+      }
+      .filter-item { 
+          height:32px;
+          border-radius:6px;
+          line-height: 32px;
+          text-align: center;
+          cursor: pointer; 
+          padding: 0 10px;
+          &.select {
+            background: $primary;
+            color: #fff;
+            box-shadow:0px 2px 6px 0px rgba(201,169,108,0.6);
+          }
         }
       .title-box {
         width: 100%;

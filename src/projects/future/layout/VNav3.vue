@@ -232,12 +232,7 @@
                     <router-link
                       :to="{name: 'profile'}"
                       class="link">{{ $t('appNav.mapNavRight.personal_center.children.personal_center') }}</router-link>
-                  </li>
-                  <!-- <li class="dropdown-item pl-24 pr-24">
-                    <router-link
-                      :to="{name: 'MyOrderNew'}"
-                      class="link">{{ $t('my_orders') }}</router-link>
-                  </li> -->
+                  </li> 
                   <li class="dropdown-item pl-24 pr-24">
                     <router-link
                       :to="{name: 'ServiceFeeSet'}"

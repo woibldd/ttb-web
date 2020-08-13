@@ -29,9 +29,9 @@
             <p class="mb-6">{{ $t('user_service_fee_rule_e') }}</p>
           </div>
         </div>
-        <div class="to-history">
+        <!-- <div class="to-history">
           <router-link :to="{name: 'MyOrderNew'}">{{ $t('user_service_fee_history') }} >></router-link>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
