@@ -2,7 +2,8 @@ import _ from 'lodash'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
 import { state, local } from '@/modules/store'
-import ws from '@/modules/ws'
+// import ws from '@/modules/ws'
+import wsNew from '@/modules/ws-new'
 
 export default {
   data() {
@@ -218,26 +219,39 @@ export default {
       this.state.pro.pairList = res.data.items
     },
     subMarket() {
-      if (this.socket) {
-        this.socket.$destroy()
-      }
-      this.socket = ws.create('market/tickers')
-      this.socket.$on('open', () => {
-        this.socket.heartCheck.start()
-      })
-      this.socket.$on('message', (datas) => {
-        this.socket.heartCheck.start()
-        datas.forEach(data => {
-          this.patch(data)
+      // if (this.socket) {
+      //   this.socket.$destroy()
+      // }
+      // this.socket = ws.create('market/tickers')
+      // this.socket.$on('open', () => {
+      //   this.socket.heartCheck.start()
+      // })
+      // this.socket.$on('message', (datas) => {
+      //   this.socket.heartCheck.start()
+      //   datas.forEach(data => {
+      //     this.patch(data)
+      //   })
+      // })
+      // this.socket.$on('reopen', this.openSocket)
+      if (!utils.$tvSocket) {
+        utils.$tvSocket = wsNew.create()
+        utils.$tvSocket.$on('open', () => { 
+          utils.$tvSocket.socket.send('{"op":"subscribepub","args":["market@ticker"]}') 
         })
+      }
+      utils.$tvSocket.$on('message', (datas) => {   
+        if (datas.topic && datas.topic.indexOf('market@ticker') > -1) {
+          datas.data.forEach(data => {
+            this.patch(data)
+          }) 
+        }
       })
-      this.socket.$on('reopen', this.openSocket)
     }
   },
   destroyed() {
-    if (this.socket) {
-      this.socket.$destroy()
-    }
+    // if (this.socket) {
+    //   this.socket.$destroy()
+    // }
   },
   async created() {
     if (this.local.proOnFav) {

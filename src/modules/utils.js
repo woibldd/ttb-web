@@ -621,6 +621,26 @@ const utils = {
       }
     }
     return result
+  },
+  getPeriod (interval) {
+    return { 
+      1: '1m',
+      3: '3m',
+      5: '5m',
+      15: '15m',
+      30: '30m',
+      60: '1h',
+      120: '2h',
+      240: '4h',
+      360: '6h',
+      720: '12h', 
+      'D': '1d',
+      '1D': '1d',
+      'W': '1w',
+      '1W': '1w',
+      'M': '1M',
+      '1M': '1M'
+    }[interval]
   }
 
 }

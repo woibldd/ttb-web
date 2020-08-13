@@ -125,7 +125,7 @@
                 @click="linkHandle(scope.row, 0)"
                 class="link-btn">{{$t('account_exchange')}}</a>
               <a
-                :href="`/future.html#/mix`"
+                :href="`/mix`"
                 class="link-btn">{{$t('asset_trading')}}</a>
             </template>
           </el-table-column>

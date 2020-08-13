@@ -14,7 +14,7 @@
             <li　class="listAn">{{ $t('guide_title_index0_step6') }}</li> -->
           </ul>
           <button type="button" name="button" class="guide-index-btn" @click="step = 1">{{ $t('guide_title_index0_step7') }}</button>
-          <a href="/contract.html#/" class="guide-back">{{ $t('guide_title_index0_step8') }} <i></i><i></i>  </a>
+          <a href="/future/" class="guide-back">{{ $t('guide_title_index0_step8') }} <i></i><i></i>  </a>
         </div>
 
         <button @click="oldStepClick" v-show="step > 2" class="guide-up-step"> <img src="@/assets/fanhui.png" alt=""> </button>
@@ -171,7 +171,7 @@
            <div class="guide-calc" style=" text-indent: 40px;width: 1270px;">
             <p v-html="$t('guide_title_index9_step1')" style="font-size: 16px;"> </p>
            </div>
-           <a href="/contract.html#/"  class="guide-back-btn"   style="color:#fff">{{ $t('guide_title_index9_step2') }}</a>
+           <a href="/future/"  class="guide-back-btn"   style="color:#fff">{{ $t('guide_title_index9_step2') }}</a>
 
           </div>
         </div>
@@ -233,7 +233,7 @@
               }) }}</p>
               <div class="guide-right-dom">
 
-                <a href="/contract.html" class="guide-btn yellow">{{ $t('guide_title_index24_step3') }}</a>
+                <a href="/future" class="guide-btn yellow">{{ $t('guide_title_index24_step3') }}</a>
                 <button @click="step = 0" class="guide-btn yellow">{{ $t('guide_title_index24_step4') }}</button>
               </div>
             </div>
@@ -305,7 +305,7 @@
               </div>
               <p>{{ $t('guide_title_index19_step2',{guide_number17:numberValue * 476 /1000}) }}</p>
               <div class="guide-right-dom">
-                <a href="/contract.html" class="guide-btn yellow">{{ $t('guide_title_index24_step3') }}</a>
+                <a href="/future" class="guide-btn yellow">{{ $t('guide_title_index24_step3') }}</a>
                 <button @click="step = 0" class="guide-btn yellow">{{ $t('guide_title_index13_step4') }}</button>
               </div>
             </div>

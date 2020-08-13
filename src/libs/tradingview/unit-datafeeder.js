@@ -1,6 +1,6 @@
 import utils from '@/modules/utils'
 import service from '@/modules/service'
-import ws from '@/modules/ws'
+// import ws from '@/modules/ws'
 import _ from 'lodash'
 import {state} from '@/modules/store'
 // const theme = process.env.THEME_ENV

@@ -114,7 +114,7 @@
 <script>
 import {state, local} from '@/modules/store'
 import utils from '@/modules/utils'
-import ws from '@/modules/ws'
+// import ws from '@/modules/ws'
 import _ from 'lodash'
 import OrderbookItem from './OrderbookItem'
 import OrderbookNav from './OrderbookNav'
@@ -125,6 +125,12 @@ export default {
   components: {
     OrderbookItem,
     OrderbookNav
+  },
+  props: {
+    dataTable: {
+      type: Array,
+      default: []
+    }
   },
   data () {
     const vm = this
@@ -180,7 +186,10 @@ export default {
         this.isFristAdultScrolling = true
         this.computedScrollPosition()
       }
-    }
+    },
+    dataTable() { 
+      this.assignData(this.dataTable) 
+    } 
   },
   computed: {
     lastPrice () {
@@ -374,10 +383,7 @@ export default {
       this.err = msg
     },
     async sub () {
-      this.loading = true
-      if (this.socket) {
-        this.socket.$destroy()
-      }
+      this.loading = true 
       const fetchId = this.pair + this.offset + this.accuracy
       const res = await service.getQuoteOrderbook({
         pair: this.pair,
@@ -385,21 +391,24 @@ export default {
         accuracy: this.accuracy,
         size: 20
       })
+      this.$emit('setDeep', this.offset)
+
       if (fetchId !== this.pair + this.offset + this.accuracy) {
         return false
       }
       if (!res.code) {
         this.assignData(res.data)
       }
-      this.socket = ws.create(`orderbook/${this.pair}/${this.offset}/${this.accuracy}/20`)
-      this.socket.$on('open', () => {
-        this.socket.heartCheck.start()
-      })
-      this.socket.$on('message', (data) => {
-        this.socket.heartCheck.start()
-        this.assignData(data)
-      })
-      this.socket.$on('reopen', this.sub)
+ 
+      // this.socket = ws.create(`orderbook/${this.pair}/${this.offset}/${this.accuracy}/20`)
+      // this.socket.$on('open', () => {
+      //   this.socket.heartCheck.start()
+      // })
+      // this.socket.$on('message', (data) => {
+      //   this.socket.heartCheck.start()
+      //   this.assignData(data)
+      // })
+      // this.socket.$on('reopen', this.sub)
     },
     assignData (data) {
       const toBig = item => [this.$big(item.values[0]), this.$big(item.values[1])]

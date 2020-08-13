@@ -24,20 +24,20 @@
                   <a
                     v-if="showContract"
                     :class="{'router-link-active': from === 'contract'}"
-                    href="/contract.html"
+                    href="/future"
                     class="nav_link"
                   >{{ $t('contract_btc') }}</a> 
                 </li>
                 <li class="dropdown-item pl-24 pr-24"> 
                   <a
-                    href="/future.html#/unit"
+                    href="/unit"
                     :class="{'router-link-active': from === 'unit'}"
                     class="nav_link">{{ $t('currency-unit') }}
                   </a>
                 </li> 
                 <li class="dropdown-item pl-24 pr-24"> 
                   <a 
-                    href="/future.html#/mix"
+                    href="/mix"
                     :class="{'router-link-active': from === 'mix'}"
                     class="nav_link">{{ $t('currency-mix') }}
                   </a>

@@ -442,7 +442,40 @@ export const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: ByAmount
-  }
+  },
+  {
+    path: '/mix',
+    name:'mix',
+    meta: {
+      nav: true,
+      footer: false,
+      class: 'dark', 
+      zendeskWidget: false
+    },
+    component:  () => import('@/views/contract-mix')
+  },
+  {
+    path: '/unit',
+    name:'unit',
+    meta: {
+      nav: true,
+      footer: false,
+      class: 'dark', 
+      zendeskWidget: false
+    },
+    component:  () => import('@/views/currency-unit')
+  },
+  {
+    path: '/future',
+    name:'future',
+    meta: {
+      nav: true,
+      footer: false,
+      class: 'dark', 
+      zendeskWidget: false
+    },
+    component:  () => import('@/views/contract-btc')
+  },
 ]
 
 const router = new Router({

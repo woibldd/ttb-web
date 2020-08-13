@@ -13,7 +13,14 @@ export default {
     },
     chineseLangData() {
       return this.$i18n.messages[this.$i18n.locale][this.thisName]
-    }
+    },
+    langData () {
+      return this.allLangData[this.thisName]
+    },
+    allLangData () {
+      const locale = this.$i18n.locale
+      return this.$i18n.messages[locale]
+    },
   },
   methods: {
     gotoPath(path) {

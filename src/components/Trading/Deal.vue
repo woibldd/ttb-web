@@ -52,15 +52,22 @@
 
 <script>
 import { state, local } from '@/modules/store'
-import ws from '@/modules/ws'
+// import ws from '@/modules/ws'
 import _ from 'lodash'
 import config from '@/libs/config'
 import service from '@/modules/service'
 import { pairfix } from '@/mixins/index'
+import utils from '@/modules/utils'
 
 export default {
   name: 'Deal',
   mixins: [pairfix],
+  props: {
+    dataTable: {
+      type: Array,
+      default: []
+    }
+  },
   data () {
     return {
       err: '',
@@ -83,9 +90,9 @@ export default {
     },
     async sub () {
       this.loading = true
-      if (this.socket) {
-        this.socket.$destroy()
-      }
+      // if (this.socket) {
+      //   this.socket.$destroy()
+      // }
       const pair = this.state.pro.pair
       const res = await service.getQuoteDeal({
         pair: this.state.pro.pair,
@@ -100,17 +107,21 @@ export default {
         this.update(res.data)
         this.$eh.$emit('deal:update', res.data)
       }
-      this.socket = ws.create(`deal/${this.state.pro.pair}`)
-      this.socket.$on('open', () => {
-        this.socket.heartCheck.start()
-      })
-      this.socket.$on('message', data => {
-        this.socket.heartCheck.start()
-        this.loading = false
-        this.update(data)
-        this.$eh.$emit('deal:update', data)
-      })
-      this.socket.$on('reopen', this.sub)
+      // if(!this.lastPair) {
+      //   this.lastPair = `deal@${this.state.pro.pair}`
+      // } else { 
+      //   utils.$tvSocket.socket.send(`{"op":"unsubscribepub","args":${this.lastPair}}`)
+      //   this.lastPair = `deal@${this.state.pro.pair}`
+      //   utils.$tvSocket.socket.send(`{"op":"subscribepub","args":${this.lastPair}}`)  
+      // }
+      // utils.$tvSocket.$on('message', data => {  
+      //   if (data.topic && data.topic.indexOf('deal') > -1) {
+      //     this.loading = false
+      //     this.update(data.data)
+      //     this.$eh.$emit('deal:update', data.data)
+      //   }
+      // })
+
     },
     getStyle (deal, index) {
       if (index % 2 === 0) {
@@ -208,6 +219,10 @@ export default {
         }
       },
       immediate: true
+    },
+    dataTable() {
+      // console.log(this.dataTable)
+      this.update(this.dataTable)
     }
   },
   created () {
@@ -215,9 +230,9 @@ export default {
     this.$eh.$on('protrade:layout:init', this.layout)
   },
   destroyed () {
-    if (this.socket) {
-      this.socket.$destroy()
-    }
+    // if (this.socket) {
+    //   this.socket.$destroy()
+    // }
     this.$eh.$off('app:resize', this.onresize)
     this.$eh.$off('protrade:deal:refresh', this.sub)
     this.$eh.$off('protrade:layout:init', this.layout)

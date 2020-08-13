@@ -43,13 +43,13 @@
             <div
               class="ix-grid ix-grid-orderbook"
               ref="gridOrderbook">
-              <Orderbook ref="Orderbook"/>
+              <Orderbook ref="Orderbook" :dataTable="delegateData" @setDeep="changeDeep" />
             </div>
             <div
               class="ix-grid ix-grid-deal pb-5"
               ref="gridDeal">
               <!-- 最新交易 -->
-              <Deal ref="Deal"/>
+              <Deal ref="Deal" :dataTable="dealData"/>
             </div>
           </div>
           <!--  限价单 & 市价单 -->
@@ -123,6 +123,7 @@ import OrderDealPopover from '@/components/Trading/OrderDealPopover'
 import coinIntro from '@/components/Trading/coin-intro'
 import PairTitle from '@/components/Trading/PairTitle'
 import responsiveScale from '@/mixins/responsiveScale'
+import wsNew from '@/modules/ws-new'
 
 export default {
   mixins: [responsiveScale],
@@ -145,6 +146,14 @@ export default {
     isLogin() {
       return this.state.userInfo !== null;
     },
+    mapHandlerSocket () {
+      return { 
+        'heart': this.handleHeart,
+        'market': this.handleTickers,
+        'deal': this.handleDealSoket,
+        'orderbook': this.handleOrderbook, 
+      }
+    } 
   },
   data () {
     return {
@@ -152,7 +161,11 @@ export default {
       comps: [],
       isMobile: utils.isMobile(),
       showMvpModal: false,
-      agreeMPV: false
+      agreeMPV: false,
+      socket: null,
+      delegateData: [],
+      dealData: [],
+      currentDeep: 0
     }
   },
   watch: {
@@ -297,6 +310,65 @@ export default {
     },
     activeMpv() { 
       this.activityWalletSet('mpv_user')   
+    }, handleCloseSgpDialog() {
+      this.showSgpDialog = false;
+    },
+    handleNeverShowSgpAgain() {
+      local.neverShowSgpTradingDialog = this.neverShowSgpAgain;
+    }, 
+    handleSocketData (res) { 
+      const key = res.topic && res.topic.split('@')[0] 
+      this.mapHandlerSocket[key] && this.mapHandlerSocket[key](res.data)
+    },  
+    handleHeart(data) {  
+      if (this.socket) {
+        this.socket.heartCheck.start()
+      }
+    }, 
+    handleOrderbook(data) { 
+      this.delegateData = data
+    },
+    handleTickers (data) { 
+      // console.log('handleTickers') 
+    },
+    handleDealSoket(data) { 
+      this.dealData = data
+    }, 
+    subMarket() {    
+      const that = this
+      if (utils.$tvSocket) {
+        utils.$tvSocket.$destroy()
+      }
+      utils.$tvSocket = wsNew.create()
+      this.socket = utils.$tvSocket 
+      this.socket.$on('open', () => { 
+        // that.socket.heartCheck.start() 
+        that.socket.socket.send('{"op":"subscribepub","args":["market@ticker"]}') 
+        if (that.state.userInfo) {
+          that.socket.socket.send(`{"op":"loginWeb","args":["${that.state.userInfo.session_id}"]}`) 
+        } 
+        if (that.state && that.state.pro && that.state.pro.pair) {
+          let period = utils.getPeriod(local.interval)
+          that.socket.socket.send(`{"op":"subscribepub","args":["history@${that.state.pro.pair}@${period}"]}`)
+          that.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${that.state.pro.pair}@${this.currentDeep}@1@20"]}`)
+          that.socket.socket.send(`{"op":"subscribepub","args":["deal@${that.state.pro.pair}"]}`) 
+        }
+      })
+      
+      this.socket.$on('message', (data) => { 
+        that.handleSocketData(data) 
+      })
+      this.socket.$on('reopen', () => {
+        that.socket.$destroy()
+        that.subMarket()
+      })
+    },
+    changeDeep(deep) {
+      if (this.socket) {
+        this.socket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${this.state.pro.pair}@${this.currentDeep}@1@20"]}`)
+        this.currentDeep = deep
+        this.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.state.pro.pair}@${this.currentDeep}@1@20"]}`) 
+      }
     }
   },
   async created () {
@@ -318,7 +390,7 @@ export default {
 
     }
     this.state.loading = true
-
+    this.subMarket()
     this.$nextTick(() => {
       // const layoutHeight = window.innerHeight
       // this.$refs.wrap.style.height = layoutHeight + 'px'

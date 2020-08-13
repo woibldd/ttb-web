@@ -105,7 +105,7 @@
             width="90">
             <template slot-scope="scope">
               <a  v-if="scope.row.currency!=='METH'" href="javascript:;" @click="linkHandle(scope.row, 0)" class="link-btn">{{$t('account_exchange')}}</a>
-              <a :href="`/future.html#/unit?product=${scope.row.currency}USD`" class="link-btn">{{$t('asset_trading')}}</a>
+              <a :href="`/unit?pair=${scope.row.currency}USD`" class="link-btn">{{$t('asset_trading')}}</a>
             </template>
           </el-table-column>
         </el-table>

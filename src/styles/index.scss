@@ -423,3 +423,18 @@ $primary-color: #01CED1;
   float: right;
 }
  
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+.flex-lr {
+  display: flex;
+  flex-direction: row;
+}
+.flex-start {
+  justify-content: flex-start;
+}
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}

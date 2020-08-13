@@ -1,10 +1,11 @@
 import utils from '@/modules/utils'
 import service from '@/modules/service'
-import ws from '@/modules/ws'
+// import ws from '@/modules/ws'
 import _ from 'lodash'
 // const theme = process.env.THEME_ENV
 
 let lastTime
+let lastPair 
 
 function getPeriod (interval) {
   return {  
@@ -231,32 +232,38 @@ export default {
     return data
   },
   subscribeBars: function (symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback) {
-    const period = getPeriod(resolution)
-    utils.$tvSocket && utils.$tvSocket.$destroy()
-    utils.$tvSocket = ws.create(`history/${symbolInfo.ticker}/${period}`)
-    utils.$tvSocket.$on('open', () => {
-      utils.$tvSocket.heartCheck.start()
-    })
+    const period = getPeriod(resolution) 
+    lastPair = `["history@${symbolInfo.ticker}@${period}"]`
+    if (utils.$tvSocket.socket.readyState === 1) {
+      utils.$tvSocket.socket.send(`{"op":"subscribepub","args":${lastPair}}`)
+    } else {
+      utils.$tvSocket.$on('open', () => {
+        utils.$tvSocket.socket.send(`{"op":"subscribepub","args":${lastPair}}`) 
+      })
+    }
     utils.$tvSocket.$on('message', (data) => {
-      utils.$tvSocket.heartCheck.start()
-      // @fixme 改接口，不用数组
-      data = data[0]
-      if (!data.time || data.time < lastTime) {
-        return utils.log('Wrong realtime')
+      if (data.topic && data.topic.indexOf('history')===0) {
+        data = data.data[0]
+        if (!data.time || data.time < lastTime) {
+          return utils.log('Wrong realtime')
+        }
+        lastTime = data.time
+        onRealtimeCallback(toTick(data))
       }
-      lastTime = data.time
-      onRealtimeCallback(toTick(data))
-    })
-    utils.$tvSocket.$on('reopen', () => {
-      utils.$tvSocket.$destroy()
+    }) 
+    utils.$tvSocket.$on('reopen', () => { 
       this.subscribeBars(symbolInfo, resolution, onRealtimeCallback)
-    })
+    }) 
   },
   unsubscribeBars (subscriberUID) {
     utils.log('UnsubscribeBars', subscriberUID)
-    utils.$tvSocket && utils.$tvSocket.$destroy()
+    if (utils.$tvSocket.socket.readyState === 1) {
+      utils.$tvSocket.socket.send(`{"op":"unsubscribepub","args":${lastPair}}`)
+    } 
   },
   destroy () {
-    utils.$tvSocket && utils.$tvSocket.$destroy()
+    if (utils.$tvSocket.socket.readyState === 1) {
+      utils.$tvSocket.socket.send(`{"op":"unsubscribepub","args":${lastPair}}`)
+    } 
   }
 }
