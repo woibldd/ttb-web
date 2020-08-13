@@ -385,8 +385,7 @@ export default {
     // 订单历史
     getOrderhistory (params) {
       this.isLoading = true 
-      service.getUnitOrderhistory(params).then(res => {
-        console.log(res.data.data, '订单历史')
+      service.getUnitOrderhistory(params).then(res => { 
         this.tableData = res.data.data
         this.totalItems = res.data.total
         // console.log(this.tableData, 'assign')
@@ -399,8 +398,7 @@ export default {
       this.isLoading = true 
       service.getUnitTradeHistory(params).then(res => {
         this.tableData = res.data.data
-        this.totalItems = res.data.total
-        console.log(this.tableData, 'trace')
+        this.totalItems = res.data.total 
       }).finally(res => {
         this.isLoading = false
       })

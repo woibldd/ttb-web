@@ -21,7 +21,7 @@
           class="opetion"
           v-model="myfilter.symbol"
           @change="filter"
-          placeholder="请选择"
+          :placeholder="$t('please_choose')"
           size="mini"
           value-key="currency">
           <el-option :label="$t('allin')" value="" />
@@ -165,7 +165,7 @@
             <span v-else
               :class="[{'font-color-buy': item.side === 1 || item.side === 4},
                        {'font-color-sell': item.side === 2 || item.side === 3}]"
-              v-html="$t(`mix_side.${item.side}`)"/>
+              v-html="$t(`contractMix.side.${item.side}`)"/>
           </td>
           <td class="table__td">{{ (item.amount || 0) }}</td> 
           <td class="table__td">{{ (item.price || 0) | fixed(valueScale) }}</td>
@@ -248,7 +248,7 @@
             <span
               :class="[{'font-color-buy': item.side === 1 || item.side === 4},
                        {'font-color-sell': item.side === 2 || item.side === 3}]"
-              v-html="$t(`mix_side.${item.side}`)"/>
+              v-html="$t(`contractMix.side.${item.side}`)"/>
           </td>
           <td class="table__td">{{ item.amount }}</td>
           <td class="table__td">{{ $big(item.price || 0) | fixed(2) }}</td>
@@ -258,8 +258,7 @@
           <td class="table__th"> {{ (item.trigger_price || "0") == "0" ? "--" : $big(item.trigger_price).round(valueScale || 0).toFixed(valueScale) }} </td>
           <td class="table__td">{{ $big(assignValue(item) || 0) | fixed(valueScale) }}</td> <!-- 委托价值 -->
           <td class="table__td">{{ processValue('type', item) }}</td> 
-          <td class="table__td">{{ $t(`contract.state.${item.state}`) }}</td>
-          <!-- <td class="table__td">{{ processValue('state',item) }}</td>
+          <td class="table__td">{{ $t(`contract.state.${item.state}`) }}</td> 
           <td class="table__td">{{ item.id }}</td> -->
         </tr>
       </table>
