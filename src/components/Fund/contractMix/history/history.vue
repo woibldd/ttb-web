@@ -21,7 +21,7 @@
           class="opetion"
           v-model="myfilter.symbol"
           @change="filter"
-          placeholder="请选择"
+          :placeholder="$t('please_choose')"
           size="mini"
           value-key="currency">
           <el-option :label="$t('allin')" value="" />

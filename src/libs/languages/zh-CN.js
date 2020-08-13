@@ -2748,44 +2748,26 @@ export default {
           // sl_type: '止损触发类型',
           // sl_price: '止损价格'
         }
-      },
-      lossEntrust: {
-        text: '止损委托',
+      }, 
+      historyEntrust: {
+        text: '委托历史',
         mapTableColumns: {
           symbol: '合约类型',
+          side: '方向',
           amount: '数量',
-          price: '委托价格',
-          trigger_price: '触发价格',
-          distancePrice: '距离触发',
-          // total: '已成交额', 
-          // executed: '已成交量', 
+          // price: '委托价格', 
+          executed_price: '成交价格',
+          executed: '已成交量/剩余量',
+          // entrustValue: '委托价值', 
           type: '类型',
           state: '状态',
+          // tp_type: '止盈/止损', 
           create_time: '下单时间'
-          // update_time: '更新时间'
-          // tp_type: '止盈触发类型',
-          // tp_price: '止盈价格',
-          // sl_type: '止损触发类型',
-          // sl_price: '止损价格'
-        }
-      },
-      text: '委托历史',
-      mapTableColumns: {
-        symbol: '合约类型',
-        side: '方向',
-        amount: '数量',
-        // price: '委托价格', 
-        executed_price: '成交价格',
-        executed: '已成交量/剩余量',
-        // entrustValue: '委托价值', 
-        type: '类型',
-        state: '状态',
-        // tp_type: '止盈/止损', 
-        create_time: '下单时间'
-        // update_time: '更新时间' 
-        // tp_price: '止盈价格', 
-        // sl_type: '止损触发类型', 
-        // sl_price: '止损价格' 
+          // update_time: '更新时间' 
+          // tp_price: '止盈价格', 
+          // sl_type: '止损触发类型', 
+          // sl_price: '止损价格' 
+        } 
       },
       bargain: {
         text: '已成交',
