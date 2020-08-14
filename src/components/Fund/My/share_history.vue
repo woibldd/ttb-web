@@ -1,7 +1,7 @@
 <template>
   <div class="property-manage-warp"
        flex="dir:top">
-    <div class="top mb-30" flex="main:justify cross:center">
+    <div class="top mb-10" flex="main:justify cross:center">
       <div class="title" style="font-size: 18px;text-align: left;">
         {{$t('shareOption.share_account')}}
       </div>
@@ -21,6 +21,7 @@
 
       <!-- <el-divider style="maring:12px 0" /> -->
     </div> 
+    <div class="line  mb-30"></div>
     <div class="filter mb-10" v-if="currentType==='history'"> 
       <div class="label mr-20">
         <label for="">{{$t('order_th_type')}}</label> 
@@ -217,6 +218,10 @@ export default {
 .property-manage-warp {
   height: 100%;
   text-align: center;
+  .line {
+    height: 1px;
+    background-color: #e6e6e6;
+  }
   .filter {
     display: flex;
     align-items: center;
