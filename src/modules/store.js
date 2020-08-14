@@ -143,7 +143,14 @@ export const local = new Locals('store', {
   hideCanceled: false,
   ixAlert: false,
   lineType : 1,
-  stNeverShow: false
+  stNeverShow: false,
+  mixLineType: 1,
+  unitLineType: 1,
+  neverShowSgpHomeDialog: false,
+  neverShowSgpTradingDialog: false, 
+  tv: {},
+  share_labels:[],
+  share_shapes:[]
 })
 
 export const actions = {

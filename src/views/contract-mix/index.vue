@@ -686,7 +686,7 @@ import tradingView from './components/contract-trading-view'
 import config from '@/libs/config'
 import contractActive from '@/components/contractActive'
 import orderBook from './components/orderbook'
-import { state, actions } from '@/modules/store'
+import { local,state, actions } from '@/modules/store'
 // import VNav from '../../layout/VNav3'
 import utils from '@/modules/utils'
 import wsNew from '@/modules/ws-new'
@@ -712,6 +712,7 @@ export default {
   data () {
     return {
       state,
+      local,
       activeProduct: {},
       activeBtnsKey: '1',
       activePriceType: {},

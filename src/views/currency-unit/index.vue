@@ -512,7 +512,7 @@ import contractActive from '@/components/contractActive'
 import orderBook from './components/orderbook'
 // import VNav from '../../layout/VNav3' 
 
-import { state, actions } from '@/modules/store'
+import { local, state, actions } from '@/modules/store'
 import utils from '@/modules/utils'
 import wsNew from '@/modules/ws-new'
 import api from '@/modules/api/unit'
@@ -538,6 +538,7 @@ export default {
   data () {
     return {
       state,
+      local,
       activeProduct: {},
       activeBtnsKey: '1',
       activePriceType: {},
