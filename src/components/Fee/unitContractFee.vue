@@ -16,7 +16,7 @@
           <tr
             v-for="pair in pairList"
             :key="pair.name">
-            <td class="">{{ $t('FUTURE_&USD', {currency: pair.currency.replace('USD','')} ) }}</td>
+            <td class="">{{ pair.name }}</td>
             <td class="">{{ pair.max_leverage }}</td>
             <td class="">{{ $big(pair.make_rate || 0).mul(100) | fixed(4) }}%</td>
             <td class="">{{ $big(pair.take_rate || 0).mul(100) | fixed(4) }}%</td>
