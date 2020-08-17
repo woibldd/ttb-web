@@ -1368,7 +1368,10 @@ export default {
 
       // localStorage.setItem('mix-product', product.symbol)
       // this.$router.replace({ query: { product: product.symbol } }) 
-      this.$router.replace({ query: { pair: product.symbol } }) 
+      this.$router.replace({ 
+        name: 'mix',
+        query: { pair: product.symbol } 
+      }) 
       if (this.socket) {  
         if (this.activeProduct && this.activeProduct.currency && this.activeProduct.product) {
           this.socket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@0@1@20"]}`)

@@ -1129,9 +1129,14 @@ export default {
       if (this.isLogin) {
         this.checkActive()
       } 
-      // localStorage.setItem('unit-product', product.name)
-      // this.$router.replace({ query: { product: product.name } })
-      this.$router.replace({ query: { pair: product.symbol } })
+      // localStorage.setItem('unit-product', product.name) 
+      // this.$router.replace({ query: { pair: product.symbol } })
+       this.$router.replace({
+        name: 'unit',
+        query: {
+          pair: product.symbol
+        }
+      })
       if (this.socket) {  
         if (this.activeProduct) {
           this.socket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${this.activeProduct.product}_${this.activeProduct.currency}@0@1@20"]}`)
