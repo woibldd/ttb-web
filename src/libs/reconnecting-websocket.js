@@ -126,7 +126,7 @@
             reconnectDecay: 1.5,
 
             /** The maximum time in milliseconds to wait for a connection to succeed before closing and retrying. */
-            timeoutInterval: 2000,
+            timeoutInterval: 8000,
 
             /** The maximum number of reconnection attempts to make. Unlimited if null. */
             maxReconnectAttempts: null,
