@@ -1042,7 +1042,7 @@ export default {
     // border: 1px solid #0F0F0F;
     .tr {
       &:nth-of-type(even){
-        background: rgb(16, 23, 42);
+        background: #373737;
       }
       &.th {
         color: #ACACAC;

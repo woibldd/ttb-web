@@ -1538,7 +1538,7 @@ export default {
           padding: 0 10px 0 0;
           & > li {
             &:nth-child(2n) {
-              background: rgb(16, 23, 42);
+              background: #373737;
             }
             & > span {
               position: relative;

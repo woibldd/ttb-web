@@ -20,27 +20,14 @@
               trigger="hover">
               <div class="pop-dropdown">
               <ul class="dropdown-list pt-10 pb-10">
-                <li class="dropdown-item pl-24 pr-24">
-                  <a
-                    v-if="showContract"
-                    :class="{'router-link-active': from === 'contract'}"
-                    href="/future"
-                    class="nav_link"
-                  >{{ $t('contract_btc') }}</a> 
-                </li>
                 <li class="dropdown-item pl-24 pr-24"> 
-                  <a
-                    href="/unit"
-                    :class="{'router-link-active': from === 'unit'}"
-                    class="nav_link">{{ $t('currency-unit') }}
-                  </a>
+                  <router-link :to="{name:'future'}" class="nav_log_res mr-20">{{ $t("contract_btc") }}</router-link>
+                </li>
+                <li class="dropdown-item pl-24 pr-24">  
+                  <router-link :to="{name:'unit'}" class="nav_log_res mr-20">{{ $t("currency-unit") }}</router-link> 
                 </li> 
                 <li class="dropdown-item pl-24 pr-24"> 
-                  <a 
-                    href="/mix"
-                    :class="{'router-link-active': from === 'mix'}"
-                    class="nav_link">{{ $t('currency-mix') }}
-                  </a>
+                  <router-link :to="{name:'mix'}" class="nav_log_res mr-20">{{ $t("currency-mix") }}</router-link> 
                   <icon name="hot-red" />
                 </li> 
               </ul>

@@ -1564,7 +1564,7 @@ export default {
   contract_undefined: "미지",
   contract_cancel_all: "전부철회",
   contract_history_deal_dan: "성공",
-  contract_ix_index_source: "IX지수",
+  contract_ix_index_source: "IXX지수",
   contract_deal_type_0: "자금 요율 배정",
   contract_risklimit_tips: "이 슬라이더를 사용해서 당신의 레버를 조정하세요. 그는 단지 분배된 보증금에 영향을 줄 뿐입니다",
   contract_action_passive_delegate: "피동위탁",
