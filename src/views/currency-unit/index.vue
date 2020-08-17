@@ -1144,13 +1144,13 @@ export default {
         this.newBargainListData = data
       })
 
-      getSymbolInfo({ symbol: product.name }).then(res => {
-        if (!res.code) {
-          this.symbolInfo = res.data[0]
-        } else if (res.code !== 401) {
-          this.$message.error(res)
-        }
-      })
+      // getSymbolInfo({ symbol: product.name }).then(res => {
+      //   if (!res.code) {
+      //     this.symbolInfo = res.data[0]
+      //   } else if (res.code !== 401) {
+      //     this.$message.error(res)
+      //   }
+      // })
       this.activeProduct = product
       this.setTitle()
       this.state.unit.pair = `${product.product}_${product.currency}`
