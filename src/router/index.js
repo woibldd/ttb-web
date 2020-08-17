@@ -444,17 +444,6 @@ export const routes = [
     component: ByAmount
   },
   {
-    path: '/mix',
-    name:'mix',
-    meta: {
-      nav: true,
-      footer: false,
-      class: 'dark', 
-      zendeskWidget: false
-    },
-    component:  () => import('@/views/contract-mix')
-  },
-  {
     path: '/unit',
     name:'unit',
     meta: {
@@ -464,6 +453,17 @@ export const routes = [
       zendeskWidget: false
     },
     component:  () => import('@/views/currency-unit')
+  },
+  {
+    path: '/mix',
+    name:'mix',
+    meta: {
+      nav: true,
+      footer: false,
+      class: 'dark', 
+      zendeskWidget: false
+    },
+    component:  () => import('@/views/contract-mix')
   },
   {
     path: '/future',
@@ -477,6 +477,11 @@ export const routes = [
     component:  () => import('@/views/contract-btc')
   },
 ]
+
+const routerPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch(error=> error)
+}
 
 const router = new Router({
   mode: process.env.NODE_ENV === 'development' ? 'history' : 'history',

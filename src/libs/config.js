@@ -23,9 +23,12 @@ if (process.env.NODE_ENV != 'development') {
   }
 }
 if (process.env.NODE_ENV === 'development') {
-  wsUrl = 'wss://ws.ixex.io/v1/'
-  quoteUrl = 'https://q.ixex.io/v1/'
-  wssUrl = 'wss://wss.ixex.io/v1'
+  // wsUrl = 'wss://ws.ixex.io/v1/'
+  // quoteUrl = 'https://q.ixex.io/v1/'
+  // wssUrl = 'wss://wss.ixex.io/v1' 
+  wsUrl = 'wss://ws.cloudservicex.com/v1/'
+  quoteUrl = 'https://q.cloudservicex.com/v1/'
+  wssUrl = 'wss://wss.cloudservicex.com/v1'
   // wsUrl = 'wss://ws.ixex.pro/v1/'
   // quoteUrl = 'https://q.ixex.pro/v1/'
   // wssUrl = 'wss://wss.ixex.pro/v1' 

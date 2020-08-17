@@ -382,6 +382,12 @@ $primary-color: #01CED1;
 .c-999{
   color: #999999;
 }
+.text-success {
+  color: $--color-success;
+}
+.text-danger {
+  color: $--color-danger;
+}
 .inline-block{
   display: inline-block;
 }
