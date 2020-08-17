@@ -326,13 +326,17 @@ export default {
       }
     }, 
     handleOrderbook(data) { 
-      this.delegateData = data
+      if (topic.indexOf(this.state.pro.pair) > -1) {
+        this.delegateData = data
+      }
     },
     handleTickers (data) { 
       // console.log('handleTickers') 
     },
     handleDealSoket(data) { 
-      this.dealData = data
+      if (topic.indexOf(this.state.pro.pair) > -1) {
+        this.dealData = data
+      } 
     }, 
     subMarket() {    
       const that = this
