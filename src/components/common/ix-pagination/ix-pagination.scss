@@ -1,9 +1,8 @@
 .ix-pagination-container {
-    display: flex;
-
+    display: flex; 
+    flex-direction:  row-reverse;
     .pa-btn {
-        cursor: pointer;
-
+        cursor: pointer; 
         &:hover {
             opacity: .7;
         }

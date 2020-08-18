@@ -7,7 +7,7 @@
           <el-tab-pane :label="$t('contract_trade_his')" name="executed"></el-tab-pane>
           <el-tab-pane :label="$t('order_history')" name="delegate"></el-tab-pane> 
         </el-tabs>
-      </div>
+      </div> 
       <el-row :gutter="20"> 
         <el-col :span="4">
           <el-select
@@ -85,6 +85,14 @@
           v-if="!isLoading&& !tableData.length">
           {{ $t('order_empty') }}
         </div>
+        <div
+          class="pt-10 pb-30 mb-20"
+          style="text-align: center;"> 
+          <ix-pagination
+            :page.sync="params.page"
+            :is-end="isLastPage"
+            :func="getList"/>
+        </div>
       </div> 
     </div>
   </div>
@@ -92,6 +100,7 @@
 <script>
 import service from '@/modules/service'
 import { pairfix } from '@/mixins/index'
+import ixPagination from '@/components/common/ix-pagination'
 
 export default {
   mixins: [pairfix],
@@ -122,12 +131,17 @@ export default {
           { value:1, text:'order_side_buy'}, 
           { value:2, text:'order_side_sell'}, 
         ],  
-      }
+      },
+      totalItems: 0,
     }
+  },
+  components: {
+    ixPagination
   },
   methods: {
     handleTabChange(name) {
       // this.recordTab = name 
+      this.params.page = 1
       this.filter()
     },
     filter () {  
@@ -175,11 +189,12 @@ export default {
         begin_time: this.myfilter.daterange[0],
         end_time: this.myfilter.daterange[1],
         side: this.myfilter.side, 
-        page: this.page,
-        size: this.size
+        page: this.params.page,
+        size: this.params.size
       } 
       if (this.recordTab === 'executed') {
         service.getBiBiOrders(params).then(res => {
+          this.totalItems = res.data.length
           this.originList = res.data
           this.tableData = res.data
         }).finally(() => {
@@ -189,8 +204,9 @@ export default {
         })
       } else if (this.recordTab === 'delegate') {
         service.orderHistory(params).then(res => {
-          this.originList = res.data
-          this.tableData = res.data
+          this.totalItems = res.data.items.length
+          this.originList = res.data.items
+          this.tableData = res.data.items
         }).finally(() => {
           setTimeout(() => {
             this.isLoading = false
@@ -205,6 +221,11 @@ export default {
         this.getList()
       }
     }
+  },
+  computed: {
+    isLastPage () {  
+      return this.totalItems < this.params.size
+    }, 
   },
   async created () {
     await this.getAllPairs()
@@ -277,8 +298,7 @@ export default {
         align-items: center;
         color: #666666;
     }
-    .table-wrapper {
-        height: 420px;
+    .table-wrapper { 
         overflow: scroll;
         width: 100%;
     }

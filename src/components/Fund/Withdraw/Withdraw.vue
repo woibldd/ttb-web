@@ -139,6 +139,18 @@
         v-if="selectCoin.memo_support">
         {{ $t('eos_deposit_tip_label') }}
       </div>
+      <!-- remark -->
+      <div class="fund-item-row mb-20" >
+        <div class="row__label">{{ $t('fund.withdraw.address_remark') }}</div>
+        <div class="row__value">
+          <div class="withdraw-address border-1 pl-10">
+            <input
+              class="coin-count"
+              :placeholder="$t('fund.withdraw.address_remark_tag')"
+              v-model="remark">
+          </div>
+        </div> 
+      </div> 
       <div class="fund-item-row">
         <div class="row__label">{{ $t('withdraw_amount') }}</div>
         <div class="row__value">
@@ -395,6 +407,7 @@ export default {
       phoneCode: '',
       googleCode: '',
       emailCode: '',
+      remark: '',
       memo: '',
       state,
       myitem: '',
@@ -627,7 +640,7 @@ export default {
           this.lianData.forEach((item) => {
             if (item.chain === 'OMNI') {
               Vue.set(item, 'currencyName', item.currency + '-' + 'Omni')
-            }
+            } 
             else if (item.chain === 'ETH') {
               Vue.set(item, 'currencyName', item.currency + '-' + 'ERC20')
             }
@@ -709,27 +722,28 @@ export default {
         currency: this.selectCoin.currency,
         to_address: this.selectAddress.address,
         amount: this.withdrawCount,
-        google_code: this.googleCode  
+        google_code: this.googleCode,
+        remark: this.remark
       }
 
       if (this.selectCoin.currency === 'USDT') {
         param.chain = this.selectLian.chain
       }
  
-      // // eos 需要填memo
-      // if (this.selectCoin.memo_support) {
-      //   if (this.memo) {
-      //     param.memo = this.memo
-      //   } else {
-      //     const ok = await utils.confirm(this, {
-      //       content: this.$i18n.t('eos_deposit_tip_label'),
-      //       title: this.$i18n.t('tips')
-      //     })
-      //     if (!ok) {
-      //       return
-      //     }
-      //   }
-      // }
+      // eos 需要填memo
+      if (this.selectCoin.memo_support) {
+        if (this.memo) {
+          param.memo = this.memo
+        } else {
+          const ok = await utils.confirm(this, {
+            content: this.$i18n.t('eos_deposit_tip_label'),
+            title: this.$i18n.t('tips')
+          })
+          if (!ok) {
+            return
+          }
+        }
+      }
 
       if (this.verify_email) {
         param.email_code = this.emailCode

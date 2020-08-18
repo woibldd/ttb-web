@@ -2550,7 +2550,9 @@ export default {
       bind_google: " Link with Google Autheticator",
       bind_email_or_phone: "Link with Email/ Mobile",
       to_deposit_tips: "Activation of withdrawal function  can  only be done after a deposit of any amount had been made into the account",
-      to_deposit: "Deposit"
+      to_deposit: "Deposit",
+      address_remark: "地址备注",
+      address_remark_tag: "添加地址备注，如钱包、交易所地址信息",
     },
     address: {
       address: "Address"

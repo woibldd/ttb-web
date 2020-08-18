@@ -2426,7 +2426,9 @@ export default {
       bind_google: "Google인증을 입력",
       bind_email_or_phone: "이메일/핸드폰 입력",
       to_deposit_tips: "인출은 원하는 액수의 최소 충전을 완료하고, 인출 기능을 활성화합니다",
-      to_deposit: "코인을 충전하다"
+      to_deposit: "코인을 충전하다",
+      address_remark: "地址备注",
+      address_remark_tag: "添加地址备注，如钱包、交易所地址信息",
     },
     address: {
       address: "주소"
