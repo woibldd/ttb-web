@@ -1,13 +1,13 @@
 <template>
   <div class="ix-pagination-container">
     <div
-      class="prev-page pa-btn "
-      @click="prev"
-      v-if="page > 1">{{ $t('last_page') }}</div>
-    <div
-      class="next-page pa-btn ml-20"
+      class="next-page pa-btn ml-20  mr-20"
       @click="next"
       v-if="!isEnd">{{ $t('next_page') }}</div>
+    <div
+      class="prev-page pa-btn  mr-20"
+      @click="prev"
+      v-if="page > 1">{{ $t('last_page') }}</div>
   </div>
 </template>
 <script>
