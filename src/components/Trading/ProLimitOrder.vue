@@ -373,14 +373,13 @@ export default {
     sell_worth () {
       this.calcAmount('sell')
     },
-    // currencyAvailable: {
-    //   async handler (val) {
-    //     console.log('valvalvalvalvalvalvalvalvalvalvalval')
-    //     this.buy_percent = 0
-    //     this.sell_percent = 0
-    //   },
-    //   immediate: true
-    // }
+    currencyAvailable: {
+      async handler (val) { 
+        this.buy_percent = 0
+        this.sell_percent = 0
+      },
+      immediate: true
+    }
   },
   methods: {
     clear () {
@@ -408,6 +407,7 @@ export default {
           this.buy_worth = ''
           return
         }
+        this.buy_percent = this.buy_amount
         this.buy_worth = this.$big(this.buy_amount).mul(this.buy_price).toString()
       } else if (type === 'sell') {
         if (!this.sell_amount || !this.sell_price) {

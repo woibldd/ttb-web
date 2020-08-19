@@ -318,24 +318,24 @@ export default {
     }, 
     handleSocketData (res) { 
       const key = res.topic && res.topic.split('@')[0] 
-      this.mapHandlerSocket[key] && this.mapHandlerSocket[key](res.data)
+      this.mapHandlerSocket[key] && this.mapHandlerSocket[key](res)
     },  
     handleHeart(data) {  
       if (this.socket) {
         this.socket.heartCheck.start()
       }
     }, 
-    handleOrderbook(data) { 
-      if (topic.indexOf(this.state.pro.pair) > -1) {
-        this.delegateData = data
+    handleOrderbook(res) { 
+      if (res.topic.indexOf(this.state.pro.pair) > -1) {
+        this.delegateData = res.data
       }
     },
     handleTickers (data) { 
       // console.log('handleTickers') 
     },
-    handleDealSoket(data) { 
-      if (topic.indexOf(this.state.pro.pair) > -1) {
-        this.dealData = data
+    handleDealSoket(res) { 
+      if (res.topic.indexOf(this.state.pro.pair) > -1) {
+        this.dealData = res.data
       } 
     }, 
     subMarket() {    
