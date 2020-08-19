@@ -690,7 +690,7 @@ export default {
         this.myCoinInfoList = res.data
       })
     },
-    getPhoneVerifyCode() {
+    getPhoneVerifyCode(){
       const param = {
         region: this.state.userInfo.region,
         phone: this.contact_phone
@@ -698,7 +698,7 @@ export default {
       let res = service.getVerifyCode(param, 'phone') 
       return res
     },
-    getEmailVerifyCode () { 
+    getEmailVerifyCode() { 
       const param = { 
         email: this.contact_email
       }

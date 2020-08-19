@@ -11,6 +11,7 @@
       <el-row :gutter="20"> 
         <el-col :span="4">
           <el-select
+            filterable 
             id="contractType"
             class="opetion"
             v-model="myfilter.symbol"
