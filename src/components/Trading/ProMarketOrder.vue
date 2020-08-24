@@ -308,13 +308,13 @@ export default {
     setBuyVolumn (ratio) {
       this.buy_amount = this.$big(this.currency.available)
         .mul(ratio)
-        .round(this.pairInfo.amount_scale)
+        .round(this.pairInfo.amount_scale, this.C.ROUND_DOWN)
         .toString()
     },
     setSellVolumn (ratio) {
       this.sell_amount = this.$big(this.product.available)
         .mul(ratio)
-        .round(this.pairInfo.amount_scale)
+        .round(this.pairInfo.amount_scale, this.C.ROUND_DOWN)
         .toString()
     },
     setInputStatus (input, status) {

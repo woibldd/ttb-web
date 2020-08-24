@@ -408,13 +408,13 @@ export default {
           return
         }
         // this.buy_percent = this.buy_amount
-        this.buy_worth = this.$big(this.buy_amount).mul(this.buy_price).toString()
+        this.buy_worth = this.$big(this.buy_amount).mul(this.buy_price, this.C.ROUND_DOWN).toString()
       } else if (type === 'sell') {
         if (!this.sell_amount || !this.sell_price) {
           this.sell_worth = ''
           return
         }
-        this.sell_worth = this.$big(this.sell_amount).mul(this.sell_price).toString()
+        this.sell_worth = this.$big(this.sell_amount).mul(this.sell_price, this.C.ROUND_DOWN).toString()
       }
     },
     calcAmount (type) {
@@ -426,7 +426,7 @@ export default {
         if (this.$big(this.buy_price).lte(0)) {
           return
         }
-        this.buy_amount = this.$big(this.buy_worth).div(this.buy_price).round(this.pairInfo.amount_scale).toString()
+        this.buy_amount = this.$big(this.buy_worth).div(this.buy_price).round(this.pairInfo.amount_scale, this.C.ROUND_DOWN).toString()
       } else {
         if (!this.sell_worth || !this.sell_price || !this.pairInfo) {
           this.sell_amount = ''
@@ -435,7 +435,7 @@ export default {
         if (this.$big(this.sell_price).lte(0)) {
           return
         }
-        this.sell_amount = this.$big(this.sell_worth).div(this.sell_price).round(this.pairInfo.amount_scale).toString()
+        this.sell_amount = this.$big(this.sell_worth).div(this.sell_price).round(this.pairInfo.amount_scale, this.C.ROUND_DOWN).toString()
       }
     },
     set ({price, amount, dontOveride, side}) {
