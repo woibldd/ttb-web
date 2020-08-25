@@ -442,7 +442,7 @@ export default {
   value_low: "최소주문총량%{num}",
   value_high: "최고주문총량%{num}",
   amount_over: "잔액부족",
-  hide_others: "仅显示 %{pair}",
+  hide_others: "이것만 선명 %{pair}",
   next_page: "다음 페이지",
   last_page: "이전 페이지",
   commission: "커미션",
