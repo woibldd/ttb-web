@@ -379,6 +379,7 @@
                     style="font-size:12px"
                     href="/fund/my/contractMix/index"
                     type="primary">{{ (activeBalance||{}).available_balance||0| bigRound(8) }} {{ (activeBalance||{}).currency }}</el-link>
+ 
                 </div>
                 <!-- <div>
                   <el-checkbox
@@ -1015,7 +1016,7 @@ export default {
         return item
       })
     },
-    activeBalance () { 
+    activeBalance () {  
       const found = this.balanceList.find(item => this.activeProduct.name === item.name && item.side === +this.activeTypesKey) || {}
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.activeLever = found && found.leverage   
@@ -1208,8 +1209,7 @@ export default {
         }
       }
     },
-    handleDealSoket (data, topic) { 
-      console.log(this.newBargainListData)
+    handleDealSoket (data, topic) {  
       if (topic.indexOf(this.activeProduct.currency) > 0) {
         const last = data[data.length - 1]
         this.newBargainListData.unshift(last)
@@ -1233,8 +1233,7 @@ export default {
         ${this.$t('amount')}【${this.activeAcountAndPriceArr[0]}】
       `
     },
-    handleDisabledBtn (side) {
-      // console.log('handleDisabledBtn')
+    handleDisabledBtn (side) { 
       let isRule = true
       if (this.activeTypesKey === '2') {
         isRule = this.costObj[`${side}Amount`] >= +(this.activeAcountAndPriceArr[0] || 0)
@@ -1284,16 +1283,16 @@ export default {
         }
       })
     },
-    handleBalanceList () {
-      // this.balanceList = null
-      // console.log('handleBalanceList')
+    handleBalanceList () {  
       return this.mapHandlers.shipping().then(res => {
         if (!res.code) {
           // this.balanceList =
           let blist = res.data.map(item => {
             let curProduct = this.mapProduct[item.name] // amount, price, multiplier, rate
+            if (!curProduct) return item
+
             item.value = !+item.holding ? 0 : calcMixValueByAmountAndPrice(item.holding, item.price, curProduct.multiplier, item.rate) // bigDiv([item.holding, item.price], 8)
-            item.price = this.bigRound(item.price, this.activeProduct['price_scale'])
+            // item.price = this.bigRound(item.price, (this.activeProduct || {})['price_scale'] || 2)
             item._leverage = item.leverage === '0' ? this.$t('contract_cal_full') : item.leverage
             // if (this.mapProduct && curProduct.MIX && +item.holding > 0) {
 
@@ -1321,12 +1320,12 @@ export default {
                 return { unrealized, roe, unrealizedM, roeM }
               }
             }
+            item.isEffective = true
             // item._symbol = item.symbol
             // item.symbol = this.$tR(`mapTabs.FUTURE_${item.symbol}`)
             return item
-          })
-          // console.log({blist})
-          this.balanceList = blist
+          }) 
+          this.balanceList = blist.filter(x => x.isEffective === true)
           return Promise.resolve()
         } else if (res.code !== 401) {
           this.$message.error(res)
@@ -1334,14 +1333,12 @@ export default {
       })
     },
     handleTickers (data) {
-      // data.reduce((prev, curr) => {
-      //   // console.log({prev, curr})
+      // data.reduce((prev, curr) => { 
       //   const pairArr = curr.pair.split('_')
       //   const found = prev.find(item => item.symbol === curr.pair || item.name === pairArr[1])
       //   found && this.$set(found, pairArr[0], curr)
       //   return prev
-      // }, this.products)
-      // console.log('handleTickers')
+      // }, this.products) 
       if (!this.products) return
       data.map(market => {
         const pairArr = market.pair.split('_') 
@@ -1512,8 +1509,7 @@ export default {
         this.totalItems = this.totalItems || list.length
         if (this.historyPage > 1 && Array.isArray(this.tableList)) {
           this.tableList = this.tableList.concat([], list)
-        } else {
-          // console.log(res.data)
+        } else { 
           this.tableList = list
         }
       }
