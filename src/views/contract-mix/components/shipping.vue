@@ -89,9 +89,13 @@
               </span>
               <span v-else-if="key==='markPrice'">
                 <span v-if="item.product">
-                  {{ (item.product.MARKET || {}).current | bigRound(item.price_scale) }}
+                  {{ (item.product.MARKET || {}).current | bigRound(item.product.price_scale || 2) }}
                 </span>
               </span>
+              <span v-else-if="key==='price'"> 
+                  {{ item[key] | bigRound(item.product.price_scale) }} 
+              </span>
+
               <span v-else> 
                 {{ key === 'markPrice'? (item.product.MARKET || {}).current :key === 'liq_price'?bigRound(item[key],2):item[key] }}
               </span>
@@ -111,17 +115,14 @@
               </span>
               <span
                 class="unrealized"
-                v-else-if="key==='unrealized'">
+                v-else-if="key==='unrealized'"> 
                 <span
                   class="lastPrice">
                   <span :class="item['funUnrealized'](item)['unrealized'] > 0 ? 'text-success' : 'text-danger'">
                     {{ item['funUnrealized'](item)['unrealized'] |bigRound(8) }}  {{ item.currency }}
                     ({{ item['funUnrealized'](item)['roe'] |bigRound(2) }}%)
                   </span>
-                  <br>
-                  <!-- <span>
-                    ≈ {{ translateByRate(item['funUnrealized'](item)['unrealized'])|bigRound(2) }} USDT
-                  </span> -->
+                  <br> 
                 </span>
                 <span
                   class="marketPrice">
@@ -129,10 +130,7 @@
                     {{ item['funUnrealized'](item)['unrealizedM'] | bigRound(8) }}  {{ item.currency }}
                     ({{ item['funUnrealized'](item)['roeM'] |bigRound(2) }}%)
                   </span>
-                  <br>
-                  <!-- <span>
-                    ≈ {{ translateByRate(item['funUnrealized'](item)['unrealizedM'])|bigRound(2) }} USDT
-                  </span> -->
+                  <br> 
                 </span>
               </span>
               <span
@@ -147,7 +145,7 @@
               </span>
               <span v-else-if="key==='value'">
                 <span>
-                  {{ item[key]| toBig().abs().round(8) }} {{ item.currency }}
+                  {{  $big(item[key] || 0).abs().round(8) }} {{ item.currency }}
                 </span>
                 <br>
                 <!-- <span>
@@ -206,13 +204,15 @@
               @focus="e=>e.currentTarget.select()"
               @input="e=>input = e.target.value">
           </div>
-          <div
+          <!-- <div
             class="el-button el-button--small bd-primary"
-            @click="closeStorehouse(item)">{{ $t('contract_close_limit') }}</div>
-          <div
+            @click="closeStorehouse(item)">{{ $t('contract_close_limit') }}</div> -->
+          <!-- <div
             class="el-button el-button--small bd-primary"
             style="margin-left:0"
-            @click="closeStorehouse(item,true)">{{ $t('contract_close_market') }}</div>
+            @click="closeStorehouse(item,true)">{{ $t('contract_close_market') }}</div> -->
+          <el-button size="small" style="margin-left:0" type="primary" @click="closeStorehouse(item)">{{ $t('contract_close_limit') }}</el-button>
+          <el-button size="small" style="margin-left:0" type="primary" @click="closeStorehouse(item,true)">{{ $t('contract_close_market') }}</el-button>
         </div>
         <div
           v-else
@@ -240,7 +240,7 @@
         </div> -->
       </div>
 
-    </div>
+    </div> 
     <span
       v-if="dataList && dataList.length === 0"
       class="el-table__empty-text">{{ $t('el.table.emptyText') }}</span>
@@ -390,8 +390,12 @@ export default {
       const price = isMarket ? '最优' : this.input || this.markData[this.activeProduct.currency]
       const amount = Math.abs(item.holding)
       const currency = item.currency
-      const isOk = await this.confirm(`${option}${this.$t('contract_close_tips1', {price, amount, currency})}<br>${this.$t('contract_close_tips2')}`)
-
+      const isOk = await this.$confirm(`${option}${this.$t('contract_close_tips1', {price, amount, currency})}<br>${this.$t('contract_close_tips2')}`,
+        this.$t('contract_action_open_short'), {
+          dangerouslyUseHTMLString: true
+        }
+      )
+      console.log(isOk)
       const orderPrice = isMarket ? 0 : this.input || this.markData[this.activeProduct.currency]
 
       // const isOk = await this.confirm(`<span class="text-primary">卖出</span>在${isMarket ? '最优' : this.input || this.markData[item.currency]}价格${item.holding}张${item.currency}合约在执行时，将平掉你的整个仓位`, isMarket ? '市价平仓' : '限价平仓')
@@ -406,7 +410,7 @@ export default {
         this.loadingHouse = false
         this.$emit('change')
         if (!res.code) {
-          this.$message.success(this.$t('handleSuccess'))
+          this.$message.success(this.$t('tj_cg'))
         } else {
           this.$message.error(res.data)
         }
