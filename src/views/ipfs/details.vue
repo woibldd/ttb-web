@@ -137,6 +137,14 @@ export default {
         this.$router.push({name:'login'})
         return
       } 
+      if (!(this.amount || 0)) {
+        this.$message({
+              type: 'warning',
+              message: `请输入正确购买数量！`
+            })
+        return
+      }
+
       const isok = await this.$confirm(`您确认用${this.$big(this.amount || 0).times(this.current.price || 0) }${this.current.currency}购买${this.amount}（T）算力？`, {
         confirmButtonText: this.$t('confirm'),
         cancelButtonText: this.$t('cancel'),

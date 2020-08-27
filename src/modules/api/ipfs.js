@@ -15,9 +15,7 @@ export default {
   }, 
   async getPowerBalanceByPair(params) { 
 
-    const result = await this.getPowerBalanceList()
-    // let resp = []
-    console.log('getPowerBalanceByPairgetPowerBalanceByPairgetPowerBalanceByPair')
+    const result = await this.getPowerBalanceList() 
     if (!result.code) {
       const list = result.data
       const balance = list ? list.filter(l => params.currency === l.currency)[0] || {} : {
