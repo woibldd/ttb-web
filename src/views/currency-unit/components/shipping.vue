@@ -415,9 +415,7 @@ export default {
       return toBig(this.currencyRates[currency]['USD']).times(value)
     },
     async closeStorehouse (item, isMarket) {
-      this.loadingHouse = true
-      // "contract_close_tips1": "在%{price}价格%{amount}张%{currency}合约。",
-      // "contract_close_tips2": "在执行时，将平掉你的整个仓位。",
+      this.loadingHouse = true 
       const side = item.holding > 0 ? `<span class="text-danger">${this.$t('order_side_sell')}</span>` : `<span class="text-success">${this.$t('order_side_buy')}</span>`
       const price = isMarket ? '最优' : this.input || this.markData[item.currency]
       const amount = Math.abs(item.holding)
