@@ -204,15 +204,15 @@
               @focus="e=>e.currentTarget.select()"
               @input="e=>input = e.target.value">
           </div>
-          <!-- <div
+          <div
             class="el-button el-button--small bd-primary"
-            @click="closeStorehouse(item)">{{ $t('contract_close_limit') }}</div> -->
-          <!-- <div
+            @click="closeStorehouse(item)">{{ $t('contract_close_limit') }}</div>
+          <div
             class="el-button el-button--small bd-primary"
             style="margin-left:0"
-            @click="closeStorehouse(item,true)">{{ $t('contract_close_market') }}</div> -->
-          <el-button size="small" style="margin-left:0" type="primary" @click="closeStorehouse(item)">{{ $t('contract_close_limit') }}</el-button>
-          <el-button size="small" style="margin-left:0" type="primary" @click="closeStorehouse(item,true)">{{ $t('contract_close_market') }}</el-button>
+            @click="closeStorehouse(item,true)">{{ $t('contract_close_market') }}</div>
+          <!-- <el-button size="small" style="margin-left:0" type="primary" @click="closeStorehouse(item)" plain>{{ $t('contract_close_limit') }}</el-button>
+          <el-button size="small" style="margin-left:0" type="primary" @click="closeStorehouse(item,true)" plain>{{ $t('contract_close_market') }}</el-button> -->
         </div>
         <div
           v-else
@@ -249,6 +249,7 @@
 <script>
 import { bigDiv, bigTimes, calcProfit, toBig, bigRound } from '@/utils/handleNum'
 import { getRates, closeOrder, cancelOrder, modifyOrder, setTransferMargin, submitOrder } from '@/modules/api/contractMix'
+import utils from '@/modules/utils'
 export default {
   name: 'Shipping',
   props: {
@@ -390,12 +391,13 @@ export default {
       const price = isMarket ? '最优' : this.input || this.markData[this.activeProduct.currency]
       const amount = Math.abs(item.holding)
       const currency = item.currency
-      const isOk = await this.$confirm(`${option}${this.$t('contract_close_tips1', {price, amount, currency})}<br>${this.$t('contract_close_tips2')}`,
-        this.$t('contract_action_open_short'), {
-          dangerouslyUseHTMLString: true
+      const isOk = await utils.confirm(this, {
+          title:this.$t('contract_action_open_short'),
+          content: `${option}${this.$t('contract_close_tips1', {price, amount, currency})}<br>${this.$t('contract_close_tips2')}`,
+          type: 'warning',
+          dangerouslyUseHTMLString: true,
         }
       )
-      console.log(isOk)
       const orderPrice = isMarket ? 0 : this.input || this.markData[this.activeProduct.currency]
 
       // const isOk = await this.confirm(`<span class="text-primary">卖出</span>在${isMarket ? '最优' : this.input || this.markData[item.currency]}价格${item.holding}张${item.currency}合约在执行时，将平掉你的整个仓位`, isMarket ? '市价平仓' : '限价平仓')

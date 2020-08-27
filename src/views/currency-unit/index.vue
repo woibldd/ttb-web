@@ -1079,19 +1079,14 @@ export default {
       })
     },
     
-    handleBalanceList () {
-      // this.balanceList = null
+    handleBalanceList () { 
       return this.mapHandlers.shipping().then(res => {
         if (!res.code) {
           this.balanceList = res.data.map(item => {
             let curProduct = this.mapProduct[item.name]
             item.value = !+item.holding ? 0 : bigDiv([item.holding, item.price], 8)
             // item.price = this.bigRound(item.price, this.activeProduct['price_scale'])
-            item._leverage = item.leverage === '0' ? this.$t('contract_cal_full') : item.leverage 
-            // console.log('handleBalanceListhandleBalanceListhandleBalanceList')
-            // if (this.mapProduct && curProduct.UNIT && +item.holding > 0) {
-
-            // } 
+            item._leverage = item.leverage === '0' ? this.$t('contract_cal_full') : item.leverage  
             item.funUnrealized = (row) => {
               if (!this.mapProduct || !curProduct.UNIT || !row.holding || !row.price) {
                 return '0'
@@ -1180,44 +1175,8 @@ export default {
     handleWidthBg (amount, max) {
       return +bigDiv([amount, max]) * 100 + '%'
     },
-    async handleAmountObj () { 
-      // utils.log('handleAmountObj 1111')
-      if (!this.state.userInfo) return
-      // utils.log('handleAmountObj 2222')
-      // clearTimeout(this._timer)
-      // return new Promise(resolve => {
-      //   this._timer = setTimeout(async () => {
-      //     await this.handleBalanceList()
-      //     const res = await getAllAmount()  
-      //     if (!res.code) {
-      //       const { holding_amount: shipped, active_amount: curEntrust, active_triggers_amount: lossEntrust, active_orders_amount: historyEntrust, orders_amount: bargain } =res.data
-      //       const data = this.amountObj && JSON.parse(JSON.stringify(this.amountObj))
-      //       const obj = {
-      //         shipping: [this.calcBalanceList.length, data && data.shipping[0] !== this.calcBalanceList.length],
-      //         shipped: [shipped, false],
-      //         curEntrust: [curEntrust, data && data.curEntrust[0] !== curEntrust],
-      //         lossEntrust: [lossEntrust, data && data.lossEntrust[0] !== lossEntrust],
-      //         historyEntrust: [historyEntrust, data && data.historyEntrust[0] !== historyEntrust],
-      //         bargain: [bargain, data && data.bargain[0] !== bargain]
-      //       }
-      //       obj[this.activeTableTabKey][1] = false
-      //       this.amountObj = obj
-      //     } else {
-      //       const obj = {
-      //         shipping: [0,0],
-      //         shipped: [0,0],
-      //         curEntrust: [0,0],
-      //         lossEntrust: [0,0],
-      //         historyEntrust: [0,0],
-      //         bargain: [0,0]
-      //       }
-      //       this.amountObj = obj
-      //     } 
-      //     this.handleTableTabClick(this.activeTableTabKey) 
-      //     this.handleEntrustList()
-      //     resolve()
-      //   }, 100)
-      // })
+    async handleAmountObj () {  
+      if (!this.state.userInfo) return 
       await this.handleBalanceList()
         const res = await getAllAmount()  
         if (!res.code) {

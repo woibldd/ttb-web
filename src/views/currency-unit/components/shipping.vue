@@ -281,6 +281,7 @@
 <script>
 import { bigDiv, bigTimes, calcProfit, toBig } from '@/utils/handleNum'
 import { getRates, closeStorehouse, cancelOrder, setModify, setTransferMargin, submitOrder } from '@/modules/api/currencyUnit'
+import utils from '@/modules/utils'
 export default {
   name: 'Shipping',
   props: {
@@ -417,11 +418,17 @@ export default {
       this.loadingHouse = true
       // "contract_close_tips1": "在%{price}价格%{amount}张%{currency}合约。",
       // "contract_close_tips2": "在执行时，将平掉你的整个仓位。",
-      const side = item.holding > 0 ? `<span class="text-danger">卖出</span>` : `<span class="text-success">买入</span>`
+      const side = item.holding > 0 ? `<span class="text-danger">${this.$t('order_side_sell')}</span>` : `<span class="text-success">${this.$t('order_side_buy')}</span>`
       const price = isMarket ? '最优' : this.input || this.markData[item.currency]
       const amount = Math.abs(item.holding)
       const currency = item.currency
-      const isOk = await this.confirm(`${side}${this.$t('contract_close_tips1', {price, amount, currency})}<br>${this.$t('contract_close_tips2')}`)
+      const isOk = await utils.confirm(this, {
+          title:this.$t('contract_action_open_short'),
+          content: `${side}${this.$t('contract_close_tips1', {price, amount, currency})}<br>${this.$t('contract_close_tips2')}`,
+          type: 'warning',
+          dangerouslyUseHTMLString: true,
+        })
+ 
 
       // const isOk = await this.confirm(`<span class="text-primary">卖出</span>在${isMarket ? '最优' : this.input || this.markData[item.currency]}价格${item.holding}张${item.currency}合约在执行时，将平掉你的整个仓位`, isMarket ? '市价平仓' : '限价平仓')
       if (!isOk) {
@@ -433,20 +440,10 @@ export default {
       closeStorehouse(params).then(res => {
         this.loadingHouse = false
         this.$emit('change')
-        this.$message.success(this.$t('handleSuccess'))
+        this.$message.success(this.$t('tj_cg'))
       }).catch(res => {
         this.loadingHouse = false
-      })
-      // if (this.visibleChecked) {
-      //   this.disabled = true
-      // }
-      // const params = { name: item.name, user_id: item.user_id, price: isMarket ? '0' : this.input }
-      // closeStorehouse(params).then(res => {
-      //   this.$emit('change')
-      //   this.$message.success(this.$t('handleSuccess'))
-      // })
-      // this.visible = false
-      // this.visible1 = false
+      }) 
     },
     cancelOrder (item) {
       const { user_id, future_close_id, name } = item
