@@ -1,8 +1,6 @@
 <template>
   <div class="ipfs-container">
-    <div class="banner" :class="['banner', state.locale ]" >
-      <!-- <h1>filecoin算力</h1>
-      <h2>火热进行中</h2> -->
+    <div class="banner" :class="['banner', state.locale ]" >  
     </div>
     <div class="content"
       v-loading="loading">

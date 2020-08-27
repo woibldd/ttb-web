@@ -55,7 +55,8 @@ export default {
             console.log("Error:"+err);
           }
           if (restored) {
-            data = JSON.parse(restored) 
+            data = JSON.parse(restored)  
+            // console.log(data)
             hub.$emit('message', data) 
           }
         })
@@ -64,6 +65,7 @@ export default {
         utils.logE(e)
       } 
       if (data) { 
+        // console.log(data)
         hub.$emit('message', data)
       }
     } 

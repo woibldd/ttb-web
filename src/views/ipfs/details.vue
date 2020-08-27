@@ -60,13 +60,19 @@
           </div>
         </div>
         <div class="input mb-23 relative">
-          <el-input-number  style="width:100%;" v-model="amount" @change="handleChange" :step="1"  label="T"> 
+          <el-input-number  style="width:100%;" 
+          v-model="amount" 
+            @change="handleChange" 
+            :step="1" 
+            :min="0" 
+            :max="+current.maxLimit" 
+            :precision="0"
+            step-strictly label="T"> 
           </el-input-number>
           <span class="append">T</span>
         </div>
         <div class="mb-19">
           <span>{{$tR('buy_value')}}  {{`${ $big(amount || 0).times(current.price || 0)} ${current.currency}`}} </span>
-
         </div>
         <div class="mb-16" style="display: flex;justify-content: space-between;"> 
           <span> {{ `${$t('available_balance')} ${balance.available || ''} ${balance.currency || ''}` }}</span>
@@ -74,13 +80,9 @@
             <a href="/fund/transfer">{{$t('account_exchange')}}</a>
           </span>
         </div>
-        <!-- <div class="mb-16">
-          <el-checkbox v-model="ready">我已阅读并同意：</el-checkbox>
-          <label>算力合同</label>
-        </div> -->
         <div class="mt-30">
           <el-button  :type="current.state === 1 ? 'primary' : 'info'" :disabled="current.state!==1" style="width: 100%;" @click="handleBuyClick">{{$tR('buy_now')}}</el-button>
-        </div> 
+        </div>  
       </div>
     </div>
     <div class="content">
@@ -172,8 +174,10 @@ export default {
       }
     }
   },
+  mounted() {
+    this.init() 
+  },
   created() {
-    this.init()
   }
 }
 </script>
@@ -242,10 +246,10 @@ export default {
         position: relative;
         .append {
           position: absolute;
-          top: 13px;
-          right: 132px;
+          top: 8px;
+          right: 122px;
           color: #999;
-          font-size: 12px;
+          font-size: 15px;
         }
       }
     }
