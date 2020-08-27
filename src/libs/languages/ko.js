@@ -3193,6 +3193,7 @@ export default {
     },
     setLever: '레버리지 개수', 
     tip: '당신의 작업은 이미 보유하고 있는 지렛대 배수와 위탁 주문의 지레 배수를 수정하여 <i class="text-danger">{leverage}</i>배, 위탁 보증금은<i class="text-danger">{margin_position}</i>로 조절하고, 위탁 보증금은 <i class="text-danger">{margin_delegation}</i>으로 조정합니다',
+    tip_mix: '당신의 작업은 이미 보유하고 있는 지렛대 배수와 위탁 주문의 지레 배수를 수정하여 <i class="text-danger">{leverage}</i>배, 위탁 보증금은<i class="text-danger">{margin_position}</i>로 조절하고, 위탁 보증금은 <i class="text-danger">{margin_delegation}</i>으로 조정합니다',
     leverageTip: '确定将杠杆倍数调节至{leverage}吗',
     allstorehouse: '포지션'
   },

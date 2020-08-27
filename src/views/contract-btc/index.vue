@@ -547,7 +547,13 @@ export default {
       }) 
     },
     handleDealSoket (data) {  
-      this.dealList = data
+      this.dealList = data 
+      let side = this.dealList ? this.dealList[0].side : "buy" 
+      if (side == "buy") {
+        this.state.ct.lastSide = 1
+      } else if (side == "sell") {
+        this.state.ct.lastSide = 2
+      }
     },
     handleAmountObj(data) {
       console.log('handleAmountObj')

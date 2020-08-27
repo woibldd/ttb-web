@@ -2,7 +2,7 @@
   <div
     v-loading="false"
     class="hold-content"
-    element-loading-background="rgba(0, 0, 0, 0.3)">
+    element-loading-background="rgba(0, 0, 0, 0.3)"> 
     <div class="content-container-hold text-info">
       <div>{{ hander }}</div>
       <div
@@ -270,19 +270,25 @@ export default {
       this.activeTag = tag
       this.leverageLoading = true
       this.leverageLoading = false
-      this.leveragePreview(tag).then(res => {
-        if (+this.leverageTipObj.margin_position === 0) {
+      this.leveragePreview(tag).then(res => {   
+        if  (!this.leverageTipObj ||  (+this.leverageTipObj[0].margin_position === 0 && +this.leverageTipObj[1].margin_position === 0)) {
           this.confirmClick()
           return
-        }
-
+        } 
         if (this.$root.modelVisible) {
           this.popoverVisible = true
           return
         }
-        this.$confirm(this.$tR('tip', this.leverageTipObj), '修改杠杆', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
+        
+        let content = ''
+        this.leverageTipObj.map(h => {
+          if (h.side) {
+            h.side = this.$t(`mix_side.${h.side}`)
+          }
+          content += this.$tR('tip_mix', h) + '<br>'
+        })
+
+        this.$confirm(content, this.$t('contract_confirm_change'), { 
           type: 'warning',
           dangerouslyUseHTMLString: true,
           lockScroll: false

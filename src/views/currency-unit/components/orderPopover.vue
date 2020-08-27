@@ -260,9 +260,7 @@ export default {
           this.popoverVisible = true
           return
         }
-        this.$confirm(this.$tR('tip', this.leverageTipObj), '修改杠杆', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
+        this.$confirm(this.$tR('tip', this.leverageTipObj), this.$t('contract_confirm_change'), { 
           type: 'warning',
           dangerouslyUseHTMLString: true,
           lockScroll: false

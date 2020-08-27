@@ -70,10 +70,11 @@
           <span
             class="delta"
             :class="{'color-up': state.ct.lastSide === 1, 'color-down': state.ct.lastSide === 2 }">{{ lastPrice }}
-            <i
+            <!-- <i
               class="iconfont arrow"
               :class="{'arrow-up': state.ct.lastSide === 1, 'arrow-down': state.ct.lastSide === 2}"
-            />
+            /> -->
+            <svg-icon :icon-class="state.ct.lastSide === 1?'lv':'hong'" />
           </span>
           <div class="left-part" v-if="!hasBtnReturnDish">
             <span class="last-price">

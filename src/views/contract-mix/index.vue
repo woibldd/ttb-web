@@ -1848,7 +1848,7 @@ export default {
           padding-right: 62px;
         }
         .activeBtn {
-          box-shadow: 0 2px 0px 0px #fff;
+          box-shadow: 0 2px 0px 0px #fff !important;
         }
         & > span {
           position: absolute;

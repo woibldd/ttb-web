@@ -2,35 +2,14 @@
   <div class="orderaction-container relative">
     <div class="ix-pannel">
       <div class="ix-header relative">
-        {{ $t('contract_block_orderaction') }}
-        <!-- <a 
-          class="primary-text pull-right btn"
-          @click="transfer"
-        > -->
+        {{ $t('contract_block_orderaction') }} 
         <a
           class="primary-text pull-right btn"
           @click="$router.push({path:'/fund/transfer', query:{key:'2.funds-transfer'}})"
         >
           <icon name="exchange" />
           {{ $t('account_transfer_come_on') }}
-        </a>
-        <!-- <div class="ibm pull-right arrow-down pointer">
-          {{ currentTimes }}<icon
-            class="arrow ml-5"
-            name="arrow-down-yellow"/>
-          <div class="dropdown-sub-menu">
-            <ul class="dropdown-list pt-10 pb-10">
-              <li
-                class="dropdown-item pl-24 pr-24"
-                :class="{active: time === currentTimes}"
-                :key="time"
-                @click="setTime(time)"
-                v-for="time in leverTimes">
-                {{ time }}
-              </li>
-            </ul>
-          </div>
-        </div>-->
+        </a> 
       </div>
       <div class="ix-pannel-body flex">
         <div class="row flex-lr button-group">
@@ -952,7 +931,10 @@ export default {
       }
     };
   },
-  computed: {
+  computed: { 
+    lastSide () { 
+      return this.state.ct.lastSide
+    },
     userSetting() {
       if (this.state.ct.userSetting) {
         return this.state.ct.userSetting;

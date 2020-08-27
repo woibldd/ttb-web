@@ -3306,6 +3306,7 @@ export default {
     },
     setLever: 'Leverage', 
     tip: 'There will be modifications in your operations with the position leverage multiplier and the commissioned order leverage multiplier altering by the value of <i class="text-danger">{leverage}</i> times; position deposit altering by the value of <i class="text-danger">{margin_position}</i>; commissioned deposit position altering by the value of <i class="text-danger">{margin_delegation}</i>',
+    tip_mix: 'There will be modifications in your operations with the {side} position leverage multiplier and the commissioned order leverage multiplier altering by the value of <i class="text-danger">{leverage}</i> times; position deposit altering by the value of <i class="text-danger">{margin_position}</i>; commissioned deposit position altering by the value of <i class="text-danger">{margin_delegation}</i>',
     leverageTip: '确定将杠杆倍数调节至{leverage}吗',
     allstorehouse: 'Cross'
   },

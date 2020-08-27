@@ -316,16 +316,16 @@
                 <p style="border-left:1px solid #333">{{ (activeBalance||{}).unrealized || 0 }} <br> {{ $tR('rateOReturn') }}</p>
               </div>
               <orderPopover v-if="activeProduct.UNIT"
-                            v-model="activeLever"
-                            only-lever
-                            flex="dir:top"
-                            :loading="buyBtnLoading"
-                            :form-value-obj="formValueObj"
-                            :active-product="activeProduct"
-                            :data="mapLever"
-                            type="success"
-                            @change="setLeverage"
-                            @command="handleCommandOrder" />
+                v-model="activeLever"
+                only-lever
+                flex="dir:top"
+                :loading="buyBtnLoading"
+                :form-value-obj="formValueObj"
+                :active-product="activeProduct"
+                :data="mapLever"
+                type="success"
+                @change="setLeverage"
+                @command="handleCommandOrder" />
               <div flex="main:justify"
                    style="padding:8px">
                 <p>{{ $tR('quota') }}</p>
@@ -1571,7 +1571,7 @@ export default {
           padding-right: 62px;
         }
         .activeBtn {
-          box-shadow: 0 2px 0px 0px #fff;
+          box-shadow: 0 2px 0px 0px #fff !important;
         }
         & > span {
           position: absolute;
