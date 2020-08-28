@@ -377,7 +377,6 @@ export default {
     this.$nextTick(this.fixPosition)
   },
   created() {
-    console.log(this.$route.path)
     this.fetchRegion()
     let $this = this
     setTimeout(function () {
