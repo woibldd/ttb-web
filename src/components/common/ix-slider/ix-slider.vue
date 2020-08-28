@@ -600,7 +600,6 @@ export default {
       }
 
       let resetVal = this.limitValue(this.val)
-      console.log('max')
       this.setValue(resetVal)
       this.refresh()
     },
@@ -609,7 +608,6 @@ export default {
         return this.printError('The minimum value can not be greater than the maximum value.')
       }
 
-      console.log('min')
       let resetVal = this.limitValue(this.val)
       this.setValue(resetVal)
       this.refresh()
@@ -821,7 +819,6 @@ export default {
       this.setPosition()
     },
     setValueOnPos (pos, isDrag) {
-      console.log('setValueOnPos', {pos, isDrag})
       let range = this.isRange ? this.limit[this.currentSlider] : this.limit
       let valueRange = this.isRange ? this.valueLimit[this.currentSlider] : this.valueLimit
       if (pos >= range[0] && pos <= range[1]) {
@@ -1078,7 +1075,6 @@ export default {
       if (this.isComponentExists) {
         this.getStaticData()
         
-        console.log('mounted')
         this.setValue(this.limitValue(this.value), true, this.startAnimation ? this.speed : 0)
         this.bindEvents()
 
