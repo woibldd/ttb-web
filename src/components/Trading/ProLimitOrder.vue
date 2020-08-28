@@ -356,22 +356,28 @@ export default {
     },
     buy_amount (newval) {
       this.calcWorth('buy')
+      this.calcProportion('buy')
     },
     buy_price (val) {
       // console.log('buy_price_' + val)
       this.calcWorth('buy')
+      this.calcProportion('buy')
     },
     buy_worth () {
       this.calcAmount('buy')
+      this.calcProportion('buy')
     },
     sell_amount () {
       this.calcWorth('sell')
+      this.calcProportion('sell')
     },
     sell_price () {
       this.calcWorth('sell')
+      this.calcProportion('sell')
     },
     sell_worth () {
       this.calcAmount('sell')
+      this.calcProportion('sell')
     },
     // currencyAvailable: {
     //   async handler (val) { 
@@ -438,6 +444,36 @@ export default {
         this.sell_amount = this.$big(this.sell_worth).div(this.sell_price).round(this.pairInfo.amount_scale, this.C.ROUND_DOWN).toString()
       }
     },
+    calcProportion (type) {  
+      if (type === 'buy') {
+        if (!this.buy_worth || !this.buy_price || !this.pairInfo) { 
+          this.$refs.sliderBuy.setValue(0)
+          return
+        }  
+        if (this.buy_price && this.buy_amount && this.buy_price !== '0') {
+          let ratio = this.$big(this.buy_amount)
+            .times(this.buy_price) 
+            .div(this.currency.available)
+            .times(100)
+            .round(2, this.C.ROUND_DOWN) 
+          this.$refs.sliderBuy.setValue(+ratio, true, 0.5, true)
+        }
+      } else {
+        if (!this.sell_worth || !this.sell_price || !this.pairInfo) {
+          this.$refs.sliderSell.setValue(0)
+          return
+        }
+        if (this.sell_price && this.sell_price && this.sell_price !== '0') {
+          let ratio = this.$big(this.sell_amount)
+            .times(this.sell_price)
+            .div(this.product.available)
+            .times(100)
+            .round(2, this.C.ROUND_DOWN)
+          // this.postOnly = true
+          this.$refs.sliderSell.setValue(+ratio, true, 0.5, true)
+        }
+      }
+    },
     set ({price, amount, dontOveride, side}) {
       if (!side) {
         this.set({
@@ -467,20 +503,20 @@ export default {
         }
       }
     },
-    setBuyVolumn (ratio) {
+    setBuyVolumn (ratio) { 
       if (!this.currency) return
-      if (this.buy_price && this.buy_price !== '0') {
+      if (this.buy_price && this.buy_price !== '0') {  
         this.buy_amount = this.$big(this.currency.available)
           .mul(ratio)
           .div(this.buy_price)
           .round(this.pairInfo.amount_scale, this.C.ROUND_DOWN)
-          .toString()
+          .toString() 
       } else {
         this.setInputStatus('buy_price', 'error')
       }
     },
-    setSellVolumn (ratio) {
-      if (!this.product) return
+    setSellVolumn (ratio) { 
+      if (!this.product) return 
       this.sell_amount = this.$big(this.product.available)
         .mul(ratio)
         .round(this.pairInfo.amount_scale, this.C.ROUND_DOWN)
@@ -614,14 +650,14 @@ export default {
         this.checkOrder(res.data.order_id)
       }
     },
-    onSliderDragEnd (value, dir) {
+    onSliderDragEnd (value, dir) { 
+      
       value = value / 100.0
       if (dir === 'buy') {
         this.setBuyVolumn(value)
       } else {
         this.setSellVolumn(value)
-      }
-      // console.log(value)
+      } 
     }, 
     refreshBalance () {  
       this.$refs.sliderBuy.setValue(0)

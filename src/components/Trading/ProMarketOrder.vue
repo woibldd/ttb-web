@@ -285,20 +285,56 @@ export default {
       },
       immediate: true
     }, 
+    buy_amount() {
+      this.calcProportion ('buy')
+    },
+    sell_amount() {
+      this.calcProportion ('sell')
+    }
   },
   methods: {
+    calcProportion (type) {   
+      if (type === 'buy') {
+        const $ask = this.$big(this.state.pro.ask || 0)
+        if (!$ask || !this.pairInfo) { 
+          this.$refs.sliderBuy.setValue(0)
+          return
+        }  
+        if (this.buy_amount) {
+          let ratio = this.$big(this.buy_amount) 
+            .div(this.currency.available)
+            .times(100)
+            .round(2, this.C.ROUND_DOWN)
+          this.$refs.sliderBuy.setValue(+ratio, true, 0.5, true) 
+        }
+      } else {
+        const $bid = this.$big(this.state.pro.bid || 0)
+        if (!$bid || !this.pairInfo) {
+          this.$refs.sliderSell.setValue(0)
+          return
+        }
+        if (this.sell_amount) {
+          let ratio = this.$big(this.sell_amount)
+            .times($bid)
+            .div(this.product.available)
+            .times(100)
+            .round(2, this.C.ROUND_DOWN)
+          // this.postOnly = true
+          this.$refs.sliderSell.setValue(+ratio, true, 0.5, true)
+        }
+      }
+    }, 
     clear () {
       this.buy_amount = ''
       this.buy_price = ''
       this.sell_amount = ''
-      this.sell_price = ''
-      
+      this.sell_price = '' 
     },
     set ({price, amount, side}) {
       if (!side) {
         side = 'BUY'
       }
-      if (price) {
+      if (price) {  
         this.setValues('price', side, this.$big(price).toString())
       }
       if (amount) {

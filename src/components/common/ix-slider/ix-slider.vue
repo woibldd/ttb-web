@@ -591,8 +591,7 @@ export default {
     }
   },
   watch: {
-    value (val) {
-      console.log('090999999999999999999999999999999999999999999999999999999999')
+    value (val) { 
       this.flag || this.setValue(val, true)
     },
     max (val) {
@@ -822,6 +821,7 @@ export default {
       this.setPosition()
     },
     setValueOnPos (pos, isDrag) {
+      console.log('setValueOnPos', {pos, isDrag})
       let range = this.isRange ? this.limit[this.currentSlider] : this.limit
       let valueRange = this.isRange ? this.valueLimit[this.currentSlider] : this.valueLimit
       if (pos >= range[0] && pos <= range[1]) {
@@ -886,8 +886,7 @@ export default {
     getIndexByValue (value) {
       return Math.round((value - this.minimum) * this.multiple) / (this.spacing * this.multiple)
     },
-    setIndex (val) {
-      console.log('setIndex')
+    setIndex (val) { 
       if (Array.isArray(val) && this.isRange) {
         let value
         if (this.data) {
@@ -904,15 +903,13 @@ export default {
         this.setCurrentValue(val)
       }
     },
-    setValue (val, noCb, speed) {
-      console.log('setValue')
+    setValue (val, noCb, speed, noInput) {  
       if (this.isDiff(this.val, val)) {
         let resetVal = this.limitValue(val)
         this.val = this.isRange ? resetVal.concat() : resetVal
         this.computedFixedValue()
-        this.syncValue(noCb)
-      }
-
+        this.syncValue(noCb, noInput)
+      } 
       this.$nextTick(() => this.setPosition(speed))
     },
     computedFixedValue () {
@@ -1003,9 +1000,9 @@ export default {
         return inRange(val)
       }
     },
-    syncValue (noCb) {
+    syncValue (noCb, noInput) {
       let val = this.isRange ? this.val.concat() : this.val
-      this.$emit('input', val)
+      noInput || this.$emit('input', val)
       this.keydownFlag && this.$emit('on-keypress', val)
       noCb || this.$emit('callback', val)
     },
