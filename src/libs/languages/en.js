@@ -2683,15 +2683,15 @@ export default {
           },
           3: {
             label: 'BTC Contract',
-            path: '/fund/my/contract/index'
+            path: '/fund/my/contract'
           },
           4: {
             label: 'Currency Standard Contract',
-            path: '/fund/my/contractUnit/index'
+            path: '/fund/my/contractUnit'
           },
           5: {
             label: 'Gold Standard Contract',
-            path: '/fund/my/contractMix/index'
+            path: '/fund/my/contractMix'
           },
           6: {
             label: 'Speed Contract',

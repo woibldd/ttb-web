@@ -2502,15 +2502,15 @@ export default {
           },
           3: {
             label: 'BTC合约账户',
-            path: '/fund/my/contract/index'
+            path: '/fund/my/contract'
           },
           4: {
             label: '币本位账户',
-            path: '/fund/my/contractUnit/index'
+            path: '/fund/my/contractUnit'
           },
           5: {
             label: '金本位账户',
-            path: '/fund/my/contractMix/index'
+            path: '/fund/my/contractMix'
           },
           6: {
             label: '极速合约账户',

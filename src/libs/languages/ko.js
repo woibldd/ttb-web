@@ -2554,15 +2554,15 @@ export default {
           },
           3: {
             label: 'BTC 계정 잔액',
-            path: '/fund/my/contract/index'
+            path: '/fund/my/contract'
           },
           4: {
             label: '코인 베이스 계약 계좌',
-            path: '/fund/my/contractUnit/index'
+            path: '/fund/my/contractUnit'
           },
           5: {
             label: '금본위 계약 계좌',
-            path: '/fund/my/contractMix/index'
+            path: '/fund/my/contractMix'
           },
           6: {
             label: '전속계좌',

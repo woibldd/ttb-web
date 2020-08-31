@@ -22,9 +22,9 @@
           v-model="myfilter.symbol"
           @change="filter"
           :placeholder="$t('please_choose')"
-          size="mini"
+          size="mini" 
           value-key="currency">
-          <el-option :label="$t('allin')" value="" />
+          <el-option :label="langDict.currency[0]" value="" />
           <el-option
             v-for="(item, idx) in pairList"
             :key="idx"
@@ -34,16 +34,15 @@
       </el-col> 
       <el-col :span="4"> 
         <el-select
-          class="opetion"
-          v-model="myfilter.side" 
-          size="mini"
-          @change="filter"
-          value-key="currency"> 
-          <el-option v-for="item in dict.side"
-            :key="item.value"
-            :label="$t(item.text)" 
-            :value="item.value"/> 
-        </el-select>
+            class="opetion"
+            v-model="myfilter.side" 
+            size="mini"
+            @change="filter">  
+            <el-option v-for="(item, key) in langDict.mix_side"
+              :key="key"
+              :label="item" 
+              :value="key"/>
+          </el-select>
       </el-col> 
       <el-col :span="4"> 
         <el-select
@@ -51,24 +50,22 @@
           class="opetion"
           v-model="myfilter.state"  
           @change="filter"
-          size="mini"
-          value-key="currency">
-          <el-option v-for="item in dict.state"
-            :key="item.value"
-            :label="$t(item.text)" 
-            :value="item.value"/> 
+          size="mini">
+           <el-option v-for="(item, key) in langDict.delegate_state"
+              :key="key"
+              :label="item" 
+              :value="key"/>
         </el-select> 
         <el-select
           v-else
           class="opetion"
           v-model="myfilter.state"  
           @change="filter"
-          size="mini"
-          value-key="currency">
-          <el-option v-for="item in dict.trade_state"
-            :key="item.value"
-            :label="$t(item.text)" 
-            :value="item.value"/> 
+          size="mini">
+          <el-option v-for="(item, key) in langDict.state"
+              :key="key"
+              :label="item" 
+              :value="key"/>
         </el-select>
       </el-col>
       <el-col :span="8">
@@ -165,7 +162,7 @@
             <span v-else
               :class="[{'font-color-buy': item.side === 1 || item.side === 4},
                        {'font-color-sell': item.side === 2 || item.side === 3}]"
-              v-html="$t(`contractMix.side.${item.side}`)"/>
+              v-html="$t(`mix_side.${item.side}`)"/>
           </td>
           <td class="table__td">{{ (item.amount || 0) }}</td> 
           <td class="table__td">{{ (item.price || 0) | fixed(valueScale) }}</td>
@@ -248,7 +245,7 @@
             <span
               :class="[{'font-color-buy': item.side === 1 || item.side === 4},
                        {'font-color-sell': item.side === 2 || item.side === 3}]"
-              v-html="$t(`contractMix.side.${item.side}`)"/>
+              v-html="$t(`mix_side.${item.side}`)"/>
           </td>
           <td class="table__td">{{ item.amount }}</td>
           <td class="table__td">{{ $big(item.price || 0) | fixed(2) }}</td>
@@ -296,9 +293,9 @@ export default {
       selectPair: 'EOSUSD',
       state,
       myfilter: {
-        pair: '',
-        side: 0,
-        state: 0,
+        symbol: '',
+        side: '0',
+        state: '0',
         daterange: '',  
       },
       dict: {
@@ -336,6 +333,9 @@ export default {
     },
     valueScale () {
       return 4
+    },
+    langDict () {
+      return this.allLangData.fund.dict
     }
   },
   filters: {
@@ -373,10 +373,11 @@ export default {
     }, 
     handleTabChange(name) {
       this.tabName = name
-      this.myfilter.state = 0
+      this.myfilter.state = '0'
       this.filter()
     },
     filter () { 
+      if (!this.myfilter.daterange) this.myfilter.daterange = []
       const params = {
         name: this.myfilter.symbol, 
         begin_time: this.myfilter.daterange[0],

@@ -11,15 +11,15 @@
       <el-row :gutter="20"> 
         <el-col :span="4">
           <el-select
-            filterable 
             id="contractType"
             class="opetion"
             v-model="myfilter.symbol"
             @change="filter"
             :placeholder="$t('please_choose')"
             size="mini"
+            :filterable="true"
             value-key="currency">
-            <el-option :label="$t('allin')" value="" />
+            <el-option :label="langDict.currency[0]" value="" />
             <el-option
               v-for="(item, idx) in pairList"
               :key="idx"
@@ -32,12 +32,11 @@
             class="opetion"
             v-model="myfilter.side" 
             size="mini"
-            @change="filter"
-            value-key="currency"> 
-            <el-option v-for="item in dict.side"
-              :key="item.value"
-              :label="$t(item.text)" 
-              :value="item.value"/> 
+            @change="filter"> 
+             <el-option v-for="(item, key) in langDict.side"
+              :key="key"
+              :label="item" 
+              :value="key"/>
           </el-select>
         </el-col>  
         <el-col :span="8">
@@ -72,7 +71,7 @@
             class="row-tr"
             v-for="(row,index) in tableData"
             :key="index">
-            <td>{{ row.create_time }}</td>
+            <td>{{ row.create_time | date }}</td>
             <td>{{ row.symbol | pairfix }}</td>
             <td><span v-html="processSide(row.side)"/></td>
             <td>{{ row.type == 1 ? $t('operate_limit') : $t('operate_market') }}</td>
@@ -121,10 +120,10 @@ export default {
       },
       recordTab: 'executed', 
       myfilter: {
-        pair: 'BTC_USD',
-        side: 0,
-        state: 0,
-        daterange: '',  
+        symbol: '',
+        side: '0',
+        state: '0',
+        daterange: [],  
       },
       dict: {
         side: [ 
@@ -162,9 +161,11 @@ export default {
       let value = ''
       switch (side) {
         case 1:
+        case 'BUY':
           value = `<span class="font-color-buy"> ${this.$t('order_side_buy')}</span>`
           break
         case 2:
+        case 'SELL':
           value = `<span class="font-color-sell">${this.$t('order_side_sell')}</span>`
           break
         default:
@@ -185,6 +186,7 @@ export default {
     },
     getList () { 
       this.isLoading = true
+      if (!this.myfilter.daterange) this.myfilter.daterange = [] 
       const params = {
         symbol: this.myfilter.symbol, 
         begin_time: this.myfilter.daterange[0],
@@ -226,6 +228,9 @@ export default {
   computed: {
     isLastPage () {  
       return this.totalItems < this.params.size
+    },
+    langDict () {
+      return this.allLangData.fund.dict
     }, 
   },
   async created () {

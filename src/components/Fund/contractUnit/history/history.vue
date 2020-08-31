@@ -25,7 +25,7 @@
             :placeholder="$t('please_choose')"
             size="mini"
             value-key="currency">
-            <el-option :label="$t('allin')" value="" />
+            <el-option :label="langDict.currency[0]" value="" />
             <el-option
               v-for="(item, idx) in pairList"
               :key="idx"
@@ -38,12 +38,11 @@
             class="opetion"
             v-model="myfilter.side" 
             size="mini"
-            @change="pairChange"
-            value-key="currency"> 
-            <el-option v-for="item in dict.side"
-              :key="item.value"
-              :label="$t(item.text) " 
-              :value="item.value"/> 
+            @change="pairChange">  
+            <el-option v-for="(item, key) in langDict.side"
+              :key="key"
+              :label="item" 
+              :value="key"/>
           </el-select>
         </el-col> 
         <el-col :span="4"> 
@@ -52,24 +51,22 @@
             class="opetion"
             v-model="myfilter.state"  
             @change="pairChange"
-            size="mini"
-            value-key="currency">
-            <el-option v-for="item in dict.state"
-              :key="item.value"
-              :label="$t(item.text) " 
-              :value="item.value"/> 
+            size="mini"> 
+            <el-option v-for="(item, key) in langDict.delegate_state"
+              :key="key"
+              :label="item" 
+              :value="key"/>
           </el-select> 
           <el-select
             v-else
             class="opetion"
             v-model="myfilter.state"  
             @change="pairChange"
-            size="mini"
-            value-key="currency">
-            <el-option v-for="item in dict.trade_state"
-              :key="item.value"
-              :label="$t(item.text) " 
-              :value="item.value"/> 
+            size="mini"> 
+            <el-option v-for="(item, key) in langDict.state"
+              :key="key"
+              :label="item" 
+              :value="key"/>
           </el-select>
         </el-col>
         <el-col :span="8">
@@ -287,9 +284,9 @@ export default {
       selectPair: "BTCUSD",
       state,
       myfilter: {
-        pair: 'ETHUSD',
-        side: 0,
-        state: 0,
+        symbol: '',
+        side: '0',
+        state: '0',
         daterange: '',  
       },
       dict: {
@@ -326,6 +323,9 @@ export default {
     valueScale () {
       return 4
     },
+    langDict () {
+      return this.allLangData.fund.dict
+    }
   },
   filters:{
     smailNumber(val){  //小数点
@@ -358,10 +358,11 @@ export default {
     }, 
     handleTabChange(name) {
       this.tabName = name
-      this.myfilter.state = 0
+      this.myfilter.state = '0'
       this.filter()
     },
-    filter () {
+    filter () { 
+      if (!this.myfilter.daterange) this.myfilter.daterange = []
       const params = {
         name: this.myfilter.symbol, 
         begin_time: this.myfilter.daterange[0],
@@ -385,7 +386,8 @@ export default {
     // 订单历史
     getOrderhistory (params) {
       this.isLoading = true 
-      service.getUnitOrderhistory(params).then(res => { 
+      service.getUnitOrderhistory(params).then(res => {
+        console.log(res.data.data, '订单历史')
         this.tableData = res.data.data
         this.totalItems = res.data.total
         // console.log(this.tableData, 'assign')
@@ -398,7 +400,8 @@ export default {
       this.isLoading = true 
       service.getUnitTradeHistory(params).then(res => {
         this.tableData = res.data.data
-        this.totalItems = res.data.total 
+        this.totalItems = res.data.total
+        console.log(this.tableData, 'trace')
       }).finally(res => {
         this.isLoading = false
       })
