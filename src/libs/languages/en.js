@@ -2591,16 +2591,50 @@ export default {
       amount:"Qty"
     },
     opetate: {
-      1: "转入",
-      2: "转出",
-      3: "当日清算",
-      4: "购买",
-      5: "出售",
-      6: "理财冻结",
-      7: "理财本息结算",
+      1: "Transfer In",
+      2: "Transfer Out", 
+      3: "Settlement ",
+      4: "Buy",
+      5: "Sell",
+      6: "Financial Management Freeze",
+      7: "Financial management principal and interest settlement",
       8: "",
-      9: "币本位当日清算",
-      10: "金本位当日清算"
+      9: "The currency standard is settled on the same day",
+      10: "Gold Standard Liquidation on the Same Day"
+    },
+    dict: {
+      side: {
+        0: "Buy&Sell",
+        1: "Buy",
+        2: "Sell" 
+      }, 
+      mix_side: {
+        0: "Buy&Sell",
+        1: "Buy long",
+        2: "Sell short",
+        3: "Sell Long",
+        4: "Buy short"
+      },
+      delegate_state: {
+        0: 'All Orders', 
+        1: 'Unexecuted',
+        2: 'Limited partial termination',
+        3: 'All Filled',
+        4: 'Cancel All',
+        5: 'Cancelled success partially',
+        6: 'Market partial termination',
+        7: 'Market closing termination'
+      },
+      state: {
+        0: 'All Executed', 
+        1: 'Fill',
+        2: 'Liquidated Order',
+        3: 'Fee Rate',
+        4: 'ADL Deleverage'
+      },
+      currency: {
+        0: 'All Trading Pairs'
+      },
     },
     left: {
       1: {
