@@ -71,7 +71,10 @@
             class="row-tr"
             v-for="(row,index) in tableData"
             :key="index">
-            <td>{{ row.create_time | date }}</td>
+            <td>
+              <span v-if="recordTab==='executed'">{{ row.create_time }}</span>
+              <span v-else>{{ row.create_time | date }}</span> 
+            </td>
             <td>{{ row.symbol | pairfix }}</td>
             <td><span v-html="processSide(row.side)"/></td>
             <td>{{ row.type == 1 ? $t('operate_limit') : $t('operate_market') }}</td>
