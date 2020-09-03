@@ -15,10 +15,7 @@ export const profileRouter = [
       class: 'dark',
       mobileNav: isMobile
     },
-    redirect: 'profile/info',
-    // redirect: 'profile/ProfileInfo',
-    // redirect: 'profile/ProfileSafety',
-
+    redirect: 'profile/info', 
     // component: (isMobile && process.env.MODE === 'beta') ? MobileProfile : Profile
     component: () => import(/* webpackChunkName: "Profile" */ '@/pages/Profile'),
     children: [
