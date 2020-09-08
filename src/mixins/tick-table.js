@@ -87,9 +87,7 @@ export default {
         let arr =  _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1
             && pair.currency.indexOf(this.tabSelected) > -1 
-            && pair.type === 1
-            // && pair.name.toUpperCase().indexOf('GRC') < 0
-            // && pair.name.toUpperCase().indexOf('BTZ') < 0  
+            && pair.type === 1 
         }) 
         arr = _.sortBy(arr, ['rank'])
         return arr 

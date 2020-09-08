@@ -36,7 +36,6 @@
             </div> -->
           </div>
         </div>
-
         <div class="trade-top-right">
           <div class="ix-col-rb ix-height-rt flex-row">
             <!-- bids & asks -->
@@ -172,8 +171,7 @@ export default {
     '$route.params.pair': {
       async handler (pair = '', last) { 
         this.state.pro.lock = true
-        const match = pair.match(/^([A-Za-z0-9]*)_([A-Za-z0-9]*)$/)
-
+        const match = pair.match(/^([A-Za-z0-9]*)_([A-Za-z0-9]*)$/) 
         if (this.isLogin) {
           //默认可交易
           this.state.pro.isActivity = true
@@ -310,7 +308,8 @@ export default {
     },
     activeMpv() { 
       this.activityWalletSet('mpv_user')   
-    }, handleCloseSgpDialog() {
+    }, 
+    handleCloseSgpDialog() {
       this.showSgpDialog = false;
     },
     handleNeverShowSgpAgain() {

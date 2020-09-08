@@ -350,7 +350,7 @@ export default {
         const amount = this.$big(buy[1])
         buyTotal = buyTotal.plus(amount)
         // console.log(buy[1],maxBuyTotal)
-     bids.push({
+        bids.push({
           price: this.$big(buy[0]),
           amount: this.$big(buy[1]),
           deep: this.$big(buy[1]).times(100).round(4).toString(),
