@@ -231,27 +231,34 @@ export default {
       })
     },
     async submit () {
-      if (this.form.password_new === this.form.password_repeat) {
-        if (this.verify_phone || this.verify_email || this.verify_google) {
-          this.showModal = true
-        } else {
-          const verifyObj = this.verifyCode()
-          let params = {
-            old_password: this.form.password_orig,
-            new_password: this.form.password_new
-          }
-          params = Object.assign(verifyObj)
-          let result = await service.changePassword(params)
-          if (result && !result.code) {
-            this.toLogin()
+      this.$refs.form.validate(async (valid) => {
+        if (valid) {
+          if (this.form.password_new === this.form.password_repeat) {
+            if (this.verify_phone || this.verify_email || this.verify_google) {
+              this.showModal = true
+            } else {
+              const verifyObj = this.verifyCode()
+              let params = {
+                old_password: this.form.password_orig,
+                new_password: this.form.password_new
+              }
+              params = Object.assign(verifyObj)
+              let result = await service.changePassword(params)
+              if (result && !result.code) {
+                this.toLogin()
+              } else {
+                utils.alert(result.message)
+              }
+            }
           } else {
-            utils.alert(result.message)
-          }
+            console.log('error submit!!')
+            return false
+          } 
+        } else {
+          console.log('error submit!!');
+          return false; 
         }
-      } else {
-        console.log('error submit!!')
-        return false
-      }
+      })
     },
     hideModal () {
       this.showModal = false
