@@ -316,13 +316,13 @@
               @click="clickVerifyRow('EmailBind')"
               :class="{'done': email_or_phone_bound}">{{ email_or_phone_bound ? $t('fund.withdraw.done') : $t('fund.withdraw.to_bind') }}</span>
           </div>
-          <div class="layer__row mt-20">
+          <!-- <div class="layer__row mt-20">
             <span class="row__label">2. {{ $t('fund.withdraw.bind_google') }}</span>
             <span
               class="row__status"
               @click="clickVerifyRow('GoogleBind')"
               :class="{'done': google_bound}">{{ google_bound ? $t('fund.withdraw.done') : $t('fund.withdraw.to_bind') }}</span>
-          </div>
+          </div> -->
           <div class="layer__row mt-20">
             <span class="row__label">3.
               <span v-html="$t('complete_verified')"/>
@@ -486,7 +486,8 @@ export default {
       return this.state.userInfo && this.state.userInfo.deposit_state 
     },
     google_bound() {
-      return this.state.userInfo && this.state.userInfo.google_key_bound
+      return true
+      // return this.state.userInfo && this.state.userInfo.google_key_bound
     }, 
     disableBtn () {
       //return !this.email_bound || !this.phone_bound || !this.all_bound
