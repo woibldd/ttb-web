@@ -28,12 +28,7 @@ export default {
           const arrData = newValue[key].map(item => {
             total += +item.values[1]
             return [+item.values[0], total]
-          }).sort((a, b) => a[0] - b[0])
-          // if (index === 1) {
-          //   arrData.push([arrData[arrData.length - 1][0], 0])
-          // } else if (index === 0) {
-          //   arrData.splice(0, 0, [arrData[0][0], 0])
-          // }
+          }).sort((a, b) => a[0] - b[0]) 
           this.chart.series[index].setData(arrData, false, false, true)
         })
         this.chart.redraw()
@@ -70,8 +65,7 @@ export default {
         },
         legend: {
           enabled: false
-        },
-
+        }, 
         xAxis: {
           minPadding: 0,
           maxPadding: 0,
