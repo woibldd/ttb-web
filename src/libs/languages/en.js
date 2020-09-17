@@ -3634,7 +3634,7 @@ export default {
     }
   },
   mining_power: {
-    cloud_mine: "BA Cloud Mine",
+    cloud_mine: "Cloud Miner",
     calc_account: "Mining Power Account",
     calc_balance: "Balance of computing power",
     account_details: "Account Details",
