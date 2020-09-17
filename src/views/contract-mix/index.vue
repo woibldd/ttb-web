@@ -808,9 +808,9 @@ export default {
         7: 1 - (this.activeProduct.MIX.current - getLiqPrice) / this.activeProduct.MIX.current
       }
     },
-    userData () {
-      return this.$store.state.userData
-    },
+    // userData () {
+    //   return this.$store.state.userData
+    // },
     mapDishInfo () {
       return this.langData.mapDishInfo
     },
@@ -1120,8 +1120,8 @@ export default {
       this.socket.$on('open', () => { 
         that.socket.heartCheck.start() // 发送一次心跳  
         that.socket.socket.send('{"op":"subscribepub","args":["market@ticker"]}')
-        if (this.userData) {
-          that.socket.socket.send(`{"op":"loginWeb","args":["${this.userData.session_id}"]}`)
+        if (this.state.userInfo) {
+          that.socket.socket.send(`{"op":"loginWeb","args":["${this.state.userInfo.session_id}"]}`)
           that.socket.socket.send('{"op":"subscribe","args":["orderfills"]}')
           that.socket.socket.send('{"op":"subscribe","args":["position"]}')
           that.socket.socket.send('{"op":"subscribe","args":["trigger"]}')
@@ -1561,7 +1561,7 @@ export default {
         }
       }
       const data = {
-        user_id: this.userData.id,
+        user_id: this.state.userInfo.id,
         currency: this.tradingType,
         amount: this.activeAcountAndPriceArr[0],
         price: this.activeAcountAndPriceArr[1] || this.activeProduct.MIX.current,

@@ -33,7 +33,7 @@
           </div> 
         </div>
         <div > 
-          <p class="footer_explain_txt">{{ $t('home.footer.component_address') }}</p>
+          <!-- <p class="footer_explain_txt">{{ $t('home.footer.component_address') }}</p> -->
           <!-- <p class="footer_ewm_ltxt">{{ $t('footer_contract_jb') }}</p> -->
         </div>
         <!-- <div
