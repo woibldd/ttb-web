@@ -2,6 +2,7 @@
 import api from './../request'
 import { quotaApi } from './../request'
 import config from '@/libs/config'
+import utils from '@/modules/utils'
 const cache = {}
  
 export async function fetch(url, body, options, method = 'post') {
@@ -27,6 +28,10 @@ export async function fetch(url, body, options, method = 'post') {
     if (data.code == 200) {
       data.code = 0
     }
+    
+    // if (data.status == 200) {
+    //   data.status = 0
+    // }
     if (data.code && !data.message) {
       data.message = 'Error ' + data.code
     }
