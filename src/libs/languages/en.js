@@ -2969,7 +2969,9 @@ export default {
         'transaction-price ': 'Executed Price',
         'trading-volume': 'Executed Qty',
         'time': 'Time'
-      }
+      },
+      contract_index_price_tips: "The price of the underlying asset. This is the price of the %{product_name} contract. Click here to view the historical price。",
+      contract_mark_price_tips: '<a>Mark Price</a><br/>This is the current marked price, click for more information。。',
     },
     mapFormContent: {
       mapBtns: {

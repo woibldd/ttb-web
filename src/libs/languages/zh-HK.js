@@ -2787,7 +2787,9 @@ export default {
         'transaction-price ': '成交價',
         'trading-volume': '成交量',
         'time': '時間'
-      }
+      },
+      contract_mark_price_tips: '<a>標記價格</a><br/>這是現在的標記價格，點此瞭解更多。',
+      contract_index_price_tips: '<a>指數價格</a><br/>標的資產的價格這是%{product_name}合約的價格，點此查看歷史價格。'
     },
     mapFormContent: {
       mapBtns: {
