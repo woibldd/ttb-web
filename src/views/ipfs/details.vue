@@ -61,7 +61,7 @@
         </div>
         <div class="input mb-23 relative">
           <el-input-number  style="width:100%;" 
-          v-model="amount" 
+            v-model="amount" 
             @change="handleChange" 
             :step="1" 
             :min="0" 
