@@ -14,7 +14,7 @@
       >
         <template slot="header" slot-scope="{ column }">
           <el-tooltip :disabled="false" :content="column.label" placement="top" effect="light">
-            <p class="text-nowrap">{{ column.label }}</p>
+            <span class="text-nowrap">{{ column.label }}</span>
           </el-tooltip>
         </template>
         <template slot-scope="scope">
