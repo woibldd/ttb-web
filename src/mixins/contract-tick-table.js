@@ -120,9 +120,7 @@ export default {
         find.vol = item.volume_24h
         find.tick = item
       }
-
-      console.log('patch',item)
-      
+ 
       let ct = state.ct
       if (item.pair === this.state.ct.pair) {  
         state.ct.pairTick = item 
