@@ -2834,7 +2834,9 @@ export default {
         'transaction-price ': '방향',
         'trading-volume': '체결가',
         'time': '시간'
-      }
+      },
+      contract_index_price_tips: "<a>지수 가격</a><br/>표시 자산 가격 이것은 %{product_name} 계약 가격 입니다. 과거 가격을 참고 하세요。",
+      contract_mark_price_tips: "<a>표시 가격</a><br/>이것은 현재의 표시 가격 입니다, 이것을 더 알아보십시오。",
     },
     mapFormContent: {
       mapBtns: {

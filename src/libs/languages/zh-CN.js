@@ -2849,7 +2849,9 @@ export default {
         'transaction-price ': '成交价',
         'trading-volume': '成交量',
         'time': '时间'
-      }
+      },
+      contract_mark_price_tips: '<a>标记价格</a><br/>这是现在的标记价格，点此了解更多。',
+      contract_index_price_tips: '<a>指数价格</a><br/>标的资产的价格这是 %{product_name} 合约的价格，点此查看历史价格。'
     },
     mapFormContent: {
       mapBtns: {
