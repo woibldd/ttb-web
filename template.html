@@ -42,14 +42,24 @@
       gtag('config', '<%= htmlWebpackPlugin.options.theme.googleAnalyticsId %>');
     </script>
   <% } %> -->
-  <script>
+  <!-- <script>
     window.zESettings = {
       webWidget: {
         position: { horizontal: 'right', vertical: 'bottom' }
       }
     };
     </script>
-    <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=ec643172-9ba0-4ced-8dac-9beeb83ab4a0" ></script>
+    <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=ec643172-9ba0-4ced-8dac-9beeb83ab4a0" ></script> -->
+    
+  <script>
+    function initFreshChat() {
+      window.fcWidget.init({
+        token: "dca95e14-41ac-4dd4-a4e5-00b4be5caf77",
+        host: "https://wchat.freshchat.com"
+      });
+    }
+    function initialize(i,t){var e;i.getElementById(t)?initFreshChat():((e=i.createElement("script")).id=t,e.async=!0,e.src="https://wchat.freshchat.com/js/widget.js",e.onload=initFreshChat,i.head.appendChild(e))}function initiateCall(){initialize(document,"freshchat-js-sdk")}window.addEventListener?window.addEventListener("load",initiateCall,!1):window.attachEvent("load",initiateCall,!1);
+  </script>
     <script type="text/javascript">window.grayline=false</script>
   <!-- 国内使用 滑块验证，如果主要客户是国外用户，需要替换以下地址-->
   <!-- <script type="text/javascript" async charset="utf-8" src="//g.alicdn.com/sd/ncpc/nc.js?t=2015052012"></script> -->
