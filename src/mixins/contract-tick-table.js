@@ -120,6 +120,8 @@ export default {
         find.vol = item.volume_24h
         find.tick = item
       }
+
+      console.log('patch',item)
       
       let ct = state.ct
       if (item.pair === this.state.ct.pair) {  
@@ -127,12 +129,11 @@ export default {
       }
 
       if (item.pair.indexOf('INDEX') > -1) {
-        if (item.pair.indexOf(state.ct.symbol) > -1) { 
+        if (item.pair === state.ct.pair.replace('FUTURE','INDEX')) { 
           state.ct.indexTick = {
             current: item.current
           }  
-        } 
-        //state.ct.indexTickList[item.pair.replace('INDEX_','')] =  item.current
+        }  
         if (!!ct.pairInfoList[item.pair.replace('INDEX','FUTURE')]) { 
           this.$set(ct.pairInfoList[item.pair.replace('INDEX','FUTURE')], 'indexPrice', item.current )
         } 
