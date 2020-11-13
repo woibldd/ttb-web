@@ -67,7 +67,7 @@
           <router-link :to="{name: 'trading'}">{{ $t('trading') }}</router-link>
           <a
             :href="aboutLink"
-            target="_blank">{{ $t('footer_about') }}</a>
+            target="_blank">{{ $t('footer_about') }}</a> 
           <a
             :href="requestLink"
             target="_blank">{{ $t('footer_request') }}</a>
@@ -225,12 +225,12 @@ export default {
       return this.state.theme.help[this.state.locale] || this.state.theme.help.en
     },
     requestLink() {
-      if (this.state.userInfo && this.state.theme.themeName === 'default') {
-        return process.env.BASE_API + '/ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
-      } else {
-        return this.state.theme.request[this.state.locale] || this.request.theme.help.en
-      }
-      // return this.state.theme.request[this.state.locale] || this.request.theme.help.en
+      // if (this.state.userInfo && this.state.theme.themeName === 'default') {
+      //   return process.env.BASE_API + '/ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.request[this.state.locale] || this.state.theme.request.en)
+      // } else {
+      //   return this.state.theme.request[this.state.locale] || this.request.theme.help.en
+      // }
+      return this.state.theme.request[this.state.locale] || this.request.theme.request.en
     },
     announcementLink() {
 

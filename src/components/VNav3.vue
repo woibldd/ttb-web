@@ -442,9 +442,8 @@ export default {
       //       this.state.theme.request[this.state.locale] ||
       //       this.request.theme.help.en
       //     )
-      //   }
-
-      this.state.theme.request[this.state.locale] || this.request.theme.help.en;
+      //   } 
+      return this.state.theme.request[this.state.locale] || this.request.theme.request.en 
     },
     announcementLink() {
       return (
