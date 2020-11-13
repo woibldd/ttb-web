@@ -59,10 +59,10 @@ module.exports = {
     'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/categories/360001229751'
   },
   request: {
-    en: 'https://ixxcustomer.zendesk.com/hc/en-us/requests/new',
-    ko: 'https://ixxcustomer.zendesk.com/hc/en-us/requests/new',
-    'zh-CN': 'https://ixxcustomer.zendesk.com/hc/zh-cn/requests/new',
-    'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/requests/new'
+    en: 'https://ixxsupport.freshdesk.com/support/tickets/new',
+    ko: 'https://ixxsupport.freshdesk.com/support/tickets/new',
+    'zh-CN': 'https://ixxsupport.freshdesk.com/support/tickets/new',
+    'zh-HK': 'https://ixxsupport.freshdesk.com/support/tickets/new'
   },
   activeRule: {
     en: 'https://ixxcustomer.zendesk.com/hc/en-us/articles/360015900832',
