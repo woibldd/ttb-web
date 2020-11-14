@@ -26,7 +26,7 @@ const service = {
   },
   getBanners(data = {}) {
     data.platform = data.platform || 1
-    return request('announcement/list', data)
+    return getCache('announcement', () => request('announcement/list', data), 1e3)
   },
   hasNewBanner() {
     return request('announcement/has_new')
