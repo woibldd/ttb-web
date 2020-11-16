@@ -10,11 +10,11 @@
       <div class="page-content">
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item :to="{ name: 'knowledgeBaseIndex' }">{{$t('footer_help')}}</el-breadcrumb-item>
-          <el-breadcrumb-item :to="item.to" v-for="(item, index) in breadcrumb" :key="index">{{$route.query[item.type] || item.txt}}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="item.to" v-for="(item, index) in breadcrumb" :key="index">{{item.txt}}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
     </div>
-    <router-view :key="$route.fullpath"></router-view>
+    <router-view :key="$route.fullpath" @paramsNav="paramsNav"></router-view>
   </div>
 </template>
 
@@ -23,32 +23,48 @@ export default {
   data() {
     let keyword = this.$route.query.keyword || '';
     return {
-      keyword
+      keyword,
+      breadcrumb: [],
+      breadcrumbData: {}
     };
   },
   computed: {
     lang() {
       return this.$t('knowledgeBase');
     },
-    breadcrumb() {
-      const json = {
-        // /knowledgeBase/details2?first=常见问题
-        helpDetails: [{type: 'first', to: ''}],
-        // /knowledgeBase/details2?first=常见问题&second=啊沙发沙发收到
-        helpDetails2: [
-          //{type: 'first', to: {name: 'helpDetails', query: {first: this.$route.query.first}}},
-          {type: 'first', to: ''},
-          {type: 'second', to: ''}
-        ],
-        searchResult: [{to: '', txt: this.lang.result.title}]
-      };
-
-      return json[this.$route.name];
+    locale() {
+      return this.$store.state.locale;
+    }
+  },
+  watch: {
+    locale() {
+      this.setBreadcrumb(this.breadcrumbData);
     }
   },
   methods: {
     search() {
       this.$router.push({name: 'searchResult', query: {keyword: this.keyword}});
+    },
+    paramsNav(nav) {
+      this.breadcrumbData = nav;
+      this.setBreadcrumb(this.breadcrumbData);
+    },
+    setBreadcrumb(data) {
+      const locale = this.locale == 'zh-CN' || this.locale == 'zh-HK';
+      switch(this.$route.name) {
+        case 'helpDetails':
+          this.breadcrumb = [{txt: locale ? data.parentNameCh : data.parentNameEn, to: ''}];
+          break;
+        case 'helpDetails2':
+          this.breadcrumb = [
+            {txt: locale ? data.parent_name_ch : data.parent_name_en, to: {name: 'helpDetails', query: {id: data.support_id}}},
+            {txt: locale ? data.support_name_ch : data.support_name_en, to: ''}
+          ];
+          break;
+        case 'searchResult':
+          this.breadcrumb = [{txt:  this.lang.result.title, to: ''}];
+          break;
+      }
     }
   }
 }
@@ -70,6 +86,7 @@ export default {
   .el-breadcrumb{height: 54px; line-height: 54px;}
   .el-breadcrumb__inner.is-link{color: #575757;}
   .el-breadcrumb__separator{color: #8c8c8c;}
+  .el-breadcrumb__item:nth-last-of-type(1){max-width: 50%; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;}
   
   .list-box{
     background: #fff; border-top: #efefef solid 1px; border-bottom: #efefef solid 1px;

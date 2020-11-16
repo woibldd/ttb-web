@@ -10,7 +10,11 @@
         <div class="title">{{second}}</div>
         <div class="box">
           <div class="item-box">
-            <router-link class="item" :to="{name: 'helpDetails2', query: {first, second, id: item.article_id}}" v-for="(item,index) in infor.list" :key="index">
+            <router-link
+              class="item"
+              :to="{name: 'helpDetails2', query: {id: item.article_id}}"
+              v-for="(item,index) in infor.list" :key="index"
+            >
               <span class="icons"></span>{{locale == 'zh-CN' ? item.name_ch : item.name_en}}
             </router-link>
           </div>
@@ -20,7 +24,7 @@
     </div>
   </template>
   <div v-else class="list-box">
-    <router-link class="link" :to="{name: 'helpDetails2', query: {first, second, id: item.article_id}}" v-for="(item, index) in infor.list" :key="index">
+    <router-link class="link" :to="{name: 'helpDetails2', query: {id: item.article_id}}" v-for="(item, index) in infor.list" :key="index">
       <span class="con">{{locale == 'zh-CN' ? item.name_ch : item.name_en}}</span>
       <i class="el-icon-arrow-right"></i>
     </router-link>
@@ -37,7 +41,7 @@ export default {
     return {
       site: process.env.SITE_ID, // 101
       total: 0,
-      currentPage: 1, size: 20,
+      currentPage: 1, size: 16,
       infor: {}
     };
   },
@@ -71,6 +75,7 @@ export default {
         this.infor = res.data.data;
         this.currentPage = res.data.page;
         this.total = res.data.total;
+        this.$emit('paramsNav', this.infor);
       }
     },
     changePage(index) {
@@ -95,7 +100,7 @@ export default {
   .box{margin-bottom: 45px;}
   .box-title{height: 16px; line-height: 16px; margin-bottom: 24px; font-size: 16px; color: $primary;}
   .item-box{
-    display: flex; flex-direction: column; flex-wrap: wrap; line-height: 36px; margin-bottom: 20px; font-size: 14px; overflow: hidden;
+    display: flex; flex-direction: column; flex-wrap: wrap; height: 288px; line-height: 36px; margin-bottom: 20px; font-size: 14px; overflow: hidden;
     .item{
       width: 50%; padding-left: 16px; color: #585858; transition: .5ms;
       &:hover{

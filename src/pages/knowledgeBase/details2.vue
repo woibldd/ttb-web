@@ -50,6 +50,7 @@ export default {
       const res = await http.get('/support/article/detail', {params});
       if (res.code == 200) {
         this.article = res.data;
+        this.$emit('paramsNav', this.article);
       }
     }
   }
