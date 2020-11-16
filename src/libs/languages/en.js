@@ -3749,4 +3749,16 @@ export default {
     price: '市价',
     closeOut: '平仓'
   },
+
+  // 知识库相关
+  knowledgeBase: {
+    searchTitle: 'Please enter your question', placeholder: 'Search',
+    index: {
+      problemTitle: 'FAQ', announcement: 'Announcement', articleTitle: 'Newest Article '
+    },
+    result: {
+      title: 'Search results', total: 'Total {total} results'
+    },
+    goHome: 'Return to home page'
+  }
 }

@@ -29,7 +29,7 @@
     </div>
     <v-footer
       v-if="footer === 'default'"
-      v-show="showFooter"
+      v-show="showFooter && $route.matched[0].name != 'knowledgeBase'"
       ref="footer"
       :fixed="fixed"/> 
     <v-notify-list/>

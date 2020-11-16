@@ -18,6 +18,7 @@ import BidTable from '@/pages/Bid/table.vue'
 import Superzis from '@/pages/Superzis/index.vue'
 import ByAmount from '@/pages/Superzis/sell.vue'
 import layout from '@/pages/layout/index'
+import knowledgeBase from './module/knowledgeBase'
 
 import _ from 'lodash'
 
@@ -185,6 +186,7 @@ export const routes = [
   ...fundRouter,
   ...otherRouter,
   ...ipfsRouter,
+  ...knowledgeBase,
   {
     path: '/',
     name: 'home',

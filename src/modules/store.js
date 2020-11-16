@@ -391,6 +391,7 @@ export const actions = {
       locale = 'en'
     }
 
+    store.commit('CHANGE_LANG', locale);
     utils.setCookie('lang', locale, 1000)
     state.locale = locale 
     actions.setZendeskLocale(locale) 

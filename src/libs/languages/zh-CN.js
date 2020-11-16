@@ -3656,4 +3656,16 @@ export default {
     price: '市价',
     closeOut: '平仓'
   },
+
+  // 知识库相关
+  knowledgeBase: {
+    searchTitle: '请输入您的问题', placeholder: '在这儿搜索',
+    index: {
+      problemTitle: '常见问题', announcement: '公告中心', articleTitle: '最新发布文章 '
+    },
+    result: {
+      title: '搜索结果', total: '共有{total}条结果'
+    },
+    goHome: '返回首页'
+  }
 }

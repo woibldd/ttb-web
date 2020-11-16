@@ -3633,4 +3633,16 @@ export default {
     price: '市价',
     closeOut: '平仓'
   },
+
+  // 知识库相关
+  knowledgeBase: {
+    searchTitle: '당신의 문제를 입력하세요', placeholder: '여기에 검색을 하세요',
+    index: {
+      problemTitle: '자주 묻는 문제', announcement: '공고중심', articleTitle: '문장을 최신에 발급하다 '
+    },
+    result: {
+      title: '수색결과', total: '모두{total}개 결과'
+    },
+    goHome: '홈 페이지로 돌아가기'
+  }
 }

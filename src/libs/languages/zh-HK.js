@@ -3597,4 +3597,15 @@ export default {
     closeOut: '平仓'
   },
 
+  // 知识库相关
+  knowledgeBase: {
+    searchTitle: '請輸入您的問題', placeholder: '在這兒搜索',
+    index: {
+      problemTitle: '常見問題', announcement: '公告中心', articleTitle: '最新發佈文章 '
+    },
+    result: {
+      title: '搜索結果', total: '共有{total}條結果'
+    },
+    goHome: '返回首頁'
+  }
 }
