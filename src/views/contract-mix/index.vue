@@ -1342,13 +1342,16 @@ export default {
       if (!this.products) return
       data.map(market => {
         const pairArr = market.pair.split('_') 
-        if (pairArr && pairArr.length) {
+        if (pairArr && pairArr.length) { 
           const found = this.products.find(item => item.symbol === market.pair || item.name === pairArr[1])
           if (found) {
             this.$set(found, pairArr[0], market)
+            if (market.pair.indexOf('INDEX') > -1 && found.name==='BTCUSDT') {
+              console.log(found, market)
+            }
           } 
         }
-      })
+      }) 
     }, 
     handleHeart(data) {  
       if (this.socket) {
