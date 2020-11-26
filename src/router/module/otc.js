@@ -13,9 +13,14 @@ export const otcRouter = [
     redirect: {name: 'quick'},
     children: [
       {
-        path: 'quick-trade',
+        path: 'quick',
         name: 'quick',
         component: () => import('@/views/otc-new/components/quick')
+      },
+      {
+        path: 'quick-offer',
+        name: 'quick-offer',
+        component: () => import('@/views/otc-new/components/quick-offer')
       },
       {
         path: 'trade',

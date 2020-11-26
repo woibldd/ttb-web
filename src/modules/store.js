@@ -122,7 +122,14 @@ export const state = {
     indexPrice: 0,
     bid: 0,
     ask: 0,
-    fee: '0'
+    fee: '0',
+    fiatMoney:null,
+    digitalMoney:null, 
+    fiatCurrencies: [],
+    digitalCurrencies: [],
+    quote_id: null,
+    valid_until: '',
+    vallet_id: 'ixx'
   },
 }
 

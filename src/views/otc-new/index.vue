@@ -47,10 +47,9 @@ export default {
     }
   }
   .otc-new-content { 
-    padding:90px;
-    margin: 0 auto;
-    width: 1200px;
-    background-color: #F9F9F9;
+    // margin: 0 auto;
+    // width: 1200px;
+    // background-color: #F9F9F9;
   }
 }
 </style>

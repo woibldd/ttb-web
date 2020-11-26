@@ -1338,7 +1338,7 @@ export default {
       //   const found = prev.find(item => item.symbol === curr.pair || item.name === pairArr[1])
       //   found && this.$set(found, pairArr[0], curr)
       //   return prev
-      // }, this.products) 
+      // }, this.products)
       if (!this.products) return
       data.map(market => {
         const pairArr = market.pair.split('_') 
@@ -1351,7 +1351,7 @@ export default {
             }
           } 
         }
-      }) 
+      })
     }, 
     handleHeart(data) {  
       if (this.socket) {
