@@ -10,9 +10,9 @@
         <div class="box">  
           <p 
             v-tooltip.bottom="{html: true, content: coinInfo.brief_info, classes: ['contract', 'big']}" 
-            :class="['issue-info-describe', {ellipsis: customInCurrency !== 'USDT' && customOutCurrency !=='USDT'}]">{{coinInfo.brief_info}}</p>
+            :class="['issue-info-describe', {ellipsis: customDigitalCurrency !== 'USDT' && customFiatCurrency !=='USDT'}]">{{coinInfo.brief_info}}</p>
           <div class="kline mt-20"> 
-            <div v-if="customInCurrency !== 'USDT' && customOutCurrency !=='USDT'" class="canvas">
+            <div v-if="customDigitalCurrency !== 'USDT' && customFiatCurrency !=='USDT'" class="canvas">
               <canvas ref="myCanvas" width="578" height="150"></canvas>
             </div>
           </div>
@@ -41,38 +41,102 @@
                  :class="['side', 'side-sell', {'side-active': side===2}]">出售</div>
           </div>
           <div class="trade-content"> 
-            <div>
-              <div>1 USDT价值约</div> 
-              <h4>6.89 CNY</h4>
-            </div>
-            <div class="mt-20">
-              <number-input  
-                :list="outCurrencyList"
-                :label="outInputText" 
-                @selectChange="handleOutCurrencyChange"
-                :selectValue="customOutCurrency"
-                v-model="outAmount"
-                :scale="4"/>
-            </div>
+            <!-- <div>
+              <div>1 USDT价值约</div>  
+              <h4>{{digitalPrice}} {{customFiatCurrency}}</h4>
+            </div>  -->
+            <div class="my-select pl-16 pr-16 mt-20">
+              <el-dropdown @command="handleCommandDigitalCurrency">
+                <div class="el-dropdown-link" flex="main:justify cross:center">
+                  <label>
+                    <span v-if="digitalCurrencies">
+                      <icon :name="`coin-${customDigitalCurrency}`" />
+                      {{customDigitalCurrency}} 
+                    </span>
+                    &nbsp;
+                  </label>
+                  <i class="el-icon-arrow-down el-icon--right"></i>
+                </div>
+                <el-dropdown-menu slot="dropdown" class="custom-dropdown">
+                  <el-dropdown-item 
+                      v-for="(item, index) in digitalCurrencies" 
+                      :command="index"
+                      :key="index">
+                    <icon :name="`coin-${item}`"/> {{item}} 
+                  </el-dropdown-item> 
+                </el-dropdown-menu>
+              </el-dropdown>
+            </div>  
             <div class="interlayer mt-5" flex="main:justify">
               <div class="l">&nbsp;</div>
-              <div v-if="+side===1" class="r">
+              <div class="r">
                 资金账户可用 {{available || '--'}} 
                 <router-link to="/fund/transfer">资金划转</router-link>
               </div>
             </div>
             <div class="mt-20">
               <number-input  
-                :list="inCurrencyList"
                 label="我将收到" 
-                v-model="inAmount"
-                @selectChange="handleInCurrencyChange"
-                :selectValue="customInCurrency"
+                :list="fiatCurrencies"
+                @selectChange="handleFiatCurrencyChange"
+                :selectValue="customFiatCurrency"
+                v-model="fiatAmount"
                 :scale="8"/>
             </div>
+            <!-- <div v-if="+side===1"> 
+              <div class="mt-20">
+                <number-input  
+                  :list="fiatCurrencies"
+                  :label="outInputText" 
+                  @selectChange="handleFiatCurrencyChange"
+                  :selectValue="customFiatCurrency"
+                  v-model="fiatAmount"
+                  :scale="4"/>
+              </div>
+              <div class="interlayer mt-5" flex="main:justify">
+                <div class="l">&nbsp;</div>
+                <div v-if="+side===1" class="r">
+                  资金账户可用 {{available || '--'}} 
+                  <router-link to="/fund/transfer">资金划转</router-link>
+                </div>
+              </div>
+              <div class="mt-20">
+                <number-input  
+                  :list="digitalCurrencies"
+                  label="我将收到" 
+                  v-model="digitalAmount"
+                  @selectChange="handleDigitalCurrencyChange"
+                  :selectValue="customDigitalCurrency"
+                  :scale="8"/>
+              </div>
+            </div>
+            <div v-else-if="+side===2">
+              <div class="mt-20">
+                <number-input  
+                  :label="outInputText" 
+                  :list="digitalCurrencies"
+                  v-model="digitalAmount"
+                  @selectChange="handleDigitalCurrencyChange"
+                  :selectValue="customDigitalCurrency"
+                  :scale="4"/>
+              </div>
+              <div class="interlayer mt-5" flex="main:justify">
+                <div class="l">&nbsp;</div>
+                <div class="r">&nbsp;</div>
+              </div>
+              <div class="mt-20">
+                <number-input  
+                  label="我将收到" 
+                  :list="fiatCurrencies"
+                  @selectChange="handleFiatCurrencyChange"
+                  :selectValue="customFiatCurrency"
+                  v-model="fiatAmount"
+                  :scale="8"/>
+              </div>
+            </div> -->
             <div class="mt-20">
               <label>{{inSelectText}}</label>
-              <div 
+              <!-- <div 
                 class="my-select pl-16 pr-16" 
                 flex="main:justify"
                 v-popover:custom-dropdown>
@@ -96,7 +160,29 @@
                     <icon :name="item.icon" /> <label class="pl-10">{{ $t(item.name) }}</label>
                   </li>
                 </ul>
-              </el-popover> 
+              </el-popover>  -->
+              <div class="my-select pl-16 pr-16">
+                <el-dropdown @command="handleCommandType">
+                  <div class="el-dropdown-link" flex="main:justify cross:center">
+                    <label>
+                      <span v-if="customPayType">
+                        <icon :name="customPayType.icon" />
+                        {{customPayType.name}} 
+                      </span>
+                      &nbsp;
+                    </label>
+                    <i class="el-icon-arrow-down el-icon--right"></i>
+                  </div>
+                  <el-dropdown-menu slot="dropdown" class="custom-dropdown">
+                    <el-dropdown-item 
+                        v-for="(item, index) in payTypeList" 
+                        :command="index"
+                        :key="index">
+                      <icon :name="item.icon"/> {{item.name}} 
+                    </el-dropdown-item> 
+                  </el-dropdown-menu>
+                </el-dropdown>
+              </div>  
             </div>
             <div class="mt-25">
               <el-button style="width:100%;" @click="handleConfirm" type="primary">立即购买</el-button>
@@ -327,41 +413,57 @@ export default {
   data () {
     return {
       side: 1,
+      rates: null,
       coinInfo: {}, 
       priceHistory: [], 
-      // inCurrencyList: [],
-      // outCurrencyList: [],
+      // digitalCurrencies: [],
+      // fiatCurrencies: [],
       payTypeList: [],
-      outAmount: '',
-      inAmount: '',
-      customInCurrency: null,
-      customOutCurrency: null,
+      fiatAmount: '',
+      digitalAmount: '',
+      customDigitalCurrency: null,
+      customFiatCurrency: null,
       customPayType: null, 
       outInputText: '我要支付',
       inSelectText: '支付方式',
       available: 0,
-      fiatCurrencies: null,
-      digitalCurrencies: null,
+      // fiatCurrencies: null,
+      // digitalCurrencies: null,
       
     }
   },
   computed: {
-    outCurrencyList() {
+    fiatCurrencies() {
       if (+this.side===1) {
         return state.otc.fiatCurrencies
+      } else {
+        return ['CNY']
+      }
+    },
+    digitalCurrencies() {
+      if (+this.side===1) {
+        return state.otc.digitalCurrencies
       } else {
         return ['USDT']
       }
     },
-    inCurrencyList() {
-      if (+this.side===1) {
-        return state.otc.digitalCurrencies
-      } else {
-        return ['CNY']
-      }
+    digitalPrice() {
+      if (this.rates && this.rates[this.customDigitalCurrency]) {
+        let obj = this.rates[this.customDigitalCurrency]
+        return obj.USD
+      } 
+      return 0
     }
   },
-  methods: {
+  methods: {  
+    handleCommandDigitalCurrency(index) {
+      this.customDigitalCurrency = this.digitalCurrencies[index]
+      this.getHistory(this.customDigitalCurrency)
+      this.getCurrencyInfo(this.customDigitalCurrency)  
+    }, 
+    handleCommandType(index) {
+      this.customPayType = this.payTypeList[index]
+    },
     getHistory (name) { 
       name = `${name}_USDT`
       const to = (new Date) * 1
@@ -381,18 +483,22 @@ export default {
     async handleConfirm () {  
       if (this.side === 1) {
         state.otc.fiatMoney = {
-          amount: this.outAmount,
-          currency: this.customOutCurrency
+          amount: this.fiatAmount,
+          currency: this.customFiatCurrency
         }
         state.otc.digitalMoney = {
-          amount: this.inAmount,
-          currency: this.customInCurrency
+          amount: this.digitalAmount,
+          currency: this.customDigitalCurrency
         }
-        this.$router.push({name: 'quick-offer'})
+
+        await this.fetchForeignAddress(this.customDigitalCurrency)
+        await this.fetchSimplePayment()
+        // this.$router.push({name: 'quick-offer'})
       }
     },
-    switchContent (coinType) { 
+    getCurrencyInfo (coinType) { 
       const {locale} = state 
+      console.log('getCurrencyInfo')
       if (coinData[coinType]) {
         this.coinInfo = coinData[coinType][locale]
       } else { 
@@ -448,78 +554,129 @@ export default {
         ctx2.stroke()
       }
     },
-    handleInCurrencyChange(sender) { 
-      this.customInCurrency = sender
-      if (+this.side === 1) {
-        this.getHistory(sender)
-        this.switchContent(sender) 
-      }
+    handleDigitalCurrencyChange(sender) { 
+      this.customDigitalCurrency = sender 
+      this.getHistory(sender)
+      this.getCurrencyInfo(sender)  
     },
-    handleOutCurrencyChange(sender) {
-      this.customOutCurrency = sender
-      if (+this.side === 2) {
-        this.getHistory(sender)
-        this.switchContent(sender) 
-      }
-    },
-    handleChangeSide(obj) { 
-      this.side = obj
-      if (+obj === 1) { 
-        // this.outCurrencyList = state.otc.fiatCurrencies
-        // this.inCurrencyList = state.otc.digitalCurrencies
-        this.payTypeList = [
-          { name: 'MasterCard', icon:'master-card' },
-          { name: 'VISA', icon:'visa' }, 
-        ]
-        this.outInputText = '我要支付'
-        this.inSelectText = '支付方式'
-      } else {
-        // this.outCurrencyList = ['USDT']
-        // this.inCurrencyList = ['CNY']
+    handleFiatCurrencyChange(sender) {
+      this.customFiatCurrency = sender 
+      if (this.customFiatCurrency === 'CNY') {
         this.payTypeList = [
           { name: 'alipay', icon:'alipay' },
           { name: 'wechat', icon:'wechat' },
           { name: 'bank-card', icon:'bank-card' },
         ]
+      } else {
+        this.payTypeList = [
+          { name: 'MasterCard', icon:'master-card' },
+          { name: 'VISA', icon:'visa' }, 
+        ] 
+      }
+      this.handleCommandType(0)
+      
+    },
+    handleChangeSide(obj) {  
+      this.side = obj
+      if (+obj === 1) {  
+        this.outInputText = '我要支付'
+        this.inSelectText = '支付方式'
+      } else { 
         this.outInputText = '我要出售'
         this.inSelectText = '收款方式'
-      } 
-      this.handleInCurrencyChange(this.inCurrencyList[0])
-      this.handleOutCurrencyChange(this.outCurrencyList[0])  
-      // this.customInCurrency = this.inCurrencyList[0]
-      // this.customOutCurrency = this.outCurrencyList[0]
+      }  
+      // this.handleDigitalCurrencyChange(this.digitalCurrencies[0]) 
+      this.handleCommandDigitalCurrency(0) 
+      this.handleFiatCurrencyChange(this.fiatCurrencies[0])   
+      // this.customDigitalCurrency = this.digitalCurrencies[0]
+      // this.customFiatCurrency = this.fiatCurrencies[0]
       this.customPayType = this.payTypeList[0] 
     },
-    fetchForeignAddress(currency) { 
+    async fetchForeignAddress(currency) { 
       const params = { currency } 
-      api.foreignAddress(params).then(res => {
-        console.log(res)
-      })
+      const res = await api.foreignAddress(params) 
+      if (res && !res.code) {
+        state.otc.digitalAddress = res.data.address
+        state.otc.payment_id =  res.data.payment_id
+        state.otc.order_id = res.data.order_id
+        state.otc.time = res.data.create_time
+      } 
     },
-    async fetchQuote() { 
-      console.log('fetchQuote')
-      let res = await api.simpleQuote() 
-      if (res && res.quote_id) {
-        state.otc.fiatCurrencies = res.supported_fiat_currencies
-        state.otc.digitalCurrencies = res.supported_digital_currencies
-        state.otc.valid_until = res.valid_until
-        state.otc.quote_id = res.quote_id 
+    async fetchSimplePayment() {
+      let params = { 
+        "account_details": {
+          "app_provider_id": "ixx",
+          "app_version_id": "1.5.9",
+          "app_end_user_id": "940951", //state.userInfo.id,
+          "signup_login": { 
+            "timestamp": "2020-11-13T14:42:24.832+08:00"
+          }
+        },
+        "transaction_details": {
+          "payment_details": {
+            "quote_id": state.otc.quote_id,
+            "payment_id": state.otc.payment_id,
+            "order_id": state.otc.order_id,
+            "destination_wallet": {
+              "currency": this.customDigitalCurrency,
+              "address": state.otc.digitalAddress,
+              "tag": ""
+            }
+          },
+          "original_http_ref_url": "https://ixxex.me/"
+        }
+      } 
+      return await api.simplePayment(params)
+    },
+    async fetchQuote(amount, digital, fiat) {  
+      let params = { 
+        "end_user_id": "940951",// state.userInfo.id,
+        "digital_currency": this.customDigitalCurrency,
+        "fiat_currency": this.customFiatCurrency,
+        "requested_currency":  this.customFiatCurrency,
+        "requested_amount": amount,
+        "wallet_id": "ixx", 
+        "payment_methods" : ["credit_card"] 
+      }
+      return api.simpleQuote(params)
+      // let res = await api.simpleQuote(params) 
+      // if (res && res.quote_id) {
+      //   state.otc.fiatCurrencies = res.supported_fiat_currencies
+      //   state.otc.digitalCurrencies = res.supported_digital_currencies
+      //   state.otc.valid_until = res.valid_until
+      //   state.otc.quote_id = res.quote_id 
         
+      //   this.handleChangeSide(1) 
+      //   this.getHistory(res.supported_digital_currencies[0])
+      //   this.getCurrencyInfo(res.supported_digital_currencies[0]) 
+      // } 
+    },
+    async fetchRates() {
+      let res = await service.getAllRate()
+      if (!res.code && !!res.data) {
+        this.rates = res.data;
+      }
+    },
+    async init() {
+      await this.fetchRates() 
+      //第一次请求simpleQuote接口是为了拿到simple平台支持的 数字货币列表 和 法币列表
+      //所以这里币种可以写死，但是获取到的quote_id是没有意义的，需要下单前重新获取一次
+      let res = await this.fetchQuote(100, 'USDT', 'CNY') 
+      if (res && res.quote_id) {
+        state.otc.fiatCurrencies = ['CNY'].concat(res.supported_fiat_currencies) 
+        state.otc.digitalCurrencies = res.supported_digital_currencies  
         this.handleChangeSide(1) 
+        //获取24小时价格走势
         this.getHistory(res.supported_digital_currencies[0])
-        this.switchContent(res.supported_digital_currencies[0])
-        // this.outCurrencyList = state.otc.fiatCurrencies
-        // this.inCurrencyList = state.otc.digitalCurrencies
+        //获取币种描述
+        this.getCurrencyInfo(res.supported_digital_currencies[0]) 
       } 
     }
-  },
-  mounted () {
-    // this.getHistory('BTC'), 
-    // this.switchContent('BTC')
-  },
+  }, 
   async created () { 
-    await this.fetchQuote() 
-
+    this.customDigitalCurrency = 'USDT'
+    this.customFiatCurrency = 'USD'
+    this.init()
   }
 }
 
@@ -666,6 +823,13 @@ export default {
             line-height: 40px;
             border: 1px solid #e9ebf2;
             border-radius: 4px;
+            .el-dropdown {
+              width: 100%;
+            }
+          }
+          h4 {
+            font-size: 20px;
+            color: #262626;
           }
         }
       }

@@ -235,9 +235,7 @@ export default {
     }
     if (state.otc.digitalCurrencyList && !this.digitalMoneyCurrency) { 
       this.digitalMoneyCurrency = this.digitalCurrencyList[0]
-    }
-    // this.digitalMoneyCurrency = this.digitalCurrencyList[0]
-    // this.fiatMoneyCurrency = this.fiatCurrencyList[0]
+    } 
     this.fetchForeignAddress(this.digitalMoneyCurrency || 'BTC') 
     this.fetchQuote()
   }

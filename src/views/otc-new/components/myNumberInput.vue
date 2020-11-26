@@ -1,14 +1,14 @@
 <template>
   <div class="number-input-box pl-16 pr-16" flex> 
     <div flex-box="1" class="input">
-      <div class="input-label"><label> {{label}}</label></div> 
+      <!-- <div class="input-label"><label> {{label}}</label></div>  -->
       <input class="input" v-model="value" :placeholder="$big(0).toFixed(scale || 2)" type="text">
     </div>
     <div flex-box="0" class="flex-lr drop-down">
       <el-popover
         popper-class="custom-popover"
         placement="bottom-end"
-        trigger="hover">
+        v-model="show">
         <ul>
           <li v-for="(item, index) in list" 
             @click="handleSelectChange(item)"
@@ -40,12 +40,14 @@ export default {
   },
   data() {
     return { 
+      show: false
     }
   },
   methods: {
     handleSelectChange(org) {
       this.selectValue=org
       this.$emit('selectChange', org)
+      this.show = false
     }
   },
   created() {
@@ -69,6 +71,7 @@ export default {
   .input {
     border: none;
     width: 100%;
+    height: 40px;
   }
   .drop-down {
     line-height: 40px;
