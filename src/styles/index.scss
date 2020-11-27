@@ -388,6 +388,9 @@ $primary-color: #01CED1;
 .text-danger {
   color: $--color-danger;
 }
+.text-primary {
+  color: $primary-color;
+}
 .inline-block{
   display: inline-block;
 }

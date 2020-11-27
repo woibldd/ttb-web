@@ -37,8 +37,8 @@ api.interceptors.request.use(config => {
     // 服务端准备好 就可以上token了
     config.headers['token'] = token
   }
-  config.headers['from'] = 'ixx'
-  config.headers['lang'] = state.locale
+  // config.headers['from'] = 'ixx'
+  // config.headers['lang'] = state.locale
   return config
 }, error => {
   // Do something with request error 

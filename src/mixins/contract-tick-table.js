@@ -142,7 +142,7 @@ export default {
         } 
         this.$eh.$emit("socket:price:update", item)
       } else if (item.pair.indexOf('MARKET') > -1) {
-        if (item.pair.indexOf(state.ct.symbol) > -1) {
+        if (item.pair === state.ct.pair.replace('FUTURE', 'MARKET')) {
           state.ct.markTick = {
             current: item.current
           }   
