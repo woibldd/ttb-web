@@ -31,7 +31,7 @@ import moment from 'moment';
 export default {
   data() {
     return {
-      site: process.env.SITE_ID, // 101
+      site: 2, // 101
       total: 0,
       currentPage: 1,
       size: 20,

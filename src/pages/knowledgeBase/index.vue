@@ -40,7 +40,7 @@ import {state} from '@/modules/store';
 export default {
   data() {
     return {
-      site: process.env.SITE_ID, // 101
+      site: 2, // 101
       firstPage: {},
       newArticle: []
     };
