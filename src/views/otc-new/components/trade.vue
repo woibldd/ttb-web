@@ -114,7 +114,12 @@
           @closeSideBar="closeSideBar"
         />
       </side-bar>
-
+      
+      <side-bar :open.sync="showOrderSide" >
+        <orderBuy
+          :show="showOrderSide"
+          @closeSide="closeSideBar" />
+      </side-bar>
     </div>
   </div>
 </template>
@@ -259,6 +264,7 @@ export default {
     },
     closeSideBar() {
       this.showSide = false;
+      this.showOrderSide = false
     },
     async switchCurrency(currency, side) {
       this.tableData = []
