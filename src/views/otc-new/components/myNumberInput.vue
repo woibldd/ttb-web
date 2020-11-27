@@ -13,7 +13,7 @@
         popper-class="custom-popover"
         placement="bottom-end"
         v-model="show">
-        <ul>
+        <ul> 
           <li v-for="(item, index) in list" 
             @click="handleSelectChange(item)"
             :key="index">

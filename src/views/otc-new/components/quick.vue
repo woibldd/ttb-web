@@ -23,11 +23,11 @@
             </div>
             <div flex-box="1">
               <h6>总市值</h6>
-              <span>666.66亿</span>
+              <span>--</span>
             </div>
             <div flex-box="1">
               <h6>历史最高价</h6>
-              <span>￥6.98</span>
+              <span>--</span>
             </div>
           </div>
         </div>
@@ -353,7 +353,11 @@ export default {
   computed: {
     fiatCurrencies() {
       if (+this.side===1) {
-        return state.otc.fiatCurrencies
+        if (this.customDigitalCurrency === 'USDT') {
+          return ['CNY'].concat(state.otc.fiatCurrencies)
+        } else {
+          return state.otc.fiatCurrencies
+        }
       } else {
         return ['CNY']
       }
@@ -460,9 +464,9 @@ export default {
       this.customFiatCurrency = sender 
       if (this.customFiatCurrency === 'CNY') {
         this.payTypeList = [
-          { name: 'alipay', icon:'alipay' },
-          { name: 'wechat', icon:'wechat' },
-          { name: 'bank-card', icon:'bank-card' },
+          { name: 'but_aliPay', icon:'alipay' },
+          { name: 'but_wechat', icon:'wechat' },
+          { name: 'but_bank', icon:'bank-card' }, 
         ]
       } else {
         this.payTypeList = [
@@ -558,7 +562,7 @@ export default {
       //所以这里币种可以写死，但是获取到的quote_id是没有意义的，需要下单前重新获取一次
       let res = await this.fetchQuote(100, 'BTC', 'USD') 
       if (res && res.quote_id) {
-        state.otc.fiatCurrencies = ['CNY'].concat(res.supported_fiat_currencies) 
+        state.otc.fiatCurrencies = res.supported_fiat_currencies
         state.otc.digitalCurrencies = res.supported_digital_currencies  
         this.handleChangeSide(1) 
         //获取24小时价格走势
@@ -579,7 +583,14 @@ export default {
         }
 
         if (this.customFiatCurrency === 'CNY') {
-
+          this.$router.push({
+            path: '/byamount',
+            query: {
+              active: 1,
+              amount:  this.fiatAmount,
+              currency: 'USDT'
+            }
+          })
         } else {
           // let res = await this.fetchQuote(+this.fiatAmount, this.customDigitalCurrency, this.customFiatCurrency) 
           // await this.fetchForeignAddress(this.customDigitalCurrency)
@@ -594,6 +605,15 @@ export default {
           }
           this.$router.push({name: 'quick-offer', query}) 
         }
+      } else { 
+        this.$router.push({
+          path: '/byamount',
+          query: {
+            active: 2,
+            amount:  this.fiatAmount,
+            currency: 'USDT'
+          }
+        })
       }
     },
   }, 
