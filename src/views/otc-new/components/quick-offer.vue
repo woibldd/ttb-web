@@ -91,7 +91,7 @@
             <span>综合手续费、到账时间、价格等，为您推荐</span>
           </div>
           <div class="details">
-            <el-row class="details-row">
+            <el-row v-if="quoteId" class="details-row">
               <el-col :span="8">
                 <h5> Simplex</h5>
                 <p class="c-b0">
@@ -103,12 +103,14 @@
                 <div>2-10 mins</div>
               </el-col>
               <el-col :span="4">
-                <label class="c-b0">可获得(USDT)</label>
-                <div>961.36999993</div>
+                <label class="c-b0">可获得{{`(${digitalMoneyCurrency})`}}</label>
+                <div>{{digitalMoneyAmount}}</div>
               </el-col>
               <el-col :span="4">              
                 <label class="c-b0">参考单价</label>
-                <div class="text-primary">$1.04</div>
+                <div class="text-primary" v-if="fiatMoneyAmount && digitalMoneyAmount">
+                  {{$big(fiatMoneyAmount).div(digitalMoneyAmount).round(8,0)}}
+                </div>
               </el-col>
               <el-col :span="4">
                 <el-button @click="handleClickBuy" type="primary">购买</el-button>
@@ -137,7 +139,18 @@
           </el-checkbox> 
         </div>
         <div class="modal-quick-footer">
-          <el-button type="primary">前往Simplex支付</el-button>
+          <form id="payment_form" action="https://checkout.simplexcc.com/payments/new" method="post">
+            <input type="hidden" name="version" value="1">
+            <input type="hidden" name="partner" value="ixx">
+            <input type="hidden" name="payment_flow_type" value="wallet">
+            <input type="hidden" name="return_url_success" value="https://www.simplex.com">
+            <input type="hidden" name="return_url_fail" value="https://www.simplex.com/support">
+            <input type="hidden" name="payment_id" :value="paymentId"> 
+          </form>
+
+          <el-button @click="handleClickGoSimplex" :disabled="!agree" type="primary">
+            前往Simplex支付
+          </el-button>
         </div>
       </div>
     </v-modal>
@@ -150,24 +163,30 @@
 import numberInput from './myNumberInput.vue' 
 import api from '@/modules/api/notc'
 import {state} from '@/modules/store'
+import utils from '@/modules/utils'
 export default {
   components: {
     numberInput 
   },
   data() {
-    return {
-      // digitalCurrencyList: [ 'BTC', 'USDT', 'ETH'],
-      // fiatCurrencyList: [ 'CNY',  'USD'],
+    return { 
       payTypeList: [ 
         { name: 'MasterCard', icon:'master-card' },
         { name: 'VISA', icon:'visa' }, 
-      ],
+      ], 
+      showModal: false,
+      agree: false,
       fiatMoneyAmount: 0,
       fiatMoneyCurrency: null,
       digitalMoneyAmount: 0,
       digitalMoneyCurrency: null,
-      customPayType: null, 
-      showModal: false
+      quoteId: '',
+      validUntil: '',
+      digitalAddress: '',
+      paymentId: '',
+      orderId: '',
+      createTime: '',
+      customPayType: null
     }
   },
   computed: {
@@ -191,31 +210,38 @@ export default {
     handleAmountChange() {
       
     },
-    fetchSimplePayment() {
+    handleClickGoSimplex() {
+      this.fetchSimplePayment()
+    },
+    async fetchSimplePayment() {
       let params = { 
         "account_details": {
           "app_provider_id": "ixx",
           "app_version_id": "1.5.9",
           "app_end_user_id": state.userInfo.id,
           "signup_login": { 
-            "timestamp": "2020-11-13T14:42:24.832+08:00"
+            "timestamp": this.$moment().format()
           }
         },
         "transaction_details": {
           "payment_details": {
-            "quote_id": state.otc.quote_id,
-            "payment_id": state.otc.payment_id,
-            "order_id": state.otc.order_id,
+            "quote_id": this.quoteId,
+            "payment_id": this.paymentId,
+            "order_id": this.orderId,
             "destination_wallet": {
               "currency": this.digitalMoneyCurrency,
-              "address": state.otc.digitalAddress,
+              "address": this.digitalAddress,
               "tag": ""
             }
           },
-          "original_http_ref_url": "https://ixxex.me/"
+          "original_http_ref_url": "https://ixxex.me/" 
         }
       } 
-      api.simplePayment(params)
+      const res = await api.simplePayment(params)
+      // console.log(res)
+      if (res.is_kyc_update_required) {
+        document.forms["payment_form"].submit(); 
+      }
     },
     fetchForeignAddress(currency='BTC') { 
       const params = {
@@ -223,44 +249,71 @@ export default {
       }
       api.foreignAddress(params).then(res => {
         if (res && !res.code) {
-          state.otc.digitalAddress = res.data.address
-          state.otc.payment_id =  res.data.payment_id
-          state.otc.order_id = res.data.order_id
-          state.otc.time = res.data.create_time
+          // state.otc.digitalAddress = res.data.address
+          // state.otc.payment_id =  res.data.payment_id
+          // state.otc.order_id = res.data.order_id
+          // state.otc.time = res.data.create_time
+          this.digitalAddress = res.data.address
+          this.paymentId =  res.data.payment_id
+          this.orderId = res.data.order_id
+          this.createTime = res.data.create_time
         }
       })
     },
-    async fetchQuote() {  
-      let res = await api.simpleQuote() 
-      if (res && res.quote_id) {
-        state.otc.fiatCurrencies = res.supported_fiat_currencies
-        state.otc.digitalCurrencies = res.supported_digital_currencies
-        state.otc.valid_until = res.valid_until
-        state.otc.quote_id = res.quote_id  
+    async fetchQuote() {   
+      while (!state.userInfo) {
+        await utils.sleep(3e3)
+      }
+      
+      if (state && state.userInfo) {
+        let params = {
+          // "end_user_id": state.userInfo.id,// state.userInfo.id,
+          "digital_currency": this.$route.query.digital,
+          "fiat_currency": this.$route.query.fiat,
+          "requested_currency":  this.$route.query.fiat,
+          "requested_amount": +this.$route.query.amount,
+          "wallet_id": "ixx", 
+          "payment_methods" : ["credit_card"] 
+        }
+        let res = await api.simpleQuote(params) 
+        if (res && res.quote_id) {
+          // state.otc.fiatCurrencies = res.supported_fiat_currencies
+          // state.otc.digitalCurrencies = res.supported_digital_currencies
+          state.otc.valid_until = res.valid_until
+          state.otc.quote_id = res.quote_id  
+          this.quoteId = res.quote_id 
+          this.validUntil =  res.valid_until
+          this.digitalMoneyAmount = res.digital_money.amount 
+        } 
       } 
     },
     handleClickBuy() {
       this.showModal = true
     }
   },
+  mounted() {
+  },
   created() { 
-    this.customPayType = this.payTypeList[0] 
-    if (state.otc.fiatMoney) {
-      this.fiatMoneyCurrency = state.otc.fiatMoney.currency
-      this.fiatMoneyAmount = state.otc.fiatMoney.amount
-    }
-    if (state.otc.digitalMoney) {
-      this.digitalMoneyCurrency = state.otc.digitalMoney.currency
-      this.digitalMoneyAmount = state.otc.digitalMoney.amount
-    }
-    if (state.otc.fiatCurrencies && !this.fiatMoneyCurrency) { 
-      this.fiatMoneyCurrency = this.fiatCurrencyList[0]
-    }
-    if (state.otc.digitalCurrencyList && !this.digitalMoneyCurrency) { 
-      this.digitalMoneyCurrency = this.digitalCurrencyList[0]
-    } 
-    this.fetchForeignAddress(this.digitalMoneyCurrency || 'BTC') 
+    this.customPayType = this.payTypeList.find(item => item.name === this.$route.query.payment)
+    this.fiatMoneyCurrency = this.$route.query.fiat
+    this.digitalMoneyCurrency = this.$route.query.digital
+    this.fiatMoneyAmount = this.$route.query.amount 
+    this.fetchForeignAddress(this.digitalMoneyCurrency) 
     this.fetchQuote()
+    // if (state.otc.fiatMoney) {
+    //   this.fiatMoneyCurrency = state.otc.fiatMoney.currency
+    //   this.fiatMoneyAmount = state.otc.fiatMoney.amount
+    // }
+    // if (state.otc.digitalMoney) {
+    //   this.digitalMoneyCurrency = state.otc.digitalMoney.currency
+    //   this.digitalMoneyAmount = state.otc.digitalMoney.amount
+    // }
+    // if (state.otc.fiatCurrencies && !this.fiatMoneyCurrency) { 
+    //   this.fiatMoneyCurrency = this.fiatCurrencyList[0]
+    // }
+    // if (state.otc.digitalCurrencyList && !this.digitalMoneyCurrency) { 
+    //   this.digitalMoneyCurrency = this.digitalCurrencyList[0]
+    // } 
   }
 }
 </script>
