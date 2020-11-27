@@ -91,7 +91,7 @@
                     <label>
                       <span v-if="customPayType">
                         <icon :name="customPayType.icon" />
-                        {{customPayType.name}} 
+                        {{ $t(customPayType.name)}} 
                       </span>
                       &nbsp;
                     </label>
@@ -102,7 +102,7 @@
                         v-for="(item, index) in payTypeList" 
                         :command="index"
                         :key="index">
-                      <icon :name="item.icon"/> {{item.name}} 
+                      <icon :name="item.icon"/> {{$t(item.name)}} 
                     </el-dropdown-item> 
                   </el-dropdown-menu>
                 </el-dropdown>
