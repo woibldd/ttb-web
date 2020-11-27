@@ -4,18 +4,22 @@ export const otcRouter = [
   {
     path: '/notc',
     name: 'notc',
-    component: () => import('@/views/otc-new'),
+    component: () => import('@/views/otc-new'), 
     meta: {
       nav: true,
       footer: false,
-      class: 'dark'
+      class: 'dark',
+      require: true
     },
     redirect: {name: 'quick'},
     children: [
       {
         path: 'quick',
         name: 'quick',
-        component: () => import('@/views/otc-new/components/quick')
+        component: () => import('@/views/otc-new/components/quick'),
+        meta: {
+          require: true
+        }
       },
       {
         path: 'quick-offer',
