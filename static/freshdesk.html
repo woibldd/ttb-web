@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>freshdesk</title>
+</head>
+<body> 
+  <script>
+    window.fwSettings={
+    'widget_id':66000001483
+    };
+    !function(){if("function"!=typeof window.FreshworksWidget){var n=function(){n.q.push(arguments)};n.q=[],window.FreshworksWidget=n}}() 
+  </script>
+  <script type='text/javascript' src='https://widget.freshworks.com/widgets/66000001483.js' async defer></script>
+  <script> 
+    window.onload = () => {
+      window.openFresh = () => {
+        FreshworksWidget('open'); 
+      }
+      window.freshSet = (name, email) => {
+        FreshworksWidget('identify', 'ticketForm', {
+          name: name,
+          email: email,
+        });
+      }
+    }
+  </script>
+</body>
+</html>

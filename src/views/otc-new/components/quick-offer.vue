@@ -93,9 +93,9 @@
           <div class="details">
             <el-row class="details-row">
               <el-col :span="8">
-                <h5>Moon Pay</h5>
+                <h5> Simplex</h5>
                 <p class="c-b0">
-                  法定货币到数字货币转换的新标准。 MoonPay让每个人都可......
+                  法定货币到数字货币转换的新标准。 Simplex让每个人都可......
                 </p>
               </el-col>
               <el-col :span="4">
@@ -111,7 +111,7 @@
                 <div class="text-primary">$1.04</div>
               </el-col>
               <el-col :span="4">
-                <el-button type="primary">购买</el-button>
+                <el-button @click="handleClickBuy" type="primary">购买</el-button>
               </el-col>
             </el-row>
           </div>
@@ -121,7 +121,26 @@
         </div>
       </div> 
     </div>
-    <div class="quick"></div>
+    
+    <v-modal :open.sync="showModal" >
+      <div class="modal-quick">
+        <div class="modal-quick-title">
+          即将从IXX跳转至Simplex
+        </div>
+        <div class="modal-quick-content">
+          <p>
+            如果您已在Simplex完成支付请耐心等待，Simplex将在2~10分钟内 将数字货币充值到您的IXX资金账户。
+          </p>
+          <div class="line"></div>
+          <el-checkbox style="vertical-align: top !important;" v-model="agree"> 
+            <label style="white-space: normal;">您已知晓Simplex是由第三方独立运营的法定货币与数字货币交易平台，IXX不对因使用该服务遭受的任何损失或损害承担任何责任。</label> 
+          </el-checkbox> 
+        </div>
+        <div class="modal-quick-footer">
+          <el-button type="primary">前往Simplex支付</el-button>
+        </div>
+      </div>
+    </v-modal>
   </div>
 </template>
 
@@ -148,6 +167,7 @@ export default {
       digitalMoneyAmount: 0,
       digitalMoneyCurrency: null,
       customPayType: null, 
+      showModal: false
     }
   },
   computed: {
@@ -195,7 +215,7 @@ export default {
           "original_http_ref_url": "https://ixxex.me/"
         }
       } 
-      api.simplePayment()
+      api.simplePayment(params)
     },
     fetchForeignAddress(currency='BTC') { 
       const params = {
@@ -218,6 +238,9 @@ export default {
         state.otc.valid_until = res.valid_until
         state.otc.quote_id = res.quote_id  
       } 
+    },
+    handleClickBuy() {
+      this.showModal = true
     }
   },
   created() { 
@@ -307,6 +330,35 @@ export default {
         }
       }
     } 
+  } 
+  .modal-quick {
+    width: 500px;
+    .modal-quick-title {
+      padding: 25px 30px;
+      font-size: 18px;
+      color: #151515;
+      border-bottom: 1px solid #EAEAEA;
+    }
+    .modal-quick-content {
+      padding: 25px 30px;
+      font-size: 14px;
+      color: #323232;
+      border-bottom: 1px solid #EAEAEA;
+      .line {
+        margin: 25px 0;
+        height: 1px;
+        background: #dcdcdc;
+      }
+      .el-checkbox__input {
+        vertical-align: top;
+      }
+    }
+    .modal-quick-footer {
+      padding: 25px 30px;
+      font-size: 14px;
+      color: #AAAAAA;
+      text-align: right;
+    }
   }
 
 }
@@ -315,9 +367,6 @@ export default {
   max-height: 240px;
   overflow-x: hidden;
   overflow-y: auto; 
-}
-.test {
-  font-size: 66px !important;
-}
+} 
 
 </style>

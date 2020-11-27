@@ -1,8 +1,12 @@
 <template>
   <div class="number-input-box pl-16 pr-16" flex> 
     <div flex-box="1" class="input">
-      <!-- <div class="input-label"><label> {{label}}</label></div>  -->
-      <input class="input" v-model="value" :placeholder="$big(0).toFixed(scale || 2)" type="text">
+      <!-- <div class="input-label"><label> {{value}}</label></div>  -->
+      <input class="input"
+        ref="input"  
+        @input="updateValue($event.target.value, 'input')"
+        :placeholder="$big(0).toFixed(scale || 2)" 
+        type="text">
     </div>
     <div flex-box="0" class="flex-lr drop-down">
       <el-popover
@@ -35,7 +39,10 @@ export default {
     ], 
     scale: 2,
     label: '',
-    value: '',
+    value: {
+      type: [String, Object],
+      default: null
+    },
     selectValue: null
   },
   data() {
@@ -43,12 +50,35 @@ export default {
       show: false
     }
   },
+  watch: { 
+    value (newValue, oldValue) {
+      if (newValue !== oldValue)
+        this.onValueChange(newValue)
+    }
+  },
   methods: {
     handleSelectChange(org) {
       this.selectValue=org
       this.$emit('selectChange', org)
       this.show = false
-    }
+    },
+    updateValue (value, src) { 
+      this.$refs.input.value = value
+      this.$emit('input', value) 
+    },
+    onValueChange (newValue) {
+      this.log('Value Change: ', newValue)
+      if (!newValue) {
+        return this.updateValue('')
+      } else {
+        this.updateValue(newValue, 'valueChange')
+      } 
+    },
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this.value && this.onValueChange(this.value)
+    })
   },
   created() {
     if (!this.selectValue && this.list.length > 0) {
