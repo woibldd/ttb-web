@@ -990,9 +990,9 @@ export default {
       this.balanceList.map(item => {
         if (item.name === this.activeProduct.name) {
           if (item.sell) {
-            obj.buyAmount = item.holding
+            obj.buyAmount =  item.sum_close_amount || 0
           } else if (item.buy) {
-            obj.sellAmount = item.holding
+            obj.sellAmount =  item.sum_close_amount || 0
           }
         }
       }) 
@@ -1446,6 +1446,15 @@ export default {
               bargain: [0,0]
             }
             this.amountObj = obj
+          } 
+           //获取可平仓数量
+          const cres = await getClosedpositionList() 
+          if (!res.code) { 
+            const cdata = cres.data
+            this.balanceList.map(item => {
+              const find = cdata.find(r => r.name === item.name && r.side === item.side)
+              if (find) item.sum_close_amount = find.sum_close_amount
+            })
           } 
           this.handleTableTabClick(this.activeTableTabKey)
           this.handleEntrustList()

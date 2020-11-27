@@ -24,7 +24,8 @@ export const otcRouter = [
       },
       {
         path: 'trade',
-        name: 'trade'
+        name: 'trade',
+        component: () => import('@/views/otc-new/components/trade')
       },
     ]
   }

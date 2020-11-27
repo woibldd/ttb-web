@@ -3,8 +3,12 @@
     <div class="otc-new-nav">
       <div class="otc-new-box" flex="main:justify">
         <div class="l" flex="main:left">
-          <div class="nav-item">快捷买币</div>
-          <div class="nav-item">C2C交易</div>
+          <div class="nav-item"> 
+            <router-link to="/notc/quick">快捷买币</router-link>
+          </div>
+          <div class="nav-item"> 
+            <router-link to="/notc/trade">C2C交易</router-link>
+          </div>
         </div>
         <div class="r" flex="main:left">
           <div class="nav-item">交易管理</div>

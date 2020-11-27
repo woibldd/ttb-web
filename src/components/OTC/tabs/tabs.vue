@@ -1,46 +1,22 @@
-<!--
- * @Author: zlccy
- * @Date: 2019-08-15 14:07:18
- * @LastEditTime: 2019-08-15 14:12:02
- * @Description: file content
- -->
+ 
 <template>
   <div class="main-tabs-container">
     <div class="main-tabs-box  clear-fix">
       <div class="tab-left pull-left">
-        <div class="side-buy tab ">
-          <!-- <label>{{$t('otc_side_1')}}</label> -->
-          <!-- <button class='btn_left'
-                  :class="{'active' : currency==='USDT','active-side': side===1  }"
-                  @click="setCurrency('USDT', 1)"
-          >USDT</button>
-          <button
-            class='btn_left'
-            :class="{'active' : currency==='BTC','active-side': side===1 }"
-            @click="setCurrency('BTC', 1)"
-          >BTC</button> -->
+        <div class="side-buy tab "> 
           <button
             :class="{'active' : currency==='BTC','active-side': side===1 }"
             class="btn_left"
             @click="changeSide(1)"
           >{{ $t('otc_side_1') }}</button>
         </div>
-        <div class="side-sell tab">
-          <!-- <label>{{$t('otc_side_2')}}</label> -->
+        <div class="side-sell tab"> 
           <button
             :class="{'active' : currency==='BTC','active-side': side===2 }"
             class="btn_left"
             @click="changeSide(2)"
           >{{ $t('otc_side_2') }}</button>
-          <!-- <button class='btn_left'
-                  :class="{'active' : currency==='USDT','active-side': side===2  }"
-                  @click="setCurrency('USDT', 2)"
-          >USDT</button>
-          <button
-            class='btn_left'
-            :class="{'active' : currency==='BTC','active-side': side===2  }"
-            @click="setCurrency('BTC', 2)"
-          >BTC</button> -->
+          
         </div>
       </div>
       <div class="tab-right pull-right" style="margin-top:-5px!important;" >
