@@ -101,14 +101,7 @@
                     <div
                       class="content"
                       v-if="type===1">
-                      <div class="el-number-input">
-                        <!-- <el-input
-                          type="number"
-                          :placeholder="$t('otc_placeholder_b')"
-                          v-model="inputPrice"
-                          @input="computeTotal"
-                          step-strictly
-                        /> -->
+                      <div class="el-number-input"> 
                         <number-input
                           class="number-input"
                           v-model="inputPrice"
@@ -873,7 +866,16 @@ export default {
             // }
 
             .unit-label {
+              position: absolute;
               right: 10px;
+              top: 0;
+              line-height: 40px;
+              height: 40px;
+              width: 40px;
+              // border-right: 1px solid #DDDDDD;
+              text-align: center;
+              user-select: none;
+              font-size: 12px;
             }
             .text-total {
               position: relative;
@@ -1008,7 +1010,8 @@ export default {
       box-shadow: none
     }
     .number-input {
-      border-color: transparent!important;
+      // border-color: transparent!important;
+      border: none
     }
   }
 </style>

@@ -838,8 +838,7 @@ export default {
     }
   }
 </style>
-<style lang='scss'>
-
+<style lang='scss'> 
   .otcaction {
     height: 100%;
     .action-box {

@@ -1,104 +1,105 @@
 <template>
-  <div class="entrust-order-container">
-    <div class="entrust-order-nav" flex="cross:center main:justify">
-      <div>
-        <el-button-group class="mr-15">
-          <el-button @click="handleClickSetSide(1)" :type="side===1 ? 'success' : ''">购买</el-button>
-          <el-button @click="handleClickSetSide(2)" :type="side===2 ? 'danger' : ''">出售</el-button>
-        </el-button-group>
-        <el-select v-model="currentDigital" @change="handleChangeDigital" placeholder="请选择">
-          <el-option
-            v-for="(item, index) in digitalCurrencyList"
-            :key="index"
-            :label="item.currency"
-            :value="item.currency">
-              <label ><icon :name="`coin-${item.currency}`"/> {{item.currency}}</label>
-          </el-option>
-        </el-select> 
+  <div>
+    <div class="entrust-order-container">
+      <div class="entrust-order-nav" flex="cross:center main:justify">
+        <div>
+          <el-button-group class="mr-15">
+            <el-button @click="handleClickSetSide(1)" :type="side===1 ? 'success' : ''">购买</el-button>
+            <el-button @click="handleClickSetSide(2)" :type="side===2 ? 'danger' : ''">出售</el-button>
+          </el-button-group>
+          <el-select v-model="currentDigital" @change="handleChangeDigital" placeholder="请选择">
+            <el-option
+              v-for="(item, index) in digitalCurrencyList"
+              :key="index"
+              :label="item.currency"
+              :value="item.currency">
+                <label ><icon :name="`coin-${item.currency}`"/> {{item.currency}}</label>
+            </el-option>
+          </el-select> 
+        </div>
+        <div>
+          <label class="text-primary" @click="handleClickNowOrder"><icon name="add"  class="mr-5"/>发布委托单</label>
+        </div>
       </div>
-      <div>
-        <label class="text-primary"><icon name="add"  class="mr-5"/>发布委托单</label>
-      </div>
-    </div>
-    <div class="entrust-order-content">
-      <!-- 挂单列表 -->
-      <el-table v-loading="loading" :data="tableData" style="width: 100%" :empty-text="$t('no_data')">
-        <el-table-column :label="$t('otc_position')" type="index"/>
-        <el-table-column :label="$t('otc_completed_info')" prop="name" width="180">
-          <template slot-scope="scope">
-            {{ `${scope.row.name}(${scope.row.thirty_day_orders}/` }}
-            {{ $big(scope.row.thirty_day_orders_rate || 0).mul(100) | fixed(0) }}%)
-          </template>
-        </el-table-column>
-        <el-table-column :label="$t('otc_price',{legal_currency})" prop="price">
-          <template slot-scope="scope">
-            <div>
-              {{ $big(scope.row.price || 0) | fixed(2) }}
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column :label="$t('otc_amount',{currency})" prop="amount">
-          <template slot-scope="scope">
-            <div>
-              {{ $big(scope.row.amount).minus(scope.row.freezed).toString() }}
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column :label="$t('otc_total',{legal_currency})" prop="total">
-          <template slot-scope="scope">
-            <div>
-              {{ $big(scope.row.amount).minus(scope.row.freezed).mul(scope.row.price) | fixed(2) }}
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column :label="$t('otc_order_quota',{legal_currency})" prop="quota"/>
-        <el-table-column :label="$t('otc_payment_method')" prop="payment_type">
-          <template slot-scope="scope">
-            <div v-for="(item, index) in scope.row.pay_ment_data" :key="index" style="display: inline-block;margin-right: 4px;">
-              <!-- <icon
-                :class="item === '1' ? 'card active' : item === '2' ? 'alipay active' :  item === '3' ? 'wechat active' : ''"
-                :name="item === '1' ? 'bank-card' : item === '2' ? 'alipay' :  item === '3' ? 'wechat' : ''"
-              /> -->
-              <icon v-if="index < 3" :name="paytype(item)" />
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column :label="$t('otc_order_trade')" width="130">
-          <template slot-scope="scope">
-            <div>
-              <button
-                v-if="isLogin && scope.row.user_id == userInfo.id"
-                class="btn my"
-              >{{ $t('my_order') }}</button>
-              <div v-else-if="isLogin && scope.row.kyc_level > userInfo.lv">
-                <div
-                  @click="clickVerifyRow('Kyc')"
-                  v-html="$t('otc_need_authentication', {side: $t('otc_side_'+side)} )"
-                />
-                <!-- 需要 <span>{{$t('otc_authentication')}}</span> -->
+      <div class="entrust-order-content">
+        <!-- 挂单列表 -->
+        <el-table v-loading="loading" :data="tableData" style="width: 100%" :empty-text="$t('no_data')">
+          <el-table-column :label="$t('otc_position')" type="index"/>
+          <el-table-column :label="$t('otc_completed_info')" prop="name" width="180">
+            <template slot-scope="scope">
+              {{ `${scope.row.name}(${scope.row.thirty_day_orders}/` }}
+              {{ $big(scope.row.thirty_day_orders_rate || 0).mul(100) | fixed(0) }}%)
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('otc_price',{legal_currency})" prop="price">
+            <template slot-scope="scope">
+              <div>
+                {{ $big(scope.row.price || 0) | fixed(2) }}
               </div>
-              <button
-                v-else-if="side===1"
-                class="btn buy"
-                @click="openSideBar(scope.row)"
-              >{{ $t('otc_buy_currency', {currency}) }}</button>
-              <button
-                v-else-if="side===2"
-                class="btn sell"
-                @click="openSideBar(scope.row)"
-              >{{ $t('otc_sell_currency', {currency}) }}</button>
-            </div>
-          </template>
-        </el-table-column>
-      </el-table>
-      <el-pagination
-        :pager-count="5"
-        class="pagination"
-        :page-size="size"
-        background
-        :total="total"
-        layout="prev, pager, next"
-      />
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('otc_amount',{currency})" prop="amount">
+            <template slot-scope="scope">
+              <div>
+                {{ $big(scope.row.amount).minus(scope.row.freezed).toString() }}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('otc_total',{legal_currency})" prop="total">
+            <template slot-scope="scope">
+              <div>
+                {{ $big(scope.row.amount).minus(scope.row.freezed).mul(scope.row.price) | fixed(2) }}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('otc_order_quota',{legal_currency})" prop="quota"/>
+          <el-table-column :label="$t('otc_payment_method')" prop="payment_type">
+            <template slot-scope="scope">
+              <div v-for="(item, index) in scope.row.pay_ment_data" :key="index" style="display: inline-block;margin-right: 4px;">
+                <!-- <icon
+                  :class="item === '1' ? 'card active' : item === '2' ? 'alipay active' :  item === '3' ? 'wechat active' : ''"
+                  :name="item === '1' ? 'bank-card' : item === '2' ? 'alipay' :  item === '3' ? 'wechat' : ''"
+                /> -->
+                <icon v-if="index < 3" :name="paytype(item)" />
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('otc_order_trade')" width="130">
+            <template slot-scope="scope">
+              <div>
+                <button
+                  v-if="isLogin && scope.row.user_id == userInfo.id"
+                  class="btn my"
+                >{{ $t('my_order') }}</button>
+                <div v-else-if="isLogin && scope.row.kyc_level > userInfo.lv">
+                  <div
+                    @click="clickVerifyRow('Kyc')"
+                    v-html="$t('otc_need_authentication', {side: $t('otc_side_'+side)} )"
+                  />
+                  <!-- 需要 <span>{{$t('otc_authentication')}}</span> -->
+                </div>
+                <button
+                  v-else-if="side===1"
+                  class="btn buy"
+                  @click="openSideBar(scope.row)"
+                >{{ $t('otc_buy_currency', {currency}) }}</button>
+                <button
+                  v-else-if="side===2"
+                  class="btn sell"
+                  @click="openSideBar(scope.row)"
+                >{{ $t('otc_sell_currency', {currency}) }}</button>
+              </div>
+            </template>
+          </el-table-column>
+        </el-table>
+        <el-pagination
+          :pager-count="5"
+          class="pagination"
+          :page-size="size"
+          background
+          :total="total"
+          layout="prev, pager, next"
+        />
       <!-- 侧边操作栏 -->
       <side-bar :open.sync="showSide">
         <transactionBuy
@@ -114,13 +115,14 @@
           @closeSideBar="closeSideBar"
         />
       </side-bar>
-      
-      <side-bar :open.sync="showOrderSide" >
-        <orderBuy
-          :show="showOrderSide"
-          @closeSide="closeSideBar" />
-      </side-bar>
+      </div> 
     </div>
+    <side-bar :open.sync="showOrderSide" >
+      <orderBuy
+        :show="showOrderSide"
+        @closeSide="closeSideBar" />
+    </side-bar>
+
   </div>
 </template>
 
@@ -133,6 +135,7 @@ import sideBar from '@/components/VSideBar'
 import vList from '@/components/OTC/vlist/vertical-table'
 import transactionBuy from '@/components/OTC/order/transaction/transactionBuy'
 import transactionSell from '@/components/OTC/order/transaction/transactionSell'
+import orderBuy from '@/components/OTC/order/orderForm/orderBuy'
 import Vue from 'vue'
 import { setInterval, clearInterval } from 'timers'
 import otcComputed from '@/components/OTC/mixins/index.js'
@@ -143,7 +146,8 @@ export default {
     sideBar,
     vList,
     transactionBuy,
-    transactionSell
+    transactionSell,
+    orderBuy
   },
   mixins: [otcComputed],
   data() {
@@ -151,6 +155,7 @@ export default {
       tableData: [],
       loading: false,
       showSide: false,
+      showOrderSide: false,
       amount: '',
       operation: 1, // 操作 1: 买/卖, 2: 发布委托
       operSide: 1, // 操作类型 1: 买 ,2: 卖
@@ -265,6 +270,9 @@ export default {
     closeSideBar() {
       this.showSide = false;
       this.showOrderSide = false
+    },
+    handleClickNowOrder() {
+      this.showOrderSide = true
     },
     async switchCurrency(currency, side) {
       this.tableData = []
