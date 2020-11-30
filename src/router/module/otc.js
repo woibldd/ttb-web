@@ -31,6 +31,21 @@ export const otcRouter = [
         name: 'trade',
         component: () => import('@/views/otc-new/components/trade')
       },
+      {
+        path: 'order',
+        name: 'quick-order',
+        component: () => import('@/views/otc-new/components/order')
+      },
+      {
+        path: 'bill',
+        name: 'quick-bill',
+        component: () => import('@/views/otc-new/components/bill')
+      },
+      {
+        path: 'collection',
+        name: 'quick-collection',
+        component: () => import('@/views/otc-new/components/collection')
+      }
     ]
   }
 ]

@@ -886,6 +886,9 @@ export default {
               text-indent: 15px;
               border: 1px solid #ccc;
               border-radius: 4px;
+              .number-input {
+                border: none;
+              }
             }
           }
           @include clearfix();
@@ -958,6 +961,7 @@ export default {
           }
         }
       }
+      
     }
     .wrap {
       margin: 10px 0;
