@@ -584,9 +584,8 @@ export default {
 
         if (this.customFiatCurrency === 'CNY') {
           this.$router.push({
-            path: '/byamount',
-            query: {
-              active: 1,
+            path: '/Superzis',
+            query: { 
               amount:  this.fiatAmount,
               currency: 'USDT'
             }
@@ -608,8 +607,7 @@ export default {
       } else { 
         this.$router.push({
           path: '/byamount',
-          query: {
-            active: 2,
+          query: { 
             amount:  this.fiatAmount,
             currency: 'USDT'
           }

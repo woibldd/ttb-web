@@ -148,7 +148,7 @@
             <input type="hidden" name="payment_id" :value="paymentId"> 
           </form>
 
-          <el-button @click="handleClickGoSimplex" :disabled="!agree" type="primary">
+          <el-button v-loading="confirmLoading" @click="handleClickGoSimplex" :disabled="!agree" type="primary">
             前往Simplex支付
           </el-button>
         </div>
@@ -186,7 +186,8 @@ export default {
       paymentId: '',
       orderId: '',
       createTime: '',
-      customPayType: null
+      customPayType: null,
+      confirmLoading: false
     }
   },
   computed: {
@@ -213,7 +214,8 @@ export default {
     handleClickGoSimplex() {
       this.fetchSimplePayment()
     },
-    async fetchSimplePayment() {
+    async fetchSimplePayment() { 
+      this.confirmLoading = true
       let params = { 
         "account_details": {
           "app_provider_id": "ixx",
@@ -237,10 +239,11 @@ export default {
           "original_http_ref_url": "https://ixxex.me/" 
         }
       } 
-      const res = await api.simplePayment(params)
-      // console.log(res)
-      if (res.is_kyc_update_required) {
+      const res = await api.simplePayment(params) 
+      if (res && res.is_kyc_update_required) {
         document.forms["payment_form"].submit(); 
+      } else {
+        this.confirmLoading = false
       }
     },
     fetchForeignAddress(currency='BTC') { 
@@ -248,11 +251,7 @@ export default {
         currency 
       }
       api.foreignAddress(params).then(res => {
-        if (res && !res.code) {
-          // state.otc.digitalAddress = res.data.address
-          // state.otc.payment_id =  res.data.payment_id
-          // state.otc.order_id = res.data.order_id
-          // state.otc.time = res.data.create_time
+        if (res && !res.code) { 
           this.digitalAddress = res.data.address
           this.paymentId =  res.data.payment_id
           this.orderId = res.data.order_id
@@ -266,8 +265,7 @@ export default {
       }
       
       if (state && state.userInfo) {
-        let params = {
-          // "end_user_id": state.userInfo.id,// state.userInfo.id,
+        let params = { 
           "digital_currency": this.$route.query.digital,
           "fiat_currency": this.$route.query.fiat,
           "requested_currency":  this.$route.query.fiat,
@@ -276,9 +274,7 @@ export default {
           "payment_methods" : ["credit_card"] 
         }
         let res = await api.simpleQuote(params) 
-        if (res && res.quote_id) {
-          // state.otc.fiatCurrencies = res.supported_fiat_currencies
-          // state.otc.digitalCurrencies = res.supported_digital_currencies
+        if (res && res.quote_id) { 
           state.otc.valid_until = res.valid_until
           state.otc.quote_id = res.quote_id  
           this.quoteId = res.quote_id 
@@ -290,30 +286,14 @@ export default {
     handleClickBuy() {
       this.showModal = true
     }
-  },
-  mounted() {
-  },
+  }, 
   created() { 
     this.customPayType = this.payTypeList.find(item => item.name === this.$route.query.payment)
     this.fiatMoneyCurrency = this.$route.query.fiat
     this.digitalMoneyCurrency = this.$route.query.digital
     this.fiatMoneyAmount = this.$route.query.amount 
     this.fetchForeignAddress(this.digitalMoneyCurrency) 
-    this.fetchQuote()
-    // if (state.otc.fiatMoney) {
-    //   this.fiatMoneyCurrency = state.otc.fiatMoney.currency
-    //   this.fiatMoneyAmount = state.otc.fiatMoney.amount
-    // }
-    // if (state.otc.digitalMoney) {
-    //   this.digitalMoneyCurrency = state.otc.digitalMoney.currency
-    //   this.digitalMoneyAmount = state.otc.digitalMoney.amount
-    // }
-    // if (state.otc.fiatCurrencies && !this.fiatMoneyCurrency) { 
-    //   this.fiatMoneyCurrency = this.fiatCurrencyList[0]
-    // }
-    // if (state.otc.digitalCurrencyList && !this.digitalMoneyCurrency) { 
-    //   this.digitalMoneyCurrency = this.digitalCurrencyList[0]
-    // } 
+    this.fetchQuote() 
   }
 }
 </script>
