@@ -38,7 +38,7 @@
           </div>
           <div class="nav_link arrow-down" >
           </div>
-          <router-link :to="{name: 'OTC'}" class="nav_link ml-30">{{ $t('otc_trade') }}</router-link>
+          <router-link :to="{name: 'notc'}" class="nav_link ml-30">{{ $t('otc_trade') }}</router-link>
           <router-link
             v-if="false"
             :to="{name: 'RushBuy'}"
