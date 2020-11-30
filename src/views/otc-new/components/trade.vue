@@ -194,15 +194,9 @@ export default {
       this.switchCurrency(this.currency, this.side)
     } 
   },
-  async created() {
-    console.log('created')
+  async created() { 
     this.getCurrencyList()
-    this.switchCurrency(this.currency, this.side)
-    // this.$eh.$on('otc:currency:change', (arg1, arg2) => { 
-    //   setTimeout(() => { 
-    //     this.switchCurrency(arg1, arg2)
-    //    }, 200)
-    // })
+    this.switchCurrency(this.currency, this.side) 
 
     const $this = this  
     this.inter2 = setInterval(() => {

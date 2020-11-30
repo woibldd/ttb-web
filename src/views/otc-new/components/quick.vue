@@ -22,12 +22,15 @@
               <span>{{ coinInfo.issue_time }}</span>
             </div>
             <div flex-box="1">
-              <h6>总市值</h6>
-              <span>--</span>
+              <h6>流通量</h6>
+              <span>{{ coinInfo.issue_circulation }}</span>
             </div>
             <div flex-box="1">
-              <h6>历史最高价</h6>
-              <span>--</span>
+              <div v-if="customDigitalCurrency!=='USDT'">
+                <h6>24H最高价</h6>
+                <span>${{ maxPrice }} </span> 
+              </div>
+              &nbsp;
             </div>
           </div>
         </div>
@@ -70,7 +73,7 @@
             <div class="interlayer mt-5" flex="main:justify">
               <div class="l">&nbsp;</div>
               <div class="r">
-                资金账户可用 {{available || '--'}} 
+                资金账户可用 {{available || '0.00'}} &nbsp;
                 <router-link to="/fund/transfer">资金划转</router-link>
               </div>
             </div> 
@@ -347,7 +350,9 @@ export default {
       customPayType: null, 
       outInputText: '我要支付',
       inSelectText: '支付方式',
-      available: 0,  
+      available: 0, //余额  
+      ordering: 0, //冻结
+      maxPrice: 0
     }
   },
   computed: {
@@ -382,6 +387,7 @@ export default {
       this.customDigitalCurrency = this.digitalCurrencies[index]
       this.getHistory(this.customDigitalCurrency)
       this.getCurrencyInfo(this.customDigitalCurrency)  
+      this.fetchBalance()
     }, 
     handleCommandPayType(index) {
       this.customPayType = this.payTypeList[index]
@@ -455,9 +461,9 @@ export default {
           let x = +this.$big(index).times(ystep)
           ctx2.lineTo(x, y)
         })  
-        ctx2.strokeStyle = '#09C989'
-        // ctx2.closePath();
+        ctx2.strokeStyle = '#09C989' 
         ctx2.stroke()
+        this.maxPrice = max
       }
     }, 
     handleFiatCurrencyChange(sender) {
@@ -555,9 +561,23 @@ export default {
       if (!res.code && !!res.data) {
         this.rates = res.data;
       }
+    }, 
+    fetchBalance() {
+      this.available = 0
+      this.ordering = 0
+      service.getOtcBalance().then(res => {
+        if (res.code === 0) {
+          const arr = _.filter(res.data, item => item.currency === this.customDigitalCurrency)
+          if (arr.length > 0) {
+            this.available = arr[0].available
+            this.ordering = arr[0].ordering
+          }
+        }
+      })
     },
     async init() {
       await this.fetchRates() 
+      this.fetchBalance()
       //第一次请求simpleQuote接口是为了拿到simple平台支持的 数字货币列表 和 法币列表
       //所以这里币种可以写死，但是获取到的quote_id是没有意义的，需要下单前重新获取一次
       let res = await this.fetchQuote(100, 'BTC', 'USD') 

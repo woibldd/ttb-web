@@ -1,6 +1,6 @@
 <template>
   <div class="quick-offer-container">
-    <div class="quick-nav-wrap">
+    <div class="quick-nav-wrap"  v-if="pageState==='offer'">
       <div class="quick-nav" flex="main:left cross:center">
         <div class="quick-nav-item">
           <label>购买</label> 
@@ -83,7 +83,7 @@
         </div>
       </div> 
     </div>
-    <div class="quick-content-wrap">
+    <div class="quick-content-wrap" v-if="pageState==='offer'">
       <div class="quick-content">
         <div class="offer-price">
           <div class="title mt-20">
@@ -93,7 +93,7 @@
           <div class="details">
             <el-row v-if="quoteId" class="details-row">
               <el-col :span="8">
-                <h5> Simplex</h5>
+                <h5> <img src="@/assets/simplex-logo.png" style="vertical-align: middle;" alt=""> <span>Simplex</span>  </h5>
                 <p class="c-b0">
                   法定货币到数字货币转换的新标准。 Simplex让每个人都可......
                 </p>
@@ -118,10 +118,43 @@
             </el-row>
           </div>
         </div>
-        <div class="">
-
+        <div class=""> 
         </div>
       </div> 
+    </div>
+    <form id="payment_form" action="https://checkout.simplexcc.com/payments/new" method="post" target="_blank">
+      <input type="hidden" name="version" value="1">
+      <input type="hidden" name="partner" value="ixx">
+      <input type="hidden" name="payment_flow_type" value="wallet">
+      <input type="hidden" name="return_url_success" value="https://www.simplex.com">
+      <input type="hidden" name="return_url_fail" value="https://www.simplex.com/support">
+      <input type="hidden" name="payment_id" :value="paymentId"> 
+    </form>
+    <div class="payment-content-wrap" flex="main:center cross:center" v-if="pageState==='payment'">
+      <div class="payment-box" >
+        <div class="payment-row mt-30 logo">
+          <img src="@/assets/wait-payment.png" alt="">
+        </div>
+        <div class="payment-row mt-30">如果您已完成支付，请耐心等待Simplex给您打币</div>
+        <div class="payment-row mt-30" flex="main:justify">
+          <div class="l">
+            <label>待支付</label>
+            <span>{{`${fiatMoneyAmount} ${fiatMoneyCurrency}`}}</span>
+          </div>
+          <div class="r">
+            <label>到账时间</label>
+            <span>2-10 mins</span>
+          </div>
+        </div>
+        <div class="mt-30">
+          <router-link to="/notc/quick"><el-button type="primary" style="width:100%">{{$t('购买')}}</el-button></router-link>
+          
+        </div>
+        <div class="mt-20">
+          <el-button @click="handleClickGoSimplex" type="primary" style="width:100%" plain>{{$t('还未支付，继续支付')}}</el-button>
+        </div>
+      </div>
+       
     </div>
     
     <v-modal :open.sync="showModal" >
@@ -138,16 +171,7 @@
             <label style="white-space: normal;">您已知晓Simplex是由第三方独立运营的法定货币与数字货币交易平台，IXX不对因使用该服务遭受的任何损失或损害承担任何责任。</label> 
           </el-checkbox> 
         </div>
-        <div class="modal-quick-footer">
-          <form id="payment_form" action="https://checkout.simplexcc.com/payments/new" method="post">
-            <input type="hidden" name="version" value="1">
-            <input type="hidden" name="partner" value="ixx">
-            <input type="hidden" name="payment_flow_type" value="wallet">
-            <input type="hidden" name="return_url_success" value="https://www.simplex.com">
-            <input type="hidden" name="return_url_fail" value="https://www.simplex.com/support">
-            <input type="hidden" name="payment_id" :value="paymentId"> 
-          </form>
-
+        <div class="modal-quick-footer"> 
           <el-button v-loading="confirmLoading" @click="handleClickGoSimplex" :disabled="!agree" type="primary">
             前往Simplex支付
           </el-button>
@@ -187,7 +211,9 @@ export default {
       orderId: '',
       createTime: '',
       customPayType: null,
-      confirmLoading: false
+      confirmLoading: false,
+      pageState: 'offer',
+      is_kyc_update_required: false, //simplex payment接口返回的值
     }
   },
   computed: {
@@ -212,10 +238,21 @@ export default {
       
     },
     handleClickGoSimplex() {
-      this.fetchSimplePayment()
+      // this.fetchSimplePayment()
+      this.pageState = 'payment' 
+      let query = {
+        digital: this.digitalMoneyCurrency,
+        fiat: this.fiatMoneyCurrency,
+        payment: this.customPayType.name,
+        amount: this.fiatMoneyAmount,
+        s: 'payment'
+      }
+      this.$router.replace({name: 'quick-offer', query}) 
+      document.forms["payment_form"].submit();  
+      this.showModal = false
     },
     async fetchSimplePayment() { 
-      this.confirmLoading = true
+      // this.confirmLoading = true
       let params = { 
         "account_details": {
           "app_provider_id": "ixx",
@@ -241,10 +278,8 @@ export default {
       } 
       const res = await api.simplePayment(params) 
       if (res && res.is_kyc_update_required) {
-        document.forms["payment_form"].submit(); 
-      } else {
-        this.confirmLoading = false
-      }
+        this.is_kyc_update_required = res.is_kyc_update_required 
+      }  
     },
     fetchForeignAddress(currency='BTC') { 
       const params = {
@@ -259,31 +294,26 @@ export default {
         }
       })
     },
-    async fetchQuote() {   
-      while (!state.userInfo) {
-        await utils.sleep(3e3)
+    async fetchQuote() {    
+      let params = { 
+        "digital_currency": this.$route.query.digital,
+        "fiat_currency": this.$route.query.fiat,
+        "requested_currency":  this.$route.query.fiat,
+        "requested_amount": +this.$route.query.amount,
+        "wallet_id": "ixx", 
+        "payment_methods" : ["credit_card"] 
       }
-      
-      if (state && state.userInfo) {
-        let params = { 
-          "digital_currency": this.$route.query.digital,
-          "fiat_currency": this.$route.query.fiat,
-          "requested_currency":  this.$route.query.fiat,
-          "requested_amount": +this.$route.query.amount,
-          "wallet_id": "ixx", 
-          "payment_methods" : ["credit_card"] 
-        }
-        let res = await api.simpleQuote(params) 
-        if (res && res.quote_id) { 
-          state.otc.valid_until = res.valid_until
-          state.otc.quote_id = res.quote_id  
-          this.quoteId = res.quote_id 
-          this.validUntil =  res.valid_until
-          this.digitalMoneyAmount = res.digital_money.amount 
-        } 
+      let res = await api.simpleQuote(params) 
+      if (res && res.quote_id) { 
+        state.otc.valid_until = res.valid_until
+        state.otc.quote_id = res.quote_id  
+        this.quoteId = res.quote_id 
+        this.validUntil =  res.valid_until
+        this.digitalMoneyAmount = res.digital_money.amount 
       } 
+      this.fetchSimplePayment() 
     },
-    handleClickBuy() {
+    handleClickBuy() { 
       this.showModal = true
     }
   }, 
@@ -292,8 +322,10 @@ export default {
     this.fiatMoneyCurrency = this.$route.query.fiat
     this.digitalMoneyCurrency = this.$route.query.digital
     this.fiatMoneyAmount = this.$route.query.amount 
+    this.pageState = this.$route.query.s || 'offer'
     this.fetchForeignAddress(this.digitalMoneyCurrency) 
     this.fetchQuote() 
+
   }
 }
 </script>
@@ -359,6 +391,10 @@ export default {
           .details-row {
             padding: 30px 26px;
             border: 1px solid #878889;
+            h5 {
+              color: #202020;
+              font-size: 16px;
+            }
           }
         }
       }
@@ -391,6 +427,16 @@ export default {
       font-size: 14px;
       color: #AAAAAA;
       text-align: right;
+    }
+  }
+  .payment-content-wrap {
+    width: 100%;
+    height: 650px;
+    .payment-box {
+      width: 370px;
+      .logo {
+        text-align:center;
+      }
     }
   }
 

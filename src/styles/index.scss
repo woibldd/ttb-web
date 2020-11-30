@@ -251,25 +251,31 @@ $primary-color: #01CED1;
 
 .el-button.el-button--primary {
     color: #fff;
-    background-color: $primary-color !important;
-    border-color: $primary-color !important;
+    background-color: $primary-color;
+    border-color: $primary-color;
 
+    &.is-plain {
+      background-color: #ecf5ff;
+      color: $primary-color;
+    }
     &:hover, &:focus {
-        color: #fff !important;
-        background-color: $primary-color !important;
-        border-color: $primary-color !important;
+        color: #fff;
+        background-color: $primary-color;
+        border-color: $primary-color;
         opacity: .8;
     } 
 }
+
+
 .el-button.el-button--buy {
   color: #fff;
-  background-color: $otc-buy-bg !important;
-  border-color: $otc-buy-bg !important;
+  background-color: $otc-buy-bg;
+  border-color: $otc-buy-bg;
 
   &:hover, &:focus {
-      color: #fff !important;
-      background-color: $otc-buy-bg-light !important;
-      border-color: $otc-buy-bg-light !important;
+      color: #fff;
+      background-color: $otc-buy-bg-light;
+      border-color: $otc-buy-bg-light;
       opacity: .8;
   }
 }
