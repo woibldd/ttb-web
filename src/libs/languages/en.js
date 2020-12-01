@@ -3645,7 +3645,7 @@ export default {
     describe6:"Self-developed high-performance matching engine, fully supporting the matching speed of 2 million + / seconds / transaction pairs, non-stop service without jam."
   },
   pre_reviewed: "Order is being pre-reviewed",
-  gold_account: "Contract - USDT Contract",
+  gold_account: "Contract - USDT",
   gold_contract: "Contract - USDT",
   mix_side: {
     1: "Buy long",
