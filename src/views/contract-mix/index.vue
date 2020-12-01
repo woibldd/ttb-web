@@ -194,21 +194,7 @@
                   v-for="(value,key) in mapFormContent.mapBtns"
                   :key="key"
                   :flex-box="+key > 2 ? 2 : 1"
-                  :class="['btn', {active:activeBtnsKey === key}]">
-                  <!-- <dropdown
-                    v-if="key === '3'"
-                    v-model="activePriceType"
-                    :menu-options="menuOptions"
-                    label="label">
-                    <el-button
-                      class="custom-btn"
-                      :class="{active:activeBtnsKey === key}"
-                      size="small"
-                      plain
-                      @click="handleSwitch(key)">
-                      {{ activePriceType.label }} <i class="el-icon-caret-bottom" />
-                    </el-button>
-                  </dropdown> -->
+                  :class="['btn', {active:activeBtnsKey === key}]"> 
                   <el-button
                     v-tooltip.bottom="{html: true, content: $tR(`mapFormContent.mapBtns.${key}.describe`), classes: 'contract'}"
                     class="custom-btn"
@@ -217,17 +203,7 @@
                     plain
                     @click="handleSwitch(key)">
                     {{ $tR(`mapFormContent.mapBtns.${key}.text`) }}
-                  </el-button>
-                  <!-- <el-tooltip
-                    placement="bottom"
-                    effect="dark"
-                    popper-class="custom-tooltip">
-                    <div
-                      v-if="!!$tR(`mapFormContent.mapBtns.${key}.describe`)"
-                      slot="content"
-                      style="width:200px;font-size:12px;line-height:20px">{{ $tR(`mapFormContent.mapBtns.${key}.describe`) }}</div>
-
-                  </el-tooltip> -->
+                  </el-button> 
                 </div>
               </div>
               <!-- 仓位、价格 -->
@@ -243,21 +219,7 @@
                   flex="main:justify box:mean">
                   <div style="color: #666;">{{ $tR(`mapFormContent.perfactPrice`) }}</div>
                 </div>
-                <template v-else>
-                  <!-- <div
-                    v-if="key === 'triggerType'"
-                    class="transactionPrice">
-                    <el-select
-                      v-model="trigger_type"
-                      size="small"
-                      class="custom-select">
-                      <el-option
-                        v-for="(subValue,subKey) in mapFormContent.mapTriggerType"
-                        :key="subKey"
-                        :label="$tR(`mapFormContent.mapTriggerType.${subKey}`)"
-                        :value="+subKey" />
-                    </el-select>
-                  </div> -->
+                <template v-else> 
                   <input
                     :value="(i===0 || i===2) ? activeAcountAndPriceArr[i]:(activeAcountAndPriceArr[i] || (activeProduct.MIX||{}).current)"
                     type="text"
@@ -378,17 +340,8 @@
                     v-else
                     style="font-size:12px"
                     href="/fund/my/contractMix/index"
-                    type="primary">{{ (activeBalance||{}).available_balance||0| bigRound(8) }} {{ (activeBalance||{}).currency }}</el-link>
- 
-                </div>
-                <!-- <div>
-                  <el-checkbox
-                    class="text-light"
-                    v-if="+activeBtnsKey===1"
-                    v-model="passive">
-                    {{ $tR(`mapFormContent.passive`) }}
-                  </el-checkbox>
-                </div> -->
+                    type="primary">{{ (activeBalance||{}).available_balance||0| bigRound(8) }} {{ (activeBalance||{}).currency }}</el-link> 
+                </div> 
                 <div
                   v-if="+activeBtnsKey > 2"
                   flex>
@@ -407,20 +360,8 @@
                         :label="$tR(`mapFormContent.mapTriggerType.${subKey}`)"
                         :value="+subKey" />
                     </el-select>
-                  </div>
-                  <!-- <el-checkbox v-if="+activeBtnsKey > 2"
-                              v-model="trigger_close ">{{ $tR(`mapFormContent.trigger_close`) }}</el-checkbox> -->
-                  <!-- <el-checkbox
-                    flex-box="1"
-                    v-model="trigger_close ">{{ $tR(`mapFormContent.trigger_close`) }}</el-checkbox> -->
-                </div>
-                <!-- <div flex="main:justify">
-                  <el-tooltip popper-class="custom-tooltip">
-                    <div slot="content"
-                        style="width:200px;">{{ '选择直接下单后将不会弹出详细委托表单信息而直接下单，请慎重选择' }}</div>
-                    <el-checkbox v-model="popoverDisabled">{{ $tR(`mapFormContent.notip`) }}</el-checkbox>
-                  </el-tooltip> 
-                </div> -->
+                  </div> 
+                </div> 
               </div>
             </div>
           </div>  
@@ -1108,6 +1049,7 @@ export default {
       this.activeAcountAndPriceArr[0] = params.amount || this.activeAcountAndPriceArr[0]
       this.activeAcountAndPriceArr[1] = params.price || this.activeAcountAndPriceArr[1]
     })
+    this.$eh.$on('mix:handleAmount', this.handleAmountObj)
   },
   methods: {
     subMarket() { 

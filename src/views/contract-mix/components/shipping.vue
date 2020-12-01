@@ -383,10 +383,7 @@ export default {
       return toBig(this.currencyRates['USD']).times(value)
     },
     async closeStorehouse (item, isMarket) {
-      this.loadingHouse = true
-      // "contract_close_tips1": "在%{price}价格%{amount}张%{currency}合约。",
-      // "contract_close_tips2": "在执行时，将平掉你的整个仓位。",
-      // const side = item.holding > 0 ? `<span class="text-danger">卖出</span>` : `<span class="text-success">买入</span>`
+      this.loadingHouse = true 
       const option = item.side === 1 ? `<span class="text-danger">卖出</span>` : `<span class="text-success">买入</span>`
       const price = isMarket ? '最优' : this.input || this.markData[this.activeProduct.currency]
       const amount = Math.abs(item.holding)
@@ -400,36 +397,61 @@ export default {
       )
       const orderPrice = isMarket ? 0 : this.input || this.markData[this.activeProduct.currency]
 
-      // const isOk = await this.confirm(`<span class="text-primary">卖出</span>在${isMarket ? '最优' : this.input || this.markData[item.currency]}价格${item.holding}张${item.currency}合约在执行时，将平掉你的整个仓位`, isMarket ? '市价平仓' : '限价平仓')
       if (!isOk) {
         this.loadingHouse = false
         return
       }
 
-      const params = { name: item.name, side: item.side, price: orderPrice }
-      // console.log({params})
-      closeOrder(params).then(res => {
-        this.loadingHouse = false
-        this.$emit('change')
-        if (!res.code) {
-          this.$message.success(this.$t('tj_cg'))
-        } else {
-          this.$message.error(res.data)
-        }
-      }).catch(res => {
-        this.loadingHouse = false
-      })
-      // if (this.visibleChecked) {
-      //   this.disabled = true
-      // }
-      // const params = { name: item.name, user_id: item.user_id, price: isMarket ? '0' : this.input }
-      // closeStorehouse(params).then(res => {
+      // const params = { name: item.name, side: item.side, price: orderPrice } 
+      // closeOrder(params).then(res => {
+      //   this.loadingHouse = false
       //   this.$emit('change')
-      //   this.$message.success(this.$t('handleSuccess'))
+      //   if (!res.code) {
+      //     this.$message.success(this.$t('tj_cg'))
+      //   } else {
+      //     this.$message.error(res.data)
+      //   }
+      // }).catch(res => {
+      //   this.loadingHouse = false
       // })
-      // this.visible = false
-      // this.visible1 = false
-    },
+
+      if (isMarket) {
+        const mparams = { name: item.name, side: item.side, price: 0 }
+        closeOrder(mparams).then(res => {  
+          if (!res.code) {
+            this.$eh.$emit('mix:handleAmount', this.handleAmountObj)
+            this.$message.success(this.$t('tj_cg'))
+          } else {
+            this.$message.error(res.data)
+          }
+        })
+        this.loadingHouse = false 
+      } else {
+        const params = { 
+          amount: amount, 
+          name: item.name,
+          currency: item.currency, 
+          price: orderPrice,
+          type: 1
+        }  
+        if (item.side===1) {
+          params.side = 3
+        } else {
+          params.side = 4
+        }
+
+        submitOrder(params).then(res => {
+          if (!res.code) {
+            this.$message.success(this.$t('tj_cg')) 
+            this.$eh.$emit('mix:handleAmount', this.handleAmountObj)
+            this.loadingHouse = false
+          } else {
+            this.$message.error(res)
+            this.loadingHouse = false
+          }
+        })
+      }  
+    }, 
     cancelOrder (item) {
       const { user_id, future_close_id, name } = item
       this.loadingHouse = true
