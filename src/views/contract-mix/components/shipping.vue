@@ -168,31 +168,12 @@
             <p v-else-if="i>4">≈ {{ translateByRate(item[key])|bigRound(2) }} USD </p> -->
           </div>
         </div>
-        <div
+        <!-- <div
           v-if="!item.future_close_id || +(item.close_position_price || 0) === 0 "
           v-loading="loadingHouse"
           flex="dir:top cross:center main:justify"
           element-loading-spinner="el-icon-loading"
-          element-loading-background="rgba(0, 0, 0, 0.5)">
-          <!-- <el-popover :ref="`popover-${item.name}`" :disabled="disabled" placement="top" width="160">
-            <p>确定要以 <span class="text-primary">市价【{{ $t(`contract.mapFormContent.perfactPrice`) }}】</span>平掉所有持仓吗</p>
-            <hr>
-            <div flex="main:justify cross:center">
-              <el-checkbox v-model="visibleChecked">不在提示</el-checkbox>
-              <el-button type="primary" size="mini" @click="closeStorehouse(item,true)">确定</el-button>
-            </div>
-            <el-button slot="reference" type="primary" @click="visibleChecked && closeStorehouse(item,true)">市价平仓</el-button>
-          </el-popover>
-          <div />
-          <el-popover placement="top" width="160">
-            <el-input :value="input||markData[item.currency]" selected size="small" autofocus placeholder="请输入平仓价格" @input="value=>input=value" />
-            <p style="margin-top:5px">确定到<span class="text-primary">指定价格</span>后平掉所有持仓吗</p>
-            <hr>
-            <div flex="main:justify cross:center dir:right">
-              <el-button type="primary" size="mini" @click="closeStorehouse(item)">确定</el-button>
-            </div>
-            <el-button slot="reference" type="primary" plain>限价平仓</el-button>
-          </el-popover> -->
+          element-loading-background="rgba(0, 0, 0, 0.5)"> 
           <div
             flex="dir:top"
             style="font-size:12px">
@@ -210,9 +191,52 @@
           <div
             class="el-button el-button--small bd-primary"
             style="margin-left:0"
-            @click="closeStorehouse(item,true)">{{ $t('contract_close_market') }}</div>
-          <!-- <el-button size="small" style="margin-left:0" type="primary" @click="closeStorehouse(item)" plain>{{ $t('contract_close_limit') }}</el-button>
-          <el-button size="small" style="margin-left:0" type="primary" @click="closeStorehouse(item,true)" plain>{{ $t('contract_close_market') }}</el-button> -->
+            @click="closeStorehouse(item,true)">{{ $t('contract_close_market') }}</div> 
+        </div> --> 
+        <!-- 平仓 -->
+        <div
+          :class="['close_position', 'pl-20', 'pr-20', state.skin]"
+          v-if="!item.future_close_id || +(item.close_position_price || 0) === 0 "
+          v-loading="loadingHouse"
+          flex="dir:left main:justify"
+          element-loading-spinner="el-icon-loading"
+          element-loading-background="rgba(0, 0, 0, 0.5)"> 
+          <div 
+            style="font-size:12px" class="mr-8">
+            <div class="ml-5 mr-10">{{ $t('contract_exit_price') }}</div>
+            <div>
+              <input
+                :value="item.inputEdit ? item.input : (item.input || bigRound((item.product.MARKET || {}).current, 2))"
+                :class="['custom-input', state.skin]"
+                style="width:75px;text-align:center;height: 20px;margin: 1px;"
+                @focus="() => { item.input = item.input || (item.product.MARKET || {}).current; item.inputEdit = true}"
+                @blur="() => item.inputEdit = false" 
+                @input="e=>item.input = e.target.value">  
+            </div> 
+            <div>
+              <el-button size="mini" type="success" class="mt-10" @click="closeStorehouse(item, true)">
+                {{ $t('contractMix.closeMarket') }}
+              </el-button> 
+            </div>
+          </div>
+          <div 
+            style="font-size:12px">
+            <div class="ml-5 mr-10">{{ $t('contract_equal_werehouse_amount') }}</div> 
+            <div>
+              <el-input-number  
+                size="mini" 
+                :min="1" 
+                style="width:79px;"
+                v-model="item.inputAmount" 
+                :controls="false"></el-input-number> 
+            </div>
+            <el-button size="mini" type="success" class="mt-10"  plain  @click="closeStorehouse(item)">
+              {{ $t('contract_close_limit') }}
+            </el-button>
+          </div>
+          <div class="text-primary" >
+            <icon name="question-n" v-tooltip.top="{html: true, content: $t('contractMix.closeMarketTips')}"/>
+          </div> 
         </div>
         <div
           v-else
@@ -226,18 +250,10 @@
             <i
               class="el-icon-close hover-point"
               title="取消"
-              @click="cancelOrder(item)" /></p>
+              @click="cancelOrder(item)" />
               <!-- <el-button type="primary" @click="cancelOrder(item)">取消平仓</el-button> -->
           </div>
-        </div>
-        <!-- <div class="el-loading-mask" style="background-color: rgba(0, 0, 0, 0.8);">
-          <div class="el-loading-spinner">
-            <p>
-              <span><i class="el-icon-bell" /> 系统以150的价格发布了平仓委托 </span>
-              <el-link type="primary" :underline="false">取消平仓</el-link>
-            </p>
-          </div>
-        </div> -->
+        </div> 
       </div>
 
     </div> 
@@ -250,6 +266,7 @@
 import { bigDiv, bigTimes, calcProfit, toBig, bigRound } from '@/utils/handleNum'
 import { getRates, closeOrder, cancelOrder, modifyOrder, setTransferMargin, submitOrder } from '@/modules/api/contractMix'
 import utils from '@/modules/utils'
+import {state} from '@/modules/store'
 export default {
   name: 'Shipping',
   props: {
@@ -280,6 +297,7 @@ export default {
   },
   data () {
     return {
+      state,
       currencyRates: null,
       visible: false,
       visible1: false,
@@ -382,39 +400,98 @@ export default {
       // return bigTimes([this.currencyRates['USD'], value])
       return toBig(this.currencyRates['USD']).times(value)
     },
-    async closeStorehouse (item, isMarket) {
-      this.loadingHouse = true 
-      const option = item.side === 1 ? `<span class="text-danger">卖出</span>` : `<span class="text-success">买入</span>`
-      const price = isMarket ? '最优' : this.input || this.markData[this.activeProduct.currency]
-      const amount = Math.abs(item.holding)
-      const currency = item.currency
-      const isOk = await utils.confirm(this, {
-          title:this.$t('contract_action_open_short'),
-          content: `${option}${this.$t('contract_close_tips1', {price, amount, currency})}<br>${this.$t('contract_close_tips2')}`,
-          type: 'warning',
-          dangerouslyUseHTMLString: true,
-        }
-      )
-      const orderPrice = isMarket ? 0 : this.input || this.markData[this.activeProduct.currency]
+    // async closeStorehouse (item, isMarket) {
+    //   this.loadingHouse = true 
+    //   const option = item.side === 1 ? `<span class="text-danger">卖出</span>` : `<span class="text-success">买入</span>`
+    //   const price = isMarket ? '最优' : this.input || this.markData[this.activeProduct.currency]
+    //   const amount = Math.abs(item.holding)
+    //   const currency = item.currency
+    //   const isOk = await utils.confirm(this, {
+    //       title:this.$t('contract_action_open_short'),
+    //       content: `${option}${this.$t('contract_close_tips1', {price, amount, currency})}<br>${this.$t('contract_close_tips2')}`,
+    //       type: 'warning',
+    //       dangerouslyUseHTMLString: true,
+    //     }
+    //   )
+    //   const orderPrice = isMarket ? 0 : this.input || this.markData[this.activeProduct.currency]
 
+    //   if (!isOk) {
+    //     this.loadingHouse = false
+    //     return
+    //   } 
+
+    //   if (isMarket) {
+    //     const mparams = { name: item.name, side: item.side, price: 0 }
+    //     closeOrder(mparams).then(res => {  
+    //       if (!res.code) {
+    //         this.$eh.$emit('mix:handleAmount', this.handleAmountObj)
+    //         this.$message.success(this.$t('tj_cg'))
+    //       } else {
+    //         this.$message.error(res.data)
+    //       }
+    //     })
+    //     this.loadingHouse = false 
+    //   } else {
+    //     const params = { 
+    //       amount: amount, 
+    //       name: item.name,
+    //       currency: item.currency, 
+    //       price: orderPrice,
+    //       type: 1
+    //     }  
+    //     if (item.side===1) {
+    //       params.side = 3
+    //     } else {
+    //       params.side = 4
+    //     }
+
+    //     submitOrder(params).then(res => {
+    //       if (!res.code) {
+    //         this.$message.success(this.$t('tj_cg')) 
+    //         this.$eh.$emit('mix:handleAmount', this.handleAmountObj)
+    //         this.loadingHouse = false
+    //       } else {
+    //         this.$message.error(res)
+    //         this.loadingHouse = false
+    //       }
+    //     })
+    //   }  
+    // }, 
+    async closeStorehouse (item, isMarket) {
+      if (!item.inputAmount && !isMarket) {
+        this.$message.warning(this.$t('contract_order_enter_tips1'))
+        return
+      }
+      this.loadingHouse = true 
+      const title = isMarket ? this.$t('contract_close_market') : this.$t('contract_close_limit')  
+      let option = item.side === 1 ? `<span class="text-danger">${ this.$t('order_side_sell')}</span>` : `<span class="text-success">${this.$t('order_side_buy')}</span>`
+      let price = item.input || this.markData[this.activeProduct.currency] 
+      let amount = item.inputAmount
+      let currency = item.currency 
+
+      let content = `${option}${this.$t('contract_close_tips1', {price, amount, currency: item.name})}`
+      if (isMarket) {
+        option = item.side === 1 ? this.$t('contract_close_market_buy') : this.$t('contract_close_market_sell')
+        content = `<div>${this.$t('contractMix.closeMarketConfirm')}</div>`
+      }
+
+      
+      const isOk = await utils.confirm(this, {
+          customClass: "ix-message-box-wrapper",
+          // confirmBtnText: confirmbtn,
+          confirmButtonClass: "btn--confirm",
+          cancelButtonClass: "btn--cancel",
+          title,
+          content,
+          dangerouslyUseHTMLString: true
+        }); 
+      const orderPrice = isMarket ? 0 : item.input || this.markData[this.activeProduct.currency]
+
+      // const isOk = await this.confirm(`<span class="text-primary">卖出</span>在${isMarket ? '最优' : this.input || this.markData[item.currency]}价格${item.holding}张${item.currency}合约在执行时，将平掉你的整个仓位`, isMarket ? '市价平仓' : '限价平仓')
       if (!isOk) {
         this.loadingHouse = false
         return
-      }
-
-      // const params = { name: item.name, side: item.side, price: orderPrice } 
-      // closeOrder(params).then(res => {
-      //   this.loadingHouse = false
-      //   this.$emit('change')
-      //   if (!res.code) {
-      //     this.$message.success(this.$t('tj_cg'))
-      //   } else {
-      //     this.$message.error(res.data)
-      //   }
-      // }).catch(res => {
-      //   this.loadingHouse = false
-      // })
-
+      } 
       if (isMarket) {
         const mparams = { name: item.name, side: item.side, price: 0 }
         closeOrder(mparams).then(res => {  
@@ -428,7 +505,7 @@ export default {
         this.loadingHouse = false 
       } else {
         const params = { 
-          amount: amount, 
+          amount: item.inputAmount, 
           name: item.name,
           currency: item.currency, 
           price: orderPrice,
@@ -450,8 +527,8 @@ export default {
             this.loadingHouse = false
           }
         })
-      }  
-    }, 
+      } 
+    },
     cancelOrder (item) {
       const { user_id, future_close_id, name } = item
       this.loadingHouse = true
@@ -644,6 +721,18 @@ export default {
           }
         }
       }
+    }
+    .close_position{
+      /deep/ .el-input .el-input__inner { 
+        border-radius: 0;
+        height:24px;
+      }
+      &.dark {
+        /deep/ .el-input .el-input__inner {
+          background-color: transparent; 
+          color: #FFFFFF;
+        } 
+      } 
     }
 
   }

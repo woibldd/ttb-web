@@ -2911,6 +2911,9 @@ export default {
     handleSuccess: '操作成功',
     index: '指数',
     currentPlace: '当前仓位',
+    closeMarket: '市价全平',
+    closeMarketConfirm: '您确认对此仓位按进行全部市价平仓吗',
+    closeMarketTips: '选择市价全平时，根据仓位当前拥有持仓数量进行相对应平仓，跟输入的平仓数量无关',
     side: {
       1: '买入开多',
       2: '卖出开空',

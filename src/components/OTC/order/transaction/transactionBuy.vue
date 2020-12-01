@@ -692,8 +692,7 @@ export default {
       })
     },
     removefill() {
-      if (this.active_id <= 0) {
-        console.log(11)
+      if (this.active_id <= 0) { 
       }
     },
     amountInput() {
@@ -794,7 +793,7 @@ export default {
       })
     },
     changePayType(e) {
-      console.log(e)
+      // console.log(e)
     },
     async setQr(url) {
       const QRCode = await qrcode()

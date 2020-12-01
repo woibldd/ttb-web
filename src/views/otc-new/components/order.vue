@@ -105,7 +105,7 @@
             v-for="(item, index) in orderBtn"
             :key="index"
             :class="{selected: orderActive === index}"
-            @click="orderSwtich(index)">{{ item }}</span>
+            @click="orderSwtich(index)">{{ $t(item) }}</span>
             <icon
               name="robot-info"
               v-tooltip.top-end="{html: true,content: $t('otc_suspend_all_tips')} "
@@ -300,29 +300,12 @@
                         style="font-size: 12px;"
                         @click="closeHadle(item)">{{ $t('otc_cancel_order') }}</a>
                     </dd>
-                  </div>
-                  <!-- <dd v-if="item.bankId">
-                    姓名:
-                    <span>{{ item.realName }}</span>
-                  </dd>
-                  <dd v-if="item.bankId">
-                    账号:
-                    <span>{{ item.pAccount }}</span>
-                  </dd>
-                  <dd v-if="item.bankId && item.paySet === 1">
-                    银行卡
-                    {{item.bankAccount}}
-                  </dd> -->
+                  </div> 
                 </dl>
                 <div
                   v-if="item.side === 1 && item.state === 1 && !item.appeal && !item.other_appeal"
                   class="btn btn1"
-                  @click="detailHandle(item)">{{ $t('otc_already_paid') }}</div>
-                <!--<div-->
-                <!--class="btn btn2"-->
-                <!--v-if="item.side === 1 && item.state === 1 && !item.appeal && !item.other_appeal"-->
-                <!--@click="closeHadle(item)"-->
-                <!--&gt;{{ $t('otc_cancel_order') }}</div>-->
+                  @click="detailHandle(item)">{{ $t('otc_already_paid') }}</div> 
                 <template>
                   <div
                     v-if="item.side === 2 && item.state === 2 && !item.appeal && !item.other_appeal"
@@ -442,7 +425,7 @@ export default {
         }
       ],
       token: window.localStorage.getItem('X-TOKEN'),
-      orderBtn: [this.$t('contract_cancel_all'), this.$t('otc_tab_lisetr3'), this.$t('otc_tab_lisetr4')],
+      orderBtn: ['contract_cancel_all', 'otc_tab_lisetr3', 'otc_tab_lisetr4'],
       orderActive: -1,
       tableDataUname: [],
       count: 0,
@@ -553,26 +536,7 @@ export default {
       showQRcode: false,
       datalist: [] 
     }
-  },
-  // computed: {
-  //   userInfo () {
-  //     return state.userInfo || {}
-  //   },
-  //   id () {
-  //     return this.userInfo.id
-  //   },
-  //   terminal () {
-  //     if(this.aver.state === 1){
-  //       return this.aver.create_time + 15 * 60 * 1000
-  //     } else if (this.aver.state === 2){
-  //       return this.aver.pay_time + 12 * 60 * 60 * 1000
-  //     }
-  //     return 0
-  //   }
-  // },
-  // mounted() {
-  //   this.setTimeInit()
-  // },
+  }, 
   beforeDestroy() {
     clearInterval(this.timer)
   },
@@ -732,19 +696,7 @@ export default {
       if (item.otc_collection) {
         this.bankData.push(item.otc_collection)
       } else {
-        item.otc_collection_list.forEach(item => {
-          // const payType =
-          //   item.payment_type === 1
-          //     ? item.deposit_bank
-          //     : item.payment_type === 2
-          //       ? this.$t('payment_namezfb')
-          //       : this.$t('payment_weChat_adasunt')
-          // const payAccount = item.alipay_account
-          //   ? item.alipay_account
-          //   : item.card_number
-          //     ? item.card_number
-          //     : item.we_chat_account
-
+        item.otc_collection_list.forEach(item => { 
           const payAccount = this.processValue('payment_type', item)
           payData.push({
             collection_id: item.collection_id,

@@ -513,8 +513,7 @@ export default {
       }
     },
     isMerchant () {
-      if (this.state.userInfo) {
-        console.log({userinfo: this.state.userInfo})
+      if (this.state.userInfo) { 
         return this.state.userInfo.is_merchant
       }
       return false
@@ -606,8 +605,7 @@ export default {
         if (this.side === 2 && !this.order.remark) {
           this.order.remark  = this.$t('otc_order_default_tips')
         }
-
-        // console.log({total: this.total})
+ 
         service.createOtcOrder(this.order).then(res => {
           this.nodata = false
           this.nodata1 = false
@@ -670,8 +668,7 @@ export default {
     inputPrice () {
       this.flag = false
       this.alertTitle = ''
-      this.awitFlag = false 
-      console.log({symbolInfo:this.symbolInfo})
+      this.awitFlag = false  
       let buy_price_one = this.symbolInfo.buy_price_one
       let sell_price_one = this.symbolInfo.sell_price_one
       if (this.legal_currency.toUpperCase() === 'SGD') {
@@ -696,8 +693,7 @@ export default {
            // `您发布的购买${this.currency}的交易单，价格为${this.inputPrice}CNY高于卖一价${this.symbolInfo.sell_price_one}CNY，以该价格发布可能给您带来损失`
           } else {
             this.flag = false
-            if (awit_buyPrice > 0) {
-              console.log({awit_buyPrice})
+            if (awit_buyPrice > 0) { 
               this.awitFlag = true
             } else {
               this.awitFlag = false
@@ -710,8 +706,7 @@ export default {
           // `您发布的出售${this.currency}的交易单，价格为${this.inputPrice}CNY低于买一价${ this.symbolInfo.buy_price_one}CNY，以该价格发布可能给您带来损失`
           } else {
             this.flag = false
-            if (awit_sellPrice > 0) {
-              // console.log({awit_sellPrice})
+            if (awit_sellPrice > 0) { 
               this.awitFlag = true
             } else {
               this.awitFlag = false

@@ -252,8 +252,7 @@ export default {
       if (window.localStorage.getItem('X-TOKEN')) {
         this.operation = 1
         this.operSide = this.side
-        this.selectedRow = row
-        console.log(this.selectedRow)
+        this.selectedRow = row 
         this.showSide = true
       } else {
         this.$router.push({
@@ -333,8 +332,7 @@ export default {
       service.otcSymbolList({}).then((res) => {
         if (res.code === 0) { 
           // this.$set(this, "currencyList", res.data ) 
-          this.digitalCurrencies = res.data
-          console.log(this.digitalCurrencies)
+          this.digitalCurrencies = res.data 
           if (!this.state.otc.symbolInfo) {
             this.state.otc.symbolInfo = res.data[0]
           }
