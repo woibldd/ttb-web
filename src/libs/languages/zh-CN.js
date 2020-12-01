@@ -3308,7 +3308,27 @@ export default {
     right_bar: {
       order_fee: "平台服务费(%{currency})",
       orderdeal_fee: "手续费"
-    }
+    },
+    quick: '快捷买币',
+    ctoc: 'C2C交易',
+    about: '关于',
+    account: '资金账户可用',
+    sell: '我要出售',
+    payment: '我要支付',
+    payType: '支付方式',
+    collectionType: '收款方式',
+    quotation: '最新报价',
+    paymentDate: '到账时间',
+    available: '可获得',
+    tag1: '综合手续费、到账时间、价格等，为您推荐',
+    tag2: '法定货币到数字货币转换的新标准。',
+    tag3: '如果您已完成支付，请耐心等待Simplex给您打币',
+    tag4: '还未支付，继续支付',
+    tag5: '即将从IXX跳转至Simplex',
+    tag6: '如果您已在Simplex完成支付请耐心等待，Simplex将在2~10分钟内 将数字货币充值到您的IXX资金账户。',
+    tag7: '您已知晓Simplex是由第三方独立运营的法定货币与数字货币交易平台，IXX不对因使用该服务遭受的任何损失或损害承担任何责任。',
+    gotopay: '前往Simplex支付', 
+    buy_now: "立即购买",
   },
   el: {
     pagination: {
@@ -3655,8 +3675,7 @@ export default {
     winLimit: '止盈',
     price: '市价',
     closeOut: '平仓'
-  },
-
+  }, 
   // 知识库相关
   knowledgeBase: {
     searchTitle: '请输入您的问题', placeholder: '在这儿搜索',

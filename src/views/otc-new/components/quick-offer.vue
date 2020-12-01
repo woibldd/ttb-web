@@ -3,9 +3,11 @@
     <div class="quick-nav-wrap"  v-if="pageState==='offer'">
       <div class="quick-nav" flex="main:left cross:center">
         <div class="quick-nav-item">
-          <label>购买</label> 
+          <label>{{$t('otc_side_1')}}</label> 
           <div class="quick-nav-drop">
-            <el-dropdown @command="handleCommandDigitalCurrency">
+            <icon :name="`coin-${digitalMoneyCurrency}`" />
+            <span>{{digitalMoneyCurrency}}</span>   
+            <!-- <el-dropdown @command="handleCommandDigitalCurrency">
               <div class="el-dropdown-link" flex="main:justify cross:center">
                 <label>
                   <span v-if="digitalMoneyCurrency">
@@ -24,13 +26,18 @@
                   <icon :name="`coin-${item}`"/> {{item}} 
                 </el-dropdown-item> 
               </el-dropdown-menu>
-            </el-dropdown>
+            </el-dropdown> -->
           </div>
         </div>
-        <div class="quick-nav-item">
-          <label>金额</label>  
-          <div class="quick-nav-drop"> 
-            <el-input-number 
+        <div class="quick-nav-item amount">
+          <label>{{$t('otc_amount_money')}}</label>  
+          <div class="quick-nav-drop " flex="main:justify"> 
+            <span>{{fiatMoneyAmount}}</span>
+            <span v-if="fiatMoneyCurrency">
+              <icon :name="`coin-${fiatMoneyCurrency}`" />
+              {{fiatMoneyCurrency}} 
+            </span>
+            <!-- <el-input-number 
               v-model="fiatMoneyAmount"  
               @change="handleAmountChange" 
               :controls="false"></el-input-number>
@@ -53,13 +60,18 @@
                   <icon :name="`coin-${item}`"/> {{item}} 
                 </el-dropdown-item> 
               </el-dropdown-menu>
-            </el-dropdown>
+            </el-dropdown> -->
           </div>
         </div> 
         <div class="quick-nav-item">
-          <label>支付方式</label>
+          <label>{{$t('otc.payType')}}</label>
           <div class="quick-nav-drop">
-            <el-dropdown @command="handleCommandType">
+            <span v-if="customPayType">
+              <icon :name="customPayType.icon" />
+              {{customPayType.name}} 
+            </span>
+            &nbsp;
+            <!-- <el-dropdown @command="handleCommandType">
               <div class="el-dropdown-link" flex="main:justify cross:center">
                 <label>
                   <span v-if="customPayType">
@@ -78,7 +90,7 @@
                   <icon :name="item.icon"/> {{item.name}} 
                 </el-dropdown-item> 
               </el-dropdown-menu>
-            </el-dropdown>
+            </el-dropdown> -->
           </div>
         </div>
       </div> 
@@ -87,33 +99,33 @@
       <div class="quick-content">
         <div class="offer-price">
           <div class="title mt-20">
-            <strong>最有报价</strong>
-            <span>综合手续费、到账时间、价格等，为您推荐</span>
+            <strong>{{$t('otc.quotation')}}</strong>
+            <span>{{$t('otc.tag1')}}</span>
           </div>
           <div class="details">
             <el-row v-if="quoteId" class="details-row">
               <el-col :span="8">
                 <h5> <img src="@/assets/simplex-logo.png" style="vertical-align: middle;" alt=""> <span>Simplex</span>  </h5>
                 <p class="c-b0">
-                  法定货币到数字货币转换的新标准。 Simplex让每个人都可......
+                  {{$t('otc.tag2')}} 
                 </p>
               </el-col>
               <el-col :span="4">
-                <label class="c-b0">到账时间</label>
+                <label class="c-b0">{{$t('otc.paymentDate')}}</label>
                 <div>2-10 mins</div>
               </el-col>
               <el-col :span="4">
-                <label class="c-b0">可获得{{`(${digitalMoneyCurrency})`}}</label>
+                <label class="c-b0">{{$t('otc.available')}}{{`(${digitalMoneyCurrency})`}}</label>
                 <div>{{digitalMoneyAmount}}</div>
               </el-col>
               <el-col :span="4">              
-                <label class="c-b0">参考单价</label>
+                <label class="c-b0">{{$t('ck_jg')}}</label>
                 <div class="text-primary" v-if="fiatMoneyAmount && digitalMoneyAmount">
                   {{$big(fiatMoneyAmount).div(digitalMoneyAmount).round(8,0)}}
                 </div>
               </el-col>
               <el-col :span="4">
-                <el-button @click="handleClickBuy" type="primary">购买</el-button>
+                <el-button style="width: 120px;" @click="handleClickBuy" type="primary">{{$t('otc_side_1')}}</el-button>
               </el-col>
             </el-row>
           </div>
@@ -135,23 +147,23 @@
         <div class="payment-row mt-30 logo">
           <img src="@/assets/wait-payment.png" alt="">
         </div>
-        <div class="payment-row mt-30">如果您已完成支付，请耐心等待Simplex给您打币</div>
+        <div class="payment-row mt-30">{{$t('otc.tag3')}}</div>
         <div class="payment-row mt-30" flex="main:justify">
           <div class="l">
-            <label>待支付</label>
+            <label>{{$t('otc_sideoc_6')}}</label>
             <span>{{`${fiatMoneyAmount} ${fiatMoneyCurrency}`}}</span>
           </div>
           <div class="r">
-            <label>到账时间</label>
+            <label>{{$t('otc.paymentDate')}}</label>
             <span>2-10 mins</span>
           </div>
         </div>
         <div class="mt-30">
-          <router-link to="/notc/quick"><el-button type="primary" style="width:100%">{{$t('购买')}}</el-button></router-link>
+          <router-link to="/notc/quick"><el-button type="primary" style="width:100%">{{$t('otc_side_1')}}</el-button></router-link>
           
         </div>
         <div class="mt-20">
-          <el-button @click="handleClickGoSimplex" type="primary" style="width:100%" plain>{{$t('还未支付，继续支付')}}</el-button>
+          <el-button @click="handleClickGoSimplex" type="primary" style="width:100%" plain>{{$t('otc.tag4')}}</el-button>
         </div>
       </div>
        
@@ -160,20 +172,20 @@
     <v-modal :open.sync="showModal" >
       <div class="modal-quick">
         <div class="modal-quick-title">
-          即将从IXX跳转至Simplex
+          {{$t('otc.tag5')}}
         </div>
         <div class="modal-quick-content">
           <p>
-            如果您已在Simplex完成支付请耐心等待，Simplex将在2~10分钟内 将数字货币充值到您的IXX资金账户。
+            {{$t('otc.tag6')}}
           </p>
           <div class="line"></div>
           <el-checkbox style="vertical-align: top !important;" v-model="agree"> 
-            <label style="white-space: normal;">您已知晓Simplex是由第三方独立运营的法定货币与数字货币交易平台，IXX不对因使用该服务遭受的任何损失或损害承担任何责任。</label> 
+            <label style="white-space: normal;">{{$t('otc.tag7')}}</label> 
           </el-checkbox> 
         </div>
         <div class="modal-quick-footer"> 
           <el-button v-loading="confirmLoading" @click="handleClickGoSimplex" :disabled="!agree" type="primary">
-            前往Simplex支付
+            {{$t('otc.gotopay')}}
           </el-button>
         </div>
       </div>
@@ -341,6 +353,10 @@ export default {
       height: 130px; 
       .quick-nav-item {
         margin-right: 30px;
+        min-width: 150px;
+        &.amount {
+          width: 200px; 
+        }
         .quick-nav-drop {
           padding: 0 15px;
           height: 40px;

@@ -3399,7 +3399,27 @@ export default {
     right_bar: {
        order_fee: "Platform service fee (%{currency})",
        orderdeal_fee: "Fees"
-    }
+    },
+    quick: '快捷买币',
+    ctoc: 'C2C交易',
+    about: '关于',
+    account: '资金账户可用',
+    sell: '我要出售',
+    payment: '我要支付',
+    payType: 'Payment Method',
+    collectionType: '收款方式',
+    quotation: 'Best Offer',
+    paymentDate: 'Arrival time',
+    available: 'Available',
+    tag1: 'Comprehensive handling fee, recevied time, price, etc., recommended for you',
+    tag2: '法定货币到数字货币转换的新标准。',
+    tag3: '如果您已完成支付，请耐心等待Simplex给您打币',
+    tag4: '还未支付，继续支付',
+    tag5: 'Entering Simplex from IXX ',
+    tag6: 'If you have completed the payment in Simplex, please wait patiently. Simplex will deposit the digital currency to your IXX account within 2~10 minutes',
+    tag7: 'You already know that Simplex is a legal tender and digital currency trading platform independently operated by a third party, and IXX will not be liable for any loss or damage caused by using this service.',
+    gotopay: 'Go to Simplex',  
+    buy_now: "Buy Now",
   },
   el: {
     pagination: {

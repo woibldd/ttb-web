@@ -5,7 +5,7 @@
       <div class="coin-info">
         <div class="title">
           <icon :name="`coin-${coinInfo.name}`" />
-          <span>关于{{ coinInfo.name }}</span>
+          <span>{{$t('otc.account')}}{{ coinInfo.name }}</span>
         </div>
         <div class="box">  
           <p 
@@ -18,16 +18,16 @@
           </div>
           <div flex class="issue-info-row">
             <div flex-box="1">
-              <h6>发行时间</h6>
+              <h6>{{$t('issue_time')}}</h6>
               <span>{{ coinInfo.issue_time }}</span>
             </div>
             <div flex-box="1">
-              <h6>流通量</h6>
+              <h6>{{$t('issue_circulation')}}</h6>
               <span>{{ coinInfo.issue_circulation }}</span>
             </div>
             <div flex-box="1">
               <div v-if="customDigitalCurrency!=='USDT'">
-                <h6>24H最高价</h6>
+                <h6>{{$t('homechart_24h_h')}}</h6>
                 <span>${{ maxPrice }} </span> 
               </div>
               &nbsp;
@@ -39,9 +39,9 @@
         <div class="form">
           <div class="trade-side">
             <div @click="handleChangeSide(1)"
-                 :class="['side', 'side-buy', {'side-active': side===1}]">购买</div>
+                 :class="['side', 'side-buy', {'side-active': side===1}]">{{$t('otc_side_1')}}</div>
             <div @click="handleChangeSide(2)"
-                 :class="['side', 'side-sell', {'side-active': side===2}]">出售</div>
+                 :class="['side', 'side-sell', {'side-active': side===2}]">{{$t('otc_side_2')}}</div>
           </div>
           <div class="trade-content"> 
             <!-- <div>
@@ -73,13 +73,12 @@
             <div class="interlayer mt-5" flex="main:justify">
               <div class="l">&nbsp;</div>
               <div class="r">
-                资金账户可用 {{available || '0.00'}} &nbsp;
-                <router-link to="/fund/transfer">资金划转</router-link>
+                {{$t('otc.account')}} {{available || '0.00'}} &nbsp;
+                <router-link to="/fund/transfer">{{$t('account_exchange')}}</router-link>
               </div>
             </div> 
             <div class="mt-20">
-              <number-input  
-                label="我将收到" 
+              <number-input   
                 :list="fiatCurrencies"
                 @selectChange="handleFiatCurrencyChange"
                 :selectValue="customFiatCurrency"
@@ -87,7 +86,7 @@
                 :scale="8"/>
             </div> 
             <div class="mt-20">
-              <label>{{inSelectText}}</label> 
+              <label>{{$t(inSelectText)}}</label> 
               <div class="my-select pl-16 pr-16">
                 <el-dropdown @command="handleCommandPayType">
                   <div class="el-dropdown-link" flex="main:justify cross:center">
@@ -112,7 +111,11 @@
               </div>  
             </div>
             <div class="mt-25">
-              <el-button style="width:100%;" @click="handleConfirm" type="primary">立即购买</el-button>
+              <el-button style="width:100%;" @click="handleConfirm" type="primary"> 
+                <span v-if="side===1">{{$t('otc.buy_now')}}</span>
+                <span v-else-if="side===2">{{$t('otc_side_2')}}</span> 
+              </el-button>
+              <!-- <el-button style="width:100%;" @click="handleConfirm" type="danger"> {{$t('otc_side_2')}}</el-button> -->
             </div>
           </div>
         </div>
@@ -348,7 +351,7 @@ export default {
       customDigitalCurrency: null,
       customFiatCurrency: null,
       customPayType: null, 
-      outInputText: '我要支付',
+      outInputText: 'otc.payType',
       inSelectText: '支付方式',
       available: 0, //余额  
       ordering: 0, //冻结
@@ -487,10 +490,10 @@ export default {
       this.side = obj
       if (+obj === 1) {  
         this.outInputText = '我要支付'
-        this.inSelectText = '支付方式'
+        this.inSelectText = 'otc.payType'
       } else { 
         this.outInputText = '我要出售'
-        this.inSelectText = '收款方式'
+        this.inSelectText = 'otc.collectionType'
       }   
       this.handleCommandDigitalCurrency(0) 
       this.handleFiatCurrencyChange(this.fiatCurrencies[0])    
