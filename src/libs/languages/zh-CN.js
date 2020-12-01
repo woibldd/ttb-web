@@ -1,5 +1,9 @@
 export default {
-  'currency-mix': "金本位合约",
+  finance: '金融业务',
+  promotion: '促销',
+  quickBuy: '一键买币',
+  buyCrypto: '买币',
+  'currency-mix': "USDT合约",
   'currency-unit': "币本位合约",
   'currency-btc': "BTC合约",
   google_login: "登录时进行谷歌验证",
@@ -1779,7 +1783,7 @@ export default {
   bubble_site_tips: "请您登录时认准下方IXX的标准域名:",
   tradingview_line: "分时线",
   footer_application_coin: "上币申请",
-  otc_trade: "法币交易",
+  otc_trade: "P2P交易",
   otc_tips: "添加微信请备注",
   trading_fees: "币币手续费",
   contract_fees: "BTC合约手续费",
@@ -2009,7 +2013,7 @@ export default {
   otc_side_1: "购买",
   otc_side_2: "出售",
   otc_side_3: "  交易总额(CNY)",
-  otc_need_verify: "法币交易需完成以下认证",
+  otc_need_verify: "P2P交易需完成以下认证",
   otc_bind_bankCard: "绑定本人实名银行卡",
   otc_kyc_verified: "身份认证 <i style='color:#ccc;'>（认证等级:KYC2）</i>",
   otc_side_99: "开户行",
@@ -2091,7 +2095,7 @@ export default {
   otc_otutcol_13: "法币资产估值",
   otc_otutcol_14: "币币资产估值",
   otc_otutcol_15: "合约资产估值",
-  otc_otutcol_16: "充币成功后，若想进行”币币交易/法币交易/合约交易，需操作“资金划转”，将“资金账户”的币转移到该账户上。",
+  otc_otutcol_16: "充币成功后，若想进行”币币交易/P2P交易/合约交易，需操作“资金划转”，将“资金账户”的币转移到该账户上。",
   otc_otutcol_17: "个人资产",
   otc_otutcol_19: "你确定要申诉？",
   order_th_typecsef1: "输入金额不合法",
@@ -2481,7 +2485,7 @@ export default {
       7: "理财本息结算",
       8: "",
       9: "币本位当日清算",
-      10: "金本位当日清算"
+      10: "USDT合约当日清算"
     },
     dict: {
       side: {
@@ -2571,7 +2575,7 @@ export default {
             path: '/fund/my/contractUnit'
           },
           5: {
-            label: '金本位账户',
+            label: 'USDT合约账户',
             path: '/fund/my/contractMix'
           },
           6: {
@@ -3526,7 +3530,7 @@ export default {
   },
   no_account: "还没有账号?",
   'UNIT_&': "%{currency}币本位",
-  'MIX_&': "%{currency}金本位",
+  'MIX_&': "%{currency}USDT",
   kyc_failure: "认证失败",
   kyc_failure_tip: "您的KYC认证审核失败,请重新认证",
   kyc_retry: "重新认证",
@@ -3551,8 +3555,8 @@ export default {
     describe6: "自研高性能撮合引擎，充分支持200万+/秒/交易对的撮合速度，服务不间断操作无卡顿"
   },
   pre_reviewed: "订单在前置审核中",
-  gold_account: "金本位合约账户",
-  gold_contract: "金本位合约",
+  gold_account: "USDT合约账户",
+  gold_contract: "USDT合约",
   mix_side: {
     1: "买入开多",
     2: "卖出开空",
@@ -3626,8 +3630,8 @@ export default {
       'trading': '币币交易',
       'contract': 'BTC合约',
       'currency-unit': '币本位合约',
-      'currency-mix': '金本位合约',
-      'legalTender': '法币交易',
+      'currency-mix': 'USDT合约',
+      'legalTender': 'P2P交易',
       'hotActive': {
         label: '热门活动',
         children: {

@@ -1,7 +1,11 @@
 export default {
-  'currency-mix': "Gold Standard",
-  'currency-unit': "Currency Standard",
-  'currency-btc': "BTC Contract",
+  finance: 'Finance',
+  promotion: 'Promotion',
+  quickBuy: 'Quick Buy',
+  buyCrypto: 'Buy Crypto',
+  'currency-mix': "Contract - USDT",
+  'currency-unit': "Contract - Currency",
+  'currency-btc': "Contract - BTC",
   google_login: "Google authentication on login",
   google_turn_off: "Turn off",
   google_reset: "Reset",
@@ -191,7 +195,7 @@ export default {
   signup: "Sign up",
   signin: "Sign in",
   signout: "Sign out",
-  trading: "Exchange",
+  trading: "Coin Exchange",
   mining: "Mining",
   asset: "Assets",
   mining_robot: "Mining Robot",
@@ -247,7 +251,7 @@ export default {
   homechart_24h_l: "24H Low",
   homechart_24h_v: "24H Vol",
   asset_th_unavlb: "Unavailable",
-  asset_trading: "Exchange",
+  asset_trading: "Coin Exchange",
   deposit_address: "Address",
   address_manage: "Address Mgmt",
   add_address_error: "Address is required",
@@ -950,7 +954,7 @@ export default {
   lever_accrual__unpaid_amount: "unpaid amount",
   lever_repayment: "repayment ",
   activity_piece_amount: "BTC fragments amount",
-  activity_piece_btn: "Exchange",
+  activity_piece_btn: "Coin Exchange",
   activity_piece_invite_text: "Inviting a friend with completed level 2 KYC certification",
   activity_piece_buy_text: "Rewards after hold 5000 IXX tokens net purchased",
   activity_piece_obtain: "%{amount} fragments",
@@ -1225,10 +1229,10 @@ export default {
   user_open_sevice_fee: "Open the fee deduction",
   user_service_fee_history: "View history of transaction",
   order_ix_service_fee: "IX deduction fee",
-  trading_lever: "Contract",
+  trading_lever: "Derivative",
   activity_lock_share: "Rule of Lock for Dividend:",
   order_ix_total_discount: "Accumulated deduction",
-  contract_account: "BTC Contract Account",
+  contract_account: "Contract - BTC Account",
   contract_btc: "BTC",
   account_balance: "Account Balance",
   transaction_record: "Transactions Record",
@@ -1254,7 +1258,7 @@ export default {
   coin_trade_index3: "index3",
   all_fee_history_list_here: "Listed here are historical fund rates for all positions。",
   fee_rates_announce_every_eight_hour: "*fee rates announced every eight hours。",
-  contract_name: "Contract",
+  contract_name: "Derivative",
   contract_name_tips: "Contract code (for this position)。",
   fee_cost_interval: "funding fee cost interval",
   fee_rate: "Fee Rate",
@@ -1287,7 +1291,7 @@ export default {
   contract_history_deal_fills: "Filled",
   contract_history_deal_fills_tips: "Here are the recent 100 transactions. To view the full transaction history, please go to your account page。",
   contract_history_fund_info: "Data on history of positions ",
-  contract_history_postion_header_contract: "contract",
+  contract_history_postion_header_contract: "Derivative",
   contract_history_postion_header_amount: "flattening positions（%{unit}）",
   contract_history_postion_header_value: "Value（BTC）",
   contract_history_postion_header_value_tips: "nominal value of the position at the current reasonable price",
@@ -1318,7 +1322,7 @@ export default {
   contract_index_resource: "Price Sources",
   contract_index_resource_tips: "<a>Price Sources</a><br/>price data sources。",
   contract_ix_index_price: "IXX Index Price",
-  contract_index_price_tips: "The price of the underlying asset. This is the price of the BTC contract. Click here to view the historical price。",
+  contract_index_price_tips: "The price of the underlying asset. This is the price of the Contract - BTC. Click here to view the historical price。",
   contract_face_value: "contract face value",
   contract_fee_rate: "Funding Rate",
   contract_holding: "holding positions",
@@ -1329,7 +1333,7 @@ export default {
   contract_action_open_short: "Limit",
   contract_action_open_short_tips: "Closing the position - you can close the position here which will be submitted to the market to offset the existing position of the commission. Select \"market\" immediately to close the position. You need to confirm the operation.。",
   contract_action_delegate_type: "Type",
-  contract_action_button_tips: "Click here to submit  %{amount}BTC contract with a limit at the price of % {price}<span style='font-weight: bold’>%{method}</span> Order,If the deal closed, your position will increases from % {raw}to % {now}。<br/><br/>the white color under the button if it appears, represents parts of the commission that have the opportunity to make an immediate deal in the submission to the market. <br/><br/>your expected liquidation price is % {boom}。",
+  contract_action_button_tips: "Click here to submit  %{amount}Contract - BTC with a limit at the price of % {price}<span style='font-weight: bold’>%{method}</span> Order,If the deal closed, your position will increases from % {raw}to % {now}。<br/><br/>the white color under the button if it appears, represents parts of the commission that have the opportunity to make an immediate deal in the submission to the market. <br/><br/>your expected liquidation price is % {boom}。",
   contract_action_button_avg: "Cost",
   contract_action_button_avg_tips: "The deposit required for the commission. It considers the leverage you choose and the existing positions. The partial selling does not require a deposit。",
   contract_action_button_available: "Available positions",
@@ -1865,8 +1869,8 @@ export default {
   successful_trade: "Trading successfully",
   entrusted_mandatory_liquidation: "Liquidation Order",
   system_automatic_warehouse_closing: "System Auto Liquidation",
-  successfully_body_text_system: "Successful, bought %{amount} BTC Contracts at %{price}, has been liquidated by the system。",
-  successfully_body_text_reduce: "Successful, bought %{amount} BTC Contracts at %{price}, has been auto deleveraged  by the system",
+  successfully_body_text_system: "Successful, bought %{amount} Contract - BTCs at %{price}, has been liquidated by the system。",
+  successfully_body_text_reduce: "Successful, bought %{amount} Contract - BTCs at %{price}, has been auto deleveraged  by the system",
   answer_the_question: "Dear, Please answer the questions carefully before submitting ",
   successful_purchase_of_contracts: "Successful %{language}%{amount}contracts",
   orderbook_depth_title: "Depth Chart",
@@ -1883,7 +1887,7 @@ export default {
   bubble_site_tips: "Please identify the standard domain name IXX below when you log in：",
   tradingview_line: "Time-share Line",
   footer_application_coin: "Coin listing application",
-  otc_trade: "Fiat",
+  otc_trade: "P2P Trading",
   otc_tips: "Add WeChat Please note",
   trading_fees: "Spot Trading",
   contract_fees: "BTC Perpetual Contracts",
@@ -2116,7 +2120,7 @@ export default {
   otc_side_2: "Sell",
   otc_side_99: "Account-opening Bank",
   otc_side_98: "Account-opening Branch",
-  wallet_account: " Funds Account ",
+  wallet_account: "My Wallet",
   otc_otutcol_15: "Estimated ",
   otc_ziurec_1: "The price cannot be empty",
   otc_ziurec_2: "The quantity cannot be empty",
@@ -2570,7 +2574,7 @@ export default {
       start: "Start",
       end: "End",
       winloss_record: "P&L Record",
-      contract_name: "Contract",
+      contract_name: "Derivative",
       future: "Perpetual",
       query: "Query",
       close_side: "Direction",
@@ -2599,8 +2603,8 @@ export default {
       6: "Financial Management Freeze",
       7: "Financial management principal and interest settlement",
       8: "",
-      9: "The currency standard is settled on the same day",
-      10: "Gold Standard Liquidation on the Same Day"
+      9: "The Contract - Currency is settled on the same day",
+      10: "Contract - USDT Liquidation on the Same Day"
     },
     dict: {
       side: {
@@ -2648,11 +2652,11 @@ export default {
         }
       },
       2: {
-        label: 'Funds Account',
+        label: 'My Wallet',
         icon: 'wallet',
         list: {
           1: {
-            label: 'Funds Account',
+            label: 'Overview',
             path: '/fund/my/assets'
           },
           2: {
@@ -2674,23 +2678,23 @@ export default {
         icon: 'transaction',
         list: {
           1: {
-            label: 'Fiat',
+            label: 'P2P Trading',
             path: '/fund/my/otc'
           },
           2: {
-            label: 'Exchange',
+            label: 'Coin Exchange',
             path: '/fund/my/trading'
           },
           3: {
-            label: 'BTC Contract',
+            label: 'Contract - BTC',
             path: '/fund/my/contract'
           },
           4: {
-            label: 'Currency Standard Contract',
+            label: 'Contract - Currency Contract',
             path: '/fund/my/contractUnit'
           },
           5: {
-            label: 'Gold Standard Contract',
+            label: 'Contract - USDT Contract',
             path: '/fund/my/contractMix'
           },
           6: {
@@ -3246,7 +3250,7 @@ export default {
       'depth': 'Depth',
       'return-dish': 'Back to Order Book',
       'new-bargain': 'Latest',
-      'contract_index_price_tips': 'The price of the underlying asset. This is the price of the BTC contract. Click here to view the historical price。',
+      'contract_index_price_tips': 'The price of the underlying asset. This is the price of the Contract - BTC. Click here to view the historical price。',
       'contract_mark_price_tips': '<a>Mark Price</a><br/>This is the current marked price, click for more information。。',
       mapHeader1: {
         'price': 'Price',
@@ -3603,7 +3607,7 @@ export default {
       process: "App Install Guide >>"
     }
   },
-  seo_keywords: "speculation, bitcoin, bitcoin exchange, bitcoin price today, bitcoin trend, digital currency exchange, where to buy bitcoin, how to buy bitcoin, bitcoin exchange, bitcoin price today, Bitcoin real-time market, bitcoin trend, digital currency exchange, where to buy bitcoin, how to buy bitcoin, contract exchange, contract exchange ranking, delivery contract, bitcoin contract, BTC contract, contract, what to play Contracts, perpetual contracts, contract exchanges, contract exchange rankings, delivery contracts, bitcoin contracts, BTC contracts, contracts, and how to play contracts",
+  seo_keywords: "speculation, bitcoin, bitcoin exchange, bitcoin price today, bitcoin trend, digital currency exchange, where to buy bitcoin, how to buy bitcoin, bitcoin exchange, bitcoin price today, Bitcoin real-time market, bitcoin trend, digital currency exchange, where to buy bitcoin, how to buy bitcoin, contract exchange, contract exchange ranking, delivery contract, bitcoin contract, Contract - BTC, contract, what to play Contracts, perpetual contracts, contract exchanges, contract exchange rankings, delivery contracts, bitcoin contracts, Contract - BTCs, contracts, and how to play contracts",
   exchangeNameConfig: "IXX | Digital assets trading community",
   modal: {
     safeModal: {
@@ -3618,11 +3622,11 @@ export default {
   kyc_failure: "Verification failed",
   "kyc_failure_tip" : "Your KYC verification failed, please reverify",
   kyc_retry: "Re-verification",
-  'UNIT_&':"%{currency} Currency Standard Contract",
-  'MIX_&':"%{currency} Gold Standard Contract", 
-  unit_account: "Currency Standard Contract",
+  'UNIT_&':"%{currency} Contract - Currency Contract",
+  'MIX_&':"%{currency} Contract - USDT Contract", 
+  unit_account: "Contract - Currency Contract",
   footer_link: "Link",
-  unit_contract: "Currency Standard",
+  unit_contract: "Contract - Currency",
   h5_home_new: {
     title:"The World's First Digital Asset Trading Community",
     describe1:"Easy download, trade anytime",
@@ -3641,8 +3645,8 @@ export default {
     describe6:"Self-developed high-performance matching engine, fully supporting the matching speed of 2 million + / seconds / transaction pairs, non-stop service without jam."
   },
   pre_reviewed: "Order is being pre-reviewed",
-  gold_account: "Gold Standard Contract",
-  gold_contract: "Gold Standard",
+  gold_account: "Contract - USDT Contract",
+  gold_contract: "Contract - USDT",
   mix_side: {
     1: "Buy long",
     2: "Sell short",
@@ -3747,10 +3751,10 @@ export default {
     },
     mapNavList: {
       'trading': 'Trading',
-      'contract': 'BTC',
-      'legalTender': 'Fiat',
-      'currency-unit': 'Currency Standard',
-      'currency-mix': 'Gold Standard',
+      'contract': 'Contract - BTC',
+      'legalTender': 'P2P Trading',
+      'currency-unit': 'Contract - Currency',
+      'currency-mix': 'Contract - USDT',
       'hotActive': {
         label: 'Activities',
         children: {
