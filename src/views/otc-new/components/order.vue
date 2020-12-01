@@ -84,7 +84,7 @@
           :key="index"
           :class="{active: active === index}"
           class="nav-list"
-          @click="switchTab(index)">{{ item.name }}
+          @click="switchTab(index)">{{ $t(item.name) }}
           <span v-if="item.count > 0 && token">{{ item.count }}</span>
         </div>
         <div
@@ -234,39 +234,10 @@
                   <dt>
                     {{ $t('otc_payment_method') }}：
                     <template v-if="item.state !== 1">
-                      <span>{{ $t(payName(item.otc_collection.payment_type)) }}</span>
-                      <!-- <span v-if="item.otc_collection.alipay_account">{{ $t('payment_namezfb') }}</span>
-                      <span
-                        v-else-if="item.otc_collection.we_chat_account"
-                      >{{ $t('payment_weChat_adasunt') }}</span>
-                      <span v-else-if="item.otc_collection.card_number">{{ $t('payment_nameyhk') }}</span> -->
+                      <span>{{ $t(payName(item.otc_collection.payment_type)) }}</span> 
                     </template>
                   </dt>
-                  <!-- <dd>
-                    {{ $t('payment_name') }}：
-                    <span>{{ item.otc_collection.name || '--' }}</span>
-                  </dd>
-                  <dd>
-                    {{ $t('payment_nameid') }}：
-                    <template v-if="item.state !== 1">
-                      <span
-                        v-if="item.otc_collection.alipay_account"
-                      >{{ item.otc_collection.alipay_account }}</span>
-                      <span
-                        v-if="item.otc_collection.we_chat_account"
-                      >{{ item.otc_collection.we_chat_account }}</span>
-                      <span
-                        v-if="item.otc_collection.deposit_bank"
-                      >{{ item.otc_collection.deposit_bank }}</span>
-                    </template>
-                    <template v-else>--</template>
-                  </dd>
-                  <dd v-if="item.state !== 1">
-                    <template v-if="item.otc_collection.card_number">
-                      {{ $t('payment_nameyhk') }}：
-                      <span>{{ item.otc_collection.card_number }}</span>
-                    </template>
-                  </dd> -->
+                  
                   <div v-if="item.otc_collection">
                     <dd
                       v-for="(payItem, index) in paymentHeaderList[item.otc_collection.payment_type]"
@@ -454,19 +425,19 @@ export default {
       iconActive: 0,
       tab: [
         {
-          name: this.$t('otc_tab_lisetr'),
+          name: 'otc_tab_lisetr',
           count: 0
         },
         {
-          name: this.$t('otc_tab_lisetr1'),
+          name: 'otc_tab_lisetr1',
           count: 0
         },
         {
-          name: this.$t('otc_tab_lisetr2'),
+          name: 'otc_tab_lisetr2',
           count: 0
         },
         {
-          name: this.$t('my_order'),
+          name: 'my_order',
           count: 0
         }
       ],

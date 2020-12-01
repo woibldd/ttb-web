@@ -43,11 +43,7 @@
             <div @click="handleChangeSide(2)"
                  :class="['side', 'side-sell', {'side-active': side===2}]">{{$t('otc_side_2')}}</div>
           </div>
-          <div class="trade-content"> 
-            <!-- <div>
-              <div>1 USDT价值约</div>  
-              <h4>{{digitalPrice}} {{customFiatCurrency}}</h4>
-            </div>  -->
+          <div class="trade-content">  
             <div class="my-select pl-16 pr-16 mt-20">
               <el-dropdown @command="handleCommandDigitalCurrency">
                 <div class="el-dropdown-link" flex="main:justify cross:center">
@@ -341,6 +337,7 @@ export default {
   },
   data () {
     return {
+      state,
       side: 1,
       rates: null,
       coinInfo: {}, 
@@ -385,6 +382,11 @@ export default {
       return 0
     }
   },
+  watch: { 
+    'state.locale' (val) { 
+       this.getCurrencyInfo(this.customDigitalCurrency)
+    }
+  },
   methods: {  
     handleCommandDigitalCurrency(index) {
       this.customDigitalCurrency = this.digitalCurrencies[index]
@@ -412,8 +414,7 @@ export default {
       })
     },
     getCurrencyInfo (coinType) { 
-      const {locale} = state 
-      console.log('getCurrencyInfo')
+      const {locale} = state  
       if (coinData[coinType]) {
         this.coinInfo = coinData[coinType][locale]
       } else { 

@@ -4,8 +4,8 @@
       <div class="entrust-order-nav" flex="cross:center main:justify">
         <div>
           <el-button-group class="mr-15">
-            <el-button @click="handleClickSetSide(1)" :type="side===1 ? 'success' : ''">购买</el-button>
-            <el-button @click="handleClickSetSide(2)" :type="side===2 ? 'danger' : ''">出售</el-button>
+            <el-button @click="handleClickSetSide(1)" :type="side===1 ? 'success' : ''">{{$t('otc_side_1')}}</el-button>
+            <el-button @click="handleClickSetSide(2)" :type="side===2 ? 'danger' : ''">{{$t('otc_side_2')}}</el-button>
           </el-button-group>
           <el-select v-model="currentDigital" @change="handleChangeDigital" placeholder="请选择">
             <el-option
@@ -18,7 +18,7 @@
           </el-select> 
         </div>
         <div>
-          <label class="text-primary" @click="handleClickNowOrder"><icon name="add"  class="mr-5"/>发布委托单</label>
+          <label class="text-primary" @click="handleClickNowOrder"><icon name="add"  class="mr-5"/>{{$t('otc_publish_order')}}</label>
         </div>
       </div>
       <div class="entrust-order-content">
@@ -64,7 +64,7 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('otc_order_trade')" width="130">
+          <el-table-column :label="$t('otc_order_trade')" width="140">
             <template slot-scope="scope">
               <div>
                 <button
