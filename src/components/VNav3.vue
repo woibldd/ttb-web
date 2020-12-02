@@ -32,9 +32,9 @@
                   <router-link :to="{name:'mix'}" class="nav_log_res mr-20">{{ $t("currency-mix") }}</router-link> 
                   <icon name="hot-red" />
                 </li> 
-                <li class="dropdown-item pl-24 pr-24">
+                <!-- <li class="dropdown-item pl-24 pr-24">
                   <router-link to="/share_option" class="nav_log_res mr-20" >{{ $t('shareOption.navText') }} </router-link>
-                </li>
+                </li> -->
               </ul>
               </div>
             </el-popover>
@@ -105,6 +105,7 @@
               </div>
             </el-popover>
           </div>
+          <router-link to="/share_option" class="nav_link ml-30">{{ $t('shareOption.navText') }}</router-link> 
           <!-- <router-link
             v-if="false"
             :to="{name: 'RushBuy'}"
