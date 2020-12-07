@@ -47,16 +47,16 @@ module.exports = {
     'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/'
   },
   announcement: {
-    en: 'https://ixxcustomer.zendesk.com/hc/en-us/categories/360001229791',
-    ko: 'https://ixxcustomer.zendesk.com/hc/en-us/categories/360001229791',
-    'zh-CN': 'https://ixxcustomer.zendesk.com/hc/zh-cn/categories/360001229791',
-    'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/categories/360001229791'
+    en: '/knowledgeBase',
+    ko: '/knowledgeBase',
+    'zh-CN': '/knowledgeBase',
+    'zh-HK': '/knowledgeBase',
   },
   help: {
-    en: 'https://ixxcustomer.zendesk.com/hc/en-us/categories/360001229751',
-    ko: 'https://ixxcustomer.zendesk.com/hc/en-us/categories/360001229751',
-    'zh-CN': 'https://ixxcustomer.zendesk.com/hc/zh-cn/categories/360001229751',
-    'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/categories/360001229751'
+    en: '/knowledgeBase',
+    ko: '/knowledgeBase',
+    'zh-CN': '/knowledgeBase',
+    'zh-HK': '/knowledgeBase',
   },
   request: {
     en: 'https://ixxsupport.freshdesk.com/support/tickets/new',

@@ -1161,7 +1161,7 @@ export default {
         this.isBuy = last.side === 'buy'
       }
     }, 
-    handleSoketData (res) {
+    handleSoketData (res) { 
       const key = res.topic && res.topic.split('@')[0]
       this.mapHandlerSoket[key] && this.mapHandlerSoket[key](res.data, res.topic)
     },

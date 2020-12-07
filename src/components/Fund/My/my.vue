@@ -15,13 +15,7 @@
           </el-select>
         </span>
       </div>
-      <div class="title__right">
-        <!-- <router-link
-          :to="{name: 'LockWarehouse'}"
-          class="c-mine mr-30 dib pointer"><icon
-        name="anchor"/>{{ $t('mining') }}</router-link>-->
-        <!-- <span @click="showLockModal = true" style="font-size: 14px;"  class="c-mine pointer mr-30 dib"><a >{{ $t('locked') }}</a></span>
-        <span @click="showUnlockModal = true" style="font-size: 14px;"  class="c-mine pointer mr-30 dib"><a>{{ $t('unlock') }}</a></span> -->
+      <div class="title__right"> 
         <span class="mr-8"  >    
           <router-link 
               class="fund-history"

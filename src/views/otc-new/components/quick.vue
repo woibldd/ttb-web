@@ -457,11 +457,12 @@ export default {
         const diff= this.$big(max).minus(min)  //价格差值
         const start = this.$big(min).minus(this.$big(diff).times(0.1)) //起点价格
         const end = this.$big(max).plus(this.$big(diff).times(0.1)) //终点价格
-        const xstep = this.$big(150).div(end.minus(start)) //价格1的步长
+        console.log(+list.length, +start, +end)
+        const xstep = this.$big(1).div(150).times(end.minus(start)) //价格1的步长
         const ystep = this.$big(578).div(list.length) //一个时间点的步长
         ctx2.beginPath(); 
         list.map((item, index) => { 
-          let y = +this.$big(150).minus(this.$big(item).minus(start).times(xstep))
+          let y = +this.$big(150).minus(this.$big(item).minus(start).times(xstep || 1))
           let x = +this.$big(index).times(ystep)
           ctx2.lineTo(x, y)
         })  
@@ -615,18 +616,20 @@ export default {
             }
           })
         } else {
-          // let res = await this.fetchQuote(+this.fiatAmount, this.customDigitalCurrency, this.customFiatCurrency) 
+          let res = await this.fetchQuote(+this.fiatAmount, this.customDigitalCurrency, this.customFiatCurrency) 
           // await this.fetchForeignAddress(this.customDigitalCurrency)
           // await this.fetchSimplePayment() 
-          // if (res && res.quote_id) {
-          // }
-          let query = {
-            digital: this.customDigitalCurrency,
-            fiat: this.customFiatCurrency,
-            payment: this.customPayType.name,
-            amount: this.fiatAmount
+          if (res && res.quote_id) {
+            let query = {
+              digital: this.customDigitalCurrency,
+              fiat: this.customFiatCurrency,
+              payment: this.customPayType.name,
+              amount: this.fiatAmount
+            }
+            this.$router.push({name: 'quick-offer', query}) 
+          } else {
+            utils.alert(res.error)
           }
-          this.$router.push({name: 'quick-offer', query}) 
         }
       } else { 
         this.$router.push({
