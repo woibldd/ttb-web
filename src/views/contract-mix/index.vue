@@ -296,8 +296,9 @@
                   </p>
                 </div>
                 <div flex="main:left">
-                  <span :flex-box="0">{{ $tR('mapFormContent.tradingType') }} </span>
-                  <div
+                  <span :flex-box="0">{{ $tR('mapFormContent.tradingType') }}: </span>
+                  <span class="ml-10">{{tradingType}}</span>
+                  <!-- <div
                     :flex-box="1"
                     class="transactionPrice"
                     style="width: 60px;"> 
@@ -312,7 +313,7 @@
                         :label="subValue.label" 
                         :value="subValue.key" />
                     </el-select>
-                  </div>
+                  </div> -->
                   <div :flex-box="3"/> 
                 </div> 
                 <div
@@ -1288,9 +1289,9 @@ export default {
           const found = this.products.find(item => item.symbol === market.pair || item.name === pairArr[1])
           if (found) {
             this.$set(found, pairArr[0], market)
-            if (market.pair.indexOf('INDEX') > -1 && found.name==='BTCUSDT') {
-              console.log(found, market)
-            }
+            // if (market.pair.indexOf('INDEX') > -1 && found.name==='BTCUSDT') {
+            //   console.log(found, market)
+            // }
           } 
         }
       })
