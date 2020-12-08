@@ -38,7 +38,7 @@
             <template v-if="activeProduct.MIX">
               <div class="info-left">
                 <div class="title">
-                  {{ $tR(`mapTabs.${activeProduct.name}`) }}
+                  {{  activeProduct.name }}
                   <svg-icon
                     :class="[activeProduct.MIX.increment_24h > 0?'text-success':'text-danger']"
                     :icon-class="activeProduct.MIX.increment_24h > 0?'lv':'hong'" />
@@ -388,7 +388,7 @@
             <div
               class="header"
               flex="main:justify">
-              <span> {{ $tR('currentPlace') }}：{{ activeProduct && $tR(`mapTabs.${activeProduct.name}`)||'' }}</span>
+              <span> {{ $tR('currentPlace') }}：{{ activeProduct && activeProduct.name ||'' }}</span>
               <el-link
                 type="primary"
                 :underline="false"
@@ -528,7 +528,7 @@
             <div
               class="header"
               flex="main:justify">
-              <span>{{ $t('contract_symbol_detail') }}{{ activeProduct && $tR(`mapTabs.${activeProduct.name}`)||'' }}</span> 
+              <span>{{ $t('contract_symbol_detail') }}{{ activeProduct && activeProduct.name ||'' }}</span> 
               <router-link
                 class="pointer"
                 v-tooltip.top-center="{html: true, content: $tR('mapDelegateList.contract_mark_price_tips'), classes: 'contract'}"
@@ -1235,7 +1235,7 @@ export default {
           this.entrustList = res.data.data.map(item => {
             item.cancelBtnLoading = false
             item._symbol = item.symbol
-            item.symbol = this.$tR(`mapTabs.${item.name}`)
+            item.symbol = titem.name
             return item
           })
         } else if (res.code !== 401) {
@@ -1280,9 +1280,7 @@ export default {
                 return { unrealized, roe, unrealizedM, roeM }
               }
             }
-            item.isEffective = true
-            // item._symbol = item.symbol
-            // item.symbol = this.$tR(`mapTabs.FUTURE_${item.symbol}`)
+            item.isEffective = true 
             return item
           }) 
           this.balanceList = blist.filter(x => x.isEffective === true)
@@ -1459,9 +1457,10 @@ export default {
         item.cancelBtnLoading = false
         if (item.symbol) {
           item._symbol = item.symbol
-          item.symbol = this.activeTableTabKey === 'shipped' ? this.$tR(`mapTabs.FUTURE_${item.symbol}`) : this.$tR(`mapTabs.${item.symbol}`)
+          // item.symbol = this.activeTableTabKey === 'shipped' ? this.$tR(`mapTabs.FUTURE_${item.symbol}`) : this.$tR(`mapTabs.${item.symbol}`)
+          item.symbol = item.name
         } else {
-          item.symbol = this.$tR(`mapTabs.${item.name}`)
+          item.symbol = item.name
         }
         return item
       })
