@@ -20,7 +20,7 @@
                 :class="{active:activeProduct.name === product.name}"
                 flex="dir:top main:center"
                 @click="handleProductsChange(product)">
-                <p style="white-space: nowrap;">{{ $tR(`mapTabs.${product.name}`) }}</p>
+                <p style="white-space: nowrap;">{{ product.name}}</p>
                 <span
                   v-if="product.MIX"
                   :class="[product.MIX.increment_24h > 0?'text-success':'text-danger']">
@@ -349,18 +349,31 @@
                   <div
                     flex-box="1"
                     flex>
-                    <label flex-box="0">{{ $tR(`mapFormContent.mapInput.triggerType`) }}</label>
-                    <el-select
+                    <label flex-box="0">{{ $tR(`mapFormContent.mapInput.triggerType`) }}:</label>
+                    <!-- <el-select
                       style="width:100px;"
                       v-model="trigger_type"
-                      size="small"
-                      class="custom-select">
+                      size="mini"
+                      class="custom-select ml-10">
                       <el-option
                         v-for="(subValue,subKey) in mapFormContent.mapTriggerType"
                         :key="subKey"
                         :label="$tR(`mapFormContent.mapTriggerType.${subKey}`)"
                         :value="+subKey" />
-                    </el-select>
+                    </el-select> -->
+                    <el-dropdown trigger="click" @command="handleCommandTriggerType">
+                      <span style="color:#d7d7d7;" class=" el-dropdown-link ml-10">
+                        {{$tR(`mapFormContent.mapTriggerType.${trigger_type}`)}}<i class="el-icon-arrow-down el-icon--right"></i>
+                      </span>
+                      <el-dropdown-menu class="dark" slot="dropdown">
+                        <el-dropdown-item 
+                          v-for="(subValue,subKey) in mapFormContent.mapTriggerType"
+                          :key="subKey" 
+                          :command="subKey">
+                          {{$tR(`mapFormContent.mapTriggerType.${subKey}`)}}
+                        </el-dropdown-item> 
+                      </el-dropdown-menu>
+                  </el-dropdown>
                   </div> 
                 </div> 
               </div>
@@ -1053,6 +1066,10 @@ export default {
     this.$eh.$on('mix:handleAmount', this.handleAmountObj)
   },
   methods: {
+    handleCommandTriggerType(obj) {
+      console.log(obj)
+      this.trigger_type = obj
+    },
     subMarket() { 
       const that = this
       if (this.socket) {
