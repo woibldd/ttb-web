@@ -24,7 +24,7 @@
                 <span
                   v-if="product.MIX"
                   :class="[product.MIX.increment_24h > 0?'text-success':'text-danger']">
-                  {{ calcIncreaseRate(product) }}%
+                  {{ calcIncreaseRate(product) || 0 | fixed(2) }}%
                   <svg-icon :icon-class="product.MIX.increment_24h > 0?'lv':'hong'" />
                 </span>
               </div>
@@ -1235,7 +1235,7 @@ export default {
           this.entrustList = res.data.data.map(item => {
             item.cancelBtnLoading = false
             item._symbol = item.symbol
-            item.symbol = titem.name
+            item.symbol = item.name
             return item
           })
         } else if (res.code !== 401) {

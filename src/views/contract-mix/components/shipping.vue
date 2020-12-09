@@ -11,7 +11,7 @@
       class="shipping-item"
       flex>
       <div>
-        <h2 class="text-active">{{ $t(`contractMix.mapTabs.${item.name}`) }}</h2>
+        <h2 class="text-active">{{ item.name }}</h2>
         <h3
           v-if="item.side === 1"
           class="text-success">{{ $t(`contractMix.side.${item.side}`) }}</h3>
