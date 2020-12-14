@@ -456,9 +456,8 @@ export default {
         const min = _.min(list) //最低价格
         const diff= this.$big(max).minus(min)  //价格差值
         const start = this.$big(min).minus(this.$big(diff).times(0.1)) //起点价格
-        const end = this.$big(max).plus(this.$big(diff).times(0.1)) //终点价格
-        console.log(+list.length, +start, +end)
-        const xstep = this.$big(1).div(150).times(end.minus(start)) //价格1的步长
+        const end = this.$big(max).plus(this.$big(diff).times(0.1)) //终点价格 
+        const xstep = this.$big(150).div(end.minus(start)) //价格1的步长
         const ystep = this.$big(578).div(list.length) //一个时间点的步长
         ctx2.beginPath(); 
         list.map((item, index) => { 

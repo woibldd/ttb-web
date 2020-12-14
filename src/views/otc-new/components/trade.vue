@@ -237,6 +237,7 @@ export default {
     },
     handleChangeDigital(currency) {
       this.currency = currency
+      this.state.otc.symbolInfo = this.digitalCurrencies.find(item => item.currency === currency)
       this.switchCurrency(currency, this.side)
     },
     paytype(type) {
@@ -334,7 +335,7 @@ export default {
           // this.$set(this, "currencyList", res.data ) 
           this.digitalCurrencies = res.data 
           if (!this.state.otc.symbolInfo) {
-            this.state.otc.symbolInfo = res.data[0]
+            this.state.otc.symbolInfo = res.data.find(item => item.currency === this.currentDigital)
           }
         }
       })
