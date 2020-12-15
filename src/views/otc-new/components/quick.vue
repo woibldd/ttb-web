@@ -69,8 +69,8 @@
             <div class="interlayer mt-5" flex="main:justify">
               <div class="l">&nbsp;</div>
               <div class="r">
-                {{$t('otc.account')}} {{available || '0.00'}} &nbsp;
-                <router-link to="/fund/transfer">{{$t('account_exchange')}}</router-link>
+                <!-- {{$t('otc.account')}} {{available || '0.00'}} &nbsp; -->
+                <!-- <router-link to="/fund/transfer">{{$t('account_exchange')}}</router-link> -->
               </div>
             </div> 
             <div class="mt-20">
@@ -391,7 +391,8 @@ export default {
     handleCommandDigitalCurrency(index) {
       this.customDigitalCurrency = this.digitalCurrencies[index]
       this.getHistory(this.customDigitalCurrency)
-      this.getCurrencyInfo(this.customDigitalCurrency)  
+      this.getCurrencyInfo(this.customDigitalCurrency) 
+      this.handleFiatCurrencyChange(this.fiatCurrencies[0])  
       this.fetchBalance()
     }, 
     handleCommandPayType(index) {
@@ -484,8 +485,7 @@ export default {
           { name: 'VISA', icon:'visa' }, 
         ] 
       }
-      this.handleCommandPayType(0)
-      
+      this.handleCommandPayType(0) 
     },
     handleChangeSide(obj) {  
       this.side = obj
@@ -497,8 +497,7 @@ export default {
         this.inSelectText = 'otc.collectionType'
       }   
       this.handleCommandDigitalCurrency(0) 
-      this.handleFiatCurrencyChange(this.fiatCurrencies[0])    
-      // this.customPayType = this.payTypeList[0] 
+      this.handleFiatCurrencyChange(this.fiatCurrencies[0])     
       this.handleCommandPayType(0)
     },
     async fetchForeignAddress(currency) { 

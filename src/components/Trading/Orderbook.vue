@@ -430,7 +430,7 @@ export default {
       this.panelShow = false
     },
     onresize: _.debounce(function () {
-      this.panelHeight = this.container.height
+      // this.panelHeight = this.container.height
     }, 100),
     layout () {
       this.onresize()

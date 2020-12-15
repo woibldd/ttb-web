@@ -660,8 +660,10 @@ export default {
       } 
     }, 
     refreshBalance () {  
-      this.$refs.sliderBuy.setValue(0)
-      this.$refs.sliderSell.setValue(0)
+      this.$nextTick(() => {
+        this.$refs.sliderBuy.setValue(0)
+        this.$refs.sliderSell.setValue(0)
+      })
     }
   },
   components: {

@@ -667,9 +667,9 @@ export default {
         return this.$nextTick(() => this.onresize())
       }
       
-      this.$refs.active.style.height = this.container.height - 32 + 'px'
-      this.$refs.history.style.height = this.container.height - 32 + 'px'
-      this.$refs.stop.style.height = this.container.height - 32 + 'px'
+      // this.$refs.active.style.height = this.container.height - 32 + 'px'
+      // this.$refs.history.style.height = this.container.height - 32 + 'px'
+      // this.$refs.stop.style.height = this.container.height - 32 + 'px'
       this.onScroll(this.tab)
     }, 100),
     layout () { 
