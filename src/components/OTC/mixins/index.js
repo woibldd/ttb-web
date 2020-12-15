@@ -31,12 +31,7 @@ export default {
         this.state.otc.legal_currency = value
       }
     }, 
-    symbolInfo () {
-      // for (const symbol of this.symbolList) {
-      //   if (symbol.currency == this.currency) {
-      //     return symbol; 
-      //   }
-      // } 
+    symbolInfo () { 
       return this.state.otc.symbolInfo
     },
     indexPrice () {
