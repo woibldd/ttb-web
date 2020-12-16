@@ -123,13 +123,9 @@ import coinIntro from '@/components/Trading/coin-intro'
 import PairTitle from '@/components/Trading/PairTitle'
 import responsiveScale from '@/mixins/responsiveScale'
 import wsNew from '@/modules/ws-new'
-import tickTableMixin from '@/mixins/tick-table'
 
 export default {
-  mixins: [
-    responsiveScale,
-    // tickTableMixin
-  ],
+  mixins: [responsiveScale],
   name: 'Trading',
   components: {
     VNav,
@@ -334,19 +330,20 @@ export default {
       }
     },
     handleTickers (data) { 
-      // console.log('handleTickers') 
+      // console.log('handleTickers')  
+      this.$eh.$emit('protrade:socket:market', data)
     },
     handleDealSoket(res) { 
       if (res.topic.indexOf(this.state.pro.pair) > -1) {
         this.dealData = res.data
       } 
     }, 
-    tradingMarket() {    
+    subMarket() {    
       const that = this
       if (utils.$tvSocket) {
         utils.$tvSocket.$destroy()
-      } 
-      utils.$tvSocket = wsNew.create() 
+      }
+      utils.$tvSocket = wsNew.create()
       this.socket = utils.$tvSocket 
       this.socket.$on('open', () => { 
         // that.socket.heartCheck.start() 
@@ -369,28 +366,12 @@ export default {
         that.socket.$destroy()
         that.subMarket()
       })
-      // this.$eh.$on('protrade:socket:open', this.handleSocketOpen)
-      // this.$eh.$on('protrade:socket:message', this.handleSocketMessage)
-    },
-    handleSocketOpen() {
-      if (this.state.userInfo) {
-        utils.$tvSocket.socket.send(`{"op":"loginWeb","args":["${this.state.userInfo.session_id}"]}`) 
-      } 
-      if (this.state && this.state.pro && this.state.pro.pair) {
-        let period = utils.getPeriod(local.interval)
-        utils.$tvSocket.socket.send(`{"op":"subscribepub","args":["history@${this.state.pro.pair}@${period}"]}`)
-        utils.$tvSocket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.state.pro.pair}@${this.currentDeep}@1@20"]}`)
-        utils.$tvSocket.socket.send(`{"op":"subscribepub","args":["deal@${this.state.pro.pair}"]}`) 
-      }
-    },
-    handleSocketMessage(data) {
-      this.handleSocketData(data) 
     },
     changeDeep(deep) {
-      if (utils.$tvSocket) {
-        utils.$tvSocket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${this.state.pro.pair}@${this.currentDeep}@1@20"]}`)
+      if (this.socket) {
+        this.socket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${this.state.pro.pair}@${this.currentDeep}@1@20"]}`)
         this.currentDeep = deep
-        utils.$tvSocket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.state.pro.pair}@${this.currentDeep}@1@20"]}`) 
+        this.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.state.pro.pair}@${this.currentDeep}@1@20"]}`) 
       }
     }
   },
@@ -413,7 +394,7 @@ export default {
 
     }
     this.state.loading = true
-    this.tradingMarket()
+    this.subMarket()
     this.$nextTick(() => {
       // const layoutHeight = window.innerHeight
       // this.$refs.wrap.style.height = layoutHeight + 'px'
@@ -536,7 +517,6 @@ export default {
 .ix-grid-deal {
   flex: 1;
   height: 320px;
-  overflow: auto;
 }
 .ix-grid-orderbook {
   // height: 2px;
