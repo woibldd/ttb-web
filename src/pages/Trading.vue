@@ -123,9 +123,10 @@ import coinIntro from '@/components/Trading/coin-intro'
 import PairTitle from '@/components/Trading/PairTitle'
 import responsiveScale from '@/mixins/responsiveScale'
 import wsNew from '@/modules/ws-new'
+import tickTableMixin from '@/mixins/tick-table'
 
 export default {
-  mixins: [responsiveScale],
+  mixins: [responsiveScale,tickTableMixin],
   name: 'Trading',
   components: {
     VNav,
@@ -337,40 +338,56 @@ export default {
         this.dealData = res.data
       } 
     }, 
-    subMarket() {    
-      const that = this
-      if (utils.$tvSocket) {
-        utils.$tvSocket.$destroy()
-      }
-      utils.$tvSocket = wsNew.create()
-      this.socket = utils.$tvSocket 
-      this.socket.$on('open', () => { 
-        // that.socket.heartCheck.start() 
-        that.socket.socket.send('{"op":"subscribepub","args":["market@ticker"]}') 
-        if (that.state.userInfo) {
-          that.socket.socket.send(`{"op":"loginWeb","args":["${that.state.userInfo.session_id}"]}`) 
-        } 
-        if (that.state && that.state.pro && that.state.pro.pair) {
-          let period = utils.getPeriod(local.interval)
-          that.socket.socket.send(`{"op":"subscribepub","args":["history@${that.state.pro.pair}@${period}"]}`)
-          that.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${that.state.pro.pair}@${this.currentDeep}@1@20"]}`)
-          that.socket.socket.send(`{"op":"subscribepub","args":["deal@${that.state.pro.pair}"]}`) 
-        }
-      })
+    tradingMarket() {    
+      // const that = this
+      // if (utils.$tvSocket) {
+      //   utils.$tvSocket.$destroy()
+      // } 
+      // utils.$tvSocket = wsNew.create() 
+      // this.socket = utils.$tvSocket 
+      // this.socket.$on('open', () => { 
+      //   // that.socket.heartCheck.start() 
+      //   that.socket.socket.send('{"op":"subscribepub","args":["market@ticker"]}') 
+      //   if (that.state.userInfo) {
+      //     that.socket.socket.send(`{"op":"loginWeb","args":["${that.state.userInfo.session_id}"]}`) 
+      //   } 
+      //   if (that.state && that.state.pro && that.state.pro.pair) {
+      //     let period = utils.getPeriod(local.interval)
+      //     that.socket.socket.send(`{"op":"subscribepub","args":["history@${that.state.pro.pair}@${period}"]}`)
+      //     that.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${that.state.pro.pair}@${this.currentDeep}@1@20"]}`)
+      //     that.socket.socket.send(`{"op":"subscribepub","args":["deal@${that.state.pro.pair}"]}`) 
+      //   }
+      // })
       
-      this.socket.$on('message', (data) => { 
-        that.handleSocketData(data) 
-      })
-      this.socket.$on('reopen', () => {
-        that.socket.$destroy()
-        that.subMarket()
-      })
+      // this.socket.$on('message', (data) => { 
+      //   that.handleSocketData(data) 
+      // })
+      // this.socket.$on('reopen', () => {
+      //   that.socket.$destroy()
+      //   that.subMarket()
+      // })
+      this.$eh.$on('protrade:socket:open', this.handleSocketOpen)
+      this.$eh.$on('protrade:socket:message', this.handleSocketMessage)
+    },
+    handleSocketOpen() {
+      if (this.state.userInfo) {
+        utils.$tvSocket.socket.send(`{"op":"loginWeb","args":["${this.state.userInfo.session_id}"]}`) 
+      } 
+      if (this.state && this.state.pro && this.state.pro.pair) {
+        let period = utils.getPeriod(local.interval)
+        utils.$tvSocket.socket.send(`{"op":"subscribepub","args":["history@${this.state.pro.pair}@${period}"]}`)
+        utils.$tvSocket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.state.pro.pair}@${this.currentDeep}@1@20"]}`)
+        utils.$tvSocket.socket.send(`{"op":"subscribepub","args":["deal@${this.state.pro.pair}"]}`) 
+      }
+    },
+    handleSocketMessage(data) {
+      this.handleSocketData(data) 
     },
     changeDeep(deep) {
-      if (this.socket) {
-        this.socket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${this.state.pro.pair}@${this.currentDeep}@1@20"]}`)
+      if (utils.$tvSocket) {
+        utils.$tvSocket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${this.state.pro.pair}@${this.currentDeep}@1@20"]}`)
         this.currentDeep = deep
-        this.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.state.pro.pair}@${this.currentDeep}@1@20"]}`) 
+        utils.$tvSocket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.state.pro.pair}@${this.currentDeep}@1@20"]}`) 
       }
     }
   },
@@ -393,7 +410,7 @@ export default {
 
     }
     this.state.loading = true
-    this.subMarket()
+    this.tradingMarket()
     this.$nextTick(() => {
       // const layoutHeight = window.innerHeight
       // this.$refs.wrap.style.height = layoutHeight + 'px'

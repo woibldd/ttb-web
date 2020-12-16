@@ -216,25 +216,12 @@ export default {
 
       this.state.pro.pairList = res.data.items
     },
-    subMarket() {
-      // if (this.socket) {
-      //   this.socket.$destroy()
-      // }
-      // this.socket = ws.create('market/tickers')
-      // this.socket.$on('open', () => {
-      //   this.socket.heartCheck.start()
-      // })
-      // this.socket.$on('message', (datas) => {
-      //   this.socket.heartCheck.start()
-      //   datas.forEach(data => {
-      //     this.patch(data)
-      //   })
-      // })
-      // this.socket.$on('reopen', this.openSocket)
+    subMarket() { 
       if (!utils.$tvSocket) {
         utils.$tvSocket = wsNew.create()
         utils.$tvSocket.$on('open', () => { 
           utils.$tvSocket.socket.send('{"op":"subscribepub","args":["market@ticker"]}') 
+          this.$eh.$emit('protrade:socket:open')
         })
       }
       utils.$tvSocket.$on('message', (datas) => {   
@@ -242,8 +229,14 @@ export default {
           datas.data.forEach(data => {
             this.patch(data)
           }) 
-        }
+        } 
+        this.$eh.$on('protrade:socket:message', datas)
       })
+      utils.$tvSocket.$on('reopen', () => {
+        utils.$tvSocket.$destroy()
+        this.subMarket()
+      })
+      
     }
   },
   destroyed() {
