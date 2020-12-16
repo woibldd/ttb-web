@@ -3335,7 +3335,7 @@ export default {
     tag3: '如果您已完成支付，请耐心等待Simplex给您打币',
     tag4: '还未支付，继续支付',
     tag5: '即将从IXX跳转至Simplex',
-    tag6: '如果您已在Simplex完成支付请耐心等待，Simplex将在2~10分钟内 将数字货币充值到您的IXX资金账户。',
+    tag6: '如果您已在Simplex完成支付请耐心等待，Simplex将在5~20分钟内 将数字货币充值到您的IXX资金账户。',
     tag7: '您已知晓Simplex是由第三方独立运营的法定货币与数字货币交易平台，IXX不对因使用该服务遭受的任何损失或损害承担任何责任。',
     gotopay: '前往Simplex支付', 
     buy_now: "立即购买",

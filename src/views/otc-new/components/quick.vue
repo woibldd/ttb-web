@@ -66,14 +66,17 @@
                 </el-dropdown-menu>
               </el-dropdown>
             </div>  
-            <div class="interlayer mt-5" flex="main:justify">
-              <div class="l">&nbsp;</div>
+            <div class="interlayer mt-25" flex="main:justify">
+              <div class="l"> 
+                <span v-if="side===1">{{$t('otc_purchase_amount')}}</span> 
+                <span v-else>{{$t('otc_amount_sale')}} </span> 
+              </div>
               <div class="r">
                 <!-- {{$t('otc.account')}} {{available || '0.00'}} &nbsp; -->
                 <!-- <router-link to="/fund/transfer">{{$t('account_exchange')}}</router-link> -->
               </div>
             </div> 
-            <div class="mt-20">
+            <div class="">
               <number-input   
                 :list="fiatCurrencies"
                 @selectChange="handleFiatCurrencyChange"

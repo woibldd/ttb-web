@@ -3423,7 +3423,7 @@ export default {
     tag3: 'If you have made payment, please wait patiently for Simplex to release the token',
     tag4: 'Unpaid, continue to make payment',
     tag5: 'Entering Simplex from IXX ',
-    tag6: 'If you have completed the payment in Simplex, please wait patiently. Simplex will deposit the digital currency to your IXX account within 2~10 minutes',
+    tag6: 'If you have completed the payment in Simplex, please wait patiently. Simplex will deposit the digital currency to your IXX account within 5~20 minutes',
     tag7: 'You already know that Simplex is a legal tender and digital currency trading platform independently operated by a third party, and IXX will not be liable for any loss or damage caused by using this service.',
     gotopay: 'Go to Simplex',  
     buy_now:"Buy Now",

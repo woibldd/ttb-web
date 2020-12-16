@@ -3272,7 +3272,7 @@ export default {
     tag3: '如果您已完成支付，請耐心等待Simplex給您打幣',
     tag4: '還未支付，繼續支付',
     tag5: '即將從IXX跳轉至Simplex',
-    tag6: '如果您已在Simplex完成支付請耐心等待，Simplex將在2~10分鐘內將數位貨幣充值到您的IXX資金帳戶。',
+    tag6: '如果您已在Simplex完成支付請耐心等待，Simplex將在5~20分鐘內將數位貨幣充值到您的IXX資金帳戶。',
     tag7: '您已知曉Simplex是由協力廠商獨立運營的法定貨幣與數位貨幣交易平臺，IXX不對因使用該服務遭受的任何損失或損害承擔任何責任。',
     gotopay: '前往Simplex支付',  
     buy_now: "立即購買",
