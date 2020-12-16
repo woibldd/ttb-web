@@ -20,7 +20,9 @@ export default {
 
 <style scoped lang="scss">
 
-
+.doc-wrap {
+  padding-top:1px;
+}
 
 .header {
   height: auto;
@@ -101,12 +103,19 @@ ul {
     .title {
       width: 100%;
       text-align: center;
+      padding: 0 20px;
     }
   }
   .page-wrap {
     width: 100%;
     margin: 0 auto;
     padding-bottom: 0;
+  }
+  .panel {
+    padding: 20px;
+  }
+  ul {
+    padding-left: 20px;
   }
 }
 </style>

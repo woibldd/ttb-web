@@ -7,7 +7,7 @@
 <template>
   <div
     id="app"
-    :class="['lang-' + $i18n.locale]"
+    :class="['lang-' + $i18n.locale, {mobile: isMobile}]"
     tabindex="0"
     @click="onclick"
     @keyup.enter="onkeyup('enter')"
