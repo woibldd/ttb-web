@@ -126,7 +126,10 @@ import wsNew from '@/modules/ws-new'
 import tickTableMixin from '@/mixins/tick-table'
 
 export default {
-  mixins: [responsiveScale,tickTableMixin],
+  mixins: [
+    responsiveScale,
+    // tickTableMixin
+  ],
   name: 'Trading',
   components: {
     VNav,
@@ -339,35 +342,35 @@ export default {
       } 
     }, 
     tradingMarket() {    
-      // const that = this
-      // if (utils.$tvSocket) {
-      //   utils.$tvSocket.$destroy()
-      // } 
-      // utils.$tvSocket = wsNew.create() 
-      // this.socket = utils.$tvSocket 
-      // this.socket.$on('open', () => { 
-      //   // that.socket.heartCheck.start() 
-      //   that.socket.socket.send('{"op":"subscribepub","args":["market@ticker"]}') 
-      //   if (that.state.userInfo) {
-      //     that.socket.socket.send(`{"op":"loginWeb","args":["${that.state.userInfo.session_id}"]}`) 
-      //   } 
-      //   if (that.state && that.state.pro && that.state.pro.pair) {
-      //     let period = utils.getPeriod(local.interval)
-      //     that.socket.socket.send(`{"op":"subscribepub","args":["history@${that.state.pro.pair}@${period}"]}`)
-      //     that.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${that.state.pro.pair}@${this.currentDeep}@1@20"]}`)
-      //     that.socket.socket.send(`{"op":"subscribepub","args":["deal@${that.state.pro.pair}"]}`) 
-      //   }
-      // })
+      const that = this
+      if (utils.$tvSocket) {
+        utils.$tvSocket.$destroy()
+      } 
+      utils.$tvSocket = wsNew.create() 
+      this.socket = utils.$tvSocket 
+      this.socket.$on('open', () => { 
+        // that.socket.heartCheck.start() 
+        that.socket.socket.send('{"op":"subscribepub","args":["market@ticker"]}') 
+        if (that.state.userInfo) {
+          that.socket.socket.send(`{"op":"loginWeb","args":["${that.state.userInfo.session_id}"]}`) 
+        } 
+        if (that.state && that.state.pro && that.state.pro.pair) {
+          let period = utils.getPeriod(local.interval)
+          that.socket.socket.send(`{"op":"subscribepub","args":["history@${that.state.pro.pair}@${period}"]}`)
+          that.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${that.state.pro.pair}@${this.currentDeep}@1@20"]}`)
+          that.socket.socket.send(`{"op":"subscribepub","args":["deal@${that.state.pro.pair}"]}`) 
+        }
+      })
       
-      // this.socket.$on('message', (data) => { 
-      //   that.handleSocketData(data) 
-      // })
-      // this.socket.$on('reopen', () => {
-      //   that.socket.$destroy()
-      //   that.subMarket()
-      // })
-      this.$eh.$on('protrade:socket:open', this.handleSocketOpen)
-      this.$eh.$on('protrade:socket:message', this.handleSocketMessage)
+      this.socket.$on('message', (data) => { 
+        that.handleSocketData(data) 
+      })
+      this.socket.$on('reopen', () => {
+        that.socket.$destroy()
+        that.subMarket()
+      })
+      // this.$eh.$on('protrade:socket:open', this.handleSocketOpen)
+      // this.$eh.$on('protrade:socket:message', this.handleSocketMessage)
     },
     handleSocketOpen() {
       if (this.state.userInfo) {
