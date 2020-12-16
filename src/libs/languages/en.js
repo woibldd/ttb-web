@@ -1978,7 +1978,7 @@ export default {
   otc_sell_step_1: "Place an order",
   otc_sell_step_2: "Waiting for payment",
   otc_sell_step_3: "Go to the currency",
-  otc_amount_sale: "sale amount",
+  otc_amount_sale: "Sell amount",
   otc_confirm_sell: "OK sale",
   otc_sell_currency: "Sell %{currency}",
   otc_authentication: "Advanced Certification",
