@@ -517,6 +517,7 @@ export default {
 .ix-grid-deal {
   flex: 1;
   height: 320px;
+  overflow: auto;
 }
 .ix-grid-orderbook {
   // height: 2px;
