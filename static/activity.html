@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>IXX</title>
   <style>
     .button {
       position: relative;
@@ -31,18 +31,13 @@
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
       var r = window.location.search.substr(1).match(reg);
       if (r != null) return unescape(r[2]); return null;
-    }
-    // let doc = document.getElementById('bg-img')
-    // doc.addEventListener('click', (e) => { 
-    //   if (e.offsetY > doc.height - 100 ) {
-    //     window.open('http://sg.mikecrm.com/QnYJL1I')
-    //   } 
-    // }) 
+    } 
     window.onload = () => { 
       let lang = getQueryString("lang")
       if (lang === 'en') {
         document.getElementById('bg-img').setAttribute('src','./active/activity-en.png')
         document.getElementById('confirm-button').innerText="Register Now"
+        document.getElementById('confirm-button').style.marginTop='-70px'
       } else { 
         document.getElementById('bg-img').setAttribute('src','./active/activity-zh-cn.png')
         document.getElementById('confirm-button').innerText="立即报名"
