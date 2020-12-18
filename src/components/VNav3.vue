@@ -105,83 +105,8 @@
               </div>
             </el-popover>
           </div>
-          <router-link to="/share_option" class="nav_link ml-30">{{ $t('shareOption.navText') }}</router-link> 
-          <!-- <router-link
-            v-if="false"
-            :to="{name: 'RushBuy'}"
-            class="nav_link"
-            style="padding-left:10px;"
-          >
-            {{ $t('FrenzySaleZone') }}(SP)
-            <icon name="hot-red" /> 
-          </router-link>
-
-          彼岸云矿 
-          <div class="nav_link arrow-down"> 
-            <a href="/mining-power" class="nav_link ml-30" v-popover:popover2>
-              {{ this.$t('mining_power.cloud_mine') }}
-              <icon name="hot-red" />
-              <icon name="header-down" class="mini arrow" />
-            </a>
-            <el-popover
-              ref="popover2"
-              popper-class="nav-list"
-              placement="bottom"
-              style="background:#2C3B4B;"
-              trigger="hover">
-              <div class="pop-dropdown">
-              <ul class="dropdown-list pt-10 pb-10">
-                
-                <li class="dropdown-item pl-24 pr-24">
-                  <a href="/mining-power" class="link">
-                    {{ this.$t('mining_power.cloud_mine') }}
-                    <icon name="hot-red" />
-                  </a>
-                </li>
-                <li class="dropdown-item pl-24 pr-24">
-                  <router-link to="/affiliate" class="link">{{ $t('plan') }}</router-link>
-                </li>
-                <li class="dropdown-item pl-24 pr-24">
-                  <a
-                    href="/snowball/bazaar"
-                    :class="{'router-link-active': from === 'contract'}"
-                    class="link"
-                  >{{ $t('bidTitle') }}</a>
-                </li> 
-              </ul>
-              </div>
-            </el-popover>
-          </div> 
-          交易赠金
-          <div class="nav_link arrow-down">
-            <a href="/bonus" class="nav_link ml-30" v-popover:popover3>
-              {{ this.$t('gift.bonus') }} 
-              <icon name="header-down" class="mini arrow" />
-            </a>
-            <el-popover
-              ref="popover3"
-              popper-class="nav-list"
-              placement="bottom"
-              style="background:#2C3B4B;"
-              trigger="hover">
-              <div class="pop-dropdown">
-              <ul class="dropdown-list pt-10 pb-10">
-                <li class="dropdown-item pl-24 pr-24">
-                  <a href="/bonus" class="link">
-                    {{ this.$t('gift.bonus') }} 
-                  </a>
-                </li>
-                <li class="dropdown-item pl-24 pr-24">
-                  <a
-                    href="javascript:;"
-                    class="link"
-                    @click="subscribeHandle"
-                  >{{ this.$t('node_sub') }}</a>
-                </li>
-              </ul>
-              </div>
-            </el-popover>
-          </div> --> 
+          <!-- <router-link to="/share_option" class="nav_link ml-30">{{ $t('shareOption.navText') }}</router-link>  -->
+          
         </div>
       </div>
       <div class="nav_right">

@@ -4,19 +4,54 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    .button {
+      position: relative;
+      display:block;
+      margin: -60px 15%;
+      padding: 10px 0;
+      text-align: center;
+      background-color: #21B98A;
+      border-radius: 22px;
+      color: #ffffff;
+    }
+  </style>
 </head>
 <body style="margin:0;padding:0;width:100%;">
   <div>
-    <img id="bg-img" src="./active/activity-bg.png" alt="">
-
+    <img style="width: 100%;" id="bg-img"  alt="">
+    <div>
+      <a id="confirm-button" class="button" onclick="handleClick()">
+        立即报名
+      </a> 
+    </div>
   </div>
   <script>
-    let doc = document.getElementById('bg-img')
-    doc.addEventListener('click', (e) => { 
-      if (e.offsetY > doc.height - 100 ) {
-        window.open('http://sg.mikecrm.com/QnYJL1I')
+    function getQueryString(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) return unescape(r[2]); return null;
+    }
+    // let doc = document.getElementById('bg-img')
+    // doc.addEventListener('click', (e) => { 
+    //   if (e.offsetY > doc.height - 100 ) {
+    //     window.open('http://sg.mikecrm.com/QnYJL1I')
+    //   } 
+    // }) 
+    window.onload = () => { 
+      let lang = getQueryString("lang")
+      if (lang === 'en') {
+        document.getElementById('bg-img').setAttribute('src','./active/activity-en.png')
+        document.getElementById('confirm-button').innerText="Register Now"
+      } else { 
+        document.getElementById('bg-img').setAttribute('src','./active/activity-zh-cn.png')
+        document.getElementById('confirm-button').innerText="立即报名"
       }
-    })
+    } 
+    function handleClick() { 
+      console.log('asdfasdf')
+      window.open('http://sg.mikecrm.com/QnYJL1I')
+    }
   </script>
 </body>
 </html>
