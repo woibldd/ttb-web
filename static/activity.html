@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body style="margin:0;padding:0;">
+  <div>
+    <img id="bg-img" src="./active/activity-bg.png" alt="">
+
+  </div>
+  <script>
+    let doc = document.getElementById('bg-img')
+    doc.addEventListener('click', (e) => { 
+      if (e.offsetY > doc.height - 100 ) {
+        window.open('http://www.baidu.com')
+      }
+    })
+  </script>
+</body>
+</html>
