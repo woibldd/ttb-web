@@ -32,6 +32,12 @@
       var r = window.location.search.substr(1).match(reg);
       if (r != null) return unescape(r[2]); return null;
     } 
+    function isIos() {
+      return navigator.userAgent.match(/(iPhone|iPod|ios|iPad)/i)
+    }
+    function isAndroid() {
+      return navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1
+    }
     window.onload = () => { 
       let lang = getQueryString("lang")
       if (lang === 'en') {
@@ -44,8 +50,13 @@
       }
     } 
     function handleClick() { 
-      console.log('asdfasdf')
-      window.open('http://sg.mikecrm.com/QnYJL1I')
+      // console.log('asdfasdf')
+      // window.open('http://sg.mikecrm.com/QnYJL1I')
+      if (isAndroid()) {
+        android.openBrowser('http://sg.mikecrm.com/QnYJL1I') 
+      } else {
+        openBrowser('http://sg.mikecrm.com/QnYJL1I') 
+      }
     }
   </script>
 </body>
