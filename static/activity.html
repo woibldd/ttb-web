@@ -53,7 +53,8 @@
       if (isAndroid()) {
         android.openBrowser('http://sg.mikecrm.com/QnYJL1I') 
       } else {
-        openBrowser('http://sg.mikecrm.com/QnYJL1I') 
+        // openBrowser('http://sg.mikecrm.com/QnYJL1I') 
+        window.webkit.messageHandlers.openBrowser.postMessage('http://sg.mikecrm.com/QnYJL1I')
       }
     }
     function openBrowser(url) {
