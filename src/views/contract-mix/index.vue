@@ -1342,13 +1342,13 @@ export default {
         this.newBargainListData = data || []
       })
 
-      // getSymbolInfo({ symbol: product.name }).then(res => {
-      //   if (!res.code) {
-      //     this.symbolInfo = res.data[0]
-      //   } else if (res.code !== 401) {
-      //     this.$message.error(res)
-      //   }
-      // })
+      getSymbolInfo({ symbol: product.name }).then(res => {
+        if (!res.code) {
+          this.symbolInfo = res.data.find(item => item.name===product.name) 
+        } else if (res.code !== 401) {
+          this.$message.error(res)
+        }
+      })
 
       this.activeProduct = product
       // this.tradingType = product.symbol_currency[0].currency 
@@ -1588,18 +1588,18 @@ export default {
         if (match) {
           this.state.mix.pair = pair 
           local.mix = pair    
-          getSymbolInfo({ symbol: pair }).then(res => {
-            if (!res.code) {
-              this.symbolInfo = res.data[0]
-            } else if (res.code !== 401) {
-              this.$message.error(res)
-            }
-          })
           if (this.products && this.products.length > 0) {
             const found = this.products.find(item => item.symbol === pair)
             if (found) {  
               this.activeProduct = found 
-              this.tradingType = found.symbol_currency.find(item => item.currency.indexOf('USDT') > -1).currency //暂时默认usdt
+              this.tradingType = found.symbol_currency.find(item => item.currency.indexOf('USDT') > -1).currency //暂时默认usdt 
+              getSymbolInfo({ symbol: pair }).then(res => {
+                if (!res.code) { 
+                  this.symbolInfo = res.data.find(item => item.name===found.name) 
+                } else if (res.code !== 401) {
+                  this.$message.error(res)
+                }
+              })
             } 
           }
           
