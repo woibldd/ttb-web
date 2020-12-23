@@ -1028,6 +1028,10 @@ export default {
   },
   async created () {
     actions.updateSession()  
+    const result = await getSymbolInfo()
+    if (!result.code) { 
+      this.state.mix.symbolInfoList = result.data
+    }  
     const res = await getSymbolList()
     if (res && !res.code) {
       this.products = res.data
@@ -1341,14 +1345,15 @@ export default {
       getFutureListByKey(`${product.product}_${product.currency}`, { size: 20 }).then(({ data }) => {
         this.newBargainListData = data || []
       })
+      this.symbolInfo = this.state.mix.symbolInfoList.find(item => item.name===product.name)
 
-      getSymbolInfo({ symbol: product.name }).then(res => {
-        if (!res.code) {
-          this.symbolInfo = res.data.find(item => item.name===product.name) 
-        } else if (res.code !== 401) {
-          this.$message.error(res)
-        }
-      })
+      // getSymbolInfo({ symbol: product.name }).then(res => {
+      //   if (!res.code) {
+      //     this.symbolInfo = res.data.find(item => item.name===product.name) 
+      //   } else if (res.code !== 401) {
+      //     this.$message.error(res)
+      //   }
+      // })
 
       this.activeProduct = product
       // this.tradingType = product.symbol_currency[0].currency 
@@ -1592,14 +1597,15 @@ export default {
             const found = this.products.find(item => item.symbol === pair)
             if (found) {  
               this.activeProduct = found 
-              this.tradingType = found.symbol_currency.find(item => item.currency.indexOf('USDT') > -1).currency //暂时默认usdt 
-              getSymbolInfo({ symbol: pair }).then(res => {
-                if (!res.code) { 
-                  this.symbolInfo = res.data.find(item => item.name===found.name) 
-                } else if (res.code !== 401) {
-                  this.$message.error(res)
-                }
-              })
+              this.tradingType = found.symbol_currency.find(item => item.currency.indexOf('USDT') > -1).currency //暂时默认usdt  
+              this.symbolInfo = this.state.mix.symbolInfoList.find(item => item.name===this.activeProduct.name)
+              // getSymbolInfo({ symbol: pair }).then(res => {
+              //   if (!res.code) { 
+              //     this.symbolInfo = res.data.find(item => item.name===found.name) 
+              //   } else if (res.code !== 401) {
+              //     this.$message.error(res)
+              //   }
+              // })
             } 
           }
           
