@@ -35,10 +35,10 @@ module.exports = {
   supportMail: 'support@ixx.com', 
   hrMail: 'hr@ixx.com',
   apiDoc: {
-    en: 'https://github.com/sonsea/ixx-API-Docs',
-    ko: 'https://github.com/sonsea/ixx-API-Docs',
-    'zh-CN': 'https://github.com/sonsea/ixx-API-Docs',
-    'zh-HK': 'https://github.com/sonsea/ixx-API-Docs'
+    en: 'http://ixxapidoc.cloudservicex.com/apidocs/spot/en/',
+    ko: 'http://ixxapidoc.cloudservicex.com/apidocs/spot/en/',
+    'zh-CN': 'http://ixxapidoc.cloudservicex.com/apidocs/spot/cn',
+    'zh-HK': 'http://ixxapidoc.cloudservicex.com/apidocs/spot/en/'
   },
   faq: {
     en: 'https://ixxcustomer.zendesk.com/hc/en-us/',
