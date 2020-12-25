@@ -178,8 +178,7 @@ export default {
           if (!!match && match.indexOf('MPV') > -1) {
             if (this.state.pro.activityList.indexOf('mpv_user') > -1) {
               this.showMvpModal = false
-            } else {
-              console.log('$route.params.pair')
+            } else { 
               this.showMvpModal = true
               this.state.pro.isActivity = false
             }
