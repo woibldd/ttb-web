@@ -105,7 +105,7 @@
               </div>
             </el-popover>
           </div>
-          <!-- <router-link to="/share_option" class="nav_link ml-30">{{ $t('shareOption.navText') }}</router-link>  -->
+          <router-link to="/share_option" class="nav_link ml-30">{{ $t('shareOption.navText') }}</router-link> 
           
         </div>
       </div>
