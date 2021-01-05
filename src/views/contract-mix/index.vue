@@ -398,7 +398,10 @@
               <div
                 flex="box:mean"
                 style="text-align:center">
-                <p>{{ (activeBalance||{}).holdingSum || 0 }} <br> {{ $tR('deal') }}</p>
+                <p>
+                  <!-- {{ (activeBalance||{}).holdingSum || 0 }} <br>  -->
+                  {{ $tR('deal') }}
+                </p>
                 <!-- <p style="border-left:1px solid #333">{{ (activeBalance||{}).unrealized || 0 }} <br> {{ $tR('rateOReturn') }}</p> -->
               </div>
               <orderPopover
