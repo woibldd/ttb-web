@@ -1123,9 +1123,7 @@ export default {
       } 
       if (this.isLogin) {
         this.checkActive()
-      } 
-      // localStorage.setItem('unit-product', product.name) 
-      // this.$router.replace({ query: { pair: product.symbol } })
+      }  
        this.$router.replace({
         name: 'unit',
         query: {
