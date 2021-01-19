@@ -36,7 +36,7 @@
     <div v-if="!showHistory" class="my-fund-content">
       <div class="information">
         <icon name='information' />
-        <span >{{$t('otc_otutcol_16')}}        </span>
+        <span >{{$t('otc_otutcol_16')}}       </span>
       </div>
       <div class="fund-total">
         <div class="total__label">{{ $t('my_balance_equal') }}</div>
@@ -84,8 +84,7 @@
           header-align="right"
           align="right"
           width="400"
-          :label="operate.title"
-        >
+          :label="operate.title">
           <template slot-scope="scope">
             <template v-if="is_nodes === false">
                 <label class="my-fund-label"
@@ -431,9 +430,13 @@ export default {
       this.rates = res.data
     } 
     //获取币对列表
-    let result =  await service.getPairList()
+    // let result =  await service.getPairList()
+    // if (!result.code && !!result.data) {
+    //   this.pairList = result.data.items
+    // }
+    let result = await service.getAccountWalletList 
     if (!result.code && !!result.data) {
-      this.pairList = result.data.items
+      this.pairList = result.data
     }
     await this.getMine()
     this.getAccountBalanceList()
@@ -648,17 +651,7 @@ export default {
           return item
         })
       }) 
-    },
-    // getEstValue(item) {
-    //   let res = this.$big(item.amount).times(
-    //     this.$big(item.rates[this.unit] || 0)
-    //   );
-    //   let num = 8;
-    //   // if (this.unit === 'USD') {
-    //   //   num = 8
-    //   // }
-    //   return res.round(num, this.C.ROUND_DOWN).toString();
-    // },
+    }, 
     getEstValue (item) {
       let res = this.$big(0)
       let unit = this.unit.name
