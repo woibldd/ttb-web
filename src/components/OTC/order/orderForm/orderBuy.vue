@@ -3,7 +3,7 @@
     <!-- 挂单 -->
     <div class="action-box">
       <div class="release">
-        <!-- 标题 -->
+        <!-- 标题 --> 
         <div
           :class="{'buy': side===1, 'sell': side===2}"
           class="action-title title buy item"

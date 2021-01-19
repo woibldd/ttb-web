@@ -4,7 +4,7 @@
       <div class="coin_link arrow-down"
         :class="{hover: down}"
         @click="down=!down"
-        >
+        > 
         <dl>
           <dt>{{coin.name +'/' + coin.symbol}}</dt>
           <dd>
@@ -106,12 +106,12 @@
           <span class="menu-title">{{ $t('footer_help') }}</span>
         </p>
         <ul class="left-menu-list">
-          <li class>
+          <!-- <li class>
             <a class="menu-name" :href="guidanceLink">{{ $t('footer_hreseqgslp1') }}</a>
           </li>
           <li class>
             <a class="menu-name" :href="commonProblemLink">{{ $t('footer_hreseqgslp2') }}</a>
-          </li>
+          </li> -->
            <li class>
             <a class="menu-name" :href="fxpl">{{ $t('fxpl')}}</a>
           </li>
@@ -136,7 +136,7 @@ export default {
         btcCount: 0,
         usdtCount: 0
       },
-      fxpl: 'https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360033225252--IXX-com平台反洗钱和反恐怖融资用户指引-',
+      fxpl: '/knowledgeBase/details2?id=3445',
       symbolList: {
         CNY: {
           name: "CNY",
@@ -211,9 +211,9 @@ export default {
     getCurrencyList() { 
       service.otcSymbolList({}).then((res) => {
         if (res.code === 0) { 
-          this.$set(this, "currencyList", res.data ) 
+          this.$set(this, "currencyList", res.data )  
           if (!this.state.otc.symbolInfo) {
-            this.state.otc.symbolInfo = res.data[0]
+            this.state.otc.symbolInfo = res.data.find(item => item.currency === this.currency) || res.data[0]
           }
         }
       })
@@ -301,7 +301,7 @@ export default {
     },
     commonProblemLink() {
       let link =
-        "https://ixxcustomer.zendesk.com/hc/zh-cn/categories/360001229751";
+        "/knowledgeBase";
       if (this.state.locale === "en") {
         link = link.replace("zh-cn", "en-us");
       }
@@ -309,7 +309,7 @@ export default {
     },
     guidanceLink() {
       let link =
-        "https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360029413991";
+        "/knowledgeBase/details?id=2379";
       if (this.state.locale === "en") {
         link = link.replace("zh-cn", "en-us");
       }
