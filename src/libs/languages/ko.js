@@ -3,6 +3,7 @@ export default {
   promotion: 'Promotion',
   quickBuy: 'Quick Buy',
   buyCrypto: 'Buy Crypto',
+  future_account: "계약 계정",
   'currency-mix': "금본위 계약",
   'currency-unit': "코인 베이스 계약",
   google_login: "로그인할 때 구글 인증",

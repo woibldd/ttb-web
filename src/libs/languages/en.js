@@ -3,6 +3,7 @@ export default {
   promotion: 'Promotion',
   quickBuy: 'Quick Buy',
   buyCrypto: 'Buy Crypto',
+  future_account: "Contract Account",
   'currency-mix': "Contract - USDT",
   'currency-unit': "Contract - Currency",
   'currency-btc': "Contract - BTC",
