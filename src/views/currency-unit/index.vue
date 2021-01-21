@@ -37,6 +37,7 @@
                             :icon-class="activeProduct.UNIT.increment_24h > 0?'lv':'hong'" />
                 </div>
                 <span>{{ $tR(`mapInformation.valueRate`) }}： {{ $big(symbolInfo.fee_rate || 0).times(100).round(4).toFixed(4) }}% </span>
+                <!-- {{symbolInfo}} -->
                 <span>
                   <i class="el-icon-bell"
                      v-tooltip.top-center="{html: true, content: $t('contract_fee_rate_estimate_tips', { feeRate: (symbolInfo.fee_rate * 100).toFixed(8) + '%' }), classes: 'contract'}" />
@@ -50,11 +51,8 @@
                 </div>
                 <div>≈ {{ calcToBTC }} {{ activeProduct.currency }}</div>
               </div>
-            </template>
-
-            <!-- <div class="calculator"><i class="el-icon-caret-bottom" />计算器</div> -->
-          </div>
-          <!-- tradingview -->
+            </template> 
+          </div> 
           <div class="mt-4">
             <tradingView style="height:556px;"
                          ref="tradingView" />
@@ -874,6 +872,11 @@ export default {
       this.products = res.data.items
       this.state.unit.pairList = this.products
     } 
+    
+    const result = await getSymbolInfo()
+    if (!result.code) { 
+      this.state.unit.symbolInfoList = result.data
+    }  
   
     if (!this.$route.query.pair) { 
       let pair = this.products.find(item => item.symbol === local.unit) ? local.unit : this.products[0].symbol 
@@ -1141,6 +1144,7 @@ export default {
       getFutureListByKey(`${product.product}_${product.currency}`, { size: 20 }).then(({ data }) => {
         this.newBargainListData = data
       })
+      this.symbolInfo = this.state.unit.symbolInfoList.find(item => item.name===product.name)
 
       // getSymbolInfo({ symbol: product.name }).then(res => {
       //   if (!res.code) {
@@ -1341,13 +1345,15 @@ export default {
         if (match) {
           this.state.unit.pair = pair 
           local.unit = pair    
-          getSymbolInfo({ symbol: pair }).then(res => {
-            if (!res.code) {
-              this.symbolInfo = res.data[0]
-            } else if (res.code !== 401) {
-              this.$message.error(res)
-            }
-          })
+          // getSymbolInfo({ symbol: pair }).then(res => {
+          //   if (!res.code) {
+          //     this.symbolInfo = res.data[0]
+          //   } else if (res.code !== 401) {
+          //     this.$message.error(res)
+          //   }
+          // })
+          
+          this.symbolInfo = this.state.unit.symbolInfoList.find(item => item.name===this.activeProduct.name)
           if (this.products && this.products.length > 0) {
             const found = this.products.find(item => item.symbol === pair)
             if (found) {  

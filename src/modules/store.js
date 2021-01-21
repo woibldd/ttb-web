@@ -82,6 +82,7 @@ export const state = {
   unit: {
     pair: '',
     symbol: '',
+    symbolInfoList: [],
     pairList: []
   },
   mix: {
