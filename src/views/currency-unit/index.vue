@@ -29,7 +29,7 @@
           <div v-loading="!activeProduct.UNIT"
                class="dish-info mt-4"
                element-loading-background="rgba(0, 0, 0, 0.3)">
-            <template v-if="activeProduct.UNIT">
+            <template v-if="activeProduct.UNIT" flex="box:first">
               <div class="info-left">
                 <div class="title">
                   {{ $tR(`mapTabs.${activeProduct.name}`) }}
@@ -1451,6 +1451,7 @@ export default {
       line-height: 32px;
       & > div {
         flex-basis: 150px;
+        white-space: nowrap;
       }
     }
   }
