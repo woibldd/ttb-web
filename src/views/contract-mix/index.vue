@@ -47,7 +47,7 @@
                 <span>
                   <i
                     class="el-icon-bell"
-                    v-tooltip.top-center="{html: true, content: $t('contract_fee_rate_estimate_tips', { feeRate: (symbolInfo.fee_rate * 100).toFixed(8) + '%' }), classes: 'contract'}" />
+                    v-tooltip.top-center="{html: true, content: $t('contract_fee_rate_estimate_tips', { feeRate: (symbolInfo.fee_rate_forecast * 100).toFixed(8) + '%' }), classes: 'contract'}" />
                 </span>
               </div>
               <div class="info-list-box">

@@ -40,7 +40,7 @@
                 <!-- {{symbolInfo}} -->
                 <span>
                   <i class="el-icon-bell"
-                     v-tooltip.top-center="{html: true, content: $t('contract_fee_rate_estimate_tips', { feeRate: (symbolInfo.fee_rate * 100).toFixed(8) + '%' }), classes: 'contract'}" />
+                     v-tooltip.top-center="{html: true, content: $t('contract_fee_rate_estimate_tips', { feeRate: (symbolInfo.fee_rate_forecast * 100).toFixed(8) + '%' }), classes: 'contract'}" />
                 </span>
               </div>
               <div class="info-list-box">
@@ -867,16 +867,18 @@ export default {
   },
   async created () {
     actions.updateSession() 
+    const result = await getSymbolInfo()
+    if (!result.code) { 
+      console.log('created ()')
+      this.state.unit.symbolInfoList = result.data
+    }  
+
     const res = await api.getUnitContractSymList() 
     if (res && !res.code) {
       this.products = res.data.items
       this.state.unit.pairList = this.products
     } 
     
-    const result = await getSymbolInfo()
-    if (!result.code) { 
-      this.state.unit.symbolInfoList = result.data
-    }  
   
     if (!this.$route.query.pair) { 
       let pair = this.products.find(item => item.symbol === local.unit) ? local.unit : this.products[0].symbol 
@@ -1145,14 +1147,7 @@ export default {
         this.newBargainListData = data
       })
       this.symbolInfo = this.state.unit.symbolInfoList.find(item => item.name===product.name)
-
-      // getSymbolInfo({ symbol: product.name }).then(res => {
-      //   if (!res.code) {
-      //     this.symbolInfo = res.data[0]
-      //   } else if (res.code !== 401) {
-      //     this.$message.error(res)
-      //   }
-      // })
+ 
       this.activeProduct = product
       this.setTitle()
       this.state.unit.pair = `${product.product}_${product.currency}`
@@ -1351,13 +1346,12 @@ export default {
           //   } else if (res.code !== 401) {
           //     this.$message.error(res)
           //   }
-          // })
-          
-          this.symbolInfo = this.state.unit.symbolInfoList.find(item => item.name===this.activeProduct.name)
+          // }) 
           if (this.products && this.products.length > 0) {
             const found = this.products.find(item => item.symbol === pair)
             if (found) {  
               this.activeProduct = found 
+              this.symbolInfo = state.unit.symbolInfoList.find(item => item.name===this.activeProduct.name) 
             }  
           }
         }
