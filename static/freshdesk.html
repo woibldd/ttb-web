@@ -17,7 +17,8 @@
     window.onload = () => {
       window.openFresh = () => {
         FreshworksWidget('open'); 
-      }
+      } 
+      FreshworksWidget('open'); 
       window.freshSet = (name, email) => {
         FreshworksWidget('identify', 'ticketForm', {
           name: name,
