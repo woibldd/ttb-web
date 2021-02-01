@@ -410,8 +410,7 @@ export const actions = {
       try {
         const msg = await import(`@/libs/languages/${locale}.js`)
         const eleLocale = locale === 'zh-HK' ? 'zh-TW' : locale
-        const element = await import(`element-ui/lib/locale/lang/${eleLocale}`)
-        // utils.$i18n.setLocaleMessage(locale, actions.replaceName(msg)) 
+        const element = await import(`element-ui/lib/locale/lang/${eleLocale}`) 
         utils.$i18n.setLocaleMessage(locale, {...msg.default, ...element.default })
       } catch (e) {
         utils.logE('load language failed')
