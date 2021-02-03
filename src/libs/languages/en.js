@@ -1234,7 +1234,7 @@ export default {
   activity_lock_share: "Rule of Lock for Dividend:",
   order_ix_total_discount: "Accumulated deduction",
   contract_account: "Contract - BTC Account",
-  contract_btc: "BTC",
+  contract_btc: "Contract - BTC",
   account_balance: "Account Balance",
   transaction_record: "Transactions Record",
   warehouse_margin: "Position Margin",
