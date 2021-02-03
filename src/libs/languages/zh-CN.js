@@ -2865,7 +2865,7 @@ export default {
         3: { text: '限价止盈', describe: '' }
       },
       mapMenuOptions: {
-        3: '限价止盈',
+        3: '限价止损',
         4: '市价止损',
         5: '限价止盈',
         6: '市价止盈'

@@ -5,7 +5,7 @@ export default {
   buyCrypto: 'Buy Crypto',
   future_account: "Contract Account",
   'currency-mix': "Contract - USDT",
-  'currency-unit': "Contract - Currency",
+  'currency-unit': "Contract - Standard",
   'currency-btc': "Contract - BTC",
   google_login: "Google authentication on login",
   google_turn_off: "Turn off",
@@ -196,7 +196,7 @@ export default {
   signup: "Sign up",
   signin: "Sign in",
   signout: "Sign out",
-  trading: "Coin Exchange",
+  trading: "Exchange",
   mining: "Mining",
   asset: "Assets",
   mining_robot: "Mining Robot",
@@ -252,7 +252,7 @@ export default {
   homechart_24h_l: "24H Low",
   homechart_24h_v: "24H Vol",
   asset_th_unavlb: "Unavailable",
-  asset_trading: "Coin Exchange",
+  asset_trading: "Exchange",
   deposit_address: "Address",
   address_manage: "Address Mgmt",
   add_address_error: "Address is required",
@@ -459,7 +459,7 @@ export default {
   order_th_placed: "Time",
   order_empty: "Empty",
   deal_amount: "Amount",
-  deal_value: "Executed Price",
+  deal_value: "Price",
   order_side_buy: "Buy",
   order_side_sell: "Sell",
   order_status_active: "Active",
@@ -815,7 +815,7 @@ export default {
   td_trad_amount: "Today’s trading and mining amount",
   cum_trad_amount: "Totally mining amount",
   improve_hash_rate: "Improve Hashrate",
-  available_balance: "Available Margin",
+  available_balance: "Available Balance",
   lock_amount: "Locked Amount",
   locked: "Locked",
   unlock: "Unlock",
@@ -955,7 +955,7 @@ export default {
   lever_accrual__unpaid_amount: "unpaid amount",
   lever_repayment: "repayment ",
   activity_piece_amount: "BTC fragments amount",
-  activity_piece_btn: "Coin Exchange",
+  activity_piece_btn: "Exchange",
   activity_piece_invite_text: "Inviting a friend with completed level 2 KYC certification",
   activity_piece_buy_text: "Rewards after hold 5000 IXX tokens net purchased",
   activity_piece_obtain: "%{amount} fragments",
@@ -1409,7 +1409,7 @@ export default {
   contract_neweast_price: "New price",
   contract_select_new_limit: "selecting new limits",
   contract_all_in: "Cross",
-  contract_limit_price: "Limits",
+  contract_limit_price: "Limit",
   contract_price_tips: "Specific price levels you wish to trade in",
   contract_limit_price_tips: "Limited trading based on specified price available in the market. This is the most common strategy of delegated trading。",
   contract_cost_10_times: "Cost @{lever}x",
@@ -1437,7 +1437,7 @@ export default {
   contract_assign_time: "Order Time",
   contract_all_dealed: "Filled",
   contract_amount_value: "Qty",
-  contract_symbol_detail: "contract details",
+  contract_symbol_detail: "Contract Details:",
   contract_trade_index_base: "1.Base currency is %{currency}。",
   contract_trade_index_value: "2.Pricing currency is USD",
   contract_how_price: "How is the perpetual contact qupted？ ",
@@ -1816,8 +1816,8 @@ export default {
   contract_competition_message_success: "The registration was successful.",
   contract_competition_message_failed: "Registration failed",
   header_title_contract_competition: "Contract Competition",
-  contract_action_position: "Qty",
-  contract_action_limit_price: "Limits",
+  contract_action_position: "Quantity",
+  contract_action_limit_price: "Limit",
   contract_action_market_price: "Market",
   contract_order_enter_tips1: "Enter the Qty",
   contract_order_enter_tips2: "Enter the price",
@@ -2683,7 +2683,7 @@ export default {
             path: '/fund/my/otc'
           },
           2: {
-            label: 'Coin Exchange',
+            label: 'Exchange',
             path: '/fund/my/trading'
           },
           3: {
@@ -2783,12 +2783,12 @@ export default {
     sell: 'Sell',
     handle: 'Operation',
     cancel: 'Cancel',
-    deal: 'contract transaction',
+    deal: 'Transaction',
     rateOReturn: 'Rate',
     quota: 'Risk limits',
     handleSuccess: 'Submitted successfully',
     index: 'index',
-    currentPlace: 'Quantity',
+    currentPlace: 'Position',
     state: {
       1: 'Unexecuted',
       2: 'Limited partial termination',
@@ -2971,8 +2971,8 @@ export default {
       },
       mapHeader2: {
         'direction': 'Side',
-        'transaction-price ': 'Executed Price',
-        'trading-volume': 'Executed Qty',
+        'transaction-price ': 'Price',
+        'trading-volume': 'Amount',
         'time': 'Time'
       },
       contract_index_price_tips: "The price of the underlying asset. This is the price of the %{product_name} contract. Click here to view the historical price。",
@@ -2980,20 +2980,20 @@ export default {
     },
     mapFormContent: {
       mapBtns: {
-        1: { text: 'Limits', describe: 'Limited trading based on specified price available in the market. This is the most common strategy of delegated trading。' },
+        1: { text: 'Limit', describe: 'Limited trading based on specified price available in the market. This is the most common strategy of delegated trading。' },
         2: { text: 'Market', describe: 'Market price commission is one of the fastest way to transact. It is executed at the best price for the current delegated list. Please note that network delays may cause the execution price to differ from your expectations。' },
         3: { text: 'Profit taking', describe: '' }
       },
       mapMenuOptions: {
-        3: 'Profit taking',
-        4: 'Loss minimization',
+        3: 'Stop Limit',
+        4: 'Stop Market',
         5: 'Take Profit Limit',
         6: 'Take Profit Market'
       },
       mapInput: {
-        shippingSpace: 'Qty',
-        value: 'Value',
-        triggerPrice: 'Price',
+        shippingSpace: 'Quantity',
+        value: 'Price',
+        triggerPrice: 'Trigger Price',
         triggerType: 'Trigger'
       },
       mapHandleBtn: {
@@ -3005,10 +3005,10 @@ export default {
       mapDescribe: {
         entrustValue: {
           text: 'Order Value',
-          tips: '此委托的总价值'
+          tips: 'Total Value'
         },
         available: {
-          text: 'Available',
+          text: 'Available Balance',
           tips: 'you create an available balance for a commission. Click here to see the wallet details。'
         }
       },
@@ -3050,12 +3050,12 @@ export default {
     sell: 'Sell',
     handle: 'Action',
     cancel: 'Cancel',
-    deal: 'Contract transaction',
+    deal: 'Transaction',
     rateOReturn: 'Rate',
     quota: 'Risk limits',
     handleSuccess: 'Submitted successfully',
     index: 'index',
-    currentPlace: 'Quantity',
+    currentPlace: 'Position',
     closeMarket: 'Close Market',
     closeMarketConfirm: 'Are you sure you want to close this position at Market Price?',
     closeMarketTips: 'If Close Market is selected, the position will be closed according to the number of Positions you currently hold, which has nothing to do with the entered closing quantity',
@@ -3180,7 +3180,7 @@ export default {
           trigger_price: 'Price',
           distancePrice: 'Distance',
           // total: '已成交额',
-          executed: '已成交量',
+          executed: 'Executed',
           type: 'Type',
           state: 'Status',
           create_time: 'Order time'
@@ -3271,9 +3271,9 @@ export default {
         2: { text: 'Close Position'}
       },
       mapBtns: {
-        1: { text: 'Limit Order', describe: 'Limited trading based on specified price available in the market. This is the most common strategy of delegated trading.' },
-        2: { text: 'Market Order', describe: 'Market price commission is one of the fastest way to transact. It is executed at the best price for the current delegated list. Please note that network delays may cause the execution price to differ from your expectations。' },
-        3: { text: 'Conditions Order', describe: '' }
+        1: { text: 'Limit', describe: 'Limited trading based on specified price available in the market. This is the most common strategy of delegated trading.' },
+        2: { text: 'Market', describe: 'Market price commission is one of the fastest way to transact. It is executed at the best price for the current delegated list. Please note that network delays may cause the execution price to differ from your expectations。' },
+        3: { text: 'Conditions', describe: '' }
       },
       mapMenuOptions: {
         3: 'Stop Limit',
@@ -3283,8 +3283,8 @@ export default {
       },
       mapInput: {
         shippingSpace: 'Position',
-        value: 'Value',
-        triggerPrice: 'Price',
+        value: 'Price',
+        triggerPrice: 'Trigger Price',
         triggerType: 'Trigger'
       },
       mapHandleBtn: {
@@ -3303,10 +3303,10 @@ export default {
       mapDescribe: {
         entrustValue: {
           text: 'Order Value',
-          tips: '此委托的总价值'
+          tips: 'Total Value'
         },
         available: {
-          text: 'Available',
+          text: 'Available Balance',
           tips: 'you create an available balance for a commission. Click here to see the wallet details。'
         }
       },
