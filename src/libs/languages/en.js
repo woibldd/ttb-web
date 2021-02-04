@@ -3019,7 +3019,7 @@ export default {
       },
       notip: '直接下单',
       trigger_close: 'Close on Trigger',
-      perfactPrice: '市场最优价格',
+      perfactPrice: 'Best Price',
       passive: 'Post-Only Order'
 
     },
