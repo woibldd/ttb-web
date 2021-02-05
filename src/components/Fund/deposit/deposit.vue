@@ -23,7 +23,7 @@
               :value="item">
               <b style="display: inline-block;width: 40px">{{ item.currency }}</b>
               <span style="color: #CCC;font-size: 12px;padding-left: 20px;">
-                {{ item.full_name }}
+                {{state.locale==='zh-CN'? item.zh_name : item.full_name}}
               </span>
             </el-option>
           </el-select>
@@ -175,6 +175,7 @@ export default {
   },
   data() {
     return {
+      state,
       address: '',
       memo: '',
       allCoins: [],
@@ -278,30 +279,16 @@ export default {
         if (res && res.data) {
           this.lianData = []
           res.data.forEach((item) => {
-            if (item.currency === 'USDT') {
+            if (item.currency === 'USDT' && item.depositable) {
+              if (item.chain === 'OMNI') { item.currencyName = item.currency + '-' + 'Omni'}
+              if (item.chain === 'ETH') { item.currencyName = item.currency + '-' + 'ERC20'}
+              if (item.chain === 'TRX') { item.currencyName = item.currency + '-' + 'TRC20'}
               this.lianData.push(item)
             }
           })
-          this.lianData.forEach((item) => {
-            if (item.chain === 'OMNI') {
-              Vue.set(item, 'currencyName', item.currency + '-' + 'Omni')
-            }
-            else if (item.chain === 'ETH') {
-              Vue.set(item, 'currencyName', item.currency + '-' + 'ERC20')
-            }
-            else if (item.chain === 'TRX') {
-              Vue.set(item, 'currencyName', item.currency + '-' + 'TRC20')
-            }
-          })
+           
           this.lianData = this.lianData.reverse()//顺序颠倒一下，omni要放在前面
-          this.allCoins = this.removalData(res.data.filter(c => c.depositable))
-          this.allCoins.forEach((item) => {
-            if (state.locale === 'zh-CN') {
-              Vue.set(item, 'full_name', item.zh_name)
-            } else {
-              Vue.set(item, 'full_name', item.full_name)
-            }
-          })
+          this.allCoins = this.removalData(res.data.filter(c => c.depositable)) 
           if (this.$route.params.currency) {
             const currency = this.$route.params.currency.toUpperCase()
             this.selectCoin = this.allCoins.find(item => {
@@ -311,14 +298,7 @@ export default {
           }
           if (this.allCoins[0].currency === 'USDT') {
             this.selectLian = this.lianData.find(a => a.chain === 'ETH')
-            this.selectCoin = this.selectLian
-            // this.lianData.forEach((item) => {
-            //   console.log(item.currencyName)
-            //   if (item.currencyName === 'USDT-ERC20') {
-            //     this.selectLian = item
-            //     this.selectCoin = item
-            //   }
-            // })
+            this.selectCoin = this.selectLian 
           } else {
             this.selectCoin = this.allCoins[0]
           }
