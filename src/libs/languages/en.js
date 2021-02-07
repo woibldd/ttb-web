@@ -5,7 +5,7 @@ export default {
   buyCrypto: 'Buy Crypto',
   future_account: "Contract Account",
   'currency-mix': "Contract - USDT",
-  'currency-unit': "Contract - Standard",
+  'currency-unit': "Coin Margin Contact",
   'currency-btc': "Contract - BTC",
   google_login: "Google authentication on login",
   google_turn_off: "Turn off",
@@ -3754,7 +3754,7 @@ export default {
       'trading': 'Trading',
       'contract': 'Contract - BTC',
       'legalTender': 'P2P Trading',
-      'currency-unit': 'Contract - Currency',
+      'currency-unit': 'Coin Margin Contact',
       'currency-mix': 'Contract - USDT',
       'hotActive': {
         label: 'Activities',
