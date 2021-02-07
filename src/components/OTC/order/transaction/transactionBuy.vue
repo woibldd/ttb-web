@@ -692,8 +692,7 @@ export default {
       })
     },
     removefill() {
-      if (this.active_id <= 0) {
-        console.log(11)
+      if (this.active_id <= 0) { 
       }
     },
     amountInput() {
@@ -794,7 +793,7 @@ export default {
       })
     },
     changePayType(e) {
-      console.log(e)
+      // console.log(e)
     },
     async setQr(url) {
       const QRCode = await qrcode()
@@ -838,8 +837,7 @@ export default {
     }
   }
 </style>
-<style lang='scss'>
-
+<style lang='scss'> 
   .otcaction {
     height: 100%;
     .action-box {

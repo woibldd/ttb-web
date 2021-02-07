@@ -9,7 +9,10 @@
     <link rel="shortcut icon" type="image/x-icon" href="<%= htmlWebpackPlugin.options.static %>/static/icon.png"> 
     <link rel="stylesheet" href="https://cdn.bootcss.com/element-ui/2.12.0/theme-chalk/index.css"> 
     <title><%= htmlWebpackPlugin.options.theme.exchangeName %></title>
-    <style>.page-mask {position: fixed;width: 100%;height: 100%;left: 0;right: 0;top: 0;bottom: 0;background-color: transparent;z-index: 99999;cursor: progress;}.page-loading {background: #0C1222;opacity: 0;visibility: hidden;transition: opacity 300ms, visibility 0s 300ms;}.page-loading.show {opacity: 1;visibility: visible;transition: none;}.k-square-holder {width: 50px;position: absolute;text-align:center;bottom: 50%;left: 50%;}.k-square3 {display: inline-block;width: 15px;height: 15px;margin-right:5px;background: #01CED1;opacity: 0.2;animation: k-loadingQ 2s infinite;opacity: 0.5;}.k-square3a {transform: translate(0,-25px);}.k-square3b {transform: translate(25px,0);}.k-square3c {transform: translate(-25px,0);}.k-square3d {transform: translate(0,25px);}@keyframes k-loadingQ {33% {  transform: translate(0,0);  opacity: .7;}66% {  transform: translate(0,0);  opacity: .7;}}</style>
+    <style>
+      .page-mask {position: fixed;width: 100%;height: 100%;left: 0;right: 0;top: 0;bottom: 0;background-color: transparent;z-index: 99999;cursor: progress;}.page-loading {background: #0C1222;opacity: 0;visibility: hidden;transition: opacity 300ms, visibility 0s 300ms;}.page-loading.show {opacity: 1;visibility: visible;transition: none;}.k-square-holder {width: 50px;position: absolute;text-align:center;bottom: 50%;left: 50%;}.k-square3 {display: inline-block;width: 15px;height: 15px;margin-right:5px;background: #01CED1;opacity: 0.2;animation: k-loadingQ 2s infinite;opacity: 0.5;}.k-square3a {transform: translate(0,-25px);}.k-square3b {transform: translate(25px,0);}.k-square3c {transform: translate(-25px,0);}.k-square3d {transform: translate(0,25px);}@keyframes k-loadingQ {33% {  transform: translate(0,0);  opacity: .7;}66% {  transform: translate(0,0);  opacity: .7;}}
+      #launcher-frame { right: 19px !important;bottom: 61px !important;height: 45px !important;min-width: 90px !important; max-width: 90px !important;} 
+    </style>
     
 </head>
 <body>
@@ -60,6 +63,9 @@
     }
     function initialize(i,t){var e;i.getElementById(t)?initFreshChat():((e=i.createElement("script")).id=t,e.async=!0,e.src="https://wchat.freshchat.com/js/widget.js",e.onload=initFreshChat,i.head.appendChild(e))}function initiateCall(){initialize(document,"freshchat-js-sdk")}window.addEventListener?window.addEventListener("load",initiateCall,!1):window.attachEvent("load",initiateCall,!1);
   </script>
+  <!-- <script type='text/javascript' src='https://ykf-webchat.7moor.com/javascripts/7moorInit.js?accessId=47842030-4688-11eb-9d37-bb09a05ef855&autoShow=true&language=ZHCN' async='async'>
+  </script> -->
+   <!-- // language用于控制访客端展示的语言类型，language=ZHCN为中文，language=EN为英文，您可按需设置一种语言类型 -->
   <!-- End of ixcustomer Zendesk Widget script -->
   <script type="text/javascript">window.grayline=false</script>
   <!-- built files will be auto injected -->

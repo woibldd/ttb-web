@@ -35,10 +35,10 @@ module.exports = {
   supportMail: 'support@ixx.com', 
   hrMail: 'hr@ixx.com',
   apiDoc: {
-    en: 'https://github.com/sonsea/ixx-API-Docs',
-    ko: 'https://github.com/sonsea/ixx-API-Docs',
-    'zh-CN': 'https://github.com/sonsea/ixx-API-Docs',
-    'zh-HK': 'https://github.com/sonsea/ixx-API-Docs'
+    en: 'http://ixxapidoc.cloudservicex.com/apidocs/spot/en/',
+    ko: 'http://ixxapidoc.cloudservicex.com/apidocs/spot/en/',
+    'zh-CN': 'http://ixxapidoc.cloudservicex.com/apidocs/spot/cn',
+    'zh-HK': 'http://ixxapidoc.cloudservicex.com/apidocs/spot/en/'
   },
   faq: {
     en: 'https://ixxcustomer.zendesk.com/hc/en-us/',
@@ -47,16 +47,16 @@ module.exports = {
     'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/'
   },
   announcement: {
-    en: 'https://ixxcustomer.zendesk.com/hc/en-us/categories/360001229791',
-    ko: 'https://ixxcustomer.zendesk.com/hc/en-us/categories/360001229791',
-    'zh-CN': 'https://ixxcustomer.zendesk.com/hc/zh-cn/categories/360001229791',
-    'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/categories/360001229791'
+    en: '/knowledgeBase',
+    ko: '/knowledgeBase',
+    'zh-CN': '/knowledgeBase',
+    'zh-HK': '/knowledgeBase',
   },
   help: {
-    en: 'https://ixxcustomer.zendesk.com/hc/en-us/categories/360001229751',
-    ko: 'https://ixxcustomer.zendesk.com/hc/en-us/categories/360001229751',
-    'zh-CN': 'https://ixxcustomer.zendesk.com/hc/zh-cn/categories/360001229751',
-    'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/categories/360001229751'
+    en: '/knowledgeBase',
+    ko: '/knowledgeBase',
+    'zh-CN': '/knowledgeBase',
+    'zh-HK': '/knowledgeBase',
   },
   request: {
     en: 'https://ixxsupport.freshdesk.com/support/tickets/new',

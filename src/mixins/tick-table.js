@@ -1,7 +1,8 @@
 import _ from 'lodash'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
-import { state, local } from '@/modules/store'
+import { state, local } from '@/modules/store' 
+
 // import ws from '@/modules/ws'
 import wsNew from '@/modules/ws-new'
 
@@ -211,26 +212,10 @@ export default {
             pair[0].like = true
           }
         }
-      }
-      
-
+      } 
       this.state.pro.pairList = res.data.items
     },
-    subMarket() {
-      // if (this.socket) {
-      //   this.socket.$destroy()
-      // }
-      // this.socket = ws.create('market/tickers')
-      // this.socket.$on('open', () => {
-      //   this.socket.heartCheck.start()
-      // })
-      // this.socket.$on('message', (datas) => {
-      //   this.socket.heartCheck.start()
-      //   datas.forEach(data => {
-      //     this.patch(data)
-      //   })
-      // })
-      // this.socket.$on('reopen', this.openSocket)
+    subMarket() { 
       if (!utils.$tvSocket) {
         utils.$tvSocket = wsNew.create()
         utils.$tvSocket.$on('open', () => { 
@@ -244,7 +229,15 @@ export default {
           }) 
         }
       })
+    },
+    assignData(datas) { 
+      if (datas.topic && datas.topic.indexOf('market@ticker') > -1) {
+        datas.data.forEach(data => {
+          this.patch(data)
+        }) 
+      }
     }
+
   },
   destroyed() {
     // if (this.socket) {
@@ -257,6 +250,7 @@ export default {
     }
     await this.fetch()
     this.subMarket()
+    this.$eh.$on('protrade:socket:market', this.assignData)
     // actions.updateFavorite()
   }
 }

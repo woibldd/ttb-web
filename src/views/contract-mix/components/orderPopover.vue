@@ -3,8 +3,8 @@
     v-loading="false"
     class="hold-content"
     element-loading-background="rgba(0, 0, 0, 0.3)"> 
-    <div class="content-container-hold text-info">
-      <div>{{ hander }}</div>
+    <div class="content-container-hold text-info"> 
+      <div>{{ hander }}</div> 
       <div
         class="linear-bar text-light"
         flex="main:justify cross:center">

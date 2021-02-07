@@ -1373,6 +1373,11 @@ const service = {
   futureActivitySet(params) {
     return request('future/activity/wallet/setTag', params)
   },
+  //新的资金划转列表
+  getAllTransferList() {
+    return request('/fund/transfer/list')
+  }
+
 }
 
 export async function fetch(url, body, options, method = 'post') {

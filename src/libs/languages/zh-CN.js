@@ -1,5 +1,10 @@
 export default {
-  'currency-mix': "金本位合约",
+  finance: '金融业务',
+  promotion: '促销',
+  quickBuy: '一键买币',
+  buyCrypto: '买币', 
+  future_account: "合约账户",
+  'currency-mix': "USDT合约",
   'currency-unit': "币本位合约",
   'currency-btc': "BTC合约",
   google_login: "登录时进行谷歌验证",
@@ -1779,7 +1784,7 @@ export default {
   bubble_site_tips: "请您登录时认准下方IXX的标准域名:",
   tradingview_line: "分时线",
   footer_application_coin: "上币申请",
-  otc_trade: "法币交易",
+  otc_trade: "P2P交易",
   otc_tips: "添加微信请备注",
   trading_fees: "币币手续费",
   contract_fees: "BTC合约手续费",
@@ -2009,7 +2014,7 @@ export default {
   otc_side_1: "购买",
   otc_side_2: "出售",
   otc_side_3: "  交易总额(CNY)",
-  otc_need_verify: "法币交易需完成以下认证",
+  otc_need_verify: "P2P交易需完成以下认证",
   otc_bind_bankCard: "绑定本人实名银行卡",
   otc_kyc_verified: "身份认证 <i style='color:#ccc;'>（认证等级:KYC2）</i>",
   otc_side_99: "开户行",
@@ -2091,7 +2096,7 @@ export default {
   otc_otutcol_13: "法币资产估值",
   otc_otutcol_14: "币币资产估值",
   otc_otutcol_15: "合约资产估值",
-  otc_otutcol_16: "充币成功后，若想进行”币币交易/法币交易/合约交易，需操作“资金划转”，将“资金账户”的币转移到该账户上。",
+  otc_otutcol_16: "充币成功后，若想进行”币币交易/P2P交易/合约交易，需操作“资金划转”，将“资金账户”的币转移到该账户上。",
   otc_otutcol_17: "个人资产",
   otc_otutcol_19: "你确定要申诉？",
   order_th_typecsef1: "输入金额不合法",
@@ -2481,7 +2486,7 @@ export default {
       7: "理财本息结算",
       8: "",
       9: "币本位当日清算",
-      10: "金本位当日清算"
+      10: "USDT合约当日清算"
     },
     dict: {
       side: {
@@ -2571,7 +2576,7 @@ export default {
             path: '/fund/my/contractUnit'
           },
           5: {
-            label: '金本位账户',
+            label: 'USDT合约账户',
             path: '/fund/my/contractMix'
           },
           6: {
@@ -2860,7 +2865,7 @@ export default {
         3: { text: '限价止盈', describe: '' }
       },
       mapMenuOptions: {
-        3: '限价止盈',
+        3: '限价止损',
         4: '市价止损',
         5: '限价止盈',
         6: '市价止盈'
@@ -2972,6 +2977,9 @@ export default {
     handleSuccess: '操作成功',
     index: '指数',
     currentPlace: '当前仓位',
+    closeMarket: '市价全平',
+    closeMarketConfirm: '您确认对此仓位按进行全部市价平仓吗',
+    closeMarketTips: '选择市价全平时，根据仓位当前拥有持仓数量进行相对应平仓，跟输入的平仓数量无关',
     side: {
       1: '买入开多',
       2: '卖出开空',
@@ -2981,7 +2989,10 @@ export default {
     orderType: {
       1: '限价',
       2: '市价',
-      3: '止盈止损'
+      3: '止盈止损',
+      4: '止盈止损',
+      5: '止盈止损',
+      6: '止盈止损'
     },
     origin: {
       1: '成交单',
@@ -3308,7 +3319,27 @@ export default {
     right_bar: {
       order_fee: "平台服务费(%{currency})",
       orderdeal_fee: "手续费"
-    }
+    },
+    quick: '快捷买币',
+    ctoc: 'C2C交易',
+    about: '关于',
+    account: '资金账户可用',
+    sell: '我要出售',
+    payment: '我要支付',
+    payType: '支付方式',
+    collectionType: '收款方式',
+    quotation: '最新报价',
+    paymentDate: '到账时间',
+    available: '可获得',
+    tag1: '综合手续费、到账时间、价格等，为您推荐',
+    tag2: '法定货币到数字货币转换的新标准。',
+    tag3: '如果您已完成支付，请耐心等待Simplex给您打币',
+    tag4: '还未支付，继续支付',
+    tag5: '即将从IXX跳转至Simplex',
+    tag6: '如果您已在Simplex完成支付请耐心等待，Simplex将在5~20分钟内 将数字货币充值到您的IXX资金账户。',
+    tag7: '您已知晓Simplex是由第三方独立运营的法定货币与数字货币交易平台，IXX不对因使用该服务遭受的任何损失或损害承担任何责任。',
+    gotopay: '前往Simplex支付', 
+    buy_now: "立即购买",
   },
   el: {
     pagination: {
@@ -3500,7 +3531,7 @@ export default {
   },
   no_account: "还没有账号?",
   'UNIT_&': "%{currency}币本位",
-  'MIX_&': "%{currency}金本位",
+  'MIX_&': "%{currency}USDT",
   kyc_failure: "认证失败",
   kyc_failure_tip: "您的KYC认证审核失败,请重新认证",
   kyc_retry: "重新认证",
@@ -3525,8 +3556,8 @@ export default {
     describe6: "自研高性能撮合引擎，充分支持200万+/秒/交易对的撮合速度，服务不间断操作无卡顿"
   },
   pre_reviewed: "订单在前置审核中",
-  gold_account: "金本位合约账户",
-  gold_contract: "金本位合约",
+  gold_account: "USDT合约账户",
+  gold_contract: "USDT合约",
   mix_side: {
     1: "买入开多",
     2: "卖出开空",
@@ -3600,8 +3631,8 @@ export default {
       'trading': '币币交易',
       'contract': 'BTC合约',
       'currency-unit': '币本位合约',
-      'currency-mix': '金本位合约',
-      'legalTender': '法币交易',
+      'currency-mix': 'USDT合约',
+      'legalTender': 'P2P交易',
       'hotActive': {
         label: '热门活动',
         children: {
@@ -3655,8 +3686,7 @@ export default {
     winLimit: '止盈',
     price: '市价',
     closeOut: '平仓'
-  },
-
+  }, 
   // 知识库相关
   knowledgeBase: {
     searchTitle: '请输入您的问题', placeholder: '在这儿搜索',

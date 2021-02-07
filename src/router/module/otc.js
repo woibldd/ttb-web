@@ -4,18 +4,22 @@ export const otcRouter = [
   {
     path: '/notc',
     name: 'notc',
-    component: () => import('@/views/otc-new'),
+    component: () => import('@/views/otc-new'), 
     meta: {
       nav: true,
       footer: false,
-      class: 'dark'
+      class: 'dark',
+      require: true
     },
     redirect: {name: 'quick'},
     children: [
       {
         path: 'quick',
         name: 'quick',
-        component: () => import('@/views/otc-new/components/quick')
+        component: () => import('@/views/otc-new/components/quick'),
+        meta: {
+          require: true
+        }
       },
       {
         path: 'quick-offer',
@@ -24,8 +28,24 @@ export const otcRouter = [
       },
       {
         path: 'trade',
-        name: 'trade'
+        name: 'trade',
+        component: () => import('@/views/otc-new/components/trade')
       },
+      {
+        path: 'order',
+        name: 'quick-order',
+        component: () => import('@/views/otc-new/components/order')
+      },
+      {
+        path: 'bill',
+        name: 'quick-bill',
+        component: () => import('@/views/otc-new/components/bill')
+      },
+      {
+        path: 'collection',
+        name: 'quick-collection',
+        component: () => import('@/views/otc-new/components/collection')
+      }
     ]
   }
 ]

@@ -20,11 +20,11 @@
                 :class="{active:activeProduct.name === product.name}"
                 flex="dir:top main:center"
                 @click="handleProductsChange(product)">
-                <p style="white-space: nowrap;">{{ $tR(`mapTabs.${product.name}`) }}</p>
+                <p style="white-space: nowrap;">{{ product.name}}</p>
                 <span
                   v-if="product.MIX"
                   :class="[product.MIX.increment_24h > 0?'text-success':'text-danger']">
-                  {{ calcIncreaseRate(product) }}%
+                  {{ calcIncreaseRate(product) || 0 | fixed(2) }}%
                   <svg-icon :icon-class="product.MIX.increment_24h > 0?'lv':'hong'" />
                 </span>
               </div>
@@ -38,7 +38,7 @@
             <template v-if="activeProduct.MIX">
               <div class="info-left">
                 <div class="title">
-                  {{ $tR(`mapTabs.${activeProduct.name}`) }}
+                  {{  activeProduct.name }}
                   <svg-icon
                     :class="[activeProduct.MIX.increment_24h > 0?'text-success':'text-danger']"
                     :icon-class="activeProduct.MIX.increment_24h > 0?'lv':'hong'" />
@@ -47,7 +47,7 @@
                 <span>
                   <i
                     class="el-icon-bell"
-                    v-tooltip.top-center="{html: true, content: $t('contract_fee_rate_estimate_tips', { feeRate: (symbolInfo.fee_rate * 100).toFixed(8) + '%' }), classes: 'contract'}" />
+                    v-tooltip.top-center="{html: true, content: $t('contract_fee_rate_estimate_tips', { feeRate: (symbolInfo.fee_rate_forecast * 100).toFixed(8) + '%' }), classes: 'contract'}" />
                 </span>
               </div>
               <div class="info-list-box">
@@ -194,21 +194,7 @@
                   v-for="(value,key) in mapFormContent.mapBtns"
                   :key="key"
                   :flex-box="+key > 2 ? 2 : 1"
-                  :class="['btn', {active:activeBtnsKey === key}]">
-                  <!-- <dropdown
-                    v-if="key === '3'"
-                    v-model="activePriceType"
-                    :menu-options="menuOptions"
-                    label="label">
-                    <el-button
-                      class="custom-btn"
-                      :class="{active:activeBtnsKey === key}"
-                      size="small"
-                      plain
-                      @click="handleSwitch(key)">
-                      {{ activePriceType.label }} <i class="el-icon-caret-bottom" />
-                    </el-button>
-                  </dropdown> -->
+                  :class="['btn', {active:activeBtnsKey === key}]"> 
                   <el-button
                     v-tooltip.bottom="{html: true, content: $tR(`mapFormContent.mapBtns.${key}.describe`), classes: 'contract'}"
                     class="custom-btn"
@@ -217,17 +203,7 @@
                     plain
                     @click="handleSwitch(key)">
                     {{ $tR(`mapFormContent.mapBtns.${key}.text`) }}
-                  </el-button>
-                  <!-- <el-tooltip
-                    placement="bottom"
-                    effect="dark"
-                    popper-class="custom-tooltip">
-                    <div
-                      v-if="!!$tR(`mapFormContent.mapBtns.${key}.describe`)"
-                      slot="content"
-                      style="width:200px;font-size:12px;line-height:20px">{{ $tR(`mapFormContent.mapBtns.${key}.describe`) }}</div>
-
-                  </el-tooltip> -->
+                  </el-button> 
                 </div>
               </div>
               <!-- 仓位、价格 -->
@@ -243,21 +219,7 @@
                   flex="main:justify box:mean">
                   <div style="color: #666;">{{ $tR(`mapFormContent.perfactPrice`) }}</div>
                 </div>
-                <template v-else>
-                  <!-- <div
-                    v-if="key === 'triggerType'"
-                    class="transactionPrice">
-                    <el-select
-                      v-model="trigger_type"
-                      size="small"
-                      class="custom-select">
-                      <el-option
-                        v-for="(subValue,subKey) in mapFormContent.mapTriggerType"
-                        :key="subKey"
-                        :label="$tR(`mapFormContent.mapTriggerType.${subKey}`)"
-                        :value="+subKey" />
-                    </el-select>
-                  </div> -->
+                <template v-else> 
                   <input
                     :value="(i===0 || i===2) ? activeAcountAndPriceArr[i]:(activeAcountAndPriceArr[i] || (activeProduct.MIX||{}).current)"
                     type="text"
@@ -334,8 +296,9 @@
                   </p>
                 </div>
                 <div flex="main:left">
-                  <span :flex-box="0">{{ $tR('mapFormContent.tradingType') }} </span>
-                  <div
+                  <span :flex-box="0">{{ $tR('mapFormContent.tradingType') }}: </span>
+                  <span class="ml-10">{{tradingType}}</span>
+                  <!-- <div
                     :flex-box="1"
                     class="transactionPrice"
                     style="width: 60px;"> 
@@ -350,7 +313,7 @@
                         :label="subValue.label" 
                         :value="subValue.key" />
                     </el-select>
-                  </div>
+                  </div> -->
                   <div :flex-box="3"/> 
                 </div> 
                 <div
@@ -378,49 +341,41 @@
                     v-else
                     style="font-size:12px"
                     href="/fund/my/contractMix/index"
-                    type="primary">{{ (activeBalance||{}).available_balance||0| bigRound(8) }} {{ (activeBalance||{}).currency }}</el-link>
- 
-                </div>
-                <!-- <div>
-                  <el-checkbox
-                    class="text-light"
-                    v-if="+activeBtnsKey===1"
-                    v-model="passive">
-                    {{ $tR(`mapFormContent.passive`) }}
-                  </el-checkbox>
-                </div> -->
+                    type="primary">{{ (activeBalance||{}).available_balance||0| bigRound(8) }} {{ (activeBalance||{}).currency }}</el-link> 
+                </div> 
                 <div
                   v-if="+activeBtnsKey > 2"
                   flex>
                   <div
                     flex-box="1"
                     flex>
-                    <label flex-box="0">{{ $tR(`mapFormContent.mapInput.triggerType`) }}</label>
-                    <el-select
+                    <label flex-box="0">{{ $tR(`mapFormContent.mapInput.triggerType`) }}:</label>
+                    <!-- <el-select
                       style="width:100px;"
                       v-model="trigger_type"
-                      size="small"
-                      class="custom-select">
+                      size="mini"
+                      class="custom-select ml-10">
                       <el-option
                         v-for="(subValue,subKey) in mapFormContent.mapTriggerType"
                         :key="subKey"
                         :label="$tR(`mapFormContent.mapTriggerType.${subKey}`)"
                         :value="+subKey" />
-                    </el-select>
-                  </div>
-                  <!-- <el-checkbox v-if="+activeBtnsKey > 2"
-                              v-model="trigger_close ">{{ $tR(`mapFormContent.trigger_close`) }}</el-checkbox> -->
-                  <!-- <el-checkbox
-                    flex-box="1"
-                    v-model="trigger_close ">{{ $tR(`mapFormContent.trigger_close`) }}</el-checkbox> -->
-                </div>
-                <!-- <div flex="main:justify">
-                  <el-tooltip popper-class="custom-tooltip">
-                    <div slot="content"
-                        style="width:200px;">{{ '选择直接下单后将不会弹出详细委托表单信息而直接下单，请慎重选择' }}</div>
-                    <el-checkbox v-model="popoverDisabled">{{ $tR(`mapFormContent.notip`) }}</el-checkbox>
-                  </el-tooltip> 
-                </div> -->
+                    </el-select> -->
+                    <el-dropdown trigger="click" @command="handleCommandTriggerType">
+                      <span style="color:#d7d7d7;" class=" el-dropdown-link ml-10">
+                        {{$tR(`mapFormContent.mapTriggerType.${trigger_type}`)}}<i class="el-icon-arrow-down el-icon--right"></i>
+                      </span>
+                      <el-dropdown-menu class="dark" slot="dropdown">
+                        <el-dropdown-item 
+                          v-for="(subValue,subKey) in mapFormContent.mapTriggerType"
+                          :key="subKey" 
+                          :command="subKey">
+                          {{$tR(`mapFormContent.mapTriggerType.${subKey}`)}}
+                        </el-dropdown-item> 
+                      </el-dropdown-menu>
+                  </el-dropdown>
+                  </div> 
+                </div> 
               </div>
             </div>
           </div>  
@@ -433,7 +388,7 @@
             <div
               class="header"
               flex="main:justify">
-              <span> {{ $tR('currentPlace') }}：{{ activeProduct && $tR(`mapTabs.${activeProduct.name}`)||'' }}</span>
+              <span> {{ $tR('currentPlace') }}：{{ activeProduct && activeProduct.name ||'' }}</span>
               <el-link
                 type="primary"
                 :underline="false"
@@ -443,7 +398,10 @@
               <div
                 flex="box:mean"
                 style="text-align:center">
-                <p>{{ (activeBalance||{}).holdingSum || 0 }} <br> {{ $tR('deal') }}</p>
+                <p>
+                  <!-- {{ (activeBalance||{}).holdingSum || 0 }} <br>  -->
+                  {{ $tR('deal') }}
+                </p>
                 <!-- <p style="border-left:1px solid #333">{{ (activeBalance||{}).unrealized || 0 }} <br> {{ $tR('rateOReturn') }}</p> -->
               </div>
               <orderPopover
@@ -573,7 +531,7 @@
             <div
               class="header"
               flex="main:justify">
-              <span>{{ $t('contract_symbol_detail') }}{{ activeProduct && $tR(`mapTabs.${activeProduct.name}`)||'' }}</span> 
+              <span>{{ $t('contract_symbol_detail') }}{{ activeProduct && activeProduct.name ||'' }}</span> 
               <router-link
                 class="pointer"
                 v-tooltip.top-center="{html: true, content: $tR('mapDelegateList.contract_mark_price_tips'), classes: 'contract'}"
@@ -990,9 +948,9 @@ export default {
       this.balanceList.map(item => {
         if (item.name === this.activeProduct.name) {
           if (item.sell) {
-            obj.buyAmount = item.holding
+            obj.buyAmount =  item.sum_close_amount || 0
           } else if (item.buy) {
-            obj.sellAmount = item.holding
+            obj.sellAmount =  item.sum_close_amount || 0
           }
         }
       }) 
@@ -1073,6 +1031,10 @@ export default {
   },
   async created () {
     actions.updateSession()  
+    const result = await getSymbolInfo()
+    if (!result.code) { 
+      this.state.mix.symbolInfoList = result.data
+    }  
     const res = await getSymbolList()
     if (res && !res.code) {
       this.products = res.data
@@ -1108,8 +1070,13 @@ export default {
       this.activeAcountAndPriceArr[0] = params.amount || this.activeAcountAndPriceArr[0]
       this.activeAcountAndPriceArr[1] = params.price || this.activeAcountAndPriceArr[1]
     })
+    this.$eh.$on('mix:handleAmount', this.handleAmountObj)
   },
   methods: {
+    handleCommandTriggerType(obj) {
+      console.log(obj)
+      this.trigger_type = obj
+    },
     subMarket() { 
       const that = this
       if (this.socket) {
@@ -1219,7 +1186,7 @@ export default {
         this.isBuy = last.side === 'buy'
       }
     }, 
-    handleSoketData (res) {
+    handleSoketData (res) { 
       const key = res.topic && res.topic.split('@')[0]
       this.mapHandlerSoket[key] && this.mapHandlerSoket[key](res.data, res.topic)
     },
@@ -1275,7 +1242,7 @@ export default {
           this.entrustList = res.data.data.map(item => {
             item.cancelBtnLoading = false
             item._symbol = item.symbol
-            item.symbol = this.$tR(`mapTabs.${item.name}`)
+            item.symbol = item.name
             return item
           })
         } else if (res.code !== 401) {
@@ -1320,9 +1287,7 @@ export default {
                 return { unrealized, roe, unrealizedM, roeM }
               }
             }
-            item.isEffective = true
-            // item._symbol = item.symbol
-            // item.symbol = this.$tR(`mapTabs.FUTURE_${item.symbol}`)
+            item.isEffective = true 
             return item
           }) 
           this.balanceList = blist.filter(x => x.isEffective === true)
@@ -1346,9 +1311,9 @@ export default {
           const found = this.products.find(item => item.symbol === market.pair || item.name === pairArr[1])
           if (found) {
             this.$set(found, pairArr[0], market)
-            if (market.pair.indexOf('INDEX') > -1 && found.name==='BTCUSDT') {
-              console.log(found, market)
-            }
+            // if (market.pair.indexOf('INDEX') > -1 && found.name==='BTCUSDT') {
+            //   console.log(found, market)
+            // }
           } 
         }
       })
@@ -1383,10 +1348,11 @@ export default {
       getFutureListByKey(`${product.product}_${product.currency}`, { size: 20 }).then(({ data }) => {
         this.newBargainListData = data || []
       })
+      this.symbolInfo = this.state.mix.symbolInfoList.find(item => item.name===product.name)
 
       // getSymbolInfo({ symbol: product.name }).then(res => {
       //   if (!res.code) {
-      //     this.symbolInfo = res.data[0]
+      //     this.symbolInfo = res.data.find(item => item.name===product.name) 
       //   } else if (res.code !== 401) {
       //     this.$message.error(res)
       //   }
@@ -1447,6 +1413,15 @@ export default {
             }
             this.amountObj = obj
           } 
+           //获取可平仓数量
+          const cres = await getClosedpositionList() 
+          if (!res.code) { 
+            const cdata = cres.data
+            this.balanceList.map(item => {
+              const find = cdata.find(r => r.name === item.name && r.side === item.side)
+              if (find) item.sum_close_amount = find.sum_close_amount
+            })
+          } 
           this.handleTableTabClick(this.activeTableTabKey)
           this.handleEntrustList()
           resolve()
@@ -1490,9 +1465,10 @@ export default {
         item.cancelBtnLoading = false
         if (item.symbol) {
           item._symbol = item.symbol
-          item.symbol = this.activeTableTabKey === 'shipped' ? this.$tR(`mapTabs.FUTURE_${item.symbol}`) : this.$tR(`mapTabs.${item.symbol}`)
+          // item.symbol = this.activeTableTabKey === 'shipped' ? this.$tR(`mapTabs.FUTURE_${item.symbol}`) : this.$tR(`mapTabs.${item.symbol}`)
+          item.symbol = item.name
         } else {
-          item.symbol = this.$tR(`mapTabs.${item.name}`)
+          item.symbol = item.name
         }
         return item
       })
@@ -1620,18 +1596,19 @@ export default {
         if (match) {
           this.state.mix.pair = pair 
           local.mix = pair    
-          getSymbolInfo({ symbol: pair }).then(res => {
-            if (!res.code) {
-              this.symbolInfo = res.data[0]
-            } else if (res.code !== 401) {
-              this.$message.error(res)
-            }
-          })
           if (this.products && this.products.length > 0) {
             const found = this.products.find(item => item.symbol === pair)
             if (found) {  
               this.activeProduct = found 
-              this.tradingType = found.symbol_currency.find(item => item.currency.indexOf('USDT') > -1).currency //暂时默认usdt
+              this.tradingType = found.symbol_currency.find(item => item.currency.indexOf('USDT') > -1).currency //暂时默认usdt  
+              this.symbolInfo = this.state.mix.symbolInfoList.find(item => item.name===this.activeProduct.name)
+              // getSymbolInfo({ symbol: pair }).then(res => {
+              //   if (!res.code) { 
+              //     this.symbolInfo = res.data.find(item => item.name===found.name) 
+              //   } else if (res.code !== 401) {
+              //     this.$message.error(res)
+              //   }
+              // })
             } 
           }
           

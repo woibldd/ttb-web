@@ -564,9 +564,6 @@ export default {
         this.$router.push(state.loginBack)
       }
       actions.setLoginBack(null)
-      // this.$router.push({
-      //   name: 'profile'
-      // })
       setTimeout(()=>{
         // activeShareAccount(userInfo.id)
         this.$eventBus.$emit('handleFirstLogin')

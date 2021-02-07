@@ -178,8 +178,7 @@ export default {
           if (!!match && match.indexOf('MPV') > -1) {
             if (this.state.pro.activityList.indexOf('mpv_user') > -1) {
               this.showMvpModal = false
-            } else {
-              console.log('$route.params.pair')
+            } else { 
               this.showMvpModal = true
               this.state.pro.isActivity = false
             }
@@ -330,7 +329,8 @@ export default {
       }
     },
     handleTickers (data) { 
-      // console.log('handleTickers') 
+      // console.log('handleTickers')  
+      this.$eh.$emit('protrade:socket:market', data)
     },
     handleDealSoket(res) { 
       if (res.topic.indexOf(this.state.pro.pair) > -1) {
@@ -516,6 +516,7 @@ export default {
 .ix-grid-deal {
   flex: 1;
   height: 320px;
+  overflow: auto;
 }
 .ix-grid-orderbook {
   // height: 2px;

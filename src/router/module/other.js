@@ -165,6 +165,11 @@ export const otherRouter = [
     component: () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pages/PrivacyPolicy')
   },
   {
+    path: '/PrivacyAgreement',
+    name: 'PrivacyAgreement',
+    component: () => import(/* webpackChunkName: "PrivacyPolicy" */ '@/pages/PrivacyAgreement')
+  },
+  {
     path: '/services',
     name: 'terms',
     component: () => import(/* webpackChunkName: "terms" */ '@/pages/terms')

@@ -13,6 +13,7 @@ import { fundRouter } from './module/fund'
 import { otherRouter } from './module/other'
 import { ipfsRouter } from './module/ipfs'
 import { otcRouter } from './module/otc'
+import { gameRouter } from './module/game'
 import Bid from '@/pages/Bid/index.vue'
 import BidDetail from '@/pages/Bid/detail.vue'
 import BidTable from '@/pages/Bid/table.vue'
@@ -189,6 +190,7 @@ export const routes = [
   ...ipfsRouter,
   ...knowledgeBase,
   ...otcRouter,
+  ...gameRouter,
   {
     path: '/',
     name: 'home',

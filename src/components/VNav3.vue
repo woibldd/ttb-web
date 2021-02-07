@@ -6,9 +6,11 @@
       </router-link>
       <div class="nav_left">
         <div class="left_options">
+          <!-- 币币交易 -->
           <router-link :to="{name: 'trading'}" class="nav_link">{{ $t('trading') }}</router-link> 
+          <!-- 合约交易 -->
           <div class="nav_link arrow-down">
-            <span to="/affiliate" class="nav_link ml-30" v-popover:popoverContract>
+            <span  class="nav_link ml-30" v-popover:popoverContract>
               {{$t('trading_lever')}}
               <icon name="header-down" class="mini arrow" />
             </span> 
@@ -30,79 +32,54 @@
                   <router-link :to="{name:'mix'}" class="nav_log_res mr-20">{{ $t("currency-mix") }}</router-link> 
                   <icon name="hot-red" />
                 </li> 
+                <!-- <li class="dropdown-item pl-24 pr-24">
+                  <router-link to="/share_option" class="nav_log_res mr-20" >{{ $t('shareOption.navText') }} </router-link>
+                </li> -->
               </ul>
               </div>
             </el-popover>
-          </div>
-          <div class="nav_link arrow-down" >
-          </div>
-          <div class="nav_link arrow-down" >
-          </div>
-          <router-link :to="{name: 'OTC'}" class="nav_link ml-30">{{ $t('otc_trade') }}</router-link>
-          <router-link
-            v-if="false"
-            :to="{name: 'RushBuy'}"
-            class="nav_link"
-            style="padding-left:10px;"
-          >
-            {{ $t('FrenzySaleZone') }}(SP)
-            <icon name="hot-red" /> 
-          </router-link>
-
+          </div> 
+          <!-- p2P交易 -->
+          <router-link :to="{name: 'OTC'}" class="nav_link ml-30">{{ $t('otc_trade') }}</router-link> 
+          <!-- 金融业务 -->
           <div class="nav_link arrow-down">
-            <!-- <router-link to="/affiliate" class="nav_link ml-30" v-popover:popover2>
-              {{$t('plan')}}
-              <icon name="header-down" class="mini arrow" /> 
-            </router-link> -->
-            <a href="/mining-power" class="nav_link ml-30" v-popover:popover2>
-              {{ this.$t('mining_power.cloud_mine') }}
-              <icon name="hot-red" />
+            <span  class="nav_link ml-30" v-popover:popoverFinance>
+              {{$t('finance')}}
               <icon name="header-down" class="mini arrow" />
-            </a>
+            </span> 
             <el-popover
-              ref="popover2"
+              ref="popoverFinance"
               popper-class="nav-list"
               placement="bottom"
               style="background:#2C3B4B;"
               trigger="hover">
               <div class="pop-dropdown">
               <ul class="dropdown-list pt-10 pb-10">
-                
-                <li class="dropdown-item pl-24 pr-24">
+                <li class="dropdown-item pl-24 pr-24"> 
                   <a href="/mining-power" class="link">
                     {{ this.$t('mining_power.cloud_mine') }}
                     <icon name="hot-red" />
                   </a>
                 </li>
-                <li class="dropdown-item pl-24 pr-24">
-                  <router-link to="/affiliate" class="link">{{ $t('plan') }}</router-link>
-                </li>
-                <li class="dropdown-item pl-24 pr-24">
-                  <a
-                    href="/snowball/bazaar"
+                <li class="dropdown-item pl-24 pr-24">  
+                  <a href="/snowball/bazaar"
                     :class="{'router-link-active': from === 'contract'}"
-                    class="link"
-                  >{{ $t('bidTitle') }}</a>
-                </li>
-                <!-- <li class="dropdown-item pl-24 pr-24" v-if="isLogin">
-                  <a
-                    href="/snowball"
-                    :class="{'router-link-active': from === 'contract'}"
-                    class="link"
-                  >{{ $t('playBTC') }}</a>
-                </li> -->
+                    class="link">
+                    {{ $t('bidTitle') }}
+                  </a>
+                </li>  
               </ul>
               </div>
             </el-popover>
           </div>
-
+          <!-- 促销 -->
           <div class="nav_link arrow-down">
-            <a href="/bonus" class="nav_link ml-30" v-popover:popover3>
-              {{ this.$t('gift.bonus') }} 
+            <span  class="nav_link ml-30" v-popover:popoverPromotion>
+              {{$t('promotion')}}
               <icon name="header-down" class="mini arrow" />
-            </a>
+            </span> 
             <el-popover
-              ref="popover3"
+              ref="popoverPromotion"
               popper-class="nav-list"
               placement="bottom"
               style="background:#2C3B4B;"
@@ -113,7 +90,10 @@
                   <a href="/bonus" class="link">
                     {{ this.$t('gift.bonus') }} 
                   </a>
-                </li>
+                </li> 
+                <li class="dropdown-item pl-24 pr-24">
+                  <router-link to="/affiliate" class="link">{{ $t('plan') }}</router-link>
+                </li> 
                 <li class="dropdown-item pl-24 pr-24">
                   <a
                     href="javascript:;"
@@ -125,11 +105,7 @@
               </div>
             </el-popover>
           </div>
-          
-          <router-link 
-            to="/share_option"
-            class="nav_link ml-30"
-          >{{ $t('shareOption.navText') }} </router-link>
+          <!-- <router-link to="/share_option" class="nav_link ml-30">{{ $t('shareOption.navText') }}</router-link>  -->
           
         </div>
       </div>
@@ -309,11 +285,11 @@
               trigger="hover">
               <div class="pop-dropdown">
             <ul class="dropdown-list pt-10 pb-10">
-              <li class="dropdown-item pl-24 pr-24">
+              <!-- <li class="dropdown-item pl-24 pr-24">
                 <a class="link" target="_blank"  rel="nofollow"  :href="announcementLink">{{ $t('footer_notice') }}</a>
-              </li>
+              </li> -->
               <li class="dropdown-item pl-24 pr-24">
-                <a class="link" target="_blank"  rel="nofollow"  :href="helpLink">{{ $t('user_guide') }}</a>
+                <a class="link" target="_blank"  rel="nofollow"  :href="helpLink">{{ $t('footer_help') }}</a>
               </li>
               <li class="dropdown-item pl-24 pr-24">
                 <a class="link" target="_blank"  rel="nofollow"  :href="requestLink">{{ $t('footer_request') }}</a>

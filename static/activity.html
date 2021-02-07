@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IXX</title>
+  <style>
+    .button {
+      position: relative;
+      display:block;
+      margin: -60px 15%;
+      padding: 10px 0;
+      text-align: center;
+      background-color: #21B98A;
+      border-radius: 22px;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;width:100%;">
+  <div>
+    <img style="width: 100%;" id="bg-img"  alt="">
+    <div>
+      <a id="confirm-button" class="button" onclick="handleClick()">
+        立即报名
+      </a> 
+    </div>
+  </div>
+  <script>
+    function getQueryString(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) return unescape(r[2]); return null;
+    } 
+    function isIos() {
+      return navigator.userAgent.match(/(iPhone|iPod|ios|iPad)/i)
+    }
+    function isAndroid() {
+      return navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1
+    }
+    window.onload = () => { 
+      let lang = getQueryString("lang")
+      if (lang === 'en') {
+        document.getElementById('bg-img').setAttribute('src','./active/activity-en.png')
+        document.getElementById('confirm-button').innerText="Register Now"
+        document.getElementById('confirm-button').style.marginTop='-70px'
+      } else { 
+        document.getElementById('bg-img').setAttribute('src','./active/activity-zh-cn.png')
+        document.getElementById('confirm-button').innerText="立即报名"
+      }
+    } 
+    function handleClick() {  
+      if (isAndroid()) {
+        android.openBrowser('http://sg.mikecrm.com/QnYJL1I') 
+      } else {
+        // openBrowser('http://sg.mikecrm.com/QnYJL1I') 
+        window.webkit.messageHandlers.openBrowser.postMessage('http://sg.mikecrm.com/QnYJL1I')
+      }
+    }
+    function openBrowser(url) {
+
+    }
+  </script>
+</body>
+</html>

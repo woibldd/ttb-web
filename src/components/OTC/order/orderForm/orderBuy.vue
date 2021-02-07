@@ -3,7 +3,7 @@
     <!-- 挂单 -->
     <div class="action-box">
       <div class="release">
-        <!-- 标题 -->
+        <!-- 标题 --> 
         <div
           :class="{'buy': side===1, 'sell': side===2}"
           class="action-title title buy item"
@@ -101,14 +101,7 @@
                     <div
                       class="content"
                       v-if="type===1">
-                      <div class="el-number-input">
-                        <!-- <el-input
-                          type="number"
-                          :placeholder="$t('otc_placeholder_b')"
-                          v-model="inputPrice"
-                          @input="computeTotal"
-                          step-strictly
-                        /> -->
+                      <div class="el-number-input"> 
                         <number-input
                           class="number-input"
                           v-model="inputPrice"
@@ -520,8 +513,7 @@ export default {
       }
     },
     isMerchant () {
-      if (this.state.userInfo) {
-        console.log({userinfo: this.state.userInfo})
+      if (this.state.userInfo) { 
         return this.state.userInfo.is_merchant
       }
       return false
@@ -613,8 +605,7 @@ export default {
         if (this.side === 2 && !this.order.remark) {
           this.order.remark  = this.$t('otc_order_default_tips')
         }
-
-        // console.log({total: this.total})
+ 
         service.createOtcOrder(this.order).then(res => {
           this.nodata = false
           this.nodata1 = false
@@ -677,8 +668,7 @@ export default {
     inputPrice () {
       this.flag = false
       this.alertTitle = ''
-      this.awitFlag = false 
-      console.log({symbolInfo:this.symbolInfo})
+      this.awitFlag = false  
       let buy_price_one = this.symbolInfo.buy_price_one
       let sell_price_one = this.symbolInfo.sell_price_one
       if (this.legal_currency.toUpperCase() === 'SGD') {
@@ -703,8 +693,7 @@ export default {
            // `您发布的购买${this.currency}的交易单，价格为${this.inputPrice}CNY高于卖一价${this.symbolInfo.sell_price_one}CNY，以该价格发布可能给您带来损失`
           } else {
             this.flag = false
-            if (awit_buyPrice > 0) {
-              console.log({awit_buyPrice})
+            if (awit_buyPrice > 0) { 
               this.awitFlag = true
             } else {
               this.awitFlag = false
@@ -717,8 +706,7 @@ export default {
           // `您发布的出售${this.currency}的交易单，价格为${this.inputPrice}CNY低于买一价${ this.symbolInfo.buy_price_one}CNY，以该价格发布可能给您带来损失`
           } else {
             this.flag = false
-            if (awit_sellPrice > 0) {
-              // console.log({awit_sellPrice})
+            if (awit_sellPrice > 0) { 
               this.awitFlag = true
             } else {
               this.awitFlag = false
@@ -873,7 +861,16 @@ export default {
             // }
 
             .unit-label {
+              position: absolute;
               right: 10px;
+              top: 0;
+              line-height: 40px;
+              height: 40px;
+              width: 40px;
+              // border-right: 1px solid #DDDDDD;
+              text-align: center;
+              user-select: none;
+              font-size: 12px;
             }
             .text-total {
               position: relative;
@@ -884,6 +881,9 @@ export default {
               text-indent: 15px;
               border: 1px solid #ccc;
               border-radius: 4px;
+              .number-input {
+                border: none;
+              }
             }
           }
           @include clearfix();
@@ -956,6 +956,7 @@ export default {
           }
         }
       }
+      
     }
     .wrap {
       margin: 10px 0;
@@ -1008,7 +1009,8 @@ export default {
       box-shadow: none
     }
     .number-input {
-      border-color: transparent!important;
+      // border-color: transparent!important;
+      border: none
     }
   }
 </style>

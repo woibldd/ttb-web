@@ -1,46 +1,44 @@
 <template>
   <div class="fund-container my-fund-container">
-    <div class="title-box">
-
+    <div class="title-box"> 
       <div>{{ $t('account_exchange') }}</div>
       <div class="title__right"></div>
-    </div>
+    </div>   
     <div class="fund-items-content" style="margin-left:0">
       <div class="fund-item-row mb-14">
         <div class="row__label">{{$t('transfer_currency')}}</div>
         <div>
-          <el-select v-model="selectCoin"
+          <el-select v-model="selectCurrency" 
             :placeholder="$t('please_choose')"
             class="max-input"
-            :filterable="true"
-            @change="changeCoin"
-          >
-            <el-option
-              v-for="(item, idx) in allCoins"
-              :key="idx"
-              :label="item.currency"
-              :value="item.currency">
+            value-key="name"
+            @change="changeCurrency"
+            :filterable="true">
+            <el-option v-for="item in currencyList"  
+              :key="item.name" 
+              :label="item.name"
+              :value="item"> 
             </el-option>
           </el-select>
         </div>
       </div>
       <div class="fund-item-row mb-14">
         <div class="row__label">{{ $t('transfer_side')}}</div>
-        <el-select v-model="accountFrom" :placeholder="$t('please_choose')" class="min-input" @change="transferType(1)">
+        <el-select value-key="balance_types" v-model="fromAccount" :placeholder="$t('please_choose')" class="min-input" @change="handleSelectFromAccount">
           <el-option
-            v-for="item in accountTypes"
-            :key="item.value"
-            :label="$t(item.label)"
-            :value="item.value">
+            v-for="item in accountList"
+            :key="item.balance_types"
+            :label="$t(balanceList[item.balance_types])"
+            :value="item">
           </el-option>
         </el-select>
         <span style="padding:0 10px ">{{$t('transfer_to_a')}}</span>
-        <el-select v-model="accountTo" :placeholder="$t('please_choose')" class="min-input" @change="transferType(2)">
+        <el-select value-key="balance_types" v-model="toAccount" :placeholder="$t('please_choose')" class="min-input" @change="handleSelectToAccount">
           <el-option
-            v-for="item in accountTypes2"
-            :key="item.value"
-            :label="$t(item.label)"
-            :value="item.value">
+            v-for="item in toAccountList"
+            :key="item.balance_types"
+            :label="$t(balanceList[item.balance_types])"
+            :value="item">
           </el-option>
         </el-select>
       </div>
@@ -58,9 +56,9 @@
       <div class="fund-item-row mb-14">
         <div class="row__label"></div>
         <div>
-          {{$t('transfer_able_amount')}}{{fromAmount | fixed(8) }} <button @click="all" class="all">{{$t('transfer_all')}}</button>
+          {{$t('transfer_able_amount')}}{{fromAccount.m | fixed(8) }} <button @click="all" class="all">{{$t('transfer_all')}}</button>
         </div>
-      </div>
+      </div> 
       <div class="fund-item-row mb-14">
         <div class="row__label"></div>
         <div>
@@ -68,14 +66,12 @@
             style="width: 200px"
             class="max-input"
             @click="submit"
-            :label="$t('confirm')"/>
-          <!-- <el-input v-model="number" placeholder="请输入内容" class="max-input"></el-input> -->
+            :label="$t('confirm')"/> 
         </div>
       </div>
     </div>  
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane :label="$t('transfer_btc_history')" name="first"></el-tab-pane>
-      <!-- <el-tab-pane label="全部划转记录" name="second"></el-tab-pane> -->
+      <el-tab-pane :label="$t('transfer_btc_history')" name="first"></el-tab-pane> 
       <el-table
         :data="tableData"  :empty-text="$t('no_data')"
         style="width: 100%">
@@ -129,274 +125,98 @@
     data () {
       return  {
         number: '',
-        selectCoin:'BTC',
+        selectCoin:'',
         activeName: 'second',
         pages:1,
         text: 'mmm',
         isLastPage:false,
         allCoins : [],
         accountTo: '',
-        accountFrom: 1,
-        availableBalance:0,
-        tradingBalance: null,
-        contractBalance: null,
-        walletBalance: null,
-        otcBalance: null,
-        unitBalance: null,
-        mixBalance: null,
-        shareBlance: null,
-        powerBalance: null,
-        tableData: [],
-        accountTypes: [{
-          value: 1,
-          label: 'wallet_account'
-        },{
-          value: 2,
-          label: 'trading_account'
-        },{
-          value: 3,
-          label: 'contract_account'
-        }, {
-          value: 4,
-          label: 'otc_account'
-        }, {
-          value: 8,
-          label: 'shareOption.share_account'
-        }, {
-          value: 9,
-          label: 'mining_power.calc_account'
-        }],
-        accountTypes2: []
+        accountFrom: 1, 
+        tableData: [], 
+        accountTypes2: [],
+        selectCurrency: {},
+        currencyList: [], 
+        accountList: [],
+        currencyList:[],
+        selectCurrency: {},
+        fromAccount: {},
+        toAccount: {},
+        fromName: '',
+        toName: '',
       }
     },
     async created () {
     },
     computed: {
-      totalBalance() {
-        return this.$big(this.tradingAvai || 0)
-          .plus(this.contractAvai || 0)
-          .plus(this.otcAvai || 0)
-          .plus(this.walletAvai || 0)
-          .plus(this.unitAvai || 0)
-          .toFixed(8)
-          .toString();
+      toAccountList() {
+        return this.accountList.filter(item => item != this.fromAccount)
       },
-      fromAmount() {
-        let amount = 0
-        switch (this.accountFrom) {
-          case 1:
-            amount = this.walletAvai
-            break
-          case 2:
-            amount = this.tradingAvai
-            break
-          case 3:
-            amount = this.contractAvai
-            break
-          case 4:
-            amount = this.otcAvai
-            break
-          case 5: 
-            amount = this.unitAvai
-            break
-          case 7: 
-            amount = this.mixAvai
-            break
-          case 8:
-            amount = this.shareAvai
-            break
-          case 9:
-            amount = this.powerAvai
-            break
-          default:
-            amount = 0
-        } 
-        return amount
-      },
-      toAmount() {
-        let amount = 0
-        switch (this.accountTo) {
-          case 1:
-            amount = this.walletAvai
-            break
-          case 2:
-            amount = this.tradingAvai
-            break
-          case 3:
-            amount = this.contractAvai
-            break
-          case 4:
-            amount = this.otcAvai
-            break
-          case 5: 
-            amount = this.unitAvai
-            break
-          case 7: 
-            amount = this.mixAvai
-            break
-          case 8:
-            amount = this.shareAvai
-            break
-          case 9:
-            amount = this.powerAvai
-            break
-          default:
-            amount = 0
-        }
-        return amount
-      },
-      tradingAvai() {
-        if (!this.tradingBalance) {
-          return 0;
-        } else {
-          return this.$big(this.tradingBalance.available || 0).round(8, 0).toFixed(8);
-        }
-      },
-      contractAvai() {
-        if (!this.contractBalance) {
-          return 0;
-        } else {
-          return this.$big(this.contractBalance.available_balance || 0).round(8, 0).toFixed(8);
-        }
-      },
-      otcAvai() {
-        if (!this.otcBalance) {
-          return 0;
-        } else {
-          return this.$big(this.otcBalance.available || 0).round(8, 0).toFixed(8);
-        }
-      },
-      walletAvai() {
-        if (!this.walletBalance) {
-          return 0;
-        } else {
-          return this.$big(this.walletBalance.available || 0).round(8, 0).toFixed(8);
-        }
-      },
-      unitAvai () { 
-        if (!this.unitBalance) {
-          return 0
-        } else {
-          return this.$big(this.unitBalance.available_balance || 0).round(8, 0).toFixed(8)
-        }
-      },
-      mixAvai () { 
-        if (!this.mixBalance) { 
-          return 0
-        } else { 
-          return this.$big(this.mixBalance.available_balance || 0).round(8, 0).toFixed(8) 
-        }
-      },
-      shareAvai() { 
-        if (!this.shareBlance) {
-          return 0;
-        } else {
-          return this.$big(this.shareBlance.available || 0).round(8, 0).toFixed(8);
-        } 
-      },
-      powerAvai() { 
-        if (!this.powerBalance) {
-          return 0;
-        } else {
-          return this.$big(this.powerBalance.available || 0).round(8, 0).toFixed(8);
-        } 
+      currencyFilterList() {
+        return this.currencyList.filter(item => item.name.indexOf(this.search.toUpperCase()) > -1)
+      }, 
+      balanceList() {
+        let obj = {
+          1 : "wallet_account",
+          2 : "trading_account",
+          3 : "future_account",
+          4 : "otc_account",
+          5 : 'future_account',
+          7 : 'future_account', 
+          8 : 'shareOption.share_account', 
+          9 : 'mining_power.calc_account', 
+          10: 'header_nav.defiAccount' }
+        return obj
       }
     },
-    methods: {
-      transferType(type){
-        this.number = ""
-        let arr = {}
-        // this.availableBalance = 0
-        if (type === 1) {
-          this.accountTypes2 = []
-          this.accountTo = ''
-          this.accountTypes.forEach((item)=> {
-            if(item.value !== this.accountFrom) {
-              this.accountTypes2.push(item)
-            }
-          })
-          this.accountTo = this.accountTypes2[0].value
-        }
-        //this.updateAvailable()
-      },
+    methods: { 
       all(){
         // Big.RM = 0
-        this.number = this.$big(this.fromAmount).toFixed(8)
+        this.number = this.$big(this.fromAccount.m).toFixed(8)
+      },
+      changeCurrency(item) {
+        this.selectCurrency = item 
+        this.accountList = item.accounts
+        this.fromAccount = this.accountList.find(item => item.balance_types === this.fromName) || this.accountList[0]
+        this.fromName = this.fromAccount.balance_types
+        this.toAccount = this.toAccountList[0] 
+      },
+      handleSelectFromAccount(item) { 
+        this.amount = ''
+        this.fromAccount = item
+        if (this.toAccount === item) {
+          this.toAccount = this.toAccountList[0]
+        } 
+      },
+      handleSelectToAccount(item) {
+        this.toAccount = item 
       },
       async submit(){
         if (0 >= this.number || this.number === '') {
           utils.alert(this.$t('transfer_enter_error'))
           return
         }
-        if (this.$big(this.number).gt(this.fromAmount)) {
+        if (this.$big(this.number).gt(this.fromAccount.m)) {
           utils.alert(this.$t('amount_over'))
           return
         }
-        let $this = this
-        // let res = await service.transferContractFund({
+        let $this = this 
         let res = await service.transferSelf({
           amount: this.number,
-          currency: this.selectCoin,
-          from: this.accountFrom,
-          to: this.accountTo,
+          currency: this.selectCurrency.name,
+          from: this.fromAccount.balance_types,
+          to: this.toAccount.balance_types,
           type: 1
         })
         if (!res.code) {
           utils.success(this.$t('transfer_success'))
-          this.getBalance()
+          this.fetchData()
           this.page()
-          this.number = ''
-          service.getContractBalanceByPair({
-            symbol: this.selectCoin
-          }).then(res => {
-            state.ct.holding = res.data
-          })
+          this.number = '' 
         } else {
           utils.alert(res.message)
         }
-      },
-      handleClick(tab, event) {
-
-      },
-      async getBalance(){
-        let [tradingBalance, contractBalance, otcBalance, walletBalance, unitBalance, mixBalance, shareBlance, powerBalance] = await Promise.all([
-          service.getBalanceByPair(this.selectCoin),
-          service.getContractBalanceByPair({ symbol:this.selectCoin}),
-          service.getOtcBalanceByPair({symbol: this.selectCoin}),
-          service.getwalletBalanceByPair({symbol: this.selectCoin}),
-          service.getUnitBalanceByPair({symbol: this.selectCoin}),
-          service.getMixBalanceByPair({symbol: this.selectCoin}),
-          getShareAccountList(0 ,this.selectCoin),
-          service.getPowerBalanceByPair({currency: this.selectCoin})
-        ]);
-
-        //console.log({tradingBalance, contractBalance, otcBalance})
-        if (tradingBalance && tradingBalance.length) {
-          this.tradingBalance = tradingBalance[0]
-        }
-        if (contractBalance) {
-          this.contractBalance = contractBalance.data
-        }
-        if (otcBalance) {
-          this.otcBalance = otcBalance.data
-        }
-        if (walletBalance) {
-          this.walletBalance = walletBalance.data
-        } 
-        if (unitBalance) {
-          this.unitBalance = unitBalance.data
-        }
-        if (mixBalance) {
-          this.mixBalance = mixBalance.data
-        }
-        if (shareBlance && shareBlance.data && shareBlance.data.length) {
-          this.shareBlance = shareBlance.data[0]
-        }  
-        if (powerBalance && powerBalance.data) {
-          this.powerBalance = powerBalance.data
-        } 
-        //this.updateAvailable()
-      },
+      },  
       getPage(){
         this.page(this.pages)
       },
@@ -420,14 +240,15 @@
               //let opetate = this.tableData[i].balance
 
               let balanceList = {
-                1 :  this.$t("wallet_account"),
+                1 : this.$t("wallet_account"),
                 2 : this.$t("trading_account"),
-                3 : this.$t("contract_account"),
+                3 : this.$t("future_account"),
                 4 : this.$t("otc_account"),
-                5 : this.$t('unit_account'),
-                7 : this.$t('gold_account'), 
+                5 : this.$t('future_account'),
+                7 : this.$t('future_account'), 
                 8 : this.$t('shareOption.share_account'), 
-                9 : this.$t('mining_power.calc_account')
+                9 : this.$t('mining_power.calc_account'), 
+                10: this.$t('header_nav.defiAccount')
               }
 
               this.tableData[i].from_balance = balanceList[this.tableData[i].from_balance]
@@ -447,170 +268,43 @@
             }
           }
         })
-      },
-      changeCoin(val) {
-        this.accountTypes = []
-        if (val === 'USDT') {
-          this.accountTypes = [{
-            value: 1,
-            label: 'wallet_account'
-          },{
-            value: 2,
-            label: 'trading_account'
-          }, {
-            value: 4,
-            label: 'otc_account'
-          }, {
-            value: 7,
-            label: 'gold_account'
-          }, {
-            value: 8,
-            label: 'shareOption.share_account'
-          }, {
-            value: 9,
-            label: 'mining_power.calc_account'
-          }]
-        } else if(val === 'BTC') {
-          this.accountTypes = [{
-            value: 1,
-            label: 'wallet_account'
-          },{
-            value: 2,
-            label: 'trading_account'
-          },{
-            value: 3,
-            label: 'contract_account'
-          }, {
-            value: 4,
-            label: 'otc_account'
-          }, {
-            value: 8,
-            label: 'shareOption.share_account'
-          }, {
-            value: 9,
-            label: 'mining_power.calc_account'
-          }]
-        } else if(val === 'ETH') {
-          this.accountTypes = [{
-            value: 1,
-            label: 'wallet_account'
-          },{
-            value: 2,
-            label: 'trading_account'
-          }, {
-            value: 5,
-            label: 'unit_account'
-          }]
-        } else if (val === 'EOS') {
-          this.accountTypes = [{
-            value: 1,
-            label: 'wallet_account'
-          },{
-            value: 2,
-            label: 'trading_account'
-          }, {
-            value: 5,
-            label: 'unit_account'
-          }] 
-        } else {
-          this.accountTypes = [{
-            value: 1,
-            label: 'wallet_account'
-          },{
-            value: 2,
-            label: 'trading_account'
-          }]
-        }
-        //改变币种的时候重新获取数据
-        //this.transferType(1)
-        this.getBalance()
-        this.value = 2
-        this.transferType(1)
-        this.accountTypes2 = []
-        this.accountTo = ''
-        this.accountFrom = this.accountTypes[0].value
-        this.accountTypes.forEach((item) => {
-          if (item.value !== this.accountFrom) {
-            this.accountTypes2.push(item)
+      },   
+      async fetchData() {
+        this.currencyList = []
+        const res = await service.getAllTransferList() 
+        if (res && !res.code) {
+          const data = res.data
+          Object.keys(data).map(key => {
+            const item = {
+              name: key,
+              accounts: data[key]
+            }
+            this.currencyList.push(item)
+          }) 
+          if (this.currency) { 
+            this.selectCurrency = this.currencyList.find(item => item.name===this.currency)
+            if (this.selectCurrency) {
+              this.accountList = this.selectCurrency.accounts
+              if (this.from) {
+                this.fromName = this.from 
+                this.fromAccount = this.accountList.find(item => item.balance_types === this.from) 
+                this.toAccount = this.toAccountList[0]
+              }
+            }
+          } else {
+            this.selectCurrency = this.currencyList[0]
+            this.accountList = this.selectCurrency.accounts
+            this.fromAccount = this.accountList[0]
+            this.toAccount = this.toAccountList[0]
           }
-        })
-      this.accountTo = this.accountTypes2[0].value
-        this.accountFrom = this.accountTypes[0].value
+        } 
       },
-      updateAvailable() {
-        // console.log({value : this.accountFrom})
-        // if (this.accountFrom === 1) { //钱包账户
-        //   this.availableBalance = this.$big(this.walletBalance.available || 0)
-        // }
-        // else if (this.accountFrom === 2) {  //币币账户
-        //   this.availableBalance = this.$big(this.tradingBalance.available || 0)
-        // }
-        // else if (this.accountFrom === 3) {  //合约账户
-        // console.log({contractBalance:this.contractBalance})
-        //   this.availableBalance = this.$big(this.contractBalance.available_balance || 0)
-        // }
-        // else if (this.accountFrom === 4) {  //OTC账户
-        //   this.availableBalance = this.$big(this.otcBalance.available || 0)
-        // }
-      },
-      getAllCoinTypes() {
-        // this.allCoins = [
-        //   {
-        //     chain: "BTC",
-        //     currency: "BTC",
-        //     depositable: true,
-        //     full_name: "Bitcoin",
-        //     id: "1",
-        //     memo_support: false,
-        //     min_confirm: 3,
-        //     min_deposit_amount: "0.001",
-        //     min_review_amount: "0",
-        //     min_withdraw_amount: "0.002",
-        //     scan_url: "https://explorer.bitcoin.com/btc/tx/${txid}",
-        //     withdraw_fee: "0.001"
-        //   },{
-        //     chain: "USDT",
-        //     currency: "USDT",
-        //     depositable: true,
-        //     full_name: "USDT",
-        //     id: "2",
-        //     memo_support: false,
-        //     min_confirm: 3,
-        //     min_deposit_amount: "0.001",
-        //     min_review_amount: "0",
-        //     min_withdraw_amount: "0.002",
-        //     withdraw_fee: "0.001"
-        //   }
-        // ],
-        this.getBalance();
-      },
-      getAccountBalanceList() {
-        service.getBalance().then(res => {
-          if(!res.code && !!res.data) {
-            console.log({data:res.data})
-            this.allCoins = (res.data || []).map(item => item)
-          }
-        })
-      }
     },
-    created(){ 
-      this.getAccountBalanceList()
-      this.getBalance() 
+    async created(){  
+      this.fetchData() 
       this.page()
-
-      this.accountTo = ''
-      this.accountTypes.forEach((item) => {
-        if(item.value !== this.accountFrom) {
-          this.accountTypes2.push(item)
-        }
-      })
-      this.accountTo = this.accountTypes2[0].value
-
-      if (!!this.$route.query.currency) {
-        this.selectCoin = this.$route.query.currency
-        this.changeCoin(this.selectCoin)
-      }
-    }
+  
+    } 
   }
 </script>
 <style lang="scss" scoped>

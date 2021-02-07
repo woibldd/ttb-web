@@ -355,8 +355,7 @@ export default {
         }
       })
     },
-    amountInput() {
-      console.log('amount')
+    amountInput() { 
       if (!this.amount || this.amount == '') {
         this.total = ''
       } else {
@@ -372,8 +371,7 @@ export default {
         }
       }
     },
-    totalInput() {
-      console.log('total')
+    totalInput() { 
       if (!this.total || this.total == '') {
         this.amount = ''
       } else {

@@ -15,13 +15,7 @@
           </el-select>
         </span>
       </div>
-      <div class="title__right">
-        <!-- <router-link
-          :to="{name: 'LockWarehouse'}"
-          class="c-mine mr-30 dib pointer"><icon
-        name="anchor"/>{{ $t('mining') }}</router-link>-->
-        <!-- <span @click="showLockModal = true" style="font-size: 14px;"  class="c-mine pointer mr-30 dib"><a >{{ $t('locked') }}</a></span>
-        <span @click="showUnlockModal = true" style="font-size: 14px;"  class="c-mine pointer mr-30 dib"><a>{{ $t('unlock') }}</a></span> -->
+      <div class="title__right"> 
         <span class="mr-8"  >    
           <router-link 
               class="fund-history"
@@ -42,7 +36,7 @@
     <div v-if="!showHistory" class="my-fund-content">
       <div class="information">
         <icon name='information' />
-        <span >{{$t('otc_otutcol_16')}}        </span>
+        <span >{{$t('otc_otutcol_16')}}       </span>
       </div>
       <div class="fund-total">
         <div class="total__label">{{ $t('my_balance_equal') }}</div>
@@ -85,30 +79,12 @@
             <span v-else-if="hd.key==='estValue'">{{ scope.row[hd.key] || 0 | fixed(unit.scale) }}</span>
             <span v-else>{{ scope.row[hd.key] || 0 | fixed(8) }}</span>
           </template>
-        </el-table-column>
-        <!-- <el-table-column
-          width="100">
-          <template slot-scope="scope"> 
-            <template v-if="scope.row.currency==='USDT'">
-              <label class="my-fund-label"
-                v-if="is_nodes === false"
-                @click="nodeBuy"
-                v-tooltip.top="{html: true, content: $t('fund_assets_node_buy_tip'), classes: 'assets'}">
-                {{$t('fund_assets_node_buy')}}
-              </label>
-              <label class="my-fund-label dis-my-fund-label"
-               v-else>
-                {{$t('fund_assets_subscribed')}}
-              </label> 
-            </template>
-          </template> 
-        </el-table-column> -->
+        </el-table-column> 
         <el-table-column
           header-align="right"
           align="right"
           width="400"
-          :label="operate.title"
-        >
+          :label="operate.title">
           <template slot-scope="scope">
             <template v-if="is_nodes === false">
                 <label class="my-fund-label"
@@ -379,15 +355,13 @@ export default {
     header () {
       return (
         state.locale && [
-          { key: 'currency', title: this.$t('fees_name'), width: "100" },
-          { key: 'available', title: this.$t('avlb'), width: "120"  },
-          { key: 'locking', title: this.$t('asset_th_unavlb'), width: "120"  },
+          { key: 'currency', title: this.$t('fees_name')  },
+          { key: 'available', title: this.$t('avlb')   },
+          { key: 'locking', title: this.$t('asset_th_unavlb') },
           // {key: 'amount', title: this.$t('total_count')},
           {
             key: 'estValue',
-            title: `${this.$t('homechart_fiat')}(${this.unit.name})`,
-            width: "130"
-
+            title: `${this.$t('homechart_fiat')}(${this.unit.name})`, 
           }
         ]
       )
@@ -456,9 +430,13 @@ export default {
       this.rates = res.data
     } 
     //获取币对列表
-    let result =  await service.getPairList()
+    // let result =  await service.getPairList()
+    // if (!result.code && !!result.data) {
+    //   this.pairList = result.data.items
+    // }
+    let result = await service.getAccountWalletList 
     if (!result.code && !!result.data) {
-      this.pairList = result.data.items
+      this.pairList = result.data
     }
     await this.getMine()
     this.getAccountBalanceList()
@@ -673,17 +651,7 @@ export default {
           return item
         })
       }) 
-    },
-    // getEstValue(item) {
-    //   let res = this.$big(item.amount).times(
-    //     this.$big(item.rates[this.unit] || 0)
-    //   );
-    //   let num = 8;
-    //   // if (this.unit === 'USD') {
-    //   //   num = 8
-    //   // }
-    //   return res.round(num, this.C.ROUND_DOWN).toString();
-    // },
+    }, 
     getEstValue (item) {
       let res = this.$big(0)
       let unit = this.unit.name

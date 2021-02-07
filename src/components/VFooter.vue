@@ -80,14 +80,14 @@
         </div>
         <div class="footer_ct">
           <p>{{ $t('footer_tools') }}</p>
-          <a
+          <!-- <a
             rel="nofollow"
             :href="announcementLink"
-            target="_blank">{{ $t('footer_notice') }}</a>
+            target="_blank">{{ $t('footer_notice') }}</a> -->
           <a
             rel="nofollow"
             :href="helpLink"
-            target="_blank">{{ $t('user_guide') }}</a>
+            target="_blank">{{ $t('footer_help') }}</a>
           <router-link
             :to="{name:'Fee'}"
             target="_blank">{{ $t('footer_fee') }}</router-link>

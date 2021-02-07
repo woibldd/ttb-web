@@ -1,5 +1,10 @@
 export default {
-  'currency-mix': "金本位合约",
+  finance: '金融业务',
+  promotion: '促销',
+  quickBuy: '一键买币',
+  buyCrypto: '买币',
+  future_account: "合約賬戶",
+  'currency-mix': "USDT合約",
   'currency-unit': "幣本位合約",
   google_login: "登入時進行穀歌驗證",
   google_turn_off: "關閉穀歌驗證",
@@ -1754,7 +1759,7 @@ export default {
   bubble_site_tips: "請您登入時認准下方IXX的標準功能變數名稱：",
   tradingview_line: "分時綫",
   footer_application_coin: "上幣申請",
-  otc_trade: "法幣交易",
+  otc_trade: "P2P交易",
   otc_tips: "添加微信請備註",
   trading_fees: "幣幣手續費",
   contract_fees: "BTC合約手續費",
@@ -2003,7 +2008,7 @@ export default {
   otc_otutcol_13: "法幣資產估值",
   otc_otutcol_14: "幣幣資產估值",
   otc_otutcol_15: "合約資產估值",
-  otc_otutcol_16: "充幣成功後，若想進行”幣幣交易/法幣交易/合約交易，需操作“資金劃轉”，將“資金賬戶”的幣轉移到該賬戶上。",
+  otc_otutcol_16: "充幣成功後，若想進行”幣幣交易/P2P交易/合約交易，需操作“資金劃轉”，將“資金賬戶”的幣轉移到該賬戶上。",
   otc_otutcol_17: "個人資產",
   wallet_account: "資金帳戶",
   kyc_cf_id: "證件號碼",
@@ -2419,7 +2424,7 @@ export default {
       7: "理财本息结算",
       8: "",
       9: "币本位当日清算",
-      10: "金本位当日清算"
+      10: "USDT合约当日清算"
     },
     dict: {
       side: {
@@ -2509,7 +2514,7 @@ export default {
             path: '/fund/my/contractUnit'
           },
           5: {
-            label: '金本位账户',
+            label: 'USDT合约账户',
             path: '/fund/my/contractMix'
           },
           6: {
@@ -2911,6 +2916,9 @@ export default {
     handleSuccess: '操作成功',
     index: '指数',
     currentPlace: '当前仓位',
+    closeMarket: '市價全平',
+    closeMarketConfirm: '您確認對此倉位按進行全部市價平倉嗎',
+    closeMarketTips: '選擇市價全平時，根據倉位當前擁有持倉數量進行相對應平倉，跟輸入的平倉數量無關',
     side: {
       1: '买入开多',
       2: '卖出开空',
@@ -3248,7 +3256,27 @@ export default {
     right_bar: {
        order_fee: "平臺服務費(%{currency})",
        orderdeal_fee: "手續費"
-    }
+    },
+    quick: '快捷買幣',
+    ctoc: 'C2C交易',
+    about: '關於',
+    account: '資金帳戶可用',
+    sell: '我要出售',
+    payment: '我要支付',
+    payType: '支付方式',
+    collectionType: '收款管道',
+    quotation: '最新報價',
+    paymentDate: '到賬時間',
+    available: '可獲得',
+    tag1: '綜合手續費、到賬時間、價格等，為您推薦',
+    tag2: '法定貨幣到數位貨幣轉換的新標準。',
+    tag3: '如果您已完成支付，請耐心等待Simplex給您打幣',
+    tag4: '還未支付，繼續支付',
+    tag5: '即將從IXX跳轉至Simplex',
+    tag6: '如果您已在Simplex完成支付請耐心等待，Simplex將在5~20分鐘內將數位貨幣充值到您的IXX資金帳戶。',
+    tag7: '您已知曉Simplex是由協力廠商獨立運營的法定貨幣與數位貨幣交易平臺，IXX不對因使用該服務遭受的任何損失或損害承擔任何責任。',
+    gotopay: '前往Simplex支付',  
+    buy_now: "立即購買",
   },
   el:{
     pagination:{
@@ -3440,7 +3468,7 @@ export default {
   },
   no_account: "還沒有帳號?",
   'UNIT_&':"%{currency}币本位",
-  'MIX_&':"%{currency}金本位", 
+  'MIX_&':"%{currency}USDT", 
   kyc_failure: "認證失敗",
   kyc_failure_tip: "您的KYC認證稽核失敗，請重新認證",
   kyc_retry: "重新認證",
@@ -3465,8 +3493,8 @@ export default {
     describe6:"自研高性能撮合引擎，充分支持200萬+/秒/交易對的撮合速度，服務不間斷操作無卡頓"
   },
   pre_reviewed: "訂單在前置稽核中",
-  gold_account: "金本位合約帳戶",
-  gold_contract: "金本位合約",
+  gold_account: "USDT合約帳戶",
+  gold_contract: "USDT合約",
   mix_side: {
     1: "買入開多",
     2: "賣出開空",
@@ -3540,8 +3568,8 @@ export default {
       'trading': '币币交易',
       'contract': 'BTC合約',
       'currency-unit': '幣本位合約',
-      'currency-mix': '金本位合約',
-      'legalTender': '法币交易',
+      'currency-mix': 'USDT合約',
+      'legalTender': 'P2P交易',
       'hotActive': {
         label: '热门活动',
         children: {

@@ -293,7 +293,7 @@ import PairRankTable from '@/components/home/pair-rank-table'
 import MineSummary from '@/components/Mine/MineSummary'
 import tickTableMixin from '@/mixins/tick-table'
 import HomeBanner from './banner/index'
-import { local } from '@/modules/store' 
+import { local } from '@/modules/store'  
 
 export default {
   components: {
@@ -345,8 +345,7 @@ export default {
       this.getBanners()
     }
   },
-  created() { 
-    this.subMarket()
+  created() {  
     this.getBanners()
     //如果地址带有邀请码信息则将邀请码写入cookie中，有效期为10天  2019/10/16 yzf
     let invitorId = this.$route.query.invitor
@@ -398,7 +397,8 @@ export default {
     },
     close () {
       this.showSTModal = false
-    }
+    },
+     
   }
 }
 </script>

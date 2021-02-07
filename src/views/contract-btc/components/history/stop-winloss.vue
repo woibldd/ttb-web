@@ -535,18 +535,18 @@ export default {
 
   .el-button.el-button--primary { 
     color: #fff;
-    background-color: $primary-color !important;
-    border-color: $primary-color !important; 
+    background-color: $primary-color;
+    border-color: $primary-color; 
     &:hover,
     &:focus {
-      color: #fff !important;
-      background-color: $primary-color !important;
-      border-color: $primary-color !important;
+      color: #fff;
+      background-color: $primary-color;
+      border-color: $primary-color;
       opacity: 0.8;
     }   
     &.is-disabled {
-      background-color: #999 !important;;
-      color: #fff  !important; ;
+      background-color: #999;;
+      color: #fff;
     }
   }
 }

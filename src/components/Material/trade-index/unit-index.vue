@@ -104,7 +104,7 @@
           <div class="note-back">
             <p class="flex">{{ $t('contract_label_result_a') }} <span>I = 0.0100%</span></p>
             <!-- <p class="flex">{{ $t('contract_label_result_b') }} <span>F = -0.3750%</span></p> -->
-            <p class="flex">{{ $t('contract_label_result_b',{premium}) }} <span>F = {{ feeRate | fixed(8) }}%</span></p>
+            <p class="flex">{{ $t('contract_label_result_b',{premium: 1}) }} <span>F = {{ feeRate | fixed(8) }}%</span></p>
           </div>
         </div>
       </div>

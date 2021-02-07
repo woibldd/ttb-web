@@ -135,8 +135,7 @@ export default {
       if (!value) {
         callback(new Error(this.$i18n.t('kyc_ph_id')))
       }
-      if (this.form.id_type === 1 && this.form.regionId === 86) {
-
+      if (this.form.id_type === 1 && this.form.regionId === 86) { 
         if (!/^[1-9]\d{5}(18|19|2([0-9]))\d{2}(0[0-9]|10|11|12)([0-2][0-9]|30|31)\d{3}[0-9Xx]$/.test(value)) {
         // if (!/^.+$/g.test(value)) {
           callback(new Error(this.$i18n.t('kyc_id_no_err')))

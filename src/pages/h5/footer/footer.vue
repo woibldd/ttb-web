@@ -52,7 +52,7 @@
             target="_blank">{{ $t('footer_notice') }}</a>
           <a
             :href="helpLink"
-            target="_blank">{{ $t('user_guide') }}</a>
+            target="_blank">{{ $t('footer_help') }}</a>
           <router-link
             :to="{name:'Fee'}"
             target="_blank">{{ $t('footer_fee') }}</router-link>
