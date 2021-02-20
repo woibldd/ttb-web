@@ -3101,6 +3101,7 @@ export default {
           name: '合约类型',
           side: '方向',
           amount: '数量',
+          price: '委托价格',
           trigger_price: '触发价格',
           distancePrice: '距离触发',
           // total: '已成交额',

@@ -293,9 +293,9 @@ export default {
     .table{
       border-collapse: collapse;
       width: 100%;
-      tr {
-
+      tr { 
         height: 35px;
+        line-height: 35px;
         td,th {
           border-bottom: 1px solid $--contract-table-bd;
         }

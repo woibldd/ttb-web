@@ -3177,7 +3177,7 @@ export default {
           symbol: 'Contract Type',
           amount: 'Volume',
           price: 'Order Price',
-          trigger_price: 'Price',
+          trigger_price: 'Trigger Price',
           distancePrice: 'Distance',
           // total: '已成交额',
           executed: 'Executed',

@@ -2746,7 +2746,7 @@ export default {
       lossEntrust: {
         text: '취소 위탁',
         mapTableColumns: {
-          symbol: '合约类型',
+          symbol: '연락처',
           amount: '계약 종류',
           price: '위탁가격',
           trigger_price: '촉발 가격',
@@ -3078,6 +3078,7 @@ export default {
           name: '合约类型',
           side: '方向',
           amount: '数量',
+          price: '委托价格',
           trigger_price: '触发价格',
           distancePrice: '距离触发', 
           executed: '已成交量',
