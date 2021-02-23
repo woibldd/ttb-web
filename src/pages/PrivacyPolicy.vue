@@ -1,6 +1,6 @@
 <template>
   <div class="page-home">
-    <div class="header">
+    <div class="header" v-if="!isMobile">
       <v-nav2 is-home="true" />
     </div>
 
@@ -127,8 +127,14 @@
 <script>
 import VNav2 from '@/components/VNav3'
 import DocWrap from '@/components/docwrap'
+import utils from '@/modules/utils'
 export default {
   name: 'PrivacyPolicy',
+  data() {
+    return {
+      isMobile: utils.isMobile(),
+    } 
+  },
   components: {
     VNav2,
     DocWrap

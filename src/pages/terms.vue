@@ -1,6 +1,6 @@
 <template>
   <div class="page-home">
-    <div class="header">
+    <div class="header" v-if="!isMobile">
       <v-nav2
         is-home="true"
       />
