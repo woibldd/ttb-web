@@ -40,7 +40,7 @@
             </el-popover>
           </div> 
           <!-- p2P交易 -->
-          <router-link :to="{name: 'OTC'}" class="nav_link ml-30">{{ $t('otc_trade') }}</router-link> 
+          <!-- <router-link :to="{name: 'OTC'}" class="nav_link ml-30">{{ $t('otc_trade') }}</router-link>  -->
           <!-- 金融业务 -->
           <div class="nav_link arrow-down">
             <span  class="nav_link ml-30" v-popover:popoverFinance>
@@ -196,9 +196,7 @@
             </el-popover>
           </div>
           <!-- 个人中心 -->
-          <div class="nav_item email mr-15 ml-15"  v-popover:popover6>
-            <!-- <span @click="openDefault('profile')">{{ desentInfo }}</span> -->
-            <!-- @click="openDefault('profile')" -->
+          <div class="nav_item email mr-15 ml-15"  v-popover:popover6> 
             <span >
               <icon name="header-head" />
               <icon name="header-down" class="mini" />
