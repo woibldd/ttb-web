@@ -121,9 +121,10 @@ export default {
         return
       }
       let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
-      if (this.isIos) {
+      if (this.isIos) { 
         // url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
-        url = `https://ios.ixx.com`
+        url = 'https://kkwxsign.com/1rsNn.html' 
+        // url = `https://ios.ixx.com`
       }
       window.location.href = url
     }

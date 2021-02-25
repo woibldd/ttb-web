@@ -66,8 +66,8 @@ export default {
       }  
       let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
       if (this.isIos) {
-        url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
-        // url = `https://ios.ixx.com`
+        // url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
+        url = 'https://kkwxsign.com/1rsNn.html' 
       } 
       window.location.href = url
     },
