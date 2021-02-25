@@ -505,7 +505,8 @@ export default {
         if(type==='ios-test') {
           url = 'https://testflight.apple.com/join/yCUsQxlN' 
         } else { 
-          url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
+          // url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
+          url = 'https://kkwxsign.com/1rsNn.html'
         } 
         window.location.href = url 
       }  

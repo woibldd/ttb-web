@@ -233,37 +233,38 @@
         <div class="nav_item">
           <router-link class="download mr-15 ml-15" v-popover:popover1 :to="{name: 'Download'}">
             <icon class="mr-3" name="header-download" />
-          </router-link>
-           <!-- <label
-            class="download mr-15 ml-15"
-            v-popover:popover1>
-            <icon
-              class="mr-3"
-              name="header-download"/>
-          </label> -->
+          </router-link> 
           <el-popover
             ref="popover1"
             popper-class="nav-popover"
-            placement="bottom-start"
-            width="270"
+            placement="bottom"
+            width="220"
             style="background:#2C3B4B;"
             trigger="hover">
             <div
               class="pop">
-              <div class="left">
-                <h3><span>{{ $t('nav.download_pop.scan') }}</span></h3>
+              <div> 
                 <p>
-                  <img
-                    src="~@/assets/download/qr-download.png" >
+                  <img style="width: 100px"
+                    src="~@/assets/download/ios-download.png" >
+                  <v-btn class="mt-5" icon="apple" label="Iphone"/>
                 </p>
               </div>
-              <div class="right">
+              <div class="ml-20"> 
+                <p>
+                  <img style="width: 100px"
+                    src="~@/assets/download/qr-download.png" >
+                  
+                  <v-btn class="mt-5" icon="android" label="Android"/>
+                </p>
+              </div>
+              <!-- <div class="right">
                 <h3><a target="_blank" href="https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360032874512">{{ $t('nav.download_pop.process') }}</a></h3>
                 <p>
                   <v-btn icon="apple" label="Iphone"/>
                   <v-btn icon="android" label="Android"/>
                 </p>
-              </div>
+              </div> -->
             </div>
           </el-popover>
         </div>
@@ -910,7 +911,7 @@ export default {
     }
   }
   .right {
-    flex: 1 150px;
+    flex: 1 110px;
     margin-right:10px;
     .btn {
       margin-top:10px;
