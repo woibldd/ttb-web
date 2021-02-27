@@ -33,7 +33,7 @@
         </el-carousel>
       </div>
     </div>
-    <div class="buy-currency-container" v-if="state.locale==='zh-CN' || state.locale==='zh-HK'">
+    <!-- <div class="buy-currency-container" v-if="state.locale==='zh-CN' || state.locale==='zh-HK'">
       <div class="currency-inner">
         <el-row>
           <el-col :span="6">
@@ -51,8 +51,7 @@
           <el-col :span="18">
             <el-row>
               <el-col :span="11">
-                <div class="currency-ipt">
-                  <!-- <el-input placeholder="请输入需要购买的总金额" v-model="buy.amount" style="width: 100%" /> -->
+                <div class="currency-ipt"> 
                   <number-input
                     class="number-input"
                     v-model="buy.amount"
@@ -65,21 +64,8 @@
                 <div class="mynav_link arrow-down">
                   <span class="label">
                     <icon name="USDT" />
-                    {{buy.currency}}
-                    <!-- <icon
-                      class="arrow ml-5"
-                      name="arrow-down-w"/> -->
-                  </span>
-                  <!-- <div class="dropdown-sub-menu">
-                    <ul class="dropdown-list pt-10 pb-10">
-                      <li class="dropdown-item pl-24 pr-24">
-                        <span>
-                          <icon name="USDT" />
-                          {{buy.currency}}
-                        </span>
-                      </li>
-                    </ul>
-                  </div> -->
+                    {{buy.currency}} 
+                  </span> 
                 </div>
               </el-col>
               <el-col :span="7">
@@ -91,7 +77,7 @@
           </el-col>
         </el-row>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
