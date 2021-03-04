@@ -755,7 +755,13 @@ export default {
       if (!this.state.userInfo || !this.activeProduct.MIX || !this.costObj || !this.activeBalance || !this.activeProduct.MARKET) return {}
       const price = this.activeAcountAndPriceArr[1] || this.activeProduct.MIX.current
       const getLiqPrice = this.getLiqPrice()
-      const balance = this.balanceList.find(item => item.name === this.activeProduct.name && item[this.side === 1 ? 'buy' : 'sell']) || {}
+      // const balance = this.balanceList.find(item => item.name === this.activeProduct.name && item[this.side === 1 ? 'buy' : 'sell']) || {}
+      const balance = this.balanceList.find(item => { 
+        if (item.name === this.activeProduct.name) {
+          if (+this.activeTypesKey === 1 && item.side===this.side) return true
+          if (+this.activeTypesKey === 2 && item.side!==this.side) return true 
+        }
+      }) || {}
       return {
         1: calcMixValueByAmountAndPrice(this.activeAcountAndPriceArr[0], price, this.activeProduct.multiplier, this.activeBalance.rate),
         2: this.costObj[this.side === 1 ? 'buy' : 'sell'],

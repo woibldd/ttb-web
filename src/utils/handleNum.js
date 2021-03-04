@@ -487,7 +487,7 @@ export const getUnitLiqPrice = ({ isBuy, leverages, amount, price, available_bal
     // console.log(`可用余额available：${available}`)
     // 强平价格计算=（乘数X合约张数）/【开仓价值+（开仓保证金-维持保证金）】
     // console.log({multiplier, totalAmount: totalAmount.toString(), totalValue: totalValue.toString(), margin: margin.toString(), MM: MM.toString()})
-    const lipPrice = Big(multiplier).times(totalAmount.abs()).div(Big(totalValue).plus(margin).minus(MM))
+    const lipPrice = Big(multiplier).times(totalAmount.abs()).div(Big(totalValue)[isBuy ? 'plus' : 'minus'](margin).minus(MM))
     // console.log(`强平价格lipPrice：${lipPrice}`)
     return lipPrice.lt(0) ? '1000000' : lipPrice
   } else {
