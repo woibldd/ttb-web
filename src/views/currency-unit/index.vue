@@ -579,10 +579,7 @@ export default {
   },
   computed: {
     adlurl () {
-      let link = 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360024495432'
-      // if (this.state.locale === 'en') {
-      //   link = link.replace('zh-cn', 'en-us')
-      // }
+      let link = 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360024495432' 
       return link
     },
     adl () {
@@ -866,10 +863,9 @@ export default {
     }
   },
   async created () {
-    actions.updateSession() 
+    await actions.updateSession() 
     const result = await getSymbolInfo()
-    if (!result.code) { 
-      console.log('created ()')
+    if (!result.code) {  
       this.state.unit.symbolInfoList = result.data
     }  
 
@@ -1174,34 +1170,35 @@ export default {
     },
     async handleAmountObj () {  
       if (!this.state.userInfo) return 
+      console.log('handleAmountObj')
       await this.handleBalanceList()
-        const res = await getAllAmount()  
-        if (!res.code) {
-          const { holding_amount: shipped, active_amount: curEntrust, active_triggers_amount: lossEntrust, active_orders_amount: historyEntrust, orders_amount: bargain } =res.data
-          const data = this.amountObj && JSON.parse(JSON.stringify(this.amountObj))
-          const obj = {
-            shipping: [this.calcBalanceList.length, data && data.shipping[0] !== this.calcBalanceList.length],
-            shipped: [shipped, false],
-            curEntrust: [curEntrust, data && data.curEntrust[0] !== curEntrust],
-            lossEntrust: [lossEntrust, data && data.lossEntrust[0] !== lossEntrust],
-            historyEntrust: [historyEntrust, data && data.historyEntrust[0] !== historyEntrust],
-            bargain: [bargain, data && data.bargain[0] !== bargain]
-          }
-          obj[this.activeTableTabKey][1] = false
-          this.amountObj = obj
-        } else {
-          const obj = {
-            shipping: [0,0],
-            shipped: [0,0],
-            curEntrust: [0,0],
-            lossEntrust: [0,0],
-            historyEntrust: [0,0],
-            bargain: [0,0]
-          }
-          this.amountObj = obj
-        } 
-        this.handleTableTabClick(this.activeTableTabKey) 
-        this.handleEntrustList() 
+      const res = await getAllAmount()  
+      if (!res.code) {
+        const { holding_amount: shipped, active_amount: curEntrust, active_triggers_amount: lossEntrust, active_orders_amount: historyEntrust, orders_amount: bargain } =res.data
+        const data = this.amountObj && JSON.parse(JSON.stringify(this.amountObj))
+        const obj = {
+          shipping: [this.calcBalanceList.length, data && data.shipping[0] !== this.calcBalanceList.length],
+          shipped: [shipped, false],
+          curEntrust: [curEntrust, data && data.curEntrust[0] !== curEntrust],
+          lossEntrust: [lossEntrust, data && data.lossEntrust[0] !== lossEntrust],
+          historyEntrust: [historyEntrust, data && data.historyEntrust[0] !== historyEntrust],
+          bargain: [bargain, data && data.bargain[0] !== bargain]
+        }
+        obj[this.activeTableTabKey][1] = false
+        this.amountObj = obj
+      } else {
+        const obj = {
+          shipping: [0,0],
+          shipped: [0,0],
+          curEntrust: [0,0],
+          lossEntrust: [0,0],
+          historyEntrust: [0,0],
+          bargain: [0,0]
+        }
+        this.amountObj = obj
+      } 
+      this.handleTableTabClick(this.activeTableTabKey) 
+      this.handleEntrustList() 
     },
     async handleTableTabClick (key) {
       this.activeTableTabKey = key
