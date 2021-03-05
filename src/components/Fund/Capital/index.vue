@@ -15,7 +15,7 @@
           </el-select> 
         </span>
       </div> 
-    </div> 
+    </div>  
     <div class="tip">
       <h1>{{$t('otc_otutcol_11')}}</h1>
       <p><b>≈ {{ixTotal | fixed(unit.scale || 2)}}</b> {{unit.name}}</p>
@@ -274,6 +274,16 @@ export default {
       })
       return sum.toString()
     },
+    unitTotal() {
+      let sum = this.$big(0)
+      this.unitContractTable.forEach(item => { sum = sum.plus(item.estValue) })
+      return sum.toString()
+    },
+    mixTotal() {
+      let sum = this.$big(0)
+      this.mixContractTable.forEach(item => { sum = sum.plus(item.estValue) })
+      return sum.toString()
+    },
     walletTotal() { 
       let sum = this.$big(0) 
       this.walletTable.forEach(item => {
@@ -283,7 +293,11 @@ export default {
     },
     accountTotal() { 
       let sum = this.$big(0) 
-      sum = sum.plus(this.otcTotal).plus(this.tradingTotal).plus(this.contractTotal)
+      sum = sum.plus(this.otcTotal)
+                .plus(this.tradingTotal)
+                .plus(this.contractTotal)
+                .plus(this.unitTotal)
+                .plus(this.mixTotal)
       return sum.toString()
     },
     ixTotal() {

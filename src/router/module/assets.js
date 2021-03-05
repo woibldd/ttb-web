@@ -39,7 +39,7 @@ export const capitalRouter = [
         path: 'my',
         name: 'my',
         component: () => import(/* webpackChunkName: "Myfund" */ '@/components/Fund/My/my-template.vue'),
-        redirect: 'capital',
+        redirect: 'contract',
         children: [
           {
             path: 'contract',
