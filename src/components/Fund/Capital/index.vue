@@ -339,12 +339,15 @@ export default {
           dataList: this.contractTable,
           total: (data) => {
             let sum = big(0)
-            data.forEach(item => { sum = sum.plus(item.estValue) })
+            if (data.length > 0) {
+              sum = data[0].estValue
+            }
+            // data.forEach(item => { sum = sum.plus(item.estValue) })
             return sum.toString() || 0
           },
           link: '/fund/my/contract'
         },
-        {
+        { 
           name: 'unit_account',
           color: '#6E69DE',
           visible: true,
@@ -363,7 +366,10 @@ export default {
           dataList: this.mixContractTable,
           total: (data) => {
             let sum = big(0)
-            data.forEach(item => { sum = sum.plus(item.estValue) })
+            if (data.length > 0) {
+              sum = data[0].estValue
+            }
+            // data.forEach(item => { sum = sum.plus(item.estValue) })
             return sum.toString() || 0
           },
           link: '/fund/my/contractMix'
@@ -409,7 +415,9 @@ export default {
         this.contractTable = (future.data || []).map(item => { 
           item.currency = item.currency.replace("USD","")
           item.camount = item.available
+          // console.log('future',item, this.rates)
           item.estValue = this.getEstValue(item)  
+          // console.log(+item.estValue)
           return item
         })
       }
@@ -432,7 +440,7 @@ export default {
           }
         })
       }
-    },
+    }, 
     getEstValue (item) {
       let res = this.$big(0)
       let unit = this.unit.name
