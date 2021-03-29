@@ -32,7 +32,7 @@
             <template v-if="activeProduct.UNIT" flex="box:first">
               <div class="info-left">
                 <div class="title">
-                  {{ $tR(`mapTabs.${activeProduct.name}`) }}
+                  {{ activeProduct.name }}
                   <svg-icon :class="[activeProduct.UNIT.increment_24h > 0?'text-success':'text-danger']"
                             :icon-class="activeProduct.UNIT.increment_24h > 0?'lv':'hong'" />
                 </div>
@@ -302,7 +302,7 @@
                element-loading-background="rgba(0, 0, 0, 0.3)">
             <div class="header"
                  flex="main:justify">
-              <span> {{ $tR('currentPlace') }}：{{ activeProduct && $tR(`mapTabs.${activeProduct.name}`)||'' }}</span>
+              <span> {{ $tR('currentPlace') }}：{{ activeProduct && activeProduct.name ||'' }}</span>
               <el-link type="primary"
                        :underline="false"
                        @click="$router.push({path: '/fee/unitContractFee', query: {key: 'fee.contract-fee'}})">{{ $t('contract_fee_rate') }}</el-link>
@@ -407,7 +407,7 @@
                element-loading-background="rgba(0, 0, 0, 0.3)">
             <div class="header"
                  flex="main:justify">
-              <span>{{ $t('contract_symbol_detail') }}{{ activeProduct && $tR(`mapTabs.${activeProduct.name}`)||'' }}</span> 
+              <span>{{ $t('contract_symbol_detail') }}{{ activeProduct && activeProduct.name ||'' }}</span> 
               <router-link
                 class="pointer" 
                 :to="{name: 'UnitIndex', params: {pair: (activeProduct || {}).symbol }}">
@@ -514,6 +514,7 @@ import { local, state, actions } from '@/modules/store'
 import utils from '@/modules/utils'
 import wsNew from '@/modules/ws-new'
 import api from '@/modules/api/unit'
+import pairTableVue from '../../components/home/pair-table/pair-table.vue'
 
 
 // import { mapPeriod } from '@/const'
@@ -884,6 +885,7 @@ export default {
           pair
         }
       })  
+      console.log(pair)
       getFutureListByKey(`${pair}`, { size: 20 }).then(({ data }) => {
         this.newBargainListData = data || []
       })
@@ -1071,7 +1073,7 @@ export default {
           this.entrustList = res.data.data.map(item => {
             item.cancelBtnLoading = false
             item._symbol = item.symbol
-            item.symbol = this.$tR(`mapTabs.${item.name}`)
+            // item.symbol = this.$tR(`mapTabs.${item.name}`)
             return item
           })
         } else if (res.code !== 401) {
@@ -1139,6 +1141,8 @@ export default {
         this.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${product.product}_${product.currency}@0@1@20"]}`)
         this.socket.socket.send(`{"op":"subscribepub","args":["deal@${product.product}_${product.currency}"]}`)
       }
+      
+      console.log('handleProductsChange',`${product.product}_${product.currency}`)
       getFutureListByKey(`${product.product}_${product.currency}`, { size: 20 }).then(({ data }) => {
         this.newBargainListData = data
       })
@@ -1226,8 +1230,7 @@ export default {
     loadNext () {
       this.fetch()
     },
-    async fetch () {
-      console.log('fetchfetchfetchfetch')
+    async fetch () { 
       if (this.historyPage * this.historySize >= this.totalItems) {
         return
       }
@@ -1240,13 +1243,9 @@ export default {
       data = Array.isArray(data) ? data : data.data
       let list = data.map(item => {
         item.realized && (item.realized = this.bigRound(item.realized, 8))
-        item.cancelBtnLoading = false
-        if (item.symbol) {
-          item._symbol = item.symbol
-          item.symbol = this.activeTableTabKey === 'shipped' ? this.$tR(`mapTabs.FUTURE_${item.symbol}`) : this.$tR(`mapTabs.${item.symbol}`)
-        } else {
-          item.symbol = this.$tR(`mapTabs.${item.name}`)
-        }
+        item.cancelBtnLoading = false 
+        item.symbol = item.name
+         
         return item
       })
       this.totalItems = this.totalItems || list.length

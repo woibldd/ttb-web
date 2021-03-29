@@ -64,8 +64,7 @@ export const getHistoryBySymbolAndOption = (symbol, params = { period: '1m', beg
 export const getReachDataBySymbol = (symbol, params = { size: 10 }) => {
   return quote(`deal/${symbol}`,params)
 }
-export const getOrderDataBySymbol = (symbol, params = { offset: 0, accuracy: 1, size: 10 }) =>  {
-  console.log('123123123')
+export const getOrderDataBySymbol = (symbol, params = { offset: 0, accuracy: 1, size: 10 }) =>  { 
   return quote(`orderbook/${symbol}`,params)
 }
 
