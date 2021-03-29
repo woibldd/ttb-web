@@ -16,7 +16,7 @@
                    :class="{active:activeProduct.name === product.name}"
                    flex="dir:top main:center"
                    @click="handleProductsChange(product)">
-                <p style="white-space: nowrap;">{{ $tR(`mapTabs.${product.name}`) }}</p>
+                <p style="white-space: nowrap;">{{ product.name }}</p>
                 <span v-if="product.UNIT"
                       :class="[product.UNIT.increment_24h > 0?'text-success':'text-danger']">
                   {{ calcIncreaseRate(product) }}%
