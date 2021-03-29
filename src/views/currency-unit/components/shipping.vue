@@ -11,7 +11,7 @@
       class="shipping-item"
       flex>
       <div>
-        <h2 class="text-active">{{ $t(`contract.mapTabs.${item.name}`) }}</h2>
+        <h2 class="text-active">{{ item.name }}</h2>
         <h3
           v-if="item.holding > 0"
           class="text-success">{{ $t(`contract.mapFormContent.mapHandleBtn.buy`) }}</h3>
@@ -233,16 +233,15 @@
             <div>{{ $t('contract_exit_price') }}</div>
             <input
               :value="input|| bigRound(markData[item.currency], getProduct(item.name).price_scale || 2)"
-              class="custom-input"
-              style="width:80px;text-align:center"
+              class="custom-input" 
               @focus="e=>e.currentTarget.select()"
               @input="e=>input = e.target.value">
           </div>
           <div
-            class="el-button el-button--small bd-primary"
+            class="el-button el-button--small el-button--primary"
             @click="closeStorehouse(item)">{{ $t('contract_close_limit') }}</div>
           <div
-            class="el-button el-button--small bd-primary"
+            class="el-button el-button--small el-button--primary"
             style="margin-left:0"
             @click="closeStorehouse(item,true)">{{ $t('contract_close_market') }}</div>
         </div>
@@ -621,6 +620,14 @@ export default {
             }
           }
         }
+      }
+      .custom-input {
+        width:73px; 
+        height: 25px;
+        background-color: transparent;
+        text-align:center;
+        border: 1px solid #333;
+        color: #ddd;
       }
     }
 
