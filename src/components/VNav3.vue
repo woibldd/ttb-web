@@ -55,12 +55,12 @@
               trigger="hover">
               <div class="pop-dropdown">
               <ul class="dropdown-list pt-10 pb-10">
-                <li class="dropdown-item pl-24 pr-24"> 
+                <!-- <li class="dropdown-item pl-24 pr-24"> 
                   <a href="/mining-power" class="link">
                     {{ this.$t('mining_power.cloud_mine') }}
                     <icon name="hot-red" />
                   </a>
-                </li>
+                </li> -->
                 <li class="dropdown-item pl-24 pr-24">  
                   <a href="/snowball/bazaar"
                     :class="{'router-link-active': from === 'contract'}"
