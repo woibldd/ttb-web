@@ -1,5 +1,5 @@
 <template>
-  <div class="ipfs-container">
+  <div class="ipfs-container" >
     <div class="banner" :class="['banner', state.locale ]" >  
     </div>
     <div class="content"
