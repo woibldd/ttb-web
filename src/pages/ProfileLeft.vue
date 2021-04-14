@@ -54,14 +54,14 @@
             {{ $t('profile_left_invite') }}
           </router-link>
         </li>
-        <li class="">
+        <!-- <li class="">
           <router-link
             class="menu-name"
             :to="{name: 'MessageSettings'}"
             active-class="active">
             {{ $t('profile_left_message_setting') }}
           </router-link>
-        </li>
+        </li> -->
         <!--<li class="">-->
         <!--<router-link-->
         <!--class="menu-name"-->
