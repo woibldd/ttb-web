@@ -7,7 +7,8 @@ export const ipfsRouter = [
       footer: true,
       class: 'dark'
     },
-    component: () => import('@/views/ipfs/index.vue')
+    // component: () => import('@/views/ipfs/index.vue')
+    
   },
   {
     path: '/mining-power-detail',
