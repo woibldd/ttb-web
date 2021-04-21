@@ -35,29 +35,10 @@ export default {
         item.amount_scale = parseInt(item.amount_scale, 10)
         item.currency_scale = parseInt(item.price_scale, 10) || 0
         item.price_scale = parseInt(item.price_scale, 10) || 2
-        item.fee_rate = item.fee_rate || 0
-        // item.value_scale = parseInt(item.value_scale, 10) || 4
-        if (item.currency === 'BTCUSD') {
-          item.value_scale = 8
-          item.accuracy = item.accuracy || 5
-        } else {
-          item.value_scale = 8
-          item.accuracy = item.accuracy || 5
-        }
-
-        // if (item.name.indexOf('MIX_') < 0) {
-        //   item.name = `MIX_${item.name.replace('_', '')}`
-        // }
-
-        // // USD
-        // item.currency_name = item.name.substr(-3)
-        // // BTCUSD
-        // item.symbol = item.name.split('_')[1]
-        // // BTC
-        // item.product_name = item.symbol.substr(0, 3)
+        item.fee_rate = item.fee_rate || 0 
         return item
-      })
-      res.data = { items: res.data }
+      }) 
+      res.data = { items: res.data.sort((a,b) => a.rank - b.rank) }
     } 
     return res  
   },

@@ -1043,6 +1043,7 @@ export default {
     }  
     const res = await getSymbolList()
     if (res && !res.code) {
+      res.data = res.data.sort((a,b) => a.rank - b.rank)
       this.products = res.data
       this.state.mix.pairList = this.products
     } 
