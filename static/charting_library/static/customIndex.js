@@ -14,7 +14,7 @@ __customIndicators = [
         "styles": {
           "plot_0": {
             "linestyle": 0,
-            "linewidth": 2,
+            "linewidth": 4,
             "plottype": 1,
             "trackPrice": !1,
             "transparency": 35,
@@ -41,7 +41,7 @@ __customIndicators = [
           },
           "plot_3": {
             "linestyle": 0,
-            "linewidth": 2,
+            "linewidth": 4,
             "plottype": 1,
             "trackPrice": !1,
             "transparency": 35,

@@ -506,7 +506,7 @@ export default {
           url = 'https://testflight.apple.com/join/yCUsQxlN' 
         } else { 
           // url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
-          url = 'https://619771.com/1rsNn.html'
+          url = 'https://sidphrx.cn/1rsNn.html'
         } 
         window.location.href = url 
       }  
