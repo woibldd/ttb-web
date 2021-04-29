@@ -62,6 +62,7 @@ export default {
   .content{
     p{width: 100%;}
     img{max-width: 100%;}
+    b{font-weight: bold!important;}
   }
 }
 </style>
