@@ -2380,8 +2380,8 @@ export default {
       phone: "手机号",
       phone_code: "手机验证码",
       email_code: "邮箱验证码",
-      address_remark: "地址备注",
-      address_remark_tag: "添加地址备注，如钱包、交易所地址信息",
+      address_remark: "地址備註",
+      address_remark_tag: "添加地址備註，如錢包、交易所地址資訊",
     },
     address: {
       address: "地址"

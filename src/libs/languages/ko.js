@@ -2432,8 +2432,8 @@ export default {
       bind_email_or_phone: "이메일/핸드폰 입력",
       to_deposit_tips: "인출은 원하는 액수의 최소 충전을 완료하고, 인출 기능을 활성화합니다",
       to_deposit: "코인을 충전하다",
-      address_remark: "地址备注",
-      address_remark_tag: "添加地址备注，如钱包、交易所地址信息",
+      address_remark: "주소 참고",
+      address_remark_tag: "주소，지갑, 거래소 등 주소 정보 추가",
     },
     address: {
       address: "주소"

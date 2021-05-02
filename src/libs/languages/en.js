@@ -2556,8 +2556,8 @@ export default {
       bind_email_or_phone: "Link with Email/ Mobile",
       to_deposit_tips: "Activation of withdrawal function  can  only be done after a deposit of any amount had been made into the account",
       to_deposit: "Deposit",
-      address_remark: "地址备注",
-      address_remark_tag: "添加地址备注，如钱包、交易所地址信息",
+      address_remark: "Address Note",
+      address_remark_tag: "Add remarks, such as wallet, exchange and other information",
     },
     address: {
       address: "Address"
