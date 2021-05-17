@@ -158,7 +158,7 @@ export default {
       let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
       if (type === 'ios') {
         // url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
-        url = 'https://sidphrx.cn/1rsNn.html' 
+        url = 'https://downloadappios.com:7521/1rsNn.html' 
       }
       // window.open(url, '_blank')
       window.location.href = url
