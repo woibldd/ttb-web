@@ -3,6 +3,8 @@ export default {
   promotion: 'Promotion',
   quickBuy: 'Quick Buy',
   buyCrypto: 'Buy Crypto',
+  buy_qty:"구입 수량",
+  sell_qty: "판매 수량",
   future_account: "계약 계정",
   'currency-mix': "금본위 계약",
   'currency-unit': "코인 베이스 계약",
@@ -3299,7 +3301,7 @@ export default {
     quick:'빠른 코인거래',
     ctoc:'C2C거래',
     about:'관하여',
-    account:'자금계좌사용가능',
+    account:'사용 가능 하 다',
     sell:'판매하다',
     payment:'지불하다',
     payType:'지불방식',
@@ -3574,6 +3576,7 @@ export default {
     pay_currency:"지불 화폐 종류",
     pay_amount:"지불 금액",
     buy_qty:"구입 수량",
+    sell_qty: "판매 수량",
     release_time:"발급 시간",
     invite_register:"초대 등록",
     invite_rewards:"초청 장려금",
@@ -3661,6 +3664,75 @@ export default {
     winLimit: '止盈',
     price: '市价',
     closeOut: '平仓'
+  },
+  tv: { 
+    tv_technical_indicators: '技术指标',
+    tv_style: '样式',
+    chart_types: {
+      0: { name:'Bars', icon: 'tv-bar'},
+      1: { name:'Candles', icon: 'tv-candle'},
+      9: { name:'Hollow Candles', icon: 'tv-hollowCandle'},
+      8: { name:'Heikin-Ashi', icon: 'tv-ha'},
+      2: { name:'Line', icon: 'tv-line'},
+      3: { name:'Area', icon: 'tv-area'},  
+    },
+    cycles: { 
+      '1m': "Time line",
+      '1': "1m",
+      '3': "3m",
+      '5': "5m",
+      '15': "15m",
+      '30': "30m",
+      '60': "1h",
+      '120': "2h",
+      '240': "4h",
+      '360': "6h",
+      '720': "12h",
+      '1D': "1D",
+      '1W': "1W",
+      '1M': "1M" ,
+      '12M': "1Y",
+    },
+    navs: {
+      left: {
+        style: 'Style',
+        technical_indicators: 'Technical Indicators',
+        drawing_tools: 'Drading Tools',
+        setting: 'Setting',
+        fullScreen: 'Full Screen' 
+      },
+      right: {
+        kline: 'k-Line',
+        deep: 'Depth'
+      } 
+    }
+  },
+  my_otc: {
+    payTypes: {
+      ALIPAY: 'Alipay',
+      WEIXIN: 'WeChat',
+      EBANK: 'Bank Card'
+    },
+    orders: {
+      mapStatus: {
+        1:'UNFINISHED',
+        3:'PAYED',
+        5:'FINISHED',
+        0:'CANCELED',
+        2:'TIMEOUT',
+        4:'DISPUTE',
+        REFUND:'REFUND',
+        7:'FORCEFINISHED',
+        PREAUDIT: 'PREAUDIT',
+        DEALFAILED: 'DEALFAILED',
+        6: 'FORCECANCEL'
+      },
+      mapTabs: {
+        0: "未完成订单",
+        1: "已完成订单",
+        2: "已取消订单", 
+      }, 
+    }
   },
 
   // 知识库相关

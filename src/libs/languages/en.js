@@ -3,6 +3,8 @@ export default {
   promotion: 'Promotion',
   quickBuy: 'Quick Buy',
   buyCrypto: 'Buy Crypto',
+  buy_qty:"Buy Qty",
+  sell_qty: "Sell Qty",
   future_account: "Contract Account",
   'currency-mix': "Contract - USDT",
   'currency-unit': "Coin Margin Contact",
@@ -3411,7 +3413,7 @@ export default {
     quick: 'One-click Buy',
     ctoc: 'C2C transaction',
     about: 'About',
-    account: 'Funds Act available',
+    account: 'Available',
     sell: '我要出售',
     payment: '我要支付',
     payType: 'Payment Method',
@@ -3689,6 +3691,7 @@ export default {
     pay_currency:"Payment Currency",
     pay_amount:"Payment Amount",
     buy_qty:"Buy Qty",
+    sell_qty: "Sell Qty",
     release_time:"Release Time",
     invite_register:"Invite to register",
     invite_rewards:"Invite to buy rewards",
@@ -3770,6 +3773,132 @@ export default {
     "signup": "Sign up",
     "signin": "Sign in",
     "signout": "Sign out",
+  },
+  tv: { 
+    tv_technical_indicators: 'Technical Indicators',
+    tv_style: 'Style',
+    chart_types: {
+      0: { name:'Bars', icon: 'tv-bar'},
+      1: { name:'Candles', icon: 'tv-candle'},
+      9: { name:'Hollow Candles', icon: 'tv-hollowCandle'},
+      8: { name:'Heikin-Ashi', icon: 'tv-ha'},
+      2: { name:'Line', icon: 'tv-line'},
+      3: { name:'Area', icon: 'tv-area'},  
+    }, 
+    cycles:[ 
+      { 
+        key:'1m',
+        text: "Time line"
+      },
+      { 
+        key:'1',
+        text: "1m"
+      },
+      { 
+        key:'3',
+        text:  "3m"
+      },
+      {
+        key:'5',
+        text:  "5m"
+      },
+      {
+        key:'15',
+        text:  "15m"
+      },
+      {
+        key:'30',
+        text:  "30m"
+      },
+      {
+        key:'60',
+        text:  "1h"
+      },
+      {
+        key:'120',
+        text:  "2h"
+      },
+      {
+        key:'240',
+        text:  "4h"
+      },
+      {
+        key:'360',
+        text:  "6h"
+      },
+      {
+        key:'720',
+        text:  "12h"
+      },
+      {
+        key:'1D',
+        text:  "1D"
+      },
+      {
+        key:'1W',
+        text:  "1W"
+      },
+      {
+        key:'1M',
+        text:  "1M"
+      } ,
+      {
+        key:'12M',
+        text:  "1Y"
+      },
+    ],
+    navs: {
+      left: {
+        style: 'Style',
+        technical_indicators: 'Technical Indicators',
+        drawing_tools: 'Drading Tools',
+        setting: 'Setting',
+        fullScreen: 'Full Screen' 
+      },
+      right: {
+        kline: 'k-Line',
+        deep: 'Depth'
+      } 
+    }
+  },
+  my_otc: {
+    payTypes: {
+      ALIPAY: 'Alipay',
+      WEIXIN: 'WeChat',
+      EBANK: 'Bank Card'
+    },
+    orders: {
+      mapStatus: {
+        
+        // 1:'未完成(待付款)',
+        // 3:'已付款待放币',
+        // 5:'已完成',
+        // 0:'取消关闭',
+        // 2:'超时关闭',
+        // 4:'申诉中',
+        // REFUND:'退款取消',
+        // 7:'强制成交',
+        // PREAUDIT: '前置审核',
+        // DEALFAILED: '成交失败',
+        // 6: '强制取消'
+        1:'UNFINISHED',
+        3:'PAYED',
+        5:'FINISHED',
+        0:'CANCELED',
+        2:'TIMEOUT',
+        4:'DISPUTE',
+        REFUND:'REFUND',
+        7:'FORCEFINISHED',
+        PREAUDIT: 'PREAUDIT',
+        DEALFAILED: 'DEALFAILED',
+        6: 'FORCECANCEL'
+      },
+      mapTabs: {
+        0: "未完成订单",
+        1: "已完成订单",
+        2: "已取消订单", 
+      }, 
+    }
   },
   shipping: {
     lossLimit: '止损',

@@ -40,7 +40,7 @@
             </el-popover>
           </div> 
           <!-- p2P交易 -->
-          <!-- <router-link :to="{name: 'OTC'}" class="nav_link ml-30">{{ $t('otc_trade') }}</router-link>  -->
+          <router-link :to="{name: 'hlotc'}" class="nav_link ml-30">{{ $t('otc_trade') }}</router-link> 
           <!-- 金融业务 -->
           <div class="nav_link arrow-down">
             <span  class="nav_link ml-30" v-popover:popoverFinance>

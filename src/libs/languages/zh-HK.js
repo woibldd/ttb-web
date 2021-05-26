@@ -3,6 +3,8 @@ export default {
   promotion: '促销',
   quickBuy: '一键买币',
   buyCrypto: '买币',
+  buy_qty: "購買數量",
+  sell_qty: "出售數量",
   future_account: "合約賬戶",
   'currency-mix': "USDT合約",
   'currency-unit': "幣本位合約",
@@ -3261,7 +3263,7 @@ export default {
     quick: '快捷買幣',
     ctoc: 'C2C交易',
     about: '關於',
-    account: '資金帳戶可用',
+    account: '可用',
     sell: '我要出售',
     payment: '我要支付',
     payType: '支付方式',
@@ -3451,6 +3453,33 @@ export default {
     '1M': "1月",
     more: "更多"
   },
+  my_otc: {
+    payTypes: {
+      ALIPAY: '支付宝',
+      WEIXIN: '微信',
+      EBANK: '银行卡'
+    },
+    orders: {
+      mapStatus: { 
+        1:'未完成(待付款)',
+        3:'已付款待放币',
+        5:'已完成',
+        0:'取消关闭',
+        2:'超时关闭',
+        4:'申诉中',
+        REFUND:'退款取消',
+        7:'强制成交',
+        PREAUDIT: '前置审核',
+        DEALFAILED: '成交失败',
+        6: '强制取消'
+      },
+      mapTabs: {
+        0: "未完成订单",
+        1: "已完成订单",
+        2: "已取消订单", 
+      }, 
+    }
+  },
   nav: {
     download_pop: {
       scan: "掃碼下載App",
@@ -3537,6 +3566,7 @@ export default {
     pay_currency: "支付幣種",
     pay_amount: "支付金額",
     buy_qty: "購買數量",
+    sell_qty: "出售數量",
     release_time: "發放時間",
     invite_register: "邀請注册",
     invite_rewards: "邀請購買獎勵",
