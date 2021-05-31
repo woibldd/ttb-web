@@ -76,6 +76,7 @@ export default {
     height: 180px; padding: 35px 0 0 0; background: $home-header-bgdark; color: #fff; text-align: center;
     .title{margin-bottom: 25px; font-size: 24px;}
     .el-input{width: 607px;}
+    .el-input__suffix{right: 30px;}
     .el-input__inner{height: 44px; color: #fff; background: #5e5e5e; border: none;}
     .el-input__icon{cursor: pointer;}
   }
