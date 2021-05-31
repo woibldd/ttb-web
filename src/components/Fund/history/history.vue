@@ -601,17 +601,13 @@ export default {
     getBalance(code) {
       switch (code) {
         case 1:
-          return this.$t('wallet_account')
-          break;
+          return this.$t('wallet_account') 
         case 2:
-          return this.$t('trading_account')
-          break;
+          return this.$t('trading_account') 
         case 3:
-          return this.$t('contract_account')
-          break;
+          return this.$t('contract_account') 
         case 4:
-          return this.$t('otc_account')
-          break;
+          return this.$t('otc_account') 
 
       }
     },
