@@ -182,6 +182,7 @@
                     -->
                   <div class="time-ago"> 
                     <!--order_status 0已取消,1未付款,2超时取消,3已付款,4申诉中,5已完成,6强制取消,7强制完成 -->
+                    <!-- type 0 买，1卖 -->
                     <div style="height: 30px">
                       <p v-if="item.type === 0 && item.time &&  item.order_status===1">
                         {{ $t('otc_overtime_tips_a1') }}
@@ -194,15 +195,12 @@
                       </p> 
                     </div>
                     <!-- 取消订单 -->
-                    <div  style="height: 30px">
-                      <el-button size='mini' type="danger" class="mt-5" 
-                        v-if="item.order_status===1"
-                        @click="handleClickCancel(item, 'cancel')"
-                        >
+                    <div  v-if="item.type === 0 && item.order_status===1" style="height: 30px">
+                      <el-button size='mini' type="danger" class="mt-5"  
+                        @click="handleClickCancel(item, 'cancel')">
                         {{$t('otc_cancel_order')}}
                       </el-button> 
-                    </div>
-                    
+                    </div> 
                     <div  style="height: 30px">
                       <div><!-- 确认付款 -->
                         <el-button size='mini' type="success" class="mt-5" 
@@ -213,7 +211,7 @@
                       </div>
                       <div><!-- 确认放币 -->
                         <el-button size='mini' type="danger" class="mt-5" 
-                          v-if="item.side === 'SELL' && (item.order_status===3|| item.order_status===4)"
+                          v-if="item.side === 1 && (item.order_status===3|| item.order_status===4)"
                           @click="handleClickPayCoin(item, 'payCoin')">
                           {{$t('otc_confirm_issued')}}
                         </el-button> 

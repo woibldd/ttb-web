@@ -3868,19 +3868,7 @@ export default {
       EBANK: 'Bank Card'
     },
     orders: {
-      mapStatus: {
-        
-        // 1:'未完成(待付款)',
-        // 3:'已付款待放币',
-        // 5:'已完成',
-        // 0:'取消关闭',
-        // 2:'超时关闭',
-        // 4:'申诉中',
-        // REFUND:'退款取消',
-        // 7:'强制成交',
-        // PREAUDIT: '前置审核',
-        // DEALFAILED: '成交失败',
-        // 6: '强制取消'
+      mapStatus: { 
         1:'UNFINISHED',
         3:'PAYED',
         5:'FINISHED',
