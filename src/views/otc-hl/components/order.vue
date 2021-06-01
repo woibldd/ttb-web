@@ -676,8 +676,7 @@ export default {
           this.datalist = myOrder.data.data
           this.total = myOrder.data.total
         }
-      }
-      console.log(state)
+      } 
       switch (state) { 
         //未完成订单
         case 0:  

@@ -366,12 +366,12 @@ export default {
         this.rates = res.data;
       }
     }, 
-    fetchBalance() {
+    fetchBalance() { 
       this.available = 0
       this.ordering = 0
       service.getOtcBalance().then(res => {
         if (res.code === 0) {
-          const arr = _.filter(res.data, item => item.currency === this.customDigitalCurrency)
+          const arr = _.filter(res.data, item => item.currency === this.customDigitalCurrency.unit) 
           if (arr.length > 0) {
             this.available = arr[0].available
             this.ordering = arr[0].ordering
