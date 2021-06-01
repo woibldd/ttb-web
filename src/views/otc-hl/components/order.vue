@@ -12,8 +12,7 @@
         <dl>
           <dd class="user-info">
             <div class="user"> 
-              <icon class="avt" name="rentou" />
-
+              <icon class="avt" name="rentou" /> 
               <div class="avt-text">
                 <div class="top">
                   {{ tableDataUname.name }}
@@ -105,14 +104,7 @@
                 <div class="name">
                   {{ $t('otc_trans_idadawq') }}：
                   <span>{{ item.seller_nick_name }}</span>
-                </div> 
-                <!-- <div class="btn-im">
-                  <label class="text-primary"  @click="handleClickOpenIm" flex="main:left cross:center"> 
-                    <icon style="font-size:17px; margin-right: 5px;" name="message-history" />  
-                    <span>{{$t('otc.tim.text1')}}</span>
-                  </label>
-                  <i v-if="showUnreadCount" class="red-point"></i>
-                </div>  -->
+                </div>  
               </div>
               <div
                 class="state" > 
@@ -132,9 +124,9 @@
               <el-row>
                 <el-col :span="8" class="first">
                   <div class="type">
-                    <em :style="{color: item.type === 'BUY' ? '#23C88B' : '#F24E4D'}">{{ $t(`otc_side_${item.type === 'BUY' ? 1 : 2}`) }}</em>
+                    <em :style="{color: item.type === 0 ? '#23C88B' : '#F24E4D'}">{{ $t(`otc_side_${item.type === 0 ? 1 : 2}`) }}</em>
                     <div
-                      :style="{color: item.type === 'BUY' ? '#23C88B' : '#F24E4D'}"
+                      :style="{color: item.type === 0 ? '#23C88B' : '#F24E4D'}"
                       class="cur">
                       <p style="opacity:0.6;">{{ item.currency }}/</p>
                       {{ item.coin_symbol }}
@@ -160,16 +152,16 @@
                 <el-col :span="12" class="last">
                   <dl>
                     <dt>
-                      {{ $t('otc_payment_method') }}：{{ $t(`my_otc.payTypes.${item.pay_mode}`)}} 
+                      {{ $t('otc_payment_method') }}：{{ $t(`my_otc.payTypes.${item.pay_type}`)}} 
                     </dt>   
                     <dd flex>  
-                      <div v-for="(payItem, index) in paymentHeaderList[item.pay_mode]" :key="index" flex-box='1'>
+                      <div v-for="(payItem, index) in paymentHeaderList[item.pay_type]" :key="index" flex-box='1'>
                         <p>{{ $t(payItem.text) }}</p>
                         <span>
                           <span
                             v-if="payItem.key==='weixin_url' || payItem.key==='alipay_url'"
                             style="cursor: pointer;"
-                            @click="openQR(item[payItem.key])">
+                            @click="openQR(item[payItem.key])"> 
                             <icon v-if="item[payItem.key]" name="qrcode" />
                           </span>
                           <span v-else>{{ item[payItem.key] }}</span>
@@ -191,7 +183,7 @@
                   <div class="time-ago"> 
                     <!--order_status 0已取消,1未付款,2超时取消,3已付款,4申诉中,5已完成,6强制取消,7强制完成 -->
                     <div style="height: 30px">
-                      <p v-if="item.side === 1 && item.time &&  item.order_status===1">
+                      <p v-if="item.type === 0 && item.time &&  item.order_status===1">
                         {{ $t('otc_overtime_tips_a1') }}
                         <count-down
                           :terminal="item.time"
@@ -214,7 +206,7 @@
                     <div  style="height: 30px">
                       <div><!-- 确认付款 -->
                         <el-button size='mini' type="success" class="mt-5" 
-                          v-if="item.type === 'BUY' && item.order_status===1"
+                          v-if="item.type === 0 && item.order_status===1"
                           @click="handleClickPayMoney(item, 'payMoney')">
                           {{$t('otc_already_paid')}}
                         </el-button> 
@@ -267,7 +259,7 @@
         @bank-change="bankChange" />
     </slide-model>
     <v-modal :open.sync="showQRcode">
-      <div class="qr">
+      <div class="qr"> 
         <img
           :src="qrsrc"
           alt=""
@@ -344,7 +336,7 @@ export default {
       paymentHeaderList: {
         // 0支付宝，1微信，2银行卡
         // 银行卡
-        2: [
+        EBANK: [
           {
             title: 'name', // 姓名
             text: 'payment_name',
@@ -365,12 +357,12 @@ export default {
           }
         ],
         // 支付宝
-        0: [
+        ALIPAY: [
           {
             title: 'alipay_account', // 支付宝账号
             text: 'payment_alipay_account',
             width: '',
-            key: 'alipay_id'
+            key: 'account_id'
           },
           {
             title: 'name', // 姓名
@@ -386,7 +378,7 @@ export default {
           }
         ],
         // 微信
-        1: [
+        WEIXIN: [
           {
             title: 'we_chat_account', // 微信账号
             text: 'payment_weChat_account',
@@ -405,37 +397,7 @@ export default {
             width: '',
             key: 'weixin_url'
           }
-        ],
-        // paynow
-        4: [
-          {
-            title: 'name', // 姓名
-            text: 'payment_name',
-            width: '',
-            key: 'name'
-          },
-          {
-            title: 'card_number', // 银行卡号
-            text: 'payment_card_number',
-            width: '',
-            key: 'card_number'
-          }
-        ],
-        // paylah
-        5: [
-          {
-            title: 'name', // 姓名
-            text: 'payment_name',
-            width: '',
-            key: 'name'
-          },
-          {
-            title: 'card_number', // 银行卡号
-            text: 'payment_card_number',
-            width: '',
-            key: 'card_number'
-          }
-        ]
+        ], 
       },
       selectPayment: {},
       qrsrc: '',
@@ -476,8 +438,8 @@ export default {
     changePayType(e) {
       // console.log(e)
     },
-    openQR(pay) {
-      this.qrsrc = pay.collection_img
+    openQR(url) {
+      this.qrsrc = url
       this.showQRcode = true
     },
     orderSwtich(index) {
@@ -722,6 +684,9 @@ export default {
           if (this.datalist.length > 0) {
             // const rec = await api.gethlOrderDetail({other_order_id: this.datalist[0].other_order_id})  
             this.datalist = this.datalist.filter(item => [1, 3, 4].includes(item.order_status)) 
+            this.datalist.map(item => {
+              item.time = (item.update_at || item.create_time) + (item.timeout_minute || 15) * 1000 * 60 
+            })
             break
           }
         //已完成订单

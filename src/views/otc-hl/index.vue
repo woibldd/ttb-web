@@ -18,7 +18,7 @@
               placement="bottom">
               <ul>
                 <li class="nav-link-right"> 
-                  <router-link to="/hlotc/order">{{$t('otc_my_order')}}</router-link>
+                  <router-link to="/hlotc/order">{{$t('my_orders')}}</router-link>
                 </li>
                 <li class="nav-link-right"> 
                   <router-link to="/hlotc/bill">{{$t('otc_side_35')}}</router-link>

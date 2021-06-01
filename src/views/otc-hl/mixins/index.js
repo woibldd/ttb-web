@@ -49,7 +49,7 @@ export const tradeMixins = {
     orderHeader () {
       return [
         { 
-          prop: 'trans_id',
+          prop: 'order_id',
           renderHeader: (h) => {
             return (
               <span>{this.$t('otc_trans_id')}</span>
@@ -58,27 +58,14 @@ export const tradeMixins = {
         },
         {
           label: this.$t('order_th_type'),
-          prop: 'side', 
+          prop: 'type', 
           renderHeader: (h, params) => {
-            return h(STepSelect, { 
-              props: {
-                dropData: {
-                  name: this.$t('order_th_type'),
-                  data: [this.$t('allin'), this.$t('order_side_buy'),  this.$t('order_side_sell')]
-                }
-              },
-              on: {
-                'dropdown-slect': (e) => {
-                  this.params1.side = e
-                  this.init(this.active)
-                }
-              }
-            })
+            return <span>{this.$t('order_th_type')}</span>
           },
           render: (h, params) => {
-            const state = params.row.side
-            const name = state === 1 ? this.$t('order_side_buy') : this.$t('order_side_sell')
-            const color = state === 1 ? '#09C989' : '#F45151'
+            const state = params.row.type
+            const name = state === 0 ? this.$t('order_side_buy') : this.$t('order_side_sell')
+            const color = state === 0 ? '#09C989' : '#F45151'
             return h('div', {
               style: {
                 color: color
@@ -94,29 +81,15 @@ export const tradeMixins = {
             )
           },
           render: (h, params) => {
-            return h('div', this.exchangeState(params.row.state))
+            return h('div',  this.$t('my_otc.orders.mapStatus.'+params.row.order_status))
           }
         },
         {
           label: this.$t('currency'),
-          prop: 'symbol',
+          prop: 'coin_symbol',
           width: 120, 
           renderHeader: (h, params) => {
-            return h(STepSelect, {
-              props: {
-                dropData: {
-                  name: this.$t('otc_currency'),
-                  data: [this.$t('allin'), 'USDT', 'BTC']
-                }
-              },
-              on: {
-                'dropdown-slect': (e) => {
-                  const selectName = e === 0 ? '' : e === 1 ? 'USDT' : 'BTC'
-                  this.params1.currency = selectName
-                  this.init(this.active)
-                }
-              }
-            })
+            return  <span>{this.$t('otc_currency')}</span>
           }
         },
         { 
@@ -134,16 +107,16 @@ export const tradeMixins = {
           }
         },
         { 
-          prop: 'amount',
+          prop: 'coin_amount',
           renderHeader: (h) => {
             return (
               <span>{this.$t('amount')}</span>
             )
           },
-          render: (h, params) => {
-            let name = params.row.amount + '   ' + params.row.currency
-            return h('div', name)
-          }
+          // render: (h, params) => {
+          //   let name = params.row.amount + '   ' + params.row.currency
+          //   return h('div', name)
+          // }
         },
         { 
           prop: 'total',
@@ -152,10 +125,8 @@ export const tradeMixins = {
               <span>{this.$t('order_value')}</span>
             )
           },
-          render: (h, params) => {
-            // let spiltName = params.row.symbol.split('/')
-            // let name = params.row.total + '   ' + spiltName[1]
-            let name = params.row.price
+          render: (h, params) => { 
+            let name = params.row.total+ '   ' + params.row.currency
             return h('div', name)
           }
         },
@@ -171,21 +142,21 @@ export const tradeMixins = {
             return h('div', utils.dateFormatter(params.row.create_time, 'Y-M-D H:m:s'))
           }
         },
-        { 
-          prop: 'trans_id',
-          renderHeader: (h) => {
-            return (
-              <span>{this.$t('operation')}</span>
-            )
-          },
-          render: this.tradeActions
-        }
+        // { 
+        //   prop: 'trans_id',
+        //   renderHeader: (h) => {
+        //     return (
+        //       <span>{this.$t('operation')}</span>
+        //     )
+        //   },
+        //   render: this.tradeActions
+        // }
       ]
     },
     tradeHeader () {
       return [
         { 
-          prop: 'active_id',
+          prop: 'order_id',
           renderHeader: (h) => {
             return (
               <span>{this.$t('otc_active_id')}</span>
@@ -193,16 +164,16 @@ export const tradeMixins = {
           },
         },
         { 
-          prop: 'side',
+          prop: 'type',
           renderHeader: (h) => {
             return (
               <span>{this.$t('order_th_type')}</span>
             )
           },
           render: (h, params) => {
-            const state = params.row.side
-            const name = state === 1 ? this.$t('order_side_buy') : this.$t('order_side_sell')
-            const color = state === 1 ? '#09C989' : '#F45151'
+            const state = params.row.type
+            const name = state === 0 ? this.$t('order_side_buy') : this.$t('order_side_sell')
+            const color = state === 0 ? '#09C989' : '#F45151'
             return h('div', {
               style: {
                 color: color

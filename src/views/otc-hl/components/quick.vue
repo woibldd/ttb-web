@@ -351,6 +351,15 @@ export default {
         return null
       }
     },
+    async fetchIsQualified() {
+      const res = await api.gethlIsQualified()
+      if (!res.code) {
+        console.log(res)
+      } else {
+        utils.alert(res.message)
+        return null
+      }
+    },
     async fetchRates() {
       let res = await service.getAllRate()
       if (!res.code && !!res.data) {
@@ -376,20 +385,20 @@ export default {
         coin_symbol: this.customDigitalCurrency.unit,
         currency: this.customFiatCurrency,
         price_type: this.priceType, //购买方式 0按数量，1按金额
-        coin_amount: this.digitalAmount, //购买数量（priceType为0时必传，支持8位小数）
-        money: this.fiatAmount, //（priceType为1时必传，支持2位小数）
+        coin_amount: this.digitalAmount || 0, //购买数量（priceType为0时必传，支持8位小数）
+        money: this.fiatAmount || 0, //（priceType为1时必传，支持2位小数）
         pay_type: this.customPayType.name, //支付方式，EBANK":银行卡 "WEIXIN":微信支付 "ALIPAY":支付宝支付
       }
       const res = await api.sethlQuickByAmount(params)
       if (!res.code && !res.status) {
         utils.success('otc_seiitm_16') 
-        let query = {
-          digital: this.customDigitalCurrency.unit,
-          fiat: this.customFiatCurrency,
-          payment: this.customPayType.text,
-          amount: this.fiatAmount
-        }
-        this.$router.push({name: 'hlquick-order', query}) 
+        // let query = {
+        //   digital: this.customDigitalCurrency.unit,
+        //   fiat: this.customFiatCurrency,
+        //   payment: this.customPayType.text,
+        //   amount: this.fiatAmount
+        // }
+        this.$router.push({name: 'hlquick-order'}) 
       } else {
         utils.alert(res.message)
       }
@@ -408,13 +417,13 @@ export default {
       const res = await api.sethlQuickSellMoney(params)
       if (!res.code && !res.status) {
         utils.success('otc_seiitm_16')
-        let query = {
-          digital: this.customDigitalCurrency.unit,
-          fiat: this.customFiatCurrency,
-          payment: this.customPayType.text,
-          amount: this.fiatAmount
-        }
-        this.$router.push({name: 'hlquick-order', query}) 
+        // let query = {
+        //   digital: this.customDigitalCurrency.unit,
+        //   fiat: this.customFiatCurrency,
+        //   payment: this.customPayType.text,
+        //   amount: this.fiatAmount
+        // }
+        this.$router.push({name: 'hlquick-order'}) 
       } else {
         utils.alert(res.message)
       }
@@ -443,6 +452,7 @@ export default {
     },
   }, 
   async created () {  
+    this.fetchIsQualified()
     this.init()
   }
 }
