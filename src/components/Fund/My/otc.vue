@@ -100,7 +100,7 @@
               </a>
             </span>
             <router-link
-              :to="{name: 'OTC'}"
+              :to="{name: 'hlotc'}"
               class="my-fund-operate">{{ $t('asset_trading') }}</router-link>
           </template>
         </el-table-column>
