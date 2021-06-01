@@ -3469,7 +3469,7 @@ export default {
         4:'申诉中',
         REFUND:'退款取消',
         7:'强制成交',
-        PREAUDIT: '前置审核',
+        8: '前置审核',
         DEALFAILED: '成交失败',
         6: '强制取消'
       },

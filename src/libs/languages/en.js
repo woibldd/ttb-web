@@ -3889,7 +3889,7 @@ export default {
         4:'DISPUTE',
         REFUND:'REFUND',
         7:'FORCEFINISHED',
-        PREAUDIT: 'PREAUDIT',
+        8: 'PREAUDIT',
         DEALFAILED: 'DEALFAILED',
         6: 'FORCECANCEL'
       },
