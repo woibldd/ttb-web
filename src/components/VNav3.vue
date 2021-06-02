@@ -443,14 +443,7 @@ export default {
     },
     mapBalanceMenu() {
       return this.$store.state.mapShareAccount;
-    },
-    mapUserCenter() {
-      return [
-        { label: "个人中心", path: "/user/index" },
-        { label: "资产管理", path: "/user/property" },
-        { label: "退出", click: () => this.$store.dispatch("loginout") }
-      ];
-    },
+    }, 
     activeShareAccount: {
       get() {
         return this.$store.state.activeShareAccount;
@@ -585,7 +578,7 @@ export default {
       margin: 0 0 0 40px;
       .nav_link {
         color: #ffffff;
-        font-size: 16px;
+        font-size: 14px;
         position: relative;
         display: inline-block;
         padding-top: 19px;

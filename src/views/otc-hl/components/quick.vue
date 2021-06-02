@@ -141,9 +141,15 @@
                   <el-dropdown-menu slot="dropdown" class="custom-dropdown">
                     <el-dropdown-item 
                         v-for="(item, index) in payTypeList" 
-                        :command="index"
-                        :key="index">
-                      <icon :name="item.icon"/> {{$t(item.text)}} 
+                        :command="item.key"
+                        :key="index"
+                        flex="main:justify">
+                      <div>
+                        <icon :name="item.icon"/> {{$t(item.text)}} 
+                      </div>
+                      <div v-if="item.unenabled">
+                        <icon name="otc-add"/>
+                      </div>
                     </el-dropdown-item> 
                   </el-dropdown-menu>
                 </el-dropdown>
@@ -217,9 +223,9 @@ export default {
       coinInfo: {}, 
       priceHistory: [],  
       payTypeList: [ 
-        { name: 'ALIPAY', icon:'alipay', text: 'but_aliPay'},
-        { name: 'WEIXIN', icon:'wechat', text: 'but_wechat' },
-        { name: 'EBANK', icon:'bank-card', text: 'but_bank' }, 
+        { name: 'EBANK', icon:'bank-card', text: 'but_bank', key: 2, unenabled:false, }, 
+        { name: 'ALIPAY', icon:'alipay', text: 'but_aliPay', key: 0, unenabled:false, },
+        { name: 'WEIXIN', icon:'wechat', text: 'but_wechat', key: 1, unenabled:false, },
       ],
       fiatAmount: '',
       digitalAmount: '',
@@ -232,7 +238,8 @@ export default {
       ordering: 0, //冻结
       maxPrice: 0,
       priceType: 1, //0按数量，1按金额
-      secondConfirmShow: false
+      secondConfirmShow: false,
+      userPayInfo: [],
     }
   },
   computed: {
@@ -278,7 +285,10 @@ export default {
       this.fetchBalance()
     }, 
     handleCommandPayType(index) {
-      this.customPayType = this.payTypeList[index]
+      this.customPayType = this.payTypeList.find(item => item.key===+index)
+      if (this.customPayType.unenabled) {
+        this.$router.push({name:'hlquick-collection'})
+      }
     },
     getHistory (name) { 
       name = `${name}_USDT`
@@ -330,12 +340,7 @@ export default {
       }
     }, 
     handleFiatCurrencyChange(sender) {
-      this.customFiatCurrency = sender 
-      // this.payTypeList = [ 
-      //   { name: 'ALIPAY', icon:'alipay' },
-      //   { name: 'WEIXIN', icon:'wechat' },
-      //   { name: 'EBANK', icon:'bank-card' }, 
-      // ]
+      this.customFiatCurrency = sender  
       this.handleCommandPayType(0) 
     },
     handleChangeSide(obj) {  
@@ -442,8 +447,25 @@ export default {
         utils.alert(res.message)
       }
     },
+    fetchUserPayInfo() {
+      api.gethlUserPayInfo().then(res => {
+        if (!res.code) {
+          this.userPayInfo = res.data
+          
+          this.payTypeList.map(item => {
+            let find = res.data.find(obj => obj.payMode===+item.key)
+            if (!find) {
+              item.unenabled = true
+            }
+          })
+         
+          console.log(this.payTypeList)
+        }
+      })
+    },
     async init() {
       await this.fetchRates() 
+      this.fetchUserPayInfo()
       this.fetchBalance() 
       let data = await this.fetchQuote() 
       if (data) {

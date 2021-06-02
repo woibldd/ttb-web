@@ -134,7 +134,7 @@ export default {
    * @param {*} user_id 用户id 
    */
   gethlIsQualified(params) {
-    return getCache('hl-user-pay-info', () => request('/otc/hilamg/is_qualified', params), 1e3)
+    return getCache('hl-is-qualified', () => request('/otc/hilamg/is_qualified', params), 1e3)
   },
 
 

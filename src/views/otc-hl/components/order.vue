@@ -171,16 +171,7 @@
                     </dd> 
                   </dl>    
                 </el-col> 
-                <el-col :span="4"> 
-                  <!-- <div
-                    v-if="item.side === 1 && item.order_status === 'UNFINISHED'"
-                    class="btn btn1"
-                    @click="handleOrderOption(item, 'payMoney')">{{ $t('otc_already_paid') }}</div> 
-                  <div
-                    v-if="item.side === 2 && item.order_status === 'PAYED'"
-                    class="btn btn1"
-                    @click="handleOrderOption(item, 'payCoin')">{{ $t('otc_confirm_issued') }}</div> 
-                    -->
+                <el-col :span="4">  
                   <div class="time-ago"> 
                     <!--order_status 0已取消,1未付款,2超时取消,3已付款,4申诉中,5已完成,6强制取消,7强制完成 -->
                     <!-- type 0 买，1卖 -->
