@@ -815,7 +815,7 @@ export default {
       })
     },
     handleSocketData(data) { 
-      that.init(that.active)
+      this.init(this.active)
     }
   }
 
