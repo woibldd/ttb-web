@@ -269,7 +269,7 @@
 
 <script type="text/ecmascript-6">
 import { tradeMixins } from '../mixins'
-// import { state } from '@/modules/store' 
+import { state } from '@/modules/store' 
 import utils from '@/modules/utils' 
 import TextInfo from './textInfo'
 import service from '@/modules/service'
@@ -288,6 +288,7 @@ export default {
   data() {
     return {
       utils, 
+      state,
       iconActive: 0,
       socket: null,
       tab: [
