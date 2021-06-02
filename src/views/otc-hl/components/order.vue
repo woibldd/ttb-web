@@ -7,7 +7,7 @@
 <template>
   <div class="trade-container">
     <div class="trade-message-box"> 
-      <div class="link">{{ $t('otc_my_order') }}</div>
+      <div class="link">{{ $t('my_orders') }}</div>
       <div class="message-con">
         <dl>
           <dd class="user-info">
@@ -276,8 +276,9 @@ import service from '@/modules/service'
 import countDown from '@/components/CountDown'
 import processValue from '@/mixins/process-otc-value.js'
 import api from '@/modules/api/hl-otc'
-
+import wsNew from '@/modules/ws-new' 
 import Vue from 'vue'
+
 export default {
   components: {
     TextInfo,
@@ -286,9 +287,9 @@ export default {
   mixins: [tradeMixins, processValue],
   data() {
     return {
-      utils,
-      // icons: ['&#xe618;', '&#xe654;'],
+      utils, 
       iconActive: 0,
+      socket: null,
       tab: [
         {
           name: 'otc_tab_lisetr',
@@ -301,11 +302,7 @@ export default {
         {
           name: 'otc_tab_lisetr2',
           count: 0
-        },
-        // {
-        //   name: 'my_order',
-        //   count: 0
-        // }
+        }, 
       ],
       token: window.localStorage.getItem('X-TOKEN'),
       orderBtn: ['contract_cancel_all', 'otc_tab_lisetr3', 'otc_tab_lisetr4'],
@@ -327,9 +324,7 @@ export default {
         currency: ''
       },
       bankData: [],
-      bankId: '',
-      timer: null,
-      timers: null,
+      bankId: '', 
       stepActive: false,
       paymentHeaderList: {
         // 0支付宝，1微信，2银行卡
@@ -402,129 +397,26 @@ export default {
       showQRcode: false,
       datalist: [] 
     }
-  }, 
-  beforeDestroy() {
-    clearInterval(this.timer)
-  },
+  },  
   created() {
     this.getOrderz()
     // todo 初始化第一种类型数据
     this.init(this.active) 
+    this.subMarket()
   }, 
-  beforeDestroy() {
-    clearInterval(this.timers)
+  beforeDestroy() { 
+    this.socket.$off('message')
+    this.socket.$off('reopen')
+    this.socket.$destroy()
   },
-  methods: { 
-    compareDown(property) {
-      return function(a, b) {
-        return a[property] - b[property]
-      }
-    },
-    compareUp(property) {
-      return function(a, b) {
-        return b[property] - a[property]
-      }
-    },
-    iconTab(index) {
-      this.iconActive = index
-      if (index === 0) {
-        return this.datalist.sort(this.compareDown('create_time'))
-      } else {
-        return this.datalist.sort(this.compareUp('create_time'))
-      }
-    },
-    changePayType(e) {
-      // console.log(e)
-    },
+  methods: {  
     openQR(url) {
       this.qrsrc = url
       this.showQRcode = true
-    },
-    orderSwtich(index) {
-      if (this.datalist.length > 0) {
-        this.orderActive = index
-        const orderName =
-          index === 0 ? this.$t('otc_seiitm_15') : index === 1 ? this.$t('otc_tab_lisetr3') : this.$t('otc_tab_lisetr4')
-        this.$confirm(this.$t('otc_otutcol_18', { orderName }), this.$t('tips'), {
-          confirmButtonText: this.$t('otc_ziurec_20'),
-          cancelButtonText: this.$t('cancel'),
-          type: 'warning'
-        })
-          .then(() => {
-            var obj = {
-              user_id: this.id,
-              type: index + 1
-            }
-            service.otcOrderOperateAll(obj).then(res => {
-              if (res.code === 0) {
-                this.init(this.active)
-                this.$message({
-                  type: 'success',
-                  message: `${orderName}成功`,
-                  duration: 1000
-                })
-              } else {
-                // this.$message.warning(`${res.message}`)
-                this.$message({
-                  type: 'warning',
-                  message: `${res.message}`,
-                  duration: 1000
-                })
-              }
-            })
-            this.orderActive = -1
-          })
-          .catch(() => {
-            this.orderActive = -1
-          })
-      } else {
-        this.$message({
-          type: 'warning',
-          message: this.$t('no_data'),
-          duration: 1000
-        })
-      }
-    },
-    closeHadle(item) {
-      this.detail = item
-      // console.log(item)
-      this.closeFlag = true
-      this.stepActive = true
-      this.dialogVisible = true
-    },
+    }, 
     bankChange(bank) {
       this.bankId = bank
-    },
-    // Todo 待开发
-    paySetHandle(item, index) {
-      // console.log(item, index)
-    },
-    detailHandle(item) {
-      // console.log({ item })
-      this.stepActive = false
-      this.bankData = []
-      this.closeFlag = false
-      this.detail = item
-      const payData = []
-      if (item.otc_collection) {
-        this.bankData.push(item.otc_collection)
-      } else {
-        item.otc_collection_list.forEach(item => { 
-          const payAccount = this.processValue('payment_type', item)
-          payData.push({
-            collection_id: item.collection_id,
-            // deposit_bank: payType + payAccount,
-            deposit_bank: payAccount,
-            obj: item
-          })
-        })
-        this.bankData = payData
-        if (item.selectPayment) {
-          this.bankId = item.selectPayment.collection_id
-        }
-      }
-      this.dialogVisible = true
-    },
+    },  
     closeChange() {
       this.dialogVisible = false
       this.closeFlag = false
@@ -696,62 +588,7 @@ export default {
             break
         default: 
            return
-      }
-      // switch (state) { 
-      //   //未完成订单
-      //   case 0: 
-      //     utils.alert('0')
-      //     const rec = await service.getUnDonefills(that.params)
-      //     if (!rec.code) {
-      //       this.datalist = rec.data.data
-      //       this.setOrderInfo(rec)
-      //     }
-      //     //支付方式默认选择银行卡
-      //     if (!rec.code) {
-      //       let dt = rec.data.data
-      //       dt.forEach((item) => {
-      //         if (item.state === 1 && item.side === 1 && !item.appeal && !item.other_appeal) {
-      //           const paylist = item.otc_collection_list
-      //           if (paylist.length > 0 && !item.selectPayment) {
-      //             const arr = paylist.filter(arg => arg.payment_type === 1)
-      //             if (arr.length > 0) {
-      //               // this.selectPayment = arr[0]
-      //               Vue.set(item, 'selectPayment', arr[0])
-      //             } else {
-      //               Vue.set(item, 'selectPayment', paylist[0])
-      //             }
-      //           }
-      //         }
-      //       })
-      //     } 
-      //     break 
-      //   //已完成订单
-      //   case 1:
-      //     utils.alert(1)
-      //     const rer = await service.getDonefills(that.params1)
-      //     if (!rer.code) {
-      //       that.datalist = rer.data.data
-      //       that.total = rer.data.total
-      //     }
-      //     break
-      //   //已取消订单
-      //   case 2:
-      //     utils.alert(2)
-      //     const res = await service.getOtcRemovefills(that.params1)
-      //     if (!res.code) {
-      //       that.datalist = res.data.data
-      //       that.total = res.data.total
-      //     }
-      //     break
-      //   //我的委托单
-      //   default:
-      //     utils.alert(3)
-      //     const rew = await service.getOtcActivefills(that.params)
-      //     if (!rew.code) {
-      //       that.datalist = rew.data.data
-      //       that.total = rew.data.total
-      //     }
-      // }
+      } 
     },
     setOrderInfo(rec) {
       if (!rec.code) {
@@ -954,14 +791,32 @@ export default {
         }
       }  
 
+    },
+    subMarket() {    
+      const that = this
+      if (utils.$tvSocket) {
+        utils.$tvSocket.$destroy()
+      }
+      utils.$tvSocket = wsNew.create()
+      this.socket = utils.$tvSocket 
+      this.socket.$on('open', () => {  
+        that.socket.heartCheck.start() // 发送一次心跳 
+        if (that.state.userInfo) {
+          that.socket.socket.send(`{"op":"loginWeb","args":["${that.state.userInfo.session_id}"]}`) 
+          that.socket.socket.send(`{"op":"subscribeotc","args":["${state.userInfo.id}"]}`) 
+        }  
+      }) 
+      this.socket.$on('message', (data) => { 
+        that.handleSocketData(data) 
+      })
+      this.socket.$on('reopen', () => {
+        that.socket.$destroy()
+        that.subMarket()
+      })
+    },
+    handleSocketData(data) { 
+      that.init(that.active)
     }
-    // setTimeInit() {
-    //   this.timer = setInterval(() => {
-    //     if (this.active === 0 || this.active === 3) {
-    //       // this.init(this.active)
-    //     }
-    //   }, 3000)
-    // }
   }
 
 }

@@ -43,17 +43,19 @@
 
 <script>
 import {state} from '@/modules/store'
+import utils from '@/modules/utils' 
 export default {
   data() {
     return {
       state,
+      utils, 
     }
   },
   computed: { 
     from () {
       return this.$route.name
     }, 
-  }
+  }, 
 }
 </script>
 
