@@ -807,6 +807,7 @@ export default {
         }  
       }) 
       this.socket.$on('message', (data) => { 
+        console.log(data)
         that.handleSocketData(data) 
       })
       this.socket.$on('reopen', () => {
