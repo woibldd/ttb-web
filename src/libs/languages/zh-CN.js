@@ -3343,6 +3343,7 @@ export default {
     tag7: '您已知晓Simplex是由第三方独立运营的法定货币与数字货币交易平台，IXX不对因使用该服务遭受的任何损失或损害承担任何责任。',
     gotopay: '前往Simplex支付', 
     buy_now: "立即购买",
+    value: '价值约'
   },
   el: {
     pagination: {

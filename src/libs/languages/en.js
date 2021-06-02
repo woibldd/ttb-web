@@ -3430,6 +3430,7 @@ export default {
     tag7: 'You already know that Simplex is a legal tender and digital currency trading platform independently operated by a third party, and IXX will not be liable for any loss or damage caused by using this service.',
     gotopay: 'Go to Simplex',  
     buy_now:"Buy Now",
+    value: ' is roughly'
   },
   el: {
     pagination: {

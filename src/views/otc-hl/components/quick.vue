@@ -49,7 +49,7 @@
           </div>
           <div class="trade-content">  
             <div class="valuation">
-              <div class="label">1 {{customDigitalCurrency.unit}}价值约</div>
+              <div class="label">1 {{customDigitalCurrency.unit}}{{$t('otc.value')}}</div>
               <div class="value">{{price}} <i>CNY</i> </div>
             </div>
             <div class="my-select pl-16 pr-16 mt-20">
@@ -150,7 +150,7 @@
               </div>  
             </div>
             <div class="mt-25">
-              <el-button style="width:100%;" @click="handleConfirm" type="primary"> 
+              <el-button style="width:100%;" @click="handleApply" type="primary"> 
                 <span v-if="side===1">{{$t('otc.buy_now')}}</span>
                 <span v-else-if="side===2">{{$t('otc_side_2')}}</span> 
               </el-button>
@@ -159,6 +159,36 @@
           </div>
         </div>
       </div>
+    </div>
+    <div>
+      <v-modal :open.sync="secondConfirmShow"> 
+        <div class="confirm-box">
+          <div class="title">
+            {{$t('confirm')}}<span>{{$t(`otc_side_${side}`)}}</span>
+          </div>
+          <div class="line"></div>
+          <div class="content">
+            <div class="row" flex="main:justify">
+              <div class="label" v-html="$t('cj_jg')">成交单价：</div>
+              <div class="text-primary">{{price}} CNY</div>
+            </div>
+            <div class="row" flex="main:justify">
+              <div class="label" v-html="$t('cj_sl')">成交数量：</div>
+              <div class="value">{{digitalAmount}} USDT</div>
+            </div>
+            <div class="row" flex="main:justify">
+              <div class="label" v-html="$t('cj_ze')">成交总额：</div>
+              <div class="value">{{fiatAmount}} CNY</div>
+            </div>
+            <div class="row mt-15 mb-15">
+              <el-button style="width:100%;" @click="handleConfirm" type="primary"> 
+                <span v-if="side===1">{{$t('otc.buy_now')}}</span>
+                <span v-else-if="side===2">{{$t('otc_side_2')}}</span> 
+              </el-button>
+            </div>
+          </div> 
+        </div>
+      </v-modal>
     </div>
   </div>
 </template>
@@ -171,13 +201,13 @@ import api from '@/modules/api/hl-otc'
 import {state} from '@/modules/store'
 import utils from '@/modules/utils'
 import coinData from '../coinInfoData'
-import xnumberInput from '@/components/XNumberInput'
+import xnumberInput from '@/components/XNumberInput' 
  
 export default {
   components: {
     numberInput,
     xnumberInput
-  },
+  }, 
   data () {
     return {
       state,
@@ -202,6 +232,7 @@ export default {
       ordering: 0, //冻结
       maxPrice: 0,
       priceType: 1, //0按数量，1按金额
+      secondConfirmShow: false
     }
   },
   computed: {
@@ -218,12 +249,7 @@ export default {
       // }
     },
     digitalCurrencies() {
-      return state.otc.digitalCurrencies || []
-      // if (+this.side===1) {
-      //   return state.otc.digitalCurrencies
-      // } else {
-      //   return ['USDT']
-      // }
+      return state.otc.digitalCurrencies || [] 
     },
     digitalPrice() {
       if (this.rates && this.rates[this.customDigitalCurrency]) {
@@ -388,16 +414,10 @@ export default {
         coin_amount: this.digitalAmount || 0, //购买数量（priceType为0时必传，支持8位小数）
         money: this.fiatAmount || 0, //（priceType为1时必传，支持2位小数）
         pay_type: this.customPayType.name, //支付方式，EBANK":银行卡 "WEIXIN":微信支付 "ALIPAY":支付宝支付
-      }
+      }  
       const res = await api.sethlQuickByAmount(params)
       if (!res.code && !res.status) {
-        utils.success('otc_seiitm_16') 
-        // let query = {
-        //   digital: this.customDigitalCurrency.unit,
-        //   fiat: this.customFiatCurrency,
-        //   payment: this.customPayType.text,
-        //   amount: this.fiatAmount
-        // }
+        utils.success(this.$t('otc_seiitm_16'))  
         this.$router.push({name: 'hlquick-order'}) 
       } else {
         utils.alert(res.message)
@@ -416,13 +436,7 @@ export default {
       }
       const res = await api.sethlQuickSellMoney(params)
       if (!res.code && !res.status) {
-        utils.success('otc_seiitm_16')
-        // let query = {
-        //   digital: this.customDigitalCurrency.unit,
-        //   fiat: this.customFiatCurrency,
-        //   payment: this.customPayType.text,
-        //   amount: this.fiatAmount
-        // }
+        utils.success(this.$t('otc_seiitm_16')) 
         this.$router.push({name: 'hlquick-order'}) 
       } else {
         utils.alert(res.message)
@@ -430,9 +444,7 @@ export default {
     },
     async init() {
       await this.fetchRates() 
-      this.fetchBalance()
-      //第一次请求simpleQuote接口是为了拿到simple平台支持的 数字货币列表 和 法币列表
-      //所以这里币种可以写死，但是获取到的quote_id是没有意义的，需要下单前重新获取一次
+      this.fetchBalance() 
       let data = await this.fetchQuote() 
       if (data) {
         let side = this.side === 1 ? this.side : 0
@@ -442,7 +454,19 @@ export default {
         this.getCurrencyInfo(data[0].unit)
       } 
     }, 
-
+    handleApply() {
+      // priceType: 0按数量，1按金额
+      if (this.priceType===0) {
+        this.fiatAmount = this.$big(this.digitalAmount).times(this.price).round(2, 0)
+      } else if (this.priceType===1) {
+        if (this.$big(this.fiatAmount).gt(0)) {
+          this.digitalAmount = this.$big(this.fiatAmount).div(this.price).round(8, 0)
+        } else {
+          this.digitalAmount = 0
+        }
+      } 
+      this.secondConfirmShow = true
+    },
     async handleConfirm () {  
       if (this.side === 1) {
         this.fetchQuickByAmount() 
@@ -636,6 +660,33 @@ export default {
           border-color: #e9ebf2 !important;
         }
       } 
+  }
+  .confirm-box {
+    width: 450px;
+    .line {
+      height: 1px;
+      background-color: #EAEAEA;
+    }
+    .title {
+      padding: 22px 36px;
+      font-size: 18px;
+      color:#151515;
+      font-weight: 600;
+    }
+    .content { 
+      padding: 22px 36px;
+      .row {
+        font-size: 14px;
+        height: 2.5em;
+        line-height: 2.5em;
+        .label {
+          color: #999999;
+        }
+        .value {
+          color: #333333;
+        }
+      }
+    }
   }
 }
 

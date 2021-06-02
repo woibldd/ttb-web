@@ -3280,6 +3280,7 @@ export default {
     tag7: '您已知曉Simplex是由協力廠商獨立運營的法定貨幣與數位貨幣交易平臺，IXX不對因使用該服務遭受的任何損失或損害承擔任何責任。',
     gotopay: '前往Simplex支付',  
     buy_now: "立即購買",
+    value: '價值約'
   },
   el:{
     pagination:{

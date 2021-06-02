@@ -100,6 +100,7 @@
                 <div class="order-number">
                   {{ $t('otc_trans_id') }}：
                   <span>{{ item.other_order_id  }}</span>
+                  <!-- <span>{{ item.order_id  }}</span> -->
                 </div>
                 <div class="name">
                   {{ $t('otc_trans_idadawq') }}：
