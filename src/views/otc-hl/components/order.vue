@@ -356,7 +356,7 @@ export default {
             title: 'alipay_account', // 支付宝账号
             text: 'payment_alipay_account',
             width: '',
-            key: 'account_id'
+            key: 'alipay_id'
           },
           {
             title: 'name', // 姓名
@@ -573,7 +573,7 @@ export default {
         case 0:  
           if (this.datalist.length > 0) {
             // const rec = await api.gethlOrderDetail({other_order_id: this.datalist[0].other_order_id})  
-            this.datalist = this.datalist.filter(item => [1, 3, 4].includes(item.order_status)) 
+            this.datalist = this.datalist.filter(item => [1, 3, 4, 8].includes(item.order_status)) 
             this.datalist.map(item => {
               item.time = (item.update_at || item.create_time) + (item.timeout_minute || 15) * 1000 * 60 
             })
