@@ -9,62 +9,27 @@
     <div class="trade-message-box"> 
       <div class="link">{{ $t('my_orders') }}</div>
       <div class="message-con">
-        <dl>
+        <dl flex="main:justify">
           <dd class="user-info">
             <div class="user"> 
               <icon class="avt" name="rentou" /> 
               <div class="avt-text">
                 <div class="top">
                   {{ tableDataUname.name }}
-                  <span>{{ tableDataUname.kyc_level }}</span>
+                  <span>K<i>{{ tableDataUname.kyc_level }}</i></span>
                   {{ $t('otc_kyc_level') }}
                 </div>
                 <p>UID: {{ tableDataUname.id }}</p>
               </div>
             </div> 
-          </dd>
+          </dd> 
           <dd class="acount-info">
-            <div class="trade">
-              <div class="number">
-                <em>{{ $t('otc_side_3') }}:</em>
-                <span>{{ Number(tableDataUname.orders_total).toFixed(2) || '--' }}</span>
-              </div>
-              <div class="number">
-                <em>{{ $t('pay_time_avg') }}:</em>
-                <span>{{ processValue('pay_time_avg', tableDataUname) || '--' }}</span> 
-              </div>
+            <div class="trade mt-20">
+              <span>{{$t('otc_register_time')}}:</span>
+               <span v-if="tableDataUname.register_time">{{ tableDataUname.register_time | date }}</span>
             </div>
-          </dd>
-          <dd>
-            <div class="trade">
-              <div class="number">
-                <em>{{ $t('otc_total_arder') }}:</em>
-                <span>{{ tableDataUname.orders_complete || '0' }}</span>
-              </div>
-              <div class="number">
-                <em>{{ $t('issue_time_avg') }}:</em> 
-                <span>{{ processValue('issue_time_avg', tableDataUname) || '--' }}</span>
-              </div>
-            </div>
-          </dd>
-          <dd>
-            <div class="trade">
-              <div class="number">
-                <em>{{ $t('thirty_day_orders_rate') }}:</em>
-                <span>{{ tableDataUname.orders_rate ? (Number(tableDataUname.orders_rate) * 100).toFixed(2) + '%' : '0%' }}</span>
-              </div>
-            </div>
-          </dd>
-        </dl>
-        <div
-          class="tip"
-          style="padding-bottom: 20px;">
-          <div class="time">
-            {{ $t('otc_register_time') }}
-            <span v-if="tableDataUname.register_time">{{ tableDataUname.register_time | date }}</span>
-            <span v-else />
-          </div> 
-        </div>
+          </dd> 
+        </dl> 
       </div>
     </div>
     <div class="trade-table-box">

@@ -30,10 +30,8 @@ $high-color: #333;
     dl, .tip {
       display: flex;
       dd {
-        flex: 1;
-        padding: 20px 0 0 0;
-        color: #666666;
-        flex: 1;
+        padding: 20px;
+        color: #666666; 
         em {
           flex: 100px 0 0 0;
           display: inline-block;
@@ -42,16 +40,11 @@ $high-color: #333;
           margin-bottom: 12px;
         }
       }
-      .user-info,.time, .acount-info {
-        flex: 225px 0 0 0;
-        width: 225px;
+      .user-info,.time, .acount-info { 
         padding-left: 20px;
         color: #999999;
         font-weight: 400;
-      }
-      .acount-info {
-          flex-grow: 1.5
-      }
+      } 
       .text {
         flex: 1;
         padding-bottom: 20px;
@@ -77,6 +70,7 @@ $high-color: #333;
           line-height: 14px;
           padding: 0 5px;
           background: #f5a623;
+          font-style: italic;
           //margin-right: 10px;
           font-size: 12px;
           text-align: center;
