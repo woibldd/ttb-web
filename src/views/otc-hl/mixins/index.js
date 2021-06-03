@@ -49,7 +49,7 @@ export const tradeMixins = {
     orderHeader () {
       return [
         { 
-          prop: 'order_id',
+          prop: 'other_order_id',
           renderHeader: (h) => {
             return (
               <span>{this.$t('otc_trans_id')}</span>
@@ -156,7 +156,7 @@ export const tradeMixins = {
     tradeHeader () {
       return [
         { 
-          prop: 'order_id',
+          prop: 'other_order_id',
           renderHeader: (h) => {
             return (
               <span>{this.$t('otc_active_id')}</span>
