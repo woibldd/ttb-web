@@ -7,7 +7,7 @@
         <div class="title">
           <icon :name="`coin-${coinInfo.name}`" />
           <span>{{$t('otc.about')}}{{ coinInfo.name }}</span>
-        </div>
+        </div> 
         <div class="box">  
           <!-- <div>{{customDigitalCurrency}} </div>
           <div>{{customFiatCurrency}}</div> -->
@@ -147,7 +147,7 @@
                       <div>
                         <icon :name="item.icon"/> {{$t(item.text)}} 
                       </div>
-                      <div v-if="item.unenabled">
+                      <div v-if="!item.active">
                         <icon name="otc-add"/>
                       </div>
                     </el-dropdown-item> 
@@ -223,9 +223,9 @@ export default {
       coinInfo: {}, 
       priceHistory: [],  
       payTypeList: [ 
-        { name: 'EBANK', icon:'bank-card', text: 'but_bank', key: 2, unenabled:false, }, 
-        { name: 'ALIPAY', icon:'alipay', text: 'but_aliPay', key: 0, unenabled:false, },
-        { name: 'WEIXIN', icon:'wechat', text: 'but_wechat', key: 1, unenabled:false, },
+        { name: 'EBANK', icon:'bank-card', text: 'but_bank', key: 2, active:false, }, 
+        { name: 'ALIPAY', icon:'alipay', text: 'but_aliPay', key: 0, active:false, },
+        { name: 'WEIXIN', icon:'wechat', text: 'but_wechat', key: 1, active:false, },
       ],
       fiatAmount: '',
       digitalAmount: '',
@@ -286,7 +286,7 @@ export default {
     }, 
     handleCommandPayType(index) {
       this.customPayType = this.payTypeList.find(item => item.key===+index)
-      if (this.customPayType.unenabled) {
+      if (!this.customPayType.active) {
         this.$router.push({name:'hlquick-collection'})
       }
     },
@@ -341,7 +341,8 @@ export default {
     }, 
     handleFiatCurrencyChange(sender) {
       this.customFiatCurrency = sender  
-      this.handleCommandPayType(0) 
+      this.customPayType = this.payTypeList[0]
+      // this.handleCommandPayType(0) 
     },
     handleChangeSide(obj) {  
       this.side = obj
@@ -352,7 +353,8 @@ export default {
       }   
       this.handleCommandDigitalCurrency(0)  
       let side = this.side === 1 ? this.side : 0
-      this.fetchUnitPrice(this.customDigitalCurrency.unit, side)
+      this.fetchUnitPrice(this.customDigitalCurrency.unit, side) 
+      this.customPayType = this.payTypeList[0]
       // this.handleFiatCurrencyChange(this.fiatCurrencies[0])     
       // this.handleCommandPayType(0)
     }, 
@@ -450,11 +452,13 @@ export default {
     fetchUserPayInfo() {
       api.gethlUserPayInfo().then(res => {
         if (!res.code) {
-          this.userPayInfo = res.data 
-          this.payTypeList.map(item => {
-            let find = res.data.find(obj => obj.payMode===+item.key)
-            if (!find) {
-              item.unenabled = true
+          this.userPayInfo = res.data  
+          // this.payTypeList.map(item => {
+          res.data.map(item => {
+            let find = this.payTypeList.find(obj => +obj.key===item.payMode)
+            if (find) { 
+              find.active = true
+              // this.$set(find, 'active', true)
             }
           }) 
         }
@@ -473,16 +477,16 @@ export default {
         this.getCurrencyInfo(data[0].unit)
       } 
     }, 
-    handleApply() {
-      if (this.customPayType.unenabled) {
+    handleApply() { 
+      if (!this.customPayType.active) {
         this.$router.push({name:'hlquick-collection'})
       }
       // priceType: 0按数量，1按金额
       if (this.priceType===0) {
-        this.fiatAmount = this.$big(this.digitalAmount).times(this.price).round(2, 0)
+        this.fiatAmount = this.$big(this.digitalAmount || 0).times(this.price).round(2, 0)
       } else if (this.priceType===1) {
-        if (this.$big(this.fiatAmount).gt(0)) {
-          this.digitalAmount = this.$big(this.fiatAmount).div(this.price).round(8, 0)
+        if (this.$big(this.fiatAmount || 0).gt(0)) {
+          this.digitalAmount = this.$big(this.fiatAmount || 0).div(this.price).round(8, 0)
         } else {
           this.digitalAmount = 0
         }

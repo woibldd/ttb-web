@@ -551,37 +551,27 @@ export default {
     }),
     async init(state) {
       const that = this
-      const myOrder = await api.gethlOrderMyOrder({coin_symbol: 'USDT', currency_symbol:'CNY', page: 1, size: 10}) 
+      const stateStr = ['1,3,4,8', '5,7', '0,2,6,9'][state]
+      const params = {
+        coin_symbol: 'USDT', 
+        currency_symbol:'CNY',
+        orderStatus: stateStr,
+        page: this.params1.page, 
+        size: this.params1.size
+      }
+      const myOrder = await api.gethlOrderMyOrder(params) 
        
       if (myOrder) { 
         if (myOrder.status===200) {
-          //status 0已取消,1未付款,2超时取消,3已付款,4申诉中,5已完成,6强制取消,7强制完成
+          //status 0已取消,1未付款,2超时取消,3已付款,4申诉中,5已完成,6强制取消,7强制完成,8前置审核,9成交失败
           this.datalist = myOrder.data.data
           this.total = myOrder.data.total
         }
       } 
-      switch (state) { 
-        //未完成订单
-        case 0:  
-          if (this.datalist.length > 0) {
-            // const rec = await api.gethlOrderDetail({other_order_id: this.datalist[0].other_order_id})  
-            this.datalist = this.datalist.filter(item => [1, 3, 4, 8].includes(item.order_status)) 
-            this.datalist.map(item => {
-              item.time = (item.update_at || item.create_time) + (item.timeout_minute || 15) * 1000 * 60 
-            })
-            break
-          }
-        //已完成订单
-        case 1:
-           this.datalist = this.datalist.filter(item => [5, 7].includes(item.order_status)) 
-            break
-        //已取消订单
-        case 2:
-           this.datalist = this.datalist.filter(item => [0, 2, 6].includes(item.order_status))  
-            break
-        default: 
-           return
-      } 
+      this.datalist.map(item => {
+        item.time = (item.update_at || item.create_time) + (item.timeout_minute || 15) * 1000 * 60 
+      })
+      
     },
     setOrderInfo(rec) {
       if (!rec.code) {
@@ -721,15 +711,13 @@ export default {
         })
         .catch(() => { })
     },
-    handleCurrentChange(e) {
-      // console.log(this.active)
+    handleCurrentChange(e) { 
       if (this.active === 1 || this.active === 2) {
         this.params1.page = e
-        // console.log(this.params1.page, '1')
+        console.log(this.params1.page, '1')
         this.init(this.active)
       } else {
-        this.params.page = e
-        // console.log(this.params.page, '2')
+        this.params.page = e 
         this.init(this.active)
       }
     },
@@ -801,7 +789,11 @@ export default {
       }) 
       this.socket.$on('message', (data) => { 
         console.log(data)
-        that.handleSocketData(data) 
+        if (data.topic && data.topic.indexOf('heart') > -1) {
+          that.handleHeart()
+        } else {
+          that.handleSocketData(data) 
+        }
       })
       this.socket.$on('reopen', () => {
         that.socket.$destroy()
@@ -810,7 +802,12 @@ export default {
     },
     handleSocketData(data) { 
       this.init(this.active)
-    }
+    }, 
+    handleHeart(data) {  
+      if (this.socket) {
+        this.socket.heartCheck.start()
+      }
+    }, 
   }
 
 }

@@ -3535,7 +3535,7 @@ export default {
         REFUND:'退款取消',
         7:'强制成交',
         8: '前置审核',
-        DEALFAILED: '成交失败',
+        9: '成交失败',
         6: '强制取消'
       },
       mapTabs: {

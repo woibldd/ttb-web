@@ -70,7 +70,7 @@ export default {
       }
     } 
     hub.heartCheck = {
-      timeout: 60000, // 60秒一次
+      timeout: 10000, // 10秒一次
       timeoutObj: null,
       serverTimeoutObj: null,
       start: function () { 

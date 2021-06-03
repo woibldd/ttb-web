@@ -3879,7 +3879,7 @@ export default {
         REFUND:'REFUND',
         7:'FORCEFINISHED',
         8: 'PREAUDIT',
-        DEALFAILED: 'DEALFAILED',
+        9: 'DEALFAILED',
         6: 'FORCECANCEL'
       },
       mapTabs: {

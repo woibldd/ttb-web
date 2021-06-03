@@ -290,6 +290,9 @@ export default {
         deposit_bank: [
           {required: true, message: this.$t('otc_kvcoc_10'), trigger: 'blur'}
         ],
+        sub_branch: [
+          {required: true, message: this.$t('otc_kvcoc_10'), trigger: 'blur'}
+        ],
         card_number: [
           {required: true, message: this.$t('otc_kvcec_11'), trigger: 'blur'}
         ],
