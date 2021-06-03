@@ -142,7 +142,7 @@
                     <el-dropdown-item 
                         v-for="(item, index) in payTypeList" 
                         :command="item.key"
-                        :key="index"
+                        :key="index" 
                         flex="main:justify">
                       <div>
                         <icon :name="item.icon"/> {{$t(item.text)}} 
@@ -354,7 +354,7 @@ export default {
       let side = this.side === 1 ? this.side : 0
       this.fetchUnitPrice(this.customDigitalCurrency.unit, side)
       // this.handleFiatCurrencyChange(this.fiatCurrencies[0])     
-      this.handleCommandPayType(0)
+      // this.handleCommandPayType(0)
     }, 
     async fetchQuote() {  
        const res = await api.gethlCoinList()
@@ -385,7 +385,7 @@ export default {
     async fetchIsQualified() {
       const res = await api.gethlIsQualified()
       if (!res.code) {
-        console.log(res)
+        // console.log(res)
       } else {
         utils.alert(res.message)
         return null
@@ -450,16 +450,13 @@ export default {
     fetchUserPayInfo() {
       api.gethlUserPayInfo().then(res => {
         if (!res.code) {
-          this.userPayInfo = res.data
-          
+          this.userPayInfo = res.data 
           this.payTypeList.map(item => {
             let find = res.data.find(obj => obj.payMode===+item.key)
             if (!find) {
               item.unenabled = true
             }
-          })
-         
-          console.log(this.payTypeList)
+          }) 
         }
       })
     },
@@ -477,6 +474,9 @@ export default {
       } 
     }, 
     handleApply() {
+      if (this.customPayType.unenabled) {
+        this.$router.push({name:'hlquick-collection'})
+      }
       // priceType: 0按数量，1按金额
       if (this.priceType===0) {
         this.fiatAmount = this.$big(this.digitalAmount).times(this.price).round(2, 0)
@@ -495,7 +495,7 @@ export default {
       } else {
         this.fetchQuickSellMoney()
       }
-    },
+    }, 
   }, 
   async created () {  
     this.fetchIsQualified()
