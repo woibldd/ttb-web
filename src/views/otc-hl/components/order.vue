@@ -203,7 +203,7 @@
                       </div>
                       <div><!-- 确认放币 -->
                         <el-button size='mini' type="danger" class="mt-5" 
-                          v-if="item.side === 1 && (item.order_status===3|| item.order_status===4)"
+                          v-if="item.type === 1 && (item.order_status===3|| item.order_status===4)"
                           @click="handleClickPayCoin(item, 'payCoin')">
                           {{$t('otc_confirm_issued')}}
                         </el-button> 
