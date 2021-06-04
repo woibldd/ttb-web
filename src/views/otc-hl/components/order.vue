@@ -75,13 +75,12 @@
               <div
                 class="state" > 
                 <div>
-                  <div v-if="!item.appeal_type"> 
+                  <div> 
                     <span>{{ $t(`my_otc.orders.mapStatus.${item.order_status}`) || "" }}</span>
-                    <label v-if="item.order_status === 'PAYED'"
-                      @click="handleDispute(item)"
-                    >{{ $t('otc_seiitm_8') }}</label>
-                  </div>
-                  <div v-else>{{ $t('otc_seiitm_9') }}</div> 
+                    <label  v-if="+item.order_status===3" @click="handleClickAppeal(item)" >
+                      {{ $t('otc_seiitm_8') }}
+                    </label>
+                  </div> 
                 </div>
               </div>
             </div>  
@@ -643,39 +642,7 @@ export default {
           }
         })
       }
-    },
-    sq(item) {
-      this.$confirm(this.$t('otc_otutcol_19'), this.$t('tips'), {
-        confirmButtonText: this.$t('otc_ziurec_20'),
-        cancelButtonText: this.$t('cancel'),
-        type: 'warning'
-      })
-        .then(() => {
-          const params = {
-            trans_id: item.trans_id,
-            user_id: this.id
-          }
-          service.otcAppeal(params).then(res => { 
-            if (!res.code) {
-              // this.$message.success('申诉成功，请等待客服处理')
-              this.$message({
-                type: 'success',
-                message: this.$t('otc_otutcol_20'),
-                duration: 1000
-              })
-              this.init(this.active)
-            } else {
-              // this.$message.warning(`${res.message}`)
-              this.$message({
-                type: 'warning',
-                message: `${res.message}`,
-                duration: 1000
-              })
-            }
-          })
-        })
-        .catch(() => { })
-    },
+    }, 
     handleCurrentChange(e) { 
       if (this.active === 1 || this.active === 2) {
         this.params1.page = e
@@ -695,7 +662,7 @@ export default {
       if (isok) {
         const res = await api.sethlOrderCancel({other_order_id: obj.other_order_id})
         if (!res.code && !res.status) {
-          utils.success('订单取消成功')
+          utils.success(this.$t('otc_seiitm_17'))
           // this.init(this.active) 
         } else {
           utils.alert(res.message)
@@ -712,7 +679,7 @@ export default {
       if (isok) {
         const res = await api.sethlOrderPayMoney({other_order_id: obj.other_order_id})
         if (!res.code && !res.status) {
-          utils.success('确认付款成功')
+          utils.success(this.$t('otc_seiitm_16'))
           // this.init(this.active) 
         } else {
           utils.alert(res.message)
@@ -730,13 +697,29 @@ export default {
       if (isok) {
         const res = await api.sethlOrderRelease({other_order_id: obj.other_order_id})
         if (!res.code && !res.status) {
-          utils.success('放币成功')
+          utils.success(this.$t('otc_seiitm_16'))
           // this.init(this.active) 
         } else {
           utils.alert(res.message)
         }
       }  
 
+    },
+    //申诉
+    async handleClickAppeal(obj) {
+      const isok = await utils.confirm(this, {
+        title: this.$t('confirm'),
+        content: this.$t('otc_otutcol_19')
+      })
+
+      if (isok) {
+        const res = await api.sethlOrderAppeal({other_order_id: obj.other_order_id})
+        if (!res.code && !res.status) {
+          utils.success('otc_otutcol_20') 
+        } else {
+          utils.alert(res.message)
+        }
+      }
     },
     subMarket() {    
       const that = this
