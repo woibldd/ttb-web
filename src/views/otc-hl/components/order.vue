@@ -696,7 +696,7 @@ export default {
         const res = await api.sethlOrderCancel({other_order_id: obj.other_order_id})
         if (!res.code && !res.status) {
           utils.success('订单取消成功')
-          this.init(this.active) 
+          // this.init(this.active) 
         } else {
           utils.alert(res.message)
         }
@@ -713,7 +713,7 @@ export default {
         const res = await api.sethlOrderPayMoney({other_order_id: obj.other_order_id})
         if (!res.code && !res.status) {
           utils.success('确认付款成功')
-          this.init(this.active) 
+          // this.init(this.active) 
         } else {
           utils.alert(res.message)
         }
@@ -731,7 +731,7 @@ export default {
         const res = await api.sethlOrderRelease({other_order_id: obj.other_order_id})
         if (!res.code && !res.status) {
           utils.success('放币成功')
-          this.init(this.active) 
+          // this.init(this.active) 
         } else {
           utils.alert(res.message)
         }
@@ -754,9 +754,9 @@ export default {
       }) 
       this.socket.$on('message', (data) => { 
         console.log(data)
-        if (data.topic && data.topic.indexOf('heart') > -1) {
+        if (data.topic && data.topic==='heart') {
           that.handleHeart()
-        } else {
+        } else  if (data.topic && data.topic==='otcUpdate'){
           that.handleSocketData(data) 
         }
       })
