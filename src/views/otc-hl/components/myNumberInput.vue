@@ -6,6 +6,7 @@
         ref="input"  
         @input="updateValue($event.target.value, 'input')"
         :placeholder="$big(0).toFixed(scale || 2)" 
+        @blur="blur()"
         type="text">
     </div>
     <div flex-box="0" class="flex-lr drop-down">
@@ -50,26 +51,39 @@ export default {
     }
   },
   watch: { 
-    value (newValue, oldValue) {
+    value (newValue, oldValue) { 
       if (newValue !== oldValue)
         this.onValueChange(newValue)
     }
   },
   methods: {
+    blur() {
+      this.$emit('blur')
+    },
     handleSelectChange(org) {
       this.selectValue=org
       this.$emit('selectChange', org)
       this.show = false
     },
     updateValue (value, src) { 
-      this.$refs.input.value = value
-      this.$emit('input', value) 
+      const newVal = value === '' ? undefined : Number(value);
+      if (!isNaN(newVal) || value === '') { 
+        this.$refs.input.value = value
+        this.$emit('input',  value) 
+      } else {
+        this.$refs.input.value = this.value
+        this.$emit('input',  this.value) 
+      }
     },
     onValueChange (newValue) {
-      this.log('Value Change: ', newValue)
+      this.log('Value Change: ', newValue) 
       if (!newValue) {
         return this.updateValue('')
-      } else {
+      } else { 
+        let calcValue = +this.$big(newValue).round(this.scale, 0)
+        if (calcValue != newValue) {
+          newValue = calcValue
+        } 
         this.updateValue(newValue, 'valueChange')
       } 
     },
@@ -80,8 +94,7 @@ export default {
     })
   },
   created() {
-    if (!this.selectValue && this.list.length > 0) {
-      // this.selectValue = this.list[0]
+    if (!this.selectValue && this.list.length > 0) { 
       this.handleSelectChange(this.list[0])
     }
   }

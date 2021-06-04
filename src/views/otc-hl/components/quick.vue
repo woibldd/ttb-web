@@ -98,14 +98,14 @@
                   :list="fiatCurrencies"
                   @selectChange="handleFiatCurrencyChange"
                   :selectValue="customFiatCurrency"
-                  v-model="fiatAmount"
-                  :scale="8"/> 
+                  v-model="fiatAmount" 
+                  :scale="2"/> 
               </div>
               <div v-else>  
                 <xnumber-input 
                   skin="light"
                   v-model="digitalAmount" 
-                  :scale="8">
+                  :precision="2">
                   <i slot="suffix" class="mr-10">{{(customDigitalCurrency || {}).unit}}</i>
                 </xnumber-input> 
               </div>
