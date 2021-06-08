@@ -195,6 +195,53 @@
           </div> 
         </div>
       </v-modal>
+      
+    <v-modal :open.sync="showLayerModal">
+      <div class="not-verified-layer">
+        <div class="layer__title mb-30">{{ $t('otc_need_verify') }}</div>
+        <div class="layer__content">
+          <div class="layer__row">
+            <span class="row__label">1. {{ $t('bind_phone') }}</span>
+            <span
+              v-if="!phone_bound"
+              class="row__status "
+              @click="clickVerifyRow('PhoneBind')"
+            >{{ $t('to_bind') }}</span>
+            <span
+              v-if="phone_bound"
+              class="row__status done"
+            >{{ $t('done_verified') }}</span>
+          </div>
+        </div>
+        <div class="layer__row mt-20">
+          <span class="row__label">2. {{ $t('otc_bind_bankCard') }}</span>
+          <span
+            v-if="!card_bound"
+            class="row__status "
+            @click="clickVerifyRow('hlquick-collection')"
+          >{{ $t('to_bind') }}</span>
+          <span
+            v-if="card_bound"
+            class="row__status done"
+          >{{ $t('done_verified') }}</span>
+        </div>
+        <div class="layer__row mt-20">
+          <span class="row__label">
+            3.
+            <span v-html="$t('otc_kyc_verified')"/>
+          </span>
+          <span
+            v-if="!kyc_bound"
+            class="row__status "
+            @click="clickVerifyRow('Kyc')"
+          >{{ $t('to_verify') }}</span>
+          <span
+            v-if="kyc_bound"
+            class="row__status done"
+          >{{ $t('done_verified') }}</span>
+        </div>
+      </div>
+    </v-modal>
     </div>
   </div>
 </template>
@@ -240,9 +287,21 @@ export default {
       priceType: 1, //0按数量，1按金额
       secondConfirmShow: false,
       userPayInfo: [],
+      verifiedInfo: null,
+      showLayerModal: false,
     }
   },
-  computed: {
+  computed: { 
+    card_bound() { 
+      return this.verifiedInfo && this.verifiedInfo.is_card
+    },
+    phone_bound() {
+      return this.verifiedInfo && this.verifiedInfo.is_phone
+    },
+    kyc_bound() {
+      // kyc > 0 就可以提币
+      return this.verifiedInfo && this.verifiedInfo.kyc_level === 2
+    },
     fiatCurrencies() {
       return ['CNY']
       // if (+this.side===1) {
@@ -387,7 +446,9 @@ export default {
     async fetchIsQualified() {
       const res = await api.gethlIsQualified()
       if (!res.code) {
-        // console.log(res)
+        this.verifiedInfo = res.data 
+        this.showLayerModal =
+            !this.card_bound || !this.phone_bound || !this.kyc_bound
       } else {
         utils.alert(res.message)
         return null
@@ -500,6 +561,11 @@ export default {
         this.fetchQuickSellMoney()
       }
     }, 
+    clickVerifyRow(v) {
+      this.$router.push({
+        name: v
+      })
+    }
   }, 
   async created () {  
     this.fetchIsQualified()
@@ -727,4 +793,47 @@ export default {
     }
   }
 }
+
+  .not-verified-layer {
+    position: relative;
+    width: 410px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 8px;
+    padding-bottom: 50px;
+    padding-top: 34px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .layer__title {
+      font-size: 20px;
+      font-weight: bold;
+      color: $text-strong;
+    }
+
+    .layer__row_note {
+      color: $text-weak;
+      font-size: 16px;
+    }
+    .layer__row {
+      width: 330px;
+      display: flex;
+      justify-content: space-between;
+
+      .row__label {
+        display: inline-block;
+        padding-left: 20px;
+        color: $text-light;
+      }
+      .row__status {
+        color: $primary;
+        cursor: pointer;
+
+        &.done {
+          color: #09c989;
+          cursor: default;
+        }
+      }
+    }
+  }
 </style>
