@@ -547,7 +547,7 @@ export default {
         this.fiatAmount = this.$big(this.digitalAmount || 0).times(this.price).round(2, 0)
       } else if (this.priceType===1) {
         if (this.$big(this.fiatAmount || 0).gt(0)) {
-          this.digitalAmount = this.$big(this.fiatAmount || 0).div(this.price).round(8, 0)
+          this.digitalAmount = this.$big(this.fiatAmount || 0).div(this.price).round(2, 0)
         } else {
           this.digitalAmount = 0
         }
