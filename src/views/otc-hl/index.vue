@@ -20,9 +20,9 @@
                 <li class="nav-link-right"> 
                   <router-link to="/hlotc/order">{{$t('my_orders')}}</router-link>
                 </li>
-                <li class="nav-link-right"> 
+                <!-- <li class="nav-link-right"> 
                   <router-link to="/hlotc/bill">{{$t('otc_side_35')}}</router-link>
-                </li>
+                </li> -->
                 <li class="nav-link-right"> 
                   <router-link to="/hlotc/collection">{{$t('otc_collection_payment_setting')}}</router-link>
                 </li>
@@ -64,7 +64,7 @@ export default {
   background-color:#F9F9F9;
   .otc-simple-nav {
     background-color: #FFFFFF;
-    font-size: 14px;
+    font-size: 16px;
     color: #272727;
     .otc-simple-box {
       width: 1200px;

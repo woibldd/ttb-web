@@ -411,7 +411,7 @@ export default {
         this.inSelectText = 'otc.collectionType'
       }   
       this.handleCommandDigitalCurrency(0)  
-      let side = this.side === 1 ? this.side : 0
+      let side = this.side === 1 ? 0 : 1
       this.fetchUnitPrice(this.customDigitalCurrency.unit, side) 
       this.customPayType = this.payTypeList[0]
       // this.handleFiatCurrencyChange(this.fiatCurrencies[0])     
@@ -512,7 +512,7 @@ export default {
     },
     fetchUserPayInfo() {
       api.gethlUserPayInfo().then(res => {
-        if (!res.code) {
+        if (!res.code && !res.status) {
           this.userPayInfo = res.data  
           // this.payTypeList.map(item => {
           res.data.map(item => {

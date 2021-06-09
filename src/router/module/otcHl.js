@@ -9,7 +9,7 @@ export const otcHlRouter = [
       nav: true,
       footer: false,
       class: 'dark',
-      require: true
+      auth: true
     },
     redirect: {name: 'hlquick'},
     children: [
@@ -18,7 +18,7 @@ export const otcHlRouter = [
         name: 'hlquick',
         component: () => import('@/views/otc-hl/components/quick'),
         meta: {
-          require: true
+          auth: true
         }
       },
       {

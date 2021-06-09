@@ -128,7 +128,7 @@ async function beforeEach(to, from, next) {
   // utils.log('to:', to.name, 'from:', from.name)
   if (auth) {
     await actions.updateSession()
-    if (!state.userStatus) {
+    if (!state.userStatus) { 
       actions.setLoginBack(to)
       return next({
         name: 'login'

@@ -77,7 +77,7 @@
                 <div>
                   <div> 
                     <span>{{ $t(`my_otc.orders.mapStatus.${item.order_status}`) || "" }}</span>
-                    <label  v-if="+item.order_status===3" @click="handleClickAppeal(item)" >
+                    <label  v-if="+item.order_status===3" @click="handleClickAppeal(item)"  style="text-decoration: underline;">
                       {{ $t('otc_seiitm_8') }}
                     </label>
                   </div> 
@@ -526,7 +526,7 @@ export default {
       const myOrder = await api.gethlOrderMyOrder(params) 
        
       if (myOrder) { 
-        if (myOrder.status===200) {
+        if (!myOrder.status && !myOrder.code) {
           //status 0已取消,1未付款,2超时取消,3已付款,4申诉中,5已完成,6强制取消,7强制完成,8前置审核,9成交失败
           this.datalist = myOrder.data.data
           this.total = myOrder.data.total
