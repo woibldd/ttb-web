@@ -194,54 +194,53 @@
             </div>
           </div> 
         </div>
-      </v-modal>
-      
-    <v-modal :open.sync="showLayerModal">
-      <div class="not-verified-layer">
-        <div class="layer__title mb-30">{{ $t('otc_need_verify') }}</div>
-        <div class="layer__content">
-          <div class="layer__row">
-            <span class="row__label">1. {{ $t('bind_phone') }}</span>
+      </v-modal> 
+      <v-modal :open.sync="showLayerModal">
+        <div class="not-verified-layer">
+          <div class="layer__title mb-30">{{ $t('otc_need_verify') }}</div>
+          <div class="layer__content">
+            <div class="layer__row">
+              <span class="row__label">1. {{ $t('bind_phone') }}</span>
+              <span
+                v-if="!phone_bound"
+                class="row__status "
+                @click="clickVerifyRow('PhoneBind')"
+              >{{ $t('to_bind') }}</span>
+              <span
+                v-if="phone_bound"
+                class="row__status done"
+              >{{ $t('done_verified') }}</span>
+            </div>
+          </div>
+          <div class="layer__row mt-20">
+            <span class="row__label">2. {{ $t('otc_bind_bankCard') }}</span>
             <span
-              v-if="!phone_bound"
+              v-if="!card_bound"
               class="row__status "
-              @click="clickVerifyRow('PhoneBind')"
+              @click="clickVerifyRow('hlquick-collection')"
             >{{ $t('to_bind') }}</span>
             <span
-              v-if="phone_bound"
+              v-if="card_bound"
+              class="row__status done"
+            >{{ $t('done_verified') }}</span>
+          </div>
+          <div class="layer__row mt-20">
+            <span class="row__label">
+              3.
+              <span v-html="$t('otc_kyc_verified')"/>
+            </span>
+            <span
+              v-if="!kyc_bound"
+              class="row__status "
+              @click="clickVerifyRow('Kyc')"
+            >{{ $t('to_verify') }}</span>
+            <span
+              v-if="kyc_bound"
               class="row__status done"
             >{{ $t('done_verified') }}</span>
           </div>
         </div>
-        <div class="layer__row mt-20">
-          <span class="row__label">2. {{ $t('otc_bind_bankCard') }}</span>
-          <span
-            v-if="!card_bound"
-            class="row__status "
-            @click="clickVerifyRow('hlquick-collection')"
-          >{{ $t('to_bind') }}</span>
-          <span
-            v-if="card_bound"
-            class="row__status done"
-          >{{ $t('done_verified') }}</span>
-        </div>
-        <div class="layer__row mt-20">
-          <span class="row__label">
-            3.
-            <span v-html="$t('otc_kyc_verified')"/>
-          </span>
-          <span
-            v-if="!kyc_bound"
-            class="row__status "
-            @click="clickVerifyRow('Kyc')"
-          >{{ $t('to_verify') }}</span>
-          <span
-            v-if="kyc_bound"
-            class="row__status done"
-          >{{ $t('done_verified') }}</span>
-        </div>
-      </div>
-    </v-modal>
+      </v-modal>
     </div>
   </div>
 </template>
