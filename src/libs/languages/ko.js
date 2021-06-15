@@ -3216,7 +3216,40 @@ export default {
       volume_24h: '24小时交易量',
       value: '合约价值',
       valueRate: '资金费率'
-    }
+    },
+    stoppl: {
+        set_profit:'영리를 설정',
+        set_loss:'손실설정',
+        already_held_orders:'위탁거래를 이미 함',
+        flat_amount:'평창수량',
+        close_amount:'평창수량이 장수보다 크다',
+        input_pro_price:'이득을 중지하여 촉발한 가격을  입력하세요',
+        input_pro_price_commission:'이득을 중지하여 촉발한 가격을  입력하세요',
+        input_loss_price:'손실을 중지하여 촉발한가격을  입력하세요',
+        input_loss_price_commission:'손실을 중지하여 촉발한 가격을  입력하세요',
+        take_profit:'이득',
+        stop_loss:'손실',
+        price_1:'손실가격이 최신거래가격보다 작아야한다',
+        price_2:'이득가격이 최신거래가격보다 작아야한다',
+        price_3:'이득가격이 최신거래가격보다 커야한다',
+        price_4:'손실가격이 최신거래가격보다 커야한다',
+        input_can_amount:'평창수량을 입력하세요',
+        input_can_amount_error:'평창수량의 수치가 틀렸음',
+        buy_long:'매입하다',
+        sell_short:'수출하다',
+        set_pro_loss:'창고이득손실설정',
+        average_open_price:'개창평균가격',
+        limit_price:'가격한정',
+        take_profit_trigger_price:'이득이 가격을 촉발',
+        stop_loss_trigger_price:'손실이 가격을 촉발',
+        take_profit_commission_price:'이득위탁가격',
+        stop_loss_order_rice:'손실위탁가격',
+        can_be_leveled:'평창량', 
+        newPrice: "최신가격",
+        set_profit_loss:'트레이드 모드 설정',
+        close_quality: '보유 물량을 균등하게 나누다.',
+        set_profit_loss_not_empty: '과음 설정과 과음 설정이 동시에 빈상태여서는 안 됩니다!',
+    } 
   },
   orderPopover: {
     mapTableColumns: {
@@ -3667,8 +3700,8 @@ export default {
     closeOut: '平仓'
   },
   tv: { 
-    tv_technical_indicators: '技术指标',
-    tv_style: '样式',
+    tv_technical_indicators: 'Technical Indicators',
+    tv_style: 'Style',
     chart_types: {
       0: { name:'Bars', icon: 'tv-bar'},
       1: { name:'Candles', icon: 'tv-candle'},
