@@ -13,8 +13,8 @@
 
 <script>
 import utils from '@/modules/utils'
-import configIniter from '@/libs/tradingview/contract-config'
-import datafeeder from '@/libs/tradingview/mix-datafeeder'
+import configIniter from '../libs/contract-config'
+import datafeeder from '../libs/mix-datafeeder'
 import { local, state } from '@/modules/store'
 // preload
 const tvlib = utils.getExtModule('TradingView')

@@ -1319,8 +1319,7 @@ export default {
     const product = this.products.find(item => item.symbol === this.$route.query.pair) || this.products[0] 
     if (!this.$route.query.pair) { 
       const pair = this.products.find(item => item.symbol === local.mix) ? local.mix : this.products[0].symbol 
-      this.$router.replace({
-        name: 'mixx',
+      this.$router.replace({ 
         query: {
           pair
         }
@@ -1766,8 +1765,7 @@ export default {
         this.checkActive()
       }   
       if (!this.$route.query.pair !== product.symbol) {  
-        this.$router.replace({
-          name: 'mixx',
+        this.$router.replace({ 
           query: {
             pair: product.symbol
           }
