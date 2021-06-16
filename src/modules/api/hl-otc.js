@@ -112,7 +112,7 @@ export default {
    * @param {*} remark 备注
    */
   sethlOrderAppeal(params) {
-    return request('/otc/hilamg//order/appeal', params) 
+    return request('/otc/hilamg/order/appeal', params) 
   },
   /** 通过成交
    * @param {*} other_order_id 订单号

@@ -95,7 +95,7 @@
     watch: {
       value: {
         immediate: true,
-        handler(value) {
+        handler(value) { 
           let newVal = value === undefined ? value : Number(value);
           if (newVal !== undefined) {
             if (isNaN(newVal)) {
@@ -116,6 +116,7 @@
           if (newVal <= this.min) newVal = this.min;
           this.currentValue = newVal;
           this.userInput = null;
+           
           this.$emit('input', newVal);
         }
       }
@@ -176,7 +177,7 @@
     methods: {
       toPrecision(num, precision) {
         if (precision === undefined) precision = this.numPrecision;
-        return parseFloat(Math.round(num * Math.pow(10, precision)) / Math.pow(10, precision));
+        return parseFloat(Math.floor(num * Math.pow(10, precision)) / Math.pow(10, precision));
       },
       getPrecision(value) {
         if (value === undefined) return 0;
@@ -220,7 +221,7 @@
       handleFocus(event) {
         this.$emit('focus', event);
       },
-      setCurrentValue(newVal) {
+      setCurrentValue(newVal) { 
         const oldVal = this.currentValue;
         if (typeof newVal === 'number' && this.precision !== undefined) {
           newVal = this.toPrecision(newVal, this.precision);
@@ -231,7 +232,7 @@
         this.userInput = null;
         this.$emit('input', newVal);
         this.$emit('change', newVal, oldVal);
-        this.currentValue = newVal;
+        this.currentValue = newVal; 
       },
       handleInput(value) {
         this.userInput = value;

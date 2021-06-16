@@ -715,7 +715,7 @@ export default {
       if (isok) {
         const res = await api.sethlOrderAppeal({other_order_id: obj.other_order_id})
         if (!res.code && !res.status) {
-          utils.success('otc_otutcol_20') 
+          utils.success(this.$t('otc_otutcol_20'))
         } else {
           utils.alert(res.message)
         }
