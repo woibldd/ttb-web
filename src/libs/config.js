@@ -9,15 +9,15 @@ let wss = ''
 if (process.env.NODE_ENV != 'development') {
   const val = location.host.split('.')
   const host = val.slice(val.length - 2, val.length).join('.')
-  // if (host === 'ixex.pro') {
-  //   ws = `wss://ws.${host}/v1/`
-  //   quote = `https://q.${host}/v1/`
-  //   wss = `wss://wss.${host}/v1` 
-  // } else {
+  if (host === 'ixex.pro') {
+    ws = `wss://ws.${host}/v1/`
+    quote = `https://q.${host}/v1/`
+    wss = `wss://wss.${host}/v1` 
+  } else {
     ws = 'wss://ws.ixex.io/v1/'
     quote = 'https://q.ixex.io/v1/'
     wss = 'wss://wss.ixex.io/v1'  
-  // }
+  }
 }
 if (process.env.NODE_ENV === 'development') {
   wsUrl = 'wss://ws.ixex.io/v1/'
