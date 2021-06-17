@@ -183,33 +183,33 @@ export const otherRouter = [
       nav: false
     },
     component: () => import(/* webpackChunkName: "Trading" */ '@/pages/Trading')
-  }, {
-    path: '/tradingx/:pair?',
-    name: 'tradingx',
-    meta: {
-      auth: false,
-      footer: true,
-      nav: false
-    },
-    component: () => import(/* webpackChunkName: "Trading" */ '@/views/Trading')
-  }, {
-    path: '/mixx',
-    name: 'mixx',
-    meta: {
-      auth: false,
-      footer: true,
-      nav: false
-    },
-    component: () => import(/* webpackChunkName: "Trading" */ '@/views/contract-mix1')
-  }, {
-    path: '/blendx',
-    name: 'blendx',
-    meta: {
-      auth: false,
-      footer: true,
-      nav: false
-    },
-    component: () => import(/* webpackChunkName: "Trading" */ '@/views/contract-blend')
+  // }, {
+  //   path: '/tradingx/:pair?',
+  //   name: 'tradingx',
+  //   meta: {
+  //     auth: false,
+  //     footer: true,
+  //     nav: false
+  //   },
+  //   component: () => import(/* webpackChunkName: "Trading" */ '@/views/Trading')
+  // }, {
+  //   path: '/mixx',
+  //   name: 'mixx',
+  //   meta: {
+  //     auth: false,
+  //     footer: true,
+  //     nav: false
+  //   },
+  //   component: () => import(/* webpackChunkName: "Trading" */ '@/views/contract-mix1')
+  // }, {
+  //   path: '/blendx',
+  //   name: 'blendx',
+  //   meta: {
+  //     auth: false,
+  //     footer: true,
+  //     nav: false
+  //   },
+  //   component: () => import(/* webpackChunkName: "Trading" */ '@/views/contract-blend')
   }, {
     path: '/RushBuy',
     name: 'RushBuy',
