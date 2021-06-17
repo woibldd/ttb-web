@@ -3,6 +3,8 @@ export default {
   promotion: 'Promotion',
   quickBuy: 'Quick Buy',
   buyCrypto: 'Buy Crypto',
+  buy_qty:"구입 수량",
+  sell_qty: "판매 수량",
   future_account: "계약 계정",
   'currency-mix': "금본위 계약",
   'currency-unit': "코인 베이스 계약",
@@ -3214,7 +3216,40 @@ export default {
       volume_24h: '24小时交易量',
       value: '合约价值',
       valueRate: '资金费率'
-    }
+    },
+    stoppl: {
+        set_profit:'영리를 설정',
+        set_loss:'손실설정',
+        already_held_orders:'위탁거래를 이미 함',
+        flat_amount:'평창수량',
+        close_amount:'평창수량이 장수보다 크다',
+        input_pro_price:'이득을 중지하여 촉발한 가격을  입력하세요',
+        input_pro_price_commission:'이득을 중지하여 촉발한 가격을  입력하세요',
+        input_loss_price:'손실을 중지하여 촉발한가격을  입력하세요',
+        input_loss_price_commission:'손실을 중지하여 촉발한 가격을  입력하세요',
+        take_profit:'이득',
+        stop_loss:'손실',
+        price_1:'손실가격이 최신거래가격보다 작아야한다',
+        price_2:'이득가격이 최신거래가격보다 작아야한다',
+        price_3:'이득가격이 최신거래가격보다 커야한다',
+        price_4:'손실가격이 최신거래가격보다 커야한다',
+        input_can_amount:'평창수량을 입력하세요',
+        input_can_amount_error:'평창수량의 수치가 틀렸음',
+        buy_long:'매입하다',
+        sell_short:'수출하다',
+        set_pro_loss:'창고이득손실설정',
+        average_open_price:'개창평균가격',
+        limit_price:'가격한정',
+        take_profit_trigger_price:'이득이 가격을 촉발',
+        stop_loss_trigger_price:'손실이 가격을 촉발',
+        take_profit_commission_price:'이득위탁가격',
+        stop_loss_order_rice:'손실위탁가격',
+        can_be_leveled:'평창량', 
+        newPrice: "최신가격",
+        set_profit_loss:'트레이드 모드 설정',
+        close_quality: '보유 물량을 균등하게 나누다.',
+        set_profit_loss_not_empty: '과음 설정과 과음 설정이 동시에 빈상태여서는 안 됩니다!',
+    } 
   },
   orderPopover: {
     mapTableColumns: {
@@ -3299,7 +3334,7 @@ export default {
     quick:'빠른 코인거래',
     ctoc:'C2C거래',
     about:'관하여',
-    account:'자금계좌사용가능',
+    account:'사용 가능 하 다',
     sell:'판매하다',
     payment:'지불하다',
     payType:'지불방식',
@@ -3316,6 +3351,7 @@ export default {
     tag7:'당신은 심플렉스가 제3자가 독립적으로 운영하는 법페와 디지털 화폐의 거래라는 것을 알았다. ⅱ xx는이 서비스의 사용에 대한 어떤 손실 또는 손실에 대해서 어떠한 책임도 부담하지 않는다。',
     gotopay:'Simplex으로 가서 지불', 
     buy_now:"지금 구매하기",
+    value: ' 은(는) 대략'
   },
   el:{
     pagination:{
@@ -3574,6 +3610,7 @@ export default {
     pay_currency:"지불 화폐 종류",
     pay_amount:"지불 금액",
     buy_qty:"구입 수량",
+    sell_qty: "판매 수량",
     release_time:"발급 시간",
     invite_register:"초대 등록",
     invite_rewards:"초청 장려금",
@@ -3661,6 +3698,75 @@ export default {
     winLimit: '止盈',
     price: '市价',
     closeOut: '平仓'
+  },
+  tv: { 
+    tv_technical_indicators: 'Technical Indicators',
+    tv_style: 'Style',
+    chart_types: {
+      0: { name:'Bars', icon: 'tv-bar'},
+      1: { name:'Candles', icon: 'tv-candle'},
+      9: { name:'Hollow Candles', icon: 'tv-hollowCandle'},
+      8: { name:'Heikin-Ashi', icon: 'tv-ha'},
+      2: { name:'Line', icon: 'tv-line'},
+      3: { name:'Area', icon: 'tv-area'},  
+    },
+    cycles: { 
+      '1m': "Time line",
+      '1': "1m",
+      '3': "3m",
+      '5': "5m",
+      '15': "15m",
+      '30': "30m",
+      '60': "1h",
+      '120': "2h",
+      '240': "4h",
+      '360': "6h",
+      '720': "12h",
+      '1D': "1D",
+      '1W': "1W",
+      '1M': "1M" ,
+      '12M': "1Y",
+    },
+    navs: {
+      left: {
+        style: 'Style',
+        technical_indicators: 'Technical Indicators',
+        drawing_tools: 'Drading Tools',
+        setting: 'Setting',
+        fullScreen: 'Full Screen' 
+      },
+      right: {
+        kline: 'k-Line',
+        deep: 'Depth'
+      } 
+    }
+  },
+  my_otc: {
+    payTypes: {
+      ALIPAY: 'Alipay',
+      WEIXIN: 'WeChat',
+      EBANK: 'Bank Card'
+    },
+    orders: {
+      mapStatus: {
+        1:'UNFINISHED',
+        3:'PAYED',
+        5:'FINISHED',
+        0:'CANCELED',
+        2:'TIMEOUT',
+        4:'DISPUTE',
+        REFUND:'REFUND',
+        7:'FORCEFINISHED',
+        8: 'PREAUDIT',
+        9: 'DEALFAILED',
+        6: 'FORCECANCEL'
+      },
+      mapTabs: {
+        0: "未完成订单",
+        1: "已完成订单",
+        2: "已取消订单", 
+      }, 
+    }
   },
 
   // 知识库相关

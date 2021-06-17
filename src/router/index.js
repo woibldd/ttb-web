@@ -14,6 +14,7 @@ import { otherRouter } from './module/other'
 import { ipfsRouter } from './module/ipfs'
 import { otcRouter } from './module/otc'
 import { gameRouter } from './module/game'
+import { otcHlRouter } from './module/otcHl'
 import Bid from '@/pages/Bid/index.vue'
 import BidDetail from '@/pages/Bid/detail.vue'
 import BidTable from '@/pages/Bid/table.vue'
@@ -127,7 +128,7 @@ async function beforeEach(to, from, next) {
   // utils.log('to:', to.name, 'from:', from.name)
   if (auth) {
     await actions.updateSession()
-    if (!state.userStatus) {
+    if (!state.userStatus) { 
       actions.setLoginBack(to)
       return next({
         name: 'login'
@@ -191,6 +192,7 @@ export const routes = [
   ...knowledgeBase,
   ...otcRouter,
   ...gameRouter,
+  ...otcHlRouter,
   {
     path: '/',
     name: 'home',

@@ -6,6 +6,7 @@ import store from '@/store.js'
 const locales = process.env.THEME_ENV.locales
 import { setSession } from '@/utils/auth'
 export const state = {
+  skin: 'dark',
   enablePhoneSignup: true,
   router: null,
   locale: 'en',

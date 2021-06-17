@@ -154,8 +154,7 @@ export default {
         return this.state.otc.legal_currency
       }
     },
-    card_bound() {
-      console.log(this.verifiedInfo)
+    card_bound() { 
       return this.verifiedInfo && this.verifiedInfo.is_card
     },
     phone_bound() {

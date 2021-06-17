@@ -3,6 +3,8 @@ export default {
   promotion: 'Promotion',
   quickBuy: 'Quick Buy',
   buyCrypto: 'Buy Crypto',
+  buy_qty:"Buy Qty",
+  sell_qty: "Sell Qty",
   future_account: "Contract Account",
   'currency-mix': "Contract - USDT",
   'currency-unit': "Coin Margin Contact",
@@ -3326,7 +3328,39 @@ export default {
       volume_24h: '24H Trading Volume',
       value: 'Contract Value',
       valueRate: 'Rate'
-    }
+    },
+    stoppl: {
+      set_profit:'Set Take Profit',
+      set_loss:'Set Stop Loss',
+      already_held_orders:' You Already Have Close Position Order ',
+      flat_amount:' Close Position Quantity ',
+      close_amount:' Close Position Quantity Is Bigger Than Available Position Can Be Closed ',
+      input_pro_price:' Please Enter Take Profit Trigger Price ',
+      input_pro_price_commission:' Please Enter Take Profit Order Price ',
+      input_loss_price:' Please Enter Stop Loss Trigger Price ',
+      input_loss_price_commission:' Please Enter Stop Loss Order Price ',
+      take_profit:' Take Profit ',
+      stop_loss:' Stop Loss ',
+      price_1:' Stop Loss Price Must Be Smaller Than Latest Execution Price ',
+      price_2:' Take Profit Price Must Be Smaller Than Latest Execution Price ',
+      price_3:' Take Profit Price Must Be Bigger Than Latest Execution Price ',
+      price_4:' Stop Loss Price Must Be Bigger Than Latest Execution Price ',
+      input_can_amount:' Please Enter Available Close Position Quantity ',
+      input_can_amount_error:' Available Close Position Quantity Error ',
+      buy_long:' Buy Long',
+      sell_short:' Sell Short',
+      set_pro_loss:' Take Profit And Stop Loss Position Setting ',
+      average_open_price:' Average Open Position Price ',
+      limit_price:'Limit Price',
+      take_profit_trigger_price:' Take Profit Trigger Price ',
+      stop_loss_trigger_price:' Stop Loss Trigger Price ',
+      take_profit_commission_price:' Take Profit Order Price ',
+      can_be_leveled:'Available Close Position Quantity', 
+      newPrice: "Latest Price",
+      set_profit_loss:'Set Take Profit and Stop Loss',
+      close_quality: 'Close position quality',
+      set_profit_loss_not_empty: 'Set take profit and set stop loss cannot be empty at the same time!',
+    } 
   },
   orderPopover: {
     mapTableColumns: {
@@ -3411,7 +3445,7 @@ export default {
     quick: 'One-click Buy',
     ctoc: 'C2C transaction',
     about: 'About',
-    account: 'Funds Act available',
+    account: 'Available',
     sell: '我要出售',
     payment: '我要支付',
     payType: 'Payment Method',
@@ -3428,6 +3462,7 @@ export default {
     tag7: 'You already know that Simplex is a legal tender and digital currency trading platform independently operated by a third party, and IXX will not be liable for any loss or damage caused by using this service.',
     gotopay: 'Go to Simplex',  
     buy_now:"Buy Now",
+    value: ' is roughly'
   },
   el: {
     pagination: {
@@ -3689,6 +3724,7 @@ export default {
     pay_currency:"Payment Currency",
     pay_amount:"Payment Amount",
     buy_qty:"Buy Qty",
+    sell_qty: "Sell Qty",
     release_time:"Release Time",
     invite_register:"Invite to register",
     invite_rewards:"Invite to buy rewards",
@@ -3770,6 +3806,120 @@ export default {
     "signup": "Sign up",
     "signin": "Sign in",
     "signout": "Sign out",
+  },
+  tv: { 
+    tv_technical_indicators: 'Technical Indicators',
+    tv_style: 'Style',
+    chart_types: {
+      0: { name:'Bars', icon: 'tv-bar'},
+      1: { name:'Candles', icon: 'tv-candle'},
+      9: { name:'Hollow Candles', icon: 'tv-hollowCandle'},
+      8: { name:'Heikin-Ashi', icon: 'tv-ha'},
+      2: { name:'Line', icon: 'tv-line'},
+      3: { name:'Area', icon: 'tv-area'},  
+    }, 
+    cycles:[ 
+      { 
+        key:'1m',
+        text: "Time line"
+      },
+      { 
+        key:'1',
+        text: "1m"
+      },
+      { 
+        key:'3',
+        text:  "3m"
+      },
+      {
+        key:'5',
+        text:  "5m"
+      },
+      {
+        key:'15',
+        text:  "15m"
+      },
+      {
+        key:'30',
+        text:  "30m"
+      },
+      {
+        key:'60',
+        text:  "1h"
+      },
+      {
+        key:'120',
+        text:  "2h"
+      },
+      {
+        key:'240',
+        text:  "4h"
+      },
+      {
+        key:'360',
+        text:  "6h"
+      },
+      {
+        key:'720',
+        text:  "12h"
+      },
+      {
+        key:'1D',
+        text:  "1D"
+      },
+      {
+        key:'1W',
+        text:  "1W"
+      },
+      {
+        key:'1M',
+        text:  "1M"
+      } ,
+      {
+        key:'12M',
+        text:  "1Y"
+      },
+    ],
+    navs: {
+      left: {
+        style: 'Style',
+        technical_indicators: 'Technical Indicators',
+        drawing_tools: 'Drading Tools',
+        setting: 'Setting',
+        fullScreen: 'Full Screen' 
+      },
+      right: {
+        kline: 'k-Line',
+        deep: 'Depth'
+      } 
+    }
+  },
+  my_otc: {
+    payTypes: {
+      ALIPAY: 'Alipay',
+      WEIXIN: 'WeChat',
+      EBANK: 'Bank Card'
+    },
+    orders: {
+      mapStatus: { 
+        1:'UNFINISHED',
+        3:'PAYED',
+        5:'FINISHED',
+        0:'CANCELED',
+        2:'TIMEOUT',
+        4:'DISPUTE',
+        REFUND:'REFUND',
+        7:'FORCEFINISHED',
+        8: 'PREAUDIT',
+        9: 'DEALFAILED',
+        6: 'FORCECANCEL'
+      },
+      mapTabs: {
+        0: "未完成订单",
+        1: "已完成订单",
+        2: "已取消订单", 
+      }, 
+    }
   },
   shipping: {
     lossLimit: '止损',

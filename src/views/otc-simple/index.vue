@@ -1,7 +1,7 @@
 <template>
-  <div class="otc-new-container">
-    <div class="otc-new-nav">
-      <div class="otc-new-box" flex="main:justify">
+  <div class="otc-simple-container">
+    <div class="otc-simple-nav">
+      <div class="otc-simple-box" flex="main:justify">
         <!-- {{from}} -->
         <div class="l" flex="main:left">
           <div :class="['nav-item', 'nav-link-left', {active: from==='quick'}]"> 
@@ -38,7 +38,7 @@
         </div> 
       </div>
     </div>
-    <div class="otc-new-content">
+    <div class="otc-simple-content">
       <router-view></router-view> 
     </div>
   </div>
@@ -61,13 +61,13 @@ export default {
 </script>
 
 <style lang="scss">
-.otc-new-container { 
+.otc-simple-container { 
   background-color:#F9F9F9;
-  .otc-new-nav {
+  .otc-simple-nav {
     background-color: #FFFFFF;
     font-size: 14px;
     color: #272727;
-    .otc-new-box {
+    .otc-simple-box {
       width: 1200px;
       margin: 0 auto;
     }
@@ -90,7 +90,7 @@ export default {
       }
     }
   }
-  .otc-new-content { 
+  .otc-simple-content { 
     min-height: 850px; 
     // margin: 0 auto;
     // width: 1200px;

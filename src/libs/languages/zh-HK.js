@@ -3,6 +3,8 @@ export default {
   promotion: '促销',
   quickBuy: '一键买币',
   buyCrypto: '买币',
+  buy_qty: "購買數量",
+  sell_qty: "出售數量",
   future_account: "合約賬戶",
   'currency-mix': "USDT合約",
   'currency-unit': "幣本位合約",
@@ -3187,7 +3189,40 @@ export default {
       volume_24h: '24小时交易量',
       value: '合约价值',
       valueRate: '资金费率'
-    }
+    },
+    stoppl: {
+      set_profit:'設定止盈', 
+      set_loss:'設定止損', 
+      already_held_orders:'您已有委託平倉訂單', 
+      flat_amount:'平倉數量', 
+      close_amount:'平倉張數大於可平張數', 
+      input_pro_price:'請輸入止盈觸發價格', 
+      input_pro_price_commission:'請輸入止盈委託價格', 
+      input_loss_price:'請輸入止損觸發價格', 
+      input_loss_price_commission:'請輸入止損委託價格', 
+      take_profit:'止盈', 
+      stop_loss:'止損', 
+      price_1:'止損價格必須小於最新成交價格', 
+      price_2:'止盈價格必須小於最新成交價格', 
+      price_3:'止盈價格必須大於最新成交價格', 
+      price_4:'止損價格必須大於最新成交價格', 
+      input_can_amount:'請輸入可平倉數量', 
+      input_can_amount_error:'可平倉數量有誤', 
+      buy_long:'買入開多', 
+      sell_short:'賣出開空', 
+      set_pro_loss:'倉位止盈止損設定', 
+      average_open_price:'開倉均價', 
+      limit_price:'限價', 
+      take_profit_trigger_price:'止盈觸發價格', 
+      stop_loss_trigger_price:'止損觸發價格', 
+      take_profit_commission_price:'止盈委託價格', 
+      stop_loss_order_rice:'止損委託價格', 
+      can_be_leveled:'可平量', 
+      newPrice: "最新價格",
+      set_profit_loss:'設定止盈止損',
+      close_quality: '平倉數量',
+      set_profit_loss_not_empty: '設定止盈和設定止損不能同時為空！'
+    } 
   },
   orderPopover: {
     mapTableColumns: {
@@ -3261,7 +3296,7 @@ export default {
     quick: '快捷買幣',
     ctoc: 'C2C交易',
     about: '關於',
-    account: '資金帳戶可用',
+    account: '可用',
     sell: '我要出售',
     payment: '我要支付',
     payType: '支付方式',
@@ -3278,6 +3313,7 @@ export default {
     tag7: '您已知曉Simplex是由協力廠商獨立運營的法定貨幣與數位貨幣交易平臺，IXX不對因使用該服務遭受的任何損失或損害承擔任何責任。',
     gotopay: '前往Simplex支付',  
     buy_now: "立即購買",
+    value: '價值約'
   },
   el:{
     pagination:{
@@ -3449,7 +3485,119 @@ export default {
     '1D': "1日",
     '1W': "1周",
     '1M': "1月",
-    more: "更多"
+    more: "更多",
+    tv_technical_indicators: '技术指标',
+    tv_style: '样式',
+    chart_types: {
+      0: { name:'Bars', icon: 'tv-bar'},
+      1: { name:'Candles', icon: 'tv-candle'},
+      9: { name:'Hollow Candles', icon: 'tv-hollowCandle'},
+      8: { name:'Heikin-Ashi', icon: 'tv-ha'},
+      2: { name:'Line', icon: 'tv-line'},
+      3: { name:'Area', icon: 'tv-area'},  
+    },
+    cycles: [ 
+      { 
+        key:'1m',
+        text: "分时线"
+      },
+      { 
+        key:'1',
+        text: "1分"
+      },
+      { 
+        key:'3',
+        text:  "3分"
+      },
+      {
+        key:'5',
+        text:  "5分"
+      },
+      {
+        key:'15',
+        text:  "15分"
+      },
+      {
+        key:'30',
+        text:  "30分"
+      },
+      {
+        key:'60',
+        text:  "1小时"
+      },
+      {
+        key:'120',
+        text:  "2小时"
+      },
+      {
+        key:'240',
+        text:  "4小时"
+      },
+      {
+        key:'360',
+        text:  "6小时"
+      },
+      {
+        key:'720',
+        text:  "12小时"
+      },
+      {
+        key:'1D',
+        text:  "1日"
+      },
+      {
+        key:'1W',
+        text:  "1周"
+      },
+      {
+        key:'1M',
+        text:  "1月"
+      } ,
+      {
+        key:'12M',
+        text:  "1年"
+      },
+    ],
+    navs: {
+      left: {
+        style: 'K线类型',
+        technical_indicators: '技术指标',
+        drawing_tools: '画图工具',
+        setting: '设置',
+        fullScreen: '全屏' 
+      },
+      right: {
+        kline: 'k线图',
+        deep: '深度图'
+      } 
+    }
+  },
+  my_otc: {
+    payTypes: {
+      ALIPAY: '支付宝',
+      WEIXIN: '微信',
+      EBANK: '银行卡'
+    },
+    orders: {
+      mapStatus: { 
+        1:'未完成(待付款)',
+        3:'已付款待放币',
+        5:'已完成',
+        0:'取消关闭',
+        2:'超时关闭',
+        4:'申诉中',
+        REFUND:'退款取消',
+        7:'强制成交',
+        8: '前置审核',
+        9: '成交失败',
+        6: '强制取消'
+      },
+      mapTabs: {
+        0: "未完成订单",
+        1: "已完成订单",
+        2: "已取消订单", 
+      }, 
+    }
   },
   nav: {
     download_pop: {
@@ -3537,6 +3685,7 @@ export default {
     pay_currency: "支付幣種",
     pay_amount: "支付金額",
     buy_qty: "購買數量",
+    sell_qty: "出售數量",
     release_time: "發放時間",
     invite_register: "邀請注册",
     invite_rewards: "邀請購買獎勵",

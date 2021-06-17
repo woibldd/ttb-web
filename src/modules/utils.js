@@ -26,6 +26,7 @@ const utils = {
   isBeta: process.env.MODE === 'beta',
   isProd: process.env.NODE_ENV === 'production',
   locales: localeName, 
+
   getLocaleName(locale) {
     return localeName[locale] || 'Unknown'
   },
@@ -643,7 +644,22 @@ const utils = {
       'M': '1M',
       '1M': '1M'
     }[interval]
+  },
+  debounce (fn, t) {
+    let delay = t || 500
+    let timer
+    return function () {
+      let args = arguments
+      if (timer) {
+        clearTimeout(timer)
+      }
+      timer = setTimeout(() => {
+        timer = null
+        fn.apply(this, args)
+      }, delay)
+    }
   }
+  
 
 }
 
