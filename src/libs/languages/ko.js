@@ -3700,6 +3700,22 @@ export default {
     closeOut: '平仓'
   },
   tv: { 
+    '1m': "시 분할 선",
+    1: "1m",
+    3: "3m",
+    5: "5m",
+    15: "15m",
+    30: "30m",
+    60: "1h",
+    120: "2h",
+    240: "4h",
+    360: "6h",
+    720: "12h",
+    '1D': "1D",
+    '1W': "1W",
+    '1M': "1M",
+    '12M': "1Y",
+    more: "더.",
     tv_technical_indicators: 'Technical Indicators',
     tv_style: 'Style',
     chart_types: {
@@ -3711,7 +3727,6 @@ export default {
       3: { name:'Area', icon: 'tv-area'},  
     },
     cycles: { 
-      '1m': "Time line",
       '1': "1m",
       '3': "3m",
       '5': "5m",
@@ -3726,6 +3741,7 @@ export default {
       '1W': "1W",
       '1M': "1M" ,
       '12M': "1Y",
+      '1m': "Time line",
     },
     navs: {
       left: {
