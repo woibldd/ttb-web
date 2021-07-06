@@ -47,7 +47,7 @@
         </el-table-column>
         <el-table-column>
           <template slot-scope="scope"> 
-            <template v-if="scope.row.currency==='USDT'">
+            <!-- <template v-if="scope.row.currency==='USDT'">
               <label class="my-fund-label"
                 v-if="is_nodes === false"
                 @click="nodeBuy"
@@ -58,7 +58,10 @@
                v-else>
                 {{$t('fund_assets_subscribed')}}
               </label> 
-            </template>
+            </template> -->
+            <label class="my-fund-label dis-my-fund-label">
+                {{$t('fund_assets_subscribed')}}
+              </label> 
           </template> 
         </el-table-column>
         <el-table-column
@@ -68,7 +71,7 @@
           :label="operate.title"
         >
           <template slot-scope="scope">
-            <template v-if="is_nodes === false">
+            <!-- <template v-if="is_nodes === false">
                 <label class="my-fund-label"
                 v-if="scope.row.currency==='USDT'"
                 @click="nodeBuy"
@@ -83,7 +86,7 @@
                 >
                 {{$t('fund_assets_subscribed')}}
                 </label>
-            </template>
+            </template> -->
             <span 
               class="my-fund-operate"> 
                <a href="javascript:;" class="menu-name" @click="routerTransFer(scope.row)">

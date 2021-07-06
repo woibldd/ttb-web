@@ -42,7 +42,7 @@
           <!-- p2P交易 -->
           <!-- <router-link :to="{name: 'hlotc'}" class="nav_link ml-30">{{ $t('otc_trade') }}</router-link>  -->
           <!-- 金融业务 -->
-          <div class="nav_link arrow-down">
+          <!-- <div class="nav_link arrow-down">
             <span  class="nav_link ml-30" v-popover:popoverFinance>
               {{$t('finance')}}
               <icon name="header-down" class="mini arrow" />
@@ -55,12 +55,12 @@
               trigger="hover">
               <div class="pop-dropdown">
               <ul class="dropdown-list pt-10 pb-10">
-                <!-- <li class="dropdown-item pl-24 pr-24"> 
+                <li class="dropdown-item pl-24 pr-24"> 
                   <a href="/mining-power" class="link">
                     {{ this.$t('mining_power.cloud_mine') }}
                     <icon name="hot-red" />
                   </a>
-                </li> -->
+                </li>
                 <li class="dropdown-item pl-24 pr-24">  
                   <a href="/snowball/bazaar"
                     :class="{'router-link-active': from === 'contract'}"
@@ -71,7 +71,7 @@
               </ul>
               </div>
             </el-popover>
-          </div>
+          </div> -->
           <!-- 促销 -->
           <div class="nav_link arrow-down">
             <span  class="nav_link ml-30" v-popover:popoverPromotion>
@@ -91,7 +91,7 @@
                     {{ this.$t('gift.bonus') }} 
                   </a>
                 </li> 
-                <li class="dropdown-item pl-24 pr-24">
+                <!-- <li class="dropdown-item pl-24 pr-24">
                   <router-link to="/affiliate" class="link">{{ $t('plan') }}</router-link>
                 </li> 
                 <li class="dropdown-item pl-24 pr-24">
@@ -100,7 +100,7 @@
                     class="link"
                     @click="subscribeHandle"
                   >{{ this.$t('node_sub') }}</a>
-                </li>
+                </li> -->
               </ul>
               </div>
             </el-popover>

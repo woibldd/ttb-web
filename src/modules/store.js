@@ -16,7 +16,7 @@ export const state = {
   page: '',
   userStatus: -1, // 未知
   userInfo: null,
-  loginBack: {name: 'home'}, // 默认登录返回页
+  loginBack: {name: 'home'}, // 默认登录返回页 
   verifyEmail: '', // 注册、找回密码使用的邮箱 
   tabSelected: 'USDT', //币对列表
   downloadTool: true,
