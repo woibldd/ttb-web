@@ -2700,14 +2700,14 @@ export default {
             label: 'Contract - USDT Contract',
             path: '/fund/my/contractMix'
           },
-          6: {
-            label: 'Speed Contract',
-            path: '/fund/my/share'
-          },
-          7: {
-            label: 'Mining Power',
-            path: '/fund/my/mining-power'
-          },
+          // 6: {
+          //   label: 'Speed Contract',
+          //   path: '/fund/my/share'
+          // },
+          // 7: {
+          //   label: 'Mining Power',
+          //   path: '/fund/my/mining-power'
+          // },
         }
       },
       4: {

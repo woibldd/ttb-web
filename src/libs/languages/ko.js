@@ -2571,14 +2571,14 @@ export default {
             label: '금본위 계약 계좌',
             path: '/fund/my/contractMix'
           },
-          6: {
-            label: '전속계좌',
-            path: '/fund/my/share'
-          },
-          7: {
-            label: '산정력계정',
-            path: '/fund/my/mining-power'
-          },
+          // 6: {
+          //   label: '전속계좌',
+          //   path: '/fund/my/share'
+          // },
+          // 7: {
+          //   label: '산정력계정',
+          //   path: '/fund/my/mining-power'
+          // },
         }
       },
       4: {

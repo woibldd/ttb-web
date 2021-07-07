@@ -2519,14 +2519,14 @@ export default {
             label: 'USDT合约账户',
             path: '/fund/my/contractMix'
           },
-          6: {
-            label: '极速合约账户',
-            path: '/fund/my/share'
-          },
-          7: {
-            label: '算力账户',
-            path: '/fund/my/mining-power'
-          },
+          // 6: {
+          //   label: '极速合约账户',
+          //   path: '/fund/my/share'
+          // },
+          // 7: {
+          //   label: '算力账户',
+          //   path: '/fund/my/mining-power'
+          // },
         }
       },
       4: {
