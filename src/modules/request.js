@@ -21,7 +21,7 @@ if(process.env.NODE_ENV != 'development'){
 const api = axios.create({
   baseURL: _env_ || process.env.BASE_API,
   timeout: 30000, // request timeout
-  withCredentials: true
+  // withCredentials: true
 })
 // console.log("_env_:" + _env_)
 export const envApi = _env_

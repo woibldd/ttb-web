@@ -554,8 +554,7 @@ export default {
     this.$eh.$on('app:resize', () => this.fixPosition())
     this.$nextTick(this.fixPosition)
   },
-  async created () {
-
+  async created () { 
     //如果地址带有邀请码信息则将邀请码写入cookie中，有效期为10天  2019/10/16 yzf
     let invitorId = this.$route.query.invitor
     let agentId = this.$route.query.agent
