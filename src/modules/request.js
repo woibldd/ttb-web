@@ -21,7 +21,7 @@ if(process.env.NODE_ENV != 'development'){
 const api = axios.create({
   baseURL: _env_ || process.env.BASE_API,
   timeout: 30000, // request timeout
-  // withCredentials: true
+  withCredentials: true
 })
 // console.log("_env_:" + _env_)
 export const envApi = _env_
@@ -32,8 +32,8 @@ export const quotaApi = axios.create({
 })
 
 // request interceptor
-api.interceptors.request.use(config => {
-  let token = actions.getToken()
+api.interceptors.request.use(config => { 
+  let token = actions.getToken() 
   if (token) {
     // 服务端准备好 就可以上token了
     config.headers['token'] = token
