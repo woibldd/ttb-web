@@ -236,24 +236,24 @@
             ref="popover1"
             popper-class="nav-popover"
             placement="bottom"
-            width="220"
+            width="80"
             style="background:#2C3B4B;"
             trigger="hover">
             <div
               class="pop">
-              <div> 
+              <!-- <div> 
                 <p>
                   <img style="width: 100px"
                     src="~@/assets/download/ios-download.png" >
                   <v-btn class="mt-5" icon="apple" label="Iphone"/>
                 </p>
-              </div>
-              <div class="ml-20"> 
+              </div> -->
+              <div > 
                 <p>
-                  <img style="width: 100px"
+                  <img style="width: 150px"
                     src="~@/assets/download/qr-download.png" >
                   
-                  <v-btn class="mt-5" icon="android" label="Android"/>
+                  <!-- <v-btn class="mt-5" icon="android" label="Android"/> -->
                 </p>
               </div>
               <!-- <div class="right">

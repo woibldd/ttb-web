@@ -97,7 +97,7 @@
           <p>{{$t('h5_home_new.describe1')}}</p>
         </div>
         <div class="list">
-          <div class="row">
+          <!-- <div class="row">
             <div class="btn">
               <img src="~@/assets/h5/home/computer@2x.png" alt="">
               <span>{{$t('h5_home_new.computer')}}</span>
@@ -113,6 +113,18 @@
               @click="download('ios-test')">
               <img src="~@/assets/h5/home/apple@2x.png" alt="">
               <span>{{$t('h5_home_new.ios1')}}</span>
+            </div>
+            <div class="btn"
+              @click="download('ios')">
+              <img src="~@/assets/h5/home/apple@2x.png" alt="">
+              <span>{{$t('h5_home_new.ios2')}}</span>
+            </div>
+          </div> -->
+          <div class="row"> 
+            <div class="btn"
+              @click="download('android')">
+              <img src="~@/assets/h5/home/android@2x.png" alt="">
+              <span>{{$t('h5_home_new.android')}}</span>
             </div>
             <div class="btn"
               @click="download('ios')">
