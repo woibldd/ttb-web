@@ -127,7 +127,7 @@ export default {
       }
 
       if (this.isSafari) {
-        url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
+        let url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
         // url = 'https://downloadappios.com:7521/1rsNn.html' 
         // window.open(url, '_blank')
         window.location.href = url
