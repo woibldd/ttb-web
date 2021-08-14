@@ -56,7 +56,7 @@ export default {
           }
           if (restored) {
             data = JSON.parse(restored)  
-            // console.log(data)
+            console.log(data)
             hub.$emit('message', data) 
           }
         })

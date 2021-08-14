@@ -22,7 +22,7 @@ export const mapBaseUrl = {
 
 export const mapLever = [1, 2, 3, 5, 10, 25, 50, 100]
 
-export const serviceCharge = 7 / 10000
+export const serviceCharge = 7 / 10000cc
 
 export const upColor = '#09C989'
 
@@ -34,7 +34,7 @@ export const mapPeriod = {
 
 export const mapCurrency = ['CNY', 'USD']
 
-export const WSURL = 'wss://wss.ixex.io/v1'
+export const WSURL = 'wss://wss.ixex.cc/v1'
 
 export const mapRisk = {
   '20': [
