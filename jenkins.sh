@@ -1,6 +1,10 @@
 #!/bin/sh
 echo "\nixx.com building...\n"
 
+cnpm i
+
+sleep 2
+
 npm run build
 
 sleep 2
