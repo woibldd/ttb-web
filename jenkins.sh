@@ -1,7 +1,7 @@
 #!/bin/sh
 echo "\nixx.com building...\n"
 
-npm install async-validator@1.11.5
+cnpm install async-validator@1.11.5
 sleep 2
 
 npm run build
