@@ -22,7 +22,7 @@ export const mapBaseUrl = {
 
 export const mapLever = [1, 2, 3, 5, 10, 25, 50, 100]
 
-export const serviceCharge = 7 / 10000cc
+export const serviceCharge = 7 / 10000
 
 export const upColor = '#09C989'
 
