@@ -14,15 +14,15 @@ if (process.env.NODE_ENV != 'development') {
     quote = `https://q.${host}/v1/`
     wss = `wss://wss.${host}/v1` 
   } else {
-    ws = 'wss://ws.ixex.cc/v1/'
-    quote = 'https://q.ixex.cc/v1/'
-    wss = 'wss://wss.ixex.cc/v1'  
+    ws = 'wss://ws.ixweb.pro/v1/'
+    quote = 'https://q.ixweb.pro/v1/'
+    wss = 'wss://wss.ixweb.pro/v1'  
   }
 }
 if (process.env.NODE_ENV === 'development') {
-  // wsUrl = 'wss://ws.ixex.cc/v1/'
-  // quoteUrl = 'https://q.ixex.cc/v1/'
-  // wssUrl = 'wss://wss.ixex.cc/v1' 
+  // wsUrl = 'wss://ws.ixweb.pro/v1/'
+  // quoteUrl = 'https://q.ixweb.pro/v1/'
+  // wssUrl = 'wss://wss.ixweb.pro/v1' 
   // wsUrl = 'wss://ws.cloudservicex.com/v1/'
   // quoteUrl = 'https://q.cloudservicex.com/v1/'
   // wssUrl = 'wss://wss.cloudservicex.com/v1'

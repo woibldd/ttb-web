@@ -84,7 +84,7 @@ export default {
     _getDataSourceUrl () {
       let pair = this.pair || 'FUTURE_BTCUSD'
       if (pair) {
-        return `https://q.ixex.cc/v1/orderbook/${pair}?offset=0&accuracy=1&size=20`
+        return `https://q.ixweb.pro/v1/orderbook/${pair}?offset=0&accuracy=1&size=20`
       }
     },cc
     _parseData (resp) {

@@ -34,7 +34,7 @@ export const mapPeriod = {
 
 export const mapCurrency = ['CNY', 'USD']
 
-export const WSURL = 'wss://wss.ixex.cc/v1'
+export const WSURL = 'wss://wss.ixweb.pro/v1'
 
 export const mapRisk = {
   '20': [
