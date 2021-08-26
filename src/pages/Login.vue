@@ -139,7 +139,7 @@
     <v-download />
     <v-modal
       :open.sync="showModal"
-      :backdrop="false"
+      :backdrop="false" 
       @click="hideModal">
       <div class="ensure-modal">
         <div class="modal__title mb-30">{{ $t('security_verification') }}</div>
@@ -207,14 +207,14 @@
                 />
               </div>
             </div>
-          </div>
-
+          </div> 
           <v-btn
             :label="$t('signin')"
             class="w-340"
-            @click="toVerifyCode"/>
+            @click="toVerifyCode"/> 
         </div>
-      </div>
+      </div> 
+      <div slot="close">123</div>
     </v-modal>
     <div>
      <!-- <v-modal

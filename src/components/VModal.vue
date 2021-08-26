@@ -8,11 +8,11 @@
       class="modal-wrap"
       :style="{backgroundColor: bgColor}">
       <slot/>
-      <slot name="close">
+      <div name="close"> 
         <a
           class="close-btn"
-          @click.prevent="close"/>
-      </slot>
+          @click.prevent="close"/> 
+      </div> 
     </div>
     <div
       class="modal-mask"
@@ -91,7 +91,7 @@ export default {
     z-index: 2;
   }
   .close-btn {
-    @include bg-retina('../assets/icon-cancel', 'png', 12px, 12px);
+    // @include bg-retina('../assets/icon-cancel', 'png', 12px, 12px);
     width: 40px;
     height: 40px;
     position: absolute;
