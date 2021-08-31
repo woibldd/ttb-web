@@ -38,7 +38,7 @@
           {{ c.currency }}
         </span>
       </div>
-      <div v-if="selectCoin.currency === 'USDT'" class="fund-item-row mb-24">
+      <div v-if="lianDataList[selectCoin.currency]" class="fund-item-row mb-24">
         <div class="row__label">
           <el-popover
             :content="depTip"
@@ -57,7 +57,7 @@
             value-key="chain"
             @change="lianSelect">
             <el-option
-              v-for="(item, idx) in lianData"
+              v-for="(item, idx) in lianDataList[selectCoin.currency]"
               :key="idx"
               :label="item.currencyName"
               :value="item"/>
@@ -185,6 +185,7 @@ export default {
       lianData: [],
       curreryCoin: '',
       selectLian: {},
+      lianDataList :{},
       contract: '',
       showQr: false
     }
@@ -206,7 +207,7 @@ export default {
     this.getDepositHistory()
     await this.getAllCoinTypes()
     await this.getCoinAddress()
-    this.setQr(this.address)
+    // this.setQr(this.address)
   },
   methods: {
     copy() {
@@ -236,6 +237,7 @@ export default {
       })
     },
     async setQr(url) { 
+      console.log('setQr')
       const vm = this
       this.showQr = true
       const QRCode = await qrcode()
@@ -260,48 +262,67 @@ export default {
     },
     async changeCoinType(coin) {
       this.curreryCoin = ''
-      this.showQr = false
-      await this.getCoinAddress()
-      this.setQr(this.address)
+      if (this.lianDataList[coin.currency]) {
+        if (coin.currency === 'USDT') {
+          this.selectLian = this.lianDataList[coin.currency].find(a => a.chain==='TRX')
+          this.selectCoin = this.selectLian
+        } else {
+          this.selectLian = this.lianDataList[coin.currency][0]
+          this.selectCoin = this.selectLian
+        }
+      }
+      else {
+        this.selectCoin = coin
+      }
+      await this.getCoinAddress() 
       if (coin.currency === 'EOS' || coin.currency === 'PAN') {
         this.openEosAlert = true
         this.curreryCoin = coin.currency
-      }
+      } 
+      this.neverShowAgain = local.depositAlert[this.selectCoin.currency] || false
+      this.showModal = !this.neverShowAgain
     },
     async lianSelect(coin) {
       this.selectCoin = coin
-      this.showQr = false
+      // this.showQr = false
       await this.getCoinAddress()
-      this.setQr(this.address)
+      // this.setQr(this.address)
     },
     async getAllCoinTypes() {
       await service.getAllCoinTypes().then(res => {
         if (res && res.data) {
           this.lianData = []
           res.data.forEach((item) => {
-            if (item.currency === 'USDT' && item.depositable) {
+            if ((item.currency === 'USDT' || item.currency==='LEMO' || item.currency==='BNB' ) && item.depositable) {
               if (item.chain === 'OMNI') { item.currencyName = item.currency + '-' + 'Omni'}
               if (item.chain === 'ETH') { item.currencyName = item.currency + '-' + 'ERC20'}
               if (item.chain === 'TRX') { item.currencyName = item.currency + '-' + 'TRC20'}
+              if (item.chain === 'BSC') { item.currencyName = item.currency + '-' + 'BSC'}
+              if (item.chain === 'BNB') { item.currencyName = item.currency + '-' + 'BNB'}
               this.lianData.push(item)
+              if (!this.lianDataList[item.currency])  
+                this.lianDataList[item.currency] = [] 
+              this.lianDataList[item.currency].push(item) 
             }
           })
            
-          this.lianData = this.lianData.reverse()//顺序颠倒一下，omni要放在前面
-          this.allCoins = this.removalData(res.data.filter(c => c.depositable)) 
+          // this.lianData = this.lianData.reverse()//顺序颠倒一下，omni要放在前面
+          this.allCoins = this.removalData(res.data.filter(c => c.depositable))
+          
           if (this.$route.params.currency) {
             const currency = this.$route.params.currency.toUpperCase()
             this.selectCoin = this.allCoins.find(item => {
               return item.currency.toUpperCase() === currency
             })
+            this.quickSelectCoin(this.selectCoin)
             return
-          }
-          if (this.allCoins[0].currency === 'USDT') {
-            this.selectLian = this.lianData.find(a => a.chain === 'ETH')
-            this.selectCoin = this.selectLian 
           } else {
-            this.selectCoin = this.allCoins[0]
-          }
+            //没传参数的情况下打开页面默认选择usdt的trx链
+            this.selectLian = this.lianDataList['USDT'].find(a => a.chain==='TRX') 
+            this.selectCoin = this.selectLian || this.allCoins[0]
+          } 
+          this.neverShowAgain = local.depositAlert[this.selectCoin.currency] || false
+          this.showModal = !this.neverShowAgain
         }
       })
     },
@@ -337,6 +358,11 @@ export default {
       service.getDepositHistory(param).then(res => {
         this.tableData = []
       })
+    }
+  },
+  watch: {
+    address() {
+      this.setQr(this.address)
     }
   }
 }
