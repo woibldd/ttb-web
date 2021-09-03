@@ -27,7 +27,7 @@
             </el-select>
           </div>
         </div>
-        <div v-if="selectCoin.currency === 'USDT'" class="fund-item-row mb-14">
+        <div v-if="selectCoin.currency === 'USDT' || this.selectCoin.currency === 'BNB' || this.selectCoin.currency === 'LEMO'" class="fund-item-row mb-14">
           <div class="row__label">
             <el-popover
               :content="depTip"
@@ -45,7 +45,7 @@
               value-key="chain"
               @change="lianSelect">
               <el-option
-                v-for="(item, idx) in lianData"
+                v-for="(item, idx) in lianDataList[selectCoin.currency]"
                 :key="idx"
                 :label="item.currencyName"
                 :value="item"/>
@@ -102,8 +102,8 @@
           :label="hd.title">
           <template slot-scope="scope">
             <span>{{ scope.row[hd.key] }}</span>
-            <label v-if="hd.key==='currency' && scope.row[hd.key]==='USDT'" class="chain">
-              {{ chainDict[scope.row['chain']] }}
+            <label v-if="hd.key==='currency' && (scope.row[hd.key]==='USDT' || scope.row[hd.key]==='BNB' || scope.row[hd.key]==='LEMO')" class="chain">
+              {{ chainDict[scope.row['chain']] || scope.row['chain'] }} 
             </label>
           </template>
         </el-table-column>
@@ -147,6 +147,7 @@ export default {
       header: [
         { key: 'currency', title: this.$t('fees_name') },
         { key: 'address', title: this.$t('fund.address.address') },
+        { key: 'memo', title: this.$t('address_tag') },
         { key: 'description', title: this.$t('note') }
       ],
       operate: { key: 'operate', title: this.$t('operation') },
@@ -159,7 +160,8 @@ export default {
         OMNI: 'OMNI',
         ETH: 'ERC20',
         TRX: 'TRC20'
-      }
+      },
+      lianDataList :{},
     }
   },
   computed: {
@@ -180,8 +182,7 @@ export default {
       copyToClipboard(row.address)
       utils.success(this.$i18n.t('copyed'))
     },
-    async getCoinAddress() {
-      console.log('getCoinAddressgetCoinAddressgetCoinAddressgetCoinAddressgetCoinAddress')
+    async getCoinAddress() { 
       const param = {
         currency: this.selectCoin.currency
       }
@@ -190,7 +191,7 @@ export default {
           this.addressList = res.data
           this.hasMemo = this.addressList.filter(c => !!c.memo).length
           if (this.hasMemo) {
-            this.header.splice(2, 0, { key: 'memo', title: this.$t('address_tag') })
+            // this.header.splice(2, 0, { key: 'memo', title: this.$t('address_tag') })
           }
           this.loading = false
         }
@@ -205,21 +206,18 @@ export default {
         if (res && res.data) {
           this.lianData = []
           res.data.forEach((item) => {
-            if (item.currency === 'USDT') {
-              this.lianData.push(item)
-            }
-          })
-          this.lianData.forEach((item) => {
-            if (item.chain === 'OMNI') {
-              Vue.set(item, 'currencyName', item.currency + '-' + 'Omni')
+            if((item.currency === 'USDT' || item.currency === 'BNB' || item.currency === 'LEMO') && item.withdrawable) {
+              if (item.chain === 'OMNI') { item.currencyName = item.currency + '-' + 'Omni'}
+              if (item.chain === 'ETH') { item.currencyName = item.currency + '-' + 'ERC20'}
+              if (item.chain === 'TRX') { item.currencyName = item.currency + '-' + 'TRC20'}
+              if (item.chain === 'BSC') { item.currencyName = item.currency + '-' + 'BSC'}
+              if (item.chain === 'BNB') { item.currencyName = item.currency + '-' + 'BNB'}
+              this.lianData.push(item) 
+              if (!this.lianDataList[item.currency])  
+                this.lianDataList[item.currency] = [] 
+              this.lianDataList[item.currency].push(item) 
             } 
-            else if (item.chain === 'ETH') {
-              Vue.set(item, 'currencyName', item.currency + '-' + 'ERC20')
-            }
-            else if (item.chain === 'TRX') {
-              Vue.set(item, 'currencyName', item.currency + '-' + 'TRC20')
-            }
-          })
+          }) 
           this.selectLian = this.lianData[0]
           // this.allCoins = this.removalData(res.data.filter(c => c.depositable))
           this.allCoins = _.uniqBy(res.data.filter(c => c.depositable), 'currency')
@@ -257,7 +255,7 @@ export default {
       }
 
       const param = {
-        chain: this.selectCoin.currency === 'USDT' ? this.selectLian.chain : '',
+        chain: (this.selectCoin.currency === 'USDT' || this.selectCoin.currency === 'BNB' || this.selectCoin.currency === 'LEMO') ? this.selectLian.chain : '',
         currency: this.selectCoin.currency,
         address: this.address,
         description: this.description

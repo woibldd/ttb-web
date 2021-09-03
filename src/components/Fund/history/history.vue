@@ -253,12 +253,12 @@ import ixPagination from '@/components/common/ix-pagination'
 
 /**
  *
-currency 币名
-available 可用量
-ordering 委托锁定量
-withdrawing 提币锁定量
-quota 当前提币剩余额度
-max_quota 当前提币总额度
+ *currency 币名
+ *available 可用量
+ *ordering 委托锁定量
+ *withdrawing 提币锁定量
+ *quota 当前提币剩余额度
+ *max_quota 当前提币总额度
  */
 export default {
   name: 'MyFund',
