@@ -2172,6 +2172,7 @@ export default {
   pair_list_option: "自选",
   pair_list_new: "创新区",
   pair_list_ST: "ST区",
+  pair_list_main: "主流币",
   done_verified: "已完成",
   otc_trans_time: "成交时间",
   coin_FUTURE_BTCUSD: "BTC",

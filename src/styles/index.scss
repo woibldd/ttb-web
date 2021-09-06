@@ -469,4 +469,54 @@ $primary-color: #01CED1;
 }
 
 
+.vertical-login {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;  
+  background-color: #ffffff;
+  z-index: 5; 
+  img {
+    width: 50%;
+    margin-bottom: 70px;
+  }
+  .message {
+    font-size: 14px;
+  }
+  .vertical-login-box {
+    padding: 24px;
+    margin-top: 90px;
+    text-align: center; 
+  }
+  .login-button {
+    padding: 10px 0;
+    background-color: #252525;
+    border-radius: 2px;
+    color: $primary;
+    cursor: pointer;
+    &.register {
+      background-color: $primary;
+      color: #ffffff;
+    }
+  }
+  &.dark {
+    background-color: #14151A;
+  }
+}
+
+.divider-line-info{
+  height: 1px;
+  width: 100%;
+  margin: 0;
+  background: $--color-info;
+}
+ 
+
+.between {
+  display: flex;
+  justify-content: space-between;
+}
+ 
+
 strong{font-weight: bold;}

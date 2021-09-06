@@ -2079,6 +2079,7 @@ export default {
   pair_list_all: "全部",
   pair_list_option: "自選",
   pair_list_new: "創新區",
+  pair_list_main: "主流幣",
   otc_seiitm_15: "撤銷全部",
   done_verified: "已完成",
   otc_trans_time: "成交時間",

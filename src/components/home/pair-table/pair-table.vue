@@ -2,12 +2,13 @@
   <div class="newest-coin-pairs">
     <div class="relative">
       <!-- <div class="pair-title">{{ $t('newest_coin_pairs') }}</div> -->
-      <div class="pair-title">
+      <div class="pair-title"> 
         <el-tabs v-model="tabSelected" @tab-click="tabChange" type="card">
           <el-tab-pane :label="$t('pair_list_option')" name="like"/>
-          <el-tab-pane  label="USDT" name="USDT"/>
-          <el-tab-pane label="BTC" name="BTC"/>
-          <el-tab-pane label="ETH" name="ETH"/>
+          <el-tab-pane  :label="$t('pair_list_main')" name="main"/>
+          <el-tab-pane label="DeFi" name="DeFi"/>
+          <el-tab-pane label="NFT" name="NFT"/>
+          <el-tab-pane label="GameFi" name="GameFi"/>
           <el-tab-pane :label="$t('pair_list_new')" name="new"/>
           <el-tab-pane :label="$t('pair_list_all')" name="all"/>
         </el-tabs>
@@ -68,8 +69,9 @@
           {{ $t('actions') }}
         </div>
       </div>
-      <div class="pairs-table-container pl-10 pr-10" >
-        <div v-for="(pair,index) in sortedList" :key="index" @click="toExchange(pair.name)">
+      <div class="pairs-table-container pl-10 pr-10" > 
+        <!-- {{sortedList}} -->
+        <div v-for="(pair,index) in sortedList" :key="index" @click="toExchange(pair.name)"> 
           <template v-if="pair.tick && !pair.CUSTOM">
             <div class="pairs-table__row c-21">
               <div
@@ -118,8 +120,8 @@
                 <icon name="handle"/>
               </div>
             </div>
-          </template>
-          <p v-if="pair.CUSTOM" v-cloak class="custom-title">{{ pair.type === '2' ? $t('pair_list_new') : $t('pair_list_ST') }}</p>
+          </template>   
+          <p v-else-if="pair.CUSTOM" v-cloak class="custom-title">{{ pair.group == 2 ? $t('pair_list_new') :  $t('pair_list_ST')  }}</p>
         </div>
         <div v-if="tabSelected==='like' && sortedList.length===0" class="pairs-table__row empty" style="padding:40px 0;height: initial;line-height:normal">
           <img src="./empty-data.png" alt="" srcset="">

@@ -1363,8 +1363,7 @@ export default {
       //   } else if (res.code !== 401) {
       //     this.$message.error(res)
       //   }
-      // })
-
+      // }) 
       this.activeProduct = product
       // this.tradingType = product.symbol_currency[0].currency 
       this.tradingType = product.symbol_currency.find(item => item.currency.indexOf('USDT') > -1).currency //暂时默认usdt
@@ -1444,8 +1443,7 @@ export default {
       if (['curEntrust', 'shipping'].includes(key)) return
       this.tableList = null
       this.historyPage = 0
-      this.totalItems = 10
-
+      this.totalItems = 10 
       this.fetch()
       // key === 'shipping' && (this.amountObj.shipping[0] = this.tableList.length)
       // const found = this.tableList.find(item => this.activeTabItem.pair.includes(item.currency))

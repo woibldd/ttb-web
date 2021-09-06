@@ -23,9 +23,10 @@
       <div class="ix-pair-head">
         <el-tabs v-model="tabSelected"  @tab-click="tabChange">
           <el-tab-pane :label="$t('pair_list_option')" name="like"/>
-          <el-tab-pane label="USDT" name="USDT"/>
-          <el-tab-pane label="BTC" name="BTC"/>
-          <el-tab-pane label="ETH" name="ETH"/>
+          <el-tab-pane  :label="$t('pair_list_main')" name="main"/>
+          <el-tab-pane label="DeFi" name="DeFi"/>
+          <el-tab-pane label="NFT" name="NFT"/>
+          <el-tab-pane label="GameFi" name="GameFi"/>
           <el-tab-pane :label="$t('pair_list_new')" name="new"/>
           <el-tab-pane :label="$t('pair_list_all')" name="all"/>
         </el-tabs>

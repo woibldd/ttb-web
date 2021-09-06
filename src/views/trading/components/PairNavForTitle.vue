@@ -22,6 +22,7 @@
       </div>
       <!-- tabs -->
       <div class="ix-pair-head">
+        123
         <el-tabs v-model="tabSelected" :skin="state.skin">
           <el-tab-pane :label="$t('pair_list_option')" name="like"/>
           <el-tab-pane label="USDT" name="USDT" />
