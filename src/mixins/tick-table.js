@@ -60,8 +60,8 @@ export default {
         res = _.filter(res, (pair, index) => {
           if (pair.type == 4 || pair.type == 2){
             pair.group = 2
-          } else if (pair.type == 5 || pair.type == 3) {
-            pair.group = 3
+          // } else if (pair.type == 5 || pair.type == 3) {
+          //   pair.group = 3
           }
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1
                 && (pair.group === 2 || pair.group === 3 )
