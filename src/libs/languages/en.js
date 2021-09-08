@@ -2241,7 +2241,7 @@ export default {
   pair_list_all: "ALL",
   pair_list_option: "Option",
   pair_list_new: "Innovation Zone",
-  pair_list_main: "Mainstream",
+  pair_list_main: "Top",
   otc_bind_bankCard: "Bank Card",
   otc_kyc_verified: "ID Verification",
   otc_need_verify: "Verification",
