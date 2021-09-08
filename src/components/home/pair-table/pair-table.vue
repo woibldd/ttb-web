@@ -69,8 +69,7 @@
           {{ $t('actions') }}
         </div>
       </div>
-      <div class="pairs-table-container pl-10 pr-10" > 
-        <!-- {{sortedList}} -->
+      <div class="pairs-table-container pl-10 pr-10" >  
         <div v-for="(pair,index) in sortedList" :key="index" @click="toExchange(pair.name)"> 
           <template v-if="pair.tick && !pair.CUSTOM">
             <div class="pairs-table__row c-21">
@@ -121,66 +120,14 @@
               </div>
             </div>
           </template>   
-          <p v-else-if="pair.CUSTOM" v-cloak class="custom-title">{{ pair.group == 2 ? $t('pair_list_new') :  $t('pair_list_ST')  }}</p>
+          <!-- <p v-else-if="pair.CUSTOM" v-cloak class="custom-title">{{ pair.group == 2 ? $t('pair_list_new') :  $t('pair_list_ST')  }}</p> -->
         </div>
         <div v-if="tabSelected==='like' && sortedList.length===0" class="pairs-table__row empty" style="padding:40px 0;height: initial;line-height:normal">
           <img src="./empty-data.png" alt="" srcset="">
           <br>
           <span style="color: #adadad;">{{$t('pair_table_option_empty')}}</span>
         </div>
-      </div>
-      <!-- class="pairs-table__row c-21" -->
-      <!-- <div
-          v-for="(pair,index) in sortedList"
-          v-if="pair.tick && !pair.CUSTOM"
-          :key="index"
-
-          @click="toExchange(pair.name)">
-          <div
-            class="row__item percent5"
-            @click.stop="collection(pair)">
-            <icon
-              v-show="pair.like"
-              name="sc-x" style="color:red;"/>
-            <icon
-              v-show="!pair.like"
-              name="sc-w"/>
-          </div>
-          <div class="row__item percent13">
-            {{ pair.name | pairfix }}
-            <icon v-show="index < 3 && tabSelected==='new' " name="hot-red"/>
-          </div>
-          <div class="row__item percent18_8 newest_price">
-            <span class="ml-10 inline-block c-999">{{ state.fiatMoneySymbol }}<fiat-money
-              :base="pair.currency"
-              :value="pair.tick.current"/>
-            </span>
-            {{ pair.tick.current | fixed(pair.price_scale) }}
-          </div>
-          <div
-            :class="{'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}"
-            class="row__item percent14_8 c-f24">
-            <p v-if="pair.tick">{{ (getDelta(pair.tick) > 0) ? '+' : '' }}{{ getDelta(pair.tick) }}%
-            </p>
-            <p v-else>...</p>
-
-          </div>
-          <div class="row__item percent14_8">
-            {{ pair.tick.lowest_24h | fixed(pair.price_scale) }}
-          </div>
-          <div class="row__item percent14_8">
-            {{ pair.tick.highest_24h | fixed(pair.price_scale) }}
-          </div>
-          <div class="row__item percent14_8">
-            {{ pretty(pair.tick.volume_24h) }}<span> {{ pair.product }}</span>
-          </div>
-          <div
-            class="row__item percent8 tg"
-            @click="toExchange(pair.name)">
-            <icon name="handle"/>
-          </div>
-        </div>
-        <p v-else class="custom-title">bbbb</p> -->
+      </div> 
     </div>
   </div>
 </template>

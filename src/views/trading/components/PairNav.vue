@@ -84,7 +84,7 @@
               <span v-else>...</span>
             </div>
           </template>
-          <p v-if="pair.CUSTOM" v-cloak class="custom-title">{{ pair.type === '2' ? $t('pair_list_new') : 'ST区' }}aaa</p>
+          <!-- <p v-if="pair.CUSTOM" v-cloak class="custom-title">{{ pair.type === '2' ? $t('pair_list_new') : 'ST区' }}aaa</p> -->
         </li>
       </ul>
     </div>

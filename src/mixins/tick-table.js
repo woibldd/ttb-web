@@ -66,17 +66,13 @@ export default {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1
                 && (pair.group === 2 || pair.group === 3 )
         })
-        let arr = []
-        const temGroup = _.groupBy(res, 'group')
-        // temGroup['2'] = temGroup['2'].concat(temGroup['4']||[])
-        // delete temGroup['4'] 
-        Object.keys(temGroup).forEach(key => {
-          arr = arr.concat([{ CUSTOM: true, type: key }]).concat(temGroup[key]) 
-        }) 
-  
-        return arr
-        // res = _.groupBy(res, 'type') 
-        // return res
+        // let arr = []
+        // const temGroup = _.groupBy(res, 'group') 
+        // Object.keys(temGroup).forEach(key => {
+        //   arr = arr.concat([{ CUSTOM: true, type: key }]).concat(temGroup[key]) 
+        // })  
+        // return arr 
+        return res
       } else if (this.tabSelected === 'like') {
         return _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 

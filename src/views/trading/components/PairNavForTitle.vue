@@ -82,7 +82,7 @@
               <span v-else>...</span>
             </div>
           </template>
-          <div v-if="pair.CUSTOM" v-cloak class="td custom-title">{{ pair.type === '2' ? $t('pair_list_new') : $t('pair_list_ST') }}</div>
+          <!-- <div v-if="pair.CUSTOM" v-cloak class="td custom-title">{{ pair.type === '2' ? $t('pair_list_new') : $t('pair_list_ST') }}</div> -->
         </li>
       </ul>
       <div v-show="!sortedList.length && tabSelected==='like'" class="ix-pair-empty">
