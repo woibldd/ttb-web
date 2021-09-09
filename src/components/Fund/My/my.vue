@@ -694,7 +694,7 @@ export default {
     }, 
   },
   async beforeRouteEnter(to, from, next) { 
-    console.log({to, from}) 
+    // console.log({to, from}) 
     next();
   }
 }
