@@ -27,7 +27,7 @@
         <div class="title">{{lang.wallet.title}}</div>
         <el-form ref="walletForm" :model="forms" :rules="rules" label-width="90px">
           <el-form-item :label="lang.wallet.amount">
-            <el-input-number v-model="forms.amount" :controls="false" :min="0" :max="1000" :precision="0" @keydown="changeAmount"></el-input-number>
+            <el-input-number v-model="forms.amount" :controls="false" :min="0" :max="1000" :precision="0" @change="changeAmount"></el-input-number>
             <span class="currency">NBZZ</span>
           </el-form-item>
           <!-- <el-slider v-model="vslider" :marks="marks" @input="changeSlider"></el-slider> -->
