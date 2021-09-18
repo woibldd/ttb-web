@@ -3995,9 +3995,9 @@ export default {
     ],
     dialogInfo: {
       succ: {
-        Title: 'congratulations on the success of the rush purchase!',
-        Content: 'after the rush purchase, the allotment quota you get will be distributed to your account, please check.',
-        Subtxt: 'OK', class: 'succ', type: 'succ'
+        title: 'congratulations on the success of the rush purchase!',
+        content: 'after the rush purchase, the allotment quota you get will be distributed to your account, please check.',
+        subTxt: 'OK', class: 'succ', type: 'succ'
       },
       Balance: {Title: 'prompt', content: 'warm prompt: insufficient balance', subtxt: 'OK', type: 'balance'}
     }

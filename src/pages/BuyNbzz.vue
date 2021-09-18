@@ -27,7 +27,8 @@
         <div class="title">{{lang.wallet.title}}</div>
         <el-form ref="walletForm" :model="forms" :rules="rules" label-width="90px">
           <el-form-item :label="lang.wallet.amount">
-            <el-input-number v-model="forms.amount" :controls="false" :min="0" :max="1000" :precision="0" @change="changeAmount"></el-input-number>
+            <!-- <el-input-number v-model="forms.amount" :controls="false" :min="0" :max="1000" :precision="0" @change="changeAmount"></el-input-number> -->
+            <el-input v-model="forms.amount" @input="changeAmount"></el-input>
             <span class="currency">NBZZ</span>
           </el-form-item>
           <!-- <el-slider v-model="vslider" :marks="marks" @input="changeSlider"></el-slider> -->
@@ -151,7 +152,13 @@ export default {
     changeAmount(val) {
       /* if (val) this.vslider = parseInt(new Big(val).minus(Min).div(9));
       else this.vslider = 0; */
-      this.forms.pay_amount = val;
+      this.forms.amount=this.forms.amount.replace(/\D/g,'');
+      if (val > 1000) {
+        this.forms.amount = 1000;
+        this.forms.pay_amount = 1000;
+      } else {
+        this.forms.pay_amount = val;
+      }
     },
     /* changeSlider(val) {
       const pro = 900 / 100;
@@ -231,7 +238,7 @@ export default {
   }
 
   .el-dialog{
-    width: 410px; height: 240px; padding: 0 50px; border-radius: 4px; background: #2a3743; text-align: center;
+    width: 410px; padding: 0 50px 30px; border-radius: 4px; background: #2a3743; text-align: center;
     .el-dialog__body{padding: 0; color: #bfcedd;}
     .title{margin-bottom: 32px; font-size: 18px;}
     .title.succ{color: #00ced1;}
