@@ -1,4 +1,5 @@
 export default {
+  buyEvent: 'Hot Buying event',
   finance: 'Finance',
   promotion: 'Promotion',
   quickBuy: 'Quick Buy',
@@ -3960,9 +3961,10 @@ export default {
     pageStatus: ['Start countdown', 'Hot buying', 'Hot buying', 'The event is over'],
     quota: 'Available', progress: 'Current flash sale progress',
     wallet: {
-      title: 'Wallet', amount: 'Quantity', pay_amount: 'Payment currency', Available: 'Available',
+      title: 'Wallet', amount: 'Quantity', pay_amount: 'Currency', Available: 'Available',
       btn: ['Has not started', 'Flash sale', 'Sold out', 'Has ended']
     },
+    Mintips: 'the minimum number of snapped up orders is 100',
     text: [
       {
         title: '1. Information',
@@ -3990,6 +3992,14 @@ export default {
           'IXX reserves the right of final interpretation of the event.'
         ]
       }
-    ]
+    ],
+    dialogInfo: {
+      succ: {
+        Title: 'congratulations on the success of the rush purchase!',
+        Content: 'after the rush purchase, the allotment quota you get will be distributed to your account, please check.',
+        Subtxt: 'OK', class: 'succ', type: 'succ'
+      },
+      Balance: {Title: 'prompt', content: 'warm prompt: insufficient balance', subtxt: 'OK', type: 'balance'}
+    }
   }
 }

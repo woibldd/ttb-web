@@ -3888,6 +3888,15 @@ export default {
           'IXX将保留对活动的最终解释权'
         ]
       }
-    ]
+    ],
+    dialogInfo: {
+      succ: {
+        title: '恭喜你，抢购成功！',
+        content: '抢购结束后，您得到的配售额度将发放至您的账户，请查看。',
+        subTxt: '确定', class: 'succ', type: 'succ'
+      },
+      // fail: {title: '很遗憾，抢购失败…', content: '温馨提示：不要灰心，再试一次会有可能抢到哦。', subTxt: '继续试试', type: 'fail'},
+      balance: {title: '提示', content: '温馨提示：余额不足', subTxt: '确定', type: 'balance'}
+    }
   }
 }

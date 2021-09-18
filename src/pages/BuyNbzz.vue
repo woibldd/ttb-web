@@ -86,17 +86,7 @@ export default {
       // vslider: 0, marks: {0: '0%', 25: '25%', 50: '50%', 75: '75%', 100: '100%'},
       amount: 0, progress: 0,
       dialog: false, dialogActive: {},
-      buyoff: true,
-
-      dialogInfo: {
-        succ: {
-          title: '恭喜你，抢购成功！',
-          content: '抢购结束后，您得到的配售额度将发放至您的账户，请查看。',
-          subTxt: '确定', class: 'succ', type: 'succ'
-        },
-        fail: {title: '很遗憾，抢购失败…', content: '温馨提示：不要灰心，再试一次会有可能抢到哦。', subTxt: '继续试试', type: 'fail'},
-        balance: {title: '提示', content: '温馨提示：余额不足', subTxt: '确定', type: 'balance'}
-      }
+      buyoff: true
     }
   },
   computed: {
@@ -135,7 +125,7 @@ export default {
         return false;
       }
       if (this.forms.pay_amount > this.page.usdt_available) {
-        this.dialogActive = this.dialogInfo.balance;
+        this.dialogActive = this.lang.dialogInfo.balance;
         this.dialog = true;
         return false;
       }
@@ -146,7 +136,7 @@ export default {
         const res = await api.post('/future/activity/buy_wgt', {user_id, ...this.forms});
 
         if (res.code == 200) {
-          this.dialogActive = this.dialogInfo.succ;
+          this.dialogActive = this.lang.dialogInfo.succ;
           this.dialog = true;
         } else {
           this.$message.error(res.message);

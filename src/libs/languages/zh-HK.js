@@ -1,4 +1,5 @@
 export default {
+  buyEvent: '活動搶購',
   finance: '金融业务',
   promotion: '促销',
   quickBuy: '一键买币',
@@ -3793,7 +3794,8 @@ export default {
     wallet: {
       title: '錢包', amount: '搶購數量', pay_amount: '支付幣種', Available: '當前可用',
       btn: ['未開始', '搶購', '已售罄', '已結束']
-    }, 
+    },
+    minTips: '最低搶購數量100個',
     text: [
       {
         title: '一、公募資訊', 
@@ -3821,6 +3823,14 @@ export default {
           'IXX將保留對活動的最終解釋權'
         ]
       }
-    ]
+    ],
+    dialogInfo: {
+      succ: {
+        title: '恭喜你，搶購成功！',
+        content: '搶購結束後，您得到的配售額度將發放至您的帳戶，請查看。',
+        subTxt: '確定', class: 'succ', type: 'succ'
+      },
+      balance: {title: '提示', content: '溫馨提示：餘額不足', subTxt: '確定', type: 'balance'}
+    }
   }
 }

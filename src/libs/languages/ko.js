@@ -1,4 +1,5 @@
 export default {
+  buyEvent: '이벤트 사재 기',
   finance: 'Finance',
   promotion: 'Promotion',
   quickBuy: 'Quick Buy',
@@ -3804,6 +3805,7 @@ export default {
       title: '돈지갑', amount: '사재기수량', pay_amount: '지불 화폐', Available: '현재 사용 가능',
       btn: ['미 시작', '사재 기', '매진', '이미 종료']
     },
+    minTips: '최저 구 매 수량 100 개',
     text: [
       {
         title: '1. 공모정보',
@@ -3831,6 +3833,14 @@ export default {
           'IXX는 이벤트에 대한 최종 해석 권한을 보유합니다.'
         ]
       }
-    ]
+    ],
+    dialogInfo: {
+      succ: {
+        title: '축하합니다, 사재 기 성공!',
+        content: '사재 기 가 끝 난 후, 당신 이 받 은 판매 한 도 는 당신 의 계좌 로 발 급 됩 니 다. 확인 하 세 요.',
+        subTxt: '확정', class: 'succ', type: 'succ'
+      },
+      balance: {title: '알림', content: '따뜻 한 알림: 잔액 부족', subTxt: '확정', type: 'balance'}
+    }
   }
 }
