@@ -178,11 +178,6 @@ export default {
       }
     },
     CountTotal() {
-      if (!this.page.wgt_remaining_amount) {
-        this.amount = '000000';
-        return false;
-      }
-
       const amount = this.page.wgt_remaining_amount + '';
       let str = '';
 
@@ -193,6 +188,7 @@ export default {
         case 3: str = '000' + amount; break;
         case 2: str = '0000' + amount; break;
         case 1: str = '00000' + amount; break;
+        case 0: str = '000000' + amount; break;
       }
 
       this.amount = str.split('');
