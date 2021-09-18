@@ -27,7 +27,7 @@
         <div class="title">{{lang.wallet.title}}</div>
         <el-form ref="walletForm" :model="forms" :rules="rules" label-width="90px">
           <el-form-item :label="lang.wallet.amount">
-            <el-input-number v-model="forms.amount" :controls="false" :min="0" :max="1000" :precision="0" @input="changeAmount" @blur="blurAmount"></el-input-number>
+            <el-input-number v-model="forms.amount" :controls="false" :min="0" :max="1000" :precision="0" @keydown="changeAmount"></el-input-number>
             <span class="currency">NBZZ</span>
           </el-form-item>
           <!-- <el-slider v-model="vslider" :marks="marks" @input="changeSlider"></el-slider> -->
@@ -138,15 +138,15 @@ export default {
         if (res.code == 200) {
           this.dialogActive = this.lang.dialogInfo.succ;
           this.dialog = true;
+        } else if (res.code == 30409) { // 已售罄
+          this.$message.error(res.message);
+          this.getData();
         } else {
           this.$message.error(res.message);
         }
         
         this.buyoff = true;
       }
-    },
-    blurAmount() {
-      if (!this.forms.amount) this.forms.amount = Min;
     },
     changeAmount(val) {
       /* if (val) this.vslider = parseInt(new Big(val).minus(Min).div(9));
@@ -172,8 +172,7 @@ export default {
           default: this.endTime = 0;
         }
 
-        this.countDowmInit();
-        this.countDowm();
+        if (this.page.status != 3) this.countDowm();
         this.CountTotal();
       }
     },
@@ -193,6 +192,9 @@ export default {
 
       this.amount = str.split('');
       this.progress = parseInt(new Big(this.page.executed).div(Total).toFixed() * 100);
+    },
+    endTimeCb() {
+      this.getData();
     }
   }
 }

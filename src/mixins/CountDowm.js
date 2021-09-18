@@ -34,14 +34,18 @@ export default {
         this.minute = Math.floor(diff / (1000 * 60) % 60);
         this.second = Math.floor(diff / 1000 % 60);
       } else {
+        clearInterval(this.timer);
         this.day = 0;
         this.hour = 0;
         this.minute = 0;
         this.second = 0;
+        if (this.endTimeCb) this.endTimeCb();
       }
     },
     countDowm () {
       if (this.timer) clearInterval(this.timer);
+      this.countDowmInit();
+
       this.timer = setInterval(() => {
         this.countDowmInit();
       }, 1000);
@@ -49,5 +53,9 @@ export default {
     formatNum (num) {
       return num < 10 ? '0' + num : '' + num;
     }
+  },
+  beforeRouteLeave(to, from, next){ // 页面离开时清除定时器
+    if (this.timer) clearInterval(this.timer);
+    next();
   }
 }
