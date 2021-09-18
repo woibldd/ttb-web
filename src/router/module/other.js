@@ -222,6 +222,11 @@ export const otherRouter = [
     component: () => import(/* webpackChunkName: "home" */ '@/pages/RushBuy.vue')
   },
   {
+    path: '/BuyNbzz', name: 'BuyNbzz',
+    meta: {auth: false, nav: true, footer: false, class: 'absolute'},
+    component: () => import(/* webpackChunkName: "home" */ '@/pages/BuyNbzz.vue')
+  },
+  {
     path: '/orders',
     name: 'orders',
     meta: {
