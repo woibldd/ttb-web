@@ -1,5 +1,5 @@
 export default {
-  buyEvent: '이벤트 사재 기',
+  buyEvent: '사재 기 이벤트',
   finance: 'Finance',
   promotion: 'Promotion',
   quickBuy: 'Quick Buy',

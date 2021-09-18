@@ -1,5 +1,5 @@
 export default {
-  buyEvent: '活動搶購',
+  buyEvent: '搶購活動',
   finance: '金融业务',
   promotion: '促销',
   quickBuy: '一键买币',
