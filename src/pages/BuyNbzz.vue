@@ -136,7 +136,8 @@ export default {
 
       if (this.buyoff) {
         this.buyoff = false;
-        const res = await api.post('/future/activity/buy_wgt', {user_id: +this.userInfo.id, ...this.forms});
+        const user_id = this.userInfo ? +this.userInfo.id : '';
+        const res = await api.post('/future/activity/buy_wgt', {user_id, ...this.forms});
 
         if (res.code == 200) this.dialogActive = this.dialogInfo.succ;
         else this.dialogActive = this.dialogInfo.fail;
@@ -158,7 +159,8 @@ export default {
       this.forms.pay_amount = new Big(this.forms.amount).times(1);
     },
     async getData() {
-      const res = await api.get('/future/activity/wgt_info', {params: {user_id: +this.userInfo.id}});
+      const user_id = this.userInfo ? +this.userInfo.id : '';
+      const res = await api.get('/future/activity/wgt_info', {params: {user_id}});
 
       if (res.code == 200) {
         this.page = res.data;
