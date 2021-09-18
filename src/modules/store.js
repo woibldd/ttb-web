@@ -183,6 +183,7 @@ export const actions = {
       state.userStatus = 1
       state.userInfo = userInfo
       local.everSignup = true
+      utils.setStorageValue('user_info', JSON.stringify(userInfo))
       utils.setStorageValue('X-TOKEN', userInfo.token)
       window.zE && window.zE(function () {
         window.zE.identify({
