@@ -133,8 +133,12 @@ export default {
 
       if (this.buyoff) {
         this.buyoff = false;
-        const user_id = this.userInfo ? +this.userInfo.id : '';
-        const res = await api.post('/future/activity/buy_wgt', {user_id, ...this.forms});
+        const send = {
+          user_id: this.userInfo ? +this.userInfo.id : '',
+          amount: +this.forms.amount,
+          pay_amount: +this.forms.pay_amount
+        };
+        const res = await api.post('/future/activity/buy_wgt', send);
 
         if (res.code == 200) {
           this.dialogActive = this.lang.dialogInfo.succ;
@@ -152,7 +156,7 @@ export default {
     changeAmount(val) {
       /* if (val) this.vslider = parseInt(new Big(val).minus(Min).div(9));
       else this.vslider = 0; */
-      this.forms.amount=this.forms.amount.replace(/\D/g,'');
+      this.forms.amount = this.forms.amount.replace(/\D/g,'');
       if (val > 1000) {
         this.forms.amount = 1000;
         this.forms.pay_amount = 1000;
