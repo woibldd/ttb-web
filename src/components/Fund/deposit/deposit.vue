@@ -63,18 +63,7 @@
               :value="item"/>
           </el-select>
         </div>
-      </div>
-      <!-- <div class="fund-item-row mb-24">
-        <div class="row__label">{{ $t('deposit_address') }}</div>
-        <div class="row__value">
-          <div class="deposit-address">
-            <span class="address-txt">{{ address }}</span>
-            <span
-              class="address-copy pointer"
-              @click="copy">{{ $t('copy') }}</span>
-          </div>
-        </div>
-      </div> -->
+      </div> 
       <div class="fund-item-row mb-24" style="height: auto">
         <div class="row__label">{{ $t('fund.deposit.address') }}</div>
         <div class="row__value">
@@ -270,8 +259,7 @@ export default {
           this.selectLian = this.lianDataList[coin.currency][0]
           this.selectCoin = this.selectLian
         }
-      }
-      else {
+      } else {
         this.selectCoin = coin
       }
       await this.getCoinAddress() 
@@ -279,8 +267,8 @@ export default {
         this.openEosAlert = true
         this.curreryCoin = coin.currency
       } 
-      this.neverShowAgain = local.depositAlert[this.selectCoin.currency] || false
-      this.showModal = !this.neverShowAgain
+      // this.neverShowAgain = local.depositAlert[this.selectCoin.currency] || false
+      // this.showModal = !this.neverShowAgain
     },
     async lianSelect(coin) {
       this.selectCoin = coin
@@ -321,8 +309,8 @@ export default {
             this.selectLian = this.lianDataList['USDT'].find(a => a.chain==='TRX') 
             this.selectCoin = this.selectLian || this.allCoins[0]
           } 
-          this.neverShowAgain = local.depositAlert[this.selectCoin.currency] || false
-          this.showModal = !this.neverShowAgain
+          // this.neverShowAgain = local.depositAlert[this.selectCoin.currency] || false
+          // this.showModal = !this.neverShowAgain
         }
       })
     },

@@ -220,6 +220,16 @@ export const otherRouter = [
       class: 'absolute'
     },
     component: () => import(/* webpackChunkName: "home" */ '@/pages/RushBuy.vue')
+  }, {
+    path: '/RushBuyN',
+    name: 'RushBuyN',
+    meta: {
+      auth: false,
+      nav: true,
+      footer: false,
+      class: 'absolute'
+    },
+    component: () => import(/* webpackChunkName: "home" */ '@/pages/RushBuyN.vue')
   },
   {
     path: '/orders',
