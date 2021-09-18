@@ -165,7 +165,13 @@ export default {
       if (res.code == 200) {
         this.page = res.data;
         
-        this.remainTime = this.page.end_time / 1000;
+        switch(this.page.status) {
+          case 0: this.remainTime = this.page.begin_time / 1000; break;
+          case 1:
+          case 2: this.remainTime = this.page.end_time / 1000; break;
+          default: this.remainTime = 0;
+        }
+
         this.countDowmInit();
         this.CountTotal();
       }
@@ -189,7 +195,7 @@ export default {
       }
 
       this.amount = str.split('');
-      this.progress = parseInt(new Big(this.page.executed).div(Total) * 100);
+      this.progress = parseInt(parseInt(new Big(this.page.executed).div(Total)) * 100);
     }
   }
 }
