@@ -3955,5 +3955,41 @@ export default {
       title: 'Search results', total: 'Total {total} results'
     },
     goHome: 'Return to home page'
+  },
+  buy_nbzz: {
+    pageStatus: ['Start countdown', 'Hot buying', 'Hot buying', 'The event is over'],
+    quota: 'NBZZ Available', progress: 'Current flash sale progress',
+    wallet: {
+      title: 'Wallet', amount: 'Quantity', pay_amount: 'Payment currency', Available: 'Available',
+      btn: ['Has not started', 'Flash sale', 'Sold out', 'Has ended']
+    },
+    text: [
+      {
+        title: '1. Information',
+        content: [
+          'Assets: NBZZ',
+          'Total Offering: 625,000',
+          'Time: 10:00 am, September 19, 2021-10:00 am, September 21, 2021 (UTC+8)',
+          'Fixed price: 1USDT/token',
+          'Amount of subscription: minimum 100 NBZZ, maximum 1000NBZZ',
+          'Trading pair: USDT',
+          'Release Time: released within 72 hours after the mainnet goes online'
+        ]
+      },
+      {
+        title: '2. Terms & Conditions',
+        content: [
+          'Register an IXX account.', 'The available balance of the account is at least 100USDT.'
+        ]
+      },
+      {
+        title: '3, Please take note',
+        content: [
+          'If you don’t have an IXX account yet, click here to register to get a $10 contract trading bonus.',
+          'Reward Distribution: rewards will be distributed within 48 hours after the event ends. ',
+          'IXX reserves the right of final interpretation of the event.'
+        ]
+      }
+    ]
   }
 }

@@ -103,6 +103,7 @@ const KycRelay = () => import(/* webpackChunkName: "KycRelay" */ '@/pages/active
 const ExchangeRank = () => import(/* webpackChunkName: "ExchangeRank" */ '@/pages/active/ExchangeRank')
 const Lottery = () => import(/* webpackChunkName: "lottery" */ '@/pages/active/lottery')
 const RushBuy = () => import(/* webpackChunkName: "home" */ '@/pages/RushBuy.vue')
+const BuyNbzz = () => import(/* webpackChunkName: "home" */ '@/pages/BuyNbzz.vue')
 
 // const Guide = () => import(/* webpackChunkName: "home" */ '@/pages/guide.vue')
 const MessageSettings = () => import(/* webpackChunkName: "home" */ '@/pages/Profile/MessageSettings.vue')
@@ -314,6 +315,10 @@ export const routes = [
       class: 'absolute'
     },
     component: RushBuy
+  },
+  {
+    path: '/BuyNbzz', name: 'BuyNbzz', component: BuyNbzz,
+    meta: {auth: false, nav: true, footer: false, class: 'absolute'}
   },
   // {
   //   path: 'MessageSettings',
