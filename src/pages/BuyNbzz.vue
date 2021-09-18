@@ -198,7 +198,7 @@ export default {
       }
 
       this.amount = str.split('');
-      this.progress = parseInt(new Big(this.page.executed).div(Total).toFixed() * 100);
+      this.progress = new Big(this.page.executed).div(Total).toFixed(4) * 100;
     },
     endTimeCb() {
       this.getData();
@@ -215,7 +215,7 @@ export default {
   .el-progress-bar__outer{background-color: #4e6072;}
   .el-progress-bar__inner{background-color: #19fcff;}
   .el-progress-bar__inner::after{position: absolute; top: -3px; right: -3px; width: 12px; height: 12px; border-radius: 50%; background: #19fcff;}
-  .el-progress-bar__innerText{position: absolute; top: -20px; right: -20px; font-size: 16px;}
+  .el-progress-bar__innerText{position: absolute; top: -20px; right: -32px; width: 60px; text-align: center; font-size: 16px;}
   
   .el-form-item__label{line-height: 55px; text-align: left; color: #fff;}
   .el-input__inner{height: 55px; border: none; text-align: left; color: #fff; background-color: #232f3b;}
