@@ -81,7 +81,7 @@ export default {
   data () {
     return {
       state,
-      forms: {amount: 0, pay_amount: 0.00},
+      forms: {amount: '', pay_amount: 0.00},
       rules: {},
       page: {},
       // vslider: 0, marks: {0: '0%', 25: '25%', 50: '50%', 75: '75%', 100: '100%'},
