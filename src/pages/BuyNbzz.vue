@@ -27,7 +27,7 @@
         <div class="title">{{lang.wallet.title}}</div>
         <el-form ref="walletForm" :model="forms" :rules="rules" label-width="90px">
           <el-form-item :label="lang.wallet.amount">
-            <el-input-number v-model="forms.amount" :controls="false" :min="0" :max="1000" @input="changeAmount" @blur="blurAmount"></el-input-number>
+            <el-input-number v-model="forms.amount" :controls="false" :min="0" :max="1000" :precision="0" @input="changeAmount" @blur="blurAmount"></el-input-number>
             <span class="currency">NBZZ</span>
           </el-form-item>
           <!-- <el-slider v-model="vslider" :marks="marks" @input="changeSlider"></el-slider> -->
@@ -164,15 +164,16 @@ export default {
 
       if (res.code == 200) {
         this.page = res.data;
-        
+
         switch(this.page.status) {
-          case 0: this.remainTime = this.page.begin_time / 1000; break;
+          case 0: this.endTime = this.page.begin_time; break;
           case 1:
-          case 2: this.remainTime = this.page.end_time / 1000; break;
-          default: this.remainTime = 0;
+          case 2: this.endTime = this.page.end_time; break;
+          default: this.endTime = 0;
         }
 
         this.countDowmInit();
+        this.countDowm();
         this.CountTotal();
       }
     },
@@ -195,7 +196,7 @@ export default {
       }
 
       this.amount = str.split('');
-      this.progress = parseInt(parseInt(new Big(this.page.executed).div(Total)) * 100);
+      this.progress = parseInt(new Big(this.page.executed).div(Total).toFixed() * 100);
     }
   }
 }

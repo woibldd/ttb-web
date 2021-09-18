@@ -1,11 +1,13 @@
 export default {
   data () {
     return {
-      remainTime: 0, // 倒计时间总秒数
-      hour: 0, minute: 0, second: 0, timer: null
+      endTime: 0, day: 0, hour: 0, minute: 0, second: 0, timer: null, showDay: false
     }
   },
   computed: {
+    dayString() {
+      return this.formatNum(this.day);
+    },
     hourString () {
       return this.formatNum(this.hour);
     },
@@ -18,40 +20,30 @@ export default {
   },
   methods: {
     countDowmInit() {
-      if (this.remainTime > 0) {
-        this.hour = Math.floor((this.remainTime / 3600) % 24);
-        this.minute = Math.floor((this.remainTime / 60) % 60);
-        this.second = Math.floor(this.remainTime % 60);
-        this.countDowm();
+      const nowtime = new Date().getTime();
+      const diff = this.endTime - nowtime;
+
+      if (diff > 0) {
+        if (this.showDay) {
+          this.day = Math.floor(diff / (1000 * 60 * 60 *24));
+          this.hour = Math.floor(diff / (1000 * 60 * 60) % 24);
+        } else {
+          this.hour = Math.floor(diff / (1000 * 60 * 60));
+        }
+
+        this.minute = Math.floor(diff / (1000 * 60) % 60);
+        this.second = Math.floor(diff / 1000 % 60);
+      } else {
+        this.day = 0;
+        this.hour = 0;
+        this.minute = 0;
+        this.second = 0;
       }
     },
     countDowm () {
       if (this.timer) clearInterval(this.timer);
       this.timer = setInterval(() => {
-        if (this.hour === 0) {
-          if (this.minute !== 0 && this.second === 0) {
-            this.second = 59;
-            this.minute -= 1;
-          } else if (this.minute === 0 && this.second === 0) {
-            this.second = 0;
-            clearInterval(this.timer);
-            if (this.countDowmEnd) this.countDowmEnd(); // 倒计时结束
-          } else {
-            this.second -= 1;
-          }
-        } else {
-          if (this.minute !== 0 && this.second === 0) {
-            this.second = 59;
-            this.minute -= 1;
-          } else if (this.minute === 0 && this.second === 0) {
-            this.hour -= 1;
-            this.minute = 59;
-            this.second = 59;
-            if (this.countDowmEnd) this.countDowmEnd(); // 倒计时结束
-          } else {
-            this.second -= 1;
-          }
-        }
+        this.countDowmInit();
       }, 1000);
     },
     formatNum (num) {
