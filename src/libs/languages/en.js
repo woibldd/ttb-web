@@ -3958,7 +3958,7 @@ export default {
   },
   buy_nbzz: {
     pageStatus: ['Start countdown', 'Hot buying', 'Hot buying', 'The event is over'],
-    quota: 'NBZZ Available', progress: 'Current flash sale progress',
+    quota: 'Available', progress: 'Current flash sale progress',
     wallet: {
       title: 'Wallet', amount: 'Quantity', pay_amount: 'Payment currency', Available: 'Available',
       btn: ['Has not started', 'Flash sale', 'Sold out', 'Has ended']

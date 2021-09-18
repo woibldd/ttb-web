@@ -27,19 +27,19 @@
         <div class="title">{{lang.wallet.title}}</div>
         <el-form ref="walletForm" :model="forms" :rules="rules" label-width="90px">
           <el-form-item :label="lang.wallet.amount">
-            <el-input-number v-model="forms.amount" :controls="false" :min="100" :max="1000" @input="changeAmount" @blur="blurAmount"></el-input-number>
+            <el-input-number v-model="forms.amount" :controls="false" :min="0" :max="1000" @input="changeAmount" @blur="blurAmount"></el-input-number>
             <span class="currency">NBZZ</span>
           </el-form-item>
-          <el-slider v-model="vslider" :marks="marks" @input="changeSlider"></el-slider>
+          <!-- <el-slider v-model="vslider" :marks="marks" @input="changeSlider"></el-slider> -->
           <el-form-item :label="lang.wallet.pay_amount">
             <el-input-number v-model="forms.pay_amount" placeholder="0.00" :controls="false" :precision="2" disabled></el-input-number>
-            <span class="currency">USDT</span>
+            <span class="currency" style="color: #00ced1">USDT</span>
           </el-form-item>
           <div class="balance">
             <div>{{lang.wallet.Available}}：{{page.usdt_available}} USDT</div>
             <div class="transforms">
-              <router-link style="margin-right: 22px" :to="''">{{$t('deposit')}}</router-link>
-              <router-link :to="''">{{$t('suvbanean')}}</router-link>
+              <router-link style="margin-right: 22px" :to="{name: 'deposit'}">{{$t('deposit')}}</router-link>
+              <router-link :to="'/fund/transfer'">{{$t('suvbanean')}}</router-link>
             </div>
           </div>
           <el-button @click="buy" :disabled="page.status == 1 ? false : true">{{lang.wallet.btn[page.status]}}</el-button>
@@ -73,16 +73,17 @@ import CountDowm from '@/mixins/CountDowm'
 import Big from "big.js";
 
 const Total = 625000;
+const Min = 100;
 
 export default {
   mixins: [CountDowm],
   data () {
     return {
       state,
-      forms: {amount: 100, pay_amount: 100.00},
+      forms: {amount: 0, pay_amount: 0.00},
       rules: {},
       page: {},
-      vslider: 0, marks: {0: '0%', 25: '25%', 50: '50%', 75: '75%', 100: '100%'},
+      // vslider: 0, marks: {0: '0%', 25: '25%', 50: '50%', 75: '75%', 100: '100%'},
       amount: 0, progress: 0,
       dialog: false, dialogActive: {},
       buyoff: true,
@@ -129,9 +130,14 @@ export default {
       }
     },
     async buy() {
+      if (this.forms.amount < Min) {
+        this.$message.error(this.lang.minTips);
+        return false;
+      }
       if (this.forms.pay_amount > this.page.usdt_available) {
         this.dialogActive = this.dialogInfo.balance;
         this.dialog = true;
+        return false;
       }
 
       if (this.buyoff) {
@@ -139,25 +145,29 @@ export default {
         const user_id = this.userInfo ? +this.userInfo.id : '';
         const res = await api.post('/future/activity/buy_wgt', {user_id, ...this.forms});
 
-        if (res.code == 200) this.dialogActive = this.dialogInfo.succ;
-        else this.dialogActive = this.dialogInfo.fail;
-
-        this.dialog = true;
+        if (res.code == 200) {
+          this.dialogActive = this.dialogInfo.succ;
+          this.dialog = true;
+        } else {
+          this.$message.error(res.message);
+        }
+        
         this.buyoff = true;
       }
     },
     blurAmount() {
-      if (!this.forms.amount) this.forms.amount = 100;
+      if (!this.forms.amount) this.forms.amount = Min;
     },
     changeAmount(val) {
-      if (val) this.vslider = parseInt(new Big(val).minus(100).div(9));
-      else this.vslider = 0;
+      /* if (val) this.vslider = parseInt(new Big(val).minus(Min).div(9));
+      else this.vslider = 0; */
+      this.forms.pay_amount = val;
     },
-    changeSlider(val) {
+    /* changeSlider(val) {
       const pro = 900 / 100;
-      this.forms.amount = 100 + pro * val;
+      this.forms.amount = Min + pro * val;
       this.forms.pay_amount = new Big(this.forms.amount).times(1);
-    },
+    }, */
     async getData() {
       const user_id = this.userInfo ? +this.userInfo.id : '';
       const res = await api.get('/future/activity/wgt_info', {params: {user_id}});
@@ -257,7 +267,7 @@ export default {
 .box-show{width: 604px; margin-right: 37px;}
 .box-wallet{width: 558px;}
 .box-countDowm{
-  height: 70px; line-height: 70px; padding: 20px 0; margin-bottom: 30px; font-size: 24px; color: #00ced1; text-align: center; border-radius: 5px;
+  height: 70px; line-height: 70px; padding: 20px 0; margin-bottom: 20px; font-size: 24px; color: #00ced1; text-align: center; border-radius: 5px;
   .icon{display: inline-block; width: 27px; height: 37px; margin-right: 15px; transform: translateY(10px); background: url(~@/assets/activity_nbzz/hot.png) no-repeat;}
   .text{margin-right: 25px; font-size: 18px; color: #fff;}
   .time{display: inline-block; padding: 0 16px; background: #232f3b;}
@@ -265,9 +275,9 @@ export default {
 }
 .box-progress{
   padding: 36px 27px 48px 36px; color: #fff; text-align: center; border-radius: 5px;
-  .title{margin-bottom: 48px; font-size: 18px;}
+  .title{margin-bottom: 20px; font-size: 18px;}
   .number{
-    display: flex; justify-content: space-between; height: 80px; line-height: 80px; margin-bottom: 75px; font-size: 28px;
+    display: flex; justify-content: space-between; height: 80px; line-height: 80px; margin-bottom: 40px; font-size: 28px;
     span{width: 58px; background: #232f3b;}
     i{transform: translateY(22px);}
     em{font-size: 16px; color: #4e6072;}

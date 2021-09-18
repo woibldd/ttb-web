@@ -107,6 +107,12 @@
           </div>
           <!-- <router-link to="/share_option" class="nav_link ml-30">{{ $t('shareOption.navText') }}</router-link>  -->
           
+          <!-- 2021-09-18 新加 nbzz抢购活动 -->
+          <div class="nav_link" style="padding: 0">
+            <router-link :to="{name: 'BuyNbzz'}" class="nav_link ml-30">{{ $t('buyEvent') }}</router-link>
+            <icon name="hot-red" />
+          </div>
+          
         </div>
       </div>
       <div class="nav_right">

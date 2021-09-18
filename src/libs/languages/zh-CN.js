@@ -1,4 +1,5 @@
 export default {
+  buyEvent: '活动抢购',
   finance: '金融业务',
   promotion: '促销',
   quickBuy: '一键买币',
@@ -3854,11 +3855,12 @@ export default {
   },
   buy_nbzz: {
     pageStatus: ['开始倒计时', '火热抢购中', '火热抢购中', '活动已结束'],
-    quota: 'NBZZ可抢购额度', progress: '当前抢购进度',
+    quota: '可抢购额度', progress: '当前抢购进度',
     wallet: {
       title: '钱包', amount: '抢购数量', pay_amount: '支付币种', Available: '当前可用',
       btn: ['未开始', '抢购', '已售罄', '已结束']
     },
+    minTips: '最低抢购数量100个',
     text: [
       {
         title: '一、公募信息',

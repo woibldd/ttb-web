@@ -3789,7 +3789,7 @@ export default {
   },
   buy_nbzz: {
     pageStatus: ['開始倒數計時', '火熱搶購中', '火熱搶購中', '活動已結束'], 
-    quota: 'NBZZ可搶購額度', progress: '當前搶購進度', 
+    quota: '可搶購額度', progress: '當前搶購進度', 
     wallet: {
       title: '錢包', amount: '搶購數量', pay_amount: '支付幣種', Available: '當前可用',
       btn: ['未開始', '搶購', '已售罄', '已結束']

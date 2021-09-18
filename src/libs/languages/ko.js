@@ -3799,7 +3799,7 @@ export default {
   },
   buy_nbzz: {
     pageStatus: ['카운트다운 시작', '불타는앞다투어구매중', '불타는앞다투어구매중', '이벤트 종료'],
-    quota: 'NBZZ 사재 기 가능 한도', progress: '현재 사재 기 진도',
+    quota: '사재 기 가능 한도', progress: '현재 사재 기 진도',
     wallet: {
       title: '돈지갑', amount: '사재기수량', pay_amount: '지불 화폐', Available: '현재 사용 가능',
       btn: ['미 시작', '사재 기', '매진', '이미 종료']
