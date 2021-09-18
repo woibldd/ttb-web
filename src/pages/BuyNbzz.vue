@@ -202,7 +202,7 @@ export default {
       }
 
       this.amount = str.split('');
-      this.progress = new Big(this.page.executed).div(Total).toFixed(4) * 100;
+      this.progress = new Big(this.page.executed).div(Total).toFixed(2) * 100;
     },
     endTimeCb() {
       this.getData();
