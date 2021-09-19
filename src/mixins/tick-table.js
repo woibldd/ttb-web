@@ -81,19 +81,23 @@ export default {
         })
       } else if (this.tabSelected === 'main') {
         return _.filter(list, pair => {
-          return pair.type === 1
+          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
+              && pair.type === 1
         })
       } else if (this.tabSelected === 'DeFi') {
         return _.filter(list, pair => {
-          return pair.type === 7
+          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
+              && pair.type === 7
         })
       } else if (this.tabSelected === 'NFT') {
         return _.filter(list, pair => {
-          return pair.type === 8
+          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
+              && pair.type === 8
         })
       } else if (this.tabSelected === 'GameFi') {
         return _.filter(list, pair => {
-          return pair.type === 9
+          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
+              && pair.type === 9
         })
       } else {
         let arr =  _.filter(list, pair => {
