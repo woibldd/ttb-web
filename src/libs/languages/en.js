@@ -3994,6 +3994,7 @@ export default {
       }
     ],
     dialogInfo: {
+      login: {title: 'prompt', content: 'please login first', subtxt: 'OK', class: 'login', type: 'succ'},
       succ: {
         title: 'congratulations on the success of the rush purchase!',
         content: 'after the rush purchase, the allotment quota you get will be distributed to your account, please check.',

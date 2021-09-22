@@ -60,7 +60,7 @@
 
   <el-dialog :visible.sync="dialog" :close-on-click-modal="false">
     <div class="title" :class="dialogActive.class">{{dialogActive.title}}</div>
-    <div class="content">{{dialogActive.content}}</div>
+    <div class="content" :class="dialogActive.class">{{dialogActive.content}}</div>
     <el-button @click="dialogBtn(dialogActive.type)">{{dialogActive.subTxt}}</el-button>
   </el-dialog>
 </div>
@@ -121,6 +121,12 @@ export default {
       }
     },
     async buy() {
+      if (!this.state.userInfo) {
+        this.dialogActive = this.lang.dialogInfo.login;
+        this.dialog = true;
+        return false;
+      }
+
       if (this.forms.amount < Min) {
         this.$message.error(this.lang.minTips);
         return false;
@@ -185,6 +191,8 @@ export default {
 
         if (this.page.status != 3) this.countDowm();
         this.CountTotal();
+      } else {
+        this.amount = '000000'.split('');
       }
     },
     CountTotal() {
@@ -202,7 +210,7 @@ export default {
       }
 
       this.amount = str.split('');
-      this.progress = new Big(this.page.executed).div(Total).toFixed(2) * 100;
+      this.progress = new Big(this.page.executed).div(Total).toFixed(4) * 100;
     },
     endTimeCb() {
       this.getData();
@@ -247,6 +255,7 @@ export default {
     .title{margin-bottom: 32px; font-size: 18px;}
     .title.succ{color: #00ced1;}
     .content{line-height: 30px; margin-bottom: 32px; font-size: 14px; text-align: left;}
+    .content.login{text-align: center;}
     .el-button{width: 100%; height: 46px; font-size: 16px; color: #fff; background: #00ced1; border: none;}
     // .el-dialog__header{display: none;}
   }

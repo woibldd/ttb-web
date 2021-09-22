@@ -3835,6 +3835,7 @@ export default {
       }
     ],
     dialogInfo: {
+      login: {title: '알림', content: '먼저 로그 인 하 세 요', subTxt: '확인', class: 'login', type: 'succ'},
       succ: {
         title: '축하합니다, 사재 기 성공!',
         content: '사재 기 가 끝 난 후, 당신 이 받 은 판매 한 도 는 당신 의 계좌 로 발 급 됩 니 다. 확인 하 세 요.',

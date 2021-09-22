@@ -3825,6 +3825,7 @@ export default {
       }
     ],
     dialogInfo: {
+      login: {title: '提示', content: '請先登錄', subTxt: '確定', class: 'login', type: 'succ'},
       succ: {
         title: '恭喜你，搶購成功！',
         content: '搶購結束後，您得到的配售額度將發放至您的帳戶，請查看。',

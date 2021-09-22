@@ -3890,6 +3890,7 @@ export default {
       }
     ],
     dialogInfo: {
+      login: {title: '提示', content: '请先登录', subTxt: '确定', class: 'login', type: 'succ'},
       succ: {
         title: '恭喜你，抢购成功！',
         content: '抢购结束后，您得到的配售额度将发放至您的账户，请查看。',
