@@ -635,12 +635,13 @@ export default {
         if (res && res.data) {
           this.lianData = []
           res.data.forEach((item) => {
-            if((item.currency === 'USDT' || item.currency==='LEMO' || item.currency==='BNB' ) && item.withdrawable) {
+            if((item.currency === 'USDT' || item.currency==='LEMO' || item.currency==='BNB' || item.currency ==='CFX' ) && item.withdrawable) {
               if (item.chain === 'OMNI') { item.currencyName = item.currency + '-' + 'Omni'}
               if (item.chain === 'ETH') { item.currencyName = item.currency + '-' + 'ERC20'}
               if (item.chain === 'TRX') { item.currencyName = item.currency + '-' + 'TRC20'}
               if (item.chain === 'BSC') { item.currencyName = item.currency + '-' + 'BSC'}
               if (item.chain === 'BNB') { item.currencyName = item.currency + '-' + 'BNB'}
+              if (item.chain === 'CFX') { item.currencyName = item.currency + '-' + 'CFX'} 
               this.lianData.push(item)
               if (!this.lianDataList[item.currency])  
                 this.lianDataList[item.currency] = [] 

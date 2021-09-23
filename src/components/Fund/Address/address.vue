@@ -27,7 +27,7 @@
             </el-select>
           </div>
         </div>
-        <div v-if="selectCoin.currency === 'USDT' || this.selectCoin.currency === 'BNB' || this.selectCoin.currency === 'LEMO'" class="fund-item-row mb-14">
+        <div v-if="selectCoin.currency === 'USDT' || this.selectCoin.currency === 'BNB' || this.selectCoin.currency === 'LEMO' || this.selectCoin.currency === 'CFX'" class="fund-item-row mb-14">
           <div class="row__label">
             <el-popover
               :content="depTip"
@@ -206,12 +206,13 @@ export default {
         if (res && res.data) {
           this.lianData = []
           res.data.forEach((item) => {
-            if((item.currency === 'USDT' || item.currency === 'BNB' || item.currency === 'LEMO') && item.withdrawable) {
+            if((item.currency === 'USDT' || item.currency === 'BNB' || item.currency === 'LEMO' || item.currency ==='CFX') && item.withdrawable) {
               if (item.chain === 'OMNI') { item.currencyName = item.currency + '-' + 'Omni'}
               if (item.chain === 'ETH') { item.currencyName = item.currency + '-' + 'ERC20'}
               if (item.chain === 'TRX') { item.currencyName = item.currency + '-' + 'TRC20'}
               if (item.chain === 'BSC') { item.currencyName = item.currency + '-' + 'BSC'}
               if (item.chain === 'BNB') { item.currencyName = item.currency + '-' + 'BNB'}
+              if (item.chain === 'CFX') { item.currencyName = item.currency + '-' + 'CFX'} 
               this.lianData.push(item) 
               if (!this.lianDataList[item.currency])  
                 this.lianDataList[item.currency] = [] 
@@ -255,7 +256,7 @@ export default {
       }
 
       const param = {
-        chain: (this.selectCoin.currency === 'USDT' || this.selectCoin.currency === 'BNB' || this.selectCoin.currency === 'LEMO') ? this.selectLian.chain : '',
+        chain: (this.selectCoin.currency === 'USDT' || this.selectCoin.currency === 'BNB' || this.selectCoin.currency === 'LEMO' || this.selectCoin.currency ==='CFX') ? this.selectLian.chain : '',
         currency: this.selectCoin.currency,
         address: this.address,
         description: this.description
