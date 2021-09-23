@@ -71,7 +71,7 @@
             <span
               v-else
               :class="typeof item.class === 'function'?item.class(row[item.prop],item.prop,row):item.class">
-              {{ row[item.prop] | filterColumnValue(item.prop,row,item.handleValue) }}
+              {{ row[item.prop] | filterColumnValue(item.prop,row,item.handleValue) }} 
             </span>
           </td>
           <td v-if="lastColumnConfig">
@@ -81,52 +81,7 @@
           </td>
         </tr>
       </tbody>
-    </table>
-    <!-- <el-table
-      class="table  mb-10"
-      ref="elTable"
-      v-bind="$attrs"
-      :data="tableList">
-      <el-table-column
-        v-for="(item,index) in tableColumns"
-        :key="index"
-        :show-overflow-tooltip="true"
-        v-bind="item"
-        :label="item.hearderLabel"
-        :width="item.hearderWidth && item.hearderWidth(item.prop)||''"
-      >
-        <template
-          slot="header"
-          slot-scope="{ column }">
-          <el-tooltip
-            :disabled="true"
-            :content="column.label"
-            placement="top"
-            effect="light">
-            <span class="text-nowrap">{{ column.label }}</span>
-          </el-tooltip>
-        </template>
-        <template slot-scope="scope">
-          <span :class="typeof item.class === 'function'?item.class(scope.row[item.prop],item.prop,scope.row):item.class">
-            {{ scope.row[item.prop] | filterColumnValue(item.prop,scope.row,item.handleValue) }}
-          </span>
-        </template>
-      </el-table-column>
-      <el-table-column
-        v-if="lastColumnConfig"
-        v-bind="lastColumnConfig">
-        <template slot="header">
-          <p
-            class="text-nowrap"
-            :style="{textAlign:lastColumnConfig.headerAlign||'left'}">{{ lastColumnConfig.headerLabel }}</p>
-        </template>
-        <template slot-scope=" { row }">
-          <slot
-            name="handlerDom"
-            :data="row" />
-        </template>
-      </el-table-column>
-    </el-table> -->
+    </table> 
   </div>
 </template>
 

@@ -863,7 +863,10 @@ export default {
           // hearderWidth: key => ['amount', 'trade_type', 'amount'].includes(key) && '50px',
           handleValue: (value, key, row) => {
             switch (key) {
-              case 'amount':
+              case 'amount': 
+                if (this.activeTableTabKey==='lossEntrust') {
+                  return value
+                }
                 return `${(row.side === 2 || row.side === 3) ? '-' : ''}${value}`
               case 'side':
                 // return `${row.side === 2 ? this.$tR('sell') : this.$tR('buy')}`
@@ -1393,8 +1396,7 @@ export default {
       return new Promise(resolve => {
         this._timer = setTimeout(async () => {
           await this.handleBalanceList() 
-          const res = await getAllAmount()  
-
+          const res = await getAllAmount()   
           if (!res.code) {
             const { holding_amount: shipped, active_amount: curEntrust, active_triggers_amount: lossEntrust, active_orders_amount: historyEntrust, orders_amount: bargain } = res.data
             const data = this.amountObj && JSON.parse(JSON.stringify(this.amountObj))
