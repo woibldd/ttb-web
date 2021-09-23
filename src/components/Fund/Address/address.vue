@@ -102,7 +102,7 @@
           :label="hd.title">
           <template slot-scope="scope">
             <span>{{ scope.row[hd.key] }}</span>
-            <label v-if="hd.key==='currency' && (scope.row[hd.key]==='USDT' || scope.row[hd.key]==='BNB' || scope.row[hd.key]==='LEMO')" class="chain">
+            <label v-if="hd.key==='currency' && (scope.row[hd.key]==='USDT' || scope.row[hd.key]==='BNB' || scope.row[hd.key]==='LEMO' || scope.row[hd.key]==='CFX')" class="chain">
               {{ chainDict[scope.row['chain']] || scope.row['chain'] }} 
             </label>
           </template>
