@@ -28,7 +28,7 @@
             v-for="(item,key) in tableColumns"
             :style="{width: item.width(currentTab, item.prop)}"
             :key="key">
-            <div v-if="(currentTab==='curEntrust' || currentTab==='lossEntrust') && item.prop==='amount'">
+            <div v-if="(currentTab==='curEntrust') && item.prop==='amount'">
               <edit-cell
                 :value="row[item.prop]"
                 :type="'amount'"
@@ -41,7 +41,7 @@
                 </span>
               </edit-cell>
             </div>
-            <div v-else-if="(currentTab==='curEntrust' || currentTab==='lossEntrust') && item.prop==='price'">
+            <div v-else-if="(currentTab==='curEntrust') && item.prop==='price'">
               <edit-cell
                 :value="row[item.prop]"
                 :type="'price'"
@@ -54,7 +54,7 @@
                 </span>
               </edit-cell>
             </div>
-            <div v-else-if="currentTab==='lossEntrust' && item.prop==='trigger_price'">
+            <!-- <div v-else-if="currentTab==='lossEntrust' && item.prop==='trigger_price'">
               <edit-cell
                 :value="row[item.prop]"
                 :type="item.prop"
@@ -66,7 +66,7 @@
                   {{ row[item.prop] | filterColumnValue(item.prop,row,item.handleValue) }}
                 </span>
               </edit-cell>
-            </div>
+            </div> -->
             <!-- <span v-else-if="currentTab==='lossEntrust' && item.prop==='distancePrice'"/> -->
             <span
               v-else

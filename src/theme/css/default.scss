@@ -1,5 +1,6 @@
 /* primary */
 $primary: #01CED1; // base -主色
+$primary-back: #ffffff;
 $primary-hover: #22CED0; // hover
 $primary-active: #01CED1; // active
 $primary-disabled: rgba(0,0,0,0.2); // disabled
@@ -127,11 +128,11 @@ $font-down: #F45151;
 
 $--font-path: '~element-ui/lib/theme-chalk/fonts'; 
 
-$--color-primary: #C9A96C;
+$--color-primary: #01CED1;
 /// color|1|Functional Color|1
 $--color-success: #09C989 !default;
 /// color|1|Functional Color|1
-$--color-warning: #C9A96C !default;
+$--color-warning: #01CED1 !default;
 /// color|1|Functional Color|1
 $--color-danger: #F24E4D !default;
 /// color|1|Functional Color|1 
@@ -142,9 +143,9 @@ $--color-light: #dfe4ed !default;
 
 $--border-info: #909399 !default;
 //contract
-$--contract-table-bg: #252525;
-$--contract-table-bd: #0F0F0F;
-$--contract-table-active: #1d1d1d;
+$--contract-table-bg: #0c1222;
+$--contract-table-bd: #272837;
+$--contract-table-active: #1C2435;
  
 
 //trading
@@ -194,3 +195,65 @@ $sideBarWidth: 210px;
 // https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
 $border-color-extralight:#F2F6FC;
 $border-color-lighter:#EBEEF5;
+
+
+
+//new
+//light
+$--ix-button: #ffffff;//#ffffff
+$--ix-input: #3D3D3D; //#ffffff
+$--simple-slider: #D4D4D4; //#ffffff
+$--contract-pair-tab: #3D3D3D;
+$--contract-pair-bg: #EDEDED; //$contract-block-bg
+$--contract-pair-active-bg: #FFFFFF; //$contract-block-active-bg;
+$--contract-nav: #616161;
+$--contract-order-deal: #7D7D7D;
+$--contract-orderbook-price: #7D7D7D;//#ffffff
+$--contract-history-tab: #767676;//#ffffff
+$--contract-history-position-border:#CACACA;//#ffffff
+$--contract-history-table: #666666;//#ffffff
+$--contract-history-num-bg: #EDEDED; //1B1B1B
+$--contract-pannel-header: #4E4E4E;//#ffffff
+$--contract-action-label: #949494; //#d7d7d7;
+$--contract-action-icon: #ffffff; //#252525
+$--pair-title-color: #212121;
+$--ix-header-bg: #EDEDED;
+$--ix-header-color: #303030;
+$--ix-order-split-bg: #EDEDED;
+$--table-hover: #F9F9F9;
+$--table-nth-odd: #ffffff;
+$--table-nth-even: #F9F9F9;
+$--table-color: #303030; 
+$slider: #e0e0e0;//#ffffff;
+$slider-label: #ffffff;//#ffffff; 
+$slider-border: #d2d2d2;//#ffffff;
+$search-bar-bg: #ffffff; // search bg 搜索框背景
+ 
+//dark
+$--ix-button2: #ffffff;//#ffffff
+$--ix-input2: #ffffff; //#ffffff
+$primary-opacity2: #222222;
+$loading-mask2: rgba(50,50,50,.8);
+$contract-bg2: #272837;
+$contract-block-bg2: #121212;
+$contract-block-active-bg2: #1C2435;
+$--contract-pannel-header2: #4E4E4E;//#ffffff
+$--contract-pannel-header3: #303030;//#ffffff
+$--contract-table-bg2: #151518;
+$--contract-table-bd2: #1A1B1D;
+$--contract-table-active2: #1d1d1d; 
+$--pair-title-color2: #ACACAC; 
+$--ix-header-bg2: #1d1d1d;
+$--ix-header-color2:#ACACAC;
+$--ix-order-split-bg2: #121212;
+$--table-hover2: #222222;
+$--table-nth-odd2: #151518;
+$--table-nth-even2: #222222;
+$--table-color2: #acacac;
+
+$slider2: #2C3138;//#ffffff;
+$slider-label2: #151518;//#ffffff;
+$slider-border2: #2C3138;//#ffffff;
+$search-bar-bg2: #151518; // search bg 搜索框背景
+
+$home-header-custom-bgdark: #ffffff;

@@ -3834,7 +3834,8 @@ export default {
     },
     'signup': '注册',
     'signin': '登录',
-    'signout': '退出登录'
+    'signout': '退出登录',
+    'welcome': '欢迎来到IXX'
   },
   shipping: {
     lossLimit: '止损',

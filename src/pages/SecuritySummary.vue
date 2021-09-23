@@ -4,7 +4,7 @@
       <i v-if="secure_level <= 1">{{ $t('secure_level_0') }}</i>
       <i
         v-if="secure_level == 2"
-        style="color:#C9A96C">{{ $t('secure_level_1') }}</i>
+        style="color:#01CED1">{{ $t('secure_level_1') }}</i>
       <i
         v-if="secure_level == 3"
         style="color:#2FB883">{{ $t('secure_level_2') }}</i>

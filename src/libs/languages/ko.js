@@ -1720,7 +1720,7 @@ export default {
   contract_action_position: "포지션",
   contract_action_limit_price: "한도가",
   contract_action_market_price: "시가",
-  contract_history_close_content: "<span style='color:#C9A96C;'>%{price}</span>에서의 평창위탁",
+  contract_history_close_content: "<span style='color:#01CED1;'>%{price}</span>에서의 평창위탁",
   contract_competition_explain_50: "당첨자 전단명단은 실시간 각 대형 전략협력매체에 공포될 것이다 (화폐세계, 항저우재정,화성재정,황금재정,핵재정,브로크재정 등)",
   contract_market_button_buy: "시장가 매수",
   contract_market_button_sell: "시장 매도",
@@ -3694,6 +3694,7 @@ export default {
     'signup': '회원가입',
     'signin': '로그인',
     'signout': '로그아웃',
+    'welcome': 'IXX 에 오신 걸 환영 합 니 다'
   }, 
   shipping: {
     lossLimit: '止损',

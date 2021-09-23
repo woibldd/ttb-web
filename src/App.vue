@@ -33,6 +33,10 @@
       ref="footer"
       :fixed="fixed"/> 
     <v-notify-list/>
+    
+    <div class="my-freshchat">
+      <v-freshchat />
+    </div>
     <!-- <giveMoneyAD v-if="isFirstLogin" v-model="isFirstLogin"></giveMoneyAD> -->
     <!-- <div
       class="home-ball"
@@ -52,6 +56,7 @@ import MobileFooter from '@/pages/h5/footer'
 import { state, actions } from '@/modules/store'
 import utils from '@/modules/utils'
 import VNotifyList from '@/components/VNotifyList.vue'
+import VFreshchat from '@/components/freshchatBtn'
 import giveMoneyAD from '@/components/giveMoneyAD'
 import service from '@/modules/service'
 const zeStyleEl = document.querySelector('#ze-style')
@@ -64,7 +69,8 @@ export default {
     VNotifyList,
     MobileFooter,
     MobileNav,
-    giveMoneyAD
+    giveMoneyAD,
+    VFreshchat
   },
   data() {
     return {

@@ -1394,8 +1394,8 @@ export default {
           that.socket.socket.send('{"op":"subscribe","args":["trigger"]}')
         }
         if (this.activeProduct && this.activeProduct.product && this.activeProduct.currency) {
-          that.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.activeProduct.symbol}${state.affix}@${this.dataDeep}@1@20"]}`)
-          that.socket.socket.send(`{"op":"subscribepub","args":["deal@${this.activeProduct.symbol}${state.affix}"]}`)
+          that.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.activeProduct.symbol}@${this.dataDeep}@1@20"]}`)
+          that.socket.socket.send(`{"op":"subscribepub","args":["deal@${this.activeProduct.symbol}"]}`)
         }
       })
       this.socket.$on('message', (data) => {  
@@ -1438,8 +1438,8 @@ export default {
       let orgDeep = this.dataDeep
       this.dataDeep = e.accuracy
       if (this.activeProduct && this.socket) { 
-        this.socket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${this.activeProduct.symbol}${state.affix}@${orgDeep}@1@20"]}`)
-        this.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.activeProduct.symbol}${state.affix}@${this.dataDeep}@1@20"]}`) 
+        this.socket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${this.activeProduct.symbol}@${orgDeep}@1@20"]}`)
+        this.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.activeProduct.symbol}@${this.dataDeep}@1@20"]}`) 
       }
     },
     totalValue () {
@@ -1466,7 +1466,7 @@ export default {
       return price
     },
     handleOrderbookSoket (data, topic) {   
-      if (topic.indexOf(this.activeProduct.symbol + state.affix) > 0) {
+      if (topic.indexOf(this.activeProduct.symbol) > 0) {
         this.delegateData = data
         if (!this._scrolled) {
           this.$nextTick(() => {
@@ -1477,7 +1477,7 @@ export default {
       }
     },
     handleDealSoket (data, topic) {  
-      if (topic.indexOf(this.activeProduct.symbol + state.affix) > 0) {
+      if (topic.indexOf(this.activeProduct.symbol) > 0) {
          const last = data[data.length - 1]
         this.isBuy = last.side === 'buy'
         // this.newBargainListData.unshift(last)
@@ -1723,7 +1723,7 @@ export default {
       data.map(market => { 
         const pairArr = market.pair.split('_') 
         if (pairArr && pairArr.length) {
-          const found = this.products.find(item => item.symbol+state.affix === market.pair || item.name+state.affix === pairArr[1])  
+          const found = this.products.find(item => item.symbol === market.pair || item.name === pairArr[1])  
           if (found) { 
             this.$set(found, pairArr[0], market)
             if (found.symbol === state.blend.pair) {  
@@ -1755,13 +1755,13 @@ export default {
       const affix = state.siteId >= 100 ? state.siteId : ''
       if (this.socket && this.socket.socket.readyState) {  
         if (this.activeProduct && this.activeProduct.currency && this.activeProduct.product) {
-          this.socket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${this.activeProduct.symbol}${state.affix}@0@1@20"]}`)
-          this.socket.socket.send(`{"op":"unsubscribepub","args":["deal@${this.activeProduct.symbol}${state.affix}"]}`)
+          this.socket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${this.activeProduct.symbol}@0@1@20"]}`)
+          this.socket.socket.send(`{"op":"unsubscribepub","args":["deal@${this.activeProduct.symbol}"]}`)
         }
-        this.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${product.symbol}${state.affix}@0@1@20"]}`)
-        this.socket.socket.send(`{"op":"subscribepub","args":["deal@${product.symbol}${state.affix}"]}`)  
+        this.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${product.symbol}@0@1@20"]}`)
+        this.socket.socket.send(`{"op":"subscribepub","args":["deal@${product.symbol}"]}`)  
       }
-      api.getBlendFutureListByKey({ pair:`${product.symbol}${state.affix}`,  size: 30 }).then((res) => { 
+      api.getBlendFutureListByKey({ pair:`${product.symbol}`,  size: 30 }).then((res) => { 
         this.newBargainListData = res.data || []
       })  
       this.activeProduct = product

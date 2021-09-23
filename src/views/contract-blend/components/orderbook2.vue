@@ -408,7 +408,7 @@ export default {
       }
       const fetchId = this.pair + this.offset + this.accuracy
       const res = await service.getQuoteOrderbook({
-        pair: this.pair + state.affix,
+        pair: this.pair,
         offset: this.offset,
         accuracy: this.accuracy,
         size: 20

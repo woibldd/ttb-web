@@ -91,14 +91,14 @@ export default {
     const period = getPeriod(resolution) 
     service.getQuoteHistory({
       period: period,
-      pair: `${symbolInfo.ticker}${state.affix}`,
+      pair: `${symbolInfo.ticker}`,
       begin: from * 1000,
       end: to * 1000
     }).then((res) => {
       if (res.code) {
         return onErrorCallback(new Error())
       }
-      res.data = this._fixData(period, `${symbolInfo.ticker}${state.affix}`, res.data)
+      res.data = this._fixData(period, `${symbolInfo.ticker}`, res.data)
       const data = _.map(res.data, toTick)
       if (data.length && firstDataRequest) {
         lastTime = _.last(data).time
@@ -117,10 +117,10 @@ export default {
     }
     if (lastPair) {
       utils.$tvSocket.socket.send(`{"op":"unsubscribepub","args":${lastPair}}`)
-      lastPair = `["history@${symbolInfo.ticker}${state.affix}@${period}"]`
+      lastPair = `["history@${symbolInfo.ticker}@${period}"]`
       utils.$tvSocket.socket.send(`{"op":"subscribepub","args":${lastPair}}`) 
     } else {
-      lastPair = `["history@${symbolInfo.ticker}${state.affix}@${period}"]` 
+      lastPair = `["history@${symbolInfo.ticker}@${period}"]` 
       utils.$tvSocket.socket.send(`{"op":"subscribepub","args":${lastPair}}`)  
     } 
     utils.$tvSocket.$on('message', (data) => { 

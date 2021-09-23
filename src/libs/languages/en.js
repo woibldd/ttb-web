@@ -3808,6 +3808,7 @@ export default {
     "signup": "Sign up",
     "signin": "Sign in",
     "signout": "Sign out",
+    'welcome': 'Welcome to IXX'
   },
   tv: { 
     '1m': "Time line",

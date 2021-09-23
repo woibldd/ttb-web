@@ -91,7 +91,7 @@ export default {
     const period = getPeriod(resolution) 
     service.getQuoteHistory({
       period: period,
-      pair: `${symbolInfo.ticker}${state.affix}`,
+      pair: `${symbolInfo.ticker}`,
       begin: from * 1000,
       end: to * 1000
     }).then((res) => {
@@ -113,7 +113,7 @@ export default {
     // console.log(symbolInfo, resolution)
     if (!symbolInfo || !resolution) return 
     const period = getPeriod(resolution) 
-    lastPair = `["history@${symbolInfo.ticker}${state.affix}@${period}"]`  
+    lastPair = `["history@${symbolInfo.ticker}@${period}"]`  
     
     while (utils.$tvSocket.socket.readyState !== 1) {
       await utils.sleep(3e3)

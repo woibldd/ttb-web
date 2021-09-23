@@ -136,39 +136,7 @@ export default {
       if (!product[product.product]) return 0 
       return this.$big(product[product.product].increment_24h).times(100).div(this.$big(product[product.product].current).minus(product[product.product].increment_24h)).round(product.price_scale || 2)
     },
-    subMarket(data) {
-      // data.map(market => { 
-      //   const pairArr = market.pair.split('_') 
-      //   if (pairArr && pairArr.length) {
-      //     if (this.allSymbolList.future) {
-      //       const found = this.allSymbolList.future.find(item => item.name+state.affix === market.pair || item.currency+state.affix === pairArr[1])
-      //       if (found) { 
-      //         found[pairArr[0]] = market
-      //       }  
-      //     } 
-      //     if (this.allSymbolList.mix) {
-      //       const found = this.allSymbolList.mix.find(item => item.symbol+state.affix === market.pair || item.name+state.affix === pairArr[1])
-      //       if (found) { 
-      //         found[pairArr[0]] = market
-      //       }   
-      //     } 
-          
-      //     if (this.allSymbolList.unit) {
-      //       const found = this.allSymbolList.unit.find(item => item.symbol+state.affix === market.pair || item.name+state.affix === pairArr[1])
-      //       if (found) { 
-      //         found[pairArr[0]] = market 
-      //       }   
-      //     } 
-
-      //     if (this.allSymbolList.blend) {
-      //       const found = this.allSymbolList.blend.find(item => item.symbol+state.affix === market.pair || item.name+state.affix === pairArr[1])
-      //       if (found) { 
-      //         found[pairArr[0]] = market 
-      //       }   
-      //     } 
-          
-      //   }
-      // })  
+    subMarket(data) { 
     }
   },
   watch:{

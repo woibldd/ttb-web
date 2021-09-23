@@ -478,17 +478,17 @@ export const routes = [
     },
     component:  () => import('@/views/contract-mix')
   },
-  // {
-  //   path: '/mix2',
-  //   name:'mix2',
-  //   meta: {
-  //     nav: true,
-  //     footer: false,
-  //     class: 'dark', 
-  //     zendeskWidget: false
-  //   },
-  //   component:  () => import('@/views/contract-mix1')
-  // },
+  {
+    path: '/mix2',
+    name:'mix2',
+    meta: {
+      nav: true,
+      footer: false,
+      class: 'dark', 
+      zendeskWidget: false
+    },
+    component:  () => import('@/views/contract-mix1')
+  },
   {
     path: '/future',
     name:'future',
