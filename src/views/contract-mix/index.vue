@@ -863,11 +863,11 @@ export default {
           // hearderWidth: key => ['amount', 'trade_type', 'amount'].includes(key) && '50px',
           handleValue: (value, key, row) => {
             switch (key) {
-              case 'amount': 
-                if (this.activeTableTabKey==='lossEntrust') {
-                  return value
-                }
-                return `${(row.side === 2 || row.side === 3) ? '-' : ''}${value}`
+              // case 'amount': 
+              //   if (this.activeTableTabKey==='lossEntrust') {
+              //     return value
+              //   }
+              //   return `${(row.side === 2 || row.side === 3) ? '-' : ''}${value}`
               case 'side':
                 // return `${row.side === 2 ? this.$tR('sell') : this.$tR('buy')}`
                 return this.$tR(`side.${row.side}`)
