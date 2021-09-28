@@ -493,8 +493,7 @@ export default {
     await actions.getKycLv()
     await actions.updateSession()
     // console.log({userInfo: this.state.userInfo}) 
-    // this.showLayerModal = !this.email_bound || !this.phone_bound || !this.all_bound
-     
+    // this.showLayerModal = !this.email_bound || !this.phone_bound || !this.all_bound 
     // //有充币行为
     // if (this.isDeposited){
     //   this.showDepositModal = !this.google_bound
@@ -533,8 +532,7 @@ export default {
           memo: ''
         }
         // if (this.restaurants)
-        //   {this.restaurants.push(obj)}
-
+        //   {this.restaurants.push(obj)} 
         this.selectItem = obj.value
         this.selectAddress = obj
         this.memo = ''
@@ -737,7 +735,7 @@ export default {
         remark: this.remark
       }
 
-      if (this.selectCoin.currency === 'USDT') {
+      if (this.lianDataList[this.selectCoin.currency]) {
         param.chain = this.selectLian.chain
       }
  
