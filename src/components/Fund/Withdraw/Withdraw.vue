@@ -1,11 +1,11 @@
 <template>
   <div class="withdraw-container fund-container">
     <div class="title-box">
-      <div> {{ $t('withdraw') }}</div>
+      <div> {{ $t('withdraw') }}</div> 
       <router-link
         to="/fund/my/assets/history/deposit"
         class="fund-history"> {{ $t('capital_record') }}</router-link>
-    </div>
+    </div>  
     <div class="fund-items-content">
       <div class="fund-item-row">
         <div class="row__label">{{ $t('coin') }}</div>
@@ -558,13 +558,14 @@ export default {
     },
     async getCoinAddress () {
       const param = {
-        currency: this.selectCoin.currency
+        currency: this.selectCoin.currency,
+        chain: this.selectLian.chain
       }
       return service.getMyAddressList(param).then((res) => {
         if (res && res.data) { 
           this.restaurants = []
           this.allAddress = res.data
-          if (this.selectCoin.currency === 'USDT') {
+          if (this.selectCoin.currency === this.selectLian.currency) {
             this.allAddress = this.allAddress.filter(item => item.chain === this.selectLian.chain || (!item.chain &&  this.selectLian.chain === 'OMNI' ))
           }
             
@@ -759,9 +760,7 @@ export default {
       }
       if (this.verify_phone) {
         param.phone_code = this.phoneCode 
-      }
-
-
+      } 
       service.confirmWithdraw(param).then(res => {
         if (res.code) {
           utils.alert(res.message)
