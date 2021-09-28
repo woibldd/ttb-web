@@ -27,7 +27,7 @@
             </el-select>
           </div>
         </div>
-        <div v-if="selectCoin.currency === 'USDT' || this.selectCoin.currency === 'BNB' || this.selectCoin.currency === 'LEMO' || this.selectCoin.currency === 'CFX'" class="fund-item-row mb-14">
+        <div v-if="selectCoin.currency === 'USDT' || this.selectCoin.currency === 'BNB' || this.selectCoin.currency === 'LEMO' || this.selectCoin.currency === 'CFX' || this.selectCoin.currency === 'NBZZ'" class="fund-item-row mb-14">
           <div class="row__label">
             <el-popover
               :content="depTip"
@@ -102,7 +102,7 @@
           :label="hd.title">
           <template slot-scope="scope">
             <span>{{ scope.row[hd.key] }}</span>
-            <label v-if="hd.key==='currency' && (scope.row[hd.key]==='USDT' || scope.row[hd.key]==='BNB' || scope.row[hd.key]==='LEMO' || scope.row[hd.key]==='CFX')" class="chain">
+            <label v-if="hd.key==='currency' && (scope.row[hd.key]==='USDT' || scope.row[hd.key]==='BNB' || scope.row[hd.key]==='LEMO' || scope.row[hd.key]==='CFX' || scope.row[hd.key]==='NBZZ')" class="chain">
               {{ chainDict[scope.row['chain']] || scope.row['chain'] }} 
             </label>
           </template>
@@ -206,13 +206,20 @@ export default {
         if (res && res.data) {
           this.lianData = []
           res.data.forEach((item) => {
-            if((item.currency === 'USDT' || item.currency === 'BNB' || item.currency === 'LEMO' || item.currency ==='CFX') && item.withdrawable) {
+            if((item.currency === 'USDT' || 
+                item.currency === 'BNB' || 
+                item.currency === 'LEMO' || 
+                item.currency ==='CFX' ||
+                item.currency === 'NBZZ') && item.withdrawable) {
               if (item.chain === 'OMNI') { item.currencyName = item.currency + '-' + 'Omni'}
-              if (item.chain === 'ETH') { item.currencyName = item.currency + '-' + 'ERC20'}
-              if (item.chain === 'TRX') { item.currencyName = item.currency + '-' + 'TRC20'}
-              if (item.chain === 'BSC') { item.currencyName = item.currency + '-' + 'BSC'}
-              if (item.chain === 'BNB') { item.currencyName = item.currency + '-' + 'BNB'}
-              if (item.chain === 'CFX') { item.currencyName = item.currency + '-' + 'CFX'} 
+              else if (item.chain === 'ETH') { item.currencyName = item.currency + '-' + 'ERC20'}
+              else if (item.chain === 'TRX') { item.currencyName = item.currency + '-' + 'TRC20'}
+              else {
+                item.currencyName = item.currency + '-' + item.chain
+              }
+              // if (item.chain === 'BSC') { item.currencyName = item.currency + '-' + 'BSC'}
+              // if (item.chain === 'BNB') { item.currencyName = item.currency + '-' + 'BNB'}
+              // if (item.chain === 'CFX') { item.currencyName = item.currency + '-' + 'CFX'} 
               this.lianData.push(item) 
               if (!this.lianDataList[item.currency])  
                 this.lianDataList[item.currency] = [] 
@@ -221,7 +228,7 @@ export default {
           }) 
           this.selectLian = this.lianData[0]
           // this.allCoins = this.removalData(res.data.filter(c => c.depositable))
-          this.allCoins = _.uniqBy(res.data.filter(c => c.depositable), 'currency')
+          this.allCoins = _.uniqBy(res.data.filter(c => c.withdrawable), 'currency')
           this.allCoins.forEach((item) => {
             if (state.locale === 'zh-CN') {
               Vue.set(item, 'full_name', item.zh_name)
@@ -256,7 +263,11 @@ export default {
       }
 
       const param = {
-        chain: (this.selectCoin.currency === 'USDT' || this.selectCoin.currency === 'BNB' || this.selectCoin.currency === 'LEMO' || this.selectCoin.currency ==='CFX') ? this.selectLian.chain : '',
+        chain: (this.selectCoin.currency === 'USDT' || 
+                this.selectCoin.currency === 'BNB' || 
+                this.selectCoin.currency === 'LEMO' || 
+                this.selectCoin.currency ==='CFX' ||
+                this.selectCoin.currency === 'NBZZ') ? this.selectLian.chain : '',
         currency: this.selectCoin.currency,
         address: this.address,
         description: this.description
