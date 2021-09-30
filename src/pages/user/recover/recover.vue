@@ -454,6 +454,9 @@ export default {
     $route () {
       this.resetError()
       this.clearCountDown()
+    },
+    'state.locale'(newVal) {
+      location.reload();
     }
   },
   async created () {

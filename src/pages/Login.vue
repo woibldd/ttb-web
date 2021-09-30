@@ -376,6 +376,9 @@ export default {
     },
     params() {
       this.errmsg = ''
+    },
+    'state.locale'(newVal) {
+      location.reload();
     }
   },
   mounted() {

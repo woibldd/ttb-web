@@ -5,7 +5,7 @@ export default {
   data() {
     return {
       state, utils,
-      nc: null, ncData: {}, isnc: false,
+      nc: null, ncData: {}, isnc: false
     }
   },
   methods: {
