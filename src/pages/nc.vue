@@ -1,5 +1,6 @@
 <template>
   <div class="nc-page">
+    <div class="title">{{$t('profile_left_invite_safety')}}</div>
     <div class="nc-box"><div id="nc"></div></div>
   </div>
 </template>
@@ -35,6 +36,7 @@ export default {
 <style lang="scss">
 .nc-page{
   height: 100vh; background: #fff;
+  .title{position: absolute; top: 40%; width: 100%; font-size: 20px; text-align: center; color: $primary;}
   .nc-box{position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0 auto; box-sizing: border-box;}
 }
 </style>
