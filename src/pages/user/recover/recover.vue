@@ -179,13 +179,16 @@
             />
           </div>
         </div>
+
+        <div class="nc-box"><div id="nc"></div></div>
+
         <div class="field submit mt-16">
           <v-btn
             class="submit-btn"
             :label="$t('reset_password')"
             height="40"
             :loading="loading"
-            :disabled="disableNextBtn"
+            :disabled="!isnc"
             @click="nextstep"/>
         </div>
       </form>
@@ -212,9 +215,10 @@ import ixInput from '@/components/common/ix-input/ix-input.vue'
 import utils from '@/modules/utils'
 import _ from 'lodash'
 import responsive from '@/mixins/responsive'
+import nc from '@/mixins/createnc'
 
 export default {
-  mixins: [responsive],
+  mixins: [responsive, nc],
   name: 'Recover',
   components: {
     slideValidate,
@@ -232,7 +236,7 @@ export default {
       regionOptions: [],
       pwCheckList: pwChecker.getState(''),
       loading: false,
-      disableNextBtn: false,
+      isnc: false,
       password: '',
       password2: '',
       captcha: '',
@@ -312,7 +316,7 @@ export default {
         return false
       }
       this.loading = true
-      const res = await service.resetPassword(this.params)
+      const res = await service.resetPassword({...this.params, ...this.ncData})
       if (res.code) {
         // 错误信息
         utils.alert(res.message)
@@ -335,7 +339,7 @@ export default {
       //   return false
       // }
       // this.step++
-      // this.disableNextBtn = false
+      // this.isnc = false
     },
     checkParams () {
       const err = (em, field) => ({ ok: false, em, field })
@@ -378,7 +382,7 @@ export default {
       this.pwCheckList = pwChecker.getState(this.password)
     },
     validateDone () {
-      this.disableNextBtn = false
+      this.isnc = false
     },
     active (active) {
       this.atPw = active
@@ -459,6 +463,9 @@ export default {
     if (state.locale === 'zh-CN') {
       this.regionId = 86
     }
+  },
+  mounted() {
+    this.initnc();
   }
 }
 </script>

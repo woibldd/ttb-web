@@ -49,6 +49,12 @@ export const accountRouter = [
         name: 'recoverBy',
         component: () => import(/* webpackChunkName: "Register" */ '@/pages/user/recover/recover.vue'),
         props: true
+      },
+      {
+        path: 'nc',
+        name: 'nc',
+        component: () => import(/* webpackChunkName: "Register" */ '@/pages/nc'),
+        props: true
       }
     ]
   }

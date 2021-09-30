@@ -186,6 +186,9 @@
               />
             </div>
           </div>
+
+          <div class="nc-box"><div id="nc"></div></div>
+
           <div class="field submit">
             <v-btn
               :label="$t('signup_submit')"
@@ -193,6 +196,7 @@
               height="40"
               width="390"
               class="submit-btn"
+              :disabled="!isnc"
               @click="submit"/>
             <div class="agreement">
               <input
@@ -234,11 +238,12 @@ import bubble from '@/components/Bubble'
 import VDownload from '@/components/VDownload'
 import safeModal from '@/pages/login/safeModal'
 import { mapState } from 'vuex'
+import nc from '@/mixins/createnc'
 // import { MdField } from 'vue-material/dist/components'
 // import gtMixin from '@/mixins/gt'
 
 export default {
-  mixins: [responsive],
+  mixins: [responsive, nc],
   name: 'Register',
   components: {
     VBtn,
@@ -407,7 +412,7 @@ export default {
       }
       this.resetError()
       this.loading = true
-      const res = await service.register(this.params)
+      const res = await service.register({...this.params, ...this.ncData})
       this.loading = false
       if (res.code) {
         // 错误信息
@@ -551,6 +556,7 @@ export default {
 
   },
   mounted () {
+    this.initnc();
     this.$eh.$on('app:resize', () => this.fixPosition())
     this.$nextTick(this.fixPosition)
   },
