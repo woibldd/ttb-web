@@ -20,12 +20,15 @@ export default {
   },
   methods: {
     ncback() {
-      if (this.utils.isIos()) {
+      if (this.utils.isIos()) {alert(3)
         window.webkit.messageHandlers.getSlideData.postMessage(this.ncData);
       }
 
       if (this.utils.isAndroid()) {
+        alert(1)
         android.verifySuccess(this.ncData.sessionId, this.ncData.token, this.ncData.sig, this.ncData.scene);
+      } else {
+        alert(2)
       }
     }
   }
