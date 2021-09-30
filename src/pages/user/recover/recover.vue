@@ -391,7 +391,7 @@ export default {
       this.triggerValidate = false
     },
     async getSmsCode () {
-      if (this.sms.status === 1 || this.sms.loading || this.loading) {
+      if (this.sms.status === 1 || this.sms.loading || this.loading || !this.isnc) {
         return false
       }
       if (this.by === 'phone') {
@@ -421,7 +421,8 @@ export default {
         region: this.regionId,
         email: this.email,
         phone: this.phone,
-        lang: state.locale
+        lang: state.locale,
+        ...this.ncData
       })
       if (res.code) {
         this.errmsg = res.message
