@@ -21,15 +21,15 @@ export default {
   methods: {
     ncback() {
       if (this.utils.isIos()) {
-        android.verifySuccess();
-      }
-
-      if (this.utils.isAndroid()) {
         const send = {
           sessionId: this.ncData.sessionId,
           sig: this.ncData.sig
         };
         window.webkit.messageHandlers.getSlideData.postMessage(send);
+      }
+
+      if (this.utils.isAndroid()) {
+        android.verifySuccess();
       }
     }
   }
