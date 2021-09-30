@@ -187,7 +187,7 @@
             :label="$t('reset_password')"
             height="40"
             :loading="loading"
-            :disabled="!isnc"
+            :disabled="disableNextBtn"
             @click="nextstep"/>
         </div>
       </form>
@@ -235,7 +235,7 @@ export default {
       regionOptions: [],
       pwCheckList: pwChecker.getState(''),
       loading: false,
-      isnc: false,
+      disableNextBtn: false,
       password: '',
       password2: '',
       captcha: '',
@@ -315,7 +315,7 @@ export default {
         return false
       }
       this.loading = true
-      const res = await service.resetPassword({...this.params, ...this.ncData})
+      const res = await service.resetPassword(this.params)
       if (res.code) {
         // 错误信息
         utils.alert(res.message)
@@ -338,7 +338,7 @@ export default {
       //   return false
       // }
       // this.step++
-      // this.isnc = false
+      // this.disableNextBtn = false
     },
     checkParams () {
       const err = (em, field) => ({ ok: false, em, field })
@@ -381,7 +381,7 @@ export default {
       this.pwCheckList = pwChecker.getState(this.password)
     },
     validateDone () {
-      this.isnc = false
+      this.disableNextBtn = false
     },
     active (active) {
       this.atPw = active
