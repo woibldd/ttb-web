@@ -20,7 +20,17 @@ export default {
   },
   methods: {
     ncback() {
-      android.verifySuccess();
+      if (this.utils.isIos()) {
+        android.verifySuccess();
+      }
+
+      if (this.utils.isAndroid()) {
+        const send = {
+          sessionId: this.ncData.sessionId,
+          sig: this.ncData.sig
+        };
+        window.webkit.messageHandlers.getSlideData.postMessage(send);
+      }
     }
   }
 }
