@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     ncback() {
-      alert(1)
+      android.verifySuccess();
     }
   }
 }

@@ -92,6 +92,7 @@
             />
           </div>
         </div>
+        <div class="nc-box"><div id="nc"></div></div>
         <div
           v-if="step===1"
           class="field recover__validate mt-17"
@@ -179,8 +180,6 @@
             />
           </div>
         </div>
-
-        <div class="nc-box"><div id="nc"></div></div>
 
         <div class="field submit mt-16">
           <v-btn

@@ -77,6 +77,7 @@
               />
             </div>
           </div>
+          
           <div
             :class="['field']"
             v-show="by === 'email'">
@@ -95,6 +96,7 @@
               />
             </div>
           </div>
+          <div class="nc-box"><div id="nc"></div></div>
           <div :class="['field']">
             <div class="input-box">
               <ix-input
@@ -186,8 +188,6 @@
               />
             </div>
           </div>
-
-          <div class="nc-box"><div id="nc"></div></div>
 
           <div class="field submit">
             <v-btn
