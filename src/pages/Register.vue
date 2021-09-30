@@ -521,6 +521,7 @@ export default {
         lang: state.locale,
         ...this.ncData
       })
+      this.ncreset();
       if (res.code) {
         utils.alert(res.message)
         // this.errmsg = res.message

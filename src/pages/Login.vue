@@ -458,6 +458,7 @@ export default {
       this.loading = true
 
       const res = await service.login({...this.params, ...this.ncData})
+      this.ncreset();
       if (res.code) {
         this.loading = false
         utils.alert(res.message)

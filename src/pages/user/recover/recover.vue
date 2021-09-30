@@ -424,6 +424,7 @@ export default {
         lang: state.locale,
         ...this.ncData
       })
+      this.ncreset();
       if (res.code) {
         this.errmsg = res.message
       } else {

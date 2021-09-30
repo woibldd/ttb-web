@@ -48,6 +48,7 @@ export default {
     },
     ncreset() {
       this.nc.reset();
+      this.isnc = false;
     }
   }
 }
