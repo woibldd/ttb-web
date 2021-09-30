@@ -21,15 +21,11 @@ export default {
   methods: {
     ncback() {
       if (this.utils.isIos()) {
-        const send = {
-          sessionId: this.ncData.sessionId,
-          sig: this.ncData.sig
-        };
-        window.webkit.messageHandlers.getSlideData.postMessage(send);
+        window.webkit.messageHandlers.getSlideData.postMessage(this.ncData);
       }
 
       if (this.utils.isAndroid()) {
-        android.verifySuccess();
+        android.verifySuccess(this.ncData.sessionId, this.ncData.token, this.ncData.sig, this.ncData.scene);
       }
     }
   }
