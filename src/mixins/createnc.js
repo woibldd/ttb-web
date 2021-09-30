@@ -15,14 +15,16 @@ export default {
         'zh-CN': 'cn',
         'zh-HK': 'tw',
         'en': 'en',
-        'ko': 'ko_KR',
+        'ko': 'ko_KR'
       };
       AWSC.use("nc", function (state, module) {
         const isMobile = vm.utils.isMobile();
         const scene = isMobile ? 'nc_login_h5' : 'nc_login';
+        const routerLan = vm.$route.query.lang;
+        const language = routerLan ? lang[routerLan] : lang[vm.state.locale];
 
         vm.nc = module.init({
-          language: lang[vm.state.locale],
+          language,
           appkey: "FFFF0N0000000000A411",
           scene,
           renderTo: "nc",

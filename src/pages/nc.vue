@@ -1,11 +1,12 @@
 <template>
   <div class="nc-page">
-    <div class="title">{{$t('profile_left_invite_safety')}}</div>
+    <div class="title">{{title}}</div>
     <div class="nc-box"><div id="nc"></div></div>
   </div>
 </template>
 
 <script>
+import {state} from '@/modules/store';
 import utils from '@/modules/utils'
 import nc from '@/mixins/createnc';
 
@@ -13,7 +14,21 @@ export default {
   mixins: [nc],
   data() {
     return {
-      utils
+      state, utils
+    }
+  },
+  computed: {
+    title() {
+      const temp = {
+        'zh-CN': '安全验证',
+        'zh-HK': '安全驗證',
+        'en': 'Security',
+        'ko': '안전인증'
+      };
+      const lang = this.$route.query.lang;
+
+      if (lang) return temp[lang];
+      else return temp[this.state.locale];
     }
   },
   mounted() {
