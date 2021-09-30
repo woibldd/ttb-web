@@ -517,6 +517,11 @@ $primary-color: #01CED1;
   display: flex;
   justify-content: space-between;
 }
- 
+
+
+.nc-box{
+  width: 280px; height: 34px; margin: 20px 0 0 38px; position: relative;
+  .nc-container .nc_wrapper{width: 100%!important;}
+}
 
 strong{font-weight: bold;}

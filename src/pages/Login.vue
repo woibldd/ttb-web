@@ -111,6 +111,9 @@
               />
             </div>
           </div>
+
+          <div class="nc-box"><div id="nc"></div></div>
+
           <div class="field submit">
             <v-btn
               :label="$t('signin')"
@@ -119,6 +122,7 @@
               class="submit-btn"
               height="40"
               width="290"
+              :disabled="!isnc"
               @click="submit"/>
             <div class="to-others">
               <div class="mr-10">
@@ -241,6 +245,8 @@ import VDownload from '@/components/VDownload'
 import { activeShareAccount } from '@/api/share_option'
 import safeModal from '@/pages/login/safeModal'
 import { mapState } from 'vuex'
+import nc from '@/mixins/createnc'
+
 export default {
   name: 'Login',
   components: {
@@ -252,7 +258,7 @@ export default {
     VDownload,
     safeModal
   },
-  mixins: [responsive],
+  mixins: [responsive, nc],
   props: ['by'],
   data() {
     return {
@@ -370,9 +376,13 @@ export default {
     },
     params() {
       this.errmsg = ''
+    },
+    'state.locale'(newVal) {
+      location.reload();
     }
   },
   mounted() {
+    this.initnc();
     this.$eh.$on('app:resize', () => this.fixPosition())
     this.$nextTick(this.fixPosition)
   },
@@ -450,7 +460,8 @@ export default {
       this.errmsg = ''
       this.loading = true
 
-      const res = await service.login(this.params)
+      const res = await service.login({...this.params, ...this.ncData})
+      this.ncreset();
       if (res.code) {
         this.loading = false
         utils.alert(res.message)
