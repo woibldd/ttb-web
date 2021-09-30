@@ -118,7 +118,7 @@
             />
             <a
               class="sms-btn"
-              :class="{disabled: sms.status === 1}"
+              :class="{disabled: sms.status === 1 || !isnc}"
               @click.prevent="getSmsCode">
               {{ smsBtnText }}</a>
           </div>

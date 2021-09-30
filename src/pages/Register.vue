@@ -114,7 +114,7 @@
 
               <a
                 class="sms-btn"
-                :class="{disabled: sms.status === 1}"
+                :class="{disabled: sms.status === 1 || !isnc}"
                 @click.prevent="getSmsCode">
                 {{ smsBtnText }}</a>
             </div>
@@ -196,7 +196,6 @@
               height="40"
               width="390"
               class="submit-btn"
-              :disabled="!isnc"
               @click="submit"/>
             <div class="agreement">
               <input
@@ -412,7 +411,7 @@ export default {
       }
       this.resetError()
       this.loading = true
-      const res = await service.register({...this.params, ...this.ncData})
+      const res = await service.register(this.params)
       this.loading = false
       if (res.code) {
         // 错误信息
@@ -489,7 +488,7 @@ export default {
       clearInterval(this.sms.timer)
     },
     async getSmsCode () {
-      if (this.sms.status === 1 || this.sms.loading || this.loading) {
+      if (this.sms.status === 1 || this.sms.loading || this.loading || !this.isnc) {
         return false
       }
       if (this.by === 'phone') {
@@ -519,7 +518,8 @@ export default {
         region: this.regionId,
         phone: this.phone,
         email: this.email,
-        lang: state.locale
+        lang: state.locale,
+        ...this.ncData
       })
       if (res.code) {
         utils.alert(res.message)
