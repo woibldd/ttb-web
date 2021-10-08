@@ -2,13 +2,7 @@
   <div class="page-contract">
     <div :class="['container-trade-panel', state.skin]">
       <!-- 1-1 -->
-      <div  style="width: 100%;" flex >
-        <!-- <div class="x-col mb-2 ml-4"  flex-box="0"   v-if="state.siteName==='FoBit'" style="width:302px;">
-          <div class="r1-c1-r1 mt-2 mb-2" 
-            element-loading-background="rgba(0, 0, 0, 0.3)"> 
-            <symList ref="symList" :pair="state.ct.pair"/>
-          </div>
-        </div> --> 
+      <div  style="width: 100%;" flex > 
         <div class="x-col ml-4 mr-4" flex-box="1" > 
           <div class="x-row-1 "> 
             <div  class="r1-c2-r1 ">   
@@ -35,7 +29,7 @@
                               <el-col 
                                 :class="[(item.tick || {}).increment_24h > 0?'text-success':'text-danger']"
                                 :span="8">
-                                {{`₮${+(item.tick || {}).current}`}}
+                                {{`$${+(item.tick || {}).current}`}}
                               </el-col>
                               <el-col 
                                 :class="[(item.tick || {}).increment_24h > 0?'text-success':'text-danger', 'txr', ' pr-10']"

@@ -139,13 +139,11 @@
             </el-popover>
           </div>
           <!-- <router-link to="/share_option" class="nav_link ml-30">{{ $t('shareOption.navText') }}</router-link>  -->
-          
           <!-- 2021-09-18 新加 nbzz抢购活动 -->
           <!-- <div class="nav_link" style="padding: 0">
             <router-link :to="{name: 'BuyNbzz'}" class="nav_link ml-30">{{ $t('buyEvent') }}</router-link>
             <icon name="hot-red" />
           </div> -->
-          
         </div>
       </div>
       <div class="nav_right">
@@ -274,8 +272,7 @@
           <el-popover
             ref="popover1"
             popper-class="nav-popover"
-            placement="bottom"
-            width="80"
+            placement="bottom" 
             style="background:#2C3B4B;"
             trigger="hover">
             <div
@@ -289,7 +286,7 @@
               </div> -->
               <div > 
                 <p>
-                  <img style="width: 150px"
+                  <img style="width: 150px; vertical-align: bottom;"
                     src="~@/assets/download/qr-download.png" >
                   
                   <!-- <v-btn class="mt-5" icon="android" label="Android"/> -->
@@ -923,7 +920,7 @@ export default {
 
 .pop {
   display: flex;
-  width: 280px;
+  // width: 280px;
   color: #fff;
   h3 {
     margin-bottom: 10px;

@@ -655,7 +655,7 @@
           <!-- 合约账户 -->
           <div class="r1-c4-r2 account-box mt-4">
             <div class="account-hander">
-              {{$t('contract_account')}}
+              {{$t('future_account')}}
             </div> 
             <div class="account-content">  
               <el-tabs v-model="currentAccount">  

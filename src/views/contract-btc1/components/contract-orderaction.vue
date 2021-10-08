@@ -30,18 +30,7 @@
                 <span v-if="currentDealType < 3">{{ $t(`contract.mapFormContent.mapBtns.3.text`)}}</span>
                 <span v-else>{{ $t(`contract.mapFormContent.mapMenuOptions.${currentDealType}`)}}</span>
                 <icon name="arrow-down" />
-              </div>
-              <!-- <div class="btn"
-                v-for="(value,key) in mapFormContent.mapBtns" 
-                :key="key"
-                v-popover:popoverMenuOptions
-                @click="handleActiveTypeClick(key)"
-                v-tooltip.bottom="{html: true, content: value.describe, classes: 'contract'}"
-                :class="['menu-box',{active:currentDealType === key}]">  
-                <span v-if="key < 3">{{ value.text }}</span>
-                <span v-else-if="currentDealType < 3">{{ value.text }}</span>
-                <span v-else>{{$t(`contract.mapFormContent.mapMenuOptions.${currentDealType}`)}}</span>
-              </div>  -->
+              </div> 
             </div>  
             <el-popover ref="popoverMenuOptions"
               :popper-class="['popoverMenuOptions', state.skin]"
@@ -283,10 +272,10 @@
         {{$t('contract_account')}}
       </div> 
       <div class="account-content">   
-        <el-tabs v-model="balance.currency">  
+        <el-tabs v-model="balance.currency">   
           <el-tab-pane  
-            :label="balance.currency" 
-            :name="balance.currency">
+            label="BTC" 
+            :name="balance.currency"> 
             <el-row class="tr ">
               <el-col :span='12' class="pt-10 pb-10 th">
                 <p >{{ $t('contract.float_profit_loss') }}</p>  

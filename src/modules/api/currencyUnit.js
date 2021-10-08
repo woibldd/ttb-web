@@ -199,11 +199,13 @@ export const setLeverage = data => request({
 // 合约信息 POST /unit/account/symbol/info
 /* symbol 交易对 */
 
-export const getSymbolInfo = data => request({
-  url: `/unit/account/symbol/info`,
-  method: 'post',
-  params: data
-})
+export const getSymbolInfo = data => {
+  return getCache('unit-symbol-info', () => request({
+    url: `/unit/account/symbol/info`,
+    method: 'post',
+    params: data
+  }), 1e3)
+} 
 // 合约信息 POST /unit/account/symbol/info
 /* user_id
 symbol 交易对
@@ -212,18 +214,7 @@ export const closeStorehouse = data => request({
   url: `/unit/close`,
   method: 'post',
   params: data
-})
-
-// "0.076973",         // 起始价
-//                 "0.076838",         // 结束价
-//                 "0.07606",          // 最低价
-//                 "0.077378",         // 最高价
-//                 "27.3411",          // 成交量
-//                 "2.1000977805",     // 成交额
-//                 "0.076973",         // 上一周期结束价
-//                 "121",              // 成交笔数
-//                 "0.205"             // 现量
-// history/millis/{pair}?period={period}&begin={begin}&end={end}
+}) 
 export const getKlineHistoryList = (symbol, query) =>  {
   return quote(`history/millis/${symbol}`, query)
 }

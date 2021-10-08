@@ -416,8 +416,8 @@ export default {
       } else if (option === 'chartType') { 
         this.widget.chart().setChartType(+p)
       } else if (option === 'cycle') {
-          const key = dict.cycles[p].key
-          this.widget.chart().setResolution('1', null) // 周期切换
+        let dict = this.$t('tv')
+        const key = dict.cycles[p].key 
         if (key === '1m') { // 分时线let dict = this.$t('tv')
           local.unitLineType = this.widget.chart().chartType() // 记录当前的K线样式
           this.widget.chart().setChartType(2) // K线样式切換到线形图 
@@ -425,6 +425,14 @@ export default {
           this.widget.chart().setResolution(key, null) // 周期切换
           this.widget.chart().setChartType(local.unitLineType) // K线样式切換到线形图 
         } 
+        // if (p === '1m') { // 分时线
+        //   this.widget.chart().setResolution('1', null) // 周期切换
+        //   local.unitLineType = this.widget.chart().chartType() // 记录当前的K线样式
+        //   this.widget.chart().setChartType(2) // K线样式切換到线形图 
+        // } else { 
+        //   this.widget.chart().setResolution(p, null) // 周期切换
+        //   this.widget.chart().setChartType(local.unitLineType) // K线样式切換到线形图 
+        // }
         local.unitIntervalText = p
       }  
     },

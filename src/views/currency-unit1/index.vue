@@ -3,8 +3,8 @@
     <!-- <v-nav from="unit"/> -->
     <div ref="unit-container"  :class="['page-contract', 'table-container', state.skin]">
       <!-- 1-1 --> 
-      <el-row :gutter="4" class="pt-4"> 
-        <el-col class="x-col" :span="19">
+      <div :gutter="4" class="pt-4 el-row"> 
+        <div class="x-col el-col" :span="19">
           <div class="x-row-1 ">
             <div class="r1-c2-r1"> 
               <div class="product-row" flex="left"> 
@@ -131,66 +131,7 @@
                     <icon v-if="state.skin==='light'" name="moon" />
                   </label>
                 </div> 
-              </div>
-              <!-- <el-row>
-                <el-col class="product-info" :span="5"> 
-                  <p>
-                    <span v-if="showSymbolList"><label class="c-primary f17">{{ activeProduct.name }}</label> </span>
-                    <el-popover v-else trigger="hover">
-                      <div class="drop-down">
-                        <div v-for="(item, idx) in products" :key="idx" class="drop-item">  
-                          <label :class="{'router-link-exact-active': item.symbol===state.unit.pair}" @click="handleProductsChange(item)">
-                            {{item.name}}
-                          </label>
-                        </div>
-                      </div>
-                      <span slot="reference"><label class="c-primary f17">{{ activeProduct.name }} <icon name="arrow-down" /> </label> </span>
-                    </el-popover> 
-                    <label  :class="[(activeProduct.UNIT || {}).increment_24h > 0?'text-success':'text-danger']">{{(activeProduct.UNIT || {}).current}}</label> <br/>
-                    <label  :class="[(activeProduct.UNIT || {}).increment_24h > 0?'text-success':'text-danger']">{{(activeProduct.UNIT || {}).change_24h || 0 | round(2)}}% </label>
-                  </p>
-                </el-col>
-                <el-col :span="19"> 
-                  <el-row>
-                    <el-col 
-                      class="product-info"
-                      :span='3'
-                      v-for="(value,key) in mapDishNewInfo"
-                      :key='key'>
-                      <div>{{ $tR(`mapDishNewInfo.${key}`) }}</div>
-                      <div>
-                        <span v-if="key==='fee_rate'">
-                          <span :class="{'text-success':$big(symbolInfo.fee_rate || 0).gt(0), 'text-danger':$big(symbolInfo.fee_rate || 0).lt(0)}">
-                            {{ $big(symbolInfo.fee_rate || 0).times(100).round(4).toFixed(4) }}% 
-                          </span>  
-                        </span>
-                        <span v-else-if="key==='markPrice'"> {{(activeProduct.MARKET || {}).current }}</span>
-                        <span v-else-if="key==='indexPrice'"> {{(activeProduct.INDEX || {}).current }}</span>  
-                        <span v-else-if="key==='increment_24h'" > 
-                          <span v-if="((activeProduct.UNIT || {})['increment_24h'] || 0) > 0" class="text-success">
-                            {{(activeProduct.UNIT || {})['increment_24h']}}%
-                          </span> 
-                          <span v-else class="text-danger">
-                            {{(activeProduct.UNIT || {})['increment_24h']}}%
-                          </span>
-                        </span> 
-                        <span v-else-if="key==='volume_24h'"> {{(activeProduct.UNIT || {})[key] | pretty }}</span>
-                        <span v-else>
-                          {{(activeProduct.UNIT || {})[key] }}
-                        </span> 
-                      </div>
-                    </el-col>  
-                    <el-col 
-                      style="font-size: 26px; text-align:center; height: 60px; line-height: 60px;"  
-                      :span='3'>
-                      <label class="el-dropdown-link pointer tool" @click="swithStyle"> 
-                        <icon v-if="state.skin==='dark'" name="sun" />
-                        <icon v-if="state.skin==='light'" name="moon" />
-                      </label>
-                    </el-col>
-                  </el-row>
-                </el-col> 
-              </el-row>  -->
+              </div> 
             </div> 
           </div>
           <div class="x-row-2 mt-4" flex>
@@ -293,8 +234,8 @@
                       :order-data="delegateData"
                       :last-price="(activeProduct.UNIT||{}).current"
                       :index-price="(activeProduct.INDEX||{}).current"
-                      :mark-price="handleDishInfoItem('markPrice')"
-                      :is-buy="isBuy" />
+                      :mark-price="(activeProduct.MARKET||{}).current"
+                      :is-buy="isBuy" /> 
                 </div> 
                 <div v-loading="!newBargainListData.length"
                     class="delegate-list mt-4"
@@ -334,15 +275,12 @@
               </div> 
             </div>
           </div>
-        </el-col>
-        <el-col class="r1-c4 x-col"
-                :span="5">
-          <!-- {{activeProduct}} --> 
+        </div>
+        <div class="r1-c4 x-col el-col"
+                :span="5"> 
           <div class="r1-c4-r1 option ">
             <div class="option-header">
-              <span>{{$t('contract_block_orderaction')}}</span>
-              <!-- <span>可用资产：</span>
-              <span>{{(activeBalance||{}).available_balance||0| bigRound( (activeCurrency || {}).value_scale || 4)}} {{tradingType}}</span> -->
+              <span>{{$t('contract_block_orderaction')}}</span> 
             </div>
             <div>
               <hr>
@@ -413,7 +351,7 @@
               </div> -->
               <div class="option-box-middle ">  
                 <div style="text-align:center;" class="mt-20">  
-                  <el-button-group style='width: 85%; display: flex; margin: 0 auto;'>
+                  <el-button-group style=' display: flex; margin: 0 10px;'>
                     <el-button style="flex:1;" :type="+activeBtnsKey===1 ? 'primary' : ''"
                                v-tooltip.bottom="{html: true, content: $tR(`mapFormContent.mapBtns.1.describe`), classes: 'contract'}"
                                @click="activeBtnsKey=1">
@@ -599,7 +537,7 @@
           </div>
           <div class="r1-c4-r2 account-box mt-4">
             <div class="account-hander">
-              {{$t('contract_account')}}
+              {{$t('future_account')}}
               <!-- {{balanceFilterList}} -->
             </div>
             <div class="account-content">
@@ -653,8 +591,8 @@
                 @click="login('register')">{{ $t('appNav.signup') }}</div> 
             </div>
           </div> 
-        </el-col>
-      </el-row>
+        </div>
+      </div>
       <!-- 2-1 -->
       <div class="ix-row">
         <div class="ix-col ix-col-1">
@@ -1794,6 +1732,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
 .table-container {
   .tabs-group,
   .dish-info,
@@ -2281,6 +2220,16 @@ export default {
   // 隐藏滚动条
   &::-webkit-scrollbar {
     width: 0 !important;
+  }
+  .el-row {
+    display: flex;
+    .el-col[span~="19"] {
+      flex: 1;
+    }
+    .el-col[span~="5"] {
+      margin-left: 4px;
+      width: 320px;
+    }
   }
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
