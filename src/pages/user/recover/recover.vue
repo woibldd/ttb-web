@@ -92,6 +92,7 @@
             />
           </div>
         </div>
+        <div class="nc-box"><div id="nc"></div></div>
         <div
           v-if="step===1"
           class="field recover__validate mt-17"
@@ -117,7 +118,7 @@
             />
             <a
               class="sms-btn"
-              :class="{disabled: sms.status === 1}"
+              :class="{disabled: sms.status === 1 || !isnc}"
               @click.prevent="getSmsCode">
               {{ smsBtnText }}</a>
           </div>
@@ -179,6 +180,7 @@
             />
           </div>
         </div>
+
         <div class="field submit mt-16">
           <v-btn
             class="submit-btn"
@@ -212,9 +214,10 @@ import ixInput from '@/components/common/ix-input/ix-input.vue'
 import utils from '@/modules/utils'
 import _ from 'lodash'
 import responsive from '@/mixins/responsive'
+import nc from '@/mixins/createnc'
 
 export default {
-  mixins: [responsive],
+  mixins: [responsive, nc],
   name: 'Recover',
   components: {
     slideValidate,
@@ -388,7 +391,7 @@ export default {
       this.triggerValidate = false
     },
     async getSmsCode () {
-      if (this.sms.status === 1 || this.sms.loading || this.loading) {
+      if (this.sms.status === 1 || this.sms.loading || this.loading || !this.isnc) {
         return false
       }
       if (this.by === 'phone') {
@@ -418,8 +421,10 @@ export default {
         region: this.regionId,
         email: this.email,
         phone: this.phone,
-        lang: state.locale
+        lang: state.locale,
+        ...this.ncData
       })
+      this.ncreset();
       if (res.code) {
         this.errmsg = res.message
       } else {
@@ -449,6 +454,9 @@ export default {
     $route () {
       this.resetError()
       this.clearCountDown()
+    },
+    'state.locale'(newVal) {
+      location.reload();
     }
   },
   async created () {
@@ -459,6 +467,9 @@ export default {
     if (state.locale === 'zh-CN') {
       this.regionId = 86
     }
+  },
+  mounted() {
+    this.initnc();
   }
 }
 </script>

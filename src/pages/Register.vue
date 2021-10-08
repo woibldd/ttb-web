@@ -77,6 +77,7 @@
               />
             </div>
           </div>
+          
           <div
             :class="['field']"
             v-show="by === 'email'">
@@ -95,6 +96,7 @@
               />
             </div>
           </div>
+          <div class="nc-box"><div id="nc"></div></div>
           <div :class="['field']">
             <div class="input-box">
               <ix-input
@@ -112,7 +114,7 @@
 
               <a
                 class="sms-btn"
-                :class="{disabled: sms.status === 1}"
+                :class="{disabled: sms.status === 1 || !isnc}"
                 @click.prevent="getSmsCode">
                 {{ smsBtnText }}</a>
             </div>
@@ -186,6 +188,7 @@
               />
             </div>
           </div>
+
           <div class="field submit">
             <v-btn
               :label="$t('signup_submit')"
@@ -234,11 +237,12 @@ import bubble from '@/components/Bubble'
 import VDownload from '@/components/VDownload'
 import safeModal from '@/pages/login/safeModal'
 import { mapState } from 'vuex'
+import nc from '@/mixins/createnc'
 // import { MdField } from 'vue-material/dist/components'
 // import gtMixin from '@/mixins/gt'
 
 export default {
-  mixins: [responsive],
+  mixins: [responsive, nc],
   name: 'Register',
   components: {
     VBtn,
@@ -392,6 +396,9 @@ export default {
     $route () {
       this.resetError()
       this.clearCountDown()
+    },
+    'state.locale'(newVal) {
+      location.reload();
     }
   },
   methods: {
@@ -484,7 +491,7 @@ export default {
       clearInterval(this.sms.timer)
     },
     async getSmsCode () {
-      if (this.sms.status === 1 || this.sms.loading || this.loading) {
+      if (this.sms.status === 1 || this.sms.loading || this.loading || !this.isnc) {
         return false
       }
       if (this.by === 'phone') {
@@ -514,8 +521,10 @@ export default {
         region: this.regionId,
         phone: this.phone,
         email: this.email,
-        lang: state.locale
+        lang: state.locale,
+        ...this.ncData
       })
+      this.ncreset();
       if (res.code) {
         utils.alert(res.message)
         // this.errmsg = res.message
@@ -551,6 +560,7 @@ export default {
 
   },
   mounted () {
+    this.initnc();
     this.$eh.$on('app:resize', () => this.fixPosition())
     this.$nextTick(this.fixPosition)
   },
