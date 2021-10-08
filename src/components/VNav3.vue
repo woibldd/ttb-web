@@ -39,6 +39,39 @@
               </div>
             </el-popover>
           </div> 
+          <div class="nav_link arrow-down">
+            <span  class="nav_link ml-30" v-popover:popoverContract2>
+              {{$t('trading_lever')}}2
+              <icon name="header-down" class="mini arrow" />
+            </span> 
+            <el-popover
+              ref="popoverContract2"
+              popper-class="nav-list"
+              placement="bottom"
+              style="background:#2C3B4B;"
+              trigger="hover">
+              <div class="pop-dropdown">
+              <ul class="dropdown-list pt-10 pb-10">
+                <li class="dropdown-item pl-24 pr-24"> 
+                  <router-link :to="{name: 'trading2'}" class="nav_link">{{ $t('trading') }}</router-link> 
+                </li>
+                <li class="dropdown-item pl-24 pr-24"> 
+                  <router-link :to="{name:'future2'}" class="nav_log_res mr-20">{{ $t("contract_btc") }}</router-link>
+                </li>
+                <li class="dropdown-item pl-24 pr-24">  
+                  <router-link :to="{name:'unit2'}" class="nav_log_res mr-20">{{ $t("currency-unit") }}</router-link> 
+                </li> 
+                <li class="dropdown-item pl-24 pr-24"> 
+                  <router-link :to="{name:'mix2'}" class="nav_log_res mr-20">{{ $t("currency-mix") }}</router-link> 
+                  <icon name="hot-red" />
+                </li> 
+                <!-- <li class="dropdown-item pl-24 pr-24">
+                  <router-link to="/share_option" class="nav_log_res mr-20" >{{ $t('shareOption.navText') }} </router-link>
+                </li> -->
+              </ul>
+              </div>
+            </el-popover>
+          </div> 
           <!-- p2P交易 -->
           <!-- <router-link :to="{name: 'hlotc'}" class="nav_link ml-30">{{ $t('otc_trade') }}</router-link>  -->
           <!-- 金融业务 -->

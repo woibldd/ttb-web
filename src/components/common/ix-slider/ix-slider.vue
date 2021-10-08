@@ -11,6 +11,7 @@
       ref="elem"
       aria-hidden="true"
       class="vue-slider"
+      :skin="skin"
       :style="[elemStyles, bgStyle]">
       <template v-if="isRange">
         <div
@@ -23,7 +24,8 @@
               'vue-slider-dot-focus': focusFlag && focusSlider === 0,
               'vue-slider-dot-dragging': flag && currentSlider === 0,
               'vue-slider-dot-disabled': !boolDisabled && disabledArray[0]
-            }
+            },
+            side
           ]"
           :style="[
             dotStyles,
@@ -57,7 +59,8 @@
               'vue-slider-dot-focus': focusFlag && focusSlider === 1,
               'vue-slider-dot-dragging': flag && currentSlider === 1,
               'vue-slider-dot-disabled': !boolDisabled && disabledArray[1]
-            }
+            },
+            side
           ]"
           :style="[
             dotStyles,
@@ -92,7 +95,8 @@
             {
               'vue-slider-dot-focus': focusFlag && focusSlider === 0,
               'vue-slider-dot-dragging': flag && currentSlider === 0
-            }
+            },
+            side
           ]"
           :style="[
             dotStyles,
@@ -118,7 +122,8 @@
           v-for="(piecewiseObj, index) in piecewiseDotWrap"
           class="vue-slider-piecewise-item"
           :style="[piecewiseDotStyle, piecewiseObj.style]"
-          :key="index">
+          :key="index"> 
+          &nbsp;
           <slot
             name="piecewise"
             :label="piecewiseObj.label"
@@ -127,11 +132,11 @@
             :last="index === piecewiseDotWrap.length - 1"
             :active="piecewiseObj.inRange"
           >
-            <span
+            <!-- <span
               v-if="piecewise"
               class="vue-slider-piecewise-dot"
               :style="[ piecewiseStyle, piecewiseObj.inRange ? piecewiseActiveStyle : null ]"
-            />
+            /> -->
           </slot>
 
           <slot
@@ -142,19 +147,19 @@
             :last="index === piecewiseDotWrap.length - 1"
             :active="piecewiseObj.inRange"
           >
-            <span
+            <!-- <span
               v-if="!piecewiseLabel"
               class="vue-slider-piecewise-label"
               :style="[ labelStyle, piecewiseObj.inRange ? labelActiveStyle : null ]"
             >
               {{ piecewiseObj.label }}
-            </span>
+            </span> -->
           </slot>
         </li>
       </ul>
       <div
         ref="process"
-        :class="['vue-slider-process', { 'vue-slider-process-dragable': isRange && processDragable }]"
+        :class="['vue-slider-process', { 'vue-slider-process-dragable': isRange && processDragable }, side]"
         :style="processStyle"
         @click="processClick"
         @mousedown="moveStart($event, 0, true)"
@@ -325,7 +330,15 @@ export default {
     tooltipStyle: [Array, Object, Function],
     disabledDotStyle: [Array, Object, Function],
     labelStyle: Object,
-    labelActiveStyle: Object
+    labelActiveStyle: Object,
+    skin: {
+      type: String,
+      default: 'light'
+    },
+    side: {
+      type: String,
+      default: 'default'
+    }
   },
   data () {
     return {
@@ -578,7 +591,7 @@ export default {
         } : {
           left: `${this.gap * i - this.height / 2}px`,
           top: 0
-        }
+        } 
         let index = this.reverse ? (this.total - i) : i
         let label = this.data ? this.data[index] : (this.spacing * index) + this.min
         arr.push({
@@ -599,7 +612,7 @@ export default {
         return this.printError('The maximum value can not be less than the minimum value.')
       }
 
-      let resetVal = this.limitValue(this.val)
+      let resetVal = this.limitValue(this.val) 
       this.setValue(resetVal)
       this.refresh()
     },
@@ -607,7 +620,7 @@ export default {
       if (val > this.max) {
         return this.printError('The minimum value can not be greater than the maximum value.')
       }
-
+ 
       let resetVal = this.limitValue(this.val)
       this.setValue(resetVal)
       this.refresh()
@@ -1009,8 +1022,8 @@ export default {
     getIndex () {
       return this.currentIndex
     },
-    getStaticData () {
-      if (this.$refs.elem) {
+    getStaticData () { 
+      if (this.$refs.elem) { 
         this.size = this.direction === 'vertical' ? this.$refs.elem.offsetHeight : this.$refs.elem.offsetWidth
         this.offset = this.direction === 'vertical' ? (this.$refs.elem.getBoundingClientRect().top + window.pageYOffset || document.documentElement.scrollTop) : this.$refs.elem.getBoundingClientRect().left
       }
@@ -1074,7 +1087,7 @@ export default {
     this.$nextTick(() => {
       if (this.isComponentExists) {
         this.getStaticData()
-        
+         
         this.setValue(this.limitValue(this.value), true, this.startAnimation ? this.speed : 0)
         this.bindEvents()
 
@@ -1116,7 +1129,10 @@ export default {
     position: relative;
     display: block;
     border-radius: 15px;
-    background-color: #293443;
+    background-color: $slider;
+    &[skin~="dark"] {
+      background-color: $slider2;
+    }
   }
   .vue-slider-component .vue-slider::after {
     content: '';
@@ -1133,7 +1149,13 @@ export default {
     border-radius: 15px;
     background-color: $primary;
     transition: all 0s;
-    z-index: 1;
+    z-index: 1; 
+    &.buy {
+      background-color: $--color-success;
+    }
+    &.sell {
+      background-color: $--color-danger;
+    }
   }
   .vue-slider-component .vue-slider-process.vue-slider-process-dragable {
     cursor: pointer;
@@ -1168,15 +1190,22 @@ export default {
   .vue-slider-component .vue-slider-dot {
     position: absolute;
     border-radius: 50%;
-    background:rgba(255,255,255,1);
+    background:$primary;
     border: 4px solid $primary;
-    box-sizing: border-box;
-    border-radius:50%;
+    box-sizing: border-box; 
     box-shadow: 0.5px 0.5px 2px 1px rgba(0, 0, 0, 0.32);
     transition: all 0s;
     will-change: transform;
     cursor: pointer;
     z-index: 5;
+    &.buy {
+      background:$--color-success;
+      border-color: $--color-success;
+    }
+    &.sell {
+      background:$--color-danger;
+      border-color: $--color-danger;
+    }
   }
   .vue-slider-component .vue-slider-dot.vue-slider-dot-focus {
     box-shadow: 0 0 2px 1px $primary;

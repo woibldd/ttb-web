@@ -27,6 +27,7 @@ export const state = {
     err: ''
   },
   pro: {
+    side: 1,
     lock: false,
     layout: false,
     lastPrice: 0,

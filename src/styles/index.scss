@@ -352,6 +352,9 @@ $primary-color: #01CED1;
 .f17{
   font-size: 17px;
 }
+.f20{
+  font-size: 20px;
+}
 .f28 {
   font-size: 28px;
 }
@@ -437,6 +440,15 @@ $primary-color: #01CED1;
 .fr {
   float: right;
 }
+.txr {
+  text-align: right;
+}
+.txl {
+  text-align: left;
+}
+.txc {
+  text-align: center;
+}
  
 .flex {
   display: flex;
@@ -464,8 +476,11 @@ $primary-color: #01CED1;
   /* transform: translateX(10px); */
   justify-content: center;
   align-items: center;
-  background-color: rgba(0,0,0,.8);
+  background-color: hsla(0,0%,100%,.8);
   z-index: 5;
+  &.dark {
+    background-color: rgba(50,50,50,.8);
+  }
 }
 
 
@@ -520,3 +535,53 @@ $primary-color: #01CED1;
  
 
 strong{font-weight: bold;}
+
+
+.ix-slider {
+  padding: 7px 0px;
+  // margin-right: 20px;
+  position: relative;
+  box-sizing: border-box;
+  @include clearfix(); 
+}
+.custom-label {
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  transform: translate(-50%, -12px);
+  margin-left: 3px;
+  width:10px;
+  height:10px;
+  // background:$slider-label;
+  background: $slider-label;
+  border:2px solid $slider-border;
+  &[skin~="dark"] {
+    background-color: $slider-label2;
+    border-color: $slider-border2; 
+  }
+  border-radius:50%;
+  box-sizing: border-box;
+  cursor: pointer;
+  z-index: 4;
+}
+.custom-tooltip {
+  position: absolute;
+  bottom: -39px;
+  left: -7px;
+  color: #788694;
+}
+.custom-label.active {
+  // background-color: $primary; 
+  border-color: $primary; 
+  font-weight: bold;
+  &.buy {
+    border-color: $--color-success;
+  }
+  &.sell {
+    border-color: $--color-danger;
+  }
+}
+.custom-label.active::after {
+  background-color: $primary;
+  width: 2px;
+} 

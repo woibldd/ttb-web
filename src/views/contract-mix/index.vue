@@ -718,7 +718,10 @@ export default {
     }
   },
   mixins: [mixin],
-  computed: {
+  computed: { 
+    isLogin() {
+      return !!this.state.userInfo
+    },
     adlurl () {
       let link = 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360024495432'
       // if (this.state.locale === 'en') {
@@ -863,10 +866,7 @@ export default {
           // hearderWidth: key => ['amount', 'trade_type', 'amount'].includes(key) && '50px',
           handleValue: (value, key, row) => {
             switch (key) {
-              // case 'amount': 
-              //   if (this.activeTableTabKey==='lossEntrust') {
-              //     return value
-              //   }
+              // case 'amount':  
               //   return `${(row.side === 2 || row.side === 3) ? '-' : ''}${value}`
               case 'side':
                 // return `${row.side === 2 ? this.$tR('sell') : this.$tR('buy')}`

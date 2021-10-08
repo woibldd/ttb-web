@@ -1,4 +1,5 @@
 export default {
+  order: 'Create Order',
   buyEvent: 'Hot Buying event',
   finance: 'Finance',
   promotion: 'Promotion',
@@ -2973,8 +2974,7 @@ export default {
         'amount': 'Amount',
         'total': 'Total'
       },
-      mapHeader2: {
-        'direction': 'Side',
+      mapHeader2: { 
         'transaction-price ': 'Price',
         'trading-volume': 'Amount',
         'time': 'Time'
@@ -3262,8 +3262,7 @@ export default {
         'amount': 'Amount',
         'total': 'Total'
       },
-      mapHeader2: {
-        'direction': 'Side',
+      mapHeader2: { 
         'transaction-price': 'Price',
         'trading-volume': 'Amount',
         'time': 'Time'
@@ -3388,7 +3387,9 @@ export default {
     tip: 'There will be modifications in your operations with the position leverage multiplier and the commissioned order leverage multiplier altering by the value of <i class="text-danger">{leverage}</i> times; position deposit altering by the value of <i class="text-danger">{margin_position}</i>; commissioned deposit position altering by the value of <i class="text-danger">{margin_delegation}</i>',
     tip_mix: 'There will be modifications in your operations with the {side} position leverage multiplier and the commissioned order leverage multiplier altering by the value of <i class="text-danger">{leverage}</i> times; position deposit altering by the value of <i class="text-danger">{margin_position}</i>; commissioned deposit position altering by the value of <i class="text-danger">{margin_delegation}</i>',
     leverageTip: '确定将杠杆倍数调节至{leverage}吗',
-    allstorehouse: 'Cross'
+    allstorehouse: 'Cross',
+    marginMode: 'Perpetual Margin Mode',
+    tip2: 'Switching the margin mode will only apply it to the selected contract.', 
   },
   Proposer:{
     title:"Please fill in the following to submit your application for the currency. We will contact you as soon as we receive the application.",

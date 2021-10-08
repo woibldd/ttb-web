@@ -1,4 +1,5 @@
 export default {
+  order: '주문 하 다',
   buyEvent: '사재 기 이벤트',
   finance: 'Finance',
   promotion: 'Promotion',
@@ -2838,8 +2839,7 @@ export default {
         'amount': '수량',
         'total': '누적'
       },
-      mapHeader2: {
-        'direction': '방향',
+      mapHeader2: { 
         'transaction-price ': '방향',
         'trading-volume': '체결가',
         'time': '시간'
@@ -3150,8 +3150,7 @@ export default {
         'amount': '数量',
         'total': '累计'
       },
-      mapHeader2: {
-        'direction': '方向',
+      mapHeader2: { 
         'transaction-price': '成交价',
         'trading-volume': '成交量',
         'time': '时间'
@@ -3277,7 +3276,9 @@ export default {
     tip: '당신의 작업은 이미 보유하고 있는 지렛대 배수와 위탁 주문의 지레 배수를 수정하여 <i class="text-danger">{leverage}</i>배, 위탁 보증금은<i class="text-danger">{margin_position}</i>로 조절하고, 위탁 보증금은 <i class="text-danger">{margin_delegation}</i>으로 조정합니다',
     tip_mix: '당신의 작업은 이미 보유하고 있는 지렛대 배수와 위탁 주문의 지레 배수를 수정하여 <i class="text-danger">{leverage}</i>배, 위탁 보증금은<i class="text-danger">{margin_position}</i>로 조절하고, 위탁 보증금은 <i class="text-danger">{margin_delegation}</i>으로 조정합니다',
     leverageTip: '确定将杠杆倍数调节至{leverage}吗',
-    allstorehouse: '포지션'
+    allstorehouse: '포지션',
+    marginMode: '무기한 마진 모드',
+    tip2: '마진 모드 전환은 선택한 계약에만 적용됩니다.。', 
   },
   Proposer:{
     title:"Please fill in the following to submit your application for the currency. We will contact you as soon as we receive the application.",

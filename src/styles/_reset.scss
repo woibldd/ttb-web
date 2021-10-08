@@ -85,3 +85,102 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
 .el-popper.nav-list .popper__arrow {
   display: none;
 }
+
+.el-popper.el-popover {
+  min-width: 120px;
+}
+ 
+.el-popper.pd-0 {
+  padding: 12px 0;
+}
+// .el-pager li.active {
+//   color: $primary !important;
+// }
+
+.swiper-pagination {
+  .swiper-pagination-bullet-active {
+    background-color: $primary;
+  }
+}
+
+
+.el-dropdown-menu.dark {
+  background-color: #151518;
+  .el-dropdown-menu__item {
+    background-color: #151518;
+    color:#999999;
+    &:hover {
+      background-color: #222222;
+    }
+    .my-fund-operate {
+      background-color:red;
+      color:#999999;
+      a {
+        color: #999999;
+      }
+    }
+  }
+}
+
+.el-popper {
+  &.contrat-popper-success-class{
+    background: $--contract-table-bg;
+    border: 1px solid $--color-success;
+    &.dark {
+      background-color:  $--contract-table-bg2;
+      color: #cccccc;
+    }
+    &>.el-popover__title{
+      color: $--color-success;
+    }
+    &[x-placement^="left"] .popper__arrow{
+      border-left-color: $--color-success;
+      &::after{
+        border-left-color: $--color-success;
+      }
+    }
+  }
+  &.contrat-popper-danger-class{
+    background: $--contract-table-bg;
+    border: 1px solid $--color-danger;
+    &.dark {
+      background-color:  $--contract-table-bg2;
+      color: #cccccc;
+    }
+    &>.el-popover__title{
+      color: $--color-danger;
+    }
+    &[x-placement^="left"] .popper__arrow{
+      border-left-color: $--color-danger;
+      &::after{
+        border-left-color: $--color-danger;
+      }
+    }
+  }
+  &.dark { 
+    margin: 5px !important;
+    background: $contract-bg2; 
+    border: 1px solid $contract-block-bg2; 
+    .popper__arrow {
+      display: none;
+    }
+    .el-popover__title {
+      color: #acacac;
+    }
+    .el-button {
+      background-color: $--contract-table-bg2;
+      color:#acacac;
+    }
+    ul {
+      li {
+        color: #ffffff;
+      }
+    }
+    .el-select-dropdown__item {
+      background: $contract-bg2; 
+      &.hover { 
+        background-color: $--contract-table-bg2; 
+      }
+    }
+  }
+}

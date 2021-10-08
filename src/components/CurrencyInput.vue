@@ -3,6 +3,7 @@
     class="currency-input"
     :class="{static: isStatic}">
     <input
+      :skin="state.skin"
       type="text"
       ref="input"
       class="input"
@@ -14,28 +15,18 @@
       @keydown.down="down"
       @input="updateValue($event.target.value, 'input')"
       @focus="focus()"
-      @blur="fixValue();blur()">
-
+      @blur="fixValue();blur()"> 
     <div
       class="currency-input label long"
       v-if="currency"
       v-html="currency">
-    </div>
-    <!-- <div class="btn bid1" v-show="bid"
-      v-tooltip.left="bidTip"
-      @click="setBid">
-      <i class="ibt bgcolor-up"></i>
-    </div>
-    <div class="btn ask1" v-show="ask"
-      v-tooltip.left="askTip"
-      @click="setAsk">
-      <i class="ibt bgcolor-down"></i>
-    </div> -->
+    </div> 
   </div>
 </template>
 
 <script>
 import utils from '@/modules/utils'
+import {state} from '@/modules/store'
 
 export default {
   name: 'CurrencyInput',
@@ -66,7 +57,9 @@ export default {
     currency: {
       type: String
     },
-    value: [String, Number],
+    value: {
+      type: [String, Number]
+    },
     // 步长间隔 N 每次增加N个最小单位
     accuracy: {
       type: Number,
@@ -76,6 +69,7 @@ export default {
   data () {
     const vm = this
     return {
+      state,
       debug: 0,
       lastValue: '',
       bidTip: {
@@ -119,7 +113,7 @@ export default {
       return this.readonly || this.disabled
     },
     step () {
-      const scale = this.stepScale ? 0 - this.stepScale : 0 - this.realScale
+      const scale = this.stepScale ? 0 - this.stepScale : 0 - this.realScale 
       return this.$big(10).pow(scale)
     },
     realScale () {
@@ -166,12 +160,11 @@ export default {
       }
       try {
         // 最小进步 accuracy 参与运算 
-        const minStep = this.$big(10).pow(-this.realScale).times(this.accuracy)
+        const minStep = this.$big(10).pow(-this.realScale).times(this.accuracy) 
         // const minStep = Math.pow(10, -this.realScale) * this.accuracy
         let $newValue = this.$big(newValue)
         if (!$newValue.mod(minStep).eq(0)) {
-          // $newValue = $newValue.div(minStep).round(this.realScale >= 1 ? this.realScale - 1 : 0, 0).mul(minStep)
-          $newValue = $newValue.div(minStep).round(0, 0).mul(minStep)
+          $newValue = $newValue.div(minStep).round(this.realScale >= 1 ? this.realScale - 1 : 0, 0).mul(minStep)
         }
         // this.updateValue(this.$big(newValue).round(this.realScale) + '', 'valueChange')
         this.updateValue($newValue.round(this.realScale) + '', 'valueChange')
@@ -265,7 +258,7 @@ export default {
   line-height: 40px;
   height: 40px;
   width: 54px;
-  border-right: 1px solid #DDDDDD;
+  // border-right: 1px solid #DDDDDD;
   text-align: center;
   user-select: none;
   font-size: 13px;
@@ -273,7 +266,7 @@ export default {
 .input {
   font-family: monaco Trebuchet MS, Tahoma, Arial, sans-serif;
   outline: none;
-  border: 1px solid $text-light;
+  border: 1px solid #e0e0e0;
   border-radius: 3px;
   background-color: transparent;
   width: 100%;
@@ -282,7 +275,11 @@ export default {
   line-height: 20px;
   font-size: 14px;
   padding: 9px 60px 9px 9px;
-  color: #ffffff;
+  color: $--ix-input;
+  &[skin~='dark'] { 
+    color: $--ix-input2;
+    border-color: #3e454e !important;
+  }
 }
 ::placeholder {
   color: #999;
@@ -294,27 +291,27 @@ export default {
     }
   }
   .label {
-    color: white;
-    // background-color: #CCCCCC;
+    color: $order-input-label;
+    background-color: transparent;
     padding-right: 15px;
     width: 50px;
     text-align: right;
-    line-height: 33px;
+    // line-height: 33px;
     height: 32px;
     box-sizing: border-box;
-    border-top: 1px solid $order-input-label;
-    border-right: 1px solid $order-input-label;
-    border-bottom: 1px solid $order-input-label;
+    // border-top: 1px solid $order-input-label;
+    // border-right: 1px solid $order-input-label;
+    // border-bottom: 1px solid $order-input-label;
     &.long {
       font-size: 12px;
     }
   }
   .input {
-    border: 1px solid $order-input-label;
-    border-radius: 0;
-    background-color: $protrade-bg;
-    height: 32px;
-    line-height: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    // background-color: $protrade-bg;
+    // height: 32px;
+    // line-height: 20px;
     padding: 3px 60px 3px 9px;
     text-align: right;
     transition: background-color 300ms;

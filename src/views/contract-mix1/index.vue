@@ -4,14 +4,14 @@
     <div ref="mix-container" :class="['page-contract', 'table-container', state.skin]"> 
       <!-- 1-1 -->  
       <div style="width: 100%;" flex>
-        <!-- 币对列表 -->
+        <!-- 币对列表 --> 
         <div class="x-col mt-2 mb-2 "  flex-box="0"   v-if="showSymbolList" style="width:302px;"> 
           <div class="r1-c1-r1 mt-2 mb-2" 
             v-loading="!products.length"
             element-loading-background="rgba(0, 0, 0, 0.3)"> 
             <symList ref="symList" :pair="state.mix.pair"/>
           </div>
-        </div>
+        </div> 
         <!-- 币对信息/k线 -->
         <div class="x-col ml-4 mr-4" flex-box="1" >
           <div class="x-row-1 ">
@@ -23,7 +23,7 @@
                     <el-popover 
                       v-else
                       :popper-class="[state.skin, 'pd-0']"  
-                      trigger="hover">
+                      trigger="click">
                       <div class="drop-down">
                         <div>
                           <el-row>
@@ -220,6 +220,7 @@
                 </div> 
               </div>
             </div>
+            <!-- 委托列表/最新成交 -->
             <div class="r1-c2-list" style="width: 250px;" flex-box="0">
               <div class=""> 
                 <div class="delegate-list"
@@ -432,19 +433,7 @@
                 <!-- 限价 市价 条件单 -->
                 <div class="ix-tab-type">
                   <div style="text-align:center;" class="mt-20 type-menus" :class="[state.skin]"> 
-                    <!-- <el-button-group  style="padding:0 10px; margin: 0 auto; display: flex;">   
-                      <el-button 
-                        size="small"
-                        style="flex:1;"
-                        v-for="(value,key) in mapFormContent.mapBtns" 
-                        :key="key"
-                        :flex-box="1"
-                        :type="(activeBtnsKey===key || (+key===3 && +activeBtnsKey===4)) ? 'primary' : ''"
-                        v-tooltip.bottom="{html: true, content: $tR(`mapFormContent.mapBtns.${key}.describe`), classes: 'contract'}"
-                        @click="activeBtnsKey=key;isProportion=0;"> 
-                        {{ $tR(`mapFormContent.mapBtns.${key}.text`) }} 
-                      </el-button>
-                    </el-button-group>  -->
+                     
                     <div 
                       v-for="(value,key) in mapFormContent.mapBtns" 
                       :key="key"
@@ -556,13 +545,13 @@
                           :class="['custom-label', { active }]"
                           v-if="label % 25 === 0"/> 
                       </template>
-                      <template
+                      <!-- <template
                         slot="tooltip"
                         slot-scope="tooltip">
                         <div class="custom-tooltip">
                           {{ tooltip.value }}%
                         </div>
-                      </template>
+                      </template> -->
                     </ix-slider> 
                   </div>
                 </div>  

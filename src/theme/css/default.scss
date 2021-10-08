@@ -4,17 +4,20 @@ $primary-back: #ffffff;
 $primary-hover: #22CED0; // hover
 $primary-active: #01CED1; // active
 $primary-disabled: rgba(0,0,0,0.2); // disabled
-$primary-opacity: #293443; // background 交易品种列表选中的背景色，主色25%透明度
+$nav-white-color: #ffffff;
+$nav-hover-color: #010101;
+$primary-opacity: #F9F9F9; // background 交易品种列表选中的背景色，主色25%透明度
+
+$profile-menu-bg: #EBF2FD;
 
 /* nav */
-$nav: #1C2435; // 主导航颜色 -nav bg
+$nav: #EDEDED; // 主导航颜色 -nav bg 
 $normal-nav: #252838; // 资产个人中心导航颜色 -nav bg
 $nav-2: #303E4B; // 副导航颜色 -nav-2
 
-/* link */
-$text-link: #00CED2; // base -文字链
-$text-link-hover: #01CED1; // hover
-$text-link-active: #00CED2; // active
+$text-link: $primary; // base -文字链
+$text-link-hover: $primary; // hover
+$text-link-active: $primary; // active
 $text-link-disabled: rgba(0,0,0,0.3); // disabled
 
 /* trade */
@@ -36,7 +39,6 @@ $down-price: #f46c53; // base 下降数字 -跌文字
 $down-price-hover: #f46c53; // hover
 $down-price-active: #f46c53; // active
 
-$search-bar-bg: #0C1222; // search bg 搜索框背景
 $search-bar-border: #666666; // search border 搜索框border
 
 $up-candle: #6ba583; // 蜡烛图涨色
@@ -74,84 +76,88 @@ $text-strong: #333333; // 重要文字
 $text-light: #666666; // 重要文字
 $text-weak: #999999; // 重要文字
 $text-normal: #cccccc; // 一般
-
+$footer-color: #606060;
 /* hover */
 $hover-bg: #01CED1; // 首页按钮hover
 $dropdown-bg: rgba(0,0,0,0.1); // 下拉列表hover
 
 /* home header background */
 // $home-header-bg:linear-gradient(-153.7deg,#1B244F,#494988);
-$home-header-bgdark: #3E3E3E;
-$home-header-login: #303E4B;
 
-$home-header-custom-bgdark:rgb(17, 22, 33);
+$home-header-bgdark: #3E3E3E;;
+$home-header-colordark: #FFFFFF;
+$home-header-bglight: #FFFFFF;
+$home-header-bglight-top: transparent;
+$home-header-colorlight: #020202;
+$home-header-login: #303E4B;
+$home-banner-color: #020202;
+$home-footer-bgdark: #3E3E3E;
 
 /* const */
-$splitter:#272837; // trade split line 交易页面分割线
-$loading-mask: #0C1222; // 交易页面loading背景
+$splitter:#F5F5F5; // trade split line 交易页面分割线
+$loading-mask: rgba(255, 255, 255,.8); // 交易页面loading背景
+$loading-mask-color: #777777;
 $order-input-label: #666666; //订单填写 input 右侧币种的背景色
+// $input-color: #ffffff;
+$input-color: #646464;
 
 /* logo pic */
 $logo-pic: 'assets/logo'; // logo图片
 $logo-bg-width: 150px;
-$logo-bg-height: 42px;
-
+$logo-bg-height: 42px; 
 /* kyc pic */
-$kyc-pic: '../assets/kyc-example';
-
-$page-width: 1200px;
-
-$protrade-bg: #0C1222;
-
+$kyc-pic: '../assets/kyc-example'; 
+$page-width: 1200px; 
+$protrade-bg: #ffffff; //背景色 
+$protrade-bg-hover:#EBF2FD; //背景色 
 /* font family */
 $hex: monaco, monospace, arial;
 
-/* profile 左侧 背景色 */
-$profile-menu-bg: #B0EDEF;
 
 
-$contract-bg: #272837;
-$contract-block-bg: #0C1222;
-$contract-block-active-bg: #1C2435;
+$contract-bg: #F5F5F5;
+$contract-block-bg: #ffffff;
+$contract-block-active-bg: #EDEDED;
 
 
-$otc-buy-bg: #09C989;
+$otc-buy-bg: #41b37d;
 $otc-buy-bg-light: #53E3B3;
-$otc-sell-bg: #F45151;
+$otc-sell-bg: #d74e5a;
 $otc-sell-bg-light: #FA8B8B;
 
 $font-up: #53E3B3;
 $font-down: #F45151;
 
 
-
-
-$--font-path: '~element-ui/lib/theme-chalk/fonts'; 
-
-$--color-primary: #01CED1;
-/// color|1|Functional Color|1
-$--color-success: #09C989 !default;
-/// color|1|Functional Color|1
-$--color-warning: #01CED1 !default;
-/// color|1|Functional Color|1
-$--color-danger: #F24E4D !default;
-/// color|1|Functional Color|1 
-// $--color-info: #1E1E1E;
-$--color-info: #dfe4ed !default;
-
-$--color-light: #dfe4ed !default; 
-
-$--border-info: #909399 !default;
-//contract
-$--contract-table-bg: #0c1222;
-$--contract-table-bd: #272837;
-$--contract-table-active: #1C2435;
+$download-icon: url('../../assets/h5/download_h5_bg.jpg');
+$download-btn-bc:#364050;
  
 
-//trading
-$--trading-table-bg: #0c1222;
-$--trading-table-bd: #272837;
-$--trading-table-active: #1C2435;
+// $primary-item: rgba(255, 255, 255, 0.8); //交易品种列表选字体默认颜色
+$primary-item: #7D7D7D;
+$nav-grey-color: #666666;
+// $scrollbar: #192D3F; //交易品种列表滚动条颜色
+$scrollbar:#9D9999;
+$down-background: #ffffff;
+$down-background-hover: #EDEDED; //#0f1f2d;
+$down-background-cur: #E0E0E0;  //#203950;
+$slider: #D4D4D4;//#ffffff;
+$slider-label: #D4D4D4;//#ffffff;
+$grid-color: #606060; 
+$coin-label: #929292; 
+
+$home-corp-background: #F7F7F7;
+$home-corp-border: #E6E6E6;
+
+$bazaar-right-background: linear-gradient(-48deg, #4184fe, #994df6);
+
+
+
+
+$--contract-table-bg: #ffffff;
+$--contract-table-bd: #EDEDED;
+$--contract-table-active: #EDEDED;
+
 
 //share-option
 $--share-border-color:rgba(105, 111, 128, 0.5);
@@ -160,45 +166,24 @@ $--share-text-info:#8F97AE;
 
 $--button-font-weight: 400;
 $--background-active-bg:#b0edef;
-// $--color-text-regular: #1f2d3d;
-
-$--border-color-light: #dfe4ed;
-$--border-color-lighter: #e6ebf5;
-$--secondary-text:#909399;
-
-$--table-border:1px solid #dfe6ec;
-$--background-color-gray:#3E3E3E;
-// base color
-$blue:#324157;
-$light-blue:#3A71A8;
-$red:#C03639;
-$pink: #E65D6E;
-$green: #30B08F;
-$tiffany: #4AB7BD;
-$yellow:#FEC171;
-$panGreen: #30B08F;
-
-// sidebar
-$menuText:#bfcbd9;
-$menuActiveText:#409EFF;
-$subMenuActiveText:#f4f4f5; // https://github.com/ElemeFE/element/issues/12951
-
-$menuBg:#304156;
-$menuHover:#263445;
-
-$subMenuBg:#1f2d3d;
-$subMenuHover:#1B1B1B;
-
-$sideBarWidth: 210px;
-
-// the :export directive is the magic sauce for webpack
-// https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
-$border-color-extralight:#F2F6FC;
-$border-color-lighter:#EBEEF5;
 
 
+$--color-primary: #1A70FF;
+/// color|1|Functional Color|1
+$--color-success: #09C989 !default;
+/// color|1|Functional Color|1
+$--color-warning: #E6A23C !default;
+/// color|1|Functional Color|1
+$--color-danger: #F24E4D !default;
+/// color|1|Functional Color|1 
+// $--color-info: #1E1E1E;
+$--color-info: #000 !default;
 
-//new
+$--color-light: #dfe4ed !default;
+
+$--border-info: #909399 !default;
+
+
 //light
 $--ix-button: #ffffff;//#ffffff
 $--ix-input: #3D3D3D; //#ffffff

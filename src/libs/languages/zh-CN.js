@@ -1,4 +1,5 @@
 export default {
+  order: '下单',
   buyEvent: '抢购活动',
   finance: '金融业务',
   promotion: '促销',
@@ -2853,8 +2854,7 @@ export default {
         'amount': '数量',
         'total': '累计'
       },
-      mapHeader2: {
-        'direction': '方向',
+      mapHeader2: { 
         'transaction-price ': '成交价',
         'trading-volume': '成交量',
         'time': '时间'
@@ -3187,8 +3187,7 @@ export default {
         'amount': '数量',
         'total': '累计'
       },
-      mapHeader2: {
-        'direction': '方向',
+      mapHeader2: { 
         'transaction-price': '成交价',
         'trading-volume': '成交量',
         'time': '时间'
@@ -3315,7 +3314,9 @@ export default {
     tip: '您的操作将会把已持仓杠杆倍数和委托订单杠杆倍数修改为<i class="text-danger">{leverage}</i>，仓位保证金调节为<i class="text-danger">{margin_position}</i>，委托保证金为<i class="text-danger">{margin_delegation}</i>',
     tip_mix: '您的操作将会把已持{side}仓杠杆倍数和委托订单杠杆倍数修改为<i class="text-danger">{leverage}</i>，仓位保证金调节为<i class="text-danger">{margin_position}</i>，委托保证金为<i class="text-danger">{margin_delegation}</i>',
     leverageTip: '确定将杠杆倍数调节至{leverage}吗',
-    allstorehouse: '全仓'
+    allstorehouse: '全仓',
+    marginMode: '保证金模式',
+    tip2: '注：调整保证金模式仅对当前合约生效。', 
   },
   Proposer: {
     title: "请填写以下内容提交上币申请，收到申请后我们将尽快联系您",

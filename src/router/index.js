@@ -468,6 +468,17 @@ export const routes = [
     component:  () => import('@/views/currency-unit')
   },
   {
+    path: '/unit2',
+    name:'unit2',
+    meta: {
+      nav: true,
+      footer: false,
+      class: 'dark', 
+      zendeskWidget: false
+    },
+    component:  () => import('@/views/currency-unit1')
+  },
+  {
     path: '/mix',
     name:'mix',
     meta: {
@@ -500,6 +511,28 @@ export const routes = [
     },
     component:  () => import('@/views/contract-btc')
   },
+  {
+    path: '/future2',
+    name:'future2',
+    meta: {
+      nav: true,
+      footer: false,
+      class: 'dark', 
+      zendeskWidget: false
+    },
+    component:  () => import('@/views/contract-btc1')
+  }, 
+  {
+    path: '/trading2/:pair?',
+    name: 'trading2',
+    meta: {
+      class: 'dark', 
+      auth: false,
+      footer: true,
+      nav: true
+    },
+    component:  () => import('@/views/trading1')
+  }, 
 ]
 
 const routerPush = VueRouter.prototype.push
