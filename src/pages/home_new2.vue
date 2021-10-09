@@ -307,10 +307,10 @@
             <div class="row"
               :style="{backgroundImage: `url(${require('../assets/home/home-download-bg.png')})`}">
               <div class="download-title"> 
-                {{$t('bachex.home.middle.title')}}
+                {{$t('home.middle.title')}}
               </div>
               <div class="download-sub-title">
-                  {{$t('bachex.home.middle.sub_title', {siteName: state.siteNameText})}}
+                  {{$t('home.middle.sub_title', {siteName: state.siteNameText})}}
               </div>
               <div class="download-path flex-lr">
                 <div class="l pd-1">
