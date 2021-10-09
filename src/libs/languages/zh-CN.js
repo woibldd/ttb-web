@@ -2500,6 +2500,19 @@ export default {
       describe4: '7*24小时多语言在线服务<br>支持极速充/提币',
     }, 
   },
+  market: {
+    name: '行情',
+    fee: '费率标准',
+    about: '关于',
+    support: '支持',
+    tips1: '任选结算币种，便捷收益结算',
+    tips2: '操作简单，最高百倍杠杆',
+    tips3: '用比特币、USDT购买其他数字资产',
+    product: '产品',
+    h24change: '24小时变化',
+    view: '图表',
+    h24amount: '24小时成交额',  
+  },
   fund: {
     history: {
       byy: {

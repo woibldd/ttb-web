@@ -148,7 +148,7 @@
               <!-- <div class="calculator"><i class="el-icon-caret-bottom" />计算器</div> --> 
               <div class="r1-c2-r2">
                 <div class="tv-tools" flex="cross:center">
-                  <el-dropdown class="tool" @command="handleCyclesCommand" size="mini">
+                  <el-dropdown class="tool ml-10" @command="handleCyclesCommand" size="mini">
                     <span class="el-dropdown-link pointer">
                       <span style="display: inline-block; width:36px; white-space: nowrap;">{{ $t(`tv.cycles.${local.mixIntervalText}.text`)}}</span> <i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
@@ -161,7 +161,7 @@
                       </el-dropdown-item> 
                     </el-dropdown-menu>
                   </el-dropdown> 
-                  <div class="sep"></div>
+                  <div class="sep ml-5 mr-5"></div>
                   <el-dropdown class="tool" @command="handleTypesCommand">
                     <span class="el-dropdown-link pointer">
                       <icon name="candle" /> 
@@ -179,19 +179,19 @@
                       </el-dropdown-item> 
                     </el-dropdown-menu>
                   </el-dropdown> 
-                  <div class="sep"></div>
+                  <div class="sep ml-5 mr-5"></div>
                   <label class="el-dropdown-link pointer tool" @click="handleTVOption('indicators')"> 
                     <icon name="view"/>
                   </label> 
-                  <div class="sep"></div>
+                  <div class="sep ml-5 mr-5"></div>
                   <label class="el-dropdown-link pointer tool" @click="handleTVOption('drawing')">
                     <span class="draw">{{ $t('tv.navs.left.drawing_tools') }}</span>  
                   </label>
-                  <div class="sep"></div>
+                  <div class="sep ml-5 mr-5"></div>
                   <label class="el-dropdown-link pointer tool" @click="handleTVOption('setting')"> 
                     <icon name="setting" />
                   </label>
-                  <div class="sep"></div> 
+                  <div class="sep ml-5 mr-5"></div> 
                   <label class="el-dropdown-link pointer tool" @click="handleTVOption('fullscreen')"> 
                     <icon name="fullscreen" />
                   </label>  
