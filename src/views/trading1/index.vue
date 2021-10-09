@@ -127,7 +127,6 @@
             </div>-->
           </div>
         </div> 
-        
       </div>
       <div class="ix-row">
         <!--  当前委托 & 委托历史 -->

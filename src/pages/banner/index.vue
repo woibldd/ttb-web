@@ -227,9 +227,7 @@ export default {
   created() {
     this.bicher();
     this.init()
-  },
-  computed: {
-  }
+  }, 
 }
 </script>
 

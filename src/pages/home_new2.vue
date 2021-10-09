@@ -5,7 +5,8 @@
       <div class="nav_box"> 
         <v-navbc myClass="light" /> 
       </div> 
-      <div class="banner-wrap" flex="main:center">
+      <HomeBanner />
+      <!-- <div class="banner-wrap" flex="main:center">
         <div>
           <div class="slogan"> 
               <div class="title">{{$t('home.banner.title')}}</div>
@@ -19,7 +20,7 @@
             <el-button class="large" type="primary" plain @click="gotoPath('otc')">{{$t('otc.buy_now')}}</el-button>
           </div>
         </div>
-      </div>
+      </div> -->
     </div> 
     <div class="ixx-home-items">
       <div
@@ -29,7 +30,7 @@
       </div>  
       <!-- 公告 -->
       <div class="home-notice">
-        <div class="home_swiper pt-10">
+        <div style="display:none" class="home_swiper pt-10">
           <!-- 跑马灯 -->
           <div class="swiper-container2">
             <div class="swiper-wrapper"> 
