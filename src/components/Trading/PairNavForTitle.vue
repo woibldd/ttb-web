@@ -397,6 +397,7 @@ export default {
       background-color: #203950;
     }
     .el-tabs__item {
+      padding: 0 10px;
       color: white;
       &.is-top:nth-child(2) {
         padding-left: 20px;

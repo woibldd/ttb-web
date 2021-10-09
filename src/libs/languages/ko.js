@@ -3173,10 +3173,9 @@ export default {
         6: '市价止盈'
       },
       mapInput: { 
-        shippingSpace: '포지션',
-        value: '가격',
         triggerPrice: '트리거 프라이스',
-        triggerType: '제한류형'
+        value: '가격',
+        shippingSpace: '포지션', 
       },
       mapHandleBtn: {
         buy: {

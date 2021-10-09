@@ -281,7 +281,7 @@
                 <p >{{ $t('contract.float_profit_loss') }}</p>  
                 <p :class="currentHolding.unrealized > 0 ? 'text-success' : 'text-danger'">
                   <span>{{currentHolding.unrealized | round(8)}} </span> <br>
-                  <span>{{currentHolding.roe |round(2) }}%</span> 
+                  <!-- <span>{{currentHolding.roe |round(2) }}%</span>  -->
                 </p>  
               </el-col>
               <el-col :span='12' class="pt-15 pb-10 th"> 

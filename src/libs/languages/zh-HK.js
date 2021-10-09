@@ -3146,10 +3146,9 @@ export default {
         6: '市价止盈'
       },
       mapInput: {
-        value: '委托价格',
-        shippingSpace: '合约数量',
         triggerPrice: '触发价格',
-        triggerType: '触发类型'
+        value: '委托价格',
+        shippingSpace: '合约数量',  
       },
       mapHandleBtn: {
         buy: {

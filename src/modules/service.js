@@ -522,8 +522,9 @@ const service = {
   canbullWithdraw(param) {
     return request('/otcactive//keyByCoins', param)
   },
-  /* -- 资金管理 end  -- */
-
+  getQutoHistoryMultiple({period, pair, begin, end}) {
+    return quote(`history/millis/fobit?period=${period}&pair=${pair}&begin=${begin}&end=${end}`)
+  },
   /* 挖矿 */
   getMineTotal(data) {
     return request('mine/exchange/total', data)

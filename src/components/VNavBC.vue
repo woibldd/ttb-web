@@ -24,7 +24,7 @@
         class="nav_logo"/>
       <div class="nav_left"> 
         <div  class="left_options" flex="main:left">  
-          <div class="mr-10" v-if="state.rules.otc">
+          <div class="mr-10" >
             <router-link class="nav_link ml-30" to="/otc">{{$t('header_nav.notc')}}</router-link>
           </div>
           <div class="mr-10">
@@ -35,7 +35,7 @@
               <div>{{ $t(`market.product`) }} <icon name="arrow-down" /></div>
               <div class="dropdown-sub-menu">
                 <ul class="dropdown-list pt-10 pb-10">
-                  <li  v-if="state.rules.trading" class="dropdown-item2 pl-24 pr-24"> 
+                  <li   class="dropdown-item2 pl-24 pr-24"> 
                     <router-link to="/trading" flex="dir:column">
                       <div class="mr-10">
                         <!-- <img :src="require(`../assets/site/${state.siteName}/icon/trading.png`)" alt="">  -->
@@ -48,7 +48,7 @@
                       </div>
                     </router-link>
                   </li> 
-                  <li v-if="state.rules.mix" class="dropdown-item2 pl-24 pr-24">
+                  <li class="dropdown-item2 pl-24 pr-24">
                     <router-link to="/mix" flex="dir:column">  
                       <div class="mr-10"> 
                         <!-- <img :src="require(`../assets/site/${state.siteName}/icon/contract.png`)" alt="">  -->
@@ -61,7 +61,7 @@
                       </div> 
                     </router-link>
                   </li>
-                  <li v-if="state.rules.blend" class="dropdown-item2 pl-24 pr-24"> 
+                  <li class="dropdown-item2 pl-24 pr-24"> 
                     <router-link to="/blend" flex="dir:column"> 
                       <div class="mr-10">
                         <!-- <img :src="require(`../assets/site/${state.siteName}/icon/blend.png`)"  alt=""> -->
@@ -537,10 +537,10 @@ export default {
   },
 
   async created() {
-    let res = await service.getCloudSetting() 
-    if (!res.code && res.data) {
-      this.state.setting = res.data[0]
-    }
+    // let res = await service.getCloudSetting() 
+    // if (!res.code && res.data) {
+    //   this.state.setting = res.data[0]
+    // }
     this.$nextTick(() => { 
       window.addEventListener('scroll', this.windowScroll) 
       this.windowScroll()

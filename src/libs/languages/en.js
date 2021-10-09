@@ -3285,10 +3285,9 @@ export default {
         6: 'Take Profit Market'
       },
       mapInput: {
-        shippingSpace: 'Position',
-        value: 'Price',
         triggerPrice: 'Trigger Price',
-        triggerType: 'Trigger'
+        value: 'Value',
+        shippingSpace: 'Position', 
       },
       mapHandleBtn: {
         buy: {

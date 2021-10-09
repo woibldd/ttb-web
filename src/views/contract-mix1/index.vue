@@ -266,54 +266,7 @@
                       </div>
                     </div>  
                 </div>
-              </div>
-              <!-- <el-tabs v-else v-model="selectOrderList" >
-                <el-tab-pane :label="$t('contract_block_orderbook')" name="delegate"> 
-                  <div class="delegate-list"
-                    v-loading="!delegateData"
-                    element-loading-background="rgba(0, 0, 0, 0.3)"> 
-                    <orderBook
-                      ref="orderBook"
-                      @changeDeep="changeDeep"
-                      :active-product="activeProduct"
-                      :order-data="delegateData"
-                      :last-price="(activeProduct.MIX||{}).current"
-                      :index-price="(activeProduct.INDEX||{}).current"
-                      :mark-price="handleDishInfoItem('markPrice')"
-                      :is-buy="isBuy" />
-                  </div> 
-                </el-tab-pane>
-                <el-tab-pane :label="$t('contract_block_orderdeal')" name="deal">
-                  <div
-                    v-loading="!newBargainListData.length"
-                    class="delegate-list"
-                    style="height:638px"
-                    element-loading-background="rgba(0, 0, 0, 0.3)"> 
-                    <div
-                      class="content-header"
-                      flex="main:justify box:mean">
-                      <span
-                        v-for="(value,key) in mapHeader2"
-                        :key="key">{{ $tR(`mapDelegateList.mapHeader2.${key}`) }}</span>
-                    </div>
-                    <div class="content-wrap">
-                      <div class="content-container">
-                        <ul>
-                          <li
-                            v-for="(item,index) in newBargainListData"
-                            :key="index"
-                            flex="main:justify cross:center box:mean">
-                            <span :class="[item.side === 'buy'?'text-success':'text-danger']">{{ $tR(item.side) }}</span>
-                            <span :class="[item.side === 'buy'?'text-success':'text-danger']">{{ item.values[0]|bigRound(activeProduct.price_scale) }}</span>
-                            <span>{{ item.values[1] }}</span>
-                            <span>{{ item.time | parseTime('{h}:{i}:{s}') }}</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </el-tab-pane> 
-              </el-tabs> -->
+              </div> 
             </div>
           </div>
         </div> 
@@ -432,8 +385,7 @@
                 </div> 
                 <!-- 限价 市价 条件单 -->
                 <div class="ix-tab-type">
-                  <div style="text-align:center;" class="mt-20 type-menus" :class="[state.skin]"> 
-                     
+                  <div style="text-align:center;" class="mt-20 type-menus" :class="[state.skin]">  
                     <div 
                       v-for="(value,key) in mapFormContent.mapBtns" 
                       :key="key"
@@ -515,9 +467,8 @@
                       </i>
                     </span>
                   </template>   
-                </div>
+                </div> 
                 <div class="mt-10 mr-20 txr">
-                  <!-- {{$t('contract_value')}}： {{totalValue() || 0}} {{tradingType}} -->
                   {{`${$t('contract_total_werehouse_value')}:${ $big(activeAcountAndPriceArr.shippingSpace || 0).times(activeProduct.multiplier || 0)  || 0} ${activeProduct.currency}`}} 
                   <!-- {{activeAcountAndPriceArr}} --> 
                 </div>
@@ -601,8 +552,7 @@
                             <span
                               v-else-if="activeBtnsKey === '2' && asks.last && bids.first"
                               style="font-size:12px">
-                              {{ activeAcountAndPriceArr['value'] }}
-                              
+                              {{ activeAcountAndPriceArr['value'] }} 
                             </span>
                             <span
                               v-else-if="activeBtnsKey === '3'"
@@ -612,8 +562,7 @@
                               <br>
                               <span v-if="['3','4'].includes(activePriceType.key) && activeAcountAndPriceArr['triggerPrice']">{{ key === 'buy'? '≧':'≦' }} {{ activeAcountAndPriceArr['triggerPrice'] }}</span>
                               <span v-if="['5','6'].includes(activePriceType.key) && activeAcountAndPriceArr['triggerPrice']">{{ key === 'buy'? '≦':'≧' }} {{ activeAcountAndPriceArr['triggerPrice'] }}</span>
-                            </span>
-
+                            </span> 
                           </div>
                             <p class="mt-5" flex="main:center cross:center">
                               <b v-if="+activeTypesKey===1">

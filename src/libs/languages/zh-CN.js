@@ -2407,6 +2407,10 @@ export default {
     }
   },
   home: {
+    how_to_register: "如何注册交易账户",
+    how_to_login: "如何登陆交易账户",
+    how_to_unseal: "账户被限制登陆怎么办",
+    more: '更多',
     nav: {
       information: "行业资讯"
     },
@@ -2422,7 +2426,79 @@ export default {
       content: "【创新区】本区交易品种均为创新型项目，属于全球流动性较小，价格波动较大，风险较高的区块链资产。IXX.com强烈建议您事先调查了解，在自身所能 承受的风险范围内参与交易。",
       no_alert_again: "不再提醒",
       understand: "我已了解"
-    }
+    },
+    banner: {
+      title: '新型数字资产期权交易平台',
+      sub_title: '让交易更简单',
+      i_want: '我想要',
+      spend: '花费'
+    },
+    main_top: {
+      title: '增强您的交易经验！',
+      sub_title: '扫码二维码下载 APP',
+      download: '下载'
+    },
+    main_middle: {
+      title: '%{siteName}全球站，近24小时成交量%{total}美元',
+      sub_title: '为全球超过130个国家的数千万用户提供安全、可信赖的数字资产交易及资产管理服务',
+      start: '开始交易',
+      swiper: {
+        0: {
+          title: '安全',
+          sub_title: 'security',
+          detail: '区块链安全专家、顶级风控管理团队自内而外打造多种 安全机制，多层加密、多级防。', 
+        },
+        1: {
+          title: '高效',
+          sub_title: 'high efficiency',
+          detail: '采用先进的内存算法、快速读写、分布式信息传输框架 ，能够实时撮合大规模交易、秒速充提到账。', 
+        }, 
+        2: {
+          title: '透明',
+          sub_title: 'transparent',
+          detail: '实时的资产与交易数据查询验证机制，可为用户提供24小时实时全交易记录，达到高度公开透明。', 
+        }
+      }
+    },
+    middle: {
+      title: '随时随地 任享交易',
+      sub_title: '下载%{siteName} App 所有交易尽在手中',
+      contract: '合约',
+      orders: '币币',
+      more: '查看更多'
+    },
+    bottom: {
+      title: '开启交易之旅',
+      sub_title: '体验BTC、ETH、USDT等上百种数字货币交易',
+      register: '立即注册', 
+      start: '开始交易',
+    }, 
+    gift: { 
+      placeholder: '请输入您的whatsapp账号(选填)',
+      note: '注：填写whatsapp账号与客服确认后赠送188U赠金',
+      tips: 'IXX Pro 平台赠予新老客户188U，请联系客服确认账号后领取188U赠金。',
+      placeholder2: '填写whatsapp账号'
+    },
+    guide: {
+      title: '新手指引',
+      sub_title: '即刻开启数字货币交易学习',
+      option1: '购买及出售数字货币',
+      option2: '探索 %{siteName} 交易',
+      item1: '3分钟快速了解法币交易',
+      item2: '如何购买数字货币',
+      item3: '如何出售数字货币', 
+    },
+    feature: {
+      title: '开启您的数字货币之旅',
+      lable1: '合约产品',
+      describe1: '支持金本位合约<br>币种丰富，合约功能完善',
+      lable2: '高性能',
+      describe2: '每秒处理300,000交易量, 从输入<br>订单到响应时间的延迟小于1毫秒',
+      lable3: '最高的钱包安全性',
+      describe3: '冷钱包存储。转账经过<br> 2级严格的人员审查。',
+      lable4: '客户服务',
+      describe4: '7*24小时多语言在线服务<br>支持极速充/提币',
+    }, 
   },
   fund: {
     history: {
@@ -3209,11 +3285,10 @@ export default {
         5: '限价止盈',
         6: '市价止盈'
       },
-      mapInput: {
-        shippingSpace: '合约数量',
-        value: '委托价格',
+      mapInput: { 
         triggerPrice: '触发价格',
-        triggerType: '触发类型'
+        value: '委托价格',
+        shippingSpace: '合约数量', 
       },
       mapHandleBtn: {
         buy: {

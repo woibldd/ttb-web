@@ -3,8 +3,8 @@
     <!-- <v-nav from="unit"/> -->
     <div ref="unit-container"  :class="['page-contract', 'table-container', state.skin]">
       <!-- 1-1 --> 
-      <div :gutter="4" class="pt-4 el-row"> 
-        <div class="x-col el-col" :span="19">
+      <div :gutter="4" class="pt-4 my-row"> 
+        <div class="x-col my-col" :span="19">
           <div class="x-row-1 ">
             <div class="r1-c2-r1"> 
               <div class="product-row" flex="left"> 
@@ -138,7 +138,7 @@
             <div style="min-width:615px;" class="mr-4" flex-box="1">  
               <!-- <div class="calculator"><i class="el-icon-caret-bottom" />计算器</div> --> 
               <div class="r1-c2-r2">
-                <div class="tv-tools">
+                <div class="tv-tools ml-10">
                   <el-dropdown class="tool" @command="handleCyclesCommand" size="mini">
                     <span class="el-dropdown-link pointer">
                       <span style="display: inline-block; width:36px; white-space: nowrap;">{{ $t(`tv.cycles.${local.unitIntervalText}.text`)}}</span> <i class="el-icon-arrow-down el-icon--right"></i>
@@ -152,7 +152,7 @@
                       </el-dropdown-item> 
                     </el-dropdown-menu>
                   </el-dropdown> 
-                  <div class="sep"></div>
+                  <div class="sep ml-5 mr-5"></div>
                   <el-dropdown class="tool" @command="handleTypesCommand">
                     <span class="el-dropdown-link pointer">
                       <icon name="candle" />
@@ -171,21 +171,21 @@
                       </el-dropdown-item> 
                     </el-dropdown-menu>
                   </el-dropdown> 
-                  <div class="sep"></div>
+                  <div class="sep ml-5 mr-5"></div>
                   <label class="el-dropdown-link pointer tool" @click="handleTVOption('indicators')">
                     <!-- {{ $t('tv.navs.left.technical_indicators') }} -->
                     <icon name="view"/>
                   </label> 
-                  <div class="sep"></div>
+                  <div class="sep ml-5 mr-5"></div>
                   <label class="el-dropdown-link pointer tool" @click="handleTVOption('drawing')">
                     <span class="draw">{{ $t('tv.navs.left.drawing_tools') }}</span>  
                   </label>
-                  <div class="sep"></div>
+                  <div class="sep ml-5 mr-5"></div>
                   <label class="el-dropdown-link pointer tool" @click="handleTVOption('setting')">
                     <!-- {{ $t('tv.navs.left.setting') }} -->
                     <icon name="setting" />
                   </label>
-                  <div class="sep"></div>
+                  <div class="sep ml-5 mr-5"></div>
                   <!-- <label>计算器</label> -->
                   <label class="el-dropdown-link pointer tool" @click="handleTVOption('fullscreen')"> 
                     <icon name="fullscreen" />
@@ -193,8 +193,7 @@
                   <!-- <label class="el-dropdown-link pointer tool" @click="swithStyle"> 
                     <icon v-if="state.skin==='dark'" name="sun" />
                     <icon v-if="state.skin==='light'" name="moon" />
-                  </label> -->
-
+                  </label> --> 
                   <!-- <el-button @click="swithStyle">样式</el-button> -->
                 </div>
                 <div class="tv-tab">
@@ -276,8 +275,7 @@
             </div>
           </div>
         </div>
-        <div class="r1-c4 x-col el-col"
-                :span="5"> 
+        <div class="r1-c4 x-col my-col" :span="5"> 
           <div class="r1-c4-r1 option ">
             <div class="option-header">
               <span>{{$t('contract_block_orderaction')}}</span> 
@@ -543,13 +541,11 @@
             <div class="account-content">
               <el-tabs v-model="currentAccount">
                 <el-tab-pane v-for="(item, index) in balanceFilterList"
-                             :key="index"
-                             :label="item.currency"
-                             :name="item.currency">
+                    :key="index" :label="item.currency" :name="item.currency">
                   <el-row class="tr">
                     <el-col :span='12'
                             class="pt-10 pb-10 th">
-                      <p>浮动盈亏</p>
+                      <p>{{$t('contract.float_profit_loss')}}</p>
                       <p :class="item.funUnrealized(item).unrealized > 0 ? 'text-success' : 'text-danger'">
                         <span>{{item.funUnrealized(item).unrealized}} </span> <br>
                         <span>{{ item.funUnrealized(item).roe |round(2) }}%</span>
@@ -558,7 +554,7 @@
                     </el-col>
                     <el-col :span='12'
                             class="pt-15 pb-10 th">
-                      <router-link :to="{path:'/fund/transfer'}">划转</router-link>
+                      <router-link :to="{path:'/fund/transfer'}">{{$t('suvbanean')}}</router-link>
                     </el-col>
                   </el-row>
                   <el-row class="tr">
@@ -579,9 +575,8 @@
             v-if="!isLogin" >
             <div class="message mt-30 ml-24">{{ $t('appNav.welcome', {siteName: state.siteName})}}!</div>
             <div class="vertical-login-box">
-              <div class="logo">
-                <!-- <img :src="require(`../../assets/site/${state.siteName}/logo${state.skin==='dark' ? '' : '-dark'}.png`)" alt=""> -->
-                  <img src="@/assets/ixx/ixx_logo.png" :alt="$t('seo_keywords')">
+              <div class="logo"> 
+                <img src="@/assets/ixx/ixx_logo.png" :alt="$t('seo_keywords')">
               </div>
               <div
                 class="login-button"
@@ -2221,12 +2216,12 @@ export default {
   &::-webkit-scrollbar {
     width: 0 !important;
   }
-  .el-row {
+  .my-row {
     display: flex;
-    .el-col[span~="19"] {
+    .my-col[span~="19"] {
       flex: 1;
     }
-    .el-col[span~="5"] {
+    .my-col[span~="5"] {
       margin-left: 4px;
       width: 320px;
     }

@@ -33,6 +33,7 @@ let loaded = false
 const isMobile = utils.isMobile()
 
 const HomeNew = () => import(/* webpackChunkName: "home" */ '@/pages/home_new.vue')
+const HomeNew2 = () => import(/* webpackChunkName: "home" */ '@/pages/home_new2.vue')
 // const MobileHome = () => import(/* webpackChunkName: "mobilehome" */ '@/pages/Mobile/Home3.vue')
 const Test1 = () => import(/* webpackChunkName: "Test1" */ '@/pages/test1.vue')
 // const Test2 = () => import(/* webpackChunkName: "Test2" */ '@/pages/test2.vue')
@@ -202,7 +203,7 @@ export const routes = [
       class: 'dark',
       auth: false
     },
-    component: isMobile ? h5index : HomeNew
+    component: isMobile ? h5index : HomeNew2
   },
   {
     path: '/h5',

@@ -22,13 +22,14 @@
       </div>
       <!-- tabs -->
       <div class="ix-pair-head">
-        <el-tabs v-model="tabSelected" :skin="state.skin">
+        <el-tabs v-model="tabSelected" :skin="state.skin"> 
           <el-tab-pane :label="$t('pair_list_option')" name="like"/>
-          <el-tab-pane label="USDT" name="USDT" />
-          <el-tab-pane label="BTC" name="BTC"/>
-          <!-- <el-tab-pane label="ETH" name="ETH"/>
-          <el-tab-pane :label="$t('pair_list_new')" name="new" v-if="site!=='sgp_'"/>
-          <el-tab-pane :label="$t('pair_list_all')" name="all" v-if="site!=='sgp_'"/> -->
+          <el-tab-pane  :label="$t('pair_list_main')" name="main"/>
+          <el-tab-pane label="DeFi" name="DeFi"/>
+          <el-tab-pane label="NFT" name="NFT"/>
+          <el-tab-pane label="GameFi" name="GameFi"/>
+          <el-tab-pane :label="$t('pair_list_new')" name="new"/>
+          <el-tab-pane :label="$t('pair_list_all')" name="all"/>
         </el-tabs>
       </div>
       <div v-show="sortedList.length" class="ix-pair-head tr">
@@ -396,8 +397,7 @@ export default {
   .el-input /deep/ .el-input__inner {
     background-color: $nav !important;
     border-radius: 0;
-    border-color: #4880b3;
-
+    border-color: #4880b3; 
     .el-input-group__append {
       background-color: #4880b3;
     }
@@ -408,6 +408,7 @@ export default {
     }
     .el-tabs__item {
       // color: $nav-grey-color;
+      padding: 0 10px;
       color: #666666;
       &.is-top:nth-child(2) {
         padding-left: 20px;
@@ -417,9 +418,7 @@ export default {
   .el-tabs[skin~='dark'] /deep/ .el-tabs__nav-wrap {
     &::after {  
         background: $--ix-header-bg2; 
-    }
-    .el-tabs__item { 
-    }
+    } 
   }
 }
 .ix-pair-body {
