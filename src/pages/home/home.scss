@@ -41,24 +41,31 @@
   padding-bottom: 110px;
 }
 
+
 .ind_txt {
   width: 100%;
   height: 60px;
   line-height: 60px;
-  // background: #262626;
+  background: #F7F7F7;
   // margin-bottom: 60px;
   .ind_c {
+    width: 100%;
     text-align: center;
     font-size: 14px;
     float: left;
-    width: 31%;
-    padding: 0 1%;
-    color: #6C869C;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    color: #212833;
     overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap; 
+    a {
+      display: inline-block;
+      padding: 0 20px 0 5px;
+    }
+    .laba {
+      font-size: 22px;
+    }
     .text_link {
-      color: #6C869C;
+      color: #212833;
       &:hover {
         color: $primary;
       }
@@ -82,13 +89,19 @@
       }
     }
   }
-  .more {
-    display: block;
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    right: 0;
-    top: 0;
+  .more { 
+    position: relative;
+    color: #ccc;
+    &::after {
+      position: absolute; 
+      top: 20px;
+      left: -9px;
+      content: '';
+      height: 20px;
+      width: 1px;
+      background-color: #ccc;
+
+    }
   }
 }
 
