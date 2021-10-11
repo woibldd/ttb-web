@@ -5,8 +5,8 @@
       <div class="nav_box"> 
         <v-navbc myClass="light" /> 
       </div> 
-      <HomeBanner />
-      <!-- <div class="banner-wrap" flex="main:center">
+      <!-- <HomeBanner /> -->
+      <div class="banner-wrap" flex="main:center">
         <div>
           <div class="slogan"> 
               <div class="title">{{$t('home.banner.title')}}</div>
@@ -20,7 +20,7 @@
             <el-button class="large" type="primary" plain @click="gotoPath('otc')">{{$t('otc.buy_now')}}</el-button>
           </div>
         </div>
-      </div> -->
+      </div>
     </div> 
     <div class="ixx-home-items">
       <div
@@ -30,7 +30,7 @@
       </div>  
       <!-- 公告 -->
       <div class="home-notice">
-        <div style="display:none" class="home_swiper pt-10">
+        <div  class="home_swiper pt-10">
           <!-- 跑马灯 -->
           <div class="swiper-container2">
             <div class="swiper-wrapper"> 
@@ -175,8 +175,8 @@
                 class="row mt-10">
                 <!-- <el-col :span="1">{{index + 1}}</el-col> -->
                 <el-col :span="5" flex="cross:center">
-                  <img  class="iconfont mr-10" style="font-size: 24px"  :src="getCoinIcon(item.currency)" alt="">
-                  {{item.currency}}<span class="currency">/USDT</span> &nbsp;
+                  <img  class="iconfont mr-10" style="font-size: 24px"  :src="getCoinIcon(item.currency.replace('USD', ''))" alt="">
+                  {{item.currency.replace('USD', '')}}<span class="currency">/USD</span> &nbsp;
                 </el-col>
                 <el-col :span="4">{{item.price}} &nbsp;</el-col>
                 <el-col :span="5">
@@ -190,8 +190,8 @@
                 </el-col>
                 <!-- <el-col :span="4">{{item.vol}} &nbsp;</el-col> -->
                 <el-col :span="4" flex="main:center">
-                  <span v-if="quoteList[item.symbol + state.affix]">
-                    <quote-view :historyList="quoteList[item.symbol + state.affix]"  :delta="item.delta"/>   
+                  <span v-if="quoteList[item.name]">
+                    <quote-view :historyList="quoteList[item.name ]"  :delta="item.delta"/>   
                   </span>
                   &nbsp; 
                 </el-col>
@@ -240,8 +240,8 @@
                 </el-col>
                 <!-- <el-col :span="4">{{item.vol}} &nbsp;</el-col> -->
                 <el-col :span="4" flex="main:center">
-                  <span v-if="quoteList[item.symbol + state.affix]">
-                    <quote-view :historyList="quoteList[item.symbol + state.affix]"  :delta="item.delta"/>   
+                  <span v-if="quoteList[item.symbol]">
+                    <quote-view :historyList="quoteList[item.symbol]"  :delta="item.delta"/>   
                   </span>
                   &nbsp; 
                 </el-col>
@@ -290,8 +290,8 @@
                 </el-col>
                 <!-- <el-col :span="4">{{item.vol}} &nbsp;</el-col> -->
                 <el-col :span="4" flex="main:center">
-                  <span v-if="quoteList[item.symbol + state.affix]">
-                    <quote-view :historyList="quoteList[item.symbol + state.affix]"  :delta="item.delta"/>   
+                  <span v-if="quoteList[item.symbol]">
+                    <quote-view :historyList="quoteList[item.symbol]"  :delta="item.delta"/>   
                   </span>
                   &nbsp; 
                 </el-col>
@@ -342,8 +342,8 @@
                 </el-col>
                 <!-- <el-col :span="4">{{item.volume_24h}} &nbsp;</el-col>  -->
                 <el-col :span="4" flex="main:center"> 
-                  <span v-if="quoteList[item.symbol + state.affix]">
-                    <quote-view :historyList="quoteList[item.symbol + state.affix]"  :delta="item.delta"/>   
+                  <span v-if="quoteList[item.symbol]">
+                    <quote-view :historyList="quoteList[item.symbol]"  :delta="item.delta"/>   
                   </span>
                   &nbsp;
                 </el-col>
@@ -526,7 +526,7 @@ import {state, local} from '@/modules/store'
 import utils from '@/modules/utils'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper' 
 // import VNav2 from '@/components/VNav3'
-import VNavbc from '@/components/VNavBC' 
+// import VNavbc from '@/components/VNavBC' 
 // import loginModal from '@/components/VLogin'  
 import quoteView from '../views/markets/quoteView'
 import wsNew from '@/modules/ws-new'
@@ -540,7 +540,7 @@ export default {
     Swiper, 
     SwiperSlide,
     // VNav2, 
-    VNavbc,
+    // VNavbc,
     // loginModal,
     quoteView
     // Kyc
@@ -720,8 +720,8 @@ export default {
         })
       }
       if (!future.code && future.data) {
-        this.unitList = future.data.items
-        this.unitList.forEach((item) => {
+        this.btcList = future.data.items
+        this.btcList.forEach((item) => {
           this.$set(item, 'price', item.price)
           this.$set(item, 'delta', item.delta)
           this.$set(item, 'vol', item.vol),
@@ -746,7 +746,7 @@ export default {
           this.$set(item, 'delta', item.delta)
           this.$set(item, 'vol', item.vol)
           this.$set(item, 'quote', null)
-          pairs.push(item.symbol + state.affix)  
+          pairs.push(item.symbol)  
         })
       }
       // if (!blend.code && blend.data) { 
@@ -917,11 +917,20 @@ export default {
     patch(item) { 
       let find = this.tradingList.find(pair => pair.name === item.pair)
       if (!find) {
-        find = this.mixList.find(pair => pair.symbol + state.affix  === item.pair)
+        find = this.mixList.find(pair => pair.symbol  === item.pair)
       } 
       if (!find) {
-        find = this.blendList.find(pair => pair.symbol + state.affix  === item.pair)
-      }
+        find = this.btcList.find(pair => pair.name  === item.pair)
+      } 
+      if (!find) {
+        find = this.unitList.find(pair => pair.symbol  === item.pair)
+      } 
+      if (!find) {
+        find = this.mixList.find(pair => pair.symbol  === item.pair)
+      } 
+      // if (!find) {
+      //   find = this.blendList.find(pair => pair.symbol + state.affix  === item.pair)
+      // }
       if (find) { 
         find.price = item.current
         find.delta = this.$big(item.increment_24h || 0).mul(100).div(this.$big(item.current).minus(item.increment_24h)).round(2, this.C.ROUND_HALF_UP).toFixed(2)
@@ -1043,7 +1052,7 @@ export default {
       margin-top:132px;
       font-size: 34px;
       text-align: center;
-      color: #424242;
+      color: #fff;
     }
     .option {
       margin: 70px auto 0;
@@ -1052,8 +1061,8 @@ export default {
         width: 480px;
         /deep/ input {
           height: 59px;
-          background-color: #ffe179 ;
-          border: 1px solid #ffea9e;
+          background-color: rgba(255,255,255,.7) ;
+          border: 1px solid rgba(255,255,255,.9);
           color: #424242;
           font-size: 16px;
           &::-webkit-input-placeholder {
@@ -1076,6 +1085,10 @@ export default {
         font-size: 16px;
         &.large {
           width: 200px;
+        }
+        &--primary:hover {
+          background-color:rgba(255,255,255,.8);
+          color: $primary;
         }
       }
     }

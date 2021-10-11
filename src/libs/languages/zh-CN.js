@@ -2428,10 +2428,11 @@ export default {
       understand: "我已了解"
     },
     banner: {
-      title: '新型数字资产期权交易平台',
+      title: '全球首家数字资产交易共同体',
       sub_title: '让交易更简单',
       i_want: '我想要',
-      spend: '花费'
+      spend: '花费',
+      placeholder: '手机号/邮箱'
     },
     main_top: {
       title: '增强您的交易经验！',

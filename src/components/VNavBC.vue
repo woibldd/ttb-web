@@ -416,7 +416,12 @@ export default {
       return utils.urlTransfor(this.state.theme.announcement[this.state.locale || 'en'], this.state) 
     },
     aboutUsLink() {
-      return this.state.theme.aboutUs[this.state.locale || 'en']
+      // return this.state.theme.aboutUs[this.state.locale || 'en']
+      if (this.state.locale === 'zh-CN') {
+        return `https://ix-static.oss-ap-southeast-1.aliyuncs.com/IXX_introduction_zh-CN.pdf`
+      } else {
+        return `https://ix-static.oss-ap-southeast-1.aliyuncs.com/IXX_introduction_en.pdf`
+      }
     },
     apiDocLink() {
       return this.state.theme.apiDoc[this.state.locale || 'en']
