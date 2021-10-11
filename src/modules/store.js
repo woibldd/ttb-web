@@ -138,6 +138,7 @@ export const state = {
 }
 
 export const local = new Locals('store', {
+  skin: 'dark',
   pair: '',
   fiat: 'AUTO',
   upDown: 'gr',
