@@ -780,8 +780,7 @@ export default {
             quoteList[item.pair].push(item)
           })
         }
-        this.quoteList = quoteList
-         
+        this.quoteList = quoteList 
       }  
     }, 
     slidePrev() {
@@ -933,7 +932,6 @@ export default {
     goRegister() {
       let by="phone"
       if (/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(this.userInput)) by='email'
-
       this.$router.push({
         name: 'registerBy',
         params: {

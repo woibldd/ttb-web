@@ -22,6 +22,7 @@ export default function () {
  
   // let curStyle = myStyle[process.env.THEME_ENV.tvStyle]
   let curStyle = myStyle[state.skin] 
+  console.log(curStyle)
 
   return {
     indicators_file_name: 'customIndex.js',
