@@ -6,6 +6,7 @@
       </router-link>
       <div class="nav_left">
         <div class="left_options">
+          <router-link :to="{name: 'markets'}" class="nav_link mr-30">行情</router-link>
           <!-- 币币交易 -->
           <router-link :to="{name: 'trading'}" class="nav_link">{{ $t('trading') }}</router-link> 
           <!-- 合约交易 -->

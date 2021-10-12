@@ -534,6 +534,16 @@ export const routes = [
     },
     component:  () => import('@/views/trading1')
   }, 
+  {
+    path: '/markets',
+    name: 'markets',
+    meta: {
+      class: 'dark',
+      footer: true,
+      nav:true
+    },
+    component: () => import('@/views/markets')
+  }
 ]
 
 const routerPush = VueRouter.prototype.push
