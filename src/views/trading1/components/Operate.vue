@@ -79,7 +79,7 @@
       <div class="vertical-login-box">
         <div class="logo">
           <!-- <img :src="require(`../../../assets/site/${state.siteName}/logo${state.skin==='dark' ? '' : '-dark'}.png`)" alt=""> -->
-          <img src="@/assets/ixx/ixx_logo.png" :alt="$t('seo_keywords')">
+          <img :src="require(`../../../assets/ixx/ixx_logo${state.skin==='dark' ? '' : '-dark'}.png`)" alt="">  
         </div>
         <div
           class="login-button"
