@@ -1,0 +1,79 @@
+.address-container {
+  .fund-items-content {
+    padding: 78px 0 32px;
+    border: 1px solid #e8e8e8;
+    .fund-item-row {
+      font-size: 14px; 
+      .row__label {
+        margin-left: 310px;
+        width: 108px; 
+        color:#666;
+        font-weight: normal;
+      }
+      .row__value {
+        .min-input{
+          width: 160px;
+        }
+        .max-input{
+          width: 376px;
+        }
+        .number-input {
+          width: 333px;
+          line-height: 37px;
+          border: 1px solid #DCDFE6;
+          border-radius: 5px;
+          text-indent: 15px;
+        }
+      }
+    }
+  } 
+    .input-address {
+        display: flex;
+        width: 438px;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 4px;
+        overflow: hidden;
+        color: $text-strong;
+        box-sizing: border-box;
+        border: 1px solid rgba(204,204,204,1);
+        &:focus{
+            outline: none;
+        }
+
+    }
+
+    .a-copy {
+        color: $primary;
+    }
+
+    .my-fund-operate {
+        display: inline-block;
+        margin-left: 5px;
+        &:hover{
+            opacity: .5;
+        }
+    }
+    .address-list {
+        margin-top: 40px;
+        min-height: 500px;
+        overflow: scroll;
+      .address-list-table {
+        border: 1px solid #e0e0e0; 
+        border-bottom: none;
+        .el-table { 
+          color:#373737; 
+          .el-table__header { 
+            tr th { 
+              font-weight: 400;
+              color:#767676; 
+            }
+          } 
+        }
+      }
+    }
+
+    .address__table { 
+        overflow-x: scroll;
+    }
+}

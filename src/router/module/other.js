@@ -173,16 +173,16 @@ export const otherRouter = [
     path: '/services',
     name: 'terms',
     component: () => import(/* webpackChunkName: "terms" */ '@/pages/terms')
-  },
-  {
-    path: '/trading/:pair?',
-    name: 'trading',
-    meta: {
-      auth: false,
-      footer: true,
-      nav: false
-    },
-    component: () => import(/* webpackChunkName: "Trading" */ '@/pages/Trading')
+  // },
+  // {
+  //   path: '/trading/:pair?',
+  //   name: 'trading',
+  //   meta: {
+  //     auth: false,
+  //     footer: true,
+  //     nav: false
+  //   },
+  //   component: () => import(/* webpackChunkName: "Trading" */ '@/pages/Trading')
   // }, {
   //   path: '/tradingx/:pair?',
   //   name: 'tradingx',

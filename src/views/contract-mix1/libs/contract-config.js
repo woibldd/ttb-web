@@ -22,8 +22,7 @@ export default function () {
  
   // let curStyle = myStyle[process.env.THEME_ENV.tvStyle]
 
-  let curStyle = myStyle[state.skin || 'dark'] 
-  console.log(curStyle, 'mix')
+  let curStyle = myStyle[state.skin || 'dark']  
 
   return {
     // auto_save_delay: 5,

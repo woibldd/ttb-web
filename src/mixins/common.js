@@ -11,6 +11,7 @@ export default {
   },
   methods: {
     $big: Big,
+    $date: utils.dateFormatter,
     log () {
       if (this.debug) {
         utils.log.apply(null, arguments)

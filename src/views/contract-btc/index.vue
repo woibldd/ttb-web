@@ -417,9 +417,7 @@ export default {
         }
       }
     },
-    downStep() {
-      console.log(this.problemLstt)
-
+    downStep() { 
       for (var i = 0; i < this.problemLstt.length; i++) {
         if (this.problemLstt[i] === '') {
           this.problemError = false
@@ -442,8 +440,7 @@ export default {
         .activeContract(this.pairInfo.symbol, this.state.isSimulation)
         .then(res => {
           if (!res.code) {
-            this.contractNotActive = !res.data.state
-            console.log(this.contractNotActive, 12345679)
+            this.contractNotActive = !res.data.state 
             utils.success(this.$t('contract_has_active'))
             this.$eh.$emit('protrade:balance:refresh')
           } else {
@@ -522,8 +519,7 @@ export default {
       this.socket.$on('message', (data) => {  
         that.handleSocketData(data) 
       })
-      this.socket.$on('reopen', () => {
-        console.log('reopen')
+      this.socket.$on('reopen', () => { 
         that.socket.$destroy()
         that.subMarket()
       })

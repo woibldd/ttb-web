@@ -15,6 +15,7 @@ import { ipfsRouter } from './module/ipfs'
 import { otcRouter } from './module/otc'
 import { gameRouter } from './module/game'
 import { otcHlRouter } from './module/otcHl'
+import { newFundRouter } from './module/new-fund'
 import Bid from '@/pages/Bid/index.vue'
 import BidDetail from '@/pages/Bid/detail.vue'
 import BidTable from '@/pages/Bid/table.vue'
@@ -152,8 +153,7 @@ async function beforeEach(to, from, next) {
   // to.query.redirect && next({ path: to.query.redirect }) || next()
   next()
   // next()
-}
-
+} 
 function beforeResolve(to, from, next) {
   if (to.name !== '404' || (from.name && from.name !== '404')) {
     document.body.className = document.body.className.replace(/\brouter-([-a-zA-Z0-9]+)\b/g, '')
@@ -195,6 +195,7 @@ export const routes = [
   ...otcRouter,
   ...gameRouter,
   ...otcHlRouter,
+  ...newFundRouter,
   {
     path: '/',
     name: 'home',
@@ -273,16 +274,16 @@ export const routes = [
     name: 'terms',
     component: terms
   },
-  {
-    path: '/trading/:pair?',
-    name: 'trading',
-    meta: {
-      auth: false,
-      footer: true,
-      nav: false
-    },
-    component: Trading
-  }, 
+  // {
+  //   path: '/trading/:pair?',
+  //   name: 'trading',
+  //   meta: {
+  //     auth: false,
+  //     footer: true,
+  //     nav: false
+  //   },
+  //   component: Trading
+  // }, 
   {
     path: '/orders',
     name: 'orders',
@@ -457,6 +458,17 @@ export const routes = [
     // which is lazy-loaded when the route is visited.
     component: ByAmount
   },
+  // {
+  //   path: '/unit',
+  //   name:'unit',
+  //   meta: {
+  //     nav: true,
+  //     footer: false,
+  //     class: 'dark', 
+  //     zendeskWidget: false
+  //   },
+  //   component:  () => import('@/views/currency-unit')
+  // },
   {
     path: '/unit',
     name:'unit',
@@ -466,19 +478,19 @@ export const routes = [
       class: 'dark', 
       zendeskWidget: false
     },
-    component:  () => import('@/views/currency-unit')
-  },
-  {
-    path: '/unit2',
-    name:'unit2',
-    meta: {
-      nav: true,
-      footer: false,
-      class: 'dark', 
-      zendeskWidget: false
-    },
     component:  () => import('@/views/currency-unit1')
   },
+  // {
+  //   path: '/mix',
+  //   name:'mix',
+  //   meta: {
+  //     nav: true,
+  //     footer: false,
+  //     class: 'dark', 
+  //     zendeskWidget: false
+  //   },
+  //   component:  () => import('@/views/contract-mix')
+  // },
   {
     path: '/mix',
     name:'mix',
@@ -488,19 +500,19 @@ export const routes = [
       class: 'dark', 
       zendeskWidget: false
     },
-    component:  () => import('@/views/contract-mix')
-  },
-  {
-    path: '/mix2',
-    name:'mix2',
-    meta: {
-      nav: true,
-      footer: false,
-      class: 'dark', 
-      zendeskWidget: false
-    },
     component:  () => import('@/views/contract-mix1')
   },
+  // {
+  //   path: '/future',
+  //   name:'future',
+  //   meta: {
+  //     nav: true,
+  //     footer: false,
+  //     class: 'dark', 
+  //     zendeskWidget: false
+  //   },
+  //   component:  () => import('@/views/contract-btc')
+  // },
   {
     path: '/future',
     name:'future',
@@ -510,22 +522,11 @@ export const routes = [
       class: 'dark', 
       zendeskWidget: false
     },
-    component:  () => import('@/views/contract-btc')
-  },
-  {
-    path: '/future2',
-    name:'future2',
-    meta: {
-      nav: true,
-      footer: false,
-      class: 'dark', 
-      zendeskWidget: false
-    },
     component:  () => import('@/views/contract-btc1')
   }, 
   {
-    path: '/trading2/:pair?',
-    name: 'trading2',
+    path: '/trading/:pair?',
+    name: 'trading',
     meta: {
       class: 'dark', 
       auth: false,

@@ -1,0 +1,318 @@
+.withdraw-container {
+  position: relative; 
+  border: 1px solid #e8e8e8; 
+  .fund-item-row {
+    font-size: 14px;
+    .nav-list {
+      padding: 37px 108px 24px;
+      .nav-btn {
+        padding: 3px 10px;
+        border: 1px solid $primary;
+        border-radius: 5px;
+      }
+    }
+    .row__label {
+      margin-left: 310px;
+      width: 108px;
+    }
+    .row__value {
+      .deposit-address {
+        display: flex;
+        width: 438px;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 4px;
+        color: $text-strong;
+        border: 1px solid $text-normal;
+
+        .address-txt {
+          flex: 1;
+          padding-left: 14px;
+        }
+        .address-copy {
+          flex: none;
+          width: 75px;
+          text-align: center;
+          color: $primary;
+          border-left: 1px solid $text-normal;
+        }
+      }
+    }
+  }
+  .fund-item-other {
+    margin-left: 310px;
+    .quick-btn {
+      display: inline-block;
+      width: 70px;
+      height: 30px;
+      border: 1px solid #e0e0e0;
+      border-radius: 5px;
+      text-align: center;
+      line-height: 30px;
+      cursor: pointer;
+
+      &:hover,
+      &.selected {
+        color: $primary;
+        border-color: $primary;
+      }
+    }
+    &.coin-list {
+      width: 440px;
+      overflow: hidden;
+      max-height: 80px;
+    }
+    &.text-des {
+      margin-bottom: 150px;
+      font-family: MicrosoftYaHei;
+      line-height: 18px;
+      font-size: 12px;
+      color: $text-weak;
+      li {
+        margin-bottom: 25px;
+        list-style: outside;
+      }
+      .dib {
+        display: inline-block;
+      }
+    }
+    &.deposit-qrcode {
+      height: 150px;
+      .qrcode {
+        width: 136px;
+        height: 136px;
+        margin-top: 10px;
+        border-radius: 4px;
+        position: absolute;
+        background: #fff;
+      }
+    } 
+  }
+  .coin-count {
+    width: 100%;
+    border: 0;
+    color: #000; 
+    &:focus {
+      outline: none;
+    }
+  } 
+  .withdraw-address {
+    display: flex;
+    box-sizing: border-box;
+    width: 438px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 4px;
+    overflow: hidden;
+    color: $text-strong;
+    position: relative;
+    .coin-type {
+      display: inline-block;
+      position: absolute;
+      padding-right: 10px;
+      bottom: 0;
+      right: 0;
+      background: #ffffff;
+    }
+    .amount-input {
+      border: none;
+    }
+    .el-select,
+    .select-address {
+      width: 100%;
+    }
+    .select-address input {
+      cursor: text !important;
+    }
+  }
+
+  .border-1 {
+    border: 1px solid rgba(204, 204, 204, 1);
+  }
+
+  .withdraw-remain {
+    color: $text-weak;
+    > span {
+      display: inline-block;
+    }
+
+    .up-limit {
+      width: 56px;
+      height: 15px;
+      font-size: 14px;
+      font-family: MicrosoftYaHei;
+      font-weight: 400;
+      line-height: 18px;
+    }
+  }
+  .withdraw-list {
+    overflow: hidden;
+    max-height: 72px;
+  }
+
+  .withdraw-least {
+    color: $primary;
+  }
+  .withdraw-new-address {
+    font-size: 14px;
+    color: $text-strong;
+    display: flex;
+    align-items: center;
+    .add-icon {
+      width: 14px;
+      height: 14px;
+      text-align: center;
+      line-height: 12px;
+      display: inline-block;
+      background: $primary;
+      border-radius: 50%;
+      color: white;
+    }
+  }
+ 
+  .not-verified-layer {
+    position: relative;
+    width: 410px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 8px;
+    padding-bottom: 50px;
+    padding-top: 34px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .layer__title {
+      font-size: 20px;
+      font-weight: bold;
+      color: $text-strong;
+    }
+
+    .layer__row_note {
+      color: $text-weak;
+      font-size: 16px;
+    }
+    .layer__row {
+      width: 330px;
+      display: flex;
+      justify-content: space-between;
+
+      .row__label {
+        // padding-left: 20px;
+        color: $text-light;
+      }
+      .row__status {
+        color: $primary;
+        cursor: pointer;
+
+        &.done {
+          color: #09c989;
+          cursor: default;
+        }
+      }
+    }
+  }
+
+  .withdraw-fee {
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
+
+    .fee__label {
+      display: inline-block;
+      min-width: 80px;
+    }
+
+    .fee__coin {
+      font-weight: bold;
+    }
+  } 
+  .withdraw-btn {
+    width: 200px;
+    height: 40px;
+    background: $primary;
+    color: white;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 40px;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  .ensure-modal {
+    width: 541px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 8px;
+    padding-bottom: 50px;
+    padding-top: 34px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .modal__title {
+      font-size: 20px;
+      font-weight: bold;
+      color: $text-strong;
+    }
+    .modal__row {
+      box-sizing: border-box;
+      .row__label {
+        font-size: 14px;
+        font-weight: 400;
+        color: $text-weak;
+      }
+      .row__input {
+        box-sizing: border-box;
+        border: 1px solid $text-normal;
+        width: 340px;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 4px;
+        color: $text-weak;
+        padding-left: 10px;
+      }
+      .input-validate {
+        width: 220px;
+        border: 0;
+        border-right: 1px solid $text-normal;
+
+        &.google {
+          border: 0;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+    .w-340 {
+      width: 340px;
+    }
+  }
+
+  &.fund-container {
+    .fund-items-content {
+      .fund-item-other {
+        padding-left: 130px;
+      }
+      .fund-item-row {
+        align-items: center;
+        .row__label {
+          width: 130px;
+        }
+      }
+    }
+  }
+  .attention {
+    position: relative;
+    display: inline-block;
+    color: $primary;
+    margin-left: 14px;
+
+    .icon-eos {
+      width: 20px;
+      height: 20px;
+      margin-top: 10px;
+    }
+  }
+}

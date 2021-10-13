@@ -54,8 +54,8 @@ export default {
         result = value.toFixed(1)
       } else if (value.gte(1)) {
         result = value.toFixed(2)
-      } else if (value.gt(0)) {
-        result = value.toPrecision(4)
+      // } else if (value.gt(0)) {
+      //   result = value.toPrecision(4)
       } else {
         result = '0.00'
       }

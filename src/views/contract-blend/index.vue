@@ -1591,8 +1591,7 @@ export default {
         this.$message.error(res.message)
       }
     },   
-    handleLeverClose() { 
-      console.log(1)
+    handleLeverClose() {  
       if (this.$refs['popLeverageC']) { 
         this.$refs['popLeverageC'].doClose()
         this.$eh.$emit('lever-box-init')
@@ -1602,8 +1601,7 @@ export default {
         this.$eh.$emit('lever-box-init')
       }
     },
-    handleLeverInit() { 
-      console.log(2)
+    handleLeverInit() {  
       this.$eh.$emit('lever-box-init')
     },
     setLeverage (leverage) {

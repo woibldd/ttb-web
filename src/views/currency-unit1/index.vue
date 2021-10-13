@@ -1092,8 +1092,7 @@ export default {
     
     if (!this.$route.query.pair) { 
       const pair = this.products.find(item => item.symbol === local.unit) ? local.unit : this.products[0].symbol 
-      this.$router.replace({
-        name: 'unit2',
+      this.$router.replace({ 
         query: {
           pair
         }

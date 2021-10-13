@@ -78,8 +78,7 @@ export default {
       this.state = 'show'
       this.newValue = this.value
     },
-    async confirm () {
-      console.log(toBig(this.newValue))
+    async confirm () { 
       this.newValue = toBig(this.newValue).round(this.scale, 0).toFixed(this.scale)
       if (this.type === 'price') {
         // let content = `将价格更改至${this.newValue}可能会使该委托立刻与市场中的其他委托成交。请确认更改。`

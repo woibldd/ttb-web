@@ -381,7 +381,7 @@ const service = {
   },
   getRate(currency = 'USDT') {
     // return getCache(name + 'FiatRate', () => request('currency/query', { name }), 1e4)
-    return getCache(currency + 'FiatRate', () => request('account/currency/rates', { currency }), 1e4)
+    return getCache(currency + 'FiatRate', () => request('account/currency/rates'), 1e4)
   },
   getAllRate() {
     return getCache('ALLFiatRate', () => request('account/currency/rates'), 1e4)
@@ -545,13 +545,11 @@ const service = {
   // ix市场信息
   getIXMarket() {
     return request('/market/ix')
-  },
-
+  }, 
   // 分红信息汇总
   getAllBonusInfo() {
     return request('/bonus/total')
-  },
-
+  }, 
   // Sp 活动
   spPageInfo(params) {
     return request('/future/activity/sp_info', params)
@@ -613,8 +611,7 @@ const service = {
   },
 
   // 发起提币 POST /account/withdraw/create
-  // 获取内部划转记录 POST /account/balance/transfer/list
-
+  // 获取内部划转记录 POST /account/balance/transfer/list 
   // 用户订单历史
   getOrderHistory(params) {
     return request('/order/history', params)
@@ -754,8 +751,7 @@ const service = {
   // ix累计抵扣
   getIxTotalDiscount() {
     return request('fee/discount/total')
-  },
-
+  }, 
   // contract 接口
   getContractSymList() {
     return getCache('cpairList', () => request('contract/symbol/list').then(res => {
@@ -887,7 +883,7 @@ const service = {
     return getCache('c_stoploss', () => request('contract/activetriggers', params), 1e3)
   },
   // 委托历史
-  getOrderhistory(params) {
+  getContractOrderhistory(params) {
     return getCache('c_orderhisotry', () => request('contract/orderhistory', params), 1e3)
   },
   // 已成交
@@ -1377,6 +1373,10 @@ const service = {
   //新的资金划转列表
   getAllTransferList() {
     return request('/fund/transfer/list')
+  },
+  //账户整合接口
+  getAccountAssets() {
+    return request('/account/assets/list')
   }
 
 }

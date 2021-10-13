@@ -668,8 +668,7 @@ export default {
     'state.locale'(locale) {
       this.getBanners()
     },
-    'state.userInfo.id'() {
-      if (state.siteName !== 'BachEx') return
+    'state.userInfo.id'() { 
       if (state.userInfo && local.newLogin) {
         if (!state.userInfo.reward_state || !state.userInfo.whats_app_status) {
           this.showGiftModal = true
@@ -951,8 +950,7 @@ export default {
     }
   }, 
   mounted() {
-    this.$nextTick(()=> { 
-      if (state.siteName !== 'BachEx') return
+    this.$nextTick(()=> {  
       if (state.userInfo && local.newLogin) {
         if (!state.userInfo.reward_state || !state.userInfo.whats_app_status) {
           this.showGiftModal = true

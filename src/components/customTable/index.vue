@@ -1,34 +1,57 @@
 <template>
-  <div class="custom-table">
+  <div class="custom-table"> 
     <el-table
       ref="elTable"
       v-bind="$attrs"
       :data="tableList"
     >
+      <el-table-column  v-if="hasAppend">  
+        <template slot="header">
+          <slot name="myheader" />
+        </template>
+        <template slot-scope=" { row }">
+          <slot name="append" :data="row" />
+        </template>
+      </el-table-column>
       <el-table-column
         v-for="(item,index) in tableColumns"
         :key="index"
         v-bind="item"
-        :label="item.hearderLabel"
+        :label="item.headerFun && item.headerFun(item.prop) || item.hearderLabel"
         :width="item.hearderWidth && item.hearderWidth(item.prop)||''"
-      >
+        :style="{textAlign:item.headerAlign||'left'}"
+      > 
         <template slot="header" slot-scope="{ column }">
           <el-tooltip :disabled="false" :content="column.label" placement="top" effect="light">
-            <span class="text-nowrap">{{ column.label }}</span>
+            <span :style="{textAlign:item.headerAlign||'left'}" class="text-nowrap">{{ column.label }}</span>
           </el-tooltip>
         </template>
         <template slot-scope="scope">
-          <span>{{ scope.row[item.prop] | filterColumnValue(item.prop,item,item.handleValue) }}</span> 
+          <p  :style="{textAlign:item.headerAlign||'left'}">
+            <!-- <span>{{ scope.row[item.prop] | filterColumnValue(item.prop, scope.row, item.handleValue) }}</span> -->
+            <span v-html="getColumnValue(scope.row[item.prop],item.prop, scope.row, item.handleValue )"></span>
+          </p>
         </template>
       </el-table-column>
-      <el-table-column v-if="lastColumnConfig" v-bind="$attrs">
+      <el-table-column 
+        v-if="lastColumnConfig" 
+        :width="lastColumnConfig && lastColumnConfig.width"
+        v-bind="$attrs">
         <template slot="header">
-          <p :style="{textAlign:lastColumnConfig.headerAlign||'left'}">{{ lastColumnConfig.headerLabel }}</p>
+          <p :style="{textAlign:lastColumnConfig.headerAlign||'left'}">{{ $t(lastColumnConfig.headerLabel) }}</p>
         </template>
         <template slot-scope=" { row }">
           <slot name="handlerDom" :data="row" />
         </template>
       </el-table-column>
+      <template slot="empty">
+        <div style="padding: 40px 0;">
+          <p style="height: 70px;">
+            <img src="~@/assets/table-empty.png" alt="">
+          </p>  
+          <p style="line-height: 30px;">{{$t('shareHistory.noData')}}</p>  
+        </div>
+      </template>
     </el-table>
     <el-pagination
       v-if="!!pageConfig.total"
@@ -42,7 +65,7 @@
       :total="pageConfig.total"
       @size-change="pageConfig.handleSizeChange"
       @current-change="pageConfig.handleCurrentChange"
-    />
+    /> 
   </div>
 
   <!-- <div class="com-table">
@@ -130,7 +153,8 @@ export default {
     lastColumnConfig: {
       type: Object,
       default: () => {}
-    }
+    },
+    hasAppend: false,
   },
   data(vm) {
     const defaultValue = {
@@ -159,7 +183,10 @@ export default {
     }
   },
   methods: {
-  }
+    getColumnValue(value, key, row, callback) {
+      return callback && callback(value, key, row) || value
+    }
+  }, 
   // computed: {
   //   width() {
   //     return this.$scopedSlots.moreHandle() ? 180 : 140

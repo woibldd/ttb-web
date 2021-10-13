@@ -125,8 +125,7 @@ export default {
 
     },
     updateData (data) {
-      this.data = this._parseData(data)
-      console.log(this.data)
+      this.data = this._parseData(data) 
     },
     fetch () {
       let pair = this.pair || 'BTC_USDT'

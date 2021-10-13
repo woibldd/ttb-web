@@ -158,8 +158,7 @@ export default {
     }
   },
   methods: {
-    loadMore () {
-      console.log('loadMore')
+    loadMore () { 
       this.$emit('loadMore')
     },
     editCell () {

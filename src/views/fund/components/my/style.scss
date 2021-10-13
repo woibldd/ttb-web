@@ -1,0 +1,105 @@
+.fund-assets-container {
+  .fund-assets-content {
+    .fund-tabs {
+      .fund-tab-item { 
+        padding: 5px 15px;
+        box-sizing: border-box;
+        border-color: #E0E0E0;
+        border-style: solid;
+        cursor: pointer;
+        &:first-child {
+          border-radius: 4px 0px 0px 4px;
+          border-width: 1px 0px 1px 1px;
+        }
+        &:last-child {
+          border-radius: 0px 4px 4px 0px;
+          border-width: 1px 1px 1px 0px;
+        }
+        &.active {
+          border:none;
+          background-color: $primary;
+          color: $primary-back;
+        }
+      }
+    }
+    .fund-assets-menu { 
+      margin-top: 28px;
+    }
+    .fund-assets-total {
+      .total-label {
+        color: #B4B4B4;
+      }
+      .total-value {
+        .valuation {
+          color: #373737;
+          font-size: 24px;
+        }
+        .fail {
+          color:#B4B4B4;
+          font-size: 14px;
+        }
+      }
+    }
+    .fund-assets-sub-menu {
+      .assets-item {
+        margin: 20px 20px 0 0;
+        padding: 3px 10px;
+        border: 1px solid #9C9C9C;
+        border-radius: 5px;
+        color: #9C9C9C;
+        cursor:pointer;
+        &.active {
+          border-color: $primary;
+          color: $primary;
+        }
+      }
+    }
+    .fund-assets-table { 
+      .fund-assets-filter {
+        height: 67px;
+        line-height: 67px;
+        border: 1px solid #E6E6E6;
+        border-bottom: none; 
+        .input-search {
+          width: 500px;
+          height:50px;
+          border: none;
+        }
+      }
+      .fund-assets-data {
+        min-height: 600px;
+        .el-table {
+          border: 1px solid #E6E6E6;
+          border-bottom: none;  
+          color:#373737;
+          font-size:12px;
+            .el-table__header { 
+              tr th{ 
+                font-weight: 400;
+                color:#767676;
+              }
+            }
+          .large {
+            font-size: 14px;
+            color:#373737;
+          }
+          .small {
+            font-size: 12px;
+            color:#A0A0A0;
+          }
+        } 
+        .personal {
+          .el-table { 
+            font-size:14px;
+            .el-table__header {
+              font-size: 14px;
+            }
+          }
+        }
+        .realized-item {
+          text-align: center;
+        } 
+      }
+    }
+  }
+}

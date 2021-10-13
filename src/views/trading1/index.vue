@@ -431,8 +431,7 @@ export default {
       if (!local.pair && this.site === 'sgp_') {
         local.pair = 'ETH_BTC'
       } 
-      this.$router.replace({
-        name: "trading2",
+      this.$router.replace({ 
         params: {
           pair: _.find(res.data.items, item => item.name === local.pair)
             ? local.pair

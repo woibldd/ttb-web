@@ -66,8 +66,7 @@ export default {
       return big.toFixed(this.priceScale)
     },
     setPrice (price) {
-      this.$eventBus.$emit('protrade:exchange:set', {price, side: this.side})
-      console.log(price, this.side)
+      this.$eventBus.$emit('protrade:exchange:set', {price, side: this.side}) 
     },
     setAmount (amount) {
       this.$eventBus.$emit('protrade:exchange:set', {amount, side: this.side})

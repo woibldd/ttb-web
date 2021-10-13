@@ -172,8 +172,7 @@ export default {
   watch: {
     pair: {
       handler (pair, oldPair) {  
-        if (pair && !oldPair) { 
-          console.log('initinitinit')
+        if (pair && !oldPair) {  
           this.init(pair)
         }
         if (pair && oldPair) {

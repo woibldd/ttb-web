@@ -6,11 +6,11 @@
       </router-link>
       <div class="nav_left">
         <div class="left_options">
-          <router-link :to="{name: 'markets'}" class="nav_link mr-30">行情</router-link>
+          <router-link :to="{name: 'markets'}" class="nav_link">{{$t('market.name')}}</router-link>
           <!-- 币币交易 -->
-          <router-link :to="{name: 'trading'}" class="nav_link">{{ $t('trading') }}</router-link> 
+          <!-- <router-link  :to="{name: 'trading'}" class="nav_link">{{ $t('trading') }}</router-link>  -->
           <!-- 合约交易 -->
-          <div class="nav_link arrow-down">
+          <!-- <div class="nav_link arrow-down">
             <span  class="nav_link ml-30" v-popover:popoverContract>
               {{$t('trading_lever')}}
               <icon name="header-down" class="mini arrow" />
@@ -32,17 +32,14 @@
                 <li class="dropdown-item pl-24 pr-24"> 
                   <router-link :to="{name:'mix'}" class="nav_log_res mr-20">{{ $t("currency-mix") }}</router-link> 
                   <icon name="hot-red" />
-                </li> 
-                <!-- <li class="dropdown-item pl-24 pr-24">
-                  <router-link to="/share_option" class="nav_log_res mr-20" >{{ $t('shareOption.navText') }} </router-link>
-                </li> -->
+                </li>  
               </ul>
               </div>
             </el-popover>
-          </div> 
+          </div>  -->
           <div class="nav_link arrow-down">
             <span  class="nav_link ml-30" v-popover:popoverContract2>
-              {{$t('trading_lever')}}2
+              {{$t('trading_lever')}}
               <icon name="header-down" class="mini arrow" />
             </span> 
             <el-popover
@@ -54,16 +51,16 @@
               <div class="pop-dropdown">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24"> 
-                  <router-link :to="{name: 'trading2'}" class="nav_link">{{ $t('trading') }}</router-link> 
+                  <router-link :to="{name: 'trading'}" class="nav_link">{{ $t('trading') }}</router-link> 
                 </li>
                 <li class="dropdown-item pl-24 pr-24"> 
-                  <router-link :to="{name:'future2'}" class="nav_log_res mr-20">{{ $t("contract_btc") }}</router-link>
+                  <router-link :to="{name:'future'}" class="nav_log_res mr-20">{{ $t("contract_btc") }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">  
-                  <router-link :to="{name:'unit2'}" class="nav_log_res mr-20">{{ $t("currency-unit") }}</router-link> 
+                  <router-link :to="{name:'unit'}" class="nav_log_res mr-20">{{ $t("currency-unit") }}</router-link> 
                 </li> 
                 <li class="dropdown-item pl-24 pr-24"> 
-                  <router-link :to="{name:'mix2'}" class="nav_log_res mr-20">{{ $t("currency-mix") }}</router-link> 
+                  <router-link :to="{name:'mix'}" class="nav_log_res mr-20">{{ $t("currency-mix") }}</router-link> 
                   <icon name="hot-red" />
                 </li> 
                 <!-- <li class="dropdown-item pl-24 pr-24">
@@ -206,7 +203,7 @@
         </div>
         <div class="right_options" v-else>
           <!-- 我的资产 -->
-          <div class="nav_item fund arrow-down mr-15" style="margin-left: -10px;"  v-popover:popover5>
+          <!-- <div class="nav_item fund arrow-down mr-15" style="margin-left: -10px;"  v-popover:popover5>
             <span @click="openDefault('fund')">{{ $t('wallets_nav_asset') }}</span>
             <icon name="header-down" class="mini arrow" />
              <el-popover
@@ -232,7 +229,41 @@
               </ul>
              </div>
             </el-popover>
-          </div>
+          </div> --> 
+          <div class="fund mr-30 nav_link">
+            <icon :name="fund" />
+            <span @click="openDefault('new-fund')">{{ $t('wallets_nav_asset') }}</span> 
+            <div class="dropdown-sub-menu">
+              <ul class="dropdown-list pt-10 pb-10">
+                <li class="dropdown-item pl-24 pr-24"> 
+                  <router-link
+                    v-if="state.siteName==='FoBit'"
+                    :to="{ name: 'personalAssets'}"
+                    class="link">{{ $t('capital_manage') }}</router-link>
+                  <router-link
+                    v-else
+                    :to="{name: 'new-fund'}"
+                    class="link">{{ $t('capital_manage') }}</router-link>
+                </li>
+                <li class="dropdown-item pl-24 pr-24">
+                  <router-link
+                    :to="{name: 'new-deposit'}"
+                    class="link">{{ $t('deposit') }}</router-link>
+                </li>
+                <li class="dropdown-item pl-24 pr-24">
+                  <router-link
+                    :to="{name: 'new-withdraw'}"
+                    class="link">{{ $t('withdraw') }}</router-link>
+                </li>
+                <li class="dropdown-item pl-24 pr-24">
+                  <router-link
+                    class="link"
+                    :to="'/nfund/transfer'">{{ $t('account_exchange') }}
+                  </router-link>
+                </li>
+              </ul>
+            </div>
+          </div> 
           <!-- 个人中心 -->
           <div class="nav_item email mr-15 ml-15"  v-popover:popover6> 
             <span >

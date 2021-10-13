@@ -146,8 +146,7 @@ export default {
       if (this.xAxis) {
         // let tickCount = (data.asks[data.asks.length - 1].value - data.bids[0].value)
         // if (tickCount)
-        // this.xAxis.renderer.minGridDistance =
-        // console.log(this.xAxis.renderer.minGridDistance)
+        // this.xAxis.renderer.minGridDistance = 
       }
       this.loading = false
       return res
@@ -169,8 +168,7 @@ export default {
         size: 20
       }).then(resp => {
         if (this.chart) { 
-          const list = this._parseData(resp.data)  
-          console.log('console',this.chart, resp)
+          const list = this._parseData(resp.data)   
           this.chart.series[0].setData(list[0], false, false, true)
           this.chart.series[1].setData(list[1], false, false, true)
           this.chart.redraw()
