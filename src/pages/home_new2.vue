@@ -492,8 +492,7 @@
     </div>
     <div class="corperator"> 
     </div>
-    <v-modal
-      :open.sync="showGiftModal"
+    <v-modal 
       @close="handleCloseModal">
       <div class="gift-modal-wrap">
         <div class="modal-message">
@@ -950,13 +949,13 @@ export default {
     }
   }, 
   mounted() {
-    this.$nextTick(()=> {  
-      if (state.userInfo && local.newLogin) {
-        if (!state.userInfo.reward_state || !state.userInfo.whats_app_status) {
-          this.showGiftModal = true
-        }
-      } 
-    }) 
+    // this.$nextTick(()=> {  
+    //   if (state.userInfo && local.newLogin) {
+    //     if (!state.userInfo.reward_state || !state.userInfo.whats_app_status) {
+    //       this.showGiftModal = true
+    //     }
+    //   } 
+    // }) 
   },
   destroyed() {
     if (this.socket) {

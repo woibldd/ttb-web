@@ -496,13 +496,13 @@
                           :class="['custom-label', { active }]"
                           v-if="label % 25 === 0"/> 
                       </template>
-                      <!-- <template
+                      <template
                         slot="tooltip"
                         slot-scope="tooltip">
                         <div class="custom-tooltip">
                           {{ tooltip.value }}%
                         </div>
-                      </template> -->
+                      </template>
                     </ix-slider> 
                   </div>
                 </div>  

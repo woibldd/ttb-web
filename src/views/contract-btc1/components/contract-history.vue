@@ -524,7 +524,7 @@ export default {
           func = service.getActiveorders;
           break;
         case "contract_history_del_history":
-          func = service.getOrderhistory;
+          func = service.getContractOrderhistory;
           break;
         case "contract_history_deal_fills":
           func = service.getOrderfillList;
@@ -746,7 +746,7 @@ export default {
         page: 1,
         size: 1
       };
-      await service.getOrderhistory(params).then(res => {
+      await service.getContractOrderhistory(params).then(res => {
         if (!res.code && !!res.data) { 
           this.setTabDataCount(tab, res.data.total);
         }
