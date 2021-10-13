@@ -11,8 +11,9 @@ export default {
   btc_account: "BTC 계약 계정",
   unit_account: "화폐 본위 계약 계좌",
   mix_account: "USDT 계약 계정",
-  'currency-mix': "금본위 계약",
+  'currency-mix': "USDT 계약",
   'currency-unit': "코인 베이스 계약",
+  'currency-btc': "BTC 계약",
   google_login: "로그인할 때 구글 인증",
   google_turn_off: "Goole 인증 끄기",
   google_reset: "초기화",
@@ -2424,78 +2425,85 @@ export default {
       understand: "나는 이미 이해했다"
     },
     banner: {
-      title: '全球首家数字资产交易共同体',
-      sub_title: '让交易更简单',
-      i_want: '我想要',
-      spend: '花费',
-      placeholder: '手机号/邮箱'
+      title:"세계 첫 번째 디지털 자산교역공동체",
+      sub_title: '거래 를 더 쉽게',
+      i_want: 'I want',
+      spend: 'Spend',
+      placeholder: '핸드폰 번호 / 메 일주 소'
     },
     main_top: {
-      title: '增强您的交易经验！',
-      sub_title: '扫码二维码下载 APP',
-      download: '下载'
+      title: 'Enhance your trading experience!',
+      sub_title: 'Scan QR code to download APP',
+      download: 'Download'
     },
     main_middle: {
-      title: '%{siteName}全球站，近24小时成交量%{total}美元',
-      sub_title: '为全球超过130个国家的数千万用户提供安全、可信赖的数字资产交易及资产管理服务',
-      start: '开始交易',
+      start: 'Start Trading',
+      title: '%{siteName} Global Station with a volume of USD %{total} in the last 24 hours',
+      sub_title: 'Provide safe and reliable digital asset trading and asset management services for tens of millions of users in more than 130 countries around the world',
       swiper: {
         0: {
-          title: '安全',
+          title: 'Security',
           sub_title: 'security',
-          detail: '区块链安全专家、顶级风控管理团队自内而外打造多种 安全机制，多层加密、多级防。', 
+          detail: 'Blockchain security experts and top risk control management teams create multiple security mechanisms from the inside out, with multiple layers of encryption and multiple levels of defense.', 
         },
         1: {
-          title: '高效',
+          title: 'High Efficiency',
           sub_title: 'high efficiency',
-          detail: '采用先进的内存算法、快速读写、分布式信息传输框架 ，能够实时撮合大规模交易、秒速充提到账。', 
+          detail: 'Adopting advanced memory algorithm, fast reading and writing, and distributed information transmission framework, it can match large-scale transactions in real time and charge in seconds.', 
         }, 
         2: {
-          title: '透明',
+          title: 'Transparent',
           sub_title: 'transparent',
-          detail: '实时的资产与交易数据查询验证机制，可为用户提供24小时实时全交易记录，达到高度公开透明。', 
+          detail: 'The real-time asset and transaction data query and verification mechanism can provide users with 24-hour real-time full transaction records, achieving a high degree of openness and transparency.', 
         }
       }
     },
     middle: {
-      title: '随时随地 任享交易',
-      sub_title: '下载%{siteName} App 所有交易尽在手中',
-      contract: '合约',
-      orders: '币币',
-      more: '查看更多'
+      title: '언제 어디서나 마음껏 거래를 즐기다.',
+      sub_title: '%{siteName} App 다운로드, 모든 거래 완료',
+      contract: '계약',
+      orders: '코인거래',
+      more: '더 보기'
     },
     bottom: {
-      title: '开启交易之旅',
-      sub_title: '体验BTC、ETH、USDT等上百种数字货币交易',
-      register: '立即注册', 
-      start: '开始交易',
+      title: '거래려행을  트다',
+      sub_title: 'BTC, 노스, USDT 등 100개가 넘는 디지털 화폐들을 직접 경험하고 있습니다.',
+      register: '지금 등록',  
+      start: '거래 를 시작 하 다',
     }, 
-    gift: { 
-      placeholder: '请输入您的whatsapp账号(选填)',
-      note: '注：填写whatsapp账号与客服确认后赠送188U赠金',
-      tips: 'IXX Pro 平台赠予新老客户188U，请联系客服确认账号后领取188U赠金。',
-      placeholder2: '填写whatsapp账号'
+    guide: { 
+      title: "신 입 가이드", 
+      subtitle: "디지털 화폐 거래 학습 즉시 시작", 
+      option1: '디지털 화폐 구 매 및 판매', 
+      option2: 'IXX Pro 거래 탐색', 
+      item1: '3 분 빠 른 법정 통화 거래 파악',
+      item2: "디지털 화폐 어떻게 구 매 하나 요",
+      item3: "디지털 화폐 어떻게 판매 하나 요"
     },
-    guide: {
-      title: '新手指引',
-      sub_title: '即刻开启数字货币交易学习',
-      option1: '购买及出售数字货币',
-      option2: '探索 %{siteName} 交易',
-      item1: '3分钟快速了解法币交易',
-      item2: '如何购买数字货币',
-      item3: '如何出售数字货币', 
-    },
-    feature: {
-      title: '开启您的数字货币之旅',
-      lable1: '合约产品',
-      describe1: '支持金本位合约<br>币种丰富，合约功能完善',
-      lable2: '高性能',
-      describe2: '每秒处理300,000交易量, 从输入<br>订单到响应时间的延迟小于1毫秒',
-      lable3: '最高的钱包安全性',
-      describe3: '冷钱包存储。转账经过<br> 2级严格的人员审查。',
-      lable4: '客户服务',
-      describe4: '7*24小时多语言在线服务<br>支持极速充/提币',
-    }, 
+    feature: { 
+      title: "디지털 화폐 여행 을 시작 합 니 다", 
+      lable1: "계약 제품", 
+      describe1: "금 본위 계약 <br> 화폐의 종류 가 풍부 하고 계약 기능 이 완선 함 을 지지 합 니 다", 
+      lable2: "고성능", 
+      describe2: "1 초 에 300000 거래 량 을 처리 하고 <br> 주문 을 입력 하 는 것 부터 응답 하 는 시간 까지 의 지연 은 1 ms 보다 적 음", 
+      lable3: "최고의 지갑 안전성", 
+      describe3: '콜 드 지갑 저장\'.계좌 이체 가 <br> 2 급 엄격 한 인원 심 사 를 거치다.', 
+      lable4: "고객 서비스", 
+      describe4: '7 * 24 시간 다 국어 온라인 서비스<br>는 빠 른 충전 / 인출 을 지원 합 니 다',
+    }
+  },
+  market: {
+    name: '시세',
+    fee: '요율기준',
+    about: '관',
+    support: '지지',
+    tips1: '선택결제한 화폐의 종류는 간편 수익 결산이다',
+    tips2: '조작이 간단하여, 최고 백배 지렛대.',
+    tips3: '비트코인, USDT로 다른 디지털 자산을 사들이다',
+    product: '제품',
+    h24change: '24시간 변화',
+    view: '도표',
+    h24amount: '24시간 거래액',  
   },
   fund: {
     history: {

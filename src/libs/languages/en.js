@@ -2548,78 +2548,91 @@ export default {
       understand: "I already understand"
     },
     banner: {
-      title: '全球首家数字资产交易共同体',
-      sub_title: '让交易更简单',
-      i_want: '我想要',
-      spend: '花费',
-      placeholder: '手机号/邮箱'
+      title:"The World's First Digital Asset Trading Community",
+      sub_title: 'Simplify Trading',
+      i_want: 'I want',
+      spend: 'Spend',
+      placeholder: 'Phone/Email'
     },
     main_top: {
-      title: '增强您的交易经验！',
-      sub_title: '扫码二维码下载 APP',
-      download: '下载'
+      title: 'Enhance your trading experience!',
+      sub_title: 'Scan QR code to download APP',
+      download: 'Download'
     },
     main_middle: {
-      title: '%{siteName}全球站，近24小时成交量%{total}美元',
-      sub_title: '为全球超过130个国家的数千万用户提供安全、可信赖的数字资产交易及资产管理服务',
-      start: '开始交易',
+      title: '%{siteName} Global Station with a volume of USD %{total} in the last 24 hours',
+      sub_title: 'Provide safe and reliable digital asset trading and asset management services for tens of millions of users in more than 130 countries around the world',
+      start: 'Start Trading',
       swiper: {
         0: {
-          title: '安全',
+          title: 'Security',
           sub_title: 'security',
-          detail: '区块链安全专家、顶级风控管理团队自内而外打造多种 安全机制，多层加密、多级防。', 
+          detail: 'Blockchain security experts and top risk control management teams create multiple security mechanisms from the inside out, with multiple layers of encryption and multiple levels of defense.', 
         },
         1: {
-          title: '高效',
+          title: 'High Efficiency',
           sub_title: 'high efficiency',
-          detail: '采用先进的内存算法、快速读写、分布式信息传输框架 ，能够实时撮合大规模交易、秒速充提到账。', 
+          detail: 'Adopting advanced memory algorithm, fast reading and writing, and distributed information transmission framework, it can match large-scale transactions in real time and charge in seconds.', 
         }, 
         2: {
-          title: '透明',
+          title: 'Transparent',
           sub_title: 'transparent',
-          detail: '实时的资产与交易数据查询验证机制，可为用户提供24小时实时全交易记录，达到高度公开透明。', 
+          detail: 'The real-time asset and transaction data query and verification mechanism can provide users with 24-hour real-time full transaction records, achieving a high degree of openness and transparency.', 
         }
       }
     },
     middle: {
-      title: '随时随地 任享交易',
-      sub_title: '下载%{siteName} App 所有交易尽在手中',
-      contract: '合约',
-      orders: '币币',
-      more: '查看更多'
+      title: 'Enjoy trading anytime, anywhere',
+      sub_title: 'Download %{siteName} App All transactions are in your hands',
+      contract: 'Contract',
+      orders: 'Exchange',
+      more: 'More'
     },
     bottom: {
-      title: '开启交易之旅',
-      sub_title: '体验BTC、ETH、USDT等上百种数字货币交易',
-      register: '立即注册', 
-      start: '开始交易',
-    }, 
+      title: 'Start a trading journey',
+      sub_title: 'Experience hundreds of digital currency transactions such as BTC, ETH, USDT, etc.',
+      register: 'Sign up now', 
+      start: 'Start Trading',
+    },
     gift: { 
-      placeholder: '请输入您的whatsapp账号(选填)',
-      note: '注：填写whatsapp账号与客服确认后赠送188U赠金',
-      tips: 'IXX Pro 平台赠予新老客户188U，请联系客服确认账号后领取188U赠金。',
-      placeholder2: '填写whatsapp账号'
+      placeholder: 'Please enter your WhatsApp account (Optional)',
+      note: 'Note: fill in the WhatsApp account and confirm with customer service to give $188 bonus.',
+      tips: 'IXX Pro platform presents $188 to new and old customers, please contact customer service to confirm the account and you can receive the bonus.',
+      placeholder2: 'Fill in the WhatsApp account.'
     },
     guide: {
-      title: '新手指引',
-      sub_title: '即刻开启数字货币交易学习',
-      option1: '购买及出售数字货币',
-      option2: '探索 %{siteName} 交易',
-      item1: '3分钟快速了解法币交易',
-      item2: '如何购买数字货币',
-      item3: '如何出售数字货币', 
+      title: 'Beginner Guide ',
+      sub_title: 'Start learning about digital currency trading now ',
+      option1: 'Buy and Sell Digital Currency ',
+      option2: 'Know more about Fucoin Trading ',
+      item1: 'Know about Fiat Trading just in 3 minutes ',
+      item2: 'How to buy digital currency ',
+      item3: 'How to sell digital currency ',
     },
     feature: {
-      title: '开启您的数字货币之旅',
-      lable1: '合约产品',
-      describe1: '支持金本位合约<br>币种丰富，合约功能完善',
-      lable2: '高性能',
-      describe2: '每秒处理300,000交易量, 从输入<br>订单到响应时间的延迟小于1毫秒',
-      lable3: '最高的钱包安全性',
-      describe3: '冷钱包存储。转账经过<br> 2级严格的人员审查。',
-      lable4: '客户服务',
-      describe4: '7*24小时多语言在线服务<br>支持极速充/提币',
+      title: 'Start your digital currency journey ',
+      lable1: 'Futures  ',
+      describe1: 'Support Gold Standard Contract Multiple Currencies and Futures Function complete ',
+      lable2: 'High Performance ',
+      describe2: 'Process 300,000 transactions per second with less than 1 millisecond  from enter order to response time ',
+      lable3: 'High Security ',
+      describe3: 'Cold Wallet Storage. Transactions reviewed by personnel with level 2 security strickly. ',
+      lable4: 'Customer Service ',
+      describe4: '7* 24-hour multilingual online service Support for Fast Deposit/Withdrawal ',
     }, 
+  },
+  market: {
+    name: 'Market',
+    fee: 'Fees',
+    about: 'About',
+    support: 'Support',
+    tips1: 'Choose any  currency for convenience\'s income settlement',
+    tips2: 'Easy to trade, maximum leverage',
+    tips3: 'Buy other digital assets with Bitcoin and USDT',
+    product: 'Product',
+    h24change: '24H',
+    view: 'K Line',
+    h24amount: '24h volume',  
   },
   fund: {
     history: {

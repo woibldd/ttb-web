@@ -20,10 +20,10 @@
     </div>
     <div class="markets-main"> 
       <div class="markets-box">
-        <div class="tab-nav" >
+        <div class="tab-nav" flex="main:justify">
           <div class="left" flex="dir:column"> 
             <div @click="handleClickTabs('all')" :class="['tab-nav-item', 'mr-30', {active: selectTab==='all'}]">
-              <label>全部</label> 
+              <label>{{$t('allin')}}</label> 
             </div>
             <div @click="handleClickTabs('trading')" :class="['tab-nav-item', 'mr-30', {active: selectTab==='trading'}]">
               <label>{{lang.middle.orders}}</label> 
@@ -38,9 +38,9 @@
               <label>{{$t('currency-mix')}}</label> 
             </div>
           </div>
-          <!-- <div class="right">
+          <div class="right">
             <span>{{$t('contract_24_hour_trade')}}： <label class="ml-10">{{tradeTotal}} </label>USDT</span>
-          </div> -->
+          </div>
         </div> 
         <div class="markets-table">
           <template v-if="(selectTab==='all' || selectTab==='trading')"> 

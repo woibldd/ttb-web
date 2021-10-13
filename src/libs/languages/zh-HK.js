@@ -13,6 +13,7 @@ export default {
   mix_account: "USDT合約賬戶",
   'currency-mix': "USDT合約",
   'currency-unit': "幣本位合約",
+  'currency-btc': "BTC合約",
   google_login: "登入時進行穀歌驗證",
   google_turn_off: "關閉穀歌驗證",
   google_reset: "重置",
@@ -2444,6 +2445,19 @@ export default {
       lable4: '客户服务',
       describe4: '7*24小时多语言在线服务<br>支持极速充/提币',
     }, 
+  },
+  market: {
+    name: '行情',
+    fee: '費率標準',
+    about: '關於',
+    support: '支持',
+    tips1: '任選結算幣種，便捷收益結算',
+    tips2: '操作簡單，最高百倍杠杆',
+    tips3: '用比特幣、USDT購買其他數位資產',
+    product: '產品',
+    h24change: '24小時變化',
+    view: '圖表',
+    h24amount: '24小時成交額',  
   },
   fund: {
     history: {
