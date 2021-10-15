@@ -410,11 +410,11 @@ export default {
       return ''
     },
     helpLink() {
-      return ''
+      return './knowledgeBase/index'
       // return utils.urlTransfor(this.state.theme.help[this.state.locale || 'en'], this.state) 
     },
     requestLink() {
-      return ''
+      return 'https://ixxsupport.freshdesk.com/support/tickets/new'
       // if (this.state.userInfo && this.state.theme.themeName === 'default') {
       //   let from = utils.getFrom()
       //   let url = utils.getApiUrl()
@@ -515,16 +515,10 @@ export default {
     },
     openDefault(type) {
       switch (type) {
-        case 'fund':
-          if (state.siteName==='FoBit') {
-            this.$router.push({
-              name: 'personalAssets'
-            })
-          } else {
+        case 'fund': 
             this.$router.push({
               name: 'fund'
             }) 
-          }
           break
         case 'profile':
           this.$router.push({

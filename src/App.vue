@@ -15,9 +15,10 @@
     <div
       v-show="state.loading"
       class="page-mask"/>
-    <v-nav2
+    <v-navbc v-if="showNav && !isMobile" :myClass="[navClass]" />
+    <!-- <v-nav2
       v-if="showNav && !isMobile"
-      :class="[navClass]"/>
+      :class="[navClass]"/> -->
     <!-- <mobile-nav
       v-if="showNav && isMobile"
       :class="[navClass]"/> -->
@@ -50,6 +51,7 @@
 
 <script>
 import VNav2 from '@/components/VNav3.vue'
+import VNavbc from '@/components/VNavBC.vue'
 import MobileNav from '@/components/Mobile/MobileNav.vue'
 import VFooter from '@/components/VFooter.vue'
 import MobileFooter from '@/pages/h5/footer'
@@ -65,6 +67,7 @@ export default {
   name: 'App',
   components: {
     VNav2,
+    VNavbc,
     VFooter,
     VNotifyList,
     MobileFooter,
