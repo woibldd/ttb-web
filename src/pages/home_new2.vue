@@ -2,8 +2,8 @@
   <div class="page-home"> 
     <div class="banner" 
       :style="{backgroundImage: `url(${require('../assets/home/bj.png')}`}"> 
-      <div class="nav_box"> 
-        <v-navbc myClass="light" /> 
+      <div class="nav_box">
+        <v-navbc myClass="light" />   
       </div> 
       <!-- <HomeBanner /> -->
       <div class="banner-wrap" flex="main:center">
@@ -525,7 +525,7 @@ import {state, local} from '@/modules/store'
 import utils from '@/modules/utils'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper' 
 // import VNav2 from '@/components/VNav3'
-// import VNavbc from '@/components/VNavBC' 
+import VNavbc from '@/components/VNavBC' 
 // import loginModal from '@/components/VLogin'  
 import quoteView from '../views/markets/quoteView'
 import wsNew from '@/modules/ws-new'
@@ -539,7 +539,7 @@ export default {
     Swiper, 
     SwiperSlide,
     // VNav2, 
-    // VNavbc,
+    VNavbc,
     // loginModal,
     quoteView
     // Kyc

@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[myClass, {top: scrollTop===0}]"
-    class="bc_nav_box">
+    class="bc_nav_box"> 
     <div class="ind_cen"> 
       <!-- <router-link 
         v-if="(myClass || '').indexOf('dark') > -1"
@@ -24,9 +24,7 @@
         class="nav_logo"/>
       <div class="nav_left"> 
         <div  class="left_options" flex="main:left">  
-          <div class="mr-10" >
-            <router-link class="nav_link ml-30" to="/otc">{{$t('header_nav.notc')}}</router-link>
-          </div>
+          
           <div class="mr-10">
             <router-link class="nav_link ml-30" to="/markets">{{$t('market.name')}}</router-link>
           </div>
@@ -400,9 +398,11 @@ export default {
       return ''
     },
     helpLink() {
-      return utils.urlTransfor(this.state.theme.help[this.state.locale || 'en'], this.state) 
+      return ''
+      // return utils.urlTransfor(this.state.theme.help[this.state.locale || 'en'], this.state) 
     },
     requestLink() {
+      return ''
       // if (this.state.userInfo && this.state.theme.themeName === 'default') {
       //   let from = utils.getFrom()
       //   let url = utils.getApiUrl()
@@ -410,10 +410,11 @@ export default {
       // } else {
       //   return this.state.theme.request[this.state.locale] || this.request.theme.help.en
       // }
-      return utils.urlTransfor(this.state.theme.request[this.state.locale || 'en'], this.state) 
+      // return utils.urlTransfor(this.state.theme.request[this.state.locale || 'en'], this.state) 
     },
     announcementLink() {
-      return utils.urlTransfor(this.state.theme.announcement[this.state.locale || 'en'], this.state) 
+      return ''
+      // return utils.urlTransfor(this.state.theme.announcement[this.state.locale || 'en'], this.state) 
     },
     aboutUsLink() {
       // return this.state.theme.aboutUs[this.state.locale || 'en']
@@ -560,7 +561,7 @@ export default {
   height: 60px;
   min-width: 1340px;
   .border-right-1 {
-    border-right: 1px so lid; 
+    border-right: 1px solid; 
   }
 
   .ind_cen {
@@ -914,7 +915,7 @@ export default {
     .ind_cen {
       .nav_link {
         // color: #020202;
-        color: $home-header-colorlight;
+        color: $primary-back;
       }  
     }
     &.top {
@@ -922,7 +923,8 @@ export default {
       border-bottom: none;
       .ind_cen {
         .nav_link { 
-          color: $home-header-colorlight;
+          // color: $home-header-colorlight;
+          color: $primary-back;
         }  
       }
     }

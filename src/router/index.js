@@ -200,7 +200,7 @@ export const routes = [
     path: '/',
     name: 'home',
     meta: {
-      nav: true,
+      nav: false,
       class: 'dark',
       auth: false
     },
