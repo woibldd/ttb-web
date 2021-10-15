@@ -214,7 +214,7 @@
               <div class="left">
                 <h3 style="text-align:center; color: $nav-grey-color;line-height:2em;"><span>{{ $t('nav.download_pop.scan') }}</span></h3>
                 <p>
-                  <!-- <img width="150" :src="require(`../assets/site/${state.siteName}/qr-download.png`)" > -->
+                  <img width="150" src="~@/assets/download/qr-download.png" >
                 </p>
               </div> 
             </div>
