@@ -5,7 +5,8 @@ export default {
   data() {
     return {
       state, utils,
-      nc: null, ncData: {}, isnc: false
+      nc: null, ncData: {}, isnc: false,
+      succls: false
     }
   },
   methods: {
@@ -28,7 +29,13 @@ export default {
           appkey: "FFFF0N0000000000A411",
           scene,
           renderTo: "nc",
+          upLang: {
+            cn: {
+              'SLIDE': "向右滑动安全验证"
+            }
+          },
           success: function (data) {
+            vm.succls = true;
             vm.ncData = {...data, scene};
             vm.isnc = true;
             if (vm.ncback) vm.ncback();

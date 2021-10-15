@@ -1,7 +1,7 @@
 <template>
   <div class="nc-page">
     <div class="title">{{title}}</div>
-    <div class="nc-box"><div id="nc"></div></div>
+    <div class="nc-box" :class="{succls}"><div id="nc"></div></div>
   </div>
 </template>
 
@@ -52,6 +52,39 @@ export default {
 .nc-page{
   height: 100vh; background: #fff;
   .title{position: absolute; top: 40%; width: 100%; font-size: 20px; text-align: center; color: $primary;}
-  .nc-box{position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0 auto; box-sizing: border-box;}
+  .common{height: 60px!important; line-height: 66px!important; border-radius: 30px!important;}
+  .nc-box{
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0 auto; box-sizing: border-box;
+
+    &.succls{
+      .nc-container .nc_wrapper{background: #787878;}
+      .nc_scale, .nc_bg{background: #787878!important;}
+    }
+  }
+  .nc-container .nc_wrapper{
+    @extend .common;
+    padding: 0 5px; background: #4d4d4d;
+  }
+  .nc_scale{
+    @extend .common;
+    background: #4d4d4d; overflow: hidden;
+    .btn_slide, .btn_ok{
+      top: 4px; width: 50px; height: 50px; border-radius: 50%; text-indent: -9000px;
+      background-repeat: no-repeat!important;
+      background-position: center center!important;
+      background-size: 30px!important;
+    }
+    .btn_slide{background-image: url('../assets/nc_default.png')!important; background-size: 30px!important;}
+    .btn_ok{background-image: url('../assets/nc_succ.png')!important; background-size: 24px!important;}
+    .scale_text{@extend .common;}
+    .scale_text2{text-indent: -16px!important;}
+    .nc_bg{
+      @extend .common;
+      background: #4d4d4d!important;
+    }
+    .nc-lang-cnt{
+      -webkit-text-fill-color: #cecece!important; font-size: 18px; text-indent: 18px;
+    }
+  }
 }
 </style>
