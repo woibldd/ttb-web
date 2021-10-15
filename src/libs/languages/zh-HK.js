@@ -3000,7 +3000,7 @@ export default {
       available:'账户权益',
       available_balance:'可用余额',
       unrealized:'未实现盈亏',
-      margin_balance:'保证金余额',
+      // margin_balance:'保证金余额',
       margin_position:'仓位保证金',
       margin_delegation:'委托保证金',
     }

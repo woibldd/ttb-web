@@ -280,8 +280,8 @@
             <div class="option-header">
               <span>{{$t('contract_block_orderaction')}}</span> 
             </div>
-            <div>
-              <hr>
+            <div class="hr">
+              
             </div> 
             <!-- 下单区域 -->
             <div class="option-box"> 
@@ -1765,6 +1765,10 @@ export default {
       }
     }
   }
+  .hr {
+    height: 4px;
+    background-color: $contract-bg;
+  }
 
   
   &.dark { 
@@ -1894,6 +1898,9 @@ export default {
           }
         }
       }
+    }
+    .hr {
+      background-color: $contract-bg2;
     }
   }
 

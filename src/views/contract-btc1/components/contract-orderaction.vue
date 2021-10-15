@@ -2874,6 +2874,9 @@ export default {
   &.dark {
     .r1-c4-r1,.r1-c4-r2 {
       background:$--contract-table-bg2; 
+      .option-header {
+        border-color: #272837;
+      }
       .el-tabs {
         /deep/ .el-tabs__nav-wrap::after {
           background-color: #474747;

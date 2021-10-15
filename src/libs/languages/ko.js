@@ -3041,7 +3041,7 @@ export default {
       available:'Balance',
       available_balance:'Available Balance',
       unrealized:'Unrealised',
-      margin_balance:'Guarantee Balance',
+      // margin_balance:'Guarantee Balance',
       margin_position:'Position Margin',
       margin_delegation:'Order Margin',
     }

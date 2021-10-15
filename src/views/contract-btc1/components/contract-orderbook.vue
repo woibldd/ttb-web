@@ -43,10 +43,10 @@
           <span
             class="delta"
             :class="{'color-up': state.ct.lastSide === 1, 'color-down': state.ct.lastSide === 2 }">{{ lastPrice }}  
-             <!-- <icon name="arrow-contract-down" 
-              :class="{'color-up':state.ct.lastSide === 1, 'color-down': state.ct.lastSide === 2}"/> -->
-              
-            <svg-icon :icon-class="state.ct.lastSide === 1?'lv':'hong'" />
+             <icon name="arrow-up" 
+              :class="{'color-up':state.ct.lastSide === 1, 'color-down': state.ct.lastSide === 2}"/>
+            <!-- <icon name="arrow-up"  :class="{'up':isBuy, 'down': !isBuy}"/>   -->
+            <!-- <svg-icon :icon-class="state.ct.lastSide === 1?'lv':'hong'" /> -->
           </span> 
           <div class="left-part" v-if="!hasBtnReturnDish">
             <span class="last-price">
@@ -58,7 +58,10 @@
               <em
                 class="pointer text-primary"
                 @click="jumpToHistory"
-                v-tooltip.top-center="{html: true, content: $t('contract_mark_price_tips'), classes: 'contract'}">{{ markPrice }}</em>
+                v-tooltip.top-center="{html: true, content: $t('contract_mark_price_tips'), classes: 'contract'}">
+                <icon class="" name="qizhi" />
+                {{ markPrice }}
+              </em>
             </span>
           </div>
           <a v-else size='mini' class="el-link" @click="returnToDefault">{{$t('contract_page.orderbook.back_to')}}</a>
@@ -715,6 +718,7 @@ th.sell {
     }
     .color-down {
       color: #F24E4D; 
+      transform: rotateZ(180deg)
     }
   }
 }

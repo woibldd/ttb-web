@@ -45,7 +45,9 @@
           <span
             class="delta"
             :class="isBuy ? 'color-up' : 'color-down'">{{ lastPrice }}  
-            <svg-icon :icon-class="isBuy?'lv':'hong'" />
+            <!-- <svg-icon :icon-class="isBuy?'lv':'hong'" /> -->
+            <icon name="arrow-up" 
+              :class="{'up':isBuy, 'down': !isBuy}"/>
           </span>
           <div
             class="left-part"
@@ -59,7 +61,7 @@
               <router-link
                 class="pointer text-primary"
                 v-tooltip.top-center="{html: true, content: $t('contractMix.mapDelegateList.contract_mark_price_tips'), classes: 'contract'}"
-                :to="{name: 'MixIndex', params: {pair: `${(activeProduct || {}).symbol}` }}">{{ markPrice }}</router-link>
+                :to="{name: 'MixIndex', params: {pair: `${(activeProduct || {}).symbol}` }}"><icon class="" name="qizhi" />  {{ markPrice }}</router-link>
             </span>
           </div>
           <a

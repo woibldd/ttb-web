@@ -10,7 +10,6 @@
             <div class="th ibt txl">{{ $t('contractMix.mapDelegateList.mapHeader1.price') }}</div>
             <div class="th ibt txr">{{ $t('contractMix.mapDelegateList.mapHeader1.amount') }}</div>
             <div class="th ibt txr">{{ $t('contractMix.mapDelegateList.mapHeader1.total', {unit: ''}).replace('(','').replace(')','') }}</div>
-
           </div>
         </div>
       </div>
