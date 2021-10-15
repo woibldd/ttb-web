@@ -7,6 +7,15 @@
   clear: both;
 }
 
+.nav_box {
+  position: fixed;
+  top: 0;
+  left: 0; 
+  width: 100%;
+  z-index: 11;
+  // background-color: #3E3E3E;
+}
+
 .page-home {
   background: linear-gradient(0deg, #222931, #3A444F);
   .statement {

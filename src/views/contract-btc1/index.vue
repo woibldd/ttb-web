@@ -11,7 +11,7 @@
                   <div > 
                     <el-popover  
                       :popper-class="[state.skin, 'pd-0']"  
-                      trigger="click">
+                      trigger="hover">
                       <div class="drop-down">
                         <div>
                           <el-row>
@@ -565,8 +565,7 @@ export default {
         this.state.ct.pairInfoList[element.name] = element
       })
 
-      this.$router.replace({
-        name: 'future2',
+      this.$router.replace({ 
         query: {
           pair: pair
         }

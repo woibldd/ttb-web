@@ -20,11 +20,10 @@
         class="nav_logo"/>  -->
       <router-link  
         :to="{name:'home'}" 
-        style="background-image:url(@/assets/ixx/ixx_logo.png)" 
+        :style="{backgroundImage:`url(${require('../assets/ixx/ixx_logo'+ (scrollTop===0 ? '' : '-dark') +'.png')})`}" 
         class="nav_logo"/>
       <div class="nav_left"> 
-        <div  class="left_options" flex="main:left">  
-          
+        <div  class="left_options" flex="main:left">   
           <div class="mr-10">
             <router-link class="nav_link ml-30" to="/markets">{{$t('market.name')}}</router-link>
           </div>
@@ -39,11 +38,37 @@
                         <!-- <img :src="require(`../assets/site/${state.siteName}/icon/trading.png`)" alt="">  -->
                       </div>
                       <div>
-                        <div>{{$t('header_nav.orders')}}</div>
+                        <div>{{$t('trading')}}</div>
                         <div class="info">
                           {{$t('market.tips3')}}
                         </div>
                       </div>
+                    </router-link>
+                  </li> 
+                  <li class="dropdown-item2 pl-24 pr-24"> 
+                    <router-link to="/mix" flex="dir:column"> 
+                      <div class="mr-10">
+                        <!-- <img :src="require(`../assets/site/${state.siteName}/icon/blend.png`)"  alt=""> -->
+                      </div>
+                      <div>
+                        <div>{{$t('contract_btc')}}</div>
+                        <div class="info"> 
+                          {{$t('market.tips2')}}
+                        </div>
+                      </div>  
+                    </router-link>
+                  </li> 
+                  <li class="dropdown-item2 pl-24 pr-24"> 
+                    <router-link to="/unit" flex="dir:column"> 
+                      <div class="mr-10">
+                        <!-- <img :src="require(`../assets/site/${state.siteName}/icon/blend.png`)"  alt=""> -->
+                      </div>
+                      <div>
+                        <div>{{$t('currency-unit')}}</div>
+                        <div class="info"> 
+                          {{$t('market.tips1')}}
+                        </div>
+                      </div>  
                     </router-link>
                   </li> 
                   <li class="dropdown-item2 pl-24 pr-24">
@@ -52,26 +77,13 @@
                         <!-- <img :src="require(`../assets/site/${state.siteName}/icon/contract.png`)" alt="">  -->
                       </div>
                       <div>
-                        <div>{{$t('header_nav.mix')}}</div>
+                        <div>{{$t('currency-mix')}}</div>
                         <div class="info">
                           {{$t('market.tips2')}}
                         </div>
                       </div> 
                     </router-link>
                   </li>
-                  <li class="dropdown-item2 pl-24 pr-24"> 
-                    <router-link to="/blend" flex="dir:column"> 
-                      <div class="mr-10">
-                        <!-- <img :src="require(`../assets/site/${state.siteName}/icon/blend.png`)"  alt=""> -->
-                      </div>
-                      <div>
-                        <div>{{$t('header_nav.blend')}}</div>
-                        <div class="info"> 
-                          {{$t('market.tips1')}}
-                        </div>
-                      </div>  
-                    </router-link>
-                  </li> 
                 </ul>
               </div>
             </div>
@@ -439,14 +451,7 @@ export default {
     }, 
     mapBalanceMenu() { 
       return this.$store.state.mapShareAccount;
-    },
-    mapUserCenter() {
-      return [
-        { label: "个人中心", path: "/user/index" },
-        { label: "资产管理", path: "/user/property" },
-        { label: "退出", click: () => this.$store.dispatch("loginout") }
-      ];
-    },
+    }, 
     activeShareAccount: {
       get() {
         return this.$store.state.activeShareAccount;
@@ -572,7 +577,7 @@ export default {
 
   .nav_logo {
     float: left;
-    width: 88px;
+    width: 170px;
     height: 38px;
     margin-top: 11px;
     display: block;
@@ -584,7 +589,7 @@ export default {
   }
   .nav_left {
     float: left;
-    margin-left: 20px;
+    // margin-left: 20px;
 
     .left_options {
       float: left;
@@ -914,8 +919,8 @@ export default {
     border-bottom: 1px solid #eee;
     .ind_cen {
       .nav_link {
-        // color: #020202;
-        color: $primary-back;
+        color: #020202;
+        // color: $primary-back;
       }  
     }
     &.top {

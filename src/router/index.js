@@ -541,7 +541,7 @@ export const routes = [
     meta: {
       class: 'dark',
       footer: true,
-      nav:true
+      // nav:true
     },
     component: () => import('@/views/markets')
   }
