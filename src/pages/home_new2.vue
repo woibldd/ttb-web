@@ -10,7 +10,7 @@
         <div>
           <div class="slogan"> 
               <div class="title">{{$t('home.banner.title')}}</div>
-              <div class="title">{{$t('home.banner.sub_title')}}</div> 
+              <!-- <div class="title">{{$t('home.banner.sub_title')}}</div>  -->
           </div> 
           <div v-if="!state.userInfo" class="option" flex="box:last"> 
             <el-input type="text" :placeholder="lang.banner.placeholder" class="mr-20" v-model="userInput" />
@@ -485,8 +485,8 @@
       <div class="home-login" style="background-color: #fafafa;">
         <div class="home-bottom" flex="dir:top cross:center  main:center">
           <h2 class="mb-20">{{$t('home.bottom.title')}}</h2>
-          <el-button v-if="!state.userInfo" @click="handleToRegister" type="info" round>{{$t('home.bottom.register')}}</el-button>
-          <el-button v-else @click="gotoPath('mix')" type="info" round>{{$t('home.bottom.start')}}</el-button>
+          <el-button v-if="!state.userInfo" @click="handleToRegister" class="dark" type="info" round>{{$t('home.bottom.register')}}</el-button>
+          <el-button v-else @click="gotoPath('mix')" type="primary" round>{{$t('home.bottom.start')}}</el-button>
         </div> 
       </div>
     </div>
@@ -1063,16 +1063,16 @@ export default {
           color: #424242;
           font-size: 16px;
           &::-webkit-input-placeholder {
-            color: #525252;
+            color: #09888a;
           }
           &:-moz-placeholder {
-            color: #525252;
+            color: #09888a;
           }
           &::-moz-placeholder {
-            color: #525252;
+            color: #09888a;
           }
           &:-ms-input-placeholder {
-            color: #525252;
+            color: #09888a;
           } 
         }
       }
@@ -1084,7 +1084,7 @@ export default {
           width: 200px;
         }
         &--primary:hover {
-          background-color:rgba(255,255,255,.8);
+          background-color:rgb(255,255,255);
           color: $primary;
         }
       }
@@ -1281,5 +1281,10 @@ export default {
     }
   } 
 
+  .home-login {
+    .el-button.dark {
+      background-color: #000;
+    }
+  }
  
 </style>

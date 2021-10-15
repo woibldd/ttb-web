@@ -631,7 +631,7 @@ export default {
       border-radius:5px;
       box-shadow: 0 0 20px 0 rgba(0,0,0,0.05);  ; 
       .tab-nav {
-        padding: 45px 55px;
+        padding: 45px 55px 20px;
         color: #9C9C9C;
         .tab-nav-item {
           font-size: 14px; 
