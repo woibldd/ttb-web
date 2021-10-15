@@ -485,7 +485,7 @@
       <div class="home-login" style="background-color: #fafafa;">
         <div class="home-bottom" flex="dir:top cross:center  main:center">
           <h2 class="mb-20">{{$t('home.bottom.title')}}</h2>
-          <el-button v-if="!state.userInfo" @click="handleToRegister" class="dark" type="info" round>{{$t('home.bottom.register')}}</el-button>
+          <el-button v-if="!state.userInfo" @click="handleToRegister" class="break"  round>{{$t('home.bottom.register')}}</el-button>
           <el-button v-else @click="gotoPath('mix')" type="primary" round>{{$t('home.bottom.start')}}</el-button>
         </div> 
       </div>
@@ -1282,8 +1282,13 @@ export default {
   } 
 
   .home-login {
-    .el-button.dark {
+    .el-button.break {
       background-color: #000;
+      color: #ffffff;
+      &:hover {
+        border-color: #000;
+        background-color: rgba(0, 0, 0, 0.9)
+      }
     }
   }
  
