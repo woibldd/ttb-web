@@ -30,8 +30,17 @@ export default {
           scene,
           renderTo: "nc",
           upLang: {
-            cn: {
+            'cn': {
               'SLIDE': "向右滑动安全验证"
+            },
+            'tw': {
+              'SLIDE': '向右滑動安全驗證'
+            },
+            'en': {
+              'SLIDE': 'Slide security verification to the right'
+            },
+            'ko_KR': {
+              'SLIDE': '오른쪽으로 미끄럼 안전 검증'
             }
           },
           success: function (data) {
