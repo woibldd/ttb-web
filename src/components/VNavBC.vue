@@ -366,7 +366,7 @@ export default {
       return ''
     },
     helpLink() {
-      return './knowledgeBase/index'
+      return '/knowledgeBase/index'
       // return utils.urlTransfor(this.state.theme.help[this.state.locale || 'en'], this.state) 
     },
     requestLink() {
