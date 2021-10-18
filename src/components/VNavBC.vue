@@ -35,7 +35,7 @@
                   <li   class="dropdown-item2 pl-24 pr-24"> 
                     <router-link to="/trading" flex="dir:column">
                       <div class="mr-10">
-                        <!-- <img :src="require(`../assets/site/${state.siteName}/icon/trading.png`)" alt="">  -->
+                        <img src="@/assets/ixx/icon/trading.png" alt=""> 
                       </div>
                       <div>
                         <div>{{$t('trading')}}</div>
@@ -48,6 +48,7 @@
                   <li class="dropdown-item2 pl-24 pr-24"> 
                     <router-link to="/mix" flex="dir:column"> 
                       <div class="mr-10">
+                        <img src="@/assets/ixx/icon/future.png" alt=""> 
                         <!-- <img :src="require(`../assets/site/${state.siteName}/icon/blend.png`)"  alt=""> -->
                       </div>
                       <div>
@@ -61,6 +62,7 @@
                   <li class="dropdown-item2 pl-24 pr-24"> 
                     <router-link to="/unit" flex="dir:column"> 
                       <div class="mr-10">
+                        <img src="@/assets/ixx/icon/unit.png" alt=""> 
                         <!-- <img :src="require(`../assets/site/${state.siteName}/icon/blend.png`)"  alt=""> -->
                       </div>
                       <div>
@@ -74,6 +76,7 @@
                   <li class="dropdown-item2 pl-24 pr-24">
                     <router-link to="/mix" flex="dir:column">  
                       <div class="mr-10"> 
+                        <img src="@/assets/ixx/icon/mix.png" alt=""> 
                         <!-- <img :src="require(`../assets/site/${state.siteName}/icon/contract.png`)" alt="">  -->
                       </div>
                       <div>
@@ -87,23 +90,7 @@
                 </ul>
               </div>
             </div>
-          </div>
-          <!-- <div class="mr-10">
-            <div class="nav_link arrow-down ml-30"> 
-              <div>{{ $t(`market.support`) }} <icon name="arrow-down" /></div>
-              <div class="dropdown-sub-menu">
-                <ul class="dropdown-list pt-10 pb-10">
-                  <li  v-if="helpCenter" class="dropdown-item pl-24 pr-24"> 
-                    <a target="_blank" :href="helpCenter">{{$t('footer_help')}}</a>
-                  </li>
-                  <li class="dropdown-item pl-24 pr-24">
-                    <router-link to="/mix"></router-link>
-                    <a class="link" target="_blank" :href="apiDocLink">{{$t('api_doc')}}</a>
-                  </li> 
-                </ul>
-              </div>
-            </div>
-          </div> -->
+          </div> 
           <div class="mr-10">
             <div class="nav_link arrow-down ml-30"> 
               <div>{{ $t(`market.about`) }} <icon name="arrow-down" /></div>
@@ -119,32 +106,7 @@
               </div>
             </div>
           </div> 
-        </div> 
-        <!-- <div v-else class="left_options" flex="main:left">  
-          <div v-for="(item, index) in state.modular.nav" :key='index' class="mr-10">
-            <a v-if="item.path" 
-              :href="item.path"
-              class="nav_link ml-30">{{ $t(`header_nav.${item.name}`) }}
-            </a>
-            <div v-else-if="!item.route" 
-              class="nav_link arrow-down ml-30">
-              <div>{{ $t(`header_nav.${item.name}`) }}</div>
-              <div class="dropdown-sub-menu">
-                <ul class="dropdown-list pt-10 pb-10">
-                  <li v-for="(n,i) in item.sub" class="dropdown-item pl-24 pr-24" :key="i">
-                    <a :href="n.route"
-                      class="link">{{ $t(`header_nav.${n.name}`) }}
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <router-link 
-              v-else 
-              :to="{name: item.route}"
-              class="nav_link ml-30">{{ $t(`header_nav.${item.name}`) }}</router-link>
-          </div>  
-        </div> -->
+        </div>  
       </div> 
       <div class="nav_right">
         <div
@@ -242,31 +204,25 @@
 
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
-                <li class="dropdown-item pl-24 pr-24">
-                 
-                  <router-link
-                    v-if="state.siteName==='FoBit'"
-                    :to="{ name: 'personalAssets'}"
-                    class="link">{{ $t('capital_manage') }}</router-link>
-                  <router-link
-                    v-else
-                    :to="{name: 'fund'}"
+                <li class="dropdown-item pl-24 pr-24">  
+                  <router-link 
+                    :to="{name: 'new-fund'}"
                     class="link">{{ $t('capital_manage') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
                   <router-link
-                    :to="{name: 'deposit'}"
+                    :to="{name: 'new-deposit'}"
                     class="link">{{ $t('deposit') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
                   <router-link
-                    :to="{name: 'withdraw'}"
+                    :to="{name: 'new-withdraw'}"
                     class="link">{{ $t('withdraw') }}</router-link>
                 </li>
                 <li class="dropdown-item pl-24 pr-24">
                   <router-link
                     class="link"
-                    :to="'/fund/transfer'">{{ $t('account_exchange') }}
+                    :to="'/nfund/transfer'">{{ $t('account_exchange') }}
                   </router-link>
                 </li>
               </ul>
