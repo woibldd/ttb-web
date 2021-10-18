@@ -473,7 +473,7 @@ export default {
       switch (type) {
         case 'fund': 
             this.$router.push({
-              name: 'fund'
+              name: 'new-fund'
             }) 
           break
         case 'profile':

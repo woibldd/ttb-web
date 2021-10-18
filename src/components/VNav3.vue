@@ -235,13 +235,8 @@
             <span @click="openDefault('new-fund')">{{ $t('wallets_nav_asset') }}</span> 
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
-                <li class="dropdown-item pl-24 pr-24"> 
-                  <router-link
-                    v-if="state.siteName==='FoBit'"
-                    :to="{ name: 'personalAssets'}"
-                    class="link">{{ $t('capital_manage') }}</router-link>
-                  <router-link
-                    v-else
+                <li class="dropdown-item pl-24 pr-24">  
+                  <router-link 
                     :to="{name: 'new-fund'}"
                     class="link">{{ $t('capital_manage') }}</router-link>
                 </li>
