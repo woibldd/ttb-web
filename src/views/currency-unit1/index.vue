@@ -812,19 +812,33 @@ export default {
     currentDeep () {
       return this.mapDeepData[this.dataDeep] ? this.mapDeepData[this.dataDeep].offset : 0
     },
-    formValueObj () {
+    formValueObj () { 
+      // if (!this.activeProduct.UNIT || !this.costObj || !this.activeBalance || !this.activeProduct.MARKET) return {}
+      // const price = this.activeAcountAndPriceArr[1] || this.activeProduct.UNIT.current
+      // const getLiqPrice = this.getLiqPrice()
+      // return {
+      //   1: calcValueByAmountAndPrice(this.activeAcountAndPriceArr['value'], price),
+      //   2: this.costObj[this.side === 1 ? 'buy' : 'sell'],
+      //   3: this.activeBalance.available_balance,
+      //   4: +this.activeBalance.holding + (this.side === 2 ? -this.activeAcountAndPriceArr['value'] : +this.activeAcountAndPriceArr['value']),
+      //   5: this.activeProduct.MARKET.current,
+      //   6: getLiqPrice,
+      //   7: 1 - (this.activeProduct.UNIT.current - getLiqPrice) / this.activeProduct.UNIT.current
+      // }
       if (!this.activeProduct.UNIT || !this.costObj || !this.activeBalance || !this.activeProduct.MARKET) return {}
-      const price = this.activeAcountAndPriceArr['shippingSpace'] || this.activeProduct.UNIT.current
-      const getLiqPrice = this.getLiqPrice()
+      const price = this.activeAcountAndPriceArr[1] || this.activeProduct.UNIT.current
+      const liqPrice = this.getLiqPrice() || 0
       return {
-        1: calcValueByAmountAndPrice(this.activeAcountAndPriceArr['value'], price),
-        2: this.costObj[this.side === 1 ? 'buy' : 'sell'],
-        3: this.activeBalance.available_balance,
-        4: +this.activeBalance.holding + (this.side === 2 ? -this.activeAcountAndPriceArr['value'] : +this.activeAcountAndPriceArr['value']),
-        5: this.activeProduct.MARKET.current,
-        6: getLiqPrice,
-        7: 1 - (this.activeProduct.UNIT.current - getLiqPrice) / this.activeProduct.UNIT.current
+        value: calcValueByAmountAndPrice(this.activeAcountAndPriceArr[0], price),
+        cost: this.costObj[this.side === 1 ? 'buy' : 'sell'],
+        available: this.activeBalance.available_balance,
+        holding: +this.activeBalance.holding + (this.side === 2 ? -this.activeAcountAndPriceArr[0] : +this.activeAcountAndPriceArr[0]),
+        market: this.activeProduct.MARKET.current,
+        liqPrice: liqPrice,
+        difference: 1 - (this.activeProduct.UNIT.current - liqPrice) / this.activeProduct.UNIT.current,
+        differenceb: this.$big(this.activeProduct.UNIT.current - liqPrice).round(2).abs() 
       }
+       
     },
     userData () {
       return this.$store.state.userData
@@ -984,23 +998,42 @@ export default {
       this.activePriceType = arr[0]
       return arr
     },
-    costObj () {
+    // costObj () {
+    //   if (!this.activeBalance) return
+    //   const obj = {} 
+    //   const price = this.activeAcountAndPriceArr['shippingSpace'] || this.activeProduct.UNIT.current
+    //   // const activeLever = !+this.activeLever ? 100 : +this.activeLever
+    //   if (+this.activeBalance.holding < 0) {
+    //     let buyAmount
+    //     buyAmount = this.activeAcountAndPriceArr['value'] - Math.abs(+this.activeBalance.holding)
+    //     buyAmount = buyAmount <= 0 ? 0 : buyAmount
+    //     obj.buy = getCost({ ...this.activeProduct, amount: buyAmount, price }, this.activeLever)
+    //     obj.sell = getCost({ ...this.activeProduct, amount: this.activeAcountAndPriceArr['value'], price }, this.activeLever)
+    //   } else {
+    //     let sellAmount
+    //     sellAmount = this.activeAcountAndPriceArr['value'] - +this.activeBalance.holding
+    //     sellAmount = sellAmount <= 0 ? 0 : sellAmount
+    //     obj.buy = getCost({ ...this.activeProduct, amount: this.activeAcountAndPriceArr['value'], price }, this.activeLever)
+    //     obj.sell = getCost({ ...this.activeProduct, amount: sellAmount, price }, this.activeLever)
+    //   }
+    //   return obj
+    // },
+    costObj () { 
       if (!this.activeBalance) return
       const obj = {}
-
-      const price = this.activeAcountAndPriceArr['shippingSpace'] || this.activeProduct.UNIT.current
+      const price = this.activeAcountAndPriceArr[1] || this.activeProduct.UNIT.current
       // const activeLever = !+this.activeLever ? 100 : +this.activeLever
       if (+this.activeBalance.holding < 0) {
         let buyAmount
-        buyAmount = this.activeAcountAndPriceArr['value'] - Math.abs(+this.activeBalance.holding)
+        buyAmount = this.activeAcountAndPriceArr[0] - Math.abs(+this.activeBalance.holding)
         buyAmount = buyAmount <= 0 ? 0 : buyAmount
         obj.buy = getCost({ ...this.activeProduct, amount: buyAmount, price }, this.activeLever)
-        obj.sell = getCost({ ...this.activeProduct, amount: this.activeAcountAndPriceArr['value'], price }, this.activeLever)
+        obj.sell = getCost({ ...this.activeProduct, amount: this.activeAcountAndPriceArr[0], price }, this.activeLever)
       } else {
         let sellAmount
-        sellAmount = this.activeAcountAndPriceArr['value'] - +this.activeBalance.holding
+        sellAmount = this.activeAcountAndPriceArr[0] - +this.activeBalance.holding
         sellAmount = sellAmount <= 0 ? 0 : sellAmount
-        obj.buy = getCost({ ...this.activeProduct, amount: this.activeAcountAndPriceArr['value'], price }, this.activeLever)
+        obj.buy = getCost({ ...this.activeProduct, amount: this.activeAcountAndPriceArr[0], price }, this.activeLever)
         obj.sell = getCost({ ...this.activeProduct, amount: sellAmount, price }, this.activeLever)
       }
       return obj
@@ -1244,14 +1277,13 @@ export default {
     },
     totalValue () { 
       if (!this.activeAcountAndPriceArr['value'] || !this.balanceList) return
-
       // return getUnitTotalValue(this.entrustList,
       return getUnitTotalValue(this.balanceList,
         {
           amount: this.activeAcountAndPriceArr['value'],
           price: this.activeAcountAndPriceArr['shippingSpace'] || this.activeProduct.UNIT.current        },
         this.activeProduct.multiplier)
-    },
+    }, 
     getLiqPrice () {
       if (!this.activeAcountAndPriceArr['value']) return
       const price = getUnitLiqPrice({

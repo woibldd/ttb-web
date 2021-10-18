@@ -95,37 +95,9 @@
           v-if="!onlyLever"
           class="divider-line-info"
           style="background:#333" />
-          <!-- <el-divider content-position="center"> <span style="font-size:12px" class="text-nowrap">{{ $tR(`setLever`) }}</span> </el-divider>
-        <div :flex="$attrs.flex || 'main:justify cross:center'" style="margin-top:30px">
-          <el-input-number v-model="sliderValue" :min="1" :max="100" size="mini" :style="{width: !onlyLever ? '100px':'100%'}" @change="handleSliderChange" />
-          <el-popover ref="popover" v-model="popoverVisible" placement="top" width="270" trigger="manual" @show="leveragePreview">
-            <p>
-              <span v-if="+leverageTipObj.margin_position" v-html="$tR('tip',leverageTipObj)" />
-              <span v-else v-html="$tR('leverageTip',leverageTipObj)" />
-            </p>
-            <hr>
-            <div flex="main:justify dir:right cross:center">
-              <div>
-                <el-button size="mini" type="text" @click="cancelClick">{{ $t('cancel') }}</el-button>
-                <el-button type="primary" size="mini" @click="handleTagClick">{{ $t('confirm') }}</el-button>
-              </div>
-            </div>
-            <div slot="reference" flex="main:justify">
-              <template v-if="!onlyLever">
-                <el-tag v-for="tag in data" :key="tag" style="cursor: pointer;" size="mini" :type="activeTag ===tag && 'warning'||''" :effect="active === tag && 'dark'||'plain'" @click="handleActive(tag)">
-                  {{ tag === '0'?$tR('allstorehouse'):tag+'x' }}
-                </el-tag>
-              </template>
-              <template v-else>
-                <el-link v-for="tag in data" :key="tag" :underline="false" :class="active ===tag && 'text-active'||''" :type="activeTag ===tag && 'warning'||''" @click="handleActive(tag)">{{ tag === '0'?$tR('allstorehouse'):tag+'x' }}</el-link>
-              </template>
-            </div>
-          </el-popover>
-        </div>
-        <el-slider v-model="sliderValue" @change="handleSliderChange" /> -->
       </div>
       <div v-if="!onlyLever">
-        <div
+        <!-- <div
           v-for="(value,key) in mapTableColumns[1]"
           :key="key"
           class="table-box"
@@ -133,6 +105,18 @@
           <span>{{ $tR(`mapTableColumns.1.${key}`,{active:active === '0'?$t('contract_cal_full'):active+'x'}) }}</span>
           <span v-if="key==='7'">{{ +formValueObj[key]*100|bigRound(2) }}%</span>
           <span v-else>{{ ['4','5'].includes(key)?formValueObj[key]:bigRound(formValueObj[key],key==='6'?3:8) }}</span>
+        </div> -->
+        <!-- {{mapTableColumns}}
+        {{formValueObj}} -->
+        <div
+          v-for="(value,key) in mapTableColumns[1]" 
+          :key="key"
+          class="table-box" 
+          flex="box:mean"> 
+            <span>{{ $tR(`mapTableColumns.1.${key}`,{active:active === '0'?$t('contract_cal_full'):active+'x'}) }}</span> 
+            <span v-if="key==='difference'">{{`(${formValueObj['differenceb']})`}} {{ +formValueObj[key]*100| round(2) }}%</span>
+            <span v-else-if="['market','available', 'liqPrice', 'value' ].includes(key)">{{ +formValueObj[key] | round(2) }} USDT</span>
+            <span v-else>{{ formValueObj[key] }}</span>
         </div>
         <!-- <div class="divider-line-info" style="background:none" /> -->
         <div

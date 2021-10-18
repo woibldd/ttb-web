@@ -107,8 +107,7 @@
       </div>
       <div v-if="!onlyLever"> 
         <div
-          v-for="(value,key) in mapTableColumns[activeType]"
-          v-show="(state.siteLabel==='goldcoin' && key!=6) || state.siteLabel!=='goldcoin'"
+          v-for="(value,key) in mapTableColumns[activeType]" 
           :key="key"
           class="table-box" 
           flex="box:mean"> 
