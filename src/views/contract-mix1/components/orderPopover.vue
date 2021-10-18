@@ -112,9 +112,7 @@
           :key="key"
           class="table-box" 
           flex="box:mean"> 
-            <span>{{ $tR(`mapTableColumns.${activeType}.${key}`,{active:active === '0'?$t('contract_cal_full'):active+'x'}) }}</span>
-            <!-- <span v-if="key==='7'">{{ +formValueObj[key]*100|bigRound(2) }}%</span>
-            <span v-else>{{ ['4','5'].includes(key) ? formValueObj[key] : bigRound(formValueObj[key],key==='6'?2:4) }}</span>  -->
+            <span>{{ $tR(`mapTableColumns.${activeType}.${key}`,{active:active === '0'?$t('contract_cal_full'):active+'x'}) }}</span> 
             <span v-if="key==='difference'">{{`(${formValueObj['differenceb']})`}} {{ +formValueObj[key]*100| round(2) }}%</span>
             <span v-else-if="['market','available', 'liqPrice', 'value' ].includes(key)">{{ +formValueObj[key] | round(2) }} USDT</span>
             <span v-else>{{ formValueObj[key] }}</span>

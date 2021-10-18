@@ -601,6 +601,7 @@
               </div>
             </div> 
           </div>
+          {{formValueObj}}
           <!-- 合约账户 -->
           <div class="r1-c4-r2 account-box mt-4">
             <div class="account-hander">

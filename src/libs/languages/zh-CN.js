@@ -3389,20 +3389,20 @@ export default {
     mapTableColumns: {
       //1开仓， 2平仓
       1: {
-        1: '委托价值',
-        2: '成本@{active}',
-        3: '可用余额',
-        4: '成交后的仓位大小',
-        5: '标记价格',
-        6: '预期强平价格',
-        7: '标记价格/预期强平价格 差异'
+        value: '委托价值',
+        cost: '保证金@{active}',
+        available: '可用余额',
+        holding: '成交后的仓位大小',
+        market: '标记价格',
+        liqPrice: '预期强平价格',
+        difference: '标记价格/预期强平价格 差异'
       },
       2: {
-        1: '委托价值',
-        2: '成本@{active}',
-        3: '可用余额',
-        4: '成交后的仓位大小',
-        5: '标记价格'
+        value: '委托价值',
+        cost: '保证金@{active}',
+        available: '可用余额',
+        holding: '成交后的仓位大小',
+        market: '标记价格',
       }
     },
     setLever: '设置杠杆倍数',

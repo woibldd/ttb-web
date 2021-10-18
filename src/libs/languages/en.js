@@ -3462,20 +3462,20 @@ export default {
     mapTableColumns: {
       //1开仓， 2平仓
       1: { 
-        1: 'Order Value',
-        2: 'Cost@{active}',
-        3: 'Available Balance',
-        4: 'Position Size After Execution',
-        5: 'Mark Price',
-        6: 'Estimated Liquidation Price',
-        7: 'Mark Price/Est. Liquidation Difference'
+        value: 'Order Value',
+        cost: 'Margin@{active}',
+        available: 'Available Balance',
+        holding: 'Position Size After Execution',
+        market: 'Mark Price',
+        liqPrice: 'Estimated Liquidation Price',
+        difference: 'Mark Price/Est. Liquidation Difference'
       },
       2: {
-        1: 'Order Value',
-        2: 'Cost@{active}',
-        3: 'Available Balance',
-        4: 'Position Size After Execution',
-        5: 'Mark Price',
+        value: 'Order Value',
+        cost: 'Margin@{active}',
+        available: 'Available Balance',
+        holding: 'Position Size After Execution',
+        market: 'Mark Price',
       }
     },
     setLever: 'Leverage', 
