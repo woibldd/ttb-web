@@ -1,6 +1,6 @@
 <template>
   <div class="nc-page">
-    <div class="title">{{title}}</div>
+    <!-- <div class="title">{{title}}</div> -->
     <div class="nc-box" :class="{succls}"><div id="nc"></div></div>
   </div>
 </template>
