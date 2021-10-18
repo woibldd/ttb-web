@@ -42,10 +42,14 @@ module.exports = {
     'zh-HK': 'http://ixxapidoc.cloudservicex.com/apidocs/spot/en/'
   },
   faq: {
-    en: 'https://ixxcustomer.zendesk.com/hc/en-us/',
-    ko: 'https://ixxcustomer.zendesk.com/hc/en-us/',
-    'zh-CN': 'https://ixxcustomer.zendesk.com/hc/zh-cn/',
-    'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/'
+    // en: 'https://ixxcustomer.zendesk.com/hc/en-us/',
+    // ko: 'https://ixxcustomer.zendesk.com/hc/en-us/',
+    // 'zh-CN': 'https://ixxcustomer.zendesk.com/hc/zh-cn/',
+    // 'zh-HK': 'https://ixxcustomer.zendesk.com/hc/zh-cn/'
+    en: '/knowledgeBase/details?id=2543',
+    ko: '/knowledgeBase/details?id=2543',
+    'zh-CN': '/knowledgeBase/details?id=2543',
+    'zh-HK': '/knowledgeBase/details?id=2543',
   },
   announcement: {
     en: '/knowledgeBase',
