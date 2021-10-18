@@ -369,10 +369,10 @@
                     </el-button>
                   </el-button-group> 
                   <el-popover ref="popoverMenuOptions"
-                              popper-class="popoverMenuOptions"
-                              placement="bottom"
-                              trigger="hover"
-                              width="200">
+                      popper-class="popoverMenuOptions"
+                      placement="bottom"
+                      trigger="hover"
+                      width="200">
                     <ul>
                       <li v-for="(item, key) in mapFormContent.mapMenuOptions"
                           @click="activeBtnsKey=key"
@@ -402,14 +402,7 @@
                     <span v-else>USDT</span>
                   </template>
                 </div> 
-                <div class="option-proportion mt-20">
-                  <!-- <el-button-group style="width: 100%;" flex>
-                    <el-button @click="handleProportion(0.1)">10%</el-button>
-                    <el-button @click="handleProportion(0.25)">25%</el-button>
-                    <el-button @click="handleProportion(0.5)">50%</el-button>
-                    <el-button @click="handleProportion(0.75)">75%</el-button>
-                    <el-button @click="handleProportion(1)">100%</el-button>
-                  </el-button-group> -->
+                <div class="option-proportion mt-20"> 
                   <ix-slider 
                     ref="sliderBuy"
                     @input="onSliderDragEnd($event, 'buy')"
@@ -826,13 +819,13 @@ export default {
       //   7: 1 - (this.activeProduct.UNIT.current - getLiqPrice) / this.activeProduct.UNIT.current
       // }
       if (!this.activeProduct.UNIT || !this.costObj || !this.activeBalance || !this.activeProduct.MARKET) return {}
-      const price = this.activeAcountAndPriceArr[1] || this.activeProduct.UNIT.current
+      const price = this.activeAcountAndPriceArr['value'] || this.activeProduct.UNIT.current
       const liqPrice = this.getLiqPrice() || 0
       return {
-        value: calcValueByAmountAndPrice(this.activeAcountAndPriceArr[0], price),
+        value: calcValueByAmountAndPrice(this.activeAcountAndPriceArr['shippingSpace'], price),
         cost: this.costObj[this.side === 1 ? 'buy' : 'sell'],
         available: this.activeBalance.available_balance,
-        holding: +this.activeBalance.holding + (this.side === 2 ? -this.activeAcountAndPriceArr[0] : +this.activeAcountAndPriceArr[0]),
+        holding: +this.activeBalance.holding + (this.side === 2 ? -this.activeAcountAndPriceArr['shippingSpace'] : +this.activeAcountAndPriceArr['shippingSpace']),
         market: this.activeProduct.MARKET.current,
         liqPrice: liqPrice,
         difference: 1 - (this.activeProduct.UNIT.current - liqPrice) / this.activeProduct.UNIT.current,
@@ -1021,19 +1014,19 @@ export default {
     costObj () { 
       if (!this.activeBalance) return
       const obj = {}
-      const price = this.activeAcountAndPriceArr[1] || this.activeProduct.UNIT.current
+      const price = this.activeAcountAndPriceArr['value'] || this.activeProduct.UNIT.current
       // const activeLever = !+this.activeLever ? 100 : +this.activeLever
       if (+this.activeBalance.holding < 0) {
         let buyAmount
-        buyAmount = this.activeAcountAndPriceArr[0] - Math.abs(+this.activeBalance.holding)
+        buyAmount = this.activeAcountAndPriceArr["shippingSpace"] - Math.abs(+this.activeBalance.holding)
         buyAmount = buyAmount <= 0 ? 0 : buyAmount
         obj.buy = getCost({ ...this.activeProduct, amount: buyAmount, price }, this.activeLever)
-        obj.sell = getCost({ ...this.activeProduct, amount: this.activeAcountAndPriceArr[0], price }, this.activeLever)
+        obj.sell = getCost({ ...this.activeProduct, amount: this.activeAcountAndPriceArr["shippingSpace"], price }, this.activeLever)
       } else {
         let sellAmount
-        sellAmount = this.activeAcountAndPriceArr[0] - +this.activeBalance.holding
+        sellAmount = this.activeAcountAndPriceArr["shippingSpace"] - +this.activeBalance.holding
         sellAmount = sellAmount <= 0 ? 0 : sellAmount
-        obj.buy = getCost({ ...this.activeProduct, amount: this.activeAcountAndPriceArr[0], price }, this.activeLever)
+        obj.buy = getCost({ ...this.activeProduct, amount: this.activeAcountAndPriceArr["shippingSpace"], price }, this.activeLever)
         obj.sell = getCost({ ...this.activeProduct, amount: sellAmount, price }, this.activeLever)
       }
       return obj
@@ -1280,8 +1273,8 @@ export default {
       // return getUnitTotalValue(this.entrustList,
       return getUnitTotalValue(this.balanceList,
         {
-          amount: this.activeAcountAndPriceArr['value'],
-          price: this.activeAcountAndPriceArr['shippingSpace'] || this.activeProduct.UNIT.current        },
+          amount: this.activeAcountAndPriceArr['shippingSpace'],
+          price: this.activeAcountAndPriceArr['value'] || this.activeProduct.UNIT.current        },
         this.activeProduct.multiplier)
     }, 
     getLiqPrice () {
@@ -1289,8 +1282,8 @@ export default {
       const price = getUnitLiqPrice({
         isBuy: this.side === 1,
         leverages: this.activeLever,
-        amount: this.activeAcountAndPriceArr['value'],
-        price: this.activeAcountAndPriceArr['shippingSpace'] || this.activeProduct.UNIT.current,
+        amount: this.activeAcountAndPriceArr['shippingSpace'],
+        price: this.activeAcountAndPriceArr['value'] || this.activeProduct.UNIT.current,
         available_balance: this.activeBalance.available_balance,
         totalValue: this.totalValue(),
         totalAmount: this.activeBalance.holding
@@ -1326,12 +1319,12 @@ export default {
     },
     handlePopoverTitle (key) {
       const type = this.activeBtnsKey === '3' && this.activePriceType.key || this.activeBtnsKey
-      const price = this.activeAcountAndPriceArr['shippingSpace'] || (this.activeProduct.UNIT || {}).current
+      const price = this.activeAcountAndPriceArr['value'] || (this.activeProduct.UNIT || {}).current
       const calcPrice = ['2', '4', '6'].includes(type) ? '市场最优价格' : price
       return `
         ${this.$tR(`mapFormContent.mapHandleBtn.${key}`)}--
         ${this.$tR(`mapFormContent.mapBtns.${this.activeBtnsKey}.text`)}【${calcPrice}】--
-        数量【${this.activeAcountAndPriceArr['value']}】
+        数量【${this.activeAcountAndPriceArr['shippingSpace']}】
       `
     },
     handleDisabledBtn (side) {
@@ -1386,8 +1379,7 @@ export default {
           this.$message.error(res)
         }
       })
-    },
-
+    }, 
     handleBalanceList () {
       // this.balanceList = null
       return this.mapHandlers.shipping().then(res => {
@@ -1674,8 +1666,8 @@ export default {
       this.buyBtnLoading = true
       const data = {
         user_id: this.userData.id,
-        amount: this.activeAcountAndPriceArr['value'],
-        price: this.activeAcountAndPriceArr['shippingSpace'] || (this.activeProduct.UNIT || this.activeProduct.MARKET).current,
+        amount: this.activeAcountAndPriceArr['shippingSpace'],
+        price: this.activeAcountAndPriceArr['value'] || (this.activeProduct.UNIT || this.activeProduct.MARKET).current,
         type: this.activeBtnsKey === '3' && this.activePriceType.key || this.activeBtnsKey, // 下单类型 1 限价 2市价 3限价止损 4市价止损 5限价止盈 6市价止盈
         side: this.side,
         name: this.activeProduct.name,
