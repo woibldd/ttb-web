@@ -4,97 +4,8 @@
     class="hold-content"
     element-loading-background="rgba(0, 0, 0, 0.3)">
     <div class="content-container-hold text-info">
-      <div>{{ hander }}</div>
-      <template v-if="state.siteLabel!=='goldcoin'"> 
-        <div 
-          class="linear-bar text-light"
-          flex="main:justify cross:center"> 
-          <svg-icon v-if="state.locale==='zh-CN'" icon-class="money-cn" v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}"/>
-          <svg-icon v-else icon-class="money-en" v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}"/> 
-          <img
-            src="~@/assets/contract/icon/icon-risk-alert.png"
-            v-tooltip.left="{content: $t('contract_max_lever') + calcData[calcData.length-1]+'x', classes: 'contract'}"
-            alt=""> 
-        </div> 
-        <div class="multiple-bar">
-          <el-popover
-            ref="popover"
-            v-model="popoverVisible"
-            placement="top"
-            width="360"
-            trigger="manual">
-            <p>
-              <span
-                v-if="+leverageTipObj.margin_position"
-                v-html="$tR('tip',leverageTipObj)" />
-              <span
-                v-else
-                v-html="$tR('leverageTip',leverageTipObj)" />
-            </p>
-            <hr>
-            <div flex="main:justify dir:right cross:center">
-              <div>
-                <el-button
-                  size="mini"
-                  type="text"
-                  @click="cancelClick">{{ $t('cancel') }}</el-button>
-                <el-button
-                  type="primary"
-                  size="mini"
-                  v-preventReClick
-                  @click="confirmClick">{{ $t('confirm') }}</el-button>
-              </div>
-            </div>
-            <div slot="reference">
-              <ul
-                v-if="!showEdit"
-                v-loading="leverageLoading"
-                element-loading-spinner="el-icon-loading"
-                element-loading-background="rgba(0, 0, 0, 0.5)"
-                flex="main:justify"
-                class="dot-box">
-                <div class="line" />
-                <li
-                  v-for="tag in calcData"
-                  :key="tag"
-                  flex="dir:top main:justify"
-                  :class="[active == tag && 'active'||'',activeTag === tag && 'previewActive']"
-                  @click="handleActive(tag)">
-                  <div style="font-size:32px;text-align:center">•</div>
-                  <div style="color:#666666;">{{ tag === '0'?$t('contract_cal_full'):tag+'x' }}</div>
-                </li>
-              </ul>
-              <div
-                v-else
-                slot="reference"
-                class="input-box text-light"
-                flex="main:justify cross:strech">
-                <input
-                  v-model="activeTag"
-                  :min="1"
-                  :max="calcData[calcData.length-1]"
-                  type="number"
-                  autofocus="autofocus">
-                <div @click="showEdit=!showEdit"><i class="el-icon-close" /></div>
-                <div @click="handleActive(activeTag)"><i class="el-icon-check" /></div>
-              </div>
-            </div>
-          </el-popover> 
-          <div
-            flex="main:justify cross:center"
-            class="text-light mt-10">
-            <span>{{ $t('contract_lever_times') }}：{{ active === '0'? $t('contract_cal_full'):active+'x' }}</span>
-            <i
-              class="el-icon-edit hover-point"
-              @click="showEdit=!showEdit" />
-          </div>
-          <div
-            v-if="!onlyLever"
-            class="divider-line-info"
-            style="background:#333" /> 
-        </div>
-      </template>
-      <div v-else> 
+      <div>{{ hander }}</div> 
+      <div> 
         <div
           flex="main:justify cross:center"
           class="text-light mt-10">
@@ -106,15 +17,17 @@
           style="background:#333" /> 
       </div>
       <div v-if="!onlyLever"> 
-        <div
-          v-for="(value,key) in mapTableColumns[activeType]" 
-          :key="key"
-          class="table-box" 
-          flex="box:mean"> 
-            <span>{{ $tR(`mapTableColumns.${activeType}.${key}`,{active:active === '0'?$t('contract_cal_full'):active+'x'}) }}</span> 
-            <span v-if="key==='difference'">{{`(${formValueObj['differenceb']})`}} {{ +formValueObj[key]*100| round(2) }}%</span>
-            <span v-else-if="['market','available', 'liqPrice', 'value' ].includes(key)">{{ +formValueObj[key] | round(2) }} USDT</span>
-            <span v-else>{{ formValueObj[key] }}</span>
+        <div class="table-box">
+          <div
+            v-for="(value,key) in mapTableColumns[activeType]" 
+            :key="key"
+            class="row-box" 
+            flex="box:mean"> 
+              <span>{{ $tR(`mapTableColumns.${activeType}.${key}`,{active:active === '0'?$t('contract_cal_full'):active+'x'}) }}</span> 
+              <span v-if="key==='difference'">{{`(${formValueObj['differenceb']})`}} {{ +formValueObj[key]*100| round(2) }}%</span>
+              <span v-else-if="['market','available', 'liqPrice', 'value' ].includes(key)">{{ +formValueObj[key] | round(2) }} USDT</span>
+              <span v-else>{{ formValueObj[key] }}</span>
+          </div>
         </div>
         <!-- <div class="divider-line-info" style="background:none" /> -->
         <div
@@ -367,14 +280,20 @@ export default {
       text-align: center
     }
     .table-box{
-      border-bottom: 1px solid #222;
-      &>span{
-        text-indent: 5px;
-        &:first-child{
-          // border-bottom: 1px solid;
-          border-right: 1px solid #222;
+      border: 1px solid #222;
+      .row-box {
+        border-bottom: 1px solid #222;
+        &:last-child {
+          border: none;
         }
-      }
+        &>span{
+          text-indent: 5px;
+          &:first-child{
+            // border-bottom: 1px solid;
+            border-right: 1px solid #222;
+          }
+        } 
+      } 
     }
   }
 }

@@ -5,23 +5,17 @@
     element-loading-background="rgba(0, 0, 0, 0.3)"> 
     <div class="content-container-hold text-info"> 
       <div>{{ hander }}</div> 
-      <div
+      <!-- <div
         class="linear-bar text-light"
-        flex="main:justify cross:center">
-        <!-- <svg-icon icon-class="money" /> -->
+        flex="main:justify cross:center"> 
         <svg-icon v-if="state.locale==='zh-CN'" icon-class="money-cn" v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}"/>
         <svg-icon v-else icon-class="money-en" v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}"/>
-        <!-- <img
-          src="~@/assets/contract/icon-risk-money.png"
-          v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}"
-          alt=""> -->
-        <!-- <i class="el-icon-warning" /> -->
         <img
           src="~@/assets/contract/icon-risk-alert.png"
           v-tooltip.left="{content: $t('contract_max_lever') + calcData[calcData.length-1]+'x', classes: 'contract'}"
           alt="">
         <div class="mark">{{ active == '0'?$t('contract_cal_full'):active+'x' }}</div>
-      </div>
+      </div> -->
 
       <div class="multiple-bar">
         <div

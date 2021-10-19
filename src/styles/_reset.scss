@@ -121,13 +121,13 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
     }
   }
 }
-
+// #151518
 .el-popper {
   &.contrat-popper-success-class{
     background: $--contract-table-bg;
     border: 1px solid $--color-success;
     &.dark {
-      background-color:  $--contract-table-bg2;
+      background-color:  #19191d;
       color: #cccccc;
     }
     &>.el-popover__title{
@@ -144,7 +144,7 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
     background: $--contract-table-bg;
     border: 1px solid $--color-danger;
     &.dark {
-      background-color:  $--contract-table-bg2;
+      background-color:  #19191d;
       color: #cccccc;
     }
     &>.el-popover__title{

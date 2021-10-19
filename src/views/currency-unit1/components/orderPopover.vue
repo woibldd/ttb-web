@@ -3,22 +3,20 @@
     v-loading="false"
     class="hold-content"
     element-loading-background="rgba(0, 0, 0, 0.3)">
-    <div class="content-container-hold text-info">
-      <div
+    <div class="content-container-hold text-info pt-1">
+      <!-- <div
         class="linear-bar text-light"
         flex="main:justify cross:center">
         <img
           src="~@/assets/contract/icon/icon-risk-money.png"
           v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}"
-          alt="">
-        <!-- <i class="el-icon-warning" /> -->
+          alt=""> 
         <img
           src="~@/assets/contract/icon/icon-risk-alert.png"
           v-tooltip.left="{content: $t('contract_max_lever') + calcData[calcData.length-1] +'x', classes: 'contract'}"
           alt="">
         <div class="mark">{{ active === '0'?$t('contract_cal_full'):active+'x' }}</div>
-      </div>
-
+      </div> 
       <div class="multiple-bar">
         <div
           flex="main:justify cross:center"
@@ -95,34 +93,28 @@
           v-if="!onlyLever"
           class="divider-line-info"
           style="background:#333" />
-      </div>
-      <div v-if="!onlyLever">
-        <!-- <div
-          v-for="(value,key) in mapTableColumns[1]"
-          :key="key"
-          class="table-box"
-          flex="box:mean">
-          <span>{{ $tR(`mapTableColumns.1.${key}`,{active:active === '0'?$t('contract_cal_full'):active+'x'}) }}</span>
-          <span v-if="key==='7'">{{ +formValueObj[key]*100|bigRound(2) }}%</span>
-          <span v-else>{{ ['4','5'].includes(key)?formValueObj[key]:bigRound(formValueObj[key],key==='6'?3:8) }}</span>
-        </div> -->
-        <!-- {{mapTableColumns}}
-        {{formValueObj}} -->
-        <div
-          v-for="(value,key) in mapTableColumns[1]" 
-          :key="key"
-          class="table-box" 
-          flex="box:mean"> 
-            <span>{{ $tR(`mapTableColumns.1.${key}`,{active:active === '0'?$t('contract_cal_full'):active+'x'}) }}</span> 
-            <span v-if="key==='difference'">{{`(${formValueObj['differenceb']})`}} {{ +formValueObj[key]*100| round(2) }}%</span>
-            <span v-else-if="['market','available', 'liqPrice', 'value' ].includes(key)">{{ +formValueObj[key] | round(2) }} USDT</span>
-            <span v-else>{{ formValueObj[key] }}</span>
-        </div>
+      </div> --> 
+      <div v-if="!onlyLever"> 
+        <div class="table-box">
+          <div
+            v-for="(value,key) in mapTableColumns[1]" 
+            :key="key"
+            class="row-box" 
+            flex="box:mean"> 
+              <span>{{ $tR(`mapTableColumns.1.${key}`,{active:active === '0'?$t('contract_cal_full'):active+'x'}) }}</span> 
+              <span v-if="key==='difference'">{{`(${formValueObj['differenceb']})`}} {{ +formValueObj[key]*100| round(2) }}%</span>
+              <span v-else-if="['market','available', 'liqPrice', 'value' ].includes(key)">{{ +formValueObj[key] | round(2) }} USDT</span>
+              <span v-else>{{ formValueObj[key] }}</span>
+          </div> 
+        </div> 
         <!-- <div class="divider-line-info" style="background:none" /> -->
         <div
           flex="box:mean"
           style="margin-top:22px">
-          <el-button @click="$emit('command')">{{ $t('cancel') }}</el-button>
+          <el-button 
+            :type="state.skin==='light' ? '': 'dark'" 
+            plain
+            @click="$emit('command')">{{ $t('cancel') }}</el-button>
           <el-button
             :type="type"
             :loading="loading"
@@ -135,6 +127,7 @@
 <script>
 import { leveragePreview } from '@/modules/api/currencyUnit'
 import { toRound } from '@/utils/handleNum' 
+import { state } from '@/modules/store'
 export default {
   name: 'OrderPopover',
   model: {
@@ -173,6 +166,7 @@ export default {
   },
   data () {
     return {
+      state,
       input: '',
       isSeting: false,
       inputVisible: false,
@@ -347,15 +341,22 @@ export default {
       border:1px solid #ccc;
       text-align: center
     }
+
     .table-box{
-      border-bottom: 1px solid #222;
-      &>span{
-        text-indent: 5px;
-        &:first-child{
-          // border-bottom: 1px solid;
-          border-right: 1px solid #222;
+      border: 1px solid #222;
+      .row-box {
+        border-bottom: 1px solid #222;
+        &:last-child {
+          border: none;
         }
-      }
+        &>span{
+          text-indent: 5px;
+          &:first-child{
+            // border-bottom: 1px solid;
+            border-right: 1px solid #222;
+          }
+        } 
+      } 
     }
   }
 }

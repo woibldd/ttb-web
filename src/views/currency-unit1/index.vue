@@ -441,12 +441,12 @@
                             v-for="(value,key) in mapFormContent.mapHandleBtn"
                             :key="key">
                       <el-popover :ref="`popover-${key}`"
-                                  placement="right"
-                                  :popper-class="`contrat-popper-${key === 'buy'?'success':'danger'}-class`"
-                                  width="400"
-                                  trigger="click"
-                                  :disabled="popoverDisabled"
-                                  :title="value">
+                        placement="right"
+                        :popper-class="[`contrat-popper-${key === 'buy'?'success':'danger'}-class`, state.skin]"
+                        width="400"
+                        trigger="click"
+                        :disabled="popoverDisabled"
+                        :title="value">
                         <orderPopover v-if="activeProduct.UNIT"
                                       v-model="activeLever" 
                                       :hander="handlePopoverTitle(key)"
@@ -1893,6 +1893,11 @@ export default {
                   color: #fff;
                   background-color: $contract-block-bg2;
                   border-color: $primary;
+                  &.el-button.el-button--primary {
+                    color: #fff;
+                    background-color: $primary;
+                    border-color:  $primary;
+                  }
                 }
               }
               .option-proportion { 
@@ -1919,6 +1924,16 @@ export default {
                 }
               }
             }
+          } 
+          .el-tabs { 
+            /deep/ .el-tabs__item {
+              color:#ACACAC;
+            } 
+            /deep/ .el-tabs__nav-wrap {
+              &::after {
+                background-color: #474747;
+              }
+            } 
           }
         }
       }

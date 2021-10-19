@@ -46,7 +46,7 @@
                     </router-link>
                   </li> 
                   <li class="dropdown-item2 pl-24 pr-24"> 
-                    <router-link to="/mix" flex="dir:column"> 
+                    <router-link to="/future" flex="dir:column"> 
                       <div class="mr-10 pt-4">
                         <img src="@/assets/ixx/icon/future.png" alt=""> 
                         <!-- <img :src="require(`../assets/site/${state.siteName}/icon/blend.png`)"  alt=""> -->
