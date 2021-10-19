@@ -308,11 +308,15 @@ export default {
       padding: 17px;
       .el-button {
         width: 128px;
+        &.el-button--dark {
+          background-color: #151518;
+          color: #acacac;
+        }
       }
     }
     &.dark {
       color: #cccccc;
-      background-color: #121212;
+      background-color: #19191f;
       .line { 
         background-color: #666;
       }
