@@ -34,7 +34,7 @@
                 <ul class="dropdown-list pt-10 pb-10">
                   <li   class="dropdown-item2 pl-24 pr-24"> 
                     <router-link to="/trading" flex="dir:column">
-                      <div class="mr-10">
+                      <div class="mr-10 pt-4">
                         <img src="@/assets/ixx/icon/trading.png" alt=""> 
                       </div>
                       <div>
@@ -47,7 +47,7 @@
                   </li> 
                   <li class="dropdown-item2 pl-24 pr-24"> 
                     <router-link to="/mix" flex="dir:column"> 
-                      <div class="mr-10">
+                      <div class="mr-10 pt-4">
                         <img src="@/assets/ixx/icon/future.png" alt=""> 
                         <!-- <img :src="require(`../assets/site/${state.siteName}/icon/blend.png`)"  alt=""> -->
                       </div>
@@ -61,7 +61,7 @@
                   </li> 
                   <li class="dropdown-item2 pl-24 pr-24"> 
                     <router-link to="/unit" flex="dir:column"> 
-                      <div class="mr-10">
+                      <div class="mr-10 pt-4">
                         <img src="@/assets/ixx/icon/unit.png" alt=""> 
                         <!-- <img :src="require(`../assets/site/${state.siteName}/icon/blend.png`)"  alt=""> -->
                       </div>
@@ -75,7 +75,7 @@
                   </li> 
                   <li class="dropdown-item2 pl-24 pr-24">
                     <router-link to="/mix" flex="dir:column">  
-                      <div class="mr-10"> 
+                      <div class="mr-10 pt-4"> 
                         <img src="@/assets/ixx/icon/mix.png" alt=""> 
                         <!-- <img :src="require(`../assets/site/${state.siteName}/icon/contract.png`)" alt="">  -->
                       </div>
