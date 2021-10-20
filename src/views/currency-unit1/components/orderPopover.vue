@@ -103,7 +103,8 @@
             flex="box:mean"> 
               <span>{{ $tR(`mapTableColumns.1.${key}`,{active:active === '0'?$t('contract_cal_full'):active+'x'}) }}</span> 
               <span v-if="key==='difference'">{{`(${formValueObj['differenceb']})`}} {{ +formValueObj[key]*100| round(2) }}%</span>
-              <span v-else-if="['market','available', 'liqPrice', 'value' ].includes(key)">{{ +formValueObj[key] | round(2) }} USDT</span>
+              <span v-else-if="['available', 'value' ].includes(key)">{{ +formValueObj[key] | fixed(8) }} USDT</span>
+              <span v-else-if="['market', 'liqPrice'].includes(key)">{{ +formValueObj[key] | fixed(2) }}</span>
               <span v-else>{{ formValueObj[key] }}</span>
           </div> 
         </div> 

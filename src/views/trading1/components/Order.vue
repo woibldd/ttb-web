@@ -495,7 +495,7 @@ export default {
       }
       if (this.local.hideOthers) {
         params.symbol = this.state.pro.pair
-      }
+      } 
       const res = await service[ctx.api](params)
       await service.getPairList() // 由于 avg() 使用了 pairList，需要等待该请求完成
 

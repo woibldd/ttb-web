@@ -370,7 +370,7 @@ export default {
         fetching: false,
         over: false,
         latest: false,
-        api: 'orderStop',
+        api: 'orderTriggers',
         list: []
       },
       progressing: false,

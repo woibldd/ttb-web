@@ -4,7 +4,7 @@
         v-loading="!!item.future_close_id"
         element-loading-text="系统正在以市价【市场最优价格】为你的【ETH币本位】平仓，请耐心等待..."
         element-loading-spinner="el-icon-loading"
-        element-loading-background="rgba(0, 0, 0, 0.8)" -->
+        element-loading-background="rgba(0, 0, 0, 0.8)" --> 
     <div
       v-for="(item, idx) in dataList"
       :key="idx"
@@ -28,8 +28,7 @@
         style="flex:1;"> 
         <div flex> 
           <div
-            v-for="(value,key,i) in tableColumns" 
-            v-show="(state.siteLabel==='goldcoin' && key!=='liq_price') || state.siteLabel!=='goldcoin'"
+            v-for="(value,key,i) in tableColumns"  
             :key="key"
             flex-box="1">
             <!-- label -->
@@ -121,7 +120,7 @@
               <span
                 v-if="key==='margin_position'">
                 <span class="text-primary"> 
-                  {{ item[key] | fixed(item.symbol.price_scale || 2) }} {{ item.currency }}
+                  {{ item[key] | fixed( 8) }} {{ item.currency }}
                 </span>
                 <br> 
               </span> 
@@ -130,8 +129,8 @@
                 v-else-if="key==='unrealized'">
                 <span
                   class="lastPrice">
-                  <span :class="item['funUnrealized'](item)['unrealized'] > 0 ? 'text-success' : 'text-danger'">
-                    {{ item['funUnrealized'](item)['unrealized'] |round(item.symbol.price_scale || 2) }}  {{ item.currency }}
+                  <span :class="item['funUnrealized'](item)['unrealized'] > 0 ? 'text-success' : 'text-danger'"> 
+                    {{ item['funUnrealized'](item)['unrealized'] |round(8) }}  {{ item.currency }}
                     ({{ item['funUnrealized'](item)['roe'] |round(2) }}%)
                   </span>
                   <br> 
@@ -139,22 +138,22 @@
                 <span
                   class="marketPrice">
                   <span :class="item['funUnrealized'](item)['unrealizedM'] > 0 ? 'text-success' : 'text-danger'">
-                    {{ item['funUnrealized'](item)['unrealizedM'] | round(item.symbol.price_scale || 2) }}  {{ item.currency }}
+                    {{ item['funUnrealized'](item)['unrealizedM'] | round(8) }}  {{ item.currency }}
                     ({{ item['funUnrealized'](item)['roeM'] |round(2) }}%)
                   </span>
                   <br> 
                 </span>
               </span>
               <span
-                v-else-if="key==='realized'">
+                v-else-if="key==='realized'"> 
                 <span :class="item[key] > 0 ? 'text-success' : 'text-danger'">
-                  {{ item[key]|fixed(item.symbol.price_scale || 2) }} {{ item.currency }}
+                  {{ item[key]|fixed(8) }} {{ item.currency }}
                 </span>
                 <br> 
               </span>
-              <span v-else-if="key==='value'">
+              <span v-else-if="key==='value'"> 
                 <span>
-                    {{ item['funUnrealized'](item)['openValue'] |fixed(item.symbol.price_scale || 2) }} 
+                    {{ item['funUnrealized'](item)['openValue'] |round(8) }} 
                 </span>
                 <br> 
               </span>

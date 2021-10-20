@@ -196,7 +196,7 @@ const service = {
       return res
     })
   },
-  orderStop (data) {
+  orderTriggers (data) {
     return request('order/active/triggers', data).then(res => {
       if (res.data) {
         if (res.data.length) {

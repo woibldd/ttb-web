@@ -622,7 +622,7 @@
                       </p>  
                     </div>
                     <div class="right pt-15 pb-10 th">
-                      <router-link   :to="{path:'/fund/transfer'}">{{$t('suvbanean')}}</router-link>
+                      <router-link   :to="{path:'/nfund/transfer'}">{{$t('suvbanean')}}</router-link>
                     </div>
                   </div>
                   <el-row class="tr">

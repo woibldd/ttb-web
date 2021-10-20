@@ -3140,7 +3140,7 @@ export default {
           amount: '数量',
           price: '委託價格',
           trigger_price: '触发价格',
-          distancePrice: '距离触发',
+          currency : '距离触发',
           // total: '已成交额',
           executed: '已成交量',
           type: '类型',

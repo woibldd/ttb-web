@@ -285,7 +285,7 @@
                 </p>  
               </el-col>
               <el-col :span='12' class="pt-15 pb-10 th"> 
-                <router-link   :to="{path:'/fund/transfer'}">{{$t('suvbanean')}}</router-link>
+                <router-link   :to="{path:'/nfund/transfer'}">{{$t('suvbanean')}}</router-link>
               </el-col> 
             </el-row>
             <el-row class="tr">

@@ -108,8 +108,8 @@
       <div class="ix-row">
         <div class="ix-col ix-col-2">
           <!-- 倒计时 & 大盘 -->
-          <div class="ix-grid ix-grid-tv">
-            <!-- <div
+          <!-- <div class="ix-grid ix-grid-tv">
+            <div
               class="active-box"
               v-if="showCountdown">
               <p class="text"><span v-html="$t('active_countdown_text')"/><span class="seconds">{{ countdownText }}</span>{{ $t('active_countdown_unit') }}</p>
@@ -124,8 +124,8 @@
                 class="close pointer"
                 @click.prevent="closeBox"
               >x</span>
-            </div>-->
-          </div>
+            </div>
+          </div> -->
         </div> 
       </div>
       <div class="ix-row">

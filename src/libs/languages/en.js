@@ -3278,7 +3278,7 @@ export default {
           amount: 'Volume',
           price: 'Order Price',
           trigger_price: 'Trigger Price',
-          distancePrice: 'Distance',
+          currency: 'Currency',
           // total: '已成交额',
           executed: 'Executed',
           type: 'Type',

@@ -547,7 +547,7 @@
                     </el-col>
                     <el-col :span='12'
                             class="pt-15 pb-10 th">
-                      <router-link :to="{path:'/fund/transfer'}">{{$t('suvbanean')}}</router-link>
+                      <router-link :to="{path:'/nfund/transfer'}">{{$t('suvbanean')}}</router-link>
                     </el-col>
                   </el-row>
                   <el-row class="tr">
@@ -1372,7 +1372,7 @@ export default {
           this.entrustList = res.data.data.map(item => {
             item.cancelBtnLoading = false
             item._symbol = item.symbol
-            item.symbol = this.$tR(`mapTabs.${item.name}`)
+            item.symbol = item.name
             return item
           })
         } else if (res.code !== 401) {
@@ -1626,9 +1626,9 @@ export default {
         item.cancelBtnLoading = false
         if (item.symbol) {
           item._symbol = item.symbol
-          item.symbol = this.activeTableTabKey === 'shipped' ? this.$tR(`mapTabs.FUTURE_${item.symbol}`) : this.$tR(`mapTabs.${item.symbol}`)
+          item.symbol = item.name
         } else {
-          item.symbol = this.$tR(`mapTabs.${item.name}`)
+          item.symbol = item.name
         }
         return item
       })

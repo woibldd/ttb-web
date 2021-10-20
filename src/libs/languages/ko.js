@@ -3102,115 +3102,116 @@ export default {
     },
     mapTableTapContents: {
       shipping: {
-        text: '仓位',
+        text: '창고 의 위치',
         mapTableColumns: {
           holding: {
-            label: '目前仓位数量',
-            tips: '<a>目前仓位数量</a><br/>你在此合约的仓位，正数为多仓，负数为空仓。'
+            label: '현재 창고 포지션 수량',
+            tips: '<a>현재 창고 포지션 수량</a><br/>현재 창고 공간의 수-당신이이 계약의 볼륨에 있는, 양수는 여러 창고 이고, 음수는 빈 창고이다。'
           },
           _leverage: {
-            label: '杠杆倍数',
+            label: '레버리지 개수',
             tips: ''
           },
           markPrice: {
-            label: '标记价格',
-            tips: '<a>标记价格</a><br/>这是现在的标记价格，点此了解更多。'
+            label: '가격을 표시',
+            tips: '<a>표시 가격</a><br/>이것은 현재의 표시 가격 입니다, 이것을 더 알아보십시오。'
           },
           price: {
-            label: '开仓价格',
-            tips: '<a>开仓价格</a><br/>目前多/空仓的平均买入/卖出价。'
+            label: '포지션가격',
+            tips: '<a>오픈 가격</a><br/>현재 대량-빈 주식의 평균 매입/매각 가격。'
           },
           liq_price: {
-            label: '强平价格',
-            tips: '<a>强平价格</a><br/>如果该合约的标记价格低于该价格（多仓）或高于该价格（空仓），你将会被强制平仓。'
-          },
+            label: '강평 가격',
+            tips: '<a>강평 가격</a><br/>만약이 계약의 표지 가격이이 가격 (다 창고)보다 낮 거나,다 창고 형 (빈 창고)보다 높으면 강제로 평창이 된다。'
+          }, 
           value: {
-            label: '价值',
-            tips: '仓位在当前合理价格的名义价值'
+            label: '가치',
+            tips: '창고 자리 가 현재 합리적인 가격의 명목 가치"'
           },
           margin_position: {
-            label: '仓位保证金',
-            tips: '<a>保证金</a><br/>被仓位使用并锁仓的保证金，如果你有在某个仓位启用逐仓，此数值将会随着保证金下跌而减少，亦代表你的实际杠杆上升。移动滑杆来调整分配到各个仓位的保证金。'
+            label: '창고 보관 보증금',
+            tips: '<a>창고 보관 보증금 </a><br/> 보증금에서 미 평 창고 증권에 분배 되는 초기 보증금 요구 부분에 실현 되지 못 한 손익을 합 한다。'
           },
           unrealized: {
-            label: '未实现盈亏（回报率%）',
-            tips: '<a>未实现盈亏（回报率%）</a><br/>该合约的未实现盈亏，以及回报率。'
+            label: '미 실현 손익 (투자수익률%)',
+            tips: '<a>미 실현 손익 (수익률%)</a><br/>이 계약의 미 실현 손익 및 수익률。'
           },
           realized: {
-            label: '已实现盈亏',
-            tips: '<a>已实现盈亏</a><br/>自开仓以来的已实现盈亏。'
+            label: '이미 실현한 손익',
+            tips: '<a>이미 실현한 손익</a><br/>창고를 연 이후의 것은 이미 손익을 실현하였다。'
           },
           currency: {
-            label: '结算币种',
+            label: '화폐 종 류 를 결산 하 다',
             tips: ''
           }
         }
       },
       shipped: {
-        text: '已平仓位',
+        text: '이미 창고 의 위치 가 안정 되 었 다',
         mapTableColumns: {
-          symbol: '合约类型',
-          realized: '已实现盈亏'
+          symbol: '계약 유형',
+          realized: '손익 을 이미 실현 하 였 다'
         }
       },
       curEntrust: {
-        text: '当前委托',
+        text: '현재 의뢰',
         mapTableColumns: {
-          symbol: '合约类型',
-          side: '方向',
-          amount: '数量',
-          price: '委托价格', 
-          executed: '已成交量/剩余量',
-          entrustValue: '委托价值',
-          type: '类型',
-          state: '状态', 
-          create_time: '下单时间' 
+          symbol: "계약 유형", 
+          side: "방향", 
+          amount: "수량", 
+          price: "위탁 가격", 
+          execute: '이미 거래 량 / 남 은 양', 
+          entrustValue: "위탁 가치", 
+          type: "종류", 
+          state: '상태', 
+          create_time: '주문 시간' 
         }
       },
       lossEntrust: {
-        text: '止损委托',
+        text: "손실 정지 의뢰", 
         mapTableColumns: {
-          name: '合约类型',
-          side: '方向',
-          amount: '数量',
-          price: '委托价格',
-          trigger_price: '触发价格',
-          distancePrice: '距离触发', 
-          executed: '已成交量',
-          type: '类型',
-          state: '状态',
-          create_time: '下单时间' 
-        }
+          name: "계약 유형", 
+          side: "방향", 
+          amount: "수량", 
+          price: "위탁 가격", 
+          trigger_price: '트리거 가격',
+          currency: "화폐 종 류 를 결산 하 다",
+          executed: '거래량',
+          type: '종류',
+          state: '상태',
+          create_time: '주문' 
+        } 
       },
       historyEntrust: {
-        text: '委托历史',
+        text: '위탁기록',
         mapTableColumns: {
-          symbol: '合约类型',
-          side: '方向',
-          amount: '数量',
-          trigger_price: '触发价格', 
-          executed_price: '成交价格',
-          executed: '已成交量/剩余量', 
-          type: '类型',
-          state: '状态', 
-          create_time: '下单时间' 
+          symbol: '계약 유형',
+          side: '방향',
+          amount: '수량',
+          trigger_price: '"트리거 가격', 
+          executed_price: '거래 가격',
+          executed: '이미 거래 량 / 남 은 양', 
+          type: '종류',
+          state: '상태', 
+          create_time: '주문 시간' 
         }
       },
       bargain: {
-        text: '已成交',
+        text: '체결내역',
         mapTableColumns: {
-          symbol: '合约类型',
-          side: '方向',
-          amount_total: '委托数量',
-          amount: '成交量',
-          amount_surplus: '剩余量',
-          price: '成交价格', 
-          total: '价值',
-          type: '委托类型',
-          origin: '成交类型',
-          order_id: '委托单ID',
+          name: '계약 유형',
+          side: '방향',
+          amount_total: '위탁수량',
+          amount: '거래수량',
+          amount_surplus: '잔여량',
+          price: '거래 가격',
+          // entrustPrice: '委托价格',
+          total: '가치',
+          type: '위탁류형',
+          origin: '거래 유형',
+          order_id: '위임장 정보',
           // fee: '手续费',
-          create_time: '成交时间'
+          create_time: '거래시간' 
         }
       }
     },
