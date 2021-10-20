@@ -63,6 +63,7 @@
                 :label="$t('phone_number')"
                 class=""
                 tabindex="2"
+                @change="changefn2"
               />
             <!-- <input class="input item" type="text"
               name="phone"
@@ -88,6 +89,7 @@
                 :label="$t('login_label_mail')"
                 class=""
                 tabindex="2"
+                @change="changefn2"
               />
             </div>
           </div>
@@ -108,11 +110,15 @@
                 class=""
                 tabindex="3"
                 @input="password=$event"
+                @change="changefn2"
               />
             </div>
           </div>
 
-          <div class="nc-box"><div id="nc"></div></div>
+          <div class="nc-box">
+            <div class="mask" v-if="ncmask"></div>
+            <div id="nc"></div>
+          </div>
 
           <div class="field submit">
             <v-btn
@@ -415,6 +421,13 @@ export default {
         // url = 'https://downloadappios.com:7521/1rsNn.html' 
       }
       window.location.href = url
+    },
+    changefn2(val) {
+      if (!val) {
+        this.ncmask = true;
+        return false;
+      }
+      this.ncmask = !this.checkParams();
     },
     async fetchRegion() {
       const res = await service.getRegionList()

@@ -537,6 +537,7 @@ $primary-color: #01CED1;
 .nc-box{
   width: 280px; height: 34px; margin: 20px 0 0 38px; position: relative;
   .nc-container .nc_wrapper{width: 100%!important;}
+  .mask{position: absolute; z-index: 10; left: 0; right: 0; top: 0; bottom: 0;}
 }
 
 strong{font-weight: bold;}
