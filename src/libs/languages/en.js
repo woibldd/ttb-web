@@ -3631,7 +3631,15 @@ export default {
     }
   },
   fee: {
-    unit_fees: "币本位合约手续费",
+    unit_fees: "Currency Contract Fees",
+    mix_fees: 'USDT Contract Fees', 
+    blend_fees: 'Fees',
+    future: 'BTC Contract',
+    unit:' Currency Standard Contract',
+    mix: ' Gold Standard Contract', 
+    future: ' Contract',
+    slogan: '%{siteName} Committed to creating a secure, user friendly, and competitive trading environment for users. In order to achieve this goal, we have set reasonable preferential fee policies and conditions for all trading products.',
+
     contract: {
       "leverage" : "Leverage" ,
       "provision_fee" :"Maker Fees",

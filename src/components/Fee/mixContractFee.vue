@@ -1,6 +1,6 @@
 <template>
   <div class="profile-container">
-    <div class="title-box rate-tit">{{ $t('金本位合约手续费') }}</div>
+    <div v-if="state.siteName!=='BachEx'"  class="title-box rate-tit mb-20">{{ $t('fee.mix_fees') }}</div>
     <div class="rate-tab"> 
       <table class="rate-table">
         <tr>
@@ -39,12 +39,14 @@
 <script>
 import service from '@/modules/service'
 import { pairfix } from '@/mixins/index'
+import { state } from '@/modules/store'
 
 export default {
   name: 'MixContractFee',
   mixins: [pairfix],
   data () {
     return {
+      state,
       pairList: [],
       symbolList: []
     }
@@ -76,7 +78,6 @@ export default {
 }
 
 </script>
-
 <style lang='scss'>
 .profile-container {
   width: 960px;
@@ -88,8 +89,7 @@ export default {
   }
   .rate-tab{
     width: 100%;
-    height: auto;
-    margin-top: 22px;
+    height: auto; 
     font-size: 14px;
     color: #333;
     .rate-tab-tit {
@@ -162,13 +162,19 @@ export default {
     tr {
       height: 45px;
       line-height: 45px;
-      border-bottom: 1px solid #ccc;
       // display: flex;
       th {
-        text-align: left;
+        background-color: #f8f8f8;
+        text-align: center;
+        border: 1px solid #e5e5e5;
+        color: #9A9A9A;
+        // text-align: left;
         // flex: 1;
       }
       td {
+        text-align: center;
+        border: 1px solid #e5e5e5;
+        color: #5B5B5B;
         // flex: 1;
       }
     }

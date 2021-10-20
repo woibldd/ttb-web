@@ -4,7 +4,8 @@
  */
 import utils from '@/modules/utils'
 const isMobile = utils.isMobile()
-const Fee = () => import(/* webpackChunkName: "Fee" */ '@/pages/Fee')
+// const Fee = () => import(/* webpackChunkName: "Fee" */ '@/pages/Fee')
+const Fee = () => import(/* webpackChunkName: "Fee" */ '@/pages/Fee_new')
 const ContractFee = () => import(/* webpackChunkName: "ContractFee" */ '@/components/Fee/contractFee')
 const TradingFee = () => import(/* webpackChunkName: "tradingFee" */ '@/components/Fee/tradingFee') 
 const UnitContractFee = () => import(/* webpackChunkName: "tradingFee" */ '@/components/Fee/unitContractFee')
@@ -15,7 +16,7 @@ export const feeRouter = [
     name: 'Fee',
     meta: {
       auth: false,
-      nav: true,
+      nav: false,
       footer: true,
       class: 'dark',
       mobileNav: isMobile

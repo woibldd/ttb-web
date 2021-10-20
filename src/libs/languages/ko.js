@@ -3514,8 +3514,15 @@ export default {
       noMatch: "No data"
     }
   },
-  fee: {
-    unit_fees: "币本位合约手续费",
+  fee: {    
+    unit_fees: "코인 베이스 계약 수수료",
+    mix_fees: 'USDT 계약 수수료',  
+    blend_fees: 'Fees',
+    future: '계약 거래',
+    unit:'코인 베이스 계약',
+    mix: '계약 거래',
+    slogan: '%{siteName} Committed to creating a secure, user friendly, and competitive trading environment for users. In order to achieve this goal, we have set reasonable preferential fee policies and conditions for all trading products.',
+
     contract: {
       "leverage" : "지레" ,
       "provision_fee" :"유동성 공급비률",

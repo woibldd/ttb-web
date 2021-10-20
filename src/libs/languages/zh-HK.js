@@ -3481,8 +3481,13 @@ export default {
       noMatch: "无数据"
     }
   },
-  fee: {
-    unit_fees: "币本位合约手续费",
+  fee: {    unit_fees: "币本位合约手续费",
+  mix_fees: '金本位合约手续费',
+  blend_fees: '混合合约手续费',
+  mix: '金本位',
+  unit: '币本位',
+  future: '永续',
+  slogan: '%{siteName}致力于为用户打造一个安全、易用、且有竞争力的交易环境。为了这个目标，我们对所有交易产品设定了合理优惠的费用政策和条件。',
     contract: {
       leverage: "杠杆" ,
       provision_fee:"提供流動性費率",
