@@ -2454,10 +2454,12 @@ export default {
     tips1: '任選結算幣種，便捷收益結算',
     tips2: '操作簡單，最高百倍杠杆',
     tips3: '用比特幣、USDT購買其他數位資產',
-    product: '產品',
-    h24change: '24小時變化',
-    view: '圖表',
-    h24amount: '24小時成交額',  
+    product: '產品',  
+    h24change: '涨跌幅',
+    view: '分時預覽',
+    h24amount: '24H成交額',  
+    H24trade: "24H交易量",
+    orderdeal: "最新價",
   },
   fund: {
     history: {

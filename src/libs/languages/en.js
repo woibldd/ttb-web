@@ -2630,9 +2630,11 @@ export default {
     tips2: 'Easy to trade, maximum leverage',
     tips3: 'Buy other digital assets with Bitcoin and USDT',
     product: 'Product',
-    h24change: '24H',
-    view: 'K Line',
-    h24amount: '24h volume',  
+    h24change: '24H Change',
+    view: 'View',
+    h24amount: '24h Volume',   
+    H24trade: "24H Amount",
+    orderdeal: "Price",
   },
   fund: {
     history: {

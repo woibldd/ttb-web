@@ -2516,9 +2516,11 @@ export default {
     tips2: '操作简单，最高百倍杠杆',
     tips3: '用比特币、USDT购买其他数字资产',
     product: '产品',
-    h24change: '24小时变化',
-    view: '图表',
-    h24amount: '24小时成交额',  
+    h24change: '涨跌幅',
+    view: '分时预览',
+    h24amount: '24H成交额',  
+    h24trade: "24H交易量",
+    orderdeal: "最新价",
   },
   fund: {
     history: {

@@ -20,7 +20,7 @@
         </th>
         <th v-if="lastColumnConfig">{{ lastColumnConfig.headerLabel }}</th>
       </tr>
-      <tbody>
+      <tbody :class="[state.skin]">
         <tr
           v-for="(row,index) in dataTable"
           :key="index">
@@ -134,6 +134,7 @@
 import editCell from './edit-cell'
 import { setModify } from '@/modules/api/currencyUnit'
 import { bigMinus } from '@/utils/handleNum'
+import {state,} from '@/modules/store'
 export default {
   components: {editCell},
   filters: {
@@ -186,7 +187,8 @@ export default {
     }
     pageConfig.handleCurrentChange()
     return {
-      pageConfig
+      pageConfig,
+      state,
     }
   },
   methods: {
@@ -291,9 +293,8 @@ export default {
     -ms-overflow-style: none;
     .table{
       border-collapse: collapse;
-      width: 100%;
-      tr {
-
+      width: 100%;    
+      tr { 
         height: 35px;
         td,th {
           border-bottom: 1px solid $--contract-table-bd;
@@ -302,6 +303,11 @@ export default {
       tbody {
         tr:hover {
           background-color: $--contract-table-bd;
+        }
+        &.dark {
+          tr:hover {
+            background-color: #222222;
+          }
         }
       }
     }

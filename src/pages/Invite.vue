@@ -510,7 +510,7 @@ export default {
           color: $text-weak;
         }
         .tbody {
-          background: #E2FFFF;
+          // background: #E2FFFF;
           border: 1px solid $text-normal;
           border-radius:4px;
           min-height: 161px;

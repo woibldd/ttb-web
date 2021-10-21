@@ -2501,9 +2501,11 @@ export default {
     tips2: '조작이 간단하여, 최고 백배 지렛대.',
     tips3: '비트코인, USDT로 다른 디지털 자산을 사들이다',
     product: '제품',
-    h24change: '24시간 변화',
-    view: '도표',
-    h24amount: '24시간 거래액',  
+    h24change: '등락 폭',
+    view: '시간 대별 미리 보기',
+    h24amount: '24H 거래액',  
+    H24trade: "24H 거래 량",
+    orderdeal: "최신 가격",
   },
   fund: {
     history: {
