@@ -2521,6 +2521,7 @@ export default {
     h24amount: '24H成交额',  
     h24trade: "24H交易量",
     orderdeal: "最新价",
+    search: '搜索币种'
   },
   fund: {
     history: {

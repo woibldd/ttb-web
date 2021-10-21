@@ -10,7 +10,7 @@
         </div>
         <div class="right mr-10"> 
           <el-input
-            :placeholder="$t('search')"
+            :placeholder="$t('market.search')"
             size="small"
             suffix-icon="el-icon-search"
             v-model="inputSearch">

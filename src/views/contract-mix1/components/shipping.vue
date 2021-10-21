@@ -54,8 +54,8 @@
                   <hr>
                   <div
                     style="font-size:12px; line-height:24px">
-                    <p>{{$t('contract_your_current_werehouse')}}: <span class="text-primary"> {{ item.holding }}</span> {{$t('contract_many_piece_con', {amount:''})}} ({{ item.leverage }}x)</p>
-                    <p>{{$t('contract_have_apply_yet')}}: <span class="text-primary">{{ item.margin_position | round(item.symbol.price_scale || 2) }}</span> {{ item.currency }} 【{{$t('contract_max_remove_account')}} <span class="text-primary">{{ item.margin_user | round(item.symbol.price_scale || 2) }}</span> {{ item.currency }}】<span
+                    <p>{{$t('contract_your_current_werehouse')}}<span class="text-primary"> {{ item.holding }}</span> {{$t('contract_many_piece_con', {amount:''})}} ({{ item.leverage }}x)</p>
+                    <p>{{$t('contract_have_apply_yet')}}<span class="text-primary">{{ item.margin_position | round(item.symbol.price_scale || 2) }}</span> {{ item.currency }} 【{{$t('contract_max_remove_account')}} <span class="text-primary">{{ item.margin_user | round(item.symbol.price_scale || 2) }}</span> {{ item.currency }}】<span
                       v-if="checked"
                       class="text-primary hover-point"
                       @click="margin_position = Math.floor(item.margin_user)">{{$t('input_all')}}</span></p>

@@ -2635,6 +2635,7 @@ export default {
     h24amount: '24h Volume',   
     H24trade: "24H Amount",
     orderdeal: "Price",
+    search: 'Search Currency',
   },
   fund: {
     history: {

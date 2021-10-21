@@ -2506,6 +2506,7 @@ export default {
     h24amount: '24H 거래액',  
     H24trade: "24H 거래 량",
     orderdeal: "최신 가격",
+    search: '화폐 종 류 를 검색 하 다',
   },
   fund: {
     history: {

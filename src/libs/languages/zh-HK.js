@@ -2460,6 +2460,7 @@ export default {
     h24amount: '24H成交額',  
     H24trade: "24H交易量",
     orderdeal: "最新價",
+    search: '蒐索幣種'
   },
   fund: {
     history: {
