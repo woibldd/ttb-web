@@ -25,7 +25,7 @@
                             :class="[{'router-link-exact-active': item.symbol===state.ct.pair}, 'link']"
                             @click="handleProductsChange(item)">
                             <el-row >
-                              <el-col :span="10" class="label pl-10"><span class="currency">{{item.product_name}}/</span><span class="product">{{item.currency_name}}</span> </el-col>
+                              <el-col :span="10" class="label pl-10"><span class="currency">{{item.product_name}}</span> <span class="">{{$t('fund.contract.future')}}</span> </el-col>
                               <el-col 
                                 :class="[(item.tick || {}).increment_24h > 0?'text-success':'text-danger']"
                                 :span="8">
@@ -40,7 +40,7 @@
                           </div> 
                         </div>
                       </div>
-                      <span slot="reference"><label  v-if="pairInfo" class="f20 bold">{{ `${pairInfo.product_name}/${pairInfo.currency_name}`}} <icon name="arrow-down" /> </label> </span>
+                      <span slot="reference"><label  v-if="pairInfo" class="f20 bold">{{ `${pairInfo.product_name} ${$t('fund.contract.future')}`}} <icon name="arrow-down" /> </label> </span>
                     </el-popover>  
                   </div> 
                 </div> 
