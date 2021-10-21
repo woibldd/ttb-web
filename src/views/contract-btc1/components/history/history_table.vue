@@ -3,10 +3,12 @@
     class="history_table_container"
     v-scroll-load="loadMore">
     <table
-      class="table scroll--body mb-10"
+      class="table scroll--body mb-10" 
+      :class="[state.skin]"
       v-show="!isFirst">
-      <tr class="tr th pt-15">
+      <tr class="pt-15">
         <th
+          class="column"
           v-for="header in headers"
           :key="'th_' +header.title"
           :style="{width: header.width ? header.width: 'auto'}"
@@ -14,7 +16,7 @@
           <span v-tooltip.top-center="{html: true, content: $t(header.tips), classes: 'contract'}">{{ $t(header.title) }}</span>
         </th>
       </tr>
-      <tbody :class="[state.skin]">
+      <tbody>
         <tr
           class="tr td"
           v-for="(row, index) in bodyData"
@@ -926,21 +928,28 @@ export default {
     width: 100%;
     // border: 1px solid #0F0F0F;
     tr { 
-        height: 35px;
-        td,th {
-          border-bottom: 1px solid $--contract-table-bd;
-        }
+      height: 35px;
+      line-height: 35px;
+      td.column,th.column {
+        border-bottom: 1px solid $--contract-table-bd;
+      }
+    }
+    tbody {
+      tr:hover {
+        background-color: $--contract-table-bd;
+      } 
+    }
+    &.dark { 
+      td.column,th.column {
+        border-color: #444;
+        color:#ACACAC;
       }
       tbody {
         tr:hover {
-          background-color: $--contract-table-bd;
-        }
-        &.dark {
-          tr:hover {
-            background-color: #222222;
-          }
-        }
+          background-color: #222222;
+        } 
       }
+    }
   }
 
   // 隐藏滚动条

@@ -5,6 +5,7 @@
   >
     <table
       class="table scroll--body"
+       :class="[state.skin]"
     >
       <colgroup flex="main:justify ">
         <col
@@ -14,17 +15,19 @@
       </colgroup>
       <tr>
         <th
+            class="column"
           v-for="(item,index) in tableColumns"
           :key="index">
           {{ item.hearderLabel }}
         </th>
         <th v-if="lastColumnConfig">{{ lastColumnConfig.headerLabel }}</th>
       </tr>
-      <tbody :class="[state.skin]">
+      <tbody>
         <tr
           v-for="(row,index) in dataTable"
           :key="index">
           <td
+            class="column"
             v-for="(item,key) in tableColumns"
             :style="{width: item.width(currentTab, item.prop)}"
             :key="key">
@@ -291,23 +294,30 @@ export default {
     font-size: 12px;
     overflow: -moz-scrollbars-none;
     -ms-overflow-style: none;
-    .table{
-      border-collapse: collapse;
-      width: 100%;    
+    .table {
+      width: 100%;
+      // border: 1px solid #0F0F0F;
       tr { 
         height: 35px;
-        td,th {
+        line-height: 35px;
+        td.column,th.column {
           border-bottom: 1px solid $--contract-table-bd;
         }
       }
       tbody {
         tr:hover {
           background-color: $--contract-table-bd;
+        } 
+      }
+      &.dark { 
+        td.column,th.column {
+          border-color: #444;
+          color:#ACACAC;
         }
-        &.dark {
+        tbody {
           tr:hover {
             background-color: #222222;
-          }
+          } 
         }
       }
     }

@@ -7,7 +7,7 @@
           <div class="x-row-1 "> 
             <div  class="r1-c2-r1 ">   
               <div class="product-row" flex="left"> 
-                <div class="product-info" flex="box:first cross:center">
+                <div class="product-info" flex="box:first cross:center"> 
                   <div > 
                     <el-popover  
                       :popper-class="[state.skin, 'pd-0']"  
@@ -400,12 +400,13 @@ export default {
       isProportion: 0, //百分比下单
       proportionBuy: 0, //
       proportionSell: 0,
-      allSymbolList: {},
-      activeLever: '0',
+      allSymbolList: {}, 
     }
   },
-  computed: {
-    
+  computed: { 
+    activeLever() { 
+      return (state.ct.holding || {}).leverage || 0
+    },
     langData() {
       return this.$i18n.messages[this.$i18n.locale].contract
     }, 
@@ -586,7 +587,7 @@ export default {
       document.querySelector('.page-loading').classList.remove('show')
     })
     this.state.loading = true  
-    this.loadSymbolList()
+    // this.loadSymbolList()
   },
   methods: {  
     handleLeverClose() {  
@@ -616,22 +617,22 @@ export default {
         this.$refs.tradingView.switchSkin('light')
       } 
     },
-    async loadSymbolList() {
-      const [future, mix, unit] = await Promise.all([
-        service.getContractSymList(),
-        service.getMixContractSymList(),
-        service.getUnitContractSymList()
-      ])
-      if (future && !future.code) {
-        this.allSymbolList.future = future.data.items
-      }
-      if (unit && !unit.code) {
-        this.allSymbolList.unit = unit.data.items
-      }
-      if (mix && !mix.code) {
-        this.allSymbolList.mix = mix.data.items
-      } 
-    },
+    // async loadSymbolList() {
+    //   const [future, mix, unit] = await Promise.all([
+    //     service.getContractSymList(),
+    //     service.getMixContractSymList(),
+    //     service.getUnitContractSymList()
+    //   ])
+    //   if (future && !future.code) {
+    //     this.allSymbolList.future = future.data.items
+    //   }
+    //   if (unit && !unit.code) {
+    //     this.allSymbolList.unit = unit.data.items
+    //   }
+    //   if (mix && !mix.code) {
+    //     this.allSymbolList.mix = mix.data.items
+    //   } 
+    // },
     handleProductsChange(product) {
       const pair = product.product === 'FUTURE' ? product.name : product.symbol 
       this.$router.push({ 

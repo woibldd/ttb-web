@@ -362,30 +362,30 @@
               <span class="c-666">{{ $t(exchangeDir === 'BUY' ? 'contract_trigger_tips_sell' : 'contract_trigger_tips_buy', {price: trigger_price, trigger_type: $t(triggerType)}) }}</span>
             </p>
           </div>
-          <div class="modal__holding pt-17 pb-17">
+          <!-- <div class="modal__holding pt-17 pb-17"> -->
             <!-- !-- 持有仓位 -- -->
-            <div class="mb-17 c-fff">{{ $t('contract_hold_pos') }} : {{ $t('FUTURE_&USD', {currency: state.ct.product_name}) }}</div>
+            <!-- <div class="mb-17 c-fff">{{ $t('contract_hold_pos') }} : {{ $t('FUTURE_&USD', {currency: state.ct.product_name}) }}</div> -->
             <!-- !-- 红绿条 -- -->
-            <div class="profit-risk-row mb-20">
+            <!-- <div class="profit-risk-row mb-20">
               <div class="response-times c-fff f12"
                    :style="{left: riskModalTimesLeft}">{{ mmModal.inputLeverTime == 0 ? maxTimes : mmModal.inputLeverTime }}x</div>
               <span class="icon icon-alert"
                     v-tooltip.top-center="{content: $t('contract_max_lever') + maxTimes +'x', classes: 'contract'}" />
               <span class="icon icon-money"
                     v-tooltip.top-center="{content: $t('contract_newest_deal_price'), classes: 'contract'}" />
-            </div>
+            </div> -->
             <!-- !-- 杠杆操作 input number-- -->
             <!-- !-- @change="mmModalLeverChange" -- -->
-            <leverOperate v-if="language"
+            <!-- <leverOperate v-if="language"
                           @change="mmChangeConfirm"
                           :timers-map="timersMap"
                           :real-value.sync="mmModal.inputLeverTime"
-                          :slider-value.sync="mmModal.sliderLeverTime" />
+                          :slider-value.sync="mmModal.sliderLeverTime" /> -->
             <!-- !-- 提示信息-- -->
-            <div class="stopmarket_tips"
+            <!-- <div class="stopmarket_tips"
                  v-if="isExtOrderType"
                  v-html="$t(mmModal.inputLeverTime == 0 ? 'contract_win_stopMarket_0.info':'contract_win_stopMarket_sell.info' , {times: mmModal.inputLeverTime})" />
-          </div>
+          </div> -->
           <!-- 表格 -->
           <div class="more__table mt-10">
             <div class="table__tr c-fff">
@@ -2117,9 +2117,12 @@ export default {
         .then(res => {
           if (!res.code && !!res.data) {
             state.ct.holdingList = res.data
+            // state.ct.holding = res.data;
+            // console.log(res.data, this.pairInfo.currency)
             let holdingList = res.data
             holdingList.map(item => {
               if (item.currency === this.pairInfo.currency) {
+                state.ct.holding = item
                 if (
                   item.leverage != null &&
                   item.leverage != undefined
@@ -2820,6 +2823,7 @@ export default {
   color: #393d4d;
 
   .modal-title {
+    text-align:left;
     font-size: 16px;
     margin-bottom: 13px;
     color: #393d4d;
@@ -3121,6 +3125,8 @@ export default {
     .op-balance {
       justify-content: space-between;
       align-items: center;
+      white-space: nowrap;
+      overflow: hidden;
       font-weight: 400;
       font-size: 12px;
       &.overflow {

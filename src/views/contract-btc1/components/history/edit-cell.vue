@@ -4,10 +4,11 @@
       <!-- <span :class="{'font-color-buy' : side==1, 'font-color-sell' : side==2}">{{ value | fixed(scale) }} </span> -->
       <!-- <icon style="font-size: 14px;" name="edit" @click="editPrice('edit')"/>  -->
       <slot />
-      <span
+       <icon style="font-size: 14px;" name="edit" @click="editPrice('edit')"/> 
+      <!-- <span
         class="icon edit"
         name="edit"
-        @click="editPrice('edit')"/>
+        @click="editPrice('edit')"/> -->
     </span>
     <span
       v-if="state=='edit'"
@@ -108,17 +109,17 @@ export default {
 
 <style lang="scss">
 
-.icon {
-  display: inline-block;
-  background-repeat: no-repeat;
-  background-size: contain;
-  text-align: baseline;
-  &.edit {
-    width: 12px;
-    height: 12px;
-    background-image: url('~@/assets/contract/icon-risk-edit.png')
-  }
-}
+// .icon {
+//   display: inline-block;
+//   background-repeat: no-repeat;
+//   background-size: contain;
+//   text-align: baseline;
+//   &.edit {
+//     width: 12px;
+//     height: 12px;
+//     background-image: url('~@/assets/contract/icon-risk-edit.png')
+//   }
+// }
 .modify {
   width: 88px;
   display: flex;

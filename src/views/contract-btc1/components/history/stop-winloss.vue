@@ -1,5 +1,6 @@
 <template>
-  <el-popover placement="top" @show="onShow" width="300" effect="dark" :ref="'popover-' + id" popper-class="stop-loss-container">
+  <el-popover placement="top" @show="onShow" width="300" effect="dark" :ref="'popover-' + id" 
+    :popper-class="['stop-loss-container', state.skin]" :skin="state.skin">
     <!-- <span class="icon icon-edit pointer" slot="reference" /> -->
     
     <i slot="reference" class="el-icon-edit hover-point text-primary" style="font-size:15px;" />
@@ -11,7 +12,7 @@
             class="c-fff"
           >{{ $t('contract_page.order_action.modal.stop_win',{unit: "USD"}) }}</el-checkbox>
         </div>
-        <div class="r2">
+        <div class="r2 mt-10">
           <div class="row">
             <div class="action__table mt-10">
               <div class="table__tr c-fff">
@@ -25,7 +26,7 @@
                 </div>
                 <div class="col1"></div>
               </div>
-              <div class="table__tr c-fff">
+              <div class="table__tr c-fff mt-10">
                 <div class="col">{{$t('price')}}</div>
                 <div class="col2 pl-12">
                   <currency-input
@@ -42,7 +43,7 @@
             </div>
           </div>
         </div>
-        <div class="r3">
+        <div class="r3 mt-10">
           <!-- <p>{{$t('市场价格 上涨 至 8500 将触发 市价止盈单 预计 盈利： 0.00000432BTC')}}</p> -->
           <!-- <p>{{$t('%{triggerType} %{triggerSide} 至 %{triggerPrice} 将触发 %{triggerOrder} 预计 %{triggerResult}： %{realized}BTC', -->
           <p>
@@ -63,7 +64,7 @@
             v-model="stoplossState"
           >{{ $t('contract_page.order_action.modal.stop_loss',{unit: "USD"}) }}</el-checkbox>
         </div>
-        <div class="r2">
+        <div class="r2 mt-10">
           <div class="row">
             <div class="action__table mt-10">
               <div class="table__tr c-fff">
@@ -77,7 +78,7 @@
                 </div>
                 <div class="col1"></div>
               </div>
-              <div class="table__tr c-fff">
+              <div class="table__tr c-fff mt-10">
                 <div class="col">{{$t('price')}}</div>
                 <div class="col2 pl-12">
                   <currency-input
@@ -94,7 +95,7 @@
             </div>
           </div>
         </div>
-        <div class="r3">
+        <div class="r3 mt-10">
           <p>
             {{$t('contract_page.order_action.modal.stop_loss_tips',
             {
@@ -459,21 +460,21 @@ export default {
 .stop-loss-container {
   width: 300px !important;
   padding: 20px  !important;
-  background: #1b1b1b !important;
-  color: #fff !important;
+  // background: #1b1b1b !important;
+  // color: #fff !important;
   .stoploss {
     margin-top: 20px;
     margin-bottom: 20px;
   }
   .r1 {
-    color: #fff;
+    // color: #fff;
     .el-checkbox{
       .el-checkbox__label {
-          color: #fff;
+          // color: #fff;
       }
       &.is-checked {
         .el-checkbox__label {
-          color: #fff;
+          // color: #fff;
         }
       }
     }
@@ -499,19 +500,19 @@ export default {
           .currency-input.trade {
             width: 188px;
             .input {
-              background-color: #292929;
+              // background-color: #292929;
               text-align: left;
             }
           }
           .trigger_dropdown {
             input {
               background: transparent !important;
-              color: #fff !important;
-              border-color: #fff !important;
+              // color: #fff !important;
+              // border-color: #fff !important;
               width: 188px !important;
             }
             .el-select__caret {
-              color: #fff;
+              // color: #fff;
             }
           }
         }
@@ -536,22 +537,48 @@ export default {
   }
 
   .el-button.el-button--primary { 
-    color: #fff;
+    // color: #fff;
     background-color: $primary-color !important;
     border-color: $primary-color !important; 
     &:hover,
     &:focus {
-      color: #fff !important;
+      // color: #fff !important;
       background-color: $primary-color !important;
       border-color: $primary-color !important;
       opacity: 0.8;
     }   
     &.is-disabled {
       background-color: #999 !important;;
-      color: #fff  !important; ;
+      // color: #fff  !important; ;
+    }
+  }
+  &.dark {
+    background: #1b1b1b !important;
+    color: #fff !important;
+    .input, input {
+      background-color: #292929  !important;
+      color: #fff !important;
+    }
+    .el-select__caret {
+      color: #fff !important;
+    }
+    .el-button.el-button--primary { 
+      color: #fff;
+      &:hover,
+      &:focus {
+        color: #fff !important;
+        background-color: $primary-color !important;
+        border-color: $primary-color !important;
+        opacity: 0.8;
+      }   
+      &.is-disabled {
+        background-color: #999 !important;;
+        color: #fff  !important; ;
+      }
     }
   }
 }
+
 
 .icon {
   background-repeat: no-repeat;
