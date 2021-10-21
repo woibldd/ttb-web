@@ -74,6 +74,7 @@
                 :rule="validateRules.phone"
                 :placeholder="$t('bind_phone_input')"
                 :label="$t('phone_number')"
+                @change="changefn"
               />
             </div>
           </div>
@@ -93,10 +94,14 @@
                 :rule="validateRules.email"
                 placeholder="you@example.com"
                 :label="$t('email')"
+                @change="changefn"
               />
             </div>
           </div>
-          <div class="nc-box"><div id="nc"></div></div>
+          <div class="nc-box">
+            <div class="mask" v-if="ncmask"></div>
+            <div id="nc"></div>
+          </div>
           <div :class="['field']">
             <div class="input-box">
               <ix-input

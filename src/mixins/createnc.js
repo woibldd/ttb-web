@@ -6,7 +6,8 @@ export default {
     return {
       state, utils,
       nc: null, ncData: {}, isnc: false,
-      succls: false
+      succls: false,
+      ncmask: true
     }
   },
   methods: {
@@ -67,6 +68,18 @@ export default {
     ncreset() {
       this.nc.reset();
       this.isnc = false;
+    },
+    changefn(val) {
+      if (!val) {
+        this.ncmask = true;
+        return false;
+      }
+
+      if (this.by === 'phone' && this.$refs.phone.validateSuccess) {
+        this.ncmask = false;
+      } else if (this.by === 'email' && this.$refs.email.validateSuccess) {
+        this.ncmask = false;
+      } else this.ncmask = true;
     }
   }
 }
