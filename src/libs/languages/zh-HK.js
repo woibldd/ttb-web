@@ -3936,5 +3936,17 @@ export default {
       },
       balance: {title: '提示', content: '溫馨提示：餘額不足', subTxt: '確定', type: 'balance'}
     }
-  }
+  },
+  customer: { 
+    registerAccount: '注册%{siteName}帳號', 
+    registerByPhone: '手機註冊', 
+    registerByEmail: '郵箱註冊', 
+    hasAccount: '已有帳號？', 
+    accountVerification: '帳號驗證', 
+    tip1: '請輸入您在%{contact}收到的6比特驗證碼，驗證碼15分鐘有效', 
+    loginAccount: '登入%{siteName}帳號', 
+    loginByPhone: '手機登入', 
+    loginByEmail: '郵箱登錄', 
+    freeRegistre: '免費註冊', 
+  },
 }

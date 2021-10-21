@@ -4107,5 +4107,17 @@ export default {
       },
       Balance: {Title: 'prompt', content: 'warm prompt: insufficient balance', subtxt: 'OK', type: 'balance'}
     }
-  }
+  },
+  customer: { 
+    registerAccount: 'Register %{siteName}',
+    registerByPhone: 'Register with Mobile',
+    registerByEmail: 'Register with Email',
+    hasAccount: 'already had an account？',
+    accountVerification: 'Account verification',
+    tip1: 'Please enter %{contact} the 6-digit verification code received, the verification code is valid for 15 minutes',
+    loginAccount: 'Log in %{siteName} Account',
+    loginByPhone: 'Log in with Mobile',
+    loginByEmail: 'Log in with Email',
+    freeRegistre: 'Free registration',
+  },
 }

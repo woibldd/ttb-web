@@ -4003,5 +4003,17 @@ export default {
       // fail: {title: '很遗憾，抢购失败…', content: '温馨提示：不要灰心，再试一次会有可能抢到哦。', subTxt: '继续试试', type: 'fail'},
       balance: {title: '提示', content: '温馨提示：余额不足', subTxt: '确定', type: 'balance'}
     }
-  }
+  }, 
+  customer: { 
+    registerAccount: '注册%{siteName}账号',
+    registerByPhone: '手机注册',
+    registerByEmail: '邮箱注册',
+    hasAccount: '已有账号？',
+    accountVerification: '账号验证',
+    tip1: '请输入您在 %{contact} 收到的6位验证码，验证码15分钟有效',
+    loginAccount: '登录%{siteName}账号',
+    loginByPhone: '手机登录',
+    loginByEmail: '邮箱登录',
+    freeRegistre: '免费注册',  
+  },
 }

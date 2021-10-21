@@ -3943,5 +3943,17 @@ export default {
       },
       balance: {title: '알림', content: '따뜻 한 알림: 잔액 부족', subTxt: '확정', type: 'balance'}
     }
-  }
+  },
+  customer: { 
+    registerAccount: '등록%{site Name} 계 정',
+    registerByPhone: '휴대폰 등록',
+    registerByEmail: '메 일 등록"',
+    hasAccount: '계 정 이 있 나 요？',
+    accountVerification: '계 정 인증',
+    tip1: '%{contact} 에서 받 은 6 개의 인증 코드 를 입력 하 십시오. 인증번호 15 분 유효 합 니 다',
+    loginAccount: '로그 인%{siteName} 계 정',
+    loginByPhone: '휴대폰 로그 인',
+    loginByEmail: '메 일 로그 인',
+    freeRegistre: '무료 등록',  
+  },
 }
