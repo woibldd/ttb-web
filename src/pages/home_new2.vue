@@ -106,20 +106,20 @@
             <span>{{$t('contract_24_hour_trade')}}： <label class="ml-10">{{tradeTotal}} </label>USDT</span>
           </div> -->
         </div> 
+
         <div class="markets-table">
           <template v-if="(selectTab==='all' || selectTab==='trading')"> 
-            <div class="grid mb-10">
+            <!-- <div class="title mb-10">
+              <h4>{{$t('trading')}}</h4>
+            </div> -->
+            <div class="grid mb-30">
               <el-row class="hander mt-10 mb-20">
                 <!-- <el-col :span="1">#</el-col> -->
-                <el-col :span="5">{{$t('currency')}}</el-col>
-                <el-col :span="4">{{$t('contract_block_orderdeal')}}</el-col>
-                <el-col :span="5">
-                   {{$t('market.h24change')}}
-                </el-col>
-                <el-col :span="4">{{$t('contract_24_hour_trade')}}</el-col>
-                <!-- <el-col :span="4">  
-                   {{$t('market.h24amount')}}
-                </el-col> -->
+                <el-col :span="4">{{$t('currency')}}</el-col>
+                <el-col :span="3">{{$t('market.orderdeal')}}</el-col>
+                <el-col :span="3">{{$t('market.h24change')}}</el-col>
+                <el-col :span="4">{{$t('market.h24trade')}}</el-col>
+                <el-col :span="4">{{$t('market.h24amount')}}</el-col>
                 <el-col :span="4"  flex="main:center">{{$t('market.view')}}</el-col>
                 <el-col :span="2"  flex="main:right">{{$t('operation')}}</el-col>
               </el-row> 
@@ -128,17 +128,17 @@
                 :key="index" 
                 class="row mt-10">
                 <!-- <el-col :span="1">{{index + 1}}</el-col> -->
-                <el-col :span="5" flex="cross:center"> 
+                <el-col :span="4" flex="cross:center"> 
                   <img class="iconfont mr-10" style="font-size: 24px"  :src="getCoinIcon(item.product)" alt="">
                   {{item.product}}<span class="currency">/{{item.currency}}</span> &nbsp;
                 </el-col>
-                <el-col :span="4" >{{item.price}} &nbsp;</el-col>
-                <el-col :span="5">
+                <el-col :span="3" >{{item.price}} &nbsp;</el-col>
+                <el-col :span="3">
                   <span v-if="item.delta > 0" class="text-success">{{item.delta |fixed(2)}}%</span>  
                   <span v-else class="text-danger">{{item.delta | fixed(2)}}%</span>&nbsp;
                 </el-col>
                 <el-col :span="4">{{item.vol | fixed(2)}} <span class="currency">{{item.product}}</span> &nbsp;</el-col>
-                <!-- <el-col :span="4">{{$big(item.vol || 0).times(item.price || 0)| fixed(2)}} &nbsp;</el-col> -->
+                <el-col :span="4">{{$big(item.vol || 0).times(item.price || 0)| fixed(2)}} <span class="currency">{{item.currency}}</span> &nbsp;</el-col>
                 <el-col :span="4" flex="main:center">   
                   <span v-if="quoteList[item.name]">
                     <quote-view :historyList="quoteList[item.name]"  :delta="item.delta"/>  
@@ -154,41 +154,40 @@
             </div> 
           </template>
           <template v-if="(selectTab==='all' || selectTab==='btc')"> 
+            <!-- <div class="title mb-10">
+              <h4>{{$t('currency-btc')}}</h4>
+            </div> -->
             <div class="grid mb-10">
               <el-row class="hander mt-10 mb-20">
                 <!-- <el-col :span="1">#</el-col> -->
-                <el-col :span="5">{{$t('currency')}}</el-col>
-                <el-col :span="4">{{$t('contract_block_orderdeal')}}</el-col>
-                <el-col :span="5"> 
-                   {{$t('market.h24change')}}
-                </el-col>
-                <el-col :span="4">{{$t('contract_24_hour_trade')}}</el-col>
-                <!-- <el-col :span="4">
-                   {{$t('market.h24amount')}}
-                </el-col> -->
-                <el-col :span="4" flex="main:center">{{$t('market.view')}}</el-col>
-                <el-col :span="2" flex="main:right">{{$t('operation')}}</el-col>
+                <el-col :span="4">{{$t('currency')}}</el-col>
+                <el-col :span="3">{{$t('market.orderdeal')}}</el-col>
+                <el-col :span="3">{{$t('market.h24change')}}</el-col>
+                <el-col :span="4">{{$t('market.h24trade')}}</el-col>
+                <el-col :span="4">{{$t('market.h24amount')}}</el-col>
+                <el-col :span="4"  flex="main:center">{{$t('market.view')}}</el-col>
+                <el-col :span="2"  flex="main:right">{{$t('operation')}}</el-col>
               </el-row> 
               <el-row v-for="(item, index) in btcShowList"  
                 v-show="index < 5"
                 :key="index" 
                 class="row mt-10">
                 <!-- <el-col :span="1">{{index + 1}}</el-col> -->
-                <el-col :span="5" flex="cross:center">
+                <el-col :span="4" flex="cross:center">
                   <img  class="iconfont mr-10" style="font-size: 24px"  :src="getCoinIcon(item.currency.replace('USD', ''))" alt="">
                   {{item.currency.replace('USD', '')}}<span class="currency">/USD</span> &nbsp;
                 </el-col>
-                <el-col :span="4">{{item.price}} &nbsp;</el-col>
-                <el-col :span="5">
+                <el-col :span="3">{{item.price}} &nbsp;</el-col>
+                <el-col :span="3">
                   <span v-if="item.delta > 0" class="text-success">{{item.delta |fixed(2)}}%</span>  
                   <span v-else class="text-danger">{{item.delta | fixed(2)}}%</span>&nbsp;
                   &nbsp;
                 </el-col>
                 <el-col :span="4">
-                  <span v-if="+item.vol">{{ $big(item.vol).div(item.price).round(item.price_scale)}}  <span class="currency">{{item.currency}}</span></span>
+                  <span v-if="+item.vol">{{ $big(item.vol).div(item.price).round(item.price_scale)}}  <span class="currency">{{item.currency.replace('USD', '')}}</span></span>
                   &nbsp;
                 </el-col>
-                <!-- <el-col :span="4">{{item.vol}} &nbsp;</el-col> -->
+                <el-col :span="4">{{item.vol | fixed(2)}} <span class="currency">USD</span> &nbsp;</el-col>
                 <el-col :span="4" flex="main:center">
                   <span v-if="quoteList[item.name]">
                     <quote-view :historyList="quoteList[item.name ]"  :delta="item.delta"/>   
@@ -204,32 +203,31 @@
             </div>
           </template>
           <template v-if="(selectTab==='all' || selectTab==='unit')"> 
+            <!-- <div class="title mb-10">
+              <h4>{{$t('currency-unit')}}</h4>
+            </div> -->
             <div class="grid mb-10">
               <el-row class="hander mt-10 mb-20">
-                <!-- <el-col :span="1">#</el-col> -->
-                <el-col :span="5">{{$t('currency')}}</el-col>
-                <el-col :span="4">{{$t('contract_block_orderdeal')}}</el-col>
-                <el-col :span="5"> 
-                   {{$t('market.h24change')}}
-                </el-col>
-                <el-col :span="4">{{$t('contract_24_hour_trade')}}</el-col>
-                <!-- <el-col :span="4">
-                   {{$t('market.h24amount')}}
-                </el-col> -->
-                <el-col :span="4" flex="main:center">{{$t('market.view')}}</el-col>
-                <el-col :span="2" flex="main:right">{{$t('operation')}}</el-col>
+                <!-- <el-col :span="1">#</el-col> --> 
+                <el-col :span="4">{{$t('currency')}}</el-col>
+                <el-col :span="3">{{$t('market.orderdeal')}}</el-col>
+                <el-col :span="3">{{$t('market.h24change')}}</el-col>
+                <el-col :span="4">{{$t('market.h24trade')}}</el-col>
+                <el-col :span="4">{{$t('market.h24amount')}}</el-col>
+                <el-col :span="4"  flex="main:center">{{$t('market.view')}}</el-col>
+                <el-col :span="2"  flex="main:right">{{$t('operation')}}</el-col>
               </el-row> 
               <el-row v-for="(item, index) in unitShowList"  
                 v-show="index < 5"
                 :key="index" 
                 class="row mt-10">
                 <!-- <el-col :span="1">{{index + 1}}</el-col> -->
-                <el-col :span="5" flex="cross:center">
+                <el-col :span="4" flex="cross:center">
                   <img  class="iconfont mr-10" style="font-size: 24px"  :src="getCoinIcon(item.currency)" alt="">
-                  {{item.currency}}<span class="currency">/USDT</span> &nbsp;
+                  {{item.currency}}<span class="currency">/USD</span> &nbsp;
                 </el-col>
-                <el-col :span="4">{{item.price}} &nbsp;</el-col>
-                <el-col :span="5">
+                <el-col :span="3">{{item.price}} &nbsp;</el-col>
+                <el-col :span="3">
                   <span v-if="item.delta > 0" class="text-success">{{item.delta |fixed(2)}}%</span>  
                   <span v-else class="text-danger">{{item.delta | fixed(2)}}%</span>&nbsp;
                   &nbsp;
@@ -238,7 +236,7 @@
                   <span v-if="+item.vol">{{ $big(item.vol).div(item.price).round(item.price_scale)}}  <span class="currency">{{item.currency}}</span></span>
                   &nbsp;
                 </el-col>
-                <!-- <el-col :span="4">{{item.vol}} &nbsp;</el-col> -->
+                <el-col :span="4">{{item.vol}} <span class="currency">USD</span>&nbsp;</el-col>
                 <el-col :span="4" flex="main:center">
                   <span v-if="quoteList[item.symbol]">
                     <quote-view :historyList="quoteList[item.symbol]"  :delta="item.delta"/>   
@@ -254,32 +252,31 @@
             </div>
           </template>
           <template v-if="(selectTab==='all' || selectTab==='mix')"> 
+            <!-- <div class="title mb-10">
+              <h4>{{$t('currency-mix')}}</h4>
+            </div> -->
             <div class="grid mb-10">
               <el-row class="hander mt-10 mb-20">
                 <!-- <el-col :span="1">#</el-col> -->
-                <el-col :span="5">{{$t('currency')}}</el-col>
-                <el-col :span="4">{{$t('contract_block_orderdeal')}}</el-col>
-                <el-col :span="5"> 
-                   {{$t('market.h24change')}}
-                </el-col>
-                <el-col :span="4">{{$t('contract_24_hour_trade')}}</el-col>
-                <!-- <el-col :span="4">
-                   {{$t('market.h24amount')}}
-                </el-col> -->
-                <el-col :span="4" flex="main:center">{{$t('market.view')}}</el-col>
-                <el-col :span="2" flex="main:right">{{$t('operation')}}</el-col>
+                <el-col :span="4">{{$t('currency')}}</el-col>
+                <el-col :span="3">{{$t('market.orderdeal')}}</el-col>
+                <el-col :span="3">{{$t('market.h24change')}}</el-col>
+                <el-col :span="4">{{$t('market.h24trade')}}</el-col>
+                <el-col :span="4">{{$t('market.h24amount')}}</el-col>
+                <el-col :span="4"  flex="main:center">{{$t('market.view')}}</el-col>
+                <el-col :span="2"  flex="main:right">{{$t('operation')}}</el-col>
               </el-row> 
               <el-row v-for="(item, index) in mixShowList"  
                 v-show="index < 5"
                 :key="index" 
                 class="row mt-10">
                 <!-- <el-col :span="1">{{index + 1}}</el-col> -->
-                <el-col :span="5" flex="cross:center">
+                <el-col :span="4" flex="cross:center">
                   <img  class="iconfont mr-10" style="font-size: 24px"  :src="getCoinIcon(item.currency)" alt="">
                   {{item.currency}}<span class="currency">/USDT</span> &nbsp;
                 </el-col>
-                <el-col :span="4">{{item.price}} &nbsp;</el-col>
-                <el-col :span="5">
+                <el-col :span="3">{{item.price}} &nbsp;</el-col>
+                <el-col :span="3">
                   <span v-if="item.delta > 0" class="text-success">{{item.delta |fixed(2)}}%</span>  
                   <span v-else class="text-danger">{{item.delta | fixed(2)}}%</span>&nbsp;
                   &nbsp;
@@ -288,7 +285,7 @@
                   <span v-if="+item.vol">{{ $big(item.vol).div(item.price).round(item.price_scale)}}  <span class="currency">{{item.currency}}</span></span>
                   &nbsp;
                 </el-col>
-                <!-- <el-col :span="4">{{item.vol}} &nbsp;</el-col> -->
+                <el-col :span="4">{{item.vol}} <span class="currency">USDT</span>&nbsp;</el-col>
                 <el-col :span="4" flex="main:center">
                   <span v-if="quoteList[item.symbol]">
                     <quote-view :historyList="quoteList[item.symbol]"  :delta="item.delta"/>   
@@ -303,27 +300,25 @@
               </el-row>
             </div>
           </template>
-          <template v-if="(selectTab==='all' || selectTab==='blend')"> 
+          <!-- <template v-if="(selectTab==='all' || selectTab==='blend')"> 
+            <div class="title mb-10">
+              <h4>{{$t('trading')}}</h4>
+            </div>
             <div class="grid mb-30">
-              <el-row class="hander mt-10 mb-20">
-                <!-- <el-col :span="1">#</el-col> -->
+              <el-row class="hander mt-10 mb-20"> 
                 <el-col :span="5">{{$t('currency')}}</el-col>
                 <el-col :span="4">{{$t('contract_block_orderdeal')}}</el-col>
                 <el-col :span="5"> 
                    {{$t('market.h24change')}} 
                 </el-col>
-                <el-col :span="4">{{$t('contract_24_hour_trade')}}</el-col>
-                <!-- <el-col :span="4">
-                   {{$t('market.h24amount')}}
-                </el-col> -->
+                <el-col :span="4">{{$t('contract_24_hour_trade')}}</el-col> 
                 <el-col :span="4" flex="main:center">{{$t('market.view')}}</el-col>
                 <el-col :span="2"  flex="main:right">{{$t('operation')}}</el-col>
               </el-row> 
               <el-row v-for="(item, index) in blendShowList"  
                 v-show="index < 5"
                 :key="index" 
-                class="row mt-10">
-                <!-- <el-col :span="1">{{index + 1}}</el-col> -->
+                class="row mt-10"> 
                 <el-col :span="5">
                   <img  class="iconfont mr-10" style="font-size: 24px"  :src="getCoinIcon(item.product)" alt="">
                   {{item.product}}<span class="currency">/{{item.currency}}</span>  &nbsp;
@@ -339,8 +334,7 @@
                     <span class="currency">{{item.product}}</span>
                   </span>
                   &nbsp;
-                </el-col>
-                <!-- <el-col :span="4">{{item.volume_24h}} &nbsp;</el-col>  -->
+                </el-col> 
                 <el-col :span="4" flex="main:center"> 
                   <span v-if="quoteList[item.symbol]">
                     <quote-view :historyList="quoteList[item.symbol]"  :delta="item.delta"/>   
@@ -354,7 +348,7 @@
                 </el-col>
               </el-row>
             </div>
-          </template>
+          </template> -->
         </div> 
         <div class="markets-btn pb-30">
           <router-link to="/markets">
