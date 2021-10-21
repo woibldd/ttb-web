@@ -16,38 +16,38 @@ export const accountRouter = [
       {
         path: 'login',
         name: 'login',
-        component: () => import(/* webpackChunkName: "Login" */ '@/pages/Login'),
+        component: () => import(/* webpackChunkName: "Login" */ '@/pages/Login2'),
         redirect: 'login/email'
       },
       {
         path: 'login/:by',
         name: 'loginBy',
-        component: () => import(/* webpackChunkName: "Login" */ '@/pages/Login'),
+        component: () => import(/* webpackChunkName: "Login" */ '@/pages/Login2'),
         props: true
       },
       {
         path: 'register',
         name: 'register',
-        component: () => import(/* webpackChunkName: "Register" */ '@/pages/Register'),
+        component: () => import(/* webpackChunkName: "Register" */ '@/pages/Register2'),
         redirect: 'register/email'
       },
       {
         path: 'register/:by',
         name: 'registerBy',
-        component: () => import(/* webpackChunkName: "Register" */ '@/pages/Register'),
+        component: () => import(/* webpackChunkName: "Register" */ '@/pages/Register2'),
         props: true
       },
       {
         path: 'recover',
         name: 'recover',
-        component: () => import(/* webpackChunkName: "Register" */ '@/pages/user/recover/recover.vue'),
+        component: () => import(/* webpackChunkName: "Register" */ '@/pages/user/recover/recover2.vue'),
         redirect: 'recover/email',
         props: true
       },
       {
         path: 'recover/:by?',
         name: 'recoverBy',
-        component: () => import(/* webpackChunkName: "Register" */ '@/pages/user/recover/recover.vue'),
+        component: () => import(/* webpackChunkName: "Register" */ '@/pages/user/recover/recover2.vue'),
         props: true
       },
       {
