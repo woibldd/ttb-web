@@ -89,7 +89,7 @@
                   </li>
                 </ul>
               </div>
-            </el-form-item> 
+            </el-form-item>
             <!-- <el-form-item class="mb-1">
               <el-input v-model="form.whatsapp" :placeholder="$t('bachex.gift.placeholder')"></el-input>
               <div class="text-danger label" > 
@@ -103,8 +103,17 @@
                 :step-strictly="true"
                 :controls="false"
                 v-model="form.invitor" 
-                :placeholder="$t('invitor_re')"></el-input-number>
-            </el-form-item> 
+                :placeholder="$t('invitor')"></el-input-number>
+            </el-form-item>
+
+            <!-- 代翔: 滑动验证组件 -->
+            <el-form-item>
+              <div class="nc-box">
+                <div class="mask" v-if="!((form.phone || form.email) && form.password)"></div>
+                <div id="nc"></div>
+              </div>
+            </el-form-item>
+
             <el-form-item prop="agree">
               <div class="label">
                 <input
@@ -120,7 +129,9 @@
               <!-- <el-checkbox v-model="form.agree">
               <span v-html="$t('agreement', {agreement: '/services', privacyPolicy: '/privacypolicy'})"></span></el-checkbox> -->
               <div>
-                <el-button type="primary" style="width:100%;" @click="handleSubmit">{{$t('signup_title')}}</el-button> 
+                <el-button :type="isnc?'primary':'info'" style="width:100%;" :disabled="!isnc"@click="handleSubmit">
+                  {{$t('signup_title')}}
+                </el-button> 
               </div>
             </el-form-item> 
           </el-form>
@@ -175,6 +186,8 @@ import service from '@/modules/service'
 import pwChecker from '@/modules/pw-checker' 
 import responsive from '@/mixins/responsive'
 import VDownload2 from '@/components/VDownload'
+import nc from '@/mixins/createnc'
+
 export default {
   name: "register",
   components: {
@@ -182,7 +195,7 @@ export default {
     VDownload2
   },
   props: ['by'],
-  mixins: [responsive],
+  mixins: [responsive, nc],
   data() { 
     return {
       state,  
@@ -266,7 +279,7 @@ export default {
             validator: (rule, invitorId, callback) => {  
               // return !invitorId
               if (!invitorId) {
-                callback(new Error(this.$t('invitor_re')));
+                callback(new Error(this.$t('invitor')));
               }
               else {
                 callback();
@@ -456,7 +469,8 @@ export default {
       }
     },
   },
-  mounted () { 
+  mounted () {
+    this.initnc(); // 代翔: 初始化滑动验证组件
     this.$eh.$on('app:resize', () => this.fixPosition())
     this.$nextTick(this.fixPosition)
   },

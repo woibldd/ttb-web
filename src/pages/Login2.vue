@@ -69,10 +69,19 @@
                 </i>
                 <!-- <i slot="append"> <icon name="" /> </i>  -->
               </el-input>  
-            </el-form-item>   
+            </el-form-item>
+            <!-- 代翔: 滑动验证组件 -->
+            <el-form-item>
+              <div class="nc-box">
+                <div class="mask" v-if="!((form.phone || form.email) && form.password)"></div>
+                <div id="nc"></div>
+              </div>
+            </el-form-item>
             <el-form-item prop="agree">   
               <div>
-                <el-button type="primary" style="width:100%;" @click="handleSubmit">{{$t('signin')}}</el-button> 
+                <el-button :type="isnc?'primary':'info'" style="width:100%;" :disabled="!isnc" @click="handleSubmit">
+                  {{$t('signin')}}
+                </el-button> 
               </div>
             </el-form-item> 
           </el-form>
@@ -131,6 +140,7 @@ import service from '@/modules/service'
 import responsive from '@/mixins/responsive'
 import VDownload2 from '@/components/VDownload'
 import _ from 'lodash'
+import nc from '@/mixins/createnc'
 
 export default {
   name: "login",
@@ -139,7 +149,7 @@ export default {
     VDownload2
   },
   props: ['by'],
-  mixins: [responsive],
+  mixins: [responsive, nc],
   data() {
     return {
       state,
@@ -385,7 +395,8 @@ export default {
       this.clearCountDown()
     }
   },
-  mounted () { 
+  mounted () {
+    this.initnc(); // 代翔: 初始化滑动验证组件
     this.$eh.$on('app:resize', () => this.fixPosition())
     this.$nextTick(this.fixPosition)
   },

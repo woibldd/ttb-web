@@ -60,6 +60,7 @@
                 :rule="validateRules.phone"
                 :placeholder="$t('bind_phone_input')"
                 :label="$t('phone_number')"
+                @change="changefn"
               />
             </div>
           </div>
@@ -78,8 +79,13 @@
                 :rule="validateRules.email"
                 placeholder="you@example.com"
                 :label="$t('email')"
+                @change="changefn"
               />
             </div>
+          </div>
+          <div class="nc-box" style="width: 280px; margin: 26px auto 0;">
+            <div class="mask" v-if="ncmask"></div>
+            <div id="nc"></div>
           </div>
           <div
             v-if="step===1"
@@ -107,7 +113,7 @@
                 />
                 <a
                   class="sms-btn"
-                  :class="{disabled: sms.status === 1}"
+                  :class="{disabled: sms.status === 1 || !isnc}"
                   @click.prevent="getSmsCode">
                   {{ smsBtnText }}</a> 
               </div> 
@@ -203,9 +209,10 @@ import ixInput from '@/components/common/ix-input/ix-input.vue'
 import utils from '@/modules/utils'
 import _ from 'lodash'
 import responsive from '@/mixins/responsive'
+import nc from '@/mixins/createnc'
 
 export default {
-  mixins: [responsive],
+  mixins: [responsive, nc],
   name: 'Recover',
   components: {
     slideValidate,
@@ -379,7 +386,7 @@ export default {
       this.triggerValidate = false
     },
     async getSmsCode () {
-      if (this.sms.status === 1 || this.sms.loading || this.loading) {
+      if (this.sms.status === 1 || this.sms.loading || this.loading || !this.isnc) {
         return false
       }
       if (this.by === 'phone') {
@@ -450,6 +457,9 @@ export default {
     if (state.locale === 'zh-CN') {
       this.regionId = 86
     }
+  },
+  mounted() {
+    this.initnc();
   }
 }
 </script>
