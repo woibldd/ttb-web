@@ -10,7 +10,7 @@
       <div class="option-box ix-pannel-body"> 
         <div :class="['option-box-middle', state.skin] ">
           <div style="text-align:center;"
-              class="mt-10"> 
+              class="mt-10">  
             <!-- 限价 市价 条件单 --> 
             <div class="ix-tab-side "   :skin="state.skin"> 
               <div
@@ -77,12 +77,7 @@
                       :class="[input.amount.status]"
                       :currency="$t(unit)"
                       :scale="pairInfo.amount_scale"
-                      :placeholder="$t('contract_order_enter_tips1')" />
-                    <!-- <div class="estimate">
-                      ≈ {{ state.fiatMoneySymbol }} <fiat-money
-                        :base="'USDT'"
-                        :value="price" />
-                    </div>-->
+                      :placeholder="$t('contract_order_enter_tips1')" /> 
                   </div>
                 </li>
                 <li class="li-price mb-12">
@@ -125,14 +120,7 @@
               </ul>
             </div>
           </div> 
-          <div :class="['option-proportion', state.skin]">
-            <!-- <el-button-group style="width: 100%;" flex>
-              <el-button @click="handleProportion(0.1)">10%</el-button>
-              <el-button @click="handleProportion(0.25)">25%</el-button>
-              <el-button @click="handleProportion(0.5)">50%</el-button>
-              <el-button @click="handleProportion(0.75)">75%</el-button>
-              <el-button @click="handleProportion(1)">100%</el-button>
-            </el-button-group> -->
+          <div :class="['option-proportion', state.skin]"> 
             <ix-slider 
               ref="sliderBuy"
               @input="onSliderDragEnd($event, 'buy')"
@@ -1235,8 +1223,8 @@ export default {
     isMarketOrderType () {
       return (
         this.currentDealType === 2 ||
-        this.currentDealType === 4 ||
-        this.currentDealType === 6
+        this.currentDealType == 4 ||
+        this.currentDealType == 6
       );
     },
     isTestnet () {

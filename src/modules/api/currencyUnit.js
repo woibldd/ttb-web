@@ -255,8 +255,10 @@ export const leveragePreview = data => request({
 })
 
 // 合约是否开通
-export const checkContractActive = (currency, isSimulation) => request({
-  url: `/future/account/is_activated${isSimulation ? '_simulation' : ''}`,
-  method: 'post',
-  params: {currency}
-})
+export const checkContractActive = (currency, isSimulation) => { 
+  return getCache('c_check_contract', () => request({
+    url: `/future/account/is_activated${isSimulation ? '_simulation' : ''}`,
+    method: 'post',
+    params: {currency}
+  }), 1e3)
+}  

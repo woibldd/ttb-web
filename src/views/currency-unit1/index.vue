@@ -9,10 +9,8 @@
             <div class="r1-c2-r1"> 
               <div class="product-row" flex="left"> 
                 <div class="product-info" flex="box:first cross:center">
-                  <div >
-                    <span v-if="showSymbolList"><label class="f17">{{ activeProduct.currency }}/USDT</label> </span>
-                    <el-popover 
-                      v-else
+                  <div > 
+                    <el-popover  
                       :popper-class="[state.skin, 'pd-0']"  
                       trigger="click">
                       <div class="drop-down">
@@ -28,7 +26,7 @@
                             :class="[{'router-link-exact-active': item.symbol===state.unit.pair}, 'link']"
                             @click="handleProductsChange(item)">
                             <el-row >
-                              <el-col :span="10" class="label pl-10"><span class="currency">{{item.currency}}</span><span class="product">/USDT</span> </el-col>
+                              <el-col :span="10" class="label pl-10"><span class="currency">{{item.currency}}</span><span class="product">/USD</span> </el-col>
                               <el-col 
                                 :class="[(item.UNIT || {}).increment_24h > 0?'text-success':'text-danger']"
                                 :span="8">
@@ -43,7 +41,7 @@
                           </div> 
                         </div>
                       </div>
-                      <span slot="reference"><label class="f20 bold">{{ activeProduct.currency }}/USDT <icon name="arrow-down" /> </label> </span>
+                      <span slot="reference"><label class="f20 bold">{{ activeProduct.currency }}/USD <icon name="arrow-down" /> </label> </span>
                     </el-popover>  
                   </div> 
                 </div> 
@@ -367,7 +365,7 @@
                       <span v-else>{{ $tR(`mapFormContent.mapMenuOptions.${activeBtnsKey}`)}}</span>
                       <icon name="arrow-down" />
                     </el-button>
-                  </el-button-group> 
+                  </el-button-group>  
                   <el-popover ref="popoverMenuOptions"
                       popper-class="popoverMenuOptions"
                       placement="bottom"
@@ -389,7 +387,7 @@
                      v-show="key !== 'triggerType'"
                      flex="main:justify">
                   <label>{{ $tR(`mapFormContent.mapInput.${key}`) }} </label>
-                  <div v-if="key==='value' && +activeBtnsKey === 2"
+                  <div v-if="key==='value' && (+activeBtnsKey === 2 || +activeBtnsKey === 4 || +activeBtnsKey === 6)"
                        class="transactionPrice"
                        flex="main:justify box:mean">
                     <div style="color: #666;">{{ $tR(`mapFormContent.perfactPrice`) }}</div>
