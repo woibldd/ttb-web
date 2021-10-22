@@ -283,7 +283,7 @@
     </div>
     <!-- 增加/减少保证金 modal -->
     <v-modal :open.sync="showPromiseFundModal">
-      <div class="modal-operate-ensurance pd-26 c-333">
+      <div class="modal-operate-ensurance pd-26 c-333" :class="[state.skin]">
         <div class="modal__title f16 bold">{{ $t('contract_add_incre_ensurance') }}</div>
         <div class="modal__content">
           <div class="showing-unit mb-24">
@@ -1014,7 +1014,7 @@ export default {
         width: 80px;
         height: 18px;
         color: $primary;
-        background-color: $--contract-history-num-bg;
+        background-color: rgba($--contract-history-num-bg, .1);
         padding-left: 7px;
         margin-left: -7px;
         box-sizing: border-box;
@@ -1084,7 +1084,7 @@ export default {
     & .input-num{
       width: 80px;
       color: $primary;
-      background-color: $--contract-history-num-bg;
+        background-color: rgba($--contract-history-num-bg, .3);
       margin-top:2px;
       box-sizing: border-box;
       border-width: 0;
@@ -1161,12 +1161,15 @@ export default {
         .btn-cancel {
             text-align: right;
             padding-right: 40px;
-            color: #393D4D;
+            color: #60606D;
         }
         > div {
             width: 133px;
         }
 
+    }
+    &.dark {
+      background-color: #29292f;
     }
 }
 .pointer {

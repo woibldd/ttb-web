@@ -132,6 +132,10 @@ const service = {
   getBalance() {
     return getCache('balanceList', () => request('account/balance/list'), 2e3)
   },
+  // 当前仓位,委托,止损委托,委托历史,已成交的数量 POST /blend/account/holding/amount 
+  getFutureAllAmount:(query) => {
+    return getCache('future-all-amount', () => request('/future/account/holding/amount',query), 1e3)
+  },
   createOrder(data) {
     return request('order/create', data)
   },

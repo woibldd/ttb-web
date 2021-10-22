@@ -503,6 +503,7 @@ export default {
     }
   },
   async created() {  
+    // service.getFutureAllAmount()
     this.state.skin =  this.local.skin
     this.subMarket()
     //如果地址带有邀请码信息则将邀请码写入cookie中，有效期为10天 2019/10/16 yzf

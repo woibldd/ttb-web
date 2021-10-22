@@ -553,7 +553,7 @@ export default {
     }
   }
   &.dark {
-    background: #1b1b1b !important;
+    background: #29292f !important;
     color: #fff !important;
     .input, input {
       background-color: #292929  !important;

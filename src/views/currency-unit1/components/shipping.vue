@@ -11,7 +11,7 @@
       class="shipping-item"
       flex>
       <div>
-        <h2 class="text-active text-primary">{{ $t(`contract.mapTabs.${item.name}`) }}</h2>
+        <h2 class="text-active text-primary">{{ item.name }}</h2>
         <h3
           v-if="item.holding > 0"
           class="text-success">{{ $t(`contract.mapFormContent.mapHandleBtn.buy`) }}</h3>
@@ -241,7 +241,7 @@
             <span>{{ $t('contract_exit_price') }}</span>
             <input
               :value="input|| bigRound(markData[item.currency], getProduct(item.name).price_scale || 2)"
-              class="custom-input"
+              :class="['custom-input', state.skin]"
               style="width:80px;text-align:center"
               @focus="e=>e.currentTarget.select()"
               @input="e=>input = e.target.value">
@@ -294,6 +294,7 @@
 import { bigDiv, bigTimes, calcProfit, toBig } from '@/utils/handleNum'
 import { getRates, closeStorehouse, cancelOrder, setModify, setTransferMargin, submitOrder } from '@/modules/api/currencyUnit' 
 import utils from '@/modules/utils'
+import {state} from '@/modules/store'
 export default {
   name: 'Shipping',
   props: {
@@ -324,6 +325,7 @@ export default {
   },
   data () {
     return {
+      state,
       currencyRates: null,
       visible: false,
       visible1: false,
@@ -649,6 +651,13 @@ export default {
               display:inline;
             }
           }
+        }
+      }
+      .custom-input {
+        border-width: 1px;
+        background-color: transparent;
+        &.dark {
+          color: #ccc;
         }
       }
     }
