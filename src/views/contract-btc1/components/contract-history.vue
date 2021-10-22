@@ -837,8 +837,7 @@ export default {
     fetchTabAmount() { 
       service.getFutureAllAmount()
         .then(res => {
-          if (!res.code) {
-            console.log(res)
+          if (!res.code) { 
             // active_amount: 1
             // active_orders_amount: 2133
             // active_triggers_amount: 1
