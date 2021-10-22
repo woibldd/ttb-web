@@ -833,9 +833,29 @@ export default {
       if (e.state === 1) {
         this.fetchData()
       }
+    },
+    fetchTabAmount() { 
+      service.getFutureAllAmount()
+        .then(res => {
+          if (!res.code) {
+            console.log(res)
+            // active_amount: 1
+            // active_orders_amount: 2133
+            // active_triggers_amount: 1
+            // holding_amount: 3
+            // orders_amount: 1430
+            const result = res.data
+            this.nav[0].dataCount = result.holding_amount
+            this.nav[2].dataCount = result.active_amount
+            this.nav[3].dataCount = result.active_triggers_amount
+            this.nav[4].dataCount = result.active_orders_amount 
+          }
+        })
     }
+    // service.getFutureAllAmount()
   },
   async created() { 
+    this.fetchTabAmount()
     this.subMarket()
     await actions.updateSession();
     if (this.state.userInfo) {
