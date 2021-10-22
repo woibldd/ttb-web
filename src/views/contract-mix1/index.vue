@@ -411,7 +411,6 @@
                     flex="main:justify box:mean">
                     <div style="color: #666;">{{ $tR(`mapFormContent.perfactPrice`) }}</div>
                   </div>
-                  <!-- 百分比输入的值 -->
                   <div v-else-if="i===1 && isProportion"
                     @click="isProportion=0"
                     class="isProportion">
@@ -471,7 +470,8 @@
                 <div class="mt-10 mr-20 txr">
                   {{`${$t('contract_total_werehouse_value')}:${ $big(activeAcountAndPriceArr.shippingSpace || 0).times(activeProduct.multiplier || 0)  || 0} ${activeProduct.currency}`}} 
                   <!-- {{activeAcountAndPriceArr}} --> 
-                </div>
+                </div> 
+                <!-- 百分比输入的值 -->
                 <div v-if="activeBtnsKey < 3" class="option-proportion" > 
                   <div class="ix-slider" > 
                     <ix-slider 
@@ -1292,8 +1292,7 @@ export default {
     })
   },
   methods: {  
-    handleLeverClose() { 
-      console.log(1)
+    handleLeverClose() {  
       if (this.$refs['popLeverageC']) { 
         this.$refs['popLeverageC'].doClose()
         this.$eh.$emit('lever-box-init')
@@ -1303,8 +1302,7 @@ export default {
         this.$eh.$emit('lever-box-init')
       }
     },
-    handleLeverInit() { 
-      console.log(2)
+    handleLeverInit() {  
       this.$eh.$emit('lever-box-init')
     },
     swithStyle() {
@@ -2844,6 +2842,7 @@ export default {
       }
       .option-proportion {
         padding: 0 10px;
+        overflow: hidden;
         .el-button-group {
           display: flex;
           .el-button {

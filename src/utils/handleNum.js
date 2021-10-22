@@ -76,8 +76,10 @@ export const toThousand = (num = 0) => {
  * @param {Array [amount,price]} holding
  */
 export const calcValueByAmountAndPrice = (amount, price, multiplier) => {
-  if (!amount || !+amount || !price || !+price) return 0
-  else return multiplier === '1' || !+multiplier ? Big(amount).div(price) : Big(multiplier).times(price).times(amount)
+  if (!amount || !+amount || !price || !+price) 
+    return 0
+  else 
+    return multiplier === '1' || !+multiplier ? Big(amount).div(price) : Big(multiplier).times(price).times(amount)
 }
 
 export const calcMixValueByAmountAndPrice = (amount, price, multiplier, rate) => {

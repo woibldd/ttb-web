@@ -120,7 +120,7 @@
               </ul>
             </div>
           </div> 
-          <div :class="['option-proportion', state.skin]"> 
+          <div v-if="+currentDealType < 3" :class="['option-proportion', state.skin]"> 
             <ix-slider 
               ref="sliderBuy"
               @input="onSliderDragEnd($event, 'buy')"

@@ -347,15 +347,16 @@
               </div> -->
               <div class="option-box-middle ">  
                 <div style="text-align:center;" class="mt-20">  
+                  <!-- 限价、市价、条件单 -->
                   <el-button-group style=' display: flex; margin: 0 10px;'>
                     <el-button style="flex:1;" :type="+activeBtnsKey===1 ? 'primary' : ''"
                                v-tooltip.bottom="{html: true, content: $tR(`mapFormContent.mapBtns.1.describe`), classes: 'contract'}"
-                               @click="activeBtnsKey=1">
+                               @click="handleActiveBtn(1)">
                       {{ $tR(`mapFormContent.mapBtns.1.text`)}}
                     </el-button>
                     <el-button style="flex:1;" :type="+activeBtnsKey===2 ? 'primary' : ''"
                                v-tooltip.bottom="{html: true, content: $tR(`mapFormContent.mapBtns.2.describe`), classes: 'contract'}"
-                               @click="activeBtnsKey=2">
+                               @click="handleActiveBtn(2)">
                       {{ $tR(`mapFormContent.mapBtns.2.text`)}}
                     </el-button>
                     <el-button style="flex:1.5;max-width:135px;"
@@ -373,7 +374,7 @@
                       width="200">
                     <ul>
                       <li v-for="(item, key) in mapFormContent.mapMenuOptions"
-                          @click="activeBtnsKey=key"
+                          @click="handleActiveBtn(key)"
                           :class="{active: activeBtnsKey===key}"
                           :key="key">
                         {{item}}
@@ -381,7 +382,8 @@
                     </ul>
                   </el-popover>
                 </div> 
-                <div class="option-input mt-12"
+                <!-- 价格数量 -->
+                <!-- <div class="option-input mt-12"
                      v-for="(value,key) in mapInput"
                      :key="key"
                      v-show="key !== 'triggerType'"
@@ -399,8 +401,72 @@
                     <span v-if="key==='shippingSpace'">{{ $t('contract_min_unit') }}</span>
                     <span v-else>USDT</span>
                   </template>
+                </div>  -->
+                <!-- 价格数量 -->
+                <div class="option-input  mt-15"
+                  v-for="(value,key,i) in mapInput"
+                  :key="key"
+                  v-show="key !== 'triggerType'"
+                  flex="main:justify">
+                  <label>{{ $tR(`mapFormContent.mapInput.${key}`) }}</label> 
+                  <div v-if="i===1 && isProportion"
+                    @click="isProportion=0"
+                    class="isProportion">
+                    <i v-if="+activeTypesKey===1">
+                      <span class="text-info">{{ activeAcountAndPriceArr[key] }}</span>
+                    </i>
+                    <i v-else>
+                      <span class="text-success">{{ buyAmount || 0 }}</span>/
+                      <span class="text-danger">{{ sellAmount || 0 }}</span>
+                    </i>
+                    <b>{{ $t('contract_min_unit') }}</b>
+                  </div>
+                  <template v-else> 
+                    <xnumberInput
+                      style="width: 75%;" 
+                      :skin="state.skin"
+                      :ref="'xnumber'+key"
+                      :disabled="key==='value' && (activeBtnsKey==2 || activeBtnsKey==4 || activeBtnsKey==6)" 
+                      :placeholder="(key==='value' && (activeBtnsKey==2 || activeBtnsKey==4 || activeBtnsKey==6)) ? $t('contract_order_enter_tips3'):''"
+                      v-model="activeAcountAndPriceArr[key]"> 
+                      <i slot="suffix" class="el-input__icon pr-10">{{ key==='shippingSpace' ? $t('contract_min_unit') : 'USD' }}</i>
+                      <el-select slot="append" 
+                        :popper-class="state.skin"
+                        v-if="key==='triggerPrice'" 
+                        v-model="trigger_type">
+                        <el-option
+                          v-for="(subValue,subKey) in mapFormContent.mapTriggerType"
+                          :key="subKey"
+                          :label="$tR(`mapFormContent.mapTriggerType.${subKey}`)"
+                          :value="+subKey" />
+                      </el-select> 
+                      <!-- <el-select  
+                        :popper-class="state.skin" 
+                        v-if="key==='value' && activeBtnsKey > 1" 
+                        @change="numberInput('', 'xnumber'+key)"
+                        slot="append"
+                        v-model="activeBtnsKey" placeholder="请选择">
+                        <el-option :label="$t('contract_deal_type_1')" value="3"></el-option>
+                        <el-option :label="$t('contract_deal_type_2')" value="4"></el-option>
+                      </el-select>  -->
+                    </xnumberInput> 
+                    <span   
+                      class="proportion"
+                      @click="isProportion=0"
+                      v-if="i===1"
+                      v-show="isProportion">
+                      <i v-if="+activeTypesKey===1">
+                        <span class="text-info">{{ activeAcountAndPriceArr[key] }}</span>
+                      </i>
+                      <i v-else>
+                        <!-- <span class="text-success">{{ $big(isProportion || 0).times(costObj.buyAmount || 0).round(0,0) }}</span>/
+                        <span class="text-danger">{{$big(isProportion || 0).times(costObj.sellAmount || 0).round(0,0)}}</span> -->
+                      </i>
+                    </span>
+                  </template>   
                 </div> 
-                <div class="option-proportion mt-20"> 
+                <!-- 百分百输入 -->
+                <div v-if="activeBtnsKey < 3"  class="option-proportion mt-20"> 
                   <ix-slider 
                     ref="sliderBuy"
                     @input="onSliderDragEnd($event, 'buy')"
@@ -500,17 +566,6 @@
                       </el-popover>
                     </el-col>
                   </el-row>
-                  <div v-for="(value,key) in mapFormContent.mapHandleBtn"
-                       :key="key">
-                    <!-- <p style="font-size:12px;color:#999">
-                      <b v-if="+activeTypesKey===1">
-                        {{ $tR(`mapFormContent.cost`) }}：<span>{{ !activeAcountAndPriceArr['shippingSpace']?'--':costObj[key] }}</span> {{ (activeBalance||{}).currency }}
-                      </b>
-                      <b v-else>
-                        可平仓数量：{{ costObj[`${key}Amount`] }} 张
-                      </b>
-                    </p> -->
-                  </div>
                   <div style="text-align:right;">
                     <span>{{$t('available_balance')}}</span>
                     <el-link style="font-size:12px"
@@ -694,12 +749,14 @@ import { local, state, actions } from '@/modules/store'
 import utils from '@/modules/utils'
 import wsNew from '@/modules/ws-new' 
 import api from '@/modules/api/unit'
+import xnumberInput from '@/components/XNumberInput.vue'  
 import ixSlider from '@/components/common/ix-slider/'
 // import { mapPeriod } from '@/const'
 export default {
   name: 'Contract',
   components: {
     // candlestick,
+    xnumberInput,
     selectBase,
     depthMap,
     // customTable,
@@ -719,7 +776,7 @@ export default {
       state,
       local,
       activeProduct: {},
-      activeBtnsKey: '1',
+      activeBtnsKey: '2',
       activePriceType: {},
       activeLever: '0',
       activeTableTabKey: 'shipping',
@@ -817,13 +874,15 @@ export default {
       //   7: 1 - (this.activeProduct.UNIT.current - getLiqPrice) / this.activeProduct.UNIT.current
       // }
       if (!this.activeProduct.UNIT || !this.costObj || !this.activeBalance || !this.activeProduct.MARKET) return {}
-      const price = this.activeAcountAndPriceArr['value'] || this.activeProduct.UNIT.current
+      const price = this.activeAcountAndPriceArr['value'] || this.activeProduct.UNIT.current || 0
+      const amount = this.activeAcountAndPriceArr['shippingSpace'] || 0
+      // if (price == 0 || amount == 0) return {}
       const liqPrice = this.getLiqPrice() || 0
       return {
-        value: calcValueByAmountAndPrice(this.activeAcountAndPriceArr['shippingSpace'], price),
+        value: calcValueByAmountAndPrice(amount, price),
         cost: this.costObj[this.side === 1 ? 'buy' : 'sell'],
         available: this.activeBalance.available_balance,
-        holding: +this.activeBalance.holding + (this.side === 2 ? -this.activeAcountAndPriceArr['shippingSpace'] : +this.activeAcountAndPriceArr['shippingSpace']),
+        holding: +this.activeBalance.holding + (this.side === 2 ? -amount : +amount),
         market: this.activeProduct.MARKET.current,
         liqPrice: liqPrice,
         difference: 1 - (this.activeProduct.UNIT.current - liqPrice) / this.activeProduct.UNIT.current,
@@ -1013,18 +1072,19 @@ export default {
       if (!this.activeBalance) return
       const obj = {}
       const price = this.activeAcountAndPriceArr['value'] || this.activeProduct.UNIT.current
-      // const activeLever = !+this.activeLever ? 100 : +this.activeLever
+      const amount =  this.activeAcountAndPriceArr["shippingSpace"] || 0
+      const activeLever = !+this.activeLever ? 100 : +this.activeLever
       if (+this.activeBalance.holding < 0) {
         let buyAmount
-        buyAmount = this.activeAcountAndPriceArr["shippingSpace"] - Math.abs(+this.activeBalance.holding)
+        buyAmount =amount - Math.abs(+this.activeBalance.holding)
         buyAmount = buyAmount <= 0 ? 0 : buyAmount
         obj.buy = getCost({ ...this.activeProduct, amount: buyAmount, price }, this.activeLever)
-        obj.sell = getCost({ ...this.activeProduct, amount: this.activeAcountAndPriceArr["shippingSpace"], price }, this.activeLever)
+        obj.sell = getCost({ ...this.activeProduct, amount: amount, price }, this.activeLever)
       } else {
         let sellAmount
-        sellAmount = this.activeAcountAndPriceArr["shippingSpace"] - +this.activeBalance.holding
+        sellAmount = amount - +this.activeBalance.holding
         sellAmount = sellAmount <= 0 ? 0 : sellAmount
-        obj.buy = getCost({ ...this.activeProduct, amount: this.activeAcountAndPriceArr["shippingSpace"], price }, this.activeLever)
+        obj.buy = getCost({ ...this.activeProduct, amount: amount, price }, this.activeLever)
         obj.sell = getCost({ ...this.activeProduct, amount: sellAmount, price }, this.activeLever)
       }
       return obj
@@ -1140,8 +1200,8 @@ export default {
     this.handleAmountObj()
 
     this.$eventBus.$on('protrade:exchange:set', (params) => {
-      this.activeAcountAndPriceArr['value'] = params.amount || this.activeAcountAndPriceArr['value']
-      this.activeAcountAndPriceArr['shippingSpace'] = params.price || this.activeAcountAndPriceArr['shippingSpace']
+      this.activeAcountAndPriceArr['shippingSpace'] = params.amount || this.activeAcountAndPriceArr['shippingSpace']
+      this.activeAcountAndPriceArr['value'] = params.price || this.activeAcountAndPriceArr['value']
     })
   },
   mounted() { 
@@ -1152,6 +1212,14 @@ export default {
     }
   },
   methods: {  
+    handleActiveBtn(key) {
+      if (key == 2 || key == 4 || key == 6) {
+        this.activeAcountAndPriceArr['value'] = undefined
+      } else {
+        this.activeAcountAndPriceArr['value'] = (this.activeProduct.UNIT||{}).current || 0
+      }
+      this.activeBtnsKey = key
+    },
     handleLeverClose() {  
       if (this.$refs['popLeverageC']) { 
         this.$refs['popLeverageC'].doClose()
@@ -1195,10 +1263,10 @@ export default {
     },
     handleProportion (num) {
       let amount = 0
-      let quantity = 0
+      let quantity = 0 
       amount = this.$big((this.activeBalance || {}).available_balance).
         div(this.$big(1).div(+this.activeLever === 0 ? this.activeCurrency.max_leverage : this.activeLever).times(this.$big(1).plus(this.activeProduct.im)).plus(this.$big(this.activeProduct.take_rate).times(2)))
-      quantity = amount.div(this.$big(this.activeProduct.multiplier).times(this.activeAcountAndPriceArr['value'] || this.activeProduct.UNIT.current)).times(num).round(0, 0)
+      quantity = amount.div(this.$big(this.activeProduct.multiplier).div(this.activeAcountAndPriceArr['value'] || this.activeProduct.UNIT.current)).times(num).round(0, 0)
       this.activeAcountAndPriceArr['shippingSpace'] = quantity
     },
     async subMarket () {
@@ -1267,7 +1335,8 @@ export default {
       }
     },
     totalValue () { 
-      if (!this.activeAcountAndPriceArr['value'] || !this.balanceList) return
+      const current = this.activeAcountAndPriceArr['value'] || this.activeProduct.UNIT.current
+      if (!current || !this.balanceList) return
       // return getUnitTotalValue(this.entrustList,
       return getUnitTotalValue(this.balanceList,
         {
@@ -1275,13 +1344,15 @@ export default {
           price: this.activeAcountAndPriceArr['value'] || this.activeProduct.UNIT.current        },
         this.activeProduct.multiplier)
     }, 
-    getLiqPrice () {
-      if (!this.activeAcountAndPriceArr['value']) return
+    getLiqPrice () { 
+      const amount = this.activeAcountAndPriceArr['shippingSpace'] 
+      const current =  this.activeAcountAndPriceArr['value'] || this.activeProduct.UNIT.current
+      if (!amount || !current) return
       const price = getUnitLiqPrice({
         isBuy: this.side === 1,
         leverages: this.activeLever,
         amount: this.activeAcountAndPriceArr['shippingSpace'],
-        price: this.activeAcountAndPriceArr['value'] || this.activeProduct.UNIT.current,
+        price: current,
         available_balance: this.activeBalance.available_balance,
         totalValue: this.totalValue(),
         totalAmount: this.activeBalance.holding
@@ -1327,13 +1398,17 @@ export default {
     },
     handleDisabledBtn (side) {
       if (+this.activeBtnsKey > 2) {
+      const hasValue = this.activeAcountAndPriceArr['value'] && this.activeAcountAndPriceArr['triggerPrice']
         const comparisonValue = (this.activeProduct[this.productType[this.trigger_type]] || {}).current
-        const hasValue = this.activeAcountAndPriceArr['value'] && this.activeAcountAndPriceArr['triggerPrice']
         const type = !['3', '4'].includes(this.activePriceType.key) ? 'sell' : 'buy'
         const isSell = side === type ? +this.activeAcountAndPriceArr['triggerPrice'] > comparisonValue : +this.activeAcountAndPriceArr['triggerPrice'] < +comparisonValue
         const res = hasValue && isSell
         return !res
-      } else return !this.activeAcountAndPriceArr['value']
+      } 
+      else if (+this.activeBtnsKey == 2 && this.activeAcountAndPriceArr['shippingSpace']) 
+        return true
+      else if ( this.activeAcountAndPriceArr['value'] && this.activeAcountAndPriceArr['shippingSpace'])
+        return true
     },
     handleLever (leverage) {
       if (leverage === 'cross') {
@@ -1436,12 +1511,15 @@ export default {
         }
       })
     },
-    handleTickers (data) { 
-      if (!this.products) return
+    handleTickers (data) {  
+      if (!this.products) return 
       data.map(market => { 
         const pairArr = market.pair.split('_') 
         if (pairArr && pairArr.length) {
-          const found = this.products.find(item => item.symbol === market.pair || item.name === pairArr[1])
+          // const found = this.products.find(item => item.symbol === market.pair || item.name === pairArr[1])
+          const found = this.products.find(item => item.symbol === market.pair 
+                                                || item.symbol.replace('UNIT', 'MARKET') === market.pair
+                                                || item.symbol.replace('UNIT', 'INDEX') === market.pair)
           if (found) {
             this.$set(found, pairArr[0], market)
             if (found.symbol === state.unit.pair) {
@@ -1911,8 +1989,11 @@ export default {
                 /deep/ .el-input {
                   .el-input__inner {
                     background-color: transparent;
+                    border-color: none;
+                    color: #fff;
                   }
                   .el-input-group__append {
+                    overflow: hidden;
                     background-color: transparent;
                     border-color: #A6A6A6;
                     .el-select {
@@ -2460,6 +2541,7 @@ export default {
       }
       .option-proportion {
         padding: 10px;
+        overflow: hidden;
         .el-button-group {
           display: flex;
           justify-content: center;

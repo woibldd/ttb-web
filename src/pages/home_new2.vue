@@ -380,17 +380,17 @@
               </a> 
             </div>
             <div class="guide-item mr-30">
-              <router-link to="/knowledgeBase/details2?id=9923">
+              <a href="#">
                 <img :src="require('../assets/home/guide-1.png')" alt="">
                 <div class="pd-20">{{lang.guide.item2}}
                 </div>
-              </router-link> 
+              </a> 
             </div>
             <div class="guide-item">
-              <router-link to="/knowledgeBase/details2?id=9964">
+              <a href="#">
                 <img :src="require('../assets/home/guide-2.png')" alt="">
                 <div class="pd-20">{{lang.guide.item3}}</div> 
-              </router-link> 
+              </a> 
             </div>
           </div> 
         </div>
