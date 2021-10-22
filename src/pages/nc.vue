@@ -70,7 +70,7 @@ export default {
     @extend .common;
     background: #474747; overflow: hidden;
     .btn_slide, .btn_ok{
-      top: -1px; width: 50px; height: 50px; border-radius: 50%; text-indent: -9000px;
+      top: -1px; width: 50px; height: 50px!important; border-radius: 50%; text-indent: -9000px;
       background-repeat: no-repeat!important;
       background-position: center center!important;
       background-size: 30px!important;
