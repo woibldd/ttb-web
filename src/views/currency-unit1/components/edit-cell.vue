@@ -2,12 +2,12 @@
   <div>
     <span v-if="state=='show'">
       <!-- <span :class="{'font-color-buy' : side==1, 'font-color-sell' : side==2}">{{ value | fixed(scale) }} </span> -->
-      <!-- <icon style="font-size: 14px;" name="edit" @click="editPrice('edit')"/>  -->
       <slot />
-      <span
+      <icon style="font-size: 14px;" name="edit" @click="editPrice('edit')"/> 
+      <!-- <span
         class="icon edit"
         name="edit"
-        @click="editPrice('edit')"/>
+        @click="editPrice('edit')"/> -->
     </span>
     <span
       v-if="state=='edit'"
