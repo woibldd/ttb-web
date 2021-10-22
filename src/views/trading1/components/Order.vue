@@ -224,7 +224,7 @@
                 </span>
               </td>
               <td>{{ order.price }} </td>
-              <td> {{ getType(order.type) }}</td>
+              <td> {{ getType('STOP') }}</td>
               <td> {{ $t('trading_page.stop_order.untriggerl') }}</td>
               <td>{{ order.create_time | date }}</td>
               <td class="center">

@@ -4,7 +4,10 @@
       <!-- <span :class="{'font-color-buy' : side==1, 'font-color-sell' : side==2}">{{ value | fixed(scale) }} </span> -->
       <!-- <icon style="font-size: 14px;" name="edit" @click="editPrice('edit')"/>  -->
       <slot />
-       <icon style="font-size: 14px;" name="edit" @click="editPrice('edit')"/> 
+      <span @click="editPrice('edit')">
+        <icon style="font-size: 14px;" name="edit"/> 
+      </span>
+       
       <!-- <span
         class="icon edit"
         name="edit"
