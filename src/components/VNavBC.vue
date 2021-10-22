@@ -3,24 +3,20 @@
     :class="[myClass, {top: scrollTop===0}]"
     class="bc_nav_box"> 
     <div class="ind_cen"> 
-      <!-- <router-link 
+      <router-link 
         v-if="(myClass || '').indexOf('dark') > -1"
         :to="{name:'home'}" 
-        :style="{backgroundImage: `url(${require('../assets/site/' + state.siteName + '/logo.png')})`}"
-        class="nav_logo"/>  
-      <router-link 
-        v-else-if="(myClass || '').indexOf('login') > -1"
-        :to="{name:'home'}" 
-        :style="{backgroundImage: `url(${require('../assets/site/' + state.siteName + '/logo.png')})`}"
-        class="nav_logo top"/>  
-      <router-link 
+        :style="{backgroundImage: `url(${require('../assets/ixx/ixx_logo.png')})`}"
+        class="nav_logo"/>   
+      <!-- <router-link 
         v-else
         :to="{name:'home'}" 
         :style="{backgroundImage: `url(${require('../assets/site/' + state.siteName + '/logo'+ (scrollTop===0 ? '-light' : '-dark') +'.png')})`}"
         class="nav_logo"/>  -->
       <router-link  
+        v-else
         :to="{name:'home'}" 
-        :style="{backgroundImage:`url(${require('../assets/ixx/ixx_logo'+ (scrollTop===0 ? '' : '-dark') +'.png')})`}" 
+        :style="{backgroundImage:`url(${require('../assets/ixx/ixx_logo'+ (scrollTop===0 ? '-light' : '-dark') +'.png')})`}" 
         class="nav_logo"/>
       <div class="nav_left"> 
         <div  class="left_options" flex="main:left">   
