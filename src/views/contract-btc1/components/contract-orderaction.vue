@@ -1409,11 +1409,12 @@ export default {
       }
     },
     handleProportion (num) {
+      console.log('handleProportion')
       let amount = 0
       let quantity = 0
       amount = this.$big((this.currentHolding || {}).available_balance).
-        div(this.$big(1).div(+this.activeLever === 0 ? this.pairInfo.max_leverage : this.activeLever).times(this.$big(1).plus(this.pairInfo.im)).plus(this.$big(this.pairInfo.take_rate).times(2)))
-      quantity = amount.div(this.$big(this.pairInfo.multiplier).times(this.price || this.lastPrice)).times(num).round(0, 0)
+        div(this.$big(1).div(+(this.currentHolding || {}).leverage === 0 ? this.pairInfo.max_leverage : (this.currentHolding || {}).leverage).times(this.$big(1).plus(this.pairInfo.im)).plus(this.$big(this.pairInfo.take_rate).times(2)))
+      quantity = amount.div(this.$big(1).div(this.price || this.lastPrice)).times(num).round(0, 0)
       this.amount = quantity 
     }, 
     tologin () {
