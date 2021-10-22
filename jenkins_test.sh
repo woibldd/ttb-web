@@ -3,6 +3,8 @@
 
 # cnpm i happypack
 
+cnpm i vue-verification-code-input -S
+
 sleep 2
 
 npm run build

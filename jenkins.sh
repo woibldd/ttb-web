@@ -2,6 +2,10 @@
 echo "\nixx.com building...\n"
  
 
+cnpm i vue-verification-code-input -S
+
+sleep 2
+
 npm run build
 
 sleep 2
