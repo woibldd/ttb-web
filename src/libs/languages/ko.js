@@ -2367,8 +2367,8 @@ export default {
         difference: "예상가격차이",
         stop_win: "리익정지%{unit}",
         stop_loss: "손익정지%{unit}",
-        stop_win_tips: "%{triggerType} %{triggerSide} 부터%{triggerPrice} 시세 리익단예상 리윤 발생： %{realized} BTC",
-        stop_loss_tips: "%{triggerType} %{triggerSide} 부터%{triggerPrice} 시세 수익단예상 손해발생： %{realized} BTC"
+        stop_win_tips: "%{triggerType} %{triggerSide} 부터%{triggerPrice} 시세 리익단예상 리윤 발생： %{realized} ${currency}",
+        stop_loss_tips: "%{triggerType} %{triggerSide} 부터%{triggerPrice} 시세 수익단예상 손해발생： %{realized} ${currency}"
      }
     },
     orderbook: {
@@ -2796,6 +2796,10 @@ export default {
           liq_price: {
             label: '강평 가격',
             tips: '<a>강평 가격</a><br/>만약이 계약의 표지 가격이이 가격 (다 창고)보다 낮 거나,다 창고 형 (빈 창고)보다 높으면 강제로 평창이 된다。'
+          },
+          lp_tp: {
+            label: '이윤 을 멈추다/손실 을 멈추다',
+            tips: ''
           },
           value: {
             label: '가치',

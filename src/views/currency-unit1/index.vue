@@ -936,7 +936,7 @@ export default {
       return this.activeProduct.name === 'FUTURE_BTCUSD' ? bigDiv(arr) : bigTimes([...arr, this.activeProduct.multiplier], 2)
     },
     asks () {
-      const arr = [...(this.delegateData.asks || [])]
+      const arr = [...((this.delegateData || {}).asks || [])]
       let max = 0
       arr.forEach((item, index, arr) => {
         max = Math.max(item.values[1], max)
@@ -945,7 +945,7 @@ export default {
       return { arr: arr.reverse(), max, first: (arr[0] || {}).values, last: (arr[arr.length - 1] || {}).values }
     },
     bids () {
-      const arr = [...this.delegateData.bids || []]
+      const arr = [...(this.delegateData || {}).bids || []]
       let max = 0
       arr.forEach((item, index, arr) => {
         max = Math.max(item.values[1], max)

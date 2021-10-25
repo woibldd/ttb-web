@@ -848,6 +848,7 @@ export default {
             this.nav[2].dataCount = result.active_amount
             this.nav[3].dataCount = result.active_triggers_amount
             this.nav[4].dataCount = result.active_orders_amount 
+            this.nav[5].dataCount = result.orders_amount
           }
         })
     }

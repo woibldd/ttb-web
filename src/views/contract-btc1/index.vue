@@ -520,34 +520,34 @@ export default {
       }
     })
 
-    let newOrder = {}
-    const $this = this
-    setInterval(function() { 
-      service.getOrderfills({ page: 1, size: 10, symbol: $this.state.ct.pair }).then(res => {
-        if (!res.code) { 
-          if (JSON.stringify(newOrder) === '{}') {
-            newOrder = res.data.data
-            return false
-          } 
-          const newOrderList = []
-          const oneListObj = newOrder[0]
-          if (JSON.stringify(newOrder) !== JSON.stringify(res.data.data)) {
-            for (var i in res.data.data) {
-              if (JSON.stringify(res.data.data[i]) === JSON.stringify(oneListObj)) {
-                break
-              }
-              newOrderList.push(res.data.data[i])
-            } 
-            $this.toast(newOrderList)
-            newOrder = res.data.data
-            $this.$eh.$emit('protrade:order:refresh', 1)
-          }
+    // let newOrder = {}
+    // const $this = this
+    // setInterval(function() { 
+    //   service.getOrderfills({ page: 1, size: 10, symbol: $this.state.ct.pair }).then(res => {
+    //     if (!res.code) { 
+    //       if (JSON.stringify(newOrder) === '{}') {
+    //         newOrder = res.data.data
+    //         return false
+    //       } 
+    //       const newOrderList = []
+    //       const oneListObj = newOrder[0]
+    //       if (JSON.stringify(newOrder) !== JSON.stringify(res.data.data)) {
+    //         for (var i in res.data.data) {
+    //           if (JSON.stringify(res.data.data[i]) === JSON.stringify(oneListObj)) {
+    //             break
+    //           }
+    //           newOrderList.push(res.data.data[i])
+    //         } 
+    //         $this.toast(newOrderList)
+    //         newOrder = res.data.data
+    //         $this.$eh.$emit('protrade:order:refresh', 1)
+    //       }
 
-          // 刷新已成交表头的数量
-          $this.$eh.$emit('setOrderfill:count', res.data.total)
-        }
-      })
-    }, 5000)
+    //       // 刷新已成交表头的数量
+    //       $this.$eh.$emit('setOrderfill:count', res.data.total)
+    //     }
+    //   })
+    // }, 5000)
 
     await actions.updateSession()
     document.querySelector('.page-loading').classList.add('show')

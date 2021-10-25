@@ -49,7 +49,8 @@
             triggerType: $t(triggerTypes[stopWinType]),
             triggerSide: side === 1 ? $t("contract_page.rise"): $t("contract_page.fall"),
             triggerPrice: stopWinPrice,
-            realized: $big(stopWinRealized).round(8,0).toFixed(8)
+            realized: $big(stopWinRealized).round(8,0).toFixed(8),
+            currency: 'BTC'
             })}}
           </p>
         </div>

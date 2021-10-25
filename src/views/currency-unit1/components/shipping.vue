@@ -98,18 +98,18 @@
                   <span class="text-success">{{ !+item.tp_price?'--':item.tp_price }}</span>  / <span class="text-danger">{{ !+item.sl_price?'--':item.sl_price }}</span>
                   <el-popover
                     placement="top"
-                    popper-class="custom-popper"
+                    :popper-class="['custom-popper',, state.skin ]"
                     width="400"
                     trigger="click"
                     :ref="'popover-' + item.currency">
-                    <div>
+                    <div :class="['tlp-wrap']">
                       <div
                         v-for="(formItem,index) in formArrData"
                         :key="index"
                         class="popover-body">
                         <el-checkbox
                           class="text-light"
-                          v-model="formItem.type">{{ $t(`shipping.${!index?'winLimit':'lossLimit'}`) }} USD</el-checkbox>
+                          v-model="formItem.type">{{ $t(formItem.option ,{unit: "USD"}) }}</el-checkbox>
                         <div flex="main:justify">
                           <label class="text-light">{{ $t('contract.mapFormContent.mapInput.triggerType') }}</label>
                           <el-select
@@ -122,7 +122,7 @@
                               v-for="(subValue,subKey) in mapFormContent.mapTriggerType"
                               :key="subKey"
                               :label="subValue"
-                              :value="+subKey" />
+                              :value="+subKey"/>
                           </el-select>
                         </div>
                         <div flex="main:justify">
@@ -134,14 +134,17 @@
                             @input="handleInput($event,formItem,item.holding, item.price)"
                           >
                           <span>USD</span>
-                        </div>
-                        <div
-                          class="border-active text-active"
-                          style="padding:0 10px">
-                          <i class="text-success">{{ mapFormContent.mapTriggerType[formItem.trigger_type] }}</i>
-                          <i class="text-success">{{ $t(`${(item.buy && !index)?'up':'down'}`) }}</i> 至
-                          <i class="text-success">{{ formItem.trigger_price||'--' }}</i> 将触发 市价<i class="text-success">{{ (item.buy && !index)?'止盈':'止损' }}</i>单 预计 <i class="text-success">{{ (item.buy && !index)?'盈利':'亏损' }}</i>：
-                        <i class="text-success">{{ formItem.calcProfit||'--' }}</i> {{ item.currency }}</div>
+                        </div> 
+                        <p> 
+                            {{$t(formItem.tips, {
+                              triggerType: mapFormContent.mapTriggerType[formItem.trigger_type],
+                              triggerSide: ((item.buy && !index) || (!item.buy && !!index))  ? $t("contract_page.rise"): $t("contract_page.fall") ,
+                              triggerPrice: formItem.trigger_price||'--',
+                              realized: formItem.calcProfit||'--',
+                              currency: item.currency
+                              })
+                            }} 
+                        </p>
                       </div>
                       <el-button
                         type="primary"
@@ -282,8 +285,7 @@
             </p>
           </div>
         </div> -->
-      </div>
-
+      </div> 
     </div>
     <span
       v-if="data && data.length === 0"
@@ -340,6 +342,8 @@ export default {
       margin_popover: false,
       formArrData: [
         {
+          option: 'contract_page.order_action.modal.stop_win',
+          tips: 'contract_page.order_action.modal.stop_win_tips', 
           type: false,
           trigger_type: 1,
           trigger_price: '',
@@ -347,6 +351,8 @@ export default {
           calcProfit: ''
         },
         {
+          option: 'contract_page.order_action.modal.stop_loss',
+          tips: 'contract_page.order_action.modal.stop_loss_tips', 
           type: false,
           trigger_type: 1,
           trigger_price: '',
@@ -663,32 +669,49 @@ export default {
     }
 
   }
-  .popover-body>*{
-    margin-top: 12px;
-    line-height: 32px;
-    &>input,&>.transactionPrice{
-      background: transparent;
-      border: 1px solid #333;
-      text-align: center;
-      color: #ddd;
-      box-sizing: border-box;
-      width: 70%;
-      font-size: 12px;
-    }
-    &>input{
-      text-align: right;
-      padding-right: 45px;
-      &:disabled{
-        color: #333;
-        cursor: not-allowed
+  .custom-popper {
+    .popover-body>*{
+      margin-top: 12px;
+      line-height: 32px;
+      &>input,&>.transactionPrice{
+        background: transparent;
+        // border: 1px solid #333;
+        // text-align: center;
+        // color: #ddd;
+        box-sizing: border-box;
+        width: 70%;
+        font-size: 12px;
+      }
+      &>input{
+        text-align: left;
+        // padding-right: 45px;
+        &:disabled{
+          // color: #333;
+          cursor: not-allowed
+        }
+      }
+      &>span{
+        position:absolute;
+        right:14px;
+        color:#999;
+        border-left: 1px solid #333;
+        padding-left: 4px;
       }
     }
-    &>span{
-      position:absolute;
-      right:14px;
-      color:#999;
-      border-left: 1px solid #333;
-      padding-left: 4px;
+    &.dark {
+      background-color: #29292f;
+      color: #ddd;
+      .popover-body>* {
+        &>span, label, p {
+          color: #ccc; 
+        }
+        &>input {
+          border-radius: 5px;
+          border-width: 1px;
+          color: #ccc;
+        }
+      }
     }
+
   }
 </style>

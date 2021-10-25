@@ -2490,8 +2490,8 @@ export default {
         difference: "Mark Price/Est. Liquidation Difference",
         stop_win: "Take Profit %{unit}",
         stop_loss: "Stop Loss %{unit}",
-        stop_win_tips: "%{triggerType} %{triggerSide} to %{triggerPrice} will trigger Market take profit order Estimated profit: %{realized} BTC",
-        stop_loss_tips: "%{triggerType} %{triggerSide} to %{triggerPrice} will trigger Market stop loss order Estimate Loss: %{realized} BTC"
+        stop_win_tips: "%{triggerType} %{triggerSide} to %{triggerPrice} will trigger Market take profit order Estimated profit: %{realized} ${currency}",
+        stop_loss_tips: "%{triggerType} %{triggerSide} to %{triggerPrice} will trigger Market stop loss order Estimate Loss: %{realized} ${currency}"
       }
     },
     orderbook: {
@@ -2936,6 +2936,10 @@ export default {
           liq_price: {
             label: 'Forced Liq Price',
             tips: '<a>Forced Liq Price</a><br/>if the price of the position is lower than the existing price (multiple positions) or higher than the existing price (empty position), you will be forced to close the position。'
+          },
+          lp_tp: {
+            label: 'TP/SL',
+            tips: ''
           },
           value: {
             label: 'Value',

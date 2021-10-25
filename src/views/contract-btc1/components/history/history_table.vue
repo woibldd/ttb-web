@@ -342,19 +342,7 @@
     <div
       class="mask"
       v-if="!isLogin"
-      :class="[{show: state.userStatus === 0}, state.skin]">
-      <!-- <div class="mask-front">
-        <div class="hint">{{ $t('operate_noauth') }}</div>
-        <div class="link-group"> 
-          <span
-            class="link btn ibt signin bgcolor-up"
-            @click="tologin"
-          >{{ $t('signin') }}</span>
-          <router-link
-            class="link btn ibt signup bgcolor-down"
-            :to="{name: 'register'}"><span>{{ $t('signup') }}</span></router-link>
-        </div>
-      </div> -->
+      :class="[{show: state.userStatus === 0}, state.skin]"> 
     </div>
     <div
       class="mask show loadfailed"

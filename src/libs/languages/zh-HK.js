@@ -2315,8 +2315,8 @@ export default {
         difference: "標記價格/預期強平價格 差異",
         stop_win: "止盈%{unit}",
         stop_loss: "止损%{unit}",
-        stop_win_tips: "%{triggerType} %{triggerSide} 至 %{triggerPrice} 将触发 市价止盈单 预计 盈利： %{realized} BTC",
-        stop_loss_tips: "%{triggerType} %{triggerSide} 至 %{triggerPrice} 将触发 市价止损单 预计 亏损： %{realized} BTC"
+        stop_win_tips: "%{triggerType} %{triggerSide} 至 %{triggerPrice} 将触发 市价止盈单 预计 盈利： %{realized} ${currency}",
+        stop_loss_tips: "%{triggerType} %{triggerSide} 至 %{triggerPrice} 将触发 市价止损单 预计 亏损： %{realized} ${currency}"
       }
     },
     orderbook: {
@@ -2755,6 +2755,10 @@ export default {
           liq_price: {
             label: '強平價格',
             tips: '<a>強平價格</a><br/>如果该合约的标记价格低于该价格（多仓）或高于该价格（空仓），你将会被强制平仓。'
+          },
+          lp_tp: {
+            label: '止盈/止損',
+            tips: ''
           },
           value: {
             label: '價值',
