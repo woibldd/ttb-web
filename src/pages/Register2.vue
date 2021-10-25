@@ -423,7 +423,8 @@ export default {
         region: this.selectRegion.id,
         phone: this.form.phone,
         email: this.form.email,
-        lang: state.locale
+        lang: state.locale,
+        ...this.ncData
       })
       if (res.code) {
         utils.alert(res.message)

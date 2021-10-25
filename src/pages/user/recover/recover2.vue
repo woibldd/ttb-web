@@ -416,7 +416,8 @@ export default {
         region: this.regionId,
         email: this.email,
         phone: this.phone,
-        lang: state.locale
+        lang: state.locale,
+        ...this.ncData
       })
       if (res.code) {
         this.errmsg = res.message

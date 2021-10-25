@@ -294,7 +294,7 @@ export default {
             params.phone = this.form.phone
             params.region = this.selectRegion.id
           }
-          const res = await service.login(params)
+          const res = await service.login({params, ...this.ncData})
           if (res.code) {
             this.loading = false
             utils.alert(res.message)
