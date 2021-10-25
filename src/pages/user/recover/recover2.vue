@@ -84,7 +84,7 @@
             </div>
           </div>
           <div class="nc-box" style="width: 280px; margin: 26px auto 0;">
-            <div class="mask" v-if="ncmask"></div>
+            <div class="mask" v-if="!(phone || email)"></div>
             <div id="nc"></div>
           </div>
           <div
@@ -421,6 +421,7 @@ export default {
       })
       if (res.code) {
         this.errmsg = res.message
+        this.ncreset(); // 重置滑动验证模块
       } else {
         this.errmsg = ''
       }

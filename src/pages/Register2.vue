@@ -430,6 +430,7 @@ export default {
         this.sms.countDown = 0
         this.sms.status = 2
         // this.errmsg = res.message
+        this.ncreset(); // 重置滑动验证模块
       } else {
         this.errmsg = '' 
         this.step = 2

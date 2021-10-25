@@ -298,6 +298,7 @@ export default {
           if (res.code) {
             this.loading = false
             utils.alert(res.message)
+            this.ncreset(); // 重置滑动验证模块
             return false
           }  
           console.log('login')
