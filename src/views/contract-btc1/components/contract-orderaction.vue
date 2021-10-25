@@ -1623,7 +1623,7 @@ export default {
       //yzf 2019/3/7
       // type: 3 限价止损 4 市价止损 5 限价止赢 6 市价止盈
       //止盈止损操作，当系统会自动产生委托时，弹出确认提示
-      const type = this._getOrderType();
+      const type = +this._getOrderType();
       let showWarn = false;
       let lprice = {
         1: this.lastPrice * 1, //盘口价格
@@ -1816,15 +1816,16 @@ export default {
 
       $value = this.$big($value);
       if ($value.gt(this.balance.available_balance)) {
-        if (true) {
-          return this.$toast({
-            title: this.$t("order_apply_failed"),
-            body: this.$t("order_apply_message_a"),
-            color: "red"
-          });
-        } else {
-          return utils.alert(this.$i18n.t("amount_over")); //余额不足
-        }
+        // if (true) {
+        //   return this.$message({
+        //     title: this.$t("order_apply_failed"),
+        //     body: this.$t("order_apply_message_a"),
+        //     color: "red"
+        //   }); 
+        // } else {
+        //   return utils.alert(this.$i18n.t("amount_over")); //余额不足
+        // }
+        return utils.alert(this.$i18n.t("order_apply_message_a")); //余额不足
       }
       if ($amount.lt(this.pairInfo.min_amount)) {
         return utils.alert(
@@ -1846,22 +1847,7 @@ export default {
             num: this.pairInfo.max_total + " " + this.pairInfo.product_name
           })
         );
-      }
-      // if (side === "BUY" && $ask.gt(0) && $price.div(1.3).gt($ask)) {
-      //   if (true) {
-      //     let toastText = {
-      //       title: this.$t("order_apply_failed"),
-      //       body: this.$t("order_apply_message_b"),
-      //       color: "red"
-      //     };
-      //     this.$toast(toastText);
-      //   } else {
-      //     return utils.alert(this.$i18n.t("price_high", { per: 30 }));
-      //   }
-      // }
-      // if (side === "SELL" && $bid.gt(0) && $price.div(0.7).lt($bid)) {
-      //   return utils.alert(this.$i18n.t("price_low", { per: 30 }));
-      // }
+      } 
       if (side === "BUY" && $ask.gt(0) && $price.div(1.05).gt($ask)) {
         const ok = await utils.confirm(this, {
           trade: true,
@@ -2028,17 +2014,17 @@ export default {
       } else if (type === 2 || type === 1) {
         [this.buyEnabled, this.sellEnabled] = [true, true];
       } else {
-        const orderType = this._getOrderType();
-
+        const orderType = this._getOrderType(); 
         let lprice = {
           1: this.lastPrice * 1, //盘口价格
           2: this.markPrice * 1, //标记价格
           3: this.indexPrice * 1 //指数价格
         }[this.currentTriggerType];
 
+        console.log("orderType", orderType)
         const tprice = this.trigger_price;
         //限价止损  市价止损
-        if (orderType === 3 || orderType === 4) {
+        if (+orderType === 3 || +orderType === 4) {
           //当盘口价格等于触发价格，不可买入或者卖出
           if (tprice == lprice) {
             [this.buyEnabled, this.sellEnabled] = [false, false];
@@ -2053,7 +2039,7 @@ export default {
           }
         }
         //限价止盈  市价止盈
-        else if (orderType === 5 || orderType === 6) {
+        else if (+orderType === 5 || +orderType === 6) {
           //当盘口价格等于触发价格，不可买入或者卖出
           if (tprice == lprice) {
             [this.buyEnabled, this.sellEnabled] = [false, false];
@@ -2362,6 +2348,7 @@ export default {
       }
     },
     amount (v) {
+      console.log(' amount (v)', this.currentDealType)
       this.setButtonState(this.currentDealType);
       if (v > 99999999) {
         this.amount = 99999999;
