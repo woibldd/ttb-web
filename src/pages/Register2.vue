@@ -273,21 +273,20 @@ export default {
             return !(captcha && captcha.length === 6)
           }, trigger: 'blur'
         }],
-        invitor: [ 
-          // {  required: true, trigger: 'blur', message: this.$t('invitor_re'), },
-          { 
-            validator: (rule, invitorId, callback) => {  
-              // return !invitorId
-              if (!invitorId) {
-                callback(new Error(this.$t('invitor')));
-              }
-              else {
-                callback();
-              } 
-            }, 
-            trigger: 'blur'
-          }
-        ],
+        // invitor: [  
+        //   { 
+        //     validator: (rule, invitorId, callback) => {  
+        //       // return !invitorId
+        //       if (!invitorId) {
+        //         callback(new Error(this.$t('invitor')));
+        //       }
+        //       else {
+        //         callback();
+        //       } 
+        //     }, 
+        //     trigger: 'blur'
+        //   }
+        // ],
         agree: [{
           trigger: 'blur',
           validator: (rule, value, callback) => {
