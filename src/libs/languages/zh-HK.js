@@ -1326,7 +1326,7 @@ export default {
   contract_amount_value: "數額",
   contract_symbol_detail: "合約明細",
   contract_trade_index_base: "1.基礎貨幣是%{currency}。",
-  contract_trade_index_value: "2.計價貨幣是USD。",
+  contract_trade_index_value: "2.計價貨幣是%{currency}。",
   contract_how_price: "合約是如何報價的？",
   contract_how_price_tip_a: "<span style=\"color:#22ced0\"> %{symbol} </span>是根據<span style=\"color:#22ced0\"> %{coin} </span>指數定價的%{symbol}合約。每張合約價值%{value} 的比特幣。",
   contract_how_price_tip_b: "每 8 小時 支付或收取資金費用。下一個支付將發生在 %{next_pay_time}。",

@@ -8,7 +8,7 @@
         <p class="mb-15 c-primary f26">{{ symbol }}</p>
         <p class="flex-avg">
           <span>{{ $t('contract_trade_index_base',{currency: pair.replace('MIX_', '')} ) }}</span>
-          <span>{{ $t('contract_trade_index_value') }}</span>
+          <span>{{ $t('contract_trade_index_value', {currency: 'USDT'}) }}</span>
         </p>
       </div>
       <div class="sub-title mb-30">
@@ -27,7 +27,8 @@
             feerate: ($big(feeRate).round(4, 0)),
             next_pay_time:nextPayTime,
             receive: $big(feeRate).lt(0) ? $t('pay') : $t('receive'),
-            pay: $big(feeRate).lt(0) ? $t('receive') : $t('pay'),})
+            pay: $big(feeRate).lt(0) ? $t('receive') : $t('pay'),
+            siteName: state.siteNameText})
           }}
         </p>
         <p>{{ $t('contract_how_price_tip_e') }}</p>
@@ -39,8 +40,7 @@
         :href="tutorialUrl">
         <div class="icon-wrapper mr-16">
         <span class="icon icon-ques"/><span/></div><span>{{ $t('contract_look_tutorial', {currency: coin}) }}</span>
-      </a>
-
+      </a> 
       <div class="index-chart-wrapper">
         <div class="button-wrapper">
           <button
@@ -49,8 +49,7 @@
           <button
             @click="switchChart('market')"
             :class="{'active': chartType === 'market'}">{{ $t('contract_convin_price') }}</button>
-        </div>
-
+        </div> 
         <TradingView
           :pair="tempPair"
           ref="TradingView"
@@ -117,6 +116,7 @@ import ixPagination from '@/components/common/ix-pagination'
 import TradingView from '../contract-trading-view'
 import service from '@/modules/service'
 import utils from '@/modules/utils'
+import {state} from '@/modules/store'
 
 export default {
   components: {ixPagination, TradingView},
@@ -124,28 +124,34 @@ export default {
     return {
       page: 1,
       account: 'all',
-      pair: 'MIX_METH',
-      tempPair: 'MIX_ETHMUSDT',
+      pair: '',
+      tempPair: '',
       chartType: 'index',
       symbolInfo: {
         fee_rate: 0,
         next_fee_time: new Date().getTime()
       },
       premium_price: 0,
-      symbolName: 'ETHMUSDT',
-      value: ''
+      symbolName: '',
+      value: '',
+      state
     }
   },
   watch: {
     '$route.params.pair': {
       async handler (pair = '', last) {
-        const match = pair.match(/^([A-Za-z]*)_([A-Za-z]*)$/)
+        const match = pair.match(/^([A-Za-z]*)_([A-Za-z]*)$/) 
         if (match) {
-          this.pair = pair
-          this.tempPair = this._formatPair('index')
-          // this.tempPair = `INDEX_${this.symbolName}`
+          this.pair = pair 
+          let res = await service.getMixContractPairInfo({symbol:this.pair}) 
+          if (!res.code) {
+            this.symbolName = res.data.name  
+            this.tempPair = this._formatPair() 
+            this.value = res.data.multiplier +' '+ res.data.currency
+          } 
+
           let fun = service.getMixContractSymInfo
-          let res = await fun({
+          res = await fun({
             symbol: this.pair
           })
           if (!res.code) {
@@ -159,7 +165,7 @@ export default {
   },
   computed: {
     symbol () {
-      return this.$t('MIX_&', {currency: this.pair.replace('MIX_', '')})
+      return  this.symbolName //this.$t('MIX_&', {currency: this.pair.replace('MIX_', '')})
     },
     coin () {
       return this.pair.replace('MIX_', '')
@@ -195,7 +201,7 @@ export default {
       // return this.pair.replace('MIX', type.toUpperCase())
       return `${type.toUpperCase()}_${this.symbolName}`
     },
-    switchChart (type) {
+    switchChart (type) { 
       this.chartType = type
       this.tempPair = this._formatPair(type)
       // this.tempPair = `INDEX_${this.symbolName}`
@@ -216,21 +222,16 @@ export default {
         let fun = service.getMixContractSymInfo  
         let res = await fun({
           symbol: this.pair
-        })
+        }) 
         if (!res.code) {
-          let prodect = res.data.find(item => item.name === this.symbolName)
+          let prodect = res.data.find(item => item.name === this.symbolName) 
           this.$set(this, 'symbolInfo', prodect)
         }
       } catch (e) {
       }
     }
   },
-  async created () {
-    let res = await service.getMixContractPairInfo({symbol:this.pair})
-    if (!res.code) {
-      this.symbolName = res.data.name 
-      this.value = res.data.multiplier +' '+ res.data.currency
-    }
+  async created () { 
     if (!this.$route.params.pair) {
       this.$router.replace({
         name: 'MixIndex',
@@ -367,7 +368,7 @@ export default {
         button {
             width:90px;
             height:40px;
-            background:rgba(244,238,226,1);
+            background:rgba($primary,.1);
             color: $primary;
             border: 0;
 

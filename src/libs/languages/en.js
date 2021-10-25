@@ -1449,7 +1449,7 @@ export default {
   contract_amount_value: "Qty",
   contract_symbol_detail: "Contract Details:",
   contract_trade_index_base: "1.Base currency is %{currency}。",
-  contract_trade_index_value: "2.Pricing currency is USD",
+  contract_trade_index_value: "2.Pricing currency is %{currency}",
   contract_how_price: "How is the perpetual contact qupted？ ",
   contract_how_price_tip_a: "<span style=\"color:#22ced0\"> %{symbol} </span> </span> is based on <span style=\"color:#22ced0\"> %{coin} </span>index pricing of %{symbol} contracts.Each contract is worth %{value} of Bitcoin. ",
   contract_how_price_tip_b: " Funding is paid and received every 8 hours. The next payout event is %{next_pay_time}。",

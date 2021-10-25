@@ -8,7 +8,7 @@
         <p class="mb-15 c-primary f26">{{ symbol }}</p>
         <p class="flex-avg">
           <span>{{ $t('contract_trade_index_base',{currency: pair.replace('UNIT_', '')} ) }}</span>
-          <span>{{ $t('contract_trade_index_value') }}</span>
+          <span>{{ $t('contract_trade_index_value', {currency: 'USD'}) }}</span>
         </p>
       </div>
       <div class="sub-title mb-30">

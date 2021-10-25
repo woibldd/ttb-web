@@ -1401,7 +1401,7 @@ export default {
   contract_base_rate: "基础货币利率",
   contract_cal_rate: "计价货币利率",
   contract_over_price: "溢价指数",
-  contract_trade_index_value: "2.计价货币是USD。",
+  contract_trade_index_value: "2.计价货币是%{currency}。",
   contract_undefined: "未知",
   contract_history_deal_dan: "成交单",
   contract_ix_index_source: "IXX指数",

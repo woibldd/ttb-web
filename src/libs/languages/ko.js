@@ -1576,7 +1576,7 @@ export default {
   contract_base_rate: "기초통화 이율",
   contract_cal_rate: "계산 화폐 이율",
   contract_over_price: "프리미엄 인덱스",
-  contract_trade_index_value: "2.계산화폐는 USD。",
+  contract_trade_index_value: "2.계산화폐는 %{currency}。",
   contract_undefined: "미지",
   contract_cancel_all: "전부철회",
   contract_history_deal_dan: "성공",
