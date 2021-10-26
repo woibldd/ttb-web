@@ -10,7 +10,7 @@
         <div>
           <div class="slogan"> 
               <div class="title">{{$t('home.banner.title')}}</div>
-              <!-- <div class="title">{{$t('home.banner.sub_title')}}</div>  -->
+              <div class="title mt-25" style="font-size: 18px;" v-text="$t('home.banner.sub_title')" >安全 · 便捷 · 稳定</div> 
           </div> 
           <div v-if="!state.userInfo" class="option" flex="box:last"> 
             <el-input type="text" :placeholder="lang.banner.placeholder" class="mr-20" v-model="userInput" />
@@ -1046,7 +1046,7 @@ export default {
       color: #fff;
     }
     .option {
-      margin: 70px auto 0;
+      margin: 30px auto 0;
       width: 632px;
       .el-input {
         width: 480px;
@@ -1057,16 +1057,16 @@ export default {
           color: #424242;
           font-size: 16px;
           &::-webkit-input-placeholder {
-            color: #09888a;
+            color: #8a8b8b;
           }
           &:-moz-placeholder {
-            color: #09888a;
+            color: #8a8b8b;
           }
           &::-moz-placeholder {
-            color: #09888a;
+            color: #8a8b8b;
           }
           &:-ms-input-placeholder {
-            color: #09888a;
+            color: #8a8b8b;
           } 
         }
       }
@@ -1074,12 +1074,14 @@ export default {
         height: 59px;
         width: 132px;
         font-size: 16px;
+        background-color:#11f2f5;
+        color: #ffffff;
         &.large {
           width: 200px;
         }
         &--primary:hover {
-          background-color:rgb(255,255,255);
-          color: $primary;
+          background-color:#11f2f5;
+          color: #ffffff;
         }
       }
     }

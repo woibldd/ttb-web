@@ -2426,7 +2426,7 @@ export default {
     },
     banner: {
       title:"세계 첫 번째 디지털 자산교역공동체",
-      sub_title: '거래 를 더 쉽게',
+      sub_title: '안전 · 편리 · 안정',
       i_want: 'I want',
       spend: 'Spend',
       placeholder: '핸드폰 번호 / 메 일주 소'

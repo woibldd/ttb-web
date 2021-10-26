@@ -2549,7 +2549,7 @@ export default {
     },
     banner: {
       title:"The World's First Digital Asset Trading Community",
-      sub_title: 'Simplify Trading',
+      sub_title: 'Security · Simple · Stable',
       i_want: 'I want',
       spend: 'Spend',
       placeholder: 'Phone/Email'

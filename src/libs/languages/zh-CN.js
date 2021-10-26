@@ -2435,7 +2435,7 @@ export default {
     },
     banner: {
       title: '全球首家数字资产交易共同体',
-      sub_title: '让交易更简单',
+      sub_title: '安全 · 便捷 · 稳定',
       i_want: '我想要',
       spend: '花费',
       placeholder: '手机号/邮箱'
