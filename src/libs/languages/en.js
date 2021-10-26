@@ -2605,9 +2605,9 @@ export default {
       sub_title: 'Start learning about digital currency trading now ',
       option1: 'Buy and Sell Digital Currency ',
       option2: 'Know more about Fucoin Trading ', 
-      item1: '3分钟注册账号',
-      item2: '如何进行现货交易',
-      item3: '学习合约教程', 
+      item1: 'Register an account in 3 minutes',
+      item2: 'How to conduct Spot Trading',
+      item3: 'Swaps Trading Tutorial', 
     },
     feature: {
       title: 'Start your digital currency journey ',
