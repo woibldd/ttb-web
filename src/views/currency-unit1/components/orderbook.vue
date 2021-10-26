@@ -61,7 +61,7 @@
               <router-link
                 class="pointer text-primary"
                 v-tooltip.top-center="{html: true, content: $t('contractMix.mapDelegateList.contract_mark_price_tips'), classes: 'contract'}"
-                :to="{name: 'MixIndex', params: {pair: `${(activeProduct || {}).symbol}` }}"><icon class="" name="qizhi" />  {{ markPrice }}</router-link>
+                :to="{name: 'UnitIndex', params: {pair: `${(activeProduct || {}).symbol}` }}"><icon class="" name="qizhi" />  {{ markPrice | fixed(2) }}</router-link>
             </span>
           </div>
           <a

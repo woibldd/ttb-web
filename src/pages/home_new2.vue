@@ -374,21 +374,21 @@
           <div class="guide-content mt-30" flex="box:mean">
             <div class="guide-item mr-30">
               <a href="#">
-                <img :src="require('../assets/home/guide-3.png')" alt="">
+                <img :src="require('../assets/home/guide-1.png')" alt="">
                 <div class="pd-20">{{lang.guide.item1}}
                 </div>
               </a> 
             </div>
             <div class="guide-item mr-30">
               <a href="#">
-                <img :src="require('../assets/home/guide-1.png')" alt="">
+                <img :src="require('../assets/home/guide-2.png')" alt="">
                 <div class="pd-20">{{lang.guide.item2}}
                 </div>
               </a> 
             </div>
             <div class="guide-item">
               <a href="#">
-                <img :src="require('../assets/home/guide-2.png')" alt="">
+                <img :src="require('../assets/home/guide-3.png')" alt="">
                 <div class="pd-20">{{lang.guide.item3}}</div> 
               </a> 
             </div>

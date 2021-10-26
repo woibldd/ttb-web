@@ -2293,7 +2293,7 @@ export default {
   fxpl: "反洗錢指引",
   pay: "支付",
   receive: "獲得",
-  new_user_register_popup1: "注册贈金",
+  new_user_register_popup1: "註冊贈金",
   new_user_register_popup2: "掃碼添加微信客服，加入ixx.com官方社區立即領取$50等值合約交易體驗金！",
   new_user_register_popup3: "如有疑問，請直接諮詢微信客服。",
   pair_table_option_empty: "暫無添加自選 ",
@@ -2352,7 +2352,7 @@ export default {
     }
   },
   home: {
-    how_to_register: "如何注册交易账户",
+    how_to_register: "如何註冊交易账户",
     how_to_login: "如何登陆交易账户",
     how_to_unseal: "账户被限制登陆怎么办",
     more: '更多',
@@ -2373,11 +2373,11 @@ export default {
       understand: "我已瞭解"
     },
     banner: {
-      title: '全球首家数字资产交易共同体',
+      title: '全球首家數位資產交易共同體',
       sub_title: '安全 · 便捷 · 穩定',
       i_want: '我想要',
-      spend: '花费',
-      placeholder: '手机号/邮箱'
+      spend: '花費',
+      placeholder: '手機號/郵箱'
     },
     main_top: {
       title: '增强您的交易经验！',
@@ -2416,7 +2416,7 @@ export default {
     bottom: {
       title: '开启交易之旅',
       sub_title: '体验BTC、ETH、USDT等上百种数字货币交易',
-      register: '立即注册', 
+      register: '立即註冊', 
       start: '开始交易',
     }, 
     gift: { 
@@ -2430,9 +2430,9 @@ export default {
       sub_title: '即刻开启数字货币交易学习',
       option1: '购买及出售数字货币',
       option2: '探索 %{siteName} 交易',
-      item1: '3分钟快速了解法币交易',
-      item2: '如何购买数字货币',
-      item3: '如何出售数字货币', 
+      item1: '3分鐘註冊帳號',
+      item2: '如何進行現貨交易',
+      item3: '學習合約教程',
     },
     feature: {
       title: '开启您的数字货币之旅',
@@ -2458,7 +2458,7 @@ export default {
     h24change: '涨跌幅',
     view: '分時預覽',
     h24amount: '24H成交額',  
-    H24trade: "24H交易量",
+    h24trade: "24H交易量", 
     orderdeal: "最新價",
     search: '蒐索幣種'
   },
@@ -3798,7 +3798,7 @@ export default {
     buy_qty: "購買數量",
     sell_qty: "出售數量",
     release_time: "發放時間",
-    invite_register: "邀請注册",
+    invite_register: "邀請註冊",
     invite_rewards: "邀請購買獎勵",
     mining_reward: "挖礦產出獎勵",
     schedule: "進度",
@@ -3875,7 +3875,7 @@ export default {
         }
       }
     },
-    'signup': '注册',
+    'signup': '註冊',
     'signin': '登录',
     'signout': '退出登录', 
     'welcome': '欢迎来到IXX'
@@ -3922,7 +3922,7 @@ export default {
       {
         title: '二、符合公募條件', 
         content: [
-          '注册IXX帳號', '帳號可用餘額至少為100USDT'
+          '註冊IXX帳號', '帳號可用餘額至少為100USDT'
         ]
       }, 
       {
@@ -3945,7 +3945,7 @@ export default {
     }
   },
   customer: { 
-    registerAccount: '注册%{siteName}帳號', 
+    registerAccount: '註冊%{siteName}帳號', 
     registerByPhone: '手機註冊', 
     registerByEmail: '郵箱註冊', 
     hasAccount: '已有帳號？', 

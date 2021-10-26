@@ -46,13 +46,13 @@
               </router-link>
               <div class="dropdown-sub-menu">
                 <ul class="dropdown-list pt-10 pb-10">
-                  <li class="dropdown-item pl-34 pr-24">
+                  <!-- <li class="dropdown-item pl-34 pr-24">
                     <a
                       target="_blank"
                       :href="tutorialUrl(pair.fullname)"
                       class="index__sub__link">{{ $t("ensurance_btc_future_tutorial", {coin: pair.coin}) }}
                     </a>
-                  </li>
+                  </li> -->
                   <!-- <li class="dropdown-item pl-34 pr-24">
                     <a
                       target="_blank"
@@ -80,13 +80,13 @@
             </router-link>
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
-                <li class="dropdown-item pl-34 pr-24">
+                <!-- <li class="dropdown-item pl-34 pr-24">
                   <a
                     target="_blank"
                     :href="tutorialUrl(pair.fullname)"
                     class="index__sub__link">{{ $t("ensurance_btc_future_tutorial", {coin: pair.coin}) }}
                   </a>
-                </li>
+                </li> -->
                 <!-- <li class="dropdown-item pl-34 pr-24">
                   <a
                     target="_blank"
@@ -112,7 +112,7 @@
                 class="arrow ml-5 arrow-black"
                 name="arrow-contract-down"/>
             </router-link>
-            <div class="dropdown-sub-menu">
+            <!-- <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-34 pr-24">
                   <a
@@ -122,7 +122,7 @@
                   </a>
                 </li> 
               </ul>
-            </div>
+            </div> -->
           </div> 
         </li>
       </ul>

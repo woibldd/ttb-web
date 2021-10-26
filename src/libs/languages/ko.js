@@ -2473,12 +2473,12 @@ export default {
     }, 
     guide: { 
       title: "신 입 가이드", 
-      subtitle: "디지털 화폐 거래 학습 즉시 시작", 
+      sub_title: "디지털 화폐 거래 학습 즉시 시작", 
       option1: '디지털 화폐 구 매 및 판매', 
-      option2: 'IXX Pro 거래 탐색', 
-      item1: '3 분 빠 른 법정 통화 거래 파악',
-      item2: "디지털 화폐 어떻게 구 매 하나 요",
-      item3: "디지털 화폐 어떻게 판매 하나 요"
+      option2: 'IXX Pro 거래 탐색',  
+      item1: '3 분 등록 계 정',
+      item2: '현물 거래 를 어떻게 하 는 지',
+      item3: '계약 튜 토리 얼 학습',
     },
     feature: { 
       title: "디지털 화폐 여행 을 시작 합 니 다", 
