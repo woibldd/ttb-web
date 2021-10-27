@@ -150,7 +150,7 @@
                       </el-dropdown-item> 
                     </el-dropdown-menu>
                   </el-dropdown> 
-                  <div class="sep ml-5 mr-5"></div>
+                  <div class="sep ml-5 mr-5" :class="[state.skin]"></div>
                   <el-dropdown class="tool" @command="handleTypesCommand">
                     <span class="el-dropdown-link pointer">
                       <icon name="candle" />
@@ -169,21 +169,21 @@
                       </el-dropdown-item> 
                     </el-dropdown-menu>
                   </el-dropdown> 
-                  <div class="sep ml-5 mr-5"></div>
+                  <div class="sep ml-5 mr-5" :class="[state.skin]"></div>
                   <label class="el-dropdown-link pointer tool" @click="handleTVOption('indicators')">
                     <!-- {{ $t('tv.navs.left.technical_indicators') }} -->
                     <icon name="view"/>
                   </label> 
-                  <div class="sep ml-5 mr-5"></div>
+                  <div class="sep ml-5 mr-5" :class="[state.skin]"></div>
                   <label class="el-dropdown-link pointer tool" @click="handleTVOption('drawing')">
                     <span class="draw">{{ $t('tv.navs.left.drawing_tools') }}</span>  
                   </label>
-                  <div class="sep ml-5 mr-5"></div>
+                  <div class="sep ml-5 mr-5" :class="[state.skin]"></div>
                   <label class="el-dropdown-link pointer tool" @click="handleTVOption('setting')">
                     <!-- {{ $t('tv.navs.left.setting') }} -->
                     <icon name="setting" />
                   </label>
-                  <div class="sep ml-5 mr-5"></div>
+                  <div class="sep ml-5 mr-5" :class="[state.skin]"></div>
                   <!-- <label>计算器</label> -->
                   <label class="el-dropdown-link pointer tool" @click="handleTVOption('fullscreen')"> 
                     <icon name="fullscreen" />
@@ -236,7 +236,7 @@
                 </div> 
                 <div v-loading="!newBargainListData.length"
                     class="delegate-list mt-4"
-                    style="height:245px"
+                    style="height:318px"
                     element-loading-background="rgba(0, 0, 0, 0.3)">  
                     <div class="title-delegate">{{$t('contract_block_orderdeal')}}</div>
                     <div
@@ -1947,6 +1947,9 @@ export default {
           }
         }
       }
+      .r1-c2-list {
+        background: #272837;
+      }
       .r1-c4 {
         .r1-c4-r1, .r1-c4-r2 {
           background:$--contract-table-bg2; 
@@ -2077,7 +2080,7 @@ export default {
       height: 32px;
       line-height: 32px;
       padding: 0 10px;
-      border-bottom: 1px solid $--contract-table-bd;
+      // border-bottom: 1px solid $--contract-table-bd;
       font-size: 12px;
       span {
         width: 20%;
@@ -2089,7 +2092,7 @@ export default {
     & > .content-wrap {
       position: absolute;
       width: 100%;
-      height: calc(100% - 4px);
+      height: calc(100% - 72px);
       overflow-y: scroll;
       scroll-behavior: smooth;
       &::-webkit-scrollbar {
@@ -2428,6 +2431,9 @@ export default {
         width:1px;
         height: 20px;
         background-color: #dddddd;
+        &.dark {
+          background-color:#606266;
+        }
       }
     }
     .tv-tab {

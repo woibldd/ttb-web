@@ -130,7 +130,7 @@
                   &nbsp; 
                 </el-col>
                 <el-col :span="2" flex="main:right"> 
-                  <router-link :to="{name:'mix', query: {pair: item.symbol}  }">
+                  <router-link :to="{name:'future', query: {pair: item.symbol}  }">
                     <el-button size="mini" type="primary">{{$t('asset_trading')}}</el-button>
                   </router-link>
                 </el-col>
@@ -179,7 +179,7 @@
                   &nbsp; 
                 </el-col>
                 <el-col :span="2" flex="main:right"> 
-                  <router-link :to="{name:'mix', query: {pair: item.symbol}  }">
+                  <router-link :to="{name:'unit', query: {pair: item.symbol}  }">
                     <el-button size="mini" type="primary">{{$t('asset_trading')}}</el-button>
                   </router-link>
                 </el-col>

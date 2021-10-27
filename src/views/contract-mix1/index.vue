@@ -161,7 +161,7 @@
                       </el-dropdown-item> 
                     </el-dropdown-menu>
                   </el-dropdown> 
-                  <div class="sep ml-5 mr-5"></div>
+                  <div class="sep ml-5 mr-5" :class="[state.skin]"></div>
                   <el-dropdown class="tool" @command="handleTypesCommand">
                     <span class="el-dropdown-link pointer">
                       <icon name="candle" /> 
@@ -179,19 +179,19 @@
                       </el-dropdown-item> 
                     </el-dropdown-menu>
                   </el-dropdown> 
-                  <div class="sep ml-5 mr-5"></div>
+                  <div class="sep ml-5 mr-5" :class="[state.skin]"></div>
                   <label class="el-dropdown-link pointer tool" @click="handleTVOption('indicators')"> 
                     <icon name="view"/>
                   </label> 
-                  <div class="sep ml-5 mr-5"></div>
+                  <div class="sep ml-5 mr-5" :class="[state.skin]"></div>
                   <label class="el-dropdown-link pointer tool" @click="handleTVOption('drawing')">
                     <span class="draw">{{ $t('tv.navs.left.drawing_tools') }}</span>  
                   </label>
-                  <div class="sep ml-5 mr-5"></div>
+                  <div class="sep ml-5 mr-5" :class="[state.skin]"></div>
                   <label class="el-dropdown-link pointer tool" @click="handleTVOption('setting')"> 
                     <icon name="setting" />
                   </label>
-                  <div class="sep ml-5 mr-5"></div> 
+                  <div class="sep ml-5 mr-5" :class="[state.skin]"></div> 
                   <label class="el-dropdown-link pointer tool" @click="handleTVOption('fullscreen')"> 
                     <icon name="fullscreen" />
                   </label>  
@@ -222,7 +222,7 @@
             </div>
             <!-- 委托列表/最新成交 -->
             <div class="r1-c2-list" style="width: 250px;" flex-box="0">
-              <div class=""> 
+              <div class="list-wrap"> 
                 <div class="delegate-list"
                     v-loading="!delegateData"
                     element-loading-background="rgba(0, 0, 0, 0.3)"> 
@@ -2130,8 +2130,10 @@ export default {
           ul > li:nth-child(2n) {
             background: #373737;
           }
-        }
-
+        } 
+      }
+      .r1-c2-list {
+        background: #272837;
       }
       .r1-c4 {
         .r1-c4-r1, .r1-c4-r2 {
@@ -2584,6 +2586,9 @@ export default {
         width:1px;
         height: 20px;
         background-color: #dddddd;
+        &.dark {
+          background-color:#606266;
+        }
       }
     }
     .tv-tab {

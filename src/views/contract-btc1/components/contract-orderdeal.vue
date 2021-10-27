@@ -240,7 +240,7 @@ export default {
   .ix-pannel {
     // height: 100%;
     // overflow: hidden;
-    height: 281px;
+    height: 278px;
     overflow: auto; 
   }
 }

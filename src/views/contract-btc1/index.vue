@@ -135,7 +135,7 @@
             <div style="min-width: 615px;" flex-box="1">
               <!-- pair info -->
               <div class="r1-c2-r2">
-                <div class="tv-tools" flex="cross:center">
+                <div class="tv-tools ml-10" flex="cross:center">
                   <el-dropdown @command="handleCyclesCommand" size="mini">
                     <span class="el-dropdown-link pointer">
                       <span style="display: inline-block; width:36px; white-space: nowrap;">{{ $t(`tv.cycles.${local.intervalText}.text`)}}</span> <i class="el-icon-arrow-down el-icon--right"></i>
@@ -149,7 +149,7 @@
                       </el-dropdown-item> 
                     </el-dropdown-menu>
                   </el-dropdown> 
-                  <div class="sep"></div>
+                  <div class="sep" :class="[state.skin]"></div>
                   <el-dropdown @command="handleTypesCommand">
                     <span class="el-dropdown-link pointer">
                       {{ $t('tv.navs.left.style') }}<i class="el-icon-arrow-down el-icon--right"></i>
@@ -166,13 +166,13 @@
                       </el-dropdown-item> 
                     </el-dropdown-menu>
                   </el-dropdown> 
-                  <div class="sep"></div>
+                  <div class="sep" :class="[state.skin]"></div>
                   <label class="el-dropdown-link pointer" @click="handleTVOption('indicators')"><icon name="view"/></label> 
-                  <div class="sep"></div>
+                  <div class="sep" :class="[state.skin]"></div>
                   <label class="el-dropdown-link pointer" @click="handleTVOption('drawing')">{{ $t('tv.navs.left.drawing_tools') }}</label>
-                  <div class="sep"></div>
+                  <div class="sep" :class="[state.skin]"></div>
                   <label class="el-dropdown-link pointer" @click="handleTVOption('setting')"><icon name="setting" /></label>
-                  <div class="sep"></div>
+                  <div class="sep" :class="[state.skin]"></div>
                   <!-- <label>计算器</label> -->
                   <label class="el-dropdown-link pointer" @click="handleTVOption('fullscreen')"><icon name="fullscreen" /></label>
                 </div>
@@ -1077,6 +1077,9 @@ export default {
         width:1px;
         height: 20px;
         background-color: #dddddd;
+        &.dark {
+          background-color:#606266;
+        }
       }
     }
     .tv-tab {
@@ -1130,7 +1133,7 @@ export default {
     .delegate-list { 
       &:not(:first-child) {
         .title-delegate {
-          border-top: 2px solid $--contract-table-bd;
+          border-top: 4px solid $--contract-table-bd;
         }
       }
       .header {

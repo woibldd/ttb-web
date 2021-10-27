@@ -30,7 +30,7 @@
                 <ul class="dropdown-list pt-10 pb-10">
                   <li class="dropdown-item2 pl-24 pr-24"> 
                     <router-link to="/trading" flex="dir:column">
-                      <div class="mr-10" flex="cross:center">
+                      <div style="width: 30px;" flex="cross:center">
                         <img src="@/assets/ixx/icon/trading.png" alt=""> 
                       </div>
                       <div>
@@ -43,7 +43,7 @@
                   </li> 
                   <li class="dropdown-item2 pl-24 pr-24"> 
                     <router-link to="/future" flex="dir:column"> 
-                      <div class="mr-10"  flex="cross:center">
+                      <div style="width: 30px;"  flex="cross:center">
                         <img src="@/assets/ixx/icon/future.png" alt=""> 
                         <!-- <img :src="require(`../assets/site/${state.siteName}/icon/blend.png`)"  alt=""> -->
                       </div>
@@ -57,7 +57,7 @@
                   </li> 
                   <li class="dropdown-item2 pl-24 pr-24"> 
                     <router-link to="/unit" flex="dir:column"> 
-                      <div class="mr-10" flex="cross:center">
+                      <div style="width: 30px;" flex="cross:center">
                         <img src="@/assets/ixx/icon/unit.png" alt=""> 
                         <!-- <img :src="require(`../assets/site/${state.siteName}/icon/blend.png`)"  alt=""> -->
                       </div>
@@ -71,7 +71,7 @@
                   </li> 
                   <li class="dropdown-item2 pl-24 pr-24">
                     <router-link to="/mix" flex="dir:column">  
-                      <div class="mr-10" flex="cross:center"> 
+                      <div style="width: 30px;" flex="cross:center"> 
                         <img src="@/assets/ixx/icon/mix.png" alt=""> 
                         <!-- <img :src="require(`../assets/site/${state.siteName}/icon/contract.png`)" alt="">  -->
                       </div>
@@ -517,7 +517,7 @@ export default {
 
   .ind_cen {
     position: relative;
-    margin: 0 60px;
+    margin: 0 60px 0 0;
     min-width: 1300px;
   }
 
@@ -783,7 +783,7 @@ export default {
     // text-indent: 16px;
     position: relative;
     text-align: center;
-    font-size: 12px;
+    font-size: 14px;
     cursor: pointer;
     z-index: 100;
     .rig {
@@ -917,7 +917,7 @@ export default {
         .ind_cen {
             width: auto;
             min-width: 1300px;
-            margin: 0 60px;
+            margin: 0 60px 0 0;
         }
    }
 }
