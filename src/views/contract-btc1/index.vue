@@ -1124,7 +1124,7 @@ export default {
   
   .container-trade-panel.dark {
     background-color: #272837;
-    color: #ACACAC;
+    color: #ffffff;
     .r1-c1-r1,.r1-c2-r1,.r1-c2-r2,.r1-c3-r1 {
       background:$--contract-table-bg2; 
     }
