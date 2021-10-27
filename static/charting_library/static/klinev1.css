@@ -10,7 +10,7 @@ body {
 */
 
 .chart-page {
-  background: #0C1222;
+  background: #151518;
   
 }
 .chart-page .chart-container {
@@ -120,7 +120,7 @@ body {
   border: none;
   background-color: #1C2435;
   
-  box-shadow: #0C1222 0 6px 24px;
+  box-shadow: #151518 0 6px 24px;
   
 }
 .drawings-popup-list.iconed .item.active svg,
@@ -254,12 +254,11 @@ body {
   
 }
 
-/* .chart-top-toolbar .space-single:not(:first-child),
+.chart-top-toolbar .space-single:not(:first-child),
 .header-chart-panel .space-single:not(:first-child) {
   border-left: solid 1px hsla(0, 0%, 100%, 0.05);
   
-}  */
-
+}
 .header-chart-panel .space-single:not(:first-child) .button:hover {
   color: #01CED1;
   opacity: 0.8;
@@ -269,17 +268,6 @@ body {
   font-weight: bold;
   opacity: 1;
 }
-
-.header-chart-panel .space-single:not(:first-child) .button.active {
-  color: #01CED1;
-  font-weight: bold;
-  opacity: 1;
-}
-
-.header-chart-panel .space-single:not(:first-child) .button .active {
-  color: #01CED1;
-}
-
 .header-chart-panel-content {
   box-shadow: hsla(218, 26%, 86%, 0.25) 0 -1px 0 inset;
   
@@ -339,7 +327,6 @@ body {
   bottom: 20px;
   left: 0;
 }
- 
 
 .layout__area--top.header-chart-panel .header-chart-panel-sizer {
   overflow: visible;
@@ -362,45 +349,56 @@ ul {
   background-color: #1C2435;
   list-style: none;
 }
-li { 
-  width:120px;
-  height:26px;
-  line-height: 26px;
+li {
+  width:193px;
+  height:28px;
+  line-height: 28px;
   text-indent: 12px;
   color: hsla(218, 26%, 86%, 1);
 }
 li:hover {
   background-color: hsla(218, 26%, 86%, 0.06);
-} 
-.charts-popup-d .drowdownlist:after {
-  display: inline-block; 
-  content: "";
-  transition: all 0.2s ease-in-out;
-  width:0;
-  height:0;
-  border-width:4px 4px 0;
-  border-style:solid;
-  border-color: #ccc  transparent transparent;/*灰 透明 透明 */
-  margin:0 5px;
-  position:relative;
 }
 
-.charts-popup-d.selected .drowdownlist:after { 
-  transform: rotate(180deg);
+
+
+/* 下面配置的是弹窗的颜色 */ 
+.tv-dialog,._tv-dialog {
+  background-color: #151518;
+  color: #cccccc;
+  
+}
+.tv-dialog__section, .tv-dialog__title {
+  color: #cccccc;
 }
 
-.header-chart-panel .button {
-  padding: 0 3px;
+.tv-search-row {
+  border-color: #999999;
 }
-.header-chart-panel .button.fullscreen {
-  padding: 2px 3px;
+.tv-search-row__input {
+  background-color:#151518;
+}
+.feature-no-touch .tv-insert-study-item:hover, 
+.custom-select .switcher,
+button._tv-button,
+._tv-button,
+.tv-text-input.inset,
+.tv-select-container {
+  background: #222222;
+}
+.properties-tabs a.properties-tabs-label,
+.property-page,
+._tv-dialog-content label {
+  color: #cccccc;
 }
 
-.header-chart-panel .space-single:not(:first-child) .button.cycle {
-  padding: 0;
-}
-.header-chart-panel .group {
-  height: 25px;
-  line-height: 25px;
-  vertical-align: middle;
+.feature-no-touch 
+.tv-tabs__tab:active, 
+.feature-no-touch 
+.tv-tabs__tab:hover, 
+.feature-touch 
+.tv-tabs__tab:active, 
+.tv-tabs__tab.i-active, 
+.tv-tabs__tab.i-hover {
+  color: #dddddd;
 }

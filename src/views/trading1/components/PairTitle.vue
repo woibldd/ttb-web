@@ -9,12 +9,31 @@
         @mouseover="showPair(true)"
         @mouseout="showPair(false)"
       >
-        {{ pair | pairfix }}
+        {{ pair | pairfix }} 
         <icon :class="{up: show}" name="arrow-down" class="arrow"/>
-        <div :class="{show: show}" class="grid-pairtable" :skin="state.skin">
+        <div v-show="show" :class="{show: show}" class="grid-pairtable" :skin="state.skin">
           <PairNav ref="PairNav" :init-height="400" :sort="false"/>
         </div>
       </div>
+      <!-- <el-popover
+        placement="bottom-start" 
+        width="500"
+        trigger="hover" > 
+        <div
+          slot="reference"
+          class="fl grid-currency pointer"
+          :skin="state.skin"
+          @switchPair="showPair(false)"
+          @mouseover="showPair(true)"
+          @mouseout="showPair(false)"
+        >
+          {{ pair | pairfix }} 
+          <icon :class="{up: show}" name="arrow-down" class="arrow"/>
+        </div>
+        <div  class="grid-pairtable show" :skin="state.skin">
+          <PairNav ref="PairNav" :init-height="400" :sort="false"/>
+        </div>
+      </el-popover> -->
       <div class="fl grid-value" >
         <p  :class="{'color-up': delta > 0, 'color-down': delta < 0}">{{ lastPrice }}</p> 
         <p class="fl grid-abt">
@@ -290,6 +309,8 @@ export default {
   }
 
   .grid-currency {
+    height: 50px;
+    line-height: 50px;
     color: $--pair-title-color;
     &[skin~="dark"] { 
       color: #ffffff;
@@ -306,12 +327,12 @@ export default {
   }
   .grid-pairtable {
     position: absolute;
-    top: 28px;
+    top: 52px;
     left: 0;
     z-index: 99999;
     width: 480px;
     box-shadow: 0px 0px 2px 0px;
-    display: none;
+    // display: none;
     opacity: 0;
     transition: all 0.5s ease-in-out;
     background: $--table-nth-odd;

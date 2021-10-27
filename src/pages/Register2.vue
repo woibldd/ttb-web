@@ -128,7 +128,7 @@
               </div>
               <!-- <el-checkbox v-model="form.agree">
               <span v-html="$t('agreement', {agreement: '/services', privacyPolicy: '/privacypolicy'})"></span></el-checkbox> -->
-              <div>
+              <div class="mt-5">
                 <el-button :type="isnc?'primary':'info'" style="width:100%;" :disabled="!isnc"@click="handleSubmit">
                   {{$t('signup_title')}}
                 </el-button> 

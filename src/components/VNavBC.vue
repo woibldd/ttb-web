@@ -25,12 +25,12 @@
           </div>
           <div class="mr-10">
             <div class="nav_link arrow-down ml-30"> 
-              <div>{{ $t(`market.product`) }} <icon name="arrow-down" /></div>
+              <div>{{ $t(`market.product`) }} <icon class="arrow" name="arrow-down" /></div>
               <div class="dropdown-sub-menu">
                 <ul class="dropdown-list pt-10 pb-10">
-                  <li   class="dropdown-item2 pl-24 pr-24"> 
+                  <li class="dropdown-item2 pl-24 pr-24"> 
                     <router-link to="/trading" flex="dir:column">
-                      <div class="mr-10 pt-4">
+                      <div class="mr-10" flex="cross:center">
                         <img src="@/assets/ixx/icon/trading.png" alt=""> 
                       </div>
                       <div>
@@ -43,7 +43,7 @@
                   </li> 
                   <li class="dropdown-item2 pl-24 pr-24"> 
                     <router-link to="/future" flex="dir:column"> 
-                      <div class="mr-10 pt-4">
+                      <div class="mr-10"  flex="cross:center">
                         <img src="@/assets/ixx/icon/future.png" alt=""> 
                         <!-- <img :src="require(`../assets/site/${state.siteName}/icon/blend.png`)"  alt=""> -->
                       </div>
@@ -57,7 +57,7 @@
                   </li> 
                   <li class="dropdown-item2 pl-24 pr-24"> 
                     <router-link to="/unit" flex="dir:column"> 
-                      <div class="mr-10 pt-4">
+                      <div class="mr-10" flex="cross:center">
                         <img src="@/assets/ixx/icon/unit.png" alt=""> 
                         <!-- <img :src="require(`../assets/site/${state.siteName}/icon/blend.png`)"  alt=""> -->
                       </div>
@@ -71,7 +71,7 @@
                   </li> 
                   <li class="dropdown-item2 pl-24 pr-24">
                     <router-link to="/mix" flex="dir:column">  
-                      <div class="mr-10 pt-4"> 
+                      <div class="mr-10" flex="cross:center"> 
                         <img src="@/assets/ixx/icon/mix.png" alt=""> 
                         <!-- <img :src="require(`../assets/site/${state.siteName}/icon/contract.png`)" alt="">  -->
                       </div>
@@ -89,7 +89,7 @@
           </div> 
           <div class="mr-10">
             <div class="nav_link arrow-down ml-30"> 
-              <div>{{ $t(`market.about`) }} <icon name="arrow-down" /></div>
+              <div>{{ $t(`market.about`) }} <icon class="arrow" name="arrow-down" /></div>
               <div class="dropdown-sub-menu">
                 <ul class="dropdown-list pt-10 pb-10">
                   <li v-if="aboutUsLink" class="dropdown-item pl-24 pr-24"> 
@@ -549,8 +549,11 @@ export default {
         padding-bottom: 20px; 
         &.arrow-down { 
           .arrow {
-            font-size: 10px;
+            // font-size: 10px;
             transition: all 0.2s ease-in-out;
+            &:hover {
+              transform: rotate(180deg);
+            }
           }
           &:hover {
             .dropdown-sub-menu {

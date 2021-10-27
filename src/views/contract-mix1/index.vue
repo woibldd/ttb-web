@@ -23,13 +23,13 @@
                     <el-popover 
                       v-else
                       :popper-class="[state.skin, 'pd-0']"  
-                      trigger="hover">
+                      trigger="click">
                       <div class="drop-down">
                         <div>
                           <el-row>
-                            <el-col :span="10" class="label pl-10">{{$t('pair')}}</el-col>
+                            <el-col :span="10" class=" pl-22">{{$t('pair')}}</el-col>
                             <el-col :span="9">{{$t('price')}}</el-col>
-                            <el-col :span="5" class="txr pr-10">{{$t('increase')}}</el-col>
+                            <el-col :span="5" class="txr pr-25">{{$t('increase')}}</el-col>
                           </el-row>
                         </div>
                         <div v-for="(item, idx) in products" :key="idx" class="drop-item">  
@@ -3149,8 +3149,9 @@ export default {
 
 .el-popover {  
   .drop-down {
-    width: 300px; 
+    width: 350px; 
     line-height: 40px;
+    color: #9F9F9F;
     .label {
       display:block; 
       color: $text-strong;

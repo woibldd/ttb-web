@@ -159,7 +159,7 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
   }
   &.dark { 
     margin: 5px !important;
-    background: $contract-bg2; 
+    background: #2B2E34; 
     border: 1px solid $contract-block-bg2; 
     .popper__arrow {
       display: none;
@@ -183,4 +183,8 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
       }
     }
   }
+}
+
+.el-menu--horizontal>.el-menu-item.is-active {
+  border-bottom: 2px solid $primary;
 }

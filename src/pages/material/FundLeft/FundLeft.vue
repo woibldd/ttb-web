@@ -18,7 +18,7 @@
           class="menu-name"
           target="_blank"
           active-class="active"
-          href="https://ixxcustomer.zendesk.com/hc/zh-cn/articles/360027994471">{{ $t('ensurance_contract_tutorial') }}</a></li>
+          href="/knowledgeBase/details2?id=4101">{{ $t('ensurance_contract_tutorial') }}</a></li>
       </ul> 
       <!-- 指数 -->
       <p class="left-menu-title mt-20">

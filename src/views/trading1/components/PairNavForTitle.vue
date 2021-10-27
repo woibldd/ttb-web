@@ -21,16 +21,16 @@
         </div>
       </div>
       <!-- tabs -->
-      <div class="ix-pair-head">
-        <el-tabs v-model="tabSelected" :skin="state.skin"> 
+      <div class="ix-pair-head"> 
+        <el-tabs v-model="tabSelected" :skin="state.skin" > 
           <el-tab-pane :label="$t('pair_list_option')" name="like"/>
-          <el-tab-pane  :label="$t('pair_list_main')" name="main"/>
+          <el-tab-pane :label="$t('pair_list_main')" name="main"/>
           <el-tab-pane label="DeFi" name="DeFi"/>
           <el-tab-pane label="NFT" name="NFT"/>
           <el-tab-pane label="GameFi" name="GameFi"/>
           <el-tab-pane :label="$t('pair_list_new')" name="new"/>
           <el-tab-pane :label="$t('pair_list_all')" name="all"/>
-        </el-tabs>
+        </el-tabs> 
       </div>
       <div v-show="sortedList.length" class="ix-pair-head tr">
         <div class="th pair" @click="setSort('pair')">
@@ -87,10 +87,9 @@
       </ul>
       <div v-show="!sortedList.length && tabSelected==='like'" class="ix-pair-empty">
         <!-- {{$t('pair_table_option_empty')}} -->  
-        <div>
+        <div class="mt-30">
           <img src="~@/assets/empty.png" alt="" srcset="">
-        </div> 
-        <br>
+        </div>  
         <span style="color: #5F6B76;font-size:14px">{{$t('pair_table_option_empty')}}</span>
       </div>
     </div>
@@ -128,7 +127,7 @@ export default {
       site: process.env.SITE,
       bodyHeight: 0,
       isMac: /Macintosh/.test(navigator.userAgent),
-      activeName: 'like'
+      tabSelected: 'main'
     }
   },
   computed: {
@@ -141,14 +140,14 @@ export default {
       }
       return this.bodyHeight
     },
-    tabSelected: {
-      get() {
-        return this.state.tabSelected
-      },
-      set(val) {
-        this.state.tabSelected = val
-      }
-    }
+    // tabSelected: {
+    //   get() {
+    //     return this.state.tabSelected
+    //   },
+    //   set(val) {
+    //     this.state.tabSelected = val
+    //   }
+    // }
   },
   watch: {
     'state.pro.currency_name': {
@@ -159,17 +158,16 @@ export default {
       },
       immediate: true
     }
-  },
-  created() {
-
-  },
-
+  }, 
   destroyed() {
     this.$eh.$off('app:resize', this.onresize)
     this.$eh.$off('protrade:layout:init', this.layoutInit)
   },
   async created() {
     this.$eh.$on('protrade:layout:init', this.layoutInit)
+    // this.$nextTick(() => {
+    //   this.tabSelected = 'main'
+    // })
   },
   methods: {
     setPair(pair) {
@@ -410,9 +408,15 @@ export default {
       // color: $nav-grey-color;
       padding: 0 10px;
       color: #666666;
+      &.is-active {
+        color: $primary;
+      }
       &.is-top:nth-child(2) {
         padding-left: 20px;
       }
+    }
+    .el-tabs__active-bar {
+      background-color: $primary;
     }
   }
   .el-tabs[skin~='dark'] /deep/ .el-tabs__nav-wrap {
