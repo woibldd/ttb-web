@@ -58,8 +58,7 @@
                 <el-col :span="4"  flex="main:center">{{$t('market.view')}}</el-col>
                 <el-col :span="2"  flex="main:right">{{$t('operation')}}</el-col>
               </el-row> 
-              <el-row v-for="(item, index) in tradingShowList" 
-                v-show="index < 5"
+              <el-row v-for="(item, index) in tradingShowList"  
                 :key="index" 
                 class="row mt-10">
                 <!-- <el-col :span="1">{{index + 1}}</el-col> -->
@@ -103,8 +102,7 @@
                 <el-col :span="4"  flex="main:center">{{$t('market.view')}}</el-col>
                 <el-col :span="2"  flex="main:right">{{$t('operation')}}</el-col>
               </el-row> 
-              <el-row v-for="(item, index) in btcShowList"  
-                v-show="index < 5"
+              <el-row v-for="(item, index) in btcShowList"   
                 :key="index" 
                 class="row mt-10">
                 <!-- <el-col :span="1">{{index + 1}}</el-col> -->
@@ -152,8 +150,7 @@
                 <el-col :span="4"  flex="main:center">{{$t('market.view')}}</el-col>
                 <el-col :span="2"  flex="main:right">{{$t('operation')}}</el-col>
               </el-row> 
-              <el-row v-for="(item, index) in unitShowList"  
-                v-show="index < 5"
+              <el-row v-for="(item, index) in unitShowList"   
                 :key="index" 
                 class="row mt-10">
                 <!-- <el-col :span="1">{{index + 1}}</el-col> -->
@@ -201,8 +198,7 @@
                 <el-col :span="4"  flex="main:center">{{$t('market.view')}}</el-col>
                 <el-col :span="2"  flex="main:right">{{$t('operation')}}</el-col>
               </el-row> 
-              <el-row v-for="(item, index) in mixShowList"  
-                v-show="index < 5"
+              <el-row v-for="(item, index) in mixShowList"   
                 :key="index" 
                 class="row mt-10">
                 <!-- <el-col :span="1">{{index + 1}}</el-col> -->
