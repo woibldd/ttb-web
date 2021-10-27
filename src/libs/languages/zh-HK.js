@@ -2353,8 +2353,8 @@ export default {
   },
   home: {
     how_to_register: "如何註冊交易账户",
-    how_to_login: "如何登陆交易账户",
-    how_to_unseal: "账户被限制登陆怎么办",
+    how_to_login: "如何登入交易帳戶",
+    how_to_unseal: "帳戶被限制登入怎麼辦",
     more: '更多',
     nav: {
       information:"行業資訊"
@@ -2380,9 +2380,9 @@ export default {
       placeholder: '手機號/郵箱'
     },
     main_top: {
-      title: '增强您的交易经验！',
-      sub_title: '扫码二维码下载 APP',
-      download: '下载'
+      title: '增强您的交易經驗！',
+      sub_title: '掃碼二維碼下載 APP',
+      download: '下載'
     },
     main_middle: {
       title: '%{siteName}全球站，近24小时成交量%{total}美元',
@@ -2407,17 +2407,17 @@ export default {
       }
     },
     middle: {
-      title: '随时随地 任享交易',
-      sub_title: '下载%{siteName} App 所有交易尽在手中',
+      title: '隨時隨地 任享交易',
+      sub_title: '下載%{siteName} App 所有交易盡在手中',
       contract: '合约',
-      orders: '币币',
+      orders: '幣幣',
       more: '查看更多'
     },
     bottom: {
-      title: '开启交易之旅',
-      sub_title: '体验BTC、ETH、USDT等上百种数字货币交易',
+      title: '開啟交易之旅',
+      sub_title: '體驗BTC、ETH、USDT等上百種數位貨幣交易',
       register: '立即註冊', 
-      start: '开始交易',
+      start: '開始交易',
     }, 
     gift: { 
       placeholder: '请输入您的whatsapp账号(选填)',
@@ -2427,23 +2427,23 @@ export default {
     },
     guide: {
       title: '新手指引',
-      sub_title: '即刻开启数字货币交易学习',
-      option1: '购买及出售数字货币',
+      sub_title: '即刻開啟數位貨幣交易學習',
+      option1: '購買及出售數位貨幣',
       option2: '探索 %{siteName} 交易',
       item1: '3分鐘註冊帳號',
       item2: '如何進行現貨交易',
       item3: '學習合約教程',
     },
     feature: {
-      title: '开启您的数字货币之旅',
-      lable1: '合约产品',
-      describe1: '支持金本位合约<br>币种丰富，合约功能完善',
+      title: '開啟您的數位貨幣之旅',
+      lable1: '合約產品',
+      describe1: '支持金本位合約<br>幣種豐富，合約功能完善',
       lable2: '高性能',
-      describe2: '每秒处理300,000交易量, 从输入<br>订单到响应时间的延迟小于1毫秒',
-      lable3: '最高的钱包安全性',
-      describe3: '冷钱包存储。转账经过<br> 2级严格的人员审查。',
-      lable4: '客户服务',
-      describe4: '7*24小时多语言在线服务<br>支持极速充/提币',
+      describe2: '每秒處理300000交易量，從輸入<br>訂單到回應時間的延遲小於1毫秒',
+      lable3: '最高的錢包安全性',
+      describe3: '冷錢包存儲。 轉帳經過<br> 2級嚴格的人員審查。',
+      lable4: '客戶服務。',
+      describe4: '7*24小時多語言線上服務<br>支持極速充/提幣',
     }, 
   },
   market: {
