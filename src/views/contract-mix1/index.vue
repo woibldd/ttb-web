@@ -23,7 +23,7 @@
                     <el-popover 
                       v-else
                       :popper-class="[state.skin, 'pd-0']"  
-                      trigger="click">
+                      trigger="hover">
                       <div class="drop-down">
                         <div>
                           <el-row>
