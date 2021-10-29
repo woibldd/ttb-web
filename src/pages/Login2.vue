@@ -1,6 +1,5 @@
 <template>
-  <div class="register-container "> 
-    <bubble v-if="!isMobile"/>
+  <div class="register-container"> 
     <div class="register-box" ref="container">
       <div v-if="step===1" class="wrap">
         <div class="register-title">
@@ -54,7 +53,7 @@
               </el-col>
               <el-col :span="1">&nbsp;</el-col>
               <el-col :span="16">
-                <el-input v-model="form.phone" :placeholder="$t('register_by_phone')"></el-input>
+                <el-input v-model="form.phone" :placeholder="$t('phone')"></el-input>
               </el-col>
             </el-form-item>
             <el-form-item v-if="by==='email'" prop="email"> 
@@ -73,10 +72,7 @@
             </el-form-item>
             <!-- 代翔: 滑动验证组件 -->
             <el-form-item>
-              <div class="nc-box">
-                <div class="mask" v-if="!((form.phone || form.email) && form.password)"></div>
-                <div id="nc"></div>
-              </div>
+              <nc ref="nc" :mask="!((form.phone || form.email) && form.password)" @getnc="getnc"/>
             </el-form-item>
             <el-form-item prop="agree">   
               <div>
@@ -96,7 +92,10 @@
       </div>
       <div v-else-if="step===2" class="wrap"> 
         <div class="close"> 
-          <label @click="handleCloseSmsCode"><icon name="close" /></label> 
+          <label @click="handleCloseSmsCode">
+            <!-- <icon name="close" /> -->
+            x
+          </label> 
         </div>
         <div class="register-title">
           <h3>{{$t('customer.accountVerification')}}</h3>
@@ -108,7 +107,7 @@
             </div>
             <div class="text" >
               <!-- 请输入您在{{by==='phone'?'手机号 '+form.phone:'邮箱 ' + form.email}}  收到的6位验证码，验证 码30分钟有效 -->
-              {{$t('customer.tip1', {contact: verify_type==='phone'? $t('register_by_phone')+form.phone:$t('email') + form.email})}}
+              {{$t('customer.tip1', {contact: verify_type==='phone'? $t('phone')+form.phone:$t('email') + form.email})}}
             </div>
           </div>
           <div class="mt-30 pb-15 mb-5">
@@ -120,11 +119,10 @@
             <CodeInput :loading="false" class="input" v-on:change="onChange" v-on:complete="onComplete" />
           </div>
           <div class="mt-20" v-if="verify_type==='phone' || verify_type==='email'">
-            <label class="sms-btn"
-              :class="{disabled: sms.status === 1}"
-              @click.prevent="getSmsCode">
+            <label v-show="!shownc" class="sms-btn" :class="{disabled: sms.status === 1}" @click.prevent="getSmsCode2">
               {{smsBtnText}}
-            </label> 
+            </label>
+            <nc v-show="shownc" ref="ncvalid" :mask="false" @getnc="getnc2"/> 
           </div>
         </div>
       </div>
@@ -140,19 +138,14 @@ import utils from '@/modules/utils'
 import service from '@/modules/service'
 import responsive from '@/mixins/responsive'
 import VDownload2 from '@/components/VDownload'
-import bubble from '@/components/Bubble'
 import _ from 'lodash'
-import nc from '@/mixins/createnc'
+import nc from '@/components/createnc'
 
 export default {
   name: "login",
-  components: {
-    CodeInput,
-    VDownload2,
-    bubble
-  },
+  components: {CodeInput, VDownload2, nc},
   props: ['by'],
-  mixins: [responsive, nc],
+  mixins: [responsive],
   data() {
     return {
       state,
@@ -187,6 +180,7 @@ export default {
         email: [ {  required: true, trigger: 'blur', message: this.$t('bind_email_input'), },],
         password:[{  required: true, trigger: 'blur', message: this.$t('login_ph_pw'), },],  
       },
+      ncData: {}, isnc: false, shownc: false
     }
   },
   beforeRouteEnter(to, from, next) {  
@@ -205,9 +199,6 @@ export default {
     })
   },
   computed: { 
-    isMobile(){
-      return utils.isMobile()
-    },
     smsBtnText () {
       if (this.sms.status === 0) {
         return this.$i18n.t('sms_send')
@@ -230,6 +221,26 @@ export default {
     },
   },
   methods: {
+    getnc(data) {
+      this.ncData = data;
+      this.isnc = true;
+    },
+    getnc2(data) {
+      this.ncData = data;
+      this.shownc = false;
+      this.getSmsCode();
+    },
+    ncreset() {
+      this.$refs.nc.ncreset();
+      this.$refs.ncvalid.ncreset();
+      this.isnc = false;
+      this.shownc = false;
+    },
+    getSmsCode2() {
+      this.$refs.ncvalid.ncreset();
+      this.shownc = true;
+    },
+
     onChange(v) {
       this.form.captcha = v
       // console.log("onChange ", v);
@@ -403,7 +414,6 @@ export default {
     }
   },
   mounted () {
-    this.initnc(); // 代翔: 初始化滑动验证组件
     this.$eh.$on('app:resize', () => this.fixPosition())
     this.$nextTick(this.fixPosition)
   },
@@ -420,7 +430,7 @@ export default {
 @import "../styles/_countryselect";
 .register-container {
   width:100%;
-  padding-top: 1px;
+  // padding-top: 100px;
   height: 650px;
   .register-box {
     margin: 0 auto;
@@ -429,12 +439,14 @@ export default {
     background-color: #ffffff;
     .wrap {
       position:relative;
-      padding: 30px 50px 40px; 
+      padding: 30px 50px 40px;
+      .sms-btn{color: $primary; cursor: pointer;}
       .close {
         position: absolute;
         top: 10px;
         right: 15px;
-        font-size: 20px; 
+        font-size: 20px;
+        label{cursor: pointer;}
       }
       .register-title {
         margin-bottom: 25px;

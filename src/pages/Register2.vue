@@ -109,10 +109,7 @@
 
             <!-- 代翔: 滑动验证组件 -->
             <el-form-item>
-              <div class="nc-box">
-                <div class="mask" v-if="!((form.phone || form.email) && form.password)"></div>
-                <div id="nc"></div>
-              </div>
+              <nc ref="nc" :mask="!((form.phone || form.email) && form.password)" @getnc="getnc"/>
             </el-form-item>
 
             <el-form-item prop="agree">
@@ -144,7 +141,10 @@
       </div>
       <div v-else-if="step===2" class="wrap">
         <div class="close"> 
-          <label @click="handleCloseSmsCode"><icon name="close" /></label> 
+          <label @click="handleCloseSmsCode">
+            <!-- <icon name="close" /> -->
+            x
+          </label> 
         </div>
         <div class="register-title">
           <h3>{{$t('customer.accountVerification')}}</h3>
@@ -166,11 +166,10 @@
             <CodeInput :loading="false" class="input" v-on:change="onChange" v-on:complete="onComplete" />
           </div>
           <div class="mt-20">
-            <label class="sms-btn"
-              :class="{disabled: sms.status === 1}"
-              @click.prevent="getSmsCode">
+            <label v-show="!shownc" class="sms-btn" :class="{disabled: sms.status === 1}" @click.prevent="getSmsCode2">
               {{smsBtnText}}
-            </label> 
+            </label>
+            <nc v-show="shownc" ref="ncvalid" :mask="false" @getnc="getnc2"/>
           </div>
         </div>
       </div>
@@ -188,20 +187,17 @@ import pwChecker from '@/modules/pw-checker'
 import responsive from '@/mixins/responsive'
 import VDownload2 from '@/components/VDownload'
 import bubble from '@/components/Bubble'
-import nc from '@/mixins/createnc'
+import nc from '@/components/createnc'
 
 export default {
   name: "register",
-  components: {
-    CodeInput, 
-    VDownload2,
-    bubble
-  },
+  components: {CodeInput,  VDownload2, bubble, nc},
   props: ['by'],
-  mixins: [responsive, nc],
+  mixins: [responsive],
   data() { 
     return {
-      state,  
+      state,
+      ncData: {}, isnc: false, shownc: false,
       pwdType: 'password', //密码输入框状态
       step: 1, 
       atPw: false, 
@@ -332,7 +328,27 @@ export default {
       return `${this.$i18n.t('sms_retry')}(${this.sms.countDown})`
     },
   },
-  methods: { 
+  methods: {
+    getnc(data) {
+      this.ncData = data;
+      this.isnc = true;
+    },
+    getnc2(data) {
+      this.ncData = data;
+      this.shownc = false;
+      this.getSmsCode();
+    },
+    ncreset() {
+      this.$refs.nc.ncreset();
+      this.$refs.ncvalid.ncreset();
+      this.isnc = false;
+      this.shownc = false;
+    },
+    getSmsCode2() {
+      this.$refs.ncvalid.ncreset();
+      this.shownc = true;
+    },
+
     active (active) {
       //显示密码辅助弹窗
       this.atPw = active
@@ -435,12 +451,12 @@ export default {
         this.sms.countDown = 0
         this.sms.status = 2
         // this.errmsg = res.message
-        this.ncreset(); // 重置滑动验证模块
       } else {
         this.errmsg = '' 
         this.step = 2
         this.startCountDown()
       }
+      this.ncreset(); // 重置滑动验证模块
     },
     startCountDown () {
       clearInterval(this.sms.timer)
@@ -519,12 +535,14 @@ export default {
     background-color: #ffffff;
     .wrap {
       position: relative;
-      padding: 30px 50px 40px; 
+      padding: 30px 50px 40px;
+      .sms-btn{color: $primary; cursor: pointer;}
       .close {
         position: absolute;
         top: 10px;
         right: 15px;
-        font-size: 20px; 
+        font-size: 20px;
+        label{cursor: pointer;}
       }
       .register-title {
         margin-bottom: 25px;

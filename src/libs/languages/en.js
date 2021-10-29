@@ -321,6 +321,7 @@ export default {
   bind_google_ph: "6 digits Google Authenticaion",
   bind: "Confirm",
   bind_phone_input: "Enter your cellphone number",
+  bind_email_input: "Please enter email address",
   bind_phone_label: "Please enter your cellphone number",
   phone_code_ph: "6 digit code",
   bind_phone_confirm: "Authentification",
