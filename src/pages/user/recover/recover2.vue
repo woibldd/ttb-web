@@ -425,10 +425,10 @@ export default {
       })
       if (res.code) {
         this.errmsg = res.message
-        this.ncreset(); // 重置滑动验证模块
       } else {
         this.errmsg = ''
       }
+      this.ncreset(); // 重置滑动验证模块
     },
     startCountDown () {
       clearInterval(this.sms.timer)

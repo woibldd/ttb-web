@@ -47,10 +47,12 @@ export default {
 
 <style lang="scss">
 .nc-page{
-  height: 100vh; background: #000;
+  height: 100vh; padding: 20px; background: #000;
   .title{position: absolute; top: 40%; width: 100%; font-size: 20px; text-align: center; color: $primary;}
   .common{height: 52px!important; line-height: 56px!important; border-radius: 26px!important;}
   .nc-box{
+    @extend .common;
+    width: 85%;
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0 auto; box-sizing: border-box;
 
     &.succls{
