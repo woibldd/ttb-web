@@ -1,17 +1,17 @@
 <template>
   <div class="nc-page">
     <!-- <div class="title">{{title}}</div> -->
-    <div class="nc-box" :class="{succls}"><div id="nc"></div></div>
+    <nc ref="nc" @getnc="getnc"/>
   </div>
 </template>
 
 <script>
 import {state} from '@/modules/store';
 import utils from '@/modules/utils'
-import nc from '@/mixins/createnc';
+import nc from '@/components/createnc';
 
 export default {
-  mixins: [nc],
+  components: {nc},
   data() {
     return {
       state, utils
@@ -31,17 +31,14 @@ export default {
       else return temp[this.state.locale];
     }
   },
-  mounted() {
-    this.initnc();
-  },
   methods: {
-    ncback() {
+    getnc(data) {
       if (this.utils.isIos()) {
-        window.webkit.messageHandlers.getSlideData.postMessage(this.ncData);
+        window.webkit.messageHandlers.getSlideData.postMessage(data);
       }
 
       if (this.utils.isAndroid()) {
-        android.verifySuccess(this.ncData.sessionId, this.ncData.token, this.ncData.sig, this.ncData.scene);
+        android.verifySuccess(data.sessionId, data.token, data.sig, data.scene);
       }
     }
   }
@@ -63,6 +60,7 @@ export default {
   }
   .nc-container .nc_wrapper{
     @extend .common;
+    margin: 0 auto;
     // padding: 0 5px;
     background: #474747;
   }

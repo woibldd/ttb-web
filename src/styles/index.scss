@@ -534,22 +534,6 @@ $primary-color: #01CED1;
 }
 
 
-.nc-box{
-  width: 100%; height: 40px; position: relative;
-  .common{height: 40px!important; line-height: 40px!important; border-radius: 4px!important;}
-  .nc-container .nc_wrapper{width: 100%!important;}
-  .mask{position: absolute; z-index: 10; left: 0; right: 0; top: 0; bottom: 0;}
-
-  .nc-container .nc_wrapper, .nc_scale, .scale_text, .nc_bg {
-    @extend .common;
-  }
-  .nc_bg{background: $primary!important;}
-  .btn_slide, .btn_ok {height: 38px!important; line-height: 38px !important;}
-  .btn_slide{border-radius: 4px 0 0 4px;}
-  .btn_ok{border-radius: 0 4px 4px 0;}
-  .nc-lang-cnt{@extend .common; font-size: 14px;}
-}
-
 strong{font-weight: bold;}
 
 
