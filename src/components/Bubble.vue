@@ -60,6 +60,7 @@ export default {}
       height:18px;
     } 
     .text-box {
+      color: $primary;
       .title {
         position: relative;
         height: 21px;

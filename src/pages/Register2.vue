@@ -1,5 +1,6 @@
 <template>
   <div class="register-container">
+    <bubble v-if="!isMobile"/>
     <div class="register-box" ref="container">
       <div v-if="step===1" class="wrap">
         <div class="register-title">
@@ -186,13 +187,15 @@ import service from '@/modules/service'
 import pwChecker from '@/modules/pw-checker' 
 import responsive from '@/mixins/responsive'
 import VDownload2 from '@/components/VDownload'
+import bubble from '@/components/Bubble'
 import nc from '@/mixins/createnc'
 
 export default {
   name: "register",
   components: {
     CodeInput, 
-    VDownload2
+    VDownload2,
+    bubble
   },
   props: ['by'],
   mixins: [responsive, nc],
@@ -297,8 +300,7 @@ export default {
             }
           }
         }]
-      },
-
+      }, 
     }
   }, 
   beforeRouteEnter(to, from, next) {  
@@ -317,6 +319,9 @@ export default {
     })
   },
   computed: { 
+    isMobile(){
+      return utils.isMobile()
+    },
     smsBtnText () {
       if (this.sms.status === 0) {
         return this.$i18n.t('sms_send')
@@ -505,7 +510,7 @@ export default {
 @import "../styles/_countryselect";
 .register-container { 
   width:100%;
-  // padding-top: 100px;
+  padding-top: 1px;
   height: 650px;
   .register-box {
     margin: 0 auto;

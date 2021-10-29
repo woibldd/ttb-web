@@ -1,5 +1,6 @@
 <template>
-  <div class="register-container"> 
+  <div class="register-container "> 
+    <bubble v-if="!isMobile"/>
     <div class="register-box" ref="container">
       <div v-if="step===1" class="wrap">
         <div class="register-title">
@@ -53,7 +54,7 @@
               </el-col>
               <el-col :span="1">&nbsp;</el-col>
               <el-col :span="16">
-                <el-input v-model="form.phone" :placeholder="$t('phone')"></el-input>
+                <el-input v-model="form.phone" :placeholder="$t('register_by_phone')"></el-input>
               </el-col>
             </el-form-item>
             <el-form-item v-if="by==='email'" prop="email"> 
@@ -107,7 +108,7 @@
             </div>
             <div class="text" >
               <!-- 请输入您在{{by==='phone'?'手机号 '+form.phone:'邮箱 ' + form.email}}  收到的6位验证码，验证 码30分钟有效 -->
-              {{$t('customer.tip1', {contact: verify_type==='phone'? $t('phone')+form.phone:$t('email') + form.email})}}
+              {{$t('customer.tip1', {contact: verify_type==='phone'? $t('register_by_phone')+form.phone:$t('email') + form.email})}}
             </div>
           </div>
           <div class="mt-30 pb-15 mb-5">
@@ -139,6 +140,7 @@ import utils from '@/modules/utils'
 import service from '@/modules/service'
 import responsive from '@/mixins/responsive'
 import VDownload2 from '@/components/VDownload'
+import bubble from '@/components/Bubble'
 import _ from 'lodash'
 import nc from '@/mixins/createnc'
 
@@ -146,7 +148,8 @@ export default {
   name: "login",
   components: {
     CodeInput,
-    VDownload2
+    VDownload2,
+    bubble
   },
   props: ['by'],
   mixins: [responsive, nc],
@@ -202,6 +205,9 @@ export default {
     })
   },
   computed: { 
+    isMobile(){
+      return utils.isMobile()
+    },
     smsBtnText () {
       if (this.sms.status === 0) {
         return this.$i18n.t('sms_send')
@@ -414,7 +420,7 @@ export default {
 @import "../styles/_countryselect";
 .register-container {
   width:100%;
-  // padding-top: 100px;
+  padding-top: 1px;
   height: 650px;
   .register-box {
     margin: 0 auto;
