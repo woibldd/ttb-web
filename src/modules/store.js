@@ -175,7 +175,8 @@ export const local = new Locals('store', {
   neverShowSgpTradingDialog: false, 
   tv: {},
   share_labels:[],
-  share_shapes:[]
+  share_shapes:[],
+  depositAlert:{},
 })
 
 export const actions = {
