@@ -27,7 +27,7 @@ export default {}
   position: relative;
   .wrap {
     position: absolute;
-    z-index: 99999;
+    z-index: 10;
     width: 260px;
     background: #0c1222;
     -webkit-box-shadow: 0 1px 6px 0 rgba(0,0,0,.15);
