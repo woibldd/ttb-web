@@ -237,8 +237,10 @@ export default {
       this.shownc = false;
     },
     getSmsCode2() {
-      this.$refs.ncvalid.ncreset();
-      this.shownc = true;
+      if (this.sms.status === 0 || this.sms.status === 2) {
+        this.$refs.ncvalid.ncreset();
+        this.shownc = true;
+      }
     },
 
     onChange(v) {
