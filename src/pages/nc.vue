@@ -1,17 +1,17 @@
 <template>
   <div class="nc-page">
     <!-- <div class="title">{{title}}</div> -->
-    <div class="nc-box" :class="{succls}"><div id="nc"></div></div>
+    <nc ref="nc" @getnc="getnc"/>
   </div>
 </template>
 
 <script>
 import {state} from '@/modules/store';
 import utils from '@/modules/utils'
-import nc from '@/mixins/createnc';
+import nc from '@/components/createnc';
 
 export default {
-  mixins: [nc],
+  components: {nc},
   data() {
     return {
       state, utils
@@ -31,17 +31,14 @@ export default {
       else return temp[this.state.locale];
     }
   },
-  mounted() {
-    this.initnc();
-  },
   methods: {
-    ncback() {
+    getnc(data) {
       if (this.utils.isIos()) {
-        window.webkit.messageHandlers.getSlideData.postMessage(this.ncData);
+        window.webkit.messageHandlers.getSlideData.postMessage(data);
       }
 
       if (this.utils.isAndroid()) {
-        android.verifySuccess(this.ncData.sessionId, this.ncData.token, this.ncData.sig, this.ncData.scene);
+        android.verifySuccess(data.sessionId, data.token, data.sig, data.scene);
       }
     }
   }
@@ -50,10 +47,12 @@ export default {
 
 <style lang="scss">
 .nc-page{
-  height: 100vh; background: #000;
+  height: 100vh; padding: 20px; background: #000;
   .title{position: absolute; top: 40%; width: 100%; font-size: 20px; text-align: center; color: $primary;}
   .common{height: 52px!important; line-height: 56px!important; border-radius: 26px!important;}
   .nc-box{
+    @extend .common;
+    width: 85%;
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0 auto; box-sizing: border-box;
 
     &.succls{
@@ -63,6 +62,7 @@ export default {
   }
   .nc-container .nc_wrapper{
     @extend .common;
+    margin: 0 auto;
     // padding: 0 5px;
     background: #474747;
   }

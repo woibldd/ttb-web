@@ -312,6 +312,7 @@ export default {
   bind_google_ph: "6자리 구글인증번호",
   bind: "연동",
   bind_phone_input: "휴대폰번호를 입력 하십시오.",
+  bind_email_input: "메 일 을 입력 하 세 요",
   bind_phone_label: "고객님의 휴대폰번호를 입력 하십시오.",
   phone_code_ph: "6자리 인증번호",
   bind_phone_confirm: "인증",

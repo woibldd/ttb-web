@@ -311,6 +311,7 @@ export default {
   bind_google_ph: "6位谷歌验证码",
   bind: "绑定",
   bind_phone_input: "请输入手机号码",
+  bind_email_input: "请输入邮箱",
   bind_phone_label: "请输入你的手机号码",
   phone_code_ph: "6位验证码",
   bind_phone_confirm: "验证",

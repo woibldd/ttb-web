@@ -60,7 +60,6 @@
                 :rule="validateRules.phone"
                 :placeholder="$t('bind_phone_input')"
                 :label="$t('phone_number')"
-                @change="changefn"
               />
             </div>
           </div>
@@ -79,14 +78,12 @@
                 :rule="validateRules.email"
                 placeholder="you@example.com"
                 :label="$t('email')"
-                @change="changefn"
               />
             </div>
           </div>
-          <div class="nc-box" style="width: 280px; margin: 26px auto 0;">
-            <div class="mask" v-if="!(phone || email)"></div>
-            <div id="nc"></div>
-          </div>
+          <nc
+            style="width: 280px; margin: 26px auto 0;"
+            ref="nc" :mask="!(phone || email)" @getnc="getnc"/>
           <div
             v-if="step===1"
             class="field recover__validate mt-17"
@@ -209,19 +206,17 @@ import ixInput from '@/components/common/ix-input/ix-input.vue'
 import utils from '@/modules/utils'
 import _ from 'lodash'
 import responsive from '@/mixins/responsive'
-import nc from '@/mixins/createnc'
+import nc from '@/components/createnc'
 
 export default {
-  mixins: [responsive, nc],
+  mixins: [responsive],
   name: 'Recover',
-  components: {
-    slideValidate,
-    ixInput
-  },
+  components: {slideValidate, ixInput, nc},
   props: ['by'],
   data () {
     return {
       state,
+      ncData: {}, isnc: false,
       email: '',
       regionId: '',
       step: 2,
@@ -300,6 +295,15 @@ export default {
     }
   },
   methods: {
+    getnc(ncData) {
+      this.ncData = ncData;
+      this.isnc = true;
+    },
+    ncreset() {
+      this.$refs.nc.ncreset(); // 重置滑动验证模块
+      this.isnc = false;
+    },
+    
     async nextstep () {
       const check = this.checkParams()
       if (!check.ok || !!this.triggerValidate) {
@@ -421,10 +425,10 @@ export default {
       })
       if (res.code) {
         this.errmsg = res.message
-        this.ncreset(); // 重置滑动验证模块
       } else {
         this.errmsg = ''
       }
+      this.ncreset(); // 重置滑动验证模块
     },
     startCountDown () {
       clearInterval(this.sms.timer)

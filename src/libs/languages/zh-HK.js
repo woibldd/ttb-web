@@ -322,6 +322,7 @@ export default {
   bind_google_ph: "6位谷歌驗證碼",
   bind: "綁定",
   bind_phone_input: "請輸入手機號碼",
+  bind_email_input: "請輸入郵箱",
   bind_phone_label: "請輸入你的手機號碼",
   phone_code_ph: "6位驗證碼",
   bind_phone_confirm: "驗證",
