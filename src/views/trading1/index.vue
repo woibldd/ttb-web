@@ -130,7 +130,7 @@
       </div>
       <div class="ix-row">
         <!--  当前委托 & 委托历史 -->
-        <div v-if="state.userInfo" class="ix-grid ix-grid-order" ref="gridOrder">
+        <div class="ix-grid ix-grid-order" ref="gridOrder">
           <Order ref="Order"/>
         </div>
       </div>
