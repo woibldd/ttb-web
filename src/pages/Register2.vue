@@ -155,7 +155,7 @@
               <icon name="message" />
             </div>
             <div class="text">
-              {{$t('customer.tip1', {contact: by==='phone'? $t('phone')+form.phone:$t('email') + form.email})}}
+              {{$t('customer.tip1', {contact: by==='phone'? $t('register_by_phone')+form.phone:$t('email') + form.email})}}
             </div>
           </div>
           <div class="mt-30 pb-15 mb-5">

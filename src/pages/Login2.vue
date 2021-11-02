@@ -1,13 +1,25 @@
 <template>
   <div class="register-container"> 
     <div class="register-box" ref="container">
+      <!-- <div class="corner-icon-view view-type-password">  
+        <div class="label" @click="handleChangeLoginType">
+          <div class="qrcode" v-if="loginType==='password'" @click="loginType='qrcode'">
+            <icon style="font-size: 60px;" name="login-qrcode" />
+          </div> 
+          <div class="qrcode pt-7 pr-7" v-else @click="loginType='password'">
+            <icon style="font-size: 38px;" name="compute" />
+          </div> 
+          <div class="mask"></div>
+        </div>
+      </div>
+      <div></div> -->
       <div v-if="step===1" class="wrap">
         <div class="register-title">
           <h3>
             {{$t('customer.loginAccount', {siteName: 'IXX'})}}
           </h3>
         </div>
-        <div class="register-content">
+        <div class="register-content"> 
           <el-menu :default-active="by" class="el-menu-demo" mode="horizontal" @select="handleSelect"> 
             <el-menu-item index="phone">
               <router-link
@@ -106,8 +118,8 @@
               <icon name="message" />
             </div>
             <div class="text" >
-              <!-- 请输入您在{{by==='phone'?'手机号 '+form.phone:'邮箱 ' + form.email}}  收到的6位验证码，验证 码30分钟有效 -->
-              {{$t('customer.tip1', {contact: verify_type==='phone'? $t('phone')+form.phone:$t('email') + form.email})}}
+              <!-- 请输入您在{{by==='phone'?'手机号 '+form.phone:'邮箱' + form.email}}  收到的6位验证码，验证 码30分钟有效 -->
+              {{$t('customer.tip1', {contact: verify_type==='phone'? $t('register_by_phone')+form.phone:$t('email') + form.email})}}
             </div>
           </div>
           <div class="mt-30 pb-15 mb-5">
@@ -149,6 +161,7 @@ export default {
   data() {
     return {
       state,
+      loginType: 'password',
       by: 'phone', 
       pwdType: 'password', //密码输入框状态
       step: 1, 
@@ -180,7 +193,9 @@ export default {
         email: [ {  required: true, trigger: 'blur', message: this.$t('bind_email_input'), },],
         password:[{  required: true, trigger: 'blur', message: this.$t('login_ph_pw'), },],  
       },
-      ncData: {}, isnc: false, shownc: false
+      ncData: {}, 
+      isnc: false, 
+      shownc: false
     }
   },
   beforeRouteEnter(to, from, next) {  
@@ -221,6 +236,13 @@ export default {
     },
   },
   methods: {
+    handleChangeLoginType() {
+      if (this.loginType==='password') {
+        this.loginType = 'qrcode'
+      } else {
+        this.loginType = 'password'
+      }
+    },
     getnc(data) {
       this.ncData = data;
       this.isnc = true;
@@ -495,6 +517,30 @@ export default {
       }
     }
   } 
+  .corner-icon-view {
+    position: relative;
+    color: $primary;
+    text-align: right;
+    .label {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 60px;
+      width: 60px; 
+      cursor: pointer;
+      z-index: 10; 
+    } 
+    .mask {
+      position: absolute; 
+      top: 0;
+      right: 0;
+      height: 0;
+      width: 0;
+      border-right: 60px solid transparent;
+      border-bottom: 60px solid white;
+      cursor: pointer;
+    }
+  }
 } 
   
 </style>
