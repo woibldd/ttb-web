@@ -53,11 +53,11 @@
               </el-col>
               <el-col :span="1">&nbsp;</el-col>
               <el-col :span="16">
-                <el-input v-model="form.phone" :placeholder="$t('phone')"></el-input>
+                <el-input v-model="form.phone" :placeholder="$t('bind_phone_input')"></el-input>
               </el-col>
             </el-form-item>
             <el-form-item v-if="by==='email'" prop="email"> 
-              <el-input v-model="form.email" :placeholder="$t('email')"></el-input> 
+              <el-input v-model="form.email" :placeholder="$t('bind_email_input')"></el-input> 
             </el-form-item>
             <el-form-item prop="password">
               <el-input 
