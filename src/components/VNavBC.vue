@@ -196,8 +196,7 @@
             <icon
               :name="fund"
             />
-            <span @click="openDefault('fund')">{{ $t('wallets_nav_asset') }}</span>
-
+            <span @click="openDefault('fund')">{{ $t('wallets_nav_asset') }}</span> 
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <li class="dropdown-item pl-24 pr-24">  
@@ -225,14 +224,14 @@
             </div>
           </div> 
           <div class="email mr-30 nav_link">
-            <span @click="openDefault('profile')">{{ desentInfo }}</span>
+            <span @click="openDefault('profile')">1{{ desentInfo }}2</span>
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
-                <li class="dropdown-item pl-24 pr-24 mobile">
+                <!-- <li class="dropdown-item pl-24 pr-24 mobile">
                   <router-link
                     :to="{name: 'fund'}"
                     class="link">{{ $t('capital_manage') }}</router-link>
-                </li>
+                </li> -->
                 <li class="dropdown-item pl-24 pr-24">
                   <router-link
                     :to="{name: 'profile'}"

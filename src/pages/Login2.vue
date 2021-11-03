@@ -1,7 +1,7 @@
 <template>
   <div class="register-container"> 
     <div class="register-box" ref="container">
-      <div class="corner-icon-view view-type-password">  
+      <div class="corner-icon-view view-type-password" v-if="step===1">  
         <div class="label" @click="handleChangeLoginType">
           <div class="qrcode" v-if="loginType==='password'" @click="loginType='qrcode'">
             <icon style="font-size: 60px;" name="login-qrcode" />
