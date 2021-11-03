@@ -327,7 +327,9 @@ export default {
       } 
     },
     async fetchGetQrcode() {
-      const params = {}
+      const params = {
+        device: navigator.userAgent
+      }
       if (this.qrUrl){
         params.code = this.qrUrl
       }

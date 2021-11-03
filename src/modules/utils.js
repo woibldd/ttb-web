@@ -658,9 +658,10 @@ const utils = {
         fn.apply(this, args)
       }, delay)
     }
-  }
-  
-
+  },
+  getDevice () {
+    return navigator.userAgent
+  } 
 }
 
 if (process.env.NODE_ENV === 'development') {

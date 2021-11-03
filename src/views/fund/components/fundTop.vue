@@ -143,8 +143,7 @@ export default {
   },
   created() {  
     this.fetchAccountAssets()
-  }
-
+  } 
 }
 
 </script>

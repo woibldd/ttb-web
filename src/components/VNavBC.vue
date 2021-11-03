@@ -280,13 +280,13 @@
         </div> 
         <div class="lang"> 
           <div class='lang_title nav_link'>
-            {{ localeText }}
-            <icon class="rig" name="arrow-down"/> 
+            {{`${localeText} | ${state.fiatMoney}`}}
+            <!-- <icon class="rig" name="arrow-down"/>  -->
           </div>
           <div class="dropdown-sub-menu lang_account" >
             <div class="lang-ddl-wrap" flex>
-              <ul class="dropdown-list pt-10 pb-10" flex-box="1">
-                <li class="dropdown-title pl-24">语言</li>
+              <ul class="dropdown-list pt-10" flex-box="1">
+                <li class="dropdown-title pl-20">语言</li>
                 <li class="dropdown-item yuyan pl-20 pr-20"
                   v-for="(value, key) in locales"
                   :key="key"
@@ -295,8 +295,8 @@
                   <a class="link" target="#">{{ value }}</a> <span v-if="key===state.locale"><icon name="gou" /></span> 
                 </li> 
               </ul>
-              <ul class="dropdown-list pt-10 bd-10" flex-box="1">
-                <li class="dropdown-title pl-24">本地货币</li>
+              <ul class="dropdown-list pt-10" flex-box="1">
+                <li class="dropdown-title pl-20">本地货币</li>
                 <li class="dropdown-item  pl-20 pr-20" @click="handleCommand('CNY')" flex="main:justify">
                   <a class="link" target="#">CNY</a> <span v-if="state.fiatMoney==='CNY'"><icon name="gou" /></span>
                 </li>
@@ -552,8 +552,7 @@ export default {
   }
   .nav_left {
     float: left;
-    // margin-left: 20px;
-
+    // margin-left: 20px; 
     .left_options {
       float: left;
       margin: 0 0 0 40px;
@@ -681,8 +680,12 @@ export default {
     height: 100%;
     display: flex;
     align-items: center;
-
+    color: #ffffff; 
+    .nav_link { 
+      color: $nav-white-color;
+    }
     .right_options {
+      color: $nav-white-color;
       height: 60px;
       line-height: 60px;
       display: flex;
@@ -756,7 +759,7 @@ export default {
         }
       }
       &.lang_account {
-        left: -190px;
+        right: -58px;
         .lang-ddl-wrap {
           width: 260px;
           // background-color: #ffffff; 
@@ -764,7 +767,8 @@ export default {
             width: 130px;
             text-align: left;
             .dropdown-title {
-              color: #202020;
+              color: #7D7D7D;
+              font-size: 12px;
             }
             .yuyan {
               border-right: 1px solid #E7E7E7;
@@ -772,8 +776,7 @@ export default {
           }
         }
       }
-    }
-
+    } 
     .fund:hover,
     .email:hover,
     .help:hover,
