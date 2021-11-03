@@ -329,6 +329,7 @@ export default {
           params.token = res.token
           res = await service.setQrcodeLogin(params) 
           if (!res.code) {
+            this.loginSuccess(res.data)
             console.log(res)
           }
         }
