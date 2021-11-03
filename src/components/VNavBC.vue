@@ -698,9 +698,9 @@ export default {
       padding: 18px 0;
       cursor: pointer; 
       .dropdown-sub-menu {
-        // opacity: 0;
-        // display: none;
-        // visibility: hidden;
+        opacity: 0;
+        display: none;
+        visibility: hidden;
       }
     }
     .dropdown-sub-menu {
