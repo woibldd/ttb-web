@@ -1381,7 +1381,24 @@ const service = {
   //账户整合接口
   getAccountAssets() {
     return request('/account/assets/list')
+  },
+  //生成二维码ID
+  getQrcodeGenerate(params) {
+    return request('/user/qrcode/generate', params)
+  },
+  //二维码登录
+  setQrcodeLogin(params) {
+    return request('/user/qrcode/login', params)
+  },
+  //手机端扫码二维码
+  setQrcodeRelation(params) {
+    return request('/user/qrcode/relation', params)
+  },
+  //手机端二维码确认登录
+  setQrcodeConfirm(params) {
+    return request('/user/qrcode/confirm', params)
   }
+
 
 }
 

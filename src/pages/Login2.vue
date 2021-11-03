@@ -1,7 +1,7 @@
 <template>
   <div class="register-container"> 
     <div class="register-box" ref="container">
-      <!-- <div class="corner-icon-view view-type-password">  
+      <div class="corner-icon-view view-type-password">  
         <div class="label" @click="handleChangeLoginType">
           <div class="qrcode" v-if="loginType==='password'" @click="loginType='qrcode'">
             <icon style="font-size: 60px;" name="login-qrcode" />
@@ -12,8 +12,39 @@
           <div class="mask"></div>
         </div>
       </div>
-      <div></div> -->
-      <div v-if="step===1" class="wrap">
+      <div v-if="loginType==='qrcode'" class="wrap">
+        <div class="register-title">
+          <h3>手机扫码，安全登录</h3>
+        </div>
+        <div class="register-content">
+          <div class="scan-before" v-if="qrStatus===1">
+            <div class="login-qrcode mt-30 pt-30 txc"> 
+              <canvas
+                class="qr-img"
+                ref="qr"/> 
+            </div>
+            <div class="login-tip  mt-15" flex="main:center cross:center">
+              <span class="f20 text-primary" >
+                <icon class="f20"  name="scan" />
+              </span>
+              打开 IXX App 扫一扫登录
+            </div> 
+          </div>
+          <div class="scan-after" v-else-if="qrStatus===2">
+            <div class="scan-result">
+              <div class="result-img txc pd-30 text-success">
+                <icon style="font-size: 40px;" name="duigou" />
+              </div>
+              <div class="result-text txc">扫描成功！</div>
+            </div>
+            <div class="scan-tips txc mt-20">请在手机上根据提示确认登录</div> 
+          </div>
+        </div>
+        <div class="register-footer mt-20 text-primary" flex="main:right">
+          <label  @click="handleChangeLoginType">密码登录</label>
+        </div>
+      </div>
+      <div v-else-if="step===1" class="wrap">
         <div class="register-title">
           <h3>
             {{$t('customer.loginAccount', {siteName: 'IXX'})}}
@@ -152,6 +183,7 @@ import responsive from '@/mixins/responsive'
 import VDownload2 from '@/components/VDownload'
 import _ from 'lodash'
 import nc from '@/components/createnc'
+const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')
 
 export default {
   name: "login",
@@ -195,7 +227,11 @@ export default {
       },
       ncData: {}, 
       isnc: false, 
-      shownc: false
+      shownc: false,
+      qrUrl: '',
+      qrStatus: 1,
+      qrTimer: null,
+      qrAmount: 0,
     }
   },
   beforeRouteEnter(to, from, next) {  
@@ -236,12 +272,67 @@ export default {
     },
   },
   methods: {
-    handleChangeLoginType() {
+    async setQr (url) {
+      const QRCode = await qrcode()
+      QRCode.toCanvas(
+        this.$refs.qr,
+        url,
+        {
+          margin: 0,
+          width: 136,
+          height: 136,
+          errorCorrectionLevel: 'H'
+        },
+        (err) => {
+          if (err) {
+            // @improve
+            return utils.log('qrcode error')
+          }
+          this.qrReady = true
+        }
+      )
+    },
+    async handleChangeLoginType() {
       if (this.loginType==='password') {
         this.loginType = 'qrcode'
+        await this.fetchGetQrcode()
+        if (this.qrUrl) {
+          this.qrTimer = setInterval(()=>{
+            if (this.qrAmount < 60) {
+              this.qrAmount++
+              this.fetchGetQrcode()
+            } else {
+              clearInterval(this.qrTimer)
+            }
+          }, 1000)
+        } 
       } else {
         this.loginType = 'password'
+        this.qrUrl = ''
+        this.qrStatus = 1
+        clearInterval(this.qrTimer)
       }
+    },
+    async fetchGetQrcode() {
+      const params = {}
+      if (this.qrUrl){
+        params.code = this.qrUrl
+      }
+      let res = await service.getQrcodeGenerate(params)  
+      if (!res.code) {
+        this.qrUrl = res.url
+        this.qrStatus = +res.status
+        this.setQr(this.qrUrl)
+        if (this.qrStatus===3) { 
+          clearInterval(this.qrTimer)
+
+          params.token = res.token
+          res = await service.setQrcodeLogin(params) 
+          if (!res.code) {
+            console.log(res)
+          }
+        }
+      } 
     },
     getnc(data) {
       this.ncData = data;
