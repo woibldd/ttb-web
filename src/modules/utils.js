@@ -7,9 +7,9 @@ import consts from '@/libs/consts'
 const preloadEl = document.querySelector('.page-loading')
 const externalModule = {}
 const localeName = {
-  'en': 'English',
   'zh-CN': '简体中文',
   'zh-HK': '繁體中文',
+  'en': 'English',
   'ko': '한국어'
 }
 

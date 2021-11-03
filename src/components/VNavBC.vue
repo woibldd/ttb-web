@@ -224,7 +224,7 @@
             </div>
           </div> 
           <div class="email mr-30 nav_link">
-            <span @click="openDefault('profile')">1{{ desentInfo }}2</span>
+            <span @click="openDefault('profile')">{{ desentInfo }}</span>
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
                 <!-- <li class="dropdown-item pl-24 pr-24 mobile">
@@ -283,15 +283,28 @@
             {{ localeText }}
             <icon class="rig" name="arrow-down"/> 
           </div>
-          <div class="dropdown-sub-menu">
-            <ul class="dropdown-list pt-10 pb-10">
-              <li class="dropdown-item pl-24 pr-24"
-                v-for="(value, key) in locales"
-                :key="key"
-                @click="switchLang(key)">  
-                <a class="link" target="#">{{ value }}</a> 
-              </li> 
-            </ul>
+          <div class="dropdown-sub-menu lang_account" >
+            <div class="lang-ddl-wrap" flex>
+              <ul class="dropdown-list pt-10 pb-10" flex-box="1">
+                <li class="dropdown-title pl-24">语言</li>
+                <li class="dropdown-item yuyan pl-20 pr-20"
+                  v-for="(value, key) in locales"
+                  :key="key"
+                  @click="switchLang(key)"
+                  flex="main:justify">  
+                  <a class="link" target="#">{{ value }}</a> <span v-if="key===state.locale"><icon name="gou" /></span> 
+                </li> 
+              </ul>
+              <ul class="dropdown-list pt-10 bd-10" flex-box="1">
+                <li class="dropdown-title pl-24">本地货币</li>
+                <li class="dropdown-item  pl-20 pr-20" @click="handleCommand('CNY')" flex="main:justify">
+                  <a class="link" target="#">CNY</a> <span v-if="state.fiatMoney==='CNY'"><icon name="gou" /></span>
+                </li>
+                <li class="dropdown-item  pl-20 pr-20" @click="handleCommand('USD')" flex="main:justify">
+                  <a class="link" target="#">USD</a> <span v-if="state.fiatMoney==='USD'"><icon name="gou" /></span>
+                </li>
+              </ul> 
+            </div>
           </div> 
         </div>
       </div>
@@ -356,6 +369,8 @@ export default {
           return utils.publicDesensitization(userInfo.phone)[0] 
         } else if (userInfo.email) {
           return utils.publicDesensitization(userInfo.email)[0]
+        } else {
+          return userInfo.name
         }
       }
       return ''
@@ -413,7 +428,10 @@ export default {
       }
     }
   },
-  methods: {
+  methods: { 
+    handleCommand(command) {
+      actions.setFiat(command)
+    },
     resetBalance(balance) { 
       balance === "DEMO" &&
         resetBalance().then(res => {
@@ -583,9 +601,10 @@ export default {
                 height: 40px;
                 line-height: 40px;
                 white-space: nowrap;
+                color: $nav-grey-color;
                 .link {
-                  width: 100%;
-                  height: 100%;
+                  // width: 100%;
+                  // height: 100%;
                   display: block;
                   color: $nav-grey-color;
                 } 
@@ -675,14 +694,13 @@ export default {
     .help,
     .lang {
       float: left;
-      color: $nav-white-color;
+      // color: $nav-white-color;
       padding: 18px 0;
-      cursor: pointer;
-
+      cursor: pointer; 
       .dropdown-sub-menu {
-        opacity: 0;
-        display: none;
-        visibility: hidden;
+        // opacity: 0;
+        // display: none;
+        // visibility: hidden;
       }
     }
     .dropdown-sub-menu {
@@ -691,12 +709,12 @@ export default {
       top: 60px;
       border-radius: 4px;
       z-index: 999; 
-      box-shadow: 0 0 2px 0 #ccc; 
-
+      box-shadow: 0 0 2px 0 #ccc;  
       .dropdown-list {
         .dropdown-item {
           height: 40px;
           line-height: 40px;
+            color: $nav-grey-color;
           &.mobile {
             display: none;
           }
@@ -737,6 +755,23 @@ export default {
           cursor: pointer;
         }
       }
+      &.lang_account {
+        left: -190px;
+        .lang-ddl-wrap {
+          width: 260px;
+          // background-color: #ffffff; 
+          .dropdown-list {
+            width: 130px;
+            text-align: left;
+            .dropdown-title {
+              color: #202020;
+            }
+            .yuyan {
+              border-right: 1px solid #E7E7E7;
+            }
+          }
+        }
+      }
     }
 
     .fund:hover,
@@ -773,13 +808,9 @@ export default {
   .help {
     line-height: 24px;
   }
-  .lang {
-    width: 110px;
-    // height: 24px;
+  .lang { 
     margin-left: 20px; 
-    line-height: 24px;
-    // background: url(../assets/lang.png) no-repeat 12px center;
-    // text-indent: 16px;
+    line-height: 24px; 
     position: relative;
     text-align: center;
     font-size: 14px;
@@ -787,46 +818,11 @@ export default {
     z-index: 100;
     .rig {
       display: inline-block;
-      transition: all 0.2s ease-in-out;
-      // position: absolute;
-      // top: 4px;
-      // right: 10px;
+      transition: all 0.2s ease-in-out; 
       vertical-align: middle;
       font-size: 16px;
-    }
-    .lang_title { 
-      // border-radius: 20px;
-      // border: 1px solid $nav-white-color;
-    }
-    .lang_box {
-      // display: block;
-      width: 100%;
-      height: auto;
-      line-height: 40px;
-      margin-top: 18px;
-      right: 0;
-      position: absolute;
-      display: none;
-      flex-direction: column;
-      box-shadow: 0 0 2px 0 #ccc; 
-      border-radius: 5px;
-      a {
-        background: $protrade-bg;
-        display: block;
-        width: 100%;
-        height: 40px;
-        float: left;
-        color: $nav-grey-color;
-        &:hover {
-          background: $protrade-bg-hover;
-          color: rgba($primary, 0.7);
-        }
-      }
-    }
-    &:hover {
-      .lang_box {
-        display: block;
-      }
+    } 
+    &:hover { 
       .rig {
         transform: rotate(180deg);
       }

@@ -22,6 +22,10 @@
               <canvas
                 class="qr-img"
                 ref="qr"/> 
+              <div class="qr-mask" v-if="!qrEnable">
+                <div class="text mt-30 mb-10">二维码已失效</div>
+                <el-button type="primary" @click="freshQrcode">刷新二维码</el-button>
+              </div>
             </div>
             <div class="login-tip  mt-15" flex="main:center cross:center">
               <span class="f20 text-primary" >
@@ -232,6 +236,7 @@ export default {
       qrStatus: 1,
       qrTimer: null,
       qrAmount: 0,
+      qrEnable: false
     }
   },
   beforeRouteEnter(to, from, next) {  
@@ -292,26 +297,34 @@ export default {
         }
       )
     },
-    async handleChangeLoginType() {
+    handleChangeLoginType() {
       if (this.loginType==='password') {
         this.loginType = 'qrcode'
-        await this.fetchGetQrcode()
-        if (this.qrUrl) {
-          this.qrTimer = setInterval(()=>{
-            if (this.qrAmount < 60) {
-              this.qrAmount++
-              this.fetchGetQrcode()
-            } else {
-              clearInterval(this.qrTimer)
-            }
-          }, 1000)
-        } 
+        this.freshQrcode()
       } else {
         this.loginType = 'password'
         this.qrUrl = ''
         this.qrStatus = 1
         clearInterval(this.qrTimer)
       }
+    },
+    async freshQrcode() { 
+      await this.fetchGetQrcode()
+      if (this.qrUrl) {
+        this.qrEnable = true
+        this.qrTimer = setInterval(()=>{
+          if (this.qrAmount < 60) {
+            this.qrAmount++
+            this.fetchGetQrcode()
+          } else {
+            this.qrEnable = false
+            this.qrStatus = 1
+            this.qrAmount = 0 
+            this.setQr(this.qrUrl)
+            clearInterval(this.qrTimer)
+          }
+        }, 1000)
+      } 
     },
     async fetchGetQrcode() {
       const params = {}
@@ -324,8 +337,7 @@ export default {
         this.qrStatus = +res.status
         this.setQr(this.qrUrl)
         if (this.qrStatus===3) { 
-          clearInterval(this.qrTimer)
-
+          clearInterval(this.qrTimer) 
           params.token = res.token
           res = await service.setQrcodeLogin(params) 
           if (!res.code) {
@@ -602,6 +614,22 @@ export default {
               }
             }
           } 
+        }
+        .login-qrcode {
+          position:relative;
+          .qr-mask {
+            position:absolute;
+            top: 30px;
+            left: 0;
+            height: 136px;
+            width: 100%;
+            background-color: rgba(255,255,255, 0.95);
+            .text {
+              font-size: 14px;
+              color: #3c3c3c;
+              font-weight: 700;
+            }
+          }
         }
       }
       .label {
