@@ -545,8 +545,7 @@ import pairInfoMixins from "./statePairInfoComputedMixins";
 import priceInfoMixins from "./stateComputedMixins";
 import stateHoldingMixins from "./stateHoldingComputedMixins";
 import currentDelMixins from "./stateCurrentDelComputedMixins.js";
-import utils from "@/modules/utils";
-import registryToast from "@/libs/toast/index";
+import utils from "@/modules/utils"; 
 import isEmpty from "lodash/isEmpty";
 import calculator from "@/views/contract-btc/calculator";
 import ixSlider from '@/components/common/ix-slider'

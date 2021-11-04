@@ -837,12 +837,7 @@ export default {
     fetchTabAmount() { 
       service.getFutureAllAmount()
         .then(res => {
-          if (!res.code) { 
-            // active_amount: 1
-            // active_orders_amount: 2133
-            // active_triggers_amount: 1
-            // holding_amount: 3
-            // orders_amount: 1430
+          if (!res.code) {  
             const result = res.data
             this.nav[0].dataCount = result.holding_amount
             this.nav[2].dataCount = result.active_amount
@@ -863,15 +858,17 @@ export default {
         user: this.state.userInfo.id
       }; 
     } //查询用户设置 
-    await service.getRates({currency:'BTC'}).then(res=>{
-      this.state.rate.BTC = res.data.BTC
-    }) 
+    // await service.getRates({currency:'BTC'}).then(res=>{
+    //   this.state.rate.BTC = res.data.BTC
+    // }) 
     this.switchTab({ name: "contract_history_position" });
     this.$eh.$once("protrade:order:refresh", this.refreshCurrentDelegation);
     this.$eh.$on("protrade:order:refresh", type => { 
       this.size = this.page * this.size;
       this.page = 1; 
+      this.fetchTabAmount()
       this.fetchData(); 
+      console.log('protrade:order:refresh');
       this.refreshCurrentDelegation(); 
       this.refreshOrderHistory()
       this.refreshTriggerCount()

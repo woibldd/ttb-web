@@ -138,13 +138,12 @@
         <div
           v-if="cholding.holding && cholding.holding != 0"
           flex="main:justify box:mean"
-          class="reset-werehouse-box"> 
+          class="reset-werehouse-box mb-20"
+          :class="[state.skin]"> 
           <div flex="dir:top">
             <p> {{ $t('FUTURE_&USD', {currency: cholding.currency.replace('USD','')} ) }}</p>
             <p :class="[cholding.holding > 0 && 'color-up'||'color-down']"> {{ cholding.holding > 0 ? $t('contract_action_button_up_r') : $t('contract_action_button_down_r') }} </p>
-            
           </div>
- 
           <div flex="dir:top">
             <span v-tooltip.top-center="{html: true, content: $t('contract_current_werehouse_poi_tips'), classes: 'contract'}">{{ $t('contract_current_werehouse_poi') }}</span>
             <span :class="{'color-up': cholding.holding > 0, 'color-down':cholding.holding < 0}">{{ cholding.holding }}</span>
@@ -152,8 +151,7 @@
           </div>
           <div flex="dir:top">
             <span class="label">{{ $t('contract_lever_times') }}</span>
-            <span class="value">{{ cholding.leverage == 0? $t('contract_all_in') : (cholding.leverage + 'x') }}</span>
-            
+            <span class="value">{{ cholding.leverage == 0? $t('contract_all_in') : (cholding.leverage + 'x') }}</span> 
           </div>
           <div flex="dir:top">
             <span v-tooltip.top-center="{html: true, content: $t('contract_mark_price_tips_table'), classes: 'contract'}">{{ $t('contract_mark_price') }}</span>
@@ -863,9 +861,9 @@ export default {
         }
       })
     }, 1000)
-    service.getRates({currency: 'BTC'}).then(res => {
-      this.rates = res.data.BTC
-    })
+    // service.getRates({currency: 'BTC'}).then(res => {
+    //   this.rates = res.data.BTC
+    // })
   },
   destroyed () {
     this.$eh.$off('protrade:exchange:set', this.set)
@@ -1065,6 +1063,9 @@ export default {
   line-height: 24px;
   border:1px solid #CACACA;
   padding: 22px 10px;
+  &.dark {
+    border-color: #444;
+  }
   &>div{
     // &>*:nth-child(3){
     //   margin-top:15px;

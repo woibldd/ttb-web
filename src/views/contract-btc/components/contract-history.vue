@@ -842,11 +842,11 @@ export default {
         user: this.state.userInfo.id
       }; 
     } //查询用户设置
-    await service.getRates({currency:'BTC'}).then(res=>{
-      if (!res.code) {
-        state.rate.BTC = res.data.BTC
-      }
-    })
+    // await service.getRates({currency:'BTC'}).then(res=>{
+    //   if (!res.code) {
+    //     state.rate.BTC = res.data.BTC
+    //   }
+    // })
     this.switchTab({ name: "contract_history_position" });
     this.$eh.$once("protrade:order:refresh", this.refreshCurrentDelegation);
     this.$eh.$on("protrade:order:refresh", type => { 

@@ -354,6 +354,7 @@ import service from '@/modules/service'
 import pairInfoMixins from './components/statePairInfoComputedMixins' 
 import wsNew from '@/modules/ws-new'
 import leverBox from '@/components/LeverBox' 
+import registryToast from "@/libs/toast/index";
 // import symList from '@/components/contractSymbolList' 
 
 export default {
@@ -509,6 +510,7 @@ export default {
     }
   },
   async created() {  
+    registryToast()
     this.state.skin =  this.local.skin
     this.subMarket()
     //如果地址带有邀请码信息则将邀请码写入cookie中，有效期为10天 2019/10/16 yzf
@@ -522,7 +524,7 @@ export default {
     
     service.MessageSettings().then(resp => {
       if (!resp.code) {
-        $this.state.ct.userSetting = resp.data
+        this.state.ct.userSetting = resp.data
       }
     })
 

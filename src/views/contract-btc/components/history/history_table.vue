@@ -989,9 +989,9 @@ export default {
         }
       })
     }, 1000)
-    service.getRates({currency: 'BTC'}).then(res => {
-      this.rates = res.data.BTC
-    })
+    // service.getRates({currency: 'BTC'}).then(res => {
+    //   this.rates = res.data.BTC
+    // })
   },
   destroyed () {
     this.$eh.$off('protrade:exchange:set', this.set)
