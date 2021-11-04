@@ -428,6 +428,12 @@ export default {
       }
       return {}
     },
+    indexTick() {
+      if (this.state.ct.indexTick) {
+        return this.state.ct.indexTick
+      }
+      return {}
+    },
     userSetting () {
       if (this.state.ct.userSetting) {
         return this.state.ct.userSetting

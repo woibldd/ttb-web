@@ -2889,12 +2889,13 @@ export default {
       increment_24h: '漲跌額'
     },
     mapDishNewInfo: {
-      increment_24h: '涨跌值',
-      markPrice: '标记价格',
-      highest_24h: '24H最高价',
-      lowest_24h: '24最低价', 
+      increment_24h: '漲跌值',
+      markPrice: '標記價格',
+      indexPrice: '指數價格',
+      highest_24h: '24H最高價',
+      lowest_24h: '24最低價', 
       volume_24h: '24H成交量',
-      fee_rate: '资金费率'
+      fee_rate: '資金費率'
     },
     mapDelegateList: {
       'entrust-list': '委託列表',
@@ -3220,6 +3221,7 @@ export default {
     mapDishNewInfo: {
       increment_24h: '涨跌值',
       markPrice: '标记价格',
+      indexPrice: '指数价格',
       highest_24h: '24H最高价',
       lowest_24h: '24最低价', 
       volume_24h: '24H成交量',

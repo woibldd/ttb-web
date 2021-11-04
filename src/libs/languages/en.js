@@ -3072,6 +3072,7 @@ export default {
     mapDishNewInfo: {
       increment_24h: 'Change amt',
       markPrice: 'Mark Price',
+      indexPrice: 'Index Price',
       highest_24h: '24H High',
       lowest_24h: '24H Low', 
       volume_24h: 'Mark Price',
@@ -3358,6 +3359,7 @@ export default {
     mapDishNewInfo: {
       increment_24h: 'Change amt',
       markPrice: 'Mark Price',
+      indexPrice: 'Index Price',
       highest_24h: '24H High',
       lowest_24h: '24H Low', 
       volume_24h: 'Mark Price',

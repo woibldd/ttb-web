@@ -2952,6 +2952,7 @@ export default {
     mapDishNewInfo: {
       increment_24h: '涨跌值',
       markPrice: '标记价格',
+      indexPrice: '指数价格',
       highest_24h: '24H最高价',
       lowest_24h: '24最低价',
       volume_24h: '24H成交量',
@@ -3283,6 +3284,7 @@ export default {
     mapDishNewInfo: {
       increment_24h: '涨跌值',
       markPrice: '标记价格',
+      indexPrice: '指数价格',
       highest_24h: '24H最高价',
       lowest_24h: '24最低价',
       volume_24h: '24H成交量',

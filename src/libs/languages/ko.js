@@ -2932,6 +2932,7 @@ export default {
     mapDishNewInfo: {
       increment_24h: '등락액',
       markPrice: '가격을 표시',
+      indexPrice: '지수의 가격',
       highest_24h: '24시간 최고가',
       lowest_24h: '24시간 최저가',  
       volume_24h: '24시간 거래량',
@@ -3242,6 +3243,7 @@ export default {
     mapDishNewInfo: {
       increment_24h: '등락액',
       markPrice: '가격을 표시',
+      indexPrice: '지수의 가격',
       highest_24h: '24시간 최고가',
       lowest_24h: '24시간 최저가',  
       volume_24h: '24시간 거래량',
