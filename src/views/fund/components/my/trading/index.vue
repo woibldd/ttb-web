@@ -14,7 +14,7 @@
             :class="['fund-tab-item', { active: tab==='history'}]" 
             @click="handleClickTabs('history')" 
             flex="cross:center"
-            v-html="$t('order_history')">
+            v-html="$t('fund_trading_bill')">
             委托历史
           </div> 
         </div>

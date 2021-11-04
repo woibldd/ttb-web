@@ -2725,6 +2725,14 @@ export default {
         3: "Sell Long",
         4: "Buy short"
       },
+      orderType: {
+        1: 'Limit',
+        2: 'Market',
+        3: 'Take Profit Stop Loss',
+        4: 'Take Profit Stop Loss',
+        5: 'Take Profit Stop Loss',
+        6: 'Take Profit Stop Loss'
+      },
       delegate_state: {
         0: 'All Orders', 
         1: 'Unexecuted',
@@ -4128,4 +4136,24 @@ export default {
     loginByEmail: 'Log in with Email',
     freeRegistre: 'Free registration',
   },
+  fund_contract: {
+    activity: {
+      create_time:"Create time",
+      currency:"Currency",
+      name:"Type",
+      amount: "Distribution volume",
+      // available: "Available Balance",
+      // lockAvailable: "Freeze Balance",
+      state: "State"
+    },
+    type_dict: {
+      合约交易大赛: 'Contract Competition',
+      空投奖励: 'Airdrop reward',
+      混合账户赠金: 'Hybrid Bonus',
+      体验金账户赠金: 'Trading Bonus',
+      金本位赠金: 'Gold Standard Bonus',
+      资金账户返佣回收: 'Funds Account Reclaim',
+      社区奖励: 'Community rewards',
+    }
+  }, 
 }

@@ -2591,6 +2591,14 @@ export default {
         3: "매출액이 평이",
         4: "매입공거래"
       },
+      orderType: {
+        1: '가격',
+        2: '시가',
+        3: '리익 정지',
+        4: '리익 정지',
+        5: '리익 정지',
+        6: '리익 정지'
+      },
       delegate_state: {
         0: '전부위탁', 
         1: 'Unexecuted',
@@ -3964,4 +3972,24 @@ export default {
     loginByEmail: '메 일 로그 인',
     freeRegistre: '무료 등록',  
   },
+  fund_contract: {
+    activity: {
+      create_time:"생성일자",
+      currency:"코인종류",
+      name:"종류",
+      amount: "방출 량",
+      // available: "사용가능한 량",
+      // lockAvailable: "랭동 나머지량",
+      state: "상태"
+    },
+    type_dict: {
+      合约交易大赛: '계약 대회',
+      空投奖励: '공수 보상',
+      混合账户赠金: '혼합 계 정 증정 금',
+      体验金账户赠金: '체험 금 계좌 증정 금',
+      金本位赠金: '금본위 증금',
+      资金账户返佣回收: '자금 계좌 리베이트 회수',
+      社区奖励: '커 뮤 니 티 보상',
+    }
+  }, 
 }

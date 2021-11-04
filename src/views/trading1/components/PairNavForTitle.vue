@@ -1,8 +1,6 @@
 <template>
   <div :class="{loading: loading}" class="ix-pannel">
     <div class="ix-pannel-body">
-      <div v-if="errmsg" class="no-data">{{ $t(errmsg) }}</div>
-      <div v-if="!loading && err && !pairList.length" class="err">{{ err }}</div>
       <!-- 索引 -->
       <div class="ix-pair-head tr">
         <!-- <el-input placeholder="搜索" v-model="search" >
@@ -92,6 +90,8 @@
         </div>  
         <span style="color: #5F6B76;font-size:14px">{{$t('pair_table_option_empty')}}</span>
       </div>
+      <div v-if="errmsg && tabSelected!='like'" class="no-data">{{ $t(errmsg) }}</div>
+      <div v-if="!loading && err && !pairList.length" class="err">{{ err }}</div>
     </div>
   </div>
 </template>

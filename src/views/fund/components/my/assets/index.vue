@@ -429,7 +429,8 @@ export default {
               value = this.$t(value)
             }
             else if (key==='name') {
-              value = this.$t(`fund_contract.type_dict.${value}`) 
+              // value = this.$t(`fund_contract.type_dict.${value}`) 
+              value = this.typeDict[value] || value
             }  
             return value ? value : '--'
           }
@@ -455,6 +456,9 @@ export default {
     },
     fiatMoney() {
       return state.fiatMoney
+    },
+    typeDict() {
+      return this.$t('fund_contract.type_dict')
     }
   },
   watch: {

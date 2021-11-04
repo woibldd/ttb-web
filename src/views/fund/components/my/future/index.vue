@@ -152,7 +152,7 @@
                       </router-link> 
                     </div>
                     <div style="text-align:right;">
-                      <router-link to="/mix">{{$t('asset_trading')}}</router-link>
+                      <router-link to="/future">{{$t('asset_trading')}}</router-link>
                     </div>
                   </template>
                 </el-table-column>
@@ -288,7 +288,7 @@ export default {
         'total', //价值
         'fee_rate', //资金费率
         'fee', //已付费用
-        'deduction_fee', //体验金扣除值
+        // 'deduction_fee', //体验金扣除值
         'type', //委托类型
         'realized', //已实现盈亏 
       ],
@@ -615,7 +615,7 @@ export default {
                 value = this.$t('day_liquidation')
               }
             } else if (key==='amount' || key==='available') {
-              value = this.$big(value).round(2, 0).toFixed(2)
+              value = this.$big(value).round(8, 0).toFixed(8)
             } else if (key==='status') {
               value = this.$t('contract_simple_success') 
             }
@@ -811,7 +811,7 @@ export default {
       })
     },
     fetchSymbolList() {
-      service.getMixContractSymList().then(res => {
+      service.getContractSymList().then(res => {
         if (!res.code) {
           this.pairList = res.data.items
         }

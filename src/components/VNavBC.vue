@@ -286,7 +286,7 @@
           <div class="dropdown-sub-menu lang_account" >
             <div class="lang-ddl-wrap" flex>
               <ul class="dropdown-list pt-10" flex-box="1">
-                <li class="dropdown-title pl-20">语言</li>
+                <li class="dropdown-title pl-20">{{$t('language')}}</li>
                 <li class="dropdown-item yuyan pl-20 pr-20"
                   v-for="(value, key) in locales"
                   :key="key"

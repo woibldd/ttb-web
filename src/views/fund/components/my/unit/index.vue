@@ -152,7 +152,7 @@
                       </router-link> 
                     </div>
                     <div style="text-align:right;">
-                      <router-link to="/mix">{{$t('asset_trading')}}</router-link>
+                      <router-link to="/unit">{{$t('asset_trading')}}</router-link>
                     </div>
                   </template>
                 </el-table-column>
@@ -288,7 +288,7 @@ export default {
         'total', //价值
         'fee_rate', //资金费率
         'fee', //已付费用
-        'deduction_fee', //体验金扣除值
+        // 'deduction_fee', //体验金扣除值
         'type', //委托类型
         'realized', //已实现盈亏 
       ],
@@ -410,7 +410,7 @@ export default {
               value = this.$date(value/1000)
             } 
             else if (key === 'name') {
-              value =`<span class="large">${row.name.replace(/USDT/,'')}</span><span class="small">/${row.currency}</span>`
+              value =`<span class="large">${row.name.replace(/USD/,'')}</span><span class="small">/USD</span>`
             } 
             else if (key==='origin') {
               value = this.$t('fund.dict.state.' + value)
@@ -505,7 +505,7 @@ export default {
               value = this.$date(value)
             } 
             if (key === 'name') {
-              value =`<span class="large">${row.name.replace(/USDT/,'')}</span><span class="small">/${row.currency}</span>`
+              value =`<span class="large">${row.name.replace(/USD/,'')}</span><span class="small">/USD</span>`
             } 
             else if (key==='state') {
               value = this.$t('fund.dict.delegate_state.' + value)
@@ -562,7 +562,7 @@ export default {
                 value = this.$t('transfer_out')
               }
             } else if (key==='amount' || key==='available') {
-              value = this.$big(value).round(2, 0).toFixed(2)
+              value = this.$big(value).round(8, 0).toFixed(8)
             } else if (key==='status') {
               value = this.$t('contract_simple_success') 
             }

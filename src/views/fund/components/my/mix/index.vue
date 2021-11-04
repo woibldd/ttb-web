@@ -288,7 +288,7 @@ export default {
         'total', //价值
         'fee_rate', //资金费率
         'fee', //已付费用
-        'deduction_fee', //体验金扣除值
+        // 'deduction_fee', //体验金扣除值
         'type', //委托类型
         'realized', //已实现盈亏 
       ],
@@ -572,7 +572,7 @@ export default {
                 value = this.$t('transfer_out')
               }
             } else if (key==='amount' || key==='available') {
-              value = this.$big(value).round(2, 0).toFixed(2)
+              value = this.$big(value).round(8, 0).toFixed(8)
             } else if (key==='status') {
               value = this.$t('contract_simple_success') 
             }

@@ -2545,6 +2545,14 @@ export default {
         3: "賣出平多",
         4: "買入平空" 
       },
+      orderType: {
+        1: '限價',
+        2: '市價',
+        3: '止盈止損',
+        4: '止盈止損',
+        5: '止盈止損',
+        6: '止盈止損'
+      },
       delegate_state: {
         0: '全部委託', 
         1: '委託中未成交',
@@ -3957,4 +3965,24 @@ export default {
     loginByEmail: '郵箱登錄', 
     freeRegistre: '免費註冊', 
   },
+  fund_contract: {
+    activity: {
+      create_time:"時間",
+      currency:"幣種",
+      name:"类型",
+      amount: "發放量",
+      // available: "可用剩餘量",
+      // lockAvailable: "凍結剩餘量",
+      state: "狀態"
+    },
+    type_dict: {
+      合约交易大赛: '合約大賽',
+      空投奖励: '空投獎勵',
+      混合账户赠金: '混合帳戶贈金',
+      体验金账户赠金: '體驗金帳戶贈金',
+      金本位赠金: '金本位贈金',
+      资金账户返佣回收: '資金帳戶返傭回收',
+      社区奖励: '社區獎勵',
+    }
+  },  
 }
