@@ -4156,7 +4156,9 @@ export default {
       资金账户返佣回收: 'Funds Account Reclaim',
       社区奖励: 'Community rewards',
       锁仓释放: 'Lock release',
-      NBZZ锁仓释放: 'NBZZ Lock release'
+      NBZZ锁仓释放: 'NBZZ Lock release',
+      锁仓扣除: 'Lock-up deduction',
+      NBZZ锁仓扣除: 'NBZZ Lock-up deduction'
     }
   }, 
 }
