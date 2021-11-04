@@ -1,4 +1,5 @@
 export default {
+  local_currency: '로 컬 머 니',
   order: '주문 하 다',
   buyEvent: '사재 기 이벤트',
   finance: 'Finance',

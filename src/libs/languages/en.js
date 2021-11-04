@@ -1,4 +1,5 @@
 export default {
+  local_currency: 'Local Currency',
   order: 'Create Order',
   buyEvent: 'Hot Buying event',
   finance: 'Finance',

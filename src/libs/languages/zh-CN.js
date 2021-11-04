@@ -1,4 +1,5 @@
 export default {
+  local_currency: '本地货币',
   order: '下单',
   buyEvent: '抢购活动',
   finance: '金融业务',

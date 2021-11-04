@@ -296,7 +296,7 @@
                 </li> 
               </ul>
               <ul class="dropdown-list pt-10" flex-box="1">
-                <li class="dropdown-title pl-20">本地货币</li>
+                <li class="dropdown-title pl-20">{{$t('local_currency')}}</li>
                 <li class="dropdown-item  pl-20 pr-20" @click="handleCommand('CNY')" flex="main:justify">
                   <a class="link" target="#">CNY</a> <span v-if="state.fiatMoney==='CNY'"><icon name="gou" /></span>
                 </li>
