@@ -1,7 +1,7 @@
 <template>
   <div class="register-container"> 
     <div class="register-box" ref="container">
-      <!-- <div class="corner-icon-view view-type-password" v-if="step===1">  
+      <div class="corner-icon-view view-type-password" v-if="step===1">  
         <div class="label" @click="handleChangeLoginType">
           <div class="qrcode" v-if="loginType==='password'" @click="loginType='qrcode'">
             <icon style="font-size: 60px;" name="login-qrcode" />
@@ -11,7 +11,7 @@
           </div> 
           <div class="mask"></div>
         </div>
-      </div> -->
+      </div>
       <div v-if="loginType==='qrcode'" class="wrap">
         <div class="register-title">
           <h3>手机扫码，安全登录</h3>
@@ -316,23 +316,24 @@ export default {
           if (this.qrAmount < 60) {
             this.qrAmount++
             this.fetchGetQrcode()
-          } else {
+          } else { 
             this.qrEnable = false
             this.qrStatus = 1
-            this.qrAmount = 0 
-            this.setQr(this.qrUrl)
+            this.qrAmount = 0  
+            this.qrUrl = '' 
             clearInterval(this.qrTimer)
           }
         }, 1000)
       } 
     },
-    async fetchGetQrcode() {
+    async fetchGetQrcode(reset) { 
       const params = {
         device: navigator.userAgent
       }
-      if (this.qrUrl){
+      if (this.qrUrl && !reset){
         params.code = this.qrUrl
       }
+      console.log(this.qrUrl)
       let res = await service.getQrcodeGenerate(params)  
       if (!res.code) {
         this.qrUrl = res.url
@@ -343,11 +344,15 @@ export default {
           params.token = res.token
           res = await service.setQrcodeLogin(params) 
           if (!res.code) {
-            this.loginSuccess(res.data)
-            console.log(res)
+            this.loginSuccess(res.data) 
           }
         }
-      } 
+      } else {
+        this.qrEnable = false
+        this.qrStatus = 1
+        // this.qrAmount = 0  
+        this.qrUrl = '' 
+      }
     },
     getnc(data) {
       this.ncData = data;
