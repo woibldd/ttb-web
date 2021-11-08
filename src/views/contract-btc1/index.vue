@@ -103,7 +103,7 @@
                       <span v-if="key==='fee_rate'"> 
                         <router-link
                           :class="{'text-success':$big((pairInfo || {}).fee_rate || 0).gt(0), 'text-danger':$big((pairInfo || {}).fee_rate || 0).lt(0)}" 
-                          :to="{name: 'MixContractFee'}"> {{ $big((pairInfo || {}).fee_rate || 0).times(100).round(4).toFixed(4) }}% </router-link> 
+                          :to="{name: 'ContractFee'}"> {{ $big((pairInfo || {}).fee_rate || 0).times(100).round(4).toFixed(4) }}% </router-link> 
                       </span>
                       <span v-else-if="key==='markPrice'"> {{(markTick || {}).current }}</span>
                       <span v-else-if="key==='indexPrice'"> {{(indexTick || {}).current }}</span>  

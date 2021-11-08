@@ -139,19 +139,21 @@
       </div>
       <div v-if="step===1 && !isMobile" class="wrap-right"> 
         <div class="register-content">
-          <div class="scan-before" >
-            <div class="login-qrcode txc"> 
-              <canvas
-                class="qr-img"
-                ref="qr"/>  
-              <div class="qr-mask" v-if="qrStatus===2">
-                <div class="scan-result">
-                  <div class="result-img txc text-success">
-                    <icon style="font-size: 40px;" name="shigou" />
+          <div class="scan-before">
+            <div flex="main:center">
+              <div class="login-qrcode txc"> 
+                <canvas
+                  class="qr-img"
+                  ref="qr"/>  
+                <div class="qr-mask" v-if="qrStatus===2">
+                  <div class="scan-result">
+                    <div class="result-img txc text-success">
+                      <icon style="font-size: 40px;" name="shigou" />
+                    </div>
+                    <div class="result-text mt-5 txc" v-html="$t('customer.goLogin')">去登陆</div>
                   </div>
-                  <div class="result-text mt-5 txc" v-html="$t('customer.goLogin')">去登陆</div>
                 </div>
-              </div>
+              </div> 
             </div>
             <div class="login-tip  mt-15" flex="main:center dir:top cross:center"> 
               <p class="text1" v-html="$t('customer.qrLogin')">使用二维码登录</p>
@@ -665,9 +667,16 @@ export default {
     .wrap-right {
       width: 320px; 
       padding-right: 50px;
-      padding-top: 143px;
+      padding-top: 140px;
       .login-qrcode {
         position:relative;
+        padding:10px;
+        width: 160px;
+        border: 1px solid #f1f1f1;
+        border-radius: 10px;
+        .qr-img {
+          vertical-align: bottom;
+        }
         .qr-mask {
           position:absolute;
           top: 0;
@@ -687,15 +696,13 @@ export default {
         .result-text {
           color: #2F2F2F;
           font-size: 14px;
-          font-weight: 600;
+          // font-weight: 600;
         }
       }
       .login-tip {
         .text1 {
           color: #2F2F2F;
-          font-size: 14px;
-          font-weight: 600;
-          font-size: large;
+          font-size: 16px; 
         } 
       }
     }
