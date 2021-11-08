@@ -103,7 +103,7 @@
                       <span v-if="key==='fee_rate'"> 
                         <router-link
                           :class="{'text-success':$big((pairInfo || {}).fee_rate || 0).gt(0), 'text-danger':$big((pairInfo || {}).fee_rate || 0).lt(0)}" 
-                          :to="{name: 'MixContractFee'}"> {{ $big((pairInfo || {}).fee_rate || 0).times(100).round(4).toFixed(4) }}% </router-link> 
+                          :to="{name: 'ContractFee'}"> {{ $big((pairInfo || {}).fee_rate || 0).times(100).round(4).toFixed(4) }}% </router-link> 
                       </span>
                       <span v-else-if="key==='markPrice'"> {{(markTick || {}).current }}</span>
                       <span v-else-if="key==='indexPrice'"> {{(indexTick || {}).current }}</span>  
@@ -624,23 +624,7 @@ export default {
         this.state.skin = 'light' 
         this.$refs.tradingView.switchSkin('light')
       } 
-    },
-    // async loadSymbolList() {
-    //   const [future, mix, unit] = await Promise.all([
-    //     service.getContractSymList(),
-    //     service.getMixContractSymList(),
-    //     service.getUnitContractSymList()
-    //   ])
-    //   if (future && !future.code) {
-    //     this.allSymbolList.future = future.data.items
-    //   }
-    //   if (unit && !unit.code) {
-    //     this.allSymbolList.unit = unit.data.items
-    //   }
-    //   if (mix && !mix.code) {
-    //     this.allSymbolList.mix = mix.data.items
-    //   } 
-    // },
+    }, 
     handleProductsChange(product) {
       const pair = product.product === 'FUTURE' ? product.name : product.symbol 
       this.$router.push({ 
