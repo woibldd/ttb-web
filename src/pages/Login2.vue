@@ -137,8 +137,8 @@
           <router-link to="/user/register">{{$t('customer.freeRegistre')}}</router-link>
         </div> 
       </div>
-      <div class="wrap-right"> 
-        <div class="register-content"  v-if="step===1">
+      <div v-if="step===1" class="wrap-right"> 
+        <div class="register-content">
           <div class="scan-before" >
             <div class="login-qrcode txc"> 
               <canvas
@@ -161,7 +161,7 @@
         </div>
       </div>
     </div>  
-    <div class="register-box" ref="container"> 
+    <div class="register-box" ref="container2"> 
       <div v-if="step===2" class="wrap"> 
         <div class="close"> 
           <label @click="handleCloseSmsCode">
@@ -225,7 +225,7 @@ export default {
       loginType: 'password',
       by: 'phone', 
       pwdType: 'password', //密码输入框状态
-      step: 1, 
+      step: 2, 
       verify_phone: '',
       verify_email: '',
       verify_google: '', 
@@ -563,6 +563,8 @@ export default {
         } else {
           this.$refs.container.style.width = '900px'
           this.$refs.container.style.marginTop = '100px'
+          this.$refs.container2.style.width = '500px'
+          this.$refs.container2.style.marginTop = '100px'
         }
       } catch (e) {
         console.log(e)
