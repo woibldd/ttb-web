@@ -137,7 +137,7 @@
           <router-link to="/user/register">{{$t('customer.freeRegistre')}}</router-link>
         </div> 
       </div>
-      <div v-if="step===1" class="wrap-right"> 
+      <div v-if="step===1 && !isMobile" class="wrap-right"> 
         <div class="register-content">
           <div class="scan-before" >
             <div class="login-qrcode txc"> 
@@ -225,7 +225,7 @@ export default {
       loginType: 'password',
       by: 'phone', 
       pwdType: 'password', //密码输入框状态
-      step: 2, 
+      step: 1, 
       verify_phone: '',
       verify_email: '',
       verify_google: '', 
@@ -300,6 +300,10 @@ export default {
       }
       return type
     },
+    isMobile() {
+      return utils.isMobile()
+    }
+    
   },
   methods: {
     async setQr (url) {
@@ -557,9 +561,11 @@ export default {
     },
     fixPosition () {
       try { 
-        if (utils.isMobile()) {
+        if (this.isMobile) {
           this.$refs.container.style.width = '100%'
           this.$refs.container.style.marginTop = '0'
+          this.$refs.container2.style.width = '100%'
+          this.$refs.container2.style.marginTop = '0'
         } else {
           this.$refs.container.style.width = '900px'
           this.$refs.container.style.marginTop = '100px'
