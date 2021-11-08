@@ -59,15 +59,15 @@ export default {
     }
   },
   async created () {
+    let res2 = await service.getContractSymInfo({symbol: 'FUTURE_BTCUSD'})
+    if (!res2.code) {
+      this.symbolList = res2.data.future_symbol_info_list
+    }
     let res = await service.getContractSymList()
     if (!res.code) {
       this.pairList = res.data.items
     }
     
-    let res2 = await service.getContractSymInfo({symbol: 'FUTURE_BTCUSD'})
-    if (!res2.code) {
-      this.symbolList = res2.data.future_symbol_info_list
-    }
  
     if (this.pairList.length > 0 && this.symbolList.length > 0) {
       this.pairList.map(p => {

@@ -48,7 +48,7 @@
           <label  @click="handleChangeLoginType">密码登录</label>
         </div>
       </div> -->
-      <div v-if="step===1" class="wrap" flex-box="1">
+      <div v-if="step===1" class="wrap"  flex-box="1">
         <div class="register-title">
           <h3>
             {{$t('customer.loginAccount', {siteName: 'IXX'})}}
@@ -137,7 +137,32 @@
           <router-link to="/user/register">{{$t('customer.freeRegistre')}}</router-link>
         </div> 
       </div>
-      <div v-else-if="step===2" class="wrap"> 
+      <div class="wrap-right"> 
+        <div class="register-content"  v-if="step===1">
+          <div class="scan-before" >
+            <div class="login-qrcode txc"> 
+              <canvas
+                class="qr-img"
+                ref="qr"/>  
+              <div class="qr-mask" v-if="qrStatus===2">
+                <div class="scan-result">
+                  <div class="result-img txc text-success">
+                    <icon style="font-size: 40px;" name="shigou" />
+                  </div>
+                  <div class="result-text mt-5 txc" v-html="$t('customer.goLogin')">去登陆</div>
+                </div>
+              </div>
+            </div>
+            <div class="login-tip  mt-15" flex="main:center dir:top cross:center"> 
+              <p class="text1" v-html="$t('customer.qrLogin')">使用二维码登录</p>
+              <p class="text2 mt-10" v-html="$t('customer.useLogin')">使用IXX手机App扫描二维码</p>
+            </div> 
+          </div> 
+        </div>
+      </div>
+    </div>  
+    <div class="register-box" ref="container"> 
+      <div v-if="step===2" class="wrap"> 
         <div class="close"> 
           <label @click="handleCloseSmsCode">
             <!-- <icon name="close" /> -->
@@ -173,30 +198,7 @@
           </div>
         </div>
       </div>
-      <div class="wrap-right"> 
-        <div class="register-content"  v-if="step===1">
-          <div class="scan-before" >
-            <div class="login-qrcode txc"> 
-              <canvas
-                class="qr-img"
-                ref="qr"/>  
-              <div class="qr-mask" v-if="qrStatus===2">
-                <div class="scan-result">
-                  <div class="result-img txc text-success">
-                    <icon style="font-size: 40px;" name="shigou" />
-                  </div>
-                  <div class="result-text mt-5 txc" v-html="$t('customer.goLogin')">去登陆</div>
-                </div>
-              </div>
-            </div>
-            <div class="login-tip  mt-15" flex="main:center dir:top cross:center"> 
-              <p class="text1" v-html="$t('customer.qrLogin')">使用二维码登录</p>
-              <p class="text2 mt-10" v-html="$t('customer.useLogin')">使用IXX手机App扫描二维码</p>
-            </div> 
-          </div> 
-        </div>
-      </div>
-    </div>  
+    </div>
     <v-download2 />
   </div>
 </template>
