@@ -365,8 +365,7 @@ export default {
       }
       if (this.qrUrl && !reset){
         params.code = this.qrUrl
-      }
-      console.log(this.qrUrl)
+      } 
       let res = await service.getQrcodeGenerate(params)  
       if (!res.code) {
         this.qrUrl = res.url
