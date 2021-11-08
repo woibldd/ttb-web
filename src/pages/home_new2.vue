@@ -16,9 +16,9 @@
             <el-input type="text" :placeholder="lang.banner.placeholder" class="mr-20" v-model="userInput" />
             <el-button type="primary" plain @click="goRegister">{{lang.bottom.register}}</el-button>
           </div> 
-          <!-- <div v-else class="option" flex="main:center">
-            <el-button class="large" type="primary" plain @click="gotoPath('otc')">{{$t('otc.buy_now')}}</el-button>
-          </div> -->
+          <div v-else class="option" flex="main:center">
+            <el-button class="large" type="primary" plain @click="gotoPath('trading')">{{$t('home.bottom.start')}}</el-button>
+          </div>
         </div>
       </div>
     </div> 

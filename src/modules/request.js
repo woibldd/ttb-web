@@ -13,8 +13,8 @@ let _from = 'ixx'
 if(process.env.NODE_ENV != 'development'){
   let val = location.host.split('.')
   _env_ = val.slice(val.length - 2, val.length).join('.')
-  // _env_ = `https://i.${_env_}/`
-  _env_ = `https://i.ixxweb.com/`
+  _env_ = `https://i.${_env_}/`
+  // _env_ = `https://i.ixxweb.com/`
   // _env_ = `https://i.ixex.pro/`
 }
 
