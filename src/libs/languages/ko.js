@@ -3974,6 +3974,9 @@ export default {
     loginByPhone: '휴대폰 로그 인',
     loginByEmail: '메 일 로그 인',
     freeRegistre: '무료 등록',  
+    goLogin: '로그 인 하 러 가기',
+    qrLogin: 'QR 코드 로 로그 인',
+    useLogin: '사용 <span class="text-primary">IXX 모 바 일 앱</span> QR 코드 스 캔',
   },
   fund_contract: {
     activity: {

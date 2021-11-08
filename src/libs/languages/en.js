@@ -4138,6 +4138,9 @@ export default {
     loginByPhone: 'Log in with Mobile',
     loginByEmail: 'Log in with Email',
     freeRegistre: 'Free registration',
+    goLogin: 'Log in',
+    qrLogin: 'Login with QR code',
+    useLogin: 'Use <span class="text-primary">IXX mobile App</span> to scan the QR code', 
   },
   fund_contract: {
     activity: {

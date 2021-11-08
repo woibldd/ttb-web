@@ -4034,6 +4034,9 @@ export default {
     loginByPhone: '手机登录',
     loginByEmail: '邮箱登录',
     freeRegistre: '免费注册',  
+    goLogin: '去登陆',
+    qrLogin: '使用二维码登录',
+    useLogin: '使用<span class="text-primary">IXX手机App</span>扫描二维码', 
   },
   fund_contract: {
     activity: {
