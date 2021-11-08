@@ -550,16 +550,13 @@ export default {
           pair: pair
         }
       })
-    } else { 
-      console.log('adsfasdf')
-      const infores = await service.getContractSymInfo({ symbol: this.$route.query.pair })
-       if (!infores.code) {
-          console.log(infores.data)
-            this.state.ct.pairInfo = infores.data
-            this.state.ct.product_name = infores.data.product_name
-            this.state.ct.currency_name = infores.data.currency_name
-            this.state.ct.symbol = infores.data.symbol
-       }
+    } else {  
+      console.log('ppppppppppppppppinfores')
+      // const infores = await service.getContractSymInfo({ symbol: this.$route.query.pair })
+      //  if (!infores.code) {  
+      //   Object.assign(this.state.ct.pairInfo, resp.data) 
+      //  }
+      this.loopFetch()
     }
     this.$nextTick(() => {
       // const layoutHeight = window.innerHeight
@@ -724,7 +721,7 @@ export default {
     },
     async loopFetch() {
       const resp = await service.getContractSymInfo({
-        symbol: this.symbol.name
+        symbol: this.state.ct.pair
       })
       if (!resp.code) {
         Object.assign(this.state.ct.pairInfo, resp.data)

@@ -475,7 +475,7 @@ export default {
     },
     async loopFetch() {
       const resp = await service.getContractSymInfo({
-        symbol: this.symbol.name
+        symbol: this.state.ct.pair
       })
       if (!resp.code) {
         Object.assign(this.state.ct.pairInfo, resp.data)
