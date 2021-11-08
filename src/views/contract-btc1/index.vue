@@ -526,48 +526,19 @@ export default {
       if (!resp.code) {
         this.state.ct.userSetting = resp.data
       }
-    })
-
-    // let newOrder = {}
-    // const $this = this
-    // setInterval(function() { 
-    //   service.getOrderfills({ page: 1, size: 10, symbol: $this.state.ct.pair }).then(res => {
-    //     if (!res.code) { 
-    //       if (JSON.stringify(newOrder) === '{}') {
-    //         newOrder = res.data.data
-    //         return false
-    //       } 
-    //       const newOrderList = []
-    //       const oneListObj = newOrder[0]
-    //       if (JSON.stringify(newOrder) !== JSON.stringify(res.data.data)) {
-    //         for (var i in res.data.data) {
-    //           if (JSON.stringify(res.data.data[i]) === JSON.stringify(oneListObj)) {
-    //             break
-    //           }
-    //           newOrderList.push(res.data.data[i])
-    //         } 
-    //         $this.toast(newOrderList)
-    //         newOrder = res.data.data
-    //         $this.$eh.$emit('protrade:order:refresh', 1)
-    //       }
-
-    //       // 刷新已成交表头的数量
-    //       $this.$eh.$emit('setOrderfill:count', res.data.total)
-    //     }
-    //   })
-    // }, 5000)
+    }) 
 
     await actions.updateSession()
+      console.log('updateSession')
     document.querySelector('.page-loading').classList.add('show')
-    if (!this.$route.params.pair) {
+    if (!this.$route.query.pair) {
       const res = await service.getContractSymList()
       if (res.code) {
         return utils.alert(res.message)
       }
       const pair = res.data.items.filter(item => item.name === local.future).length
         ? local.future
-        : res.data.items[0].name
- 
+        : res.data.items[0].name 
       // 保存所有币对的基本信息
       this.state.ct.pairInfoList = {}
       res.data.items.forEach(element => {
@@ -579,6 +550,16 @@ export default {
           pair: pair
         }
       })
+    } else { 
+      console.log('adsfasdf')
+      const infores = await service.getContractSymInfo({ symbol: this.$route.query.pair })
+       if (!infores.code) {
+          console.log(infores.data)
+            this.state.ct.pairInfo = infores.data
+            this.state.ct.product_name = infores.data.product_name
+            this.state.ct.currency_name = infores.data.currency_name
+            this.state.ct.symbol = infores.data.symbol
+       }
     }
     this.$nextTick(() => {
       // const layoutHeight = window.innerHeight
