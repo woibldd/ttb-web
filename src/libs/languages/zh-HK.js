@@ -3967,6 +3967,9 @@ export default {
     loginByPhone: '手機登入', 
     loginByEmail: '郵箱登錄', 
     freeRegistre: '免費註冊', 
+    goLogin: '去登錄',
+    qrLogin: '使用二維碼登錄',
+    useLogin: '使用<span class="text-primary">IXX手機App</span>掃描二維碼', 
   },
   fund_contract: {
     activity: {

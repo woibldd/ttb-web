@@ -3,19 +3,35 @@
     <div v-if="state.siteName!=='BachEx'" class="title-box rate-tit mb-20">{{ $t('contract_fees') }}</div> 
     <table class="rate-table">
       <tr>
-        <th>{{ $t('transaction_pair') }}</th> 
+        <!-- <th>{{ $t('transaction_pair') }}</th> 
         <th>{{ $t('maker') }}</th>
-        <th>{{ $t('taker') }}</th> 
+        <th>{{ $t('taker') }}</th>  -->
+         <th>{{ $t('transaction_pair') }}</th> 
+          <th>{{ $t('fee.contract.provision_fee') }}</th>
+          <th>{{ $t('fee.contract.withdraw_fee') }}</th>
+          <th>{{ $t('fee.contract.capital_fee') }}</th>
+          <th>{{ $t('fee.contract.capital_fee_period') }}</th>
+          <th>{{ $t('fee.contract.next_capital_fee') }}</th>
       </tr>
       <tbody>
-        <tr
+        <!-- <tr
           v-for="pair in pairList"
           :key="pair.name">
           <td class="">{{  $t('FUTURE_&USD', {currency: pair.currency.replace('USD','')})  }}</td> 
           <td class="">{{ $big(pair.make_rate || 0).mul(100) | fixed(4) }}%</td>
           <td class="">{{ $big(pair.take_rate || 0).mul(100) | fixed(4) }}%</td> 
-        </tr>
-      </tbody>
+        </tr> -->
+         <tr
+            v-for="pair in pairList"
+            :key="pair.name">
+            <td class="">{{ pair.currency }}</td> 
+            <td class="">{{ $big(pair.make_rate || 0).mul(100) | fixed(4) }}%</td>
+            <td class="">{{ $big(pair.take_rate || 0).mul(100) | fixed(4) }}%</td>
+            <td class="">{{ $big(pair.fee_rate || 0).mul(100) | fixed(4) }}%</td>
+            <td class="">{{ $t('fee.contract.every_8_hours') }}</td>
+            <td class="">{{ pair.next_fee_time | date('Y-M-D H:m:s') }}</td>
+          </tr>
+      </tbody> 
     </table> 
     <div class="rate-tips">
       <p class="rate-tips-title">{{ $t('tips') }}</p> 
@@ -39,12 +55,30 @@ export default {
     return {
       state,
       pairList: [],
+      symbolList: []
     }
   },
   async created () {
+    let res2 = await service.getContractSymInfo({symbol: 'FUTURE_BTCUSD'})
+    if (!res2.code) {
+      this.symbolList = res2.data.future_symbol_info_list
+    }
     let res = await service.getContractSymList()
     if (!res.code) {
       this.pairList = res.data.items
+    }
+    
+ 
+    if (this.pairList.length > 0 && this.symbolList.length > 0) {
+      this.pairList.map(p => {
+        let info = this.symbolList.filter(s => s.currency == p.currency)
+
+        if (info.length) {
+          p.fee_rate = info[0].fee_rate
+          p.next_fee_time = info[0].next_fee_time
+          p.ss = info[0].currency
+        }
+      })
     }
   }
 }
@@ -52,6 +86,7 @@ export default {
 </script>
 
 <style lang='scss'>
+
 .profile-container {
   width: 960px;
   position: relative;
@@ -65,18 +100,26 @@ export default {
     height: auto; 
     font-size: 14px;
     color: #333;
-    .rate-tab-tit{
+    .rate-tab-tit {
+      display: flex;
       width: 100%;
       height: 35px;
       font-size: 12px;
       line-height: 35px;
       border-bottom: 1px solid #ccc;
+      p {
+        flex: 1;
+      }
     }
     .rate-ul{
       li{
+      display: flex;
         border-bottom: 1px solid #ccc;
         height: 45px;
         line-height: 45px;
+        p {
+          flex: 1;
+        }
       }
     }
     .lt{
@@ -115,10 +158,32 @@ export default {
         height: 4px;
         position: absolute;
         border-radius: 4px;
-        background: $primary;
+        background: #C1A538;
         left: 0;
         top: 50%;
         margin-top: -2px;
+      }
+    }
+  }
+  .rate-table {
+    width: 100%;
+    tr {
+      height: 45px;
+      line-height: 45px;
+      // display: flex;
+      th {
+        background-color: #f8f8f8;
+        text-align: center;
+        border: 1px solid #e5e5e5;
+        color: #9A9A9A;
+        // text-align: left;
+        // flex: 1;
+      }
+      td {
+        text-align: center;
+        border: 1px solid #e5e5e5;
+        color: #5B5B5B;
+        // flex: 1;
       }
     }
   }

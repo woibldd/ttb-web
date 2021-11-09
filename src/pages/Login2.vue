@@ -1,6 +1,7 @@
 <template>
   <div class="register-container"> 
-    <div class="register-box" ref="container">
+
+    <div class="register-box" ref="container" flex="box:last">
       <!-- <div class="corner-icon-view view-type-password" v-if="step===1">  
         <div class="label" @click="handleChangeLoginType">
           <div class="qrcode" v-if="loginType==='password'" @click="loginType='qrcode'">
@@ -12,7 +13,7 @@
           <div class="mask"></div>
         </div>
       </div> -->
-      <div v-if="loginType==='qrcode'" class="wrap">
+      <!-- <div v-if="loginType==='qrcode'" class="wrap">
         <div class="register-title">
           <h3>手机扫码，安全登录</h3>
         </div>
@@ -47,8 +48,8 @@
         <div class="register-footer mt-20 text-primary" flex="main:right">
           <label  @click="handleChangeLoginType">密码登录</label>
         </div>
-      </div>
-      <div v-else-if="step===1" class="wrap">
+      </div> -->
+      <div v-if="step===1" class="wrap"  flex-box="1">
         <div class="register-title">
           <h3>
             {{$t('customer.loginAccount', {siteName: 'IXX'})}}
@@ -137,7 +138,34 @@
           <router-link to="/user/register">{{$t('customer.freeRegistre')}}</router-link>
         </div> 
       </div>
-      <div v-else-if="step===2" class="wrap"> 
+      <div v-if="step===1 && !isMobile" class="wrap-right"> 
+        <div class="register-content">
+          <div class="scan-before">
+            <div flex="main:center">
+              <div class="login-qrcode txc"> 
+                <canvas
+                  class="qr-img"
+                  ref="qr"/>  
+                <div class="qr-mask" v-if="qrStatus===2">
+                  <div class="scan-result">
+                    <div class="result-img txc text-success">
+                      <icon style="font-size: 40px;" name="shigou" />
+                    </div>
+                    <div class="result-text mt-5 txc" v-html="$t('customer.goLogin')">去登陆</div>
+                  </div>
+                </div>
+              </div> 
+            </div>
+            <div class="login-tip  mt-15" flex="main:center dir:top cross:center"> 
+              <p class="text1" v-html="$t('customer.qrLogin')">使用二维码登录</p>
+              <p class="text2 mt-10" v-html="$t('customer.useLogin')">使用IXX手机App扫描二维码</p>
+            </div> 
+          </div> 
+        </div>
+      </div>
+    </div>  
+    <div class="register-box" ref="container2"> 
+      <div v-if="step===2" class="wrap"> 
         <div class="close"> 
           <label @click="handleCloseSmsCode">
             <!-- <icon name="close" /> -->
@@ -173,7 +201,7 @@
           </div>
         </div>
       </div>
-    </div>  
+    </div>
     <v-download2 />
   </div>
 </template>
@@ -275,6 +303,10 @@ export default {
       }
       return type
     },
+    isMobile() {
+      return utils.isMobile()
+    }
+    
   },
   methods: {
     async setQr (url) {
@@ -284,8 +316,8 @@ export default {
         url,
         {
           margin: 0,
-          width: 136,
-          height: 136,
+          width: 160,
+          height: 160,
           errorCorrectionLevel: 'H'
         },
         (err) => {
@@ -313,15 +345,17 @@ export default {
       if (this.qrUrl) {
         this.qrEnable = true
         this.qrTimer = setInterval(()=>{
-          if (this.qrAmount < 60) {
+          if (this.qrAmount < 100) {
             this.qrAmount++
-            this.fetchGetQrcode()
+            if (this.step===1) {
+              this.fetchGetQrcode() 
+            }
           } else { 
             this.qrEnable = false
             this.qrStatus = 1
             this.qrAmount = 0  
             this.qrUrl = '' 
-            clearInterval(this.qrTimer)
+            // clearInterval(this.qrTimer)
           }
         }, 1000)
       } 
@@ -332,8 +366,7 @@ export default {
       }
       if (this.qrUrl && !reset){
         params.code = this.qrUrl
-      }
-      console.log(this.qrUrl)
+      } 
       let res = await service.getQrcodeGenerate(params)  
       if (!res.code) {
         this.qrUrl = res.url
@@ -350,7 +383,7 @@ export default {
       } else {
         this.qrEnable = false
         this.qrStatus = 1
-        // this.qrAmount = 0  
+        this.qrAmount = 0  
         this.qrUrl = '' 
       }
     },
@@ -374,8 +407,7 @@ export default {
         this.$refs.ncvalid.ncreset();
         this.shownc = true;
       }
-    },
-
+    }, 
     onChange(v) {
       this.form.captcha = v
       // console.log("onChange ", v);
@@ -452,8 +484,7 @@ export default {
             utils.alert(res.message)
             this.ncreset(); // 重置滑动验证模块
             return false
-          }  
-          console.log('login')
+          }   
           if (res.data.google_key_bound || res.data.phone || res.data.email) { 
             this.form.phone = res.data.phone
             this.form.email = res.data.email
@@ -532,12 +563,16 @@ export default {
     },
     fixPosition () {
       try { 
-        if (utils.isMobile()) {
+        if (this.isMobile) {
           this.$refs.container.style.width = '100%'
           this.$refs.container.style.marginTop = '0'
+          this.$refs.container2.style.width = '100%'
+          this.$refs.container2.style.marginTop = '0'
         } else {
-          this.$refs.container.style.width = '500px'
+          this.$refs.container.style.width = '900px'
           this.$refs.container.style.marginTop = '100px'
+          this.$refs.container2.style.width = '500px'
+          this.$refs.container2.style.marginTop = '100px'
         }
       } catch (e) {
         console.log(e)
@@ -554,6 +589,7 @@ export default {
   },
   async created() {
     const res = await service.getRegionList()
+    this.freshQrcode()
     if (!res.code) {
       this.regionOptions = res.data
     } 
@@ -569,7 +605,8 @@ export default {
   height: 650px;
   .register-box {
     margin: 0 auto;
-    width: 500px;
+    // width: 500px;
+    width:900px;
     border-radius: 10px;
     background-color: #ffffff;
     .wrap {
@@ -622,25 +659,51 @@ export default {
             }
           } 
         }
-        .login-qrcode {
-          position:relative;
-          .qr-mask {
-            position:absolute;
-            top: 30px;
-            left: 0;
-            height: 136px;
-            width: 100%;
-            background-color: rgba(255,255,255, 0.95);
-            .text {
-              font-size: 14px;
-              color: #3c3c3c;
-              font-weight: 700;
-            }
-          }
-        }
       }
       .label {
         line-height: 1.5em;
+      }
+    }
+    .wrap-right {
+      width: 320px; 
+      padding-right: 50px;
+      padding-top: 140px;
+      .login-qrcode {
+        position:relative;
+        padding:10px;
+        width: 160px;
+        border: 1px solid #f1f1f1;
+        border-radius: 10px;
+        .qr-img {
+          vertical-align: bottom;
+        }
+        .qr-mask {
+          position:absolute;
+          top: 0;
+          left: 0;
+          height: 160px;
+          width: 100%;
+          background-color: rgba(255,255,255, 0.95);
+          .text {
+            font-size: 14px;
+            color: #3c3c3c;
+            font-weight: 700;
+          }
+          .result-img {
+            margin-top: 55px;
+          }
+        }
+        .result-text {
+          color: #2F2F2F;
+          font-size: 14px;
+          // font-weight: 600;
+        }
+      }
+      .login-tip {
+        .text1 {
+          color: #2F2F2F;
+          font-size: 16px; 
+        } 
       }
     }
   } 
