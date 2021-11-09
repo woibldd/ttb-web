@@ -593,7 +593,12 @@ export default {
     if (!res.code) {
       this.regionOptions = res.data
     } 
-  }
+  },
+  destroyed() {
+    if (this.qrTimer) {
+      clearInterval(this.qrTimer)
+    }
+  },
 }
 </script>
 
