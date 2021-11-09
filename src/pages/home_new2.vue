@@ -12,12 +12,12 @@
               <div class="title">{{$t('home.banner.title')}}</div>
               <div class="title mt-25" style="font-size: 18px;" v-text="$t('home.banner.sub_title')" >安全 · 便捷 · 稳定</div> 
           </div> 
-          <div v-if="!!state.userInfo" class="option" flex="box:last"> 
+          <div v-if="!state.userInfo" class="option" flex="box:last"> 
             <el-input type="text" :placeholder="lang.banner.placeholder" class="mr-20" v-model="userInput" />
-            <el-button type="primary" plain @click="goRegister">{{lang.bottom.register}}</el-button>
+            <el-button type="primary" @click="goRegister">{{lang.bottom.register}}</el-button>
           </div> 
           <div v-else class="option" flex="main:center">
-            <el-button class="large" type="primary" plain @click="gotoPath('trading')">{{$t('home.bottom.start')}}</el-button>
+            <el-button class="large" @click="gotoPath('trading')">{{$t('home.bottom.start')}}</el-button>
           </div>
         </div>
       </div>
@@ -1074,12 +1074,12 @@ export default {
         height: 59px;
         width: 132px;
         font-size: 16px;
-        background-color:#11f2f5;
-        color: #ffffff;
+        // background-color:#11f2f5;
+        // color: #ffffff;
         &.large {
           width: 200px;
         }
-        &--primary:hover {
+        &--primary {
           background-color:#11f2f5;
           color: #ffffff;
         }
