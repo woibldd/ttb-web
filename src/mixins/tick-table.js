@@ -72,33 +72,44 @@ export default {
         //   arr = arr.concat([{ CUSTOM: true, type: key }]).concat(temGroup[key]) 
         // })  
         // return arr 
+        res = _.sortBy(res, ['rank'])
         return res
       } else if (this.tabSelected === 'like') {
-        return _.filter(list, pair => {
+        let arr = _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
             && (pair.like || false)
             && pair.type != 4 && pair.type != 5
         })
+        arr = _.sortBy(arr, ['rank'])
+        return arr 
       } else if (this.tabSelected === 'main') {
-        return _.filter(list, pair => {
+        let arr = _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
               && pair.type === 1
         })
+        arr = _.sortBy(arr, ['rank'])
+        return arr 
       } else if (this.tabSelected === 'DeFi') {
-        return _.filter(list, pair => {
+        let arr = _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
               && pair.type === 7
         })
+        arr = _.sortBy(arr, ['rank'])
+        return arr 
       } else if (this.tabSelected === 'NFT') {
-        return _.filter(list, pair => {
+        let arr = _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
               && pair.type === 8
         })
+        arr = _.sortBy(arr, ['rank'])
+        return arr 
       } else if (this.tabSelected === 'GameFi') {
-        return _.filter(list, pair => {
+        let arr = _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
               && pair.type === 9
         })
+        arr = _.sortBy(arr, ['rank'])
+        return arr 
       } else {
         let arr =  _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1
