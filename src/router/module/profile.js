@@ -100,5 +100,102 @@ export const profileRouter = [
         ]
       }
     ]
+  },
+  {
+    path: '/profileN',
+    name: 'profileN',
+    meta: {
+      // auth: true,
+      nav: true,
+      footer: true,
+      class: 'dark',
+      mobileNav: isMobile
+    },
+    component: () => import('@/views/profile'),
+    redirect: 'profileN/overview',
+    children: [
+      {
+        //总览
+        path: 'overview',
+        name: 'overview',
+        component: () => import('@/views/profile/components/overview')
+      },
+      {
+        //个人信息
+        path: 'info',
+        name: 'profileNinfo',
+        component: () => import('@/views/profile/components/information')
+      },
+      {
+        //安全验证
+        path: 'security',
+        name: 'profileNsecurity',
+        component: () => import('@/views/profile/components/security/index'),
+        redirect: 'security/summary',
+        children: [
+          {
+            path: 'summary',
+            name: 'Safety',
+            component: () => import( '@/views/profile/components/security/SecuritySummary')
+          },
+          {
+            path: 'phone',
+            name: 'PhoneBind',
+            component: () => import('@/views/profile/components/security/PhoneBind')
+          },
+          {
+            path: 'email',
+            name: 'EmailBind',
+            component: () => import('@/views/profile/components/security/eBind')
+          },
+          {
+            path: 'change_password',
+            name: 'ModPwd',
+            component: () => import('@/views/profile/components/security/ModPwd')
+          },
+          {
+            path: '2fa',
+            name: 'GoogleBind',
+            component: () => import( '@/views/profile/components/security/GoogleTitle')
+          }
+        ]
+      },
+      {
+        //身份认证
+        path: 'kyc',
+        name: 'kyc',
+        component: () => import(/* webpackChunkName: "Kyc" */ '@/views/profile/components/kyc/index'),
+        redirect: 'kyc/kyc_step1',
+        children: [
+          {
+            path: 'kyc_step1',
+            name: 'KycStep1',
+            component: () => import(/* webpackChunkName: "SafeVerified" */ '@/views/profile/components/kyc/kyc_step1')
+          },
+          {
+            path: 'kyc_step2',
+            name: 'KycStep2',
+            component: () => import(/* webpackChunkName: "Authen" */ '@/views/profile/components/kyc/kyc_step2')
+          },
+          {
+            path: 'kyc_step3',
+            name: 'KycStep3',
+            component: () => import(/* webpackChunkName: "Authen" */ '@/views/profile/components/kyc/kyc_step3')
+          }
+        ]
+      },
+      {
+        //API管理
+        path: 'api',
+        name: 'profileNapi',
+        component: () => import(/* webpackChunkName: "ProfileApi" */ '@/views/profile/components/api')
+      },
+      {
+        //我的邀请
+        path: 'invite',
+        name: 'profileNinvite',
+        component: () => import(/* webpackChunkName: "Invite" */ '@/views/profile/components/invite')
+      },
+    ]
   }
 ]

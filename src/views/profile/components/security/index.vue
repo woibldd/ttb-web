@@ -9,13 +9,12 @@ export default {
   name: 'ProfileSafety'
 }
 </script>
-<style lang="scss" scoped> 
-  @import '../styles/mixins'; 
+<style lang="scss" scoped>  
   .user-center-right {
-    padding-left: 60px;
     float: left;
+    margin-left: 29px;
     .profile-container {
-      width: 960px;
+      width: 954px;
       position: relative;
       .title-box {
         width: 100%;
@@ -24,13 +23,13 @@ export default {
         font-weight: 600;
         color: $text-strong;
         border-bottom: 1px solid #e6e6e6;
-        span {
+        span{
             color: #999;
             font-size: 14px;
             float: right;
             font-weight: lighter;
             padding-right: 25px;
-            i {
+            i{
                 color: #EB5757;
             }
         }
