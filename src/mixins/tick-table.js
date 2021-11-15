@@ -45,7 +45,13 @@ export default {
     },
     showList() {
       const list = this.pairList
-      if (this.tabSelected === 'all') { 
+      if (this.search.trim()) {
+        let arr =  _.filter(list, pair => {
+          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1  
+        }) 
+        arr = _.sortBy(arr, ['rank'])
+        return arr 
+      } else if (this.tabSelected === 'all') { 
         let arr =  _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
              && pair.type != 5 &&  pair.type != 4
