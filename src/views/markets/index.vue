@@ -333,6 +333,7 @@ export default {
           } 
         }) 
       } else {
+        list = list.sort((a,b) => (+a.rank)-(+b.rank))
         return list
       }
     },
