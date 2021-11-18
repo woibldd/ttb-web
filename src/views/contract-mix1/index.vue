@@ -115,7 +115,7 @@
                       <span v-if="key==='fee_rate'"> 
                         <router-link
                           :class="{'text-success':$big(symbolInfo.fee_rate || 0).gt(0), 'text-danger':$big(symbolInfo.fee_rate || 0).lt(0)}" 
-                          :to="{name: 'MixContractFee'}"> {{ $big(symbolInfo.fee_rate || 0).times(100).round(4).toFixed(4) }}% </router-link> 
+                          :to="{name: 'MixContractFee'}"> {{ $big(symbolInfo.fee_rate || 0).times(100).round(4, 0).toFixed(4) }}% </router-link> 
                       </span>
                       <span v-else-if="key==='markPrice'"> {{(activeProduct.MARKET || {}).current }}</span>
                       <span v-else-if="key==='indexPrice'"> {{(activeProduct.INDEX || {}).current }}</span>  

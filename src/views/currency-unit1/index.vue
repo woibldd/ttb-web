@@ -104,7 +104,7 @@
                       <span v-if="key==='fee_rate'"> 
                         <router-link
                           :class="{'text-success':$big(symbolInfo.fee_rate || 0).gt(0), 'text-danger':$big(symbolInfo.fee_rate || 0).lt(0)}" 
-                          :to="{name: 'UnitContractFee'}"> {{ $big(symbolInfo.fee_rate || 0).times(100).round(4).toFixed(4) }}% </router-link> 
+                          :to="{name: 'UnitContractFee'}"> {{ $big(symbolInfo.fee_rate || 0).times(100).round(4, 0).toFixed(4) }}% </router-link> 
                       </span>
                       <span v-else-if="key==='markPrice'"> {{(activeProduct.MARKET || {}).current }}</span>
                       <span v-else-if="key==='indexPrice'"> {{(activeProduct.INDEX || {}).current }}</span>  
@@ -1565,7 +1565,7 @@ export default {
 
       getSymbolInfo({ symbol: product.name }).then(res => {
         if (!res.code) {
-          this.symbolInfo = res.data[0]
+          this.symbolInfo = res.data.find(item => item.name===product.name)
         } else if (res.code !== 401) {
           this.$message.error(res)
         }
