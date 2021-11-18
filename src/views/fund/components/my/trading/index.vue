@@ -217,9 +217,9 @@ export default {
             if (key === 'pair') { 
               value = `${row.product}/${row.currency}` 
             }
-            else if (key === 'create_time') {
-              value = this.$date(value)
-            } 
+            // else if (key === 'create_time') {
+            //   value = this.$date(value)
+            // } 
             else if (key === 'side') {
               const txt = this.$t(`fund.dict.side.${value}`)
               if (+value === 1) {
