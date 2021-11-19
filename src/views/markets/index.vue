@@ -293,7 +293,7 @@ import utils from '@/modules/utils'
 import wsNew from '@/modules/ws-new'
 import quoteView from './quoteView'
 import VNavbc from '@/components/VNavBC'
-import Sort from '@/views/trading/components/Sort'
+import Sort from '@/views/trading1/components/Sort' 
 import _ from 'lodash'
 export default {
   components: {quoteView, VNavbc, Sort},

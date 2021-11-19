@@ -137,8 +137,7 @@ import service from '@/modules/service'
 import { pairfix } from '@/mixins/index'
 import tickTableMixin from '@/mixins/tick-table'
 import dataView from './data-view'
-import Sort from '../../Trading/Sort'
-
+import Sort from '@/views/trading1/components/Sort' 
 export default {
   components: {
     dataView

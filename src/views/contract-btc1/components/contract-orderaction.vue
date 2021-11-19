@@ -547,7 +547,7 @@ import stateHoldingMixins from "./stateHoldingComputedMixins";
 import currentDelMixins from "./stateCurrentDelComputedMixins.js";
 import utils from "@/modules/utils"; 
 import isEmpty from "lodash/isEmpty";
-import calculator from "@/views/contract-btc/calculator";
+import calculator from "@/views/contract-btc1/calculator";
 import ixSlider from '@/components/common/ix-slider'
 // const transferModal = () =>
 //   import(

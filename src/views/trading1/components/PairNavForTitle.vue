@@ -22,12 +22,13 @@
       <div class="ix-pair-head"> 
         <el-tabs v-model="tabSelected" :skin="state.skin" > 
           <el-tab-pane :label="$t('pair_list_option')" name="like"/>
+          <el-tab-pane :label="$t('pair_list_all')" name="all"/>
           <el-tab-pane :label="$t('pair_list_main')" name="main"/>
+          <el-tab-pane label="Meme" name="Meme"/>
+          <el-tab-pane label="GameFi" name="GameFi"/>
           <el-tab-pane label="DeFi" name="DeFi"/>
           <el-tab-pane label="NFT" name="NFT"/>
-          <el-tab-pane label="GameFi" name="GameFi"/>
           <el-tab-pane :label="$t('pair_list_new')" name="new"/>
-          <el-tab-pane :label="$t('pair_list_all')" name="all"/>
         </el-tabs> 
       </div>
       <div v-show="sortedList.length" class="ix-pair-head tr">

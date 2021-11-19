@@ -152,7 +152,7 @@
 import copyToClipboard from 'copy-to-clipboard'
 import utils from '@/modules/utils'
 import service from '@/modules/service'
-import RememberAlert from '@/components/Trading/RememberAlert'
+import RememberAlert from '@/views/trading1/components/RememberAlert'
 import Vue from 'vue'
 import { state } from '@/modules/store'
 const qrcode = () => import(/* webpackChunkName: "Qrcode" */ 'qrcode')

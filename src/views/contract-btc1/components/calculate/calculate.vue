@@ -279,7 +279,7 @@
 import './calculate.scss'
 import {state} from '@/modules/store'
 import utils from '@/modules/utils'
-import calculator from '@/views/contract-btc/calculator'
+import calculator from '@/views/contract-btc1/calculator'
 // import stateHolding from '../stateHoldingComputedMixins'
 
 export default {

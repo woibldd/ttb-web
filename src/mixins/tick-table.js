@@ -116,6 +116,13 @@ export default {
         })
         arr = _.sortBy(arr, ['rank'])
         return arr 
+      } else if (this.tabSelected === 'Meme') {
+        let arr = _.filter(list, pair => {
+          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
+              && pair.type === 10
+        })
+        arr = _.sortBy(arr, ['rank'])
+        return arr 
       } else {
         let arr =  _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1
