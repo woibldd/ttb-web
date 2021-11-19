@@ -274,10 +274,11 @@ export default {
       }
     },
     download () {
-      let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
+      // let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
+      let url = this.$myState.download.android
       if (utils.isIos()) { 
-        url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
-        // url = 'https://downloadappios.com:7521/1rsNn.html' 
+        // url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
+        url = this.$myState.download.ios
       }
       // window.open(url, '_blank')
       window.location.href = url

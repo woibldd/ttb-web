@@ -120,10 +120,11 @@ export default {
         this.showTutorialArrow = true
         return
       }
-      let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
+      // let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
+      let url = this.$myState.download.android
       if (this.isIos) { 
-        url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
-        // url = 'https://downloadappios.com:7521/1rsNn.html' 
+        // url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
+        url = this.$myState.download.ios
         // url = `https://ios.ixx.com`
       }
       window.location.href = url

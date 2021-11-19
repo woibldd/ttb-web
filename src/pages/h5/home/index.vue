@@ -505,7 +505,8 @@ export default {
         return
       }  
       if (type==='android') {
-        let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk' 
+      // let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
+        let url = this.$myState.download.android
         window.location.href = url
       }
       else if (type==='ios-test') {
@@ -517,8 +518,8 @@ export default {
         if(type==='ios-test') {
           url = 'https://testflight.apple.com/join/yCUsQxlN' 
         } else { 
-          url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
-          // url = 'https://downloadappios.com:7521/1rsNn.html'
+          // url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
+          url = this.$myState.download.ios
         } 
         window.location.href = url 
       }  

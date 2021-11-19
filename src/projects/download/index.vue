@@ -120,15 +120,16 @@ export default {
       }
 
       if (type === 'android') {
-        let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk' 
+        // let url = 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk'
+        let url = this.$myState.download.android
         // window.open(url, '_blank')
         window.location.href = url
         return
       }
 
       if (this.isSafari) {
-        let url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
-        //let  url = 'https://downloadappios.com:7521/1rsNn.html' 
+        // let url = 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist'
+        let  url = this.$myState.download.ios
         // window.open(url, '_blank')
         window.location.href = url
       }

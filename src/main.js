@@ -7,7 +7,7 @@ import router from './router'
 import VueI18n from 'vue-i18n'
 import utils from './modules/utils'
 import theme from './modules/dynamic-theme'
-import { actions } from './modules/store'
+import { actions, state } from './modules/store'
 import './bootstrap'
 import en from '@/libs/languages/en.js' 
 import enLocale from 'element-ui/lib/locale/lang/en'
@@ -172,6 +172,7 @@ Vue.prototype.$eh = eventHub
 // Vue.prototype.$message = Message
 Vue.prototype.$moment = moment
 Vue.prototype.$eventBus = new Vue({})
+Vue.prototype.$myState = state
 
 actions.setLocale()
 import mixins from './mixins'
