@@ -84,14 +84,13 @@
           <div v-if="pair.CUSTOM" v-cloak class="td custom-title">{{ pair.type === '2' ? $t('pair_list_new') : $t('pair_list_ST') }}</div>
         </li>
       </ul>
-      <div v-show="!sortedList.length && tabSelected==='like'" class="ix-pair-empty">
-        <!-- {{$t('pair_table_option_empty')}} -->  
+      <div v-show="!sortedList.length && tabSelected==='like'" class="ix-pair-empty">  
         <div class="mt-30">
           <img src="~@/assets/empty.png" alt="" srcset="">
         </div>  
         <span style="color: #5F6B76;font-size:14px">{{$t('pair_table_option_empty')}}</span>
       </div>
-      <div v-if="errmsg && tabSelected!='like'" class="no-data">{{ $t(errmsg) }}</div>
+      <div v-if="tabSelected!='like' && !sortedList.length" class="no-data">{{ $t('pairnav_no_matched') }}</div>
       <div v-if="!loading && err && !pairList.length" class="err">{{ err }}</div>
     </div>
   </div>
