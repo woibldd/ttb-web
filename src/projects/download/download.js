@@ -2,7 +2,7 @@ import App from './App'
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import theme from '@/modules/dynamic-theme'
-import { actions } from '@/modules/store'
+import { actions, state } from '@/modules/store'
 import eventHub from '@/modules/eventHub'
 import router from './router'
 import utils from '@/modules/utils' 
@@ -27,6 +27,7 @@ request.keys().forEach(request)
 actions.setLocale()
 
 Vue.prototype.$eh = eventHub
+Vue.prototype.$myState = state
 
 new Vue({
   el: '#app',
