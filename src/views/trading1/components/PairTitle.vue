@@ -12,7 +12,7 @@
         {{ pair | pairfix }} 
         <icon :class="{up: show}" name="arrow-down" class="arrow"/>
         <div v-show="show" :class="{show: show}" class="grid-pairtable" :skin="state.skin">
-          <PairNav ref="PairNav" :init-height="400" :sort="false"/>
+          <PairNav ref="PairNav" :init-height="400" :sort="true"/>
         </div>
       </div>
       <!-- <el-popover

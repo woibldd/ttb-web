@@ -1,5 +1,5 @@
 <template>
-  <div style="page-kyc-wrap">
+  <div class="profile-right-container">
     <div class="user-center-right">
       <router-view/>
     </div>
@@ -25,13 +25,12 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.user-center-right {
-  padding-left: 60px;
+.profile-right-container {
   float: left;
-  .profile-container {
-    width: 960px;
-    position: relative;
-
+  margin-left: 29px;
+  width: 954px;
+  .profile-container { 
+    position: relative; 
     .title-box {
       width: 100%;
       height: 40px;

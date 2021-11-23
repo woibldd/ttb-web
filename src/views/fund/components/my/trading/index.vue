@@ -376,7 +376,7 @@ export default {
             })
             break;
           case 'order': // 
-            service.orderHistorise({page:currentPage,size:pageSize}).then(res => {
+            service.getOrderHistory({page:currentPage,size:pageSize}).then(res => {
               if (!res.code) {
                 this.tableOrderList = res.data 
               }

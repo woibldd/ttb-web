@@ -25,15 +25,15 @@
             <div class="invinfo-icon">
               <img src="@/assets/profile/binding-phone.png" alt="" />
             </div>
-             <p>{{ $t('Phone_binding') }}</p>
+             <p class="label">{{ $t('Phone_binding') }}</p>
              <div>保护您的交易和账户安全</div>
           </div>
           <div flex="cross:center">
-            <span v-if="!phone">
+            <span v-if="!phone" class="label">
               <img src="@/assets/profile/security-state-false.png" alt="" class="mr-6">
                {{ $t('No_Bindings') }}
             </span>
-            <span v-else>
+            <span v-else class="label">
               <img src="@/assets/profile/security-state-true.png" alt="" class="mr-6">
               <!-- {{ $t('Bindings') }} -->
               {{ phone }}
@@ -42,16 +42,18 @@
           </div>
           <div class="option" flex="main:right cross:center">
             <template v-if="!phone">
-              <router-link
-                :to="{name: 'PhoneBind'}">{{ $t('to_bind') }}</router-link>
+              <div class="btn">
+                <router-link
+                  :to="{name: 'PhoneBind'}">{{ $t('to_bind') }}</router-link>
+              </div>
             </template>
             <template v-else>
-              <a
-                v-if="verify_phone"
-                @click="switchPhoneBind">{{ $t('close_verify') }}</a>
-              <a
-                v-if="!verify_phone && phone"
-                @click="switchPhoneBind">{{ $t('open_verify') }}</a> 
+              <div class="btn" v-if="verify_phone">
+                <a @click="switchPhoneBind">{{ $t('close_verify') }}</a> 
+              </div>
+              <div class="btn" v-if="!verify_phone && phone">
+                <a @click="switchPhoneBind">{{ $t('open_verify') }}</a> 
+              </div>
             </template>
           </div>
         </li>
@@ -60,31 +62,30 @@
             <div class="invinfo-icon">
               <img src="@/assets/profile/binding-email.png" alt="" />
             </div>
-             <div>{{ $t('email') }}</div>
+             <div class="label">{{ $t('email') }}</div>
              <div>保护您的交易和账户安全</div>
           </div>
           <div flex="cross:center"> 
-            <span v-if="!email">
+            <span v-if="!email" class="label">
               <img src="@/assets/profile/security-state-false.png" alt="" class="mr-6">
                {{ $t('No_Bindings') }}
             </span>
-            <span v-else>
+            <span v-else class="label">
               <img src="@/assets/profile/security-state-true.png" alt="" class="mr-6">
               <!-- {{ $t('Bindings') }} -->
               {{ email }}
             </span> 
           </div>
-          <div class="option" flex="main:right cross:center">
-            
-            <a
-              v-if="verify_email"
-              @click="switchEmailBind">{{ $t('close_verify') }}</a>
-            <a
-              v-if="!verify_email && email"
-              @click="switchEmailBind">{{ $t('open_verify') }}</a>
-            <router-link
-              v-if="!email"
-              :to="{name: 'EmailBind'}">{{ $t('to_bind') }}</router-link>
+          <div class="option" flex="main:right cross:center"> 
+            <div class="btn" v-if="verify_email">
+              <a @click="switchEmailBind">{{ $t('close_verify') }}</a>
+            </div>
+            <div class="btn" v-if="!verify_email && email">
+              <a @click="switchEmailBind">{{ $t('open_verify') }}</a>
+            </div>
+            <div class="btn" v-if="!email">
+              <router-link :to="{name: 'EmailBind'}">{{ $t('to_bind') }}</router-link>
+            </div>
           </div>
         </li>
         <li :class="{pass: !!google_key_bound}">
@@ -92,34 +93,36 @@
             <div class="invinfo-icon">
               <img src="@/assets/profile/binding-google.png" alt="" />
             </div>
-            <p>{{ $t('google_validator') }}</p>
+            <p class="label">{{ $t('google_validator') }}</p>
             <div>保护您的交易和账户安全</div>  
           </div>
           <div flex="cross:center"> 
-            <span v-if="!google_key_bound">
+            <span v-if="!google_key_bound" class="label">
               <img src="@/assets/profile/security-state-false.png" alt="" class="mr-6">
                {{ $t('No_Bindings') }}
             </span>
-            <span v-else>
+            <span v-else class="label">
               <img src="@/assets/profile/security-state-true.png" alt="" class="mr-6">
               {{ $t('Bindings') }}
             </span>  
           </div>
           <div class="option" flex="main:right cross:center">
             <template v-if="!google_key_bound">
-              <router-link
-                :to="{name: 'GoogleBind'}">{{ $t('to_bind') }}</router-link>
+              <div class="btn">
+                <router-link
+                  :to="{name: 'GoogleBind'}">{{ $t('to_bind') }}</router-link>
+              </div>
             </template>
             <template v-else>
-              <a
-                v-if="verify_google || !verify_google"
-                @click="resetHandle">{{ $t('google_reset') }}</a>
-              <a
-                v-if="verify_google"
-                @click="switchGoogleBind">{{ $t('close_verify') }}</a>
-              <a
-                v-if="!verify_google && google_key_bound"
-                @click="switchGoogleBind">{{ $t('open_verify') }}</a>
+              <div v-if="verify_google || !verify_google" class="btn">
+                <a @click="resetHandle">{{ $t('google_reset') }}</a>
+              </div>
+              <div class="btn" v-if="verify_google">
+                <a @click="switchGoogleBind">{{ $t('close_verify') }}</a>
+              </div>
+              <div class="btn" v-if="!verify_google && google_key_bound">
+                <a @click="switchGoogleBind">{{ $t('open_verify') }}</a>
+            </div>
             </template>
           </div>
         </li>
@@ -128,31 +131,33 @@
             <div class="invinfo-icon">
               <img src="@/assets/profile/binding-password.png" alt="" />
             </div>
-            <p>{{ $t('log_pwd') }}</p>
+            <p class="label">{{ $t('log_pwd') }}</p>
             <div>保护您的交易和账户安全</div>  
           </div> 
           <div flex="cross:center"> 
-            <span  flex="cross:center">
+            <span  flex="cross:center" class="label">
               <img src="@/assets/profile/security-state-true.png" alt="" class="mr-6">
               {{ $t('settinged') }}
             </span>  
           </div>
           <div class="option" flex="main:right cross:center">
-            <router-link :to="{name: 'ModPwd'}">{{ $t('modify') }}</router-link>
-            <em
-              style="color: #999"
-              v-if="google_key_bound && !verify_google">{{ $t('google_login') }}</em>
-            <em
-              style="color: #999"
-              v-else-if="!google_key_bound">{{ $t('google_login') }}</em>
+            <div v-if="google_key_bound && !verify_google">
+              <em class="xbtn" style="color: #999" >{{ $t('google_login') }}</em>
+            </div>
+            <div v-else-if="!google_key_bound">
+              <em class="xbtn" style="color: #999" >{{ $t('google_login') }}</em>
+            </div>
             <template v-else>
-              <a
-                v-if="verify_login_google"
-                @click="switchLoginGoogleBind">{{ $t('google_login') }}</a>
-              <a
-                v-if="!verify_login_google"
-                @click="switchLoginGoogleBind">{{ $t('google_turn_off') }}</a>
+              <div v-if="verify_login_google">
+                <a class="xbtn" @click="switchLoginGoogleBind">{{ $t('google_login') }}</a>
+              </div>
+              <div v-if="!verify_login_google">
+                <a class="xbtn"  @click="switchLoginGoogleBind">{{ $t('google_turn_off') }}</a>
+              </div>
             </template>
+            <div class="btn">
+              <router-link  :to="{name: 'ModPwd'}">{{ $t('modify') }}</router-link>
+            </div> 
           </div>
         </li>
       </ul>
@@ -460,6 +465,10 @@
     padding: 0 28px;  
     border: 1px solid #eaeaea;
     border-radius: 6px; 
+    .label {
+      color: #1F2533;
+      font-weight: 600;
+    }
     .invinfo-grid {
       display: grid;
       align-content: center;
@@ -469,6 +478,26 @@
         grid-row-start: 1;
         grid-row-end: 3;
         align-items: center;
+      }
+    }
+    .btn {
+      padding: 0 10px;
+      margin-left: 20px;
+      height: 32px;
+      min-width: 60px;
+      background-color: #EAECEF;
+      border-radius: 4px;
+      text-align: center;
+      line-height: 32px;
+      a {
+        color: #1E2329;
+        font-size: 14px;
+      }
+    }
+    .option {
+      .xbtn {
+        color: #999;
+        font-size: 12px;
       }
     }
     ul{
@@ -484,9 +513,9 @@
         }
         div{
           // float: left;
-          a{
-            margin-left: 20px;
-          }
+          // a{
+          //   margin-left: 20px;
+          // }
           span{
             display: flex;
             align-items: center;

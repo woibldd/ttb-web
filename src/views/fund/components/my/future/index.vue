@@ -57,9 +57,9 @@
               <el-option
                 v-for="(item, idx) in pairList"
                 :key="idx"
-                :label="`${item.currency}/USDT`"
+                :label="`${item.currency.replace(/USD/,'')}/USD`"
                 :value="item.name"/>
-            </el-select>
+            </el-select> 
           </div>
           <div v-if="subTab==='tradeHistory' || subTab==='orderHistory'" class="mr-20">
             <el-select
@@ -67,7 +67,7 @@
               v-model="myfilter.side" 
               size="mini"
               @change="handleFilter">  
-              <el-option v-for="(item, key) in langDict.mix_side"
+              <el-option v-for="(item, key) in langDict.side"
                 :key="key"
                 :label="item" 
                 :value="key"/>

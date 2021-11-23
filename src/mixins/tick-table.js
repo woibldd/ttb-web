@@ -208,6 +208,13 @@ export default {
         this.sortState = 1
       }
     },
+    stateSortBy(key) {
+      if (key !== this.sortBy) {
+        return 0
+      } else {
+        return this.sortState
+      }
+    },
     patch(item) {
       const find = _.find(this.pairList, pair => pair.name === item.pair)
       if (find) {
@@ -218,13 +225,6 @@ export default {
       }
       if (item.pair === this.state.pro.pair) {
         this.state.pro.pairTick = item
-      }
-    },
-    stateSortBy(key) {
-      if (key !== this.sortBy) {
-        return 0
-      } else {
-        return this.sortState
       }
     },
     async fetch() {

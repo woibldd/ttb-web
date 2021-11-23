@@ -318,8 +318,9 @@ export default {
 <style lang="scss" scoped> 
   // @import '../styles/mixins'; 
   .user-center-right {
-    padding-left: 60px;
     float: left;
+    margin-left: 29px;
+    width: 954px;
     .profile-container {
       max-width: 920px;
       position: relative;
