@@ -39,7 +39,7 @@
               class="menu-name clearfix"
               :replace="true"
               active-class="active"
-              to="/profile/kyc/kyc_step3">
+              to="/profileN/kyc/kyc_step3">
             <div class="menu-icon fl"><icon name="nav-kyc"/></div>  
             <span class="fl">{{ $t('profile_sec_kyc') }}</span> 
             </router-link>
@@ -49,7 +49,7 @@
               class="menu-name clearfix"
               :replace="true"
               active-class="active"
-              :to="kycRouter">
+              to="/profileN/kyc/">
               <div class="menu-icon fl"><icon name="nav-kyc"/></div>  
               <span class="fl">{{ $t('profile_sec_kyc') }}</span> 
             </router-link>
@@ -59,7 +59,7 @@
           <router-link
             class="menu-name clearfix"
             active-class="active"
-            :to="{name: 'ProfileApi'}"> 
+            :to="{name: 'profileNapi'}"> 
             <div class="menu-icon fl"><icon name="nav-api"/></div>  
             <span class="fl">{{ $t('api_management') }}</span> 
           </router-link>
@@ -67,7 +67,7 @@
         <li class="">
           <router-link
             class="menu-name clearfix"
-            :to="{name: 'invite'}"
+            :to="{name: 'profileNinvite'}"
             active-class="active">
             <div class="menu-icon fl"><icon name="nav-yaoqing"/></div>  
             <span class="fl">{{ $t('profile_left_invite') }}</span> 

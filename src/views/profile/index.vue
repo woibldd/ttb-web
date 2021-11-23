@@ -26,6 +26,7 @@ export default {
   width: 1200px;
   padding-top: 60px;
   padding-bottom: 100px;
+  @include clearfix;
 }
 
 .mobile {

@@ -416,20 +416,18 @@ export default {
 </script>
 <style lang="scss" scoped>
   .user-center-right {
-    padding-left: 60px;
     float: left;
-    .profile-container {
-      width: 960px;
-      position: relative;
-
+    margin-left: 29px;
+    width: 954px;
+    .profile-container { 
+      position: relative; 
       .title-box {
         width: 100%;
         height: 40px;
         font-size: 18px;
         font-weight: 600;
         color: $text-strong;
-        border-bottom: 1px solid #e6e6e6;
-
+        border-bottom: 1px solid #e6e6e6; 
         .tips {
           font-size:16px;
           font-weight:400;

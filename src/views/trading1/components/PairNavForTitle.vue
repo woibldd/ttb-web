@@ -33,16 +33,16 @@
       </div>
       <div v-show="sortedList.length" class="ix-pair-head tr">
         <div class="th pair" @click="setSort('pair')">
-          <sort :sort="sort" :label="$t('pairnav_pair')" :state="stateSortBy('pair')"/>
+          <sort color="#01CED1"  :sort="sort" :label="$t('pairnav_pair')" :state="stateSortBy('pair')"/>
         </div>
         <div class="th price" @click="setSort('price')">
-          <sort :sort="sort" :label="$t('pairnav_price')" :state="stateSortBy('price')"/>
+          <sort color="#01CED1"  :sort="sort" :label="$t('pairnav_price')" :state="stateSortBy('price')"/>
         </div>
         <div class="th delta" @click="setSort('delta')">
-          <sort :sort="sort" :label="$t('pairnav_wave')" :state="stateSortBy('delta')"/>
+          <sort color="#01CED1"  :sort="sort" :label="$t('pairnav_wave')" :state="stateSortBy('delta')"/>
         </div>
         <div class="th vol" @click="setSort('vol')">
-          <sort :sort="sort" :label="$t('pairnav_vol')" :state="stateSortBy('vol')"/>
+          <sort color="#01CED1"  :sort="sort" :label="$t('pairnav_vol')" :state="stateSortBy('vol')"/>
         </div>
       </div>
       <ul v-show="sortedList.length" :style="{'max-height': height}" class="ul ix-pair-body tbody">
@@ -328,7 +328,7 @@ export default {
 .pair {
   padding: 0;
   margin-left: 14px;
-  width: 20%;
+  width: 30%;
 }
 .price {
   width: 30%;
@@ -353,7 +353,7 @@ export default {
     padding-right: 7px;
   }
   &.vol {
-    padding-right: 7px;
+    padding-right: 12px;
   }
 }
 .ix-pair-head {

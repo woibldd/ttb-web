@@ -163,7 +163,7 @@ export const profileRouter = [
       {
         //身份认证
         path: 'kyc',
-        name: 'kyc',
+        name: 'profileNkyc',
         component: () => import(/* webpackChunkName: "Kyc" */ '@/views/profile/components/kyc/index'),
         redirect: 'kyc/kyc_step1',
         children: [
