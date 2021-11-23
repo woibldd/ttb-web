@@ -18,7 +18,7 @@ export const state = {
   userInfo: null,
   loginBack: {name: 'home'}, // 默认登录返回页 
   verifyEmail: '', // 注册、找回密码使用的邮箱 
-  tabSelected: 'main', //币对列表
+  tabSelected: 'all', //币对列表
   downloadTool: true,
   download: { 
     android: 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk',
