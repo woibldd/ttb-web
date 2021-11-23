@@ -127,7 +127,7 @@ export default {
       site: process.env.SITE,
       bodyHeight: 0,
       isMac: /Macintosh/.test(navigator.userAgent),
-      tabSelected: 'main'
+      tabSelected: 'all'
     }
   },
   computed: {
