@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import {state} from '@/modules/store'
 export default {
   data() {
     return {
