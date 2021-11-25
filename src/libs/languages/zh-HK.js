@@ -3667,19 +3667,19 @@ export default {
       },
       {
         key:'1D',
-        text:  "1日"
+        text:  "日线"
       },
       {
         key:'1W',
-        text:  "1周"
+        text:  "周线"
       },
       {
         key:'1M',
-        text:  "1月"
+        text:  "月线"
       } ,
       {
         key:'12M',
-        text:  "1年"
+        text:  "年线"
       },
     ],
     navs: {

@@ -84,7 +84,7 @@
               </div> 
             </div>
           </div>
-          <div class="" style="width:300px; ">
+          <div class="" style="width:320px; ">
             <div class="trade-box mb-5"> 
               <!-- 委托列表 -->
               <div class="ix-grid ix-grid-orderbook" ref="gridOrderbook">
