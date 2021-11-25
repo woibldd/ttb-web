@@ -4062,4 +4062,19 @@ export default {
       NBZZ锁仓扣除: 'NBZZ锁仓扣除'
     }
   },  
+  profile: {
+    overview: '总览',
+    basicInfo: '基础信息',
+    safeCenter: '安全中心',
+    tip1: '帮助您提升账户安全的功能设置',
+    routeText1: '4个安全建议',
+    tip2: '完成身份认证以提升您的安全等级和体现额度',
+    routeText2: '验证',
+    tip3: '您可以根据自身需求创建API',
+    routeText3: '管理',
+    tip4: '邀请好友，一起赚币',
+    routeText4: '邀请',
+    doubleVerification: '双重验证',
+    accountSafe: '保护您的交易和账户安全' 
+  }
 }

@@ -4001,5 +4001,20 @@ export default {
       锁仓扣除: '락업 공제',
       NBZZ锁仓扣除: 'NBZZ 락업 공제'
     }
+  },  
+  profile: { 
+    overview:'총람', 
+    basicInfo: '기초 정보',
+    safeCenter:'안전 센터', 
+    tip1:'계정 보안을 향상시키는 기능 설정', 
+    routeText1:'4개의 안전 조언', 
+    tip2:'신분인증을 완성하여 당신의 안전 등급과 구현 한도를 향상시킵니다',
+    routeText2:'검증', 
+    tip3: "자신의 요구에 따라 API를 만들 수 있습니다", 
+    routeText3:'관리', 
+    tip4:'친구 초대, 같이 돈 벌기', 
+    routeText4: '초대', 
+    DoubleVerification: '이중 검증', 
+    accountSafe:'거래 및 계정 보안'
   }, 
 }

@@ -12,7 +12,7 @@
             active-class="active "
             :to="{name:'overview'}">
             <div class="menu-icon fl"><icon name="nav-zonglan"/></div> 
-            <span class="fl">总览</span> 
+            <span class="fl">{{ $t('profile.overview')}}</span> 
           </router-link>
         </li>
         <li class="">

@@ -4165,5 +4165,20 @@ export default {
       锁仓扣除: 'Lock-up deduction',
       NBZZ锁仓扣除: 'NBZZ Lock-up deduction'
     }
+  },  
+  profile: { 
+    overview: 'Overview',
+    basicInfo: 'Basic information',
+    safeCenter: 'Security Center',
+    tip1: 'Settings to help you improve account security',
+    routeText1: ' 4 safety recommendations',
+    tip2: 'Complete identity verification to improve your security level and withdrawal limit',
+    routeText2: 'Verification',
+    tip3: 'You can create an API according to your needs',
+    routeText3: 'Management',
+    tip4: 'Invite and Earn ',
+    routeText4: 'Invitation',
+    doubleVerification: 'Two-step verification',
+    accountSafe: 'Protect your transactions and account security' 
   }, 
 }

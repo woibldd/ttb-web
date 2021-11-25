@@ -193,9 +193,7 @@
           v-else
           class="right_options"> 
           <div class="fund mr-30 nav_link">
-            <icon
-              :name="fund"
-            />
+            <icon :name="fund" />
             <span @click="openDefault('fund')">{{ $t('wallets_nav_asset') }}</span> 
             <div class="dropdown-sub-menu">
               <ul class="dropdown-list pt-10 pb-10">
@@ -234,7 +232,7 @@
                 </li> -->
                 <li class="dropdown-item pl-24 pr-24">
                   <router-link
-                    :to="{name: 'profile'}"
+                    :to="{name: 'profileN'}"
                     class="link"
                   >{{ $t('profile_personal_center') }}</router-link>
                 </li>

@@ -1,8 +1,8 @@
 <template>
   <div class="user-center-right">
-    <div class="profile-container"> 
+    <div class="profile-container">  
       <div class="profile-panel header-panel">
-        <div class="profile-panel-title">基础信息</div>
+        <div class="profile-panel-title">{{$t('profile.basicInfo')}}</div>
         <div class="profile-panel-box">
           <div class="profile-panel-row" flex>
             <div class="profile-panel-item" flex>
@@ -18,7 +18,7 @@
               </div>
             </div>
             <div class="profile-panel-item">
-              <div class="label">用户姓名</div>
+              <div class="label">{{$t('u_name')}}</div>
               <div class="value">
                 <span v-if="name===-1"><router-link :to="{name: 'Kyc'}">{{ $t("kyc_failure") }}</router-link></span>
                 <span v-else-if="name">{{ name }}</span>
@@ -26,7 +26,7 @@
               </div>
             </div>
             <div class="profile-panel-item">
-              <div class="label">邮箱</div>
+              <div class="label">{{$t('register_by_email')}}</div>
               <div class="value">
                 <span v-if="email"> {{ email }}</span>
                 <span v-else><router-link :to="{name: 'EmailBind'}">{{ $t('to_bind') }}</router-link></span>
