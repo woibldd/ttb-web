@@ -62,6 +62,7 @@
 
 <script>
 import {state} from '@/modules/store'
+import utils from '@/modules/utils'
 export default {
   data() {
     return {
