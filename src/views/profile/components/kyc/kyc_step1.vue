@@ -1,8 +1,8 @@
 <template>
   <div class="profile-container">
     <div class="title-box">
-      {{ $t('identity_authentication') }}
-      <span>{{ $t('Verified') }}</span>
+      <div class="title-text">{{ $t('identity_authentication') }}</div> 
+      <div class="sub-title-text mt-3">身份认证后，即刻开启交易！</div>
     </div>
     <div v-if="kycState === -1" style="height:400px;" flex="dir:top main:center cross:center">
       <span>
@@ -28,10 +28,10 @@
       </div> -->
       <div class="authen_top mt-20" flex> 
         <div class="top-arrow arrow-a">
-          {{ $t('kyc_top_authen_1') }}
+          <em><icon name="kyc-lv1"></icon>  {{ $t('kyc_top_authen_1') }}</em> 
         </div>
         <div class="top-arrow arrow-b">
-          {{ $t('kyc_top_authen_2') }}
+          <em><icon name="kyc-lv1"></icon>{{ $t('kyc_top_authen_2') }}</em> 
         </div>
       </div>
       <div class="invinfo-content" v-if="step===1">
@@ -282,6 +282,10 @@ export default {
     border-radius: 8px;
     text-align: center;
     font-size: 12px;
+    em {
+      position: relative;
+      z-index: 2;
+    }
     &:after {
       position:absolute;
       top: 6px;

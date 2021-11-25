@@ -1,15 +1,27 @@
 
 <template>
   <div class="profile-container">
-    <div class="title-box">
+    <!-- <div class="title-box">
       {{ $t('identity_authentication') }}
       <span>{{ $t('Verified') }}</span>
+    </div> -->
+    <div class="title-box">
+      <div class="title-text">{{ $t('identity_authentication') }}</div> 
+      <div class="sub-title-text mt-3">身份认证后，即刻开启交易！</div>
     </div>
     <div class="invinfo-box">
-      <div class="authen_top">
+      <!-- <div class="authen_top">
         <i class="jd"/>
         <p class="yy">{{ $t('kyc_top_authen_1') }}</p>
         <p class="yy">{{ $t('kyc_top_authen_2') }}</p>
+      </div> -->
+      <div class="authen_top mt-20" flex> 
+        <div class="top-arrow arrow-a">
+          <em><icon name="kyc-lv1"></icon>  {{ $t('kyc_top_authen_1') }}</em> 
+        </div>
+        <div class="top-arrow arrow-b">
+          <em><icon name="kyc-lv1"></icon>{{ $t('kyc_top_authen_2') }}</em> 
+        </div>
       </div>
       <div class="option-title">
         <h3>
@@ -580,6 +592,57 @@ export default {
 <style lang="scss" scoped>
 @import "./index.scss";
 
+  .invinfo-box {
+    width: 100%;
+    margin: 20px auto 50px auto;
+    .top-arrow {
+      position: relative;
+      margin-right: 25px;
+      height: 40px;
+      width: 170px;
+      line-height: 40px;
+      background-color: $primary;
+      color: #fff;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 12px;
+      em {
+        position: relative;
+        z-index: 2;
+      }
+      &:after {
+        position:absolute;
+        top: 6px;
+        right: -10px;
+        z-index: 1;
+        display: block;
+        content: '';
+        height: 28px;
+        width: 28px; 
+        background-color: $primary;
+        transform: rotate(45deg);
+        border-radius: 4px;
+      }
+      &.arrow-b { 
+        padding-left: 20px;
+        width: 150px;
+        background-color: $primary;;
+        color: #fff; 
+        &:before {
+          position:absolute;
+          top: 6px;
+          left: -16px;
+          display: block;
+          content: '';
+          height: 28px;
+          width: 28px; 
+          background-color: #fff;
+          transform: rotate(45deg); 
+          border-top-right-radius: 4px;
+        } 
+      }
+    }
+  }
 </style>
 
 

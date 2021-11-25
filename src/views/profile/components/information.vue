@@ -29,7 +29,7 @@
               <div class="label">邮箱</div>
               <div class="value">
                 <span v-if="email"> {{ email }}</span>
-          <span v-else><router-link :to="{name: 'EmailBind'}">{{ $t('to_bind') }}</router-link></span>
+                <span v-else><router-link :to="{name: 'EmailBind'}">{{ $t('to_bind') }}</router-link></span>
               </div>
             </div>
           </div>

@@ -5,7 +5,7 @@
         <div class="title-label">{{ $t('profile_left_invite_safety') }}</div> 
         <div class="title-sub mt-15" flex="main:left">
           <label flex="cross:center"> <img src="@/assets/profile/security-state-true.png" alt="" class="mr-6"> 双重验证 </label>
-          <label flex="cross:center" class="ml-20"> <img src="@/assets/profile/security-state-false.png" alt="" class="mr-6"> 身份认证 </label>
+          <label flex="cross:center" class="ml-20"> <img src="@/assets/profile/security-state-false.png" alt="" class="mr-6"> {{$t('identity_authentication')}} </label>
         </div>
       </div>
       <div class="title-right">

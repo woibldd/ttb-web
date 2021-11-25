@@ -10,17 +10,27 @@
                 <img src="@/assets/profile/info-header.png" alt="">
               </div>
               <div class="info">
-                <div class="value">18600001111</div>
-                <div class="label">UID:123456</div>
+                <div class="value">
+                  <span v-if="phone"> {{ phone }}</span>
+                  <span v-else><router-link :to="{name: 'PhoneBind'}">{{ $t('to_bind') }}</router-link></span>
+                </div>
+                <div class="label">UID:{{uid}}</div>
               </div>
             </div>
             <div class="profile-panel-item">
               <div class="label">用户姓名</div>
-              <div class="value">去认证</div>
+              <div class="value">
+                <span v-if="name===-1"><router-link :to="{name: 'Kyc'}">{{ $t("kyc_failure") }}</router-link></span>
+                <span v-else-if="name">{{ name }}</span>
+                <span v-else><router-link :to="{name: 'Kyc'}">{{ $t("to_verify") }}</router-link> </span>
+              </div>
             </div>
             <div class="profile-panel-item">
               <div class="label">邮箱</div>
-              <div class="value">106****93@qq.com</div>
+              <div class="value">
+                <span v-if="email"> {{ email }}</span>
+                <span v-else><router-link :to="{name: 'EmailBind'}">{{ $t('to_bind') }}</router-link></span>
+              </div>
             </div>
           </div>
         </div>
@@ -42,7 +52,7 @@
             </div>
           </div>
           <div class="profile-panel-footer">
-            <router-link to="">{{item.routeText}} <icon style="font-size: 12px;" name="jiantou" /></router-link>
+            <router-link :to="item.route">{{item.routeText}} <icon style="font-size: 12px;" name="jiantou" /></router-link>
           </div>
         </div> 
       </div>
@@ -58,34 +68,62 @@ export default {
         {
           name: '安全中心',
           tip:'帮助您提升账户安全的功能设置',
-          route: '',
+          route: '/profileN/security/summary',
           routeText: '4个安全建议',
           img: 'overview-safely.png'
         },
         {
-          name: '身份认证',
+          name: 'profile_sec_kyc',
           tip:'完成身份认证以提升您的安全等级和体现额度',
-          route: '',
+          route: '/profileN/kyc',
           routeText: '验证',
           img: 'overview-kyc.png'
         },
         {
-          name: 'API管理',
+          name: 'api_management',
           tip:'您可以根据自身需求创建API',
-          route: '',
+          route: '/profileN/api',
           routeText: '管理',
           img: 'overview-API.png'
         },
         {
-          name: '邀请好友',
+          name: 'invite_friends',
           tip:'邀请好友，一起赚币',
-          route: '',
+          route: '/profileN/invite',
           routeText: '邀请',
           img: 'overview-invite.png'
         },
       ]
     }
-  }
+  },
+  computed: {
+    uid () {
+      if (state.userInfo) {
+        return state.userInfo.id
+      }
+      return ''
+    },
+    name () {
+      if (state.userInfo && state.userInfo.state === -1) {
+        return state.userInfo.state
+      } else if (state.userInfo) {
+        return state.userInfo.name
+      }
+      return ''
+    },
+    phone () {
+      if (state.userInfo && state.userInfo.phone) {
+        return utils.publicDesensitization(state.userInfo.phone)[0]
+      }
+      return ''
+    },
+    email () {
+      if (state.userInfo && state.userInfo.email) {
+        return utils.publicDesensitization(state.userInfo.email)[0]
+      }
+      return ''
+    }
+  },
 
 }
 </script>

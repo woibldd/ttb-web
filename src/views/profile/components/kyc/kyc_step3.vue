@@ -8,12 +8,12 @@
         <p class="yy">{{ $t('kyc_top_authen_2') }}</p> 
       </div> -->
       <div class="authen_top mt-20" flex> 
-        <div class="top-arrow arrow-a">
-          {{ $t('kyc_top_authen_1') }}
+        <!-- <div class="top-arrow arrow-a">
+          <em><icon name="kyc-lv1"></icon>  {{ $t('kyc_top_authen_1') }}</em> 
         </div>
         <div class="top-arrow arrow-b">
-          {{ $t('kyc_top_authen_2') }}
-        </div>
+          <em><icon name="kyc-lv1"></icon>{{ $t('kyc_top_authen_2') }}</em> 
+        </div> -->
       </div>
       <div class="notify">
         <div
@@ -214,6 +214,10 @@ export default {
       border-radius: 8px;
       text-align: center;
       font-size: 12px;
+      em {
+        position: relative;
+        z-index: 2;
+      }
       &:after {
         position:absolute;
         top: 6px;
