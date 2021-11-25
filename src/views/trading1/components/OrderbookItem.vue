@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import utils from '@/modules/utils'
 export default {
   name: 'OrderbookItem',
   props: ['item', 'side', 'priceScale', 'amountScale', 'height', 'rank'],
@@ -52,7 +53,8 @@ export default {
       if (!big) {
         return ''
       }
-      return big.toFixed(this.amountScale)
+      // return big.toFixed(this.amountScale)
+      return utils.toPretty(big)
     },
     fixPrice (big) {
       if (!big) {

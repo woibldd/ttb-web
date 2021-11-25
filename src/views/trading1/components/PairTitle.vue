@@ -61,7 +61,7 @@
       </div>
       <div class="fl grid-tf-amount" :skin="state.skin">
         <p class="tick-info">{{ $t('homechart_24h_v') }}</p>
-        <p class="tick-value">{{ pairTick.volume_24h | round(2) }} {{ state.pro.product_name }}</p> 
+        <p class="tick-value">{{ fixAmount(pairTick.volume_24h) }} {{ state.pro.product_name }}</p> 
       </div>
     </div>
     <div class="skin"> 
@@ -79,6 +79,7 @@ import { state, local } from '@/modules/store'
 import { pairfix } from '@/mixins/index'
 import isEmpty from 'lodash/isEmpty'
 import PairNav from './PairNavForTitle'
+import utils from "@/modules/utils"
 
 export default {
   components: {
@@ -270,6 +271,12 @@ export default {
         this.state.skin = 'light'  
         this.$eh.$emit('tradingview:skin')
       } 
+    },
+    fixAmount (big) {
+      if (!big) {
+        return ''
+      } 
+      return utils.toPretty(big)
     },
   }
 }

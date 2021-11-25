@@ -428,8 +428,11 @@ const utils = {
     if (num < 100) {
       return num.toFixed(2)
     }
-    if (num < 1e6) {
+    if (num < 1e3) {
       return num.toFixed(0)
+    }
+    if (num < 1e6) {
+      return num.div(1e3).toFixed(1) + 'K'
     }
     if (num < 1e7) {
       return num.div(1e6).toFixed(1) + 'M'

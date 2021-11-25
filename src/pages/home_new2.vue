@@ -85,7 +85,7 @@
           </div>
         </div> 
       </div>
-      <!-- 行情 --> 
+      <!-- 行情 -->  
       <div class="home-markets markets-box">
         <div class="tab-nav" >
           <div class="left" flex="dir:column"> 
@@ -105,8 +105,7 @@
           <!-- <div class="right">
             <span>{{$t('contract_24_hour_trade')}}： <label class="ml-10">{{tradeTotal}} </label>USDT</span>
           </div> -->
-        </div> 
-
+        </div>  
         <div class="markets-table">
           <template v-if="(selectTab==='all' || selectTab==='trading')"> 
             <!-- <div class="title mb-10">
@@ -115,9 +114,21 @@
             <div class="grid mb-30">
               <el-row class="hander mt-10 mb-20">
                 <!-- <el-col :span="1">#</el-col> -->
-                <el-col :span="4">{{$t('currency')}}</el-col>
-                <el-col :span="3">{{$t('market.orderdeal')}}</el-col>
-                <el-col :span="3">{{$t('market.h24change')}}</el-col>
+                <el-col :span="4"> 
+                  <div @click="setTradingSort('product')">
+                    <sort color="#01CED1" :sort="sortView" :label="$t('currency')" :state="stateTradingSortBy('product')"/>
+                  </div>
+                </el-col>
+                <el-col :span="3"> 
+                  <div @click="setTradingSort('price')">
+                    <sort color="#01CED1" :sort="sortView" :label="$t('market.orderdeal')" :state="stateTradingSortBy('price')"/>
+                  </div>
+                </el-col>
+                <el-col :span="3"> 
+                  <div @click="setTradingSort('delta')">
+                    <sort color="#01CED1" :sort="sortView" :label="$t('market.h24change')" :state="stateTradingSortBy('delta')"/>
+                  </div> 
+                </el-col>
                 <el-col :span="4">{{$t('market.h24trade')}}</el-col>
                 <el-col :span="4">{{$t('market.h24amount')}}</el-col>
                 <el-col :span="4"  flex="main:center">{{$t('market.view')}}</el-col>
@@ -138,7 +149,7 @@
                   <span v-else class="text-danger">{{item.delta | fixed(2)}}%</span>&nbsp;
                 </el-col>
                 <el-col :span="4">{{item.vol | fixed(2)}} <span class="currency">{{item.product}}</span> &nbsp;</el-col>
-                <el-col :span="4">{{$big(item.vol || 0).times(item.price || 0)| fixed(2)}} <span class="currency">{{item.currency}}</span> &nbsp;</el-col>
+                <el-col :span="4">{{$big(item.vol || 0).times(item.price || 0)| pretty(2)}} <span class="currency">{{item.currency}}</span> &nbsp;</el-col>
                 <el-col :span="4" flex="main:center">   
                   <span v-if="quoteList[item.name]">
                     <quote-view :historyList="quoteList[item.name]"  :delta="item.delta"/>  
@@ -160,9 +171,21 @@
             <div class="grid mb-10">
               <el-row class="hander mt-10 mb-20">
                 <!-- <el-col :span="1">#</el-col> -->
-                <el-col :span="4">{{$t('currency')}}</el-col>
-                <el-col :span="3">{{$t('market.orderdeal')}}</el-col>
-                <el-col :span="3">{{$t('market.h24change')}}</el-col>
+                <el-col :span="4"> 
+                  <div @click="setBtcSort('currency')">
+                    <sort color="#01CED1" :sort="sortView" :label="$t('currency')" :state="stateBtcSortBy('currency')"/>
+                  </div>
+                </el-col>
+                <el-col :span="3"> 
+                  <div @click="setBtcSort('price')">
+                    <sort color="#01CED1" :sort="sortView" :label="$t('market.orderdeal')" :state="stateBtcSortBy('price')"/>
+                  </div>
+                </el-col>
+                <el-col :span="3"> 
+                  <div @click="setBtcSort('delta')">
+                    <sort color="#01CED1" :sort="sortView" :label="$t('market.h24change')" :state="stateBtcSortBy('delta')"/>
+                  </div> 
+                </el-col>
                 <el-col :span="4">{{$t('market.h24trade')}}</el-col>
                 <el-col :span="4">{{$t('market.h24amount')}}</el-col>
                 <el-col :span="4"  flex="main:center">{{$t('market.view')}}</el-col>
@@ -187,7 +210,7 @@
                   <span v-if="+item.vol">{{ $big(item.vol).div(item.price).round(item.price_scale)}}  <span class="currency">{{item.currency.replace('USD', '')}}</span></span>
                   &nbsp;
                 </el-col>
-                <el-col :span="4">{{item.vol | fixed(2)}} <span class="currency">USD</span> &nbsp;</el-col>
+                <el-col :span="4">{{item.vol | pretty(2)}} <span class="currency">USD</span> &nbsp;</el-col>
                 <el-col :span="4" flex="main:center">
                   <span v-if="quoteList[item.name]">
                     <quote-view :historyList="quoteList[item.name ]"  :delta="item.delta"/>   
@@ -209,9 +232,21 @@
             <div class="grid mb-10">
               <el-row class="hander mt-10 mb-20">
                 <!-- <el-col :span="1">#</el-col> --> 
-                <el-col :span="4">{{$t('currency')}}</el-col>
-                <el-col :span="3">{{$t('market.orderdeal')}}</el-col>
-                <el-col :span="3">{{$t('market.h24change')}}</el-col>
+                <el-col :span="4"> 
+                  <div @click="setUnitSort('currency')">
+                    <sort color="#01CED1" :sort="sortView" :label="$t('currency')" :state="stateUnitSortBy('currency')"/>
+                  </div>
+                </el-col>
+                <el-col :span="3"> 
+                  <div @click="setUnitSort('price')">
+                    <sort color="#01CED1" :sort="sortView" :label="$t('market.orderdeal')" :state="stateUnitSortBy('price')"/>
+                  </div>
+                </el-col>
+                <el-col :span="3"> 
+                  <div @click="setUnitSort('delta')">
+                    <sort color="#01CED1" :sort="sortView" :label="$t('market.h24change')" :state="stateUnitSortBy('delta')"/>
+                  </div> 
+                </el-col>
                 <el-col :span="4">{{$t('market.h24trade')}}</el-col>
                 <el-col :span="4">{{$t('market.h24amount')}}</el-col>
                 <el-col :span="4"  flex="main:center">{{$t('market.view')}}</el-col>
@@ -236,7 +271,7 @@
                   <span v-if="+item.vol">{{ $big(item.vol).div(item.price).round(item.price_scale)}}  <span class="currency">{{item.currency}}</span></span>
                   &nbsp;
                 </el-col>
-                <el-col :span="4">{{item.vol}} <span class="currency">USD</span>&nbsp;</el-col>
+                <el-col :span="4">{{item.vol | pretty}} <span class="currency">USD</span>&nbsp;</el-col>
                 <el-col :span="4" flex="main:center">
                   <span v-if="quoteList[item.symbol]">
                     <quote-view :historyList="quoteList[item.symbol]"  :delta="item.delta"/>   
@@ -258,9 +293,21 @@
             <div class="grid mb-10">
               <el-row class="hander mt-10 mb-20">
                 <!-- <el-col :span="1">#</el-col> -->
-                <el-col :span="4">{{$t('currency')}}</el-col>
-                <el-col :span="3">{{$t('market.orderdeal')}}</el-col>
-                <el-col :span="3">{{$t('market.h24change')}}</el-col>
+                <el-col :span="4"> 
+                  <div @click="setMixSort('currency')">
+                    <sort color="#01CED1" :sort="sortView" :label="$t('currency')" :state="stateMixSortBy('currency')"/>
+                  </div>
+                </el-col>
+                <el-col :span="3"> 
+                  <div @click="setMixSort('price')">
+                    <sort color="#01CED1" :sort="sortView" :label="$t('market.orderdeal')" :state="stateMixSortBy('price')"/>
+                  </div>
+                </el-col>
+                <el-col :span="3"> 
+                  <div @click="setMixSort('delta')">
+                    <sort color="#01CED1" :sort="sortView" :label="$t('market.h24change')" :state="stateMixSortBy('delta')"/>
+                  </div> 
+                </el-col>
                 <el-col :span="4">{{$t('market.h24trade')}}</el-col>
                 <el-col :span="4">{{$t('market.h24amount')}}</el-col>
                 <el-col :span="4"  flex="main:center">{{$t('market.view')}}</el-col>
@@ -285,7 +332,7 @@
                   <span v-if="+item.vol">{{ $big(item.vol).div(item.price).round(item.price_scale)}}  <span class="currency">{{item.currency}}</span></span>
                   &nbsp;
                 </el-col>
-                <el-col :span="4">{{item.vol}} <span class="currency">USDT</span>&nbsp;</el-col>
+                <el-col :span="4">{{item.vol | pretty}} <span class="currency">USDT</span>&nbsp;</el-col>
                 <el-col :span="4" flex="main:center">
                   <span v-if="quoteList[item.symbol]">
                     <quote-view :historyList="quoteList[item.symbol]"  :delta="item.delta"/>   
@@ -523,6 +570,7 @@ import VNavbc from '@/components/VNavBC'
 // import loginModal from '@/components/VLogin'  
 import quoteView from '../views/markets/quoteView'
 import wsNew from '@/modules/ws-new'
+import Sort from '@/views/trading1/components/Sort' 
 
 export default {
   components: { 
@@ -535,8 +583,9 @@ export default {
     // VNav2, 
     VNavbc,
     // loginModal,
-    quoteView
-    // Kyc
+    quoteView,
+    // Kyc,
+    Sort
   },
   // mixins: [tickTableMixin],
   data: function() {
@@ -576,7 +625,19 @@ export default {
       blendList: [],
       quoteList: {},
       selectTab: 'trading',
+      inputSearch: '',
       userInput: '',
+      sortView: false,
+      sortTradingBy: '',
+      sortTradingState: 0, // 0:不排序 1:降序 2:升序
+      sortMixBy: '',
+      sortMixState: 0,
+      sortBlendBy: '',
+      sortBlendState: 0, 
+      sortUnitBy: '',
+      sortUnitState: 0,
+      sortBtcBy: '',
+      sortBtcState: 0
     }
   },
   computed: { 
@@ -624,37 +685,114 @@ export default {
       return utils.getRouteMeta(this.$route, 'class')
     }, 
     tradingShowList() {
-      let list = this.tradingList.filter(item => {
-        return item.market_hidden === 1 
+      let list = this.tradingList.filter(item => { 
+        return (item.product.indexOf(this.inputSearch.toUpperCase()) > -1 || item.currency.indexOf(this.inputSearch.toUpperCase()) > -1) && item.market_hidden===1
       }) 
-      list = list.sort((a,b)=>(+a.rank)-(+b.rank)) 
-      return list
+      if (this.sortTradingState > 0 && this.sortTradingBy) {
+        return list.sort((a, b) => {
+          if (this.sortTradingState === 1) { 
+            if (this.sortTradingBy==='product') {
+              return b[this.sortTradingBy].charCodeAt(0) - a[this.sortTradingBy].charCodeAt(0)
+            }
+            return b[this.sortTradingBy] - a[this.sortTradingBy]
+          } else if (this.sortTradingState === 2) {
+            if (this.sortTradingBy==='product') {
+              return a[this.sortTradingBy].charCodeAt(0) - b[this.sortTradingBy].charCodeAt(0)
+            }
+            return a[this.sortTradingBy] - b[this.sortTradingBy]
+          } 
+        }) 
+      } else {
+        list = list.sort((a,b) => (+a.rank)-(+b.rank))
+        return list
+      }
     },
     btcShowList() {
       let list = this.btcList.filter(item => {
-        return true
-      })
-      list = list.sort((a,b) => (+a.rank)-(+b.rank))
-      return list
+        return item.name.indexOf(this.inputSearch.toUpperCase()) > -1 
+      }) 
+      if (this.sortBtcState > 0 && this.sortBtcBy) {
+        return list.sort((a, b) => {
+          if (this.sortBtcState === 1) { 
+            if (this.sortBtcBy==='currency') {
+              return b[this.sortBtcBy].charCodeAt(0) - a[this.sortBtcBy].charCodeAt(0)
+            }
+            return b[this.sortBtcBy] - a[this.sortBtcBy]
+          } else if (this.sortBtcState === 2) {
+            if (this.sortBtcBy==='currency') {
+              return a[this.sortBtcBy].charCodeAt(0) - b[this.sortBtcBy].charCodeAt(0)
+            }
+            return a[this.sortBtcBy] - b[this.sortBtcBy]
+          } 
+        }) 
+      } else {
+        list = list.sort((a,b) => (+a.rank)-(+b.rank))
+        return list
+      }
     },
     unitShowList() {
       let list = this.unitList.filter(item => {
-        return true
+        return item.name.indexOf(this.inputSearch.toUpperCase()) > -1 
       })
-      list = list.sort((a,b) => (+a.rank)-(+b.rank))
-      return list
+      if (this.sortUnitState > 0 && this.sortUnitBy) {
+        return list.sort((a, b) => { 
+          if (this.sortUnitState === 1) { 
+            if (this.sortUnitBy==='currency') {
+              return b[this.sortUnitBy].charCodeAt(0) - a[this.sortUnitBy].charCodeAt(0)
+            }
+            return b[this.sortUnitBy] - a[this.sortUnitBy]
+          } else if (this.sortUnitState === 2) {
+            if (this.sortUnitBy==='currency') {
+              return a[this.sortUnitBy].charCodeAt(0) - b[this.sortUnitBy].charCodeAt(0)
+            }
+            return a[this.sortUnitBy] - b[this.sortUnitBy]
+          } 
+        }) 
+      } else {
+        list = list.sort((a,b) => (+a.rank)-(+b.rank))
+        return list
+      }
     },
     mixShowList() {
       let list = this.mixList.filter(item => {
-        return true 
+        return item.name.indexOf(this.inputSearch.toUpperCase()) > -1 
       }) 
-      return list.sort((a,b)=>(+a.rank)-(+b.rank))
+      if (this.sortMixState > 0 && this.sortMixBy) { 
+        return list.sort((a, b) => { 
+          if (this.sortMixState === 1) { 
+            if (this.sortMixBy==='currency') {
+              return b[this.sortMixBy].charCodeAt(0) - a[this.sortMixBy].charCodeAt(0)
+            }
+            return b[this.sortMixBy] - a[this.sortMixBy]
+          } else if (this.sortMixState === 2) {
+            if (this.sortMixBy==='currency') {
+              return a[this.sortMixBy].charCodeAt(0) - b[this.sortMixBy].charCodeAt(0)
+            }
+            return a[this.sortMixBy] - b[this.sortMixBy]
+          } 
+        }) 
+      } else {
+        // return list
+        return list.sort((a, b) => {
+           return a['rank'] - b['rank']
+        })
+      }
     },
     blendShowList() {
       let list = this.blendList.filter(item => {
-        return true 
+        return item.name.indexOf(this.inputSearch.toUpperCase()) > -1 
       })
-      return list.sort((a,b)=>(+a.rank)-(+b.rank))
+       if (this.sortBlendState > 0 && this.sortBlendBy) {
+        return list.sort((a, b) => {
+          if (this.sortBlendState === 1) {
+            return a[this.sortBlendBy] - b[this.sortBlendBy]
+          } else if (this.sortBlendState === 2) {
+            return b[this.sortBlendBy] - a[this.sortBlendBy]
+          } 
+        }) 
+      } else {
+        return list
+      }
     },
   },
   watch: {
@@ -940,7 +1078,82 @@ export default {
           username: this.userInput
         }
       })
-    }
+    },
+    setTradingSort(key) { 
+      if (this.sortTradingBy === key) {
+        this.sortTradingState = (this.sortTradingState + 1) % 3
+      } else {
+        this.sortTradingBy = key
+        this.sortTradingState = 1
+      }
+    },
+    stateTradingSortBy(key) {
+      if (key !== this.sortTradingBy) {
+        return 0
+      } else {
+        return this.sortTradingState
+      }
+    },
+    setBtcSort(key) { 
+      if (this.sortBtcBy === key) {
+        this.sortBtcState = (this.sortBtcState + 1) % 3
+      } else {
+        this.sortBtcBy = key
+        this.sortBtcState = 1
+      }
+    },
+    stateBtcSortBy(key) {
+      if (key !== this.sortBtcBy) {
+        return 0
+      } else {
+        return this.sortBtcState
+      }
+    },
+    setMixSort(key) { 
+      if (this.sortMixBy === key) {
+        this.sortMixState = (this.sortMixState + 1) % 3
+      } else {
+        this.sortMixBy = key
+        this.sortMixState = 1
+      }
+    },
+    stateMixSortBy(key) {
+      if (key !== this.sortMixBy) {
+        return 0
+      } else {
+        return this.sortMixState
+      }
+    },
+    setUnitSort(key) { 
+      if (this.sortUnitBy === key) {
+        this.sortUnitState = (this.sortUnitState + 1) % 3
+      } else {
+        this.sortUnitBy = key
+        this.sortUnitState = 1
+      }
+    },
+    stateUnitSortBy(key) {
+      if (key !== this.sortUnitBy) {
+        return 0
+      } else {
+        return this.sortUnitState
+      }
+    },
+    setBlendSort(key) { 
+      if (this.sortBlendBy === key) {
+        this.sortBlendState = (this.sortBlendState + 1) % 3
+      } else {
+        this.sortBlendBy = key
+        this.sortBlendState = 1
+      }
+    },
+    stateBlendSortBy(key) {
+      if (key !== this.sortBlendBy) {
+        return 0
+      } else {
+        return this.sortBlendState
+      }
+    },
   }, 
   mounted() {
     // this.$nextTick(()=> {  
