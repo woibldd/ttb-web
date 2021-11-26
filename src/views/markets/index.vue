@@ -83,7 +83,7 @@
                   <span v-if="item.delta > 0" class="text-success">{{item.delta |fixed(2)}}%</span>  
                   <span v-else class="text-danger">{{item.delta | fixed(2)}}%</span>&nbsp;
                 </el-col>
-                <el-col :span="4">{{item.vol | fixed(2)}} <span class="currency">{{item.product}}</span> &nbsp;</el-col>
+                <el-col :span="4">{{item.vol | pretty}} <span class="currency">{{item.product}}</span> &nbsp;</el-col>
                 <el-col :span="4">{{$big(item.vol || 0).times(item.price || 0)| pretty(2)}} <span class="currency">{{item.currency}}</span> &nbsp;</el-col>
                 <el-col :span="4" flex="main:center">   
                   <span v-if="quoteList[item.name]">
@@ -144,7 +144,7 @@
                   &nbsp;
                 </el-col>
                 <el-col :span="4">
-                  <span v-if="+item.vol">{{ $big(item.vol).div(item.price).round(item.price_scale)}}  <span class="currency">{{item.currency.replace('USD', '')}}</span></span>
+                  <span v-if="+item.vol">{{ $big(item.vol).div(item.price) | pretty}}  <span class="currency">{{item.currency.replace('USD', '')}}</span></span>
                   &nbsp;
                 </el-col>
                 <el-col :span="4">{{item.vol | pretty(2)}} <span class="currency">USD</span> &nbsp;</el-col>
@@ -203,7 +203,7 @@
                   &nbsp;
                 </el-col>
                 <el-col :span="4">
-                  <span v-if="+item.vol">{{ $big(item.vol).div(item.price).round(item.price_scale)}}  <span class="currency">{{item.currency}}</span></span>
+                  <span v-if="+item.vol">{{ $big(item.vol).div(item.price) | pretty}}  <span class="currency">{{item.currency}}</span></span>
                   &nbsp;
                 </el-col>
                 <el-col :span="4">{{item.vol | pretty}} <span class="currency">USD</span>&nbsp;</el-col>
@@ -266,7 +266,7 @@
                   &nbsp;
                 </el-col>
                 <el-col :span="4">
-                  <span v-if="+item.vol">{{ $big(item.vol).div(item.price).round(item.price_scale)}}  <span class="currency">{{item.currency}}</span></span>
+                  <span v-if="+item.vol">{{ $big(item.vol).div(item.price) | pretty}}  <span class="currency">{{item.currency}}</span></span>
                   &nbsp;
                 </el-col>
                 <el-col :span="4">{{item.vol | pretty}} <span class="currency">USDT</span>&nbsp;</el-col>
