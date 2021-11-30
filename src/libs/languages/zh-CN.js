@@ -2708,12 +2708,7 @@ export default {
         path: '/fund/address'
       }
     }
-  },
-  profile: {
-    security: {
-      close_verify_tips: "手机验证和邮箱验证不能同时关闭"
-    }
-  },
+  }, 
   shareOption: {
     time: "时间",
     price: "价格",
@@ -4068,13 +4063,16 @@ export default {
     safeCenter: '安全中心',
     tip1: '帮助您提升账户安全的功能设置',
     routeText1: '4个安全建议',
-    tip2: '完成身份认证以提升您的安全等级和体现额度',
+    tip2: '完成身份认证以提升您的安全等级和提现额度',
     routeText2: '验证',
     tip3: '您可以根据自身需求创建API',
     routeText3: '管理',
     tip4: '邀请好友，一起赚币',
     routeText4: '邀请',
     doubleVerification: '双重验证',
-    accountSafe: '保护您的交易和账户安全' 
+    accountSafe: '保护您的交易和账户安全' ,
+    security: {
+      close_verify_tips: "手机验证和邮箱验证不能同时关闭"
+    }
   }
 }

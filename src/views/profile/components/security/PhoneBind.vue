@@ -119,7 +119,7 @@
     // padding-left: 60px;
     float: left;
     .profile-container {
-      width: 960px;
+      width: 954px;
       position: relative;
 
       .title-box {

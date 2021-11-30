@@ -2670,12 +2670,7 @@ export default {
     },
     deposit: {
       address: "Deposit Address"
-    },
-    profile: {
-      security: {
-        close_verify_tips: "Do not allowed to turn off mobile and email verification simultaneous"
-      }
-    },
+    }, 
     contract: {
       day: " Days",
       start: "Start",
@@ -2827,12 +2822,7 @@ export default {
         path: '/fund/address'
       }
     }
-  },
-  profile: {
-    security: {
-      close_verify_tips: "Do not allowed to turn off mobile and email verification simultaneous"
-    }
-  },
+  }, 
   shareOption: {
     time: "time",
     price: "price",
@@ -4179,6 +4169,9 @@ export default {
     tip4: 'Invite and Earn ',
     routeText4: 'Invitation',
     doubleVerification: 'Two-step verification',
-    accountSafe: 'Protect your transactions and account security' 
+    accountSafe: 'Protect your transactions and account security' ,
+    security: {
+      close_verify_tips: "Do not allowed to turn off mobile and email verification simultaneous"
+    }
   }, 
 }

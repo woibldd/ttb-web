@@ -2648,11 +2648,6 @@ export default {
       }
     }
   },
-  profile: {
-    security: {
-      close_verify_tips: "手機驗證和郵箱驗證不能同時關閉"
-    }
-  },
   shareOption: {
     time:"時間",
     price:"價格",
@@ -4002,13 +3997,16 @@ export default {
     safeCenter: '安全中心',
     tip1: '幫助您提升帳戶安全的功能設置',
     routeText1: '4個安全建議',
-    tip2: '完成身份認證以提升您的安全等級和體現額度',
+    tip2: '完成身份認證以提升您的安全等級和提現額度',
     routeText2: '驗證',
     tip3: '您可以根據自身需求創建API',
     routeText3: '管理',
     tip4: '邀請好友,一起賺幣',
     routeText4: '邀請',
     doubleVerification: '雙重驗證',
-    accountSafe: '保護您的交易和帳戶安全'
-  } 
+    accountSafe: '保護您的交易和帳戶安全', 
+    security: {
+      close_verify_tips: "手機驗證和郵箱驗證不能同時關閉"
+    }
+  }  
 }

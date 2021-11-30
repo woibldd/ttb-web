@@ -122,10 +122,10 @@ export default {
   // @import '../styles/mixins';
 
   .user-center-right {
-    // padding-left: 60px;
+    padding-left: 29px;
     float: left;
     .profile-container {
-      width: 960px;
+      width: 954px;
       position: relative;
 
       .title-box {

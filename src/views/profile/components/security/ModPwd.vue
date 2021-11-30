@@ -338,8 +338,9 @@ export default {
   // @import '../styles/mixins';
   .user-center-right {
     float: left;
+      padding-left: 29px;
     .profile-container {
-      width: 960px;
+      width: 954px;
       position: relative;
 
       .title-box {

@@ -60,14 +60,14 @@ export default {
   margin-top: 5px;
   &.state-1 .down,
   &.state-2 .up {
-    opacity: .6;
+    opacity: .9
   }
 }
 i {
   display: block;
   width: 5px;
   height: 5px;
-  opacity: .2;
+  opacity: .4;
   box-sizing: border-box;
   border-left-width: 1px;
   border-top-width: 1px;

@@ -4,7 +4,7 @@
       <div class="title-left">
         <div class="title-label">{{ $t('profile_left_invite_safety') }}</div> 
         <div class="title-sub mt-15" flex="main:left">
-          <label flex="cross:center"> <img src="@/assets/profile/security-state-true.png" alt="" class="mr-6"> 双重验证 </label>
+          <label flex="cross:center"> <img src="@/assets/profile/security-state-true.png" alt="" class="mr-6"> {{$t('profile.doubleVerification')}} </label>
           <label flex="cross:center" class="ml-20"> <img src="@/assets/profile/security-state-false.png" alt="" class="mr-6"> {{$t('identity_authentication')}} </label>
         </div>
       </div>
@@ -26,7 +26,7 @@
               <img src="@/assets/profile/binding-phone.png" alt="" />
             </div>
              <p class="label">{{ $t('Phone_binding') }}</p>
-             <div>保护您的交易和账户安全</div>
+             <div>{{$t('profile.accountSafe')}}</div>
           </div>
           <div flex="cross:center">
             <span v-if="!phone" class="label">
@@ -63,7 +63,7 @@
               <img src="@/assets/profile/binding-email.png" alt="" />
             </div>
              <div class="label">{{ $t('email') }}</div>
-             <div>保护您的交易和账户安全</div>
+             <div>{{$t('profile.accountSafe')}}</div>
           </div>
           <div flex="cross:center"> 
             <span v-if="!email" class="label">
@@ -94,7 +94,7 @@
               <img src="@/assets/profile/binding-google.png" alt="" />
             </div>
             <p class="label">{{ $t('google_validator') }}</p>
-            <div>保护您的交易和账户安全</div>  
+            <div>{{$t('profile.accountSafe')}}</div>  
           </div>
           <div flex="cross:center"> 
             <span v-if="!google_key_bound" class="label">
@@ -132,7 +132,7 @@
               <img src="@/assets/profile/binding-password.png" alt="" />
             </div>
             <p class="label">{{ $t('log_pwd') }}</p>
-            <div>保护您的交易和账户安全</div>  
+            <div>{{$t('profile.accountSafe')}}</div>  
           </div> 
           <div flex="cross:center"> 
             <span  flex="cross:center" class="label">

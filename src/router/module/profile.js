@@ -104,7 +104,7 @@ export const profileRouter = [
     path: '/profileN',
     name: 'profileN',
     meta: {
-      // auth: true,
+      auth: true,
       nav: true,
       footer: true,
       class: 'dark',
