@@ -27,7 +27,7 @@
                       <div class="drop-down">
                         <div>
                           <el-row>
-                            <el-col :span="10" class=" pl-22">{{$t('pair')}}1</el-col>
+                            <el-col :span="10" class=" pl-22">{{$t('pair')}}</el-col>
                             <el-col :span="9">{{$t('price')}}</el-col>
                             <el-col :span="5" class="txr pr-25">{{$t('increase')}}</el-col>
                           </el-row>
