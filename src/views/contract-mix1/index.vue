@@ -23,7 +23,7 @@
                     <el-popover 
                       v-else
                       :popper-class="[state.skin, 'pd-0']"  
-                      trigger="click">
+                      trigger="hover">
                       <div class="drop-down">
                         <div>
                           <el-row>
@@ -32,7 +32,7 @@
                             <el-col :span="5" class="txr pr-25">{{$t('increase')}}</el-col>
                           </el-row>
                         </div>
-                        <div style="max-height: 250px;overflow-y: auto;"> 
+                        <div style="max-height: 430px;overflow-y: auto;"> 
                           <div v-for="(item, idx) in products" :key="idx" class="drop-item">  
                             <div 
                               :class="[{'router-link-exact-active': item.symbol===state.mix.pair}, 'link']"
