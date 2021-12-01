@@ -23,33 +23,35 @@
                     <el-popover 
                       v-else
                       :popper-class="[state.skin, 'pd-0']"  
-                      trigger="hover">
+                      trigger="click">
                       <div class="drop-down">
                         <div>
                           <el-row>
-                            <el-col :span="10" class=" pl-22">{{$t('pair')}}</el-col>
+                            <el-col :span="10" class=" pl-22">{{$t('pair')}}1</el-col>
                             <el-col :span="9">{{$t('price')}}</el-col>
                             <el-col :span="5" class="txr pr-25">{{$t('increase')}}</el-col>
                           </el-row>
                         </div>
-                        <div v-for="(item, idx) in products" :key="idx" class="drop-item">  
-                          <div 
-                            :class="[{'router-link-exact-active': item.symbol===state.mix.pair}, 'link']"
-                            @click="handleProductsChange(item)">
-                            <el-row >
-                              <el-col :span="10" class="label pl-10"><span class="currency">{{item.currency}}</span><span class="product">/USDT</span> </el-col>
-                              <el-col 
-                                :class="[(item.MIX || {}).increment_24h > 0?'text-success':'text-danger']"
-                                :span="8">
-                                {{`₮${+(item.MIX || {}).current}`}}
-                              </el-col>
-                              <el-col 
-                                :class="[(item.MIX || {}).increment_24h > 0?'text-success':'text-danger', 'txr', ' pr-10']"
-                                :span="6" >
-                                {{+(item.MIX || {}).change_24h > 0 ? '+' : ''}}{{(item.MIX || {}).change_24h || 0 | round(2)}}%
-                              </el-col>
-                            </el-row> 
-                          </div> 
+                        <div style="max-height: 250px;overflow-y: auto;"> 
+                          <div v-for="(item, idx) in products" :key="idx" class="drop-item">  
+                            <div 
+                              :class="[{'router-link-exact-active': item.symbol===state.mix.pair}, 'link']"
+                              @click="handleProductsChange(item)">
+                              <el-row >
+                                <el-col :span="10" class="label pl-10"><span class="currency">{{item.currency}}</span><span class="product">/USDT</span> </el-col>
+                                <el-col 
+                                  :class="[(item.MIX || {}).increment_24h > 0?'text-success':'text-danger']"
+                                  :span="8">
+                                  {{`₮${+(item.MIX || {}).current}`}}
+                                </el-col>
+                                <el-col 
+                                  :class="[(item.MIX || {}).increment_24h > 0?'text-success':'text-danger', 'txr', ' pr-10']"
+                                  :span="6" >
+                                  {{+(item.MIX || {}).change_24h > 0 ? '+' : ''}}{{(item.MIX || {}).change_24h || 0 | round(2)}}%
+                                </el-col>
+                              </el-row> 
+                            </div> 
+                          </div>
                         </div>
                       </div>
                       <span slot="reference"><label class="f20 bold">{{ activeProduct.currency }}/USDT <icon name="arrow-down" /> </label> </span>
