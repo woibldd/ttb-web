@@ -4005,6 +4005,7 @@ export default {
     routeText4: '邀請',
     doubleVerification: '雙重驗證',
     accountSafe: '保護您的交易和帳戶安全', 
+    tip5: '身份認證後，即刻開啟交易！',
     security: {
       close_verify_tips: "手機驗證和郵箱驗證不能同時關閉"
     }

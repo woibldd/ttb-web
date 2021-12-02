@@ -4016,6 +4016,7 @@ export default {
     routeText4: '초대', 
     DoubleVerification: '이중 검증', 
     accountSafe:'거래 및 계정 보안',
+    tip5: '인증 후 즉시 거래 시작！',
     security: {
       close_verify_tips: "핸드폰 인증과 메일박스 인증을 동시에 닫을 수 없습니다"
     }

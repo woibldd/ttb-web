@@ -20,9 +20,9 @@
             <div class="profile-panel-item">
               <div class="label">{{$t('u_name')}}</div>
               <div class="value">
-                <span v-if="name===-1"><router-link :to="{name: 'Kyc'}">{{ $t("kyc_failure") }}</router-link></span>
+                <span v-if="name===-1"><router-link :to="{name: 'profileNkyc'}">{{ $t("kyc_failure") }}</router-link></span>
                 <span v-else-if="name">{{ name }}</span>
-                <span v-else><router-link :to="{name: 'Kyc'}">{{ $t("to_verify") }}</router-link> </span>
+                <span v-else><router-link :to="{name: 'profileNkyc'}">{{ $t("to_verify") }}</router-link> </span>
               </div>
             </div>
             <div class="profile-panel-item">

@@ -4170,6 +4170,7 @@ export default {
     routeText4: 'Invitation',
     doubleVerification: 'Two-step verification',
     accountSafe: 'Protect your transactions and account security' ,
+    tip5: 'Start trading after your identity verification！',
     security: {
       close_verify_tips: "Do not allowed to turn off mobile and email verification simultaneous"
     }
