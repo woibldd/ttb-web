@@ -27,13 +27,28 @@
                       <div class="drop-down">
                         <div>
                           <el-row>
-                            <el-col :span="10" class=" pl-22">{{$t('pair')}}1</el-col>
+                            <!-- <el-col :span="10" class=" pl-22">{{$t('pair')}}</el-col>
                             <el-col :span="9">{{$t('price')}}</el-col>
-                            <el-col :span="5" class="txr pr-25">{{$t('increase')}}</el-col>
+                            <el-col :span="5" class="txr pr-25">{{$t('increase')}}</el-col> -->
+                            <el-col :span="10" class="pl-22"> 
+                            <div @click="setMixSort('currency')">
+                                <sort color="#01CED1" :sort="true" :label="$t('currency')" :state="stateMixSortBy('currency')"/>
+                              </div>
+                            </el-col>
+                            <el-col :span="9"> 
+                              <div @click="setMixSort('current')">
+                                <sort color="#01CED1" :sort="true" :label="$t('market.orderdeal')" :state="stateMixSortBy('current')"/>
+                              </div>
+                            </el-col>
+                            <el-col :span="5"> 
+                              <div @click="setMixSort('change_24h')">
+                                <sort color="#01CED1" :sort="true" :label="$t('market.h24change')" :state="stateMixSortBy('change_24h')"/>
+                              </div> 
+                            </el-col>
                           </el-row>
                         </div>
                         <div style="max-height: 250px;overflow-y: auto;"> 
-                          <div v-for="(item, idx) in products" :key="idx" class="drop-item">  
+                          <div v-for="(item, idx) in mixShowList" :key="idx" class="drop-item">  
                             <div 
                               :class="[{'router-link-exact-active': item.symbol===state.mix.pair}, 'link']"
                               @click="handleProductsChange(item)">
@@ -780,6 +795,7 @@ import service from '@/modules/service'
 import xnumberInput from '@/components/XNumberInput.vue'  
 import ixSlider from '@/components/common/ix-slider/'
 import leverBox from '@/components/LeverBox' 
+import Sort from '@/views/trading1/components/Sort' 
 export default {
   name: 'ContractMix',
   components: {
@@ -799,7 +815,8 @@ export default {
     orderBook2,
     // VNav,
     ixSlider,
-    leverBox 
+    leverBox,
+    Sort 
   },
   mixins: [mixins],
   data () {
@@ -868,7 +885,9 @@ export default {
       orderType: '',
       buyAmount: '',
       sellAmount: '',
-      previewLever: 0,
+      previewLever: 0,  
+      sortMixBy: '',
+      sortMixState: 0,
     }
   },
   computed: {
@@ -878,6 +897,32 @@ export default {
         BachEx: false,
         'Gold Coin': false,
       }[state.siteName]
+    }, 
+    mixShowList() {
+      // let list = this.products.filter(item => {
+      //   return item.name.indexOf(this.inputSearch.toUpperCase()) > -1 
+      // }) 
+      console.log('mixShowList')
+      if (this.sortMixState > 0 && this.sortMixBy) { 
+        return this.products.sort((a, b) => { 
+          if (this.sortMixState === 1) { 
+            if (this.sortMixBy==='currency') {
+              return b[this.sortMixBy].charCodeAt(0) - a[this.sortMixBy].charCodeAt(0)
+            }
+            return b.MIX[this.sortMixBy] - a.MIX[this.sortMixBy]
+          } else if (this.sortMixState === 2) {
+            if (this.sortMixBy==='currency') {
+              return a[this.sortMixBy].charCodeAt(0) - b[this.sortMixBy].charCodeAt(0)
+            }
+            return a.MIX[this.sortMixBy] - b.MIX[this.sortMixBy]
+          } 
+        }) 
+      } else {
+        // return list
+        return this.products.sort((a, b) => {
+           return a['rank'] - b['rank']
+        })
+      }
     },
     adlurl () {
       let link = 'https://ixcustomer.zendesk.com/hc/zh-cn/articles/360024495432' 
@@ -1293,7 +1338,22 @@ export default {
       document.querySelector('.page-loading').classList.remove('show')
     })
   },
-  methods: {  
+  methods: {   
+    setMixSort(key) { 
+      if (this.sortMixBy === key) {
+        this.sortMixState = (this.sortMixState + 1) % 3
+      } else {
+        this.sortMixBy = key
+        this.sortMixState = 1
+      }
+    },
+    stateMixSortBy(key) {
+      if (key !== this.sortMixBy) {
+        return 0
+      } else {
+        return this.sortMixState
+      }
+    },
     handleLeverClose() {  
       if (this.$refs['popLeverageC']) { 
         this.$refs['popLeverageC'].doClose()
