@@ -68,7 +68,7 @@
         <p class="describe">{{ $t('gift.modal.describe') }}</p>
         <div class="qr-code">
           <div class="lt left">
-            <img class="footer_ewm" src="../assets/ixx_kefu_big.jpg" />
+            <img class="footer_ewm" src="../assets/ixx_kefu_big.png" />
             <p class="footer_ewm_ltxt">{{ $t('gift.modal.qr_a') }}</p>
           </div>
           <div class="lt right">
