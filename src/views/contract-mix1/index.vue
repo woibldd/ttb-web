@@ -5,13 +5,13 @@
       <!-- 1-1 -->  
       <div style="width: 100%;" flex>
         <!-- 币对列表 --> 
-        <div class="x-col mt-2 mb-2 "  flex-box="0"   v-if="showSymbolList" style="width:302px;"> 
+        <!-- <div class="x-col mt-2 mb-2 "  flex-box="0"   v-if="showSymbolList" style="width:302px;"> 
           <div class="r1-c1-r1 mt-2 mb-2" 
             v-loading="!products.length"
             element-loading-background="rgba(0, 0, 0, 0.3)"> 
             <symList ref="symList" :pair="state.mix.pair"/>
           </div>
-        </div> 
+        </div>  -->
         <!-- 币对信息/k线 -->
         <div class="x-col ml-4 mr-4" flex-box="1" >
           <div class="x-row-1 ">
@@ -19,13 +19,23 @@
               <div class="product-row" flex="left"> 
                 <div class="product-info" flex="box:first cross:center">
                   <div >
-                    <span v-if="showSymbolList"><label class="f17">{{ activeProduct.currency }}/USDT</label> </span>
-                    <el-popover 
-                      v-else
+                    <!-- <span v-if="showSymbolList"><label class="f17">{{ activeProduct.currency }}/USDT</label> </span> -->
+                    <el-popover  
                       :popper-class="[state.skin, 'pd-0']"  
-                      trigger="click">
+                      trigger="hover">
                       <div class="drop-down">
                         <div>
+                          <div class="pairs-search">
+                            <div class="search-box">
+                              <input
+                                :skin="state.skin"
+                                v-model="inputSearch"
+                                :placeholder="$t('search')"
+                                type="text"
+                                @input="filterPair()">
+                              <icon name="home-search-t"/>
+                            </div>
+                          </div>
                           <el-row>
                             <!-- <el-col :span="10" class=" pl-22">{{$t('pair')}}</el-col>
                             <el-col :span="9">{{$t('price')}}</el-col>
@@ -35,13 +45,13 @@
                                 <sort color="#01CED1" :sort="true" :label="$t('currency')" :state="stateMixSortBy('currency')"/>
                               </div>
                             </el-col>
-                            <el-col :span="9"> 
+                            <el-col :span="6"> 
                               <div @click="setMixSort('current')">
                                 <sort color="#01CED1" :sort="true" :label="$t('market.orderdeal')" :state="stateMixSortBy('current')"/>
                               </div>
                             </el-col>
-                            <el-col :span="5"> 
-                              <div @click="setMixSort('change_24h')">
+                            <el-col :span="8"> 
+                              <div @click="setMixSort('change_24h')" class="txr pr-18">
                                 <sort color="#01CED1" :sort="true" :label="$t('market.h24change')" :state="stateMixSortBy('change_24h')"/>
                               </div> 
                             </el-col>
@@ -888,6 +898,8 @@ export default {
       previewLever: 0,  
       sortMixBy: '',
       sortMixState: 0,
+      inputSearch: '',
+
     }
   },
   computed: {
@@ -899,12 +911,11 @@ export default {
       }[state.siteName]
     }, 
     mixShowList() {
-      // let list = this.products.filter(item => {
-      //   return item.name.indexOf(this.inputSearch.toUpperCase()) > -1 
-      // }) 
-      console.log('mixShowList')
+      let list = this.products.filter(item => {
+        return item.name.indexOf(this.inputSearch.toUpperCase()) > -1 
+      })  
       if (this.sortMixState > 0 && this.sortMixBy) { 
-        return this.products.sort((a, b) => { 
+        return list.sort((a, b) => { 
           if (this.sortMixState === 1) { 
             if (this.sortMixBy==='currency') {
               return b[this.sortMixBy].charCodeAt(0) - a[this.sortMixBy].charCodeAt(0)
@@ -919,7 +930,7 @@ export default {
         }) 
       } else {
         // return list
-        return this.products.sort((a, b) => {
+        return list.sort((a, b) => {
            return a['rank'] - b['rank']
         })
       }
@@ -1339,6 +1350,9 @@ export default {
     })
   },
   methods: {   
+    filterPair() {
+
+    },
     setMixSort(key) { 
       if (this.sortMixBy === key) {
         this.sortMixState = (this.sortMixState + 1) % 3
@@ -3219,6 +3233,27 @@ export default {
     width: 350px; 
     line-height: 40px;
     color: #9F9F9F;
+    .pairs-search {
+      padding: 0 20px;
+      .search-box {
+        position:relative;
+        .iconfont {
+          position: absolute;
+          top: 13px;
+          left: 19px;
+        }
+      }
+      input {
+        width: 100%;
+        height: 32px;
+        line-height: 32px;
+        font-size: 12px;
+        background-color: #f3f3f3;
+        border:none;
+        border-radius: 4px;
+        text-indent: 37px;
+      }
+    }
     .label {
       display:block; 
       color: $text-strong;
@@ -3248,6 +3283,18 @@ export default {
   }
   &.dark {
     .drop-down { 
+    .pairs-search {
+      padding: 0 20px;
+      .search-box { 
+        .iconfont { 
+          color: #808080;
+        }
+      }
+      input { 
+        background-color: #37373A; 
+        color: #fff;
+      }
+    }
       .drop-item {
         .router-link-exact-active { 
           background-color: #222222;

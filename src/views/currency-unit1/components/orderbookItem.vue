@@ -24,7 +24,7 @@
     </td>
     <td class="right btn">
       <!-- @click="setAmount(item.total);setPrice(item.price)" -->
-      {{ fixAmount(item.total) }}
+      {{  item.total | pretty(2) }}
     </td>
     <td
       :class="sideBgColor(side)"

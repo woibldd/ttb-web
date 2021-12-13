@@ -3,7 +3,7 @@
     :class="{loading: loading}"
     class="ix-pannel">
     <div class="ix-header">
-      {{ $t('pairnav_title') }}
+      {{ $t('pairnav_title') }}123
       <div class="input-wrap">
         <span class="search-icon">
           <icon name="search"/>
