@@ -525,9 +525,10 @@ export default {
         if (res && res.data) { 
           this.restaurants = []
           this.allAddress = res.data
-          if (this.selectCoin.currency === 'USDT' || this.selectCoin.currency === 'SLD') {
-            this.allAddress = this.allAddress.filter(item => item.chain === this.selectLian.chain || (!item.chain &&  this.selectLian.chain === 'OMNI' ))
-          }
+          // if (this.selectCoin.currency === 'USDT' || this.selectCoin.currency === 'SLD') {
+          //   this.allAddress = this.allAddress.filter(item => item.chain === this.selectLian.chain || (!item.chain &&  this.selectLian.chain === 'OMNI' ))
+          // }
+          this.allAddress = this.allAddress.filter(item => item.chain === this.selectLian.chain || (!item.chain &&  this.selectLian.chain === 'OMNI' ))
            
           // console.log(this.allAddress)
           for (const item of this.allAddress) {
@@ -684,9 +685,10 @@ export default {
         remark: this.remark
       }
 
-      if (this.selectCoin.currency === 'USDT' || this.selectCoin.currency === 'SLD') {
+      // if (this.selectCoin.currency === 'USDT' || this.selectCoin.currency === 'SLD') {
+      //   param.chain = this.selectLian.chain
+      // }
         param.chain = this.selectLian.chain
-      }
  
       // eos 需要填memo
       if (this.selectCoin.memo_support) {
