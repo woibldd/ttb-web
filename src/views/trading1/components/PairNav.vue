@@ -10,7 +10,7 @@
         </span>
         <input
           ref="input"
-          :placeholder="$t('search')"
+          :placeholder="$t('searchxx')"
           v-model="search"
           type="text"
           class="input search-input"
@@ -367,28 +367,32 @@ td {
   height: 24px;
 }
 .search-icon {
-  position: absolute;
-  left: 8px;
-  font-size: 14px;
-  top: 1px;
-  height: 22px;
-  line-height: 22px;
-  z-index: 2;
-  color: #525668;
+  
+          position: absolute;
+          top: 13px;
+          left: 19px;
 }
 .input {
-  display: block;
-  background-color: $search-bar-bg;
-  // border-radius: 12px;
-  height: 24px;
-  box-sizing: border-box;
-  border: 1px solid $search-bar-border;
-  outline: none;
-  padding-left: 24px;
-  line-height: 22px;
+  // display: block;
+  // background-color: $search-bar-bg;
+  // // border-radius: 12px;
+  // height: 24px;
+  // box-sizing: border-box;
+  // border: 1px solid $search-bar-border;
+  // outline: none;
+  // padding-left: 24px;
+  // line-height: 22px;
+  // width: 100%;
+  // color: fade-out(white, .5);
+  // z-index: 1;
   width: 100%;
-  color: fade-out(white, .5);
-  z-index: 1;
+  height: 32px;
+  line-height: 32px;
+  font-size: 12px;
+  background-color: #f3f3f3;
+  border:none;
+  border-radius: 4px;
+  text-indent: 37px;
 }
 ::placeholder {
   color: fade-out(white, .6);
