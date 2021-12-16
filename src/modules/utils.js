@@ -426,7 +426,8 @@ const utils = {
     num = Big(num || 0)
     Big.RM = 0 // rm = 0,向下截取
     if (num < 100) {
-      return num.toFixed(2)
+      // return num.toFixed(2)
+      return num.toString()
     }
     if (num < 1e3) {
       return num.toFixed(0)

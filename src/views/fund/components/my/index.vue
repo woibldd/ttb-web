@@ -16,10 +16,10 @@
             <router-link :to="{name:'new-mixAccount'}" v-html="$t('mix_account')">金本位合约账户</router-link>
           </div>
           <div class="fund-menu-item">  
-            <router-link :to="{name:'new-futureAccount'}" v-html="$t('btc_account')">BTC合约账户</router-link>
+            <router-link :to="{name:'new-unitAccount'}" v-html="$t('unit_account')">币本位合约账户</router-link>
           </div>
           <div class="fund-menu-item">  
-            <router-link :to="{name:'new-unitAccount'}" v-html="$t('unit_account')">币本位合约账户</router-link>
+            <router-link :to="{name:'new-futureAccount'}" v-html="$t('btc_account')">BTC合约账户</router-link>
           </div>
           <!-- <div class="fund-menu-item">  
             <router-link :to="{name:'new-blendAccount'}" v-html="$t('blend_account')">混合合约账户</router-link>

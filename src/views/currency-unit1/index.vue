@@ -15,13 +15,38 @@
                       trigger="hover">
                       <div class="drop-down">
                         <div>
+                          <div class="pairs-search">
+                            <div class="search-box">
+                              <input
+                                :skin="state.skin"
+                                v-model="inputSearch"
+                                :placeholder="$t('search')"
+                                type="text" >
+                              <icon name="home-search-t"/>
+                            </div>
+                          </div>
                           <el-row>
-                            <el-col :span="10" class="pl-22">{{$t('pair')}}</el-col>
+                            <!-- <el-col :span="10" class="pl-22">{{$t('pair')}}</el-col>
                             <el-col :span="9">{{$t('price')}}</el-col>
-                            <el-col :span="5" class="txr pr-25">{{$t('increase')}}</el-col>
+                            <el-col :span="5" class="txr pr-25">{{$t('increase')}}</el-col> -->
+                            <el-col :span="10" class="pl-22"> 
+                              <div @click="setUnitSort('currency')">
+                                <sort color="#01CED1" :sort="true" :label="$t('currency')" :state="stateUnitSortBy('currency')"/>
+                              </div>
+                            </el-col>
+                            <el-col :span="6"> 
+                              <div @click="setUnitSort('current')">
+                                <sort color="#01CED1" :sort="true" :label="$t('market.orderdeal')" :state="stateUnitSortBy('current')"/>
+                              </div>
+                            </el-col>
+                            <el-col :span="8"> 
+                              <div @click="setUnitSort('change_24h')" class="txr pr-18">
+                                <sort color="#01CED1" :sort="true" :label="$t('market.h24change')" :state="stateUnitSortBy('change_24h')"/>
+                              </div> 
+                            </el-col>
                           </el-row>
                         </div>
-                        <div v-for="(item, idx) in products" :key="idx" class="drop-item">  
+                        <div v-for="(item, idx) in unitShowList" :key="idx" class="drop-item">  
                           <div 
                             :class="[{'router-link-exact-active': item.symbol===state.unit.pair}, 'link']"
                             @click="handleProductsChange(item)">
@@ -751,6 +776,7 @@ import wsNew from '@/modules/ws-new'
 import api from '@/modules/api/unit'
 import xnumberInput from '@/components/XNumberInput.vue'  
 import ixSlider from '@/components/common/ix-slider/'
+import Sort from '@/views/trading1/components/Sort' 
 // import { mapPeriod } from '@/const'
 export default {
   name: 'Contract',
@@ -768,7 +794,8 @@ export default {
     contractActive,
     orderBook,
     leverBox, 
-    ixSlider
+    ixSlider,
+    Sort 
     // VNav
   },
   data () {
@@ -822,7 +849,10 @@ export default {
       orgLeverage: 0,
       currentAccount: 'ETH',
       popLeverage: false,
-      popLeverageB: false
+      popLeverageB: false,
+      sortUnitBy: '',
+      sortUnitState: 0,
+      inputSearch: '', 
     }
   },
   computed: { 
@@ -1164,8 +1194,33 @@ export default {
     mapCycles () {
       return this.allLangData.tv.cycles
     },
+    unitShowList() {
+      let list = this.products.filter(item => {
+        return item.name.indexOf(this.inputSearch.toUpperCase()) > -1 
+      })
+      console.log('showlist')
+      if (this.sortUnitState > 0 && this.sortUnitBy) {
+        return list.sort((a, b) => { 
+          if (this.sortUnitState === 1) { 
+            if (this.sortUnitBy==='currency') {
+              return b[this.sortUnitBy].charCodeAt(0) - a[this.sortUnitBy].charCodeAt(0)
+            }
+            return b[this.sortUnitBy] - a[this.sortUnitBy]
+          } else if (this.sortUnitState === 2) {
+            if (this.sortUnitBy==='currency') {
+              return a[this.sortUnitBy].charCodeAt(0) - b[this.sortUnitBy].charCodeAt(0)
+            }
+            return a.UNIT[this.sortUnitBy] - b.UNIT[this.sortUnitBy]
+          } 
+        }) 
+      } else {
+        list = list.sort((a,b) => (+a.rank)-(+b.rank))
+        return list
+      }
+    },
   },
   async created () {  
+    
     actions.updateSession()
     // this.products = (await getSymbolList()).data
     const res = await api.getUnitContractSymList() 
@@ -1211,7 +1266,25 @@ export default {
       this.state.skin =  this.local.skin
     }
   },
-  methods: {  
+  methods: {   
+    filterPair() {
+
+    }, 
+    setUnitSort(key) { 
+      if (this.sortUnitBy === key) {
+        this.sortUnitState = (this.sortUnitState + 1) % 3
+      } else {
+        this.sortUnitBy = key
+        this.sortUnitState = 1
+      }
+    },
+    stateUnitSortBy(key) {
+      if (key !== this.sortUnitBy) {
+        return 0
+      } else {
+        return this.sortUnitState
+      }
+    },
     handleActiveBtn(key) {
       if (key == 2 || key == 4 || key == 6) {
         this.activeAcountAndPriceArr['value'] = undefined
@@ -2836,6 +2909,27 @@ export default {
     width: 350px; 
     line-height: 40px;
     color: #9F9F9F;
+     .pairs-search {
+      padding: 0 20px;
+      .search-box {
+        position:relative;
+        .iconfont {
+          position: absolute;
+          top: 13px;
+          left: 19px;
+        }
+      }
+      input {
+        width: 100%;
+        height: 32px;
+        line-height: 32px;
+        font-size: 12px;
+        background-color: #f3f3f3;
+        border:none;
+        border-radius: 4px;
+        text-indent: 37px;
+      }
+    }
     .label {
       display:block; 
       color: $text-strong;
@@ -2865,6 +2959,18 @@ export default {
   }
   &.dark {
     .drop-down { 
+      .pairs-search {
+        padding: 0 20px;
+        .search-box { 
+          .iconfont { 
+            color: #808080;
+          }
+        }
+        input { 
+          background-color: #37373A; 
+          color: #fff;
+        }
+      }
       .drop-item {
         .router-link-exact-active { 
           background-color: #222222;

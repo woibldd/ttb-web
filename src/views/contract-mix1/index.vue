@@ -22,7 +22,7 @@
                     <!-- <span v-if="showSymbolList"><label class="f17">{{ activeProduct.currency }}/USDT</label> </span> -->
                     <el-popover  
                       :popper-class="[state.skin, 'pd-0']"  
-                      trigger="click">
+                      trigger="hover">
                       <div class="drop-down">
                         <div>
                           <div class="pairs-search">
