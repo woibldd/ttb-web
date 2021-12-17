@@ -99,9 +99,9 @@
               </el-row>
             </div> 
           </template>
-          <template v-if="(selectTab==='all' || selectTab==='btc')"> 
+          <template v-if="(selectTab==='all' || selectTab==='mix')"> 
             <div class="title mb-10">
-              <h4>{{$t('currency-btc')}}</h4>
+              <h4>{{$t('currency-mix')}}</h4>
             </div>
             <div class="grid mb-10">
               <el-row class="hander mt-10 mb-20">
@@ -110,18 +110,18 @@
                 <el-col :span="3">{{$t('market.orderdeal')}}</el-col>
                 <el-col :span="3">{{$t('market.h24change')}}</el-col> -->
                 <el-col :span="4"> 
-                  <div @click="setBtcSort('currency')">
-                    <sort color="#01CED1" :sort="true" :label="$t('currency')" :state="stateBtcSortBy('currency')"/>
+                  <div @click="setMixSort('currency')">
+                    <sort color="#01CED1" :sort="true" :label="$t('currency')" :state="stateMixSortBy('currency')"/>
                   </div>
                 </el-col>
                 <el-col :span="3"> 
-                  <div @click="setBtcSort('price')">
-                    <sort color="#01CED1" :sort="true" :label="$t('market.orderdeal')" :state="stateBtcSortBy('price')"/>
+                  <div @click="setMixSort('price')">
+                    <sort color="#01CED1" :sort="true" :label="$t('market.orderdeal')" :state="stateMixSortBy('price')"/>
                   </div>
                 </el-col>
                 <el-col :span="3"> 
-                  <div @click="setBtcSort('delta')">
-                    <sort color="#01CED1" :sort="true" :label="$t('market.h24change')" :state="stateBtcSortBy('delta')"/>
+                  <div @click="setMixSort('delta')">
+                    <sort color="#01CED1" :sort="true" :label="$t('market.h24change')" :state="stateMixSortBy('delta')"/>
                   </div> 
                 </el-col>
                 <el-col :span="4">{{$t('market.h24trade')}}</el-col>
@@ -129,13 +129,13 @@
                 <el-col :span="4"  flex="main:center">{{$t('market.view')}}</el-col>
                 <el-col :span="2"  flex="main:right">{{$t('operation')}}</el-col>
               </el-row> 
-              <el-row v-for="(item, index) in btcShowList"   
+              <el-row v-for="(item, index) in mixShowList"   
                 :key="index" 
                 class="row mt-10">
                 <!-- <el-col :span="1">{{index + 1}}</el-col> -->
                 <el-col :span="4" flex="cross:center">
-                  <img  class="iconfont mr-10" style="font-size: 24px"  :src="getCoinIcon(item.currency.replace('USD', ''))" alt="">
-                  {{item.currency.replace('USD', '')}}<span class="currency">/USD</span> &nbsp;
+                  <img  class="iconfont mr-10" style="font-size: 24px"  :src="getCoinIcon(item.currency)" alt="">
+                  {{item.currency}}<span class="currency">/USDT</span> &nbsp;
                 </el-col>
                 <el-col :span="3">{{item.price}} &nbsp;</el-col>
                 <el-col :span="3">
@@ -144,18 +144,18 @@
                   &nbsp;
                 </el-col>
                 <el-col :span="4">
-                  <span v-if="+item.vol">{{ $big(item.vol).div(item.price) | pretty}}  <span class="currency">{{item.currency.replace('USD', '')}}</span></span>
+                  <span v-if="+item.vol">{{ $big(item.vol).div(item.price) | pretty}}  <span class="currency">{{item.currency}}</span></span>
                   &nbsp;
                 </el-col>
-                <el-col :span="4">{{item.vol | pretty(2)}} <span class="currency">USD</span> &nbsp;</el-col>
+                <el-col :span="4">{{item.vol | pretty}} <span class="currency">USDT</span>&nbsp;</el-col>
                 <el-col :span="4" flex="main:center">
-                  <span v-if="quoteList[item.name]">
-                    <quote-view :historyList="quoteList[item.name ]"  :delta="item.delta"/>   
+                  <span v-if="quoteList[item.symbol]">
+                    <quote-view :historyList="quoteList[item.symbol]"  :delta="item.delta"/>   
                   </span>
                   &nbsp; 
                 </el-col>
                 <el-col :span="2" flex="main:right"> 
-                  <router-link :to="{name:'future', query: {pair: item.symbol}  }">
+                  <router-link :to="{name:'mix', query: {pair: item.symbol}  }">
                     <el-button size="mini" type="primary">{{$t('asset_trading')}}</el-button>
                   </router-link>
                 </el-col>
@@ -221,9 +221,9 @@
               </el-row>
             </div>
           </template>
-          <template v-if="(selectTab==='all' || selectTab==='mix')"> 
+          <template v-if="(selectTab==='all' || selectTab==='btc')"> 
             <div class="title mb-10">
-              <h4>{{$t('currency-mix')}}</h4>
+              <h4>{{$t('currency-btc')}}</h4>
             </div>
             <div class="grid mb-10">
               <el-row class="hander mt-10 mb-20">
@@ -232,18 +232,18 @@
                 <el-col :span="3">{{$t('market.orderdeal')}}</el-col>
                 <el-col :span="3">{{$t('market.h24change')}}</el-col> -->
                 <el-col :span="4"> 
-                  <div @click="setMixSort('currency')">
-                    <sort color="#01CED1" :sort="true" :label="$t('currency')" :state="stateMixSortBy('currency')"/>
+                  <div @click="setBtcSort('currency')">
+                    <sort color="#01CED1" :sort="true" :label="$t('currency')" :state="stateBtcSortBy('currency')"/>
                   </div>
                 </el-col>
                 <el-col :span="3"> 
-                  <div @click="setMixSort('price')">
-                    <sort color="#01CED1" :sort="true" :label="$t('market.orderdeal')" :state="stateMixSortBy('price')"/>
+                  <div @click="setBtcSort('price')">
+                    <sort color="#01CED1" :sort="true" :label="$t('market.orderdeal')" :state="stateBtcSortBy('price')"/>
                   </div>
                 </el-col>
                 <el-col :span="3"> 
-                  <div @click="setMixSort('delta')">
-                    <sort color="#01CED1" :sort="true" :label="$t('market.h24change')" :state="stateMixSortBy('delta')"/>
+                  <div @click="setBtcSort('delta')">
+                    <sort color="#01CED1" :sort="true" :label="$t('market.h24change')" :state="stateBtcSortBy('delta')"/>
                   </div> 
                 </el-col>
                 <el-col :span="4">{{$t('market.h24trade')}}</el-col>
@@ -251,13 +251,13 @@
                 <el-col :span="4"  flex="main:center">{{$t('market.view')}}</el-col>
                 <el-col :span="2"  flex="main:right">{{$t('operation')}}</el-col>
               </el-row> 
-              <el-row v-for="(item, index) in mixShowList"   
+              <el-row v-for="(item, index) in btcShowList"   
                 :key="index" 
                 class="row mt-10">
                 <!-- <el-col :span="1">{{index + 1}}</el-col> -->
                 <el-col :span="4" flex="cross:center">
-                  <img  class="iconfont mr-10" style="font-size: 24px"  :src="getCoinIcon(item.currency)" alt="">
-                  {{item.currency}}<span class="currency">/USDT</span> &nbsp;
+                  <img  class="iconfont mr-10" style="font-size: 24px"  :src="getCoinIcon(item.currency.replace('USD', ''))" alt="">
+                  {{item.currency.replace('USD', '')}}<span class="currency">/USD</span> &nbsp;
                 </el-col>
                 <el-col :span="3">{{item.price}} &nbsp;</el-col>
                 <el-col :span="3">
@@ -266,18 +266,18 @@
                   &nbsp;
                 </el-col>
                 <el-col :span="4">
-                  <span v-if="+item.vol">{{ $big(item.vol).div(item.price) | pretty}}  <span class="currency">{{item.currency}}</span></span>
+                  <span v-if="+item.vol">{{ $big(item.vol).div(item.price) | pretty}}  <span class="currency">{{item.currency.replace('USD', '')}}</span></span>
                   &nbsp;
                 </el-col>
-                <el-col :span="4">{{item.vol | pretty}} <span class="currency">USDT</span>&nbsp;</el-col>
+                <el-col :span="4">{{item.vol | pretty(2)}} <span class="currency">USD</span> &nbsp;</el-col>
                 <el-col :span="4" flex="main:center">
-                  <span v-if="quoteList[item.symbol]">
-                    <quote-view :historyList="quoteList[item.symbol]"  :delta="item.delta"/>   
+                  <span v-if="quoteList[item.name]">
+                    <quote-view :historyList="quoteList[item.name ]"  :delta="item.delta"/>   
                   </span>
                   &nbsp; 
                 </el-col>
                 <el-col :span="2" flex="main:right"> 
-                  <router-link :to="{name:'mix', query: {pair: item.symbol}  }">
+                  <router-link :to="{name:'future', query: {pair: item.symbol}  }">
                     <el-button size="mini" type="primary">{{$t('asset_trading')}}</el-button>
                   </router-link>
                 </el-col>
