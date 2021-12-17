@@ -306,17 +306,29 @@ export default {
         if (res && res.data) {
           this.lianData = []
           res.data.forEach((item) => {
-            if((item.currency === 'USDT' || item.currency === 'SLD') && item.withdrawable) {
-              if (item.chain === 'OMNI') { item.currencyName = item.currency + '-' + 'Omni'}
-              if (item.chain === 'ETH') { item.currencyName = item.currency + '-' + 'ERC20'}
-              if (item.chain === 'TRX') { item.currencyName = item.currency + '-' + 'TRC20'}
-              if (item.chain === 'BSC') { item.currencyName = item.currency + '-' + 'BSC'}
-              if (item.chain === 'BNB') { item.currencyName = item.currency + '-' + 'BNB'}
-              this.lianData.push(item) 
-              if (!this.lianDataList[item.currency])  
-                this.lianDataList[item.currency] = [] 
-              this.lianDataList[item.currency].push(item) 
-            }  
+            // if((item.currency === 'USDT' || item.currency === 'SLD') && item.withdrawable) {
+            //   if (item.chain === 'OMNI') { item.currencyName = item.currency + '-' + 'Omni'}
+            //   if (item.chain === 'ETH') { item.currencyName = item.currency + '-' + 'ERC20'}
+            //   if (item.chain === 'TRX') { item.currencyName = item.currency + '-' + 'TRC20'}
+            //   if (item.chain === 'BSC') { item.currencyName = item.currency + '-' + 'BSC'}
+            //   if (item.chain === 'BNB') { item.currencyName = item.currency + '-' + 'BNB'}
+            //   this.lianData.push(item) 
+            //   if (!this.lianDataList[item.currency])  
+            //     this.lianDataList[item.currency] = [] 
+            //   this.lianDataList[item.currency].push(item) 
+            // }  
+            if (item.chain === 'OMNI' && item.depositable) { item.currencyName = item.currency + '-' + 'Omni'}
+              else if (item.chain === 'ETH' && item.depositable) { item.currencyName = item.currency + '-' + 'ERC20'}
+              else if (item.chain === 'TRX' && item.depositable) { item.currencyName = item.currency + '-' + 'TRC20'} 
+              else {
+                item.currencyName = item.currency + '-' + item.chain
+              }
+              if (item.depositable) {
+                this.lianData.push(item) 
+                if (!this.lianDataList[item.currency])  
+                  this.lianDataList[item.currency] = [] 
+                this.lianDataList[item.currency].push(item)  
+              }
           })
           // this.lianData = this.lianData.reverse()//顺序颠倒一下，omni要放在前面
           this.allCoins = this.removalData(res.data.filter(c => c.depositable))
