@@ -599,13 +599,13 @@ export default {
           this.lianData = []
           res.data.forEach((item) => {
             // if((item.currency === 'USDT' || item.currency === 'SLD' ) && item.withdrawable) {
-              if (item.chain === 'OMNI') { item.currencyName = item.currency + '-' + 'Omni'}
-              else if (item.chain === 'ETH') { item.currencyName = item.currency + '-' + 'ERC20'}
-              else if (item.chain === 'TRX') { item.currencyName = item.currency + '-' + 'TRC20'}
-              else if (item.chain === 'BSC') { item.currencyName = item.currency + '-' + 'BSC'} 
-              else if (item.chain === 'BNB') { item.currencyName = item.currency + '-' + 'BNB'}
-              else {
-                item.currencyName = item.chain
+              if (item.chain === 'OMNI' && item.withdrawable) { item.currencyName = item.currency + '-' + 'Omni'}
+              else if (item.chain === 'ETH' && item.withdrawable) { item.currencyName = item.currency + '-' + 'ERC20'}
+              else if (item.chain === 'TRX' && item.withdrawable) { item.currencyName = item.currency + '-' + 'TRC20'}
+              // else if (item.chain === 'BSC') { item.currencyName = item.currency + '-' + 'BSC'} 
+              // else if (item.chain === 'BNB') { item.currencyName = item.currency + '-' + 'BNB'}
+              else if (item.withdrawable) {
+                item.currencyName = item.currency + '-' + item.chain
               }
               this.lianData.push(item) 
               if (!this.lianDataList[item.currency])  
