@@ -8,7 +8,7 @@
           <div
             class="thead">
             <!-- <div class="th ibt left" /> -->
-            <div class="th ibt left">{{ $t('contractMix.mapDelegateList.mapHeader1.price') }}</div>
+            <div class="th ibt left">{{ $t('contractMix.mapDelegateList.mapHeader1.price') }}</div>333
             <div class="th ibt right">{{ $t('contractMix.mapDelegateList.mapHeader1.amount') }}</div>
             <div class="th ibt right">{{ $t('contractMix.mapDelegateList.mapHeader1.total', {unit: ''}).replace('(','').replace(')','') }}</div>
 

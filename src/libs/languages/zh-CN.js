@@ -4071,6 +4071,7 @@ export default {
     routeText4: '邀请',
     doubleVerification: '双重验证',
     accountSafe: '保护您的交易和账户安全' ,
+    tip5: '身份认证后，即刻开启交易！',
     security: {
       close_verify_tips: "手机验证和邮箱验证不能同时关闭"
     }

@@ -2,7 +2,7 @@
   <div class="profile-container">
     <div class="title-box">
       <div class="title-text">{{ $t('identity_authentication') }}</div> 
-      <div class="sub-title-text mt-3">身份认证后，即刻开启交易！</div>
+      <div class="sub-title-text mt-3">{{$t('profile.tip5')}}</div>
     </div>
     <div v-if="kycState === -1" style="height:400px;" flex="dir:top main:center cross:center">
       <span>
@@ -49,7 +49,6 @@
           label-position="left"
           :model="form"
           label-width="104px">
-
           <el-form-item
             prop="nationality"
             class="inp_box"

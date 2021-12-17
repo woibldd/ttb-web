@@ -2,16 +2,15 @@
   <div :class="{loading: loading}" class="ix-pannel">
     <div class="ix-pannel-body">
       <!-- 索引 -->
-      <div class="ix-pair-head tr">
+      <div class="ix-pair-head ">
         <!-- <el-input placeholder="搜索" v-model="search" >
           <el-button slot="append" icon="el-icon-search"></el-button>
         </el-input>-->
         <div class="pairs-search">
-          <div class="search-box">
-            <input
-              :skin="state.skin"
+          <div class="search-box" :skin="state.skin">
+            <input 
               v-model="search"
-              placeholder="搜索"
+              :placeholder="$t('search')"
               type="text"
               @input="filterPair()">
             <icon name="home-search-t"/>
@@ -357,18 +356,14 @@ export default {
   }
 }
 .ix-pair-head {
-  .pairs-search {
-    width: 100%;
-    padding: 2px 10px;
+  .pairs-search { 
+    margin: 10px 10px;
     .search-box {
+      position:relative;
       font-size: 20px;
       width: 100%;
-      height: 29px;
-      // background:rgba(255,255,255,1);
-      border: 1px solid #4880b3;
-      //border-radius: 14px;
-      // padding-left: 10px;
-      // padding-right: 10px;
+      height: 29px; 
+      // border: 1px solid #4880b3; 
       box-sizing: border-box;
       overflow: hidden;
       padding-top: 2px;
@@ -376,18 +371,33 @@ export default {
       display: flex;
       align-items: center; 
       input {
-        padding-left: 10px;
+        padding: 0;
         width: 100%;
-        border: 0;
-        height: 16px;
-        color:$input-color;
-        //border-right: 1px solid rgba(160,160,160,1);
-        background: $search-bar-bg;
-        &[skin~='dark'] {
-          background: $search-bar-bg2;
-        }
+        height: 32px;
+        line-height: 32px;
+        font-size: 12px;
+        background-color: #f3f3f3;
+        border:none;
+        border-radius: 4px;
+        text-indent: 37px; 
         &:focus {
           outline: none;
+        }
+      }
+      .iconfont {
+        position: absolute;
+        top: 7px;
+        left: 16px;
+          color: #808080 !important;
+      }
+       
+      &[skin~='dark'] { 
+        input { 
+          background-color: #37373A; 
+          color: #fff;
+        }
+        input::-webkit-input-placeholder {
+          color: #ccc;
         }
       }
     }

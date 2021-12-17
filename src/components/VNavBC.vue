@@ -41,34 +41,6 @@
                       </div>
                     </router-link>
                   </li> 
-                  <li class="dropdown-item2 pl-24 pr-24"> 
-                    <router-link to="/future" flex="dir:column"> 
-                      <div style="width: 30px;"  flex="cross:center">
-                        <img src="@/assets/ixx/icon/future.png" alt=""> 
-                        <!-- <img :src="require(`../assets/site/${state.siteName}/icon/blend.png`)"  alt=""> -->
-                      </div>
-                      <div>
-                        <div>{{$t('contract_btc')}}</div>
-                        <div class="info"> 
-                          {{$t('market.tips2')}}
-                        </div>
-                      </div>  
-                    </router-link>
-                  </li> 
-                  <li class="dropdown-item2 pl-24 pr-24"> 
-                    <router-link to="/unit" flex="dir:column"> 
-                      <div style="width: 30px;" flex="cross:center">
-                        <img src="@/assets/ixx/icon/unit.png" alt=""> 
-                        <!-- <img :src="require(`../assets/site/${state.siteName}/icon/blend.png`)"  alt=""> -->
-                      </div>
-                      <div>
-                        <div>{{$t('currency-unit')}}</div>
-                        <div class="info"> 
-                          {{$t('market.tips1')}}
-                        </div>
-                      </div>  
-                    </router-link>
-                  </li> 
                   <li class="dropdown-item2 pl-24 pr-24">
                     <router-link to="/mix" flex="dir:column">  
                       <div style="width: 30px;" flex="cross:center"> 
@@ -83,6 +55,34 @@
                       </div> 
                     </router-link>
                   </li>
+                  <li class="dropdown-item2 pl-24 pr-24"> 
+                    <router-link to="/unit" flex="dir:column"> 
+                      <div style="width: 30px;" flex="cross:center">
+                        <img src="@/assets/ixx/icon/unit.png" alt=""> 
+                        <!-- <img :src="require(`../assets/site/${state.siteName}/icon/blend.png`)"  alt=""> -->
+                      </div>
+                      <div>
+                        <div>{{$t('currency-unit')}}</div>
+                        <div class="info"> 
+                          {{$t('market.tips1')}}
+                        </div>
+                      </div>  
+                    </router-link>
+                  </li> 
+                  <li class="dropdown-item2 pl-24 pr-24"> 
+                    <router-link to="/future" flex="dir:column"> 
+                      <div style="width: 30px;"  flex="cross:center">
+                        <img src="@/assets/ixx/icon/future.png" alt=""> 
+                        <!-- <img :src="require(`../assets/site/${state.siteName}/icon/blend.png`)"  alt=""> -->
+                      </div>
+                      <div>
+                        <div>{{$t('contract_btc')}}</div>
+                        <div class="info"> 
+                          {{$t('market.tips2')}}
+                        </div>
+                      </div>  
+                    </router-link>
+                  </li> 
                 </ul>
               </div>
             </div>

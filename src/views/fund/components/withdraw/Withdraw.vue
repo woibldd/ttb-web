@@ -525,9 +525,10 @@ export default {
         if (res && res.data) { 
           this.restaurants = []
           this.allAddress = res.data
-          if (this.selectCoin.currency === 'USDT' || this.selectCoin.currency === 'SLD') {
-            this.allAddress = this.allAddress.filter(item => item.chain === this.selectLian.chain || (!item.chain &&  this.selectLian.chain === 'OMNI' ))
-          }
+          // if (this.selectCoin.currency === 'USDT' || this.selectCoin.currency === 'SLD') {
+          //   this.allAddress = this.allAddress.filter(item => item.chain === this.selectLian.chain || (!item.chain &&  this.selectLian.chain === 'OMNI' ))
+          // }
+          this.allAddress = this.allAddress.filter(item => item.chain === this.selectLian.chain || (!item.chain &&  this.selectLian.chain === 'OMNI' ))
            
           // console.log(this.allAddress)
           for (const item of this.allAddress) {
@@ -597,17 +598,20 @@ export default {
         if (res && res.data) { 
           this.lianData = []
           res.data.forEach((item) => {
-            if((item.currency === 'USDT' || item.currency === 'SLD' ) && item.withdrawable) {
+            // if((item.currency === 'USDT' || item.currency === 'SLD' ) && item.withdrawable) {
               if (item.chain === 'OMNI') { item.currencyName = item.currency + '-' + 'Omni'}
-              if (item.chain === 'ETH') { item.currencyName = item.currency + '-' + 'ERC20'}
-              if (item.chain === 'TRX') { item.currencyName = item.currency + '-' + 'TRC20'}
-              if (item.chain === 'BSC') { item.currencyName = item.currency + '-' + 'BSC'} 
-              if (item.chain === 'BNB') { item.currencyName = item.currency + '-' + 'BNB'}
+              else if (item.chain === 'ETH') { item.currencyName = item.currency + '-' + 'ERC20'}
+              else if (item.chain === 'TRX') { item.currencyName = item.currency + '-' + 'TRC20'}
+              else if (item.chain === 'BSC') { item.currencyName = item.currency + '-' + 'BSC'} 
+              else if (item.chain === 'BNB') { item.currencyName = item.currency + '-' + 'BNB'}
+              else {
+                item.currencyName = item.chain
+              }
               this.lianData.push(item) 
               if (!this.lianDataList[item.currency])  
                 this.lianDataList[item.currency] = [] 
               this.lianDataList[item.currency].push(item) 
-            }  
+            // }  
           })
           // this.lianData = this.lianData.reverse()//顺序颠倒一下，ERC20要放在前面
           // this.selectLian = this.lianData.find(a => a.chain==='TRX') 
@@ -627,10 +631,7 @@ export default {
         this.selectCoin = this.selectLian || this.allCoins[0]
       } 
     },
-    quickSelectCoin (coin) {  
-      // if (coin.currency === 'USDT') {
-      //   this.selectLian = this.lianDataList['USDT'].find(a => a.chain==='TRX') 
-      // }
+    quickSelectCoin (coin) {   
       this.changeCoinType(coin)   
       
     },
@@ -684,9 +685,10 @@ export default {
         remark: this.remark
       }
 
-      if (this.selectCoin.currency === 'USDT' || this.selectCoin.currency === 'SLD') {
+      // if (this.selectCoin.currency === 'USDT' || this.selectCoin.currency === 'SLD') {
+      //   param.chain = this.selectLian.chain
+      // }
         param.chain = this.selectLian.chain
-      }
  
       // eos 需要填memo
       if (this.selectCoin.memo_support) {
