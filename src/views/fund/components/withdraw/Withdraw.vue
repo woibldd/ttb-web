@@ -604,13 +604,15 @@ export default {
               else if (item.chain === 'TRX' && item.withdrawable) { item.currencyName = item.currency + '-' + 'TRC20'}
               // else if (item.chain === 'BSC') { item.currencyName = item.currency + '-' + 'BSC'} 
               // else if (item.chain === 'BNB') { item.currencyName = item.currency + '-' + 'BNB'}
-              else if (item.withdrawable) {
+              else {
                 item.currencyName = item.currency + '-' + item.chain
               }
-              this.lianData.push(item) 
-              if (!this.lianDataList[item.currency])  
-                this.lianDataList[item.currency] = [] 
-              this.lianDataList[item.currency].push(item) 
+              if (item.withdrawable) {
+                this.lianData.push(item) 
+                if (!this.lianDataList[item.currency])  
+                  this.lianDataList[item.currency] = [] 
+                this.lianDataList[item.currency].push(item)  
+              }
             // }  
           })
           // this.lianData = this.lianData.reverse()//顺序颠倒一下，ERC20要放在前面
