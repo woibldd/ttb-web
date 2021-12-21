@@ -11,7 +11,7 @@ export default {
   future_account: "合约账户",
   btc_account: "BTC合约账户",
   unit_account: "币本位合约账户",
-  mix_account: "金本位合约账户",
+  mix_account: "USDT合约账户",
   'currency-mix': "USDT合约",
   'currency-unit': "币本位合约",
   'currency-btc': "BTC合约",
