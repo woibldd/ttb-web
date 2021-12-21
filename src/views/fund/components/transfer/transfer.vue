@@ -198,10 +198,10 @@
         let obj = {
           1 : "wallet_account",
           2 : "trading_account",
-          3 : "contract_account",
+          3 : "btc_account",
           4 : "otc_account",
-          5 : 'contract_account',
-          7 : 'contract_account', 
+          5 : 'unit_account',
+          7 : 'mix_account', 
           8 : 'shareOption.share_account', 
           10: 'header_nav.defiAccount', 
           11: 'header_nav.blend' }
@@ -287,14 +287,14 @@
               let balanceList = {
                 1 : this.$t("wallet_account"),
                 2 : this.$t("trading_account"),
-                3 : this.$t("contract_account"),
+                3 : this.$t("btc_account"),
                 4 : this.$t("otc_account"),
-                5 : this.$t('contract_account'),
-                7 : this.$t('contract_account'), 
+                5 : this.$t('unit_account'),
+                7 : this.$t('mix_account'), 
                 8 : this.$t('shareOption.share_account'), 
                 10: this.$t('header_nav.defiAccount'), 
                 11: this.$t('header_nav.blend')
-              }
+              } 
 
               this.tableData[i].from_balance = balanceList[this.tableData[i].from_balance]
               this.tableData[i].to_balance = balanceList[this.tableData[i].to_balance]
