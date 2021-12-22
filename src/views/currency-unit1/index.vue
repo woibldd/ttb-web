@@ -1544,14 +1544,14 @@ export default {
 
             // } 
             item.funUnrealized = (row) => {
-              if (!this.mapProduct || !curProduct.UNIT || !+row.holding || !+row.price) {
+              if (!this.mapProduct || !curProduct.UNIT || !curProduct.MARKET || !+row.holding || !+row.price) {
                 return '0'
               }
-              let openValue = toBig(row.holding).div(curProduct.MARKET.current).abs()
+              let openValue = toBig(row.holding).div((curProduct.MARKET || {}).current).abs()
               let leverage = +row.leverage || curProduct.max_leverage
               let unrealized = calcProfit(row.holding, row.price, curProduct.UNIT.current)
               let roe = toBig(unrealized).div(openValue).times(leverage).times(100).toFixed(2)
-              let unrealizedM = calcProfit(row.holding, row.price, curProduct.MARKET.current)
+              let unrealizedM = calcProfit(row.holding, row.price, (curProduct.MARKET || {}).current || 0)
               let roeM = toBig(unrealizedM).div(openValue).times(leverage).times(100).toFixed(2)
               return { unrealized, roe, unrealizedM, roeM }
             }

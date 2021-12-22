@@ -39,7 +39,7 @@ export default {
       }
       // hub.$emit('reopen')
     }
-    socket.onmessage = function (evt) {
+    socket.onmessage = function (evt) { 
       if (hub._isDestroyed) {
         return socket.close()
       }
@@ -56,6 +56,7 @@ export default {
           }
           if (restored) {
             data = JSON.parse(restored)   
+            console.log(data)
             hub.$emit('message', data) 
           }
         })
@@ -64,7 +65,7 @@ export default {
         utils.logE(e)
       } 
       if (data) { 
-        // console.log(data)
+        console.log(data)
         hub.$emit('message', data)
       }
     } 

@@ -205,7 +205,9 @@ export const getTotalValue = (futures, holding, multiplier) => {
  * product 币对属性
 */
 export const calcProfit = (amount, open_price, close_price) => {
-  return (Big(amount).div(open_price)).minus(Big(amount).div(close_price)).toFixed(8)
+  if (Big(open_price).gt(0) && Big(close_price).gt(0)) {
+    return (Big(amount).div(open_price)).minus(Big(amount).div(close_price)).toFixed(8)
+  } else return Big(0)
 }
 export const getProfitLoss = ({ direction, leverages, amount, open_price, close_price, product }) => {
   if (direction === 'less') {
