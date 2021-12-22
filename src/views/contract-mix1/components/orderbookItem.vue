@@ -20,7 +20,7 @@
     <td
       class="right btn"
       @click="setAmount(item.amount)">
-      {{ fixAmount(item.amount) }}
+      {{ item.amount | pretty(2) }}
     </td>
     <td class="right btn">
       <!-- @click="setAmount(item.total);setPrice(item.price)" -->

@@ -23,7 +23,8 @@
               <td
                 class="left pl-15"
                 :class="['side-' + deal.side, sideColor(deal.side)]"><num :num="$big(deal.price).toFixed(state.ct.pairInfo.price_scale)"/></td>
-              <td class="right">{{ deal.amount | fixed(state.ct.pairInfo.amount_scale) }}</td>
+              <!-- <td class="right">{{ deal.amount | fixed(state.ct.pairInfo.amount_scale) }}</td> -->
+              <td class="right">{{ deal.amount | pretty }}</td>
               <td class="right">{{ deal.time | date('H:m:s') }}</td>
             </tr>
           </tbody>

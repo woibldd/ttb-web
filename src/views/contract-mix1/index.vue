@@ -286,7 +286,7 @@
                             flex="main:justify cross:center">
                             <!-- <span :class="[item.side === 'buy'?'text-success':'text-danger']">{{ $tR(item.side) }}</span> -->
                             <span :class="[item.side === 'buy'?'text-success':'text-danger', 'txl']">{{ item.values[0]|bigRound(activeProduct.price_scale) }}</span>
-                            <span class="txr">{{ item.values[1] }}</span>
+                            <span class="txr">{{ item.values[1] | pretty }}</span>
                             <span class="txr">{{ item.time | parseTime('{h}:{i}:{s}') }}</span>
                           </li>
                         </ul>
