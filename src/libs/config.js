@@ -9,17 +9,17 @@ let wss = ''
 if (process.env.NODE_ENV != 'development') {
   const val = location.host.split('.')
   const host = val.slice(val.length - 2, val.length).join('.')
-  if (host === 'ixex.pro') {
-    // ws = `wss://ws.${host}/v1/`
-    // quote = `https://q.${host}/v1/`
-    // wss = `wss://wss.${host}/v1` 
-    ws = 'wss://ws.ixweb.pro/v1/'
-    quote = 'https://q.ixweb.pro/v1/'
-    wss = 'wss://wss.ixweb.pro/v1'  
+  if (host === 'qimenpaipan.com') {
+    ws = `wss://ws.${host}/v1/`
+    quote = `https://q.${host}/v1/`
+    wss = `wss://wss.${host}/v1` 
+    // ws = 'wss://ws.ixweb.pro/v1/'
+    // quote = 'https://q.ixweb.pro/v1/'
+    // wss = 'wss://wss.ixweb.pro/v1'  
   } else {
-    ws = 'wss://ws.ixweb.pro/v1/'
-    quote = 'https://q.ixweb.pro/v1/'
-    wss = 'wss://wss.ixweb.pro/v1'  
+    ws = `wss://ws.${host}/v1/`
+    quote = `https://q.${host}/v1/`
+    wss = `wss://wss.${host}/v1` 
   }
 }
 if (process.env.NODE_ENV === 'development') {
