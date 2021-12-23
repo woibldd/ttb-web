@@ -805,11 +805,12 @@ export default {
       console.log('handleAmountObj')
     }
   },
-  destroyed() { 
+  beforeDestroy() {
+    // document.title = config.title
     if (this.socket) {
       this.socket.$destroy()
-    } 
-  },
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

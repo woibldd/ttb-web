@@ -468,6 +468,12 @@ export default {
     this.$refs.TradingView.$destroy();
     next();
   },
+  beforeDestroy() {
+    // document.title = config.title
+    if (utils.$tvSocket) {
+      utils.$tvSocket.$destroy()
+    }
+  },
   destroyed() {
     this.$eh.$off("app:resize", this.onresize);
     this.$eh.$off("protrade:balance:refresh", this.refreshBalance);

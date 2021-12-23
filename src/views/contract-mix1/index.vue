@@ -2073,12 +2073,12 @@ export default {
       this.setTitle()
     },
   },
-  destroyed () {
+  beforeDestroy() {
     document.title = config.title
     if (this.socket) {
       this.socket.$destroy()
-    } 
-  } 
+    }
+  }
 }
 </script>
 
