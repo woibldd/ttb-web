@@ -435,15 +435,15 @@ const utils = {
     if (num < 1e6) {
       return num.div(1e3).toFixed(3) + 'K'
     }
-    if (num < 1e7) {
-      return num.div(1e4).toFixed(3) + 'M'
-    }
+    // if (num < 1e7) {
+    //   return num.div(1e6).toFixed(3) + 'M'
+    // }
     if (num < 1e9) {
       return num.div(1e6).toFixed(3) + 'M'
     }
-    if (num < 1e10) {
-      return num.div(1e7).toFixed(3) + 'B'
-    }
+    // if (num < 1e10) {
+    //   return num.div(1e7).toFixed(3) + 'B'
+    // }
     return num.div(1e9).toFixed(3) + 'B'
   },
   toRound(num, scale = 20, rm = consts.ROUND_DOWN) {
