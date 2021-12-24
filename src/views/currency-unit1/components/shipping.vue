@@ -378,7 +378,7 @@ export default {
         // this.margin_popover = false
         this.pClose('margin' + item.currency)
         this.margin_position = 0
-        this.checked = true
+        this.checked = 0
         if (!res.code) {
           this.$message.success(this.$t('tj_cg'))
         } else {
