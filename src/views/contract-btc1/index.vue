@@ -481,9 +481,9 @@ export default {
             this.state.ct.product_name = res.data.product_name
             this.state.ct.currency_name = res.data.currency_name
             this.state.ct.symbol = res.data.symbol
-            if (this.isLogin) {
-              this.checkActiveContract()
-            }
+            // if (this.isLogin) {
+            //   this.checkActiveContract()
+            // }
             this.$eh.$emit('protrade:balance:refresh')
             const resp = await service.getContractSymInfo({
               symbol: this.symbol.name

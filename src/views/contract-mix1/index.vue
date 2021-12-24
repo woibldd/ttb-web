@@ -1772,9 +1772,9 @@ export default {
       if (!product) {
         return
       } 
-      if (this.isLogin) {
-        this.checkActive()
-      }   
+      // if (this.isLogin) {
+      //   this.checkActive()
+      // }   
       if (!this.$route.query.pair !== product.symbol) {  
         this.$router.replace({ 
           query: {

@@ -438,8 +438,8 @@ export default {
       this.loadingHouse = true
       // "contract_close_tips1": "在%{price}价格%{amount}张%{currency}合约。",
       // "contract_close_tips2": "在执行时，将平掉你的整个仓位。",
-      const side = item.holding > 0 ? `<span class="text-danger">卖出</span>` : `<span class="text-success">买入</span>`
-      const price = isMarket ? '最优' : this.input || this.markData[item.currency]
+      const side = item.holding > 0 ? `<span class="text-danger">${this.$t('order_side_sell')}</span>` : `<span class="text-success">${this.$t('order_side_buy')}</span>`
+      const price = isMarket ? this.$t('contract_order_enter_tips3') : this.input || this.markData[item.currency]
       const amount = Math.abs(item.holding)
       const currency = item.currency
       // const isOk = await this.confirm(`${side}${this.$t('contract_close_tips1', {price, amount, currency})}<br>${this.$t('contract_close_tips2')}`)
@@ -463,9 +463,13 @@ export default {
       const params = { name: item.name, user_id: item.user_id, price: isMarket ? 0 : +this.input || +this.markData[item.currency] }
       // console.log({params})
       closeStorehouse(params).then(res => {
-        this.loadingHouse = false
-        this.$emit('change')
-        this.$message.success(this.$t('tj_cg'))
+        if (!res.code) {
+          this.loadingHouse = false
+          this.$emit('change')
+          this.$message.success(this.$t('tj_cg')) 
+        } else {
+          this.$message.error(res.message)
+        }
       }).catch(res => {
         this.loadingHouse = false
       })

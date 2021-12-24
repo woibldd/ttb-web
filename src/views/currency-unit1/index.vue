@@ -1618,9 +1618,9 @@ export default {
       if (!product) {
         return
       }
-      if (this.isLogin) {
-        this.checkActive()
-      }
+      // if (this.isLogin) {
+      //   this.checkActive()
+      // }
       local.unit = product.name
       // localStorage.setItem('unit-product', product.name)
       this.$router.replace({ query: { pair: product.symbol } })
