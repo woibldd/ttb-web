@@ -43,23 +43,25 @@
                   <div flex="main:justify">
                     <el-radio
                       v-model="checked"
-                      :label="0">增加仓位保证金</el-radio>
+                      :label="0">{{$t('contract_add_ensurance')}}</el-radio>
                     <el-radio
                       v-model="checked"
-                      :label="1">减少仓位保证金</el-radio>
+                      :label="1">{{$t('contract_increase_ensurance')}}</el-radio>
                   </div>
                   <hr>
                   <div
                     style="font-size:12px; line-height:24px">
-                    <p>你的当前仓位: <span class="text-primary"> {{ item.holding }}</span> 张合约 ({{ item.leverage }}x)</p>
-                    <p>当前已分配的保证金: <span class="text-primary">{{ item.margin_position | toRound(8) }}</span> {{ item.currency }} 【最大可减少 <span class="text-primary">{{ Math.floor(item.margin_position) }}</span> {{ item.currency }}】<span
+                    <p>{{$t('contract_your_current_werehouse')}} <span class="text-primary"> {{$t('contract_many_piece_con', {amount: item.holding})}} </span> ({{ item.leverage }}x)</p>
+                    <p>{{$t('contract_have_apply_yet')}} <span class="text-primary">{{ item.margin_position | round(8) }}</span> {{ item.currency }} 【{{$t('contract_max_remove_account')}} <span class="text-primary">{{ Math.floor(item.margin_position) }}</span> {{ item.currency }}】<span
                       v-if="checked"
                       class="text-primary hover-point"
-                      @click="margin_position = Math.floor(item.margin_position)">全部</span></p>
-                    <p>可用保证金: <span class="text-primary">{{ item.available_balance | toRound(8) }}</span> {{ item.currency }}【最大可增加 <span class="text-primary">{{ Math.floor(item.available_balance) | toRound(8) }}</span> {{ item.currency }}】<span
-                      v-if="!checked"
-                      class="text-primary hover-point"
-                      @click="margin_position = Math.floor(item.available_balance)">全部</span></p>
+                      @click="margin_position = Math.floor(item.margin_position)">{{$t('input_all')}}</span></p>
+                    <p>{{$t('contract_aval_balance')}}: 
+                      <span class="text-primary">{{ item.available_balance | round(8) }}</span> {{ item.currency }} 
+                      <span v-if="!checked"
+                        class="text-primary hover-point"
+                        @click="margin_position = Math.floor(item.available_balance)">{{$t('input_all')}}</span>
+                    </p>
                   </div>
                   <el-input
                     v-model="margin_position"
@@ -68,9 +70,8 @@
                     :max="Math.floor(item.available_balance)"
                     style="width:100%"
                     placeholder="请输入数量" />
-                </div>
-                <hr>
-                <div flex="main:justify cross:center dir:right">
+                </div> 
+                <div class="mt-10" flex="main:justify cross:center dir:right">
                   <el-button
                     type="primary"
                     size="mini"
