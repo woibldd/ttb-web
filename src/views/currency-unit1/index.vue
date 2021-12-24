@@ -605,12 +605,35 @@
             </div>
           </div>
           <div class="r1-c4-r2 account-box mt-4">
-            <div class="account-hander">
-              {{$t('future_account')}}
+            <div class="account-hander option-header" flex="main:justify">
+              <div>{{$t('future_account')}}</div> 
               <!-- {{balanceFilterList}} -->
+              <div class="account-currency">{{currentAccount}}</div>
             </div>
-            <div class="account-content">
-              <el-tabs v-model="currentAccount">
+            <div class="hr"></div>
+            <div v-if="activeBalance" class="account-content">
+              <el-row class="tr">
+                <el-col :span='12' class="pt-10 pb-10 th">
+                  <p>{{$t('contract.float_profit_loss')}}</p>
+                  <p :class="activeBalance.funUnrealized(activeBalance).unrealized > 0 ? 'text-success' : 'text-danger'">
+                    <span>{{activeBalance.funUnrealized(activeBalance).unrealized}} </span> <br>
+                    <span>{{ activeBalance.funUnrealized(activeBalance).roe |round(2) }}%</span>
+                  </p>
+                </el-col>
+                <el-col :span='12' class="pt-15 pb-10 th">
+                  <router-link :to="{path:'/nfund/transfer'}">{{$t('suvbanean')}}</router-link>
+                </el-col>
+              </el-row>
+              <el-row class="tr">
+                <el-col class="td"
+                  :span="12"
+                  v-for="(value, key) in mapAccountInfo"
+                  :key="key">
+                  <p>{{value}}</p>
+                  <span>{{activeBalance[key] | round( (activeCurrency || {}).value_scale || 4)}}</span>
+                </el-col>
+              </el-row> 
+              <!-- <el-tabs v-model="currentAccount">
                 <el-tab-pane v-for="(item, index) in balanceFilterList"
                     :key="index" :label="item.currency" :name="item.currency">
                   <el-row class="tr">
@@ -638,7 +661,7 @@
                     </el-col>
                   </el-row> 
                 </el-tab-pane>
-              </el-tabs>
+              </el-tabs> -->
             </div>
           </div>  
           <div
@@ -1939,7 +1962,7 @@ export default {
     }
   }
   .hr {
-    height: 4px;
+    height: 2px;
     background-color: $contract-bg;
   }
 
@@ -2637,52 +2660,51 @@ export default {
       background: #ffffff;
       height: 290px;
       .account-hander {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        z-index: 1;
-      }
-      .account-content {
-        .el-tabs {
-          /deep/ .el-tabs__nav {
-            float: right;
-            padding-right: 15px;
-          }
-          /deep/ .el-tabs__content {
-            padding: 0 10px;
-            .tr {
-              .th {
-                width: 50%;
-                padding: 5px 0;
-                &:first-child {
-                  text-align: left;
-                  font-size: 16px;
-                }
-                &:last-child {
-                  text-align: right;
-                }
-                a {
-                  display: inline;
-                  padding: 5px 10px;
-                  border: 1px solid;
-                  border-radius: 3px;
-                }
-              }
-              .td {
-                vertical-align: middle;
-                span {
-                  color: $primary;
-                }
-              }
-            }
+        // position: absolute;
+        // top: 10px;
+        // left: 10px;
+        // z-index: 1;
+        padding: 10px; 
+        .account-currency {
+          position:relative;
+          &::after {
+            position: absolute;
+            content: '';
+            top: 30px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: $primary;
           }
         }
-        // .el-row {
-        //   span {
-        //     color: $primary;
-        //     margin: 8px 0;
-        //   }
-        // }
+      }
+      .account-content { 
+        padding: 0 10px;
+        .tr {
+          .th {
+            width: 50%;
+            padding: 5px 0;
+            &:first-child {
+              text-align: left;
+              font-size: 16px;
+            }
+            &:last-child {
+              text-align: right;
+            }
+            a {
+              display: inline;
+              padding: 5px 10px;
+              border: 1px solid;
+              border-radius: 3px;
+            }
+          }
+          .td {
+            vertical-align: middle;
+            span {
+              color: $primary;
+            }
+          }
+        } 
       }
     }
   }
