@@ -470,9 +470,9 @@ export default {
   },
   beforeDestroy() {
     // document.title = config.title
-    if (utils.$tvSocket) {
-      utils.$tvSocket.$destroy()
-    }
+    // if (utils.$tvSocket) {
+    //   utils.$tvSocket.$destroy()
+    // }
   },
   destroyed() {
     this.$eh.$off("app:resize", this.onresize);
