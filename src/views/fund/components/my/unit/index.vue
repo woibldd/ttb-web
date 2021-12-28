@@ -57,7 +57,7 @@
               <el-option
                 v-for="(item, idx) in pairList"
                 :key="idx"
-                :label="`${item.currency}/USDT`"
+                :label="`${item.currency}/USD`"
                 :value="item.name"/>
             </el-select>
           </div>
@@ -195,25 +195,25 @@
                 <div class="realized-item">
                   <div class="title">{{ $t('fund.contract.total_realized') }} </div>
                   <div class="value">
-                    <span :class="realizedList.realized_total > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{ realizedList.realized_total | fixed(2) }}<b>USDT</b></span>
+                    <span :class="realizedList.realized_total > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{ realizedList.realized_total | fixed(2) }}<b>USD</b></span>
                   </div> 
                 </div>
                 <div class="realized-item">
                   <div class="title">{{ $t('fund.contract.current_day_realized') }} </div>
                   <div class="value">
-                    <span :class="realizedList.realized_today > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{ realizedList.realized_today | fixed(2) }}<b>USDT</b></span>
+                    <span :class="realizedList.realized_today > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{ realizedList.realized_today | fixed(2) }}<b>USD</b></span>
                   </div> 
                 </div>
                 <div class="realized-item">
                   <div class="title">{{ $t('fund.contract.unrealized_mark_price') }} </div>
                   <div class="value">
-                    <span :class="realizedList.realized_market > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{ realizedList.realized_market | fixed(2) }}<b>USDT</b></span>
+                    <span :class="realizedList.realized_market > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{ realizedList.realized_market | fixed(2) }}<b>USD</b></span>
                   </div> 
                 </div>
                 <div class="realized-item">
                   <div class="title">{{ $t('fund.contract.unrealized_last_price') }} </div>
                   <div class="value">
-                    <span :class="realizedList.realized_price > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{ realizedList.realized_price | fixed(2) }}<b>USDT</b></span>
+                    <span :class="realizedList.realized_price > 0 ? 'bgcolor-unp' : 'bgcolor-dnp'" >{{ realizedList.realized_price | fixed(2) }}<b>USD</b></span>
                   </div> 
                 </div> 
               </div>
