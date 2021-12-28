@@ -430,7 +430,7 @@ const utils = {
       return num.round(3, 0).toFixed(3)
     }
     if (num < 1e3) {
-      return num.toFixed(0)
+      return num.round(3, 0).toFixed(3)
     }
     if (num < 1e6) {
       return num.div(1e3).toFixed(3) + 'K'
