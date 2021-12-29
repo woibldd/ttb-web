@@ -2664,7 +2664,7 @@ export default {
         // top: 10px;
         // left: 10px;
         // z-index: 1;
-        padding: 10px; 
+        padding: 10px 20px 10px 10px; 
         .account-currency {
           position:relative;
           &::after {
