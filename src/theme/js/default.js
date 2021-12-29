@@ -13,10 +13,10 @@ module.exports = {
     // 'zh-HK': 'IXX交易所 | BTC合约交易所排名-比特币价格今日实时行情走势-永续交割合约',
     // en: 'IXX |  IXX | Rhino Exchange-BTC Contract Exchange Ranking-Bitcoin Price Real-Time Quote Trend Today-Perpetual Delivery Contract',
     // ko: 'IXX | IXX 수자 재산 거래 공동체'
-    'zh-CN': 'IXX交易所',
-    'zh-HK': 'IXX交易所',
+    'zh-CN': 'IXX',
+    'zh-HK': 'IXX',
     en: 'IXX ',
-    ko: 'IXX | IXX 수자 재산 거래 공동체'
+    ko: 'IXX '
   },
   keywords: 'Bitcoin exchange, contract exchange, contract exchange ranking, bitcoin trend, real-time bitcoin market, perpetual contract, delivery contract, bitcoin contract, BTC contract, rhino exchange, 比特币交易所,合约交易所,合约交易所排名,比特币走势,比特币实时行情,永续合约,交割合约,比特币合约,BTC合约',
   keywordsConfig: {
