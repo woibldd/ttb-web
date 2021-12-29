@@ -1474,7 +1474,7 @@ export default {
         // this.newBargainListData.pop()
         this.newBargainListData.unshift(...data) 
         if (this.newBargainListData.length > 30) {
-          this.newBargainListData.splice(30, data.length)
+          this.newBargainListData.splice(30, this.newBargainListData.length - 30)
         } 
       }
     },
