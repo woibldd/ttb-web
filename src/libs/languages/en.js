@@ -367,7 +367,7 @@ export default {
   pwcheck_upper: "Contain at least one upper case letter",
   pwcheck_lower: "Contain at least one lower case letter",
   pwcheck_number: "Contain at least one number",
-  invitor: "Referral Code",
+  invitor: "Referral Code(Optional)",
   invitor_ph: "Referral (Optional)",
   agreement: "I have already read and agree to the <a href=\"%{agreement}\" target=\"_blank\"> Terms of Service </a> <a href=\"%{privacyPolicy}\" target=\"_blank\"> Privacy statement </a>",
   signup_submit: "Create an Account",

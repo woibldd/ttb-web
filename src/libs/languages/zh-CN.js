@@ -334,7 +334,7 @@ export default {
   pwcheck_upper: "包含至少一个大写字母",
   pwcheck_lower: "包含至少一个小写字母",
   pwcheck_number: "包含至少一个数字",
-  invitor: "邀请码",
+  invitor: "邀请码(选填)",
   invitor_ph: "填写邀请码(选填)",
   agreement: "我已阅读并同意 <a href=\"%{agreement}\" target=\"_blank\">服务条款</a> <a href=\"%{privacyPolicy}\" target=\"_blank\">隐私协议</a>",
   signup_submit: "注册",

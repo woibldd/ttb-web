@@ -335,7 +335,7 @@ export default {
   pwcheck_upper: "최소 하나의 대문자가 포함되여야 합니다.",
   pwcheck_lower: "최소 하나의 소문자가 포함되여야 합니다.",
   pwcheck_number: "최소 하나의 숫자가 포함되여야 합니다.",
-  invitor: "추천인번호",
+  invitor: "추천인번호(선택)",
   invitor_ph: "추천인번호 입력(선택)",
   agreement: "나는 이미 읽고 동의했다 <a href=\"%{agreement}\" target=\"_blank\">서비스 조항</a> <a href=\"%{privacyPolicy}\" target=\"_blank\">프라이버시 프로토콜</a>",
   signup_submit: "가입",
