@@ -24,7 +24,7 @@ export const state = {
     android: 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk',
     // ios: 'https://ssfdld.com?onpYQ',
     // ios: 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist',
-    ios: 'https://bnyo.nywdo.com/onpYQ.html'
+    ios: 'https://zz.zzkdp.com/onpYQ.html'
   },
   assets: {
     ready: false,
