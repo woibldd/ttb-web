@@ -48,19 +48,19 @@ const utils = {
   },
   getDefaultLang() {
     // return 'zh-CN'
-    const lang = navigator.language
-    if (/^en(-|$)/.test(lang)) {
-      return 'en'
-    }
-    if (/^zh(-|$)/.test(lang)) {
-      return 'zh-CN'
-    }
-    if (/^ko(-|$)/.test(lang)) {
-      return 'ko'
-    }
-    if (/^zh-(HK|TW)/.test(lang)) {
-      return 'zh-HK'
-    }
+    // const lang = navigator.language
+    // if (/^en(-|$)/.test(lang)) {
+    //   return 'en'
+    // }
+    // if (/^zh(-|$)/.test(lang)) {
+    //   return 'zh-CN'
+    // }
+    // if (/^ko(-|$)/.test(lang)) {
+    //   return 'ko'
+    // }
+    // if (/^zh-(HK|TW)/.test(lang)) {
+    //   return 'zh-HK'
+    // }
     return 'en'
   },
   getGtLang(locale) {
