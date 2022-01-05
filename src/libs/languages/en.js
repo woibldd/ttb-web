@@ -2538,7 +2538,7 @@ export default {
     },
     footer: {
       affiliate: "",
-      explain: "",
+      explain: "IXX Exchange is the world's first digital asset trading community. It is committed to realise the ideal utopia nation of blockchain trading ecology and to create an exchange for everyone. I am for everyone, and everyone is for me.  All contributors can share the fruitful outcome from developments of the exchange。",
       footer_contract_desc: "Official Wechat",
       information:"Industrial News",
       component_address: 'Office Address: Venture Drive #13-03 Vision Exchange Singapore 608526'
