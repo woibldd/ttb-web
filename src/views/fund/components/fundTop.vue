@@ -118,7 +118,13 @@ export default {
           let totalbtcValue = this.$big(0)
           let totalusdValue = this.$big(0) 
           mylist[key].map(item => { 
-            let usdValue = myrates[item.currency] ? this.$big(item.available).times(myrates[item.currency]['USD']) : 0
+            let account = item.available
+            if (key==='wallet') {
+              account = this.$big(item.available).plus(item.withdrawing)
+            } else if (key === 'balance') {
+              account = this.$big(item.available).plus(item.ordering)
+            }
+            let usdValue = myrates[item.currency] ? this.$big(account).times(myrates[item.currency]['USD']) : 0
             totalusdValue = totalusdValue.plus(usdValue)  
             // console.log({key, currency:item.currency, available:item.available, BTC:+btcValue, total: +totalbtcValue}) 
           })  
@@ -127,11 +133,7 @@ export default {
             usdValue: +totalusdValue,
             btcValue: +totalbtcValue, 
           }   
-        })
-        // state.fund.valueList = list
-        // this.$set(this, 'accountList', list ) 
-        // this.accountList = list
-
+        }) 
       } 
     },
     handleCommand(command) {
