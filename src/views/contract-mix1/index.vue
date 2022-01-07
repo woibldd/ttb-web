@@ -253,8 +253,24 @@
                 <div class="delegate-list"
                     v-loading="!delegateData"
                     element-loading-background="rgba(0, 0, 0, 0.3)"> 
-                    <div class="title-delegate">{{$t('contract_block_orderbook')}}</div>
-                    <orderBook2
+                    <div class="title-delegate" flex="main:justify"> 
+                      <span class="l">
+                        <label >{{$t('contract_block_orderbook')}}</label>
+                        <!-- <span @click="setMode('both')">
+                          <icon name="orderbook-all" class="ml-10" :class="{active: state.mix.orderbookMode === 'both'}"></icon>
+                        </span>
+                        <span @click="setMode('bid')">
+                          <icon name="orderbook-green" class="ml-10" :class="{active: state.mix.orderbookMode === 'bid'}"></icon> 
+                        </span>
+                        <span @click="setMode('ask')">
+                          <icon name="orderbook-red" class="ml-10" :class="{active: state.mix.orderbookMode === 'ask'}"></icon> 
+                        </span>  -->
+                      </span>
+                      <span class="r"> 
+                        <!-- <span class="pointer">{{currentDeep}} <icon name="arrow-down"></icon></span> --> 
+                      </span> 
+                    </div>
+                    <orderBook2 
                       ref="orderBook2"
                       @changeDeep="changeDeep"
                       :active-product="activeProduct"
@@ -1350,6 +1366,9 @@ export default {
     })
   },
   methods: {   
+    setMode (mode) {
+      this.state.mix.orderbookMode = mode
+    },
     filterPair() {
 
     },
@@ -2330,6 +2349,12 @@ export default {
       border-bottom: 2px solid $--contract-table-bd;
       text-align: left;
       font-size: 12px;
+      .iconfont {
+        opacity: 0.5;
+        &.active {
+          opacity: 1;
+        }
+      }
     }
     .content-header {
       height: 32px;

@@ -23,15 +23,15 @@ if (process.env.NODE_ENV != 'development') {
   }
 }
 if (process.env.NODE_ENV === 'development') {
-  // wsUrl = 'wss://ws.ixweb.pro/v1/'
-  // quoteUrl = 'https://q.ixweb.pro/v1/'
-  // wssUrl = 'wss://wss.ixweb.pro/v1' 
+  wsUrl = 'wss://ws.ixweb.pro/v1/'
+  quoteUrl = 'https://q.ixweb.pro/v1/'
+  wssUrl = 'wss://wss.ixweb.pro/v1' 
   // wsUrl = 'wss://ws.cloudservicex.com/v1/'
   // quoteUrl = 'https://q.cloudservicex.com/v1/'
   // wssUrl = 'wss://wss.cloudservicex.com/v1'
-  wsUrl = 'wss://ws.qimenpaipan.com/v1/'
-  quoteUrl = 'https://q.qimenpaipan.com/v1/'
-  wssUrl = 'wss://wss.qimenpaipan.com/v1' 
+  // wsUrl = 'wss://ws.qimenpaipan.com/v1/'
+  // quoteUrl = 'https://q.qimenpaipan.com/v1/'
+  // wssUrl = 'wss://wss.qimenpaipan.com/v1' 
 } else if (process.env.NODE_ENV === 'beta') {
   wsUrl = ws
   quoteUrl = quote

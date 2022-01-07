@@ -57,6 +57,7 @@ export const state = {
     activityList: []
   },
   ct: {
+    orderbookMode: 'both',
     pair: '',
     lastPrice: 0,
     bid: 0,
@@ -88,12 +89,14 @@ export const state = {
     userSetting: {}
   },
   unit: {
+    orderbookMode: 'both',
     pair: '',
     symbol: '',
     symbolInfoList: [],
     pairList: []
   },
   mix: {
+    orderbookMode: 'both',
     pair: '',
     symbol: 'MIX_METH',
     symbolInfoList: [],

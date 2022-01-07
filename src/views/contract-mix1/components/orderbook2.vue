@@ -20,6 +20,7 @@
         <div
           class="side-wrap ask"
           :style="askStyle"
+          v-if="mode!='bid'"
         >
           <table class="table table-asks" :class="[state.skin]">
             <!-- <tbody v-if="state.ct.pairInfo"> -->
@@ -77,7 +78,8 @@
         </div>
         <div
           class="side-wrap bid"
-          :style="bidStyle">
+          :style="bidStyle"
+          v-if="mode!='ask'">
           <table class="table table-bids" :class="[state.skin]">
             <!-- <tbody v-if="state.ct.pairInfo"> -->
             <tbody>
@@ -117,7 +119,6 @@ import _ from 'lodash'
 import OrderbookItem from './orderbookItem'
 import service from '@/modules/service'
 // import stateMixins from './stateComputedMixins'
-
 // import dealSocketMixins from '@/mixins/deal-socket-mixins'
 
 export default {
@@ -212,9 +213,17 @@ export default {
       async handler (data) {
         this.changeDepthNumber(data)
       }
+    },
+    mode() {
+      if (this.mode==='both') { 
+        this.returnToDefault() 
+      }
     }
   },
   computed: {
+    mode() {
+      return state.mix.orderbookMode
+    },
     // spread () {
     //   if (this.state.ct.ask && this.state.ct.ask > 0) {
     //     return this.state.ct.ask.minus(this.state.ct.bid).div(this.state.ct.ask)
@@ -494,7 +503,9 @@ export default {
     },
     returnToDefault () {
       // const singleSideLength = 7 
-      this.$refs['body'].scrollTop = (this.asks && this.asks.length) ? (this.asks.length - this.singleSideLength) * 20 : 300
+      this.$nextTick(() => {
+        this.$refs['body'].scrollTop = (this.asks && this.asks.length) ? (this.asks.length - this.singleSideLength) * 20 : 300
+      })
     }
   },
   created () {
