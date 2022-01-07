@@ -25,6 +25,7 @@
           <el-tab-pane :label="$t('pair_list_main')" name="main"/>
           <el-tab-pane label="Meme" name="Meme"/>
           <el-tab-pane label="GameFi" name="GameFi"/>
+          <el-tab-pane label="Layer2" name="Layer2"/>
           <el-tab-pane label="DeFi" name="DeFi"/>
           <el-tab-pane label="NFT" name="NFT"/>
           <el-tab-pane :label="$t('pair_list_new')" name="new"/>

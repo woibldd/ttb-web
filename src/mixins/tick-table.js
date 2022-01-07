@@ -20,9 +20,9 @@ export default {
     }
   },
   computed: {
-    tabSelected() {
-      return state.tabSelected
-    },
+    // tabSelected() {
+    //   return state.tabSelected
+    // },
     errmsg() {
       if (this.loading || this.err) {
         return ''
@@ -113,6 +113,13 @@ export default {
         let arr = _.filter(list, pair => {
           return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
               && pair.type === 9
+        })
+        arr = _.sortBy(arr, ['rank'])
+        return arr 
+      } else if (this.tabSelected === 'Layer2') {
+        let arr = _.filter(list, pair => {
+          return pair.name.toUpperCase().indexOf(this.search.toUpperCase()) > -1 
+              && pair.type === 11
         })
         arr = _.sortBy(arr, ['rank'])
         return arr 
