@@ -10,15 +10,15 @@
         </div>
         <div class="register-content">
           <el-menu :default-active="by" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-            <el-menu-item index="phone">
-              <router-link
-                class="by-link ibt"
-                to="phone">{{ $t('customer.registerByPhone') }}</router-link>  
-            </el-menu-item> 
             <el-menu-item index="email" >
               <router-link
                 class="by-link ibt"
                 to="email">{{ $t('customer.registerByEmail') }}</router-link>
+            </el-menu-item> 
+            <el-menu-item index="phone">
+              <router-link
+                class="by-link ibt"
+                to="phone">{{ $t('customer.registerByPhone') }}</router-link>  
             </el-menu-item> 
           </el-menu> 
           <el-form :model="form" ref="form" :rules="validateRules" class="mt-20">
@@ -205,10 +205,10 @@ export default {
       // 密码强度校验结果
       pwCheckList: pwChecker.getState(''),
       selectRegion: {
-        "id": 86,
-        "name": "CN",
-        "fullname": "China",
-        "cname": "中国"
+        "id": 376,
+        "name": "AD",
+        "fullname": "Andorra",
+        "cname": "安道尔共和国"
       },
       form: { 
         phone: '',
@@ -309,7 +309,7 @@ export default {
     next({
       name: 'login2By',
       params: {
-        by: 'phone'
+        by: 'email'
       },
       query: to.query
     })
@@ -501,7 +501,8 @@ export default {
   async created() {
     const res = await service.getRegionList()
     if (!res.code) {
-      this.regionOptions = res.data
+      let data = res.data.filter(item => item.id !== 86)
+      this.regionOptions = data
     }
     // if (state.locale === 'zh-CN') {
     //   this.regionId = 86

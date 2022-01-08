@@ -56,7 +56,7 @@
     data () {
       return {
         state,
-        regionId: '86',
+        regionId: '376',
         phone: '',
         code: '',
         regionOptions: [],

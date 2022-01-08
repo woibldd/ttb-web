@@ -57,15 +57,15 @@
         </div>
         <div class="register-content"> 
           <el-menu :default-active="by" class="el-menu-demo" mode="horizontal" @select="handleSelect"> 
-            <el-menu-item index="phone">
-              <router-link
-                class="by-link ibt"
-                to="phone">{{ $t('customer.loginByPhone') }}</router-link>  
-            </el-menu-item> 
             <el-menu-item index="email" >
               <router-link
                 class="by-link ibt"
                 to="email">{{ $t('customer.loginByEmail') }}</router-link>
+            </el-menu-item> 
+            <el-menu-item index="phone">
+              <router-link
+                class="by-link ibt"
+                to="phone">{{ $t('customer.loginByPhone') }}</router-link>  
             </el-menu-item> 
           </el-menu> 
           <el-form :model="form" ref="form" :rules="validateRules"  class="mt-20">
@@ -226,17 +226,17 @@ export default {
     return {
       state,
       loginType: 'password',
-      by: 'phone', 
+      by: 'email', 
       pwdType: 'password', //密码输入框状态
       step: 1, 
       verify_phone: '',
       verify_email: '',
       verify_google: '', 
       selectRegion: {
-        "id": 86,
-        "name": "CN",
-        "fullname": "China",
-        "cname": "中国"
+        "id": 376,
+        "name": "AD",
+        "fullname": "Andorra",
+        "cname": "安道尔共和国"
       },
       regionOptions: [],
       form: { 
