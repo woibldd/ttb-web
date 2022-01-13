@@ -600,3 +600,16 @@ strong{font-weight: bold;}
   background-color: $primary;
   width: 2px;
 } 
+
+.ix-scroll-body {
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: block;
+    width: 2px;
+    height: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $scrollbar;
+    border: none;
+  }
+}

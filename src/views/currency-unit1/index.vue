@@ -46,24 +46,26 @@
                             </el-col>
                           </el-row>
                         </div>
-                        <div v-for="(item, idx) in unitShowList" :key="idx" class="drop-item">  
-                          <div 
-                            :class="[{'router-link-exact-active': item.symbol===state.unit.pair}, 'link']"
-                            @click="handleProductsChange(item)">
-                            <el-row >
-                              <el-col :span="10" class="label pl-10"><span class="currency">{{item.currency}}</span><span class="product">/USD</span> </el-col>
-                              <el-col 
-                                :class="[(item.UNIT || {}).increment_24h > 0?'text-success':'text-danger']"
-                                :span="8">
-                                {{`₮${+(item.UNIT || {}).current}`}}
-                              </el-col>
-                              <el-col 
-                                :class="[(item.UNIT || {}).increment_24h > 0?'text-success':'text-danger', 'txr', ' pr-10']"
-                                :span="6" >
-                                {{+(item.UNIT || {}).change_24h > 0 ? '+' : ''}}{{(item.UNIT || {}).change_24h || 0 | round(2)}}%
-                              </el-col>
-                            </el-row> 
-                          </div> 
+                        <div class="ix-scroll-body" style="max-height: 250px;"> 
+                          <div v-for="(item, idx) in unitShowList" :key="idx" class="drop-item">  
+                            <div 
+                              :class="[{'router-link-exact-active': item.symbol===state.unit.pair}, 'link']"
+                              @click="handleProductsChange(item)">
+                              <el-row >
+                                <el-col :span="10" class="label pl-10"><span class="currency">{{item.currency}}</span><span class="product">/USD</span> </el-col>
+                                <el-col 
+                                  :class="[(item.UNIT || {}).increment_24h > 0?'text-success':'text-danger']"
+                                  :span="8">
+                                  {{`₮${+(item.UNIT || {}).current}`}}
+                                </el-col>
+                                <el-col 
+                                  :class="[(item.UNIT || {}).increment_24h > 0?'text-success':'text-danger', 'txr', ' pr-10']"
+                                  :span="6" >
+                                  {{+(item.UNIT || {}).change_24h > 0 ? '+' : ''}}{{(item.UNIT || {}).change_24h || 0 | round(2)}}%
+                                </el-col>
+                              </el-row> 
+                            </div> 
+                          </div>
                         </div>
                       </div>
                       <span slot="reference"><label class="f20 bold">{{ activeProduct.currency }}/USD <icon name="arrow-down" /> </label> </span>

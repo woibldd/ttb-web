@@ -57,7 +57,7 @@
                             </el-col>
                           </el-row>
                         </div>
-                        <div style="max-height: 250px;overflow-y: auto;"> 
+                        <div class="ix-scroll-body" style="max-height: 250px;"> 
                           <div v-for="(item, idx) in mixShowList" :key="idx" class="drop-item">  
                             <div 
                               :class="[{'router-link-exact-active': item.symbol===state.mix.pair}, 'link']"
@@ -253,10 +253,10 @@
                 <div class="delegate-list"
                     v-loading="!delegateData"
                     element-loading-background="rgba(0, 0, 0, 0.3)"> 
-                    <div class="title-delegate" flex="main:justify"> 
+                    <!-- <div class="title-delegate" flex="main:justify"> 
                       <span class="l">
                         <label >{{$t('contract_block_orderbook')}}</label>
-                        <!-- <span @click="setMode('both')">
+                        <span @click="setMode('both')">
                           <icon name="orderbook-all" class="ml-10" :class="{active: state.mix.orderbookMode === 'both'}"></icon>
                         </span>
                         <span @click="setMode('bid')">
@@ -264,12 +264,9 @@
                         </span>
                         <span @click="setMode('ask')">
                           <icon name="orderbook-red" class="ml-10" :class="{active: state.mix.orderbookMode === 'ask'}"></icon> 
-                        </span>  -->
-                      </span>
-                      <span class="r"> 
-                        <!-- <span class="pointer">{{currentDeep}} <icon name="arrow-down"></icon></span> --> 
+                        </span> 
                       </span> 
-                    </div>
+                    </div> -->
                     <orderBook2 
                       ref="orderBook2"
                       @changeDeep="changeDeep"
@@ -1468,7 +1465,7 @@ export default {
           that.socket.socket.send('{"op":"subscribe","args":["trigger"]}')
         }
         if (this.activeProduct && this.activeProduct.product && this.activeProduct.currency) {
-          that.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.activeProduct.symbol}@${this.dataDeep}@1@10"]}`)
+          that.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.activeProduct.symbol}@${this.dataDeep}@1@20"]}`)
           that.socket.socket.send(`{"op":"subscribepub","args":["deal@${this.activeProduct.symbol}"]}`)
         }
       })
@@ -1512,8 +1509,8 @@ export default {
       let orgDeep = this.dataDeep
       this.dataDeep = e.accuracy
       if (this.activeProduct && this.socket) { 
-        this.socket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${this.activeProduct.symbol}@${orgDeep}@1@10"]}`)
-        this.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.activeProduct.symbol}@${this.dataDeep}@1@10"]}`) 
+        this.socket.socket.send(`{"op":"unsubscribepub","args":["orderbook@${this.activeProduct.symbol}@${orgDeep}@1@20"]}`)
+        this.socket.socket.send(`{"op":"subscribepub","args":["orderbook@${this.activeProduct.symbol}@${this.dataDeep}@1@20"]}`) 
       }
     },
     totalValue () {
@@ -2348,13 +2345,7 @@ export default {
       padding: 6px 13px;
       border-bottom: 2px solid $--contract-table-bd;
       text-align: left;
-      font-size: 12px;
-      .iconfont {
-        opacity: 0.5;
-        &.active {
-          opacity: 1;
-        }
-      }
+      font-size: 12px; 
     }
     .content-header {
       height: 32px;

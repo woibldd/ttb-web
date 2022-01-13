@@ -1,6 +1,40 @@
 <template>
   <div class="orderbook-container" :style="{height: panelHeight + 'px'}">
     <div class="ix-pannel flex "> 
+      <div class="ix-header pl-12" :style="{height: navHeight + 'px', lineHeight: navHeight + 'px'}" flex="main:justify" :skin="state.skin">
+        <div  class=" mr-20" flex="main:left">
+          {{$t('contract_block_orderbook')}}
+          <orderbook-nav :height="navHeight" />
+        </div>
+        <!-- 深度选择 -->
+        <div
+          class="depth-group-display relative pointer pull-right"
+          :skin="state.skin"
+          @mouseover="showDepthOption = true"
+          @click.prevent.stop="toggleSetting"
+          @mouseout="showDepthOption = false">
+          <span
+            class="ibt depth">
+            <span class="dib mr-5">{{ $t('orderbook_depth_group') }}</span>{{ currentDepth }} 
+            <icon
+              name="arrow-down-blue"
+              :class="[showDepthOption && 'up']"
+              class="arrow-down-blue"/>
+          </span>
+          <div
+            class="depth-options-wrapper"
+            :skin="state.skin"
+            v-show="showDepthOption">
+            <div class="depth-options">
+              <div
+                v-for="(dp, index) in depthGroup"
+                @click="changeDepth(dp)"
+                :key="index"
+                class="depth__row">{{ dp.offset }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div
         class="ix-panel-thead">
         <div class="table table-ix-orderbook" :style="{height: theadHeight + 'px'}" >
@@ -118,6 +152,7 @@ import utils from '@/modules/utils'
 import _ from 'lodash'
 import OrderbookItem from './orderbookItem'
 import service from '@/modules/service'
+import OrderbookNav from './orderbook-nav'
 // import stateMixins from './stateComputedMixins'
 // import dealSocketMixins from '@/mixins/deal-socket-mixins'
 
@@ -125,7 +160,8 @@ export default {
   // mixins: [stateMixins],
   name: 'OrderBook',
   components: {
-    OrderbookItem
+    OrderbookItem,
+    OrderbookNav
   },
   data () {
     const vm = this
@@ -143,11 +179,11 @@ export default {
       offset: 0,
       deepthData: {},
       accuracy: 1,
-      itemHeight: 19,
-      navHeight: 32,
+      itemHeight: 23,
+      navHeight: 38,
       splitHeight: 50,
       theadHeight: 35,
-      panelHeight: 323, 
+      panelHeight: 361, 
       loading: false,
       changing: false,
       clearTip: {
@@ -192,7 +228,7 @@ export default {
     // 单边显示长度
     singleSideLength: {
       type: [Number, String],
-      default: () => 6
+      default: () => 5
     } 
   },
   watch: {
@@ -384,8 +420,8 @@ export default {
       })
       // console.log(asks,asks)
       let asksRepair = []
-      if (asks.length < 10) {
-        for (var i = 0; i < (10 - asks.length); i++) {
+      if (asks.length < 20) {
+        for (var i = 0; i < (20 - asks.length); i++) {
           asksRepair.push({})
         }
         asksRepair = asksRepair.concat(asks)
@@ -419,7 +455,7 @@ export default {
         pair: this.pair,
         offset: this.offset,
         accuracy: this.accuracy,
-        size: 10
+        size: 20
       })
       if (fetchId !== this.pair + this.offset + this.accuracy) {
         return false
@@ -478,11 +514,11 @@ export default {
       // const singleSideLength = 12.5
       // mode === 'both'
       this.$nextTick(() => {
-        this.$refs['body'].scrollTop = (this.asks && this.asks.length) ? (this.asks.length - this.singleSideLength) * 20 : 300
+        this.$refs['body'].scrollTop = (this.asks && this.asks.length) ? (this.asks.length - this.singleSideLength) * (this.itemHeight + 1) : 300
       })
       // 数据更新不及时可能会带来问题
       setTimeout(() => {
-        this.$refs['body'].scrollTop = (this.asks && this.asks.length) ? (this.asks.length - this.singleSideLength) * 20 : 300
+        this.$refs['body'].scrollTop = (this.asks && this.asks.length) ? (this.asks.length - this.singleSideLength) * (this.itemHeight + 1) : 300
       }, 300)
     },
     jumpToHistory () {
@@ -504,7 +540,7 @@ export default {
     returnToDefault () {
       // const singleSideLength = 7 
       this.$nextTick(() => {
-        this.$refs['body'].scrollTop = (this.asks && this.asks.length) ? (this.asks.length - this.singleSideLength) * 20 : 300
+        this.$refs['body'].scrollTop = (this.asks && this.asks.length) ? (this.asks.length - this.singleSideLength) * (this.itemHeight + 1) : 300
       })
     }
   },
@@ -613,21 +649,40 @@ export default {
 }
 .ix-header {
   background-color: $nav;
+  white-space: nowrap;
   height: 32px;
   line-height: 32px;
   box-sizing: border-box;
-  color: $--contract-pannel-header;
-  font-size: 0;
+  background-color: #fff;
+  color: $--ix-header-color; 
+  border-bottom: 2px solid $--contract-table-bd;
+  text-align: left;
+  font-size: 12px;
+  .iconfont {
+    font-size: 10px;
+    opacity: 0.5;
+    &.active {
+      opacity: 1;
+    }
+  }
+  &[skin~="dark"] {
+    background-color: $--ix-header-bg2; 
+    color: $--ix-header-color2; 
+    border-bottom-color: $contract-bg2;
+  } 
 }
-.depth-group-display {
+.depth-group-display { 
   font-size: 12px;
-  margin-right: 18px;
-  color: $--contract-pannel-header;
+  margin-right: 6px;
+  width: 102px;
+  color: #3f475a;
   font-size: 12px;
-  text-align: right;
-
+  text-align: right; 
   .depth {
     @include limit(1);
+  }
+  &[skin~="dark"] {
+    color:#acacac;
   }
 }
 .arrow-down-yellow {

@@ -45,45 +45,50 @@
           <sort color="#01CED1"  :sort="sort" :label="$t('pairnav_vol')" :state="stateSortBy('vol')"/>
         </div>
       </div>
-      <ul v-show="sortedList.length" :style="{'max-height': height}" class="ul ix-pair-body tbody">
-        <li
-          v-for="(pair,index) in sortedList"
-          :class="{cur: pair.name === state.pro.pair}"
-          :key="pair.id"
-          class="tr"
-          :skin="state.skin"
-          @click="setPair(pair)"
-        >
-          <template v-if="!pair.CUSTOM">
-            <div class="td pair">
-              <span class="row__item percent5" @click.stop="collection(pair)">
-                <icon v-show="pair.like" name="sc-x"/>
-                <icon v-show="!pair.like" name="sc-w"/>
-              </span>
-              {{ pair.product_name }}/{{ pair.currency_name }}
-              <icon v-show="index < 4 && tabSelected==='new' " name="hot-red"/>
-            </div>
-            <div class="td price">
-              <span v-if="pair.tick">{{ pair.tick.current | fixed(pair.price_scale) }}</span>
-              <span v-else>...</span>
-            </div>
-            <div
-              :class="{'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}"
-              class="td delta"
+      <div >
+        <!-- <happy-scroll color="rgba(0,0,0,0.5)" size="5" > -->
+          <ul v-show="sortedList.length" :style="{'max-height': height}"   class="ul ix-pair-body ix-scroll-body tbody">
+            <li
+              v-for="(pair,index) in sortedList"
+              :class="{cur: pair.name === state.pro.pair}"
+              :key="pair.id"
+              class="tr"
+              :skin="state.skin"
+              @click="setPair(pair)"
             >
-              <span
-                v-if="pair.tick"
-              >{{ (getDelta(pair.tick) > 0) ? '+' : '' }}{{ getDelta(pair.tick) }}%</span>
-              <span v-else>...</span>
-            </div>
-            <div class="td vol">
-              <span v-if="pair.tick">{{ pretty(pair.tick.volume_24h) }}</span>
-              <span v-else>...</span>
-            </div>
-          </template>
-          <div v-if="pair.CUSTOM" v-cloak class="td custom-title">{{ pair.type === '2' ? $t('pair_list_new') : $t('pair_list_ST') }}</div>
-        </li>
-      </ul>
+              <template v-if="!pair.CUSTOM"> 
+                <div class="td pair">
+                  <span class="row__item percent5" @click.stop="collection(pair)">
+                    <icon v-show="pair.like" name="sc-x"/>
+                    <icon v-show="!pair.like" name="sc-w"/>
+                  </span>
+                  {{ pair.product_name }}/{{ pair.currency_name }}
+                  <icon v-show="index < 4 && tabSelected==='new' " name="hot-red"/>
+                </div>
+                <div class="td price">
+                  <span v-if="pair.tick">{{ pair.tick.current | fixed(pair.price_scale) }}</span>
+                  <span v-else>...</span>
+                </div>
+                <div
+                  :class="{'color-up': getDelta(pair.tick) > 0, 'color-down': getDelta(pair.tick) < 0}"
+                  class="td delta"
+                >
+                  <span
+                    v-if="pair.tick"
+                  >{{ (getDelta(pair.tick) > 0) ? '+' : '' }}{{ getDelta(pair.tick) }}%</span>
+                  <span v-else>...</span>
+                </div>
+                <div class="td vol">
+                  <span v-if="pair.tick">{{ pretty(pair.tick.volume_24h) }}</span>
+                  <span v-else>...</span>
+                </div>
+              </template>
+              <div v-if="pair.CUSTOM" v-cloak class="td custom-title">{{ pair.type === '2' ? $t('pair_list_new') : $t('pair_list_ST') }}</div>
+            </li>
+          </ul>
+        <!-- </happy-scroll> -->
+        
+      </div>
       <div v-show="!sortedList.length && tabSelected==='like'" class="ix-pair-empty">  
         <div class="mt-30">
           <img src="~@/assets/empty.png" alt="" srcset="">
@@ -434,10 +439,9 @@ export default {
     &::after {  
         background: $--ix-header-bg2; 
     } 
-  }
+  } 
 }
 .ix-pair-body {
-  overflow-y: auto;
   .tr {
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;

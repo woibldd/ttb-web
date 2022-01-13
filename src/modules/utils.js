@@ -423,6 +423,9 @@ const utils = {
     return Big(num).toString()
   },
   toPretty(num) {
+    if (isNaN(num)) {
+      return ''
+    }
     num = Big(num || 0)
     Big.RM = 0 // rm = 0,向下截取
     if (num < 100) {

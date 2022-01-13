@@ -18,6 +18,7 @@ import zhCNLocale from 'element-ui/lib/locale/lang/zh-CN'
 import eventHub from '@/modules/eventHub'
 import VTooltip from 'v-tooltip'
 import qs from 'querystring'
+ 
 // import * as Sentry from '@sentry/browser'
 import 'babel-polyfill'
 import './assets/scss/index.scss'
@@ -47,7 +48,7 @@ utils.$i18n = new VueI18n({
 // import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ELEMENT,{
   i18n: (key, value) => utils.$i18n.t(key, value)
-})
+}) 
 
 // import {
 //   Select,
