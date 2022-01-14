@@ -199,7 +199,7 @@
               </div>
             </div>
             <div class="x-col ml-4" > 
-              <div class="r1-c3-r1" style="width: 250px;" flex-box="0">
+              <div class="r1-c3-r1" style="width: 480px;" flex-box="0">
                 <!-- <el-tabs v-model="selectOrderList"  >
                   <el-tab-pane :label="$t('contract_block_orderbook')" name="delegate"> 
                     <order-book :deepthData="delegateData"/>

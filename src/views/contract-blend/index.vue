@@ -235,7 +235,7 @@
                 </div> 
               </div>
             </div>
-            <div class="r1-c2-list" style="width: 250px;" flex-box="0"> 
+            <div class="r1-c2-list" style="width: 480px;" flex-box="0"> 
               <div class=""> 
                 <div class="delegate-list"
                     v-loading="!delegateData"

@@ -46,7 +46,7 @@
                             </el-col>
                           </el-row>
                         </div>
-                        <div class="ix-scroll-body" style="max-height: 250px;"> 
+                        <div class="ix-scroll-body" style="max-height: 480px;"> 
                           <div v-for="(item, idx) in unitShowList" :key="idx" class="drop-item">  
                             <div 
                               :class="[{'router-link-exact-active': item.symbol===state.unit.pair}, 'link']"

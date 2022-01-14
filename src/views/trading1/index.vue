@@ -389,6 +389,7 @@ export default {
       // console.log('handleTickers') 
     },
     handleDealSoket(data) { 
+      console.log(data)
       this.dealData = data
     }, 
     subMarket() {    

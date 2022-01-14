@@ -428,6 +428,9 @@ const utils = {
     }
     num = Big(num || 0)
     Big.RM = 0 // rm = 0,向下截取
+    if (num < 1) {
+      return num.toString()
+    }
     if (num < 100) {
       // return num.toFixed(2)
       return num.round(3, 0).toFixed(3)
