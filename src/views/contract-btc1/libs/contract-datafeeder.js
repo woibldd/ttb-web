@@ -54,7 +54,7 @@ export default {
     let product
     let currency
     // @check
-    const match = name.match(/([A-Za-zz0-9]*)[/_]([A-Za-zz0-9]*)$/)
+    const match = name.match(/([A-Za-z0-9]*)[/_]([A-Za-z0-9]*)$/)
     if (match) {
       product = match[1]
       currency = match[2]

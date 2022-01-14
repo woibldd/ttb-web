@@ -10,7 +10,7 @@
         </span>
         <input
           ref="input"
-          :placeholder="$t('searchxx')"
+          :placeholder="$t('searchxxxxx')"
           v-model="search"
           type="text"
           class="input search-input"
@@ -68,7 +68,7 @@
           class="tr"
           @click="setPair(pair)">
           <template v-if="!pair.CUSTOM">
-            <div class="td pair">{{ pair.product_name }}/{{ pair.currency_name }}bbb</div>
+            <div class="td pair">{{ pair.product_name }}/{{ pair.currency_name }}</div>
             <div class="td price">
               <span v-if="pair.tick">{{ pair.tick.current | fixed(pair.price_scale) }}</span>
               <span v-else>...</span>
