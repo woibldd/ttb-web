@@ -528,30 +528,28 @@ export default {
       }
     }) 
 
-    await actions.updateSession()
-      console.log('updateSession')
+    await actions.updateSession() 
     document.querySelector('.page-loading').classList.add('show')
+    const res = await service.getContractSymList()
+    if (res.code) {
+      return utils.alert(res.message)
+    }
+    // 保存所有币对的基本信息
+    this.state.ct.pairInfoList = {}
+    res.data.items.forEach(element => {
+      this.state.ct.pairInfoList[element.name] = element
+    })
     if (!this.$route.query.pair) {
-      const res = await service.getContractSymList()
-      if (res.code) {
-        return utils.alert(res.message)
-      }
       const pair = res.data.items.filter(item => item.name === local.future).length
         ? local.future
         : res.data.items[0].name 
-      // 保存所有币对的基本信息
-      this.state.ct.pairInfoList = {}
-      res.data.items.forEach(element => {
-        this.state.ct.pairInfoList[element.name] = element
-      })
 
       this.$router.replace({ 
         query: {
           pair: pair
         }
       })
-    } else {  
-      console.log('ppppppppppppppppinfores')
+    } else {   
       // const infores = await service.getContractSymInfo({ symbol: this.$route.query.pair })
       //  if (!infores.code) {  
       //   Object.assign(this.state.ct.pairInfo, resp.data) 
@@ -724,7 +722,7 @@ export default {
         symbol: this.state.ct.pair
       })
       if (!resp.code) {
-        Object.assign(this.state.ct.pairInfo, resp.data)
+        Object.assign(this.state.ct.pairInfo, resp.data) 
       }
     },
     checkActiveContract() {

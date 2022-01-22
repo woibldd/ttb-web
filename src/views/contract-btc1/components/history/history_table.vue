@@ -357,7 +357,7 @@
           >{{ $t('contract_reload') }}</a>
         </div>
       </div>
-    </div> 
+    </div>  
   </div>
 </template>
 <script>
@@ -418,7 +418,7 @@ export default {
         return dataview
       }
       return []
-    },
+    }, 
     pairInfo () {
       if (this.state.ct.pairInfo) {
         return this.state.ct.pairInfo
