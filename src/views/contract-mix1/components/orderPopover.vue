@@ -88,7 +88,7 @@ export default {
       default: () => ({})
     },
     activeType: {
-      type: Number,
+      type: [Number, String],
       default: 1
     },
     hander: {

@@ -9,7 +9,7 @@ import _ from 'lodash'
 export default {
   props: {
     delta: {
-      type: Number,
+      type: [Number, String],
       defalut: 0
     },
     historyList: {

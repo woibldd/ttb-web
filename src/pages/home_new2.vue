@@ -23,11 +23,11 @@
       </div>
     </div> 
     <div class="ixx-home-items">
-      <div
+      <!-- <div
         :class="{show: loading}"
         class="mask">
         <v-loading/>
-      </div>  
+      </div>   -->
       <!-- 公告 -->
       <div class="home-notice">
         <div  class="home_swiper pt-10">

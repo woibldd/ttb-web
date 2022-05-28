@@ -21,7 +21,7 @@
                   <div >
                     <!-- <span v-if="showSymbolList"><label class="f17">{{ activeProduct.currency }}/USDT</label> </span> -->
                     <el-popover  
-                      :popper-class="[state.skin, 'pd-0']"  
+                      :popper-class="state.skin"  
                       trigger="hover">
                       <div class="drop-down">
                         <div>
@@ -417,7 +417,7 @@
                       :key="key"
                       @click="handleActiveTypeClick(key)"
                       v-tooltip.bottom="{html: true, content: $tR(`mapFormContent.mapBtns.${key}.describe`), classes: 'contract'}"
-                      :class="['menu-box',{active:activeTypesKey === key}]"> 
+                      :class="['menu-box',{active: activeTypesKey === key}]"> 
                       {{ $tR(`mapFormContent.mapOrderTypes.${key}.text`) }}
                     </div> 
                   </div> 
@@ -556,7 +556,7 @@
                       <el-popover
                         :ref="`popover-${key}`"
                         placement="right"
-                        :popper-class="[`contrat-popper-${key === 'buy'?'success':'danger'}-class`, state.skin]"
+                        :popper-class=" state.skin"
                         width="400"
                         trigger="click"
                         :disabled="popoverDisabled"
@@ -1539,6 +1539,7 @@ export default {
     handleOrderbookSoket (data, topic) {   
       if (topic.indexOf(this.activeProduct.symbol) > 0) {
         this.delegateData = data
+        console.log( this.delegateData)
         if (!this._scrolled) {
           this.$nextTick(() => {
             this.dataLoaded()
