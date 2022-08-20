@@ -112,7 +112,7 @@ export default {
         overflow: hidden;
         text-align: center;
         border-bottom: 1px solid #eee;
-        color: #01CED1;
+        color: #F5C109;
         font-size: .96rem;
       }
       em {
@@ -135,7 +135,7 @@ export default {
           left: 0;
           top: 50%;
           transform: translateY(-50%);
-          background: #01CED1;
+          background: #F5C109;
           width: 6px;
           height: 12px;
         }
@@ -158,7 +158,7 @@ export default {
         height: 48px;
         margin: 10px auto;
         line-height: 48px;
-        background:#01CED1;
+        background:#F5C109;
         border-radius:4px;
         color: #fff;
         text-align: center;

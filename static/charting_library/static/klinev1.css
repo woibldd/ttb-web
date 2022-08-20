@@ -37,12 +37,12 @@ body {
 }
 .chart-controls-bar-buttons a.active,
 .feature-no-touch .chart-controls-bar-buttons a.active:hover {
-  color: #01CED1;
+  color: #F5C109;
   
 }
 .feature-no-touch .chart-controls-bar-buttons a:not(.disabled):hover {
   background: transparent;
-  color: #01CED1;
+  color: #F5C109;
   
 }
 
@@ -57,7 +57,7 @@ body {
   
 }
 .tv-side-toolbar .button.selected svg {
-  fill: #01CED1;
+  fill: #F5C109;
   
 }
 
@@ -80,7 +80,7 @@ body {
 
 .feature-no-touch .tv-side-toolbar .tools-group .button:hover .main.text-as-icon,
 .tv-side-toolbar .tools-group .button.selected .main.text-as-icon {
-  color: #01CED1;
+  color: #F5C109;
   
 }
 
@@ -125,7 +125,7 @@ body {
 }
 .drawings-popup-list.iconed .item.active svg,
 .drawings-popup-list .item.active svg {
-  fill: #01CED1;
+  fill: #F5C109;
   
 }
 .drawings-popup-list.iconed .item svg,
@@ -141,7 +141,7 @@ body {
 }
 .charts-popup-list.intervals-list .item.active,
 .charts-popup-list .item.active span {
-  color: #01CED1;
+  color: #F5C109;
   
 }
 .charts-popup-list .item.active {
@@ -162,7 +162,7 @@ body {
   
 }
 .feature-no-touch .favored-list .to-quick:hover svg {
-  fill: #01CED1 !important;
+  fill: #F5C109 !important;
   
 }
 
@@ -241,7 +241,7 @@ body {
 }
 .favored-list-container.active span.submenu,
 .favored-list-container span.submenu.active {
-  color: #01CED1;
+  color: #F5C109;
   
   background: #1C2435 !important;
   
@@ -260,11 +260,11 @@ body {
   
 }
 .header-chart-panel .space-single:not(:first-child) .button:hover {
-  color: #01CED1;
+  color: #F5C109;
   opacity: 0.8;
 }
 .header-chart-panel .space-single:not(:first-child) .button.selected {
-  color: #01CED1;
+  color: #F5C109;
   font-weight: bold;
   opacity: 1;
 }
@@ -295,12 +295,12 @@ body {
 .symbol-edit-widget .button.active {
   background: #1C2435 !important;
   
-  color: #01CED1;
+  color: #F5C109;
   
 }
 
 .button.indicators.active svg {
-  fill: #01CED1;
+  fill: #F5C109;
   
 }
 
@@ -309,11 +309,11 @@ body {
   
 }
 .feature-no-touch .pane-legend-icon svg:hover {
-  fill: #01CED1;
+  fill: #F5C109;
   
 }
 .pane-legend-line.disabled .icon-hide svg {
-  fill: #01CED1;
+  fill: #F5C109;
   
 }
 

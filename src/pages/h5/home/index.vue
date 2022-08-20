@@ -344,7 +344,7 @@ export default {
           spacingLeft: 0,
           spacingRight: 0,
         },
-        colors: ["#01CED1"],
+        colors: ["#F5C109"],
         title: {text: ""},
         subtitle: {},
         xAxis: {

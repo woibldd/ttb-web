@@ -105,7 +105,7 @@
                 <li>{{$t('available')}} {{data.usdt_available | number}} USDT <a href="/fund/deposit/USDT" class="text-right">{{$t('TopUp')}}</a></li> 
               </ul>
               <button v-if="isLogin" class="submit" @click="submit">{{$t('RushBuy_text_list_10')}}</button>
-              <router-link v-else :to="'/user/login/email'" style="background:#01CED1;color:#fff;" class="submit">{{$t('signin')}}/{{$t('signup_title')}}</router-link>
+              <router-link v-else :to="'/user/login/email'" style="background:#F5C109;color:#fff;" class="submit">{{$t('signin')}}/{{$t('signup_title')}}</router-link>
           </div>
         </div>
         <!-- <div class="RushBuy-flow">

@@ -608,8 +608,8 @@
   @import './my.scss';
   .title__right{
     &>.active{
-      color: #01CED1 !important;
-      border-color: #01CED1 !important;
+      color: #F5C109 !important;
+      border-color: #F5C109 !important;
     }
   } 
   .gz-wrapper {

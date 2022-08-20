@@ -49,17 +49,17 @@
                 <!-- <el-col :span="1">#</el-col> -->
                 <el-col :span="4"> 
                   <div @click="setTradingSort('product')">
-                    <sort color="#01CED1" :sort="sortTrading" :label="$t('currency')" :state="stateTradingSortBy('product')"/>
+                    <sort color="#F5C109" :sort="sortTrading" :label="$t('currency')" :state="stateTradingSortBy('product')"/>
                   </div>
                 </el-col>
                 <el-col :span="3"> 
                   <div @click="setTradingSort('price')">
-                    <sort color="#01CED1" :sort="sortTrading" :label="$t('market.orderdeal')" :state="stateTradingSortBy('price')"/>
+                    <sort color="#F5C109" :sort="sortTrading" :label="$t('market.orderdeal')" :state="stateTradingSortBy('price')"/>
                   </div>
                 </el-col>
                 <el-col :span="3"> 
                   <div @click="setTradingSort('delta')">
-                    <sort color="#01CED1" :sort="sortTrading" :label="$t('market.h24change')" :state="stateTradingSortBy('delta')"/>
+                    <sort color="#F5C109" :sort="sortTrading" :label="$t('market.h24change')" :state="stateTradingSortBy('delta')"/>
                   </div> 
                 </el-col>
                 <el-col :span="4">{{$t('market.h24trade')}}</el-col>
@@ -108,17 +108,17 @@
                 <el-col :span="3">{{$t('market.h24change')}}</el-col> -->
                 <el-col :span="4"> 
                   <div @click="setMixSort('currency')">
-                    <sort color="#01CED1" :sort="true" :label="$t('currency')" :state="stateMixSortBy('currency')"/>
+                    <sort color="#F5C109" :sort="true" :label="$t('currency')" :state="stateMixSortBy('currency')"/>
                   </div>
                 </el-col>
                 <el-col :span="3"> 
                   <div @click="setMixSort('price')">
-                    <sort color="#01CED1" :sort="true" :label="$t('market.orderdeal')" :state="stateMixSortBy('price')"/>
+                    <sort color="#F5C109" :sort="true" :label="$t('market.orderdeal')" :state="stateMixSortBy('price')"/>
                   </div>
                 </el-col>
                 <el-col :span="3"> 
                   <div @click="setMixSort('delta')">
-                    <sort color="#01CED1" :sort="true" :label="$t('market.h24change')" :state="stateMixSortBy('delta')"/>
+                    <sort color="#F5C109" :sort="true" :label="$t('market.h24change')" :state="stateMixSortBy('delta')"/>
                   </div> 
                 </el-col>
                 <el-col :span="4">{{$t('market.h24trade')}}</el-col>
@@ -167,17 +167,17 @@
               <el-row class="hander mt-10 mb-20"> 
                 <el-col :span="4"> 
                   <div @click="setUnitSort('currency')">
-                    <sort color="#01CED1" :sort="true" :label="$t('currency')" :state="stateUnitSortBy('currency')"/>
+                    <sort color="#F5C109" :sort="true" :label="$t('currency')" :state="stateUnitSortBy('currency')"/>
                   </div>
                 </el-col>
                 <el-col :span="3"> 
                   <div @click="setUnitSort('price')">
-                    <sort color="#01CED1" :sort="true" :label="$t('market.orderdeal')" :state="stateUnitSortBy('price')"/>
+                    <sort color="#F5C109" :sort="true" :label="$t('market.orderdeal')" :state="stateUnitSortBy('price')"/>
                   </div>
                 </el-col>
                 <el-col :span="3"> 
                   <div @click="setUnitSort('delta')">
-                    <sort color="#01CED1" :sort="true" :label="$t('market.h24change')" :state="stateUnitSortBy('delta')"/>
+                    <sort color="#F5C109" :sort="true" :label="$t('market.h24change')" :state="stateUnitSortBy('delta')"/>
                   </div> 
                 </el-col>
                 <el-col :span="4">{{$t('market.h24trade')}}</el-col>

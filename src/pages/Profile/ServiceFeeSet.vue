@@ -131,7 +131,7 @@ export default {
         display: inline-block;
         width:4px;
         height:4px;
-        background:#01CED1;
+        background:#F5C109;
         border-radius:50%;
     }
     .to-history {

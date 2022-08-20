@@ -125,7 +125,7 @@ export default {
   background: rgba(255, 255, 255, .4) !important;
 }
 .swiper-pagination-bullet-active{
-  background: #01CED1 !important;
+  background: #F5C109 !important;
 }
 .swiper-container{
     z-index: 0 !important;

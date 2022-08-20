@@ -36,7 +36,7 @@
       </div>
       <div class="api-tips">
         <div class="api-tips__lead"><span class="dot"/>{{ $t('note') }}</div>
-        <div class="api-tips__row"><span v-html="$t('api_tips_one', {link: apiDoc})"/></div>
+        <!-- <div class="api-tips__row"><span v-html="$t('api_tips_one', {link: apiDoc})"/></div> -->
         <div class="api-tips__row">{{ $t('api_tips_two') }}</div>
         <!-- <div
           class="api-tips__row"

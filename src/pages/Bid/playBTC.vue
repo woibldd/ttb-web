@@ -210,7 +210,7 @@ export default {
         height:42px;
         line-height: 42px;
         text-align: center;
-        background:#01CED1;
+        background:#F5C109;
         border-radius:5px;
         font-weight:400;
         color: #fff;

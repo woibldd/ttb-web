@@ -290,7 +290,7 @@ export default {
               width: 180px;
               height: 180px;
               margin: 0 auto;
-              background: #01ced1;
+              background: #F5C109;
               padding: 10px;
               box-sizing: border-box;
           }
@@ -306,8 +306,8 @@ export default {
           .gt_yz{
               height: 30px;
               line-height: 30px;
-              color: #01ced1;
-              border-bottom: 1px solid #01ced1;
+              color: #F5C109;
+              border-bottom: 1px solid #F5C109;
               margin: 0 auto;
               display: table;
               font-size: 16px;

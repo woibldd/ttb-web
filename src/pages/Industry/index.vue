@@ -261,14 +261,14 @@ export default {
               color: #AFAFAF;
             }
             &:hover {
-              background: #01CED1;
+              background: #F5C109;
               i {
                 color: #fff
               }
             }
           }
           .active {
-            background: #01CED1;
+            background: #F5C109;
             i {
               color: #fff
             }
@@ -301,7 +301,7 @@ export default {
             font-weight: 500;
             margin-bottom: 10px;
             &:hover{
-              color: #01CED1;
+              color: #F5C109;
             }
           }
           p {
@@ -334,7 +334,7 @@ export default {
         float: right;
         margin-bottom: 20px;
         overflow: hidden;
-        color: #01CED1;
+        color: #F5C109;
       }
       .inner {
         width: 332px;

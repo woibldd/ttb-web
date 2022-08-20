@@ -1,8 +1,8 @@
 /* primary */
-$primary: #01CED1; // base -主色
+$primary: #F5C109; // base -主色
 $primary-back: #ffffff;
 $primary-hover: #22CED0; // hover
-$primary-active: #01CED1; // active
+$primary-active: #F5C109; // active
 $primary-disabled: rgba(0,0,0,0.2); // disabled
 $primary-opacity: #293443; // background 交易品种列表选中的背景色，主色25%透明度
 
@@ -13,7 +13,7 @@ $nav-2: #303E4B; // 副导航颜色 -nav-2
 
 /* link */
 $text-link: #00CED2; // base -文字链
-$text-link-hover: #01CED1; // hover
+$text-link-hover: #F5C109; // hover
 $text-link-active: #00CED2; // active
 $text-link-disabled: rgba(0,0,0,0.3); // disabled
 
@@ -76,7 +76,7 @@ $text-weak: #999999; // 重要文字
 $text-normal: #cccccc; // 一般
 
 /* hover */
-$hover-bg: #01CED1; // 首页按钮hover
+$hover-bg: #F5C109; // 首页按钮hover
 $dropdown-bg: rgba(0,0,0,0.1); // 下拉列表hover
 
 /* home header background */
@@ -128,11 +128,11 @@ $font-down: #F45151;
 
 $--font-path: '~element-ui/lib/theme-chalk/fonts'; 
 
-$--color-primary: #01CED1;
+$--color-primary: #F5C109;
 /// color|1|Functional Color|1
 $--color-success: #09C989 !default;
 /// color|1|Functional Color|1
-$--color-warning: #01CED1 !default;
+$--color-warning: #F5C109 !default;
 /// color|1|Functional Color|1
 $--color-danger: #F24E4D !default;
 /// color|1|Functional Color|1 

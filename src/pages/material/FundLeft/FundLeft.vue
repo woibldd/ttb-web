@@ -281,7 +281,7 @@ export default{
 
           &:hover,
           &.active {
-              color: #01CED1;
+              color: #F5C109;
           }
       }
       li {

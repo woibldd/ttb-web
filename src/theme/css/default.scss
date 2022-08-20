@@ -1,8 +1,8 @@
 /* primary */
-$primary: #01CED1; // base -主色
-$primary-back: #ffffff;
-$primary-hover: #22CED0; // hover
-$primary-active: #01CED1; // active
+$primary: #F5C109; // base -主色
+$primary-back: #010101;
+$primary-hover: #F8D147; // hover
+$primary-active: #FFF7E6; // active
 $primary-disabled: rgba(0,0,0,0.2); // disabled
 $nav-white-color: #ffffff;
 $nav-hover-color: #010101;
@@ -15,9 +15,9 @@ $nav: #EDEDED; // 主导航颜色 -nav bg
 $normal-nav: #252838; // 资产个人中心导航颜色 -nav bg
 $nav-2: #303E4B; // 副导航颜色 -nav-2
 
-$text-link: $primary; // base -文字链
-$text-link-hover: $primary; // hover
-$text-link-active: $primary; // active
+$text-link: #F5C109; // base -文字链
+$text-link-hover: #F8D147; // hover
+$text-link-active: #F8D147; // active
 $text-link-disabled: rgba(0,0,0,0.3); // disabled
 
 /* trade */
@@ -78,7 +78,7 @@ $text-weak: #999999; // 重要文字
 $text-normal: #cccccc; // 一般
 $footer-color: #606060;
 /* hover */
-$hover-bg: #01CED1; // 首页按钮hover
+$hover-bg: #F5C109; // 首页按钮hover
 $dropdown-bg: rgba(0,0,0,0.1); // 下拉列表hover
 
 /* home header background */

@@ -532,7 +532,7 @@ export default {
     background-color: rgba(210, 176, 112, 0.1);
     border-radius: 5px;
   } 
-  $primary-color: #01CED1;
+  $primary-color: #F5C109;
   .el-select-dropdown__item.selected {
     color: $primary-color !important;
   }

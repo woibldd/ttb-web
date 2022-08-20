@@ -412,7 +412,7 @@ export default {
             text-align: center;
             vertical-align: middle;
 
-            color:#01CED1
+            color:#F5C109
         }
     }
 .lian {

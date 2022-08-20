@@ -80,7 +80,7 @@ export default {
         0: '#C7C7C7', 
         1: '#FB9246',
         2: '#FF5454',
-        3: '#01CED1',
+        3: '#F5C109',
         4: '#C7C7C7', 
       },
       pageConfig: {

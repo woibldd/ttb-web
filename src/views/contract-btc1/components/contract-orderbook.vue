@@ -528,7 +528,7 @@ export default {
   color: #888;
   &:hover{
     text-decoration: underline;
-    color: #01CED1
+    color: #F5C109
   }
 }
 

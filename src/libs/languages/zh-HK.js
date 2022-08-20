@@ -1974,7 +1974,7 @@ export default {
   otc_order_quota: "限額(%{legal_currency})",
   otc_completed_infadwo: " 成交單數 / 完成率",
   otc_completed_info: "商家(成單 | 完成率)",
-  otc_need_authentication: "%{side} 需 <span style='color:#01CED1;'>高級認證</span>",
+  otc_need_authentication: "%{side} 需 <span style='color:#F5C109;'>高級認證</span>",
   otc_confirm_payment: "確認付款",
   otc_side_1: "購買",
   otc_side_2: "出售",

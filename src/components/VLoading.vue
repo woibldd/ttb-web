@@ -12,7 +12,7 @@ export default {
   name: 'vLoading',
   props: {
     color: {
-      default: '#01CED1'
+      default: '#F5C109'
     },
     size: {
       default: 8

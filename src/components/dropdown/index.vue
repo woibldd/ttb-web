@@ -136,7 +136,7 @@ export default {
     //   &>li{
     //     width: 100%;
     //     &.active,&:hover{
-    //       color: #01CED1
+    //       color: #F5C109
     //     }
     //   }
     // }

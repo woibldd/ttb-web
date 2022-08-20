@@ -13,7 +13,7 @@
           <img src="@/assets/profile/security-safely.png" alt="">
           <!-- {{ $t('secure_level') }}： -->
           <i v-if="secure_level <= 1" style="background-color: #EB5757;">{{ $t('secure_level_0') }}</i>
-          <i v-if="secure_level == 2" style="background-color:#01CED1">{{ $t('secure_level_1') }}</i>
+          <i v-if="secure_level == 2" style="background-color:#F5C109">{{ $t('secure_level_1') }}</i>
           <i v-if="secure_level == 3" style="background-color:#2FB883">{{ $t('secure_level_2') }}</i>
         </span>
       </div>

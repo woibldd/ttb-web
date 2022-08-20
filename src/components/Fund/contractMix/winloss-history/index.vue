@@ -322,7 +322,7 @@ export default {
 </style>
 <style lang="scss">
 .el-date-table td.end-date span, .el-date-table td.start-date span {
-        background: #01CED1 !important;
+        background: #F5C109 !important;
     }
     .el-date-table td.in-range div, .el-date-table td.in-range div:hover, .el-date-table.is-week-mode .el-date-table__row.current div, .el-date-table.is-week-mode .el-date-table__row:hover div {
         background: rgba(201,169,108,0.2) !important;
@@ -330,9 +330,9 @@ export default {
     .el-date-table td.today span,
     .el-picker-panel__icon-btn:hover,
     .el-date-table td.available:hover {
-        color: #01CED1 !important;
+        color: #F5C109 !important;
     }
     .el-range-editor.is-active, .el-range-editor.is-active:hover {
-        border-color: #01CED1 !important;
+        border-color: #F5C109 !important;
     }
 </style>

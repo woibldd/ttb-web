@@ -71,9 +71,9 @@
           <a
             :href="requestLink"
             target="_blank">{{ $t('footer_request') }}</a>
-          <a
+          <!-- <a
             href="/proposer"
-            target="_blank">{{ $t('footer_application_coin') }}</a>
+            target="_blank">{{ $t('footer_application_coin') }}</a> -->
           <!-- <a
             href="http://ixxwenjuan.mikecrm.com/kl7CuJZ"
             target="_blank">{{ $t('footer_application_coin') }}</a> -->
@@ -91,10 +91,10 @@
           <router-link
             :to="{name:'Fee'}"
             target="_blank">{{ $t('footer_fee') }}</router-link>
-          <a
+          <!-- <a
             rel="nofollow"
             :href="apiDoc"
-            target="_blank">{{ $t('footer_api') }}</a>
+            target="_blank">{{ $t('footer_api') }}</a> -->
           <router-link to="/industry">{{ $t('home.footer.information') }}</router-link>
 <!--           <a-->
 <!--            href="/industry"></a>-->
@@ -297,7 +297,7 @@ export default {
     .footer_ltxt{
       font-size: 14px;
       line-height: 40px;
-    //   color: #01CED1;
+    //   color: #F5C109;
     color: #ffffff;
     opacity:0.32;
       display: block;
@@ -354,7 +354,7 @@ export default {
         line-height: 30px;
         margin-top: 15px;
         margin-bottom: 15px;
-        color: #01CED1;
+        color: $primary;
       }
     }
     .footer-rt{

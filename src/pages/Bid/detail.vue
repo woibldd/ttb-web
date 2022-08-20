@@ -57,17 +57,17 @@
           <div class="time-line">
             <el-timeline>
               <el-timeline-item
-                color="#01CED1">
+                color="#F5C109">
                 {{ $t('bby_shouy28') }}
                 <span style="padding-left: 10px;color: #333">{{ detail.timeLine[0].timestamp }}</span>
               </el-timeline-item>
               <el-timeline-item
-                color="#01CED1">
+                color="#F5C109">
                 {{ $t('bby_shouy29') }}
                 <span style="padding-left: 10px;color: #333">{{ detail.timeLine[1].timestamp }}</span>
               </el-timeline-item>
               <el-timeline-item
-                color="#01CED1">
+                color="#F5C109">
                 {{ $t('bby_shouy30') }}
                 <span style="padding-left: 10px;color: #333">{{ detail.timeLine[2].timestamp }}</span>
               </el-timeline-item>
@@ -166,15 +166,15 @@ export default {
         timeLine: [{
           content: this.$t('bby_shouy28'),
           timestamp: '2018-04-15',
-          color: '#01CED1'
+          color: '#F5C109'
         }, {
           content: this.$t('bby_shouy29'),
           timestamp: '2018-04-13',
-          color: '#01CED1'
+          color: '#F5C109'
         }, {
           content: this.$t('bby_shouy30'),
           timestamp: '2018-04-11',
-          color: '#01CED1'
+          color: '#F5C109'
         }]
       },
       disabled: true,
@@ -285,15 +285,15 @@ export default {
     this.timeLine = [{
       content: this.$t('bby_shouy28'),
       timestamp: '2018-04-15',
-      color: '#01CED1'
+      color: '#F5C109'
     }, {
       content: this.$t('bby_shouy29'),
       timestamp: '2018-04-13',
-      color: '#01CED1'
+      color: '#F5C109'
     }, {
       content: this.$t('bby_shouy30'),
       timestamp: '2018-04-11',
-      color: '#01CED1'
+      color: '#F5C109'
     }]
   },
   created () {

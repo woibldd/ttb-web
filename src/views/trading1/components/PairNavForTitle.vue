@@ -33,16 +33,16 @@
       </div>
       <div v-show="sortedList.length" class="ix-pair-head tr">
         <div class="th pair" @click="setSort('pair')">
-          <sort color="#01CED1"  :sort="sort" :label="$t('pairnav_pair')" :state="stateSortBy('pair')"/>
+          <sort color="#F5C109"  :sort="sort" :label="$t('pairnav_pair')" :state="stateSortBy('pair')"/>
         </div>
         <div class="th price" @click="setSort('price')">
-          <sort color="#01CED1"  :sort="sort" :label="$t('pairnav_price')" :state="stateSortBy('price')"/>
+          <sort color="#F5C109"  :sort="sort" :label="$t('pairnav_price')" :state="stateSortBy('price')"/>
         </div>
         <div class="th delta" @click="setSort('delta')">
-          <sort color="#01CED1"  :sort="sort" :label="$t('pairnav_wave')" :state="stateSortBy('delta')"/>
+          <sort color="#F5C109"  :sort="sort" :label="$t('pairnav_wave')" :state="stateSortBy('delta')"/>
         </div>
         <div class="th vol" @click="setSort('vol')">
-          <sort color="#01CED1"  :sort="sort" :label="$t('pairnav_vol')" :state="stateSortBy('vol')"/>
+          <sort color="#F5C109"  :sort="sort" :label="$t('pairnav_vol')" :state="stateSortBy('vol')"/>
         </div>
       </div>
       <div >

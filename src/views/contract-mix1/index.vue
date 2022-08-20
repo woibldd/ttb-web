@@ -42,17 +42,17 @@
                             <el-col :span="5" class="txr pr-25">{{$t('increase')}}</el-col> -->
                             <el-col :span="10" class="pl-22"> 
                             <div @click="setMixSort('currency')">
-                                <sort color="#01CED1" :sort="true" :label="$t('currency')" :state="stateMixSortBy('currency')"/>
+                                <sort color="#F5C109" :sort="true" :label="$t('currency')" :state="stateMixSortBy('currency')"/>
                               </div>
                             </el-col>
                             <el-col :span="6"> 
                               <div @click="setMixSort('current')">
-                                <sort color="#01CED1" :sort="true" :label="$t('market.orderdeal')" :state="stateMixSortBy('current')"/>
+                                <sort color="#F5C109" :sort="true" :label="$t('market.orderdeal')" :state="stateMixSortBy('current')"/>
                               </div>
                             </el-col>
                             <el-col :span="8"> 
                               <div @click="setMixSort('change_24h')" class="txr pr-18">
-                                <sort color="#01CED1" :sort="true" :label="$t('market.h24change')" :state="stateMixSortBy('change_24h')"/>
+                                <sort color="#F5C109" :sort="true" :label="$t('market.h24change')" :state="stateMixSortBy('change_24h')"/>
                               </div> 
                             </el-col>
                           </el-row>

@@ -264,7 +264,7 @@ export default {
         .btn_left {
           font-size: 15px;
           &.active.active-side{
-            color:#01CED1;
+            color:#F5C109;
             text-decoration: underline;
             font-weight: bold; 
             padding-bottom: 6px;
@@ -321,7 +321,7 @@ export default {
     }
   }
    .active-side {
-        color:#01CED1!important;
+        color:#F5C109!important;
         text-decoration: underline;
         font-weight: bold;
         font-size: 14px;

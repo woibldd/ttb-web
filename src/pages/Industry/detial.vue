@@ -295,14 +295,14 @@ export default {
               color: #afafaf;
             }
             &:hover {
-              background: #01ced1;
+              background: #F5C109;
               i {
                 color: #fff;
               }
             }
           }
           .active {
-            background: #01ced1;
+            background: #F5C109;
             i {
               color: #fff;
             }
@@ -370,7 +370,7 @@ export default {
         float: right;
         margin-bottom: 20px;
         overflow: hidden;
-        color: #01CED1;
+        color: #F5C109;
       }
       .inner {
         width: 332px;
