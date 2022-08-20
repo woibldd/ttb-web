@@ -124,7 +124,7 @@ async function beforeEach(to, from, next) {
   if(to.path === "/industry") {
     document.title = '合约交易所排名-比特币价格今日行情-比特币实时行情走势'
     document.querySelector('meta[name="keywords"]').setAttribute('content', '比特币交易所,合约交易所,合约交易所排名,比特币走势,比特币实时行情')
-    document.querySelector('meta[name="description"]').setAttribute('content', 'IXX是全球首家数字资产交易共同体，总部在新加坡，其致力于实现交易所生态的区块链理想国，打造人人的交易所，我为人人，人人为我，所有参与交易所的贡献者均可共享交易所的发展成果。')
+    document.querySelector('meta[name="description"]').setAttribute('content', 'TTB自内而外采用最新的多重因素安全机制，在技术平台、产品支线、安全风控体系、运营及客户服务体系等方面，TTB在全球均处于领先地位。')
   }
   state.loading = true
   const auth = utils.getRouteMeta(to, 'auth')

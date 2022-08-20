@@ -9,7 +9,7 @@
         <div class="l"> 
           <div>
             <div class="title">{{$t('market.fee')}}</div>
-            <div class="sub-title">{{$t('fee.slogan', {siteName: 'IXX'})}}</div>
+            <div class="sub-title">{{$t('fee.slogan', {siteName: 'TTB'})}}</div>
           </div>
         </div>
         <div class="r"> 
@@ -22,9 +22,7 @@
           <div class="fee-nav-item mr-30"> 
             <router-link :to="{name: 'TradingFee'}">{{$t('trading_fees')}}</router-link>
           </div>
-          <div class="fee-nav-item mr-30"> 
-            <router-link :to="{name: 'ContractFee'}">{{$t('contract_fees')}}</router-link>
-          </div>
+          
           <div class="fee-nav-item mr-30"> 
             <router-link :to="{name: 'UnitContractFee'}">{{$t('fee.unit_fees')}}</router-link>
           </div>

@@ -9,9 +9,9 @@
       </div>
       <div class="text">
         <h1>
-          IXX.COM {{ $t('newLoad.az') }}
+          TTB.PLUS {{ $t('newLoad.az') }}
         </h1>
-        <p> {{ $t('newLoad.user_apple_id', {web: 'IXX Exchange'}) }} </p>
+        <p> {{ $t('newLoad.user_apple_id', {web: 'TTB Exchange'}) }} </p>
       </div>
     </div>
     <div class="text-list">
@@ -34,7 +34,7 @@
       </template>
       <p>{{ $t('newLoad.id') }}</p>
       <em>{{ $t('newLoad.fid') }}</em>
-      <em>{{ $t('newLoad.kf') }}：IXX官方客服 (9点~21点)</em>
+      <em>{{ $t('newLoad.kf') }}：TTB官方客服 (9点~21点)</em>
       <em>{{ $t('newLoad.sm') }}：</em>
       <img
         class="contact-img"
@@ -43,7 +43,7 @@
     </div>
     <div class="text-list">
       <div class="title">02  {{ $t('newLoad.install_app') }}</div>
-      <p> {{ $t('newLoad.login_up', {web: 'IXX Exchange'}) }}</p>
+      <p> {{ $t('newLoad.login_up', {web: 'TTB Exchange'}) }}</p>
       <img src="./../../assets/overseas/ix/tip2.png" alt="">
       <p>{{ $t('newLoad.get') }}</p>
       <img src="./../../assets/overseas/ix/IXX@2x.png" alt="">

@@ -1,6 +1,6 @@
 // import defaultSettings from '@/settings'
 
-const title = 'IXX'
+const title = 'TTB'
 
 export default function getPageTitle(pageTitle) {
   if (pageTitle) {

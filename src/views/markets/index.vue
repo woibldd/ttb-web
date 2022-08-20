@@ -33,10 +33,7 @@
             </div>
             <div @click="handleClickTabs('unit')" :class="['tab-nav-item', 'mr-30', {active: selectTab==='unit'}]">
               <label>{{$t('currency-unit')}}</label> 
-            </div> 
-            <div @click="handleClickTabs('btc')" :class="['tab-nav-item', 'mr-30', {active: selectTab==='btc'}]">
-              <label>{{$t('currency-btc')}}</label> 
-            </div> 
+            </div>  
           </div>
           <div class="right">
             <span>{{$t('contract_24_hour_trade')}}： <label class="ml-10">{{tradeTotal | pretty}} </label>USDT</span>
@@ -220,119 +217,8 @@
                 </el-col>
               </el-row>
             </div>
-          </template>
-          <template v-if="(selectTab==='all' || selectTab==='btc')"> 
-            <div class="title mb-10">
-              <h4>{{$t('currency-btc')}}</h4>
-            </div>
-            <div class="grid mb-10">
-              <el-row class="hander mt-10 mb-20">
-                <!-- <el-col :span="1">#</el-col> -->
-                <!-- <el-col :span="4">{{$t('currency')}}</el-col>
-                <el-col :span="3">{{$t('market.orderdeal')}}</el-col>
-                <el-col :span="3">{{$t('market.h24change')}}</el-col> -->
-                <el-col :span="4"> 
-                  <div @click="setBtcSort('currency')">
-                    <sort color="#01CED1" :sort="true" :label="$t('currency')" :state="stateBtcSortBy('currency')"/>
-                  </div>
-                </el-col>
-                <el-col :span="3"> 
-                  <div @click="setBtcSort('price')">
-                    <sort color="#01CED1" :sort="true" :label="$t('market.orderdeal')" :state="stateBtcSortBy('price')"/>
-                  </div>
-                </el-col>
-                <el-col :span="3"> 
-                  <div @click="setBtcSort('delta')">
-                    <sort color="#01CED1" :sort="true" :label="$t('market.h24change')" :state="stateBtcSortBy('delta')"/>
-                  </div> 
-                </el-col>
-                <el-col :span="4">{{$t('market.h24trade')}}</el-col>
-                <el-col :span="4">{{$t('market.h24amount')}}</el-col>
-                <el-col :span="4"  flex="main:center">{{$t('market.view')}}</el-col>
-                <el-col :span="2"  flex="main:right">{{$t('operation')}}</el-col>
-              </el-row> 
-              <el-row v-for="(item, index) in btcShowList"   
-                :key="index" 
-                class="row mt-10">
-                <!-- <el-col :span="1">{{index + 1}}</el-col> -->
-                <el-col :span="4" flex="cross:center">
-                  <img  class="iconfont mr-10" style="font-size: 24px"  :src="getCoinIcon(item.currency.replace('USD', ''))" alt="">
-                  {{item.currency.replace('USD', '')}}<span class="currency">/USD</span> &nbsp;
-                </el-col>
-                <el-col :span="3">{{item.price}} &nbsp;</el-col>
-                <el-col :span="3">
-                  <span v-if="item.delta > 0" class="text-success">{{item.delta |fixed(2)}}%</span>  
-                  <span v-else class="text-danger">{{item.delta | fixed(2)}}%</span>&nbsp;
-                  &nbsp;
-                </el-col>
-                <el-col :span="4">
-                  <span v-if="+item.vol">{{ $big(item.vol).div(item.price) | pretty}}  <span class="currency">{{item.currency.replace('USD', '')}}</span></span>
-                  &nbsp;
-                </el-col>
-                <el-col :span="4">{{item.vol | pretty(2)}} <span class="currency">USD</span> &nbsp;</el-col>
-                <el-col :span="4" flex="main:center">
-                  <span v-if="quoteList[item.name]">
-                    <quote-view :historyList="quoteList[item.name ]"  :delta="item.delta"/>   
-                  </span>
-                  &nbsp; 
-                </el-col>
-                <el-col :span="2" flex="main:right"> 
-                  <router-link :to="{name:'future', query: {pair: item.symbol}  }">
-                    <el-button size="mini" type="primary">{{$t('asset_trading')}}</el-button>
-                  </router-link>
-                </el-col>
-              </el-row>
-            </div>
-          </template>
-          <!-- <template v-if="(selectTab==='all' || selectTab==='blend')"> 
-            <div class="title mb-10">
-              <h4>{{$t('trading')}}</h4>
-            </div>
-            <div class="grid mb-30">
-              <el-row class="hander mt-10 mb-20"> 
-                <el-col :span="5">{{$t('currency')}}</el-col>
-                <el-col :span="4">{{$t('contract_block_orderdeal')}}</el-col>
-                <el-col :span="5"> 
-                   {{$t('market.h24change')}} 
-                </el-col>
-                <el-col :span="4">{{$t('contract_24_hour_trade')}}</el-col> 
-                <el-col :span="4" flex="main:center">{{$t('market.view')}}</el-col>
-                <el-col :span="2"  flex="main:right">{{$t('operation')}}</el-col>
-              </el-row> 
-              <el-row v-for="(item, index) in blendShowList"  
-                v-show="index < 5"
-                :key="index" 
-                class="row mt-10"> 
-                <el-col :span="5">
-                  <img  class="iconfont mr-10" style="font-size: 24px"  :src="getCoinIcon(item.product)" alt="">
-                  {{item.product}}<span class="currency">/{{item.currency}}</span>  &nbsp;
-                </el-col>
-                <el-col :span="4">{{item.price}} &nbsp;</el-col>
-                <el-col :span="5">
-                  <span v-if="item.delta > 0" class="text-success">{{item.delta |fixed(2)}}%</span>  
-                  <span v-else class="text-danger">{{item.delta | fixed(2)}}%</span>&nbsp;
-                  &nbsp;
-                </el-col>
-                <el-col :span="4">
-                  <span v-if="+item.vol">{{ $big(item.vol).div(item.price).round(item.price_scale)}}  
-                    <span class="currency">{{item.product}}</span>
-                  </span>
-                  &nbsp;
-                </el-col> 
-                <el-col :span="4" flex="main:center"> 
-                  <span v-if="quoteList[item.symbol]">
-                    <quote-view :historyList="quoteList[item.symbol]"  :delta="item.delta"/>   
-                  </span>
-                  &nbsp;
-                </el-col>
-                <el-col :span="2" flex="main:right">
-                  <router-link :to="{name:'blend', query: {pair: item.symbol}  }">
-                    <el-button size="mini" type="primary">{{$t('asset_trading')}}</el-button>
-                  </router-link>
-                </el-col>
-              </el-row>
-            </div>
-          </template> -->
+          </template> 
+          
         </div> 
       </div>
     </div>

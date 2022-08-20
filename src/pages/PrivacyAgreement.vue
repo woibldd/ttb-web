@@ -115,7 +115,7 @@
 
       <p>For security, you may need to provide a written request, or use other ways to verify your identity.We may ask you to verify your identity before processing your request.</p>
 
-      <p>We will reply within[support@IXX.com].</p>
+      <p>We will reply within[server@ttb.plus].</p>
 
       <p>For your reasonable request, we do not charge fees in principle, but we will charge a certain cost for repeated requests that exceed the reasonable limit. We may refuse requests that are gratuitous, require too much technology, pose a risk to the legitimate interests of others, or are highly unrealistic.</p>
 
@@ -156,7 +156,7 @@
         <h3>VIII、 How to contact us</h3>
         <p>If you have any questions, comments or Suggestions about this privacy policy, please contact us by:</p>
 
-        <p>Online customer service and email:[support@IXX.com]</p>
+        <p>Online customer service and email:[server@ttb.plus]</p>
 
         <p>Generally, we will reply within one day.</p>
 
@@ -180,7 +180,7 @@ export default {
         p1: 'This clause only applies to IXX DIGITAL PRIVATE LIMITED (hereinafter referred to as "IXX"), a company registered in Singapore under the relevant laws of the Republic Of Singapore, which provides digital asset transaction and related services that include currency transaction, contract or other derivatives, digital asset information, etc.',
         subtitle11: 'Updated date: September 12, 2018',
         p3: 'If you have any questions, comments or suggestions, please contact us through the following contact information:',
-        p4: 'Online customer service and email:[support@ixx.com]',
+        p4: 'Online customer service and email:[server@ttb.plus]',
         p5: 'This clause will help you understand the following:',
         p6: '1.How we collect and use your personal information;',
         p7: '2.How we use cookies and technologies which are similar to it;',
@@ -249,7 +249,7 @@ export default {
         p74: 'In some business functions, we base on the non-artificial system of automatic decision such as information systems and algorithms to make decisions.If these decisions significantly affect your lawful rights and interests, you are entitled to request an explanation from us and we will provide appropriate remedies.',
         p75: '5. Respond to your request mentioned above',
         p76: 'For security, you may need to provide a written request, or use other ways to verify your identity.We may ask you to verify your identity before processing your request.',
-        p77: 'We will reply within[support@ixx.com].',
+        p77: 'We will reply within[server@ttb.plus].',
         p78: 'For your reasonable request, we do not charge fees in principle, but we will charge a certain cost for repeated requests that exceed the reasonable limit. We may refuse requests that are gratuitous, require too much technology, pose a risk to the legitimate interests of others, or are highly unrealistic.',
         p79: 'In the following circumstances, we will not be able to respond to your request as required by laws and regulations:',
         p80: '1. Directly related to national security and national defense security;',
@@ -275,7 +275,7 @@ export default {
         p99: 'We will also save the old version of this clause for your looking through.',
         subtitle8: 'VIII、 How to contact us',
         p101: 'If you have any questions, comments or Suggestions about this privacy policy, please contact us by:',
-        p102: 'Online customer service and email:[support@ixx.com]',
+        p102: 'Online customer service and email:[server@ttb.plus]',
         p103: 'Generally, we will reply within one day.'
       },
       'zh-CN': {
@@ -283,7 +283,7 @@ export default {
         p1: '本条款仅适用于IXX DIGITAL PRIVATE LIMITED（以下简称“IXX”），一家根据新加坡共和国相关法律在新加坡注册成立的公司的数字资产交易及相关服务，包括币币交易、合约或其他衍生品、数字资产资讯等。',
         subtitle11: '最近更新日期：2018年9月12日',
         p3: '如果您有任何疑问、意见或建议，请通过以下联系方式与我们联系：',
-        p4: '在线客服及电子邮件：【support@ixx.com】',
+        p4: '在线客服及电子邮件：【server@ttb.plus】',
         p5: '本条款将帮助您了解以下内容：',
         p6: '1.我们如何收集和使用您的个人信息',
         p7: '2.我们如何使用Cookie和同类技术',
@@ -352,7 +352,7 @@ export default {
         p74: '在某些业务功能中，我们可能仅依据信息系统、算法等在内的非人工自动决策机制做出决定。如果这些决定显著影响您的合法权益，您有权要求我们做出解释，我们也将提供适当的救济方式。',
         p75: '（五） 响应您的上述请求',
         p76: '为保障安全，您可能需要提供书面请求，或以其他方式证明您的身份。我们可能会先要求您验证自己的身份，然后再处理您的请求。',
-        p77: '我们将在【support@ixx.com】内做出答复。',
+        p77: '我们将在【server@ttb.plus】内做出答复。',
         p78: '对于您合理的请求，我们原则上不收取费用，但对多次重复、超出合理限度的请求，我们将视情况收取一定成本费用。对于那些无端重复、需要过多技术手段、给他人合法权益带来风险或者非常不切实际的请求，我们可能会予以拒绝。',
         p79: '在以下情形中，按照法律法规要求，我们将无法响应您的请求：',
         p80: '1. 与国家安全、国防安全直接相关的；',
@@ -378,7 +378,7 @@ export default {
         p99: '我们还会将本条款的旧版本存档，供您查阅。',
         subtitle8: '八、 如何联系我们',
         p101: '如果您对本隐私条款有任何疑问、意见或建议，通过以下方式与我们联系：',
-        p102: '在线客服及电子邮箱：【support@ixx.com】',
+        p102: '在线客服及电子邮箱：【server@ttb.plus】',
         p103: '一般情况下，我们将在一日内回复。'
       }
     }

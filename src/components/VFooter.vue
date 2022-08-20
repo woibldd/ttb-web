@@ -111,9 +111,9 @@
         <div class="hg"/>
         <div class="right-bottom">
           <div class="bottom-txt bot-la">
-            <p class="footer_ltxt">{{ $t('footer_services_email') }}：support@ixx.com</p>
-            <p class="footer_ltxt">{{ $t('footer_bussness') }}：business@ixx.com</p>
-            <p class="footer_ltxt">{{ $t('home.footer.affiliate') }}</p>
+            <p class="footer_ltxt">{{ $t('footer_services_email') }}：server@ttb.plus</p>
+            <p class="footer_ltxt">{{ $t('footer_bussness') }}：business@ttb.plus</p>
+            <!-- <p class="footer_ltxt">{{ $t('home.footer.affiliate') }}</p> -->
           </div>
           <div class="bottom-txt bot-lb">
             <div class="contact-list">
@@ -137,7 +137,7 @@
               </a>
               <a
                 rel="nofollow"
-                href="mailto:support@ixx.com"
+                href="mailto:server@ttb.plus"
                 target="_blank"
                 class="contact-item-wrapper pointer">
                 <icon
@@ -187,7 +187,7 @@
                   class="contact-item "
                   name="footer-linkedin"/>
               </a>
-              <a
+              <!-- <a
                 rel="nofollow"
                 target="_blank"
                 href="https://medium.com/@ixxofficial"
@@ -195,9 +195,9 @@
                 <icon
                   class="contact-item "
                   name="footer-medium"/>
-              </a>
+              </a> -->
             </div>
-            <p class="copyright">Copyright © 2019 ixx.com</p>
+            <p class="copyright">Copyright © 2022 btt.plus</p>
           </div>
 
         </div>

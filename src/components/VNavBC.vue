@@ -69,11 +69,10 @@
                       </div>  
                     </router-link>
                   </li> 
-                  <li class="dropdown-item2 pl-24 pr-24"> 
+                  <!-- <li class="dropdown-item2 pl-24 pr-24"> 
                     <router-link to="/future" flex="dir:column"> 
                       <div style="width: 30px;"  flex="cross:center">
-                        <img src="@/assets/ixx/icon/future.png" alt=""> 
-                        <!-- <img :src="require(`../assets/site/${state.siteName}/icon/blend.png`)"  alt=""> -->
+                        <img src="@/assets/ixx/icon/future.png" alt="">  
                       </div>
                       <div>
                         <div>{{$t('contract_btc')}}</div>
@@ -82,7 +81,7 @@
                         </div>
                       </div>  
                     </router-link>
-                  </li> 
+                  </li>  -->
                 </ul>
               </div>
             </div>
@@ -525,6 +524,7 @@ export default {
 .bc_nav_box {
   width: 100%;
   height: 60px;
+  padding-left: 30px;
   min-width: 1340px;
   .border-right-1 {
     border-right: 1px solid; 

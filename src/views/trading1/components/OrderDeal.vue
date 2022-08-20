@@ -30,7 +30,7 @@
                 {{ pairName | c }}
               </td>
               <td class="left">
-                <div v-if="!$big(deal.fee_tb).eq(0)"><span class="num">{{ deal.fee_tb }}</span> IXX</div>
+                <div v-if="!$big(deal.fee_tb).eq(0)"><span class="num">{{ deal.fee_tb }}</span> TTB</div>
                 <div v-if="!$big(deal.fee_currency).eq(0)"><span class="num">{{ deal.fee_currency }}</span> {{ pairName | c }}</div>
                 <div v-if="!$big(deal.fee_product).eq(0)"><span class="num">{{ deal.fee_product }}</span> {{ pairName | p }}</div>
                 <div v-if="isFree(deal)">0</div>

@@ -157,7 +157,7 @@
             name="footer-twitter"/>
         </a>
         <a
-          href="mailto:support@ixx.com"
+          href="mailto:server@ttb.plus"
           class="contact-item-wrapper mr-20 pointer">
           <icon
             class="contact-item"

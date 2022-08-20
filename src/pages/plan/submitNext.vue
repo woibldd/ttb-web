@@ -6,7 +6,7 @@
       <em>{{ $t('submit_tip_2') }}</em>
       <div class="submit-container-ipt">
         <div class="ipt">
-          <input type="text" disabled="disabled" value="support@ixx.com">
+          <input type="text" disabled="disabled" value="server@ttb.plus">
         </div>
       </div>
       <div class="chart-container">

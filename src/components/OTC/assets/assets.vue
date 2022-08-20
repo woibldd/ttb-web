@@ -32,7 +32,7 @@
       <div class="dialog-container">
         <div class="top"/>
         <div class="title" style="margin-bottom:13px;" >
-          <i class="logo">IXX</i>
+          <i class="logo">TTB</i>
           <span style="margin-left: 7px;">{{ dataTable.name || '--' }}</span>
         </div>
         <div class="user-info">
