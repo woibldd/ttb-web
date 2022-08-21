@@ -218,7 +218,7 @@
       <div class="flex">
         <div class="dl-icon">
           <img
-            src="../../../assets/h5/h5_download@3x.png"
+            src="../../../assets/h5/h5_download.png"
             alt="">
         </div>
         <div class="dl__txt">

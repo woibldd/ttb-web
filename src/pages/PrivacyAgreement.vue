@@ -4,8 +4,8 @@
       <v-nav2 is-home="true" />
     </div> -->
 
-    <doc-wrap title="Privacy Agreement Of CoinIXX">
-      <p>CoinIXX deeply understands the importance of personal information to you and will do its best to protect your personal information.We are committed to maintaining your trust in us and protecting your personal information and will use, collect and process your personal information in accordance with the principles of legality, integrity and necessity.At the same time, CoinIXX promises that we will take safety precautions to protect your personal information in accordance with mature safety standards in this industry.In addition, we have taken measures to prevent money laundering, financing terrorism, and trade and economic sanctions.</p>
+    <doc-wrap title="Privacy Agreement Of CoinTTB">
+      <p>CoinTTB deeply understands the importance of personal information to you and will do its best to protect your personal information.We are committed to maintaining your trust in us and protecting your personal information and will use, collect and process your personal information in accordance with the principles of legality, integrity and necessity.At the same time, CoinTTB promises that we will take safety precautions to protect your personal information in accordance with mature safety standards in this industry.In addition, we have taken measures to prevent money laundering, financing terrorism, and trade and economic sanctions.</p>
       <h2>This clause will help you understand the following:</h2>
       <ul>
         <li>1. How we collect and use your personal information;</li>
@@ -20,7 +20,7 @@
       <p>Please read and understand this privacy policy carefully before using our products (or services).</p>
       <h3>I、 How we collect and use your personal information</h3>
       <p>Personal information refers to all kinds of information recorded electronically or otherwise, which can be separately or combined with other information to identify the identity of a particular natural person or reflect the activity of a specific natural person.</p>
-      <p>CoinIXX will only collect and use your personal information for the registration and related services of this website:</p>
+      <p>CoinTTB will only collect and use your personal information for the registration and related services of this website:</p>
       <p>Mobile phone number/mobile verification code/mailbox/password/invitation code/the front and back of ID card /face recognition/verification video and other information.</p>
       <p>The above information will be stored in the republic of Singapore.If it need transfering across borders, we will obtain your authorization and consent alone.</p>
       <p>We will seek your consent in advance if we will use the information for other purposes not noted in this clause.</p>
@@ -39,13 +39,13 @@
       <h3>III、 How we share, transfer, and publicly disclose your personal information</h3>
       <p>1. Sharing</p>
 
-      <p>We will not share your personal information with any company, organization or individual other than CoinIXX,,</p>
+      <p>We will not share your personal information with any company, organization or individual other than CoinTTB,,</p>
 
       <p>Except for following situations:</p>
       <ul>
         <li>1.We will share your personal information with others after obtaining your consent.</li>
         <li>2.We may share your personal information according to laws and regulations or mandatory requirements of government authorities.</li>
-        <li>3.Share with our affiliates: your personal information may be Shared with the companys associated with CoinIXX .We will only share the necessary personal information and will be bound by the stated purpose of this privacy clause.If affiliates want to change the purpose of personal information processing, they will ask for your authorization again.</li>
+        <li>3.Share with our affiliates: your personal information may be Shared with the companys associated with CoinTTB .We will only share the necessary personal information and will be bound by the stated purpose of this privacy clause.If affiliates want to change the purpose of personal information processing, they will ask for your authorization again.</li>
       </ul>
       <p>2. Transfer</p>
 
@@ -66,11 +66,11 @@
       </ul>
       <h3>IV、 How we protect your personal information</h3>
       <ul>
-        <li>1. We have used industry-standard methods to protect the personal information you provide to prevent it from suffering unauthorized access, public disclosure, use, modification, damage or loss of data.We will take all reasonable and feasible measures to protect your personal information.For example, the exchange of data between your browser and the "service" is protected by SSL encryption; CoinIXX also use the safe browsing of HTTPS provided by us;We will use encryption to ensure data confidentiality: we will use trusted protection mechanisms to protect data from malicious attacks; We will deploy the access control mechanism to ensure that only authorized personnel can access personal information. At the same time we will conduct security and privacy protection training courses to enhance staff awareness of the importance of protecting personal information.</li>
+        <li>1. We have used industry-standard methods to protect the personal information you provide to prevent it from suffering unauthorized access, public disclosure, use, modification, damage or loss of data.We will take all reasonable and feasible measures to protect your personal information.For example, the exchange of data between your browser and the "service" is protected by SSL encryption; CoinTTB also use the safe browsing of HTTPS provided by us;We will use encryption to ensure data confidentiality: we will use trusted protection mechanisms to protect data from malicious attacks; We will deploy the access control mechanism to ensure that only authorized personnel can access personal information. At the same time we will conduct security and privacy protection training courses to enhance staff awareness of the importance of protecting personal information.</li>
 
         <li>2. We will take all reasonably practicable measures to ensure that no irrelevant personal information is collected. We will only retain your personal information in the period of time to meet the purposes stated in this clause, unless the period of retention is extended or permitted by law.</li>
 
-        <li>3. The Internet environment is not absolutely safe, and email, instant messaging, the communication with other CoinIXX users are not encrypted, so we strongly recommend that you do not send personal information in such a way.Please use complex passwords to help us guarantee the security of your account.</li>
+        <li>3. The Internet environment is not absolutely safe, and email, instant messaging, the communication with other CoinTTB users are not encrypted, so we strongly recommend that you do not send personal information in such a way.Please use complex passwords to help us guarantee the security of your account.</li>
 
         <li>4. The Internet environment is not 100% secure and we will do our best to ensure or guarantee the security of any information you send to us.If our physical, technical, or administrative protection facilities are damaged, resulting in the information sufferinf from unauthorized access, public disclosure, tampering, or destruction,which result in damage to your legitimate rights and interests, we will not be liable accordingly.</li>
 
@@ -176,8 +176,8 @@ export default {
   i18n: {
     messages: {
       en: {
-        title: 'Privacy Agreement Of IXX',
-        p1: 'This clause only applies to IXX DIGITAL PRIVATE LIMITED (hereinafter referred to as "IXX"), a company registered in Singapore under the relevant laws of the Republic Of Singapore, which provides digital asset transaction and related services that include currency transaction, contract or other derivatives, digital asset information, etc.',
+        title: 'Privacy Agreement Of TTB',
+        p1: 'This clause only applies to TTB DIGITAL PRIVATE LIMITED (hereinafter referred to as "TTB"), a company registered in Singapore under the relevant laws of the Republic Of Singapore, which provides digital asset transaction and related services that include currency transaction, contract or other derivatives, digital asset information, etc.',
         subtitle11: 'Updated date: September 12, 2018',
         p3: 'If you have any questions, comments or suggestions, please contact us through the following contact information:',
         p4: 'Online customer service and email:[server@ttb.plus]',
@@ -190,11 +190,11 @@ export default {
         p11: '6. How your personal information transfer globally',
         p12: '7. How this clause is updated',
         p13: '8. How to contact us',
-        p14: 'IXX deeply understands the importance of personal information to you and will do its best to protect your personal information.We are committed to maintaining your trust in us and protecting your personal information and will use, collect and process your personal information in accordance with the principles of legality, integrity and necessity.At the same time, IXX promises that we will take safety precautions to protect your personal information in accordance with mature safety standards in this industry.In addition, we have taken measures to prevent money laundering, financing terrorism, and trade and economic sanctions.',
+        p14: 'TTB deeply understands the importance of personal information to you and will do its best to protect your personal information.We are committed to maintaining your trust in us and protecting your personal information and will use, collect and process your personal information in accordance with the principles of legality, integrity and necessity.At the same time, TTB promises that we will take safety precautions to protect your personal information in accordance with mature safety standards in this industry.In addition, we have taken measures to prevent money laundering, financing terrorism, and trade and economic sanctions.',
         p15: 'Please read and understand this privacy policy carefully before using our products (or services).',
         subtitle1: 'I、How we collect and use your personal information',
         p19: 'Personal information refers to all kinds of information recorded electronically or otherwise, which can be separately or combined with other information to identify the identity of a particular natural person or reflect the activity of a specific natural person.',
-        p20: 'IXX will only collect and use your personal information for the registration and related services of this website:',
+        p20: 'TTB will only collect and use your personal information for the registration and related services of this website:',
         p21: 'Mobile phone number/mobile verification code/mailbox/password/invitation code/the front and back of ID card /face recognition/verification video and other information.',
         p22: 'The above information will be stored in the republic of Singapore.If it need transfering across borders, we will obtain your authorization and consent alone.',
         p23: 'We will seek your consent in advance if we will use the information for other purposes not noted in this clause.',
@@ -208,11 +208,11 @@ export default {
         p33: 'We will not use LocalStorage for any purpose other than those mentioned in this clause.You can manage or remove localStorage based on your preferences.You shall be aware of all localStorage saved in your computer, but if you do this, you may not be able to start or use some of the functions of our website.',
         subtitle3: 'III、 How we share, transfer, and publicly disclose your personal information',
         p35: '1. Sharing',
-        p36: 'We will not share your personal information with any company, organization or individual other than IXX,,',
+        p36: 'We will not share your personal information with any company, organization or individual other than TTB,,',
         p37: 'Except for following situations:',
         p38: '1.We will share your personal information with others after obtaining your consent.',
         p39: '2.We may share your personal information according to laws and regulations or mandatory requirements of government authorities.',
-        p40: '3.Share with our affiliates: your personal information may be Shared with the companys associated with IXX .We will only share the necessary personal information and will be bound by the stated purpose of this privacy clause.If affiliates want to change the purpose of personal information processing, they will ask for your authorization again.',
+        p40: '3.Share with our affiliates: your personal information may be Shared with the companys associated with TTB .We will only share the necessary personal information and will be bound by the stated purpose of this privacy clause.If affiliates want to change the purpose of personal information processing, they will ask for your authorization again.',
         p41: '2. Transfer',
         p42: 'We will not transfer your personal information to any company, organization or individual except for following situations:',
         p43: '1. Transfering with clear consent: after obtaining your clear consent, we will transfer your personal information to other parties;',
@@ -222,9 +222,9 @@ export default {
         p47: '1. With your clear consent;',
         p48: '2. Law-based disclosure: we may disclose your personal information publicly if compulsively required by law, legal process, litigation or governmental authority.',
         subtitle4: 'IV、 How we protect your personal information',
-        p50: '1. We have used industry-standard methods to protect the personal information you provide to prevent it from suffering unauthorized access, public disclosure, use, modification, damage or loss of data.We will take all reasonable and feasible measures to protect your personal information.For example, the exchange of data between your browser and the "service" is protected by SSL encryption; IXX also use the safe browsing of HTTPS provided by us;We will use encryption to ensure data confidentiality: we will use trusted protection mechanisms to protect data from malicious attacks; We will deploy the access control mechanism to ensure that only authorized personnel can access personal information. At the same time we will conduct security and privacy protection training courses to enhance staff awareness of the importance of protecting personal information.',
+        p50: '1. We have used industry-standard methods to protect the personal information you provide to prevent it from suffering unauthorized access, public disclosure, use, modification, damage or loss of data.We will take all reasonable and feasible measures to protect your personal information.For example, the exchange of data between your browser and the "service" is protected by SSL encryption; TTB also use the safe browsing of HTTPS provided by us;We will use encryption to ensure data confidentiality: we will use trusted protection mechanisms to protect data from malicious attacks; We will deploy the access control mechanism to ensure that only authorized personnel can access personal information. At the same time we will conduct security and privacy protection training courses to enhance staff awareness of the importance of protecting personal information.',
         p51: '2. We will take all reasonably practicable measures to ensure that no irrelevant personal information is collected. We will only retain your personal information in the period of time to meet the purposes stated in this clause, unless the period of retention is extended or permitted by law.',
-        p52: '3. The Internet environment is not absolutely safe, and email, instant messaging, the communication with other IXX users are not encrypted, so we strongly recommend that you do not send personal information in such a way.Please use complex passwords to help us guarantee the security of your account.',
+        p52: '3. The Internet environment is not absolutely safe, and email, instant messaging, the communication with other TTB users are not encrypted, so we strongly recommend that you do not send personal information in such a way.Please use complex passwords to help us guarantee the security of your account.',
         p53: '4. The Internet environment is not 100% secure and we will do our best to ensure or guarantee the security of any information you send to us.If our physical, technical, or administrative protection facilities are damaged, resulting in the information sufferinf from unauthorized access, public disclosure, tampering, or destruction,which result in damage to your legitimate rights and interests, we will not be liable accordingly.',
         p54: '5. After the unfortunate personal information security incident, we will timely inform you of following situations according to the requirements of the laws and regulations: basic information and possible impacts of the security incident, the disposal measures we have taken or will take, Suggestions of preventing and reducing risks personally, and the remedial measures for you, etc.We will inform you of relevant situations of the event by email, letter, phone, push notification, etc. When it is difficult to inform the owner of individual information one by one, we will issue the announcement in a reasonable and effective way.At the same time, we will actively report the handling of personal information security incidents in accordance with the requirements of the regulatory authorities.',
         subtitle5: 'V、Your rights',
@@ -280,7 +280,7 @@ export default {
       },
       'zh-CN': {
         title: '《隐私条款》',
-        p1: '本条款仅适用于IXX DIGITAL PRIVATE LIMITED（以下简称“IXX”），一家根据新加坡共和国相关法律在新加坡注册成立的公司的数字资产交易及相关服务，包括币币交易、合约或其他衍生品、数字资产资讯等。',
+        p1: '本条款仅适用于TTB DIGITAL PRIVATE LIMITED（以下简称“TTB”），一家根据新加坡共和国相关法律在新加坡注册成立的公司的数字资产交易及相关服务，包括币币交易、合约或其他衍生品、数字资产资讯等。',
         subtitle11: '最近更新日期：2018年9月12日',
         p3: '如果您有任何疑问、意见或建议，请通过以下联系方式与我们联系：',
         p4: '在线客服及电子邮件：【server@ttb.plus】',
@@ -293,11 +293,11 @@ export default {
         p11: '6. 您的个人信息如何在全球范围转移',
         p12: '7. 本条款如何更新',
         p13: '8. 如何联系我们',
-        p14: 'IXX深知个人信息对您的重要性，并会尽全力保护您的个人信息安全可靠。我们致力于维持您对我们的信任，保护您的个人信息，将按照合法、正当、必要的原则使用、收集及处理您的个人信息。同时，IXX承诺，我们将按业界成熟的安全标准，采取相应的安全保护措施来保护您的个人信息。此外，我们已采取措施，防止洗钱、资助恐怖主义、规避贸易和经济制裁的行为。',
+        p14: 'TTB深知个人信息对您的重要性，并会尽全力保护您的个人信息安全可靠。我们致力于维持您对我们的信任，保护您的个人信息，将按照合法、正当、必要的原则使用、收集及处理您的个人信息。同时，TTB承诺，我们将按业界成熟的安全标准，采取相应的安全保护措施来保护您的个人信息。此外，我们已采取措施，防止洗钱、资助恐怖主义、规避贸易和经济制裁的行为。',
         p15: '请在使用我们的产品（或服务）前，仔细阅读并了解本隐私条款。',
         subtitle1: '一、 我们如何收集和使用您的个人信息',
         p19: '个人信息是指以电子或者其他方式记录的能够单独或者与其他信息结合识别特定自然人身份或者反映特定自然人活动情况的各种信息。',
-        p20: 'IXX仅会出于网站的注册及相关服务，收集和使用您的个人信息：',
+        p20: 'TTB仅会出于网站的注册及相关服务，收集和使用您的个人信息：',
         p21: '手机号/手机验证码/邮箱/密码/邀请码身份证正反照片/人脸识别/验证视频等信息。',
         p22: '上述信息将存储新加坡共和国境内。如能跨境传输,我们将会单独征得您的授权同意。',
         p23: '当我们要将信息用于本条款未载明的其它用途时，会事先征求您的同意。',
@@ -311,11 +311,11 @@ export default {
         p33: '我们不会将localStorage用于本条款所述目的之外的任何用途。您可根据自己的偏好管理或删除localStorage。您可以清楚计算机保存的所有localStorage，但如果您这么做，则可能出现不便启动或使用我们网站的某些功能的情况。',
         subtitle3: '三、 我们如何共享、转让、公开披露您的个人信息',
         p35: '（一）共享',
-        p36: '我们不会与IXX以外的任何公司、组织和个人分享您的个人信息,',
+        p36: '我们不会与TTB以外的任何公司、组织和个人分享您的个人信息,',
         p37: '以下情况除外：',
         p38: '1、 在获取明确同意的情况下共享：获得您的明确同意后，我们会与其他方共享您的个人信息。',
         p39: '2、 我们可能会根据法律法规规定,或按政府主管部门的强制性要求，对外共享您的个人信息。',
-        p40: '3、 与我们的关联公司共享：您的个人信息可能会与IXX的关联公司共享。我们只会共享必要的个人信息，且受本隐私条款中所声明目的的约束。关联公司如要改变个人信息的处理目的，将再次征求您的授权同意。',
+        p40: '3、 与我们的关联公司共享：您的个人信息可能会与TTB的关联公司共享。我们只会共享必要的个人信息，且受本隐私条款中所声明目的的约束。关联公司如要改变个人信息的处理目的，将再次征求您的授权同意。',
         p41: '（二） 转让',
         p42: '我们不会将您的个人信息转让给任何公司、组织和个人，但以下情况除外：',
         p43: '1. 在获取明确同意的情况下转让：获得您的明确同意后，我们会向其他方转让您的个人信息；',
@@ -325,9 +325,9 @@ export default {
         p47: '1. 获得您的明确同意后；',
         p48: '2. 基于法律的披露：在法律、法律程序、诉讼或政府主管部门强制性要求的情况下，我们可能会公开披露您的个人信息。',
         subtitle4: '四、 我们如何保护您的个人信息',
-        p50: '(一)我们已使用符合业界标准的安全防护措施保护您提供的个人信息，防止数据遭到未经授权访问、公开披露、使用、修改、损坏或丢失。我们会采取一切合理可行的措施，保护您的个人信息。例如，在您的浏览器与“服务”之间交换数据受SSL加密保护；我们同时对IXX网站提供https安全浏览方式；我们会使用加密技术确保数据的保密性：我们会使用受信赖的保护机制防止数据遭到恶意攻击；我们会部署访问控制机制，确保只有授权人员才可访问个人信息：以及我们会举办安全和隐私保护培训课程，加强员工对于保护个人信息重要性的认识。',
+        p50: '(一)我们已使用符合业界标准的安全防护措施保护您提供的个人信息，防止数据遭到未经授权访问、公开披露、使用、修改、损坏或丢失。我们会采取一切合理可行的措施，保护您的个人信息。例如，在您的浏览器与“服务”之间交换数据受SSL加密保护；我们同时对TTB网站提供https安全浏览方式；我们会使用加密技术确保数据的保密性：我们会使用受信赖的保护机制防止数据遭到恶意攻击；我们会部署访问控制机制，确保只有授权人员才可访问个人信息：以及我们会举办安全和隐私保护培训课程，加强员工对于保护个人信息重要性的认识。',
         p51: '(二)我们会采取一切合理可行的措施，确保未收集无关的个人信息。我们只会在达成本条款所述目的所需的期限内保留您的个人信息，除非需要延长保留期或受到法律的允许。',
-        p52: '(三)互联网并非绝对安全的环境，而且电子邮件、即时通讯、及与其他IXX用户的交流方式并未加密,我们强烈建议您不要通过此类方式发送个人信息。请使用复杂密码，协助我们保证您的账号安全。',
+        p52: '(三)互联网并非绝对安全的环境，而且电子邮件、即时通讯、及与其他TTB用户的交流方式并未加密,我们强烈建议您不要通过此类方式发送个人信息。请使用复杂密码，协助我们保证您的账号安全。',
         p53: '(四)互联网环境并非百分之百安全，我们将尽力确保或担保您发送给我们的任何信息的安全性。如果我们的物理、技术、或管理防护设施遭到破坏，导致信息被非授权访问、公开披露、篡改、或毁坏，导致您的合法权益受损，我们将不会承担相应的法律责任。',
         p54: '(五)在不幸发生个人信息安全事件后，我们将按照法律法规的要求，及时向您告知：安全事件的基本情况和可能的影响、我们已采取或将要采取或将要采取的处置措施、您可自主防范和降低风险的建议、对您的补救措施等。我们将及时将事件相关情况以邮件、信函、电话、推送通知等方式告知您,难以逐一告知个人信息主体时，我们会采取合理、有效的方式发布公告。同时，我们还将按照监管部门要求，主动上报个人信息安全事件的处置情况。',
         subtitle5: '五、 您的权利',

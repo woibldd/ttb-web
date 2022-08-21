@@ -538,7 +538,7 @@ export default {
 
   .nav_logo {
     float: left;
-    width: 170px;
+    width: 130px;
     height: 38px;
     margin-top: 11px;
     display: block;
