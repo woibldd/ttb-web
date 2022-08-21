@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+  <link id="icon" rel="shortcut icon" type="image/x-icon" >
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APP下载</title>
+  <style>
+    body {
+      margin: 0; 
+      padding: 0;
+    }
+    a {
+      text-decoration: none;
+    }
+    .container {
+      width: 100vw;
+      height: 100vh;
+      background:  center center/100%;
+      text-align: center;
+    }
+    .btn {
+      display:inline-block;
+      width: 81vw;
+    }
+    .apple { 
+      margin-top: 5vh; 
+    }
+    .android {
+      margin-top: 65vh; 
+    }
+    #android-btn {
+      padding: 11px 0px;
+      background-color: #ffffff;
+      border-radius:5px;
+      color: #ffffff;
+    }
+    #apple-btn {
+      padding: 11px 0px;
+      box-sizing: border-box;
+      background-color: #ffffff;
+      border-radius:5px;
+      border:1px solid;
+      color: #ffffff;
+    }
+    img {
+      width: 100%;
+    }
+    .tt-mask {height: 100vh; width: 100vw; position: fixed; top: 0; left: 0; background-color: rgba(0,0,0,.5); display: none;}
+    .tutorial-arrow {width: 27vw; position: absolute; right: 11.5vw; top: 11.25vw;}
+    .tutorial-arrow img{width: 100%; height: 100%;} 
+    .tuto__txt {position: absolute; left: -29.5vw; bottom: -4.25vw; color: #fff; width: 29.0625vw; text-align: center; font-size: 3.5vw; line-height: 1.2;}
+  </style>
+</head>
+<body>
+  <div class="container">  
+    <!-- <a class="btn android" href="https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/fobit/fobit.apk">
+      <img class="" src="./img/down_android.png" alt=""> 
+    </a>  -->
+    <a id="android-btn" class="btn android" href="https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/ttb/ttb.apk">
+      <img style="height: 20px; width: 20px;" class="" src="./img/android.png" alt="">
+      Android下载 
+    </a>
+    <!-- <a class="btn apple" href="itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/fobit/fobit.plist">
+      <img class="" src="./img/down_ios.png" alt=""> 
+    </a> -->
+    <a id="apple-btn" class="btn apple" href="https://www.dek28d.com/PGdZ8.html"> 
+      <svg version="1.1" id="icon-iphone" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        width="20px" height="20px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve"> 
+        <path class="st0" d="M63.5,15.8c5.6-7.2,4.3-15,3.9-15.6c-0.7-0.7-9.1,0.7-15,8.5c-5.2,7.2-5.2,15-4.6,15.6
+          C48.5,24.9,56.9,24.2,63.5,15.8L63.5,15.8z"/>
+        <path class="st0" d="M77.6,52.2C76.9,41.8,86.7,35.3,88.6,34v-0.7c0,0-8.5-10.4-20.8-9.8c-7.8,0.7-11.7,4.6-16.9,4.6
+          c-6.5,0-12.4-4.6-19.5-4.6c-5.9,0-22.8,5.2-24.1,27.3C6.2,73.1,21.8,93.7,27.6,97.6c5.9,3.9,9.8,2.6,16.3-0.7
+          c3.3-2,13.7-2.6,19.5,1.3c7.2,2.6,17.6,0.7,29.3-25.4C91.2,73.1,78.2,69.8,77.6,52.2L77.6,52.2z"/>
+      </svg>
+      iOS下载 
+    </a>
+    <div id="tt-mask" class="tt-mask">
+      <div class="tutorial-arrow">
+        <img src="./img/ios-tutorial-arrow.png" alt="">
+        <div class="tuto__txt">点击右上角选择在浏览器中打开</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+<script>
+
+  // function checkMobile() {
+  //   const isMobile = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
+  //   if (!isMobile) { 
+  //     let body = document.getElementsByTagName("body")[0];
+  //     body.setAttribute("style", "width: 562px;" + "margin: 0 auto"); 
+  //   }
+  // }
+
+
+
+
+
+
+  window.onload = () => {    
+    // checkMobile()
+    document.title = "下载 TTB"
+    document.head.getElementsByTagName('link')[0].href = './icon.png'
+    document.getElementsByClassName('container')[0].style.backgroundImage = "url('./img/download_h5_bg.png')"
+    document.getElementById('android-btn').setAttribute('href', 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/ttb/ttb.apk')
+    // document.getElementById('apple-btn').setAttribute('href', 'https://downloadappios.com:7521/1tZ7x.html')
+    document.getElementById('apple-btn').setAttribute('href', 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/ttb/ttb.plist') 
+    document.getElementById('icon-iphone').setAttribute('fill', '#F5C109')
+    document.getElementById('android-btn').style.backgroundColor="#F5C109"
+    document.getElementById('apple-btn').style.color="#F5C109"
+      
+    if (window.navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger') {
+      let mask = document.getElementById('tt-mask');
+      mask.style.display = 'block';
+      mask.addEventListener('touchstart', () => {
+        mask.style.display = 'none';
+      }, false);
+    }
+  }
+
+</script>

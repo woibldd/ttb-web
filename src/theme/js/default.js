@@ -63,6 +63,11 @@ module.exports = {
     'zh-CN': '/knowledgeBase',
     'zh-HK': '/knowledgeBase',
   },
+  download: {
+    android: 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/ttb/ttb.apk', 
+    ios: 'https://www.baidu.com/',
+    iosTest: ''
+  },
   request: {
     en: 'https://ixxsupport.freshdesk.com/support/tickets/new',
     ko: 'https://ixxsupport.freshdesk.com/support/tickets/new',

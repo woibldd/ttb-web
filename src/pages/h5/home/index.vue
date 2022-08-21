@@ -49,45 +49,45 @@
       </div>
       <div class="introduce box">
         <div class="title">
-          <p>{{$t('h5_home_new.describe2')}}</p>
+          <p> {{lang.feature.title}}</p>
         </div> 
         <div class="row">
           <div class="item">
             <div class="h" >
-              <img src="~@/assets/h5/home/btc@2x.png" alt="">
-              <h3>{{$t('h5_home_new.trading')}}</h3>
+              <img src="~@/assets/home/contract.png" alt="">
+              <h3>{{lang.feature.lable1}}</h3>
             </div>
-            <p class="c">
-              {{$t('h5_home_new.describe3')}}
+            <p class="c" v-html="lang.feature.describe1">
+              {{lang.feature.describe1}}
             </p> 
           </div>
           <div class="item">
             <div class="h">
-              <img src="~@/assets/h5/home/safe@2x.png" alt="">
-              <h3>{{$t('h5_home_new.safe')}}</h3>
+              <img src="~@/assets/home/efficient.png" alt="">
+              <h3>{{lang.feature.lable2}}</h3>
             </div>
-            <p class="c">
-              {{$t('h5_home_new.describe4')}}
+            <p class="c" v-html="lang.feature.describe2">
+              {{lang.feature.describe2}}
             </p> 
           </div>
         </div> 
         <div class="row">
           <div class="item">
             <div class="h">
-              <img src="~@/assets/h5/home/service@2x.png" alt="">
-              <h3>{{$t('h5_home_new.service')}}</h3>
+              <img src="~@/assets/home/safe.png" alt="">
+              <h3>{{lang.feature.lable3}}</h3>
             </div>
-            <p class="c">
-              {{$t('h5_home_new.describe5')}}
+            <p class="c" v-html="lang.feature.describe3">
+              {{lang.feature.describe3}}
             </p> 
           </div>
           <div class="item">
             <div class="h">
-              <img src="~@/assets/h5/home/rocket@2x.png" alt="">
-              <h3>{{$t('h5_home_new.efficiency')}}</h3>
+              <img src="~@/assets/home/service.png" alt="">
+              <h3>{{lang.feature.lable4}}</h3>
             </div>
-            <p class="c">
-              {{$t('h5_home_new.describe6')}}
+            <p class="c" v-html="lang.feature.describe4">
+              {{lang.feature.describe4}}
             </p> 
           </div>
         </div> 
@@ -398,6 +398,9 @@ export default {
     }
   },
   computed: {
+    lang () { 
+      return this.$t('home')
+    },
     mapTabs() {
       return [
         {

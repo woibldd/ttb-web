@@ -22,8 +22,8 @@
       </div>
     </div>
     <div class="content">
-      <div class="ix-logo"/>
-      <div class="ix-txt">IXX</div>
+      <!-- <div class="ix-logo"/> -->
+      <div class="ix-txt">TTB</div>
       <div
         class="download__btn"
         @click="download('android')">
@@ -70,6 +70,7 @@ import utils from '@/modules/utils'
 import {state, actions} from '@/modules/store'
 import 'mint-ui/lib/style.css'
 import responsiveMixin from '@/mixins/responsive'
+
 export default {
   mixins: [responsiveMixin],
   data () {
@@ -99,6 +100,9 @@ export default {
     }
   },
   methods: {
+    isMobile() {
+      return navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
+    },
     switchLang (lang) {
       actions.setLocale(lang)
       this.showLang = false
@@ -139,6 +143,8 @@ export default {
     }
   },
   created () {
+    let body = document.getElementsByTagName("body")[0];
+    this.isMobile() ?  "" : body.setAttribute("style", "width: 562px;" + "margin: 0 auto"); 
     if (this.isWeiXin) {
       this.showTutorialArrow = true
     }
