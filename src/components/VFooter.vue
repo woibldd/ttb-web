@@ -234,12 +234,13 @@ export default {
     },
     announcementLink() {
 
-      if (this.state.userInfo && this.state.theme.themeName === 'default') {
-        return process.env.BASE_API + '/ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.announcement[this.state.locale] || this.request.theme.announcement.en)
-      } else {
-        return this.state.theme.announcement[this.state.locale] || this.request.theme.announcement.en
-      }
+      // if (this.state.userInfo && this.state.theme.themeName === 'default') {
+      //   return process.env.BASE_API + '/ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.announcement[this.state.locale] || this.request.theme.announcement.en)
+      // } else {
+      //   return this.state.theme.announcement[this.state.locale] || this.request.theme.announcement.en
+      // }
       // return this.state.theme.announcement[this.state.locale] || this.state.theme.announcement.en
+      return ""
     },
     aboutLink() {
       // return `/docs/IXX_introduction_${this.state.locale || 'en'}.pdf`
@@ -253,11 +254,12 @@ export default {
       return this.state.theme.apiDoc[this.state.locale || 'en']
     },
     deepDoc() {
-      if (this.state.userInfo && this.state.theme.themeName === 'default') {
-        return process.env.BASE_API + '/ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.deep[this.state.locale] || this.request.theme.deep.en)
-      } else {
-        return this.state.theme.deep[this.state.locale] || this.request.theme.deep.en
-      }
+      // if (this.state.userInfo && this.state.theme.themeName === 'default') {
+      //   return process.env.BASE_API + '/ixx/zendesk/sso?return_to=' + encodeURIComponent(this.state.theme.deep[this.state.locale] || this.request.theme.deep.en)
+      // } else {
+      //   return this.state.theme.deep[this.state.locale] || this.request.theme.deep.en
+      // }
+      return ""
     },
     showEnTips() {
       return this.state.locale === 'en' || this.state.locale === 'ko'

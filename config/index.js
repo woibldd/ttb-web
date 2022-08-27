@@ -44,7 +44,10 @@ module.exports = {
       '/test': {
         target: 'https://i.ttb.plus/',
         changeOrigin: true,
-        secure: false
+        secure: false,
+        pathRewrite: {
+          '^\/test': ''
+        }
       }
     },
 

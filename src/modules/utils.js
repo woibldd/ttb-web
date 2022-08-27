@@ -23,7 +23,7 @@ const utils = {
   staticPath: process.env.STATIC,
   Big,
   isDev: process.env.NODE_ENV === 'development',
-  isBeta: process.env.MODE === 'beta',
+  // isBeta: process.env.MODE === 'beta',
   isProd: process.env.NODE_ENV === 'production',
   locales: localeName, 
 

@@ -14,7 +14,7 @@ if(process.env.NODE_ENV != 'development'){
   // _env_ = `https://i.ixex.pro/`
 }
 const service = axios.create({
-  baseURL: _env_ || 'https://i.ixex.pro/', // url = base url + request url
+  baseURL: _env_ || 'https://i.ttb.plus/', // url = base url + request url
   withCredentials: true, // send cookies when cross-domain requests
   timeout: 10000 // request timeout
 })
@@ -25,13 +25,13 @@ service.interceptors.request.use(
     // do something before request is sent
     // if (!config.url.startsWith('http'))config.url = process.env.VUE_APP_BASE_API_I + config.url
     // const userDataStr = getUser()
-    // console.log(store,222);
+    console.log(store,222);
     if (store.state.userData) {
       config.headers['token'] = store.state.userData.token
       // config.headers['ix_session_id'] = store.state.userData.ix_session_id
     }
     // config.headers.Origin = 'https://staging.ixex.pro'
-    config.headers['from'] = 'ixx'
+    config.headers['from'] = 'ttb'
     config.headers['lang'] = localStorage.getItem('locale') || 'zh-CN'
     return config
   },
