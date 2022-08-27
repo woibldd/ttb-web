@@ -40,13 +40,13 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    // proxyTable: {
-    //   '/': {
-    //     target: 'http://i.ix-test.com:8080/',
-    //     changeOrigin: true,
-    //     secure: false
-    //   }
-    // },
+    proxyTable: {
+      '/test': {
+        target: 'https://i.ttb.plus/',
+        changeOrigin: true,
+        secure: false
+      }
+    },
 
     // Various Dev Server settings
     host: process.env.HOST || '0.0.0.0', // can be overwritten by process.env.HOST

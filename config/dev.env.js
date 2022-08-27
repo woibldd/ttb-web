@@ -8,9 +8,10 @@ module.exports = merge(prodEnv, {
   //BASE_API: '"http://i.ix-test.com:8080"',
   // BASE_API: '"https://i.ixex.io"',
   // BASE_API: '"https://i.ixx.com"',
-  BASE_API: '"https://i.ttb.plus"',
+  BASE_API: '/test',
   // BASE_API: '"https://i.fobit.net"',
   // BASE_API: '"https://i.qimenpaipan.com"',
   // BASE_API: '"https://i.nstarex.com"',
+
   ...require("./theme.env")
 })
