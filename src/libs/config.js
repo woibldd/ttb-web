@@ -6,6 +6,7 @@ let ws = ''
 let quote = ''
 let wss = ''
 
+console.log("NODE_ENV:", process.env.NODE_ENV )
 if (process.env.NODE_ENV != 'development') {
   const val = location.host.split('.')
   const host = val.slice(val.length - 2, val.length).join('.')
@@ -30,11 +31,7 @@ if (process.env.NODE_ENV === 'development') {
   wsUrl = ws
   quoteUrl = quote
   wssUrl = wss
-} else {
-  wsUrl = ws
-  quoteUrl = quote
-  wssUrl = wss
-}
+} 
 
 const { exchangeName } = process.env.THEME_ENV
 
