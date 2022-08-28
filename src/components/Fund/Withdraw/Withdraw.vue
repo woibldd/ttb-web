@@ -322,7 +322,7 @@
             </span>
             <span
               class="row__status"
-              @click="clickVerifyRow('Kyc')"
+              @click="clickVerifyRow('profileNkyc')"
               :class="{'done': all_bound}">{{ all_bound ? $t('done') : $t('to_verify') }}</span>
           </div> 
         </div>
