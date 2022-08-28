@@ -9,7 +9,7 @@ import { state, actions} from './store'
 //   withCredentials: true
 // })
 let _env_ = ''
-// let _from = 'ixx'
+let _from = 'ttb'
 if(process.env.NODE_ENV != 'development'){
   let val = location.host.split('.')
   _env_ = val.slice(val.length - 2, val.length).join('.')
@@ -38,7 +38,7 @@ api.interceptors.request.use(config => {
     // 服务端准备好 就可以上token了
     config.headers['token'] = token
   }
-  // config.headers['from'] = _from
+  config.headers['from'] = _from
   // config.headers['from'] = 'ixx'
   // config.headers['lang'] = state.locale
   return config
