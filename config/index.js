@@ -38,6 +38,10 @@ module.exports = {
   dev: {
     THEME_ENV,
     // Paths
+    arrowedHosts: [
+      'ix.com',
+      '.ix.com'
+    ],
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {

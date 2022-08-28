@@ -297,6 +297,7 @@ const utils = {
     return domain
   },
   setCookie(name, value, days) {
+    
     utils.eraseCookie(name)
     let expires = ''
     if (days) {

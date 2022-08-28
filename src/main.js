@@ -176,11 +176,11 @@ Vue.prototype.$eventBus = new Vue({})
 Vue.prototype.$myState = state
 
 actions.setLocale()
-import mixins from './mixins'
+import mixins from './mixins'  
 Vue.mixin(mixins)
 /* eslint-disable no-new */
 const release = qs.parse(location.search.replace('?', '')).release
-if (release || !window.grayline) {
+if (release || !window.grayline) {     
   new Vue({
     el: '#app',
     router,
