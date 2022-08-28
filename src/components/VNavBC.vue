@@ -91,9 +91,9 @@
               <div>{{ $t(`market.about`) }} <icon class="arrow" name="arrow-down" /></div>
               <div class="dropdown-sub-menu">
                 <ul class="dropdown-list pt-10 pb-10">
-                  <li v-if="aboutUsLink" class="dropdown-item pl-24 pr-24"> 
+                  <!-- <li v-if="aboutUsLink" class="dropdown-item pl-24 pr-24"> 
                     <a class="link" target="_blank" :href="aboutUsLink">{{$t('footer_about')}}</a>
-                  </li>
+                  </li> -->
                   <li class="dropdown-item pl-24 pr-24">
                     <router-link class="link" to="/fee/mixContractFee">{{$t('market.fee')}}</router-link>
                   </li> 
@@ -272,12 +272,12 @@
                   class="link"
                   target="_blank">{{ $t('footer_help') }}</a>
               </li>
-              <li v-if="requestLink" class="dropdown-item pl-24 pr-24">
+              <!-- <li v-if="requestLink" class="dropdown-item pl-24 pr-24">
                 <a
                   :href="requestLink"
                   class="link"
                   target="_blank">{{ $t('footer_request') }}</a>
-              </li>
+              </li> -->
             </ul>
           </div>
         </div> 

@@ -353,9 +353,9 @@
               <li class="dropdown-item pl-24 pr-24">
                 <a class="link" target="_blank"  rel="nofollow"  :href="helpLink">{{ $t('footer_help') }}</a>
               </li>
-              <li class="dropdown-item pl-24 pr-24">
+              <!-- <li class="dropdown-item pl-24 pr-24">
                 <a class="link" target="_blank"  rel="nofollow"  :href="requestLink">{{ $t('footer_request') }}</a>
-              </li>
+              </li> -->
               <li class="dropdown-item pl-24 pr-24">
                  <router-link
                     :to="{name: 'industry'}"

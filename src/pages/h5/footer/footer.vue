@@ -20,13 +20,11 @@
           v-if="list.service"
           class="row-content">
           <router-link :to="{name: 'trading'}">{{ $t('trading') }}</router-link>
-          <a
-            :href="aboutLink"
-            target="_blank">{{ $t('footer_about') }}</a>
-          <!-- <a href="#" target="_blank">{{$t('footer_help')}}</a> --> 
-          <a
+          <!-- <a :href="aboutLink"
+            target="_blank">{{ $t('footer_about') }}</a>  -->
+          <!-- <a
             :href="requestLink"
-            target="_blank">{{ $t('footer_request') }}</a>
+            target="_blank">{{ $t('footer_request') }}</a> -->
         </div>
       </div>
       <div class="footer-row">

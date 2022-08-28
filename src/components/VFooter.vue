@@ -13,7 +13,7 @@
           <!-- {{ $t('exchangeNameConfig') }} -->
         </p>
         <div class="clearfix">
-          <div
+          <!-- <div
             class="lt">
             <img
               class="footer_ewm"
@@ -26,7 +26,7 @@
               class="footer_ewm"
               src="../assets/kefu_telegran_ewm.jpg">
             <p class="footer_ewm_ltxt">{{ $t('footer_contract_desc') }}</p>
-          </div>
+          </div> -->
           <div
             class="lt">
             <p class="footer_explain_txt">{{ $t('home.footer.explain') }}</p>
@@ -65,12 +65,12 @@
         <div class="footer_ct">
           <p>{{ $t('footer_services') }}</p>
           <router-link :to="{name: 'trading'}">{{ $t('trading') }}</router-link>
-          <a
+          <!-- <a
             :href="aboutLink"
-            target="_blank">{{ $t('footer_about') }}</a> 
-          <a
+            target="_blank">{{ $t('footer_about') }}</a>  -->
+          <!-- <a
             :href="requestLink"
-            target="_blank">{{ $t('footer_request') }}</a>
+            target="_blank">{{ $t('footer_request') }}</a> -->
           <!-- <a
             href="/proposer"
             target="_blank">{{ $t('footer_application_coin') }}</a> -->
