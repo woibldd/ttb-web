@@ -20,6 +20,7 @@ export const state = {
   verifyEmail: '', // 注册、找回密码使用的邮箱 
   tabSelected: 'all', //币对列表
   downloadTool: true,
+  site: 11,
   download: { 
     android: 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk',
     // ios: 'https://ssfdld.com?onpYQ',

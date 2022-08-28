@@ -2529,6 +2529,10 @@ export default {
     }
   },
   home: {
+    text1: 'TTB is committed to being a reliable, safe, stable and reputable international platform for digital assets. It not only provides users with safe, convenient and fair blockchain asset trading services, but also comprehensively protects users\' transaction information and asset security.',
+    text2: 'TTB exchange supports 100 + currency transactions with ultra-low handling fees, provides high-yield financial products, a deep liquidity contract market, regular discounts of mainstream tokens, and a series of coin listing activities. There are many simple and easy to operate channels for depositing and depositing legal currency.',
+    text3: 'TTB has successfully created a one-stop trading service for digital assets, which can provide users with trading services including spot, leverage, ETF and contract at the same time. In terms of security, TTB has set up a top technical team in the industry, and has carried out in-depth cooperation with many top security institutions in the industry to ensure the security of user assets. ',
+    text4: 'at the technical architecture level, senior engineers from Google and Microsoft are personally involved. TTB effectively supports the separation of dynamic and static data, supports hot data cache, supports remote disaster recovery, supports parallel expansion, and through a series of detection and optimization, effectively avoids common errors and vulnerabilities, and ensures user transactions with financial level security technology standards. ',
     how_to_register: "如何注册交易账户",
     how_to_login: "如何登陆交易账户",
     how_to_unseal: "账户被限制登陆怎么办",

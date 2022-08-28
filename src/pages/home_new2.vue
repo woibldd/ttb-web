@@ -523,7 +523,15 @@
           </div>
         </div>
       </div>
-      <div class="home-login" style="background-color: #fafafa;">
+      <div class="home-descraption" style="background-color: #fafafa;">
+        <div class="descraption-box" flex="dir:top cross:center  main:center">
+          <p class="mb-20">{{$t('home.text1')}}</p>
+          <p class="mb-20">{{$t('home.text2')}}</p>
+          <p class="mb-20">{{$t('home.text3')}}</p>
+          <p class="mb-20">{{$t('home.text4')}}</p>
+        </div> 
+      </div>
+      <div class="home-login" style="background-color: #FFFFFF;">
         <div class="home-bottom" flex="dir:top cross:center  main:center">
           <h2 class="mb-20">{{$t('home.bottom.title')}}</h2>
           <el-button v-if="!state.userInfo" @click="handleToRegister" class="break"  round>{{$t('home.bottom.register')}}</el-button>
@@ -1439,7 +1447,8 @@ export default {
         background-color: $primary;
         border-radius: 20px;
         a {
-          color: $primary-back;
+          // color: $primary-back;
+          color: #fff;
         }
         cursor: pointer;
         &.plain {
@@ -1489,6 +1498,18 @@ export default {
       }
     }
   } 
+
+  .home-descraption {
+    padding: 50px 0;
+    .descraption-box {
+      width: 1200px;
+      margin: 0 auto;
+    }
+    p {
+      text-align: left;
+      font-size: 16px;
+    }
+  }
 
   .home-login {
     .el-button.break {

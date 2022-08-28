@@ -5,7 +5,7 @@ module.exports = {
   googleAnalyticsId: 'UA-125390817-4',
   locales: ['en', 'zh-CN', 'zh-HK', 'ko'],
   themeName: 'default',
-  affix: '',
+  affix: '11',
   companyName: 'TTB.plus',
   exchangeName: 'TTB |  TTB | Rhino Exchange-BTC Contract Exchange Ranking-Bitcoin Price Real-Time Quote Trend Today-Perpetual Delivery Contract, BTC合约交易所排名-比特币价格今日实时行情走势-永续交割合约',
   exchangeNameConfig: {

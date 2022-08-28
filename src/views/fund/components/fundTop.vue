@@ -181,7 +181,7 @@ export default {
         }
         label {
           padding: 3px 5px;
-          background-color: #21eef1;
+          background-color: #f5d129;
           border-radius: 4px;
           font-size: 14px;
           color:#ffffff; 

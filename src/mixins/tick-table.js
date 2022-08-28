@@ -249,7 +249,7 @@ export default {
         this.$set(item, 'delta', item.delta || false)
         this.$set(item, 'vol', item.vol || false)
       })
-      const optional = await service.getOptionalList({ site: 2 })
+      const optional = await service.getOptionalList({ site: 11 })
       if (!!optional && optional.data != null) {
         for (const item of optional.data) {
           const id = item.id

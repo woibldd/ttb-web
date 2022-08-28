@@ -222,13 +222,13 @@ export default {
       if (pair.like) {
         pair.like = false
         service.delOptional({
-          site: 2,
+          site: 11,
           id: pair.id
         })
       } else {
         pair.like = true
         service.addOptional({
-          site: 2,
+          site: 11,
           id: pair.id
         })
       }

@@ -149,7 +149,7 @@ const service = {
     }, 0)
   },
   removeAllOrder() {
-    return request('order/remove_all', { site: 2 })
+    return request('order/remove_all', { site: 11 })
   },
   queryOrder({ id, finished }) {
     if (finished) {
