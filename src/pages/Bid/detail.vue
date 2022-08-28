@@ -1,6 +1,7 @@
 <template>
   <div class="bid-detail-container">
-    <div class="backTop" 
+    <div
+      class="backTop"
       @click="backTop">
       <i class="iconfont">&#xe64e;</i>
       <span>{{ $t('bby_shouy7') }}</span>
@@ -8,12 +9,13 @@
     <div class="title-box">
       <div class="logo"/>
       <h1>{{ cell.currency }}</h1>
-       <h2 v-if="state.locale==='zh-CN'">{{ cell.product }}</h2>
+      <h2 v-if="state.locale==='zh-CN'">{{ cell.product }}</h2>
       <h2 v-else-if="state.locale==='zh-HK'">{{ cell.productCt }}</h2>
       <h2 v-else-if="state.locale==='en'">{{ cell.productEn }}</h2>
       <h2 v-else-if="state.locale==='ko'">{{ cell.productKn }}</h2>
-      <em class="jl" 
-@click="jl">{{ $t('bby_shise1') }}</em>
+      <em
+        class="jl"
+        @click="jl">{{ $t('bby_shise1') }}</em>
     </div>
     <div class="bid-detail-area">
       <div class="message-box">
@@ -29,8 +31,11 @@
         </div>
         <div class="range-box">
           <div class="range">
-            <el-progress :text-inside="true" 
-:stroke-width="12" :percentage="cell.down_amount" status="warning"/>
+            <el-progress
+              :text-inside="true"
+              :stroke-width="12"
+              :percentage="cell.down_amount"
+              status="warning"/>
           </div>
           <div class="range-txt">
             <span class="lock">{{ $t('bby_shouy3') }} {{ cell.lockedAmount }}</span>
@@ -57,17 +62,17 @@
           <div class="time-line">
             <el-timeline>
               <el-timeline-item
-                color="#F5C109">
+                color="#C9A96C">
                 {{ $t('bby_shouy28') }}
                 <span style="padding-left: 10px;color: #333">{{ detail.timeLine[0].timestamp }}</span>
               </el-timeline-item>
               <el-timeline-item
-                color="#F5C109">
+                color="#C9A96C">
                 {{ $t('bby_shouy29') }}
                 <span style="padding-left: 10px;color: #333">{{ detail.timeLine[1].timestamp }}</span>
               </el-timeline-item>
               <el-timeline-item
-                color="#F5C109">
+                color="#C9A96C">
                 {{ $t('bby_shouy30') }}
                 <span style="padding-left: 10px;color: #333">{{ detail.timeLine[2].timestamp }}</span>
               </el-timeline-item>
@@ -80,14 +85,16 @@
         <div class="buy-area">
           <span>{{ $t('account_balance') }} {{ accountBalance }} {{ cell.currency }}</span>
           <em class="pay">
-            <router-link to="/fund/deposit" 
-tag="a">{{ $t('bby_shouy15') }}</router-link>
-            <!--<a href="http://127.0.0.1:8080/fund/deposit">{{$t('bby_shouy15')}}</a></em>-->
+            <router-link
+              to="/fund/deposit"
+              tag="a">{{ $t('bby_shouy15') }}</router-link>
+              <!--<a href="http://127.0.0.1:8080/fund/deposit">{{$t('bby_shouy15')}}</a></em>-->
           </em>
           <em class="buy">
-            <router-link to="/trading/BTC_USDT" 
-tag="a">{{ $t('bby_shouy16') }}</router-link>
-            <!--<a href="http://127.0.0.1:8080/fund/deposit">{{$t('bby_shouy16')}}</a>-->
+            <router-link
+              to="/trading/BTC_USDT"
+              tag="a">{{ $t('bby_shouy16') }}</router-link>
+              <!--<a href="http://127.0.0.1:8080/fund/deposit">{{$t('bby_shouy16')}}</a>-->
           </em>
         </div>
         <div class="buy-ipt">
@@ -109,7 +116,10 @@ tag="a">{{ $t('bby_shouy16') }}</router-link>
           </div>
           <div class="tip">{{ $t('bby_shouy18') }}<em>{{ money }}</em>{{ cell.currency }}</div>
         </div>
-        <button class="join-btn" :disabled="disabled" @click="submit">
+        <button
+          class="join-btn"
+          :disabled="accordDate || disabled"
+          @click="submit">
           {{ $t('bby_shouy20') }}
         </button>
       </div>
@@ -129,13 +139,13 @@ tag="a">{{ $t('bby_shouy16') }}</router-link>
 </template>
 
 <script type="text/ecmascript-6">
-import axios from 'axios'
+// import axios from 'axios'
 import {getLocalTime} from './mixins'
 import Vue from 'vue'
 import qs from 'qs'
 import service from '@/modules/service'
-import {envApi} from '../../modules/request'
 import {state} from '@/modules/store'
+// import { envApi } from '../../modules/request'
 
 export default {
   data () {
@@ -166,24 +176,21 @@ export default {
         timeLine: [{
           content: this.$t('bby_shouy28'),
           timestamp: '2018-04-15',
-          color: '#F5C109'
+          color: '#C9A96C'
         }, {
           content: this.$t('bby_shouy29'),
           timestamp: '2018-04-13',
-          color: '#F5C109'
+          color: '#C9A96C'
         }, {
           content: this.$t('bby_shouy30'),
           timestamp: '2018-04-11',
-          color: '#F5C109'
+          color: '#C9A96C'
         }]
       },
       disabled: true,
       cell: {},
       point: 0
     }
-  },
-  mounted () {
-
   },
   methods: {
     //   manageResopetate
@@ -193,16 +200,16 @@ export default {
         if (res.code === 0) {
           res.data.forEach((item) => {
             if (item.currency === this.cell.currency) {
-              // console.log(item.currency)
-              // console.log(this.cell.currency)
-              this.accountBalance = this.$big(item.available).toString();
+              console.log(item.currency)
+              console.log(this.cell.currency)
+              this.accountBalance = Number(item.available)
             }
           })
         }
       })
     },
     backTop () {
-      this.$router.push('/snowball/bazaar')
+      this.$router.push('/snowball')
     },
     inputKeyBoard (e) {
       if (e > this.accountBalance) {
@@ -237,16 +244,13 @@ export default {
           this.$message.warning(this.$t('bby_shouy32'))
         }
       } else {
-        this.$message.warning(`可用数量不足`)
+        this.$message.warning(this.$t('bby_shise2'))
         this.disabled = true
       }
     },
     jl () {
-      this.$router.replace({
-        name: 'FundHistory',
-        params: {
-          from: 'byyRecord'
-        } 
+      this.$router.push({
+        path: '/snowballTable'
       })
     },
     submit () {
@@ -268,7 +272,7 @@ export default {
               message: this.$t('bby_shouy31')
             })
             this.$router.push({
-              path: '/bidtable'
+              path: '/snowballTable'
             })
           } else {
             this.$message.warning(`${res.message}`)
@@ -281,23 +285,29 @@ export default {
       }
     }
   },
+  computed: {
+    accordDate () {
+      return this.cell.deadlineTime - new Date().getTime() < 0
+    }
+  },
   mounted () {
     this.timeLine = [{
       content: this.$t('bby_shouy28'),
       timestamp: '2018-04-15',
-      color: '#F5C109'
+      color: '#C9A96C'
     }, {
       content: this.$t('bby_shouy29'),
       timestamp: '2018-04-13',
-      color: '#F5C109'
+      color: '#C9A96C'
     }, {
       content: this.$t('bby_shouy30'),
       timestamp: '2018-04-11',
-      color: '#F5C109'
+      color: '#C9A96C'
     }]
   },
   created () {
     this.cell = JSON.parse(window.localStorage.getItem('detail'))
+    // eslint-disable-next-line camelcase
     const remaining_amount = Number(this.cell.total) - Number(this.cell.lockedAmount)
     let c = Number(this.cell.lockedAmount) / (Number(this.cell.total) / 100)
     if (this.cell.lockedAmount.indexOf('.') > 0) {
@@ -340,7 +350,7 @@ export default {
         }
       }
     }
-    let timestamp = Date.parse(new Date())
+    // let timestamp = Date.parse(new Date())
     if (this.cell.state === 1) {
       this.disabled = false
     } else {
@@ -388,7 +398,7 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
-  $main-bg: #00CED2;
+  $main-bg: #C9A96C;
   $disabled-bg: #F2F3F5;
   $white-color: #fff;
   $disabled-color: #B0B4B9;
@@ -401,41 +411,33 @@ export default {
     url('//at.alicdn.com/t/font_1244642_2j1jpa97dqh.ttf') format('truetype'),
     url('//at.alicdn.com/t/font_1244642_2j1jpa97dqh.svg#iconfont') format('svg');
   }
-
-  .iconfont {
-    font-family: "iconfont" !important;
-    font-size: 16px;
-    font-style: normal;
+  .iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;font-style:normal;
     -webkit-font-smoothing: antialiased;
     -webkit-text-stroke-width: 0.2px;
     -moz-osx-font-smoothing: grayscale;
   }
-
   .bid-detail-container {
     width: 960px;
     margin: 0 auto;
-
     .backTop {
       padding: 16px 0;
       font-size: 14px;
       color: $main-bg;
       cursor: pointer;
-
       i {
         vertical-align: middle;
       }
-
       span {
         vertical-align: middle;
       }
     }
-
     .title-box {
       padding: 12px 0;
       border-bottom: 2px solid #ececec;
       position: relative;
       width: 100%;
-
       .jl {
         color: $main-bg;
         position: absolute;
@@ -443,8 +445,7 @@ export default {
         top: 24px;
         cursor: pointer;
         display: block;
-      }
-
+    }
       .logo {
         width: 36px;
         height: 36px;
@@ -453,32 +454,26 @@ export default {
         background: $disabled-bg;
         margin-right: 10px;
       }
-
-      h1, h2 {
+      h1,h2 {
         display: inline-block;
         color: #333;
         vertical-align: middle;
         font-size: 18px;
       }
-
       h1 {
         font-size: 24px;
         margin-right: 10px;
       }
     }
-
     .bid-detail-area {
       overflow: hidden;
       display: flex;
-
       & > div {
         flex: 1;
         padding: 20px;
       }
-
       .message-box {
         position: relative;
-
         &::after {
           content: '';
           position: absolute;
@@ -488,160 +483,129 @@ export default {
           right: 0;
           top: 0;
         }
-
         & > div {
           h1 {
             font-size: 28px;
             font-weight: bold;
             color: $main-bg;
           }
-
           span {
             color: $disabled-color;
             font-size: 12px;
           }
         }
-
         .tips {
           display: flex;
-
           .rate {
             flex: 1;
           }
-
           .week {
             flex: 0 0 0 80px;
             width: 80px;
-
             h1 {
               color: #333;
             }
-
             span {
               text-align: center;
             }
           }
         }
-
         .range-box {
           width: 70%;
           margin-top: 40px;
-
           .range-txt {
             font-size: 13px;
             display: flex;
             margin: 12px 0;
-
             span {
               color: #333;
               flex: 1;
-
               &:last-child {
                 text-align: right;
               }
             }
           }
-
           dl {
             padding: 12px 0;
             border-top: 2px solid #ececec;
             border-bottom: 2px solid #ececec;
-
             dd {
               font-size: 14px;
               display: flex;
-
               em, span {
                 flex: 1
               }
-
               em {
                 text-align: right;
               }
             }
           }
-
           .time-line {
             margin-top: 12px;
           }
         }
       }
     }
-
     .el-progress-bar__innerText {
       color: transparent;
     }
-
     .el-timeline-item__tail {
-      border-color: rgba(193, 165, 56, .3)
+      border-color: rgba(193,165,56, .3)
     }
-
     .el-timeline-item__node--normal {
       width: 6px;
       height: 6px;
       border: 2px solid #fff;
       left: 0px;
     }
-
     .el-timeline-item {
       padding-bottom: 6px
     }
-
     .el-timeline-item__content {
       font-size: 12px;
     }
-
     .el-progress.is-warning .el-progress-bar__inner {
       background: $main-bg;
     }
-
     .buy-area {
       float: right;
       font-size: 12px;
-
       span {
         color: $disabled-color;
       }
-
       em {
         display: inline-block;
         padding-left: 18px;
         color: $main-bg;
         position: relative;
-
         &::after {
           content: '';
           position: absolute;
           left: 9px;
           top: 15%;
-          width: 1px;
+          width:1px;
           background: $main-bg;
           height: 70%;
           cursor: pointer;
         }
       }
     }
-
     .buy-ipt {
       width: 100%;
       clear: both;
-
       .tip {
         font-size: 13px;
         color: $disabled-color;
         line-height: 40px;
-
         em {
-          padding: 0 12px;
+          padding:0 12px;
           color: $main-bg;
         }
       }
-
       .title {
         padding: 16px 0 10px 0;
         font-size: 12px;
       }
-
       .ipt-inner {
         width: 100%;
         box-sizing: border-box;
@@ -652,7 +616,6 @@ export default {
         border-radius: 4px;
         overflow: hidden;
         position: relative;
-
         input {
           width: 100%;
           padding: 11px 12px;
@@ -662,15 +625,13 @@ export default {
           float: left;
           font-size: 16px;
           text-align: center;
-          -moz-appearance: textfield;
-
+          -moz-appearance:textfield;
           &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
             -webkit-appearance: none;
             appearance: none;
             margin: 0;
           }
         }
-
         .rage {
           position: absolute;
           right: 20px;
@@ -680,20 +641,18 @@ export default {
           text-align: right;
           margin-left: 8px;
           color: $main-bg;
-
           em {
             display: inline-block;
             padding-left: 18px;
             color: $main-bg;
             position: relative;
-
             &::after {
               content: '';
               position: absolute;
               left: 9px;
               top: 50%;
               margin-top: -6px;
-              width: 1px;
+              width:1px;
               background: $main-bg;
               height: 12px;
               cursor: pointer;
@@ -702,7 +661,6 @@ export default {
         }
       }
     }
-
     .join-btn {
       width: 100%;
       height: 48px;
@@ -717,7 +675,6 @@ export default {
       border-color: transparent;
       cursor: pointer;
       font-size: 16px;
-
       &:disabled {
         background: $disabled-bg;
         color: $disabled-color;
@@ -725,12 +682,10 @@ export default {
         cursor: not-allowed;
       }
     }
-
     .rule-msg {
       width: 100%;
       overflow: hidden;
       margin-top: 30px;
-
       dt {
         display: inline-block;
         font-size: 16px;
@@ -739,7 +694,6 @@ export default {
         border-bottom: 1px solid $main-bg;
         margin-bottom: 12px;
       }
-
       dd {
         font-size: 14px;
         line-height: 24px;

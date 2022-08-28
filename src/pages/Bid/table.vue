@@ -1,62 +1,54 @@
 <template>
-  <div style="width: 1200px;margin: 40px auto;" class="detail-table">
-    <div class="backTop" @click="backTop">
-      <i class="iconfont">&#xe64e;</i>
-      <span>{{$t('bby_shouy7')}}</span>
-    </div>
-    <el-table  
-      :data="tableData"
-      :empty-text="$t('no_data')"
-      border
-      scripe
-      style="width: 100%"> 
-      <el-table-column
-        prop="manageName"
-        :label="$t('产品中文名称')"
-        width="180">
-      </el-table-column> 
+    <div style="width: 1200px;margin: 40px auto;" class="detail-table">
+        <div class="backTop" @click="backTop">
+            <i class="iconfont">&#xe64e;</i>
+            <span>{{$t('bby_shouy7')}}</span>
+        </div>
+        <el-table  
+        :data="tableData"
+        :empty-text="$t('no_data')"
+        border
+        scripe
+        style="width: 100%">
+
       <el-table-column
         prop="createTime"
-        :label="$t('time')"
+       :label="$t('time')"
         width="180">
-      </el-table-column> 
+      </el-table-column>
+
       <el-table-column
         prop="currency"
-        :label="$t('currency')"
+       :label="$t('currency')"
         width="180">
-      </el-table-column> 
+      </el-table-column>
+
       <el-table-column
         prop="amount"
-        :label="$t('otc_trans_idsl')">
+       :label="$t('otc_trans_idsl')">
       </el-table-column>
       <el-table-column
         prop="income"
-        :label="$t('bby_shouy18')" >
+     :label="$t('bby_shouy18')" >
       </el-table-column>
-      <el-table-column
+       <el-table-column
         prop="opetate"
-        :label="$t('operation')">
+      :label="$t('operation')">
       </el-table-column>
       <el-table-column
         prop="state"
-        :label="$t('status')" >
+      :label="$t('status')" >
       </el-table-column>
-      <el-table-column
-        prop="unlockTime"
-        :label="$t('预计还款时间')"
-        width="180">
-      </el-table-column> 
-
-    </el-table>
-    <div style="text-align:center;margin-top: 20px;">
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :total="total"
-        @current-change="currentChange">
-      </el-pagination>
+   </el-table>
+   <div style="text-align:center;margin-top: 20px;">
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="total"
+            @current-change="currentChange">
+          </el-pagination>
+      </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -75,40 +67,45 @@ export default {
         }
     },
     methods: {
-      backTop () {
-        this.$router.push('/snowball')
-      },
-      manageResopetate (params) {
-        service.manageResopetate(params).then(res => { 
-          if (res.code === 0) {
-            this.tableData=res.data.data
-            this.total = res.data.total
-            if (this.tableData.length > 0) {
-              this.tableData.forEach((item) => {
-                const stateName = item.state === 1 ?  $t('qrcode_close') : item.state === 2 ? $t('waiting_for_release') : item.state === 3 ? $t('waiting_for_release') : $t('bby_shise6')
-                const siteName = item.site === 1 ? 'ix' : 'ixx'
-                const opetateName = item.opetate === 1 ? $t('bby_shise7') : $t('bby_shise8')
-                Vue.set(item, 'state', stateName)
-                Vue.set(item, 'site', siteName)
-                Vue.set(item, 'opetate', opetateName)
-              })
+         backTop () {
+            this.$router.push('/snowball')
+        },
+        manageResopetate (params) {
+        service.manageResopetate(params).then(res => {
+            console.log(res)
+            if (res.code === 0) {
+                this.tableData=res.data.data
+                this.total = res.data.total
+                if (this.tableData.length > 0) {
+                    this.tableData.forEach((item) => {
+                        const stateName = item.state === 1 ?  $t('qrcode_close') : item.state === 2 ? $t('waiting_for_release') : item.state === 3 ? $t('waiting_for_release') : $t('bby_shise6')
+                        const siteName = item.site === 1 ? "ix" : 'ixx'
+                        const opetateName = item.opetate === 1 ? $t('bby_shise7') : $t('bby_shise8')
+                        Vue.set(item, 'state', stateName)
+                        Vue.set(item, 'site', siteName)
+                        Vue.set(item, 'opetate', opetateName)
+                    })
+                }
             }
-          }
         })
-      }, 
+      },
+
+      
       currentChange(e) {
-          this.history.start = e 
+          this.history.start = e
+      console.log('1111111111111111111111111111111111111111111111111111111111111')
           this.manageResopetate(this.history)
       }
     },
-    created() { 
+    created() {
+      console.log('ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss')
         this.manageResopetate(this.history)
     }
 }
 </script>
 
 <style lang="scss">
-  $main-bg: #00CED2;
+  $main-bg: #C9A96C;
   $disabled-bg: #F2F3F5;
   $white-color: #fff;
   $disabled-color: #B0B4B9;

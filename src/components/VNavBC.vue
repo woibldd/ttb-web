@@ -100,7 +100,13 @@
                 </ul>
               </div>
             </div>
-          </div> 
+          </div>  
+
+
+          <div class="mr-10">
+            <router-link class="nav_link ml-30" to="/snowball/bazaar">{{$t('bidTitle')}}</router-link>
+          </div>
+          
         </div>  
       </div> 
       <div class="nav_right">
@@ -660,7 +666,7 @@ export default {
         }
 
         &.router-link-active {
-          color: $nav-hover-color;
+          // color: $nav-hover-color;
         }
 
         .hot,
@@ -873,8 +879,8 @@ export default {
       border-bottom: none;
       .ind_cen {
         .nav_link { 
-          // color: $home-header-colorlight;
-          color: $primary-back;
+          color: #fff;
+          // color: $primary-back;
         }  
       }
     }

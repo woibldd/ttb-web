@@ -6,9 +6,9 @@
         <div class="sub-text">{{ $t('bubble_site_tips')}}</div>
         <div class="content">  
           <!-- <i class="icon warn-icon"></i> -->
-          <a href="https://ixx.com" class="domain-text">
+          <a href="https://ttb.plus" class="domain-text">
             <img src="~@/assets/safe.png" alt="" class='safe-icon'>
-              https://ixx.com
+              https://ttb.plus
           </a>
         </div>
       </div>  
