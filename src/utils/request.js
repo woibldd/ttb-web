@@ -24,8 +24,7 @@ service.interceptors.request.use(
   config => {
     // do something before request is sent
     // if (!config.url.startsWith('http'))config.url = process.env.VUE_APP_BASE_API_I + config.url
-    // const userDataStr = getUser()
-    console.log(store,222);
+    // const userDataStr = getUser() 
     if (store.state.userData) {
       config.headers['token'] = store.state.userData.token
       // config.headers['ix_session_id'] = store.state.userData.ix_session_id

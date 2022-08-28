@@ -1500,6 +1500,7 @@ export function request(url, body, options) {
 }
 
 function quote(url, body, options) {
+  console.log({config})
   return fetchQuota(config.quoteUrl + url, body, options, 'get')
 }
 
