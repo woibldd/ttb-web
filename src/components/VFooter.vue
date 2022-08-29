@@ -13,14 +13,14 @@
           <!-- {{ $t('exchangeNameConfig') }} -->
         </p>
         <div class="clearfix">
-          <!-- <div
+          <div
             class="lt">
             <img
               class="footer_ewm"
-              src="../assets/ixx_kefu_big.png">
+              src="../assets/pic-contact-wx.jpeg">
             <p class="footer_ewm_ltxt">{{ $t('home.footer.footer_contract_desc') }}</p>
           </div>
-          <div
+          <!-- <div
             class="lt">
             <img
               class="footer_ewm"
