@@ -64,7 +64,9 @@ export default {
   
   .banner { 
     height:296px;
-    color: #fff;
+    // color: #fff;
+    color: $primary-back;
+    
     .banner-wrap {
       width: 1200px;
       height:296px;

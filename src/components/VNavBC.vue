@@ -16,7 +16,7 @@
       <router-link  
         v-else
         :to="{name:'home'}" 
-        :style="{backgroundImage:`url(${require('../assets/ixx/ixx_logo'+ (scrollTop===0 ? '-light' : '-dark') +'.png')})`}" 
+        :style="{backgroundImage:`url(${require('../assets/ixx/ixx_logo-dark.png')})`}" 
         class="nav_logo"/>
       <div class="nav_left"> 
         <div  class="left_options" flex="main:left">   
@@ -870,8 +870,8 @@ export default {
     border-bottom: 1px solid #eee;
     .ind_cen {
       .nav_link {
-        color: #020202;
-        // color: $primary-back;
+        // color: #020202;
+        color: $primary-back;
       }  
     }
     &.top {
@@ -879,8 +879,8 @@ export default {
       border-bottom: none;
       .ind_cen {
         .nav_link { 
-          color: #fff;
-          // color: $primary-back;
+          // color: #fff;
+          color: $primary-back;
         }  
       }
     }

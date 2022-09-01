@@ -1264,7 +1264,8 @@ export default {
       margin-top:132px;
       font-size: 34px;
       text-align: center;
-      color: #fff;
+      // color: #fff;
+      color: $primary-back;
     }
     .option {
       margin: 30px auto 0;
@@ -1302,7 +1303,8 @@ export default {
         }
         &--primary {
           background-color:#F5C109;
-          color: #ffffff;
+          // color: #ffffff;
+          color: $primary-back; 
         }
       }
     }
@@ -1447,8 +1449,8 @@ export default {
         background-color: $primary;
         border-radius: 20px;
         a {
-          // color: $primary-back;
-          color: #fff;
+          color: $primary-back;
+          // color: #fff;
         }
         cursor: pointer;
         &.plain {
