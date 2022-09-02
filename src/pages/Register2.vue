@@ -480,8 +480,10 @@ export default {
       this.clearCountDown()
     },
     fixPosition () {
+          console.log('isMobile')
       try {
         if (utils.isMobile()) {
+          console.log('isMobile')
           this.$refs.container.style.width = '100%'
           this.$refs.container.style.marginTop = '0'
         } else {
@@ -492,9 +494,14 @@ export default {
         console.log(e)
       }
     },
+    initnc() { 
+      this.$refs.nc.ncreset();
+      this.$refs.ncvalid.ncreset();
+      this.isnc = false;
+      this.shownc = false; 
+    }
   },
-  mounted () {
-    this.initnc(); // 代翔: 初始化滑动验证组件
+  mounted () { 
     this.$eh.$on('app:resize', () => this.fixPosition())
     this.$nextTick(this.fixPosition)
   },

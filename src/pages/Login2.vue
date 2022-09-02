@@ -1,58 +1,10 @@
 <template>
   <div class="register-container"> 
-
     <div class="register-box" ref="container" flex="box:last">
-      <!-- <div class="corner-icon-view view-type-password" v-if="step===1">  
-        <div class="label" @click="handleChangeLoginType">
-          <div class="qrcode" v-if="loginType==='password'" @click="loginType='qrcode'">
-            <icon style="font-size: 60px;" name="login-qrcode" />
-          </div> 
-          <div class="qrcode pt-7 pr-7" v-else @click="loginType='password'">
-            <icon style="font-size: 38px;" name="compute" />
-          </div> 
-          <div class="mask"></div>
-        </div>
-      </div> -->
-      <!-- <div v-if="loginType==='qrcode'" class="wrap">
-        <div class="register-title">
-          <h3>手机扫码，安全登录</h3>
-        </div>
-        <div class="register-content">
-          <div class="scan-before" v-if="qrStatus===1">
-            <div class="login-qrcode mt-30 pt-30 txc"> 
-              <canvas
-                class="qr-img"
-                ref="qr"/> 
-              <div class="qr-mask" v-if="!qrEnable">
-                <div class="text mt-30 mb-10">二维码已失效</div>
-                <el-button type="primary" @click="freshQrcode">刷新二维码</el-button>
-              </div>
-            </div>
-            <div class="login-tip  mt-15" flex="main:center cross:center">
-              <span class="f20 text-primary" >
-                <icon class="f20"  name="scan" />
-              </span>
-              打开 IXX App 扫一扫登录
-            </div> 
-          </div>
-          <div class="scan-after" v-else-if="qrStatus===2">
-            <div class="scan-result">
-              <div class="result-img txc pd-30 text-success">
-                <icon style="font-size: 40px;" name="duigou" />
-              </div>
-              <div class="result-text txc">扫描成功！</div>
-            </div>
-            <div class="scan-tips txc mt-20">请在手机上根据提示确认登录</div> 
-          </div>
-        </div>
-        <div class="register-footer mt-20 text-primary" flex="main:right">
-          <label  @click="handleChangeLoginType">密码登录</label>
-        </div>
-      </div> -->
       <div v-if="step===1" class="wrap"  flex-box="1">
         <div class="register-title">
           <h3>
-            {{$t('customer.loginAccount', {siteName: 'IXX'})}}
+            {{$t('customer.loginAccount', {siteName: 'TTB'})}}
           </h3>
         </div>
         <div class="register-content"> 

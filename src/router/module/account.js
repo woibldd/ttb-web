@@ -9,7 +9,7 @@ export const accountRouter = [
     meta: {
       auth: false,
       nav: true,
-      class: 'login'
+      class: 'login dark'
     },
     component: () => import(/* webpackChunkName: "home" */ '@/pages/Account'),
     children: [

@@ -272,7 +272,11 @@ export const routes = [
   {
     path: '/services',
     name: 'terms',
-    component: terms
+    component: terms,
+    meta: { 
+      nav: true, 
+      class: 'dark'
+    },
   },
   // {
   //   path: '/trading/:pair?',

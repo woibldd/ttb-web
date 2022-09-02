@@ -116,86 +116,15 @@
             <!-- <p class="footer_ltxt">{{ $t('home.footer.affiliate') }}</p> -->
           </div>
           <div class="bottom-txt bot-lb">
-            <div class="contact-list">
-              <a
-                rel="nofollow"
-                class="contact-item-wrapper pointer"
-                target="_blank"
-                href=' https://www.facebook.com/profile.php?id=100040054419479'>
-                <icon
-                  class="contact-item"
-                  name="footer-facebook"/>
-              </a>
-              <a
-                rel="nofollow"
-                class="contact-item-wrapper pointer"
-                target="_blank"
-                href='https://twitter.com/IXX_Official'>
-                <icon
-                  class="contact-item"
-                  name="footer-twitter"/>
-              </a>
-              <a
-                rel="nofollow"
-                href="mailto:server@ttb.plus"
-                target="_blank"
-                class="contact-item-wrapper pointer">
-                <icon
-                  class="contact-item"
-                  name="footer-email"/>
-              </a>
+            <div class="contact-list"> 
               <div class="contact-item-wrapper ">
                 <icon
                   class="contact-item"
                   name="footer-wx"/>
                 <img
                   class="contact-img"
-                  src="../assets/pic-contact-wx.png">
-              </div>
-              <a
-                rel="nofollow"
-                target="_blank"
-                :href="showEnTips ? 'https://t.me/ixxofficial' : 'https://t.me/ixxofficial'"
-                class="contact-item-wrapper pointer">
-                <icon
-                  class="contact-item "
-                  name="footer-telegram"/>
-              </a>
-              <div class="contact-item-wrapper hide_en">
-                <icon
-                  class="contact-item"
-                  name="footer-biyong"/>
-                <img
-                  class="contact-img"
-                  src="../assets/pic-contact-biyong.png">
-              </div>
-              <a
-                rel="nofollow"
-                target="_blank"
-                href="https://www.instagram.com/ixxexchange/"
-                class="contact-item-wrapper pointer">
-                <icon
-                  class="contact-item"
-                  name="footer-Instagram"/>
-              </a>
-              <a
-                rel="nofollow"
-                target="_blank"
-                href="https://www.linkedin.com/in/ixx-digital-assets-trading-community-134877194/"
-                class="contact-item-wrapper pointer">
-                <icon
-                  class="contact-item "
-                  name="footer-linkedin"/>
-              </a>
-              <!-- <a
-                rel="nofollow"
-                target="_blank"
-                href="https://medium.com/@ixxofficial"
-                class="contact-item-wrapper pointer">
-                <icon
-                  class="contact-item "
-                  name="footer-medium"/>
-              </a> -->
+                  src="../assets/pic-contact-wx.jpeg">
+              </div> 
             </div>
             <p class="copyright">Copyright © 2022 btt.plus</p>
           </div>

@@ -3,21 +3,19 @@
     :class="[myClass, {top: scrollTop===0}]"
     class="bc_nav_box"> 
     <div class="ind_cen"> 
-      <router-link 
-        v-if="(myClass || '').indexOf('dark') > -1"
+      <router-link  
         :to="{name:'home'}" 
         :style="{backgroundImage: `url(${require('../assets/ixx/ixx_logo.png')})`}"
-        class="nav_logo"/>   
+        class="nav_logo dark-logo"/>   
       <!-- <router-link 
         v-else
         :to="{name:'home'}" 
         :style="{backgroundImage: `url(${require('../assets/site/' + state.siteName + '/logo'+ (scrollTop===0 ? '-light' : '-dark') +'.png')})`}"
         class="nav_logo"/>  -->
-      <router-link  
-        v-else
+      <router-link   
         :to="{name:'home'}" 
         :style="{backgroundImage:`url(${require('../assets/ixx/ixx_logo-dark.png')})`}" 
-        class="nav_logo"/>
+        class="nav_logo light-logo"/>
       <div class="nav_left"> 
         <div  class="left_options" flex="main:left">   
           <div class="mr-10">
@@ -332,7 +330,7 @@ export default {
       default: false
     }, 
     myClass: {
-      type: String,
+      type: [String, Array],
       default: 'dark'
     },
     from: {
@@ -532,6 +530,20 @@ export default {
   height: 60px;
   padding-left: 30px;
   min-width: 1340px;
+  .dark-logo {
+    display: none;
+  }
+  .light-logo {
+    display: block;
+  }
+  &.dark {
+    .dark-logo {
+      display: block;
+    }
+    .light-logo {
+      display: none;
+    }
+  }
   .border-right-1 {
     border-right: 1px solid; 
   }
@@ -547,7 +559,6 @@ export default {
     width: 100px;
     height: 38px;
     margin-top: 11px;
-    display: block;
     // background-image: url("../assets/ixx/ixx_logo.png");
     background-size: contain;
     background-repeat: no-repeat;

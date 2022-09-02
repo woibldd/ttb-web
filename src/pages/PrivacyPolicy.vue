@@ -125,7 +125,7 @@
 </template>
 
 <script>
-import VNav2 from '@/components/VNav3'
+import VNav2 from '@/components/VNavBC'
 import DocWrap from '@/components/docwrap'
 import utils from '@/modules/utils'
 export default {
