@@ -23,7 +23,7 @@ export const state = {
   site: 11,
   download: { 
     // android: 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ixx.apk',
-    android: 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/ttb.apk', 
+    android: 'https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/ttb/ttb.apk', 
     // ios: 'https://ssfdld.com?onpYQ',
     // ios: 'itms-services://?action=download-manifest&url=https://upgrade-app.oss-cn-hangzhou.aliyuncs.com/two/install-manifest.plist',
     ios: 'https://www.ndkfe.com/iX5qQ.html'
