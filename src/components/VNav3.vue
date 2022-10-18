@@ -56,9 +56,9 @@
                 <li class="dropdown-item pl-24 pr-24"> 
                   <router-link :to="{name:'future'}" class="nav_log_res mr-20">{{ $t("contract_btc") }}</router-link>
                 </li>
-                <li class="dropdown-item pl-24 pr-24">  
+                <!-- <li class="dropdown-item pl-24 pr-24">  
                   <router-link :to="{name:'unit'}" class="nav_log_res mr-20">{{ $t("currency-unit") }}</router-link> 
-                </li> 
+                </li>  -->
                 <li class="dropdown-item pl-24 pr-24"> 
                   <router-link :to="{name:'mix'}" class="nav_log_res mr-20">{{ $t("currency-mix") }}</router-link> 
                   <icon name="hot-red" />

@@ -23,9 +23,9 @@
             <router-link :to="{name: 'TradingFee'}">{{$t('trading_fees')}}</router-link>
           </div>
           
-          <div class="fee-nav-item mr-30"> 
+          <!-- <div class="fee-nav-item mr-30"> 
             <router-link :to="{name: 'UnitContractFee'}">{{$t('fee.unit_fees')}}</router-link>
-          </div>
+          </div> -->
           <div class="fee-nav-item mr-30"> 
             <router-link :to="{name: 'MixContractFee'}">{{$t('fee.mix_fees')}}</router-link>
           </div> 

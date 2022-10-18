@@ -95,9 +95,9 @@
             <div @click="handleClickTabs('mix')" :class="['tab-nav-item', 'mr-30', {active: selectTab==='mix'}]">
               <label>{{$t('currency-mix')}}</label> 
             </div>
-            <div @click="handleClickTabs('unit')" :class="['tab-nav-item', 'mr-30', {active: selectTab==='unit'}]">
+            <!-- <div @click="handleClickTabs('unit')" :class="['tab-nav-item', 'mr-30', {active: selectTab==='unit'}]">
               <label>{{$t('currency-unit')}}</label> 
-            </div> 
+            </div>  -->
             <div @click="handleClickTabs('btc')" :class="['tab-nav-item', 'mr-30', {active: selectTab==='btc'}]">
               <label>{{$t('currency-btc')}}</label> 
             </div> 

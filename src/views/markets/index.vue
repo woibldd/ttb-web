@@ -31,9 +31,9 @@
             <div @click="handleClickTabs('mix')" :class="['tab-nav-item', 'mr-30', {active: selectTab==='mix'}]">
               <label>{{$t('currency-mix')}}</label> 
             </div>
-            <div @click="handleClickTabs('unit')" :class="['tab-nav-item', 'mr-30', {active: selectTab==='unit'}]">
+            <!-- <div @click="handleClickTabs('unit')" :class="['tab-nav-item', 'mr-30', {active: selectTab==='unit'}]">
               <label>{{$t('currency-unit')}}</label> 
-            </div>  
+            </div>   -->
           </div>
           <div class="right">
             <span>{{$t('contract_24_hour_trade')}}： <label class="ml-10">{{tradeTotal | pretty}} </label>USDT</span>
