@@ -19,7 +19,7 @@ import VNotifyList from '@/components/VNotifyList.vue'
 
 export default {
   name: 'App',
-  components: {
+  components: { 
     VNotifyList
   },
   data() {
